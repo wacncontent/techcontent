@@ -74,9 +74,11 @@ ms.author: denlee
 5. 对于本教程，请在“选择 JSP 模板”对话框中选择“新建 JSP 文件(html)”，然后单击“完成”。
 6. 在 Eclipse 中打开 index.jsp 文件后，添加文本以便在现有 <body> 元素中显示 **Hello World!**。更新后的 <body> 内容应类似于以下代码：
 
-        <body>
-            <% out.println("Hello World!"); %>
-        </body>
+    ```
+    <body>
+        <% out.println("Hello World!"); %>
+    </body>
+    ```
 7. 保存 index.jsp 文件。
 8. 如果在步骤 2 中设置了目标运行时，则可以单击“项目”，然后单击“运行”，以在本地运行 JSP 应用程序：
 
@@ -93,9 +95,9 @@ ms.author: denlee
 4. 在“依赖项”选项卡上，在“依赖项”窗格中单击“添加”。
 5. 在“选择依赖项”窗口中，执行以下操作：
 
-    - 在“组 ID”框中，输入 com.microsoft.azure。
-    - 在“项目 ID”框中输入 azure-documentdb。
-    - 在“版本”框中输入 1.5.1。
+   - 在“组 ID”框中，输入 com.microsoft.azure。
+   - 在“项目 ID”框中输入 azure-documentdb。
+   - 在“版本”框中输入 1.5.1。
 
      ![安装 DocumentDB Java 应用程序 SDK](./media/documentdb-java-application/image13.png)
 
@@ -112,605 +114,631 @@ ms.author: denlee
 ## <a id="UseService"></a>步骤 4：在 java 应用程序中使用 DocumentDB 服务
 1. 首先，让我们定义 TodoItem 对象：
 
-        @Data
-        @Builder
-        public class TodoItem {
-            private String category;
-            private boolean complete;
-            private String id;
-            private String name;
-        }
+    ```
+    @Data
+    @Builder
+    public class TodoItem {
+        private String category;
+        private boolean complete;
+        private String id;
+        private String name;
+    }
+    ```
 
     在此项目中，我们将使用[项目 Lombok](http://projectlombok.org/) 生成构造函数、getter、setter 和一个生成器。或者，你可以手动编写此代码，或使用 IDE 生成此代码。
 2. 若要调用 DocumentDB 服务，则必须实例化一个新的 **DocumentClient**。一般情况下，最好是重用 **DocumentClient** -而不是为每个后续请求构造新的客户端。我们可以通过在 **DocumentClientFactory** 中包装客户端来重用此客户端。你还需要在此处粘贴[步骤 1](#CreateDB) 中保存到剪贴板中的 URI 和 PRIMARY KEY 值。将 [YOUR\_ENDPOINT\_HERE] 替换为你的 URI，以及将 [YOUR\_KEY\_HERE] 替换为你的 PRIMARY KEY。
 
-        private static final String HOST = "[YOUR_ENDPOINT_HERE]";
-        private static final String MASTER_KEY = "[YOUR_KEY_HERE]";
+    ```
+    private static final String HOST = "[YOUR_ENDPOINT_HERE]";
+    private static final String MASTER_KEY = "[YOUR_KEY_HERE]";
 
-        private static DocumentClient documentClient = new DocumentClient(HOST, MASTER_KEY,
-                        ConnectionPolicy.GetDefault(), ConsistencyLevel.Session);
+    private static DocumentClient documentClient = new DocumentClient(HOST, MASTER_KEY,
+                    ConnectionPolicy.GetDefault(), ConsistencyLevel.Session);
 
-        public static DocumentClient getDocumentClient() {
-            return documentClient;
-        }
+    public static DocumentClient getDocumentClient() {
+        return documentClient;
+    }
+    ```
 3. 现在让我们来创建数据访问对象 (DAO)，将 ToDo 项保存到 DocumentDB 的过程进行抽象。
 
     要将 ToDo 项保存到集合中，客户端需要知道保存到哪个数据库和集合（通过自链接引用）通常，如果可能的话最好缓存数据库和集合，以避免额外的往返访问数据库。
 
     以下代码演示了存在数据库和集合的情况下如何检索数据库和集合，如果不存在，则创建新的数据库和集合。
 
-        public class DocDbDao implements TodoDao {
-            // The name of our database.
-            private static final String DATABASE_ID = "TodoDB";
+    ```
+    public class DocDbDao implements TodoDao {
+        // The name of our database.
+        private static final String DATABASE_ID = "TodoDB";
 
-            // The name of our collection.
-            private static final String COLLECTION_ID = "TodoCollection";
+        // The name of our collection.
+        private static final String COLLECTION_ID = "TodoCollection";
 
-            // The DocumentDB Client
-            private static DocumentClient documentClient = DocumentClientFactory
-                    .getDocumentClient();
+        // The DocumentDB Client
+        private static DocumentClient documentClient = DocumentClientFactory
+                .getDocumentClient();
 
-            // Cache for the database object, so we don't have to query for it to
-            // retrieve self links.
-            private static Database databaseCache;
+        // Cache for the database object, so we don't have to query for it to
+        // retrieve self links.
+        private static Database databaseCache;
 
-            // Cache for the collection object, so we don't have to query for it to
-            // retrieve self links.
-            private static DocumentCollection collectionCache;
+        // Cache for the collection object, so we don't have to query for it to
+        // retrieve self links.
+        private static DocumentCollection collectionCache;
 
-            private Database getTodoDatabase() {
-                if (databaseCache == null) {
-                    // Get the database if it exists
-                    List<Database> databaseList = documentClient
-                            .queryDatabases(
-                                    "SELECT * FROM root r WHERE r.id='" + DATABASE_ID
-                                            + "'", null).getQueryIterable().toList();
+        private Database getTodoDatabase() {
+            if (databaseCache == null) {
+                // Get the database if it exists
+                List<Database> databaseList = documentClient
+                        .queryDatabases(
+                                "SELECT * FROM root r WHERE r.id='" + DATABASE_ID
+                                        + "'", null).getQueryIterable().toList();
 
-                    if (databaseList.size() > 0) {
-                        // Cache the database object so we won't have to query for it
-                        // later to retrieve the selfLink.
-                        databaseCache = databaseList.get(0);
-                    } else {
-                        // Create the database if it doesn't exist.
-                        try {
-                            Database databaseDefinition = new Database();
-                            databaseDefinition.setId(DATABASE_ID);
+                if (databaseList.size() > 0) {
+                    // Cache the database object so we won't have to query for it
+                    // later to retrieve the selfLink.
+                    databaseCache = databaseList.get(0);
+                } else {
+                    // Create the database if it doesn't exist.
+                    try {
+                        Database databaseDefinition = new Database();
+                        databaseDefinition.setId(DATABASE_ID);
 
-                            databaseCache = documentClient.createDatabase(
-                                    databaseDefinition, null).getResource();
-                        } catch (DocumentClientException e) {
-                            // TODO: Something has gone terribly wrong - the app wasn't
-                            // able to query or create the collection.
-                            // Verify your connection, endpoint, and key.
-                            e.printStackTrace();
-                        }
+                        databaseCache = documentClient.createDatabase(
+                                databaseDefinition, null).getResource();
+                    } catch (DocumentClientException e) {
+                        // TODO: Something has gone terribly wrong - the app wasn't
+                        // able to query or create the collection.
+                        // Verify your connection, endpoint, and key.
+                        e.printStackTrace();
                     }
                 }
-
-                return databaseCache;
             }
 
-            private DocumentCollection getTodoCollection() {
-                if (collectionCache == null) {
-                    // Get the collection if it exists.
-                    List<DocumentCollection> collectionList = documentClient
-                            .queryCollections(
-                                    getTodoDatabase().getSelfLink(),
-                                    "SELECT * FROM root r WHERE r.id='" + COLLECTION_ID
-                                            + "'", null).getQueryIterable().toList();
-
-                    if (collectionList.size() > 0) {
-                        // Cache the collection object so we won't have to query for it
-                        // later to retrieve the selfLink.
-                        collectionCache = collectionList.get(0);
-                    } else {
-                        // Create the collection if it doesn't exist.
-                        try {
-                            DocumentCollection collectionDefinition = new DocumentCollection();
-                            collectionDefinition.setId(COLLECTION_ID);
-
-                            collectionCache = documentClient.createCollection(
-                                    getTodoDatabase().getSelfLink(),
-                                    collectionDefinition, null).getResource();
-                        } catch (DocumentClientException e) {
-                            // TODO: Something has gone terribly wrong - the app wasn't
-                            // able to query or create the collection.
-                            // Verify your connection, endpoint, and key.
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-                return collectionCache;
-            }
+            return databaseCache;
         }
+
+        private DocumentCollection getTodoCollection() {
+            if (collectionCache == null) {
+                // Get the collection if it exists.
+                List<DocumentCollection> collectionList = documentClient
+                        .queryCollections(
+                                getTodoDatabase().getSelfLink(),
+                                "SELECT * FROM root r WHERE r.id='" + COLLECTION_ID
+                                        + "'", null).getQueryIterable().toList();
+
+                if (collectionList.size() > 0) {
+                    // Cache the collection object so we won't have to query for it
+                    // later to retrieve the selfLink.
+                    collectionCache = collectionList.get(0);
+                } else {
+                    // Create the collection if it doesn't exist.
+                    try {
+                        DocumentCollection collectionDefinition = new DocumentCollection();
+                        collectionDefinition.setId(COLLECTION_ID);
+
+                        collectionCache = documentClient.createCollection(
+                                getTodoDatabase().getSelfLink(),
+                                collectionDefinition, null).getResource();
+                    } catch (DocumentClientException e) {
+                        // TODO: Something has gone terribly wrong - the app wasn't
+                        // able to query or create the collection.
+                        // Verify your connection, endpoint, and key.
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            return collectionCache;
+        }
+    }
+    ```
 4. 下一步是编写一些代码将 TodoItem 保存到集合中。在本示例中，我们将使用 [Gson](https://code.google.com/p/google-gson/) 将 TodoItem 普通 Java 对象 (POJO) 序列化到 JSON 文档和从中反序列化 POJO。Jackson 或你自己的自定义序列化程序也是用于序列化 POJO 的很好的替代项。
 
-        // We'll use Gson for POJO <=> JSON serialization for this example.
-        private static Gson gson = new Gson();
+    ```
+    // We'll use Gson for POJO <=> JSON serialization for this example.
+    private static Gson gson = new Gson();
 
-        @Override
-        public TodoItem createTodoItem(TodoItem todoItem) {
-            // Serialize the TodoItem as a JSON Document.
-            Document todoItemDocument = new Document(gson.toJson(todoItem));
+    @Override
+    public TodoItem createTodoItem(TodoItem todoItem) {
+        // Serialize the TodoItem as a JSON Document.
+        Document todoItemDocument = new Document(gson.toJson(todoItem));
 
-            // Annotate the document as a TodoItem for retrieval (so that we can
-            // store multiple entity types in the collection).
-            todoItemDocument.set("entityType", "todoItem");
+        // Annotate the document as a TodoItem for retrieval (so that we can
+        // store multiple entity types in the collection).
+        todoItemDocument.set("entityType", "todoItem");
 
-            try {
-                // Persist the document using the DocumentClient.
-                todoItemDocument = documentClient.createDocument(
-                        getTodoCollection().getSelfLink(), todoItemDocument, null,
-                        false).getResource();
-            } catch (DocumentClientException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+        try {
+            // Persist the document using the DocumentClient.
+            todoItemDocument = documentClient.createDocument(
+                    getTodoCollection().getSelfLink(), todoItemDocument, null,
+                    false).getResource();
+        } catch (DocumentClientException e) {
+            e.printStackTrace();
+            return null;
         }
+
+        return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+    }
+    ```
 5. 和 DocumentDB 数据库和集合一样，文档也是通过自链接来引用。以下帮助器函数可以让我们通过另一个属性（例如“id”）来检索文档，而不是自链接：
 
-        private Document getDocumentById(String id) {
-            // Retrieve the document using the DocumentClient.
-            List<Document> documentList = documentClient
-                    .queryDocuments(getTodoCollection().getSelfLink(),
-                            "SELECT * FROM root r WHERE r.id='" + id + "'", null)
-                    .getQueryIterable().toList();
+    ```
+    private Document getDocumentById(String id) {
+        // Retrieve the document using the DocumentClient.
+        List<Document> documentList = documentClient
+                .queryDocuments(getTodoCollection().getSelfLink(),
+                        "SELECT * FROM root r WHERE r.id='" + id + "'", null)
+                .getQueryIterable().toList();
 
-            if (documentList.size() > 0) {
-                return documentList.get(0);
-            } else {
-                return null;
-            }
+        if (documentList.size() > 0) {
+            return documentList.get(0);
+        } else {
+            return null;
         }
+    }
+    ```
 6. 我们可使用步骤 5 中的帮助器方法按 ID 检索 TodoItem JSON 文档，然后将其反序列化到 POJO：
 
-        @Override
-        public TodoItem readTodoItem(String id) {
-            // Retrieve the document by id using our helper method.
-            Document todoItemDocument = getDocumentById(id);
+    ```
+    @Override
+    public TodoItem readTodoItem(String id) {
+        // Retrieve the document by id using our helper method.
+        Document todoItemDocument = getDocumentById(id);
 
-            if (todoItemDocument != null) {
-                // De-serialize the document in to a TodoItem.
-                return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
-            } else {
-                return null;
-            }
+        if (todoItemDocument != null) {
+            // De-serialize the document in to a TodoItem.
+            return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+        } else {
+            return null;
         }
+    }
+    ```
 7. 我们还可以通过 DocumentClient 使用 DocumentDB SQL 获取一个集合或 TodoItem 列表：
 
-        @Override
-        public List<TodoItem> readTodoItems() {
-            List<TodoItem> todoItems = new ArrayList<TodoItem>();
+    ```
+    @Override
+    public List<TodoItem> readTodoItems() {
+        List<TodoItem> todoItems = new ArrayList<TodoItem>();
 
-            // Retrieve the TodoItem documents
-            List<Document> documentList = documentClient
-                    .queryDocuments(getTodoCollection().getSelfLink(),
-                            "SELECT * FROM root r WHERE r.entityType = 'todoItem'",
-                            null).getQueryIterable().toList();
+        // Retrieve the TodoItem documents
+        List<Document> documentList = documentClient
+                .queryDocuments(getTodoCollection().getSelfLink(),
+                        "SELECT * FROM root r WHERE r.entityType = 'todoItem'",
+                        null).getQueryIterable().toList();
 
-            // De-serialize the documents in to TodoItems.
-            for (Document todoItemDocument : documentList) {
-                todoItems.add(gson.fromJson(todoItemDocument.toString(),
-                        TodoItem.class));
-            }
-
-            return todoItems;
+        // De-serialize the documents in to TodoItems.
+        for (Document todoItemDocument : documentList) {
+            todoItems.add(gson.fromJson(todoItemDocument.toString(),
+                    TodoItem.class));
         }
+
+        return todoItems;
+    }
+    ```
 8. 使用 DocumentClient 更新文档的方法有多种。在 Todo 列表应用程序中，我们希望能够切换 TodoItem 是否已完成。这可以通过更新文档中的"完成"属性来实现：
 
-        @Override
-        public TodoItem updateTodoItem(String id, boolean isComplete) {
-            // Retrieve the document from the database
-            Document todoItemDocument = getDocumentById(id);
+    ```
+    @Override
+    public TodoItem updateTodoItem(String id, boolean isComplete) {
+        // Retrieve the document from the database
+        Document todoItemDocument = getDocumentById(id);
 
-            // You can update the document as a JSON document directly.
-            // For more complex operations - you could de-serialize the document in
-            // to a POJO, update the POJO, and then re-serialize the POJO back in to
-            // a document.
-            todoItemDocument.set("complete", isComplete);
+        // You can update the document as a JSON document directly.
+        // For more complex operations - you could de-serialize the document in
+        // to a POJO, update the POJO, and then re-serialize the POJO back in to
+        // a document.
+        todoItemDocument.set("complete", isComplete);
 
-            try {
-                // Persist/replace the updated document.
-                todoItemDocument = documentClient.replaceDocument(todoItemDocument,
-                        null).getResource();
-            } catch (DocumentClientException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+        try {
+            // Persist/replace the updated document.
+            todoItemDocument = documentClient.replaceDocument(todoItemDocument,
+                    null).getResource();
+        } catch (DocumentClientException e) {
+            e.printStackTrace();
+            return null;
         }
+
+        return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+    }
+    ```
 9. 最后，我们希望能够从我们的列表中删除 TodoItem。若要执行此操作，我们可以使用之前编写的帮助器方法检索自链接，然后告诉客户端将其删除：
 
-        @Override
-        public boolean deleteTodoItem(String id) {
-            // DocumentDB refers to documents by self link rather than id.
+    ```
+    @Override
+    public boolean deleteTodoItem(String id) {
+        // DocumentDB refers to documents by self link rather than id.
 
-            // Query for the document to retrieve the self link.
-            Document todoItemDocument = getDocumentById(id);
+        // Query for the document to retrieve the self link.
+        Document todoItemDocument = getDocumentById(id);
 
-            try {
-                // Delete the document by self link.
-                documentClient.deleteDocument(todoItemDocument.getSelfLink(), null);
-            } catch (DocumentClientException e) {
-                e.printStackTrace();
-                return false;
-            }
-
-            return true;
+        try {
+            // Delete the document by self link.
+            documentClient.deleteDocument(todoItemDocument.getSelfLink(), null);
+        } catch (DocumentClientException e) {
+            e.printStackTrace();
+            return false;
         }
+
+        return true;
+    }
+    ```
 
 ## <a id="Wire"></a>步骤 5：将剩余的 Java 应用程序开发项目绑定到一起
 现在我们完成了有趣的部分，剩下所有要做的是构建一个快速的用户接口，并将其与我们的 DAO 进行绑定。
 
 1. 首先，让我们生成控制器以调用 DAO：
 
-        public class TodoItemController {
-            public static TodoItemController getInstance() {
-                if (todoItemController == null) {
-                    todoItemController = new TodoItemController(TodoDaoFactory.getDao());
-                }
-                return todoItemController;
+    ```
+    public class TodoItemController {
+        public static TodoItemController getInstance() {
+            if (todoItemController == null) {
+                todoItemController = new TodoItemController(TodoDaoFactory.getDao());
             }
-
-            private static TodoItemController todoItemController;
-
-            private final TodoDao todoDao;
-
-            TodoItemController(TodoDao todoDao) {
-                this.todoDao = todoDao;
-            }
-
-            public TodoItem createTodoItem(@NonNull String name,
-                    @NonNull String category, boolean isComplete) {
-                TodoItem todoItem = TodoItem.builder().name(name).category(category)
-                        .complete(isComplete).build();
-                return todoDao.createTodoItem(todoItem);
-            }
-
-            public boolean deleteTodoItem(@NonNull String id) {
-                return todoDao.deleteTodoItem(id);
-            }
-
-            public TodoItem getTodoItemById(@NonNull String id) {
-                return todoDao.readTodoItem(id);
-            }
-
-            public List<TodoItem> getTodoItems() {
-                return todoDao.readTodoItems();
-            }
-
-            public TodoItem updateTodoItem(@NonNull String id, boolean isComplete) {
-                return todoDao.updateTodoItem(id, isComplete);
-            }
+            return todoItemController;
         }
+
+        private static TodoItemController todoItemController;
+
+        private final TodoDao todoDao;
+
+        TodoItemController(TodoDao todoDao) {
+            this.todoDao = todoDao;
+        }
+
+        public TodoItem createTodoItem(@NonNull String name,
+                @NonNull String category, boolean isComplete) {
+            TodoItem todoItem = TodoItem.builder().name(name).category(category)
+                    .complete(isComplete).build();
+            return todoDao.createTodoItem(todoItem);
+        }
+
+        public boolean deleteTodoItem(@NonNull String id) {
+            return todoDao.deleteTodoItem(id);
+        }
+
+        public TodoItem getTodoItemById(@NonNull String id) {
+            return todoDao.readTodoItem(id);
+        }
+
+        public List<TodoItem> getTodoItems() {
+            return todoDao.readTodoItems();
+        }
+
+        public TodoItem updateTodoItem(@NonNull String id, boolean isComplete) {
+            return todoDao.updateTodoItem(id, isComplete);
+        }
+    }
+    ```
 
     在更复杂的应用程序中，控制器可以包含基于 DAO 的复杂的业务逻辑。
 2. 接下来，我们将创建 servlet 将 HTTP 请求路由到控制器：
 
-        public class TodoServlet extends HttpServlet {
-            // API Keys
-            public static final String API_METHOD = "method";
+    ```
+    public class TodoServlet extends HttpServlet {
+        // API Keys
+        public static final String API_METHOD = "method";
 
-            // API Methods
-            public static final String CREATE_TODO_ITEM = "createTodoItem";
-            public static final String GET_TODO_ITEMS = "getTodoItems";
-            public static final String UPDATE_TODO_ITEM = "updateTodoItem";
+        // API Methods
+        public static final String CREATE_TODO_ITEM = "createTodoItem";
+        public static final String GET_TODO_ITEMS = "getTodoItems";
+        public static final String UPDATE_TODO_ITEM = "updateTodoItem";
 
-            // API Parameters
-            public static final String TODO_ITEM_ID = "todoItemId";
-            public static final String TODO_ITEM_NAME = "todoItemName";
-            public static final String TODO_ITEM_CATEGORY = "todoItemCategory";
-            public static final String TODO_ITEM_COMPLETE = "todoItemComplete";
+        // API Parameters
+        public static final String TODO_ITEM_ID = "todoItemId";
+        public static final String TODO_ITEM_NAME = "todoItemName";
+        public static final String TODO_ITEM_CATEGORY = "todoItemCategory";
+        public static final String TODO_ITEM_COMPLETE = "todoItemComplete";
 
-            public static final String MESSAGE_ERROR_INVALID_METHOD = "{'error': 'Invalid method'}";
+        public static final String MESSAGE_ERROR_INVALID_METHOD = "{'error': 'Invalid method'}";
 
-            private static final long serialVersionUID = 1L;
-            private static final Gson gson = new Gson();
+        private static final long serialVersionUID = 1L;
+        private static final Gson gson = new Gson();
 
-            @Override
-            protected void doGet(HttpServletRequest request,
-                    HttpServletResponse response) throws ServletException, IOException {
+        @Override
+        protected void doGet(HttpServletRequest request,
+                HttpServletResponse response) throws ServletException, IOException {
 
-                String apiResponse = MESSAGE_ERROR_INVALID_METHOD;
+            String apiResponse = MESSAGE_ERROR_INVALID_METHOD;
 
-                TodoItemController todoItemController = TodoItemController
-                        .getInstance();
+            TodoItemController todoItemController = TodoItemController
+                    .getInstance();
 
-                String id = request.getParameter(TODO_ITEM_ID);
-                String name = request.getParameter(TODO_ITEM_NAME);
-                String category = request.getParameter(TODO_ITEM_CATEGORY);
-                boolean isComplete = StringUtils.equalsIgnoreCase("true",
-                        request.getParameter(TODO_ITEM_COMPLETE)) ? true : false;
+            String id = request.getParameter(TODO_ITEM_ID);
+            String name = request.getParameter(TODO_ITEM_NAME);
+            String category = request.getParameter(TODO_ITEM_CATEGORY);
+            boolean isComplete = StringUtils.equalsIgnoreCase("true",
+                    request.getParameter(TODO_ITEM_COMPLETE)) ? true : false;
 
-                switch (request.getParameter(API_METHOD)) {
-                case CREATE_TODO_ITEM:
-                    apiResponse = gson.toJson(todoItemController.createTodoItem(name,
-                            category, isComplete));
-                    break;
-                case GET_TODO_ITEMS:
-                    apiResponse = gson.toJson(todoItemController.getTodoItems());
-                    break;
-                case UPDATE_TODO_ITEM:
-                    apiResponse = gson.toJson(todoItemController.updateTodoItem(id,
-                            isComplete));
-                    break;
-                default:
-                    break;
-                }
-
-                response.getWriter().println(apiResponse);
+            switch (request.getParameter(API_METHOD)) {
+            case CREATE_TODO_ITEM:
+                apiResponse = gson.toJson(todoItemController.createTodoItem(name,
+                        category, isComplete));
+                break;
+            case GET_TODO_ITEMS:
+                apiResponse = gson.toJson(todoItemController.getTodoItems());
+                break;
+            case UPDATE_TODO_ITEM:
+                apiResponse = gson.toJson(todoItemController.updateTodoItem(id,
+                        isComplete));
+                break;
+            default:
+                break;
             }
 
-            @Override
-            protected void doPost(HttpServletRequest request,
-                    HttpServletResponse response) throws ServletException, IOException {
-                doGet(request, response);
-            }
+            response.getWriter().println(apiResponse);
         }
+
+        @Override
+        protected void doPost(HttpServletRequest request,
+                HttpServletResponse response) throws ServletException, IOException {
+            doGet(request, response);
+        }
+    }
+    ```
 3. 我们需要一个 Web 用户界面来向用户显示。让我们重新编写之前创建的 index.jsp：
 
-        <html>
-        <head>
-          <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
-          <title>Azure DocumentDB Java Sample</title>
+    ```
+    <html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
+      <title>Azure DocumentDB Java Sample</title>
 
-          <!-- Bootstrap -->
-          <link href="//ajax.aspnetcdn.com/ajax/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Bootstrap -->
+      <link href="//ajax.aspnetcdn.com/ajax/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
-          <style>
-            /* Add padding to body for fixed nav bar */
-            body {
-              padding-top: 50px;
-            }
-          </style>
-        </head>
-        <body>
-          <!-- Nav Bar -->
-          <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-              <div class="navbar-header">
-                <a class="navbar-brand" href="#">My Tasks</a>
-              </div>
-            </div>
+      <style>
+        /* Add padding to body for fixed nav bar */
+        body {
+          padding-top: 50px;
+        }
+      </style>
+    </head>
+    <body>
+      <!-- Nav Bar -->
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">My Tasks</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="container">
+        <h1>My ToDo List</h1>
+
+        <hr/>
+
+        <!-- The ToDo List -->
+        <div class = "todoList">
+          <table class="table table-bordered table-striped" id="todoItems">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Complete</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+          <!-- Update Button -->
+          <div class="todoUpdatePanel">
+            <form class="form-horizontal" role="form">
+              <button type="button" class="btn btn-primary">Update Tasks</button>
+            </form>
           </div>
 
-          <!-- Body -->
-          <div class="container">
-            <h1>My ToDo List</h1>
+        </div>
 
-            <hr/>
+        <hr/>
 
-            <!-- The ToDo List -->
-            <div class = "todoList">
-              <table class="table table-bordered table-striped" id="todoItems">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Complete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-
-              <!-- Update Button -->
-              <div class="todoUpdatePanel">
-                <form class="form-horizontal" role="form">
-                  <button type="button" class="btn btn-primary">Update Tasks</button>
-                </form>
+        <!-- Item Input Form -->
+        <div class="todoForm">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="inputItemName" class="col-sm-2">Task Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputItemName" placeholder="Enter name">
               </div>
-
             </div>
 
-            <hr/>
-
-            <!-- Item Input Form -->
-            <div class="todoForm">
-              <form class="form-horizontal" role="form">
-                <div class="form-group">
-                  <label for="inputItemName" class="col-sm-2">Task Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputItemName" placeholder="Enter name">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="inputItemCategory" class="col-sm-2">Task Category</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputItemCategory" placeholder="Enter category">
-                  </div>
-                </div>
-
-                <button type="button" class="btn btn-primary">Add Task</button>
-              </form>
+            <div class="form-group">
+              <label for="inputItemCategory" class="col-sm-2">Task Category</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputItemCategory" placeholder="Enter category">
+              </div>
             </div>
 
-          </div>
+            <button type="button" class="btn btn-primary">Add Task</button>
+          </form>
+        </div>
 
-          <!-- Placed at the end of the document so the pages load faster -->
-          <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
-          <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.2.0/bootstrap.min.js"></script>
-          <script src="assets/todo.js"></script>
-        </body>
-        </html>
+      </div>
+
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+      <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.2.0/bootstrap.min.js"></script>
+      <script src="assets/todo.js"></script>
+    </body>
+    </html>
+    ```
 4. 最后，编写一些客户端 Javascript 将 Web 用户界面和 servlet 绑定在一起：
 
-        var todoApp = {
-          /*
-           * API methods to call Java backend.
-           */
-          apiEndpoint: "api",
+    ```
+    var todoApp = {
+      /*
+       * API methods to call Java backend.
+       */
+      apiEndpoint: "api",
 
-          createTodoItem: function(name, category, isComplete) {
-            $.post(todoApp.apiEndpoint, {
-                "method": "createTodoItem",
-                "todoItemName": name,
-                "todoItemCategory": category,
-                "todoItemComplete": isComplete
-              },
-              function(data) {
-                var todoItem = data;
-                todoApp.addTodoItemToTable(todoItem.id, todoItem.name, todoItem.category, todoItem.complete);
-              },
-              "json");
+      createTodoItem: function(name, category, isComplete) {
+        $.post(todoApp.apiEndpoint, {
+            "method": "createTodoItem",
+            "todoItemName": name,
+            "todoItemCategory": category,
+            "todoItemComplete": isComplete
           },
-
-          getTodoItems: function() {
-            $.post(todoApp.apiEndpoint, {
-                "method": "getTodoItems"
-              },
-              function(data) {
-                var todoItemArr = data;
-                $.each(todoItemArr, function(index, value) {
-                  todoApp.addTodoItemToTable(value.id, value.name, value.category, value.complete);
-                });
-              },
-              "json");
+          function(data) {
+            var todoItem = data;
+            todoApp.addTodoItemToTable(todoItem.id, todoItem.name, todoItem.category, todoItem.complete);
           },
+          "json");
+      },
 
-          updateTodoItem: function(id, isComplete) {
-            $.post(todoApp.apiEndpoint, {
-                "method": "updateTodoItem",
-                "todoItemId": id,
-                "todoItemComplete": isComplete
-              },
-              function(data) {},
-              "json");
+      getTodoItems: function() {
+        $.post(todoApp.apiEndpoint, {
+            "method": "getTodoItems"
           },
-
-          /*
-           * UI Methods
-           */
-          addTodoItemToTable: function(id, name, category, isComplete) {
-            var rowColor = isComplete ? "active" : "warning";
-
-            todoApp.ui_table().append($("<tr>")
-              .append($("<td>").text(name))
-              .append($("<td>").text(category))
-              .append($("<td>")
-                .append($("<input>")
-                  .attr("type", "checkbox")
-                  .attr("id", id)
-                  .attr("checked", isComplete)
-                  .attr("class", "isComplete")
-                ))
-              .addClass(rowColor)
-            );
-          },
-
-          /*
-           * UI Bindings
-           */
-          bindCreateButton: function() {
-            todoApp.ui_createButton().click(function() {
-              todoApp.createTodoItem(todoApp.ui_createNameInput().val(), todoApp.ui_createCategoryInput().val(), false);
-              todoApp.ui_createNameInput().val("");
-              todoApp.ui_createCategoryInput().val("");
+          function(data) {
+            var todoItemArr = data;
+            $.each(todoItemArr, function(index, value) {
+              todoApp.addTodoItemToTable(value.id, value.name, value.category, value.complete);
             });
           },
+          "json");
+      },
 
-          bindUpdateButton: function() {
-            todoApp.ui_updateButton().click(function() {
-              // Disable button temporarily.
-              var myButton = $(this);
-              var originalText = myButton.text();
-              $(this).text("Updating...");
-              $(this).prop("disabled", true);
-
-              // Call api to update todo items.
-              $.each(todoApp.ui_updateId(), function(index, value) {
-                todoApp.updateTodoItem(value.name, value.value);
-                $(value).remove();
-              });
-
-              // Re-enable button.
-              setTimeout(function() {
-                myButton.prop("disabled", false);
-                myButton.text(originalText);
-              }, 500);
-            });
+      updateTodoItem: function(id, isComplete) {
+        $.post(todoApp.apiEndpoint, {
+            "method": "updateTodoItem",
+            "todoItemId": id,
+            "todoItemComplete": isComplete
           },
+          function(data) {},
+          "json");
+      },
 
-          bindUpdateCheckboxes: function() {
-            todoApp.ui_table().on("click", ".isComplete", function(event) {
-              var checkboxElement = $(event.currentTarget);
-              var rowElement = $(event.currentTarget).parents('tr');
-              var id = checkboxElement.attr('id');
-              var isComplete = checkboxElement.is(':checked');
+      /*
+       * UI Methods
+       */
+      addTodoItemToTable: function(id, name, category, isComplete) {
+        var rowColor = isComplete ? "active" : "warning";
 
-              // Toggle table row color
-              if (isComplete) {
-                rowElement.addClass("active");
-                rowElement.removeClass("warning");
-              } else {
-                rowElement.removeClass("active");
-                rowElement.addClass("warning");
-              }
+        todoApp.ui_table().append($("<tr>")
+          .append($("<td>").text(name))
+          .append($("<td>").text(category))
+          .append($("<td>")
+            .append($("<input>")
+              .attr("type", "checkbox")
+              .attr("id", id)
+              .attr("checked", isComplete)
+              .attr("class", "isComplete")
+            ))
+          .addClass(rowColor)
+        );
+      },
 
-              // Update hidden inputs for update panel.
-              todoApp.ui_updateForm().children("input[name='" + id + "']").remove();
-
-              todoApp.ui_updateForm().append($("<input>")
-                .attr("type", "hidden")
-                .attr("class", "updateComplete")
-                .attr("name", id)
-                .attr("value", isComplete));
-
-            });
-          },
-
-          /*
-           * UI Elements
-           */
-          ui_createNameInput: function() {
-            return $(".todoForm #inputItemName");
-          },
-
-          ui_createCategoryInput: function() {
-            return $(".todoForm #inputItemCategory");
-          },
-
-          ui_createButton: function() {
-            return $(".todoForm button");
-          },
-
-          ui_table: function() {
-            return $(".todoList table tbody");
-          },
-
-          ui_updateButton: function() {
-            return $(".todoUpdatePanel button");
-          },
-
-          ui_updateForm: function() {
-            return $(".todoUpdatePanel form");
-          },
-
-          ui_updateId: function() {
-            return $(".todoUpdatePanel .updateComplete");
-          },
-
-          /*
-           * Install the TodoApp
-           */
-          install: function() {
-            todoApp.bindCreateButton();
-            todoApp.bindUpdateButton();
-            todoApp.bindUpdateCheckboxes();
-
-            todoApp.getTodoItems();
-          }
-        };
-
-        $(document).ready(function() {
-          todoApp.install();
+      /*
+       * UI Bindings
+       */
+      bindCreateButton: function() {
+        todoApp.ui_createButton().click(function() {
+          todoApp.createTodoItem(todoApp.ui_createNameInput().val(), todoApp.ui_createCategoryInput().val(), false);
+          todoApp.ui_createNameInput().val("");
+          todoApp.ui_createCategoryInput().val("");
         });
+      },
+
+      bindUpdateButton: function() {
+        todoApp.ui_updateButton().click(function() {
+          // Disable button temporarily.
+          var myButton = $(this);
+          var originalText = myButton.text();
+          $(this).text("Updating...");
+          $(this).prop("disabled", true);
+
+          // Call api to update todo items.
+          $.each(todoApp.ui_updateId(), function(index, value) {
+            todoApp.updateTodoItem(value.name, value.value);
+            $(value).remove();
+          });
+
+          // Re-enable button.
+          setTimeout(function() {
+            myButton.prop("disabled", false);
+            myButton.text(originalText);
+          }, 500);
+        });
+      },
+
+      bindUpdateCheckboxes: function() {
+        todoApp.ui_table().on("click", ".isComplete", function(event) {
+          var checkboxElement = $(event.currentTarget);
+          var rowElement = $(event.currentTarget).parents('tr');
+          var id = checkboxElement.attr('id');
+          var isComplete = checkboxElement.is(':checked');
+
+          // Toggle table row color
+          if (isComplete) {
+            rowElement.addClass("active");
+            rowElement.removeClass("warning");
+          } else {
+            rowElement.removeClass("active");
+            rowElement.addClass("warning");
+          }
+
+          // Update hidden inputs for update panel.
+          todoApp.ui_updateForm().children("input[name='" + id + "']").remove();
+
+          todoApp.ui_updateForm().append($("<input>")
+            .attr("type", "hidden")
+            .attr("class", "updateComplete")
+            .attr("name", id)
+            .attr("value", isComplete));
+
+        });
+      },
+
+      /*
+       * UI Elements
+       */
+      ui_createNameInput: function() {
+        return $(".todoForm #inputItemName");
+      },
+
+      ui_createCategoryInput: function() {
+        return $(".todoForm #inputItemCategory");
+      },
+
+      ui_createButton: function() {
+        return $(".todoForm button");
+      },
+
+      ui_table: function() {
+        return $(".todoList table tbody");
+      },
+
+      ui_updateButton: function() {
+        return $(".todoUpdatePanel button");
+      },
+
+      ui_updateForm: function() {
+        return $(".todoUpdatePanel form");
+      },
+
+      ui_updateId: function() {
+        return $(".todoUpdatePanel .updateComplete");
+      },
+
+      /*
+       * Install the TodoApp
+       */
+      install: function() {
+        todoApp.bindCreateButton();
+        todoApp.bindUpdateButton();
+        todoApp.bindUpdateCheckboxes();
+
+        todoApp.getTodoItems();
+      }
+    };
+
+    $(document).ready(function() {
+      todoApp.install();
+    });
+    ```
 5. 非常好！ 现在剩下的就是测试此应用程序。在本地运行此应用程序，并添加一些 Todo 项，方法是填充项名称和类别，然后单击“添加任务”。
 6. 显示项之后，你可以通过切换复选框，然后单击“更新任务”来更新项是否已完成。
 
@@ -720,9 +748,9 @@ ms.author: denlee
 1. 若要将应用程序导出为 WAR，请在“项目资源管理器”中右键单击你的项目，然后依次单击“导出”和“WAR 文件”。
 2. 在“WAR 导出”窗口中，执行以下操作：
 
-    - 在“Web 项目”框中，输入 azure-documentdb-java-sample。
-    - 在“目标”框中，选择一个目标以保存 WAR 文件。
-    - 单击“完成”。
+   - 在“Web 项目”框中，输入 azure-documentdb-java-sample。
+   - 在“目标”框中，选择一个目标以保存 WAR 文件。
+   - 单击“完成”。
 3. 现在你已经具有 WAR 文件，只需将它上载到 Azure 网站的 **webapps** 目录。有关上载此文件的说明，请参阅 [Adding an application to your Java website on Azure](../app-service-web/web-sites-java-add-app.md)（将应用程序添加到 Azure 上的 Java 网站）。
 
     将 WAR 文件上载到 webapps 目录之后，运行时环境将检测到你已经添加了此文件，并将自动加载它。

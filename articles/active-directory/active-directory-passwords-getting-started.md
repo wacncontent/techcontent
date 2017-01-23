@@ -257,9 +257,9 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 在 Azure AD Connect 工具中启用密码写回之后，需确保服务可连接到云。
 
 1. 安装完成后，如果要阻止环境中的未知出站连接，还需要向防火墙添加以下规则。确保进行这些更改后重新启动你的 AAD Connect 计算机：
-    - 允许通过端口 443 的出站连接 TCP
-    - 允许到 https://ssprsbprodncu-sb.accesscontrol.chinacloudapi.cn/ 的出站连接
-    - 当使用代理或遇到一般连接问题时，允许通过端口 9350-9354 和端口 5671 TCP 的出站连接
+   - 允许通过端口 443 的出站连接 TCP
+   - 允许到 https://ssprsbprodncu-sb.accesscontrol.chinacloudapi.cn/ 的出站连接
+   - 当使用代理或遇到一般连接问题时，允许通过端口 9350-9354 和端口 5671 TCP 的出站连接
 
 ### <a name="overview-of-password-management-reports"></a>步骤 4：设置适当的 Active Directory 权限
 对于包含密码将要重置的用户的每个林，如果 X 是（初始配置期间）在配置向导中为该林指定的帐户，则必须为 X 授予对 `lockoutTime` 的“重置密码”、“更改密码”和“写入权限”，对 `pwdLastSet` 的“写入权限”，以及对该林中每个域的根对象的扩展权限。应当将权限标记为“由所有用户对象继承”。

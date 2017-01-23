@@ -6,85 +6,89 @@
 
 1. 在 MainPage.xaml.cs 项目文件中，添加以下 **using** 语句：
 
-        using System.IO.IsolatedStorage;
-        using System.Security.Cryptography;		
+    ```
+    using System.IO.IsolatedStorage;
+    using System.Security.Cryptography;		
+    ```
 
 2. 将 **AuthenticateAsync** 方法替换为以下代码：
 
-        private async System.Threading.Tasks.Task AuthenticateAsync()
+    ```
+    private async System.Threading.Tasks.Task AuthenticateAsync()
+    {
+        string message;
+        // This sample uses the Facebook provider.
+        var provider = "Facebook";
+
+        // Provide some additional app-specific security for the encryption.
+        byte [] entropy = { 1, 8, 3, 6, 5 };
+
+        // Authorization credential.
+        MobileServiceUser user = null;
+
+        // Isolated storage for the app.
+        IsolatedStorageSettings settings =
+            IsolatedStorageSettings.ApplicationSettings;
+
+        while (user == null)
         {
-            string message;
-            // This sample uses the Facebook provider.
-            var provider = "Facebook";
-
-            // Provide some additional app-specific security for the encryption.
-            byte [] entropy = { 1, 8, 3, 6, 5 };
-
-            // Authorization credential.
-            MobileServiceUser user = null;
-
-            // Isolated storage for the app.
-            IsolatedStorageSettings settings =
-                IsolatedStorageSettings.ApplicationSettings;
-
-            while (user == null)
+            // Try to get an existing encrypted credential from isolated storage.                    
+            if (settings.Contains(provider))
             {
-                // Try to get an existing encrypted credential from isolated storage.                    
-                if (settings.Contains(provider))
-                {
-                    // Get the encrypted byte array, decrypt and deserialize the user.
-                    var encryptedUser = settings[provider] as byte[];
-                    var userBytes = ProtectedData.Unprotect(encryptedUser, entropy);
-                    user = JsonConvert.DeserializeObject<MobileServiceUser>(
-                        System.Text.Encoding.Unicode.GetString(userBytes, 0, userBytes.Length));
-                }
-                if (user != null)
-                {
-                    // Set the user from the stored credentials.
-                    App.MobileService.CurrentUser = user;
-
-                    try
-                    {
-                        // Try to return an item now to determine if the cached credential has expired.
-                        await App.MobileService.GetTable<TodoItem>().Take(1).ToListAsync();
-                    }
-                    catch (MobileServiceInvalidOperationException ex)
-                    {
-                        if (ex.Response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                        {
-                            // Remove the credential with the expired token.
-                            settings.Remove(provider);
-                            user = null;
-                            continue;
-                        }
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        // Login with the identity provider.
-                        user = await App.MobileService
-                            .LoginAsync(provider);
-
-                        // Serialize the user into an array of bytes and encrypt with DPAPI.
-                        var userBytes = System.Text.Encoding.Unicode
-                            .GetBytes(JsonConvert.SerializeObject(user));
-                        byte[] encryptedUser = ProtectedData.Protect(userBytes, entropy);
-
-                        // Store the encrypted user credentials in local settings.
-                        settings.Add(provider, encryptedUser);
-                        settings.Save();
-                    }
-                    catch (MobileServiceInvalidOperationException ex)
-                    {
-                        message = "You must log in. Login Required";
-                    }
-                }
-                message = string.Format("You are now logged in - {0}", user.UserId);
-                MessageBox.Show(message);
+                // Get the encrypted byte array, decrypt and deserialize the user.
+                var encryptedUser = settings[provider] as byte[];
+                var userBytes = ProtectedData.Unprotect(encryptedUser, entropy);
+                user = JsonConvert.DeserializeObject<MobileServiceUser>(
+                    System.Text.Encoding.Unicode.GetString(userBytes, 0, userBytes.Length));
             }
+            if (user != null)
+            {
+                // Set the user from the stored credentials.
+                App.MobileService.CurrentUser = user;
+
+                try
+                {
+                    // Try to return an item now to determine if the cached credential has expired.
+                    await App.MobileService.GetTable<TodoItem>().Take(1).ToListAsync();
+                }
+                catch (MobileServiceInvalidOperationException ex)
+                {
+                    if (ex.Response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        // Remove the credential with the expired token.
+                        settings.Remove(provider);
+                        user = null;
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    // Login with the identity provider.
+                    user = await App.MobileService
+                        .LoginAsync(provider);
+
+                    // Serialize the user into an array of bytes and encrypt with DPAPI.
+                    var userBytes = System.Text.Encoding.Unicode
+                        .GetBytes(JsonConvert.SerializeObject(user));
+                    byte[] encryptedUser = ProtectedData.Protect(userBytes, entropy);
+
+                    // Store the encrypted user credentials in local settings.
+                    settings.Add(provider, encryptedUser);
+                    settings.Save();
+                }
+                catch (MobileServiceInvalidOperationException ex)
+                {
+                    message = "You must log in. Login Required";
+                }
+            }
+            message = string.Format("You are now logged in - {0}", user.UserId);
+            MessageBox.Show(message);
         }
+    }
+    ```
 
     在此版本的 **AuthenticateAsync** 中，此应用尝试使用在本地存储中加密存储的凭证来访问移动服务。发送一个简单查询以验证存储的令牌是否未到期。返回 401 时，尝试了基于提供商的常规登录。没有存储任何凭证时，也执行常规登录。	
 

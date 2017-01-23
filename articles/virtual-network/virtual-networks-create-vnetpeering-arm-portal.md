@@ -98,7 +98,9 @@ VNet 对等互连中的每个链接都具有上述这组属性。从门户中，
 
 6. 作为用户 A 登录到门户，导航到 VNET3 边栏选项卡，单击“对等互连”，勾选“我知道我的资源 ID”复选框并使用以下格式键入 VNET5 的资源 ID。
 
-        /subscriptions/<Subscription- ID>/resourceGroups/<ResourceGroupName>/providers/Microsoft.Network/VirtualNetwork/<VNET name>
+    ```
+    /subscriptions/<Subscription- ID>/resourceGroups/<ResourceGroupName>/providers/Microsoft.Network/VirtualNetwork/<VNET name>
+    ```
 
     ![资源 ID](./media/virtual-networks-create-vnetpeering-arm-portal/figure12.png)
 

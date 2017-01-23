@@ -42,7 +42,9 @@ ms.author: jgao
 
 在 HDInsight 群集上，Azure Resource Manager 将此信息存储到默认存储帐户默认容器中的历史记录存储。可以通过 REST API 检索有关完成应用程序的此类通用数据：
 
-    GET on https://<cluster-dns-name>.azurehdinsight.cn/ws/v1/applicationhistory/apps
+```
+GET on https://<cluster-dns-name>.azurehdinsight.cn/ws/v1/applicationhistory/apps
+```
 
 ## <a name="YARNAppsAndLogs"></a> YARN 应用程序和日志
 
@@ -52,14 +54,18 @@ YARN 通过将资源管理与应用程序计划/监视分离，支持多种编�
 
 应用程序日志（和关联容器日志）对于调试有问题的 Hadoop 应用程序至关重要。YARN 提供一个良好的框架，通过使用[日志聚合][log-aggregation]功能收集、聚合和储应用程序日志。日志聚合功能让访问应用程序日志更具确定性，因为该功能可聚合辅助节点上所有容器的日志，并在应用程序完成后，将它们按每个辅助节点一个聚合日志的方式存储在默认文件系统上。应用程序可能使用数百或数千个容器，但在单个辅助节点上运行的所有容器的日志将始终聚合成单个文件，从而为应用程序所用的每个辅助节点生成一个日志。在 HDInsight 群集（3.0 版和更高版本）上默认启用日志聚合，并且可在群集的默认容器中找到聚合日志，位置如下：
 
-    wasbs:///app-logs/<user>/logs/<applicationId>
+```
+wasbs:///app-logs/<user>/logs/<applicationId>
+```
 
 在该位置中，*user* 是启动应用程序的用户名，*applicationId* 是 YARN RM 分配的应用程序唯一标识符。
 
 无法直接阅读聚合日志，因为它们是以 [TFile][T-file]（由容器编制索引的[二进制格式][binary-format]）编写。YARN 提供 CLI 工具，针对感兴趣的应用程序或容器，将这些日志转储成纯文本。可以直接在群集节点上（通过 RDP 连接到节点后）运行以下 YARN 命令之一，以纯文本格式查看这些日志：
 
-    yarn logs -applicationId <applicationId> -appOwner <user-who-started-the-application>
-    yarn logs -applicationId <applicationId> -appOwner <user-who-started-the-application> -containerId <containerId> -nodeAddress <worker-node-address>
+```
+yarn logs -applicationId <applicationId> -appOwner <user-who-started-the-application>
+yarn logs -applicationId <applicationId> -appOwner <user-who-started-the-application> -containerId <containerId> -nodeAddress <worker-node-address>
+```
 
 下节介绍如何以编程方式访问应用程序或容器特定日志，无需通过 RDP 连接到 HDInsight 群集。
 
@@ -72,85 +78,95 @@ YARN 通过将资源管理与应用程序计划/监视分离，支持多种编�
 > [!NOTE]
 > 以下 API 仅适用于运行 3.1.1.374 版或更高版本的 Hadoop 群集。添加以下指令：
 
-    using Microsoft.Hadoop.Client;
-    using Microsoft.WindowsAzure.Management.HDInsight;
+```
+using Microsoft.Hadoop.Client;
+using Microsoft.WindowsAzure.Management.HDInsight;
+```
 
 这些指令引用在以下代码中新定义的 API。以下代码片段针对在订阅中“运行”的群集创建应用程序历史记录客户端。
 
-    string subscriptionId = "<your-subscription-id>";
-    string clusterName = "<your-cluster-name>";
-    string certName = "<your-subscription-management-cert-name>";
+```
+string subscriptionId = "<your-subscription-id>";
+string clusterName = "<your-cluster-name>";
+string certName = "<your-subscription-management-cert-name>";
 
-    // Create an HDInsight client
-    X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-    store.Open(OpenFlags.ReadOnly);
-    X509Certificate2 cert = store.Certificates.Cast<X509Certificate2>()
-                                .Single(x => x.FriendlyName == certName);
+// Create an HDInsight client
+X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+store.Open(OpenFlags.ReadOnly);
+X509Certificate2 cert = store.Certificates.Cast<X509Certificate2>()
+                            .Single(x => x.FriendlyName == certName);
 
-    HDInsightCertificateCredential creds =
-                new HDInsightCertificateCredential(new Guid(subscriptionId), cert);
+HDInsightCertificateCredential creds =
+            new HDInsightCertificateCredential(new Guid(subscriptionId), cert);
 
-    IHDInsightClient client = HDInsightClient.Connect(creds);
+IHDInsightClient client = HDInsightClient.Connect(creds);
 
-    // Get the cluster on which your applications were run
-    // The cluster needs to be in the "Running" state
-    ClusterDetails cluster = client.GetCluster(clusterName);
+// Get the cluster on which your applications were run
+// The cluster needs to be in the "Running" state
+ClusterDetails cluster = client.GetCluster(clusterName);
 
-    // Create an Application History client against your cluster
-    IHDInsightApplicationHistoryClient appHistoryClient =
-                cluster.CreateHDInsightApplicationHistoryClient(TimeSpan.FromMinutes(5));
+// Create an Application History client against your cluster
+IHDInsightApplicationHistoryClient appHistoryClient =
+            cluster.CreateHDInsightApplicationHistoryClient(TimeSpan.FromMinutes(5));
+```
 
 现在，可以使用应用程序历史记录客户端列出已完成应用程序，根据条件筛选应用程序，并下载相关的应用程序日志。以下代码片段演示如何以编程方式执行此操作。
 
-    // Local download folder location where the logs will be placed
-    string downloadLocation = "E:\\YarnApplicationLogs";
+```
+// Local download folder location where the logs will be placed
+string downloadLocation = "E:\\YarnApplicationLogs";
 
-    // List completed applications on your cluster that were submitted in the last 24 hours but failed
-    // Search for applications based on application name
-    string appNamePrefix = "your-app-name-prefix";
-    DateTime endTime = DateTime.UtcNow;
-    DateTime startTime = endTime.AddHours(-24);
-    IEnumerable<ApplicationDetails> applications = appHistoryClient
-                    .ListCompletedApplications(startTime, endTime)
-                    .Where(app =>
-                        app.GetApplicationFinalStatusAsEnum() == ApplicationFinalStatus.Failed
-                        && app.Name.StartsWith(appNamePrefix));
+// List completed applications on your cluster that were submitted in the last 24 hours but failed
+// Search for applications based on application name
+string appNamePrefix = "your-app-name-prefix";
+DateTime endTime = DateTime.UtcNow;
+DateTime startTime = endTime.AddHours(-24);
+IEnumerable<ApplicationDetails> applications = appHistoryClient
+                .ListCompletedApplications(startTime, endTime)
+                .Where(app =>
+                    app.GetApplicationFinalStatusAsEnum() == ApplicationFinalStatus.Failed
+                    && app.Name.StartsWith(appNamePrefix));
 
-    // Download logs for failed or killed applications
-    // This will generate one log file for each application
-    foreach (ApplicationDetails application in applications)
-    {
-        appHistoryClient.DownloadApplicationLogs(application, downloadLocation);
-    }
+// Download logs for failed or killed applications
+// This will generate one log file for each application
+foreach (ApplicationDetails application in applications)
+{
+    appHistoryClient.DownloadApplicationLogs(application, downloadLocation);
+}
+```
 
 上述代码使用应用程序历史记录客户端列出/查找所需的应用程序，然后将其日志下载到本地文件夹。
 
 或者，也可以使用以下代码片段下载应用程序 ID 已知的应用程序日志。应用程序 ID 是 RM 分配给应用程序的全局唯一标识符。其构建方式是使用 RM 的开始时间，加上提交给它的应用程序的单调递增计数器。应用程序 ID 格式为“application\_&lt;RM-start-time&gt;\_&lt;Counter&gt;”。请注意，应用程序 ID 与作业 ID 完全不同。作业 ID 是针对 MapReduce 框架的概念，而应用程序 ID 是不区分框架的 YARN 概念。在 YARN 中，作业 ID 标识特定 MapReduce 作业，由向 RM 提交 MapReduce 应用程序的 AM 处理。
 
-    // Download application logs for an application whose application ID is known
-    string applicationId = "application_1416017767088_0028";
-    ApplicationDetails someApplication = appHistoryClient.GetApplicationDetails(applicationId);
-    appHistoryClient.DownloadApplicationLogs(someApplication, downloadLocation);
+```
+// Download application logs for an application whose application ID is known
+string applicationId = "application_1416017767088_0028";
+ApplicationDetails someApplication = appHistoryClient.GetApplicationDetails(applicationId);
+appHistoryClient.DownloadApplicationLogs(someApplication, downloadLocation);
+```
 
 如果需要，也可以下载应用程序使用的每个容器（或任何特定容器）的日志，如下所示。
 
-    ApplicationDetails someApplication = appHistoryClient.GetApplicationDetails(applicationId);
+```
+ApplicationDetails someApplication = appHistoryClient.GetApplicationDetails(applicationId);
 
-    // Download logs separately for each container of application(s) of interest
-    // This will generate one log file per container
-    IEnumerable<ApplicationAttemptDetails> applicationAttempts =
-                appHistoryClient.ListApplicationAttempts(someApplication);
+// Download logs separately for each container of application(s) of interest
+// This will generate one log file per container
+IEnumerable<ApplicationAttemptDetails> applicationAttempts =
+            appHistoryClient.ListApplicationAttempts(someApplication);
 
-    ApplicationAttemptDetails finalAttempt = applicationAttempts
-                .Single(x => x.ApplicationAttemptId == someApplication.LatestApplicationAttemptId);
+ApplicationAttemptDetails finalAttempt = applicationAttempts
+            .Single(x => x.ApplicationAttemptId == someApplication.LatestApplicationAttemptId);
 
-    IEnumerable<ApplicationContainerDetails> containers =
-                appHistoryClient.ListApplicationContainers(finalAttempt);
+IEnumerable<ApplicationContainerDetails> containers =
+            appHistoryClient.ListApplicationContainers(finalAttempt);
 
-    foreach (ApplicationContainerDetails container in containers)
-    {
-        appHistoryClient.DownloadApplicationLogs(container, downloadLocation);
-    }
+foreach (ApplicationContainerDetails container in containers)
+{
+    appHistoryClient.DownloadApplicationLogs(container, downloadLocation);
+}
+```
 
 [YARN-timeline-server]: http://hadoop.apache.org/docs/r2.4.0/hadoop-yarn/hadoop-yarn-site/TimelineServer.html
 [log-aggregation]: http://hortonworks.com/blog/simplifying-user-logs-management-and-access-in-yarn/

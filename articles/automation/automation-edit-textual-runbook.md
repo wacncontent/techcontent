@@ -73,25 +73,29 @@ Azure 自动化中的每个 Runbook 都有两个版本：草稿版和已发布�
 
 以下示例命令演示了如何检索 Runbook 的脚本并将其保存到脚本文件。在此示例中，检索的是草稿版本。也可以检索 Runbook 的已发布版本，不过该版本不能进行更改。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Sample-TestRunbook"
-    $scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Sample-TestRunbook"
+$scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
 
-    $runbookDefinition = Get-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Slot Draft
-    $runbookContent = $runbookDefinition.Content
+$runbookDefinition = Get-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Slot Draft
+$runbookContent = $runbookDefinition.Content
 
-    Out-File -InputObject $runbookContent -FilePath $scriptPath
+Out-File -InputObject $runbookContent -FilePath $scriptPath
+```
 
 ### 使用 Windows PowerShell 更改 Runbook 的内容
 
 以下示例命令演示了如何使用脚本文件的内容替换 Runbook 的现有内容。请注意，此示例过程与[使用 Windows PowerShell 从脚本文件中导入 Runbook](./automation-creating-importing-runbook.md#ImportRunbookScriptPS) 中的相同。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Sample-TestRunbook"
-    $scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Sample-TestRunbook"
+$scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
 
-    Set-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Path $scriptPath -Overwrite
-    Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+Set-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Path $scriptPath -Overwrite
+Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+```
 
 ## 相关文章
 

@@ -60,10 +60,12 @@ ms.author: glenga
 
 2. 在 Visual Studio 的解决方案资源管理器中，打开客户端示例项目中的 App.xaml.cs 文件。更改 **MobileServiceClient** 的初始化以使用你的移动服务 URL 和应用程序密钥：
 
-         public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://your-mobile-service.azure-mobile.net/",
-            "Your AppKey"
-        );
+    ```
+     public static MobileServiceClient MobileService = new MobileServiceClient(
+        "https://your-mobile-service.azure-mobile.net/",
+        "Your AppKey"
+    );
+    ```
 
 3. 在 Visual Studio 中，按 **F5** 键重新生成并运行应用。
 
@@ -100,26 +102,34 @@ ms.author: glenga
 
 若要使用移动服务脱机功能，必须在本地数据库和数据传输对象中都包括版本列。这是通过更新 `TodoItem` 类的以下成员实现的：
 
-        [Version]
-        public string Version { get; set; }
+```
+    [Version]
+    public string Version { get; set; }
+```
 
 当使用 `TodoItem` 类来定义本地存储时，`__version` 列包括在本地数据库的 `OnNavigatedTo()` 方法中。
 
 若要使用代码处理脱机同步冲突，请创建一个实现 `IMobileServiceSyncHandler` 的类。调用 `MobileServiceClient.SyncContext.InitializeAsync()` 时传递这种类型的对象。在示例的 `OnNavigatedTo()` 方法中也会发生这种情况。
 
-     await App.MobileService.SyncContext.InitializeAsync(store, new SyncHandler(App.MobileService));
+```
+ await App.MobileService.SyncContext.InitializeAsync(store, new SyncHandler(App.MobileService));
+```
 
 **SyncHandler.cs** 中的类 `SyncHandler` 实现了 `IMobileServiceSyncHandler`。将每个推送操作发送到服务器时均调用 `ExecuteTableOperationAsync` 方法。如果引发了 `MobileServicePreconditionFailedException` 类型的异常，则意味着某个项目的本地版本和远程版本之间存在冲突。
 
 若要在解决冲突时考虑到本地项目，则只需重试该操作。发生冲突后，需更新本地项目版本，使之与服务器版本匹配，因此重新执行该操作将使用本地更改覆盖服务器更改：
 
-    await operation.ExecuteAsync(); 
+```
+await operation.ExecuteAsync(); 
+```
 
 若要在解决冲突时考虑到服务器项目，则只需从 `ExecuteTableOperationAsync` 返回。将放弃该对象的本地版本，将其替换为服务器中的值。
 
 若要停止推送操作（但保留已排队的更改），请使用方法 `AbortPush()`：
 
-    operation.AbortPush();
+```
+operation.AbortPush();
+```
 
 这将停止当前的推送操作，但会保留所有挂起的更改，包括当前操作（如果从 `ExecuteTableOperationAsync` 调用了 `AbortPush`）。下次调用 `PushAsync()` 时，这些更改将发送到服务器。
 

@@ -43,22 +43,28 @@ ms.author: rortloff;barbkess;sonyama
 
 若要创建 SQL Server 验证的用户，请使用服务器管理员登录名连接到服务器上的 **master** 数据库，并创建新的服务器登录名。另外，最好是在针对 Azure SQL 数据仓库用户的 master 数据库中创建一个用户。在 master 中创建用户以后，用户即可使用 SSMS 之类的工具登录，不需指定数据库名称。此外，用户还可以使用对象资源管理器查看 SQL Server 上的所有数据库。
 
-    -- Connect to master database and create a login
-    CREATE LOGIN ApplicationLogin WITH PASSWORD = 'strong_password';
-    CREATE USER ApplicationUser FOR LOGIN ApplicationLogin;
+```
+-- Connect to master database and create a login
+CREATE LOGIN ApplicationLogin WITH PASSWORD = 'strong_password';
+CREATE USER ApplicationUser FOR LOGIN ApplicationLogin;
+```
 
 然后，使用服务器管理员登录名连接到“SQL 数据仓库数据库”，并基于刚刚创建的服务器登录名创建数据库用户。
 
-    -- Connect to SQL DW database and create a database user
-    CREATE USER ApplicationUser FOR LOGIN ApplicationLogin;
+```
+-- Connect to SQL DW database and create a database user
+CREATE USER ApplicationUser FOR LOGIN ApplicationLogin;
+```
 
 如果用户需要执行其他操作（例如创建登录名或新数据库），则还需在 master 数据库中为其分配 `Loginmanager` 和 `dbmanager` 角色。如需详细了解这些额外的角色，以及如何在 SQL 数据库上进行身份验证，请参阅[在 Azure SQL 数据库中管理数据库和登录名][]。如需详细了解用于 SQL 数据仓库的 Azure AD，请参阅 [Connecting to SQL Data Warehouse By Using Azure Active Directory Authentication][]（使用 Azure Active Directory 身份验证连接到 SQL 数据仓库）。
 
 ## 授权
 授权是指你可以在 Azure SQL 数据仓库数据库中执行哪些操作，这由你的用户帐户角色成员身份和权限来控制。作为最佳实践，你应向用户授予所需的最低权限。Azure SQL 数据仓库可让你在 T-SQL 中使用角色方便管理这种权限：
 
-    EXEC sp_addrolemember 'db_datareader', 'ApplicationUser'; -- allows ApplicationUser to read data
-    EXEC sp_addrolemember 'db_datawriter', 'ApplicationUser'; -- allows ApplicationUser to write data
+```
+EXEC sp_addrolemember 'db_datareader', 'ApplicationUser'; -- allows ApplicationUser to read data
+EXEC sp_addrolemember 'db_datawriter', 'ApplicationUser'; -- allows ApplicationUser to write data
+```
 
 用于连接的服务器管理员帐户是 db\_owner 所有者的成员，该帐户有权在数据库中执行任何操作。请保存此帐户，以便部署架构升级并执行其他管理操作。权限受到更多限制的“ApplicationUser”帐户可让用户使用应用程序所需的最低权限从应用程序连接到数据库。
 

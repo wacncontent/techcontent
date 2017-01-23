@@ -33,7 +33,9 @@ OpenID Connect 是构建在 OAuth 2.0 基础之上的身份验证协议，可用
 ## 提取 OpenID Connect 元数据文档
 OpenID Connect 描述了元数据文档，该文档包含了应用执行登录所需的大部分信息。这些信息包括诸如要使用的 URL、服务的公共签名密钥的位置等。对于 v2.0 终结点，应使用的 OpenID Connect 的元数据文档为：
 
-    https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration
+```
+https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration
+```
 
 其中 `{tenant}` 可以接受以下四个不同值之一：
 
@@ -46,18 +48,20 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
 
 元数据是一个简单的 json 文档，下面提供了其中一个代码段。[OpenID Connect 规范](https://openid.net)对其内容进行了完整描述。
 
-    {
-        "authorization_endpoint": "https:\/\/login.microsoftonline.com\/common\/oauth2\/v2.0\/authorize",
-        "token_endpoint": "https:\/\/login.microsoftonline.com\/common\/oauth2\/v2.0\/token",
-        "token_endpoint_auth_methods_supported": [
-            "client_secret_post",
-            "private_key_jwt"
-        ],
-        "jwks_uri": "https:\/\/login.microsoftonline.com\/common\/discovery\/v2.0\/keys",
+```
+{
+    "authorization_endpoint": "https:\/\/login.microsoftonline.com\/common\/oauth2\/v2.0\/authorize",
+    "token_endpoint": "https:\/\/login.microsoftonline.com\/common\/oauth2\/v2.0\/token",
+    "token_endpoint_auth_methods_supported": [
+        "client_secret_post",
+        "private_key_jwt"
+    ],
+    "jwks_uri": "https:\/\/login.microsoftonline.com\/common\/discovery\/v2.0\/keys",
 
-        ...
+    ...
 
-    }
+}
+```
 
 通常，使用此元数据文档来配置 OpenID Connect 库或 SDK；该库使用元数据来完成其工作。但是，如果不使用预生成的 OpenID Connect 库，则可以按照本文剩余部分的步骤来使用 v2.0 终结点执行 Web 应用中的登录。
 
@@ -68,16 +72,18 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
 - `response_type` 参数必须包含 `id_token`
 - 该请求必须包含 `nonce` 参数
 
-        // 换行符仅用于增强可读性
+    ```
+    // 换行符仅用于增强可读性
 
-        GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
-        client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-        &response_type=id_token
-        &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-        &response_mode=form_post
-        &scope=openid
-        &state=12345
-        &nonce=678910
+    GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &response_type=id_token
+    &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+    &response_mode=form_post
+    &scope=openid
+    &state=12345
+    &nonce=678910
+    ```
 
 > [!TIP]
 > 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 的 `https://localhost/myapp/`。请注意，此请求会使用 `response_mode=query`（仅用于教程）。建议使用 `response_mode=form_post`。
@@ -103,11 +109,13 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
 #### 成功的响应
 使用 `response_mode=form_post` 的成功响应如下所示：
 
-    POST /myapp/ HTTP/1.1
-    Host: localhost
-    Content-Type: application/x-www-form-urlencoded
+```
+POST /myapp/ HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
 
-    id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNB...&state=12345
+id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNB...&state=12345
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -117,11 +125,13 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
 #### 错误响应
 错误响应可能也发送到 `redirect_uri`，让应用可以适当地处理：
 
-    POST /myapp/ HTTP/1.1
-    Host: localhost
-    Content-Type: application/x-www-form-urlencoded
+```
+POST /myapp/ HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
 
-    error=access_denied&error_description=the+user+canceled+the+authentication
+error=access_denied&error_description=the+user+canceled+the+authentication
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -168,8 +178,10 @@ When you wish to sign the user out of the app, it is not sufficient to clear you
 
 You can simply redirect the user to the `end_session_endpoint` listed in the OpenID Connect metadata document:
 
-    GET https://login.microsoftonline.com/common/oauth2/v2.0/logout?
-    post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+```
+GET https://login.microsoftonline.com/common/oauth2/v2.0/logout?
+post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+```
 
 | Parameter | | Description |
 | ----------------------- | ------------------------------- | ------------ |
@@ -187,18 +199,20 @@ You can simply redirect the user to the `end_session_endpoint` listed in the Ope
 ## 获取访问令牌
 若要获取访问令牌，需要稍微修改上述登录请求：
 
-    // Line breaks for legibility only
+```
+// Line breaks for legibility only
 
-    GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
-    client_id=6731de76-14a6-49ae-97bc-6eba6914391e		// Your registered Application Id
-    &response_type=id_token%20code
-    &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F 	  // Your registered Redirect Uri, url encoded
-    &response_mode=form_post						      // 'query', 'form_post', or 'fragment'
-    &scope=openid%20                                      // Include both 'openid' and scopes your app needs  
-    offline_access%20										 
-    https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
-    &state=12345						 				 // Any value, provided by your app
-    &nonce=678910										 // Any value, provided by your app
+GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
+client_id=6731de76-14a6-49ae-97bc-6eba6914391e		// Your registered Application Id
+&response_type=id_token%20code
+&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F 	  // Your registered Redirect Uri, url encoded
+&response_mode=form_post						      // 'query', 'form_post', or 'fragment'
+&scope=openid%20                                      // Include both 'openid' and scopes your app needs  
+offline_access%20										 
+https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
+&state=12345						 				 // Any value, provided by your app
+&nonce=678910										 // Any value, provided by your app
+```
 
 > [!TIP]
 > 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 和 `code` 的 `https://localhost/myapp/`。请注意，此请求会使用 `response_mode=query`（仅用于教程）。建议使用 `response_mode=form_post`。
@@ -209,11 +223,13 @@ You can simply redirect the user to the `end_session_endpoint` listed in the Ope
 #### 成功的响应
 使用 `response_mode=form_post` 的成功响应如下所示：
 
-    POST /myapp/ HTTP/1.1
-    Host: localhost
-    Content-Type: application/x-www-form-urlencoded
+```
+POST /myapp/ HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
 
-    id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNB...&code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...&state=12345
+id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNB...&code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...&state=12345
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -224,11 +240,13 @@ You can simply redirect the user to the `end_session_endpoint` listed in the Ope
 #### 错误响应
 错误响应可能也发送到 `redirect_uri`，让应用可以适当地处理：
 
-    POST /myapp/ HTTP/1.1
-    Host: localhost
-    Content-Type: application/x-www-form-urlencoded
+```
+POST /myapp/ HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
 
-    error=access_denied&error_description=the+user+canceled+the+authentication
+error=access_denied&error_description=the+user+canceled+the+authentication
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |

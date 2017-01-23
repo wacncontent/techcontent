@@ -66,10 +66,12 @@ wacn.date: 01/09/2017
 
 js
 
-        ...
-        <script src="App/Scripts/adal.js"></script>
-        <script src="App/Scripts/adal-angular.js"></script>
-        ...
+```
+    ...
+    <script src="App/Scripts/adal.js"></script>
+    <script src="App/Scripts/adal-angular.js"></script>
+    ...
+```
 
 - 要使 SPA 后端待办事项列表 API 接受来自浏览器的令牌，后端需要有关应用程序注册的配置信息。在 TodoSPA 项目中，打开 `web.config`。替换 `<appSettings>` 中的元素值，以反映你在 Azure 门户预览中输入的值。只要使用 ADAL，你的代码就会引用这些值。
     - `ida:Tenant` 是 Azure AD 租户的域，例如 contoso.partner.onmschina.cn
@@ -82,36 +84,42 @@ Adal.js 能够与 AngularJS 路由和 http 提供程序集成，使你就可以�
 
 js
 
-        angular.module('todoApp', ['ngRoute','AdalAngular'])
-        .config(['$routeProvider','$httpProvider', 'adalAuthenticationServiceProvider',
-         function ($routeProvider, $httpProvider, adalProvider) {
-        ...
+```
+    angular.module('todoApp', ['ngRoute','AdalAngular'])
+    .config(['$routeProvider','$httpProvider', 'adalAuthenticationServiceProvider',
+     function ($routeProvider, $httpProvider, adalProvider) {
+    ...
+```
 
 - 现在，你可以使用应用程序注册的配置值初始化 `adalProvider`（同样在 `App/Scripts/app.js` 中）：
 
 js
 
-        adalProvider.init(
-          {
-              instance: 'https://login.microsoftonline.com/',
-              tenant: 'Enter your tenant name here e.g. contoso.partner.onmschina.cn',
-              clientId: 'Enter your client ID here e.g. e9a5a8b6-8af7-4719-9821-0deef255f68e',
-              extraQueryParameter: 'nux=1',
-              //cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
-          },
-          $httpProvider
-        );
+```
+    adalProvider.init(
+      {
+          instance: 'https://login.microsoftonline.com/',
+          tenant: 'Enter your tenant name here e.g. contoso.partner.onmschina.cn',
+          clientId: 'Enter your client ID here e.g. e9a5a8b6-8af7-4719-9821-0deef255f68e',
+          extraQueryParameter: 'nux=1',
+          //cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
+      },
+      $httpProvider
+    );
+```
 
 - 若要在应用程序中保护 `TodoList` 视图，只需编写一行代码 - `requireADLogin`。
 
 js
 
-        ...
-        }).when("/TodoList", {
-                controller: "todoListCtrl",
-                templateUrl: "/App/Views/TodoList.html",
-                requireADLogin: true,
-        ...
+```
+    ...
+    }).when("/TodoList", {
+            controller: "todoListCtrl",
+            templateUrl: "/App/Views/TodoList.html",
+            requireADLogin: true,
+    ...
+```
 
 现在，你已获得一个安全的单页面应用程序，它可以让用户登录，并可向其后端 API 发出受持有者令牌保护的请求。当用户单击 `TodoList` 链接时，adal.js 会根据需要自动重定向到 Azure AD 以进行登录。此外，adal.js 会自动将 access\_token 附加到已发送至应用程序后端的任何 ajax 请求。以上是使用 adal.js 生成 SPA 的最低要求 - SPA 中还提供了其他许多有用的功能：
 
@@ -119,30 +127,36 @@ js
 
 js
 
-        ...
-        $scope.login = function () {
-            adalService.login();
-        };
-        $scope.logout = function () {
-            adalService.logOut();
-        };
-        ...
+```
+    ...
+    $scope.login = function () {
+        adalService.login();
+    };
+    $scope.logout = function () {
+        adalService.logOut();
+    };
+    ...
+```
 
 - 你可能还想要在应用程序的 UI 中显示用户信息。adal 服务已添加到 `userDataCtrl` 控制器，因此你可以在关联的视图 `App/Views/UserData.html` 中访问 `userInfo` 对象：
 
 js
 
-        <p>{{userInfo.userName}}</p>
-        <p>aud:{{userInfo.profile.aud}}</p>
-        <p>iss:{{userInfo.profile.iss}}</p>
-        ...
+```
+    <p>{{userInfo.userName}}</p>
+    <p>aud:{{userInfo.profile.aud}}</p>
+    <p>iss:{{userInfo.profile.iss}}</p>
+    ...
+```
 
 - 另外，在许多情况下，你想要知道用户是否已登录。你也可以使用 `userInfo` 对象来收集此信息。例如，在 `index.html` 中，可以根据身份验证状态显示“登录”或“注销”按钮：
 
 js
 
-        <li><a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a></li>
-        <li><a class="btn btn-link" ng-hide=" userInfo.isAuthenticated" ng-click="login()">Login</a></li>
+```
+    <li><a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a></li>
+    <li><a class="btn btn-link" ng-hide=" userInfo.isAuthenticated" ng-click="login()">Login</a></li>
+```
 
 祝贺你！ 你现已完成创建 Azure AD 集成的单页面应用程序。该应用程序可对用户进行身份验证，使用 OAuth 2.0 安全调用其后端，并获取有关用户的基本信息。如果你尚未这样做，可以在租户中填充一些用户。运行待办事项列表 SPA，然后使用这些用户之一进行登录。将任务添加到用户待办事项列表、注销和重新登录。
 

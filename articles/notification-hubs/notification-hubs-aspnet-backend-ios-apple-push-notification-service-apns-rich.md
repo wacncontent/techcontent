@@ -47,85 +47,91 @@ ms.author: wesmc
 
 5. 在 **Notifications.cs** 中，添加以下 using 语句：
 
-        using System.Reflection;
+    ```
+    using System.Reflection;
+    ```
 
 6. 使用以下代码更新整个 **Notifications** 类。请确保将占位符替换为您的通知中心凭据和图像文件名。
 
-        public class Notification {
-            public int Id { get; set; }
-            // Initial notification message to display to users
-            public string Message { get; set; }
-            // Type of rich payload (developer-defined)
-            public string RichType { get; set; }
-            public string Payload { get; set; }
-            public bool Read { get; set; }
+    ```
+    public class Notification {
+        public int Id { get; set; }
+        // Initial notification message to display to users
+        public string Message { get; set; }
+        // Type of rich payload (developer-defined)
+        public string RichType { get; set; }
+        public string Payload { get; set; }
+        public bool Read { get; set; }
+    }
+
+    public class Notifications {
+        public static Notifications Instance = new Notifications();
+
+        private List<Notification> notifications = new List<Notification>();
+
+        public NotificationHubClient Hub { get; set; }
+
+        private Notifications() {
+            // Placeholders: replace with the connection string (with full access) for your notification hub and the hub name from the Azure Classics Portal
+            Hub = NotificationHubClient.CreateClientFromConnectionString("{conn string with full access}",  "{hub name}");
         }
 
-        public class Notifications {
-            public static Notifications Instance = new Notifications();
+        public Notification CreateNotification(string message, string richType, string payload) {
+            var notification = new Notification() {
+                Id = notifications.Count,
+                Message = message,
+                RichType = richType,
+                Payload = payload,
+                Read = false
+            };
 
-            private List<Notification> notifications = new List<Notification>();
+            notifications.Add(notification);
 
-            public NotificationHubClient Hub { get; set; }
-
-            private Notifications() {
-                // Placeholders: replace with the connection string (with full access) for your notification hub and the hub name from the Azure Classics Portal
-                Hub = NotificationHubClient.CreateClientFromConnectionString("{conn string with full access}",  "{hub name}");
-            }
-
-            public Notification CreateNotification(string message, string richType, string payload) {
-                var notification = new Notification() {
-                    Id = notifications.Count,
-                    Message = message,
-                    RichType = richType,
-                    Payload = payload,
-                    Read = false
-                };
-
-                notifications.Add(notification);
-
-                return notification;
-            }
-
-            public Stream ReadImage(int id) {
-                var assembly = Assembly.GetExecutingAssembly();
-                // Placeholder: image file name (for example, logo.png).
-                return assembly.GetManifestResourceStream("AppBackend.img.{logo.png}");
-            }
+            return notification;
         }
+
+        public Stream ReadImage(int id) {
+            var assembly = Assembly.GetExecutingAssembly();
+            // Placeholder: image file name (for example, logo.png).
+            return assembly.GetManifestResourceStream("AppBackend.img.{logo.png}");
+        }
+    }
+    ```
 
     >[!NOTE]
     >(optional) 请参阅[如何使用 Visual C# 嵌入和访问资源](http://support.microsoft.com/zh-cn/kb/319292)了解有关如何添加和获取项目资源的详细信息。
 
 7. 在 **NotificationsController.cs** 中，使用以下代码段重新定义 **NotificationsController**。这会将初始无提示的富通知 ID 发送到设备，并允许客户端对图像进行检索：
 
-        // Return http response with image binary
-        public HttpResponseMessage Get(int id) {
-            var stream = Notifications.Instance.ReadImage(id);
+    ```
+    // Return http response with image binary
+    public HttpResponseMessage Get(int id) {
+        var stream = Notifications.Instance.ReadImage(id);
 
-            var result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StreamContent(stream);
-            // Switch in your image extension for "png"
-            result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/{png}");
+        var result = new HttpResponseMessage(HttpStatusCode.OK);
+        result.Content = new StreamContent(stream);
+        // Switch in your image extension for "png"
+        result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/{png}");
 
-            return result;
-        }
+        return result;
+    }
 
-        // Create rich notification and send initial silent notification (containing id) to client
-        public async Task<HttpResponseMessage> Post() {
-            // Replace the placeholder with image file name
-            var richNotificationInTheBackend = Notifications.Instance.CreateNotification("Check this image out!", "img",  "{logo.png}");
+    // Create rich notification and send initial silent notification (containing id) to client
+    public async Task<HttpResponseMessage> Post() {
+        // Replace the placeholder with image file name
+        var richNotificationInTheBackend = Notifications.Instance.CreateNotification("Check this image out!", "img",  "{logo.png}");
 
-            var usernameTag = "username:" + HttpContext.Current.User.Identity.Name;
+        var usernameTag = "username:" + HttpContext.Current.User.Identity.Name;
 
-            // Silent notification with content available
-            var aboutUser = "{"aps": {"content-available": 1, "sound":""}, "richId": "" + richNotificationInTheBackend.Id.ToString() + "",  "richMessage": "" + richNotificationInTheBackend.Message + "", "richType": "" + richNotificationInTheBackend.RichType + ""}";
+        // Silent notification with content available
+        var aboutUser = "{"aps": {"content-available": 1, "sound":""}, "richId": "" + richNotificationInTheBackend.Id.ToString() + "",  "richMessage": "" + richNotificationInTheBackend.Message + "", "richType": "" + richNotificationInTheBackend.RichType + ""}";
 
-            // Send notification to apns
-            await Notifications.Instance.Hub.SendAppleNativeNotificationAsync(aboutUser, usernameTag);
+        // Send notification to apns
+        await Notifications.Instance.Hub.SendAppleNativeNotificationAsync(aboutUser, usernameTag);
 
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
+        return Request.CreateResponse(HttpStatusCode.OK);
+    }
+    ```
 
 8. 现在，我们将此应用重新部署到 Azure 网站，以便可以从所有设备对其进行访问。右键单击 **AppBackend** 项目，然后选择“发布”。
 
@@ -157,211 +163,227 @@ ms.author: wesmc
 
 9. 在 **imageViewController.h** 中，将以下代码添加到控制器的接口声明中。请务必按住 Ctrl 键并从情节提要图像视图拖动到这些属性中，以链接两者：
 
-        @property (weak, nonatomic) IBOutlet UIImageView *myImage;
-        @property (strong) UIImage* imagePayload;
+    ```
+    @property (weak, nonatomic) IBOutlet UIImageView *myImage;
+    @property (strong) UIImage* imagePayload;
+    ```
 
 10. 在 **imageViewController.m** 中，在 **viewDidload** 末尾添加以下内容:
 
-        // Display the UI Image in UI Image View
-        [self.myImage setImage:self.imagePayload];
+    ```
+    // Display the UI Image in UI Image View
+    [self.myImage setImage:self.imagePayload];
+    ```
 
 11. 在 **AppDelegate.m** 中，导入您创建的图像控制器：
 
-        #import "imageViewController.h"
+    ```
+    #import "imageViewController.h"
+    ```
 
 12. 使用以下声明添加接口部分：
 
-        @interface AppDelegate ()
+    ```
+    @interface AppDelegate ()
 
-        @property UIImage* imagePayload;
-        @property NSDictionary* userInfo;
-        @property BOOL iOS8;
+    @property UIImage* imagePayload;
+    @property NSDictionary* userInfo;
+    @property BOOL iOS8;
 
-        // Obtain content from backend with notification id
-        - (void)retrieveRichImageWithId:(int)richId completion: (void(^)(NSError*)) completion;
+    // Obtain content from backend with notification id
+    - (void)retrieveRichImageWithId:(int)richId completion: (void(^)(NSError*)) completion;
 
-        // Redirect to Image View Controller after notification interaction
-        - (void)redirectToImageViewWithImage: (UIImage *)img;
+    // Redirect to Image View Controller after notification interaction
+    - (void)redirectToImageViewWithImage: (UIImage *)img;
 
-        @end
+    @end
+    ```
 
 13. 在 **AppDelegate** 中，请确保您的应用在 **application: didFinishLaunchingWithOptions** 中注册了无提示通知：
 
-        // Software version
-        self.iOS8 = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)] && [[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)];
+    ```
+    // Software version
+    self.iOS8 = [[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)] && [[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)];
 
-        // Register for remote notifications for iOS8 and previous versions
-        if (self.iOS8) {
-            NSLog(@"This device is running with iOS8.");
+    // Register for remote notifications for iOS8 and previous versions
+    if (self.iOS8) {
+        NSLog(@"This device is running with iOS8.");
 
-            // Action
-            UIMutableUserNotificationAction *richPushAction = [[UIMutableUserNotificationAction alloc] init];
-            richPushAction.identifier = @"richPushMore";
-            richPushAction.activationMode = UIUserNotificationActivationModeForeground;
-            richPushAction.authenticationRequired = NO;
-            richPushAction.title = @"More";
+        // Action
+        UIMutableUserNotificationAction *richPushAction = [[UIMutableUserNotificationAction alloc] init];
+        richPushAction.identifier = @"richPushMore";
+        richPushAction.activationMode = UIUserNotificationActivationModeForeground;
+        richPushAction.authenticationRequired = NO;
+        richPushAction.title = @"More";
 
-            // Notification category
-            UIMutableUserNotificationCategory* richPushCategory = [[UIMutableUserNotificationCategory alloc] init];
-            richPushCategory.identifier = @"richPush";
-            [richPushCategory setActions:@[richPushAction] forContext:UIUserNotificationActionContextDefault];
+        // Notification category
+        UIMutableUserNotificationCategory* richPushCategory = [[UIMutableUserNotificationCategory alloc] init];
+        richPushCategory.identifier = @"richPush";
+        [richPushCategory setActions:@[richPushAction] forContext:UIUserNotificationActionContextDefault];
 
-            // Notification categories
-            NSSet* richPushCategories = [NSSet setWithObjects:richPushCategory, nil];
+        // Notification categories
+        NSSet* richPushCategories = [NSSet setWithObjects:richPushCategory, nil];
 
-            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound |
-                                                    UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge
-                                                                                     categories:richPushCategories];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound |
+                                                UIUserNotificationTypeAlert |
+                                                UIUserNotificationTypeBadge
+                                                                                 categories:richPushCategories];
 
-            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
 
-        }
-        else {
-            // Previous iOS versions
-            NSLog(@"This device is running with iOS7 or earlier versions.");
+    }
+    else {
+        // Previous iOS versions
+        NSLog(@"This device is running with iOS7 or earlier versions.");
 
-            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability];
-        }
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability];
+    }
 
-        return YES;
+    return YES;
+    ```
 
 14. 在以下实现中替代 **application:didRegisterForRemoteNotificationsWithDeviceToken** 以考虑情节提要 UI 更改情况：
 
-        // Access navigation controller which is at the root of window
-        UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
-        // Get home view controller from stack on navigation controller
-        homeViewController *hvc = (homeViewController *)[nc.viewControllers objectAtIndex:0];
-        hvc.deviceToken = deviceToken;
+    ```
+    // Access navigation controller which is at the root of window
+    UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
+    // Get home view controller from stack on navigation controller
+    homeViewController *hvc = (homeViewController *)[nc.viewControllers objectAtIndex:0];
+    hvc.deviceToken = deviceToken;
+    ```
 
 15. 然后，将以下方法添加到 **AppDelegate.m** 以从您的终结点检索图像，并在检索完成后发送本地通知。请确保将占位符 `{backend endpoint}` 替换为后端终结点：
 
-        NSString *const GetNotificationEndpoint = @"{backend endpoint}/api/notifications";
+    ```
+    NSString *const GetNotificationEndpoint = @"{backend endpoint}/api/notifications";
 
-        // Helper: retrieve notification content from backend with rich notification id
-        - (void)retrieveRichImageWithId:(int)richId completion: (void(^)(NSError*)) completion {
-            UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
-            homeViewController *hvc = (homeViewController *)[nc.viewControllers objectAtIndex:0];
-            NSString* authenticationHeader = hvc.registerClient.authenticationHeader;
-            // Check if authenticated
-            if (!authenticationHeader) return;
+    // Helper: retrieve notification content from backend with rich notification id
+    - (void)retrieveRichImageWithId:(int)richId completion: (void(^)(NSError*)) completion {
+        UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
+        homeViewController *hvc = (homeViewController *)[nc.viewControllers objectAtIndex:0];
+        NSString* authenticationHeader = hvc.registerClient.authenticationHeader;
+        // Check if authenticated
+        if (!authenticationHeader) return;
 
-            NSURLSession* session = [NSURLSession
-                                     sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                     delegate:nil
-                                     delegateQueue:nil];
+        NSURLSession* session = [NSURLSession
+                                 sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                 delegate:nil
+                                 delegateQueue:nil];
 
-            NSURL* requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%d", GetNotificationEndpoint, richId]];
-            NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:requestURL];
-            [request setHTTPMethod:@"GET"];
-            NSString* authorizationHeaderValue = [NSString stringWithFormat:@"Basic %@", authenticationHeader];
-            [request setValue:authorizationHeaderValue forHTTPHeaderField:@"Authorization"];
+        NSURL* requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%d", GetNotificationEndpoint, richId]];
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:requestURL];
+        [request setHTTPMethod:@"GET"];
+        NSString* authorizationHeaderValue = [NSString stringWithFormat:@"Basic %@", authenticationHeader];
+        [request setValue:authorizationHeaderValue forHTTPHeaderField:@"Authorization"];
 
-            NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
-                NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
-                if (!error && httpResponse.statusCode == 200) {
-                    // From NSData to UIImage
-                    self.imagePayload = [UIImage imageWithData:data];
+            NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+            if (!error && httpResponse.statusCode == 200) {
+                // From NSData to UIImage
+                self.imagePayload = [UIImage imageWithData:data];
 
-                    completion(nil);
-                }
+                completion(nil);
+            }
+            else {
+                NSLog(@"Error status: %ld, request: %@", (long)httpResponse.statusCode, error);
+                if (error)
+                    completion(error);
                 else {
-                    NSLog(@"Error status: %ld, request: %@", (long)httpResponse.statusCode, error);
-                    if (error)
-                        completion(error);
-                    else {
-                        completion([NSError errorWithDomain:@"APICall" code:httpResponse.statusCode userInfo:nil]);
+                    completion([NSError errorWithDomain:@"APICall" code:httpResponse.statusCode userInfo:nil]);
+                }
+            }
+        }];
+        [dataTask resume];
+    }
+
+    // Handle silent push notifications when id is sent from backend
+    - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
+        self.userInfo = userInfo;
+        int richId = [[self.userInfo objectForKey:@"richId"] intValue];
+        NSString* richType = [self.userInfo objectForKey:@"richType"];
+
+        // Retrieve image data
+        if ([richType isEqualToString:@"img"]) {  
+            [self retrieveRichImageWithId:richId completion:^(NSError* error) {
+                if (!error){
+                    // Send local notification
+                    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+
+                    // "5" is arbitrary here to give you enough time to quit out of the app and receive push notifications
+                    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+                    localNotification.userInfo = self.userInfo;
+                    localNotification.alertBody = [self.userInfo objectForKey:@"richMessage"];
+                    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+
+                    // iOS8 categories
+                    if (self.iOS8) {
+                        localNotification.category = @"richPush";
                     }
+
+                    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+
+                    handler(UIBackgroundFetchResultNewData);
+                }
+                else{
+                    handler(UIBackgroundFetchResultFailed);
                 }
             }];
-            [dataTask resume];
         }
-
-        // Handle silent push notifications when id is sent from backend
-        - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
-            self.userInfo = userInfo;
-            int richId = [[self.userInfo objectForKey:@"richId"] intValue];
-            NSString* richType = [self.userInfo objectForKey:@"richType"];
-
-            // Retrieve image data
-            if ([richType isEqualToString:@"img"]) {  
-                [self retrieveRichImageWithId:richId completion:^(NSError* error) {
-                    if (!error){
-                        // Send local notification
-                        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-
-                        // "5" is arbitrary here to give you enough time to quit out of the app and receive push notifications
-                        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
-                        localNotification.userInfo = self.userInfo;
-                        localNotification.alertBody = [self.userInfo objectForKey:@"richMessage"];
-                        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-
-                        // iOS8 categories
-                        if (self.iOS8) {
-                            localNotification.category = @"richPush";
-                        }
-
-                        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-
-                        handler(UIBackgroundFetchResultNewData);
-                    }
-                    else{
-                        handler(UIBackgroundFetchResultFailed);
-                    }
-                }];
-            }
-            // Add "else if" here to handle more types of rich content such as url, sound files, etc.
-        }
+        // Add "else if" here to handle more types of rich content such as url, sound files, etc.
+    }
+    ```
 
 16. 使用以下方法打开 **AppDelegate.m** 中的图像视图控制器，以处理上述本地通知：
 
-        // Helper: redirect users to image view controller
-        - (void)redirectToImageViewWithImage: (UIImage *)img {
-            UINavigationController *navigationController = (UINavigationController*) self.window.rootViewController;
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                                     bundle: nil];
-            imageViewController *imgViewController = [mainStoryboard instantiateViewControllerWithIdentifier: @"imageViewController"];
-            // Pass data/image to image view controller
-            imgViewController.imagePayload = img;
+    ```
+    // Helper: redirect users to image view controller
+    - (void)redirectToImageViewWithImage: (UIImage *)img {
+        UINavigationController *navigationController = (UINavigationController*) self.window.rootViewController;
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                 bundle: nil];
+        imageViewController *imgViewController = [mainStoryboard instantiateViewControllerWithIdentifier: @"imageViewController"];
+        // Pass data/image to image view controller
+        imgViewController.imagePayload = img;
 
-            // Redirect
-            [navigationController pushViewController:imgViewController animated:YES];
+        // Redirect
+        [navigationController pushViewController:imgViewController animated:YES];
+    }
+
+    // Handle local notification sent above in didReceiveRemoteNotification
+    - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+        if (application.applicationState == UIApplicationStateActive) {
+            // Show in-app alert with an extra "more" button
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification" message:notification.alertBody delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"More", nil];
+
+            [alert show];
         }
-
-        // Handle local notification sent above in didReceiveRemoteNotification
-        - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-            if (application.applicationState == UIApplicationStateActive) {
-                // Show in-app alert with an extra "more" button
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification" message:notification.alertBody delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"More", nil];
-
-                [alert show];
-            }
-            // App becomes active from user's tap on notification
-            else {
-                [self redirectToImageViewWithImage:self.imagePayload];
-            }
+        // App becomes active from user's tap on notification
+        else {
+            [self redirectToImageViewWithImage:self.imagePayload];
         }
+    }
 
-        // Handle buttons in in-app alerts and redirect with data/image
-        - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-            // Handle "more" button
-            if (buttonIndex == 1)
-            {
-                [self redirectToImageViewWithImage:self.imagePayload];
-            }
-            // Add "else if" here to handle more buttons
+    // Handle buttons in in-app alerts and redirect with data/image
+    - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+        // Handle "more" button
+        if (buttonIndex == 1)
+        {
+            [self redirectToImageViewWithImage:self.imagePayload];
         }
+        // Add "else if" here to handle more buttons
+    }
 
-        // Handle notification setting actions in iOS8
-        - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
-            // Handle richPush related buttons
-            if ([identifier isEqualToString:@"richPushMore"]) {
-                [self redirectToImageViewWithImage:self.imagePayload];
-            }
-            completionHandler();
+    // Handle notification setting actions in iOS8
+    - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+        // Handle richPush related buttons
+        if ([identifier isEqualToString:@"richPushMore"]) {
+            [self redirectToImageViewWithImage:self.imagePayload];
         }
+        completionHandler();
+    }
+    ```
 
 ## 运行应用程序
 

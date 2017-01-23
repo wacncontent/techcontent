@@ -45,9 +45,11 @@ ms.tgt_pltfrm: NA
 
 此命令将 Database1 复制到同一服务器上名为 Database2 的新数据库。根据数据库的大小，复制操作可能需要一些时间才能完成。
 
-    -- Execute on the master database.
-    -- Start copying.
-    CREATE DATABASE Database1_copy AS COPY OF Database1;
+```
+-- Execute on the master database.
+-- Start copying.
+CREATE DATABASE Database1_copy AS COPY OF Database1;
+```
 
 ### 将 SQL 数据库复制到不同的服务器
 
@@ -55,9 +57,11 @@ ms.tgt_pltfrm: NA
 
 此命令将 server1 上的 Database1 复制到 server2 上名为 Database2 的新数据库。根据数据库的大小，复制操作可能需要一些时间才能完成。
 
-    -- Execute on the master database of the target server (server2)
-    -- Start copying from Server1 to Server2
-    CREATE DATABASE Database1_copy AS COPY OF server1.Database1;
+```
+-- Execute on the master database of the target server (server2)
+-- Start copying from Server1 to Server2
+CREATE DATABASE Database1_copy AS COPY OF server1.Database1;
+```
 
 ## 监视复制操作的进度
 

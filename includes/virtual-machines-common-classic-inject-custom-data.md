@@ -13,9 +13,11 @@
 
 当前仅在 [Azure 命令行界面](https://github.com/Azure/azure-xplat-cli)上支持此功能。此处我们将要创建一个包含数据的 `custom-data.txt` 文件，然后在预配期间将它注入 VM。尽管你可以使用 `azure vm create` 命令的任何选项，但以下内容演示的是一个非常基本的方法：
 
-    azure vm create <vmname> <vmimage> <username> <password> \  
-    --location "China North" --ssh 22 \  
-    --custom-data ./custom-data.txt  
+```
+azure vm create <vmname> <vmimage> <username> <password> \  
+--location "China North" --ssh 22 \  
+--custom-data ./custom-data.txt  
+```
 
 ## 在虚拟机中使用自定义数据
 

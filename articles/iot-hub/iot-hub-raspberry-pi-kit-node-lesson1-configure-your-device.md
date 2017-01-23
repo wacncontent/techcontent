@@ -1,16 +1,22 @@
 ---
-title: 配置设备
+title: 配置设备 | Azure
 description: 对 Raspberry Pi 3 进行首次使用配置，并安装 Raspbian OS，这是一个免费操作系统，已针对 Raspberry Pi 硬件优化。
 services: iot-hub
 documentationcenter: 
 author: shizn
 manager: timlt
 tags: 
-keywords: 
+keywords: 安装 raspbian, raspbian 下载, 如何安装 raspbian, raspbian 安装程序, raspberry pi 安装 raspbian, raspberry pi 安装 os, raspberry pi sd 卡安装, raspberry pi 连接, 连接到 raspberry pi, raspberry pi 连接
 
+ms.assetid: 43f7c2cf-f1a5-4dd5-93f0-7e546c6dc91e
 ms.service: iot-hub
-ms.date: 10/21/2016
-wacn.date: 12/19/2016
+ms.devlang: node
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/28/2016
+wacn.date: 01/13/2017
+ms.author: xshi
 ---
 
 # 配置设备
@@ -42,7 +48,7 @@ wacn.date: 12/19/2016
 用户还需要：
 
 * 适合 Pi 连接的有线或无线连接。
-* USB-SD 适配器或 miniSD 卡，用于将 OS 映像刻录到 microSD 卡中。
+* USB-SD 适配器或 miniSD 卡，用于将操作系统映像刻录到 microSD 卡中。
 * 运行 Windows、Mac 或 Linux 的计算机。该计算机用于将 Raspbian 安装在 microSD 卡上。
 * Internet 连接，用于下载必需的工具和软件。
 
@@ -51,17 +57,17 @@ wacn.date: 12/19/2016
 
 1. 下载 Raspbian。
 
-    1. [下载](https://www.raspberrypi.org/downloads/raspbian/) Raspbian Jessie with Pixel 的 .zip 文件。
-    2. 将 Raspbian 映像解压缩到计算机的某个文件夹中。
+   1. [下载](https://www.raspberrypi.org/downloads/raspbian/) Raspbian Jessie with Pixel 的 .zip 文件。
+   2. 将 Raspbian 映像解压缩到计算机的某个文件夹中。
 
 2. 将 Raspbian 安装到 microSD 卡。
 
-    1. [下载](https://www.etcher.io)并安装 Etcher SD 卡刻录机实用程序。
-    2. 运行 Etcher 并选择已在步骤 1 中解压缩的 Raspbian 映像。
-    3. 选择 microSD 卡驱动器。请注意，Etcher 可能已选择正确的驱动器。
-    4. 单击“闪存”将 Raspbian 安装到 microSD 卡。
-    5. 安装完成后，从计算机中取出 microSD 卡。可以安全地直接取出 microSD 卡，因为 Etcher 会在完成后自动弹出或卸载 microSD 卡。
-    6. 将 microSD 卡插入 Pi。
+   1. [下载](https://www.etcher.io)并安装 Etcher SD 卡刻录机实用程序。
+   2. 运行 Etcher 并选择已在步骤 1 中解压缩的 Raspbian 映像。
+   3. 选择 microSD 卡驱动器。请注意，Etcher 可能已选择正确的驱动器。
+   4. 单击“闪存”将 Raspbian 安装到 microSD 卡。
+   5. 安装完成后，从计算机中取出 microSD 卡。可以安全地直接取出 microSD 卡，因为 Etcher 会在完成后自动弹出或卸载 microSD 卡。
+   6. 将 microSD 卡插入 Pi。
 
 ![插入 SD 卡](./media/iot-hub-raspberry-pi-lessons/lesson1/insert_sdcard.jpg)  
 
@@ -109,4 +115,5 @@ wacn.date: 12/19/2016
 ## 后续步骤
 [获取工具](./iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-win32.md)
 
-<!---HONumber=Mooncake_1212_2016-->
+<!---HONumber=Mooncake_0109_2017-->
+<!--Update_Description:update wording-->

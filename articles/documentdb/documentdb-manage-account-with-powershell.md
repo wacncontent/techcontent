@@ -40,10 +40,12 @@ ms.author: dimakwan
 
 此命令可创建 DocumentDB 数据库帐户。使用特定[一致性策略](./documentdb-consistency-levels.md)将新的数据库帐户配置为单区域或[多区域][scaling-globally]。
 
-    $locations = @(@{"locationName"="<write-region-location>"; "failoverPriority"=0}, @{"locationName"="<read-region-location>"; "failoverPriority"=1})
-    $consistencyPolicy = @{"defaultConsistencyLevel"="<default-consistency-level>"; "maxIntervalInSeconds"="<max-interval>"; "maxStalenessPrefix"="<max-staleness-prefix>"}
-    $DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
-    New-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName <resource-group-name>  -Location "<resource-group-location>" -Name <database-account-name> -PropertyObject $DocumentDBProperties
+```
+$locations = @(@{"locationName"="<write-region-location>"; "failoverPriority"=0}, @{"locationName"="<read-region-location>"; "failoverPriority"=1})
+$consistencyPolicy = @{"defaultConsistencyLevel"="<default-consistency-level>"; "maxIntervalInSeconds"="<max-interval>"; "maxStalenessPrefix"="<max-staleness-prefix>"}
+$DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
+New-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName <resource-group-name>  -Location "<resource-group-location>" -Name <database-account-name> -PropertyObject $DocumentDBProperties
+```
 
 - `<write-region-location>` 数据库帐户的写入区域位置名称。此位置的故障转移优先级值需要为 0。每个数据库帐户必须有且只有一个写入区域。
 - `<read-region-location>` 数据库帐户的读取区域位置名称。此位置的故障转移优先级值需要大于 0。每个数据库帐户可以有多个读取区域。
@@ -56,10 +58,12 @@ ms.author: dimakwan
 
 示例：
 
-    $locations = @(@{"locationName"="China North"; "failoverPriority"=0}, @{"locationName"="China East"; "failoverPriority"=1})
-    $consistencyPolicy = @{"defaultConsistencyLevel"="BoundedStaleness"; "maxIntervalInSeconds"=5; "maxStalenessPrefix"=100}
-    $DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
-    New-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Location "China North" -Name "docdb-test" -PropertyObject $DocumentDBProperties
+```
+$locations = @(@{"locationName"="China North"; "failoverPriority"=0}, @{"locationName"="China East"; "failoverPriority"=1})
+$consistencyPolicy = @{"defaultConsistencyLevel"="BoundedStaleness"; "maxIntervalInSeconds"=5; "maxStalenessPrefix"=100}
+$DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
+New-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Location "China North" -Name "docdb-test" -PropertyObject $DocumentDBProperties
+```
 
 ### 说明
 - 前面的示例使用两个区域创建数据库帐户。还可以使用一个区域（指定为写入区域并具有故障转移优先级值 0）或两个以上区域创建数据库帐户。有关详细信息，请参阅[多区域数据库帐户][scaling-globally]。
@@ -72,10 +76,12 @@ ms.author: dimakwan
 > [!NOTE]
 此命令可添加和删除区域，但不可修改故障转移优先级。若要修改故障转移优先级，请参阅[下文](#modify-failover-priority-powershell)。
 
-    $locations = @(@{"locationName"="<write-region-location>"; "failoverPriority"=0}, @{"locationName"="<read-region-location>"; "failoverPriority"=1})
-    $consistencyPolicy = @{"defaultConsistencyLevel"="<default-consistency-level>"; "maxIntervalInSeconds"="<max-interval>"; "maxStalenessPrefix"="<max-staleness-prefix>"}
-    $DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
-    Set-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName <resource-group-name> -Name <database-account-name> -PropertyObject $DocumentDBProperties
+```
+$locations = @(@{"locationName"="<write-region-location>"; "failoverPriority"=0}, @{"locationName"="<read-region-location>"; "failoverPriority"=1})
+$consistencyPolicy = @{"defaultConsistencyLevel"="<default-consistency-level>"; "maxIntervalInSeconds"="<max-interval>"; "maxStalenessPrefix"="<max-staleness-prefix>"}
+$DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
+Set-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName <resource-group-name> -Name <database-account-name> -PropertyObject $DocumentDBProperties
+```
 
 - `<write-region-location>` 数据库帐户的写入区域位置名称。此位置的故障转移优先级值需要为 0。每个数据库帐户必须有且只有一个写入区域。
 - `<read-region-location>` 数据库帐户的读取区域位置名称。此位置的故障转移优先级值需要大于 0。每个数据库帐户可以有多个读取区域。
@@ -88,36 +94,46 @@ ms.author: dimakwan
 
 示例：
 
-    $locations = @(@{"locationName"="China North"; "failoverPriority"=0}, @{"locationName"="China East"; "failoverPriority"=1})
-    $consistencyPolicy = @{"defaultConsistencyLevel"="BoundedStaleness"; "maxIntervalInSeconds"=5; "maxStalenessPrefix"=100}
-    $DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
-    Set-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test" -PropertyObject $DocumentDBProperties
+```
+$locations = @(@{"locationName"="China North"; "failoverPriority"=0}, @{"locationName"="China East"; "failoverPriority"=1})
+$consistencyPolicy = @{"defaultConsistencyLevel"="BoundedStaleness"; "maxIntervalInSeconds"=5; "maxStalenessPrefix"=100}
+$DocumentDBProperties = @{"databaseAccountOfferType"="Standard"; "locations"=$locations; "consistencyPolicy"=$consistencyPolicy}
+Set-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test" -PropertyObject $DocumentDBProperties
+```
 
 ## <a id="delete-documentdb-account-powershell"></a> 删除 DocumentDB 数据库帐户
 
 此命令可删除现有 DocumentDB 数据库帐户。
 
-    Remove-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>"
+```
+Remove-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>"
+```
 
 - `<resource-group-name>` 新的 DocumentDB 数据库帐户所属的 [Azure 资源组][azure-resource-groups]的名称。
 - `<database-account-name>` 要删除的 DocumentDB 数据库帐户的名称。
 
 示例：
 
-    Remove-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test"
+```
+Remove-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test"
+```
 
 ## <a id="get-documentdb-properties-powershell"></a> 获取 DocumentDB 数据库帐户的属性
 
 此命令可获取现有 DocumentDB 数据库帐户的属性。
 
-    Get-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>"
+```
+Get-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>"
+```
 
 - `<resource-group-name>` 新的 DocumentDB 数据库帐户所属的 [Azure 资源组][azure-resource-groups]的名称。
 - `<database-account-name>` DocumentDB 数据库帐户的名称。
 
 示例：
 
-    Get-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test"
+```
+Get-AzureRmResource -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test"
+```
 
 ## <a id="update-tags-powershell"></a> 更新 DocumentDB 数据库帐户的标记
 
@@ -128,27 +144,35 @@ ms.author: dimakwan
 
 示例：
 
-    $tags = @{"dept" = "Finance”; environment = “Production”}
-    Set-AzureRmResource -ResourceType “Microsoft.DocumentDB/databaseAccounts”  -ResourceGroupName "rg-test" -Name "docdb-test" -Tags $tags
+```
+$tags = @{"dept" = "Finance”; environment = “Production”}
+Set-AzureRmResource -ResourceType “Microsoft.DocumentDB/databaseAccounts”  -ResourceGroupName "rg-test" -Name "docdb-test" -Tags $tags
+```
 
 ## <a id="list-account-keys-powershell"></a> 列出帐户密钥
 
 当创建 DocumentDB 帐户时，服务生成两个主访问密钥，用于访问 DocumentDB 帐户时的身份验证。通过提供两个访问密钥，DocumentDB 允许你在不中断 DocumentDB 帐户连接的情况下重新生成密钥。还提供用于对只读操作进行身份验证的只读密钥。有两个读写密钥（主密钥和辅助密钥）和两个只读密钥（主密钥和辅助密钥）。
 
-    $keys = Invoke-AzureRmResourceAction -Action listKeys -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>"
+```
+$keys = Invoke-AzureRmResourceAction -Action listKeys -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>"
+```
 
 - `<resource-group-name>` 新的 DocumentDB 数据库帐户所属的 [Azure 资源组][azure-resource-groups]的名称。
 - `<database-account-name>` DocumentDB 数据库帐户的名称。
 
 示例：
 
-    $keys = Invoke-AzureRmResourceAction -Action listKeys -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test"
+```
+$keys = Invoke-AzureRmResourceAction -Action listKeys -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test"
+```
 
 ## <a id="regenerate-account-key-powershell"></a> 重新生成帐户密钥
 
 你应定期将访问密钥更改为你的 DocumentDB 帐户，使你的连接更安全。分配了两个访问密钥，你可以使用一个访问密钥保持与 DocumentDB 帐户的连接，同时，你可以重新生成另一个访问密钥。
 
-    Invoke-AzureRmResourceAction -Action regenerateKey -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>" -Parameters @{"keyKind"="<key-kind>"}
+```
+Invoke-AzureRmResourceAction -Action regenerateKey -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>" -Parameters @{"keyKind"="<key-kind>"}
+```
 
 - `<resource-group-name>` 新的 DocumentDB 数据库帐户所属的 [Azure 资源组][azure-resource-groups]的名称。
 - `<database-account-name>` DocumentDB 数据库帐户的名称。
@@ -156,14 +180,18 @@ ms.author: dimakwan
 
 示例：
 
-    Invoke-AzureRmResourceAction -Action regenerateKey -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test" -Parameters @{"keyKind"="Primary"}
+```
+Invoke-AzureRmResourceAction -Action regenerateKey -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test" -Parameters @{"keyKind"="Primary"}
+```
 
 ## <a id="modify-failover-priority-powershell"></a> 修改 DocumentDB 数据库帐户的故障转移优先级
 
 对于多区域数据库帐户，可以更改 DocumentDB 数据库帐户所在的各个区域的故障转移优先级。有关 DocumentDB 数据库帐户中的故障转移的详细信息，请参阅[使用 DocumentDB 全局分发数据][distribute-data-globally]。
 
-    $failoverPolicies = @(@{"locationName"="<write-region-location>"; "failoverPriority"=0},@{"locationName"="<read-region-location>"; "failoverPriority"=1})
-    Invoke-AzureRmResourceAction -Action failoverPriorityChange -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>" -Parameters @{"failoverPolicies"=$failoverPolicies}
+```
+$failoverPolicies = @(@{"locationName"="<write-region-location>"; "failoverPriority"=0},@{"locationName"="<read-region-location>"; "failoverPriority"=1})
+Invoke-AzureRmResourceAction -Action failoverPriorityChange -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "<resource-group-name>" -Name "<database-account-name>" -Parameters @{"failoverPolicies"=$failoverPolicies}
+```
 
 - `<write-region-location>` 数据库帐户的写入区域位置名称。此位置的故障转移优先级值需要为 0。每个数据库帐户必须有且只有一个写入区域。
 - `<read-region-location>` 数据库帐户的读取区域位置名称。此位置的故障转移优先级值需要大于 0。每个数据库帐户可以有多个读取区域。
@@ -172,8 +200,10 @@ ms.author: dimakwan
 
 示例：
 
-    $failoverPolicies = @(@{"locationName"="China East"; "failoverPriority"=0},@{"locationName"="China North"; "failoverPriority"=1})
-    Invoke-AzureRmResourceAction -Action failoverPriorityChange -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test" -Parameters @{"failoverPolicies"=$failoverPolicies}
+```
+$failoverPolicies = @(@{"locationName"="China East"; "failoverPriority"=0},@{"locationName"="China North"; "failoverPriority"=1})
+Invoke-AzureRmResourceAction -Action failoverPriorityChange -ResourceType "Microsoft.DocumentDb/databaseAccounts" -ApiVersion "2015-04-08" -ResourceGroupName "rg-test" -Name "docdb-test" -Parameters @{"failoverPolicies"=$failoverPolicies}
+```
 
 <!--Reference style links - using these makes the source content way more readable than using inline links-->
 

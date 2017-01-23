@@ -73,8 +73,8 @@ Azure 检测到问题节点并因此将角色实例移到新节点时，系统�
 
 1. 在 Azure 经典管理门户中，单击角色实例。
 2. 在 Azure 经典管理门户的“属性”窗格中，考虑是否存在以下情况，以便解决问题：
-    * 如果角色实例最近停止过（可查看“中止计数”的值），则可能是因为部署正在进行更新。等待，看角色实例是否会自行恢复运行。
-    * 如果角色实例处于“忙”状态，请检查应用程序代码，看是否已处理 [StatusCheck](https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck) 事件。可能需要添加或修复处理此事件的某些代码。
+   * 如果角色实例最近停止过（可查看“中止计数”的值），则可能是因为部署正在进行更新。等待，看角色实例是否会自行恢复运行。
+   * 如果角色实例处于“忙”状态，请检查应用程序代码，看是否已处理 [StatusCheck](https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck) 事件。可能需要添加或修复处理此事件的某些代码。
 
 >[!WARNING]
 > 如果回收云服务，请重置部署的属性，以便有效清除有关原始问题的信息。

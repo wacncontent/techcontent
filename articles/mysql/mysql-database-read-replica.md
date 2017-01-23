@@ -66,48 +66,50 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
 
 下面是应用端读写分离的Java样例程序：
 
-    package test1;
+```
+package test1;
 
-    import java.sql.Connection;
-    import java.sql.ResultSet;
-    import java.sql.Statement;
-    import java.util.Properties;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Properties;
 
-    import com.mysql.jdbc.Driver;
-    import com.mysql.jdbc.ReplicationDriver;;
+import com.mysql.jdbc.Driver;
+import com.mysql.jdbc.ReplicationDriver;;
 
-    public class ConnectionDemo {
+public class ConnectionDemo {
 
-      public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
 
-        ReplicationDriver driver = new ReplicationDriver();
-        String url = "jdbc:mysql:replication://address=(protocol=tcp)(type=master)(host=masterhost)(port=3306)(user=masteruser),address=(protocol=tcp)(type=slave)(host=slavehost)(port=3306)(user=slaveuser)/yourdb";
-        Properties props = new Properties();    
-        props.put("password", "yourpassword");
-        try (Connection conn = driver.connect(url, props))
+    ReplicationDriver driver = new ReplicationDriver();
+    String url = "jdbc:mysql:replication://address=(protocol=tcp)(type=master)(host=masterhost)(port=3306)(user=masteruser),address=(protocol=tcp)(type=slave)(host=slavehost)(port=3306)(user=slaveuser)/yourdb";
+    Properties props = new Properties();    
+    props.put("password", "yourpassword");
+    try (Connection conn = driver.connect(url, props))
+    {
+        // Perform read/write work on the master
+        conn.setReadOnly(false);
+        conn.setAutoCommit(false);
+        conn.createStatement().executeUpdate("update t1 set id = id+1;");
+        conn.commit();    
+
+        // Set up connection to slave;
+        conn.setReadOnly(true);
+
+        // Now, do a query from a slave
+        try (Statement statement = conn.createStatement())
         {
-            // Perform read/write work on the master
-            conn.setReadOnly(false);
-            conn.setAutoCommit(false);
-            conn.createStatement().executeUpdate("update t1 set id = id+1;");
-            conn.commit();    
-
-            // Set up connection to slave;
-            conn.setReadOnly(true);
-
-            // Now, do a query from a slave
-            try (Statement statement = conn.createStatement())
-            {
-                ResultSet res = statement.executeQuery("show tables");
-                System.out.println("There are below tables:");
-                while (res.next()) {
-                    String tblName = res.getString(1);
-                    System.out.println(tblName);
-                }
-            } 
-        }
-      }
+            ResultSet res = statement.executeQuery("show tables");
+            System.out.println("There are below tables:");
+            while (res.next()) {
+                String tblName = res.getString(1);
+                System.out.println(tblName);
+            }
+        } 
     }
+  }
+}
+```
 
 下面是应用端读写分离的PHP样例程序：
 
@@ -119,93 +121,97 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
 
 - 创建 PECL/mysqlnd_ms插件配置文件如下所示：
 
-        File mysqlnd_ms_plugin.ini:
-        {
-            "myapp": {
-                   "master": {
-                    "master_0": {
-                        "host": "<your master host>",
-                        "port": "<your master port>",
-                        "user": "<your master username>",
-                        "password": "<your master password>"
-                        }
-                },
-                "slave": {
-                    "slave_0": {
-                        "host": "<your slave host>",
-                        "port": "<your slave port>",
-                        "user": "<your slave username>",
-                        "password": "<your slave password>"
+    ```
+    File mysqlnd_ms_plugin.ini:
+    {
+        "myapp": {
+               "master": {
+                "master_0": {
+                    "host": "<your master host>",
+                    "port": "<your master port>",
+                    "user": "<your master username>",
+                    "password": "<your master password>"
                     }
+            },
+            "slave": {
+                "slave_0": {
+                    "host": "<your slave host>",
+                    "port": "<your slave port>",
+                    "user": "<your slave username>",
+                    "password": "<your slave password>"
                 }
-        }
+            }
+    }
+    ```
 
 - PHP样例程序：
 
-        <?php
-        function is_select($query)
-        {
-          switch (mysqlnd_ms_query_is_select($query))
-          {
-            case MYSQLND_MS_QUERY_USE_MASTER:
-              printf("'%s' should be run on the master.<br>\n", $query);
-              break;
-            case MYSQLND_MS_QUERY_USE_SLAVE:
-              printf("'%s' should be run on a slave.<br>\n", $query);
-              break;
-            case MYSQLND_MS_QUERY_USE_LAST_USED:
-              printf("'%s' should be run on the server that has run the previous query.<br>\n", $query);
-              break;
-            default:
-              printf("No suggestion where to run the '%s', fallback to master recommended.<br>\n", $query);
-              break;
-          }
-        }
+    ```
+    <?php
+    function is_select($query)
+    {
+      switch (mysqlnd_ms_query_is_select($query))
+      {
+        case MYSQLND_MS_QUERY_USE_MASTER:
+          printf("'%s' should be run on the master.<br>\n", $query);
+          break;
+        case MYSQLND_MS_QUERY_USE_SLAVE:
+          printf("'%s' should be run on a slave.<br>\n", $query);
+          break;
+        case MYSQLND_MS_QUERY_USE_LAST_USED:
+          printf("'%s' should be run on the server that has run the previous query.<br>\n", $query);
+          break;
+        default:
+          printf("No suggestion where to run the '%s', fallback to master recommended.<br>\n", $query);
+          break;
+      }
+    }
 
-        if (!($mysqli = new mysqli("myapp", "<your username>", "<your password>", "<your db>")) || mysqli_connect_errno())
-        {
-          die(sprintf("Failed to connect: [%d] %s\n", mysqli_connect_errno(), mysqli_connect_error()));
-        }
-        $query = "INSERT INTO user(name, num) VALUES ('test', 1)";
-        is_select($query);
+    if (!($mysqli = new mysqli("myapp", "<your username>", "<your password>", "<your db>")) || mysqli_connect_errno())
+    {
+      die(sprintf("Failed to connect: [%d] %s\n", mysqli_connect_errno(), mysqli_connect_error()));
+    }
+    $query = "INSERT INTO user(name, num) VALUES ('test', 1)";
+    is_select($query);
 
-        if (!($res = $mysqli->query($query)))
-        {
-          printf("Failed to insert: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
-        }
+    if (!($res = $mysqli->query($query)))
+    {
+      printf("Failed to insert: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
+    }
 
-        $query = "SELECT * FROM user";
-        is_select($query);
-        if (!($res = $mysqli->query($query)))
-        {
-          printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
-        }
-        else
-        {
-          for ($i=0; $row = $res->fetch_assoc(); $i++)
-          {
-            $value[$i] = $row;
-          }
-          print_r($value);
-          printf("<br>\n");
-          $res->close();
-        }
+    $query = "SELECT * FROM user";
+    is_select($query);
+    if (!($res = $mysqli->query($query)))
+    {
+      printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
+    }
+    else
+    {
+      for ($i=0; $row = $res->fetch_assoc(); $i++)
+      {
+        $value[$i] = $row;
+      }
+      print_r($value);
+      printf("<br>\n");
+      $res->close();
+    }
 
-        $query = "/*" . MYSQLND_MS_LAST_USED_SWITCH . "*/SELECT * FROM user limit 1";
-        is_select($query);
-        if (!($res = $mysqli->query($query)))
-        {
-          printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
-        }
-        else
-        {
-          $value = $res->fetch_assoc();
-          print_r($value);
-          printf("<br>\n");
-          $res->close();
-        }
-        $mysqli->close();
-        ?>
+    $query = "/*" . MYSQLND_MS_LAST_USED_SWITCH . "*/SELECT * FROM user limit 1";
+    is_select($query);
+    if (!($res = $mysqli->query($query)))
+    {
+      printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
+    }
+    else
+    {
+      $value = $res->fetch_assoc();
+      print_r($value);
+      printf("<br>\n");
+      $res->close();
+    }
+    $mysqli->close();
+    ?>
+    ```
 
 ##提升从属实例
 

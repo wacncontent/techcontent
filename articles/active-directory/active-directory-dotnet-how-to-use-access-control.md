@@ -106,29 +106,31 @@ Azure 将创建并激活该命名空间。
 5. 在下一个对话框中，选择“Internet 应用程序”，然后单击“确定”。
 6. 编辑 *Views\\Shared\_LoginPartial.cshtml* 文件，并将内容替换为下列代码：
 
-        @if (Request.IsAuthenticated)
+    ```
+    @if (Request.IsAuthenticated)
+    {
+        string name = "Null ID";
+        if (!String.IsNullOrEmpty(User.Identity.Name))
         {
-            string name = "Null ID";
-            if (!String.IsNullOrEmpty(User.Identity.Name))
-            {
-                name = User.Identity.Name;
-            }
-            <text>
-            Hello, @Html.ActionLink(name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
-                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                    }
-            </text>
+            name = User.Identity.Name;
         }
-        else
-        {
-            <ul>
-                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-            </ul>
-        }
+        <text>
+        Hello, @Html.ActionLink(name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                }
+        </text>
+    }
+    else
+    {
+        <ul>
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }
+    ```
 
 目前，ACS 未设置 User.Identity.Name，因此我们需要进行上述更改。
 
@@ -204,9 +206,11 @@ Azure 将创建并激活该命名空间。
     {
         ViewBag.Message = "Your claims page.";
 
-        ViewBag.ClaimsIdentity = Thread.CurrentPrincipal.Identity;
+    ```
+    ViewBag.ClaimsIdentity = Thread.CurrentPrincipal.Identity;
 
-        return View();
+    return View();
+    ```
     }
 
 1. 右键单击 *Claims* 方法，然后选择“添加视图”。
@@ -217,53 +221,55 @@ Azure 将创建并激活该命名空间。
 
 1. 将 *Views\\Home\\Claims.cshtml* 文件的内容替换为下列代码：
 
-        @{
-            ViewBag.Title = "Claims";
-        }
-        <hgroup class="title">
-            <h1>@ViewBag.Title.</h1>
-            <h2>@ViewBag.Message</h2>
-        </hgroup>
-        <h3>Values from Identity</h3>
-        <table>
-            <tr>
-                <td>
-                    IsAuthenticated: 
-                </td>
-                <td>
-                    @ViewBag.ClaimsIdentity.IsAuthenticated 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Name: 
-                </td>        
-                <td>
-                    @ViewBag.ClaimsIdentity.Name
-                </td>        
-            </tr>
-        </table>
-        <h3>Claims from ClaimsIdentity</h3>
-        <table>
-            <tr>
-                <th>
-                    Claim Type
-                </th>
-                <th>
-                    Claim Value
-                </th>
-            </tr>
-                @foreach (System.Security.Claims.Claim claim in ViewBag.ClaimsIdentity.Claims ) {
-            <tr>
-                <td>
-                    @claim.Type
-                </td>
-                <td>
-                    @claim.Value
-                </td>
-            </tr>
-        }
-        </table>
+    ```
+    @{
+        ViewBag.Title = "Claims";
+    }
+    <hgroup class="title">
+        <h1>@ViewBag.Title.</h1>
+        <h2>@ViewBag.Message</h2>
+    </hgroup>
+    <h3>Values from Identity</h3>
+    <table>
+        <tr>
+            <td>
+                IsAuthenticated: 
+            </td>
+            <td>
+                @ViewBag.ClaimsIdentity.IsAuthenticated 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Name: 
+            </td>        
+            <td>
+                @ViewBag.ClaimsIdentity.Name
+            </td>        
+        </tr>
+    </table>
+    <h3>Claims from ClaimsIdentity</h3>
+    <table>
+        <tr>
+            <th>
+                Claim Type
+            </th>
+            <th>
+                Claim Value
+            </th>
+        </tr>
+            @foreach (System.Security.Claims.Claim claim in ViewBag.ClaimsIdentity.Claims ) {
+        <tr>
+            <td>
+                @claim.Type
+            </td>
+            <td>
+                @claim.Value
+            </td>
+        </tr>
+    }
+    </table>
+    ```
 
 1. 运行应用程序并导航到 *Claims* 方法：
 

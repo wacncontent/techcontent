@@ -127,29 +127,35 @@ ms.author: syamk
 2. 将新类命名为 **Item.cs**，然后单击“添加”。
 3. 在这个新的 **Item.cs** 文件中，将下列代码添加到最后一个 *using 语句*后面。
 
-        using Newtonsoft.Json;
+    ```
+    using Newtonsoft.Json;
+    ```
 4. 现在将此代码
 
-        public class Item
-        {
-        }
+    ```
+    public class Item
+    {
+    }
+    ```
 
     替换为以下代码。
 
-        public class Item
-        {
-            [JsonProperty(PropertyName = "id")]
-            public string Id { get; set; }
+    ```
+    public class Item
+    {
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
 
-            [JsonProperty(PropertyName = "name")]
-            public string Name { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
-            [JsonProperty(PropertyName = "description")]
-            public string Description { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
-            [JsonProperty(PropertyName = "isComplete")]
-            public bool Completed { get; set; }
-        }
+        [JsonProperty(PropertyName = "isComplete")]
+        public bool Completed { get; set; }
+    }
+    ```
 
     DocumentDB 中的所有数据都会通过线路传递，并存储为 JSON。若要通过 JSON.NET 控制对象的序列化/反序列化方式，可以使用刚才创建的 **Item** 类中所示的 **JsonProperty** 属性。你**不一定**要这样做，但我想确保所有属性都按照 JSON camelCase 命名约定命名。
 
@@ -187,11 +193,11 @@ ms.author: syamk
     ![屏幕截图：显示 Visual Studio 使用突出显示的“添加视图”命令创建的 Item 文件夹的解决方案资源管理器](./media/documentdb-dotnet-application/image17.png)
 2. 在“添加视图”对话框中，执行以下操作：
 
-    - 在“视图名称”框中，键入“索引”。
-    - 在“模板”框中，选择“列表”。
-    - 在“模型类”框中，选择“项(todo.Models)”。
-    - 将“数据上下文类”框留空。
-    - 在“布局页”框中，键入 ***~/Views/Shared/\_Layout.cshtml***。
+   - 在“视图名称”框中，键入“索引”。
+   - 在“模板”框中，选择“列表”。
+   - 在“模型类”框中，选择“项(todo.Models)”。
+   - 将“数据上下文类”框留空。
+   - 在“布局页”框中，键入 ***~/Views/Shared/\_Layout.cshtml***。
 
      ![屏幕截图：显示“添加视图”对话框](./media/documentdb-dotnet-application/image18.png)
 3. 设置完所有这些值之后，单击“添加”，让 Visual Studio 创建新的模板视图。完成之后，它会打开刚创建的 cshtml 文件。我们可以在 Visual Studio 中关闭该文件，我们稍后会回头使用此文件。
@@ -202,12 +208,12 @@ ms.author: syamk
 1. 在“解决方案资源管理器”中，再次右键单击“Item”文件夹，单击“添加”，然后单击“视图”。
 2. 在“添加视图”对话框中，执行以下操作：
 
-    - 在“视图名称”框中，键入“创建”。
-    - 在“模板”框中，选择“创建”。
-    - 在“模型类”框中，选择“项(todo.Models)”。
-    - 将“数据上下文类”框留空。
-    - 在“布局页”框中，键入 ***~/Views/Shared/\_Layout.cshtml***。
-    - 单击**“添加”**。
+   - 在“视图名称”框中，键入“创建”。
+   - 在“模板”框中，选择“创建”。
+   - 在“模型类”框中，选择“项(todo.Models)”。
+   - 将“数据上下文类”框留空。
+   - 在“布局页”框中，键入 ***~/Views/Shared/\_Layout.cshtml***。
+   - 单击**“添加”**。
 
 #### <a name="_Toc395888515"></a>添加“编辑项”视图
 最后，采用与之前相同的方式添加最后一个视图，以供编辑**项**使用。
@@ -215,12 +221,12 @@ ms.author: syamk
 1. 在“解决方案资源管理器”中，再次右键单击“Item”文件夹，单击“添加”，然后单击“视图”。
 2. 在“添加视图”对话框中，执行以下操作：
 
-    - 在“视图名称”框中，键入“编辑”。
-    - 在“模板”框中，选择“编辑”。
-    - 在“模型类”框中，选择“项(todo.Models)”。
-    - 将“数据上下文类”框留空。
-    - 在“布局页”框中，键入 ***~/Views/Shared/\_Layout.cshtml***。
-    - 单击**“添加”**。
+   - 在“视图名称”框中，键入“编辑”。
+   - 在“模板”框中，选择“编辑”。
+   - 在“模型类”框中，选择“项(todo.Models)”。
+   - 将“数据上下文类”框留空。
+   - 在“布局页”框中，键入 ***~/Views/Shared/\_Layout.cshtml***。
+   - 单击**“添加”**。
 
 完成此操作之后，关闭 Visual Studio 中的所有 cshtml 文档，我们稍后会回头使用这些视图。
 
@@ -239,133 +245,151 @@ ms.author: syamk
 1. 在“解决方案资源管理器”中，右键单击该项目，单击“添加”，然后单击“类”。将新类命名为 **DocumentDBRepository**，然后单击“添加”。
 2. 在刚刚创建的 **DocumentDBRepository** 类中，在*命名空间*声明上方添加以下 *using 语句*
 
-        using Microsoft.Azure.Documents; 
-        using Microsoft.Azure.Documents.Client; 
-        using Microsoft.Azure.Documents.Linq; 
-        using System.Configuration;
-        using System.Linq.Expressions;
-        using System.Threading.Tasks;
+    ```
+    using Microsoft.Azure.Documents; 
+    using Microsoft.Azure.Documents.Client; 
+    using Microsoft.Azure.Documents.Linq; 
+    using System.Configuration;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
+    ```
 
     现在将此代码
 
-        public class DocumentDBRepository
-        {
-        }
+    ```
+    public class DocumentDBRepository
+    {
+    }
+    ```
 
     替换为以下代码。
 
-        public static class DocumentDBRepository<T> where T : class
+    ```
+    public static class DocumentDBRepository<T> where T : class
+    {
+        private static readonly string DatabaseId = ConfigurationManager.AppSettings["database"];
+        private static readonly string CollectionId = ConfigurationManager.AppSettings["collection"];
+        private static DocumentClient client;
+
+        public static void Initialize()
         {
-            private static readonly string DatabaseId = ConfigurationManager.AppSettings["database"];
-            private static readonly string CollectionId = ConfigurationManager.AppSettings["collection"];
-            private static DocumentClient client;
+            client = new DocumentClient(new Uri(ConfigurationManager.AppSettings["endpoint"]), ConfigurationManager.AppSettings["authKey"]);
+            CreateDatabaseIfNotExistsAsync().Wait();
+            CreateCollectionIfNotExistsAsync().Wait();
+        }
 
-            public static void Initialize()
+        private static async Task CreateDatabaseIfNotExistsAsync()
+        {
+            try
             {
-                client = new DocumentClient(new Uri(ConfigurationManager.AppSettings["endpoint"]), ConfigurationManager.AppSettings["authKey"]);
-                CreateDatabaseIfNotExistsAsync().Wait();
-                CreateCollectionIfNotExistsAsync().Wait();
+                await client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(DatabaseId));
             }
-
-            private static async Task CreateDatabaseIfNotExistsAsync()
+            catch (DocumentClientException e)
             {
-                try
+                if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    await client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(DatabaseId));
+                    await client.CreateDatabaseAsync(new Database { Id = DatabaseId });
                 }
-                catch (DocumentClientException e)
+                else
                 {
-                    if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
-                    {
-                        await client.CreateDatabaseAsync(new Database { Id = DatabaseId });
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            }
-
-            private static async Task CreateCollectionIfNotExistsAsync()
-            {
-                try
-                {
-                    await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId));
-                }
-                catch (DocumentClientException e)
-                {
-                    if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
-                    {
-                        await client.CreateDocumentCollectionAsync(
-                            UriFactory.CreateDatabaseUri(DatabaseId),
-                            new DocumentCollection { Id = CollectionId },
-                            new RequestOptions { OfferThroughput = 1000 });
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
             }
         }
+
+        private static async Task CreateCollectionIfNotExistsAsync()
+        {
+            try
+            {
+                await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId));
+            }
+            catch (DocumentClientException e)
+            {
+                if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    await client.CreateDocumentCollectionAsync(
+                        UriFactory.CreateDatabaseUri(DatabaseId),
+                        new DocumentCollection { Id = CollectionId },
+                        new RequestOptions { OfferThroughput = 1000 });
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+    }
+    ```
 
     > [!TIP]
     > 创建新的 DocumentCollection 时，你可以提供 OfferType 的可选 RequestOptions 参数，此参数可让你指定新集合的性能级别。如果未传递此参数，系统将使用默认的产品/服务类型。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 性能级别](./documentdb-performance-levels.md)
 
 3. 我们打算从配置中读取部分值，因此请打开应用程序的 **Web.config** 文件，并在 `<AppSettings>` 节下面添加下列几行。
 
-        <add key="endpoint" value="enter the URI from the Keys blade of the Azure Portal"/>
-        <add key="authKey" value="enter the PRIMARY KEY, or the SECONDARY KEY, from the Keys blade of the Azure  Portal"/>
-        <add key="database" value="ToDoList"/>
-        <add key="collection" value="Items"/>
+    ```
+    <add key="endpoint" value="enter the URI from the Keys blade of the Azure Portal"/>
+    <add key="authKey" value="enter the PRIMARY KEY, or the SECONDARY KEY, from the Keys blade of the Azure  Portal"/>
+    <add key="database" value="ToDoList"/>
+    <add key="collection" value="Items"/>
+    ```
 4. 现在，使用 Azure 门户预览的“密钥”边栏选项卡来更新*终结点*和 *authKey* 的值。使用“密钥”边栏选项卡中的“URI”作为终结点设置的值，使用“密钥”边栏选项卡中的“主密钥”或“辅助密钥”作为 authKey 设置的值。
 
     我们已经连接了 DocumentDB 存储库，现在让我们添加应用程序逻辑。
 
 1. 我们想要用待办事项列表应用程序做的第一件事就是显示未完成的项。在 **DocumentDBRepository** 类中的任意位置复制并粘贴以下代码片段。
 
-        public static async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate)
+    ```
+    public static async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate)
+    {
+        IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+            UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId))
+            .Where(predicate)
+            .AsDocumentQuery();
+
+        List<T> results = new List<T>();
+        while (query.HasMoreResults)
         {
-            IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
-                UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId))
-                .Where(predicate)
-                .AsDocumentQuery();
-
-            List<T> results = new List<T>();
-            while (query.HasMoreResults)
-            {
-                results.AddRange(await query.ExecuteNextAsync<T>());
-            }
-
-            return results;
+            results.AddRange(await query.ExecuteNextAsync<T>());
         }
+
+        return results;
+    }
+    ```
 2. 打开我们先前添加的 **ItemController**，并在命名空间声明上方添加以下 *using 语句*。
 
-        using System.Net;
-        using System.Threading.Tasks;
-        using todo.Models;
+    ```
+    using System.Net;
+    using System.Threading.Tasks;
+    using todo.Models;
+    ```
 
     如果你的项目名称不是“todo”，则必须使用“todo. Models”进行更新，才能反映你的项目名称。
 
     现在将此代码
 
-        //GET: Item
-        public ActionResult Index()
-        {
-            return View();
-        }
+    ```
+    //GET: Item
+    public ActionResult Index()
+    {
+        return View();
+    }
+    ```
 
     替换为以下代码。
 
-        [ActionName("Index")]
-        public async Task<ActionResult> IndexAsync()
-        {
-            var items = await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed);
-            return View(items);
-        }
+    ```
+    [ActionName("Index")]
+    public async Task<ActionResult> IndexAsync()
+    {
+        var items = await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed);
+        return View(items);
+    }
+    ```
 3. 打开 **Global.asax.cs** 并将以下行添加到 **Application\_Start** 方法
 
-        DocumentDBRepository<todo.Models.Item>.Initialize();
+    ```
+    DocumentDBRepository<todo.Models.Item>.Initialize();
+    ```
 
 此时，应该可以构建解决方案，而不会发生任何错误。
 
@@ -373,7 +397,9 @@ ms.author: syamk
 
 打开 ***App\_Start\\RouteConfig.cs***，找到以“defaults:”开头的行，然后将它更改为如下行。
 
-        defaults: new { controller = "Item", action = "Index", id = UrlParameter.Optional }
+```
+    defaults: new { controller = "Item", action = "Index", id = UrlParameter.Optional }
+```
 
 若未在 URL 中指定控制路由行为的值，这会让 ASP.NET MVC 知道改用“项”（而不是“主页”）作为控制器，并使用“索引”作为视图。
 
@@ -390,38 +416,44 @@ ms.author: syamk
 
 1. 将下列方法添加到 **DocumentDBRepository** 类。
 
-        public static async Task<Document> CreateItemAsync(T item)
-        {
-            return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);
-        }
+    ```
+    public static async Task<Document> CreateItemAsync(T item)
+    {
+        return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);
+    }
+    ```
 
     此方法只接受传递给它的对象，并将对象保留在 DocumentDB 中。
 
 2. 打开 ItemController.cs 文件，并在类中添加下列代码段。这是 ASP.NET MVC 得知如何执行**创建**操作的方式。在此情况下，只需呈现先前创建的关联 Create.cshtml 视图。
 
-        [ActionName("Create")]
-        public async Task<ActionResult> CreateAsync()
-        {
-            return View();
-        }
+    ```
+    [ActionName("Create")]
+    public async Task<ActionResult> CreateAsync()
+    {
+        return View();
+    }
+    ```
 
     现在此控制器需要更多代码，以接受“创建”视图所提交的数据。
 
 3. 将下一个代码块添加到 ItemController.cs 类，以告诉 ASP.NET MVC 如何使用窗体 POST 来执行此控制器的操作。
 
-        [HttpPost]
-        [ActionName("Create")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync([Bind(Include = "Id,Name,Description,Completed")] Item item)
+    ```
+    [HttpPost]
+    [ActionName("Create")]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> CreateAsync([Bind(Include = "Id,Name,Description,Completed")] Item item)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                await DocumentDBRepository<Item>.CreateItemAsync(item);
-                return RedirectToAction("Index");
-            }
-
-            return View(item);
+            await DocumentDBRepository<Item>.CreateItemAsync(item);
+            return RedirectToAction("Index");
         }
+
+        return View(item);
+    }
+    ```
 
     此代码会调用到 DocumentDBRepository，并使用 CreateItemAsync 方法将新的待办事项保存到数据库。
 
@@ -436,66 +468,70 @@ ms.author: syamk
 
 1. 将下列代码添加到 **DocumentDBRepository** 类。
 
-        public static async Task<Document> UpdateItemAsync(string id, T item)
-        {
-            return await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), item);
-        }
+    ```
+    public static async Task<Document> UpdateItemAsync(string id, T item)
+    {
+        return await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), item);
+    }
 
-        public static async Task<T> GetItemAsync(string id)
+    public static async Task<T> GetItemAsync(string id)
+    {
+        try
         {
-            try
+            Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
+            return (T)(dynamic)document;
+        }
+        catch (DocumentClientException e)
+        {
+            if (e.StatusCode == HttpStatusCode.NotFound)
             {
-                Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
-                return (T)(dynamic)document;
+                return null;
             }
-            catch (DocumentClientException e)
+            else
             {
-                if (e.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return null;
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
+    }
+    ```
 
     这些方法中的第一个方法 (**GetItem**) 会从 DocumentDB 中提取某个项，此项会被传递回 **ItemController**，接着传到“编辑”视图。
 
     刚刚添加的第二个方法使用从 **ItemController** 传入的**文档**版本取代 DocumentDB 中的**文档**。
 2. 将下列代码添加到 **ItemController** 类。
 
-        [HttpPost]
-        [ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync([Bind(Include = "Id,Name,Description,Completed")] Item item)
+    ```
+    [HttpPost]
+    [ActionName("Edit")]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> EditAsync([Bind(Include = "Id,Name,Description,Completed")] Item item)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                await DocumentDBRepository<Item>.UpdateItemAsync(item.Id, item);
-                return RedirectToAction("Index");
-            }
-
-            return View(item);
+            await DocumentDBRepository<Item>.UpdateItemAsync(item.Id, item);
+            return RedirectToAction("Index");
         }
 
-        [ActionName("Edit")]
-        public async Task<ActionResult> EditAsync(string id)
+        return View(item);
+    }
+
+    [ActionName("Edit")]
+    public async Task<ActionResult> EditAsync(string id)
+    {
+        if (id == null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Item item = await DocumentDBRepository<Item>.GetItemAsync(id);
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(item);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+
+        Item item = await DocumentDBRepository<Item>.GetItemAsync(id);
+        if (item == null)
+        {
+            return HttpNotFound();
+        }
+
+        return View(item);
+    }
+    ```
 
     第一个方法会处理当用户单击“索引”视图中的“编辑”链接时所发生的 Http GET。此方法会从 DocumentDB 中提取[**文档**](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.document.aspx)，并将它传递给“编辑”视图。
 

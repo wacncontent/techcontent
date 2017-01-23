@@ -115,105 +115,107 @@ Azure 导入/导出工具是可与 Azure 导入/导出服务一起使用的驱�
 
     Parameters:  
 
-        /j:<JournalFile>  
-            - Required. Path to the journal file. Each drive must have one and only one  
-              journal file. The journal file corresponding to the target drive must always  
-              be specified.  
-        /logdir:<LogDirectory>  
-            - Optional. The log directory. Verbose log files as well as some temporary  
-              files will be written to this directory. If not specified, current directory  
-              will be used as the log directory.  
-        /id:<SessionId>  
-            - Required. The session Id is used to identify a copy session. It is used to  
-              ensure accurate recovery of an interrupted copy session. In addition, files  
-              that are copied in a copy session are stored in a directory named after the  
-              session Id on the target drive.  
-        /resumesession  
-            - Optional. If the last copy session was terminated abnormally, this parameter  
-              can be specified to resume the session.  
-        /abortsession  
-            - Optional. If the last copy session was terminated abnormally, this parameter  
-              can be specified to abort the session.  
-        /sn:<StorageAccountName>  
-            - Required. Only applicable for RepairImport and RepairExport. The name of  
-              the storage account.  
-        /sk:<StorageAccountKey>  
-            - Optional. The key of the storage account. One of /sk: and /csas: must be  
-              specified.  
-        /csas:<ContainerSas>  
-            - Optional. A container SAS, in format of <ContainerName>?<SasString>, to be  
-              used for import the data. One of /sk: and /csas: must be specified.  
-        /t:<TargetDriveLetter>  
-            - Required. Drive letter of the target drive.  
-        /r:<RepairFile>  
-            - Required. Only applicable for RepairImport and RepairExport.  
-              Path to the file for tracking repair progress. Each drive must have one  
-              and only one repair file.  
-        /d:<TargetDirectories>  
-            - Required. Only applicable for RepairImport and RepairExport.  
-              For RepairImport, one or more semicolon-separated directories to repair;  
-              For RepairExport, one directory to repair, e.g. root directory of the drive.  
-        /format  
-            - Optional. If specified, the target drive will be formatted. DO NOT specify  
-              this parameter if you do not want to format the drive.  
-        /silentmode  
-            - Optional. If not specified, the /format parameter will require a confirmation  
-              from console before the tool formats the drive. If this parameter is specified,  
-              not confirmation will be given for formatting the drive.  
-        /encrypt  
-            - Optional. If specified, the target drive will be encrypted with BitLocker.  
-              If the drive has already been encrypted with BitLocker, do not specify this  
-              parameter and instead specify the BitLocker key using the "/k" parameter.  
-        /bk:<BitLockerKey>  
-            - Optional. The current BitLocker key if the drive has already been encrypted  
-              with BitLocker.  
-        /Disposition:<Disposition>  
-            - Optional. Specifies the behavior when a blob with the same path as the one  
-              being imported already exists. Valid values are: rename, no-overwrite and  
-              overwrite (case-sensitive). If not specified, "rename" will be used as the  
-              default value.  
-        /BlobType:<BlobType>  
-            - Optional. The blob type for the imported blob(s). Valid values are BlockBlob  
-              and PageBlob. If not specified, BlockBlob will be used as the default value.  
-        /PropertyFile:<PropertyFile>  
-            - Optional. Path to the property file for the file(s) to be imported.  
-        /MetadataFile:<MetadataFile>  
-            - Optional. Path to the metadata file for the file(s) to be imported.  
-        /CopyLogFile:<DriveCopyLogFile>  
-            - Required. Only applicable for RepairImport and RepairExport. Path to the  
-              drive copy log file (verbose or error).  
-        /ManifestFile:<DriveManifestFile>  
-            - Required. Only applicable for RepairExport. Path to the drive manifest file.  
-        /PathMapFile:<DrivePathMapFile>  
-            - Optional. Only applicable for RepairImport. Path to the file containing  
-              mappings of file paths relative to the drive root to locations of actual files  
-              (tab-delimited). When first specified, it will be populated with file paths  
-              with empty targets, which means either they are not found in TargetDirectories,  
-              access denied, with invalid name, or they exist in multiple directories. The  
-              path map file can be manually edited to include the correct target paths and  
-              specified again for the tool to resolve the file paths correctly.  
-        /ExportBlobListFile:<ExportBlobListFile>  
-            - Required. Path to the XML file containing list of blob paths or blob path  
-              prefixes for the blobs to be exported. The file format is the same as the  
-              blob list blob format in the Put Job operation of the Import/Export Service  
-              REST API.  
-        /DriveSize:<DriveSize>  
-            - Required. Size of drives to be used for export. For example, 500GB, 1.5TB.  
-              Note: 1 GB = 1,000,000,000 bytes  
-                    1 TB = 1,000,000,000,000 bytes  
-        /srcdir:<SourceDirectory>  
-            - Required. Source directory that contains files to be copied to the  
-              target drives.  
-        /dstdir:<DestinationBlobVirtualDirectory>  
-            - Required. Destination blob virtual directory to which the files will  
-              be imported.  
-        /srcfile:<SourceFilePath>  
-            - Required. Path to the source file to be imported.  
-        /dstblob:<DestinationBlobPath>  
-            - Required. Destination blob path for the file to be imported.  
-        /skipwrite
-            - Optional. To skip write process. Used for inplace data drive preparation.
-              Be sure to reserve enough space (3 GB per 7TB) for drive manifest file!
+    ```
+    /j:<JournalFile>  
+        - Required. Path to the journal file. Each drive must have one and only one  
+          journal file. The journal file corresponding to the target drive must always  
+          be specified.  
+    /logdir:<LogDirectory>  
+        - Optional. The log directory. Verbose log files as well as some temporary  
+          files will be written to this directory. If not specified, current directory  
+          will be used as the log directory.  
+    /id:<SessionId>  
+        - Required. The session Id is used to identify a copy session. It is used to  
+          ensure accurate recovery of an interrupted copy session. In addition, files  
+          that are copied in a copy session are stored in a directory named after the  
+          session Id on the target drive.  
+    /resumesession  
+        - Optional. If the last copy session was terminated abnormally, this parameter  
+          can be specified to resume the session.  
+    /abortsession  
+        - Optional. If the last copy session was terminated abnormally, this parameter  
+          can be specified to abort the session.  
+    /sn:<StorageAccountName>  
+        - Required. Only applicable for RepairImport and RepairExport. The name of  
+          the storage account.  
+    /sk:<StorageAccountKey>  
+        - Optional. The key of the storage account. One of /sk: and /csas: must be  
+          specified.  
+    /csas:<ContainerSas>  
+        - Optional. A container SAS, in format of <ContainerName>?<SasString>, to be  
+          used for import the data. One of /sk: and /csas: must be specified.  
+    /t:<TargetDriveLetter>  
+        - Required. Drive letter of the target drive.  
+    /r:<RepairFile>  
+        - Required. Only applicable for RepairImport and RepairExport.  
+          Path to the file for tracking repair progress. Each drive must have one  
+          and only one repair file.  
+    /d:<TargetDirectories>  
+        - Required. Only applicable for RepairImport and RepairExport.  
+          For RepairImport, one or more semicolon-separated directories to repair;  
+          For RepairExport, one directory to repair, e.g. root directory of the drive.  
+    /format  
+        - Optional. If specified, the target drive will be formatted. DO NOT specify  
+          this parameter if you do not want to format the drive.  
+    /silentmode  
+        - Optional. If not specified, the /format parameter will require a confirmation  
+          from console before the tool formats the drive. If this parameter is specified,  
+          not confirmation will be given for formatting the drive.  
+    /encrypt  
+        - Optional. If specified, the target drive will be encrypted with BitLocker.  
+          If the drive has already been encrypted with BitLocker, do not specify this  
+          parameter and instead specify the BitLocker key using the "/k" parameter.  
+    /bk:<BitLockerKey>  
+        - Optional. The current BitLocker key if the drive has already been encrypted  
+          with BitLocker.  
+    /Disposition:<Disposition>  
+        - Optional. Specifies the behavior when a blob with the same path as the one  
+          being imported already exists. Valid values are: rename, no-overwrite and  
+          overwrite (case-sensitive). If not specified, "rename" will be used as the  
+          default value.  
+    /BlobType:<BlobType>  
+        - Optional. The blob type for the imported blob(s). Valid values are BlockBlob  
+          and PageBlob. If not specified, BlockBlob will be used as the default value.  
+    /PropertyFile:<PropertyFile>  
+        - Optional. Path to the property file for the file(s) to be imported.  
+    /MetadataFile:<MetadataFile>  
+        - Optional. Path to the metadata file for the file(s) to be imported.  
+    /CopyLogFile:<DriveCopyLogFile>  
+        - Required. Only applicable for RepairImport and RepairExport. Path to the  
+          drive copy log file (verbose or error).  
+    /ManifestFile:<DriveManifestFile>  
+        - Required. Only applicable for RepairExport. Path to the drive manifest file.  
+    /PathMapFile:<DrivePathMapFile>  
+        - Optional. Only applicable for RepairImport. Path to the file containing  
+          mappings of file paths relative to the drive root to locations of actual files  
+          (tab-delimited). When first specified, it will be populated with file paths  
+          with empty targets, which means either they are not found in TargetDirectories,  
+          access denied, with invalid name, or they exist in multiple directories. The  
+          path map file can be manually edited to include the correct target paths and  
+          specified again for the tool to resolve the file paths correctly.  
+    /ExportBlobListFile:<ExportBlobListFile>  
+        - Required. Path to the XML file containing list of blob paths or blob path  
+          prefixes for the blobs to be exported. The file format is the same as the  
+          blob list blob format in the Put Job operation of the Import/Export Service  
+          REST API.  
+    /DriveSize:<DriveSize>  
+        - Required. Size of drives to be used for export. For example, 500GB, 1.5TB.  
+          Note: 1 GB = 1,000,000,000 bytes  
+                1 TB = 1,000,000,000,000 bytes  
+    /srcdir:<SourceDirectory>  
+        - Required. Source directory that contains files to be copied to the  
+          target drives.  
+    /dstdir:<DestinationBlobVirtualDirectory>  
+        - Required. Destination blob virtual directory to which the files will  
+          be imported.  
+    /srcfile:<SourceFilePath>  
+        - Required. Path to the source file to be imported.  
+    /dstblob:<DestinationBlobPath>  
+        - Required. Destination blob path for the file to be imported.  
+    /skipwrite
+        - Optional. To skip write process. Used for inplace data drive preparation.
+          Be sure to reserve enough space (3 GB per 7TB) for drive manifest file!
+    ```
     Examples:  
 
         Copy a source directory to a drive:  

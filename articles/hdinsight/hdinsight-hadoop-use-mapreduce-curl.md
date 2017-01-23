@@ -47,11 +47,15 @@ ms.author: larryfr
 
 1. 在命令行中，使用以下命令验证是否可以连接到 HDInsight 群集：
 
-        curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/status
+    ```
+    curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/status
+    ```
 
     你应会收到类似于下面的响应：
 
-        {"status":"ok","version":"v1"}
+    ```
+    {"status":"ok","version":"v1"}
+    ```
 
     此命令中使用的参数如下：
 
@@ -62,7 +66,9 @@ ms.author: larryfr
 
 2. 要提交 MapReduce 作业，请使用以下命令：
 
-        curl -u USERNAME:PASSWORD -d user.name=USERNAME -d jar=wasbs:///example/jars/hadoop-mapreduce-examples.jar -d class=wordcount -d arg=wasbs:///example/data/gutenberg/davinci.txt -d arg=wasbs:///example/data/CurlOut https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/mapreduce/jar
+    ```
+    curl -u USERNAME:PASSWORD -d user.name=USERNAME -d jar=wasbs:///example/jars/hadoop-mapreduce-examples.jar -d class=wordcount -d arg=wasbs:///example/data/gutenberg/davinci.txt -d arg=wasbs:///example/data/CurlOut https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/mapreduce/jar
+    ```
 
     URI 的末尾 (/mapreduce/jar) 可告知 WebHCat，此请求从 jar 文件中的类启动 MapReduce 作业。此命令中使用的参数如下：
 
@@ -75,11 +81,15 @@ ms.author: larryfr
 
     此命令应返回可用来检查作业状态的作业 ID：
 
-        {"id":"job_1415651640909_0026"}
+    ```
+    {"id":"job_1415651640909_0026"}
+    ```
 
 3. 要检查作业的状态，请使用以下命令。将 **JOBID** 替换为上一步骤返回的值。例如，如果返回值为 `{"id":"job_1415651640909_0026"}`，则 JOBID 是 `job_1415651640909_0026`。
 
-        curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
+    ```
+    curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
+    ```
 
     如果作业已完成，则状态是“SUCCEEDED”。
 
@@ -90,11 +100,15 @@ ms.author: larryfr
 
 可以使用 [Azure CLI](../xplat-cli-install.md) 列出并下载这些文件。例如，要列出 **example/curl** 中的文件，请使用以下命令：
 
-    azure storage blob list <container-name> example/curl
+```
+azure storage blob list <container-name> example/curl
+```
 
 要下载文件，请使用以下命令：
 
-    azure storage blob download <container-name> <blob-name> <destination-file>
+```
+azure storage blob download <container-name> <blob-name> <destination-file>
+```
 
 > [!NOTE]
 >必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。有关详细信息，请参阅[如何将数据上载到 HDInsight](./hdinsight-upload-data.md)。

@@ -45,15 +45,21 @@ ms.author: ganesr;cherylmc
 
 1. 使用权限提升的 Windows PowerShell 提示符运行以下 cmdlet：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 2. 在出现的登录屏幕中登录到帐户。
 
 3. 获取你的订阅的列表。
 
-        Get-AzureSubscription
+    ```
+    Get-AzureSubscription
+    ```
 4. 选择要使用的订阅。
 
-        Select-AzureSubscription -SubscriptionName "mysubscriptionname"
+    ```
+    Select-AzureSubscription -SubscriptionName "mysubscriptionname"
+    ```
 
 ## 创建和预配 ExpressRoute 线路
 
@@ -61,8 +67,10 @@ ms.author: ganesr;cherylmc
 
  在开始使用 ExpressRoute cmdlet 之前，必须将 Azure 和 ExpressRoute 模块导入 PowerShell 会话（如果尚未这样做）。将模块从其安装位置导入本地计算机。根据模块的安装方法，该位置可能与下例中所示不同。请根据需要修改示例。
 
-        Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
-        Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
+ ```
+    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
+    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
+ ```
 
 ### 2\.获取支持的提供商、位置和带宽的列表
 
@@ -70,7 +78,9 @@ ms.author: ganesr;cherylmc
 
 PowerShell cmdlet `Get-AzureDedicatedCircuitServiceProvider` 将返回此信息，你将在后面的步骤中使用该信息：
 
-    Get-AzureDedicatedCircuitServiceProvider
+```
+Get-AzureDedicatedCircuitServiceProvider
+```
 
 检查连接服务提供商是否已在该处列出。请记下以下信息，因为稍后创建线路时需要用到：
 
@@ -84,62 +94,76 @@ PowerShell cmdlet `Get-AzureDedicatedCircuitServiceProvider` 将返回此信息�
 
 ### 3\.创建 ExpressRoute 线路
 
-    以下示例演示如何通过北京的 Beijing Telecom Ethernet 创建 200 Mbps 的 ExpressRoute 线路。如果你使用的是其他提供商和其他设置，请在发出请求时替换该信息。
+```
+以下示例演示如何通过北京的 Beijing Telecom Ethernet 创建 200 Mbps 的 ExpressRoute 线路。如果你使用的是其他提供商和其他设置，请在发出请求时替换该信息。
+```
 
 >[!IMPORTANT]
 > 从发布服务密钥的那一刻起，将对 ExpressRoute 线路进行计费。确保连接服务提供商准备好预配线路后就执行此操作。
 
 下面是请求新的服务密钥的示例：
 
-        #Creating a new circuit
-        $Bandwidth = 200
-        $CircuitName = "21vDemo"
-        $ServiceProvider = "Beijing Telecom Ethernet"
-        $Location = "Beijing"
+```
+    #Creating a new circuit
+    $Bandwidth = 200
+    $CircuitName = "21vDemo"
+    $ServiceProvider = "Beijing Telecom Ethernet"
+    $Location = "Beijing"
 
-    New-AzureDedicatedCircuit -CircuitName $CircuitName -ServiceProviderName $ServiceProvider -Bandwidth $Bandwidth -Location $Location -sku Standard -BillingType MeteredData
+New-AzureDedicatedCircuit -CircuitName $CircuitName -ServiceProviderName $ServiceProvider -Bandwidth $Bandwidth -Location $Location -sku Standard -BillingType MeteredData
+```
 
 或者，如果你想要通过高级版外接程序创建 ExpressRoute 线路，则可使用下述示例。请参阅 [ExpressRoute 常见问题](./expressroute-faqs.md)页，了解有关高级版外接程序的更多详细信息。
 
-    New-AzureDedicatedCircuit -CircuitName $CircuitName -ServiceProviderName $ServiceProvider -Bandwidth $Bandwidth -Location $Location -sku Premium - BillingType MeteredData
+```
+New-AzureDedicatedCircuit -CircuitName $CircuitName -ServiceProviderName $ServiceProvider -Bandwidth $Bandwidth -Location $Location -sku Premium - BillingType MeteredData
+```
 
 响应将包含服务密钥。你可以通过运行以下命令获取所有这些参数的详细说明。
 
-        Get-Help New-AzureDedicatedCircuit -detailed 
+```
+    Get-Help New-AzureDedicatedCircuit -detailed 
+```
 
 ### 4\.列出所有 ExpressRoute 线路
 
 可以运行 `Get-AzureDedicatedCircuit` 命令，获取创建的所有 ExpressRoute 线路的列表：
 
-    Get-AzureDedicatedCircuit
+```
+Get-AzureDedicatedCircuit
+```
 
 响应将如以下示例所示：
 
-        Bandwidth                        : 200
-        CircuitName                      : 21vDemo
-        Location                         : Beijing
-        ServiceKey                       : *********************************
-        ServiceProviderName              : Beijing Telecom Ethernet
-        ServiceProviderProvisioningState : NotProvisioned
-        Sku                              : Standard
-        Status                           : Enabled
+```
+    Bandwidth                        : 200
+    CircuitName                      : 21vDemo
+    Location                         : Beijing
+    ServiceKey                       : *********************************
+    ServiceProviderName              : Beijing Telecom Ethernet
+    ServiceProviderProvisioningState : NotProvisioned
+    Sku                              : Standard
+    Status                           : Enabled
+```
 
 可以随时使用 `Get-AzureDedicatedCircuit` cmdlet 检索此信息。进行不带任何参数的调用将列出所有线路。服务密钥将在 *ServiceKey* 字段中列出。
 
-    Get-AzureDedicatedCircuit
+```
+Get-AzureDedicatedCircuit
 
-        Bandwidth                        : 200
-        CircuitName                      : 21vDemo
-        Location                         : Beijing
-        ServiceKey                       : *********************************
-        ServiceProviderName              : Beijing Telecom Ethernet
-        ServiceProviderProvisioningState : NotProvisioned
-        Sku                              : Standard
-        Status                           : Enabled
+    Bandwidth                        : 200
+    CircuitName                      : 21vDemo
+    Location                         : Beijing
+    ServiceKey                       : *********************************
+    ServiceProviderName              : Beijing Telecom Ethernet
+    ServiceProviderProvisioningState : NotProvisioned
+    Sku                              : Standard
+    Status                           : Enabled
 
-    你可以通过运行以下命令获取所有这些参数的详细说明。
+你可以通过运行以下命令获取所有这些参数的详细说明。
 
-        Get-Help Get-AzureDedicatedCircuit -detailed 
+    Get-Help Get-AzureDedicatedCircuit -detailed 
+```
 
 ### 5\.将服务密钥发送给连接服务提供商进行预配
 
@@ -147,34 +171,42 @@ PowerShell cmdlet `Get-AzureDedicatedCircuitServiceProvider` 将返回此信息�
 
 当你创建新的 ExpressRoute 线路时，线路将是以下状态：
 
-    ServiceProviderProvisioningState : NotProvisioned
-    Status                           : Enabled
+```
+ServiceProviderProvisioningState : NotProvisioned
+Status                           : Enabled
+```
 
 当连接服务提供商正在为你启用线路时，线路将转为以下状态：
 
-    ServiceProviderProvisioningState : Provisioning
-    Status                           : Enabled
+```
+ServiceProviderProvisioningState : Provisioning
+Status                           : Enabled
+```
 
 ExpressRoute 线路处于以下状态时，你才能使用它：
 
-        ServiceProviderProvisioningState : Provisioned
+```
+    ServiceProviderProvisioningState : Provisioned
 
-        Status                           : Enabled
+    Status                           : Enabled
+```
 
 ### 6\.定期检查线路密钥的状态
 
 这样，你就知道提供商何时启用了你的线路。配置线路后，*ServiceProviderProvisioningState* 将显示为 *Provisioned*，如以下示例所示：
 
-        PS C:\> Get-AzureDedicatedCircuit
+```
+    PS C:\> Get-AzureDedicatedCircuit
 
-        Bandwidth                        : 200
-        CircuitName                      : 21vDemo
-        Location                         : Beijing
-        ServiceKey                       : *********************************
-        ServiceProviderName              : Beijing Telecom Ethernet
-        ServiceProviderProvisioningState : Provisioned
-        Sku                              : Standard
-        Status                           : Enabled
+    Bandwidth                        : 200
+    CircuitName                      : 21vDemo
+    Location                         : Beijing
+    ServiceKey                       : *********************************
+    ServiceProviderName              : Beijing Telecom Ethernet
+    ServiceProviderProvisioningState : Provisioned
+    Sku                              : Standard
+    Status                           : Enabled
+```
 
 ### 7\.创建路由配置
 
@@ -191,42 +223,48 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
 
 可以随时使用 `Get-AzureCircuit` cmdlet 检索此信息。进行不带任何参数的调用将列出所有线路。
 
-    Get-AzureDedicatedCircuit
+```
+Get-AzureDedicatedCircuit
 
-        Bandwidth                        : 200
-        CircuitName                      : 21vDemo
-        Location                         : Beijing
-        ServiceKey                       : *********************************
-        ServiceProviderName              : Beijing Telecom Ethernet
-        ServiceProviderProvisioningState : Provisioned
-        Sku                              : Standard
-        Status                           : Enabled
+    Bandwidth                        : 200
+    CircuitName                      : 21vDemo
+    Location                         : Beijing
+    ServiceKey                       : *********************************
+    ServiceProviderName              : Beijing Telecom Ethernet
+    ServiceProviderProvisioningState : Provisioned
+    Sku                              : Standard
+    Status                           : Enabled
 
-        Bandwidth                        : 1000
-        CircuitName                      : MyAsiaCircuit
-        Location                         : China
-        ServiceKey                       : #################################
-        ServiceProviderName              : equinix
-        ServiceProviderProvisioningState : Provisioned
-        Sku                              : Standard
-        Status                           : Enabled
+    Bandwidth                        : 1000
+    CircuitName                      : MyAsiaCircuit
+    Location                         : China
+    ServiceKey                       : #################################
+    ServiceProviderName              : equinix
+    ServiceProviderProvisioningState : Provisioned
+    Sku                              : Standard
+    Status                           : Enabled
+```
 
 你可以将服务密钥作为参数传递给调用，从而获取特定 ExpressRoute 线路的相关信息：
 
-    Get-AzureDedicatedCircuit -ServiceKey "*********************************"
+```
+Get-AzureDedicatedCircuit -ServiceKey "*********************************"
 
-        Bandwidth                        : 200
-        CircuitName                      : 21vDemo
-        Location                         : Beijing
-        ServiceKey                       : *********************************
-        ServiceProviderName              : Beijing Telecom Ethernet
-        ServiceProviderProvisioningState : Provisioned
-        Sku                              : Standard
-        Status                           : Enabled
+    Bandwidth                        : 200
+    CircuitName                      : 21vDemo
+    Location                         : Beijing
+    ServiceKey                       : *********************************
+    ServiceProviderName              : Beijing Telecom Ethernet
+    ServiceProviderProvisioningState : Provisioned
+    Sku                              : Standard
+    Status                           : Enabled
+```
 
 你可以通过运行以下命令获取所有这些参数的详细说明。
 
-        get-help get-azurededicatedcircuit -detailed 
+```
+    get-help get-azurededicatedcircuit -detailed 
+```
 
 ##  修改 ExpressRoute 线路
 
@@ -245,16 +283,18 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
 
 可以使用以下 PowerShell cmdlet 为现有线路启用 ExpressRoute 高级版外接程序：
 
-    Set-AzureDedicatedCircuitProperties -ServiceKey "*********************************" -Sku Premium
+```
+Set-AzureDedicatedCircuitProperties -ServiceKey "*********************************" -Sku Premium
 
-    Bandwidth                        : 1000
-    CircuitName                      : TestCircuit
-    Location                         : Beijing
-    ServiceKey                       : *********************************
-    ServiceProviderName              : Beijing Telecom Ethernet
-    ServiceProviderProvisioningState : Provisioned
-    Sku                              : Premium
-    Status                           : Enabled
+Bandwidth                        : 1000
+CircuitName                      : TestCircuit
+Location                         : Beijing
+ServiceKey                       : *********************************
+ServiceProviderName              : Beijing Telecom Ethernet
+ServiceProviderProvisioningState : Provisioned
+Sku                              : Premium
+Status                           : Enabled
+```
 
 你的线路现已启用 ExpressRoute 高级版外接程序功能。请注意，该命令成功运行后，我们将立即开始为你对高级版外接程序功能计费。
 
@@ -273,16 +313,18 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
 
 可以使用以下 PowerShell cmdlet 为现有线路禁用 ExpressRoute 高级版外接程序：
 
-    Set-AzureDedicatedCircuitProperties -ServiceKey "*********************************" -Sku Standard
+```
+Set-AzureDedicatedCircuitProperties -ServiceKey "*********************************" -Sku Standard
 
-    Bandwidth                        : 1000
-    CircuitName                      : TestCircuit
-    Location                         : Bejing
-    ServiceKey                       : *********************************
-    ServiceProviderName              : Beijing Telecom Ethernet
-    ServiceProviderProvisioningState : Provisioned
-    Sku                              : Standard
-    Status                           : Enabled
+Bandwidth                        : 1000
+CircuitName                      : TestCircuit
+Location                         : Bejing
+ServiceKey                       : *********************************
+ServiceProviderName              : Beijing Telecom Ethernet
+ServiceProviderProvisioningState : Provisioned
+Sku                              : Standard
+Status                           : Enabled
+```
 
 ### 更新 ExpressRoute 线路带宽
 
@@ -293,26 +335,30 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
 确定所需的大小后，即可使用以下命令调整线路的大小：
         PS C:\> Set-AzureDedicatedCircuitProperties -ServiceKey ********************************* -Bandwidth 1000
 
-        Bandwidth                        : 1000
-        CircuitName                      : TestCircuit
-        Location                         : Beijing 
-        ServiceKey                       : *********************************
-        ServiceProviderName              : Beijing Telecom Ethernet
-        ServiceProviderProvisioningState : Provisioned
-        Sku                              : Standard
-        Status                           : Enabled
+```
+    Bandwidth                        : 1000
+    CircuitName                      : TestCircuit
+    Location                         : Beijing 
+    ServiceKey                       : *********************************
+    ServiceProviderName              : Beijing Telecom Ethernet
+    ServiceProviderProvisioningState : Provisioned
+    Sku                              : Standard
+    Status                           : Enabled
+```
 
 将已在 Azure 一侧估计好线路的大小。你必须联系连接提供商，让他们在那一边根据此更改更新配置。请注意，我们将从现在开始按照已更新的带宽选项为你计费。
 
 如果在增加线路带宽时看到以下错误，这意味着创建现有线路所在的物理端口上没有足够的带宽可用。必须删除此线路，然后创建所需大小的新线路。
 
-    Set-AzureDedicatedCircuitProperties : InvalidOperation : Insufficient bandwidth available to perform this circuit
-    update operation
-    At line:1 char:1
-    + Set-AzureDedicatedCircuitProperties -ServiceKey ********************* ...
-    + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        + CategoryInfo          : CloseError: (:) [Set-AzureDedicatedCircuitProperties], CloudException
-        + FullyQualifiedErrorId : Microsoft.WindowsAzure.Commands.ExpressRoute.SetAzureDedicatedCircuitPropertiesCommand
+```
+Set-AzureDedicatedCircuitProperties : InvalidOperation : Insufficient bandwidth available to perform this circuit
+update operation
+At line:1 char:1
++ Set-AzureDedicatedCircuitProperties -ServiceKey ********************* ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : CloseError: (:) [Set-AzureDedicatedCircuitProperties], CloudException
+    + FullyQualifiedErrorId : Microsoft.WindowsAzure.Commands.ExpressRoute.SetAzureDedicatedCircuitPropertiesCommand
+```
 
 ## 取消预配和删除 ExpressRoute 线路
 
@@ -326,7 +372,9 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
 
 可以通过运行以下命令来删除 ExpressRoute 线路：
 
-    Remove-AzureDedicatedCircuit -ServiceKey "*********************************"
+```
+Remove-AzureDedicatedCircuit -ServiceKey "*********************************"
+```
 
 ## 后续步骤
 

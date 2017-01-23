@@ -39,60 +39,66 @@ ms.author: sstein
 
 可将独立的数据库移入或移出池。
 
-    // Retrieve current database properties.
+```
+// Retrieve current database properties.
 
-    currentDatabase = sqlClient.Databases.Get("resourcegroup-name", "server-name", "Database1").Database;
+currentDatabase = sqlClient.Databases.Get("resourcegroup-name", "server-name", "Database1").Database;
 
-    // Configure create or update parameters with existing property values, override those to be changed.
-    DatabaseCreateOrUpdateParameters updatePooledDbParameters = new DatabaseCreateOrUpdateParameters()
+// Configure create or update parameters with existing property values, override those to be changed.
+DatabaseCreateOrUpdateParameters updatePooledDbParameters = new DatabaseCreateOrUpdateParameters()
+{
+    Location = currentDatabase.Location,
+    Properties = new DatabaseCreateOrUpdateProperties()
     {
-        Location = currentDatabase.Location,
-        Properties = new DatabaseCreateOrUpdateProperties()
-        {
-            Edition = "Standard",
-            RequestedServiceObjectiveName = "ElasticPool",
-            ElasticPoolName = "ElasticPool1",
-            MaxSizeBytes = currentDatabase.Properties.MaxSizeBytes,
-            Collation = currentDatabase.Properties.Collation,
-        }
-    };
+        Edition = "Standard",
+        RequestedServiceObjectiveName = "ElasticPool",
+        ElasticPoolName = "ElasticPool1",
+        MaxSizeBytes = currentDatabase.Properties.MaxSizeBytes,
+        Collation = currentDatabase.Properties.Collation,
+    }
+};
 
-    // Update the database.
-    var dbUpdateResponse = sqlClient.Databases.CreateOrUpdate("resourcegroup-name", "server-name", "Database1", updatePooledDbParameters);
+// Update the database.
+var dbUpdateResponse = sqlClient.Databases.CreateOrUpdate("resourcegroup-name", "server-name", "Database1", updatePooledDbParameters);
+```
 
 ## 列出弹性池中的数据库
 
 若要在池中检索所有的数据库，可调用 [ListDatabases](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.management.sql.elasticpooloperationsextensions.listdatabases) 方法。
 
-    //List databases in the elastic pool
-    DatabaseListResponse dbListInPool = sqlClient.ElasticPools.ListDatabases("resourcegroup-name", "server-name", "ElasticPool1");
-    Console.WriteLine("Databases in Elastic Pool {0}", "server-name.ElasticPool1");
-    foreach (Database db in dbListInPool)
-    {
-        Console.WriteLine("  Database {0}", db.Name);
-    }
+```
+//List databases in the elastic pool
+DatabaseListResponse dbListInPool = sqlClient.ElasticPools.ListDatabases("resourcegroup-name", "server-name", "ElasticPool1");
+Console.WriteLine("Databases in Elastic Pool {0}", "server-name.ElasticPool1");
+foreach (Database db in dbListInPool)
+{
+    Console.WriteLine("  Database {0}", db.Name);
+}
+```
 
 ## 更改池的性能设置
 
 检索现有池属性。修改值并执行 CreateOrUpdate 方法。
 
-    var currentPool = sqlClient.ElasticPools.Get("resourcegroup-name", "server-name", "ElasticPool1").ElasticPool;
+```
+var currentPool = sqlClient.ElasticPools.Get("resourcegroup-name", "server-name", "ElasticPool1").ElasticPool;
 
-    // Configure create or update parameters with existing property values, override those to be changed.
-    ElasticPoolCreateOrUpdateParameters updatePoolParameters = new ElasticPoolCreateOrUpdateParameters()
+// Configure create or update parameters with existing property values, override those to be changed.
+ElasticPoolCreateOrUpdateParameters updatePoolParameters = new ElasticPoolCreateOrUpdateParameters()
+{
+    Location = currentPool.Location,
+    Properties = new ElasticPoolCreateOrUpdateProperties()
     {
-        Location = currentPool.Location,
-        Properties = new ElasticPoolCreateOrUpdateProperties()
-        {
-            Edition = currentPool.Properties.Edition,
-            DatabaseDtuMax = 50, /* Setting DatabaseDtuMax to 50 limits the eDTUs that any one database can consume */
-            DatabaseDtuMin = 10, /* Setting DatabaseDtuMin above 0 limits the number of databases that can be stored in the pool */
-            Dtu = (int)currentPool.Properties.Dtu,
-            StorageMB = currentPool.Properties.StorageMB,  /* For a Standard pool there is 1 GB of storage per eDTU. */
-        }
-    };
+        Edition = currentPool.Properties.Edition,
+        DatabaseDtuMax = 50, /* Setting DatabaseDtuMax to 50 limits the eDTUs that any one database can consume */
+        DatabaseDtuMin = 10, /* Setting DatabaseDtuMin above 0 limits the number of databases that can be stored in the pool */
+        Dtu = (int)currentPool.Properties.Dtu,
+        StorageMB = currentPool.Properties.StorageMB,  /* For a Standard pool there is 1 GB of storage per eDTU. */
+    }
+};
 
-    newPoolResponse = sqlClient.ElasticPools.CreateOrUpdate("resourcegroup-name", "server-name", "ElasticPool1", newPoolParameters);
+newPoolResponse = sqlClient.ElasticPools.CreateOrUpdate("resourcegroup-name", "server-name", "ElasticPool1", newPoolParameters);
+```
 
 ## 弹性池操作延迟
 

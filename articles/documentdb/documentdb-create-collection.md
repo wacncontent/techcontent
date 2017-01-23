@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 12/13/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: mimig
 ---
 
@@ -83,3 +83,4 @@ DocumentDB 自动将集合分区到一个或多个物理服务器。创建集合
 当集合中有文档后，就可以利用门户中的[查询资源管理器](./documentdb-query-collections-query-explorer.md)、[REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或某个 [SDK](./documentdb-sdk-dotnet.md)，来针对文档使用 [DocumentDB SQL](./documentdb-sql-query.md) [执行查询](./documentdb-sql-query.md#executing-sql-queries)。
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: update some words and links -->

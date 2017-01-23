@@ -41,8 +41,10 @@ ms.author: sstein
 
 以下命令将资源组“rg2”下服务器“srv2”上名为“mydb”的数据库角色切换为主数据库。"db2”所连接的原始主数据库在两个数据库完全同步之后切换为辅助数据库。
 
-    $database = Get-AzureRmSqlDatabase –DatabaseName "mydb" –ResourceGroupName "rg2” –ServerName "srv2”
-    $database | Set-AzureRmSqlDatabaseSecondary -Failover
+```
+$database = Get-AzureRmSqlDatabase –DatabaseName "mydb" –ResourceGroupName "rg2” –ServerName "srv2”
+$database | Set-AzureRmSqlDatabaseSecondary -Failover
+```
 
 > [!NOTE]
 > 在很少见的情况下，操作可能无法完成并且可能会出现停止响应。在此情况下，用户可以调用强制故障转移命令（非计划的故障转移）并接受数据丢失。
@@ -62,8 +64,10 @@ ms.author: sstein
 
 以下命令在主数据库无法使用时将名为“mydb”的数据库角色切换为主数据库。“mydb”连接的原始主数据库将在重新联机后切换为辅助数据库。在该时间点，同步可能导致数据丢失。
 
-    $database = Get-AzureRmSqlDatabase –DatabaseName "mydb" –ResourceGroupName "rg2” –ServerName "srv2”
-    $database | Set-AzureRmSqlDatabaseSecondary –Failover -AllowDataLoss
+```
+$database = Get-AzureRmSqlDatabase –DatabaseName "mydb" –ResourceGroupName "rg2” –ServerName "srv2”
+$database | Set-AzureRmSqlDatabaseSecondary –Failover -AllowDataLoss
+```
 
 ## 后续步骤   
 

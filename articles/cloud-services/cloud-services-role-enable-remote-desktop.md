@@ -90,25 +90,27 @@ Azure 经典管理门户使用远程桌面扩展方法，即使在部署应用�
 
 服务定义文件应类似于下面的示例，并添加 `<Imports>` 元素。
 
-        <ServiceDefinition name="<name-of-cloud-service>" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
-            <WebRole name="WebRole1" vmsize="Small">
-                <Sites>
-                    <Site name="Web">
-                        <Bindings>
-                            <Binding name="Endpoint1" endpointName="Endpoint1" />
-                        </Bindings>
-                    </Site>
-                </Sites>
-                <Endpoints>
-                    <InputEndpoint name="Endpoint1" protocol="http" port="80" />
-                </Endpoints>
-                <Imports>
-                    <Import moduleName="Diagnostics" />
-                    <Import moduleName="RemoteAccess" />
-                    <Import moduleName="RemoteForwarder" />
-                </Imports>
-            </WebRole>
-        </ServiceDefinition>
+```
+    <ServiceDefinition name="<name-of-cloud-service>" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
+        <WebRole name="WebRole1" vmsize="Small">
+            <Sites>
+                <Site name="Web">
+                    <Bindings>
+                        <Binding name="Endpoint1" endpointName="Endpoint1" />
+                    </Bindings>
+                </Site>
+            </Sites>
+            <Endpoints>
+                <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+            </Endpoints>
+            <Imports>
+                <Import moduleName="Diagnostics" />
+                <Import moduleName="RemoteAccess" />
+                <Import moduleName="RemoteForwarder" />
+            </Imports>
+        </WebRole>
+    </ServiceDefinition>
+```
 [ServiceConfiguration.cscfg](./cloud-services-model-and-package.md#cscfg) 文件应类似于下面的示例，请注意 `<ConfigurationSettings>` 和 `<Certificates>` 元素。指定的证书必须 [已上载到云服务](./cloud-services-how-to-create-deploy.md#how-to-upload-a-certificate-for-a-cloud-service)。
 
         <?xml version="1.0" encoding="utf-8"?>

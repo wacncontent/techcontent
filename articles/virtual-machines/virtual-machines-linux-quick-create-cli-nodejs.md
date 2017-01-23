@@ -35,7 +35,9 @@ ms.author: v-livech
 ## 快速命令
 以下示例演示如何部署 CoreOS VM 并附加安全外壳 (SSH) 密钥（你的参数可能与此不同）：
 
-    azure vm quick-create -M ~/.ssh/id_rsa.pub -Q CoreOS
+```
+azure vm quick-create -M ~/.ssh/id_rsa.pub -Q CoreOS
+```
 
 ## 详细演练
 下面逐步讲解如何部署 UbuntuLTS VM，并解释每个步骤的具体操作。
@@ -63,125 +65,133 @@ ms.author: v-livech
 
 以下示例会指定所有值，因此不会再有进一步的提示。只要使用 `~/.ssh/id_rsa.pub` 作为 ssh-rsa 格式公钥文件，它就会正常运行：
 
-    azure vm quick-create \
-      --resource-group myResourceGroup \
-      --name myVM \
-      --location chinanorth \
-      --os-type Linux \
-      --admin-username myAdminUser \
-      --ssh-public-file ~/.ssh/id_rsa.pub \
-      --image-urn UbuntuLTS
+```
+azure vm quick-create \
+  --resource-group myResourceGroup \
+  --name myVM \
+  --location chinanorth \
+  --os-type Linux \
+  --admin-username myAdminUser \
+  --ssh-public-file ~/.ssh/id_rsa.pub \
+  --image-urn UbuntuLTS
+```
 
 输出应类似于以下输出块：
 
-    info:    Executing command vm quick-create
-    + Listing virtual machine sizes available in the location "chinanorth"
-    + Looking up the VM "myVM"
-    info:    Verifying the public key SSH file: /Users/ahmet/.ssh/id_rsa.pub
-    info:    Using the VM Size "Standard_DS1"
-    info:    The [OS, Data] Disk or image configuration requires storage account
-    + Looking up the storage account cli16330708391032639673
-    + Looking up the NIC "examp-china-1633070839-nic"
-    info:    An nic with given name "examp-china-1633070839-nic" not found, creating a new one
-    + Looking up the virtual network "examp-china-1633070839-vnet"
-    info:    Preparing to create new virtual network and subnet
-    / Creating a new virtual network "examp-china-1633070839-vnet" [address prefix: "10.0.0.0/16"] with subnet "examp-china-1633070839-snet" [address prefix: "10.+.1.0/24"]
-    + Looking up the virtual network "examp-china-1633070839-vnet"
-    + Looking up the subnet "examp-china-1633070839-snet" under the virtual network "examp-china-1633070839-vnet"
-    info:    Found public ip parameters, trying to setup PublicIP profile
-    + Looking up the public ip "examp-china-1633070839-pip"
-    info:    PublicIP with given name "examp-china-1633070839-pip" not found, creating a new one
-    + Creating public ip "examp-china-1633070839-pip"
-    + Looking up the public ip "examp-china-1633070839-pip"
-    + Creating NIC "examp-china-1633070839-nic"
-    + Looking up the NIC "examp-china-1633070839-nic"
-    + Looking up the storage account clisto1710997031examplev
-    + Creating VM "myVM"
-    + Looking up the VM "myVM"
-    + Looking up the NIC "examp-china-1633070839-nic"
-    + Looking up the public ip "examp-china-1633070839-pip"
-    data:    Id                              :/subscriptions/2<--snip-->d/resourceGroups/exampleResourceGroup/providers/Microsoft.Compute/virtualMachines/exampleVMName
-    data:    ProvisioningState               :Succeeded
-    data:    Name                            :exampleVMName
-    data:    Location                        :chinanorth
-    data:    Type                            :Microsoft.Compute/virtualMachines
-    data:
-    data:    Hardware Profile:
-    data:      Size                          :Standard_DS1
-    data:
-    data:    Storage Profile:
-    data:      Image reference:
-    data:        Publisher                   :Canonical
-    data:        Offer                       :UbuntuServer
-    data:        Sku                         :14.04.3-LTS
-    data:        Version                     :latest
-    data:
-    data:      OS Disk:
-    data:        OSType                      :Linux
-    data:        Name                        :clic7fadb847357e9cf-os-1473374894359
-    data:        Caching                     :ReadWrite
-    data:        CreateOption                :FromImage
-    data:        Vhd:
-    data:          Uri                       :https://cli16330708391032639673.blob.core.chinacloudapi.cn/vhds/clic7fadb847357e9cf-os-1473374894359.vhd
-    data:
-    data:    OS Profile:
-    data:      Computer Name                 :myVM
-    data:      User Name                     :myAdminUser
-    data:      Linux Configuration:
-    data:        Disable Password Auth       :true
-    data:
-    data:    Network Profile:
-    data:      Network Interfaces:
-    data:        Network Interface #1:
-    data:          Primary                   :true
-    data:          MAC Address               :00-0D-3A-33-42-FB
-    data:          Provisioning State        :Succeeded
-    data:          Name                      :examp-china-1633070839-nic
-    data:          Location                  :chinanorth
-    data:            Public IP address       :138.91.247.29
-    data:            FQDN                    :examp-china-1633070839-pip.chinanorth.chinacloudapp.cn
-    data:
-    data:    Diagnostics Profile:
-    data:      BootDiagnostics Enabled       :true
-    data:      BootDiagnostics StorageUri    :https://clisto1710997031examplev.blob.core.chinacloudapi.cn/
-    data:
-    data:      Diagnostics Instance View:
-    info:    vm quick-create command OK
+```
+info:    Executing command vm quick-create
++ Listing virtual machine sizes available in the location "chinanorth"
++ Looking up the VM "myVM"
+info:    Verifying the public key SSH file: /Users/ahmet/.ssh/id_rsa.pub
+info:    Using the VM Size "Standard_DS1"
+info:    The [OS, Data] Disk or image configuration requires storage account
++ Looking up the storage account cli16330708391032639673
++ Looking up the NIC "examp-china-1633070839-nic"
+info:    An nic with given name "examp-china-1633070839-nic" not found, creating a new one
++ Looking up the virtual network "examp-china-1633070839-vnet"
+info:    Preparing to create new virtual network and subnet
+/ Creating a new virtual network "examp-china-1633070839-vnet" [address prefix: "10.0.0.0/16"] with subnet "examp-china-1633070839-snet" [address prefix: "10.+.1.0/24"]
++ Looking up the virtual network "examp-china-1633070839-vnet"
++ Looking up the subnet "examp-china-1633070839-snet" under the virtual network "examp-china-1633070839-vnet"
+info:    Found public ip parameters, trying to setup PublicIP profile
++ Looking up the public ip "examp-china-1633070839-pip"
+info:    PublicIP with given name "examp-china-1633070839-pip" not found, creating a new one
++ Creating public ip "examp-china-1633070839-pip"
++ Looking up the public ip "examp-china-1633070839-pip"
++ Creating NIC "examp-china-1633070839-nic"
++ Looking up the NIC "examp-china-1633070839-nic"
++ Looking up the storage account clisto1710997031examplev
++ Creating VM "myVM"
++ Looking up the VM "myVM"
++ Looking up the NIC "examp-china-1633070839-nic"
++ Looking up the public ip "examp-china-1633070839-pip"
+data:    Id                              :/subscriptions/2<--snip-->d/resourceGroups/exampleResourceGroup/providers/Microsoft.Compute/virtualMachines/exampleVMName
+data:    ProvisioningState               :Succeeded
+data:    Name                            :exampleVMName
+data:    Location                        :chinanorth
+data:    Type                            :Microsoft.Compute/virtualMachines
+data:
+data:    Hardware Profile:
+data:      Size                          :Standard_DS1
+data:
+data:    Storage Profile:
+data:      Image reference:
+data:        Publisher                   :Canonical
+data:        Offer                       :UbuntuServer
+data:        Sku                         :14.04.3-LTS
+data:        Version                     :latest
+data:
+data:      OS Disk:
+data:        OSType                      :Linux
+data:        Name                        :clic7fadb847357e9cf-os-1473374894359
+data:        Caching                     :ReadWrite
+data:        CreateOption                :FromImage
+data:        Vhd:
+data:          Uri                       :https://cli16330708391032639673.blob.core.chinacloudapi.cn/vhds/clic7fadb847357e9cf-os-1473374894359.vhd
+data:
+data:    OS Profile:
+data:      Computer Name                 :myVM
+data:      User Name                     :myAdminUser
+data:      Linux Configuration:
+data:        Disable Password Auth       :true
+data:
+data:    Network Profile:
+data:      Network Interfaces:
+data:        Network Interface #1:
+data:          Primary                   :true
+data:          MAC Address               :00-0D-3A-33-42-FB
+data:          Provisioning State        :Succeeded
+data:          Name                      :examp-china-1633070839-nic
+data:          Location                  :chinanorth
+data:            Public IP address       :138.91.247.29
+data:            FQDN                    :examp-china-1633070839-pip.chinanorth.chinacloudapp.cn
+data:
+data:    Diagnostics Profile:
+data:      BootDiagnostics Enabled       :true
+data:      BootDiagnostics StorageUri    :https://clisto1710997031examplev.blob.core.chinacloudapi.cn/
+data:
+data:      Diagnostics Instance View:
+info:    vm quick-create command OK
+```
 
 ## 登录到新 VM
 使用输出中列出的公共 IP 地址登录到 VM。可以使用列出的完全限定域名 (FQDN)：
 
-    ssh -i ~/.ssh/id_rsa.pub ahmet@138.91.247.29
+```
+ssh -i ~/.ssh/id_rsa.pub ahmet@138.91.247.29
+```
 
 登录过程应如以下输出块所示：
 
-    Warning: Permanently added '138.91.247.29' (ECDSA) to the list of known hosts.
-    Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.19.0-65-generic x86_64)
+```
+Warning: Permanently added '138.91.247.29' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.19.0-65-generic x86_64)
 
-    * Documentation:  https://help.ubuntu.com/
+* Documentation:  https://help.ubuntu.com/
 
-      System information as of Thu Sep  8 22:50:57 UTC 2016
+  System information as of Thu Sep  8 22:50:57 UTC 2016
 
-      System load: 0.63              Memory usage: 2%   Processes:       81
-      Usage of /:  39.6% of 1.94GB   Swap usage:   0%   Users logged in: 0
+  System load: 0.63              Memory usage: 2%   Processes:       81
+  Usage of /:  39.6% of 1.94GB   Swap usage:   0%   Users logged in: 0
 
-      Graph this data and manage this system at:
-        https://landscape.canonical.com/
+  Graph this data and manage this system at:
+    https://landscape.canonical.com/
 
-      Get cloud support with Ubuntu Advantage Cloud Guest:
-        http://www.ubuntu.com/business/services/cloud
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
 
-    0 packages can be updated.
-    0 updates are security updates.
+0 packages can be updated.
+0 updates are security updates.
 
-    The programs included with the Ubuntu system are free software;
-    the exact distribution terms for each program are described in the
-    individual files in /usr/share/doc/*/copyright.
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
 
-    Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
-    applicable law.
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
 
-    myAdminUser@myVM:~$
+myAdminUser@myVM:~$
+```
 
 ## 后续步骤
 使用 `azure vm quick-create` 命令可以快速部署 VM，以便可以登录到 bash shell 开始工作。但是，使用 `vm quick-create` 不会为用户提供广泛的控制，也不会让用户创建更复杂的环境。若要部署针对基础结构自定义的 Linux VM，可以遵循下列任一文章操作：

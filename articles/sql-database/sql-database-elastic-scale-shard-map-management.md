@@ -106,32 +106,34 @@ ms.author: ddove
 
 在此代码中，应用程序尝试使用 [TryGetSqlShardMapManager 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.trygetsqlshardmapmanager.aspx)打开现有的 **ShardMapManager**。如果表示全局 **ShardMapManager** (GSM) 的对象尚未存在于数据库内，则客户端库将在此处使用 [CreateSqlShardMapManager 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.createsqlshardmapmanager.aspx)创建这些对象。
 
-    // Try to get a reference to the Shard Map Manager 
-     // via the Shard Map Manager database.  
-    // If it doesn't already exist, then create it. 
-    ShardMapManager shardMapManager; 
-    bool shardMapManagerExists = ShardMapManagerFactory.TryGetSqlShardMapManager(
-                                        connectionString, 
-                                        ShardMapManagerLoadPolicy.Lazy, 
-                                        out shardMapManager); 
+```
+// Try to get a reference to the Shard Map Manager 
+ // via the Shard Map Manager database.  
+// If it doesn't already exist, then create it. 
+ShardMapManager shardMapManager; 
+bool shardMapManagerExists = ShardMapManagerFactory.TryGetSqlShardMapManager(
+                                    connectionString, 
+                                    ShardMapManagerLoadPolicy.Lazy, 
+                                    out shardMapManager); 
 
-    if (shardMapManagerExists) 
-     { 
-        Console.WriteLine("Shard Map Manager already exists");
-    } 
-    else
-    {
-        // Create the Shard Map Manager. 
-        ShardMapManagerFactory.CreateSqlShardMapManager(connectionString);
-        Console.WriteLine("Created SqlShardMapManager"); 
+if (shardMapManagerExists) 
+ { 
+    Console.WriteLine("Shard Map Manager already exists");
+} 
+else
+{
+    // Create the Shard Map Manager. 
+    ShardMapManagerFactory.CreateSqlShardMapManager(connectionString);
+    Console.WriteLine("Created SqlShardMapManager"); 
 
-        shardMapManager = ShardMapManagerFactory.GetSqlShardMapManager(
-            connectionString, 
-            ShardMapManagerLoadPolicy.Lazy);
+    shardMapManager = ShardMapManagerFactory.GetSqlShardMapManager(
+        connectionString, 
+        ShardMapManagerLoadPolicy.Lazy);
 
-        // The connectionString contains server name, database name, and admin credentials 
-        // for privileges on both the GSM and the shards themselves.
-    } 
+    // The connectionString contains server name, database name, and admin credentials 
+    // for privileges on both the GSM and the shards themselves.
+} 
+```
 
 作为替代方法，你可以使用 Powershell 创建新的分片映射管理器。[此处](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)提供了一个示例。
 
@@ -139,28 +141,30 @@ ms.author: ddove
 
 创建分片映射管理器后，使用 [TryGetRangeShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetrangeshardmap.aspx)、[TryGetListShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetlistshardmap.aspx) 或者 [GetShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.getshardmap.aspx) 方法获取 [RangeShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn807318.aspx) 或 [ListShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn807370.aspx)。
 
-    /// <summary>
-    /// Creates a new Range Shard Map with the specified name, or gets the Range Shard Map if it already exists.
-    /// </summary>
-    public static RangeShardMap<T> CreateOrGetRangeShardMap<T>(ShardMapManager shardMapManager, string shardMapName)
+```
+/// <summary>
+/// Creates a new Range Shard Map with the specified name, or gets the Range Shard Map if it already exists.
+/// </summary>
+public static RangeShardMap<T> CreateOrGetRangeShardMap<T>(ShardMapManager shardMapManager, string shardMapName)
+{
+    // Try to get a reference to the Shard Map.
+    RangeShardMap<T> shardMap;
+    bool shardMapExists = shardMapManager.TryGetRangeShardMap(shardMapName, out shardMap);
+
+    if (shardMapExists)
     {
-        // Try to get a reference to the Shard Map.
-        RangeShardMap<T> shardMap;
-        bool shardMapExists = shardMapManager.TryGetRangeShardMap(shardMapName, out shardMap);
+        ConsoleUtils.WriteInfo("Shard Map {0} already exists", shardMap.Name);
+    }
+    else
+    {
+        // The Shard Map does not exist, so create it
+        shardMap = shardMapManager.CreateRangeShardMap<T>(shardMapName);
+        ConsoleUtils.WriteInfo("Created Shard Map {0}", shardMap.Name);
+    }
 
-        if (shardMapExists)
-        {
-            ConsoleUtils.WriteInfo("Shard Map {0} already exists", shardMap.Name);
-        }
-        else
-        {
-            // The Shard Map does not exist, so create it
-            shardMap = shardMapManager.CreateRangeShardMap<T>(shardMapName);
-            ConsoleUtils.WriteInfo("Created Shard Map {0}", shardMap.Name);
-        }
-
-        return shardMap;
-    } 
+    return shardMap;
+} 
+```
 
 ### 分片映射管理凭据
 
@@ -184,102 +188,104 @@ ms.author: ddove
 
 编写代码，以在发生错误时重新运行该方法。每个请求将测试是否存在某个分片或映射，然后尝试创建该分片或映射。此代码假定名为 **sample\_shard_0**、**sample\_shard_1** 和 **sample\_shard\_2** 的数据库已在字符串 **shardServer** 引用的服务器中创建。
 
-    public void CreatePopulatedRangeMap(ShardMapManager smm, string mapName) 
-        {            
-            RangeShardMap<long> sm = null; 
+```
+public void CreatePopulatedRangeMap(ShardMapManager smm, string mapName) 
+    {            
+        RangeShardMap<long> sm = null; 
 
-            // check if shardmap exists and if not, create it 
-            if (!smm.TryGetRangeShardMap(mapName, out sm)) 
-            { 
-                sm = smm.CreateRangeShardMap<long>(mapName); 
-            } 
-
-            Shard shard0 = null, shard1=null; 
-            // Check if shard exists and if not, 
-            // create it (Idempotent / tolerant of re-execute) 
-            if (!sm.TryGetShard(new ShardLocation(
-                                     shardServer, 
-                                     "sample_shard_0"), 
-                                     out shard0)) 
-            { 
-                Shard0 = sm.CreateShard(new ShardLocation(
-                                            shardServer, 
-                                            "sample_shard_0")); 
-            } 
-
-            if (!sm.TryGetShard(new ShardLocation(
-                                    shardServer, 
-                                    "sample_shard_1"), 
-                                    out shard1)) 
-            { 
-                Shard1 = sm.CreateShard(new ShardLocation(
-                                             shardServer, 
-                                            "sample_shard_1"));  
-            } 
-
-            RangeMapping<long> rmpg=null; 
-
-            // Check if mapping exists and if not,
-            // create it (Idempotent / tolerant of re-execute) 
-            if (!sm.TryGetMappingForKey(0, out rmpg)) 
-            { 
-                sm.CreateRangeMapping(
-                          new RangeMappingCreationInfo<long>
-                          (new Range<long>(0, 50), 
-                          shard0, 
-                          MappingStatus.Online)); 
-            } 
-
-            if (!sm.TryGetMappingForKey(50, out rmpg)) 
-            { 
-                sm.CreateRangeMapping(
-                         new RangeMappingCreationInfo<long> 
-                         (new Range<long>(50, 100), 
-                         shard1, 
-                         MappingStatus.Online)); 
-            } 
-
-            if (!sm.TryGetMappingForKey(100, out rmpg)) 
-            { 
-                sm.CreateRangeMapping(
-                         new RangeMappingCreationInfo<long>
-                         (new Range<long>(100, 150), 
-                         shard0, 
-                         MappingStatus.Online)); 
-            } 
-
-            if (!sm.TryGetMappingForKey(150, out rmpg)) 
-            { 
-                sm.CreateRangeMapping(
-                         new RangeMappingCreationInfo<long> 
-                         (new Range<long>(150, 200), 
-                         shard1, 
-                         MappingStatus.Online)); 
-            } 
-
-            if (!sm.TryGetMappingForKey(200, out rmpg)) 
-            { 
-               sm.CreateRangeMapping(
-                         new RangeMappingCreationInfo<long> 
-                         (new Range<long>(200, 300), 
-                         shard0, 
-                         MappingStatus.Online)); 
-            } 
-
-            // List the shards and mappings 
-            foreach (Shard s in sm.GetShards()
-                         .OrderBy(s => s.Location.DataSource)
-                         .ThenBy(s => s.Location.Database))
-            { 
-               Console.WriteLine("shard: "+ s.Location); 
-            } 
-
-            foreach (RangeMapping<long> rm in sm.GetMappings()) 
-            { 
-                Console.WriteLine("range: [" + rm.Value.Low.ToString() + ":" 
-                        + rm.Value.High.ToString()+ ")  ==>" +rm.Shard.Location); 
-            } 
+        // check if shardmap exists and if not, create it 
+        if (!smm.TryGetRangeShardMap(mapName, out sm)) 
+        { 
+            sm = smm.CreateRangeShardMap<long>(mapName); 
         } 
+
+        Shard shard0 = null, shard1=null; 
+        // Check if shard exists and if not, 
+        // create it (Idempotent / tolerant of re-execute) 
+        if (!sm.TryGetShard(new ShardLocation(
+                                 shardServer, 
+                                 "sample_shard_0"), 
+                                 out shard0)) 
+        { 
+            Shard0 = sm.CreateShard(new ShardLocation(
+                                        shardServer, 
+                                        "sample_shard_0")); 
+        } 
+
+        if (!sm.TryGetShard(new ShardLocation(
+                                shardServer, 
+                                "sample_shard_1"), 
+                                out shard1)) 
+        { 
+            Shard1 = sm.CreateShard(new ShardLocation(
+                                         shardServer, 
+                                        "sample_shard_1"));  
+        } 
+
+        RangeMapping<long> rmpg=null; 
+
+        // Check if mapping exists and if not,
+        // create it (Idempotent / tolerant of re-execute) 
+        if (!sm.TryGetMappingForKey(0, out rmpg)) 
+        { 
+            sm.CreateRangeMapping(
+                      new RangeMappingCreationInfo<long>
+                      (new Range<long>(0, 50), 
+                      shard0, 
+                      MappingStatus.Online)); 
+        } 
+
+        if (!sm.TryGetMappingForKey(50, out rmpg)) 
+        { 
+            sm.CreateRangeMapping(
+                     new RangeMappingCreationInfo<long> 
+                     (new Range<long>(50, 100), 
+                     shard1, 
+                     MappingStatus.Online)); 
+        } 
+
+        if (!sm.TryGetMappingForKey(100, out rmpg)) 
+        { 
+            sm.CreateRangeMapping(
+                     new RangeMappingCreationInfo<long>
+                     (new Range<long>(100, 150), 
+                     shard0, 
+                     MappingStatus.Online)); 
+        } 
+
+        if (!sm.TryGetMappingForKey(150, out rmpg)) 
+        { 
+            sm.CreateRangeMapping(
+                     new RangeMappingCreationInfo<long> 
+                     (new Range<long>(150, 200), 
+                     shard1, 
+                     MappingStatus.Online)); 
+        } 
+
+        if (!sm.TryGetMappingForKey(200, out rmpg)) 
+        { 
+           sm.CreateRangeMapping(
+                     new RangeMappingCreationInfo<long> 
+                     (new Range<long>(200, 300), 
+                     shard0, 
+                     MappingStatus.Online)); 
+        } 
+
+        // List the shards and mappings 
+        foreach (Shard s in sm.GetShards()
+                     .OrderBy(s => s.Location.DataSource)
+                     .ThenBy(s => s.Location.Database))
+        { 
+           Console.WriteLine("shard: "+ s.Location); 
+        } 
+
+        foreach (RangeMapping<long> rm in sm.GetMappings()) 
+        { 
+            Console.WriteLine("range: [" + rm.Value.Low.ToString() + ":" 
+                    + rm.Value.High.ToString()+ ")  ==>" +rm.Shard.Location); 
+        } 
+    } 
+```
 
 作为替代方法，可使用 PowerShell 脚本达到相同的结果。[此处](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)提供了某些 PowerShell 示例。
 
@@ -321,7 +327,9 @@ ms.author: ddove
 
 映射是 .Net 中的不可变对象。以上会更改映射的所有方法也会使代码中任何对映射的引用失效。为了更轻松地执行操作序列来更改映射的状态，所有会更改映射的方法都将返回新的映射引用，以便能够链接操作。例如，若要在 shardmap sm 中删除包含键 25 的现有映射，可以执行以下命令：
 
-        sm.DeleteMapping(sm.MarkMappingOffline(sm.GetMappingForKey(25)));
+```
+    sm.DeleteMapping(sm.MarkMappingOffline(sm.GetMappingForKey(25)));
+```
 
 ## 添加分片 
 

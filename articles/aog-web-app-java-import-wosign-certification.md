@@ -26,7 +26,9 @@ wacn.date: 10/28/2016
 1. 从 [http://www.wosign.com/Root/index.htm# "http://www.wosign.com/Root/index.htm#"](http://www.wosign.com/Root/index.htm# "http://www.wosign.com/Root/index.htm#") 站点 下载 WoSign 根证书（Certification Authority of WoSign），将 .crt 文件后缀改为 .cer
 2. 执行以下命令导入
 
-        keytool -keystore "C:\Program Files\Java\jdk1.8.0_71\jre\lib\security\cacerts" -importcert -alias WoSign -file WS_CA1_NEW.cer
+    ```
+    keytool -keystore "C:\Program Files\Java\jdk1.8.0_71\jre\lib\security\cacerts" -importcert -alias WoSign -file WS_CA1_NEW.cer
+    ```
 
     接下来 会提示输入密码，默认密码为 changeit，输入之后，选择‘是’将其安装到 JDK 可信证书库中。
 

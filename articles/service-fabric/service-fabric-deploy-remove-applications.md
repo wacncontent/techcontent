@@ -34,14 +34,18 @@ ms.author: ryanwi
 
 假设您有一个名为 *MyApplicationType* 的文件夹，其中包含必要的应用程序清单、服务清单以及代码/配置/数据包。[Copy-ServiceFabricApplicationPackage](https://docs.microsoft.com/powershell/servicefabric/vlatest/copy-servicefabricapplicationpackage) 命令可将包上传到群集映像存储。Service Fabric SDK PowerShell 模块中包含的 **Get-ImageStoreConnectionStringFromClusterManifest** cmdlet 用于获取映像存储连接字符串。要导入 SDK 模块，请运行：
 
-    Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
+```
+Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
+```
 
 可以将应用程序包从 *C:\\users\\ryanwi\\Documents\\Visual Studio 2015\\Projects\\MyApplication\\myapplication\\pkg\\debug* 复制到 *c:\\temp\\MyApplicationType*（将“debug”目录重命名为“MyApplicationType”）。以下示例将上载包：
 
 ~~~
 PS C:\temp> dir
 
-    Directory: c:\temp
+```
+Directory: c:\temp
+```
 
 Mode                LastWriteTime         Length Name                                                                                   
 ----                -------------         ------ ----                                                                                   
@@ -205,13 +209,15 @@ ImageStoreConnectionString:
 PS D:\temp> Get-ServiceFabricClusterManifest
 <ClusterManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Server-Default-SingleNode" Version="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
 
-    [...]
+```
+[...]
 
-    <Section Name="Management">
-      <Parameter Name="ImageStoreConnectionString" Value="file:D:\ServiceFabric\Data\ImageStore" />
-    </Section>
+<Section Name="Management">
+  <Parameter Name="ImageStoreConnectionString" Value="file:D:\ServiceFabric\Data\ImageStore" />
+</Section>
 
-    [...]
+[...]
+```
 
 PS D:\temp> Copy-ServiceFabricApplicationPackage .\MyApplicationType -ImageStoreConnectionString file:D:\ServiceFabric\Data\ImageStore
 Copy application package succeeded

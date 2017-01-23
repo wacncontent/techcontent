@@ -43,15 +43,19 @@ Windows 事件日志中引发了虚拟机中有关**系统**、**安全**和**�
 
 要作为启动任务运行的任务文件（即以下示例中的 EnableLogOnAudit.cmd）需要包含在您的生成包中。如果您使用是的 Visual Studio，请将文件添加到您的云项目，右键单击该文件名，单击“属性”，然后将“复制到输出目录”设置为“始终复制”。
 
-    <Startup>
-        <Task commandLine="EnableLogOnAudit.cmd" executionContext="elevated" taskType="simple" />
-    </Startup>
+```
+<Startup>
+    <Task commandLine="EnableLogOnAudit.cmd" executionContext="elevated" taskType="simple" />
+</Startup>
+```
 
 EnableLogOnAudit.cmd 的内容：
 
-    @echo off
-    auditpol.exe /set /category:"Logon/Logoff" /success:enable /failure:enable
-    Exit /B 0
+```
+@echo off
+auditpol.exe /set /category:"Logon/Logoff" /success:enable /failure:enable
+Exit /B 0
+```
 
 前面示例中使用的 [Auditpol.exe](https://technet.microsoft.com/zh-cn/library/cc731451.aspx) 是 Windows Server 操作系统中包含的命令行工具，该操作系统允许您管理审核策略设置。
 
@@ -61,16 +65,20 @@ EnableLogOnAudit.cmd 的内容：
 
 更新 IIS 配置的任务需要包含在 Web 角色的服务定义文件中。对服务定义文件的以下更改运行一个启动任务，该启动任务通过运行名为 ConfigureIISLogging.cmd 的脚本来配置 IIS 日志记录。
 
-    <Startup>
-        <Task commandLine="ConfigureIISLogging.cmd" executionContext="elevated" taskType="simple" />
-    </Startup>
+```
+<Startup>
+    <Task commandLine="ConfigureIISLogging.cmd" executionContext="elevated" taskType="simple" />
+</Startup>
+```
 
 ConfigureIISLogging:cmd 的内容
 
-    @echo off
-    appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /dontLog:"True" /commit:apphost
-    appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /selectiveLogging:"LogAll" /commit
-    Exit /B 0
+```
+@echo off
+appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /dontLog:"True" /commit:apphost
+appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /selectiveLogging:"LogAll" /commit
+Exit /B 0
+```
 
 ## <a name="log-collection"></a>日志收集
 通过以下两种主要方法来从云服务或 Azure 中的虚拟机收集安全事件和日志：
@@ -126,16 +134,18 @@ Azure PowerShell SDK 提供用于配置 Azure 虚拟机上的 Azure 诊断的 cm
 
 可以在配置文件中指定存储帐户，也可以在运行 Azure PowerShell cmdlet 设置 Azure 诊断时将存储帐户指定为参数。
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-        <WadCfg>
-            <DiagnosticMonitorConfiguration overallQuotaInMB="10000">
-                <WindowsEventLog scheduledTransferPeriod="PT1M">
-                    <DataSource name="Security!*[System[(EventID=4624 or EventID=4625)]]" />
-                </WindowsEventLog>
-            </DiagnosticMonitorConfiguration>
-        </WadCfg>
-    </PublicConfig>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+    <WadCfg>
+        <DiagnosticMonitorConfiguration overallQuotaInMB="10000">
+            <WindowsEventLog scheduledTransferPeriod="PT1M">
+                <DataSource name="Security!*[System[(EventID=4624 or EventID=4625)]]" />
+            </WindowsEventLog>
+        </DiagnosticMonitorConfiguration>
+    </WadCfg>
+</PublicConfig>
+```
 
 在将以前的内容保存为 XML 文件时，将编码设置为 **UTF-8**。如果您使用的是记事本，将在“另存为”对话框中看到编码选项。下表列出了配置文件中一些需要注意的关键属性。
 
@@ -233,10 +243,12 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 若要检索现有配置设置，可以使用 **Get-AzureVMDiagnosticsExtension** cmdlet。下面是一个用于检索现有配置的示例 Azure PowerShell 脚本：
 
-    $service_name="<VM Name>"
-    $VM1 = Get-AzureVM -ServiceName $service_name
-    $config = Get-AzureVMDiagnosticsExtension -VM $VM1 | Select -Expand PublicConfiguration | % {$_.substring($_.IndexOf(':"')+2,$_.LastIndexOf('",')-$_.IndexOf(':"')-2)}
-    [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($config))
+```
+$service_name="<VM Name>"
+$VM1 = Get-AzureVM -ServiceName $service_name
+$config = Get-AzureVMDiagnosticsExtension -VM $VM1 | Select -Expand PublicConfiguration | % {$_.substring($_.IndexOf(':"')+2,$_.LastIndexOf('",')-$_.IndexOf(':"')-2)}
+[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($config))
+```
 更新 Azure 诊断配置以收集 Windows 应用程序事件日志错误和关键事件，如下所示：
 
     <?xml version="1.0" encoding="utf-8" ?>
@@ -259,14 +271,18 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 ##### 步骤 3：验证配置设置
 运行以下命令来验证配置设置是否已更新：
 
-    $service_name="<VM Name>"
-    $VM1 = Get-AzureVM -ServiceName $service_name
-    Get-AzureVMDiagnosticsExtension -VM $VM1
+```
+$service_name="<VM Name>"
+$VM1 = Get-AzureVM -ServiceName $service_name
+Get-AzureVMDiagnosticsExtension -VM $VM1
+```
 
 ##### 步骤 4：生成事件
 针对本例，请运行以下命令来生成类型为**错误**的应用程序事件日志：
 
-    eventcreate /t error /id 100 /l application /d "Create event in application log for Demo Purpose"
+```
+eventcreate /t error /id 100 /l application /d "Create event in application log for Demo Purpose"
+```
 
 ![][5]
 
@@ -352,16 +368,20 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 #### 步骤 4：配置 Azure 诊断
 运行以下 Azure PowerShell 脚本来启用 Azure 诊断（请确保更新 storage\_name、key、config\_path 和 service\_name）。
 
-    $storage_name = "<storage account name>"
-    $key = " <storage key>"
-    $config_path="<path to configuration XML file>"
-    $service_name="<Cloud Service Name>"
-    $storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
+$storage_name = "<storage account name>"
+$key = " <storage key>"
+$config_path="<path to configuration XML file>"
+$service_name="<Cloud Service Name>"
+$storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
 
 若要验证您的服务是否具有最新的诊断配置，请运行以下 Azure PowerShell 命令：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 5：生成事件
 若要生成事件，请执行以下操作：
@@ -400,21 +420,25 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 若要检索现有配置设置，可以使用 **Get-AzureServiceDiagnosticsExtension** cmdlet：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 2：更新配置 XML 以包括防火墙事件
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-    <WadCfg>
-        <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
-        <WindowsEventLog scheduledTransferPeriod="PT1M">
-            <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
-            <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
-        </WindowsEventLog>
-        </DiagnosticMonitorConfiguration>
-    </WadCfg>
-    </PublicConfig>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+<WadCfg>
+    <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
+    <WindowsEventLog scheduledTransferPeriod="PT1M">
+        <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
+        <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
+    </WindowsEventLog>
+    </DiagnosticMonitorConfiguration>
+</WadCfg>
+</PublicConfig>
+```
 
 通过使用前面[步骤 3：验证配置 XML 文件](#step3)中所述的相同验证过程来验证 XML 内容。
 
@@ -422,17 +446,21 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 运行以下 Azure PowerShell 脚本来更新 Azure 诊断以使用新配置（请确保使用您的云服务信息更新 storage\_name、key、config\_path 和 service\_name)。
 
-    Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
-    $storage_name = "<storage account name>"
-    $key = " <storage key>"
-    $config_path="<path to configuration XML file>"
-    $service_name="<Cloud Service Name>"
-    $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
+Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
+$storage_name = "<storage account name>"
+$key = " <storage key>"
+$config_path="<path to configuration XML file>"
+$service_name="<Cloud Service Name>"
+$storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
 
 若要验证您的服务是否具有最新的诊断配置，请运行以下 Azure PowerShell 命令：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 4：启用防火墙事件
 
@@ -470,20 +498,22 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 1：更新配置文件以包括 IIS 日志收集
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-    <WadCfg>
-        <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
-        <Directories scheduledTransferPeriod="PT5M">
-        <IISLogs containerName="iislogs" />
-        </Directories>
-        <WindowsEventLog scheduledTransferPeriod="PT1M">
-            <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
-            <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
-        </WindowsEventLog>
-        </DiagnosticMonitorConfiguration>
-    </WadCfg>
-    </PublicConfig>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+<WadCfg>
+    <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
+    <Directories scheduledTransferPeriod="PT5M">
+    <IISLogs containerName="iislogs" />
+    </Directories>
+    <WindowsEventLog scheduledTransferPeriod="PT1M">
+        <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
+        <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
+    </WindowsEventLog>
+    </DiagnosticMonitorConfiguration>
+</WadCfg>
+</PublicConfig>
+```
 
 在前面的 Azure 诊断配置中，**containerName** 是在客户的存储帐户内要将日志移动到的 blob 容器名称。
 
@@ -492,17 +522,21 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 #### 步骤 2：更新 Azure 诊断以使用新配置
 运行以下 Azure PowerShell 脚本来更新 Azure 诊断以使用新配置（请确保使用您的云服务信息更新 storage\_name、key、config\_path 和 service\_name)。
 
-    Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
-    $storage_name = "<storage account name>"
-    $key = " <storage key>"
-    $config_path="<path to configuration XML file>"
-    $service_name="<Cloud Service Name>"
-    $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
+Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
+$storage_name = "<storage account name>"
+$key = " <storage key>"
+$config_path="<path to configuration XML file>"
+$service_name="<Cloud Service Name>"
+$storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
 
 若要验证您的服务是否具有最新的诊断配置，请运行以下 Azure PowerShell 命令：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 3：生成 IIS 日志
 
@@ -534,7 +568,9 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 >[!NOTE]
 >将会显著影响收集的数据量的另一个变量是日志记录级别。下面举例说明如何通过日志记录级别筛选日志：
 
-    System!*[System[(Level =2)]]
+```
+System!*[System[(Level =2)]]
+```
 
 日志记录级别是累积的。如果将筛选器设置为**警告**，则还会收集**错误**和**严重**事件。
 

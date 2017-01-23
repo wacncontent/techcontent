@@ -537,79 +537,81 @@ _**图 4：**定义附加的新 SAP ASCS/SCS 群集虚拟名称和 TCP/IP 地址
 
 以下脚本将新的 IP 地址添加到现有负载均衡器。更新环境的 PowerShell 变量。该脚本将为所有 SAP ASCS/SCS 端口创建全部所需的负载均衡规则。
 
-    # Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
-    Clear-Host
-    $ResourceGroupName = "SAP-MULTI-SID-Landscape"      # Existing Resource group name
-    $VNetName = "pr2-vnet"                        # Existing Virtual network name
-    $SubnetName = "Subnet"                        # Existing Subnet name
-    $ILBName = "pr2-lb-ascs"                      # Existing ILB name                      
-    $ILBIP = "10.0.0.50"                          # New IP address
-    $VMNames = "pr2-ascs-0","pr2-ascs-1"          # Existing cluster Virtual machine names
-    $SAPInstanceNumber = 50                       # SAP ASCS/SCS Instance Number - must be unique value per cluster
-    [int]$ProbePort = "623$SAPInstanceNumber"     # Probe port - MUST be unique value per IP and load balancer
+```
+# Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+# Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
+Clear-Host
+$ResourceGroupName = "SAP-MULTI-SID-Landscape"      # Existing Resource group name
+$VNetName = "pr2-vnet"                        # Existing Virtual network name
+$SubnetName = "Subnet"                        # Existing Subnet name
+$ILBName = "pr2-lb-ascs"                      # Existing ILB name                      
+$ILBIP = "10.0.0.50"                          # New IP address
+$VMNames = "pr2-ascs-0","pr2-ascs-1"          # Existing cluster Virtual machine names
+$SAPInstanceNumber = 50                       # SAP ASCS/SCS Instance Number - must be unique value per cluster
+[int]$ProbePort = "623$SAPInstanceNumber"     # Probe port - MUST be unique value per IP and load balancer
 
-    $ILB = Get-AzureRmLoadBalancer -Name $ILBName -ResourceGroupName $ResourceGroupName
+$ILB = Get-AzureRmLoadBalancer -Name $ILBName -ResourceGroupName $ResourceGroupName
 
-    $count = $ILB.FrontendIpConfigurations.Count + 1
-    $FrontEndConfigurationName ="lbFrontendASCS$count"
-    $LBProbeName = "lbProbeASCS$count"
+$count = $ILB.FrontendIpConfigurations.Count + 1
+$FrontEndConfigurationName ="lbFrontendASCS$count"
+$LBProbeName = "lbProbeASCS$count"
 
-    # Get the Azure VNet and Subnet
-    $VNet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName
-    $Subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $VNet -Name $SubnetName
+# Get the Azure VNet and Subnet
+$VNet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName
+$Subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $VNet -Name $SubnetName
 
-    # Add Second Frontend and Probe config
-    Write-Host "Adding new front end IP Pool '$FrontEndConfigurationName' ..." -ForegroundColor Green
-    $ILB | Add-AzureRmLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -PrivateIpAddress $ILBIP -SubnetId $Subnet.Id
-    $ILB | Add-AzureRmLoadBalancerProbeConfig -Name $LBProbeName  -Protocol Tcp -Port $Probeport -ProbeCount 2 -IntervalInSeconds 10  | Set-AzureRmLoadBalancer
+# Add Second Frontend and Probe config
+Write-Host "Adding new front end IP Pool '$FrontEndConfigurationName' ..." -ForegroundColor Green
+$ILB | Add-AzureRmLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -PrivateIpAddress $ILBIP -SubnetId $Subnet.Id
+$ILB | Add-AzureRmLoadBalancerProbeConfig -Name $LBProbeName  -Protocol Tcp -Port $Probeport -ProbeCount 2 -IntervalInSeconds 10  | Set-AzureRmLoadBalancer
 
-    #Get new updated config
-    $ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
-    # Get new updated LP FrontendIP COnfig
-    $FEConfig = Get-AzureRmLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -LoadBalancer $ILB
-    $HealthProbe  = Get-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -LoadBalancer $ILB
+#Get new updated config
+$ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
+# Get new updated LP FrontendIP COnfig
+$FEConfig = Get-AzureRmLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -LoadBalancer $ILB
+$HealthProbe  = Get-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -LoadBalancer $ILB
 
-    # Add new backend config into existign ILB
-    $BackEndConfigurationName  = "backendPoolASCS$count"
-    Write-Host "Adding new backend Pool '$BackEndConfigurationName' ..." -ForegroundColor Green
-    $BEConfig = Add-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB | Set-AzureRmLoadBalancer
+# Add new backend config into existign ILB
+$BackEndConfigurationName  = "backendPoolASCS$count"
+Write-Host "Adding new backend Pool '$BackEndConfigurationName' ..." -ForegroundColor Green
+$BEConfig = Add-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB | Set-AzureRmLoadBalancer
 
-    #Get new updated config
-    $ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
+#Get new updated config
+$ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
 
-    # Assign VM NICs to backend pool
-    $BEPool = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB
-    foreach($VMName in $VMNames){
-            $VM = Get-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VMName
-            $NICName = ($VM.NetworkInterfaceIDs[0].Split('/') | select -last 1)        
-            $NIC = Get-AzureRmNetworkInterface -name $NICName -ResourceGroupName $ResourceGroupName                
-            $NIC.IpConfigurations[0].LoadBalancerBackendAddressPools += $BEPool
-            Write-Host "Assigning network card '$NICName' of the '$VMName' VM to the backend pool '$BackEndConfigurationName' ..." -ForegroundColor Green
-            Set-AzureRmNetworkInterface -NetworkInterface $NIC
-            #start-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VM.Name
-    }
+# Assign VM NICs to backend pool
+$BEPool = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB
+foreach($VMName in $VMNames){
+        $VM = Get-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VMName
+        $NICName = ($VM.NetworkInterfaceIDs[0].Split('/') | select -last 1)        
+        $NIC = Get-AzureRmNetworkInterface -name $NICName -ResourceGroupName $ResourceGroupName                
+        $NIC.IpConfigurations[0].LoadBalancerBackendAddressPools += $BEPool
+        Write-Host "Assigning network card '$NICName' of the '$VMName' VM to the backend pool '$BackEndConfigurationName' ..." -ForegroundColor Green
+        Set-AzureRmNetworkInterface -NetworkInterface $NIC
+        #start-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VM.Name
+}
 
-    # Create Load Balancing Rules
-    $Ports = "445","32$SAPInstanceNumber","33$SAPInstanceNumber","36$SAPInstanceNumber","39$SAPInstanceNumber","5985","81$SAPInstanceNumber","5$SAPInstanceNumber`13","5$SAPInstanceNumber`14","5$SAPInstanceNumber`16"
-    $ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
-    $FEConfig = get-AzureRMLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -LoadBalancer $ILB
-    $BEConfig = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB
-    $HealthProbe  = Get-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -LoadBalancer $ILB
+# Create Load Balancing Rules
+$Ports = "445","32$SAPInstanceNumber","33$SAPInstanceNumber","36$SAPInstanceNumber","39$SAPInstanceNumber","5985","81$SAPInstanceNumber","5$SAPInstanceNumber`13","5$SAPInstanceNumber`14","5$SAPInstanceNumber`16"
+$ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
+$FEConfig = get-AzureRMLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -LoadBalancer $ILB
+$BEConfig = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB
+$HealthProbe  = Get-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -LoadBalancer $ILB
 
-    Write-Host "Creating load balancing rules for the ports: '$Ports' ... " -ForegroundColor Green
+Write-Host "Creating load balancing rules for the ports: '$Ports' ... " -ForegroundColor Green
 
-    foreach ($Port in $Ports) {
+foreach ($Port in $Ports) {
 
-            $LBConfigrulename = "lbrule$Port" + "_$count"
-            Write-Host "Creating load balancing rule '$LBConfigrulename' for the port '$Port' ..." -ForegroundColor Green
+        $LBConfigrulename = "lbrule$Port" + "_$count"
+        Write-Host "Creating load balancing rule '$LBConfigrulename' for the port '$Port' ..." -ForegroundColor Green
 
-            $ILB | Add-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConfiguration $FEConfig  -BackendAddressPool $BEConfig -Probe $HealthProbe -Protocol tcp -FrontendPort  $Port -BackendPort $Port -IdleTimeoutInMinutes 30 -LoadDistribution Default -EnableFloatingIP   
-    }
+        $ILB | Add-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConfiguration $FEConfig  -BackendAddressPool $BEConfig -Probe $HealthProbe -Protocol tcp -FrontendPort  $Port -BackendPort $Port -IdleTimeoutInMinutes 30 -LoadDistribution Default -EnableFloatingIP   
+}
 
-    $ILB | Set-AzureRmLoadBalancer
+$ILB | Set-AzureRmLoadBalancer
 
-    Write-Host "Succesfully added new IP '$ILBIP' to the internal load balancer '$ILBName'!" -ForegroundColor Green
+Write-Host "Succesfully added new IP '$ILBIP' to the internal load balancer '$ILBName'!" -ForegroundColor Green
+```
 
 运行完脚本后，可在 Azure 门户预览中看到结果。
 

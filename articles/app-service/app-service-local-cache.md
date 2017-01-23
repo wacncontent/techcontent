@@ -63,22 +63,24 @@ Azure 应用服务本地缓存功能允许通过 Web 角色来查看内容。存
 ### 使用 Azure Resource Manager 配置本地缓存
 <a name="Configure-Local-Cache-ARM"></a>
 
-    ...
+```
+...
 
-    {
-        "apiVersion": "2015-08-01",
-        "type": "config",
-        "name": "appsettings",
-        "dependsOn": [
-            "[resourceId('Microsoft.Web/sites/', variables('siteName'))]"
-        ],
-        "properties": {
-            "WEBSITE_LOCAL_CACHE_OPTION": "Always",
-            "WEBSITE_LOCAL_CACHE_SIZEINMB": "300"
-        }
+{
+    "apiVersion": "2015-08-01",
+    "type": "config",
+    "name": "appsettings",
+    "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/', variables('siteName'))]"
+    ],
+    "properties": {
+        "WEBSITE_LOCAL_CACHE_OPTION": "Always",
+        "WEBSITE_LOCAL_CACHE_SIZEINMB": "300"
     }
+}
 
-    ...
+...
+```
 
 ## 更改本地缓存中的大小设置
 

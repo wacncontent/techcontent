@@ -51,24 +51,32 @@ ms.author: cephalin
 ## 在你的开发计算机上创建一个 PHP (Laravel) 应用
 1. 打开新的 Windows 命令提示符、PowerShell 窗口、Linux shell 或 OS X 终端。运行以下命令以验证是否在你的计算机上正确安装了所需工具。
 
-        php --version
-        composer --version
-        azure --version
-        git --version
+    ```
+    php --version
+    composer --version
+    azure --version
+    git --version
+    ```
 
     如果尚未安装这些工具，请参阅[先决条件](#Prerequisites)中的下载链接。
 
 2. 安装 Laravel，如下：
 
-        composer global require "laravel/installer"
+    ```
+    composer global require "laravel/installer"
+    ```
 3. 使用 `CD` 命令切换到工作目录并创建新的 Laravel 应用程序，如下：
 
-        cd <working_directory>
-        laravel new <app_name>
+    ```
+    cd <working_directory>
+    laravel new <app_name>
+    ```
 4. 使用 `CD` 命令切换到新创建的 `<app_name>` 目录并测试该应用程序，如下：
 
-        cd <app_name>
-        php artisan serve
+    ```
+    cd <app_name>
+    php artisan serve
+    ```
 
     现在可以在浏览器中导航到 http://localhost:8000，并查看 Laravel 初始屏幕。
 
@@ -86,8 +94,10 @@ ms.author: cephalin
 
 1. 更改为 ASM 模式并登录 Azure：
 
-        azure config mode asm
-        azure login -e AzureChinaCloud
+    ```
+    azure config mode asm
+    azure login -e AzureChinaCloud
+    ```
 
     按照帮助消息的提示继续此登录过程。
 
@@ -95,11 +105,15 @@ ms.author: cephalin
 
 3. 设置应用服务的部署用户。稍后使用凭据部署代码。
 
-        azure site deployment user set --username <username> --pass <password>
+    ```
+    azure site deployment user set --username <username> --pass <password>
+    ```
 
 2. 运行以下命令以使用 Git 部署创建 Azure Web 应用。出现提示时，请指定所需区域数目。
 
-        azure site create --git <app_name>
+    ```
+    azure site create --git <app_name>
+    ```
 
     ![在 Azure 中创建 PHP (Laravel) 应用的 Azure 资源](./media/app-service-web-php-get-started/create-site-cli.png)  
 
@@ -117,16 +131,22 @@ ms.author: cephalin
 
 1. 设置 Laravel 应用需要的 PHP 版本。
 
-        azure site set --php-version 5.6
+    ```
+    azure site set --php-version 5.6
+    ```
 
     你完成了 PHP 版本的设置！
 2. 为 Azure Web 应用生成新的 `APP_KEY`，并针对 Azure Web 应用将其设置为一个应用程序设置。
 
-        php artisan key:generate --show
-        azure site appsetting add APP_KEY="<output_of_php_artisan_key:generate_--show>"
+    ```
+    php artisan key:generate --show
+    azure site appsetting add APP_KEY="<output_of_php_artisan_key:generate_--show>"
+    ```
 3. 此外，启用 Laravel 调试功能以解决任何含义模糊的错误消息 `Whoops, looks like something went wrong.` 页面。
 
-        azure site appsetting add APP_DEBUG=true
+    ```
+    azure site appsetting add APP_DEBUG=true
+    ```
 
     你已完成环境变量的设置！
 
@@ -178,15 +198,19 @@ ms.author: cephalin
 
 1. 提交所有更改，并将代码部署到 Azure Web 应用，就像在任何 Git 存储库中一样：
 
-        git add .
-        git commit -m "Hurray! My first commit for my Azure app!"
-        git push azure master 
+    ```
+    git add .
+    git commit -m "Hurray! My first commit for my Azure app!"
+    git push azure master 
+    ```
 
     出现提示时，使用前面创建的用户凭据。
 
 2. 通过运行以下命令在浏览器中查看它的运行：
 
-        azure site browse
+    ```
+    azure site browse
+    ```
 
     浏览器应显示 Laravel 初始屏幕。
 

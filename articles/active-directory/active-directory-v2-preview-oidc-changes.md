@@ -23,7 +23,9 @@ ms.author: dastrock
 ## 哪些人会受到影响？
 任何已编写为使用 v2.0 聚合身份验证终结点的应用，
 
-    https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+```
+https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+```
 
 有关 v2.0 终结点的详细信息可以在[此处](./active-directory-appmodel-v2-overview.md)找到。
 
@@ -32,7 +34,9 @@ ms.author: dastrock
 ## 哪些人不会受到影响？
 任何已根据生产 Azure AD 身份验证终结点编写的应用，
 
-    https://login.microsoftonline.com/common/oauth2/authorize
+```
+https://login.microsoftonline.com/common/oauth2/authorize
+```
 
 此协议一定都是如此，不会发生任何更改。
 
@@ -42,12 +46,14 @@ ms.author: dastrock
 ### 从 JWT 标头删除 x5t 值
 v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令牌的相关元数据。如果解码其中一个当前 JWT 的标头，你会发现类似以下的情形：
 
-    { 
-        "type": "JWT",
-        "alg": "RS256",
-        "x5t": "MnC_VZcATfM5pOYiJHMba9goEKY",
-        "kid": "MnC_VZcATfM5pOYiJHMba9goEKY"
-    }
+```
+{ 
+    "type": "JWT",
+    "alg": "RS256",
+    "x5t": "MnC_VZcATfM5pOYiJHMba9goEKY",
+    "kid": "MnC_VZcATfM5pOYiJHMba9goEKY"
+}
+```
 
 “x5t”和“kid”属性都会识别从 OpenID Connect 元数据终结点检索的，应该用于验证令牌签名的公钥。
 
@@ -59,31 +65,37 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 ### 删除 profile\_info
 以前，v2.0 终结点一直在称为 `profile_info` 的令牌响应中返回 base64 编码的 JSON 对象。当通过向下列对象发送请求，从 v2.0 终结点请求访问令牌时：
 
-    https://login.microsoftonline.com/common/oauth2/v2.0/token
+```
+https://login.microsoftonline.com/common/oauth2/v2.0/token
+```
 
 响应看起来将类似于下列 JSON 对象：
 
-    { 
-        "token_type": "Bearer",
-        "expires_in": 3599,
-        "scope": "https://outlook.office.com/mail.read",
-        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
-        "refresh_token": "OAAABAAAAiL9Kn2Z27UubvWFPbm0gL...",
-        "profile_info": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
-    }
+```
+{ 
+    "token_type": "Bearer",
+    "expires_in": 3599,
+    "scope": "https://outlook.office.com/mail.read",
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
+    "refresh_token": "OAAABAAAAiL9Kn2Z27UubvWFPbm0gL...",
+    "profile_info": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
+}
+```
 
 `profile_info` 值包含登录应用的用户的相关信息 - 其显示名称、名字、姓氏、电子邮件地址、标识符等。`profile_info` 主要用于令牌缓存和显示用途。
 
 我们现在删除 `profile_info` 值 - 不过别担心，我们仍然会在稍微不同的地方为开发人员提供此信息。v2.0 终结点现在会在每个令牌响应中返回 `id_token`，而不是 `profile_info`：
 
-    { 
-        "token_type": "Bearer",
-        "expires_in": 3599,
-        "scope": "https://outlook.office.com/mail.read",
-        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
-        "refresh_token": "OAAABAAAAiL9Kn2Z27UubvWFPbm0gL...",
-        "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
-    }
+```
+{ 
+    "token_type": "Bearer",
+    "expires_in": 3599,
+    "scope": "https://outlook.office.com/mail.read",
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
+    "refresh_token": "OAAABAAAAiL9Kn2Z27UubvWFPbm0gL...",
+    "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
+}
+```
 
 你可以解码并分析 id\_token，以检索你从 profile\_info 收到的相同信息。id\_token 是 JSON Web 令牌 (JWT)，其内容由 OpenID Connect 指定。用于执行此操作的代码应该非常类似 — 你只需要提取 id\_token 的中间段（主体），base64 会将其解码以在 JSON 对象中访问。
 
@@ -95,18 +107,22 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 ### 删除 id\_token\_expires\_in
 与 `profile_info` 相似，我们同时也从响应中删除 `id_token_expires_in` 参数。以前，v2.0 终结点会返回 `id_token_expires_in` 的值以及每个 id\_token 响应，例如在授权响应中：
 
-    https://myapp.com?id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...&id_token_expires_in=3599...
+```
+https://myapp.com?id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...&id_token_expires_in=3599...
+```
 
 或令牌响应中：
 
-    { 
-        "token_type": "Bearer",
-        "id_token_expires_in": 3599,
-        "scope": "openid",
-        "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
-        "refresh_token": "OAAABAAAAiL9Kn2Z27UubvWFPbm0gL...",
-        "profile_info": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
-    }
+```
+{ 
+    "token_type": "Bearer",
+    "id_token_expires_in": 3599,
+    "scope": "openid",
+    "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
+    "refresh_token": "OAAABAAAAiL9Kn2Z27UubvWFPbm0gL...",
+    "profile_info": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsI...",
+}
+```
 
 `id_token_expires_in` 值会指出 id\_token 保持有效的秒数。现在，我们完全删除 `id_token_expires_in` 值。可以改为使用 OpenID Connect 标准 `nbf` 和 `exp` 声明来检查 id\_token 的有效性。有关这些声明的详细信息，请参阅 [v2.0 令牌参考](./active-directory-v2-tokens.md)。
 
@@ -116,28 +132,32 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 ### 更改 scope=openid 返回的声明
 这项更改最为重要 — 事实上，它将影响使用 v2.0 终结点的几乎每个应用。许多应用程序使用 `openid` 范围将请求发送到 v2.0 终结点，例如：
 
-    https://login.microsoftonline.com/common/oauth2/v2.0/authorize?
-    client_id=...
-    &redirect_uri=...
-    &response_mode=form_post
-    &response_type=id_token
-    &scope=openid offline_access https://outlook.office.com/mail.read
+```
+https://login.microsoftonline.com/common/oauth2/v2.0/authorize?
+client_id=...
+&redirect_uri=...
+&response_mode=form_post
+&response_type=id_token
+&scope=openid offline_access https://outlook.office.com/mail.read
+```
 
 现在，用户同意 `openid` 范围时，应用会在生成的 id\_token 中收到丰富的用户相关信息。这些声明可以包含用户的名称、首选用户名、电子邮件地址和对象 ID 等等。
 
 在此更新中，我们会更改 `openid` 范围可让应用访问的信息，使其更符合 OpenID Connect 规范。`openid` 范围只允许应用让用户登录，并在 id\_token 的 `sub` 声明中接收用户的应用特定标识符。只被授予 `openid` 范围的 id\_token 中的声明将缺少所有个人可识别信息。id\_token 声明示例为：
 
-    { 
-        "aud": "580e250c-8f26-49d0-bee8-1c078add1609",
-        "iss": "https://login.microsoftonline.com/b9410318-09af-49c2-b0c3-653adc1f376e/v2.0 ",
-        "iat": 1449520283,
-        "nbf": 1449520283,
-        "exp": 1449524183,
-        "nonce": "12345",
-        "sub": "MF4f-ggWMEji12KynJUNQZphaUTvLcQug5jdF2nl01Q",
-        "tid": "b9410318-09af-49c2-b0c3-653adc1f376e",
-        "ver": "2.0",
-    }
+```
+{ 
+    "aud": "580e250c-8f26-49d0-bee8-1c078add1609",
+    "iss": "https://login.microsoftonline.com/b9410318-09af-49c2-b0c3-653adc1f376e/v2.0 ",
+    "iat": 1449520283,
+    "nbf": 1449520283,
+    "exp": 1449524183,
+    "nonce": "12345",
+    "sub": "MF4f-ggWMEji12KynJUNQZphaUTvLcQug5jdF2nl01Q",
+    "tid": "b9410318-09af-49c2-b0c3-653adc1f376e",
+    "ver": "2.0",
+}
+```
 
 如果你想要获取有关应用程序中的用户的个人标识信息 (PII)，应用程序必须向用户请求其他权限。我们将从 OpenID Connect 规范引入对两个新范围（`email` 和 `profile` 范围）的支持，这两个范围让你能够执行此操作。
 
@@ -146,12 +166,14 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 
 这样，你就能够以最低泄漏的方式编码应用 — 只能向用户请求应用执行其作业所需的信息集。如果你想继续获取应用当前接收的完整用户信息集，则应该在授权请求中包含所有三个范围：
 
-    https://login.microsoftonline.com/common/oauth2/v2.0/authorize?
-    client_id=...
-    &redirect_uri=...
-    &response_mode=form_post
-    &response_type=id_token
-    &scope=openid profile email offline_access https://outlook.office.com/mail.read
+```
+https://login.microsoftonline.com/common/oauth2/v2.0/authorize?
+client_id=...
+&redirect_uri=...
+&response_mode=form_post
+&response_type=id_token
+&scope=openid profile email offline_access https://outlook.office.com/mail.read
+```
 
 应用可以立即开始发送 `email` 和 `profile` 范围，v2.0 终结点会接受这两个范围，并根据需要开始向用户请求权限。不过，对 `openid` 范围解释的更改几周后才会生效。
 
@@ -161,7 +183,9 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 ### 删除颁发者尾部斜杠。
 以前，v2.0 终结点的令牌中显示的颁发者值采用以下格式：
 
-    https://login.microsoftonline.com/{some-guid}/v2.0/
+```
+https://login.microsoftonline.com/{some-guid}/v2.0/
+```
 
 其中 guid 是颁发令牌的 Azure AD 租户的 tenantId。进行这些更改之后，这两个令牌和 OpenID Connect 发现文档中的颁发者值将变为。
     https://login.microsoftonline.com/{some-guid}/v2.0 

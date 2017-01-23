@@ -57,9 +57,11 @@ ms.author: jeffstok
 
 **查询：**
 
-    SELECT TollBoothId
-    FROM Input1 Partition By PartitionId
-    WHERE TollBoothId > 100
+```
+SELECT TollBoothId
+FROM Input1 Partition By PartitionId
+WHERE TollBoothId > 100
+```
 
 此查询是一个简单的筛选器，并在这种情况下，我们不需要担心对我们发送到事件中心的输入的分区。你会注意到该查询具有 **PartitionId** 的 **Partition By**，因此我们满足上述要求 #2。对于输出，我们需要配置作业中的事件中心输出，将“PartitionKey”字段设置为“PartitionId”。一个上次检查、输入分区 == 输出分区。此拓扑是易并行。
 
@@ -68,9 +70,11 @@ ms.author: jeffstok
 
 **查询：**
 
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+SELECT COUNT(*) AS Count, TollBoothId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
 
 此查询具有分组键，在这种情况下，相同的密钥需要由同一个查询实例进行处理。这意味着我们需要以分区的方式将我们事件发送到事件中心。我们关注哪个键？ **PartitionId** 是作业的逻辑概念，我们所关心的真正键是 **TollBoothId**。这意味着我们应将发送到事件中心的事件数据的 **PartitionKey** 设置为事件的 **TollBoothId**。该查询具有 **PartitionId** 的 **Partition By**，所以我们没有问题。对于输出，因为它是 Blob，所以我们不需要担心如何配置 **PartitionKey**。对于要求 #4，同样由于这是 Blob，因此我们无需担心。此拓扑是易并行。
 
@@ -79,15 +83,17 @@ ms.author: jeffstok
 
 **查询：**
 
-    WITH Step1 AS (
-    SELECT COUNT(*) AS Count, TollBoothId, PartitionId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
+```
+WITH Step1 AS (
+SELECT COUNT(*) AS Count, TollBoothId, PartitionId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+)
 
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
 
 此查询具有分组键，在这种情况下，相同的密钥需要由同一个查询实例进行处理。我们可以使用与前面的查询相同的策略。查询包含多个步骤。是否每个步骤都包含 ** PartitionId** 的 **Partition By**？ 是的，因此我们没问题。对于输出，我们需要如上文所述，将 **PartitionKey** 设置为 **PartitionId**，我们还可以看到它的分区数与输入的相同。此拓扑是易并行。
 
@@ -108,15 +114,17 @@ PowerBI 输出当前不支持分区。
 
 **查询：**
 
-    WITH Step1 AS (
-    SELECT COUNT(*) AS Count, TollBoothId, PartitionId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
+```
+WITH Step1 AS (
+SELECT COUNT(*) AS Count, TollBoothId, PartitionId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+)
 
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1 Partition By TollBoothId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1 Partition By TollBoothId
+GROUP BY TumblingWindow(minute, 3), TollBoothId
+```
 
 正如所见，第二步使用 **TollBoothId** 作为分区键。这与第一步不相同，因此将要求我们执行随机选择。
 
@@ -130,15 +138,19 @@ PowerBI 输出当前不支持分区。
 ### 查询中的步骤
 查询可以有一个或多个步骤。每一步都是一个使用 **WITH** 关键字定义的子查询。位于 **WITH** 关键字外的唯一查询也计为一步，例如以下查询中的 **SELECT** 语句：
 
-    WITH Step1 AS (
-        SELECT COUNT(*) AS Count, TollBoothId
-        FROM Input1 Partition By PartitionId
-        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
+```
+WITH Step1 AS (
+```
+SELECT COUNT(*) AS Count, TollBoothId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+)
 
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1
-    GROUP BY TumblingWindow(minute,3), TollBoothId
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1
+GROUP BY TumblingWindow(minute,3), TollBoothId
+```
 
 前面的查询有两步。
 
@@ -200,9 +212,11 @@ PowerBI 输出当前不支持分区。
 ### 缩放示例
 以下查询计算三分钟时段内通过收费站（总共三个收费亭）的车辆数。此查询可以扩展到 6 个流式处理单位。
 
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+SELECT COUNT(*) AS Count, TollBoothId
+FROM Input1
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
 
 若要对查询使用更多的流式处理单位，必须对数据流输入和查询进行分区。如果将数据流分区设置为 3，则可将以下修改的查询扩展到 18 个流式处理单位：
 
@@ -214,15 +228,17 @@ PowerBI 输出当前不支持分区。
 
 将通过流分析对每个 Input1 分区分开进行处理，并会在相同的翻转窗口中为同一收费亭创建多个有关已通过车辆计数的记录。如果不能更改输入分区键，则可通过添加额外的不分区步骤来解决此问题，例如：
 
-    WITH Step1 AS (
-        SELECT COUNT(*) AS Count, TollBoothId
-        FROM Input1 Partition By PartitionId
-        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
+```
+WITH Step1 AS (
+    SELECT COUNT(*) AS Count, TollBoothId
+    FROM Input1 Partition By PartitionId
+    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+)
 
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1
-    GROUP BY TumblingWindow(minute, 3), TollBoothId
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1
+GROUP BY TumblingWindow(minute, 3), TollBoothId
+```
 
 此查询可以扩展到 24 个流式处理单位。
 
@@ -258,16 +274,20 @@ PowerBI 输出当前不支持分区。
 
 客户端将综合性的传感器数据发送到事件中心，事件中心再以 JSON 格式将数据发送给流分析，数据输出也采用 JSON 格式。下面是示例数据看起来的样子：
 
-    {"devicetime":"2014-12-11T02:24:56.8850110Z","hmdt":42.7,"temp":72.6,"prss":98187.75,"lght":0.38,"dspl":"R-PI Olivier's Office"}
+```
+{"devicetime":"2014-12-11T02:24:56.8850110Z","hmdt":42.7,"temp":72.6,"prss":98187.75,"lght":0.38,"dspl":"R-PI Olivier's Office"}
+```
 
 查询：“关灯时发送警报”
 
-    SELECT AVG(lght),
-     “LightOff” as AlertText
-    FROM input TIMESTAMP
-    BY devicetime
-     WHERE
-        lght< 0.05 GROUP BY TumblingWindow(second, 1)
+```
+SELECT AVG(lght),
+ “LightOff” as AlertText
+FROM input TIMESTAMP
+BY devicetime
+ WHERE
+    lght< 0.05 GROUP BY TumblingWindow(second, 1)
+```
 
 衡量吞吐量：在这种情况下，吞吐量是指由流分析在固定的时间（10 分钟）内处理的输入数据的量。若要使输入数据达到最佳的处理吞吐量，必须对数据流输入和查询进行分区。此外，还需在查询中添加 **COUNT()**，以便度量所处理的输入事件数。为了确保作业不会单纯地等待输入事件的到来，输入事件中心的每个分区已预先加载了足够的输入数据（大约 300MB）。
 

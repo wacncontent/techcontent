@@ -40,39 +40,41 @@ ms.author: amsriva
 
 现有的 HTTPListener 配置元素得到了增强，因此可以支持主机名称和服务器名称指示元素，方便应用程序网关将流量路由到相应的后端池。这是模板文件中 HttpListeners 元素的代码片段。
 
-         "httpListeners": [
-                    {
-                        "name": "appGatewayHttpsListener1",
-                        "properties": {
-                            "FrontendIPConfiguration": {
-                                "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/DefaultFrontendPublicIP"
-                            },
-                            "FrontendPort": {
-                                "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort443'"
-                            },
-                            "Protocol": "Https",
-                            "SslCertificate": {
-                                "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/sslCertificates/appGatewaySslCert1'"
-                            },
-                            "HostName": "contoso.com",
-                            "RequireServerNameIndication": "true"
-                        }
-                    },
-                    {
-                        "name": "appGatewayHttpListener2",
-                        "properties": {
-                            "FrontendIPConfiguration": {
-                                "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/appGatewayFrontendIP'"
-                            },
-                            "FrontendPort": {
-                                "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort80'"
-                            },
-                            "Protocol": "Http",
-                            "HostName": "fabrikam.com",
-                            "RequireServerNameIndication": "false"
-                        }
+```
+     "httpListeners": [
+                {
+                    "name": "appGatewayHttpsListener1",
+                    "properties": {
+                        "FrontendIPConfiguration": {
+                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/DefaultFrontendPublicIP"
+                        },
+                        "FrontendPort": {
+                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort443'"
+                        },
+                        "Protocol": "Https",
+                        "SslCertificate": {
+                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/sslCertificates/appGatewaySslCert1'"
+                        },
+                        "HostName": "contoso.com",
+                        "RequireServerNameIndication": "true"
                     }
-                ],
+                },
+                {
+                    "name": "appGatewayHttpListener2",
+                    "properties": {
+                        "FrontendIPConfiguration": {
+                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/appGatewayFrontendIP'"
+                        },
+                        "FrontendPort": {
+                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort80'"
+                        },
+                        "Protocol": "Http",
+                        "HostName": "fabrikam.com",
+                        "RequireServerNameIndication": "false"
+                    }
+                }
+            ],
+```
 
 你可以查看 [ARM template using multiple site hosting](https://github.com/Azure/azure-quickstart-templates/blob/master/201-application-gateway-multihosting)（使用多站点托管的 ARM 模板），了解如何进行端到端的基于模板的部署。
 
@@ -80,40 +82,42 @@ ms.author: amsriva
 
 不需更改路由规则。应继续选择“基本”路由规则，以便将适当的站点侦听器绑定到相应的后端地址池。
 
-    "requestRoutingRules": [
-    {
-        "name": "<ruleName1>",
-        "properties": {
-            "RuleType": "Basic",
-            "httpListener": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpsListener1')]"
-            },
-            "backendAddressPool": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/ContosoServerPool')]"
-            },
-            "backendHttpSettings": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
-            }
+```
+"requestRoutingRules": [
+{
+    "name": "<ruleName1>",
+    "properties": {
+        "RuleType": "Basic",
+        "httpListener": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpsListener1')]"
+        },
+        "backendAddressPool": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/ContosoServerPool')]"
+        },
+        "backendHttpSettings": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
         }
-
-    },
-    {
-        "name": "<ruleName2>",
-        "properties": {
-            "RuleType": "Basic",
-            "httpListener": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpListener2')]"
-            },
-            "backendAddressPool": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/FabrikamServerPool')]"
-            },
-            "backendHttpSettings": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
-            }
-        }
-
     }
-    ]
+
+},
+{
+    "name": "<ruleName2>",
+    "properties": {
+        "RuleType": "Basic",
+        "httpListener": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpListener2')]"
+        },
+        "backendAddressPool": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/FabrikamServerPool')]"
+        },
+        "backendHttpSettings": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+        }
+    }
+
+}
+]
+```
 
 ## 后续步骤 
 

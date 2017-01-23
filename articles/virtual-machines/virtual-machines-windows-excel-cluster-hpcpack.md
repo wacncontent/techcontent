@@ -104,31 +104,33 @@ HPC Pack IaaS 部署脚本提供了另一种通用的方法来部署 HPC Pack �
 
 * 该文件指定在头节点上运行的配置后 PowerShell 脚本 PostConfig.ps1。以下示例脚本可配置 Azure 存储连接字符串、从头节点删除计算节点角色，以及在部署所有节点后将这些节点联机。
 
-        # add the HPC Pack powershell cmdlets
-            Add-PSSnapin Microsoft.HPC
+    ```
+    # add the HPC Pack powershell cmdlets
+        Add-PSSnapin Microsoft.HPC
 
-        # set the Azure storage connection string for the cluster
-            Set-HpcClusterProperty -AzureStorageConnectionString 'DefaultEndpointsProtocol=https;AccountName=<yourstorageaccountname>;AccountKey=<yourstorageaccountkey>'
+    # set the Azure storage connection string for the cluster
+        Set-HpcClusterProperty -AzureStorageConnectionString 'DefaultEndpointsProtocol=https;AccountName=<yourstorageaccountname>;AccountKey=<yourstorageaccountkey>'
 
-            # remove the compute node role for head node to make sure the Excel workbook won't run on head node
-            Get-HpcNode -GroupName HeadNodes | Set-HpcNodeState -State offline | Set-HpcNode -Role BrokerNode
+        # remove the compute node role for head node to make sure the Excel workbook won't run on head node
+        Get-HpcNode -GroupName HeadNodes | Set-HpcNodeState -State offline | Set-HpcNode -Role BrokerNode
 
-        # total number of nodes in the deployment including the head node and compute nodes, which should match the number specified in the XML configuration file
-            $TotalNumOfNodes = 19
+    # total number of nodes in the deployment including the head node and compute nodes, which should match the number specified in the XML configuration file
+        $TotalNumOfNodes = 19
 
-            $ErrorActionPreference = 'SilentlyContinue'
+        $ErrorActionPreference = 'SilentlyContinue'
 
-        # bring nodes online when they are deployed until all nodes are online
-            while ($true)
-            {
-              Get-HpcNode -State Offline | Set-HpcNodeState -State Online -Confirm:$false
-              $OnlineNodes = @(Get-HpcNode -State Online)
-              if ($OnlineNodes.Count -eq $TotalNumOfNodes)
-              {
-                 break
-              }
-              sleep 60
-            }
+    # bring nodes online when they are deployed until all nodes are online
+        while ($true)
+        {
+          Get-HpcNode -State Offline | Set-HpcNodeState -State Online -Confirm:$false
+          $OnlineNodes = @(Get-HpcNode -State Online)
+          if ($OnlineNodes.Count -eq $TotalNumOfNodes)
+          {
+             break
+          }
+          sleep 60
+        }
+    ```
 
 **运行脚本**
 
@@ -136,7 +138,9 @@ HPC Pack IaaS 部署脚本提供了另一种通用的方法来部署 HPC Pack �
 
 2.  将目录更改到脚本文件夹（在此示例中为 E:\\IaaSClusterScript）。
 
-        cd E:\IaaSClusterScript
+    ```
+    cd E:\IaaSClusterScript
+    ```
 
 3.  若要部署 HPC Pack 群集，请运行以下命令。本示例假定配置文件位于 E:\\HPCDemoConfig.xml。
 
@@ -144,8 +148,10 @@ HPC Pack IaaS 部署脚本提供了另一种通用的方法来部署 HPC Pack �
 
 HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出并下载群集证书，然后将其保存到客户端计算机上当前用户的 Documents 文件夹中。此脚本将生成类似于下面的消息。在下面的步骤中，需在相应的证书存储中导入证书。
 
-    You have enabled REST API or web portal on HPC Pack head node. Please import the following certificate in the Trusted Root Certification Authorities certificate store on the computer where you are submitting job or accessing the HPC web portal:
-    C:\Users\hpcuser\Documents\HPCWebComponent_HPCExcelHN004_20150707162011.cer
+```
+You have enabled REST API or web portal on HPC Pack head node. Please import the following certificate in the Trusted Root Certification Authorities certificate store on the computer where you are submitting job or accessing the HPC web portal:
+C:\Users\hpcuser\Documents\HPCWebComponent_HPCExcelHN004_20150707162011.cer
+```
 
 ## 步骤 2.卸载 Excel 工作簿并从本地客户端运行 UDF
 
@@ -157,9 +163,11 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 
 安装在 VM 映像上的 Office Professional Plus 2013 是使用通用批量许可密钥 (GVLK) 的批量版。可以通过密钥管理服务 (KMS)/基于 Active Directory 的激活 (AD-BA) 或多次激活密钥 (MAK) 进行激活。
 
-    * 若要使用 KMS/AD-BA，请使用现有的 KMS 服务器，或使用 Microsoft Office 2013 批量许可包设置新服务器。（如果你想在头节点上设置服务器。）然后，通过 Internet 或电话激活 KMS 主机密钥。然后运行 clusrun `ospp.vbs` 以设置 KMS 服务器和端口，并激活所有 Excel 计算节点上的 Office。 
+```
+* 若要使用 KMS/AD-BA，请使用现有的 KMS 服务器，或使用 Microsoft Office 2013 批量许可包设置新服务器。（如果你想在头节点上设置服务器。）然后，通过 Internet 或电话激活 KMS 主机密钥。然后运行 clusrun `ospp.vbs` 以设置 KMS 服务器和端口，并激活所有 Excel 计算节点上的 Office。 
 
-    * 若要使用 MAK，请先运行 clusrun `ospp.vbs` 以输入密钥，然后通过 Internet 或电话激活所有 Excel 计算节点。 
+* 若要使用 MAK，请先运行 clusrun `ospp.vbs` 以输入密钥，然后通过 Internet 或电话激活所有 Excel 计算节点。 
+```
 
 >[!NOTE]
 >Office Professional Plus 2013 的零售产品密钥不适用于此 VM 映像。如果拥有不属此 Office Professional Plus 2013 批量版的 Office 或 Excel 版本的有效密钥和安装媒体，则也可以使用这些版本。请首先卸载此批量版，然后安装所拥有的版本。可捕获重新安装的 Excel 计算节点作为自定义 VM 映像，以便在大规模部署中使用。
@@ -174,12 +182,14 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 
 3. 确保已安装 Excel。使用与客户端计算机上的 Excel.exe 位于同一文件夹中的以下内容创建 Excel.exe.config 文件。此步骤可确保 HPC Pack 2012 R2 Excel COM 外接程序成功加载。
 
-        <?xml version="1.0"?>
-        <configuration>
-            <startup useLegacyV2RuntimeActivationPolicy="true">
-                <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
-            </startup>
-        </configuration>
+    ```
+    <?xml version="1.0"?>
+    <configuration>
+        <startup useLegacyV2RuntimeActivationPolicy="true">
+            <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
+        </startup>
+    </configuration>
+    ```
 
 4. 设置客户端，以便将作业提交到 HPC Pack 群集。一个选项是下载完整的 [HPC Pack 2012 R2 Update 3 安装](http://www.microsoft.com/download/details.aspx?id=49922)，然后安装 HPC Pack 客户端。也可为计算机下载并安装 [HPC Pack 2012 R2 Update 3 客户端实用工具](https://www.microsoft.com/download/details.aspx?id=49923)和相应的 Visual C++ 2010 可再发行组件（[x64](http://www.microsoft.com/download/details.aspx?id=14632)、[x86](https://www.microsoft.com/download/details.aspx?id=5555)）。
 
@@ -195,20 +205,22 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 
     ![HPC Pack 的 Excel 宏][macro]
 
-        'Private Const HPC_ClusterScheduler = "HEADNODE_NAME"
-            Private Const HPC_ClusterScheduler = "hpc01.chinaeast.chinacloudapp.cn"
+    ```
+    'Private Const HPC_ClusterScheduler = "HEADNODE_NAME"
+        Private Const HPC_ClusterScheduler = "hpc01.chinaeast.chinacloudapp.cn"
 
-        'Private Const HPC_NetworkShare = "\\PATH\TO\SHARE\DIRECTORY"
-        Private Const HPC_DependFiles = "D:\Excel\Upload\ConvertiblePricing_Complete.xlsb=ConvertiblePricing_Complete.xlsb"
+    'Private Const HPC_NetworkShare = "\\PATH\TO\SHARE\DIRECTORY"
+    Private Const HPC_DependFiles = "D:\Excel\Upload\ConvertiblePricing_Complete.xlsb=ConvertiblePricing_Complete.xlsb"
 
-        'HPCExcelClient.Initialize ActiveWorkbook
-        HPCExcelClient.Initialize ActiveWorkbook, HPC_DependFiles
+    'HPCExcelClient.Initialize ActiveWorkbook
+    HPCExcelClient.Initialize ActiveWorkbook, HPC_DependFiles
 
-        'HPCWorkbookPath = HPC_NetworkShare & Application.PathSeparator & ActiveWorkbook.name
-        HPCWorkbookPath = "ConvertiblePricing_Complete.xlsb"
+    'HPCWorkbookPath = HPC_NetworkShare & Application.PathSeparator & ActiveWorkbook.name
+    HPCWorkbookPath = "ConvertiblePricing_Complete.xlsb"
 
-        'HPCExcelClient.OpenSession headNode:=HPC_ClusterScheduler, remoteWorkbookPath:=HPCWorkbookPath
-        HPCExcelClient.OpenSession headNode:=HPC_ClusterScheduler, remoteWorkbookPath:=HPCWorkbookPath, UserName:="hpc\azureuser", Password:="<YourPassword>"
+    'HPCExcelClient.OpenSession headNode:=HPC_ClusterScheduler, remoteWorkbookPath:=HPCWorkbookPath
+    HPCExcelClient.OpenSession headNode:=HPC_ClusterScheduler, remoteWorkbookPath:=HPCWorkbookPath, UserName:="hpc\azureuser", Password:="<YourPassword>"
+    ```
 
 9. 将 Excel 工作簿复制到某个上载目录，例如 D:\\Excel\\Upload。此目录在 VBA 宏的 HPC\_DependsFiles 常量中指定。
 
@@ -255,38 +267,50 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 
 * 更新群集名称。
 
-        // Before
-        const string headnode = "[headnode]";
-        // After e.g.
-        const string headnode = "hpc01.chinaeast.chinacloudapp.cn";
-        or
-        const string headnode = "hpc01.chinacloudapp.cn";
+    ```
+    // Before
+    const string headnode = "[headnode]";
+    // After e.g.
+    const string headnode = "hpc01.chinaeast.chinacloudapp.cn";
+    or
+    const string headnode = "hpc01.chinacloudapp.cn";
+    ```
 
 * （可选）在 SessionStartInfo 中使用默认 TransportScheme 或显式将其设置为 Http。
 
-        info.TransportScheme = TransportScheme.Http;
+    ```
+    info.TransportScheme = TransportScheme.Http;
+    ```
 
 * 对 BrokerClient 使用默认绑定。
 
-        // Before
-        using (BrokerClient<IService1> client = new BrokerClient<IService1>(session, binding))
-        // After
-        using (BrokerClient<IService1> client = new BrokerClient<IService1>(session))
+    ```
+    // Before
+    using (BrokerClient<IService1> client = new BrokerClient<IService1>(session, binding))
+    // After
+    using (BrokerClient<IService1> client = new BrokerClient<IService1>(session))
+    ```
 
     或者，显式使用 basicHttpBinding 进行设置。
 
-        BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.TransportWithMessageCredential);
-        binding.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;    binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
+    ```
+    BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.TransportWithMessageCredential);
+    binding.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;    binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
+    ```
 
 * （可选）在 SessionStartInfo 中将 UseAzureQueue 标志设置为 true。如果未设置，则在群集名称具有 Azure 域后缀并且 TransportScheme 为 Http 的情况下，它将默认设置为 true。
 
-        info.UseAzureQueue = true;
+    ```
+    info.UseAzureQueue = true;
+    ```
 
 ###在没有 Azure 存储队列的情况下使用 Http 绑定
 
 若要在没有 Azure 存储队列的情况下使用 Http 绑定，请在 SessionStartInfo 中将 UseAzureQueue 标志显式设置为 false。
 
-    info.UseAzureQueue = false;
+```
+info.UseAzureQueue = false;
+```
 
 ### 使用 NetTcp 绑定
 

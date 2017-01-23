@@ -6,7 +6,9 @@
 
 2. 在门户中，执行查询以查看 Windows Store 应用所做的更改。你的查询应类似于以下查询，不过，请使用你的数据库名称而不是 <code>todolist</code>。</p>
 
-        SELECT * FROM [todolist].[todoitems]
+    ```
+    SELECT * FROM [todolist].[todoitems]
+    ```
 
     ![在 SQL 数据库中查询存储项](./media/mobile-services-dotnet-backend-view-sql-data/sql-azure-query.png)
 

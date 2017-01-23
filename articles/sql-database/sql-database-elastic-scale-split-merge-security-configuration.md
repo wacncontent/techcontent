@@ -45,7 +45,9 @@ ms.author: torsteng
 
     如果已安装工具，请转到：
 
-        %ProgramFiles(x86)%\Windows Kits\x.y\bin\x86 
+    ```
+    %ProgramFiles(x86)%\Windows Kits\x.y\bin\x86 
+    ```
 
 * 从 [Windows 8.1：下载工具包和工具](http://msdn.microsoft.com/windows/hardware/gg454513#drivers)获取 WDK
 
@@ -129,22 +131,26 @@ ms.author: torsteng
 
 在“服务配置文件”的 **<EndpointAcls>** 部分配置应用的访问控制组规则和终结点。
 
-    <EndpointAcls>
-      <EndpointAcl role="SplitMergeWeb" endPoint="HttpIn" accessControl="DenyAll" />
-      <EndpointAcl role="SplitMergeWeb" endPoint="HttpsIn" accessControl="AllowAll" />
-    </EndpointAcls>
+```
+<EndpointAcls>
+  <EndpointAcl role="SplitMergeWeb" endPoint="HttpIn" accessControl="DenyAll" />
+  <EndpointAcl role="SplitMergeWeb" endPoint="HttpsIn" accessControl="AllowAll" />
+</EndpointAcls>
+```
 
 在服务配置文件的 <AccessControl name=""> 部分配置访问控制组中的规则。
 
 在网络访问控制列表文档中对格式进行了说明。
 例如，若要仅允许范围 100.100.0.0 到 100.100.255.255 中的 IP 访问 HTTPS 终结点，规则将如下所示：
 
-    <AccessControl name="Retricted">
-      <Rule action="permit" description="Some" order="1" remoteSubnet="100.100.0.0/16"/>
-      <Rule action="deny" description="None" order="2" remoteSubnet="0.0.0.0/0" />
-    </AccessControl>
-    <EndpointAcls>
-    <EndpointAcl role="SplitMergeWeb" endPoint="HttpsIn" accessControl="Restricted" />
+```
+<AccessControl name="Retricted">
+  <Rule action="permit" description="Some" order="1" remoteSubnet="100.100.0.0/16"/>
+  <Rule action="deny" description="None" order="2" remoteSubnet="0.0.0.0/0" />
+</AccessControl>
+<EndpointAcls>
+<EndpointAcl role="SplitMergeWeb" endPoint="HttpsIn" accessControl="Restricted" />
+```
 
 ## 防止拒绝服务
 
@@ -162,8 +168,10 @@ ms.author: torsteng
 
 配置此行为的设置如下：
 
-    <Setting name="DynamicIpRestrictionDenyByConcurrentRequests" value="false" />
-    <Setting name="DynamicIpRestrictionMaxConcurrentRequests" value="20" />
+```
+<Setting name="DynamicIpRestrictionDenyByConcurrentRequests" value="false" />
+<Setting name="DynamicIpRestrictionMaxConcurrentRequests" value="20" />
+```
 
 将 DynamicIpRestrictionDenyByConcurrentRequests 更改为 true 以启用此保护。
 
@@ -171,15 +179,19 @@ ms.author: torsteng
 
 配置此行为的设置如下：
 
-    <Setting name="DynamicIpRestrictionDenyByRequestRate" value="true" />
-    <Setting name="DynamicIpRestrictionMaxRequests" value="100" />
-    <Setting name="DynamicIpRestrictionRequestIntervalInMilliseconds" value="2000" />
+```
+<Setting name="DynamicIpRestrictionDenyByRequestRate" value="true" />
+<Setting name="DynamicIpRestrictionMaxRequests" value="100" />
+<Setting name="DynamicIpRestrictionRequestIntervalInMilliseconds" value="2000" />
+```
 
 ## 配置对拒绝请求的响应
 
 以下设置将配置对拒绝请求的响应：
 
-    <Setting name="DynamicIpRestrictionDenyAction" value="AbortRequest" />
+```
+<Setting name="DynamicIpRestrictionDenyAction" value="AbortRequest" />
+```
 有关其他受支持的值，请参考 IIS 中动态 IP 安全文档。
 
 ## 用于配置服务证书的操作
@@ -191,12 +203,14 @@ ms.author: torsteng
 ##<a name="Create-a-Self-Signed-Certificate"></a> 创建自签名证书
 执行：
 
-    makecert ^
-      -n "CN=myservice.chinacloudapp.cn" ^
-      -e MM/DD/YYYY ^
-      -r -cy end -sky exchange -eku "1.3.6.1.5.5.7.3.1" ^
-      -a sha1 -len 2048 ^
-      -sv MySSL.pvk MySSL.cer
+```
+makecert ^
+  -n "CN=myservice.chinacloudapp.cn" ^
+  -e MM/DD/YYYY ^
+  -r -cy end -sky exchange -eku "1.3.6.1.5.5.7.3.1" ^
+  -a sha1 -len 2048 ^
+  -sv MySSL.pvk MySSL.cer
+```
 
 自定义：
 
@@ -207,7 +221,9 @@ ms.author: torsteng
 
 执行：
 
-        pvk2pfx -pvk MySSL.pvk -spc MySSL.cer
+```
+    pvk2pfx -pvk MySSL.pvk -spc MySSL.cer
+```
 
 输入密码，然后使用以下选项导出证书：
 * 是，导出私钥
@@ -232,7 +248,9 @@ ms.author: torsteng
 
 在服务配置文件中，使用已上传到云服务的证书指纹更新以下设置的指纹值：
 
-    <Certificate name="SSL" thumbprint="" thumbprintAlgorithm="sha1" />
+```
+<Certificate name="SSL" thumbprint="" thumbprintAlgorithm="sha1" />
+```
 
 ##<a name="Import-SSL-Certification-Authority"></a> 导入 SSL 证书颁发机构
 
@@ -248,23 +266,29 @@ ms.author: torsteng
 
 在服务配置文件中，将这些设置更改为 false 以关闭该功能：
 
-    <Setting name="SetupWebAppForClientCertificates" value="false" />
-    <Setting name="SetupWebserverForClientCertificates" value="false" />
+```
+<Setting name="SetupWebAppForClientCertificates" value="false" />
+<Setting name="SetupWebserverForClientCertificates" value="false" />
+```
 
 然后，复制与 CA 证书设置中 SSL 证书相同的指纹：
 
-    <Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
+```
+<Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
+```
 
 ##<a name="Create-a-Self-Signed-Certification-Authority"></a> 创建自签名证书颁发机构
 执行以下步骤来创建自签名证书，以充当证书颁发机构：
 
-    makecert ^
-    -n "CN=MyCA" ^
-    -e MM/DD/YYYY ^
-     -r -cy authority -h 1 ^
-     -a sha1 -len 2048 ^
-      -sr localmachine -ss my ^
-      MyCA.cer
+```
+makecert ^
+-n "CN=MyCA" ^
+-e MM/DD/YYYY ^
+ -r -cy authority -h 1 ^
+ -a sha1 -len 2048 ^
+  -sr localmachine -ss my ^
+  MyCA.cer
+```
 
 对其进行自定义
 
@@ -299,11 +323,15 @@ ms.author: torsteng
 
 在服务配置文件中，使用已上传到云服务的证书指纹更新以下设置的指纹值：
 
-    <Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
+```
+<Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
+```
 
 使用同一指纹更新以下设置的值：
 
-    <Setting name="AdditionalTrustedRootCertificationAuthorities" value="" />
+```
+<Setting name="AdditionalTrustedRootCertificationAuthorities" value="" />
+```
 
 ##<a name="Issue-Client-Certificates"></a> 颁发客户端证书
 
@@ -311,13 +339,15 @@ ms.author: torsteng
 
 必须在生成和存储了自签名 CA 证书的同一计算机上执行以下步骤：
 
-    makecert ^
-      -n "CN=My ID" ^
-      -e MM/DD/YYYY ^
-      -cy end -sky exchange -eku "1.3.6.1.5.5.7.3.2" ^
-      -a sha1 -len 2048 ^
-      -in "MyCA" -ir localmachine -is my ^
-      -sv MyID.pvk MyID.cer
+```
+makecert ^
+  -n "CN=My ID" ^
+  -e MM/DD/YYYY ^
+  -cy end -sky exchange -eku "1.3.6.1.5.5.7.3.2" ^
+  -a sha1 -len 2048 ^
+  -in "MyCA" -ir localmachine -is my ^
+  -sv MyID.pvk MyID.cer
+```
 
 自定义：
 
@@ -331,11 +361,15 @@ ms.author: torsteng
 
 针对每个生成的客户端证书，执行：
 
-    pvk2pfx -pvk MyID.pvk -spc MyID.cer
+```
+pvk2pfx -pvk MyID.pvk -spc MyID.cer
+```
 
 自定义：
 
-    MyID.pvk and MyID.cer with the filename for the client certificate
+```
+MyID.pvk and MyID.cer with the filename for the client certificate
+```
 
 输入密码，然后使用以下选项导出证书：
 
@@ -367,23 +401,31 @@ ms.author: torsteng
 
 在服务配置文件中，使用以逗号分隔的客户端证书（允许访问服务）的指纹列表更新以下设置的值：
 
-    <Setting name="AllowedClientCertificateThumbprints" value="" />
+```
+<Setting name="AllowedClientCertificateThumbprints" value="" />
+```
 
 ##<a name="Configure-Client-Certificate-Revocation-Check"></a> 配置客户端证书吊销检查
 
 默认设置不会通过证书颁发机构检查客户端证书吊销状态。若要启用检查，请在颁发了客户端证书的证书颁发机构支持此类检查时，使用在 X509RevocationMode 枚举中定义的值之一更改以下设置：
 
-    <Setting name="ClientCertificateRevocationCheck" value="NoCheck" />
+```
+<Setting name="ClientCertificateRevocationCheck" value="NoCheck" />
+```
 
 ##<a name="Create-PFX-file-for-Self-Signed-Encryption-Certificate"></a> 为自签名加密证书创建 PFX 文件
 
 对于加密证书，请执行：
 
-    pvk2pfx -pvk MyID.pvk -spc MyID.cer
+```
+pvk2pfx -pvk MyID.pvk -spc MyID.cer
+```
 
 自定义：
 
-    MyID.pvk and MyID.cer with the filename for the encryption certificate
+```
+MyID.pvk and MyID.cer with the filename for the encryption certificate
+```
 
 输入密码，然后使用以下选项导出证书：
 *    是，导出私钥
@@ -409,7 +451,9 @@ ms.author: torsteng
 
 在服务配置文件中，使用已上传到云服务的证书指纹更新以下设置的指纹值：
 
-    <Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
+```
+<Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
+```
 
 ## 公用证书操作
 
@@ -485,7 +529,9 @@ ms.author: torsteng
 
 使用 HTTPS 终结点时，本文档中介绍的 SSL 设置将对服务及其客户端之间的通信进行加密。这一点很重要，因为该通信中包含了数据库访问凭据以及其他可能的敏感信息。但是，请注意，该服务会将内部状态（包括凭据）保存在其内部表中，该表位于你在 Azure 订阅中为元数据存储提供的 Azure SQL 数据库中。在服务配置文件（.CSCFG 文件）中，该数据库已定义为以下设置的一部分：
 
-    <Setting name="ElasticScaleMetadata" value="Server=…" />
+```
+<Setting name="ElasticScaleMetadata" value="Server=…" />
+```
 
 对此数据库中存储的凭据进行加密。但是，最佳实践是，确保服务部署的 Web 角色和辅助角色保持最新且是安全的，因为它们都有权访问元数据数据库和用于加密和解密存储凭据的证书。
 

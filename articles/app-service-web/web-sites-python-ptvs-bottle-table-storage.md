@@ -80,9 +80,11 @@ ms.author: huvalo
      ![项目调试设置](./media/web-sites-python-ptvs-bottle-table-storage/PollsBottleAzureTableStorageProjectDebugSettings.png)
 2. 在**调试服务器命令**、**环境**中设置应用程序所需的环境变量的值。
 
-        REPOSITORY\_NAME=azuretablestorage
-        STORAGE\_NAME=<存储帐户名称>
-        STORAGE\_KEY=<主访问密钥>
+    ```
+    REPOSITORY\_NAME=azuretablestorage
+    STORAGE\_NAME=<存储帐户名称>
+    STORAGE\_KEY=<主访问密钥>
+    ```
 
     当您**开始调试**时，这便会设置环境变量。如果想在**启动但不调试**时设置变量，请在**运行服务器命令**下设置相同的值。
 

@@ -44,118 +44,138 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 2. 如有必要，创建一个新的资源组，如下所示。对于此方案，创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](../azure-resource-manager/resource-group-overview.md)。
 
-        New-AzureRmResourceGroup -Name TestRG -Location chinaeast
+    ```
+    New-AzureRmResourceGroup -Name TestRG -Location chinaeast
+    ```
 
     预期输出：
 
-        ResourceGroupName : TestRG
-        Location          : chinaeast
-        ProvisioningState : Succeeded
-        Tags              :
-        ResourceId        : /subscriptions/[Subscription Id]/resourceGroups/TestRG    
+    ```
+    ResourceGroupName : TestRG
+    Location          : chinaeast
+    ProvisioningState : Succeeded
+    Tags              :
+    ResourceId        : /subscriptions/[Subscription Id]/resourceGroups/TestRG    
+    ```
 3. 创建名为 *TestVNet* 的新 VNet：
 
-        New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet `
-        -AddressPrefix 192.168.0.0/16 -Location chinaeast
+    ```
+    New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet `
+    -AddressPrefix 192.168.0.0/16 -Location chinaeast
+    ```
 
     预期输出：
 
-        Name                  : TestVNet
-        ResourceGroupName     : TestRG
-        Location              : chinaeast
-        Id                    : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
-        Etag                   : W/"[Id]"
-        ProvisioningState          : Succeeded
-        Tags                       : 
-        AddressSpace               : {
-                                   "AddressPrefixes": [
-                                     "192.168.0.0/16"
-                                   ]
-                                  }
-        DhcpOptions                : {}
-        Subnets                    : []
-        VirtualNetworkPeerings     : []
+    ```
+    Name                  : TestVNet
+    ResourceGroupName     : TestRG
+    Location              : chinaeast
+    Id                    : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
+    Etag                   : W/"[Id]"
+    ProvisioningState          : Succeeded
+    Tags                       : 
+    AddressSpace               : {
+                               "AddressPrefixes": [
+                                 "192.168.0.0/16"
+                               ]
+                              }
+    DhcpOptions                : {}
+    Subnets                    : []
+    VirtualNetworkPeerings     : []
+    ```
 4. 将虚拟网络对象存储在变量中：
 
-        $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
+    ```
+    $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
+    ```
 
-    > [!TIP]
-    可通过运行 `$vnet = New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location chinaeast` 合并步骤 3 和步骤 4。
-    > 
+   > [!TIP]
+   可通过运行 `$vnet = New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location chinaeast` 合并步骤 3 和步骤 4。
+   > 
 
 5. 将子网添加到新的 VNet 变量中：
 
-        Add-AzureRmVirtualNetworkSubnetConfig -Name FrontEnd `
-        -VirtualNetwork $vnet -AddressPrefix 192.168.1.0/24
+    ```
+    Add-AzureRmVirtualNetworkSubnetConfig -Name FrontEnd `
+    -VirtualNetwork $vnet -AddressPrefix 192.168.1.0/24
+    ```
 
     预期输出：
 
-        Name                  : TestVNet
-        ResourceGroupName     : TestRG
-        Location              : chinaeast
-        Id                    : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
-        Etag                  : W/"[Id]"
-        ProvisioningState     : Succeeded
-        Tags                  :
-        AddressSpace          : {
-                                  "AddressPrefixes": [
-                                    "192.168.0.0/16"
-                                  ]
-                                }
-        DhcpOptions           : {}
-        Subnets             : [
-                                  {
-                                    "Name": "FrontEnd",
-                                    "AddressPrefix": "192.168.1.0/24"
-                                  }
-                                ]
-        VirtualNetworkPeerings     : []
+    ```
+    Name                  : TestVNet
+    ResourceGroupName     : TestRG
+    Location              : chinaeast
+    Id                    : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
+    Etag                  : W/"[Id]"
+    ProvisioningState     : Succeeded
+    Tags                  :
+    AddressSpace          : {
+                              "AddressPrefixes": [
+                                "192.168.0.0/16"
+                              ]
+                            }
+    DhcpOptions           : {}
+    Subnets             : [
+                              {
+                                "Name": "FrontEnd",
+                                "AddressPrefix": "192.168.1.0/24"
+                              }
+                            ]
+    VirtualNetworkPeerings     : []
+    ```
 
 6. 对要创建的每个子网重复执行上面的步骤 5。对于此方案，以下命令将创建 *BackEnd* 子网：
 
-        Add-AzureRmVirtualNetworkSubnetConfig -Name BackEnd `
-        -VirtualNetwork $vnet -AddressPrefix 192.168.2.0/24
+    ```
+    Add-AzureRmVirtualNetworkSubnetConfig -Name BackEnd `
+    -VirtualNetwork $vnet -AddressPrefix 192.168.2.0/24
+    ```
 
 7. 尽管你创建了子网，但它们当前仅存在于用于检索你在上面的步骤 4 中创建的 VNet 的本地变量中。若要将更改保存到 Azure，请运行以下命令：
 
-        Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
+    ```
+    Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
+    ```
 
     预期输出：
 
-        Name                  : TestVNet
-        ResourceGroupName     : TestRG
-        Location              : chinaeast
-        Id                    : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
-        Etag                  : W/"[Id]"
-        ProvisioningState     : Succeeded
-        Tags                  :
-        AddressSpace          : {
-                                  "AddressPrefixes": [
-                                    "192.168.0.0/16"
-                                  ]
-                                }
-        DhcpOptions           : {
-                                  "DnsServers": []
-                                }
-        Subnets               : [
-                                  {
-                                    "Name": "FrontEnd",
-                                    "Etag": "W/"[Id]"",
-                                    "Id": "/subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd",
-                                    "AddressPrefix": "192.168.1.0/24",
-                                    "IpConfigurations": [],
-                                    "ProvisioningState": "Succeeded"
-                                  },
-                                  {
-                                    "Name": "BackEnd",
-                                    "Etag": "W/"[Id]"",
-                                    "Id": "/subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/BackEnd",
-                                    "AddressPrefix": "192.168.2.0/24",
-                                    "IpConfigurations": [],
-                                    "ProvisioningState": "Succeeded"
-                                  }
-                                ]
-        VirtualNetworkPeerings : []
+    ```
+    Name                  : TestVNet
+    ResourceGroupName     : TestRG
+    Location              : chinaeast
+    Id                    : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
+    Etag                  : W/"[Id]"
+    ProvisioningState     : Succeeded
+    Tags                  :
+    AddressSpace          : {
+                              "AddressPrefixes": [
+                                "192.168.0.0/16"
+                              ]
+                            }
+    DhcpOptions           : {
+                              "DnsServers": []
+                            }
+    Subnets               : [
+                              {
+                                "Name": "FrontEnd",
+                                "Etag": "W/"[Id]"",
+                                "Id": "/subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd",
+                                "AddressPrefix": "192.168.1.0/24",
+                                "IpConfigurations": [],
+                                "ProvisioningState": "Succeeded"
+                              },
+                              {
+                                "Name": "BackEnd",
+                                "Etag": "W/"[Id]"",
+                                "Id": "/subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/BackEnd",
+                                "AddressPrefix": "192.168.2.0/24",
+                                "IpConfigurations": [],
+                                "ProvisioningState": "Succeeded"
+                              }
+                            ]
+    VirtualNetworkPeerings : []
+    ```
 
 ## 后续步骤
 

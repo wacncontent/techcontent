@@ -56,89 +56,93 @@ Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源
 
 从 GitHub 克隆或复制 [201-servicebus-create-queue](https://github.com/Azure/azure-quickstart-templates/blob/master/201-servicebus-create-queue/azuredeploy.json) 模板：
 
-        {
-            "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
-            "contentVersion": "1.0.0.0",
-            "parameters": {
-                "serviceBusNamespaceName": {
-                    "type": "string",
-                    "metadata": {
-                        "description": "Name of the Service Bus namespace"
-                    }
-                },
-                "serviceBusQueueName": {
-                    "type": "string",
-                    "metadata": {
-                        "description": "Name of the Queue"
-                    }
-                },
-                "serviceBusApiVersion": {
-                    "type": "string",
-                    "defaultValue": "2015-08-01",
-                    "metadata": {
-                        "description": "Service Bus ApiVersion used by the template"
-                    }
+```
+    {
+        "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+            "serviceBusNamespaceName": {
+                "type": "string",
+                "metadata": {
+                    "description": "Name of the Service Bus namespace"
                 }
             },
-            "variables": {
-                "location": "[resourceGroup().location]",
-                "sbVersion": "[parameters('serviceBusApiVersion')]",
-                "defaultSASKeyName": "RootManageSharedAccessKey",
-                "authRuleResourceId": "[resourceId('Microsoft.ServiceBus/namespaces/authorizationRules', parameters('serviceBusNamespaceName'), variables('defaultSASKeyName'))]"
+            "serviceBusQueueName": {
+                "type": "string",
+                "metadata": {
+                    "description": "Name of the Queue"
+                }
+            },
+            "serviceBusApiVersion": {
+                "type": "string",
+                "defaultValue": "2015-08-01",
+                "metadata": {
+                    "description": "Service Bus ApiVersion used by the template"
+                }
+            }
+        },
+        "variables": {
+            "location": "[resourceGroup().location]",
+            "sbVersion": "[parameters('serviceBusApiVersion')]",
+            "defaultSASKeyName": "RootManageSharedAccessKey",
+            "authRuleResourceId": "[resourceId('Microsoft.ServiceBus/namespaces/authorizationRules', parameters('serviceBusNamespaceName'), variables('defaultSASKeyName'))]"
+        },
+        "resources": [{
+            "apiVersion": "[variables('sbVersion')]",
+            "name": "[parameters('serviceBusNamespaceName')]",
+            "type": "Microsoft.ServiceBus/Namespaces",
+            "location": "[variables('location')]",
+            "kind": "Messaging",
+            "sku": {
+                "name": "StandardSku",
+                "tier": "Standard"
             },
             "resources": [{
                 "apiVersion": "[variables('sbVersion')]",
-                "name": "[parameters('serviceBusNamespaceName')]",
-                "type": "Microsoft.ServiceBus/Namespaces",
-                "location": "[variables('location')]",
-                "kind": "Messaging",
-                "sku": {
-                    "name": "StandardSku",
-                    "tier": "Standard"
-                },
-                "resources": [{
-                    "apiVersion": "[variables('sbVersion')]",
-                    "name": "[parameters('serviceBusQueueName')]",
-                    "type": "Queues",
-                    "dependsOn": [
-                        "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
-                    ],
-                    "properties": {
-                        "path": "[parameters('serviceBusQueueName')]"
-                    }
-                }]
-            }],
-            "outputs": {
-                "NamespaceConnectionString": {
-                    "type": "string",
-                    "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryConnectionString]"
-                },
-                "SharedAccessPolicyPrimaryKey": {
-                    "type": "string",
-                    "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryKey]"
+                "name": "[parameters('serviceBusQueueName')]",
+                "type": "Queues",
+                "dependsOn": [
+                    "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
+                ],
+                "properties": {
+                    "path": "[parameters('serviceBusQueueName')]"
                 }
+            }]
+        }],
+        "outputs": {
+            "NamespaceConnectionString": {
+                "type": "string",
+                "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryConnectionString]"
+            },
+            "SharedAccessPolicyPrimaryKey": {
+                "type": "string",
+                "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryKey]"
             }
         }
+    }
+```
 
 ### 创建参数文件（可选）
 
 若要使用可选参数文件，请复制 [201-servicebus-create-queue](https://github.com/Azure/azure-quickstart-templates/blob/master/201-servicebus-create-queue/azuredeploy.parameters.json) 文件。将 `serviceBusNamespaceName` 的值替换为要在此部署中创建的服务总线命名空间的名称，并将 `serviceBusQueueName` 的值替换为要创建的队列的名称。
 
-        {
-            "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-            "contentVersion": "1.0.0.0",
-            "parameters": {
-                "serviceBusNamespaceName": {
-                    "value": "<myNamespaceName>"
-                },
-                "serviceBusQueueName": {
-                    "value": "<myQueueName>"
-                },
-                "serviceBusApiVersion": {
-                    "value": "2015-08-01"
-                }
+```
+    {
+        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+            "serviceBusNamespaceName": {
+                "value": "<myNamespaceName>"
+            },
+            "serviceBusQueueName": {
+                "value": "<myQueueName>"
+            },
+            "serviceBusApiVersion": {
+                "value": "2015-08-01"
             }
         }
+    }
+```
 
 有关详细信息，请参阅[参数文件](../azure-resource-manager/resource-group-template-deploy.md#parameter-file)主题。
 
@@ -146,35 +150,47 @@ Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源
 
 在 PowerShell 提示符下，运行以下命令：
 
-        Login-AzureRmAccount -Environment $(Get-AzureRmEnvironment -Name AzureChinaCloud)
+```
+    Login-AzureRmAccount -Environment $(Get-AzureRmEnvironment -Name AzureChinaCloud)
+```
 
 系统将提示你登录到 Azure 帐户。登录后，运行以下命令以查看可用订阅。
 
-        Get-AzureRMSubscription
+```
+    Get-AzureRMSubscription
+```
 
 此命令返回可用 Azure 订阅的列表。通过运行以下命令为当前会话选择订阅。将 `<YourSubscriptionId>` 替换为要使用的 Azure 订阅的 GUID。
 
-        Set-AzureRmContext -SubscriptionID <YourSubscriptionId>
+```
+    Set-AzureRmContext -SubscriptionID <YourSubscriptionId>
+```
 
 ### 设置资源组
 
 如果目前没有资源组，请使用“New-AzureRmResourceGroup”命令创建新的资源组。提供资源组的名称，以及要使用的位置。例如：
 
-        New-AzureRmResourceGroup -Name MyDemoRG -Location "China East"
+```
+    New-AzureRmResourceGroup -Name MyDemoRG -Location "China East"
+```
 
 如果成功，则会显示新的资源组的摘要。
 
-        ResourceGroupName : MyDemoRG
-        Location          : chinaeast
-        ProvisioningState : Succeeded
-        Tags              :
-        ResourceId        : /subscriptions/<GUID>/resourceGroups/MyDemoRG
+```
+    ResourceGroupName : MyDemoRG
+    Location          : chinaeast
+    ProvisioningState : Succeeded
+    Tags              :
+    ResourceId        : /subscriptions/<GUID>/resourceGroups/MyDemoRG
+```
 
 ### 测试部署
 
 通过运行 `Test-AzureRmResourceGroupDeployment` cmdlet 验证你的部署。测试部署时，请提供与执行部署时所提供的完全相同的参数。
 
-        Test-AzureRmResourceGroupDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json
+```
+    Test-AzureRmResourceGroupDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json
+```
 
 ### 创建部署
 
@@ -182,36 +198,46 @@ Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源
 
 以下命令会提示你在 PowerShell 窗口中输入三个参数：
 
-        New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json
+```
+    New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json
+```
 
 若要改为指定参数文件，请使用以下命令。
 
-        New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json -TemplateParameterFile <path to parameters file>\azuredeploy.parameters.json
+```
+    New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json -TemplateParameterFile <path to parameters file>\azuredeploy.parameters.json
+```
 
 运行部署 cmdlet 时，还可以使用内联参数。该命令如下所示：
 
-        New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json -parameterName "parameterValue"
+```
+    New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json -parameterName "parameterValue"
+```
 
 若要运行完整部署，请将 **Mode** 参数设置为 **Complete**：
 
-        New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -Mode Complete -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json 
+```
+    New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -Mode Complete -ResourceGroupName MyDemoRG -TemplateFile <path to template file>\azuredeploy.json 
+```
 
 ### 验证部署
 
 如果资源已成功部署，将在 PowerShell 窗口中显示部署的摘要：
 
-        DeploymentName    : MyDemoDeployment
-        ResourceGroupName : MyDemoRG
-        ProvisioningState : Succeeded
-        Timestamp         : 4/19/2016 10:38:30 PM
-        Mode              : Incremental
-        TemplateLink      :
-        Parameters        :
-                            Name             Type                       Value
-                            ===============  =========================  ==========
-                            serviceBusNamespaceName  String             <namespaceName>
-                            serviceBusQueueName  String                 <queueName>
-                            serviceBusApiVersion  String                2015-08-01
+```
+    DeploymentName    : MyDemoDeployment
+    ResourceGroupName : MyDemoRG
+    ProvisioningState : Succeeded
+    Timestamp         : 4/19/2016 10:38:30 PM
+    Mode              : Incremental
+    TemplateLink      :
+    Parameters        :
+                        Name             Type                       Value
+                        ===============  =========================  ==========
+                        serviceBusNamespaceName  String             <namespaceName>
+                        serviceBusQueueName  String                 <queueName>
+                        serviceBusApiVersion  String                2015-08-01
+```
 
 ## 后续步骤
 

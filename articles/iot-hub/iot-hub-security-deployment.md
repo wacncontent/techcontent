@@ -1,6 +1,6 @@
 ---
 title: 保护你的 IoT 部署 | Azure
-description: 本文详细说明如何保护你的 IoT 部署
+description: 如何保护你的 IoT 部署。包括保护设备预配、连接和对 IoT 中心服务的访问的指导原则
 services: iot-hub
 documentationCenter: 
 authors: YuriDio
@@ -13,20 +13,19 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/17/2016
-wacn.date: 11/07/2016
+wacn.date: 01/13/2017
 ms.author: yurid
 ---
 
 [!INCLUDE [iot-secure-your-deployment](../../includes/iot-secure-your-deployment.md)]
 
-## 后续步骤
+## 另请参阅
 
 若要进一步探索 IoT 中心的功能，请参阅：
 
 - [使用网关 SDK 模拟设备][lnk-gateway]
-- [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
 [lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
-[lnk-portal]: ./iot-hub-manage-through-portal.md
 
-<!---HONumber=Mooncake_0822_2016-->
+<!---HONumber=Mooncake_0109_2017-->
+<!--Update_Description:update wording-->

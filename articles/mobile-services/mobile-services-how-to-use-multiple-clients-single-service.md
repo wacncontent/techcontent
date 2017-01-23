@@ -49,30 +49,34 @@ ms.author: glenga
 
 下面的代码从 .NET 后端服务将推送通知发送到所有 iOS 和 Windows 应用商店设备注册：
 
-    // Define a push notification for APNS.
-    ApplePushMessage apnsMessage = new ApplePushMessage(item.Text, TimeSpan.FromHours(1));    
+```
+// Define a push notification for APNS.
+ApplePushMessage apnsMessage = new ApplePushMessage(item.Text, TimeSpan.FromHours(1));    
 
-    // Define a push notification for WNS.
-    WindowsPushMessage wnsMessage = new WindowsPushMessage();
-    wnsMessage.XmlPayload = @"<?xml version=""1.0"" encoding=""utf-8""?>" +
-                         @"<toast><visual><binding template=""ToastText01"">" +
-                         @"<text id=""1"">" + item.Text + @"</text>" +
-                         @"</binding></visual></toast>";
+// Define a push notification for WNS.
+WindowsPushMessage wnsMessage = new WindowsPushMessage();
+wnsMessage.XmlPayload = @"<?xml version=""1.0"" encoding=""utf-8""?>" +
+                     @"<toast><visual><binding template=""ToastText01"">" +
+                     @"<text id=""1"">" + item.Text + @"</text>" +
+                     @"</binding></visual></toast>";
 
-    // Send push notifications to all registered iOS and Windows Store devices. 
-    await Services.Push.SendAsync(apnsMessage);
-    await Services.Push.SendAsync(wnsMessage);
+// Send push notifications to all registered iOS and Windows Store devices. 
+await Services.Push.SendAsync(apnsMessage);
+await Services.Push.SendAsync(wnsMessage);
+```
 
 有关如何将推送通知发送到其他本机客户端平台的示例，请单击上表标题中的平台链接。
 
 如果你使用模板客户端注册（而不是本机客户端注册），则只需提供 [TemplatePushMessage] 对象调用 [SendAsync] 一次即可发送同一通知，如下所示：
 
-    // Create a new template message and add the 'message' parameter.    
-    var templatePayload = new TemplatePushMessage();
-    templatePayload.Add("message", item.Text);
+```
+// Create a new template message and add the 'message' parameter.    
+var templatePayload = new TemplatePushMessage();
+templatePayload.Add("message", item.Text);
 
-    // Send a push notification to all template registrations.
-    await Services.Push.SendAsync(templatePayload); 
+// Send a push notification to all template registrations.
+await Services.Push.SendAsync(templatePayload); 
+```
 
 ### JavaScript 后端
 
@@ -84,50 +88,54 @@ ms.author: glenga
 
 下面的代码将向所有 Android 和 Windows Phone 注册发送推送通知：
 
-    // Define a push notification for GCM.
-    var gcmPayload = 
-    '{"data":{"message" : item.text }}';
+```
+// Define a push notification for GCM.
+var gcmPayload = 
+'{"data":{"message" : item.text }}';
 
-    // Define the payload for a Windows Phone toast notification.
-    var mpnsPayload = '<?xml version="1.0" encoding="utf-8"?>' +
-    '<wp:Notification xmlns:wp="WPNotification"><wp:Toast>' +
-    '<wp:Text1>New Item</wp:Text1><wp:Text2>' + item.text + 
-    '</wp:Text2></wp:Toast></wp:Notification>';
+// Define the payload for a Windows Phone toast notification.
+var mpnsPayload = '<?xml version="1.0" encoding="utf-8"?>' +
+'<wp:Notification xmlns:wp="WPNotification"><wp:Toast>' +
+'<wp:Text1>New Item</wp:Text1><wp:Text2>' + item.text + 
+'</wp:Text2></wp:Toast></wp:Notification>';
 
-    // Send push notifications to all registered Android and Windows Phone 8.0 devices. 
-    push.mpns.send(null, mpnsPayload, 'toast', 22, {
-            success: function(pushResponse) {
-                // Push succeeds.
-                },              
-                error: function (pushResponse) {
-                    // Push fails.
-                    }
-                });
-    push.gcm.send(null, gcmPayload, {
-            success: function(pushResponse) {
-                // Push succeeds.
-                },              
-                error: function (pushResponse) {
-                    // Push fails.
-                    }
-                });
+// Send push notifications to all registered Android and Windows Phone 8.0 devices. 
+push.mpns.send(null, mpnsPayload, 'toast', 22, {
+        success: function(pushResponse) {
+            // Push succeeds.
+            },              
+            error: function (pushResponse) {
+                // Push fails.
+                }
+            });
+push.gcm.send(null, gcmPayload, {
+        success: function(pushResponse) {
+            // Push succeeds.
+            },              
+            error: function (pushResponse) {
+                // Push fails.
+                }
+            });
+```
 
 有关如何将推送通知发送到其他本机客户端平台的示例，请单击上表标题中的平台链接。
 
 如果你使用模板客户端注册（而不是本机客户端注册），则只需提供模板消息负载调用全局 [push 对象]的 **send** 函数一次即可发送同一通知，如下所示：
 
-    // Create a new template message with the 'message' parameter.    
-    var templatePayload = { "message": item.text };
+```
+// Create a new template message with the 'message' parameter.    
+var templatePayload = { "message": item.text };
 
-    // Send a push notification to all template registrations.
-    push.send(null, templatePayload, {
-            success: function(pushResponse) {
-                // Push succeeds.
-                },              
-                error: function (pushResponse) {
-                    // Push fails.
-                    }
-                }); 
+// Send a push notification to all template registrations.
+push.send(null, templatePayload, {
+        success: function(pushResponse) {
+            // Push succeeds.
+            },              
+            error: function (pushResponse) {
+                // Push fails.
+                }
+            }); 
+```
 
 ## <a id="xplat-app-dev"></a>跨平台应用程序开发
 开发所有主要移动设备平台的本机移动设备应用程序要求你（或你的组织）至少具备 Objective-C、Java 和 C# 或 JavaScript 编程语言的专业知识。由于在这些不同平台中开发费用昂贵，一些开发人员为其应用程序选择完全基于 Web 浏览器的体验。但是，此类基于 Web 的体验不能访问大多数本机资源，这些资源提供了用户希望在其移动设备上实现的丰富体验。

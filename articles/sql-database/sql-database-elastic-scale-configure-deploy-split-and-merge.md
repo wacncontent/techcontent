@@ -55,7 +55,9 @@ ms.author: ddove
 
     在 Azure SQL DB 中，连接字符串通常采用以下形式：
 
-        "Server=myservername.database.chinacloudapi.cn; Database=mydatabasename;User ID=myuserID; Password=mypassword; Encrypt=True; Connection Timeout=30" .
+    ```
+    "Server=myservername.database.chinacloudapi.cn; Database=mydatabasename;User ID=myuserID; Password=mypassword; Encrypt=True; Connection Timeout=30" .
+    ```
 4.    同时在 ElasticScaleMetadata 设置的 **SplitMergeWeb** 和 **SplitMergeWorker** 角色部分中，在 cscfg 文件内输入此连接字符串。
 
 5.    对于 **SplitMergeWorker** 角色，在 **WorkerRoleSynchronizationStorageAccountConnectionString** 设置中输入有效的连接字符串用于连接到 Azure 存储。
@@ -70,19 +72,23 @@ ms.author: ddove
 
 新建目录并使用 [Visual Studio 的开发人员命令提示符](http://msdn.microsoft.com/zh-cn/library/ms229859.aspx)窗口从该目录执行以下命令：
 
-    makecert ^
-    -n "CN=*.chinacloudapp.cn" ^
-    -r -cy end -sky exchange -eku "1.3.6.1.5.5.7.3.1,1.3.6.1.5.5.7.3.2" ^
-    -a sha1 -len 2048 ^
-    -sr currentuser -ss root ^
-    -sv MyCert.pvk MyCert.cer
+```
+makecert ^
+-n "CN=*.chinacloudapp.cn" ^
+-r -cy end -sky exchange -eku "1.3.6.1.5.5.7.3.1,1.3.6.1.5.5.7.3.2" ^
+-a sha1 -len 2048 ^
+-sr currentuser -ss root ^
+-sv MyCert.pvk MyCert.cer
+```
 
 将要求你提供密码以保护私钥。输入强密码并进行确认。之后，系统将提示你再次输入该密码。在完成后单击“是”，以将证书导入到“受信任的根证书颁发机构”存储中。
 
 ### 创建 PFX 文件
 从执行 makecert 的相同窗口中执行以下命令；使用你用于创建证书的相同密码：
 
-    pvk2pfx -pvk MyCert.pvk -spc MyCert.cer -pfx MyCert.pfx -pi <password>
+```
+pvk2pfx -pvk MyCert.pvk -spc MyCert.cer -pfx MyCert.pfx -pi <password>
+```
 
 ### 将客户端证书导入到个人存储中
 1. 在 Windows 资源管理器中，双击“MyCert.pfx”。
@@ -108,17 +114,21 @@ ms.author: ddove
 将之前复制的证书指纹粘贴到这些设置的指纹/值属性中。
 对于辅助角色：
 
-    <Setting name="DataEncryptionPrimaryCertificateThumbprint" value="" />
-    <Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
+```
+<Setting name="DataEncryptionPrimaryCertificateThumbprint" value="" />
+<Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
+```
 
 对于 Web 角色：
 
-    <Setting name="AdditionalTrustedRootCertificationAuthorities" value="" />
-    <Setting name="AllowedClientCertificateThumbprints" value="" />
-    <Setting name="DataEncryptionPrimaryCertificateThumbprint" value="" />
-    <Certificate name="SSL" thumbprint="" thumbprintAlgorithm="sha1" />
-    <Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
-    <Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
+```
+<Setting name="AdditionalTrustedRootCertificationAuthorities" value="" />
+<Setting name="AllowedClientCertificateThumbprints" value="" />
+<Setting name="DataEncryptionPrimaryCertificateThumbprint" value="" />
+<Certificate name="SSL" thumbprint="" thumbprintAlgorithm="sha1" />
+<Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
+<Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
+```
 
 请注意，对于生产部署，应针对用于加密的 CA 使用单独的证书（服务器证书和客户端证书）。有关此内容的详细说明，请参阅[安全配置](./sql-database-elastic-scale-split-merge-security-configuration.md)。
 
@@ -147,7 +157,9 @@ ms.author: ddove
 * 检查服务器和数据库是否存在，以及用户 ID 和密码是否正确。
 * 对于 Azure SQL DB，连接字符串应采用以下形式：
 
-        "Server=myservername.database.chinacloudapi.cn; Database=mydatabasename;User ID=myuserID; Password=mypassword; Encrypt=True; Connection Timeout=30" .
+    ```
+    "Server=myservername.database.chinacloudapi.cn; Database=mydatabasename;User ID=myuserID; Password=mypassword; Encrypt=True; Connection Timeout=30" .
+    ```
 
 * 确保服务器名称不以 **https://** 开头。
 * 确保你的 Azure SQL DB 服务器允许 Azure 服务与其连接。若要执行此操作，请打开 https://manage.windowsazure.cn、依次单击左侧的“SQL 数据库s”和顶部的“服务器”，然后选择你的服务器。在顶部单击“配置”并确保将“Azure 服务”设置设为“是”。（请参阅此文章顶部的“先决条件”部分）。
@@ -231,66 +243,76 @@ ms.author: ddove
 
     示例命令行：
 
-        .\SetupSampleSplitMergeEnvironment.ps1 `
-            -UserName 'mysqluser' `
-            -Password 'MySqlPassw0rd' `
-            -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn'
+    ```
+    .\SetupSampleSplitMergeEnvironment.ps1 `
+        -UserName 'mysqluser' `
+        -Password 'MySqlPassw0rd' `
+        -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn'
+    ```
 
 4.    执行 Getmappings.ps1 脚本以查看示例环境中当前存在的映射。
 
-        .\GetMappings.ps1 `
-            -UserName 'mysqluser' `
-            -Password 'MySqlPassw0rd' `
-            -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn'
+    ```
+    .\GetMappings.ps1 `
+        -UserName 'mysqluser' `
+        -Password 'MySqlPassw0rd' `
+        -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn'
+    ```
 
 5.    执行 ExecuteSampleSplitMerge.ps1 脚本以执行拆分操作（将第一个分片上一半的数据移至第二个分片），然后执行合并操作（将数据移回第一个分片）。如果你已配置 SSL 并且已将 http 终结点保留为禁用，请确保改为使用 https:// 终结点。
 
     示例命令行：
 
-        .\ExecuteSampleSplitMerge.ps1 `
-            -UserName 'mysqluser' `
-            -Password 'MySqlPassw0rd' `
-            -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn' `
-            -SplitMergeServiceEndpoint 'https://mysplitmergeservice.chinacloudapp.cn' `
-            -CertificateThumbprint '0123456789abcdef0123456789abcdef01234567'
+    ```
+    .\ExecuteSampleSplitMerge.ps1 `
+        -UserName 'mysqluser' `
+        -Password 'MySqlPassw0rd' `
+        -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn' `
+        -SplitMergeServiceEndpoint 'https://mysplitmergeservice.chinacloudapp.cn' `
+        -CertificateThumbprint '0123456789abcdef0123456789abcdef01234567'
+    ```
 
     如果你收到以下错误，很有可能是你的 Web 终结点证书出现了问题。尝试使用你最喜欢的 Web 浏览器连接到 Web 终结点并检查是否存在证书错误。
 
-        Invoke-WebRequest : The underlying connection was closed: Could not establish trust relationship for the SSL/TLSsecure channel.
+    ```
+    Invoke-WebRequest : The underlying connection was closed: Could not establish trust relationship for the SSL/TLSsecure channel.
+    ```
 
     如果成功，则输出应如下所示：
 
-        > .\ExecuteSampleSplitMerge.ps1 -UserName 'mysqluser' -Password 'MySqlPassw0rd' -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn' -SplitMergeServiceEndpoint 'http://mysplitmergeservice.chinacloudapp.cn' –CertificateThumbprint 0123456789abcdef0123456789abcdef01234567
-        Sending split request
-        Began split operation with id dc68dfa0-e22b-4823-886a-9bdc903c80f3
-        Polling split-merge request status. Press Ctrl-C to end
-        Progress: 0% | Status: Queued | Details: [Informational] Queued request
-        Progress: 5% | Status: Starting | Details: [Informational] Starting split-merge state machine for request.
-        Progress: 5% | Status: Starting | Details: [Informational] Performing data consistency checks on target     shards.
-        Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Moving reference tables from     source to target shard.
-        Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Waiting for reference tables copy     completion.
-        Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Moving reference tables from     source to target shard.
-        Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Moving key range [100:110) of     Sharded tables
-        Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Successfully copied key range     [100:110) for table [dbo].[MyShardedTable]
-        ...
-        ...
-        Progress: 90% | Status: Completing | Details: [Informational] Successfully deleted shardlets in table     [dbo].[MyShardedTable].
-        Progress: 90% | Status: Completing | Details: [Informational] Deleting any temp tables that were created     while processing the request.
-        Progress: 100% | Status: Succeeded | Details: [Informational] Successfully processed request.
-        Sending merge request
-        Began merge operation with id 6ffc308f-d006-466b-b24e-857242ec5f66
-        Polling request status. Press Ctrl-C to end
-        Progress: 0% | Status: Queued | Details: [Informational] Queued request
-        Progress: 5% | Status: Starting | Details: [Informational] Starting split-merge state machine for request.
-        Progress: 5% | Status: Starting | Details: [Informational] Performing data consistency checks on target     shards.
-        Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Moving reference tables from     source to target shard.
-        Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Moving key range [100:110) of     Sharded tables
-        Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Successfully copied key range     [100:110) for table [dbo].[MyShardedTable]
-        ...
-        ...
-        Progress: 90% | Status: Completing | Details: [Informational] Successfully deleted shardlets in table     [dbo].[MyShardedTable].
-        Progress: 90% | Status: Completing | Details: [Informational] Deleting any temp tables that were created     while processing the request.
-        Progress: 100% | Status: Succeeded | Details: [Informational] Successfully processed request.
+    ```
+    > .\ExecuteSampleSplitMerge.ps1 -UserName 'mysqluser' -Password 'MySqlPassw0rd' -ShardMapManagerServerName 'abcdefghij.database.chinacloudapi.cn' -SplitMergeServiceEndpoint 'http://mysplitmergeservice.chinacloudapp.cn' –CertificateThumbprint 0123456789abcdef0123456789abcdef01234567
+    Sending split request
+    Began split operation with id dc68dfa0-e22b-4823-886a-9bdc903c80f3
+    Polling split-merge request status. Press Ctrl-C to end
+    Progress: 0% | Status: Queued | Details: [Informational] Queued request
+    Progress: 5% | Status: Starting | Details: [Informational] Starting split-merge state machine for request.
+    Progress: 5% | Status: Starting | Details: [Informational] Performing data consistency checks on target     shards.
+    Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Moving reference tables from     source to target shard.
+    Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Waiting for reference tables copy     completion.
+    Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Moving reference tables from     source to target shard.
+    Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Moving key range [100:110) of     Sharded tables
+    Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Successfully copied key range     [100:110) for table [dbo].[MyShardedTable]
+    ...
+    ...
+    Progress: 90% | Status: Completing | Details: [Informational] Successfully deleted shardlets in table     [dbo].[MyShardedTable].
+    Progress: 90% | Status: Completing | Details: [Informational] Deleting any temp tables that were created     while processing the request.
+    Progress: 100% | Status: Succeeded | Details: [Informational] Successfully processed request.
+    Sending merge request
+    Began merge operation with id 6ffc308f-d006-466b-b24e-857242ec5f66
+    Polling request status. Press Ctrl-C to end
+    Progress: 0% | Status: Queued | Details: [Informational] Queued request
+    Progress: 5% | Status: Starting | Details: [Informational] Starting split-merge state machine for request.
+    Progress: 5% | Status: Starting | Details: [Informational] Performing data consistency checks on target     shards.
+    Progress: 20% | Status: CopyingReferenceTables | Details: [Informational] Moving reference tables from     source to target shard.
+    Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Moving key range [100:110) of     Sharded tables
+    Progress: 44% | Status: CopyingShardedTables | Details: [Informational] Successfully copied key range     [100:110) for table [dbo].[MyShardedTable]
+    ...
+    ...
+    Progress: 90% | Status: Completing | Details: [Informational] Successfully deleted shardlets in table     [dbo].[MyShardedTable].
+    Progress: 90% | Status: Completing | Details: [Informational] Deleting any temp tables that were created     while processing the request.
+    Progress: 100% | Status: Succeeded | Details: [Informational] Successfully processed request.
+    ```
 
 6.    试用其他数据类型！ 所有这些脚本均采取可选的 -ShardKeyType 参数，该参数允许你指定密钥类型。默认值为 Int32，但你也可以指定 Int64、Guid 或 Binary。
 
@@ -316,7 +338,9 @@ ms.author: ddove
 
 在运行示例 powershell 脚本时，你可能会看到下面的消息：
 
-    Invoke-WebRequest : The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.
+```
+Invoke-WebRequest : The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.
+```
 
 此错误表示你的 SSL 证书未正确配置。请按照“与 Web 浏览器连接”部分中的说明进行操作。
 

@@ -33,27 +33,31 @@ Azure 存储空间是依赖于持续性、可用性和可缩放性来满足客�
 
 cli 标志 `-z` 选择具有 A1 大小的 Standard\_A1 作为基于标准存储的 Linux VM。
 
-    azure vm quick-create -g rbg \
-    exampleVMname \
-    -l chinanorth \
-    -y Linux \
-    -Q Debian \
-    -u exampleAdminUser \
-    -M ~/.ssh/id_rsa.pub
-    -z Standard_A1
+```
+azure vm quick-create -g rbg \
+exampleVMname \
+-l chinanorth \
+-y Linux \
+-Q Debian \
+-u exampleAdminUser \
+-M ~/.ssh/id_rsa.pub
+-z Standard_A1
+```
 
 ### 在 CLI 中创建使用高级存储的 VM
 
 cli 标志 `-z` 选择具有 DS1 大小的 Standard\_DS1 作为基于高级存储的 Linux VM。
 
-    azure vm quick-create -g rbg \
-    exampleVMname \
-    -l chinanorth \
-    -y Linux \
-    -Q Debian \
-    -u exampleAdminUser \
-    -M ~/.ssh/id_rsa.pub
-    -z Standard_DS1
+```
+azure vm quick-create -g rbg \
+exampleVMname \
+-l chinanorth \
+-y Linux \
+-Q Debian \
+-u exampleAdminUser \
+-M ~/.ssh/id_rsa.pub
+-z Standard_DS1
+```
 
 ## 标准存储
 

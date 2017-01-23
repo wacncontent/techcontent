@@ -172,7 +172,9 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 表名称采用以下格式：
 
-    WAD*deploymentID*PT*aggregation_interval*[R|RI]Table
+```
+WAD*deploymentID*PT*aggregation_interval*[R|RI]Table
+```
 
 其中：
 
@@ -186,8 +188,10 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 例如，下表将存储在 1 小时时间间隔内汇总的详细监视数据。
 
-    WAD8b7c4233802442b494d0cc9eb9d8dd9fPT1HRTable (hourly aggregations for the role)
+```
+WAD8b7c4233802442b494d0cc9eb9d8dd9fPT1HRTable (hourly aggregations for the role)
 
-    WAD8b7c4233802442b494d0cc9eb9d8dd9fPT1HRITable (hourly aggregations for role instances)
+WAD8b7c4233802442b494d0cc9eb9d8dd9fPT1HRITable (hourly aggregations for role instances)
+```
 
 <!---HONumber=Mooncake_1226_2016-->

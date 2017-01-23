@@ -95,11 +95,15 @@ Blob|**默认 URL**：http://mystorageaccount.blob.core.chinacloudapi.cn/myconta
 ## 验证该自定义域引用你的 Blob 服务终结点
 若要验证你的自定义域是否确实已映射到你的 Blob 服务终结点，请在你的存储帐户内的公共容器中创建一个 Blob。然后在 Web 浏览器中，使用以下格式的 URI 来访问该 Blob：
 
-    http://<*subdomain.customdomain*>/<*mycontainer*>/<*myblob*>
+```
+http://<*subdomain.customdomain*>/<*mycontainer*>/<*myblob*>
+```
 
 例如，你可以使用以下 URI 来通过映射到 **myforms** 容器中的 Blob 的自定义子域 **photos.contoso.com** 访问 Web 窗体：
 
-    http://photos.contoso.com/myforms/applicationform.htm
+```
+http://photos.contoso.com/myforms/applicationform.htm
+```
 
 ## 取消注册存储帐户的自定义域
 若要取消注册自定义域，请执行以下步骤：

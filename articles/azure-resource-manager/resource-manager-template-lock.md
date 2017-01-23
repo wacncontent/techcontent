@@ -24,17 +24,19 @@ ms.author: tomfitz
 ## 架构格式
 若要创建锁，请将以下架构添加到模板的资源节中。
 
+```
+{
+    "type": enum,
+    "apiVersion": "2015-01-01",
+    "name": string,
+    "dependsOn": [ array values ],
+    "properties":
     {
-        "type": enum,
-        "apiVersion": "2015-01-01",
-        "name": string,
-        "dependsOn": [ array values ],
-        "properties":
-        {
-            "level": enum,
-            "notes": string
-        }
+        "level": enum,
+        "notes": string
     }
+}
+```
 
 ## 值
 下表描述了需要在架构中设置的值。
@@ -65,63 +67,67 @@ ms.author: tomfitz
 ## 示例
 以下示例将一个 cannot-delete 锁应用到 Web 应用。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "hostingPlanName": {
-                  "type": "string"
-            }
-        },
-        "variables": {
-            "siteName": "[concat('site',uniqueString(resourceGroup().id))]"
-        },
-        "resources": [
-            {
-                "apiVersion": "2015-08-01",
-                "name": "[variables('siteName')]",
-                "type": "Microsoft.Web/sites",
-                "location": "[resourceGroup().location]",
-                "properties": {
-                    "serverFarmId": "[parameters('hostingPlanName')]"
-                },
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hostingPlanName": {
+              "type": "string"
+        }
+    },
+    "variables": {
+        "siteName": "[concat('site',uniqueString(resourceGroup().id))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-08-01",
+            "name": "[variables('siteName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "serverFarmId": "[parameters('hostingPlanName')]"
             },
+        },
+        {
+            "type": "Microsoft.Web/sites/providers/locks",
+            "apiVersion": "2015-01-01",
+            "name": "[concat(variables('siteName'),'/Microsoft.Authorization/MySiteLock')]",
+            "dependsOn": [ "[variables('siteName')]" ],
+            "properties":
             {
-                "type": "Microsoft.Web/sites/providers/locks",
-                "apiVersion": "2015-01-01",
-                "name": "[concat(variables('siteName'),'/Microsoft.Authorization/MySiteLock')]",
-                "dependsOn": [ "[variables('siteName')]" ],
-                "properties":
-                {
-                    "level": "CannotDelete",
-                    "notes": "my notes"
-                }
-             }
-        ],
-        "outputs": {}
-    }
+                "level": "CannotDelete",
+                "notes": "my notes"
+            }
+         }
+    ],
+    "outputs": {}
+}
+```
 
 以下示例将一个 cannot-delete 锁应用到资源组。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {},
-        "variables": {},
-        "resources": [
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Authorization/locks",
+            "apiVersion": "2015-01-01",
+            "name": "MyGroupLock",
+            "properties":
             {
-                "type": "Microsoft.Authorization/locks",
-                "apiVersion": "2015-01-01",
-                "name": "MyGroupLock",
-                "properties":
-                {
-                    "level": "CannotDelete",
-                    "notes": "my notes"
-                }
+                "level": "CannotDelete",
+                "notes": "my notes"
             }
-        ],
-        "outputs": {}
-    }
+        }
+    ],
+    "outputs": {}
+}
+```
 
 ## 后续步骤
 * 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。

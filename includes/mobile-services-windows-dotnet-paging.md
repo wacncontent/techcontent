@@ -6,15 +6,17 @@
 
 4. 在 MainPage.xaml.cs 文件中，将 **RefreshTodoItems** 方法替换为以下代码：
 
-        private async void RefreshTodoItems()
-        {
-            // Define a filtered query that returns the top 3 items.
-            IMobileServiceTableQuery<TodoItem> query = todoTable
-                            .Where(todoItem => todoItem.Complete == false)
-                           .Take(3);
-            items = await query.ToCollectionAsync();
-            ListItems.ItemsSource = items;
-        }
+    ```
+    private async void RefreshTodoItems()
+    {
+        // Define a filtered query that returns the top 3 items.
+        IMobileServiceTableQuery<TodoItem> query = todoTable
+                        .Where(todoItem => todoItem.Complete == false)
+                       .Take(3);
+        items = await query.ToCollectionAsync();
+        ListItems.ItemsSource = items;
+    }
+    ```
 
       在数据绑定过程中执行此查询时，将返回未标记为已完成的前三个项。
 
@@ -28,17 +30,19 @@
 
 7. 使用以下代码，再一次更新 **RefreshTodoItems** 方法：
 
-        private async void RefreshTodoItems()
-        {
-            // Define a filtered query that skips the first 3 items and 
-            // then returns the next 3 items.
-            IMobileServiceTableQuery<TodoItem> query = todoTable
-                           .Where(todoItem => todoItem.Complete == false)
-                           .Skip(3)
-                           .Take(3);
-            items = await query.ToCollectionAsync();
-            ListItems.ItemsSource = items;
-        }
+    ```
+    private async void RefreshTodoItems()
+    {
+        // Define a filtered query that skips the first 3 items and 
+        // then returns the next 3 items.
+        IMobileServiceTableQuery<TodoItem> query = todoTable
+                       .Where(todoItem => todoItem.Complete == false)
+                       .Skip(3)
+                       .Take(3);
+        items = await query.ToCollectionAsync();
+        ListItems.ItemsSource = items;
+    }
+    ```
 
        此查询将跳过前三个结果，返回其后的三个结果。实际上这是数据的第二“页”，其页大小为三个项。
 

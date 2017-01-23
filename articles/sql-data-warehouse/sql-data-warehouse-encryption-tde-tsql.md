@@ -34,7 +34,9 @@ ms.author: rortloff;barbkess
 1. 使用在 master 数据库中充当管理员或 **dbmanager** 角色成员的登录名，连接到托管数据库的服务器上的 *master* 数据库
 2. 执行以下语句来加密数据库。
 
-        ALTER DATABASE [AdventureWorks] SET ENCRYPTION ON;
+    ```
+    ALTER DATABASE [AdventureWorks] SET ENCRYPTION ON;
+    ```
 
 ## 禁用加密
 执行以下步骤，对 SQL 数据仓库禁用 TDE：
@@ -42,7 +44,9 @@ ms.author: rortloff;barbkess
 1. 使用在 master 数据库中充当管理员或 **dbmanager** 角色成员的登录名，连接到 *master* 数据库
 2. 执行以下语句来加密数据库。
 
-        ALTER DATABASE [AdventureWorks] SET ENCRYPTION OFF;
+    ```
+    ALTER DATABASE [AdventureWorks] SET ENCRYPTION OFF;
+    ```
 
 > [!NOTE]
 > 在更改 TDE 设置之前，必须恢复暂停的 SQL 数据仓库。

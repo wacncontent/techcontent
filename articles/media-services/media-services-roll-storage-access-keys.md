@@ -42,38 +42,40 @@ ms.author: milangada;cenkdin;juliako
 
 以下代码示例演示了如何构造 https://endpoint/*subscriptionId*/services/mediaservices/Accounts/*accountName*/StorageAccounts/*storageAccountName*/Key 请求，以便将指定的存储密钥与媒体服务同步。在本例中，使用辅助存储密钥值。有关详细信息，请参阅[如何：使用媒体服务管理 REST API](https://docs.microsoft.com/zh-cn/rest/api/media/management/how-to-use-media-services-management-rest-api)。
 
-        public void UpdateMediaServicesWithStorageAccountKey(string mediaServicesAccount, string storageAccountName, string storageAccountKey)
+```
+    public void UpdateMediaServicesWithStorageAccountKey(string mediaServicesAccount, string storageAccountName, string storageAccountKey)
+    {
+        var clientCert = GetCertificate(CertThumbprint);
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("{0}/{1}/services/mediaservices/Accounts/{2}/StorageAccounts/{3}/Key",
+            Endpoint, SubscriptionId, mediaServicesAccount, storageAccountName));
+        request.Method = "PUT";
+        request.ContentType = "application/json; charset=utf-8";
+        request.Headers.Add("x-ms-version", "2011-10-01");
+        request.Headers.Add("Accept-Encoding: gzip, deflate");
+        request.ClientCertificates.Add(clientCert);
+
+        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
         {
-            var clientCert = GetCertificate(CertThumbprint);
+            streamWriter.Write("\"");
+            streamWriter.Write(storageAccountKey);
+            streamWriter.Write("\"");
+            streamWriter.Flush();
+        }
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("{0}/{1}/services/mediaservices/Accounts/{2}/StorageAccounts/{3}/Key",
-                Endpoint, SubscriptionId, mediaServicesAccount, storageAccountName));
-            request.Method = "PUT";
-            request.ContentType = "application/json; charset=utf-8";
-            request.Headers.Add("x-ms-version", "2011-10-01");
-            request.Headers.Add("Accept-Encoding: gzip, deflate");
-            request.ClientCertificates.Add(clientCert);
-
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+        using (var response = (HttpWebResponse)request.GetResponse())
+        {
+            string jsonResponse;
+            Stream receiveStream = response.GetResponseStream();
+            Encoding encode = Encoding.GetEncoding("utf-8");
+            if (receiveStream != null)
             {
-                streamWriter.Write("\"");
-                streamWriter.Write(storageAccountKey);
-                streamWriter.Write("\"");
-                streamWriter.Flush();
-            }
-
-            using (var response = (HttpWebResponse)request.GetResponse())
-            {
-                string jsonResponse;
-                Stream receiveStream = response.GetResponseStream();
-                Encoding encode = Encoding.GetEncoding("utf-8");
-                if (receiveStream != null)
-                {
-                    var readStream = new StreamReader(receiveStream, encode);
-                    jsonResponse = readStream.ReadToEnd();
-                }
+                var readStream = new StreamReader(receiveStream, encode);
+                jsonResponse = readStream.ReadToEnd();
             }
         }
+    }
+```
 
 完成此步骤后，按以下步骤中所示，更新（依赖于旧存储密钥的）现有定位符。
 
@@ -93,37 +95,39 @@ ms.author: milangada;cenkdin;juliako
 
 以下 .NET 示例演示如何重新创建具相同 ID 的定位符。
 
-    private static ILocator RecreateLocator(CloudMediaContext context, ILocator locator)
+```
+private static ILocator RecreateLocator(CloudMediaContext context, ILocator locator)
+{
+    // Save properties of existing locator.
+    var asset = locator.Asset;
+    var accessPolicy = locator.AccessPolicy;
+    var locatorId = locator.Id;
+    var startDate = locator.StartTime;
+    var locatorType = locator.Type;
+    var locatorName = locator.Name;
+
+    // Delete old locator.
+    locator.Delete();
+
+    if (locator.ExpirationDateTime <= DateTime.UtcNow)
     {
-        // Save properties of existing locator.
-        var asset = locator.Asset;
-        var accessPolicy = locator.AccessPolicy;
-        var locatorId = locator.Id;
-        var startDate = locator.StartTime;
-        var locatorType = locator.Type;
-        var locatorName = locator.Name;
-
-        // Delete old locator.
-        locator.Delete();
-
-        if (locator.ExpirationDateTime <= DateTime.UtcNow)
-        {
-            throw new Exception(String.Format(
-                "Cannot recreate locator Id={0} because its locator expiration time is in the past",
-                locator.Id));
-        }
-
-        // Create new locator using saved properties.
-        var newLocator = context.Locators.CreateLocator(
-            locatorId,
-            locatorType,
-            asset,
-            accessPolicy,
-            startDate,
-            locatorName);
-
-        return newLocator;
+        throw new Exception(String.Format(
+            "Cannot recreate locator Id={0} because its locator expiration time is in the past",
+            locator.Id));
     }
+
+    // Create new locator using saved properties.
+    var newLocator = context.Locators.CreateLocator(
+        locatorId,
+        locatorType,
+        asset,
+        accessPolicy,
+        startDate,
+        locatorName);
+
+    return newLocator;
+}
+```
 
 ##步骤 5：重新生成主存储访问密钥
 

@@ -129,45 +129,51 @@ topic.[jndi_name] = [physical_name]
 
 若要定义映射到名为“topic1”的服务总线主题的名为“TOPIC”的逻辑 JMS 目标，属性文件中的条目应如下所示：
 
-    topic.TOPIC = topic1
+```
+topic.TOPIC = topic1
+```
 
 ### 使用 JMS 发送消息
 
 以下代码演示如何向服务总线主题发送消息。假设在上一部分中所述的 **servicebus.properties** 配置文件中定义了 `SBCONNECTIONFACTORY` 和 `TOPIC`。
 
-    Hashtable<String, String> env = new Hashtable<String, String>(); 
-    env.put(Context.INITIAL_CONTEXT_FACTORY, 
-            "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
-    env.put(Context.PROVIDER_URL, "servicebus.properties"); 
+```
+Hashtable<String, String> env = new Hashtable<String, String>(); 
+env.put(Context.INITIAL_CONTEXT_FACTORY, 
+        "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
+env.put(Context.PROVIDER_URL, "servicebus.properties"); 
 
-    InitialContext context = new InitialContext(env); 
+InitialContext context = new InitialContext(env); 
 
-    ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
-    Topic topic = (Topic) context.lookup("TOPIC");
-    Connection connection = cf.createConnection();
-    Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-    MessageProducer producer = session.createProducer(topic);
-    TextMessage message = session.createTextMessage("This is a text string"); 
-    producer.send(message);
+ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
+Topic topic = (Topic) context.lookup("TOPIC");
+Connection connection = cf.createConnection();
+Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+MessageProducer producer = session.createProducer(topic);
+TextMessage message = session.createTextMessage("This is a text string"); 
+producer.send(message);
+```
 
 ### 使用 JMS 接收消息
 
 以下代码演示`how`从服务总线主题订阅接收消息。假设在上一部分中所述的 **servicebus.properties** 配置文件中定义了 `SBCONNECTIONFACTORY` 和 TOPIC。它还假定订阅名称是 `subscription1`。
 
-    Hashtable<String, String> env = new Hashtable<String, String>(); 
-    env.put(Context.INITIAL_CONTEXT_FACTORY, 
-            "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
-    env.put(Context.PROVIDER_URL, "servicebus.properties"); 
+```
+Hashtable<String, String> env = new Hashtable<String, String>(); 
+env.put(Context.INITIAL_CONTEXT_FACTORY, 
+        "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
+env.put(Context.PROVIDER_URL, "servicebus.properties"); 
 
-    InitialContext context = new InitialContext(env);
+InitialContext context = new InitialContext(env);
 
-    ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
-    Topic topic = (Topic) context.lookup("TOPIC");
-    Connection connection = cf.createConnection();
-    Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-    TopicSubscriber subscriber = session.createDurableSubscriber(topic, "subscription1");
-    connection.start();
-    Message message = messageConsumer.receive();
+ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
+Topic topic = (Topic) context.lookup("TOPIC");
+Connection connection = cf.createConnection();
+Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+TopicSubscriber subscriber = session.createDurableSubscriber(topic, "subscription1");
+connection.start();
+Message message = messageConsumer.receive();
+```
 
 ### 用于构建可靠的应用程序的准则
 
@@ -193,49 +199,57 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 
 以下代码演示如何通过服务总线 .NET API 使用 **BytesMessage** 对象的正文。
 
-    Stream stream = message.GetBody<Stream>();
-    int streamLength = (int)stream.Length;
+```
+Stream stream = message.GetBody<Stream>();
+int streamLength = (int)stream.Length;
 
-    byte[] byteArray = new byte[streamLength];
-    stream.Read(byteArray, 0, streamLength);
+byte[] byteArray = new byte[streamLength];
+stream.Read(byteArray, 0, streamLength);
 
-    Console.WriteLine("Length = " + streamLength);
-    for (int i = 0; i < stream.Length; i++)
-    {
-      Console.Write("[" + (sbyte) byteArray[i] + "]");
-    }
+Console.WriteLine("Length = " + streamLength);
+for (int i = 0; i < stream.Length; i++)
+{
+  Console.Write("[" + (sbyte) byteArray[i] + "]");
+}
+```
 
 ##### MapMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **MapMessage** 对象的正文。此代码循环访问映射的元素，并显示每个元素的名称和值。
 
-    Dictionary<String, Object> dictionary = message.GetBody<Dictionary<String, Object>>();
+```
+Dictionary<String, Object> dictionary = message.GetBody<Dictionary<String, Object>>();
 
-    foreach (String mapItemName in dictionary.Keys)
-    {
-      Object mapItemValue = null;
-      if (dictionary.TryGetValue(mapItemName, out mapItemValue))
-      {
-        Console.WriteLine(mapItemName + ":" + mapItemValue);
-      }
-    }
+foreach (String mapItemName in dictionary.Keys)
+{
+  Object mapItemValue = null;
+  if (dictionary.TryGetValue(mapItemName, out mapItemValue))
+  {
+    Console.WriteLine(mapItemName + ":" + mapItemValue);
+  }
+}
+```
 
 ##### StreamMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **StreamMessage** 对象的正文。此代码将列出流中的每一项及其类型。
 
-    List<Object> list = message.GetBody<List<Object>>();
+```
+List<Object> list = message.GetBody<List<Object>>();
 
-    foreach (Object item in list)
-    {
-      Console.WriteLine(item + " (" + item.GetType() + ")");
-    }
+foreach (Object item in list)
+{
+  Console.WriteLine(item + " (" + item.GetType() + ")");
+}
+```
 
 ##### TextMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **TextMessage** 对象的正文。此代码将显示消息的正文中包含的文本字符串。
 
-    Console.WriteLine("Text: " + message.GetBody<String>());
+```
+Console.WriteLine("Text: " + message.GetBody<String>());
+```
 
 #### 服务总线 .NET API 到 JMS
 
@@ -245,25 +259,31 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 
 以下代码演示如何在 .NET 中创建由 JMS 客户端接收作为 **BytesMessage** 的 [BrokeredMessage][] 对象。
 
-    byte[] bytes = { 33, 12, 45, 33, 12, 45, 33, 12, 45, 33, 12, 45 };
-    message = new BrokeredMessage(bytes);
+```
+byte[] bytes = { 33, 12, 45, 33, 12, 45, 33, 12, 45, 33, 12, 45 };
+message = new BrokeredMessage(bytes);
+```
 
 ##### StreamMessage
 
 以下代码演示如何在 .NET 中创建由 JMS 客户端接收作为 **StreamMessage** 的 [BrokeredMessage][] 对象。
 
-    List<Object> list = new List<Object>();
-    list.Add("String 1");
-    list.Add("String 2");
-    list.Add("String 3");
-    list.Add((double)3.14159);
-    message = new BrokeredMessage(list);
+```
+List<Object> list = new List<Object>();
+list.Add("String 1");
+list.Add("String 2");
+list.Add("String 3");
+list.Add((double)3.14159);
+message = new BrokeredMessage(list);
+```
 
 ##### TextMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **TextMessage** 的正文。此代码将显示消息的正文中包含的文本字符串。
 
-    message = new BrokeredMessage("this is a text string");
+```
+message = new BrokeredMessage("this is a text string");
+```
 
 ### 应用程序属性
 
@@ -271,24 +291,28 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 
 JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**short**、**int**、**long**、**float**、**double** 和 **String**。以下 Java 代码显示如何使用上述每种属性类型在消息上设置属性。
 
-    message.setBooleanProperty("TestBoolean", true); 
-    message.setByteProperty("TestByte", (byte) 33); 
-    message.setDoubleProperty("TestDouble", 3.14159D); 
-    message.setFloatProperty("TestFloat", 3.13159F); 
-    message.setIntProperty("TestInt", 100); 
-    message.setStringProperty("TestString", "Service Bus");
+```
+message.setBooleanProperty("TestBoolean", true); 
+message.setByteProperty("TestByte", (byte) 33); 
+message.setDoubleProperty("TestDouble", 3.14159D); 
+message.setFloatProperty("TestFloat", 3.13159F); 
+message.setIntProperty("TestInt", 100); 
+message.setStringProperty("TestString", "Service Bus");
+```
 
 在服务总线 .NET API 中，在 [BrokeredMessage][] 的 **Properties** 集合中携带消息应用程序属性。以下代码演示如何读取从 JMS 客户端收到的消息的应用程序属性。
 
-    if (message.Properties.Keys.Count > 0)
-    {
-      foreach (string name in message.Properties.Keys)
-      {
-        Object value = message.Properties[name];
-        Console.WriteLine(name + ": " + value + " (" + value.GetType() + ")" );
-      }
-      Console.WriteLine();
-    }
+```
+if (message.Properties.Keys.Count > 0)
+{
+  foreach (string name in message.Properties.Keys)
+  {
+    Object value = message.Properties[name];
+    Console.WriteLine(name + ": " + value + " (" + value.GetType() + ")" );
+  }
+  Console.WriteLine();
+}
+```
 
 下表显示如何将 JMS 属性类型映射到 .NET 属性类型。
 
@@ -303,35 +327,39 @@ JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**s
 
 [BrokeredMessage][] 类型支持以下类型的应用程序属性：**byte**、**sbyte**、**char**、**short**、**ushort**、**int**、**uint**、**long**、**ulong**、**float**、**double**、**decimal**、**bool**、**Guid**、**string**、**Uri**、**DateTime**、**DateTimeOffset** 和 **TimeSpan**。以下 .NET 代码显示如何使用上述每种属性类型在 [BrokeredMessage][] 对象上设置属性。
 
-    message.Properties["TestByte"] = (byte)128;
-    message.Properties["TestSbyte"] = (sbyte)-22;
-    message.Properties["TestChar"] = (char) 'X';
-    message.Properties["TestShort"] = (short)-12345;
-    message.Properties["TestUshort"] = (ushort)12345;
-    message.Properties["TestInt"] = (int)-100;
-    message.Properties["TestUint"] = (uint)100;
-    message.Properties["TestLong"] = (long)-12345;
-    message.Properties["TestUlong"] = (ulong)12345;
-    message.Properties["TestFloat"] = (float)3.14159;
-    message.Properties["TestDouble"] = (double)3.14159;
-    message.Properties["TestDecimal"] = (decimal)3.14159;
-    message.Properties["TestBoolean"] = true;
-    message.Properties["TestGuid"] = Guid.NewGuid();
-    message.Properties["TestString"] = "Service Bus";
-    message.Properties["TestUri"] = new Uri("http://www.bing.com");
-    message.Properties["TestDateTime"] = DateTime.Now;
-    message.Properties["TestDateTimeOffSet"] = DateTimeOffset.Now;
-    message.Properties["TestTimeSpan"] = TimeSpan.FromMinutes(60);
+```
+message.Properties["TestByte"] = (byte)128;
+message.Properties["TestSbyte"] = (sbyte)-22;
+message.Properties["TestChar"] = (char) 'X';
+message.Properties["TestShort"] = (short)-12345;
+message.Properties["TestUshort"] = (ushort)12345;
+message.Properties["TestInt"] = (int)-100;
+message.Properties["TestUint"] = (uint)100;
+message.Properties["TestLong"] = (long)-12345;
+message.Properties["TestUlong"] = (ulong)12345;
+message.Properties["TestFloat"] = (float)3.14159;
+message.Properties["TestDouble"] = (double)3.14159;
+message.Properties["TestDecimal"] = (decimal)3.14159;
+message.Properties["TestBoolean"] = true;
+message.Properties["TestGuid"] = Guid.NewGuid();
+message.Properties["TestString"] = "Service Bus";
+message.Properties["TestUri"] = new Uri("http://www.bing.com");
+message.Properties["TestDateTime"] = DateTime.Now;
+message.Properties["TestDateTimeOffSet"] = DateTimeOffset.Now;
+message.Properties["TestTimeSpan"] = TimeSpan.FromMinutes(60);
+```
 
 以下 Java 代码演示如何读取从服务总线 .NET 客户端收到的消息的应用程序属性。
 
-    Enumeration propertyNames = message.getPropertyNames(); 
-    while (propertyNames.hasMoreElements()) 
-    { 
-      String name = (String) propertyNames.nextElement(); 
-      Object value = message.getObjectProperty(name); 
-      System.out.println(name + ": " + value + " (" + value.getClass() + ")"); 
-    }
+```
+Enumeration propertyNames = message.getPropertyNames(); 
+while (propertyNames.hasMoreElements()) 
+{ 
+  String name = (String) propertyNames.nextElement(); 
+  Object value = message.getObjectProperty(name); 
+  System.out.println(name + ": " + value + " (" + value.getClass() + ")"); 
+}
+```
 
 下表显示如何将 .NET 属性类型映射到 JMS 属性类型。
 

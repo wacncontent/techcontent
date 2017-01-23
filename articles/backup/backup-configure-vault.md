@@ -41,24 +41,34 @@ ms.author: jimpark; trinadhk; markgal
 
 1. 首先使用以下命令行登录你的 Azure 订阅。
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 
 1. 如果你是首次使用 Azure 备份，则必须使用 **[Register-AzureRMResourceProvider](https://msdn.microsoft.com/zh-cn/library/mt603685.aspx)** cmdlet 注册用于订阅的 Azure 恢复服务提供程序。
 
-        Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.RecoveryServices"
+    ```
+    Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.RecoveryServices"
+    ```
 
 2. 恢复服务保管库是一种 Resource Manager 资源，因此需要将它放在资源组中。你可以使用现有的资源组，也可以使用 **[New-AzureRmResourceGroup](https://msdn.microsoft.com/zh-cn/library/mt603739.aspx)** cmdlet 创建新的资源组。创建新的资源组时，请指定资源组的名称和位置。
 
-        New-AzureRmResourceGroup –Name "test-rg" –Location "China North"
+    ```
+    New-AzureRmResourceGroup –Name "test-rg" –Location "China North"
+    ```
 
 3. 使用 **[New-AzureRmRecoveryServicesVault](https://msdn.microsoft.com/zh-cn/library/mt643910.aspx)** cmdlet 创建新的保管库。确保为保管库指定的位置与用于资源组的位置是相同的。
 
-        New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "West US"
+    ```
+    New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "West US"
+    ```
 
 4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
-        $vault1 = Get-AzureRmRecoveryServicesVault –Name "testVault"
-        Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
+    ```
+    $vault1 = Get-AzureRmRecoveryServicesVault –Name "testVault"
+    Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
+    ```
 
 ## 步骤 2 - 下载文件
 
@@ -73,9 +83,11 @@ ms.author: jimpark; trinadhk; markgal
 
 使用以下 PowerShell 脚本下载保管库凭据。
 
-    $vault1 = Get-AzureRmRecoveryServicesVault –Name “testVault”
-    $credspath = "C:\downloads"
-    $credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $vault1 -Path  $credspath
+```
+$vault1 = Get-AzureRmRecoveryServicesVault –Name “testVault”
+$credspath = "C:\downloads"
+$credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $vault1 -Path  $credspath
+```
 
 ## 步骤 3 - 安装并注册代理
 1. 在 Downloads 文件夹（或其他保存位置）中找到并双击 **MARSagentinstaller.exe**。

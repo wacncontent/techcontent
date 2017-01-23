@@ -23,68 +23,72 @@ wacn.date: 08/01/2016
 ## <a id="detail"></a>详细操作
 
 1. 首先需要创建一个虚拟网络：</br>
-    以下面的网络为例：</br>
-    虚拟网络名称：DanielEastVNet</br>
-    子网划分：
+   以下面的网络为例：</br>
+   虚拟网络名称：DanielEastVNet</br>
+   子网划分：
 
     ![](./media/aog-virtual-network-use-nsg-dmz/subnet.png)<br>
-    每个子网部署 1 台虚拟机：
+   每个子网部署 1 台虚拟机：
 
     ![](./media/aog-virtual-network-use-nsg-dmz/subnet-and-vm.png)<br>
 2. 接下来要实现下面的策略：<br>
-    Subnet-1 面向公网，但是公网仅可以访问 Subnet-1 中虚拟机的 80/5986/3389/23 端口，从 Subnet-1 访问公网不受限。<br>
-    Subnet-1 可以与 Subnet-2 通信，Subnet-1 不能与 Subnet-3 通信。<br>
-    Subnet-2 可以与 Subnet-1 和 Subnet-3 通信，Subnet-2 屏蔽掉公网（进出流量都被屏蔽）。<br>
-    Subnet-3 可以与 Subnet-2 通信，不能与 Subnet-1 通信。Subnet-3 屏蔽掉公网（进出流量都被屏蔽）。<br>
-    大致的拓扑关系如下（红色表示不通，绿色表示连通）：<br>
-    ![](./media/aog-virtual-network-use-nsg-dmz/nsg-relation.png)<br>
+   Subnet-1 面向公网，但是公网仅可以访问 Subnet-1 中虚拟机的 80/5986/3389/23 端口，从 Subnet-1 访问公网不受限。<br>
+   Subnet-1 可以与 Subnet-2 通信，Subnet-1 不能与 Subnet-3 通信。<br>
+   Subnet-2 可以与 Subnet-1 和 Subnet-3 通信，Subnet-2 屏蔽掉公网（进出流量都被屏蔽）。<br>
+   Subnet-3 可以与 Subnet-2 通信，不能与 Subnet-1 通信。Subnet-3 屏蔽掉公网（进出流量都被屏蔽）。<br>
+   大致的拓扑关系如下（红色表示不通，绿色表示连通）：<br>
+   ![](./media/aog-virtual-network-use-nsg-dmz/nsg-relation.png)<br>
 
 3. 针对三个子网配置 NSG，脚本如下：
 
-        # Address Space 10.0.0.0/24<br>
-        # Subnet-1 10.0.0.0/27<br>
-        # Subnet-2 10.0.0.32/27<br>
-        # Subnet-3 10.0.0.64/27<br>
+    ```
+    # Address Space 10.0.0.0/24<br>
+    # Subnet-1 10.0.0.0/27<br>
+    # Subnet-2 10.0.0.32/27<br>
+    # Subnet-3 10.0.0.64/27<br>
 
-        $VNetName = "DanielEastVNet";
-        $Subnet1Name = "Subnet-1";
-        $Subnet2Name = "Subnet-2";
-        $Subnet3Name = "Subnet-3";
+    $VNetName = "DanielEastVNet";
+    $Subnet1Name = "Subnet-1";
+    $Subnet2Name = "Subnet-2";
+    $Subnet3Name = "Subnet-3";
 
-        $DMZNSG = New-AzureNetworkSecurityGroup -Name "DMZNSG" -Location "China East";
-        $BackendNSG = New-AzureNetworkSecurityGroup -Name "BackendNSG" -Location "China East";
-        $DBNSG = New-AzureNetworkSecurityGroup -Name "DBNSG" -Location "China East";
+    $DMZNSG = New-AzureNetworkSecurityGroup -Name "DMZNSG" -Location "China East";
+    $BackendNSG = New-AzureNetworkSecurityGroup -Name "BackendNSG" -Location "China East";
+    $DBNSG = New-AzureNetworkSecurityGroup -Name "DBNSG" -Location "China East";
 
-        # set DMZ zone(Subnet-1) security rules
-        $DMZNSG | Set-AzureNetworkSecurityRule -Name "RDPInternet-DMZ" -Type Inbound -Priority 200 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 3389 -Protocol TCP;
-        $DMZNSG | Set-AzureNetworkSecurityRule -Name "HTTPInternet-DMZ" -Type Inbound -Priority 201 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 80 -Protocol TCP;
-        $DMZNSG | Set-AzureNetworkSecurityRule -Name "PowershellInternet-DMZ" -Type Inbound -Priority 202 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 5986 -Protocol TCP;
-        $DMZNSG | Set-AzureNetworkSecurityRule -Name "TelnetInternet-DMZ" -Type Inbound -Priority 203 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 23 -Protocol TCP;
-        $DMZNSG | Set-AzureNetworkSecurityRule -Name "DMZ-Backend" -Type Outbound -Priority 300 -Action Allow -SourceAddressPrefix "10.0.0.0/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.32/27" -DestinationPortRange * -Protocol TCP;
-        $DMZNSG | Set-AzureNetworkSecurityRule -Name "DMZ-DB" -Type Outbound -Priority 400 -Action Deny -SourceAddressPrefix "10.0.0.0/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.64/27" -DestinationPortRange * -Protocol TCP;
+    # set DMZ zone(Subnet-1) security rules
+    $DMZNSG | Set-AzureNetworkSecurityRule -Name "RDPInternet-DMZ" -Type Inbound -Priority 200 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 3389 -Protocol TCP;
+    $DMZNSG | Set-AzureNetworkSecurityRule -Name "HTTPInternet-DMZ" -Type Inbound -Priority 201 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 80 -Protocol TCP;
+    $DMZNSG | Set-AzureNetworkSecurityRule -Name "PowershellInternet-DMZ" -Type Inbound -Priority 202 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 5986 -Protocol TCP;
+    $DMZNSG | Set-AzureNetworkSecurityRule -Name "TelnetInternet-DMZ" -Type Inbound -Priority 203 -Action Allow -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange 23 -Protocol TCP;
+    $DMZNSG | Set-AzureNetworkSecurityRule -Name "DMZ-Backend" -Type Outbound -Priority 300 -Action Allow -SourceAddressPrefix "10.0.0.0/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.32/27" -DestinationPortRange * -Protocol TCP;
+    $DMZNSG | Set-AzureNetworkSecurityRule -Name "DMZ-DB" -Type Outbound -Priority 400 -Action Deny -SourceAddressPrefix "10.0.0.0/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.64/27" -DestinationPortRange * -Protocol TCP;
 
-        # set Backend zone(Subnet-2) security rules
-        $BackendNSG | Set-AzureNetworkSecurityRule -Name "DMZ-Backend" -Type Inbound -Priority 300 -Action Allow -SourceAddressPrefix "10.0.0.0/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.32/27" -DestinationPortRange * -Protocol TCP;
-        $BackendNSG | Set-AzureNetworkSecurityRule -Name "Backend-DMZ" -Type Outbound -Priority 400 -Action Allow -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange * -Protocol TCP;
-        $BackendNSG | Set-AzureNetworkSecurityRule -Name "Backend-DB" -Type Outbound -Priority 401 -Action Allow -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.64/27" -DestinationPortRange * -Protocol TCP;
-        $BackendNSG | Set-AzureNetworkSecurityRule -Name "Backend-Internet" -Type Outbound -Priority 500 -Action Deny -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange * -Protocol TCP;
+    # set Backend zone(Subnet-2) security rules
+    $BackendNSG | Set-AzureNetworkSecurityRule -Name "DMZ-Backend" -Type Inbound -Priority 300 -Action Allow -SourceAddressPrefix "10.0.0.0/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.32/27" -DestinationPortRange * -Protocol TCP;
+    $BackendNSG | Set-AzureNetworkSecurityRule -Name "Backend-DMZ" -Type Outbound -Priority 400 -Action Allow -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange * -Protocol TCP;
+    $BackendNSG | Set-AzureNetworkSecurityRule -Name "Backend-DB" -Type Outbound -Priority 401 -Action Allow -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.64/27" -DestinationPortRange * -Protocol TCP;
+    $BackendNSG | Set-AzureNetworkSecurityRule -Name "Backend-Internet" -Type Outbound -Priority 500 -Action Deny -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange * -Protocol TCP;
 
-        # set DB zone(Subnet-3) security rules
-        $DBNSG | Set-AzureNetworkSecurityRule -Name "DB-DMZ" -Type Outbound -Priority 300 -Action Deny -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange * -Protocol TCP;
-        $DBNSG | Set-AzureNetworkSecurityRule -Name "DB-Backend" -Type Outbound -Priority 301 -Action Allow -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.32/27" -DestinationPortRange * -Protocol TCP;
-        $DBNSG | Set-AzureNetworkSecurityRule -Name "Backend-DB" -Type Inbound -Priority 400 -Action Allow -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.64/27" -DestinationPortRange * -Protocol TCP;
-        $DBNSG | Set-AzureNetworkSecurityRule -Name "DB-Internet" -Type Outbound -Priority 500 -Action Deny -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange * -Protocol TCP;
+    # set DB zone(Subnet-3) security rules
+    $DBNSG | Set-AzureNetworkSecurityRule -Name "DB-DMZ" -Type Outbound -Priority 300 -Action Deny -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange * -Protocol TCP;
+    $DBNSG | Set-AzureNetworkSecurityRule -Name "DB-Backend" -Type Outbound -Priority 301 -Action Allow -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.32/27" -DestinationPortRange * -Protocol TCP;
+    $DBNSG | Set-AzureNetworkSecurityRule -Name "Backend-DB" -Type Inbound -Priority 400 -Action Allow -SourceAddressPrefix "10.0.0.32/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.64/27" -DestinationPortRange * -Protocol TCP;
+    $DBNSG | Set-AzureNetworkSecurityRule -Name "DB-Internet" -Type Outbound -Priority 500 -Action Deny -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange * -Protocol TCP;
 
-        # apply the rules to associated subnets
-        $DMZNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet1Name;
-        $BackendNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet2Name;
-        $DBNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet3Name; 
+    # apply the rules to associated subnets
+    $DMZNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet1Name;
+    $BackendNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet2Name;
+    $DBNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet3Name; 
+    ```
 
 4. 配置成功后，可以使用下面的命令查看每个 AzureNetworkSecurityGroup 的规则：
 
-        Get-AzureNetworkSecurityGroup -Name "DMZNSG" -Detailed 
-        Get-AzureNetworkSecurityGroup -Name "BackendNSG" -Detailed 
-        Get-AzureNetworkSecurityGroup -Name "DBNSG" -Detailed 
+    ```
+    Get-AzureNetworkSecurityGroup -Name "DMZNSG" -Detailed 
+    Get-AzureNetworkSecurityGroup -Name "BackendNSG" -Detailed 
+    Get-AzureNetworkSecurityGroup -Name "DBNSG" -Detailed 
+    ```
 
      设置完成后规则列表如下：
       ![](./media/aog-virtual-network-use-nsg-dmz/dmznsg-detail.png)
@@ -96,7 +100,9 @@ wacn.date: 08/01/2016
 ##  <a id="command"></a>PowerShell 指令详解
 对下面这个命令的一些参数做一下简单说明：
 
-        Set-AzureNetworkSecurityRule -Name "DB-DMZ" -Type Outbound -Priority 300 -Action Deny -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange * -Protocol TCP;
+```
+    Set-AzureNetworkSecurityRule -Name "DB-DMZ" -Type Outbound -Priority 300 -Action Deny -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange * -Protocol TCP;
+```
 
 **Name**：指定过滤规则的名称
 

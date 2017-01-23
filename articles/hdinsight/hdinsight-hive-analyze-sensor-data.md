@@ -49,7 +49,9 @@ ms.author: larryfr
 
 1. 通过 Web 浏览器导航到以下 URL。将 `<clustername>` 替换为 HDInsight 群集的名称。
 
-         https://<clustername>.azurehdinsight.cn
+    ```
+     https://<clustername>.azurehdinsight.cn
+    ```
 
     出现提示时，可以通过使用设置此群集时所用的管理员用户名和密码进行身份验证。
 

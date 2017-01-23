@@ -53,7 +53,9 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句以将辅助数据库切换为主角色。
 
-        ALTER DATABASE <MyDB> FAILOVER;
+    ```
+    ALTER DATABASE <MyDB> FAILOVER;
+    ```
 
 4. 单击“执行”运行查询。
 
@@ -78,7 +80,9 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句以将辅助数据库切换为主角色。
 
-        ALTER DATABASE <MyDB>   FORCE_FAILOVER_ALLOW_DATA_LOSS;
+    ```
+    ALTER DATABASE <MyDB>   FORCE_FAILOVER_ALLOW_DATA_LOSS;
+    ```
 
 4. 单击“执行”运行查询。
 

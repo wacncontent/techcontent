@@ -26,13 +26,17 @@ ms.author: kundanap
 
 从 Azure CLI，运行以下命令：
 
-      Azure VM Extension list
+```
+  Azure VM Extension list
+```
 
 此命令会返回发布者名称、扩展名称和版本，如下所示：
 
-       Publisher                   : Microsoft.Azure.Extensions  
-      ExtensionName               : DockerExtension
-      Version                     : 1.0
+```
+   Publisher                   : Microsoft.Azure.Extensions  
+  ExtensionName               : DockerExtension
+  Version                     : 1.0
+```
 
 这三个属性分别映射到上述模板代码段中的“发布者”、“类型”和“typeHandlerVersion”。
 

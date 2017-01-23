@@ -280,8 +280,10 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 运行 OpenLogic CentOS VM 的客户应该运行以下命令来安装最新的驱动程序：
 
-    sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
-    sudo yum install microsoft-hyper-v
+```
+sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
+sudo yum install microsoft-hyper-v
+```
 
 需要重新启动才能激活新的驱动程序。
 
@@ -306,31 +308,37 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 1. 根据[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中提供的步骤设置 PowerShell 环境。
 2. 启动 PowerShell 控制台，连接到订阅，并在控制台窗口中运行以下 PowerShell cmdlet。如此 PowerShell 语句中所示，当你创建高级存储帐户时，必须将 **Type** 参数指定为 **Premium_LRS**。
 
-        New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+    ```
+    New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+    ```
 
 3. 接下来，请创建新的 DS 系列 VM，并在控制台窗口中运行以下 PowerShell cmdlet 以指定你要使用高级存储：
 
-        $storageAccount = "yourpremiumaccount"
-        $adminName = "youradmin"
-        $adminPassword = "yourpassword"
-        $vmName ="yourVM"
-        $location = "China East"
-        $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20150726-en.us-127GB.vhd"
-        $vmSize ="Standard_DS2"
-        $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
-        $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
-        Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
-        New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+    ```
+    $storageAccount = "yourpremiumaccount"
+    $adminName = "youradmin"
+    $adminPassword = "yourpassword"
+    $vmName ="yourVM"
+    $location = "China East"
+    $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20150726-en.us-127GB.vhd"
+    $vmSize ="Standard_DS2"
+    $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
+    $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
+    Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
+    New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+    ```
 
 4. 如果希望 VM 有更多的磁盘空间，请在创建虚拟机后于控制台窗口中运行以下 PowerShell cmdlet 以将新的数据磁盘附加到现有 DS 系列 VM。
 
-        $storageAccount = "yourpremiumaccount"
-        $vmName ="yourVM"
-        $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
-        $LunNo = 1
-        $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
-        $label = "Disk " + $LunNo
-        Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+    ```
+    $storageAccount = "yourpremiumaccount"
+    $vmName ="yourVM"
+    $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
+    $LunNo = 1
+    $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
+    $label = "Disk " + $LunNo
+    Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+    ```
 
 ### 通过 Azure 命令行界面使用高级存储创建 Azure 虚拟机
 
@@ -338,24 +346,34 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 #### 创建高级存储帐户
 
-    azure storage account create "premiumtestaccount" -l "china east" --type PLRS
+```
+azure storage account create "premiumtestaccount" -l "china east" --type PLRS
+```
 
 #### 创建 DS 系列虚拟机
 
-    azure vm create -z "Standard_DS2" -l "china east" -e 22 "premium-test-vm"
-        "b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB" -u "myusername" -p "passwd@123"
+```
+azure vm create -z "Standard_DS2" -l "china east" -e 22 "premium-test-vm"
+    "b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB" -u "myusername" -p "passwd@123"
+```
 
 #### 显示有关虚拟机的信息
 
-    azure vm show premium-test-vm
+```
+azure vm show premium-test-vm
+```
 
 #### 附加新的数据磁盘
 
-    azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+```
+azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+```
 
 #### 显示有关新数据磁盘的信息
 
-    azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+```
+azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+```
 
 ## 后续步骤
 

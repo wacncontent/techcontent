@@ -25,18 +25,20 @@ wacn.date: 07/26/2016
 ##<a id="scenario01"></a>场景1 
 在配置文件（/etc/sysconfig/network-scripts/ifcfg-eth0）中配置固定的IP地址或MAC地址：
 
-    DHCP_HOSTNAME=DanCentOS65
-    DEVICE=eth0
-    ONBOOT=yes
-    BOOTPROTO=static
-    IPADDR=10.0.0.36
-    NETMASK=255.255.255.224
-    GATEWAY=10.0.0.33
-    HWADDR=00:0C:29:13:5D:74
-    TYPE=Ethernet
-    USERCTL=no
-    PEERDNS=yes
-    IPV6INIT=no
+```
+DHCP_HOSTNAME=DanCentOS65
+DEVICE=eth0
+ONBOOT=yes
+BOOTPROTO=static
+IPADDR=10.0.0.36
+NETMASK=255.255.255.224
+GATEWAY=10.0.0.33
+HWADDR=00:0C:29:13:5D:74
+TYPE=Ethernet
+USERCTL=no
+PEERDNS=yes
+IPV6INIT=no
+```
 
 修改后，在界面上关机后再开机，虚拟机会无法ssh登陆。（针对固定IP的情况，如果配置文件中写入的IP与虚拟机启动后DHCP获取到的IP恰巧一致，这种情况下可以链接，但是如果再次重启的时候，DHCP获取到的IP可能会变化，所以仍然存在风险）
 

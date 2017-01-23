@@ -49,51 +49,53 @@ ms.author: MikeRayMSFT
 
 以下 PowerShell 脚本创建内部负载均衡器、配置负载均衡规则，并设置负载均衡器的 IP 地址。若要运行该脚本，请打开 Windows PowerShell ISE，然后将脚本粘贴到“脚本”窗格中。使用 `Login-AzureRMAccount -EnvironmentName AzureChinaCloud` 登录到 PowerShell。如果有多个 Azure 订阅，请使用 `Select-AzureRmSubscription ` 设置订阅。
 
-    # Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
+```
+# Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+# Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
 
-    $ResourceGroupName = "<Resource Group Name>" # Resource group name
-    $VNetName = "<Virtual Network Name>"         # Virtual network name
-    $SubnetName = "<Subnet Name>"                # Subnet name
-    $ILBName = "<Load Balancer Name>"            # ILB name
-    $Location = "<Azure Region>"                 # Azure location
-    $VMNames = "<VM1>","<VM2>"                   # Virtual machine names
+$ResourceGroupName = "<Resource Group Name>" # Resource group name
+$VNetName = "<Virtual Network Name>"         # Virtual network name
+$SubnetName = "<Subnet Name>"                # Subnet name
+$ILBName = "<Load Balancer Name>"            # ILB name
+$Location = "<Azure Region>"                 # Azure location
+$VMNames = "<VM1>","<VM2>"                   # Virtual machine names
 
-    $ILBIP = "<n.n.n.n>"                         # IP address
-    [int]$ListenerPort = "<nnnn>"                # AG listener port
-    [int]$ProbePort = "<nnnn>"                   # Probe port
+$ILBIP = "<n.n.n.n>"                         # IP address
+[int]$ListenerPort = "<nnnn>"                # AG listener port
+[int]$ProbePort = "<nnnn>"                   # Probe port
 
-    $LBProbeName ="ILBPROBE_$ListenerPort"       # The Load balancer Probe Object Name              
-    $LBConfigRuleName = "ILBCR_$ListenerPort"    # The Load Balancer Rule Object Name
+$LBProbeName ="ILBPROBE_$ListenerPort"       # The Load balancer Probe Object Name              
+$LBConfigRuleName = "ILBCR_$ListenerPort"    # The Load Balancer Rule Object Name
 
-    $FrontEndConfigurationName = "FE_SQLAGILB_1" # Object name for the Front End configuration 
-    $BackEndConfigurationName ="BE_SQLAGILB_1"   # Object name for the Back End configuration
+$FrontEndConfigurationName = "FE_SQLAGILB_1" # Object name for the Front End configuration 
+$BackEndConfigurationName ="BE_SQLAGILB_1"   # Object name for the Back End configuration
 
-    $VNet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName 
+$VNet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName 
 
-    $Subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $VNet -Name $SubnetName 
+$Subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $VNet -Name $SubnetName 
 
-    $FEConfig = New-AzureRMLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -PrivateIpAddress $ILBIP -SubnetId $Subnet.id
+$FEConfig = New-AzureRMLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -PrivateIpAddress $ILBIP -SubnetId $Subnet.id
 
-    $BEConfig = New-AzureRMLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName 
+$BEConfig = New-AzureRMLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName 
 
-    $SQLHealthProbe = New-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -Protocol tcp -Port $ProbePort -IntervalInSeconds 15 -ProbeCount 2
+$SQLHealthProbe = New-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -Protocol tcp -Port $ProbePort -IntervalInSeconds 15 -ProbeCount 2
 
-    $ILBRule = New-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConfiguration $FEConfig -BackendAddressPool $BEConfig -Probe $SQLHealthProbe -Protocol tcp -FrontendPort $ListenerPort -BackendPort $ListenerPort -LoadDistribution Default -EnableFloatingIP 
+$ILBRule = New-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConfiguration $FEConfig -BackendAddressPool $BEConfig -Probe $SQLHealthProbe -Protocol tcp -FrontendPort $ListenerPort -BackendPort $ListenerPort -LoadDistribution Default -EnableFloatingIP 
 
-    $ILB= New-AzureRmLoadBalancer -Location $Location -Name $ILBName -ResourceGroupName $ResourceGroupName -FrontendIpConfiguration $FEConfig -BackendAddressPool $BEConfig -LoadBalancingRule $ILBRule -Probe $SQLHealthProbe 
+$ILB= New-AzureRmLoadBalancer -Location $Location -Name $ILBName -ResourceGroupName $ResourceGroupName -FrontendIpConfiguration $FEConfig -BackendAddressPool $BEConfig -LoadBalancingRule $ILBRule -Probe $SQLHealthProbe 
 
-    $bepool = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB 
+$bepool = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $BackEndConfigurationName -LoadBalancer $ILB 
 
-    foreach($VMName in $VMNames)
-        {
-            $VM = Get-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VMName 
-            $NICName = ($VM.NetworkInterfaceIDs[0].Split('/') | select -last 1)
-            $NIC = Get-AzureRmNetworkInterface -name $NICName -ResourceGroupName $ResourceGroupName
-            $NIC.IpConfigurations[0].LoadBalancerBackendAddressPools = $BEPool
-            Set-AzureRmNetworkInterface -NetworkInterface $NIC
-            start-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VM.Name 
-        }
+foreach($VMName in $VMNames)
+    {
+        $VM = Get-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VMName 
+        $NICName = ($VM.NetworkInterfaceIDs[0].Split('/') | select -last 1)
+        $NIC = Get-AzureRmNetworkInterface -name $NICName -ResourceGroupName $ResourceGroupName
+        $NIC.IpConfigurations[0].LoadBalancerBackendAddressPools = $BEPool
+        Set-AzureRmNetworkInterface -NetworkInterface $NIC
+        start-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $VM.Name 
+    }
+```
 
 ## 示例脚本：使用 PowerShell 将 IP 地址添加到现有负载均衡器
 
@@ -110,42 +112,44 @@ ms.author: MikeRayMSFT
 
 以下脚本将新的 IP 地址添加到现有负载均衡器。请更新环境的变量。ILB 使用侦听器端口作为负载均衡前端端口。此端口可以是 SQL Server 正在侦听的端口。对于 SQL Server 的默认实例，此端口为 1433。可用性组的负载均衡规则需要浮动 IP（直接服务器返回），因此后端端口与前端端口相同。
 
-    # Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
+```
+# Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+# Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
 
-    $ResourceGroupName = "<ResourceGroup>"          # Resource group name
-    $VNetName = "<VirtualNetwork>"                  # Virtual network name
-    $SubnetName = "<Subnet>"                        # Subnet name
-    $ILBName = "<ILBName>"                          # ILB name                      
+$ResourceGroupName = "<ResourceGroup>"          # Resource group name
+$VNetName = "<VirtualNetwork>"                  # Virtual network name
+$SubnetName = "<Subnet>"                        # Subnet name
+$ILBName = "<ILBName>"                          # ILB name                      
 
-    $ILBIP = "<n.n.n.n>"                            # IP address
-    [int]$ListenerPort = "<nnnn>"                   # AG listener port
-    [int]$ProbePort = "<nnnnn>"                     # Probe port 
+$ILBIP = "<n.n.n.n>"                            # IP address
+[int]$ListenerPort = "<nnnn>"                   # AG listener port
+[int]$ProbePort = "<nnnnn>"                     # Probe port 
 
-    $ILB = Get-AzureRmLoadBalancer -Name $ILBName -ResourceGroupName $ResourceGroupName 
+$ILB = Get-AzureRmLoadBalancer -Name $ILBName -ResourceGroupName $ResourceGroupName 
 
-    $count = $ILB.FrontendIpConfigurations.Count+1
-    $FrontEndConfigurationName ="FE_SQLAGILB_$count"  
+$count = $ILB.FrontendIpConfigurations.Count+1
+$FrontEndConfigurationName ="FE_SQLAGILB_$count"  
 
-    $LBProbeName = "ILBPROBE_$count"
-    $LBConfigrulename = "ILBCR_$count"
+$LBProbeName = "ILBPROBE_$count"
+$LBConfigrulename = "ILBCR_$count"
 
-    $VNet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName 
-    $Subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $VNet -Name $SubnetName
+$VNet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName 
+$Subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $VNet -Name $SubnetName
 
-    $ILB | Add-AzureRmLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -PrivateIpAddress $ILBIP -SubnetId $Subnet.Id 
+$ILB | Add-AzureRmLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -PrivateIpAddress $ILBIP -SubnetId $Subnet.Id 
 
-    $ILB | Add-AzureRmLoadBalancerProbeConfig -Name $LBProbeName  -Protocol Tcp -Port $Probeport -ProbeCount 2 -IntervalInSeconds 15  | Set-AzureRmLoadBalancer 
+$ILB | Add-AzureRmLoadBalancerProbeConfig -Name $LBProbeName  -Protocol Tcp -Port $Probeport -ProbeCount 2 -IntervalInSeconds 15  | Set-AzureRmLoadBalancer 
 
-    $ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
+$ILB = Get-AzureRmLoadBalancer -Name $ILBname -ResourceGroupName $ResourceGroupName
 
-    $FEConfig = get-AzureRMLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -LoadBalancer $ILB
+$FEConfig = get-AzureRMLoadBalancerFrontendIpConfig -Name $FrontEndConfigurationName -LoadBalancer $ILB
 
-    $SQLHealthProbe  = Get-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -LoadBalancer $ILB
+$SQLHealthProbe  = Get-AzureRmLoadBalancerProbeConfig -Name $LBProbeName -LoadBalancer $ILB
 
-    $BEConfig = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $ILB.BackendAddressPools[0].Name -LoadBalancer $ILB 
+$BEConfig = Get-AzureRmLoadBalancerBackendAddressPoolConfig -Name $ILB.BackendAddressPools[0].Name -LoadBalancer $ILB 
 
-    $ILB | Add-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConfiguration $FEConfig  -BackendAddressPool $BEConfig -Probe $SQLHealthProbe -Protocol tcp -FrontendPort  $ListenerPort -BackendPort $ListenerPort -LoadDistribution Default -EnableFloatingIP | Set-AzureRmLoadBalancer   
+$ILB | Add-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConfiguration $FEConfig  -BackendAddressPool $BEConfig -Probe $SQLHealthProbe -Protocol tcp -FrontendPort  $ListenerPort -BackendPort $ListenerPort -LoadDistribution Default -EnableFloatingIP | Set-AzureRmLoadBalancer   
+```
 
 ## 将群集配置为使用负载均衡器 IP 地址 
 
@@ -184,14 +188,16 @@ ms.author: MikeRayMSFT
 
 - 在当前托管主副本的群集节点上，打开已提升权限的 PowerShell ISE，然后将以下命令粘贴到新脚本中。在“依赖关系”选项卡上，单击侦听器的名称。
 
-        $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
-        $IPResourceName = "<IPResourceName>" # the IP Address resource name
-        $ILBIP = "<n.n.n.n>" # the IP Address of the Internal Load Balancer (ILB). This is the static IP address for the load balancer you configured in the Azure portal Preview.
-        [int]$ProbePort = <nnnnn>
+    ```
+    $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
+    $IPResourceName = "<IPResourceName>" # the IP Address resource name
+    $ILBIP = "<n.n.n.n>" # the IP Address of the Internal Load Balancer (ILB). This is the static IP address for the load balancer you configured in the Azure portal Preview.
+    [int]$ProbePort = <nnnnn>
 
-        Import-Module FailoverClusters
+    Import-Module FailoverClusters
 
-        Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"=$ProbePort;"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
+    Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"=$ProbePort;"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
+    ```
 
 - 更新变量并运行 PowerShell 脚本，以配置新侦听器的 IP 地址和端口。
 
@@ -232,11 +238,15 @@ ms.author: MikeRayMSFT
 
 1. 使用 **sqlcmd** 实用工具测试连接。例如，以下脚本通过侦听器与 Windows 身份验证来与主副本建立 **sqlcmd** 连接：
 
-        sqlmd -S <listenerName> -E
+    ```
+    sqlmd -S <listenerName> -E
+    ```
 
     如果侦听器使用的端口不是默认端口 (1433)，请在连接字符串中指定该端口。例如，以下 sqlcmd 命令连接到位于端口 1435 的侦听器：
 
-        sqlcmd -S <listenerName>,1435 -E
+    ```
+    sqlcmd -S <listenerName>,1435 -E
+    ```
 
 SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。
 

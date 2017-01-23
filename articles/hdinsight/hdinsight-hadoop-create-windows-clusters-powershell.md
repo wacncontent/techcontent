@@ -40,84 +40,86 @@ Azure PowerShell 是一个功能强大的脚本编写环境，可用于在 Azure
 
 通过使用 Azure PowerShell 创建 HDInsight 群集需要执行以下过程：
 
-    ####################################
-    # Set these variables
-    ####################################
-    #region - used for creating Azure service names
-    $nameToken = "<Enter an Alias>" 
-    #endregion
+```
+####################################
+# Set these variables
+####################################
+#region - used for creating Azure service names
+$nameToken = "<Enter an Alias>" 
+#endregion
 
-    #region - cluster user accounts
-    $httpUserName = "admin"  #HDInsight cluster username
-    $httpPassword = "<Enter a Password>"
-    #endregion
+#region - cluster user accounts
+$httpUserName = "admin"  #HDInsight cluster username
+$httpPassword = "<Enter a Password>"
+#endregion
 
-    ###########################################
-    # Service names and varialbes
-    ###########################################
-    #region - service names
-    $namePrefix = $nameToken.ToLower() + (Get-Date -Format "MMdd")
+###########################################
+# Service names and varialbes
+###########################################
+#region - service names
+$namePrefix = $nameToken.ToLower() + (Get-Date -Format "MMdd")
 
-    $hdinsightClusterName = $namePrefix + "hdi"
-    $defaultStorageAccountName = $namePrefix + "store"
-    $defaultBlobContainerName = $hdinsightClusterName
+$hdinsightClusterName = $namePrefix + "hdi"
+$defaultStorageAccountName = $namePrefix + "store"
+$defaultBlobContainerName = $hdinsightClusterName
 
-    $location = "China East"
-    $clusterSizeInNodes = 1
-    #endregion
+$location = "China East"
+$clusterSizeInNodes = 1
+#endregion
 
-    # Treat all errors as terminating
-    $ErrorActionPreference = "Stop"
+# Treat all errors as terminating
+$ErrorActionPreference = "Stop"
 
-    ###########################################
-    # Connect to Azure
-    ###########################################
-    #region - Connect to Azure subscription
-    Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
-    try{Get-AzureContext}
-    catch{
-        Add-AzureAccount -Environment AzureChinaCloud
-    }
-    #endregion
+###########################################
+# Connect to Azure
+###########################################
+#region - Connect to Azure subscription
+Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
+try{Get-AzureContext}
+catch{
+    Add-AzureAccount -Environment AzureChinaCloud
+}
+#endregion
 
-    ###########################################
-    # Preapre default storage account and container
-    ###########################################
-    New-AzureStorageAccount `
-        -StorageAccountName $defaultStorageAccountName `
-        -Type Standard_GRS `
-        -Location $location
+###########################################
+# Preapre default storage account and container
+###########################################
+New-AzureStorageAccount `
+    -StorageAccountName $defaultStorageAccountName `
+    -Type Standard_GRS `
+    -Location $location
 
-    $defaultStorageAccountKey = Get-AzureStorageKey `
-                                    -StorageAccountName $defaultStorageAccountName |  %{ $_.Primary }
-    $defaultStorageContext = New-AzureStorageContext `
-                                    -StorageAccountName $defaultStorageAccountName `
-                                    -StorageAccountKey $defaultStorageAccountKey
-    New-AzureStorageContainer `
-        -Name $hdinsightClusterName -Context $defaultStorageContext
+$defaultStorageAccountKey = Get-AzureStorageKey `
+                                -StorageAccountName $defaultStorageAccountName |  %{ $_.Primary }
+$defaultStorageContext = New-AzureStorageContext `
+                                -StorageAccountName $defaultStorageAccountName `
+                                -StorageAccountKey $defaultStorageAccountKey
+New-AzureStorageContainer `
+    -Name $hdinsightClusterName -Context $defaultStorageContext
 
-    ###########################################
-    # Create the cluster
-    ###########################################
+###########################################
+# Create the cluster
+###########################################
 
-    $httpPW = ConvertTo-SecureString -String $httpPassword -AsPlainText -Force
-    $httpCredential = New-Object System.Management.Automation.PSCredential($httpUserName,$httpPW)
+$httpPW = ConvertTo-SecureString -String $httpPassword -AsPlainText -Force
+$httpCredential = New-Object System.Management.Automation.PSCredential($httpUserName,$httpPW)
 
-    New-AzureHDInsightCluster `
-        -Name $hdinsightClusterName `
-        -Location $location `
-        -ClusterSizeInNodes $clusterSizeInNodes `
-        -ClusterType Hadoop `
-        -Version "3.2" `
-        -Credential $httpCredential `
-        -DefaultStorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
-        -DefaultStorageAccountKey $defaultStorageAccountKey `
-        -DefaultStorageContainerName $hdinsightClusterName 
+New-AzureHDInsightCluster `
+    -Name $hdinsightClusterName `
+    -Location $location `
+    -ClusterSizeInNodes $clusterSizeInNodes `
+    -ClusterType Hadoop `
+    -Version "3.2" `
+    -Credential $httpCredential `
+    -DefaultStorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
+    -DefaultStorageAccountKey $defaultStorageAccountKey `
+    -DefaultStorageContainerName $hdinsightClusterName 
 
-    ####################################
-    # Verify the cluster
-    ####################################
-    Get-AzureHDInsightCluster -Name $hdinsightClusterName 
+####################################
+# Verify the cluster
+####################################
+Get-AzureHDInsightCluster -Name $hdinsightClusterName 
+```
 
 ##自定义群集
 

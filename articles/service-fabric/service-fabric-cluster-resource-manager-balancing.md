@@ -31,12 +31,14 @@ Service Fabric 群集资源管理器可用于报告动态负载、对群集中�
 
 ClusterManifest.xml：
 
-        <Section Name="PlacementAndLoadBalancing">
-            <Parameter Name="PLBRefreshGap" Value="0.1" />
-            <Parameter Name="MinPlacementInterval" Value="1.0" />
-            <Parameter Name="MinConstraintCheckInterval" Value="1.0" />
-            <Parameter Name="MinLoadBalancingInterval" Value="5.0" />
-        </Section>
+```
+    <Section Name="PlacementAndLoadBalancing">
+        <Parameter Name="PLBRefreshGap" Value="0.1" />
+        <Parameter Name="MinPlacementInterval" Value="1.0" />
+        <Parameter Name="MinConstraintCheckInterval" Value="1.0" />
+        <Parameter Name="MinLoadBalancingInterval" Value="5.0" />
+    </Section>
+```
 
 今天我们只按顺序一次执行这些操作中的一个（这就是为什么我们将这些配置称为“最小间隔”）。例如，我们已响应任何挂起的请求，已在继续均衡群集之前创建新副本。如此处所示，可以根据指定的默认时间间隔扫描并检查我们需要非常频繁执行的任何操作，这意味着我们在每个步骤结束时所做的更改集通常比较小：我们不是扫描群集中数小时的更改并尝试一次更正全部，并尝试在事情发生时进行处理，而是在同时有许多事情发生时进行某种批处理。这使得 Service Fabric 资源管理器对于群集中发生的事情保持极高的响应度。
 
@@ -49,10 +51,12 @@ ClusterManifest.xml：
 
 ClusterManifest.xml
 
-    <Section Name="MetricBalancingThresholds">
-      <Parameter Name="MetricName1" Value="2"/>
-      <Parameter Name="MetricName2" Value="3.5"/>
-    </Section>
+```
+<Section Name="MetricBalancingThresholds">
+  <Parameter Name="MetricName1" Value="2"/>
+  <Parameter Name="MetricName2" Value="3.5"/>
+</Section>
+```
 
 指标的平衡阈值是一个比率。如果负载最重的节点的负载量除以负载最轻的节点的负载量超过此数目，此群集将被视为不均衡，在群集资源管理器下一次检查时将触发均衡（默认情况下为每 5 秒，由 MinLoadBalancingInterval 控制，如上所示）。
 
@@ -77,9 +81,11 @@ ClusterManifest.xml
 
 ClusterManifest.xml
 
-    <Section Name="MetricActivityThresholds">
-      <Parameter Name="Memory" Value="1536"/>
-    </Section>
+```
+<Section Name="MetricActivityThresholds">
+  <Parameter Name="Memory" Value="1536"/>
+</Section>
+```
 
 请注意，均衡和活动阈值都绑定到指标，并且只有在同一个指标的均衡和活动阈值都超过时才触发均衡。因此，如果超过内存的均衡阈值和 CPU 的活动阈值，只要其余阈值未超过（CPU 的均衡阈值和内存的活动阈值），就不触发均衡。
 

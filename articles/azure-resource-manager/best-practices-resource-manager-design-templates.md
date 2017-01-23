@@ -185,13 +185,15 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 
 下面显示了完整的示例文件。
 
-    {
-        "itemDisplayName": "PostgreSQL 9.3 on Ubuntu VMs",
-        "description": "This template creates a PostgreSQL streaming-replication between a master and one or more slave servers each with 2 striped data disks. The database servers are deployed into a private-only subnet with one publicly accessible jumpbox VM in a DMZ subnet with public IP.",
-        "summary": "PostgreSQL stream-replication with multiple slave servers and a publicly accessible jumpbox VM",
-        "githubUsername": "arsenvlad",
-        "dateUpdated": "2015-04-24"
-    }
+```
+{
+    "itemDisplayName": "PostgreSQL 9.3 on Ubuntu VMs",
+    "description": "This template creates a PostgreSQL streaming-replication between a master and one or more slave servers each with 2 striped data disks. The database servers are deployed into a private-only subnet with one publicly accessible jumpbox VM in a DMZ subnet with public IP.",
+    "summary": "PostgreSQL stream-replication with multiple slave servers and a publicly accessible jumpbox VM",
+    "githubUsername": "arsenvlad",
+    "dateUpdated": "2015-04-24"
+}
+```
 
 ### 主模板
 主模板从用户接收参数，使用该信息来填充复杂对象变量并执行链接的模板。

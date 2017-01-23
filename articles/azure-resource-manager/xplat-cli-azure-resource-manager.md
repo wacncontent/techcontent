@@ -36,7 +36,9 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 ### 资源组
 若要获取订阅中所有资源组的列表及其位置，请运行以下命令。
 
-    azure group list
+```
+azure group list
+```
 
 ### 资源
  若要列出组中的所有资源，例如名为 *testRG* 的资源，请使用以下命令。
@@ -45,7 +47,9 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 
 若要查看组中的单个资源，例如名为 *MyUbuntuVM* 的 VM，请使用如下命令。
 
-    azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15"
+```
+azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15"
+```
 
 注意 **Microsoft.Compute/virtualMachines** 参数。此参数表示要请求其信息的资源的类型。
 
@@ -56,7 +60,9 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 
 在资源上查看详细信息时，通常使用 `--json` 参数会很有用。此参数使输出更易于阅读，因为某些值为嵌套的结构或集合。以下示例演示了将 **show** 命令的结果返回为 JSON 文档。
 
-    azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15" --json
+```
+azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15" --json
+```
 
 > [!NOTE]
 可以将 JSON 数据保存到文件，使用 &gt; 字符将输出定向到文件即可。例如：
@@ -71,49 +77,61 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 ## 管理资源
 若要将存储帐户等资源添加到资源组，请运行如下所示的命令：
 
-    azure resource create testRG MyStorageAccount "Microsoft.Storage/storageAccounts" "chinanorth" -o "2015-06-15" -p "{"accountType": "Standard_LRS"}"
+```
+azure resource create testRG MyStorageAccount "Microsoft.Storage/storageAccounts" "chinanorth" -o "2015-06-15" -p "{"accountType": "Standard_LRS"}"
+```
 
 除了使用 **-o** 参数指定资源的 API 版本以外，请使用 **-p** 参数传递包含任何必需或其他属性的 JSON 格式字符串。
 
 若要删除现有资源（例如虚拟机资源），请使用如下命令。
 
-    azure resource delete testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15"
+```
+azure resource delete testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15"
+```
 
 若要将现有资源移到另一个资源组或订阅，请使用 **azure resource move** 命令。以下示例演示如何将一个 Redis 缓存移到新的资源组。在 **-i** 参数中，提供要移动的资源 ID 的逗号分隔列表。
 
-    azure resource move -i "/subscriptions/{guid}/resourceGroups/OldRG/providers/Microsoft.Cache/Redis/examplecache" -d "NewRG"
+```
+azure resource move -i "/subscriptions/{guid}/resourceGroups/OldRG/providers/Microsoft.Cache/Redis/examplecache" -d "NewRG"
+```
 
 ## 控制对资源的访问
 可以使用 Azure CLI 来创建和管理策略，控制对 Azure 资源的访问。有关策略定义以及将策略分配给资源的背景信息，请参阅 [Use policy to manage resources and control access](./resource-manager-policy.md)（使用策略来管理资源和控制访问）。
 
 例如，定义以下策略来拒绝所有位置不在中国东部或中国北部的请求，并将该策略保存到策略定义文件 policy.json 中：
 
-    {
-    "if" : {
-        "not" : {
-        "field" : "location",
-        "in" : ["chinanorth" ,  "chinaeast"]
-        }
-    },
-    "then" : {
-        "effect" : "deny"
+```
+{
+"if" : {
+    "not" : {
+    "field" : "location",
+    "in" : ["chinanorth" ,  "chinaeast"]
     }
-    }
+},
+"then" : {
+    "effect" : "deny"
+}
+}
+```
 
 然后运行 **policy definition create** 命令：
 
-    azure policy definition create MyPolicy -p c:\temp\policy.json
+```
+azure policy definition create MyPolicy -p c:\temp\policy.json
+```
 
 此命令显示如下所示的输出。
 
-    + Creating policy definition MyPolicy
-    data:    PolicyName:             MyPolicy
-    data:    PolicyDefinitionId:     /subscriptions/########-####-####-####-############/providers/Microsoft.Authorization/policyDefinitions/MyPolicy
+```
++ Creating policy definition MyPolicy
+data:    PolicyName:             MyPolicy
+data:    PolicyDefinitionId:     /subscriptions/########-####-####-####-############/providers/Microsoft.Authorization/policyDefinitions/MyPolicy
 
-    data:    PolicyType:             Custom
-    data:    DisplayName:            undefined
-    data:    Description:            undefined
-    data:    PolicyRule:             field=location, in=[chinanorth, chinaeast], effect=deny
+data:    PolicyType:             Custom
+data:    DisplayName:            undefined
+data:    Description:            undefined
+data:    PolicyRule:             field=location, in=[chinanorth, chinaeast], effect=deny
+```
 
  若要在所需的范围内分配策略，请使用前一命令返回的 **PolicyDefinitionId**。在以下示例中，此范围是订阅，但可以将范围设置为资源组或单个资源：
 
@@ -135,12 +153,16 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 
     若要将资源组模板导出到本地目录中，请运行 `azure group export` 命令，如以下示例所示。（替换为适用于你操作系统环境的本地目录。）
 
-        azure group export testRG ~/azure/templates/
+    ```
+    azure group export testRG ~/azure/templates/
+    ```
 * **针对特定部署导出模板** - 需要查看用于部署资源的实际模板时，此操作很有用。模板包含针对原始部署定义的所有参数和变量。但是，如果组织中的某人更改了不在模板定义中的资源组，此模板不会显示资源组的当前状态。
 
     若要将用于特定部署的模板下载到本地目录，请运行 `azure group deployment template download` 命令。例如：
 
-        azure group deployment template download TestRG testRGDeploy ~/azure/templates/downloads/
+    ```
+    azure group deployment template download TestRG testRGDeploy ~/azure/templates/downloads/
+    ```
 
 > [!NOTE]
 模板导出功能处于预览状态，并非所有的资源类型目前都支持导出模板。尝试导出模板时，你可能会看到一个错误，指出未导出某些资源。如果需要，可以在下载模板之后，在模板中手动定义这些资源。

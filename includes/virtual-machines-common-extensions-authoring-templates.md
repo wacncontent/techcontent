@@ -10,22 +10,24 @@ Azure 资源管理器模板可让你通过定义资源之间的依赖关系，�
 ## VM 扩展的示例模板代码段。
 将 VM 扩展部署为 Azure 资源管理器模板的一部分要求你在模板中以声明方式指定扩展配置。以下是指定扩展配置的格式。
 
-      {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "MyExtension",
-      "apiVersion": "2015-05-01-preview",
-      "location": "[parameters('location')]",
-      "dependsOn": ["[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"],
-      "properties":
-      {
-      "publisher": "Publisher Namespace",
-      "type": "extension Name",
-      "typeHandlerVersion": "extension version",
-      "settings": {
-      // Extension specific configuration goes in here.
-      }
-      }
-      }
+```
+  {
+  "type": "Microsoft.Compute/virtualMachines/extensions",
+  "name": "MyExtension",
+  "apiVersion": "2015-05-01-preview",
+  "location": "[parameters('location')]",
+  "dependsOn": ["[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"],
+  "properties":
+  {
+  "publisher": "Publisher Namespace",
+  "type": "extension Name",
+  "typeHandlerVersion": "extension version",
+  "settings": {
+  // Extension specific configuration goes in here.
+  }
+  }
+  }
+```
 
 如上所示，扩展模板包含两个主要部分：
 

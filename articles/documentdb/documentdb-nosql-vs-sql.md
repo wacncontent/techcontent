@@ -16,7 +16,7 @@ ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 11/22/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: mimig
 ---
 
@@ -40,22 +40,24 @@ NoSQL 是一种与 SQL 数据库截然不同的数据库。NoSQL 常用来指代
 
 和 SQL 支持动态数据（[以 JSON 为格式](https://msdn.microsoft.com/zh-cn/library/dn921897.aspx)）一样，现在可以使用关系解决方案（如 SQL Server）存储数据并使用联接查询数据 - 但是存在另一种选项（即 NoSQL），它简化了此特定场景的解决方法。通过使用和以下内容类似的一个文档并将其存储在 DocumentDB（Azure NoSQL 文档数据库服务）中，可以提高性能并使用一个查询检索整个帖子，而无需使用联接。它更简单、更直观，并且性能更高。
 
-    {
-        "id":"ew12-res2-234e-544f",
-        "title":"post title",
-        "date":"2016-01-01",
-        "body":"this is an awesome post stored on NoSQL",
-        "createdBy":User,
-        "images":["http://myfirstimage.png","http://mysecondimage.png"],
-        "videos":[
-            {"url":"http://myfirstvideo.mp4", "title":"The first video"},
-            {"url":"http://mysecondvideo.mp4", "title":"The second video"}
-        ],
-        "audios":[
-            {"url":"http://myfirstaudio.mp3", "title":"The first audio"},
-            {"url":"http://mysecondaudio.mp3", "title":"The second audio"}
-        ]
-    }
+```
+{
+    "id":"ew12-res2-234e-544f",
+    "title":"post title",
+    "date":"2016-01-01",
+    "body":"this is an awesome post stored on NoSQL",
+    "createdBy":User,
+    "images":["http://myfirstimage.png","http://mysecondimage.png"],
+    "videos":[
+        {"url":"http://myfirstvideo.mp4", "title":"The first video"},
+        {"url":"http://mysecondvideo.mp4", "title":"The second video"}
+    ],
+    "audios":[
+        {"url":"http://myfirstaudio.mp3", "title":"The first audio"},
+        {"url":"http://mysecondaudio.mp3", "title":"The second audio"}
+    ]
+}
+```
 
 此外，此数据可以按帖子 ID 进行分区，从而允许数据自然扩展并利用 NoSQL 缩放特征。此外，NoSQL 系统允许开发人员放宽一致性，并提供低延迟的高度可用的应用。最后，此解决方案不需要开发人员在数据层定义、管理和维护架构，实现快速迭代。
 
@@ -128,3 +130,4 @@ Microsoft 提供了五种 SQL 产品/服务：
   - [Azure 虚拟机中的 SQL Server](https://www.azure.cn/home/features/virtual-machines#SQL/)
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: wording update -->

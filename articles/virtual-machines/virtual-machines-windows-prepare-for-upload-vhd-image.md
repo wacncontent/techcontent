@@ -45,7 +45,9 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 ### 使用 PowerShell 转换
 可以使用 [Convert-VHD PowerShell cmdlet](http://technet.microsoft.com/zh-cn/library/hh848454.aspx) 来转换虚拟磁盘。以下示例演示如何从 VHDX 转换为 VHD，然后从动态类型转换为固定类型：
 
-    Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHDType Fixed
+```
+Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHDType Fixed
+```
 
 ### 从 VMware VMDK 磁盘格式转换
 如果你有 [VMDK 文件格式](https://en.wikipedia.org/wiki/VMDK)的 Windows VM 映像，可以使用 [Microsoft 虚拟机转换器](https://www.microsoft.com/download/details.aspx?id=42497)将其转换为 VHD。有关详细信息，请阅读博客 [How to Convert a VMware VMDK to Hyper-V VHD](http://blogs.msdn.com/b/timomta/archive/2015/06/11/how-to-convert-a-vmware-vmdk-to-hyper-v-vhd.aspx)（如何将 VMware VMDK 转换为 Hyper-V VHD）。
@@ -62,162 +64,188 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 
 2. 删除 WinHTTP 代理：
 
-        netsh winhttp reset proxy
+    ```
+    netsh winhttp reset proxy
+    ```
 
 3. 将磁盘 SAN 策略配置为 [Onlineall](https://technet.microsoft.com/zh-cn/library/gg252636.aspx)：
 
-        diskpart san policy=onlineall
+    ```
+    diskpart san policy=onlineall
+    ```
 
 4. 为 Windows 使用协调世界时 (UTC) 时间，将 Windows 时间 (w32time) 服务的启动类型设置为“自动”：
 
-        REG ADD HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1
-        sc config w32time start= auto
+    ```
+    REG ADD HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1
+    sc config w32time start= auto
+    ```
 
 ## 配置 Windows 服务
 5. 确保下面的每个 Windows 服务均设置为 **Windows 默认值**。这些服务是使用以下列表中所述的启动设置配置的。可以运行以下命令重置启动设置：
 
-        sc config bfe start= auto
+    ```
+    sc config bfe start= auto
 
-        sc config dcomlaunch start= auto
+    sc config dcomlaunch start= auto
 
-        sc config dhcp start= auto
+    sc config dhcp start= auto
 
-        sc config dnscache start= auto
+    sc config dnscache start= auto
 
-        sc config IKEEXT start= auto
+    sc config IKEEXT start= auto
 
-        sc config iphlpsvc start= auto
+    sc config iphlpsvc start= auto
 
-        sc config PolicyAgent start= demand
+    sc config PolicyAgent start= demand
 
-        sc config LSM start= auto
+    sc config LSM start= auto
 
-        sc config netlogon start= demand
+    sc config netlogon start= demand
 
-        sc config netman start= demand
+    sc config netman start= demand
 
-        sc config NcaSvc start= demand
+    sc config NcaSvc start= demand
 
-        sc config netprofm start= demand
+    sc config netprofm start= demand
 
-        sc config NlaSvc start= auto
+    sc config NlaSvc start= auto
 
-        sc config nsi start= auto
+    sc config nsi start= auto
 
-        sc config RpcSs start= auto
+    sc config RpcSs start= auto
 
-        sc config RpcEptMapper start= auto
+    sc config RpcEptMapper start= auto
 
-        sc config termService start= demand
+    sc config termService start= demand
 
-        sc config MpsSvc start= auto
+    sc config MpsSvc start= auto
 
-        sc config WinHttpAutoProxySvc start= demand
+    sc config WinHttpAutoProxySvc start= demand
 
-        sc config LanmanWorkstation start= auto
+    sc config LanmanWorkstation start= auto
 
-        sc config RemoteRegistry start= auto
+    sc config RemoteRegistry start= auto
+    ```
 
 ## 远程桌面配置
 6. 如果有任何自签名证书绑定到远程桌面协议 (RDP) 侦听器，请删除这些证书：
 
-        REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\SSLCertificateSHA1Hash"
+    ```
+    REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\SSLCertificateSHA1Hash"
+    ```
 
     有关配置 RDP 侦听器证书的详细信息，请参阅 [Listener Certificate Configurations in Windows Server](https://blogs.technet.microsoft.com/askperf/2014/05/28/listener-certificate-configurations-in-windows-server-2012-2012-r2/)（Windows Server 中的侦听器证书配置）
 
 7. 配置 RDP 服务的 [KeepAlive](https://technet.microsoft.com/zh-cn/library/cc957549.aspx) 值：
 
-        REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v KeepAliveEnable /t REG_DWORD  /d 1 /f
+    ```
+    REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v KeepAliveEnable /t REG_DWORD  /d 1 /f
 
-        REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v KeepAliveInterval /t REG_DWORD  /d 1 /f
+    REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v KeepAliveInterval /t REG_DWORD  /d 1 /f
 
-        REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\Winstations\RDP-Tcp" /v KeepAliveTimeout /t REG_DWORD /d 1 /f
+    REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\Winstations\RDP-Tcp" /v KeepAliveTimeout /t REG_DWORD /d 1 /f
+    ```
 
 8. 配置 RDP 服务的身份验证模式：
 
-        REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD  /d 1 /f
+    ```
+    REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD  /d 1 /f
 
-        REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v SecurityLayer /t REG_DWORD  /d 1 /f
+    REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v SecurityLayer /t REG_DWORD  /d 1 /f
 
-        REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v fAllowSecProtocolNegotiation /t REG_DWORD  /d 1 /f
+    REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v fAllowSecProtocolNegotiation /t REG_DWORD  /d 1 /f
+    ```
 
 9. 通过在注册表中添加以下子项来启用 RDP 服务：
 
-        REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD  /d 0 /f
+    ```
+    REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD  /d 0 /f
+    ```
 
 ## 配置 Windows 防火墙规则
 10. 允许 WinRM 通过三个防火墙配置文件（“域”、“专用”和“公共”）并启用 PowerShell 远程服务：
 
-        Enable-PSRemoting -force
+    ```
+    Enable-PSRemoting -force
+    ```
 
 11. 确保已部署以下来宾操作系统防火墙规则：
 
     - 入站
 
-            netsh advfirewall firewall set rule dir=in name="File and Printer Sharing (Echo Request - ICMPv4-In)" new enable=yes
+        ```
+        netsh advfirewall firewall set rule dir=in name="File and Printer Sharing (Echo Request - ICMPv4-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Network Discovery (LLMNR-UDP-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Network Discovery (LLMNR-UDP-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Network Discovery (NB-Datagram-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Network Discovery (NB-Datagram-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Network Discovery (NB-Name-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Network Discovery (NB-Name-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Network Discovery (Pub-WSD-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Network Discovery (Pub-WSD-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Network Discovery (SSDP-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Network Discovery (SSDP-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Network Discovery (UPnP-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Network Discovery (UPnP-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Network Discovery (WSD EventsSecure-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Network Discovery (WSD EventsSecure-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Windows Remote Management (HTTP-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Windows Remote Management (HTTP-In)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=in name="Windows Remote Management (HTTP-In)" new enable=yes
+        netsh advfirewall firewall set rule dir=in name="Windows Remote Management (HTTP-In)" new enable=yes
+        ```
 
     - 入站和出站
 
-            netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes
+        ```
+        netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes
 
-            netsh advfirewall firewall set rule group="Core Networking" new enable=yes
+        netsh advfirewall firewall set rule group="Core Networking" new enable=yes
+        ```
 
     - 出站
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (LLMNR-UDP-Out)" new enable=yes
+        ```
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (LLMNR-UDP-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (NB-Datagram-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (NB-Datagram-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (NB-Name-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (NB-Name-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (Pub-WSD-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (Pub-WSD-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (SSDP-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (SSDP-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (UPnPHost-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (UPnPHost-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (UPnP-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (UPnP-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD Events-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD Events-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD EventsSecure-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD EventsSecure-Out)" new enable=yes
 
-            netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD-Out)" new enable=yes
+        netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD-Out)" new enable=yes
+        ```
 
 ## 其他 Windows 配置步骤
 12. 运行 `winmgmt /verifyrepository`，确认 Windows Management Instrumentation (WMI) 存储库是否一致。如果存储库已损坏，请参阅[这篇博客文章](https://blogs.technet.microsoft.com/askperf/2014/08/08/wmi-repository-corruption-or-not)。
 
 13. 确保“引导配置数据”(BCD) 设置与以下内容相符：
 
-        bcdedit /set {bootmgr} integrityservices enable
+    ```
+    bcdedit /set {bootmgr} integrityservices enable
 
-        bcdedit /set {default} device partition=C:
+    bcdedit /set {default} device partition=C:
 
-        bcdedit /set {default} integrityservices enable
+    bcdedit /set {default} integrityservices enable
 
-        bcdedit /set {default} recoveryenabled Off
+    bcdedit /set {default} recoveryenabled Off
 
-        bcdedit /set {default} osdevice partition=C:
+    bcdedit /set {default} osdevice partition=C:
 
-        bcdedit /set {default} bootstatuspolicy IgnoreAllFailures
+    bcdedit /set {default} bootstatuspolicy IgnoreAllFailures
+    ```
 
 14. 删除所有其他传输驱动程序接口筛选器，例如分析 TCP 数据包的软件。
 15. 为了确保磁盘正常运行且一致，请运行 `CHKDSK /f` 命令。
@@ -267,19 +295,23 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 
 - 转储日志可帮助排查 Windows 崩溃问题。启用转储日志收集：
 
-        REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v CrashDumpEnabled /t REG_DWORD /d 2 /f`
+    ```
+    REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v CrashDumpEnabled /t REG_DWORD /d 2 /f`
 
-        REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /v DumpFolder /t REG_EXPAND_SZ /d "c:\CrashDumps" /f
+    REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /v DumpFolder /t REG_EXPAND_SZ /d "c:\CrashDumps" /f
 
-        REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /v DumpCount /t REG_DWORD /d 10 /f
+    REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /v DumpCount /t REG_DWORD /d 10 /f
 
-        REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /v DumpType /t REG_DWORD /d 2 /f
+    REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /v DumpType /t REG_DWORD /d 2 /f
 
-        sc config wer start= auto
+    sc config wer start= auto
+    ```
 
 - 在 Azure 中创建 VM 后，在 D: 驱动器上配置系统定义大小的页面文件
 
-        REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /t REG_MULTI_SZ /v PagingFiles /d "D:\pagefile.sys 0 0" /f
+    ```
+    REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /t REG_MULTI_SZ /v PagingFiles /d "D:\pagefile.sys 0 0" /f
+    ```
 
 ## 后续步骤
 

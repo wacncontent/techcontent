@@ -50,120 +50,152 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 根据在上述[先决条件](#Prerequisites)中部署的现有资源组，更改以下变量的值。
 
-        $location              = "China North"
-        $vnetName              = "WTestVNet"
-        $backendSubnetName     = "BackEnd"
+    ```
+    $location              = "China North"
+    $vnetName              = "WTestVNet"
+    $backendSubnetName     = "BackEnd"
+    ```
 
 2. 根据要用于后端部署的值，更改以下变量的值。
 
-        $backendCSName         = "IaaSStory-Backend"
-        $prmStorageAccountName = "iaasstoryprmstorage"
-        $avSetName             = "ASDB"
-        $vmSize                = "Standard_DS3"
-        $diskSize              = 127
-        $vmNamePrefix          = "DB"
-        $dataDiskSuffix        = "datadisk"
-        $ipAddressPrefix       = "192.168.2."
-        $numberOfVMs           = 2
+    ```
+    $backendCSName         = "IaaSStory-Backend"
+    $prmStorageAccountName = "iaasstoryprmstorage"
+    $avSetName             = "ASDB"
+    $vmSize                = "Standard_DS3"
+    $diskSize              = 127
+    $vmNamePrefix          = "DB"
+    $dataDiskSuffix        = "datadisk"
+    $ipAddressPrefix       = "192.168.2."
+    $numberOfVMs           = 2
+    ```
 
 ### 步骤 2 - 为 VM 创建必要的资源
 需要为所有 VM 的数据磁盘创建新的云服务和存储帐户。还需要为 VM 指定映像和本地管理员帐户。若要创建这些资源，请完成以下步骤：
 
 1. 创建新的云服务。
 
-        New-AzureService -ServiceName $backendCSName -Location $location
+    ```
+    New-AzureService -ServiceName $backendCSName -Location $location
+    ```
 
 2. 创建新的高级存储帐户。
 
-        New-AzureStorageAccount -StorageAccountName $prmStorageAccountName `
-        -Location $location -Type Premium_LRS
+    ```
+    New-AzureStorageAccount -StorageAccountName $prmStorageAccountName `
+    -Location $location -Type Premium_LRS
+    ```
 
 3. 将上面创建的存储帐户设置为订阅的当前存储帐户。
 
-        $subscription = Get-AzureSubscription | where {$_.IsCurrent -eq $true}  
-        Set-AzureSubscription -SubscriptionName $subscription.SubscriptionName `
-        -CurrentStorageAccountName $prmStorageAccountName
+    ```
+    $subscription = Get-AzureSubscription | where {$_.IsCurrent -eq $true}  
+    Set-AzureSubscription -SubscriptionName $subscription.SubscriptionName `
+    -CurrentStorageAccountName $prmStorageAccountName
+    ```
 
 4. 为 VM 选择映像。
 
-        $image = Get-AzureVMImage `
-        | where{$_.ImageFamily -eq "SQL Server 2014 RTM Web on Windows Server 2012 R2"} `
-        | sort PublishedDate -Descending `
-        | select -ExpandProperty ImageName -First 1
+    ```
+    $image = Get-AzureVMImage `
+    | where{$_.ImageFamily -eq "SQL Server 2014 RTM Web on Windows Server 2012 R2"} `
+    | sort PublishedDate -Descending `
+    | select -ExpandProperty ImageName -First 1
+    ```
 
 5. 设置本地管理员帐户凭据。
 
-        $cred = Get-Credential -Message "Enter username and password for local admin account"
+    ```
+    $cred = Get-Credential -Message "Enter username and password for local admin account"
+    ```
 
 ### 步骤 3 - 创建 VM
 需要使用循环创建所需数量的 VM，并在循环中创建所需的 NIC 和 VM。若要创建 NIC 和 VM，请执行以下步骤。
 
 1. 启动 `for` 循环，基于 `$numberOfVMs` 变量的值重复执行命令，从而以所需次数创建一个 VM 和两个 NIC。
 
-        for ($suffixNumber = 1; $suffixNumber -le $numberOfVMs; $suffixNumber++){
+    ```
+    for ($suffixNumber = 1; $suffixNumber -le $numberOfVMs; $suffixNumber++){
+    ```
 
 2. 创建 `VMConfig` 对象，它为 VM 指定映像、大小和可用性集。
 
-        $vmName = $vmNamePrefix + $suffixNumber
-        $vmConfig = New-AzureVMConfig -Name $vmName `
-            -ImageName $image `
-            -InstanceSize $vmSize `
-            -AvailabilitySetName $avSetName
+    ```
+    $vmName = $vmNamePrefix + $suffixNumber
+    $vmConfig = New-AzureVMConfig -Name $vmName `
+        -ImageName $image `
+        -InstanceSize $vmSize `
+        -AvailabilitySetName $avSetName
+    ```
 
 3. 将 VM 预配为 Windows VM。
 
-        Add-AzureProvisioningConfig -VM $vmConfig -Windows `
-            -AdminUsername $cred.UserName `
-            -Password $cred.Password
+    ```
+    Add-AzureProvisioningConfig -VM $vmConfig -Windows `
+        -AdminUsername $cred.UserName `
+        -Password $cred.Password
+    ```
 
 4. 设置默认 NIC，并为其分配静态 IP 地址。
 
-        Set-AzureSubnet            -SubnetNames $backendSubnetName -VM $vmConfig
-        Set-AzureStaticVNetIP     -IPAddress ($ipAddressPrefix+$suffixNumber+3) -VM $vmConfig
+    ```
+    Set-AzureSubnet            -SubnetNames $backendSubnetName -VM $vmConfig
+    Set-AzureStaticVNetIP     -IPAddress ($ipAddressPrefix+$suffixNumber+3) -VM $vmConfig
+    ```
 
 5. 为每个 VM 添加第二个 NIC。
 
-        Add-AzureNetworkInterfaceConfig -Name ("RemoteAccessNIC"+$suffixNumber) `
-        -SubnetName $backendSubnetName `
-        -StaticVNetIPAddress ($ipAddressPrefix+(53+$suffixNumber)) `
-        -VM $vmConfig
+    ```
+    Add-AzureNetworkInterfaceConfig -Name ("RemoteAccessNIC"+$suffixNumber) `
+    -SubnetName $backendSubnetName `
+    -StaticVNetIPAddress ($ipAddressPrefix+(53+$suffixNumber)) `
+    -VM $vmConfig
+    ```
 
 6. 为每个 VM 创建两个数据磁盘。
 
-        $dataDisk1Name = $vmName + "-" + $dataDiskSuffix + "-1"    
-        Add-AzureDataDisk -CreateNew -VM $vmConfig `
-        -DiskSizeInGB $diskSize `
-        -DiskLabel $dataDisk1Name `
-        -LUN 0
+    ```
+    $dataDisk1Name = $vmName + "-" + $dataDiskSuffix + "-1"    
+    Add-AzureDataDisk -CreateNew -VM $vmConfig `
+    -DiskSizeInGB $diskSize `
+    -DiskLabel $dataDisk1Name `
+    -LUN 0
 
-        $dataDisk2Name = $vmName + "-" + $dataDiskSuffix + "-2"   
-        Add-AzureDataDisk -CreateNew -VM $vmConfig `
-        -DiskSizeInGB $diskSize `
-        -DiskLabel $dataDisk2Name `
-        -LUN 1
+    $dataDisk2Name = $vmName + "-" + $dataDiskSuffix + "-2"   
+    Add-AzureDataDisk -CreateNew -VM $vmConfig `
+    -DiskSizeInGB $diskSize `
+    -DiskLabel $dataDisk2Name `
+    -LUN 1
+    ```
 
 7. 创建每个 VM，然后结束循环。
 
-        New-AzureVM -VM $vmConfig `
-        -ServiceName $backendCSName `
-        -Location $location `
-        -VNetName $vnetName
-        }
+    ```
+    New-AzureVM -VM $vmConfig `
+    -ServiceName $backendCSName `
+    -Location $location `
+    -VNetName $vnetName
+    }
+    ```
 
 ### 步骤 4 - 运行脚本
 既已根据需要下载并更改了脚本，可运行该脚本以创建具有多个 NIC 的后端数据库 VM。
 
 1. 保存脚本并从 **PowerShell** 命令提示符或 **PowerShell ISE** 运行它。将看到最初的输出，如下所示。
 
-        OperationDescription    OperationId                          OperationStatus
-        --------------------    -----------                          ---------------
-        New-AzureService        xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded      
-        New-AzureStorageAccount xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded      
+    ```
+    OperationDescription    OperationId                          OperationStatus
+    --------------------    -----------                          ---------------
+    New-AzureService        xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded      
+    New-AzureStorageAccount xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded      
 
-        WARNING: No deployment found in service: 'IaaSStory-Backend'.
+    WARNING: No deployment found in service: 'IaaSStory-Backend'.
+    ```
 2. 填写凭据提示中所需的信息，然后单击“确定”。此时将显示以下输出。
 
-        New-AzureVM             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded
-        New-AzureVM             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded
+    ```
+    New-AzureVM             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded
+    New-AzureVM             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx Succeeded
+    ```
 
 <!---HONumber=Mooncake_1219_2016-->

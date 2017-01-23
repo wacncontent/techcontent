@@ -40,19 +40,23 @@ ms.author: juliako
 - 获取已附加到媒体服务帐户的存储帐户的凭据。
 - 创建一个通知终结点，其 **EndPointType** 设置为 **AzureTable**，endPontAddress 指向存储表。
 
-        INotificationEndPoint notificationEndPoint = 
-                      _context.NotificationEndPoints.Create("monitoring", 
-                      NotificationEndPointType.AzureTable,
-                      "https://" + _mediaServicesStorageAccountName + ".table.core.chinacloudapi.cn/");
+    ```
+    INotificationEndPoint notificationEndPoint = 
+                  _context.NotificationEndPoints.Create("monitoring", 
+                  NotificationEndPointType.AzureTable,
+                  "https://" + _mediaServicesStorageAccountName + ".table.core.chinacloudapi.cn/");
+    ```
 
 - 为要监视的服务创建监视配置设置。最多允许一个监视配置设置。
 
-        IMonitoringConfiguration monitoringConfiguration = _context.MonitoringConfigurations.Create(notificationEndPoint.Id,
-            new List<ComponentMonitoringSetting>()
-            {
-                new ComponentMonitoringSetting(MonitoringComponent.Channel, MonitoringLevel.Normal),
-                new ComponentMonitoringSetting(MonitoringComponent.StreamingEndpoint, MonitoringLevel.Normal)
-            });
+    ```
+    IMonitoringConfiguration monitoringConfiguration = _context.MonitoringConfigurations.Create(notificationEndPoint.Id,
+        new List<ComponentMonitoringSetting>()
+        {
+            new ComponentMonitoringSetting(MonitoringComponent.Channel, MonitoringLevel.Normal),
+            new ComponentMonitoringSetting(MonitoringComponent.StreamingEndpoint, MonitoringLevel.Normal)
+        });
+    ```
 
 ## 使用遥测信息
 
@@ -62,178 +66,182 @@ ms.author: juliako
 
 本部分所示的示例假设 App.config 文件中包含以下部分。
 
-    <appSettings>
-      <add key="MediaServicesAccountName" value="ams_acct_name" />
-      <add key="MediaServicesAccountKey" value="ams_acct_key" />
-      <add key="MediaServicesAccountID" value="ams_acct_id" />
-      <add key="StorageAccountName" value="storage_name" />
-      <add key="StorageAccountKey" value="storage_key" />
-    </appSettings>
+```
+<appSettings>
+  <add key="MediaServicesAccountName" value="ams_acct_name" />
+  <add key="MediaServicesAccountKey" value="ams_acct_key" />
+  <add key="MediaServicesAccountID" value="ams_acct_id" />
+  <add key="StorageAccountName" value="storage_name" />
+  <add key="StorageAccountKey" value="storage_key" />
+</appSettings>
+```
 
 以下示例说明如何为指定的 AMS 帐户启用遥测，以及如何使用 Azure 媒体服务 .NET SDK 查询度量值。
 
-    using System;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.Linq;
-    using Microsoft.WindowsAzure.MediaServices.Client;
+```
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using Microsoft.WindowsAzure.MediaServices.Client;
 
-    namespace AMSMetrics
+namespace AMSMetrics
+{
+    class Program
     {
-        class Program
+        private static readonly string _mediaServicesAccountName =
+            ConfigurationManager.AppSettings["MediaServicesAccountName"];
+        private static readonly string _mediaServicesAccountKey =
+            ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+        private static readonly string _mediaServicesAccountID =
+            ConfigurationManager.AppSettings["MediaServicesAccountID"];
+        private static readonly string _mediaServicesStorageAccountName =
+            ConfigurationManager.AppSettings["StorageAccountName"];
+        private static readonly string _mediaServicesStorageAccountKey =
+            ConfigurationManager.AppSettings["StorageAccountKey"];
+
+    private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+
+    // Azure China uses a different API server and a different ACS Base Address from the Global.
+    private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
+    private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+
+        // Field for service context.
+        private static CloudMediaContext _context = null;
+        private static MediaServicesCredentials _cachedCredentials = null;
+    private static Uri _apiServer = null;
+
+        private static IStreamingEndpoint _streamingEndpoint = null;
+        private static IChannel _channel = null;
+
+        static void Main(string[] args)
         {
-            private static readonly string _mediaServicesAccountName =
-                ConfigurationManager.AppSettings["MediaServicesAccountName"];
-            private static readonly string _mediaServicesAccountKey =
-                ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-            private static readonly string _mediaServicesAccountID =
-                ConfigurationManager.AppSettings["MediaServicesAccountID"];
-            private static readonly string _mediaServicesStorageAccountName =
-                ConfigurationManager.AppSettings["StorageAccountName"];
-            private static readonly string _mediaServicesStorageAccountKey =
-                ConfigurationManager.AppSettings["StorageAccountKey"];
+            // Create and cache the Media Services credentials in a static class variable.
+                _cachedCredentials = new MediaServicesCredentials(
+                            _mediaServicesAccountName,
+                            _mediaServicesAccountKey,
+                            _defaultScope,
+                            _chinaAcsBaseAddressUrl);
 
-        private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+        // Create the API server Uri
+        _apiServer = new Uri(_chinaApiServerUrl);
 
-        // Azure China uses a different API server and a different ACS Base Address from the Global.
-        private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
-        private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+                // Used the chached credentials to create CloudMediaContext.
+                _context = new CloudMediaContext(_apiServer, _cachedCredentials);
 
-            // Field for service context.
-            private static CloudMediaContext _context = null;
-            private static MediaServicesCredentials _cachedCredentials = null;
-        private static Uri _apiServer = null;
+            _streamingEndpoint = _context.StreamingEndpoints.FirstOrDefault();
+            _channel = _context.Channels.FirstOrDefault();
 
-            private static IStreamingEndpoint _streamingEndpoint = null;
-            private static IChannel _channel = null;
+            var monitoringConfigurations = _context.MonitoringConfigurations;
+            IMonitoringConfiguration monitoringConfiguration = null;
 
-            static void Main(string[] args)
+            // No more than one monitoring configuration settings is allowed.
+            if (monitoringConfigurations.ToArray().Length != 0)
             {
-                // Create and cache the Media Services credentials in a static class variable.
-                    _cachedCredentials = new MediaServicesCredentials(
-                                _mediaServicesAccountName,
-                                _mediaServicesAccountKey,
-                                _defaultScope,
-                                _chinaAcsBaseAddressUrl);
+                monitoringConfiguration = _context.MonitoringConfigurations.FirstOrDefault();
+            }
+            else
+            {
+                INotificationEndPoint notificationEndPoint =
+                              _context.NotificationEndPoints.Create("monitoring",
+                              NotificationEndPointType.AzureTable, GetTableEndPoint());
 
-            // Create the API server Uri
-            _apiServer = new Uri(_chinaApiServerUrl);
+                monitoringConfiguration = _context.MonitoringConfigurations.Create(notificationEndPoint.Id,
+                    new List<ComponentMonitoringSetting>()
+                    {
+                        new ComponentMonitoringSetting(MonitoringComponent.Channel, MonitoringLevel.Normal),
+                        new ComponentMonitoringSetting(MonitoringComponent.StreamingEndpoint, MonitoringLevel.Normal)
 
-                    // Used the chached credentials to create CloudMediaContext.
-                    _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-
-                _streamingEndpoint = _context.StreamingEndpoints.FirstOrDefault();
-                _channel = _context.Channels.FirstOrDefault();
-
-                var monitoringConfigurations = _context.MonitoringConfigurations;
-                IMonitoringConfiguration monitoringConfiguration = null;
-
-                // No more than one monitoring configuration settings is allowed.
-                if (monitoringConfigurations.ToArray().Length != 0)
-                {
-                    monitoringConfiguration = _context.MonitoringConfigurations.FirstOrDefault();
-                }
-                else
-                {
-                    INotificationEndPoint notificationEndPoint =
-                                  _context.NotificationEndPoints.Create("monitoring",
-                                  NotificationEndPointType.AzureTable, GetTableEndPoint());
-
-                    monitoringConfiguration = _context.MonitoringConfigurations.Create(notificationEndPoint.Id,
-                        new List<ComponentMonitoringSetting>()
-                        {
-                            new ComponentMonitoringSetting(MonitoringComponent.Channel, MonitoringLevel.Normal),
-                            new ComponentMonitoringSetting(MonitoringComponent.StreamingEndpoint, MonitoringLevel.Normal)
-
-                        });
-                }
-
-                //Print metrics for a Streaming Endpoint.
-                PrintStreamingEndpointMetrics();
-
-                Console.ReadLine();
+                    });
             }
 
-            private static string GetTableEndPoint()
-            {
-                return "https://" + _mediaServicesStorageAccountName + ".table.core.chinacloudapi.cn/";
-            }
+            //Print metrics for a Streaming Endpoint.
+            PrintStreamingEndpointMetrics();
 
-            private static void PrintStreamingEndpointMetrics()
-            {
-                Console.WriteLine(string.Format("Telemetry for streaming endpoint '{0}'", _streamingEndpoint.Name));
+            Console.ReadLine();
+        }
 
-                var end = DateTime.UtcNow;
-                var start = DateTime.UtcNow.AddHours(-5);
+        private static string GetTableEndPoint()
+        {
+            return "https://" + _mediaServicesStorageAccountName + ".table.core.chinacloudapi.cn/";
+        }
 
-                // Get some streaming endpoint metrics.
-                var res = _context.StreamingEndPointRequestLogs.GetStreamingEndPointMetrics(
-                        GetTableEndPoint(),
-                        _mediaServicesStorageAccountKey,
-                        _mediaServicesAccountID,
-                        _streamingEndpoint.Id,
-                        start,
-                        end);
+        private static void PrintStreamingEndpointMetrics()
+        {
+            Console.WriteLine(string.Format("Telemetry for streaming endpoint '{0}'", _streamingEndpoint.Name));
 
-                Console.Title = "Streaming endpoint metrics:";
+            var end = DateTime.UtcNow;
+            var start = DateTime.UtcNow.AddHours(-5);
 
-                foreach (var log in res)
-                {
-                    Console.WriteLine("AccountId: {0}", log.AccountId);
-                    Console.WriteLine("BytesSent: {0}", log.BytesSent);
-                    Console.WriteLine("EndToEndLatency: {0}", log.EndToEndLatency);
-                    Console.WriteLine("HostName: {0}", log.HostName);
-                    Console.WriteLine("ObservedTime: {0}", log.ObservedTime);
-                    Console.WriteLine("PartitionKey: {0}", log.PartitionKey);
-                    Console.WriteLine("RequestCount: {0}", log.RequestCount);
-                    Console.WriteLine("ResultCode: {0}", log.ResultCode);
-                    Console.WriteLine("RowKey: {0}", log.RowKey);
-                    Console.WriteLine("ServerLatency: {0}", log.ServerLatency);
-                    Console.WriteLine("StatusCode: {0}", log.StatusCode);
-                    Console.WriteLine("StreamingEndpointId: {0}", log.StreamingEndpointId);
-                    Console.WriteLine();
-                }
-
-                Console.WriteLine();
-            }
-
-            private static void PrintChannelMetrics()
-            {
-                if (_channel == null)
-                {
-                    Console.WriteLine("There are no channels in this AMS account");
-                    return;
-                }
-
-                Console.WriteLine(string.Format("Telemetry for channel '{0}'", _channel.Name));
-
-                var end = DateTime.UtcNow;
-                var start = DateTime.UtcNow.AddHours(-5);
-
-                // Get some channel metrics.
-                var channelMetrics = _context.ChannelMetrics.GetChannelMetrics(
+            // Get some streaming endpoint metrics.
+            var res = _context.StreamingEndPointRequestLogs.GetStreamingEndPointMetrics(
                     GetTableEndPoint(),
                     _mediaServicesStorageAccountKey,
                     _mediaServicesAccountID,
-                   _channel.Id,
+                    _streamingEndpoint.Id,
                     start,
                     end);
 
-                // Print the channel metrics.
-                Console.WriteLine("Channel metrics:");
+            Console.Title = "Streaming endpoint metrics:";
 
-                foreach (var channelHeartbeat in channelMetrics.OrderBy(x => x.ObservedTime))
-                {
-                    Console.WriteLine(
-                        "    Observed time: {0}, Last timestamp: {1}, Incoming bitrate: {2}",
-                        channelHeartbeat.ObservedTime,
-                        channelHeartbeat.LastTimestamp,
-                        channelHeartbeat.IncomingBitrate);
-                }
-
+            foreach (var log in res)
+            {
+                Console.WriteLine("AccountId: {0}", log.AccountId);
+                Console.WriteLine("BytesSent: {0}", log.BytesSent);
+                Console.WriteLine("EndToEndLatency: {0}", log.EndToEndLatency);
+                Console.WriteLine("HostName: {0}", log.HostName);
+                Console.WriteLine("ObservedTime: {0}", log.ObservedTime);
+                Console.WriteLine("PartitionKey: {0}", log.PartitionKey);
+                Console.WriteLine("RequestCount: {0}", log.RequestCount);
+                Console.WriteLine("ResultCode: {0}", log.ResultCode);
+                Console.WriteLine("RowKey: {0}", log.RowKey);
+                Console.WriteLine("ServerLatency: {0}", log.ServerLatency);
+                Console.WriteLine("StatusCode: {0}", log.StatusCode);
+                Console.WriteLine("StreamingEndpointId: {0}", log.StreamingEndpointId);
                 Console.WriteLine();
             }
+
+            Console.WriteLine();
+        }
+
+        private static void PrintChannelMetrics()
+        {
+            if (_channel == null)
+            {
+                Console.WriteLine("There are no channels in this AMS account");
+                return;
+            }
+
+            Console.WriteLine(string.Format("Telemetry for channel '{0}'", _channel.Name));
+
+            var end = DateTime.UtcNow;
+            var start = DateTime.UtcNow.AddHours(-5);
+
+            // Get some channel metrics.
+            var channelMetrics = _context.ChannelMetrics.GetChannelMetrics(
+                GetTableEndPoint(),
+                _mediaServicesStorageAccountKey,
+                _mediaServicesAccountID,
+               _channel.Id,
+                start,
+                end);
+
+            // Print the channel metrics.
+            Console.WriteLine("Channel metrics:");
+
+            foreach (var channelHeartbeat in channelMetrics.OrderBy(x => x.ObservedTime))
+            {
+                Console.WriteLine(
+                    "    Observed time: {0}, Last timestamp: {1}, Incoming bitrate: {2}",
+                    channelHeartbeat.ObservedTime,
+                    channelHeartbeat.LastTimestamp,
+                    channelHeartbeat.IncomingBitrate);
+            }
+
+            Console.WriteLine();
         }
     }
+}
+```
 
 <!---HONumber=Mooncake_1205_2016-->

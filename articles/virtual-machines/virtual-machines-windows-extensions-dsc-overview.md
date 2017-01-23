@@ -94,37 +94,41 @@ Azure DSC 扩展使用 Azure VM 代理框架来传送、启用和报告 Azure VM
 
 Azure DSC 扩展将检索并在 Azure VM 上启用 DSC 配置文档。下面是一个简单的配置示例。以“IisInstall.ps1”的名称将它保存在本地：
 
-    configuration IISInstall 
+```
+configuration IISInstall 
+{ 
+    node "localhost"
     { 
-        node "localhost"
+        WindowsFeature IIS 
         { 
-            WindowsFeature IIS 
-            { 
-                Ensure = "Present" 
-                Name = "Web-Server"                       
-            } 
+            Ensure = "Present" 
+            Name = "Web-Server"                       
         } 
-    }
+    } 
+}
+```
 
 以下步骤将 IisInstall.ps1 脚本放在指定的 VM 上，执行配置，然后报告状态。
 
-    #Azure PowerShell cmdlets are required
-    Import-Module Azure
+```
+#Azure PowerShell cmdlets are required
+Import-Module Azure
 
-    #Use an existing Azure Virtual Machine, 'DscDemo1'
-    $demoVM = Get-AzureVM DscDemo1
+#Use an existing Azure Virtual Machine, 'DscDemo1'
+$demoVM = Get-AzureVM DscDemo1
 
-    #Publish the configuration script into user storage.
-    Publish-AzureVMDscConfiguration -ConfigurationPath ".\IisInstall.ps1" -StorageContext $storageContext -Verbose -Force
+#Publish the configuration script into user storage.
+Publish-AzureVMDscConfiguration -ConfigurationPath ".\IisInstall.ps1" -StorageContext $storageContext -Verbose -Force
 
-    #Set the VM to run the DSC configuration
-    Set-AzureVMDscExtension -VM $demoVM -ConfigurationArchive "demo.ps1.zip" -StorageContext $storageContext -ConfigurationName "runScript" -Verbose
+#Set the VM to run the DSC configuration
+Set-AzureVMDscExtension -VM $demoVM -ConfigurationArchive "demo.ps1.zip" -StorageContext $storageContext -ConfigurationName "runScript" -Verbose
 
-    #Update the configuration of an Azure Virtual Machine
-    $demoVM | Update-AzureVM -Verbose
+#Update the configuration of an Azure Virtual Machine
+$demoVM | Update-AzureVM -Verbose
 
-    #check on status
-    Get-AzureVMDscExtensionStatus -VM $demovm -Verbose
+#check on status
+Get-AzureVMDscExtensionStatus -VM $demovm -Verbose
+```
 
 ## 日志记录 ##
 

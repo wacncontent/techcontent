@@ -74,15 +74,19 @@ ms.author: nitinme
 
 2. **通过上载数据文件为 Solr 编制索引**。在为 Solr 编制索引时，应将可能需要搜索的文档放在其中。要为 Solr 编制索引，请使用 RDP 远程连接到群集，导航到桌面，打开 Hadoop 命令行，然后导航到 **C:\\apps\\dist\\solr-4.7.2\\example\\exampledocs**。运行以下命令：
 
-        java -jar post.jar solr.xml monitor.xml
+    ```
+    java -jar post.jar solr.xml monitor.xml
+    ```
 
     控制台上会显示以下输出：
 
-        POSTing file solr.xml
-        POSTing file monitor.xml
-        2 files indexed.
-        COMMITting Solr index changes to http://localhost:8983/solr/update..
-        Time spent: 0:00:01.624
+    ```
+    POSTing file solr.xml
+    POSTing file monitor.xml
+    2 files indexed.
+    COMMITting Solr index changes to http://localhost:8983/solr/update..
+    Time spent: 0:00:01.624
+    ```
 
     post.jar 实用程序通过以下两个示例文档为 Solr 编制索引：**solr.xml** 和 **monitor.xml**。post.jar 实用程序和示例文档是随 Solr 安装一起提供的。
 
@@ -94,80 +98,88 @@ ms.author: nitinme
 
     输出返回两个用于为 Solr 编制索引的文档。输出如下所示：
 
-            "response": {
-                "numFound": 2,
-                "start": 0,
-                "maxScore": 1,
-                "docs": [
-                  {
-                    "id": "SOLR1000",
-                    "name": "Solr, the Enterprise Search Server",
-                    "manu": "Apache Software Foundation",
-                    "cat": [
-                      "software",
-                      "search"
-                    ],
-                    "features": [
-                      "Advanced Full-Text Search Capabilities using Lucene",
-                      "Optimized for High Volume Web Traffic",
-                      "Standards Based Open Interfaces - XML and HTTP",
-                      "Comprehensive HTML Administration Interfaces",
-                      "Scalability - Efficient Replication to other Solr Search Servers",
-                      "Flexible and Adaptable with XML configuration and Schema",
-                      "Good unicode support: héllo (hello with an accent over the e)"
-                    ],
-                    "price": 0,
-                    "price_c": "0,USD",
-                    "popularity": 10,
-                    "inStock": true,
-                    "incubationdate_dt": "2006-01-17T00:00:00Z",
-                    "_version_": 1486960636996878300
-                  },
-                  {
-                    "id": "3007WFP",
-                    "name": "Dell Widescreen UltraSharp 3007WFP",
-                    "manu": "Dell, Inc.",
-                    "manu_id_s": "dell",
-                    "cat": [
-                      "electronics and computer1"
-                    ],
-                    "features": [
-                      "30" TFT active matrix LCD, 2560 x 1600, .25mm dot pitch, 700:1 contrast"
-                    ],
-                    "includes": "USB cable",
-                    "weight": 401.6,
-                    "price": 2199,
-                    "price_c": "2199,USD",
-                    "popularity": 6,
-                    "inStock": true,
-                    "store": "43.17614,-90.57341",
-                    "_version_": 1486960637584081000
-                  }
-                ]
+    ```
+        "response": {
+            "numFound": 2,
+            "start": 0,
+            "maxScore": 1,
+            "docs": [
+              {
+                "id": "SOLR1000",
+                "name": "Solr, the Enterprise Search Server",
+                "manu": "Apache Software Foundation",
+                "cat": [
+                  "software",
+                  "search"
+                ],
+                "features": [
+                  "Advanced Full-Text Search Capabilities using Lucene",
+                  "Optimized for High Volume Web Traffic",
+                  "Standards Based Open Interfaces - XML and HTTP",
+                  "Comprehensive HTML Administration Interfaces",
+                  "Scalability - Efficient Replication to other Solr Search Servers",
+                  "Flexible and Adaptable with XML configuration and Schema",
+                  "Good unicode support: héllo (hello with an accent over the e)"
+                ],
+                "price": 0,
+                "price_c": "0,USD",
+                "popularity": 10,
+                "inStock": true,
+                "incubationdate_dt": "2006-01-17T00:00:00Z",
+                "_version_": 1486960636996878300
+              },
+              {
+                "id": "3007WFP",
+                "name": "Dell Widescreen UltraSharp 3007WFP",
+                "manu": "Dell, Inc.",
+                "manu_id_s": "dell",
+                "cat": [
+                  "electronics and computer1"
+                ],
+                "features": [
+                  "30" TFT active matrix LCD, 2560 x 1600, .25mm dot pitch, 700:1 contrast"
+                ],
+                "includes": "USB cable",
+                "weight": 401.6,
+                "price": 2199,
+                "price_c": "2199,USD",
+                "popularity": 6,
+                "inStock": true,
+                "store": "43.17614,-90.57341",
+                "_version_": 1486960637584081000
               }
+            ]
+          }
+    ```
 
 4. **建议：将索引数据从 Solr 备份到与 HDInsight 群集关联的 Azure Blob 存储**。最好将索引数据从 Solr 群集节点备份到 Azure Blob 存储上。执行以下步骤来完成此操作：
 
     1. 在 RDP 会话中，打开 Internet Explorer，然后指向以下 URL：
 
-            http://localhost:8983/solr/replication?command=backup
+        ```
+        http://localhost:8983/solr/replication?command=backup
+        ```
 
         你应该看到如下所示的响应：
 
-            <?xml version="1.0" encoding="UTF-8"?>
-            <response>
-              <lst name="responseHeader">
-                <int name="status">0</int>
-                <int name="QTime">9</int>
-              </lst>
-              <str name="status">OK</str>
-            </response>
+        ```
+        <?xml version="1.0" encoding="UTF-8"?>
+        <response>
+          <lst name="responseHeader">
+            <int name="status">0</int>
+            <int name="QTime">9</int>
+          </lst>
+          <str name="status">OK</str>
+        </response>
+        ```
 
     2. 在远程会话中，导航到 {SOLR\_HOME}{Collection}\\data。对于通过示例脚本创建的群集，该目录应该是 **C:\\apps\\dist\\solr-4.7.2\\example\\solr\\collection1\\data**。在此位置，你应该会看到使用类似于 **snapshot.*timestamp*** 的名称创建的快照文件夹。
 
     3. 压缩快照文件夹，并将其上载到 Azure Blob 存储。从 Hadoop 命令行，通过使用以下命令导航到快照文件夹所在的位置：
 
-              hadoop fs -CopyFromLocal snapshot._timestamp_.zip /example/data
+        ```
+          hadoop fs -CopyFromLocal snapshot._timestamp_.zip /example/data
+        ```
 
         此命令会将快照复制到与群集关联的默认存储帐户中容器下方的 /example/data/。
 
@@ -180,29 +192,35 @@ ms.author: nitinme
 
 1. 打开 Azure PowerShell 窗口，并声明以下变量：
 
-        # PROVIDE VALUES FOR THESE VARIABLES
-        $subscriptionName = "<SubscriptionName>"		# Name of the Azure subscription
-        $clusterName = "<HDInsightClusterName>"			# HDInsight cluster name
-        $storageAccountName = "<StorageAccountName>"	# Azure Storage account that hosts the default container
-        $storageAccountKey = "<StorageAccountKey>"      # Key for the Storage account
-        $containerName = $clusterName
-        $location = "<MicrosoftDataCenter>"				# Location of the HDInsight cluster. It must be in the same data center as the Storage account.
-        $clusterNodes = <ClusterSizeInNumbers>			# Number of nodes in the HDInsight cluster
-        $version = "<HDInsightClusterVersion>"          # For example, "3.1"
+    ```
+    # PROVIDE VALUES FOR THESE VARIABLES
+    $subscriptionName = "<SubscriptionName>"		# Name of the Azure subscription
+    $clusterName = "<HDInsightClusterName>"			# HDInsight cluster name
+    $storageAccountName = "<StorageAccountName>"	# Azure Storage account that hosts the default container
+    $storageAccountKey = "<StorageAccountKey>"      # Key for the Storage account
+    $containerName = $clusterName
+    $location = "<MicrosoftDataCenter>"				# Location of the HDInsight cluster. It must be in the same data center as the Storage account.
+    $clusterNodes = <ClusterSizeInNumbers>			# Number of nodes in the HDInsight cluster
+    $version = "<HDInsightClusterVersion>"          # For example, "3.1"
+    ```
 
 2. 指定配置值，例如群集中的节点，以及要使用的默认存储。
 
-        # Specify the configuration options
-        Select-AzureSubscription $subscriptionName
-        $config = New-AzureHDInsightClusterConfig -ClusterSizeInNodes $clusterNodes
-        $config.DefaultStorageAccount.StorageAccountName="$storageAccountName.blob.core.chinacloudapi.cn"
-        $config.DefaultStorageAccount.StorageAccountKey=$storageAccountKey
-        $config.DefaultStorageAccount.StorageContainerName=$containerName
+    ```
+    # Specify the configuration options
+    Select-AzureSubscription $subscriptionName
+    $config = New-AzureHDInsightClusterConfig -ClusterSizeInNodes $clusterNodes
+    $config.DefaultStorageAccount.StorageAccountName="$storageAccountName.blob.core.chinacloudapi.cn"
+    $config.DefaultStorageAccount.StorageAccountKey=$storageAccountKey
+    $config.DefaultStorageAccount.StorageContainerName=$containerName
+    ```
 
 3. 使用 **Add-AzureHDInsightScriptAction** cmdlet 将脚本操作添加到群集配置中。稍后，在创建群集时，将执行脚本操作。
 
-        # Add the script action to the cluster configuration
-        $config = Add-AzureHDInsightScriptAction -Config $config -Name "Install Solr" -ClusterRoleCollection HeadNode,DataNode -Uri https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1
+    ```
+    # Add the script action to the cluster configuration
+    $config = Add-AzureHDInsightScriptAction -Config $config -Name "Install Solr" -ClusterRoleCollection HeadNode,DataNode -Uri https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1
+    ```
 
     **Add-AzureHDInsightScriptAction** cmdlet 采用以下参数：
 
@@ -230,8 +248,10 @@ ms.author: nitinme
 
 4. 最后，开始设置安装有 Solr 的自定义群集。
 
-        # Start provisioning a cluster with Solr installed
-        New-AzureHDInsightCluster -Config $config -Name $clusterName -Location $location -Version $version 
+    ```
+    # Start provisioning a cluster with Solr installed
+    New-AzureHDInsightCluster -Config $config -Name $clusterName -Location $location -Version $version 
+    ```
 
 出现提示时，请输入群集的凭据。创建群集可能需要几分钟时间。
 
@@ -282,7 +302,9 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
 
 6. 在控制台中运行下列命令以安装程序包：
 
-        Install-Package Microsoft.WindowsAzure.Management.HDInsight
+    ```
+    Install-Package Microsoft.WindowsAzure.Management.HDInsight
+    ```
 
     此命令将从当前 Visual Studio 项目添加 .NET 库以及对这些库的引用。
 
@@ -290,62 +312,70 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
 
 8. 将下列 using 语句添加到文件顶部：
 
-        using System.Security.Cryptography.X509Certificates;
-        using Microsoft.WindowsAzure.Management.HDInsight;
-        using Microsoft.WindowsAzure.Management.HDInsight.ClusterProvisioning;
-        using Microsoft.WindowsAzure.Management.HDInsight.Framework.Logging;
+    ```
+    using System.Security.Cryptography.X509Certificates;
+    using Microsoft.WindowsAzure.Management.HDInsight;
+    using Microsoft.WindowsAzure.Management.HDInsight.ClusterProvisioning;
+    using Microsoft.WindowsAzure.Management.HDInsight.Framework.Logging;
+    ```
 
 9. 在 Main() 函数中，复制并粘贴以下代码，然后提供变量值：
 
-        var clusterName = args[0];
+    ```
+    var clusterName = args[0];
 
-        // Provide values for the variables
-        string thumbprint = "<CertificateThumbprint>";  
-        string subscriptionId = "<AzureSubscriptionID>";
-        string location = "<MicrosoftDataCenterLocation>";
-        string storageaccountname = "<AzureStorageAccountName>.blob.core.chinacloudapi.cn";
-        string storageaccountkey = "<AzureStorageAccountKey>";
-        string username = "<HDInsightUsername>";
-        string password = "<HDInsightUserPassword>";
-        int clustersize = <NumberOfNodesInTheCluster>;
+    // Provide values for the variables
+    string thumbprint = "<CertificateThumbprint>";  
+    string subscriptionId = "<AzureSubscriptionID>";
+    string location = "<MicrosoftDataCenterLocation>";
+    string storageaccountname = "<AzureStorageAccountName>.blob.core.chinacloudapi.cn";
+    string storageaccountkey = "<AzureStorageAccountKey>";
+    string username = "<HDInsightUsername>";
+    string password = "<HDInsightUserPassword>";
+    int clustersize = <NumberOfNodesInTheCluster>;
 
-        // Provide the certificate thumbprint to retrieve the certificate from the certificate store 
-        X509Store store = new X509Store();
-        store.Open(OpenFlags.ReadOnly);
-        X509Certificate2 cert = store.Certificates.Cast<X509Certificate2>().First(item => item.Thumbprint == thumbprint);
+    // Provide the certificate thumbprint to retrieve the certificate from the certificate store 
+    X509Store store = new X509Store();
+    store.Open(OpenFlags.ReadOnly);
+    X509Certificate2 cert = store.Certificates.Cast<X509Certificate2>().First(item => item.Thumbprint == thumbprint);
 
-        // Create an HDInsight client object
-        HDInsightCertificateCredential creds = new HDInsightCertificateCredential(new Guid(subscriptionId), cert);
-        var client = HDInsightClient.Connect(creds);
-        client.IgnoreSslErrors = true;
+    // Create an HDInsight client object
+    HDInsightCertificateCredential creds = new HDInsightCertificateCredential(new Guid(subscriptionId), cert);
+    var client = HDInsightClient.Connect(creds);
+    client.IgnoreSslErrors = true;
 
-        // Provide the cluster information
-        var clusterInfo = new ClusterCreateParameters()
-        {
-            Name = clusterName,
-            Location = location,
-            DefaultStorageAccountName = storageaccountname,
-            DefaultStorageAccountKey = storageaccountkey,
-            DefaultStorageContainer = clusterName,
-            UserName = username,
-            Password = password,
-            ClusterSizeInNodes = clustersize,
-            Version = "3.1"
-        };        
+    // Provide the cluster information
+    var clusterInfo = new ClusterCreateParameters()
+    {
+        Name = clusterName,
+        Location = location,
+        DefaultStorageAccountName = storageaccountname,
+        DefaultStorageAccountKey = storageaccountkey,
+        DefaultStorageContainer = clusterName,
+        UserName = username,
+        Password = password,
+        ClusterSizeInNodes = clustersize,
+        Version = "3.1"
+    };        
+    ```
 
 10. 将以下代码追加到 Main() 函数，以使用 [ScriptAction](http://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.management.hdinsight.clusterprovisioning.data.scriptaction.aspx) 类调用自定义脚本来安装 Solr。
 
-        // Add the script action to install Solr
-        clusterInfo.ConfigActions.Add(new ScriptAction(
-          "Install Solr", // Name of the config action
-          new ClusterNodeType[] { ClusterNodeType.HeadNode, ClusterNodeType.DataNode }, // List of nodes to install Solr on
-          new Uri("https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1"), // Location of the script to install Solr
-          null //Because the script used does not require any parameters
-        ));
+    ```
+    // Add the script action to install Solr
+    clusterInfo.ConfigActions.Add(new ScriptAction(
+      "Install Solr", // Name of the config action
+      new ClusterNodeType[] { ClusterNodeType.HeadNode, ClusterNodeType.DataNode }, // List of nodes to install Solr on
+      new Uri("https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1"), // Location of the script to install Solr
+      null //Because the script used does not require any parameters
+    ));
+    ```
 
 11. 最后，创建群集。
 
-        client.CreateCluster(clusterInfo);
+    ```
+    client.CreateCluster(clusterInfo);
+    ```
 
 11. 将更改保存到应用程序并构建解决方案。
 
@@ -353,7 +383,9 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
 
 打开 Windows PowerShell 或 Azure PowerShell 控制台，导航到保存 Visual Studio 项目的位置，再导航到项目中的 \\bin\\debug 目录，然后运行以下命令：
 
-    .\CreateSolrCluster <cluster-name>
+```
+.\CreateSolrCluster <cluster-name>
+```
 
 提供群集名称，并按 ENTER 预配安装有 Solr 的群集。
 

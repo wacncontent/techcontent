@@ -63,7 +63,9 @@ Azure 支持各种 Linux 分发版（请参阅 [Endorsed Distributions](./virtua
 
 请确保在经典部署模型中使用 Azure CLI (`azure config mode asm`)，然后登录帐户：
 
-    azure login -e AzureChinaCloud
+```
+azure login -e AzureChinaCloud
+```
 
 <a id="upload"> </a>
 ## 步骤 3：向 Azure 上载映像
@@ -72,9 +74,11 @@ Azure 支持各种 Linux 分发版（请参阅 [Endorsed Distributions](./virtua
 
 在 Azure CLI 中使用以下命令来上载映像：
 
-    azure vm image create <ImageName> `
-        --blob-url <BlobStorageURL>/<YourImagesFolder>/<VHDName> `
-        --os Linux <PathToVHDFile>
+```
+azure vm image create <ImageName> `
+    --blob-url <BlobStorageURL>/<YourImagesFolder>/<VHDName> `
+    --os Linux <PathToVHDFile>
+```
 
 在上述示例中：
 
@@ -85,15 +89,19 @@ Azure 支持各种 Linux 分发版（请参阅 [Endorsed Distributions](./virtua
 
 下面显示一个完整示例：
 
-    azure vm image create UbuntuLTS `
-        --blob-url https://teststorage.blob.core.chinacloudapi.cn/vhds/UbuntuLTS.vhd `
-        --os Linux /home/ahmet/UbuntuLTS.vhd
+```
+azure vm image create UbuntuLTS `
+    --blob-url https://teststorage.blob.core.chinacloudapi.cn/vhds/UbuntuLTS.vhd `
+    --os Linux /home/ahmet/UbuntuLTS.vhd
+```
 
 ## 步骤 4：从映像创建 VM
 使用 `azure vm create` 以与创建常规 VM 相同的方式创建 VM。指定在上一步中为映像提供的名称。在以下示例中，使用上一步中指定的映像名称 **UbuntuLTS**：
 
-    azure vm create --userName ops --password P@ssw0rd! --vm-size Small --ssh `
-        --location "China North" "DeployedUbuntu" UbuntuLTS
+```
+azure vm create --userName ops --password P@ssw0rd! --vm-size Small --ssh `
+    --location "China North" "DeployedUbuntu" UbuntuLTS
+```
 
 若要创建自己的 VM，请提供自己的用户名 + 密码、位置、DNS 名称和映像名称。
 

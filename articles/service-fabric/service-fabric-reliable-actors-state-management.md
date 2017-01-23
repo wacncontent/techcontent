@@ -34,51 +34,59 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 
 ### 持久化状态
 
-    [StatePersistence(StatePersistence.Persisted)]
-    class MyActor : Actor, IMyActor
-    {
-    }
+```
+[StatePersistence(StatePersistence.Persisted)]
+class MyActor : Actor, IMyActor
+{
+}
+```
 
 此设置使用一个状态提供程序，该提供程序可在磁盘上存储数据，并自动将服务副本计数设置为 3。
 
 ### 易失性状态
 
-    [StatePersistence(StatePersistence.Volatile)]
-    class MyActor : Actor, IMyActor
-    {
-    }
+```
+[StatePersistence(StatePersistence.Volatile)]
+class MyActor : Actor, IMyActor
+{
+}
+```
 
 此设置使用仅在内存中的状态提供程序，并将副本计数设置为 3。
 
 ### 非持久化状态
 
-    [StatePersistence(StatePersistence.None)]
-    class MyActor : Actor, IMyActor
-    {
-    }
+```
+[StatePersistence(StatePersistence.None)]
+class MyActor : Actor, IMyActor
+{
+}
+```
 
 此设置使用仅在内存中的状态提供程序，并将副本计数设置为 1。
 
 ### 默认值和生成的设置
 如果使用 `StatePersistence` 属性，在执行组件服务启动时，系统会在运行时自动选择状态提供程序。但是，副本计数将在编译时由 Visual Studio 执行组件构建工具设置。生成工具在 ApplicationManifest.xml 中自动为执行组件服务生成*默认服务*。参数是针对**副本集大小下限**和**目标副本集大小**创建的。当然，可以手动更改这些参数，但是，`StatePersistence` 属性每次更改时，参数会设置为所选 `StatePersistence` 属性的默认副本集大小值，并替代所有旧值。换而言之，更改 `StatePersistence` 属性值时，在 ServiceManifest.xml 中设置的值**仅**会在生成时被替代。
 
-    <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Application12Type" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-       <Parameters>
-          <Parameter Name="MyActorService_PartitionCount" DefaultValue="10" />
-          <Parameter Name="MyActorService_MinReplicaSetSize" DefaultValue="3" />
-          <Parameter Name="MyActorService_TargetReplicaSetSize" DefaultValue="3" />
-       </Parameters>
-       <ServiceManifestImport>
-          <ServiceManifestRef ServiceManifestName="MyActorPkg" ServiceManifestVersion="1.0.0" />
-       </ServiceManifestImport>
-       <DefaultServices>
-          <Service Name="MyActorService" GeneratedIdRef="77d965dc-85fb-488c-bd06-c6c1fe29d593|Persisted">
-             <StatefulService ServiceTypeName="MyActorServiceType" TargetReplicaSetSize="[MyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[MyActorService_MinReplicaSetSize]">
-                <UniformInt64Partition PartitionCount="[MyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
-             </StatefulService>
-          </Service>
-       </DefaultServices>
-    </ApplicationManifest>
+```
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Application12Type" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <Parameters>
+      <Parameter Name="MyActorService_PartitionCount" DefaultValue="10" />
+      <Parameter Name="MyActorService_MinReplicaSetSize" DefaultValue="3" />
+      <Parameter Name="MyActorService_TargetReplicaSetSize" DefaultValue="3" />
+   </Parameters>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="MyActorPkg" ServiceManifestVersion="1.0.0" />
+   </ServiceManifestImport>
+   <DefaultServices>
+      <Service Name="MyActorService" GeneratedIdRef="77d965dc-85fb-488c-bd06-c6c1fe29d593|Persisted">
+         <StatefulService ServiceTypeName="MyActorServiceType" TargetReplicaSetSize="[MyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[MyActorService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[MyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
+      </Service>
+   </DefaultServices>
+</ApplicationManifest>
+```
 
 ## 状态管理器
 每个执行组件实例都有其自身的状态管理器：一种类似于字典的数据结构，能够可靠地存储密钥-值对。状态管理器是围绕状态提供程序的包装。它可用于存储数据，而不论使用的是哪一种持久性设置，但不保证运行中的执行组件服务可在保留数据的同时，以通过滚动升级从易失性（仅在内存中）状态设置更改保存的状态设置。但是，针对运行中的服务更改副本计数是可行的。
@@ -96,38 +104,42 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 
 如果给定键的条目不存在，可以使用引发 `KeyNotFoundException` 的标准 *Get* 操作来检索状态：
 
-    [StatePersistence(StatePersistence.Persisted)]
-    class MyActor : Actor, IMyActor
+```
+[StatePersistence(StatePersistence.Persisted)]
+class MyActor : Actor, IMyActor
+{
+    public MyActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public MyActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public Task<int> GetCountAsync()
-        {
-            return this.StateManager.GetStateAsync<int>("MyState");
-        }
     }
+    public Task<int> GetCountAsync()
+    {
+        return this.StateManager.GetStateAsync<int>("MyState");
+    }
+}
+```
 
 如果给定键的条目不存在，还可以使用不引发异常的 *TryGet* 方法来检索状态：
 
-    class MyActor : Actor, IMyActor
+```
+class MyActor : Actor, IMyActor
+{
+    public MyActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public MyActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public async Task<int> GetCountAsync()
-        {
-            ConditionalValue<int> result = await this.StateManager.TryGetStateAsync<int>("MyState");
-            if (result.HasValue)
-            {
-                return result.Value;
-            }
-
-            return 0;
-        }
     }
+    public async Task<int> GetCountAsync()
+    {
+        ConditionalValue<int> result = await this.StateManager.TryGetStateAsync<int>("MyState");
+        if (result.HasValue)
+        {
+            return result.Value;
+        }
+
+        return 0;
+    }
+}
+```
 
 ### 保存状态
 
@@ -135,101 +147,113 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 
 可以使用无条件的 *Set*（相当于 `dictionary["key"] = value` 语法）来插入状态：
 
-    [StatePersistence(StatePersistence.Persisted)]
-    class MyActor : Actor, IMyActor
+```
+[StatePersistence(StatePersistence.Persisted)]
+class MyActor : Actor, IMyActor
+{
+    public MyActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public MyActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public Task SetCountAsync(int value)
-        {
-            return this.StateManager.SetStateAsync<int>("MyState", value);
-        }
     }
+    public Task SetCountAsync(int value)
+    {
+        return this.StateManager.SetStateAsync<int>("MyState", value);
+    }
+}
+```
 
 可以使用 *Add* 方法来添加状态，但尝试添加已存在的键时会引发 `InvalidOperationException`：
 
-    [StatePersistence(StatePersistence.Persisted)]
-    class MyActor : Actor, IMyActor
+```
+[StatePersistence(StatePersistence.Persisted)]
+class MyActor : Actor, IMyActor
+{
+    public MyActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public MyActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public Task AddCountAsync(int value)
-        {
-            return this.StateManager.AddStateAsync<int>("MyState", value);
-        }
     }
+    public Task AddCountAsync(int value)
+    {
+        return this.StateManager.AddStateAsync<int>("MyState", value);
+    }
+}
+```
 
 还可以使用 *TryAdd* 方法来添加状态，但尝试添加已存在的键时不会引发异常：
 
-    [StatePersistence(StatePersistence.Persisted)]
-    class MyActor : Actor, IMyActor
+```
+[StatePersistence(StatePersistence.Persisted)]
+class MyActor : Actor, IMyActor
+{
+    public MyActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public MyActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public async Task AddCountAsync(int value)
-        {
-            bool result = await this.StateManager.TryAddStateAsync<int>("MyState", value);
+    }
+    public async Task AddCountAsync(int value)
+    {
+        bool result = await this.StateManager.TryAddStateAsync<int>("MyState", value);
 
-            if (result)
-            {
-                // Added successfully!
-            }
+        if (result)
+        {
+            // Added successfully!
         }
     }
+}
+```
 
 在执行组件方法结束时，状态管理器将自动保存通过插入或更新操作添加或修改的任何值。根据所用的设置，“保存”可能包括持久保存到磁盘和复制。未修改的值不会持久保存或复制。如果未修改任何值，保存操作不起作用。如果保存失败，将丢弃修改的状态并重新加载原始状态。
 
 还可以通过对执行组件基调用 `SaveStateAsync` 方法来手动保存状态：
 
-    async Task IMyActor.SetCountAsync(int count)
-    {
-        await this.StateManager.AddOrUpdateStateAsync("count", count, (key, value) => count > value ? count : value);
+```
+async Task IMyActor.SetCountAsync(int count)
+{
+    await this.StateManager.AddOrUpdateStateAsync("count", count, (key, value) => count > value ? count : value);
 
-        await this.SaveStateAsync();
-    }
+    await this.SaveStateAsync();
+}
+```
 
 ### 删除状态
 
 可以通过调用 *Remove* 方法，从执行组件的状态管理器中永久删除状态。尝试删除不存在的键时，此方法会引发 `KeyNotFoundException`：
 
-    [StatePersistence(StatePersistence.Persisted)]
-    class MyActor : Actor, IMyActor
+```
+[StatePersistence(StatePersistence.Persisted)]
+class MyActor : Actor, IMyActor
+{
+    public MyActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public MyActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public Task RemoveCountAsync()
-        {
-            return this.StateManager.RemoveStateAsync("MyState");
-        }
     }
+    public Task RemoveCountAsync()
+    {
+        return this.StateManager.RemoveStateAsync("MyState");
+    }
+}
+```
 
 还可以使用 *TryRemove* 方法永久删除状态，此方法在尝试删除不存在的键时不会引发异常：
 
-    [StatePersistence(StatePersistence.Persisted)]
-    class MyActor : Actor, IMyActor
+```
+[StatePersistence(StatePersistence.Persisted)]
+class MyActor : Actor, IMyActor
+{
+    public MyActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public MyActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public async Task RemoveCountAsync()
-        {
-            bool result = await this.StateManager.TryRemoveStateAsync("MyState");
+    }
+    public async Task RemoveCountAsync()
+    {
+        bool result = await this.StateManager.TryRemoveStateAsync("MyState");
 
-            if (result)
-            {
-                // State removed!
-            }
+        if (result)
+        {
+            // State removed!
         }
     }
+}
+```
 
 ## 后续步骤
  - [执行组件类型序列化](./service-fabric-reliable-actors-notes-on-actor-type-serialization.md)

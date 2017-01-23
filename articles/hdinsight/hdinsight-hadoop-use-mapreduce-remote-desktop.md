@@ -47,7 +47,9 @@ ms.author: larryfr
 
 2. 要使用 **Hadoop** 命令运行示例 MapReduce 作业，请使用以下命令：
 
-        hadoop jar hadoop-mapreduce-examples.jar wordcount wasbs:///example/data/gutenberg/davinci.txt wasbs:///example/data/WordCountOutput
+    ```
+    hadoop jar hadoop-mapreduce-examples.jar wordcount wasbs:///example/data/gutenberg/davinci.txt wasbs:///example/data/WordCountOutput
+    ```
 
     这将启动 **wordcount** 类（包含在当前目录下的 **hadoop-mapreduce-examples.jar** 文件中）。它使用 **wasbs://example/data/gutenberg/davinci.txt** 文档作为输入，输出将存储到 **wasbs:///example/data/WordCountOutput**。
 
@@ -56,14 +58,18 @@ ms.author: larryfr
 
 2. 作业在处理时提供详细信息，并在完成时返回如下信息：
 
-        File Input Format Counters
-        Bytes Read=1395666
-        File Output Format Counters
-        Bytes Written=337623
+    ```
+    File Input Format Counters
+    Bytes Read=1395666
+    File Output Format Counters
+    Bytes Written=337623
+    ```
 
 3. 作业完成时，使用以下命令列出存储在 **wasbs://example/data/WordCountOutput** 上的输出文件：
 
-        hadoop fs -ls wasbs:///example/data/WordCountOutput
+    ```
+    hadoop fs -ls wasbs:///example/data/WordCountOutput
+    ```
 
     这会显示两个文件：**\_SUCCESS** 和 **part-r-00000**。**part-r-00000** 文件包含此作业的输出。
 
@@ -72,17 +78,21 @@ ms.author: larryfr
 
 4. 要查看输出，请使用以下命令：
 
-        hadoop fs -cat wasbs:///example/data/WordCountOutput/part-r-00000
+    ```
+    hadoop fs -cat wasbs:///example/data/WordCountOutput/part-r-00000
+    ```
 
     这会显示 **wasbs://example/data/gutenberg/davinci.txt** 文件中包含的单词列表，以及每个单词的出现次数。下面是要包含在文件中的数据示例：
 
-        wreathed        3
-        wreathing       1
-        wreaths 		1
-        wrecked 		3
-        wrenching       1
-        wretched        6
-        wriggling       1
+    ```
+    wreathed        3
+    wreathing       1
+    wreaths 		1
+    wrecked 		3
+    wrenching       1
+    wretched        6
+    wriggling       1
+    ```
 
 ## <a id="summary"></a>摘要
 

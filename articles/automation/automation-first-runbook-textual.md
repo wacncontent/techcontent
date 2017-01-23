@@ -45,16 +45,20 @@ ms.author: magoedte;bwren
 
 1. 我们的 Runbook 目前是空的，只有必需的 *workflow* 关键字、Runbook 名称以及括住整个工作流的大括号。
 
-        Workflow MyFirstRunbook-Workflow
-        {
-        }
+    ```
+    Workflow MyFirstRunbook-Workflow
+    {
+    }
+    ```
 
 2. 在大括号之间键入 *Write-Output "Hello World"*。
 
-        Workflow MyFirstRunbook-Workflow
-        {
-          Write-Output "Hello World"
-        }
+    ```
+    Workflow MyFirstRunbook-Workflow
+    {
+      Write-Output "Hello World"
+    }
+    ```
 
 3. 通过单击“保存”来保存 Runbook。
 
@@ -89,21 +93,25 @@ ms.author: magoedte;bwren
 5.  在 **Get-AutomationPSCredential** 前面，输入 *$Credential =* 以将凭据分配给变量。
 3.  在下一行中键入 *Add-AzureRmAccount -Credential $Credential -EnvironmentName AzureChinaCloud*。
 
-        workflow test
-        {
-            $Credential = Get-AutomationPSCredential -Name "<your credential>"
-            Add-AzureRmAccount -Credential $Credential -EnvironmentName AzureChinaCloud
-        }
+    ```
+    workflow test
+    {
+        $Credential = Get-AutomationPSCredential -Name "<your credential>"
+        Add-AzureRmAccount -Credential $Credential -EnvironmentName AzureChinaCloud
+    }
+    ```
 
 3. 单击“测试”，然后在出现提示时单击“是”。
 10.  完成后，你应会收到类似于下面的输出，这是向凭据中的用户返回的信息。这是对凭据有效的确认。
 
-        PSComputeerName			: localhost
-        PSSourceJobInstanceID	: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        Id						: azureuser@contoso.com
-        Type					: User
-        Subscriptions			: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        Tenants					: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    ```
+    PSComputeerName			: localhost
+    PSSourceJobInstanceID	: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Id						: azureuser@contoso.com
+    Type					: User
+    Subscriptions			: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Tenants					: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    ```
 
 ## 步骤 6 – 添加用于启动虚拟机的代码
 
@@ -111,13 +119,15 @@ ms.author: magoedte;bwren
 
 1. 在 *Add-AzureRmAccount* 后面键入 *Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'NameofResourceGroup'*（提供要启动的虚拟机的名称和资源组名称）。
 
-        workflow MyFirstRunbook-Workflow
-        {
-         $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
-         Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
+    ```
+    workflow MyFirstRunbook-Workflow
+    {
+     $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
+     Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
 
-         Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'ResourceGroupName'
-        }
+     Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'ResourceGroupName'
+    }
+    ```
 
 9. 保存 Runbook，然后单击“测试”，以便我们可以测试 Runbook。
 
@@ -127,16 +137,18 @@ ms.author: magoedte;bwren
 
 1. 将 *VMName* 和 *ResourceGroupName* 的参数添加到 Runbook，并将这些变量与 **Start-AzureRmVM** cmdlet 配合使用，如以下示例所示。
 
-        workflow MyFirstRunbook-Workflow
-        {
-           Param(
-            [string]$VMName,
-            [string]$ResourceGroupName
-           )  
-         $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
-         Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
-         Start-AzureRmVM -Name $VMName -ResourceGroupName $ResourceGroupName
-        }
+    ```
+    workflow MyFirstRunbook-Workflow
+    {
+       Param(
+        [string]$VMName,
+        [string]$ResourceGroupName
+       )  
+     $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
+     Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
+     Start-AzureRmVM -Name $VMName -ResourceGroupName $ResourceGroupName
+    }
+    ```
 
 2. 保存 Runbook 并打开“测试”窗格。请注意，现在可以为将在测试中使用的两个输入变量提供值。
 3. 关闭“测试”窗格。

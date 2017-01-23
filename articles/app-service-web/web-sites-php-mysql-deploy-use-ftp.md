@@ -68,34 +68,38 @@ ms.author: robmcm
 
 1. 创建名为 `registration` 的 MySQL 数据库。你可以在 MySQL 命令提示符中使用此命令执行此操作：
 
-        mysql> create database registration;
+    ```
+    mysql> create database registration;
+    ```
 
 2. 在 Web 服务器的根目录中，创建一个名为 `registration` 的文件夹，并在其中创建两个文件 - 一个名为 `createtable.php`，另一个名为 `index.php`。
 
 3. 在文本编辑器或 IDE 中打开 `createtable.php` 文件并添加以下代码。此代码用于在 `registration` 数据库中创建 `registration_tbl` 表。
 
-        <?php
-        // DB connection info
-        $host = "localhost";
-        $user = "user name";
-        $pwd = "password";
-        $db = "registration";
-        try{
-            $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
-            $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-            $sql = "CREATE TABLE registration_tbl(
-                        id INT NOT NULL AUTO_INCREMENT, 
-                        PRIMARY KEY(id),
-                        name VARCHAR(30),
-                        email VARCHAR(30),
-                        date DATE)";
-            $conn->query($sql);
-        }
-        catch(Exception $e){
-            die(print_r($e));
-        }
-        echo "<h3>Table created.</h3>";
-        ?>
+    ```
+    <?php
+    // DB connection info
+    $host = "localhost";
+    $user = "user name";
+    $pwd = "password";
+    $db = "registration";
+    try{
+        $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $sql = "CREATE TABLE registration_tbl(
+                    id INT NOT NULL AUTO_INCREMENT, 
+                    PRIMARY KEY(id),
+                    name VARCHAR(30),
+                    email VARCHAR(30),
+                    date DATE)";
+        $conn->query($sql);
+    }
+    catch(Exception $e){
+        die(print_r($e));
+    }
+    echo "<h3>Table created.</h3>";
+    ?>
+    ```
 
     > [!NOTE] 
     你需要使用本地 MySQL 用户名和密码更新 <code>$user</code> 和 <code>$pwd</code> 的值。
@@ -104,98 +108,106 @@ ms.author: robmcm
 
 5. 在文本编辑器或 IDE 中打开 **index.php** 文件，并为页面添加基本 HTML 和 CSS 代码（后续步骤会添加 PHP 代码）。
 
-        <html>
-        <head>
-        <Title>Registration Form</Title>
-        <style type="text/css">
-            body { background-color: #fff; border-top: solid 10px #000;
-                color: #333; font-size: .85em; margin: 20; padding: 20;
-                font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-            }
-            h1, h2, h3,{ color: #000; margin-bottom: 0; padding-bottom: 0; }
-            h1 { font-size: 2em; }
-            h2 { font-size: 1.75em; }
-            h3 { font-size: 1.2em; }
-            table { margin-top: 0.75em; }
-            th { font-size: 1.2em; text-align: left; border: none; padding-left: 0; }
-            td { padding: 0.25em 2em 0.25em 0em; border: 0 none; }
-        </style>
-        </head>
-        <body>
-        <h1>Register here!</h1>
-        <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
-        <form method="post" action="index.php" enctype="multipart/form-data" >
-              Name  <input type="text" name="name" id="name"/></br>
-              Email <input type="text" name="email" id="email"/></br>
-              <input type="submit" name="submit" value="Submit" />
-        </form>
-        <?php
+    ```
+    <html>
+    <head>
+    <Title>Registration Form</Title>
+    <style type="text/css">
+        body { background-color: #fff; border-top: solid 10px #000;
+            color: #333; font-size: .85em; margin: 20; padding: 20;
+            font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+        }
+        h1, h2, h3,{ color: #000; margin-bottom: 0; padding-bottom: 0; }
+        h1 { font-size: 2em; }
+        h2 { font-size: 1.75em; }
+        h3 { font-size: 1.2em; }
+        table { margin-top: 0.75em; }
+        th { font-size: 1.2em; text-align: left; border: none; padding-left: 0; }
+        td { padding: 0.25em 2em 0.25em 0em; border: 0 none; }
+    </style>
+    </head>
+    <body>
+    <h1>Register here!</h1>
+    <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
+    <form method="post" action="index.php" enctype="multipart/form-data" >
+          Name  <input type="text" name="name" id="name"/></br>
+          Email <input type="text" name="email" id="email"/></br>
+          <input type="submit" name="submit" value="Submit" />
+    </form>
+    <?php
 
-        ?>
-        </body>
-        </html>
+    ?>
+    </body>
+    </html>
+    ```
 
 6. 在 PHP 标记中，添加用于连接到数据库的 PHP 代码。
 
-        // DB connection info
-        $host = "localhost";
-        $user = "user name";
-        $pwd = "password";
-        $db = "registration";
-        // Connect to database.
-        try {
-            $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
-            $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        }
-        catch(Exception $e){
-            die(var_dump($e));
-        }
+    ```
+    // DB connection info
+    $host = "localhost";
+    $user = "user name";
+    $pwd = "password";
+    $db = "registration";
+    // Connect to database.
+    try {
+        $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    }
+    catch(Exception $e){
+        die(var_dump($e));
+    }
+    ```
 
     > [!NOTE]
     同样，需要使用本地 MySQL 用户名和密码更新 <code>$user</code> 和 <code>$pwd</code> 的值。
 
 7. 在数据库连接代码后面添加用于将注册信息插入数据库的代码。
 
-        if(!empty($_POST)) {
-        try {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $date = date("Y-m-d");
-            // Insert data
-            $sql_insert = "INSERT INTO registration_tbl (name, email, date) 
-                           VALUES (?,?,?)";
-            $stmt = $conn->prepare($sql_insert);
-            $stmt->bindValue(1, $name);
-            $stmt->bindValue(2, $email);
-            $stmt->bindValue(3, $date);
-            $stmt->execute();
-        }
-        catch(Exception $e) {
-            die(var_dump($e));
-        }
-        echo "<h3>Your're registered!</h3>";
-        }
+    ```
+    if(!empty($_POST)) {
+    try {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $date = date("Y-m-d");
+        // Insert data
+        $sql_insert = "INSERT INTO registration_tbl (name, email, date) 
+                       VALUES (?,?,?)";
+        $stmt = $conn->prepare($sql_insert);
+        $stmt->bindValue(1, $name);
+        $stmt->bindValue(2, $email);
+        $stmt->bindValue(3, $date);
+        $stmt->execute();
+    }
+    catch(Exception $e) {
+        die(var_dump($e));
+    }
+    echo "<h3>Your're registered!</h3>";
+    }
+    ```
 
 8. 最后，在上述代码后面添加从数据库中检索数据的代码。
 
-        $sql_select = "SELECT * FROM registration_tbl";
-        $stmt = $conn->query($sql_select);
-        $registrants = $stmt->fetchAll(); 
-        if(count($registrants) > 0) {
-            echo "<h2>People who are registered:</h2>";
-            echo "<table>";
-            echo "<tr><th>Name</th>";
-            echo "<th>Email</th>";
-            echo "<th>Date</th></tr>";
-            foreach($registrants as $registrant) {
-                echo "<tr><td>".$registrant['name']."</td>";
-                echo "<td>".$registrant['email']."</td>";
-                echo "<td>".$registrant['date']."</td></tr>";
-            }
-             echo "</table>";
-        } else {
-            echo "<h3>No one is currently registered.</h3>";
+    ```
+    $sql_select = "SELECT * FROM registration_tbl";
+    $stmt = $conn->query($sql_select);
+    $registrants = $stmt->fetchAll(); 
+    if(count($registrants) > 0) {
+        echo "<h2>People who are registered:</h2>";
+        echo "<table>";
+        echo "<tr><th>Name</th>";
+        echo "<th>Email</th>";
+        echo "<th>Date</th></tr>";
+        foreach($registrants as $registrant) {
+            echo "<tr><td>".$registrant['name']."</td>";
+            echo "<td>".$registrant['email']."</td>";
+            echo "<td>".$registrant['date']."</td></tr>";
         }
+         echo "</table>";
+    } else {
+        echo "<h3>No one is currently registered.</h3>";
+    }
+    ```
 
 你现在可以浏览到 [http://localhost/registration/index.php][localhost-index] 来测试应用。
 
@@ -227,9 +239,11 @@ ms.author: robmcm
 
 3. 查找带有 `publishMethod="FTP"` 的 `<publishProfile >` 元素，该元素与以下内容类似：
 
-        <publishProfile publishMethod="FTP" publishUrl="ftp://[mysite].chinacloudsites.cn/site/wwwroot" ftpPassiveMode="True" userName="[username]" userPWD="[password]" destinationAppUrl="http://[name].chinacloudsites.cn" 
-            ...
-        </publishProfile>
+    ```
+    <publishProfile publishMethod="FTP" publishUrl="ftp://[mysite].chinacloudsites.cn/site/wwwroot" ftpPassiveMode="True" userName="[username]" userPWD="[password]" destinationAppUrl="http://[name].chinacloudsites.cn" 
+        ...
+    </publishProfile>
+    ```
 
 记下 `publishUrl`、`userName` 和 `userPWD` 属性。
 
@@ -237,11 +251,13 @@ ms.author: robmcm
 
 在本地测试你的应用之后，你可以使用 FTP 将其发布到 Web 应用。但是，你首先需要更新应用程序中的数据库连接信息。使用之前获取的数据库连接信息（在“获取 MySQL 和 FTP 连接信息”部分中），使用适当的值在 `createdatabase.php` 和 `index.php` 文件中更新以下信息：
 
-    // DB connection info
-    $host = "value of Data Source";
-    $user = "value of User Id";
-    $pwd = "value of Password";
-    $db = "value of Database";
+```
+// DB connection info
+$host = "value of Data Source";
+$user = "value of User Id";
+$pwd = "value of Password";
+$db = "value of Database";
+```
 
 现在可以使用 FTP 发布应用。
 

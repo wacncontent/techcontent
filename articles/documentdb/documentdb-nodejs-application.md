@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: hero-article
 ms.date: 12/16/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: syamk
 ---
 
@@ -60,14 +60,20 @@ ms.author: syamk
 2. 导航到要在其中存储新应用程序的目录。
 3. 使用 Express 生成器生成名叫 **todo** 的新应用程序。
 
-        express todo
+    ```
+    express todo
+    ```
 4. 打开新的 **todo** 目录并安装依赖项。
 
-        cd todo
-        npm install
+    ```
+    cd todo
+    npm install
+    ```
 5. 运行新应用程序。
 
-        npm start
+    ```
+    npm start
+    ```
 6. 可以通过将浏览器导航到 http://localhost:3000 来查看新的应用程序。
 
     ![了解 Node.js - 浏览器窗口中 Hello World 应用程序的屏幕截图](./media/documentdb-nodejs-application/image12.png)  
@@ -79,31 +85,37 @@ ms.author: syamk
 
 1. 返回终端，通过 npm 安装 **async** 模块。
 
-        npm install async --save
+    ```
+    npm install async --save
+    ```
 2. 通过 npm 安装 **documentdb** 模块。这是 DocumentDB 所有奇迹发生的模块。
 
-        npm install documentdb --save
+    ```
+    npm install documentdb --save
+    ```
 3. 快速检查应用程序的 **package.json** 文件应显示其他模块。此文件将通知 Azure 当运行应用程序时要下载并安装的程序包。它应类似于下面的示例。
 
-        {
-          "name": "todo",
-          "version": "0.0.0",
-          "private": true,
-          "scripts": {
-            "start": "node ./bin/www"
-          },
-          "dependencies": {
-            "async": "^2.1.4",
-            "body-parser": "~1.15.2",
-            "cookie-parser": "~1.4.3",
-            "debug": "~2.2.0",
-            "documentdb": "^1.10.0",
-            "express": "~4.14.0",
-            "jade": "~1.11.0",
-            "morgan": "~1.7.0",
-            "serve-favicon": "~2.3.0"
-          }
-        }
+    ```
+    {
+      "name": "todo",
+      "version": "0.0.0",
+      "private": true,
+      "scripts": {
+        "start": "node ./bin/www"
+      },
+      "dependencies": {
+        "async": "^2.1.4",
+        "body-parser": "~1.15.2",
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.2.0",
+        "documentdb": "^1.10.0",
+        "express": "~4.14.0",
+        "jade": "~1.11.0",
+        "morgan": "~1.7.0",
+        "serve-favicon": "~2.3.0"
+      }
+    }
+    ```
 
     这将告知 Node（稍后告知 Azure），你的应用程序依赖于这些模块。
 
@@ -116,71 +128,73 @@ ms.author: syamk
 3. 在同一个 **models** 目录中，创建另一个名为 **docdbUtils.js** 的新文件。此文件将包含一些可重用的有用代码，我们将在整个应用程序期间用到这些代码。
 4. 将以下代码复制到 **docdbUtils.js** 中
 
-        var DocumentDBClient = require('documentdb').DocumentClient;
+    ```
+    var DocumentDBClient = require('documentdb').DocumentClient;
 
-        var DocDBUtils = {
-            getOrCreateDatabase: function (client, databaseId, callback) {
-                var querySpec = {
-                    query: 'SELECT * FROM root r WHERE r.id= @id',
-                    parameters: [{
-                        name: '@id',
-                        value: databaseId
-                    }]
-                };
+    var DocDBUtils = {
+        getOrCreateDatabase: function (client, databaseId, callback) {
+            var querySpec = {
+                query: 'SELECT * FROM root r WHERE r.id= @id',
+                parameters: [{
+                    name: '@id',
+                    value: databaseId
+                }]
+            };
 
-                client.queryDatabases(querySpec).toArray(function (err, results) {
-                    if (err) {
-                        callback(err);
+            client.queryDatabases(querySpec).toArray(function (err, results) {
+                if (err) {
+                    callback(err);
+
+                } else {
+                    if (results.length === 0) {
+                        var databaseSpec = {
+                            id: databaseId
+                        };
+
+                        client.createDatabase(databaseSpec, function (err, created) {
+                            callback(null, created);
+                        });
 
                     } else {
-                        if (results.length === 0) {
-                            var databaseSpec = {
-                                id: databaseId
-                            };
-
-                            client.createDatabase(databaseSpec, function (err, created) {
-                                callback(null, created);
-                            });
-
-                        } else {
-                            callback(null, results[0]);
-                        }
+                        callback(null, results[0]);
                     }
-                });
-            },
+                }
+            });
+        },
 
-            getOrCreateCollection: function (client, databaseLink, collectionId, callback) {
-                var querySpec = {
-                    query: 'SELECT * FROM root r WHERE r.id=@id',
-                    parameters: [{
-                        name: '@id',
-                        value: collectionId
-                    }]
-                };               
+        getOrCreateCollection: function (client, databaseLink, collectionId, callback) {
+            var querySpec = {
+                query: 'SELECT * FROM root r WHERE r.id=@id',
+                parameters: [{
+                    name: '@id',
+                    value: collectionId
+                }]
+            };               
 
-                client.queryCollections(databaseLink, querySpec).toArray(function (err, results) {
-                    if (err) {
-                        callback(err);
+            client.queryCollections(databaseLink, querySpec).toArray(function (err, results) {
+                if (err) {
+                    callback(err);
 
-                    } else {        
-                        if (results.length === 0) {
-                            var collectionSpec = {
-                                id: collectionId
-                            };
+                } else {        
+                    if (results.length === 0) {
+                        var collectionSpec = {
+                            id: collectionId
+                        };
 
-                            client.createCollection(databaseLink, collectionSpec, function (err, created) {
-                                callback(null, created);
-                            });
+                        client.createCollection(databaseLink, collectionSpec, function (err, created) {
+                            callback(null, created);
+                        });
 
-                        } else {
-                            callback(null, results[0]);
-                        }
+                    } else {
+                        callback(null, results[0]);
                     }
-                });
-            }
-        };
+                }
+            });
+        }
+    };
 
-        module.exports = DocDBUtils;
+    module.exports = DocDBUtils;
+    ```
 
     > [!TIP]
        > createCollection 采用一个用以指定集合 Offer 类型的可选 requestOptions 参数。如果没有提供任何 requestOptions.offerType 值，则将使用默认 Offer 类型创建集合。
@@ -192,203 +206,215 @@ ms.author: syamk
 5. 保存并关闭 **docdbUtils.js** 文件。
 6. 在 **taskDao.js** 文件的开头，添加以下代码以引用我们上面创建的 **DocumentDBClient** 和 **docdbUtils.js**：
 
-        var DocumentDBClient = require('documentdb').DocumentClient;
-        var docdbUtils = require('./docdbUtils');
+    ```
+    var DocumentDBClient = require('documentdb').DocumentClient;
+    var docdbUtils = require('./docdbUtils');
+    ```
 7. 接下来，你将添加代码以定义和导出 Task 对象。这负责初始化我们的 Task 对象，并设置我们将使用的数据库和文档集合。
 
-        function TaskDao(documentDBClient, databaseId, collectionId) {
-          this.client = documentDBClient;
-          this.databaseId = databaseId;
-          this.collectionId = collectionId;
+    ```
+    function TaskDao(documentDBClient, databaseId, collectionId) {
+      this.client = documentDBClient;
+      this.databaseId = databaseId;
+      this.collectionId = collectionId;
 
-          this.database = null;
-          this.collection = null;
-        }
+      this.database = null;
+      this.collection = null;
+    }
 
-        module.exports = TaskDao;
+    module.exports = TaskDao;
+    ```
 8. 然后添加以下代码以定义 Task 对象上的其他方法，该对象可与存储在 DocumentDB 中的数据进行交互。
 
-        TaskDao.prototype = {
-            init: function (callback) {
-                var self = this;
+    ```
+    TaskDao.prototype = {
+        init: function (callback) {
+            var self = this;
 
-                docdbUtils.getOrCreateDatabase(self.client, self.databaseId, function (err, db) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        self.database = db;
-                        docdbUtils.getOrCreateCollection(self.client, self.database._self, self.collectionId, function (err, coll) {
-                            if (err) {
-                                callback(err);
+            docdbUtils.getOrCreateDatabase(self.client, self.databaseId, function (err, db) {
+                if (err) {
+                    callback(err);
+                } else {
+                    self.database = db;
+                    docdbUtils.getOrCreateCollection(self.client, self.database._self, self.collectionId, function (err, coll) {
+                        if (err) {
+                            callback(err);
 
-                            } else {
-                                self.collection = coll;
-                            }
-                        });
-                    }
-                });
-            },
+                        } else {
+                            self.collection = coll;
+                        }
+                    });
+                }
+            });
+        },
 
-            find: function (querySpec, callback) {
-                var self = this;
+        find: function (querySpec, callback) {
+            var self = this;
 
-                self.client.queryDocuments(self.collection._self, querySpec).toArray(function (err, results) {
-                    if (err) {
-                        callback(err);
+            self.client.queryDocuments(self.collection._self, querySpec).toArray(function (err, results) {
+                if (err) {
+                    callback(err);
 
-                    } else {
-                        callback(null, results);
-                    }
-                });
-            },
+                } else {
+                    callback(null, results);
+                }
+            });
+        },
 
-            addItem: function (item, callback) {
-                var self = this;
+        addItem: function (item, callback) {
+            var self = this;
 
-                item.date = Date.now();
-                item.completed = false;
+            item.date = Date.now();
+            item.completed = false;
 
-                self.client.createDocument(self.collection._self, item, function (err, doc) {
-                    if (err) {
-                        callback(err);
+            self.client.createDocument(self.collection._self, item, function (err, doc) {
+                if (err) {
+                    callback(err);
 
-                    } else {
-                        callback(null, doc);
-                    }
-                });
-            },
+                } else {
+                    callback(null, doc);
+                }
+            });
+        },
 
-            updateItem: function (itemId, callback) {
-                var self = this;
+        updateItem: function (itemId, callback) {
+            var self = this;
 
-                self.getItem(itemId, function (err, doc) {
-                    if (err) {
-                        callback(err);
+            self.getItem(itemId, function (err, doc) {
+                if (err) {
+                    callback(err);
 
-                    } else {
-                        doc.completed = true;
+                } else {
+                    doc.completed = true;
 
-                        self.client.replaceDocument(doc._self, doc, function (err, replaced) {
-                            if (err) {
-                                callback(err);
+                    self.client.replaceDocument(doc._self, doc, function (err, replaced) {
+                        if (err) {
+                            callback(err);
 
-                            } else {
-                                callback(null, replaced);
-                            }
-                        });
-                    }
-                });
-            },
+                        } else {
+                            callback(null, replaced);
+                        }
+                    });
+                }
+            });
+        },
 
-            getItem: function (itemId, callback) {
-                var self = this;
+        getItem: function (itemId, callback) {
+            var self = this;
 
-                var querySpec = {
-                    query: 'SELECT * FROM root r WHERE r.id = @id',
-                    parameters: [{
-                        name: '@id',
-                        value: itemId
-                    }]
-                };
+            var querySpec = {
+                query: 'SELECT * FROM root r WHERE r.id = @id',
+                parameters: [{
+                    name: '@id',
+                    value: itemId
+                }]
+            };
 
-                self.client.queryDocuments(self.collection._self, querySpec).toArray(function (err, results) {
-                    if (err) {
-                        callback(err);
+            self.client.queryDocuments(self.collection._self, querySpec).toArray(function (err, results) {
+                if (err) {
+                    callback(err);
 
-                    } else {
-                        callback(null, results[0]);
-                    }
-                });
-            }
-        };
+                } else {
+                    callback(null, results[0]);
+                }
+            });
+        }
+    };
+    ```
 9. 保存并关闭 **taskDao.js** 文件。
 
 ### 创建控制器
 1. 在项目的 **routes** 目录中，创建一个名为 **tasklist.js** 的新文件。
 2. 将以下代码添加到 **tasklist.js**。这将加载 **tasklist.js** 使用的 DocumentDBClient 和 async 模块。这还定义了 **TaskList** 函数，将向该函数传递我们之前定义的 **Task** 对象的一个实例：
 
-        var DocumentDBClient = require('documentdb').DocumentClient;
-        var async = require('async');
+    ```
+    var DocumentDBClient = require('documentdb').DocumentClient;
+    var async = require('async');
 
-        function TaskList(taskDao) {
-          this.taskDao = taskDao;
-        }
+    function TaskList(taskDao) {
+      this.taskDao = taskDao;
+    }
 
-        module.exports = TaskList;
+    module.exports = TaskList;
+    ```
 3. 继续向 **tasklist.js** 文件添加用于 **showTasks、addTask** 和 **completeTasks** 的方法：
 
-        TaskList.prototype = {
-            showTasks: function (req, res) {
-                var self = this;
+    ```
+    TaskList.prototype = {
+        showTasks: function (req, res) {
+            var self = this;
 
-                var querySpec = {
-                    query: 'SELECT * FROM root r WHERE r.completed=@completed',
-                    parameters: [{
-                        name: '@completed',
-                        value: false
-                    }]
-                };
+            var querySpec = {
+                query: 'SELECT * FROM root r WHERE r.completed=@completed',
+                parameters: [{
+                    name: '@completed',
+                    value: false
+                }]
+            };
 
-                self.taskDao.find(querySpec, function (err, items) {
-                    if (err) {
-                        throw (err);
-                    }
+            self.taskDao.find(querySpec, function (err, items) {
+                if (err) {
+                    throw (err);
+                }
 
-                    res.render('index', {
-                        title: 'My ToDo List ',
-                        tasks: items
-                    });
+                res.render('index', {
+                    title: 'My ToDo List ',
+                    tasks: items
                 });
-            },
+            });
+        },
 
-            addTask: function (req, res) {
-                var self = this;
-                var item = req.body;
+        addTask: function (req, res) {
+            var self = this;
+            var item = req.body;
 
-                self.taskDao.addItem(item, function (err) {
+            self.taskDao.addItem(item, function (err) {
+                if (err) {
+                    throw (err);
+                }
+
+                res.redirect('/');
+            });
+        },
+
+        completeTask: function (req, res) {
+            var self = this;
+            var completedTasks = Object.keys(req.body);
+
+            async.forEach(completedTasks, function taskIterator(completedTask, callback) {
+                self.taskDao.updateItem(completedTask, function (err) {
                     if (err) {
-                        throw (err);
-                    }
-
-                    res.redirect('/');
-                });
-            },
-
-            completeTask: function (req, res) {
-                var self = this;
-                var completedTasks = Object.keys(req.body);
-
-                async.forEach(completedTasks, function taskIterator(completedTask, callback) {
-                    self.taskDao.updateItem(completedTask, function (err) {
-                        if (err) {
-                            callback(err);
-                        } else {
-                            callback(null);
-                        }
-                    });
-                }, function goHome(err) {
-                    if (err) {
-                        throw err;
+                        callback(err);
                     } else {
-                        res.redirect('/');
+                        callback(null);
                     }
                 });
-            }
-        };
+            }, function goHome(err) {
+                if (err) {
+                    throw err;
+                } else {
+                    res.redirect('/');
+                }
+            });
+        }
+    };
+    ```
 4. 保存并关闭 **tasklist.js** 文件。
 
 ### 添加 config.js
 1. 在项目目录中创建一个名为 **config.js** 的新文件。
 2. 将以下内容添加到 **config.js**。这将定义我们的应用程序所需的配置设置和值。
 
-        var config = {}
+    ```
+    var config = {}
 
-        config.host = process.env.HOST || "[the URI value from the DocumentDB Keys blade on http://portal.azure.cn]";
-        config.authKey = process.env.AUTH_KEY || "[the PRIMARY KEY value from the DocumentDB Keys blade on http://portal.azure.cn]";
-        config.databaseId = "ToDoList";
-        config.collectionId = "Items";
+    config.host = process.env.HOST || "[the URI value from the DocumentDB Keys blade on http://portal.azure.cn]";
+    config.authKey = process.env.AUTH_KEY || "[the PRIMARY KEY value from the DocumentDB Keys blade on http://portal.azure.cn]";
+    config.databaseId = "ToDoList";
+    config.collectionId = "Items";
 
-        module.exports = config;
+    module.exports = config;
+    ```
 3. 在 **config.js** 文件中，使用在 [Azure 门户预览](https://portal.azure.cn)上 DocumentDB 帐户的“密钥”边栏选项卡中找到的值更新 HOST 和 AUTH\_KEY 的值。
 4. 保存并关闭 **config.js** 文件。
 
@@ -396,15 +422,19 @@ ms.author: syamk
 1. 在项目目录中，打开 **app.js** 文件。此文件早于 Express Web 应用程序创建。
 2. 将以下代码添加到 **app.js** 顶部
 
-        var DocumentDBClient = require('documentdb').DocumentClient;
-        var config = require('./config');
-        var TaskList = require('./routes/tasklist');
-        var TaskDao = require('./models/taskDao');
+    ```
+    var DocumentDBClient = require('documentdb').DocumentClient;
+    var config = require('./config');
+    var TaskList = require('./routes/tasklist');
+    var TaskDao = require('./models/taskDao');
+    ```
 3. 此代码定义要使用的配置文件，并继续将此文件的值读取到不久就要使用的一些变量中。
 4. 替换 **app.js** 文件中的以下两行：
 
-        app.use('/', index);
-        app.use('/users', users); 
+    ```
+    app.use('/', index);
+    app.use('/users', users); 
+    ```
 
       使用下面的代码段：
 
@@ -428,60 +458,64 @@ ms.author: syamk
 1. **views** 目录中的 **layout.jade** 文件用作其他 .**jade** 文件的全局模板。在此步骤中，对其进行修改以使用 [Bootstrap](https://github.com/twbs/bootstrap)（一个可以轻松设计漂亮网站的工具包）。
 2. 打开在 **views** 文件夹中找到的 **layout.jade** 文件，并将内容替换为以下代码：
 
-        doctype html
-        html
-           head
-             title= title
-             link(rel='stylesheet', href='//ajax.aspnetcdn.com/ajax/bootstrap/3.3.2/css/bootstrap.min.css')
-             link(rel='stylesheet', href='/stylesheets/style.css')
-           body
-             nav.navbar.navbar-inverse.navbar-fixed-top
-               div.navbar-header
-                 a.navbar-brand(href='#') My Tasks
-             block content
-             script(src='//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js')
-             script(src='//ajax.aspnetcdn.com/ajax/bootstrap/3.3.2/bootstrap.min.js')
+    ```
+    doctype html
+    html
+       head
+         title= title
+         link(rel='stylesheet', href='//ajax.aspnetcdn.com/ajax/bootstrap/3.3.2/css/bootstrap.min.css')
+         link(rel='stylesheet', href='/stylesheets/style.css')
+       body
+         nav.navbar.navbar-inverse.navbar-fixed-top
+           div.navbar-header
+             a.navbar-brand(href='#') My Tasks
+         block content
+         script(src='//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js')
+         script(src='//ajax.aspnetcdn.com/ajax/bootstrap/3.3.2/bootstrap.min.js')
+    ```
 
     这将有效告知 **Jade** 引擎来为应用程序呈现某些 HTML，并创建名为 **content** 的**块**，我们可在其中提供内容页面的布局。保存并关闭此 **layout.jade** 文件。
 
 3. 现在打开 **index.jade** 文件（应用程序将要使用的视图），并将文件内容替换为以下代码：
 
-        extends layout
-        block content
-           h1 #{title}
-           br
+    ```
+    extends layout
+    block content
+       h1 #{title}
+       br
 
-           form(action="/completetask", method="post")
-             table.table.table-striped.table-bordered
+       form(action="/completetask", method="post")
+         table.table.table-striped.table-bordered
+           tr
+             td Name
+             td Category
+             td Date
+             td Complete
+           if (typeof tasks === "undefined")
+             tr
+               td
+           else
+             each task in tasks
                tr
-                 td Name
-                 td Category
-                 td Date
-                 td Complete
-               if (typeof tasks === "undefined")
-                 tr
-                   td
-               else
-                 each task in tasks
-                   tr
-                     td #{task.name}
-                     td #{task.category}
-                     - var date  = new Date(task.date);
-                     - var day   = date.getDate();
-                     - var month = date.getMonth() + 1;
-                     - var year  = date.getFullYear();
-                     td #{month + "/" + day + "/" + year}
-                     td
-                       input(type="checkbox", name="#{task.id}", value="#{!task.completed}", checked=task.completed)
-             button.btn(type="submit") Update tasks
-           hr
-           form.well(action="/addtask", method="post")
-             label Item Name:
-             input(name="name", type="textbox")
-             label Item Category:
-             input(name="category", type="textbox")
-             br
-             button.btn(type="submit") Add item
+                 td #{task.name}
+                 td #{task.category}
+                 - var date  = new Date(task.date);
+                 - var day   = date.getDate();
+                 - var month = date.getMonth() + 1;
+                 - var year  = date.getFullYear();
+                 td #{month + "/" + day + "/" + year}
+                 td
+                   input(type="checkbox", name="#{task.id}", value="#{!task.completed}", checked=task.completed)
+         button.btn(type="submit") Update tasks
+       hr
+       form.well(action="/addtask", method="post")
+         label Item Name:
+         input(name="name", type="textbox")
+         label Item Category:
+         input(name="category", type="textbox")
+         br
+         button.btn(type="submit") Add item
+    ```
 
     这将扩展布局，并为我们先前在 **layout.jade** 文件中看到的 **content** 占位符提供内容。
 
@@ -490,23 +524,25 @@ ms.author: syamk
     这应该是应用程序工作所需的所有内容了。
 4. 打开 **public\\stylesheets** 目录中的 **style.css** 文件并替换为以下代码：
 
-        body {
-          padding: 50px;
-          font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-        }
-        a {
-          color: #00B7FF;
-        }
-        .well label {
-          display: block;
-        }
-        .well input {
-          margin-bottom: 5px;
-        }
-        .btn {
-          margin-top: 5px;
-          border: outset 1px #C8C8C8;
-        }
+    ```
+    body {
+      padding: 50px;
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    }
+    a {
+      color: #00B7FF;
+    }
+    .well label {
+      display: block;
+    }
+    .well input {
+      margin-bottom: 5px;
+    }
+    .btn {
+      margin-top: 5px;
+      border: outset 1px #C8C8C8;
+    }
+    ```
 
     保存并关闭此 **style.css** 文件。
 
@@ -530,10 +566,14 @@ ms.author: syamk
 1. 如果尚未部署，则启用 Azure 网站的 git 存储库。可以在 [Local Git Deployment to Azure App Service](../app-service-web/app-service-deploy-local-git.md)（从本地 GIT 部署到 Azure App Service）主题中找到如何执行此操作的说明。
 2. 将 Azure 网站添加为 git 远程。
 
-        git remote add azure https://username@your-azure-website.scm.chinacloudsites.cn:443/your-azure-website.git
+    ```
+    git remote add azure https://username@your-azure-website.scm.chinacloudsites.cn:443/your-azure-website.git
+    ```
 3. 通过推送到远程进行部署。
 
-        git push azure master
+    ```
+    git push azure master
+    ```
 4. 在几秒钟内，git 将完成 Web 应用程序发布并启动浏览器，你可从中查看在 Azure 中运行的简单作品！
 
     祝贺你！ 你刚使用 Azure DocumentDB 生成第一个 Node.js Express Web 应用程序并将其发布到了 Azure 网站。
@@ -552,3 +592,4 @@ ms.author: syamk
 [Github]: https://github.com/Azure-Samples/documentdb-node-todo-app
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: wording and code update -->

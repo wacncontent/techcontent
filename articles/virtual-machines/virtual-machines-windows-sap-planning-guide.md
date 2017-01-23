@@ -622,7 +622,9 @@ Microsoft 在 2015 年 4 月推出了 Azure 高级存储。推出高级存储的
 
 在 Azure 中，VHD 名称遵循以下命名约定，需要为 Azure 中的 VHD 提供唯一的名称：
 
-    http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
+```
+http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
+```
 
 如前所述，此字符串必须唯一标识存储在 Azure 存储空间中的 VHD。
 
@@ -982,7 +984,9 @@ Azure 基础结构即服务不仅能够上载 VHD 和 SAP 系统，而且你还�
 
 然后，只需定义参数 SourceUri 作为要下载的 VHD 的 URL，定义 LocalFilePath 作为 VHD 的物理位置（包括其名称），即可利用该命令来实现此目的。该命令如下所示：
 
-    Save-AzureRmVhd -ResourceGroupName <resource group name of storage account> -SourceUri http://<storage account name>.blob.core.chinacloudapi.cn/<container name>/sapidedata.vhd -LocalFilePath E:\Azure_downloads\sapidesdata.vhd
+```
+Save-AzureRmVhd -ResourceGroupName <resource group name of storage account> -SourceUri http://<storage account name>.blob.core.chinacloudapi.cn/<container name>/sapidedata.vhd -LocalFilePath E:\Azure_downloads\sapidesdata.vhd
+```
 
 有关 Save-AzureRmVhd cmdlet 的更多详细信息，请查看 <https://msdn.microsoft.com/zh-cn/library/mt622705.aspx>。
 
@@ -992,7 +996,9 @@ Azure 基础结构即服务不仅能够上载 VHD 和 SAP 系统，而且你还�
 
 然后，只需定义要下载的 VHD 的参数 blob 和 container，并将目标定义为 VHD 的物理目标位置（包括其名称），即可利用该命令来实现此目的。该命令如下所示：
 
-    azure storage blob download --blob <name of the VHD to download> --container <container of the VHD to download> --account-name <storage account name of the VHD to download> --account-key <storage account key> --destination <destination of the VHD to download> 
+```
+azure storage blob download --blob <name of the VHD to download> --container <container of the VHD to download> --account-name <storage account name of the VHD to download> --account-key <storage account key> --destination <destination of the VHD to download> 
+```
 
 ### 在 Azure 内部传输 VM 和 VHD
 
@@ -1004,7 +1010,9 @@ SAP 系统，甚至是支持 SAP 应用程序层的专用 DBMS 服务器，都�
 
 数据磁盘作为 VHD 文件存储在 Azure 存储帐户中，并可直接附加到虚拟机或用作映像。在本例中，VHD 将复制到另一个位置，再附加到虚拟机。Azure 中 VHD 文件的完整名称必须在 Azure 中唯一。如前所述，此名称由三个部分组成，如下所示：
 
-    http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
+```
+http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
+```
 
 ##### Powershell
 可按[此文][storage-powershell-guide-full-copy-vhd]中所述，使用 Azure PowerShell cmdlet 来复制 VHD。
@@ -1025,25 +1033,29 @@ SAP 系统，甚至是支持 SAP 应用程序层的专用 DBMS 服务器，都�
 
 ##### Powershell
 
-    # attach a vhd to a vm
-    $vm = Get-AzureRmVM -ResourceGroupName <resource group name> -Name <vm name>
-    $vm = Add-AzureRmVMDataDisk -VM $vm -Name newdatadisk -VhdUri <path to vhd> -Caching <caching option> -DiskSizeInGB $null -Lun <lun e.g. 0> -CreateOption attach
-    $vm | Update-AzureRmVM
+```
+# attach a vhd to a vm
+$vm = Get-AzureRmVM -ResourceGroupName <resource group name> -Name <vm name>
+$vm = Add-AzureRmVMDataDisk -VM $vm -Name newdatadisk -VhdUri <path to vhd> -Caching <caching option> -DiskSizeInGB $null -Lun <lun e.g. 0> -CreateOption attach
+$vm | Update-AzureRmVM
 
-    # attach a copy of the vhd to a vm
-    $vm = Get-AzureRmVM -ResourceGroupName <resource group name> -Name <vm name>
-    $vm = Add-AzureRmVMDataDisk -VM $vm -Name newdatadisk -VhdUri <new path of vhd> -SourceImageUri <path to image vhd> -Caching <caching option> -DiskSizeInGB $null -Lun <lun e.g. 0> -CreateOption fromImage
-    $vm | Update-AzureRmVM
+# attach a copy of the vhd to a vm
+$vm = Get-AzureRmVM -ResourceGroupName <resource group name> -Name <vm name>
+$vm = Add-AzureRmVMDataDisk -VM $vm -Name newdatadisk -VhdUri <new path of vhd> -SourceImageUri <path to image vhd> -Caching <caching option> -DiskSizeInGB $null -Lun <lun e.g. 0> -CreateOption fromImage
+$vm | Update-AzureRmVM
+```
 
 ##### CLI
 
-    azure config mode arm 
+```
+azure config mode arm 
 
-    # attach a vhd to a vm
-    azure vm disk attach <resource group name> <vm name> <path to vhd>
+# attach a vhd to a vm
+azure vm disk attach <resource group name> <vm name> <path to vhd>
 
-    # attach a copy of the vhd to a vm
-    # this scenario is currently not possible with Azure CLI. A workaround is to manually copy the vhd to the destination.
+# attach a copy of the vhd to a vm
+# this scenario is currently not possible with Azure CLI. A workaround is to manually copy the vhd to the destination.
+```
 
 #### <a name="9789b076-2011-4afa-b2fe-b07a8aba58a1"></a>在 Azure 存储帐户之间复制磁盘
 无法在 Azure 门户预览中执行此任务。可以使用 Azure PowerShell cmdlet、Azure CLI 或第三方存储浏览器。PowerShell cmdlet 或 CLI 命令可以创建和管理 Blob，包括跨 Azure 订阅中的存储帐户和区域异步复制 Blob。
@@ -1103,12 +1115,16 @@ ___
 >
 > 将 Linux 交换文件放在 Linux 上的 /mnt /mnt/resource 下，如[此文][virtual-machines-linux-agent-user-guide]所述。可以在 Linux 代理 /etc/waagent.conf 的配置文件中配置交换文件。添加或更改以下设置：
 
-    ResourceDisk.EnableSwap=y
-    ResourceDisk.SwapSizeMB=30720
+```
+ResourceDisk.EnableSwap=y
+ResourceDisk.SwapSizeMB=30720
+```
 
 若要激活更改，需要使用以下命令重新启动 Linux 代理
 
-    sudo service waagent restart
+```
+sudo service waagent restart
+```
 
 有关建议的交换文件大小的详细信息，请参阅 SAP 说明 [1597355]
 
@@ -1271,82 +1287,98 @@ SAP GUI 不会立即连接到运行中的任何 SAP 实例（端口 32xx），�
 
 * 为每个培训/演示布局创建新资源组
 
-        $rgName = "SAPERPDemo1"
-        New-AzureRmResourceGroup -Name $rgName -Location "China North"
+    ```
+    $rgName = "SAPERPDemo1"
+    New-AzureRmResourceGroup -Name $rgName -Location "China North"
+    ```
 
 * 新建存储帐户
 
-        $suffix = Get-Random -Minimum 100000 -Maximum 999999
-        $account = New-AzureRmStorageAccount -ResourceGroupName $rgName -Name "saperpdemo$suffix" -SkuName Standard_LRS -Kind "Storage" -Location "China North"
+    ```
+    $suffix = Get-Random -Minimum 100000 -Maximum 999999
+    $account = New-AzureRmStorageAccount -ResourceGroupName $rgName -Name "saperpdemo$suffix" -SkuName Standard_LRS -Kind "Storage" -Location "China North"
+    ```
 
 * 为每个培训/演示布局创建新的虚拟网络，以允许使用相同的主机名和 IP 地址。虚拟网络受网络安全组的保护，只允许发往端口 3389 的流量，以针对 SSH 启用远程桌面访问和端口 22。
 
-        # Create a new Virtual Network
-        $rdpRule = New-AzureRmNetworkSecurityRuleConfig -Name SAPERPDemoNSGRDP -Protocol * -SourcePortRange * -DestinationPortRange 3389 -Access Allow -Direction Inbound -SourceAddressPrefix * -DestinationAddressPrefix * -Priority 100
-        $sshRule = New-AzureRmNetworkSecurityRuleConfig -Name SAPERPDemoNSGSSH -Protocol * -SourcePortRange * -DestinationPortRange 22 -Access Allow -Direction Inbound -SourceAddressPrefix * -DestinationAddressPrefix * -Priority 101
-        $nsg = New-AzureRmNetworkSecurityGroup -Name SAPERPDemoNSG -ResourceGroupName $rgName -Location  "China North" -SecurityRules $rdpRule,$sshRule
+    ```
+    # Create a new Virtual Network
+    $rdpRule = New-AzureRmNetworkSecurityRuleConfig -Name SAPERPDemoNSGRDP -Protocol * -SourcePortRange * -DestinationPortRange 3389 -Access Allow -Direction Inbound -SourceAddressPrefix * -DestinationAddressPrefix * -Priority 100
+    $sshRule = New-AzureRmNetworkSecurityRuleConfig -Name SAPERPDemoNSGSSH -Protocol * -SourcePortRange * -DestinationPortRange 22 -Access Allow -Direction Inbound -SourceAddressPrefix * -DestinationAddressPrefix * -Priority 101
+    $nsg = New-AzureRmNetworkSecurityGroup -Name SAPERPDemoNSG -ResourceGroupName $rgName -Location  "China North" -SecurityRules $rdpRule,$sshRule
 
-        $subnetConfig = New-AzureRmVirtualNetworkSubnetConfig -Name Subnet1 -AddressPrefix  10.0.1.0/24 -NetworkSecurityGroup $nsg
-        $vnet = New-AzureRmVirtualNetwork -Name SAPERPDemoVNet -ResourceGroupName $rgName -Location "China North"  -AddressPrefix 10.0.1.0/24 -Subnet $subnetConfig
+    $subnetConfig = New-AzureRmVirtualNetworkSubnetConfig -Name Subnet1 -AddressPrefix  10.0.1.0/24 -NetworkSecurityGroup $nsg
+    $vnet = New-AzureRmVirtualNetwork -Name SAPERPDemoVNet -ResourceGroupName $rgName -Location "China North"  -AddressPrefix 10.0.1.0/24 -Subnet $subnetConfig
+    ```
 
 * 创建可用于从 Internet 访问虚拟机的新公共 IP 地址
 
-        # Create a public IP address with a DNS name
-        $pip = New-AzureRmPublicIpAddress -Name SAPERPDemoPIP -ResourceGroupName $rgName -Location "China North" -DomainNameLabel $rgName.ToLower() -AllocationMethod Dynamic
+    ```
+    # Create a public IP address with a DNS name
+    $pip = New-AzureRmPublicIpAddress -Name SAPERPDemoPIP -ResourceGroupName $rgName -Location "China North" -DomainNameLabel $rgName.ToLower() -AllocationMethod Dynamic
+    ```
 
 * 为虚拟机创建新网络接口
 
-        # Create a new Network Interface
-        $nic = New-AzureRmNetworkInterface -Name SAPERPDemoNIC -ResourceGroupName $rgName -Location "China North" -Subnet $vnet.Subnets[0] -PublicIpAddress $pip 
+    ```
+    # Create a new Network Interface
+    $nic = New-AzureRmNetworkInterface -Name SAPERPDemoNIC -ResourceGroupName $rgName -Location "China North" -Subnet $vnet.Subnets[0] -PublicIpAddress $pip 
+    ```
 
 * 创建虚拟机。对于仅限云的方案，每个 VM 的名称都是相同的。这些 VM 中的 SAP NetWeaver 实例的 SAP SID 也是相同的。在 Azure 资源组中，VM 的名称需要唯一，但是，在不同的 Azure 资源组中，可以运行同名的 VM。Windows 的默认“Administrator”帐户和 Linux 的“root”帐户无效。因此，新的管理员用户名需要与密码一起定义。此外，还需要定义 VM 的大小。
 
-        #####
-        # Create a new virtual machine with an official image from the Azure Marketplace
-        #####
-        $cred=Get-Credential -Message "Type the name and password of the local administrator account."
-        $vmconfig = New-AzureRmVMConfig -VMName SAPERPDemo -VMSize Standard_D11
+    ```
+    #####
+    # Create a new virtual machine with an official image from the Azure Marketplace
+    #####
+    $cred=Get-Credential -Message "Type the name and password of the local administrator account."
+    $vmconfig = New-AzureRmVMConfig -VMName SAPERPDemo -VMSize Standard_D11
 
-        # select image
-        $vmconfig = Set-AzureRmVMSourceImage -VM $vmconfig -PublisherName "MicrosoftWindowsServer" -Offer "WindowsServer" -Skus "2012-R2-Datacenter" -Version "latest"
-        $vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Windows -ComputerName "SAPERPDemo" -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
-        # $vmconfig = Set-AzureRmVMSourceImage -VM $vmconfig -PublisherName "SUSE" -Offer "SLES" -Skus "12" -Version "latest"
-        # $vmconfig = Set-AzureRmVMSourceImage -VM $vmconfig -PublisherName "RedHat" -Offer "RHEL" -Skus "7.2" -Version "latest"
-        # $vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Linux -ComputerName "SAPERPDemo" -Credential $cred
+    # select image
+    $vmconfig = Set-AzureRmVMSourceImage -VM $vmconfig -PublisherName "MicrosoftWindowsServer" -Offer "WindowsServer" -Skus "2012-R2-Datacenter" -Version "latest"
+    $vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Windows -ComputerName "SAPERPDemo" -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
+    # $vmconfig = Set-AzureRmVMSourceImage -VM $vmconfig -PublisherName "SUSE" -Offer "SLES" -Skus "12" -Version "latest"
+    # $vmconfig = Set-AzureRmVMSourceImage -VM $vmconfig -PublisherName "RedHat" -Offer "RHEL" -Skus "7.2" -Version "latest"
+    # $vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Linux -ComputerName "SAPERPDemo" -Credential $cred
 
-        $vmconfig = Add-AzureRmVMNetworkInterface -VM $vmconfig -Id $nic.Id
+    $vmconfig = Add-AzureRmVMNetworkInterface -VM $vmconfig -Id $nic.Id
 
-        $diskName="os"
-        $osDiskUri=$account.PrimaryEndpoints.Blob.ToString() + "vhds/" + $diskName  + ".vhd"
-        $vmconfig = Set-AzureRmVMOSDisk -VM $vmconfig -Name $diskName -VhdUri $osDiskUri -CreateOption fromImage
-        $vm = New-AzureRmVM -ResourceGroupName $rgName -Location "China North" -VM $vmconfig
+    $diskName="os"
+    $osDiskUri=$account.PrimaryEndpoints.Blob.ToString() + "vhds/" + $diskName  + ".vhd"
+    $vmconfig = Set-AzureRmVMOSDisk -VM $vmconfig -Name $diskName -VhdUri $osDiskUri -CreateOption fromImage
+    $vm = New-AzureRmVM -ResourceGroupName $rgName -Location "China North" -VM $vmconfig
+    ```
 
     <br/>
 
-        #####
-        # Create a new virtual machine with a VHD that contains the private image that you want to use
-        #####
-        $cred=Get-Credential -Message "Type the name and password of the local administrator account."
-        $vmconfig = New-AzureRmVMConfig -VMName SAPERPDemo -VMSize Standard_D11
+    ```
+    #####
+    # Create a new virtual machine with a VHD that contains the private image that you want to use
+    #####
+    $cred=Get-Credential -Message "Type the name and password of the local administrator account."
+    $vmconfig = New-AzureRmVMConfig -VMName SAPERPDemo -VMSize Standard_D11
 
-        $vmconfig = Add-AzureRmVMNetworkInterface -VM $vmconfig -Id $nic.Id
+    $vmconfig = Add-AzureRmVMNetworkInterface -VM $vmconfig -Id $nic.Id
 
-        $diskName="osfromimage"
-        $osDiskUri=$account.PrimaryEndpoints.Blob.ToString() + "vhds/" + $diskName  + ".vhd"
+    $diskName="osfromimage"
+    $osDiskUri=$account.PrimaryEndpoints.Blob.ToString() + "vhds/" + $diskName  + ".vhd"
 
-        $vmconfig = Set-AzureRmVMOSDisk -VM $vmconfig -Name $diskName -VhdUri $osDiskUri -CreateOption fromImage -SourceImageUri <path to VHD that contains the OS image> -Windows
-        $vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Windows -ComputerName "SAPERPDemo" -Credential $cred
-        #$vmconfig = Set-AzureRmVMOSDisk -VM $vmconfig -Name $diskName -VhdUri $osDiskUri -CreateOption fromImage -SourceImageUri <path to VHD that contains the OS image> -Linux
-        #$vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Linux -ComputerName "SAPERPDemo" -Credential $cred
+    $vmconfig = Set-AzureRmVMOSDisk -VM $vmconfig -Name $diskName -VhdUri $osDiskUri -CreateOption fromImage -SourceImageUri <path to VHD that contains the OS image> -Windows
+    $vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Windows -ComputerName "SAPERPDemo" -Credential $cred
+    #$vmconfig = Set-AzureRmVMOSDisk -VM $vmconfig -Name $diskName -VhdUri $osDiskUri -CreateOption fromImage -SourceImageUri <path to VHD that contains the OS image> -Linux
+    #$vmconfig = Set-AzureRmVMOperatingSystem -VM $vmconfig -Linux -ComputerName "SAPERPDemo" -Credential $cred
 
-        $vm = New-AzureRmVM -ResourceGroupName $rgName -Location "China North" -VM $vmconfig
+    $vm = New-AzureRmVM -ResourceGroupName $rgName -Location "China North" -VM $vmconfig
+    ```
 
 * （可选）添加更多磁盘，并还原所需的内容。请注意，所有 Blob 名称（Blob 的 URL）在 Azure 中必须唯一。
 
-        # Optional: Attach additional data disks
-        $vm = Get-AzureRmVM -ResourceGroupName $rgName -Name SAPERPDemo
-        $dataDiskUri = $account.PrimaryEndpoints.Blob.ToString() + "vhds/datadisk.vhd"
-        Add-AzureRmVMDataDisk -VM $vm -Name datadisk -VhdUri $dataDiskUri -DiskSizeInGB 1023 -CreateOption empty | Update-AzureRmVM
+    ```
+    # Optional: Attach additional data disks
+    $vm = Get-AzureRmVM -ResourceGroupName $rgName -Name SAPERPDemo
+    $dataDiskUri = $account.PrimaryEndpoints.Blob.ToString() + "vhds/datadisk.vhd"
+    Add-AzureRmVMDataDisk -VM $vm -Name datadisk -VhdUri $dataDiskUri -DiskSizeInGB 1023 -CreateOption empty | Update-AzureRmVM
+    ```
 
 ##### CLI
 
@@ -1354,49 +1386,65 @@ SAP GUI 不会立即连接到运行中的任何 SAP 实例（端口 32xx），�
 
 * 为每个培训/演示布局创建新资源组
 
-        rgName=SAPERPDemo1
-        rgNameLower=saperpdemo1
-        azure group create $rgName "China North"
+    ```
+    rgName=SAPERPDemo1
+    rgNameLower=saperpdemo1
+    azure group create $rgName "China North"
+    ```
 
 * 新建存储帐户
 
-        azure storage account create --resource-group $rgName --location "China North" --kind Storage --sku-name LRS $rgNameLower
+    ```
+    azure storage account create --resource-group $rgName --location "China North" --kind Storage --sku-name LRS $rgNameLower
+    ```
 
 * 为每个培训/演示布局创建新的虚拟网络，以允许使用相同的主机名和 IP 地址。虚拟网络受网络安全组的保护，只允许发往端口 3389 的流量，以针对 SSH 启用远程桌面访问和端口 22。
 
-        azure network nsg create --resource-group $rgName --location "China North" --name SAPERPDemoNSG
-        azure network nsg rule create --resource-group $rgName --nsg-name SAPERPDemoNSG --name SAPERPDemoNSGRDP --protocol * --source-address-prefix * --source-port-range * --destination-address-prefix * --destination-port-range 3389 --access Allow --priority 100 --direction Inbound
-        azure network nsg rule create --resource-group $rgName --nsg-name SAPERPDemoNSG --name SAPERPDemoNSGSSH --protocol * --source-address-prefix * --source-port-range * --destination-address-prefix * --destination-port-range 22 --access Allow --priority 101 --direction Inbound
+    ```
+    azure network nsg create --resource-group $rgName --location "China North" --name SAPERPDemoNSG
+    azure network nsg rule create --resource-group $rgName --nsg-name SAPERPDemoNSG --name SAPERPDemoNSGRDP --protocol * --source-address-prefix * --source-port-range * --destination-address-prefix * --destination-port-range 3389 --access Allow --priority 100 --direction Inbound
+    azure network nsg rule create --resource-group $rgName --nsg-name SAPERPDemoNSG --name SAPERPDemoNSGSSH --protocol * --source-address-prefix * --source-port-range * --destination-address-prefix * --destination-port-range 22 --access Allow --priority 101 --direction Inbound
 
-        azure network vnet create --resource-group $rgName --name SAPERPDemoVNet --location "China North" --address-prefixes 10.0.1.0/24
-        azure network vnet subnet create --resource-group $rgName --vnet-name SAPERPDemoVNet --name Subnet1 --address-prefix 10.0.1.0/24 --network-security-group-name SAPERPDemoNSG
+    azure network vnet create --resource-group $rgName --name SAPERPDemoVNet --location "China North" --address-prefixes 10.0.1.0/24
+    azure network vnet subnet create --resource-group $rgName --vnet-name SAPERPDemoVNet --name Subnet1 --address-prefix 10.0.1.0/24 --network-security-group-name SAPERPDemoNSG
+    ```
 
 * 创建可用于从 Internet 访问虚拟机的新公共 IP 地址
 
-        azure network public-ip create --resource-group $rgName --name SAPERPDemoPIP --location "China North" --domain-name-label $rgNameLower --allocation-method Dynamic
+    ```
+    azure network public-ip create --resource-group $rgName --name SAPERPDemoPIP --location "China North" --domain-name-label $rgNameLower --allocation-method Dynamic
+    ```
 
 * 为虚拟机创建新网络接口
 
-        azure network nic create --resource-group $rgName --location "China North" --name SAPERPDemoNIC --public-ip-name SAPERPDemoPIP --subnet-name Subnet1 --subnet-vnet-name SAPERPDemoVNet 
+    ```
+    azure network nic create --resource-group $rgName --location "China North" --name SAPERPDemoNIC --public-ip-name SAPERPDemoPIP --subnet-name Subnet1 --subnet-vnet-name SAPERPDemoVNet 
+    ```
 
 * 创建虚拟机。对于仅限云的方案，每个 VM 的名称都是相同的。这些 VM 中的 SAP NetWeaver 实例的 SAP SID 也是相同的。在 Azure 资源组中，VM 的名称需要唯一，但是，在不同的 Azure 资源组中，可以运行同名的 VM。Windows 的默认“Administrator”帐户和 Linux 的“root”帐户无效。因此，新的管理员用户名需要与密码一起定义。此外，还需要定义 VM 的大小。
 
-        azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:latest --os-type Windows --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd --disable-boot-diagnostics
-        # azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --image-urn SUSE:SLES:12:latest --os-type Linux --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd --disable-boot-diagnostics
-        # azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --image-urn RedHat:RHEL:7.2:latest --os-type Linux --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd --disable-boot-diagnostics
+    ```
+    azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:latest --os-type Windows --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd --disable-boot-diagnostics
+    # azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --image-urn SUSE:SLES:12:latest --os-type Linux --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd --disable-boot-diagnostics
+    # azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --image-urn RedHat:RHEL:7.2:latest --os-type Linux --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd --disable-boot-diagnostics
+    ```
 
     <br/>
 
-        #####
-        # Create a new virtual machine with a VHD that contains the private image that you want to use
-        #####
-        azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --os-type Windows --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd -Q <path to image vhd> --disable-boot-diagnostics
-        #azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --os-type Linux --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd -Q <path to image vhd> --disable-boot-diagnostics
+    ```
+    #####
+    # Create a new virtual machine with a VHD that contains the private image that you want to use
+    #####
+    azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --os-type Windows --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd -Q <path to image vhd> --disable-boot-diagnostics
+    #azure vm create --resource-group $rgName --location "China North" --name SAPERPDemo --nic-name SAPERPDemoNIC --os-type Linux --admin-username <username> --admin-password <password> --vm-size Standard_D11 --os-disk-vhd https://$rgNameLower.blob.core.chinacloudapi.cn/vhds/os.vhd -Q <path to image vhd> --disable-boot-diagnostics
+    ```
 
 * （可选）添加更多磁盘，并还原所需的内容。请注意，所有 Blob 名称（Blob 的 URL）在 Azure 中必须唯一。
 
-        # Optional: Attach additional data disks
-        azure vm disk attach-new --resource-group $rgName --vm-name SAPERPDemo --size-in-gb 1023 --vhd-name datadisk
+    ```
+    # Optional: Attach additional data disks
+    azure vm disk attach-new --resource-group $rgName --vm-name SAPERPDemo --size-in-gb 1023 --vhd-name datadisk
+    ```
 
 ##### 模板
 可以使用 github 上 azure-quickstart-templates 存储库中的示例模板。
@@ -1803,7 +1851,9 @@ Azure 上 Linux 的 SAP HA 体系结构基本上与上述 Windows 相同。不�
 
 SAP 提供了相应的功能，用于在启动 VM 中的 OS 后立即启动 SAP 实例。SAP 知识库文章 [1909114] - How to start SAP instances automatically using parameter Autostart（如何使用参数 Autostart 自动启动 SAP 实例）中描述了确切的步骤。但是，SAP 不再建议使用此设置，因为假设多个 VM 已受到影响或每个 VM 已运行多个实例，将无法控制实例重新启动的顺序。假设这是一个 VM 中有一个 SAP 应用程序服务器实例的典型 Azure 方案，并且这是最终重新启动单个 VM 的方案，则 Autostart 实际上并不重要，可以通过将此参数添加到以下位置来启用它：
 
-    Autostart = 1
+```
+Autostart = 1
+```
 
 运行 SAP ABAP 和/或 Java 实例的启动配置文件。
 

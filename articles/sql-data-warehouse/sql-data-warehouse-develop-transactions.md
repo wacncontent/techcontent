@@ -62,39 +62,41 @@ SQL 数据仓库使用 XACT\_STATE() 函数（采用值 -2）来报告失败的�
 
 例如，在 SQL Server 中，您可能会看到如下所示的事务：
 
-    SET NOCOUNT ON;
-    DECLARE @xact_state smallint = 0;
+```
+SET NOCOUNT ON;
+DECLARE @xact_state smallint = 0;
 
-    BEGIN TRAN
-        BEGIN TRY
-            DECLARE @i INT;
-            SET     @i = CONVERT(int,'ABC');
-        END TRY
-        BEGIN CATCH
-            SET @xact_state = XACT_STATE();
+BEGIN TRAN
+    BEGIN TRY
+        DECLARE @i INT;
+        SET     @i = CONVERT(int,'ABC');
+    END TRY
+    BEGIN CATCH
+        SET @xact_state = XACT_STATE();
 
-            SELECT  ERROR_NUMBER()    AS ErrNumber
-            ,       ERROR_SEVERITY()  AS ErrSeverity
-            ,       ERROR_STATE()     AS ErrState
-            ,       ERROR_PROCEDURE() AS ErrProcedure
-            ,       ERROR_MESSAGE()   AS ErrMessage
-            ;
+        SELECT  ERROR_NUMBER()    AS ErrNumber
+        ,       ERROR_SEVERITY()  AS ErrSeverity
+        ,       ERROR_STATE()     AS ErrState
+        ,       ERROR_PROCEDURE() AS ErrProcedure
+        ,       ERROR_MESSAGE()   AS ErrMessage
+        ;
 
-            IF @@TRANCOUNT > 0
-            BEGIN
-                PRINT 'ROLLBACK';
-                ROLLBACK TRAN;
-            END
+        IF @@TRANCOUNT > 0
+        BEGIN
+            PRINT 'ROLLBACK';
+            ROLLBACK TRAN;
+        END
 
-        END CATCH;
+    END CATCH;
 
-    IF @@TRANCOUNT >0
-    BEGIN
-        PRINT 'COMMIT';
-        COMMIT TRAN;
-    END
+IF @@TRANCOUNT >0
+BEGIN
+    PRINT 'COMMIT';
+    COMMIT TRAN;
+END
 
-    SELECT @xact_state AS TransactionState;
+SELECT @xact_state AS TransactionState;
+```
 
 如果将代码按如上所示保持原样，会获得以下错误消息：
 
@@ -104,38 +106,40 @@ Msg 111233, Level 16, State 1, Line 1 111233；当前事务已中止，所有挂
 
 在 SQL 数据仓库中，该代码需要稍做更改：
 
-    SET NOCOUNT ON;
-    DECLARE @xact_state smallint = 0;
+```
+SET NOCOUNT ON;
+DECLARE @xact_state smallint = 0;
 
-    BEGIN TRAN
-        BEGIN TRY
-            DECLARE @i INT;
-            SET     @i = CONVERT(INT,'ABC');
-        END TRY
-        BEGIN CATCH
-            SET @xact_state = XACT_STATE();
+BEGIN TRAN
+    BEGIN TRY
+        DECLARE @i INT;
+        SET     @i = CONVERT(INT,'ABC');
+    END TRY
+    BEGIN CATCH
+        SET @xact_state = XACT_STATE();
 
-            IF @@TRANCOUNT > 0
-            BEGIN
-                PRINT 'ROLLBACK';
-                ROLLBACK TRAN;
-            END
+        IF @@TRANCOUNT > 0
+        BEGIN
+            PRINT 'ROLLBACK';
+            ROLLBACK TRAN;
+        END
 
-            SELECT  ERROR_NUMBER()    AS ErrNumber
-            ,       ERROR_SEVERITY()  AS ErrSeverity
-            ,       ERROR_STATE()     AS ErrState
-            ,       ERROR_PROCEDURE() AS ErrProcedure
-            ,       ERROR_MESSAGE()   AS ErrMessage
-            ;
-        END CATCH;
+        SELECT  ERROR_NUMBER()    AS ErrNumber
+        ,       ERROR_SEVERITY()  AS ErrSeverity
+        ,       ERROR_STATE()     AS ErrState
+        ,       ERROR_PROCEDURE() AS ErrProcedure
+        ,       ERROR_MESSAGE()   AS ErrMessage
+        ;
+    END CATCH;
 
-    IF @@TRANCOUNT >0
-    BEGIN
-        PRINT 'COMMIT';
-        COMMIT TRAN;
-    END
+IF @@TRANCOUNT >0
+BEGIN
+    PRINT 'COMMIT';
+    COMMIT TRAN;
+END
 
-    SELECT @xact_state AS TransactionState;
+SELECT @xact_state AS TransactionState;
+```
 
 现在观察到了预期行为。事务中的错误得到了管理，并且 ERROR\_* 函数提供了预期值。
 

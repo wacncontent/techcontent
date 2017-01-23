@@ -50,7 +50,9 @@ ms.author: cephalin
     如果尚未安装这些工具，请参阅[先决条件](#Prerequisites)中的下载链接。
 2. 如下所示登录 Azure ：
 
-        azure login -e AzureChinaCloud
+    ```
+    azure login -e AzureChinaCloud
+    ```
 
     按照帮助消息的提示继续此登录过程。
 
@@ -58,12 +60,16 @@ ms.author: cephalin
 
 3. 将 Azure CLI 更改为 ASM 模式，然后设置应用服务的部署用户。稍后使用凭据部署代码。
 
-        azure config mode asm
-        azure site deployment user set --username <username> --pass <password>
+    ```
+    azure config mode asm
+    azure site deployment user set --username <username> --pass <password>
+    ```
 
 4. 切换到工作目录 (`CD`) 并克隆示例应用，如下所示：
 
-        git clone <github_sample_url>
+    ```
+    git clone <github_sample_url>
+    ```
 
     ![在 Azure 中克隆第一个 Web 应用的应用示例代码](./media/app-service-web-get-started/2-clone-sample.png)  
 
@@ -78,11 +84,15 @@ ms.author: cephalin
 
 5. 更改为示例应用的存储库。例如：
 
-        cd app-service-web-html-get-started
+    ```
+    cd app-service-web-html-get-started
+    ```
 
 6. 在 Azure 中创建具有唯一应用名称及之前配置的部署用户的应用服务应用资源。出现提示时，指定所需的区域数目。
 
-        azure site create <app_name> --git --gitusername <username>
+    ```
+    azure site create <app_name> --git --gitusername <username>
+    ```
 
     ![在 Azure 中创建第一个 Web 应用的 Azure 资源](./media/app-service-web-get-started/4-create-site.png)  
 
@@ -90,7 +100,9 @@ ms.author: cephalin
 
 7. 像使用 Git 推送任何代码一样，将示例代码部署到 Azure 应用。出现提示时，使用之前配置的密码。
 
-        git push azure master
+    ```
+    git push azure master
+    ```
 
     ![在 Azure 中将代码推送到第一个 Web 应用](./media/app-service-web-get-started/5-push-code.png)  
 
@@ -101,14 +113,18 @@ ms.author: cephalin
 ## 查看应用实时运行
 若要查看 Azure 中实时运行的应用，请从存储库中的任何目录运行以下命令：
 
-    azure site browse
+```
+azure site browse
+```
 
 ## 更新应用
 现在可以使用 Git 随时从项目（存储库）根目录进行推送，以更新实时站点。操作方式与首次部署代码时相同。例如，每次想要推送已在本地测试的新更改时，只需从项目（存储库）根目录运行以下命令：
 
-    git add .
-    git commit -m "<your_message>"
-    git push azure master
+```
+git add .
+git commit -m "<your_message>"
+git push azure master
+```
 
 ## 后续步骤
 查找语言框架的首选开发和部署步骤：

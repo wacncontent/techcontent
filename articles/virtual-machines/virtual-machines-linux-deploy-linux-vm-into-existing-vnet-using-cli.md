@@ -34,18 +34,20 @@ ms.author: v-livech
 
 ### 将 VM 部署到 VNet、NSG 中并连接 VNic
 
-    azure vm create myVM \
-    -g myResourceGroup \
-    -l chinanorth \
-    -y linux \
-    -Q Debian \
-    -o myStorageAcct \
-    -u myAdminUser \
-    -M ~/.ssh/id_rsa.pub \
-    -n myVM \
-    -F myVNet \
-    -j mySubnet \
-    -N myVNic
+```
+azure vm create myVM \
+-g myResourceGroup \
+-l chinanorth \
+-y linux \
+-Q Debian \
+-o myStorageAcct \
+-u myAdminUser \
+-M ~/.ssh/id_rsa.pub \
+-n myVM \
+-F myVNet \
+-j mySubnet \
+-N myVNic
+```
 
 ## <a name="detailed-walkthrough"></a> 详细演练
 
@@ -55,51 +57,61 @@ ms.author: v-livech
 
 首先，我们将创建资源组，以便组织在本演练中创建的所有内容。有关 Azure 资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)
 
-    azure group create myResourceGroup \
-    --location chinanorth
+```
+azure group create myResourceGroup \
+--location chinanorth
+```
 
 ## 创建 VNet
 
 第一步是生成用于在其中启动 VM 的 VNet。该 VNet 包含本演练所用的一个子网。有关 Azure VNet 的详细信息，请参阅[使用 Azure CLI 创建虚拟网络](../virtual-network/virtual-networks-create-vnet-arm-cli.md)
 
-    azure network vnet create myVNet \
-    --resource-group myResourceGroup \
-    --address-prefixes 10.10.0.0/24 \
-    --location chinanorth
+```
+azure network vnet create myVNet \
+--resource-group myResourceGroup \
+--address-prefixes 10.10.0.0/24 \
+--location chinanorth
+```
 
 ## 创建 NSG
 
 子网在现有网络安全组后面构建，因此我们在构建子网之前先构建 NSG。Azure NSG 相当于网络层防火墙。有关 Azure NSG 的详细信息，请参阅[如何在 Azure CLI 中创建 NSG](../virtual-network/virtual-networks-create-nsg-arm-cli.md)
 
-    azure network nsg create myNSG \
-    --resource-group myResourceGroup \
-    --location chinanorth
+```
+azure network nsg create myNSG \
+--resource-group myResourceGroup \
+--location chinanorth
+```
 
 ## 添加入站 SSH 允许规则
 
 Linux VM 需要从 Internet 访问，因此需要允许通过网络将入站端口 22 流量传递到 Linux VM 上的端口 22 的规则。
 
-    azure network nsg rule create inboundSSH \
-    --resource-group myResourceGroup \
-    --nsg-name myNSG \
-    --access Allow \
-    --protocol Tcp \
-    --direction Inbound \
-    --priority 100 \
-    --source-address-prefix Internet \
-    --source-port-range 22 \
-    --destination-address-prefix 10.10.0.0/24 \
-    --destination-port-range 22
+```
+azure network nsg rule create inboundSSH \
+--resource-group myResourceGroup \
+--nsg-name myNSG \
+--access Allow \
+--protocol Tcp \
+--direction Inbound \
+--priority 100 \
+--source-address-prefix Internet \
+--source-port-range 22 \
+--destination-address-prefix 10.10.0.0/24 \
+--destination-port-range 22
+```
 
 ## 将子网添加到 VNet
 
 VNet 中的 VM 必须位于一个子网中。每个 VNet 可以有多个子网。创建子网并将子网与 NSG 相关联，以便将防火墙添加到子网。
 
-    azure network vnet subnet create mySubNet \
-    --resource-group myResourceGroup \
-    --vnet-name myVNet \
-    --address-prefix 10.10.0.0/26 \
-    --network-security-group-name myNSG
+```
+azure network vnet subnet create mySubNet \
+--resource-group myResourceGroup \
+--vnet-name myVNet \
+--address-prefix 10.10.0.0/26 \
+--network-security-group-name myNSG
+```
 
 现在，子网已添加到 VNet 中，并已与 NSG 和 NSG 规则相关联。
 
@@ -107,11 +119,13 @@ VNet 中的 VM 必须位于一个子网中。每个 VNet 可以有多个子网�
 
 虚拟网卡 (VNic) 很重要，因为用户可以通过将它们连接到不同的 VM 来重新使用它们，这使 VNic 保持作为静态资源，而 VM 可以是临时 VM。创建 VNic 并将其与上一步中创建的子网相关联。
 
-    azure network nic create myVNic \
-    -g myResourceGroup \
-    -l chinanorth \
-    -m myVNet \
-    -k mySubNet
+```
+azure network nic create myVNic \
+-g myResourceGroup \
+-l chinanorth \
+-m myVNet \
+-k mySubNet
+```
 
 ## 将 VM 部署到 VNet 和 NSG 中
 
@@ -119,17 +133,19 @@ VNet 中的 VM 必须位于一个子网中。每个 VNet 可以有多个子网�
 
 使用 Azure CLI 和 `azure vm create` 命令，将 Linux VM 部署到现有的 Azure 资源组、VNet、子网和 VNic 中。有关使用 CLI 部署完整的 VM 的详细信息，请参阅[使用 Azure CLI 创建完整的 Linux 环境](./virtual-machines-linux-create-cli-complete.md)
 
-    azure vm create myVM \
-    --resource-group myResourceGroup \
-    --location chinanorth \
-    --os-type linux \
-    --image-urn Debian \
-    --storage-account-name mystorageaccount \
-    --admin-username myAdminUser \
-    --ssh-publickey-file ~/.ssh/id_rsa.pub \
-    --vnet-name myVNet \
-    --vnet-subnet-name mySubnet \
-    --nic-name myVNic
+```
+azure vm create myVM \
+--resource-group myResourceGroup \
+--location chinanorth \
+--os-type linux \
+--image-urn Debian \
+--storage-account-name mystorageaccount \
+--admin-username myAdminUser \
+--ssh-publickey-file ~/.ssh/id_rsa.pub \
+--vnet-name myVNet \
+--vnet-subnet-name mySubnet \
+--nic-name myVNic
+```
 
 通过使用 CLI 标志调用现有资源，我们指示 Azure 将 VM 部署在现有网络内部。重述一遍，VNet 和子网一经部署，便可在 Azure 区域内保留为静态或永久资源。
 

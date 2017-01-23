@@ -163,36 +163,40 @@ Azure 密钥保管库是可以在 Azure资源管理器部署模型中使用的 A
 
 首先，订阅管理员向安全小组分配“密钥保管库参与者”和“用户访问管理员”角色。这样，安全团队便可以管理对其他资源的访问权限，以及管理资源组 ContosoAppRG 中的密钥保管库。
 
-    New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "key vault Contributor" -ResourceGroupName ContosoAppRG
-    New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "User Access Administrator" -ResourceGroupName ContosoAppRG
+```
+New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "key vault Contributor" -ResourceGroupName ContosoAppRG
+New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "User Access Administrator" -ResourceGroupName ContosoAppRG
+```
 
 以下脚本演示安全团队如何创建密钥保管库、设置日志记录，以及设置对其他角色和应用程序的访问权限。
 
-    # Create key vault and enable logging
-    $sa = Get-AzureRmStorageAccount -ResourceGroup ContosoAppRG -Name contosologstorage
-    $kv = New-AzureRmKeyVault -VaultName ContosoKeyVault -ResourceGroup ContosoAppRG -SKU premium -Location 'ChinaNorth' -EnabledForDeployment
-    Set-AzureRmDiagnosticSetting -ResourceId $kv.ResourceId -StorageAccountId $sa.Id -Enabled $true -Categories AuditEvent
+```
+# Create key vault and enable logging
+$sa = Get-AzureRmStorageAccount -ResourceGroup ContosoAppRG -Name contosologstorage
+$kv = New-AzureRmKeyVault -VaultName ContosoKeyVault -ResourceGroup ContosoAppRG -SKU premium -Location 'ChinaNorth' -EnabledForDeployment
+Set-AzureRmDiagnosticSetting -ResourceId $kv.ResourceId -StorageAccountId $sa.Id -Enabled $true -Categories AuditEvent
 
-    # Data plane permissions for Security team
-    Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -PermissionToKeys backup,create,delete,get,import,list,restore -PermissionToSecrets all
+# Data plane permissions for Security team
+Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -PermissionToKeys backup,create,delete,get,import,list,restore -PermissionToSecrets all
 
-    # Management plane permissions for Dev/ops
-    # Create a new role from an existing role
-    $devopsrole = Get-AzureRmRoleDefinition -Name "Virtual Machine Contributor"
-    $devopsrole.Id = $null
-    $devopsrole.Name = "Contoso App Devops"
-    $devopsrole.Description = "Can deploy VMs that need secrets from key vault"
-    $devlopsrole.AssignableScopes = @("/subscriptions/<SUBSCRIPTION-GUID>")
+# Management plane permissions for Dev/ops
+# Create a new role from an existing role
+$devopsrole = Get-AzureRmRoleDefinition -Name "Virtual Machine Contributor"
+$devopsrole.Id = $null
+$devopsrole.Name = "Contoso App Devops"
+$devopsrole.Description = "Can deploy VMs that need secrets from key vault"
+$devlopsrole.AssignableScopes = @("/subscriptions/<SUBSCRIPTION-GUID>")
 
-    # Add permission for dev/ops so they can deploy VMs that have secrets deployed from key vaults
-    $devopsrole.Actions.Add("Microsoft.KeyVault/vaults/deploy/action")
-    New-AzureRmRoleDefinition -Role $role
+# Add permission for dev/ops so they can deploy VMs that have secrets deployed from key vaults
+$devopsrole.Actions.Add("Microsoft.KeyVault/vaults/deploy/action")
+New-AzureRmRoleDefinition -Role $role
 
-    # Assign this newly defined role to Dev ops security group
-    New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Devops')[0].Id -RoleDefinitionName "Contoso App Devops" -ResourceGroupName ContosoAppRG
+# Assign this newly defined role to Dev ops security group
+New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Devops')[0].Id -RoleDefinitionName "Contoso App Devops" -ResourceGroupName ContosoAppRG
 
-    # Data plane permissions for Auditors
-    Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Auditors')[0].Id -PermissionToKeys list -PermissionToSecrets list
+# Data plane permissions for Auditors
+Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Auditors')[0].Id -PermissionToKeys list -PermissionToSecrets list
+```
 
 自定义的角色只能分配给创建 ContosoAppRG 资源组所在的订阅。如果要为其他订阅中的其他项目使用相同的自定义角色，应该在角色范围中添加更多的订阅。
 

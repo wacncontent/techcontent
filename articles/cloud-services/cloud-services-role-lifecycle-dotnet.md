@@ -48,17 +48,19 @@ Azure 使角色实例联机时，会调用 **OnStart** 方法。OnStart 代码�
 
 下面的代码示例演示如何重写 **OnStart** 方法。当角色实例启动并设置将日志记录数据传输到存储帐户时，此方法将配置并启动诊断监视器：
 
-    public override bool OnStart()
-    {
-        var config = DiagnosticMonitor.GetDefaultInitialConfiguration();
+```
+public override bool OnStart()
+{
+    var config = DiagnosticMonitor.GetDefaultInitialConfiguration();
 
-        config.DiagnosticInfrastructureLogs.ScheduledTransferLogLevelFilter = LogLevel.Error;
-        config.DiagnosticInfrastructureLogs.ScheduledTransferPeriod = TimeSpan.FromMinutes(5);
+    config.DiagnosticInfrastructureLogs.ScheduledTransferLogLevelFilter = LogLevel.Error;
+    config.DiagnosticInfrastructureLogs.ScheduledTransferPeriod = TimeSpan.FromMinutes(5);
 
-        DiagnosticMonitor.Start("DiagnosticsConnectionString", config);
+    DiagnosticMonitor.Start("DiagnosticsConnectionString", config);
 
-        return true;
-    }
+    return true;
+}
+```
 
 ## OnStop 方法
 

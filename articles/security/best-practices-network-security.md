@@ -285,15 +285,17 @@ ms.author: jonor;sivae
 #### UDR 描述
 默认情况下，以下系统路由定义为：
 
-        Effective routes : 
-         Address Prefix    Next hop type    Next hop IP address Status   Source     
-         --------------    -------------    ------------------- ------   ------     
-         {10.0.0.0/16}     VNETLocal                            Active   Default    
-         {0.0.0.0/0}       Internet                             Active   Default    
-         {10.0.0.0/8}      Null                                 Active   Default    
-         {100.64.0.0/10}   Null                                 Active   Default    
-         {172.16.0.0/12}   Null                                 Active   Default    
-         {192.168.0.0/16}  Null                                 Active   Default
+```
+    Effective routes : 
+     Address Prefix    Next hop type    Next hop IP address Status   Source     
+     --------------    -------------    ------------------- ------   ------     
+     {10.0.0.0/16}     VNETLocal                            Active   Default    
+     {0.0.0.0/0}       Internet                             Active   Default    
+     {10.0.0.0/8}      Null                                 Active   Default    
+     {100.64.0.0/10}   Null                                 Active   Default    
+     {172.16.0.0/12}   Null                                 Active   Default    
+     {192.168.0.0/16}  Null                                 Active   Default
+```
 
 VNETLocal 始终是该特定网络的虚拟网络的已定义地址前缀（也就是说，根据每个特定虚拟网络的定义方式，不同的虚拟网络有不同前缀）。其余系统路由是静态的，表中列出了其默认值。
 
@@ -310,12 +312,14 @@ VNETLocal 始终是该特定网络的虚拟网络的已定义地址前缀（也�
 
 路由表在创建后会绑定到其子网。前端子网路由表在创建并绑定到子网后将如下所示：
 
-        Effective routes : 
-         Address Prefix    Next hop type    Next hop IP address Status   Source     
-         --------------    -------------    ------------------- ------   ------     
-         {10.0.1.0/24}     VNETLocal                            Active 
-         {10.0.0.0/16}     VirtualAppliance 10.0.0.4            Active    
-         {0.0.0.0/0}       VirtualAppliance 10.0.0.4            Active
+```
+    Effective routes : 
+     Address Prefix    Next hop type    Next hop IP address Status   Source     
+     --------------    -------------    ------------------- ------   ------     
+     {10.0.1.0/24}     VNETLocal                            Active 
+     {10.0.0.0/16}     VirtualAppliance 10.0.0.4            Active    
+     {0.0.0.0/0}       VirtualAppliance 10.0.0.4            Active
+```
 
 >[!NOTE]
 > 现在可以将 UDR 应用到在其上连接了 ExpressRoute 线路的网关子网。

@@ -71,22 +71,26 @@ R 与 Azure Blob 存储 (WASB) 兼容，这样，存储在此的数据可以在 
 
 3. **运行 R 脚本**：通过粘贴并选择 R 脚本，然后按 ENTER，可以从 R 控制台直接运行该脚本。下面是一个简单的示例脚本，该脚本将生成 1 到 100 的数字，然后将其乘以 2。
 
-        library(rmr2)
-        library(rhdfs)
-        ints = to.dfs(1:100)
-        calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
-        from.dfs(calc)
+    ```
+    library(rmr2)
+    library(rhdfs)
+    ints = to.dfs(1:100)
+    calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
+    from.dfs(calc)
+    ```
 
 前两行调用随 R 一起安装的 RHadoop 库。最后一行将结果打印到控制台。输出应如下所示：
 
-    [1,]  1 2
-    [2,]  2 4
-    .
-    .
-    .
-    [98,]  98 196
-    [99,]  99 198
-    [100,] 100 200
+```
+[1,]  1 2
+[2,]  2 4
+.
+.
+.
+[98,]  98 196
+[99,]  99 198
+[100,] 100 200
+```
 
 ## 使用 Azure PowerShell 安装 R
 

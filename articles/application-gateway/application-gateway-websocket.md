@@ -29,84 +29,90 @@ ms.author: amsriva
 
 现有的 HTTPListener 可用于支持 WebSocket。以下是示例模板文件中 HttpListeners 元素的代码片段。需要同时拥有 HTTP 和 HTTPS 侦听器才能支持 WebSocket 并保护 WebSocket 流量。同样，可以使用[门户](./application-gateway-create-gateway-portal.md)或 [PowerShell](./application-gateway-create-gateway-arm.md) 在端口 80/443 上创建具有侦听器的应用程序网关，以支持 WebSocket 通信。
 
-    "httpListeners": [
-                {
-                    "name": "appGatewayHttpsListener",
-                    "properties": {
-                        "FrontendIPConfiguration": {
-                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/DefaultFrontendPublicIP"
-                        },
-                        "FrontendPort": {
-                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort443'"
-                        },
-                        "Protocol": "Https",
-                        "SslCertificate": {
-                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/sslCertificates/appGatewaySslCert1'"
-                        },
-                    }
-                },
-                {
-                    "name": "appGatewayHttpListener",
-                    "properties": {
-                        "FrontendIPConfiguration": {
-                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/appGatewayFrontendIP'"
-                        },
-                        "FrontendPort": {
-                            "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort80'"
-                        },
-                        "Protocol": "Http",
-                    }
+```
+"httpListeners": [
+            {
+                "name": "appGatewayHttpsListener",
+                "properties": {
+                    "FrontendIPConfiguration": {
+                        "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/DefaultFrontendPublicIP"
+                    },
+                    "FrontendPort": {
+                        "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort443'"
+                    },
+                    "Protocol": "Https",
+                    "SslCertificate": {
+                        "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/sslCertificates/appGatewaySslCert1'"
+                    },
                 }
-            ],
+            },
+            {
+                "name": "appGatewayHttpListener",
+                "properties": {
+                    "FrontendIPConfiguration": {
+                        "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendIPConfigurations/appGatewayFrontendIP'"
+                    },
+                    "FrontendPort": {
+                        "Id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/frontendPorts/appGatewayFrontendPort80'"
+                    },
+                    "Protocol": "Http",
+                }
+            }
+        ],
+```
 
 ## BackendAddressPool、BackendHttpSetting 和路由规则配置
 
 如果后端池具有已启用 WebSocket 的服务器，那么应使用 BackendAddressPool 对其进行定义。只能使用后端端口 80/443 对 BackendHttpSetting 进行定义。基于 cookie 的相关性和 requestTimeouts 的属性与 WebSocket 流量不相关。不需更改路由规则。应继续使用“基本”路由规则，以便将适当的侦听器绑定到相应的后端地址池。
 
-    "requestRoutingRules": [{
-        "name": "<ruleName1>",
-        "properties": {
-            "RuleType": "Basic",
-            "httpListener": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpsListener')]"
-            },
-            "backendAddressPool": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/ContosoServerPool')]"
-            },
-            "backendHttpSettings": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
-            }
+```
+"requestRoutingRules": [{
+    "name": "<ruleName1>",
+    "properties": {
+        "RuleType": "Basic",
+        "httpListener": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpsListener')]"
+        },
+        "backendAddressPool": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/ContosoServerPool')]"
+        },
+        "backendHttpSettings": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+        }
+    }
+
+}, {
+    "name": "<ruleName2>",
+    "properties": {
+        "RuleType": "Basic",
+        "httpListener": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpListener')]"
+        },
+        "backendAddressPool": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/ContosoServerPool')]"
+        },
+        "backendHttpSettings": {
+            "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
         }
 
-    }, {
-        "name": "<ruleName2>",
-        "properties": {
-            "RuleType": "Basic",
-            "httpListener": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/httpListeners/appGatewayHttpListener')]"
-            },
-            "backendAddressPool": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendAddressPools/ContosoServerPool')]"
-            },
-            "backendHttpSettings": {
-                "id": "/subscriptions/<subid>/resourceGroups/<rgName>/providers/Microsoft.Network/applicationGateways/applicationGateway1/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
-            }
-
-        }
-    }]
+    }
+}]
+```
 
 ## 已启用 WebSocket 的后端
 
 后端必须具有在已配置端口（通常为 80/443）上运行的 HTTP/HTTPS Web 服务器，WebSocket 才能运行。此要求是因为 WebSocket 协议要求初始握手是 HTTP，且标头字段为升级到 WebSocket 协议。
 
-    GET /chat HTTP/1.1
-    Host: server.example.com
-    Upgrade: websocket
-    Connection: Upgrade
-    Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
-    Origin: http://example.com
-    Sec-WebSocket-Protocol: chat, superchat
-    Sec-WebSocket-Version: 13
+```
+GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Origin: http://example.com
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13
+```
 
 另一个原因是该应用程序网关后端运行状况探测仅支持 HTTP/HTTPS 协议。如果后端服务器没有响应 HTTP/HTTPS 探测，它将被移出后端池，且包括 WebSocket 请求在内的任何请求都无法到达此后端。
 

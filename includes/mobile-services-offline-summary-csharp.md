@@ -18,7 +18,9 @@
 
     例如，如果要对 userid 进行过滤，它需要是查询 ID 的一部分：
 
-        await PullAsync("todoItems" + userid, syncTable.Where(u => u.UserId = userid));
+    ```
+    await PullAsync("todoItems" + userid, syncTable.Where(u => u.UserId = userid));
+    ```
 
     如果您想要选择退出增量同步，请将  `null` 作为查询 ID 进行传递。在此情况下，在对  `PullAsync` 的每次调用中检索所有记录，这可能效率低下。
 

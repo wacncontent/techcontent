@@ -36,11 +36,13 @@ ms.author: masnider
 ## 如何配置相关性
 若要设置相关性，可以定义两个不同服务之间的相关性关系。可以将相关性想象成在一个服务上“指向”另一个服务，同时假设“这个服务只有在那个服务正在运行时才能运行”。 有时我们将这种相关性称为父子关系（将子级指向父级）。相关性确保将一个服务的副本或实例放置在与另一个服务的副本或实例相同的节点上。
 
-    ServiceCorrelationDescription affinityDescription = new ServiceCorrelationDescription();
-    affinityDescription.Scheme = ServiceCorrelationScheme.Affinity;
-    affinityDescription.ServiceName = new Uri("fabric:/otherApplication/parentService");
-    serviceDescription.Correlations.Add(affinityDescription);
-    await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
+```
+ServiceCorrelationDescription affinityDescription = new ServiceCorrelationDescription();
+affinityDescription.Scheme = ServiceCorrelationScheme.Affinity;
+affinityDescription.ServiceName = new Uri("fabric:/otherApplication/parentService");
+serviceDescription.Correlations.Add(affinityDescription);
+await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
+```
 
 ## 不同的相关性选项
 相关性通过多种相互关联的架构之一来表示，有两种不同的模式。相关性的最常见模式是所谓的 NonAlignedAffinity 模式。在 NonAlignedAffinity 下，不同服务的副本或实例放在同一个节点上。另一种模式是 AlignedAffinity。对齐的相关性仅适用于有状态服务。配置两个有状态服务实现对齐的相关性，可确保这些服务的主副本与其他服务的主副本位于相同的节点上。它还能确保这些服务的每个辅助副本对位于相同的节点上。也可以针对有状态服务配置 NonAlignedAffinity（但不太常见）。使用 NonAlignedAffinity 时，会将两个有状态服务的不同副本共置在相同的节点上，但不尝试对齐它们的主副本或辅助副本。

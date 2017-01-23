@@ -81,7 +81,9 @@ Tools选项卡下面提供了一些其他在线工具：
 
     输出实时日志到页面, 此功能也可以通过 curl 命令行 启动。
 
-        curl -u {username} https://{sitename}.scm.chinacloudsites.cn/logstream
+    ```
+    curl -u {username} https://{sitename}.scm.chinacloudsites.cn/logstream
+    ```
 
     页面打印如下格式的日志信息：
 

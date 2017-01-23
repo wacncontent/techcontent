@@ -46,30 +46,36 @@ ms.author: kundanap
 
 下面的示例将创建一个 VM，但同一方案也可在现有 VM 上运行。
 
-    # Create a new VM in Azure.
-    $vm = New-AzureVMConfig -Name $name -InstanceSize Small -ImageName $imagename
-    $vm = Add-AzureProvisioningConfig -VM $vm -Windows -AdminUsername $username -Password $password
-    // Add Custom Script extension to the VM. The container name refers to the storage container that contains the file.
-    $vm = Set-AzureVMCustomScriptExtension -VM $vm -ContainerName $container -FileName 'start.ps1'
-    New-AzureVM -ServiceName $servicename -Location $location -VMs $vm
-    #  After the VM is created, the extension downloads the script from the storage location and executes it on the VM.
+```
+# Create a new VM in Azure.
+$vm = New-AzureVMConfig -Name $name -InstanceSize Small -ImageName $imagename
+$vm = Add-AzureProvisioningConfig -VM $vm -Windows -AdminUsername $username -Password $password
+// Add Custom Script extension to the VM. The container name refers to the storage container that contains the file.
+$vm = Set-AzureVMCustomScriptExtension -VM $vm -ContainerName $container -FileName 'start.ps1'
+New-AzureVM -ServiceName $servicename -Location $location -VMs $vm
+#  After the VM is created, the extension downloads the script from the storage location and executes it on the VM.
 
-    # Viewing the  script execution output.
-    $vm = Get-AzureVM -ServiceName $servicename -Name $name
-    # Use the position of the extension in the output as index.
-    $vm.ResourceExtensionStatusList[i].ExtensionSettingStatus.SubStatusList
+# Viewing the  script execution output.
+$vm = Get-AzureVM -ServiceName $servicename -Name $name
+# Use the position of the extension in the output as index.
+$vm.ResourceExtensionStatusList[i].ExtensionSettingStatus.SubStatusList
+```
 
 ### 将文件上载到非默认存储容器
 
 此方案说明如何使用同一订阅中的或不同订阅中的非默认存储容器来上载脚本和文件。此示例演示的是现有 VM，但创建 VM 时也可执行同样的操作。
 
-        Get-AzureVM -Name $name -ServiceName $servicename | Set-AzureVMCustomScriptExtension -StorageAccountName $storageaccount -StorageAccountKey $storagekey -ContainerName $container -FileName 'file1.ps1','file2.ps1' -Run 'file.ps1' | Update-AzureVM
+```
+    Get-AzureVM -Name $name -ServiceName $servicename | Set-AzureVMCustomScriptExtension -StorageAccountName $storageaccount -StorageAccountKey $storagekey -ContainerName $container -FileName 'file1.ps1','file2.ps1' -Run 'file.ps1' | Update-AzureVM
+```
 
 ### 将脚本上载到不同存储帐户中的多个容器
 
   如果脚本文件存储在多个容器中，则要运行脚本，必须提供这些文件的完整共享访问签名 (SAS) URL。
 
-      Get-AzureVM -Name $name -ServiceName $servicename | Set-AzureVMCustomScriptExtension -StorageAccountName $storageaccount -StorageAccountKey $storagekey -ContainerName $container -FileUri $fileUrl1, $fileUrl2 -Run 'file.ps1' | Update-AzureVM
+  ```
+  Get-AzureVM -Name $name -ServiceName $servicename | Set-AzureVMCustomScriptExtension -StorageAccountName $storageaccount -StorageAccountKey $storagekey -ContainerName $container -FileUri $fileUrl1, $fileUrl2 -Run 'file.ps1' | Update-AzureVM
+  ```
 
 ### 从 Azure 门户预览添加自定义脚本扩展
 
@@ -81,7 +87,9 @@ ms.author: kundanap
 
 可以使用以下命令从 VM 中卸载自定义脚本扩展。
 
-      get-azureVM -ServiceName KPTRDemo -Name KPTRDemo | Set-AzureVMCustomScriptExtension -Uninstall | Update-AzureVM
+```
+  get-azureVM -ServiceName KPTRDemo -Name KPTRDemo | Set-AzureVMCustomScriptExtension -Uninstall | Update-AzureVM
+```
 
 ### 将自定义脚本扩展与模板配合使用
 

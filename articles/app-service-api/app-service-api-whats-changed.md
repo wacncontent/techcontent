@@ -42,23 +42,27 @@ API 应用更新的关键设计原则是让用户以所选的语言直接使用 
 ### CORS
 现在，Azure 管理门户中提供了一个边栏选项卡用于配置 CORS，而不再提供以逗号分隔的 **MS\_CrossDomainOrigins** 应用设置。也可以使用 Azure PowerShell、CLI 等 Resource Manager 工具进行配置。在 **&lt;site name&gt;/web** 资源的 **Microsoft.Web/sites/config** 资源类型中设置 **cors** 属性。例如：
 
-    {
-        "cors": {
-            "allowedOrigins": [
-                "https://localhost:44300"
-            ]
-        }
-    } 
+```
+{
+    "cors": {
+        "allowedOrigins": [
+            "https://localhost:44300"
+        ]
+    }
+} 
+```
 
 ### API 元数据
 Web 应用、移动应用和 API 应用中各自提供了 API 定义边栏选项卡。在管理门户中，可以指定相对 URL，或者提供指向 API 的 Swagger 2.0 表示形式所在的终结点的绝对 URL。也可以使用 Resource Manager 工具进行配置。在 **&lt;site name&gt;/web** 资源的 **Microsoft.Web/sites/config** 资源类型中设置 **apiDefinition** 属性。例如：
 
+```
+{
+    "apiDefinition":
     {
-        "apiDefinition":
-        {
-            "url": "https://myStorageAccount.blob.core.chinacloudapi.cn/swagger/apiDefinition.json"
-        }
+        "url": "https://myStorageAccount.blob.core.chinacloudapi.cn/swagger/apiDefinition.json"
     }
+}
+```
 
 目前，元数据终结点需要在不经过身份验证的情况下即可公开访问，使许多下游客户端（例如 Visual Studio REST API 客户端生成和 PowerApps 的“添加 API”流）能够使用它。这意味着，如果使用应用服务身份验证并想要从应用本身内部公开 API 定义，则需要使用前面所述的“延迟身份验证”选项，使 Swagger 元数据的路由公开。
 

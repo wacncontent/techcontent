@@ -63,16 +63,18 @@ ms.author: dastrock
 
 准备向公司管理员请求权限时，可以将用户重定向到 v2.0 **管理员许可终结点**。
 
-    // Line breaks for legibility only
+```
+// Line breaks for legibility only
 
-    GET https://login.microsoftonline.com/{tenant}/adminconsent?
-    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-    &state=12345
-    &redirect_uri=http://localhost/myapp/permissions
+GET https://login.microsoftonline.com/{tenant}/adminconsent?
+client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+&state=12345
+&redirect_uri=http://localhost/myapp/permissions
 
-    // Pro Tip: Try pasting the below request in a browser!
+// Pro Tip: Try pasting the below request in a browser!
 
-    https://login.microsoftonline.com/common/adminconsent?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&state=12345&redirect_uri=http://localhost/myapp/permissions
+https://login.microsoftonline.com/common/adminconsent?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&state=12345&redirect_uri=http://localhost/myapp/permissions
+```
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -86,7 +88,9 @@ ms.author: dastrock
 ##### 成功的响应
 如果管理员批准了应用程序的权限，成功响应如下：
 
-    GET http://localhost/myapp/permissions?tenant=a8990e1f-ff32-408a-9f8e-78d3b9139b95&state=state=12345&admin_consent=True
+```
+GET http://localhost/myapp/permissions?tenant=a8990e1f-ff32-408a-9f8e-78d3b9139b95&state=state=12345&admin_consent=True
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -97,7 +101,9 @@ ms.author: dastrock
 ##### 错误响应
 如果管理员未批准了应用程序的权限，失败响应如下：
 
-    GET http://localhost/myapp/permissions?error=permission_denied&error_description=The+admin+canceled+the+request
+```
+GET http://localhost/myapp/permissions?error=permission_denied&error_description=The+admin+canceled+the+request
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -109,13 +115,15 @@ ms.author: dastrock
 ## 获取令牌
 获取应用程序的必要授权后，可以继续获取 API 的访问令牌。若要使用客户端凭据授予获取令牌，请将 POST 请求发送到 `/token` v2.0 终结点：
 
-    POST /common/oauth2/v2.0/token HTTP/1.1
-    Host: login.microsoftonline.com
-    Content-Type: application/x-www-form-urlencoded
+```
+POST /common/oauth2/v2.0/token HTTP/1.1
+Host: login.microsoftonline.com
+Content-Type: application/x-www-form-urlencoded
 
-    client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials
+client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials
 
-    curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials' 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials' 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+```
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -127,11 +135,13 @@ ms.author: dastrock
 #### 成功的响应
 成功响应如下所示：
 
-    {
-      "token_type": "Bearer",
-      "expires_in": 3599,
-      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBP..."
-    }
+```
+{
+  "token_type": "Bearer",
+  "expires_in": 3599,
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBP..."
+}
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -142,16 +152,18 @@ ms.author: dastrock
 #### 错误响应
 错误响应如下所示：
 
-    {
-      "error": "invalid_scope",
-      "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/.default is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
-      "error_codes": [
-        70011
-      ],
-      "timestamp": "2016-01-09 02:02:12Z",
-      "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
-      "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
-    }
+```
+{
+  "error": "invalid_scope",
+  "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/.default is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
+  "error_codes": [
+    70011
+  ],
+  "timestamp": "2016-01-09 02:02:12Z",
+  "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
+  "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
+}
+```
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -165,13 +177,15 @@ ms.author: dastrock
 ## 使用令牌
 获取令牌后，可以使用该令牌对资源发出请求。当令牌过期时，只需向 `/token` 终结点重复该请求，即可获取全新的访问令牌。
 
-    GET /v1.0/me/messages
-    Host: https://graph.microsoft.com
-    Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
+```
+GET /v1.0/me/messages
+Host: https://graph.microsoft.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
 
-    // Pro Tip: Try the below command out! (but replace the token with your own)
+// Pro Tip: Try the below command out! (but replace the token with your own)
 
-    curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q" 'https://graph.microsoft.com/v1.0/me/messages'
+curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q" 'https://graph.microsoft.com/v1.0/me/messages'
+```
 
 ## 代码示例
 若要查看使用管理员许可终结点实现 client\_credentials 授予的应用程序示例，请参阅 [v2.0 daemon code sample](https://github.com/Azure-Samples/active-directory-dotnet-daemon-v2)（v2.0 守护程序代码示例）。

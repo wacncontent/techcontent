@@ -52,7 +52,9 @@ ms.author: robmcm
 
 3. 输入以下 PowerShell cmdlet 来创建项目：
 
-        New-AzureServiceProject helloworld
+    ```
+    New-AzureServiceProject helloworld
+    ```
 
     ![New-AzureService helloworld 命令的结果][The result of the New-AzureService helloworld command]
 
@@ -66,7 +68,9 @@ ms.author: robmcm
 
 4.  输入以下命令添加新的 Web 角色：
 
-        Add-AzureNodeWebRole
+    ```
+    Add-AzureNodeWebRole
+    ```
 
     ![Add-AzureNodeWebRole 命令的输出][The output of the Add-AzureNodeWebRole command]
 
@@ -77,12 +81,14 @@ ms.author: robmcm
 
 Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（默认为 **WebRole1**）的目录中。代码如下：
 
-    var http = require('http');
-    var port = process.env.port || 1337;
-    http.createServer(function (req, res) {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Hello World\n');
-    }).listen(port);
+```
+var http = require('http');
+var port = process.env.port || 1337;
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World\n');
+}).listen(port);
+```
 
 此代码基本上与 nodejs.org 网站上的“Hello World”示例相同，但它使用云环境分配的端口号。
 
@@ -97,7 +103,9 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 1.  运行以下 Azure Powershell cmdlet：
 
-        Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
+    Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
 
     此操作将使用浏览器导航到发布设置下载页。可能会提示使用 Microsoft 帐户登录。如果出现提示，请使用与 Azure 订阅关联的帐户。
 
@@ -105,7 +113,9 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 2.  运行以下 cmdlet 以导入下载的发布配置文件：
 
-        Import-AzurePublishSettingsFile -Environment AzureChinaCloud [path to file]
+    ```
+    Import-AzurePublishSettingsFile -Environment AzureChinaCloud [path to file]
+    ```
 
     > [!NOTE]
     > 导入发布设置之后，请考虑删除下载的 .publishSettings 文件，因为其他人可能利用其中信息访问你的帐户。
@@ -114,8 +124,10 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 若要发布，请运行以下命令：
 
-      $ServiceName = "NodeHelloWorld" + $(Get-Date -Format ('ddhhmm'))   
-    Publish-AzureServiceProject -ServiceName $ServiceName  -Location "China East" -Launch
+```
+  $ServiceName = "NodeHelloWorld" + $(Get-Date -Format ('ddhhmm'))   
+Publish-AzureServiceProject -ServiceName $ServiceName  -Location "China East" -Launch
+```
 
 - **-ServiceName** 指定部署的名称。此名称必须唯一，否则发布过程将会失败。**Get-Date** 命令附加应使名称唯一的日期/时间字符串。
 
@@ -152,7 +164,9 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 1.  在 Windows PowerShell 窗口中，使用以下 cmdlet 以停止上一节中创建的服务部署：
 
-        Stop-AzureService
+    ```
+    Stop-AzureService
+    ```
 
     停止服务可能需要花费几分钟时间。服务停止后，将收到消息表明已停止服务。
 
@@ -160,7 +174,9 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 2.  若要删除服务，请调用以下 cmdlet：
 
-        Remove-AzureService
+    ```
+    Remove-AzureService
+    ```
 
     在出现提示时，输入 **Y** 以删除服务。
 

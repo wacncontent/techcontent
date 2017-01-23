@@ -24,32 +24,42 @@ ms.author: iainfou
 ## 快速命令
 若要创建网络安全组和规则，需要安装 [Azure CLI](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
-    azure config mode arm
+```
+azure config mode arm
+```
 
 在以下示例中，请将示例参数名称替换为你自己的值。示例参数名称包括 `myResourceGroup`、`myNetworkSecurityGroup` 和 `myVnet`。
 
 正确输入自己的名称和位置来创建网络安全组。以下示例在 `ChinaNorth` 位置创建名为 `myNetworkSecurityGroup` 的网络安全组：
 
-    azure network nsg create --resource-group myResourceGroup --location chinanorth \
-        --name myNetworkSecurityGroup
+```
+azure network nsg create --resource-group myResourceGroup --location chinanorth \
+    --name myNetworkSecurityGroup
+```
 
 添加规则以允许 HTTP 流量流向 Web 服务器（或者根据自己的情况（例如 SSH 访问或数据库连接）来调整此规则）。以下示例创建名为 `myNetworkSecurityGroupRule` 的规则，以便允许在端口 80 上传输 TCP 流量：
 
-    azure network nsg rule create --resource-group myResourceGroup \
-        --nsg-name myNetworkSecurityGroup --name myNetworkSecurityGroupRule \
-        --protocol tcp --direction inbound --priority 1000 \
-        --destination-port-range 80 --access allow
+```
+azure network nsg rule create --resource-group myResourceGroup \
+    --nsg-name myNetworkSecurityGroup --name myNetworkSecurityGroupRule \
+    --protocol tcp --direction inbound --priority 1000 \
+    --destination-port-range 80 --access allow
+```
 
 将网络安全组与 VM 的网络接口 (NIC) 相关联。以下示例将名为 `myNic` 的现有 NIC 与名为 `myNetworkSecurityGroup` 的网络安全组相关联：
 
-    azure network nic set --resource-group myResourceGroup \
-        --network-security-group-name myNetworkSecurityGroup --name myNic
+```
+azure network nic set --resource-group myResourceGroup \
+    --network-security-group-name myNetworkSecurityGroup --name myNic
+```
 
 或者，也可以将网络安全组与虚拟网络的子网相关联，而不是只与单个 VM 上的网络接口相关联。以下示例将 `myVnet` 虚拟网络中名为 `mySubnet` 的现有子网与名为 `myNetworkSecurityGroup` 的网络安全组相关联：
 
-    azure network vnet subnet set --resource-group myResourceGroup \
-        --network-security-group-name myNetworkSecurityGroup \
-        --vnet-name myVnet --name mySubnet
+```
+azure network vnet subnet set --resource-group myResourceGroup \
+    --network-security-group-name myNetworkSecurityGroup \
+    --vnet-name myVnet --name mySubnet
+```
 
 ## <a name="more-information-on-network-security-groups"></a>有关网络安全组的详细信息
 利用此处的快速命令，可以让流向 VM 的流量开始正常运行。网络安全组提供许多出色的功能和粒度来控制资源的访问。请参阅[创建网络安全组和 ACL 规则](../virtual-network/virtual-networks-create-nsg-arm-cli.md)了解更多信息。

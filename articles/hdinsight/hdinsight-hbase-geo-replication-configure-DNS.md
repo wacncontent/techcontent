@@ -47,11 +47,15 @@ ms.author: jgao
 
     运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
     如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
 
-        Select-AzureSubscription <AzureSubscriptionName>
+    ```
+    Select-AzureSubscription <AzureSubscriptionName>
+    ```
 
     [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
@@ -107,12 +111,14 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 1. 打开 Windows PowerShell ISE。
 2. 运行以下 cmdlet：  
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
 
-        Select-AzureSubscription [YourAzureSubscriptionName]
+    Select-AzureSubscription [YourAzureSubscriptionName]
 
-        Get-AzureVM -ServiceName Contoso-DNS-CN -Name Contoso-DNS-CN | Set-AzureStaticVNetIP -IPAddress 10.1.0.4 | Update-AzureVM
-        Get-AzureVM -ServiceName Contoso-DNS-CE -Name Contoso-DNS-CE | Set-AzureStaticVNetIP -IPAddress 10.2.0.4 | Update-AzureVM 
+    Get-AzureVM -ServiceName Contoso-DNS-CN -Name Contoso-DNS-CN | Set-AzureStaticVNetIP -IPAddress 10.1.0.4 | Update-AzureVM
+    Get-AzureVM -ServiceName Contoso-DNS-CE -Name Contoso-DNS-CE | Set-AzureStaticVNetIP -IPAddress 10.2.0.4 | Update-AzureVM 
+    ```
 
     ServiceName 是云服务名称。由于 DNS 服务器是云服务的第一个虚拟机，因此云服务名称与虚拟机名称相同。
 

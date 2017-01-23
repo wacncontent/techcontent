@@ -44,8 +44,8 @@ ms.author: carlrab
 
     ![导出设置](./media/sql-database-cloud-migrate/MigrateUsingBACPAC02.png)  
 
-    > [!IMPORTANT]
-    > 将 BACPAC 导出到 Azure Blob 存储时，请使用标准存储。不支持从高级存储导入 BACPAC。
+   > [!IMPORTANT]
+   > 将 BACPAC 导出到 Azure Blob 存储时，请使用标准存储。不支持从高级存储导入 BACPAC。
 
 ## 后续步骤
 

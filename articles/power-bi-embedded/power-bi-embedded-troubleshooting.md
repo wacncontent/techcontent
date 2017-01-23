@@ -24,7 +24,9 @@ wacn.date: 01/13/2017
 ## 设置 SQL Server 连接字符串 <a name="connection-string"/>
 若要设置 SQL Server 连接字符串，请遵循以下特定格式。下面列举了一个 SQL Server 连接字符串的示例。
 
-    "Persist Security Info=False;Integrated Security=true;Initial Catalog=Northwind;server=(local)"
+```
+"Persist Security Info=False;Integrated Security=true;Initial Catalog=Northwind;server=(local)"
+```
 
 若要了解有关 SQL Server 连接字符串的详细信息，请参阅以下文章：
 

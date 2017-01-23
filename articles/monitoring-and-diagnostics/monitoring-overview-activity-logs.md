@@ -56,10 +56,10 @@ ms.author: johnkem
 
 3. 在显示的边栏选项卡中，可以选择：
 
-    * 想要导出其事件的区域
-    * 想要将事件保存到的存储帐户
-    * 想要在存储中保留这些事件的天数。设置为 0 天可以永久保留日志。
-    * 想要在其中创建用于流式处理这些事件的事件中心的服务总线命名空间。
+   * 想要导出其事件的区域
+   * 想要将事件保存到的存储帐户
+   * 想要在存储中保留这些事件的天数。设置为 0 天可以永久保留日志。
+   * 想要在其中创建用于流式处理这些事件的事件中心的服务总线命名空间。
 
      ![“导出活动日志”边栏选项卡](./media/monitoring-overview-activity-logs/activity-logs-portal-export-blade.png)  
 
@@ -67,11 +67,15 @@ ms.author: johnkem
 
 ### 通过 Azure PowerShell Cmdlet 配置日志配置文件
 #### 获取现有的日志配置文件
-        Get-AzureRmLogProfile
+```
+    Get-AzureRmLogProfile
+```
 
 #### 添加日志配置文件
 
-        Add-AzureRmLogProfile -Name my_log_profile -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinanorth/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Locations chinaeast,chinanorth -RetentionInDays 90 -Categories Write,Delete,Action
+```
+    Add-AzureRmLogProfile -Name my_log_profile -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinanorth/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Locations chinaeast,chinanorth -RetentionInDays 90 -Categories Write,Delete,Action
+```
 
 | 属性 | 必选 | 说明 |
 |------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -84,19 +88,25 @@ ms.author: johnkem
 
 #### 删除日志配置文件
 
-        Remove-AzureRmLogProfile -name my_log_profile
+```
+    Remove-AzureRmLogProfile -name my_log_profile
+```
 
 ### 通过 Azure 跨平台 CLI 配置日志配置文件
 #### 获取现有的日志配置文件
-        azure insights logprofile list
+```
+    azure insights logprofile list
 
-        azure insights logprofile get --name my_log_profile
+    azure insights logprofile get --name my_log_profile
+```
 
 `name` 属性应为日志配置文件的名称。
 
 #### 添加日志配置文件
 
-        azure insights logprofile add --name my_log_profile --storageId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Storage/storageAccounts/my_storage --serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinanorth/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey --locations chinaeast,chinanorth --retentionInDays 90 –categories Write,Delete,Action
+```
+    azure insights logprofile add --name my_log_profile --storageId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Storage/storageAccounts/my_storage --serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinanorth/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey --locations chinaeast,chinanorth --retentionInDays 90 –categories Write,Delete,Action
+```
 
 | 属性 | 必选 | 说明 |
 |------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -109,89 +119,93 @@ ms.author: johnkem
 
 #### 删除日志配置文件
 
-        azure insights logprofile delete --name my_log_profile
+```
+    azure insights logprofile delete --name my_log_profile
+```
 
 ## 事件架构
 活动日志中的每个事件都有一个类似于此示例的 JSON blob：
 
-        {
-          "value": [ {
-            "authorization": {
-              "action": "microsoft.support/supporttickets/write",
-              "role": "Subscription Admin",
-              "scope": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841"
-            },
-            "caller": "admin@contoso.com",
-            "channels": "Operation",
-            "claims": {
-              "aud": "https://management.core.windows.net/",
-              "iss": "https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/",
-              "iat": "1421876371",
-              "nbf": "1421876371",
-              "exp": "1421880271",
-              "ver": "1.0",
-              "http://schemas.microsoft.com/identity/claims/tenantid": "1e8d8218-c5e7-4578-9acc-9abbd5d23315 ",
-              "http://schemas.microsoft.com/claims/authnmethodsreferences": "pwd",
-              "http://schemas.microsoft.com/identity/claims/objectidentifier": "2468adf0-8211-44e3-95xq-85137af64708",
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn": "admin@contoso.com",
-              "puid": "20030000801A118C",
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "9vckmEGF7zDKk1YzIY8k0t1_EAPaXoeHyPRn6f413zM",
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname": "John",
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname": "Smith",
-              "name": "John Smith",
-              "groups": "cacfe77c-e058-4712-83qw-f9b08849fd60,7f71d11d-4c41-4b23-99d2-d32ce7aa621c,31522864-0578-4ea0-9gdc-e66cc564d18c",
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": " admin@contoso.com",
-              "appid": "c44b4083-3bq0-49c1-b47d-974e53cbdf3c",
-              "appidacr": "2",
-              "http://schemas.microsoft.com/identity/claims/scope": "user_impersonation",
-              "http://schemas.microsoft.com/claims/authnclassreference": "1"
-            },
-            "correlationId": "1e121103-0ba6-4300-ac9d-952bb5d0c80f",
-            "description": "",
-            "eventDataId": "44ade6b4-3813-45e6-ae27-7420a95fa2f8",
-            "eventName": {
-              "value": "EndRequest",
-              "localizedValue": "End request"
-            },
-            "eventSource": {
-              "value": "Microsoft.Resources",
-              "localizedValue": "Microsoft Resources"
-            },
-            "httpRequest": {
-              "clientRequestId": "27003b25-91d3-418f-8eb1-29e537dcb249",
-              "clientIpAddress": "192.168.35.115",
-              "method": "PUT"
-            },
-            "id": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841/events/44ade6b4-3813-45e6-ae27-7420a95fa2f8/ticks/635574752669792776",
-            "level": "Informational",
-            "resourceGroupName": "MSSupportGroup",
-            "resourceProviderName": {
-              "value": "microsoft.support",
-              "localizedValue": "microsoft.support"
-            },
-            "resourceUri": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841",
-            "operationId": "1e121103-0ba6-4300-ac9d-952bb5d0c80f",
-            "operationName": {
-              "value": "microsoft.support/supporttickets/write",
-              "localizedValue": "microsoft.support/supporttickets/write"
-            },
-            "properties": {
-              "statusCode": "Created"
-            },
-            "status": {
-              "value": "Succeeded",
-              "localizedValue": "Succeeded"
-            },
-            "subStatus": {
-              "value": "Created",
-              "localizedValue": "Created (HTTP Status Code: 201)"
-            },
-            "eventTimestamp": "2015-01-21T22:14:26.9792776Z",
-            "submissionTimestamp": "2015-01-21T22:14:39.9936304Z",
-            "subscriptionId": "s1"
-          } ],
-        "nextLink": "https://management.azure.com/########-####-####-####-############$skiptoken=######"
-        }
+```
+    {
+      "value": [ {
+        "authorization": {
+          "action": "microsoft.support/supporttickets/write",
+          "role": "Subscription Admin",
+          "scope": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841"
+        },
+        "caller": "admin@contoso.com",
+        "channels": "Operation",
+        "claims": {
+          "aud": "https://management.core.windows.net/",
+          "iss": "https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/",
+          "iat": "1421876371",
+          "nbf": "1421876371",
+          "exp": "1421880271",
+          "ver": "1.0",
+          "http://schemas.microsoft.com/identity/claims/tenantid": "1e8d8218-c5e7-4578-9acc-9abbd5d23315 ",
+          "http://schemas.microsoft.com/claims/authnmethodsreferences": "pwd",
+          "http://schemas.microsoft.com/identity/claims/objectidentifier": "2468adf0-8211-44e3-95xq-85137af64708",
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn": "admin@contoso.com",
+          "puid": "20030000801A118C",
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "9vckmEGF7zDKk1YzIY8k0t1_EAPaXoeHyPRn6f413zM",
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname": "John",
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname": "Smith",
+          "name": "John Smith",
+          "groups": "cacfe77c-e058-4712-83qw-f9b08849fd60,7f71d11d-4c41-4b23-99d2-d32ce7aa621c,31522864-0578-4ea0-9gdc-e66cc564d18c",
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": " admin@contoso.com",
+          "appid": "c44b4083-3bq0-49c1-b47d-974e53cbdf3c",
+          "appidacr": "2",
+          "http://schemas.microsoft.com/identity/claims/scope": "user_impersonation",
+          "http://schemas.microsoft.com/claims/authnclassreference": "1"
+        },
+        "correlationId": "1e121103-0ba6-4300-ac9d-952bb5d0c80f",
+        "description": "",
+        "eventDataId": "44ade6b4-3813-45e6-ae27-7420a95fa2f8",
+        "eventName": {
+          "value": "EndRequest",
+          "localizedValue": "End request"
+        },
+        "eventSource": {
+          "value": "Microsoft.Resources",
+          "localizedValue": "Microsoft Resources"
+        },
+        "httpRequest": {
+          "clientRequestId": "27003b25-91d3-418f-8eb1-29e537dcb249",
+          "clientIpAddress": "192.168.35.115",
+          "method": "PUT"
+        },
+        "id": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841/events/44ade6b4-3813-45e6-ae27-7420a95fa2f8/ticks/635574752669792776",
+        "level": "Informational",
+        "resourceGroupName": "MSSupportGroup",
+        "resourceProviderName": {
+          "value": "microsoft.support",
+          "localizedValue": "microsoft.support"
+        },
+        "resourceUri": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841",
+        "operationId": "1e121103-0ba6-4300-ac9d-952bb5d0c80f",
+        "operationName": {
+          "value": "microsoft.support/supporttickets/write",
+          "localizedValue": "microsoft.support/supporttickets/write"
+        },
+        "properties": {
+          "statusCode": "Created"
+        },
+        "status": {
+          "value": "Succeeded",
+          "localizedValue": "Succeeded"
+        },
+        "subStatus": {
+          "value": "Created",
+          "localizedValue": "Created (HTTP Status Code: 201)"
+        },
+        "eventTimestamp": "2015-01-21T22:14:26.9792776Z",
+        "submissionTimestamp": "2015-01-21T22:14:39.9936304Z",
+        "subscriptionId": "s1"
+      } ],
+    "nextLink": "https://management.azure.com/########-####-####-####-############$skiptoken=######"
+    }
+```
 
 | 元素名称 | 说明 |
 | --- | --- |

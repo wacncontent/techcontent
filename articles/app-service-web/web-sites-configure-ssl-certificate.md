@@ -61,25 +61,29 @@ ms.author: cephalin
 
 1. 创建文件（如 **myrequest.txt**），并向其复制以下文本，再将其保存在工作目录中。将 `<your-domain>` 占位符替换为应用的自定义域名。
 
-        [NewRequest]
-        Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
-        Exportable = TRUE
-        KeyLength = 2048              ; Required minimum is 2048
-        KeySpec = 1
-        KeyUsage = 0xA0
-        MachineKeySet = True
-        ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
-        ProviderType = 12
-        HashAlgorithm = SHA256
+    ```
+    [NewRequest]
+    Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
+    Exportable = TRUE
+    KeyLength = 2048              ; Required minimum is 2048
+    KeySpec = 1
+    KeyUsage = 0xA0
+    MachineKeySet = True
+    ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
+    ProviderType = 12
+    HashAlgorithm = SHA256
 
-        [EnhancedKeyUsageExtension]
-        OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
+    [EnhancedKeyUsageExtension]
+    OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
+    ```
 
     若要深入了解 CSR 中的选项和其他可用选项，请参阅 [Certreq 参考文档](https://technet.microsoft.com/zh-cn/library/dn296456.aspx)。
 
 4. 在命令提示符中，通过 `CD` 转到工作目录，再运行以下命令来创建 CSR：
 
-        certreq -new myrequest.txt myrequest.csr
+    ```
+    certreq -new myrequest.txt myrequest.csr
+    ```
 
     现已在当前工作目录中创建 **myrequest.csr**。
 
@@ -89,7 +93,9 @@ ms.author: cephalin
 
 6. CA 返回证书 ( CER) 文件后，即将其保存到工作目录中。然后，运行以下命令以完成挂起的 CSR。
 
-        certreq -accept -user <certificate-name>.cer
+    ```
+    certreq -accept -user <certificate-name>.cer
+    ```
 
     此命令将完成后的证书存储在 Windows 证书存储中。
 
@@ -148,21 +154,25 @@ ms.author: cephalin
 
 1. 在命令行终端，通过 `CD` 转到工作目录并运行以下命令来生成私钥和 CSR：
 
-        openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048
+    ```
+    openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048
+    ```
 
 2. 在系统提示后，输入适当的信息。例如：
 
-         Country Name (2 letter code)
-        State or Province Name (full name) []: Washington
-        Locality Name (eg, city) []: Redmond
-        Organization Name (eg, company) []: Microsoft
-        Organizational Unit Name (eg, section) []: Azure
-        Common Name (eg, YOUR name) []: www.microsoft.com
-        Email Address []:
+    ```
+     Country Name (2 letter code)
+    State or Province Name (full name) []: Washington
+    Locality Name (eg, city) []: Redmond
+    Organization Name (eg, company) []: Microsoft
+    Organizational Unit Name (eg, section) []: Azure
+    Common Name (eg, YOUR name) []: www.microsoft.com
+    Email Address []:
 
-        Please enter the following 'extra' attributes to be sent with your certificate request
+    Please enter the following 'extra' attributes to be sent with your certificate request
 
-           A challenge password []:
+       A challenge password []:
+    ```
 
     完成后，工作目录中应有两个文件：**myserver.key** 和 **server.csr**。**Server.csr** 包含 CSR，稍后会需要 **myserver.key**。
 
@@ -170,29 +180,33 @@ ms.author: cephalin
 
 4. CA 发回请求证书后，将其保存到工作目录中名为 **myserver.crt** 的文件下。如果 CA 提供的是文本格式，只需在文本编辑器中将内容复制到 **myserver.crt**，然后进行保存。该文件应如下所示：
 
-        -----BEGIN CERTIFICATE-----
-        MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
-        UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
-        c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
-        NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
-        ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
-        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
-        enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
-        3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
-        xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
-        ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
-        Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
-        AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
-        Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
-        F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
-        7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
-        lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
-        A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
-        -----END CERTIFICATE-----
+    ```
+    -----BEGIN CERTIFICATE-----
+    MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
+    UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
+    c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
+    NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
+    ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
+    ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
+    enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
+    3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
+    xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
+    ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
+    Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
+    AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
+    Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
+    F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
+    7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
+    lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
+    A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
+    -----END CERTIFICATE-----
+    ```
 
 5. 在命令行终端中，运行以下命令从 **myserver.key** 和 **myserver.crt** 中导出 **myserver.pfx**:
 
-        openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+    ```
+    openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+    ```
 
     系统提示后，定义密码以保护该 .pfx 文件。
 
@@ -205,49 +219,57 @@ ms.author: cephalin
 
 1. 创建名为 **sancert.cnf** 的文件，向其复制以下文本，再将其保存到工作目录中：
 
-        # -------------- BEGIN custom sancert.cnf -----
-        HOME = .
-        oid_section = new_oids
-        [ new_oids ]
-        [ req ]
-        default_days = 730
-        distinguished_name = req_distinguished_name
-        encrypt_key = no
-        string_mask = nombstr
-        req_extensions = v3_req # Extensions to add to certificate request
-        [ req_distinguished_name ]
-        countryName = Country Name (2 letter code)
-        countryName_default =
-        stateOrProvinceName = State or Province Name (full name)
-        stateOrProvinceName_default =
-        localityName = Locality Name (eg, city)
-        localityName_default =
-        organizationalUnitName  = Organizational Unit Name (eg, section)
-        organizationalUnitName_default  =
-        commonName              = Your common name (eg, domain name)
-        commonName_default      = www.mydomain.com
-        commonName_max = 64
-        [ v3_req ]
-        subjectAltName=DNS:ftp.mydomain.com,DNS:blog.mydomain.com,DNS:*.mydomain.com
-        # -------------- END custom sancert.cnf -----
+    ```
+    # -------------- BEGIN custom sancert.cnf -----
+    HOME = .
+    oid_section = new_oids
+    [ new_oids ]
+    [ req ]
+    default_days = 730
+    distinguished_name = req_distinguished_name
+    encrypt_key = no
+    string_mask = nombstr
+    req_extensions = v3_req # Extensions to add to certificate request
+    [ req_distinguished_name ]
+    countryName = Country Name (2 letter code)
+    countryName_default =
+    stateOrProvinceName = State or Province Name (full name)
+    stateOrProvinceName_default =
+    localityName = Locality Name (eg, city)
+    localityName_default =
+    organizationalUnitName  = Organizational Unit Name (eg, section)
+    organizationalUnitName_default  =
+    commonName              = Your common name (eg, domain name)
+    commonName_default      = www.mydomain.com
+    commonName_max = 64
+    [ v3_req ]
+    subjectAltName=DNS:ftp.mydomain.com,DNS:blog.mydomain.com,DNS:*.mydomain.com
+    # -------------- END custom sancert.cnf -----
+    ```
 
     在以 `subjectAltName` 开头的行中，将值替换为要保护的所有域名（`commonName` 除外）。例如：
 
-        subjectAltName=DNS:sales.contoso.com,DNS:support.contoso.com,DNS:fabrikam.com
+    ```
+    subjectAltName=DNS:sales.contoso.com,DNS:support.contoso.com,DNS:fabrikam.com
+    ```
 
     无需更改 `commonName` 在内的任何其他字段。系统将提示在后续几步中指定它们。
 
 1. 在命令行终端，通过 `CD` 转到工作目录并运行以下命令：
 
-        openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048 -config sancert.cnf
+    ```
+    openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048 -config sancert.cnf
+    ```
 
 2. 在系统提示后，输入适当的信息。例如：
 
-         Country Name (2 letter code) []: US
-        State or Province Name (full name) []: Washington
-        Locality Name (eg, city) []: Redmond
-        Organizational Unit Name (eg, section) []: Azure
-        Your common name (eg, domain name) []: www.microsoft.com
+    ```
+     Country Name (2 letter code) []: US
+    State or Province Name (full name) []: Washington
+    Locality Name (eg, city) []: Redmond
+    Organizational Unit Name (eg, section) []: Azure
+    Your common name (eg, domain name) []: www.microsoft.com
+    ```
 
     完成后，工作目录中应有两个文件：**myserver.key** 和 **server.csr**。**Server.csr** 包含 CSR，稍后会需要 **myserver.key**。
 
@@ -255,29 +277,33 @@ ms.author: cephalin
 
 4. CA 发回请求证书后，将其保存到名为 **myserver.crt** 的文件下。如果 CA 提供的是文本格式，只需在文本编辑器中将内容复制到 **myserver.crt**，然后进行保存。该文件应如下所示：
 
-        -----BEGIN CERTIFICATE-----
-        MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
-        UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
-        c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
-        NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
-        ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
-        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
-        enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
-        3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
-        xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
-        ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
-        Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
-        AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
-        Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
-        F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
-        7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
-        lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
-        A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
-        -----END CERTIFICATE-----
+    ```
+    -----BEGIN CERTIFICATE-----
+    MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
+    UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
+    c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
+    NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
+    ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
+    ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
+    enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
+    3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
+    xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
+    ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
+    Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
+    AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
+    Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
+    F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
+    7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
+    lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
+    A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
+    -----END CERTIFICATE-----
+    ```
 
 5. 在命令行终端中，运行以下命令从 **myserver.key** 和 **myserver.crt** 中导出 **myserver.pfx**:
 
-        openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+    ```
+    openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+    ```
 
     系统提示后，定义密码以保护该 .pfx 文件。
 
@@ -293,28 +319,32 @@ ms.author: cephalin
 
 1. 创建文本文件（如 **mycert.txt**），向其复制以下文本并将其文件保存到工作目录中。将 `<your-domain>` 占位符替换为应用的自定义域名。
 
-        [NewRequest]
-        Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
-        Exportable = TRUE
-        KeyLength = 2048              ; KeyLength can be 2048, 4096, 8192, or 16384 (required minimum is 2048)
-        KeySpec = 1
-        KeyUsage = 0xA0
-        MachineKeySet = True
-        ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
-        ProviderType = 12
-        HashAlgorithm = SHA256
-        RequestType = Cert            ; Self-signed certificate
-        ValidityPeriod = Years
-        ValidityPeriodUnits = 1
+    ```
+    [NewRequest]
+    Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
+    Exportable = TRUE
+    KeyLength = 2048              ; KeyLength can be 2048, 4096, 8192, or 16384 (required minimum is 2048)
+    KeySpec = 1
+    KeyUsage = 0xA0
+    MachineKeySet = True
+    ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
+    ProviderType = 12
+    HashAlgorithm = SHA256
+    RequestType = Cert            ; Self-signed certificate
+    ValidityPeriod = Years
+    ValidityPeriodUnits = 1
 
-        [EnhancedKeyUsageExtension]
-        OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
+    [EnhancedKeyUsageExtension]
+    OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
+    ```
 
     参数 `RequestType = Cert` 很重要，可指定自签名证书。若要深入了解 CSR 中的选项和其他可用选项，请参阅 [](https://technet.microsoft.com/zh-cn/library/dn296456.aspx)。
 
 4. 在命令提示符中，通过 `CD` 转到工作目录并运行以下命令：
 
-        certreq -new mycert.txt mycert.crt
+    ```
+    certreq -new mycert.txt mycert.crt
+    ```
 
     新的自签名证书现已安装在证书存储中。
 
@@ -347,47 +377,53 @@ ms.author: cephalin
 
 1. 创建一个名为 **serverauth.cnf** 的文本文件，然后向其复制以下内容，并将其保存到工作目录中：
 
-        [ req ]
-        default_bits           = 2048
-        default_keyfile        = privkey.pem
-        distinguished_name     = req_distinguished_name
-        attributes             = req_attributes
-        x509_extensions        = v3_ca
+    ```
+    [ req ]
+    default_bits           = 2048
+    default_keyfile        = privkey.pem
+    distinguished_name     = req_distinguished_name
+    attributes             = req_attributes
+    x509_extensions        = v3_ca
 
-        [ req_distinguished_name ]
-        countryName			= Country Name (2 letter code)
-        countryName_min			= 2
-        countryName_max			= 2
-        stateOrProvinceName		= State or Province Name (full name)
-        localityName			= Locality Name (eg, city)
-        0.organizationName		= Organization Name (eg, company)
-        organizationalUnitName		= Organizational Unit Name (eg, section)
-        commonName			= Common Name (eg, your app's domain name)
-        commonName_max			= 64
-        emailAddress			= Email Address
-        emailAddress_max		= 40
+    [ req_distinguished_name ]
+    countryName			= Country Name (2 letter code)
+    countryName_min			= 2
+    countryName_max			= 2
+    stateOrProvinceName		= State or Province Name (full name)
+    localityName			= Locality Name (eg, city)
+    0.organizationName		= Organization Name (eg, company)
+    organizationalUnitName		= Organizational Unit Name (eg, section)
+    commonName			= Common Name (eg, your app's domain name)
+    commonName_max			= 64
+    emailAddress			= Email Address
+    emailAddress_max		= 40
 
-        [ req_attributes ]
-        challengePassword		= A challenge password
-        challengePassword_min		= 4
-        challengePassword_max		= 20
+    [ req_attributes ]
+    challengePassword		= A challenge password
+    challengePassword_min		= 4
+    challengePassword_max		= 20
 
-        [ v3_ca ]
-         subjectKeyIdentifier=hash
-         authorityKeyIdentifier=keyid:always,issuer:always
-         basicConstraints = CA:false
-         keyUsage=nonRepudiation, digitalSignature, keyEncipherment
-         extendedKeyUsage = serverAuth
+    [ v3_ca ]
+     subjectKeyIdentifier=hash
+     authorityKeyIdentifier=keyid:always,issuer:always
+     basicConstraints = CA:false
+     keyUsage=nonRepudiation, digitalSignature, keyEncipherment
+     extendedKeyUsage = serverAuth
+    ```
 
 2. 在命令行终端，通过 `CD` 转到工作目录并运行以下命令：
 
-        openssl req -sha256 -x509 -nodes -days 365 -newkey rsa:2048 -keyout myserver.key -out myserver.crt -config serverauth.cnf
+    ```
+    openssl req -sha256 -x509 -nodes -days 365 -newkey rsa:2048 -keyout myserver.key -out myserver.crt -config serverauth.cnf
+    ```
 
     此命令会基于 **serverauth.cnf** 中的设置创建两个文件：**myserver.crt**（自签名证书）和 **myserver.key**（私钥）。
 
 3. 运行以下命令将证书导出到 .pfx 文件：
 
-        openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+    ```
+    openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+    ```
 
     系统提示后，定义密码以保护该 .pfx 文件。
 
@@ -465,24 +501,26 @@ ms.author: cephalin
 
 4. 如果必需创建 `web.config`，请向其复制以下代码并进行保存。如果已打开现有的 web.config，只需将整个 `<rule>` 标记到 `web.config` 的 `configuration/system.webServer/rewrite/rules` 元素中。
 
-        <?xml version="1.0" encoding="UTF-8"?>
-        <configuration>
-          <system.webServer>
-            <rewrite>
-              <rules>
-                <!-- BEGIN rule TAG FOR HTTPS REDIRECT -->
-                <rule name="Force HTTPS" enabled="true">
-                  <match url="(.*)" ignoreCase="false" />
-                  <conditions>
-                    <add input="{HTTPS}" pattern="off" />
-                  </conditions>
-                  <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" appendQueryString="true" redirectType="Permanent" />
-                </rule>
-                <!-- END rule TAG FOR HTTPS REDIRECT -->
-              </rules>
-            </rewrite>
-          </system.webServer>
-        </configuration>
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+      <system.webServer>
+        <rewrite>
+          <rules>
+            <!-- BEGIN rule TAG FOR HTTPS REDIRECT -->
+            <rule name="Force HTTPS" enabled="true">
+              <match url="(.*)" ignoreCase="false" />
+              <conditions>
+                <add input="{HTTPS}" pattern="off" />
+              </conditions>
+              <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" appendQueryString="true" redirectType="Permanent" />
+            </rule>
+            <!-- END rule TAG FOR HTTPS REDIRECT -->
+          </rules>
+        </rewrite>
+      </system.webServer>
+    </configuration>
+    ```
 
     用户使用 HTTP 请求页面时，此规则都会将 HTTP 301（永久重定向）返回到 HTTPS 协议。它会从 http://contoso.com 重定向到 https://contoso.com。
 

@@ -126,11 +126,13 @@ Azure Redis 缓存提供的 Redis 群集与[在 Redis 中实施](http://redis.io
 
 对于非 ssl，请使用以下命令。
 
-    Redis-cli.exe -h <<cachename>> -p 13000 (to connect to instance 0)
-    Redis-cli.exe -h <<cachename>> -p 13001 (to connect to instance 1)
-    Redis-cli.exe -h <<cachename>> -p 13002 (to connect to instance 2)
-    ...
-    Redis-cli.exe -h <<cachename>> -p 1300N (to connect to instance N)
+```
+Redis-cli.exe -h <<cachename>> -p 13000 (to connect to instance 0)
+Redis-cli.exe -h <<cachename>> -p 13001 (to connect to instance 1)
+Redis-cli.exe -h <<cachename>> -p 13002 (to connect to instance 2)
+...
+Redis-cli.exe -h <<cachename>> -p 1300N (to connect to instance N)
+```
 
 对于 ssl，请将 `1300N` 替换为 `1500N`。
 

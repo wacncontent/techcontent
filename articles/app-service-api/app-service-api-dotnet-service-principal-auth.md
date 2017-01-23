@@ -179,35 +179,39 @@ ms.author: rachelap
 
     这是使用用于 .NET 的 ADAL 获取 Azure AD 持有者令牌的代码。此代码使用多个配置值，稍后将在 Azure 运行时环境中设置这些值。代码如下：
 
-        public static class ServicePrincipal
+    ```
+    public static class ServicePrincipal
+    {
+        static string authority = ConfigurationManager.AppSettings["ida:Authority"];
+        static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+        static string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
+        static string resource = ConfigurationManager.AppSettings["ida:Resource"];
+
+        public static AuthenticationResult GetS2SAccessTokenForProdMSA()
         {
-            static string authority = ConfigurationManager.AppSettings["ida:Authority"];
-            static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-            static string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
-            static string resource = ConfigurationManager.AppSettings["ida:Resource"];
-
-            public static AuthenticationResult GetS2SAccessTokenForProdMSA()
-            {
-                return GetS2SAccessToken(authority, resource, clientId, clientSecret);
-            }
-
-            static AuthenticationResult GetS2SAccessToken(string authority, string resource, string clientId, string clientSecret)
-            {
-                var clientCredential = new ClientCredential(clientId, clientSecret);
-                AuthenticationContext context = new AuthenticationContext(authority, false);
-                AuthenticationResult authenticationResult = context.AcquireToken(
-                    resource,
-                    clientCredential);
-                return authenticationResult;
-            }
+            return GetS2SAccessToken(authority, resource, clientId, clientSecret);
         }
+
+        static AuthenticationResult GetS2SAccessToken(string authority, string resource, string clientId, string clientSecret)
+        {
+            var clientCredential = new ClientCredential(clientId, clientSecret);
+            AuthenticationContext context = new AuthenticationContext(authority, false);
+            AuthenticationResult authenticationResult = context.AcquireToken(
+                resource,
+                clientCredential);
+            return authenticationResult;
+        }
+    }
+    ```
 
     **注意**：此代码需要项目中已安装的用于 .NET 的 ADAL NuGet 包 (Microsoft.IdentityModel.Clients.ActiveDirectory)。如果此项目是从头开始创建的，则必须安装此包。API 应用的 new-project 模板不会自动安装此包。
 
 2. 在 *Controllers/ToDoListController* 中，取消注释 `NewDataAPIClient` 方法中用于将令牌添加到 HTTP 请求 authorization 标头的代码。
 
-        client.HttpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", ServicePrincipal.GetS2SAccessTokenForProdMSA().AccessToken);
+    ```
+    client.HttpClient.DefaultRequestHeaders.Authorization =
+        new AuthenticationHeaderValue("Bearer", ServicePrincipal.GetS2SAccessTokenForProdMSA().AccessToken);
+    ```
 
 3. 部署 ToDoListAPI 项目。（右键单击该项目，然后单击“发布”>“发布”）。
 
@@ -333,20 +337,24 @@ ms.author: rachelap
 
 3. 取消注释用于设置 `trustedCallerClientId` 和 `trustedCallerServicePrincipalId` 的代码行。
 
-        private static string trustedCallerClientId = ConfigurationManager.AppSettings["todo:TrustedCallerClientId"];
-        private static string trustedCallerServicePrincipalId = ConfigurationManager.AppSettings["todo:TrustedCallerServicePrincipalId"];
+    ```
+    private static string trustedCallerClientId = ConfigurationManager.AppSettings["todo:TrustedCallerClientId"];
+    private static string trustedCallerServicePrincipalId = ConfigurationManager.AppSettings["todo:TrustedCallerServicePrincipalId"];
+    ```
 
 4. 取消注释 CheckCallerId 方法中的代码。开始执行控制器中的每个操作方法时将调用此方法。
 
-        private static void CheckCallerId()
+    ```
+    private static void CheckCallerId()
+    {
+        string currentCallerClientId = ClaimsPrincipal.Current.FindFirst("appid").Value;
+        string currentCallerServicePrincipalId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+        if (currentCallerClientId != trustedCallerClientId || currentCallerServicePrincipalId != trustedCallerServicePrincipalId)
         {
-            string currentCallerClientId = ClaimsPrincipal.Current.FindFirst("appid").Value;
-            string currentCallerServicePrincipalId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-            if (currentCallerClientId != trustedCallerClientId || currentCallerServicePrincipalId != trustedCallerServicePrincipalId)
-            {
-                throw new HttpResponseException(new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, ReasonPhrase = "The appID or service principal ID is not the expected value." });
-            }
+            throw new HttpResponseException(new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, ReasonPhrase = "The appID or service principal ID is not the expected value." });
         }
+    }
+    ```
 
 5. 将 ToDoListDataAPI 项目重新部署到 Azure 应用服务。
 

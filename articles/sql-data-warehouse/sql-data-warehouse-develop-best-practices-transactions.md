@@ -82,31 +82,33 @@ Azure SQL 数据仓库使用事务日志将更改提交到数据库。每个分�
 ## 优化删除
 `DELETE` 是完整记录的操作。如果需要删除表或分区中的大量数据，`SELECT` 要保留的数据通常更有意义，其可作为最少记录的操作来运行。为此，可使用 [CTAS][CTAS] 创建新表。创建完以后，可通过 [RENAME][RENAME] 操作使用新创建的表将旧表交换出来。
 
-    -- Delete all sales transactions for Promotions except PromotionKey 2.
+```
+-- Delete all sales transactions for Promotions except PromotionKey 2.
 
-    --Step 01. Create a new table select only the records we want to kep (PromotionKey 2)
-    CREATE TABLE [dbo].[FactInternetSales_d]
-    WITH
-    (	CLUSTERED COLUMNSTORE INDEX
-    ,	DISTRIBUTION = HASH([ProductKey])
-    , 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
-                                        FOR VALUES	(	20000101, 20010101, 20020101, 20030101, 20040101, 20050101
-                                                    ,	20060101, 20070101, 20080101, 20090101, 20100101, 20110101
-                                                    ,	20120101, 20130101, 20140101, 20150101, 20160101, 20170101
-                                                    ,	20180101, 20190101, 20200101, 20210101, 20220101, 20230101
-                                                    ,	20240101, 20250101, 20260101, 20270101, 20280101, 20290101
-                                                    )
-    )
-    AS
-    SELECT 	*
-    FROM 	[dbo].[FactInternetSales]
-    WHERE	[PromotionKey] = 2
-    OPTION (LABEL = 'CTAS : Delete')
-    ;
+--Step 01. Create a new table select only the records we want to kep (PromotionKey 2)
+CREATE TABLE [dbo].[FactInternetSales_d]
+WITH
+(	CLUSTERED COLUMNSTORE INDEX
+,	DISTRIBUTION = HASH([ProductKey])
+, 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
+                                    FOR VALUES	(	20000101, 20010101, 20020101, 20030101, 20040101, 20050101
+                                                ,	20060101, 20070101, 20080101, 20090101, 20100101, 20110101
+                                                ,	20120101, 20130101, 20140101, 20150101, 20160101, 20170101
+                                                ,	20180101, 20190101, 20200101, 20210101, 20220101, 20230101
+                                                ,	20240101, 20250101, 20260101, 20270101, 20280101, 20290101
+                                                )
+)
+AS
+SELECT 	*
+FROM 	[dbo].[FactInternetSales]
+WHERE	[PromotionKey] = 2
+OPTION (LABEL = 'CTAS : Delete')
+;
 
-    --Step 02. Rename the Tables to replace the 
-    RENAME OBJECT [dbo].[FactInternetSales]   TO [FactInternetSales_old];
-    RENAME OBJECT [dbo].[FactInternetSales_d] TO [FactInternetSales];
+--Step 02. Rename the Tables to replace the 
+RENAME OBJECT [dbo].[FactInternetSales]   TO [FactInternetSales_old];
+RENAME OBJECT [dbo].[FactInternetSales_d] TO [FactInternetSales];
+```
 
 ## 优化更新
 `UPDATE` 是完整记录的操作。如果需要更新表或分区中的大量行，通常更有效的方法是使用最少记录的操作（如 [CTAS][CTAS]）来实现。
@@ -115,57 +117,59 @@ Azure SQL 数据仓库使用事务日志将更改提交到数据库。每个分�
 
 在该案例中，我们回顾性地向表中的销售额添加折扣金额：
 
-    --Step 01. Create a new table containing the "Update". 
-    CREATE TABLE [dbo].[FactInternetSales_u]
-    WITH
-    (	CLUSTERED INDEX
-    ,	DISTRIBUTION = HASH([ProductKey])
-    , 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
-                                        FOR VALUES	(	20000101, 20010101, 20020101, 20030101, 20040101, 20050101
-                                                    ,	20060101, 20070101, 20080101, 20090101, 20100101, 20110101
-                                                    ,	20120101, 20130101, 20140101, 20150101, 20160101, 20170101
-                                                    ,	20180101, 20190101, 20200101, 20210101, 20220101, 20230101
-                                                    ,	20240101, 20250101, 20260101, 20270101, 20280101, 20290101
-                                                    )
-                    )
-    )
-    AS 
-    SELECT
-        [ProductKey]  
-    ,	[OrderDateKey] 
-    ,	[DueDateKey]  
-    ,	[ShipDateKey] 
-    ,	[CustomerKey] 
-    ,	[PromotionKey] 
-    ,	[CurrencyKey] 
-    ,	[SalesTerritoryKey]
-    ,	[SalesOrderNumber]
-    ,	[SalesOrderLineNumber]
-    ,	[RevisionNumber]
-    ,	[OrderQuantity]
-    ,	[UnitPrice]
-    ,	[ExtendedAmount]
-    ,	[UnitPriceDiscountPct]
-    ,	ISNULL(CAST(5 as float),0) AS [DiscountAmount]
-    ,	[ProductStandardCost]
-    ,	[TotalProductCost]
-    ,	ISNULL(CAST(CASE WHEN [SalesAmount] <=5 THEN 0
-             ELSE [SalesAmount] - 5
-             END AS MONEY),0) AS [SalesAmount]
-    ,	[TaxAmt]
-    ,	[Freight]
-    ,	[CarrierTrackingNumber] 
-    ,	[CustomerPONumber]
-    FROM	[dbo].[FactInternetSales]
-    OPTION (LABEL = 'CTAS : Update')
-    ;
+```
+--Step 01. Create a new table containing the "Update". 
+CREATE TABLE [dbo].[FactInternetSales_u]
+WITH
+(	CLUSTERED INDEX
+,	DISTRIBUTION = HASH([ProductKey])
+, 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
+                                    FOR VALUES	(	20000101, 20010101, 20020101, 20030101, 20040101, 20050101
+                                                ,	20060101, 20070101, 20080101, 20090101, 20100101, 20110101
+                                                ,	20120101, 20130101, 20140101, 20150101, 20160101, 20170101
+                                                ,	20180101, 20190101, 20200101, 20210101, 20220101, 20230101
+                                                ,	20240101, 20250101, 20260101, 20270101, 20280101, 20290101
+                                                )
+                )
+)
+AS 
+SELECT
+    [ProductKey]  
+,	[OrderDateKey] 
+,	[DueDateKey]  
+,	[ShipDateKey] 
+,	[CustomerKey] 
+,	[PromotionKey] 
+,	[CurrencyKey] 
+,	[SalesTerritoryKey]
+,	[SalesOrderNumber]
+,	[SalesOrderLineNumber]
+,	[RevisionNumber]
+,	[OrderQuantity]
+,	[UnitPrice]
+,	[ExtendedAmount]
+,	[UnitPriceDiscountPct]
+,	ISNULL(CAST(5 as float),0) AS [DiscountAmount]
+,	[ProductStandardCost]
+,	[TotalProductCost]
+,	ISNULL(CAST(CASE WHEN [SalesAmount] <=5 THEN 0
+         ELSE [SalesAmount] - 5
+         END AS MONEY),0) AS [SalesAmount]
+,	[TaxAmt]
+,	[Freight]
+,	[CarrierTrackingNumber] 
+,	[CustomerPONumber]
+FROM	[dbo].[FactInternetSales]
+OPTION (LABEL = 'CTAS : Update')
+;
 
-    --Step 02. Rename the tables
-    RENAME OBJECT [dbo].[FactInternetSales]   TO [FactInternetSales_old];
-    RENAME OBJECT [dbo].[FactInternetSales_u] TO [FactInternetSales];
+--Step 02. Rename the tables
+RENAME OBJECT [dbo].[FactInternetSales]   TO [FactInternetSales_old];
+RENAME OBJECT [dbo].[FactInternetSales_u] TO [FactInternetSales];
 
-    --Step 03. Drop the old table
-    DROP TABLE [dbo].[FactInternetSales_old]
+--Step 03. Drop the old table
+DROP TABLE [dbo].[FactInternetSales_old]
+```
 
 > [!NOTE]
 > 重新创建大型表可以受益于使用 SQL 数据仓库工作负荷管理功能。有关详细信息，请参阅[并发][]文章中的工作负荷管理部分。
@@ -183,209 +187,215 @@ Azure SQL 数据仓库使用事务日志将更改提交到数据库。每个分�
 
 但为帮助确定要切换的分区，我们首先需要生成一个帮助器过程，例子如下。
 
-    CREATE PROCEDURE dbo.partition_data_get
-        @schema_name		   NVARCHAR(128)
-    ,	@table_name			   NVARCHAR(128)
-    ,	@boundary_value		   INT
-    AS
-    IF OBJECT_ID('tempdb..#ptn_data') IS NOT NULL
-    BEGIN
-        DROP TABLE #ptn_data
-    END
-    CREATE TABLE #ptn_data
-    WITH	(	DISTRIBUTION = ROUND_ROBIN
-            ,	HEAP
-            )
-    AS
-    WITH CTE
-    AS
-    (
-    SELECT 	s.name							AS [schema_name]
-    ,		t.name							AS [table_name]
-    , 		p.partition_number				AS [ptn_nmbr]
-    ,		p.[rows]						AS [ptn_rows]
-    ,		CAST(r.[value] AS INT)			AS [boundary_value]
-    FROM		sys.schemas					AS s
-    JOIN		sys.tables					AS t	ON  s.[schema_id]		= t.[schema_id]
-    JOIN		sys.indexes					AS i	ON 	t.[object_id]		= i.[object_id]
-    JOIN		sys.partitions				AS p	ON 	i.[object_id]		= p.[object_id] 
-                                                    AND i.[index_id]		= p.[index_id] 
-    JOIN		sys.partition_schemes		AS h	ON 	i.[data_space_id]	= h.[data_space_id]
-    JOIN		sys.partition_functions		AS f	ON 	h.[function_id]		= f.[function_id]
-    LEFT JOIN	sys.partition_range_values	AS r 	ON 	f.[function_id]		= r.[function_id] 
-                                                    AND r.[boundary_id]		= p.[partition_number]
-    WHERE i.[index_id] <= 1
-    )
-    SELECT	*
-    FROM	CTE
-    WHERE	[schema_name]		= @schema_name
-    AND		[table_name]		= @table_name
-    AND		[boundary_value]	= @boundary_value
-    OPTION (LABEL = 'dbo.partition_data_get : CTAS : #ptn_data')
-    ;
-    GO
+```
+CREATE PROCEDURE dbo.partition_data_get
+    @schema_name		   NVARCHAR(128)
+,	@table_name			   NVARCHAR(128)
+,	@boundary_value		   INT
+AS
+IF OBJECT_ID('tempdb..#ptn_data') IS NOT NULL
+BEGIN
+    DROP TABLE #ptn_data
+END
+CREATE TABLE #ptn_data
+WITH	(	DISTRIBUTION = ROUND_ROBIN
+        ,	HEAP
+        )
+AS
+WITH CTE
+AS
+(
+SELECT 	s.name							AS [schema_name]
+,		t.name							AS [table_name]
+, 		p.partition_number				AS [ptn_nmbr]
+,		p.[rows]						AS [ptn_rows]
+,		CAST(r.[value] AS INT)			AS [boundary_value]
+FROM		sys.schemas					AS s
+JOIN		sys.tables					AS t	ON  s.[schema_id]		= t.[schema_id]
+JOIN		sys.indexes					AS i	ON 	t.[object_id]		= i.[object_id]
+JOIN		sys.partitions				AS p	ON 	i.[object_id]		= p.[object_id] 
+                                                AND i.[index_id]		= p.[index_id] 
+JOIN		sys.partition_schemes		AS h	ON 	i.[data_space_id]	= h.[data_space_id]
+JOIN		sys.partition_functions		AS f	ON 	h.[function_id]		= f.[function_id]
+LEFT JOIN	sys.partition_range_values	AS r 	ON 	f.[function_id]		= r.[function_id] 
+                                                AND r.[boundary_id]		= p.[partition_number]
+WHERE i.[index_id] <= 1
+)
+SELECT	*
+FROM	CTE
+WHERE	[schema_name]		= @schema_name
+AND		[table_name]		= @table_name
+AND		[boundary_value]	= @boundary_value
+OPTION (LABEL = 'dbo.partition_data_get : CTAS : #ptn_data')
+;
+GO
+```
 
 此过程可最大程度地重复使用代码，并保持分区切换示例更紧凑。
 
 下面的代码演示上述五个步骤，讲述如何实现完整的分区切换例程。
 
-    --Create a partitioned aligned empty table to switch out the data 
-    IF OBJECT_ID('[dbo].[FactInternetSales_out]') IS NOT NULL
-    BEGIN
-        DROP TABLE [dbo].[FactInternetSales_out]
-    END
+```
+--Create a partitioned aligned empty table to switch out the data 
+IF OBJECT_ID('[dbo].[FactInternetSales_out]') IS NOT NULL
+BEGIN
+    DROP TABLE [dbo].[FactInternetSales_out]
+END
 
-    CREATE TABLE [dbo].[FactInternetSales_out]
-    WITH
-    (	DISTRIBUTION = HASH([ProductKey])
-    ,	CLUSTERED COLUMNSTORE INDEX
-    , 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
-                                        FOR VALUES	(	20020101, 20030101
-                                                    )
-                    )
-    )
-    AS
-    SELECT *
-    FROM	[dbo].[FactInternetSales]
-    WHERE 1=2
-    OPTION (LABEL = 'CTAS : Partition Switch IN : UPDATE')
-    ;
+CREATE TABLE [dbo].[FactInternetSales_out]
+WITH
+(	DISTRIBUTION = HASH([ProductKey])
+,	CLUSTERED COLUMNSTORE INDEX
+, 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
+                                    FOR VALUES	(	20020101, 20030101
+                                                )
+                )
+)
+AS
+SELECT *
+FROM	[dbo].[FactInternetSales]
+WHERE 1=2
+OPTION (LABEL = 'CTAS : Partition Switch IN : UPDATE')
+;
 
-    --Create a partitioned aligned table and update the data in the select portion of the CTAS
-    IF OBJECT_ID('[dbo].[FactInternetSales_in]') IS NOT NULL
-    BEGIN
-        DROP TABLE [dbo].[FactInternetSales_in]
-    END
+--Create a partitioned aligned table and update the data in the select portion of the CTAS
+IF OBJECT_ID('[dbo].[FactInternetSales_in]') IS NOT NULL
+BEGIN
+    DROP TABLE [dbo].[FactInternetSales_in]
+END
 
-    CREATE TABLE [dbo].[FactInternetSales_in]
-    WITH
-    (	DISTRIBUTION = HASH([ProductKey])
-    ,	CLUSTERED COLUMNSTORE INDEX
-    , 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
-                                        FOR VALUES	(	20020101, 20030101
-                                                    )
-                    )
-    )
-    AS 
-    SELECT
-        [ProductKey]  
-    ,	[OrderDateKey] 
-    ,	[DueDateKey]  
-    ,	[ShipDateKey] 
-    ,	[CustomerKey] 
-    ,	[PromotionKey] 
-    ,	[CurrencyKey] 
-    ,	[SalesTerritoryKey]
-    ,	[SalesOrderNumber]
-    ,	[SalesOrderLineNumber]
-    ,	[RevisionNumber]
-    ,	[OrderQuantity]
-    ,	[UnitPrice]
-    ,	[ExtendedAmount]
-    ,	[UnitPriceDiscountPct]
-    ,	ISNULL(CAST(5 as float),0) AS [DiscountAmount]
-    ,	[ProductStandardCost]
-    ,	[TotalProductCost]
-    ,	ISNULL(CAST(CASE WHEN [SalesAmount] <=5 THEN 0
-             ELSE [SalesAmount] - 5
-             END AS MONEY),0) AS [SalesAmount]
-    ,	[TaxAmt]
-    ,	[Freight]
-    ,	[CarrierTrackingNumber] 
-    ,	[CustomerPONumber]
-    FROM	[dbo].[FactInternetSales]
-    WHERE	OrderDateKey BETWEEN 20020101 AND 20021231
-    OPTION (LABEL = 'CTAS : Partition Switch IN : UPDATE')
-    ;
+CREATE TABLE [dbo].[FactInternetSales_in]
+WITH
+(	DISTRIBUTION = HASH([ProductKey])
+,	CLUSTERED COLUMNSTORE INDEX
+, 	PARTITION 	(	[OrderDateKey] RANGE RIGHT 
+                                    FOR VALUES	(	20020101, 20030101
+                                                )
+                )
+)
+AS 
+SELECT
+    [ProductKey]  
+,	[OrderDateKey] 
+,	[DueDateKey]  
+,	[ShipDateKey] 
+,	[CustomerKey] 
+,	[PromotionKey] 
+,	[CurrencyKey] 
+,	[SalesTerritoryKey]
+,	[SalesOrderNumber]
+,	[SalesOrderLineNumber]
+,	[RevisionNumber]
+,	[OrderQuantity]
+,	[UnitPrice]
+,	[ExtendedAmount]
+,	[UnitPriceDiscountPct]
+,	ISNULL(CAST(5 as float),0) AS [DiscountAmount]
+,	[ProductStandardCost]
+,	[TotalProductCost]
+,	ISNULL(CAST(CASE WHEN [SalesAmount] <=5 THEN 0
+         ELSE [SalesAmount] - 5
+         END AS MONEY),0) AS [SalesAmount]
+,	[TaxAmt]
+,	[Freight]
+,	[CarrierTrackingNumber] 
+,	[CustomerPONumber]
+FROM	[dbo].[FactInternetSales]
+WHERE	OrderDateKey BETWEEN 20020101 AND 20021231
+OPTION (LABEL = 'CTAS : Partition Switch IN : UPDATE')
+;
 
-    --Use the helper procedure to identify the partitions
-    --The source table
-    EXEC dbo.partition_data_get 'dbo','FactInternetSales',20030101
-    DECLARE @ptn_nmbr_src INT = (SELECT ptn_nmbr FROM #ptn_data)
-    SELECT @ptn_nmbr_src
+--Use the helper procedure to identify the partitions
+--The source table
+EXEC dbo.partition_data_get 'dbo','FactInternetSales',20030101
+DECLARE @ptn_nmbr_src INT = (SELECT ptn_nmbr FROM #ptn_data)
+SELECT @ptn_nmbr_src
 
-    --The "in" table
-    EXEC dbo.partition_data_get 'dbo','FactInternetSales_in',20030101
-    DECLARE @ptn_nmbr_in INT = (SELECT ptn_nmbr FROM #ptn_data)
-    SELECT @ptn_nmbr_in
+--The "in" table
+EXEC dbo.partition_data_get 'dbo','FactInternetSales_in',20030101
+DECLARE @ptn_nmbr_in INT = (SELECT ptn_nmbr FROM #ptn_data)
+SELECT @ptn_nmbr_in
 
-    --The "out" table
-    EXEC dbo.partition_data_get 'dbo','FactInternetSales_out',20030101
-    DECLARE @ptn_nmbr_out INT = (SELECT ptn_nmbr FROM #ptn_data)
-    SELECT @ptn_nmbr_out
+--The "out" table
+EXEC dbo.partition_data_get 'dbo','FactInternetSales_out',20030101
+DECLARE @ptn_nmbr_out INT = (SELECT ptn_nmbr FROM #ptn_data)
+SELECT @ptn_nmbr_out
 
-    --Switch the partitions over
-    DECLARE @SQL NVARCHAR(4000) = '
-    ALTER TABLE [dbo].[FactInternetSales]	SWITCH PARTITION '+CAST(@ptn_nmbr_src AS VARCHAR(20))	+' TO [dbo].[FactInternetSales_out] PARTITION '	+CAST(@ptn_nmbr_out AS VARCHAR(20))+';
-    ALTER TABLE [dbo].[FactInternetSales_in] SWITCH PARTITION '+CAST(@ptn_nmbr_in AS VARCHAR(20))	+' TO [dbo].[FactInternetSales] PARTITION '		+CAST(@ptn_nmbr_src AS VARCHAR(20))+';'
-    EXEC sp_executesql @SQL
+--Switch the partitions over
+DECLARE @SQL NVARCHAR(4000) = '
+ALTER TABLE [dbo].[FactInternetSales]	SWITCH PARTITION '+CAST(@ptn_nmbr_src AS VARCHAR(20))	+' TO [dbo].[FactInternetSales_out] PARTITION '	+CAST(@ptn_nmbr_out AS VARCHAR(20))+';
+ALTER TABLE [dbo].[FactInternetSales_in] SWITCH PARTITION '+CAST(@ptn_nmbr_in AS VARCHAR(20))	+' TO [dbo].[FactInternetSales] PARTITION '		+CAST(@ptn_nmbr_src AS VARCHAR(20))+';'
+EXEC sp_executesql @SQL
 
-    --Perform the clean-up
-    TRUNCATE TABLE dbo.FactInternetSales_out;
-    TRUNCATE TABLE dbo.FactInternetSales_in;
+--Perform the clean-up
+TRUNCATE TABLE dbo.FactInternetSales_out;
+TRUNCATE TABLE dbo.FactInternetSales_in;
 
-    DROP TABLE dbo.FactInternetSales_out
-    DROP TABLE dbo.FactInternetSales_in
-    DROP TABLE #ptn_data
+DROP TABLE dbo.FactInternetSales_out
+DROP TABLE dbo.FactInternetSales_in
+DROP TABLE #ptn_data
+```
 
 ## 使用小批量尽量减少日志记录
 对于大型数据修改操作，将操作划分为区块或批次来界定工作单元很有效。
 
 下面提供了可用示例。批大小已设置为一个简单的数字来突显该方法。实际中批大小会变得非常大。
 
-    SET NO_COUNT ON;
-    IF OBJECT_ID('tempdb..#t') IS NOT NULL
-    BEGIN
-        DROP TABLE #t;
-        PRINT '#t dropped';
-    END
+```
+SET NO_COUNT ON;
+IF OBJECT_ID('tempdb..#t') IS NOT NULL
+BEGIN
+    DROP TABLE #t;
+    PRINT '#t dropped';
+END
 
-    CREATE TABLE #t
-    WITH	(	DISTRIBUTION = ROUND_ROBIN
-            ,	HEAP
-            )
-    AS
-    SELECT	ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS seq_nmbr
-    ,		SalesOrderNumber
-    ,		SalesOrderLineNumber
-    FROM	dbo.FactInternetSales
-    WHERE	[OrderDateKey] BETWEEN 20010101 and 20011231
-    ;
-
-    DECLARE	@seq_start		INT = 1
-    ,		@batch_iterator	INT = 1
-    ,		@batch_size		INT = 50
-    ,		@max_seq_nmbr	INT = (SELECT MAX(seq_nmbr) FROM dbo.#t)
-    ;
-
-    DECLARE	@batch_count	INT = (SELECT CEILING((@max_seq_nmbr*1.0)/@batch_size))
-    ,		@seq_end		INT = @batch_size
-    ;
-
-    SELECT COUNT(*)
-    FROM	dbo.FactInternetSales f
-
-    PRINT 'MAX_seq_nmbr '+CAST(@max_seq_nmbr AS VARCHAR(20))
-    PRINT 'MAX_Batch_count '+CAST(@batch_count AS VARCHAR(20))
-
-    WHILE	@batch_iterator <= @batch_count
-    BEGIN
-        DELETE
-        FROM	dbo.FactInternetSales
-        WHERE EXISTS
-        (
-                SELECT	1
-                FROM	#t t
-                WHERE	seq_nmbr BETWEEN  @seq_start AND @seq_end
-                AND		FactInternetSales.SalesOrderNumber		= t.SalesOrderNumber
-                AND		FactInternetSales.SalesOrderLineNumber	= t.SalesOrderLineNumber
+CREATE TABLE #t
+WITH	(	DISTRIBUTION = ROUND_ROBIN
+        ,	HEAP
         )
-        ;
+AS
+SELECT	ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS seq_nmbr
+,		SalesOrderNumber
+,		SalesOrderLineNumber
+FROM	dbo.FactInternetSales
+WHERE	[OrderDateKey] BETWEEN 20010101 and 20011231
+;
 
-        SET @seq_start = @seq_end
-        SET @seq_end = (@seq_start+@batch_size);
-        SET @batch_iterator +=1;
-    END
+DECLARE	@seq_start		INT = 1
+,		@batch_iterator	INT = 1
+,		@batch_size		INT = 50
+,		@max_seq_nmbr	INT = (SELECT MAX(seq_nmbr) FROM dbo.#t)
+;
+
+DECLARE	@batch_count	INT = (SELECT CEILING((@max_seq_nmbr*1.0)/@batch_size))
+,		@seq_end		INT = @batch_size
+;
+
+SELECT COUNT(*)
+FROM	dbo.FactInternetSales f
+
+PRINT 'MAX_seq_nmbr '+CAST(@max_seq_nmbr AS VARCHAR(20))
+PRINT 'MAX_Batch_count '+CAST(@batch_count AS VARCHAR(20))
+
+WHILE	@batch_iterator <= @batch_count
+BEGIN
+    DELETE
+    FROM	dbo.FactInternetSales
+    WHERE EXISTS
+    (
+            SELECT	1
+            FROM	#t t
+            WHERE	seq_nmbr BETWEEN  @seq_start AND @seq_end
+            AND		FactInternetSales.SalesOrderNumber		= t.SalesOrderNumber
+            AND		FactInternetSales.SalesOrderLineNumber	= t.SalesOrderLineNumber
+    )
+    ;
+
+    SET @seq_start = @seq_end
+    SET @seq_end = (@seq_start+@batch_size);
+    SET @batch_iterator +=1;
+END
+```
 
 ## 暂停和缩放指南
 借助 Azure SQL 数据仓库，你可以根据需要暂停、恢复和缩放数据仓库。暂停或缩放 SQL 数据仓库时，一定要了解会立即终止任何正提交的事务；导致回滚所有未决事务。如果你的工作负荷在暂停或缩放操作前已发出数据修改在长时间运行之后仍未完成的指示，则需要撤消此项工作。这可能会影响暂停或缩放 Azure SQL 数据仓库数据库所花费的时间。

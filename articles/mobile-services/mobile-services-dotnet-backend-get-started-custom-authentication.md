@@ -38,22 +38,28 @@ ms.author: mahender
 
 2. 添加以下 `using` 语句：
 
-        using Microsoft.WindowsAzure.Mobile.Service;  
+    ```
+    using Microsoft.WindowsAzure.Mobile.Service;  
+    ```
 
 3. 将类定义替换为以下代码：
 
-            public class Account : EntityData
-            {
-                public string Username { get; set; }
-                public byte[] Salt { get; set; }
-                public byte[] SaltedAndHashedPassword { get; set; }
-            }
+    ```
+        public class Account : EntityData
+        {
+            public string Username { get; set; }
+            public byte[] Salt { get; set; }
+            public byte[] SaltedAndHashedPassword { get; set; }
+        }
+    ```
 
     这样，我们的新帐户表中将会显示一行，其中包含用户名、该用户的盐以及安全存储的密码。
 
 4. 在 **Models** 文件夹下，你将会看到与移动服务同名的 **DbContext** 派生类。请打开你的内容并添加以下代码，将帐户表添加到数据模型：
 
-        public DbSet<Account> Accounts { get; set; }
+    ```
+    public DbSet<Account> Accounts { get; set; }
+    ```
 
     >[!NOTE]
     >本教程中的代码段使用 `todoContext` 作为上下文名称。你必须更新项目上下文的代码段。 
@@ -62,37 +68,41 @@ ms.author: mahender
 
 5. 创建名为 `CustomLoginProviderUtils` 的类，然后添加以下 `using` 语句：
 
-        using System.Security.Cryptography;
+    ```
+    using System.Security.Cryptography;
+    ```
 
 6. 将以下代码方法添加到新类：
 
-        public static byte[] hash(string plaintext, byte[] salt)
-        {
-            SHA512Cng hashFunc = new SHA512Cng();
-            byte[] plainBytes = System.Text.Encoding.ASCII.GetBytes(plaintext);
-            byte[] toHash = new byte[plainBytes.Length + salt.Length];
-            plainBytes.CopyTo(toHash,0);
-            salt.CopyTo(toHash, plainBytes.Length);
-            return hashFunc.ComputeHash(toHash);
-        }
+    ```
+    public static byte[] hash(string plaintext, byte[] salt)
+    {
+        SHA512Cng hashFunc = new SHA512Cng();
+        byte[] plainBytes = System.Text.Encoding.ASCII.GetBytes(plaintext);
+        byte[] toHash = new byte[plainBytes.Length + salt.Length];
+        plainBytes.CopyTo(toHash,0);
+        salt.CopyTo(toHash, plainBytes.Length);
+        return hashFunc.ComputeHash(toHash);
+    }
 
-        public static byte[] generateSalt()
-        {
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] salt = new byte[256];
-            rng.GetBytes(salt);
-            return salt;
-        }
+    public static byte[] generateSalt()
+    {
+        RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+        byte[] salt = new byte[256];
+        rng.GetBytes(salt);
+        return salt;
+    }
 
-        public static bool slowEquals(byte[] a, byte[] b)
+    public static bool slowEquals(byte[] a, byte[] b)
+    {
+        int diff = a.Length ^ b.Length;
+        for (int i = 0; i < a.Length && i < b.Length; i++)
         {
-            int diff = a.Length ^ b.Length;
-            for (int i = 0; i < a.Length && i < b.Length; i++)
-            {
-                diff |= a[i] ^ b[i];
-            }
-            return diff == 0;
+            diff |= a[i] ^ b[i];
         }
+        return diff == 0;
+    }
+    ```
 
     这样，便会生成新的长格式盐，添加用于哈希处理加盐密码的功能，以及比较两个哈希代码的安全方式。
 
@@ -102,68 +112,76 @@ ms.author: mahender
 
 1. 创建以下新类用于表示传入的注册尝试：
 
-        public class RegistrationRequest
-        {
-            public String username { get; set; }
-            public String password { get; set; }
-        }
+    ```
+    public class RegistrationRequest
+    {
+        public String username { get; set; }
+        public String password { get; set; }
+    }
+    ```
 
     如果你要在注册期间收集和存储其他信息，应该在此处执行相应的操作。
 
 2. 在移动服务后端项目中，右键单击“控制器”，单击“添加”和“控制器”，创建名为 `CustomRegistrationController` 的新“Microsoft Azure 移动服务自定义控制器”，然后添加以下 `using` 语句：
 
-        using Microsoft.WindowsAzure.Mobile.Service.Security;
-        using System.Text.RegularExpressions;
-        using <my_project_namespace>.DataObjects;
-        using <my_project_namespace>.Models;
+    ```
+    using Microsoft.WindowsAzure.Mobile.Service.Security;
+    using System.Text.RegularExpressions;
+    using <my_project_namespace>.DataObjects;
+    using <my_project_namespace>.Models;
+    ```
 
     在以上代码中，将占位符替换为项目的命名空间。
 
 3. 将类定义替换为以下代码：
 
-        [AuthorizeLevel(AuthorizationLevel.Anonymous)]
-        public class CustomRegistrationController : ApiController
+    ```
+    [AuthorizeLevel(AuthorizationLevel.Anonymous)]
+    public class CustomRegistrationController : ApiController
+    {
+        public ApiServices Services { get; set; }
+
+        // POST api/CustomRegistration
+        public HttpResponseMessage Post(RegistrationRequest registrationRequest)
         {
-            public ApiServices Services { get; set; }
-
-            // POST api/CustomRegistration
-            public HttpResponseMessage Post(RegistrationRequest registrationRequest)
+            if (!Regex.IsMatch(registrationRequest.username, "^[a-zA-Z0-9]{4,}$"))
             {
-                if (!Regex.IsMatch(registrationRequest.username, "^[a-zA-Z0-9]{4,}$"))
-                {
-                    return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid username (at least 4 chars, alphanumeric only)");
-                }
-                else if (registrationRequest.password.Length < 8)
-                {
-                    return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid password (at least 8 chars required)");
-                }
-
-                todoContext context = new todoContext();
-                Account account = context.Accounts.Where(a => a.Username == registrationRequest.username).SingleOrDefault();
-                if (account != null)
-                {
-                    return this.Request.CreateResponse(HttpStatusCode.BadRequest, "That username already exists.");
-                }
-                else
-                {
-                    byte[] salt = CustomLoginProviderUtils.generateSalt();
-                    Account newAccount = new Account
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Username = registrationRequest.username,
-                        Salt = salt,
-                        SaltedAndHashedPassword = CustomLoginProviderUtils.hash(registrationRequest.password, salt)
-                    };
-                    context.Accounts.Add(newAccount);
-                    context.SaveChanges();
-                    return this.Request.CreateResponse(HttpStatusCode.Created);
-                }
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid username (at least 4 chars, alphanumeric only)");
             }
-        }   
+            else if (registrationRequest.password.Length < 8)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid password (at least 8 chars required)");
+            }
+
+            todoContext context = new todoContext();
+            Account account = context.Accounts.Where(a => a.Username == registrationRequest.username).SingleOrDefault();
+            if (account != null)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "That username already exists.");
+            }
+            else
+            {
+                byte[] salt = CustomLoginProviderUtils.generateSalt();
+                Account newAccount = new Account
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Username = registrationRequest.username,
+                    Salt = salt,
+                    SaltedAndHashedPassword = CustomLoginProviderUtils.hash(registrationRequest.password, salt)
+                };
+                context.Accounts.Add(newAccount);
+                context.SaveChanges();
+                return this.Request.CreateResponse(HttpStatusCode.Created);
+            }
+        }
+    }   
+    ```
 
     请记得将 *todoContext* 变量替换为项目的 **DbContext** 的名称。请注意，此控制器使用以下属性来允许发往此终结点的所有流量：
 
-        [AuthorizeLevel(AuthorizationLevel.Anonymous)]
+    ```
+    [AuthorizeLevel(AuthorizationLevel.Anonymous)]
+    ```
 
 >[!IMPORTANT]
 >任何客户端均可通过 HTTP 访问此注册终结点。将此服务发布到生产环境之前，应实现某种形式的方案来验证注册，例如 SMS 或基于电子邮件的验证。这有助于防止恶意用户创建欺骗性的注册。
@@ -175,91 +193,105 @@ ms.author: mahender
 
 1. 创建派生自 **LoginProvider** 的新类 `CustomLoginProvider`，然后添加以下 `using` 语句：
 
-        using Microsoft.WindowsAzure.Mobile.Service;
-        using Microsoft.WindowsAzure.Mobile.Service.Security;
-        using Newtonsoft.Json.Linq;
-        using Owin;
-        using System.Security.Claims;
+    ```
+    using Microsoft.WindowsAzure.Mobile.Service;
+    using Microsoft.WindowsAzure.Mobile.Service.Security;
+    using Newtonsoft.Json.Linq;
+    using Owin;
+    using System.Security.Claims;
+    ```
 
 2. 将 **CustomLoginProvider** 类定义替换为以下代码：
 
-        public class CustomLoginProvider : LoginProvider
+    ```
+    public class CustomLoginProvider : LoginProvider
+    {
+        public const string ProviderName = "custom";
+
+        public override string Name
         {
-            public const string ProviderName = "custom";
-
-            public override string Name
-            {
-                get { return ProviderName; }
-            }
-
-            public CustomLoginProvider(IServiceTokenHandler tokenHandler)
-                : base(tokenHandler)
-            {
-                this.TokenLifetime = new TimeSpan(30, 0, 0, 0);
-            }
-
+            get { return ProviderName; }
         }
+
+        public CustomLoginProvider(IServiceTokenHandler tokenHandler)
+            : base(tokenHandler)
+        {
+            this.TokenLifetime = new TimeSpan(30, 0, 0, 0);
+        }
+
+    }
+    ```
 
        如果你现在尝试生成项目，生成将会失败。`LoginProvider` 有三个稍后需要实现的抽象方法。
 
 3. 在同一个代码文件中创建名为 `CustomLoginProviderCredentials` 的新类。
 
-        public class CustomLoginProviderCredentials : ProviderCredentials
+    ```
+    public class CustomLoginProviderCredentials : ProviderCredentials
+    {
+        public CustomLoginProviderCredentials()
+            : base(CustomLoginProvider.ProviderName)
         {
-            public CustomLoginProviderCredentials()
-                : base(CustomLoginProvider.ProviderName)
-            {
-            }
         }
+    }
+    ```
 
     此类表示有关用户的信息，将通过 [GetIdentitiesAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.security.serviceuser.getidentitiesasync.aspx) 在后端上供你使用。如果你要添加自定义声明，请确保可在此对象中捕获这些声明。
 
 4. 将抽象方法 `ConfigureMiddleware` 的以下实现添加到 **CustomLoginProvider**。
 
-        public override void ConfigureMiddleware(IAppBuilder appBuilder, ServiceSettingsDictionary settings)
-        {
-            // Not Applicable - used for federated identity flows
-            return;
-        }
+    ```
+    public override void ConfigureMiddleware(IAppBuilder appBuilder, ServiceSettingsDictionary settings)
+    {
+        // Not Applicable - used for federated identity flows
+        return;
+    }
+    ```
 
     此方法尚未实现，因为 **CustomLoginProvider** 不会与身份验证管道集成。
 
 4. 将抽象方法 `ParseCredentials` 的以下实现添加到 **CustomLoginProvider**。
 
-        public override ProviderCredentials ParseCredentials(JObject serialized)
+    ```
+    public override ProviderCredentials ParseCredentials(JObject serialized)
+    {
+        if (serialized == null)
         {
-            if (serialized == null)
-            {
-                throw new ArgumentNullException("serialized");
-            }
-
-            return serialized.ToObject<CustomLoginProviderCredentials>();
+            throw new ArgumentNullException("serialized");
         }
+
+        return serialized.ToObject<CustomLoginProviderCredentials>();
+    }
+    ```
 
     此方法将使后端能够从传入的身份验证令牌反序列化用户信息。
 
 6. 将抽象方法 `CreateCredentials` 的以下实现添加到 **CustomLoginProvider**。
 
-        public override ProviderCredentials CreateCredentials(ClaimsIdentity claimsIdentity)
+    ```
+    public override ProviderCredentials CreateCredentials(ClaimsIdentity claimsIdentity)
+    {
+        if (claimsIdentity == null)
         {
-            if (claimsIdentity == null)
-            {
-                throw new ArgumentNullException("claimsIdentity");
-            }
-
-            string username = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            CustomLoginProviderCredentials credentials = new CustomLoginProviderCredentials
-            {
-                UserId = this.TokenHandler.CreateUserId(this.Name, username)
-            };
-
-            return credentials;
+            throw new ArgumentNullException("claimsIdentity");
         }
+
+        string username = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+        CustomLoginProviderCredentials credentials = new CustomLoginProviderCredentials
+        {
+            UserId = this.TokenHandler.CreateUserId(this.Name, username)
+        };
+
+        return credentials;
+    }
+    ```
 
     此方法将 [ClaimsIdentity] 转换成在身份验证令牌颁发阶段使用的 [ProviderCredentials] 对象。在此方法中，你可以再次捕获任何其他声明。
 7. 创建 **ConfigOptions** 后，打开 App\_Start 文件夹中的 WebApiConfig.cs 项目文件并添加以下代码行:
 
-        options.LoginProviders.Add(typeof(CustomLoginProvider));
+    ```
+    options.LoginProviders.Add(typeof(CustomLoginProvider));
+    ```
 
 ## 创建登录终结点
 
@@ -267,69 +299,77 @@ ms.author: mahender
 
 1. 在移动服务后端项目中创建以下新的 `LoginRequest` 类：
 
-        public class LoginRequest
-        {
-            public String username { get; set; }
-            public String password { get; set; }
-        }
+    ```
+    public class LoginRequest
+    {
+        public String username { get; set; }
+        public String password { get; set; }
+    }
+    ```
 
     此类表示传入的登录尝试。
 
 2. 创建以下新的 `CustomLoginResult` 类：
 
-        public class CustomLoginResult
-        {
-            public string UserId { get; set; }
-            public string MobileServiceAuthenticationToken { get; set; }
+    ```
+    public class CustomLoginResult
+    {
+        public string UserId { get; set; }
+        public string MobileServiceAuthenticationToken { get; set; }
 
-        }
+    }
+    ```
 
     此类表示使用用户 ID 和身份验证令牌成功完成的登录。请注意，此类和客户端的 MobileServiceUser 类具有相同形式，因此，使用此类可以轻松地将登录响应传递给强类型化客户端。
 
 2. 右键单击“控制器”，单击“添加”和“控制器”，创建名为 `CustomLoginController` 的新“Microsoft Azure 移动服务自定义控制器”，然后添加以下 `using` 语句：
 
-        using Microsoft.WindowsAzure.Mobile.Service.Security;
-        using System.Security.Claims;
-        using <my_project_namespace>.DataObjects;
-        using <my_project_namespace>.Models;
+    ```
+    using Microsoft.WindowsAzure.Mobile.Service.Security;
+    using System.Security.Claims;
+    using <my_project_namespace>.DataObjects;
+    using <my_project_namespace>.Models;
+    ```
 
 4. 将 **CustomLoginController** 类定义替换为以下代码：
 
-        [AuthorizeLevel(AuthorizationLevel.Anonymous)]
-        public class CustomLoginController : ApiController
+    ```
+    [AuthorizeLevel(AuthorizationLevel.Anonymous)]
+    public class CustomLoginController : ApiController
+    {
+        public ApiServices Services { get; set; }
+        public IServiceTokenHandler handler { get; set; }
+
+        // POST api/CustomLogin
+        public HttpResponseMessage Post(LoginRequest loginRequest)
         {
-            public ApiServices Services { get; set; }
-            public IServiceTokenHandler handler { get; set; }
-
-            // POST api/CustomLogin
-            public HttpResponseMessage Post(LoginRequest loginRequest)
+            todoContext context = new todoContext();
+            Account account = context.Accounts
+                .Where(a => a.Username == loginRequest.username).SingleOrDefault();
+            if (account != null)
             {
-                todoContext context = new todoContext();
-                Account account = context.Accounts
-                    .Where(a => a.Username == loginRequest.username).SingleOrDefault();
-                if (account != null)
-                {
-                    byte[] incoming = CustomLoginProviderUtils
-                        .hash(loginRequest.password, account.Salt);
+                byte[] incoming = CustomLoginProviderUtils
+                    .hash(loginRequest.password, account.Salt);
 
-                    if (CustomLoginProviderUtils.slowEquals(incoming, account.SaltedAndHashedPassword))
+                if (CustomLoginProviderUtils.slowEquals(incoming, account.SaltedAndHashedPassword))
+                {
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity();
+                    claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, loginRequest.username));
+                    LoginResult loginResult = new CustomLoginProvider(handler)
+                        .CreateLoginResult(claimsIdentity, Services.Settings.MasterKey);
+                    var customLoginResult = new CustomLoginResult()
                     {
-                        ClaimsIdentity claimsIdentity = new ClaimsIdentity();
-                        claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, loginRequest.username));
-                        LoginResult loginResult = new CustomLoginProvider(handler)
-                            .CreateLoginResult(claimsIdentity, Services.Settings.MasterKey);
-                        var customLoginResult = new CustomLoginResult()
-                        {
-                            UserId = loginResult.User.UserId,
-                            MobileServiceAuthenticationToken = loginResult.AuthenticationToken
-                        };
-                        return this.Request.CreateResponse(HttpStatusCode.OK, customLoginResult);
-                    }
+                        UserId = loginResult.User.UserId,
+                        MobileServiceAuthenticationToken = loginResult.AuthenticationToken
+                    };
+                    return this.Request.CreateResponse(HttpStatusCode.OK, customLoginResult);
                 }
-                return this.Request.CreateResponse(HttpStatusCode.Unauthorized,
-                    "Invalid username or password");
             }
+            return this.Request.CreateResponse(HttpStatusCode.Unauthorized,
+                "Invalid username or password");
         }
+    }
+    ```
 
        请记得将 *todoContext* 变量替换为项目的 **DbContext** 的名称。请注意，此控制器使用以下属性来允许发往此终结点的所有流量：
 

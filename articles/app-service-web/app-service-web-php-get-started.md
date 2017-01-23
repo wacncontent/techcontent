@@ -55,25 +55,33 @@ ms.author: cephalin
 ## 在你的开发计算机上创建一个 PHP (Laravel) 应用
 1. 打开新的 Windows 命令提示符、PowerShell 窗口、Linux shell 或 OS X 终端。运行以下命令以验证是否在你的计算机上正确安装了所需工具。
 
-        php --version
-        composer --version
-        az --version
-        git --version
+    ```
+    php --version
+    composer --version
+    az --version
+    git --version
+    ```
 
     如果尚未安装这些工具，请参阅[先决条件](#Prerequisites)中的下载链接。
 
 2. 安装 Laravel，如下：
 
-        composer global require "laravel/installer"
+    ```
+    composer global require "laravel/installer"
+    ```
 
 3. 使用 `CD` 命令切换到工作目录并创建新的 Laravel 应用程序，如下：
 
-        cd <working_directory>
-        laravel new <app_name>
+    ```
+    cd <working_directory>
+    laravel new <app_name>
+    ```
 4. 使用 `CD` 命令切换到新创建的 `<app_name>` 目录并测试该应用程序，如下：
 
-        cd <app_name>
-        php artisan serve
+    ```
+    cd <app_name>
+    php artisan serve
+    ```
 
     现在可以在浏览器中导航到 http://localhost:8000， 并查看 Laravel 初始屏幕。
 
@@ -81,9 +89,11 @@ ms.author: cephalin
 
 1. 初始化 Git 存储库并提交所有代码：
 
-        git init
-        git add .
-        git commit -m "Hurray! My first commit for my Azure web app!"
+    ```
+    git init
+    git add .
+    git commit -m "Hurray! My first commit for my Azure web app!"
+    ```
 
 到目前为止，我们只介绍了常规的 Laravel 和 Git 工作流，尚未<a href="https://laravel.com/docs/5.3" rel="nofollow">了解 Laravel</a>。因此，让我们继续以下章节的讲解。
 
@@ -97,41 +107,57 @@ ms.author: cephalin
 
 1. 如下所示登录 Azure ：
 
-        az login
+    ```
+    az login
+    ```
 
     按照帮助消息的提示继续此登录过程。
 
 3. 设置应用服务的部署用户。稍后会使用这些凭据部署代码。
 
-        az appservice web deployment user set --user-name <username> --password <password>
+    ```
+    az appservice web deployment user set --user-name <username> --password <password>
+    ```
 
 3. 创建新的[资源组](../azure-resource-manager/resource-group-overview.md)。对于本 PHP 教程，不需要实际知道它是什么。
 
-        az group create --location "<location>" --name my-php-app-group
+    ```
+    az group create --location "<location>" --name my-php-app-group
+    ```
 
     若要查看可用于 `<location>` 的可能值，请使用 `az appservice list-locations` CLI 命令。
 
 3. 创建新的“免费”[应用服务计划](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)。对于本 PHP 教程，只需知道不用为此计划中的 Web 应用付费即可。
 
-        az appservice plan create --name my-php-appservice-plan --resource-group my-php-app-group --sku FREE
+    ```
+    az appservice plan create --name my-php-appservice-plan --resource-group my-php-app-group --sku FREE
+    ```
 
 4. 使用 `<app_name>` 中的唯一名称创建新的 Web 应用。
 
-        az appservice web create --name <app_name> --resource-group my-php-app-group --plan my-php-appservice-plan
+    ```
+    az appservice web create --name <app_name> --resource-group my-php-app-group --plan my-php-appservice-plan
+    ```
 
 5. 使用以下命令配置新 Web 应用的本地 Git 部署：
 
-        az appservice web source-control config-local-git --name <app_name> --resource-group my-php-app-group
+    ```
+    az appservice web source-control config-local-git --name <app_name> --resource-group my-php-app-group
+    ```
 
     会获得类似如下的 JSON 输出，这意味着已配置远程 Git 存储库：
 
-        {
-        "url": "https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git"
-        }
+    ```
+    {
+    "url": "https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git"
+    }
+    ```
 
 6. 将 JSON 中的 URL 作为本地存储库的 Git remote 添加（为简单起见，调用 `azure`）。
 
-        git remote add azure https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git
+    ```
+    git remote add azure https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git
+    ```
 
 ## <a name="configure"></a>配置 Azure Web 应用
 若要在 Azure 中使用 Laravel 应用，你需要注意以下几件事。你将对你选择的 PHP 框架做此类似的练习。
@@ -145,18 +171,24 @@ ms.author: cephalin
 
 1. 设置 Laravel 应用需要的 PHP 版本。
 
-        az appservice web config update --php-version 7.0 --name <app_name> --resource-group my-php-app-group
+    ```
+    az appservice web config update --php-version 7.0 --name <app_name> --resource-group my-php-app-group
+    ```
 
     你完成了 PHP 版本的设置！
 
 2. 为 Azure Web 应用生成新的 `APP_KEY`，并针对 Azure Web 应用将其设置为一个应用程序设置。
 
-        php artisan key:generate --show
-        az appservice web config appsettings update --settings APP_KEY="<output_of_php_artisan_key:generate_--show>" --name <app_name> --resource-group my-php-app-group
+    ```
+    php artisan key:generate --show
+    az appservice web config appsettings update --settings APP_KEY="<output_of_php_artisan_key:generate_--show>" --name <app_name> --resource-group my-php-app-group
+    ```
 
 3. 此外，启用 Laravel 调试功能以解决任何含义模糊的错误消息 `Whoops, looks like something went wrong.` 页面。
 
-        az appservice web config appsettings update --settings APP_DEBUG=true --name <app_name> --resource-group my-php-app-group
+    ```
+    az appservice web config appsettings update --settings APP_DEBUG=true --name <app_name> --resource-group my-php-app-group
+    ```
 
     你已完成环境变量的设置！
 
@@ -208,13 +240,17 @@ ms.author: cephalin
 
 1. 如同会针对任何 Git 存储库执行的操作一样，将代码推送到 Azure Web 应用：
 
-        git push azure master 
+    ```
+    git push azure master 
+    ```
 
     出现提示时，使用前面创建的凭据。
 
 2. 通过运行以下命令在浏览器中查看它的运行：
 
-        az appservice web browse --name <app_name> --resource-group my-php-app-group
+    ```
+    az appservice web browse --name <app_name> --resource-group my-php-app-group
+    ```
 
     浏览器应显示 Laravel 初始屏幕。
 

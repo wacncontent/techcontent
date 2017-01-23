@@ -237,8 +237,8 @@ ms.author: lvargas
 2. 计划在 Azure 平台中需要的资源和配置，例如存储帐户和虚拟机。
 3. 设置本地企业网络和 [Azure 虚拟网络](../virtual-network/virtual-networks-overview.md)之间的连接。若要设置本地企业网络和 Azure 中虚拟机之间的连接，请使用以下两种方法之一：
 
-    1. 通过 Azure 中虚拟机上的公共终结点，在本地和 Azure 之间建立连接。这种方法提供简单的设置，让你能够在虚拟机中使用 SQL Server 身份验证。另外，还可以设置网络安全组规则，控制到 VM 的公共流量。有关详细信息，请参阅 [Allow external access to your VM using the Azure portal Preview](./virtual-machines-windows-nsg-quickstart-portal.md)（允许通过 Azure 门户预览对 VM 进行外部访问）。
-    2. 通过 Azure 虚拟专用网络 (VPN) 隧道，在本地和 Azure 之间建立连接。这种方法允许你将域策略缩放到 Azure 中的虚拟机。此外，你可以设置防火墙规则，并在虚拟机中使用 Windows 身份验证。当前，Azure 支持安全的站点到站点 VPN 和点到站点 VPN 连接：
+   1. 通过 Azure 中虚拟机上的公共终结点，在本地和 Azure 之间建立连接。这种方法提供简单的设置，让你能够在虚拟机中使用 SQL Server 身份验证。另外，还可以设置网络安全组规则，控制到 VM 的公共流量。有关详细信息，请参阅 [Allow external access to your VM using the Azure portal Preview](./virtual-machines-windows-nsg-quickstart-portal.md)（允许通过 Azure 门户预览对 VM 进行外部访问）。
+   2. 通过 Azure 虚拟专用网络 (VPN) 隧道，在本地和 Azure 之间建立连接。这种方法允许你将域策略缩放到 Azure 中的虚拟机。此外，你可以设置防火墙规则，并在虚拟机中使用 Windows 身份验证。当前，Azure 支持安全的站点到站点 VPN 和点到站点 VPN 连接：
 
       * 使用安全的站点到站点连接，你可在本地网络和 Azure 中的虚拟网络之间建立网络连接。建议将你的本地数据中心环境连接到 Azure。
       * 使用安全的点到站点连接，你可在 Azure 中的虚拟网络和在任何地点运行的各个计算机之间建立网络连接。建议将它主要用于开发和测试。
@@ -247,9 +247,9 @@ ms.author: lvargas
 4. 设置计划的作业和警报，将本地数据备份到 Azure 中的虚拟机磁盘上。有关详细信息，请参阅[使用 Azure Blob 存储服务执行 SQL Server 备份和还原](https://msdn.microsoft.com/zh-cn/library/jj919148.aspx)和 [Azure 虚拟机中 SQL Server 的备份和还原](./virtual-machines-windows-sql-backup-recovery.md)。
 5. 根据应用程序的需要，可以实现以下三个常见方案之一：
 
-    1. 你可将 Web 服务器、应用程序服务器和非敏感数据保留在 Azure 中的数据库服务器中，而将敏感数据保留在本地。
-    2. 你可将 Web 服务器和应用程序服务器保留在本地，而将数据库服务器保留在 Azure 的虚拟机中。
-    3. 你可将数据库服务器、Web 服务器和应用程序服务器保留在本地，而将数据库副本保留在 Azure 的虚拟机中。这种设置允许本地 Web 服务器或报告应用程序访问 Azure 中的数据库副本。因此，你可以成功地降低本地数据库中的工作负荷。我们建议你在具有很高读取工作负荷的情况下实施此方案，也可将其用于开发目的。有关在 Azure 中创建数据库副本的信息，请参阅 [Azure 虚拟机中 SQL Server 的高可用性和灾难恢复](./virtual-machines-windows-sql-high-availability-dr.md)中的“AlwaysOn 可用性组”。
+   1. 你可将 Web 服务器、应用程序服务器和非敏感数据保留在 Azure 中的数据库服务器中，而将敏感数据保留在本地。
+   2. 你可将 Web 服务器和应用程序服务器保留在本地，而将数据库服务器保留在 Azure 的虚拟机中。
+   3. 你可将数据库服务器、Web 服务器和应用程序服务器保留在本地，而将数据库副本保留在 Azure 的虚拟机中。这种设置允许本地 Web 服务器或报告应用程序访问 Azure 中的数据库副本。因此，你可以成功地降低本地数据库中的工作负荷。我们建议你在具有很高读取工作负荷的情况下实施此方案，也可将其用于开发目的。有关在 Azure 中创建数据库副本的信息，请参阅 [Azure 虚拟机中 SQL Server 的高可用性和灾难恢复](./virtual-machines-windows-sql-high-availability-dr.md)中的“AlwaysOn 可用性组”。
 
 ## <a name="comparing-web-development-strategies-in-azure"></a> 比较 Azure 中的 Web 开发策略
 若要在 Azure 中实现和部署基于 SQL Server 的多层应用程序，可以使用下述两种编程方法之一：

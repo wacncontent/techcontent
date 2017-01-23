@@ -143,15 +143,17 @@ ms.author: tdykstra
 
 当你设置 Web 作业部署的控制台应用程序时，Visual Studio 将会安装 [Microsoft.Web.WebJobs.Publish](http://www.nuget.org/packages/Microsoft.Web.WebJobs.Publish/) NuGet 包，并将计划信息存储在 Web 作业项目的项目 *Properties* 文件夹中的 *webjob-publish-settings.json* 文件内。以下是该文件的示例：
 
-        {
-          "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
-          "webJobName": "WebJob1",
-          "startTime": "2014-06-23T00:00:00-08:00",
-          "endTime": "2014-06-27T00:00:00-08:00",
-          "jobRecurrenceFrequency": "Minute",
-          "interval": 5,
-          "runMode": "Scheduled"
-        }
+```
+    {
+      "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
+      "webJobName": "WebJob1",
+      "startTime": "2014-06-23T00:00:00-08:00",
+      "endTime": "2014-06-27T00:00:00-08:00",
+      "jobRecurrenceFrequency": "Minute",
+      "interval": 5,
+      "runMode": "Scheduled"
+    }
+```
 
 你可以编辑此文件目录，Visual Studio 将提供 IntelliSense。在 [http://schemastore.org/schemas/json/webjob-publish-settings.json](http://schemastore.org/schemas/json/webjob-publish-settings.json) 中可查看存储的文件架构。
 
@@ -162,17 +164,19 @@ ms.author: tdykstra
 
 如果将已启用 Web 作业的项目链接到 Web 项目，Visual Studio 会将 Web 作业项目的名称存储在 Web 项目 *Properties* 文件夹的 *webjobs-list.json* 文件中。该列表可能包含多个 Web 作业项目，如以下示例：
 
+```
+    {
+      "$schema": "http://schemastore.org/schemas/json/webjobs-list.json",
+      "WebJobs": [
         {
-          "$schema": "http://schemastore.org/schemas/json/webjobs-list.json",
-          "WebJobs": [
-            {
-              "filePath": "../ConsoleApplication1/ConsoleApplication1.csproj"
-            },
-            {
-              "filePath": "../WebJob1/WebJob1.csproj"
-            }
-          ]
+          "filePath": "../ConsoleApplication1/ConsoleApplication1.csproj"
+        },
+        {
+          "filePath": "../WebJob1/WebJob1.csproj"
         }
+      ]
+    }
+```
 
 你可以编辑此文件目录，Visual Studio 将提供 IntelliSense。在 [http://schemastore.org/schemas/json/webjobs-list.json](http://schemastore.org/schemas/json/webjobs-list.json) 中可查看存储的文件架构。
 

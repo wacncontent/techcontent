@@ -63,27 +63,33 @@ Azure 门户中该 VM 的“状态”将从“已停止”更改为“已停止(
 
 若要复制容器中的所有文件，请使用 **/S** 开关。此开关可用于复制 OS VHD 和所有数据磁盘（如果它们在同一个容器中）。本示例演示如何将存储帐户 **mysourcestorageaccount** 中容器 **mysourcecontainer** 内的所有文件复制到存储帐户 **mydestinationstorageaccount** 中的容器 **mydestinationcontainer**。将存储帐户和容器的名称替换为自己的名称。将 `<sourceStorageAccountKey1>` 和 `<destinationStorageAccountKey1>` 替换为自己的密钥。
 
-    AzCopy /Source:https://mysourcestorageaccount.blob.core.chinacloudapi.cn/mysourcecontainer `
-        /Dest:https://mydestinationatorageaccount.blob.core.chinacloudapi.cn/mydestinationcontainer `
-        /SourceKey:<sourceStorageAccountKey1> /DestKey:<destinationStorageAccountKey1> /S
+```
+AzCopy /Source:https://mysourcestorageaccount.blob.core.chinacloudapi.cn/mysourcecontainer `
+    /Dest:https://mydestinationatorageaccount.blob.core.chinacloudapi.cn/mydestinationcontainer `
+    /SourceKey:<sourceStorageAccountKey1> /DestKey:<destinationStorageAccountKey1> /S
+```
 
 如果只想要复制某个容器中包含多个文件的特定 VHD，则还可以使用 /Pattern 开关指定文件名。在本示例中，将复制名为 **myFileName.vhd** 的文件。
 
-    AzCopy /Source:https://mysourcestorageaccount.blob.core.chinacloudapi.cn/mysourcecontainer `
-    /Dest:https://mydestinationatorageaccount.blob.core.chinacloudapi.cn/mydestinationcontainer `
-    /SourceKey:<sourceStorageAccountKey1> /DestKey:<destinationStorageAccountKey1> `
-    /Pattern:myFileName.vhd
+```
+AzCopy /Source:https://mysourcestorageaccount.blob.core.chinacloudapi.cn/mysourcecontainer `
+/Dest:https://mydestinationatorageaccount.blob.core.chinacloudapi.cn/mydestinationcontainer `
+/SourceKey:<sourceStorageAccountKey1> /DestKey:<destinationStorageAccountKey1> `
+/Pattern:myFileName.vhd
+```
 
 完成后，将出现如下所示的消息：
 
-    Finished 2 of total 2 file(s).
-    [2016/10/07 17:37:41] Transfer summary:
-    -----------------
-    Total files transferred: 2
-    Transfer successfully:   2
-    Transfer skipped:        0
-    Transfer failed:         0
-    Elapsed time:            00.00:13:07
+```
+Finished 2 of total 2 file(s).
+[2016/10/07 17:37:41] Transfer summary:
+-----------------
+Total files transferred: 2
+Transfer successfully:   2
+Transfer skipped:        0
+Transfer failed:         0
+Elapsed time:            00.00:13:07
+```
 
 ## 故障排除
 * 使用 AZCopy 时，如果看到错误“服务器无法对请求进行身份验证。请确保授权标头的值构成正确，且包括签名”并且使用了密钥 2 或辅助存储密钥，请尝试使用主密钥或第一个存储密钥。

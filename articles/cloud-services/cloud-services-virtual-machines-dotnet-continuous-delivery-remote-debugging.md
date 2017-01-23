@@ -28,7 +28,9 @@ ms.author: tarcher
 3. 根据 [Azure 云服务的证书概述](./cloud-services-certs-create.md)中所述创建证书。保留 .pfx 和 RDP 证书指纹，并将证书上传到目标云服务。
 4. 在 MSBuild 命令行中使用以下选项生成一个已启用远程调试的包。（将尖括号中的项替换为系统和项目文件的实际路径）。
 
-        msbuild /TARGET:PUBLISH /PROPERTY:Configuration=Debug;EnableRemoteDebugger=true;VSX64RemoteDebuggerPath="<remote tools path>";RemoteDebuggerConnectorCertificateThumbprint="<thumbprint of the certificate added to the cloud service>";RemoteDebuggerConnectorVersion="2.7" "<path to your VS solution file>"
+    ```
+    msbuild /TARGET:PUBLISH /PROPERTY:Configuration=Debug;EnableRemoteDebugger=true;VSX64RemoteDebuggerPath="<remote tools path>";RemoteDebuggerConnectorCertificateThumbprint="<thumbprint of the certificate added to the cloud service>";RemoteDebuggerConnectorVersion="2.7" "<path to your VS solution file>"
+    ```
 
     `VSX64RemoteDebuggerPath` 是 Visual Studio 远程工具中 msvsmon.exe 所在的文件夹的路径。`RemoteDebuggerConnectorVersion` 是云服务中的 Azure SDK 版本。它也应与随 Visual Studio 一起安装的版本匹配。
 

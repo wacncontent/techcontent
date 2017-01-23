@@ -59,134 +59,138 @@ ms.author: motanv
 ## 如何运行混沌测试
 **C#：**
 
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Fabric;
+```
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Fabric;
 
-    using System.Diagnostics;
-    using System.Fabric.Chaos.DataStructures;
+using System.Diagnostics;
+using System.Fabric.Chaos.DataStructures;
 
-    class Program
+class Program
+{
+    private class ChaosEventComparer : IEqualityComparer<ChaosEvent>
     {
-        private class ChaosEventComparer : IEqualityComparer<ChaosEvent>
+        public bool Equals(ChaosEvent x, ChaosEvent y)
         {
-            public bool Equals(ChaosEvent x, ChaosEvent y)
-            {
-                return x.TimeStampUtc.Equals(y.TimeStampUtc);
-            }
-
-            public int GetHashCode(ChaosEvent obj)
-            {
-                return obj.TimeStampUtc.GetHashCode();
-            }
+            return x.TimeStampUtc.Equals(y.TimeStampUtc);
         }
 
-        static void Main(string[] args)
+        public int GetHashCode(ChaosEvent obj)
         {
-            var clusterConnectionString = "localhost:19000";
-            using (var client = new FabricClient(clusterConnectionString))
+            return obj.TimeStampUtc.GetHashCode();
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        var clusterConnectionString = "localhost:19000";
+        using (var client = new FabricClient(clusterConnectionString))
+        {
+            var startTimeUtc = DateTime.UtcNow;
+            var stabilizationTimeout = TimeSpan.FromSeconds(30.0);
+            var timeToRun = TimeSpan.FromMinutes(60.0);
+            var maxConcurrentFaults = 3;
+
+            var parameters = new ChaosParameters(
+                stabilizationTimeout,
+                maxConcurrentFaults,
+                true, /* EnableMoveReplicaFault */
+                timeToRun);
+
+            try
             {
-                var startTimeUtc = DateTime.UtcNow;
-                var stabilizationTimeout = TimeSpan.FromSeconds(30.0);
-                var timeToRun = TimeSpan.FromMinutes(60.0);
-                var maxConcurrentFaults = 3;
+                client.TestManager.StartChaosAsync(parameters).GetAwaiter().GetResult();
+            }
+            catch (FabricChaosAlreadyRunningException)
+            {
+                Console.WriteLine("An instance of Chaos is already running in the cluster.");
+            }
 
-                var parameters = new ChaosParameters(
-                    stabilizationTimeout,
-                    maxConcurrentFaults,
-                    true, /* EnableMoveReplicaFault */
-                    timeToRun);
+            var filter = new ChaosReportFilter(startTimeUtc, DateTime.MaxValue);
 
-                try
+            var eventSet = new HashSet<ChaosEvent>(new ChaosEventComparer());
+
+            while (true)
+            {
+                var report = client.TestManager.GetChaosReportAsync(filter).GetAwaiter().GetResult();
+
+                foreach (var chaosEvent in report.History)
                 {
-                    client.TestManager.StartChaosAsync(parameters).GetAwaiter().GetResult();
-                }
-                catch (FabricChaosAlreadyRunningException)
-                {
-                    Console.WriteLine("An instance of Chaos is already running in the cluster.");
-                }
-
-                var filter = new ChaosReportFilter(startTimeUtc, DateTime.MaxValue);
-
-                var eventSet = new HashSet<ChaosEvent>(new ChaosEventComparer());
-
-                while (true)
-                {
-                    var report = client.TestManager.GetChaosReportAsync(filter).GetAwaiter().GetResult();
-
-                    foreach (var chaosEvent in report.History)
+                    if (eventSet.add(chaosEvent))
                     {
-                        if (eventSet.add(chaosEvent))
-                        {
-                            Console.WriteLine(chaosEvent);
-                        }
+                        Console.WriteLine(chaosEvent);
                     }
-
-                    // When Chaos stops, a StoppedEvent is created.
-                    // If a StoppedEvent is found, exit the loop.
-                    var lastEvent = report.History.LastOrDefault();
-
-                    if (lastEvent is StoppedEvent)
-                    {
-                        break;
-                    }
-
-                    Task.Delay(TimeSpan.FromSeconds(1.0)).GetAwaiter().GetResult();
                 }
+
+                // When Chaos stops, a StoppedEvent is created.
+                // If a StoppedEvent is found, exit the loop.
+                var lastEvent = report.History.LastOrDefault();
+
+                if (lastEvent is StoppedEvent)
+                {
+                    break;
+                }
+
+                Task.Delay(TimeSpan.FromSeconds(1.0)).GetAwaiter().GetResult();
             }
         }
     }
+}
+```
 
 **PowerShell：**
 
-    $connection = "localhost:19000"
-    $timeToRun = 60
-    $maxStabilizationTimeSecs = 180
-    $concurrentFaults = 3
-    $waitTimeBetweenIterationsSec = 60
+```
+$connection = "localhost:19000"
+$timeToRun = 60
+$maxStabilizationTimeSecs = 180
+$concurrentFaults = 3
+$waitTimeBetweenIterationsSec = 60
 
-    Connect-ServiceFabricCluster $connection
+Connect-ServiceFabricCluster $connection
 
-    $events = @{}
-    $now = [System.DateTime]::UtcNow
+$events = @{}
+$now = [System.DateTime]::UtcNow
 
-    Start-ServiceFabricChaos -TimeToRunMinute $timeToRun -MaxConcurrentFaults $concurrentFaults -MaxClusterStabilizationTimeoutSec $maxStabilizationTimeSecs -EnableMoveReplicaFaults -WaitTimeBetweenIterationsSec $waitTimeBetweenIterationsSec
+Start-ServiceFabricChaos -TimeToRunMinute $timeToRun -MaxConcurrentFaults $concurrentFaults -MaxClusterStabilizationTimeoutSec $maxStabilizationTimeSecs -EnableMoveReplicaFaults -WaitTimeBetweenIterationsSec $waitTimeBetweenIterationsSec
 
-    while($true)
-    {
-        $stopped = $false
-        $report = Get-ServiceFabricChaosReport -StartTimeUtc $now -EndTimeUtc ([System.DateTime]::MaxValue)
+while($true)
+{
+    $stopped = $false
+    $report = Get-ServiceFabricChaosReport -StartTimeUtc $now -EndTimeUtc ([System.DateTime]::MaxValue)
 
-        foreach ($e in $report.History) {
+    foreach ($e in $report.History) {
 
-            if(-Not ($events.Contains($e.TimeStampUtc.Ticks)))
+        if(-Not ($events.Contains($e.TimeStampUtc.Ticks)))
+        {
+            $events.Add($e.TimeStampUtc.Ticks, $e)
+            if($e -is [System.Fabric.Chaos.DataStructures.ValidationFailedEvent])
             {
-                $events.Add($e.TimeStampUtc.Ticks, $e)
-                if($e -is [System.Fabric.Chaos.DataStructures.ValidationFailedEvent])
+                Write-Host -BackgroundColor White -ForegroundColor Red $e
+            }
+            else
+            {
+                if($e -is [System.Fabric.Chaos.DataStructures.StoppedEvent])
                 {
-                    Write-Host -BackgroundColor White -ForegroundColor Red $e
+                    $stopped = $true
                 }
-                else
-                {
-                    if($e -is [System.Fabric.Chaos.DataStructures.StoppedEvent])
-                    {
-                        $stopped = $true
-                    }
 
-                    Write-Host $e
-                }
+                Write-Host $e
             }
         }
-
-        if($stopped -eq $true)
-        {
-            break
-        }
-
-        Start-Sleep -Seconds 1
     }
 
-    Stop-ServiceFabricChaos
+    if($stopped -eq $true)
+    {
+        break
+    }
+
+    Start-Sleep -Seconds 1
+}
+
+Stop-ServiceFabricChaos
+```
 
 <!---HONumber=Mooncake_1121_2016-->

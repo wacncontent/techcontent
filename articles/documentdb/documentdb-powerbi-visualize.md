@@ -48,22 +48,24 @@ wacn.date: 11/28/2016
 ## 让我们开始吧
 在本教程中，让我们假设你是一位研究世界各地的火山的地理学家。火山数据存储在 DocumentDB 帐户中且 JSON 文档的外观如下所示。
 
-    {
-        "Volcano Name": "Rainier",
-           "Country": "United States",
-          "Region": "US-Washington",
-          "Location": {
-            "type": "Point",
-            "coordinates": [
-              -121.758,
-              46.87
-            ]
-          },
-          "Elevation": 4392,
-          "Type": "Stratovolcano",
-          "Status": "Dendrochronology",
-          "Last Known Eruption": "Last known eruption from 1800-1899, inclusive"
-    }
+```
+{
+    "Volcano Name": "Rainier",
+       "Country": "United States",
+      "Region": "US-Washington",
+      "Location": {
+        "type": "Point",
+        "coordinates": [
+          -121.758,
+          46.87
+        ]
+      },
+      "Elevation": 4392,
+      "Type": "Stratovolcano",
+      "Status": "Dendrochronology",
+      "Last Known Eruption": "Last known eruption from 1800-1899, inclusive"
+}
+```
 
 你想从 DocumentDB 帐户中检索火山数据并在如下交互式 Power BI 报表中将数据可视化。
 
@@ -205,11 +207,11 @@ wacn.date: 11/28/2016
 
 将报表从 Power BI Desktop 发布到 PowerBI.com 时，会在 PowerBI.com 租户中生成一份**报表**和一个**数据集**。例如，将名为 **PowerBITutorial** 的报表发布到 PowerBI.com 后，将在 PowerBI.com 的“报表”和“数据集”部分中看到 PowerBITutorial。
 
-    ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/documentdb-powerbi-reports-datasets.png)  
+   ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/documentdb-powerbi-reports-datasets.png)  
 
 若要创建可共享的仪表板，请单击 PowerBI.com 报表上的“固定活动页面”按钮。
 
-    ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/azure-documentdb-power-bi-pin-live-tile.png)  
+   ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/azure-documentdb-power-bi-pin-live-tile.png)  
 
 然后，根据 [Pin a tile from a report](https://powerbi.microsoft.com/documentation/powerbi-service-pin-a-tile-to-a-dashboard-from-a-report/#pin-a-tile-from-a-report)（从报表固定磁贴）中的说明创建新仪表板。
 

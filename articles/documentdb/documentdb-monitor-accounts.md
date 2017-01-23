@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 12/15/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: mimig
 ---
 
@@ -42,17 +42,17 @@ ms.author: mimig
 1. 在 [Azure 门户预览](https://portal.azure.cn/)中，单击“更多服务”，滚动到“数据库”，单击“NoSQL \(DocumentDB\)”，然后单击要查看其性能指标的 DocumentDB 帐户的名称。
 2. 默认情况下，“监视”可重用功能区显示以下磁贴：
 
-    - 当天的请求总数。
-    - 使用的存储量。
+   - 当天的请求总数。
+   - 使用的存储量。
 
-    如果表显示“无可用数据”而你认为数据库中有数据，请参阅[故障排除](#troubleshooting)部分。
+   如果表显示“无可用数据”而你认为数据库中有数据，请参阅[故障排除](#troubleshooting)部分。
 
-    ![“监视”可重用功能区的屏幕截图，可显示请求数和存储使用情况](./media/documentdb-monitor-accounts/documentdb-total-requests-and-usage.png)  
+   ![“监视”可重用功能区的屏幕截图，可显示请求数和存储使用情况](./media/documentdb-monitor-accounts/documentdb-total-requests-and-usage.png)  
 
 3. 单击“请求”或“使用配额”磁贴可打开详细的“指标”边栏选项卡。
 4. “指标”边栏选项卡显示有关所选指标的详细信息。边栏选项卡顶部显示了按小时绘制的请求图表，其下的表格中显示了限制请求数和请求总数的聚合值。指标边栏选项卡还显示警报列表，这些警报已经定义，且根据当前指标边栏选项卡上显示的指标进行了筛选（如此，如果你的警报数量较多，将只能在此处看到相关的警报）。
 
-    ![包括限制请求数的“指标”边栏选项卡屏幕截图](./media/documentdb-monitor-accounts/documentdb-metric-blade.png)  
+   ![包括限制请求数的“指标”边栏选项卡屏幕截图](./media/documentdb-monitor-accounts/documentdb-metric-blade.png)  
 
 ## 在门户预览中自定义性能指标视图
 1. 若要自定义显示在特定图表中的指标，请单击该图表在“指标”边栏选项卡中将它打开，然后单击“编辑图表”。![“指标”边栏选项卡控件的屏幕截图，其中突出显示了“编辑图表”](./media/documentdb-monitor-accounts/madocdb3.png)
@@ -60,7 +60,7 @@ ms.author: mimig
 3. 若要更改显示在该部件中的指标，只需选择或清除可用的性能指标，然后单击边栏选项卡底部的“确定”。
 4. 若要更改时间范围，请选择一个不同的范围（例如，“自定义”），然后单击边栏选项卡底部的“确定”。
 
-    ![“编辑图表”边栏选项卡的“时间范围”部件的屏幕截图，显示如何输入自定义时间范围](./media/documentdb-monitor-accounts/madocdb5.png)  
+   ![“编辑图表”边栏选项卡的“时间范围”部件的屏幕截图，显示如何输入自定义时间范围](./media/documentdb-monitor-accounts/madocdb5.png)  
 
 ## 在门户中创建并排图表
 Azure 门户预览使你能够创建并排的指标图表。
@@ -78,17 +78,17 @@ Azure 门户预览使你能够创建并排的指标图表。
 ## 在门户中设置警报
 1. 在 [Azure 门户预览](https://portal.azure.cn/)中单击“更多服务”、“DocumentDB \(NoSQL\)”，然后单击要设置性能指标警报的 DocumentDB 帐户的名称。
 2. 在资源菜单中，单击“警报规则”以打开“警报规则”边栏选项卡。  
-    ![所选的警报规则部件的屏幕截图](./media/documentdb-monitor-accounts/madocdb10.5.png)
+   ![所选的警报规则部件的屏幕截图](./media/documentdb-monitor-accounts/madocdb10.5.png)
 3. 在“警报规则”边栏选项卡中，单击“添加警报”。  
-    ![“警报规则”边栏选项卡的屏幕截图，其中突出显示了“添加警报”按钮](./media/documentdb-monitor-accounts/madocdb11.png)
+   ![“警报规则”边栏选项卡的屏幕截图，其中突出显示了“添加警报”按钮](./media/documentdb-monitor-accounts/madocdb11.png)
 4. 在“添加警报规则”边栏选项卡中，指定：
 
-    - 你正在设置的警报规则的名称。
-    - 新的警报规则的说明。
-    - 警报规则指标。
-    - 确定何时激活警报的条件、阈值和时间段。例如，在过去的 15 分钟服务器错误计数大于 5。
-    - 当警报触发时，服务管理员和协同管理员是否将通过电子邮件得到通知。
-    - 警报通知的其他电子邮件地址。  
+   - 你正在设置的警报规则的名称。
+   - 新的警报规则的说明。
+   - 警报规则指标。
+   - 确定何时激活警报的条件、阈值和时间段。例如，在过去的 15 分钟服务器错误计数大于 5。
+   - 当警报触发时，服务管理员和协同管理员是否将通过电子邮件得到通知。
+   - 警报通知的其他电子邮件地址。  
      ![“添加警报规则”边栏选项卡的屏幕截图](./media/documentdb-monitor-accounts/madocdb12.png)
 
 ## 以编程方式监视 DocumentDB
@@ -99,11 +99,15 @@ Azure 门户预览使你能够创建并排的指标图表。
 
 若要访问其他指标，请使用 [Azure Monitor SDK](https://www.nuget.org/packages/Microsoft.Azure.Insights)。可以通过调用以下命令检索可用的指标定义：
 
-    https://management.azure.com/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metricDefinitions?api-version=2015-04-08
+```
+https://management.azure.com/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metricDefinitions?api-version=2015-04-08
+```
 
 用于检索各个指标的查询使用以下格式：
 
-    https://management.azure.com/subscriptions/{SubecriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metrics?api-version=2015-04-08&$filter=%28name.value%20eq%20%27Total%20Requests%27%29%20and%20timeGrain%20eq%20duration%27PT5M%27%20and%20startTime%20eq%202016-06-03T03%3A26%3A00.0000000Z%20and%20endTime%20eq%202016-06-10T03%3A26%3A00.0000000Z
+```
+https://management.azure.com/subscriptions/{SubecriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metrics?api-version=2015-04-08&$filter=%28name.value%20eq%20%27Total%20Requests%27%29%20and%20timeGrain%20eq%20duration%27PT5M%27%20and%20startTime%20eq%202016-06-03T03%3A26%3A00.0000000Z%20and%20endTime%20eq%202016-06-10T03%3A26%3A00.0000000Z
+```
 
 有关详细信息，请参阅[通过 Azure Monitor REST API 检索资源指标](https://blogs.msdn.microsoft.com/cloud_solution_architect/2016/02/23/retrieving-resource-metrics-via-the-azure-insights-api/)。请注意，“Azure Inights”已重命名为“Azure Monitor”。本博客条目引用旧名称。
 
@@ -113,13 +117,14 @@ Azure 门户预览使你能够创建并排的指标图表。
 
 ### 编辑磁贴以刷新当前数据
 1. 若要自定义显示在特定部件中的指标，请单击该图表打开“指标”边栏选项卡，然后单击“编辑图表”。  
-    ![“指标”边栏选项卡控件的屏幕截图，其中突出显示了“编辑图表”](./media/documentdb-monitor-accounts/madocdb3.png)
+   ![“指标”边栏选项卡控件的屏幕截图，其中突出显示了“编辑图表”](./media/documentdb-monitor-accounts/madocdb3.png)
 2. 在“编辑图表”边栏选项卡上的“时间范围”部分中，单击“过去一小时”，然后单击“确定”。  
-    ![选择了过去一个小时的“编辑图表”边栏选项卡的屏幕截图](./media/documentdb-monitor-accounts/documentdb-no-available-data-past-hour.png)
+   ![选择了过去一个小时的“编辑图表”边栏选项卡的屏幕截图](./media/documentdb-monitor-accounts/documentdb-no-available-data-past-hour.png)
 3. 现在磁贴应该刷新以显示当前数据和使用情况。  
-    ![更新后的过去一小时请求总数磁贴的屏幕截图](./media/documentdb-monitor-accounts/documentdb-no-available-data-fixed.png)
+   ![更新后的过去一小时请求总数磁贴的屏幕截图](./media/documentdb-monitor-accounts/documentdb-no-available-data-fixed.png)
 
 ## 后续步骤
 若要了解有关 DocumentDB 容量的详细信息，请参阅 [Manage DocumentDB capacity](./documentdb-manage.md)（管理 DocumentDB 容量）。
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: add content to describe how to view performance metrics by using Azure Monitoring -->

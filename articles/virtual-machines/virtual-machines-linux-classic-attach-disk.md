@@ -39,7 +39,9 @@ ms.author: iainfou
 
     a) 日志中 SCSI 设备的 Grep，例如，在以下命令中：
 
-        sudo grep SCSI /var/log/messages
+    ```
+    sudo grep SCSI /var/log/messages
+    ```
 
     如果是最近的 Ubuntu 分发，则可能需要使用 `sudo grep SCSI /var/log/syslog`，因为默认情况下可能已禁止登录到 `/var/log/messages`。
 
@@ -51,31 +53,39 @@ ms.author: iainfou
 
     b) 使用 `lsscsi` 命令找出设备 ID。可以通过 `yum install lsscsi`（在基于 Red Hat 的分发上）或 `apt-get install lsscsi`（在基于 Debian 的分发上）安装 `lsscsi`。可以通过磁盘的 *lun*（即 **逻辑单元号**）找到所需磁盘。例如，所附加磁盘的 *lun* 可以轻松地通过 `azure vm disk list <virtual-machine>` 来查看，如下所示：
 
-        azure vm disk list myVM
+    ```
+    azure vm disk list myVM
+    ```
 
     输出与下面类似：
 
-        info:    Executing command vm disk list
-        + Fetching disk images
-        + Getting virtual machines
-        + Getting VM disks
-        data:    Lun  Size(GB)  Blob-Name                         OS
-        data:    ---  --------  --------------------------------  -----
-        data:         30        myVM-2645b8030676c8f8.vhd  Linux
-        data:    0    100       myVM-76f7ee1ef0f6dddc.vhd
-        info:    vm disk list command OK
+    ```
+    info:    Executing command vm disk list
+    + Fetching disk images
+    + Getting virtual machines
+    + Getting VM disks
+    data:    Lun  Size(GB)  Blob-Name                         OS
+    data:    ---  --------  --------------------------------  -----
+    data:         30        myVM-2645b8030676c8f8.vhd  Linux
+    data:    0    100       myVM-76f7ee1ef0f6dddc.vhd
+    info:    vm disk list command OK
+    ```
 
     将此数据与同一示例性虚拟机的 `lsscsi` 的输出进行比较：
 
-        [1:0:0:0]    cd/dvd  Msft     Virtual CD/ROM   1.0   /dev/sr0
-        [2:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sda
-        [3:0:1:0]    disk    Msft     Virtual Disk     1.0   /dev/sdb
-        [5:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sdc
+    ```
+    [1:0:0:0]    cd/dvd  Msft     Virtual CD/ROM   1.0   /dev/sr0
+    [2:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sda
+    [3:0:1:0]    disk    Msft     Virtual Disk     1.0   /dev/sdb
+    [5:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sdc
+    ```
 
     每一行的元组中的最后一个数字就是 *lun*。有关详细信息，请参阅 `man lsscsi`。
 3. 在提示符下，键入以下命令以创建设备：
 
-        sudo fdisk /dev/sdc
+    ```
+    sudo fdisk /dev/sdc
+    ```
 
 4. 出现提示时，请键入 **n** 创建分区。
 
@@ -95,20 +105,26 @@ ms.author: iainfou
 
 8. 现在，可以在新分区上创建文件系统。在设备 ID 后面追加磁盘分区号（在以下示例中为 `/dev/sdc1`）。以下示例在 /dev/sdc1 上创建 ext4 磁盘分区：
 
-        sudo mkfs -t ext4 /dev/sdc1
+    ```
+    sudo mkfs -t ext4 /dev/sdc1
+    ```
 
     ![创建文件系统](./media/virtual-machines-linux-classic-attach-disk/mkfsext4.png)  
 
-    > [!NOTE]
-    对于 ext4 文件系统，SuSE Linux Enterprise 11 系统仅支持只读访问。对于这些系统，建议将新文件系统格式化为 ext3 而非 ext4。
+   > [!NOTE]
+   对于 ext4 文件系统，SuSE Linux Enterprise 11 系统仅支持只读访问。对于这些系统，建议将新文件系统格式化为 ext3 而非 ext4。
 
 9. 创建一个目录来装载新的文件系统，如下所示：
 
-        sudo mkdir /datadrive
+    ```
+    sudo mkdir /datadrive
+    ```
 
 10. 最后可以装载驱动器，如下所示：
 
-        sudo mount /dev/sdc1 /datadrive
+    ```
+    sudo mount /dev/sdc1 /datadrive
+    ```
 
     数据磁盘现在可以作为 **/datadrive** 使用。
 
@@ -118,42 +134,56 @@ ms.author: iainfou
 
     若要确保在重新引导后自动重新装载驱动器，必须将其添加到 /etc/fstab 文件。此外，强烈建议在 /etc/fstab 中使用 UUID（全局唯一标识符）来引用驱动器而不是只使用设备名称（即 /dev/sdc1）。如果 OS 在启动过程中检测到磁盘错误，使用 UUID 可以避免将错误的磁盘装载到给定位置，然后为剩余的数据磁盘分配这些设备 ID。若要查找新驱动器的 UUID，可以使用 **blkid** 实用程序：
 
-        sudo -i blkid
+    ```
+    sudo -i blkid
+    ```
 
     输出内容类似于下面的示例：
 
-        /dev/sda1: UUID="11111111-1b1b-1c1c-1d1d-1e1e1e1e1e1e" TYPE="ext4"
-        /dev/sdb1: UUID="22222222-2b2b-2c2c-2d2d-2e2e2e2e2e2e" TYPE="ext4"
-        /dev/sdc1: UUID="33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e" TYPE="ext4"
+    ```
+    /dev/sda1: UUID="11111111-1b1b-1c1c-1d1d-1e1e1e1e1e1e" TYPE="ext4"
+    /dev/sdb1: UUID="22222222-2b2b-2c2c-2d2d-2e2e2e2e2e2e" TYPE="ext4"
+    /dev/sdc1: UUID="33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e" TYPE="ext4"
+    ```
 
     > [!NOTE]
     错误地编辑 **/etc/fstab** 文件可能会导致系统无法引导。如果没有把握，请参考分发的文档来获取有关如何正确编辑该文件的信息。另外，建议在编辑之前创建 /etc/fstab 文件的备份。
 
     接下来，请在文本编辑器中打开 **/etc/fstab** 文件：
 
-        sudo vi /etc/fstab
+    ```
+    sudo vi /etc/fstab
+    ```
 
     在此示例中，将使用在之前的步骤中创建的新 **/dev/sdc1** 设备的 UUID 值并使用装载点 **/datadrive**。将以下行添加到 **/etc/fstab** 文件的末尾：
 
-        UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail   1   2
+    ```
+    UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail   1   2
+    ```
 
     另外，在基于 SuSE Linux 的系统上，你可能需要使用稍微不同的格式：
 
-        /dev/disk/by-uuid/33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext3   defaults,nofail   1   2
+    ```
+    /dev/disk/by-uuid/33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext3   defaults,nofail   1   2
+    ```
 
     > [!NOTE]
     即使文件系统已损坏或磁盘在引导时不存在，`nofail` 选项也能确保 VM 启动。如果不使用此选项，可能会遇到 [Cannot SSH to Linux VM due to FSTAB errors](https://blogs.msdn.microsoft.com/linuxonazure/2016/07/21/cannot-ssh-to-linux-vm-after-adding-data-disk-to-etcfstab-and-rebooting/)（由于 FSTAB 错误而无法通过 SSH 连接到 Linux VM）中所述的行为。
 
     现在，可以通过卸载并重新装载文件系统（即使用在之前的步骤中创建的示例装载点 `/datadrive`）来测试文件系统是否已正确装载：
 
-        sudo umount /datadrive
-        sudo mount /datadrive
+    ```
+    sudo umount /datadrive
+    sudo mount /datadrive
+    ```
 
     如果 `mount` 命令产生错误，请检查 /etc/fstab 文件的语法是否正确。如果还创建了其他数据驱动器或分区，同样也需要分别将其输入到 /etc/fstab 中。
 
     需要使用以下命令将驱动器设为可写：
 
-        sudo chmod go+w /datadrive
+    ```
+    sudo chmod go+w /datadrive
+    ```
 
     > [!NOTE]
     之后，在不编辑 fstab 的情况下删除数据磁盘可能会导致 VM 无法引导。如果这是一种常见情况，则请注意，大多数分发都提供了 `nofail` 和/或 `nobootwait` fstab 选项，这些选项使系统在磁盘无法装载的情况下也能引导。有关这些参数的详细信息，请查阅分发文档。
@@ -165,19 +195,25 @@ ms.author: iainfou
 
 * 在 `/etc/fstab` 中使用 `discard` 装载选项，例如：
 
-        UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,discard   1   2
+    ```
+    UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,discard   1   2
+    ```
 
 * 此处，还可以从命令行手动运行 `fstrim` 命令，或将其添加到 crontab 以定期运行：
 
     **Ubuntu**
 
-        sudo apt-get install util-linux
-        sudo fstrim /datadrive
+    ```
+    sudo apt-get install util-linux
+    sudo fstrim /datadrive
+    ```
 
     **RHEL/CentOS**
 
-        sudo yum install util-linux
-        sudo fstrim /datadrive
+    ```
+    sudo yum install util-linux
+    sudo fstrim /datadrive
+    ```
 
 ## 故障排除
 [!INCLUDE [virtual-machines-linux-lunzero](../../includes/virtual-machines-linux-lunzero.md)]

@@ -237,7 +237,9 @@ Blob 服务由 Blob 本身以及其收纳容器 (Container) 构成，容器可�
 
 用户可通过 REST API 来访问 Blob
 
-    http://<accountname>.blob.core.chinacloudapi.cn/<containername>/<blobname>
+```
+http://<accountname>.blob.core.chinacloudapi.cn/<containername>/<blobname>
+```
 
 accountname 表示 Azure 存储账号下的资源，全局唯一。
 
@@ -253,11 +255,15 @@ blobname 表示要访问的资源名称，可以认为是一个 mp3 文件，或
 
 保存在 leizhangstorage 存储账号下，containername 为 photo，blobname 为 myphoto.jpg。则这个 URL 地址为：
 
-    http://leizhangstorage.blob.core.chinacloudapi.cn/photo/myphoto.jpg
+```
+http://leizhangstorage.blob.core.chinacloudapi.cn/photo/myphoto.jpg
+```
 
 保存在 leizhangstorage 存储账号下，containername 为 vhd，blobname 为 myvm.vhd。则这个 URL 地址为：
 
-    http://leizhangstorage.blob.core.chinacloudapi.cn/vhd/myvm.vhd
+```
+http://leizhangstorage.blob.core.chinacloudapi.cn/vhd/myvm.vhd
+```
 
 Container 的命名规则:
 
@@ -323,9 +329,9 @@ Azure 官方支持的操作系统为：
 2. SQL Server：SQL Server 2008 R2, SQL Server 2012 SP1, SQL Server 2014 RTM  (Web, Standard, Enterprise)
 3.      Linux : 
 
-    (1).	Ubuntu (12.04 LTS, 12.10, 13.10, 14.04 LTS),
-    (2).	CentOS (6.5, 6.6, 7.0, 7.1), 
-    (3).	SUSE (OpenSUSE 13.3, 13.2 SUSE Linux Enterprise Server 11 SP3, Server 12)
+   (1).	Ubuntu (12.04 LTS, 12.10, 13.10, 14.04 LTS),
+   (2).	CentOS (6.5, 6.6, 7.0, 7.1), 
+   (3).	SUSE (OpenSUSE 13.3, 13.2 SUSE Linux Enterprise Server 11 SP3, Server 12)
 
 其他非 Azure 提供的虚拟机模板，比如 RedHat 或者红旗 Linux。客户可以自己在本地使用 Hyper-V 进行创建，然后上传至 Azure 云端，但是如果该虚拟机出现问题，则无法获得官方支持。
 

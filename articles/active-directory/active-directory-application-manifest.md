@@ -69,28 +69,30 @@ wacn.date: 01/19/2017
 
     例如，假设要在资源应用程序 (API) 中实现/公开名为“Employees.Read.All”的新权限，你只需将新的/第二个元素添加到 oauth2Permissions 集合，如下所示：
 
-        "oauth2Permissions": [
-        {
-        "adminConsentDescription": "Allow the application to access MyWebApplication on behalf of the signed-in user.",
-        "adminConsentDisplayName": "Access MyWebApplication",
-        "id": "aade5b35-ea3e-481c-b38d-cba4c78682a0",
-        "isEnabled": true,
-        "type": "User",
-        "userConsentDescription": "Allow the application to access MyWebApplication on your behalf.",
-        "userConsentDisplayName": "Access MyWebApplication",
-        "value": "user_impersonation"
-        },
-        {
-        "adminConsentDescription": "Allow the application to have read-only access to all Employee data.",
-        "adminConsentDisplayName": "Read-only access to Employee records",
-        "id": "2b351394-d7a7-4a84-841e-08a6a17e4cb8",
-        "isEnabled": true,
-        "type": "User",
-        "userConsentDescription": "Allow the application to have read-only access to your Employee data.",
-        "userConsentDisplayName": "Read-only access to your Employee records",
-        "value": "Employees.Read.All"
-        }
-        ],
+    ```
+    "oauth2Permissions": [
+    {
+    "adminConsentDescription": "Allow the application to access MyWebApplication on behalf of the signed-in user.",
+    "adminConsentDisplayName": "Access MyWebApplication",
+    "id": "aade5b35-ea3e-481c-b38d-cba4c78682a0",
+    "isEnabled": true,
+    "type": "User",
+    "userConsentDescription": "Allow the application to access MyWebApplication on your behalf.",
+    "userConsentDisplayName": "Access MyWebApplication",
+    "value": "user_impersonation"
+    },
+    {
+    "adminConsentDescription": "Allow the application to have read-only access to all Employee data.",
+    "adminConsentDisplayName": "Read-only access to Employee records",
+    "id": "2b351394-d7a7-4a84-841e-08a6a17e4cb8",
+    "isEnabled": true,
+    "type": "User",
+    "userConsentDescription": "Allow the application to have read-only access to your Employee data.",
+    "userConsentDisplayName": "Read-only access to your Employee records",
+    "value": "Employees.Read.All"
+    }
+    ],
+    ```
 
     条目必须唯一，因此必须为 `"id"` 属性生成新的全局唯一 ID (GUID)。在本例中，由于指定了 `"type": "User"`，此权限可由资源/API 应用程序注册所在的 Azure AD 租户所验证的任何帐户同意，授予代表帐户进行访问的客户端应用程序权限。说明和显示名称字符串将在同意期间使用，显示在 Azure 经典管理门户中。
 

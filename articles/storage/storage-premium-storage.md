@@ -348,8 +348,10 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 运行 OpenLogic CentOS VM 的客户应该运行以下命令来安装最新的驱动程序：
 
-    sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
-    sudo yum install microsoft-hyper-v
+```
+sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
+sudo yum install microsoft-hyper-v
+```
 
 需要重新启动才能激活新的驱动程序。
 
@@ -445,41 +447,49 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 1. 根据[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中提供的步骤设置 PowerShell 环境。
 2. 启动 PowerShell 控制台，连接到订阅，并在控制台窗口中运行以下 PowerShell cmdlet。如此 PowerShell 语句中所示，创建高级存储帐户时，必须将 **Type** 参数指定为 **Premium\_LRS**。
 
-        New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+    ```
+    New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+    ```
 
 #### II.通过 Azure PowerShell 创建 Azure 虚拟机
 
 接下来，请创建新的 DS 系列 VM，并在控制台窗口中运行以下 PowerShell cmdlet 以指定要使用高级存储：
 
-        $storageAccount = "yourpremiumaccount"
-        $adminName = "youradmin"
-        $adminPassword = "yourpassword"
-        $vmName ="yourVM"
-        $location = "China East"
-        $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd"
-        $vmSize ="Standard_DS2"
-        $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
-        $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
-        Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
-        New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+```
+    $storageAccount = "yourpremiumaccount"
+    $adminName = "youradmin"
+    $adminPassword = "yourpassword"
+    $vmName ="yourVM"
+    $location = "China East"
+    $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd"
+    $vmSize ="Standard_DS2"
+    $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
+    $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
+    Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
+    New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+```
 
 #### III.通过 Azure PowerShell 附加高级存储数据磁盘
 
 如果希望 VM 有更多的磁盘空间，请在创建虚拟机后于控制台窗口中运行以下 PowerShell cmdlet 以将新的数据磁盘附加到支持高级存储的现有 VM：
 
-        $storageAccount = "yourpremiumaccount"
-        $vmName ="yourVM"
-        $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
-        $LunNo = 1
-        $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
-        $label = "Disk " + $LunNo
-        Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+```
+    $storageAccount = "yourpremiumaccount"
+    $vmName ="yourVM"
+    $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
+    $LunNo = 1
+    $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
+    $label = "Disk " + $LunNo
+    Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+```
 
 #### IV.通过 Azure PowerShell 更改磁盘缓存策略
 
 若要更新磁盘缓存策略，请记下附加的数据磁盘的 LUN 编号。运行以下命令，将附加到 LUN 编号 2 的数据磁盘更新为 ReadOnly。
 
-        Get-AzureVM "myservice" -name "MyVM" | Set-AzureDataDisk -LUN 2 -HostCaching ReadOnly | Update-AzureVM
+```
+    Get-AzureVM "myservice" -name "MyVM" | Set-AzureDataDisk -LUN 2 -HostCaching ReadOnly | Update-AzureVM
+```
 
 >[!WARNING]
 > 更改 Azure 磁盘的缓存设置可分离和重新附加目标磁盘。如果它是操作系统磁盘，将重启 VM。更改磁盘缓存设置前，停止所有可能受此中断影响的应用程序/服务。
@@ -490,34 +500,48 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 #### I.通过 Azure CLI 创建高级存储帐户
 
-    azure storage account create "premiumtestaccount" -l "China East" --type PLRS
+```
+azure storage account create "premiumtestaccount" -l "China East" --type PLRS
+```
 
 #### II.通过 Azure CLI 创建 DS 系列虚拟机
 
-    azure vm create -z "Standard_DS2" -l "China East" -e 22 "premium-test-vm"
-        "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd" -u "myusername" -p "passwd@123"
+```
+azure vm create -z "Standard_DS2" -l "China East" -e 22 "premium-test-vm"
+    "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd" -u "myusername" -p "passwd@123"
+```
 
 显示有关虚拟机的信息
 
-    azure vm show premium-test-vm
+```
+azure vm show premium-test-vm
+```
 
 #### III.通过 Azure CLI 附加新的高级数据磁盘
 
-    azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+```
+azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+```
 
 显示有关新数据磁盘的信息
 
-    azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+```
+azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+```
 
 #### IV.更改磁盘缓存策略
 
 若要使用 Azure CLI 更改某个磁盘上的缓存策略，请运行以下命令：
 
-        $ azure vm disk attach -h ReadOnly <VM-Name> <Disk-Name>
+```
+    $ azure vm disk attach -h ReadOnly <VM-Name> <Disk-Name>
+```
 
 请注意，缓存策略选项可以是 ReadOnly、None 或 ReadWrite。有关更多选项，请通过运行以下命令查看帮助：
 
-        azure vm disk attach --help
+```
+    azure vm disk attach --help
+```
 
 >[!WARNING]
 > 更改 Azure 磁盘的缓存设置可分离和重新附加目标磁盘。如果它是操作系统磁盘，将重启 VM。更改磁盘缓存设置前，停止所有可能受此中断影响的应用程序/服务。

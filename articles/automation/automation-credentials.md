@@ -60,10 +60,12 @@ ms.author: bwren
 
 以下示例命令演示了如何创建新的自动化凭据。首先创建了一个具有名称和密码的 PSCredential 对象，然后使用该对象创建凭据资产。或者，可以使用 **Get-Credential** cmdlet，会提示您键入名称和密码。
 
-    $user = "MyDomain\MyUser"
-    $pw = ConvertTo-SecureString "PassWord!" -AsPlainText -Force
-    $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $user, $pw
-    New-AzureAutomationCredential -AutomationAccountName "MyAutomationAccount" -Name "MyCredential" -Value $cred
+```
+$user = "MyDomain\MyUser"
+$pw = ConvertTo-SecureString "PassWord!" -AsPlainText -Force
+$cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $user, $pw
+New-AzureAutomationCredential -AutomationAccountName "MyAutomationAccount" -Name "MyCredential" -Value $cred
+```
 
 ## 使用 PowerShell 凭据
 
@@ -73,9 +75,11 @@ ms.author: bwren
 
 下面的示例命令演示如何在 Runbook 中使用 PowerShell 凭据。在此示例中，检索了凭据并将其用户名和密码分配到变量。
 
-    $myCredential = Get-AutomationPSCredential -Name 'MyCredential'
-    $userName = $myCredential.UserName
-    $securePassword = $myCredential.Password
-    $password = $myCredential.GetNetworkCredential().Password
+```
+$myCredential = Get-AutomationPSCredential -Name 'MyCredential'
+$userName = $myCredential.UserName
+$securePassword = $myCredential.Password
+$password = $myCredential.GetNetworkCredential().Password
+```
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

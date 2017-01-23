@@ -70,8 +70,58 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 以下脚本是针对 Python 3.5 编写的。若要使用 2.x 版 Python，请针对两个启动任务以及运行时任务将 **PYTHON2** 变量文件设置为 **on**：`<Variable name="PYTHON2" value="<mark>on</mark>" />`。
 
-    <Startup>
+```
+<Startup>
 
+  <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PrepPython.ps1">
+    <Environment>
+      <Variable name="EMULATED">
+        <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+      </Variable>
+      <Variable name="PYTHON2" value="off" />
+    </Environment>
+  </Task>
+
+  <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PipInstaller.ps1">
+    <Environment>
+      <Variable name="EMULATED">
+        <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+      </Variable>
+        <Variable name="PYTHON2" value="off" />
+    </Environment>
+  </Task>
+
+</Startup>
+```
+
+需将 **PYTHON2** 和 **PYPATH** 变量添加到辅助角色启动任务。仅当 **PYTHON2** 变量设置为 **on** 时，才使用 **PYPATH** 变量。
+
+```
+<Runtime>
+  <Environment>
+    <Variable name="EMULATED">
+      <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+    </Variable>
+    <Variable name="PYTHON2" value="off" />
+    <Variable name="PYPATH" value="%SystemDrive%\Python27" />
+  </Environment>
+  <EntryPoint>
+    <ProgramEntryPoint commandLine="bin\ps.cmd LaunchWorker.ps1" setReadyOnProcessStart="true" />
+  </EntryPoint>
+</Runtime>
+```
+
+#### ServiceDefinition.csdef 示例
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="AzureCloudServicePython" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
+  <WorkerRole name="WorkerRole1" vmsize="Small">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="Python2" />
+    </ConfigurationSettings>
+    <Startup>
       <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PrepPython.ps1">
         <Environment>
           <Variable name="EMULATED">
@@ -80,20 +130,15 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
           <Variable name="PYTHON2" value="off" />
         </Environment>
       </Task>
-
       <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PipInstaller.ps1">
         <Environment>
           <Variable name="EMULATED">
             <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
           </Variable>
-            <Variable name="PYTHON2" value="off" />
+          <Variable name="PYTHON2" value="off" />
         </Environment>
       </Task>
-
     </Startup>
-
-需将 **PYTHON2** 和 **PYPATH** 变量添加到辅助角色启动任务。仅当 **PYTHON2** 变量设置为 **on** 时，才使用 **PYPATH** 变量。
-
     <Runtime>
       <Environment>
         <Variable name="EMULATED">
@@ -106,52 +151,13 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
         <ProgramEntryPoint commandLine="bin\ps.cmd LaunchWorker.ps1" setReadyOnProcessStart="true" />
       </EntryPoint>
     </Runtime>
-
-#### ServiceDefinition.csdef 示例
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <ServiceDefinition name="AzureCloudServicePython" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
-      <WorkerRole name="WorkerRole1" vmsize="Small">
-        <ConfigurationSettings>
-          <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-          <Setting name="Python2" />
-        </ConfigurationSettings>
-        <Startup>
-          <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PrepPython.ps1">
-            <Environment>
-              <Variable name="EMULATED">
-                <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
-              </Variable>
-              <Variable name="PYTHON2" value="off" />
-            </Environment>
-          </Task>
-          <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PipInstaller.ps1">
-            <Environment>
-              <Variable name="EMULATED">
-                <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
-              </Variable>
-              <Variable name="PYTHON2" value="off" />
-            </Environment>
-          </Task>
-        </Startup>
-        <Runtime>
-          <Environment>
-            <Variable name="EMULATED">
-              <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
-            </Variable>
-            <Variable name="PYTHON2" value="off" />
-            <Variable name="PYPATH" value="%SystemDrive%\Python27" />
-          </Environment>
-          <EntryPoint>
-            <ProgramEntryPoint commandLine="bin\ps.cmd LaunchWorker.ps1" setReadyOnProcessStart="true" />
-          </EntryPoint>
-        </Runtime>
-        <Imports>
-          <Import moduleName="RemoteAccess" />
-          <Import moduleName="RemoteForwarder" />
-        </Imports>
-      </WorkerRole>
-    </ServiceDefinition>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
+  </WorkerRole>
+</ServiceDefinition>
+```
 
 接下来，在角色的 **./bin** 文件夹中创建 **PrepPython.ps1** 和 **PipInstaller.ps1** 文件。
 
@@ -159,73 +165,77 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 此脚本可安装 Python。如果 **PYTHON2** 环境变量设置为 **on**，则安装 Python 2.7，否则安装 Python 3.5。
 
-    $is_emulated = $env:EMULATED -eq "true"
-    $is_python2 = $env:PYTHON2 -eq "on"
-    $nl = [Environment]::NewLine
+```
+$is_emulated = $env:EMULATED -eq "true"
+$is_python2 = $env:PYTHON2 -eq "on"
+$nl = [Environment]::NewLine
 
-    if (-not $is_emulated){
-    Write-Output "Checking if python is installed...$nl"
-        if ($is_python2) {
-            & "${env:SystemDrive}\Python27\python.exe"  -V | Out-Null
-        }
-        else {
-            py -V | Out-Null
-        }
-
-        if (-not $?) {
-
-            $url = "https://www.python.org/ftp/python/3.5.2/python-3.5.2-amd64.exe"
-            $outFile = "${env:TEMP}\python-3.5.2-amd64.exe"
-
-            if ($is_python2) {
-                $url = "https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi"
-                $outFile = "${env:TEMP}\python-2.7.12.amd64.msi"
-            }
-
-        Write-Output "Not found, downloading $url to $outFile$nl"
-            Invoke-WebRequest $url -OutFile $outFile
-        Write-Output "Installing$nl"
-
-            if ($is_python2) {
-                Start-Process msiexec.exe -ArgumentList "/q", "/i", "$outFile", "ALLUSERS=1" -Wait
-            }
-            else {
-                Start-Process "$outFile" -ArgumentList "/quiet", "InstallAllUsers=1" -Wait
-            }
-
-        Write-Output "Done$nl"
-        }
-        else {
-        Write-Output "Already installed"
-        }
+if (-not $is_emulated){
+Write-Output "Checking if python is installed...$nl"
+    if ($is_python2) {
+        & "${env:SystemDrive}\Python27\python.exe"  -V | Out-Null
     }
+    else {
+        py -V | Out-Null
+    }
+
+    if (-not $?) {
+
+        $url = "https://www.python.org/ftp/python/3.5.2/python-3.5.2-amd64.exe"
+        $outFile = "${env:TEMP}\python-3.5.2-amd64.exe"
+
+        if ($is_python2) {
+            $url = "https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi"
+            $outFile = "${env:TEMP}\python-2.7.12.amd64.msi"
+        }
+
+    Write-Output "Not found, downloading $url to $outFile$nl"
+        Invoke-WebRequest $url -OutFile $outFile
+    Write-Output "Installing$nl"
+
+        if ($is_python2) {
+            Start-Process msiexec.exe -ArgumentList "/q", "/i", "$outFile", "ALLUSERS=1" -Wait
+        }
+        else {
+            Start-Process "$outFile" -ArgumentList "/quiet", "InstallAllUsers=1" -Wait
+        }
+
+    Write-Output "Done$nl"
+    }
+    else {
+    Write-Output "Already installed"
+    }
+}
+```
 
 #### PipInstaller.ps1
 
 此脚本调用 pip 并安装 **requirements.txt** 文件中的所有依赖项。如果 **PYTHON2** 环境变量设置为 **on**，则使用 Python 2.7，否则使用 Python 3.5。
 
-    $is_emulated = $env:EMULATED -eq "true"
-    $is_python2 = $env:PYTHON2 -eq "on"
-    $nl = [Environment]::NewLine
+```
+$is_emulated = $env:EMULATED -eq "true"
+$is_python2 = $env:PYTHON2 -eq "on"
+$nl = [Environment]::NewLine
 
-    if (-not $is_emulated){
-    Write-Output "Checking if requirements.txt exists$nl"
-        if (Test-Path ..\requirements.txt) {
-        Write-Output "Found. Processing pip$nl"
+if (-not $is_emulated){
+Write-Output "Checking if requirements.txt exists$nl"
+    if (Test-Path ..\requirements.txt) {
+    Write-Output "Found. Processing pip$nl"
 
-            if ($is_python2) {
-                & "${env:SystemDrive}\Python27\python.exe" -m pip install -r ..\requirements.txt
-            }
-            else {
-                py -m pip install -r ..\requirements.txt
-            }
-
-        Write-Output "Done$nl"
+        if ($is_python2) {
+            & "${env:SystemDrive}\Python27\python.exe" -m pip install -r ..\requirements.txt
         }
         else {
-        Write-Output "Not found$nl"
+            py -m pip install -r ..\requirements.txt
         }
+
+    Write-Output "Done$nl"
     }
+    else {
+    Write-Output "Not found$nl"
+    }
+}
+```
 
 #### 修改 LaunchWorker.ps1
 
@@ -236,49 +246,53 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 此脚本从 Python 项目调用 **worker.py** 文件。如果 **PYTHON2** 环境变量设置为 **on**，则使用 Python 2.7，否则使用 Python 3.5。
 
-    $is_emulated = $env:EMULATED -eq "true"
-    $is_python2 = $env:PYTHON2 -eq "on"
-    $nl = [Environment]::NewLine
+```
+$is_emulated = $env:EMULATED -eq "true"
+$is_python2 = $env:PYTHON2 -eq "on"
+$nl = [Environment]::NewLine
 
-    if (-not $is_emulated)
-    {
-    Write-Output "Running worker.py$nl"
+if (-not $is_emulated)
+{
+Write-Output "Running worker.py$nl"
 
-        if ($is_python2) {
-            cd..
-            iex "$env:PYPATH\python.exe worker.py"
-        }
-        else {
-            cd..
-            iex "py worker.py"
-        }
+    if ($is_python2) {
+        cd..
+        iex "$env:PYPATH\python.exe worker.py"
     }
-    else
-    {
-    Write-Output "Running (EMULATED) worker.py$nl"
-
-        # Customize to your local dev environment
-
-        if ($is_python2) {
-            cd..
-            iex "$env:PYPATH\python.exe worker.py"
-        }
-        else {
-            cd..
-            iex "py worker.py"
-        }
+    else {
+        cd..
+        iex "py worker.py"
     }
+}
+else
+{
+Write-Output "Running (EMULATED) worker.py$nl"
+
+    # Customize to your local dev environment
+
+    if ($is_python2) {
+        cd..
+        iex "$env:PYPATH\python.exe worker.py"
+    }
+    else {
+        cd..
+        iex "py worker.py"
+    }
+}
+```
 
 #### ps.cmd
 
 Visual Studio 模板应在 **./bin** 文件夹中创建了一个 **ps.cmd** 文件。此 shell 脚本调用上述 PowerShell 包装脚本，并根据所调用 PowerShell 包装的名称提供日志记录。如果未创建此文件，请注意，下面是该文件应该包含的内容。
 
-    @echo off
+```
+@echo off
 
-    cd /D %~dp0
+cd /D %~dp0
 
-    if not exist "%DiagnosticStore%\LogFiles" mkdir "%DiagnosticStore%\LogFiles"
-    %SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -File %* >> "%DiagnosticStore%\LogFiles\%~n1.txt" 2>> "%DiagnosticStore%\LogFiles\%~n1.err.txt"
+if not exist "%DiagnosticStore%\LogFiles" mkdir "%DiagnosticStore%\LogFiles"
+%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -File %* >> "%DiagnosticStore%\LogFiles\%~n1.txt" 2>> "%DiagnosticStore%\LogFiles\%~n1.err.txt"
+```
 
 ## 在本地运行
 

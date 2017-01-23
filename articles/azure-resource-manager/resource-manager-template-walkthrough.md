@@ -43,31 +43,35 @@ ms.author: navale;tomfitz
 
 让我们从最简单的模板开始：
 
-        {
-          "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-          "contentVersion": "1.0.0.0",
-          "parameters": {  },
-          "variables": {  },
-          "resources": [  ],
-          "outputs": {  }
-        }
+```
+    {
+      "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {  },
+      "variables": {  },
+      "resources": [  ],
+      "outputs": {  }
+    }
+```
 
 将此文件另存为 **azuredeploy.json**（请注意，模板可以具有任何所需的名称，只是它必须是 json 文件）。
 
 ## 创建存储帐户
 在 **resources** 节内，添加用于定义存储帐户的对象，如下所示。
 
-    "resources": [
-      {
-        "type": "Microsoft.Storage/storageAccounts",
-        "name": "[parameters('storageAccountName')]",
-        "apiVersion": "2015-06-15",
-        "location": "[resourceGroup().location]",
-        "properties": {
-          "accountType": "Standard_LRS"
-        }
-      }
-    ]
+```
+"resources": [
+  {
+    "type": "Microsoft.Storage/storageAccounts",
+    "name": "[parameters('storageAccountName')]",
+    "apiVersion": "2015-06-15",
+    "location": "[resourceGroup().location]",
+    "properties": {
+      "accountType": "Standard_LRS"
+    }
+  }
+]
+```
 
 你可能想知道这些属性和值来自何处。**type**、**name**、**apiVersion** 和 **location** 属性都是可供所有资源类型使用的标准元素。你可以在 [Resources](./resource-group-authoring-templates.md#resources) 中了解常见元素。**name** 设置为在部署过程中传递的参数值，**location** 作为资源组使用的位置。我们将在下面部分探讨如何确定 **type** 和 **apiVersion**。
 
@@ -75,58 +79,66 @@ ms.author: navale;tomfitz
 
 现在，让我们跳回到 **parameters** 节，并了解如何定义存储帐户的名称。你可以在 [Parameters](./resource-group-authoring-templates.md#parameters) 中了解有关如何使用参数的更多信息。
 
-    "parameters" : {
-        "storageAccountName": {
-          "type": "string",
-          "metadata": {
-            "description": "Storage Account Name"
-          }
-        }
+```
+"parameters" : {
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage Account Name"
+      }
     }
+}
+```
 
 此处你定义了一个字符串类型的参数，用于保存存储帐户的名称。在部署模板过程中将提供此参数的值。
 
 ## 部署模板
 我们已有用于创建新存储帐户的完整模板。你应该还记得，该模板保存在 **azuredeploy.json** 文件中：
 
-    {
-      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-      "contentVersion": "1.0.0.0",
-      "parameters" : {
-        "storageAccountName": {
-          "type": "string",
-          "metadata": {
-            "description": "Storage Account Name"
-          }
-        }
-      },  
-      "resources": [
-        {
-          "type": "Microsoft.Storage/storageAccounts",
-          "name": "[parameters('storageAccountName')]",
-          "apiVersion": "2015-06-15",
-          "location": "[resourceGroup().location]",
-          "properties": {
-            "accountType": "Standard_LRS"
-          }
-        }
-      ]
+```
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters" : {
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage Account Name"
+      }
     }
+  },  
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('storageAccountName')]",
+      "apiVersion": "2015-06-15",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "accountType": "Standard_LRS"
+      }
+    }
+  ]
+}
+```
 
 有很多方法可以部署模板，如[资源部署](./resource-group-template-deploy.md)一文所示。若要使用 Azure PowerShell 部署模板，请使用：
 
-    # create a new resource group
-    New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "China East"
+```
+# create a new resource group
+New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "China East"
 
-    # deploy the template to the resource group
-    New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup `
-      -TemplateFile azuredeploy.json
+# deploy the template to the resource group
+New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup `
+  -TemplateFile azuredeploy.json
+```
 
 或者，若要使用 Azure CLI 部署模板，请使用：
 
-    azure group create -n ExampleResourceGroup -l "China East"
+```
+azure group create -n ExampleResourceGroup -l "China East"
 
-    azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n ExampleDeployment
+azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n ExampleDeployment
+```
 
 现在，你是存储帐户的骄傲拥有者！
 
@@ -135,23 +147,29 @@ ms.author: navale;tomfitz
 ## 可用性集
 在存储帐户的定义后面，添加虚拟机的可用性集。在本例中，无需其他属性，因此其定义相当简单。如果想要定义更新域计数和容错域计数值，请参阅[用于创建可用性集的 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163607.aspx) 中的完整 properties 节。
 
-    {
-        "type": "Microsoft.Compute/availabilitySets",
-        "name": "[variables('availabilitySetName')]",
-        "apiVersion": "2015-06-15",
-        "location": "[resourceGroup().location]",
-        "properties": {}
-    }
+```
+{
+    "type": "Microsoft.Compute/availabilitySets",
+    "name": "[variables('availabilitySetName')]",
+    "apiVersion": "2015-06-15",
+    "location": "[resourceGroup().location]",
+    "properties": {}
+}
+```
 
 请注意，**name** 已设置为某个变量的值。在此模板中，在几个不同的位置需要可用性集的名称。可以通过定义该值一次并在多个位置使用它，来更轻松地维护模板。
 
 为 **type** 指定的值同时包含资源提供程序和资源类型。在可用性集中，资源提供程序为 **Microsoft.Compute**，资源类型为 **availabilitySets**。可通过运行以下 PowerShell 命令获取可用的资源提供程序列表：
 
-        Get-AzureRmResourceProvider -ListAvailable
+```
+    Get-AzureRmResourceProvider -ListAvailable
+```
 
 或者，如果你使用 Azure CLI，可以运行以下命令：
 
-        azure provider list
+```
+    azure provider list
+```
 
 本主题假设用户要创建包含存储帐户、虚拟机和虚拟网络的模板，因此可以使用：
 
@@ -161,41 +179,51 @@ ms.author: navale;tomfitz
 
 若要查看特定提供程序的资源类型，请运行以下 PowerShell 命令：
 
-        (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Compute).ResourceTypes
+```
+    (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Compute).ResourceTypes
+```
 
 或者，在 Azure CLI 中，以下命令将以 JSON 格式返回可用的类型，并将它保存到文件中。
 
-        azure provider show Microsoft.Compute --json > c:\temp.json
+```
+    azure provider show Microsoft.Compute --json > c:\temp.json
+```
 
 用户会看到 **availabilitySets** 成为 **Microsoft.Compute** 中的类型之一。类型的完整名称为 **Microsoft.Compute/availabilitySets**。你可以在模板中确定任何资源的资源类型名称。
 
 ## 公共 IP
 定义公共 IP 地址。再次查看[公共 IP 地址的 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163590.aspx) 中要设置的属性。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('publicIPAddressName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "publicIPAllocationMethod": "Dynamic",
-        "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsNameforLBIP')]"
-        }
-      }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Network/publicIPAddresses",
+  "name": "[parameters('publicIPAddressName')]",
+  "location": "[resourceGroup().location]",
+  "properties": {
+    "publicIPAllocationMethod": "Dynamic",
+    "dnsSettings": {
+      "domainNameLabel": "[parameters('dnsNameforLBIP')]"
     }
+  }
+}
+```
 
 分配方法设置为 **Dynamic**，但用户可以将它设置为所需的值或将它设置为接受参数值。你已让模板的用户能够传入域名标签的值。
 
 现在，让我们看看如何确定 **apiVersion**。指定的值完全匹配创建资源时所要使用的 REST API 版本。因此，你可以查看该资源类型的 REST API 文档。或者，可以对特定类型运行以下 PowerShell 命令。
 
-        ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Network).ResourceTypes | Where-Object ResourceTypeName -eq publicIPAddresses).ApiVersions
+```
+    ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Network).ResourceTypes | Where-Object ResourceTypeName -eq publicIPAddresses).ApiVersions
+```
 
 这将返回以下值：
 
-    2015-06-15
-    2015-05-01-preview
-    2014-12-01-preview
+```
+2015-06-15
+2015-05-01-preview
+2014-12-01-preview
+```
 
 若要查看使用 Azure CLI 的 API 版本，请运行前面所示的同一 **azure provider show** 命令。
 
@@ -204,220 +232,228 @@ ms.author: navale;tomfitz
 ## 虚拟网络和子网
 创建具有一个子网的虚拟网络。有关要设置的所有属性，请查看 [REST API for virtual networks](https://msdn.microsoft.com/zh-cn/library/azure/mt163661.aspx)（虚拟网络的 REST API）。
 
-    {
-        "apiVersion": "2015-06-15",
-        "type": "Microsoft.Network/virtualNetworks",
-        "name": "[parameters('vnetName')]",
-        "location": "[resourceGroup().location]",
-        "properties": {
-         "addressSpace": {
-           "addressPrefixes": [
-             "10.0.0.0/16"
-           ]
-         },
-         "subnets": [
-           {
-             "name": "[variables('subnetName')]",
-             "properties": {
-               "addressPrefix": "10.0.0.0/24"
-             }
-           }
-         ]
-        }
+```
+{
+    "apiVersion": "2015-06-15",
+    "type": "Microsoft.Network/virtualNetworks",
+    "name": "[parameters('vnetName')]",
+    "location": "[resourceGroup().location]",
+    "properties": {
+     "addressSpace": {
+       "addressPrefixes": [
+         "10.0.0.0/16"
+       ]
+     },
+     "subnets": [
+       {
+         "name": "[variables('subnetName')]",
+         "properties": {
+           "addressPrefix": "10.0.0.0/24"
+         }
+       }
+     ]
     }
+}
+```
 
 ## 负载均衡器
 现在创建一个面向外部的负载均衡器。由于此负载均衡器使用公共 IP 地址，因此必须在 **dependsOn** 节中声明公共 IP 地址的依赖性。这意味着在公共 IP 地址完成部署后，才部署负载均衡器。如果不定义此依赖性，你将收到错误，因为 Resource Manager 尝试以并行方式部署资源，并尝试将负载均衡器设置为尚不存在的公共 IP 地址。
 
 你还要在此资源定义中创建后端地址池、几个用于通过 RDP 连接到 VM 的入站 NAT 规则，以及端口 80 上包含 TCP 探测的负载均衡规则。有关所有属性，请查看 [REST API for load balancer](https://msdn.microsoft.com/zh-cn/library/azure/mt163574.aspx)（负载均衡器的 REST API）。
 
-    {
-        "apiVersion": "2015-06-15",
-        "name": "[parameters('lbName')]",
-        "type": "Microsoft.Network/loadBalancers",
-        "location": "[resourceGroup().location]",
-        "dependsOn": [
-         "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]"
-        ],
-        "properties": {
-         "frontendIPConfigurations": [
-           {
-             "name": "LoadBalancerFrontEnd",
-             "properties": {
-               "publicIPAddress": {
-                 "id": "[variables('publicIPAddressID')]"
-               }
-             }
+```
+{
+    "apiVersion": "2015-06-15",
+    "name": "[parameters('lbName')]",
+    "type": "Microsoft.Network/loadBalancers",
+    "location": "[resourceGroup().location]",
+    "dependsOn": [
+     "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]"
+    ],
+    "properties": {
+     "frontendIPConfigurations": [
+       {
+         "name": "LoadBalancerFrontEnd",
+         "properties": {
+           "publicIPAddress": {
+             "id": "[variables('publicIPAddressID')]"
            }
-         ],
-         "backendAddressPools": [
-           {
-             "name": "BackendPool1"
-           }
-         ],
-         "inboundNatRules": [
-           {
-             "name": "RDP-VM0",
-             "properties": {
-               "frontendIPConfiguration": {
-                 "id": "[variables('frontEndIPConfigID')]"
-               },
-               "protocol": "tcp",
-               "frontendPort": 50001,
-               "backendPort": 3389,
-               "enableFloatingIP": false
-             }
+         }
+       }
+     ],
+     "backendAddressPools": [
+       {
+         "name": "BackendPool1"
+       }
+     ],
+     "inboundNatRules": [
+       {
+         "name": "RDP-VM0",
+         "properties": {
+           "frontendIPConfiguration": {
+             "id": "[variables('frontEndIPConfigID')]"
            },
-           {
-             "name": "RDP-VM1",
-             "properties": {
-               "frontendIPConfiguration": {
-                 "id": "[variables('frontEndIPConfigID')]"
-               },
-               "protocol": "tcp",
-               "frontendPort": 50002,
-               "backendPort": 3389,
-               "enableFloatingIP": false
-             }
+           "protocol": "tcp",
+           "frontendPort": 50001,
+           "backendPort": 3389,
+           "enableFloatingIP": false
+         }
+       },
+       {
+         "name": "RDP-VM1",
+         "properties": {
+           "frontendIPConfiguration": {
+             "id": "[variables('frontEndIPConfigID')]"
+           },
+           "protocol": "tcp",
+           "frontendPort": 50002,
+           "backendPort": 3389,
+           "enableFloatingIP": false
+         }
+       }
+     ],
+     "loadBalancingRules": [
+       {
+         "name": "LBRule",
+         "properties": {
+           "frontendIPConfiguration": {
+             "id": "[variables('frontEndIPConfigID')]"
+           },
+           "backendAddressPool": {
+             "id": "[variables('lbPoolID')]"
+           },
+           "protocol": "tcp",
+           "frontendPort": 80,
+           "backendPort": 80,
+           "enableFloatingIP": false,
+           "idleTimeoutInMinutes": 5,
+           "probe": {
+             "id": "[variables('lbProbeID')]"
            }
-         ],
-         "loadBalancingRules": [
-           {
-             "name": "LBRule",
-             "properties": {
-               "frontendIPConfiguration": {
-                 "id": "[variables('frontEndIPConfigID')]"
-               },
-               "backendAddressPool": {
-                 "id": "[variables('lbPoolID')]"
-               },
-               "protocol": "tcp",
-               "frontendPort": 80,
-               "backendPort": 80,
-               "enableFloatingIP": false,
-               "idleTimeoutInMinutes": 5,
-               "probe": {
-                 "id": "[variables('lbProbeID')]"
-               }
-             }
-           }
-         ],
-         "probes": [
-           {
-             "name": "tcpProbe",
-             "properties": {
-               "protocol": "tcp",
-               "port": 80,
-               "intervalInSeconds": 5,
-               "numberOfProbes": 2
-             }
-           }
-         ]
-        }
+         }
+       }
+     ],
+     "probes": [
+       {
+         "name": "tcpProbe",
+         "properties": {
+           "protocol": "tcp",
+           "port": 80,
+           "intervalInSeconds": 5,
+           "numberOfProbes": 2
+         }
+       }
+     ]
     }
+}
+```
 
 ## <a name="network-interface"></a> 网络接口
 你将创建 2 个网络接口，每个 VM 各用一个。可以使用 [copyIndex() 函数](./resource-group-create-multiple.md) 来迭代复制循环（称为 nicLoop），并创建 `numberOfInstances` 变量中定义的网络接口个数，而不必包含重复的网络接口项。网络接口取决于虚拟网络和负载均衡器的创建。它使用创建虚拟网络时所定义的子网，以及负载均衡器 ID 来配置负载均衡器地址池和入站 NAT 规则。有关所有属性，请查看 [REST API for network interfaces](https://msdn.microsoft.com/zh-cn/library/azure/mt163668.aspx)（网络接口的 REST API）。
 
-    {
-        "apiVersion": "2015-06-15",
-        "type": "Microsoft.Network/networkInterfaces",
-        "name": "[concat(parameters('nicNamePrefix'), copyindex())]",
-        "location": "[resourceGroup().location]",
-        "copy": {
-         "name": "nicLoop",
-         "count": "[variables('numberOfInstances')]"
-        },
-        "dependsOn": [
-         "[concat('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
-         "[concat('Microsoft.Network/loadBalancers/', parameters('lbName'))]"
-        ],
-        "properties": {
-         "ipConfigurations": [
-           {
-             "name": "ipconfig1",
-             "properties": {
-               "privateIPAllocationMethod": "Dynamic",
-               "subnet": {
-                 "id": "[variables('subnetRef')]"
-               },
-               "loadBalancerBackendAddressPools": [
-                 {
-                   "id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool1')]"
-                 }
-               ],
-               "loadBalancerInboundNatRules": [
-                 {
-                   "id": "[concat(variables('lbID'),'/inboundNatRules/RDP-VM', copyindex())]"
-                 }
-               ]
+```
+{
+    "apiVersion": "2015-06-15",
+    "type": "Microsoft.Network/networkInterfaces",
+    "name": "[concat(parameters('nicNamePrefix'), copyindex())]",
+    "location": "[resourceGroup().location]",
+    "copy": {
+     "name": "nicLoop",
+     "count": "[variables('numberOfInstances')]"
+    },
+    "dependsOn": [
+     "[concat('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
+     "[concat('Microsoft.Network/loadBalancers/', parameters('lbName'))]"
+    ],
+    "properties": {
+     "ipConfigurations": [
+       {
+         "name": "ipconfig1",
+         "properties": {
+           "privateIPAllocationMethod": "Dynamic",
+           "subnet": {
+             "id": "[variables('subnetRef')]"
+           },
+           "loadBalancerBackendAddressPools": [
+             {
+               "id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool1')]"
              }
-           }
-         ]
-        }
+           ],
+           "loadBalancerInboundNatRules": [
+             {
+               "id": "[concat(variables('lbID'),'/inboundNatRules/RDP-VM', copyindex())]"
+             }
+           ]
+         }
+       }
+     ]
     }
+}
+```
 
 ## 虚拟机
 如同在创建[网络接口](#network-interface)时所做的一样，将使用 copyIndex() 函数创建 2 个虚拟机。VM 的创建取决于存储帐户、网络接口和可用性集。如 `storageProfile` 属性中定义的那样，将从应用商店映像创建此 VM - `imageReference` 用于定义映像发布者、产品、SKU 和版本。最后，配置诊断配置文件以启用 VM 的诊断。
 
 若要查找应用商店映像的相关属性，请遵循[选择 Linux 虚拟机映像](../virtual-machines/virtual-machines-linux-cli-ps-findimage.md)一文或[选择 Windows 虚拟机映像](../virtual-machines/virtual-machines-windows-cli-ps-findimage.md)一文。
 
-    {
-        "apiVersion": "2015-06-15",
-        "type": "Microsoft.Compute/virtualMachines",
-        "name": "[concat(parameters('vmNamePrefix'), copyindex())]",
-        "copy": {
-         "name": "virtualMachineLoop",
-         "count": "[variables('numberOfInstances')]"
-        },
-        "location": "[resourceGroup().location]",
-        "dependsOn": [
-         "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
-         "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]",
-         "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
-        ],
-        "properties": {
-         "availabilitySet": {
-           "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
+```
+{
+    "apiVersion": "2015-06-15",
+    "type": "Microsoft.Compute/virtualMachines",
+    "name": "[concat(parameters('vmNamePrefix'), copyindex())]",
+    "copy": {
+     "name": "virtualMachineLoop",
+     "count": "[variables('numberOfInstances')]"
+    },
+    "location": "[resourceGroup().location]",
+    "dependsOn": [
+     "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
+     "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]",
+     "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
+    ],
+    "properties": {
+     "availabilitySet": {
+       "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
+     },
+     "hardwareProfile": {
+       "vmSize": "[parameters('vmSize')]"
+     },
+     "osProfile": {
+       "computerName": "[concat(parameters('vmNamePrefix'), copyIndex())]",
+       "adminUsername": "[parameters('adminUsername')]",
+       "adminPassword": "[parameters('adminPassword')]"
+     },
+     "storageProfile": {
+       "imageReference": {
+         "publisher": "[parameters('imagePublisher')]",
+         "offer": "[parameters('imageOffer')]",
+         "sku": "[parameters('imageSKU')]",
+         "version": "latest"
+       },
+       "osDisk": {
+         "name": "osdisk",
+         "vhd": {
+           "uri": "[concat('http://',parameters('storageAccountName'),'.blob.core.chinacloudapi.cn/vhds/','osdisk', copyindex(), '.vhd')]"
          },
-         "hardwareProfile": {
-           "vmSize": "[parameters('vmSize')]"
-         },
-         "osProfile": {
-           "computerName": "[concat(parameters('vmNamePrefix'), copyIndex())]",
-           "adminUsername": "[parameters('adminUsername')]",
-           "adminPassword": "[parameters('adminPassword')]"
-         },
-         "storageProfile": {
-           "imageReference": {
-             "publisher": "[parameters('imagePublisher')]",
-             "offer": "[parameters('imageOffer')]",
-             "sku": "[parameters('imageSKU')]",
-             "version": "latest"
-           },
-           "osDisk": {
-             "name": "osdisk",
-             "vhd": {
-               "uri": "[concat('http://',parameters('storageAccountName'),'.blob.core.chinacloudapi.cn/vhds/','osdisk', copyindex(), '.vhd')]"
-             },
-             "caching": "ReadWrite",
-             "createOption": "FromImage"
-           }
-         },
-         "networkProfile": {
-           "networkInterfaces": [
-             {
-               "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('nicNamePrefix'),copyindex()))]"
-             }
-           ]
-         },
-         "diagnosticsProfile": {
-           "bootDiagnostics": {
-              "enabled": "true",
-              "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.chinacloudapi.cn')]"
-           }
+         "caching": "ReadWrite",
+         "createOption": "FromImage"
+       }
+     },
+     "networkProfile": {
+       "networkInterfaces": [
+         {
+           "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('nicNamePrefix'),copyindex()))]"
          }
-    }
+       ]
+     },
+     "diagnosticsProfile": {
+       "bootDiagnostics": {
+          "enabled": "true",
+          "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.chinacloudapi.cn')]"
+       }
+     }
+}
+```
 
 > [!NOTE]
 对于**第三方供应商**发布的映像，必须指定名为 `plan` 的另一个属性。从快速入门库的[此模板](https://github.com/Azure/azure-quickstart-templates/tree/master/checkpoint-single-nic)中可找到示例。
@@ -429,116 +465,120 @@ ms.author: navale;tomfitz
 ## Parameters
 在 parameters 节中，定义可在部署模板时指定的值。只针对你认为应在部署期间更改的值定义参数。如果部署期间不提供默认值，你可以为所用的参数提供默认值。如 **imageSKU** 参数所示，也可以定义允许的值。
 
-    "parameters": {
-        "storageAccountName": {
-          "type": "string",
-          "metadata": {
-            "description": "Name of storage account"
-          }
-        },
-        "adminUsername": {
-          "type": "string",
-          "metadata": {
-            "description": "Admin username"
-          }
-        },
-        "adminPassword": {
-          "type": "securestring",
-          "metadata": {
-            "description": "Admin password"
-          }
-        },
-        "dnsNameforLBIP": {
-          "type": "string",
-          "metadata": {
-            "description": "DNS for Load Balancer IP"
-          }
-        },
-        "vmNamePrefix": {
-          "type": "string",
-          "defaultValue": "myVM",
-          "metadata": {
-            "description": "Prefix to use for VM names"
-          }
-        },
-        "imagePublisher": {
-          "type": "string",
-          "defaultValue": "MicrosoftWindowsServer",
-          "metadata": {
-            "description": "Image Publisher"
-          }
-        },
-        "imageOffer": {
-          "type": "string",
-          "defaultValue": "WindowsServer",
-          "metadata": {
-            "description": "Image Offer"
-          }
-        },
-        "imageSKU": {
-          "type": "string",
-          "defaultValue": "2012-R2-Datacenter",
-          "allowedValues": [
-            "2008-R2-SP1",
-            "2012-Datacenter",
-            "2012-R2-Datacenter"
-          ],
-          "metadata": {
-            "description": "Image SKU"
-          }
-        },
-        "lbName": {
-          "type": "string",
-          "defaultValue": "myLB",
-          "metadata": {
-            "description": "Load Balancer name"
-          }
-        },
-        "nicNamePrefix": {
-          "type": "string",
-          "defaultValue": "nic",
-          "metadata": {
-            "description": "Network Interface name prefix"
-          }
-        },
-        "publicIPAddressName": {
-          "type": "string",
-          "defaultValue": "myPublicIP",
-          "metadata": {
-            "description": "Public IP Name"
-          }
-        },
-        "vnetName": {
-          "type": "string",
-          "defaultValue": "myVNET",
-          "metadata": {
-            "description": "VNET name"
-          }
-        },
-        "vmSize": {
-          "type": "string",
-          "defaultValue": "Standard_D1",
-          "metadata": {
-            "description": "Size of the VM"
-          }
-        }
+```
+"parameters": {
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of storage account"
       }
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Admin username"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Admin password"
+      }
+    },
+    "dnsNameforLBIP": {
+      "type": "string",
+      "metadata": {
+        "description": "DNS for Load Balancer IP"
+      }
+    },
+    "vmNamePrefix": {
+      "type": "string",
+      "defaultValue": "myVM",
+      "metadata": {
+        "description": "Prefix to use for VM names"
+      }
+    },
+    "imagePublisher": {
+      "type": "string",
+      "defaultValue": "MicrosoftWindowsServer",
+      "metadata": {
+        "description": "Image Publisher"
+      }
+    },
+    "imageOffer": {
+      "type": "string",
+      "defaultValue": "WindowsServer",
+      "metadata": {
+        "description": "Image Offer"
+      }
+    },
+    "imageSKU": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "allowedValues": [
+        "2008-R2-SP1",
+        "2012-Datacenter",
+        "2012-R2-Datacenter"
+      ],
+      "metadata": {
+        "description": "Image SKU"
+      }
+    },
+    "lbName": {
+      "type": "string",
+      "defaultValue": "myLB",
+      "metadata": {
+        "description": "Load Balancer name"
+      }
+    },
+    "nicNamePrefix": {
+      "type": "string",
+      "defaultValue": "nic",
+      "metadata": {
+        "description": "Network Interface name prefix"
+      }
+    },
+    "publicIPAddressName": {
+      "type": "string",
+      "defaultValue": "myPublicIP",
+      "metadata": {
+        "description": "Public IP Name"
+      }
+    },
+    "vnetName": {
+      "type": "string",
+      "defaultValue": "myVNET",
+      "metadata": {
+        "description": "VNET name"
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_D1",
+      "metadata": {
+        "description": "Size of the VM"
+      }
+    }
+  }
+```
 
 ## 变量
 在 variables 节中，可以定义在模板中多处使用的值，或从其他表达式或变量构造的值。我们经常使用变量来简化模板的语法。
 
-    "variables": {
-        "availabilitySetName": "myAvSet",
-        "subnetName": "Subnet-1",
-        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName'))]",
-        "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
-        "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
-        "numberOfInstances": 2,
-        "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
-        "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
-        "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
-        "lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]"
-      }
+```
+"variables": {
+    "availabilitySetName": "myAvSet",
+    "subnetName": "Subnet-1",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
+    "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
+    "numberOfInstances": 2,
+    "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
+    "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
+    "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
+    "lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]"
+  }
+```
 
 你已经完成此模板！ 可以将模板与[快速入门库](https://github.com/Azure/azure-quickstart-templates/tree/master/201-2-vms-loadbalancer-lbrules)中[包含负载均衡器和负载均衡规则模板的 2 个 VM](https://github.com/Azure/azure-quickstart-templates) 下的完整模板相比较。由于使用不同的版本号，你的模板可能会略有不同。
 

@@ -56,11 +56,13 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
 以下示例命令演示了如何创建新的自动化证书并将其标记为可导出。这将导入现有的 .pfx 文件。
 
-    $certName = 'MyCertificate'
-    $certPath = '.\MyCert.pfx'
-    $certPwd = ConvertTo-SecureString -String 'P@$$w0rd' -AsPlainText -Force
+```
+$certName = 'MyCertificate'
+$certPath = '.\MyCert.pfx'
+$certPwd = ConvertTo-SecureString -String 'P@$$w0rd' -AsPlainText -Force
 
-    New-AzureAutomationCertificate -AutomationAccountName "MyAutomationAccount" -Name $certName -Path $certPath -Password $certPwd -Exportable
+New-AzureAutomationCertificate -AutomationAccountName "MyAutomationAccount" -Name $certName -Path $certPath -Password $certPwd -Exportable
+```
 
 ## 使用证书
 
@@ -70,9 +72,11 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
 以下示例代码演示了如何将证书添加到 Runbook 中的云服务。在此示例中，已从加密的自动化变量检索了密码。
 
-    $serviceName = 'MyCloudService'
-    $cert = Get-AutomationCertificate -Name 'MyCertificate'
-    $certPwd = Get-AutomationVariable -Name 'MyCertPassword'
-    Add-AzureCertificate -ServiceName $serviceName -CertToDeploy $cert
+```
+$serviceName = 'MyCloudService'
+$cert = Get-AutomationCertificate -Name 'MyCertificate'
+$certPwd = Get-AutomationVariable -Name 'MyCertPassword'
+Add-AzureCertificate -ServiceName $serviceName -CertToDeploy $cert
+```
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

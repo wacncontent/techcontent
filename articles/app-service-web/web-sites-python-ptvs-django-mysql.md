@@ -86,20 +86,24 @@ ms.author: huvalo
 
 1. 在 Visual Studio 中，打开“项目名称” 文件夹中的 **settings.py**。暂时将连接字符串粘贴在编辑器中。连接字符串是按以下格式：
 
-        Database=<NAME>;Data Source=<HOST>;User Id=<USER>;Password=<PASSWORD>
+    ```
+    Database=<NAME>;Data Source=<HOST>;User Id=<USER>;Password=<PASSWORD>
+    ```
 
     将默认数据库**引擎**更改为使用 MySQL，然后在“连接字符串”中设置“名称”、“用户”、“密码”和“主机”的值。
 
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME': '<Database>',
-                'USER': '<User Id>',
-                'PASSWORD': '<Password>',
-                'HOST': '<Data Source>',
-                'PORT': '',
-            }
+    ```
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': '<Database>',
+            'USER': '<User Id>',
+            'PASSWORD': '<Password>',
+            'HOST': '<Data Source>',
+            'PORT': '',
         }
+    }
+    ```
 2. 在“解决方案资源管理器”的“Python 环境”下，右键单击虚拟环境，然后选择“安装 Python 包”。
 3. 使用 **pip** 安装包 `mysqlclient`。
 

@@ -70,11 +70,13 @@ ms.author: nitinme
 
 1. 将示例数据文件上载到 Azure Blob 存储。在本地工作站上，创建名为 **tiny\_graph.txt** 的新文件。该文件应该包含以下几行：
 
-        [0,0,[[1,1],[3,3]]]
-        [1,0,[[0,1],[2,2],[3,1]]]
-        [2,0,[[1,2],[4,4]]]
-        [3,0,[[0,3],[1,1],[4,4]]]
-        [4,0,[[3,4],[2,4]]]
+    ```
+    [0,0,[[1,1],[3,3]]]
+    [1,0,[[0,1],[2,2],[3,1]]]
+    [2,0,[[1,2],[4,4]]]
+    [3,0,[[0,3],[1,1],[4,4]]]
+    [4,0,[[3,4],[2,4]]]
+    ```
 
     将 tiny\_graph.txt 文件上载到 HDInsight 群集的主存储。有关如何上载数据的说明，请参阅[在 HDInsight 中上载 Hadoop 作业的数据](./hdinsight-upload-data.md)。
 
@@ -86,64 +88,72 @@ ms.author: nitinme
 
 4. 运行 SimpleShortestPathsComputation 示例。使用 tiny\_graph.txt 文件作为输入，通过以下 Azure PowerShell cmdlet 来运行该示例。这要求事先安装并配置 [Azure PowerShell][powershell-install]。
 
-        $clusterName = "clustername"
-        # Giraph examples jar
-        $jarFile = "wasbs:///example/jars/giraph-examples.jar"
-        # Arguments for this job
-        $jobArguments = "org.apache.giraph.examples.SimpleShortestPathsComputation",
-                        "-ca", "mapred.job.tracker=headnodehost:9010",
-                        "-vif", "org.apache.giraph.io.formats.JsonLongDoubleFloatDoubleVertexInputFormat",
-                        "-vip", "wasbs:///example/data/tiny_graph.txt",
-                        "-vof", "org.apache.giraph.io.formats.IdWithValueTextOutputFormat",
-                        "-op",  "wasbs:///example/output/shortestpaths",
-                        "-w", "2"
-        # Create the definition
-        $jobDefinition = New-AzureHDInsightMapReduceJobDefinition
-          -JarFile $jarFile
-          -ClassName "org.apache.giraph.GiraphRunner"
-          -Arguments $jobArguments
+    ```
+    $clusterName = "clustername"
+    # Giraph examples jar
+    $jarFile = "wasbs:///example/jars/giraph-examples.jar"
+    # Arguments for this job
+    $jobArguments = "org.apache.giraph.examples.SimpleShortestPathsComputation",
+                    "-ca", "mapred.job.tracker=headnodehost:9010",
+                    "-vif", "org.apache.giraph.io.formats.JsonLongDoubleFloatDoubleVertexInputFormat",
+                    "-vip", "wasbs:///example/data/tiny_graph.txt",
+                    "-vof", "org.apache.giraph.io.formats.IdWithValueTextOutputFormat",
+                    "-op",  "wasbs:///example/output/shortestpaths",
+                    "-w", "2"
+    # Create the definition
+    $jobDefinition = New-AzureHDInsightMapReduceJobDefinition
+      -JarFile $jarFile
+      -ClassName "org.apache.giraph.GiraphRunner"
+      -Arguments $jobArguments
 
-        # Run the job, write output to the Azure PowerShell window
-        $job = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $jobDefinition
-        Write-Host "Wait for the job to complete ..." -ForegroundColor Green
-        Wait-AzureHDInsightJob -Job $job
-        Write-Host "STDERR"
-        Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardError
-        Write-Host "Display the standard output ..." -ForegroundColor Green
-        Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardOutput
+    # Run the job, write output to the Azure PowerShell window
+    $job = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $jobDefinition
+    Write-Host "Wait for the job to complete ..." -ForegroundColor Green
+    Wait-AzureHDInsightJob -Job $job
+    Write-Host "STDERR"
+    Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardError
+    Write-Host "Display the standard output ..." -ForegroundColor Green
+    Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardOutput
+    ```
 
     在上述示例中，请将 **clustername** 替换为已装有 Giraph 的 HDInsight 群集的名称。
 
 5. 查看结果。完成该作业后，结果将存储在 __wasbs:///example/out/shotestpaths__ 文件夹中的两个输出文件中。文件名分别为 __part-m-00001__ 和 __part-m-00002__。执行以下步骤以下载和查看输出：
 
-        $subscriptionName = "<SubscriptionName>"       # Azure subscription name
-        $storageAccountName = "<StorageAccountName>"   # Azure Storage account name
-        $containerName = "<ContainerName>"             # Blob storage container name
+    ```
+    $subscriptionName = "<SubscriptionName>"       # Azure subscription name
+    $storageAccountName = "<StorageAccountName>"   # Azure Storage account name
+    $containerName = "<ContainerName>"             # Blob storage container name
 
-        # Select the current subscription
-        Select-AzureSubscription $subscriptionName
+    # Select the current subscription
+    Select-AzureSubscription $subscriptionName
 
-        # Create the Storage account context object
-        $storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
-        $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
+    # Create the Storage account context object
+    $storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
+    $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
 
-        # Download the job output to the workstation
-        Get-AzureStorageBlobContent -Container $containerName -Blob example/output/shortestpaths/part-m-00001 -Context $storageContext -Force
-        Get-AzureStorageBlobContent -Container $containerName -Blob example/output/shortestpaths/part-m-00002 -Context $storageContext -Force
+    # Download the job output to the workstation
+    Get-AzureStorageBlobContent -Container $containerName -Blob example/output/shortestpaths/part-m-00001 -Context $storageContext -Force
+    Get-AzureStorageBlobContent -Container $containerName -Blob example/output/shortestpaths/part-m-00002 -Context $storageContext -Force
+    ```
 
     此时会在工作站上的当前目录中创建 __example/output/shortestpaths__ 目录结构，并将两个输出文件下载到该位置。
 
     使用 __Cat__ cmdlet 显示文件的内容：
 
-        Cat example/output/shortestpaths/part*
+    ```
+    Cat example/output/shortestpaths/part*
+    ```
 
     输出应如下所示：
 
-        0	1.0
-        4	5.0
-        2	2.0
-        1	0.0
-        3	1.0
+    ```
+    0	1.0
+    4	5.0
+    2	2.0
+    1	0.0
+    3	1.0
+    ```
 
     SimpleShortestPathComputation 示例硬编码为从对象 ID 1 开始查找与其他对象间的最短路径。因此，输出应显示为 `destination_id distance`，其中 distance 为对象 ID 1 与目标 ID 的边缘之间的行程值（或权重）。
 

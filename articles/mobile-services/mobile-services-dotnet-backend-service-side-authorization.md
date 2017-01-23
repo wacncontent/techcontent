@@ -30,31 +30,39 @@ ms.author: krisragh
 
 1. 在 Visual Studio 中打开你的移动项目，展开 DataObjects 文件夹，然后打开 **TodoItem.cs**。**TodoItem** 类定义数据对象，你需要添加用于筛选的 **UserId** 属性。将下面的新 UserId 属性添加到 **TodoItem** 类：
 
-        public string UserId { get; set; }
+    ```
+    public string UserId { get; set; }
+    ```
 
     >[!NOTE]
     > 若要进行此数据模型更改并维护数据库中的现有数据，必须使用 [Code First 迁移](./mobile-services-dotnet-backend-how-to-use-code-first-migrations.md)。
 
 2. 在 Visual Studio 中，展开“控制器”文件夹，打开 **TodoItemController.cs**，然后添加以下 using 语句：
 
-        using Microsoft.WindowsAzure.Mobile.Service.Security;
+    ```
+    using Microsoft.WindowsAzure.Mobile.Service.Security;
+    ```
 
 3. 找到 **PostTodoItem** 方法，并在该方法的开头添加以下代码。
 
-        // Get the logged in user
-        var currentUser = User as ServiceUser;
+    ```
+    // Get the logged in user
+    var currentUser = User as ServiceUser;
 
-        // Set the user ID on the item
-        item.UserId = currentUser.Id;
+    // Set the user ID on the item
+    item.UserId = currentUser.Id;
+    ```
 
     此代码会将已经过身份验证的用户的用户 ID 添加到项中，然后将此 ID 插入 TodoItem 表。
 
 4. 找到 **GetAllTodoItems** 方法，并将现有的 **return** 语句替换为以下代码行：
 
-                // Get the logged in user
-                var currentUser = User as ServiceUser;
+    ```
+            // Get the logged in user
+            var currentUser = User as ServiceUser;
 
-                return Query().Where(todo => todo.UserId == currentUser.Id);
+            return Query().Where(todo => todo.UserId == currentUser.Id);
+    ```
     此查询可筛选返回的 TodoItem 对象，使得每个用户只收到他们插入的项。
 
 5. 将移动服务项目重新发布到 Azure。

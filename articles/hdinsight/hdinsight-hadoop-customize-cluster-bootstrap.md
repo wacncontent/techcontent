@@ -58,40 +58,44 @@ Bootstrap 的使用方式有 2 种：
 
 以下 PowerShell 代码将自定义 Hive 配置：
 
-    # hive-site.xml configuration
-    $hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
+```
+# hive-site.xml configuration
+$hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
 
-    $config = New-AzureHDInsightClusterConfig `
-        | Set-AzureHDInsightDefaultStorage `
-            -StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
-            -StorageAccountKey $defaultStorageAccountKey `
-        | Add-AzureHDInsightConfigValues `
-            -Hive $hiveConfigValues 
+$config = New-AzureHDInsightClusterConfig `
+    | Set-AzureHDInsightDefaultStorage `
+        -StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
+        -StorageAccountKey $defaultStorageAccountKey `
+    | Add-AzureHDInsightConfigValues `
+        -Hive $hiveConfigValues 
 
-    New-AzureHDInsightCluster `
-        -Name $clusterName `
-        -Location $location `
-        -ClusterSizeInNodes $clusterSizeInNodes `
-        -ClusterType Hadoop `
-        -Version "3.2" `
-        -Credential $httpCredential `
-        -Config $config 
+New-AzureHDInsightCluster `
+    -Name $clusterName `
+    -Location $location `
+    -ClusterSizeInNodes $clusterSizeInNodes `
+    -ClusterType Hadoop `
+    -Version "3.2" `
+    -Credential $httpCredential `
+    -Config $config 
+```
 
 可在[附录 A](#appx-a:-powershell-sample) 中找到完整的有效 PowerShell 脚本。
 
 下面是有关自定义其他配置文件的更多示例：
 
-    # hdfs-site.xml configuration
-    $HdfsConfigValues = @{ "dfs.blocksize"="64m" } #default is 128MB in HDI 3.0 and 256MB in HDI 2.1
+```
+# hdfs-site.xml configuration
+$HdfsConfigValues = @{ "dfs.blocksize"="64m" } #default is 128MB in HDI 3.0 and 256MB in HDI 2.1
 
-    # core-site.xml configuration
-    $CoreConfigValues = @{ "ipc.client.connect.max.retries"="60" } #default 50
+# core-site.xml configuration
+$CoreConfigValues = @{ "ipc.client.connect.max.retries"="60" } #default 50
 
-    # mapred-site.xml configuration
-    $MapRedConfigValues = @{ "mapreduce.task.timeout"="1200000" } #default 600000
+# mapred-site.xml configuration
+$MapRedConfigValues = @{ "mapreduce.task.timeout"="1200000" } #default 600000
 
-    # oozie-site.xml configuration
-    $OozieConfigValues = @{ "oozie.service.coord.normal.default.timeout"="150" }  # default 120
+# oozie-site.xml configuration
+$OozieConfigValues = @{ "oozie.service.coord.normal.default.timeout"="150" }  # default 120
+```
 
 有关详细信息，请参阅 Azim Uddin 的标题为[自定义 HDInsight 群集创建](http://blogs.msdn.com/b/bigdatasupport/archive/2014/04/15/customizing-hdinsight-cluster-provisioning-via-powershell-and-net-sdk.aspx)的博客。
 
@@ -114,99 +118,101 @@ Bootstrap 的使用方式有 2 种：
 
 此 PowerShell 脚本将创建一个 HDInsight 群集并自定义 Hive 设置：
 
-    ####################################
-    # Set these variables
-    ####################################
-    #region - used for creating Azure service names
-    $nameToken = "<ENTER AN ALIAS>" 
-    #endregion
+```
+####################################
+# Set these variables
+####################################
+#region - used for creating Azure service names
+$nameToken = "<ENTER AN ALIAS>" 
+#endregion
 
-    #region - cluster user accounts
-    $httpUserName = "admin"  #HDInsight cluster username
-    $httpPassword = "<ENTER A PASSWORD>" #"<Enter a Password>"
+#region - cluster user accounts
+$httpUserName = "admin"  #HDInsight cluster username
+$httpPassword = "<ENTER A PASSWORD>" #"<Enter a Password>"
 
-    $sshUserName = "sshuser" #HDInsight ssh user name
-    $sshPassword = "<ENTER A PASSWORD>" #"<Enter a Password>"
-    #endregion
+$sshUserName = "sshuser" #HDInsight ssh user name
+$sshPassword = "<ENTER A PASSWORD>" #"<Enter a Password>"
+#endregion
 
-    ####################################
-    # Service names and varialbes
-    ####################################
-    #region - service names
-    $namePrefix = $nameToken.ToLower() + (Get-Date -Format "MMdd")
+####################################
+# Service names and varialbes
+####################################
+#region - service names
+$namePrefix = $nameToken.ToLower() + (Get-Date -Format "MMdd")
 
-    $resourceGroupName = $namePrefix + "rg"
-    $hdinsightClusterName = $namePrefix + "hdi"
-    $defaultStorageAccountName = $namePrefix + "store"
-    $defaultBlobContainerName = $hdinsightClusterName
+$resourceGroupName = $namePrefix + "rg"
+$hdinsightClusterName = $namePrefix + "hdi"
+$defaultStorageAccountName = $namePrefix + "store"
+$defaultBlobContainerName = $hdinsightClusterName
 
-    $location = "China East 2"
-    #endregion
+$location = "China East 2"
+#endregion
 
-    # Treat all errors as terminating
-    $ErrorActionPreference = "Stop"
+# Treat all errors as terminating
+$ErrorActionPreference = "Stop"
 
-    ####################################
-    # Connect to Azure
-    ####################################
-    #region - Connect to Azure subscription
-    Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
-    try{Get-AzureContext}
-    catch{
-        Add-AzureAccount -Environment AzureChinaCloud
-    }
-    #endregion
+####################################
+# Connect to Azure
+####################################
+#region - Connect to Azure subscription
+Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
+try{Get-AzureContext}
+catch{
+    Add-AzureAccount -Environment AzureChinaCloud
+}
+#endregion
 
-    Write-Host "Creating the default storage account and default blob container ..."  -ForegroundColor Green
-    New-AzureStorageAccount `
-        -StorageAccountName $defaultStorageAccountName `
-        -Location $location `
-        -Type Standard_GRS
+Write-Host "Creating the default storage account and default blob container ..."  -ForegroundColor Green
+New-AzureStorageAccount `
+    -StorageAccountName $defaultStorageAccountName `
+    -Location $location `
+    -Type Standard_GRS
 
-    $defaultStorageAccountKey = Get-AzureStorageAccountKey `
-                                    -StorageAccountName $defaultStorageAccountName |  %{ $_.Primary }
-    $defaultStorageContext = New-AzureStorageContext `
-                                    -StorageAccountName $defaultStorageAccountName `
-                                    -StorageAccountKey $defaultStorageAccountKey
-    New-AzureStorageContainer `
-        -Name $defaultBlobContainerName `
-        -Context $defaultStorageContext #use the cluster name as the container name
+$defaultStorageAccountKey = Get-AzureStorageAccountKey `
+                                -StorageAccountName $defaultStorageAccountName |  %{ $_.Primary }
+$defaultStorageContext = New-AzureStorageContext `
+                                -StorageAccountName $defaultStorageAccountName `
+                                -StorageAccountKey $defaultStorageAccountKey
+New-AzureStorageContainer `
+    -Name $defaultBlobContainerName `
+    -Context $defaultStorageContext #use the cluster name as the container name
 
-    ####################################
-    # Create a configuration object
-    ####################################
-    $hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
+####################################
+# Create a configuration object
+####################################
+$hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
 
-    $config = New-AzureHDInsightClusterConfig `
-        | Set-AzureHDInsightDefaultStorage `
-            -StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
-            -StorageAccountKey $defaultStorageAccountKey `
-        | Add-AzureHDInsightConfigValues `
-            -Hive $hiveConfigValues 
+$config = New-AzureHDInsightClusterConfig `
+    | Set-AzureHDInsightDefaultStorage `
+        -StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
+        -StorageAccountKey $defaultStorageAccountKey `
+    | Add-AzureHDInsightConfigValues `
+        -Hive $hiveConfigValues 
 
-    ####################################
-    # Create an HDInsight cluster
-    ####################################
-    $httpPW = ConvertTo-SecureString -String $httpPassword -AsPlainText -Force
-    $httpCredential = New-Object System.Management.Automation.PSCredential($httpUserName,$httpPW)
+####################################
+# Create an HDInsight cluster
+####################################
+$httpPW = ConvertTo-SecureString -String $httpPassword -AsPlainText -Force
+$httpCredential = New-Object System.Management.Automation.PSCredential($httpUserName,$httpPW)
 
-    $sshPW = ConvertTo-SecureString -String $sshPassword -AsPlainText -Force
-    $sshCredential = New-Object System.Management.Automation.PSCredential($sshUserName,$sshPW)
+$sshPW = ConvertTo-SecureString -String $sshPassword -AsPlainText -Force
+$sshCredential = New-Object System.Management.Automation.PSCredential($sshUserName,$sshPW)
 
-    New-AzureHDInsightCluster `
-        -Name $hdinsightClusterName `
-        -Location $location `
-        -ClusterSizeInNodes 1 `
-        -ClusterType Hadoop `
-        -Version "3.2" `
-        -Credential $httpCredential `
-        -Config $config
+New-AzureHDInsightCluster `
+    -Name $hdinsightClusterName `
+    -Location $location `
+    -ClusterSizeInNodes 1 `
+    -ClusterType Hadoop `
+    -Version "3.2" `
+    -Credential $httpCredential `
+    -Config $config
 
-    ####################################
-    # Verify the cluster
-    ####################################
-    Get-AzureHDInsightCluster -Name $hdinsightClusterName
+####################################
+# Verify the cluster
+####################################
+Get-AzureHDInsightCluster -Name $hdinsightClusterName
 
-    #endregion
+#endregion
+```
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

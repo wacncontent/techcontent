@@ -6,36 +6,38 @@
 
 3. 将现有**注册**函数替换为以下代码，然后单击“保存”：
 
-        exports.register = function (registration, registrationContext, done) {   
-            // Get the ID of the logged-in user.
-            var userId = registrationContext.user.userId;    
+    ```
+    exports.register = function (registration, registrationContext, done) {   
+        // Get the ID of the logged-in user.
+        var userId = registrationContext.user.userId;    
 
-            // Perform a check here for any disallowed tags.
-            if (!validateTags(registration))
-            {
-                // Return a service error when the client tries 
-                // to set a user ID tag, which is not allowed.		
-                done("You cannot supply a tag that is a user ID");		
-            }
-            else{
-                // Add a new tag that is the user ID.
-                registration.tags.push(userId);
-
-                // Complete the callback as normal.
-                done();
-            }
-        };
-
-        function validateTags(registration){
-            for(var i = 0; i < registration.tags.length; i++) { 
-                console.log(registration.tags[i]);           
-                if (registration.tags[i]
-                .search(/microsoft:/i) !== -1){
-                    return false;
-                }
-                return true;
-            }
+        // Perform a check here for any disallowed tags.
+        if (!validateTags(registration))
+        {
+            // Return a service error when the client tries 
+            // to set a user ID tag, which is not allowed.		
+            done("You cannot supply a tag that is a user ID");		
         }
+        else{
+            // Add a new tag that is the user ID.
+            registration.tags.push(userId);
+
+            // Complete the callback as normal.
+            done();
+        }
+    };
+
+    function validateTags(registration){
+        for(var i = 0; i < registration.tags.length; i++) { 
+            console.log(registration.tags[i]);           
+            if (registration.tags[i]
+            .search(/microsoft:/i) !== -1){
+                return false;
+            }
+            return true;
+        }
+    }
+    ```
 
     这会向注册添加一个标记（已登录用户的 ID）。将验证提供的标记以防止用户注册其他用户的 ID。通知发送给该用户后，用户可在此设备和用户所注册的其他任何设备上接收通知。
 

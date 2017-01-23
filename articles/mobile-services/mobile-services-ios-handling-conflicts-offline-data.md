@@ -41,60 +41,68 @@ ms.author: krisragh;donnam
 
 1. 在 **QSTodoListViewController.m** 中，编辑 **viewDidLoad**。将对 **defaultService** 的调用替换为对 **defaultServiceWithDelegate** 的调用：
 
-        self.todoService = [QSTodoService defaultServiceWithDelegate:self];
+    ```
+    self.todoService = [QSTodoService defaultServiceWithDelegate:self];
+    ```
 
 2. 在 **QSTodoListViewController.h** 中，将 **&lt;MSSyncContextDelegate&gt;** 添加到接口声明，以便实现 **MSSyncContextDelegate** 协议。
 
-        @interface QSTodoListViewController : UITableViewController<MSSyncContextDelegate, NSFetchedResultsControllerDelegate>
+    ```
+    @interface QSTodoListViewController : UITableViewController<MSSyncContextDelegate, NSFetchedResultsControllerDelegate>
+    ```
 
 3. 在 **QSTodoListViewController.m** 的顶部添加以下 import 语句：
 
-        #import "QSUIAlertViewWithBlock.h"
+    ```
+    #import "QSUIAlertViewWithBlock.h"
+    ```
 
 4. 最后，让我们将以下两项操作添加到 **QSTodoListViewController.m**，以便使用此帮助器类，并提示用户以三种方式之一协调冲突。
 
-        - (void)tableOperation:(MSTableOperation *)operation onComplete:(MSSyncItemBlock)completion
-        {
-            [self doOperation:operation complete:completion];
-        }
+    ```
+    - (void)tableOperation:(MSTableOperation *)operation onComplete:(MSSyncItemBlock)completion
+    {
+        [self doOperation:operation complete:completion];
+    }
 
-        -(void)doOperation:(MSTableOperation *)operation complete:(MSSyncItemBlock)completion
-        {
-            [operation executeWithCompletion:^(NSDictionary *item, NSError *error) {
+    -(void)doOperation:(MSTableOperation *)operation complete:(MSSyncItemBlock)completion
+    {
+        [operation executeWithCompletion:^(NSDictionary *item, NSError *error) {
 
-                NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
+            NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
 
-                if (error.code == MSErrorPreconditionFailed) {
-                    QSUIAlertViewWithBlock *alert = [[QSUIAlertViewWithBlock alloc] initWithCallback:^(NSInteger buttonIndex) {
-                        if (buttonIndex == 1) { // Client
-                            NSMutableDictionary *adjustedItem = [operation.item mutableCopy];
+            if (error.code == MSErrorPreconditionFailed) {
+                QSUIAlertViewWithBlock *alert = [[QSUIAlertViewWithBlock alloc] initWithCallback:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) { // Client
+                        NSMutableDictionary *adjustedItem = [operation.item mutableCopy];
 
-                            [adjustedItem setValue:[serverItem objectForKey:MSSystemColumnVersion] forKey:MSSystemColumnVersion];
-                            operation.item = adjustedItem;
+                        [adjustedItem setValue:[serverItem objectForKey:MSSystemColumnVersion] forKey:MSSystemColumnVersion];
+                        operation.item = adjustedItem;
 
-                            [self doOperation:operation complete:completion];
-                            return;
+                        [self doOperation:operation complete:completion];
+                        return;
 
-                        } else if (buttonIndex == 2) { // Server
-                            NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
-                            completion(serverItem, nil);
-                        } else { // Cancel
-                            [operation cancelPush];
-                            completion(nil, error);
-                        }
-                    }];
+                    } else if (buttonIndex == 2) { // Server
+                        NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
+                        completion(serverItem, nil);
+                    } else { // Cancel
+                        [operation cancelPush];
+                        completion(nil, error);
+                    }
+                }];
 
-                    NSString *message = [NSString stringWithFormat:@"Client value: %@\nServer value: %@", operation.item[@"text"], serverItem[@"text"]];
+                NSString *message = [NSString stringWithFormat:@"Client value: %@\nServer value: %@", operation.item[@"text"], serverItem[@"text"]];
 
-                    [alert showAlertWithTitle:@"Server Conflict"
-                                      message:message
-                            cancelButtonTitle:@"Cancel"
-                            otherButtonTitles:[NSArray arrayWithObjects:@"Use Client", @"Use Server", nil]];
-                } else {
-                    completion(item, error);
-                }
-            }];
-        }
+                [alert showAlertWithTitle:@"Server Conflict"
+                                  message:message
+                        cancelButtonTitle:@"Cancel"
+                        otherButtonTitles:[NSArray arrayWithObjects:@"Use Client", @"Use Server", nil]];
+            } else {
+                completion(item, error);
+            }
+        }];
+    }
+    ```
 
 ## <a name="test-app"></a>测试应用程序
 

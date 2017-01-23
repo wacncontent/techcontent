@@ -154,13 +154,15 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 
 若要定义实体框架中的索引，请在你希望创建索引的字段中使用 `[Index]` 索引。例如：
 
-    public class TodoItem : EntityData
-    {
-        public string Text { get; set; }
+```
+public class TodoItem : EntityData
+{
+    public string Text { get; set; }
 
-        [Index]
-        public bool Complete { get; set; }
-    }
+    [Index]
+    public bool Complete { get; set; }
+}
+```
 
 更多有关索引的详细信息，请参阅[实体框架中的索引批注][]。有关优化索引的更多提示，请参阅本文末尾的“[高级索引](#AdvancedIndexing)”。
 
@@ -262,10 +264,12 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 如果使用基础层、标准层和高级层，管理门户可随时提供部分指标。无论你使用哪种层，都可以通过 **[sys.resource\_stats](http://msdn.microsoft.com/zh-cn/library/dn269979.aspx)** 管理视图轻松获取这些指标以及其他指标。请考虑下列查询：
 
-    SELECT TOP 10 * 
-    FROM sys.resource_stats 
-    WHERE database_name = 'todoitem_db' 
-    ORDER BY start_time DESC
+```
+SELECT TOP 10 * 
+FROM sys.resource_stats 
+WHERE database_name = 'todoitem_db' 
+ORDER BY start_time DESC
+```
 
 > [!NOTE] 
 请在你服务器的 **master** 数据库上执行此查询，因为只有该数据库显示 **sys.resource\_stats** 视图。
@@ -276,10 +280,12 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 **[sys.event\_log](http://msdn.microsoft.com/zh-cn/library/azure/jj819229.aspx)** 视图包含连接相关事件的详细信息。
 
-    select * from sys.event_log 
-    where database_name = 'todoitem_db'
-    and event_type like 'throttling%'
-    order by start_time desc
+```
+select * from sys.event_log 
+where database_name = 'todoitem_db'
+and event_type like 'throttling%'
+order by start_time desc
+```
 
 > [!NOTE] 
 请在服务器的 **master** 数据库上执行此查询，**sys.event\_log** 视图只会出现在该数据库上。
@@ -326,10 +332,12 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 若要使用实体框架在 .NET 后端设置 `IsClustered` 索引，请设置批注的属性。例如，这是在 `Microsoft.WindowsAzure.Mobile.Service.EntityData` 中的 `CreatedAt` 定义：
 
-    [Index(IsClustered = true)]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [TableColumnAttribute(TableColumnType.CreatedAt)]
-    public DateTimeOffset? CreatedAt { get; set; }
+```
+[Index(IsClustered = true)]
+[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+[TableColumnAttribute(TableColumnType.CreatedAt)]
+public DateTimeOffset? CreatedAt { get; set; }
+```
 
 ####  在数据库架构中创建索引
 
@@ -345,26 +353,30 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 ####  查找前 n 个缺失索引 
 你可以在动态管理视图上编写 SQL 查询，以告知你与单个查询的资源使用情况有关的详细信息，或引导你找出所要添加的索引。以下查询将确定哪 10 个缺失索引会为用户查询生成最高的预期累积改进（采用降序）。
 
-    SELECT TOP 10 *
-    FROM sys.dm_db_missing_index_group_stats
-    ORDER BY avg_total_user_cost * avg_user_impact * (user_seeks + user_scans)
-    DESC;
+```
+SELECT TOP 10 *
+FROM sys.dm_db_missing_index_group_stats
+ORDER BY avg_total_user_cost * avg_user_impact * (user_seeks + user_scans)
+DESC;
+```
 
 下列示例查询在这些表内运行了一个 join，以获取应为各缺失索引一部分的列，并计算“索引优势”，以确定是否需要考虑给定的索引：
 
-    SELECT * from 
-    (
-        SELECT 
-        (user_seeks+user_scans) * avg_total_user_cost * (avg_user_impact * 0.01) AS index_advantage, migs.*
-        FROM sys.dm_db_missing_index_group_stats migs
-    ) AS migs_adv,
-      sys.dm_db_missing_index_groups mig,
-      sys.dm_db_missing_index_details mid
-    WHERE
-      migs_adv.group_handle = mig.index_group_handle and
-      mig.index_handle = mid.index_handle
-      AND migs_adv.index_advantage > 10
-    ORDER BY migs_adv.index_advantage DESC;
+```
+SELECT * from 
+(
+    SELECT 
+    (user_seeks+user_scans) * avg_total_user_cost * (avg_user_impact * 0.01) AS index_advantage, migs.*
+    FROM sys.dm_db_missing_index_group_stats migs
+) AS migs_adv,
+  sys.dm_db_missing_index_groups mig,
+  sys.dm_db_missing_index_details mid
+WHERE
+  migs_adv.group_handle = mig.index_group_handle and
+  mig.index_handle = mid.index_handle
+  AND migs_adv.index_advantage > 10
+ORDER BY migs_adv.index_advantage DESC;
+```
 
 有关详细信息，请参阅[使用动态管理视图监视 SQL 数据库][] 和[缺失索引动态管理视图][]。
 
@@ -377,20 +389,22 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 下列示例返回了按平均 CPU 时间排名的前五个查询的信息。该示例根据查询散列收集了查询，以便逻辑上等值的查询能够根据累积资源消耗分组。
 
-    SELECT TOP 5 query_stats.query_hash AS "Query Hash", 
-        SUM(query_stats.total_worker_time) / SUM(query_stats.execution_count) AS "Avg CPU Time",
-        MIN(query_stats.statement_text) AS "Statement Text"
-    FROM 
-        (SELECT QS.*, 
-        SUBSTRING(ST.text, (QS.statement_start_offset/2) + 1,
-        ((CASE statement_end_offset 
-            WHEN -1 THEN DATALENGTH(st.text)
-            ELSE QS.statement_end_offset END 
-                - QS.statement_start_offset)/2) + 1) AS statement_text
-         FROM sys.dm_exec_query_stats AS QS
-         CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
-    GROUP BY query_stats.query_hash
-    ORDER BY 2 DESC;
+```
+SELECT TOP 5 query_stats.query_hash AS "Query Hash", 
+    SUM(query_stats.total_worker_time) / SUM(query_stats.execution_count) AS "Avg CPU Time",
+    MIN(query_stats.statement_text) AS "Statement Text"
+FROM 
+    (SELECT QS.*, 
+    SUBSTRING(ST.text, (QS.statement_start_offset/2) + 1,
+    ((CASE statement_end_offset 
+        WHEN -1 THEN DATALENGTH(st.text)
+        ELSE QS.statement_end_offset END 
+            - QS.statement_start_offset)/2) + 1) AS statement_text
+     FROM sys.dm_exec_query_stats AS QS
+     CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
+GROUP BY query_stats.query_hash
+ORDER BY 2 DESC;
+```
 
 有关详细信息，请参阅[使用动态管理视图监视 SQL 数据库][]。除执行查询之外，**SQL 数据库管理门户**还可为你提供有效的捷径查看数据：选择数据库“摘要”，然后选择“查询性能”：
 

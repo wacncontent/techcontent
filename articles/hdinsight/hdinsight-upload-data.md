@@ -64,31 +64,43 @@ Azure CLI 是一个跨平台工具，可用于管理 Azure 服务。使用以下
 1. [安装和配置适用于 Mac、Linux 和 Windows 的 Azure CLI](../xplat-cli-install.md)。
 2. 打开命令提示符、bash 或其他 shell，然后使用以下方法对 Azure 订阅进行身份验证。
 
-        azure config mode asm
-        azure login -e AzureChinaCloud
+    ```
+    azure config mode asm
+    azure login -e AzureChinaCloud
+    ```
 
     > [!NOTE]
     > 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
 
 3. 输入以下命令，列出订阅的存储帐户：
 
-        azure storage account list
+    ```
+    azure storage account list
+    ```
 4. 选择包含你要使用的 Blob 的存储帐户，然后使用以下命令检索此帐户的密钥：
 
-        azure storage account keys list <storage-account-name>
+    ```
+    azure storage account keys list <storage-account-name>
+    ```
 
     这应会返回**主**密钥和**辅助**密钥。复制**主**密钥值，因为后面的步骤要用到它。
 5. 使用以下命令可检索存储帐户中的 Blob 容器列表：
 
-        azure storage container list -a <storage-account-name> -k <primary-key>
+    ```
+    azure storage container list -a <storage-account-name> -k <primary-key>
+    ```
 6. 使用以下命令可将文件上传和下载到 Blob：
 
-    * 上传文件：
+   * 上传文件：
 
-           azure storage blob upload -a <storage-account-name> -k <primary-key> <source-file> <container-name> <blob-name>
-    * 下载文件：
+       ```
+       azure storage blob upload -a <storage-account-name> -k <primary-key> <source-file> <container-name> <blob-name>
+       ```
+   * 下载文件：
 
-           azure storage blob download -a <storage-account-name> -k <primary-key> <container-name> <blob-name> <destination-file>
+       ```
+       azure storage blob download -a <storage-account-name> -k <primary-key> <container-name> <blob-name> <destination-file>
+       ```
 
 > [!NOTE]
 如果始终使用同一个存储帐户，可以不用为每条命令指定帐户和密钥，而是设置以下环境变量：
@@ -107,20 +119,22 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
 1. 根据[安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 中的说明打开 Azure PowerShell 控制台。
 2. 设置以下脚本中前五个变量的值：
 
-        $resourceGroupName = "<AzureResourceGroupName>"
-        $storageAccountName = "<StorageAccountName>"
-        $containerName = "<ContainerName>"
+    ```
+    $resourceGroupName = "<AzureResourceGroupName>"
+    $storageAccountName = "<StorageAccountName>"
+    $containerName = "<ContainerName>"
 
-        $fileName ="<LocalFileName>"
-        $blobName = "<BlobName>"
+    $fileName ="<LocalFileName>"
+    $blobName = "<BlobName>"
 
-        # Get the storage account key
-        $storageaccountkey = get-azurestoragekey -ResourceGroupName $resourceGroupName -Name $storageAccountName | %{$_.Primary}
-        # Create the storage context object
-        $destContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageaccountkey
+    # Get the storage account key
+    $storageaccountkey = get-azurestoragekey -ResourceGroupName $resourceGroupName -Name $storageAccountName | %{$_.Primary}
+    # Create the storage context object
+    $destContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageaccountkey
 
-        # Copy the file from local workstation to the Blob container
-        Set-AzureStorageBlobContent -File $fileName -Container $containerName -Blob $blobName -context $destContext
+    # Copy the file from local workstation to the Blob container
+    Set-AzureStorageBlobContent -File $fileName -Container $containerName -Blob $blobName -context $destContext
+    ```
 3. 将脚本粘贴到 Azure PowerShell 控制台，然后运行以复制文件。
 
 有关创建用来使用 HDInsight 的 PowerShell 脚本示例，请参阅 [HDInsight 工具](https://github.com/blackmist/hdinsight-tools)。
@@ -130,7 +144,9 @@ AzCopy 是一个命令行工具，用于简化将数据传入和传出 Azure 存
 
 AzCopy 语法为：
 
-    AzCopy <Source> <Destination> [filePattern [filePattern...]] [Options]
+```
+AzCopy <Source> <Destination> [filePattern [filePattern...]] [Options]
+```
 
 有关详细信息，请参阅 [AzCopy - 上传/下载 Azure Blob 的文件][azure-azcopy]。
 
@@ -143,17 +159,23 @@ AzCopy 语法为：
 
 连接之后，可以使用以下语法将文件上传到存储。
 
-    hadoop -copyFromLocal <localFilePath> <storageFilePath>
+```
+hadoop -copyFromLocal <localFilePath> <storageFilePath>
+```
 
 例如 `hadoop fs -copyFromLocal data.txt /example/data/data.txt`
 
 由于 HDInsight 的默认文件系统在 Azure Blob 存储中，/example/data.txt 实际是在 Azure Blob 存储中。也可以将该文件表示为：
 
-    wasbs:///example/data/data.txt
+```
+wasbs:///example/data/data.txt
+```
 
 或
 
-    wasbs://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/example/data/davinci.txt
+```
+wasbs://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/example/data/davinci.txt
+```
 
 有关用于处理文件的其他 Hadoop 命令列表，请参阅 [http://hadoop.apache.org/docs/r2.7.0/hadoop-project-dist/hadoop-common/FileSystemShell.html](http://hadoop.apache.org/docs/r2.7.0/hadoop-project-dist/hadoop-common/FileSystemShell.html)
 
@@ -222,31 +244,35 @@ Sqoop 是一种专用于在 Hadoop 和关系数据库之间传输数据的工具
 ### <a id="storageexception"></a>写入 blob 时的存储异常
 **症状**：使用 `hadoop` 或 `hdfs dfs` 命令将 ~12GB 或更大的文件写入 HBase 群集时，可能会遇到以下错误：
 
-    ERROR azure.NativeAzureFileSystem: Encountered Storage Exception for write on Blob : example/test_large_file.bin._COPYING_ Exception details: null Error Code : RequestBodyTooLarge
-    copyFromLocal: java.io.IOException
-            at com.microsoft.azure.storage.core.Utility.initIOException(Utility.java:661)
-            at com.microsoft.azure.storage.blob.BlobOutputStream$1.call(BlobOutputStream.java:366)
-            at com.microsoft.azure.storage.blob.BlobOutputStream$1.call(BlobOutputStream.java:350)
-            at java.util.concurrent.FutureTask.run(FutureTask.java:262)
-            at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
-            at java.util.concurrent.FutureTask.run(FutureTask.java:262)
-            at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
-            at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-            at java.lang.Thread.run(Thread.java:745)
-    Caused by: com.microsoft.azure.storage.StorageException: The request body is too large and exceeds the maximum permissible limit.
-            at com.microsoft.azure.storage.StorageException.translateException(StorageException.java:89)
-            at com.microsoft.azure.storage.core.StorageRequest.materializeException(StorageRequest.java:307)
-            at com.microsoft.azure.storage.core.ExecutionEngine.executeWithRetry(ExecutionEngine.java:182)
-            at com.microsoft.azure.storage.blob.CloudBlockBlob.uploadBlockInternal(CloudBlockBlob.java:816)
-            at com.microsoft.azure.storage.blob.CloudBlockBlob.uploadBlock(CloudBlockBlob.java:788)
-            at com.microsoft.azure.storage.blob.BlobOutputStream$1.call(BlobOutputStream.java:354)
-            ... 7 more
+```
+ERROR azure.NativeAzureFileSystem: Encountered Storage Exception for write on Blob : example/test_large_file.bin._COPYING_ Exception details: null Error Code : RequestBodyTooLarge
+copyFromLocal: java.io.IOException
+        at com.microsoft.azure.storage.core.Utility.initIOException(Utility.java:661)
+        at com.microsoft.azure.storage.blob.BlobOutputStream$1.call(BlobOutputStream.java:366)
+        at com.microsoft.azure.storage.blob.BlobOutputStream$1.call(BlobOutputStream.java:350)
+        at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+        at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+        at java.lang.Thread.run(Thread.java:745)
+Caused by: com.microsoft.azure.storage.StorageException: The request body is too large and exceeds the maximum permissible limit.
+        at com.microsoft.azure.storage.StorageException.translateException(StorageException.java:89)
+        at com.microsoft.azure.storage.core.StorageRequest.materializeException(StorageRequest.java:307)
+        at com.microsoft.azure.storage.core.ExecutionEngine.executeWithRetry(ExecutionEngine.java:182)
+        at com.microsoft.azure.storage.blob.CloudBlockBlob.uploadBlockInternal(CloudBlockBlob.java:816)
+        at com.microsoft.azure.storage.blob.CloudBlockBlob.uploadBlock(CloudBlockBlob.java:788)
+        at com.microsoft.azure.storage.blob.BlobOutputStream$1.call(BlobOutputStream.java:354)
+        ... 7 more
+```
 
 **原因**：HBase on HDInsight 群集在写入 Azure 存储时默认阻止 256KB 大小的块。尽管这对于 HBase API 或 REST API 正常工作，但在使用 `hadoop` 或 `hdfs dfs` 命令行实用程序时将导致错误。
 
 **解决方案**：使用 `fs.azure.write.request.size` 指定更大的块大小。可以使用 `-D` 参数基于使用情况执行此操作。以下是将此参数与 `hadoop` 命令配合使用的一个示例：
 
-    hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file.bin /example/data
+```
+hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file.bin /example/data
+```
 
 ## 后续步骤
 现在，你已了解如何将数据导入 HDInsight，请阅读以下文章了解如何执行分析：

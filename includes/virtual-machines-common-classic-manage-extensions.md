@@ -63,18 +63,20 @@ Azure VM 扩展实现了可帮助其他程序在 Azure VM 上正常工作的行�
 
 例如，以下代码示例显示如何使用 Azure CLI **azure vm extension list** 命令列出 **IaaSDiagnostics** 扩展的信息，并使用 **–-json** 选项返回完整信息。
 
-    $ azure vm extension list -n IaaSDiagnostics --json
-    [
-      {
-        "publisher": "Microsoft.Azure.Diagnostics",
-        "name": "IaaSDiagnostics",
-        "version": "1.2",
-        "label": "Microsoft Monitoring Agent Diagnostics",
-        "description": "Microsoft Monitoring Agent Extension",
-        "replicationCompleted": true,
-        "isJsonExtension": true
-      }
-    ]
+```
+$ azure vm extension list -n IaaSDiagnostics --json
+[
+  {
+    "publisher": "Microsoft.Azure.Diagnostics",
+    "name": "IaaSDiagnostics",
+    "version": "1.2",
+    "label": "Microsoft Monitoring Agent Diagnostics",
+    "description": "Microsoft Monitoring Agent Extension",
+    "replicationCompleted": true,
+    "isJsonExtension": true
+  }
+]
+```
 
 ###服务管理 REST API
 

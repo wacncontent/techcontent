@@ -665,13 +665,17 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 3. 如果您是第一次运行 Azure PowerShell，需要在本地创建证书文件。以便本地计算机和 Azure 建立可靠的安全连接。请在 Azure PowerShell 输入以下命令：
 
-        Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
+    Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
 
     输入命令后，计算机会弹出新的浏览器窗口，导航至 Azure 中国网站，并要求输入 Org ID 和密码进行登陆
 
 4. 如果在运行 Azure PowerShell 之后报错，错误信息为系统上禁止运行脚本，请在 PowerShell 中执行
 
-        Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+    ```
+    Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+    ```
 
 5. 登陆完毕后，系统会要求保存扩展名为 publishsettings 的文件，您可以保存至本地计算机 (这里保存在 D 盘上)。如下图:
 
@@ -679,11 +683,15 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 6. 然后回到 Azure PowerShell 窗口，继续输入以下命令
 
-        Import-AzurePublishSettingsFile <PathToFile>
+    ```
+    Import-AzurePublishSettingsFile <PathToFile>
+    ```
 
     PathToFile 就是保存步骤 4 中扩展名为 publishsettings 的文件位置 (文件路径+文件名)，比如将该文件保存至 D 盘根目录，就输入以下命令：
 
-        Import-AzurePublishSettingsFile 'D:\内部使用-6-2-2014-credentials.publishsettings'
+    ```
+    Import-AzurePublishSettingsFile 'D:\内部使用-6-2-2014-credentials.publishsettings'
+    ```
 
     上面的命令实际上是将本地的 publishsettings 文件上传至 Azure 中国的 Management Certificates。您可以打开[经典管理门户](https://manage.windowsazure.cn)。点击设置，并选择管理证书，查看上传的 publishsettings 文件。如下图：
 
@@ -722,11 +730,15 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 2. 在某些情况下，需要设置默认的订阅，可以执行以下命令：
 
-        Select-AzureSubscription "<SubscriptionName>" –Default
+    ```
+    Select-AzureSubscription "<SubscriptionName>" –Default
+    ```
 
     比如设置 POC 这个订阅为默认订阅，就执行以下命令：
 
-        Select-AzureSubscription "POC" –Default
+    ```
+    Select-AzureSubscription "POC" –Default
+    ```
 
     然后重新执行 Get-AzureSubscription，可以看到 POC 这个订阅，IsDefault 属性为 True。
 　
@@ -736,7 +748,9 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 3. 有时，需要在多个订阅之前进行切换。可以执行以下命令
 
-        Select-AzureSubscription "<SubscriptionName>" –Current
+    ```
+    Select-AzureSubscription "<SubscriptionName>" –Current
+    ```
 
     这样，可以把某个订阅设置为当前的订阅。
 
@@ -801,43 +815,51 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 3. 通过精确查询，查询到 Azure 虚拟机镜像
 
-        $imageList = Get-AzureVMImage | where {$_.ImageName -eq "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-Datacenter-201506.01-en.us-127GB.vhd"}
-        $image=$imageList[0]
+    ```
+    $imageList = Get-AzureVMImage | where {$_.ImageName -eq "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-Datacenter-201506.01-en.us-127GB.vhd"}
+    $image=$imageList[0]
+    ```
 
     或者使用模糊查询，查询到某个虚拟机镜像
 
-        $imageList = Get-AzureVMImage | where {$_.ImageName -like "*Windows-Server-2012-Datacenter*"}
-        $image=$imageList[0]
+    ```
+    $imageList = Get-AzureVMImage | where {$_.ImageName -like "*Windows-Server-2012-Datacenter*"}
+    $image=$imageList[0]
+    ```
 
 4. 根据实际情况，修改下面的参数
 
-        $ServiceName= "[虚拟机名称]"
-        $VMSize= "[虚拟机大小]"
-        $AvbSetName="[可用性集名称]"
-        $adminusername="[虚拟机登录名]"
-        $adminpassword="[虚拟机密码]"
-        $SubnetName="[子网名称]"
-        $PrivateIP="[内网IP地址]"
-        $CloudServiceName="[云服务名称]"
-        $VNetName="[虚拟网络名称]"
-        $Location="[Azure数据中心]"
+    ```
+    $ServiceName= "[虚拟机名称]"
+    $VMSize= "[虚拟机大小]"
+    $AvbSetName="[可用性集名称]"
+    $adminusername="[虚拟机登录名]"
+    $adminpassword="[虚拟机密码]"
+    $SubnetName="[子网名称]"
+    $PrivateIP="[内网IP地址]"
+    $CloudServiceName="[云服务名称]"
+    $VNetName="[虚拟网络名称]"
+    $Location="[Azure数据中心]"
 
-        New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
+    New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
+    ```
 
     以创建第一台 ContosoAD01 为例，实际的 PowerShell 如下：
 
-        $ServiceName= "ContosoAD01"
-        $VMSize= "Standard_D2"
-        $AvbSetName="ADAvbSet"
-        $adminusername="AzureAdmin"
-        $adminpassword="Contoso!000"
-        $SubnetName="AD-Subnet "
-        $PrivateIP="10.0.0.4"
-        $CloudServiceName="ContosoADCS"
-        $VNetName="ContosoVNet "
-        $Location="China East"
+    ```
+    $ServiceName= "ContosoAD01"
+    $VMSize= "Standard_D2"
+    $AvbSetName="ADAvbSet"
+    $adminusername="AzureAdmin"
+    $adminpassword="Contoso!000"
+    $SubnetName="AD-Subnet "
+    $PrivateIP="10.0.0.4"
+    $CloudServiceName="ContosoADCS"
+    $VNetName="ContosoVNet "
+    $Location="China East"
 
-        New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
+    New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
+    ```
 
 执行上面的 PowerShell，Azure PowerShell 会显示执行成功 Success，如下图:
 
@@ -885,7 +907,9 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 查看这个 IP 地址  
 
-    Get-AzureReservedIP -ReservedIPName 'NginxPublicIP'
+```
+Get-AzureReservedIP -ReservedIPName 'NginxPublicIP'
+```
 
 5. 创建虚拟网络 Virtual Network，命名为 MyVNet (位置选择 China East)。注意 Virtual Network 不能属于地缘组里。
 
@@ -921,15 +945,21 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 创建第 1 台虚拟机 (Nginx01，内网 IP 是 10.0.0.4) 的命令如下：  
 
-    New-AzureVMConfig -Name 'Nginx01' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
+```
+New-AzureVMConfig -Name 'Nginx01' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
+```
 
 创建第 2 台虚拟机 (Nginx02，内网 IP 是 10.0.0.5) 的命令如下：
 
-    New-AzureVMConfig -Name 'Nginx02' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.5' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
+```
+New-AzureVMConfig -Name 'Nginx02' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.5' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
+```
 
 创建第 3 台 虚拟机 (Nginx03，内网 IP 是10.0.0.6) 的命令如下：  
 
-    New-AzureVMConfig -Name 'Nginx03' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.6' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
+```
+New-AzureVMConfig -Name 'Nginx03' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.6' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
+```
 
 ###<a name="section_5_6"></a> 3.6 管理 Azure 虚拟机
 ####<a name="section_5_6_1"></a> 3.6.1 远程桌面连接 Windows 虚拟机

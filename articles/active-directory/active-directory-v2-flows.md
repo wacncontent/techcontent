@@ -32,24 +32,28 @@ v2.0 终结点支持各种现代应用体系结构的身份验证，所有这些
 
 注册后，应用向 Azure Active Directory v2.0 终结点发送请求，以便与 Azure AD 通信。我们提供了用于处理这些请求详细信息的开源框架和库，你也可以自行编写对这些终结点的请求，来实现身份验证逻辑：
 
-    https://login.microsoftonline.com/common/oauth2/v2.0/authorize
-    https://login.microsoftonline.com/common/oauth2/v2.0/token
+```
+https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+https://login.microsoftonline.com/common/oauth2/v2.0/token
+```
 
 <!-- TODO: Need a page for libraries to link to -->
 
 ## Web 应用  <a name="web-apps"></a>
 对于通过浏览器访问的 Web 应用（.NET、PHP、Java、Ruby、Python、Node 等），可以使用 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow) 来执行用户登录。在 OpenID Connect 中，Web 应用将接收 `id_token`，这是一个安全令牌，用于验证用户的标识并以声明形式提供有关用户的信息：
 
-    // Partial raw id_token
-    eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtyaU1QZG1Cd...
+```
+// Partial raw id_token
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtyaU1QZG1Cd...
 
-    // Partial content of a decoded id_token
-    {
-        "name": "John Smith",
-        "email": "john.smith@gmail.com",
-        "oid": "d9674823-dffc-4e3f-a6eb-62fe4bd48a58"
-        ...
-    }
+// Partial content of a decoded id_token
+{
+    "name": "John Smith",
+    "email": "john.smith@gmail.com",
+    "oid": "d9674823-dffc-4e3f-a6eb-62fe4bd48a58"
+    ...
+}
+```
 
 你可以在 [v2.0 令牌参考](./active-directory-v2-tokens.md)中了解提供给应用的各种令牌和声明。
 
@@ -66,11 +70,13 @@ v2.0 终结点支持各种现代应用体系结构的身份验证，所有这些
 ## Web API <a name="web-apis"></a>
 你可以使用 v2.0 终结点来保护 Web 服务，例如应用的 RESTful Web API。Web API 使用 OAuth 2.0 access\_token 而不是 id\_token 和会话 Cookie 来保护数据以及对传入的请求进行身份验证。Web API 调用方会在 HTTP 请求的授权标头中附加一个 access\_token：
 
-    GET /api/items HTTP/1.1
-    Host: www.mywebapi.com
-    Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6...
-    Accept: application/json
-    ...
+```
+GET /api/items HTTP/1.1
+Host: www.mywebapi.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6...
+Accept: application/json
+...
+```
 
 然后 Web API 使用此 access\_token 来验证 API 调用方的标识，并从 access\_token 中编码的声明提取调用方的相关信息。你可以在 [v2.0 令牌参考](./active-directory-v2-tokens.md)中了解提供给应用的各种令牌和声明。
 

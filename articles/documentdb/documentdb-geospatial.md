@@ -38,10 +38,12 @@ DocumentDB 支持对使用 [GeoJSON 规范](http://geojson.org/geojson-spec.html
 
 **DocumentDB 中的点**
 
-    {
-       "type":"Point",
-       "coordinates":[ 31.9, -4.8 ]
-    }
+```
+{
+   "type":"Point",
+   "coordinates":[ 31.9, -4.8 ]
+}
+```
 
 >[!NOTE]
 > GeoJSON 规范先指定经度，再指定纬度。与其他地图应用程序一样，经度和纬度为角度，并以度为单位表示。经度值从本初子午线测量，并介于 -180 度和 180.0 度之间；纬度值从赤道测量，并介于 -90.0 度和 90.0 度之间。
@@ -52,31 +54,35 @@ DocumentDB 支持对使用 [GeoJSON 规范](http://geojson.org/geojson-spec.html
 
 **存储在 DocumentDB 中包含位置的用户配置文件**
 
-    {
-       "id":"documentdb-profile",
-       "screen_name":"@DocumentDB",
-       "city":"Redmond",
-       "topics":[ "NoSQL", "Javascript" ],
-       "location":{
-          "type":"Point",
-          "coordinates":[ 31.9, -4.8 ]
-       }
-    }
+```
+{
+   "id":"documentdb-profile",
+   "screen_name":"@DocumentDB",
+   "city":"Redmond",
+   "topics":[ "NoSQL", "Javascript" ],
+   "location":{
+      "type":"Point",
+      "coordinates":[ 31.9, -4.8 ]
+   }
+}
+```
 
 除了点之外，GeoJSON 也支持 LineString 和多边形。**LineString** 表示空间中一连串的点（两个或更多个）以及连接这些点的线段。在地理空间数据中，LineString 通常用来表示高速公路或河流。**多边形**是形成闭合的 LineString 的相连接的点的边界。多边形通常用来表示自然构成物（例如湖泊），或表示政治管辖权（例如省/市/自治区）。以下是 DocumentDB 中多边形的示例。
 
 **DocumentDB 中的多边形**
 
-    {
-       "type":"Polygon",
-       "coordinates":[
-           [ 31.8, -5 ],
-           [ 31.8, -4.7 ],
-           [ 32, -4.7 ],
-           [ 32, -5 ],
-           [ 31.8, -5 ]
-       ]
-    }
+```
+{
+   "type":"Polygon",
+   "coordinates":[
+       [ 31.8, -5 ],
+       [ 31.8, -4.7 ],
+       [ 32, -4.7 ],
+       [ 32, -5 ],
+       [ 31.8, -5 ]
+   ]
+}
+```
 
 >[!NOTE]
 > GeoJSON 规范需要此数据才能形成有效的多边形；若要创建一个闭合的形状，最后一个坐标对应该与第一个坐标对相同。
@@ -95,42 +101,46 @@ DocumentDB 支持对使用 [GeoJSON 规范](http://geojson.org/geojson-spec.html
 
 **在 Node.js 中创建包含地理空间数据的文档**
 
-    var userProfileDocument = {
-       "name":"documentdb",
-       "location":{
-          "type":"Point",
-          "coordinates":[ -122.12, 47.66 ]
-       }
-    };
+```
+var userProfileDocument = {
+   "name":"documentdb",
+   "location":{
+      "type":"Point",
+      "coordinates":[ -122.12, 47.66 ]
+   }
+};
 
-    client.createDocument(`dbs/${databaseName}/colls/${collectionName}`, userProfileDocument, (err, created) => {
-        // additional code within the callback
-    });
+client.createDocument(`dbs/${databaseName}/colls/${collectionName}`, userProfileDocument, (err, created) => {
+    // additional code within the callback
+});
+```
 
 如果使用 .NET（或 Java）SDK，则可以在 Microsoft.Azure.Documents.Spatial 命名空间中使用新的点和多边形类，将位置信息嵌入应用程序对象中。这些类有助于简化将空间数据序列化和反序列化为 GeoJSON 的过程。
 
 **在 .NET 中创建包含地理空间数据的文档**
 
-    using Microsoft.Azure.Documents.Spatial;
+```
+using Microsoft.Azure.Documents.Spatial;
 
-    public class UserProfile
-    {
-        [JsonProperty("name")]
-        public string Name { get; set; }
+public class UserProfile
+{
+    [JsonProperty("name")]
+    public string Name { get; set; }
 
-        [JsonProperty("location")]
-        public Point Location { get; set; }
+    [JsonProperty("location")]
+    public Point Location { get; set; }
 
-        // More properties
-    }
+    // More properties
+}
 
-    await client.CreateDocumentAsync(
-        UriFactory.CreateDocumentCollectionUri("db", "profiles"), 
-        new UserProfile 
-        { 
-            Name = "documentdb", 
-            Location = new Point (-122.12, 47.66) 
-        });
+await client.CreateDocumentAsync(
+    UriFactory.CreateDocumentCollectionUri("db", "profiles"), 
+    new UserProfile 
+    { 
+        Name = "documentdb", 
+        Location = new Point (-122.12, 47.66) 
+    });
+```
 
 如果你没有经纬度信息，但有物理地址或位置名称，如城市或国家/地区，则可以使用必应地图 REST 服务等地理编码服务来查找实际的坐标。在[此处](https://msdn.microsoft.com/zh-cn/library/ff701713.aspx)详细了解必应地图地理编码。
 
@@ -171,15 +181,19 @@ DocumentDB 支持以下用于查询地理空间的开放地理空间信息联盟
 
 **查询**
 
-    SELECT f.id 
-    FROM Families f 
-    WHERE ST_DISTANCE(f.location, {'type': 'Point', 'coordinates':[31.9, -4.8]}) < 30000
+```
+SELECT f.id 
+FROM Families f 
+WHERE ST_DISTANCE(f.location, {'type': 'Point', 'coordinates':[31.9, -4.8]}) < 30000
+```
 
 **结果**
 
-    [{
-      "id": "WakefieldFamily"
-    }]
+```
+[{
+  "id": "WakefieldFamily"
+}]
+```
 
 如果在你的索引策略中包含空间索引，则将通过索引有效地进行“距离查询”。有关空间索引的更多详细信息，请参阅以下章节。如果你没有指定路径的空间索引，仍然可以通过指定 `x-ms-documentdb-query-enable-scan` 请求标头（其值设置为“true”）执行空间查询。在 .NET 中，可以通过将可选的 **FeedOptions** 参数传递到 [EnableScanInQuery](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.feedoptions.enablescaninquery.aspx#P:Microsoft.Azure.Documents.Client.FeedOptions.EnableScanInQuery) 设置为 true 的查询来完成此操作。
 
@@ -189,18 +203,22 @@ ST\_WITHIN 中的多边形参数只能包含一个环，也就是说，多边形
 
 **查询**
 
-    SELECT * 
-    FROM Families f 
-    WHERE ST_WITHIN(f.location, {
-        'type':'Polygon', 
-        'coordinates': [[[31.8, -5], [32, -5], [32, -4.7], [31.8, -4.7], [31.8, -5]]]
-    })
+```
+SELECT * 
+FROM Families f 
+WHERE ST_WITHIN(f.location, {
+    'type':'Polygon', 
+    'coordinates': [[[31.8, -5], [32, -5], [32, -4.7], [31.8, -4.7], [31.8, -5]]]
+})
+```
 
 **结果**
 
-    [{
-      "id": "WakefieldFamily",
-    }]
+```
+[{
+  "id": "WakefieldFamily",
+}]
+```
 
 >[!NOTE]
 > 与 DocumentDB 查询中不匹配类型的工作方式类似，如果任一参数中指定的位置值格式不正确或无效，则会评估为**未定义**，并且会在查询结果中跳过已评估的文档。如果你的查询没有返回任何结果，请运行 ST\_ISVALIDDETAILED 进行调试，以了解空间类型无效的原因。
@@ -209,48 +227,60 @@ DocumentDB 还支持执行反向查询，即可以为 DocumentDB 中的多边形
 
 **查询**
 
-    SELECT * 
-    FROM Areas a 
-    WHERE ST_WITHIN({'type': 'Point', 'coordinates':[31.9, -4.8]}, a.location)
+```
+SELECT * 
+FROM Areas a 
+WHERE ST_WITHIN({'type': 'Point', 'coordinates':[31.9, -4.8]}, a.location)
+```
 
 **结果**
 
-    [{
-      "id": "MyDesignatedLocation",
-      "location": {
-        "type":"Polygon", 
-        "coordinates": [[[31.8, -5], [32, -5], [32, -4.7], [31.8, -4.7], [31.8, -5]]]
-      }
-    }]
+```
+[{
+  "id": "MyDesignatedLocation",
+  "location": {
+    "type":"Polygon", 
+    "coordinates": [[[31.8, -5], [32, -5], [32, -4.7], [31.8, -4.7], [31.8, -5]]]
+  }
+}]
+```
 
 ST\_ISVALID 和 ST\_ISVALIDDETAILED 可用来检查空间对象是否有效。例如，下列查询检查纬度值 (-132.8) 超出范围的点的有效性。ST\_ISVALID 仅返回一个布尔值，ST\_ISVALIDDETAILED 则返回布尔值和字符串，字符串中包含被视为无效的原因。
 
 **查询**
 
-    SELECT ST_ISVALID({ "type": "Point", "coordinates": [31.9, -132.8] })
+```
+SELECT ST_ISVALID({ "type": "Point", "coordinates": [31.9, -132.8] })
+```
 
 **结果**
 
-    [{
-      "$1": false
-    }]
+```
+[{
+  "$1": false
+}]
+```
 
 这些函数也可以用来验证多边形。例如，在这里我们使用 ST\_ISVALIDDETAILED 来验证未闭合的多边形。
 
 **查询**
 
-    SELECT ST_ISVALIDDETAILED({ "type": "Polygon", "coordinates": [[ 
-        [ 31.8, -5 ], [ 31.8, -4.7 ], [ 32, -4.7 ], [ 32, -5 ] 
-        ]]})
+```
+SELECT ST_ISVALIDDETAILED({ "type": "Polygon", "coordinates": [[ 
+    [ 31.8, -5 ], [ 31.8, -4.7 ], [ 32, -4.7 ], [ 32, -5 ] 
+    ]]})
+```
 
 **结果**
 
-    [{
-       "$1": { 
-            "valid": false, 
-            "reason": "The Polygon input is not valid because the start and end points of the ring number 1 are not the same. Each ring of a Polygon must have the same start and end points." 
-          }
-    }]
+```
+[{
+   "$1": { 
+        "valid": false, 
+        "reason": "The Polygon input is not valid because the start and end points of the ring number 1 are not the same. Each ring of a Polygon must have the same start and end points." 
+      }
+}]
+```
 
 ### .NET SDK 中的 LINQ 查询
 DocumentDB .NET SDK 还提供存根方法 `Distance()` 和 `Within()`，供用户在 LINQ 表达式中使用。DocumentDB LINQ 提供程序会将这些方法调用转换为等效的 SQL 内置函数调用（分别为 ST\_DISTANCE 和 ST\_WITHIN）。
@@ -259,33 +289,37 @@ DocumentDB .NET SDK 还提供存根方法 `Distance()` 和 `Within()`，供用�
 
 **LINQ 距离查询**
 
-    foreach (UserProfile user in client.CreateDocumentQuery<UserProfile>(UriFactory.CreateDocumentCollectionUri("db", "profiles"))
-        .Where(u => u.ProfileType == "Public" && a.Location.Distance(new Point(32.33, -4.66)) < 30000))
-    {
-        Console.WriteLine("\t" + user);
-    }
+```
+foreach (UserProfile user in client.CreateDocumentQuery<UserProfile>(UriFactory.CreateDocumentCollectionUri("db", "profiles"))
+    .Where(u => u.ProfileType == "Public" && a.Location.Distance(new Point(32.33, -4.66)) < 30000))
+{
+    Console.WriteLine("\t" + user);
+}
+```
 
 同样地，以下查询查找所有文档，这些文档的“位置”均在指定的方框/多边形内。
 
 **LINQ Within 查询**
 
-    Polygon rectangularArea = new Polygon(
-        new[]
-        {
-            new LinearRing(new [] {
-                new Position(31.8, -5),
-                new Position(32, -5),
-                new Position(32, -4.7),
-                new Position(31.8, -4.7),
-                new Position(31.8, -5)
-            })
-        });
-
-    foreach (UserProfile user in client.CreateDocumentQuery<UserProfile>(UriFactory.CreateDocumentCollectionUri("db", "profiles"))
-        .Where(a => a.Location.Within(rectangularArea)))
+```
+Polygon rectangularArea = new Polygon(
+    new[]
     {
-        Console.WriteLine("\t" + user);
-    }
+        new LinearRing(new [] {
+            new Position(31.8, -5),
+            new Position(32, -5),
+            new Position(32, -4.7),
+            new Position(31.8, -4.7),
+            new Position(31.8, -5)
+        })
+    });
+
+foreach (UserProfile user in client.CreateDocumentQuery<UserProfile>(UriFactory.CreateDocumentCollectionUri("db", "profiles"))
+    .Where(a => a.Location.Within(rectangularArea)))
+{
+    Console.WriteLine("\t" + user);
+}
+```
 
 我们已经探讨过如何使用 LINQ 和 SQL 查询文档，现在我们来看一下如何针对空间索引配置 DocumentDB。
 
@@ -305,63 +339,69 @@ DocumentDB 支持点、多边形和 LineString 的自动索引。
 
 **针对点和多边形启用了空间索引的集合索引策略 JSON**
 
-    {
-       "automatic":true,
-       "indexingMode":"Consistent",
-       "includedPaths":[
-          {
-             "path":"/*",
-             "indexes":[
-                {
-                   "kind":"Range",
-                   "dataType":"String",
-                   "precision":-1
-                },
-                {
-                   "kind":"Range",
-                   "dataType":"Number",
-                   "precision":-1
-                },
-                {
-                   "kind":"Spatial",
-                   "dataType":"Point"
-                },
-                {
-                   "kind":"Spatial",
-                   "dataType":"Polygon"
-                }                
-             ]
-          }
-       ],
-       "excludedPaths":[
-       ]
-    }
+```
+{
+   "automatic":true,
+   "indexingMode":"Consistent",
+   "includedPaths":[
+      {
+         "path":"/*",
+         "indexes":[
+            {
+               "kind":"Range",
+               "dataType":"String",
+               "precision":-1
+            },
+            {
+               "kind":"Range",
+               "dataType":"Number",
+               "precision":-1
+            },
+            {
+               "kind":"Spatial",
+               "dataType":"Point"
+            },
+            {
+               "kind":"Spatial",
+               "dataType":"Polygon"
+            }                
+         ]
+      }
+   ],
+   "excludedPaths":[
+   ]
+}
+```
 
 以下是 .NET 中的代码段，演示如何创建针对所有包含点的路径启用空间索引的集合。
 
 **创建具有空间索引的集合**
 
-    DocumentCollection spatialData = new DocumentCollection()
-    spatialData.IndexingPolicy = new IndexingPolicy(new SpatialIndex(DataType.Point)); //override to turn spatial on by default
-    collection = await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), spatialData);
+```
+DocumentCollection spatialData = new DocumentCollection()
+spatialData.IndexingPolicy = new IndexingPolicy(new SpatialIndex(DataType.Point)); //override to turn spatial on by default
+collection = await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), spatialData);
+```
 
 下面说明了如何修改现有的集合，以便对文档内存储的所有点使用空间索引。
 
 **修改具有空间索引的现有集合**
 
-    Console.WriteLine("Updating collection with spatial indexing enabled in indexing policy...");
-    collection.IndexingPolicy = new IndexingPolicy(new SpatialIndex(DataType.Point));
-    await client.ReplaceDocumentCollectionAsync(collection);
+```
+Console.WriteLine("Updating collection with spatial indexing enabled in indexing policy...");
+collection.IndexingPolicy = new IndexingPolicy(new SpatialIndex(DataType.Point));
+await client.ReplaceDocumentCollectionAsync(collection);
 
-    Console.WriteLine("Waiting for indexing to complete...");
-    long indexTransformationProgress = 0;
-    while (indexTransformationProgress < 100)
-    {
-        ResourceResponse<DocumentCollection> response = await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri("db", "coll"));
-        indexTransformationProgress = response.IndexTransformationProgress;
+Console.WriteLine("Waiting for indexing to complete...");
+long indexTransformationProgress = 0;
+while (indexTransformationProgress < 100)
+{
+    ResourceResponse<DocumentCollection> response = await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri("db", "coll"));
+    indexTransformationProgress = response.IndexTransformationProgress;
 
-        await Task.Delay(TimeSpan.FromSeconds(1));
-    }
+    await Task.Delay(TimeSpan.FromSeconds(1));
+}
+```
 
 > [!NOTE]
 > 如果文档中的 GeoJSON 位置值格式不正确或无效，则不会为其编制索引以用于空间查询。你可以使用 ST\_ISVALID 和 ST\_ISVALIDDETAILED 验证位置值。

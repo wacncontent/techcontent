@@ -42,18 +42,20 @@ ms.author: marsma
 
 csharp
 
-    // Create a new Batch account
-    await batchManagementClient.Account.CreateAsync("MyResourceGroup",
-        "mynewaccount",
-        new BatchAccountCreateParameters() { Location = "China North" });
+```
+// Create a new Batch account
+await batchManagementClient.Account.CreateAsync("MyResourceGroup",
+    "mynewaccount",
+    new BatchAccountCreateParameters() { Location = "China North" });
 
-    // Get the new account from the Batch service
-    AccountResource account = await batchManagementClient.Account.GetAsync(
-        "MyResourceGroup",
-        "mynewaccount");
+// Get the new account from the Batch service
+AccountResource account = await batchManagementClient.Account.GetAsync(
+    "MyResourceGroup",
+    "mynewaccount");
 
-    // Delete the account
-    await batchManagementClient.Account.DeleteAsync("MyResourceGroup", account.Name);
+// Delete the account
+await batchManagementClient.Account.DeleteAsync("MyResourceGroup", account.Name);
+```
 
 > [!NOTE]
 > 使用 Batch Management .NET 库及其 BatchManagementClient 类的应用程序需有服务管理员或共同管理员访问权限才能使用拥有要管理的 Batch 帐户的订阅。有关详细信息，请参阅 [Azure Active Directory](#azure-active-directory) 部分和 [AccountManagement][acct_mgmt_sample] 代码示例。
@@ -63,22 +65,24 @@ csharp
 
 csharp
 
-    // Get and print the primary and secondary keys
-    BatchAccountListKeyResult accountKeys =
-        await batchManagementClient.Account.ListKeysAsync(
-            "MyResourceGroup",
-            "mybatchaccount");
-    Console.WriteLine("Primary key:   {0}", accountKeys.Primary);
-    Console.WriteLine("Secondary key: {0}", accountKeys.Secondary);
+```
+// Get and print the primary and secondary keys
+BatchAccountListKeyResult accountKeys =
+    await batchManagementClient.Account.ListKeysAsync(
+        "MyResourceGroup",
+        "mybatchaccount");
+Console.WriteLine("Primary key:   {0}", accountKeys.Primary);
+Console.WriteLine("Secondary key: {0}", accountKeys.Secondary);
 
-    // Regenerate the primary key
-    BatchAccountRegenerateKeyResponse newKeys =
-        await batchManagementClient.Account.RegenerateKeyAsync(
-            "MyResourceGroup",
-            "mybatchaccount",
-            new BatchAccountRegenerateKeyParameters() {
-                KeyName = AccountKeyType.Primary
-                });
+// Regenerate the primary key
+BatchAccountRegenerateKeyResponse newKeys =
+    await batchManagementClient.Account.RegenerateKeyAsync(
+        "MyResourceGroup",
+        "mybatchaccount",
+        new BatchAccountRegenerateKeyParameters() {
+            KeyName = AccountKeyType.Primary
+            });
+```
 
 > [!TIP]
 > 可以为管理应用程序创建简化的连接工作流。首先，获取想要使用 [ListKeysAsync][net_list_keys] 管理的 Batch 帐户的帐户密钥。然后在初始化 Batch .NET 库的 [BatchSharedKeyCredentials][net_sharedkeycred] 类（初始化 [BatchClient][net_batch_client] 时使用）时使用此密钥。
@@ -93,25 +97,27 @@ Azure 订阅和类似于 Batch 的各个 Azure 服务均有默认配额，用于
 
 csharp
 
-    // Get a collection of all Batch accounts within the subscription
-    BatchAccountListResponse listResponse =
-            await batchManagementClient.Account.ListAsync(new AccountListParameters());
-    IList<AccountResource> accounts = listResponse.Accounts;
-    Console.WriteLine("Total number of Batch accounts under subscription id {0}:  {1}",
-        creds.SubscriptionId,
-        accounts.Count);
+```
+// Get a collection of all Batch accounts within the subscription
+BatchAccountListResponse listResponse =
+        await batchManagementClient.Account.ListAsync(new AccountListParameters());
+IList<AccountResource> accounts = listResponse.Accounts;
+Console.WriteLine("Total number of Batch accounts under subscription id {0}:  {1}",
+    creds.SubscriptionId,
+    accounts.Count);
 
-    // Get a count of all accounts within the target region
-    string region = "chinanorth";
-    int accountsInRegion = accounts.Count(o => o.Location == region);
+// Get a count of all accounts within the target region
+string region = "chinanorth";
+int accountsInRegion = accounts.Count(o => o.Location == region);
 
-    // Get the account quota for the specified region
-    SubscriptionQuotasGetResponse quotaResponse = await batchManagementClient.Subscriptions.GetSubscriptionQuotasAsync(region);
-    Console.WriteLine("Account quota for {0} region: {1}", region, quotaResponse.AccountQuota);
+// Get the account quota for the specified region
+SubscriptionQuotasGetResponse quotaResponse = await batchManagementClient.Subscriptions.GetSubscriptionQuotasAsync(region);
+Console.WriteLine("Account quota for {0} region: {1}", region, quotaResponse.AccountQuota);
 
-    // Determine how many accounts can be created in the target region
-    Console.WriteLine("Accounts in {0}: {1}", region, accountsInRegion);
-    Console.WriteLine("You can create {0} accounts in the {1} region.", quotaResponse.AccountQuota - accountsInRegion, region);
+// Determine how many accounts can be created in the target region
+Console.WriteLine("Accounts in {0}: {1}", region, accountsInRegion);
+Console.WriteLine("You can create {0} accounts in the {1} region.", quotaResponse.AccountQuota - accountsInRegion, region);
+```
 
 在上面的代码段中，`creds` 是 [TokenCloudCredentials][azure_tokencreds] 的实例。若要查看创建此对象的示例，请参阅 GitHub 上的 [AccountManagement][acct_mgmt_sample] 代码示例。
 
@@ -120,15 +126,17 @@ csharp
 
 csharp
 
-    // First obtain the Batch account
-    BatchAccountGetResponse getResponse =
-        await batchManagementClient.Account.GetAsync("MyResourceGroup", "mybatchaccount");
-    AccountResource account = getResponse.Resource;
+```
+// First obtain the Batch account
+BatchAccountGetResponse getResponse =
+    await batchManagementClient.Account.GetAsync("MyResourceGroup", "mybatchaccount");
+AccountResource account = getResponse.Resource;
 
-    // Now print the compute resource quotas for the account
-    Console.WriteLine("Core quota: {0}", account.Properties.CoreQuota);
-    Console.WriteLine("Pool quota: {0}", account.Properties.PoolQuota);
-    Console.WriteLine("Active job and job schedule quota: {0}", account.Properties.ActiveJobAndJobScheduleQuota);
+// Now print the compute resource quotas for the account
+Console.WriteLine("Core quota: {0}", account.Properties.CoreQuota);
+Console.WriteLine("Pool quota: {0}", account.Properties.PoolQuota);
+Console.WriteLine("Active job and job schedule quota: {0}", account.Properties.ActiveJobAndJobScheduleQuota);
+```
 
 > [!IMPORTANT]
 > 尽管 Azure 订阅和服务有默认配额，但许多限制都可以通过在 [Azure 门户预览][azure_portal]中提出请求来提高。例如，可以参阅 [Azure Batch 服务的配额和限制](./batch-quota-limit.md)以获取有关提高 Batch 帐户配额的说明。
@@ -168,14 +176,14 @@ Azure 本身使用 Azure AD 来对其客户、服务管理员和组织用户进�
 4. 使用凭据创建 [ResourceManagementClient][resman_client]。
 5. 使用 [ResourceManagementClient][resman_client] 创建资源组。
 6. 使用 [BatchManagementClient][net_mgmt_client] 执行多个批处理帐户操作：
-    - 在新资源组中创建批处理帐户。
-    - 从 Batch 服务获取新建的帐户。
-    - 输出新帐户的帐户密钥。
-    - 重新生成帐户的新主密钥。
-    - 输出帐户的配额信息。
-    - 输出订阅的配额信息。
-    - 输出订阅中的所有帐户。
-    - 删除新建的帐户。
+   - 在新资源组中创建批处理帐户。
+   - 从 Batch 服务获取新建的帐户。
+   - 输出新帐户的帐户密钥。
+   - 重新生成帐户的新主密钥。
+   - 输出帐户的配额信息。
+   - 输出订阅的配额信息。
+   - 输出订阅中的所有帐户。
+   - 删除新建的帐户。
 7. 删除该资源组。
 
 删除新建的 Batch 帐户和资源组之前，可以在 [Azure 门户预览][azure_portal]中检查这两项：

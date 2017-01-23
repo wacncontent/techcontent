@@ -44,29 +44,31 @@ Visual Studio 中的 API 应用工具能更加轻松地生成可从桌面、应�
 
 6. 从项目根目录打开 **Program.cs**，并使用以下代码替换 **Main** 方法：
 
-        static void Main(string[] args)
+    ```
+    static void Main(string[] args)
+    {
+        var client = new ContactsList();
+
+        // Send GET request.
+        var contacts = client.Contacts.Get();
+        foreach (var c in contacts)
         {
-            var client = new ContactsList();
-
-            // Send GET request.
-            var contacts = client.Contacts.Get();
-            foreach (var c in contacts)
-            {
-                Console.WriteLine("{0}: {1} {2}",
-                    c.Id, c.Name, c.EmailAddress);
-            }
-
-            // Send POST request.
-            client.Contacts.Post(new Models.Contact
-            {
-                EmailAddress = "lkahn@contoso.com",
-                Name = "Loretta Kahn",
-                Id = 4
-            });
-
-            Console.WriteLine("Finished");
-            Console.ReadLine();
+            Console.WriteLine("{0}: {1} {2}",
+                c.Id, c.Name, c.EmailAddress);
         }
+
+        // Send POST request.
+        client.Contacts.Post(new Models.Contact
+        {
+            EmailAddress = "lkahn@contoso.com",
+            Name = "Loretta Kahn",
+            Id = 4
+        });
+
+        Console.WriteLine("Finished");
+        Console.ReadLine();
+    }
+    ```
 
 ## 测试 API 应用客户端
 

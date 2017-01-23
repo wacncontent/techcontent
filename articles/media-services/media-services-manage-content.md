@@ -151,19 +151,27 @@ ms.author: juliako
 
 SAS URL 采用以下格式：
 
-    {blob container name}/{asset name}/{file name}/{SAS signature}
+```
+{blob container name}/{asset name}/{file name}/{SAS signature}
+```
 
 流式处理 URL 采用以下格式，可用于播放平滑流资产：
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
 
 若要生成 HLS 流式处理 URL，请将 (format=m3u8-aapl) 附加到 URL。
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
 
 若要生成 MPEG DASH 流式处理 URL，请将 (format=mpd-time-csf) 追加到 URL。
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
 
 附带到期日期的定位符。使用门户发布资产时，会创建到期日期在 100 年以后的定位符。
 

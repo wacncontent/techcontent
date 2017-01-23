@@ -53,11 +53,15 @@ ms.author: sewhee
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到资源管理器模式，如下所示。
 
-        azure config mode arm
+    ```
+    azure config mode arm
+    ```
 
     预期输出：
 
-        info:    New mode is arm
+    ```
+    info:    New mode is arm
+    ```
 
 ## 为前端 IP 池创建虚拟网络和公共 IP 地址
 
@@ -67,7 +71,9 @@ ms.author: sewhee
 
     使用 *NRPVnet* 中 10.0.0.0/24 的 CIDR 块创建名为 *NRPVnetSubnet* 的子网。
 
-        azure network vnet subnet create NRPRG NRPVnet NRPVnetSubnet -a 10.0.0.0/24
+    ```
+    azure network vnet subnet create NRPRG NRPVnet NRPVnetSubnet -a 10.0.0.0/24
+    ```
 
 2. 使用 DNS 名称 *loadbalancernrp.eastus.cloudapp.azure.com* 创建要由前端 IP 池使用的名为 *NRPPublicIP* 的公共 IP 地址。下面的命令使用静态分配类型和 4 分钟的空闲超时。
 
@@ -80,18 +86,24 @@ ms.author: sewhee
 
 以下命令会在*中国东部* Azure 位置的 *NRPRG* 资源组中创建 *NRPlb* 负载均衡器。
 
-    azure network lb create NRPRG NRPlb chinaeast
+```
+azure network lb create NRPRG NRPlb chinaeast
+```
 
 ## 创建前端 IP 池和后端地址池
 此示例演示如何创建前端和后端 IP 池，前者接收负载均衡器上的传入网络流量，并向后者发送经过负载均衡的网络流量。
 
 1. 创建前端 IP 池，它与负载均衡器和上一步中创建的公共 IP 相关联。
 
-        azure network lb frontend-ip create nrpRG NRPlb NRPfrontendpool -i nrppublicip
+    ```
+    azure network lb frontend-ip create nrpRG NRPlb NRPfrontendpool -i nrppublicip
+    ```
 
 2. 设置后端地址池，它用于接收前端 IP 池的传入流量。
 
-        azure network lb address-pool create NRPRG NRPlb NRPbackendpool
+    ```
+    azure network lb address-pool create NRPRG NRPlb NRPbackendpool
+    ```
 
 ## 创建 LB 规则、NAT 规则和探测器
 
@@ -106,81 +118,91 @@ ms.author: sewhee
 
 1. 创建 NAT 规则。
 
-        azure network lb inbound-nat-rule create -g nrprg -l nrplb -n ssh1 -p tcp -f 21 -b 22
-        azure network lb inbound-nat-rule create -g nrprg -l nrplb -n ssh2 -p tcp -f 23 -b 22
+    ```
+    azure network lb inbound-nat-rule create -g nrprg -l nrplb -n ssh1 -p tcp -f 21 -b 22
+    azure network lb inbound-nat-rule create -g nrprg -l nrplb -n ssh2 -p tcp -f 23 -b 22
+    ```
 
 2. 创建负载均衡器规则。
 
-        azure network lb rule create nrprg nrplb lbrule -p tcp -f 80 -b 80 -t NRPfrontendpool -o NRPbackendpool
+    ```
+    azure network lb rule create nrprg nrplb lbrule -p tcp -f 80 -b 80 -t NRPfrontendpool -o NRPbackendpool
+    ```
 
 3. 创建运行状况探测器。
 
-        azure network lb probe create -g nrprg -l nrplb -n healthprobe -p "http" -o 80 -f healthprobe.aspx -i 15 -c 4
+    ```
+    azure network lb probe create -g nrprg -l nrplb -n healthprobe -p "http" -o 80 -f healthprobe.aspx -i 15 -c 4
+    ```
 
 4. 检查你的设置。
 
-        azure network lb show nrprg nrplb
+    ```
+    azure network lb show nrprg nrplb
+    ```
 
     预期输出：
 
-        info:    Executing command network lb show
-        + Looking up the load balancer "nrplb"
-        + Looking up the public ip "NRPPublicIP"
-        data:    Id                              : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb
-        data:    Name                            : nrplb
-        data:    Type                            : Microsoft.Network/loadBalancers
-        data:    Location                        : eastus
-        data:    Provisioning State              : Succeeded
-        data:    Frontend IP configurations:
-        data:      Name                          : NRPfrontendpool
-        data:      Provisioning state            : Succeeded
-        data:      Public IP address id          : /subscriptions/####################################/resourceGroups/NRPRG/providers/Microsoft.Network/publicIPAddresses/NRPPublicIP
-        data:      Public IP allocation method   : Static
-        data:      Public IP address             : 40.114.13.145
-        data:
-        data:    Backend address pools:
-        data:      Name                          : NRPbackendpool
-        data:      Provisioning state            : Succeeded
-        data:
-        data:    Load balancing rules:
-        data:      Name                          : HTTP
-        data:      Provisioning state            : Succeeded
-        data:      Protocol                      : Tcp
-        data:      Frontend port                 : 80
-        data:      Backend port                  : 80
-        data:      Enable floating IP            : false
-        data:      Idle timeout in minutes       : 4
-        data:      Frontend IP configuration     : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/frontendIPConfigurations/NRPfrontendpool
-        data:      Backend address pool          : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool
-        data:
-        data:    Inbound NAT rules:
-        data:      Name                          : ssh1
-        data:      Provisioning state            : Succeeded
-        data:      Protocol                      : Tcp
-        data:      Frontend port                 : 21
-        data:      Backend port                  : 22
-        data:      Enable floating IP            : false
-        data:      Idle timeout in minutes       : 4
-        data:      Frontend IP configuration     : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/frontendIPConfigurations/NRPfrontendpool
-        data:
-        data:      Name                          : ssh2
-        data:      Provisioning state            : Succeeded
-        data:      Protocol                      : Tcp
-        data:      Frontend port                 : 23
-        data:      Backend port                  : 22
-        data:      Enable floating IP            : false
-        data:      Idle timeout in minutes       : 4
-        data:      Frontend IP configuration     : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/frontendIPConfigurations/NRPfrontendpool
-        data:
-        data:    Probes:
-        data:      Name                          : healthprobe
-        data:      Provisioning state            : Succeeded
-        data:      Protocol                      : Http
-        data:      Port                          : 80
-        data:      Interval in seconds           : 15
-        data:      Number of probes              : 4
-        data:
-        info:    network lb show command OK
+    ```
+    info:    Executing command network lb show
+    + Looking up the load balancer "nrplb"
+    + Looking up the public ip "NRPPublicIP"
+    data:    Id                              : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb
+    data:    Name                            : nrplb
+    data:    Type                            : Microsoft.Network/loadBalancers
+    data:    Location                        : eastus
+    data:    Provisioning State              : Succeeded
+    data:    Frontend IP configurations:
+    data:      Name                          : NRPfrontendpool
+    data:      Provisioning state            : Succeeded
+    data:      Public IP address id          : /subscriptions/####################################/resourceGroups/NRPRG/providers/Microsoft.Network/publicIPAddresses/NRPPublicIP
+    data:      Public IP allocation method   : Static
+    data:      Public IP address             : 40.114.13.145
+    data:
+    data:    Backend address pools:
+    data:      Name                          : NRPbackendpool
+    data:      Provisioning state            : Succeeded
+    data:
+    data:    Load balancing rules:
+    data:      Name                          : HTTP
+    data:      Provisioning state            : Succeeded
+    data:      Protocol                      : Tcp
+    data:      Frontend port                 : 80
+    data:      Backend port                  : 80
+    data:      Enable floating IP            : false
+    data:      Idle timeout in minutes       : 4
+    data:      Frontend IP configuration     : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/frontendIPConfigurations/NRPfrontendpool
+    data:      Backend address pool          : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool
+    data:
+    data:    Inbound NAT rules:
+    data:      Name                          : ssh1
+    data:      Provisioning state            : Succeeded
+    data:      Protocol                      : Tcp
+    data:      Frontend port                 : 21
+    data:      Backend port                  : 22
+    data:      Enable floating IP            : false
+    data:      Idle timeout in minutes       : 4
+    data:      Frontend IP configuration     : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/frontendIPConfigurations/NRPfrontendpool
+    data:
+    data:      Name                          : ssh2
+    data:      Provisioning state            : Succeeded
+    data:      Protocol                      : Tcp
+    data:      Frontend port                 : 23
+    data:      Backend port                  : 22
+    data:      Enable floating IP            : false
+    data:      Idle timeout in minutes       : 4
+    data:      Frontend IP configuration     : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/frontendIPConfigurations/NRPfrontendpool
+    data:
+    data:    Probes:
+    data:      Name                          : healthprobe
+    data:      Provisioning state            : Succeeded
+    data:      Protocol                      : Http
+    data:      Port                          : 80
+    data:      Interval in seconds           : 15
+    data:      Number of probes              : 4
+    data:
+    info:    network lb show command OK
+    ```
 
 ## 创建 NIC
 
@@ -188,63 +210,73 @@ ms.author: sewhee
 
 1. 创建名为 *lb-nic1-be* 的 NIC，并将其与 *rdp1* NAT 规则和 *NRPbackendpool* 后端地址池相关联。
 
-        azure network nic create -g nrprg -n lb-nic1-be --subnet-name nrpvnetsubnet --subnet-vnet-name nrpvnet -d "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool" -e "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp1" eastus
+    ```
+    azure network nic create -g nrprg -n lb-nic1-be --subnet-name nrpvnetsubnet --subnet-vnet-name nrpvnet -d "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool" -e "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp1" eastus
+    ```
 
     预期输出：
 
-        info:    Executing command network nic create
-        + Looking up the network interface "lb-nic1-be"
-        + Looking up the subnet "nrpvnetsubnet"
-        + Creating network interface "lb-nic1-be"
-        + Looking up the network interface "lb-nic1-be"
-        data:    Id                              : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/networkInterfaces/lb-nic1-be
-        data:    Name                            : lb-nic1-be
-        data:    Type                            : Microsoft.Network/networkInterfaces
-        data:    Location                        : eastus
-        data:    Provisioning state              : Succeeded
-        data:    Enable IP forwarding            : false
-        data:    IP configurations:
-        data:      Name                          : NIC-config
-        data:      Provisioning state            : Succeeded
-        data:      Private IP address            : 10.0.0.4
-        data:      Private IP Allocation Method  : Dynamic
-        data:      Subnet                        : /subscriptions/####################################/resourceGroups/NRPRG/providers/Microsoft.Network/virtualNetworks/NRPVnet/subnets/NRPVnetSubnet
-        data:      Load balancer backend address pools
-        data:        Id                          : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool
-        data:      Load balancer inbound NAT rules:
-        data:        Id                          : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp1
-        data:
-        info:    network nic create command OK
+    ```
+    info:    Executing command network nic create
+    + Looking up the network interface "lb-nic1-be"
+    + Looking up the subnet "nrpvnetsubnet"
+    + Creating network interface "lb-nic1-be"
+    + Looking up the network interface "lb-nic1-be"
+    data:    Id                              : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/networkInterfaces/lb-nic1-be
+    data:    Name                            : lb-nic1-be
+    data:    Type                            : Microsoft.Network/networkInterfaces
+    data:    Location                        : eastus
+    data:    Provisioning state              : Succeeded
+    data:    Enable IP forwarding            : false
+    data:    IP configurations:
+    data:      Name                          : NIC-config
+    data:      Provisioning state            : Succeeded
+    data:      Private IP address            : 10.0.0.4
+    data:      Private IP Allocation Method  : Dynamic
+    data:      Subnet                        : /subscriptions/####################################/resourceGroups/NRPRG/providers/Microsoft.Network/virtualNetworks/NRPVnet/subnets/NRPVnetSubnet
+    data:      Load balancer backend address pools
+    data:        Id                          : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool
+    data:      Load balancer inbound NAT rules:
+    data:        Id                          : /subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp1
+    data:
+    info:    network nic create command OK
+    ```
 
 2. 创建名为 *lb-nic2-be* 的 NIC，并将其与 *rdp2* NAT 规则和 *NRPbackendpool* 后端地址池相关联。
 
-        azure network nic create --resource-group nrprg --name lb-nic2-be --subnet-name nrpvnetsubnet --subnet-vnet-name nrpvnet --lb-address-pool-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool" --lb-inbound-nat-rule-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp2" eastus
+    ```
+    azure network nic create --resource-group nrprg --name lb-nic2-be --subnet-name nrpvnetsubnet --subnet-vnet-name nrpvnet --lb-address-pool-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool" --lb-inbound-nat-rule-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp2" eastus
+    ```
 
 3. 创建名为 *web1* 的虚拟机 (VM)，并将其与名为 *lb-nic1-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 
-        azure vm create --resource-group nrprg --name web1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
+    ```
+    azure vm create --resource-group nrprg --name web1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
+    ```
 
     >[!IMPORTANT]
     > 负载均衡器中的 VM 需要在同一可用性集中。使用 `azure availset create` 创建可用性集。
 
     输出应如下所示：
 
-        info:    Executing command vm create
-        + Looking up the VM "web1"
-        Enter username: azureuser
-        Enter password for azureuser: *********
-        Confirm password: *********
-        info:    Using the VM Size "Standard_A1"
-        info:    The [OS, Data] Disk or image configuration requires storage account
-        + Looking up the storage account web1nrp
-        + Looking up the availability set "nrp-avset"
-        info:    Found an Availability set "nrp-avset"
-        + Looking up the NIC "lb-nic1-be"
-        info:    Found an existing NIC "lb-nic1-be"
-        info:    Found an IP configuration with virtual network subnet id "/subscriptions/####################################/resourceGroups/NRPRG/providers/Microsoft.Network/virtualNetworks/NRPVnet/subnets/NRPVnetSubnet" in the NIC "lb-nic1-be"
-        info:    This is a NIC without publicIP configured
-        + Creating VM "web1"
-        info:    vm create command OK
+    ```
+    info:    Executing command vm create
+    + Looking up the VM "web1"
+    Enter username: azureuser
+    Enter password for azureuser: *********
+    Confirm password: *********
+    info:    Using the VM Size "Standard_A1"
+    info:    The [OS, Data] Disk or image configuration requires storage account
+    + Looking up the storage account web1nrp
+    + Looking up the availability set "nrp-avset"
+    info:    Found an Availability set "nrp-avset"
+    + Looking up the NIC "lb-nic1-be"
+    info:    Found an existing NIC "lb-nic1-be"
+    info:    Found an IP configuration with virtual network subnet id "/subscriptions/####################################/resourceGroups/NRPRG/providers/Microsoft.Network/virtualNetworks/NRPVnet/subnets/NRPVnetSubnet" in the NIC "lb-nic1-be"
+    info:    This is a NIC without publicIP configured
+    + Creating VM "web1"
+    info:    vm create command OK
+    ```
 
     >[!NOTE]
     > 应显示信息性消息**这是未配置公共 IP 的 NIC**，因为为连接到 Internet 的负载均衡器创建的 NIC 使用的是负载均衡器公共 IP 地址。
@@ -253,17 +285,23 @@ ms.author: sewhee
 
 4. 创建名为 *web2* 的虚拟机 (VM)，并将其与名为 *lb-nic2-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 
-        azure vm create --resource-group nrprg --name web2 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic2-be --availset-name nrp-avset --storage-account-name web2nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
+    ```
+    azure vm create --resource-group nrprg --name web2 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic2-be --availset-name nrp-avset --storage-account-name web2nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
+    ```
 
 ## 更新现有的负载均衡器
 可添加引用现有负载均衡器的规则。在下例中，向现有负载均衡器 **NRPlb** 添加了新的负载均衡器规则
 
-    azure network lb rule create --resource-group nrprg --lb-name nrplb --name lbrule2 --protocol tcp --frontend-port 8080 --backend-port 8051 --frontend-ip-name frontendnrppool --backend-address-pool-name NRPbackendpool
+```
+azure network lb rule create --resource-group nrprg --lb-name nrplb --name lbrule2 --protocol tcp --frontend-port 8080 --backend-port 8051 --frontend-ip-name frontendnrppool --backend-address-pool-name NRPbackendpool
+```
 
 ## 删除负载均衡器
 以下命令可删除负载均衡器：
 
-    azure network lb delete --resource-group nrprg --name nrplb
+```
+azure network lb delete --resource-group nrprg --name nrplb
+```
 
 ## 后续步骤
 [开始配置内部负载均衡器](./load-balancer-get-started-ilb-arm-cli.md)

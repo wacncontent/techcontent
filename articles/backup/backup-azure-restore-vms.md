@@ -51,8 +51,8 @@ ms.author: trinadhk; jimpark;
 
 1. 在“选择还原实例”屏幕中，指定有关要将虚拟机还原到何处的详细信息。
 
-    - 指定虚拟机名称：在指定的云服务中，虚拟机名称应该是唯一的。不支持覆盖现有 VM。
-    - 选择 VM 的云服务：这是创建 VM 的必要步骤。可选择使用现有的云服务，或创建新的云服务。
+   - 指定虚拟机名称：在指定的云服务中，虚拟机名称应该是唯一的。不支持覆盖现有 VM。
+   - 选择 VM 的云服务：这是创建 VM 的必要步骤。可选择使用现有的云服务，或创建新的云服务。
 
      无论选取怎样的云服务名称，云服务名称都应是全局唯一的。通常，云服务名称与面向公众的 URL 相关联，采用 [cloudservice].chinacloudapp.cn 形式。如果该名称已被使用，Azure 不会允许创建新的云服务。如果选择创建新的云服务，它将被提供与虚拟机相同的名称，在这种情况下，选取的 VM 名称应具有充分的唯一性才能应用到关联的云服务。
 
@@ -135,8 +135,8 @@ PowerShell 能够只从备份还原 VM 磁盘，而不建立虚拟机。当还�
 1. 使用 [Azure 备份 PowerShell](./backup-azure-vms-classic-automation.md#restore-an-azure-vm) 从备份保管库还原磁盘
 2. 使用 PowerShell cmdlet 创建负载均衡器/多个 NIC/多个保留 IP 所需的 VM 配置，并使用该配置创建具有所需配置的 VM。
 
-    - 创建具有[多个 NIC](../virtual-network/virtual-networks-multiple-nics.md) 的 VM
-    - 具有[多个保留 IP](../virtual-network/virtual-networks-reserved-public-ip.md) 的 VM
+   - 创建具有[多个 NIC](../virtual-network/virtual-networks-multiple-nics.md) 的 VM
+   - 具有[多个保留 IP](../virtual-network/virtual-networks-reserved-public-ip.md) 的 VM
 
 ## 后续步骤
 - [排查错误](./backup-azure-vms-troubleshoot.md#restore)

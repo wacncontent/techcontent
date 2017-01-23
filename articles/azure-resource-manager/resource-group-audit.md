@@ -58,50 +58,68 @@ ms.author: tomfitz
 ## 通过 PowerShell 查看活动日志
 1. 若要检索日志条目，请运行 **Get-AzureRmLog** 命令。你可以提供附加参数来筛选条目列表。如果未指定开始和结束时间，将返回最后一个小时的条目。例如，若要检索过去一小时针对某个资源组的操作，请运行：
 
-        Get-AzureRmLog -ResourceGroup ExampleGroup
+    ```
+    Get-AzureRmLog -ResourceGroup ExampleGroup
+    ```
 
     以下示例演示了如何使用审核日志来调查在指定时间内执行的操作。开始日期和结束日期以日期格式指定。
 
-        Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime 2015-08-28T06:00 -EndTime 2015-09-10T06:00
+    ```
+    Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime 2015-08-28T06:00 -EndTime 2015-09-10T06:00
+    ```
 
     或者，可以使用 date 函数来指定日期范围，例如过去 14 天。
 
-        Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14)
+    ```
+    Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14)
+    ```
 2. 根据指定的开始时间，前面的命令可能会返回对该资源组执行的一长串操作。你可以提供搜索条件，以筛选所要查找的结果。例如，如果你想要调查 Web 应用的停止方式，可以运行以下命令。
 
-        Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14) | Where-Object OperationName -eq Microsoft.Web/sites/stop/action
+    ```
+    Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14) | Where-Object OperationName -eq Microsoft.Web/sites/stop/action
+    ```
 
     就此示例来说，该命令显示 someone@contoso.com 执行了停止操作。
 
-        Authorization     :
-        Scope     : /subscriptions/xxxxx/resourcegroups/ExampleGroup/providers/Microsoft.Web/sites/ExampleSite
-        Action    : Microsoft.Web/sites/stop/action
-        Role      : Subscription Admin
-        Condition :
-        Caller            : someone@contoso.com
-        CorrelationId     : 84beae59-92aa-4662-a6fc-b6fecc0ff8da
-        EventSource       : Administrative
-        EventTimestamp    : 8/28/2015 4:08:18 PM
-        OperationName     : Microsoft.Web/sites/stop/action
-        ResourceGroupName : ExampleGroup
-        ResourceId        : /subscriptions/xxxxx/resourcegroups/ExampleGroup/providers/Microsoft.Web/sites/ExampleSite
-        Status            : Succeeded
-        SubscriptionId    : xxxxx
-        SubStatus         : OK
+    ```
+    Authorization     :
+    Scope     : /subscriptions/xxxxx/resourcegroups/ExampleGroup/providers/Microsoft.Web/sites/ExampleSite
+    Action    : Microsoft.Web/sites/stop/action
+    Role      : Subscription Admin
+    Condition :
+    Caller            : someone@contoso.com
+    CorrelationId     : 84beae59-92aa-4662-a6fc-b6fecc0ff8da
+    EventSource       : Administrative
+    EventTimestamp    : 8/28/2015 4:08:18 PM
+    OperationName     : Microsoft.Web/sites/stop/action
+    ResourceGroupName : ExampleGroup
+    ResourceId        : /subscriptions/xxxxx/resourcegroups/ExampleGroup/providers/Microsoft.Web/sites/ExampleSite
+    Status            : Succeeded
+    SubscriptionId    : xxxxx
+    SubStatus         : OK
+    ```
 3. 你可以查看特定用户针对某个资源组执行的操作，即使该资源组不再存在。
 
-        Get-AzureRmLog -ResourceGroup deletedgroup -StartTime (Get-Date).AddDays(-14) -Caller someone@contoso.com
+    ```
+    Get-AzureRmLog -ResourceGroup deletedgroup -StartTime (Get-Date).AddDays(-14) -Caller someone@contoso.com
+    ```
 
 ## 通过 Azure CLI 查看活动日志
 1. 若要检索日志条目，请运行 **azure group log show** 命令。
 
-        azure group log show ExampleGroup
+    ```
+    azure group log show ExampleGroup
+    ```
 2. 可以使用 JSON 实用程序（如 [jq](http://stedolan.github.io/jq/download/)）来筛选结果。以下示例演示如何查找更新了 Web 配置文件的操作。
 
-        azure group log show ExampleGroup --json | jq ".[] | select(.operationName.localizedValue == "Update web sites config")"
+    ```
+    azure group log show ExampleGroup --json | jq ".[] | select(.operationName.localizedValue == "Update web sites config")"
+    ```
 3. 你可以查看特定用户的操作。
 
-        azure group log show ExampleGroup --json | jq ".[] | select(.caller=="someone@contoso.com")"
+    ```
+    azure group log show ExampleGroup --json | jq ".[] | select(.caller=="someone@contoso.com")"
+    ```
 
 ## 查看审核日志的 REST API
 用于处理活动日志的 REST 操作是 [Insights REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn931943.aspx) 的一部分。若要检索活动日志事件，请参阅[列出订阅中的管理事件](https://msdn.microsoft.com/zh-cn/library/azure/dn931934.aspx)。

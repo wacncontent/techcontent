@@ -41,33 +41,37 @@ ms.author: amsriva
 
 确保后端地址池不为空。这可以通过 PowerShell、CLI 或门户来实现。
 
-    Get-AzureRmApplicationGateway -Name "SampleGateway" -ResourceGroupName "ExampleResourceGroup"
+```
+Get-AzureRmApplicationGateway -Name "SampleGateway" -ResourceGroupName "ExampleResourceGroup"
+```
 
 上述 cmdlet 的输出应包含非空后端地址池。以下示例中返回了两个池，其中配置了后端 VM 的 FQDN 或 IP 地址。BackendAddressPool 的预配状态必须是 'Succeeded'。
 
 BackendAddressPoolsText：
 
-    [{
-        "BackendAddresses": [{
-            "ipAddress": "10.0.0.10",
-            "ipAddress": "10.0.0.11"
-        }],
-        "BackendIpConfigurations": [],
-        "ProvisioningState": "Succeeded",
-        "Name": "Pool01",
-        "Etag": "W/\"00000000-0000-0000-0000-000000000000\"",
-        "Id": "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Network/applicationGateways/<application gateway name>/backendAddressPools/pool01"
-    }, {
-        "BackendAddresses": [{
-            "Fqdn": "xyx.chinacloudapp.cn",
-            "Fqdn": "abc.chinacloudapp.cn"
-        }],
-        "BackendIpConfigurations": [],
-        "ProvisioningState": "Succeeded",
-        "Name": "Pool02",
-        "Etag": "W/\"00000000-0000-0000-0000-000000000000\"",
-        "Id": "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Network/applicationGateways/<application gateway name>/backendAddressPools/pool02"
-    }]
+```
+[{
+    "BackendAddresses": [{
+        "ipAddress": "10.0.0.10",
+        "ipAddress": "10.0.0.11"
+    }],
+    "BackendIpConfigurations": [],
+    "ProvisioningState": "Succeeded",
+    "Name": "Pool01",
+    "Etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+    "Id": "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Network/applicationGateways/<application gateway name>/backendAddressPools/pool01"
+}, {
+    "BackendAddresses": [{
+        "Fqdn": "xyx.chinacloudapp.cn",
+        "Fqdn": "abc.chinacloudapp.cn"
+    }],
+    "BackendIpConfigurations": [],
+    "ProvisioningState": "Succeeded",
+    "Name": "Pool02",
+    "Etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+    "Id": "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Network/applicationGateways/<application gateway name>/backendAddressPools/pool02"
+}]
+```
 
 ## BackendAddressPool 中存在运行不正常的实例
 
@@ -137,7 +141,9 @@ BackendAddressPoolsText：
 
 应用程序网关允许用户通过 BackendHttpSetting 配置此设置，然后可将此设置应用到不同的池。不同的后端池可以有不同的 BackendHttpSetting，因此可配置不同的请求超时。
 
-    New-AzureRmApplicationGatewayBackendHttpSettings -Name 'Setting01' -Port 80 -Protocol Http -CookieBasedAffinity Enabled -RequestTimeout 60
+```
+New-AzureRmApplicationGatewayBackendHttpSettings -Name 'Setting01' -Port 80 -Protocol Http -CookieBasedAffinity Enabled -RequestTimeout 60
+```
 
 ## 后续步骤
 

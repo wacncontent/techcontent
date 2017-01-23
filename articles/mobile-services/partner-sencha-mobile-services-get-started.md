@@ -78,7 +78,9 @@ ms.author: glenga
 
 从安装了 Touch 框架的目录发出以下命令：
 
-    $ sencha generate app Basic /path/to/application
+```
+$ sencha generate app Basic /path/to/application
+```
 
 这将生成一个名为“Basic”的 Touch 模板应用程序。若要启动您的应用程序，只需将您的浏览器指向目录 /path/to/application，然后将显示标准的 Touch 示例应用程序。
 
@@ -96,9 +98,11 @@ ms.author: glenga
 
 2. 将该 Azure 扩展包从下载目录复制到您最终希望放置和解压缩它的位置：
 
-        $ cd /path/to/application
-        $ mv /download-location/azure.zip .
-        $ unzip azure.zip  
+    ```
+    $ cd /path/to/application
+    $ mv /download-location/azure.zip .
+    $ unzip azure.zip  
+    ```
 
     这将创建包含整个程序包源、示例和文档的 **azure** 目录。该源将位于 **azure/src** 目录中。
 
@@ -115,16 +119,20 @@ ms.author: glenga
 
 1. 将 Azure 包添加到需要 app.json 文件的部分：
 
-        {
-            "name": "Basic",
-            "requires": [
-                "touch-azure"
-            ]
-        }
+    ```
+    {
+        "name": "Basic",
+        "requires": [
+            "touch-azure"
+        ]
+    }
+    ```
 
 2. 使用 **sencha cmd** 重新生成你的应用程序以提取和安装该程序包：
 
-        $ sencha app build
+    ```
+    $ sencha app build
+    ```
 
 **sencha app build** 和 **sencha app refresh** 现在都将执行将程序包集成到你的应用程序所需的步骤。通常，在更改程序包的要求之后，你将需要运行 **sencha app refresh**，以便支持“开发人员模式”所需的元数据是最新的。
 
@@ -138,23 +146,27 @@ ms.author: glenga
 
 1. 使用源代码的位置配置 Sencha 加载程序：
 
-        Ext.Loader.setConfig({
-                    enabled : true,
-               paths   : {
-                   'Ext'       : 'touch/src',
-                   'Ext.azure' : '/path-to/azure-for-touch/azure/src'
-            }
-        });
+    ```
+    Ext.Loader.setConfig({
+                enabled : true,
+           paths   : {
+               'Ext'       : 'touch/src',
+               'Ext.azure' : '/path-to/azure-for-touch/azure/src'
+        }
+    });
+    ```
 
 2. 需要 Azure 类文件：
 
-        Ext.application({
+    ```
+    Ext.application({
 
-            requires: [ 'Ext.azure.Azure' ],
+        requires: [ 'Ext.azure.Azure' ],
 
-            // ...
+        // ...
 
-        });
+    });
+    ```
 
 3. 配置 Azure：
 
@@ -166,24 +178,26 @@ ms.author: glenga
 
     此示例演示了在仅提供应用程序密钥和 URL 时进行的非常简单的 Azure 配置和初始化：
 
-        Ext.application({
-            name: 'Basic',
+    ```
+    Ext.application({
+        name: 'Basic',
 
-            requires: [ 'Ext.azure.Azure' ],
+        requires: [ 'Ext.azure.Azure' ],
 
-            azure: {
-                appKey: 'myazureservice-access-key',
-                appUrl: 'myazure-service.azure-mobile.net'
-            },
+        azure: {
+            appKey: 'myazureservice-access-key',
+            appUrl: 'myazure-service.azure-mobile.net'
+        },
 
-            launch: function() {
+        launch: function() {
 
-                // Call Azure initialization
+            // Call Azure initialization
 
-                Ext.Azure.init(this.config.azure);
+            Ext.Azure.init(this.config.azure);
 
-                }
-            });
+            }
+        });
+    ```
 
     有关 Azure 配置选项的详细信息，请参阅 Ext.Azure API 文档。
 
@@ -205,39 +219,41 @@ Sencha Touch 模型提供了您将在应用程序中使用的数据记录的定�
 
 Azure 代理会按照 Azure API 所预期的相应 CRUD 操作（包括身份验证凭据，如果它们存在）自动设置所有 HTTP 标头。
 
-    Ext.define('Basic.model.TodoItem', {
-        extend : 'Ext.data.Model',
+```
+Ext.define('Basic.model.TodoItem', {
+    extend : 'Ext.data.Model',
 
-        requires : [
-            'Ext.azure.Proxy'
+    requires : [
+        'Ext.azure.Proxy'
+    ],
+
+    config : {
+        idProperty : 'id',
+        useCache   : false,
+
+        fields     : [
+            {
+                name : 'id',
+                type : 'int'
+            },
+            {
+                name : 'text',
+                type : 'string'
+            },
+            {
+                name : 'complete',
+                type : 'boolean'
+            }
         ],
 
-        config : {
-            idProperty : 'id',
-            useCache   : false,
-
-            fields     : [
-                {
-                    name : 'id',
-                    type : 'int'
-                },
-                {
-                    name : 'text',
-                    type : 'string'
-                },
-                {
-                    name : 'complete',
-                    type : 'boolean'
-                }
-            ],
-
-            proxy : {
-                type               : 'azure',
-                tableName          : 'TodoItem',
-                enablePagingParams : true
-            }
+        proxy : {
+            type               : 'azure',
+            tableName          : 'TodoItem',
+            enablePagingParams : true
         }
-    });
+    }
+});
+```
 
 ### 存储 ToDo 项 
 
@@ -249,20 +265,22 @@ Sencha Touch 存储可用于存储用作 Touch 组件的源的数据记录（模
 
 我们还有一些其他存储配置选项（如指定页的大小（8 个记录）），而且通过 Azure 移动服务远程完成对此存储的记录的排序（无法以本地方式在存储本身内进行排序）。
 
-    Ext.define('Basic.store.TodoItems', {
-        extend : 'Ext.data.Store',
+```
+Ext.define('Basic.store.TodoItems', {
+    extend : 'Ext.data.Store',
 
-        requires : [
-            'Basic.model.TodoItem'
-        ],
+    requires : [
+        'Basic.model.TodoItem'
+    ],
 
-        config : {
-            model        : 'Basic.model.TodoItem',
-            pageSize     : 8,
-            remoteSort   : true,
-            remoteFilter : true
-        }
-    });
+    config : {
+        model        : 'Basic.model.TodoItem',
+        pageSize     : 8,
+        remoteSort   : true,
+        remoteFilter : true
+    }
+});
+```
 
 ### 查看和编辑 ToDo 项
 
@@ -272,74 +290,76 @@ Sencha Touch 存储可用于存储用作 Touch 组件的源的数据记录（模
 
 下面的视图由 ListItem 组成，它定义每个记录以及某些按钮的显示方式，这些按钮将容纳删除每个项的操作。
 
-    Ext.define('Basic.view.DataItem', {
-        extend : 'Ext.dataview.component.ListItem',
-        xtype  : 'basic-dataitem',
+```
+Ext.define('Basic.view.DataItem', {
+    extend : 'Ext.dataview.component.ListItem',
+    xtype  : 'basic-dataitem',
 
-        requires : [
-            'Ext.Button',
-            'Ext.layout.HBox',
-            'Ext.field.Checkbox'
-        ],
+    requires : [
+        'Ext.Button',
+        'Ext.layout.HBox',
+        'Ext.field.Checkbox'
+    ],
 
-        config : {
-            checkbox : {
-                docked     : 'left',
-                xtype      : 'checkboxfield',
-                width      : 50,
-                labelWidth : 0
+    config : {
+        checkbox : {
+            docked     : 'left',
+            xtype      : 'checkboxfield',
+            width      : 50,
+            labelWidth : 0
+        },
+
+        text : {
+            flex : 1
+        },
+
+        button : {
+            docked   : 'right',
+            xtype    : 'button',
+            ui       : 'plain',
+            iconMask : true,
+            iconCls  : 'delete',
+            style    : 'color: red;'
+        },
+
+        dataMap : {
+            getText : {
+                setHtml : 'text'
             },
 
-            text : {
-                flex : 1
-            },
-
-            button : {
-                docked   : 'right',
-                xtype    : 'button',
-                ui       : 'plain',
-                iconMask : true,
-                iconCls  : 'delete',
-                style    : 'color: red;'
-            },
-
-            dataMap : {
-                getText : {
-                    setHtml : 'text'
-                },
-
-                getCheckbox : {
-                    setChecked : 'complete'
-                }
-            },
-
-            layout : {
-                type : 'hbox',
-                align: 'stretch'
+            getCheckbox : {
+                setChecked : 'complete'
             }
         },
 
-        applyCheckbox : function(config) {
-            return Ext.factory(config, Ext.field.Checkbox, this.getCheckbox());
-        },
-
-        updateCheckbox : function (cmp) {
-            if (cmp) {
-                this.add(cmp);
-            }
-        },
-
-        applyButton : function(config) {
-            return Ext.factory(config, Ext.Button, this.getButton());
-        },
-
-        updateButton : function (cmp) {
-            if (cmp) {
-                this.add(cmp);
-            }
+        layout : {
+            type : 'hbox',
+            align: 'stretch'
         }
+    },
 
-    });
+    applyCheckbox : function(config) {
+        return Ext.factory(config, Ext.field.Checkbox, this.getCheckbox());
+    },
+
+    updateCheckbox : function (cmp) {
+        if (cmp) {
+            this.add(cmp);
+        }
+    },
+
+    applyButton : function(config) {
+        return Ext.factory(config, Ext.Button, this.getButton());
+    },
+
+    updateButton : function (cmp) {
+        if (cmp) {
+            this.add(cmp);
+        }
+    }
+
+});
+```
 
 ### 创建您的主视图
 
@@ -347,66 +367,68 @@ Sencha Touch 存储可用于存储用作 Touch 组件的源的数据记录（模
 
 由于我们已定义了单独的 ToDo 列表项（如上所示）的布局，因此我们希望在列表周围环绕一个完整的用户界面，该列表定义项的实际列表、应用程序标题和用于添加新任务的按钮。
 
-    Ext.define('Basic.view.Main', {
-        extend : 'Ext.dataview.List',
-        xtype  : 'main',
+```
+Ext.define('Basic.view.Main', {
+    extend : 'Ext.dataview.List',
+    xtype  : 'main',
 
-        requires : [
-            'Ext.TitleBar',
-            'Ext.dataview.List',
-            'Ext.data.Store',
-            'Ext.plugin.PullRefresh',
-            'Ext.plugin.ListPaging',
-            'Basic.view.DataItem'
+    requires : [
+        'Ext.TitleBar',
+        'Ext.dataview.List',
+        'Ext.data.Store',
+        'Ext.plugin.PullRefresh',
+        'Ext.plugin.ListPaging',
+        'Basic.view.DataItem'
+    ],
+
+    config : {
+        store : 'TodoItems',
+
+        useSimpleItems : false,
+        defaultType    : 'basic-dataitem',
+
+        plugins : [
+            {
+                xclass          : 'Ext.plugin.PullRefresh',
+                pullRefreshText : 'Pull down to refresh!'
+            },
+            {
+                xclass     : 'Ext.plugin.ListPaging',
+                autoPaging : true
+            }
         ],
 
-        config : {
-            store : 'TodoItems',
+        scrollable : {
+            direction     : 'vertical',
+            directionLock : true
+        },
 
-            useSimpleItems : false,
-            defaultType    : 'basic-dataitem',
-
-            plugins : [
-                {
-                    xclass          : 'Ext.plugin.PullRefresh',
-                    pullRefreshText : 'Pull down to refresh!'
-                },
-                {
-                    xclass     : 'Ext.plugin.ListPaging',
-                    autoPaging : true
-                }
-            ],
-
-            scrollable : {
-                direction     : 'vertical',
-                directionLock : true
+        items : [
+            {
+                docked : 'top',
+                xtype  : 'titlebar',
+                title  : 'Azure Mobile - Basic Data Example'
             },
-
-            items : [
-                {
-                    docked : 'top',
-                    xtype  : 'titlebar',
-                    title  : 'Azure Mobile - Basic Data Example'
-                },
-                {
-                    xtype  : 'toolbar',
-                    docked : 'bottom',
-                    items  : [
-                        {
-                            xtype       : 'textfield',
-                            placeHolder : 'Enter new task',
-                            flex        : 1
-                        },
-                        {
-                            xtype  : 'button',
-                            action : 'add',
-                            text   : 'Add'
-                        }
-                    ]
-                }
-            ]
-        }
-    });
+            {
+                xtype  : 'toolbar',
+                docked : 'bottom',
+                items  : [
+                    {
+                        xtype       : 'textfield',
+                        placeHolder : 'Enter new task',
+                        flex        : 1
+                    },
+                    {
+                        xtype  : 'button',
+                        action : 'add',
+                        text   : 'Add'
+                    }
+                ]
+            }
+        ]
+    }
+});
+```
 
 ### 使一切协同工作
 
@@ -414,156 +436,158 @@ Sencha Touch 存储可用于存储用作 Touch 组件的源的数据记录（模
 
 我们的应用程序中的最后一步是对按钮按下（删除、保存等）做出响应，并提供所有这些请求背后的逻辑。Sencha Touch 使用可侦听这些事件并做出相应响应的控制器。
 
-    Ext.define('Basic.controller.Main', {
-        extend : 'Ext.app.Controller',
+```
+Ext.define('Basic.controller.Main', {
+    extend : 'Ext.app.Controller',
 
-        config : {
-            refs : {
-                todoField : 'main toolbar textfield',
-                main      : 'main'
+    config : {
+        refs : {
+            todoField : 'main toolbar textfield',
+            main      : 'main'
+        },
+
+        control : {
+            'button[action=add]'    : {
+                tap : 'onAddItem'
+            },
+            'button[action=reload]' : {
+                tap : 'onReload'
             },
 
-            control : {
-                'button[action=add]'    : {
-                    tap : 'onAddItem'
-                },
-                'button[action=reload]' : {
-                    tap : 'onReload'
-                },
+            main : {
+                activate      : 'loadInitialData',
+                itemdoubletap : 'onItemEdit'
+            },
 
-                main : {
-                    activate      : 'loadInitialData',
-                    itemdoubletap : 'onItemEdit'
-                },
+            'basic-dataitem checkboxfield' : {
+                change : 'onItemCompleteTap'
+            },
 
-                'basic-dataitem checkboxfield' : {
-                    change : 'onItemCompleteTap'
-                },
-
-                'basic-dataitem button' : {
-                    tap : 'onItemDeleteTap'
-                }
+            'basic-dataitem button' : {
+                tap : 'onItemDeleteTap'
             }
-        },
+        }
+    },
 
-        loadInitialData : function () {
-            Ext.getStore('TodoItems').load();
-        },
+    loadInitialData : function () {
+        Ext.getStore('TodoItems').load();
+    },
 
-        onItemDeleteTap : function (button, e, eOpts) {
-            var store    = Ext.getStore('TodoItems'),
-                dataItem = button.up('dataitem'),
-                rec      = dataItem.getRecord();
+    onItemDeleteTap : function (button, e, eOpts) {
+        var store    = Ext.getStore('TodoItems'),
+            dataItem = button.up('dataitem'),
+            rec      = dataItem.getRecord();
 
-            rec.erase({
+        rec.erase({
+            success: function (rec, operation) {
+                store.remove(rec);
+            },
+            failure: function (rec, operation) {
+                Ext.Msg.alert(
+                    'Error',
+                    Ext.util.Format.format('There was an error deleting this task.<br/><br/>	Status Code: {0}<br/>Status Text: {1}', 
+                    operation.error.status, 
+                    operation.error.statusText)
+                );
+            }
+        });
+    },
+
+    onItemCompleteTap : function (checkbox, newVal, oldVal, eOpts) {
+        var dataItem = checkbox.up('dataitem'),
+            rec      = dataItem.getRecord(),
+            recVal   = rec.get('complete');
+
+        // this check is needed to prevent an issue where multiple creates get triggered from one create
+        if (newVal !== recVal) {
+            rec.set('complete', newVal);
+            rec.save({
                 success: function (rec, operation) {
-                    store.remove(rec);
+                    rec.commit();
                 },
                 failure: function (rec, operation) {
+                    // since there was a failure doing the update on the server then silently reject the change
+                    rec.reject(true);
                     Ext.Msg.alert(
                         'Error',
-                        Ext.util.Format.format('There was an error deleting this task.<br/><br/>	Status Code: {0}<br/>Status Text: {1}', 
+                        Ext.util.Format.format('There was an error updating this task.<br/><br/>Status Code: {0}<br/>Status Text: {1}', 
                         operation.error.status, 
                         operation.error.statusText)
                     );
                 }
             });
-        },
-
-        onItemCompleteTap : function (checkbox, newVal, oldVal, eOpts) {
-            var dataItem = checkbox.up('dataitem'),
-                rec      = dataItem.getRecord(),
-                recVal   = rec.get('complete');
-
-            // this check is needed to prevent an issue where multiple creates get triggered from one create
-            if (newVal !== recVal) {
-                rec.set('complete', newVal);
-                rec.save({
-                    success: function (rec, operation) {
-                        rec.commit();
-                    },
-                    failure: function (rec, operation) {
-                        // since there was a failure doing the update on the server then silently reject the change
-                        rec.reject(true);
-                        Ext.Msg.alert(
-                            'Error',
-                            Ext.util.Format.format('There was an error updating this task.<br/><br/>Status Code: {0}<br/>Status Text: {1}', 
-                            operation.error.status, 
-                            operation.error.statusText)
-                        );
-                    }
-                });
-            }
-        },
-
-        onItemEdit : function (list, index, target, record, e, eOpts) {
-            var rec = list.getSelection()[0];
-
-            Ext.Msg.prompt('Edit', 'Rename task',
-                function (buttonId, value) {
-                    if (buttonId === 'ok') {
-                        rec.set('text', value);
-                        rec.save({
-                            success: function (rec, operation) {
-                                rec.commit();
-                            },
-                            failure: function (rec, operation) {
-                                // since there was a failure doing the update on the server then reject the change
-                                rec.reject();
-                                Ext.Msg.alert(
-                                    'Error',
-                                    Ext.util.Format.format('There was an error updating this task.<br/><br/>Status Code: {0}<br/>Status Text: {1}', 
-                                    operation.error.status, 
-                                    operation.error.statusText)
-                                );
-                            }
-                        });
-                    }
-                },
-                null,
-                false,
-                record.get('text')
-            );
-        },
-
-        onReload : function () {
-            Ext.getStore('TodoItems').load();
-        },
-
-        onAddItem : function () {
-            var me = this,
-                rec,
-                store = Ext.getStore('TodoItems'),
-                field = me.getTodoField(),
-                value = field.getValue();
-
-            if (value === '') {
-                Ext.Msg.alert('Error', 'Please enter Task name', Ext.emptyFn);
-            }
-            else {
-                rec = Ext.create('Basic.model.TodoItem', {
-                    complete : false,
-                    text     : value
-                });
-                //store.insert(0, rec); //insert at the top
-                //store.sync();
-                rec.save({
-                    success: function (rec, operation) {
-                        store.insert(0, rec); //insert at the top
-                        field.setValue('');
-                    },
-                    failure: function (rec, operation) {
-                        Ext.Msg.alert(
-                            'Error',
-                            Ext.util.Format.format('There was an error creating this task.<br/><br/>Status Code: {0}<br/>Status Text: {1}', 
-                            operation.error.status, 
-                            operation.error.statusText)
-                        );
-                    }
-                });
-            }
         }
-    });
+    },
+
+    onItemEdit : function (list, index, target, record, e, eOpts) {
+        var rec = list.getSelection()[0];
+
+        Ext.Msg.prompt('Edit', 'Rename task',
+            function (buttonId, value) {
+                if (buttonId === 'ok') {
+                    rec.set('text', value);
+                    rec.save({
+                        success: function (rec, operation) {
+                            rec.commit();
+                        },
+                        failure: function (rec, operation) {
+                            // since there was a failure doing the update on the server then reject the change
+                            rec.reject();
+                            Ext.Msg.alert(
+                                'Error',
+                                Ext.util.Format.format('There was an error updating this task.<br/><br/>Status Code: {0}<br/>Status Text: {1}', 
+                                operation.error.status, 
+                                operation.error.statusText)
+                            );
+                        }
+                    });
+                }
+            },
+            null,
+            false,
+            record.get('text')
+        );
+    },
+
+    onReload : function () {
+        Ext.getStore('TodoItems').load();
+    },
+
+    onAddItem : function () {
+        var me = this,
+            rec,
+            store = Ext.getStore('TodoItems'),
+            field = me.getTodoField(),
+            value = field.getValue();
+
+        if (value === '') {
+            Ext.Msg.alert('Error', 'Please enter Task name', Ext.emptyFn);
+        }
+        else {
+            rec = Ext.create('Basic.model.TodoItem', {
+                complete : false,
+                text     : value
+            });
+            //store.insert(0, rec); //insert at the top
+            //store.sync();
+            rec.save({
+                success: function (rec, operation) {
+                    store.insert(0, rec); //insert at the top
+                    field.setValue('');
+                },
+                failure: function (rec, operation) {
+                    Ext.Msg.alert(
+                        'Error',
+                        Ext.util.Format.format('There was an error creating this task.<br/><br/>Status Code: {0}<br/>Status Text: {1}', 
+                        operation.error.status, 
+                        operation.error.statusText)
+                    );
+                }
+            });
+        }
+    }
+});
+```
 
 ### 将其放在一起
 
@@ -571,80 +595,82 @@ Sencha Touch 存储可用于存储用作 Touch 组件的源的数据记录（模
 
 我们的最后一个步骤是完成编辑主应用程序文件，并提供有关已定义的模型、存储、视图和控制器的信息。这些资源的源文件会自动加载到应用程序中。最后，调用 launch 方法，它创建并显示主应用程序视图“Basic.main.View”。
 
-    Ext.Loader.setConfig({
-        enabled : true,
-        paths   : {
-            'Ext'       : 'touch/src',
-            'Ext.azure' : 'packages/azure/src'
-        }
-    });
+```
+Ext.Loader.setConfig({
+    enabled : true,
+    paths   : {
+        'Ext'       : 'touch/src',
+        'Ext.azure' : 'packages/azure/src'
+    }
+});
 
-    Ext.application({
-        name : 'Basic',
+Ext.application({
+    name : 'Basic',
 
-        requires : [
-            'Ext.MessageBox',
-            'Ext.azure.Azure'
-        ],
+    requires : [
+        'Ext.MessageBox',
+        'Ext.azure.Azure'
+    ],
 
-        views : [
-            'Main'
-        ],
+    views : [
+        'Main'
+    ],
 
-        controllers : [
-            'Main'
-        ],
+    controllers : [
+        'Main'
+    ],
 
-        stores : [
-            'TodoItems'
-        ],
+    stores : [
+        'TodoItems'
+    ],
 
-        azure : {
-            appUrl : 'YOUR_APP_URL.azure-mobile.net',
-            appKey : 'YOUR_APP_KEY'
-        },
+    azure : {
+        appUrl : 'YOUR_APP_URL.azure-mobile.net',
+        appKey : 'YOUR_APP_KEY'
+    },
 
-        icon : {
-            '57'  : 'resources/icons/Icon.png',
-            '72'  : 'resources/icons/Icon~ipad.png',
-            '114' : 'resources/icons/Icon@2x.png',
-            '144' : 'resources/icons/Icon~ipad@2x.png'
-        },
+    icon : {
+        '57'  : 'resources/icons/Icon.png',
+        '72'  : 'resources/icons/Icon~ipad.png',
+        '114' : 'resources/icons/Icon@2x.png',
+        '144' : 'resources/icons/Icon~ipad@2x.png'
+    },
 
-        isIconPrecomposed : true,
+    isIconPrecomposed : true,
 
-        startupImage : {
-            '320x460'   : 'resources/startup/320x460.jpg',
-            '640x920'   : 'resources/startup/640x920.png',
-            '768x1004'  : 'resources/startup/768x1004.png',
-            '748x1024'  : 'resources/startup/748x1024.png',
-            '1536x2008' : 'resources/startup/1536x2008.png',
-            '1496x2048' : 'resources/startup/1496x2048.png'
-        },
+    startupImage : {
+        '320x460'   : 'resources/startup/320x460.jpg',
+        '640x920'   : 'resources/startup/640x920.png',
+        '768x1004'  : 'resources/startup/768x1004.png',
+        '748x1024'  : 'resources/startup/748x1024.png',
+        '1536x2008' : 'resources/startup/1536x2008.png',
+        '1496x2048' : 'resources/startup/1496x2048.png'
+    },
 
-        launch : function () {
-            // Destroy the #appLoadingIndicator element
-            Ext.fly('appLoadingIndicator').destroy();
+    launch : function () {
+        // Destroy the #appLoadingIndicator element
+        Ext.fly('appLoadingIndicator').destroy();
 
-            // Initialize Azure
-            Ext.Azure.init(this.config.azure);
+        // Initialize Azure
+        Ext.Azure.init(this.config.azure);
 
-            // Initialize the main view
-            Ext.Viewport.add(Ext.create('Basic.view.Main'));
-        },
+        // Initialize the main view
+        Ext.Viewport.add(Ext.create('Basic.view.Main'));
+    },
 
-        onUpdated : function () {
-            Ext.Msg.confirm(
-                "Application Update",
-                "This application has just successfully been updated to the latest version. Reload now?",
-                function (buttonId) {
-                    if (buttonId === 'yes') {
-                        window.location.reload();
-                    }
+    onUpdated : function () {
+        Ext.Msg.confirm(
+            "Application Update",
+            "This application has just successfully been updated to the latest version. Reload now?",
+            function (buttonId) {
+                if (buttonId === 'yes') {
+                    window.location.reload();
                 }
-            );
             }
-    });
+        );
+        }
+});
+```
 
 ### 托管并运行 Sencha Touch 应用程序
 

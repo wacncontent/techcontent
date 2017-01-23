@@ -35,34 +35,38 @@ ms.author: tdykstra
 
 下面的代码示例将 `Person` 实体添加到名为 *Ingress* 的表。
 
-        [NoAutomaticTrigger]
-        public static void IngressDemo(
-            [Table("Ingress")] ICollector<Person> tableBinding)
+```
+    [NoAutomaticTrigger]
+    public static void IngressDemo(
+        [Table("Ingress")] ICollector<Person> tableBinding)
+    {
+        for (int i = 0; i < 100000; i++)
         {
-            for (int i = 0; i < 100000; i++)
-            {
-                tableBinding.Add(
-                    new Person() { 
-                        PartitionKey = "Test", 
-                        RowKey = i.ToString(), 
-                        Name = "Name" }
-                    );
-            }
+            tableBinding.Add(
+                new Person() { 
+                    PartitionKey = "Test", 
+                    RowKey = i.ToString(), 
+                    Name = "Name" }
+                );
         }
+    }
+```
 
 通常你用于 `ICollector` 的类型派生自 `TableEntity` 或实现 `ITableEntity`，但它并不一定要执行这些操作。以下 `Person` 类之一适用于前面 `Ingress` 方法中所示的代码。
 
-        public class Person : TableEntity
-        {
-            public string Name { get; set; }
-        }
+```
+    public class Person : TableEntity
+    {
+        public string Name { get; set; }
+    }
 
-        public class Person
-        {
-            public string PartitionKey { get; set; }
-            public string RowKey { get; set; }
-            public string Name { get; set; }
-        }
+    public class Person
+    {
+        public string PartitionKey { get; set; }
+        public string RowKey { get; set; }
+        public string Name { get; set; }
+    }
+```
 
 如果你想要直接使用 Azure 存储 API，可以将 `CloudStorageAccount` 参数添加到方法签名。
 
@@ -86,17 +90,19 @@ ms.author: tdykstra
 
 下面的代码示例读取并记录 `Ingress` 表中所有行：
 
-        public static void ReadTable(
-            [Table("Ingress")] IQueryable<Person> tableBinding,
-            TextWriter logger)
+```
+    public static void ReadTable(
+        [Table("Ingress")] IQueryable<Person> tableBinding,
+        TextWriter logger)
+    {
+        var query = from p in tableBinding select p;
+        foreach (Person person in query)
         {
-            var query = from p in tableBinding select p;
-            foreach (Person person in query)
-            {
-                logger.WriteLine("PK:{0}, RK:{1}, Name:{2}", 
-                    person.PartitionKey, person.RowKey, person.Name);
-            }
+            logger.WriteLine("PK:{0}, RK:{1}, Name:{2}", 
+                person.PartitionKey, person.RowKey, person.Name);
         }
+    }
+```
 
 ### <a id="readone"></a>如何从表中读取单个实体
 
@@ -104,22 +110,24 @@ ms.author: tdykstra
 
 下面的代码示例基于队列消息中接收的分区键和行键值读取 `Person` 实体的表行：
 
-        public static void ReadTableEntity(
-            [QueueTrigger("inputqueue")] Person personInQueue,
-            [Table("persontable","{PartitionKey}", "{RowKey}")] Person personInTable,
-            TextWriter logger)
+```
+    public static void ReadTableEntity(
+        [QueueTrigger("inputqueue")] Person personInQueue,
+        [Table("persontable","{PartitionKey}", "{RowKey}")] Person personInTable,
+        TextWriter logger)
+    {
+        if (personInTable == null)
         {
-            if (personInTable == null)
-            {
-                logger.WriteLine("Person not found: PK:{0}, RK:{1}",
-                        personInQueue.PartitionKey, personInQueue.RowKey);
-            }
-            else
-            {
-                logger.WriteLine("Person found: PK:{0}, RK:{1}, Name:{2}",
-                        personInTable.PartitionKey, personInTable.RowKey, personInTable.Name);
-            }
+            logger.WriteLine("Person not found: PK:{0}, RK:{1}",
+                    personInQueue.PartitionKey, personInQueue.RowKey);
         }
+        else
+        {
+            logger.WriteLine("Person found: PK:{0}, RK:{1}, Name:{2}",
+                    personInTable.PartitionKey, personInTable.RowKey, personInTable.Name);
+        }
+    }
+```
 
 本示例中的 `Person` 类不必实现 `ITableEntity`。
 
@@ -129,19 +137,21 @@ ms.author: tdykstra
 
 下面的代码示例使用 `CloudTable` 对象将单个实体添加到 *Ingress* 表中。
 
-        public static void UseStorageAPI(
-            [Table("Ingress")] CloudTable tableBinding,
-            TextWriter logger)
-        {
-            var person = new Person()
-                {
-                    PartitionKey = "Test",
-                    RowKey = "100",
-                    Name = "Name"
-                };
-            TableOperation insertOperation = TableOperation.Insert(person);
-            tableBinding.Execute(insertOperation);
-        }
+```
+    public static void UseStorageAPI(
+        [Table("Ingress")] CloudTable tableBinding,
+        TextWriter logger)
+    {
+        var person = new Person()
+            {
+                PartitionKey = "Test",
+                RowKey = "100",
+                Name = "Name"
+            };
+        TableOperation insertOperation = TableOperation.Insert(person);
+        tableBinding.Execute(insertOperation);
+    }
+```
 
 有关如何使用 `CloudTable` 对象的详细信息，请参阅[如何通过 .NET 使用表存储](../storage/storage-dotnet-how-to-use-tables.md)。
 

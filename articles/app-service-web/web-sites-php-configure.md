@@ -44,36 +44,50 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
 ### Azure PowerShell (Windows)
 1. 打开 Azure PowerShell 并登录到你的帐户：
 
-        PS C:\> Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    PS C:\> Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 2. 设置 Web 应用的 PHP 版本。
 
-        PS C:\> Set-AzureWebsite -PhpVersion {5.4 | 5.5 | 5.6} -Name {app-name}
+    ```
+    PS C:\> Set-AzureWebsite -PhpVersion {5.4 | 5.5 | 5.6} -Name {app-name}
+    ```
 3. 现已设置 PHP 版本。你可以确认这些设置：
 
-        PS C:\> Get-AzureWebsite -Name {app-name} | findstr PhpVersion
+    ```
+    PS C:\> Get-AzureWebsite -Name {app-name} | findstr PhpVersion
+    ```
 
 ### Azure 命令行接口（Linux、Mac、Windows）
 若要使用 Azure 命令行接口，必须已在计算机上安装 **Node.js**。
 
 1. 打开终端，并登录到你的帐户。
 
-        azure login -e AzureChinaCloud
+    ```
+    azure login -e AzureChinaCloud
+    ```
 2. 设置 Web 应用的 PHP 版本。
 
-        azure site set --php-version {5.4 | 5.5 | 5.6} {app-name}
+    ```
+    azure site set --php-version {5.4 | 5.5 | 5.6} {app-name}
+    ```
 
 3. 现已设置 PHP 版本。你可以确认这些设置：
 
-        azure site show {app-name}
+    ```
+    azure site show {app-name}
+    ```
 
 > [!NOTE] 
 等效于上述设置的[Azure CLI 2.0（预览版）](https://github.com/Azure/azure-cli)命令为：
 >
 >
 
-    az login
-    az appservice web config update --php-version {5.5 | 5.6 | 7.0} -g {resource-group-name} -n {app-name}
-    az appservice web config show -g {resource-group-name} -n {app-name}
+```
+az login
+az appservice web config update --php-version {5.5 | 5.6 | 7.0} -g {resource-group-name} -n {app-name}
+az appservice web config show -g {resource-group-name} -n {app-name}
+```
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
@@ -84,12 +98,14 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
 1. 将 [.user.ini] 文件添加到根目录。
 2. 使用将在 `php.ini` 文件中使用的语法，将配置设置添加到 `.user.ini` 文件中。例如，如果你希望打开 `display_errors` 设置，并将 `upload_max_filesize` 设置设为 10 分钟，`.user.ini` 文件中将包含以下内容：
 
-        ; Example Settings
-        display_errors=On
-        upload_max_filesize=10M
+    ```
+    ; Example Settings
+    display_errors=On
+    upload_max_filesize=10M
 
-        ; OPTIONAL: Turn this on to write errors to d:\home\LogFiles\php_errors.log
-        ; log_errors=On
+    ; OPTIONAL: Turn this on to write errors to d:\home\LogFiles\php_errors.log
+    ; log_errors=On
+    ```
 3. 部署 Web 应用。
 4. 重新启动 Web 应用。（必须重新启动，因为 PHP 读取 `.user.ini` 文件的频率受 `user_ini.cache_ttl` 设置的约束，该设置是一个系统级别设置且默认值为 300 秒（5 分钟）。重新启动 Web 应用会强制 PHP 读取 `.user.ini` 文件中的新设置。）
 
@@ -100,9 +116,11 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
 2. 使用 Kudu 控制台 (http://&lt;site-name&gt;.scm.azurewebsite.net) 在 `d:\home\site\ini` 目录中创建 `settings.ini` 文件。
 3. 使用将在 php.ini 文件中使用的语法，将配置设置添加到 `settings.ini` 文件中。例如，如果你希望将 `curl.cainfo` 设置指向 `*.crt` 文件并将“wincache.maxfilesize”设置为 512K，则 `settings.ini` 文件将包含以下内容：
 
-        ; Example Settings
-        curl.cainfo="%ProgramFiles(x86)%\Git\bin\curl-ca-bundle.crt"
-        wincache.maxfilesize=512
+    ```
+    ; Example Settings
+    curl.cainfo="%ProgramFiles(x86)%\Git\bin\curl-ca-bundle.crt"
+    wincache.maxfilesize=512
+    ```
 4. 重新启动 Web 应用以加载更改。
 
 ## 如何：在默认 PHP 运行时中启用扩展
@@ -115,9 +133,11 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
 4. 在 `d:\home\site\ini` 中创建名为 `extensions.ini` 的 `ini` 文件。
 5. 使用将在 php.ini 文件中使用的语法，将配置设置添加到 `extensions.ini` 文件中。例如，如果你想要启用 MongoDB 和 XDebug 扩展，则 `extensions.ini` 文件将包含此文本：
 
-        ; Enable Extensions
-        extension=d:\home\site\ext\php_mongo.dll
-        zend_extension=d:\home\site\ext\php_xdebug.dll
+    ```
+    ; Enable Extensions
+    extension=d:\home\site\ext\php_mongo.dll
+    zend_extension=d:\home\site\ext\php_xdebug.dll
+    ```
 6. 重新启动 Web 应用以加载更改。
 
 ### 通过应用设置进行配置

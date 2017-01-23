@@ -159,10 +159,12 @@ wacn.date: 01/06/2017
 3. 导航到“当前用户\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”，如下图所示。
 4. 启用策略，并在对话框中输入以下两项。
 
-        Value: https://autologon.microsoftazuread-sso.com
-        Data: 1
-        Value: https://aadg.chinacloudapi.cn.nsatc.net 
-        Data: 1
+    ```
+    Value: https://autologon.microsoftazuread-sso.com
+    Data: 1
+    Value: https://aadg.chinacloudapi.cn.nsatc.net 
+    Data: 1
+    ```
 
 5. 结果如下图所示：
 ![Intranet 区域](./media/active-directory-aadconnect-get-started-custom/sitezone.png)

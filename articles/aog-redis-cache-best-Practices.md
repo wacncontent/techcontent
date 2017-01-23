@@ -43,10 +43,14 @@ wacn.date: 08/31/2016
 
 使用 1K 的负载来测试管道 SET 请求
 
-    redis-benchmark.exe -h yourcache.redis.cache.chinacloudapi.cn -a yourAccesskey -t SET -n 1000000 -d 1024 -P 50
+```
+redis-benchmark.exe -h yourcache.redis.cache.chinacloudapi.cn -a yourAccesskey -t SET -n 1000000 -d 1024 -P 50
+```
 
 使用 1K 的负载来测试管道 GET 请求
 >[!NOTE]
 >先运行以上的SET测试来填充缓存
 
-    redis-benchmark.exe -h yourcache.redis.cache.chinacloudapi.cn -a yourAccesskey -t GET -n 1000000 -d 1024 -P 50
+```
+redis-benchmark.exe -h yourcache.redis.cache.chinacloudapi.cn -a yourAccesskey -t GET -n 1000000 -d 1024 -P 50
+```

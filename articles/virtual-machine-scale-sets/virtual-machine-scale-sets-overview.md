@@ -115,17 +115,19 @@ ms.author: guybo
 
 **A.** 将 vhdContainers 属性留空，例如：
 
-    "storageProfile": {
-        "osDisk": {
-            "name": "vmssosdisk",
-            "caching": "ReadOnly",
-            "createOption": "FromImage",
-            "image": {
-                "uri": "https://mycustomimage.blob.core.chinacloudapi.cn/system/Microsoft.Compute/Images/mytemplates/template-osDisk.vhd"
-            },
-            "osType": "Windows"
-        }
-    },
+```
+"storageProfile": {
+    "osDisk": {
+        "name": "vmssosdisk",
+        "caching": "ReadOnly",
+        "createOption": "FromImage",
+        "image": {
+            "uri": "https://mycustomimage.blob.core.chinacloudapi.cn/system/Microsoft.Compute/Images/mytemplates/template-osDisk.vhd"
+        },
+        "osType": "Windows"
+    }
+},
+```
 
 **Q.** 如果我将 VM 规模集容量从 20 减少到 15，将删除哪些 VM？
 

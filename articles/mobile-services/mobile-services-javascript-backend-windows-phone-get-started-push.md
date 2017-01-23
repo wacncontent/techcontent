@@ -36,32 +36,36 @@ ms.author: glenga
 
 1. 在 Visual Studio 中，打开文件 App.xaml.cs 并添加以下 `using` 语句：
 
-        using Microsoft.Phone.Notification;
+    ```
+    using Microsoft.Phone.Notification;
+    ```
 
 3. 将以下代码添加到 App.xaml.cs：
 
-        public static HttpNotificationChannel CurrentChannel { get; private set; }
+    ```
+    public static HttpNotificationChannel CurrentChannel { get; private set; }
 
-        private void AcquirePushChannel()
+    private void AcquirePushChannel()
+    {
+        CurrentChannel = HttpNotificationChannel.Find("MyPushChannel");
+
+        if (CurrentChannel == null)
         {
-            CurrentChannel = HttpNotificationChannel.Find("MyPushChannel");
-
-            if (CurrentChannel == null)
-            {
-                CurrentChannel = new HttpNotificationChannel("MyPushChannel");
-                CurrentChannel.Open();
-                CurrentChannel.BindToShellToast();
-            }
-
-            CurrentChannel.ChannelUriUpdated +=
-                new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
-                {
-
-                    // Register for notifications using the new channel
-                    await MobileService.GetPush()
-                        .RegisterNativeAsync(CurrentChannel.ChannelUri.ToString());
-                });
+            CurrentChannel = new HttpNotificationChannel("MyPushChannel");
+            CurrentChannel.Open();
+            CurrentChannel.BindToShellToast();
         }
+
+        CurrentChannel.ChannelUriUpdated +=
+            new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
+            {
+
+                // Register for notifications using the new channel
+                await MobileService.GetPush()
+                    .RegisterNativeAsync(CurrentChannel.ChannelUri.ToString());
+            });
+    }
+    ```
 
     此代码检索 ChannelURI 以查找来自 Microsoft 推送通知服务 (MPNS) （由 Windows Phone 8.x "Silverlight" 使用）的应用程序， 然后注册该 ChannelURI 以支持推送通知。
 
@@ -70,7 +74,9 @@ ms.author: glenga
 
 3. 在 App.xaml.cs 中 **Application\_Launching** 事件处理程序的顶部，添加对新的 **AcquirePushChannel** 方法的以下调用：
 
-        AcquirePushChannel();
+    ```
+    AcquirePushChannel();
+    ```
 
     这可以确保每次加载页时都会请求注册。在应用程序中，你可能只需要定期执行此注册以确保注册是最新的。
 
@@ -90,29 +96,31 @@ ms.author: glenga
 
 2. 将 insert 函数替换为以下代码，然后单击“保存”：
 
-        function insert(item, user, request) {
-        // Define a payload for the Windows Phone toast notification.
-        var payload = '<?xml version="1.0" encoding="utf-8"?>' +
-            '<wp:Notification xmlns:wp="WPNotification"><wp:Toast>' +
-            '<wp:Text1>New Item</wp:Text1><wp:Text2>' + item.text + 
-            '</wp:Text2></wp:Toast></wp:Notification>';
+    ```
+    function insert(item, user, request) {
+    // Define a payload for the Windows Phone toast notification.
+    var payload = '<?xml version="1.0" encoding="utf-8"?>' +
+        '<wp:Notification xmlns:wp="WPNotification"><wp:Toast>' +
+        '<wp:Text1>New Item</wp:Text1><wp:Text2>' + item.text + 
+        '</wp:Text2></wp:Toast></wp:Notification>';
 
-        request.execute({
-            success: function() {
-                // If the insert succeeds, send a notification.
-                push.mpns.send(null, payload, 'toast', 22, {
-                    success: function(pushResponse) {
-                        console.log("Sent push:", pushResponse);
-                        request.respond();
-                        },              
-                        error: function (pushResponse) {
-                            console.log("Error Sending push:", pushResponse);
-                            request.respond(500, { error: pushResponse });
-                            }
-                        });
-                    }
-                });      
-        }
+    request.execute({
+        success: function() {
+            // If the insert succeeds, send a notification.
+            push.mpns.send(null, payload, 'toast', 22, {
+                success: function(pushResponse) {
+                    console.log("Sent push:", pushResponse);
+                    request.respond();
+                    },              
+                    error: function (pushResponse) {
+                        console.log("Error Sending push:", pushResponse);
+                        request.respond(500, { error: pushResponse });
+                        }
+                    });
+                }
+            });      
+    }
+    ```
 
     插入成功后，此插入脚本会向所有 Windows Phone 应用程序注册发送推送通知（包括插入项的文本）。
 
@@ -138,8 +146,8 @@ ms.author: glenga
 
     ![收到的 Toast 通知](./media/mobile-services-javascript-backend-windows-phone-get-started-push/mobile-quickstart-push5-wp8.png)
 
-    >[!NOTE]
-    >如果你仍未退出应用程序，则不会收到该通知。若要在应用程序处于活动状态时接收 toast 通知，你必须处理 [ShellToastNotificationReceived](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/microsoft.phone.notification.httpnotificationchannel.shelltoastnotificationreceived.aspx) 事件。
+   >[!NOTE]
+   >如果你仍未退出应用程序，则不会收到该通知。若要在应用程序处于活动状态时接收 toast 通知，你必须处理 [ShellToastNotificationReceived](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/microsoft.phone.notification.httpnotificationchannel.shelltoastnotificationreceived.aspx) 事件。
 
 ##  <a name="next-steps"></a>后续步骤
 

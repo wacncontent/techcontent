@@ -63,8 +63,10 @@ ms.author: douglasl
 
 -   若要为某个表禁用延伸并放弃远程数据，请运行以下命令。
 
-        ALTER TABLE <table_name>
-           SET ( REMOTE_DATA_ARCHIVE = OFF_WITHOUT_DATA_RECOVERY ( MIGRATION_STATE = PAUSED ) ) ;
+    ```
+    ALTER TABLE <table_name>
+       SET ( REMOTE_DATA_ARCHIVE = OFF_WITHOUT_DATA_RECOVERY ( MIGRATION_STATE = PAUSED ) ) ;
+    ```
 
 >   [!NOTE]
 > 针对表禁用 Stretch Database 不会删除远程数据或远程表。若要删除远程表，必须使用 Azure 管理门户。远程表在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
@@ -84,8 +86,10 @@ ms.author: douglasl
 ### 使用 Transact-SQL 为数据库禁用延伸数据库
 运行以下命令。
 
-    ALTER DATABASE <database name>
-        SET REMOTE_DATA_ARCHIVE = OFF ;
+```
+ALTER DATABASE <database name>
+    SET REMOTE_DATA_ARCHIVE = OFF ;
+```
 
 >   [!NOTE]
 > 针对数据库禁用 Stretch Database 不会删除远程数据库。若要删除远程数据库，必须使用 Azure 管理门户。远程数据库在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。

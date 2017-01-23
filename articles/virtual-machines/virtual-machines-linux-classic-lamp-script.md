@@ -47,52 +47,64 @@ ms.author: guybo
 
 此脚本将 LAMP 堆栈安装到 Ubuntu（包括设置 MySQL 的无提示安装类）、编写简单的 PHP 文件并启动 Apache：
 
-    #!/bin/bash
-    # set up a silent install of MySQL
-    dbpass="mySQLPassw0rd"
+```
+#!/bin/bash
+# set up a silent install of MySQL
+dbpass="mySQLPassw0rd"
 
-    export DEBIAN_FRONTEND=noninteractive
-    echo mysql-server-5.6 mysql-server/root_password password $dbpass | debconf-set-selections
-    echo mysql-server-5.6 mysql-server/root_password_again password $dbpass | debconf-set-selections
+export DEBIAN_FRONTEND=noninteractive
+echo mysql-server-5.6 mysql-server/root_password password $dbpass | debconf-set-selections
+echo mysql-server-5.6 mysql-server/root_password_again password $dbpass | debconf-set-selections
 
-    # install the LAMP stack
-    apt-get -y install apache2 mysql-server php5 php5-mysql  
+# install the LAMP stack
+apt-get -y install apache2 mysql-server php5 php5-mysql  
 
-    # write some PHP
-    echo <center><h1>My Demo App</h1><br/></center> > /var/www/html/phpinfo.php
-    echo <\?php phpinfo()\; \?> >> /var/www/html/phpinfo.php
+# write some PHP
+echo <center><h1>My Demo App</h1><br/></center> > /var/www/html/phpinfo.php
+echo <\?php phpinfo()\; \?> >> /var/www/html/phpinfo.php
 
-    # restart Apache
-    apachectl restart
+# restart Apache
+apachectl restart
+```
 
 **上载**
 
 将脚本另存为文本文件，例如 *lamp\_install.sh*，然后将其上载到 Azure 存储空间。你可以使用 Azure CLI 轻松执行此操作。以下示例将文件上载到名为“scripts”的存储容器。注意：如果该容器不存在，你需要先创建它。
 
-    azure storage blob upload -a <yourStorageAccountName> -k <yourStorageKey> --container scripts ./lamp_install.sh
+```
+azure storage blob upload -a <yourStorageAccountName> -k <yourStorageKey> --container scripts ./lamp_install.sh
+```
 
 还要创建一个描述如何从 Azure 存储下载脚本的 JSON 文件。将该文件另存为 *public\_config.json*（使用你的存储帐户的名称替换“mystorage”）：
 
-    {"fileUris":["https://mystorage.blob.core.chinacloudapi.cn/scripts/lamp_install.sh"], "commandToExecute":"sudo sh install_lamp.sh" }
+```
+{"fileUris":["https://mystorage.blob.core.chinacloudapi.cn/scripts/lamp_install.sh"], "commandToExecute":"sudo sh install_lamp.sh" }
+```
 
 ## 部署扩展
 
 现在，我们已准备好使用 Azure CLI 将 Linux CustomScript 扩展部署到远程 VM：
 
-    azure vm extension set -c "./public_config.json" lamp-vm CustomScriptForLinux Microsoft.OSTCExtensions 1.*
+```
+azure vm extension set -c "./public_config.json" lamp-vm CustomScriptForLinux Microsoft.OSTCExtensions 1.*
+```
 
 这将在名为 *lamp-vm* 的 VM 上下载并执行 *lamp\_install.sh* 脚本。
 
 因为应用程序包括一个 web 服务器，请记得在远程 VM 上打开 HTTP 侦听端口：
 
-    azure vm endpoint create -n Apache -o tcp lamp-vm 80 80
+```
+azure vm endpoint create -n Apache -o tcp lamp-vm 80 80
+```
 
 ## 监视和故障排除
 
 你可以通过查看远程 VM 上的日志文件来检查自定义脚本的执行进度。对 *lamp-vm* 使用 SSH 并对日志文件执行 tail 命令：
 
-    cd /var/log/azure/Microsoft.OSTCExtensions.CustomScriptForLinux/1.3.0.0/
-    tail -f extension.log
+```
+cd /var/log/azure/Microsoft.OSTCExtensions.CustomScriptForLinux/1.3.0.0/
+tail -f extension.log
+```
 
 当 CustomScript 扩展完成执行后，你可以浏览找到你创建的 PHP 页面，在本例中将是：*http://lamp-vm.chinacloudapp.cn/phpinfo.php*。
 

@@ -47,18 +47,22 @@ ms.author: larryfr
 
 2. 输入以下命令启动 Hive CLI：
 
-        %hive_home%\bin\hive
+    ```
+    %hive_home%\bin\hive
+    ```
 
     启动 CLI 后，可看到 Hive CLI 提示符：`hive>`。
 
 3. 在 CLI 中输入以下语句，以使用示例数据创建名为 **log4jLogs** 的新表：
 
-        set hive.execution.engine=tez;
-        DROP TABLE log4jLogs;
-        CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
-        ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
-        STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
-        SELECT t4 AS sev, COUNT(*) AS count FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log' GROUP BY t4;
+    ```
+    set hive.execution.engine=tez;
+    DROP TABLE log4jLogs;
+    CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
+    STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
+    SELECT t4 AS sev, COUNT(*) AS count FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log' GROUP BY t4;
+    ```
 
     这些语句可执行以下操作：
 
@@ -80,8 +84,10 @@ ms.author: larryfr
 
 4. 使用以下语句创建名为 **errorLogs** 的新“内部”表：
 
-        CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) STORED AS ORC;
-        INSERT OVERWRITE TABLE errorLogs SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log';
+    ```
+    CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) STORED AS ORC;
+    INSERT OVERWRITE TABLE errorLogs SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log';
+    ```
 
     这些语句可执行以下操作：
 
@@ -96,7 +102,9 @@ ms.author: larryfr
 
     要验证是否只将第 t4 列中包含 **[ERROR]** 的行存储到了 **errorLogs** 表中，请使用以下语句从 **errorLogs** 返回所有行：
 
-        SELECT * from errorLogs;
+    ```
+    SELECT * from errorLogs;
+    ```
 
     应返回三行数据，所有行都包含列 t4 中的 **[ERROR]**。
 

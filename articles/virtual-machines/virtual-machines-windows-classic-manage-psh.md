@@ -37,11 +37,15 @@ ms.author: kasing
 
 若要获取有关 VM 的信息，请运行此命令，并替换引号内的所有内容（包括 < and > 字符）：
 
-     Get-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
+ Get-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
 
 若要将输出存储在 $vm 变量中，请运行：
 
-    $vm = Get-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
+$vm = Get-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
 
 ## 登录到基于 Windows 的 VM
 
@@ -60,7 +64,9 @@ ms.author: kasing
 
 运行以下命令：
 
-    Stop-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
+Stop-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
 
 >[!IMPORTANT]
 >如果该 VM 是云服务中的最后一个 VM，则使用此参数可以保留该云服务的虚拟 IP (VIP)。<br><br> 如果你使用 StayProvisioned 参数，则仍要支付 VM 的费用。
@@ -69,7 +75,9 @@ ms.author: kasing
 
 运行以下命令：
 
-    Start-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
+Start-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
+```
 
 ## 附加数据磁盘
 此任务需要几个步骤。首先，使用 ****Add-AzureDataDisk**** cmdlet 将磁盘添加到 $vm 对象。然后，使用 **Update-AzureVM** cmdlet 更新 VM 的配置。
@@ -78,17 +86,23 @@ ms.author: kasing
 
 若要附加新磁盘，请运行以下命令：
 
-    Add-AzureDataDisk -CreateNew -DiskSizeInGB 128 -DiskLabel "<main>" -LUN <0> -VM <$vm> | Update-AzureVM
+```
+Add-AzureDataDisk -CreateNew -DiskSizeInGB 128 -DiskLabel "<main>" -LUN <0> -VM <$vm> | Update-AzureVM
+```
 
 若要附加现有数据磁盘，请运行以下命令：
 
-    Add-AzureDataDisk -Import -DiskName "<MyExistingDisk>" -LUN <0> | Update-AzureVM
+```
+Add-AzureDataDisk -Import -DiskName "<MyExistingDisk>" -LUN <0> | Update-AzureVM
+```
 
 若要从 blob 存储中现有的 .vhd 文件附加数据磁盘，请运行以下命令：
 
-    Add-AzureDataDisk -ImportFrom -MediaLocation `
-              "<https://mystorage.blob.core.chinacloudapi.cn/mycontainer/MyExistingDisk.vhd>" `
-              -DiskLabel "<main>" -LUN <0> | Update-AzureVM
+```
+Add-AzureDataDisk -ImportFrom -MediaLocation `
+          "<https://mystorage.blob.core.chinacloudapi.cn/mycontainer/MyExistingDisk.vhd>" `
+          -DiskLabel "<main>" -LUN <0> | Update-AzureVM
+```
 
 ## 创建基于 Windows 的 VM
 

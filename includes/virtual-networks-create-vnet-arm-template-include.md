@@ -34,29 +34,31 @@
 9. 将该文件保存到你计算机上的本地文件夹。
 10. 打开刚保存的文件并编辑参数的值。使用以下值来部署我们的方案中所述的 VNet。
 
-        {
-          "location": {
-            "value": "China North"
-          },
-          "vnetName": {
-              "value": "TestVNet"
-          },
-          "addressPrefix": {
-              "value": "192.168.0.0/16"
-          },
-          "subnet1Name": {
-              "value": "FrontEnd"
-          },
-          "subnet1Prefix": {
-            "value": "192.168.1.0/24"
-          },
-          "subnet2Name": {
-              "value": "BackEnd"
-          },
-          "subnet2Prefix": {
-              "value": "192.168.2.0/24"
-          }
-        }
+    ```
+    {
+      "location": {
+        "value": "China North"
+      },
+      "vnetName": {
+          "value": "TestVNet"
+      },
+      "addressPrefix": {
+          "value": "192.168.0.0/16"
+      },
+      "subnet1Name": {
+          "value": "FrontEnd"
+      },
+      "subnet1Prefix": {
+        "value": "192.168.1.0/24"
+      },
+      "subnet2Name": {
+          "value": "BackEnd"
+      },
+      "subnet2Prefix": {
+          "value": "192.168.2.0/24"
+      }
+    }
+    ```
 
 11. 保存文件。
 

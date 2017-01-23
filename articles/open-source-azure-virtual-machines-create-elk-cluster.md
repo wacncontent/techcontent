@@ -22,23 +22,33 @@ ELK 是 [Elasticsearch](https://www.elastic.co/products/elasticsearch)、[Logsta
 
 - 如果你选择 Azure PowerShell 方式搭建 ELK，那么请按[如何安装和配置 Azure PowerShell](./powershell-install-configure.md)中的说明在本地计算机上安装 Azure PowerShell。然后打开 Azure PowerShell 命令提示符，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md)：    
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 
     然后你需要创建一个 Azure 资源组( Resource Group )，创建 Azure 虚拟机和搭建 ELK 都在该资源组中进行，运行以下命令创建位于中国东部( 也可改成中国北部 "China North" )的 Azure 资源组：
 
-        New-AzureRmResourceGroup -Name <YOUR-RESOURCE-GROUP-NAME> -Location "China East"
+    ```
+    New-AzureRmResourceGroup -Name <YOUR-RESOURCE-GROUP-NAME> -Location "China East"
+    ```
 
 - 如果你选择 Azure CLI 方式搭建 ELK，那么请[安装 Azure CLI](./xplat-cli-install.md)。然后请确保你是处于[资源管理器模式](./azure-resource-manager/resource-manager-deployment-model.md)下，可通过运行以下命令来验证：
 
-        azure config mode arm
+    ```
+    azure config mode arm
+    ```
 
     现在，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md)： 
 
-        azure login -e AzureChinaCloud -u <your account>
+    ```
+    azure login -e AzureChinaCloud -u <your account>
+    ```
 
     然后你需要创建一个 Azure 资源组( Resource Group )，创建 Azure 虚拟机和搭建 ELK 都在该资源组中进行，运行以下命令创建位于中国东部( 也可改成中国北部"China North" )的 Azure 资源组：  
 
-        azure group create <YOUR-RESOURCE-GROUP-NAME> "China East"
+    ```
+    azure group create <YOUR-RESOURCE-GROUP-NAME> "China East"
+    ```
 
 ##开始动手
 
@@ -102,9 +112,11 @@ PowerShell脚本运行注意事项
 
     在 Azure PowerShell 中运行如下命令
 
-        PS D:\elk-centos> $TemplateUri = "https://mirrors.blob.core.chinacloudapi.cn/elkcentos/azuredeploy.json" 
+    ```
+    PS D:\elk-centos> $TemplateUri = "https://mirrors.blob.core.chinacloudapi.cn/elkcentos/azuredeploy.json" 
 
-        PS D:\elk-centos> New-AzureRmResourceGroupDeployment -Name deployelk -ResourceGroupName <YOUR-RESOURCE-GROUP-NAME> -TemplateParameterFile .\azuredeploy.parameters.json -TemplateUri $TemplateUri -DeploymentDebugLogLevel All -Verbose 
+    PS D:\elk-centos> New-AzureRmResourceGroupDeployment -Name deployelk -ResourceGroupName <YOUR-RESOURCE-GROUP-NAME> -TemplateParameterFile .\azuredeploy.parameters.json -TemplateUri $TemplateUri -DeploymentDebugLogLevel All -Verbose 
+    ```
 
     >[!NOTE]
     >你可以通过指定可选参数 "-DeploymentDebugLogLevel All -Verbose" 来输出更多的部署日志，这可能有助于你诊断在部署过程中发生的错误。如果 PowerShell 返回这个参数不存在，请更新 Azure Powershell 到最新版本。   
@@ -113,9 +125,11 @@ PowerShell脚本运行注意事项
 
     在安装好 Azure CLI 的机器上，运行如下命令
 
-        TemplateUri="https://mirrors.blob.core.chinacloudapi.cn/elkcentos/azuredeploy.json" 
+    ```
+    TemplateUri="https://mirrors.blob.core.chinacloudapi.cn/elkcentos/azuredeploy.json" 
 
-        azure group deployment create <YOUR-RESOURCE-GROUP-NAME> deployelk --template-uri $TemplateUri -e azuredeploy.parameters.json -vv
+    azure group deployment create <YOUR-RESOURCE-GROUP-NAME> deployelk --template-uri $TemplateUri -e azuredeploy.parameters.json -vv
+    ```
 
 4. 等待部署完成，由于需要安装的包都只有国外的源，所以部署完成可能会需要较长时间。当部署完成时， PowerShell 或 CLI 会输出 "ProvisioningState : Succeeded" 的信息
 
@@ -123,12 +137,16 @@ PowerShell脚本运行注意事项
 
     在 Azure PowerShell 中运行如下命令
 
-        PS D:\elk-centos> Get-AzureRmPublicIpAddress -Name elasticsearch-kibana-pip -ResourceGroupName <YOUR-RESOURCE-GROUP-NAME> 
+    ```
+    PS D:\elk-centos> Get-AzureRmPublicIpAddress -Name elasticsearch-kibana-pip -ResourceGroupName <YOUR-RESOURCE-GROUP-NAME> 
+    ```
 
     *或者*
 
     在安装好 Azure CLI 的机器上， 运行如下命令
 
-        azure network public-ip show -g <YOUR-RESOURCE-GROUP-NAME> -n elasticsearch-kibana-pip 
+    ```
+    azure network public-ip show -g <YOUR-RESOURCE-GROUP-NAME> -n elasticsearch-kibana-pip 
+    ```
 
 6. 用浏览器打开页面 http://"elasticsearch-kibana-pip":5601 ( 将 "elasticsearch-kibana-pip" 替换成实际的 IP 地址 ), 访问 Kibana 主页

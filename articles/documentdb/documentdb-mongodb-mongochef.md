@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 11/29/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: anhoh
 ---
 
@@ -69,49 +69,53 @@ ms.author: anhoh
     ![MongoChef“添加文档”菜单项的屏幕截图](./media/documentdb-mongodb-mongochef/AddDocument1.png)
 5. 在“添加文档”对话框中粘贴以下内容，然后单击“添加文档”。
 
-        {
-        "_id": "AndersenFamily",
-        "lastName": "Andersen",
-        "parents": [
-               { "firstName": "Thomas" },
-               { "firstName": "Mary Kay"}
-        ],
-        "children": [
-           {
-               "firstName": "Henriette Thaulow", "gender": "female", "grade": 5,
-               "pets": [{ "givenName": "Fluffy" }]
-           }
-        ],
-        "address": { "state": "WA", "county": "King", "city": "seattle" },
-        "isRegistered": true
-        }
+    ```
+    {
+    "_id": "AndersenFamily",
+    "lastName": "Andersen",
+    "parents": [
+           { "firstName": "Thomas" },
+           { "firstName": "Mary Kay"}
+    ],
+    "children": [
+       {
+           "firstName": "Henriette Thaulow", "gender": "female", "grade": 5,
+           "pets": [{ "givenName": "Fluffy" }]
+       }
+    ],
+    "address": { "state": "WA", "county": "King", "city": "seattle" },
+    "isRegistered": true
+    }
+    ```
 6. 添加另一个文档，但这次使用以下内容。
 
+    ```
+    {
+    "_id": "WakefieldFamily",
+    "parents": [
+        { "familyName": "Wakefield", "givenName": "Robin" },
+        { "familyName": "Miller", "givenName": "Ben" }
+    ],
+    "children": [
         {
-        "_id": "WakefieldFamily",
-        "parents": [
-            { "familyName": "Wakefield", "givenName": "Robin" },
-            { "familyName": "Miller", "givenName": "Ben" }
-        ],
-        "children": [
-            {
-                "familyName": "Merriam",
-                 "givenName": "Jesse",
-                "gender": "female", "grade": 1,
-                "pets": [
-                    { "givenName": "Goofy" },
-                    { "givenName": "Shadow" }
-                ]
-            },
-            {
-                "familyName": "Miller",
-                 "givenName": "Lisa",
-                 "gender": "female",
-                 "grade": 8 }
-        ],
-        "address": { "state": "NY", "county": "Manhattan", "city": "NY" },
-        "isRegistered": false
-        }
+            "familyName": "Merriam",
+             "givenName": "Jesse",
+            "gender": "female", "grade": 1,
+            "pets": [
+                { "givenName": "Goofy" },
+                { "givenName": "Shadow" }
+            ]
+        },
+        {
+            "familyName": "Miller",
+             "givenName": "Lisa",
+             "gender": "female",
+             "grade": 8 }
+    ],
+    "address": { "state": "NY", "county": "Manhattan", "city": "NY" },
+    "isRegistered": false
+    }
+    ```
 7. 执行示例查询。例如，搜索姓氏为“Andersen”的家庭，并返回父母和州/省字段。
 
     ![Mongo Chef 查询结果的屏幕截图](./media/documentdb-mongodb-mongochef/QueryDocument1.png)
@@ -120,3 +124,4 @@ ms.author: anhoh
 - 浏览具有 MongoDB 协议支持的 DocumentDB [示例](./documentdb-mongodb-samples.md)。
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: wording and links update -->

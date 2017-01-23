@@ -82,19 +82,21 @@ ms.author: stevestein
 2. 如下面的示例 App.config 代码示例所示，添加 **&#x3c;configuration&#x3e; &#x3c;/configuration&#x3e;** 元素。
  - 将 {your\_placeholders} 替换为你自己的实际值：
 
-            <?xml version="1.0" encoding="utf-8" ?>
-            <configuration>
-                <startup>
-                    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
-                </startup>
+     ```
+        <?xml version="1.0" encoding="utf-8" ?>
+        <configuration>
+            <startup>
+                <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+            </startup>
 
-                <connectionStrings>
-                    <clear />
-                    <add name="ConnectionString4NoUserIDNoPassword"
-                    connectionString="Server=tcp:{your_serverName_here}.database.chinacloudapi.cn,1433; Database={your_databaseName_here}; Connection Timeout=30; Encrypt=True; TrustServerCertificate=False;"
-                    />
-                </connectionStrings>
-            </configuration>
+            <connectionStrings>
+                <clear />
+                <add name="ConnectionString4NoUserIDNoPassword"
+                connectionString="Server=tcp:{your_serverName_here}.database.chinacloudapi.cn,1433; Database={your_databaseName_here}; Connection Timeout=30; Encrypt=True; TrustServerCertificate=False;"
+                />
+            </connectionStrings>
+        </configuration>
+     ```
 
 3. 保存 App.config 的更改。
 
@@ -115,103 +117,105 @@ ms.author: stevestein
 2. 通过在下面的示例 C# 代码中粘贴，覆盖 Program.cs 中的所有起始代码。
  - 如果你想要更短的代码示例，可以将整个连接字符串作为文本分配给变量 **SQLConnectionString**。然后可以擦除 **GetConnectionStringFromExeConfig** 和 **GatherPasswordFromConsole** 这两个方法。
 
-            using System;  // C#
-            using G = System.Configuration;   // System.Configuration.dll
-            using D = System.Data;            // System.Data.dll
-            using C = System.Data.SqlClient;  // System.Data.dll
-            using T = System.Text;
+     ```
+        using System;  // C#
+        using G = System.Configuration;   // System.Configuration.dll
+        using D = System.Data;            // System.Data.dll
+        using C = System.Data.SqlClient;  // System.Data.dll
+        using T = System.Text;
 
-            namespace ConnectAndQuery_Example
+        namespace ConnectAndQuery_Example
+        {
+            class Program
             {
-                class Program
+                static void Main()
                 {
-                    static void Main()
+                    string connectionString4NoUserIDNoPassword,
+                        password, userName, SQLConnectionString;
+
+                    // Get most of the connection string from ConnectAndQuery_Example.exe.config
+                    // file, in the same directory where ConnectAndQuery_Example.exe resides.
+                    connectionString4NoUserIDNoPassword = Program.GetConnectionStringFromExeConfig
+                        ("ConnectionString4NoUserIDNoPassword");
+                    // Get the user name from keyboard input.
+                    Console.WriteLine("Enter your User ID, without the trailing @ and server name: ");
+                    userName = Console.ReadLine();
+                    // Get the password from keyboard input.
+                    password = Program.GatherPasswordFromConsole();
+
+                    SQLConnectionString = "Password=" + password + ';' +
+                        "User ID=" + userName + ";" + connectionString4NoUserIDNoPassword;
+
+                    // Create an SqlConnection from the provided connection string.
+                    using (C.SqlConnection connection = new C.SqlConnection(SQLConnectionString))
                     {
-                        string connectionString4NoUserIDNoPassword,
-                            password, userName, SQLConnectionString;
+                        // Formulate the command.
+                        C.SqlCommand command = new C.SqlCommand();
+                        command.Connection = connection;
 
-                        // Get most of the connection string from ConnectAndQuery_Example.exe.config
-                        // file, in the same directory where ConnectAndQuery_Example.exe resides.
-                        connectionString4NoUserIDNoPassword = Program.GetConnectionStringFromExeConfig
-                            ("ConnectionString4NoUserIDNoPassword");
-                        // Get the user name from keyboard input.
-                        Console.WriteLine("Enter your User ID, without the trailing @ and server name: ");
-                        userName = Console.ReadLine();
-                        // Get the password from keyboard input.
-                        password = Program.GatherPasswordFromConsole();
+                        // Specify the query to be executed.
+                        command.CommandType = D.CommandType.Text;
+                        command.CommandText = @"
+                            SELECT TOP 9 CustomerID, NameStyle, Title, FirstName, LastName
+                            FROM SalesLT.Customer;  -- In AdventureWorksLT database.
+                            ";
+                        // Open a connection to database.
+                        connection.Open();
 
-                        SQLConnectionString = "Password=" + password + ';' +
-                            "User ID=" + userName + ";" + connectionString4NoUserIDNoPassword;
-
-                        // Create an SqlConnection from the provided connection string.
-                        using (C.SqlConnection connection = new C.SqlConnection(SQLConnectionString))
+                        // Read data returned for the query.
+                        C.SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
                         {
-                            // Formulate the command.
-                            C.SqlCommand command = new C.SqlCommand();
-                            command.Connection = connection;
-
-                            // Specify the query to be executed.
-                            command.CommandType = D.CommandType.Text;
-                            command.CommandText = @"
-                                SELECT TOP 9 CustomerID, NameStyle, Title, FirstName, LastName
-                                FROM SalesLT.Customer;  -- In AdventureWorksLT database.
-                                ";
-                            // Open a connection to database.
-                            connection.Open();
-
-                            // Read data returned for the query.
-                            C.SqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                Console.WriteLine("Values:  {0}, {1}, {2}, {3}, {4}",
-                                    reader[0], reader[1], reader[2], reader[3], reader[4]);
-                            }
+                            Console.WriteLine("Values:  {0}, {1}, {2}, {3}, {4}",
+                                reader[0], reader[1], reader[2], reader[3], reader[4]);
                         }
-                        Console.WriteLine("View the results here, then press any key to finish...");
-                        Console.ReadKey(true);
                     }
-                    //----------------------------------------------------------------------------------
+                    Console.WriteLine("View the results here, then press any key to finish...");
+                    Console.ReadKey(true);
+                }
+                //----------------------------------------------------------------------------------
 
-                    static string GetConnectionStringFromExeConfig(string connectionStringNameInConfig)
+                static string GetConnectionStringFromExeConfig(string connectionStringNameInConfig)
+                {
+                    G.ConnectionStringSettings connectionStringSettings =
+                        G.ConfigurationManager.ConnectionStrings[connectionStringNameInConfig];
+
+                    if (connectionStringSettings == null)
                     {
-                        G.ConnectionStringSettings connectionStringSettings =
-                            G.ConfigurationManager.ConnectionStrings[connectionStringNameInConfig];
-
-                        if (connectionStringSettings == null)
-                        {
-                            throw new ApplicationException(String.Format
-                                ("Error. Connection string not found for name '{0}'.",
-                                connectionStringNameInConfig));
-                        }
-                            return connectionStringSettings.ConnectionString;
+                        throw new ApplicationException(String.Format
+                            ("Error. Connection string not found for name '{0}'.",
+                            connectionStringNameInConfig));
                     }
+                        return connectionStringSettings.ConnectionString;
+                }
 
-                    static string GatherPasswordFromConsole()
+                static string GatherPasswordFromConsole()
+                {
+                    T.StringBuilder passwordBuilder = new T.StringBuilder(32);
+                    ConsoleKeyInfo key;
+                    Console.WriteLine("Enter your password: ");
+                    do
                     {
-                        T.StringBuilder passwordBuilder = new T.StringBuilder(32);
-                        ConsoleKeyInfo key;
-                        Console.WriteLine("Enter your password: ");
-                        do
+                        key = Console.ReadKey(true);
+                        if (key.Key != ConsoleKey.Backspace)
                         {
-                            key = Console.ReadKey(true);
-                            if (key.Key != ConsoleKey.Backspace)
-                            {
-                                passwordBuilder.Append(key.KeyChar);
-                                Console.Write("*");
-                            }
-                            else  // Backspace char was entered.
-                            {
-                                // Retreat the cursor, overlay '*' with ' ', retreat again.
-                                Console.Write("\b \b");
-                                passwordBuilder.Length = passwordBuilder.Length - 1;
-                            }
+                            passwordBuilder.Append(key.KeyChar);
+                            Console.Write("*");
                         }
-                        while (key.Key != ConsoleKey.Enter); // Enter key will end the looping.
-                        Console.WriteLine(Environment.NewLine);
-                        return passwordBuilder.ToString();
+                        else  // Backspace char was entered.
+                        {
+                            // Retreat the cursor, overlay '*' with ' ', retreat again.
+                            Console.Write("\b \b");
+                            passwordBuilder.Length = passwordBuilder.Length - 1;
+                        }
                     }
+                    while (key.Key != ConsoleKey.Enter); // Enter key will end the looping.
+                    Console.WriteLine(Environment.NewLine);
+                    return passwordBuilder.ToString();
                 }
             }
+        }
+     ```
 
 ### 编译程序
 

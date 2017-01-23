@@ -28,41 +28,49 @@ ms.author: tomfitz
 ## 模板中的链接
 若要在模板中定义链接，请包括将源资源的资源提供程序命名空间和类型与 **/providers/links** 组合在一起的资源类型。该名称必须包含源资源的名称。你提供目标资源的资源 ID。下面的示例将在网站与存储帐户之间建立链接。
 
-    {
-      "type": "Microsoft.Web/sites/providers/links",
-      "apiVersion": "2015-01-01",
-      "name": "[concat(variables('siteName'),'/Microsoft.Resources/SiteToStorage')]",
-      "dependsOn": [ "[variables('siteName')]" ],
-      "properties": {
-        "targetId": "[resourceId('Microsoft.Storage/storageAccounts','storagecontoso')]",
-        "notes": "This web site uses the storage account to store user information."
-      }
-    }
+```
+{
+  "type": "Microsoft.Web/sites/providers/links",
+  "apiVersion": "2015-01-01",
+  "name": "[concat(variables('siteName'),'/Microsoft.Resources/SiteToStorage')]",
+  "dependsOn": [ "[variables('siteName')]" ],
+  "properties": {
+    "targetId": "[resourceId('Microsoft.Storage/storageAccounts','storagecontoso')]",
+    "notes": "This web site uses the storage account to store user information."
+  }
+}
+```
 
 有关模板格式的完整说明，请参阅[资源链接 - 模板架构](./resource-manager-template-links.md)。
 
 ## 使用 REST API 进行链接
 若要定义已部署的资源之间的链接，请运行：
 
-    PUT https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/{provider-namespace}/{resource-type}/{resource-name}/providers/Microsoft.Resources/links/{link-name}?api-version={api-version}
+```
+PUT https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/{provider-namespace}/{resource-type}/{resource-name}/providers/Microsoft.Resources/links/{link-name}?api-version={api-version}
+```
 
 将 {subscription-id} 替换为订阅 ID。将 {resource-group}、{provider-namespace}、{resource-type} 和 {resource-name} 替换为标识链接中的第一个资源的值。将 {link-name} 替换为要创建的链接名称。将 2015-01-01 用于 api-version。
 
 在该请求中，包括定义链接中第二个资源的一个对象：
 
-    {
-        "name": "{new-link-name}",
-        "properties": {
-            "targetId": "subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/{provider-namespace}/{resource-type}/{resource-name}/",
-            "notes": "{link-description}",
-        }
+```
+{
+    "name": "{new-link-name}",
+    "properties": {
+        "targetId": "subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/{provider-namespace}/{resource-type}/{resource-name}/",
+        "notes": "{link-description}",
     }
+}
+```
 
 Properties 元素包含第二个资源的标识符。
 
 可以使用以下命令在订阅中查询链接：
 
-    https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.Resources/links?api-version={api-version}
+```
+https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.Resources/links?api-version={api-version}
+```
 
 有关更多示例，包括如何检索有关链接的信息，请参阅[链接资源](https://docs.microsoft.com/rest/api/resources/resourcelinks)。
 

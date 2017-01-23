@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/09/2016
-wacn.date: 01/19/2017
+wacn.date: 01/23/2017
 ms.author: kipandya
 ---
 
@@ -50,25 +50,27 @@ SDK 会自动将所有写入请求发送到当前写入区域。
 >
 >
 
-    // Getting endpoints from application settings or other configuration location
-    Uri accountEndPoint = new Uri(Properties.Settings.Default.GlobalDatabaseUri);
-    string accountKey = Properties.Settings.Default.GlobalDatabaseKey;
+```
+// Getting endpoints from application settings or other configuration location
+Uri accountEndPoint = new Uri(Properties.Settings.Default.GlobalDatabaseUri);
+string accountKey = Properties.Settings.Default.GlobalDatabaseKey;
 
-    ConnectionPolicy connectionPolicy = new ConnectionPolicy();
+ConnectionPolicy connectionPolicy = new ConnectionPolicy();
 
-    //Setting read region selection preference
-    connectionPolicy.PreferredLocations.Add(LocationNames.WestUS); // first preference
-    connectionPolicy.PreferredLocations.Add(LocationNames.EastUS); // second preference
-    connectionPolicy.PreferredLocations.Add(LocationNames.NorthEurope); // third preference
+//Setting read region selection preference
+connectionPolicy.PreferredLocations.Add(LocationNames.WestUS); // first preference
+connectionPolicy.PreferredLocations.Add(LocationNames.EastUS); // second preference
+connectionPolicy.PreferredLocations.Add(LocationNames.NorthEurope); // third preference
 
-    // initialize connection
-    DocumentClient docClient = new DocumentClient(
-        accountEndPoint,
-        accountKey,
-        connectionPolicy);
+// initialize connection
+DocumentClient docClient = new DocumentClient(
+    accountEndPoint,
+    accountKey,
+    connectionPolicy);
 
-    // connect to DocDB
-    await docClient.OpenAsync().ConfigureAwait(false);
+// connect to DocDB
+await docClient.OpenAsync().ConfigureAwait(false);
+```
 
 ## NodeJS、JavaScript 和 Python SDK
 无需进行任何代码更改即可使用该 SDK。在此情况下，SDK 会自动将读取和写入请求定向到当前写入区域。
@@ -84,56 +86,62 @@ SDK 会自动将所有写入请求发送到当前写入区域。
 
 下面是 NodeJS/Javascript 的代码示例。Python 和 Java 将遵循相同的模式。
 
-    // Creating a ConnectionPolicy object
-    var connectionPolicy = new DocumentBase.ConnectionPolicy();
+```
+// Creating a ConnectionPolicy object
+var connectionPolicy = new DocumentBase.ConnectionPolicy();
 
-    // Setting read region selection preference, in the following order -
-    // 1 - West US
-    // 2 - East US
-    // 3 - North Europe
-    connectionPolicy.PreferredLocations = ['West US', 'East US', 'North Europe'];
+// Setting read region selection preference, in the following order -
+// 1 - West US
+// 2 - East US
+// 3 - North Europe
+connectionPolicy.PreferredLocations = ['West US', 'East US', 'North Europe'];
 
-    // initialize the connection
-    var client = new DocumentDBClient(host, { masterKey: masterKey }, connectionPolicy);
+// initialize the connection
+var client = new DocumentDBClient(host, { masterKey: masterKey }, connectionPolicy);
+```
 
 ## REST
 数据库帐户在多个区域中可用后，客户端可以通过对以下 URI 执行 GET 请求来查询该帐户的可用性。
 
-    https://{databaseaccount}.documents.azure.com/
+```
+https://{databaseaccount}.documents.azure.com/
+```
 
 服务将返回副本的区域及其对应 DocumentDB 终结点 URI 的列表。当前写入区域将在响应中指示。然后，客户端可为所有其他 REST API 请求选择适当的终结点，如下所示。
 
 示例响应
 
-    {
-        "_dbs": "//dbs/",
-        "media": "//media/",
-        "writableLocations": [
-            {
-                "Name": "West US",
-                "DatabaseAccountEndpoint": "https://globaldbexample-westus.documents.azure.com:443/"
-            }
-        ],
-        "readableLocations": [
-            {
-                "Name": "East US",
-            "DatabaseAccountEndpoint": "https://globaldbexample-eastus.documents.azure.com:443/"
-            }
-        ],
-        "MaxMediaStorageUsageInMB": 2048,
-        "MediaStorageUsageInMB": 0,
-        "ConsistencyPolicy": {
-            "defaultConsistencyLevel": "Session",
-            "maxStalenessPrefix": 100,
-            "maxIntervalInSeconds": 5
-        },
-        "addresses": "//addresses/",
-        "id": "globaldbexample",
-        "_rid": "globaldbexample.documents.azure.com",
-        "_self": "",
-        "_ts": 0,
-        "_etag": null
-    }
+```
+{
+    "_dbs": "//dbs/",
+    "media": "//media/",
+    "writableLocations": [
+        {
+            "Name": "West US",
+            "DatabaseAccountEndpoint": "https://globaldbexample-westus.documents.azure.com:443/"
+        }
+    ],
+    "readableLocations": [
+        {
+            "Name": "East US",
+        "DatabaseAccountEndpoint": "https://globaldbexample-eastus.documents.azure.com:443/"
+        }
+    ],
+    "MaxMediaStorageUsageInMB": 2048,
+    "MediaStorageUsageInMB": 0,
+    "ConsistencyPolicy": {
+        "defaultConsistencyLevel": "Session",
+        "maxStalenessPrefix": 100,
+        "maxIntervalInSeconds": 5
+    },
+    "addresses": "//addresses/",
+    "id": "globaldbexample",
+    "_rid": "globaldbexample.documents.azure.com",
+    "_self": "",
+    "_ts": 0,
+    "_etag": null
+}
+```
 
 - 所有 PUT、POST 和 DELETE 请求必须转到指示的写入 URI
 - 所有 GET 和其他只读请求（例如查询）可以转到客户端选择的任何终结点
@@ -153,3 +161,4 @@ SDK 会自动将所有写入请求发送到当前写入区域。
 [regions]: https://azure.microsoft.com/regions/
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: update code -->

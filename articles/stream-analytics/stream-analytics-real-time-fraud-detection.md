@@ -60,14 +60,16 @@ ms.author: jeffstok
 
 2. 将 telcodatagen.exe.config 中的 Microsoft.ServiceBus.ConnectionString 和 EventHubName 值替换为事件中心的连接字符串和名称。
 
-    从 Azure 门户复制的连接字符串会将连接名称放在末尾。请务必从“add key=”字段中删除“;EntityPath=<value>”。
+   从 Azure 门户复制的连接字符串会将连接名称放在末尾。请务必从“add key=”字段中删除“;EntityPath=<value>”。
 3. 启动应用程序。用法如下：
 
-    telcodatagen.exe [#NumCDRsPerHour] [SIM Card Fraud Probability] [#DurationHours]
+   telcodatagen.exe [#NumCDRsPerHour] [SIM Card Fraud Probability] [#DurationHours]
 
 以下示例会生成 1,000 个事件，在长达两个小时的过程中，有 20% 的可能性会出现欺诈行为。
 
-    telcodatagen.exe 1000 .2 2
+```
+telcodatagen.exe 1000 .2 2
+```
 
 会看到记录被发送到事件中心。将在此实时欺诈检测应用程序中使用的某些关键字段定义如下：
 
@@ -87,14 +89,14 @@ ms.author: jeffstok
 1. 在 Azure 门户中，单击“新建”>“数据服务”>“流分析”>“快速创建”。
 2. 指定以下值，然后单击**“创建流分析作业”**：
 
-    * **作业名称**：输入作业名称。
-    * **区域**：选择要在其中运行作业的区域。考虑将作业和事件中心放在同一区域，以确保获得更好的性能，并确保在不同区域之间传输数据时不需付费。
-    * **存储帐户**：选择要使用的 Azure 存储帐户，以便为所有在此区域运行的流分析作业存储监视数据。可以选择现有的存储帐户，也可以创建新的存储帐户。
+   * **作业名称**：输入作业名称。
+   * **区域**：选择要在其中运行作业的区域。考虑将作业和事件中心放在同一区域，以确保获得更好的性能，并确保在不同区域之间传输数据时不需付费。
+   * **存储帐户**：选择要使用的 Azure 存储帐户，以便为所有在此区域运行的流分析作业存储监视数据。可以选择现有的存储帐户，也可以创建新的存储帐户。
 3. 单击左窗格中的“流分析”，列出流分析作业。
 
-    ![流分析服务图标](./media/stream-analytics-real-time-fraud-detection/stream-analytics-service-icon.png)  
+   ![流分析服务图标](./media/stream-analytics-real-time-fraud-detection/stream-analytics-service-icon.png)  
 
-    新作业在显示时的状态为**“已创建”**。请注意，页面底部的**“启动”**按钮已禁用。你必须先配置作业输入、输出和查询，然后才能启动作业。
+   新作业在显示时的状态为**“已创建”**。请注意，页面底部的**“启动”**按钮已禁用。你必须先配置作业输入、输出和查询，然后才能启动作业。
 
 ### 指定作业输入
 1. 在流分析作业中，单击页面顶部的“输入”，然后单击“添加输入”。此时会打开一个对话框，引导完成设置输入所需的多个步骤。
@@ -102,18 +104,18 @@ ms.author: jeffstok
 3. 单击“事件中心”，然后单击右侧的按钮。
 4. 在第三页中键入或选择以下值：
 
-    * **输入别名**：输入此作业的友好名称，例如 *CallStream*。请注意，你需要在后面的查询中使用此名称。
-    * **事件中心**：如果创建的事件中心与流分析作业属于同一订阅，请选择事件中心所在的命名空间。
+   * **输入别名**：输入此作业的友好名称，例如 *CallStream*。请注意，你需要在后面的查询中使用此名称。
+   * **事件中心**：如果创建的事件中心与流分析作业属于同一订阅，请选择事件中心所在的命名空间。
 
      如果事件中心属于其他订阅，请选择“使用其他订阅的事件中心”，然后手动输入**服务总线命名空间**、**事件中心名称**、**事件中心策略名称**、**事件中心策略密钥**以及**事件中心分区计数**的信息。
-    * **事件中心名称**：选择事件中心的名称。
-    * **事件中心策略名称**：选择此前在本教程中创建的事件中心策略。
-    * **事件中心使用者组**：键入此前在本教程中创建的使用者组的名称。
+   * **事件中心名称**：选择事件中心的名称。
+   * **事件中心策略名称**：选择此前在本教程中创建的事件中心策略。
+   * **事件中心使用者组**：键入此前在本教程中创建的使用者组的名称。
 5. 单击右侧按钮。
 6. 指定以下值：
 
-    * **事件序列化程序格式**：JSON
-    * **编码**：UTF8
+   * **事件序列化程序格式**：JSON
+   * **编码**：UTF8
 7. 单击“选中”按钮添加此源，并确认流分析可以成功连接到事件中心。
 
 ### 指定作业查询
@@ -127,7 +129,7 @@ ms.author: jeffstok
 2. 在打开的对话框中，指定开始收集数据的“开始时间”，以及使用额外数据的“持续时间”。
 3. 单击“选中”按钮，开始对输入中的数据取样。生成数据文件可能需要一到两分钟。该过程完成后，单击“详细信息”，下载生成的 .JSON 文件并保存。
 
-    ![在 JSON 文件中下载并保存已处理的数据](./media/stream-analytics-real-time-fraud-detection/stream-analytics-download-save-json-file.png)  
+   ![在 JSON 文件中下载并保存已处理的数据](./media/stream-analytics-real-time-fraud-detection/stream-analytics-download-save-json-file.png)  
 
 #### 传递查询
 如果想要将每个事件存档，可使用传递查询来读取事件或消息有效负载中的所有字段。开始时，执行简单的传递查询来投射事件中的所有字段。
@@ -144,7 +146,7 @@ ms.author: jeffstok
 4. 提供测试文件。可以使用在前面步骤中创建的文件，也可以使用 [telco.json](https://github.com/Azure/azure-stream-analytics/blob/master/Samples/SampleDataFiles/Telco.json)。
 5. 单击“选中”按钮，查看在查询定义下方显示的结果。
 
-    ![查询定义结果](./media/stream-analytics-real-time-fraud-detection/stream-analytics-sim-fraud-output.png)  
+   ![查询定义结果](./media/stream-analytics-real-time-fraud-detection/stream-analytics-sim-fraud-output.png)  
 
 ### 列投影
 现在，我们将返回的字段缩减为较小的集合。
@@ -155,7 +157,7 @@ ms.author: jeffstok
      FROM CallStream
 2. 单击查询编辑器下的**“重新运行”**以查看查询结果。
 
-    ![查询编辑器中的输出。](./media/stream-analytics-real-time-fraud-detection/stream-analytics-query-editor-output.png)
+   ![查询编辑器中的输出。](./media/stream-analytics-real-time-fraud-detection/stream-analytics-query-editor-output.png)
 
 ### 按区域计算传入呼叫数：带聚合功能的翻转窗口
 
@@ -173,23 +175,25 @@ ms.author: jeffstok
 
 2. 单击查询编辑器下的**“重新运行”**以查看查询结果。
 
-    ![Timestand By 的查询结果](./media/stream-analytics-real-time-fraud-detection/stream-ananlytics-query-editor-rerun.png)
+   ![Timestand By 的查询结果](./media/stream-analytics-real-time-fraud-detection/stream-ananlytics-query-editor-rerun.png)
 
 ### 使用自联接进行 SIM 欺诈行为检测
 为了确定可能存在的欺诈性使用情况，我们需要查找从同一个用户发出但发出位置却位于不同地区且间隔时间不到 5 秒钟的呼叫。我们会让呼叫事件流进行自我[联接](https://msdn.microsoft.com/zh-cn/library/azure/dn835026.aspx)，看是否存在此类情况。
 
 1. 在代码编辑器中将查询更改为：
 
-         SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
-         CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
-         FROM CallStream CS1 TIMESTAMP BY CallRecTime
-         JOIN CallStream CS2 TIMESTAMP BY CallRecTime
-         ON CS1.CallingIMSI = CS2.CallingIMSI
-         AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5 
-         WHERE CS1.SwitchNum != CS2.SwitchNum
+    ```
+     SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
+     CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
+     FROM CallStream CS1 TIMESTAMP BY CallRecTime
+     JOIN CallStream CS2 TIMESTAMP BY CallRecTime
+     ON CS1.CallingIMSI = CS2.CallingIMSI
+     AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5 
+     WHERE CS1.SwitchNum != CS2.SwitchNum
+    ```
 2. 单击查询编辑器下的**“重新运行”**以查看查询结果。
 
-    ![联接的查询结果](./media/stream-analytics-real-time-fraud-detection/stream-ananlytics-query-editor-join.png)
+   ![联接的查询结果](./media/stream-analytics-real-time-fraud-detection/stream-ananlytics-query-editor-join.png)
 
 ### 创建输出接收器
 现在，我们已经定义了事件流、用于引入事件的事件中心输入，以及用于通过流执行转换的查询，最后一步是为作业定义输出接收器。我们会针对欺诈行为将事件写入 Azure Blob 存储。
@@ -205,16 +209,16 @@ ms.author: jeffstok
 2. 单击“Blob 存储”，然后单击右侧的按钮。
 3. 在第三页中键入或选择以下值：
 
-    * **输出别名**：输入此作业输出的友好名称。
-    * **订阅**：如果创建的 Blob 存储与流分析作业属于同一订阅，请单击“使用当前订阅中的存储帐户”。如果存储属于其他订阅，请单击“使用其他订阅中的存储帐户”，然后手动输入**存储帐户**、**存储帐户密钥**和**容器**的信息。
-    * **存储帐户**：选择存储帐户的名称。
-    * **容器**：选择容器的名称。
-    * **文件名前缀**：键入写入 blob 输出时要使用的文件前缀。
+   * **输出别名**：输入此作业输出的友好名称。
+   * **订阅**：如果创建的 Blob 存储与流分析作业属于同一订阅，请单击“使用当前订阅中的存储帐户”。如果存储属于其他订阅，请单击“使用其他订阅中的存储帐户”，然后手动输入**存储帐户**、**存储帐户密钥**和**容器**的信息。
+   * **存储帐户**：选择存储帐户的名称。
+   * **容器**：选择容器的名称。
+   * **文件名前缀**：键入写入 blob 输出时要使用的文件前缀。
 4. 单击右侧按钮。
 5. 指定以下值：
 
-    * **事件序列化程序格式**：JSON
-    * **编码**：UTF8
+   * **事件序列化程序格式**：JSON
+   * **编码**：UTF8
 6. 单击“选中”按钮添加此源，并确认流分析可以成功连接到存储帐户。
 
 ## 启动要进行实时处理的作业

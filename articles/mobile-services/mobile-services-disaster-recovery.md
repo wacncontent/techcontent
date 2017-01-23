@@ -72,14 +72,16 @@ ms.author: christopheranderson
 
     准备就绪后，执行以下命令：
 
-        azure mobile migrate PrimaryService SecondaryService
-        info:    Executing command mobile migrate
-        Warning: this action will use the capacity from the mobile service 'SecondaryService' and delete it and the host name for 'PrimaryService' may not resolve for up to 30 minutes. Do you want to migrate the mobile service 'PrimaryService'? [y/n]: y
-        + Performing migration
-        + Migration with id '0123456789abcdef0123456789abcdef' started. The migration may take several minutes to complete.
-        + Cleaning up
-        info:    Migration complete. It may take 30 minutes for DNS to resolve to the migrated site.
-        info:    mobile migrate command OK
+    ```
+    azure mobile migrate PrimaryService SecondaryService
+    info:    Executing command mobile migrate
+    Warning: this action will use the capacity from the mobile service 'SecondaryService' and delete it and the host name for 'PrimaryService' may not resolve for up to 30 minutes. Do you want to migrate the mobile service 'PrimaryService'? [y/n]: y
+    + Performing migration
+    + Migration with id '0123456789abcdef0123456789abcdef' started. The migration may take several minutes to complete.
+    + Cleaning up
+    info:    Migration complete. It may take 30 minutes for DNS to resolve to the migrated site.
+    info:    mobile migrate command OK
+    ```
 
     > [!NOTE]
     > 完成该命令后，可能需要经过几分钟时间，你才能在 Azure 经典管理门户中看到更改。

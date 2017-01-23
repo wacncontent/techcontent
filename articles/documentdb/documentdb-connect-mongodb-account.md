@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 11/22/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: anhoh
 ---
 
@@ -57,7 +57,9 @@ DocumentDB 具有严格的安全要求和标准。DocumentDB 帐户需要通过 
 
 请务必注意，DocumentDB 支持标准 MongoDB 连接字符串 URI 格式，但要满足几个具体的要求：DocumentDB 帐户需要通过 SSL 进行身份验证和安全通信。因此，连接字符串格式为：
 
-    mongodb://username:password@host:port/[database]?ssl=true
+```
+mongodb://username:password@host:port/[database]?ssl=true
+```
 
 上图显示了“连接字符串”边栏选项卡中提供此字符串值的位置。
 
@@ -75,10 +77,13 @@ DocumentDB 具有严格的安全要求和标准。DocumentDB 帐户需要通过 
 
 以上面“连接字符串信息”中显示的帐户为例。有效的连接字符串为：
 
-    mongodb://contoso123:0Fc3IolnL12312asdfawejunASDF@asdfYXX2t8a97kghVcUzcDv98hawelufhawefafnoQRGwNj2nMPL1Y9qsIr9Srdw==@anhohmongo.documents.azure.com:10250/mydatabase?ssl=true
+```
+mongodb://contoso123:0Fc3IolnL12312asdfawejunASDF@asdfYXX2t8a97kghVcUzcDv98hawelufhawefafnoQRGwNj2nMPL1Y9qsIr9Srdw==@anhohmongo.documents.azure.com:10250/mydatabase?ssl=true
+```
 
 ## 后续步骤
 - 了解如何对具有 MongoDB 协议支持的 DocumentDB 帐户[使用 MongoChef](./documentdb-mongodb-mongochef.md)。
 - 浏览具有 MongoDB 协议支持的 DocumentDB [示例](./documentdb-mongodb-samples.md)。
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: show more details on how to get connection string -->

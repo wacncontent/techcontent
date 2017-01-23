@@ -71,7 +71,9 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 若要以编程方式使用缓存，你需要引用该缓存。以下代码添加到你想使用 StackExchange.Redis 客户端的任何文件的顶部，以访问 Azure Redis 缓存。
 
-    using StackExchange.Redis;
+```
+using StackExchange.Redis;
+```
 
 >[!NOTE]
 > StackExchange.Redis 客户端需要.NET Framework 4 或更高版本。
@@ -80,7 +82,9 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 要连接到 Azure Redis 缓存并返回连接的 `ConnectionMultiplexer` 的实例，请调用静态 `Connect` 方法并传递到缓存端点和密钥中，如下例所示。使用可以通过 `Get-AzureRmRedisCacheKey` PowerShell 命令获取的密钥作为 password 参数。
 
-    ConnectionMultiplexer connection = ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
+```
+ConnectionMultiplexer connection = ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
+```
 
 >[!IMPORTANT]
 > 警告：切勿将凭据存储在源代码中。为了使本示例简单明了，我将以源代码来呈现凭据内容。有关如何存储凭据的详细信息，请参阅[应用程序字符串和连接字符串的工作原理][]。
@@ -92,18 +96,20 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 共享应用程序中的 `ConnectionMultiplexer` 实例的一个方法是，拥有返回连接示例的静态属性（与下列示例类似）。这种线程安全方法，可仅初始化单一连接的 `ConnectionMultiplexer` 实例。在这些示例中，`abortConnect` 设置为 false，这表示即使未建立 Azure Redis 缓存连接，也可成功调用。`ConnectionMultiplexer` 的一个关键功能是，一旦还原网络问题和其他原因，它将自动还原缓存连接。
 
-    private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
-    {
-        return ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
-    });
+```
+private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+{
+    return ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
+});
 
-    public static ConnectionMultiplexer Connection
+public static ConnectionMultiplexer Connection
+{
+    get
     {
-        get
-        {
-            return lazyConnection.Value;
-        }
+        return lazyConnection.Value;
     }
+}
+```
 
 有关高级连接配置选项的详细信息，请参阅 [StackExchange.Redis 配置模型][]。
 
@@ -111,18 +117,20 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 建立连接后，通过调用 `ConnectionMultiplexer.GetDatabase` 方法返回对 Redis 缓存数据库的引用。从 `GetDatabase` 方法返回的对象是一个轻型直通对象，不需要存储。
 
-    // Connection refers to a property that returns a ConnectionMultiplexer
-    // as shown in the previous example.
-    IDatabase cache = Connection.GetDatabase();
+```
+// Connection refers to a property that returns a ConnectionMultiplexer
+// as shown in the previous example.
+IDatabase cache = Connection.GetDatabase();
 
-    // Perform cache operations using the cache object...
-    // Simple put of integral data types into the cache
-    cache.StringSet("key1", "value");
-    cache.StringSet("key2", 25);
+// Perform cache operations using the cache object...
+// Simple put of integral data types into the cache
+cache.StringSet("key1", "value");
+cache.StringSet("key2", 25);
 
-    // Simple get of data types from the cache
-    string key1 = cache.StringGet("key1");
-    int key2 = (int)cache.StringGet("key2");
+// Simple get of data types from the cache
+string key1 = cache.StringGet("key1");
+int key2 = (int)cache.StringGet("key2");
+```
 
 现在您知道如何连接到 Azure Redis Cache 实例并将引用返回缓存数据库，让我们看看如何使用缓存。
 
@@ -130,28 +138,34 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 可以使用 `StringSet` 和 `StringGet` 方法在缓存中存储和检索项。
 
-    // If key1 exists, it is overwritten.
-    cache.StringSet("key1", "value1");
+```
+// If key1 exists, it is overwritten.
+cache.StringSet("key1", "value1");
 
-    string value = cache.StringGet("key1");
+string value = cache.StringGet("key1");
+```
 
 Redis 将大多数数据存储为 Redis 字符串，但这些字符串可能包含许多类型的数据，包括序列化的二进制数据，可在缓存中存储 .NET 对象时使用。
 
 调用 `StringGet` 时，如果该对象存在，则返回它，如果该对象不存在，则返回 `null`。在这种情况可以从所需的数据源检索值，并将其存储在缓存中供后续使用。这称为缓存端模式。
 
-    string value = cache.StringGet("key1");
-    if (value == null)
-    {
-        // The item keyed by "key1" is not in the cache. Obtain
-        // it from the desired data source and add it to the cache.
-        value = GetValueFromDataSource();
+```
+string value = cache.StringGet("key1");
+if (value == null)
+{
+    // The item keyed by "key1" is not in the cache. Obtain
+    // it from the desired data source and add it to the cache.
+    value = GetValueFromDataSource();
 
-        cache.StringSet("key1", value);
-    }
+    cache.StringSet("key1", value);
+}
+```
 
 要在缓存中指定项的过期时间，请使用 `StringSet` 的 `TimeSpan` 参数。
 
-    cache.StringSet("key1", "value1", TimeSpan.FromMinutes(90));
+```
+cache.StringSet("key1", "value1", TimeSpan.FromMinutes(90));
+```
 
 ## <a name="store-session" id="work-with-net-objects-in-the-cache"></a>处理缓存中的 .NET 对象
 
@@ -159,23 +173,25 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 
 序列化对象的一种简单方式是使用 [Newtonsoft.Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/8.0.1-beta1) 中的 `JsonConvert` 序列化方法，并与 JSON 相互序列化。以下示例演示了使用 `Employee` 对象实例执行 GET 和 SET。
 
-    class Employee
+```
+class Employee
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public Employee(int EmployeeId, string Name)
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-        public Employee(int EmployeeId, string Name)
-        {
-            this.Id = EmployeeId;
-            this.Name = Name;
-        }
+        this.Id = EmployeeId;
+        this.Name = Name;
     }
+}
 
-    // Store to cache
-    cache.StringSet("e25", JsonConvert.SerializeObject(new Employee(25, "Clayton Gragg")));
+// Store to cache
+cache.StringSet("e25", JsonConvert.SerializeObject(new Employee(25, "Clayton Gragg")));
 
-    // Retrieve from cache
-    Employee e25 = JsonConvert.DeserializeObject<Employee>(cache.StringGet("e25"));
+// Retrieve from cache
+Employee e25 = JsonConvert.DeserializeObject<Employee>(cache.StringGet("e25"));
+```
 
 ## <a name="next-steps"></a>后续步骤
 

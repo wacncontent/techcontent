@@ -24,12 +24,14 @@ ms.author: renash
 ## 元数据文件格式  
 元数据文件的格式如下所示：
 
-    <?xml version="1.0" encoding="UTF-8"?>  
-    <Metadata>  
-    [<metadata-name-1>metadata-value-1</metadata-name-1>]  
-    [<metadata-name-2>metadata-value-2</metadata-name-2>]  
-    . . .  
-    </Metadata>  
+```
+<?xml version="1.0" encoding="UTF-8"?>  
+<Metadata>  
+[<metadata-name-1>metadata-value-1</metadata-name-1>]  
+[<metadata-name-2>metadata-value-2</metadata-name-2>]  
+. . .  
+</Metadata>  
+```
 
 |XML 元素|类型|说明|  
 |-----------------|----------|-----------------|  
@@ -41,17 +43,19 @@ ms.author: renash
 ## 属性文件格式  
 属性文件的格式如下：
 
-    <?xml version="1.0" encoding="UTF-8"?>  
-    <Properties>  
-    [<Last-Modified>date-time-value</Last-Modified>]  
-    [<Etag>etag</Etag>]  
-    [<Content-Length>size-in-bytes<Content-Length>]  
-    [<Content-Type>content-type</Content-Type>]  
-    [<Content-MD5>content-md5</Content-MD5>]  
-    [<Content-Encoding>content-encoding</Content-Encoding>]  
-    [<Content-Language>content-language</Content-Language>]  
-    [<Cache-Control>cache-control</Cache-Control>]  
-    </Properties>  
+```
+<?xml version="1.0" encoding="UTF-8"?>  
+<Properties>  
+[<Last-Modified>date-time-value</Last-Modified>]  
+[<Etag>etag</Etag>]  
+[<Content-Length>size-in-bytes<Content-Length>]  
+[<Content-Type>content-type</Content-Type>]  
+[<Content-MD5>content-md5</Content-MD5>]  
+[<Content-Encoding>content-encoding</Content-Encoding>]  
+[<Content-Language>content-language</Content-Language>]  
+[<Cache-Control>cache-control</Cache-Control>]  
+</Properties>  
+```
 
 |XML 元素|类型|说明|  
 |-----------------|----------|-----------------|  

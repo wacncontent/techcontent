@@ -22,22 +22,30 @@ Mac/Linux 用户：如果您没有 Windows 计算机的访问权限，请参阅[
 
 要构建轮，你需要轮软件包：
 
-    env\scripts\pip install wheel
+```
+env\scripts\pip install wheel
+```
 
 您将使用  `pip wheel` 来编译依赖项：
 
-    env\scripts\pip wheel azure==0.8.4
+```
+env\scripts\pip wheel azure==0.8.4
+```
 
 这将在 \wheelhouse 文件夹中创建 .whl 文件。将 \wheelhouse 文件夹和轮文件添加到您的存储库。
 
 编辑 requirements.txt 从而在顶部添加 `--find-links` 选项。这会让 pip 在本地文件夹中查找完全匹配项，然后转至 python 软件包索引。
 
-    --find-links wheelhouse
-    azure==0.8.4
+```
+--find-links wheelhouse
+azure==0.8.4
+```
 
 如果您想要将所有依赖项包含在 \wheelhouse 文件夹中而根本不使用 python 软件包索引，则可以通过将 `--no-index` 添加到 requirements.txt 之上来强制 pip 忽略软件包索引。
 
-    --no-index
+```
+--no-index
+```
 
 ### 自定义安装
 
@@ -45,13 +53,17 @@ Mac/Linux 用户：如果您没有 Windows 计算机的访问权限，请参阅[
 
 将其添加到部署脚本：
 
-    env\scripts\easy_install somepackage
+```
+env\scripts\easy_install somepackage
+```
 
 您还可以使用 easy\_install 从 exe 安装程序进行安装（有些兼容 zip，所以 easy\_install 支持它们）。将安装程序添加到您的存储库，然后通过传递可执行文件的路径来调用 easy\_install。
 
 将其添加到部署脚本：
 
-    env\scripts\easy_install "%DEPLOYMENT_SOURCE%\installers\somepackage.exe"
+```
+env\scripts\easy_install "%DEPLOYMENT_SOURCE%\installers\somepackage.exe"
+```
 
 ### 将虚拟环境包含在存储库中（需要 Windows）
 
@@ -59,7 +71,9 @@ Mac/Linux 用户：如果您没有 Windows 计算机的访问权限，请参阅[
 
 如果存储库中包含虚拟环境，您可以通过创建一个空文件来防止部署脚本在 Azure 上执行虚拟环境管理：
 
-    .skipPythonDeployment
+```
+.skipPythonDeployment
+```
 
 我们建议您删除站点上的现有虚拟环境，从而防止在自动管理虚拟环境时出现剩余文件。
 

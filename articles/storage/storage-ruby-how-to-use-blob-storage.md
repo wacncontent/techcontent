@@ -43,14 +43,18 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 ### 导入包
 使用常用的文本编辑器将以下内容添加到要在其中使用存储的 Ruby 文件的顶部：
 
-    require "azure"
+```
+require "azure"
+```
 
 ## 设置 Azure 存储连接
 
 Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY**，以便获取连接到 Azure 存储帐户所需的信息。如果未设置这些环境变量，则在使用 **Azure::Blob::BlobService** 之前必须通过以下代码指定帐户信息：
 
-    Azure.config.storage_account_name = "<your azure storage account>"
-    Azure.config.storage_access_key = "<your azure storage access key>"
+```
+Azure.config.storage_account_name = "<your azure storage account>"
+Azure.config.storage_access_key = "<your azure storage access key>"
+```
 
 从 Azure 门户预览中的经典账户或 Resource Manager 存储帐户中获取这些值：
 
@@ -75,19 +79,23 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
 
 以下代码示例创建一个容器或输出存在的错误。
 
-    azure_blob_service = Azure::Blob::BlobService.new
-    begin
-      container = azure_blob_service.create_container("test-container")
-    rescue
-      puts $!
-    end
+```
+azure_blob_service = Azure::Blob::BlobService.new
+begin
+  container = azure_blob_service.create_container("test-container")
+rescue
+  puts $!
+end
+```
 
 若要将容器中的文件设为公用，可以设置容器的权限。
 
 只需修改 <strong>create\_container()</strong> 调用即可传递 **:public\_access\_level** 选项：
 
-    container = azure_blob_service.create_container("test-container",
-      :public_access_level => "<public access level>")
+```
+container = azure_blob_service.create_container("test-container",
+  :public_access_level => "<public access level>")
+```
 
 **:public\_access\_level** 选项的有效值为：
 
@@ -98,43 +106,53 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
 
 以下代码示例将更改**容器**的公共访问级别：
 
-    azure_blob_service.set_container_acl('test-container', "container")
+```
+azure_blob_service.set_container_acl('test-container', "container")
+```
 
 ## 将 Blob 上传到容器中
 若要将内容上传到 Blob，请使用 **create\_block\_blob()** 方法创建 Blob，将文件或字符串用作 Blob 的内容。
 
 以下代码会将文件 **test.png** 作为名为“image-blob”的新 blob 上传到容器中。
 
-    content = File.open("test.png", "rb") { |file| file.read }
-    blob = azure_blob_service.create_block_blob(container.name,
-      "image-blob", content)
-    puts blob.name
+```
+content = File.open("test.png", "rb") { |file| file.read }
+blob = azure_blob_service.create_block_blob(container.name,
+  "image-blob", content)
+puts blob.name
+```
 
 ## 列出容器中的 Blob
 若要列出容器，请使用 **list\_containers()** 方法。若要列出容器中的 Blob，请使用 **list\_blobs()** 方法。
 
 这将输出帐户的所有容器中的所有 Blog 的 URL。
 
-    containers = azure_blob_service.list_containers()
-    containers.each do |container|
-      blobs = azure_blob_service.list_blobs(container.name)
-      blobs.each do |blob|
-        puts blob.name
-      end
-    end
+```
+containers = azure_blob_service.list_containers()
+containers.each do |container|
+  blobs = azure_blob_service.list_blobs(container.name)
+  blobs.each do |blob|
+    puts blob.name
+  end
+end
+```
 
 ## 下载 Blob
 若要下载 Blob，请使用 **get\_blob()** 方法来检索内容。
 
 以下代码示例演示了如何使用 **get\_blob()** 下载“image-blob”的内容并将其写入本地文件中。
 
-    blob, content = azure_blob_service.get_blob(container.name,"image-blob")
-    File.open("download.png","wb") {|f| f.write(content)}
+```
+blob, content = azure_blob_service.get_blob(container.name,"image-blob")
+File.open("download.png","wb") {|f| f.write(content)}
+```
 
 ## 删除 Blob
 最后，若要删除 Blob，请使用 **delete\_blob()** 方法。以下代码示例演示了如何删除 blob。
 
-    azure_blob_service.delete_blob(container.name, "image-blob")
+```
+azure_blob_service.delete_blob(container.name, "image-blob")
+```
 
 ## 后续步骤
 若要了解有关更复杂存储任务的信息，请访问下面的链接：

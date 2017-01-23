@@ -41,11 +41,11 @@ ms.author: robmcm
     ![安装 Azure Toolkit for Eclipse][02]
 5. 如果展开“Azure Toolkit for Eclipse”，你将看到以下项：
 
-    * **适用于 Java 的 Application Insights 插件**：此组件允许你将 Azure 的遥测日志记录和分析服务用于应用程序和服务器实例。
-    * **Azure 访问控制服务筛选器**：此组件对以下情况提供支持：向 Azure ACS 验证应用程序用户的身份，启用单一登录方案，以及从应用程序具体化标识逻辑。
-    * **Azure 常用插件**：此组件提供其他工具包组件所需的常见功能。
-    * **Azure Explorer for Eclipse**：此组件提供其他工具包组件所需的常见功能。
-    * **Azure Plugin for Eclipse with Java**：此组件对以下情况提供支持：在 Eclipse 中，通过命令行开发可帮助构建、测试和部署适用于 Azure 云的 Java 应用程序的项目。
+   * **适用于 Java 的 Application Insights 插件**：此组件允许你将 Azure 的遥测日志记录和分析服务用于应用程序和服务器实例。
+   * **Azure 访问控制服务筛选器**：此组件对以下情况提供支持：向 Azure ACS 验证应用程序用户的身份，启用单一登录方案，以及从应用程序具体化标识逻辑。
+   * **Azure 常用插件**：此组件提供其他工具包组件所需的常见功能。
+   * **Azure Explorer for Eclipse**：此组件提供其他工具包组件所需的常见功能。
+   * **Azure Plugin for Eclipse with Java**：此组件对以下情况提供支持：在 Eclipse 中，通过命令行开发可帮助构建、测试和部署适用于 Azure 云的 Java 应用程序的项目。
     * **Azure Web Apps Plugin with Java**：此组件在将 Java Web 应用程序部署到 Azure Web 应用容器时提供支持。
     * **Microsoft JDBC Driver 4.2 for SQL Server**：此组件提供适用于 SQL Server 的 JDBC API 以及适用于 Java Platform Enterprise Edition 8 的 Azure SQL 数据库。
     * **Apache Qpid JMS 客户端库包**：此组件提供 Apache Qpid 项目中的 JMS 客户端组件，以允许应用程序在 Azure 中使用 AMQP 消息传送。

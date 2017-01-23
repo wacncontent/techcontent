@@ -36,9 +36,11 @@ VPN 网关需要 `-GatewayType` *Vpn*。
 
 示例：
 
-    New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
-    -Location 'China North' -IpConfigurations $gwipconfig -GatewayType Vpn `
-    -VpnType RouteBased
+```
+New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
+-Location 'China North' -IpConfigurations $gwipconfig -GatewayType Vpn `
+-VpnType RouteBased
+```
 
 ## <a name="gwsku"></a>网关 SKU
 [!INCLUDE [vpn-gateway-gwsku-include](../../includes/vpn-gateway-gwsku-include.md)]
@@ -54,9 +56,11 @@ VPN 网关需要 `-GatewayType` *Vpn*。
 
 以下 PowerShell 示例将 `-GatewaySku` 指定为 *Standard*。
 
-    New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
-    -Location 'China North' -IpConfigurations $gwipconfig -GatewaySku Standard `
-    -GatewayType Vpn -VpnType RouteBased
+```
+New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
+-Location 'China North' -IpConfigurations $gwipconfig -GatewaySku Standard `
+-GatewayType Vpn -VpnType RouteBased
+```
 
 **更改网关 SKU**
 
@@ -64,8 +68,10 @@ VPN 网关需要 `-GatewayType` *Vpn*。
 
 以下 PowerShell 示例演示如何将网关 SKU 的大小调整为“高性能”。
 
-    $gw = Get-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg
-    Resize-AzureRmVirtualNetworkGateway -VirtualNetworkGateway $gw -GatewaySku HighPerformance
+```
+$gw = Get-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg
+Resize-AzureRmVirtualNetworkGateway -VirtualNetworkGateway $gw -GatewaySku HighPerformance
+```
 
 ### 按网关 SKU 和类型列出的估计聚合吞吐量
 [!INCLUDE [vpn-gateway-table-gwtype-aggthroughput](../../includes/vpn-gateway-table-gwtype-aggtput-include.md)]
@@ -80,9 +86,11 @@ VPN 网关需要 `-GatewayType` *Vpn*。
 
 在以下 PowerShell 示例中，将创建需要 *IPsec* 连接类型的 S2S 连接。
 
-    New-AzureRmVirtualNetworkGatewayConnection -Name localtovon -ResourceGroupName testrg `
-    -Location 'China North' -VirtualNetworkGateway1 $gateway1 -LocalNetworkGateway2 $local `
-    -ConnectionType IPsec -RoutingWeight 10 -SharedKey 'abc123'
+```
+New-AzureRmVirtualNetworkGatewayConnection -Name localtovon -ResourceGroupName testrg `
+-Location 'China North' -VirtualNetworkGateway1 $gateway1 -LocalNetworkGateway2 $local `
+-ConnectionType IPsec -RoutingWeight 10 -SharedKey 'abc123'
+```
 
 ## <a name="vpntype"></a>VPN 类型
 为 VPN 网关配置创建虚拟网络网关时，必须指定 VPN 类型。选择的 VPN 类型取决于要创建的连接拓扑。例如，P2S 连接需要 RouteBased VPN 类型。VPN 类型还取决于要使用的硬件。S2S 配置需要 VPN 设备。有些 VPN 设备仅支持特定的 VPN 类型。
@@ -95,9 +103,11 @@ VPN 网关需要 `-GatewayType` *Vpn*。
 
 以下 PowerShell 示例将 `-VpnType` 指定为 *RouteBased*。在创建网关时，你必须确保用于配置的 -VpnType 正确。
 
-    New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
-    -Location 'China North' -IpConfigurations $gwipconfig `
-    -GatewayType Vpn -VpnType RouteBased
+```
+New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
+-Location 'China North' -IpConfigurations $gwipconfig `
+-GatewayType Vpn -VpnType RouteBased
+```
 
 ## <a name="requirements"></a>网关要求
 [!INCLUDE [vpn-gateway-table-requirements](../../includes/vpn-gateway-table-requirements-include.md)]
@@ -111,7 +121,9 @@ VPN 网关需要 `-GatewayType` *Vpn*。
 
 以下 Resource Manager PowerShell 示例显示名为 GatewaySubnet 的网关子网。可以看到，CIDR 表示法指定了 /27，这可提供足够的 IP 地址供大多数现有配置使用。
 
-    Add-AzureRmVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -AddressPrefix 10.0.3.0/27
+```
+Add-AzureRmVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -AddressPrefix 10.0.3.0/27
+```
 
 [!INCLUDE [vpn-gateway-no-nsg](../../includes/vpn-gateway-no-nsg-include.md)]
 
@@ -122,8 +134,10 @@ VPN 网关需要 `-GatewayType` *Vpn*。
 
 以下 PowerShell 示例创建新的本地网络网关：
 
-    New-AzureRmLocalNetworkGateway -Name LocalSite -ResourceGroupName testrg `
-    -Location 'China North' -GatewayIpAddress '23.99.221.164' -AddressPrefix '10.5.51.0/24'
+```
+New-AzureRmLocalNetworkGateway -Name LocalSite -ResourceGroupName testrg `
+-Location 'China North' -GatewayIpAddress '23.99.221.164' -AddressPrefix '10.5.51.0/24'
+```
 
 有时需要修改本地网络网关设置。例如，在添加或修改地址范围时，或 VPN 设备的 IP 地址发生变化时。对于经典 VNet，可以在经典管理门户上的“局域网”页上更改这些设置。对于 Resource Manager，请参阅 [Modify local network gateway settings using PowerShell](./vpn-gateway-modify-local-network-gateway.md)（使用 PowerShell 修改本地网络网关设置）。
 

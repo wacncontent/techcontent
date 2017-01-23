@@ -21,40 +21,42 @@ ms.author: rashimg
 
 了解如何使用 HDInsight 中的 Hive 处理和分析 JSON 文件。本教程将使用以下 JSON 文档
 
-    {
-        "StudentId": "trgfg-5454-fdfdg-4346",
-        "Grade": 7,
-        "StudentDetails": [
-            {
-                "FirstName": "Peggy",
-                "LastName": "Williams",
-                "YearJoined": 2012
-            }
-        ],
-        "StudentClassCollection": [
-            {
-                "ClassId": "89084343",
-                "ClassParticipation": "Satisfied",
-                "ClassParticipationRank": "High",
-                "Score": 93,
-                "PerformedActivity": false
-            },
-            {
-                "ClassId": "78547522",
-                "ClassParticipation": "NotSatisfied",
-                "ClassParticipationRank": "None",
-                "Score": 74,
-                "PerformedActivity": false
-            },
-            {
-                "ClassId": "78675563",
-                "ClassParticipation": "Satisfied",
-                "ClassParticipationRank": "Low",
-                "Score": 83,
-                "PerformedActivity": true
-            }
-        ]
-    }
+```
+{
+    "StudentId": "trgfg-5454-fdfdg-4346",
+    "Grade": 7,
+    "StudentDetails": [
+        {
+            "FirstName": "Peggy",
+            "LastName": "Williams",
+            "YearJoined": 2012
+        }
+    ],
+    "StudentClassCollection": [
+        {
+            "ClassId": "89084343",
+            "ClassParticipation": "Satisfied",
+            "ClassParticipationRank": "High",
+            "Score": 93,
+            "PerformedActivity": false
+        },
+        {
+            "ClassId": "78547522",
+            "ClassParticipation": "NotSatisfied",
+            "ClassParticipationRank": "None",
+            "Score": 74,
+            "PerformedActivity": false
+        },
+        {
+            "ClassId": "78675563",
+            "ClassParticipation": "Satisfied",
+            "ClassParticipationRank": "Low",
+            "Score": 83,
+            "PerformedActivity": true
+        }
+    ]
+}
+```
 
 可以在 wasbs://processjson@hditutorialdata.blob.core.windows.net/ 上找到该文件。有关将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 HDFS 兼容的 Azure Blob 存储与 HDInsight 中的 Hadoop 配合使用](./hdinsight-hadoop-use-blob-storage.md)。如果需要，可以将该文件复制到群集的默认容器。
 
@@ -64,22 +66,24 @@ ms.author: rashimg
 
 下一节中列出的方法需要 JSON 文档在单个行中。因此，必须将 JSON 文档平展成字符串。如果已平展 JSON 文档，则可以跳过此步骤，直接转到分析 JSON 数据的下一节。
 
-    DROP TABLE IF EXISTS StudentsRaw;
-    CREATE EXTERNAL TABLE StudentsRaw (textcol string) STORED AS TEXTFILE LOCATION "wasbs://processjson@hditutorialdata.blob.core.windows.net/";
+```
+DROP TABLE IF EXISTS StudentsRaw;
+CREATE EXTERNAL TABLE StudentsRaw (textcol string) STORED AS TEXTFILE LOCATION "wasbs://processjson@hditutorialdata.blob.core.windows.net/";
 
-    DROP TABLE IF EXISTS StudentsOneLine;
-    CREATE EXTERNAL TABLE StudentsOneLine
-    (
-      json_body string
-    )
-    STORED AS TEXTFILE LOCATION '/json/students';
+DROP TABLE IF EXISTS StudentsOneLine;
+CREATE EXTERNAL TABLE StudentsOneLine
+(
+  json_body string
+)
+STORED AS TEXTFILE LOCATION '/json/students';
 
-    INSERT OVERWRITE TABLE StudentsOneLine
-    SELECT CONCAT_WS(' ',COLLECT_LIST(textcol)) AS singlelineJSON 
-          FROM (SELECT INPUT__FILE__NAME,BLOCK__OFFSET__INSIDE__FILE, textcol FROM StudentsRaw DISTRIBUTE BY INPUT__FILE__NAME SORT BY BLOCK__OFFSET__INSIDE__FILE) x
-          GROUP BY INPUT__FILE__NAME;
+INSERT OVERWRITE TABLE StudentsOneLine
+SELECT CONCAT_WS(' ',COLLECT_LIST(textcol)) AS singlelineJSON 
+      FROM (SELECT INPUT__FILE__NAME,BLOCK__OFFSET__INSIDE__FILE, textcol FROM StudentsRaw DISTRIBUTE BY INPUT__FILE__NAME SORT BY BLOCK__OFFSET__INSIDE__FILE) x
+      GROUP BY INPUT__FILE__NAME;
 
-    SELECT * FROM StudentsOneLine
+SELECT * FROM StudentsOneLine
+```
 
 原始 JSON 文件位于 **wasbs://processjson@hditutorialdata.blob.core.windows.net/**。 *StudentsRaw* Hive 表指向原始未平展的 JSON 文档。
 
@@ -107,10 +111,12 @@ Hive 提供名为 [get\_json\_object](https://cwiki.apache.org/confluence/displa
 
 获取每位学生的名字和姓氏
 
-    SELECT 
-      GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.FirstName'), 
-      GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.LastName') 
-    FROM StudentsOneLine;
+```
+SELECT 
+  GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.FirstName'), 
+  GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.LastName') 
+FROM StudentsOneLine;
+```
 
 以下是在控制台窗口中执行此查询时的输出。
 
@@ -127,10 +133,12 @@ get-json\_object UDF 存在一些限制。
 
 Hive 提供的另一个 UDF 称为 [json\_tuple](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-json_tuple)，其性能比 [get\_ json \_object](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-get_json_object) 要高。该方法采用一组键和 JSON 字符串，并使用一个函数返回值的元组。以下查询将从 JSON 文档返回学生 ID 和年级：
 
-    SELECT q1.StudentId, q1.Grade 
-      FROM StudentsOneLine jt
-      LATERAL VIEW JSON_TUPLE(jt.json_body, 'StudentId', 'Grade') q1
-        AS StudentId, Grade;
+```
+SELECT q1.StudentId, q1.Grade 
+  FROM StudentsOneLine jt
+  LATERAL VIEW JSON_TUPLE(jt.json_body, 'StudentId', 'Grade') q1
+    AS StudentId, Grade;
+```
 
 此脚本在 Hive 控制台中的输出：
 
@@ -173,38 +181,44 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 6：在 hive 提示符下，键入“add jar /path/to/json-serde-1.1.9.9-Hive13-jar-with-dependencies.jar”。在此示例中，由于 jar 在 C:\\apps\\dist\\hive-0.13.x\\bin 文件夹中，因此可以直接添加名称如下的 jar：
 
-    add jar json-serde-1.1.9.9-Hive13-jar-with-dependencies.jar;
+```
+add jar json-serde-1.1.9.9-Hive13-jar-with-dependencies.jar;
 
-    ![Adding JAR to your project][image-hdi-hivejson-addjar]
+![Adding JAR to your project][image-hdi-hivejson-addjar]
+```
 
 现在，可以使用 SerDe 对 JSON 文档执行查询。
 
 以下语句将创建包含所定义架构的表
 
-    DROP TABLE json_table;
-    CREATE EXTERNAL TABLE json_table (
-      StudentId string, 
-      Grade int,
-      StudentDetails array<struct<
-          FirstName:string,
-          LastName:string,
-          YearJoined:int
-          >
-      >,
-      StudentClassCollection array<struct<
-          ClassId:string,
-          ClassParticipation:string,
-          ClassParticipationRank:string,
-          Score:int,
-          PerformedActivity:boolean
-          >
+```
+DROP TABLE json_table;
+CREATE EXTERNAL TABLE json_table (
+  StudentId string, 
+  Grade int,
+  StudentDetails array<struct<
+      FirstName:string,
+      LastName:string,
+      YearJoined:int
       >
-    ) ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
-    LOCATION '/json/students';
+  >,
+  StudentClassCollection array<struct<
+      ClassId:string,
+      ClassParticipation:string,
+      ClassParticipationRank:string,
+      Score:int,
+      PerformedActivity:boolean
+      >
+  >
+) ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
+LOCATION '/json/students';
+```
 
 列出学生的名字和姓氏
 
-    SELECT StudentDetails.FirstName, StudentDetails.LastName FROM json_table;
+```
+SELECT StudentDetails.FirstName, StudentDetails.LastName FROM json_table;
+```
 
 以下是 Hive 控制台输出的结果。
 
@@ -212,9 +226,11 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 计算 JSON 文档的总分
 
-    SELECT SUM(scores)
-    FROM json_table jt
-      lateral view explode(jt.StudentClassCollection.Score) collection as scores;
+```
+SELECT SUM(scores)
+FROM json_table jt
+  lateral view explode(jt.StudentClassCollection.Score) collection as scores;
+```
 
 以上查询使用 [lateral view explode](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+LateralView) UDF 展开分数数组，以便可以求和。
 
@@ -230,7 +246,9 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 如果要跳过格式不正确的 JSON，可以根据此 SerDe 的 [wiki 页面](https://github.com/sheetaldolas/Hive-JSON-Serde/tree/master)中所述，通过键入以下代码实现此目的：
 
-    ALTER TABLE json_table SET SERDEPROPERTIES ( "ignore.malformed.json" = "true");
+```
+ALTER TABLE json_table SET SERDEPROPERTIES ( "ignore.malformed.json" = "true");
+```
 
 ##摘要
 总之，在 Hive 中选择 JSON 运算符类型取决于方案。如果拥有简单的 JSON 文档，并且只有一个用于查找的字段，可以选择使用 Hive UDF get\_json\_object。如果拥有多个用于查找的键，可以使用 json\_tuple。如果拥有嵌套文档，应该使用 JSON SerDe。

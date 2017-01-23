@@ -74,43 +74,45 @@ ms.author: chackdan
 
 “supportExpiryUtc”告知给定的版本即将过期或已过期。最新版本没有有效日期 - 它的值为“9999-12-31T23:59:59.9999999”，这只是表示尚未设置过期日期。
 
-    GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
+```
+GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
 
-    Output:
-    {
-                      "value": [
-                        {
-                          "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.0.1427.9490",
-                          "name": "5.0.1427.9490",
-                          "type": "Microsoft.ServiceFabric/environments/clusterVersions",
-                          "properties": {
-                            "codeVersion": "5.0.1427.9490",
-                            "supportExpiryUtc": "2016-11-26T23:59:59.9999999",
-                            "environment": "Windows"
-                          }
-                        },
-                        {
-                          "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.0.1427.9490",
-                          "name": "5.1.1427.9490",
-                          "type": " Microsoft.ServiceFabric/environments/clusterVersions",
-                          "properties": {
-                            "codeVersion": "5.1.1427.9490",
-                            "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                            "environment": "Windows"
-                          }
-                        },
-                        {
-                          "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.4.1427.9490",
-                          "name": "4.4.1427.9490",
-                          "type": " Microsoft.ServiceFabric/environments/clusterVersions",
-                          "properties": {
-                            "codeVersion": "4.4.1427.9490",
-                            "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                            "environment": "Linux"
-                          }
-                        }
-                      ]
+Output:
+{
+                  "value": [
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.0.1427.9490",
+                      "name": "5.0.1427.9490",
+                      "type": "Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "5.0.1427.9490",
+                        "supportExpiryUtc": "2016-11-26T23:59:59.9999999",
+                        "environment": "Windows"
+                      }
+                    },
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.0.1427.9490",
+                      "name": "5.1.1427.9490",
+                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "5.1.1427.9490",
+                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                        "environment": "Windows"
+                      }
+                    },
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.4.1427.9490",
+                      "name": "4.4.1427.9490",
+                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "4.4.1427.9490",
+                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                        "environment": "Linux"
+                      }
                     }
+                  ]
+                }
+```
 
 ## 群集升级模式为“自动”时的结构升级行为
 

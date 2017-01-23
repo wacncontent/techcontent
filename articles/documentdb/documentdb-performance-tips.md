@@ -30,16 +30,16 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
 
     客户端连接到 Azure DocumentDB 的方式对性能有重大影响（尤其对观察到的客户端延迟而言）。有两个重要配置设置可用于配置客户端连接策略 - 连接*模式*和连接*协议*。两种可用模式：
 
-    1. 网关模式（默认）
-    2. 直接模式
+   1. 网关模式（默认）
+   2. 直接模式
 
       网关模式受所有 SDK 平台的支持并已配置为默认设置。如果应用程序在有严格防火墙限制的企业网络中运行，则网关模式是最佳选择，因为它使用标准 HTTPS 端口与单个终结点。但是，对于性能的影响是每次读取或写入 DocumentDB 数据时，网关模式都涉及到额外的网络跃点。因此，直接模式因为网络跃点较少，可以提供更好的性能。
 2. **连接策略：使用 TCP 协议**
 
     利用直接模式时，有两个可用的协议选项： <a name="connection-protocol"></a>
 
-    - TCP
-    - HTTPS
+   - TCP
+   - HTTPS
 
      DocumentDB 提供基于 HTTPS 的简单开放 RESTful 编程模型。此外，它提供高效的 TCP 协议，该协议在其通信模型中也是 RESTful，可通过 .NET 客户端 SDK 获得。直接 TCP 和 HTTPS 都使用 SSL 进行初始身份验证和加密流量。为了获得最佳性能，请尽可能使用 TCP 协议。
 
@@ -47,15 +47,17 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
 
      连接模式是在构造 DocumentClient 实例期间使用 ConnectionPolicy 参数配置的。如果使用直接模式，则也可以在 ConnectionPolicy 参数中设置协议。
 
-         var serviceEndpoint = new Uri("https://contoso.documents.net");
-         var authKey = new "your authKey from Azure Mngt Portal";
-         DocumentClient client = new DocumentClient(serviceEndpoint, authKey,
-         new ConnectionPolicy
-         {
+     ```
+     var serviceEndpoint = new Uri("https://contoso.documents.net");
+     var authKey = new "your authKey from Azure Mngt Portal";
+     DocumentClient client = new DocumentClient(serviceEndpoint, authKey,
+     new ConnectionPolicy
+     {
 
-             ConnectionMode = ConnectionMode.Direct,
-             ConnectionProtocol = Protocol.Tcp
-         });
+         ConnectionMode = ConnectionMode.Direct,
+         ConnectionProtocol = Protocol.Tcp
+     });
+     ```
 
      由于只有直接模式支持 TCP，因此如果使用网关模式，HTTPS 协议始终用来与网关通信，并忽略 ConnectionPolicy 中的 Protocol 值。
 
@@ -64,7 +66,9 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
 
     默认情况下，第一个请求因为必须提取地址路由表而有较高的延迟。为了避免首次请求时的这种启动延迟，应该在初始化期间调用 OpenAsync() 一次，如下所示。
 
-        await client.OpenAsync();
+    ```
+    await client.OpenAsync();
+    ```
 
 4. **将客户端并置在同一个 Azure 区域以提高性能** <a id="same-region"></a>
 
@@ -119,7 +123,9 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
 
     也可以使用可用的 DocumentDB SDK 设置页面大小。例如：
 
-        IQueryable<dynamic> authorResults = client.CreateDocumentQuery(documentCollection.SelfLink, "SELECT p.Author FROM Pages p WHERE p.Title = 'About Seattle'", new FeedOptions { MaxItemCount = 1000 });
+    ```
+    IQueryable<dynamic> authorResults = client.CreateDocumentQuery(documentCollection.SelfLink, "SELECT p.Author FROM Pages p WHERE p.Title = 'About Seattle'", new FeedOptions { MaxItemCount = 1000 });
+    ```
 10. **增加线程/任务数目**
 
     请参阅“网络”部分中的[增加线程/任务数目](#increase-threads)。
@@ -136,10 +142,12 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
 
     DocumentDB 的索引策略还可让你使用索引路径（IndexingPolicy.IncludedPaths 和 IndexingPolicy.ExcludedPaths）指定要在索引中包括或排除的文档路径。在事先知道查询模式的方案中，使用索引路径可改善写入性能并降低索引存储空间，因为索引成本与索引的唯一路径数目直接相关。例如，以下代码演示了如何使用“*”通配符从索引中排除文档的整个部分（也称为子树）。
 
-        var collection = new DocumentCollection { Id = "excludedPathCollection" };
-        collection.IndexingPolicy.IncludedPaths.Add(new IncludedPath { Path = "/*" });
-        collection.IndexingPolicy.ExcludedPaths.Add(new ExcludedPath { Path = "/nonIndexedContent/*");
-        collection = await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), excluded);
+    ```
+    var collection = new DocumentCollection { Id = "excludedPathCollection" };
+    collection.IndexingPolicy.IncludedPaths.Add(new IncludedPath { Path = "/*" });
+    collection.IndexingPolicy.ExcludedPaths.Add(new ExcludedPath { Path = "/nonIndexedContent/*");
+    collection = await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), excluded);
+    ```
 
     有关详细信息，请参阅 [DocumentDB indexing policies](./documentdb-indexing-policies.md)（DocumentDB 索引策略）。
 
@@ -155,25 +163,29 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
 
     若要测量任何操作（创建、更新或删除）的开销，请检查 x-ms-request-charge header 标头（或同等的 .NET SDK 中 ResourceResponse<T> 或 FeedResponse<T> 中的 RequestCharge 属性）来测量这些操作占用的请求单位数。
 
-        // Measure the performance (request units) of writes
-        ResourceResponse<Document> response = await client.CreateDocumentAsync(collectionSelfLink, myDocument);
-        Console.WriteLine("Insert of document consumed {0} request units", response.RequestCharge);
-        // Measure the performance (request units) of queries
-        IDocumentQuery<dynamic> queryable = client.CreateDocumentQuery(collectionSelfLink, queryString).AsDocumentQuery();
-        while (queryable.HasMoreResults)
-             {
-                  FeedResponse<dynamic> queryResponse = await queryable.ExecuteNextAsync<dynamic>();
-                  Console.WriteLine("Query batch consumed {0} request units", queryResponse.RequestCharge);
-             }
+    ```
+    // Measure the performance (request units) of writes
+    ResourceResponse<Document> response = await client.CreateDocumentAsync(collectionSelfLink, myDocument);
+    Console.WriteLine("Insert of document consumed {0} request units", response.RequestCharge);
+    // Measure the performance (request units) of queries
+    IDocumentQuery<dynamic> queryable = client.CreateDocumentQuery(collectionSelfLink, queryString).AsDocumentQuery();
+    while (queryable.HasMoreResults)
+         {
+              FeedResponse<dynamic> queryResponse = await queryable.ExecuteNextAsync<dynamic>();
+              Console.WriteLine("Query batch consumed {0} request units", queryResponse.RequestCharge);
+         }
+    ```
 
     在此标头中返回的请求费用是预配吞吐量的一小部分（即 2000 RU/秒）。例如，如果上述查询返回 1000 个 1KB 文档，则操作成本是 1000。因此在一秒内，服务器在限制后续请求之前，只接受两个此类请求。有关详细信息，请参阅 [Request units](./documentdb-request-units.md)（请求单位）和 [request unit calculator](https://www.documentdb.com/capacityplanner)（请求单位计算器）。
 2. **处理速率限制/请求速率太大**
 
     当客户端尝试超过帐户保留的吞吐量时，服务器的性能不会降低，并且不使用超过保留级别的吞吐量容量。服务器将会抢先结束 RequestRateTooLarge（HTTP 状态代码 429）的请求并返回 x-ms-retry-after-ms 标头，该标头指示重试请求前用户必须等待的时间数量（以毫秒为单位）。
 
-        HTTP Status 429,
-        Status Line: RequestRateTooLarge
-        x-ms-retry-after-ms :100
+    ```
+    HTTP Status 429,
+    Status Line: RequestRateTooLarge
+    x-ms-retry-after-ms :100
+    ```
 
     SDK 全部都会隐式捕获此响应，并遵循服务器指定的 retry-after 标头，然后重试请求。除非多个客户端同时访问你的帐户，否则下次重试就会成功。
 

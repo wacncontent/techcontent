@@ -80,57 +80,61 @@ ms.author: tomfitz
 
 从用于将值传递到模板的 **参数文件（而不是模板）** 内部引用密钥。你可以通过传递密钥保管库的资源标识符和机密的名称来引用机密。在以下示例中，密钥保管库机密必须已存在，而且用户提供其资源 ID 的静态值。
 
-    {
-        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-          "sqlsvrAdminLoginPassword": {
-            "reference": {
-              "keyVault": {
-                "id": "/subscriptions/{guid}/resourceGroups/{group-name}/providers/Microsoft.KeyVault/vaults/{vault-name}"
-              },
-              "secretName": "adminPassword"
-            }
+```
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "sqlsvrAdminLoginPassword": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/{guid}/resourceGroups/{group-name}/providers/Microsoft.KeyVault/vaults/{vault-name}"
           },
-          "sqlsvrAdminLogin": {
-            "value": "exampleadmin"
-          }
+          "secretName": "adminPassword"
         }
+      },
+      "sqlsvrAdminLogin": {
+        "value": "exampleadmin"
+      }
     }
+}
+```
 
 在模板中，接受密钥的参数应是 **securestring**。以下示例显示了某个模板的相关部分，该模板将部署需要管理员密码的 SQL Server。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "sqlsvrAdminLogin": {
-                "type": "string",
-                "minLength": 4
-            },
-            "sqlsvrAdminLoginPassword": {
-                "type": "securestring"
-            },
-            ...
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sqlsvrAdminLogin": {
+            "type": "string",
+            "minLength": 4
         },
-        "resources": [
-            {
-              "name": "[variables('sqlsvrName')]",
-              "type": "Microsoft.Sql/servers",
-              "location": "[resourceGroup().location]",
-              "apiVersion": "2014-04-01-preview",
-              "properties": {
-                  "administratorLogin": "[parameters('sqlsvrAdminLogin')]",
-                  "administratorLoginPassword": "[parameters('sqlsvrAdminLoginPassword')]"
-              },
-              ...
-            }
-        ],
-        "variables": {
-            "sqlsvrName": "[concat('sqlsvr', uniqueString(resourceGroup().id))]"
+        "sqlsvrAdminLoginPassword": {
+            "type": "securestring"
         },
-        "outputs": { }
-    }
+        ...
+    },
+    "resources": [
+        {
+          "name": "[variables('sqlsvrName')]",
+          "type": "Microsoft.Sql/servers",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2014-04-01-preview",
+          "properties": {
+              "administratorLogin": "[parameters('sqlsvrAdminLogin')]",
+              "administratorLoginPassword": "[parameters('sqlsvrAdminLoginPassword')]"
+          },
+          ...
+        }
+    ],
+    "variables": {
+        "sqlsvrName": "[concat('sqlsvr', uniqueString(resourceGroup().id))]"
+    },
+    "outputs": { }
+}
+```
 
 ## 通过动态 ID 引用机密
 
@@ -138,42 +142,44 @@ ms.author: tomfitz
 
 若要动态生成密钥保管库机密的资源 ID，必须将需要机密的资源移至嵌套式模板中。需要在主模板中添加嵌套式模板，然后传入包含动态生成的资源 ID 的参数。
 
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "vaultName": {
+        "type": "string"
+      },
+      "secretName": {
+        "type": "string"
+      }
+    },
+    "resources": [
     {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-          "vaultName": {
-            "type": "string"
-          },
-          "secretName": {
-            "type": "string"
-          }
+      "apiVersion": "2015-01-01",
+      "name": "nestedTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "incremental",
+        "templateLink": {
+          "uri": "https://www.contoso.com/AzureTemplates/newVM.json",
+          "contentVersion": "1.0.0.0"
         },
-        "resources": [
-        {
-          "apiVersion": "2015-01-01",
-          "name": "nestedTemplate",
-          "type": "Microsoft.Resources/deployments",
-          "properties": {
-            "mode": "incremental",
-            "templateLink": {
-              "uri": "https://www.contoso.com/AzureTemplates/newVM.json",
-              "contentVersion": "1.0.0.0"
-            },
-            "parameters": {
-              "adminPassword": {
-                "reference": {
-                  "keyVault": {
-                    "id": "[concat(resourceGroup().id, '/providers/Microsoft.KeyVault/vaults/', parameters('vaultName'))]"
-                  },
-                  "secretName": "[parameters('secretName')]"
-                }
-              }
+        "parameters": {
+          "adminPassword": {
+            "reference": {
+              "keyVault": {
+                "id": "[concat(resourceGroup().id, '/providers/Microsoft.KeyVault/vaults/', parameters('vaultName'))]"
+              },
+              "secretName": "[parameters('secretName')]"
             }
           }
-        }],
-        "outputs": {}
-    }
+        }
+      }
+    }],
+    "outputs": {}
+}
+```
 
 ## 后续步骤
 * 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)。

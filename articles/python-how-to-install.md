@@ -61,23 +61,31 @@ Azure SDK for Python 包括允许您针对 Azure 开发、部署和管理 Python
 
 可以为每个 Azure 服务分别安装每个库：
 
-    $ pip install azure-batch          # Install the latest Batch runtime library
-    $ pip install azure-mgmt-scheduler # Install the latest Storage management library
+```
+$ pip install azure-batch          # Install the latest Batch runtime library
+$ pip install azure-mgmt-scheduler # Install the latest Storage management library
+```
 
 可以使用 `--pre` 标志安装预览包：
 
-    $ pip install --pre azure-mgmt-compute # will install only the latest Compute Management library
+```
+$ pip install --pre azure-mgmt-compute # will install only the latest Compute Management library
+```
 
 还可以使用 `azure` 元程序包在单个行中安装一组 Azure 库。由于此元程序包中并非所有包都已作为稳定版本发布，因此 `azure` 元程序包仍为预览版。但是这一次，核心程序包的代码质量/完整性方面都可以被视为是“稳定”的
 - 我们将尽快将其正式标记为“稳定”（与其他语言同步）。在那之前，我们不会作出任何重大的更改。
 
 由于这是预览版本，需要使用 `--pre` 标志：
 
-    $ pip install --pre azure
+```
+$ pip install --pre azure
+```
 
 或直接
 
-    $ pip install azure==2.0.0rc6
+```
+$ pip install azure==2.0.0rc6
+```
 
 ## 获取多个软件包
 

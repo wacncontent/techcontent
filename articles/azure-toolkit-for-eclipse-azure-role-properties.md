@@ -222,10 +222,12 @@ ms.author: robmcm
 
 在 jsp 代码中，可以使用 `System.getenv` 方法显示该值：
 
-    <body>
-      <b> Hello World!</b>
-      <p>Running role version: <%= System.getenv("MyRoleVersion") %></p>
-    </body>
+```
+<body>
+  <b> Hello World!</b>
+  <p>Running role version: <%= System.getenv("MyRoleVersion") %></p>
+</body>
+```
 
 在应用程序运行时将生成此输出：
 

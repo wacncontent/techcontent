@@ -23,19 +23,25 @@
 
 如果应用程序在台式计算机或移动设备、Azure 虚拟机或 Azure Web 应用中运行，请使用 .NET 配置保存连接字符串（例如，保存在应用程序的 `web.config` 或 `app.config` 文件中）。使用 `<appSettings>` 元素存储连接字符串，如下所示。将 `account-name` 替换为您的存储帐户名称，将 `account-key` 替换为您的存储帐户密钥：
 
-    <configuration>
-          <appSettings>
-            <add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn" />
-          </appSettings>
-    </configuration>
+```
+<configuration>
+      <appSettings>
+        <add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn" />
+      </appSettings>
+</configuration>
+```
 
 例如，配置设置将类似于：
 
-    <add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn" />
+```
+<add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn" />
+```
 
 若要以存储模拟器为目标，可使用映射到已知帐户名称和密钥的快捷方式。在这种情况下，连接字符串设置将如下：
 
-    <add key="StorageConnectionString" value="UseDevelopmentStorage=true;" />
+```
+<add key="StorageConnectionString" value="UseDevelopmentStorage=true;" />
+```
 
 ### 配置 Azure 云服务的连接字符串
 

@@ -62,55 +62,73 @@ ms.author: mingzhan
 
 3. 通过运行以下命令卸载 NetworkManager：
 
-        # sudo rpm -e --nodeps NetworkManager
+    ```
+    # sudo rpm -e --nodeps NetworkManager
+    ```
 
     请注意，如果尚未安装此包，则该命令将失败，并显示一条错误消息。这是正常情况。
 
 4. 在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
 
-        NETWORKING=yes
-        HOSTNAME=localhost.localdomain
+    ```
+    NETWORKING=yes
+    HOSTNAME=localhost.localdomain
+    ```
 
 5. 在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
-        DEVICE=eth0
-        ONBOOT=yes
-        BOOTPROTO=dhcp
-        TYPE=Ethernet
-        USERCTL=no
-        PEERDNS=yes
-        IPV6INIT=no
+    ```
+    DEVICE=eth0
+    ONBOOT=yes
+    BOOTPROTO=dhcp
+    TYPE=Ethernet
+    USERCTL=no
+    PEERDNS=yes
+    IPV6INIT=no
+    ```
 
 6. 移动（或删除）udev 规则，以避免产生以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则会引发问题：
 
-        # sudo mkdir -m 0700 /var/lib/waagent
-        # sudo mv /lib/udev/rules.d/75-persistent-net-generator.rules /var/lib/waagent/
-        # sudo mv /etc/udev/rules.d/70-persistent-net.rules /var/lib/waagent/
+    ```
+    # sudo mkdir -m 0700 /var/lib/waagent
+    # sudo mv /lib/udev/rules.d/75-persistent-net-generator.rules /var/lib/waagent/
+    # sudo mv /etc/udev/rules.d/70-persistent-net.rules /var/lib/waagent/
+    ```
 
 7. 通过运行以下命令，确保网络服务将在引导时启动：
 
-        # sudo chkconfig network on
+    ```
+    # sudo chkconfig network on
+    ```
 
 8. 注册你的 Red Hat 订阅，以通过运行以下命令来启用来自 RHEL 存储库中的包的安装：
 
-        # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
+    # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
 
 9. WALinuxAgent 包 `WALinuxAgent-<version>` 已推送到 Red Hat extras 存储库。通过运行以下命令启用 extras 存储库：
 
-        # subscription-manager repos --enable=rhel-6-server-extras-rpms
+    ```
+    # subscription-manager repos --enable=rhel-6-server-extras-rpms
+    ```
 
 10. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开 `/boot/grub/menu.lst`，并确保默认内核包含以下参数：
 
-        console=ttyS0
-        earlyprintk=ttyS0
-        rootdelay=300
-        numa=off
+    ```
+    console=ttyS0
+    earlyprintk=ttyS0
+    rootdelay=300
+    numa=off
+    ```
 
     这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题。由于 RHEL 6 所使用的内核版本中存在 bug，因此这将禁用 NUMA。
 
     除上述操作以外，建议删除以下参数：
 
-        rhgb quiet crashkernel=auto
+    ```
+    rhgb quiet crashkernel=auto
+    ```
 
     图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。
 
@@ -118,33 +136,43 @@ ms.author: mingzhan
 
 11. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。修改 /etc/ssh/sshd\_config 以包含以下行：
 
-        ClientAliveInterval 180
+    ```
+    ClientAliveInterval 180
+    ```
 
 12. 通过运行以下命令来安装 Azure Linux 代理：
 
-        # sudo yum install WALinuxAgent
-        # sudo chkconfig waagent on
+    ```
+    # sudo yum install WALinuxAgent
+    # sudo chkconfig waagent on
+    ```
 
     请注意，如果没有如步骤 2 中所述删除 NetworkManager 包和 NetworkManager-gnome 包，则安装 WALinuxAgent 包将删除它们。
 
 13. 不要在操作系统磁盘上创建交换空间。
 Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并且当取消预配 VM 时可能会被清空。在安装 Azure Linux 代理（参见前一步骤）后，相应地在 /etc/waagent.conf 中修改以下参数：
 
-        ResourceDisk.Format=y
-        ResourceDisk.Filesystem=ext4
-        ResourceDisk.MountPoint=/mnt/resource
-        ResourceDisk.EnableSwap=y
-        ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
+    ResourceDisk.Format=y
+    ResourceDisk.Filesystem=ext4
+    ResourceDisk.MountPoint=/mnt/resource
+    ResourceDisk.EnableSwap=y
+    ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
 
 14. 通过运行以下命令取消注册订阅（如有必要）：
 
-        # sudo subscription-manager unregister
+    ```
+    # sudo subscription-manager unregister
+    ```
 
 15. 运行以下命令可取消对虚拟机的预配并且对其进行准备以便在 Azure 上进行预配：
 
-        # sudo waagent -force -deprovision
-        # export HISTSIZE=0
-        # logout
+    ```
+    # sudo waagent -force -deprovision
+    # export HISTSIZE=0
+    # logout
+    ```
 
 16. 在 Hyper-V 管理器中单击“操作”>“关闭”。Linux VHD 现已准备好上载到 Azure。 
 
@@ -156,73 +184,99 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 3. 在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
 
-        NETWORKING=yes
-        HOSTNAME=localhost.localdomain
+    ```
+    NETWORKING=yes
+    HOSTNAME=localhost.localdomain
+    ```
 
 4. 在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
-        DEVICE=eth0
-        ONBOOT=yes
-        BOOTPROTO=dhcp
-        TYPE=Ethernet
-        USERCTL=no
-        PEERDNS=yes
-        IPV6INIT=no
+    ```
+    DEVICE=eth0
+    ONBOOT=yes
+    BOOTPROTO=dhcp
+    TYPE=Ethernet
+    USERCTL=no
+    PEERDNS=yes
+    IPV6INIT=no
+    ```
 
 5. 通过运行以下命令，确保网络服务将在引导时启动：
 
-        # sudo chkconfig network on
+    ```
+    # sudo chkconfig network on
+    ```
 
 6. 注册你的 Red Hat 订阅，以通过运行以下命令来启用来自 RHEL 存储库中的包的安装：
 
-        # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
+    # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
 
 7. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开 `/etc/default/grub` 并编辑 **GRUB\_CMDLINE\_LINUX** 参数。例如：
 
-        GRUB_CMDLINE_LINUX="rootdelay=300
-        console=ttyS0
-        earlyprintk=ttyS0"
+    ```
+    GRUB_CMDLINE_LINUX="rootdelay=300
+    console=ttyS0
+    earlyprintk=ttyS0"
+    ```
 
     这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题。除上述操作以外，建议删除以下参数：
 
-        rhgb quiet crashkernel=auto
+    ```
+    rhgb quiet crashkernel=auto
+    ```
 
     图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。可以根据需要配置 crashkernel 选项，但请注意，此参数会使 VM 中的可用内存量减少 128 MB 或更多。这可能对于较小的 VM 大小有问题。
 
 8. 完成 `/etc/default/grub` 编辑后，运行以下命令以重新生成 grub 配置：
 
-        # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
+    # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
 
 9. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。修改 `/etc/ssh/sshd_config` 以包含以下行：
 
-        ClientAliveInterval 180
+    ```
+    ClientAliveInterval 180
+    ```
 
 10. WALinuxAgent 包 `WALinuxAgent-<version>` 已推送到 Red Hat extras 存储库。通过运行以下命令启用 extras 存储库：
 
-        # subscription-manager repos --enable=rhel-7-server-extras-rpms
+    ```
+    # subscription-manager repos --enable=rhel-7-server-extras-rpms
+    ```
 
 11. 通过运行以下命令来安装 Azure Linux 代理：
 
-        # sudo yum install WALinuxAgent
-        # sudo systemctl enable waagent.service
+    ```
+    # sudo yum install WALinuxAgent
+    # sudo systemctl enable waagent.service
+    ```
 
 12. 不要在操作系统磁盘上创建交换空间。Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并且当取消预配 VM 时可能会被清空。安装 Azure Linux 代理（参见上一步）后，相应地在 `/etc/waagent.conf` 中修改以下参数：
 
-        ResourceDisk.Format=y
-        ResourceDisk.Filesystem=ext4
-        ResourceDisk.MountPoint=/mnt/resource
-        ResourceDisk.EnableSwap=y
-        ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
+    ResourceDisk.Format=y
+    ResourceDisk.Filesystem=ext4
+    ResourceDisk.MountPoint=/mnt/resource
+    ResourceDisk.EnableSwap=y
+    ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
 
 13. 如果你想要取消注册订阅，运行以下命令：
 
-        # sudo subscription-manager unregister
+    ```
+    # sudo subscription-manager unregister
+    ```
 
 14. 运行以下命令可取消对虚拟机的预配并且对其进行准备以便在 Azure 上进行预配：
 
-        # sudo waagent -force -deprovision
-        # export HISTSIZE=0
-        # logout
+    ```
+    # sudo waagent -force -deprovision
+    # export HISTSIZE=0
+    # logout
+    ```
 
 15. 在 Hyper-V 管理器中单击“操作”>“关闭”。Linux VHD 现已准备好上载到 Azure。 
 
@@ -236,16 +290,20 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     生成加密密码，然后复制命令的输出：
 
-        # openssl passwd -1 changeme
+    ```
+    # openssl passwd -1 changeme
+    ```
 
     使用 guestfish 设置 root 密码：
 
-        # guestfish --rw -a <image-name>
-        ><fs> run
-        ><fs> list-filesystems
-        ><fs> mount /dev/sda1 /
-        ><fs> vi /etc/shadow
-        ><fs> exit
+    ```
+    # guestfish --rw -a <image-name>
+    ><fs> run
+    ><fs> list-filesystems
+    ><fs> mount /dev/sda1 /
+    ><fs> vi /etc/shadow
+    ><fs> exit
+    ```
 
     将 root 用户的第二个字段从“!!”更改为加密密码。
 
@@ -253,42 +311,56 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 4. 在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
 
-        NETWORKING=yes
-        HOSTNAME=localhost.localdomain
+    ```
+    NETWORKING=yes
+    HOSTNAME=localhost.localdomain
+    ```
 
 5. 在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
-        DEVICE=eth0
-        ONBOOT=yes
-        BOOTPROTO=dhcp
-        TYPE=Ethernet
-        USERCTL=no
-        PEERDNS=yes
-        IPV6INIT=no
+    ```
+    DEVICE=eth0
+    ONBOOT=yes
+    BOOTPROTO=dhcp
+    TYPE=Ethernet
+    USERCTL=no
+    PEERDNS=yes
+    IPV6INIT=no
+    ```
 
 6. 移动（或删除）udev 规则，以避免产生以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则会引发问题：
 
-        # mkdir -m 0700 /var/lib/waagent
-        # mv /lib/udev/rules.d/75-persistent-net-generator.rules /var/lib/waagent/
-        # mv /etc/udev/rules.d/70-persistent-net.rules /var/lib/waagent/
+    ```
+    # mkdir -m 0700 /var/lib/waagent
+    # mv /lib/udev/rules.d/75-persistent-net-generator.rules /var/lib/waagent/
+    # mv /etc/udev/rules.d/70-persistent-net.rules /var/lib/waagent/
+    ```
 
 7. 通过运行以下命令，确保网络服务将在引导时启动：
 
-        # chkconfig network on
+    ```
+    # chkconfig network on
+    ```
 
 8. 注册你的 Red Hat 订阅，以通过运行以下命令来启用来自 RHEL 存储库中的包的安装：
 
-        # subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
+    # subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
 
 9. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开 `/boot/grub/menu.lst`，并确保默认内核包含以下参数：
 
-        console=ttyS0 earlyprintk=ttyS0 rootdelay=300 numa=off
+    ```
+    console=ttyS0 earlyprintk=ttyS0 rootdelay=300 numa=off
+    ```
 
     这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题。由于 RHEL 6 所使用的内核版本中存在 bug，因此这将禁用 NUMA。
 
     除上述操作以外，建议删除以下参数：
 
-        rhgb quiet crashkernel=auto
+    ```
+    rhgb quiet crashkernel=auto
+    ```
 
     图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。可以根据需要配置 crashkernel 选项，但请注意，此参数会使 VM 中的可用内存量减少 128 MB 或更多。这可能对于较小的 VM 大小有问题。
 
@@ -296,62 +368,86 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     编辑 `/etc/dracut.conf` 并添加以下内容：
 
-        add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+    ```
+    add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+    ```
 
     重新生成 initramfs：
 
-        # dracut -f -v
+    ```
+    # dracut -f -v
+    ```
 
 11. 卸载 cloud-init：
 
-        # yum remove cloud-init
+    ```
+    # yum remove cloud-init
+    ```
 
 12. 确保已安装 SSH 服务器且已将其配置为在引导时启动。
 
-        # chkconfig sshd on
+    ```
+    # chkconfig sshd on
+    ```
 
     修改 /etc/ssh/sshd\_config 以包含以下行：
 
-        PasswordAuthentication yes
-        ClientAliveInterval 180
+    ```
+    PasswordAuthentication yes
+    ClientAliveInterval 180
+    ```
 
     重新启动 sshd：
 
-        # service sshd restart
+    ```
+    # service sshd restart
+    ```
 
 13. WALinuxAgent 包 `WALinuxAgent-<version>` 已推送到 Red Hat extras 存储库。通过运行以下命令启用 extras 存储库：
 
-        # subscription-manager repos --enable=rhel-6-server-extras-rpms
+    ```
+    # subscription-manager repos --enable=rhel-6-server-extras-rpms
+    ```
 
 14. 通过运行以下命令来安装 Azure Linux 代理：
 
-        # yum install WALinuxAgent
-        # chkconfig waagent on
+    ```
+    # yum install WALinuxAgent
+    # chkconfig waagent on
+    ```
 
 15. Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并且当取消预配 VM 时可能会被清空。在安装 Azure Linux 代理（参见前一步骤）后，相应地在 **/etc/waagent.conf** 中修改以下参数：
 
-        ResourceDisk.Format=y
-        ResourceDisk.Filesystem=ext4
-        ResourceDisk.MountPoint=/mnt/resource
-        ResourceDisk.EnableSwap=y
-        ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
+    ResourceDisk.Format=y
+    ResourceDisk.Filesystem=ext4
+    ResourceDisk.MountPoint=/mnt/resource
+    ResourceDisk.EnableSwap=y
+    ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
 
 16. 通过运行以下命令取消注册订阅（如有必要）：
 
-        # subscription-manager unregister
+    ```
+    # subscription-manager unregister
+    ```
 
 17. 运行以下命令可取消对虚拟机的预配并且对其进行准备以便在 Azure 上进行预配：
 
-        # waagent -force -deprovision
-        # export HISTSIZE=0
-        # logout
+    ```
+    # waagent -force -deprovision
+    # export HISTSIZE=0
+    # logout
+    ```
 
 18. 关闭 KVM 中的 VM。
 
 19. 将 qcow2 映像转换为 VHD 格式。
     首先将此映像转换为原始格式：
 
-         # qemu-img convert -f qcow2 -O raw rhel-6.7.qcow2 rhel-6.7.raw
+    ```
+     # qemu-img convert -f qcow2 -O raw rhel-6.7.qcow2 rhel-6.7.raw
+    ```
     请确保原始映像大小为 1 MB。如果不是，请将大小四舍五入，使其等于 1 MB：
 
          # MB=$((1024*1024))
@@ -363,7 +459,9 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     将原始磁盘转换为固定大小的 VHD：
 
-         # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
+     ```
+    # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
+    ```
 
 ### <a id="rhel7xkvm"></a>从 KVM 准备 RHEL 7.1/7.2 虚拟机###
 
@@ -373,16 +471,20 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     生成加密密码，然后复制命令的输出：
 
-        # openssl passwd -1 changeme
+    ```
+    # openssl passwd -1 changeme
+    ```
 
     使用 guestfish 设置 root 密码。
 
-        # guestfish --rw -a <image-name>
-        ><fs> run
-        ><fs> list-filesystems
-        ><fs> mount /dev/sda1 /
-        ><fs> vi /etc/shadow
-        ><fs> exit
+    ```
+    # guestfish --rw -a <image-name>
+    ><fs> run
+    ><fs> list-filesystems
+    ><fs> mount /dev/sda1 /
+    ><fs> vi /etc/shadow
+    ><fs> exit
+    ```
 
     将 root 用户的第二个字段从“!!”更改为加密密码。
 
@@ -390,99 +492,137 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 4. 在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
 
-        NETWORKING=yes
-        HOSTNAME=localhost.localdomain
+    ```
+    NETWORKING=yes
+    HOSTNAME=localhost.localdomain
+    ```
 
 5. 在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
-        DEVICE=eth0
-        ONBOOT=yes
-        BOOTPROTO=dhcp
-        TYPE=Ethernet
-        USERCTL=no
-        PEERDNS=yes
-        IPV6INIT=no
+    ```
+    DEVICE=eth0
+    ONBOOT=yes
+    BOOTPROTO=dhcp
+    TYPE=Ethernet
+    USERCTL=no
+    PEERDNS=yes
+    IPV6INIT=no
+    ```
 
 6. 通过运行以下命令，确保网络服务将在引导时启动：
 
-        # chkconfig network on
+    ```
+    # chkconfig network on
+    ```
 
 7. 注册你的 Red Hat 订阅，以通过运行以下命令来启用来自 RHEL 存储库中的包的安装：
 
-        # subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
+    # subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
 
 8. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开 `/etc/default/grub` 并编辑 **GRUB\_CMDLINE\_LINUX** 参数。例如：
 
-        GRUB_CMDLINE_LINUX="rootdelay=300
-        console=ttyS0
-        earlyprintk=ttyS0"
+    ```
+    GRUB_CMDLINE_LINUX="rootdelay=300
+    console=ttyS0
+    earlyprintk=ttyS0"
+    ```
 
     这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题。除上述操作以外，建议删除以下参数：
 
-        rhgb quiet crashkernel=auto
+    ```
+    rhgb quiet crashkernel=auto
+    ```
 
     图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。可以根据需要配置 crashkernel 选项，但请注意，此参数会使 VM 中的可用内存量减少 128 MB 或更多。这可能对于较小的 VM 大小有问题。
 
 9. 完成 `/etc/default/grub` 编辑后，运行以下命令以重新生成 grub 配置：
 
-        # grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
+    # grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
 
 10. 将 Hyper-V 模块添加到 initramfs 中：
 
     编辑 `/etc/dracut.conf` 并添加以下内容：
 
-        add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+    ```
+    add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+    ```
 
     重新生成 initramfs：
 
-        # dracut -f -v
+    ```
+    # dracut -f -v
+    ```
 
 11. 卸载 cloud-init：
 
-        # yum remove cloud-init
+    ```
+    # yum remove cloud-init
+    ```
 
 12. 确保已安装 SSH 服务器且已将其配置为在引导时启动。
 
-        # systemctl enable sshd
+    ```
+    # systemctl enable sshd
+    ```
 
     修改 /etc/ssh/sshd\_config 以包含以下行：
 
-        PasswordAuthentication yes
-        ClientAliveInterval 180
+    ```
+    PasswordAuthentication yes
+    ClientAliveInterval 180
+    ```
 
     重新启动 sshd：
 
-        systemctl restart sshd
+    ```
+    systemctl restart sshd
+    ```
 
 13. WALinuxAgent 包 `WALinuxAgent-<version>` 已推送到 Red Hat extras 存储库。通过运行以下命令启用 extras 存储库：
 
-        # subscription-manager repos --enable=rhel-7-server-extras-rpms
+    ```
+    # subscription-manager repos --enable=rhel-7-server-extras-rpms
+    ```
 
 14. 通过运行以下命令来安装 Azure Linux 代理：
 
-        # yum install WALinuxAgent
+    ```
+    # yum install WALinuxAgent
+    ```
 
     启用 waagent 服务：
 
-        # systemctl enable waagent.service
+    ```
+    # systemctl enable waagent.service
+    ```
 
 15. 不要在操作系统磁盘上创建交换空间。Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并且当取消预配 VM 时可能会被清空。安装 Azure Linux 代理（参见上一步）后，相应地在 `/etc/waagent.conf` 中修改以下参数：
 
-        ResourceDisk.Format=y
-        ResourceDisk.Filesystem=ext4
-        ResourceDisk.MountPoint=/mnt/resource
-        ResourceDisk.EnableSwap=y
-        ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
+    ResourceDisk.Format=y
+    ResourceDisk.Filesystem=ext4
+    ResourceDisk.MountPoint=/mnt/resource
+    ResourceDisk.EnableSwap=y
+    ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
 
 16. 通过运行以下命令取消注册订阅（如有必要）：
 
-        # subscription-manager unregister
+    ```
+    # subscription-manager unregister
+    ```
 
 17. 运行以下命令可取消对虚拟机的预配并且对其进行准备以便在 Azure 上进行预配：
 
-        # sudo waagent -force -deprovision
-        # export HISTSIZE=0
-        # logout
+    ```
+    # sudo waagent -force -deprovision
+    # export HISTSIZE=0
+    # logout
+    ```
 
 18. 关闭 KVM 中的虚拟机。
 
@@ -490,20 +630,26 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     首先将此映像转换为原始格式：
 
-         # qemu-img convert -f qcow2 -O raw rhel-7.1.qcow2 rhel-7.1.raw
+    ```
+     # qemu-img convert -f qcow2 -O raw rhel-7.1.qcow2 rhel-7.1.raw
+    ```
 
     请确保原始映像大小为 1 MB。如果不是，请将大小四舍五入，使其等于 1 MB：
 
-         # MB=$((1024*1024))
-         # size=$(qemu-img info -f raw --output json "rhel-7.1.raw" | \
-                  gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
-         # rounded_size=$((($size/$MB + 1)*$MB))
+    ```
+     # MB=$((1024*1024))
+     # size=$(qemu-img info -f raw --output json "rhel-7.1.raw" | \
+              gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
+     # rounded_size=$((($size/$MB + 1)*$MB))
 
-         # qemu-img resize rhel-7.1.raw $rounded_size
+     # qemu-img resize rhel-7.1.raw $rounded_size
+    ```
 
     将原始磁盘转换为固定大小的 VHD：
 
-         # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
+     ```
+    # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
+    ```
 
 ## 从 VMware 准备基于 Red Hat 的虚拟机
 ### 先决条件
@@ -519,53 +665,71 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 1. 通过运行以下命令卸载 NetworkManager：
 
-         # sudo rpm -e --nodeps NetworkManager
+    ```
+     # sudo rpm -e --nodeps NetworkManager
+    ```
 
     请注意，如果尚未安装此包，则该命令将失败，并显示一条错误消息。这是正常情况。
 
 2. 在包含以下文本的 /etc/sysconfig/ 目录中创建一个名为 **network** 的文件：
 
-        NETWORKING=yes
-        HOSTNAME=localhost.localdomain
+    ```
+    NETWORKING=yes
+    HOSTNAME=localhost.localdomain
+    ```
 
 3. 在包含以下文本的 /etc/sysconfig/network-scripts/ 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
-        DEVICE=eth0
-        ONBOOT=yes
-        BOOTPROTO=dhcp
-        TYPE=Ethernet
-        USERCTL=no
-        PEERDNS=yes
-        IPV6INIT=no
+    ```
+    DEVICE=eth0
+    ONBOOT=yes
+    BOOTPROTO=dhcp
+    TYPE=Ethernet
+    USERCTL=no
+    PEERDNS=yes
+    IPV6INIT=no
+    ```
 
 4. 移动（或删除）udev 规则，以避免产生以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则会引发问题：
 
-        # sudo mkdir -m 0700 /var/lib/waagent
-        # sudo mv /lib/udev/rules.d/75-persistent-net-generator.rules /var/lib/waagent/
-        # sudo mv /etc/udev/rules.d/70-persistent-net.rules /var/lib/waagent/
+    ```
+    # sudo mkdir -m 0700 /var/lib/waagent
+    # sudo mv /lib/udev/rules.d/75-persistent-net-generator.rules /var/lib/waagent/
+    # sudo mv /etc/udev/rules.d/70-persistent-net.rules /var/lib/waagent/
+    ```
 
 5. 通过运行以下命令，确保网络服务将在引导时启动：
 
-        # sudo chkconfig network on
+    ```
+    # sudo chkconfig network on
+    ```
 
 6. 注册你的 Red Hat 订阅，以通过运行以下命令来启用来自 RHEL 存储库中的包的安装：
 
-        # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
+    # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
 
 7. WALinuxAgent 包 `WALinuxAgent-<version>` 已推送到 Red Hat extras 存储库。通过运行以下命令启用 extras 存储库：
 
-        # subscription-manager repos --enable=rhel-6-server-extras-rpms
+    ```
+    # subscription-manager repos --enable=rhel-6-server-extras-rpms
+    ```
 
 8. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/boot/grub/menu.lst”，并确保默认内核包含以下参数：
 
-        console=ttyS0
-        earlyprintk=ttyS0
-        rootdelay=300
-        numa=off
+    ```
+    console=ttyS0
+    earlyprintk=ttyS0
+    rootdelay=300
+    numa=off
+    ```
 
     这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题。由于 RHEL 6 所使用的内核版本中存在 bug，因此这将禁用 NUMA。除上述操作以外，建议删除以下参数：
 
-        rhgb quiet crashkernel=auto
+    ```
+    rhgb quiet crashkernel=auto
+    ```
 
     图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。可以根据需要配置 crashkernel 选项，但请注意，此参数会使 VM 中的可用内存量减少 128 MB 或更多。这可能对于较小的 VM 大小有问题。
 
@@ -573,54 +737,72 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
         Edit `/etc/dracut.conf` and add content:
 
-            add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+        ```
+    add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+    ```
 
         Rebuild initramfs:
 
-            # dracut -f -v
+        ```
+    # dracut -f -v
+    ```
 
 10. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。修改 `/etc/ssh/sshd_config` 以包含以下行：
 
-        ClientAliveInterval 180
+    ```
+    ClientAliveInterval 180
+    ```
 
 11. 通过运行以下命令来安装 Azure Linux 代理：
 
-        # sudo yum install WALinuxAgent
-        # sudo chkconfig waagent on
+    ```
+    # sudo yum install WALinuxAgent
+    # sudo chkconfig waagent on
+    ```
 
 12. 请勿在操作系统磁盘上创建交换空间：
 
     Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并且当取消预配 VM 时可能会被清空。安装 Azure Linux 代理（参见上一步）后，相应地在 `/etc/waagent.conf` 中修改以下参数：
 
-        ResourceDisk.Format=y
-        ResourceDisk.Filesystem=ext4
-        ResourceDisk.MountPoint=/mnt/resource
-        ResourceDisk.EnableSwap=y
-        ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
+    ResourceDisk.Format=y
+    ResourceDisk.Filesystem=ext4
+    ResourceDisk.MountPoint=/mnt/resource
+    ResourceDisk.EnableSwap=y
+    ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
 
 13. 通过运行以下命令取消注册订阅（如有必要）：
 
-        # sudo subscription-manager unregister
+    ```
+    # sudo subscription-manager unregister
+    ```
 
 14. 运行以下命令可取消对虚拟机的预配并且对其进行准备以便在 Azure 上进行预配：
 
-        # sudo waagent -force -deprovision
-        # export HISTSIZE=0
-        # logout
+    ```
+    # sudo waagent -force -deprovision
+    # export HISTSIZE=0
+    # logout
+    ```
 
 15. 关闭 VM，并将 VMDK 文件转换为 .vhd 文件。
 
     首先将此映像转换为原始格式：
 
-        # qemu-img convert -f vmdk -O raw rhel-6.7.vmdk rhel-6.7.raw
+    ```
+    # qemu-img convert -f vmdk -O raw rhel-6.7.vmdk rhel-6.7.raw
+    ```
 
     请确保原始映像大小为 1 MB。如果不是，请将大小四舍五入，使其等于 1 MB：
 
-        # MB=$((1024*1024))
-        # size=$(qemu-img info -f raw --output json "rhel-6.7.raw" | \
-                gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
-        # rounded_size=$((($size/$MB + 1)*$MB))
-        # qemu-img resize rhel-6.7.raw $rounded_size
+    ```
+    # MB=$((1024*1024))
+    # size=$(qemu-img info -f raw --output json "rhel-6.7.raw" | \
+            gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
+    # rounded_size=$((($size/$MB + 1)*$MB))
+    # qemu-img resize rhel-6.7.raw $rounded_size
+    ```
 
     将原始磁盘转换为固定大小的 VHD：
 
@@ -630,97 +812,131 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 1. 在包含以下文本的 /etc/sysconfig/ 目录中创建一个名为 **network** 的文件：
 
-        NETWORKING=yes
-        HOSTNAME=localhost.localdomain
+    ```
+    NETWORKING=yes
+    HOSTNAME=localhost.localdomain
+    ```
 
 2. 在包含以下文本的 /etc/sysconfig/network-scripts/ 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
-        DEVICE=eth0
-        ONBOOT=yes
-        BOOTPROTO=dhcp
-        TYPE=Ethernet
-        USERCTL=no
-        PEERDNS=yes
-        IPV6INIT=no
+    ```
+    DEVICE=eth0
+    ONBOOT=yes
+    BOOTPROTO=dhcp
+    TYPE=Ethernet
+    USERCTL=no
+    PEERDNS=yes
+    IPV6INIT=no
+    ```
 
 3. 通过运行以下命令，确保网络服务将在引导时启动：
 
-        # sudo chkconfig network on
+    ```
+    # sudo chkconfig network on
+    ```
 
 4. 注册你的 Red Hat 订阅，以通过运行以下命令来启用来自 RHEL 存储库中的包的安装：
 
-        # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
+    # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
+    ```
 
 5. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开 `/etc/default/grub` 并编辑 **GRUB\_CMDLINE\_LINUX** 参数。例如：
 
-        GRUB_CMDLINE_LINUX="rootdelay=300
-        console=ttyS0
-        earlyprintk=ttyS0"
+    ```
+    GRUB_CMDLINE_LINUX="rootdelay=300
+    console=ttyS0
+    earlyprintk=ttyS0"
+    ```
 
     这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题。除上述操作以外，建议删除以下参数：
 
-        rhgb quiet crashkernel=auto
+    ```
+    rhgb quiet crashkernel=auto
+    ```
 
     图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。可以根据需要配置 crashkernel 选项，但请注意，此参数会使 VM 中的可用内存量减少 128 MB 或更多。这可能对于较小的 VM 大小有问题。
 
 6. 完成 `/etc/default/grub` 编辑后，运行以下命令以重新生成 grub 配置：
 
-         # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
+     # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
 
 7. 将 Hyper-V 模块添加到 initramfs 中：
 
     编辑 `/etc/dracut.conf`，添加内容：
 
-        add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+```
+    add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+```
 
     重新生成 initramfs：
 
-        # dracut -f -v
+```
+    # dracut -f -v
+```
 
 8. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。修改 `/etc/ssh/sshd_config` 以包含以下行：
 
-        ClientAliveInterval 180
+    ```
+    ClientAliveInterval 180
+    ```
 
 9. WALinuxAgent 包 `WALinuxAgent-<version>` 已推送到 Red Hat extras 存储库。通过运行以下命令启用 extras 存储库：
 
-        # subscription-manager repos --enable=rhel-7-server-extras-rpms
+    ```
+    # subscription-manager repos --enable=rhel-7-server-extras-rpms
+    ```
 
 10. 通过运行以下命令来安装 Azure Linux 代理：
 
-        # sudo yum install WALinuxAgent
-        # sudo systemctl enable waagent.service
+    ```
+    # sudo yum install WALinuxAgent
+    # sudo systemctl enable waagent.service
+    ```
 
 11. 不要在操作系统磁盘上创建交换空间。Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并且当取消预配 VM 时可能会被清空。安装 Azure Linux 代理（参见上一步）后，相应地在 `/etc/waagent.conf` 中修改以下参数：
 
-        ResourceDisk.Format=y
-        ResourceDisk.Filesystem=ext4
-        ResourceDisk.MountPoint=/mnt/resource
-        ResourceDisk.EnableSwap=y
-        ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
+    ResourceDisk.Format=y
+    ResourceDisk.Filesystem=ext4
+    ResourceDisk.MountPoint=/mnt/resource
+    ResourceDisk.EnableSwap=y
+    ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
 
 12. 如果你想要取消注册订阅，运行以下命令：
 
-        # sudo subscription-manager unregister
+    ```
+    # sudo subscription-manager unregister
+    ```
 
 13. 运行以下命令可取消对虚拟机的预配并且对其进行准备以便在 Azure 上进行预配：
 
-        # sudo waagent -force -deprovision
-        # export HISTSIZE=0
-        # logout
+    ```
+    # sudo waagent -force -deprovision
+    # export HISTSIZE=0
+    # logout
+    ```
 
 14. 关闭 VM，并将 VMDK 文件转换为 VHD 格式。
 
     首先将此映像转换为原始格式：
 
-        # qemu-img convert -f vmdk -O raw rhel-7.1.vmdk rhel-7.1.raw
+    ```
+    # qemu-img convert -f vmdk -O raw rhel-7.1.vmdk rhel-7.1.raw
+    ```
 
     请确保原始映像大小为 1 MB。如果不是，请将大小四舍五入，使其等于 1 MB：
 
-        # MB=$((1024*1024))
-        # size=$(qemu-img info -f raw --output json "rhel-7.1.raw" | \
-                 gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
-        # rounded_size=$((($size/$MB + 1)*$MB))
-        # qemu-img resize rhel-7.1.raw $rounded_size
+    ```
+    # MB=$((1024*1024))
+    # size=$(qemu-img info -f raw --output json "rhel-7.1.raw" | \
+             gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
+    # rounded_size=$((($size/$MB + 1)*$MB))
+    # qemu-img resize rhel-7.1.raw $rounded_size
+    ```
 
     将原始磁盘转换为固定大小的 VHD：
 
@@ -732,124 +948,126 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 1. 创建包含以下内容的 kickstart 文件，然后保存该文件。有关 kickstart 安装的详细信息，请参阅 [Kickstart 安装指南](https://access.redhat.com/documentation/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-kickstart-installations.html)。
 
-        # Kickstart for provisioning a RHEL 7 Azure VM
+    ```
+    # Kickstart for provisioning a RHEL 7 Azure VM
 
-        # System authorization information
-        auth --enableshadow --passalgo=sha512
+    # System authorization information
+    auth --enableshadow --passalgo=sha512
 
-        # Use graphical install
-        text
+    # Use graphical install
+    text
 
-        # Do not run the Setup Agent on first boot
-        firstboot --disable
+    # Do not run the Setup Agent on first boot
+    firstboot --disable
 
-        # Keyboard layouts
-        keyboard --vckeymap=us --xlayouts='us'
+    # Keyboard layouts
+    keyboard --vckeymap=us --xlayouts='us'
 
-        # System language
-        lang en_US.UTF-8
+    # System language
+    lang en_US.UTF-8
 
-        # Network information
-        network  --bootproto=dhcp
+    # Network information
+    network  --bootproto=dhcp
 
-        # Root password
-        rootpw --plaintext "to_be_disabled"
+    # Root password
+    rootpw --plaintext "to_be_disabled"
 
-        # System services
-        services --enabled="sshd,waagent,NetworkManager"
+    # System services
+    services --enabled="sshd,waagent,NetworkManager"
 
-        # System timezone
-        timezone Etc/UTC --isUtc --ntpservers 0.rhel.pool.ntp.org,1.rhel.pool.ntp.org,2.rhel.pool.ntp.org,3.rhel.pool.ntp.org
+    # System timezone
+    timezone Etc/UTC --isUtc --ntpservers 0.rhel.pool.ntp.org,1.rhel.pool.ntp.org,2.rhel.pool.ntp.org,3.rhel.pool.ntp.org
 
-        # Partition clearing information
-        clearpart --all --initlabel
+    # Partition clearing information
+    clearpart --all --initlabel
 
-        # Clear the MBR
-        zerombr
+    # Clear the MBR
+    zerombr
 
-        # Disk partitioning information
-        part /boot --fstype="xfs" --size=500
-        part / --fstyp="xfs" --size=1 --grow --asprimary
+    # Disk partitioning information
+    part /boot --fstype="xfs" --size=500
+    part / --fstyp="xfs" --size=1 --grow --asprimary
 
-        # System bootloader configuration
-        bootloader --location=mbr
+    # System bootloader configuration
+    bootloader --location=mbr
 
-        # Firewall configuration
-        firewall --disabled
+    # Firewall configuration
+    firewall --disabled
 
-        # Enable SELinux
-        selinux --enforcing
+    # Enable SELinux
+    selinux --enforcing
 
-        # Don't configure X
-        skipx
+    # Don't configure X
+    skipx
 
-        # Power down the machine after install
-        poweroff
+    # Power down the machine after install
+    poweroff
 
-        %packages
-        @base
-        @console-internet
-        chrony
-        sudo
-        parted
-        -dracut-config-rescue
+    %packages
+    @base
+    @console-internet
+    chrony
+    sudo
+    parted
+    -dracut-config-rescue
 
-        %end
+    %end
 
-        %post --log=/var/log/anaconda/post-install.log
+    %post --log=/var/log/anaconda/post-install.log
 
-        #!/bin/bash
+    #!/bin/bash
 
-        # Register Red Hat Subscription
-        subscription-manager register --username=XXX --password=XXX --auto-attach --force
+    # Register Red Hat Subscription
+    subscription-manager register --username=XXX --password=XXX --auto-attach --force
 
-        # Install latest repo update
-        yum update -y
+    # Install latest repo update
+    yum update -y
 
-        # Enable extras repo
-        subscription-manager repos --enable=rhel-7-server-extras-rpms
+    # Enable extras repo
+    subscription-manager repos --enable=rhel-7-server-extras-rpms
 
-        # Install WALinuxAgent
-        yum install -y WALinuxAgent
+    # Install WALinuxAgent
+    yum install -y WALinuxAgent
 
-        # Unregister Red Hat subscription
-        subscription-manager unregister
+    # Unregister Red Hat subscription
+    subscription-manager unregister
 
-        # Enable waaagent at boot-up
-        systemctl enable waagent
+    # Enable waaagent at boot-up
+    systemctl enable waagent
 
-        # Disable the root account
-        usermod root -p '!!'
+    # Disable the root account
+    usermod root -p '!!'
 
-        # Configure swap in WALinuxAgent
-        sed -i 's/^(ResourceDisk\.EnableSwap)=[Nn]$/\1=y/g' /etc/waagent.conf
-        sed -i 's/^(ResourceDisk\.SwapSizeMB)=[0-9]*$/\1=2048/g' /etc/waagent.conf
+    # Configure swap in WALinuxAgent
+    sed -i 's/^(ResourceDisk\.EnableSwap)=[Nn]$/\1=y/g' /etc/waagent.conf
+    sed -i 's/^(ResourceDisk\.SwapSizeMB)=[0-9]*$/\1=2048/g' /etc/waagent.conf
 
-        # Set the cmdline
-        sed -i 's/^(GRUB_CMDLINE_LINUX)=".*"$/\1="console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300"/g' /etc/default/grub
+    # Set the cmdline
+    sed -i 's/^(GRUB_CMDLINE_LINUX)=".*"$/\1="console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300"/g' /etc/default/grub
 
-        # Enable SSH keepalive
-        sed -i 's/^#(ClientAliveInterval).*$/\1 180/g' /etc/ssh/sshd_config
+    # Enable SSH keepalive
+    sed -i 's/^#(ClientAliveInterval).*$/\1 180/g' /etc/ssh/sshd_config
 
-        # Build the grub cfg
-        grub2-mkconfig -o /boot/grub2/grub.cfg
+    # Build the grub cfg
+    grub2-mkconfig -o /boot/grub2/grub.cfg
 
-        # Configure network
-        cat << EOF > /etc/sysconfig/network-scripts/ifcfg-eth0
-        DEVICE=eth0
-        ONBOOT=yes
-        BOOTPROTO=dhcp
-        TYPE=Ethernet
-        USERCTL=no
-        PEERDNS=yes
-        IPV6INIT=no
-        NM_CONTROLLED=yes
-        EOF
+    # Configure network
+    cat << EOF > /etc/sysconfig/network-scripts/ifcfg-eth0
+    DEVICE=eth0
+    ONBOOT=yes
+    BOOTPROTO=dhcp
+    TYPE=Ethernet
+    USERCTL=no
+    PEERDNS=yes
+    IPV6INIT=no
+    NM_CONTROLLED=yes
+    EOF
 
-        # Deprovision and prepare for Azure
-        waagent -force -deprovision
+    # Deprovision and prepare for Azure
+    waagent -force -deprovision
 
-        %end
+    %end
+    ```
 
 2. 将 kickstart 文件放在可从安装系统访问的位置。
 
@@ -883,7 +1101,9 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 >[!NOTE]
 > 此已知问题已被 Red Hat 解决。若要安装关联的修补程序，请运行以下命令：
 
-    # sudo yum update
+```
+# sudo yum update
+```
 
 ### 使用非 Hyper-V 虚拟机监控程序时，初始 RAM 磁盘未包含 Hyper-V 驱动程序
 

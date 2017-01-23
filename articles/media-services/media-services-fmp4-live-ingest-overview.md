@@ -57,7 +57,9 @@ ms.author: cenkd;juliako
 
 Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 HTTP POST 请求，将以分片 MP4 格式打包的编码媒体数据传输到服务。每个 HTTP POST 发送完整的分片 MP4 位流（“流”），其开头为标头框（‘ftyp’、“实时服务器清单框”及 ‘moov’ 框），后接一系列片段（‘moof’ 与 ‘mdat’ 框）。有关 HTTP POST 请求的 URL 语法，请参阅 [1] 中的第 9.2 部分。以下是 POST URL 的示例：
 
-    http://customer.channel.mediaservices.chinacloudapi.cn/ingest.isml/streams(720p)
+```
+http://customer.channel.mediaservices.chinacloudapi.cn/ingest.isml/streams(720p)
+```
 
 ###要求
 

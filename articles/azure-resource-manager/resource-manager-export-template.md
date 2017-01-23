@@ -66,48 +66,50 @@ ms.author: tomfitz
 
     让我们特别注意该模板。你的模板的外观应类似于：
 
-        {
+    ```
+    {
 
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-          "contentVersion": "1.0.0.0",
-          "parameters": {
-            "name": {
-              "type": "String"
-            },
-            "accountType": {
-              "type": "String"
-            },
-            "location": {
-              "type": "String"
-            },
-            "encryptionEnabled": {
-              "defaultValue": false,
-              "type": "Bool"
-            }
-          },
-          "resources": [
-            {
-              "type": "Microsoft.Storage/storageAccounts",
-              "sku": {
-                "name": "[parameters('accountType')]"
-              },
-              "kind": "Storage",
-              "name": "[parameters('name')]",
-              "apiVersion": "2016-01-01",
-              "location": "[parameters('location')]",
-              "properties": {
-                "encryption": {
-                  "services": {
-                    "blob": {
-                      "enabled": "[parameters('encryptionEnabled')]"
-                    }
-                  },
-                  "keySource": "Microsoft.Storage"
-                }
-              }
-            }
-          ]
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "name": {
+          "type": "String"
+        },
+        "accountType": {
+          "type": "String"
+        },
+        "location": {
+          "type": "String"
+        },
+        "encryptionEnabled": {
+          "defaultValue": false,
+          "type": "Bool"
         }
+      },
+      "resources": [
+        {
+          "type": "Microsoft.Storage/storageAccounts",
+          "sku": {
+            "name": "[parameters('accountType')]"
+          },
+          "kind": "Storage",
+          "name": "[parameters('name')]",
+          "apiVersion": "2016-01-01",
+          "location": "[parameters('location')]",
+          "properties": {
+            "encryption": {
+              "services": {
+                "blob": {
+                  "enabled": "[parameters('encryptionEnabled')]"
+                }
+              },
+              "keySource": "Microsoft.Storage"
+            }
+          }
+        }
+      ]
+    }
+    ```
 
 该模板是用于创建存储帐户的实际模板。请注意，该模板包含的参数可用于部署不同类型的存储帐户。若要详细了解模板的结构，请参阅 [Authoring Azure Resource Manager templates](./resource-group-authoring-templates.md)（创作 Azure Resource Manager 模板）。有关可在模板中使用的函数的完整列表，请参阅 [Azure Resource Manager template functions](./resource-group-template-functions.md)（Azure Resource Manager 模板函数）。
 
@@ -144,16 +146,18 @@ ms.author: tomfitz
      并非所有资源类型都支持导出模板功能。如果资源组仅包含本文中显示的存储帐户和虚拟网络，则不会显示错误。不过，如果你已经创建其他资源类型，则可能会显示一个错误，指出导出存在问题。[修复导出问题](#fix-export-issues)部分介绍了如何处理这些问题。
 2. 此时将再次显示可用于重新部署解决方案的六个文件，但这一次模板稍有不同。该模板只有两个参数：一个用于存储帐户名称，一个用于虚拟网络名称。
 
-        "parameters": {
-          "virtualNetworks_VNET_name": {
-            "defaultValue": "VNET",
-            "type": "String"
-          },
-          "storageAccounts_storagetf05092016_name": {
-            "defaultValue": "storagetf05092016",
-            "type": "String"
-          }
-        },
+    ```
+    "parameters": {
+      "virtualNetworks_VNET_name": {
+        "defaultValue": "VNET",
+        "type": "String"
+      },
+      "storageAccounts_storagetf05092016_name": {
+        "defaultValue": "storagetf05092016",
+        "type": "String"
+      }
+    },
+    ```
 
      Resource Manager 未检索到在部署期间使用的模板。但是，它将基于资源的当前配置生成新模板。例如，模板会将存储帐户位置和复制值设置为：
 
@@ -201,80 +205,86 @@ ms.author: tomfitz
 
 3. 若要传入可能需要在部署过程中指定的值，请将 **parameters** 节替换为新的参数定义。请注意 **storageAccount\_accountType** 的 **allowedValues** 的值。如果你意外地提供了无效的值，则在部署开始之前将识别该错误。另请注意，你仅提供存储帐户名称的前缀，该前缀限制为 11 个字符。将前缀限制为 11 个字符时，可确保完整名称不超过存储帐户的最大字符数。使用前缀，可将命名约定应用于存储帐户。在下一步中，你将了解如何创建唯一名称。
 
-        "parameters": {
-          "storageAccount_prefix": {
-            "type": "string",
-            "maxLength": 11
-          },
-          "storageAccount_accountType": {
-            "defaultValue": "Standard_RAGRS",
-            "type": "string",
-            "allowedValues": [
-              "Standard_LRS",
-              "Standard_ZRS",
-              "Standard_GRS",
-              "Standard_RAGRS",
-              "Premium_LRS"
-            ]
-          },
-          "virtualNetwork_name": {
-            "type": "string"
-          },
-          "addressPrefix": {
-            "defaultValue": "10.0.0.0/16",
-            "type": "string"
-          },
-          "subnetName": {
-            "defaultValue": "subnet-1",
-            "type": "string"
-          },
-          "subnetAddressPrefix": {
-            "defaultValue": "10.0.0.0/24",
-            "type": "string"
-          }
-        },
+    ```
+    "parameters": {
+      "storageAccount_prefix": {
+        "type": "string",
+        "maxLength": 11
+      },
+      "storageAccount_accountType": {
+        "defaultValue": "Standard_RAGRS",
+        "type": "string",
+        "allowedValues": [
+          "Standard_LRS",
+          "Standard_ZRS",
+          "Standard_GRS",
+          "Standard_RAGRS",
+          "Premium_LRS"
+        ]
+      },
+      "virtualNetwork_name": {
+        "type": "string"
+      },
+      "addressPrefix": {
+        "defaultValue": "10.0.0.0/16",
+        "type": "string"
+      },
+      "subnetName": {
+        "defaultValue": "subnet-1",
+        "type": "string"
+      },
+      "subnetAddressPrefix": {
+        "defaultValue": "10.0.0.0/24",
+        "type": "string"
+      }
+    },
+    ```
 4. 模板的 **variables** 节当前为空。在 **variables** 节中，用户可以创建值，简化模板其余部分的语法。将该节替换为新的变量定义。**storageAccount\_name** 变量将参数中的前缀连接到唯一字符串，该字符串根据资源组的标识符生成。提供参数值时，不再需要构思唯一名称。
 
-        "variables": {
-          "storageAccount_name": "[concat(parameters('storageAccount_prefix'), uniqueString(resourceGroup().id))]"
-        },
+    ```
+    "variables": {
+      "storageAccount_name": "[concat(parameters('storageAccount_prefix'), uniqueString(resourceGroup().id))]"
+    },
+    ```
 5. 若要在资源定义中使用参数和变量，请将 **resources** 节替换为新的资源定义。请注意，除了分配给资源属性的值外，资源定义只进行了很少的更改。属性与已导出模板中的属性相同。你只需为参数值分配属性，而不是对值进行硬编码。资源的位置通过 **resourceGroup().location** 表达式设置为使用资源组所在的位置。为存储帐户名称创建的变量通过 **variables** 表达式进行引用。
 
-        "resources": [
-          {
-            "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetwork_name')]",
-            "apiVersion": "2015-06-15",
-            "location": "[resourceGroup().location]",
-            "properties": {
-              "addressSpace": {
-                "addressPrefixes": [
-                  "[parameters('addressPrefix')]"
-                ]
-              },
-              "subnets": [
-                {
-                  "name": "[parameters('subnetName')]",
-                  "properties": {
-                    "addressPrefix": "[parameters('subnetAddressPrefix')]"
-                  }
-                }
-              ]
-            },
-            "dependsOn": []
+    ```
+    "resources": [
+      {
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('virtualNetwork_name')]",
+        "apiVersion": "2015-06-15",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('addressPrefix')]"
+            ]
           },
-          {
-            "type": "Microsoft.Storage/storageAccounts",
-            "name": "[variables('storageAccount_name')]",
-            "apiVersion": "2015-06-15",
-            "location": "[resourceGroup().location]",
-            "tags": {},
-            "properties": {
-                "accountType": "[parameters('storageAccount_accountType')]"
-            },
-            "dependsOn": []
-          }
-        ]
+          "subnets": [
+            {
+              "name": "[parameters('subnetName')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnetAddressPrefix')]"
+              }
+            }
+          ]
+        },
+        "dependsOn": []
+      },
+      {
+        "type": "Microsoft.Storage/storageAccounts",
+        "name": "[variables('storageAccount_name')]",
+        "apiVersion": "2015-06-15",
+        "location": "[resourceGroup().location]",
+        "tags": {},
+        "properties": {
+            "accountType": "[parameters('storageAccount_accountType')]"
+        },
+        "dependsOn": []
+      }
+    ]
+    ```
 6. 编辑完模板后，选择“确定”。
 7. 选择“保存”保存对模板所做的更改。
 
@@ -291,18 +301,20 @@ ms.author: tomfitz
 
 将 parameters.json 文件的内容替换为以下内容：
 
-    {
-      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-      "contentVersion": "1.0.0.0",
-      "parameters": {
-        "storageAccount_prefix": {
-          "value": "storage"
-        },
-        "virtualNetwork_name": {
-          "value": "VNET"
-        }
-      }
+```
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccount_prefix": {
+      "value": "storage"
+    },
+    "virtualNetwork_name": {
+      "value": "VNET"
     }
+  }
+}
+```
 
 更新后的参数文件仅为没有默认值的参数提供值。如果你需要不同于默认值的值，则可以为其他参数提供值。
 
@@ -327,53 +339,57 @@ ms.author: tomfitz
 ### 连接字符串
 在网站资源中，添加数据库连接字符串的定义：
 
+```
+{
+  "type": "Microsoft.Web/sites",
+  ...
+  "resources": [
     {
-      "type": "Microsoft.Web/sites",
-      ...
-      "resources": [
-        {
-          "apiVersion": "2015-08-01",
-          "type": "config",
-          "name": "connectionstrings",
-          "dependsOn": [
-              "[concat('Microsoft.Web/Sites/', parameters('<site-name>'))]"
-          ],
-          "properties": {
-              "DefaultConnection": {
-                "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('<database-server-name>'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('<database-name>'), ';User Id=', parameters('<admin-login>'), '@', parameters('<database-server-name>'), ';Password=', parameters('<admin-password>'), ';')]",
-                  "type": "SQLServer"
-              }
+      "apiVersion": "2015-08-01",
+      "type": "config",
+      "name": "connectionstrings",
+      "dependsOn": [
+          "[concat('Microsoft.Web/Sites/', parameters('<site-name>'))]"
+      ],
+      "properties": {
+          "DefaultConnection": {
+            "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('<database-server-name>'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('<database-name>'), ';User Id=', parameters('<admin-login>'), '@', parameters('<database-server-name>'), ';Password=', parameters('<admin-password>'), ';')]",
+              "type": "SQLServer"
           }
-        }
-      ]
+      }
     }
+  ]
+}
+```
 
 ### 网站扩展
 在网站资源中，添加要安装的代码的定义：
 
+```
+{
+  "type": "Microsoft.Web/sites",
+  ...
+  "resources": [
     {
-      "type": "Microsoft.Web/sites",
-      ...
-      "resources": [
-        {
-          "name": "MSDeploy",
-          "type": "extensions",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-08-01",
-          "dependsOn": [
-            "[concat('Microsoft.Web/sites/', parameters('<site-name>'))]"
-          ],
-          "properties": {
-            "packageUri": "[concat(parameters('<artifacts-location>'), '/', parameters('<package-folder>'), '/', parameters('<package-file-name>'), parameters('<sas-token>'))]",
-            "dbType": "None",
-            "connectionString": "",
-            "setParameters": {
-              "IIS Web Application Name": "[parameters('<site-name>')]"
-            }
-          }
+      "name": "MSDeploy",
+      "type": "extensions",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-08-01",
+      "dependsOn": [
+        "[concat('Microsoft.Web/sites/', parameters('<site-name>'))]"
+      ],
+      "properties": {
+        "packageUri": "[concat(parameters('<artifacts-location>'), '/', parameters('<package-folder>'), '/', parameters('<package-file-name>'), parameters('<sas-token>'))]",
+        "dbType": "None",
+        "connectionString": "",
+        "setParameters": {
+          "IIS Web Application Name": "[parameters('<site-name>')]"
         }
-      ]
+      }
     }
+  ]
+}
+```
 
 ### 虚拟机扩展
 如需虚拟机扩展的示例，请参阅 [Azure Windows VM Extension Configuration Samples](../virtual-machines/virtual-machines-windows-extensions-configuration-samples.md)（Azure Windows VM 扩展配置示例）。
@@ -381,71 +397,77 @@ ms.author: tomfitz
 ### 虚拟网络网关
 添加虚拟网络网关资源类型。
 
-    {
-      "type": "Microsoft.Network/virtualNetworkGateways",
-      "name": "[parameters('<gateway-name>')]",
-      "apiVersion": "2015-06-15",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "gatewayType": "[parameters('<gateway-type>')]",
-        "ipConfigurations": [
-          {
-            "name": "default",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('<vnet-name>'), parameters('<new-subnet-name>'))]"
-              },
-              "publicIpAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('<new-public-ip-address-Name>'))]"
-              }
-            }
+```
+{
+  "type": "Microsoft.Network/virtualNetworkGateways",
+  "name": "[parameters('<gateway-name>')]",
+  "apiVersion": "2015-06-15",
+  "location": "[resourceGroup().location]",
+  "properties": {
+    "gatewayType": "[parameters('<gateway-type>')]",
+    "ipConfigurations": [
+      {
+        "name": "default",
+        "properties": {
+          "privateIPAllocationMethod": "Dynamic",
+          "subnet": {
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('<vnet-name>'), parameters('<new-subnet-name>'))]"
+          },
+          "publicIpAddress": {
+            "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('<new-public-ip-address-Name>'))]"
           }
-        ],
-        "enableBgp": false,
-        "vpnType": "[parameters('<vpn-type>')]"
-      },
-      "dependsOn": [
-        "Microsoft.Network/virtualNetworks/codegroup4/subnets/GatewaySubnet",
-        "[concat('Microsoft.Network/publicIPAddresses/', parameters('<new-public-ip-address-Name>'))]"
-      ]
-    },
+        }
+      }
+    ],
+    "enableBgp": false,
+    "vpnType": "[parameters('<vpn-type>')]"
+  },
+  "dependsOn": [
+    "Microsoft.Network/virtualNetworks/codegroup4/subnets/GatewaySubnet",
+    "[concat('Microsoft.Network/publicIPAddresses/', parameters('<new-public-ip-address-Name>'))]"
+  ]
+},
+```
 
 ### 本地网络网关
 添加本地网络网关资源类型。
 
-    {
-        "type": "Microsoft.Network/localNetworkGateways",
-        "name": "[parameters('<local-network-gateway-name>')]",
-        "apiVersion": "2015-06-15",
-        "location": "[resourceGroup().location]",
-        "properties": {
-          "localNetworkAddressSpace": {
-            "addressPrefixes": "[parameters('<address-prefixes>')]"
-          }
-        }
+```
+{
+    "type": "Microsoft.Network/localNetworkGateways",
+    "name": "[parameters('<local-network-gateway-name>')]",
+    "apiVersion": "2015-06-15",
+    "location": "[resourceGroup().location]",
+    "properties": {
+      "localNetworkAddressSpace": {
+        "addressPrefixes": "[parameters('<address-prefixes>')]"
+      }
     }
+}
+```
 
 ### 连接
 添加连接资源类型。
 
-    {
-        "apiVersion": "2015-06-15",
-        "name": "[parameters('<connection-name>')]",
-        "type": "Microsoft.Network/connections",
-        "location": "[resourceGroup().location]",
-        "properties": {
-            "virtualNetworkGateway1": {
-            "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('<gateway-name>'))]"
-          },
-          "localNetworkGateway2": {
-            "id": "[resourceId('Microsoft.Network/localNetworkGateways', parameters('<local-gateway-name>'))]"
-          },
-          "connectionType": "IPsec",
-          "routingWeight": 10,
-          "sharedKey": "[parameters('<shared-key>')]"
-        }
-    },
+```
+{
+    "apiVersion": "2015-06-15",
+    "name": "[parameters('<connection-name>')]",
+    "type": "Microsoft.Network/connections",
+    "location": "[resourceGroup().location]",
+    "properties": {
+        "virtualNetworkGateway1": {
+        "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('<gateway-name>'))]"
+      },
+      "localNetworkGateway2": {
+        "id": "[resourceId('Microsoft.Network/localNetworkGateways', parameters('<local-gateway-name>'))]"
+      },
+      "connectionType": "IPsec",
+      "routingWeight": 10,
+      "sharedKey": "[parameters('<shared-key>')]"
+    }
+},
+```
 
 ## 后续步骤
 祝贺你！ 你已学习如何从门户中创建的资源导出模板。

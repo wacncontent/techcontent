@@ -69,33 +69,35 @@ wacn.lang: cn
             备份与恢复——任意时间点回滚功能<br><br>
             MySQL Database on Azure支持七天内的任意时间点回滚，具体步骤请参照：<a href="./mysql-database-point-in-time-restore.md" target="_blank">MySQL Database on Azure备份和恢复——还原数据库到任意时间点</a>。
 
-        </td>
-    </tr>
-    <tr>
-        <td>
-            某次升级导致的业务中断恢复
-        </td>
-        <td>
-            在生产环境下，由于某次升级失败，导致发生兼容性问题，业务无法正常进行。
-        </td>
-        <td>
-            在升级前，用户对数据库创建快照备份；如升级遇到问题，可以快速还原完全备份到新实例/原实例。具体步骤请参照：<a href="./mysql-database-point-in-time-restore.md" target="_blank">MySQL Database on Azure备份和恢复</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            区域性灾难恢复
-        </td>
-        <td>
-            当某些区域性灾难造成大面积服务中断时，需要在异地快速进行恢复。
-        </td>
-        <td>
-            目前提供三种恢复方案，用户可以根据紧急程度选择不同方案。后文将重点介绍。<br><br>
-            - MySQL PaaS方案<br>
-            - 自助服务方案<br>
-            - 异地从属实例恢复方案
-        </td>
-    </tr>
+```
+    </td>
+</tr>
+<tr>
+    <td>
+        某次升级导致的业务中断恢复
+    </td>
+    <td>
+        在生产环境下，由于某次升级失败，导致发生兼容性问题，业务无法正常进行。
+    </td>
+    <td>
+        在升级前，用户对数据库创建快照备份；如升级遇到问题，可以快速还原完全备份到新实例/原实例。具体步骤请参照：<a href="./mysql-database-point-in-time-restore.md" target="_blank">MySQL Database on Azure备份和恢复</a>
+    </td>
+</tr>
+<tr>
+    <td>
+        区域性灾难恢复
+    </td>
+    <td>
+        当某些区域性灾难造成大面积服务中断时，需要在异地快速进行恢复。
+    </td>
+    <td>
+        目前提供三种恢复方案，用户可以根据紧急程度选择不同方案。后文将重点介绍。<br><br>
+        - MySQL PaaS方案<br>
+        - 自助服务方案<br>
+        - 异地从属实例恢复方案
+    </td>
+</tr>
+```
 </table>
 
 ## 区域性灾难恢复 ##
@@ -130,7 +132,9 @@ MySQL Database on Azure底层将用户数据存储在Azure存储的块blob中，
 
 如果发生灾难时管理门户可用，则用户可以通过《[MySQL Database on Azure备份和恢复](http://wacn-ppe.chinacloudsites.cn/documentation/articles/mysql-database-point-in-time-restore/)》一文中提供的异地还原步骤进行操作。但通常发生区域性灾难时，管理门户无法正确获取实例信息，因此建议用户通过PowerShell对实例进行异地还原操作：
 
-    New-AzureRmResource -ResourceType "Microsoft.MySql/servers" -ResourceName <ResourceName> -ApiVersion 2015-09-01 -ResourceGroupName <ResourceGroupName> -Location <TargetLocation> -SkuObject @{name=<targetSKU>} -Properties @{creationSource=@{server='<SourceServerName>';region='<SourceLocation>';timepoint='<TimeTag>'};version = '<version number>'}
+```
+New-AzureRmResource -ResourceType "Microsoft.MySql/servers" -ResourceName <ResourceName> -ApiVersion 2015-09-01 -ResourceGroupName <ResourceGroupName> -Location <TargetLocation> -SkuObject @{name=<targetSKU>} -Properties @{creationSource=@{server='<SourceServerName>';region='<SourceLocation>';timepoint='<TimeTag>'};version = '<version number>'}
+```
 
 >[!NOTE]
 >1. timepoint是Optional的值，如果不填，则默认是当前的时间点；如果用户填写时间，则需按照Json中date-time格式填写（比如2016-05-06T08:00:00），我们统一使用的是UTC时间。

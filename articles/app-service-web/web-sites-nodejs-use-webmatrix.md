@@ -85,7 +85,9 @@ ms.author: robmcm
 
 2. 将段落行更改为以下内容：
 
-        p Welcome to #{title} with WebMatrix on Azure!
+    ```
+    p Welcome to #{title} with WebMatrix on Azure!
+    ```
 
 3. 保存更改，然后单击发布图标。最后，在“发布预览”对话框中单击“继续”，并等待发布更新。
 

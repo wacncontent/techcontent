@@ -38,8 +38,10 @@ ms.author: tomfitz
 ## 快速部署步骤
 若要快速开始进行部署，请使用以下命令：
 
-    azure group create -n examplegroup -l "China East"
-    azure group deployment create -f "c:\MyTemplates\example.json" -e "c:\MyTemplates\example.params.json" -g examplegroup -n exampledeployment
+```
+azure group create -n examplegroup -l "China East"
+azure group deployment create -f "c:\MyTemplates\example.json" -e "c:\MyTemplates\example.params.json" -g examplegroup -n exampledeployment
+```
 
 这些命令创建资源组，并将模板部署到该资源组。模板文件和参数文件都是本地文件。如果该操作成功，则一切准备就绪，可以部署资源了。不过，可以使用更多选项来指定要部署的资源。本文其余部分介绍了部署过程中可用的所有选项。
 
@@ -50,11 +52,15 @@ ms.author: tomfitz
 
 1. 登录到你的 Azure 帐户。提供凭据后，该命令将返回你的登录结果。
 
-        azure login -e AzureChinaCloud
+    ```
+    azure login -e AzureChinaCloud
+    ```
 
 2. 如果有多个订阅，请提供要用于部署的订阅 ID。
 
-        azure account set <YourSubscriptionNameOrId>
+    ```
+    azure account set <YourSubscriptionNameOrId>
+    ```
 
 4. 部署模板时，必须指定将包含已部署资源的资源组。如果有要部署到的现有资源组，可以跳过此步骤，然后使用该资源组。
 
@@ -66,7 +72,9 @@ ms.author: tomfitz
 
 5. 在执行部署之前先运行 **azure group template validate** 命令验证部署。测试部署时，请提供与执行部署时所提供的完全相同的参数（如下一步中所示）。
 
-        azure group template validate -f <PathToTemplate> -p "{"ParameterName":{"value":"ParameterValue"}}" -g ExampleResourceGroup
+    ```
+    azure group template validate -f <PathToTemplate> -p "{"ParameterName":{"value":"ParameterValue"}}" -g ExampleResourceGroup
+    ```
 
 6. 若要将资源部署到资源组，请运行 **azure group deployment create** 命令并提供所需的参数。参数包括部署的名称、资源组的名称、模板的路径或 URL，以及方案所需的任何其他参数。如果未指定 **mode** 参数，则使用默认值 **Incremental**。若要运行完整部署，请将 **mode** 设置为 **Complete**。使用完整模式时要小心，因为可能会无意中删除不在模板中的资源。
 
@@ -76,29 +84,37 @@ ms.author: tomfitz
 
     To deploy an external template, use **template-uri** parameter:
 
-        azure group deployment create --resource-group examplegroup --template-uri "https://raw.githubusercontent.com/exampleuser/MyTemplates/master/example.json"
+    ```
+    azure group deployment create --resource-group examplegroup --template-uri "https://raw.githubusercontent.com/exampleuser/MyTemplates/master/example.json"
+    ```
 
     The preceding two examples do not include parameter values. You learn about the options for passing parameter values in the [Parameters](#parameters) section. For now, you are prompted to provide parameter values with the following syntax:
 
-        info:    Executing command group deployment create
-        info:    Supply values for the following parameters
-        firstParameters:  <type here>
+    ```
+    info:    Executing command group deployment create
+    info:    Supply values for the following parameters
+    firstParameters:  <type here>
+    ```
 
     After the resources have been deployed, you see a summary of the deployment. The summary includes a **ProvisioningState**, which indicates whether the deployment succeeded.
 
-        + Initializing template configurations and parameters
-        + Creating a deployment
-        info:    Created template deployment "example"
-        + Waiting for deployment to complete
-        +
-        +
-        data:    DeploymentName     : example
-        data:    ResourceGroupName  : examplegroup
-        data:    ProvisioningState  : Succeeded
+    ```
+    + Initializing template configurations and parameters
+    + Creating a deployment
+    info:    Created template deployment "example"
+    + Waiting for deployment to complete
+    +
+    +
+    data:    DeploymentName     : example
+    data:    ResourceGroupName  : examplegroup
+    data:    ProvisioningState  : Succeeded
+    ```
 
 7. 如果要记录可能帮助你排查任何部署错误的有关部署的其他信息，请使用 **debug-setting** 参数。你可以指定在对部署操作进行日志记录时记录请求内容或/和响应内容。
 
-        azure group deployment create --debug-setting All -f <PathToTemplate> -e <PathToParameterFile> -g examplegroup -n exampleDeployment
+    ```
+    azure group deployment create --debug-setting All -f <PathToTemplate> -e <PathToParameterFile> -g examplegroup -n exampleDeployment
+    ```
 
 ## 使用 SAS 令牌从存储空间部署模板
 可以将模板添加到存储帐户，并在部署过程中使用 SAS 令牌链接到这些模板。
@@ -111,36 +127,50 @@ ms.author: tomfitz
 
 1. 创建资源组。
 
-        azure group create -n "ManageGroup" -l "chinaeast"
+    ```
+    azure group create -n "ManageGroup" -l "chinaeast"
+    ```
 
 2. 创建存储帐户。存储帐户名称必须在 Azure 中唯一，因此，请为帐户提供自己的名称。
 
-        azure storage account create -g ManageGroup -l "chinaeast" --sku-name LRS --kind Storage storagecontosotemplates
+    ```
+    azure storage account create -g ManageGroup -l "chinaeast" --sku-name LRS --kind Storage storagecontosotemplates
+    ```
 
 3. 为存储帐户和密钥设置变量。
 
-        export AZURE_STORAGE_ACCOUNT=storagecontosotemplates
-        export AZURE_STORAGE_ACCESS_KEY={storage_account_key}
+    ```
+    export AZURE_STORAGE_ACCOUNT=storagecontosotemplates
+    export AZURE_STORAGE_ACCESS_KEY={storage_account_key}
+    ```
 
 4. 创建容器。权限设置为"关闭"，这意味着只有所有者可以访问该容器。
 
-        azure storage container create --container templates -p Off 
+    ```
+    azure storage container create --container templates -p Off 
+    ```
 
 5. 将模板添加到该容器。
 
-        azure storage blob upload --container templates -f c:\MyTemplates\azuredeploy.json
+    ```
+    azure storage blob upload --container templates -f c:\MyTemplates\azuredeploy.json
+    ```
 
 ### 在部署期间提供 SAS 令牌
 若要在存储帐户中部署专用模板，请检索 SAS 令牌，并将其包括在模板的 URI 中。
 
 1. 创建具有读取权限和到期时间的 SAS 令牌来限制访问。设置到期时间以允许足够的时间来完成部署。检索包括 SAS 令牌的模板的完整 URI。
 
-        expiretime=$(date -I'minutes' --date "+30 minutes")
-        fullurl=$(azure storage blob sas create --container templates --blob azuredeploy.json --permissions r --expiry $expiretimetime --json  | jq ".url")
+    ```
+    expiretime=$(date -I'minutes' --date "+30 minutes")
+    fullurl=$(azure storage blob sas create --container templates --blob azuredeploy.json --permissions r --expiry $expiretimetime --json  | jq ".url")
+    ```
 
 2. 通过提供包括 SAS 令牌的 URI 来部署该模板。
 
-        azure group deployment create --template-uri $fullurl -g ExampleResourceGroup
+    ```
+    azure group deployment create --template-uri $fullurl -g ExampleResourceGroup
+    ```
 
 有关将 SAS 令牌与链接模板配合使用的示例，请参阅[将已链接的模版与 Azure Resource Manager 配合使用](./resource-group-linked-templates.md)。
 
@@ -150,7 +180,9 @@ ms.author: tomfitz
 
 - 使用内联参数。每个参数采用以下格式：`"ParameterName": { "value": "ParameterValue" }`。以下示例显示带转义符的参数。
 
-        azure group deployment create -f <PathToTemplate> -p "{"ParameterName":{"value":"ParameterValue"}}" -g ExampleResourceGroup -n ExampleDeployment
+    ```
+    azure group deployment create -f <PathToTemplate> -p "{"ParameterName":{"value":"ParameterValue"}}" -g ExampleResourceGroup -n ExampleDeployment
+    ```
 
 - 使用参数文件。
 

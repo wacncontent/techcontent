@@ -37,8 +37,10 @@ ms.author: jdial;annahar
 3. 完成[创建 Windows VM](../virtual-machines/virtual-machines-windows-ps-create.md) 一文中的步骤 1-4。请不要完成步骤 5（创建公共 IP 资源和网络接口）。如果更改该文中使用的任何变量的名称，请同样更改剩余步骤中的变量名称。若要创建 Linux VM，请选择 Linux 操作系统，而不要选择 Windows。
 4. 键入以下命令，创建一个变量，用于存储“创建 Windows VM”一文的步骤 4（创建 VNet）中创建的子网对象：
 
-        $SubnetName = $mySubnet.Name
-        $Subnet = $myVnet.Subnets | Where-Object { $_.Name -eq $SubnetName }
+    ```
+    $SubnetName = $mySubnet.Name
+    $Subnet = $myVnet.Subnets | Where-Object { $_.Name -eq $SubnetName }
+    ```
 
 5. 定义要分配给 NIC 的 IP 配置。可根据需要添加、删除或更改配置。方案所述的配置如下所示：
 
@@ -62,24 +64,30 @@ ms.author: jdial;annahar
 
     更改所创建子网上的可用有效地址后的 **$IPAddress** 变量的值。若要检查地址 10.0.0.5 在子网上是否可用，请输入命令 `Test-AzureRmPrivateIPAddressAvailability -IPAddress 10.0.0.5 -VirtualNetwork $myVnet`。如果该地址可用，输出会返回 *True* 。如果不可用，输出会返回 *False* 以及可用地址的列表。输入以下命令，创建具有一个静态公共 IP 地址和一个静态专用 IP 地址的新公共 IP 地址资源和新 IP 配置：
 
-        $IpConfigName2 = "IPConfig-2"
-        $IPAddress     = 10.0.0.5
-        $myPublicIp2   = New-AzureRmPublicIpAddress -Name "myPublicIp2" -ResourceGroupName $myResourceGroup `
-        -Location $location -AllocationMethod Static
-        $IpConfig2     = New-AzureRmNetworkInterfaceIpConfig -Name $IpConfigName2 `
-        -Subnet $Subnet -PrivateIpAddress $IPAddress -PublicIpAddress $myPublicIp2
+    ```
+    $IpConfigName2 = "IPConfig-2"
+    $IPAddress     = 10.0.0.5
+    $myPublicIp2   = New-AzureRmPublicIpAddress -Name "myPublicIp2" -ResourceGroupName $myResourceGroup `
+    -Location $location -AllocationMethod Static
+    $IpConfig2     = New-AzureRmNetworkInterfaceIpConfig -Name $IpConfigName2 `
+    -Subnet $Subnet -PrivateIpAddress $IPAddress -PublicIpAddress $myPublicIp2
+    ```
 
     **IPConfig-3**
 
     输入以下命令，创建具有一个动态专用 IP 地址且没有公共 IP 地址的 IP 配置：
 
-        $IpConfigName3 = "IpConfig-3"
-        $IpConfig3 = New-AzureRmNetworkInterfaceIpConfig -Name $IPConfigName3 -Subnet $Subnet
+    ```
+    $IpConfigName3 = "IpConfig-3"
+    $IpConfig3 = New-AzureRmNetworkInterfaceIpConfig -Name $IPConfigName3 -Subnet $Subnet
+    ```
 
 6. 输入以下命令，使用上一步骤中定义的 IP 配置创建 NIC：
 
-        $myNIC = New-AzureRmNetworkInterface -Name myNIC -ResourceGroupName $myResourceGroup `
-        -Location $location -IpConfiguration $IpConfig1,$IpConfig2,$IpConfig3
+    ```
+    $myNIC = New-AzureRmNetworkInterface -Name myNIC -ResourceGroupName $myResourceGroup `
+    -Location $location -IpConfiguration $IpConfig1,$IpConfig2,$IpConfig3
+    ```
 
     > [!NOTE]
     尽管本文将所有 IP 配置都分配给一个 NIC，但还可将多个 IP 配置分配给 VM 中的任何 NIC。若要了解如何创建具有多个 NIC 的 VM，请阅读[创建具有多个 NIC 的 VM](./virtual-network-deploy-multinic-arm-ps.md) 一文。
@@ -93,7 +101,9 @@ ms.author: jdial;annahar
     >
 8. 输入以下命令，查看分配给 NIC 的专用 IP 地址和公共 IP 地址资源：
 
-        $myNIC.IpConfigurations | Format-Table Name, PrivateIPAddress, PublicIPAddress, Primary
+    ```
+    $myNIC.IpConfigurations | Format-Table Name, PrivateIPAddress, PublicIPAddress, Primary
+    ```
 
 9. 将专用 IP 地址添加到 VM 操作系统，只需完成本文[将 IP 地址添加到 VM 操作系统](#os-config)部分针对操作系统的步骤即可。请勿向操作系统添加公共 IP 地址。
 
@@ -104,31 +114,43 @@ ms.author: jdial;annahar
 1. 打开 PowerShell 命令提示符，在单个 PowerShell 会话中完成本部分余下的步骤。如果尚未安装并配置 PowerShell，请先完成[How to install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（如何安装和配置 Azure PowerShell）一文中所述的步骤。
 3. 将以下 $Variable 的“值”更改为要向其添加 IP 地址的 NIC 的名称，以及 NIC 所在的资源组和位置：
 
-        $NICname         = "myNIC"
-        $myResourceGroup = "myResourceGroup"
-        $location        = "westchinaeast"
+    ```
+    $NICname         = "myNIC"
+    $myResourceGroup = "myResourceGroup"
+    $location        = "westchinaeast"
+    ```
 
     如果不知道要更改的 NIC 名称，请输入以下命令，然后更改上述变量的值：
 
-        Get-AzureRmNetworkInterface | Format-Table Name, ResourceGroupName, Location
+    ```
+    Get-AzureRmNetworkInterface | Format-Table Name, ResourceGroupName, Location
+    ```
 
 4. 键入以下命令创建变量，并将它设置为现有的 NIC：
 
-        $myNIC = Get-AzureRmNetworkInterface -Name $NICname -ResourceGroupName $myResourceGroup
+    ```
+    $myNIC = Get-AzureRmNetworkInterface -Name $NICname -ResourceGroupName $myResourceGroup
+    ```
 
 5. 在以下命令中，将 *myVNet* 和 *mySubnet* 更改为 NIC 连接到的 VNet 和子网的名称。输入以下命令，检索 NIC 连接到的 VNet 和子网对象：
 
-        $myVnet = Get-AzureRMVirtualnetwork -Name myVNet -ResourceGroupName $myResourceGroup
-        $Subnet = $myVnet.Subnets | Where-Object { $_.Name -eq "mySubnet" }
+    ```
+    $myVnet = Get-AzureRMVirtualnetwork -Name myVNet -ResourceGroupName $myResourceGroup
+    $Subnet = $myVnet.Subnets | Where-Object { $_.Name -eq "mySubnet" }
+    ```
 
     如果不知道 NIC 连接到的 VNet 或子网的名称，请输入以下命令：
 
-        $mynic.IpConfigurations
+    ```
+    $mynic.IpConfigurations
+    ```
 
     在返回的输出中查找类似如下所示的文本：
 
-        Subnet   : {
-                     "Id": "/subscriptions/[Id]/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+    ```
+    Subnet   : {
+                 "Id": "/subscriptions/[Id]/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+    ```
 
     在此输出中，*myVnet* 和 *mySubnet* 分别是 NIC 连接到的 VNet 和子网。
 
@@ -138,8 +160,10 @@ ms.author: jdial;annahar
 
     若要将专用 IP 地址添加到 NIC，必须创建 IP 配置。以下命令创建具有静态 IP 地址 10.0.0.7 的配置。如果想要添加动态专用 IP 地址，请在输入命令前删除 `-PrivateIpAddress 10.0.0.7`。指定的静态 IP 地址必须是子网的未使用地址。建议首先输入 `Test-AzureRmPrivateIPAddressAvailability -IPAddress 10.0.0.7 -VirtualNetwork $myVnet` 命令测试地址，确保地址可用。如果 IP 地址可用，输出会返回 *True* 。如果不可用，输出会返回 *False* 以及可用地址的列表。
 
-        Add-AzureRmNetworkInterfaceIpConfig -Name IPConfig-4 -NetworkInterface `
-         $myNIC -Subnet $Subnet -PrivateIpAddress 10.0.0.7
+    ```
+    Add-AzureRmNetworkInterfaceIpConfig -Name IPConfig-4 -NetworkInterface `
+     $myNIC -Subnet $Subnet -PrivateIpAddress 10.0.0.7
+    ```
 
     使用唯一配置名称和专用 IP 地址（用于具有静态 IP 地址的配置），根据需要创建多个配置。
 
@@ -157,8 +181,10 @@ ms.author: jdial;annahar
 
     每次在新 IP 配置中添加公共 IP 地址时，还必须添加专用 IP 地址，因为所有 IP 配置都必须具有专用 IP 地址。可添加现有公共 IP 地址资源，也可创建新的公共 IP 地址资源。若要新建，请输入以下命令：
 
-        $myPublicIp3   = New-AzureRmPublicIpAddress -Name "myPublicIp3" -ResourceGroupName $myResourceGroup `
-        -Location $location -AllocationMethod Static
+    ```
+    $myPublicIp3   = New-AzureRmPublicIpAddress -Name "myPublicIp3" -ResourceGroupName $myResourceGroup `
+    -Location $location -AllocationMethod Static
+    ```
 
      若要创建具有动态专用 IP 地址和关联的 *myPublicIP3* 公共 IP 地址资源的新 IP 配置，请输入以下命令：
 
@@ -169,15 +195,19 @@ ms.author: jdial;annahar
 
     公共 IP 地址资源仅可关联到尚未关联公共 IP 地址资源的 IP 配置。可输入以下命令，确定某个 IP 配置是否具有关联的公共 IP 地址：
 
-        $myNIC.IpConfigurations | Format-Table Name, PrivateIPAddress, PublicIPAddress, Primary
+    ```
+    $myNIC.IpConfigurations | Format-Table Name, PrivateIPAddress, PublicIPAddress, Primary
+    ```
 
     在返回的输出中查找类似如下所示的行：
 
-        Name       PrivateIpAddress PublicIpAddress                                           Primary
-        ----       ---------------- ---------------                                           -------
-        IPConfig-1 10.0.0.4         Microsoft.Azure.Commands.Network.Models.PSPublicIpAddress    True
-        IPConfig-2 10.0.0.5         Microsoft.Azure.Commands.Network.Models.PSPublicIpAddress   False
-        IpConfig-3 10.0.0.6                                                                     False
+    ```
+    Name       PrivateIpAddress PublicIpAddress                                           Primary
+    ----       ---------------- ---------------                                           -------
+    IPConfig-1 10.0.0.4         Microsoft.Azure.Commands.Network.Models.PSPublicIpAddress    True
+    IPConfig-2 10.0.0.5         Microsoft.Azure.Commands.Network.Models.PSPublicIpAddress   False
+    IpConfig-3 10.0.0.6                                                                     False
+    ```
 
      *IpConfig-3* 的 **PublicIpAddress** 列为空白，因此，当前没有公共 IP 地址资源与其关联。 可将现有公共 IP 地址资源添加到 IpConfig-3，或输入以下命令进行创建： 
 
@@ -186,15 +216,21 @@ ms.author: jdial;annahar
 
     输入以下命令，将公共 IP 地址资源关联到名为 *IPConfig-3* 的现有 IP 配置 :
 
-        Set-AzureRmNetworkInterfaceIpConfig -Name IpConfig-3 -NetworkInterface $mynic -Subnet $Subnet -PublicIpAddress $myPublicIp3
+    ```
+    Set-AzureRmNetworkInterfaceIpConfig -Name IpConfig-3 -NetworkInterface $mynic -Subnet $Subnet -PublicIpAddress $myPublicIp3
+    ```
 
 7. 输入以下命令，为 NIC 设置新 IP 配置：
 
-        Set-AzureRmNetworkInterface -NetworkInterface $myNIC
+    ```
+    Set-AzureRmNetworkInterface -NetworkInterface $myNIC
+    ```
 
 8. 输入以下命令，查看分配给 NIC 的专用 IP 地址和公共 IP 地址资源：
 
-        $myNIC.IpConfigurations | Format-Table Name, PrivateIPAddress, PublicIPAddress, Primary
+    ```
+    $myNIC.IpConfigurations | Format-Table Name, PrivateIPAddress, PublicIPAddress, Primary
+    ```
 
 9. 将专用 IP 地址添加到 VM 操作系统，只需完成本文[将 IP 地址添加到 VM 操作系统](#os-config)部分针对操作系统的步骤即可。请勿向操作系统添加公共 IP 地址。
 

@@ -43,41 +43,43 @@ ms.author: adrianha
 
 1. 将以下代码添加到 **TodoActivity** 类：
 
-        // Define a authenticated user.
-        private MobileServiceUser user;
-        private async Task<bool> Authenticate()
-        {
-                var success = false;
-                try
-                {
-                    // Sign in with Microsoft login using a server-managed flow.
-                    user = await client.LoginAsync(this,
-                        MobileServiceAuthenticationProvider.Microsoft);
-                    CreateAndShowDialog(string.Format("you are now logged in - {0}",
-                        user.UserId), "Logged in!");
-
-                    success = true;
-                }
-                catch (Exception ex)
-                {
-                    CreateAndShowDialog(ex, "Authentication failed");
-                }
-                return success;
-        }
-
-        [Java.Interop.Export()]
-        public async void LoginUser(View view)
-        {
-            // Load data only after authentication succeeds.
-            if (await Authenticate())
+    ```
+    // Define a authenticated user.
+    private MobileServiceUser user;
+    private async Task<bool> Authenticate()
+    {
+            var success = false;
+            try
             {
-                //Hide the button after authentication succeeds.
-                FindViewById<Button>(Resource.Id.buttonLoginUser).Visibility = ViewStates.Gone;
+                // Sign in with Microsoft login using a server-managed flow.
+                user = await client.LoginAsync(this,
+                    MobileServiceAuthenticationProvider.Microsoft);
+                CreateAndShowDialog(string.Format("you are now logged in - {0}",
+                    user.UserId), "Logged in!");
 
-                // Load the data.
-                OnRefreshItemsSelected();
+                success = true;
             }
+            catch (Exception ex)
+            {
+                CreateAndShowDialog(ex, "Authentication failed");
+            }
+            return success;
+    }
+
+    [Java.Interop.Export()]
+    public async void LoginUser(View view)
+    {
+        // Load data only after authentication succeeds.
+        if (await Authenticate())
+        {
+            //Hide the button after authentication succeeds.
+            FindViewById<Button>(Resource.Id.buttonLoginUser).Visibility = ViewStates.Gone;
+
+            // Load the data.
+            OnRefreshItemsSelected();
         }
+    }
+    ```
 
     此代码创建一个新方法（用于对用户进行身份验证）和新“登录”按钮的方法处理程序。上面示例代码中的用户使用 Microsoft 登录进行身份验证。对话框用于在进行身份验证后显示用户 ID。
 
@@ -86,20 +88,26 @@ ms.author: adrianha
 
 3. 在 **OnCreate** 方法中，删除或注释掉以下代码行：
 
-        OnRefreshItemsSelected ();
+    ```
+    OnRefreshItemsSelected ();
+    ```
 
 4. 在 Activity\_To\_Do.axml 文件中，在现有 *AddItem* 按钮之前添加以下 *LoginUser* 按钮定义：
 
-          <Button
-            android:id="@+id/buttonLoginUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="LoginUser"
-            android:text="@string/login_button_text" />
+    ```
+      <Button
+        android:id="@+id/buttonLoginUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="LoginUser"
+        android:text="@string/login_button_text" />
+    ```
 
 5. 将以下元素添加到 Strings.xml 资源文件：
 
-        <string name="login_button_text">Sign in</string>
+    ```
+    <string name="login_button_text">Sign in</string>
+    ```
 
 6. 在 Visual Studio 或 Xamarin Studio 中，运行设备或模拟器中的客户端项目，并使用所选的标识提供者登录。
 

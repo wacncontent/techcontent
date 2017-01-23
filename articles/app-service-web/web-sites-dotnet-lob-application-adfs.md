@@ -62,12 +62,14 @@ ms.author: cephalin
     你将看到，代码只是发出身份验证质询以使用 WS-Federation 对用户进行身份验证。所有身份验证都在 App\_Start.Auth.cs 中配置。
 3. 打开 App\_Start.Auth.cs。在 `ConfigureAuth` 方法中，记录下面的代码行：
 
-        app.UseWsFederationAuthentication(
-           new WsFederationAuthenticationOptions
-        {
-           Wtrealm = realm,
-           MetadataAddress = metadata                                      
-           });
+    ```
+    app.UseWsFederationAuthentication(
+       new WsFederationAuthenticationOptions
+    {
+       Wtrealm = realm,
+       MetadataAddress = metadata                                      
+       });
+    ```
 
     在 OWIN 领域中，此代码片段实际上配置 WS-Federation 所需的最低要求。这比 WIF 要精简得多，因为 Web.config 中的各个位置都注入了 XML。所需的唯一信息就是信赖方 (RP) 标识符和 AD FS 服务元数据文件的 URL。下面是一个示例：
 
@@ -266,7 +268,9 @@ ms.author: cephalin
     {
         ViewBag.Message = "Your application description page.";
 
-        return View();
+    ```
+    return View();
+    ```
     }
 
     <mark>[Authorize(Roles="Domain Admins")]</mark>
@@ -274,7 +278,9 @@ ms.author: cephalin
     {
         ViewBag.Message = "Your contact page.";
 
-        return View();
+    ```
+    return View();
+    ```
     }
     </pre>
 
@@ -297,28 +303,30 @@ ms.author: cephalin
     发生此错误的原因是，默认情况下，当用户的角色未授权时，MVC 将返回“401 未授权”。这会对标识提供者 (AD FS) 发出重新进行身份验证的请求。由于用户已经过身份验证，AD FS 将返回同一页，然后再次发出 401，并创建重定向循环。您将使用简单的逻辑替代 AuthorizeAttribute 的 `HandleUnauthorizedRequest` 方法，以显示一些有意义的内容，而不是继续重定向循环。
 5. 在项目中创建名为 AuthorizeAttribute.cs 的文件，并将以下代码粘贴到其中。
 
-        using System;
-        using System.Web.Mvc;
-        using System.Web.Routing;
+    ```
+    using System;
+    using System.Web.Mvc;
+    using System.Web.Routing;
 
-        namespace WebApp_WSFederation_DotNet
+    namespace WebApp_WSFederation_DotNet
+    {
+        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+        public class AuthorizeAttribute : System.Web.Mvc.AuthorizeAttribute
         {
-            [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-            public class AuthorizeAttribute : System.Web.Mvc.AuthorizeAttribute
+            protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
             {
-                protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+                if (filterContext.HttpContext.Request.IsAuthenticated)
                 {
-                    if (filterContext.HttpContext.Request.IsAuthenticated)
-                    {
-                        filterContext.Result = new System.Web.Mvc.HttpStatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
-                    }
-                    else
-                    {
-                        base.HandleUnauthorizedRequest(filterContext);
-                    }
+                    filterContext.Result = new System.Web.Mvc.HttpStatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
+                }
+                else
+                {
+                    base.HandleUnauthorizedRequest(filterContext);
                 }
             }
         }
+    }
+    ```
 
     在已经过身份验证但未授权的情况下，重写代码将发送 HTTP 403（禁止）而不是 HTTP 401（未授权）。
 6. 再次使用 `F5` 运行调试器。现在，单击“联系人”会显示信息更丰富（但毫无吸引力）的错误消息：

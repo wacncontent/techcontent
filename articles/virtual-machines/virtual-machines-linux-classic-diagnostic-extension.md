@@ -68,11 +68,13 @@ Linux 诊断扩展可帮助用户监视 Azure 上运行的 Linux VM。它具有�
 
 步骤 1.使用以下内容创建名为 PrivateConfig.json 的文件：
 
-    {
-        "storageAccountName" : "the storage account to receive data",
-        "storageAccountKey" : "the key of the account",
-        "endpoint":"table.core.chinacloudapi.cn"
-    }
+```
+{
+    "storageAccountName" : "the storage account to receive data",
+    "storageAccountKey" : "the key of the account",
+    "endpoint":"table.core.chinacloudapi.cn"
+}
+```
 
 步骤 2.运行 **azure vm extension set vm\_name LinuxDiagnostic Microsoft.OSTCExtensions 2.\* --private-config-path PrivateConfig.json**。
 
@@ -85,15 +87,17 @@ Linux 诊断扩展可帮助用户监视 Azure 上运行的 Linux VM。它具有�
 
 默认始终收集 Rsyslog 数据。
 
-    {
-          "perfCfg":
-          [
-              {
-                  "query" : "SELECT PercentAvailableMemory, AvailableMemory, UsedMemory ,PercentUsedSwap FROM SCX_MemoryStatisticalInformation",
-                  "table" : "LinuxMemory"
-              }
-          ]
-    }
+```
+{
+      "perfCfg":
+      [
+          {
+              "query" : "SELECT PercentAvailableMemory, AvailableMemory, UsedMemory ,PercentUsedSwap FROM SCX_MemoryStatisticalInformation",
+              "table" : "LinuxMemory"
+          }
+      ]
+}
+```
 
 步骤 2.运行 **azure vm extension set vm\_name LinuxDiagnostic Microsoft.OSTCExtensions '2.\*' --private-config-path PrivateConfig.json --public-config-path PublicConfig.json**。
 
@@ -102,15 +106,17 @@ Linux 诊断扩展可帮助用户监视 Azure 上运行的 Linux VM。它具有�
 
 步骤 1.使用方案 1 描述的内容创建名为 PrivateConfig.json 的文件。然后使用以下内容创建另一个名为 PublicConfig.json 的文件：
 
-    {
-        "fileCfg" :
-        [
-            {
-                "file" : "/var/log/mysql.err",
-                "table" : "mysqlerr"
-             }
-        ]
-    }
+```
+{
+    "fileCfg" :
+    [
+        {
+            "file" : "/var/log/mysql.err",
+            "table" : "mysqlerr"
+         }
+    ]
+}
+```
 
 步骤 2.运行 **azure vm extension set vm\_name LinuxDiagnostic Microsoft.OSTCExtensions '2.*' --private-config-path PrivateConfig.json --public-config-path PublicConfig.json**。
 
@@ -121,10 +127,12 @@ Linux 诊断扩展可帮助用户监视 Azure 上运行的 Linux VM。它具有�
 
 步骤 1.使用方案 1 描述的内容创建名为 PrivateConfig.json 的文件。使用以下内容创建另一个名为 PublicConfig.json 的文件：
 
-    {
-        "perfCfg" : [],
-        "enableSyslog" : "false"
-    }
+```
+{
+    "perfCfg" : [],
+    "enableSyslog" : "false"
+}
+```
 
 步骤 2.运行 **azure vm extension set vm\_name LinuxDiagnostic Microsoft.OSTCExtensions '2.\*' --private-config-path PrivateConfig.json --public-config-path PublicConfig.json**。
 

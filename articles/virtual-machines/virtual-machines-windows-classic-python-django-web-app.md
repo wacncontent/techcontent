@@ -65,19 +65,25 @@ ms.author: huvalo
 
     对于 Python 2.7，使用以下命令。
 
-        c:\python27\scripts\pip install wfastcgi
-        c:\python27\scripts\pip install django
+    ```
+    c:\python27\scripts\pip install wfastcgi
+    c:\python27\scripts\pip install django
+    ```
 
     对于 Python 3.4，使用以下命令。
 
-        c:\python34\scripts\pip install wfastcgi
-        c:\python34\scripts\pip install django
+    ```
+    c:\python34\scripts\pip install wfastcgi
+    c:\python34\scripts\pip install django
+    ```
 
 ## 安装具有 FastCGI 的 IIS
 
 1. 安装具有 FastCGI 支持的 IIS。执行此操作可能需要几分钟。
 
-        start /wait %windir%\System32\PkgMgr.exe /iu:IIS-WebServerRole;IIS-WebServer;IIS-CommonHttpFeatures;IIS-StaticContent;IIS-DefaultDocument;IIS-DirectoryBrowsing;IIS-HttpErrors;IIS-HealthAndDiagnostics;IIS-HttpLogging;IIS-LoggingLibraries;IIS-RequestMonitor;IIS-Security;IIS-RequestFiltering;IIS-HttpCompressionStatic;IIS-WebServerManagementTools;IIS-ManagementConsole;WAS-WindowsActivationService;WAS-ProcessModel;WAS-NetFxEnvironment;WAS-ConfigurationAPI;IIS-CGI
+    ```
+    start /wait %windir%\System32\PkgMgr.exe /iu:IIS-WebServerRole;IIS-WebServer;IIS-CommonHttpFeatures;IIS-StaticContent;IIS-DefaultDocument;IIS-DirectoryBrowsing;IIS-HttpErrors;IIS-HealthAndDiagnostics;IIS-HttpLogging;IIS-LoggingLibraries;IIS-RequestMonitor;IIS-Security;IIS-RequestFiltering;IIS-HttpCompressionStatic;IIS-WebServerManagementTools;IIS-ManagementConsole;WAS-WindowsActivationService;WAS-ProcessModel;WAS-NetFxEnvironment;WAS-ConfigurationAPI;IIS-CGI
+    ```
 
 ## 创建新的 Django 应用程序
 
@@ -85,11 +91,15 @@ ms.author: huvalo
 
     对于 Python 2.7，使用以下命令。
 
-        C:\Python27\Scripts\django-admin.exe startproject helloworld
+    ```
+    C:\Python27\Scripts\django-admin.exe startproject helloworld
+    ```
 
     对于 Python 3.4，使用以下命令。
 
-        C:\Python34\Scripts\django-admin.exe startproject helloworld
+    ```
+    C:\Python34\Scripts\django-admin.exe startproject helloworld
+    ```
 
     ![New-AzureService 命令的结果](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-cmd-new-azure-service.png)
 
@@ -101,69 +111,85 @@ ms.author: huvalo
 
 1.  在 *C:\\inetpub\\wwwroot\\helloworld\\helloworld* 目录中创建一个名为 **views.py** 的新文件。这会包含呈现“hello world”页面的视图。启动编辑器并输入以下代码：
 
-        from django.http import HttpResponse
-        def home(request):
-            html = "<html><body>Hello World!</body></html>"
-            return HttpResponse(html)
+    ```
+    from django.http import HttpResponse
+    def home(request):
+        html = "<html><body>Hello World!</body></html>"
+        return HttpResponse(html)
+    ```
 
 1.  将 urls.py 文件的内容替换为以下代码。
 
-        from django.conf.urls import patterns, url
-        urlpatterns = patterns('',
-            url(r'^$', 'helloworld.views.home', name='home'),
-        )
+    ```
+    from django.conf.urls import patterns, url
+    urlpatterns = patterns('',
+        url(r'^$', 'helloworld.views.home', name='home'),
+    )
+    ```
 
 ## 配置 IIS
 
 1. 解锁全局 applicationhost.config 中的处理程序节。这将在 web.config 中启用 python 处理程序。
 
-        %windir%\system32\inetsrv\appcmd unlock config -section:system.webServer/handlers
+    ```
+    %windir%\system32\inetsrv\appcmd unlock config -section:system.webServer/handlers
+    ```
 
 1. 启用 WFastCGI。这会将应用程序添加到引用 Python 解释程序可执行文件和 wfastcgi.py 脚本的全局 applicationhost.config。
 
     Python 2.7：
 
-        c:\python27\scripts\wfastcgi-enable
+    ```
+    c:\python27\scripts\wfastcgi-enable
+    ```
 
     Python 3.4：
 
-        c:\python34\scripts\wfastcgi-enable
+    ```
+    c:\python34\scripts\wfastcgi-enable
+    ```
 
 1. 在 *C:\\inetpub\\wwwroot\\helloworld* 中创建 web.config 文件。`scriptProcessor` 属性的值应与上一步的输出相匹配。有关 wfastcgi 设置的更多信息，请参阅 pypi 上 [wfastcgi][] 的相关页。
 
     Python 2.7：
 
-        <configuration>
-          <appSettings>
-            <add key="WSGI_HANDLER" value="django.core.handlers.wsgi.WSGIHandler()" />
-            <add key="PYTHONPATH" value="C:\inetpub\wwwroot\helloworld" />
-            <add key="DJANGO_SETTINGS_MODULE" value="helloworld.settings" />
-          </appSettings>
-          <system.webServer>
-            <handlers>
-                <add name="Python FastCGI" path="*" verb="*" modules="FastCgiModule" scriptProcessor="C:\Python27\python.exe|C:\Python27\Lib\site-packages\wfastcgi.pyc" resourceType="Unspecified" />
-            </handlers>
-          </system.webServer>
-        </configuration>
+    ```
+    <configuration>
+      <appSettings>
+        <add key="WSGI_HANDLER" value="django.core.handlers.wsgi.WSGIHandler()" />
+        <add key="PYTHONPATH" value="C:\inetpub\wwwroot\helloworld" />
+        <add key="DJANGO_SETTINGS_MODULE" value="helloworld.settings" />
+      </appSettings>
+      <system.webServer>
+        <handlers>
+            <add name="Python FastCGI" path="*" verb="*" modules="FastCgiModule" scriptProcessor="C:\Python27\python.exe|C:\Python27\Lib\site-packages\wfastcgi.pyc" resourceType="Unspecified" />
+        </handlers>
+      </system.webServer>
+    </configuration>
+    ```
 
     Python 3.4：
 
-        <configuration>
-          <appSettings>
-            <add key="WSGI_HANDLER" value="django.core.handlers.wsgi.WSGIHandler()" />
-            <add key="PYTHONPATH" value="C:\inetpub\wwwroot\helloworld" />
-            <add key="DJANGO_SETTINGS_MODULE" value="helloworld.settings" />
-          </appSettings>
-          <system.webServer>
-            <handlers>
-                <add name="Python FastCGI" path="*" verb="*" modules="FastCgiModule" scriptProcessor="C:\Python34\python.exe|C:\Python34\Lib\site-packages\wfastcgi.py" resourceType="Unspecified" />
-            </handlers>
-          </system.webServer>
-        </configuration>
+    ```
+    <configuration>
+      <appSettings>
+        <add key="WSGI_HANDLER" value="django.core.handlers.wsgi.WSGIHandler()" />
+        <add key="PYTHONPATH" value="C:\inetpub\wwwroot\helloworld" />
+        <add key="DJANGO_SETTINGS_MODULE" value="helloworld.settings" />
+      </appSettings>
+      <system.webServer>
+        <handlers>
+            <add name="Python FastCGI" path="*" verb="*" modules="FastCgiModule" scriptProcessor="C:\Python34\python.exe|C:\Python34\Lib\site-packages\wfastcgi.py" resourceType="Unspecified" />
+        </handlers>
+      </system.webServer>
+    </configuration>
+    ```
 
 1. 更新 IIS 默认 Web 应用的位置以指向 django 项目文件夹。
 
-        %windir%\system32\inetsrv\appcmd set vdir "Default Web Site/" -physicalPath:"C:\inetpub\wwwroot\helloworld"
+    ```
+    %windir%\system32\inetsrv\appcmd set vdir "Default Web Site/" -physicalPath:"C:\inetpub\wwwroot\helloworld"
+    ```
 
 1. 最后，在你的浏览器中加载网页。
 

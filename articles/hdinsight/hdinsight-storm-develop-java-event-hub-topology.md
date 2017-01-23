@@ -55,7 +55,9 @@ __com.microsoft.example.EventHubReader__ 从事件中心读取数据（EventHubW
 
 数据在写入事件中心之前已格式化为 JSON 文档，因此读取器会将其从 JSON 解析为元组。JSON 格式如下：
 
-    { "deviceId": "unique identifier", "deviceValue": some value }
+```
+{ "deviceId": "unique identifier", "deviceValue": some value }
+```
 
 使用 JSON 文档将数据存储到事件中心是为了了解格式，而不是依赖事件中心 Spout 和 Bolt 的内部格式化机制。
 
@@ -65,11 +67,13 @@ __com.microsoft.example.EventHubReader__ 从事件中心读取数据（EventHubW
 
 ####EventHubs Storm Spout 依赖性
 
-    <dependency>
-      <groupId>org.apache.storm</groupId>
-      <artifactId>storm-eventhubs</artifactId>
-      <version>0.10.0</version>
-    </dependency>
+```
+<dependency>
+  <groupId>org.apache.storm</groupId>
+  <artifactId>storm-eventhubs</artifactId>
+  <version>0.10.0</version>
+</dependency>
+```
 
 这将添加 storm-eventhubs 包的依赖项，它包含用于从事件中心读取的 Spout 和写入事件中心的 Bolt。
 
@@ -80,102 +84,108 @@ __com.microsoft.example.EventHubReader__ 从事件中心读取数据（EventHubW
 
 HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。但是，HDInsight 群集使用 Azure 存储空间 (WASB) 作为默认的数据存储区，因此我们必须加载多个组件，使 HdfsBolt 识别 WASB 文件系统。
 
-      <!--HdfsBolt stuff -->
-        <dependency>
-        <groupId>org.apache.storm</groupId>
-        <artifactId>storm-hdfs</artifactId>
-        <exclusions>
-            <exclusion>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            </exclusion>
-            <exclusion>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            </exclusion>
-        </exclusions>
-        <version>0.10.0</version>
-        </dependency>
-    <!--So HdfsBolt knows how to talk to WASB -->
+```
+  <!--HdfsBolt stuff -->
     <dependency>
+    <groupId>org.apache.storm</groupId>
+    <artifactId>storm-hdfs</artifactId>
+    <exclusions>
+        <exclusion>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-client</artifactId>
-        <version>2.7.1</version>
-    </dependency>
-    <dependency>
+        </exclusion>
+        <exclusion>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-hdfs</artifactId>
-        <version>2.7.1</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-azure</artifactId>
-        <version>2.7.1</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-common</artifactId>
-        <version>2.7.1</version>
-        <exclusions>
-        <exclusion>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
         </exclusion>
-        </exclusions>
+    </exclusions>
+    <version>0.10.0</version>
     </dependency>
+<!--So HdfsBolt knows how to talk to WASB -->
+<dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-client</artifactId>
+    <version>2.7.1</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-hdfs</artifactId>
+    <version>2.7.1</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-azure</artifactId>
+    <version>2.7.1</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-common</artifactId>
+    <version>2.7.1</version>
+    <exclusions>
+    <exclusion>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+    </exclusion>
+    </exclusions>
+</dependency>
+```
 
 > [!NOTE]
 > 如果使用早期版本的 HDInsight（例如 3.2 版），必须手动注册这些组件。有关示例以及早期版本的 HDInsight 群集所需的自定义位，请参阅示例存储库的 [Storm v0.9.3](https://github.com/Azure-Samples/hdinsight-java-storm-eventhub/tree/Storm_v0.9.3) 分支。
 
 ####maven-compiler-plugin
 
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-compiler-plugin</artifactId>
-      <version>2.3.2</version>
-      <configuration>
-        <source>1.7</source>
-        <target>1.7</target>
-      </configuration>
-    </plugin>
+```
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>2.3.2</version>
+  <configuration>
+    <source>1.7</source>
+    <target>1.7</target>
+  </configuration>
+</plugin>
+```
 
 这将告诉 Maven，编译后的项目应与 HDInsight 群集所用的 Java 7 版本兼容。
 
 ####maven-shade-plugin
 
-      <!-- build an uber jar -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>2.3</version>
-        <configuration>
-          <transformers>
-            <!-- Keep us from getting a can't overwrite file error -->
-            <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
-            <!-- Keep us from getting errors when trying to use WASB from the storm-hdfs bolt -->
-            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-          </transformers>
-          <!-- Keep us from getting a bad signature error -->
-          <filters>
-            <filter>
-                <artifact>*:*</artifact>
-                <excludes>
-                    <exclude>META-INF/*.SF</exclude>
-                    <exclude>META-INF/*.DSA</exclude>
-                    <exclude>META-INF/*.RSA</exclude>
-                </excludes>
-            </filter>
-          </filters>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+```
+  <!-- build an uber jar -->
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>2.3</version>
+    <configuration>
+      <transformers>
+        <!-- Keep us from getting a can't overwrite file error -->
+        <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
+        <!-- Keep us from getting errors when trying to use WASB from the storm-hdfs bolt -->
+        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+      </transformers>
+      <!-- Keep us from getting a bad signature error -->
+      <filters>
+        <filter>
+            <artifact>*:*</artifact>
+            <excludes>
+                <exclude>META-INF/*.SF</exclude>
+                <exclude>META-INF/*.DSA</exclude>
+                <exclude>META-INF/*.RSA</exclude>
+            </excludes>
+        </filter>
+      </filters>
+    </configuration>
+    <executions>
+      <execution>
+        <phase>package</phase>
+        <goals>
+          <goal>shade</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
+```
 
 用于将解决方案打包成 uber jar，其中包含项目代码和所需的依赖项。它还用于：
 
@@ -187,44 +197,50 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
 
 ####exec-maven-plugin
 
-    <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-      <version>1.2.1</version>
-      <executions>
-        <execution>
-        <goals>
-          <goal>exec</goal>
-        </goals>
-        </execution>
-      </executions>
-      <configuration>
-        <executable>java</executable>
-        <includeProjectDependencies>true</includeProjectDependencies>
-        <includePluginDependencies>false</includePluginDependencies>
-        <classpathScope>compile</classpathScope>
-        <mainClass>${storm.topology}</mainClass>
-      </configuration>
-    </plugin>
+```
+<plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>exec-maven-plugin</artifactId>
+  <version>1.2.1</version>
+  <executions>
+    <execution>
+    <goals>
+      <goal>exec</goal>
+    </goals>
+    </execution>
+  </executions>
+  <configuration>
+    <executable>java</executable>
+    <includeProjectDependencies>true</includeProjectDependencies>
+    <includePluginDependencies>false</includePluginDependencies>
+    <classpathScope>compile</classpathScope>
+    <mainClass>${storm.topology}</mainClass>
+  </configuration>
+</plugin>
+```
 
 可使用以下命令在开发环境上本地运行拓扑：
 
-    mvn compile exec:java -Dstorm.topology=<CLASSNAME>
+```
+mvn compile exec:java -Dstorm.topology=<CLASSNAME>
+```
 
 例如，`mvn compile exec:java -Dstorm.topology=com.microsoft.example.EventHubWriter`。
 
 ####resources 节
 
-    <resources>
-      <resource>
-        <directory>${basedir}/conf</directory>
-        <filtering>false</filtering>
-        <includes>
-          <include>EventHubs.properties</include>
-          <include>core-site.xml</include>
-        </includes>
-      </resource>
-    </resources>
+```
+<resources>
+  <resource>
+    <directory>${basedir}/conf</directory>
+    <filtering>false</filtering>
+    <includes>
+      <include>EventHubs.properties</include>
+      <include>core-site.xml</include>
+    </includes>
+  </resource>
+</resources>
+```
 
 定义项目所需的资源：
 
@@ -286,7 +302,9 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
 
 2. 使用以下命令生成和打包项目：
 
-        mvn package
+    ```
+    mvn package
+    ```
 
     这会下载所需的依赖项，生成然后打包项目。输出在 __/target__ 目录中存储为 __EventHubExample-1.0-SNAPSHOT.jar__。
 
@@ -316,18 +334,22 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
 
 7. 在“查询控制台”上，选择“Hive 编辑器”并将默认的 `select * from hivesampletable` 替换为以下内容：
 
-        create external table devicedata (deviceid string, devicevalue int) row format delimited fields terminated by ',' stored as textfile location 'wasbs:///devicedata/';
-        select * from devicedata limit 10;
+    ```
+    create external table devicedata (deviceid string, devicevalue int) row format delimited fields terminated by ',' stored as textfile location 'wasbs:///devicedata/';
+    select * from devicedata limit 10;
+    ```
 
     单击“选择”以运行查询。这会返回 10 行由 EventHubReader 写入 Azure 存储空间 (WASB) 的数据。完成查询后，你应会看到类似于下面的数据：
 
-        3409e622-c85d-4d64-8622-af45e30bf774,848981614
-        c3305f7e-6948-4cce-89b0-d9fbc2330c36,-1638780537
-        788b9796-e2ab-49c4-91e3-bc5b6af1f07e,-1662107246
-        6403df8a-6495-402f-bca0-3244be67f225,275738503
-        d7c7f96c-581a-45b1-b66c-e32de6d47fce,543829859
-        9a692795-e6aa-4946-98c1-2de381b37593,1857409996
-        3c8d199b-0003-4a79-8d03-24e13bde7086,-1271260574
+    ```
+    3409e622-c85d-4d64-8622-af45e30bf774,848981614
+    c3305f7e-6948-4cce-89b0-d9fbc2330c36,-1638780537
+    788b9796-e2ab-49c4-91e3-bc5b6af1f07e,-1662107246
+    6403df8a-6495-402f-bca0-3244be67f225,275738503
+    d7c7f96c-581a-45b1-b66c-e32de6d47fce,543829859
+    9a692795-e6aa-4946-98c1-2de381b37593,1857409996
+    3c8d199b-0003-4a79-8d03-24e13bde7086,-1271260574
+    ```
 
 8. 选择页面顶部的“Storm 仪表板”，然后选择“Storm UI”。从“Storm UI”中选择__读取器__拓扑的链接，然后使用“终止”按钮停止拓扑。针对__写入器__拓扑重复该过程。
 

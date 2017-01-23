@@ -37,23 +37,27 @@ Azure 驱动版本随着 Docker-machine 的版本一同更新。参见下面链�
 [https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/"](https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/") 
 除了必须指定订阅号，其他必须参数都包含了默认值；您也可以根据需求自定义各参数值。下面是一个示例（使用 docker-machine 0.8.2 ）：
 
-    docker-machine.exe create --driver azure \
-    --azure-subscription-id "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx" \
-    --azure-image "Openlogic:CentOS:7.2:latest" \
+```
+docker-machine.exe create --driver azure \
+--azure-subscription-id "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx" \
+--azure-image "Openlogic:CentOS:7.2:latest" \
+```
 
 > 这里需要指定 docker-machine 支持的 OS 版本，同时也需要在中国版 Azure 中存在。通过 Powershell 查看中国版 Azure 支持的 image，命令为 Get-AzureRmVMImagePublisher；Get-AzureRmVMImageOffer；Get-AzureRmVMImageSku；Version 一般都是 latest。
 
-    --azure-location "China North" \
-    --azure-resource-group "dockertestrg" \
-    --azure-size "Standard_A2" \
-    #Powershell中通过Get-AzureRmVMSize查看支持的虚拟机尺寸大小。
-    --azure-vnet "dockervnet" \
-    --azure-subnet "dockersub" \
-    --azure-subnet-prefix "192.168.0.0/24" \
-    --azure-availability-set "dockeravset" \
-    --azure-open-port "80" \
-    --azure-open-port "443" \
-    --azure-private-ip-address  192.168.0.10 \
+```
+--azure-location "China North" \
+--azure-resource-group "dockertestrg" \
+--azure-size "Standard_A2" \
+#Powershell中通过Get-AzureRmVMSize查看支持的虚拟机尺寸大小。
+--azure-vnet "dockervnet" \
+--azure-subnet "dockersub" \
+--azure-subnet-prefix "192.168.0.0/24" \
+--azure-availability-set "dockeravset" \
+--azure-open-port "80" \
+--azure-open-port "443" \
+--azure-private-ip-address  192.168.0.10 \
+```
 
 > 指定的内网 IP 简易不要在网段中太靠前，有些 IP 已经被预留，创建时会出现使用预留 IP 的错误。
 

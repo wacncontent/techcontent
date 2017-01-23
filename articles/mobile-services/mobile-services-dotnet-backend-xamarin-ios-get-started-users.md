@@ -53,23 +53,27 @@ ms.author: donnam
 
 1. 在客户端项目中，打开文件 **QSTodoService.cs** 并将以下声明添加到 QSTodoService：
 
-        // Mobile Service logged in user
-        private MobileServiceUser user; 
-        public MobileServiceUser User { get { return user; } }
+    ```
+    // Mobile Service logged in user
+    private MobileServiceUser user; 
+    public MobileServiceUser User { get { return user; } }
+    ```
 
 2. 使用以下定义向 **QSTodoService** 添加新方法 **Authenticate**：
 
-        private async Task Authenticate(UIViewController view)
+    ```
+    private async Task Authenticate(UIViewController view)
+    {
+        try
         {
-            try
-            {
-                user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.Facebook);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
-            }
+            user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.Facebook);
         }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
+        }
+    }
+    ```
 
     > [!NOTE]
     > 如果使用的标识提供者不是 Facebook，请将传递给上述 **LoginAsync** 的值更改为下列其中一项：_MicrosoftAccount_ 或 _WindowsAzureActiveDirectory_。
@@ -78,14 +82,16 @@ ms.author: donnam
 
 4. 在 **RefreshAsync** 方法定义的顶部添加以下代码：
 
-        // Add at the start of the RefreshAsync method.
+    ```
+    // Add at the start of the RefreshAsync method.
+    if (todoService.User == null) {
+        await QSTodoService.DefaultService.Authenticate (this);
         if (todoService.User == null) {
-            await QSTodoService.DefaultService.Authenticate (this);
-            if (todoService.User == null) {
-                Console.WriteLine ("You must sign in.");
-                return;
-            }
+            Console.WriteLine ("You must sign in.");
+            return;
         }
+    }
+    ```
 
     这会在“User”属性为 null 时显示登录屏幕来尝试进行身份验证。登录成功时，“User”即设置完毕。
 

@@ -85,17 +85,21 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
 下面的示例命令演示如何创建字符串类型的变量，然后返回其值。
 
-    New-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable' -Encrypted $false -Value 'My String'
-    $string = (Get-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable').Value
+```
+New-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable' -Encrypted $false -Value 'My String'
+$string = (Get-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable').Value
+```
 
 下面的示例命令演示如何创建复杂类型的变量，然后返回其属性。在这种情况下，会使用来自 **Get-AzureVM** 的虚拟机对象。
 
-    $vm = Get-AzureVM -ServiceName "MyVM" -Name "MyVM"
-    New-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable" -Encrypted $false -Value $vm
+```
+$vm = Get-AzureVM -ServiceName "MyVM" -Name "MyVM"
+New-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable" -Encrypted $false -Value $vm
 
-    $vmValue = (Get-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable").Value
-    $vmName = $vmValue.Name
-    $vmIpAddress = $vmValue.IpAddress
+$vmValue = (Get-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable").Value
+$vmName = $vmValue.Name
+$vmIpAddress = $vmValue.IpAddress
+```
 
 ## 在 Runbook 中使用变量
 
@@ -107,46 +111,56 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
 下面的示例命令演示如何设置和检索文本 Runbook 中的变量。在此示例中，假定已经创建了名为 *NumberOfIterations* 和 *NumberOfRunnings* 的整数类型变量和名为 *SampleMessage* 的字符串类型变量。
 
-    $NumberOfIterations = Get-AutomationVariable -Name 'NumberOfIterations'
-    $NumberOfRunnings = Get-AutomationVariable -Name 'NumberOfRunnings'
-    $SampleMessage = Get-AutomationVariable -Name 'SampleMessage'
+```
+$NumberOfIterations = Get-AutomationVariable -Name 'NumberOfIterations'
+$NumberOfRunnings = Get-AutomationVariable -Name 'NumberOfRunnings'
+$SampleMessage = Get-AutomationVariable -Name 'SampleMessage'
 
-    Write-Output "Runbook has been run $NumberOfRunnings times."
+Write-Output "Runbook has been run $NumberOfRunnings times."
 
-    for ($i = 1; $i -le $NumberOfIterations; $i++) {
-       Write-Output "$i`: $SampleMessage"
-    }
-    Set-AutomationVariable -Name NumberOfRunnings -Value ($NumberOfRunnings += 1)
+for ($i = 1; $i -le $NumberOfIterations; $i++) {
+   Write-Output "$i`: $SampleMessage"
+}
+Set-AutomationVariable -Name NumberOfRunnings -Value ($NumberOfRunnings += 1)
+```
 
 #### 设置和检索变量中的复杂对象
 
 下面的示例代码演示如何更新文本 Runbook 中具有复杂值的变量。在此示例中，使用 **Get-AzureVM** 检索到一个 Azure 虚拟机并保存到一个现有的自动化变量。如[变量类型](#variable-types)中所述，该对象存储为一个 PSCustomObject。
 
-    $vm = Get-AzureVM -ServiceName "MyVM" -Name "MyVM"
-    Set-AutomationVariable -Name "MyComplexVariable" -Value $vm
+```
+$vm = Get-AzureVM -ServiceName "MyVM" -Name "MyVM"
+Set-AutomationVariable -Name "MyComplexVariable" -Value $vm
+```
 
 在下面的代码中，从该变量检索值并将其用于启动虚拟机。
 
-    $vmObject = Get-AutomationVariable -Name "MyComplexVariable"
-    if ($vmObject.PowerState -eq 'Stopped') {
-       Start-AzureVM -ServiceName $vmObject.ServiceName -Name $vmObject.Name
-    }
+```
+$vmObject = Get-AutomationVariable -Name "MyComplexVariable"
+if ($vmObject.PowerState -eq 'Stopped') {
+   Start-AzureVM -ServiceName $vmObject.ServiceName -Name $vmObject.Name
+}
+```
 
 #### 设置和检索变量中的集合
 
 下面的示例代码演示如何使用文本 Runbook 中包含一组复杂值的变量。在此示例中，使用 **Get-AzureVM** 检索到多个 Azure 虚拟机并保存到一个现有的自动化变量。如[变量类型](#variable-types)中所述，变量存储为一组 PSCustomObject。
 
-    $vms = Get-AzureVM | Where -FilterScript {$_.Name -match "my"}     
-    Set-AutomationVariable -Name 'MyComplexVariable' -Value $vms
+```
+$vms = Get-AzureVM | Where -FilterScript {$_.Name -match "my"}     
+Set-AutomationVariable -Name 'MyComplexVariable' -Value $vms
+```
 
 在下面的代码中，从该变量检索此集合并用于启动每个虚拟机。
 
-    $vmValues = Get-AutomationVariable -Name "MyComplexVariable"
-    ForEach ($vmValue in $vmValues)
-    {
-       if ($vmValue.PowerState -eq 'Stopped') {
-          Start-AzureVM -ServiceName $vmValue.ServiceName -Name $vmValue.Name
-       }
-    }
+```
+$vmValues = Get-AutomationVariable -Name "MyComplexVariable"
+ForEach ($vmValue in $vmValues)
+{
+   if ($vmValue.PowerState -eq 'Stopped') {
+      Start-AzureVM -ServiceName $vmValue.ServiceName -Name $vmValue.Name
+   }
+}
+```
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

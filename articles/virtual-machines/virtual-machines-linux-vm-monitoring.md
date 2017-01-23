@@ -48,7 +48,9 @@ ms.author: kmouss
 - 创建名为 PrivateConfig.json 且包含以下内容的文件。{ "storageAccountName":"the storage account to receive data", "storageAccountKey":"the key of the account" }
 - 运行以下 Azure CLI 命令。
 
-        azure vm extension set myvm LinuxDiagnostic Microsoft.OSTCExtensions 2.0 --private-config-path PrivateConfig.json
+    ```
+    azure vm extension set myvm LinuxDiagnostic Microsoft.OSTCExtensions 2.0 --private-config-path PrivateConfig.json
+    ```
 
 [Azure.Note] 可以将版本 2.0 更改为更高版本（如果有）。
 

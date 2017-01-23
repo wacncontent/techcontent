@@ -103,10 +103,12 @@ ms.author: pratshar
 
 3. 在 DNS 服务器上添加一个区域，允许非安全更新，并向 DNS 添加该区域的条目：
 
-        dnscmd /zoneadd contoso.com  /Primary
-        dnscmd /recordadd contoso.com  contoso.com. SOA %computername%.contoso.com. hostmaster. 1 15 10 1 1
-        dnscmd /recordadd contoso.com %computername%  A <IP_OF_DNS_VM>
-        dnscmd /config contoso.com /allowupdate 1
+    ```
+    dnscmd /zoneadd contoso.com  /Primary
+    dnscmd /recordadd contoso.com  contoso.com. SOA %computername%.contoso.com. hostmaster. 1 15 10 1 1
+    dnscmd /recordadd contoso.com %computername%  A <IP_OF_DNS_VM>
+    dnscmd /config contoso.com /allowupdate 1
+    ```
 
 ## 后续步骤
 阅读[我可以保护哪些工作负荷？](./site-recovery-workload.md)详细了解如何使用 Azure Site Recovery 保护企业工作负荷。

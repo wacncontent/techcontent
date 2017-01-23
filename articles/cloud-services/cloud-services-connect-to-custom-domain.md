@@ -37,28 +37,30 @@ ms.author: adegeo
 
 #创建虚拟网络
 
-    $vnetStr =
-    @"<?xml version="1.0" encoding="utf-8"?>
-    <NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
-      <VirtualNetworkConfiguration>
-        <VirtualNetworkSites>
-          <VirtualNetworkSite name="[your-vnet-name]" Location="China North">
-            <AddressSpace>
-              <AddressPrefix>[your-address-prefix]</AddressPrefix>
-            </AddressSpace>
-            <Subnets>
-              <Subnet name="[your-subnet-name]">
-                <AddressPrefix>[your-subnet-range]</AddressPrefix>
-              </Subnet>
-            </Subnets>
-          </VirtualNetworkSite>
-        </VirtualNetworkSites>
-      </VirtualNetworkConfiguration>
-    </NetworkConfiguration>
-    "@;
+```
+$vnetStr =
+@"<?xml version="1.0" encoding="utf-8"?>
+<NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
+  <VirtualNetworkConfiguration>
+    <VirtualNetworkSites>
+      <VirtualNetworkSite name="[your-vnet-name]" Location="China North">
+        <AddressSpace>
+          <AddressPrefix>[your-address-prefix]</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="[your-subnet-name]">
+            <AddressPrefix>[your-subnet-range]</AddressPrefix>
+          </Subnet>
+        </Subnets>
+      </VirtualNetworkSite>
+    </VirtualNetworkSites>
+  </VirtualNetworkConfiguration>
+</NetworkConfiguration>
+"@;
 
-    $vnetConfigPath = "<path-to-vnet-config>"
-    Set-AzureVNetConfig -ConfigurationPath $vnetConfigPath;
+$vnetConfigPath = "<path-to-vnet-config>"
+Set-AzureVNetConfig -ConfigurationPath $vnetConfigPath;
+```
 
 ## 创建虚拟机
 
@@ -66,20 +68,24 @@ ms.author: adegeo
 
 为此，请使用以下命令通过 Powershell 创建虚拟机。
 
-    # Initialize variables
-    # VNet and subnet must be classic virtual network resources, not Azure Resource Manager resources.
+```
+# Initialize variables
+# VNet and subnet must be classic virtual network resources, not Azure Resource Manager resources.
 
-    $vnetname = '<your-vnet-name>'
-    $subnetname = '<your-subnet-name>'
-    $vmsvc1 = '<your-hosted-service>'
-    $vm1 = '<your-vm-name>'
-    $username = '<your-username>'
-    $password = '<your-password>'
-    $affgrp = '<your- affgrp>'
+$vnetname = '<your-vnet-name>'
+$subnetname = '<your-subnet-name>'
+$vmsvc1 = '<your-hosted-service>'
+$vm1 = '<your-vm-name>'
+$username = '<your-username>'
+$password = '<your-password>'
+$affgrp = '<your- affgrp>'
+```
 
 # 创建 VM 并将其添加到虚拟网络
 
-    New-AzureQuickVM -Windows -ServiceName $vmsvc1 -name $vm1 -ImageName $imgname -AdminUsername $username -Password $password -AffinityGroup $affgrp -SubnetNames $subnetname -VNetName $vnetname
+```
+New-AzureQuickVM -Windows -ServiceName $vmsvc1 -name $vm1 -ImageName $imgname -AdminUsername $username -Password $password -AffinityGroup $affgrp -SubnetNames $subnetname -VNetName $vnetname
+```
 
 ## 将虚拟机提升为域控制器
 若要将虚拟机配置为 AD 域控制器，需要登录到 VM 并对其进行配置。
@@ -87,7 +93,9 @@ ms.author: adegeo
 若要登录到 VM，可使用以下命令通过 Powershell 获取 RDP 文件。
 
 # 获取 RDP 文件
-    Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-path>
+```
+Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-path>
+```
 
 登录 VM 后，请根据[如何设置客户 AD 域控制器](http://social.technet.microsoft.com/wiki/contents/articles/12370.windows-server-2012-set-up-your-first-domain-controller-step-by-step.aspx)中的分步指导，将虚拟机设置为 AD 域控制器。
 
@@ -95,32 +103,34 @@ ms.author: adegeo
 
 接下来，需要将云服务部署添加到刚刚创建的 VNET。为此，请使用 Visual Studio 或选择的编辑器将相关节添加到 cscfg，以修改云服务 cscfg。
 
-    <ServiceConfiguration serviceName="[hosted-service-name]" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="[os-family]" osVersion="*">
-        <Role name="[role-name]">
-        <Instances count="[number-of-instances]" />
-      </Role>
-      <NetworkConfiguration>
+```
+<ServiceConfiguration serviceName="[hosted-service-name]" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="[os-family]" osVersion="*">
+    <Role name="[role-name]">
+    <Instances count="[number-of-instances]" />
+  </Role>
+  <NetworkConfiguration>
 
-        <!--optional-->
-        <Dns>
-          <DnsServers><DnsServer name="[dns-server-name]" IPAddress="[ip-address]" /></DnsServers>
-        </Dns>
-        <!--optional-->
+    <!--optional-->
+    <Dns>
+      <DnsServers><DnsServer name="[dns-server-name]" IPAddress="[ip-address]" /></DnsServers>
+    </Dns>
+    <!--optional-->
 
-    <!--VNet settings
-        VNet and subnet must be classic virtual network resources, not Azure Resource Manager resources.-->
-    <VirtualNetworkSite name="[virtual-network-name]" />
-    <AddressAssignments>
-        <InstanceAddress roleName="[role-name]">
-        <Subnets>
-            <Subnet name="[subnet-name]" />
-        </Subnets>
-        </InstanceAddress>
-    </AddressAssignments>
-    <!--VNet settings-->
+<!--VNet settings
+    VNet and subnet must be classic virtual network resources, not Azure Resource Manager resources.-->
+<VirtualNetworkSite name="[virtual-network-name]" />
+<AddressAssignments>
+    <InstanceAddress roleName="[role-name]">
+    <Subnets>
+        <Subnet name="[subnet-name]" />
+    </Subnets>
+    </InstanceAddress>
+</AddressAssignments>
+<!--VNet settings-->
 
-      </NetworkConfiguration>
-    </ServiceConfiguration>
+  </NetworkConfiguration>
+</ServiceConfiguration>
+```
 
 接下来，请生成云服务项目并将其部署到 Azure。有关将云服务包部署到 Azure 的帮助，请参阅[如何创建和部署云服务](./cloud-services-how-to-create-deploy.md#deploy)
 
@@ -130,21 +140,27 @@ ms.author: adegeo
 
 # 初始化域变量
 
-    $domain = '<your-domain-name>'
-    $dmuser = '$domain<your-username>'
-    $dmpswd = '<your-domain-password>'
-    $dmspwd = ConvertTo-SecureString $dmpswd -AsPlainText -Force
-    $dmcred = New-Object System.Management.Automation.PSCredential ($dmuser, $dmspwd)
+```
+$domain = '<your-domain-name>'
+$dmuser = '$domain<your-username>'
+$dmpswd = '<your-domain-password>'
+$dmspwd = ConvertTo-SecureString $dmpswd -AsPlainText -Force
+$dmcred = New-Object System.Management.Automation.PSCredential ($dmuser, $dmspwd)
+```
 
 # 将 AD 域扩展添加到云服务角色
 
-    Set-AzureServiceADDomainExtension -Service <your-cloud-service-hosted-service-name> -Role <your-role-name> -Slot <staging-or-production> -DomainName $domain -Credential $dmcred -JoinOption 35
+```
+Set-AzureServiceADDomainExtension -Service <your-cloud-service-hosted-service-name> -Role <your-role-name> -Slot <staging-or-production> -DomainName $domain -Credential $dmcred -JoinOption 35
+```
 
 这就是所有的操作。
 
 云服务现在应已加入自定义域控制器。如果想要详细了解可用于配置 AD 域扩展的其他选项，请如下所示使用 PowerShell 帮助。
 
-    help Set-AzureServiceADDomainExtension
-    help New-AzureServiceADDomainExtensionConfig
+```
+help Set-AzureServiceADDomainExtension
+help New-AzureServiceADDomainExtensionConfig
+```
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

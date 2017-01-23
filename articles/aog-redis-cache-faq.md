@@ -40,8 +40,10 @@ wacn.date: 08/31/2016
 
 可以通过代码监控统计 ThreadPool 的数据，可以参考[链接](https://github.com/JonCole/SampleCode/blob/master/ThreadPoolMonitor/ThreadPoolLogger.cs)。也可以通过检查 StackExchange.Redis 发出的异常超时报错信息。一个简单的例子如下：
 
-    System.TimeoutException: Timeout performing EVAL, inst: 8, mgr: Inactive, queue: 0, qu: 0, qs: 0, qc: 0, wr: 0, wq: 0, in: 64221, ar: 0, 
-    IOCP: (Busy=6,Free=999,Min=2,Max=1000), WORKER: (Busy=7,Free=8184,Min=2,Max=8191)
+```
+System.TimeoutException: Timeout performing EVAL, inst: 8, mgr: Inactive, queue: 0, qu: 0, qs: 0, qc: 0, wr: 0, wq: 0, in: 64221, ar: 0, 
+IOCP: (Busy=6,Free=999,Min=2,Max=1000), WORKER: (Busy=7,Free=8184,Min=2,Max=8191)
+```
 
 通过上面的例子，可以看到几个比较有趣的问题：
 
@@ -75,12 +77,14 @@ wacn.date: 08/31/2016
 
 接下来我们来说明一下这个问题，首先请求 A 和请求 B 很快被发送出去，server 端很快开始发送 A 请求响应和 B 请求响应，然而，在处理 A 请求响应和数据传输期间，B 请求是被阻塞的，所以当 A 响应处理完之后，即使 server 端可以很快的对 B 响应，还是发生了超时。
 
-    |-------- 1 Second Timeout (A)----------|
-    |-Request A-|
-         |-------- 1 Second Timeout (B) ----------|
-         |-Request B-|
-                |- Read Response A --------|
-                                           |- Read Response B-| (**TIMEOUT**)
+```
+|-------- 1 Second Timeout (A)----------|
+|-Request A-|
+     |-------- 1 Second Timeout (B) ----------|
+     |-Request B-|
+            |- Read Response A --------|
+                                       |- Read Response B-| (**TIMEOUT**)
+```
 
 **监控该问题：**这个问题相对比较难监控，通常可以通过在 code 中做特殊的设置来检索一些比较大的请求和响应，从而有效追踪该问题。
 

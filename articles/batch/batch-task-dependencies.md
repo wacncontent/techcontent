@@ -37,11 +37,13 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 
 若要在 Batch 应用程序中使用任务依赖关系，必须先告知 Batch 服务：作业要使用任务依赖关系。在 Batch .NET 中，为 [CloudJob][net_cloudjob] 启用任务依赖关系的方法是将其 [UsesTaskDependencies][net_usestaskdependencies] 属性设置为 `true`：
 
-    CloudJob unboundJob = batchClient.JobOperations.CreateJob( "job001",
-        new PoolInformation { PoolId = "pool001" });
+```
+CloudJob unboundJob = batchClient.JobOperations.CreateJob( "job001",
+    new PoolInformation { PoolId = "pool001" });
 
-    // IMPORTANT: This is REQUIRED for using task dependencies.
-    unboundJob.UsesTaskDependencies = true;
+// IMPORTANT: This is REQUIRED for using task dependencies.
+unboundJob.UsesTaskDependencies = true;
+```
 
 在上面的代码片段中，“batchClient”是 [BatchClient][net_batchclient] 类的一个实例。
 
@@ -49,12 +51,14 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 
 若要创建一个依赖于一个或多个其他任务的成功完成的任务，需告知 Batch：该任务“依赖于”其他任务。在 Batch .NET 中，为 [CloudTask][net_cloudtask].[DependsOn][net_dependson] 属性配置 [TaskDependencies][net_taskdependencies] 类的一个实例：
 
-    // Task 'Flowers' depends on completion of both 'Rain' and 'Sun'
-    // before it is run.
-    new CloudTask("Flowers", "cmd.exe /c echo Flowers")
-    {
-        DependsOn = TaskDependencies.OnIds("Rain", "Sun")
-    },
+```
+// Task 'Flowers' depends on completion of both 'Rain' and 'Sun'
+// before it is run.
+new CloudTask("Flowers", "cmd.exe /c echo Flowers")
+{
+    DependsOn = TaskDependencies.OnIds("Rain", "Sun")
+},
+```
 
 此代码片段创建了一个 ID 为“Flowers”的任务，该任务计划为仅在 ID 为“Rain”和“Sun”的任务成功完成后，才在计算节点上运行。
 
@@ -78,29 +82,33 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 
 若要创建依赖于一个其他任务的成功完成的任务，可在填充 [CloudTask][net_cloudtask] 的 [DependsOn][net_dependson] 属性时，向 [TaskDependencies][net_taskdependencies].[OnId][net_onid] 静态方法提供单个任务 ID。
 
-    // Task 'taskA' doesn't depend on any other tasks
-    new CloudTask("taskA", "cmd.exe /c echo taskA"),
+```
+// Task 'taskA' doesn't depend on any other tasks
+new CloudTask("taskA", "cmd.exe /c echo taskA"),
 
-    // Task 'taskB' depends on completion of task 'taskA'
-    new CloudTask("taskB", "cmd.exe /c echo taskB")
-    {
-        DependsOn = TaskDependencies.OnId("taskA")
-    },
+// Task 'taskB' depends on completion of task 'taskA'
+new CloudTask("taskB", "cmd.exe /c echo taskB")
+{
+    DependsOn = TaskDependencies.OnId("taskA")
+},
+```
 
 ### <a name="one-to-many"></a>一对多
 
 若要创建依赖于多个任务的成功完成的任务，可在填充 [CloudTask][net_cloudtask] 的 [DependsOn][net_dependson] 属性时，向 [TaskDependencies][net_taskdependencies].[OnIds][net_onids] 静态方法提供任务 ID 的集合。
 
-    // 'Rain' and 'Sun' don't depend on any other tasks
-    new CloudTask("Rain", "cmd.exe /c echo Rain"),
-    new CloudTask("Sun", "cmd.exe /c echo Sun"),
+```
+// 'Rain' and 'Sun' don't depend on any other tasks
+new CloudTask("Rain", "cmd.exe /c echo Rain"),
+new CloudTask("Sun", "cmd.exe /c echo Sun"),
 
-    // Task 'Flowers' depends on completion of both 'Rain' and 'Sun'
-    // before it is run.
-    new CloudTask("Flowers", "cmd.exe /c echo Flowers")
-    {
-        DependsOn = TaskDependencies.OnIds("Rain", "Sun")
-    },
+// Task 'Flowers' depends on completion of both 'Rain' and 'Sun'
+// before it is run.
+new CloudTask("Flowers", "cmd.exe /c echo Flowers")
+{
+    DependsOn = TaskDependencies.OnIds("Rain", "Sun")
+},
+```
 
 ### <a name="task-id-range"></a>任务 ID 范围
 
@@ -109,21 +117,23 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 >[!IMPORTANT]
 > 将任务 ID 范围用于依赖关系时，该范围内的任务 ID *必须*采用整数值的字符串表示形式。此外，范围内的每项任务必须成功完成，依赖任务才能按计划执行。
 
-    // Tasks 1, 2, and 3 don't depend on any other tasks. Because
-    // we will be using them for a task range dependency, we must
-    // specify string representations of integers as their ids.
-    new CloudTask("1", "cmd.exe /c echo 1"),
-    new CloudTask("2", "cmd.exe /c echo 2"),
-    new CloudTask("3", "cmd.exe /c echo 3"),
+```
+// Tasks 1, 2, and 3 don't depend on any other tasks. Because
+// we will be using them for a task range dependency, we must
+// specify string representations of integers as their ids.
+new CloudTask("1", "cmd.exe /c echo 1"),
+new CloudTask("2", "cmd.exe /c echo 2"),
+new CloudTask("3", "cmd.exe /c echo 3"),
 
-    // Task 4 depends on a range of tasks, 1 through 3
-    new CloudTask("4", "cmd.exe /c echo 4")
-    {
-        // To use a range of tasks, their ids must be integer values.
-        // Note that we pass integers as parameters to TaskIdRange,
-        // but their ids (above) are string representations of the ids.
-        DependsOn = TaskDependencies.OnIdRange(1, 3)
-    },
+// Task 4 depends on a range of tasks, 1 through 3
+new CloudTask("4", "cmd.exe /c echo 4")
+{
+    // To use a range of tasks, their ids must be integer values.
+    // Note that we pass integers as parameters to TaskIdRange,
+    // but their ids (above) are string representations of the ids.
+    DependsOn = TaskDependencies.OnIdRange(1, 3)
+},
+```
 
 ## 代码示例
 

@@ -37,13 +37,17 @@ ms.author: srinia
 
 [New-AzureRmSqlElasticPool](https://msdn.microsoft.com/zh-cn/library/azure/mt619378.aspx) cmdlet 将创建新池。每个池的 eDTU 值、最小和最大 DTU 受服务器层值（基本、标准或高级）的约束。请参阅[弹性池和弹性数据库的 eDTU 和存储限制](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)。
 
-    New-AzureRmSqlElasticPool -ResourceGroupName "resourcegroup1" -ServerName "server1" -ElasticPoolName "elasticpool1" -Edition "Standard" -Dtu 400 -DatabaseDtuMin 10 -DatabaseDtuMax 100
+```
+New-AzureRmSqlElasticPool -ResourceGroupName "resourcegroup1" -ServerName "server1" -ElasticPoolName "elasticpool1" -Edition "Standard" -Dtu 400 -DatabaseDtuMin 10 -DatabaseDtuMax 100
+```
 
 ## 在池中创建新的弹性数据库
 
 使用 [New-AzureRmSqlDatabase](https://msdn.microsoft.com/zh-cn/library/azure/mt619339.aspx) cmdlet 并将 **ElasticPoolName** 参数设置为目标池。若要将现有数据库移到池中，请参阅[将数据库移入弹性池](./sql-database-elastic-pool-manage-powershell.md#Move-a-database-into-an-elastic-pool)。
 
-    New-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+```
+New-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+```
 
 ## 创建池，并使用多个新的数据库对其进行填充 
 
@@ -53,23 +57,25 @@ ms.author: srinia
 
 此脚本创建新的 Azure 资源组和新的服务器。出现提示时，提供新服务器的管理员用户名和密码（不是你的 Azure 凭据）。
 
-    $subscriptionId = '<your Azure subscription id>'
-    $resourceGroupName = '<resource group name>'
-    $location = '<datacenter location>'
-    $serverName = '<server name>'
-    $poolName = '<pool name>'
-    $databaseName = '<database name>'
+```
+$subscriptionId = '<your Azure subscription id>'
+$resourceGroupName = '<resource group name>'
+$location = '<datacenter location>'
+$serverName = '<server name>'
+$poolName = '<pool name>'
+$databaseName = '<database name>'
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Set-AzureRmContext -SubscriptionId $subscriptionId
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+Set-AzureRmContext -SubscriptionId $subscriptionId
 
-    New-AzureRmResourceGroup -Name $resourceGroupName -Location $location
-    New-AzureRmSqlServer -ResourceGroupName $resourceGroupName -ServerName $serverName -Location $location -ServerVersion "12.0"
-    New-AzureRmSqlServerFirewallRule -ResourceGroupName $resourceGroupName -ServerName $serverName -FirewallRuleName "rule1" -StartIpAddress "192.168.0.198" -EndIpAddress "192.168.0.199"
+New-AzureRmResourceGroup -Name $resourceGroupName -Location $location
+New-AzureRmSqlServer -ResourceGroupName $resourceGroupName -ServerName $serverName -Location $location -ServerVersion "12.0"
+New-AzureRmSqlServerFirewallRule -ResourceGroupName $resourceGroupName -ServerName $serverName -FirewallRuleName "rule1" -StartIpAddress "192.168.0.198" -EndIpAddress "192.168.0.199"
 
-    New-AzureRmSqlElasticPool -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName -Edition "Standard" -Dtu 400 -DatabaseDtuMin 10 -DatabaseDtuMax 100
+New-AzureRmSqlElasticPool -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName -Edition "Standard" -Dtu 400 -DatabaseDtuMin 10 -DatabaseDtuMax 100
 
-    New-AzureRmSqlDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -DatabaseName $databaseName -ElasticPoolName $poolName -MaxSizeBytes 10GB
+New-AzureRmSqlDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -DatabaseName $databaseName -ElasticPoolName $poolName -MaxSizeBytes 10GB
+```
 
 ## 后续步骤
 

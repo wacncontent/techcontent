@@ -89,8 +89,10 @@ Azure 事件中心是一种事件处理服务，用于向云提供大规模的�
 
 以下是使用者组 URI 约定的示例：
 
-    //<my namespace>.servicebus.chinacloudapi.cn/<event hub name>/<Consumer Group #1>
-    //<my namespace>.servicebus.chinacloudapi.cn/<event hub name>/<Consumer Group #2>
+```
+//<my namespace>.servicebus.chinacloudapi.cn/<event hub name>/<Consumer Group #1>
+//<my namespace>.servicebus.chinacloudapi.cn/<event hub name>/<Consumer Group #2>
+```
 
 下图显示了使用者组内的事件使用者。
 
@@ -150,7 +152,9 @@ Azure 事件中心是一种事件处理服务，用于向云提供大规模的�
 
 事件中心可让你通过*发布者策略*对事件发布者进行精细控制。发布者策略是一组运行时功能，旨在为大量的独立事件发布者提供方便。借助发布者策略，每个发布者在使用以下机制将事件发布到事件中心时可以使用自身的唯一标识符。
 
-    //<my namespace>.servicebus.chinacloudapi.cn/<event hub name>/publishers/<my publisher name>
+```
+//<my namespace>.servicebus.chinacloudapi.cn/<event hub name>/publishers/<my publisher name>
+```
 
 你不需要提前创建发布者名称，但它们必须与发布事件时使用的 SAS 令牌匹配，以确保发布者标识保持独立。有关 SAS 的详细信息，请参阅[使用服务总线进行共享访问签名身份验证](../service-bus-messaging/service-bus-shared-access-signature-authentication.md)。使用发布者策略时，**PartitionKey** 值将设置为发布者名称。若要正常工作，这些值必须匹配。
 

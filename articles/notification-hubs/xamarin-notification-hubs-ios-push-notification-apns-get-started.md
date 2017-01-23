@@ -40,8 +40,8 @@ ms.author: wesmc
 + iOS 开发人员计划成员身份
 + [Xamarin Studio]
 
-    > [!NOTE]
-    > 由于 iOS 推送通知配置要求，你必须在物理 iOS 设备（iPhone 或 iPad）而不是在模拟器上部署和测试示例应用程序。
+   > [!NOTE]
+   > 由于 iOS 推送通知配置要求，你必须在物理 iOS 设备（iPhone 或 iPad）而不是在模拟器上部署和测试示例应用程序。
 
 只有在完成本教程后，才能完成有关 Xamarin iOS 应用的所有其他通知中心教程。
 
@@ -80,100 +80,114 @@ ms.author: wesmc
 
 3. 在 **AppDelegate.cs** 中，添加以下 using 语句：
 
-        using WindowsAzure.Messaging;
+    ```
+    using WindowsAzure.Messaging;
+    ```
 
 4. 声明 **SBNotificationHub** 的实例：
 
-        private SBNotificationHub Hub { get; set; }
+    ```
+    private SBNotificationHub Hub { get; set; }
+    ```
 
 5. 使用以下变量创建 **Constants.cs** 类：
 
-        // Azure app-specific connection string and hub path
-        public const string ConnectionString = "<Azure connection string>";
-        public const string NotificationHubPath = "<Azure hub path>";
+    ```
+    // Azure app-specific connection string and hub path
+    public const string ConnectionString = "<Azure connection string>";
+    public const string NotificationHubPath = "<Azure hub path>";
+    ```
 
 6. 在 **AppDelegate.cs** 中，更新 **FinishedLaunching()** 以匹配以下内容：
 
-        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
-        {
-            if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
-                var pushSettings = UIUserNotificationSettings.GetSettingsForTypes (
-                       UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-                       new NSSet ());
+    ```
+    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    {
+        if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
+            var pushSettings = UIUserNotificationSettings.GetSettingsForTypes (
+                   UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+                   new NSSet ());
 
-                UIApplication.SharedApplication.RegisterUserNotificationSettings (pushSettings);
-                UIApplication.SharedApplication.RegisterForRemoteNotifications ();
-            } else {
-                UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
-                UIApplication.SharedApplication.RegisterForRemoteNotificationTypes (notificationTypes);
-            }
-
-            return true;
+            UIApplication.SharedApplication.RegisterUserNotificationSettings (pushSettings);
+            UIApplication.SharedApplication.RegisterForRemoteNotifications ();
+        } else {
+            UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
+            UIApplication.SharedApplication.RegisterForRemoteNotificationTypes (notificationTypes);
         }
+
+        return true;
+    }
+    ```
 
 7. 重写 **AppDelegate.cs** 中的 **RegisteredForRemoteNotifications()** 方法：
 
-        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-        {
-            Hub = new SBNotificationHub(Constants.ConnectionString, Constants.NotificationHubPath);
+    ```
+    public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+    {
+        Hub = new SBNotificationHub(Constants.ConnectionString, Constants.NotificationHubPath);
 
-            Hub.UnregisterAllAsync (deviceToken, (error) => {
-                if (error != null)
-                {
-                    Console.WriteLine("Error calling Unregister: {0}", error.ToString());
-                    return;
-                }
+        Hub.UnregisterAllAsync (deviceToken, (error) => {
+            if (error != null)
+            {
+                Console.WriteLine("Error calling Unregister: {0}", error.ToString());
+                return;
+            }
 
-                NSSet tags = null; // create tags if you want
-                Hub.RegisterNativeAsync(deviceToken, tags, (errorCallback) => {
-                    if (errorCallback != null)
-                        Console.WriteLine("RegisterNativeAsync error: " + errorCallback.ToString());
-                });
+            NSSet tags = null; // create tags if you want
+            Hub.RegisterNativeAsync(deviceToken, tags, (errorCallback) => {
+                if (errorCallback != null)
+                    Console.WriteLine("RegisterNativeAsync error: " + errorCallback.ToString());
             });
-        }
+        });
+    }
+    ```
 
 8. 重写 **AppDelegate.cs** 中的 **ReceivedRemoteNotification()** 方法：
 
-        public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
-        {
-            ProcessNotification(userInfo, false);
-        }
+    ```
+    public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+    {
+        ProcessNotification(userInfo, false);
+    }
+    ```
 
 9. 在 **AppDelegate.cs** 中创建以下 **ProcessNotification()** 方法：
 
-        void ProcessNotification(NSDictionary options, bool fromFinishedLaunching)
+    ```
+    void ProcessNotification(NSDictionary options, bool fromFinishedLaunching)
+    {
+        // Check to see if the dictionary has the aps key.  This is the notification payload you would have sent
+        if (null != options && options.ContainsKey(new NSString("aps")))
         {
-            // Check to see if the dictionary has the aps key.  This is the notification payload you would have sent
-            if (null != options && options.ContainsKey(new NSString("aps")))
+            //Get the aps dictionary
+            NSDictionary aps = options.ObjectForKey(new NSString("aps")) as NSDictionary;
+
+            string alert = string.Empty;
+
+            //Extract the alert text
+            // NOTE: If you're using the simple alert by just specifying
+            // "  aps:{alert:"alert msg here"}  ", this will work fine.
+            // But if you're using a complex alert with Localization keys, etc.,
+            // your "alert" object from the aps dictionary will be another NSDictionary.
+            // Basically the JSON gets dumped right into a NSDictionary,
+            // so keep that in mind.
+            if (aps.ContainsKey(new NSString("alert")))
+                alert = (aps [new NSString("alert")] as NSString).ToString();
+
+            //If this came from the ReceivedRemoteNotification while the app was running,
+            // we of course need to manually process things like the sound, badge, and alert.
+            if (!fromFinishedLaunching)
             {
-                //Get the aps dictionary
-                NSDictionary aps = options.ObjectForKey(new NSString("aps")) as NSDictionary;
-
-                string alert = string.Empty;
-
-                //Extract the alert text
-                // NOTE: If you're using the simple alert by just specifying
-                // "  aps:{alert:"alert msg here"}  ", this will work fine.
-                // But if you're using a complex alert with Localization keys, etc.,
-                // your "alert" object from the aps dictionary will be another NSDictionary.
-                // Basically the JSON gets dumped right into a NSDictionary,
-                // so keep that in mind.
-                if (aps.ContainsKey(new NSString("alert")))
-                    alert = (aps [new NSString("alert")] as NSString).ToString();
-
-                //If this came from the ReceivedRemoteNotification while the app was running,
-                // we of course need to manually process things like the sound, badge, and alert.
-                if (!fromFinishedLaunching)
+                //Manually show an alert
+                if (!string.IsNullOrEmpty(alert))
                 {
-                    //Manually show an alert
-                    if (!string.IsNullOrEmpty(alert))
-                    {
-                        UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
-                        avAlert.Show();
-                    }
+                    UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
+                    avAlert.Show();
                 }
             }
         }
+    }
+    ```
 
     > [!NOTE]
     > 你可以选择覆盖 **FailedToRegisterForRemoteNotifications()** 以处理无网络连接等情况。如果用户可能会在脱机模式下（例如飞行模式）下启动你的应用程序，并且你想要处理应用特定的推送消息方案，则此操作特别重要。
@@ -214,7 +228,9 @@ ms.author: wesmc
 
 3. 在“包管理器控制台”窗口中，将“默认项目”设置为新的控制台应用程序项目，然后在控制台窗口中执行以下命令：
 
-        Install-Package Microsoft.Azure.NotificationHubs
+    ```
+    Install-Package Microsoft.Azure.NotificationHubs
+    ```
 
     这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
 
@@ -222,21 +238,27 @@ ms.author: wesmc
 
 4. 打开 `Program.cs` 文件，并添加以下 `using` 语句，确保我们可以使用 Azure 类和你主类中的函数：
 
-        using Microsoft.Azure.NotificationHubs;
+    ```
+    using Microsoft.Azure.NotificationHubs;
+    ```
 
 3. 在你的 `Program` 类中，添加以下方法（不要忘了替换**连接字符串**和**中心名称**）：
 
-        private static async void SendNotificationAsync()
-        {
-            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
-            var alert = "{"aps":{"alert":"Hello from .NET!"}}";
-            await hub.SendAppleNativeNotificationAsync(alert);
-        }
+    ```
+    private static async void SendNotificationAsync()
+    {
+        NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
+        var alert = "{"aps":{"alert":"Hello from .NET!"}}";
+        await hub.SendAppleNativeNotificationAsync(alert);
+    }
+    ```
 
 4. 在 `Main` 方法中添加以下行：
 
-         SendNotificationAsync();
-         Console.ReadLine();
+    ```
+     SendNotificationAsync();
+     Console.ReadLine();
+    ```
 
 5. 按 F5 键以运行应用。数秒内，你应在设备上看到一条推送通知。无论你使用 Wi-Fi 或移动电话数据网络，确保设备上存在可用的 Internet 连接。
 
@@ -262,22 +284,24 @@ ms.author: wesmc
 
 5. 在你的计划程序函数中插入以下脚本。确保将占位符替换为你先前获取的通知中心名称和 *DefaultFullSharedAccessSignature* 的连接字符串。单击“保存”。
 
-        var azure = require('azure');
-        var notificationHubService = azure.createNotificationHubService('<Hubname>', '<SAS Full access >');
-        notificationHubService.apns.send(
-            null,
-            {"aps":
-                {
-                  "alert": "Hello from Mobile Services!"
-                }
-            },
-            function (error)
+    ```
+    var azure = require('azure');
+    var notificationHubService = azure.createNotificationHubService('<Hubname>', '<SAS Full access >');
+    notificationHubService.apns.send(
+        null,
+        {"aps":
             {
-                if (!error) {
-                    console.warn("Notification successful");
-                }
+              "alert": "Hello from Mobile Services!"
             }
-        );
+        },
+        function (error)
+        {
+            if (!error) {
+                console.warn("Notification successful");
+            }
+        }
+    );
+    ```
 
 6. 单击底部栏上的“运行一次”。你应在设备上收到警报。
 

@@ -50,7 +50,9 @@ wacn.date: 07/05/2016
 
     比如在本地使用 Visual Studio 2013 创建 Web 应用项目，在 Default.aspx.cs 输入以下代码：
 
-        Label1.Text = DateTime.Now.ToString();
+    ```
+    Label1.Text = DateTime.Now.ToString();
+    ```
 
     部署到 Azure Web 应用之后，显示的是 UTC 时区。如下图：
 
@@ -145,61 +147,63 @@ wacn.date: 07/05/2016
 1. 由于要检测 JVM 的 usage 信息以便确定，定制化修改的 Java 参数是否生效，所以需要写一些测试代码，打印出当前 JVM 的参数信息; 首先使用 FileZilla 连接到您的网站，进入到 /site/wwwroot/webapps/ROOT 目录下，下载 index.jsp 文件到本地。
 2. 有一个简单的测试程序，测试 Java 运行时 heap size 大小，使用 ManagmentBeans 获得的 JVM 参数，已经上传到了 github，请直接下载，或者可以打开 [index.jsp](https://github.com/kingliantop/azurelabs/blob/master/Java/websites/index.jsp) 文件添加相关代码如下：
 
-         1 <%@ page import="java.lang.management.*" %>
-         2 
-         3 <%
-         4 
-         5 ArrayList<String> mainPageProps = new ArrayList<String>();
-         6 
-         7 ……
-         8 
-         9      ……
-        10 
-        11 int MB=1024*1024;
-        12 
-        13 Runtime runtime = Runtime.getRuntime();
-        14 
-        15 out.print("<tr><td>Runtime Total memory:</td><td>" + runtime.totalMemory()/MB+"M</td></tr>");
-        16 
-        17 out.print("<tr><td>Runtime Free memory:</td><td>" + runtime.freeMemory()/MB+"M</td></tr>");
-        18 
-        19 out.print("<tr><td>Runtime Used memory:</td><td>" + (runtime.totalMemory() - runtime.freeMemory())/MB+"M</td></tr>");
-        20 
-        21 out.print("<tr><td>Runtime Max memory:</td><td>" + runtime.maxMemory()/MB+"M</td></tr>");
-        22 
-        23                 
-        24 
-        25 Iterator iter = ManagementFactory.getMemoryPoolMXBeans().iterator();
-        26 
-        27                 
-        28 
-        29 out.print("<tr><td><h3>Memory MXBean</h3></td></tr>");
-        30 
-        31 out.print("<tr><td>Heap Memory Usage:</td><td>" + ManagementFactory.getMemoryMXBean().getHeapMemoryUsage()+"</td></tr>");
-        32 
-        33 out.print("<tr><td>Non-Heap Memory Usage:</td><td>" + ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage()+"</td></tr>");
-        34 
-        35 out.print("<tr><td><h3>Memory Pool MXBeans</h3></td></tr>");
-        36 
-        37                     
-        38 
-        39 while (iter.hasNext()) {
-        40 
-        41     MemoryPoolMXBean item = (MemoryPoolMXBean) iter.next();
-        42 
-        43     out.print("<tr><td><b>"+item.getName()+"</b></td></tr>");
-        44 
-        45     out.print("<tr><td>Type:</td><td>" + item.getType()+"</td></tr>");
-        46 
-        47     out.print("<tr><td>Usage:</td><td>" + item.getUsage()+"</td></tr>");
-        48 
-        49     out.print("<tr><td>Peak Usage:</td><td>" + item.getPeakUsage()+"</td></tr>");
-        50 
-        51     out.print("<tr><td>Collection Usage:</td><td>" + item.getCollectionUsage()+"</td></tr>");
-        52 
-        53                 }
-        54 
-        55 %>    
+    ```
+     1 <%@ page import="java.lang.management.*" %>
+     2 
+     3 <%
+     4 
+     5 ArrayList<String> mainPageProps = new ArrayList<String>();
+     6 
+     7 ……
+     8 
+     9      ……
+    10 
+    11 int MB=1024*1024;
+    12 
+    13 Runtime runtime = Runtime.getRuntime();
+    14 
+    15 out.print("<tr><td>Runtime Total memory:</td><td>" + runtime.totalMemory()/MB+"M</td></tr>");
+    16 
+    17 out.print("<tr><td>Runtime Free memory:</td><td>" + runtime.freeMemory()/MB+"M</td></tr>");
+    18 
+    19 out.print("<tr><td>Runtime Used memory:</td><td>" + (runtime.totalMemory() - runtime.freeMemory())/MB+"M</td></tr>");
+    20 
+    21 out.print("<tr><td>Runtime Max memory:</td><td>" + runtime.maxMemory()/MB+"M</td></tr>");
+    22 
+    23                 
+    24 
+    25 Iterator iter = ManagementFactory.getMemoryPoolMXBeans().iterator();
+    26 
+    27                 
+    28 
+    29 out.print("<tr><td><h3>Memory MXBean</h3></td></tr>");
+    30 
+    31 out.print("<tr><td>Heap Memory Usage:</td><td>" + ManagementFactory.getMemoryMXBean().getHeapMemoryUsage()+"</td></tr>");
+    32 
+    33 out.print("<tr><td>Non-Heap Memory Usage:</td><td>" + ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage()+"</td></tr>");
+    34 
+    35 out.print("<tr><td><h3>Memory Pool MXBeans</h3></td></tr>");
+    36 
+    37                     
+    38 
+    39 while (iter.hasNext()) {
+    40 
+    41     MemoryPoolMXBean item = (MemoryPoolMXBean) iter.next();
+    42 
+    43     out.print("<tr><td><b>"+item.getName()+"</b></td></tr>");
+    44 
+    45     out.print("<tr><td>Type:</td><td>" + item.getType()+"</td></tr>");
+    46 
+    47     out.print("<tr><td>Usage:</td><td>" + item.getUsage()+"</td></tr>");
+    48 
+    49     out.print("<tr><td>Peak Usage:</td><td>" + item.getPeakUsage()+"</td></tr>");
+    50 
+    51     out.print("<tr><td>Collection Usage:</td><td>" + item.getCollectionUsage()+"</td></tr>");
+    52 
+    53                 }
+    54 
+    55 %>    
+    ```
 
 3. 上传修改后的 index.jsp 文件到 ROOT 目录下，覆盖原来的文件，重新打开您的 web 站点主页，可以看到测试程序会打印出当前运行环境下内存大小，heap size，non-heap size 大小等相关信息
 
@@ -211,7 +215,9 @@ wacn.date: 07/05/2016
 
     对于 PermGen 大小，初始大小为：
 
-        init = 22020096(21504K) used = 41871616(40890K) committed = 41943040(40960K) max = 85983232(83968K)
+    ```
+    init = 22020096(21504K) used = 41871616(40890K) committed = 41943040(40960K) max = 85983232(83968K)
+    ```
 
 5. 做个简单的实验，将 web 站点的实例升级，看看 Azure web app 是否会自动根据当前系统实例的大小来调整 JVM 相关参数，在 "缩放" 页面，将实例升级到中型实例，点击保存：
 
@@ -235,35 +241,37 @@ wacn.date: 07/05/2016
 
 6. 首先需要准备一个 web.config 文件，在本示例中使用 Azure 站点提供的 Tomcat 和 JDK，需要配置的相关参数 -Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m 放在 JAVA_OPTS 下：
 
-         1 <?xml version="1.0" encoding="UTF-8"?>
-         2 
-         3 <configuration>
-         4 
-         5 <system.webServer>
-         6 
-         7 <handlers>
-         8 
-         9 <add name="httpPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
-        10 
-        11 </handlers>
-        12 
-        13 <httpPlatform processPath="%AZURE_TOMCAT7_HOME%\bin\startup.bat"
-        14 
-        15 arguments="">
-        16 
-        17 <environmentVariables>
-        18 
-        19 <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
-        20 
-        21 <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true -Xms256m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m" />
-        22 
-        23 </environmentVariables>
-        24 
-        25 </httpPlatform>
-        26 
-        27 </system.webServer>
-        28 
-        29 </configuration> 
+    ```
+     1 <?xml version="1.0" encoding="UTF-8"?>
+     2 
+     3 <configuration>
+     4 
+     5 <system.webServer>
+     6 
+     7 <handlers>
+     8 
+     9 <add name="httpPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
+    10 
+    11 </handlers>
+    12 
+    13 <httpPlatform processPath="%AZURE_TOMCAT7_HOME%\bin\startup.bat"
+    14 
+    15 arguments="">
+    16 
+    17 <environmentVariables>
+    18 
+    19 <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
+    20 
+    21 <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true -Xms256m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m" />
+    22 
+    23 </environmentVariables>
+    24 
+    25 </httpPlatform>
+    26 
+    27 </system.webServer>
+    28 
+    29 </configuration> 
+    ```
 
     注意事项：
 
@@ -346,37 +354,39 @@ wacn.date: 07/05/2016
 
 11. 最后需要创建自己的定制化的 web.config 文件，打开您的编辑器，将下面的 web.config 文件内容拷贝粘贴，如果您的 JDK、tomcat 有所不同，请修改相关路径, 也可以直接从 [GitHub](https://github.com/kingliantop/azurelabs/blob/master/Java/websites/indepth/web.config) 直接下载。
 
-         1 <?xml version="1.0" encoding="UTF-8"?>
-         2 
-         3 <configuration>
-         4 
-         5 <system.webServer>
-         6 
-         7 <handlers>
-         8 
-         9 <add name="httpPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
-        10 
-        11 </handlers>
-        12 
-        13 <httpPlatform processPath="%HOME%\site\wwwroot\bin\apache-tomcat-8.0.32\bin\startup.bat"
-        14 
-        15 arguments="">
-        16 
-        17 <environmentVariables>
-        18 
-        19 <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
-        20 
-        21 <environmentVariable name="CATALINA_HOME" value="%HOME%\site\wwwroot\bin\apache-tomcat-8.0.32" />
-        22 
-        23 <environmentVariable name="JRE_HOME" value="%HOME%\site\wwwroot\bin\jdk1.8.0_60" /> <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true -Dsun.java2d.d3d=false -Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m" />
-        24 
-        25 </environmentVariables>
-        26 
-        27 </httpPlatform>
-        28 
-        29 </system.webServer>
-        30 
-        31 </configuration>
+    ```
+     1 <?xml version="1.0" encoding="UTF-8"?>
+     2 
+     3 <configuration>
+     4 
+     5 <system.webServer>
+     6 
+     7 <handlers>
+     8 
+     9 <add name="httpPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
+    10 
+    11 </handlers>
+    12 
+    13 <httpPlatform processPath="%HOME%\site\wwwroot\bin\apache-tomcat-8.0.32\bin\startup.bat"
+    14 
+    15 arguments="">
+    16 
+    17 <environmentVariables>
+    18 
+    19 <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
+    20 
+    21 <environmentVariable name="CATALINA_HOME" value="%HOME%\site\wwwroot\bin\apache-tomcat-8.0.32" />
+    22 
+    23 <environmentVariable name="JRE_HOME" value="%HOME%\site\wwwroot\bin\jdk1.8.0_60" /> <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true -Dsun.java2d.d3d=false -Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m" />
+    24 
+    25 </environmentVariables>
+    26 
+    27 </httpPlatform>
+    28 
+    29 </system.webServer>
+    30 
+    31 </configuration>
+    ```
 
 12. 最后一步，将 web.config 文件上传到您的 web 站点的根目录：
 

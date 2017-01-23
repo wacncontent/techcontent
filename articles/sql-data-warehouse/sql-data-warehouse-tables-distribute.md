@@ -65,35 +65,37 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 
 这两个示例都将创建轮循机制表：
 
-    -- Round Robin created by default
-    CREATE TABLE [dbo].[FactInternetSales]
-    (   [ProductKey]            int          NOT NULL
-    ,   [OrderDateKey]          int          NOT NULL
-    ,   [CustomerKey]           int          NOT NULL
-    ,   [PromotionKey]          int          NOT NULL
-    ,   [SalesOrderNumber]      nvarchar(20) NOT NULL
-    ,   [OrderQuantity]         smallint     NOT NULL
-    ,   [UnitPrice]             money        NOT NULL
-    ,   [SalesAmount]           money        NOT NULL
-    )
-    ;
+```
+-- Round Robin created by default
+CREATE TABLE [dbo].[FactInternetSales]
+(   [ProductKey]            int          NOT NULL
+,   [OrderDateKey]          int          NOT NULL
+,   [CustomerKey]           int          NOT NULL
+,   [PromotionKey]          int          NOT NULL
+,   [SalesOrderNumber]      nvarchar(20) NOT NULL
+,   [OrderQuantity]         smallint     NOT NULL
+,   [UnitPrice]             money        NOT NULL
+,   [SalesAmount]           money        NOT NULL
+)
+;
 
-    -- Explicitly Created Round Robin Table
-    CREATE TABLE [dbo].[FactInternetSales]
-    (   [ProductKey]            int          NOT NULL
-    ,   [OrderDateKey]          int          NOT NULL
-    ,   [CustomerKey]           int          NOT NULL
-    ,   [PromotionKey]          int          NOT NULL
-    ,   [SalesOrderNumber]      nvarchar(20) NOT NULL
-    ,   [OrderQuantity]         smallint     NOT NULL
-    ,   [UnitPrice]             money        NOT NULL
-    ,   [SalesAmount]           money        NOT NULL
-    )
-    WITH
-    (   CLUSTERED COLUMNSTORE INDEX
-    ,   DISTRIBUTION = ROUND_ROBIN
-    )
-    ;
+-- Explicitly Created Round Robin Table
+CREATE TABLE [dbo].[FactInternetSales]
+(   [ProductKey]            int          NOT NULL
+,   [OrderDateKey]          int          NOT NULL
+,   [CustomerKey]           int          NOT NULL
+,   [PromotionKey]          int          NOT NULL
+,   [SalesOrderNumber]      nvarchar(20) NOT NULL
+,   [OrderQuantity]         smallint     NOT NULL
+,   [UnitPrice]             money        NOT NULL
+,   [SalesAmount]           money        NOT NULL
+)
+WITH
+(   CLUSTERED COLUMNSTORE INDEX
+,   DISTRIBUTION = ROUND_ROBIN
+)
+;
+```
 
 > [!NOTE]
 > 尽管轮循机制是默认的表类型，但最好在 DDL 中明确规定此方法，使其他人能够清楚了解表布局的意图。
@@ -104,21 +106,23 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 
 本示例将创建基于 ID 分布的表：
 
-    CREATE TABLE [dbo].[FactInternetSales]
-    (   [ProductKey]            int          NOT NULL
-    ,   [OrderDateKey]          int          NOT NULL
-    ,   [CustomerKey]           int          NOT NULL
-    ,   [PromotionKey]          int          NOT NULL
-    ,   [SalesOrderNumber]      nvarchar(20) NOT NULL
-    ,   [OrderQuantity]         smallint     NOT NULL
-    ,   [UnitPrice]             money        NOT NULL
-    ,   [SalesAmount]           money        NOT NULL
-    )
-    WITH
-    (   CLUSTERED COLUMNSTORE INDEX
-    ,  DISTRIBUTION = HASH([ProductKey])
-    )
-    ;
+```
+CREATE TABLE [dbo].[FactInternetSales]
+(   [ProductKey]            int          NOT NULL
+,   [OrderDateKey]          int          NOT NULL
+,   [CustomerKey]           int          NOT NULL
+,   [PromotionKey]          int          NOT NULL
+,   [SalesOrderNumber]      nvarchar(20) NOT NULL
+,   [OrderQuantity]         smallint     NOT NULL
+,   [UnitPrice]             money        NOT NULL
+,   [SalesAmount]           money        NOT NULL
+)
+WITH
+(   CLUSTERED COLUMNSTORE INDEX
+,  DISTRIBUTION = HASH([ProductKey])
+)
+;
+```
 
 ## 选择分布列
 
@@ -176,23 +180,27 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 
 识别表偏斜的简单方法是使用 `DBCC PDW_SHOWSPACEUSED`。这是一种非常快捷简便的方法，可以查看存储在数据库中每组 60 个分布区内的表行数目。请记住，为了获得最平衡的性能，分布式表中的行应该平均分散在所有分布区中。
 
-    -- Find data skew for a distributed table
-    DBCC PDW_SHOWSPACEUSED('dbo.FactInternetSales');
+```
+-- Find data skew for a distributed table
+DBCC PDW_SHOWSPACEUSED('dbo.FactInternetSales');
+```
 
 但是，如果你查询 Azure SQL 数据仓库动态管理视图 (DMV)，则可以执行更详细的分析。若要开始，请使用 [Table Overview][Overview]（表概述）一文中的 SQL 创建 <!--[-->dbo.vTableSizes<!--][]--> 视图。创建该视图后，运行此查询来识别哪些表有 10% 以上的数据偏斜。
 
-    select *
-    from dbo.vTableSizes 
-    where two_part_name in 
-        (
-        select two_part_name
-        from dbo.vTableSizes
-        where row_count > 0
-        group by two_part_name
-        having min(row_count * 1.000)/max(row_count * 1.000) > .10
-        )
-    order by two_part_name, row_count
-    ;
+```
+select *
+from dbo.vTableSizes 
+where two_part_name in 
+    (
+    select two_part_name
+    from dbo.vTableSizes
+    where row_count > 0
+    group by two_part_name
+    having min(row_count * 1.000)/max(row_count * 1.000) > .10
+    )
+order by two_part_name, row_count
+;
+```
 
 ### 解决数据倾斜
 
@@ -206,77 +214,81 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 
 本示例使用 [CTAS][] 来重新创建具有不同哈希分布列的表。
 
-    CREATE TABLE [dbo].[FactInternetSales_CustomerKey] 
-    WITH (  CLUSTERED COLUMNSTORE INDEX
-        ,  DISTRIBUTION =  HASH([CustomerKey])
-        ,  PARTITION       ( [OrderDateKey] RANGE RIGHT FOR VALUES (   20000101, 20010101, 20020101, 20030101
-                                                                    ,   20040101, 20050101, 20060101, 20070101
-                                                                    ,   20080101, 20090101, 20100101, 20110101
-                                                                    ,   20120101, 20130101, 20140101, 20150101
-                                                                    ,   20160101, 20170101, 20180101, 20190101
-                                                                    ,   20200101, 20210101, 20220101, 20230101
-                                                                    ,   20240101, 20250101, 20260101, 20270101
-                                                                    ,   20280101, 20290101
-                                                                    )
-                            )
-        )
-    AS
-    SELECT  *
-    FROM    [dbo].[FactInternetSales]
-    OPTION  (LABEL  = 'CTAS : FactInternetSales_CustomerKey')
-    ;
+```
+CREATE TABLE [dbo].[FactInternetSales_CustomerKey] 
+WITH (  CLUSTERED COLUMNSTORE INDEX
+    ,  DISTRIBUTION =  HASH([CustomerKey])
+    ,  PARTITION       ( [OrderDateKey] RANGE RIGHT FOR VALUES (   20000101, 20010101, 20020101, 20030101
+                                                                ,   20040101, 20050101, 20060101, 20070101
+                                                                ,   20080101, 20090101, 20100101, 20110101
+                                                                ,   20120101, 20130101, 20140101, 20150101
+                                                                ,   20160101, 20170101, 20180101, 20190101
+                                                                ,   20200101, 20210101, 20220101, 20230101
+                                                                ,   20240101, 20250101, 20260101, 20270101
+                                                                ,   20280101, 20290101
+                                                                )
+                        )
+    )
+AS
+SELECT  *
+FROM    [dbo].[FactInternetSales]
+OPTION  (LABEL  = 'CTAS : FactInternetSales_CustomerKey')
+;
 
-    --Create statistics on new table
-    CREATE STATISTICS [ProductKey] ON [FactInternetSales_CustomerKey] ([ProductKey]);
-    CREATE STATISTICS [OrderDateKey] ON [FactInternetSales_CustomerKey] ([OrderDateKey]);
-    CREATE STATISTICS [CustomerKey] ON [FactInternetSales_CustomerKey] ([CustomerKey]);
-    CREATE STATISTICS [PromotionKey] ON [FactInternetSales_CustomerKey] ([PromotionKey]);
-    CREATE STATISTICS [SalesOrderNumber] ON [FactInternetSales_CustomerKey] ([SalesOrderNumber]);
-    CREATE STATISTICS [OrderQuantity] ON [FactInternetSales_CustomerKey] ([OrderQuantity]);
-    CREATE STATISTICS [UnitPrice] ON [FactInternetSales_CustomerKey] ([UnitPrice]);
-    CREATE STATISTICS [SalesAmount] ON [FactInternetSales_CustomerKey] ([SalesAmount]);
+--Create statistics on new table
+CREATE STATISTICS [ProductKey] ON [FactInternetSales_CustomerKey] ([ProductKey]);
+CREATE STATISTICS [OrderDateKey] ON [FactInternetSales_CustomerKey] ([OrderDateKey]);
+CREATE STATISTICS [CustomerKey] ON [FactInternetSales_CustomerKey] ([CustomerKey]);
+CREATE STATISTICS [PromotionKey] ON [FactInternetSales_CustomerKey] ([PromotionKey]);
+CREATE STATISTICS [SalesOrderNumber] ON [FactInternetSales_CustomerKey] ([SalesOrderNumber]);
+CREATE STATISTICS [OrderQuantity] ON [FactInternetSales_CustomerKey] ([OrderQuantity]);
+CREATE STATISTICS [UnitPrice] ON [FactInternetSales_CustomerKey] ([UnitPrice]);
+CREATE STATISTICS [SalesAmount] ON [FactInternetSales_CustomerKey] ([SalesAmount]);
 
-    --Rename the tables
-    RENAME OBJECT [dbo].[FactInternetSales] TO [FactInternetSales_ProductKey];
-    RENAME OBJECT [dbo].[FactInternetSales_CustomerKey] TO [FactInternetSales];
+--Rename the tables
+RENAME OBJECT [dbo].[FactInternetSales] TO [FactInternetSales_ProductKey];
+RENAME OBJECT [dbo].[FactInternetSales_CustomerKey] TO [FactInternetSales];
+```
 
 ### 示例 2：使用轮循机制分布重新创建表
 
 本示例使用 [CTAS][] 来重新创建具有轮循机制分布而不是哈希分布的表。这种变化将生成平均的数据分布，但代价是数据移动加大。
 
-    CREATE TABLE [dbo].[FactInternetSales_ROUND_ROBIN] 
-    WITH (  CLUSTERED COLUMNSTORE INDEX
-        ,  DISTRIBUTION =  ROUND_ROBIN
-        ,  PARTITION       ( [OrderDateKey] RANGE RIGHT FOR VALUES (   20000101, 20010101, 20020101, 20030101
-                                                                    ,   20040101, 20050101, 20060101, 20070101
-                                                                    ,   20080101, 20090101, 20100101, 20110101
-                                                                    ,   20120101, 20130101, 20140101, 20150101
-                                                                    ,   20160101, 20170101, 20180101, 20190101
-                                                                    ,   20200101, 20210101, 20220101, 20230101
-                                                                    ,   20240101, 20250101, 20260101, 20270101
-                                                                    ,   20280101, 20290101
-                                                                    )
-                            )
-        )
-    AS
-    SELECT  *
-    FROM    [dbo].[FactInternetSales]
-    OPTION  (LABEL  = 'CTAS : FactInternetSales_ROUND_ROBIN')
-    ;
+```
+CREATE TABLE [dbo].[FactInternetSales_ROUND_ROBIN] 
+WITH (  CLUSTERED COLUMNSTORE INDEX
+    ,  DISTRIBUTION =  ROUND_ROBIN
+    ,  PARTITION       ( [OrderDateKey] RANGE RIGHT FOR VALUES (   20000101, 20010101, 20020101, 20030101
+                                                                ,   20040101, 20050101, 20060101, 20070101
+                                                                ,   20080101, 20090101, 20100101, 20110101
+                                                                ,   20120101, 20130101, 20140101, 20150101
+                                                                ,   20160101, 20170101, 20180101, 20190101
+                                                                ,   20200101, 20210101, 20220101, 20230101
+                                                                ,   20240101, 20250101, 20260101, 20270101
+                                                                ,   20280101, 20290101
+                                                                )
+                        )
+    )
+AS
+SELECT  *
+FROM    [dbo].[FactInternetSales]
+OPTION  (LABEL  = 'CTAS : FactInternetSales_ROUND_ROBIN')
+;
 
-    --Create statistics on new table
-    CREATE STATISTICS [ProductKey] ON [FactInternetSales_ROUND_ROBIN] ([ProductKey]);
-    CREATE STATISTICS [OrderDateKey] ON [FactInternetSales_ROUND_ROBIN] ([OrderDateKey]);
-    CREATE STATISTICS [CustomerKey] ON [FactInternetSales_ROUND_ROBIN] ([CustomerKey]);
-    CREATE STATISTICS [PromotionKey] ON [FactInternetSales_ROUND_ROBIN] ([PromotionKey]);
-    CREATE STATISTICS [SalesOrderNumber] ON [FactInternetSales_ROUND_ROBIN] ([SalesOrderNumber]);
-    CREATE STATISTICS [OrderQuantity] ON [FactInternetSales_ROUND_ROBIN] ([OrderQuantity]);
-    CREATE STATISTICS [UnitPrice] ON [FactInternetSales_ROUND_ROBIN] ([UnitPrice]);
-    CREATE STATISTICS [SalesAmount] ON [FactInternetSales_ROUND_ROBIN] ([SalesAmount]);
+--Create statistics on new table
+CREATE STATISTICS [ProductKey] ON [FactInternetSales_ROUND_ROBIN] ([ProductKey]);
+CREATE STATISTICS [OrderDateKey] ON [FactInternetSales_ROUND_ROBIN] ([OrderDateKey]);
+CREATE STATISTICS [CustomerKey] ON [FactInternetSales_ROUND_ROBIN] ([CustomerKey]);
+CREATE STATISTICS [PromotionKey] ON [FactInternetSales_ROUND_ROBIN] ([PromotionKey]);
+CREATE STATISTICS [SalesOrderNumber] ON [FactInternetSales_ROUND_ROBIN] ([SalesOrderNumber]);
+CREATE STATISTICS [OrderQuantity] ON [FactInternetSales_ROUND_ROBIN] ([OrderQuantity]);
+CREATE STATISTICS [UnitPrice] ON [FactInternetSales_ROUND_ROBIN] ([UnitPrice]);
+CREATE STATISTICS [SalesAmount] ON [FactInternetSales_ROUND_ROBIN] ([SalesAmount]);
 
-    --Rename the tables
-    RENAME OBJECT [dbo].[FactInternetSales] TO [FactInternetSales_HASH];
-    RENAME OBJECT [dbo].[FactInternetSales_ROUND_ROBIN] TO [FactInternetSales];
+--Rename the tables
+RENAME OBJECT [dbo].[FactInternetSales] TO [FactInternetSales_HASH];
+RENAME OBJECT [dbo].[FactInternetSales_ROUND_ROBIN] TO [FactInternetSales];
+```
 
 ## 后续步骤
 

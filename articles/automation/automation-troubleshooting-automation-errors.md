@@ -40,11 +40,13 @@ ms.author: sngun; v-reagie
 
 2. 查看你是否能够在本地 PowerShell ISE 编辑器中使用存储在 Azure 自动化凭据中的用户名和密码。为此，你可以在 PowerShell ISE 中运行以下 cmdlet：
 
-        $Cred = Get-Credential  
-        #Using Azure Service Management   
-        Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred  
-        #Using Azure Resource Manager  
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $Cred
+    ```
+    $Cred = Get-Credential  
+    #Using Azure Service Management   
+    Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred  
+    #Using Azure Resource Manager  
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $Cred
+    ```
 
 3. 如果本地身份验证失败，则意味着你尚未正确设置 Azure Active Directory 凭据。请参阅[使用 Azure Active Directory 向 Azure 进行身份验证](https://azure.microsoft.com/blog/azure-automation-authenticating-to-azure-using-azure-active-directory/)博客文章，了解如何正确设置 Azure Active Directory 帐户。
 

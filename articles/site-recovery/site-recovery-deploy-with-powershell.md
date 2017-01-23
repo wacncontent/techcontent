@@ -79,14 +79,16 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 在 PowerShell 中运行以下 cmdlet：
 
-    $UserName = "<user@live.com>"
-    $Password = "<password>"
-    $AzureSubscriptionName = "prod_sub1"
+```
+$UserName = "<user@live.com>"
+$Password = "<password>"
+$AzureSubscriptionName = "prod_sub1"
 
-    $SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
-    $Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $securePassword
-    Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred;
-    $AzureSubscription = Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
+$SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
+$Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $securePassword
+Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred;
+$AzureSubscription = Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
+```
 
 将“< >”中的元素替换为你的特定信息。
 
@@ -94,12 +96,14 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 在 PowerShell 中，将“< >”中的元素替换为你的特定信息，然后运行以下命令：
 
-    $VaultName = "<testvault123>"
-    $VaultGeo  = "<China North>"
-    $OutputPathForSettingsFile = "<c:>"
+```
+$VaultName = "<testvault123>"
+$VaultGeo  = "<China North>"
+$OutputPathForSettingsFile = "<c:>"
 
-    New-AzureSiteRecoveryVault -Location $VaultGeo -Name $VaultName;
-    $vault = Get-AzureSiteRecoveryVault -Name $VaultName;
+New-AzureSiteRecoveryVault -Location $VaultGeo -Name $VaultName;
+$vault = Get-AzureSiteRecoveryVault -Name $VaultName;
+```
 
 ## 步骤 3：生成保管库注册密钥
 
@@ -107,58 +111,72 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 1. 获取保管库设置文件并设置上下文：
 
-        $VaultName = "<testvault123>"
-        $VaultGeo  = "<China North>"
-        $OutputPathForSettingsFile = "<c:>"
+    ```
+    $VaultName = "<testvault123>"
+    $VaultGeo  = "<China North>"
+    $OutputPathForSettingsFile = "<c:>"
 
-        $VaultSetingsFile = Get-AzureSiteRecoveryVaultSettingsFile -Location $VaultGeo -Name $VaultName -Path $OutputPathForSettingsFile;
+    $VaultSetingsFile = Get-AzureSiteRecoveryVaultSettingsFile -Location $VaultGeo -Name $VaultName -Path $OutputPathForSettingsFile;
+    ```
 
 2. 通过运行以下命令设置保管库上下文：
 
-        $VaultSettingFilePath = $vaultSetingsFile.FilePath 
-        $VaultContext = Import-AzureSiteRecoveryVaultSettingsFile -Path $VaultSettingFilePath -ErrorAction Stop
+    ```
+    $VaultSettingFilePath = $vaultSetingsFile.FilePath 
+    $VaultContext = Import-AzureSiteRecoveryVaultSettingsFile -Path $VaultSettingFilePath -ErrorAction Stop
+    ```
 
 ## 步骤 4：安装 Azure Site Recovery 提供者
 
 1. 在 VMM 计算机上，通过运行以下命令创建一个目录：
 
-        pushd C:\ASR\
+    ```
+    pushd C:\ASR\
+    ```
 
 2. 通过运行以下命令，使用下载的提供者提取文件
 
-        AzureSiteRecoveryProvider.exe /x:. /q
+    ```
+    AzureSiteRecoveryProvider.exe /x:. /q
+    ```
 
 3. 使用以下命令安装提供者：
 
-        .\SetupDr.exe /i
+    ```
+    .\SetupDr.exe /i
 
-        $installationRegPath = "hklm:\software\Microsoft\Microsoft System Center Virtual Machine Manager Server\DRAdapter"
-        do
-        {
-                        $isNotInstalled = $true;
-                        if(Test-Path $installationRegPath)
-                        {
-                                        $isNotInstalled = $false;
-                        }
-        }While($isNotInstalled)
+    $installationRegPath = "hklm:\software\Microsoft\Microsoft System Center Virtual Machine Manager Server\DRAdapter"
+    do
+    {
+                    $isNotInstalled = $true;
+                    if(Test-Path $installationRegPath)
+                    {
+                                    $isNotInstalled = $false;
+                    }
+    }While($isNotInstalled)
 
-        等待安装完成。
+    等待安装完成。
+    ```
 
 4. 使用以下命令在保管库中注册服务器：
 
-        $BinPath = $env:SystemDrive+"\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin"
-        pushd $BinPath
-        $encryptionFilePath = "C:\temp"
-        .\DRConfigurator.exe /r /Credentials $VaultSettingFilePath /vmmfriendlyname $env:COMPUTERNAME /dataencryptionenabled $encryptionFilePath /startvmmservice
+    ```
+    $BinPath = $env:SystemDrive+"\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin"
+    pushd $BinPath
+    $encryptionFilePath = "C:\temp"
+    .\DRConfigurator.exe /r /Credentials $VaultSettingFilePath /vmmfriendlyname $env:COMPUTERNAME /dataencryptionenabled $encryptionFilePath /startvmmservice
+    ```
 
 ## 步骤 5：创建 Azure 存储帐户
 
 如果你没有 Azure 存储帐户，请运行以下命令来创建启用异地复制的帐户：
 
-    $StorageAccountName = "teststorageacc1"
-    $StorageAccountGeo  = "China North"
+```
+$StorageAccountName = "teststorageacc1"
+$StorageAccountGeo  = "China North"
 
-    New-AzureStorageAccount -StorageAccountName $StorageAccountName -Label $StorageAccountName -Location $StorageAccountGeo;
+New-AzureStorageAccount -StorageAccountName $StorageAccountName -Label $StorageAccountName -Location $StorageAccountGeo;
+```
 
 请注意，存储帐户必须位于 Azure Site Recovery 服务所在的同一区域，并与同一订阅相关联。
 
@@ -168,49 +186,61 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 在所有 VMM 主机上运行以下命令：
 
-    marsagentinstaller.exe /q /nu
+```
+marsagentinstaller.exe /q /nu
+```
 
 ## 步骤 7：配置云保护设置
 
 1. 通过运行以下命令在 Azure 中创建云保护配置文件：
 
-        $ReplicationFrequencyInSeconds = "300";
-        $ProfileResult = New-AzureSiteRecoveryProtectionProfileObject -ReplicationProvider 	HyperVReplica -RecoveryAzureSubscription $AzureSubscriptionName `
-        -RecoveryAzureStorageAccount $StorageAccountName -ReplicationFrequencyInSeconds 	$ReplicationFrequencyInSeconds;
+    ```
+    $ReplicationFrequencyInSeconds = "300";
+    $ProfileResult = New-AzureSiteRecoveryProtectionProfileObject -ReplicationProvider 	HyperVReplica -RecoveryAzureSubscription $AzureSubscriptionName `
+    -RecoveryAzureStorageAccount $StorageAccountName -ReplicationFrequencyInSeconds 	$ReplicationFrequencyInSeconds;
+    ```
 
 2. 通过运行以下命令获取保护容器：
 
-        $PrimaryCloud = "testcloud"
-        $protectionContainer = Get-AzureSiteRecoveryProtectionContainer -Name $PrimaryCloud;	
+    ```
+    $PrimaryCloud = "testcloud"
+    $protectionContainer = Get-AzureSiteRecoveryProtectionContainer -Name $PrimaryCloud;	
+    ```
 
 3. 开始将保护容器与云相关联：
 
-        $associationJob = Start-AzureSiteRecoveryProtectionProfileAssociationJob -	ProtectionProfile $profileResult -PrimaryProtectionContainer $protectionContainer;		
+    ```
+    $associationJob = Start-AzureSiteRecoveryProtectionProfileAssociationJob -	ProtectionProfile $profileResult -PrimaryProtectionContainer $protectionContainer;		
+    ```
 
 4. 在作业完成后，运行以下命令：
 
-            $job = Get-AzureSiteRecoveryJob -Id $associationJob.JobId;
-            if($job -eq $null -or $job.StateDescription -ne "Completed")
-            {
-                $isJobLeftForProcessing = $true;
-            }
-
-5. 在作业完成处理后，运行以下命令：
-
-        Do
-        {
+    ```
         $job = Get-AzureSiteRecoveryJob -Id $associationJob.JobId;
-        Write-Host "Job State:{0}, StateDescription:{1}" -f Job.State, $job.StateDescription;
         if($job -eq $null -or $job.StateDescription -ne "Completed")
         {
             $isJobLeftForProcessing = $true;
         }
+    ```
 
-        if($isJobLeftForProcessing)
-        {
-            Start-Sleep -Seconds 60
-        }
-        }While($isJobLeftForProcessing)
+5. 在作业完成处理后，运行以下命令：
+
+    ```
+    Do
+    {
+    $job = Get-AzureSiteRecoveryJob -Id $associationJob.JobId;
+    Write-Host "Job State:{0}, StateDescription:{1}" -f Job.State, $job.StateDescription;
+    if($job -eq $null -or $job.StateDescription -ne "Completed")
+    {
+        $isJobLeftForProcessing = $true;
+    }
+
+    if($isJobLeftForProcessing)
+    {
+        Start-Sleep -Seconds 60
+    }
+    }While($isJobLeftForProcessing)
+    ```
 
 若要检查作业是否完成，请遵循[监视活动](#monitor)中的步骤。
 
@@ -221,23 +251,33 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 第一条命令将获取当前 Azure Site Recovery 保管库的服务器。该命令将 Azure Site Recovery 服务器存储在 $Servers 数组变量中。
 
-    $Servers = Get-AzureSiteRecoveryServer
+```
+$Servers = Get-AzureSiteRecoveryServer
+```
 
 第二条命令将获取 $Servers 数组中第一个服务器的站点恢复网络。该命令在 $Networks 变量中存储网络。
 
-    $Networks = Get-AzureSiteRecoveryNetwork -Server $Servers[0]
+```
+$Networks = Get-AzureSiteRecoveryNetwork -Server $Servers[0]
+```
 
 第三条命令使用 Get-AzuresubScription cmdlet 获取 Azure 订阅，然后将该值存储在 $Subscriptions 变量中。
 
-    $Subscriptions = Get-AzureSubscription
+```
+$Subscriptions = Get-AzureSubscription
+```
 
 第四条命令使用 Get-AzureVNetSite cmdlet 获取 Azure 虚拟网络，然后将该值存储在 $AzureVmNetworks 变量中。
 
-    $AzureVmNetworks = Get-AzureVNetSite
+```
+$AzureVmNetworks = Get-AzureVNetSite
+```
 
 最后一个 cmdlet 将在主网络与 Azure 虚拟机网络之间创建映射。该 cmdlet 将主网络指定为 $Networks 的第一个元素。该 cmdlet 使用虚拟机网络的 ID 将该网络指定为 $AzureVmNetworks 的第一个元素。该命令包含 Azure 订阅 ID。
 
-    New-AzureSiteRecoveryNetworkMapping -PrimaryNetwork $Networks[0] -AzureSubscriptionId $Subscriptions[0].SubscriptionId -AzureVMNetworkId $AzureVmNetworks[0].Id
+```
+New-AzureSiteRecoveryNetworkMapping -PrimaryNetwork $Networks[0] -AzureSubscriptionId $Subscriptions[0].SubscriptionId -AzureVMNetworkId $AzureVmNetworks[0].Id
+```
 
 ## 步骤 9：为虚拟机启用保护
 
@@ -249,15 +289,21 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 1. 若要启用保护，请运行以下命令以获取保护容器：
 
-        $ProtectionContainer = Get-AzureSiteRecoveryProtectionContainer -Name $CloudName
+    ```
+    $ProtectionContainer = Get-AzureSiteRecoveryProtectionContainer -Name $CloudName
+    ```
 
 2. 通过运行以下命令获取保护实体 (VM)：
 
-        $protectionEntity = Get-AzureSiteRecoveryProtectionEntity -Name $VMName -ProtectionContainer $protectionContainer
+    ```
+    $protectionEntity = Get-AzureSiteRecoveryProtectionEntity -Name $VMName -ProtectionContainer $protectionContainer
+    ```
 
 3. 通过运行以下命令为 VM 启用 DR：
 
-        $jobResult = Set-AzureSiteRecoveryProtectionEntity -ProtectionEntity $protectionEntity 	-Protection Enable -Force
+    ```
+    $jobResult = Set-AzureSiteRecoveryProtectionEntity -ProtectionEntity $protectionEntity 	-Protection Enable -Force
+    ```
 
 ## 测试你的部署
 
@@ -275,69 +321,81 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 3. 更改 ProtectionEntity 节点 PrimaryProtectionEntityId（来自 VMM 的 vmid）。
 4. 可以通过添加更多 ProtectionEntity 节点来添加更多 VM。
 
-        <#
-        <?xml version="1.0" encoding="utf-16"?>
-        <RecoveryPlan Id="d0323b26-5be2-471b-addc-0a8742796610" Name="rp-test" 	PrimaryServerId="9350a530-d5af-435b-9f2b-b941b5d9fcd5" 	SecondaryServerId="21a9403c-6ec1-44f2-b744-b4e50b792387" Description="" 	Version="V2014_07">
-          <Actions />
-          <ActionGroups>
-            <ShutdownAllActionGroup Id="ShutdownAllActionGroup">
-              <PreActionSequence />
-              <PostActionSequence />
-            </ShutdownAllActionGroup>
-            <FailoverAllActionGroup Id="FailoverAllActionGroup">
-              <PreActionSequence />
-              <PostActionSequence />
-            </FailoverAllActionGroup>
-            <BootActionGroup Id="DefaultActionGroup">
-              <PreActionSequence />
-              <PostActionSequence />
-              <ProtectionEntity PrimaryProtectionEntityId="d4c8ce92-a613-4c63-9b03-	cf163cc36ef8" />
-            </BootActionGroup>
-          </ActionGroups>
-          <ActionGroupSequence>
-            <ActionGroup Id="ShutdownAllActionGroup" ActionId="ShutdownAllActionGroup" 	Before="FailoverAllActionGroup" />
-            <ActionGroup Id="FailoverAllActionGroup" ActionId="FailoverAllActionGroup" 	After="ShutdownAllActionGroup" Before="DefaultActionGroup" />
-            <ActionGroup Id="DefaultActionGroup" ActionId="DefaultActionGroup" After="FailoverAllActionGroup"/>
-          </ActionGroupSequence>
-        </RecoveryPlan>
-        #>
+    ```
+    <#
+    <?xml version="1.0" encoding="utf-16"?>
+    <RecoveryPlan Id="d0323b26-5be2-471b-addc-0a8742796610" Name="rp-test" 	PrimaryServerId="9350a530-d5af-435b-9f2b-b941b5d9fcd5" 	SecondaryServerId="21a9403c-6ec1-44f2-b744-b4e50b792387" Description="" 	Version="V2014_07">
+      <Actions />
+      <ActionGroups>
+        <ShutdownAllActionGroup Id="ShutdownAllActionGroup">
+          <PreActionSequence />
+          <PostActionSequence />
+        </ShutdownAllActionGroup>
+        <FailoverAllActionGroup Id="FailoverAllActionGroup">
+          <PreActionSequence />
+          <PostActionSequence />
+        </FailoverAllActionGroup>
+        <BootActionGroup Id="DefaultActionGroup">
+          <PreActionSequence />
+          <PostActionSequence />
+          <ProtectionEntity PrimaryProtectionEntityId="d4c8ce92-a613-4c63-9b03-	cf163cc36ef8" />
+        </BootActionGroup>
+      </ActionGroups>
+      <ActionGroupSequence>
+        <ActionGroup Id="ShutdownAllActionGroup" ActionId="ShutdownAllActionGroup" 	Before="FailoverAllActionGroup" />
+        <ActionGroup Id="FailoverAllActionGroup" ActionId="FailoverAllActionGroup" 	After="ShutdownAllActionGroup" Before="DefaultActionGroup" />
+        <ActionGroup Id="DefaultActionGroup" ActionId="DefaultActionGroup" After="FailoverAllActionGroup"/>
+      </ActionGroupSequence>
+    </RecoveryPlan>
+    #>
+    ```
 
 4. 在模板中填充数据：
 
-        $TemplatePath = "C:\RPTemplatePath.xml";
+    ```
+    $TemplatePath = "C:\RPTemplatePath.xml";
+    ```
 
 5. 创建 RecoveryPlan：
 
-        $RPCreationJob = New-AzureSiteRecoveryRecoveryPlan -File $TemplatePath -WaitForCompletion;
+    ```
+    $RPCreationJob = New-AzureSiteRecoveryRecoveryPlan -File $TemplatePath -WaitForCompletion;
+    ```
 
 ### 运行测试故障转移
 
 1. 通过运行以下命令获取 RecoveryPlan 对象：
 
-        $RPObject = Get-AzureSiteRecoveryRecoveryPlan -Name $RPName;
+    ```
+    $RPObject = Get-AzureSiteRecoveryRecoveryPlan -Name $RPName;
+    ```
 
 2. 通过运行以下命令来启动测试故障转移：
 
-        $jobIDResult = Start-AzureSiteRecoveryTestFailoverJob -RecoveryPlan $RPObject -Direction PrimaryToRecovery;
+    ```
+    $jobIDResult = Start-AzureSiteRecoveryTestFailoverJob -RecoveryPlan $RPObject -Direction PrimaryToRecovery;
+    ```
 
 ## <a name="monitor"></a>监视活动
 
 使用以下命令来监视活动。请注意，必须在执行不同的作业之前等待处理完成。
 
-    Do
-    {
-            $job = Get-AzureSiteRecoveryJob -Id $associationJob.JobId;
-            Write-Host "Job State:{0}, StateDescription:{1}" -f Job.State, $job.StateDescription;
-            if($job -eq $null -or $job.StateDescription -ne "Completed")
-            {
-                $isJobLeftForProcessing = $true;
-            }
+```
+Do
+{
+        $job = Get-AzureSiteRecoveryJob -Id $associationJob.JobId;
+        Write-Host "Job State:{0}, StateDescription:{1}" -f Job.State, $job.StateDescription;
+        if($job -eq $null -or $job.StateDescription -ne "Completed")
+        {
+            $isJobLeftForProcessing = $true;
+        }
 
-        if($isJobLeftForProcessing)
-            {
-                Start-Sleep -Seconds 60
-            }
-    }While($isJobLeftForProcessing)
+    if($isJobLeftForProcessing)
+        {
+            Start-Sleep -Seconds 60
+        }
+}While($isJobLeftForProcessing)
+```
 
 ##<a id="next" name="next" href="#next"></a>后续步骤
 

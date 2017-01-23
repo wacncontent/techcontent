@@ -90,14 +90,14 @@ ms.author: asteen
 1. 用户单击“无法访问你的帐户”链接或直接转到 [https://passwordreset.microsoftonline.com](https://passwordreset.microsoftonline.com)。
 2. 用户输入用户 ID 并传递验证码。
 3. Azure AD 通过执行以下操作来验证用户是否能够使用此功能：
-    - 检查用户是否启用了此功能并分配有 Azure AD 许可证。
+   - 检查用户是否启用了此功能并分配有 Azure AD 许可证。
      - 如果用户未启用此功能或未分配有许可证，则要求用户联系其管理员重置其密码。
-    - 检查用户是否具有针对其帐户定义且符合管理员策略的正确质询数据。
+   - 检查用户是否具有针对其帐户定义且符合管理员策略的正确质询数据。
      - 如果策略仅要求一个质询，则确保用户具有针对由管理员策略启用的至少一个质询定义的适当数据。
        - 如果未配置用户，则建议用户联系其管理员重置其密码。
      - 如果策略要求两个质询，则确保用户具有针对由管理员策略启用的至少两个质询定义的适当数据。
        - 如果未配置用户，则我们建议用户联系其管理员重置其密码。
-    - 检查是否在本地管理用户密码（联合或密码哈希同步）。
+   - 检查是否在本地管理用户密码（联合或密码哈希同步）。
      - 如果已部署写回且在本地管理用户密码，则允许用户继续进行身份验证并重置其密码。
      - 如果未部署写回且在本地管理用户密码，则要求用户联系其管理员重置其密码。
 4. 如果确定用户能够成功重置其密码，则将指导用户完成重置过程。
@@ -311,18 +311,24 @@ ms.author: asteen
 
 #####备用电子邮件
 
-    Connect-MsolService
-    Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
+```
+Connect-MsolService
+Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
+```
 
 #####移动电话
 
-    Connect-MsolService
-    Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
+```
+Connect-MsolService
+Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
+```
 
 #####办公电话
 
-    Connect-MsolService
-    Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
+```
+Connect-MsolService
+Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
+```
 
 #### 使用 PowerShell 读取密码重置数据
 可以使用 Azure AD PowerShell 读取以下字段的值。
@@ -337,28 +343,38 @@ ms.author: asteen
 
 ##### 备用电子邮件
 
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
+```
 
 ##### 移动电话
 
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
+```
 
 ##### 办公电话
 
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
+```
 
 ##### 身份验证电话
 
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
+```
 
 ##### 身份验证电子邮件
 
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
+```
 
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：

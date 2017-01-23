@@ -164,45 +164,47 @@ wacn.date: 10/17/2016
 
 12. **删除**现有编辑页面中的所有内容，**粘贴**以下 RUNBOOK 内容到编辑页面。
 
-        workflow createdevvm
-        {
-            param (
-                  [Parameter(Mandatory = $true)] [String] $VMName,         
-                  [Parameter(Mandatory = $true)] [String] $VNetName,              	
-                  [Parameter(Mandatory = $true)] [String] $CloudServiceName,
-                  [Parameter(Mandatory = $true)] [String] $VMAdminUserName,            
-                  [Parameter(Mandatory = $true)] [String] $VMPassword,            
-                  [Parameter(Mandatory = $true)] [String] $VMSize,           
-                  [Parameter(Mandatory = $true)] [String] $ImageName,                                
-                  [Parameter(Mandatory = $true)] [String] $StorageAccount,           
-                  [Parameter(Mandatory = $true)] [String] $SubnetName,
-                  [Parameter(Mandatory = $true)] [String] $CredentialName,
-                  [Parameter(Mandatory = $true)] [Sum] $VMNumber                      
-            )
-            inlineScript {
-                     $VMNames = $using:VMName
-                     $StorageAccount = $using:StorageAccount
-                     $ImageName = $using:ImageName
-                     $VMPassword = $using:VMpassword
-                     $VMAdminUserName = $using:VMadminusername
-                     $CloudServiceName = $using:Cloudservicename
-                     $VMSize = $using:VMsize
-                     $VMs = $using:VMNumber
-                     $SubnetName = $using:subnetname
-                     $VnetName = $using:vnetname
-                     $CredentialName = $using:CredentialName
-                     $Credential = Get-AutomationPSCredential -Name $CredentialName
-                     Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
-                     Set-AzureSubscription -SubscriptionName "1 元人民币的试用订阅" -CurrentStorageAccountName $StorageAccount
-                   $i = 0
-                   do {
-                        $i++                   
-                        $VMname = ("$Vmnames" + "-" + "$i")   
-                        write-output $VMname 
-                        New-AzureVMConfig -Name $VMName -InstanceSize $VMSize -ImageName $ImageName| Add-AzureProvisioningConfig -Windows -Password $vmpassword -AdminUsername $VMAdminusername |Set-AzureSubnet –SubnetName $SubnetName | New-AzureVM -ServiceName $CloudServiceName -VnetName $VNetName              
-                   }while($i -lt $VMs)	
-              }      
-        }
+    ```
+    workflow createdevvm
+    {
+        param (
+              [Parameter(Mandatory = $true)] [String] $VMName,         
+              [Parameter(Mandatory = $true)] [String] $VNetName,              	
+              [Parameter(Mandatory = $true)] [String] $CloudServiceName,
+              [Parameter(Mandatory = $true)] [String] $VMAdminUserName,            
+              [Parameter(Mandatory = $true)] [String] $VMPassword,            
+              [Parameter(Mandatory = $true)] [String] $VMSize,           
+              [Parameter(Mandatory = $true)] [String] $ImageName,                                
+              [Parameter(Mandatory = $true)] [String] $StorageAccount,           
+              [Parameter(Mandatory = $true)] [String] $SubnetName,
+              [Parameter(Mandatory = $true)] [String] $CredentialName,
+              [Parameter(Mandatory = $true)] [Sum] $VMNumber                      
+        )
+        inlineScript {
+                 $VMNames = $using:VMName
+                 $StorageAccount = $using:StorageAccount
+                 $ImageName = $using:ImageName
+                 $VMPassword = $using:VMpassword
+                 $VMAdminUserName = $using:VMadminusername
+                 $CloudServiceName = $using:Cloudservicename
+                 $VMSize = $using:VMsize
+                 $VMs = $using:VMNumber
+                 $SubnetName = $using:subnetname
+                 $VnetName = $using:vnetname
+                 $CredentialName = $using:CredentialName
+                 $Credential = Get-AutomationPSCredential -Name $CredentialName
+                 Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
+                 Set-AzureSubscription -SubscriptionName "1 元人民币的试用订阅" -CurrentStorageAccountName $StorageAccount
+               $i = 0
+               do {
+                    $i++                   
+                    $VMname = ("$Vmnames" + "-" + "$i")   
+                    write-output $VMname 
+                    New-AzureVMConfig -Name $VMName -InstanceSize $VMSize -ImageName $ImageName| Add-AzureProvisioningConfig -Windows -Password $vmpassword -AdminUsername $VMAdminusername |Set-AzureSubnet –SubnetName $SubnetName | New-AzureVM -ServiceName $CloudServiceName -VnetName $VNetName              
+               }while($i -lt $VMs)	
+          }      
+    }
+    ```
 
 13. 粘贴完 RUNBOOK 的编辑页面如下图所示，单击 **发布** 按钮，选择 **是** 。
 
@@ -212,70 +214,76 @@ wacn.date: 10/17/2016
 
     以下是deletedevvm runbook代码：
 
-        workflow deletedevvm 
-        {
-             param  (
-                [Parameter(Mandatory = $true)] [String] $VMName,                 		
-                [Parameter(Mandatory = $true)] [String] $CloudServiceName,  	
-                [Parameter(Mandatory = $true)] [String] $VMSize,
-                [Parameter(Mandatory = $true)] [String] $CredentialName	
-             )
-             inlineScript {
-                $VMName = $using:VMName
-                $CloudServiceName = $using:CloudServiceName
-                $VMSize = $using:VMSize
-                $CredentialName = $using:CredentialName
-                $Credential = Get-AutomationPSCredential -Name $CredentialName
-                Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
-                Get-AzureVM -ServiceName $CloudServiceName | ForEach-Object { 
-                        if ($_.InstanceSize -eq $VMSize -and $_.Name  -Like "$VMName*" )
-                        {
-                         Write-Output($_.Name+":"+$_.InstanceSize)
-                         Remove-AzureVM -ServiceName $CloudServiceName -Name $_.Name
-                        }
-                 }
+    ```
+    workflow deletedevvm 
+    {
+         param  (
+            [Parameter(Mandatory = $true)] [String] $VMName,                 		
+            [Parameter(Mandatory = $true)] [String] $CloudServiceName,  	
+            [Parameter(Mandatory = $true)] [String] $VMSize,
+            [Parameter(Mandatory = $true)] [String] $CredentialName	
+         )
+         inlineScript {
+            $VMName = $using:VMName
+            $CloudServiceName = $using:CloudServiceName
+            $VMSize = $using:VMSize
+            $CredentialName = $using:CredentialName
+            $Credential = Get-AutomationPSCredential -Name $CredentialName
+            Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
+            Get-AzureVM -ServiceName $CloudServiceName | ForEach-Object { 
+                    if ($_.InstanceSize -eq $VMSize -and $_.Name  -Like "$VMName*" )
+                    {
+                     Write-Output($_.Name+":"+$_.InstanceSize)
+                     Remove-AzureVM -ServiceName $CloudServiceName -Name $_.Name
+                    }
              }
-        }
+         }
+    }
+    ```
 
     以下是startvm runbook代码：
 
-        workflow startvm{
-             inlineScript {
-                $VMName = "VMname"                		
-                $CloudServiceName = "CloudServiceName"          	
-                $VMSize = "Standard_D1"
-                $CredentialName = "CredentialName"   	
-                $Credential = Get-AutomationPSCredential -Name $CredentialName
-                Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
-                Get-AzureVM -ServiceName $CloudServiceName | ForEach-Object { 
-                        if ($_.InstanceSize -eq $VMSize -and $_.Name  -Like "$VMName*" )
-                        {
-                        Write-Output($_.Name+":"+$_.InstanceSize)
-                        Start-AzureVM -ServiceName $CloudServiceName -Name $_.Name 
-                         }
-                 }
+    ```
+    workflow startvm{
+         inlineScript {
+            $VMName = "VMname"                		
+            $CloudServiceName = "CloudServiceName"          	
+            $VMSize = "Standard_D1"
+            $CredentialName = "CredentialName"   	
+            $Credential = Get-AutomationPSCredential -Name $CredentialName
+            Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
+            Get-AzureVM -ServiceName $CloudServiceName | ForEach-Object { 
+                    if ($_.InstanceSize -eq $VMSize -and $_.Name  -Like "$VMName*" )
+                    {
+                    Write-Output($_.Name+":"+$_.InstanceSize)
+                    Start-AzureVM -ServiceName $CloudServiceName -Name $_.Name 
+                     }
              }
-        }
+         }
+    }
+    ```
 
     以下是shutdownvm runbook代码：
 
-        workflow shutdownvm{
-             inlineScript {
-                $VMName = "VMname"                		
-                $CloudServiceName = "CloudServiceName"          	
-                $VMSize = "Standard_D1"
-                $CredentialName = "CredentialName"   	
-                $Credential = Get-AutomationPSCredential -Name $CredentialName
-                Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
-                Get-AzureVM -ServiceName $CloudServiceName | ForEach-Object { 
-                        if ($_.InstanceSize -eq $VMSize -and $_.Name  -Like "$VMName*" )
-                        {
-                        Write-Output($_.Name+":"+$_.InstanceSize)
-                        stop-AzureVM -ServiceName $CloudServiceName -Name $_.Name  -Force
-                         }
-                 }
+    ```
+    workflow shutdownvm{
+         inlineScript {
+            $VMName = "VMname"                		
+            $CloudServiceName = "CloudServiceName"          	
+            $VMSize = "Standard_D1"
+            $CredentialName = "CredentialName"   	
+            $Credential = Get-AutomationPSCredential -Name $CredentialName
+            Add-AzureAccount -Credential $Credential -Environment AzureChinaCloud
+            Get-AzureVM -ServiceName $CloudServiceName | ForEach-Object { 
+                    if ($_.InstanceSize -eq $VMSize -and $_.Name  -Like "$VMName*" )
+                    {
+                    Write-Output($_.Name+":"+$_.InstanceSize)
+                    stop-AzureVM -ServiceName $CloudServiceName -Name $_.Name  -Force
+                     }
              }
-        }
+         }
+    }
+    ```
 
 15. 发布完成后 RUNBOOK 列表页面如下图所示。
 

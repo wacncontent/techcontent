@@ -52,28 +52,34 @@ ms.author: wesmc
 
 1. 在 **NotifyUserWindowsPhone** 项目中，将以下代码添加到 App.xaml.cs 注册推送后台任务。在 `OnLaunched()` 方法的末尾添加以下代码行：
 
-        RegisterBackgroundTask();
+    ```
+    RegisterBackgroundTask();
+    ```
 
 2. 仍在 App.xaml.cs 中，紧跟 `OnLaunched()` 方法添加以下代码：
 
-        private async void RegisterBackgroundTask()
+    ```
+    private async void RegisterBackgroundTask()
+    {
+        if (!Windows.ApplicationModel.Background.BackgroundTaskRegistration.AllTasks.Any(i => i.Value.Name == "PushBackgroundTask"))
         {
-            if (!Windows.ApplicationModel.Background.BackgroundTaskRegistration.AllTasks.Any(i => i.Value.Name == "PushBackgroundTask"))
-            {
-                var result = await BackgroundExecutionManager.RequestAccessAsync();
-                var builder = new BackgroundTaskBuilder();
+            var result = await BackgroundExecutionManager.RequestAccessAsync();
+            var builder = new BackgroundTaskBuilder();
 
-                builder.Name = "PushBackgroundTask";
-                builder.TaskEntryPoint = typeof(PushBackgroundComponent.PushBackgroundTask).FullName;
-                builder.SetTrigger(new Windows.ApplicationModel.Background.PushNotificationTrigger());
-                BackgroundTaskRegistration task = builder.Register();
-            }
+            builder.Name = "PushBackgroundTask";
+            builder.TaskEntryPoint = typeof(PushBackgroundComponent.PushBackgroundTask).FullName;
+            builder.SetTrigger(new Windows.ApplicationModel.Background.PushNotificationTrigger());
+            BackgroundTaskRegistration task = builder.Register();
         }
+    }
+    ```
 
 3. 在 App.xaml.cs 文件的顶部添加以下 `using` 语句：
 
-        using Windows.Networking.PushNotifications;
-        using Windows.ApplicationModel.Background;
+    ```
+    using Windows.Networking.PushNotifications;
+    using Windows.ApplicationModel.Background;
+    ```
 
 4. 从 Visual Studio 的“文件”菜单中，单击“全部保存”。
 
@@ -91,48 +97,50 @@ ms.author: wesmc
 
 4. 将 **PushBackgroundComponent** 命名空间定义的整个内容替换为以下代码，将占位符 `{back-end endpoint}` 替换为部署后端时获取的后端终结点：
 
-        public sealed class Notification
+    ```
+    public sealed class Notification
+        {
+            public int Id { get; set; }
+            public string Payload { get; set; }
+            public bool Read { get; set; }
+        }
+
+        public sealed class PushBackgroundTask : IBackgroundTask
+        {
+            private string GET_URL = "{back-end endpoint}/api/notifications/";
+
+            async void IBackgroundTask.Run(IBackgroundTaskInstance taskInstance)
             {
-                public int Id { get; set; }
-                public string Payload { get; set; }
-                public bool Read { get; set; }
+                // Store the content received from the notification so it can be retrieved from the UI.
+                RawNotification raw = (RawNotification)taskInstance.TriggerDetails;
+                var notificationId = raw.Content;
+
+                // retrieve content
+                BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
+                var httpClient = new HttpClient();
+                var settings = ApplicationData.Current.LocalSettings.Values;
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", (string)settings["AuthenticationToken"]);
+
+                var notificationString = await httpClient.GetStringAsync(GET_URL + notificationId);
+
+                var notification = JsonConvert.DeserializeObject<Notification>(notificationString);
+
+                ShowToast(notification);
+
+                deferral.Complete();
             }
 
-            public sealed class PushBackgroundTask : IBackgroundTask
+            private void ShowToast(Notification notification)
             {
-                private string GET_URL = "{back-end endpoint}/api/notifications/";
-
-                async void IBackgroundTask.Run(IBackgroundTaskInstance taskInstance)
-                {
-                    // Store the content received from the notification so it can be retrieved from the UI.
-                    RawNotification raw = (RawNotification)taskInstance.TriggerDetails;
-                    var notificationId = raw.Content;
-
-                    // retrieve content
-                    BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
-                    var httpClient = new HttpClient();
-                    var settings = ApplicationData.Current.LocalSettings.Values;
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", (string)settings["AuthenticationToken"]);
-
-                    var notificationString = await httpClient.GetStringAsync(GET_URL + notificationId);
-
-                    var notification = JsonConvert.DeserializeObject<Notification>(notificationString);
-
-                    ShowToast(notification);
-
-                    deferral.Complete();
-                }
-
-                private void ShowToast(Notification notification)
-                {
-                    ToastTemplateType toastTemplate = ToastTemplateType.ToastText01;
-                    XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-                    XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-                    toastTextElements[0].AppendChild(toastXml.CreateTextNode(notification.Payload));
-                    ToastNotification toast = new ToastNotification(toastXml);
-                    ToastNotificationManager.CreateToastNotifier().Show(toast);
-                }
+                ToastTemplateType toastTemplate = ToastTemplateType.ToastText01;
+                XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+                XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+                toastTextElements[0].AppendChild(toastXml.CreateTextNode(notification.Payload));
+                ToastNotification toast = new ToastNotification(toastXml);
+                ToastNotificationManager.CreateToastNotifier().Show(toast);
             }
+        }
+    ```
 
 5. 在“解决方案资源管理器”中，右键单击 “PushBackgroundComponent (Windows Phone 8.1)” 项目，然后单击“管理 NuGet 包”。
 
@@ -146,14 +154,16 @@ ms.author: wesmc
 
 10. 在 **PushBackgroundTask.cs** 文件的顶部添加以下 `using` 语句：
 
-        using Windows.ApplicationModel.Background;
-        using Windows.Networking.PushNotifications;
-        using System.Net.Http;
-        using Windows.Storage;
-        using System.Net.Http.Headers;
-        using Newtonsoft.Json;
-        using Windows.UI.Notifications;
-        using Windows.Data.Xml.Dom;
+    ```
+    using Windows.ApplicationModel.Background;
+    using Windows.Networking.PushNotifications;
+    using System.Net.Http;
+    using Windows.Storage;
+    using System.Net.Http.Headers;
+    using Newtonsoft.Json;
+    using Windows.UI.Notifications;
+    using Windows.Data.Xml.Dom;
+    ```
 
 11. 在“解决方案资源管理器”的 **NotifyUserWindowsPhone (Windows Phone 8.1)** 项目中，右键单击“引用”，然后单击“添加引用...”。在“引用管理器”对话框中，选中 **PushBackgroundComponent** 旁边的复选框，然后单击“确定”。
 

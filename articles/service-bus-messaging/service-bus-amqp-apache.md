@@ -40,17 +40,19 @@ wacn.date: 01/09/2017
 
 2.  安装必备组件包：
 
-        # required dependencies 
-        yum install gcc cmake libuuid-devel
+    ```
+    # required dependencies 
+    yum install gcc cmake libuuid-devel
 
-        # dependencies needed for ssl support
-        yum install openssl-devel
+    # dependencies needed for ssl support
+    yum install openssl-devel
 
-        # dependencies needed for bindings
-        yum install swig python-devel ruby-devel php-devel java-1.6.0-openjdk
+    # dependencies needed for bindings
+    yum install swig python-devel ruby-devel php-devel java-1.6.0-openjdk
 
-        # dependencies needed for python docs
-        yum install epydoc
+    # dependencies needed for python docs
+    yum install epydoc
+    ```
 
 1.  下载 Proton 库：
 
@@ -72,24 +74,28 @@ wacn.date: 01/09/2017
 
 1.  从分发存档中提取 Proton 代码：
 
-        tar xvfz qpid-proton-0.9.tar.gz
+    ```
+    tar xvfz qpid-proton-0.9.tar.gz
+    ```
 
 1.  使用从自述文件中获取的以下步骤生成并安装代码：
 
-        From the directory where you found this README file:	
+    ```
+    From the directory where you found this README file:	
 
-        mkdir build cd build
+    mkdir build cd build
 
-        # Set the install prefix. You may need to adjust depending on your		
-        # system.		
-        cmake -DCMAKE\_INSTALL\_PREFIX=/usr ..
+    # Set the install prefix. You may need to adjust depending on your		
+    # system.		
+    cmake -DCMAKE\_INSTALL\_PREFIX=/usr ..
 
-        # Omit the docs target if you do not wish to build or install		
-        # documentation.		
-        make all docs
+    # Omit the docs target if you do not wish to build or install		
+    # documentation.		
+    make all docs
 
-        # Note that this step will require root privileges.		
-        make install
+    # Note that this step will require root privileges.		
+    make install
+    ```
 
 执行这些步骤后，Proton 将安装在计算机上并可供使用。
 

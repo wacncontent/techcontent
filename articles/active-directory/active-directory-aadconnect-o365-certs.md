@@ -58,7 +58,9 @@ Azure AD 将尝试监视联合元数据，并按照此元数据的指示更新�
 
 在 AD FS 服务器上打开 Microsoft Powershell。确保 AutoCertRollover 值设置为 TRUE
 
-    Get-Adfsproperties
+```
+Get-Adfsproperties
+```
 
 ![AutoCertificateRollover](./media/active-directory-aadconnect-o365-certs/autocertrollover.png)
 
@@ -72,11 +74,15 @@ Azure AD 将尝试监视联合元数据，并按照此元数据的指示更新�
 >[!NOTE]
 > 可在[此处](https://technet.microsoft.com/zh-cn/library/jj151815.aspx)下载 Azure AD PowerShell。
 
-    Connect-MsolService
+```
+Connect-MsolService
+```
 
 检查 AD FS 和 Azure AD 信任属性中针对指定域配置的证书。
 
-    Get-MsolFederationProperty -DomainName <domain.name> | FL Source, TokenSigningCertificate
+```
+Get-MsolFederationProperty -DomainName <domain.name> | FL Source, TokenSigningCertificate
+```
 
 ![Get-MsolFederationProperty](./media/active-directory-aadconnect-o365-certs/certsync.png)
 

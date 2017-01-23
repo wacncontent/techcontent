@@ -60,20 +60,24 @@ Storm 模块 (https://github.com/apache/storm/blob/master/storm-multilang/python
 
 使用 Python（或其他 JVM 语言组件）的基于 Java 的拓朴乍看之下是使用 Java 组件，但如果仔细查看每个 Java Spout/Bolt，将看到类似于以下代码：
 
-    public SplitBolt() {
-        super("python", "countbolt.py");
-    }
+```
+public SplitBolt() {
+    super("python", "countbolt.py");
+}
+```
 
 Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java Spout/Bolt（对于本示例）只是在基础 Python 组件要发出的 Tuple 中声明字段。
 
 在此示例中，实际 Python 文件存储在 `/multilang/resources` 目录中。`/multilang` 目录在 __pom.xml__ 中引用：
 
-    <resources>
-        <resource>
-            <!-- Where the Python bits are kept -->
-            <directory>${basedir}/multilang</directory>
-        </resource>
-    </resources>
+```
+<resources>
+    <resource>
+        <!-- Where the Python bits are kept -->
+        <directory>${basedir}/multilang</directory>
+    </resource>
+</resources>
+```
 
 这会将 `/multilang` 文件夹中的所有文件包含在基于此项目构建的 jar 中。
 
@@ -86,7 +90,9 @@ Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java 
 
 要在本地运行此项目，只需使用以下 Maven 命令构建并以本地模式运行此项目：
 
-    mvn compile exec:java -Dstorm.topology=com.microsoft.example.WordCount
+```
+mvn compile exec:java -Dstorm.topology=com.microsoft.example.WordCount
+```
 
 使用 Ctrl+C 可终止进程。
 
@@ -94,7 +100,9 @@ Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java 
 
 1. 构建 uber jar：
 
-        mvn package
+    ```
+    mvn package
+    ```
 
     这会在此项目的 `/target` 目录中创建名为 __WordCount--1.0-SNAPSHOT.jar__ 的文件。
 
@@ -128,7 +136,9 @@ Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java 
 
 __要在本地构建并运行项目__，请使用以下命令：
 
-    lein clean, run
+```
+lein clean, run
+```
 
 要停止拓扑，请使用 __Ctrl+C__。
 
@@ -136,7 +146,9 @@ __要构建 Uberjar 并部署到 HDInsight__，请使用以下步骤：
 
 1. 创建包含拓扑和所需依赖项的 uberjar：
 
-        lein uberjar
+    ```
+    lein uberjar
+    ```
 
     这会在 `target\uberjar+uberjar` 目录中创建一个名为 `wordcount-1.0-SNAPSHOT.jar` 的新文件。
 

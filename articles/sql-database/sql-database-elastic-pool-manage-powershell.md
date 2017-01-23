@@ -40,25 +40,33 @@ ms.author: srinia
 
 使用 [Set-AzureRmSqlDatabase](https://msdn.microsoft.com/zh-cn/library/azure/mt619433.aspx) 可以将数据库移入或移出池。
 
-    Set-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+```
+Set-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+```
 
 ##<a name="change-performance-settings-of-a-pool"></a> 更改池的性能设置
 
 当性能受到影响时，可以更改池的设置以适应增长。使用 [Set-AzureRmSqlElasticPool](https://msdn.microsoft.com/zh-cn/library/azure/mt603511.aspx) cmdlet。将 -Dtu 参数设置为每个池的 eDTU。有关该参数可能的值，请参阅 [eDTU 和存储限制](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)。
 
-    Set-AzureRmSqlElasticPool –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” –Dtu 1200 –DatabaseDtuMax 100 –DatabaseDtuMin 50 
+```
+Set-AzureRmSqlElasticPool –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” –Dtu 1200 –DatabaseDtuMax 100 –DatabaseDtuMin 50 
+```
 
 ## 获取池操作的状态
 
 创建池需要一些时间。可以使用 [Get-AzureRmSqlElasticPoolActivity](https://msdn.microsoft.com/zh-cn/library/azure/mt603812.aspx) cmdlet 跟踪池操作（包括创建和更新）的状态。
 
-    Get-AzureRmSqlElasticPoolActivity –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” 
+```
+Get-AzureRmSqlElasticPoolActivity –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” 
+```
 
 ## 获取将弹性数据库移入和移出池的状态
 
 移动数据库需要一些时间。可以使用 [Get AzureRmSqlDatabaseActivity](https://msdn.microsoft.com/zh-cn/library/azure/mt603687.aspx) cmdlet 跟踪移动状态。
 
-    Get-AzureRmSqlDatabaseActivity -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+```
+Get-AzureRmSqlDatabaseActivity -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+```
 
 ## 获取池的资源使用情况数据
 
@@ -87,7 +95,9 @@ ms.author: srinia
 
 检索指标：
 
-    $metrics = (Get-AzureRmMetric -ResourceId /subscriptions/<subscriptionId>/resourceGroups/FabrikamData01/providers/Microsoft.Sql/servers/fabrikamsqldb02/elasticPools/franchisepool -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime "4/18/2015" -EndTime "4/21/2015")  
+```
+$metrics = (Get-AzureRmMetric -ResourceId /subscriptions/<subscriptionId>/resourceGroups/FabrikamData01/providers/Microsoft.Sql/servers/fabrikamsqldb02/elasticPools/franchisepool -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime "4/18/2015" -EndTime "4/21/2015")  
+```
 
 ##<a name="elastic-database-monitoring"></a> 获取弹性数据库的资源使用情况数据
 
@@ -97,7 +107,9 @@ ms.author: srinia
 
 检索指标：
 
-    $metrics = (Get-AzureRmMetric -ResourceId /subscriptions/<subscriptionId>/resourceGroups/FabrikamData01/providers/Microsoft.Sql/servers/fabrikamsqldb02/databases/myDB -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime "4/18/2015" -EndTime "4/21/2015") 
+```
+$metrics = (Get-AzureRmMetric -ResourceId /subscriptions/<subscriptionId>/resourceGroups/FabrikamData01/providers/Microsoft.Sql/servers/fabrikamsqldb02/databases/myDB -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime "4/18/2015" -EndTime "4/21/2015") 
+```
 
 ##<a name="add-an-alert-to-a-pool-resource"></a> 向池资源添加警报
 
@@ -108,24 +120,26 @@ ms.author: srinia
 
 该示例添加了一个警报，以便在池的 eDTU 消耗超出特定阈值时获取通知。
 
-    # Set up your resource ID configurations
-    $subscriptionId = '<Azure subscription id>'      # Azure subscription ID
-    $location =  '<location'                         # Azure region
-    $resourceGroupName = '<resource group name>'     # Resource Group
-    $serverName = '<server name>'                    # server name
-    $poolName = '<elastic pool name>'                # pool name 
+```
+# Set up your resource ID configurations
+$subscriptionId = '<Azure subscription id>'      # Azure subscription ID
+$location =  '<location'                         # Azure region
+$resourceGroupName = '<resource group name>'     # Resource Group
+$serverName = '<server name>'                    # server name
+$poolName = '<elastic pool name>'                # pool name 
 
-    #$Target Resource ID
-    $ResourceID = '/subscriptions/' + $subscriptionId + '/resourceGroups/' +$resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/elasticpools/' + $poolName
+#$Target Resource ID
+$ResourceID = '/subscriptions/' + $subscriptionId + '/resourceGroups/' +$resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/elasticpools/' + $poolName
 
-    # Create an email action
-    $actionEmail = New-AzureRmAlertRuleEmail -SendToServiceOwners -CustomEmail JohnDoe@contoso.com
+# Create an email action
+$actionEmail = New-AzureRmAlertRuleEmail -SendToServiceOwners -CustomEmail JohnDoe@contoso.com
 
-    # create a unique rule name
-    $alertName = $poolName + "- DTU consumption rule"
+# create a unique rule name
+$alertName = $poolName + "- DTU consumption rule"
 
-    # Create an alert rule for DTU_consumption_percent
-    Add-AzureRMMetricAlertRule -Name $alertName -Location $location -ResourceGroup $resourceGroupName -TargetResourceId $ResourceID -MetricName "DTU_consumption_percent"  -Operator GreaterThan -Threshold 80 -TimeAggregationOperator Average -WindowSize 00:60:00 -Actions $actionEmail 
+# Create an alert rule for DTU_consumption_percent
+Add-AzureRMMetricAlertRule -Name $alertName -Location $location -ResourceGroup $resourceGroupName -TargetResourceId $ResourceID -MetricName "DTU_consumption_percent"  -Operator GreaterThan -Threshold 80 -TimeAggregationOperator Average -WindowSize 00:60:00 -Actions $actionEmail 
+```
 
 ## 将警报添加到池中的所有数据库
 
@@ -136,33 +150,35 @@ ms.author: srinia
 
 该示例向池中的所有数据库添加了一个警报，以便在数据库的 DTU 消耗超出特定阈值时获取通知。
 
-    # Set up your resource ID configurations
-    $subscriptionId = '<Azure subscription id>'      # Azure subscription ID
-    $location = '<location'                          # Azure region
-    $resourceGroupName = '<resource group name>'     # Resource Group
-    $serverName = '<server name>'                    # server name
-    $poolName = '<elastic pool name>'                # pool name 
+```
+# Set up your resource ID configurations
+$subscriptionId = '<Azure subscription id>'      # Azure subscription ID
+$location = '<location'                          # Azure region
+$resourceGroupName = '<resource group name>'     # Resource Group
+$serverName = '<server name>'                    # server name
+$poolName = '<elastic pool name>'                # pool name 
 
-    # Get the list of databases in this pool.
-    $dbList = Get-AzureRmSqlElasticPoolDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName
+# Get the list of databases in this pool.
+$dbList = Get-AzureRmSqlElasticPoolDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName
 
-    # Create an email action
-    $actionEmail = New-AzureRmAlertRuleEmail -SendToServiceOwners -CustomEmail JohnDoe@contoso.com
+# Create an email action
+$actionEmail = New-AzureRmAlertRuleEmail -SendToServiceOwners -CustomEmail JohnDoe@contoso.com
 
-    # Get resource usage metrics for a database in an elastic database for the specified time interval.
-    foreach ($db in $dbList)
-    {
-    $dbResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/databases/' + $db.DatabaseName
+# Get resource usage metrics for a database in an elastic database for the specified time interval.
+foreach ($db in $dbList)
+{
+$dbResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/databases/' + $db.DatabaseName
 
-    # create a unique rule name
-    $alertName = $db.DatabaseName + "- DTU consumption rule"
+# create a unique rule name
+$alertName = $db.DatabaseName + "- DTU consumption rule"
 
-    # Create an alert rule for DTU_consumption_percent
-    Add-AzureRMMetricAlertRule -Name $alertName  -Location $location -ResourceGroup $resourceGroupName -TargetResourceId $dbResourceId -MetricName "dtu_consumption_percent"  -Operator GreaterThan -Threshold 80 -TimeAggregationOperator Average -WindowSize 00:60:00 -Actions $actionEmail
+# Create an alert rule for DTU_consumption_percent
+Add-AzureRMMetricAlertRule -Name $alertName  -Location $location -ResourceGroup $resourceGroupName -TargetResourceId $dbResourceId -MetricName "dtu_consumption_percent"  -Operator GreaterThan -Threshold 80 -TimeAggregationOperator Average -WindowSize 00:60:00 -Actions $actionEmail
 
-    # drop the alert rule
-    #Remove-AzureRmAlertRule -ResourceGroup $resourceGroupName -Name $alertName
-    } 
+# drop the alert rule
+#Remove-AzureRmAlertRule -ResourceGroup $resourceGroupName -Name $alertName
+} 
+```
 
 ## 在一个订阅的多个池中收集和监视资源使用情况数据
 
@@ -187,61 +203,63 @@ ms.author: srinia
 
 该示例将检索给定的弹性池及其所有数据库的资源消耗指标值。所收集的数据被格式化并写入到 .csv 格式文件中。可以使用 Excel 浏览该文件。
 
-    $subscriptionId = '<Azure subscription id>'	      # Azure subscription ID
-    $resourceGroupName = '<resource group name>'             # Resource Group
-    $serverName = <server name>                              # server name
-    $poolName = <elastic pool name>                          # pool name
+```
+$subscriptionId = '<Azure subscription id>'	      # Azure subscription ID
+$resourceGroupName = '<resource group name>'             # Resource Group
+$serverName = <server name>                              # server name
+$poolName = <elastic pool name>                          # pool name
 
-    # Login to Azure account and select the subscription.
-    Login-AzureRmAccount -EnvironmentName AzrueChinaCloud
-    Set-AzureRmContext -SubscriptionId $subscriptionId
+# Login to Azure account and select the subscription.
+Login-AzureRmAccount -EnvironmentName AzrueChinaCloud
+Set-AzureRmContext -SubscriptionId $subscriptionId
 
-    # Get resource usage metrics for an elastic pool for the specified time interval.
-    $startTime = '4/27/2016 00:00:00'  # start time in UTC
-    $endTime = '4/27/2016 01:00:00'    # end time in UTC
+# Get resource usage metrics for an elastic pool for the specified time interval.
+$startTime = '4/27/2016 00:00:00'  # start time in UTC
+$endTime = '4/27/2016 01:00:00'    # end time in UTC
 
-    # Construct the pool resource ID and retrive pool metrics at 5 minute granularity.
-    $poolResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/elasticPools/' + $poolName
-    $poolMetrics = (Get-AzureRmMetric -ResourceId $poolResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime) 
+# Construct the pool resource ID and retrive pool metrics at 5 minute granularity.
+$poolResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/elasticPools/' + $poolName
+$poolMetrics = (Get-AzureRmMetric -ResourceId $poolResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime) 
 
-    # Get the list of databases in this pool.
-    $dbList = Get-AzureRmSqlElasticPoolDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName
+# Get the list of databases in this pool.
+$dbList = Get-AzureRmSqlElasticPoolDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName
 
-    # Get resource usage metrics for a database in an elastic database for the specified time interval.
-    $dbMetrics = @()
-    foreach ($db in $dbList)
-    {
-        $dbResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/databases/' + $db.DatabaseName
-        $dbMetrics = $dbMetrics + (Get-AzureRmMetric -ResourceId $dbResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime)
-    }
+# Get resource usage metrics for a database in an elastic database for the specified time interval.
+$dbMetrics = @()
+foreach ($db in $dbList)
+{
+    $dbResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/databases/' + $db.DatabaseName
+    $dbMetrics = $dbMetrics + (Get-AzureRmMetric -ResourceId $dbResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime)
+}
 
-    #Optionally you can format the metrics and output as .csv file using the following script block.
-    $command = {
-    param($metricList, $outputFile)
+#Optionally you can format the metrics and output as .csv file using the following script block.
+$command = {
+param($metricList, $outputFile)
 
-    # Format metrics into a table.
-    $table = @()
-    foreach($metric in $metricList) { 
-      foreach($metricValue in $metric.MetricValues) {
-        $sx = New-Object PSObject -Property @{
-            Timestamp = $metricValue.Timestamp.ToString()
-            MetricName = $metric.Name; 
-            Average = $metricValue.Average;
-            ResourceID = $metric.ResourceId 
-          }
-          $table = $table += $sx
+# Format metrics into a table.
+$table = @()
+foreach($metric in $metricList) { 
+  foreach($metricValue in $metric.MetricValues) {
+    $sx = New-Object PSObject -Property @{
+        Timestamp = $metricValue.Timestamp.ToString()
+        MetricName = $metric.Name; 
+        Average = $metricValue.Average;
+        ResourceID = $metric.ResourceId 
       }
-    }
+      $table = $table += $sx
+  }
+}
 
-    # Output the metrics into a .csv file.
-    write-output $table | Export-csv -Path $outputFile -Append -NoTypeInformation
-    }
+# Output the metrics into a .csv file.
+write-output $table | Export-csv -Path $outputFile -Append -NoTypeInformation
+}
 
-    # Format and output pool metrics
-    Invoke-Command -ScriptBlock $command -ArgumentList $poolMetrics,c:\temp\poolmetrics.csv
+# Format and output pool metrics
+Invoke-Command -ScriptBlock $command -ArgumentList $poolMetrics,c:\temp\poolmetrics.csv
 
-    # Format and output database metrics
-    Invoke-Command -ScriptBlock $command -ArgumentList $dbMetrics,c:\temp\dbmetrics.csv
+# Format and output database metrics
+Invoke-Command -ScriptBlock $command -ArgumentList $dbMetrics,c:\temp\dbmetrics.csv
+```
 
 ## 弹性池操作延迟
 

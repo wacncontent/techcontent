@@ -44,21 +44,29 @@ ms.author: larryfr
 
 2. 使用以下方法启动 Pig 命令：
 
-        %pig_home%\bin\pig
+    ```
+    %pig_home%\bin\pig
+    ```
 
     系统将为你提供 `grunt>` 提示符。
 
 3. 输入以下语句：
 
-        LOGS = LOAD 'wasbs:///example/data/sample.log';
+    ```
+    LOGS = LOAD 'wasbs:///example/data/sample.log';
+    ```
 
     此命令会将 sample.log 文件的内容加载到 LOGS 文件中。你可以通过使用以下命令查看该文件的内容：
 
-        DUMP LOGS;
+    ```
+    DUMP LOGS;
+    ```
 
 4. 通过应用正则表达式从每个记录中仅提取日志记录级别来转换数据：
 
-        LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
+    ```
+    LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
+    ```
 
     转换后，你可以使用 **DUMP** 查看数据。在本例中为 `DUMP LEVELS;`。
 
@@ -84,14 +92,18 @@ ms.author: larryfr
 
 6. 你也可以使用 `STORE` 语句保存转换结果。例如，以下命令将 `RESULT` 保存到群集的默认存储容器上的 **/example/data/pigout** 目录：
 
-        STORE RESULT into 'wasbs:///example/data/pigout'
+    ```
+    STORE RESULT into 'wasbs:///example/data/pigout'
+    ```
 
     > [!NOTE]
     > 数据将存储到文件中名为 **part-nnnnn** 的指定目录。如果该目录已存在，你将收到错误消息。
 
 7. 若要退出 grunt 提示符，请输入以下语句。
 
-        QUIT;
+    ```
+    QUIT;
+    ```
 
 ###Pig Latin 批处理文件
 
@@ -101,26 +113,32 @@ ms.author: larryfr
 
 4. 在 **pigbatch.pig** 文件中键入或粘贴以下行，然后保存它：
 
-        LOGS = LOAD 'wasbs:///example/data/sample.log';
-        LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
-        FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
-        GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
-        FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
-        RESULT = order FREQUENCIES by COUNT desc;
-        DUMP RESULT;
+    ```
+    LOGS = LOAD 'wasbs:///example/data/sample.log';
+    LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
+    FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
+    GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
+    FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
+    RESULT = order FREQUENCIES by COUNT desc;
+    DUMP RESULT;
+    ```
 
 5. 使用以下命令，使用 pig 命令运行 **pigbatch.pig** 文件。
 
-        pig %PIG_HOME%\pigbatch.pig
+    ```
+    pig %PIG_HOME%\pigbatch.pig
+    ```
 
     在批处理作业完成后，你应该会看到以下输出，该输出应该与先前步骤中使用 `DUMP RESULT;` 时相同：
 
-        (TRACE,816)
-        (DEBUG,434)
-        (INFO,96)
-        (WARN,11)
-        (ERROR,6)
-        (FATAL,2)
+    ```
+    (TRACE,816)
+    (DEBUG,434)
+    (INFO,96)
+    (WARN,11)
+    (ERROR,6)
+    (FATAL,2)
+    ```
 
 ##<a id="summary"></a>摘要
 

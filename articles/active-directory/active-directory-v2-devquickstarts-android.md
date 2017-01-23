@@ -36,11 +36,15 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 ## 从 GitHub 下载代码。
 本教程的代码[在 GitHub 上](https://github.com/azure-samples/active-directory-android-native-oidcandroidlib-v2)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git/archive/skeleton.zip)，或克隆该骨架：
 
-    git clone --branch skeleton git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
+git clone --branch skeleton git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
 
 你也可以下载以下示例，并立即开始使用：
 
-    git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
+git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
 
 ## 注册应用程序
 在[应用程序注册门户](https://apps.dev.microsoft.com)创建新的应用，或按照[如何使用 v2.0 终结点注册应用](./active-directory-v2-app-registration.md)中的详细步骤操作。请确保：
@@ -56,7 +60,9 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 将 OIDCAndroidLib 副本克隆到你的计算机。
 
-    git@github.com:kalemontes/OIDCAndroidLib.git
+```
+git@github.com:kalemontes/OIDCAndroidLib.git
+```
 
 ![androidStudio](./media/active-directory-android-native-oidcandroidlib-v2/emotes-url.png)  
 
@@ -126,30 +132,38 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
     xml
 
-        <bool name="oidc_oauth2only">true</bool>
+    ```
+    <bool name="oidc_oauth2only">true</bool>
+    ```
 
 2. 配置从注册门户收到的客户端 ID。
 
     xml
 
-        <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
-        <string name="oidc_clientSecret"></string>
+    ```
+    <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
+    <string name="oidc_clientSecret"></string>
+    ```
 
 3. 使用下面的文本配置重定向 URI。
 
     xml
 
-        <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
+    ```
+    <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
+    ```
 
 4. 配置访问图形 API 所需的范围。
 
     xml
 
-        <string-array name="oidc_scopes">
-            <item>openid</item>
-            <item>https://graph.microsoft.com/User.Read</item>
-            <item>offline_access</item>
-        </string-array>
+    ```
+    <string-array name="oidc_scopes">
+        <item>openid</item>
+        <item>https://graph.microsoft.com/User.Read</item>
+        <item>offline_access</item>
+    </string-array>
+    ```
 
 `oidc_scopes` 中的 `User.Read` 值允许读取已登录用户的基本配置文件。
 你可以在 [Microsoft Graph 权限范围](https://graph.microsoft.io/docs/authorization/permission_scopes)中了解有关所有可用范围的详细信息。
@@ -162,13 +176,15 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 xml
 
-    <!-- Stores OpenID Connect provider endpoints. -->
-    <resources>
-        <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
-        <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
-        <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
-        <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
-    </resources>
+```
+<!-- Stores OpenID Connect provider endpoints. -->
+<resources>
+    <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
+    <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
+    <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
+    <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
+</resources>
+```
 
 如果你使用 OAuth2 作为你的协议，应始终不更改这些终结点。
 
@@ -181,8 +197,10 @@ xml
 
 Java
 
-       //TODO: set your protected resource url
-        private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
+```
+   //TODO: set your protected resource url
+    private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
+```
 
 此处简单的图形 API 调用将返回我们的信息。
 

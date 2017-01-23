@@ -25,7 +25,9 @@ wacn.date: 11/03/2016
 
 2. 打开 Powershell，以管理员身份运行以下命令。将 RootCertName 替换为要使用的根证书名称：
 
-        $root=New-SelfSignedCertificate -Subject "CN=RootCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyLength 2048 -KeySpec KeyExchange -KeyExportPolicy Exportable -CertStoreLocation Cert:\CurrentUser\My\ -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240)
+    ```
+    $root=New-SelfSignedCertificate -Subject "CN=RootCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyLength 2048 -KeySpec KeyExchange -KeyExportPolicy Exportable -CertStoreLocation Cert:\CurrentUser\My\ -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240)
+    ```
 
     ![](./media/aog-virtual-network-point-to-site-generate-certificate/self-signed-certificate.png)
 
@@ -53,7 +55,9 @@ wacn.date: 11/03/2016
 
 8. 打开 Powershell，以管理员身份运行以下命令。将 ClientCertName 替换为要使用的根证书名称：
 
-        New-SelfSignedCertificate -Subject "CN=ClientCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyExportPolicy Exportable -KeySpec KeyExchange -Signer $root -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240) -CertStoreLocation Cert:\CurrentUser\My\
+    ```
+    New-SelfSignedCertificate -Subject "CN=ClientCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyExportPolicy Exportable -KeySpec KeyExchange -Signer $root -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240) -CertStoreLocation Cert:\CurrentUser\My\
+    ```
 
      ![](./media/aog-virtual-network-point-to-site-generate-certificate/client-certificate.png)
 

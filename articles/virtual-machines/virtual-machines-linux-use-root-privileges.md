@@ -32,15 +32,19 @@ ms.author: szark
 
 使用 SSH 密钥或密码身份验证登录到 Linux 虚拟机，然后使用 `sudo` 运行命令，例如：
 
-    # sudo <command>
-    [sudo] password for azureuser:
+```
+# sudo <command>
+[sudo] password for azureuser:
+```
 
 在此示例中，将会提示用户输入密码。输入密码后，`sudo` 将使用 `root` 权限运行命令。
 
 还可以通过编辑 `/etc/sudoers.d/waagent` 文件启用不需要密码的 sudo，例如：
 
-    #/etc/sudoers.d/waagent
-    azureuser ALL = (ALL) NOPASSWD: ALL
+```
+#/etc/sudoers.d/waagent
+azureuser ALL = (ALL) NOPASSWD: ALL
+```
 
 对于用户“azureuser”，此更改可启用不需要密码的 sudo。
 
@@ -48,7 +52,9 @@ ms.author: szark
 
 使用 SSH 密钥身份验证登录到 Linux 虚拟机，然后使用 `sudo` 运行命令，例如：
 
-    # sudo <command>
+```
+# sudo <command>
+```
 
 在此示例中，将**不会**提示用户输入密码。按 `<enter>` 后，`sudo` 将使用 `root` 权限运行命令。
 

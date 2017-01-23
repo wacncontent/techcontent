@@ -59,11 +59,15 @@ ms.author: jgao
 
     运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
     如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
 
-        Select-AzureSubscription <AzureSubscriptionName>
+    ```
+    Select-AzureSubscription <AzureSubscriptionName>
+    ```
 
 ##在 HDInsight 中设置 HBase 群集
 
@@ -93,8 +97,10 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
         $blobContainerName = $hbaseClusterName.ToLower()  #Use the cluster name as the default container name.
 
         #connect to your Azure subscription
-        Add-AzureAccount -Environment AzureChinaCloud
-        Select-AzureSubscription $azureSubscriptionName
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    Select-AzureSubscription $azureSubscriptionName
+    ```
 
         # Create a storage account used by the HBase cluster
         $location = Get-AzureVNetSite -VNetName $vNetName | %{$_.Location} # use the virtual network location
@@ -135,9 +141,11 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 
 - 使用包含以下值的同一个脚本：
 
-        $hbaseClusterName = "Contoso-HBase-CE" # This is the HBase cluster name to be used.
-        $vNetName = "Contoso-VNet-CE"  # This name must match your Europe virtual network name.
-        $storageAccountName = 'ContosoStoreCE'	
+    ```
+    $hbaseClusterName = "Contoso-HBase-CE" # This is the HBase cluster name to be used.
+    $vNetName = "Contoso-VNet-CE"  # This name must match your Europe virtual network name.
+    $storageAccountName = 'ContosoStoreCE'	
+    ```
 
     由于已连接到 Azure 帐户，因此不再需要运行以下 cmdlet：
 
@@ -180,7 +188,9 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 2. 打开命令提示符。
 3. 运行 Ping 命令：
 
-        ping headnode0.[DNS suffix of Contoso-HBase-CE]
+    ```
+    ping headnode0.[DNS suffix of Contoso-HBase-CE]
+    ```
 
     HBase 群集的辅助节点将打开 ICM 协议
 
@@ -204,13 +214,19 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 2. 在桌面上单击“Hadoop 命令行”。
 2. 将文件夹更改为 HBase 主目录：
 
-        cd %HBASE_HOME%\bin
+    ```
+    cd %HBASE_HOME%\bin
+    ```
 3. 打开 HBase shell：
 
-        hbase shell
+    ```
+    hbase shell
+    ```
 4. 创建 HBase 表：
 
-        create 'Contacts', 'Personal', 'Office'
+    ```
+    create 'Contacts', 'Personal', 'Office'
+    ```
 5. 不要关闭 RDP 会话和 Hadoop 命令行窗口。本教程后面的步骤中仍会用到它们。
 
 **在 Contoso-HBase-CE 中创建 HBase 表**
@@ -222,7 +238,9 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 1. 切换到 **Contoso-HBase-CN** RDP 窗口。
 2. 在 HBase shell 窗口中，添加目标群集 (Contoso-HBase-CE) 作为对等方，例如：
 
-        add_peer '1', 'zookeeper0.contoso-hbase-us.d4.internal.chinacloudapp.cn,zookeeper1.contoso-hbase-us.d4.internal.chinacloudapp.cn,zookeeper2.contoso-hbase-us.d4.internal.chinacloudapp.cn:2181:/hbase'
+    ```
+    add_peer '1', 'zookeeper0.contoso-hbase-us.d4.internal.chinacloudapp.cn,zookeeper1.contoso-hbase-us.d4.internal.chinacloudapp.cn,zookeeper2.contoso-hbase-us.d4.internal.chinacloudapp.cn:2181:/hbase'
+    ```
 
     在示例中，域后缀是 *contoso-hbase us.d4.internal.chinacloudapp.cn*。将其更新为匹配中国东部 HBase 群集的域后缀。主机名之间不能有空格。
 
@@ -230,29 +248,35 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 
 1. 从 **Contso-HBase-CN** RDP 会话的 HBase shell 窗口中，配置要复制的每个列系列：
 
-        disable 'Contacts'
-        alter 'Contacts', {NAME => 'Personal', REPLICATION_SCOPE => '1'}
-        alter 'Contacts', {NAME => 'Office', REPLICATION_SCOPE => '1'}
-        enable 'Contacts'
+    ```
+    disable 'Contacts'
+    alter 'Contacts', {NAME => 'Personal', REPLICATION_SCOPE => '1'}
+    alter 'Contacts', {NAME => 'Office', REPLICATION_SCOPE => '1'}
+    enable 'Contacts'
+    ```
 
 **将数据批量上载到 HBase 表**
 
 已使用以下 URL 将一个示例数据文件上载到公共 Azure Blob 容器：
 
-        wasbs://hbasecontacts@hditutorialdata.blob.core.windows.net/contacts.txt
+```
+    wasbs://hbasecontacts@hditutorialdata.blob.core.windows.net/contacts.txt
+```
 
 文件内容：
 
-        8396	Calvin Raji	230-555-0191	5415 San Gabriel Dr.
-        16600	Karen Wu	646-555-0113	9265 La Paz
-        4324	Karl Xie	508-555-0163	4912 La Vuelta
-        16891	Jonathan Jackson	674-555-0110	40 Ellis St.
-        3273	Miguel Miller	397-555-0155	6696 Anchor Drive
-        3588	Osarumwense Agbonile	592-555-0152	1873 Lion Circle
-        10272	Julia Lee	870-555-0110	3148 Rose Street
-        4868	Jose Hayes	599-555-0171	793 Crawford Street
-        4761	Caleb Alexander	670-555-0141	4775 Kentucky Dr.
-        16443	Terry Chander	998-555-0171	771 Northridge Drive
+```
+    8396	Calvin Raji	230-555-0191	5415 San Gabriel Dr.
+    16600	Karen Wu	646-555-0113	9265 La Paz
+    4324	Karl Xie	508-555-0163	4912 La Vuelta
+    16891	Jonathan Jackson	674-555-0110	40 Ellis St.
+    3273	Miguel Miller	397-555-0155	6696 Anchor Drive
+    3588	Osarumwense Agbonile	592-555-0152	1873 Lion Circle
+    10272	Julia Lee	870-555-0110	3148 Rose Street
+    4868	Jose Hayes	599-555-0171	793 Crawford Street
+    4761	Caleb Alexander	670-555-0141	4775 Kentucky Dr.
+    16443	Terry Chander	998-555-0171	771 Northridge Drive
+```
 
 可以将同一个数据文件上载到 HBase 群集中，并从那里导入数据。
 
@@ -260,19 +284,25 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 2. 在桌面上单击“Hadoop 命令行”。
 3. 将文件夹更改为 HBase 主目录：
 
-        cd %HBASE_HOME%\bin
+    ```
+    cd %HBASE_HOME%\bin
+    ```
 
 4. 上载数据：
 
-        hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns="HBASE_ROW_KEY,Personal:Name, Personal:HomePhone, Office:Address" -Dimporttsv.bulk.output=/tmpOutput Contacts wasbs://hbasecontacts@hditutorialdata.blob.core.windows.net/contacts.txt
+    ```
+    hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns="HBASE_ROW_KEY,Personal:Name, Personal:HomePhone, Office:Address" -Dimporttsv.bulk.output=/tmpOutput Contacts wasbs://hbasecontacts@hditutorialdata.blob.core.windows.net/contacts.txt
 
-        hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles /tmpOutput Contacts
+    hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles /tmpOutput Contacts
+    ```
 
 ##验证数据复制是否正在进行
 
 可以通过使用以下 HBase shell 命令扫描两个群集中的表，以验证复制是否正在进行：
 
-        Scan 'Contacts'
+```
+    Scan 'Contacts'
+```
 
 ##后续步骤
 

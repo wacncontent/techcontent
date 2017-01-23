@@ -129,7 +129,9 @@ ms.author: wesmc;ricksal
 
 同时，将在服务日志中记录如下所示的异常消息：
 
-    Found conflicts between different versions of the same dependent assembly 'Microsoft.ServiceBus': 2.2.0.0, 2.3.0.0. Please change your project to use version '2.2.0.0' which is the one currently supported by the hosting environment.
+```
+Found conflicts between different versions of the same dependent assembly 'Microsoft.ServiceBus': 2.2.0.0, 2.3.0.0. Please change your project to use version '2.2.0.0' which is the one currently supported by the hosting environment.
+```
 
 此问题很容易解决：只需恢复到所需程序集的支持版本，然后重新发布服务。
 

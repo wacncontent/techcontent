@@ -59,14 +59,16 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 3. 表操作之前，必须初始化本地存储区。这可以在 `InitializeStoreAsync` 方法中完成：
 
-        public async Task InitializeStoreAsync()
-        {
-            var store = new MobileServiceSQLiteStore(localDbPath);
-            store.DefineTable<ToDoItem>();
+    ```
+    public async Task InitializeStoreAsync()
+    {
+        var store = new MobileServiceSQLiteStore(localDbPath);
+        store.DefineTable<ToDoItem>();
 
-            // Uses the default conflict handler, which fails on conflict
-            await client.SyncContext.InitializeAsync(store);
-        }
+        // Uses the default conflict handler, which fails on conflict
+        await client.SyncContext.InitializeAsync(store);
+    }
+    ```
 
     这将使用移动服务 SDK 中提供的类 `MobileServiceSQLiteStore` 创建本地存储。你还可以通过实现 `IMobileServiceLocalStore` 提供不同的本地存储实现。
 
@@ -76,19 +78,21 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 4. 方法 `SyncAsync` 触发实际同步操作：
 
-        public async Task SyncAsync()
+    ```
+    public async Task SyncAsync()
+    {
+        try
         {
-            try
-            {
-                await client.SyncContext.PushAsync();
-                await todoTable.PullAsync("allTodoItems", todoTable.CreateQuery()); // query ID is used for incremental sync
-            }
-
-            catch (MobileServiceInvalidOperationException e)
-            {
-                Console.Error.WriteLine(@"Sync Failed: {0}", e.Message);
-            }
+            await client.SyncContext.PushAsync();
+            await todoTable.PullAsync("allTodoItems", todoTable.CreateQuery()); // query ID is used for incremental sync
         }
+
+        catch (MobileServiceInvalidOperationException e)
+        {
+            Console.Error.WriteLine(@"Sync Failed: {0}", e.Message);
+        }
+    }
+    ```
 
     首先，将调用 `IMobileServiceSyncContext.PushAsync()`。此方法属于 `IMobileServicesSyncContext` 而不是同步表，因为它会将更改推送到所有表中。只有已在本地以某种方式修改（通过 CUD 操作来完成）的记录才会发送到服务器。
 
@@ -119,22 +123,26 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 2. 在 `QSTodoService.cs` 中，注释掉成员 `applicationURL` 和 `applicationKey` 的定义。添加以下行，通过引用无效的移动服务 URL：
 
-        const string applicationURL = @"https://your-mobile-service.azure-mobile.xxx/";
-        const string applicationKey = @"AppKey";
+    ```
+    const string applicationURL = @"https://your-mobile-service.azure-mobile.xxx/";
+    const string applicationKey = @"AppKey";
+    ```
 
 3. 为了确保执行刷新手势时同步数据，请编辑方法 `QSTodoListViewController.RefreshAsync()`。在 `RefreshDataAsync()` 调用的前面添加 `SyncAsync()` 调用：
 
-        private async Task RefreshAsync ()
-        {
-            RefreshControl.BeginRefreshing ();
+    ```
+    private async Task RefreshAsync ()
+    {
+        RefreshControl.BeginRefreshing ();
 
-            await todoService.SyncAsync();
-            await todoService.RefreshDataAsync (); // add this line
+        await todoService.SyncAsync();
+        await todoService.RefreshDataAsync (); // add this line
 
-            RefreshControl.EndRefreshing ();
+        RefreshControl.EndRefreshing ();
 
-            TableView.ReloadData ();
-        }
+        TableView.ReloadData ();
+    }
+    ```
 
 4. 构建并运行应用程序。添加一些新的 todo 项。新的 Todo 项目在推送到移动服务之前，只存在于本地存储中。客户端应用程序的行为就像它已连接到支持所有创建、读取、更新、删除 (CRUD) 操作的移动服务一样。
 

@@ -81,32 +81,38 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 
 你将使用 [EF Code First](http://msdn.microsoft.com/zh-cn/data/ee712907#codefirst) 来定义数据库表。在 DataObjects 文件夹下，添加名为 `Player` 的类。
 
-    using Microsoft.WindowsAzure.Mobile.Service;
+```
+using Microsoft.WindowsAzure.Mobile.Service;
 
-    namespace Leaderboard.DataObjects
+namespace Leaderboard.DataObjects
+{
+    public class Player : EntityData
     {
-        public class Player : EntityData
-        {
-            public string Name { get; set; }
-        }
+        public string Name { get; set; }
     }
+}
+```
 
 添加名为 `PlayerRank` 的另一个类。
 
-    using Microsoft.WindowsAzure.Mobile.Service;
-    using System.ComponentModel.DataAnnotations.Schema;
+```
+using Microsoft.WindowsAzure.Mobile.Service;
+using System.ComponentModel.DataAnnotations.Schema;
 
-    namespace Leaderboard.DataObjects
-    {
-        public class PlayerRank : EntityData
-        {
-            public int Score { get; set; }
-            public int Rank { get; set; }
+namespace Leaderboard.DataObjects
+{
+```
+public class PlayerRank : EntityData
+{
+    public int Score { get; set; }
+    public int Rank { get; set; }
 
-            [ForeignKey("Id")]
-            public virtual Player Player { get; set; }
-        }
-    }
+    [ForeignKey("Id")]
+    public virtual Player Player { get; set; }
+}
+```
+}
+```
 
 请注意，这两个类都继承自 **EntityData** 类。派生自 **EntityData** 可方便应用程序使用数据，并将跨平台客户端库用于 Azure 移动服务。**EntityData** 还可方便应用程序[处理数据库写入冲突](./mobile-services-windows-store-dotnet-handle-database-conflicts.md)。
 
@@ -157,72 +163,80 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 
 移动服务客户端库不支持导航属性，并且这些属性将不序列化。例如，下面是 GET `/tables/PlayerRank` 的原始 HTTP 响应：
 
-    HTTP/1.1 200 OK
-    Cache-Control: no-cache
-    Pragma: no-cache
-    Content-Length: 97
-    Content-Type: application/json; charset=utf-8
-    Expires: 0
-    Server: Microsoft-IIS/8.0
-    Date: Mon, 21 Apr 2014 17:58:43 GMT
+```
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Pragma: no-cache
+Content-Length: 97
+Content-Type: application/json; charset=utf-8
+Expires: 0
+Server: Microsoft-IIS/8.0
+Date: Mon, 21 Apr 2014 17:58:43 GMT
 
-    [{"id":"1","rank":1,"score":150},{"id":"2","rank":3,"score":100},{"id":"3","rank":1,"score":150}]
+[{"id":"1","rank":1,"score":150},{"id":"2","rank":3,"score":100},{"id":"3","rank":1,"score":150}]
+```
 
 请注意，`Player` 并未包含在对象图形中。若要包含玩家，可以通过定义数据传输对象 (DTO) 将对象图形平面化。
 
 DTO 是定义如何通过网络发送数据的对象。如果你希望有线格式看起来与数据库模型不同，即可使用 DTO。若要为 `PlayerRank` 创建 DTO，请在 DataObjects 文件夹中添加名为 `PlayerRankDto` 的新类。
 
-    namespace Leaderboard.DataObjects
+```
+namespace Leaderboard.DataObjects
+{
+    public class PlayerRankDto
     {
-        public class PlayerRankDto
-        {
-            public string Id { get; set; }
-            public string PlayerName { get; set; }
-            public int Score { get; set; }
-            public int Rank { get; set; }
-        }
+        public string Id { get; set; }
+        public string PlayerName { get; set; }
+        public int Score { get; set; }
+        public int Rank { get; set; }
     }
+}
+```
 
 在 `PlayerRankController` 类中，我们将使用 LINQ **Select** 方法，将 `PlayerRank` 实例转换为 `PlayerRankDto` 实例。按以下方式更新 `GetAllPlayerRank` 和 `GetPlayerRank` 控制器方法：
 
-    // GET tables/PlayerRank
-    public IQueryable<PlayerRankDto> GetAllPlayerRank()
+```
+// GET tables/PlayerRank
+public IQueryable<PlayerRankDto> GetAllPlayerRank()
+{
+    return Query().Select(x => new PlayerRankDto()
     {
-        return Query().Select(x => new PlayerRankDto()
-        {
-            Id = x.Id,
-            PlayerName = x.Player.Name,
-            Score = x.Score,
-            Rank = x.Rank
-        });
-    }
+        Id = x.Id,
+        PlayerName = x.Player.Name,
+        Score = x.Score,
+        Rank = x.Rank
+    });
+}
 
-    // GET tables/PlayerRank/48D68C86-6EA6-4C25-AA33-223FC9A27959
-    public SingleResult<PlayerRankDto> GetPlayerRank(string id)
+// GET tables/PlayerRank/48D68C86-6EA6-4C25-AA33-223FC9A27959
+public SingleResult<PlayerRankDto> GetPlayerRank(string id)
+{
+    var result = Lookup(id).Queryable.Select(x => new PlayerRankDto()
     {
-        var result = Lookup(id).Queryable.Select(x => new PlayerRankDto()
-        {
-            Id = x.Id,
-            PlayerName = x.Player.Name,
-            Score = x.Score,
-            Rank = x.Rank
-        });
+        Id = x.Id,
+        PlayerName = x.Player.Name,
+        Score = x.Score,
+        Rank = x.Rank
+    });
 
-        return SingleResult<PlayerRankDto>.Create(result);
-    }
+    return SingleResult<PlayerRankDto>.Create(result);
+}
+```
 
 做出这些更改后，两个 GET 方法将 `PlayerRankDto` 对象返回到客户端。`PlayerRankDto.PlayerName` 属性设置为玩家姓名。以下是做出此更改后的示例响应：
 
-    HTTP/1.1 200 OK
-    Cache-Control: no-cache
-    Pragma: no-cache
-    Content-Length: 160
-    Content-Type: application/json; charset=utf-8
-    Expires: 0
-    Server: Microsoft-IIS/8.0
-    Date: Mon, 21 Apr 2014 19:57:08 GMT
+```
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Pragma: no-cache
+Content-Length: 160
+Content-Type: application/json; charset=utf-8
+Expires: 0
+Server: Microsoft-IIS/8.0
+Date: Mon, 21 Apr 2014 19:57:08 GMT
 
-    [{"id":"1","playerName":"Alice","score":150,"rank":1},{"id":"2","playerName":"Bob","score":100,"rank":3},{"id":"3","playerName":"Charles","score":150,"rank":1}]
+[{"id":"1","playerName":"Alice","score":150,"rank":1},{"id":"2","playerName":"Bob","score":100,"rank":3},{"id":"3","playerName":"Charles","score":150,"rank":1}]
+```
 
 请注意 JSON 负载现在包含玩家姓名。
 
@@ -234,30 +248,34 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 首先，将名为 `PlayerScore` 的类添加到 DataObjects 文件夹。
 
-    namespace Leaderboard.DataObjects
+```
+namespace Leaderboard.DataObjects
+{
+    public class PlayerScore
     {
-        public class PlayerScore
-        {
-            public string PlayerId { get; set; }
-            public int Score { get; set; }
-        }
+        public string PlayerId { get; set; }
+        public int Score { get; set; }
     }
+}
+```
 
 在 `PlayerRankController` 类中，将 `MobileServiceContext` 变量从构造函数移到类变量：
 
-    public class PlayerRankController : TableController<PlayerRank>
+```
+public class PlayerRankController : TableController<PlayerRank>
+{
+    // Add this:
+    MobileServiceContext context = new MobileServiceContext();
+
+    protected override void Initialize(HttpControllerContext controllerContext)
     {
-        // Add this:
-        MobileServiceContext context = new MobileServiceContext();
+        base.Initialize(controllerContext);
 
-        protected override void Initialize(HttpControllerContext controllerContext)
-        {
-            base.Initialize(controllerContext);
-
-            // Delete this:
-            // MobileServiceContext context = new MobileServiceContext();
-            DomainManager = new EntityDomainManager<PlayerRank>(context, Request, Services);
-        }
+        // Delete this:
+        // MobileServiceContext context = new MobileServiceContext();
+        DomainManager = new EntityDomainManager<PlayerRank>(context, Request, Services);
+    }
+```
 
 从 `PlayerRankController` 中删除以下方法：
 
@@ -267,43 +285,45 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 然后，将以下代码添加到 `PlayerRankController`：
 
-    [Route("api/score")]
-    public async Task<IHttpActionResult> PostPlayerScore(PlayerScore score)
+```
+[Route("api/score")]
+public async Task<IHttpActionResult> PostPlayerScore(PlayerScore score)
+{
+    // Does this player exist?
+    var count = context.Players.Where(x => x.Id == score.PlayerId).Count();
+    if (count < 1)
     {
-        // Does this player exist?
-        var count = context.Players.Where(x => x.Id == score.PlayerId).Count();
-        if (count < 1)
-        {
-            return BadRequest();
-        }
-
-        // Try to find the PlayerRank entity for this player. If not found, create a new one.
-        PlayerRank rank = await context.PlayerRanks.FindAsync(score.PlayerId);
-        if (rank == null)
-        {
-            rank = new PlayerRank { Id = score.PlayerId };
-            rank.Score = score.Score;
-            context.PlayerRanks.Add(rank);
-        }
-        else
-        {
-            rank.Score = score.Score;
-        }
-
-        await context.SaveChangesAsync();
-
-        // Update rankings
-        // See http://stackoverflow.com/a/575799
-        const string updateCommand =
-            "UPDATE r SET Rank = ((SELECT COUNT(*)+1 from {0}.PlayerRanks " +
-            "where Score > (select score from {0}.PlayerRanks where Id = r.Id)))" +
-            "FROM {0}.PlayerRanks as r";
-
-        string command = String.Format(updateCommand, ServiceSettingsDictionary.GetSchemaName());
-        await context.Database.ExecuteSqlCommandAsync(command);
-
-        return Ok();
+        return BadRequest();
     }
+
+    // Try to find the PlayerRank entity for this player. If not found, create a new one.
+    PlayerRank rank = await context.PlayerRanks.FindAsync(score.PlayerId);
+    if (rank == null)
+    {
+        rank = new PlayerRank { Id = score.PlayerId };
+        rank.Score = score.Score;
+        context.PlayerRanks.Add(rank);
+    }
+    else
+    {
+        rank.Score = score.Score;
+    }
+
+    await context.SaveChangesAsync();
+
+    // Update rankings
+    // See http://stackoverflow.com/a/575799
+    const string updateCommand =
+        "UPDATE r SET Rank = ((SELECT COUNT(*)+1 from {0}.PlayerRanks " +
+        "where Score > (select score from {0}.PlayerRanks where Id = r.Id)))" +
+        "FROM {0}.PlayerRanks as r";
+
+    string command = String.Format(updateCommand, ServiceSettingsDictionary.GetSchemaName());
+    await context.Database.ExecuteSqlCommandAsync(command);
+
+    return Ok();
+}
+```
 
 `PostPlayerScore` 方法采用 `PlayerScore` 实例作为输入。（客户端将在 HTTP POST 请求中发送 `PlayerScore`。） 该方法将执行以下操作：
 
@@ -313,7 +333,9 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 **[Route]** 属性为此方法定义一个自定义路由：
 
-    [Route("api/score")]
+```
+[Route("api/score")]
+```
 
 也可以将方法放入单独的控制器中。没有哪种方法特别好，具体取决于你想要如何组织代码。
 若要深入了解 **[Route]** 属性，请参阅 [Web API 中的属性路由](http://www.asp.net/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2)。
@@ -328,7 +350,9 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 使用 NuGet Package Manager 添加移动服务客户端库。在 Visual Studio 中，从“工具”菜单中选择“NuGet Package Manager”。然后选择“Package Manager Console”。在“Package Manager Console”窗口中键入以下命令。
 
-    Install-Package WindowsAzure.MobileServices -Project LeaderboardApp
+```
+Install-Package WindowsAzure.MobileServices -Project LeaderboardApp
+```
 
 -Project 开关指定要将包安装到哪个项目。
 
@@ -336,28 +360,30 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 创建名为 Models 的文件夹并添加以下类：
 
-    namespace LeaderboardApp.Models
+```
+namespace LeaderboardApp.Models
+{
+    public class Player
     {
-        public class Player
-        {
-            public string Id { get; set; }
-            public string Name { get; set; }
-        }
-
-        public class PlayerRank
-        {
-            public string Id { get; set; }
-            public string PlayerName { get; set; }
-            public int Score { get; set; }
-            public int Rank { get; set; }
-        }
-
-        public class PlayerScore
-        {
-            public string PlayerId { get; set; }
-            public int Score { get; set; }
-        }
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
+
+    public class PlayerRank
+    {
+        public string Id { get; set; }
+        public string PlayerName { get; set; }
+        public int Score { get; set; }
+        public int Rank { get; set; }
+    }
+
+    public class PlayerScore
+    {
+        public string PlayerId { get; set; }
+        public int Score { get; set; }
+    }
+}
+```
 
 这些类直接对应于移动服务中的数据实体。
 
@@ -373,27 +399,15 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 添加名为的 `LeaderboardViewModel` 的类。
 
-    using LeaderboardApp.Models;
-    using Microsoft.WindowsAzure.MobileServices;
-    using System.ComponentModel;
-    using System.Net.Http;
-    using System.Threading.Tasks;
+```
+using LeaderboardApp.Models;
+using Microsoft.WindowsAzure.MobileServices;
+using System.ComponentModel;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-    namespace LeaderboardApp.ViewModel
-    {
-        class LeaderboardViewModel : INotifyPropertyChanged
-        {
-            MobileServiceClient _client;
-
-            public LeaderboardViewModel(MobileServiceClient client)
-            {
-                _client = client;
-            }
-        }
-    }
-
-在视图模型上实现 **INotifyPropertyChanged**，使视图模型可以参与数据绑定。
-
+namespace LeaderboardApp.ViewModel
+{
     class LeaderboardViewModel : INotifyPropertyChanged
     {
         MobileServiceClient _client;
@@ -402,207 +416,229 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
         {
             _client = client;
         }
-
-        // New code:
-        // INotifyPropertyChanged implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this,
-                    new PropertyChangedEventArgs(propertyName));
-            }
-        }    
     }
+}
+```
+
+在视图模型上实现 **INotifyPropertyChanged**，使视图模型可以参与数据绑定。
+
+```
+class LeaderboardViewModel : INotifyPropertyChanged
+{
+    MobileServiceClient _client;
+
+    public LeaderboardViewModel(MobileServiceClient client)
+    {
+        _client = client;
+    }
+
+    // New code:
+    // INotifyPropertyChanged implementation
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public void NotifyPropertyChanged(string propertyName)
+    {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this,
+                new PropertyChangedEventArgs(propertyName));
+        }
+    }    
+}
+```
 
 接下来，添加可查看属性。XAML 将与这些属性建立数据绑定。
 
-    class LeaderboardViewModel : INotifyPropertyChanged
+```
+class LeaderboardViewModel : INotifyPropertyChanged
+{
+    // ...
+
+    // New code:
+    // View model properties
+    private MobileServiceCollection<Player, Player> _Players;
+    public MobileServiceCollection<Player, Player> Players
     {
-        // ...
-
-        // New code:
-        // View model properties
-        private MobileServiceCollection<Player, Player> _Players;
-        public MobileServiceCollection<Player, Player> Players
+        get { return _Players; }
+        set
         {
-            get { return _Players; }
-            set
-            {
-                _Players = value;
-                NotifyPropertyChanged("Players");
-            }
-        }
-
-        private MobileServiceCollection<PlayerRank, PlayerRank> _Ranks;
-        public MobileServiceCollection<PlayerRank, PlayerRank> Ranks
-        {
-            get { return _Ranks; }
-            set
-            {
-                _Ranks = value;
-                NotifyPropertyChanged("Ranks");
-            }
-        }
-
-        private bool _IsPending;
-        public bool IsPending
-        {
-            get { return _IsPending; }
-            set
-            {
-                _IsPending = value;
-                NotifyPropertyChanged("IsPending");
-            }
-        }
-
-        private string _ErrorMessage = null;
-        public string ErrorMessage
-        {
-            get { return _ErrorMessage; }
-            set
-            {
-                _ErrorMessage = value;
-                NotifyPropertyChanged("ErrorMessage");
-            }
+            _Players = value;
+            NotifyPropertyChanged("Players");
         }
     }
+
+    private MobileServiceCollection<PlayerRank, PlayerRank> _Ranks;
+    public MobileServiceCollection<PlayerRank, PlayerRank> Ranks
+    {
+        get { return _Ranks; }
+        set
+        {
+            _Ranks = value;
+            NotifyPropertyChanged("Ranks");
+        }
+    }
+
+    private bool _IsPending;
+    public bool IsPending
+    {
+        get { return _IsPending; }
+        set
+        {
+            _IsPending = value;
+            NotifyPropertyChanged("IsPending");
+        }
+    }
+
+    private string _ErrorMessage = null;
+    public string ErrorMessage
+    {
+        get { return _ErrorMessage; }
+        set
+        {
+            _ErrorMessage = value;
+            NotifyPropertyChanged("ErrorMessage");
+        }
+    }
+}
+```
 
 当服务的异步操作挂起时，`IsPending` 属性为 true。`ErrorMessage` 属性包含来自服务的任何错误消息。
 
 最后，添加调用服务层的方法。
 
-    class LeaderboardViewModel : INotifyPropertyChanged
+```
+class LeaderboardViewModel : INotifyPropertyChanged
+{
+    // ...
+
+    // New code:
+    // Service operations
+    public async Task GetAllPlayersAsync()
     {
-        // ...
+        IsPending = true;
+        ErrorMessage = null;
 
-        // New code:
-        // Service operations
-        public async Task GetAllPlayersAsync()
+        try
         {
-            IsPending = true;
-            ErrorMessage = null;
-
-            try
-            {
-                IMobileServiceTable<Player> table = _client.GetTable<Player>();
-                Players = await table.OrderBy(x => x.Name).ToCollectionAsync();
-            }
-            catch (MobileServiceInvalidOperationException ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-            catch (HttpRequestException ex2)
-            {
-                ErrorMessage = ex2.Message;
-            }
-            finally
-            {
-                IsPending = false;
-            }
+            IMobileServiceTable<Player> table = _client.GetTable<Player>();
+            Players = await table.OrderBy(x => x.Name).ToCollectionAsync();
         }
-
-        public async Task AddPlayerAsync(Player player)
+        catch (MobileServiceInvalidOperationException ex)
         {
-            IsPending = true;
-            ErrorMessage = null;
-
-            try
-            {
-                IMobileServiceTable<Player> table = _client.GetTable<Player>();
-                await table.InsertAsync(player);
-                Players.Add(player);
-            }
-            catch (MobileServiceInvalidOperationException ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-            catch (HttpRequestException ex2)
-            {
-                ErrorMessage = ex2.Message;
-            }
-            finally
-            {
-                IsPending = false;
-            }
+            ErrorMessage = ex.Message;
         }
-
-        public async Task SubmitScoreAsync(Player player, int score)
+        catch (HttpRequestException ex2)
         {
-            IsPending = true;
-            ErrorMessage = null;
-
-            var playerScore = new PlayerScore()
-            {
-                PlayerId = player.Id,
-                Score = score
-            }; 
-
-            try
-            {
-                await _client.InvokeApiAsync<PlayerScore, object>("score", playerScore);
-                await GetAllRanksAsync();
-            }
-            catch (MobileServiceInvalidOperationException ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-            catch (HttpRequestException ex2)
-            {
-                ErrorMessage = ex2.Message;
-            }
-            finally
-            {
-                IsPending = false;
-            }
+            ErrorMessage = ex2.Message;
         }
-
-        public async Task GetAllRanksAsync()
+        finally
         {
-            IsPending = true;
-            ErrorMessage = null;
-
-            try
-            {
-                IMobileServiceTable<PlayerRank> table = _client.GetTable<PlayerRank>();
-                Ranks = await table.OrderBy(x => x.Rank).ToCollectionAsync();
-            }
-            catch (MobileServiceInvalidOperationException ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-            catch (HttpRequestException ex2)
-            {
-                ErrorMessage = ex2.Message;
-            }
-            finally
-            {
-                IsPending = false;
-            }
-         }    
+            IsPending = false;
+        }
     }
+
+    public async Task AddPlayerAsync(Player player)
+    {
+        IsPending = true;
+        ErrorMessage = null;
+
+        try
+        {
+            IMobileServiceTable<Player> table = _client.GetTable<Player>();
+            await table.InsertAsync(player);
+            Players.Add(player);
+        }
+        catch (MobileServiceInvalidOperationException ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        catch (HttpRequestException ex2)
+        {
+            ErrorMessage = ex2.Message;
+        }
+        finally
+        {
+            IsPending = false;
+        }
+    }
+
+    public async Task SubmitScoreAsync(Player player, int score)
+    {
+        IsPending = true;
+        ErrorMessage = null;
+
+        var playerScore = new PlayerScore()
+        {
+            PlayerId = player.Id,
+            Score = score
+        }; 
+
+        try
+        {
+            await _client.InvokeApiAsync<PlayerScore, object>("score", playerScore);
+            await GetAllRanksAsync();
+        }
+        catch (MobileServiceInvalidOperationException ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        catch (HttpRequestException ex2)
+        {
+            ErrorMessage = ex2.Message;
+        }
+        finally
+        {
+            IsPending = false;
+        }
+    }
+
+    public async Task GetAllRanksAsync()
+    {
+        IsPending = true;
+        ErrorMessage = null;
+
+        try
+        {
+            IMobileServiceTable<PlayerRank> table = _client.GetTable<PlayerRank>();
+            Ranks = await table.OrderBy(x => x.Rank).ToCollectionAsync();
+        }
+        catch (MobileServiceInvalidOperationException ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        catch (HttpRequestException ex2)
+        {
+            ErrorMessage = ex2.Message;
+        }
+        finally
+        {
+            IsPending = false;
+        }
+     }    
+}
+```
 
 ## 添加 MobileServiceClient 实例
 
 打开 App.xaml.cs 文件并将 **MobileServiceClient** 实例添加到 `App` 类。
 
-    // New code:
-    using Microsoft.WindowsAzure.MobileServices;
+```
+// New code:
+using Microsoft.WindowsAzure.MobileServices;
 
-    namespace LeaderboardApp
+namespace LeaderboardApp
+{
+    sealed partial class App : Application
     {
-        sealed partial class App : Application
-        {
-            // New code.
-            // TODO: Replace 'port' with the actual port number.
-            const string serviceUrl = "http://localhost:port/";
-            public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl);
+        // New code.
+        // TODO: Replace 'port' with the actual port number.
+        const string serviceUrl = "http://localhost:port/";
+        public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl);
 
-            // ...
-        }
+        // ...
     }
+}
+```
 
 当你在本地调试时，移动服务将在 IIS Express 上运行。Visual Studio 将分配一个随机端口号，因此本地 URL 为 http://localhost:port，其中 port 为端口号。若要获取端口号，请按 F5 在 Visual Studio 中启动服务，以进行调试。Visual Studio 将启动浏览器，并导航到服务 URL。你也可以在项目属性中的 **Web** 下查找本地 URL。
 
@@ -610,46 +646,52 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 在主页面中，添加视图模型的实例。然后将视图模型设置为该页面的 **DataContext**。
 
-    public sealed partial class MainPage : Page
+```
+public sealed partial class MainPage : Page
+{
+    // New code:
+    LeaderboardViewModel viewModel = new LeaderboardViewModel(App.MobileService);
+
+    public MainPage()
     {
+        this.InitializeComponent();
         // New code:
-        LeaderboardViewModel viewModel = new LeaderboardViewModel(App.MobileService);
+        this.DataContext = viewModel;
+    }
 
-        public MainPage()
-        {
-            this.InitializeComponent();
-            // New code:
-            this.DataContext = viewModel;
-        }
-
-       // ...
+   // ...
+```
 
 前面已经提到，我不会介绍应用程序的所有 XAML。MVVM 模式的优点之一是能够区分表示形式和应用程序逻辑，因此，如果你不喜欢示例应用程序，可以轻松更改 UI。
 
 玩家列表显示在 **ListBox** 中：
 
-    <ListBox Width="200" Height="400" x:Name="PlayerListBox" 
-        ItemsSource="{Binding Players}" DisplayMemberPath="Name"/>
+```
+<ListBox Width="200" Height="400" x:Name="PlayerListBox" 
+    ItemsSource="{Binding Players}" DisplayMemberPath="Name"/>
+```
 
 排名显示在 **ListView** 中：
 
-    <ListView x:Name="RankingsListView" ItemsSource="{Binding Ranks}" SelectionMode="None">
-        <!-- Header and styles not shown -->
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="{Binding Path=Rank}"/>
-                    <TextBlock Text="{Binding Path=PlayerName}" Grid.Column="1"/>
-                    <TextBlock Text="{Binding Path=Score}" Grid.Column="2"/>
-                </Grid>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+```
+<ListView x:Name="RankingsListView" ItemsSource="{Binding Ranks}" SelectionMode="None">
+    <!-- Header and styles not shown -->
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Path=Rank}"/>
+                <TextBlock Text="{Binding Path=PlayerName}" Grid.Column="1"/>
+                <TextBlock Text="{Binding Path=Score}" Grid.Column="2"/>
+            </Grid>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+```
 
 所有数据绑定都通过视图模型发生。
 
@@ -690,15 +732,17 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 将服务 URL 和应用程序密钥传递给 **MobileServiceClient** 构造函数。
 
-    sealed partial class App : Application
-    {
-        // TODO: Replace these strings with the real URL and key.
-        const string serviceUrl = "https://yourapp.azure-mobile.net/";
-        const string appKey = "YOUR ACCESSS KEY";
+```
+sealed partial class App : Application
+{
+    // TODO: Replace these strings with the real URL and key.
+    const string serviceUrl = "https://yourapp.azure-mobile.net/";
+    const string appKey = "YOUR ACCESSS KEY";
 
-        public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl, appKey);
+    public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl, appKey);
 
-       // ...
+   // ...
+```
 
 现在，当你运行该应用程序时，它将与实际的服务通信。
 

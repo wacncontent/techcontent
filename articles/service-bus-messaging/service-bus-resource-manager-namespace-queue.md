@@ -53,54 +53,62 @@ wacn.date: 12/26/2016
 
 要创建的服务总线命名空间的名称。
 
-        "serviceBusNamespaceName": {
-        "type": "string",
-        "metadata": { 
-            "description": "Name of the Service Bus namespace" 
-            }
+```
+    "serviceBusNamespaceName": {
+    "type": "string",
+    "metadata": { 
+        "description": "Name of the Service Bus namespace" 
         }
+    }
+```
 ### serviceBusQueueName
 
 在服务总线命名空间中创建的队列的名称。
 
-        "serviceBusQueueName": {
-        "type": "string"
-        }
+```
+    "serviceBusQueueName": {
+    "type": "string"
+    }
+```
 
 ### serviceBusApiVersion
 
 模板的服务总线 API 版本。
 
-        "serviceBusApiVersion": {
-        "type": "string"
-        }
+```
+    "serviceBusApiVersion": {
+    "type": "string"
+    }
+```
 
 ## 要部署的资源
 
 创建“Messaging”类型的标准服务总线命名空间和队列。
 
-        "resources ": [{
+```
+    "resources ": [{
+            "apiVersion": "[variables('sbVersion')]",
+            "name": "[parameters('serviceBusNamespaceName')]",
+            "type": "Microsoft.ServiceBus/Namespaces",
+            "location": "[variables('location')]",
+            "kind": "Messaging",
+            "sku": {
+                "name": "StandardSku",
+                "tier": "Standard"
+            },
+            "resources": [{
                 "apiVersion": "[variables('sbVersion')]",
-                "name": "[parameters('serviceBusNamespaceName')]",
-                "type": "Microsoft.ServiceBus/Namespaces",
-                "location": "[variables('location')]",
-                "kind": "Messaging",
-                "sku": {
-                    "name": "StandardSku",
-                    "tier": "Standard"
-                },
-                "resources": [{
-                    "apiVersion": "[variables('sbVersion')]",
-                    "name": "[parameters('serviceBusQueueName')]",
-                    "type": "Queues",
-                    "dependsOn": [
-                        "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
-                    ],
-                    "properties": {
-                        "path": "[parameters('serviceBusQueueName')]",
-                    }
-                }]
+                "name": "[parameters('serviceBusQueueName')]",
+                "type": "Queues",
+                "dependsOn": [
+                    "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
+                ],
+                "properties": {
+                    "path": "[parameters('serviceBusQueueName')]",
+                }
             }]
+        }]
+```
 
 ## 运行部署的命令
 
@@ -108,13 +116,17 @@ wacn.date: 12/26/2016
 
 ## PowerShell
 
-        New-AzureRmResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-queue/azuredeploy.json>
+```
+    New-AzureRmResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-queue/azuredeploy.json>
+```
 
 ## Azure CLI
 
-        azure config mode arm
+```
+    azure config mode arm
 
-        azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-queue/azuredeploy.json>
+    azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-queue/azuredeploy.json>
+```
 
 ## 后续步骤
 

@@ -144,7 +144,9 @@ Azure 存储帐户提供唯一的命名空间来存储和访问你的 Azure 存�
 
 若要删除与 Azure 虚拟机相关联的存储帐户，必须首先确保已删除所有虚拟机磁盘。如果不先删除虚拟机磁盘，则当你尝试删除存储帐户时，将看到如下错误消息：
 
-    未能删除存储帐户 <vm-storage-account-name>。无法删除存储帐户 <vm-storage-account-name>：“存储帐户 <vm-storage-account-name> 有一些活动映像和/或磁盘。请确保在删除此存储帐户前移除这些映像和/或磁盘。”。
+```
+未能删除存储帐户 <vm-storage-account-name>。无法删除存储帐户 <vm-storage-account-name>：“存储帐户 <vm-storage-account-name> 有一些活动映像和/或磁盘。请确保在删除此存储帐户前移除这些映像和/或磁盘。”。
+```
 
 如果存储帐户使用经典部署模型，你可以通过在 [Azure 经典管理门户](https://manage.windowsazure.cn)中执行以下步骤来删除虚拟机磁盘：
 

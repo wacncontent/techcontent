@@ -32,7 +32,9 @@ Org ID 是 Azure China 特殊的用户名系统。
 
 比如公司名为 contoso 的企业，可以注册 Org ID 为 
 
-    contoso.partner.onmschina.cn
+```
+contoso.partner.onmschina.cn
+```
 
 注意后面的 partner.onmschina.cn 为固定后缀。
 
@@ -41,11 +43,15 @@ Org ID 是 Azure China 特殊的用户名系统。
 
 比如如果需要创建管理员账号，就可创建账户为  
 
-    admin@contoso.partner.onmschina.cn
+```
+admin@contoso.partner.onmschina.cn
+```
 
 或者可以给员工 xiaowang 创建普通用户账号为  
 
-    xiaowang@contoso.partner.onmschina.cn
+```
+xiaowang@contoso.partner.onmschina.cn
+```
 
 以上 2 个账户的账户名不同，密码也不同。使用不同的账户名和密码，就可以用 Azure China 进行管理。
 

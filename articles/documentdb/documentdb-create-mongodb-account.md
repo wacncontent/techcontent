@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 11/24/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: anhoh
 ---
 
@@ -55,16 +55,17 @@ ms.author: anhoh
 
 6. 在配置了新的帐户选项后，单击“创建”。可能需要几分钟来创建帐户。
 
-    可通过通知中心监视进度。
+   可通过通知中心监视进度。
 
-    ![显示正在创建 DocumentDB 帐户的通知中心的屏幕截图](./media/documentdb-create-mongodb-account/create-documentdb-mongodb-deployment-status.png)  
+   ![显示正在创建 DocumentDB 帐户的通知中心的屏幕截图](./media/documentdb-create-mongodb-account/create-documentdb-mongodb-deployment-status.png)  
 
 7. 若要访问新帐户，请单击左侧菜单上的“DocumentDB \(NoSQL\)”。在常规的 DocumentDB 帐户和具有 Mongo 协议支持的 DocumentDB 帐户列表中，单击新帐户的名称。
 8. DocumentDB 帐户现在可用于 MongoDB 应用。
 
-    ![默认帐户边栏选项卡的屏幕截图](./media/documentdb-create-mongodb-account/defaultaccountblade.png)  
+   ![默认帐户边栏选项卡的屏幕截图](./media/documentdb-create-mongodb-account/defaultaccountblade.png)  
 
 ## 后续步骤
 - 了解如何[连接](./documentdb-connect-mongodb-account.md)到具有 MongoDB 协议支持的 DocumentDB 帐户。
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: wording update -->

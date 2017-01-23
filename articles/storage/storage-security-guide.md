@@ -230,15 +230,17 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 其中提供有关允许的访问权限的信息，以及准许该访问权限的时间长度。下面提供了一个示例：此 URI 将提供对 Blob 的读取权限，期限为五分钟。请注意，SAS 查询参数必须以 URL 编码，例如 %3A 表示冒号 (:)，%20 表示空格。
 
-    http://mystorage.blob.core.chinacloudapi.cn/mycontainer/myblob.txt (URL to the blob)
-    ?sv=2015-04-05 (storage service version)
-    &st=2015-12-10T22%3A18%3A26Z (start time, in UTC time and URL encoded)
-    &se=2015-12-10T22%3A23%3A26Z (end time, in UTC time and URL encoded)
-    &sr=b (resource is a blob)
-    &sp=r (read access)
-    &sip=168.1.5.60-168.1.5.70 (requests can only come from this range of IP addresses)
-    &spr=https (only allow HTTPS requests)
-    &sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D (signature used for the authentication of the SAS)
+```
+http://mystorage.blob.core.chinacloudapi.cn/mycontainer/myblob.txt (URL to the blob)
+?sv=2015-04-05 (storage service version)
+&st=2015-12-10T22%3A18%3A26Z (start time, in UTC time and URL encoded)
+&se=2015-12-10T22%3A23%3A26Z (end time, in UTC time and URL encoded)
+&sr=b (resource is a blob)
+&sp=r (read access)
+&sip=168.1.5.60-168.1.5.70 (requests can only come from this range of IP addresses)
+&spr=https (only allow HTTPS requests)
+&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D (signature used for the authentication of the SAS)
+```
 
 ####Azure 存储服务如何对共享访问签名进行身份验证
 
@@ -533,15 +535,17 @@ Azure 存储允许启用 CORS – 跨域资源共享。对于每个存储帐户�
 
 默认情况下，对所有服务禁用了 CORS。可以使用 REST API 或存储客户端库调用某个方法来设置服务策略，以启用 CORS。执行该操作时，将在 XML 中包含 CORS 规则。以下示例将针对存储帐户的 Blob 服务使用“设置服务属性”操作来设置 CORS 规则。可以使用存储客户端库或 REST API 针对 Azure 存储执行该操作。
 
-    <Cors>    
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
-            <AllowedMethods>PUT,GET</AllowedMethods>
-            <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
-            <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
-            <MaxAgeInSeconds>200</MaxAgeInSeconds>
-        </CorsRule>
-    <Cors>
+```
+<Cors>    
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
+        <AllowedMethods>PUT,GET</AllowedMethods>
+        <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
+        <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
+        <MaxAgeInSeconds>200</MaxAgeInSeconds>
+    </CorsRule>
+<Cors>
+```
 
 下面是每一行的含义：
 

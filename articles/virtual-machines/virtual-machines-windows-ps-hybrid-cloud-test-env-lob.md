@@ -58,35 +58,39 @@ ms.author: josephd
 
 接下来，在本地计算机上 Azure PowerShell 命令提示符下使用这些命令创建适用于 SQL1 的虚拟机。在运行这些命令之前，请填写变量值并删除 < 和 > 字符。
 
-    $rgName="<your resource group name>"
-    $locName="<the Azure location of your resource group>"
-    $saName="<your storage account name>"
+```
+$rgName="<your resource group name>"
+$locName="<the Azure location of your resource group>"
+$saName="<your storage account name>"
 
-    $vnet=Get-AzureRMVirtualNetwork -Name "TestVNET" -ResourceGroupName $rgName
-    $subnet=Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "TestSubnet"
-    $pip=New-AzureRMPublicIpAddress -Name SQL1-NIC -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
-    $nic=New-AzureRMNetworkInterface -Name SQL1-NIC -ResourceGroupName $rgName -Location $locName -Subnet $subnet -PublicIpAddress $pip
-    $vm=New-AzureRMVMConfig -VMName SQL1 -VMSize Standard_A4
-    $storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
-    $vhdURI=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/SQL1-SQLDataDisk.vhd"
-    Add-AzureRMVMDataDisk -VM $vm -Name "Data" -DiskSizeInGB 100 -VhdUri $vhdURI  -CreateOption empty
+$vnet=Get-AzureRMVirtualNetwork -Name "TestVNET" -ResourceGroupName $rgName
+$subnet=Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "TestSubnet"
+$pip=New-AzureRMPublicIpAddress -Name SQL1-NIC -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
+$nic=New-AzureRMNetworkInterface -Name SQL1-NIC -ResourceGroupName $rgName -Location $locName -Subnet $subnet -PublicIpAddress $pip
+$vm=New-AzureRMVMConfig -VMName SQL1 -VMSize Standard_A4
+$storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
+$vhdURI=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/SQL1-SQLDataDisk.vhd"
+Add-AzureRMVMDataDisk -VM $vm -Name "Data" -DiskSizeInGB 100 -VhdUri $vhdURI  -CreateOption empty
 
-    $cred=Get-Credential -Message "Type the name and password of the local administrator account for the SQL Server computer." 
-    $vm=Set-AzureRMVMOperatingSystem -VM $vm -Windows -ComputerName SQL1 -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
-    $vm=Set-AzureRMVMSourceImage -VM $vm -PublisherName MicrosoftSQLServer -Offer SQL2014-WS2012R2 -Skus Standard -Version "latest"
-    $vm=Add-AzureRMVMNetworkInterface -VM $vm -Id $nic.Id
-    $storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
-    $osDiskUri=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/SQL1-OSDisk.vhd"
-    $vm=Set-AzureRMVMOSDisk -VM $vm -Name "OSDisk" -VhdUri $osDiskUri -CreateOption fromImage
-    New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
+$cred=Get-Credential -Message "Type the name and password of the local administrator account for the SQL Server computer." 
+$vm=Set-AzureRMVMOperatingSystem -VM $vm -Windows -ComputerName SQL1 -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
+$vm=Set-AzureRMVMSourceImage -VM $vm -PublisherName MicrosoftSQLServer -Offer SQL2014-WS2012R2 -Skus Standard -Version "latest"
+$vm=Add-AzureRMVMNetworkInterface -VM $vm -Id $nic.Id
+$storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
+$osDiskUri=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/SQL1-OSDisk.vhd"
+$vm=Set-AzureRMVMOSDisk -VM $vm -Name "OSDisk" -VhdUri $osDiskUri -CreateOption fromImage
+New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
+```
 
 在 Azure 门户预览中使用 SQL1 的本地管理员帐户连接到 SQL1。
 
 接下来，配置 Windows 防火墙规则，允许基本的连接测试和 SQL Server 流量。在 SQL1 上管理员级 Windows PowerShell 命令提示符下运行这些命令。
 
     New-NetFirewallRule -DisplayName "SQL Server" -Direction Inbound -Protocol TCP -LocalPort 1433,1434,5022 -Action allow 
-    Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
-    ping dc2.corp.contoso.com
+```
+Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
+ping dc2.corp.contoso.com
+```
 
 使用 ping 命令时，会从 IP 地址 192.168.0.4 传回四个成功的答复。
 
@@ -105,14 +109,18 @@ ms.author: josephd
 
 在 SQL1 上的 Windows PowerShell 命令提示符处运行以下命令：
 
-    md f:\Data
-    md f:\Log
-    md f:\Backup
+```
+md f:\Data
+md f:\Log
+md f:\Backup
+```
 
 接下来，在 SQL1 上的 Windows PowerShell 提示符下使用以下命令将 SQL1 加入 CORP Windows Server Active Directory 域。
 
-    Add-Computer -DomainName corp.contoso.com
-    Restart-Computer
+```
+Add-Computer -DomainName corp.contoso.com
+Restart-Computer
+```
 
 当系统提示为 **Add-Computer** 命令提供域帐户凭据时，请使用 CORP\\User1 帐户。
 
@@ -144,23 +152,25 @@ ms.author: josephd
 
 首先，在本地计算机上的 Azure PowerShell 命令提示符下使用这些命令创建适用于 LOB1 的虚拟机。
 
-    $rgName="<your resource group name>"
-    $locName="<your Azure location, such as China North>"
-    $saName="<your storage account name>"
+```
+$rgName="<your resource group name>"
+$locName="<your Azure location, such as China North>"
+$saName="<your storage account name>"
 
-    $vnet=Get-AzureRMVirtualNetwork -Name "TestVNET" -ResourceGroupName $rgName
-    $subnet=Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "TestSubnet"
-    $pip=New-AzureRMPublicIpAddress -Name LOB1-NIC -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
-    $nic=New-AzureRMNetworkInterface -Name LOB1-NIC -ResourceGroupName $rgName -Location $locName -Subnet $subnet -PublicIpAddress $pip
-    $vm=New-AzureRMVMConfig -VMName LOB1 -VMSize Standard_A2
-    $storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
-    $cred=Get-Credential -Message "Type the name and password of the local administrator account for LOB1."
-    $vm=Set-AzureRMVMOperatingSystem -VM $vm -Windows -ComputerName LOB1 -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
-    $vm=Set-AzureRMVMSourceImage -VM $vm -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus 2012-R2-Datacenter -Version "latest"
-    $vm=Add-AzureRMVMNetworkInterface -VM $vm -Id $nic.Id
-    $osDiskUri=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/LOB1-TestLab-OSDisk.vhd"
-    $vm=Set-AzureRMVMOSDisk -VM $vm -Name LOB1-TestVNET-OSDisk -VhdUri $osDiskUri -CreateOption fromImage
-    New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
+$vnet=Get-AzureRMVirtualNetwork -Name "TestVNET" -ResourceGroupName $rgName
+$subnet=Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "TestSubnet"
+$pip=New-AzureRMPublicIpAddress -Name LOB1-NIC -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
+$nic=New-AzureRMNetworkInterface -Name LOB1-NIC -ResourceGroupName $rgName -Location $locName -Subnet $subnet -PublicIpAddress $pip
+$vm=New-AzureRMVMConfig -VMName LOB1 -VMSize Standard_A2
+$storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
+$cred=Get-Credential -Message "Type the name and password of the local administrator account for LOB1."
+$vm=Set-AzureRMVMOperatingSystem -VM $vm -Windows -ComputerName LOB1 -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
+$vm=Set-AzureRMVMSourceImage -VM $vm -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus 2012-R2-Datacenter -Version "latest"
+$vm=Add-AzureRMVMNetworkInterface -VM $vm -Id $nic.Id
+$osDiskUri=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/LOB1-TestLab-OSDisk.vhd"
+$vm=Set-AzureRMVMOSDisk -VM $vm -Name LOB1-TestVNET-OSDisk -VhdUri $osDiskUri -CreateOption fromImage
+New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
+```
 
 接下来，在 Azure 门户预览中使用 SQL1 的本地管理员帐户的凭据连接到 LOB1。
 
@@ -173,8 +183,10 @@ ms.author: josephd
 
 接下来，在 Windows PowerShell 提示符下使用以下命令将 LOB1 加入 CORP Active Directory 域。
 
-    Add-Computer -DomainName corp.contoso.com
-    Restart-Computer
+```
+Add-Computer -DomainName corp.contoso.com
+Restart-Computer
+```
 
 当系统提示为 **Add-Computer** 命令提供域帐户凭据时，请使用 CORP\\User1 帐户。
 

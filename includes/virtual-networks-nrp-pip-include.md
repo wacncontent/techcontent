@@ -20,21 +20,23 @@
 
 采用 JSON 格式的示例公共 IP 地址：
 
-    {
-       "name": "PIP01",
-       "location": "North US",
-       "tags": { "key": "value" },
-       "properties": {
-          "publicIPAllocationMethod": "Static",
-          "idleTimeoutInMinutes": 4,
-          "ipAddress": "104.42.233.77",
-          "dnsSettings": {
-             "domainNameLabel": "mylabel",
-             "fqdn": "mylabel.chinanorth.chinacloudapp.cn",
-             "reverseFqdn": "contoso.com."
-          }
-       }
-    } 
+```
+{
+   "name": "PIP01",
+   "location": "North US",
+   "tags": { "key": "value" },
+   "properties": {
+      "publicIPAllocationMethod": "Static",
+      "idleTimeoutInMinutes": 4,
+      "ipAddress": "104.42.233.77",
+      "dnsSettings": {
+         "domainNameLabel": "mylabel",
+         "fqdn": "mylabel.chinanorth.chinacloudapp.cn",
+         "reverseFqdn": "contoso.com."
+      }
+   }
+} 
+```
 
 ### 其他资源
 

@@ -24,20 +24,24 @@ wacn.date: 12/05/2016
 
 - **CentOS**
 
-        Bringing up loopback interface:  [  OK  ]
-        Bringing up interface eth0:  Device eth0 has different MAC address than expected, ignoring.  [FAILED]
+    ```
+    Bringing up loopback interface:  [  OK  ]
+    Bringing up interface eth0:  Device eth0 has different MAC address than expected, ignoring.  [FAILED]
+    ```
 
 - **SUSE**
 
-        Setting up (localfs) network interfaces:
-            lo        
-            lo        IP address: 127.0.0.1/8   
-                      IP address: 127.0.0.2/8   
-        done   	eth4      		            No configuration found for eth4
-        unused Waiting for mandatory devices:  eth0 
-        29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
+    ```
+    Setting up (localfs) network interfaces:
+        lo        
+        lo        IP address: 127.0.0.1/8   
+                  IP address: 127.0.0.2/8   
+    done   	eth4      		            No configuration found for eth4
+    unused Waiting for mandatory devices:  eth0 
+    29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 
 
-        eth0                                No interface found		
+    eth0                                No interface found		
+    ```
 
 ### 解决方案 ###
 

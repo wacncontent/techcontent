@@ -62,32 +62,36 @@ wacn.date: 01/09/2017
 
 C#
 
-    public partial class Startup
+```
+public partial class Startup
+{
+    public void Configuration(IAppBuilder app)
     {
-        public void Configuration(IAppBuilder app)
-        {
-            ConfigureAuth(app);
-        }
+        ConfigureAuth(app);
     }
+}
+```
 
 - 打开文件 `App_Start\Startup.Auth.cs` 并实现 `ConfigureAuth(...)` 方法。在 `OpenIDConnectAuthenticationOptions` 中提供的参数将充当应用程序与 Azure AD 通信时使用的坐标。你还需要设置 Cookie 身份验证 - OpenID Connect 中间件将在幕后使用 Cookie。
 
 C#
 
-    public void ConfigureAuth(IAppBuilder app)
-    {
-        app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
+```
+public void ConfigureAuth(IAppBuilder app)
+{
+    app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
-        app.UseCookieAuthentication(new CookieAuthenticationOptions());
+    app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
-        app.UseOpenIdConnectAuthentication(
-            new OpenIdConnectAuthenticationOptions
-            {
-                ClientId = clientId,
-                Authority = authority,
-                PostLogoutRedirectUri = postLogoutRedirectUri,
-            });
-    }
+    app.UseOpenIdConnectAuthentication(
+        new OpenIdConnectAuthenticationOptions
+        {
+            ClientId = clientId,
+            Authority = authority,
+            PostLogoutRedirectUri = postLogoutRedirectUri,
+        });
+}
+```
 
 - 最后，打开位于项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入你的配置值。
     - 应用程序的 `ida:ClientId` 是你在执行步骤 1 时从 Azure 门户预览复制的 Guid。
@@ -101,53 +105,59 @@ C#
 
 C#
 
-    [Authorize]
-    public ActionResult About()
-    {
-      ...
+```
+[Authorize]
+public ActionResult About()
+{
+  ...
+```
 
 - 还可以使用 OWIN 直接从代码内部发出身份验证请求。打开 `Controllers\AccountController.cs`。在 SignIn() 和 SignOut() 操作中，分别发出 OpenID Connect 质询和注销请求。
 
 C#
 
-    public void SignIn()
+```
+public void SignIn()
+{
+    // Send an OpenID Connect sign-in request.
+    if (!Request.IsAuthenticated)
     {
-        // Send an OpenID Connect sign-in request.
-        if (!Request.IsAuthenticated)
-        {
-            HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectAuthenticationDefaults.AuthenticationType);
-        }
+        HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectAuthenticationDefaults.AuthenticationType);
     }
-    public void SignOut()
-    {
-        // Send an OpenID Connect sign-out request.
-        HttpContext.GetOwinContext().Authentication.SignOut(
-            OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
-    }
+}
+public void SignOut()
+{
+    // Send an OpenID Connect sign-out request.
+    HttpContext.GetOwinContext().Authentication.SignOut(
+        OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
+}
+```
 
 - 现在，请打开 `Views\Shared\_LoginPartial.cshtml`。你将在其中向用户显示应用程序的登录和注销链接，用户名将在视图中列显。
 
 HTML
 
-    @if (Request.IsAuthenticated)
-    {
-        <text>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-text">
-                    Hello, @User.Identity.Name!
-                </li>
-                <li>
-                    @Html.ActionLink("Sign out", "SignOut", "Account")
-                </li>
-            </ul>
-        </text>
-    }
-    else
-    {
+```
+@if (Request.IsAuthenticated)
+{
+    <text>
         <ul class="nav navbar-nav navbar-right">
-            <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            <li class="navbar-text">
+                Hello, @User.Identity.Name!
+            </li>
+            <li>
+                @Html.ActionLink("Sign out", "SignOut", "Account")
+            </li>
         </ul>
-    }
+    </text>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+```
 
 ## *4.显示用户信息*
 使用 OpenID Connect 对用户进行身份验证时，Azure AD 将向应用程序返回 id\_token，其中包含有关用户的“声明”或断言。你可以使用这些声明来个性化应用程序：
@@ -156,16 +166,18 @@ HTML
 
 C#
 
-    public ActionResult About()
-    {
-        ViewBag.Name = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
-        ViewBag.ObjectId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-        ViewBag.GivenName = ClaimsPrincipal.Current.FindFirst(ClaimTypes.GivenName).Value;
-        ViewBag.Surname = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Surname).Value;
-        ViewBag.UPN = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Upn).Value;
+```
+public ActionResult About()
+{
+    ViewBag.Name = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
+    ViewBag.ObjectId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+    ViewBag.GivenName = ClaimsPrincipal.Current.FindFirst(ClaimTypes.GivenName).Value;
+    ViewBag.Surname = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Surname).Value;
+    ViewBag.UPN = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Upn).Value;
 
-        return View();
-    }
+    return View();
+}
+```
 
 最后，生成并运行应用程序！ 如果你尚未这样做，现在可以使用 *.partner.onmschina.cn 域在租户中创建一个新的用户。以该用户的身份登录，随后你会看到该用户的标识在顶部导航栏中的显示方式。注销，然后以租户中其他用户的身份重新登录。如果你有浓厚的兴趣，可以注册并运行此应用程序的另一个实例（使用其自身的 clientId），然后观察单一登录的运作方式。
 

@@ -47,10 +47,12 @@ ms.author: glenga
 
 &nbsp;&nbsp;7.在解决方案资源管理器中，打开 GetStartedWithData.Shared 项目文件夹中的 App.xaml.cs 代码文件，并查看已添加到 Windows 应用商店应用程序条件编译块中 **App** 类的新静态字段，如以下示例中所示：
 
-    public static Microsoft.WindowsAzure.MobileServices.MobileServiceClient 
-        todolistClient = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
-            "https://todolist.azure-mobile.net/",
-            "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+```
+public static Microsoft.WindowsAzure.MobileServices.MobileServiceClient 
+    todolistClient = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
+        "https://todolist.azure-mobile.net/",
+        "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+```
 
 &nbsp;&nbsp;此代码通过使用 [MobileServiceClient](http://go.microsoft.com/fwlink/p/?LinkId=302030) 类的一个实例提供对应用中新移动服务的访问权限。客户端是通过提供新移动服务的 URI 和应用程序密钥来创建的。此静态字段可用于你的应用程序中的所有页面。
 

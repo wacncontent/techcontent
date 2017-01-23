@@ -91,24 +91,28 @@ ms.author: huguesv
 
 1. 在 Visual Studio 中，打开“项目名称” 文件夹中的 **settings.py**。暂时将连接字符串粘贴在编辑器中。连接字符串是按以下格式：
 
-        Server=<ServerName>,<ServerPort>;Database=<DatabaseName>;User ID=<UserName>;Password={your\_password\_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    ```
+    Server=<ServerName>,<ServerPort>;Database=<DatabaseName>;User ID=<UserName>;Password={your\_password\_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    ```
 
 编辑 `DATABASES` 的定义，使用上面的值。
 
-        DATABASES = {
-            'default': {
-                'ENGINE': 'sql_server.pyodbc',
-                'NAME': '<DatabaseName>',
-                'USER': '<UserName>',
-                'PASSWORD': '{your_password_here}',
-                'HOST': '<ServerName>',
-                'PORT': '<ServerPort>',
-                'OPTIONS': {
-                    'driver': 'SQL Server Native Client 11.0',
-                    'MARS_Connection': 'True',
-                }
+```
+    DATABASES = {
+        'default': {
+            'ENGINE': 'sql_server.pyodbc',
+            'NAME': '<DatabaseName>',
+            'USER': '<UserName>',
+            'PASSWORD': '{your_password_here}',
+            'HOST': '<ServerName>',
+            'PORT': '<ServerPort>',
+            'OPTIONS': {
+                'driver': 'SQL Server Native Client 11.0',
+                'MARS_Connection': 'True',
             }
         }
+    }
+```
 
 1. 在“解决方案资源管理器”的“Python 环境”下，右键单击虚拟环境，然后选择“安装 Python 包”。
 2. 使用 **pip** 安装包 `pyodbc`。

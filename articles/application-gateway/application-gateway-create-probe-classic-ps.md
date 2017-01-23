@@ -47,11 +47,15 @@ ms.author: gwallace
 
 以下示例使用名为“testvnet1”的虚拟网络和名为“subnet-1”的子网创建应用程序网关。
 
-    New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
+```
+New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
+```
 
 若要验证是否已创建网关，可以使用 `Get-AzureApplicationGateway` cmdlet。
 
-    Get-AzureApplicationGateway AppGwTest
+```
+Get-AzureApplicationGateway AppGwTest
+```
 
 > [!NOTE]
 *InstanceCount* 的默认值为 2，最大值为 10。*GatewaySize* 的默认值为 Medium。可以选择 Small、Medium 或 Large。
@@ -72,67 +76,69 @@ ms.author: gwallace
 
 将以下文本复制到记事本中。
 
-    <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
-    <FrontendIPConfigurations>
-        <FrontendIPConfiguration>
-            <Name>fip1</Name>
-            <Type>Private</Type>
-        </FrontendIPConfiguration>
-    </FrontendIPConfigurations>
-    <FrontendPorts>
-        <FrontendPort>
-            <Name>port1</Name>
-            <Port>80</Port>
-        </FrontendPort>
-    </FrontendPorts>
-    <Probes>
-        <Probe>
-            <Name>Probe01</Name>
-            <Protocol>Http</Protocol>
-            <Host>contoso.com</Host>
-            <Path>/path/custompath.htm</Path>
-            <Interval>15</Interval>
-            <Timeout>15</Timeout>
-            <UnhealthyThreshold>5</UnhealthyThreshold>
-        </Probe>
-        </Probes>
-        <BackendAddressPools>
-        <BackendAddressPool>
-            <Name>pool1</Name>
-            <IPAddresses>
-                <IPAddress>1.1.1.1</IPAddress>
-                <IPAddress>2.2.2.2</IPAddress>
-            </IPAddresses>
-        </BackendAddressPool>
-    </BackendAddressPools>
-    <BackendHttpSettingsList>
-        <BackendHttpSettings>
-            <Name>setting1</Name>
-            <Port>80</Port>
-            <Protocol>Http</Protocol>
-            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
-            <RequestTimeout>120</RequestTimeout>
-            <Probe>Probe01</Probe>
-        </BackendHttpSettings>
-    </BackendHttpSettingsList>
-    <HttpListeners>
-        <HttpListener>
-            <Name>listener1</Name>
-            <FrontendIP>fip1</FrontendIP>
-        <FrontendPort>port1</FrontendPort>
-            <Protocol>Http</Protocol>
-        </HttpListener>
-    </HttpListeners>
-    <HttpLoadBalancingRules>
-        <HttpLoadBalancingRule>
-            <Name>lbrule1</Name>
-            <Type>basic</Type>
-            <BackendHttpSettings>setting1</BackendHttpSettings>
-            <Listener>listener1</Listener>
-            <BackendAddressPool>pool1</BackendAddressPool>
-        </HttpLoadBalancingRule>
-    </HttpLoadBalancingRules>
-    </ApplicationGatewayConfiguration>
+```
+<ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
+<FrontendIPConfigurations>
+    <FrontendIPConfiguration>
+        <Name>fip1</Name>
+        <Type>Private</Type>
+    </FrontendIPConfiguration>
+</FrontendIPConfigurations>
+<FrontendPorts>
+    <FrontendPort>
+        <Name>port1</Name>
+        <Port>80</Port>
+    </FrontendPort>
+</FrontendPorts>
+<Probes>
+    <Probe>
+        <Name>Probe01</Name>
+        <Protocol>Http</Protocol>
+        <Host>contoso.com</Host>
+        <Path>/path/custompath.htm</Path>
+        <Interval>15</Interval>
+        <Timeout>15</Timeout>
+        <UnhealthyThreshold>5</UnhealthyThreshold>
+    </Probe>
+    </Probes>
+    <BackendAddressPools>
+    <BackendAddressPool>
+        <Name>pool1</Name>
+        <IPAddresses>
+            <IPAddress>1.1.1.1</IPAddress>
+            <IPAddress>2.2.2.2</IPAddress>
+        </IPAddresses>
+    </BackendAddressPool>
+</BackendAddressPools>
+<BackendHttpSettingsList>
+    <BackendHttpSettings>
+        <Name>setting1</Name>
+        <Port>80</Port>
+        <Protocol>Http</Protocol>
+        <CookieBasedAffinity>Enabled</CookieBasedAffinity>
+        <RequestTimeout>120</RequestTimeout>
+        <Probe>Probe01</Probe>
+    </BackendHttpSettings>
+</BackendHttpSettingsList>
+<HttpListeners>
+    <HttpListener>
+        <Name>listener1</Name>
+        <FrontendIP>fip1</FrontendIP>
+    <FrontendPort>port1</FrontendPort>
+        <Protocol>Http</Protocol>
+    </HttpListener>
+</HttpListeners>
+<HttpLoadBalancingRules>
+    <HttpLoadBalancingRule>
+        <Name>lbrule1</Name>
+        <Type>basic</Type>
+        <BackendHttpSettings>setting1</BackendHttpSettings>
+        <Listener>listener1</Listener>
+        <BackendAddressPool>pool1</BackendAddressPool>
+    </HttpLoadBalancingRule>
+</HttpLoadBalancingRules>
+</ApplicationGatewayConfiguration>
+```
 
 编辑配置项的括号之间的值。使用扩展名 .xml 保存文件。
 
@@ -162,34 +168,40 @@ ms.author: gwallace
 
 使用 Get-AzureApplicationGatewayConfig 获取 XML 文件。这会导出要修改的配置 XML 以添加探测设置。
 
-    Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofile "<path to file>"
+```
+Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofile "<path to file>"
+```
 
 ### 步骤 2
 
 在文本编辑器中打开 XML 文件。将 `<probe>` 节添加到 `<frontendport>` 的后面。
 
-    <Probes>
-        <Probe>
-            <Name>Probe01</Name>
-            <Protocol>Http</Protocol>
-            <Host>contoso.com</Host>
-            <Path>/path/custompath.htm</Path>
-            <Interval>15</Interval>
-            <Timeout>15</Timeout>
-            <UnhealthyThreshold>5</UnhealthyThreshold>
-        </Probe>
-    </Probes>
+```
+<Probes>
+    <Probe>
+        <Name>Probe01</Name>
+        <Protocol>Http</Protocol>
+        <Host>contoso.com</Host>
+        <Path>/path/custompath.htm</Path>
+        <Interval>15</Interval>
+        <Timeout>15</Timeout>
+        <UnhealthyThreshold>5</UnhealthyThreshold>
+    </Probe>
+</Probes>
+```
 
 在 XML 的 backendHttpSettings 节中，添加以下示例中所示的探测名称：
 
-        <BackendHttpSettings>
-            <Name>setting1</Name>
-            <Port>80</Port>
-            <Protocol>Http</Protocol>
-            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
-            <RequestTimeout>120</RequestTimeout>
-            <Probe>Probe01</Probe>
-        </BackendHttpSettings>
+```
+    <BackendHttpSettings>
+        <Name>setting1</Name>
+        <Port>80</Port>
+        <Protocol>Http</Protocol>
+        <CookieBasedAffinity>Enabled</CookieBasedAffinity>
+        <RequestTimeout>120</RequestTimeout>
+        <Probe>Probe01</Probe>
+    </BackendHttpSettings>
+```
 
 保存该 XML 文件。
 
@@ -197,7 +209,9 @@ ms.author: gwallace
 
 使用 `Set-AzureApplicationGatewayConfig` 在新的 XML 文件中更新应用程序网关配置。这将以新的配置更新应用程序网关。
 
-    Set-AzureApplicationGatewayConfig -Name "<application gateway name>" -Configfile "<path to file>"
+```
+Set-AzureApplicationGatewayConfig -Name "<application gateway name>" -Configfile "<path to file>"
+```
 
 ## 后续步骤
 

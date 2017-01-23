@@ -53,7 +53,9 @@ Azure VM 代理可管理 Azure 虚拟机与 Azure 结构控制器之间的交互
 
 有许多不同的 VM 扩展可与 Azure 虚拟机配合使用。若要查看完整列表，请使用 Azure CLI 运行以下命令，并将命令中的位置替换为所选位置。
 
-    azure vm extension-image list chinanorth
+```
+azure vm extension-image list chinanorth
+```
 
 ## 运行 VM 扩展
 
@@ -65,16 +67,20 @@ Azure 虚拟机扩展可以在现有虚拟机上运行，当需要在已部署�
 
 可以使用 `azure vm extension set` 命令针对现有虚拟机运行 Azure 虚拟机扩展。此示例针对虚拟机运行自定义脚本扩展。
 
-    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-    --auto-upgrade-minor-version \
-    --public-config '{"fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],"commandToExecute": "./hello.sh"}'
+```
+azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+--auto-upgrade-minor-version \
+--public-config '{"fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],"commandToExecute": "./hello.sh"}'
+```
 
 该脚本提供类似于以下文本的输出：
 
-    info:    Executing command vm extension set
-    + Looking up the VM "myVM"
-    + Installing extension "CustomScript", VM: "mvVM"
-    info:    vm extension set command OK
+```
+info:    Executing command vm extension set
++ Looking up the VM "myVM"
++ Installing extension "CustomScript", VM: "mvVM"
+info:    vm extension set command OK
+```
 
 ### Azure 门户预览
 
@@ -90,32 +96,34 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 可以在[此处](https://github.com/Microsoft/dotnet-core-sample-templates/tree/master/dotnet-core-music-linux)找到完整 Resource Manager 模板。
 
-    {
-        "apiVersion": "2015-06-15",
-        "type": "extensions",
-        "name": "config-app",
-        "location": "[resourceGroup().location]",
-        "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', concat(variables('vmName'),copyindex()))]"
-        ],
-        "tags": {
-        "displayName": "config-app"
-        },
-        "properties": {
-        "publisher": "Microsoft.Azure.Extensions",
-        "type": "CustomScript",
-        "typeHandlerVersion": "2.0",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-            "fileUris": [
-            "https://raw.githubusercontent.com/Microsoft/dotnet-core-sample-templates/master/dotnet-core-music-linux/scripts/config-music.sh"
-            ]
-        },
-        "protectedSettings": {
-            "commandToExecute": "[concat('sudo sh config-music.sh ',variables('musicStoreSqlName'), ' ', parameters('adminUsername'), ' ', parameters('sqlAdminPassword'))]"
-        }
-        }
+```
+{
+    "apiVersion": "2015-06-15",
+    "type": "extensions",
+    "name": "config-app",
+    "location": "[resourceGroup().location]",
+    "dependsOn": [
+    "[concat('Microsoft.Compute/virtualMachines/', concat(variables('vmName'),copyindex()))]"
+    ],
+    "tags": {
+    "displayName": "config-app"
+    },
+    "properties": {
+    "publisher": "Microsoft.Azure.Extensions",
+    "type": "CustomScript",
+    "typeHandlerVersion": "2.0",
+    "autoUpgradeMinorVersion": true,
+    "settings": {
+        "fileUris": [
+        "https://raw.githubusercontent.com/Microsoft/dotnet-core-sample-templates/master/dotnet-core-music-linux/scripts/config-music.sh"
+        ]
+    },
+    "protectedSettings": {
+        "commandToExecute": "[concat('sudo sh config-music.sh ',variables('musicStoreSqlName'), ' ', parameters('adminUsername'), ' ', parameters('sqlAdminPassword'))]"
     }
+    }
+}
+```
 
 有关详细信息，请参阅 [Authoring Azure Resource Manager templates with linux VM extensions](./virtual-machines-linux-extensions-authoring-templates.md)（使用 Linux VM 扩展创作 Azure Resource Manager 模板）。
 
@@ -129,16 +137,20 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 针对虚拟机运行虚拟机扩展后，使用以下 Azure CLI 命令返回扩展状态。请将示例参数名称替换为你自己的值。
 
-    azure vm extension get myResourceGroup myVM
+```
+azure vm extension get myResourceGroup myVM
+```
 
 输出类似于以下文本：
 
-    info:    Executing command vm extension get
-    + Looking up the VM "myVM"
-    data:    Publisher                   Name             Version  State
-    data:    --------------------------  ---------------  -------  ---------
-    data:    Microsoft.Azure.Extensions  XXXExtension  1.0      Succeeded
-    info:    vm extension get command OK         :
+```
+info:    Executing command vm extension get
++ Looking up the VM "myVM"
+data:    Publisher                   Name             Version  State
+data:    --------------------------  ---------------  -------  ---------
+data:    Microsoft.Azure.Extensions  XXXExtension  1.0      Succeeded
+info:    vm extension get command OK         :
+```
 
 此外，还可以在 Azure 门户预览中找到扩展执行状态。若要查看扩展的状态，请选择“虚拟机”>“扩展”>选择所需的扩展。
 
@@ -146,7 +158,9 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 在某些情况下，可能需要重新运行虚拟机扩展。这可以通过删除扩展，然后使用所选执行方法重新运行扩展来实现。若要删除扩展，请使用 Azure CLI 模块运行以下命令。请将示例参数名称替换为你自己的值。
 
-    azure vm extension set myResourceGroup myVM --uninstall CustomScript Microsoft.Azure.Extensions 2.0
+```
+azure vm extension set myResourceGroup myVM --uninstall CustomScript Microsoft.Azure.Extensions 2.0
+```
 
 此外，还可以使用 Azure 门户预览来删除扩展。为此，请选择“虚拟机”>“扩展”>所需的扩展>“卸载”。
 

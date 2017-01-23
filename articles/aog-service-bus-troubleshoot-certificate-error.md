@@ -20,38 +20,44 @@ wacn.date: 11/23/2016
 
 ###示例代码：
 
-    string connectionString = "servicebus connection string";
+```
+string connectionString = "servicebus connection string";
 
-    var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
+var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
 
-    if (!namespaceManager.TopicExists("TestTopic"))
-    {
-        namespaceManager.CreateTopic("TestTopic");
-    }
+if (!namespaceManager.TopicExists("TestTopic"))
+{
+    namespaceManager.CreateTopic("TestTopic");
+}
 
-    TopicClient client = TopicClient.CreateFromConnectionString(connectionString, "TestTopic");
+TopicClient client = TopicClient.CreateFromConnectionString(connectionString, "TestTopic");
 
-    BrokeredMessage testMessage = new BrokeredMessage("test message");
-    testMessage.MessageId = "message id";
+BrokeredMessage testMessage = new BrokeredMessage("test message");
+testMessage.MessageId = "message id";
 
-    client.Send(testMessage);
+client.Send(testMessage);
+```
 
 ###错误消息:
 
-    The X.509 certificate CN=servicebus.chinacloudapi.cn, OU=Azure, O=Shanghai Blue Cloud Technology Co Ltd, L=Shanghai, S=Shanghai, C=CN is not in the trusted people store. 
-    The X.509 certificate CN=servicebus.chinacloudapi.cn, OU=Azure, O=Shanghai Blue Cloud Technology Co Ltd, L=Shanghai, S=Shanghai, C=CN chain building failed. 
-    The certificate that was used has a trust chain that cannot be verified. 
-    Replace the certificate or change the certificateValidationMode. 
-    A certificate chain could not be built to a trusted root authority.
+```
+The X.509 certificate CN=servicebus.chinacloudapi.cn, OU=Azure, O=Shanghai Blue Cloud Technology Co Ltd, L=Shanghai, S=Shanghai, C=CN is not in the trusted people store. 
+The X.509 certificate CN=servicebus.chinacloudapi.cn, OU=Azure, O=Shanghai Blue Cloud Technology Co Ltd, L=Shanghai, S=Shanghai, C=CN chain building failed. 
+The certificate that was used has a trust chain that cannot be verified. 
+Replace the certificate or change the certificateValidationMode. 
+A certificate chain could not be built to a trusted root authority.
+```
 
 ###错误堆栈：
 
-    at Microsoft.ServiceBus.Common.AsyncResult.End[TAsyncResult](IAsyncResult result)
-    at Microsoft.ServiceBus.Messaging.IteratorAsyncResult`1.RunSynchronously()
-    at Microsoft.ServiceBus.Messaging.MessageSender.OnSend(TrackingContext trackingContext, IEnumerable`1 messages, TimeSpan timeout)
-    at Microsoft.ServiceBus.Messaging.MessageSender.Send(TrackingContext trackingContext, IEnumerable`1 messages, TimeSpan timeout)
-    at Microsoft.ServiceBus.Messaging.MessageSender.Send(BrokeredMessage message)
-    at Microsoft.ServiceBus.Messaging.TopicClient.Send(BrokeredMessage message)
+```
+at Microsoft.ServiceBus.Common.AsyncResult.End[TAsyncResult](IAsyncResult result)
+at Microsoft.ServiceBus.Messaging.IteratorAsyncResult`1.RunSynchronously()
+at Microsoft.ServiceBus.Messaging.MessageSender.OnSend(TrackingContext trackingContext, IEnumerable`1 messages, TimeSpan timeout)
+at Microsoft.ServiceBus.Messaging.MessageSender.Send(TrackingContext trackingContext, IEnumerable`1 messages, TimeSpan timeout)
+at Microsoft.ServiceBus.Messaging.MessageSender.Send(BrokeredMessage message)
+at Microsoft.ServiceBus.Messaging.TopicClient.Send(BrokeredMessage message)
+```
 
 ##问题原因：
 
@@ -72,6 +78,8 @@ wacn.date: 11/23/2016
 
 我们推荐在代码中强制使用 HTTPS 模式连接 service bus 服务，HTTPS 模式有不同的设计，因此会很大程度上避免上述错误发生
 
-    ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.Https
+```
+ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.Https
+```
 
 > **注:**此设置是基于 app domain 层面的全局设置，如果访问 service bus 的代码都在同一个 app domain，那么只需要设置一次就可以。如果还有其他 app domain 中的代码访问 service bus 服务，则需要为各自的 app domain 分别调用上面的代码设置 HTTPS 模式。

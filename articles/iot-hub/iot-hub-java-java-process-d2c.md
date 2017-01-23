@@ -56,9 +56,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 + [IoT 中心入门]教程的完整工作版本。
 
-+ Java SE 8。<br/>[准备开发环境][lnk-dev-setup]介绍了如何在 Windows 或 Linux 上安装本教程所用的 Java。
-
-+ Maven 3。<br/>[准备开发环境][lnk-dev-setup]介绍了如何在 Windows 或 Linux 上安装本教程所用的 Maven。
++ Java SE 8。<br/>
++ Maven 3。<br/>
 
 + 有效的 Azure 帐户。<br/>如果没有 Azure 订阅，只需几分钟即可创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
@@ -81,18 +80,20 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             msg.setProperty("messageType", "interactive");
             System.out.println("Sending interactive message: " + msgStr);
 
-            Object lockobj = new Object();
-            EventCallback callback = new EventCallback();
-            client.sendEventAsync(msg, callback, lockobj);
+    ```
+        Object lockobj = new Object();
+        EventCallback callback = new EventCallback();
+        client.sendEventAsync(msg, callback, lockobj);
 
-            synchronized (lockobj) {
-              lockobj.wait();
-            }
-            Thread.sleep(10000);
-          }
-        } catch (InterruptedException e) {
-          System.out.println("Finished sending interactive messages.");
+        synchronized (lockobj) {
+          lockobj.wait();
         }
+        Thread.sleep(10000);
+      }
+    } catch (InterruptedException e) {
+      System.out.println("Finished sending interactive messages.");
+    }
+    ```
       }
     }
     ```
@@ -641,25 +642,25 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 1. 若要运行 **process-interactive-messages** 应用程序，请在命令提示符或外壳处导航到 process-interactive-messages 文件夹并执行以下命令：
 
-    ```
-    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-    ```
+   ```
+   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+   ```
 
-    ![运行 process-interactive-messages][processinteractive]
+   ![运行 process-interactive-messages][processinteractive]
 2. 若要运行 **process-d2c-messages** 应用程序，请在命令提示符或外壳处导航到 process-d2c-messages 文件夹并执行以下命令：
 
-    ```
-    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-    ```
+   ```
+   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+   ```
 
-    ![运行 process-d2c-messages][processd2c]
+   ![运行 process-d2c-messages][processd2c]
 3. 若要运行 **simulated-device** 应用程序，请在命令提示符或外壳处导航到 simulated-device 文件夹并执行以下命令：
 
-    ```
-    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-    ```
+   ```
+   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+   ```
 
-    ![运行 simulated-device][simulateddevice]  
+   ![运行 simulated-device][simulateddevice]  
 
 > [!NOTE]
 > 若要查看 blob 文件中的更新，需要将 **StoreEventProcessor** 类中的 **MAX\_BLOCK\_SIZE** 常量降为较小值，例如 **1024**。此更改很有用，原因是模拟设备发出的数据需要一些时间才能达到块大小限制。块大小更小时，可更快查看正创建和更新的 blob。但是，使用较大的块可以提高应用程序的可缩放性。
@@ -701,7 +702,6 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 [lnk-service-fabric]: ../service-fabric/index.md
 [lnk-stream-analytics]: ../stream-analytics/index.md
 [lnk-event-hubs]: ../event-hubs/index.md
-[Transient Fault Handling]: https://msdn.microsoft.com/zh-cn/library/hh675232.aspx
 
 <!-- Links -->
 [关于 Azure 存储]: ../storage/storage-create-storage-account.md#create-a-storage-account
@@ -716,7 +716,6 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 [lnk-c2d]: ./iot-hub-java-java-process-d2c.md
 [lnk-suite]: ../iot-suite/index.md
 
-[lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/java-devbox-setup.md
 [lnk-create-an-iot-hub]: ./iot-hub-java-java-getstarted.md
 
 <!---HONumber=Mooncake_1205_2016-->

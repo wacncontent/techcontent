@@ -42,42 +42,48 @@ ms.author: singhkay
 
 可使用以下命令来创建密钥保管库
 
-    New-AzureRmKeyVault -VaultName "<vault-name>" -ResourceGroupName "<rg-name>" -Location "<vault-location>" -EnabledForDeployment -EnabledForTemplateDeployment
+```
+New-AzureRmKeyVault -VaultName "<vault-name>" -ResourceGroupName "<rg-name>" -Location "<vault-location>" -EnabledForDeployment -EnabledForTemplateDeployment
+```
 
 ## 步骤 2：创建自签名证书
 可使用此 PowerShell 脚本创建自签名证书
 
-    $certificateName = "somename"
+```
+$certificateName = "somename"
 
-    $thumbprint = (New-SelfSignedCertificate -DnsName "$certificateName" -CertStoreLocation Cert:\CurrentUser\My -KeySpec KeyExchange).Thumbprint
+$thumbprint = (New-SelfSignedCertificate -DnsName "$certificateName" -CertStoreLocation Cert:\CurrentUser\My -KeySpec KeyExchange).Thumbprint
 
-    $cert = (Get-ChildItem -Path cert:\CurrentUser\My\$thumbprint)
+$cert = (Get-ChildItem -Path cert:\CurrentUser\My\$thumbprint)
 
-    $password = Read-Host -Prompt "Please enter the certificate password." -AsSecureString
+$password = Read-Host -Prompt "Please enter the certificate password." -AsSecureString
 
-    Export-PfxCertificate -Cert $cert -FilePath ".\$certificateName.pfx" -Password $password
+Export-PfxCertificate -Cert $cert -FilePath ".\$certificateName.pfx" -Password $password
+```
 
 ## 步骤 3：将自签名证书上载到密钥保管库
 
 将证书上载到在步骤 1 中创建的密钥保管库之前，需将其转换为 Microsoft.Compute 资源提供程序可识别的格式。以下 PowerShell 脚本将允许你执行该操作
 
-    $fileName = "<Path to the .pfx file>"
-    $fileContentBytes = Get-Content $fileName -Encoding Byte
-    $fileContentEncoded = [System.Convert]::ToBase64String($fileContentBytes)
+```
+$fileName = "<Path to the .pfx file>"
+$fileContentBytes = Get-Content $fileName -Encoding Byte
+$fileContentEncoded = [System.Convert]::ToBase64String($fileContentBytes)
 
-    $jsonObject = @"
-    {
-      "data": "$filecontentencoded",
-      "dataType" :"pfx",
-      "password": "<password>"
-    }
-    "@
+$jsonObject = @"
+{
+  "data": "$filecontentencoded",
+  "dataType" :"pfx",
+  "password": "<password>"
+}
+"@
 
-    $jsonObjectBytes = [System.Text.Encoding]::UTF8.GetBytes($jsonObject)
-    $jsonEncoded = [System.Convert]::ToBase64String($jsonObjectBytes)
+$jsonObjectBytes = [System.Text.Encoding]::UTF8.GetBytes($jsonObject)
+$jsonEncoded = [System.Convert]::ToBase64String($jsonObjectBytes)
 
-    $secret = ConvertTo-SecureString -String $jsonEncoded -AsPlainText -Force
-    Set-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>" -SecretValue $secret
+$secret = ConvertTo-SecureString -String $jsonEncoded -AsPlainText -Force
+Set-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>" -SecretValue $secret
+```
 
 ## 步骤 4：获取密钥保管库中自签名证书的 URL
 
@@ -91,13 +97,17 @@ https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2
 
 可使用以下代码获取模板中 URL 的链接
 
-    "certificateUrl": "[reference(resourceId(resourceGroup().name, 'Microsoft.KeyVault/vaults/secrets', '<vault-name>', '<secret-name>'), '2015-06-01').secretUriWithVersion]"
+```
+"certificateUrl": "[reference(resourceId(resourceGroup().name, 'Microsoft.KeyVault/vaults/secrets', '<vault-name>', '<secret-name>'), '2015-06-01').secretUriWithVersion]"
+```
 
 #### PowerShell
 
 可使用以下 PowerShell 命令获取此 URL
 
-    $secretURL = (Get-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>").Id
+```
+$secretURL = (Get-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>").Id
+```
 
 ## 步骤 5：创建 VM 时引用你的自签名证书 URL
 
@@ -105,37 +115,39 @@ https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2
 
 通过模板创建 VM 时，将在密钥部分和 winRM 部分中引用该证书，如下所示
 
-    "osProfile": {
-          ...
-          "secrets": [
+```
+"osProfile": {
+      ...
+      "secrets": [
+        {
+          "sourceVault": {
+            "id": "<resource id of the Key Vault containing the secret>"
+          },
+          "vaultCertificates": [
             {
-              "sourceVault": {
-                "id": "<resource id of the Key Vault containing the secret>"
-              },
-              "vaultCertificates": [
-                {
-                  "certificateUrl": "<URL for the certificate you got in Step 4>",
-                  "certificateStore": "<Name of the certificate store on the VM>"
-                }
-              ]
+              "certificateUrl": "<URL for the certificate you got in Step 4>",
+              "certificateStore": "<Name of the certificate store on the VM>"
             }
-          ],
-          "windowsConfiguration": {
-            ...
-            "winRM": {
-              "listeners": [
-                {
-                  "protocol": "http"
-                },
-                {
-                  "protocol": "https",
-                  "certificateUrl": "<URL for the certificate you got in Step 4>"
-                }
-              ]
+          ]
+        }
+      ],
+      "windowsConfiguration": {
+        ...
+        "winRM": {
+          "listeners": [
+            {
+              "protocol": "http"
             },
-            ...
-          }
+            {
+              "protocol": "https",
+              "certificateUrl": "<URL for the certificate you got in Step 4>"
+            }
+          ]
         },
+        ...
+      }
+    },
+```
 
 可在此处找到以上内容的示例模板 - [201-vm-winrm-keyvault-windows](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-winrm-keyvault-windows)
 
@@ -146,24 +158,30 @@ https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2
 
 #### PowerShell
 
-    $vm = New-AzureRmVMConfig -VMName "<VM name>" -VMSize "<VM Size>"
-    $credential = Get-Credential
-    $secretURL = (Get-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>").Id
-    $vm = Set-AzureRmVMOperatingSystem -VM $vm  -Windows -ComputerName "<Computer Name>" -Credential $credential -WinRMHttp -WinRMHttps -WinRMCertificateUrl $secretURL
-    $sourceVaultId = (Get-AzureRmKeyVault -ResourceGroupName "<Resource Group name>" -VaultName "<Vault Name>").ResourceId
-    $CertificateStore = "My"
-    $vm = Add-AzureRmVMSecret -VM $vm -SourceVaultId $sourceVaultId -CertificateStore $CertificateStore -CertificateUrl $secretURL
+```
+$vm = New-AzureRmVMConfig -VMName "<VM name>" -VMSize "<VM Size>"
+$credential = Get-Credential
+$secretURL = (Get-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>").Id
+$vm = Set-AzureRmVMOperatingSystem -VM $vm  -Windows -ComputerName "<Computer Name>" -Credential $credential -WinRMHttp -WinRMHttps -WinRMCertificateUrl $secretURL
+$sourceVaultId = (Get-AzureRmKeyVault -ResourceGroupName "<Resource Group name>" -VaultName "<Vault Name>").ResourceId
+$CertificateStore = "My"
+$vm = Add-AzureRmVMSecret -VM $vm -SourceVaultId $sourceVaultId -CertificateStore $CertificateStore -CertificateUrl $secretURL
+```
 
 ## 步骤 6：连接到 VM
 需要先确保你的计算机针对 WinRM 远程管理进行了配置，然后才能连接到 VM。以管理员身份启动 PowerShell 并执行以下命令以确保已设置完毕。
 
-    Enable-PSRemoting -Force
+```
+Enable-PSRemoting -Force
+```
 
 >[!NOTE]
 > 如果以上命令无效，可能需要确保 WinRM 服务正在运行。可使用 `Get-Service WinRM` 完成此操作
 
 设置完成后，即可使用以下命令连接到 VM
 
-    Enter-PSSession -ConnectionUri https://<public-ip-dns-of-the-vm>:5986 -Credential $cred -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck) -Authentication Negotiate
+```
+Enter-PSSession -ConnectionUri https://<public-ip-dns-of-the-vm>:5986 -Credential $cred -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck) -Authentication Negotiate
+```
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

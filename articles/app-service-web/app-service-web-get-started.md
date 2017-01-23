@@ -53,7 +53,9 @@ ms.author: cephalin
 
 2. 如下所示登录 Azure ：
 
-        az login
+    ```
+    az login
+    ```
 
     按照帮助消息的提示继续此登录过程。
 
@@ -61,26 +63,36 @@ ms.author: cephalin
 
 3. 设置应用服务的部署用户。稍后会使用这些凭据部署代码。
 
-        az appservice web deployment user set --user-name <username> --password <password>
+    ```
+    az appservice web deployment user set --user-name <username> --password <password>
+    ```
 
 3. 创建新的[资源组](../azure-resource-manager/resource-group-overview.md)。对于第一个应用服务教程，不需要实际知道它是什么。
 
-        az group create --location "<location>" --name my-first-app-group
+    ```
+    az group create --location "<location>" --name my-first-app-group
+    ```
 
     若要查看可用于 `<location>` 的可能值，请使用 `az appservice list-locations` CLI 命令。
 
 3. 创建新的“免费”[应用服务计划](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)。对于第一个应用服务教程，只需知道不用为此计划中的 Web 应用付费即可。
 
-        az appservice plan create --name my-free-appservice-plan --resource-group my-first-app-group --sku FREE
+    ```
+    az appservice plan create --name my-free-appservice-plan --resource-group my-first-app-group --sku FREE
+    ```
 
 4. 使用 `<app_name>` 中的唯一名称创建新的 Web 应用。
 
-        az appservice web create --name <app_name> --resource-group my-first-app-group --plan my-free-appservice-plan
+    ```
+    az appservice web create --name <app_name> --resource-group my-first-app-group --plan my-free-appservice-plan
+    ```
 
 4. 接下来，获取想要部署的示例代码。切换到工作目录 (`CD`) 并克隆示例应用，如下所示：
 
-        cd <working_directory>
-        git clone <github_sample_url>
+    ```
+    cd <working_directory>
+    git clone <github_sample_url>
+    ```
 
     对于 *&lt;github\_sample\_url>*，请使用以下 URL 中的一个，具体视所需的框架而定：
 
@@ -95,25 +107,35 @@ ms.author: cephalin
 
 5. 更改为示例应用的存储库。例如：
 
-        cd app-service-web-html-get-started
+    ```
+    cd app-service-web-html-get-started
+    ```
 
 5. 使用以下命令配置应用服务 Web 应用的本地 Git 部署：
 
-        az appservice web source-control config-local-git --name <app_name> --resource-group my-first-app-group
+    ```
+    az appservice web source-control config-local-git --name <app_name> --resource-group my-first-app-group
+    ```
 
     会获得类似如下的 JSON 输出，这意味着已配置远程 Git 存储库：
 
-        {
-        "url": "https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git"
-        }
+    ```
+    {
+    "url": "https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git"
+    }
+    ```
 
 6. 将 JSON 中的 URL 作为本地存储库的 Git remote 添加（为简单起见，调用 `azure`）。
 
-        git remote add azure https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git
+    ```
+    git remote add azure https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git
+    ```
 
 7. 向 `azure` Git remote 部署示例代码。出现提示时，使用前面配置的部署凭据。
 
-        git push azure master
+    ```
+    git push azure master
+    ```
 
     ![在 Azure 中将代码推送到第一个 Web 应用](./media/app-service-web-get-started/5-push-code.png)  
 
@@ -125,15 +147,19 @@ ms.author: cephalin
 
 若要查看应用在 Azure 中的实时运行情况，请运行此命令：
 
-    az appservice web browse --name <app_name> --resource-group my-first-app-group
+```
+az appservice web browse --name <app_name> --resource-group my-first-app-group
+```
 
 ## 更新应用
 
 现在可以使用 Git 随时从项目（存储库）根目录进行推送，以更新实时站点。操作方式与首次部署代码时相同。例如，每次想要推送已在本地测试的新更改时，只需从项目（存储库）根目录运行以下命令：
 
-    git add .
-    git commit -m "<your_message>"
-    git push azure master
+```
+git add .
+git commit -m "<your_message>"
+git push azure master
+```
 
 ## 后续步骤
 

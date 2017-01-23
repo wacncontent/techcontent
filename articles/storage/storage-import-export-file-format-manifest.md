@@ -25,66 +25,68 @@ ms.author: renash
 
 下面介绍驱动器清单文件的一般格式：
 
-    <?xml version="1.0" encoding="UTF-8"?>  
-    <DriveManifest Version="2014-11-01">  
-      <Drive>  
-        <DriveId>drive-id</DriveId>  
-        import-export-credential  
+```
+<?xml version="1.0" encoding="UTF-8"?>  
+<DriveManifest Version="2014-11-01">  
+  <Drive>  
+    <DriveId>drive-id</DriveId>  
+    import-export-credential  
 
-        <!-- First Blob List -->  
-        <BlobList>  
-          <!-- Global properties and metadata that applies to all blobs -->  
-          [<MetadataPath Hash="md5-hash">global-metadata-file-path</MetadataPath>]  
-          [<PropertiesPath   
-            Hash="md5-hash">global-properties-file-path</PropertiesPath>]  
+    <!-- First Blob List -->  
+    <BlobList>  
+      <!-- Global properties and metadata that applies to all blobs -->  
+      [<MetadataPath Hash="md5-hash">global-metadata-file-path</MetadataPath>]  
+      [<PropertiesPath   
+        Hash="md5-hash">global-properties-file-path</PropertiesPath>]  
 
-          <!-- First Blob -->  
-          <Blob>  
-            <BlobPath>blob-path-relative-to-account</BlobPath>  
-            <FilePath>file-path-relative-to-transfer-disk</FilePath>  
-            [<ClientData>client-data</ClientData>]  
-            [<Snapshot>snapshot</Snapshot>]  
-            <Length>content-length</Length>  
-            [<ImportDisposition>import-disposition</ImportDisposition>]  
-            page-range-list-or-block-list          
-            [<MetadataPath Hash="md5-hash">metadata-file-path</MetadataPath>]  
-            [<PropertiesPath Hash="md5-hash">properties-file-path</PropertiesPath>]  
-          </Blob>  
+      <!-- First Blob -->  
+      <Blob>  
+        <BlobPath>blob-path-relative-to-account</BlobPath>  
+        <FilePath>file-path-relative-to-transfer-disk</FilePath>  
+        [<ClientData>client-data</ClientData>]  
+        [<Snapshot>snapshot</Snapshot>]  
+        <Length>content-length</Length>  
+        [<ImportDisposition>import-disposition</ImportDisposition>]  
+        page-range-list-or-block-list          
+        [<MetadataPath Hash="md5-hash">metadata-file-path</MetadataPath>]  
+        [<PropertiesPath Hash="md5-hash">properties-file-path</PropertiesPath>]  
+      </Blob>  
 
-          <!-- Second Blob -->  
-          <Blob>  
-          . . .  
-          </Blob>  
-        </BlobList>  
+      <!-- Second Blob -->  
+      <Blob>  
+      . . .  
+      </Blob>  
+    </BlobList>  
 
-        <!-- Second Blob List -->  
-        <BlobList>  
-        . . .  
-        </BlobList>  
-      </Drive>  
-    </DriveManifest>  
+    <!-- Second Blob List -->  
+    <BlobList>  
+    . . .  
+    </BlobList>  
+  </Drive>  
+</DriveManifest>  
 
-    import-export-credential ::=   
-      <StorageAccountKey>storage-account-key</StorageAccountKey> | <ContainerSas>container-sas</ContainerSas>  
+import-export-credential ::=   
+  <StorageAccountKey>storage-account-key</StorageAccountKey> | <ContainerSas>container-sas</ContainerSas>  
 
-    page-range-list-or-block-list ::=   
-      page-range-list | block-list  
+page-range-list-or-block-list ::=   
+  page-range-list | block-list  
 
-    page-range-list ::=   
-        <PageRangeList>  
-          [<PageRange Offset="page-range-offset" Length="page-range-length"   
-           Hash="md5-hash"/>]  
-          [<PageRange Offset="page-range-offset" Length="page-range-length"   
-           Hash="md5-hash"/>]  
-        </PageRangeList>  
+page-range-list ::=   
+    <PageRangeList>  
+      [<PageRange Offset="page-range-offset" Length="page-range-length"   
+       Hash="md5-hash"/>]  
+      [<PageRange Offset="page-range-offset" Length="page-range-length"   
+       Hash="md5-hash"/>]  
+    </PageRangeList>  
 
-    block-list ::=  
-        <BlockList>  
-          [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
-           Hash="md5-hash"/>]  
-          [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
-           Hash="md5-hash"/>]  
-        </BlockList>  
+block-list ::=  
+    <BlockList>  
+      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
+       Hash="md5-hash"/>]  
+      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
+       Hash="md5-hash"/>]  
+    </BlockList>  
+```
 
 下表指定了驱动器清单 XML 格式的数据元素和属性。
 

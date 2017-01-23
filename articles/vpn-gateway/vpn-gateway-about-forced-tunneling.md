@@ -82,41 +82,43 @@ ms.author: cherylmc
 
 以下过程将帮助您为虚拟网络指定强制隧道。配置步骤与 VNet 网络配置文件相对应。
 
-    <VirtualNetworkSite name="MultiTier-VNet" Location="China North">
-     <AddressSpace>
-      <AddressPrefix>10.1.0.0/16</AddressPrefix>
-        </AddressSpace>
-        <Subnets>
-          <Subnet name="Frontend">
-            <AddressPrefix>10.1.0.0/24</AddressPrefix>
-          </Subnet>
-          <Subnet name="Midtier">
-            <AddressPrefix>10.1.1.0/24</AddressPrefix>
-          </Subnet>
-          <Subnet name="Backend">
-            <AddressPrefix>10.1.2.0/23</AddressPrefix>
-          </Subnet>
-          <Subnet name="GatewaySubnet">
-            <AddressPrefix>10.1.200.0/28</AddressPrefix>
-          </Subnet>
-        </Subnets>
-        <Gateway>
-          <ConnectionsToLocalNetwork>
-            <LocalNetworkSiteRef name="DefaultSiteHQ">
-              <Connection type="IPsec" />
-            </LocalNetworkSiteRef>
-            <LocalNetworkSiteRef name="Branch1">
-              <Connection type="IPsec" />
-            </LocalNetworkSiteRef>
-            <LocalNetworkSiteRef name="Branch2">
-              <Connection type="IPsec" />
-            </LocalNetworkSiteRef>
-            <LocalNetworkSiteRef name="Branch3">
-              <Connection type="IPsec" />
-            </LocalNetworkSiteRef>
-        </Gateway>
-      </VirtualNetworkSite>
-    </VirtualNetworkSite>
+```
+<VirtualNetworkSite name="MultiTier-VNet" Location="China North">
+ <AddressSpace>
+  <AddressPrefix>10.1.0.0/16</AddressPrefix>
+    </AddressSpace>
+    <Subnets>
+      <Subnet name="Frontend">
+        <AddressPrefix>10.1.0.0/24</AddressPrefix>
+      </Subnet>
+      <Subnet name="Midtier">
+        <AddressPrefix>10.1.1.0/24</AddressPrefix>
+      </Subnet>
+      <Subnet name="Backend">
+        <AddressPrefix>10.1.2.0/23</AddressPrefix>
+      </Subnet>
+      <Subnet name="GatewaySubnet">
+        <AddressPrefix>10.1.200.0/28</AddressPrefix>
+      </Subnet>
+    </Subnets>
+    <Gateway>
+      <ConnectionsToLocalNetwork>
+        <LocalNetworkSiteRef name="DefaultSiteHQ">
+          <Connection type="IPsec" />
+        </LocalNetworkSiteRef>
+        <LocalNetworkSiteRef name="Branch1">
+          <Connection type="IPsec" />
+        </LocalNetworkSiteRef>
+        <LocalNetworkSiteRef name="Branch2">
+          <Connection type="IPsec" />
+        </LocalNetworkSiteRef>
+        <LocalNetworkSiteRef name="Branch3">
+          <Connection type="IPsec" />
+        </LocalNetworkSiteRef>
+    </Gateway>
+  </VirtualNetworkSite>
+</VirtualNetworkSite>
+```
 
 在本示例中，虚拟网络“MultiTier-VNet”具有三个子网：*前端*、*中间层*和*后端*子网，并且具有四个跨界连接：一个 *DefaultSiteHQ* 和三个 *Branches*。
 
@@ -124,53 +126,73 @@ ms.author: cherylmc
 
 1. 创建一个路由表。使用以下 cmdlet 创建路由表。
 
-        New-AzureRouteTable -Name "MyRouteTable" -Label "Routing Table for Forced Tunneling" -Location "China North"
+    ```
+    New-AzureRouteTable -Name "MyRouteTable" -Label "Routing Table for Forced Tunneling" -Location "China North"
+    ```
 
 2. 将默认路由添加到路由表中。
 
     下面的示例将默认路由添加到在步骤 1 中创建的路由表。请注意，唯一支持的路由是“0.0.0.0/0”到“VPN 网关”下一跃点的目标前缀。
 
-        Set-AzureRoute -RouteTable "MyRouteTable" -RouteName "DefaultRoute" -AddressPrefix "0.0.0.0/0" -NextHopType VPNGateway
+    ```
+    Set-AzureRoute -RouteTable "MyRouteTable" -RouteName "DefaultRoute" -AddressPrefix "0.0.0.0/0" -NextHopType VPNGateway
+    ```
 
 3. 将路由表关联到子网。
 
     创建路由表并添加路由后，可以使用以下示例将路由表添加到 VNet 子网，或将路由表与 VNet 子网关联。下面的示例将“MyRouteTable”路由表添加到 VNet MultiTier-VNet 的中间层和后端子网。
 
-        Set-AzureSubnetRouteTable -VirtualNetworkName "MultiTier-VNet" -SubnetName "Midtier" -RouteTableName "MyRouteTable"
+    ```
+    Set-AzureSubnetRouteTable -VirtualNetworkName "MultiTier-VNet" -SubnetName "Midtier" -RouteTableName "MyRouteTable"
 
-        Set-AzureSubnetRouteTable -VirtualNetworkName "MultiTier-VNet" -SubnetName "Backend" -RouteTableName "MyRouteTable"
+    Set-AzureSubnetRouteTable -VirtualNetworkName "MultiTier-VNet" -SubnetName "Backend" -RouteTableName "MyRouteTable"
+    ```
 
 4. 为强制隧道指定默认站点。
 
     在前面的步骤中，示例 cmdlet 脚本创建了路由表，并将路由表关联到两个 VNet 子网。剩下的步骤是在虚拟网络的多站点连接中，选择一个本地站点作为默认站点或隧道。
 
-        $DefaultSite = @("DefaultSiteHQ")
-        Set-AzureVNetGatewayDefaultSite -VNetName "MultiTier-VNet" -DefaultSite "DefaultSiteHQ"
+    ```
+    $DefaultSite = @("DefaultSiteHQ")
+    Set-AzureVNetGatewayDefaultSite -VNetName "MultiTier-VNet" -DefaultSite "DefaultSiteHQ"
+    ```
 
 ## 其他 PowerShell cmdlet
 
 ### 删除路由表
 
-    Remove-AzureRouteTable -Name <routeTableName>
+```
+Remove-AzureRouteTable -Name <routeTableName>
+```
 
 ### 列出路由表
 
-    Get-AzureRouteTable [-Name <routeTableName> [-DetailLevel <detailLevel>]]
+```
+Get-AzureRouteTable [-Name <routeTableName> [-DetailLevel <detailLevel>]]
+```
 
 ### 从路由表中删除路由
 
-    Remove-AzureRouteTable -Name <routeTableName>
+```
+Remove-AzureRouteTable -Name <routeTableName>
+```
 
 ### 从子网中删除路由
 
-    Remove-AzureSubnetRouteTable -VirtualNetworkName <virtualNetworkName> -SubnetName <subnetName>
+```
+Remove-AzureSubnetRouteTable -VirtualNetworkName <virtualNetworkName> -SubnetName <subnetName>
+```
 
 ### 列出与子网关联的路由表
 
-    Get-AzureSubnetRouteTable -VirtualNetworkName <virtualNetworkName> -SubnetName <subnetName>
+```
+Get-AzureSubnetRouteTable -VirtualNetworkName <virtualNetworkName> -SubnetName <subnetName>
+```
 
 ### 从 VNet VPN 网关中删除默认站点
 
-    Remove-AzureVnetGatewayDefaultSite -VNetName <virtualNetworkName>
+```
+Remove-AzureVnetGatewayDefaultSite -VNetName <virtualNetworkName>
+```
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

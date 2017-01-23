@@ -45,11 +45,15 @@ Azure AD 中的 Web 应用/API 注册默认为单租户。可以将注册转换�
 ## 将代码更新为向 /common 发送请求
 在单租户应用程序中，登录请求将发送到租户的登录终结点。以 contoso.partner.onmschina.cn 为例，终结点将是：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
 
 发送到租户终结点的请求可以让该租户中的用户（或来宾）登录该租户中的应用程序。使用多租户应用程序时，应用程序事先并不知道用户来自哪个租户，因此无法将请求发送到租户的终结点。取而代之的是，请求将发送到在所有 Azure AD 租户之间多路复用的终结点：
 
-    https://login.microsoftonline.com/common
+```
+https://login.microsoftonline.com/common
+```
 
 当 Azure AD 在 /common 终结点上收到请求时，将会使用户登录，因而可以发现用户来自哪个租户。/common 终结点可与 Azure AD 支持的所有身份验证协议配合使用：OpenID Connect、OAuth 2.0、SAML 2.0 和 WS 联合身份验证。
 
@@ -69,15 +73,21 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 让我们看看应用程序如何验证它从 Azure AD 接收的令牌。单租户应用程序通常采用类似于下面的终结点值：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
 
 并使用该值构造元数据 URL（在本例中为 OpenID Connect），例如：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn/.well-known/openid-configuration
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn/.well-known/openid-configuration
+```
 
 以下载用于验证令牌的两项关键信息：租户的签名密钥和颁发者值。每个 Azure AD 租户使用以下格式的唯一颁发者值：
 
-    https://sts.chinacloudapi.cn/31537af4-6d77-4bb9-a681-d2394888ea26/
+```
+https://sts.chinacloudapi.cn/31537af4-6d77-4bb9-a681-d2394888ea26/
+```
 
 其中，GUID 值是租户的租户 ID 重命名安全版本。如果你单击上面的 `contoso.partner.onmschina.cn` 元数据链接，就可以在文档中看到此颁发者值。
 
@@ -85,7 +95,9 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 由于 /common 终结点既不对应于租户也不是颁发者，因此在检查 /common 的元数据中的颁发者值时，它拥有的是一个模板化的 URL 而不是实际值：
 
-    https://sts.chinacloudapi.cn/{tenantid}/
+```
+https://sts.chinacloudapi.cn/{tenantid}/
+```
 
 因此，多租户应用程序无法仅通过将元数据中的颁发者值与令牌中的 `issuer` 值进行匹配来验证令牌。多租户应用程序需要一个逻辑来根据颁发者值的租户 ID 部分来确定哪些颁发者值有效、哪些颁发者值无效。
 
@@ -130,7 +142,9 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 如果逻辑应用程序包含两个或更多个应用程序注册（例如独立的客户端和资源），这可能造成问题。如何先将资源添加到客户租户中？ Azure AD 通过以单个步骤对客户端和资源行使同意权的方式来处理此情况，其中用户在同意页上看到客户端和资源两者所请求的权限的总和。若要启用此行为，资源的应用程序注册必须在其应用程序清单中以 `knownClientApplications` 形式包含客户端的应用 ID。例如：
 
-    knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
+```
+knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
+```
 
 可以通过资源[应用程序的清单][AAD-App-Manifest]更新此属性，本文末尾的[相关内容](#related-content)部分中的多层本机客户端调用 Web API 示例中也提供了此属性的相关演示。下图提供了同意多层应用的概览：
 

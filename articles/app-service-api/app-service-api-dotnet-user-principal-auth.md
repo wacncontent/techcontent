@@ -220,8 +220,10 @@ ms.author: rachelap
 
 2. 取消注释引用适用于 JS 的 Active Directory 身份验证库 (ADAL) 脚本的代码行。
 
-        <script src="app/scripts/adal.js"></script>
-        <script src="app/scripts/adal-angular.js"></script>
+    ```
+    <script src="app/scripts/adal.js"></script>
+    <script src="app/scripts/adal-angular.js"></script>
+    ```
 
 1. 打开 *app/scripts/app.js* 文件。
 
@@ -233,24 +235,28 @@ ms.author: rachelap
 
     现在，代码类似于以下示例。
 
-        var endpoints = {
-            "https://todolistapi0121.chinacloudsites.cn/": "1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3"
-        };
+    ```
+    var endpoints = {
+        "https://todolistapi0121.chinacloudsites.cn/": "1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3"
+    };
+    ```
 
 9. 在 `adalProvider.init` 的调用中，将 `tenant` 设置为租户名称，将 `clientId` 设置为上一步骤使用的相同值。
 
     现在，代码类似于以下示例。
 
-        adalProvider.init(
-            {
-                instance: 'https://login.chinacloudapi.cn/', 
-                tenant: 'contoso.partner.onmschina.cn',
-                clientId: '1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3',
-                extraQueryParameter: 'nux=1',
-                endpoints: endpoints
-            },
-            $httpProvider
-            );
+    ```
+    adalProvider.init(
+        {
+            instance: 'https://login.chinacloudapi.cn/', 
+            tenant: 'contoso.partner.onmschina.cn',
+            clientId: '1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3',
+            extraQueryParameter: 'nux=1',
+            endpoints: endpoints
+        },
+        $httpProvider
+        );
+    ```
 
     对 `app.js` 所做的这些更改指定调用方代码和被调用 API 应位于同一个 Azure AD 应用程序中。
 
@@ -282,7 +288,9 @@ ms.author: rachelap
 
 1. 打开 *Controllers/ToDoListController.cs* 文件，取消注释每个操作方法中用于将 `owner` 设置为 Azure AD `NameIdentifier` 声明值的代码行。例如：
 
-        owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+    ```
+    owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+    ```
 
     **重要说明**：不要取消注释 `ToDoListDataAPI` 方法中的代码；稍后要在服务主体身份验证教程中执行这些代码。
 

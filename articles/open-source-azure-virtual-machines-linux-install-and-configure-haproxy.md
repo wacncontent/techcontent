@@ -68,7 +68,9 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 5. 下载 HAProxy 源码包。访问 HAProxy 官网下载您所需的版本，比如 http://www.haproxy.org/download/1.6/src/haproxy-1.6.3.tar.gz
 
-        $sudo wget http://www.haproxy.org/download/1.6/src/haproxy-1.6.3.tar.gz
+    ```
+    $sudo wget http://www.haproxy.org/download/1.6/src/haproxy-1.6.3.tar.gz
+    ```
 
     如果提示说没有 wget 命令，请先安装 wget。不同的 linux 发行版本在安装 wget 时会有少许差别，比如:
 
@@ -82,11 +84,13 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 6. 安装。这里以 CentOS 7.0 为例
 
-        $sudo tar zxvf haproxy-1.6.3.tar.gz
-        $cd haproxy-1.6.3
-        $sudo yum install gcc
-        $sudo make TARGET=linux2628 PREFIX=/usr/local/haproxy
-        $sudo make install PREFIX=/usr/local/haproxy
+    ```
+    $sudo tar zxvf haproxy-1.6.3.tar.gz
+    $cd haproxy-1.6.3
+    $sudo yum install gcc
+    $sudo make TARGET=linux2628 PREFIX=/usr/local/haproxy
+    $sudo make install PREFIX=/usr/local/haproxy
+    ```
 
     其他的 linux 发行版本只在 $sudo yum install gcc 这步上有区别，比如：
 
@@ -100,45 +104,49 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 1. 编辑 /usr/local/haproxy/haproxy.cfg， 内容如下：
 
-        global         
-               maxconn 4096           
-               chroot /usr/local/haproxy
-                uid 99                 
-                gid 99               
-               daemon                  
-               pidfile /usr/local/haproxy/haproxy.pid  
+    ```
+    global         
+           maxconn 4096           
+           chroot /usr/local/haproxy
+            uid 99                 
+            gid 99               
+           daemon                  
+           pidfile /usr/local/haproxy/haproxy.pid  
 
-        defaults             
-               log    global
-                log     127.0.0.1       local3        
-               mode    http         
-               option  httplog       
-                option  dontlognull  
-                option  httpclose    
-               retries 3           
-               option  redispatch   
-               maxconn 2000                     
-               timeout connect     5000           
-               timeout client     50000          
-               timeout server     50000          
+    defaults             
+           log    global
+            log     127.0.0.1       local3        
+           mode    http         
+           option  httplog       
+            option  dontlognull  
+            option  httpclose    
+           retries 3           
+           option  redispatch   
+           maxconn 2000                     
+           timeout connect     5000           
+           timeout client     50000          
+           timeout server     50000          
 
-        frontend http-in                       
-               bind *:80
-                mode    http 
-                option  httplog
-                log     global
-                default_backend httppool 
+    frontend http-in                       
+           bind *:80
+            mode    http 
+            option  httplog
+            log     global
+            default_backend httppool 
 
-        backend httppool                    
-               balance roundrobin
-                server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
-                server  10.8.0.5 10.8.0.5:80  weight 5 check inter 2000 rise 2 fall 3
+    backend httppool                    
+           balance roundrobin
+            server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
+            server  10.8.0.5 10.8.0.5:80  weight 5 check inter 2000 rise 2 fall 3
+    ```
 
     其中 10.8.0.4 和 10.8.0.5 是两台 web server 的私有IP地址。
 
 2. 启动 haproxy 程序
 
-        $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
+    ```
+    $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg
+    ```
 
     这个时候访问 [http://HAProxy 的公网地址:80]() 会出错，因为它后端的两台 web server 还没有提供 web 服务。
 
@@ -156,12 +164,16 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
     在 defaults 项目下添加如下信息
 
-        stats	uri	/haproxy-admin
-        stats	auth	admin:adminpass
+    ```
+    stats	uri	/haproxy-admin
+    stats	auth	admin:adminpass
+    ```
 
     重启 HAProxy 服务
 
-        $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
+    $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
 
 6. 访问 [#](#), 输入用户名和密码，即上面定义的 admin/adminpass
 
@@ -179,14 +191,18 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
     修改 /usr/local/haproxy/haproxy.cfg 中 backend httppool 的部分，将 balance roundrobin 改成 balance source , 内容如下
 
-        backend httppool                    
-               balance source
-                server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
-                server  10.8.0.5 10.8.0.5:80  weight 5 check inter 2000 rise 2 fall 3
+    ```
+    backend httppool                    
+           balance source
+            server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
+            server  10.8.0.5 10.8.0.5:80  weight 5 check inter 2000 rise 2 fall 3
+    ```
 
     重启 HAProxy 服务
 
-        $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
+    $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
 
     再次在浏览器里输入 [#](#) 并不断的刷新，发现访问的都是固定的一台 web server。
 
@@ -194,15 +210,19 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
     修改 /usr/local/haproxy/haproxy.cfg 中 backend httppool 的部分，修改后内容如下
 
-        backend httppool           
-                balance  roundrobin         
-                cookie  LAMP insert indirect nocache
-                server  10.8.0.4 10.8.0.4:80  weight 5 cookie httpd1 check inter 2000 rise 2 fall 3
-                server  10.8.0.5 10.8.0.5:80  weight 5 cookie httpd2 check inter 2000 rise 2 fall 3
+    ```
+    backend httppool           
+            balance  roundrobin         
+            cookie  LAMP insert indirect nocache
+            server  10.8.0.4 10.8.0.4:80  weight 5 cookie httpd1 check inter 2000 rise 2 fall 3
+            server  10.8.0.5 10.8.0.5:80  weight 5 cookie httpd2 check inter 2000 rise 2 fall 3
+    ```
 
     重启 HAProxy 服务
 
-        $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
+    $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
 
     再次在浏览器里输入 [#](#), 按 F12 ，选择“网络” -- > 点击绿色的开始按钮，然后刷新
 
@@ -220,14 +240,18 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
     修改 /usr/local/haproxy/haproxy.cfg 中 backend httppool 的部分，修改后内容如下
 
-        backend httppool           
-                balance  uri        
-                server  10.8.0.4 10.8.0.4:80  weight 5 cookie httpd1 check inter 2000 rise 2 fall 3
-                server  10.8.0.5 10.8.0.5:80  weight 5 cookie httpd2 check inter 2000 rise 2 fall 3
+    ```
+    backend httppool           
+            balance  uri        
+            server  10.8.0.4 10.8.0.4:80  weight 5 cookie httpd1 check inter 2000 rise 2 fall 3
+            server  10.8.0.5 10.8.0.5:80  weight 5 cookie httpd2 check inter 2000 rise 2 fall 3
+    ```
 
     重启 HAProxy 服务
 
-        $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
+    $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
 
     再次在浏览器里输入 [#](#), 不断的刷新浏览器，访问的都是固定的同一台 web server。
 
@@ -244,19 +268,23 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 1. HAProxy 自 1.5 版本起支持 SSL，虽然我们安装的是 1.6.3 版本，我们还是需要重新编译。在 HAProxy VM (以 CentOS 7.0 为例)上，去到 HAProxy 源码的解压目录，执行如下命令
 
-        $sudo yum install openssl-devel
-        $cd haproxy-1.6.3
-        $sudo make clean
-        $sudo make TARGET=linux26 USE_OPENSSL=1 ADDLIB=-lz
-        $sudo ldd haproxy|grep ssl
-        $sudo make install PREFIX=/usr/local/haproxy
+    ```
+    $sudo yum install openssl-devel
+    $cd haproxy-1.6.3
+    $sudo make clean
+    $sudo make TARGET=linux26 USE_OPENSSL=1 ADDLIB=-lz
+    $sudo ldd haproxy|grep ssl
+    $sudo make install PREFIX=/usr/local/haproxy
+    ```
 
 2. 创建自签名证书。在生产环境您需要去服务提供商购买 SSL 证书，我们这里演示自签名证书的创建过程。
 
-        $sudo mkdir /etc/ssl/haproxycert
-        $sudo openssl genrsa -out /etc/ssl/haproxycert/haproxycert.key 1024
-        $cd /etc/ssl/haproxycert/
-        $openssl req -new -key haproxycert.key -out /etc/ssl/haproxycert/haproxycert.csr
+    ```
+    $sudo mkdir /etc/ssl/haproxycert
+    $sudo openssl genrsa -out /etc/ssl/haproxycert/haproxycert.key 1024
+    $cd /etc/ssl/haproxycert/
+    $openssl req -new -key haproxycert.key -out /etc/ssl/haproxycert/haproxycert.csr
+    ```
 
     此时会要求输入一些相关信息，注意填 Common Name 时候记得填写 HAProxy VM 的域名信息，然后 email, password, optional company name 可以不填，直接回车。
 
@@ -264,20 +292,24 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
     继续
 
-        $sudo openssl x509 -req -days 365 -in /etc/ssl/haproxycert/haproxycert.csr -signkey /etc/ssl/haproxycert/haproxycert.key -out /etc/ssl/haproxycert/haproxycert.crt
-        $cat haproxycert.crt haproxycert.key | tee haproxycert.pem
+    ```
+    $sudo openssl x509 -req -days 365 -in /etc/ssl/haproxycert/haproxycert.csr -signkey /etc/ssl/haproxycert/haproxycert.key -out /etc/ssl/haproxycert/haproxycert.crt
+    $cat haproxycert.crt haproxycert.key | tee haproxycert.pem
+    ```
 
 3. 修改 /usr/local/haproxy/haproxy.cfg 的内容。修改 frontend 部分即可。修改后内容如下
 
-        frontend http-in
+    ```
+    frontend http-in
 
-                bind *:80
-                bind *:443 ssl crt /etc/ssl/haproxycert/haproxycert.pem
-                redirect scheme https if !{ ssl_fc }
-                mode    http 
-                option  httplog
-                log     global
-                default_backend httppool
+            bind *:80
+            bind *:443 ssl crt /etc/ssl/haproxycert/haproxycert.pem
+            redirect scheme https if !{ ssl_fc }
+            mode    http 
+            option  httplog
+            log     global
+            default_backend httppool
+    ```
 
     注意 bind *:443 ssl crt /etc/ssl/haproxycert/haproxycert.pem 这句指定的 ssl 证书即是刚刚我们创建的字签名证书，如果您是购买的证书，需要把证书文件上传到 HAProxy VM，并在这里填写证书文件的绝对路径
 
@@ -285,7 +317,9 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
     重启 HAProxy 服务
 
-        $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
+    $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
 
 4. 在HAProxy VM打开443端口。参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
 5. 在浏览器里输入 [#](#), 会出现如下图。
@@ -306,35 +340,41 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 1. HAProxy VM 上重新编译。
 
-        $sudo yum install openssl-devel
-        $cd haproxy-1.6.3
-        $sudo make clean
-        $sudo make TARGET=linux26 USE_OPENSSL=1 ADDLIB=-lz
-        $sudo ldd haproxy|grep ssl
-        $sudo make install PREFIX=/usr/local/haproxy
+    ```
+    $sudo yum install openssl-devel
+    $cd haproxy-1.6.3
+    $sudo make clean
+    $sudo make TARGET=linux26 USE_OPENSSL=1 ADDLIB=-lz
+    $sudo ldd haproxy|grep ssl
+    $sudo make install PREFIX=/usr/local/haproxy
+    ```
 
 2. 修改 /usr/local/haproxy/haproxy.cfg 的内容。修改 defaults, frontend 和 backend 关于 mode http 的部分，将 mode http 改成 mode tcp 。修改后内容如下
 
-        defaults
-               mode    tcp
-               option  tcplog
-        frontend http-in                       
-                bind *:80
-                bind *:443
-                mode tcp
-                option  tcplog
-                log     global
-                default_backend httppool
-        backend httppool          
-                mode tcp 
-                balance roundrobin 
-                option ssl-hello-chk       
-                server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
-                server  10.8.0.5 10.8.0.5:80  weight 5 check inter 2000 rise 2 fall 3
+    ```
+    defaults
+           mode    tcp
+           option  tcplog
+    frontend http-in                       
+            bind *:80
+            bind *:443
+            mode tcp
+            option  tcplog
+            log     global
+            default_backend httppool
+    backend httppool          
+            mode tcp 
+            balance roundrobin 
+            option ssl-hello-chk       
+            server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
+            server  10.8.0.5 10.8.0.5:80  weight 5 check inter 2000 rise 2 fall 3
+    ```
 
     重启 HAProxy 服务
 
-        $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
+    $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
+    ```
 
 3. 在 HAProxy VM 以及后端两台 web server 打开 443 端口。参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
 4. 在 web server 配置 SSL。请参考 apache 官网 [https://httpd.apache.org/docs/2.2/ssl/](https://httpd.apache.org/docs/2.2/ssl/)

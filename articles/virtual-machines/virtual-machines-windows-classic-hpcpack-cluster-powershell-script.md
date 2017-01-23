@@ -37,216 +37,224 @@ ms.author: danlep
 
 以下配置文件将部署 1 个 HPC Pack 群集，其中包含 1 个具有本地数据库的头节点和 5 个运行 Windows Server 2012 R2 操作系统的计算节点。所有云服务直接在“中国北部”位置创建。头节点充当域林的域控制器。
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <IaaSClusterConfig>
-      <Subscription>
-        <SubscriptionId>08701940-C02E-452F-B0B1-39D50119F267</SubscriptionId>
-        <StorageAccount>mystorageaccount</StorageAccount>
-      </Subscription>
-      <Location>China North</Location>  
-      <VNet>
-        <VNetName>MyVNet</VNetName>
-        <SubnetName>Subnet-1</SubnetName>
-      </VNet>
-      <Domain>
-        <DCOption>HeadNodeAsDC</DCOption>
-        <DomainFQDN>hpc.local</DomainFQDN>
-      </Domain>
-      <Database>
-        <DBOption>LocalDB</DBOption>
-      </Database>
-      <HeadNode>
-        <VMName>MyHeadNode</VMName>
-        <ServiceName>MyHPCService</ServiceName>
-        <VMSize>ExtraLarge</VMSize>
-      </HeadNode>
-      <ComputeNodes>
-        <VMNamePattern>MyHPCCN-%1000%</VMNamePattern>
-        <ServiceName>MyHPCCNService</ServiceName>
-        <VMSize>Medium</VMSize>
-        <NodeCount>5</NodeCount>
-        <OSVersion>WindowsServer2012R2</OSVersion>
-      </ComputeNodes>
-    </IaaSClusterConfig>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<IaaSClusterConfig>
+  <Subscription>
+    <SubscriptionId>08701940-C02E-452F-B0B1-39D50119F267</SubscriptionId>
+    <StorageAccount>mystorageaccount</StorageAccount>
+  </Subscription>
+  <Location>China North</Location>  
+  <VNet>
+    <VNetName>MyVNet</VNetName>
+    <SubnetName>Subnet-1</SubnetName>
+  </VNet>
+  <Domain>
+    <DCOption>HeadNodeAsDC</DCOption>
+    <DomainFQDN>hpc.local</DomainFQDN>
+  </Domain>
+  <Database>
+    <DBOption>LocalDB</DBOption>
+  </Database>
+  <HeadNode>
+    <VMName>MyHeadNode</VMName>
+    <ServiceName>MyHPCService</ServiceName>
+    <VMSize>ExtraLarge</VMSize>
+  </HeadNode>
+  <ComputeNodes>
+    <VMNamePattern>MyHPCCN-%1000%</VMNamePattern>
+    <ServiceName>MyHPCCNService</ServiceName>
+    <VMSize>Medium</VMSize>
+    <NodeCount>5</NodeCount>
+    <OSVersion>WindowsServer2012R2</OSVersion>
+  </ComputeNodes>
+</IaaSClusterConfig>
+```
 
 ### 示例 2
 
 以下配置文件将在现有域林中部署一个 HPC Pack 群集。该群集包含 1 个具有本地数据库的头节点和 12 个应用了 BGInfo VM 扩展的计算节点。域林中的所有 VM 均已禁用 Windows 更新的自动安装。所有云服务直接在“中国东部”位置创建。计算节点在 3 个云服务和 3 个存储帐户中创建：_MyHPCCNService01_ 和 _mycnstorage01_ 中的 _MyHPCCN-0001_ 到 _MyHPCCN-0005_；_MyHPCCNService02_ 和 _mycnstorage02_ 中的 _MyHPCCN-0006_ 到 _MyHPCCN0010_；_MyHPCCNService03_ 和 _mycnstorage03_ 中的 _MyHPCCN-0011_ 到 _MyHPCCN-0012_。计算节点基于从计算节点捕获的现有专用映像创建。已启用自动扩展和收缩服务，并采用默认的扩展和收缩间隔。
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <IaaSClusterConfig>
-      <Subscription>
-        <SubscriptionName>Subscription-1</SubscriptionName>
-        <StorageAccount>mystorageaccount</StorageAccount>
-      </Subscription>
-      <Location>China East</Location>  
-      <VNet>
-        <VNetName>MyVNet</VNetName>
-        <SubnetName>Subnet-1</SubnetName>
-      </VNet>
-      <Domain>
-        <DCOption>NewDC</DCOption>
-        <DomainFQDN>hpc.local</DomainFQDN>
-        <DomainController>
-          <VMName>MyDCServer</VMName>
-          <ServiceName>MyHPCService</ServiceName>
-          <VMSize>Large</VMSize>
-          </DomainController>
-         <NoWindowsAutoUpdate />
-      </Domain>
-      <Database>
-        <DBOption>LocalDB</DBOption>
-      </Database>
-      <HeadNode>
-        <VMName>MyHeadNode</VMName>
-        <ServiceName>MyHPCService</ServiceName>
-        <VMSize>ExtraLarge</VMSize>
-      </HeadNode>
-      <Certificates>
-        <Certificate>
-          <Id>1</Id>
-          <PfxFile>d:\mytestcert1.pfx</PfxFile>
-          <Password>MyPsw!!2</Password>
-        </Certificate>
-      </Certificates>
-      <ComputeNodes>
-        <VMNamePattern>MyHPCCN-%0001%</VMNamePattern>
-    <ServiceNamePattern>MyHPCCNService%01%</ServiceNamePattern>
-    <MaxNodeCountPerService>5</MaxNodeCountPerService>
-    <StorageAccountNamePattern>mycnstorage%01%</StorageAccountNamePattern>
-        <VMSize>Medium</VMSize>
-        <NodeCount>12</NodeCount>
-        <ImageName HPCPackInstalled="true">MyHPCComputeNodeImage</ImageName>
-        <VMExtensions>
-           <VMExtension>
-              <ExtensionName>BGInfo</ExtensionName>
-              <Publisher>Microsoft.Compute</Publisher>
-              <Version>1.*</Version>
-           </VMExtension>
-        </VMExtensions>
-      </ComputeNodes>
-      <AutoGrowShrink>
-        <CertificateId>1</CertificateId>
-      </AutoGrowShrink>
-    </IaaSClusterConfig>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<IaaSClusterConfig>
+  <Subscription>
+    <SubscriptionName>Subscription-1</SubscriptionName>
+    <StorageAccount>mystorageaccount</StorageAccount>
+  </Subscription>
+  <Location>China East</Location>  
+  <VNet>
+    <VNetName>MyVNet</VNetName>
+    <SubnetName>Subnet-1</SubnetName>
+  </VNet>
+  <Domain>
+    <DCOption>NewDC</DCOption>
+    <DomainFQDN>hpc.local</DomainFQDN>
+    <DomainController>
+      <VMName>MyDCServer</VMName>
+      <ServiceName>MyHPCService</ServiceName>
+      <VMSize>Large</VMSize>
+      </DomainController>
+     <NoWindowsAutoUpdate />
+  </Domain>
+  <Database>
+    <DBOption>LocalDB</DBOption>
+  </Database>
+  <HeadNode>
+    <VMName>MyHeadNode</VMName>
+    <ServiceName>MyHPCService</ServiceName>
+    <VMSize>ExtraLarge</VMSize>
+  </HeadNode>
+  <Certificates>
+    <Certificate>
+      <Id>1</Id>
+      <PfxFile>d:\mytestcert1.pfx</PfxFile>
+      <Password>MyPsw!!2</Password>
+    </Certificate>
+  </Certificates>
+  <ComputeNodes>
+    <VMNamePattern>MyHPCCN-%0001%</VMNamePattern>
+<ServiceNamePattern>MyHPCCNService%01%</ServiceNamePattern>
+<MaxNodeCountPerService>5</MaxNodeCountPerService>
+<StorageAccountNamePattern>mycnstorage%01%</StorageAccountNamePattern>
+    <VMSize>Medium</VMSize>
+    <NodeCount>12</NodeCount>
+    <ImageName HPCPackInstalled="true">MyHPCComputeNodeImage</ImageName>
+    <VMExtensions>
+       <VMExtension>
+          <ExtensionName>BGInfo</ExtensionName>
+          <Publisher>Microsoft.Compute</Publisher>
+          <Version>1.*</Version>
+       </VMExtension>
+    </VMExtensions>
+  </ComputeNodes>
+  <AutoGrowShrink>
+    <CertificateId>1</CertificateId>
+  </AutoGrowShrink>
+</IaaSClusterConfig>
+```
 
 ### 示例 3
 
 以下配置文件将在现有域林中部署一个 HPC Pack 群集。该群集包含 1 个头节点、 1 个具有 500 GB 数据磁盘的数据库服务器、2 个运行 Windows Server 2012 R2 操作系统的中转节点，以及 5 个运行 Windows Server 2012 R2 操作系统的计算节点。云服务 MyHPCCNService 在地缘组 *MyIBAffinityGroup* 中创建，其他云服务在地缘组 *MyAffinityGroup* 中创建。已在头节点上启用了 HPC 作业计划程序 REST API 和 HPC Web 门户。
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <IaaSClusterConfig>
-      <Subscription>
-        <SubscriptionName>Subscription-1</SubscriptionName>
-        <StorageAccount>mystorageaccount</StorageAccount>
-      </Subscription>
-      <AffinityGroup>MyAffinityGroup</AffinityGroup>
-      <Location>China East</Location>  
-      <VNet>
-        <VNetName>MyVNet</VNetName>
-        <SubnetName>Subnet-1</SubnetName>
-      </VNet>    
-      <Domain>
-        <DCOption>ExistingDC</DCOption>
-        <DomainFQDN>hpc.local</DomainFQDN>
-      </Domain>
-      <Database>
-        <DBOption>NewRemoteDB</DBOption>
-        <DBVersion>SQLServer2014_Enterprise</DBVersion>
-        <DBServer>
-          <VMName>MyDBServer</VMName>
-          <ServiceName>MyHPCService</ServiceName>
-          <VMSize>ExtraLarge</VMSize>
-          <DataDiskSizeInGB>500</DataDiskSizeInGB>
-        </DBServer>
-      </Database>
-      <HeadNode>
-        <VMName>MyHeadNode</VMName>
-        <ServiceName>MyHPCService</ServiceName>
-        <VMSize>ExtraLarge</VMSize>
-        <EnableRESTAPI />
-        <EnableWebPortal />
-      </HeadNode>
-      <ComputeNodes>
-        <VMNamePattern>MyHPCCN-%0000%</VMNamePattern>
-        <ServiceName>MyHPCCNService</ServiceName>
-        <VMSize>A7</VMSize>
-    <NodeCount>5</NodeCount>
-    <AffinityGroup>MyIBAffinityGroup</AffinityGroup>
-      </ComputeNodes>
-      <BrokerNodes>
-        <VMNamePattern>MyHPCBN-%0000%</VMNamePattern>
-        <ServiceName>MyHPCBNService</ServiceName>
-        <VMSize>Medium</VMSize>
-        <NodeCount>2</NodeCount>
-      </BrokerNodes>
-    </IaaSClusterConfig>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<IaaSClusterConfig>
+  <Subscription>
+    <SubscriptionName>Subscription-1</SubscriptionName>
+    <StorageAccount>mystorageaccount</StorageAccount>
+  </Subscription>
+  <AffinityGroup>MyAffinityGroup</AffinityGroup>
+  <Location>China East</Location>  
+  <VNet>
+    <VNetName>MyVNet</VNetName>
+    <SubnetName>Subnet-1</SubnetName>
+  </VNet>    
+  <Domain>
+    <DCOption>ExistingDC</DCOption>
+    <DomainFQDN>hpc.local</DomainFQDN>
+  </Domain>
+  <Database>
+    <DBOption>NewRemoteDB</DBOption>
+    <DBVersion>SQLServer2014_Enterprise</DBVersion>
+    <DBServer>
+      <VMName>MyDBServer</VMName>
+      <ServiceName>MyHPCService</ServiceName>
+      <VMSize>ExtraLarge</VMSize>
+      <DataDiskSizeInGB>500</DataDiskSizeInGB>
+    </DBServer>
+  </Database>
+  <HeadNode>
+    <VMName>MyHeadNode</VMName>
+    <ServiceName>MyHPCService</ServiceName>
+    <VMSize>ExtraLarge</VMSize>
+    <EnableRESTAPI />
+    <EnableWebPortal />
+  </HeadNode>
+  <ComputeNodes>
+    <VMNamePattern>MyHPCCN-%0000%</VMNamePattern>
+    <ServiceName>MyHPCCNService</ServiceName>
+    <VMSize>A7</VMSize>
+<NodeCount>5</NodeCount>
+<AffinityGroup>MyIBAffinityGroup</AffinityGroup>
+  </ComputeNodes>
+  <BrokerNodes>
+    <VMNamePattern>MyHPCBN-%0000%</VMNamePattern>
+    <ServiceName>MyHPCBNService</ServiceName>
+    <VMSize>Medium</VMSize>
+    <NodeCount>2</NodeCount>
+  </BrokerNodes>
+</IaaSClusterConfig>
+```
 
 ### 示例 4
 
 以下配置文件将在现有域林中部署一个 HPC Pack 群集。该群集包含 2 个具有本地数据库的头节点，此外还将创建 2 个 Azure 节点模板并为 Azure 节点模板 _AzureTemplate1_ 创建 3 个中等大小的 Azure 节点。配置头节点后，将在其上运行脚本文件。
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <IaaSClusterConfig>
-      <Subscription>
-        <SubscriptionName>Subscription-1</SubscriptionName>
-        <StorageAccount>mystorageaccount</StorageAccount>
-      </Subscription>
-      <AffinityGroup>MyAffinityGroup</AffinityGroup>
-      <Location>China East</Location>  
-      <VNet>
-        <VNetName>MyVNet</VNetName>
-        <SubnetName>Subnet-1</SubnetName>
-      </VNet>
-      <Domain>
-        <DCOption>ExistingDC</DCOption>
-        <DomainFQDN>hpc.local</DomainFQDN>
-      </Domain>
-      <Database>
-        <DBOption>LocalDB</DBOption>
-      </Database>
-      <HeadNode>
-        <VMName>MyHeadNode</VMName>
-        <ServiceName>MyHPCService</ServiceName>
-    <VMSize>ExtraLarge</VMSize>
-        <PostConfigScript>c:\MyHNPostActions.ps1</PostConfigScript>
-      </HeadNode>
-      <Certificates>
-        <Certificate>
-          <Id>1</Id>
-          <PfxFile>d:\mytestcert1.pfx</PfxFile>
-          <Password>MyPsw!!2</Password>
-        </Certificate>
-        <Certificate>
-          <Id>2</Id>
-          <PfxFile>d:\mytestcert2.pfx</PfxFile>
-        </Certificate>    
-      </Certificates>
-      <AzureBurst>
-        <AzureNodeTemplate>
-          <TemplateName>AzureTemplate1</TemplateName>
-          <SubscriptionId>bb9252ba-831f-4c9d-ae14-9a38e6da8ee4</SubscriptionId>
-          <CertificateId>1</CertificateId>
-          <ServiceName>mytestsvc1</ServiceName>
-          <StorageAccount>myteststorage1</StorageAccount>
-          <NodeCount>3</NodeCount>
-          <RoleSize>Medium</RoleSize>
-        </AzureNodeTemplate>
-        <AzureNodeTemplate>
-          <TemplateName>AzureTemplate2</TemplateName>
-          <SubscriptionId>ad4b9f9f-05f2-4c74-a83f-f2eb73000e0b</SubscriptionId>
-          <CertificateId>1</CertificateId>
-          <ServiceName>mytestsvc2</ServiceName>
-          <StorageAccount>myteststorage2</StorageAccount>
-          <Proxy>
-            <UsesStaticProxyCount>false</UsesStaticProxyCount>     
-            <ProxyRatio>100</ProxyRatio>
-            <ProxyRatioBase>400</ProxyRatioBase>
-          </Proxy>
-          <OSVersion>WindowsServer2012</OSVersion>
-        </AzureNodeTemplate>
-      </AzureBurst>
-    </IaaSClusterConfig>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<IaaSClusterConfig>
+  <Subscription>
+    <SubscriptionName>Subscription-1</SubscriptionName>
+    <StorageAccount>mystorageaccount</StorageAccount>
+  </Subscription>
+  <AffinityGroup>MyAffinityGroup</AffinityGroup>
+  <Location>China East</Location>  
+  <VNet>
+    <VNetName>MyVNet</VNetName>
+    <SubnetName>Subnet-1</SubnetName>
+  </VNet>
+  <Domain>
+    <DCOption>ExistingDC</DCOption>
+    <DomainFQDN>hpc.local</DomainFQDN>
+  </Domain>
+  <Database>
+    <DBOption>LocalDB</DBOption>
+  </Database>
+  <HeadNode>
+    <VMName>MyHeadNode</VMName>
+    <ServiceName>MyHPCService</ServiceName>
+<VMSize>ExtraLarge</VMSize>
+    <PostConfigScript>c:\MyHNPostActions.ps1</PostConfigScript>
+  </HeadNode>
+  <Certificates>
+    <Certificate>
+      <Id>1</Id>
+      <PfxFile>d:\mytestcert1.pfx</PfxFile>
+      <Password>MyPsw!!2</Password>
+    </Certificate>
+    <Certificate>
+      <Id>2</Id>
+      <PfxFile>d:\mytestcert2.pfx</PfxFile>
+    </Certificate>    
+  </Certificates>
+  <AzureBurst>
+    <AzureNodeTemplate>
+      <TemplateName>AzureTemplate1</TemplateName>
+      <SubscriptionId>bb9252ba-831f-4c9d-ae14-9a38e6da8ee4</SubscriptionId>
+      <CertificateId>1</CertificateId>
+      <ServiceName>mytestsvc1</ServiceName>
+      <StorageAccount>myteststorage1</StorageAccount>
+      <NodeCount>3</NodeCount>
+      <RoleSize>Medium</RoleSize>
+    </AzureNodeTemplate>
+    <AzureNodeTemplate>
+      <TemplateName>AzureTemplate2</TemplateName>
+      <SubscriptionId>ad4b9f9f-05f2-4c74-a83f-f2eb73000e0b</SubscriptionId>
+      <CertificateId>1</CertificateId>
+      <ServiceName>mytestsvc2</ServiceName>
+      <StorageAccount>myteststorage2</StorageAccount>
+      <Proxy>
+        <UsesStaticProxyCount>false</UsesStaticProxyCount>     
+        <ProxyRatio>100</ProxyRatio>
+        <ProxyRatioBase>400</ProxyRatioBase>
+      </Proxy>
+      <OSVersion>WindowsServer2012</OSVersion>
+    </AzureNodeTemplate>
+  </AzureBurst>
+</IaaSClusterConfig>
+```
 
 ## 故障排除
 

@@ -47,8 +47,10 @@ ms.author: ganesr
 
 可以使用以下 cmdlet 将虚拟网络链接到 ExpressRoute 线路。在运行 cmdlet 之前，请确保已创建虚拟网络网关并可将其用于进行链接。
 
-    New-AzureDedicatedCircuitLink -ServiceKey "*****************************" -VNetName "MyVNet"
-    Provisioned
+```
+New-AzureDedicatedCircuitLink -ServiceKey "*****************************" -VNetName "MyVNet"
+Provisioned
+```
 
 ## 将不同订阅中的虚拟网络连接到线路
 
@@ -73,55 +75,63 @@ ms.author: ganesr
 
 线路所有者可授权其他订阅的管理员使用指定的线路。在下面的示例中，线路 (Contoso IT) 管理员允许另一个订阅（开发-测试）的管理员最多将两个虚拟网络链接到线路。Contoso IT 管理员可以通过指定开发-测试 Microsoft ID 启用此功能。该 cmdlet 不会将电子邮件发送到指定的 Microsoft ID。线路所有者需要显式通知其他订阅所有者：授权已完成。
 
-    New-AzureDedicatedCircuitLinkAuthorization -ServiceKey "**************************" -Description "Dev-Test Links" -Limit 2 -MicrosoftIds 'devtest@contoso.com'
+```
+New-AzureDedicatedCircuitLinkAuthorization -ServiceKey "**************************" -Description "Dev-Test Links" -Limit 2 -MicrosoftIds 'devtest@contoso.com'
 
-        Description         : Dev-Test Links 
-        Limit               : 2 
-        LinkAuthorizationId : ********************************** 
-        MicrosoftIds        : devtest@contoso.com 
-        Used                : 0
+    Description         : Dev-Test Links 
+    Limit               : 2 
+    LinkAuthorizationId : ********************************** 
+    MicrosoftIds        : devtest@contoso.com 
+    Used                : 0
+```
 
 **查看授权**
 
 线路所有者可以通过运行以下 cmdlet 查看针对特定线路发出的所有授权：
 
-    Get-AzureDedicatedCircuitLinkAuthorization -ServiceKey: "**************************"
+```
+Get-AzureDedicatedCircuitLinkAuthorization -ServiceKey: "**************************"
 
-    Description         : EngineeringTeam 
-    Limit               : 3 
-    LinkAuthorizationId : #################################### 
-    MicrosoftIds        : engadmin@contoso.com 
-    Used                : 1 
+Description         : EngineeringTeam 
+Limit               : 3 
+LinkAuthorizationId : #################################### 
+MicrosoftIds        : engadmin@contoso.com 
+Used                : 1 
 
-    Description         : MarketingTeam 
-    Limit               : 1 
-    LinkAuthorizationId : @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-    MicrosoftIds        : marketingadmin@contoso.com 
-    Used                : 0 
+Description         : MarketingTeam 
+Limit               : 1 
+LinkAuthorizationId : @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+MicrosoftIds        : marketingadmin@contoso.com 
+Used                : 0 
 
-    Description         : Dev-Test Links 
-    Limit               : 2 
-    LinkAuthorizationId : &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
-    MicrosoftIds        : salesadmin@contoso.com 
-    Used                : 2 
+Description         : Dev-Test Links 
+Limit               : 2 
+LinkAuthorizationId : &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+MicrosoftIds        : salesadmin@contoso.com 
+Used                : 2 
+```
 
 **更新授权**
 
 线路所有者可以使用以下 cmdlet 修改授权：
 
-    Set-AzureDedicatedCircuitLinkAuthorization -ServiceKey "**************************" -AuthorizationId "&&&&&&&&&&&&&&&&&&&&&&&&&&&&"-Limit 5
+```
+Set-AzureDedicatedCircuitLinkAuthorization -ServiceKey "**************************" -AuthorizationId "&&&&&&&&&&&&&&&&&&&&&&&&&&&&"-Limit 5
 
-    Description         : Dev-Test Links 
-    Limit               : 5 
-    LinkAuthorizationId : &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
-    MicrosoftIds        : devtest@contoso.com 
-    Used                : 0
+Description         : Dev-Test Links 
+Limit               : 5 
+LinkAuthorizationId : &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+MicrosoftIds        : devtest@contoso.com 
+Used                : 0
+```
 
 **删除授权**
 
 线路所有者可以通过运行以下 cmdlet 撤消/删除对用户的授权：
 
-    Remove-AzureDedicatedCircuitLinkAuthorization -ServiceKey "*****************************" -AuthorizationId "###############################"
+```
+Remove-AzureDedicatedCircuitLinkAuthorization -ServiceKey "*****************************" -AuthorizationId "###############################"
+```
 
 ### 线路用户操作
 
@@ -129,27 +139,31 @@ ms.author: ganesr
 
 线路用户可以使用以下 cmdlet 查看授权：
 
-    Get-AzureAuthorizedDedicatedCircuit
+```
+Get-AzureAuthorizedDedicatedCircuit
 
-    Bandwidth                        : 200
-    CircuitName                      : ContosoIT
-    Location                         : Washington DC
-    MaximumAllowedLinks              : 2
-    ServiceKey                       : &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-    ServiceProviderName              : equinix
-    ServiceProviderProvisioningState : Provisioned
-    Status                           : Enabled
-    UsedLinks                        : 0
+Bandwidth                        : 200
+CircuitName                      : ContosoIT
+Location                         : Washington DC
+MaximumAllowedLinks              : 2
+ServiceKey                       : &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ServiceProviderName              : equinix
+ServiceProviderProvisioningState : Provisioned
+Status                           : Enabled
+UsedLinks                        : 0
+```
 
 **兑现链接授权**
 
 线路用户可以通过运行以下 cmdlet 兑现链接授权：
 
-    New-AzureDedicatedCircuitLink –servicekey "&&&&&&&&&&&&&&&&&&&&&&&&&&" –VnetName 'SalesVNET1'
+```
+New-AzureDedicatedCircuitLink –servicekey "&&&&&&&&&&&&&&&&&&&&&&&&&&" –VnetName 'SalesVNET1'
 
-    State VnetName
-    ----- --------
-    Provisioned SalesVNET1
+State VnetName
+----- --------
+Provisioned SalesVNET1
+```
 
 ## 后续步骤
 

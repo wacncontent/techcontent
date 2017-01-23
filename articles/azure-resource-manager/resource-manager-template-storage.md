@@ -24,16 +24,18 @@ ms.author: tomfitz
 ## 架构格式
 若要创建存储帐户，请将以下架构添加到模板的资源节中。
 
+```
+{
+    "type": "Microsoft.Storage/storageAccounts",
+    "apiVersion": "2015-06-15",
+    "name": string,
+    "location": string,
+    "properties": 
     {
-        "type": "Microsoft.Storage/storageAccounts",
-        "apiVersion": "2015-06-15",
-        "name": string,
-        "location": string,
-        "properties": 
-        {
-            "accountType": string
-        }
+        "accountType": string
     }
+}
+```
 
 ## 值
 下表描述了需要在架构中设置的值。
@@ -54,25 +56,27 @@ ms.author: tomfitz
 ## 示例
 以下示例使用基于资源组 ID 的唯一名称部署标准本地冗余存储帐户。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {},
-        "variables": {},
-        "resources": [
-            {
-                "type": "Microsoft.Storage/storageAccounts",
-                "apiVersion": "2015-06-15",
-                "name": "[concat('storage', uniqueString(resourceGroup().id))]",
-                "location": "[resourceGroup().location]",
-                "properties": 
-            {
-                    "accountType": "Standard_LRS"
-            }
-            }
-        ],
-        "outputs": {}
-    }
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2015-06-15",
+            "name": "[concat('storage', uniqueString(resourceGroup().id))]",
+            "location": "[resourceGroup().location]",
+            "properties": 
+        {
+                "accountType": "Standard_LRS"
+        }
+        }
+    ],
+    "outputs": {}
+}
+```
 
 ## 快速入门模板
 有许多快速入门模板包含存储帐户。以下模板演示了一些常见方案：

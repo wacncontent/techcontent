@@ -661,8 +661,10 @@ ___
 
 可以使用以下 PS 命令检查台式机/便携式计算机上当前安装的 Azure cmdlet 版本：
 
-    Import-Module Azure
-    (Get-Module Azure).Version
+```
+Import-Module Azure
+(Get-Module Azure).Version
+```
 
 结果应如以下[此图][deployment-guide-figure-6]中所示。
 
@@ -686,7 +688,9 @@ ___
 
 可以使用以下命令检查台式机/便携式计算机上当前安装的 Azure CLI 版本：
 
-    azure --version
+```
+azure --version
+```
 
 结果应如以下[此图][deployment-guide-figure-azure-cli-version]中所示。
 
@@ -739,12 +743,16 @@ ___
 #### Linux
 在 Azure 来宾代理的配置文件（位于 /etc/waagent.conf 中）中配置正确的代理。必须设置以下参数：
 
-    HttpProxy.Host=<proxy host e.g. proxy.corp.local>
-    HttpProxy.Port=<port of the proxy host e.g. 80>
+```
+HttpProxy.Host=<proxy host e.g. proxy.corp.local>
+HttpProxy.Port=<port of the proxy host e.g. 80>
+```
 
 更改代理配置后，重新启动代理
 
-    sudo service waagent restart
+```
+sudo service waagent restart
+```
 
 /etc/waagent.conf 中的代理设置也适用于所需的 VM 扩展。如果你要使用 Azure 存储库，请确保这些存储库的流量不会流经本地 Intranet。如果已创建用户定义的路由来启用强制隧道，请确保添加路由，将发往存储库的流量直接路由到 Internet，而不是通过站点到站点连接路由。
 
@@ -799,24 +807,34 @@ ___
 1. 如[此文][azure-cli]中所述安装 Azure CLI
 1. 使用 Azure 帐户登录
 
-        azure login -e AzureChinaCloud
+    ```
+    azure login -e AzureChinaCloud
+    ```
 
 1. 切换到 Azure Resource Manager 模式
 
-        azure config mode arm
+    ```
+    azure config mode arm
+    ```
 
 1. 启用 Azure 增强型监视
 
-        azure vm enable-aem <resource-group-name> <vm-name>
+    ```
+    azure vm enable-aem <resource-group-name> <vm-name>
+    ```
 
 1. 验证 Azure 增强型监视是否在 Azure Linux VM 上处于活动状态。检查文件 /var/lib/AzureEnhancedMonitor/PerfCounters 是否存在。如果存在，请使用以下命令显示 AEM 收集的信息：
 
-        cat /var/lib/AzureEnhancedMonitor/PerfCounters
+    ```
+    cat /var/lib/AzureEnhancedMonitor/PerfCounters
+    ```
 
     然后，将获得类似于下面的输出：
 
-        2;cpu;Current Hw Frequency;;0;2194.659;MHz;60;1444036656;saplnxmon;
-        2;cpu;Max Hw Frequency;;0;2194.659;MHz;0;1444036656;saplnxmon;
+    ```
+    2;cpu;Current Hw Frequency;;0;2194.659;MHz;60;1444036656;saplnxmon;
+    2;cpu;Max Hw Frequency;;0;2194.659;MHz;0;1444036656;saplnxmon;
+    ```
 
 ## <a name="564adb4f-5c95-4041-9616-6635e83a810b"></a>Azure 上 SAP 的端到端监视设置的检查和故障排除
 在部署 Azure VM 并设置相关的 Azure 监视基础结构后，请检查 Azure 增强型监视的所有组件是否正常工作。

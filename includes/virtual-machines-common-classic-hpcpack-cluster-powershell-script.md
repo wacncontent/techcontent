@@ -14,7 +14,9 @@
 
 ## 语法
 
-    New-HPCIaaSCluster.ps1 [-ConfigFile] <String> [-AdminUserName]<String> [[-AdminPassword] <String>] [[-HPCImageName] <String>] [[-LogFile] <String>] [-Force] [-NoCleanOnFailure] [-PSSessionSkipCACheck] [<CommonParameters>]
+```
+New-HPCIaaSCluster.ps1 [-ConfigFile] <String> [-AdminUserName]<String> [[-AdminPassword] <String>] [[-HPCImageName] <String>] [[-LogFile] <String>] [-Force] [-NoCleanOnFailure] [-PSSessionSkipCACheck] [<CommonParameters>]
+```
 
 >[!NOTE]
 >你必须以管理员身份运行脚本。
@@ -47,7 +49,9 @@
 
 以下示例将使用配置文件 *MyConfigFile.xml* 创建一个新的 HPC Pack 群集，并指定用于安装该群集的管理凭据。
 
-    .\New-HPCIaaSCluster.ps1 -ConfigFile MyConfigFile.xml -AdminUserName <username> -AdminPassword <password>
+```
+.\New-HPCIaaSCluster.ps1 -ConfigFile MyConfigFile.xml -AdminUserName <username> -AdminPassword <password>
+```
 
 ### 其他注意事项
 

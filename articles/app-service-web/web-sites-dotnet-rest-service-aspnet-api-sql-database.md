@@ -76,41 +76,43 @@ ms.author: riande
 
 2. 将 *Views\\Shared\_Layout.cshtml* 文件的内容替换为以下代码：
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="utf-8" />
-            <title>@ViewBag.Title - Contact Manager</title>
-            <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-            <meta name="viewport" content="width=device-width" />
-            @Styles.Render("~/Content/css")
-            @Scripts.Render("~/bundles/modernizr")
-        </head>
-        <body>
-            <header>
-                <div class="content-wrapper">
-                    <div class="float-left">
-                        <p class="site-title">@Html.ActionLink("Contact Manager", "Index", "Home")</p>
-                    </div>
+    ```
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Contact Manager</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("Contact Manager", "Index", "Home")</p>
                 </div>
-            </header>
-            <div id="body">
-                @RenderSection("featured", required: false)
-                <section class="content-wrapper main-content clear-fix">
-                    @RenderBody()
-                </section>
             </div>
-            <footer>
-                <div class="content-wrapper">
-                    <div class="float-left">
-                        <p>&copy; @DateTime.Now.Year - Contact Manager</p>
-                    </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Contact Manager</p>
                 </div>
-            </footer>
-            @Scripts.Render("~/bundles/jquery")
-            @RenderSection("scripts", required: false)
-        </body>
-        </html>
+            </div>
+        </footer>
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>
+    ```
 
 上面的标记会将应用程序名称从 "My ASP.NET App" 更改为 "Contact Manager"，并移除“主页”、“关于”以及“联系人”的链接。
 
@@ -152,27 +154,29 @@ Visual Studio 开始执行将文件复制到 Azure 服务器的过程。“输�
     ![“添加新项”对话框][adddb002]
 3. 将 Contacts.cs 文件的内容替换为以下代码。
 
-        using System.Globalization;
-        namespace ContactManager.Models
-        {
-            public class Contact
-               {
-                public int ContactId { get; set; }
-                public string Name { get; set; }
-                public string Address { get; set; }
-                public string City { get; set; }
-                public string State { get; set; }
-                public string Zip { get; set; }
-                public string Email { get; set; }
-                public string Twitter { get; set; }
-                public string Self
-                {
-                    get { return string.Format(CultureInfo.CurrentCulture,
-                         "api/contacts/{0}", this.ContactId); }
-                    set { }
-                }
+    ```
+    using System.Globalization;
+    namespace ContactManager.Models
+    {
+        public class Contact
+           {
+            public int ContactId { get; set; }
+            public string Name { get; set; }
+            public string Address { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string Zip { get; set; }
+            public string Email { get; set; }
+            public string Twitter { get; set; }
+            public string Self
+            {
+                get { return string.Format(CultureInfo.CurrentCulture,
+                     "api/contacts/{0}", this.ContactId); }
+                set { }
             }
         }
+    }
+    ```
 
 **Contact** 类定义你将为每个联系人存储的数据以及数据库需要的主键 ContactID。本教程末尾的[后续步骤](#nextsteps)部分提供了有关数据模型的详细信息。
 
@@ -202,12 +206,16 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
     ![“工具”菜单中的“程序包管理器控制台”][addcode008]
 2. 在“包管理器控制台”窗口中，输入以下命令：
 
-        enable-migrations 
+    ```
+    enable-migrations 
+    ```
 
     **enable-migrations** 命令将创建一个 *Migrations* 文件夹，并在该文件夹中放入一个可编辑以配置 Migrations 的 *Configuration.cs* 文件。
 3. 在“包管理器控制台”窗口中，输入以下命令：
 
-        add-migration Initial
+    ```
+    add-migration Initial
+    ```
 
     **add-migration Initial** 命令将生成一个创建数据库的名为 **&lt;date\_stamp&gt;Initial** 的类。第一个参数 (*Initial*) 是任意参数并将用于创建文件名称。你可以在“解决方案资源管理器”中查看新的类文件。
 
@@ -215,69 +223,75 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 4. 打开 *Migrations\\Configuration.cs* 文件。
 5. 添加以下命名空间。
 
-         using ContactManager.Models;
+    ```
+     using ContactManager.Models;
+    ```
 6. 将 *Seed* 方法替换为以下代码：
 
-        protected override void Seed(ContactManager.Models.ContactManagerContext context)
-        {
-            context.Contacts.AddOrUpdate(p => p.Name,
-               new Contact
-               {
-                   Name = "Debra Garcia",
-                   Address = "1234 Main St",
-                   City = "Redmond",
-                   State = "WA",
-                   Zip = "10999",
-                   Email = "debra@example.com",
-                   Twitter = "debra_example"
-               },
-                new Contact
-                {
-                    Name = "Thorsten Weinrich",
-                    Address = "5678 1st Ave W",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "thorsten@example.com",
-                    Twitter = "thorsten_example"
-                },
-                new Contact
-                {
-                    Name = "Yuhong Li",
-                    Address = "9012 State st",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "yuhong@example.com",
-                    Twitter = "yuhong_example"
-                },
-                new Contact
-                {
-                    Name = "Jon Orton",
-                    Address = "3456 Maple St",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "jon@example.com",
-                    Twitter = "jon_example"
-                },
-                new Contact
-                {
-                    Name = "Diliana Alexieva-Bosseva",
-                    Address = "7890 2nd Ave E",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "diliana@example.com",
-                    Twitter = "diliana_example"
-                }
-                );
-        }
+    ```
+    protected override void Seed(ContactManager.Models.ContactManagerContext context)
+    {
+        context.Contacts.AddOrUpdate(p => p.Name,
+           new Contact
+           {
+               Name = "Debra Garcia",
+               Address = "1234 Main St",
+               City = "Redmond",
+               State = "WA",
+               Zip = "10999",
+               Email = "debra@example.com",
+               Twitter = "debra_example"
+           },
+            new Contact
+            {
+                Name = "Thorsten Weinrich",
+                Address = "5678 1st Ave W",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "thorsten@example.com",
+                Twitter = "thorsten_example"
+            },
+            new Contact
+            {
+                Name = "Yuhong Li",
+                Address = "9012 State st",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "yuhong@example.com",
+                Twitter = "yuhong_example"
+            },
+            new Contact
+            {
+                Name = "Jon Orton",
+                Address = "3456 Maple St",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "jon@example.com",
+                Twitter = "jon_example"
+            },
+            new Contact
+            {
+                Name = "Diliana Alexieva-Bosseva",
+                Address = "7890 2nd Ave E",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "diliana@example.com",
+                Twitter = "diliana_example"
+            }
+            );
+    }
+    ```
 
     上面这段代码将用联系人信息初始化数据库。有关对数据库进行种子设定的更多信息，请参阅调试 [Entity Framework (EF) 数据库](http://blogs.msdn.com/b/rickandy/archive/2013/02/12/seeding-and-debugging-entity-framework-ef-dbs.aspx)。
 7. 在“包管理器控制台”中输入以下命令：
 
-        update-database
+    ```
+    update-database
+    ```
 
     ![“程序包管理器控制台”命令][addcode009]
 
@@ -292,165 +306,173 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 打开 *Views\\Home\\Index.cshtml* 文件。在下一步中，我们将生成的标记替换为使用 [jQuery](http://jquery.com/) 和 [Knockout.js](http://knockoutjs.com/) 的代码。此新代码将使用 Web API 和 JSON 检索联系人列表，然后使用 knockout.js 将联系人数据绑定至 UI。有关详细信息，请参阅本教程末尾的[后续步骤](#nextsteps)部分。
 2. 将文件的内容替换为以下代码。
 
-        @model IEnumerable<ContactManager.Models.Contact>
-        @{
-            ViewBag.Title = "Home";
-        }
-        @section Scripts {
-            @Scripts.Render("~/bundles/knockout")
-            <script type="text/javascript">
-                function ContactsViewModel() {
-                    var self = this;
-                    self.contacts = ko.observableArray([]);
-                    self.addContact = function () {
-                        $.post("api/contacts",
-                            $("#addContact").serialize(),
-                            function (value) {
-                                self.contacts.push(value);
-                            },
-                            "json");
-                    }
-                    self.removeContact = function (contact) {
-                        $.ajax({
-                            type: "DELETE",
-                            url: contact.Self,
-                            success: function () {
-                                self.contacts.remove(contact);
-                            }
-                        });
-                    }
-
-                    $.getJSON("api/contacts", function (data) {
-                        self.contacts(data);
+    ```
+    @model IEnumerable<ContactManager.Models.Contact>
+    @{
+        ViewBag.Title = "Home";
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/knockout")
+        <script type="text/javascript">
+            function ContactsViewModel() {
+                var self = this;
+                self.contacts = ko.observableArray([]);
+                self.addContact = function () {
+                    $.post("api/contacts",
+                        $("#addContact").serialize(),
+                        function (value) {
+                            self.contacts.push(value);
+                        },
+                        "json");
+                }
+                self.removeContact = function (contact) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: contact.Self,
+                        success: function () {
+                            self.contacts.remove(contact);
+                        }
                     });
                 }
-                ko.applyBindings(new ContactsViewModel());    
-        </script>
-        }
-        <ul id="contacts" data-bind="foreach: contacts">
-            <li class="ui-widget-content ui-corner-all">
-                <h1 data-bind="text: Name" class="ui-widget-header"></h1>
-                <div><span data-bind="text: $data.Address || 'Address?'"></span></div>
-                <div>
-                    <span data-bind="text: $data.City || 'City?'"></span>,
-                    <span data-bind="text: $data.State || 'State?'"></span>
-                    <span data-bind="text: $data.Zip || 'Zip?'"></span>
-                </div>
-                <div data-bind="if: $data.Email"><a data-bind="attr: { href: 'mailto:' + Email }, text: Email"></a></div>
-                <div data-bind="ifnot: $data.Email"><span>Email?</span></div>
-                <div data-bind="if: $data.Twitter"><a data-bind="attr: { href: 'http://twitter.com/' + Twitter }, text: '@@' + Twitter"></a></div>
-                <div data-bind="ifnot: $data.Twitter"><span>Twitter?</span></div>
-                <p><a data-bind="attr: { href: Self }, click: $root.removeContact" class="removeContact ui-state-default ui-corner-all">Remove</a></p>
-            </li>
-        </ul>
-        <form id="addContact" data-bind="submit: addContact">
-            <fieldset>
-                <legend>Add New Contact</legend>
-                <ol>
-                    <li>
-                        <label for="Name">Name</label>
-                        <input type="text" name="Name" />
-                    </li>
-                    <li>
-                        <label for="Address">Address</label>
-                        <input type="text" name="Address" >
-                    </li>
-                    <li>
-                        <label for="City">City</label>
-                        <input type="text" name="City" />
-                    </li>
-                    <li>
-                        <label for="State">State</label>
-                        <input type="text" name="State" />
-                    </li>
-                    <li>
-                        <label for="Zip">Zip</label>
-                        <input type="text" name="Zip" />
-                    </li>
-                    <li>
-                        <label for="Email">E-mail</label>
-                        <input type="text" name="Email" />
-                    </li>
-                    <li>
-                        <label for="Twitter">Twitter</label>
-                        <input type="text" name="Twitter" />
-                    </li>
-                </ol>
-                <input type="submit" value="Add" />
-            </fieldset>
-        </form>
+
+                $.getJSON("api/contacts", function (data) {
+                    self.contacts(data);
+                });
+            }
+            ko.applyBindings(new ContactsViewModel());    
+    </script>
+    }
+    <ul id="contacts" data-bind="foreach: contacts">
+        <li class="ui-widget-content ui-corner-all">
+            <h1 data-bind="text: Name" class="ui-widget-header"></h1>
+            <div><span data-bind="text: $data.Address || 'Address?'"></span></div>
+            <div>
+                <span data-bind="text: $data.City || 'City?'"></span>,
+                <span data-bind="text: $data.State || 'State?'"></span>
+                <span data-bind="text: $data.Zip || 'Zip?'"></span>
+            </div>
+            <div data-bind="if: $data.Email"><a data-bind="attr: { href: 'mailto:' + Email }, text: Email"></a></div>
+            <div data-bind="ifnot: $data.Email"><span>Email?</span></div>
+            <div data-bind="if: $data.Twitter"><a data-bind="attr: { href: 'http://twitter.com/' + Twitter }, text: '@@' + Twitter"></a></div>
+            <div data-bind="ifnot: $data.Twitter"><span>Twitter?</span></div>
+            <p><a data-bind="attr: { href: Self }, click: $root.removeContact" class="removeContact ui-state-default ui-corner-all">Remove</a></p>
+        </li>
+    </ul>
+    <form id="addContact" data-bind="submit: addContact">
+        <fieldset>
+            <legend>Add New Contact</legend>
+            <ol>
+                <li>
+                    <label for="Name">Name</label>
+                    <input type="text" name="Name" />
+                </li>
+                <li>
+                    <label for="Address">Address</label>
+                    <input type="text" name="Address" >
+                </li>
+                <li>
+                    <label for="City">City</label>
+                    <input type="text" name="City" />
+                </li>
+                <li>
+                    <label for="State">State</label>
+                    <input type="text" name="State" />
+                </li>
+                <li>
+                    <label for="Zip">Zip</label>
+                    <input type="text" name="Zip" />
+                </li>
+                <li>
+                    <label for="Email">E-mail</label>
+                    <input type="text" name="Email" />
+                </li>
+                <li>
+                    <label for="Twitter">Twitter</label>
+                    <input type="text" name="Twitter" />
+                </li>
+            </ol>
+            <input type="submit" value="Add" />
+        </fieldset>
+    </form>
+    ```
 3. 右键单击 Content 文件夹并单击“添加”，然后单击“新建项...”。
 
     ![在 Content 文件夹中添加样式表上下文菜单][addcode005]
 4. 在“添加新项”对话框中，在右上的搜索框中输入 **Style**，然后选择“样式表”。![“添加新项”对话框][rxStyle]
 5. 将文件命名为 *Contacts.css* 并单击“添加”。将文件的内容替换为以下代码。
 
-        .column {
-            float: left;
-            width: 50%;
-            padding: 0;
-            margin: 5px 0;
-        }
-        form ol {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        form li {
-            padding: 1px;
-            margin: 3px;
-        }
-        form input[type="text"] {
-            width: 100%;
-        }
-        #addContact {
-            width: 300px;
-            float: left;
-            width:30%;
-        }
-        #contacts {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            float:left;
-            width: 70%;
-        }
-        #contacts li {
-            margin: 3px 3px 3px 0;
-            padding: 1px;
-            float: left;
-            width: 300px;
-            text-align: center;
-            background-image: none;
-            background-color: #F5F5F5;
-        }
-        #contacts li h1
-        {
-            padding: 0;
-            margin: 0;
-            background-image: none;
-            background-color: Orange;
-            color: White;
-            font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-        }
-        .removeContact, .viewImage
-        {
-            padding: 3px;
-            text-decoration: none;
-        }
+    ```
+    .column {
+        float: left;
+        width: 50%;
+        padding: 0;
+        margin: 5px 0;
+    }
+    form ol {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    form li {
+        padding: 1px;
+        margin: 3px;
+    }
+    form input[type="text"] {
+        width: 100%;
+    }
+    #addContact {
+        width: 300px;
+        float: left;
+        width:30%;
+    }
+    #contacts {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        float:left;
+        width: 70%;
+    }
+    #contacts li {
+        margin: 3px 3px 3px 0;
+        padding: 1px;
+        float: left;
+        width: 300px;
+        text-align: center;
+        background-image: none;
+        background-color: #F5F5F5;
+    }
+    #contacts li h1
+    {
+        padding: 0;
+        margin: 0;
+        background-image: none;
+        background-color: Orange;
+        color: White;
+        font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+    }
+    .removeContact, .viewImage
+    {
+        padding: 3px;
+        text-decoration: none;
+    }
+    ```
 
     该样式表将用作联系人管理器应用程序的布局、颜色和样式。
 6. 打开 *App\_Start\\BundleConfig.cs* 文件。
 7. 添加以下代码以注册 [Knockout](http://knockoutjs.com/index.html "KO") 插件。
 
-        bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                    "~/Scripts/knockout-{version}.js"));
+    ```
+    bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                "~/Scripts/knockout-{version}.js"));
+    ```
     此示例使用 knockout 来简化处理屏幕模板的动态 JavaScript 代码。
 8. 修改 contents/css 条目以注册 *contacts.css* 样式表。将以下行
 
-                 bundles.Add(new StyleBundle("~/Content/css").Include(
-                   "~/Content/bootstrap.css",
-                   "~/Content/site.css"));
+    ```
+             bundles.Add(new StyleBundle("~/Content/css").Include(
+               "~/Content/bootstrap.css",
+               "~/Content/site.css"));
+    ```
     更改为：
 
         bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -459,7 +481,9 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
                    "~/Content/site.css"));
 9. 在“程序包管理器控制台”中运行以下命令以安装 Knockout。
 
-        Install-Package knockoutjs
+    ```
+    Install-Package knockoutjs
+    ```
 
 ## 为 Web API Restful 接口添加控制器
 1. 在“解决方案资源管理器”中，右键单击“控制器”，然后依次单击“添加”和“控制器....”。
@@ -503,135 +527,143 @@ XSRF 攻击不同于网络钓鱼攻击。网络钓鱼攻击需要与受害者进
 1. 在“解决方案资源管理器”中，右键单击“ContactManager”项目并单击“添加”，然后单击“类”。
 2. 将文件命名为 *ValidateHttpAntiForgeryTokenAttribute.cs* 并添加以下代码：
 
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
-        using System.Net;
-        using System.Net.Http;
-        using System.Web.Helpers;
-        using System.Web.Http.Controllers;
-        using System.Web.Http.Filters;
-        using System.Web.Mvc;
-        namespace ContactManager.Filters
+    ```
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Helpers;
+    using System.Web.Http.Controllers;
+    using System.Web.Http.Filters;
+    using System.Web.Mvc;
+    namespace ContactManager.Filters
+    {
+        public class ValidateHttpAntiForgeryTokenAttribute : AuthorizationFilterAttribute
         {
-            public class ValidateHttpAntiForgeryTokenAttribute : AuthorizationFilterAttribute
+            public override void OnAuthorization(HttpActionContext actionContext)
             {
-                public override void OnAuthorization(HttpActionContext actionContext)
+                HttpRequestMessage request = actionContext.ControllerContext.Request;
+                try
                 {
-                    HttpRequestMessage request = actionContext.ControllerContext.Request;
-                    try
+                    if (IsAjaxRequest(request))
                     {
-                        if (IsAjaxRequest(request))
-                        {
-                            ValidateRequestHeader(request);
-                        }
-                        else
-                        {
-                            AntiForgery.Validate();
-                        }
+                        ValidateRequestHeader(request);
                     }
-                    catch (HttpAntiForgeryException e)
+                    else
                     {
-                        actionContext.Response = request.CreateErrorResponse(HttpStatusCode.Forbidden, e);
+                        AntiForgery.Validate();
                     }
                 }
-                private bool IsAjaxRequest(HttpRequestMessage request)
+                catch (HttpAntiForgeryException e)
                 {
-                    IEnumerable<string> xRequestedWithHeaders;
-                    if (request.Headers.TryGetValues("X-Requested-With", out xRequestedWithHeaders))
-                    {
-                        string headerValue = xRequestedWithHeaders.FirstOrDefault();
-                        if (!String.IsNullOrEmpty(headerValue))
-                        {
-                            return String.Equals(headerValue, "XMLHttpRequest", StringComparison.OrdinalIgnoreCase);
-                        }
-                    }
-                    return false;
-                }
-                private void ValidateRequestHeader(HttpRequestMessage request)
-                {
-                    string cookieToken = String.Empty;
-                    string formToken = String.Empty;
-                    IEnumerable<string> tokenHeaders;
-                    if (request.Headers.TryGetValues("RequestVerificationToken", out tokenHeaders))
-                    {
-                        string tokenValue = tokenHeaders.FirstOrDefault();
-                        if (!String.IsNullOrEmpty(tokenValue))
-                        {
-                            string[] tokens = tokenValue.Split(':');
-                            if (tokens.Length == 2)
-                            {
-                                cookieToken = tokens[0].Trim();
-                                formToken = tokens[1].Trim();
-                            }
-                        }
-                    }
-                    AntiForgery.Validate(cookieToken, formToken);
+                    actionContext.Response = request.CreateErrorResponse(HttpStatusCode.Forbidden, e);
                 }
             }
+            private bool IsAjaxRequest(HttpRequestMessage request)
+            {
+                IEnumerable<string> xRequestedWithHeaders;
+                if (request.Headers.TryGetValues("X-Requested-With", out xRequestedWithHeaders))
+                {
+                    string headerValue = xRequestedWithHeaders.FirstOrDefault();
+                    if (!String.IsNullOrEmpty(headerValue))
+                    {
+                        return String.Equals(headerValue, "XMLHttpRequest", StringComparison.OrdinalIgnoreCase);
+                    }
+                }
+                return false;
+            }
+            private void ValidateRequestHeader(HttpRequestMessage request)
+            {
+                string cookieToken = String.Empty;
+                string formToken = String.Empty;
+                IEnumerable<string> tokenHeaders;
+                if (request.Headers.TryGetValues("RequestVerificationToken", out tokenHeaders))
+                {
+                    string tokenValue = tokenHeaders.FirstOrDefault();
+                    if (!String.IsNullOrEmpty(tokenValue))
+                    {
+                        string[] tokens = tokenValue.Split(':');
+                        if (tokens.Length == 2)
+                        {
+                            cookieToken = tokens[0].Trim();
+                            formToken = tokens[1].Trim();
+                        }
+                    }
+                }
+                AntiForgery.Validate(cookieToken, formToken);
+            }
         }
+    }
+    ```
 3. 将以下 *using* 语句添加到联系人控制器以便你可以访问 **[ValidateHttpAntiForgeryToken]** 属性。
 
-        using ContactManager.Filters;
+    ```
+    using ContactManager.Filters;
+    ```
 4. 将 **[ValidateHttpAntiForgeryToken]** 属性添加到 **ContactsController** 的 Post 方法以保护其免受 XSRF 威胁。将其添加到 "PutContact"、"PostContact" 和 **DeleteContact** 操作方法。
 
-        [ValidateHttpAntiForgeryToken]
-            public IHttpActionResult PutContact(int id, Contact contact)
-            {
+    ```
+    [ValidateHttpAntiForgeryToken]
+        public IHttpActionResult PutContact(int id, Contact contact)
+        {
+    ```
 5. 更新 *Views\\Home\\Index.cshtml* 文件的 *Scripts* 部分以包含代码，从而获取 XSRF 令牌。
 
-         @section Scripts {
-            @Scripts.Render("~/bundles/knockout")
-            <script type="text/javascript">
-                @functions{
-                   public string TokenHeaderValue()
-                   {
-                      string cookieToken, formToken;
-                      AntiForgery.GetTokens(null, out cookieToken, out formToken);
-                      return cookieToken + ":" + formToken;                
-                   }
-                }
-
-               function ContactsViewModel() {
-                  var self = this;
-                  self.contacts = ko.observableArray([]);
-                  self.addContact = function () {
-
-                     $.ajax({
-                        type: "post",
-                        url: "api/contacts",
-                        data: $("#addContact").serialize(),
-                        dataType: "json",
-                        success: function (value) {
-                           self.contacts.push(value);
-                        },
-                        headers: {
-                           'RequestVerificationToken': '@TokenHeaderValue()'
-                        }
-                     });
-
-                  }
-                  self.removeContact = function (contact) {
-                     $.ajax({
-                        type: "DELETE",
-                        url: contact.Self,
-                        success: function () {
-                           self.contacts.remove(contact);
-                        },
-                        headers: {
-                           'RequestVerificationToken': '@TokenHeaderValue()'
-                        }
-
-                     });
-                  }
-
-                  $.getJSON("api/contacts", function (data) {
-                     self.contacts(data);
-                  });
+    ```
+     @section Scripts {
+        @Scripts.Render("~/bundles/knockout")
+        <script type="text/javascript">
+            @functions{
+               public string TokenHeaderValue()
+               {
+                  string cookieToken, formToken;
+                  AntiForgery.GetTokens(null, out cookieToken, out formToken);
+                  return cookieToken + ":" + formToken;                
                }
-               ko.applyBindings(new ContactsViewModel());
-            </script>
-         }
+            }
+
+           function ContactsViewModel() {
+              var self = this;
+              self.contacts = ko.observableArray([]);
+              self.addContact = function () {
+
+                 $.ajax({
+                    type: "post",
+                    url: "api/contacts",
+                    data: $("#addContact").serialize(),
+                    dataType: "json",
+                    success: function (value) {
+                       self.contacts.push(value);
+                    },
+                    headers: {
+                       'RequestVerificationToken': '@TokenHeaderValue()'
+                    }
+                 });
+
+              }
+              self.removeContact = function (contact) {
+                 $.ajax({
+                    type: "DELETE",
+                    url: contact.Self,
+                    success: function () {
+                       self.contacts.remove(contact);
+                    },
+                    headers: {
+                       'RequestVerificationToken': '@TokenHeaderValue()'
+                    }
+
+                 });
+              }
+
+              $.getJSON("api/contacts", function (data) {
+                 self.contacts(data);
+              });
+           }
+           ko.applyBindings(new ContactsViewModel());
+        </script>
+     }
+    ```
 
 ## 将应用程序更新发布到 Azure 和 SQL 数据库
 若要发布应用程序，可重复之前遵循的过程。

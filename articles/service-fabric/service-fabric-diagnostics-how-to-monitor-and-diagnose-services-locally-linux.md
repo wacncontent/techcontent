@@ -34,17 +34,21 @@ ms.author: subramar
 
 以下代码片段包含一个示例配置：
 
-    handlers = java.util.logging.FileHandler
+```
+handlers = java.util.logging.FileHandler
 
-    java.util.logging.FileHandler.level = ALL
-    java.util.logging.FileHandler.formatter = java.util.logging.SimpleFormatter
-    java.util.logging.FileHandler.limit = 1024000
-    java.util.logging.FileHandler.count = 10
-    java.util.logging.FileHandler.pattern = /tmp/servicefabric/logs/mysfapp%u.%g.log             
+java.util.logging.FileHandler.level = ALL
+java.util.logging.FileHandler.formatter = java.util.logging.SimpleFormatter
+java.util.logging.FileHandler.limit = 1024000
+java.util.logging.FileHandler.count = 10
+java.util.logging.FileHandler.pattern = /tmp/servicefabric/logs/mysfapp%u.%g.log             
+```
 
 `app.properties` 文件指向的文件夹必须存在。创建 `app.properties` 文件后，还需要修改 `<applicationfolder>/<servicePkg>/Code/` 文件夹中的入口点脚本 `entrypoint.sh`，将属性 `java.util.logging.config.file` 设置为 `app.propertes` 文件。该入口点应如以下代码片段中所示：
 
-    java -Djava.library.path=$LD_LIBRARY_PATH -Djava.util.logging.config.file=<path to app.properties> -jar <service name>.jar
+```
+java -Djava.library.path=$LD_LIBRARY_PATH -Djava.util.logging.config.file=<path to app.properties> -jar <service name>.jar
+```
 
 此设置会导致在 `/tmp/servicefabric/logs/` 中以轮替方式收集日志。使用 **%u** 和 **%g** 可以创建更多文件，文件名为 mysfapp0.log、mysfapp1.log，依此类推。默认情况下，如果未显式配置处理程序，将会注册控制台处理程序。可以在 /var/log/syslog 下查看 syslog 中的日志。
 
@@ -56,55 +60,61 @@ ms.author: subramar
 
 首先需要包括 System.Diagnostics.Tracing，以便将日志写入内存、输出流或控制台文件。若要使用 EventSource 进行日志记录，请将以下项目添加到 project.json：
 
-        "System.Diagnostics.StackTrace": "4.0.1"
+```
+    "System.Diagnostics.StackTrace": "4.0.1"
+```
 
 可以使用自定义 EventListener 侦听服务事件，然后将它们相应地重定向到跟踪文件。下面的代码片段展示使用 EventSource 和自定义 EventListener 进行日志记录的实现示例：
 
-     public class ServiceEventSource : EventSource
-     {
-            public static ServiceEventSource Current = new ServiceEventSource();
+```
+ public class ServiceEventSource : EventSource
+ {
+        public static ServiceEventSource Current = new ServiceEventSource();
 
-            [NonEvent]
-            public void Message(string message, params object[] args)
+        [NonEvent]
+        public void Message(string message, params object[] args)
+        {
+            if (this.IsEnabled())
             {
-                if (this.IsEnabled())
-                {
-                    var finalMessage = string.Format(message, args);
-                    this.Message(finalMessage);
-                }
-            }
-
-            // TBD: Need to add method for sample event.
-
-    }
-
-       internal class ServiceEventListener : EventListener
-       {
-
-            protected override void OnEventSourceCreated(EventSource eventSource)
-            {
-                EnableEvents(eventSource, EventLevel.LogAlways, EventKeywords.All);
-            }
-            protected override void OnEventWritten(EventWrittenEventArgs eventData)
-            {
-                using (StreamWriter Out = new StreamWriter( new FileStream("/tmp/MyServiceLog.txt", FileMode.Append)))           
-            {  
-                     // report all event information               
-              Out.Write(" {0} ",  Write(eventData.Task.ToString(), eventData.EventName, eventData.EventId.ToString(), eventData.Level,""));
-                    if (eventData.Message != null)              
-                Out.WriteLine(eventData.Message, eventData.Payload.ToArray());              
-                else             
-            { 
-                        string[] sargs = eventData.Payload != null ? eventData.Payload.Select(o => o.ToString()).ToArray() : null; 
-                        Out.WriteLine("({0}).", sargs != null ? string.Join(", ", sargs) : "");             
-            }
-               }
+                var finalMessage = string.Format(message, args);
+                this.Message(finalMessage);
             }
         }
 
+        // TBD: Need to add method for sample event.
+
+}
+
+   internal class ServiceEventListener : EventListener
+   {
+
+        protected override void OnEventSourceCreated(EventSource eventSource)
+        {
+            EnableEvents(eventSource, EventLevel.LogAlways, EventKeywords.All);
+        }
+        protected override void OnEventWritten(EventWrittenEventArgs eventData)
+        {
+            using (StreamWriter Out = new StreamWriter( new FileStream("/tmp/MyServiceLog.txt", FileMode.Append)))           
+        {  
+                 // report all event information               
+          Out.Write(" {0} ",  Write(eventData.Task.ToString(), eventData.EventName, eventData.EventId.ToString(), eventData.Level,""));
+                if (eventData.Message != null)              
+            Out.WriteLine(eventData.Message, eventData.Payload.ToArray());              
+            else             
+        { 
+                    string[] sargs = eventData.Payload != null ? eventData.Payload.Select(o => o.ToString()).ToArray() : null; 
+                    Out.WriteLine("({0}).", sargs != null ? string.Join(", ", sargs) : "");             
+        }
+           }
+        }
+    }
+```
+
 上述代码片段将日志输出到 `/tmp/MyServiceLog.txt` 中的文件。此文件名需要相应地更新。如果想要将日志重定向到控制台，可在自定义 EventListener 类中使用以下片段：
 
-    public static TextWriter Out = Console.Out;
+```
+public static TextWriter Out = Console.Out;
+```
 
 [C# 示例](https://github.com/Azure-Samples/service-fabric-dotnet-core-getting-started)中的示例使用 EventSource 和自定义 EventListener 将事件记录到文件。
 

@@ -43,21 +43,25 @@ ms.author: robmcm
 
 示例（所示示例包含 **processPath**）：
 
-    processPath="%HOME%\site\wwwroot\bin\tomcat\bin\catalina.bat"
-    arguments="start"
+```
+processPath="%HOME%\site\wwwroot\bin\tomcat\bin\catalina.bat"
+arguments="start"
 
-    processPath="%JAVA_HOME\bin\java.exe"
-    arguments="-Djava.net.preferIPv4Stack=true -Djetty.port=%HTTP\_PLATFORM_PORT% -Djetty.base=";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115"; -jar ";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115\start.jar";"
+processPath="%JAVA_HOME\bin\java.exe"
+arguments="-Djava.net.preferIPv4Stack=true -Djetty.port=%HTTP\_PLATFORM_PORT% -Djetty.base=";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115"; -jar ";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115\start.jar";"
+```
 
 **processPath** - 为 HTTP 请求启动侦听进程的可执行文件或脚本的路径。
 
 示例:
 
-    processPath="%JAVA_HOME%\bin\java.exe"
+```
+processPath="%JAVA_HOME%\bin\java.exe"
 
-    processPath="%HOME%\site\wwwroot\bin\tomcat\bin\startup.bat"
+processPath="%HOME%\site\wwwroot\bin\tomcat\bin\startup.bat"
 
-    processPath="%HOME%\site\wwwroot\bin\tomcat\bin\catalina.bat"
+processPath="%HOME%\site\wwwroot\bin\tomcat\bin\catalina.bat"
+```
 
 **rapidFailsPerMinute**（默认值=10） 允许 **processPath** 中指定的进程每分钟崩溃的次数。如果超出此限制，则 **HttpPlatformHandler** 将在每分钟达到此限制后的剩余时间内停止启动该进程。
 
@@ -85,23 +89,25 @@ ms.author: robmcm
 ### Tomcat
 尽管应用服务 Web 应用提供两个 Tomcat 变体，但仍可以上载客户特定的实例。使用不同 JVM 安装 Tomcat 的示例如下。
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <configuration>
-      <system.webServer>
-        <handlers>
-          <add name="httpPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
-        </handlers>
-        <httpPlatform processPath="%HOME%\site\wwwroot\bin\tomcat\bin\startup.bat" 
-            arguments="">
-          <environmentVariables>
-            <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
-            <environmentVariable name="CATALINA_HOME" value="%HOME%\site\wwwroot\bin\tomcat" />
-            <environmentVariable name="JRE_HOME" value="%HOME%\site\wwwroot\bin\java" /> <!-- optional, if not specified, this will default to %programfiles%\Java -->
-            <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true" />
-          </environmentVariables>
-        </httpPlatform>
-      </system.webServer>
-    </configuration>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+    <handlers>
+      <add name="httpPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
+    </handlers>
+    <httpPlatform processPath="%HOME%\site\wwwroot\bin\tomcat\bin\startup.bat" 
+        arguments="">
+      <environmentVariables>
+        <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
+        <environmentVariable name="CATALINA_HOME" value="%HOME%\site\wwwroot\bin\tomcat" />
+        <environmentVariable name="JRE_HOME" value="%HOME%\site\wwwroot\bin\java" /> <!-- optional, if not specified, this will default to %programfiles%\Java -->
+        <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true" />
+      </environmentVariables>
+    </httpPlatform>
+  </system.webServer>
+</configuration>
+```
 
 对于 Tomcat，需要更改少量配置。需要编辑 Server.xml 并进行如下设置：
 
@@ -117,20 +123,22 @@ ms.author: robmcm
 
 和 Tomcat 一样，客户可以上载自己的 Jetty 实例。对于运行完整安装的 Jetty，配置应如下所示：
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <configuration>
-      <system.webServer>
-        <handlers>
-          <add name="httppPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
-        </handlers>
-        <httpPlatform processPath="%JAVA_HOME%\bin\java.exe" 
-             arguments="-Djava.net.preferIPv4Stack=true -Djetty.port=%HTTP_PLATFORM_PORT% -Djetty.base=";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115"; -jar ";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115\start.jar";"
-            startupTimeLimit="20"
-          startupRetryCount="10"
-          stdoutLogEnabled="true">
-        </httpPlatform>
-      </system.webServer>
-    </configuration>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+    <handlers>
+      <add name="httppPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified" />
+    </handlers>
+    <httpPlatform processPath="%JAVA_HOME%\bin\java.exe" 
+         arguments="-Djava.net.preferIPv4Stack=true -Djetty.port=%HTTP_PLATFORM_PORT% -Djetty.base=";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115"; -jar ";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115\start.jar";"
+        startupTimeLimit="20"
+      startupRetryCount="10"
+      stdoutLogEnabled="true">
+    </httpPlatform>
+  </system.webServer>
+</configuration>
+```
 
 应在 start.ini 中更改 Jetty 配置并设置 `java.net.preferIPv4Stack=true`。
 
@@ -142,25 +150,27 @@ ms.author: robmcm
 2. 下载 Apache Maven 3.0.5（与 Hudson 兼容），并将其放在 **d:\\home\\site\\wwwroot** 中。
 3. 在 **d:\\home\\site\\wwwroot** 中创建 web.config，并粘贴以下内容：
 
-        <?xml version="1.0" encoding="UTF-8"?>
-        <configuration>
-          <system.webServer>
-            <handlers>
-              <add name="httppPlatformHandler" path="*" verb="*" 
-        modules="httpPlatformHandler" resourceType="Unspecified" />
-            </handlers>
-            <httpPlatform processPath="%AZURE_TOMCAT7_HOME%\bin\startup.bat"
-        startupTimeLimit="20"
-        startupRetryCount="10">
-        <environmentVariables>
-          <environmentVariable name="HUDSON_HOME" 
-        value="%HOME%\site\wwwroot\hudson_home" />
-          <environmentVariable name="JAVA_OPTS" 
-        value="-Djava.net.preferIPv4Stack=true -Duser.home=%HOME%/site/wwwroot/user_home -Dhudson.DNSMultiCast.disabled=true" />
-        </environmentVariables>            
-            </httpPlatform>
-          </system.webServer>
-        </configuration>
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+      <system.webServer>
+        <handlers>
+          <add name="httppPlatformHandler" path="*" verb="*" 
+    modules="httpPlatformHandler" resourceType="Unspecified" />
+        </handlers>
+        <httpPlatform processPath="%AZURE_TOMCAT7_HOME%\bin\startup.bat"
+    startupTimeLimit="20"
+    startupRetryCount="10">
+    <environmentVariables>
+      <environmentVariable name="HUDSON_HOME" 
+    value="%HOME%\site\wwwroot\hudson_home" />
+      <environmentVariable name="JAVA_OPTS" 
+    value="-Djava.net.preferIPv4Stack=true -Duser.home=%HOME%/site/wwwroot/user_home -Dhudson.DNSMultiCast.disabled=true" />
+    </environmentVariables>            
+        </httpPlatform>
+      </system.webServer>
+    </configuration>
+    ```
 
     此时，可以重新启动 Web 应用，使所做的更改生效。连接到 http://yourwebapp/hudson 以启动 Hudson。
 
@@ -195,31 +205,35 @@ ms.author: robmcm
 
 在 **liferay\\tomcat-7.0.40\\webapps\\ROOT\\WEB-INF\\classes** 文件夹中，创建文件 **portal-ext.properties**。此文件需要包含一行如下所示的内容：
 
-    liferay.home=%HOME%/site/wwwroot/liferay
+```
+liferay.home=%HOME%/site/wwwroot/liferay
+```
 
 在 tomcat-7.0.40 文件夹所在的目录级别中，创建包含以下内容的文件 **web.config**：
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <configuration>
-      <system.webServer>
-        <handlers>
-    <add name="httpPlatformHandler" path="*" verb="*"
-         modules="httpPlatformHandler" resourceType="Unspecified" />
-        </handlers>
-        <httpPlatform processPath="%HOME%\site\wwwroot\tomcat-7.0.40\bin\catalina.bat" 
-                      arguments="run" 
-                      startupTimeLimit="10" 
-                      requestTimeout="00:10:00" 
-                      stdoutLogEnabled="true">
-          <environmentVariables>
-      <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
-      <environmentVariable name="CATALINA_HOME" value="%HOME%\site\wwwroot\tomcat-7.0.40" />
-            <environmentVariable name="JRE_HOME" value="D:\Program Files\Java\jdk1.7.0_51" /> 
-            <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true" />
-          </environmentVariables>
-        </httpPlatform>
-      </system.webServer>
-    </configuration>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+    <handlers>
+<add name="httpPlatformHandler" path="*" verb="*"
+     modules="httpPlatformHandler" resourceType="Unspecified" />
+    </handlers>
+    <httpPlatform processPath="%HOME%\site\wwwroot\tomcat-7.0.40\bin\catalina.bat" 
+                  arguments="run" 
+                  startupTimeLimit="10" 
+                  requestTimeout="00:10:00" 
+                  stdoutLogEnabled="true">
+      <environmentVariables>
+  <environmentVariable name="CATALINA_OPTS" value="-Dport.http=%HTTP_PLATFORM_PORT%" />
+  <environmentVariable name="CATALINA_HOME" value="%HOME%\site\wwwroot\tomcat-7.0.40" />
+        <environmentVariable name="JRE_HOME" value="D:\Program Files\Java\jdk1.7.0_51" /> 
+        <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true" />
+      </environmentVariables>
+    </httpPlatform>
+  </system.webServer>
+</configuration>
+```
 
 在 **httpPlatform** 块中，将 **requestTimeout** 设置为“00:10:00”。可以减少此时间，但随后在引导 Liferay 时可能会看到超时错误。如果更改此值，还应修改 tomcat server.xml 中的**connectionTimeout**。
 

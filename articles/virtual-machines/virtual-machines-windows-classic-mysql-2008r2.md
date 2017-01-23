@@ -99,7 +99,9 @@ ms.author: cynthn
 
 若要添加 Windows 防火墙规则以允许来自 Internet 的 MySQL 流量，请在 MySQL Server 虚拟机上提升的 Windows PowerShell 命令提示符下运行以下命令。
 
-    New-NetFirewallRule -DisplayName "MySQL56" -Direction Inbound –Protocol TCP –LocalPort 3306 -Action Allow -Profile Public
+```
+New-NetFirewallRule -DisplayName "MySQL56" -Direction Inbound –Protocol TCP –LocalPort 3306 -Action Allow -Profile Public
+```
 
 ## 测试你的远程连接
 
@@ -112,11 +114,15 @@ ms.author: cynthn
 
 3. 从运行 MySQL 的本地计算机或 MySQL 客户端上，运行以下命令，以便以 MySQL 用户身份登录。
 
-        mysql -u <yourMysqlUsername> -p -h <yourDNSname>
+    ```
+    mysql -u <yourMysqlUsername> -p -h <yourDNSname>
+    ```
 
     例如，如果 MySQL 用户名为 dbadmin3，虚拟机的 DNS 名称为 testmysql.chinacloudapp.cn，请使用以下命令。
 
-        mysql -u dbadmin3 -p -h testmysql.chinacloudapp.cn
+    ```
+    mysql -u dbadmin3 -p -h testmysql.chinacloudapp.cn
+    ```
 
 ## 下一步
 

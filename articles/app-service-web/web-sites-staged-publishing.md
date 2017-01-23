@@ -152,10 +152,12 @@ ms.author: cephalin
 ## <a name="Warm-up"></a>交换前的自定义准备工作
 某些应用可能需要自定义的准备操作。web.config 中的 `applicationInitialization` 配置元素允许指定收到请求之前要执行的自定义初始化操作。交换操作将等待此自定义准备操作完成。以下是 web.config 片段的示例。
 
-    <applicationInitialization>
-        <add initializationPage="/" hostName="[app hostname]" />
-        <add initializationPage="/Home/About" hostname="[app hostname]" />
-    </applicationInitialization>
+```
+<applicationInitialization>
+    <add initializationPage="/" hostName="[app hostname]" />
+    <add initializationPage="/Home/About" hostname="[app hostname]" />
+</applicationInitialization>
+```
 
 ## <a name="Delete"></a>删除部署槽
 在部署槽的边栏选项卡中，打开部署槽的边栏选项卡，单击“概述”（默认页），然后在命令栏中单击“删除”。

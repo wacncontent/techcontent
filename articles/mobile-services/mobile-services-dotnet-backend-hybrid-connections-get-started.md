@@ -53,13 +53,15 @@ ms.author: glenga
 
 2. 在“解决方案资源管理器”中打开 Web.config 文件，找到 **connectionStrings** 节，添加类似于以下内容的新 SqlClient 项目，此项目指向本地 SQL Server 数据库：
 
-        <add name="OnPremisesDBConnection" 
-         connectionString="Data Source=OnPremisesServer,1433;
-         Initial Catalog=OnPremisesDB;
-         User ID=HybridConnectionLogin;
-         Password=<**secure_password**>;
-         MultipleActiveResultSets=True"
-         providerName="System.Data.SqlClient" />
+    ```
+    <add name="OnPremisesDBConnection" 
+     connectionString="Data Source=OnPremisesServer,1433;
+     Initial Catalog=OnPremisesDB;
+     User ID=HybridConnectionLogin;
+     Password=<**secure_password**>;
+     MultipleActiveResultSets=True"
+     providerName="System.Data.SqlClient" />
+    ```
 
     请记得将这个字符串中的 `<**secure_password**>` 替换成你为 *HbyridConnectionLogin* 创建的密码。
 
@@ -72,13 +74,15 @@ ms.author: glenga
 
 5. 修改 **DbContext** 实例构造函数，以将 `OnPremisesDBConnection` 值传递到类似于以下代码段的基本 **DbContext** 构造函数：
 
-        public class hybridService1Context : DbContext
+    ```
+    public class hybridService1Context : DbContext
+    {
+        public hybridService1Context()
+            : base("OnPremisesDBConnection")
         {
-            public hybridService1Context()
-                : base("OnPremisesDBConnection")
-            {
-            }
         }
+    }
+    ```
 
     现在，服务将使用新的 SQL Server 数据库连接。
 ##在本地测试数据库连接
@@ -99,7 +103,9 @@ ms.author: glenga
 
 3. 添加名为 `OnPremisesDBConnection` 的新 **SQL Server** 连接字符串，其值如下：
 
-        Server=OnPremisesServer,1433;Database=OnPremisesDB;User ID=HybridConnectionsLogin;Password=<**secure_password**>
+    ```
+    Server=OnPremisesServer,1433;Database=OnPremisesDB;User ID=HybridConnectionsLogin;Password=<**secure_password**>
+    ```
 
     将 `<**secure_password**>` 替换为 *HybridConnectionLogin* 的安全密码。
 

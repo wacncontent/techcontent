@@ -72,15 +72,17 @@ DocumentDB 提供名为**集合**的弹性存储和吞吐量容器。集合中�
 ### ReadDocumentFeed API
 让我们简单了解一下 ReadDocumentFeed 的工作原理。DocumentDB 支持通过 `ReadDocumentFeed` API 读取集合中文档的源。例如，以下请求返回 `serverlogs` 集合中的文档页面。
 
-    GET https://mydocumentdb.documents.azure.com/dbs/smalldb/colls/smallcoll HTTP/1.1
-    x-ms-date: Tue, 22 Nov 2016 17:05:14 GMT
-    authorization: type%3dmaster%26ver%3d1.0%26sig%3dgo7JEogZDn6ritWhwc5hX%2fNTV4wwM1u9V2Is1H4%2bDRg%3d
-    Cache-Control: no-cache
-    x-ms-consistency-level: Strong
-    User-Agent: Microsoft.Azure.Documents.Client/1.10.27.5
-    x-ms-version: 2016-07-11
-    Accept: application/json
-    Host: mydocumentdb.documents.azure.com
+```
+GET https://mydocumentdb.documents.azure.com/dbs/smalldb/colls/smallcoll HTTP/1.1
+x-ms-date: Tue, 22 Nov 2016 17:05:14 GMT
+authorization: type%3dmaster%26ver%3d1.0%26sig%3dgo7JEogZDn6ritWhwc5hX%2fNTV4wwM1u9V2Is1H4%2bDRg%3d
+Cache-Control: no-cache
+x-ms-consistency-level: Strong
+User-Agent: Microsoft.Azure.Documents.Client/1.10.27.5
+x-ms-version: 2016-07-11
+Accept: application/json
+Host: mydocumentdb.documents.azure.com
+```
 
 可以使用 `x-ms-max-item-count` 限制结果；可以通过使用前一响应中返回的 `x-ms-continuation` 标头重新提交请求来恢复读取。在单个客户端中执行时，`ReadDocumentFeed` 将以串行方式循环访问各分区的结果。
 
@@ -90,12 +92,14 @@ DocumentDB 提供名为**集合**的弹性存储和吞吐量容器。集合中�
 
 还可以使用某个支持的 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 检索文档源。例如，下面的代码片段演示如何在 .NET 中执行 ReadDocumentFeed。
 
-    FeedResponse<dynamic> feedResponse = null;
-    do
-    {
-        feedResponse = await client.ReadDocumentFeedAsync(collection, new FeedOptions { MaxItemCount = -1 });
-    }
-    while (feedResponse.ResponseContinuation != null);
+```
+FeedResponse<dynamic> feedResponse = null;
+do
+{
+    feedResponse = await client.ReadDocumentFeedAsync(collection, new FeedOptions { MaxItemCount = -1 });
+}
+while (feedResponse.ResponseContinuation != null);
+```
 
 > [!NOTE]
 更改源需要 SDK 1.11.0 和更高版本（目前以个人预览版提供）
@@ -115,38 +119,42 @@ DocumentDB 提供名为**集合**的弹性存储和吞吐量容器。集合中�
 ### 检索集合的分区键范围
 可以通过请求集合中的 `pkranges` 资源来检索分区键范围。例如，以下请求检索 `serverlogs` 集合的分区键范围列表：
 
-    GET https://querydemo.documents.azure.com/dbs/bigdb/colls/serverlogs/pkranges HTTP/1.1
-    x-ms-date: Tue, 15 Nov 2016 07:26:51 GMT
-    authorization: type%3dmaster%26ver%3d1.0%26sig%3dEConYmRgDExu6q%2bZ8GjfUGOH0AcOx%2behkancw3LsGQ8%3d
-    x-ms-consistency-level: Session
-    x-ms-version: 2016-07-11
-    Accept: application/json
-    Host: querydemo.documents.azure.com
+```
+GET https://querydemo.documents.azure.com/dbs/bigdb/colls/serverlogs/pkranges HTTP/1.1
+x-ms-date: Tue, 15 Nov 2016 07:26:51 GMT
+authorization: type%3dmaster%26ver%3d1.0%26sig%3dEConYmRgDExu6q%2bZ8GjfUGOH0AcOx%2behkancw3LsGQ8%3d
+x-ms-consistency-level: Session
+x-ms-version: 2016-07-11
+Accept: application/json
+Host: querydemo.documents.azure.com
+```
 
 此请求返回以下响应，其中包含有关分区键范围的元数据：
 
-    HTTP/1.1 200 Ok
-    Content-Type: application/json
-    x-ms-item-count: 25
-    x-ms-schemaversion: 1.1
-    Date: Tue, 15 Nov 2016 07:26:51 GMT
+```
+HTTP/1.1 200 Ok
+Content-Type: application/json
+x-ms-item-count: 25
+x-ms-schemaversion: 1.1
+Date: Tue, 15 Nov 2016 07:26:51 GMT
 
-    {
-       "_rid":"qYcAAPEvJBQ=",
-       "PartitionKeyRanges":[
-          {
-             "_rid":"qYcAAPEvJBQCAAAAAAAAUA==",
-             "id":"0",
-             "_etag":"\"00002800-0000-0000-0000-580ac4ea0000\"",
-             "minInclusive":"",
-             "maxExclusive":"05C1CFFFFFFFF8",
-             "_self":"dbs\/qYcAAA==\/colls\/qYcAAPEvJBQ=\/pkranges\/qYcAAPEvJBQCAAAAAAAAUA==\/",
-             "_ts":1477100776
-          },
-          ...
-       ],
-       "_count": 25
-    }
+{
+   "_rid":"qYcAAPEvJBQ=",
+   "PartitionKeyRanges":[
+      {
+         "_rid":"qYcAAPEvJBQCAAAAAAAAUA==",
+         "id":"0",
+         "_etag":"\"00002800-0000-0000-0000-580ac4ea0000\"",
+         "minInclusive":"",
+         "maxExclusive":"05C1CFFFFFFFF8",
+         "_self":"dbs\/qYcAAA==\/colls\/qYcAAPEvJBQ=\/pkranges\/qYcAAPEvJBQCAAAAAAAAUA==\/",
+         "_ts":1477100776
+      },
+      ...
+   ],
+   "_count": 25
+}
+```
 
 **分区键范围属性**：每个分区键范围包括下表中的元数据属性：
 
@@ -174,15 +182,17 @@ DocumentDB 提供名为**集合**的弹性存储和吞吐量容器。集合中�
 
 可以使用支持的 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 之一获取此值。例如，以下代码片段演示如何在 .NET 中检索分区键范围。
 
-    List<PartitionKeyRange> partitionKeyRanges = new List<PartitionKeyRange>();
-    FeedResponse<PartitionKeyRange> response;
+```
+List<PartitionKeyRange> partitionKeyRanges = new List<PartitionKeyRange>();
+FeedResponse<PartitionKeyRange> response;
 
-    do
-    {
-        response = await client.ReadPartitionKeyRangeFeedAsync(collection);
-        partitionKeyRanges.AddRange(response);
-    }
-    while (response.ResponseContinuation != null);
+do
+{
+    response = await client.ReadPartitionKeyRangeFeedAsync(collection);
+    partitionKeyRanges.AddRange(response);
+}
+while (response.ResponseContinuation != null);
+```
 
 DocumentDB 支持通过设置可选的 `x-ms-documentdb-partitionkeyrangeid` 标头按分区键范围检索文档。
 
@@ -240,87 +250,95 @@ ReadDocumentFeed 支持使用以下方案/任务对 DocumentDB 集合中的更�
 
 以下示例请求通过逻辑版本/ ETag `28535` 和分区键范围 `16` 返回集合中发生的所有增量更改：
 
-    GET https://mydocumentdb.documents.azure.com/dbs/bigdb/colls/bigcoll/docs HTTP/1.1
-    x-ms-max-item-count: 1
-    If-None-Match: "28535"
-    A-IM: Incremental feed
-    x-ms-documentdb-partitionkeyrangeid: 16
-    x-ms-date: Tue, 22 Nov 2016 20:43:01 GMT
-    authorization: type%3dmaster%26ver%3d1.0%26sig%3dzdpL2QQ8TCfiNbW%2fEcT88JHNvWeCgDA8gWeRZ%2btfN5o%3d
-    x-ms-version: 2016-07-11
-    Accept: application/json
-    Host: mydocumentdb.documents.azure.com
+```
+GET https://mydocumentdb.documents.azure.com/dbs/bigdb/colls/bigcoll/docs HTTP/1.1
+x-ms-max-item-count: 1
+If-None-Match: "28535"
+A-IM: Incremental feed
+x-ms-documentdb-partitionkeyrangeid: 16
+x-ms-date: Tue, 22 Nov 2016 20:43:01 GMT
+authorization: type%3dmaster%26ver%3d1.0%26sig%3dzdpL2QQ8TCfiNbW%2fEcT88JHNvWeCgDA8gWeRZ%2btfN5o%3d
+x-ms-version: 2016-07-11
+Accept: application/json
+Host: mydocumentdb.documents.azure.com
+```
 
 更改已按分区键范围内每个分区键值中的时间排序。无法保证各分区键值中的顺序一致。如果结果太多，无法在一个页面中显示，可以使用 `If-None-Match` 标头（其值等于前一响应中的 `etag`）重新提交请求来阅读下一页结果。如果在存储过程或触发器中以事务方式更新了多个文档，这些文档都会在同一个响应页面中返回。
 
 .NET SDK 提供 `CreateDocumentChangeFeedQuery` 和 `ChangeFeedOptions` 帮助器类来访问对集合所做的更改。以下代码片段演示如何在单个客户端中使用.NET SDK 检索从一开始所做的全部更改。
 
-    private async Task<Dictionary<string, string>> GetChanges(
-        DocumentClient client,
-        string collection,
-        Dictionary<string, string> checkpoints)
+```
+private async Task<Dictionary<string, string>> GetChanges(
+    DocumentClient client,
+    string collection,
+    Dictionary<string, string> checkpoints)
+{
+    List<PartitionKeyRange> partitionKeyRanges = new List<PartitionKeyRange>();
+    FeedResponse<PartitionKeyRange> pkRangesResponse;
+
+    do
     {
-        List<PartitionKeyRange> partitionKeyRanges = new List<PartitionKeyRange>();
-        FeedResponse<PartitionKeyRange> pkRangesResponse;
-
-        do
-        {
-            pkRangesResponse = await client.ReadPartitionKeyRangeFeedAsync(collection);
-            partitionKeyRanges.AddRange(pkRangesResponse);
-        }
-        while (pkRangesResponse.ResponseContinuation != null);
-
-        foreach (PartitionKeyRange pkRange in partitionKeyRanges)
-        {
-            string continuation = null;
-            checkpoints.TryGetValue(pkRange.Id, out continuation);
-
-            IDocumentQuery<Document> query = client.CreateDocumentChangeFeedQuery(
-                collection,
-                new ChangeFeedOptions
-                {
-                    PartitionKeyRangeId = pkRange.Id,
-                    StartFromBeginning = true,
-                    RequestContinuation = continuation,
-                    MaxItemCount = 1
-                });
-
-            while (query.HasMoreResults)
-            {
-                FeedResponse<DeviceReading> readChangesResponse = query.ExecuteNextAsync<DeviceReading>().Result;
-
-                foreach (DeviceReading changedDocument in readChangesResponse)
-                {
-                    Console.WriteLine(changedDocument.Id);
-                }
-
-                checkpoints[pkRange.Id] = readChangesResponse.ResponseContinuation;
-            }
-        }
-
-        return checkpoints;
+        pkRangesResponse = await client.ReadPartitionKeyRangeFeedAsync(collection);
+        partitionKeyRanges.AddRange(pkRangesResponse);
     }
+    while (pkRangesResponse.ResponseContinuation != null);
+
+    foreach (PartitionKeyRange pkRange in partitionKeyRanges)
+    {
+        string continuation = null;
+        checkpoints.TryGetValue(pkRange.Id, out continuation);
+
+        IDocumentQuery<Document> query = client.CreateDocumentChangeFeedQuery(
+            collection,
+            new ChangeFeedOptions
+            {
+                PartitionKeyRangeId = pkRange.Id,
+                StartFromBeginning = true,
+                RequestContinuation = continuation,
+                MaxItemCount = 1
+            });
+
+        while (query.HasMoreResults)
+        {
+            FeedResponse<DeviceReading> readChangesResponse = query.ExecuteNextAsync<DeviceReading>().Result;
+
+            foreach (DeviceReading changedDocument in readChangesResponse)
+            {
+                Console.WriteLine(changedDocument.Id);
+            }
+
+            checkpoints[pkRange.Id] = readChangesResponse.ResponseContinuation;
+        }
+    }
+
+    return checkpoints;
+}
+```
 
 以下代码片段演示如何使用更改源支持和上述函数，在 DocumentDB 中实时处理更改。第一个调用返回集合中的所有文档，第二个调用仅返回自上一个检查点后创建的两个文档。
 
-    // Returns all documents in the collection.
-    Dictionary<string, string> checkpoints = await GetChanges(client, collection, new Dictionary<string, string>());
+```
+// Returns all documents in the collection.
+Dictionary<string, string> checkpoints = await GetChanges(client, collection, new Dictionary<string, string>());
 
-    await client.CreateDocumentAsync(collection, new DeviceReading { DeviceId = "xsensr-201", MetricType = "Temperature", Unit = "Celsius", MetricValue = 1000 });
-    await client.CreateDocumentAsync(collection, new DeviceReading { DeviceId = "xsensr-212", MetricType = "Pressure", Unit = "psi", MetricValue = 1000 });
+await client.CreateDocumentAsync(collection, new DeviceReading { DeviceId = "xsensr-201", MetricType = "Temperature", Unit = "Celsius", MetricValue = 1000 });
+await client.CreateDocumentAsync(collection, new DeviceReading { DeviceId = "xsensr-212", MetricType = "Pressure", Unit = "psi", MetricValue = 1000 });
 
-    // Returns only the two documents created above.
-    checkpoints = await GetChanges(client, collection, checkpoints);
+// Returns only the two documents created above.
+checkpoints = await GetChanges(client, collection, checkpoints);
+```
 
 还可以筛选更改源 - 使用客户端逻辑有选择性地处理事件即可。例如，以下代码片段使用客户端 LINQ 专门处理设备传感器发送的温度更改事件。
 
-    FeedResponse<DeviceReading> readChangesResponse = query.ExecuteNextAsync<DeviceReading>().Result;
+```
+FeedResponse<DeviceReading> readChangesResponse = query.ExecuteNextAsync<DeviceReading>().Result;
 
-    foreach (DeviceReading changedDocument in 
-        readChangesResponse.AsEnumerable().Where(d => d.MetricType == "Temperature" && d.MetricValue > 1000L))
-    {
-        // trigger an action, like call an API
-    }
+foreach (DeviceReading changedDocument in 
+    readChangesResponse.AsEnumerable().Where(d => d.MetricType == "Temperature" && d.MetricValue > 1000L))
+{
+    // trigger an action, like call an API
+}
+```
 
 本文逐步讲解了 DocumentDB 的更改源支持，以及如何使用 DocumentDB REST API 和/或 SDK 跟踪对 DocumentDB 数据所做的更改。
 

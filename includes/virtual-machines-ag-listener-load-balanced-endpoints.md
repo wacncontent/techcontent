@@ -14,7 +14,9 @@
 
 1. 运行 Import-azurepublishsettingsfile 命令以及你下载发布设置文件的路径：
 
-        Import-AzurePublishSettingsFile -Environment AzureChinaCloud -PublishSettingsFile <PublishSettingsFilePath>
+    ```
+    Import-AzurePublishSettingsFile -Environment AzureChinaCloud -PublishSettingsFile <PublishSettingsFilePath>
+    ```
 
     导入发布设置文件后，你可以在 PowerShell 会话中管理 Azure 订阅。
 

@@ -50,27 +50,31 @@ ms.author: guybo
 
 此示例会将 Windows 虚拟机规模集更新到新版本 4.0.20160229。更新模型后，它将一次更新一个虚拟机实例。
 
-    $rgname = "myrg"
-    $vmssname = "myvmss"
-    $newversion = "4.0.20160229"
-    $instanceid = "1"
+```
+$rgname = "myrg"
+$vmssname = "myvmss"
+$newversion = "4.0.20160229"
+$instanceid = "1"
 
-    # get the VMSS model
-    $vmss = Get-AzureRmVmss -ResourceGroupName $rgname -VMScaleSetName $vmssname
+# get the VMSS model
+$vmss = Get-AzureRmVmss -ResourceGroupName $rgname -VMScaleSetName $vmssname
 
-    # set the new version in the model data
-    $vmss.virtualMachineProfile.storageProfile.imageReference.version = $newversion
+# set the new version in the model data
+$vmss.virtualMachineProfile.storageProfile.imageReference.version = $newversion
 
-    # update the virtual machine scale set model
-    Update-AzureRmVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet $vmss
+# update the virtual machine scale set model
+Update-AzureRmVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet $vmss
 
-    # now start updating instances
-    Update-AzureRmVmssInstance -ResourceGroupName $rgname -VMScaleSetName $vmssname -InstanceId $instanceId
+# now start updating instances
+Update-AzureRmVmssInstance -ResourceGroupName $rgname -VMScaleSetName $vmssname -InstanceId $instanceId
+```
 
 如果要更新自定义映像的 URI，而不是更改平台映像版本，请将“设置新版本”一行替换为以下内容：
 
-    # set the new version in the model data
-    $vmss.virtualMachineProfile.storageProfile.osDisk.image.uri= $newURI
+```
+# set the new version in the model data
+$vmss.virtualMachineProfile.storageProfile.osDisk.image.uri= $newURI
+```
 
 ## REST API
 

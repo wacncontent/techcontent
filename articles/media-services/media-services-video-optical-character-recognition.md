@@ -48,39 +48,43 @@ DetectRegions|（可选）DetectRegion 对象的数组，指定视频帧内要�
 
 ####JSON 预设示例
 
+```
+{
+    'Version':'1.0', 
+    'Options': 
     {
-        'Version':'1.0', 
-        'Options': 
-        {
-        'Language':'English', 
-            'TimeInterval':'00:00:01.5',
-            'DetectRegions': 
-             [
-                {'Left':'1','Top':'1','Width':'1','Height':'1'},
-                {'Left':'2','Top':'2','Width':'2','Height':'2'}
-             ],
-            'TextOrientation':'Up'
-        }
+    'Language':'English', 
+        'TimeInterval':'00:00:01.5',
+        'DetectRegions': 
+         [
+            {'Left':'1','Top':'1','Width':'1','Height':'1'},
+            {'Left':'2','Top':'2','Width':'2','Height':'2'}
+         ],
+        'TextOrientation':'Up'
     }
+}
+```
 
 ####XML 预设示例
 
-    <?xml version=""1.0"" encoding=""utf-16""?>
-    <VideoOcrPreset xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" Version=""1.0"" xmlns=""http://www.windowsazure.com/media/encoding/Preset/2014/03"">
-      <Options>
-         <Language>English</Language>
-         <TimeInterval>PT1.5S</TimeInterval>
-         <DetectRegions>
-             <DetectRegion>
-                   <Left>1</Left>
-                   <Top>1</Top>
-                   <Width>1</Width>
-                   <Height>1</Height>
-            </DetectRegion>
-       </DetectRegions>
-       <TextOrientation>Up</TextOrientation>
-      </Options>
-    </VideoOcrPreset>
+```
+<?xml version=""1.0"" encoding=""utf-16""?>
+<VideoOcrPreset xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" Version=""1.0"" xmlns=""http://www.windowsazure.com/media/encoding/Preset/2014/03"">
+  <Options>
+     <Language>English</Language>
+     <TimeInterval>PT1.5S</TimeInterval>
+     <DetectRegions>
+         <DetectRegion>
+               <Left>1</Left>
+               <Top>1</Top>
+               <Width>1</Width>
+               <Height>1</Height>
+        </DetectRegion>
+   </DetectRegions>
+   <TextOrientation>Up</TextOrientation>
+  </Options>
+</VideoOcrPreset>
+```
 
 ##OCR 输出文件
 
@@ -114,58 +118,60 @@ text|实际文本
 
 以下输出示例包含常规视频信息和多个视频片段。每个视频片段包含 OCR MP 检测到的每个区域及其语言和文本方向。区域还包含此区域中的每个单词行，以及该行的文本、位置及其中每个单词的信息（单词内容、位置和置信度）。下面是一个示例，我在其中嵌入了一些注释。
 
-    {
-        "version": 1, 
-        "timescale": 90000, 
-        "offset": 0, 
-        "framerate": 30, 
-        "width": 640, 
-        "height": 480,  // general video information
-        "fragments": [
-            {
-                "start": 0, 
-                "duration": 180000, 
-                "interval": 90000,  // the time information about this fragment
-                "events": [
-                    [
-                       { 
-                            "region": { // the detected region array in this fragment 
-                                "language": "English",  // region language
-                                "orientation": "Up",  // text orientation
-                                "lines": [  // line information array in this region, including the text and the position
-                                    {
-                                        "text": "One Two", 
-                                        "left": 10, 
-                                        "top": 10, 
-                                        "right": 210, 
-                                        "bottom": 110, 
-                                        "word": [  // word information array in this line
-                                            {
-                                                "text": "One", 
-                                                "left": 10, 
-                                                "top": 10, 
-                                                "right": 110, 
-                                                "bottom": 110, 
-                                                "confidence": 900
-                                            }, 
-                                            {
-                                                "text": "Two", 
-                                                "left": 110, 
-                                                "top": 10, 
-                                                "right": 210, 
-                                                "bottom": 110, 
-                                                "confidence": 910
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+```
+{
+    "version": 1, 
+    "timescale": 90000, 
+    "offset": 0, 
+    "framerate": 30, 
+    "width": 640, 
+    "height": 480,  // general video information
+    "fragments": [
+        {
+            "start": 0, 
+            "duration": 180000, 
+            "interval": 90000,  // the time information about this fragment
+            "events": [
+                [
+                   { 
+                        "region": { // the detected region array in this fragment 
+                            "language": "English",  // region language
+                            "orientation": "Up",  // text orientation
+                            "lines": [  // line information array in this region, including the text and the position
+                                {
+                                    "text": "One Two", 
+                                    "left": 10, 
+                                    "top": 10, 
+                                    "right": 210, 
+                                    "bottom": 110, 
+                                    "word": [  // word information array in this line
+                                        {
+                                            "text": "One", 
+                                            "left": 10, 
+                                            "top": 10, 
+                                            "right": 110, 
+                                            "bottom": 110, 
+                                            "confidence": 900
+                                        }, 
+                                        {
+                                            "text": "Two", 
+                                            "left": 110, 
+                                            "top": 10, 
+                                            "right": 210, 
+                                            "bottom": 110, 
+                                            "confidence": 910
+                                        }
+                                    ]
+                                }
+                            ]
                         }
-                    ]
+                    }
                 ]
-            }
-        ]
-    }
+            ]
+        }
+    ]
+}
+```
 
 ## 代码示例
 
@@ -175,181 +181,183 @@ text|实际文本
 1. 使用 OCR 配置/预设文件创建作业。
 1. 下载输出 JSON 文件。
 
-        using System;
-        using System.Configuration;
-        using System.IO;
-        using System.Linq;
-        using Microsoft.WindowsAzure.MediaServices.Client;
-        using System.Threading;
-        using System.Threading.Tasks;
+    ```
+    using System;
+    using System.Configuration;
+    using System.IO;
+    using System.Linq;
+    using Microsoft.WindowsAzure.MediaServices.Client;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-        namespace OCR
+    namespace OCR
+    {
+        class Program
         {
-            class Program
+            // Read values from the App.config file.
+            private static readonly string _mediaServicesAccountName =
+                ConfigurationManager.AppSettings["MediaServicesAccountName"];
+            private static readonly string _mediaServicesAccountKey =
+                ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+
+            private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+
+            // Azure China uses a different API server and a different ACS Base Address from the Global.
+            private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
+            private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+
+            // Field for service context.
+            private static CloudMediaContext _context = null;
+            private static MediaServicesCredentials _cachedCredentials = null;
+
+            private static Uri _apiServer = null;
+
+            static void Main(string[] args)
             {
-                // Read values from the App.config file.
-                private static readonly string _mediaServicesAccountName =
-                    ConfigurationManager.AppSettings["MediaServicesAccountName"];
-                private static readonly string _mediaServicesAccountKey =
-                    ConfigurationManager.AppSettings["MediaServicesAccountKey"];
 
-                private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+                // Create and cache the Media Services credentials in a static class variable.
+                _cachedCredentials = new MediaServicesCredentials(
+                            _mediaServicesAccountName,
+                            _mediaServicesAccountKey,
+                            _defaultScope,
+                            _chinaAcsBaseAddressUrl);
 
-                // Azure China uses a different API server and a different ACS Base Address from the Global.
-                private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
-                private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+                // Create the API server Uri
+                _apiServer = new Uri(_chinaApiServerUrl);
 
-                // Field for service context.
-                private static CloudMediaContext _context = null;
-                private static MediaServicesCredentials _cachedCredentials = null;
+                // Used the chached credentials to create CloudMediaContext.
+                _context = new CloudMediaContext(_apiServer, _cachedCredentials);
 
-                private static Uri _apiServer = null;
+                // Run the OCR job.
+                var asset = RunOCRJob(@"C:\supportFiles\OCR\presentation.mp4",
+                                            @"C:\supportFiles\OCR\config.json");
 
-                static void Main(string[] args)
-                {
-
-                    // Create and cache the Media Services credentials in a static class variable.
-                    _cachedCredentials = new MediaServicesCredentials(
-                                _mediaServicesAccountName,
-                                _mediaServicesAccountKey,
-                                _defaultScope,
-                                _chinaAcsBaseAddressUrl);
-
-                    // Create the API server Uri
-                    _apiServer = new Uri(_chinaApiServerUrl);
-
-                    // Used the chached credentials to create CloudMediaContext.
-                    _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-
-                    // Run the OCR job.
-                    var asset = RunOCRJob(@"C:\supportFiles\OCR\presentation.mp4",
-                                                @"C:\supportFiles\OCR\config.json");
-
-                    // Download the job output asset.
-                    DownloadAsset(asset, @"C:\supportFiles\OCR\Output");
-                }
-
-                static IAsset RunOCRJob(string inputMediaFilePath, string configurationFile)
-                {
-                    // Create an asset and upload the input media file to storage.
-                    IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
-                        "My OCR Input Asset",
-                        AssetCreationOptions.None);
-
-                    // Declare a new job.
-                    IJob job = _context.Jobs.Create("My OCR Job");
-
-                    // Get a reference to Azure Media OCR.
-                    string MediaProcessorName = "Azure Media OCR";
-
-                    var processor = GetLatestMediaProcessorByName(MediaProcessorName);
-
-                    // Read configuration from the specified file.
-                    string configuration = File.ReadAllText(configurationFile);
-
-                    // Create a task with the encoding details, using a string preset.
-                    ITask task = job.Tasks.AddNew("My OCR Task",
-                        processor,
-                        configuration,
-                        TaskOptions.None);
-
-                    // Specify the input asset.
-                    task.InputAssets.Add(asset);
-
-                    // Add an output asset to contain the results of the job.
-                    task.OutputAssets.AddNew("My OCR Output Asset", AssetCreationOptions.None);
-
-                    // Use the following event handler to check job progress.  
-                    job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
-
-                    // Launch the job.
-                    job.Submit();
-
-                    // Check job execution and wait for job to finish.
-                    Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
-
-                    progressJobTask.Wait();
-
-                    // If job state is Error, the event handling
-                    // method for job progress should log errors.  Here we check
-                    // for error state and exit if needed.
-                    if (job.State == JobState.Error)
-                    {
-                        ErrorDetail error = job.Tasks.First().ErrorDetails.First();
-                        Console.WriteLine(string.Format("Error: {0}. {1}",
-                                                        error.Code,
-                                                        error.Message));
-                        return null;
-                    }
-
-                    return job.OutputMediaAssets[0];
-                }
-
-                static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
-                {
-                    IAsset asset = _context.Assets.Create(assetName, options);
-
-                    var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
-                    assetFile.Upload(filePath);
-
-                    return asset;
-                }
-
-                static void DownloadAsset(IAsset asset, string outputDirectory)
-                {
-                    foreach (IAssetFile file in asset.AssetFiles)
-                    {
-                        file.Download(Path.Combine(outputDirectory, file.Name));
-                    }
-                }
-
-                static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
-                {
-                    var processor = _context.MediaProcessors
-                        .Where(p => p.Name == mediaProcessorName)
-                        .ToList()
-                        .OrderBy(p => new Version(p.Version))
-                        .LastOrDefault();
-
-                    if (processor == null)
-                        throw new ArgumentException(string.Format("Unknown media processor",
-                                                                   mediaProcessorName));
-
-                    return processor;
-                }
-
-                static private void StateChanged(object sender, JobStateChangedEventArgs e)
-                {
-                    Console.WriteLine("Job state changed event:");
-                    Console.WriteLine("  Previous state: " + e.PreviousState);
-                    Console.WriteLine("  Current state: " + e.CurrentState);
-
-                    switch (e.CurrentState)
-                    {
-                        case JobState.Finished:
-                            Console.WriteLine();
-                            Console.WriteLine("Job is finished.");
-                            Console.WriteLine();
-                            break;
-                        case JobState.Canceling:
-                        case JobState.Queued:
-                        case JobState.Scheduled:
-                        case JobState.Processing:
-                            Console.WriteLine("Please wait...\n");
-                            break;
-                        case JobState.Canceled:
-                        case JobState.Error:
-                            // Cast sender as a job.
-                            IJob job = (IJob)sender;
-                            // Display or log error details as needed.
-                            // LogJobStop(job.Id);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
+                // Download the job output asset.
+                DownloadAsset(asset, @"C:\supportFiles\OCR\Output");
             }
+
+            static IAsset RunOCRJob(string inputMediaFilePath, string configurationFile)
+            {
+                // Create an asset and upload the input media file to storage.
+                IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
+                    "My OCR Input Asset",
+                    AssetCreationOptions.None);
+
+                // Declare a new job.
+                IJob job = _context.Jobs.Create("My OCR Job");
+
+                // Get a reference to Azure Media OCR.
+                string MediaProcessorName = "Azure Media OCR";
+
+                var processor = GetLatestMediaProcessorByName(MediaProcessorName);
+
+                // Read configuration from the specified file.
+                string configuration = File.ReadAllText(configurationFile);
+
+                // Create a task with the encoding details, using a string preset.
+                ITask task = job.Tasks.AddNew("My OCR Task",
+                    processor,
+                    configuration,
+                    TaskOptions.None);
+
+                // Specify the input asset.
+                task.InputAssets.Add(asset);
+
+                // Add an output asset to contain the results of the job.
+                task.OutputAssets.AddNew("My OCR Output Asset", AssetCreationOptions.None);
+
+                // Use the following event handler to check job progress.  
+                job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
+
+                // Launch the job.
+                job.Submit();
+
+                // Check job execution and wait for job to finish.
+                Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
+
+                progressJobTask.Wait();
+
+                // If job state is Error, the event handling
+                // method for job progress should log errors.  Here we check
+                // for error state and exit if needed.
+                if (job.State == JobState.Error)
+                {
+                    ErrorDetail error = job.Tasks.First().ErrorDetails.First();
+                    Console.WriteLine(string.Format("Error: {0}. {1}",
+                                                    error.Code,
+                                                    error.Message));
+                    return null;
+                }
+
+                return job.OutputMediaAssets[0];
+            }
+
+            static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
+            {
+                IAsset asset = _context.Assets.Create(assetName, options);
+
+                var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
+                assetFile.Upload(filePath);
+
+                return asset;
+            }
+
+            static void DownloadAsset(IAsset asset, string outputDirectory)
+            {
+                foreach (IAssetFile file in asset.AssetFiles)
+                {
+                    file.Download(Path.Combine(outputDirectory, file.Name));
+                }
+            }
+
+            static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
+            {
+                var processor = _context.MediaProcessors
+                    .Where(p => p.Name == mediaProcessorName)
+                    .ToList()
+                    .OrderBy(p => new Version(p.Version))
+                    .LastOrDefault();
+
+                if (processor == null)
+                    throw new ArgumentException(string.Format("Unknown media processor",
+                                                               mediaProcessorName));
+
+                return processor;
+            }
+
+            static private void StateChanged(object sender, JobStateChangedEventArgs e)
+            {
+                Console.WriteLine("Job state changed event:");
+                Console.WriteLine("  Previous state: " + e.PreviousState);
+                Console.WriteLine("  Current state: " + e.CurrentState);
+
+                switch (e.CurrentState)
+                {
+                    case JobState.Finished:
+                        Console.WriteLine();
+                        Console.WriteLine("Job is finished.");
+                        Console.WriteLine();
+                        break;
+                    case JobState.Canceling:
+                    case JobState.Queued:
+                    case JobState.Scheduled:
+                    case JobState.Processing:
+                        Console.WriteLine("Please wait...\n");
+                        break;
+                    case JobState.Canceled:
+                    case JobState.Error:
+                        // Cast sender as a job.
+                        IJob job = (IJob)sender;
+                        // Display or log error details as needed.
+                        // LogJobStop(job.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
+    }
+    ```
 
 <!---HONumber=Mooncake_1114_2016-->

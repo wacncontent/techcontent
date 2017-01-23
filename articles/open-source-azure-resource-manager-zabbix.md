@@ -44,15 +44,21 @@ Zabbix 解决方案主要包括客户端 (agent)、服务端 (server) 与网页�
 ## <a name="preparation-steps"></a>准备步骤
 如果您选择 Azure PowerShell 方式操作 Azure 资源管理模板，那么请参考如何安装和配置 Azure PowerShell 中的说明在本地计算机上安装 Azure PowerShell。然后打开 Azure PowerShell 命令提示符，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用工作或学校 ID 登录：
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 如果您选择 Azure CLI 方式操作 Azure 资源管理模板，那么请安装 Azure CLI。然后通过如下命令切换至资源管理器模式：
 
-    azure config mode arm
+```
+azure config mode arm
+```
 
 然后，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用工作或学校 ID 登录：
 
-    azure login -e AzureChinaCloud
+```
+azure login -e AzureChinaCloud
+```
 
 ## <a name="cluster-deployment"></a>部署样例集群模板
 本节将介绍如何通过命令行部署样例集群模板，从而搭建一个虚拟机集群，如果需要对现有集群进行监控，请跳转到下一节“部署监控解决方案模板”。
@@ -61,21 +67,29 @@ Zabbix 解决方案主要包括客户端 (agent)、服务端 (server) 与网页�
 
 PowerShell:
 
-    New-AzureRmResourceGroup -Name <ResourceGroupName> -Location <Location>
+```
+New-AzureRmResourceGroup -Name <ResourceGroupName> -Location <Location>
+```
 
 Azure Cli:
 
-    azure group create <ResourceGroupName> <Location>
+```
+azure group create <ResourceGroupName> <Location>
+```
 
 然后通过如下命令部署样例集群模板。
 
 PowerShell:
 
-    New-AzureRmResourceGroupDeployment -ResourceGroupName <ResourceGroupName> -TemplateUri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/clusterNodes.json -TemplateParameterObject @{ resourcePrefix = 'cluster1'; adminUsername = 'cluster1Admin'; adminPassword = 'password1#$%'; vmCount = 2 }
+```
+New-AzureRmResourceGroupDeployment -ResourceGroupName <ResourceGroupName> -TemplateUri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/clusterNodes.json -TemplateParameterObject @{ resourcePrefix = 'cluster1'; adminUsername = 'cluster1Admin'; adminPassword = 'password1#$%'; vmCount = 2 }
+```
 
 Azure Cli:
 
-    azure group deployment create <ResourceGroupName> --template-uri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/clusterNodes.json -p "{\"resourcePrefix\": {\"value\": \"cluster1\"},\"adminUsername\": {\"value\": \"cluster1Admin\"},\"adminPassword\":{\"value\": \"password1#$%\"},\"vmCount\": {\"value\": 2}}"
+```
+azure group deployment create <ResourceGroupName> --template-uri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/clusterNodes.json -p "{\"resourcePrefix\": {\"value\": \"cluster1\"},\"adminUsername\": {\"value\": \"cluster1Admin\"},\"adminPassword\":{\"value\": \"password1#$%\"},\"vmCount\": {\"value\": 2}}"
+```
 
 其中PowerShell命令中的 -TemplateParameterObject 选项与 Azure Cli 命令中的 -p 选项用于指定部署时的模板参数。
 各参数含义如下：
@@ -97,11 +111,15 @@ Azure Cli:
 
 PowerShell:
 
-    New-AzureRmResourceGroupDeployment -ResourceGroupName <ResourceGroupName> -TemplateUri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/monitoringSolution.json -TemplateParameterObject @{ existingStorageAccountName = 'cluster1sto'; existingVirtualNetworkName = 'cluster1vnet'; monitorVmName = 'cluster1monitor'; monitorVmPassword = 'password1#$%'; mysqlPassword = 'password1#$%' }
+```
+New-AzureRmResourceGroupDeployment -ResourceGroupName <ResourceGroupName> -TemplateUri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/monitoringSolution.json -TemplateParameterObject @{ existingStorageAccountName = 'cluster1sto'; existingVirtualNetworkName = 'cluster1vnet'; monitorVmName = 'cluster1monitor'; monitorVmPassword = 'password1#$%'; mysqlPassword = 'password1#$%' }
+```
 
 Azure Cli:
 
-    azure group deployment create <ResourceGroupName> --template-uri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/monitoringSolution.json -p "{\"existingStorageAccountName\": {\"value\": \"cluster1sto\"},\"existingVirtualNetworkName\": {\"value\": \"cluster1vnet\"},\"monitorVmName\":{\"value\": \"cluster1monitor\"},\"monitorVmPassword\": {\"value\": \"password1#$%\"}, \"mysqlPassword\": {\"value\": \"password1#$%\"}}"
+```
+azure group deployment create <ResourceGroupName> --template-uri https://raw.githubusercontent.com/karataliu/monicake/v0.2.0/nested/monitoringSolution.json -p "{\"existingStorageAccountName\": {\"value\": \"cluster1sto\"},\"existingVirtualNetworkName\": {\"value\": \"cluster1vnet\"},\"monitorVmName\":{\"value\": \"cluster1monitor\"},\"monitorVmPassword\": {\"value\": \"password1#$%\"}, \"mysqlPassword\": {\"value\": \"password1#$%\"}}"
+```
 
 其中 PowerShell 命令中的 -TemplateParameterObject 选项与 Azure Cli 命令中的 -p 选项用于指定部署时的模板参数。
 各参数含义如下：
@@ -132,18 +150,22 @@ Azure Cli:
 
 PowerShell:
 
-    Outputs                 : 
-    Name             Type                       Value     
-    ===============  =========================  ==========
-    serverPublicEndpoint  String                     http://cluster1monitor.chinaeast.cloudapp.chinacloudapi.cn/zab/
+```
+Outputs                 : 
+Name             Type                       Value     
+===============  =========================  ==========
+serverPublicEndpoint  String                     http://cluster1monitor.chinaeast.cloudapp.chinacloudapi.cn/zab/
+```
 
 Azure Cli:
 
-    data:    Outputs            :
-    data:    Name                  Type    Value
+```
+data:    Outputs            :
+data:    Name                  Type    Value
 
-    data:    --------------------  ------  --------------------------------------------------------------
-    data:    serverPublicEndpoint  String  http://cluster1monitor.chinaeast.cloudapp.chinacloudapi.cn/zab/
+data:    --------------------  ------  --------------------------------------------------------------
+data:    serverPublicEndpoint  String  http://cluster1monitor.chinaeast.cloudapp.chinacloudapi.cn/zab/
+```
 
 使用浏览器访问网页前端入口地址，如果看到如下界面则表示服务器端配置正常。
 ![portal1](./media/open-source-azure-resource-manager-zabbix/1.png)

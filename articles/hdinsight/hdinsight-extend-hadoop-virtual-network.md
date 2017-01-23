@@ -106,80 +106,88 @@ HDInsight 不支持限制出站流量，仅限制入站流量。在定义包含 
 
 **使用 Azure PowerShell**
 
-    $vnetName = "Replace with your virtual network name"
-    $subnetName = "Replace with the name of the subnet that HDInsight will be installed into"
-    # Get the Virtual Network object
-    $vnet = Get-AzureVNetSite `
-        -VNetName $vnetName 
-    # Get the region the Virtual network is in.
-    $location = $vnet.Location
-    # Create a new Network Security Group.
-    # And add exemptions for the HDInsight health and management services.
-    $nsg = New-AzureNetworkSecurityGroup `
-        -Name "hdisecure" `
-        -Location $location `
-        | Set-AzureNetworkSecurityRule `
-            -name "hdirule1" `
-            -Protocol "*" `
-            -SourcePortRange "*" `
-            -DestinationPortRange "443" `
-            -SourceAddressPrefix "168.61.49.99" `
-            -DestinationAddressPrefix "*" `
-            -Action Allow `
-            -Priority 300 `
-            -Type Inbound `
-        | Set-AzureNetworkSecurityRule `
-            -Name "hdirule2" `
-            -Protocol "*" `
-            -SourcePortRange "*" `
-            -DestinationPortRange "443" `
-            -SourceAddressPrefix "23.99.5.239" `
-            -DestinationAddressPrefix "*" `
-            -Action Allow `
-            -Priority 301 `
-            -Type Inbound `
-        | Set-AzureNetworkSecurityRule `
-            -Name "hdirule3" `
-            -Protocol "*" `
-            -SourcePortRange "*" `
-            -DestinationPortRange "443" `
-            -SourceAddressPrefix "168.61.48.131" `
-            -DestinationAddressPrefix "*" `
-            -Action Allow `
-            -Priority 302 `
-            -Type Inbound `
-        | Set-AzureNetworkSecurityRule `
-            -Name "hdirule4" `
-            -Protocol "*" `
-            -SourcePortRange "*" `
-            -DestinationPortRange "443" `
-            -SourceAddressPrefix "138.91.141.162" `
-            -DestinationAddressPrefix "*" `
-            -Action Allow `
-            -Priority 303 `
-            -Type Inbound
-    # Apply the NSG to the subnet
-    Set-AzureNetworkSecurityGroupAssociation `
-        -VirtualNetworkName $vnetName `
-        -SubnetName $subnetName `
-        -Name $nsg.Name
+```
+$vnetName = "Replace with your virtual network name"
+$subnetName = "Replace with the name of the subnet that HDInsight will be installed into"
+# Get the Virtual Network object
+$vnet = Get-AzureVNetSite `
+    -VNetName $vnetName 
+# Get the region the Virtual network is in.
+$location = $vnet.Location
+# Create a new Network Security Group.
+# And add exemptions for the HDInsight health and management services.
+$nsg = New-AzureNetworkSecurityGroup `
+    -Name "hdisecure" `
+    -Location $location `
+    | Set-AzureNetworkSecurityRule `
+        -name "hdirule1" `
+        -Protocol "*" `
+        -SourcePortRange "*" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "168.61.49.99" `
+        -DestinationAddressPrefix "*" `
+        -Action Allow `
+        -Priority 300 `
+        -Type Inbound `
+    | Set-AzureNetworkSecurityRule `
+        -Name "hdirule2" `
+        -Protocol "*" `
+        -SourcePortRange "*" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "23.99.5.239" `
+        -DestinationAddressPrefix "*" `
+        -Action Allow `
+        -Priority 301 `
+        -Type Inbound `
+    | Set-AzureNetworkSecurityRule `
+        -Name "hdirule3" `
+        -Protocol "*" `
+        -SourcePortRange "*" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "168.61.48.131" `
+        -DestinationAddressPrefix "*" `
+        -Action Allow `
+        -Priority 302 `
+        -Type Inbound `
+    | Set-AzureNetworkSecurityRule `
+        -Name "hdirule4" `
+        -Protocol "*" `
+        -SourcePortRange "*" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "138.91.141.162" `
+        -DestinationAddressPrefix "*" `
+        -Action Allow `
+        -Priority 303 `
+        -Type Inbound
+# Apply the NSG to the subnet
+Set-AzureNetworkSecurityGroupAssociation `
+    -VirtualNetworkName $vnetName `
+    -SubnetName $subnetName `
+    -Name $nsg.Name
+```
 
 **使用 Azure CLI**
 
 1. 使用以下命令创建名为 `hdisecure` 的新网络安全组。将“LOCATION”替换为 Azure 虚拟网络的位置（区域）。
 
-        azure network nsg create hdisecure LOCATION
+    ```
+    azure network nsg create hdisecure LOCATION
+    ```
 
 2. 使用以下命令将规则添加新网络安全组，以允许从 Azure HDInsight 运行状况和管理服务通过端口 443 发起的入站通信。
 
-        azure network nsg rule create hdisecure hdirule1 -p "*" -o "*" -u "443" -f "168.61.49.99" -e "*" -c "Allow" -y 300 -r "Inbound"
-        azure network nsg rule create hdisecure hdirule2 -p "*" -o "*" -u "443" -f "23.99.5.239" -e "*" -c "Allow" -y 301 -r "Inbound"
-        azure network nsg rule create hdisecure hdirule3 -p "*" -o "*" -u "443" -f "168.61.48.131" -e "*" -c "Allow" -y 302 -r "Inbound"
-        azure network nsg rule create hdisecure hdirule4 -p "*" -o "*" -u "443" -f "138.91.141.162" -e "*" -c "Allow" -y 303 -r "Inbound"
+    ```
+    azure network nsg rule create hdisecure hdirule1 -p "*" -o "*" -u "443" -f "168.61.49.99" -e "*" -c "Allow" -y 300 -r "Inbound"
+    azure network nsg rule create hdisecure hdirule2 -p "*" -o "*" -u "443" -f "23.99.5.239" -e "*" -c "Allow" -y 301 -r "Inbound"
+    azure network nsg rule create hdisecure hdirule3 -p "*" -o "*" -u "443" -f "168.61.48.131" -e "*" -c "Allow" -y 302 -r "Inbound"
+    azure network nsg rule create hdisecure hdirule4 -p "*" -o "*" -u "443" -f "138.91.141.162" -e "*" -c "Allow" -y 303 -r "Inbound"
+    ```
 
 3. 创建规则后，使用以下命令将新网络安全组应用到子网。将“VNETNAME”和“SUBNETNAME”替换为安装 HDInsight 时使用的 Azure 虚拟网络和子网的名称。
 
-        azure network nsg subnet add hdisecure VNETNAME SUBNETNAME
+    ```
+    azure network nsg subnet add hdisecure VNETNAME SUBNETNAME
+    ```
 
     此命令执行完成后，可以将 HDInsight 成功安装到这些步骤中使用的子网上的受保护虚拟网络。
 

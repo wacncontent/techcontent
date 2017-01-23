@@ -82,16 +82,18 @@ ms.author: marsma
 
 csharp
 
-    CloudJob job = batchClient.JobOperations.CreateJob(
-        "myJob",
-        new PoolInformation { PoolId = "myPool" });
+```
+CloudJob job = batchClient.JobOperations.CreateJob(
+    "myJob",
+    new PoolInformation { PoolId = "myPool" });
 
-    // Create reference to the linked Azure Storage account
-    CloudStorageAccount linkedStorageAccount =
-        new CloudStorageAccount(myCredentials, true);
+// Create reference to the linked Azure Storage account
+CloudStorageAccount linkedStorageAccount =
+    new CloudStorageAccount(myCredentials, true);
 
-    // Create the blob storage container for the outputs
-    await job.PrepareOutputStorageAsync(linkedStorageAccount);
+// Create the blob storage container for the outputs
+await job.PrepareOutputStorageAsync(linkedStorageAccount);
+```
 
 ### 存储任务输出
 
@@ -101,17 +103,19 @@ csharp
 
 csharp
 
-    CloudStorageAccount linkedStorageAccount = new CloudStorageAccount(myCredentials);
-    string jobId = Environment.GetEnvironmentVariable("AZ_BATCH_JOB_ID");
-    string taskId = Environment.GetEnvironmentVariable("AZ_BATCH_TASK_ID");
+```
+CloudStorageAccount linkedStorageAccount = new CloudStorageAccount(myCredentials);
+string jobId = Environment.GetEnvironmentVariable("AZ_BATCH_JOB_ID");
+string taskId = Environment.GetEnvironmentVariable("AZ_BATCH_TASK_ID");
 
-    TaskOutputStorage taskOutputStorage = new TaskOutputStorage(
-        linkedStorageAccount, jobId, taskId);
+TaskOutputStorage taskOutputStorage = new TaskOutputStorage(
+    linkedStorageAccount, jobId, taskId);
 
-    /* Code to process data and produce output file(s) */
+/* Code to process data and produce output file(s) */
 
-    await taskOutputStorage.SaveAsync(TaskOutputKind.TaskOutput, "frame_full_res.jpg");
-    await taskOutputStorage.SaveAsync(TaskOutputKind.TaskPreview, "frame_low_res.jpg");
+await taskOutputStorage.SaveAsync(TaskOutputKind.TaskOutput, "frame_full_res.jpg");
+await taskOutputStorage.SaveAsync(TaskOutputKind.TaskPreview, "frame_low_res.jpg");
+```
 
 “output kind”参数可保存的文件分类。有四个预定义的 [TaskOutputKind][net_taskoutputkind] 类型：“TaskOutput”、“TaskPreview”、“TaskLog”和“TaskIntermediate”。 你还可以指定自定义类型（如果在工作流中有用的话）。
 
@@ -126,11 +130,13 @@ csharp
 
 通过调用 [JobOutputStorage][net_joboutputstorage].[SaveAsync][net_joboutputstorage_saveasync] 方法存储作业输出，并指定 [JobOutputKind][net_joboutputkind] 和文件名：
 
-    CloudJob job = await batchClient.JobOperations.GetJobAsync(jobId);
-    JobOutputStorage jobOutputStorage = job.OutputStorage(linkedStorageAccount);
+```
+CloudJob job = await batchClient.JobOperations.GetJobAsync(jobId);
+JobOutputStorage jobOutputStorage = job.OutputStorage(linkedStorageAccount);
 
-    await jobOutputStorage.SaveAsync(JobOutputKind.JobOutput, "mymovie.mp4");
-    await jobOutputStorage.SaveAsync(JobOutputKind.JobPreview, "mymovie_preview.mp4");
+await jobOutputStorage.SaveAsync(JobOutputKind.JobOutput, "mymovie.mp4");
+await jobOutputStorage.SaveAsync(JobOutputKind.JobPreview, "mymovie_preview.mp4");
+```
 
 与用于任务输出的 TaskOutputKind 一样，你可以使用 [JobOutputKind][net_joboutputkind] 参数来分类作业的保存文件。以后可以使用此参数查询（列出）特定的输出类型。JobOutputKind 包括输出和预览类型，并支持创建自定义类型。
 
@@ -142,26 +148,28 @@ csharp
 
 csharp
 
-    TimeSpan stdoutFlushDelay = TimeSpan.FromSeconds(3);
-    string logFilePath = Path.Combine(
-        Environment.GetEnvironmentVariable("AZ_BATCH_TASK_DIR"), "stdout.txt");
+```
+TimeSpan stdoutFlushDelay = TimeSpan.FromSeconds(3);
+string logFilePath = Path.Combine(
+    Environment.GetEnvironmentVariable("AZ_BATCH_TASK_DIR"), "stdout.txt");
 
-    // The primary task logic is wrapped in a using statement that sends updates to
-    // the stdout.txt blob in Storage every 15 seconds while the task code runs.
-    using (ITrackedSaveOperation stdout =
-            await taskStorage.SaveTrackedAsync(
-            TaskOutputKind.TaskLog,
-            logFilePath,
-            "stdout.txt",
-            TimeSpan.FromSeconds(15)))
-    {
-        /* Code to process data and produce output file(s) */
+// The primary task logic is wrapped in a using statement that sends updates to
+// the stdout.txt blob in Storage every 15 seconds while the task code runs.
+using (ITrackedSaveOperation stdout =
+        await taskStorage.SaveTrackedAsync(
+        TaskOutputKind.TaskLog,
+        logFilePath,
+        "stdout.txt",
+        TimeSpan.FromSeconds(15)))
+{
+    /* Code to process data and produce output file(s) */
 
-        // We are tracking the disk file to save our standard output, but the
-        // node agent may take up to 3 seconds to flush the stdout stream to
-        // disk. So give the file a moment to catch up.
-         await Task.Delay(stdoutFlushDelay);
-    }
+    // We are tracking the disk file to save our standard output, but the
+    // node agent may take up to 3 seconds to flush the stdout stream to
+    // disk. So give the file a moment to catch up.
+     await Task.Delay(stdoutFlushDelay);
+}
+```
 
 `Code to process data and produce output file(s)` 只是任务通常会执行的代码的占位符。例如，代码可能会从 Azure 存储下载数据，并对其执行转换或计算。此代码片段的重要部分演示了如何在 `using` 中包装此类代码，以定期使用 [SaveTrackedAsync][net_savetrackedasync] 更新文件。
 
@@ -178,19 +186,21 @@ csharp
 
 csharp
 
-    foreach (CloudTask task in myJob.ListTasks())
+```
+foreach (CloudTask task in myJob.ListTasks())
+{
+    foreach (TaskOutputStorage output in
+        task.OutputStorage(storageAccount).ListOutputs(
+            TaskOutputKind.TaskOutput))
     {
-        foreach (TaskOutputStorage output in
-            task.OutputStorage(storageAccount).ListOutputs(
-                TaskOutputKind.TaskOutput))
-        {
-            Console.WriteLine($"output file: {output.FilePath}");
+        Console.WriteLine($"output file: {output.FilePath}");
 
-            output.DownloadToFileAsync(
-                $"{jobId}-{output.FilePath}",
-                System.IO.FileMode.Create).Wait();
-        }
+        output.DownloadToFileAsync(
+            $"{jobId}-{output.FilePath}",
+            System.IO.FileMode.Create).Wait();
     }
+}
+```
 
 ## 任务输出和 Azure 门户预览
 

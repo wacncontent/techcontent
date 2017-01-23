@@ -47,103 +47,107 @@ ms.author: georgem;tomfitz
 
 虽然此模板中的大多数字段都很直观明了，但 **enableVaultForDeployment** 设置还是需要解释一下：保管库通常并不默认允许其他 Azure 基础结构组件进行访问。设置此值之后，Azure 计算基础结构组件即可对这个特定的保管库进行只读访问。因此还需指出的是，最好不要将公司的敏感数据与虚拟机机密置于同一保管库中。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "keyVaultName": {
-                "type": "string",
-                "metadata": {
-                    "description": "Name of the Vault"
-                }
-            },
-            "location": {
-                "type": "string",
-                "allowedValues": ["China East", "China North"],
-                "metadata": {
-                    "description": "Location of the Vault"
-                }
-            },
-            "tenantId": {
-                "type": "string",
-                "metadata": {
-                    "description": "Tenant Id of the subscription. Get using Get-AzureSubscription cmdlet or Get Subscription API"
-                }
-            },
-            "objectId": {
-                "type": "string",
-                "metadata": {
-                    "description": "Object Id of the AD user. Get using Get-AzureADUser cmdlet"
-                }
-            },
-            "skuName": {
-                "type": "string",
-                "allowedValues": ["Standard", "Premium"],
-                "metadata": {
-                    "description": "SKU for the vault"
-                }
-            },
-            "enableVaultForDeployment": {
-                "type": "bool",
-                "allowedValues": [true, false],
-                "metadata": {
-                    "description": "Specifies if the vault is enabled for a VM deployment"
-                }
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the Vault"
             }
         },
-        "resources": [{
-            "type": "Microsoft.KeyVault/vaults",
-            "name": "[parameters('keyVaultName')]",
-            "apiVersion": "2014-12-19-preview",
-            "location": "[parameters('location')]",
-            "properties": {
-                "enabledForDeployment": "[parameters('enableVaultForDeployment')]",
-                "tenantid": "[parameters('tenantId')]",
-                "accessPolicies": [{
-                    "tenantId": "[parameters('tenantId')]",
-                    "objectId": "[parameters('objectId')]",
-                    "permissions": {
-                        "secrets": ["all"],
-                        "keys": ["all"]
-                    }
-                }],
-                "sku": {
-                    "name": "[parameters('skuName')]",
-                    "family": "A"
-                }
+        "location": {
+            "type": "string",
+            "allowedValues": ["China East", "China North"],
+            "metadata": {
+                "description": "Location of the Vault"
             }
-        }]
-    }
+        },
+        "tenantId": {
+            "type": "string",
+            "metadata": {
+                "description": "Tenant Id of the subscription. Get using Get-AzureSubscription cmdlet or Get Subscription API"
+            }
+        },
+        "objectId": {
+            "type": "string",
+            "metadata": {
+                "description": "Object Id of the AD user. Get using Get-AzureADUser cmdlet"
+            }
+        },
+        "skuName": {
+            "type": "string",
+            "allowedValues": ["Standard", "Premium"],
+            "metadata": {
+                "description": "SKU for the vault"
+            }
+        },
+        "enableVaultForDeployment": {
+            "type": "bool",
+            "allowedValues": [true, false],
+            "metadata": {
+                "description": "Specifies if the vault is enabled for a VM deployment"
+            }
+        }
+    },
+    "resources": [{
+        "type": "Microsoft.KeyVault/vaults",
+        "name": "[parameters('keyVaultName')]",
+        "apiVersion": "2014-12-19-preview",
+        "location": "[parameters('location')]",
+        "properties": {
+            "enabledForDeployment": "[parameters('enableVaultForDeployment')]",
+            "tenantid": "[parameters('tenantId')]",
+            "accessPolicies": [{
+                "tenantId": "[parameters('tenantId')]",
+                "objectId": "[parameters('objectId')]",
+                "permissions": {
+                    "secrets": ["all"],
+                    "keys": ["all"]
+                }
+            }],
+            "sku": {
+                "name": "[parameters('skuName')]",
+                "family": "A"
+            }
+        }
+    }]
+}
+```
 
 创建保管库后，下一步就是在新 VM 的部署模板中引用该保管库。如上所述，最佳做法是让其他开发/运营小组来管理 VM 部署，该小组不能直接访问保管库中存储的密钥。
 
 以下模板片段将整合到更高级的部署构造中，每种构造都可以安全且稳定地引用高度敏感的机密，这些机密不在操作员的直接控制之下。
 
-    "vaultName": {
-        "type": "string",
-        "metadata": {
-            "description": "Name of Key Vault that has a secret"
-        }
-    },
-    {
-        "apiVersion": "2015-05-01-preview",
-        "type": "Microsoft.Compute/virtualMachines",
-        "name": "[parameters('vmName')]",
-        "location": "[parameters('location')]",
-        "properties": {
-            "osProfile": {
-                "secrets": [{
-                    "sourceVault": {
-                        "id": "[resourceId('vaultrg', 'Microsoft.KeyVault/vaults', 'kayvault')]"
-                    },
-                    "vaultCertificates": [{
-                        "certificateUrl": "[parameters('secretUrlWithVersion')]",
-                        "certificateStore": "My"
-                    }]
+```
+"vaultName": {
+    "type": "string",
+    "metadata": {
+        "description": "Name of Key Vault that has a secret"
+    }
+},
+{
+    "apiVersion": "2015-05-01-preview",
+    "type": "Microsoft.Compute/virtualMachines",
+    "name": "[parameters('vmName')]",
+    "location": "[parameters('location')]",
+    "properties": {
+        "osProfile": {
+            "secrets": [{
+                "sourceVault": {
+                    "id": "[resourceId('vaultrg', 'Microsoft.KeyVault/vaults', 'kayvault')]"
+                },
+                "vaultCertificates": [{
+                    "certificateUrl": "[parameters('secretUrlWithVersion')]",
+                    "certificateStore": "My"
                 }]
-            }
+            }]
         }
     }
+}
+```
 
 在部署模板的过程中，若要以参数形式传递密钥保管库中的值，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md)。
 

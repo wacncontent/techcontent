@@ -48,32 +48,34 @@ ms.author: glenga
 
 &nbsp;&nbsp;5.将 insert 函数替换为以下代码，然后单击“保存”：
 
-    function insert(item, user, request) {
-    // Define a payload for the Windows Store toast notification.
-    var payload = '<?xml version="1.0" encoding="utf-8"?><toast><visual>' +    
-    '<binding template="ToastText01"><text id="1">' +
-    item.text + '</text></binding></visual></toast>';
+```
+function insert(item, user, request) {
+// Define a payload for the Windows Store toast notification.
+var payload = '<?xml version="1.0" encoding="utf-8"?><toast><visual>' +    
+'<binding template="ToastText01"><text id="1">' +
+item.text + '</text></binding></visual></toast>';
 
-    // Get the ID of the logged-in user.
-    var userId = user.userId;		
+// Get the ID of the logged-in user.
+var userId = user.userId;		
 
-    request.execute({
-        success: function() {
-            // If the insert succeeds, send a notification to all devices 
-            // registered to the logged-in user as a tag.
-                push.wns.send(userId, payload, 'wns/toast', {
-                success: function(pushResponse) {
-                    console.log("Sent push:", pushResponse);
-                    request.respond();
-                    },              
-                    error: function (pushResponse) {
-                            console.log("Error Sending push:", pushResponse);
-                        request.respond(500, { error: pushResponse });
-                        }
-                    });
-                }
-            });
-    }
+request.execute({
+    success: function() {
+        // If the insert succeeds, send a notification to all devices 
+        // registered to the logged-in user as a tag.
+            push.wns.send(userId, payload, 'wns/toast', {
+            success: function(pushResponse) {
+                console.log("Sent push:", pushResponse);
+                request.respond();
+                },              
+                error: function (pushResponse) {
+                        console.log("Error Sending push:", pushResponse);
+                    request.respond(500, { error: pushResponse });
+                    }
+                });
+            }
+        });
+}
+```
 
 &nbsp;&nbsp;此插入脚本使用用户 ID 标记向已登录用户创建的所有 Windows 应用商店应用注册发送推送通知（包含插入项的文本）。
 

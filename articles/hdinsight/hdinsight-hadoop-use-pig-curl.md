@@ -45,11 +45,15 @@ ms.author: larryfr
 
 1. 在命令行中，使用以下命令验证是否可以连接到 HDInsight 群集。
 
-        curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/status
+    ```
+    curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/status
+    ```
 
     你应会收到类似于下面的响应：
 
-        {"status":"ok","version":"v1"}
+    ```
+    {"status":"ok","version":"v1"}
+    ```
 
     此命令中使用的参数如下：
 
@@ -60,7 +64,9 @@ ms.author: larryfr
 
 2. 使用以下代码将 Pig Latin 作业提交到群集：
 
-        curl -u USERNAME:PASSWORD -d user.name=USERNAME -d execute="LOGS=LOAD+'wasbs:///example/data/sample.log';LEVELS=foreach+LOGS+generate+REGEX_EXTRACT($0,'(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)',1)+as+LOGLEVEL;FILTEREDLEVELS=FILTER+LEVELS+by+LOGLEVEL+is+not+null;GROUPEDLEVELS=GROUP+FILTEREDLEVELS+by+LOGLEVEL;FREQUENCIES=foreach+GROUPEDLEVELS+generate+group+as+LOGLEVEL,COUNT(FILTEREDLEVELS.LOGLEVEL)+as+count;RESULT=order+FREQUENCIES+by+COUNT+desc;DUMP+RESULT;" -d statusdir="wasbs:///example/pigcurl" https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/pig
+    ```
+    curl -u USERNAME:PASSWORD -d user.name=USERNAME -d execute="LOGS=LOAD+'wasbs:///example/data/sample.log';LEVELS=foreach+LOGS+generate+REGEX_EXTRACT($0,'(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)',1)+as+LOGLEVEL;FILTEREDLEVELS=FILTER+LEVELS+by+LOGLEVEL+is+not+null;GROUPEDLEVELS=GROUP+FILTEREDLEVELS+by+LOGLEVEL;FREQUENCIES=foreach+GROUPEDLEVELS+generate+group+as+LOGLEVEL,COUNT(FILTEREDLEVELS.LOGLEVEL)+as+count;RESULT=order+FREQUENCIES+by+COUNT+desc;DUMP+RESULT;" -d statusdir="wasbs:///example/pigcurl" https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/pig
+    ```
 
     此命令中使用的参数如下：
 
@@ -75,11 +81,15 @@ ms.author: larryfr
 
     此命令应返回可用来检查作业状态的作业 ID，例如：
 
-        {"id":"job_1415651640909_0026"}
+    ```
+    {"id":"job_1415651640909_0026"}
+    ```
 
 3. 若要检查作业的状态，请使用以下命令。将 **JOBID** 替换为上一步骤返回的值。例如，如果返回值为 `{"id":"job_1415651640909_0026"}`，则 **JOBID** 将是 `job_1415651640909_0026`。
 
-        curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
+    ```
+    curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
+    ```
 
     如果作业已完成，状态将是 **SUCCEEDED**。
 
@@ -92,11 +102,15 @@ ms.author: larryfr
 
 可以使用 [Azure CLI](../xplat-cli-install.md) 列出并下载这些文件。例如，若要列出 **example/pigcurl** 中的文件，请使用以下命令：
 
-    azure storage blob list <container-name> example/pigcurl
+```
+azure storage blob list <container-name> example/pigcurl
+```
 
 若要下载文件，请使用以下命令：
 
-    azure storage blob download <container-name> <blob-name> <destination-file>
+```
+azure storage blob download <container-name> <blob-name> <destination-file>
+```
 
 > [!NOTE]
 > 你必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。

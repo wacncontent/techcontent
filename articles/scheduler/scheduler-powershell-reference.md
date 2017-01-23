@@ -47,11 +47,13 @@ Cmdlet|Cmdlet 说明
 
 若要获取详细信息，可以运行以下任意 cmdlet：
 
-    Get-Help <cmdlet name> -Detailed
+```
+Get-Help <cmdlet name> -Detailed
 
-    Get-Help <cmdlet name> -Examples
+Get-Help <cmdlet name> -Examples
 
-    Get-Help <cmdlet name> -Full
+Get-Help <cmdlet name> -Full
+```
 
 ## 另请参阅
 

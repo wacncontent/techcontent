@@ -41,19 +41,25 @@ SQL 数据库的许多新功能仅在使用 [Azure Resource Manager 部署模型
 
 若要在同一服务器上创建副本，请省略 `-CopyServerName` 参数（或将其设置为同一服务器）。
 
-    New-AzureRmSqlDatabaseCopy -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -CopyDatabaseName "database1_copy"
+```
+New-AzureRmSqlDatabaseCopy -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -CopyDatabaseName "database1_copy"
+```
 
 ##<a name="copy-your-sql-database"></a> 将 SQL 数据库复制到不同的服务器
 
 若要在另一服务器上创建副本，请包括 `-CopyServerName` 参数并将其设置为另一服务器。*副本*服务器必须已存在。如果该服务器位于另一资源组中，则还必须包括 `-CopyResourceGroupName` 参数。
 
-    New-AzureRmSqlDatabaseCopy -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -CopyServerName "server2" -CopyDatabaseName "database1_copy"
+```
+New-AzureRmSqlDatabaseCopy -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -CopyServerName "server2" -CopyDatabaseName "database1_copy"
+```
 
 ## 将 SQL 数据库复制到弹性数据库池中
 
 若要在池中创建 SQL 数据库的副本，请将 `-ElasticPoolName` 参数设置为现有的池。
 
-    New-AzureRmSqlDatabaseCopy -ResourceGroupName "resourcegoup1" -ServerName "server1" -DatabaseName "database1" -CopyResourceGroupName "poolResourceGroup" -CopyServerName "poolServer1" -CopyDatabaseName "database1_copy" -ElasticPoolName "poolName"
+```
+New-AzureRmSqlDatabaseCopy -ResourceGroupName "resourcegoup1" -ServerName "server1" -DatabaseName "database1" -CopyResourceGroupName "poolResourceGroup" -CopyServerName "poolServer1" -CopyDatabaseName "database1_copy" -ElasticPoolName "poolName"
+```
 
 ## 解析登录名
 
@@ -63,37 +69,39 @@ SQL 数据库的许多新功能仅在使用 [Azure Resource Manager 部署模型
 
 以下脚本假定所有资源组、服务器和池均已存在（请将变量值替换为现有的资源）。所有项目必须都存在，数据库副本除外。
 
-    # Sign in to Azure and set the subscription to work with
-    # ------------------------------------------------------
-    $SubscriptionId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Set-AzureRmContext -SubscriptionId $SubscriptionId
+```
+# Sign in to Azure and set the subscription to work with
+# ------------------------------------------------------
+$SubscriptionId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+Set-AzureRmContext -SubscriptionId $SubscriptionId
 
-    # SQL database source (the existing database to copy)
-    # ---------------------------------------------------
-    $sourceDbName = "db1"
-    $sourceDbServerName = "server1"
-    $sourceDbResourceGroupName = "rg1"
+# SQL database source (the existing database to copy)
+# ---------------------------------------------------
+$sourceDbName = "db1"
+$sourceDbServerName = "server1"
+$sourceDbResourceGroupName = "rg1"
 
-    # SQL database copy (the new db to be created)
-    # --------------------------------------------
-    $copyDbName = "db1_copy"
-    $copyDbServerName = "server2"
-    $copyDbResourceGroupName = "rg2"
+# SQL database copy (the new db to be created)
+# --------------------------------------------
+$copyDbName = "db1_copy"
+$copyDbServerName = "server2"
+$copyDbResourceGroupName = "rg2"
 
-    # Copy a database to the same server
-    # ----------------------------------
-    New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyDatabaseName $copyDbName
+# Copy a database to the same server
+# ----------------------------------
+New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyDatabaseName $copyDbName
 
-    # Copy a database to a different server
-    # -------------------------------------
-    New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyResourceGroupName $copyDbResourceGroupName -CopyServerName $copyDbServerName -CopyDatabaseName $copyDbName
+# Copy a database to a different server
+# -------------------------------------
+New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyResourceGroupName $copyDbResourceGroupName -CopyServerName $copyDbServerName -CopyDatabaseName $copyDbName
 
-    # Copy a database into an elastic database pool
-    # ---------------------------------------------
-    $poolName = "pool1"
+# Copy a database into an elastic database pool
+# ---------------------------------------------
+$poolName = "pool1"
 
-    New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyResourceGroupName $copyDbResourceGroupName -CopyServerName $copyDbServerName -ElasticPoolName $poolName -CopyDatabaseName $copyDbName
+New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyResourceGroupName $copyDbResourceGroupName -CopyServerName $copyDbServerName -ElasticPoolName $poolName -CopyDatabaseName $copyDbName
+```
 
 ## 后续步骤
 

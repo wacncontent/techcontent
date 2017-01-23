@@ -57,48 +57,52 @@ Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azur
 ## 计数器日志
 仅当如上所述按 NSG 启用此日志后，才会生成此日志。数据存储在启用日志记录时指定的存储帐户中。以 JSON 格式记录应用于资源的每个规则，如下所示。
 
-    {
-        "time": "2015-09-11T23:14:22.6940000Z",
-        "systemId": "e22a0996-e5a7-4952-8e28-4357a6e8f0c5",
-        "category": "NetworkSecurityGroupRuleCounter",
-        "resourceId": "/SUBSCRIPTIONS/D763EE4A-9131-455F-8C5E-876035455EC4/RESOURCEGROUPS/INSIGHTOBONRP/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/NSGINSIGHTOBONRP",
-        "operationName": "NetworkSecurityGroupCounters",
-        "properties": {
-            "vnetResourceGuid":"{DD0074B1-4CB3-49FA-BF10-8719DFBA3568}",
-            "subnetPrefix":"10.0.0.0/24",
-            "macAddress":"001517D9C43C",
-            "ruleName":"DenyAllOutBound",
-            "direction":"Out",
-            "type":"block",
-            "matchedConnections":0
-            }
-    }
+```
+{
+    "time": "2015-09-11T23:14:22.6940000Z",
+    "systemId": "e22a0996-e5a7-4952-8e28-4357a6e8f0c5",
+    "category": "NetworkSecurityGroupRuleCounter",
+    "resourceId": "/SUBSCRIPTIONS/D763EE4A-9131-455F-8C5E-876035455EC4/RESOURCEGROUPS/INSIGHTOBONRP/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/NSGINSIGHTOBONRP",
+    "operationName": "NetworkSecurityGroupCounters",
+    "properties": {
+        "vnetResourceGuid":"{DD0074B1-4CB3-49FA-BF10-8719DFBA3568}",
+        "subnetPrefix":"10.0.0.0/24",
+        "macAddress":"001517D9C43C",
+        "ruleName":"DenyAllOutBound",
+        "direction":"Out",
+        "type":"block",
+        "matchedConnections":0
+        }
+}
+```
 
 ## 事件日志
 仅当如上所述按 NSG 启用此日志后，才会生成此日志。数据存储在启用日志记录时指定的存储帐户中。将记录以下数据：
 
-    {
-        "time": "2015-09-11T23:05:22.6860000Z",
-        "systemId": "e22a0996-e5a7-4952-8e28-4357a6e8f0c5",
-        "category": "NetworkSecurityGroupEvent",
-        "resourceId": "/SUBSCRIPTIONS/D763EE4A-9131-455F-8C5E-876035455EC4/RESOURCEGROUPS/INSIGHTOBONRP/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/NSGINSIGHTOBONRP",
-        "operationName": "NetworkSecurityGroupEvents",
-        "properties": {
-            "vnetResourceGuid":"{DD0074B1-4CB3-49FA-BF10-8719DFBA3568}",
-            "subnetPrefix":"10.0.0.0/24",
-            "macAddress":"001517D9C43C",
-            "ruleName":"AllowVnetOutBound",
-            "direction":"Out",
-            "priority":65000,
-            "type":"allow",
-            "conditions":{
-                "destinationPortRange":"0-65535",
-                "sourcePortRange":"0-65535",
-                "destinationIP":"10.0.0.0/8,172.16.0.0/12,169.254.0.0/16,192.168.0.0/16,168.63.129.16/32",
-                "sourceIP":"10.0.0.0/8,172.16.0.0/12,169.254.0.0/16,192.168.0.0/16,168.63.129.16/32"
-            }
+```
+{
+    "time": "2015-09-11T23:05:22.6860000Z",
+    "systemId": "e22a0996-e5a7-4952-8e28-4357a6e8f0c5",
+    "category": "NetworkSecurityGroupEvent",
+    "resourceId": "/SUBSCRIPTIONS/D763EE4A-9131-455F-8C5E-876035455EC4/RESOURCEGROUPS/INSIGHTOBONRP/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/NSGINSIGHTOBONRP",
+    "operationName": "NetworkSecurityGroupEvents",
+    "properties": {
+        "vnetResourceGuid":"{DD0074B1-4CB3-49FA-BF10-8719DFBA3568}",
+        "subnetPrefix":"10.0.0.0/24",
+        "macAddress":"001517D9C43C",
+        "ruleName":"AllowVnetOutBound",
+        "direction":"Out",
+        "priority":65000,
+        "type":"allow",
+        "conditions":{
+            "destinationPortRange":"0-65535",
+            "sourcePortRange":"0-65535",
+            "destinationIP":"10.0.0.0/8,172.16.0.0/12,169.254.0.0/16,192.168.0.0/16,168.63.129.16/32",
+            "sourceIP":"10.0.0.0/8,172.16.0.0/12,169.254.0.0/16,192.168.0.0/16,168.63.129.16/32"
         }
     }
+}
+```
 
 ## 查看和分析审核日志
 可使用以下任意方法查看和分析审核日志数据：

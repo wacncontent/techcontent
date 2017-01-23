@@ -29,23 +29,29 @@ ms.author: drewm
 ## 调整不在可用性集中的 Windows VM 的大小
 1. 列出托管 VM 的硬件群集上可用的 VM 大小。
 
-        Get-AzureRmVMSize -ResourceGroupName <resourceGroupName> -VMName <vmName> 
+    ```
+    Get-AzureRmVMSize -ResourceGroupName <resourceGroupName> -VMName <vmName> 
+    ```
 
 2. 如果列出了所需大小，请运行以下命令来调整 VM 的大小。如果未列出所需大小，请转到步骤 3。
 
-        $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
-        $vm.HardwareProfile.VmSize = "<newVMsize>"
-        Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
+    ```
+    $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
+    $vm.HardwareProfile.VmSize = "<newVMsize>"
+    Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
+    ```
 
 3. 如果未列出所需大小，请运行以下命令来解除分配 VM、调整其大小，然后将它重新启动。
 
-        $rgname = "<resourceGroupName>"
-        $vmname = "<vmName>"
-        Stop-AzureRmVM -ResourceGroupName $rgname -VMName $vmname -Force
-        $vm = Get-AzureRmVM -ResourceGroupName $rgname -VMName $vmname
-        $vm.HardwareProfile.VmSize = "<newVMSize>"
-        Update-AzureRmVM -VM $vm -ResourceGroupName $rgname
-        Start-AzureRmVM -ResourceGroupName $rgname -Name $vmname
+    ```
+    $rgname = "<resourceGroupName>"
+    $vmname = "<vmName>"
+    Stop-AzureRmVM -ResourceGroupName $rgname -VMName $vmname -Force
+    $vm = Get-AzureRmVM -ResourceGroupName $rgname -VMName $vmname
+    $vm.HardwareProfile.VmSize = "<newVMSize>"
+    Update-AzureRmVM -VM $vm -ResourceGroupName $rgname
+    Start-AzureRmVM -ResourceGroupName $rgname -Name $vmname
+    ```
 
 > [!WARNING]
 解除分配 VM 会释放分配给该 VM 的所有动态 IP 地址。OS 和数据磁盘不受影响。
@@ -57,40 +63,48 @@ ms.author: drewm
 
 1. 列出托管 VM 的硬件群集上可用的 VM 大小。
 
-        Get-AzureRmVMSize -ResourceGroupName <resourceGroupName> -VMName <vmName>
+    ```
+    Get-AzureRmVMSize -ResourceGroupName <resourceGroupName> -VMName <vmName>
+    ```
 
 2. 如果列出了所需大小，请运行以下命令来调整 VM 的大小。如果未列出所需大小，请转到步骤 3。
 
-        $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
-        $vm.HardwareProfile.VmSize = "<newVmSize>"
-        Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
+    ```
+    $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
+    $vm.HardwareProfile.VmSize = "<newVmSize>"
+    Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
+    ```
 
 3. 如果未列出所需大小，则继续执行以下步骤以解除分配可用性集中的所有 VM、调整 VM 大小，然后重新启动 VM。
 4. 停止可用性集中的所有 VM。
 
-        $rg = "<resourceGroupName>"
-        $as = Get-AzureRmAvailabilitySet -ResourceGroupName $rg
-        $vmIds = $as.VirtualMachinesReferences
-        foreach ($vmId in $vmIDs){
-            $string = $vmID.Id.Split("/")
-            $vmName = $string[8]
-            Stop-AzureRmVM -ResourceGroupName $rg -Name $vmName -Force
-        } 
+    ```
+    $rg = "<resourceGroupName>"
+    $as = Get-AzureRmAvailabilitySet -ResourceGroupName $rg
+    $vmIds = $as.VirtualMachinesReferences
+    foreach ($vmId in $vmIDs){
+        $string = $vmID.Id.Split("/")
+        $vmName = $string[8]
+        Stop-AzureRmVM -ResourceGroupName $rg -Name $vmName -Force
+    } 
+    ```
 
 5. 调整可用性集中 VM 的大小并重新启动 VM。
 
-        $rg = "<resourceGroupName>"
-        $newSize = "<newVmSize>"
-        $as = Get-AzureRmAvailabilitySet -ResourceGroupName $rg
-        $vmIds = $as.VirtualMachinesReferences
-        foreach ($vmId in $vmIDs){
-            $string = $vmID.Id.Split("/")
-            $vmName = $string[8]
-            $vm = Get-AzureRmVM -ResourceGroupName $rg -Name $vmName
-            $vm.HardwareProfile.VmSize = $newSize
-            Update-AzureRmVM -ResourceGroupName $rg -VM $vm
-            Start-AzureRmVM -ResourceGroupName $rg -Name $vmName
-        }
+    ```
+    $rg = "<resourceGroupName>"
+    $newSize = "<newVmSize>"
+    $as = Get-AzureRmAvailabilitySet -ResourceGroupName $rg
+    $vmIds = $as.VirtualMachinesReferences
+    foreach ($vmId in $vmIDs){
+        $string = $vmID.Id.Split("/")
+        $vmName = $string[8]
+        $vm = Get-AzureRmVM -ResourceGroupName $rg -Name $vmName
+        $vm.HardwareProfile.VmSize = $newSize
+        Update-AzureRmVM -ResourceGroupName $rg -VM $vm
+        Start-AzureRmVM -ResourceGroupName $rg -Name $vmName
+    }
+    ```
 
 ## 后续步骤
 * 若要提高可伸缩性，请运行多个 VM 实例并进行横向扩展。有关详细信息，请参阅[自动缩放虚拟机规模集中的 Windows 计算机](../virtual-machine-scale-sets/virtual-machine-scale-sets-windows-autoscale.md)。

@@ -18,7 +18,9 @@ wacn.date: 12/05/2016
 
 在使用 PHP 的 http 客户端工具（如 Guzzle）调用认知服务时出现证书认证问题，错误信息如下：
 
-    Fatal error: Uncaught exception 'GuzzleHttp\Exception\RequestException' with message 'cURL error 60: SSL certificate problem: unable to get local issuer certificate
+```
+Fatal error: Uncaught exception 'GuzzleHttp\Exception\RequestException' with message 'cURL error 60: SSL certificate problem: unable to get local issuer certificate
+```
 
 ### 解决方法 ###
 

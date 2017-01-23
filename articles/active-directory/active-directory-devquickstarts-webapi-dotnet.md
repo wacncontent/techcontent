@@ -62,53 +62,61 @@ wacn.date: 01/09/2017
 
 C#
 
-    public partial class Startup
+```
+public partial class Startup
+{
+    public void Configuration(IAppBuilder app)
     {
-        public void Configuration(IAppBuilder app)
-        {
-            ConfigureAuth(app);
-        }
+        ConfigureAuth(app);
     }
+}
+```
 
 - 打开文件 `App_Start\Startup.Auth.cs` 并实现 `ConfigureAuth(…)` 方法。在 `WindowsAzureActiveDirectoryBearerAuthenticationOptions` 中提供的参数将充当应用程序与 Azure AD 通信时使用的坐标。
 
 C#
 
-    public void ConfigureAuth(IAppBuilder app)
-    {
-        app.UseWindowsAzureActiveDirectoryBearerAuthentication(
-            new WindowsAzureActiveDirectoryBearerAuthenticationOptions
-            {
-                Audience = ConfigurationManager.AppSettings["ida:Audience"],
-                Tenant = ConfigurationManager.AppSettings["ida:Tenant"]
-            });
-    }
+```
+public void ConfigureAuth(IAppBuilder app)
+{
+    app.UseWindowsAzureActiveDirectoryBearerAuthentication(
+        new WindowsAzureActiveDirectoryBearerAuthenticationOptions
+        {
+            Audience = ConfigurationManager.AppSettings["ida:Audience"],
+            Tenant = ConfigurationManager.AppSettings["ida:Tenant"]
+        });
+}
+```
 
 - 现在，你可以使用 `[Authorize]` 属性并结合 JWT 持有者身份验证来保护控制器和操作。使用 authorize 标记修饰 `Controllers\TodoListController.cs` 类。这会强制用户在访问该页面之前登录。
 
 C#
 
-    [Authorize]
-    public class TodoListController : ApiController
-    {
+```
+[Authorize]
+public class TodoListController : ApiController
+{
+```
 
 - 如果已授权的调用方成功调用了某个 `TodoListController` API，该操作可能需要访问有关调用方的信息。OWIN 通过 `ClaimsPrincpal` 对象提供对持有者令牌中的声明的访问。
 - Web API 的一个常见要求是验证令牌中的“作用域”- 这可确保最终用户授予访问待办事项列表服务所需的权限：
 
 C#
 
-    public IEnumerable<TodoItem> Get()
+```
+public IEnumerable<TodoItem> Get()
+{
+    // user_impersonation is the default permission exposed by applications in AAD
+    if (ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/scope").Value != "user_impersonation")
     {
-        // user_impersonation is the default permission exposed by applications in AAD
-        if (ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/scope").Value != "user_impersonation")
-        {
-            throw new HttpResponseException(new HttpResponseMessage {
-              StatusCode = HttpStatusCode.Unauthorized,
-              ReasonPhrase = "The Scope claim does not contain 'user_impersonation' or scope claim not found"
-            });
-        }
-        ...
+        throw new HttpResponseException(new HttpResponseMessage {
+          StatusCode = HttpStatusCode.Unauthorized,
+          ReasonPhrase = "The Scope claim does not contain 'user_impersonation' or scope claim not found"
+        });
     }
+    ...
+}
+```
 
 - 最后，打开位于 TodoListService 项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入你的配置值。
   - `ida:Tenant` 是 Azure AD 租户的名称，例如“contoso.partner.onmschina.cn”。

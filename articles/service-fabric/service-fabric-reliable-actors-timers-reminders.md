@@ -26,43 +26,45 @@ ms.author: vturecek
 
 执行组件可以对其基类使用 `RegisterTimer` 和 `UnregisterTimer` 方法以注册和注销其计时器。下面的示例演示了如何使用计时器 API。这些 API 非常类似于 .NET 计时器。在本示例中，计时器运行结束时，执行组件运行时会调用 `MoveObject` 方法。可保证该方法遵循基于轮次的并发。这意味着，任何其他执行组件方法或计时器/提醒回调将一直进行，直到此回调完成执行为止。
 
-    class VisualObjectActor : Actor, IVisualObject
+```
+class VisualObjectActor : Actor, IVisualObject
+{
+    private IActorTimer _updateTimer;
+    public VisualObjectActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        private IActorTimer _updateTimer;
-        public VisualObjectActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-
-        protected override Task OnActivateAsync()
-        {
-            ...
-
-            _updateTimer = RegisterTimer(
-                MoveObject,                     // Callback method
-                null,                           // Parameter to pass to the callback method
-                TimeSpan.FromMilliseconds(15),  // Amount of time to delay before the callback is invoked
-                TimeSpan.FromMilliseconds(15)); // Time interval between invocations of the callback method
-
-            return base.OnActivateAsync();
-        }
-
-        protected override Task OnDeactivateAsync()
-        {
-            if (_updateTimer != null)
-            {
-                UnregisterTimer(_updateTimer);
-            }
-
-            return base.OnDeactivateAsync();
-        }
-
-        private Task MoveObject(object state)
-        {
-            ...
-            return Task.FromResult(true);
-        }
     }
+
+    protected override Task OnActivateAsync()
+    {
+        ...
+
+        _updateTimer = RegisterTimer(
+            MoveObject,                     // Callback method
+            null,                           // Parameter to pass to the callback method
+            TimeSpan.FromMilliseconds(15),  // Amount of time to delay before the callback is invoked
+            TimeSpan.FromMilliseconds(15)); // Time interval between invocations of the callback method
+
+        return base.OnActivateAsync();
+    }
+
+    protected override Task OnDeactivateAsync()
+    {
+        if (_updateTimer != null)
+        {
+            UnregisterTimer(_updateTimer);
+        }
+
+        return base.OnDeactivateAsync();
+    }
+
+    private Task MoveObject(object state)
+    {
+        ...
+        return Task.FromResult(true);
+    }
+}
+```
 
 计时器的下一个周期在回调完成执行之后启动。这意味着计时器会在回调执行期间停止，在回调完成时启动。
 
@@ -75,38 +77,42 @@ ms.author: vturecek
 
 为了注册提醒，执行组件会调用基类上提供的 `RegisterReminderAsync` 方法，如以下示例中所示：
 
-    protected override async Task OnActivateAsync()
-    {
-        string reminderName = "Pay cell phone bill";
-        int amountInDollars = 100;
+```
+protected override async Task OnActivateAsync()
+{
+    string reminderName = "Pay cell phone bill";
+    int amountInDollars = 100;
 
-        IActorReminder reminderRegistration = await this.RegisterReminderAsync(
-            reminderName,
-            BitConverter.GetBytes(amountInDollars),
-            TimeSpan.FromDays(3),
-            TimeSpan.FromDays(1));
-    }
+    IActorReminder reminderRegistration = await this.RegisterReminderAsync(
+        reminderName,
+        BitConverter.GetBytes(amountInDollars),
+        TimeSpan.FromDays(3),
+        TimeSpan.FromDays(1));
+}
+```
 
 在本示例中，`"Pay cell phone bill"` 是提醒名称。这是执行组件用来唯一标识提醒的字符串。`BitConverter.GetBytes(amountInDollars)` 是与提醒关联的上下文。它会作为提醒回调的参数（即 `IRemindable.ReceiveReminderAsync`）传递回执行组件。
 
 使用提醒的执行组件必须实现 `IRemindable` 接口，如以下示例中所示。
 
-    public class ToDoListActor : Actor, IToDoListActor, IRemindable
+```
+public class ToDoListActor : Actor, IToDoListActor, IRemindable
+{
+    public ToDoListActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public ToDoListActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public Task ReceiveReminderAsync(string reminderName, byte[] context, TimeSpan dueTime, TimeSpan period)
-        {
-            if (reminderName.Equals("Pay cell phone bill"))
-            {
-                int amountToPay = BitConverter.ToInt32(context, 0);
-                System.Console.WriteLine("Please pay your cell phone bill of ${0}!", amountToPay);
-            }
-            return Task.FromResult(true);
-        }
     }
+    public Task ReceiveReminderAsync(string reminderName, byte[] context, TimeSpan dueTime, TimeSpan period)
+    {
+        if (reminderName.Equals("Pay cell phone bill"))
+        {
+            int amountToPay = BitConverter.ToInt32(context, 0);
+            System.Console.WriteLine("Please pay your cell phone bill of ${0}!", amountToPay);
+        }
+        return Task.FromResult(true);
+    }
+}
+```
 
 触发提醒时，Reliable Actors 运行时会对执行组件调用 `ReceiveReminderAsync` 方法。一个执行组件可以注册多个提醒，而 `ReceiveReminderAsync` 方法会在触发其中任一提醒时调用。执行组件可以使用传入给 `ReceiveReminderAsync` 方法的提醒名称来找出触发的提醒。
 
@@ -114,8 +120,10 @@ ms.author: vturecek
 
 为了注销提醒，执行组件会调用 `UnregisterReminderAsync` 方法，如以下示例中所示。
 
-    IActorReminder reminder = GetReminder("Pay cell phone bill");
-    Task reminderUnregistration = UnregisterReminderAsync(reminder);
+```
+IActorReminder reminder = GetReminder("Pay cell phone bill");
+Task reminderUnregistration = UnregisterReminderAsync(reminder);
+```
 
 如上所示，`UnregisterReminderAsync` 方法接受 `IActorReminder` 接口。执行组件基类支持 `GetReminder` 方法，该方法可以用于通过传入提醒名称来检索 `IActorReminder` 接口。这十分方便，因为参与者无需保存从 `RegisterReminder` 方法调用返回的 `IActorReminder` 接口。
 

@@ -51,28 +51,30 @@
 
 2.  将以下 TSQL 查询粘贴到查询窗口中。
 
-        USE [master]
-        GO
+    ```
+    USE [master]
+    GO
 
-        /* Replace the PASSWORD in the following statement with a secure password. 
-           If you save this script, make sure that you secure the file to 
-           securely maintain the password. */ 
-        CREATE LOGIN [HybridConnectionLogin] WITH PASSWORD=N'<**secure_password**>', 
-            DEFAULT_DATABASE=[OnPremisesDB], DEFAULT_LANGUAGE=[us_english], 
-            CHECK_EXPIRATION=OFF, CHECK_POLICY=ON
-        GO
+    /* Replace the PASSWORD in the following statement with a secure password. 
+       If you save this script, make sure that you secure the file to 
+       securely maintain the password. */ 
+    CREATE LOGIN [HybridConnectionLogin] WITH PASSWORD=N'<**secure_password**>', 
+        DEFAULT_DATABASE=[OnPremisesDB], DEFAULT_LANGUAGE=[us_english], 
+        CHECK_EXPIRATION=OFF, CHECK_POLICY=ON
+    GO
 
-        USE [OnPremisesDB]
-        GO
+    USE [OnPremisesDB]
+    GO
 
-        CREATE USER [HybridConnectionLogin] FOR LOGIN [HybridConnectionLogin] 
-        WITH DEFAULT_SCHEMA=[dbo]
-        GO
+    CREATE USER [HybridConnectionLogin] FOR LOGIN [HybridConnectionLogin] 
+    WITH DEFAULT_SCHEMA=[dbo]
+    GO
 
-        GRANT CONNECT TO [HybridConnectionLogin]
-        GRANT CREATE TABLE TO [HybridConnectionLogin]
-        GRANT CREATE SCHEMA TO [HybridConnectionLogin]
-        GO  
+    GRANT CONNECT TO [HybridConnectionLogin]
+    GRANT CREATE TABLE TO [HybridConnectionLogin]
+    GRANT CREATE SCHEMA TO [HybridConnectionLogin]
+    GO  
+    ```
 
 3. 在上述脚本中，请将字符串 `<**secure_password**>` 替换为新 *HybridConnectionsLogin* 的安全密码。
 

@@ -98,7 +98,9 @@ ms.author: crwilcox
 
     # Update Jupyter to the latest install and generate its config file
     sudo /anaconda3/bin/conda install jupyter -y
-    /anaconda3/bin/jupyter-notebook --generate-config
+```
+/anaconda3/bin/jupyter-notebook
+``` --generate-config
 
 ![屏幕快照](./media/virtual-machines-linux-jupyter-notebook/anaconda-install.png)
 
@@ -109,39 +111,49 @@ ms.author: crwilcox
 
 在 Linux 上使用以下命令。
 
-    cd ~/.jupyter
+```
+cd ~/.jupyter
+```
 
 使用以下命令创建 SSL 证书（Linux 和 Windows）。
 
-    openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+```
 
 请注意，由于我们创建的是自签名 SSL 证书，因此在连接到 Notebook 时，您的浏览器将显示安全警告。若要进行长期生产使用，您将需要使用与您的组织关联的正确签名的证书。由于证书管理超出了本演示的范围，我们目前将只讨论自签名证书。
 
 除了使用证书外，您还必须提供密码以确保您的 Notebook 免遭未授权使用。出于安全原因，Jupyter 在其配置文件中使用加密密码，因此你将首先需要加密你的密码。IPython 提供了一个实用工具来执行此操作；在命令提示符下运行以下命令。
 
-    /anaconda3/bin/python -c "import IPython;print(IPython.lib.passwd())"
+```
+/anaconda3/bin/python -c "import IPython;print(IPython.lib.passwd())"
+```
 
 这会提示你提供密码并确认，然后将输出密码。记下此密码，以便下一步使用。
 
-    Enter password:
-    Verify password:
-    sha1:b86e933199ad:a02e9592e59723da722.. (elided the rest for security)
+```
+Enter password:
+Verify password:
+sha1:b86e933199ad:a02e9592e59723da722.. (elided the rest for security)
+```
 
 接下来，我们将编辑配置文件的配置文件，它是你所在目录中的 `jupyter_notebook_config.py` 文件。请注意，此文件可能不存在 - 只需创建它（如果不存在）。此文件包含多个字段，默认情况下会全部注释掉。你可以使用你喜欢的任何文本编辑器打开此文件，并应确保它至少具有以下内容。请务必将 config 里的 c.NotebookApp.password 替换为前一步中的 sha1。
 
-    c = get_config()
+```
+c = get_config()
 
-    # You must give the path to the certificate file.
-    c.NotebookApp.certfile = u'/home/azureuser/.jupyter/mycert.pem'
+# You must give the path to the certificate file.
+c.NotebookApp.certfile = u'/home/azureuser/.jupyter/mycert.pem'
 
-    # Create your own password as indicated above
-    c.NotebookApp.password = u'sha1:b86e933199ad:a02e9592e5 etc... '
+# Create your own password as indicated above
+c.NotebookApp.password = u'sha1:b86e933199ad:a02e9592e5 etc... '
 
-    # Network and browser details. We use a fixed port (9999) so it matches
-    # our Azure setup, where we've allowed traffic on that port
-    c.NotebookApp.ip = '*'
-    c.NotebookApp.port = 9999
-    c.NotebookApp.open_browser = False
+# Network and browser details. We use a fixed port (9999) so it matches
+# our Azure setup, where we've allowed traffic on that port
+c.NotebookApp.ip = '*'
+c.NotebookApp.port = 9999
+c.NotebookApp.open_browser = False
+```
 
 ### 运行 Jupyter Notebook
 

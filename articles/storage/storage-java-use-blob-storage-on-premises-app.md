@@ -36,30 +36,38 @@ ms.author: tamram
 
 在代码的开头请包括对 Azure 核心存储类、Azure Blob 客户端类、Java IO 类和 **URISyntaxException** 类的导入：
 
-    import com.microsoft.azure.storage.*;
-    import com.microsoft.azure.storage.blob.*;
-    import java.io.*;
-    import java.net.URISyntaxException;
+```
+import com.microsoft.azure.storage.*;
+import com.microsoft.azure.storage.blob.*;
+import java.io.*;
+import java.net.URISyntaxException;
+```
 
 声明一个名为 **StorageSample** 的类，包含左大括号 **{**。
 
-    public class StorageSample {
+```
+public class StorageSample {
+```
 
 在 StorageSample 类中，声明一个将包含**默认终结点协议、你的存储帐户名称和存储访问密钥**（在你的 Azure 存储帐户中指定）的字符串变量。将占位符值 **your_account_name** 和
 **your_account_key** 分别替换为你自己的帐户名称和帐户密钥。
 
-    public static final String storageConnectionString =
-           "DefaultEndpointsProtocol=http;" +
-               "AccountName=your_account_name;" +
-               "AccountKey=your_account_name;" +
-           "EndpointSuffix=core.chinacloudapi.cn";
+```
+public static final String storageConnectionString =
+       "DefaultEndpointsProtocol=http;" +
+           "AccountName=your_account_name;" +
+           "AccountKey=your_account_name;" +
+       "EndpointSuffix=core.chinacloudapi.cn";
+```
 
 添加对 **main** 的声明，包括 **try** 块并包括必需的左大括号 **{**。
 
-    public static void main(String[] args)
+```
+public static void main(String[] args)
+{
+    try
     {
-        try
-        {
+```
 
 声明以下类型的变量（说明针对的是如何在此示例中使用这些变量）：
 
@@ -70,56 +78,78 @@ ms.author: tamram
 
 <!-- -->
 
-    CloudStorageAccount account;
-    CloudBlobClient serviceClient;
-    CloudBlobContainer container;
-    CloudBlockBlob blob;
+```
+CloudStorageAccount account;
+CloudBlobClient serviceClient;
+CloudBlobContainer container;
+CloudBlockBlob blob;
+```
 
 为 **account** 变量赋值。
 
-    account = CloudStorageAccount.parse(storageConnectionString);
+```
+account = CloudStorageAccount.parse(storageConnectionString);
+```
 
 为 **serviceClient** 变量赋值。
 
-    serviceClient = account.createCloudBlobClient();
+```
+serviceClient = account.createCloudBlobClient();
+```
 
 为 **container** 变量赋值。我们将获取对名为 **gettingstarted** 的容器的引用。
 
-    // Container name must be lower case.
-    container = serviceClient.getContainerReference("gettingstarted");
+```
+// Container name must be lower case.
+container = serviceClient.getContainerReference("gettingstarted");
+```
 
 创建该容器。如果该容器不存在，此方法将创建该容器（并返回 **true**）。如果该容器存在，则此方法将返回 **false**。**createIfNotExists** 的一个替代方法是 **create** 方法（如果该容器已存在，该方法将返回错误）。
 
-    container.createIfNotExists();
+```
+container.createIfNotExists();
+```
 
 为容器设置匿名访问。
 
-    // Set anonymous access on the container.
-    BlobContainerPermissions containerPermissions;
-    containerPermissions = new BlobContainerPermissions();
-    containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
-    container.uploadPermissions(containerPermissions);
+```
+// Set anonymous access on the container.
+BlobContainerPermissions containerPermissions;
+containerPermissions = new BlobContainerPermissions();
+containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
+container.uploadPermissions(containerPermissions);
+```
 
 获取对块 Blob 的引用，它将表示 Azure 存储中的 Blob。
 
-    blob = container.getBlockBlobReference("image1.jpg");
+```
+blob = container.getBlockBlobReference("image1.jpg");
+```
 
 使用 **File** 构造函数获取对将上传的在本地创建的文件的引用。确保在运行代码之前已创建此文件。
 
-    File fileReference = new File ("c:\\myimages\\image1.jpg");
+```
+File fileReference = new File ("c:\\myimages\\image1.jpg");
+```
 
 通过调用 **CloudBlockBlob.upload** 方法上传该本地文件。**CloudBlockBlob.upload** 方法的第一个参数是表示将上传到 Azure 存储的本地文件的 **FileInputStream** 对象。第二个参数是此文件的大小（以字节为单位）。
 
-    blob.upload(new FileInputStream(fileReference), fileReference.length());
+```
+blob.upload(new FileInputStream(fileReference), fileReference.length());
+```
 
 调用一个名为 **MakeHTMLPage** 的帮助器函数来生成一个包含 **&lt;image&gt;** 元素的基本 HTML 页面，并将元素中的源设置为现在位于 Azure 存储帐户中的 Blob。本文后面将讨论 **MakeHTMLPage** 的代码。
 
-    MakeHTMLPage(container);
+```
+MakeHTMLPage(container);
+```
 
 打印输出有关创建的 HTML 页的状态消息和信息。
 
-    System.out.println("Processing complete.");
-    System.out.println("Open index.html to see the images stored in your storage account.");
+```
+System.out.println("Processing complete.");
+System.out.println("Open index.html to see the images stored in your storage account.");
+```
 
 结束 **try** 块的方法是插入右大括号：**}**
 
@@ -132,67 +162,81 @@ ms.author: tamram
 
 <!-- -->
 
-    catch (FileNotFoundException fileNotFoundException)
-    {
-        System.out.print("FileNotFoundException encountered: ");
-        System.out.println(fileNotFoundException.getMessage());
-        System.exit(-1);
-    }
-    catch (StorageException storageException)
-    {
-        System.out.print("StorageException encountered: ");
-        System.out.println(storageException.getMessage());
-        System.exit(-1);
-    }
-    catch (URISyntaxException uriSyntaxException)
-    {
-        System.out.print("URISyntaxException encountered: ");
-        System.out.println(uriSyntaxException.getMessage());
-        System.exit(-1);
-    }
-    catch (Exception e)
-    {
-        System.out.print("Exception encountered: ");
-        System.out.println(e.getMessage());
-        System.exit(-1);
-    }
+```
+catch (FileNotFoundException fileNotFoundException)
+{
+    System.out.print("FileNotFoundException encountered: ");
+    System.out.println(fileNotFoundException.getMessage());
+    System.exit(-1);
+}
+catch (StorageException storageException)
+{
+    System.out.print("StorageException encountered: ");
+    System.out.println(storageException.getMessage());
+    System.exit(-1);
+}
+catch (URISyntaxException uriSyntaxException)
+{
+    System.out.print("URISyntaxException encountered: ");
+    System.out.println(uriSyntaxException.getMessage());
+    System.exit(-1);
+}
+catch (Exception e)
+{
+    System.out.print("Exception encountered: ");
+    System.out.println(e.getMessage());
+    System.exit(-1);
+}
+```
 
 结束 **main** 的方法是插入右大括号：**}**
 
 创建一个名为 **MakeHTMLPage** 的方法来创建一个基本的 HTML 页面。此方法具有一个 **CloudBlobContainer** 类型的参数，该参数将用于循环访问已上传 Blob 的列表。此方法将引发 **FileNotFoundException** 类型的异常（可由 **FileOutputStream** 构造函数引发）以及 **URISyntaxException**（可由 **ListBlobItem.getUri**.getUri 方法引发）。包括左大括号 **{**。
 
-    public static void MakeHTMLPage(CloudBlobContainer container) throws FileNotFoundException, URISyntaxException
-    {
+```
+public static void MakeHTMLPage(CloudBlobContainer container) throws FileNotFoundException, URISyntaxException
+{
+```
 
 创建一个名为 **index.html** 的本地文件。
 
-    PrintStream stream;
-    stream = new PrintStream(new FileOutputStream("index.html"));
+```
+PrintStream stream;
+stream = new PrintStream(new FileOutputStream("index.html"));
+```
 
 写入本地文件，添加 **&lt;html&gt;**、**&lt;header&gt;** 和 **&lt;body&gt;** 元素。
 
-    stream.println("<html>");
-    stream.println("<header/>");
-    stream.println("<body>");
+```
+stream.println("<html>");
+stream.println("<header/>");
+stream.println("<body>");
+```
 
 循环访问已上传 Blob 的列表。对于 HTML 页中的每个 Blob，创建一个 **&lt;img&gt;** 元素，并将该元素的 **src** 属性发送到 Blob 的 URI（如同它存在于 Azure 存储帐户中一样）。虽然仅在此示例中添加了一个图像，但如果添加更多图像，此代码将循环访问所有这些图像。
 
 为简单起见，此示例假定上传的每个 Blob 都是一个图像。如果更新了图像之外的 Blob，或者更新了页面 Blob 而不是块 Blob，则请根据需要调整代码。
 
-    // Enumerate the uploaded blobs.
-    for (ListBlobItem blobItem : container.listBlobs()) {
-    // List each blob as an <img> element in the HTML body.
-    stream.println("<img src='" + blobItem.getUri() + "'/><br/>");
-    }
+```
+// Enumerate the uploaded blobs.
+for (ListBlobItem blobItem : container.listBlobs()) {
+// List each blob as an <img> element in the HTML body.
+stream.println("<img src='" + blobItem.getUri() + "'/><br/>");
+}
+```
 
 关闭 **&lt;body&gt;** 元素和 **&lt;html&gt;** 元素。
 
-    stream.println("</body>");
-    stream.println("</html>");
+```
+stream.println("</body>");
+stream.println("</html>");
+```
 
 结束本地文件。
 
-    stream.close();
+```
+stream.close();
+```
 
 结束 **MakeHTMLPage** 的方法是插入右大括号：**}**
 
@@ -200,98 +244,100 @@ ms.author: tamram
 
 以下是此示例的完整代码。请记住将占位符值 **your\_account\_name** 和 **your\_account\_key** 分别修改为使用自己的帐户名称和帐户密钥。
 
-    import com.microsoft.azure.storage.*;
-    import com.microsoft.azure.storage.blob.*;
-    import java.io.*;
-    import java.net.URISyntaxException;
+```
+import com.microsoft.azure.storage.*;
+import com.microsoft.azure.storage.blob.*;
+import java.io.*;
+import java.net.URISyntaxException;
 
-    // Create an image, c:\myimages\image1.jpg, prior to running this sample.
-    // Alternatively, change the value used by the FileInputStream constructor
-    // to use a different image path and file that you have already created.
-    public class StorageSample {
+// Create an image, c:\myimages\image1.jpg, prior to running this sample.
+// Alternatively, change the value used by the FileInputStream constructor
+// to use a different image path and file that you have already created.
+public class StorageSample {
 
-        public static final String storageConnectionString =
-                "DefaultEndpointsProtocol=http;" +
-                       "AccountName=your_account_name;" +
-                       "AccountKey=your_account_name;" +
-               "EndpointSuffix=core.chinacloudapi.cn";
+    public static final String storageConnectionString =
+            "DefaultEndpointsProtocol=http;" +
+                   "AccountName=your_account_name;" +
+                   "AccountKey=your_account_name;" +
+           "EndpointSuffix=core.chinacloudapi.cn";
 
-        public static void main(String[] args) {
-            try {
-                CloudStorageAccount account;
-                CloudBlobClient serviceClient;
-                CloudBlobContainer container;
-                CloudBlockBlob blob;
+    public static void main(String[] args) {
+        try {
+            CloudStorageAccount account;
+            CloudBlobClient serviceClient;
+            CloudBlobContainer container;
+            CloudBlockBlob blob;
 
-                account = CloudStorageAccount.parse(storageConnectionString);
-                serviceClient = account.createCloudBlobClient();
-                // Container name must be lower case.
-                container = serviceClient.getContainerReference("gettingstarted");
-                container.createIfNotExists();
+            account = CloudStorageAccount.parse(storageConnectionString);
+            serviceClient = account.createCloudBlobClient();
+            // Container name must be lower case.
+            container = serviceClient.getContainerReference("gettingstarted");
+            container.createIfNotExists();
 
-                // Set anonymous access on the container.
-                BlobContainerPermissions containerPermissions;
-                containerPermissions = new BlobContainerPermissions();
-                containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
-                container.uploadPermissions(containerPermissions);
+            // Set anonymous access on the container.
+            BlobContainerPermissions containerPermissions;
+            containerPermissions = new BlobContainerPermissions();
+            containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
+            container.uploadPermissions(containerPermissions);
 
-                // Upload an image file.
-                blob = container.getBlockBlobReference("image1.jpg");
+            // Upload an image file.
+            blob = container.getBlockBlobReference("image1.jpg");
 
-                File fileReference = new File("c:\\myimages\\image1.jpg");
-                blob.upload(new FileInputStream(fileReference), fileReference.length());
+            File fileReference = new File("c:\\myimages\\image1.jpg");
+            blob.upload(new FileInputStream(fileReference), fileReference.length());
 
-                // At this point the image is uploaded.
-                // Next, create an HTML page that lists all of the uploaded images.
-                MakeHTMLPage(container);
+            // At this point the image is uploaded.
+            // Next, create an HTML page that lists all of the uploaded images.
+            MakeHTMLPage(container);
 
-                System.out.println("Processing complete.");
-                System.out.println("Open index.html to see the images stored in your storage account.");
+            System.out.println("Processing complete.");
+            System.out.println("Open index.html to see the images stored in your storage account.");
 
-            } catch (FileNotFoundException fileNotFoundException) {
-                System.out.print("FileNotFoundException encountered: ");
-                System.out.println(fileNotFoundException.getMessage());
-                System.exit(-1);
-            } catch (StorageException storageException) {
-                System.out.print("StorageException encountered: ");
-                System.out.println(storageException.getMessage());
-                System.exit(-1);
-            } catch (URISyntaxException uriSyntaxException) {
-                System.out.print("URISyntaxException encountered: ");
-                System.out.println(uriSyntaxException.getMessage());
-                System.exit(-1);
-            } catch (Exception e) {
-                System.out.print("Exception encountered: ");
-                System.out.println(e.getMessage());
-                System.exit(-1);
-            }
-        }
-
-        // Create an HTML page that can be used to display the uploaded images.
-        // This example assumes all of the blobs are for images.
-        public static void MakeHTMLPage(CloudBlobContainer container) throws FileNotFoundException, URISyntaxException
-        {
-            PrintStream stream;
-            stream = new PrintStream(new FileOutputStream("index.html"));
-
-            // Create the opening <html>, <header>, and <body> elements.
-            stream.println("<html>");
-            stream.println("<header/>");
-            stream.println("<body>");
-
-            // Enumerate the uploaded blobs.
-            for (ListBlobItem blobItem : container.listBlobs()) {
-                // List each blob as an <img> element in the HTML body.
-                stream.println("<img src='" + blobItem.getUri() + "'/><br/>");
-            }
-
-            stream.println("</body>");
-
-            // Complete the <html> element and close the file.
-            stream.println("</html>");
-            stream.close();
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.print("FileNotFoundException encountered: ");
+            System.out.println(fileNotFoundException.getMessage());
+            System.exit(-1);
+        } catch (StorageException storageException) {
+            System.out.print("StorageException encountered: ");
+            System.out.println(storageException.getMessage());
+            System.exit(-1);
+        } catch (URISyntaxException uriSyntaxException) {
+            System.out.print("URISyntaxException encountered: ");
+            System.out.println(uriSyntaxException.getMessage());
+            System.exit(-1);
+        } catch (Exception e) {
+            System.out.print("Exception encountered: ");
+            System.out.println(e.getMessage());
+            System.exit(-1);
         }
     }
+
+    // Create an HTML page that can be used to display the uploaded images.
+    // This example assumes all of the blobs are for images.
+    public static void MakeHTMLPage(CloudBlobContainer container) throws FileNotFoundException, URISyntaxException
+    {
+        PrintStream stream;
+        stream = new PrintStream(new FileOutputStream("index.html"));
+
+        // Create the opening <html>, <header>, and <body> elements.
+        stream.println("<html>");
+        stream.println("<header/>");
+        stream.println("<body>");
+
+        // Enumerate the uploaded blobs.
+        for (ListBlobItem blobItem : container.listBlobs()) {
+            // List each blob as an <img> element in the HTML body.
+            stream.println("<img src='" + blobItem.getUri() + "'/><br/>");
+        }
+
+        stream.println("</body>");
+
+        // Complete the <html> element and close the file.
+        stream.println("</html>");
+        stream.close();
+    }
+}
+```
 
 除了将本地图像文件上传到 Azure 存储之外，此示例代码还将创建本地文件 namedindex.html，可在浏览器中打开该文件以查看上传的图像。
 
@@ -301,53 +347,57 @@ ms.author: tamram
 
 由于存储是收费的，因此可能希望在完成对此示例的试验后删除 **gettingstarted** 容器。若要删除容器，请使用 **CloudBlobContainer.delete** 方法：
 
-    container = serviceClient.getContainerReference("gettingstarted");
-    container.delete();
+```
+container = serviceClient.getContainerReference("gettingstarted");
+container.delete();
+```
 
 若要调用 **CloudBlobContainer.delete** 方法，初始化 **CloudStorageAccount**、**ClodBlobClient**、**CloudBlobContainer** 对象的过程与为 **createIfNotExist** 方法演示的过程相同。以下是删除名为 **gettingstarted** 的容器的完整示例。
 
-    import com.microsoft.azure.storage.*;
-    import com.microsoft.azure.storage.blob.*;
+```
+import com.microsoft.azure.storage.*;
+import com.microsoft.azure.storage.blob.*;
 
-    public class DeleteContainer {
+public class DeleteContainer {
 
-        public static final String storageConnectionString =
-                "DefaultEndpointsProtocol=http;" +
-                   "AccountName=your_account_name;" +
-                   "AccountKey=your_account_key;" +
-           "EndpointSuffix=core.chinacloudapi.cn";
+    public static final String storageConnectionString =
+            "DefaultEndpointsProtocol=http;" +
+               "AccountName=your_account_name;" +
+               "AccountKey=your_account_key;" +
+       "EndpointSuffix=core.chinacloudapi.cn";
 
-        public static void main(String[] args)
+    public static void main(String[] args)
+    {
+        try
         {
-            try
-            {
-                CloudStorageAccount account;
-                CloudBlobClient serviceClient;
-                CloudBlobContainer container;
+            CloudStorageAccount account;
+            CloudBlobClient serviceClient;
+            CloudBlobContainer container;
 
-                account = CloudStorageAccount.parse(storageConnectionString);
-                serviceClient = account.createCloudBlobClient();
-                // Container name must be lower case.
-                container = serviceClient.getContainerReference("gettingstarted");
-                container.delete();
+            account = CloudStorageAccount.parse(storageConnectionString);
+            serviceClient = account.createCloudBlobClient();
+            // Container name must be lower case.
+            container = serviceClient.getContainerReference("gettingstarted");
+            container.delete();
 
-                System.out.println("Container deleted.");
+            System.out.println("Container deleted.");
 
-            }
-            catch (StorageException storageException)
-            {
-                System.out.print("StorageException encountered: ");
-                System.out.println(storageException.getMessage());
-                System.exit(-1);
-            }
-            catch (Exception e)
-            {
-                System.out.print("Exception encountered: ");
-                System.out.println(e.getMessage());
-                System.exit(-1);
-            }
+        }
+        catch (StorageException storageException)
+        {
+            System.out.print("StorageException encountered: ");
+            System.out.println(storageException.getMessage());
+            System.exit(-1);
+        }
+        catch (Exception e)
+        {
+            System.out.print("Exception encountered: ");
+            System.out.println(e.getMessage());
+            System.exit(-1);
         }
     }
+}
+```
 
 有关其他 Blob 存储类和方法的概述，请参阅[如何通过 Java 使用 Blob 存储](./storage-java-how-to-use-blob-storage.md)。
 

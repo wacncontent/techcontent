@@ -176,9 +176,11 @@ Azure H 系列虚拟机是下一代高性能计算 VM，旨在满足高端计算
 
 下面是一个将 Web 角色实例的角色大小设置为 Standard_D2 的示例：
 
-    <WorkerRole name="Worker1" vmsize="Standard_D2">
-    ...
-    </WorkerRole>
+```
+<WorkerRole name="Worker1" vmsize="Standard_D2">
+...
+</WorkerRole>
+```
 
 ## 更改现有角色的大小
 

@@ -87,19 +87,21 @@ ms.author: ddove
 
 有关引用表和分片表对比的信息可由分片映射上的 **SchemaInfo** API 提供。以下示例说明了如何在给定分片映射管理器对象 smm 上使用这些 API：
 
-    // Create the schema annotations 
-    SchemaInfo schemaInfo = new SchemaInfo(); 
+```
+// Create the schema annotations 
+SchemaInfo schemaInfo = new SchemaInfo(); 
 
-    // Reference tables 
-    schemaInfo.Add(new ReferenceTableInfo("dbo", "region")); 
-    schemaInfo.Add(new ReferenceTableInfo("dbo", "nation")); 
+// Reference tables 
+schemaInfo.Add(new ReferenceTableInfo("dbo", "region")); 
+schemaInfo.Add(new ReferenceTableInfo("dbo", "nation")); 
 
-    // Sharded tables 
-    schemaInfo.Add(new ShardedTableInfo("dbo", "customer", "C_CUSTKEY")); 
-    schemaInfo.Add(new ShardedTableInfo("dbo", "orders", "O_CUSTKEY")); 
+// Sharded tables 
+schemaInfo.Add(new ShardedTableInfo("dbo", "customer", "C_CUSTKEY")); 
+schemaInfo.Add(new ShardedTableInfo("dbo", "orders", "O_CUSTKEY")); 
 
-    // Publish 
-    smm.GetSchemaInfoCollection().Add(Configuration.ShardMapName, schemaInfo); 
+// Publish 
+smm.GetSchemaInfoCollection().Add(Configuration.ShardMapName, schemaInfo); 
+```
 
 将表“region”和表“nation”定义为引用表，并使用拆分/合并/移动操作复制它们。而将“customer”和“orders”定义为分片表。C\_CUSTKEY 和 O\_CUSTKEY 将用作分片键。
 
@@ -176,23 +178,25 @@ ms.author: ddove
 
 针对 NuGet 包所提供的 Web 和辅助角色，若要使用诊断配置启用监视和诊断，请使用 Azure PowerShell 运行以下命令：
 
-    $storage_name = "<YourAzureStorageAccount>" 
+```
+$storage_name = "<YourAzureStorageAccount>" 
 
-    $key = "<YourAzureStorageAccountKey" 
+$key = "<YourAzureStorageAccountKey" 
 
-    $storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key  
+$storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key  
 
-    $config_path = "<YourFilePath>\SplitMergeWebContent.diagnostics.xml" 
+$config_path = "<YourFilePath>\SplitMergeWebContent.diagnostics.xml" 
 
-    $service_name = "<YourCloudServiceName>" 
+$service_name = "<YourCloudServiceName>" 
 
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWeb" 
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWeb" 
 
-    $config_path = "<YourFilePath>\SplitMergeWorkerContent.diagnostics.xml" 
+$config_path = "<YourFilePath>\SplitMergeWorkerContent.diagnostics.xml" 
 
-    $service_name = "<YourCloudServiceName>" 
+$service_name = "<YourCloudServiceName>" 
 
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWorker" 
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWorker" 
+```
 
 可以在此处找到有关如何配置和部署诊断设置的详细信息：[在 Azure 云服务和虚拟机中启用诊断](../cloud-services/cloud-services-dotnet-diagnostics.md)。
 

@@ -36,34 +36,36 @@ ms.author: vturecek
 
 以下示例演示了将重入模式设置为 `ActorReentrancyMode.Disallowed` 的执行组件服务。在这种情况下，如果执行组件向另一个执行组件发送可重入消息，则会引发类型为 `FabricException` 的异常。
 
-    static class Program
+```
+static class Program
+{
+    static void Main()
     {
-        static void Main()
+        try
         {
-            try
-            {
-                ActorRuntime.RegisterActorAsync<Actor1>(
-                    (context, actorType) => new ActorService(
-                        context, 
-                        actorType, () => new Actor1(), 
-                        settings: new ActorServiceSettings()
+            ActorRuntime.RegisterActorAsync<Actor1>(
+                (context, actorType) => new ActorService(
+                    context, 
+                    actorType, () => new Actor1(), 
+                    settings: new ActorServiceSettings()
+                    {
+                        ActorConcurrencySettings = new ActorConcurrencySettings()
                         {
-                            ActorConcurrencySettings = new ActorConcurrencySettings()
-                            {
-                                ReentrancyMode = ActorReentrancyMode.Disallowed
-                            }
-                        }))
-                    .GetAwaiter().GetResult();
+                            ReentrancyMode = ActorReentrancyMode.Disallowed
+                        }
+                    }))
+                .GetAwaiter().GetResult();
 
-                Thread.Sleep(Timeout.Infinite);
-            }
-            catch (Exception e)
-            {
-                ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
-                throw;
-            }
+            Thread.Sleep(Timeout.Infinite);
+        }
+        catch (Exception e)
+        {
+            ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
+            throw;
         }
     }
+}
+```
 
 ## 后续步骤
  - [执行组件诊断和性能监视](./service-fabric-reliable-actors-diagnostics.md)

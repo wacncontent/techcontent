@@ -88,11 +88,15 @@ ms.author: cephalin
 
 3. 通过执行以下命令创建分叉的本地复本：
 
-        git clone https://github.com/<your_fork>/ToDoApp.git 
+    ```
+    git clone https://github.com/<your_fork>/ToDoApp.git 
+    ```
 
 4. 创建本地复本后，请导航到 *&lt;repository\_root>* \\ARMTemplates 并运行 deploy.ps1 脚本，如下所示：
 
-        .\deploy.ps1 -RepoUrl https://github.com/<your_fork>/todoapp.git
+    ```
+    .\deploy.ps1 -RepoUrl https://github.com/<your_fork>/todoapp.git
+    ```
 
     >[!NOTE]
     > 在使用这些模板之前，需要进行以下编辑，以适应 Azure 中国区的云环境：
@@ -114,7 +118,9 @@ ms.author: cephalin
 
 6. 返回 Git Shell 会话，运行：
 
-        .\swap -Name ToDoApp<unique_string>master
+    ```
+    .\swap -Name ToDoApp<unique_string>master
+    ```
 
     ![](./media/app-service-agile-software-development/production-4-swap.png)
 
@@ -134,9 +140,11 @@ ms.author: cephalin
 
 1. 首先创建测试环境。在 Git Shell 会话中，运行以下命令来创建名为 **NewUpdate** 的新分支的环境。
 
-        git checkout -b NewUpdate
-        git push origin NewUpdate 
-        .\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch NewUpdate
+    ```
+    git checkout -b NewUpdate
+    git push origin NewUpdate 
+    .\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch NewUpdate
+    ```
 
     >[!NOTE]
     > 应该对“Dev.json”进行相同的修改，就像你对“ProdAndStage.json”所做的修改一样
@@ -155,9 +163,11 @@ ms.author: cephalin
 
 2. 运行以下命令，以继续创建开发分支：
 
-        git checkout -b Dev
-        git push origin Dev
-        .\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch Dev
+    ```
+    git checkout -b Dev
+    git push origin Dev
+    .\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch Dev
+    ```
 
 3. 出现提示时，键入所需的用户名和密码来访问数据库。
 
@@ -191,7 +201,9 @@ ms.author: cephalin
 
 1. 确保处于本地存储库的 Dev 分支中。为此，请在 Git Shell 中运行以下命令：
 
-        git checkout Dev
+    ```
+    git checkout Dev
+    ```
 
 2. 通过将代码更改为使用 [Bootstrap](http://getbootstrap.com/components/) 列表，对应用的 UI 层进行简单更改。打开 *&lt;repository\_root>* \\src\\MultiChannelToDo.Web\\index.cshtml，进行下面突出显示的更改：
 
@@ -205,10 +217,12 @@ ms.author: cephalin
 
 3. 保存更改。返回到 Git Shell 并运行以下命令：
 
-        cd <repository_root>
-        git add .
-        git commit -m "changed to bootstrap style"
-        git push origin Dev
+    ```
+    cd <repository_root>
+    git add .
+    git commit -m "changed to bootstrap style"
+    git push origin Dev
+    ```
 
     这些 git 命令与另一个源代码管理系统（例如 TFS）中的“签入你的代码”类似。运行 `git push` 时，新的提交将触发自动将代码推送到 Azure，然后重建应用程序，以反映开发环境中的更改。
 
@@ -234,10 +248,12 @@ ms.author: cephalin
 
 现在，将代码推送到 **NewUpdate** 分支。在 Git Shell 中运行以下命令：
 
-    git checkout NewUpdate
-    git pull origin NewUpdate
-    git merge Dev
-    git push origin NewUpdate
+```
+git checkout NewUpdate
+git pull origin NewUpdate
+git merge Dev
+git push origin NewUpdate
+```
 
 就这么简单！
 
@@ -249,19 +265,25 @@ ms.author: cephalin
 
 在 Git Shell 中运行以下命令：
 
-    git checkout master
-    git pull origin master
-    git merge NewUpdate
-    git push origin master
+```
+git checkout master
+git pull origin master
+git merge NewUpdate
+git push origin master
+```
 
 请记住，根据在 ProdandStage.json 中设置过渡和生产环境的方式，新代码将推送到“过渡”槽，并在该处运行。因此，如果你导航到过渡槽的 URL，则会看到新代码正在该处运行。为此，请在 Git Shell 中运行 `Show-AzureWebsite` cmdlet。
 
-    Show-AzureWebsite -Name ToDoApp<unique_string>master -Slot Staging
+```
+Show-AzureWebsite -Name ToDoApp<unique_string>master -Slot Staging
+```
 
 现在，在过渡槽中验证更新之后，唯一要做的就是将它交换到生产环境。在 Git Shell 中，只要运行以下命令：
 
-    cd <repository_root>\ARMTemplates
-    .\swap.ps1 -Name ToDoApp<unique_string>master
+```
+cd <repository_root>\ARMTemplates
+.\swap.ps1 -Name ToDoApp<unique_string>master
+```
 
 祝贺你！ 新的更新已成功发布到生产 Web 应用程序。不仅如此，完成的方式也只是轻松地创建开发和测试环境，以及构建和测试每项提交。这些是敏捷软件开发的重要构建块。
 
@@ -269,12 +291,14 @@ ms.author: cephalin
 
 由于你特意将开发和测试环境构建为独立的资源组，因此可以很容易删除它们。若要删除你在本教程中创建的环境（GitHub 分支和 Azure 项目），只需在 Git Shell 中运行以下命令：
 
-    git branch -d Dev
-    git push origin :Dev
-    git branch -d NewUpdate
-    git push origin :NewUpdate
-    Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>dev-group -Force -Verbose
-    Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>newupdate-group -Force -Verbose
+```
+git branch -d Dev
+git push origin :Dev
+git branch -d NewUpdate
+git push origin :NewUpdate
+Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>dev-group -Force -Verbose
+Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>newupdate-group -Force -Verbose
+```
 
 ## 摘要 ##
 

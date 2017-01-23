@@ -39,15 +39,19 @@ ms.author: jgao
 
 使用以下命令连接到 Azure：
 
-        azure config mode asm
-        azure login -e AzureChinaCloud
+```
+    azure config mode asm
+    azure login -e AzureChinaCloud
 
-    > [!NOTE]
-    > 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
+> [!NOTE]
+> 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
+```
 
 要获取帮助，请使用 **-h** 开关。例如：
 
-    azure hdinsight cluster create -h
+```
+azure hdinsight cluster create -h
+```
 
 ##创建群集
 
@@ -61,7 +65,9 @@ ms.author: jgao
 
     要创建新 Azure 存储帐户：
 
-        azure storage account create "<Azure Storage Account Name>" -l "<Azure Location>" --type LRS
+    ```
+    azure storage account create "<Azure Storage Account Name>" -l "<Azure Location>" --type LRS
+    ```
 
     > [!NOTE]
     > 存储帐户必须与 HDInsight 共置于同一数据中心。存储帐户类型不能为 ZRS，因为 ZRS 不支持表。
@@ -70,12 +76,14 @@ ms.author: jgao
 
     如果已拥有存储帐户但不知道帐户名称和帐户密钥，可使用以下命令检索相关信息：
 
-        -- Lists Storage accounts
-        azure storage account list
-        -- Shows a Storage account
-        azure storage account show "<Storage Account Name>"
-        -- Lists the keys for a Storage account
-        azure storage account keys list "<Storage Account Name>"
+    ```
+    -- Lists Storage accounts
+    azure storage account list
+    -- Shows a Storage account
+    azure storage account show "<Storage Account Name>"
+    -- Lists the keys for a Storage account
+    azure storage account keys list "<Storage Account Name>"
+    ```
 
     有关使用 Azure 经典管理门户获取信息的详细信息，请参阅 [创建、管理或删除存储帐户][azure-create-storageaccount] 中的“查看、复制和重新生成存储访问密钥”部分。
 
@@ -85,7 +93,9 @@ ms.author: jgao
 
 准备好存储帐户后，即可创建群集：
 
-    azure hdinsight cluster create -c <HDInsight Cluster Name> -l <Location> --osType Windows --version <Cluster Version> --clusterType <Hadoop | HBase | Spark | Storm> --workerNodeCount 2 --headNodeSize Large --workerNodeSize Large --defaultStorageAccountName <Azure Storage Account Name>.blob.core.chinacloudapi.cn --defaultStorageAccountKey "<Default Storage Account Key>" --defaultStorageContainer <Default Blob Storage Container> --userName admin --password "<HTTP User Password>" --rdpUserName <RDP Username> --rdpPassword "<RDP User Password" --rdpAccessExpiry "03/01/2016"
+```
+azure hdinsight cluster create -c <HDInsight Cluster Name> -l <Location> --osType Windows --version <Cluster Version> --clusterType <Hadoop | HBase | Spark | Storm> --workerNodeCount 2 --headNodeSize Large --workerNodeSize Large --defaultStorageAccountName <Azure Storage Account Name>.blob.core.chinacloudapi.cn --defaultStorageAccountKey "<Default Storage Account Key>" --defaultStorageContainer <Default Blob Storage Container> --userName admin --password "<HTTP User Password>" --rdpUserName <RDP Username> --rdpPassword "<RDP User Password" --rdpAccessExpiry "03/01/2016"
+```
 
 ## 另请参阅
 

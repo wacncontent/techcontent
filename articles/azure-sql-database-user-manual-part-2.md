@@ -113,7 +113,9 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 
     保存连接字符串内容到记事本上  
 
-        ew79sank1x.database.chinacloudapi.cn,1433 
+    ```
+    ew79sank1x.database.chinacloudapi.cn,1433 
+    ```
 
     > [ 注意事项 ] 请注意: 上图的 ADO.NET 连接字符串，包含关键字 Encrypt=True，也就是可以通过 SSL 连接 Azure SQL 数据库，这就需要把本地的证书上传到 Azure。
 
@@ -180,17 +182,19 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 
 执行以下语句：  
 
-    create table dbo.ChnStudent
-    (
-        studentnumber int identity(1,1) not null,
-        value nvarchar(100) not null,
-    )
-    Go
+```
+create table dbo.ChnStudent
+(
+    studentnumber int identity(1,1) not null,
+    value nvarchar(100) not null,
+)
+Go
 
-    insert into ChnStudent(value) values 
-    ('小张'),('小李'),(N'小张'),(N'小张')
+insert into ChnStudent(value) values 
+('小张'),('小李'),(N'小张'),(N'小张')
 
-    select * from dbo.ChnStudent
+select * from dbo.ChnStudent
+```
 
 执行结果：  
 
@@ -538,11 +542,15 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
 
     创建完毕后，Azure 上海数据中心 SQL Azure Server：  
 
-        hfgmi3msar.database.chinacloudapi.cn,1433
+    ```
+    hfgmi3msar.database.chinacloudapi.cn,1433
+    ```
 
     Azure 上海北京数据中心 SQL Azure Server：  
 
-        dbcljcn986.database.chinacloudapi.cn,1433
+    ```
+    dbcljcn986.database.chinacloudapi.cn,1433
+    ```
 
 2. 在上海数据中心创建数据库 TestDB  
 
@@ -565,10 +573,12 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
         #通过Management Portal ，在上海创建新的Server: hfgmi3msar，新的Database: LeiDB
         #通过Management Portal，在北京创建新的Server：dbcljcn986，但是不创建新的Database
 
-        #执行下面的脚本，在北京创建只读库
-        $database1 = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar"
+    ```
+    #执行下面的脚本，在北京创建只读库
+    $database1 = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar"
 
-        $secondaryLink = $database1 | New-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" –PartnerServerName "dbcljcn986" -AllowConnections "All"
+    $secondaryLink = $database1 | New-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" –PartnerServerName "dbcljcn986" -AllowConnections "All"
+    ```
 
         #Shanghai读写的连接字符串
         #hfgmi3msar.database.chinacloudapi.cn,1433
@@ -576,11 +586,13 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
         #Beijing只读的连接字符串
         #dbcljcn986.database.chinacloudapi.cn,1433
 
-        #Failover, 北京Database，变成读写，上海Database只读
-        #上海Server: hfgmi3msar 只读
-        $database_beijing = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaNorth" –ServerName "dbcljcn986" 
+    ```
+    #Failover, 北京Database，变成读写，上海Database只读
+    #上海Server: hfgmi3msar 只读
+    $database_beijing = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaNorth" –ServerName "dbcljcn986" 
 
-        $database_beijing | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaEast" -Failover
+    $database_beijing | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaEast" -Failover
+    ```
 
         #Failover, 上海Database读写，北京Database只读
         $database_shanghai = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar" 
@@ -612,10 +624,12 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
 
 7. 当再次执行以下脚本时，Azure 上海站点重新变成主站点，Azure 北京站点变成备份站点。  
 
-        #Failover, 上海Database读写，北京Database只读
-        $database_shanghai = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar" 
+    ```
+    #Failover, 上海Database读写，北京Database只读
+    $database_shanghai = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar" 
 
-        $database_shanghai | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" -Failover
+    $database_shanghai | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" -Failover
+    ```
 
 <!--image reference-->
 [8]: ./media/azure-sql-database-user-manual-part-2/azure-sql-database-user-manual-8.png

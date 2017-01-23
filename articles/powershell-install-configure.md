@@ -90,11 +90,13 @@ import-module "C:\\Program Files\\WindowsPowerShell\\Modules\\Azure\\XXXX\\expre
 
 在提升的 Windows PowerShell 或 PowerShell 集成脚本环境 (ISE) 提示符下，使用以下命令从 PowerShell 库安装 Azure PowerShell 1.3.0 或更高版本：
 
-    # Install the Azure Resource Manager modules from the PowerShell Gallery
-    Install-Module AzureRM
+```
+# Install the Azure Resource Manager modules from the PowerShell Gallery
+Install-Module AzureRM
 
-    # Install the Azure Service Management module from the PowerShell Gallery
-    Install-Module Azure
+# Install the Azure Service Management module from the PowerShell Gallery
+Install-Module Azure
+```
 
 ####有关这些命令的详细信息
 
@@ -113,34 +115,36 @@ import-module "C:\\Program Files\\WindowsPowerShell\\Modules\\Azure\\XXXX\\expre
 
 ###帮助入门的命令
 
-    # To make sure the Azure PowerShell module is available after you install
-    Get-Module –ListAvailable 
+```
+# To make sure the Azure PowerShell module is available after you install
+Get-Module –ListAvailable 
 
-    # To login to Azure Resource Manager
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+# To login to Azure Resource Manager
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
-    # You can also use a specific Tenant if you would like a faster login experience
-    # Login-AzureRmAccount -EnvironmentName AzureChinaCloud -TenantId xxxx
+# You can also use a specific Tenant if you would like a faster login experience
+# Login-AzureRmAccount -EnvironmentName AzureChinaCloud -TenantId xxxx
 
-    # To view all subscriptions for your account
-    Get-AzureRmSubscription
+# To view all subscriptions for your account
+Get-AzureRmSubscription
 
-    # To select a default subscription for your current session
-    Get-AzureRmSubscription –SubscriptionName “your sub” | Select-AzureRmSubscription
+# To select a default subscription for your current session
+Get-AzureRmSubscription –SubscriptionName “your sub” | Select-AzureRmSubscription
 
-    # View your current Azure PowerShell session context
-    # This session state is only applicable to the current session and will not affect other sessions
-    Get-AzureRmContext
+# View your current Azure PowerShell session context
+# This session state is only applicable to the current session and will not affect other sessions
+Get-AzureRmContext
 
-    # To select the default storage context for your current session
-    Set-AzureRmCurrentStorageAccount –ResourceGroupName “your resource group” –StorageAccountName “your storage account name”
+# To select the default storage context for your current session
+Set-AzureRmCurrentStorageAccount –ResourceGroupName “your resource group” –StorageAccountName “your storage account name”
 
-    # View your current Azure PowerShell session context
-    # Note: the CurrentStorageAccount is now set in your session context
-    Get-AzureRmContext
+# View your current Azure PowerShell session context
+# Note: the CurrentStorageAccount is now set in your session context
+Get-AzureRmContext
 
-    # To list all of the blobs in all of your containers in all of your accounts
-    Get-AzureRmStorageAccount | Get-AzureStorageContainer | Get-AzureStorageBlob
+# To list all of the blobs in all of your containers in all of your accounts
+Get-AzureRmStorageAccount | Get-AzureStorageContainer | Get-AzureStorageBlob
+```
 
 ## <a name="Connect"></a> 步骤 3：连接
 cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订阅，可以购买一个。有关说明，请参阅[如何购买 Azure](https://www.azure.cn/pricing/overview/)。
@@ -153,8 +157,10 @@ cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订
 
 登录到你的工作帐户或学校帐户：
 
-    $cred = Get-Credential
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $cred
+```
+$cred = Get-Credential
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $cred
+```
 > [!NOTE]
 > 如果你的组织帐户有多个关联的租户，请指定 TenantId 参数：
 

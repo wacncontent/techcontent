@@ -67,7 +67,9 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 * **克隆项目**：如果已安装 [Git](http://git-scm.com/)，请使用以下命令在本地克隆存储库，然后在 **lib** 目录中找到该文件。
 
-        git clone https://github.com/hdinsight/hdinsight-storm-examples
+    ```
+    git clone https://github.com/hdinsight/hdinsight-storm-examples
+    ```
 
 ## 配置事件中心
 
@@ -88,10 +90,10 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 4. 选择“配置”，然后使用以下信息创建两个新的访问策略。
 
-    | 名称 | 权限 | 
-    | --- | --- | 
-    | 写入者 | 发送 | 
-    | 读者 | 侦听 |
+   | 名称 | 权限 | 
+   | --- | --- | 
+   | 写入者 | 发送 | 
+   | 读者 | 侦听 |
 
     After You create the permissions, select the **Save** icon at the bottom of the page. This creates the shared access policies that will be used to send (writer) and listen (reader) to this Event Hub.
 
@@ -166,34 +168,40 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 2. 打开 **Program.cs** 文件，并紧接在 `TopologyBuilder topologyBuilder = new TopologyBuilder("EventHubWriter" + DateTime.Now.ToString("yyyyMMddHHmmss"));` 行后添加以下内容。
 
-        int partitionCount = Properties.Settings.Default.EventHubPartitionCount;
-        List<string> javaDeserializerInfo =
-            new List<string>() { "microsoft.scp.storm.multilang.CustomizedInteropJSONDeserializer", "java.lang.String" };
+    ```
+    int partitionCount = Properties.Settings.Default.EventHubPartitionCount;
+    List<string> javaDeserializerInfo =
+        new List<string>() { "microsoft.scp.storm.multilang.CustomizedInteropJSONDeserializer", "java.lang.String" };
+    ```
 
     第一行从前面定义的属性中读取分区计数。第二行定义一个反序列化程序，用于将 Spout 生成的 JSON 数据反序列化为 `java.lang.String`，使 Java 组件可以使用数据。
 
 4. 找到以下代码：
 
-        topologyBuilder.SetSpout(
-            "Spout",
-            Spout.Get,
-            new Dictionary<string, List<string>>()
-            {
-                {Constants.DEFAULT_STREAM_ID, new List<string>(){"count"}}
-            },
-            1);
+    ```
+    topologyBuilder.SetSpout(
+        "Spout",
+        Spout.Get,
+        new Dictionary<string, List<string>>()
+        {
+            {Constants.DEFAULT_STREAM_ID, new List<string>(){"count"}}
+        },
+        1);
+    ```
 
     将它替换为以下代码：
 
-        topologyBuilder.SetSpout(
-            "Spout",
-            Spout.Get,
-            new Dictionary<string, List<string>>()
-            {
-                {Constants.DEFAULT_STREAM_ID, new List<string>(){"Event"}}
-            },
-            partitionCount).
-            DeclareCustomizedJavaDeserializer(javaDeserializerInfo);
+    ```
+    topologyBuilder.SetSpout(
+        "Spout",
+        Spout.Get,
+        new Dictionary<string, List<string>>()
+        {
+            {Constants.DEFAULT_STREAM_ID, new List<string>(){"Event"}}
+        },
+        partitionCount).
+        DeclareCustomizedJavaDeserializer(javaDeserializerInfo);
+    ```
 
     这将创建一个 Spout，并使用事件中心分区计数作为此组件的并行度提示。这应该为每个分区创建一个 Spout 实例。
 
@@ -201,16 +209,18 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 5. 紧接在上述代码的后面添加以下代码：
 
-        JavaComponentConstructor constructor =
-            JavaComponentConstructor.CreateFromClojureExpr(
-            String.Format(@"(com.microsoft.eventhubs.bolt.EventHubBolt. (com.microsoft.eventhubs.bolt.EventHubBoltConfig. " +
-            @"""{0}"" ""{1}"" ""{2}"" ""{3}"" ""{4}"" {5}))",
-            Properties.Settings.Default.EventHubPolicyName,
-            Properties.Settings.Default.EventHubPolicyKey,
-            Properties.Settings.Default.EventHubNamespace,
-            "servicebus.chinacloudapi.cn", //suffix for servicebus fqdn
-            Properties.Settings.Default.EventHubName,
-            "true"));
+    ```
+    JavaComponentConstructor constructor =
+        JavaComponentConstructor.CreateFromClojureExpr(
+        String.Format(@"(com.microsoft.eventhubs.bolt.EventHubBolt. (com.microsoft.eventhubs.bolt.EventHubBoltConfig. " +
+        @"""{0}"" ""{1}"" ""{2}"" ""{3}"" ""{4}"" {5}))",
+        Properties.Settings.Default.EventHubPolicyName,
+        Properties.Settings.Default.EventHubPolicyKey,
+        Properties.Settings.Default.EventHubNamespace,
+        "servicebus.chinacloudapi.cn", //suffix for servicebus fqdn
+        Properties.Settings.Default.EventHubName,
+        "true"));
+    ```
 
     这会为 Java Bolt 创建一个新的构造函数，在运行时使用此构造函数配置 Bolt 的新实例。在此示例中，通过 <a href="http://storm.apache.org/documentation/Clojure-DSL.html" target="_blank">Apache Storm Clojure DSL</a> 使用先前添加的事件中心配置信息配置 Spout。更具体地说，HDInsight 在运行时将使用此代码执行以下操作：
 
@@ -219,19 +229,23 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 6. 找到以下代码：
 
-        topologyBuilder.SetBolt(
-            "Bolt",
-            Bolt.Get,
-            new Dictionary<string, List<string>>(),
-            1).shuffleGrouping("Spout");
+    ```
+    topologyBuilder.SetBolt(
+        "Bolt",
+        Bolt.Get,
+        new Dictionary<string, List<string>>(),
+        1).shuffleGrouping("Spout");
+    ```
 
     将它替换为以下代码：
 
-        topologyBuilder.SetJavaBolt(
-            "EventHubBolt",
-            constructor,
-            partitionCount).
-            shuffleGrouping("Spout");
+    ```
+    topologyBuilder.SetJavaBolt(
+        "EventHubBolt",
+        constructor,
+        partitionCount).
+        shuffleGrouping("Spout");
+    ```
 
     这会指示拓扑使用上述步骤中的 **JavaComponentConstructor** 作为 Bolt。可以在此拓扑中使用友好名称“EventHubBolt”引用该组件。 将并行度提示设置为事件中心的分区数，并订阅由 Spout（“Spout”）生成的数据。
 
@@ -240,9 +254,11 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 > [!NOTE]
 > 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作进程数：
 
-    StormConfig config = new StormConfig();
-    config.setNumWorkers(1);
-    topologyBuilder.SetTopologyConfig(config);
+```
+StormConfig config = new StormConfig();
+config.setNumWorkers(1);
+topologyBuilder.SetTopologyConfig(config);
+```
 
 ### 修改 Spout
 
@@ -250,8 +266,10 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 1. 在“解决方案资源管理器”中，打开“Spout.cs”，在该文件的顶部添加以下内容：
 
-        using Newtonsoft.Json;
-        using Newtonsoft.Json.Linq;
+    ```
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    ```
 
     这样可以更轻松地使用 JSON 数据。
 
@@ -260,28 +278,34 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 3. 找到以下代码：
 
-        Dictionary<string, List<Type>> outputSchema = new Dictionary<string, List<Type>>();
-        outputSchema.Add("default", new List<Type>() { typeof(int) });
-        this.ctx.DeclareComponentSchema(new ComponentStreamSchema(null, outputSchema));
+    ```
+    Dictionary<string, List<Type>> outputSchema = new Dictionary<string, List<Type>>();
+    outputSchema.Add("default", new List<Type>() { typeof(int) });
+    this.ctx.DeclareComponentSchema(new ComponentStreamSchema(null, outputSchema));
+    ```
 
     将它替换为以下代码：
 
-        Dictionary<string, List<Type>> outputSchema = new Dictionary<string, List<Type>>();
-        outputSchema.Add("default", new List<Type>() { typeof(string) });
-        this.ctx.DeclareComponentSchema(new ComponentStreamSchema(null, outputSchema));
-        this.ctx.DeclareCustomizedSerializer(new CustomizedInteropJSONSerializer());
+    ```
+    Dictionary<string, List<Type>> outputSchema = new Dictionary<string, List<Type>>();
+    outputSchema.Add("default", new List<Type>() { typeof(string) });
+    this.ctx.DeclareComponentSchema(new ComponentStreamSchema(null, outputSchema));
+    this.ctx.DeclareCustomizedSerializer(new CustomizedInteropJSONSerializer());
+    ```
 
     这会更改 Spout 创建的数据定义，以使用**字符串**数据和先前在拓扑中声明的 **CustomizedInteropJSONSerializer**（在 program.cs 中）。
 
 2. 将 **NextTuple** 方法替换为以下内容：
 
-        public void NextTuple(Dictionary<string, Object> parms)
-        {
-            JObject eventData = new JObject();
-            eventData.Add("deviceId", r.Next(10));
-            eventData.Add("deviceValue", r.Next());
-            ctx.Emit(new Values(eventData.ToString(Formatting.None)));
-        }
+    ```
+    public void NextTuple(Dictionary<string, Object> parms)
+    {
+        JObject eventData = new JObject();
+        eventData.Add("deviceId", r.Next(10));
+        eventData.Add("deviceValue", r.Next());
+        ctx.Emit(new Values(eventData.ToString(Formatting.None)));
+    }
+    ```
 
     这随机生成一个设备 ID 和一个值，然后使用 Json.NET 发出使用这些值的 JSON 对象。
 
@@ -303,7 +327,9 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 2. 依次选择“工具”、“NuGet 包管理器”和“包管理器控制台”。当控制台出现时，请使用以下命令安装 Azure 存储包。
 
-        NuGet install WindowsAzure.Storage
+    ```
+    NuGet install WindowsAzure.Storage
+    ```
 
 2. 在项目属性中，选择“设置”，然后选择“此项目不包含默认设置文件。单击此处可创建一个”。
 
@@ -333,13 +359,15 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 2. 打开 **Program.cs** 文件，并紧接在 `TopologyBuilder topologyBuilder = new TopologyBuilder("EventHubReader" + DateTime.Now.ToString("yyyyMMddHHmmss"));` 行后添加以下代码：
 
-        int partitionCount = Properties.Settings.Default.EventHubPartitionCount;
-        EventHubSpoutConfig ehConfig = new EventHubSpoutConfig(
-                Properties.Settings.Default.EventHubPolicyName,
-                Properties.Settings.Default.EventHubPolicyKey,
-                Properties.Settings.Default.EventHubNamespace,
-                Properties.Settings.Default.EventHubName,
-                partitionCount);
+    ```
+    int partitionCount = Properties.Settings.Default.EventHubPartitionCount;
+    EventHubSpoutConfig ehConfig = new EventHubSpoutConfig(
+            Properties.Settings.Default.EventHubPolicyName,
+            Properties.Settings.Default.EventHubPolicyKey,
+            Properties.Settings.Default.EventHubNamespace,
+            Properties.Settings.Default.EventHubName,
+            partitionCount);
+    ```
 
     读取分区计数并将其分配给本地变量。可以多次使用该计数。
 
@@ -347,48 +375,58 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 5. 找到以下代码：
 
-        topologyBuilder.SetSpout(
-            "Spout",
-            Spout.Get,
-            new Dictionary<string, List<string>>()
-            {
-                {Constants.DEFAULT_STREAM_ID, new List<string>(){"count"}}
-            },
-            1);
+    ```
+    topologyBuilder.SetSpout(
+        "Spout",
+        Spout.Get,
+        new Dictionary<string, List<string>>()
+        {
+            {Constants.DEFAULT_STREAM_ID, new List<string>(){"count"}}
+        },
+        1);
+    ```
 
     将它替换为以下代码：
 
-        topologyBuilder.SetEventHubSpout(
-            "EventHubSpout", 
-            ehConfig, 
-            partitionCount); 
+    ```
+    topologyBuilder.SetEventHubSpout(
+        "EventHubSpout", 
+        ehConfig, 
+        partitionCount); 
+    ```
 
     这将指示拓扑创建新事件中心 Spout，并使用上一步中的 `EventHubSpoutConfig` 作为配置。“EventHubSpout”设置 Spout 的友好名称，`partitionCount` 用于设置并行度提示。此代码在幕后使用提供的配置信息创建 **com.microsoft.eventhubs.Spout.EventHubSpout** Java 组件的新实例。
 
 2. 紧接在上述代码的后面添加以下内容：
 
-         List<string> javaSerializerInfo = new List<string>() { "microsoft.scp.storm.multilang.CustomizedInteropJSONSerializer" };
+    ```
+     List<string> javaSerializerInfo = new List<string>() { "microsoft.scp.storm.multilang.CustomizedInteropJSONSerializer" };
+    ```
 
     这将创建一个自定义序列化程序，用于将 Java 组件（如 EventHubSpout）生成的信息序列化为下游 C# 组件可使用的 JSON 格式。
 
 3. 找到以下代码：
 
-        topologyBuilder.SetBolt(
-            "Bolt",
-            Bolt.Get,
-            new Dictionary<string, List<string>>(),
-            1).shuffleGrouping("Spout");
+    ```
+    topologyBuilder.SetBolt(
+        "Bolt",
+        Bolt.Get,
+        new Dictionary<string, List<string>>(),
+        1).shuffleGrouping("Spout");
+    ```
 
     将它替换为以下代码：
 
-        topologyBuilder.SetBolt(
-            "Bolt",
-            Bolt.Get,
-            new Dictionary<string, List<string>>(),
-            partitionCount,
-            true).
-            DeclareCustomizedJavaSerializer(javaSerializerInfo).
-            shuffleGrouping("EventHubSpout");
+    ```
+    topologyBuilder.SetBolt(
+        "Bolt",
+        Bolt.Get,
+        new Dictionary<string, List<string>>(),
+        partitionCount,
+        true).
+        DeclareCustomizedJavaSerializer(javaSerializerInfo).
+        shuffleGrouping("EventHubSpout");
+    ```
 
     此代码指示拓扑使用 Bolt（在 Bolt.cs 中定义）。此处使用先前定义的自定义序列化程序，以便此 Bolt 可使用上游 Java 组件生成的数据。在此示例中为 EventHubSpout。
 
@@ -400,9 +438,11 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 > [!NOTE]
 > 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作线程数：
 
-    StormConfig config = new StormConfig();
-    config.setNumWorkers(1);
-    topologyBuilder.SetTopologyConfig(config);
+```
+StormConfig config = new StormConfig();
+config.setNumWorkers(1);
+topologyBuilder.SetTopologyConfig(config);
+```
 
 ### 创建帮助器类
 
@@ -412,27 +452,29 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 2. 打开 **Device.cs**，将默认代码替换为以下代码：
 
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
-        using System.Text;
-        using System.Threading.Tasks;
-        using Microsoft.WindowsAzure.Storage.Table;
+    ```
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.WindowsAzure.Storage.Table;
 
-        namespace EventHubReader
+    namespace EventHubReader
+    {
+        class Device : TableEntity
         {
-            class Device : TableEntity
-            {
-                public int value { get; set; }
+            public int value { get; set; }
 
-                public Device() { }
-                public Device(int id)
-                {
-                    this.PartitionKey = id.ToString();
-                    this.RowKey = System.Guid.NewGuid().ToString();
-                }
+            public Device() { }
+            public Device(int id)
+            {
+                this.PartitionKey = id.ToString();
+                this.RowKey = System.Guid.NewGuid().ToString();
             }
         }
+    }
+    ```
 
     这将在表存储中创建由分区键（设置为从事件中心读取的设备 ID）、唯一行键和从事件中心读取的值构成的实体。每个实体还有一个时间戳，在表中插入实体时将自动创建该时间戳。
 
@@ -440,61 +482,73 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 1. 在“解决方案资源管理器”中，展开 **EventHubReader** 项目，然后打开 **Bolt.cs** 文件。在该文件的顶部，添加以下内容：
 
-        using Newtonsoft.Json.Linq;
-        using Microsoft.WindowsAzure.Storage;
-        using Microsoft.WindowsAzure.Storage.Table;
+    ```
+    using Newtonsoft.Json.Linq;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Table;
+    ```
 
     这样，可以更轻松地处理来自 Bolt 的 JSON 数据，并将数据写入表存储。
 
 2. 找到 `private int count;` 语句，并将其替换为以下内容：
 
-        private CloudTable table;
+    ```
+    private CloudTable table;
+    ```
 
     连接到表时将使用这些代码。
 
 4. 找到以下代码：
 
-        Dictionary<string, List<Type>> inputSchema = new Dictionary<string, List<Type>>();
-        inputSchema.Add("default", new List<Type>() { typeof(int) });
-        this.ctx.DeclareComponentSchema(new ComponentStreamSchema(inputSchema, null));
+    ```
+    Dictionary<string, List<Type>> inputSchema = new Dictionary<string, List<Type>>();
+    inputSchema.Add("default", new List<Type>() { typeof(int) });
+    this.ctx.DeclareComponentSchema(new ComponentStreamSchema(inputSchema, null));
+    ```
 
     将它替换为以下代码：
 
-        Dictionary<string, List<Type>> inputSchema = new Dictionary<string, List<Type>>();
-        inputSchema.Add("default", new List<Type>() { typeof(string) });
-        this.ctx.DeclareComponentSchema(new ComponentStreamSchema(inputSchema, null));
-        this.ctx.DeclareCustomizedDeserializer(new CustomizedInteropJSONDeserializer());
+    ```
+    Dictionary<string, List<Type>> inputSchema = new Dictionary<string, List<Type>>();
+    inputSchema.Add("default", new List<Type>() { typeof(string) });
+    this.ctx.DeclareComponentSchema(new ComponentStreamSchema(inputSchema, null));
+    this.ctx.DeclareCustomizedDeserializer(new CustomizedInteropJSONDeserializer());
+    ```
 
     这将指示 Bolt 接收**字符串**值而不是**整型**值，并且应使用先前在拓扑中声明的 **CustomizedInteropJSONDeserialzer**（在 program.cs 文件中）反序列化数据。
 
 3. 紧接在上述代码的后面添加以下代码：
 
-        CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Properties.Settings.Default.StorageConnection);
-        CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-        table = tableClient.GetTableReference(Properties.Settings.Default.TableName);
-        table.CreateIfNotExists();
+    ```
+    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Properties.Settings.Default.StorageConnection);
+    CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+    table = tableClient.GetTableReference(Properties.Settings.Default.TableName);
+    table.CreateIfNotExists();
+    ```
 
     连接到先前使用存储在 `TableName` 中的连接字符串创建的 Azure 存储表。
 
 2. 找到 **Execute** 方法，并将其替换为以下内容：
 
-        public void Execute(SCPTuple tuple)
+    ```
+    public void Execute(SCPTuple tuple)
+    {
+        Context.Logger.Info("Processing events");
+        string eventValue = (string)tuple.GetValue(0);
+        if (eventValue != null)
         {
-            Context.Logger.Info("Processing events");
-            string eventValue = (string)tuple.GetValue(0);
-            if (eventValue != null)
-            {
-                JObject eventData = JObject.Parse(eventValue);
+            JObject eventData = JObject.Parse(eventValue);
 
-                Device device = new Device((int)eventData["deviceId"]);
-                device.value = (int)eventData["deviceValue"];
+            Device device = new Device((int)eventData["deviceId"]);
+            device.value = (int)eventData["deviceValue"];
 
-                TableOperation insertOperation = TableOperation.Insert(device);
+            TableOperation insertOperation = TableOperation.Insert(device);
 
-                table.Execute(insertOperation);
-                this.ctx.Ack(tuple);
-            }
+            table.Execute(insertOperation);
+            this.ctx.Ack(tuple);
         }
+    }
+    ```
 
     这使用 Json.NET 分析来自 Spout 的 JSON 数据，然后选择 **deviceId** 和 **deviceValue** 字段。随后，在初始化期间，使用 **deviceId** 创建新 **Device** 对象，以设置表的分区键。然后将值设置为 **deviceValue**，最后将实体插入到表中。
 

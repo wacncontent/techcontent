@@ -134,26 +134,30 @@ ms.author: juliako
 
 4. 打开 App.config 文件（如果该文件未按默认添加到项目中，请添加）并在该文件中添加 *appSettings* 节。如以下示例中所示设置 Azure 媒体服务帐户名和帐户密钥的值。若要获取帐户名和密钥信息，请打开 Azure 经典管理门户，选择你的媒体服务帐户，然后单击“管理密钥”按钮。
 
-        <configuration>
-        ...
-          <appSettings>
-            <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
-            <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
-          </appSettings>
+    ```
+    <configuration>
+    ...
+      <appSettings>
+        <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
+        <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
+      </appSettings>
 
-        </configuration>
+    </configuration>
+    ```
 
 5. 使用以下代码覆盖位于 Program.cs 文件开头的现有 **using** 语句。
 
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
-        using System.Text;
-        using System.Threading.Tasks;
-        using System.Configuration;
-        using System.Threading;
-        using System.IO;
-        using Microsoft.WindowsAzure.MediaServices.Client;
+    ```
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Configuration;
+    using System.Threading;
+    using System.IO;
+    using Microsoft.WindowsAzure.MediaServices.Client;
+    ```
 
 6. 创建新的文件夹（文件夹可位于本地驱动器上任意位置），然后复制要编码和流式传输或渐进式下载的 .mp4 文件。在此示例中，我们使用了“C:\\VideoFiles”路径。
 
@@ -170,66 +174,68 @@ ms.author: juliako
 > [!NOTE]
 >在添加所有函数的定义前，会一直收到编译错误。
 
-    class Program
+```
+class Program
+{
+    // Read values from the App.config file.
+    private static readonly string _mediaServicesAccountName =
+        ConfigurationManager.AppSettings["MediaServicesAccountName"];
+    private static readonly string _mediaServicesAccountKey =
+        ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+
+    private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+
+    // Azure China uses a different API server and a different ACS Base Address from the Global.
+    private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
+    private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+
+    // Field for service context.
+    private static CloudMediaContext _context = null;
+    private static MediaServicesCredentials _cachedCredentials = null;
+    private static Uri _apiServer = null;
+
+    static void Main(string[] args)
     {
-        // Read values from the App.config file.
-        private static readonly string _mediaServicesAccountName =
-            ConfigurationManager.AppSettings["MediaServicesAccountName"];
-        private static readonly string _mediaServicesAccountKey =
-            ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-
-        private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
-
-        // Azure China uses a different API server and a different ACS Base Address from the Global.
-        private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
-        private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
-
-        // Field for service context.
-        private static CloudMediaContext _context = null;
-        private static MediaServicesCredentials _cachedCredentials = null;
-        private static Uri _apiServer = null;
-
-        static void Main(string[] args)
+        try
         {
-            try
-            {
-                // Create and cache the Media Services credentials in a static class variable.
-                _cachedCredentials = new MediaServicesCredentials(
-                                _mediaServicesAccountName,
-                                _mediaServicesAccountKey,
-                                _defaultScope,
-                                _chinaAcsBaseAddressUrl);
+            // Create and cache the Media Services credentials in a static class variable.
+            _cachedCredentials = new MediaServicesCredentials(
+                            _mediaServicesAccountName,
+                            _mediaServicesAccountKey,
+                            _defaultScope,
+                            _chinaAcsBaseAddressUrl);
 
-                // Create the API server Uri
-                _apiServer = new Uri(_chinaApiServerUrl);
+            // Create the API server Uri
+            _apiServer = new Uri(_chinaApiServerUrl);
 
-                // Used the chached credentials to create CloudMediaContext.
-                _context = new CloudMediaContext(_apiServer, _cachedCredentials);
+            // Used the chached credentials to create CloudMediaContext.
+            _context = new CloudMediaContext(_apiServer, _cachedCredentials);
 
-                // Add calls to methods defined in this section.
-        // Make sure to update the file name and path to where you have your media file.
-                IAsset inputAsset =
-                    UploadFile(@"C:\VideoFiles\BigBuckBunny.mp4", AssetCreationOptions.None);
+            // Add calls to methods defined in this section.
+    // Make sure to update the file name and path to where you have your media file.
+            IAsset inputAsset =
+                UploadFile(@"C:\VideoFiles\BigBuckBunny.mp4", AssetCreationOptions.None);
 
-                IAsset encodedAsset =
-                    EncodeToAdaptiveBitrateMP4s(inputAsset, AssetCreationOptions.None);
+            IAsset encodedAsset =
+                EncodeToAdaptiveBitrateMP4s(inputAsset, AssetCreationOptions.None);
 
-                PublishAssetGetURLs(encodedAsset);
-            }
-            catch (Exception exception)
-            {
-                // Parse the XML error message in the Media Services response and create a new
-                // exception with its content.
-                exception = MediaServicesExceptionParser.Parse(exception);
+            PublishAssetGetURLs(encodedAsset);
+        }
+        catch (Exception exception)
+        {
+            // Parse the XML error message in the Media Services response and create a new
+            // exception with its content.
+            exception = MediaServicesExceptionParser.Parse(exception);
 
-                Console.Error.WriteLine(exception.Message);
-            }
-            finally
-            {
-                Console.ReadLine();
-            }
+            Console.Error.WriteLine(exception.Message);
+        }
+        finally
+        {
+            Console.ReadLine();
         }
     }
+}
+```
 
 ## 创建新资产并上载视频文件
 
@@ -250,20 +256,22 @@ ms.author: juliako
 
 将以下方法添加到 Program 类。
 
-    static public IAsset UploadFile(string fileName, AssetCreationOptions options)
-    {
-        IAsset inputAsset = _context.Assets.CreateFromFile(
-            fileName,
-            options,
-            (af, p) =>
-            {
-                Console.WriteLine("Uploading '{0}' - Progress: {1:0.##}%", af.Name, p.Progress);
-            });
+```
+static public IAsset UploadFile(string fileName, AssetCreationOptions options)
+{
+    IAsset inputAsset = _context.Assets.CreateFromFile(
+        fileName,
+        options,
+        (af, p) =>
+        {
+            Console.WriteLine("Uploading '{0}' - Progress: {1:0.##}%", af.Name, p.Progress);
+        });
 
-        Console.WriteLine("Asset {0} created.", inputAsset.Id);
+    Console.WriteLine("Asset {0} created.", inputAsset.Id);
 
-        return inputAsset;
-    }
+    return inputAsset;
+}
+```
 
 ##将源文件编码为一组自适应比特率 MP4 文件
 
@@ -282,38 +290,40 @@ ms.author: juliako
 
 将以下方法添加到 Program 类。
 
-    static public IAsset EncodeToAdaptiveBitrateMP4s(IAsset asset, AssetCreationOptions options)
-    {
+```
+static public IAsset EncodeToAdaptiveBitrateMP4s(IAsset asset, AssetCreationOptions options)
+{
 
-        // Prepare a job with a single task to transcode the specified asset
-        // into a multi-bitrate asset.
+    // Prepare a job with a single task to transcode the specified asset
+    // into a multi-bitrate asset.
 
-        IJob job = _context.Jobs.CreateWithSingleTask(
-            "Media Encoder Standard",
-            "H264 Multiple Bitrate 720p",
-            asset,
-            "Adaptive Bitrate MP4",
-            options);
+    IJob job = _context.Jobs.CreateWithSingleTask(
+        "Media Encoder Standard",
+        "H264 Multiple Bitrate 720p",
+        asset,
+        "Adaptive Bitrate MP4",
+        options);
 
-        Console.WriteLine("Submitting transcoding job...");
+    Console.WriteLine("Submitting transcoding job...");
 
-        // Submit the job and wait until it is completed.
-        job.Submit();
+    // Submit the job and wait until it is completed.
+    job.Submit();
 
-        job = job.StartExecutionProgressTask(
-            j =>
-            {
-                Console.WriteLine("Job state: {0}", j.State);
-                Console.WriteLine("Job progress: {0:0.##}%", j.GetOverallProgress());
-            },
-            CancellationToken.None).Result;
+    job = job.StartExecutionProgressTask(
+        j =>
+        {
+            Console.WriteLine("Job state: {0}", j.State);
+            Console.WriteLine("Job progress: {0:0.##}%", j.GetOverallProgress());
+        },
+        CancellationToken.None).Result;
 
-        Console.WriteLine("Transcoding job finished.");
+    Console.WriteLine("Transcoding job finished.");
 
-        IAsset outputAsset = job.OutputMediaAssets[0];
+    IAsset outputAsset = job.OutputMediaAssets[0];
 
-        return outputAsset;
-    }
+    return outputAsset;
+}
+```
 
 ##发布资产并获取用于流式处理和渐进式下载的 URL
 
@@ -325,11 +335,15 @@ ms.author: juliako
 
 #### MPEG DASH 的流 URL 采用以下格式：
 
-     {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest**(format=mpd-time-csf)**
+ ```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```**(format=mpd-time-csf)**
 
 #### HLS 的流 URL 采用以下格式：
 
-     {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest**(format=m3u8-aapl)**
+```
+ {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest**(format=m3u8-aapl)**
+```
 
 #### 平滑流式处理的流式处理 URL 采用以下格式：
 
@@ -337,7 +351,9 @@ ms.author: juliako
 
 用于下载文件的 SAS URL 采用以下格式：
 
-    {blob container name}/{asset name}/{file name}/{SAS signature}
+```
+{blob container name}/{asset name}/{file name}/{SAS signature}
+```
 
 媒体服务 .NET SDK Extensions 提供了便利的帮助器方法，可针对已发布的资产返回格式化 URL。
 
@@ -345,68 +361,70 @@ ms.author: juliako
 
 将以下方法添加到 Program 类。
 
-    static public void PublishAssetGetURLs(IAsset asset)
+```
+static public void PublishAssetGetURLs(IAsset asset)
+{
+    // Publish the output asset by creating an Origin locator for adaptive streaming,
+    // and a SAS locator for progressive download.
+
+    _context.Locators.Create(
+        LocatorType.OnDemandOrigin,
+        asset,
+        AccessPermissions.Read,
+        TimeSpan.FromDays(30));
+
+    _context.Locators.Create(
+        LocatorType.Sas,
+        asset,
+        AccessPermissions.Read,
+        TimeSpan.FromDays(30));
+
+    IEnumerable<IAssetFile> mp4AssetFiles = asset
+            .AssetFiles
+            .ToList()
+            .Where(af => af.Name.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase));
+
+    // Get the Smooth Streaming, HLS and MPEG-DASH URLs for adaptive streaming,
+    // and the Progressive Download URL.
+    Uri smoothStreamingUri = asset.GetSmoothStreamingUri();
+    Uri hlsUri = asset.GetHlsUri();
+    Uri mpegDashUri = asset.GetMpegDashUri();
+
+    // Get the URls for progressive download for each MP4 file that was generated as a result
+    // of encoding.
+    List<Uri> mp4ProgressiveDownloadUris = mp4AssetFiles.Select(af => af.GetSasUri()).ToList();
+
+    // Display  the streaming URLs.
+    Console.WriteLine("Use the following URLs for adaptive streaming: ");
+    Console.WriteLine(smoothStreamingUri);
+    Console.WriteLine(hlsUri);
+    Console.WriteLine(mpegDashUri);
+    Console.WriteLine();
+
+    // Display the URLs for progressive download.
+    Console.WriteLine("Use the following URLs for progressive download.");
+    mp4ProgressiveDownloadUris.ForEach(uri => Console.WriteLine(uri + "\n"));
+    Console.WriteLine();
+
+    // Download the output asset to a local folder.
+    string outputFolder = "job-output";
+    if (!Directory.Exists(outputFolder))
     {
-        // Publish the output asset by creating an Origin locator for adaptive streaming,
-        // and a SAS locator for progressive download.
-
-        _context.Locators.Create(
-            LocatorType.OnDemandOrigin,
-            asset,
-            AccessPermissions.Read,
-            TimeSpan.FromDays(30));
-
-        _context.Locators.Create(
-            LocatorType.Sas,
-            asset,
-            AccessPermissions.Read,
-            TimeSpan.FromDays(30));
-
-        IEnumerable<IAssetFile> mp4AssetFiles = asset
-                .AssetFiles
-                .ToList()
-                .Where(af => af.Name.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase));
-
-        // Get the Smooth Streaming, HLS and MPEG-DASH URLs for adaptive streaming,
-        // and the Progressive Download URL.
-        Uri smoothStreamingUri = asset.GetSmoothStreamingUri();
-        Uri hlsUri = asset.GetHlsUri();
-        Uri mpegDashUri = asset.GetMpegDashUri();
-
-        // Get the URls for progressive download for each MP4 file that was generated as a result
-        // of encoding.
-        List<Uri> mp4ProgressiveDownloadUris = mp4AssetFiles.Select(af => af.GetSasUri()).ToList();
-
-        // Display  the streaming URLs.
-        Console.WriteLine("Use the following URLs for adaptive streaming: ");
-        Console.WriteLine(smoothStreamingUri);
-        Console.WriteLine(hlsUri);
-        Console.WriteLine(mpegDashUri);
-        Console.WriteLine();
-
-        // Display the URLs for progressive download.
-        Console.WriteLine("Use the following URLs for progressive download.");
-        mp4ProgressiveDownloadUris.ForEach(uri => Console.WriteLine(uri + "\n"));
-        Console.WriteLine();
-
-        // Download the output asset to a local folder.
-        string outputFolder = "job-output";
-        if (!Directory.Exists(outputFolder))
-        {
-            Directory.CreateDirectory(outputFolder);
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("Downloading output asset files to a local folder...");
-        asset.DownloadToFolder(
-            outputFolder,
-            (af, p) =>
-            {
-                Console.WriteLine("Downloading '{0}' - Progress: {1:0.##}%", af.Name, p.Progress);
-            });
-
-        Console.WriteLine("Output asset files available at '{0}'.", Path.GetFullPath(outputFolder));
+        Directory.CreateDirectory(outputFolder);
     }
+
+    Console.WriteLine();
+    Console.WriteLine("Downloading output asset files to a local folder...");
+    asset.DownloadToFolder(
+        outputFolder,
+        (af, p) =>
+        {
+            Console.WriteLine("Downloading '{0}' - Progress: {1:0.##}%", af.Name, p.Progress);
+        });
+
+    Console.WriteLine("Output asset files available at '{0}'.", Path.GetFullPath(outputFolder));
+}
+```
 
 ## 通过播放内容进行测试
 在执行上一部分中定义的程序后，控制台窗口中会显示如下所示的 URL。
@@ -415,33 +433,41 @@ ms.author: juliako
 
 平滑流
 
-    http://amstestaccount001.streaming.mediaservices.chinacloudapi.cn/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest
+```
+http://amstestaccount001.streaming.mediaservices.chinacloudapi.cn/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest
+```
 
 HLS
 
-    http://amstestaccount001.streaming.mediaservices.chinacloudapi.cn/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=m3u8-aapl)
+```
+http://amstestaccount001.streaming.mediaservices.chinacloudapi.cn/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=m3u8-aapl)
+```
 
 MPEG DASH
 
-    http://amstestaccount001.streaming.mediaservices.chinacloudapi.cn/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=mpd-time-csf)
+```
+http://amstestaccount001.streaming.mediaservices.chinacloudapi.cn/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=mpd-time-csf)
+```
 
 渐进式下载 URL（音频和视频）。
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+```
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_3400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_3400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_2250kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_2250kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1500kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1500kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1000kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1000kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-    https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+```
 
 若要流式传输视频，请将 URL 粘贴到 [Azure 媒体服务播放器](http://amsplayer.azurewebsites.net/azuremediaplayer.html)的“URL”文本框中。
 

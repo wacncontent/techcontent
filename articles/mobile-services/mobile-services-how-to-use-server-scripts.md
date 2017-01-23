@@ -52,14 +52,16 @@ ms.author: ricksal
 
 如果需要在执行操作时强制实施自定义的业务逻辑，请编写表操作脚本。例如，当 `text` 字段的字符串长度大于 10 个字符时，以下脚本将拒绝插入操作：
 
-    function insert(item, user, request) {
-        if (item.text.length > 10) {
-            request.respond(statusCodes.BAD_REQUEST, 
-                'Text length must be less than 10 characters');
-        } else {
-            request.execute();
-        }
+```
+function insert(item, user, request) {
+    if (item.text.length > 10) {
+        request.respond(statusCodes.BAD_REQUEST, 
+            'Text length must be less than 10 characters');
+    } else {
+        request.execute();
     }
+}
+```
 
 表脚本函数始终采用三个参数。
 
@@ -108,31 +110,35 @@ ms.author: ricksal
 
 以下脚本将调用 **execute** 函数来完成客户端请求的数据操作：
 
-    function insert(item, user, request) { 
-        request.execute(); 
-    }
+```
+function insert(item, user, request) { 
+    request.execute(); 
+}
+```
 
 在此示例中，将向数据库中插入项目，并且将相应的状态代码返回给用户。
 
 调用 **execute** 函数时，作为第一个参数传入脚本函数的 `item`、[query][query object] 或 `id` 值用于执行该操作。对于插入、更新或查询操作，你可以在调用 **execute** 之前修改 item 或 query：
 
-    function insert(item, user, request) { 
-        item.scriptComment =
-            'this was added by a script and will be saved to the database'; 
-        request.execute(); 
-    } 
+```
+function insert(item, user, request) { 
+    item.scriptComment =
+        'this was added by a script and will be saved to the database'; 
+    request.execute(); 
+} 
 
-    function update(item, user, request) { 
-        item.scriptComment = 
-            'this was added by a script and will be saved to the database'; 
-        request.execute(); 
-    } 
+function update(item, user, request) { 
+    item.scriptComment = 
+        'this was added by a script and will be saved to the database'; 
+    request.execute(); 
+} 
 
-    function read(query, user, request) { 
-        // Only return records for the current user 	    
-        query.where({ userid: user.userId}); 
-        request.execute(); 
-    }
+function read(query, user, request) { 
+    // Only return records for the current user 	    
+    query.where({ userid: user.userId}); 
+    request.execute(); 
+}
+```
 
 >[!NOTE]
 >在删除脚本中，更改所提供的 userId 变量不会影响所删除的记录。
@@ -143,14 +149,16 @@ ms.author: ricksal
 
 你还可以使用脚本来实现能够重写默认响应行为的验证逻辑。如果验证失败，则只需调用 **respond** 函数而不是 **execute** 函数，然后将响应写入客户端：
 
-    function insert(item, user, request) {
-        if (item.userId !== user.userId) {
-            request.respond(statusCodes.FORBIDDEN, 
-            'You may only insert records with your userId.');
-        } else {
-            request.execute();
-        }
+```
+function insert(item, user, request) {
+    if (item.userId !== user.userId) {
+        request.respond(statusCodes.FORBIDDEN, 
+        'You may only insert records with your userId.');
+    } else {
+        request.execute();
     }
+}
+```
 
 在此示例中，当所插入项的 `userId` 属性与为经过身份验证的客户端提供提供的 [user 对象]的 `userId` 不匹配时，该请求将被拒绝。在这种情况下，数据库操作 (*insert*) 将不会发生，并且会将 HTTP 状态代码为 403 的响应以及自定义的错误消息返回到客户端。有关更多示例，请参阅[修改响应]。
 
@@ -160,17 +168,19 @@ ms.author: ricksal
 
 通过在调用 execute 时传入 **success** 处理程序，你可以先修改查询的结果，然后再将结果写入到响应中。以下示例调用 `execute({ success: function(results) { ... })`，以便在从数据库读取数据后但在写入响应之前执行附加操作：
 
-    function read(query, user, request) {
-        request.execute({
-            success: function(results) {
-                results.forEach(function(r) {
-                    r.scriptComment = 
-                    'this was added by a script after querying the database';
-                });
-                request.respond();
-            }
-        });
-    }
+```
+function read(query, user, request) {
+    request.execute({
+        success: function(results) {
+            results.forEach(function(r) {
+                r.scriptComment = 
+                'this was added by a script after querying the database';
+            });
+            request.respond();
+        }
+    });
+}
+```
 
 如果为 **execute** 函数提供了 **success** 处理程序，则还必须在 **success** 处理程序中调用 **respond** 函数，使运行时知道脚本已完成，并且可写入响应。如果在调用 **respond** 时未传递任何参数，则移动服务将生成默认响应。
 
@@ -183,14 +193,16 @@ ms.author: ricksal
 
 如果你想要采取特定的补救措施，或者想要使用全局控制台对象向日志写入更详细信息，则可以通过实施显式错误处理来重写默认的错误处理。向 **execute** 函数提供一个 **error** 处理程序即可实现此目的：
 
-    function update(item, user, request) { 
-      request.execute({ 
-        error: function(err) { 
-          // Do some custom logging, then call respond. 
-          request.respond(); 
-        } 
-      }); 
-    }
+```
+function update(item, user, request) { 
+  request.execute({ 
+    error: function(err) { 
+      // Do some custom logging, then call respond. 
+      request.respond(); 
+    } 
+  }); 
+}
+```
 
 提供 error 处理程序后，调用 **respond** 时，移动服务会向客户端返回错误结果。
 
@@ -208,16 +220,18 @@ ms.author: ricksal
 
 如果插入的记录中未设置字符串 ID 值，移动服务将为 ID 生成唯一值。你可以在服务器脚本中生成自己的唯一 ID 值。下面的脚本示例将生成一个自定义 GUID 并将其分配给新记录的 ID。此 ID 类似于你未传入记录的 ID 值时，移动服务生成的 ID 值。
 
-    // Example of generating an id. This is not required since Mobile Services
-    // will generate an id if one is not passed in.
-    item.id = item.id || newGuid();
-    request.execute();
+```
+// Example of generating an id. This is not required since Mobile Services
+// will generate an id if one is not passed in.
+item.id = item.id || newGuid();
+request.execute();
 
-    function newGuid() {
-        var pad4 = function(str) { return "0000".substring(str.length) + str; };
-        var hex4 = function () { return pad4(Math.floor(Math.random() * 0x10000 /* 65536 */ ).toString(16)); };
-        return (hex4() + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + hex4() + hex4());
-    }
+function newGuid() {
+    var pad4 = function(str) { return "0000".substring(str.length) + str; };
+    var hex4 = function () { return pad4(Math.floor(Math.random() * 0x10000 /* 65536 */ ).toString(16)); };
+    return (hex4() + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + hex4() + hex4());
+}
+```
 
 如果应用程序提供了某个 ID 的值，移动服务将按原样存储该值，包括前导和尾随空格。不会从值中裁剪掉空格。
 
@@ -235,70 +249,82 @@ ms.author: ricksal
 
 例如，以下 POST 请求 URI 将指示服务不要允许插入具有相同 text 值的新 *TodoItem*：
 
-        https://todolist.azure-mobile.net/tables/TodoItem?duplicateText=false
+```
+    https://todolist.azure-mobile.net/tables/TodoItem?duplicateText=false
+```
 
 可从 [request 对象]的 **parameters** 属性访问这些以 JSON 值提供的自定义查询参数。移动服务向已注册到表操作的任何函数提供 **request** 对象。以下用于插入操作的服务器脚本将在运行插入操作之前检查 `duplicateText` 参数的值：
 
-        function insert(item, user, request) {
-            var todoItemTable = tables.getTable('TodoItem');
-            // Check the supplied custom parameter to see if
-            // we should allow duplicate text items to be inserted.		   
-            if (request.parameters.duplicateText === 'false') {
-                // Find all existing items with the same text
-                // and that are not marked 'complete'. 
-                todoItemTable.where({
-                    text: item.text,
-                    complete: false
-                }).read({
-                    success: insertItemIfNotComplete
-                });
+```
+    function insert(item, user, request) {
+        var todoItemTable = tables.getTable('TodoItem');
+        // Check the supplied custom parameter to see if
+        // we should allow duplicate text items to be inserted.		   
+        if (request.parameters.duplicateText === 'false') {
+            // Find all existing items with the same text
+            // and that are not marked 'complete'. 
+            todoItemTable.where({
+                text: item.text,
+                complete: false
+            }).read({
+                success: insertItemIfNotComplete
+            });
+        } else {
+            request.execute();
+        }
+
+        function insertItemIfNotComplete(existingItems) {
+            if (existingItems.length > 0) {
+                request.respond(statusCodes.CONFLICT, 
+                    "Duplicate items are not allowed.");
             } else {
+                // Insert the item as normal. 
                 request.execute();
             }
-
-            function insertItemIfNotComplete(existingItems) {
-                if (existingItems.length > 0) {
-                    request.respond(statusCodes.CONFLICT, 
-                        "Duplicate items are not allowed.");
-                } else {
-                    // Insert the item as normal. 
-                    request.execute();
-                }
-            }
         }
+    }
+```
 
 请注意，在 **insertItemIfNotComplete** 中，如果不存在重复文本，则会调用 [request 对象]的 **execute** 函数来插入项；否则，会调用 **respond** 函数来通知客户端存在重复文本。
 
 请注意上述代码中 **success** 函数的调用语法：
 
-                 }).read({
-                    success: insertItemIfNotComplete
-                });
+```
+             }).read({
+                success: insertItemIfNotComplete
+            });
+```
 
 上述代码较为精简，JavaScript 中更冗长的等效代码为：
 
-        success: function(results) 
-        { 
-            insertItemIfNotComplete(results); 
-        }
+```
+    success: function(results) 
+    { 
+        insertItemIfNotComplete(results); 
+    }
+```
 
 ### <a name="work-with-users"></a>如何：处理用户
 
 在 Azure 移动服务中，你可以使用标识提供程序对用户进行身份验证。当经过身份验证的用户调用表操作时，移动服务将使用 [user 对象]向已注册的脚本函数提供有关该用户的信息。可以使用 **userId** 属性来存储和检索用户特定的信息。以下示例将基于某个经过身份验证的用户的 **userId** 来设置项的 owner 属性：
 
-    function insert(item, user, request) {
-        item.owner = user.userId;
-        request.execute();
-    }
+```
+function insert(item, user, request) {
+    item.owner = user.userId;
+    request.execute();
+}
+```
 
 以下示例将基于某个经过身份验证的用户的 **userId** 向查询添加一个附加的筛选器。此筛选器会将结果限制为属于当前用户的项：
 
-    function read(query, user, request) {
-        query.where({
-            owner: user.userId
-        });
-        request.execute();
-    }
+```
+function read(query, user, request) {
+    query.where({
+        owner: user.userId
+    });
+    request.execute();
+}
+```
 
 ## <a name="custom-api"></a>自定义 API
 
@@ -317,13 +343,17 @@ ms.author: ricksal
 
 当移动服务运行时调用自定义 API 函数时，将同时提供 [request][request object] 和 [response][response object] 对象。这些对象将公开 [express.js 库]的功能，而你的脚本可以利用这些功能。以下名为 **hello** 的自定义 API 是一个极简单的示例，它会返回 _Hello, world!_ 以响应 POST 请求：
 
-        exports.post = function(request, response) {
-            response.send(200, "{ message: 'Hello, world!' }");
-        } 
+```
+    exports.post = function(request, response) {
+        response.send(200, "{ message: 'Hello, world!' }");
+    } 
+```
 
 [response 对象]的 **send** 函数向客户端返回所需的响应。可以通过向以下 URL 发送 POST 请求来调用此代码：
 
-        https://todolist.azure-mobile.net/api/hello  
+```
+    https://todolist.azure-mobile.net/api/hello  
+```
 
 每次执行后都会保留全局状态。
 
@@ -343,11 +373,13 @@ ms.author: ricksal
 
 一个自定义 API 可以处理一个或多个 HTTP 方法：GET、POST、PUT、PATCH 和 DELETE。将为自定义 API 处理的每个 HTTP 方法定义一个导出函数。单个自定义 API 代码文件可以导出下列一个或所有函数：
 
-        exports.get = function(request, response) { ... };
-        exports.post = function(request, response) { ... };
-        exports.patch = function(request, response) { ... };
-        exports.put = function(request, response) { ... };
-        exports.delete = function(request, response) { ... };
+```
+    exports.get = function(request, response) { ... };
+    exports.post = function(request, response) { ... };
+    exports.patch = function(request, response) { ... };
+    exports.put = function(request, response) { ... };
+    exports.delete = function(request, response) { ... };
+```
 
 不能使用服务器脚本中尚未实现的 HTTP 方法调用自定义 API 终结点，该调用会返回 405（“不允许的方法”）错误响应。可向每个支持 HTTP 方法单独分配权限级别。
 
@@ -357,15 +389,19 @@ ms.author: ricksal
 
 以下 **OrderPizza** 自定义 API 函数将返回一个简单的 XML 文档作为响应负载：
 
-        exports.get = function(request, response) {
-          response.set('content-type', 'application/xml');
-          var xml = '<?xml version="1.0"?><PizzaOrderForm><PizzaOrderForm/>';
-          response.send(200, xml);
-        };
+```
+    exports.get = function(request, response) {
+      response.set('content-type', 'application/xml');
+      var xml = '<?xml version="1.0"?><PizzaOrderForm><PizzaOrderForm/>';
+      response.send(200, xml);
+    };
+```
 
 可以通过向以下终结点发出 HTTP GET 请求来调用此自定义 API 函数：
 
-        https://todolist.azure-mobile.net/api/orderpizza
+```
+    https://todolist.azure-mobile.net/api/orderpizza
+```
 
 ### <a name="get-api-user"></a>如何：处理用户和自定义 API 中的标头
 
@@ -373,28 +409,34 @@ ms.author: ricksal
 
 以下 **OrderPizza** 自定义 API 函数将基于某个经过身份验证的用户的 **userId** 来设置项的 owner 属性：
 
-        exports.post = function(request, response) {
-            var userTable = request.service.tables.getTable('user');
-            userTable.lookup(request.user.userId, {
-                success: function(userRecord) {
-                    callPizzaAPI(userRecord, request.body, function(orderResult) {
-                        response.send(201, orderResult);
-                    });
-                }
-            });
+```
+    exports.post = function(request, response) {
+        var userTable = request.service.tables.getTable('user');
+        userTable.lookup(request.user.userId, {
+            success: function(userRecord) {
+                callPizzaAPI(userRecord, request.body, function(orderResult) {
+                    response.send(201, orderResult);
+                });
+            }
+        });
 
-        };
+    };
+```
 
 可以通过向以下终结点发出 HTTP POST 请求来调用此自定义 API 函数：
 
-        https://<service>.azure-mobile.net/api/orderpizza
+```
+    https://<service>.azure-mobile.net/api/orderpizza
+```
 
 你还可以通过 [request 对象]访问特定的 HTTP 标头，如以下代码中所示：
 
-        exports.get = function(request, response) {    
-            var header = request.header('my-custom-header');
-            response.send(200, "You sent: " + header);
-        };
+```
+    exports.get = function(request, response) {    
+        var header = request.header('my-custom-header');
+        response.send(200, "You sent: " + header);
+    };
+```
 
 这个简单示例将读取名为 `my-custom-header` 的自定义标头，然后在响应中返回值。
 
@@ -407,20 +449,22 @@ ms.author: ricksal
 
 可以通过导出一个传递了 **api** 对象（类似于 [express.js 中的 express 对象]）的 **register** 函数来定义多个路由，该对象用于在自定义 API 终结点下注册路由。以下示例将在 **calculator** 自定义 API 中实现 **add** 和 **sub** 方法：
 
-        exports.register = function (api) {
-            api.get('add', add);
-            api.get('sub', subtract);
-        }
+```
+    exports.register = function (api) {
+        api.get('add', add);
+        api.get('sub', subtract);
+    }
 
-        function add(req, res) {
-            var result = parseInt(req.query.a) + parseInt(req.query.b);
-            res.send(200, { result: result });
-        }
+    function add(req, res) {
+        var result = parseInt(req.query.a) + parseInt(req.query.b);
+        res.send(200, { result: result });
+    }
 
-        function subtract(req, res) {
-            var result = parseInt(req.query.a) - parseInt(req.query.b);
-            res.send(200, { result: result });
-        }
+    function subtract(req, res) {
+        var result = parseInt(req.query.a) - parseInt(req.query.b);
+        res.send(200, { result: result });
+    }
+```
 
 传递给 **register** 函数的 **api** 对象将为每个 HTTP 方法（**get**、**post**、**put**、**patch** 和 **delete**）公开一个函数。这些函数会将一个路由注册到特定 HTTP 方法的已定义函数。每个函数均采用两个参数，第一个参数是路由名称，第二个参数是注册到路由的函数。
 
@@ -428,11 +472,15 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 
 + `https://<service>.azure-mobile.net/api/calculator/add?a=1&b=2`
 
-        {"result":3}
+    ```
+    {"result":3}
+    ```
 
 + `https://<service>.azure-mobile.net/api/calculator/sub?a=3&b=5`
 
-        {"result":-2}
+    ```
+    {"result":-2}
+    ```
 
 ## <a name="scheduler-scripts"></a>作业计划程序
 
@@ -485,12 +533,14 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 
 移动服务公开了脚本可以使用全局 **require** 函数加载的一组模块。例如，脚本可以要求使用 **request** 发出 HTTP 请求：
 
-    function update(item, user, request) { 
-        var httpRequest = require('request'); 
-        httpRequest('http://www.google.com', function(err, response, body) { 
-            ... 
-        }); 
-    } 
+```
+function update(item, user, request) { 
+    var httpRequest = require('request'); 
+    httpRequest('http://www.google.com', function(err, response, body) { 
+        ... 
+    }); 
+} 
+```
 
 ### <a name="shared-code-source-control"></a>如何：使用源代码管理来共享代码
 
@@ -514,39 +564,45 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 
 在以下示例中，表脚本已注册到包含 Helper 函数 **handleUnapprovedItem** 的插入操作：
 
-    function insert(item, user, request) {
-        if (!item.approved) {
-            handleUnapprovedItem(item, user, request);
-        } else {
-            request.execute();
-        }
+```
+function insert(item, user, request) {
+    if (!item.approved) {
+        handleUnapprovedItem(item, user, request);
+    } else {
+        request.execute();
     }
+}
 
-    function handleUnapprovedItem(item, user, request) {
-        // Do something with the supplied item, user, or request objects.
-    }
+function handleUnapprovedItem(item, user, request) {
+    // Do something with the supplied item, user, or request objects.
+}
+```
 
 在脚本中，Helper 函数必须在主函数之后声明。必须声明脚本中的所有变量。未声明的变量会导致出错。
 
 Helper 函数也可以只定义一次，然后在服务器脚本之间共享。若要在脚本之间共享某个函数，必须导出该函数，并且脚本文件必须在 `.\service\shared` 目录中存在。以下模板演示了如何在文件 `.\services\shared\helpers.js` 中导出共享函数：
 
-        exports.handleUnapprovedItem = function (tables, user, callback) {
+```
+    exports.handleUnapprovedItem = function (tables, user, callback) {
 
-            // Do something with the supplied tables or user objects and 
-            // return a value to the callback function.
-        };
+        // Do something with the supplied tables or user objects and 
+        // return a value to the callback function.
+    };
+```
 
 然后，你可以在表操作脚本中使用类似于下面的函数：
 
-        function insert(item, user, request) {
-            var helper = require('../shared/helper');
-            helper.handleUnapprovedItem(tables, user, function(result) {
+```
+    function insert(item, user, request) {
+        var helper = require('../shared/helper');
+        helper.handleUnapprovedItem(tables, user, function(result) {
 
-                    // Do something based on the result.
-                    request.execute();
-                }
+                // Do something based on the result.
+                request.execute();
             }
         }
+    }
+```
 
 在此示例中，必须将 [tables 对象]和 [user 对象]都传递给共享函数。这是因为共享脚本不能访问全局 [tables 对象]，而 [user 对象]只在请求的上下文中存在。
 
@@ -558,27 +614,31 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
 以下自定义 API 示例使用提供的 [service 对象]来检索某个应用程序设置值。
 
-        exports.get = function(request, response) {
+```
+    exports.get = function(request, response) {
 
-            // Get the MY_CUSTOM_SETTING value from app settings.
-            var customSetting = 
-                request.service.config.appSettings.my_custom_setting;
+        // Get the MY_CUSTOM_SETTING value from app settings.
+        var customSetting = 
+            request.service.config.appSettings.my_custom_setting;
 
-            // Do something and then send a response.
+        // Do something and then send a response.
 
-        }
+    }
+```
 
 以下代码使用配置模块来检索计划作业脚本使用的应用程序设置中存储的 Twitter 访问令牌值：
 
-        // Get the service configuration module.
-        var config = require('mobileservice-config');
+```
+    // Get the service configuration module.
+    var config = require('mobileservice-config');
 
-        // Get the stored Twitter consumer key and secret. 
-        var consumerKey = config.twitterConsumerKey,
-            consumerSecret = config.twitterConsumerSecret
-        // Get the Twitter access token from app settings.    
-        var accessToken= config.appSettings.TWITTER_ACCESS_TOKEN,
-            accessTokenSecret = config.appSettings.TWITTER_ACCESS_TOKEN_SECRET;
+    // Get the stored Twitter consumer key and secret. 
+    var consumerKey = config.twitterConsumerKey,
+        consumerSecret = config.twitterConsumerSecret
+    // Get the Twitter access token from app settings.    
+    var accessToken= config.appSettings.TWITTER_ACCESS_TOKEN,
+        accessTokenSecret = config.appSettings.TWITTER_ACCESS_TOKEN_SECRET;
+```
 
 请注意，此代码还会检索门户的“标识”选项卡中存储的 Twitter 使用者密钥值。由于 **config 对象**在表操作和计划的作业脚本中不可用，因此你必须要求配置模块访问应用程序设置。
 <h2><a name="command-prompt"></a>使用命令行工具</h2>
@@ -591,36 +651,40 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
 从命令行工具上载脚本文件时，必须先导航到 `.\services` 目录。以下命令从 `table` 子目录上载名为 `todoitem.insert.js` 的脚本：
 
-        ~$azure mobile script upload todolist table/todoitem.insert.js
-        info:    Executing command mobile script upload
-        info:    mobile script upload command OK
+```
+    ~$azure mobile script upload todolist table/todoitem.insert.js
+    info:    Executing command mobile script upload
+    info:    mobile script upload command OK
+```
 
 以下命令返回移动服务中维护的每个脚本文件的相关信息：
 
-        ~$ azure mobile script list todolist
-        info:    Executing command mobile script list
-        + Retrieving script information
-        info:    Table scripts
-        data:    Name                       Size
-        data:    -------------------------  ----
-        data:    table/channels.insert      1980
-        data:    table/TodoItem.insert      5504
-        data:    table/TodoItem.read        64
-        info:    Shared scripts
-        data:    Name              Size
-        data:    ----------------  ----
-        data:    shared/helper.js  62
-        data:    shared/uuid.js    7452
-        info:    Scheduled job scripts
-        data:    Job name    Script name           Status    Interval     Last run  Next run
-        data:    ----------  --------------------  --------  -----------  --------  --------
-        data:    getUpdates  scheduler/getUpdates  disabled  15 [minute]  N/A       N/A
-        info:    Custom API scripts
-        data:    Name                    Get          Put          Post         Patch        Delete
-        data:    ----------------------  -----------  -----------  -----------  -----------  -----------
-        data:    completeall             application  application  application  application  application
-        data:    register_notifications  application  application  user         application  application
-        info:    mobile script list command OK
+```
+    ~$ azure mobile script list todolist
+    info:    Executing command mobile script list
+    + Retrieving script information
+    info:    Table scripts
+    data:    Name                       Size
+    data:    -------------------------  ----
+    data:    table/channels.insert      1980
+    data:    table/TodoItem.insert      5504
+    data:    table/TodoItem.read        64
+    info:    Shared scripts
+    data:    Name              Size
+    data:    ----------------  ----
+    data:    shared/helper.js  62
+    data:    shared/uuid.js    7452
+    info:    Scheduled job scripts
+    data:    Job name    Script name           Status    Interval     Last run  Next run
+    data:    ----------  --------------------  --------  -----------  --------  --------
+    data:    getUpdates  scheduler/getUpdates  disabled  15 [minute]  N/A       N/A
+    info:    Custom API scripts
+    data:    Name                    Get          Put          Post         Patch        Delete
+    data:    ----------------------  -----------  -----------  -----------  -----------  -----------
+    data:    completeall             application  application  application  application  application
+    data:    register_notifications  application  application  user         application  application
+    info:    mobile script list command OK
+```
 
 ## <a name="working-with-tables"></a>使用表
 
@@ -644,56 +708,64 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
 已同时注册到表操作和计划作业的脚本可以访问全局对象形式的 [tables 对象]。以下代码行将从全局 [tables 对象]中获取 *TodoItems* 表的代理：
 
-        var todoItemsTable = tables.getTable('TodoItems');
+```
+    var todoItemsTable = tables.getTable('TodoItems');
+```
 
 自定义 API 脚本可从提供的 [request 对象]的 <strong>service</strong> 属性访问 [tables 对象]。以下代码行将从请求中获取 [tables 对象]：
 
-        var todoItemsTable = request.service.tables.getTable('TodoItem');
+```
+    var todoItemsTable = request.service.tables.getTable('TodoItem');
+```
 
 > [!NOTE]
 >共享函数不能直接访问 **tables** 对象。在共享函数中，必须将表对象传递给该函数。
 
 获得 [table 对象]后，可以调用一个或多个表操作函数：insert、update、delete 或 read。以下示例将从 permissions 表中读取用户权限：
 
-    function insert(item, user, request) {
-        var permissionsTable = tables.getTable('permissions');
+```
+function insert(item, user, request) {
+    var permissionsTable = tables.getTable('permissions');
 
-        permissionsTable
-            .where({ userId: user.userId, permission: 'submit order'})
-            .read({ success: checkPermissions });
+    permissionsTable
+        .where({ userId: user.userId, permission: 'submit order'})
+        .read({ success: checkPermissions });
 
-        function checkPermissions(results) {
-            if(results.length > 0) {
-                // Permission record was found. Continue normal execution.
-                request.execute();
-            } else {
-                console.log('User %s attempted to submit an order without permissions.', user.userId);
-                request.respond(statusCodes.FORBIDDEN, 'You do not have permission to submit orders.');
-            }
+    function checkPermissions(results) {
+        if(results.length > 0) {
+            // Permission record was found. Continue normal execution.
+            request.execute();
+        } else {
+            console.log('User %s attempted to submit an order without permissions.', user.userId);
+            request.respond(statusCodes.FORBIDDEN, 'You do not have permission to submit orders.');
         }
     }
+}
+```
 
 下一个示例将审核信息写入 **audit** 表：
 
-    function update(item, user, request) {
-        request.execute({ success: insertAuditEntry });
+```
+function update(item, user, request) {
+    request.execute({ success: insertAuditEntry });
 
-        function insertAuditEntry() {
-            var auditTable = tables.getTable('audit');
-            var audit = {
-                record: 'checkins',
-                recordId: item.id,
-                timestamp: new Date(),
-                values: JSON.stringify(item)
-            };
-            auditTable.insert(audit, {
-                success: function() {
-                    // Write to the response now that all data operations are complete
-                    request.respond();
-                }
-            });
-        }
+    function insertAuditEntry() {
+        var auditTable = tables.getTable('audit');
+        var audit = {
+            record: 'checkins',
+            recordId: item.id,
+            timestamp: new Date(),
+            values: JSON.stringify(item)
+        };
+        auditTable.insert(audit, {
+            success: function() {
+                // Write to the response now that all data operations are complete
+                request.respond();
+            }
+        });
     }
+}
+```
 
 以下部分的代码示例中提供了最后一个示例：[如何：访问自定义参数][How to: Add custom parameters]。
 
@@ -703,46 +775,48 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
 使用以下脚本可以设置要同时插入的记录批的大小。建议保持使用较小的记录数。完成异步插入批时，**insertItems** 函数将以递归方式调用自身。末尾的 for 循环一次插入一条记录，并在成功时调用 **insertComplete**，在出错时调用 **errorHandler**。**insertComplete** 控制是以递归方式为下一批调用 **insertItems**，还是在作业已完成的情况下退出脚本。
 
-        var todoTable = tables.getTable('TodoItem');
-        var recordsToInsert = 1000;
-        var batchSize = 10; 
-        var totalCount = 0;
-        var errorCount = 0; 
+```
+    var todoTable = tables.getTable('TodoItem');
+    var recordsToInsert = 1000;
+    var batchSize = 10; 
+    var totalCount = 0;
+    var errorCount = 0; 
 
-        function insertItems() {        
-            var batchCompletedCount = 0;  
+    function insertItems() {        
+        var batchCompletedCount = 0;  
 
-            var insertComplete = function() { 
-                batchCompletedCount++; 
-                totalCount++; 
-                if(batchCompletedCount === batchSize || totalCount === recordsToInsert) {                        
-                    if(totalCount < recordsToInsert) {
-                        // kick off the next batch 
-                        insertItems(); 
-                    } else { 
-                        // or we are done, report the status of the job 
-                        // to the log and don't do any more processing 
-                        console.log("Insert complete. %d Records processed. There were %d errors.", totalCount, errorCount); 
-                    } 
+        var insertComplete = function() { 
+            batchCompletedCount++; 
+            totalCount++; 
+            if(batchCompletedCount === batchSize || totalCount === recordsToInsert) {                        
+                if(totalCount < recordsToInsert) {
+                    // kick off the next batch 
+                    insertItems(); 
+                } else { 
+                    // or we are done, report the status of the job 
+                    // to the log and don't do any more processing 
+                    console.log("Insert complete. %d Records processed. There were %d errors.", totalCount, errorCount); 
                 } 
-            }; 
-
-            var errorHandler = function(err) { 
-                errorCount++; 
-                console.warn("Ignoring insert failure as part of batch.", err); 
-                insertComplete(); 
-            };
-
-            for(var i = 0; i < batchSize; i++) { 
-                var item = { text: "This is item number: " + totalCount + i }; 
-                todoTable.insert(item, { 
-                    success: insertComplete, 
-                    error: errorHandler 
-                }); 
             } 
-        } 
+        }; 
 
-        insertItems(); 
+        var errorHandler = function(err) { 
+            errorCount++; 
+            console.warn("Ignoring insert failure as part of batch.", err); 
+            insertComplete(); 
+        };
+
+        for(var i = 0; i < batchSize; i++) { 
+            var item = { text: "This is item number: " + totalCount + i }; 
+            todoTable.insert(item, { 
+                success: insertComplete, 
+                error: errorHandler 
+            }); 
+        } 
+    } 
+
+    insertItems(); 
+```
 
 ### <a name="JSON-types"></a>如何：将 JSON 类型映射到数据库类型
 
@@ -789,101 +863,117 @@ Stream|不支持
 
 以下查询不带参数，将返回 `statusupdate` 表中的三条记录。行集采用标准的 JSON 格式。
 
-        mssql.query('select top 3 * from statusupdates', {
-            success: function(results) {
-                console.log(results);
-            },
-            error: function(err) {
-                console.log("error is: " + err);
-            }
-        });
+```
+    mssql.query('select top 3 * from statusupdates', {
+        success: function(results) {
+            console.log(results);
+        },
+        error: function(err) {
+            console.log("error is: " + err);
+        }
+    });
+```
 
 #### <a name="dynamic-query"></a>如何：运行动态参数化查询
 
 以下示例通过从权限表中读取每个用户的权限来实现自定义授权。执行该查询时，占位符 (?) 将被替换为提供的参数。
 
-            var sql = "SELECT _id FROM permissions WHERE userId = ? AND permission = 'submit order'";
-            mssql.query(sql, [user.userId], {
-                success: function(results) {
-                    if (results.length > 0) {
-                        // Permission record was found. Continue normal execution. 
-                        request.execute();
-                    } else {
-                        console.log('User %s attempted to submit an order without permissions.', user.userId);
-                        request.respond(statusCodes.FORBIDDEN, 'You do not have permission to submit orders.');
-                    }
-                },
-                error: function(err) {
-                    console.log("error is: " + err);
-                }	
-            });
+```
+        var sql = "SELECT _id FROM permissions WHERE userId = ? AND permission = 'submit order'";
+        mssql.query(sql, [user.userId], {
+            success: function(results) {
+                if (results.length > 0) {
+                    // Permission record was found. Continue normal execution. 
+                    request.execute();
+                } else {
+                    console.log('User %s attempted to submit an order without permissions.', user.userId);
+                    request.respond(statusCodes.FORBIDDEN, 'You do not have permission to submit orders.');
+                }
+            },
+            error: function(err) {
+                console.log("error is: " + err);
+            }	
+        });
+```
 
 #### <a name="joins"></a>如何：联接关系表
 
 你可以使用 [mssql 对象]的 **query** 方法联接两个表，以传入实现联接的 TSQL 代码。假设 **ToDoItem** 表中有一些项，其中每个项都有一个对应于表中的列的 **priority** 属性。其中一个项类似于：
 
-        { text: 'Take out the trash', complete: false, priority: 1}
+```
+    { text: 'Take out the trash', complete: false, priority: 1}
+```
 
 另外，我们假设还有一个名为 **Priority** 的表，它的行包含优先级 **number** 和文本 **description**。如果优先级编号 (number) 1 的描述 (description) 为“Critical”，则相应的对象类似于：
 
-        { number: 1, description: 'Critical'}
+```
+    { number: 1, description: 'Critical'}
+```
 
 现在，我们可以将项中的 **priority** 编号替换为优先级编号的文本描述。将两个表进行关系联接即可实现此目的。
 
-        mssql.query('SELECT t.text, t.complete, p.description FROM ToDoItem as t INNER JOIN Priority as p ON t.priority = p.number', {
-            success: function(results) {
-                console.log(results);
-            },
-            error: function(err) {
-                console.log("error is: " + err);
-        });
+```
+    mssql.query('SELECT t.text, t.complete, p.description FROM ToDoItem as t INNER JOIN Priority as p ON t.priority = p.number', {
+        success: function(results) {
+            console.log(results);
+        },
+        error: function(err) {
+            console.log("error is: " + err);
+    });
+```
 
 该脚本将联接两个表，并将结果写入日志。最终的对象可能类似于：
 
-        { text: 'Take out the trash', complete: false, description: 'Critical'}
+```
+    { text: 'Take out the trash', complete: false, description: 'Critical'}
+```
 
 #### <a name="raw"></a>如何：运行返回 *raw* 结果的查询
 
 此示例将像前面一样执行查询，不过，这次会逐行逐列地返回需要你予以分析的“原始”格式结果集。用到此查询的可能情况是你需要访问移动服务不支持的数据类型。此代码会直接将输出写入控制台日志，使你能够检查原始格式。
 
-        mssql.queryRaw('SELECT * FROM ToDoItem', {
-            success: function(results) {
-                console.log(results);
-            },
-            error: function(err) {
-                console.log("error is: " + err);
-            }
-        });
+```
+    mssql.queryRaw('SELECT * FROM ToDoItem', {
+        success: function(results) {
+            console.log(results);
+        },
+        error: function(err) {
+            console.log("error is: " + err);
+        }
+    });
+```
 
 下面显示了运行此查询后的输出。其中包含有关表中每个列的元数据，后接行和列的表示形式。
 
-        { meta: 
-           [ { name: 'id',
-               size: 19,
-               nullable: false,
-               type: 'number',
-               sqlType: 'bigint identity' },
-             { name: 'text',
-               size: 0,
-               nullable: true,
-               type: 'text',
-               sqlType: 'nvarchar' },
-             { name: 'complete',
-               size: 1,
-               nullable: true,
-               type: 'boolean',
-               sqlType: 'bit' },
-             { name: 'priority',
-               size: 53,
-               nullable: true,
-               type: 'number',
-               sqlType: 'float' } ],
-          rows: 
-           [ [ 1, 'good idea for the future', null, 3 ],
-             [ 2, 'this is important but not so much', null, 2 ],
-             [ 3, 'fix this bug now', null, 0 ],
-             [ 4, 'we need to fix this one real soon now', null, 1 ],
-           ] }
+```
+    { meta: 
+       [ { name: 'id',
+           size: 19,
+           nullable: false,
+           type: 'number',
+           sqlType: 'bigint identity' },
+         { name: 'text',
+           size: 0,
+           nullable: true,
+           type: 'text',
+           sqlType: 'nvarchar' },
+         { name: 'complete',
+           size: 1,
+           nullable: true,
+           type: 'boolean',
+           sqlType: 'bit' },
+         { name: 'priority',
+           size: 53,
+           nullable: true,
+           type: 'number',
+           sqlType: 'float' } ],
+      rows: 
+       [ [ 1, 'good idea for the future', null, 3 ],
+         [ 2, 'this is important but not so much', null, 2 ],
+         [ 3, 'fix this bug now', null, 0 ],
+         [ 4, 'we need to fix this one real soon now', null, 1 ],
+       ] }
+```
 
 #### <a name="connection"></a>如何：获取对数据库连接的访问权限
 
@@ -891,14 +981,16 @@ Stream|不支持
 
 成功执行 **open** 后，将在 **success** 函数中以参数形式传入数据库连接。你可以对 **connection** 对象调用以下任何函数：*close*、*queryRaw*、*query*、*beginTransaction*、*commit* 和 *rollback*。
 
-            mssql.open({
-                success: function(connection) {
-                    connection.query(//query to execute);
-                },
-                error: function(err) {
-                    console.log("error is: " + err);
-                }
-            });
+```
+        mssql.open({
+            success: function(connection) {
+                connection.query(//query to execute);
+            },
+            error: function(err) {
+                console.log("error is: " + err);
+            }
+        });
+```
 
 ## <a name="debugging"></a>调试和故障排除
 
@@ -913,10 +1005,12 @@ Stream|不支持
 
 你还可以使用 [console 对象]的日志记录功能通过参数来设置消息格式。以下示例向消息字符串提供了一个参数形式的 JSON 对象：
 
-    function insert(item, user, request) {
-        console.log("Inserting item '%j' for user '%j'.", item, user);  
-        request.execute();
-    }
+```
+function insert(item, user, request) {
+    console.log("Inserting item '%j' for user '%j'.", item, user);  
+    request.execute();
+}
+```
 
 请注意，字符串 `%j` 用作 JSON 对象的占位符，并且参数是按顺序提供的。
 

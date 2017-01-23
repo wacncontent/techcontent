@@ -170,20 +170,28 @@ ms.author: cherylmc
 
 1. 打开 Windows PowerShell，然后登录。
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 2. 选择 VNet 所在的订阅。
 
-        Get-AzureSubscription | Sort SubscriptionName | Select SubscriptionName
-        Select-AzureSubscription -SubscriptionName "<Subscription Name>"
+    ```
+    Get-AzureSubscription | Sort SubscriptionName | Select SubscriptionName
+    Select-AzureSubscription -SubscriptionName "<Subscription Name>"
+    ```
 3. 创建连接。在示例中，可以看到共享密钥完全相同。共享的密钥必须始终匹配。
 
     VNet1 到 VNet2 连接
 
-        Set-AzureVNetGatewayKey -VNetName VNet1 -LocalNetworkSiteName VNet2Local -SharedKey A1b2C3D4
+    ```
+    Set-AzureVNetGatewayKey -VNetName VNet1 -LocalNetworkSiteName VNet2Local -SharedKey A1b2C3D4
+    ```
 
     VNet2 到 VNet1 连接
 
-        Set-AzureVNetGatewayKey -VNetName VNet2 -LocalNetworkSiteName VNet1Local -SharedKey A1b2C3D4
+    ```
+    Set-AzureVNetGatewayKey -VNetName VNet2 -LocalNetworkSiteName VNet1Local -SharedKey A1b2C3D4
+    ```
 
 4. 等待连接初始化。初始化网关后，网关将如下图所示。
 

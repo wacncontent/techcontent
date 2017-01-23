@@ -53,62 +53,72 @@ ms.author: donnam
 
 1. 打开 **QSToDoService** 项目文件并添加以下变量
 
-        // Mobile Service logged in user
-        private MobileServiceUser user; 
-        public MobileServiceUser User { get { return user; } }
+    ```
+    // Mobile Service logged in user
+    private MobileServiceUser user; 
+    public MobileServiceUser User { get { return user; } }
+    ```
 
 2. 然后，向 **TodoService** 添加一个名为 **Authenticate** 的新方法，其定义为：
 
-        private async Task Authenticate(MonoTouch.UIKit.UIViewController view)
+    ```
+    private async Task Authenticate(MonoTouch.UIKit.UIViewController view)
+    {
+        try
         {
-            try
-            {
-                user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.MicrosoftAccount);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
-            }
+            user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.MicrosoftAccount);
         }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
+        }
+    }
+    ```
 
     > [!NOTE]
     >如果使用的标识提供程序不是 Microsoft 帐户，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
 
 3. 从 **ToDoService** 构造函数将对 **ToDoItem** 表的请求移到名为 **CreateTable** 的新方法中：
 
-        private async Task CreateTable()
-        {
-            // Create an MSTable instance to allow us to work with the ToDoItem table
-            todoTable = client.GetSyncTable<ToDoItem>();
-        }
+    ```
+    private async Task CreateTable()
+    {
+        // Create an MSTable instance to allow us to work with the ToDoItem table
+        todoTable = client.GetSyncTable<ToDoItem>();
+    }
+    ```
 
 4. 创建一个名为 **LoginAndGetData** 的新异步公共方法，其定义为：
 
-        public async Task LoginAndGetData(MonoTouch.UIKit.UIViewController view)
-        {
-            await Authenticate(view);
-            await CreateTable();
-        }
+    ```
+    public async Task LoginAndGetData(MonoTouch.UIKit.UIViewController view)
+    {
+        await Authenticate(view);
+        await CreateTable();
+    }
+    ```
 
 5. 在 **TodoListViewController** 中，重写 **ViewDidAppear** 方法，并按如下所示定义它。如果 **TodoService** 还没有用户的句柄，则此代码让用户登录：
 
-        public override async void ViewDidAppear(bool animated)
+    ```
+    public override async void ViewDidAppear(bool animated)
+    {
+        base.ViewDidAppear(animated);
+
+        if (QSTodoService.DefaultService.User == null)
         {
-            base.ViewDidAppear(animated);
-
-            if (QSTodoService.DefaultService.User == null)
-            {
-                await QSTodoService.DefaultService.LoginAndGetData(this);
-            }
-
-            if (QSTodoService.DefaultService.User == null)
-            {
-                // TODO:: show error
-                return;
-            }
-
-            await RefreshAsync();
+            await QSTodoService.DefaultService.LoginAndGetData(this);
         }
+
+        if (QSTodoService.DefaultService.User == null)
+        {
+            // TODO:: show error
+            return;
+        }
+
+        await RefreshAsync();
+    }
+    ```
 6. 从 **TodoListViewController.ViewDidLoad** 中删除对 **RefreshAsync** 的原始调用。
 
 7. 按“运行”按钮以生成项目，在 iPhone 模拟器中启动应用，然后使用你选择的标识提供者登录。

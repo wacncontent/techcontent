@@ -46,12 +46,14 @@ ms.author: wesmc
 3. 在 Visual Studio 的解决方案资源管理器中，展开 .NET 后端项目下的“控制器”节点，然后打开控制器源代码。例如 *TodoItemController.cs*。
 4. 在控制器的 `Initialize()` 方法中，将参数 `enableSoftDelete: true` 传递给 EntityDomainManager 构造函数。
 
-        protected override void Initialize(HttpControllerContext controllerContext)
-        {
-            base.Initialize(controllerContext);
-            MobileService1Context context = new MobileService1Context();
-            DomainManager = new EntityDomainManager<TodoItem>(context, Request, Services, enableSoftDelete: true);
-        }
+    ```
+    protected override void Initialize(HttpControllerContext controllerContext)
+    {
+        base.Initialize(controllerContext);
+        MobileService1Context context = new MobileService1Context();
+        DomainManager = new EntityDomainManager<TodoItem>(context, Request, Services, enableSoftDelete: true);
+    }
+    ```
 
 ## 启用面向 JavaScript 后端的软删除
 
@@ -74,29 +76,31 @@ ms.author: wesmc
 
 以下计划的作业清除存在时间超过一个月的软删除的记录：
 
-    public class SampleJob : ScheduledJob
+```
+public class SampleJob : ScheduledJob
+{
+    private MobileService1Context context;
+
+    protected override void Initialize(ScheduledJobDescriptor scheduledJobDescriptor, 
+        CancellationToken cancellationToken)
     {
-        private MobileService1Context context;
-
-        protected override void Initialize(ScheduledJobDescriptor scheduledJobDescriptor, 
-            CancellationToken cancellationToken)
-        {
-            base.Initialize(scheduledJobDescriptor, cancellationToken);
-            context = new MobileService1Context();
-        }
-
-        public override Task ExecuteAsync()
-        {
-            Services.Log.Info("Purging old records");
-            var monthAgo = DateTimeOffset.UtcNow.AddDays(-30);
-
-            var toDelete = context.TodoItems.Where(x => x.Deleted == true && x.UpdatedAt <= monthAgo).ToArray();
-            context.TodoItems.RemoveRange(toDelete);
-            context.SaveChanges();
-
-            return Task.FromResult(true);
-        }
+        base.Initialize(scheduledJobDescriptor, cancellationToken);
+        context = new MobileService1Context();
     }
+
+    public override Task ExecuteAsync()
+    {
+        Services.Log.Info("Purging old records");
+        var monthAgo = DateTimeOffset.UtcNow.AddDays(-30);
+
+        var toDelete = context.TodoItems.Where(x => x.Deleted == true && x.UpdatedAt <= monthAgo).ToArray();
+        context.TodoItems.RemoveRange(toDelete);
+        context.SaveChanges();
+
+        return Task.FromResult(true);
+    }
+}
+```
 
 ## <a name="using-with-javascript"></a>在 JavaScript 后端使用软删除
 
@@ -104,9 +108,11 @@ ms.author: wesmc
 
 若要检测“取消删除”的请求，请使用更新表脚本中的“取消删除”属性：
 
-    function update(item, user, request) {
-        if (request.undelete) { /* any undelete specific code */; }
-    }
+```
+function update(item, user, request) {
+    if (request.undelete) { /* any undelete specific code */; }
+}
+```
 若要在脚本中包含查询结果内的已删除记录，请将“includeDeleted”参数设置为 true：
 
     tables.getTable('softdelete_scenarios').read({
@@ -118,21 +124,25 @@ ms.author: wesmc
 
 若要通过 HTTP 请求检索已删除的记录，请添加查询参数"\_\_includedeleted=true"：
 
-    http://youservice.azure-mobile.net/tables/todoitem?__includedeleted=true
+```
+http://youservice.azure-mobile.net/tables/todoitem?__includedeleted=true
+```
 
 ###  制定用于清除软删除记录的计划作业的样本。
 
 这是一个计划作业示例，用于删除在某一特定日期之前更新的记录：
 
-    function purgedeleted() {
-         mssql.query('DELETE FROM softdelete WHERE __deleted=1', {
-            success: function(results) {
-                console.log(results);
-            },
-            error: function(err) {
-                console.log("error is: " + err);
-        }});
-    }
+```
+function purgedeleted() {
+     mssql.query('DELETE FROM softdelete WHERE __deleted=1', {
+        success: function(results) {
+            console.log(results);
+        },
+        error: function(err) {
+            console.log("error is: " + err);
+    }});
+}
+```
 
 <!-- Images -->
 

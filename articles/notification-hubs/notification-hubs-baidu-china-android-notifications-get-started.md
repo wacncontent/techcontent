@@ -194,62 +194,68 @@ ms.author: wesmc
 
 7. 打开 Android 项目的 **AndroidManifest.xml** 文件，并添加百度 SDK 所需的权限。
 
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-        <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-        <uses-permission android:name="android.permission.VIBRATE" />
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-        <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
-        <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    ```
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    ```
 
 8. 向 **AndroidManifest.xml** 中的 **application** 元素添加 **android:name** 属性，并替换 *yourprojectname*（例如 **com.example.BaiduTest**）。确保此项目名称与你在百度控制台中配置的项目名称匹配。
 
-        <application android:name="yourprojectname.DemoApplication"
+    ```
+    <application android:name="yourprojectname.DemoApplication"
+    ```
 
 9. 在 **.MainActivity** 活动元素后的 application 元素内添加以下配置，并替换 *yourprojectname*（例如 **com.example.BaiduTest**）：
 
-        <receiver android:name="yourprojectname.MyPushMessageReceiver">
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
-                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
-            </intent-filter>
-        </receiver>
+    ```
+    <receiver android:name="yourprojectname.MyPushMessageReceiver">
+        <intent-filter>
+            <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
+            <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
+            <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+        </intent-filter>
+    </receiver>
 
-        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
-            android:process=":bdservice_v1">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
-            </intent-filter>
-        </receiver>
+    <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
+        android:process=":bdservice_v1">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
+        </intent-filter>
+    </receiver>
 
-        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
-            android:process=":bdservice_v1">
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.METHOD" />
-                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
+    <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
+        android:process=":bdservice_v1">
+        <intent-filter>
+            <action android:name="com.baidu.android.pushservice.action.METHOD" />
+            <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+            <data android:scheme="package" />
+        </intent-filter>
+    </receiver>
 
-        <service
-            android:name="com.baidu.android.pushservice.PushService"
-            android:exported="true"
-            android:process=":bdservice_v1"  >
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
-            </intent-filter>
-        </service>
+    <service
+        android:name="com.baidu.android.pushservice.PushService"
+        android:exported="true"
+        android:process=":bdservice_v1"  >
+        <intent-filter>
+            <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
+        </intent-filter>
+    </service>
+    ```
 
 9. 将一个名为 **ConfigurationSettings.java** 的新类添加到项目中。
 
@@ -259,143 +265,153 @@ ms.author: wesmc
 
 10. 将以下代码添加到该类中：
 
-        public class ConfigurationSettings {
-                public static String API_KEY = "...";
-                public static String NotificationHubName = "...";
-                public static String NotificationHubConnectionString = "...";
-            }
+    ```
+    public class ConfigurationSettings {
+            public static String API_KEY = "...";
+            public static String NotificationHubName = "...";
+            public static String NotificationHubConnectionString = "...";
+        }
+    ```
 
     使用前面从百度云项目中检索到的内容设置 **API\_KEY** 的值，使用 Azure 经典管理门户中的通知中心名称设置 **NotificationHubName**，并使用 Azure 经典管理门户中的 DefaultListenSharedAccessSignature 设置 **NotificationHubConnectionString**。
 
 11. 添加一个名为 **DemoApplication.java** 的新类，并向此类中添加以下代码：
 
-        import com.baidu.frontia.FrontiaApplication;
+    ```
+    import com.baidu.frontia.FrontiaApplication;
 
-        public class DemoApplication extends FrontiaApplication {
-            @Override
-            public void onCreate() {
-                super.onCreate();
-            }
+    public class DemoApplication extends FrontiaApplication {
+        @Override
+        public void onCreate() {
+            super.onCreate();
         }
+    }
+    ```
 
 12. 添加另一个名为 **MyPushMessageReceiver.java** 的新类，并向此类中添加以下代码。此类用于处理从百度推送服务器收到的推送通知。
 
-        import java.util.List;
-        import android.content.Context;
-        import android.os.AsyncTask;
-        import android.util.Log;
-        import com.baidu.frontia.api.FrontiaPushMessageReceiver;
-        import com.microsoft.windowsazure.messaging.NotificationHub;
+    ```
+    import java.util.List;
+    import android.content.Context;
+    import android.os.AsyncTask;
+    import android.util.Log;
+    import com.baidu.frontia.api.FrontiaPushMessageReceiver;
+    import com.microsoft.windowsazure.messaging.NotificationHub;
 
-        public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
-            /** TAG to Log */
-            public static NotificationHub hub = null;
-            public static String mChannelId, mUserId;
-            public static final String TAG = MyPushMessageReceiver.class
-                    .getSimpleName();
+    public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
+        /** TAG to Log */
+        public static NotificationHub hub = null;
+        public static String mChannelId, mUserId;
+        public static final String TAG = MyPushMessageReceiver.class
+                .getSimpleName();
 
-            @Override
-            public void onBind(Context context, int errorCode, String appid,
-                    String userId, String channelId, String requestId) {
-                String responseString = "onBind errorCode=" + errorCode + " appid="
-                        + appid + " userId=" + userId + " channelId=" + channelId
-                        + " requestId=" + requestId;
-                Log.d(TAG, responseString);
-                mChannelId = channelId;
-                mUserId = userId;
+        @Override
+        public void onBind(Context context, int errorCode, String appid,
+                String userId, String channelId, String requestId) {
+            String responseString = "onBind errorCode=" + errorCode + " appid="
+                    + appid + " userId=" + userId + " channelId=" + channelId
+                    + " requestId=" + requestId;
+            Log.d(TAG, responseString);
+            mChannelId = channelId;
+            mUserId = userId;
 
-                try {
-                    if (hub == null) {
-                        hub = new NotificationHub(
-                                ConfigurationSettings.NotificationHubName,
-                                ConfigurationSettings.NotificationHubConnectionString,
-                                context);
-                        Log.i(TAG, "Notification hub initialized");
-                    }
-                } catch (Exception e) {
-                   Log.e(TAG, e.getMessage());
+            try {
+                if (hub == null) {
+                    hub = new NotificationHub(
+                            ConfigurationSettings.NotificationHubName,
+                            ConfigurationSettings.NotificationHubConnectionString,
+                            context);
+                    Log.i(TAG, "Notification hub initialized");
                 }
-
-                registerWithNotificationHubs();
+            } catch (Exception e) {
+               Log.e(TAG, e.getMessage());
             }
 
-            private void registerWithNotificationHubs() {
-               new AsyncTask<Void, Void, Void>() {
-                  @Override
-                  protected Void doInBackground(Void... params) {
-                     try {
-                         hub.registerBaidu(mUserId, mChannelId);
-                         Log.i(TAG, "Registered with Notification Hub - '"
-                                 + ConfigurationSettings.NotificationHubName + "'"
-                                 + " with UserId - '"
-                                 + mUserId + "' and Channel Id - '"
-                                 + mChannelId + "'");
-                     } catch (Exception e) {
-                         Log.e(TAG, e.getMessage());
-                     }
-                     return null;
-                 }
-               }.execute(null, null, null);
-            }
-
-            @Override
-            public void onSetTags(Context context, int errorCode,
-                    List<String> sucessTags, List<String> failTags, String requestId) {
-                String responseString = "onSetTags errorCode=" + errorCode
-                        + " sucessTags=" + sucessTags + " failTags=" + failTags
-                        + " requestId=" + requestId;
-                Log.d(TAG, responseString);
-            }
-
-            @Override
-            public void onDelTags(Context context, int errorCode,
-                    List<String> sucessTags, List<String> failTags, String requestId) {
-                String responseString = "onDelTags errorCode=" + errorCode
-                        + " sucessTags=" + sucessTags + " failTags=" + failTags
-                        + " requestId=" + requestId;
-                Log.d(TAG, responseString);
-            }
-
-            @Override
-            public void onListTags(Context context, int errorCode, List<String> tags,
-                    String requestId) {
-                String responseString = "onListTags errorCode=" + errorCode + " tags="
-                        + tags;
-                Log.d(TAG, responseString);
-            }
-
-            @Override
-            public void onUnbind(Context context, int errorCode, String requestId) {
-                String responseString = "onUnbind errorCode=" + errorCode
-                        + " requestId = " + requestId;
-                Log.d(TAG, responseString);
-            }
-
-            @Override
-            public void onNotificationClicked(Context context, String title,
-                    String description, String customContentString) {
-                String notifyString = "title=\"" + title + "\" description=\""
-                        + description + "\" customContent=" + customContentString;
-                Log.d(TAG, notifyString);
-            }
-
-            @Override
-            public void onMessage(Context context, String message,
-                    String customContentString) {
-                String messageString = "message=\"" + message + "\" customContentString=" + customContentString;
-                Log.d(TAG, messageString);
-            }
+            registerWithNotificationHubs();
         }
+
+        private void registerWithNotificationHubs() {
+           new AsyncTask<Void, Void, Void>() {
+              @Override
+              protected Void doInBackground(Void... params) {
+                 try {
+                     hub.registerBaidu(mUserId, mChannelId);
+                     Log.i(TAG, "Registered with Notification Hub - '"
+                             + ConfigurationSettings.NotificationHubName + "'"
+                             + " with UserId - '"
+                             + mUserId + "' and Channel Id - '"
+                             + mChannelId + "'");
+                 } catch (Exception e) {
+                     Log.e(TAG, e.getMessage());
+                 }
+                 return null;
+             }
+           }.execute(null, null, null);
+        }
+
+        @Override
+        public void onSetTags(Context context, int errorCode,
+                List<String> sucessTags, List<String> failTags, String requestId) {
+            String responseString = "onSetTags errorCode=" + errorCode
+                    + " sucessTags=" + sucessTags + " failTags=" + failTags
+                    + " requestId=" + requestId;
+            Log.d(TAG, responseString);
+        }
+
+        @Override
+        public void onDelTags(Context context, int errorCode,
+                List<String> sucessTags, List<String> failTags, String requestId) {
+            String responseString = "onDelTags errorCode=" + errorCode
+                    + " sucessTags=" + sucessTags + " failTags=" + failTags
+                    + " requestId=" + requestId;
+            Log.d(TAG, responseString);
+        }
+
+        @Override
+        public void onListTags(Context context, int errorCode, List<String> tags,
+                String requestId) {
+            String responseString = "onListTags errorCode=" + errorCode + " tags="
+                    + tags;
+            Log.d(TAG, responseString);
+        }
+
+        @Override
+        public void onUnbind(Context context, int errorCode, String requestId) {
+            String responseString = "onUnbind errorCode=" + errorCode
+                    + " requestId = " + requestId;
+            Log.d(TAG, responseString);
+        }
+
+        @Override
+        public void onNotificationClicked(Context context, String title,
+                String description, String customContentString) {
+            String notifyString = "title=\"" + title + "\" description=\""
+                    + description + "\" customContent=" + customContentString;
+            Log.d(TAG, notifyString);
+        }
+
+        @Override
+        public void onMessage(Context context, String message,
+                String customContentString) {
+            String messageString = "message=\"" + message + "\" customContentString=" + customContentString;
+            Log.d(TAG, messageString);
+        }
+    }
+    ```
 
 13. 打开 **MainActivity.java**，并将以下内容添加到 **onCreate** 方法中：
 
-            PushManager.startWork(getApplicationContext(),
-                    PushConstants.LOGIN_TYPE_API_KEY, ConfigurationSettings.API_KEY);
+    ```
+        PushManager.startWork(getApplicationContext(),
+                PushConstants.LOGIN_TYPE_API_KEY, ConfigurationSettings.API_KEY);
+    ```
 
 14. 打开顶部的以下 import 语句：
 
-            import com.baidu.android.pushservice.PushConstants;
-            import com.baidu.android.pushservice.PushManager;
+    ```
+        import com.baidu.android.pushservice.PushConstants;
+        import com.baidu.android.pushservice.PushManager;
+    ```
 
 ##向应用程序发送通知
 

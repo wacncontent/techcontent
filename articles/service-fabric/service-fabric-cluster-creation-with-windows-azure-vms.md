@@ -30,40 +30,44 @@ ms.author: dkshir;chackdan
 5. 连接到其中一台 VM，并将 [Windows Server 独立 Service Fabric 包下载](http://go.microsoft.com/fwlink/?LinkId=730690)到此虚拟机的新文件夹中，然后提取该包。
 6. 在记事本中打开 *ClusterConfig.Unsecure.MultiMachine.json* 文件，使用计算机的三个 IP 地址编辑每个节点。更改顶部的群集名称，然后保存文件。下方显示了群集清单的部分示例。
 
+    ```
+    {
+        "name": "TestCluster",
+        "clusterManifestVersion": "1.0.0",
+        "apiVersion": "2015-01-01-alpha",
+        "nodes": [
         {
-            "name": "TestCluster",
-            "clusterManifestVersion": "1.0.0",
-            "apiVersion": "2015-01-01-alpha",
-            "nodes": [
-            {
-                "nodeName": "vm0",
-                "metadata": "Replace the localhost with valid IP address or FQDN below",
-                "iPAddress": "10.7.0.5",
-                "nodeTypeRef": "NodeType0",
-                "faultDomain": "fd:/dc1/r0",
-                "upgradeDomain": "UD0"
-            },
-            {
-                "nodeName": "vm1",
-                "metadata": "Replace the localhost with valid IP address or FQDN below",
-                "iPAddress": "10.7.0.4",
-                "nodeTypeRef": "NodeType0",
-                "faultDomain": "fd:/dc2/r0",
-                "upgradeDomain": "UD1"
-            },
-            {
-                "nodeName": "vm2",
-                "metadata": "Replace the localhost with valid IP address or FQDN below",
-                "iPAddress": "10.7.0.6",
-                "nodeTypeRef": "NodeType0",
-                "faultDomain": "fd:/dc3/r0",
-                "upgradeDomain": "UD2"
-            }
-        ],
+            "nodeName": "vm0",
+            "metadata": "Replace the localhost with valid IP address or FQDN below",
+            "iPAddress": "10.7.0.5",
+            "nodeTypeRef": "NodeType0",
+            "faultDomain": "fd:/dc1/r0",
+            "upgradeDomain": "UD0"
+        },
+        {
+            "nodeName": "vm1",
+            "metadata": "Replace the localhost with valid IP address or FQDN below",
+            "iPAddress": "10.7.0.4",
+            "nodeTypeRef": "NodeType0",
+            "faultDomain": "fd:/dc2/r0",
+            "upgradeDomain": "UD1"
+        },
+        {
+            "nodeName": "vm2",
+            "metadata": "Replace the localhost with valid IP address or FQDN below",
+            "iPAddress": "10.7.0.6",
+            "nodeTypeRef": "NodeType0",
+            "faultDomain": "fd:/dc3/r0",
+            "upgradeDomain": "UD2"
+        }
+    ],
+    ```
 
 7. 打开 [PowerShell ISE 窗口](https://msdn.microsoft.com/zh-cn/powershell/scripting/core-powershell/ise/introducing-the-windows-powershell-ise)。导航到您在其中提取已下载的独立安装程序包并保存群集清单文件的文件夹。运行以下 PowerShell 命令。
 
-        .\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json -MicrosoftServiceFabricCabFilePath .\MicrosoftAzureServiceFabric.cab
+    ```
+    .\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json -MicrosoftServiceFabricCabFilePath .\MicrosoftAzureServiceFabric.cab
+    ```
 
 8. 您会看到 PowerShell 运行，此时请连接到每台计算机并创建群集。大约一分钟后，可以通过某个计算机 IP 地址（例如通过使用 `http://10.7.0.5:19080/Explorer/index.html`）连接到 Service Fabric Explorer，以便检查群集是否正常运行。由于该群集是使用 Azure VM 的独立群集，因此若要确保其安全，则需[将证书部署到 Azure VM](./service-fabric-windows-cluster-x509-security.md)，或者将某台计算机设置为 [Windows Server Active Directory (AD) 控制器，以便进行 Windows 身份验证](./service-fabric-windows-cluster-windows-security.md)，就像在本地执行相关操作一样。
 

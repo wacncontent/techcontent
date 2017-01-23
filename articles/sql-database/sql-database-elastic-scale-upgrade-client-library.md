@@ -57,16 +57,18 @@ ms.author: ddove
 
 或者，创建一个 Visual Studio 应用程序，它打开 ShardMapManager，循环访问所有分片并通过调用 [UpgradeLocalStore](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.upgradelocalstore.aspx) 和 [UpgradeGlobalStore](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.upgradeglobalstore.aspx) 方法执行元数据升级，如此示例所示：
 
-    ShardMapManager smm =
-       ShardMapManagerFactory.GetSqlShardMapManager
-       (connStr, ShardMapManagerLoadPolicy.Lazy); 
-    smm.UpgradeGlobalStore(); 
+```
+ShardMapManager smm =
+   ShardMapManagerFactory.GetSqlShardMapManager
+   (connStr, ShardMapManagerLoadPolicy.Lazy); 
+smm.UpgradeGlobalStore(); 
 
-    foreach (ShardLocation loc in
-     smm.GetDistinctShardLocations()) 
-    {   
-       smm.UpgradeLocalStore(loc); 
-    } 
+foreach (ShardLocation loc in
+ smm.GetDistinctShardLocations()) 
+{   
+   smm.UpgradeLocalStore(loc); 
+} 
+```
 
 可以多次应用这些元数据升级技术，不会造成危害。例如，如果在已更新后，旧的客户端版本无意中创建了一个分片，则可以对所有分片再次运行升级，以确保最新的元数据版本在整个基础结构中存在。
 

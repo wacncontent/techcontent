@@ -129,10 +129,12 @@ Azure 开发支持团队已经创建了一个 SDP(Support Diagnostics Platform �
 2. **打开 Powershell**
 3. **复制/黏贴并执行以下代码**
 
-        md c:\Diagnostics; 
-        md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
-        Import-Module bitstransfer; 
-        explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
+    ```
+    md c:\Diagnostics; 
+    md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
+    Import-Module bitstransfer; 
+    explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
+    ```
 
 这行代码会做以下的事情:
 

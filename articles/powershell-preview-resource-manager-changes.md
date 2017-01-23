@@ -26,22 +26,30 @@ wacn.date: 11/12/2015
 
 在版本 0.9.8 中，若要获取特定资源组的日志，你需要运行如下所示的命令：
 
-    Get-AzureResourceGroupLog -ResourceGroup <resource-group-name>
+```
+Get-AzureResourceGroupLog -ResourceGroup <resource-group-name>
+```
 
 若要获取特定资源的日志，你需要执行以下命令：
 
-     Get-AzureResourceLog -ResourceId
-     /subscriptions/#######-####-####-####-############/resourcegroups/<resource-group-name>/providers/<provider-namespace>/
-     <resource-name>
+```
+ Get-AzureResourceLog -ResourceId
+ /subscriptions/#######-####-####-####-############/resourcegroups/<resource-group-name>/providers/<provider-namespace>/
+ <resource-name>
+```
 
 在 1.0 预览版中，运行以下 cmdlet 就能获取相同的信息。若要获取资源组的日志，你可以运行：
 
-     Get-AzureRmLog -ResourceGroup <resource-group-name>
+```
+ Get-AzureRmLog -ResourceGroup <resource-group-name>
+```
 
 若要获取特定资源的日志，你可以运行：
 
-     Get-AzureRmLog -ResourceId /subscriptions/#######-####-####-####-############/resourcegroups/<resource-group-name>
-     /providers/<provider-namespace>/<resource-name>
+```
+ Get-AzureRmLog -ResourceId /subscriptions/#######-####-####-####-############/resourcegroups/<resource-group-name>
+ /providers/<provider-namespace>/<resource-name>
+```
 
 ##对于适用于资源和资源组的 Get cmdlet 的更改
 
@@ -49,11 +57,15 @@ wacn.date: 11/12/2015
 
 在 0.9.8 中，若要查找包含特定标记的所有资源组，你需要运行：
 
-    Get-AzureResourceGroup -Tag <tag-object>
+```
+Get-AzureResourceGroup -Tag <tag-object>
+```
 
 在 1.0 预览版中，运行以下 cmdlet 即可实现上述方案：
 
-    Find-AzureRmResourceGroup -Tag <tag-object>
+```
+Find-AzureRmResourceGroup -Tag <tag-object>
+```
 
 ##已删除 Test-AzureResource 和 Test-AzureResourceGroup
 
@@ -65,21 +77,29 @@ wacn.date: 11/12/2015
 
 在 0.9.8，若要获取所有受支持位置的列表，需要运行：
 
-     Get-AzureLocation
+```
+ Get-AzureLocation
+```
 
 若要获取提供程序的注册状态，需要运行：
 
-     Get-AzureProvider -ListAvailable
+```
+ Get-AzureProvider -ListAvailable
+```
 
 在 1.0 预览版中，只需按如下所示使用一个 cmdlet，就能实现上述目的：
 
-     Get-AzureRmResourceProvider -Location <location>
+```
+ Get-AzureRmResourceProvider -Location <location>
+```
 
 上述 cmdlet 将筛选结果，以便只显示指定位置中可用的提供程序和类型。
 
 或者，你可以按如下所示将结果筛选为特定的提供程序：
 
-     Get-AzureRmResourceProvider -ProviderNamespace <provider-namespace>
+```
+ Get-AzureRmResourceProvider -ProviderNamespace <provider-namespace>
+```
 
 上述 cmdlet 将筛选结果，以便只显示指定提供程序支持的位置。
 

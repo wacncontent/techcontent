@@ -66,18 +66,20 @@ Dapper 和 DapperExtensions 的另一个优点在于，应用程序可以控制�
 
 此代码示例（来自随附的示例）演示了应用程序在库中提供分片键，以将连接中转到正确分片的方案。
 
-    using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
-                     key: tenantId1, 
-                     connectionString: connStrBldr.ConnectionString, 
-                     options: ConnectionOptions.Validate))
-    {
-        var blog = new Blog { Name = name };
-        sqlconn.Execute(@"
-                      INSERT INTO
-                            Blog (Name)
-                            VALUES (@name)", new { name = blog.Name }
-                        );
-    }
+```
+using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
+                 key: tenantId1, 
+                 connectionString: connStrBldr.ConnectionString, 
+                 options: ConnectionOptions.Validate))
+{
+    var blog = new Blog { Name = name };
+    sqlconn.Execute(@"
+                  INSERT INTO
+                        Blog (Name)
+                        VALUES (@name)", new { name = blog.Name }
+                    );
+}
+```
 
 调用 [OpenConnectionForKey](http://msdn.microsoft.com/zh-cn/library/azure/dn807226.aspx) API 会替换 SQL 客户端连接的默认创建和打开方法。[OpenConnectionForKey](http://msdn.microsoft.com/zh-cn/library/azure/dn807226.aspx) 调用采用了进行数据相关路由所需的参数：
 
@@ -89,23 +91,25 @@ Dapper 和 DapperExtensions 的另一个优点在于，应用程序可以控制�
 
 查询的工作方式非常类似 - 首先从客户端 API 使用 [OpenConnectionForKey](http://msdn.microsoft.com/zh-cn/library/azure/dn807226.aspx) 打开连接。然后，可以使用常规的 Dapper 扩展方法将 SQL 查询的结果映射到 .NET 对象：
 
-    using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
-                    key: tenantId1, 
-                    connectionString: connStrBldr.ConnectionString, 
-                    options: ConnectionOptions.Validate ))
-    {    
-           // Display all Blogs for tenant 1
-           IEnumerable<Blog> result = sqlconn.Query<Blog>(@"
-                                SELECT * 
-                                FROM Blog
-                                ORDER BY Name");
+```
+using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
+                key: tenantId1, 
+                connectionString: connStrBldr.ConnectionString, 
+                options: ConnectionOptions.Validate ))
+{    
+       // Display all Blogs for tenant 1
+       IEnumerable<Blog> result = sqlconn.Query<Blog>(@"
+                            SELECT * 
+                            FROM Blog
+                            ORDER BY Name");
 
-           Console.WriteLine("All blogs for tenant id {0}:", tenantId1);
-           foreach (var item in result)
-           {
-                Console.WriteLine(item.Name);
-            }
-    }
+       Console.WriteLine("All blogs for tenant id {0}:", tenantId1);
+       foreach (var item in result)
+       {
+            Console.WriteLine(item.Name);
+        }
+}
+```
 
 请注意：将块与 DDR 连接一起**使用**会将块中的所有数据库操作划归到其中保存 tenantId1 的一个分片内。该查询仅返回存储在当前分片上的博客，而不是存储在任何其他分片上的博客。
 
@@ -115,30 +119,34 @@ Dapper 随附了可以在开发数据库应用程序时从数据库提供更大�
 
 在应用程序中使用 DapperExtensions 不会更改创建和管理数据库连接的方式。应用程序仍要负责打开连接，并且扩展方法要求使用常规的 SQL 客户端连接对象。我们可以依赖于上述的 [OpenConnectionForKey](http://msdn.microsoft.com/zh-cn/library/azure/dn807226.aspx)。如以下代码示例所示，唯一的变化是我们不再需要编写 T-SQL 语句：
 
-    using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
-                    key: tenantId2, 
-                    connectionString: connStrBldr.ConnectionString, 
-                    options: ConnectionOptions.Validate))
-    {
-           var blog = new Blog { Name = name2 };
-           sqlconn.Insert(blog);
-    }
+```
+using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
+                key: tenantId2, 
+                connectionString: connStrBldr.ConnectionString, 
+                options: ConnectionOptions.Validate))
+{
+       var blog = new Blog { Name = name2 };
+       sqlconn.Insert(blog);
+}
+```
 
 下面是查询的代码示例：
 
-    using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
-                    key: tenantId2, 
-                    connectionString: connStrBldr.ConnectionString, 
-                    options: ConnectionOptions.Validate))
-    {
-           // Display all Blogs for tenant 2
-           IEnumerable<Blog> result = sqlconn.GetList<Blog>();
-           Console.WriteLine("All blogs for tenant id {0}:", tenantId2);
-           foreach (var item in result)
-           {
-               Console.WriteLine(item.Name);
-           }
-    }
+```
+using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
+                key: tenantId2, 
+                connectionString: connStrBldr.ConnectionString, 
+                options: ConnectionOptions.Validate))
+{
+       // Display all Blogs for tenant 2
+       IEnumerable<Blog> result = sqlconn.GetList<Blog>();
+       Console.WriteLine("All blogs for tenant id {0}:", tenantId2);
+       foreach (var item in result)
+       {
+           Console.WriteLine(item.Name);
+       }
+}
+```
 
 ### 处理暂时性故障
 
@@ -146,15 +154,17 @@ Microsoft 模式与实践团队发布了[暂时性故障处理应用程序块](h
 
 该代码示例依赖于暂时性故障库来防止出现暂时性故障。
 
-    SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() =>
-    {
-       using (SqlConnection sqlconn = 
-          shardingLayer.ShardMap.OpenConnectionForKey(tenantId2, connStrBldr.ConnectionString, ConnectionOptions.Validate))
-          {
-              var blog = new Blog { Name = name2 };
-              sqlconn.Insert(blog);
-          }
-    });
+```
+SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() =>
+{
+   using (SqlConnection sqlconn = 
+      shardingLayer.ShardMap.OpenConnectionForKey(tenantId2, connStrBldr.ConnectionString, ConnectionOptions.Validate))
+      {
+          var blog = new Blog { Name = name2 };
+          sqlconn.Insert(blog);
+      }
+});
+```
 
 上述代码中的 **SqlDatabaseUtils.SqlRetryPolicy** 定义为 **SqlDatabaseTransientErrorDetectionStrategy**，重试计数为 10，每两次重试的等待时间为 5 秒。如果正在使用事务，请确保在出现暂时性故障的情况下重试范围可以恢复为事务开始时间。
 

@@ -27,69 +27,73 @@ ms.author: zachal
 
 VMSS 的基础模板结构与单一 VM 略有不同。具体而言，单一 VM 将扩展部署在“virtualMachines”节点下面。有一个“extensions”类型的入口，DSC 将通过此处添加到模板中
 
-    "resources": [
-            {
-                "name": "Microsoft.Powershell.DSC",
-                "type": "extensions",
-                "location": "[resourceGroup().location]",
-                "apiVersion": "2015-06-15",
-                "dependsOn": [
-                    "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-                ],
-                "tags": {
-                    "displayName": "dscExtension"
-                },
-                "properties": {
-                    "publisher": "Microsoft.Powershell",
-                    "type": "DSC",
-                    "typeHandlerVersion": "2.20",
-                    "autoUpgradeMinorVersion": false,
-                    "forceUpdateTag": "[parameters('dscExtensionUpdateTagVersion')]",
-                    "settings": {
-                        "configuration": {
-                            "url": "[concat(parameters('_artifactsLocation'), '/', variables('dscExtensionArchiveFolder'), '/', variables('dscExtensionArchiveFileName'))]",
-                            "script": "DscExtension.ps1",
-                            "function": "Main"
-                        },
-                        "configurationArguments": {
-                            "nodeName": "[variables('vmName')]"
-                        }
+```
+"resources": [
+        {
+            "name": "Microsoft.Powershell.DSC",
+            "type": "extensions",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2015-06-15",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+            ],
+            "tags": {
+                "displayName": "dscExtension"
+            },
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.20",
+                "autoUpgradeMinorVersion": false,
+                "forceUpdateTag": "[parameters('dscExtensionUpdateTagVersion')]",
+                "settings": {
+                    "configuration": {
+                        "url": "[concat(parameters('_artifactsLocation'), '/', variables('dscExtensionArchiveFolder'), '/', variables('dscExtensionArchiveFileName'))]",
+                        "script": "DscExtension.ps1",
+                        "function": "Main"
                     },
-                    "protectedSettings": {
-                        "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
+                    "configurationArguments": {
+                        "nodeName": "[variables('vmName')]"
                     }
+                },
+                "protectedSettings": {
+                    "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
                 }
             }
-        ]
+        }
+    ]
+```
 
 VMSS 节点有一个“properties”节，其中包含“VirtualMachineProfile”和“extensionProfile”属性。DSC 添加在“extensions”下面
 
-    "extensionProfile": {
-                "extensions": [
-                    {
-                        "name": "Microsoft.Powershell.DSC",
-                        "properties": {
-                            "publisher": "Microsoft.Powershell",
-                            "type": "DSC",
-                            "typeHandlerVersion": "2.20",
-                            "autoUpgradeMinorVersion": false,
-                            "forceUpdateTag": "[parameters('DscExtensionUpdateTagVersion')]",
-                            "settings": {
-                                "configuration": {
-                                    "url": "[concat(parameters('_artifactsLocation'), '/', variables('DscExtensionArchiveFolder'), '/', variables('DscExtensionArchiveFileName'))]",
-                                    "script": "DscExtension.ps1",
-                                    "function": "Main"
-                                },
-                                "configurationArguments": {
-                                    "nodeName": "localhost"
-                                }
+```
+"extensionProfile": {
+            "extensions": [
+                {
+                    "name": "Microsoft.Powershell.DSC",
+                    "properties": {
+                        "publisher": "Microsoft.Powershell",
+                        "type": "DSC",
+                        "typeHandlerVersion": "2.20",
+                        "autoUpgradeMinorVersion": false,
+                        "forceUpdateTag": "[parameters('DscExtensionUpdateTagVersion')]",
+                        "settings": {
+                            "configuration": {
+                                "url": "[concat(parameters('_artifactsLocation'), '/', variables('DscExtensionArchiveFolder'), '/', variables('DscExtensionArchiveFileName'))]",
+                                "script": "DscExtension.ps1",
+                                "function": "Main"
                             },
-                            "protectedSettings": {
-                                "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
+                            "configurationArguments": {
+                                "nodeName": "localhost"
                             }
+                        },
+                        "protectedSettings": {
+                            "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
                         }
                     }
-                ]
+                }
+            ]
+```
 
 ## VMSS 的行为
 

@@ -121,7 +121,9 @@ ms.author: juliako
 
 客户可以通过使用 iOS SDK 开发播放器应用。为了能够播放 FairPlay 内容，客户必须实现许可证交换协议。许可证交换协议不由 Apple 指定。而是取决于每个应用发送密钥传送请求的方式。AMS FairPlay 密钥传送服务期望 SPC 为采用以下形式的 www-form-url 编码后消息：
 
-    spc=<Base64 encoded SPC>
+```
+spc=<Base64 encoded SPC>
+```
 
 >[!NOTE]
 > Azure Media Player 不支持现成的 FairPlay 播放。客户需要通过 Apple 开发人员帐户获得示例播放器，以便在 MAC OSX 上播放 FairPlay。
@@ -144,431 +146,437 @@ ms.author: juliako
 
 下面的示例演示了在适用于 .Net 的 Azure 媒体服务 SDK - 版本 3.6.0 中引入的功能（使用 Azure 媒体服务传送通过 FairPlay 加密的内容的功能）。以下 Nuget 包命令用于安装该包：
 
-    PM> Install-Package windowsazure.mediaservices -Version 3.6.0
+```
+PM> Install-Package windowsazure.mediaservices -Version 3.6.0
+```
 
 1. 创建控制台项目。
 1. 使用 NuGet 安装和添加 Azure 媒体服务 .NET SDK。
 2. 添加附加引用：System.Configuration。
 2. 添加包含帐户名称和密钥信息的配置文件：
 
-        <?xml version="1.0" encoding="utf-8"?>
-        <configuration>
-            <startup> 
-                <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
-            </startup>
-              <appSettings>
+    ```
+    <?xml version="1.0" encoding="utf-8"?>
+    <configuration>
+        <startup> 
+            <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+        </startup>
+          <appSettings>
 
-                <add key="MediaServicesAccountName" value="AccountName"/>
-                <add key="MediaServicesAccountKey" value="AccountKey"/>
+            <add key="MediaServicesAccountName" value="AccountName"/>
+            <add key="MediaServicesAccountKey" value="AccountKey"/>
 
-                <add key="Issuer" value="http://testacs.com"/>
-                <add key="Audience" value="urn:test"/>
-              </appSettings>
-        </configuration>
+            <add key="Issuer" value="http://testacs.com"/>
+            <add key="Audience" value="urn:test"/>
+          </appSettings>
+    </configuration>
+    ```
 
 1. 针对要传送内容的“流式处理终结点”，获取至少一个流式处理单位。有关详细信息，请参阅：[配置流式处理终结点](./media-services-dotnet-get-started.md#configure-streaming-endpoint-using-the-portal)。
 
 1. 使用本部分中所示的代码覆盖 Program.cs 文件中的代码。
 
-        using System;
-        using System.Collections.Generic;
-        using System.Configuration;
-        using System.IO;
-        using System.Linq;
-        using System.Threading;
-        using Microsoft.WindowsAzure.MediaServices.Client;
-        using Microsoft.WindowsAzure.MediaServices.Client.ContentKeyAuthorization;
-        using Microsoft.WindowsAzure.MediaServices.Client.DynamicEncryption;
-        using Microsoft.WindowsAzure.MediaServices.Client.FairPlay;
-        using Newtonsoft.Json;
-        using System.Security.Cryptography.X509Certificates;
+    ```
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using Microsoft.WindowsAzure.MediaServices.Client;
+    using Microsoft.WindowsAzure.MediaServices.Client.ContentKeyAuthorization;
+    using Microsoft.WindowsAzure.MediaServices.Client.DynamicEncryption;
+    using Microsoft.WindowsAzure.MediaServices.Client.FairPlay;
+    using Newtonsoft.Json;
+    using System.Security.Cryptography.X509Certificates;
 
-        namespace DynamicEncryptionWithFairPlay
+    namespace DynamicEncryptionWithFairPlay
+    {
+        class Program
         {
-            class Program
+            // Read values from the App.config file.
+            private static readonly string _mediaServicesAccountName =
+                ConfigurationManager.AppSettings["MediaServicesAccountName"];
+            private static readonly string _mediaServicesAccountKey =
+                ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+
+            private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+
+            // Azure China uses a different API server and a different ACS Base Address from the Global.
+            private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
+            private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+
+            private static readonly Uri _sampleIssuer =
+                new Uri(ConfigurationManager.AppSettings["Issuer"]);
+            private static readonly Uri _sampleAudience =
+                new Uri(ConfigurationManager.AppSettings["Audience"]);
+
+            // Field for service context.
+            private static CloudMediaContext _context = null;
+            private static MediaServicesCredentials _cachedCredentials = null;
+
+            private static Uri _apiServer = null;
+
+            private static readonly string _mediaFiles =
+                Path.GetFullPath(@"../..\Media");
+
+            private static readonly string _singleMP4File =
+                Path.Combine(_mediaFiles, @"BigBuckBunny.mp4");
+
+            static void Main(string[] args)
             {
-                // Read values from the App.config file.
-                private static readonly string _mediaServicesAccountName =
-                    ConfigurationManager.AppSettings["MediaServicesAccountName"];
-                private static readonly string _mediaServicesAccountKey =
-                    ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+                   // Create and cache the Media Services credentials in a static class variable.
+                _cachedCredentials = new MediaServicesCredentials(
+                            _mediaServicesAccountName,
+                            _mediaServicesAccountKey,
+                            _defaultScope,
+                            _chinaAcsBaseAddressUrl);
 
-                private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+                // Create the API server Uri
+                _apiServer = new Uri(_chinaApiServerUrl);
 
-                // Azure China uses a different API server and a different ACS Base Address from the Global.
-                private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
-                private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+                // Used the chached credentials to create CloudMediaContext.
+                _context = new CloudMediaContext(_apiServer, _cachedCredentials);
 
-                private static readonly Uri _sampleIssuer =
-                    new Uri(ConfigurationManager.AppSettings["Issuer"]);
-                private static readonly Uri _sampleAudience =
-                    new Uri(ConfigurationManager.AppSettings["Audience"]);
+                bool tokenRestriction = false;
+                string tokenTemplateString = null;
 
-                // Field for service context.
-                private static CloudMediaContext _context = null;
-                private static MediaServicesCredentials _cachedCredentials = null;
+                IAsset asset = UploadFileAndCreateAsset(_singleMP4File);
+                Console.WriteLine("Uploaded asset: {0}", asset.Id);
 
-                private static Uri _apiServer = null;
+                IAsset encodedAsset = EncodeToAdaptiveBitrateMP4Set(asset);
+                Console.WriteLine("Encoded asset: {0}", encodedAsset.Id);
 
-                private static readonly string _mediaFiles =
-                    Path.GetFullPath(@"../..\Media");
+                IContentKey key = CreateCommonCBCTypeContentKey(encodedAsset);
+                Console.WriteLine("Created key {0} for the asset {1} ", key.Id, encodedAsset.Id);
+                Console.WriteLine("FairPlay License Key delivery URL: {0}", key.GetKeyDeliveryUrl(ContentKeyDeliveryType.FairPlay));
+                Console.WriteLine();
 
-                private static readonly string _singleMP4File =
-                    Path.Combine(_mediaFiles, @"BigBuckBunny.mp4");
+                if (tokenRestriction)
+                    tokenTemplateString = AddTokenRestrictedAuthorizationPolicy(key);
+                else
+                    AddOpenAuthorizationPolicy(key);
 
-                static void Main(string[] args)
+                Console.WriteLine("Added authorization policy: {0}", key.AuthorizationPolicyId);
+                Console.WriteLine();
+
+                CreateAssetDeliveryPolicy(encodedAsset, key);
+                Console.WriteLine("Created asset delivery policy. \n");
+                Console.WriteLine();
+
+                if (tokenRestriction && !String.IsNullOrEmpty(tokenTemplateString))
                 {
-                       // Create and cache the Media Services credentials in a static class variable.
-                    _cachedCredentials = new MediaServicesCredentials(
-                                _mediaServicesAccountName,
-                                _mediaServicesAccountKey,
-                                _defaultScope,
-                                _chinaAcsBaseAddressUrl);
+                    // Deserializes a string containing an Xml representation of a TokenRestrictionTemplate
+                    // back into a TokenRestrictionTemplate class instance.
+                    TokenRestrictionTemplate tokenTemplate =
+                        TokenRestrictionTemplateSerializer.Deserialize(tokenTemplateString);
 
-                    // Create the API server Uri
-                    _apiServer = new Uri(_chinaApiServerUrl);
-
-                    // Used the chached credentials to create CloudMediaContext.
-                    _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-
-                    bool tokenRestriction = false;
-                    string tokenTemplateString = null;
-
-                    IAsset asset = UploadFileAndCreateAsset(_singleMP4File);
-                    Console.WriteLine("Uploaded asset: {0}", asset.Id);
-
-                    IAsset encodedAsset = EncodeToAdaptiveBitrateMP4Set(asset);
-                    Console.WriteLine("Encoded asset: {0}", encodedAsset.Id);
-
-                    IContentKey key = CreateCommonCBCTypeContentKey(encodedAsset);
-                    Console.WriteLine("Created key {0} for the asset {1} ", key.Id, encodedAsset.Id);
-                    Console.WriteLine("FairPlay License Key delivery URL: {0}", key.GetKeyDeliveryUrl(ContentKeyDeliveryType.FairPlay));
+                    // Generate a test token based on the the data in the given TokenRestrictionTemplate.
+                    // Note, you need to pass the key id Guid because we specified 
+                    // TokenClaim.ContentKeyIdentifierClaim in during the creation of TokenRestrictionTemplate.
+                    Guid rawkey = EncryptionUtils.GetKeyIdAsGuid(key.Id);
+                    string testToken = TokenRestrictionTemplateSerializer.GenerateTestToken(tokenTemplate, null, rawkey,
+                                                                            DateTime.UtcNow.AddDays(365));
+                    Console.WriteLine("The authorization token is:\nBearer {0}", testToken);
                     Console.WriteLine();
-
-                    if (tokenRestriction)
-                        tokenTemplateString = AddTokenRestrictedAuthorizationPolicy(key);
-                    else
-                        AddOpenAuthorizationPolicy(key);
-
-                    Console.WriteLine("Added authorization policy: {0}", key.AuthorizationPolicyId);
-                    Console.WriteLine();
-
-                    CreateAssetDeliveryPolicy(encodedAsset, key);
-                    Console.WriteLine("Created asset delivery policy. \n");
-                    Console.WriteLine();
-
-                    if (tokenRestriction && !String.IsNullOrEmpty(tokenTemplateString))
-                    {
-                        // Deserializes a string containing an Xml representation of a TokenRestrictionTemplate
-                        // back into a TokenRestrictionTemplate class instance.
-                        TokenRestrictionTemplate tokenTemplate =
-                            TokenRestrictionTemplateSerializer.Deserialize(tokenTemplateString);
-
-                        // Generate a test token based on the the data in the given TokenRestrictionTemplate.
-                        // Note, you need to pass the key id Guid because we specified 
-                        // TokenClaim.ContentKeyIdentifierClaim in during the creation of TokenRestrictionTemplate.
-                        Guid rawkey = EncryptionUtils.GetKeyIdAsGuid(key.Id);
-                        string testToken = TokenRestrictionTemplateSerializer.GenerateTestToken(tokenTemplate, null, rawkey,
-                                                                                DateTime.UtcNow.AddDays(365));
-                        Console.WriteLine("The authorization token is:\nBearer {0}", testToken);
-                        Console.WriteLine();
-                    }
-
-                    string url = GetStreamingOriginLocator(encodedAsset);
-                    Console.WriteLine("Encrypted HLS URL: {0}/manifest(format=m3u8-aapl)", url);
-
-                    Console.ReadLine();
                 }
 
-                static public IAsset UploadFileAndCreateAsset(string singleFilePath)
+                string url = GetStreamingOriginLocator(encodedAsset);
+                Console.WriteLine("Encrypted HLS URL: {0}/manifest(format=m3u8-aapl)", url);
+
+                Console.ReadLine();
+            }
+
+            static public IAsset UploadFileAndCreateAsset(string singleFilePath)
+            {
+                if (!File.Exists(singleFilePath))
                 {
-                    if (!File.Exists(singleFilePath))
-                    {
-                        Console.WriteLine("File does not exist.");
-                        return null;
-                    }
-
-                    var assetName = Path.GetFileNameWithoutExtension(singleFilePath);
-                    IAsset inputAsset = _context.Assets.Create(assetName, AssetCreationOptions.None);
-
-                    var assetFile = inputAsset.AssetFiles.Create(Path.GetFileName(singleFilePath));
-
-                    Console.WriteLine("Created assetFile {0}", assetFile.Name);
-
-                    var policy = _context.AccessPolicies.Create(
-                                            assetName,
-                                            TimeSpan.FromDays(30),
-                                            AccessPermissions.Write | AccessPermissions.List);
-
-                    var locator = _context.Locators.CreateLocator(LocatorType.Sas, inputAsset, policy);
-
-                    Console.WriteLine("Upload {0}", assetFile.Name);
-
-                    assetFile.Upload(singleFilePath);
-                    Console.WriteLine("Done uploading {0}", assetFile.Name);
-
-                    locator.Delete();
-                    policy.Delete();
-
-                    return inputAsset;
+                    Console.WriteLine("File does not exist.");
+                    return null;
                 }
 
-                static public IAsset EncodeToAdaptiveBitrateMP4Set(IAsset inputAsset)
-                {
-                    var encodingPreset = "H264 Multiple Bitrate 720p";
+                var assetName = Path.GetFileNameWithoutExtension(singleFilePath);
+                IAsset inputAsset = _context.Assets.Create(assetName, AssetCreationOptions.None);
 
-                    IJob job = _context.Jobs.Create(String.Format("Encoding into Mp4 {0} to {1}",
-                                            inputAsset.Name,
-                                            encodingPreset));
+                var assetFile = inputAsset.AssetFiles.Create(Path.GetFileName(singleFilePath));
 
-                    var mediaProcessors =
-                        _context.MediaProcessors.Where(p => p.Name.Contains("Media Encoder Standard")).ToList();
+                Console.WriteLine("Created assetFile {0}", assetFile.Name);
 
-                    var latestMediaProcessor =
-                        mediaProcessors.OrderBy(mp => new Version(mp.Version)).LastOrDefault();
+                var policy = _context.AccessPolicies.Create(
+                                        assetName,
+                                        TimeSpan.FromDays(30),
+                                        AccessPermissions.Write | AccessPermissions.List);
 
-                    ITask encodeTask = job.Tasks.AddNew("Encoding", latestMediaProcessor, encodingPreset, TaskOptions.None);
-                    encodeTask.InputAssets.Add(inputAsset);
-                    encodeTask.OutputAssets.AddNew(String.Format("{0} as {1}", inputAsset.Name, encodingPreset), 	AssetCreationOptions.StorageEncrypted);
+                var locator = _context.Locators.CreateLocator(LocatorType.Sas, inputAsset, policy);
 
-                    job.StateChanged += new EventHandler<JobStateChangedEventArgs>(JobStateChanged);
-                    job.Submit();
-                    job.GetExecutionProgressTask(CancellationToken.None).Wait();
+                Console.WriteLine("Upload {0}", assetFile.Name);
 
-                    return job.OutputMediaAssets[0];
-                }
+                assetFile.Upload(singleFilePath);
+                Console.WriteLine("Done uploading {0}", assetFile.Name);
 
-                static public IContentKey CreateCommonCBCTypeContentKey(IAsset asset)
-                {
-                    // Create HLS SAMPLE AES encryption content key
-                    Guid keyId = Guid.NewGuid();
-                    byte[] contentKey = GetRandomBuffer(16);
+                locator.Delete();
+                policy.Delete();
 
-                    IContentKey key = _context.ContentKeys.Create(
-                                            keyId,
-                                            contentKey,
-                                            "ContentKey",
-                                            ContentKeyType.CommonEncryptionCbcs);
+                return inputAsset;
+            }
 
-                    // Associate the key with the asset.
-                    asset.ContentKeys.Add(key);
+            static public IAsset EncodeToAdaptiveBitrateMP4Set(IAsset inputAsset)
+            {
+                var encodingPreset = "H264 Multiple Bitrate 720p";
 
-                    return key;
-                }
+                IJob job = _context.Jobs.Create(String.Format("Encoding into Mp4 {0} to {1}",
+                                        inputAsset.Name,
+                                        encodingPreset));
 
-                static public void AddOpenAuthorizationPolicy(IContentKey contentKey)
-                {
-                    // Create ContentKeyAuthorizationPolicy with Open restrictions 
-                    // and create authorization policy          
+                var mediaProcessors =
+                    _context.MediaProcessors.Where(p => p.Name.Contains("Media Encoder Standard")).ToList();
 
-                    List<ContentKeyAuthorizationPolicyRestriction> restrictions = new List<ContentKeyAuthorizationPolicyRestriction>
-                            {
-                                new ContentKeyAuthorizationPolicyRestriction
-                                {
-                                    Name = "Open",
-                                    KeyRestrictionType = (int)ContentKeyRestrictionType.Open,
-                                    Requirements = null
-                                }
-                            };
+                var latestMediaProcessor =
+                    mediaProcessors.OrderBy(mp => new Version(mp.Version)).LastOrDefault();
 
-                    // Configure FairPlay policy option.
-                    string FairPlayConfiguration = ConfigureFairPlayPolicyOptions();
+                ITask encodeTask = job.Tasks.AddNew("Encoding", latestMediaProcessor, encodingPreset, TaskOptions.None);
+                encodeTask.InputAssets.Add(inputAsset);
+                encodeTask.OutputAssets.AddNew(String.Format("{0} as {1}", inputAsset.Name, encodingPreset), 	AssetCreationOptions.StorageEncrypted);
 
-                    IContentKeyAuthorizationPolicyOption FairPlayPolicy =
-                        _context.ContentKeyAuthorizationPolicyOptions.Create("",
-                        ContentKeyDeliveryType.FairPlay,
-                        restrictions,
-                        FairPlayConfiguration);
+                job.StateChanged += new EventHandler<JobStateChangedEventArgs>(JobStateChanged);
+                job.Submit();
+                job.GetExecutionProgressTask(CancellationToken.None).Wait();
 
-                    IContentKeyAuthorizationPolicy contentKeyAuthorizationPolicy = _context.
-                                ContentKeyAuthorizationPolicies.
-                                CreateAsync("Deliver Common CBC Content Key with no restrictions").
-                                Result;
+                return job.OutputMediaAssets[0];
+            }
 
-                    contentKeyAuthorizationPolicy.Options.Add(FairPlayPolicy);
+            static public IContentKey CreateCommonCBCTypeContentKey(IAsset asset)
+            {
+                // Create HLS SAMPLE AES encryption content key
+                Guid keyId = Guid.NewGuid();
+                byte[] contentKey = GetRandomBuffer(16);
 
-                    // Associate the content key authorization policy with the content key.
-                    contentKey.AuthorizationPolicyId = contentKeyAuthorizationPolicy.Id;
-                    contentKey = contentKey.UpdateAsync().Result;
-                }
+                IContentKey key = _context.ContentKeys.Create(
+                                        keyId,
+                                        contentKey,
+                                        "ContentKey",
+                                        ContentKeyType.CommonEncryptionCbcs);
 
-                public static string AddTokenRestrictedAuthorizationPolicy(IContentKey contentKey)
-                {
-                    string tokenTemplateString = GenerateTokenRequirements();
+                // Associate the key with the asset.
+                asset.ContentKeys.Add(key);
 
-                    List<ContentKeyAuthorizationPolicyRestriction> restrictions = new List<ContentKeyAuthorizationPolicyRestriction>
-                            {
-                                new ContentKeyAuthorizationPolicyRestriction
-                                {
-                                    Name = "Token Authorization Policy",
-                                    KeyRestrictionType = (int)ContentKeyRestrictionType.TokenRestricted,
-                                    Requirements = tokenTemplateString,
-                                }
-                            };
+                return key;
+            }
 
-                    // Configure FairPlay policy option.
-                    string FairPlayConfiguration = ConfigureFairPlayPolicyOptions();
+            static public void AddOpenAuthorizationPolicy(IContentKey contentKey)
+            {
+                // Create ContentKeyAuthorizationPolicy with Open restrictions 
+                // and create authorization policy          
 
-                    IContentKeyAuthorizationPolicyOption FairPlayPolicy =
-                        _context.ContentKeyAuthorizationPolicyOptions.Create("Token option",
-                               ContentKeyDeliveryType.FairPlay,
-                               restrictions,
-                               FairPlayConfiguration);
-
-                    IContentKeyAuthorizationPolicy contentKeyAuthorizationPolicy = _context.
-                                ContentKeyAuthorizationPolicies.
-                                CreateAsync("Deliver Common CBC Content Key with token restrictions").
-                                Result;
-
-                    contentKeyAuthorizationPolicy.Options.Add(FairPlayPolicy);
-
-                    // Associate the content key authorization policy with the content key
-                    contentKey.AuthorizationPolicyId = contentKeyAuthorizationPolicy.Id;
-                    contentKey = contentKey.UpdateAsync().Result;
-
-                    return tokenTemplateString;
-                }
-
-                private static string ConfigureFairPlayPolicyOptions()
-                {
-                    // For testing you can provide all zeroes for ASK bytes together with the cert from Apple FPS SDK. 
-                    // However, for production you must use a real ASK from Apple bound to a real prod certificate.
-                    byte[] askBytes = Guid.NewGuid().ToByteArray();
-                    var askId = Guid.NewGuid();
-                    // Key delivery retrieves askKey by askId and uses this key to generate the response.
-                    IContentKey askKey = _context.ContentKeys.Create(
-                                            askId,
-                                            askBytes,
-                                            "askKey",
-                                            ContentKeyType.FairPlayASk);
-
-                    //Customer password for creating the .pfx file.
-                    string pfxPassword = "<customer password for creating the .pfx file>";
-                    // Key delivery retrieves pfxPasswordKey by pfxPasswordId and uses this key to generate the response.
-                    var pfxPasswordId = Guid.NewGuid();
-                    byte[] pfxPasswordBytes = System.Text.Encoding.UTF8.GetBytes(pfxPassword);
-                    IContentKey pfxPasswordKey = _context.ContentKeys.Create(
-                                            pfxPasswordId,
-                                            pfxPasswordBytes,
-                                            "pfxPasswordKey",
-                                            ContentKeyType.FairPlayPfxPassword);
-
-                    // iv - 16 bytes random value, must match the iv in the asset delivery policy.
-                    byte[] iv = Guid.NewGuid().ToByteArray();
-
-                    //Specify the .pfx file created by the customer.
-                    var appCert = new X509Certificate2("path to the .pfx file created by the customer", pfxPassword, X509KeyStorageFlags.Exportable);
-
-                    string FairPlayConfiguration =
-                        Microsoft.WindowsAzure.MediaServices.Client.FairPlay.FairPlayConfiguration.CreateSerializedFairPlayOptionConfiguration(
-                            appCert,
-                            pfxPassword,
-                            pfxPasswordId,
-                            askId,
-                            iv);
-
-                    return FairPlayConfiguration;
-                }
-
-                static private string GenerateTokenRequirements()
-                {
-                    TokenRestrictionTemplate template = new TokenRestrictionTemplate(TokenType.SWT);
-
-                    template.PrimaryVerificationKey = new SymmetricVerificationKey();
-                    template.AlternateVerificationKeys.Add(new SymmetricVerificationKey());
-                    template.Audience = _sampleAudience.ToString();
-                    template.Issuer = _sampleIssuer.ToString();
-                    template.RequiredClaims.Add(TokenClaim.ContentKeyIdentifierClaim);
-
-                    return TokenRestrictionTemplateSerializer.Serialize(template);
-                }
-
-                static public void CreateAssetDeliveryPolicy(IAsset asset, IContentKey key)
-                {
-                    var kdPolicy = _context.ContentKeyAuthorizationPolicies.Where(p => p.Id == key.AuthorizationPolicyId).Single();
-
-                    var kdOption = kdPolicy.Options.Single(o => o.KeyDeliveryType == ContentKeyDeliveryType.FairPlay);
-
-                    FairPlayConfiguration configFP = JsonConvert.DeserializeObject<FairPlayConfiguration>(kdOption.KeyDeliveryConfiguration);
-
-                    // Get the FairPlay license service URL.
-                    Uri acquisitionUrl = key.GetKeyDeliveryUrl(ContentKeyDeliveryType.FairPlay);
-
-                    // The reason the below code replaces "https://" with "skd://" is because
-                    // in the IOS player sample code which you obtained in Apple developer account, 
-                    // the player only recognizes a Key URL that starts with skd://. 
-                    // However, if you are using a customized player, 
-                    // you can choose whatever protocol you want. 
-                    // For example, "https". 
-
-                    Dictionary<AssetDeliveryPolicyConfigurationKey, string> assetDeliveryPolicyConfiguration =
-                        new Dictionary<AssetDeliveryPolicyConfigurationKey, string>
+                List<ContentKeyAuthorizationPolicyRestriction> restrictions = new List<ContentKeyAuthorizationPolicyRestriction>
                         {
-                            {AssetDeliveryPolicyConfigurationKey.FairPlayLicenseAcquisitionUrl, acquisitionUrl.ToString().Replace("https://", "skd://")},
-                            {AssetDeliveryPolicyConfigurationKey.CommonEncryptionIVForCbcs, configFP.ContentEncryptionIV}
+                            new ContentKeyAuthorizationPolicyRestriction
+                            {
+                                Name = "Open",
+                                KeyRestrictionType = (int)ContentKeyRestrictionType.Open,
+                                Requirements = null
+                            }
                         };
 
-                    var assetDeliveryPolicy = _context.AssetDeliveryPolicies.Create(
-                            "AssetDeliveryPolicy",
-                        AssetDeliveryPolicyType.DynamicCommonEncryptionCbcs,
-                        AssetDeliveryProtocol.HLS,
-                        assetDeliveryPolicyConfiguration);
+                // Configure FairPlay policy option.
+                string FairPlayConfiguration = ConfigureFairPlayPolicyOptions();
 
-                    // Add AssetDelivery Policy to the asset
-                    asset.DeliveryPolicies.Add(assetDeliveryPolicy);
+                IContentKeyAuthorizationPolicyOption FairPlayPolicy =
+                    _context.ContentKeyAuthorizationPolicyOptions.Create("",
+                    ContentKeyDeliveryType.FairPlay,
+                    restrictions,
+                    FairPlayConfiguration);
 
-                }
+                IContentKeyAuthorizationPolicy contentKeyAuthorizationPolicy = _context.
+                            ContentKeyAuthorizationPolicies.
+                            CreateAsync("Deliver Common CBC Content Key with no restrictions").
+                            Result;
 
-                /// <summary>
-                /// Gets the streaming origin locator.
-                /// </summary>
-                /// <param name="assets"></param>
-                /// <returns></returns>
-                static public string GetStreamingOriginLocator(IAsset asset)
-                {
+                contentKeyAuthorizationPolicy.Options.Add(FairPlayPolicy);
 
-                    // Get a reference to the streaming manifest file from the  
-                    // collection of files in the asset. 
+                // Associate the content key authorization policy with the content key.
+                contentKey.AuthorizationPolicyId = contentKeyAuthorizationPolicy.Id;
+                contentKey = contentKey.UpdateAsync().Result;
+            }
 
-                    var assetFile = asset.AssetFiles.Where(f => f.Name.ToLower().
-                                                 EndsWith(".ism")).
-                                                 FirstOrDefault();
+            public static string AddTokenRestrictedAuthorizationPolicy(IContentKey contentKey)
+            {
+                string tokenTemplateString = GenerateTokenRequirements();
 
-                    // Create a 30-day readonly access policy. 
-                    IAccessPolicy policy = _context.AccessPolicies.Create("Streaming policy",
-                        TimeSpan.FromDays(30),
-                        AccessPermissions.Read);
+                List<ContentKeyAuthorizationPolicyRestriction> restrictions = new List<ContentKeyAuthorizationPolicyRestriction>
+                        {
+                            new ContentKeyAuthorizationPolicyRestriction
+                            {
+                                Name = "Token Authorization Policy",
+                                KeyRestrictionType = (int)ContentKeyRestrictionType.TokenRestricted,
+                                Requirements = tokenTemplateString,
+                            }
+                        };
 
-                    // Create a locator to the streaming content on an origin. 
-                    ILocator originLocator = _context.Locators.CreateLocator(LocatorType.OnDemandOrigin, asset,
-                        policy,
-                        DateTime.UtcNow.AddMinutes(-5));
+                // Configure FairPlay policy option.
+                string FairPlayConfiguration = ConfigureFairPlayPolicyOptions();
 
-                    // Create a URL to the manifest file. 
-                    return originLocator.Path + assetFile.Name;
-                }
+                IContentKeyAuthorizationPolicyOption FairPlayPolicy =
+                    _context.ContentKeyAuthorizationPolicyOptions.Create("Token option",
+                           ContentKeyDeliveryType.FairPlay,
+                           restrictions,
+                           FairPlayConfiguration);
 
-                static private void JobStateChanged(object sender, JobStateChangedEventArgs e)
-                {
-                    Console.WriteLine(string.Format("{0}\n  State: {1}\n  Time: {2}\n\n",
-                        ((IJob)sender).Name,
-                        e.CurrentState,
-                        DateTime.UtcNow.ToString(@"yyyy_M_d__hh_mm_ss")));
-                }
+                IContentKeyAuthorizationPolicy contentKeyAuthorizationPolicy = _context.
+                            ContentKeyAuthorizationPolicies.
+                            CreateAsync("Deliver Common CBC Content Key with token restrictions").
+                            Result;
 
-                static private byte[] GetRandomBuffer(int length)
-                {
-                    var returnValue = new byte[length];
+                contentKeyAuthorizationPolicy.Options.Add(FairPlayPolicy);
 
-                    using (var rng =
-                        new System.Security.Cryptography.RNGCryptoServiceProvider())
+                // Associate the content key authorization policy with the content key
+                contentKey.AuthorizationPolicyId = contentKeyAuthorizationPolicy.Id;
+                contentKey = contentKey.UpdateAsync().Result;
+
+                return tokenTemplateString;
+            }
+
+            private static string ConfigureFairPlayPolicyOptions()
+            {
+                // For testing you can provide all zeroes for ASK bytes together with the cert from Apple FPS SDK. 
+                // However, for production you must use a real ASK from Apple bound to a real prod certificate.
+                byte[] askBytes = Guid.NewGuid().ToByteArray();
+                var askId = Guid.NewGuid();
+                // Key delivery retrieves askKey by askId and uses this key to generate the response.
+                IContentKey askKey = _context.ContentKeys.Create(
+                                        askId,
+                                        askBytes,
+                                        "askKey",
+                                        ContentKeyType.FairPlayASk);
+
+                //Customer password for creating the .pfx file.
+                string pfxPassword = "<customer password for creating the .pfx file>";
+                // Key delivery retrieves pfxPasswordKey by pfxPasswordId and uses this key to generate the response.
+                var pfxPasswordId = Guid.NewGuid();
+                byte[] pfxPasswordBytes = System.Text.Encoding.UTF8.GetBytes(pfxPassword);
+                IContentKey pfxPasswordKey = _context.ContentKeys.Create(
+                                        pfxPasswordId,
+                                        pfxPasswordBytes,
+                                        "pfxPasswordKey",
+                                        ContentKeyType.FairPlayPfxPassword);
+
+                // iv - 16 bytes random value, must match the iv in the asset delivery policy.
+                byte[] iv = Guid.NewGuid().ToByteArray();
+
+                //Specify the .pfx file created by the customer.
+                var appCert = new X509Certificate2("path to the .pfx file created by the customer", pfxPassword, X509KeyStorageFlags.Exportable);
+
+                string FairPlayConfiguration =
+                    Microsoft.WindowsAzure.MediaServices.Client.FairPlay.FairPlayConfiguration.CreateSerializedFairPlayOptionConfiguration(
+                        appCert,
+                        pfxPassword,
+                        pfxPasswordId,
+                        askId,
+                        iv);
+
+                return FairPlayConfiguration;
+            }
+
+            static private string GenerateTokenRequirements()
+            {
+                TokenRestrictionTemplate template = new TokenRestrictionTemplate(TokenType.SWT);
+
+                template.PrimaryVerificationKey = new SymmetricVerificationKey();
+                template.AlternateVerificationKeys.Add(new SymmetricVerificationKey());
+                template.Audience = _sampleAudience.ToString();
+                template.Issuer = _sampleIssuer.ToString();
+                template.RequiredClaims.Add(TokenClaim.ContentKeyIdentifierClaim);
+
+                return TokenRestrictionTemplateSerializer.Serialize(template);
+            }
+
+            static public void CreateAssetDeliveryPolicy(IAsset asset, IContentKey key)
+            {
+                var kdPolicy = _context.ContentKeyAuthorizationPolicies.Where(p => p.Id == key.AuthorizationPolicyId).Single();
+
+                var kdOption = kdPolicy.Options.Single(o => o.KeyDeliveryType == ContentKeyDeliveryType.FairPlay);
+
+                FairPlayConfiguration configFP = JsonConvert.DeserializeObject<FairPlayConfiguration>(kdOption.KeyDeliveryConfiguration);
+
+                // Get the FairPlay license service URL.
+                Uri acquisitionUrl = key.GetKeyDeliveryUrl(ContentKeyDeliveryType.FairPlay);
+
+                // The reason the below code replaces "https://" with "skd://" is because
+                // in the IOS player sample code which you obtained in Apple developer account, 
+                // the player only recognizes a Key URL that starts with skd://. 
+                // However, if you are using a customized player, 
+                // you can choose whatever protocol you want. 
+                // For example, "https". 
+
+                Dictionary<AssetDeliveryPolicyConfigurationKey, string> assetDeliveryPolicyConfiguration =
+                    new Dictionary<AssetDeliveryPolicyConfigurationKey, string>
                     {
-                        rng.GetBytes(returnValue);
-                    }
+                        {AssetDeliveryPolicyConfigurationKey.FairPlayLicenseAcquisitionUrl, acquisitionUrl.ToString().Replace("https://", "skd://")},
+                        {AssetDeliveryPolicyConfigurationKey.CommonEncryptionIVForCbcs, configFP.ContentEncryptionIV}
+                    };
 
-                    return returnValue;
+                var assetDeliveryPolicy = _context.AssetDeliveryPolicies.Create(
+                        "AssetDeliveryPolicy",
+                    AssetDeliveryPolicyType.DynamicCommonEncryptionCbcs,
+                    AssetDeliveryProtocol.HLS,
+                    assetDeliveryPolicyConfiguration);
+
+                // Add AssetDelivery Policy to the asset
+                asset.DeliveryPolicies.Add(assetDeliveryPolicy);
+
+            }
+
+            /// <summary>
+            /// Gets the streaming origin locator.
+            /// </summary>
+            /// <param name="assets"></param>
+            /// <returns></returns>
+            static public string GetStreamingOriginLocator(IAsset asset)
+            {
+
+                // Get a reference to the streaming manifest file from the  
+                // collection of files in the asset. 
+
+                var assetFile = asset.AssetFiles.Where(f => f.Name.ToLower().
+                                             EndsWith(".ism")).
+                                             FirstOrDefault();
+
+                // Create a 30-day readonly access policy. 
+                IAccessPolicy policy = _context.AccessPolicies.Create("Streaming policy",
+                    TimeSpan.FromDays(30),
+                    AccessPermissions.Read);
+
+                // Create a locator to the streaming content on an origin. 
+                ILocator originLocator = _context.Locators.CreateLocator(LocatorType.OnDemandOrigin, asset,
+                    policy,
+                    DateTime.UtcNow.AddMinutes(-5));
+
+                // Create a URL to the manifest file. 
+                return originLocator.Path + assetFile.Name;
+            }
+
+            static private void JobStateChanged(object sender, JobStateChangedEventArgs e)
+            {
+                Console.WriteLine(string.Format("{0}\n  State: {1}\n  Time: {2}\n\n",
+                    ((IJob)sender).Name,
+                    e.CurrentState,
+                    DateTime.UtcNow.ToString(@"yyyy_M_d__hh_mm_ss")));
+            }
+
+            static private byte[] GetRandomBuffer(int length)
+            {
+                var returnValue = new byte[length];
+
+                using (var rng =
+                    new System.Security.Cryptography.RNGCryptoServiceProvider())
+                {
+                    rng.GetBytes(returnValue);
                 }
+
+                return returnValue;
             }
         }
+    }
+    ```
 
 <!---HONumber=Mooncake_1114_2016-->

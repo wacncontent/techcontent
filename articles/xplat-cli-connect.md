@@ -48,11 +48,13 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 ```
 复制命令输出中提供的代码，并打开浏览器访问 http://aka.ms/devicelogin（或指定的其他页面）。（可以在同一计算机上，也可以在其他计算机或设备上打开浏览器。） 输入代码，然后系统会提示你为要使用的标识输入用户名和密码。该过程完成后，命令外壳会完成登录过程。它的外观可能如下：
 
-    info:    Added subscription Visual Studio Ultimate with MSDN
-    info:    Added subscription Azure Free Trial
-    info:    Setting subscription "Visual Studio Ultimate with MSDN" as default
-    +
-    info:    login command OK
+```
+info:    Added subscription Visual Studio Ultimate with MSDN
+info:    Added subscription Azure Free Trial
+info:    Setting subscription "Visual Studio Ultimate with MSDN" as default
++
+info:    login command OK
+```
 
 >[!NOTE]
 >  使用交互式登录时，会使用 Azure Active Directory 进行身份验证和授权。如果使用 Microsoft 帐户标识，登录过程会访问 Azure Active Directory 的默认域。（如果注册的是免费 Azure 帐户，Azure Active Directory 已为该帐户自动创建了默认域。）
@@ -61,18 +63,24 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 想要使用不需要多重身份验证的工作或学校帐户时，使用包含用户名 (`-u`) 参数的 `azure login` 命令进行身份验证。系统会在命令行中提示输入密码（也可以选择将密码作为 `azure login` 命令的其他参数传递）。以下示例将传递组织帐户的用户名：
 
-    azure login -e AzureChinaCloud -u myUserName@contoso.partner.onmschina.cn
+```
+azure login -e AzureChinaCloud -u myUserName@contoso.partner.onmschina.cn
+```
 
 然后，系统会提示输入密码：
 
-    info:    Executing command login
-    Password: *********
+```
+info:    Executing command login
+Password: *********
+```
 
 随后完成登录过程。
 
-    info:    Added subscription Visual Studio Ultimate with MSDN
-    +
-    info:    login command OK
+```
+info:    Added subscription Visual Studio Ultimate with MSDN
++
+info:    login command OK
+```
 
 在系统提示时输入你的密码。
 
@@ -82,7 +90,9 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 如果创建 Active Directory 应用程序的服务主体，并且服务主体拥有针对订阅的权限，就可以使用 `azure login -e AzureChinaCloud` 命令来对服务主体进行身份验证。根据方案，可以提供服务主体的凭据作为 `azure login` 命令的显式参数。例如，以下命令传递服务主体名称和 Active Directory 租户 ID：
 
-    azure login -u https://www.contoso.org/example --service-principal --tenant myTenantID
+```
+azure login -u https://www.contoso.org/example --service-principal --tenant myTenantID
+```
 
 随后，系统会提示提供密码。还可以通过 CLI 脚本或应用程序代码提供凭据，或使用证书针对自动化方案以非交互方式对服务主体进行身份验证。有关详细信息与示例，请参阅[使用 Azure Resource Manager 对服务主体进行身份验证](./azure-resource-manager/resource-group-authenticate-service-principal-cli.md)。
 
@@ -92,7 +102,9 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 * **若要为帐户下载发布设置文件**，请通过键入 `azure config mode asm` 来确保 CLI 处于服务管理模式下。然后运行以下命令：
 
-        azure account download
+    ```
+    azure account download
+    ```
 
 这将会打开默认浏览器，并提示你登录到 [Azure 经典管理门户](https://manage.windowsazure.cn)。登录后，将下载 `.publishsettings` 文件。记下此文件的保存位置。
 
@@ -103,7 +115,9 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 * **若要导入发布设置文件**，请运行以下命令：
 
-        azure account import <path to your .publishsettings file>
+    ```
+    azure account import <path to your .publishsettings file>
+    ```
 
 >[!IMPORTANT]
 >导入发布设置后，应删除 `.publishsettings` 文件。因为 Azure CLI 不再需要该文件，并且该文件会产生安全风险，因为它可以用来访问你的订阅。
@@ -125,15 +139,19 @@ Azure CLI 提供两种命令模式让你使用不同的命令集来处理 Azure 
 
 如果有多个 Azure 订阅，则连接到 Azure 即有权访问与凭据关联的所有订阅。将选择一个订阅作为默认订阅，由 Azure CLI 在执行操作时使用。可以使用 `azure account list` 命令查看这些订阅，包括当前默认订阅。此命令将返回如下信息：
 
-    info:    Executing command account list
-    data:    Name              Id                                    Current
-    data:    ----------------  ------------------------------------  -------
-    data:    Azure-sub-1       ####################################  true
-    data:    Azure-sub-2       ####################################  false
+```
+info:    Executing command account list
+data:    Name              Id                                    Current
+data:    ----------------  ------------------------------------  -------
+data:    Azure-sub-1       ####################################  true
+data:    Azure-sub-2       ####################################  false
+```
 
 在上述列表中，**当前**列指示当前的默认订阅为 Azure-sub-1。若要更改默认订阅，请使用 `azure account set` 命令，并指定你想要其成为默认订阅的订阅。例如：
 
-    azure account set Azure-sub-2
+```
+azure account set Azure-sub-2
+```
 
 这会将默认订阅更改为 Azure-sub-2。
 
@@ -156,7 +174,9 @@ Azure CLI 提供两种命令模式让你使用不同的命令集来处理 Azure 
 
 若要注销，请使用以下命令：
 
-    azure logout -u <username>
+```
+azure logout -u <username>
+```
 
 如果与帐户关联的订阅只使用 Active Directory 进行身份验证，则注销操作会从本地配置文件中删除订阅信息。但是，如果还为订阅导入了发布设置文件，则注销操作仅从本地配置文件中删除与 Active Directory 相关的信息。
 ## 后续步骤

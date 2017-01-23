@@ -131,7 +131,9 @@ Azure 导入和导出服务是一个数据传输进程，用于将大量 (GB++) 
 
 若要从文件系统上传文件，需要执行如下所示的命令：
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:abc.txt
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:abc.txt
+```
 
 高级过程摘要如下：
 

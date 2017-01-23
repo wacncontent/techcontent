@@ -103,7 +103,9 @@ DNS 主要是一个 UDP 协议。因为 UDP 协议无法保证消息传递，所
 
 若要检查 Linux VM 上的当前设置，请执行“cat /etc/resolv.conf”并查看“options”行，例如：
 
-    options timeout:1 attempts:5
+```
+options timeout:1 attempts:5
+```
 
 resolv.conf 文件是自动生成的，不应对其进行编辑。添加“options”行的具体步骤因发行版而异：
 

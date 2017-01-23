@@ -36,47 +36,57 @@ ms.author: yuaxu
 
 1. 在 `TodoActivity.java` 中，注释掉 `mToDoTable` 的现有定义，取消注释同步表版本：
 
-        private MobileServiceSyncTable<ToDoItem> mToDoTable;
+    ```
+    private MobileServiceSyncTable<ToDoItem> mToDoTable;
+    ```
 
 2. 在 `onCreate` 方法中，注释掉 `mToDoTable` 的现有初始化，取消注释以下定义：
 
-        mToDoTable = mClient.getSyncTable("ToDoItem", ToDoItem.class);
+    ```
+    mToDoTable = mClient.getSyncTable("ToDoItem", ToDoItem.class);
+    ```
 
 3. 在 `refreshItemsFromTable` 中，注释掉 `results` 的定义，取消注释以下定义：
 
-        // Offline Sync
-        final List<ToDoItem> results = refreshItemsFromMobileServiceTableSyncTable();
+    ```
+    // Offline Sync
+    final List<ToDoItem> results = refreshItemsFromMobileServiceTableSyncTable();
+    ```
 
 4. 注释掉 `refreshItemsFromMobileServiceTable` 的定义。
 
 5. 取消注释 `refreshItemsFromMobileServiceTableSyncTable` 的定义：
 
-        private List<ToDoItem> refreshItemsFromMobileServiceTableSyncTable() throws ExecutionException, InterruptedException {
-            //sync the data
-            sync().get();
-            Query query = QueryOperations.field("complete").
-                    eq(val(false));
-            return mToDoTable.read(query).get();
-        }
+    ```
+    private List<ToDoItem> refreshItemsFromMobileServiceTableSyncTable() throws ExecutionException, InterruptedException {
+        //sync the data
+        sync().get();
+        Query query = QueryOperations.field("complete").
+                eq(val(false));
+        return mToDoTable.read(query).get();
+    }
+    ```
 
 6. 取消注释 `sync` 的定义：
 
-        private AsyncTask<Void, Void, Void> sync() {
-            AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        MobileServiceSyncContext syncContext = mClient.getSyncContext();
-                        syncContext.push().get();
-                        mToDoTable.pull(null).get();
-                    } catch (final Exception e) {
-                        createAndShowDialogFromTask(e, "Error");
-                    }
-                    return null;
+    ```
+    private AsyncTask<Void, Void, Void> sync() {
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    MobileServiceSyncContext syncContext = mClient.getSyncContext();
+                    syncContext.push().get();
+                    mToDoTable.pull(null).get();
+                } catch (final Exception e) {
+                    createAndShowDialogFromTask(e, "Error");
                 }
-            };
-            return runAsyncTask(task);
-        }
+                return null;
+            }
+        };
+        return runAsyncTask(task);
+    }
+    ```
 
 ## 测试应用程序
 此部分在启用 WiFi 的情况下测试行为，然后关闭 WiFi 以创建脱机方案。

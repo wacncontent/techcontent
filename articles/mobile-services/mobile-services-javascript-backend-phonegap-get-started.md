@@ -135,19 +135,25 @@ ms.author: ggailey777
 
         在 Visual Studio Developer 命令提示符下运行以下命令：
 
-            phonegap local build wp8
+        ```
+        phonegap local build wp8
+        ```
 
     + **iOS**
 
         打开终端并运行以下命令：
 
-            phonegap local build ios
+        ```
+        phonegap local build ios
+        ```
 
     + **Android**
 
         打开命令提示符或终端窗口并运行以下命令：
 
-            phonegap local build android
+        ```
+        phonegap local build android
+        ```
 
 4. 根据前面部分中所述，在相应的开发环境中打开每个项目。
 

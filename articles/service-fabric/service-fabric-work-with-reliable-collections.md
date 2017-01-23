@@ -24,23 +24,25 @@ Service Fabric 通过可靠集合向 .NET 开发人员提供有状态的编程�
 ~~~
 retry:
 try {
-    // Create a new Transaction object for this partition
-    using (ITransaction tx = base.StateManager.CreateTransaction()) {
+   // Create a new Transaction object for this partition
+   using (ITransaction tx = base.StateManager.CreateTransaction()) {
       // AddAsync takes key's write lock; if >4 secs, TimeoutException
       // Key & value put in temp dictionary (read your own writes),
       // serialized, redo/undo record is logged & sent to  
       // secondary replicas
       await m_dic.AddAsync(tx, key, value, cancellationToken);
 
-      // CommitAsync sends Commit record to log & secondary replicas
-      // After quorum responds, all locks released
-      await tx.CommitAsync();
-    }
-    // If CommitAsync not called, Dispose sends Abort
-    // record to log & all locks released
+```
+  // CommitAsync sends Commit record to log & secondary replicas
+  // After quorum responds, all locks released
+  await tx.CommitAsync();
+```
+   }
+   // If CommitAsync not called, Dispose sends Abort
+   // record to log & all locks released
 }
 catch (TimeoutException) { 
-    await Task.Delay(100, cancellationToken); goto retry; 
+   await Task.Delay(100, cancellationToken); goto retry; 
 }
 ~~~
 
@@ -61,15 +63,15 @@ catch (TimeoutException) {
 
 ~~~
 using (ITransaction tx = StateManager.CreateTransaction()) {
-    // AddAsync serializes the name/user, logs the bytes, 
-    // & sends the bytes to the secondary replicas.
-    await m_dic.AddAsync(tx, name, user);
+   // AddAsync serializes the name/user, logs the bytes, 
+   // & sends the bytes to the secondary replicas.
+   await m_dic.AddAsync(tx, name, user);
 
-    // The line below updates the property’s value in memory only; the
-    // new value is NOT serialized, logged, & sent to secondary replicas.
-    user.LastLogin = DateTime.UtcNow;  // Corruption!
+   // The line below updates the property’s value in memory only; the
+   // new value is NOT serialized, logged, & sent to secondary replicas.
+   user.LastLogin = DateTime.UtcNow;  // Corruption!
 
-    await tx.CommitAsync();
+   await tx.CommitAsync();
 }
 ~~~
 
@@ -79,9 +81,9 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
 
 ~~~
 using (ITransaction tx = StateManager.CreateTransaction()) {
-    user.LastLogin = DateTime.UtcNow;  // Do this BEFORE calling AddAsync
-    await m_dic.AddAsync(tx, name, user);
-    await tx.CommitAsync(); 
+   user.LastLogin = DateTime.UtcNow;  // Do this BEFORE calling AddAsync
+   await m_dic.AddAsync(tx, name, user);
+   await tx.CommitAsync(); 
 }
 ~~~
 
@@ -89,17 +91,17 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
 
 ~~~
 using (ITransaction tx = StateManager.CreateTransaction()) {
-    // Use the user’s name to look up their data
-    ConditionalValue<User> user = 
+   // Use the user’s name to look up their data
+   ConditionalValue<User> user = 
       await m_dic.TryGetValueAsync(tx, name);
 
-    // The user exists in the dictionary, update one of their properties.
-    if (user.HasValue) {
+   // The user exists in the dictionary, update one of their properties.
+   if (user.HasValue) {
       // The line below updates the property’s value in memory only; the
       // new value is NOT serialized, logged, & sent to secondary replicas.
       user.Value.LastLogin = DateTime.UtcNow; // Corruption!
       await tx.CommitAsync(); 
-    }
+   }
 }
 ~~~
 
@@ -111,12 +113,12 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
 
 ~~~
 using (ITransaction tx = StateManager.CreateTransaction()) {
-    // Use the user’s name to look up their data
-    ConditionalValue<User> currentUser = 
+   // Use the user’s name to look up their data
+   ConditionalValue<User> currentUser = 
       await m_dic.TryGetValueAsync(tx, name);
 
-    // The user exists in the dictionary, update one of their properties.
-    if (currentUser.HasValue) {
+   // The user exists in the dictionary, update one of their properties.
+   if (currentUser.HasValue) {
       // Create new user object with the same state as the current user object.
       // NOTE: This must be a deep copy; not a shallow copy. Specifically, only
       // immutable state can be shared by currentUser & updatedUser object graphs.
@@ -129,7 +131,7 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
       await m_dic.SetValue(tx, name, updatedUser);
 
       await tx.CommitAsync(); 
-    }
+   }
 }
 ~~~
 
@@ -143,32 +145,32 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
 [DataContract]
 // If you don’t seal, you must ensure that any derived classes are also immutable
 public sealed class UserInfo {
-    private static readonly IEnumerable<ItemId> NoBids = ImmutableList<ItemId>.Empty;
+   private static readonly IEnumerable<ItemId> NoBids = ImmutableList<ItemId>.Empty;
 
-    public UserInfo(String email, IEnumerable<ItemId> itemsBidding = null) {
+   public UserInfo(String email, IEnumerable<ItemId> itemsBidding = null) {
       Email = email;
       ItemsBidding = (itemsBidding == null) ? NoBids : itemsBidding.ToImmutableList();
-    }
+   }
 
-    [OnDeserialized]
-    private void OnDeserialized(StreamingContext context) {
+   [OnDeserialized]
+   private void OnDeserialized(StreamingContext context) {
       // Convert the deserialized collection to an immutable collection
       ItemsBidding = ItemsBidding.ToImmutableList();
-    }
+   }
 
-    [DataMember]
-    public readonly String Email;
+   [DataMember]
+   public readonly String Email;
 
-    // Ideally, this would be a readonly field but it can't be because OnDeserialized 
-    // has to set it. So instead, the getter is public and the setter is private.
-    [DataMember]
-    public IEnumerable<ItemId> ItemsBidding { get; private set; }
+   // Ideally, this would be a readonly field but it can't be because OnDeserialized 
+   // has to set it. So instead, the getter is public and the setter is private.
+   [DataMember]
+   public IEnumerable<ItemId> ItemsBidding { get; private set; }
 
-    // Since each UserInfo object is immutable, we add a new ItemId to the ItemsBidding
-    // collection by creating a new immutable UserInfo object with the added ItemId.
-    public UserInfo AddItemBidding(ItemId itemId) {
+   // Since each UserInfo object is immutable, we add a new ItemId to the ItemsBidding
+   // collection by creating a new immutable UserInfo object with the added ItemId.
+   public UserInfo AddItemBidding(ItemId itemId) {
       return new UserInfo(Email, ((ImmutableList<ItemId>)ItemsBidding).Add(itemId));
-    }
+   }
 }
 ~~~
 
@@ -178,12 +180,12 @@ ItemId 类型也是不可变类型，如下所示：
 [DataContract]
 public struct ItemId {
 
-    [DataMember] public readonly String Seller;
-    [DataMember] public readonly String ItemName;
-    public ItemId(String seller, String itemName) {
+   [DataMember] public readonly String Seller;
+   [DataMember] public readonly String ItemName;
+   public ItemId(String seller, String itemName) {
       Seller = seller;
       ItemName = itemName;
-    }
+   }
 }
 ~~~
 

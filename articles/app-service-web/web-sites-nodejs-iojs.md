@@ -42,7 +42,9 @@ GitHub 上提供了 [io.js 部署脚本]。若要在 Web 应用上启用 io.js�
 
 若要将 Web 应用配置为使用 **iojs.exe** 而不是预装的 Node 版本，请在应用程序的根目录中创建一个 **IISNode.yml** 文件，并添加以下行。
 
-    nodeProcessCommandLine: "D:\home\site\wwwroot\bin\iojs\iojs.exe"
+```
+nodeProcessCommandLine: "D:\home\site\wwwroot\bin\iojs\iojs.exe"
+```
 
 <a id="nextsteps"></a>
 ## 后续步骤

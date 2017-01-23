@@ -97,7 +97,7 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 
 除了此文中所述的内容以外，建议也删除以下项：
 
-    /lib/udev/rules.d/75-persistent-net-generator.rules
+   /lib/udev/rules.d/75-persistent-net-generator.rules
 
 还可以安装 Azure Linux 代理 (waagent) 来帮助避免在没有多个 NIC 时可能出现的问题。
 
@@ -105,7 +105,9 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 
 在新的 Azure Resource Manager 模型中，应使用 JSON 模板文件创建新的 SUSE VM。创建 JSON 模板文件后，便可以使用以下 CLI 命令作为 PowerShell 的替代方法部署 VM 了：
 
-       azure group deployment create "<deployment name>" -g "<resource group name>" --template-file "<../../filename.json>"
+```
+   azure group deployment create "<deployment name>" -g "<resource group name>" --template-file "<../../filename.json>"
+```
 
 有关 JSON 模板文件的更多详细信息，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)和 [Azure 快速启动模板](https://github.com/Azure/azure-quickstart-templates/)。
 
@@ -137,17 +139,19 @@ SUSE 提供了一个名为“sapconf”的包，该包可管理一组特定于 S
 
 如果访问标准 Azure SUSE 存储库时遇到问题，可以使用一个简单的命令来重置它。以下情况下会发生这个问题：你在一个 Azure 区域中创建一个专用 OS 映像，然后将该映像复制到其他区域，并且要在该区域中基于此专用 OS 映像部署新 VM。只需在 VM 中运行以下命令：
 
-    service guestregister restart
+```
+service guestregister restart
+```
 
 ## Gnome 桌面
 
 如果要使用 Gnome 桌面在单个 VM 中安装完整的 SAP 演示系统（包括 SAP GUI、浏览器、SAP 管理控制台），请根据以下提示在 Azure SLES 映像上安装该系统：
 
-    对于 SLES 11：
+   对于 SLES 11：
 
     zypper in -t pattern gnome
 
-    对于 SLES 12：
+   对于 SLES 12：
 
     zypper in -t pattern gnome-basic
 

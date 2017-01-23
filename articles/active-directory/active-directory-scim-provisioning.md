@@ -161,74 +161,76 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 
 开发人员可以使用上述库将其服务托管在任何可执行的通用语言基础结构程序集或 Internet 信息服务中。以下代码示例用于将服务托管在地址为 http://localhost:9000 的可执行程序集中：
 
-    private static void Main(string[] arguments)
-    {
-    // Microsoft.SystemForCrossDomainIdentityManagement.IMonitor, 
-    // Microsoft.SystemForCrossDomainIdentityManagement.IProvider and 
-    // Microsoft.SystemForCrossDomainIdentityManagement.Service are all defined in 
-    // Microsoft.SystemForCrossDomainIdentityManagement.Service.dll.  
+```
+private static void Main(string[] arguments)
+{
+// Microsoft.SystemForCrossDomainIdentityManagement.IMonitor, 
+// Microsoft.SystemForCrossDomainIdentityManagement.IProvider and 
+// Microsoft.SystemForCrossDomainIdentityManagement.Service are all defined in 
+// Microsoft.SystemForCrossDomainIdentityManagement.Service.dll.  
 
-    Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitor = 
-      new DevelopersMonitor();
-    Microsoft.SystemForCrossDomainIdentityManagement.IProvider provider = 
-      new DevelopersProvider(arguments[1]);
-    Microsoft.SystemForCrossDomainIdentityManagement.Service webService = null;
-    try
-    {
-        webService = new WebService(monitor, provider);
-        webService.Start("http://localhost:9000");
+Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitor = 
+  new DevelopersMonitor();
+Microsoft.SystemForCrossDomainIdentityManagement.IProvider provider = 
+  new DevelopersProvider(arguments[1]);
+Microsoft.SystemForCrossDomainIdentityManagement.Service webService = null;
+try
+{
+    webService = new WebService(monitor, provider);
+    webService.Start("http://localhost:9000");
 
-        Console.ReadKey(true);
+    Console.ReadKey(true);
+}
+finally
+{
+    if (webService != null)
+    {
+        webService.Dispose();
+        webService = null;
     }
-    finally
-    {
-        if (webService != null)
-        {
-            webService.Dispose();
-            webService = null;
-        }
-    }
-    }
+}
+}
 
-    public class WebService : Microsoft.SystemForCrossDomainIdentityManagement.Service
-    {
-    private Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitor;
-    private Microsoft.SystemForCrossDomainIdentityManagement.IProvider provider;
+public class WebService : Microsoft.SystemForCrossDomainIdentityManagement.Service
+{
+private Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitor;
+private Microsoft.SystemForCrossDomainIdentityManagement.IProvider provider;
 
-    public WebService(
-      Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitoringBehavior, 
-      Microsoft.SystemForCrossDomainIdentityManagement.IProvider providerBehavior)
-    {
-        this.monitor = monitoringBehavior;
-        this.provider = providerBehavior;
-    }
+public WebService(
+  Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitoringBehavior, 
+  Microsoft.SystemForCrossDomainIdentityManagement.IProvider providerBehavior)
+{
+    this.monitor = monitoringBehavior;
+    this.provider = providerBehavior;
+}
 
-    public override IMonitor MonitoringBehavior
+public override IMonitor MonitoringBehavior
+{
+    get
     {
-        get
-        {
-            return this.monitor;
-        }
-
-        set
-        {
-            this.monitor = value;
-        }
+        return this.monitor;
     }
 
-    public override IProvider ProviderBehavior
+    set
     {
-        get
-        {
-            return this.provider;
-        }
+        this.monitor = value;
+    }
+}
 
-        set
-        {
-            this.provider = value;
-        }
+public override IProvider ProviderBehavior
+{
+    get
+    {
+        return this.provider;
     }
+
+    set
+    {
+        this.provider = value;
     }
+}
+}
+```
 
 请务必注意，此服务必须具有 HTTP 地址，其服务器身份验证凭证的根证书颁发机构是下列其中之一：
 
@@ -244,39 +246,43 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 
 可以使用网络 shell 实用程序将服务器身份验证证书绑定到 Windows 主机上的某个端口，例如：
 
-    netsh http add sslcert ipport=0.0.0.0:443 certhash=0000000000003ed9cd0c315bbb6dc1c08da5e6 appid={00112233-4455-6677-8899-AABBCCDDEEFF}  
+```
+netsh http add sslcert ipport=0.0.0.0:443 certhash=0000000000003ed9cd0c315bbb6dc1c08da5e6 appid={00112233-4455-6677-8899-AABBCCDDEEFF}  
+```
 
 此处，为 certhash 参数提供的值为证书指纹，为 appid 参数提供的值为任意全局唯一标识符。
 
 若要将服务托管在 Internet 信息服务中，开发人员需构建一个通用语言基础结构代码库程序集，并在该程序集的默认命名空间中使用名为 Startup 的类。以下是这种类的示例：
 
-    public class Startup
-    {
-    // Microsoft.SystemForCrossDomainIdentityManagement.IWebApplicationStarter, 
-    // Microsoft.SystemForCrossDomainIdentityManagement.IMonitor and  
-    // Microsoft.SystemForCrossDomainIdentityManagement.Service are all defined in 
-    // Microsoft.SystemForCrossDomainIdentityManagement.Service.dll.  
+```
+public class Startup
+{
+// Microsoft.SystemForCrossDomainIdentityManagement.IWebApplicationStarter, 
+// Microsoft.SystemForCrossDomainIdentityManagement.IMonitor and  
+// Microsoft.SystemForCrossDomainIdentityManagement.Service are all defined in 
+// Microsoft.SystemForCrossDomainIdentityManagement.Service.dll.  
 
-    Microsoft.SystemForCrossDomainIdentityManagement.IWebApplicationStarter starter;
+Microsoft.SystemForCrossDomainIdentityManagement.IWebApplicationStarter starter;
 
-    public Startup()
-    {
-        Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitor = 
-          new DevelopersMonitor();
-        Microsoft.SystemForCrossDomainIdentityManagement.IProvider provider = 
-          new DevelopersProvider();
-        this.starter = 
-          new Microsoft.SystemForCrossDomainIdentityManagement.WebApplicationStarter(
-            provider, 
-            monitor);
-    }
+public Startup()
+{
+    Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitor = 
+      new DevelopersMonitor();
+    Microsoft.SystemForCrossDomainIdentityManagement.IProvider provider = 
+      new DevelopersProvider();
+    this.starter = 
+      new Microsoft.SystemForCrossDomainIdentityManagement.WebApplicationStarter(
+        provider, 
+        monitor);
+}
 
-    public void Configuration(
-      Owin.IAppBuilder builder) // Defined in in Owin.dll.  
-    {
-        this.starter.ConfigureApplication(builder);
-    }
-    }
+public void Configuration(
+  Owin.IAppBuilder builder) // Defined in in Owin.dll.  
+{
+    this.starter.ConfigureApplication(builder);
+}
+}
+```
 
 ###处理终结点身份验证
 
@@ -286,50 +292,54 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 
 **1：**在提供程序中，通过每次启动服务时让服务返回要调用的方法来实现 Microsoft.SystemForCrossDomainIdentityManagement.IProvider.StartupBehavior 属性：
 
-    public override Action<Owin.IAppBuilder, System.Web.Http.HttpConfiguration.HttpConfiguration> StartupBehavior
-    {
-      get
-      {
-        return this.OnServiceStartup;
-      }
-    }
+```
+public override Action<Owin.IAppBuilder, System.Web.Http.HttpConfiguration.HttpConfiguration> StartupBehavior
+{
+  get
+  {
+    return this.OnServiceStartup;
+  }
+}
 
-    private void OnServiceStartup(
-      Owin.IAppBuilder applicationBuilder,  // Defined in Owin.dll.  
-      System.Web.Http.HttpConfiguration configuration)  // Defined in System.Web.Http.dll.  
-    {
-    }
+private void OnServiceStartup(
+  Owin.IAppBuilder applicationBuilder,  // Defined in Owin.dll.  
+  System.Web.Http.HttpConfiguration configuration)  // Defined in System.Web.Http.dll.  
+{
+}
+```
 
 **2：**将以下代码添加到该方法，以代表指定的租户对所有服务终结点的所有请求进行身份验证，以确定它们是否持有 Azure Active Directory 颁发的、用于访问 Azure Active Directory 的 Graph Web 服务的令牌：
 
-    private void OnServiceStartup(
-      Owin.IAppBuilder applicationBuilder IAppBuilder applicationBuilder, 
-      System.Web.Http.HttpConfiguration HttpConfiguration configuration)
+```
+private void OnServiceStartup(
+  Owin.IAppBuilder applicationBuilder IAppBuilder applicationBuilder, 
+  System.Web.Http.HttpConfiguration HttpConfiguration configuration)
+{
+  // IFilter is defined in System.Web.Http.dll.  
+  System.Web.Http.Filters.IFilter authorizationFilter = 
+    new System.Web.Http.AuthorizeAttribute(); // Defined in System.Web.Http.dll.configuration.Filters.Add(authorizationFilter);
+
+  // SystemIdentityModel.Tokens.TokenValidationParameters is defined in    
+  // System.IdentityModel.Token.Jwt.dll.
+  SystemIdentityModel.Tokens.TokenValidationParameters tokenValidationParameters =     
+    new TokenValidationParameters()
     {
-      // IFilter is defined in System.Web.Http.dll.  
-      System.Web.Http.Filters.IFilter authorizationFilter = 
-        new System.Web.Http.AuthorizeAttribute(); // Defined in System.Web.Http.dll.configuration.Filters.Add(authorizationFilter);
+      ValidAudience = "00000002-0000-0000-c000-000000000000"
+    };
 
-      // SystemIdentityModel.Tokens.TokenValidationParameters is defined in    
-      // System.IdentityModel.Token.Jwt.dll.
-      SystemIdentityModel.Tokens.TokenValidationParameters tokenValidationParameters =     
-        new TokenValidationParameters()
-        {
-          ValidAudience = "00000002-0000-0000-c000-000000000000"
-        };
+  // WindowsAzureActiveDirectoryBearerAuthenticationOptions is defined in 
+  // Microsoft.Owin.Security.ActiveDirectory.dll
+  Microsoft.Owin.Security.ActiveDirectory.
+  WindowsAzureActiveDirectoryBearerAuthenticationOptions authenticationOptions =
+    new WindowsAzureActiveDirectoryBearerAuthenticationOptions()    {
+    TokenValidationParameters = tokenValidationParameters,
+    Tenant = "03F9FCBC-EA7B-46C2-8466-F81917F3C15E" // Substitute the appropriate tenant’s 
+                                                  // identifier for this one.  
+  };
 
-      // WindowsAzureActiveDirectoryBearerAuthenticationOptions is defined in 
-      // Microsoft.Owin.Security.ActiveDirectory.dll
-      Microsoft.Owin.Security.ActiveDirectory.
-      WindowsAzureActiveDirectoryBearerAuthenticationOptions authenticationOptions =
-        new WindowsAzureActiveDirectoryBearerAuthenticationOptions()    {
-        TokenValidationParameters = tokenValidationParameters,
-        Tenant = "03F9FCBC-EA7B-46C2-8466-F81917F3C15E" // Substitute the appropriate tenant’s 
-                                                      // identifier for this one.  
-      };
-
-      applicationBuilder.UseWindowsAzureActiveDirectoryBearerAuthentication(authenticationOptions);
-    }
+  applicationBuilder.UseWindowsAzureActiveDirectoryBearerAuthentication(authenticationOptions);
+}
+```
 
 ##用户和组架构
 
@@ -381,56 +391,62 @@ Azure Active Directory 可将两种类型的资源预配到 SCIM Web 服务。�
 
 **1：**Azure Active Directory 将在服务中查询是否有某个用户的 externalId 属性值与 Azure Active Directory 中用户的 mailNickname 属性值匹配。查询以类似的超文本传输协议请求表示，其中，jyoung 是 Azure Active Directory 中某个用户的 mailNickname 示例：
 
-    GET https://.../scim/Users?filter=externalId eq jyoung HTTP/1.1
-    Authorization: Bearer ...
+```
+GET https://.../scim/Users?filter=externalId eq jyoung HTTP/1.1
+Authorization: Bearer ...
+```
 
 如果使用 Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库构建了服务，则将请求转换为对服务提供者的 Query 方法调用。以下是该方法的签名：
 
-    // System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
-    // Microsoft.SystemForCrossDomainIdentityManagement.Resource is defined in 
-    // Microsoft.SystemForCrossDomainIdentityManagement.Schemas.  
-    // Microsoft.SystemForCrossDomainIdentityManagement.IQueryParameters is defined in 
-    // Microsoft.SystemForCrossDomainIdentityManagement.Protocol.  
+```
+// System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
+// Microsoft.SystemForCrossDomainIdentityManagement.Resource is defined in 
+// Microsoft.SystemForCrossDomainIdentityManagement.Schemas.  
+// Microsoft.SystemForCrossDomainIdentityManagement.IQueryParameters is defined in 
+// Microsoft.SystemForCrossDomainIdentityManagement.Protocol.  
 
-    System.Threading.Tasks.Task<Microsoft.SystemForCrossDomainIdentityManagement.Resource[]> Query(
-      Microsoft.SystemForCrossDomainIdentityManagement.IQueryParameters parameters, 
-      string correlationIdentifier);
+System.Threading.Tasks.Task<Microsoft.SystemForCrossDomainIdentityManagement.Resource[]> Query(
+  Microsoft.SystemForCrossDomainIdentityManagement.IQueryParameters parameters, 
+  string correlationIdentifier);
+```
 
 以下是 Microsoft.SystemForCrossDomainIdentityManagement.IQueryParameters 接口的定义：
 
-    public interface IQueryParameters: 
-      Microsoft.SystemForCrossDomainIdentityManagement.IRetrievalParameters
-    {
-        System.Collections.Generic.IReadOnlyCollection <Microsoft.SystemForCrossDomainIdentityManagement.IFilter> AlternateFilters 
-        { get; }
-    }
+```
+public interface IQueryParameters: 
+  Microsoft.SystemForCrossDomainIdentityManagement.IRetrievalParameters
+{
+    System.Collections.Generic.IReadOnlyCollection <Microsoft.SystemForCrossDomainIdentityManagement.IFilter> AlternateFilters 
+    { get; }
+}
 
-    public interface Microsoft.SystemForCrossDomainIdentityManagement.IRetrievalParameters
-    {
-      system.Collections.Generic.IReadOnlyCollection<string> ExcludedAttributePaths 
-      { get; }
-      System.Collections.Generic.IReadOnlyCollection<string> RequestedAttributePaths 
-      { get; }
-      string SchemaIdentifier 
-      { get; }
-    }
+public interface Microsoft.SystemForCrossDomainIdentityManagement.IRetrievalParameters
+{
+  system.Collections.Generic.IReadOnlyCollection<string> ExcludedAttributePaths 
+  { get; }
+  System.Collections.Generic.IReadOnlyCollection<string> RequestedAttributePaths 
+  { get; }
+  string SchemaIdentifier 
+  { get; }
+}
 
-    public interface Microsoft.SystemForCrossDomainIdentityManagement.IFilter
-    {
-        Microsoft.SystemForCrossDomainIdentityManagement.IFilter AdditionalFilter 
-          { get; set; }
-        string AttributePath 
-          { get; } 
-        Microsoft.SystemForCrossDomainIdentityManagement.ComparisonOperator FilterOperator 
-          { get; }
-        string ComparisonValue 
-          { get; }
-    }
+public interface Microsoft.SystemForCrossDomainIdentityManagement.IFilter
+{
+    Microsoft.SystemForCrossDomainIdentityManagement.IFilter AdditionalFilter 
+      { get; set; }
+    string AttributePath 
+      { get; } 
+    Microsoft.SystemForCrossDomainIdentityManagement.ComparisonOperator FilterOperator 
+      { get; }
+    string ComparisonValue 
+      { get; }
+}
 
-    public enum Microsoft.SystemForCrossDomainIdentityManagement.ComparisonOperator
-    {
-        Equals
-    }
+public enum Microsoft.SystemForCrossDomainIdentityManagement.ComparisonOperator
+{
+    Equals
+}
+```
 
 在上述查询具有给定 externalId 属性值的用户的示例中，传递给 Query 方法的参数值将是：
 
@@ -442,79 +458,87 @@ Azure Active Directory 可将两种类型的资源预配到 SCIM Web 服务。�
 
 **2：**如果在服务中查询是否有某个用户的 externalId 属性值与 Azure Active Directory 中用户的 mailNickname 属性值匹配时，该查询的响应未返回任何用户，Azure Active Directory 将请求服务预配与 Azure Active Directory 中的用户相对应的用户。以下是此类请求的示例：
 
-    POST https://.../scim/Users HTTP/1.1
-    Authorization: Bearer ...
-    Content-type: application/json
+```
+POST https://.../scim/Users HTTP/1.1
+Authorization: Bearer ...
+Content-type: application/json
+{
+  "schemas":
+  [
+    "urn:ietf:params:scim:schemas:core:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:enterprise:2.0User"],
+  "externalId":"jyoung",
+  "userName":"jyoung",
+  "active":true,
+  "addresses":null,
+  "displayName":"Joy Young",
+  "emails": [
     {
-      "schemas":
-      [
-        "urn:ietf:params:scim:schemas:core:2.0:User",
-        "urn:ietf:params:scim:schemas:extension:enterprise:2.0User"],
-      "externalId":"jyoung",
-      "userName":"jyoung",
-      "active":true,
-      "addresses":null,
-      "displayName":"Joy Young",
-      "emails": [
-        {
-          "type":"work",
-          "value":"jyoung@Contoso.com",
-          "primary":true}],
-      "meta": {
-        "resourceType":"User"},
-       "name":{
-        "familyName":"Young",
-        "givenName":"Joy"},
-      "phoneNumbers":null,
-      "preferredLanguage":null,
-      "title":null,
-      "department":null,
-      "manager":null}
+      "type":"work",
+      "value":"jyoung@Contoso.com",
+      "primary":true}],
+  "meta": {
+    "resourceType":"User"},
+   "name":{
+    "familyName":"Young",
+    "givenName":"Joy"},
+  "phoneNumbers":null,
+  "preferredLanguage":null,
+  "title":null,
+  "department":null,
+  "manager":null}
+```
 
 Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将请求转换为对服务提供者的 Create 方法调用。Create 方法具有此签名：
 
-    // System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
-    // Microsoft.SystemForCrossDomainIdentityManagement.Resource is defined in 
-    // Microsoft.SystemForCrossDomainIdentityManagement.Schemas.  
+```
+// System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
+// Microsoft.SystemForCrossDomainIdentityManagement.Resource is defined in 
+// Microsoft.SystemForCrossDomainIdentityManagement.Schemas.  
 
-    System.Threading.Tasks.Task<Microsoft.SystemForCrossDomainIdentityManagement.Resource> Create(
-      Microsoft.SystemForCrossDomainIdentityManagement.Resource resource, 
-      string correlationIdentifier);
+System.Threading.Tasks.Task<Microsoft.SystemForCrossDomainIdentityManagement.Resource> Create(
+  Microsoft.SystemForCrossDomainIdentityManagement.Resource resource, 
+  string correlationIdentifier);
+```
 
 如果请求预配用户，资源参数的值将是 Microsoft.SystemForCrossDomainIdentityManagement 的实例。Core2EnterpriseUser 类，在 Microsoft.SystemForCrossDomainIdentityManagement.Schemas 库中定义。如果预配用户的请求成功，则方法的实现应返回 Microsoft.SystemForCrossDomainIdentityManagement 的实例。Core2EnterpriseUser 类，其 Identifier 属性值设置为新预配用户的唯一标识符。
 
 **3：**为了更新已知存在于前端为 SCIM 的标识存储中的用户，Azure Active Directory 将通过类似于下面的请求向服务请求该用户的当前状态来继续处理：
 
-    GET ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
-    Authorization: Bearer ...
+```
+GET ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
+Authorization: Bearer ...
+```
 
 如果使用 Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库构建了服务，则将请求转换为对服务提供者的 Retrieve 方法调用。以下是 Retrieve 方法的签名：
 
-    // System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
-    // Microsoft.SystemForCrossDomainIdentityManagement.Resource and 
-    // Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters 
-    // are defined in Microsoft.SystemForCrossDomainIdentityManagement.Schemas.  
-    System.Threading.Tasks.Task<Microsoft.SystemForCrossDomainIdentityManagement.Resource> 
-       Retrieve(
-         Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters 
-           parameters, 
-           string correlationIdentifier);
+```
+// System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
+// Microsoft.SystemForCrossDomainIdentityManagement.Resource and 
+// Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters 
+// are defined in Microsoft.SystemForCrossDomainIdentityManagement.Schemas.  
+System.Threading.Tasks.Task<Microsoft.SystemForCrossDomainIdentityManagement.Resource> 
+   Retrieve(
+     Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters 
+       parameters, 
+       string correlationIdentifier);
 
-    public interface 
-      Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters:   
-        IRetrievalParameters
-        {
-          Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier 
-            ResourceIdentifier 
-              { get; }
-    }
-    public interface Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier
+public interface 
+  Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters:   
+    IRetrievalParameters
     {
-        string Identifier 
-          { get; set; }
-        string Microsoft.SystemForCrossDomainIdentityManagement.SchemaIdentifier 
-          { get; set; }
-    }
+      Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier 
+        ResourceIdentifier 
+          { get; }
+}
+public interface Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier
+{
+    string Identifier 
+      { get; set; }
+    string Microsoft.SystemForCrossDomainIdentityManagement.SchemaIdentifier 
+      { get; set; }
+}
+```
 
 对于上述检索用户当前状态的请求示例，作为参数自变量值提供的对象属性值如下所示：
 
@@ -523,8 +547,10 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
 **4：**若要更新引用属性，Azure Active Directory 将查询服务以判断前端为该服务的标识存储中引用属性的当前值是否已经与 Azure Active Directory 中该属性的值相匹配。对于用户，以这种方式查询当前值的唯一属性是 manager 属性。确定特定用户对象的 manager 属性当前是否具有特定值的请求示例如下：
 
-    GET ~/scim/Users?filter=id eq 54D382A4-2050-4C03-94D1-E769F1D15682 and manager eq 2819c223-7f76-453a-919d-413861904646&attributes=id HTTP/1.1
-    Authorization: Bearer ...
+```
+GET ~/scim/Users?filter=id eq 54D382A4-2050-4C03-94D1-E769F1D15682 and manager eq 2819c223-7f76-453a-919d-413861904646&attributes=id HTTP/1.1
+Authorization: Bearer ...
+```
 
 属性查询参数 id 的值，表示如果满足提供为筛选器查询参数值的表达式的用户对象存在，则服务应以 urn:ietf:params:scim:schemas:core:2.0:User 或 urn:ietf:params:scim:schemas:extension:enterprise:2.0:User 资源做出响应（仅包括该资源的 id 属性值）。当然，请求者知道 id 属性的值 — 它包含在筛选器查询参数的值中；请求它的目的实际上是请求满足筛选表达式的资源的精简表示形式（指示是否存在任何此类对象）。
 
@@ -544,104 +570,108 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
 **5：**以下是从 Azure Active Directory 向 SCIM 服务发出更新用户请求的示例：
 
-    PATCH ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
-    Authorization: Bearer ...
-    Content-type: application/json
+```
+PATCH ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
+Authorization: Bearer ...
+Content-type: application/json
+{
+  "schemas": 
+  [
+    "urn:ietf:params:scim:api:messages:2.0:PatchOp"],
+  "Operations":
+  [
     {
-      "schemas": 
-      [
-        "urn:ietf:params:scim:api:messages:2.0:PatchOp"],
-      "Operations":
-      [
-        {
-          "op":"Add",
-          "path":"manager",
-          "value":
-            [
-              {
-                "$ref":"http://.../scim/Users/2819c223-7f76-453a-919d-413861904646",
-                "value":"2819c223-7f76-453a-919d-413861904646"}]}]}
+      "op":"Add",
+      "path":"manager",
+      "value":
+        [
+          {
+            "$ref":"http://.../scim/Users/2819c223-7f76-453a-919d-413861904646",
+            "value":"2819c223-7f76-453a-919d-413861904646"}]}]}
+```
 
 用于实现 SCIM 服务的 Microsoft 通用语言基础结构库将请求转换为对服务提供者的 Update 方法调用。以下是该方法的签名：
 
-    // System.Threading.Tasks.Tasks and 
-    // System.Collections.Generic.IReadOnlyCollection<T>
-    // are defined in mscorlib.dll.  
-    // Microsoft.SystemForCrossDomainIdentityManagement.IPatch, 
-    // Microsoft.SystemForCrossDomainIdentityManagement.PatchRequestBase, 
-    // Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier, 
-    // Microsoft.SystemForCrossDomainIdentityManagement.PatchOperation, 
-    // Microsoft.SystemForCrossDomainIdentityManagement.OperationName, 
-    // Microsoft.SystemForCrossDomainIdentityManagement.IPath and 
-    // Microsoft.SystemForCrossDomainIdentityManagement.OperationValue 
-    // are all defined in Microsoft.SystemForCrossDomainIdentityManagement.Protocol. 
+```
+// System.Threading.Tasks.Tasks and 
+// System.Collections.Generic.IReadOnlyCollection<T>
+// are defined in mscorlib.dll.  
+// Microsoft.SystemForCrossDomainIdentityManagement.IPatch, 
+// Microsoft.SystemForCrossDomainIdentityManagement.PatchRequestBase, 
+// Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier, 
+// Microsoft.SystemForCrossDomainIdentityManagement.PatchOperation, 
+// Microsoft.SystemForCrossDomainIdentityManagement.OperationName, 
+// Microsoft.SystemForCrossDomainIdentityManagement.IPath and 
+// Microsoft.SystemForCrossDomainIdentityManagement.OperationValue 
+// are all defined in Microsoft.SystemForCrossDomainIdentityManagement.Protocol. 
 
-    System.Threading.Tasks.Task Update(
-      Microsoft.SystemForCrossDomainIdentityManagement.IPatch patch, 
-      string correlationIdentifier);
+System.Threading.Tasks.Task Update(
+  Microsoft.SystemForCrossDomainIdentityManagement.IPatch patch, 
+  string correlationIdentifier);
 
-    public interface Microsoft.SystemForCrossDomainIdentityManagement.IPatch
-    {
-    Microsoft.SystemForCrossDomainIdentityManagement.PatchRequestBase 
-      PatchRequest 
-        { get; set; }
-    Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier 
-      ResourceIdentifier 
-        { get; set; }        
-    }
+public interface Microsoft.SystemForCrossDomainIdentityManagement.IPatch
+{
+Microsoft.SystemForCrossDomainIdentityManagement.PatchRequestBase 
+  PatchRequest 
+    { get; set; }
+Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier 
+  ResourceIdentifier 
+    { get; set; }        
+}
 
-    public class PatchRequest2: 
-      Microsoft.SystemForCrossDomainIdentityManagement.PatchRequestBase
-    {
-    public System.Collections.Generic.IReadOnlyCollection
-      <Microsoft.SystemForCrossDomainIdentityManagement.PatchOperation> 
-        Operations
-        { get;}
+public class PatchRequest2: 
+  Microsoft.SystemForCrossDomainIdentityManagement.PatchRequestBase
+{
+public System.Collections.Generic.IReadOnlyCollection
+  <Microsoft.SystemForCrossDomainIdentityManagement.PatchOperation> 
+    Operations
+    { get;}
 
-    public void AddOperation(
-      Microsoft.SystemForCrossDomainIdentityManagement.PatchOperation operation);
-    }
+public void AddOperation(
+  Microsoft.SystemForCrossDomainIdentityManagement.PatchOperation operation);
+}
 
-    public class PatchOperation
-    {
-    public Microsoft.SystemForCrossDomainIdentityManagement.OperationName 
-      Name
-      { get; set; }
+public class PatchOperation
+{
+public Microsoft.SystemForCrossDomainIdentityManagement.OperationName 
+  Name
+  { get; set; }
 
-    public Microsoft.SystemForCrossDomainIdentityManagement.IPath 
-      Path
-      { get; set; }
+public Microsoft.SystemForCrossDomainIdentityManagement.IPath 
+  Path
+  { get; set; }
 
-    public System.Collections.Generic.IReadOnlyCollection
-      <Microsoft.SystemForCrossDomainIdentityManagement.OperationValue> Value
-      { get; }
+public System.Collections.Generic.IReadOnlyCollection
+  <Microsoft.SystemForCrossDomainIdentityManagement.OperationValue> Value
+  { get; }
 
-    public void AddValue(
-      Microsoft.SystemForCrossDomainIdentityManagement.OperationValue value);
-    }
+public void AddValue(
+  Microsoft.SystemForCrossDomainIdentityManagement.OperationValue value);
+}
 
-    public enum OperationName
-    {
-      Add,
-      Remove,
-      Replace
-    }
+public enum OperationName
+{
+  Add,
+  Remove,
+  Replace
+}
 
-    public interface IPath
-    {
-      string AttributePath { get; }
-      System.Collections.Generic.IReadOnlyCollection<IFilter> SubAttributes { get; }
-      Microsoft.SystemForCrossDomainIdentityManagement.IPath ValuePath { get; }
-    }
+public interface IPath
+{
+  string AttributePath { get; }
+  System.Collections.Generic.IReadOnlyCollection<IFilter> SubAttributes { get; }
+  Microsoft.SystemForCrossDomainIdentityManagement.IPath ValuePath { get; }
+}
 
-    public class OperationValue
-    {
-      public string Reference
-      { get; set; }
+public class OperationValue
+{
+  public string Reference
+  { get; set; }
 
-      public string Value
-      { get; set; }
-    }
+  public string Value
+  { get; set; }
+}
+```
 
 对于上述更新用户的请求示例，作为修补参数值提供的对象将具有这些属性值：
 
@@ -656,18 +686,22 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
 **6：**为了从前端为 SCIM 服务的标识存储撤销用户，Azure Active Directory 将发送如下请求：
 
-    DELETE ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
-    Authorization: Bearer ...
+```
+DELETE ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
+Authorization: Bearer ...
+```
 
 如果使用 Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库构建了服务，则将请求转换为对服务提供者的 Delete 方法调用。该方法具有以下签名：
 
-    // System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
-    // Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier, 
-    // is defined in Microsoft.SystemForCrossDomainIdentityManagement.Protocol. 
-    System.Threading.Tasks.Task Delete(
-      Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier  
-        resourceIdentifier, 
-      string correlationIdentifier);
+```
+// System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
+// Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier, 
+// is defined in Microsoft.SystemForCrossDomainIdentityManagement.Protocol. 
+System.Threading.Tasks.Task Delete(
+  Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier  
+    resourceIdentifier, 
+  string correlationIdentifier);
+```
 
 在上述取消预配用户的请求示例中，作为 resourceIdentifier 参数值提供的对象将具有以下属性值：
 

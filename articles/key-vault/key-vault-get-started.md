@@ -44,11 +44,15 @@ ms.author: cabailey
 
 若要获取你在本教程中看到的任何 cmdlet 的详细帮助，请使用 **Get-Help** cmdlet。
 
-    Get-Help <cmdlet-name> -Detailed
+```
+Get-Help <cmdlet-name> -Detailed
+```
 
 例如，若要获取有关 **Login-AzureRmAccount** cmdlet 的帮助，请输入：
 
-    Get-Help Login-AzureRmAccount -Detailed
+```
+Get-Help Login-AzureRmAccount -Detailed
+```
 
 还可阅读以下教程以熟悉如何在 Azure PowerShell 中使用 Azure 资源管理器：
 
@@ -58,7 +62,9 @@ ms.author: cabailey
 ## <a id="connect"></a>连接到订阅
 启动 Azure PowerShell 会话，然后使用以下命令登录你的 Azure 帐户：
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 请注意，如果你使用特定的 Azure 实例（例如 Azure Government），请结合此命令使用 -Environment 参数。例如：`Login-AzureRmAccount -Environment (Get-AzureRmEnvironment -Name AzureUSGovernment)`
 
@@ -66,25 +72,33 @@ ms.author: cabailey
 
 如果你有多个订阅，并想要指定其中一个订阅供 Azure 密钥保管库使用，请键入以下内容以查看帐户的订阅：
 
-    Get-AzureRmSubscription
+```
+Get-AzureRmSubscription
+```
 
 然后，若要指定要使用的订阅，请键入：
 
-    Set-AzureRmContext -SubscriptionId <subscription ID>
+```
+Set-AzureRmContext -SubscriptionId <subscription ID>
+```
 
 有关配置 Azure PowerShell 的详细信息，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
 ## <a id="resource"></a>创建新的资源组
 使用 Azure 资源管理器时，会在资源组中创建所有相关资源。在本教程中，我们将创建名为 **ContosoResourceGroup** 的新资源组：
 
-    New-AzureRmResourceGroup -Name 'ContosoResourceGroup' -Location 'China East Site 2'
+```
+New-AzureRmResourceGroup -Name 'ContosoResourceGroup' -Location 'China East Site 2'
+```
 
 ## <a id="vault"></a>创建密钥保管库
 使用 [New-AzureRmKeyVault](https://msdn.microsoft.com/zh-cn/library/azure/mt603736(v=azure.300).aspx) cmdlet 创建密钥保管库。此 cmdlet 包含三个必需参数：**资源组名称**、**密钥保管库名称**和**地理位置**。
 
 例如，如果使用的保管库名称为 **ContosoKeyVault**，资源组名称为 **ContosoResourceGroup**，位置为**中国东部站点 2**，请键入：
 
-    New-AzureRmKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'China East Site 2'
+```
+New-AzureRmKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'China East Site 2'
+```
 
 此 cmdlet 的输出会显示你刚刚创建的密钥保管库属性。两个最重要的属性是：
 
@@ -100,35 +114,49 @@ ms.author: cabailey
 ## <a id="add"></a>将密钥或机密添加到保管库
 如果你希望 Azure 密钥保管库为你创建一个受软件保护的密钥，请使用 [Add-AzureKeyVaultKey](https://msdn.microsoft.com/zh-cn/library/azure/dn868048(v=azure.300).aspx) cmdlet，并键入以下内容：
 
-    $key = Add-AzureKeyVaultKey -VaultName 'ContosoKeyVault' -Name 'ContosoFirstKey' -Destination 'Software'
+```
+$key = Add-AzureKeyVaultKey -VaultName 'ContosoKeyVault' -Name 'ContosoFirstKey' -Destination 'Software'
+```
 
 但是，如果 C:\\ 驱动器中已存储了一个包含现有的受软件保护的密钥，并且要将文件名为 softkey.pfx 的 .PFX 文件上载到 Azure 密钥保管库，请键入以下内容来设置 **securepfxpwd** 变量，以将 .PFX 文件的密码设为 **123**：
 
-    $securepfxpwd = ConvertTo-SecureString -String '123' -AsPlainText -Force
+```
+$securepfxpwd = ConvertTo-SecureString -String '123' -AsPlainText -Force
+```
 
 然后键入以下内容以从 .PFX 文件导入密钥，这样，便会使用密钥保管库服务中的软件来保护密钥：
 
-    $key = Add-AzureKeyVaultKey -VaultName 'ContosoKeyVault' -Name 'ContosoFirstKey' -KeyFilePath 'c:\softkey.pfx' -KeyFilePassword $securepfxpwd
+```
+$key = Add-AzureKeyVaultKey -VaultName 'ContosoKeyVault' -Name 'ContosoFirstKey' -KeyFilePath 'c:\softkey.pfx' -KeyFilePassword $securepfxpwd
+```
 
 现在，你可以通过使用密钥的 URI，引用已创建或上载到 Azure 密钥保管库的密钥。使用 **https://ContosoKeyVault.vault.chinacloudapi.cn/keys/ContosoFirstKey** 可始终获取当前版本，而使用 **https://ContosoKeyVault.vault.chinacloudapi.cn/keys/ContosoFirstKey/cgacf4f763ar42ffb0a1gca546aygd87** 可获取此特定版本。
 
 若要显示此密钥的 URI，请键入：
 
-    $Key.key.kid
+```
+$Key.key.kid
+```
 
 若要将名为 SQLPassword 且其 Azure 密钥保管库的值为 Pa$$w0rd 的机密添加到保管库，请先键入以下内容，将 Pa$$w0rd 的值转换成安全字符串：
 
-    $secretvalue = ConvertTo-SecureString 'Pa$$w0rd' -AsPlainText -Force
+```
+$secretvalue = ConvertTo-SecureString 'Pa$$w0rd' -AsPlainText -Force
+```
 
 然后键入以下内容：
 
-    $secret = Set-AzureKeyVaultSecret -VaultName 'ContosoKeyVault' -Name 'SQLPassword' -SecretValue $secretvalue
+```
+$secret = Set-AzureKeyVaultSecret -VaultName 'ContosoKeyVault' -Name 'SQLPassword' -SecretValue $secretvalue
+```
 
 现在，你可以通过使用密码的 URI，引用已添加到 Azure 密钥保管库的此密码。使用 **https://ContosoVault.vault.chinacloudapi.cn/secrets/SQLPassword** 可始终获取当前版本，而使用 **https://ContosoVault.vault.chinacloudapi.cn/secrets/SQLPassword/90018dbb96a84117a0d2847ef8e7189d** 可获取此特定版本。
 
 若要显示此机密的 URI，请键入：
 
-    $secret.Id
+```
+$secret.Id
+```
 
 让我们查看一下刚刚创建的密钥或机密：
 
@@ -165,21 +193,29 @@ ms.author: cabailey
 
 例如，如果保管库名称是 **ContosoKeyVault**，要授权的应用程序的客户端 ID 为 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed，而你希望授权应用程序使用保管库中的密钥来进行解密和签名，请运行以下命令：
 
-    Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -ServicePrincipalName 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed -PermissionsToKeys decrypt,sign
+```
+Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -ServicePrincipalName 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed -PermissionsToKeys decrypt,sign
+```
 
 如果要授权同一应用程序读取保管库中的机密，请运行以下命令：
 
-    Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -ServicePrincipalName 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed -PermissionsToSecrets Get
+```
+Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -ServicePrincipalName 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed -PermissionsToSecrets Get
+```
 
 ## <a id="delete"></a>删除密钥保管库以及关联的密钥和机密 ##
 
 如果你不再需要密钥保管库及其包含的密钥或机密，可以使用 [Remove-AzureRmKeyVault](https://msdn.microsoft.com/zh-cn/library/azure/mt619485(v=azure.300).aspx) cmdlet 来删除密钥保管库：
 
-    Remove-AzureRmKeyVault -VaultName 'ContosoKeyVault'
+```
+Remove-AzureRmKeyVault -VaultName 'ContosoKeyVault'
+```
 
 或者，你可以删除整个 Azure 资源组，其中包括密钥保管库和你加入该组的任何其他资源：
 
-    Remove-AzureRmResourceGroup -ResourceGroupName 'ContosoResourceGroup'
+```
+Remove-AzureRmResourceGroup -ResourceGroupName 'ContosoResourceGroup'
+```
 
 ## <a id="other"></a>其他 Azure PowerShell Cmdlet
 可能会发现有助于管理 Azure 密钥保管库的其他命令：

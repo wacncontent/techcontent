@@ -24,23 +24,25 @@ wacn.date: 06/08/2016
 
 本文主要在虚拟机"pstest"上测试。
 
-    #获取虚拟机上数据磁盘的详细信息
-    $vm=Get-AzureVM -ServiceName 'pstest' -Name 'pstest'
-    Get-AzureDataDisk -VM $vm
+```
+#获取虚拟机上数据磁盘的详细信息
+$vm=Get-AzureVM -ServiceName 'pstest' -Name 'pstest'
+Get-AzureDataDisk -VM $vm
 
-    #添加数据磁盘
-    Add-AzureDataDisk -VM $vm -CreateNew -DiskSizeInGB 10 -DiskLabel 'test' -LUN 0 -MediaLocation "https://portalvhdsw0kfpkwrwbyf2.blob.core.chinacloudapi.cn/vhds/pstest-sport1.vhd" | Update-AzureVM	
+#添加数据磁盘
+Add-AzureDataDisk -VM $vm -CreateNew -DiskSizeInGB 10 -DiskLabel 'test' -LUN 0 -MediaLocation "https://portalvhdsw0kfpkwrwbyf2.blob.core.chinacloudapi.cn/vhds/pstest-sport1.vhd" | Update-AzureVM	
 
-    #附加存在于 Azure 存储中的数据磁盘
-    Add-AzureDataDisk -ImportFrom -MediaLocation "https://***.blob.core.chinacloudapi.cn/vhds/myvhdfile.vhd" -VM $vm -DiskLabel 'test' -LUN 0 | Update-AzureVM 
+#附加存在于 Azure 存储中的数据磁盘
+Add-AzureDataDisk -ImportFrom -MediaLocation "https://***.blob.core.chinacloudapi.cn/vhds/myvhdfile.vhd" -VM $vm -DiskLabel 'test' -LUN 0 | Update-AzureVM 
 
-    #从已经存在的数据磁盘附加到虚拟机
-    #Get-AzureDisk 获取可以附加的磁盘信息
-    #附加磁盘的条件：与虚拟机同一个 Location、同一个存储账号下，数据磁盘没有附加在其它虚拟机上
-    #以下是我测试位于 China East，没有附加于其它虚拟机，且在 portalvhdsw0kfpkwrwbyf2 存储账户下的数据磁盘
-    Get-AzureDisk | Where-Object {($_.AttachedTo -eq $null) -and ($_.Location -eq 'China East') -and ($_.MediaLink -Like '*portalvhdsw0kfpkwrwbyf2*') } | Format-Table -auto "DiskName","DiskSizeInGB","AttachedTo"
-    #将要附加的DiskName输入下述PowerShell指令
-    Add-AzureDataDisk -Import -DiskName "pstest-pstest-0-201601270217390866" -LUN 3 -VM $vm | Update-AzureVM	
+#从已经存在的数据磁盘附加到虚拟机
+#Get-AzureDisk 获取可以附加的磁盘信息
+#附加磁盘的条件：与虚拟机同一个 Location、同一个存储账号下，数据磁盘没有附加在其它虚拟机上
+#以下是我测试位于 China East，没有附加于其它虚拟机，且在 portalvhdsw0kfpkwrwbyf2 存储账户下的数据磁盘
+Get-AzureDisk | Where-Object {($_.AttachedTo -eq $null) -and ($_.Location -eq 'China East') -and ($_.MediaLink -Like '*portalvhdsw0kfpkwrwbyf2*') } | Format-Table -auto "DiskName","DiskSizeInGB","AttachedTo"
+#将要附加的DiskName输入下述PowerShell指令
+Add-AzureDataDisk -Import -DiskName "pstest-pstest-0-201601270217390866" -LUN 3 -VM $vm | Update-AzureVM	
+```
 
 **注意：**
 
@@ -51,13 +53,17 @@ wacn.date: 06/08/2016
 
 ##如何修改附加磁盘的大小
 
-    #测试前"pstest-pstest-0-201601270217390866"为 1GB	
+```
+#测试前"pstest-pstest-0-201601270217390866"为 1GB	
 
-    Update-AzureDisk -DiskName "pstest-pstest-0-201601270217390866" –ResizedSizeInGB 5 –label "resize"
+Update-AzureDisk -DiskName "pstest-pstest-0-201601270217390866" –ResizedSizeInGB 5 –label "resize"
+```
 
 通过 Get_AzureDisk 查看结果
 
-    Get-AzureDisk | Where-Object {($_.DiskName -eq 'pstest-pstest-0-201601270217390866')} | Format-Table -auto "DiskName","DiskSizeInGB","AttachedTo"	
+```
+Get-AzureDisk | Where-Object {($_.DiskName -eq 'pstest-pstest-0-201601270217390866')} | Format-Table -auto "DiskName","DiskSizeInGB","AttachedTo"	
+```
 
 ![](./media/aog-virtual-machines-attach-vhd/resize-disk.PNG)	
 
@@ -70,7 +76,9 @@ wacn.date: 06/08/2016
 
 #如何移除数据磁盘
 
-    Remove-AzureDataDisk -LUN 0 -VM $vm | Update-AzureVM
+```
+Remove-AzureDataDisk -LUN 0 -VM $vm | Update-AzureVM
+```
 
 **注意：**
 

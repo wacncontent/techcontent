@@ -121,9 +121,11 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 在 `wp-config.php` 文件中，将以下代码添加到该文件末尾附近停止编辑备注的上方。
 
-    $memcached_servers = array(
-        'default' => array('localhost:' . getenv("MEMCACHESHIM_PORT"))
-    );
+```
+$memcached_servers = array(
+    'default' => array('localhost:' . getenv("MEMCACHESHIM_PORT"))
+);
+```
 
 粘贴此代码后，monaco 会自动保存该文档。
 
@@ -167,7 +169,9 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 打开你选择的命令行控制台并键入以下命令：
 
-    redis-cli -h <hostname-for-redis-cache> -a <primary-key-for-redis-cache> -p 6379
+```
+redis-cli -h <hostname-for-redis-cache> -a <primary-key-for-redis-cache> -p 6379
+```
 
 将 **&lt;hostname-for-redis-cache&gt;** 替换为实际的 xxxxx.redis.cache.chinacloudapi.cn 主机名，将 **&lt;primary-key-for-redis-cache&gt;** 替换为缓存的访问密钥，然后按 **Enter**。CLI 连接到 Redis 缓存实例后，发出任何 Redis 命令。在下面的屏幕截图中，我已选择列出密钥。
 

@@ -44,7 +44,9 @@ ms.author: dariagrigoriu
 
 6. 使用文本编辑器打开发布配置文件，并获取以下值。
 
-        userName="$<YOUR_WEB_APP>" userPWD="<SOME_BIG_RANDOM_TOKEN>"
+    ```
+    userName="$<YOUR_WEB_APP>" userPWD="<SOME_BIG_RANDOM_TOKEN>"
+    ```
 
 7. 在你的 GitHub 存储库页面上，单击“设置”，选择“Webhook 与服务”，然后单击“添加 Webhook”
 

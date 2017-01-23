@@ -51,38 +51,46 @@ ms.author: sdanie
 
 Redics 缓存的位置。为获得最佳性能，请使用要与缓存配合使用的应用所在的同一位置。
 
-    "redisCacheLocation": {
-      "type": "string"
-    }
+```
+"redisCacheLocation": {
+  "type": "string"
+}
+```
 
 ### existingDiagnosticsStorageAccountName
 
 要用于诊断的现有存储帐户的名称。
 
-    "existingDiagnosticsStorageAccountName": {
-      "type": "string"
-    }
+```
+"existingDiagnosticsStorageAccountName": {
+  "type": "string"
+}
+```
 
 ### enableNonSslPort
 
 一个布尔值，该值指示是否允许通过非 SSL 端口访问。
 
-    "enableNonSslPort": {
-      "type": "bool"
-    }
+```
+"enableNonSslPort": {
+  "type": "bool"
+}
+```
 
 ### diagnosticsStatus
 
 一个值，该值指示是否启用诊断。使用 ON 或 OFF。
 
-    "diagnosticsStatus": {
-      "type": "string",
-      "defaultValue": "ON",
-      "allowedValues": [
-            "ON",
-            "OFF"
-        ]
-    }
+```
+"diagnosticsStatus": {
+  "type": "string",
+  "defaultValue": "ON",
+  "allowedValues": [
+        "ON",
+        "OFF"
+    ]
+}
+```
 
 ## 要部署的资源
 
@@ -90,35 +98,37 @@ Redics 缓存的位置。为获得最佳性能，请使用要与缓存配合使�
 
 创建 Azure Redis 缓存
 
-    {
-      "apiVersion": "2015-08-01",
-      "name": "[parameters('redisCacheName')]",
-      "type": "Microsoft.Cache/Redis",
-      "location": "[parameters('redisCacheLocation')]",
-      "properties": {
-        "enableNonSslPort": "[parameters('enableNonSslPort')]",
-        "sku": {
-          "capacity": "[parameters('redisCacheCapacity')]",
-          "family": "[parameters('redisCacheFamily')]",
-          "name": "[parameters('redisCacheSKU')]"
-        }
-      },
-      "resources": [
-        {
-          "apiVersion": "2015-07-01",
-          "type": "Microsoft.Cache/redis/providers/diagnosticsettings",
-          "name": "[concat(parameters('redisCacheName'), '/Microsoft.Insights/service')]",
-          "location": "[parameters('redisCacheLocation')]",
-          "dependsOn": [
-            "[concat('Microsoft.Cache/Redis/', parameters('redisCacheName'))]"
-          ],
-          "properties": {
-            "status": "[parameters('diagnosticsStatus')]",
-            "storageAccountName": "[parameters('existingDiagnosticsStorageAccountName')]"
-          }
-        }
-      ]
+```
+{
+  "apiVersion": "2015-08-01",
+  "name": "[parameters('redisCacheName')]",
+  "type": "Microsoft.Cache/Redis",
+  "location": "[parameters('redisCacheLocation')]",
+  "properties": {
+    "enableNonSslPort": "[parameters('enableNonSslPort')]",
+    "sku": {
+      "capacity": "[parameters('redisCacheCapacity')]",
+      "family": "[parameters('redisCacheFamily')]",
+      "name": "[parameters('redisCacheSKU')]"
     }
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-07-01",
+      "type": "Microsoft.Cache/redis/providers/diagnosticsettings",
+      "name": "[concat(parameters('redisCacheName'), '/Microsoft.Insights/service')]",
+      "location": "[parameters('redisCacheLocation')]",
+      "dependsOn": [
+        "[concat('Microsoft.Cache/Redis/', parameters('redisCacheName'))]"
+      ],
+      "properties": {
+        "status": "[parameters('diagnosticsStatus')]",
+        "storageAccountName": "[parameters('existingDiagnosticsStorageAccountName')]"
+      }
+    }
+  ]
+}
+```
 
 ## 运行部署的命令
 
@@ -126,10 +136,14 @@ Redics 缓存的位置。为获得最佳性能，请使用要与缓存配合使�
 
 ### PowerShell
 
-    New-AzureRmResourceGroupDeployment -TemplateFile path/to/azuredeploy.json -ResourceGroupName ExampleDeployGroup -redisCacheName ExampleCache
+```
+New-AzureRmResourceGroupDeployment -TemplateFile path/to/azuredeploy.json -ResourceGroupName ExampleDeployGroup -redisCacheName ExampleCache
+```
 
 ### Azure CLI
 
-    azure group deployment create --template-file path/to/azuredeploy.json -g ExampleDeployGroup
+```
+azure group deployment create --template-file path/to/azuredeploy.json -g ExampleDeployGroup
+```
 
 <!---HONumber=Mooncake_0829_2016-->

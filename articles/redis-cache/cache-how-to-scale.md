@@ -76,7 +76,9 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 
 修改 `Size`、`Sku` 或 `ShardCount` 属性后，可以在 PowerShell 中使用 [Set-AzureRmRedisCache](https://msdn.microsoft.com/zh-cn/library/azure/mt634518.aspx) cmdlet 缩放 Azure Redis 缓存实例。以下示例演示了如何将名为 `myCache` 的缓存缩放为 2.5 GB 缓存。
 
-    Set-AzureRmRedisCache -ResourceGroupName myGroup -Name myCache -Size 2.5GB
+```
+Set-AzureRmRedisCache -ResourceGroupName myGroup -Name myCache -Size 2.5GB
+```
 
 有关使用 PowerShell 进行缩放的详细信息，请参阅[使用 PowerShell 缩放 Redis 缓存](./cache-howto-manage-redis-cache-powershell.md#scale)。
 
@@ -90,23 +92,25 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 
 若要使用 [Azure 管理库 (MAML)](http://azure.microsoft.com/updates/management-libraries-for-net-release-announcement/) 缩放 Azure Redis 缓存实例，请调用 `IRedisOperations.CreateOrUpdate` 方法并传入 `RedisProperties.SKU.Capacity` 的新大小。
 
-    static void Main(string[] args)
-    {
-        // For instructions on getting the access token, see
-        // /documentation/articles/cache-configure/#access-keys
-        string token = GetAuthorizationHeader();
+```
+static void Main(string[] args)
+{
+    // For instructions on getting the access token, see
+    // /documentation/articles/cache-configure/#access-keys
+    string token = GetAuthorizationHeader();
 
-        TokenCloudCredentials creds = new TokenCloudCredentials(subscriptionId,token);
+    TokenCloudCredentials creds = new TokenCloudCredentials(subscriptionId,token);
 
-        RedisManagementClient client = new RedisManagementClient(creds);
-        var redisProperties = new RedisProperties();
+    RedisManagementClient client = new RedisManagementClient(creds);
+    var redisProperties = new RedisProperties();
 
-        // To scale, set a new size for the redisSKUCapacity parameter.
-        redisProperties.Sku = new Sku(redisSKUName,redisSKUFamily,redisSKUCapacity);
-        redisProperties.RedisVersion = redisVersion;
-        var redisParams = new RedisCreateOrUpdateParameters(redisProperties, redisCacheRegion);
-        client.Redis.CreateOrUpdate(resourceGroupName,cacheName, redisParams);
-    }
+    // To scale, set a new size for the redisSKUCapacity parameter.
+    redisProperties.Sku = new Sku(redisSKUName,redisSKUFamily,redisSKUCapacity);
+    redisProperties.RedisVersion = redisVersion;
+    var redisParams = new RedisCreateOrUpdateParameters(redisProperties, redisCacheRegion);
+    client.Redis.CreateOrUpdate(resourceGroupName,cacheName, redisParams);
+}
+```
 
 有关详细信息，请参阅[使用 MAML 管理 Redis 缓存](https://github.com/rustd/RedisSamples/tree/master/ManageCacheUsingMAML)示例。
 

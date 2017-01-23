@@ -100,50 +100,56 @@ ms.author: cephalin
     > 如果现在离开此页，将无法再次访问此客户端密钥。
 1. 使用 REST API 配置应用：从以下 URL 获取。
 
-        https://management.chinacloudapi.cn/subscriptions/<Subscription id>/resourceGroups/<resource group>/providers/Microsoft.Web/sites/<you app>/config/authsettings/list?api-version=2015-08-01
+    ```
+    https://management.chinacloudapi.cn/subscriptions/<Subscription id>/resourceGroups/<resource group>/providers/Microsoft.Web/sites/<you app>/config/authsettings/list?api-version=2015-08-01
+    ```
 2. 将出现类似于下面的内容：
 
-        {
-        "id": "/subscriptions/<Subscription id>/resourceGroups/<resource group>/providers/Microsoft.Web/sites/<you app>/config/authsettings",
-        "name": "authsettings",
-        "type": "Microsoft.Web/sites/config",
-        "location": "East Asia",
-        "tags": {
-            "hidden-related:/subscriptions/<Subscription id>/resourcegroups/<resource group>/providers/Microsoft.Web/serverfarms/<app service plan>": "empty"
-        },
-        "properties": {
-            "enabled": false,
-            "httpApiPrefixPath": null,
-            "unauthenticatedClientAction": null,
-            "tokenStoreEnabled": null,
-            "allowedExternalRedirectUrls": null,
-            "defaultProvider": null,
-            "clientId": null,
-            "clientSecret": null,
-            "issuer": null,
-            "allowedAudiences": null,
-            "additionalLoginParams": null,
-            "isAadAutoProvisioned": false,
-            "googleClientId": null,
-            "googleClientSecret": null,
-            "googleOAuthScopes": null,
-            "facebookAppId": null,
-            "facebookAppSecret": null,
-            "facebookOAuthScopes": null,
-            "twitterConsumerKey": null,
-            "twitterConsumerSecret": null,
-            "microsoftAccountClientId": null,
-            "microsoftAccountClientSecret": null,
-            "microsoftAccountOAuthScopes": null
-        }
-        }
+    ```
+    {
+    "id": "/subscriptions/<Subscription id>/resourceGroups/<resource group>/providers/Microsoft.Web/sites/<you app>/config/authsettings",
+    "name": "authsettings",
+    "type": "Microsoft.Web/sites/config",
+    "location": "East Asia",
+    "tags": {
+        "hidden-related:/subscriptions/<Subscription id>/resourcegroups/<resource group>/providers/Microsoft.Web/serverfarms/<app service plan>": "empty"
+    },
+    "properties": {
+        "enabled": false,
+        "httpApiPrefixPath": null,
+        "unauthenticatedClientAction": null,
+        "tokenStoreEnabled": null,
+        "allowedExternalRedirectUrls": null,
+        "defaultProvider": null,
+        "clientId": null,
+        "clientSecret": null,
+        "issuer": null,
+        "allowedAudiences": null,
+        "additionalLoginParams": null,
+        "isAadAutoProvisioned": false,
+        "googleClientId": null,
+        "googleClientSecret": null,
+        "googleOAuthScopes": null,
+        "facebookAppId": null,
+        "facebookAppSecret": null,
+        "facebookOAuthScopes": null,
+        "twitterConsumerKey": null,
+        "twitterConsumerSecret": null,
+        "microsoftAccountClientId": null,
+        "microsoftAccountClientSecret": null,
+        "microsoftAccountOAuthScopes": null
+    }
+    }
+    ```
 13. 按如下所示更新 `clientSecret` 和 `additionalLoginParams` 属性。
 
-        ...
-        "clientSecret": "<client key from the Azure Active Directory application>",
-        ...
-        "additionalLoginParams": ["response_type=code id_token", "resource=https://graph.chinacloudapi.cn"],
-        ...
+    ```
+    ...
+    "clientSecret": "<client key from the Azure Active Directory application>",
+    ...
+    "additionalLoginParams": ["response_type=code id_token", "resource=https://graph.chinacloudapi.cn"],
+    ...
+    ```
 8. 将 json 放置在 URL 的上面。
 17. 现在，若要测试是否获得了用于访问 Azure Active Directory 图形 API 的授权令牌，请在浏览器中导航到 **https://&lt;*appname*>.chinacloudsites.cn/.auth/me**。如果一切都配置正确，应会在 JSON 响应中看到 `access_token` 属性。
 
@@ -166,21 +172,25 @@ ms.author: cephalin
      public class WorkItem
      {
 
-         [Key]
-         public int ItemID { get; set; }
-         public string AssignedToID { get; set; }
-         public string AssignedToName { get; set; }
-         public string Description { get; set; }
-         public WorkItemStatus Status { get; set; }
+     ```
+     [Key]
+     public int ItemID { get; set; }
+     public string AssignedToID { get; set; }
+     public string AssignedToName { get; set; }
+     public string Description { get; set; }
+     public WorkItemStatus Status { get; set; }
+     ```
      }
 
      public enum WorkItemStatus
      {
 
-         Open,
-         Investigating,
-         Resolved,
-         Closed
+     ```
+     Open,
+     Investigating,
+     Resolved,
+     Closed
+     ```
      }
 2. 生成项目，以便能够通过 Visual Studio 中的基架逻辑访问你的新模型。
 3. 将新的基架项 `WorkItemsController` 添加到 ~\\Controllers 文件夹（右键单击“控制器”，指向“添加”，然后选择“新建基架项”）。
@@ -215,35 +225,37 @@ ms.author: cephalin
                &lt;/div>
            &lt;/div>
 
-           &lt;div class="form-group">
-               @Html.LabelFor(model => model.AssignedToName, htmlAttributes: new { @class = "control-label col-md-2" })
-               &lt;div class="col-md-10">
-                   @Html.EditorFor(model => model.AssignedToName, new { htmlAttributes = new { @class = "form-control" } })
-                   @Html.ValidationMessageFor(model => model.AssignedToName, "", new { @class = "text-danger" })
-               &lt;/div>
+       ```
+       &lt;div class="form-group">
+           @Html.LabelFor(model => model.AssignedToName, htmlAttributes: new { @class = "control-label col-md-2" })
+           &lt;div class="col-md-10">
+               @Html.EditorFor(model => model.AssignedToName, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.AssignedToName, "", new { @class = "text-danger" })
            &lt;/div>
+       &lt;/div>
 
-           &lt;div class="form-group">
-               @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-               &lt;div class="col-md-10">
-                   @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                   @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-               &lt;/div>
+       &lt;div class="form-group">
+           @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+           &lt;div class="col-md-10">
+               @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
            &lt;/div>
+       &lt;/div>
 
-           &lt;div class="form-group">
-               @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-               &lt;div class="col-md-10">
-                   @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
-                   @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-               &lt;/div>
+       &lt;div class="form-group">
+           @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+           &lt;div class="col-md-10">
+               @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
            &lt;/div>
+       &lt;/div>
 
-           &lt;div class="form-group">
-               &lt;div class="col-md-offset-2 col-md-10">
-                   &lt;input type="submit" value="Create" class="btn btn-default"<mark> id="submit-button"</mark> />
-               &lt;/div>
+       &lt;div class="form-group">
+           &lt;div class="col-md-offset-2 col-md-10">
+               &lt;input type="submit" value="Create" class="btn btn-default"<mark> id="submit-button"</mark> />
            &lt;/div>
+       &lt;/div>
+       ```
        &lt;/div>
       }
 
@@ -258,20 +270,22 @@ ms.author: cephalin
            var maxResultsPerPage = 14;
            var input = document.getElementById("AssignedToName");
 
-           // Access token from request header, and tenantID from claims identity
-           var token = "@Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"]";
-           var tenant ="@(System.Security.Claims.ClaimsPrincipal.Current.Claims
-                           .Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid")
-                           .Select(c => c.Value).SingleOrDefault())";
+      ```
+       // Access token from request header, and tenantID from claims identity
+       var token = "@Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"]";
+       var tenant ="@(System.Security.Claims.ClaimsPrincipal.Current.Claims
+                       .Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid")
+                       .Select(c => c.Value).SingleOrDefault())";
 
-           var picker = new AadPicker(maxResultsPerPage, input, token, tenant);
+       var picker = new AadPicker(maxResultsPerPage, input, token, tenant);
 
-           // Submit the selected user/group to be asssigned.
-           $("#submit-button").click({ picker: picker }, function () {
-               if (!picker.Selected())
-                   return;
-               $("#main-form").get()[0].elements["AssignedToID"].value = picker.Selected().objectId;
-           });
+       // Submit the selected user/group to be asssigned.
+       $("#submit-button").click({ picker: picker }, function () {
+           if (!picker.Selected())
+               return;
+           $("#main-form").get()[0].elements["AssignedToID"].value = picker.Selected().objectId;
+       });
+      ```
        &lt;/script></mark>
       }
       </pre>
@@ -313,29 +327,33 @@ ms.author: cephalin
                     "~/Scripts/jquery-ui-{version}.js",
                     "~/Scripts/AadPickerLibrary.js"</mark>));
 
-        bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                    "~/Scripts/jquery.validate*"));
+    ```
+    bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                "~/Scripts/jquery.validate*"));
 
-        // Use the development version of Modernizr to develop with and learn from.Then, when you're
-        // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-        bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                    "~/Scripts/modernizr-*"));
+    // Use the development version of Modernizr to develop with and learn from.Then, when you're
+    // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+    bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                "~/Scripts/modernizr-*"));
 
-        bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                    "~/Scripts/bootstrap.js",
-                    "~/Scripts/respond.js"));
+    bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/respond.js"));
 
-        bundles.Add(new StyleBundle("~/Content/css").Include(
-                    "~/Content/bootstrap.css",
-                    "~/Content/site.css"<mark>,
-                    "~/Content/themes/base/jquery-ui.css"</mark>));
+    bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/site.css"<mark>,
+                "~/Content/themes/base/jquery-ui.css"</mark>));
+    ```
     }
     </pre>
 
     还可以使用更高效的方式管理应用中的 JavaScript 和 CSS 文件。但是，为简单起见，下面只使用加载了每个视图的捆绑包。
 14. 最后，在 ~\\Global.asax 中的 `Application_Start()` 方法内添加以下代码行。对每个命名解析错误单击 `Ctrl`+`.` 可进行修复。
 
-        AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+    ```
+    AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+    ```
 
     > [!NOTE]
     之所以需要这一行代码，是因为默认的 MVC 模板对某些操作使用 <code>[ValidateAntiForgeryToken]</code> 装饰。由于 Brock Allen 在 [MVC 4, AntiForgeryToken and Claims（MVC 4、AntiForgeryToken 和声明）](http://brockallen.com/2012/07/08/mvc-4-antiforgerytoken-and-claims/)中所述的行为，HTTP POST 可能无法通过防伪令牌验证，因为：

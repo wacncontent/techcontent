@@ -46,28 +46,34 @@ ms.author: magoedte;bwren
 
 可以在 Windows PowerShell 中使用 [Start-AzureAutomationRunbook](http://msdn.microsoft.com/zh-cn/library/azure/dn690259.aspx) 启动 Runbook。以下示例代码将启动名为 Test-Runbook 的 Runbook。
 
-    Start-AzureAutomationRunbook –AutomationAccountName "MyAutomationAccount" –Name "Test-Runbook"
+```
+Start-AzureAutomationRunbook –AutomationAccountName "MyAutomationAccount" –Name "Test-Runbook"
+```
 
 Start-AzureAutomationRunbook 将返回一个作业对象，启动 Runbook 后，你可以使用该对象来跟踪 Runbook 的状态。然后可以将此作业对象与 [Get-AzureAutomationJob](http://msdn.microsoft.com/zh-cn/library/azure/dn690263.aspx) 结合使用来确定作业的状态，并将它与 [Get-AzureAutomationJobOutput](http://msdn.microsoft.com/zh-cn/library/azure/dn690268.aspx) 结合使用以获取作业的输出。以下示例代码将启动名为 Test-Runbook 的 Runbook，等待它完成，然后显示其输出。
 
-    $runbookName = "Test-Runbook"
-    $AutomationAcct = "MyAutomationAccount"
+```
+$runbookName = "Test-Runbook"
+$AutomationAcct = "MyAutomationAccount"
 
-    $job = Start-AzureAutomationRunbook -AutomationAccountName $AutomationAcct -Name $runbookName
+$job = Start-AzureAutomationRunbook -AutomationAccountName $AutomationAcct -Name $runbookName
 
-    $doLoop = $true
-    While ($doLoop) {
-       $job = Get-AzureAutomationJob -AutomationAccountName $AutomationAcct -Id $job.Id
-       $status = $job.Status
-       $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped"))
-    }
+$doLoop = $true
+While ($doLoop) {
+   $job = Get-AzureAutomationJob -AutomationAccountName $AutomationAcct -Id $job.Id
+   $status = $job.Status
+   $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped"))
+}
 
-    Get-AzureAutomationJobOutput -AutomationAccountName $AutomationAcct -Id $job.Id -Stream Output
+Get-AzureAutomationJobOutput -AutomationAccountName $AutomationAcct -Id $job.Id -Stream Output
+```
 
 如果 Runbook 需要参数，则你必须以[哈希表](http://technet.microsoft.com/zh-cn/library/hh847780.aspx)的形式提供参数，其中，哈希表的密钥与参数名称匹配，值为参数值。以下示例演示如何启动包含两个名称分别为 FirstName 和 LastName 的字符串参数、一个名为 RepeatCount 的整数和一个名为 Show 的布尔参数的 Runbook。有关参数的其他信息，请参阅下面的 [Runbook 参数](#Runbook-parameters)。
 
-    $params = @{"FirstName"="Joe";"LastName"="Smith";"RepeatCount"=2;"Show"=$true}
-    Start-AzureAutomationRunbook -AutomationAccountName "MyAutomationAccount" -Name "Test-Runbook" -Parameters $params
+```
+$params = @{"FirstName"="Joe";"LastName"="Smith";"RepeatCount"=2;"Show"=$true}
+Start-AzureAutomationRunbook -AutomationAccountName "MyAutomationAccount" -Name "Test-Runbook" -Parameters $params
+```
 
 ## <a name="runbook-parameters" id="Runbook-parameters"></a> Runbook 参数
 
@@ -81,30 +87,36 @@ Azure 自动化 Web 服务将为使用特定数据类型的参数提供特殊功
 
 请考虑以下接受名为 user 的参数的测试 Runbook。
 
-    Workflow Test-Parameters
-    {
-       param ( 
-          [Parameter(Mandatory=$true)][object]$user
-       )
-    $userObject = $user | ConvertFrom-JSON
-    if ($userObject.Show) {
-        foreach ($i in 1..$userObject.RepeatCount) {
-            $userObject.FirstName
-            $userObject.LastName
-            }
-        } 
-    }
+```
+Workflow Test-Parameters
+{
+   param ( 
+      [Parameter(Mandatory=$true)][object]$user
+   )
+$userObject = $user | ConvertFrom-JSON
+if ($userObject.Show) {
+    foreach ($i in 1..$userObject.RepeatCount) {
+        $userObject.FirstName
+        $userObject.LastName
+        }
+    } 
+}
+```
 
 可为 user 参数使用以下文本。
 
-    {"FirstName":"Joe","LastName":"Smith","RepeatCount":2,"Show":true}
+```
+{"FirstName":"Joe","LastName":"Smith","RepeatCount":2,"Show":true}
+```
 
 这会导致生成以下输出。
 
-    Joe
-    Smith
-    Joe
-    Smith
+```
+Joe
+Smith
+Joe
+Smith
+```
 
 ### 数组
 
@@ -112,29 +124,35 @@ Azure 自动化 Web 服务将为使用特定数据类型的参数提供特殊功
 
 请考虑以下接受名为 *user* 的参数的测试 Runbook。
 
-    Workflow Test-Parameters
-    {
-       param ( 
-          [Parameter(Mandatory=$true)][array]$user
-       )
-        if ($user[3]) {
-            foreach ($i in 1..$user[2]) {
-                $ user[0]
-                $ user[1]
-            }
-        } 
-    }
+```
+Workflow Test-Parameters
+{
+   param ( 
+      [Parameter(Mandatory=$true)][array]$user
+   )
+    if ($user[3]) {
+        foreach ($i in 1..$user[2]) {
+            $ user[0]
+            $ user[1]
+        }
+    } 
+}
+```
 
 可为 user 参数使用以下文本。
 
-    ["Joe","Smith",2,true]
+```
+["Joe","Smith",2,true]
+```
 
 这会导致生成以下输出。
 
-    Joe
-    Smith
-    Joe
-    Smith
+```
+Joe
+Smith
+Joe
+Smith
+```
 
 ### 凭据
 
@@ -142,21 +160,27 @@ Azure 自动化 Web 服务将为使用特定数据类型的参数提供特殊功
 
 请考虑以下接受名为 credential 的参数的测试 Runbook。
 
-    Workflow Test-Parameters
-    {
-       param ( 
-          [Parameter(Mandatory=$true)][PSCredential]$credential
-       )
-       $credential.UserName
-    }
+```
+Workflow Test-Parameters
+{
+   param ( 
+      [Parameter(Mandatory=$true)][PSCredential]$credential
+   )
+   $credential.UserName
+}
+```
 
 假设存在名为 *My Credential* 的凭据资产，则可为 user 参数使用以下文本。
 
-    My Credential
+```
+My Credential
+```
 
 假设凭据中的用户名为 *jsmith*，则会导致生成以下输出。
 
-    jsmith
+```
+jsmith
+```
 
 ## 后续步骤
 

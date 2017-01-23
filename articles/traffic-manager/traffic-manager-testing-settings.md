@@ -35,7 +35,9 @@ ms.author: sewhee
 2. 键入 `ipconfig /flushdns` 以刷新 DNS 解析程序缓存。
 3. 键入 `nslookup <your Traffic Manager domain name>`。例如，以下命令将检查前缀为 *myapp.contoso* 的域名
 
-        nslookup myapp.contoso.trafficmanager.cn
+    ```
+    nslookup myapp.contoso.trafficmanager.cn
+    ```
 
     典型的结果会显示以下信息：
 

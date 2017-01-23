@@ -23,18 +23,20 @@ wacn.date: 10/28/2016
 
     测试代码：
 
-            //file 文件测试
-            String filePath1 = "E:\\Background\\linux-087.jpg";
-            CloudFile cloudFile1 = rootDir.GetFileReference("image-03.jpg");
-            cloudFile1.UploadFromFile(filePath1,FileMode.OpenOrCreate);   
-            Console.WriteLine("md5="+cloudFile1.Properties.ContentMD5);
+    ```
+        //file 文件测试
+        String filePath1 = "E:\\Background\\linux-087.jpg";
+        CloudFile cloudFile1 = rootDir.GetFileReference("image-03.jpg");
+        cloudFile1.UploadFromFile(filePath1,FileMode.OpenOrCreate);   
+        Console.WriteLine("md5="+cloudFile1.Properties.ContentMD5);
 
-            //blob 文件测试
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference("file");
-            CloudBlockBlob blob = container.GetBlockBlobReference(@"image-03.jpg");
-            blob.UploadFromFile(filePath1, FileMode.OpenOrCreate);
-            Console.WriteLine("md5=" + blob.Properties.ContentMD5);
+        //blob 文件测试
+        CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+        CloudBlobContainer container = blobClient.GetContainerReference("file");
+        CloudBlockBlob blob = container.GetBlockBlobReference(@"image-03.jpg");
+        blob.UploadFromFile(filePath1, FileMode.OpenOrCreate);
+        Console.WriteLine("md5=" + blob.Properties.ContentMD5);
+    ```
 
     测试结果：
 
@@ -44,18 +46,20 @@ wacn.date: 10/28/2016
 
     测试代码：	
 
-            //file 文件测试
-            final String filePath = "E:\\Background\\linux-087.jpg";
-            CloudFile cloudFile = rootDir.getFileReference("image-04.jpg");
-            cloudFile.uploadFromFile(filePath); 
-            System.out.println("md5="+cloudFile.getProperties().getContentMD5());
+    ```
+        //file 文件测试
+        final String filePath = "E:\\Background\\linux-087.jpg";
+        CloudFile cloudFile = rootDir.getFileReference("image-04.jpg");
+        cloudFile.uploadFromFile(filePath); 
+        System.out.println("md5="+cloudFile.getProperties().getContentMD5());
 
-            //blob 文件测试
-            CloudBlobClient blobClient = account.createCloudBlobClient();
-            CloudBlobContainer container = blobClient.getContainerReference("file");
-            CloudBlockBlob blobFile = container.getBlockBlobReference("image-04.jpg");
-            blobFile.uploadFromFile(filePath);
-            System.out.println("md5="+blobFile.getProperties().getContentMD5());
+        //blob 文件测试
+        CloudBlobClient blobClient = account.createCloudBlobClient();
+        CloudBlobContainer container = blobClient.getContainerReference("file");
+        CloudBlockBlob blobFile = container.getBlockBlobReference("image-04.jpg");
+        blobFile.uploadFromFile(filePath);
+        System.out.println("md5="+blobFile.getProperties().getContentMD5());
+    ```
 
      测试结果：
 

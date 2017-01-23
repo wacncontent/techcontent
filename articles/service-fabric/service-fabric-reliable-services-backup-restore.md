@@ -57,9 +57,11 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 如下所示，**BackupAsync** 采用 **BackupDescription** 对象，用户可以在其中指定完整或增量备份，以及指定在本地创建备份文件夹并准备好移出到某个外部存储时调用的回调函数 **Func<< BackupInfo, CancellationToken, Task<bool>>>**。
 
-    BackupDescription myBackupDescription = new BackupDescription(backupOption.Incremental,this.BackupCallbackAsync);
+```
+BackupDescription myBackupDescription = new BackupDescription(backupOption.Incremental,this.BackupCallbackAsync);
 
-    await this.BackupAsync(myBackupDescription);
+await this.BackupAsync(myBackupDescription);
+```
 
 采用增量备份的请求可能会因 **FabricMissingFullBackupException** 而失败，该异常指示
 
@@ -73,14 +75,16 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 以下代码演示如何使用 **BackupCallbackAsync** 方法将备份上传到 Azure 存储：
 
-    private async Task<bool> BackupCallbackAsync(BackupInfo backupInfo, CancellationToken cancellationToken)
-    {
-        var backupId = Guid.NewGuid();
+```
+private async Task<bool> BackupCallbackAsync(BackupInfo backupInfo, CancellationToken cancellationToken)
+{
+    var backupId = Guid.NewGuid();
 
-        await externalBackupStore.UploadBackupFolderAsync(backupInfo.Directory, backupId, cancellationToken);
+    await externalBackupStore.UploadBackupFolderAsync(backupInfo.Directory, backupId, cancellationToken);
 
-        return true;
-    }
+    return true;
+}
+```
 
 在上面的示例中，**ExternalBackupStore** 是用于与 Azure Blob 存储连接的示例类，**UploadBackupFolderAsync** 是压缩文件夹并将其放在 Azure Blob 存储中的方法。
 
@@ -118,16 +122,18 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 以下是 **OnDataLossAsync** 方法的实现示例：
 
-    protected override async Task<bool> OnDataLossAsync(RestoreContext restoreCtx, CancellationToken cancellationToken)
-    {
-        var backupFolder = await this.externalBackupStore.DownloadLastBackupAsync(cancellationToken);
+```
+protected override async Task<bool> OnDataLossAsync(RestoreContext restoreCtx, CancellationToken cancellationToken)
+{
+    var backupFolder = await this.externalBackupStore.DownloadLastBackupAsync(cancellationToken);
 
-        var restoreDescription = new RestoreDescription(backupFolder);
+    var restoreDescription = new RestoreDescription(backupFolder);
 
-        await restoreCtx.RestoreAsync(restoreDescription);
+    await restoreCtx.RestoreAsync(restoreDescription);
 
-        return true;
-    }
+    return true;
+}
+```
 
 传入到 **RestoreContext.RestoreAsync** 调用的 **RestoreDescription** 包含一个名为 **BackupFolderPath** 的成员。还原单个完整备份时，此 **BackupFolderPath** 应设置为包含完整备份的文件夹的本地路径。还原一个完整备份和一些增量备份时，**BackupFolderPath** 应设置为包含完整备份以及所有增量备份的文件夹的本地路径。如果提供的 **BackupFolderPath** 不包含完整备份，则 **RestoreAsync** 调用可能会引发 **FabricMissingFullBackupException**。如果 **BackupFolderPath** 具有断开的增量备份链，则它还可能会引发 **ArgumentException**。例如，如果它包含完整备份、第一个增量备份和第三个增量备份，但不包含第二个增量备份。
 

@@ -150,29 +150,31 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 
 csharp
 
-    /// <summary>
-    /// Gets the tasks into which to split the job. This is where you inject
-    /// your application-specific logic for decomposing the job into tasks.
-    ///
-    /// The job manager framework invokes the Split method for you; you need
-    /// only to implement it, not to call it yourself. Typically, your
-    /// implementation should return tasks lazily, for example using a C#
-    /// iterator and the "yield return" statement; this allows tasks to be added
-    /// and to start running while splitting is still in progress.
-    /// </summary>
-    /// <returns>The tasks to be added to the job. Tasks are added automatically
-    /// by the job manager framework as they are returned by this method.</returns>
-    public IEnumerable<CloudTask> Split()
-    {
-        // Your code for the split logic goes here.
-        int startFrame = Convert.ToInt32(\_parameters["StartFrame"]);
-        int endFrame = Convert.ToInt32(\_parameters["EndFrame"]);
+```
+/// <summary>
+/// Gets the tasks into which to split the job. This is where you inject
+/// your application-specific logic for decomposing the job into tasks.
+///
+/// The job manager framework invokes the Split method for you; you need
+/// only to implement it, not to call it yourself. Typically, your
+/// implementation should return tasks lazily, for example using a C#
+/// iterator and the "yield return" statement; this allows tasks to be added
+/// and to start running while splitting is still in progress.
+/// </summary>
+/// <returns>The tasks to be added to the job. Tasks are added automatically
+/// by the job manager framework as they are returned by this method.</returns>
+public IEnumerable<CloudTask> Split()
+{
+    // Your code for the split logic goes here.
+    int startFrame = Convert.ToInt32(\_parameters["StartFrame"]);
+    int endFrame = Convert.ToInt32(\_parameters["EndFrame"]);
 
-        for (int i = startFrame; i <= endFrame; i++)
-        {
-            yield return new CloudTask("myTask" + i, "cmd /c dir");
-        }
+    for (int i = startFrame; i <= endFrame; i++)
+    {
+        yield return new CloudTask("myTask" + i, "cmd /c dir");
     }
+}
+```
 
 >[!NOTE]
 > 在 `Split()` 方法中，批注部分是作业管理器模板代码中唯一可修改的部分，方法是添加用于将作业拆分成不同任务的逻辑。如果想要修改模板的其他部分，请确定熟悉 Batch 的工作原理，并先在几个 [Batch 代码示例][github_samples]中试试看。
@@ -231,10 +233,12 @@ Split() 实现具有以下项的访问权限：
 
 csharp
 
-    job.JobManagerTask.EnvironmentSettings = new [] {
-        new EnvironmentSetting("YOUR\_BATCH\_URL", "https://account.region.batch.azure.com"),
-        new EnvironmentSetting("YOUR\_BATCH\_KEY", "{your\_base64\_encoded\_account\_key}"),
-    };
+```
+job.JobManagerTask.EnvironmentSettings = new [] {
+    new EnvironmentSetting("YOUR\_BATCH\_URL", "https://account.region.batch.azure.com"),
+    new EnvironmentSetting("YOUR\_BATCH\_KEY", "{your\_base64\_encoded\_account\_key}"),
+};
+```
 
 **存储凭据**
 
@@ -242,11 +246,13 @@ csharp
 
 csharp
 
-    job.JobManagerTask.EnvironmentSettings = new [] {
-        /* other environment settings */
-        new EnvironmentSetting("LINKED\_STORAGE\_ACCOUNT", "{storageAccountName}"),
-        new EnvironmentSetting("LINKED\_STORAGE\_KEY", "{storageAccountKey}"),
-    };
+```
+job.JobManagerTask.EnvironmentSettings = new [] {
+    /* other environment settings */
+    new EnvironmentSetting("LINKED\_STORAGE\_ACCOUNT", "{storageAccountName}"),
+    new EnvironmentSetting("LINKED\_STORAGE\_KEY", "{storageAccountKey}"),
+};
+```
 
 **作业管理器任务设置**
 
@@ -341,47 +347,49 @@ csharp
 
 csharp
 
-    /// <summary>
-    /// Runs the task processing logic. This is where you inject
-    /// your application-specific logic for decomposing the job into tasks.
-    ///
-    /// The task processor framework invokes the Run method for you; you need
-    /// only to implement it, not to call it yourself. Typically, your
-    /// implementation will execute an external program (from resource files or
-    /// an application package), check the exit code of that program and
-    /// save output files to persistent storage.
-    /// </summary>
-    public async Task<int> Run()
+```
+/// <summary>
+/// Runs the task processing logic. This is where you inject
+/// your application-specific logic for decomposing the job into tasks.
+///
+/// The task processor framework invokes the Run method for you; you need
+/// only to implement it, not to call it yourself. Typically, your
+/// implementation will execute an external program (from resource files or
+/// an application package), check the exit code of that program and
+/// save output files to persistent storage.
+/// </summary>
+public async Task<int> Run()
 
+{
+    try
     {
-        try
+        //Your code for the task processor goes here.
+        var command = $"compare {_parameters["Frame1"]} {_parameters["Frame2"]} compare.gif";
+        using (var process = Process.Start($"cmd /c {command}"))
         {
-            //Your code for the task processor goes here.
-            var command = $"compare {_parameters["Frame1"]} {_parameters["Frame2"]} compare.gif";
-            using (var process = Process.Start($"cmd /c {command}"))
-            {
-                process.WaitForExit();
-                var taskOutputStorage = new TaskOutputStorage(
-                _configuration.StorageAccount,
-                _configuration.JobId,
-                _configuration.TaskId
-                );
-                await taskOutputStorage.SaveAsync(
-                TaskOutputKind.TaskOutput,
-                @"..\stdout.txt",
-                @"stdout.txt"
-                );
-                return process.ExitCode;
-            }
-        }
-        catch (Exception ex)
-        {
-            throw new TaskProcessorException(
-            $"{ex.GetType().Name} exception in run task processor: {ex.Message}",
-            ex
+            process.WaitForExit();
+            var taskOutputStorage = new TaskOutputStorage(
+            _configuration.StorageAccount,
+            _configuration.JobId,
+            _configuration.TaskId
             );
+            await taskOutputStorage.SaveAsync(
+            TaskOutputKind.TaskOutput,
+            @"..\stdout.txt",
+            @"stdout.txt"
+            );
+            return process.ExitCode;
         }
     }
+    catch (Exception ex)
+    {
+        throw new TaskProcessorException(
+        $"{ex.GetType().Name} exception in run task processor: {ex.Message}",
+        ex
+        );
+    }
+}
+```
 
 >[!NOTE]
 > Run() 方法中的批注部分是任务处理器模板代码中唯一可修改的部分，方法是为工作负荷中的任务添加运行逻辑。如果想要修改模板的其他部分，请先熟悉 Batch 的工作原理，方法是查看 Batch 文档并在几个 Batch 代码示例上进行尝试。
@@ -423,10 +431,12 @@ Run() 实现具有以下项的访问权限：
 
 csharp
 
-    job.CommonEnvironmentSettings = new [] {
-        new EnvironmentSetting("LINKED_STORAGE_ACCOUNT", "{storageAccountName}"),
-        new EnvironmentSetting("LINKED_STORAGE_KEY", "{storageAccountKey}"),
-    };
+```
+job.CommonEnvironmentSettings = new [] {
+    new EnvironmentSetting("LINKED_STORAGE_ACCOUNT", "{storageAccountName}"),
+    new EnvironmentSetting("LINKED_STORAGE_KEY", "{storageAccountKey}"),
+};
+```
 
 然后，可以通过 `_configuration.StorageAccount` 属性在 TaskProcessor 类中使用存储帐户。
 

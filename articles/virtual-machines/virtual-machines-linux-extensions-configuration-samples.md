@@ -45,154 +45,172 @@ ms.author: kundanap
 ## VM 扩展的示例模板代码段。
 部署扩展的模板代码段如下所示：
 
+```
+  {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "MyExtension",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[parameters('location')]",
+      "dependsOn": ["[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"],
+      "properties":
       {
-          "type": "Microsoft.Compute/virtualMachines/extensions",
-          "name": "MyExtension",
-          "apiVersion": "2015-05-01-preview",
-          "location": "[parameters('location')]",
-          "dependsOn": ["[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"],
-          "properties":
-          {
-              "publisher": "Publisher Namespace",
-              "type": "extension Name",
-              "typeHandlerVersion": "extension version",
-              "autoUpgradeMinorVersion":true,
-              "settings": {
-                  // Extension specific configuration goes in here.
-              }
+          "publisher": "Publisher Namespace",
+          "type": "extension Name",
+          "typeHandlerVersion": "extension version",
+          "autoUpgradeMinorVersion":true,
+          "settings": {
+              // Extension specific configuration goes in here.
           }
       }
+  }
+```
 
 ## 适用于包含 VM 缩放集的 VM 扩展的示例模板代码段。
 
-          {
-           "type":"Microsoft.Compute/virtualMachineScaleSets",
-          ....
-                 "extensionProfile":{
-                 "extensions":[
-                   {
-                     "name":"extension Name",
-                     "properties":{
-                       "publisher":"Publisher Namespace",
-                       "type":"extension Name",
-                       "typeHandlerVersion":"extension version",
-                       "autoUpgradeMinorVersion":true,
-                       "settings":{
-                       // Extension specific configuration goes in here.
-                       }
-                     }
-                    }
-                  }
+```
+      {
+       "type":"Microsoft.Compute/virtualMachineScaleSets",
+      ....
+             "extensionProfile":{
+             "extensions":[
+               {
+                 "name":"extension Name",
+                 "properties":{
+                   "publisher":"Publisher Namespace",
+                   "type":"extension Name",
+                   "typeHandlerVersion":"extension version",
+                   "autoUpgradeMinorVersion":true,
+                   "settings":{
+                   // Extension specific configuration goes in here.
+                   }
+                 }
                 }
+              }
+            }
+```
 
 在部署此扩展之前，请检查最新的扩展版本，然后将“typeHandlerVersion”替换为当前最新版本。
 
 本文剩余部分提供 Linux VM 扩展的示例配置。
 
 ### CloudLink SecureVM 代理
-          {
-            "publisher": "CloudLinkEMC.SecureVM",
-            "type": "CloudLinkSecureVMLinuxAgent",
-            "typeHandlerVersion": "4.0",
-            "settings": {
-              "CloudLinkCenter" : "specify valid IP/FQDN to CloudLinkCenter"
-            }
-          }
+```
+      {
+        "publisher": "CloudLinkEMC.SecureVM",
+        "type": "CloudLinkSecureVMLinuxAgent",
+        "typeHandlerVersion": "4.0",
+        "settings": {
+          "CloudLinkCenter" : "specify valid IP/FQDN to CloudLinkCenter"
+        }
+      }
+```
 
 ### 适用于 Linux 的 CustomScript 扩展。
-    {
-        "publisher": " Microsoft.OSTCExtensions",
-        "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.3",
-        "settings": {
-            "fileUris": [
-                "http: //Yourstorageaccount.blob.core.chinacloudapi.cn/customscriptfiles/start.ps1"
-            ],
-            "commandToExecute": "powershell.exe-ExecutionPolicyUnrestricted-Filestart.ps1"
-        }
+```
+{
+    "publisher": " Microsoft.OSTCExtensions",
+    "type": "CustomScriptForLinux",
+    "typeHandlerVersion": "1.3",
+    "settings": {
+        "fileUris": [
+            "http: //Yourstorageaccount.blob.core.chinacloudapi.cn/customscriptfiles/start.ps1"
+        ],
+        "commandToExecute": "powershell.exe-ExecutionPolicyUnrestricted-Filestart.ps1"
     }
+}
+```
 
 ### Datadog 代理
-        {
-          "publisher": "Datadog.Agent",
-          "type": "DatadogLinuxAgent",
-          "typeHandlerVersion": "0.4",
-          "settings": {
-            "api_key" : "API Key from https://app.datadoghq.com/account/settings#api"
-          }
-        }
+```
+    {
+      "publisher": "Datadog.Agent",
+      "type": "DatadogLinuxAgent",
+      "typeHandlerVersion": "0.4",
+      "settings": {
+        "api_key" : "API Key from https://app.datadoghq.com/account/settings#api"
+      }
+    }
+```
 
 ### Chef 代理
-        {
-          "publisher": "Chef.Bootstrap.WindowsAzure",
-          "type": "CentosChefClient|LinuxChefClient",
-          "typeHandlerVersion": "1210.12",
-          "settings": {
-            "validation_key" : " Validation key",
-            "client_rb" : "client_rb file",
-            "runlist" : "Optional runlist"
-          }
-        }
+```
+    {
+      "publisher": "Chef.Bootstrap.WindowsAzure",
+      "type": "CentosChefClient|LinuxChefClient",
+      "typeHandlerVersion": "1210.12",
+      "settings": {
+        "validation_key" : " Validation key",
+        "client_rb" : "client_rb file",
+        "runlist" : "Optional runlist"
+      }
+    }
+```
 
 ### VM 访问扩展（密码重置）
 有关更新的架构，请参阅 [VMAccessForLinux 文档](https://github.com/Azure/azure-linux-extensions/tree/master/VMAccess)
 
-        {
-          "publisher": "Microsoft.OSTCExtensions",
-          "type": "VMAccessForLinux",
-          "typeHandlerVersion": "1.2",
-          "protectedSettings": {
-            "username": "(required, string) the name of the user",
-            "password": "(optional, string) the password of the user",
-            "reset_ssh": "(optional, boolean) whether or not reset the ssh",
-            "ssh_key": "(optional, string) the public key of the user, base64 encoded pem",
-            "remove_user": "(optional, string) the user name to remove"
-          }
-        }
+```
+    {
+      "publisher": "Microsoft.OSTCExtensions",
+      "type": "VMAccessForLinux",
+      "typeHandlerVersion": "1.2",
+      "protectedSettings": {
+        "username": "(required, string) the name of the user",
+        "password": "(optional, string) the password of the user",
+        "reset_ssh": "(optional, boolean) whether or not reset the ssh",
+        "ssh_key": "(optional, string) the public key of the user, base64 encoded pem",
+        "remove_user": "(optional, string) the user name to remove"
+      }
+    }
+```
 
 ### OS 修补
 有关更新的架构，请参阅 [OSPatching 文档](https://github.com/Azure/azure-linux-extensions/tree/master/OSPatching)
 
-        {
-        "publisher": "Microsoft.OSTCExtensions",
-        "type": "OSPatchingForLinux",
-        "typeHandlerVersion": "2.9",
-        "Settings": {
-          "disabled": false,
-          "stop": false,
-          "rebootAfterPatch": "RebootIfNeed|Required|NotRequired|Auto",
-          "category": "Important|ImportantAndRecommended",
-          "installDuration": "<hr:min>",
-          "oneoff": false,
-          "intervalOfWeeks": "<number>",
-          "dayOfWeek": "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Everyday",
-          "startTime": "<hr:min>",
-          "vmStatusTest": {
-              "local": false,
-              "idleTestScript": "<path_to_idletestscript>",
-              "healthyTestScript": "<path_to_healthytestscript>"
-          }
-        }
-        }
+```
+    {
+    "publisher": "Microsoft.OSTCExtensions",
+    "type": "OSPatchingForLinux",
+    "typeHandlerVersion": "2.9",
+    "Settings": {
+      "disabled": false,
+      "stop": false,
+      "rebootAfterPatch": "RebootIfNeed|Required|NotRequired|Auto",
+      "category": "Important|ImportantAndRecommended",
+      "installDuration": "<hr:min>",
+      "oneoff": false,
+      "intervalOfWeeks": "<number>",
+      "dayOfWeek": "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Everyday",
+      "startTime": "<hr:min>",
+      "vmStatusTest": {
+          "local": false,
+          "idleTestScript": "<path_to_idletestscript>",
+          "healthyTestScript": "<path_to_healthytestscript>"
+      }
+    }
+    }
+```
 
 ### Linux Diagnostics Extension
 
-        {
-        "storageAccountName": "storage account to receive data",
-        "storageAccountKey": "key of the account",
-        "perfCfg": [
-        {
-            "query": "SELECT PercentAvailableMemory, AvailableMemory, UsedMemory ,PercentUsedSwap FROM SCX_MemoryStatisticalInformation",
-            "table": "LinuxMemory"
-        }
-        ],
-        "fileCfg": [
-        {
-            "file": "/var/log/mysql.err",
-            "table": "mysqlerr"
-        }
-        ]
-        }
+```
+    {
+    "storageAccountName": "storage account to receive data",
+    "storageAccountKey": "key of the account",
+    "perfCfg": [
+    {
+        "query": "SELECT PercentAvailableMemory, AvailableMemory, UsedMemory ,PercentUsedSwap FROM SCX_MemoryStatisticalInformation",
+        "table": "LinuxMemory"
+    }
+    ],
+    "fileCfg": [
+    {
+        "file": "/var/log/mysql.err",
+        "table": "mysqlerr"
+    }
+    ]
+    }
+```
 
 在上述示例中，请将版本号替换为最新版本号。
 

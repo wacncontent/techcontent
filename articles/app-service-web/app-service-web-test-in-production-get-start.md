@@ -69,7 +69,9 @@ ms.author: cephalin
 
 例如，若要让用户选择退出 beta 应用，你可以在网页中插入以下链接：
 
-    <a href="<webappname>.chinacloudsites.cn/?x-ms-routing-name=self">Go back to production app</a>
+```
+<a href="<webappname>.chinacloudsites.cn/?x-ms-routing-name=self">Go back to production app</a>
+```
 
 字符串 `x-ms-routing-name=self` 指定生产槽。一旦客户端浏览器访问此链接，不仅浏览器会重定向到生产槽，后续每个请求也都包含将会话固定到生产槽的 `x-ms-routing-name=self` Cookie。
 
@@ -79,7 +81,9 @@ ms.author: cephalin
 
 若要让用户选择加入 beta 应用，请将相同的查询参数设置为非生产槽的名称，例如：
 
-        <webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
+```
+    <webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
+```
 
 ## 更多资源 ##
 

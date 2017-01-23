@@ -27,35 +27,43 @@ SQL 数据仓库支持对重复执行的语句块使用 [WHILE][WHILE] 循环。
 
 首先，创建一个临时表，其中包含用于标识各个语句的唯一行号：
 
-    CREATE TABLE #tbl
-    WITH
-    ( DISTRIBUTION = ROUND_ROBIN
-    )
-    AS
-    SELECT  ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS Sequence
-    ,       [name]
-    ,       'UPDATE STATISTICS '+QUOTENAME([name]) AS sql_code
-    FROM    sys.tables
-    ;
+```
+CREATE TABLE #tbl
+WITH
+( DISTRIBUTION = ROUND_ROBIN
+)
+AS
+SELECT  ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS Sequence
+,       [name]
+,       'UPDATE STATISTICS '+QUOTENAME([name]) AS sql_code
+FROM    sys.tables
+;
+```
 
 其次，初始化执行循环所需的变量：
 
-    DECLARE @nbr_statements INT = (SELECT COUNT(*) FROM #tbl)
-    ,       @i INT = 1
-    ;
+```
+DECLARE @nbr_statements INT = (SELECT COUNT(*) FROM #tbl)
+,       @i INT = 1
+;
+```
 
 现在，每次对一个语句执行一次循环：
 
-    WHILE   @i <= @nbr_statements
-    BEGIN
-        DECLARE @sql_code NVARCHAR(4000) = (SELECT sql_code FROM #tbl WHERE Sequence = @i);
-        EXEC    sp_executesql @sql_code;
-        SET     @i +=1;
-    END
+```
+WHILE   @i <= @nbr_statements
+BEGIN
+    DECLARE @sql_code NVARCHAR(4000) = (SELECT sql_code FROM #tbl WHERE Sequence = @i);
+    EXEC    sp_executesql @sql_code;
+    SET     @i +=1;
+END
+```
 
 最后，将第一个步骤创建的临时表删除
 
-    DROP TABLE #tbl;
+```
+DROP TABLE #tbl;
+```
 
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 

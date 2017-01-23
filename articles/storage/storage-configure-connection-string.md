@@ -47,14 +47,18 @@ ms.author: marsma
 ## 创建 Azure 存储帐户的连接字符串
 若要创建 Azure 存储帐户的连接字符串，请使用下面的连接字符串格式。该字符串指示是通过 HTTPS（推荐）还是 HTTP 连接到存储帐户，将 *myAccountName* 替换为存储帐户的名称，将 *myAccountKey* 替换为帐户访问密钥：
 
-    DefaultEndpointsProtocol=[http|https];AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.chinacloudapi.cn
+```
+DefaultEndpointsProtocol=[http|https];AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.chinacloudapi.cn
+```
 
 例如，你的连接字符串将类似于以下示例连接字符串：
 
-    DefaultEndpointsProtocol=https;
-    AccountName=storagesample;
-    AccountKey=<account-key>;
-    EndpointSuffix=core.chinacloudapi.cn
+```
+DefaultEndpointsProtocol=https;
+AccountName=storagesample;
+AccountKey=<account-key>;
+EndpointSuffix=core.chinacloudapi.cn
+```
 
 > [!NOTE]
 > Azure 存储空间连接字符串同时支持 HTTP 和 HTTPS，但强烈建议使用 HTTPS。
@@ -65,32 +69,36 @@ ms.author: marsma
 ## 创建显式存储终结点的连接字符串
 可以在连接字符串中显式指定服务终结点，而不使用默认终结点。若要创建指定显式终结点的连接字符串，请使用以下格式为每个服务指定完整的服务终结点，包括协议规范（HTTPS（建议）或 HTTP）：
 
-    DefaultEndpointsProtocol=[http|https];
-    BlobEndpoint=myBlobEndpoint;
-    QueueEndpoint=myQueueEndpoint;
-    TableEndpoint=myTableEndpoint;
-    FileEndpoint=myFileEndpoint;
-    AccountName=myAccountName;
-    AccountKey=myAccountKey
+```
+DefaultEndpointsProtocol=[http|https];
+BlobEndpoint=myBlobEndpoint;
+QueueEndpoint=myQueueEndpoint;
+TableEndpoint=myTableEndpoint;
+FileEndpoint=myFileEndpoint;
+AccountName=myAccountName;
+AccountKey=myAccountKey
+```
 
 如果你已将 Blob 存储终结点映射到自定义域，则可能需要指定显式终结点。在这种情况下，你可以在连接字符串中指定 Blob 存储的自定义终结点，并选择地指定另一个服务的默认终结点（如果应用程序使用这些终结点）。
 
 下面是用于指定 Blob 服务的显式终结点的有效连接字符串的示例：
 
-    # Blob endpoint only
-    DefaultEndpointsProtocol=https;
-    BlobEndpoint=www.mydomain.com;
-    AccountName=storagesample;
-    AccountKey=account-key
+```
+# Blob endpoint only
+DefaultEndpointsProtocol=https;
+BlobEndpoint=www.mydomain.com;
+AccountName=storagesample;
+AccountKey=account-key
 
-    # All service endpoints
-    DefaultEndpointsProtocol=https;
-    BlobEndpoint=www.mydomain.com;
-    FileEndpoint=myaccount.file.core.chinacloudapi.cn;
-    QueueEndpoint=myaccount.queue.core.chinacloudapi.cn;
-    TableEndpoint=myaccount;
-    AccountName=storagesample;
-    AccountKey=account-key
+# All service endpoints
+DefaultEndpointsProtocol=https;
+BlobEndpoint=www.mydomain.com;
+FileEndpoint=myaccount.file.core.chinacloudapi.cn;
+QueueEndpoint=myaccount.queue.core.chinacloudapi.cn;
+TableEndpoint=myaccount;
+AccountName=storagesample;
+AccountKey=account-key
+```
 
 连接字符串中列出的终结点值用于构造 BLOB 服务的请求 URI，还指示返回到代码的任何 URI 形式。
 
@@ -99,14 +107,18 @@ ms.author: marsma
 ### 创建含终结点后缀的连接字符串
 若要针对具有不同终结点后缀的地区或实例内的存储服务创建一个连接字符串，例如针对 Azure 中国或 Azure Governance，请使用以下连接字符串格式。该字符串指示是通过 HTTP 还是 HTTPS 连接到存储帐户，将 *myAccountName* 替换为存储帐户的名称，将 *myAccountKey* 替换为帐户访问密钥，以及将 *mySuffix* 替换为 URI 后缀：
 
-    DefaultEndpointsProtocol=[http|https];AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=mySuffix;
+```
+DefaultEndpointsProtocol=[http|https];AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=mySuffix;
+```
 
 例如，你的连接字符串应类似于以下连接字符串：
 
-    DefaultEndpointsProtocol=https;
-    AccountName=storagesample;
-    AccountKey=<account-key>;
-    EndpointSuffix=core.chinacloudapi.cn;
+```
+DefaultEndpointsProtocol=https;
+AccountName=storagesample;
+AccountKey=<account-key>;
+EndpointSuffix=core.chinacloudapi.cn;
+```
 
 ## 分析连接字符串
 [!INCLUDE [storage-cloud-configuration-manager-include](../../includes/storage-cloud-configuration-manager-include.md)]

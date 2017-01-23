@@ -94,17 +94,19 @@ ms.author: syamk
 
 1. 在解决方案资源管理器中，打开名为 **requirements.txt** 的文件并将内容替换为：
 
-        flask==0.9
-        flask-mail==0.7.6
-        sqlalchemy==0.7.9
-        flask-sqlalchemy==0.16
-        sqlalchemy-migrate==0.7.2
-        flask-whooshalchemy==0.55a
-        flask-wtf==0.8.4
-        pytz==2013b
-        flask-babel==0.8
-        flup
-        pydocumentdb>=1.0.0
+    ```
+    flask==0.9
+    flask-mail==0.7.6
+    sqlalchemy==0.7.9
+    flask-sqlalchemy==0.16
+    sqlalchemy-migrate==0.7.2
+    flask-whooshalchemy==0.55a
+    flask-wtf==0.8.4
+    pytz==2013b
+    flask-babel==0.8
+    flup
+    pydocumentdb>=1.0.0
+    ```
 2. 保存 **requirements.txt** 文件。
 3. 在解决方案资源管理器中，右键单击“env”，然后单击“使用 requirements.txt 安装”。
 
@@ -112,7 +114,9 @@ ms.author: syamk
 
     安装成功后，输出窗口将显示以下信息：
 
-        Successfully installed Babel-2.3.2 Tempita-0.5.2 WTForms-2.1 Whoosh-2.7.4 blinker-1.4 decorator-4.0.9 flask-0.9 flask-babel-0.8 flask-mail-0.7.6 flask-sqlalchemy-0.16 flask-whooshalchemy-0.55a0 flask-wtf-0.8.4 flup-1.0.2 pydocumentdb-1.6.1 pytz-2013b0 speaklater-1.3 sqlalchemy-0.7.9 sqlalchemy-migrate-0.7.2
+    ```
+    Successfully installed Babel-2.3.2 Tempita-0.5.2 WTForms-2.1 Whoosh-2.7.4 blinker-1.4 decorator-4.0.9 flask-0.9 flask-babel-0.8 flask-mail-0.7.6 flask-sqlalchemy-0.16 flask-whooshalchemy-0.55a0 flask-wtf-0.8.4 flup-1.0.2 pydocumentdb-1.6.1 pytz-2013b0 speaklater-1.3 sqlalchemy-0.7.9 sqlalchemy-migrate-0.7.2
+    ```
 
     > [!NOTE]
     > 在相当少见的情况下，你可能会在输出窗口中看到失败。如果出现此情况，请检查错误是否与清理相关。有时候清理会失败，但安装仍是成功的（在输出窗口中向上滚动以确认这一点）。可以通过[验证虚拟环境](#verify-the-virtual-environment)来检查安装。如果安装失败，但验证成功，则可以继续操作。
@@ -135,14 +139,16 @@ ms.author: syamk
 
     Python
 
-        from flask.ext.wtf import Form
-        from wtforms import RadioField
+    ```
+    from flask.ext.wtf import Form
+    from wtforms import RadioField
 
-        class VoteForm(Form):
-            deploy_preference  = RadioField('Deployment Preference', choices=[
-                ('Web Site', 'Web Site'),
-                ('Cloud Service', 'Cloud Service'),
-                ('Virtual Machine', 'Virtual Machine')], default='Web Site')
+    class VoteForm(Form):
+        deploy_preference  = RadioField('Deployment Preference', choices=[
+            ('Web Site', 'Web Site'),
+            ('Cloud Service', 'Cloud Service'),
+            ('Virtual Machine', 'Virtual Machine')], default='Web Site')
+    ```
 
 ### 将所需的导入添加到 views.py 中
 1. 在“解决方案资源管理器”中，展开 **tutorial** 文件夹并打开 **views.py** 文件。
@@ -150,47 +156,51 @@ ms.author: syamk
 
     Python
 
-        from forms import VoteForm
-        import config
-        import pydocumentdb.document_client as document_client
+    ```
+    from forms import VoteForm
+    import config
+    import pydocumentdb.document_client as document_client
+    ```
 
 ### 创建数据库、集合和文档
 - 还是在 **views.py** 中，将以下代码添加到文件末尾。这将创建窗体使用的数据库。不要删除 **views.py** 中任何现有的代码。仅将其追加到末尾。
 
     Python
 
-        @app.route('/create')
-        def create():
-            """Renders the contact page."""
-            client = document_client.DocumentClient(config.DOCUMENTDB_HOST, {'masterKey': config.DOCUMENTDB_KEY})
+    ```
+    @app.route('/create')
+    def create():
+        """Renders the contact page."""
+        client = document_client.DocumentClient(config.DOCUMENTDB_HOST, {'masterKey': config.DOCUMENTDB_KEY})
 
-            # Attempt to delete the database.  This allows this to be used to recreate as well as create
-            try:
-                db = next((data for data in client.ReadDatabases() if data['id'] == config.DOCUMENTDB_DATABASE))
-                client.DeleteDatabase(db['_self'])
-            except:
-                pass
+        # Attempt to delete the database.  This allows this to be used to recreate as well as create
+        try:
+            db = next((data for data in client.ReadDatabases() if data['id'] == config.DOCUMENTDB_DATABASE))
+            client.DeleteDatabase(db['_self'])
+        except:
+            pass
 
-            # Create database
-            db = client.CreateDatabase({ 'id': config.DOCUMENTDB_DATABASE })
+        # Create database
+        db = client.CreateDatabase({ 'id': config.DOCUMENTDB_DATABASE })
 
-            # Create collection
-            collection = client.CreateCollection(db['_self'],{ 'id': config.DOCUMENTDB_COLLECTION })
+        # Create collection
+        collection = client.CreateCollection(db['_self'],{ 'id': config.DOCUMENTDB_COLLECTION })
 
-            # Create document
-            document = client.CreateDocument(collection['_self'],
-                { 'id': config.DOCUMENTDB_DOCUMENT,
-                  'Web Site': 0,
-                  'Cloud Service': 0,
-                  'Virtual Machine': 0,
-                  'name': config.DOCUMENTDB_DOCUMENT 
-                })
+        # Create document
+        document = client.CreateDocument(collection['_self'],
+            { 'id': config.DOCUMENTDB_DOCUMENT,
+              'Web Site': 0,
+              'Cloud Service': 0,
+              'Virtual Machine': 0,
+              'name': config.DOCUMENTDB_DOCUMENT 
+            })
 
-            return render_template(
-               'create.html',
-                title='Create Page',
-                year=datetime.now().year,
-                message='You just created a new database, collection, and document.  Your old votes have been deleted')
+        return render_template(
+           'create.html',
+            title='Create Page',
+            year=datetime.now().year,
+            message='You just created a new database, collection, and document.  Your old votes have been deleted')
+    ```
 
     > [!TIP]
     > **CreateCollection** 方法采用可选的 **RequestOptions** 作为第三个参数。这可以用于指定集合的产品/服务类型。如果没有提供任何 offerType 值，则将使用默认的产品/服务类型创建集合。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
@@ -200,50 +210,52 @@ ms.author: syamk
 
     Python
 
-        @app.route('/vote', methods=['GET', 'POST'])
-        def vote(): 
-            form = VoteForm()
-            replaced_document ={}
-            if form.validate_on_submit(): # is user submitted vote  
-                client = document_client.DocumentClient(config.DOCUMENTDB_HOST, {'masterKey': config.DOCUMENTDB_KEY})
+    ```
+    @app.route('/vote', methods=['GET', 'POST'])
+    def vote(): 
+        form = VoteForm()
+        replaced_document ={}
+        if form.validate_on_submit(): # is user submitted vote  
+            client = document_client.DocumentClient(config.DOCUMENTDB_HOST, {'masterKey': config.DOCUMENTDB_KEY})
 
-                # Read databases and take first since id should not be duplicated.
-                db = next((data for data in client.ReadDatabases() if data['id'] == config.DOCUMENTDB_DATABASE))
+            # Read databases and take first since id should not be duplicated.
+            db = next((data for data in client.ReadDatabases() if data['id'] == config.DOCUMENTDB_DATABASE))
 
-                # Read collections and take first since id should not be duplicated.
-                coll = next((coll for coll in client.ReadCollections(db['_self']) if coll['id'] == config.DOCUMENTDB_COLLECTION))
+            # Read collections and take first since id should not be duplicated.
+            coll = next((coll for coll in client.ReadCollections(db['_self']) if coll['id'] == config.DOCUMENTDB_COLLECTION))
 
-                # Read documents and take first since id should not be duplicated.
-                doc = next((doc for doc in client.ReadDocuments(coll['_self']) if doc['id'] == config.DOCUMENTDB_DOCUMENT))
+            # Read documents and take first since id should not be duplicated.
+            doc = next((doc for doc in client.ReadDocuments(coll['_self']) if doc['id'] == config.DOCUMENTDB_DOCUMENT))
 
-                # Take the data from the deploy_preference and increment our database
-                doc[form.deploy_preference.data] = doc[form.deploy_preference.data] + 1
-                replaced_document = client.ReplaceDocument(doc['_self'], doc)
+            # Take the data from the deploy_preference and increment our database
+            doc[form.deploy_preference.data] = doc[form.deploy_preference.data] + 1
+            replaced_document = client.ReplaceDocument(doc['_self'], doc)
 
-                # Create a model to pass to results.html
-                class VoteObject:
-                    choices = dict()
-                    total_votes = 0
+            # Create a model to pass to results.html
+            class VoteObject:
+                choices = dict()
+                total_votes = 0
 
-                vote_object = VoteObject()
-                vote_object.choices = {
-                    "Web Site" : doc['Web Site'],
-                    "Cloud Service" : doc['Cloud Service'],
-                    "Virtual Machine" : doc['Virtual Machine']
-                }
-                vote_object.total_votes = sum(vote_object.choices.values())
+            vote_object = VoteObject()
+            vote_object.choices = {
+                "Web Site" : doc['Web Site'],
+                "Cloud Service" : doc['Cloud Service'],
+                "Virtual Machine" : doc['Virtual Machine']
+            }
+            vote_object.total_votes = sum(vote_object.choices.values())
 
-                return render_template(
-                    'results.html', 
-                    year=datetime.now().year, 
-                    vote_object = vote_object)
+            return render_template(
+                'results.html', 
+                year=datetime.now().year, 
+                vote_object = vote_object)
 
-            else :
-                return render_template(
-                    'vote.html', 
-                    title = 'Vote',
-                    year=datetime.now().year,
-                    form = form)
+        else :
+            return render_template(
+                'vote.html', 
+                title = 'Vote',
+                year=datetime.now().year,
+                form = form)
+    ```
 
 ### 创建 HTML 文件
 1. 在“解决方案资源管理器”中的 **tutorial** 文件夹中，右键单击 **templates** 文件夹，单击“添加”，然后单击“新建项”。
@@ -253,64 +265,72 @@ ms.author: syamk
 
     html
 
-        {% extends "layout.html" %}
-        {% block content %}
-        <h2>{{ title }}.</h2>
-        <h3>{{ message }}</h3>
-        <p><a href="{{ url_for('vote') }}" class="btn btn-primary btn-large">Vote &raquo;</a></p>
-        {% endblock %}
+    ```
+    {% extends "layout.html" %}
+    {% block content %}
+    <h2>{{ title }}.</h2>
+    <h3>{{ message }}</h3>
+    <p><a href="{{ url_for('vote') }}" class="btn btn-primary btn-large">Vote &raquo;</a></p>
+    {% endblock %}
+    ```
 
 5. 将以下代码添加到 `<body>` 元素中的 **results.html**。它将显示轮询结果。
 
     html
 
-        {% extends "layout.html" %}
-        {% block content %}
-        <h2>Results of the vote</h2>
-            <br />
-
-        {% for choice in vote_object.choices %}
-        <div class="row">
-            <div class="col-sm-5">{{choice}}</div>
-                <div class="col-sm-5">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{vote_object.choices[choice]}}" aria-valuemin="0" aria-valuemax="{{vote_object.total_votes}}" style="width: {{(vote_object.choices[choice]/vote_object.total_votes)*100}}%;">
-                                    {{vote_object.choices[choice]}}
-                    </div>
-                </div>
-                </div>
-        </div>
-        {% endfor %}
-
+    ```
+    {% extends "layout.html" %}
+    {% block content %}
+    <h2>Results of the vote</h2>
         <br />
-        <a class="btn btn-primary" href="{{ url_for('vote') }}">Vote again?</a>
-        {% endblock %}
+
+    {% for choice in vote_object.choices %}
+    <div class="row">
+        <div class="col-sm-5">{{choice}}</div>
+            <div class="col-sm-5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{vote_object.choices[choice]}}" aria-valuemin="0" aria-valuemax="{{vote_object.total_votes}}" style="width: {{(vote_object.choices[choice]/vote_object.total_votes)*100}}%;">
+                                {{vote_object.choices[choice]}}
+                </div>
+            </div>
+            </div>
+    </div>
+    {% endfor %}
+
+    <br />
+    <a class="btn btn-primary" href="{{ url_for('vote') }}">Vote again?</a>
+    {% endblock %}
+    ```
 
 6. 将以下代码添加到 `<body>` 元素中的 **vote.html**。它将显示轮询并接受投票。注册投票时，控件权将传递到 views.py 中，我们将在该位置识别投票并相应地追加文档。
 
     html
 
-        {% extends "layout.html" %}
-        {% block content %}
-        <h2>What is your favorite way to host an application on Azure?</h2>
-        <form action="" method="post" name="vote">
-            {{form.hidden_tag()}}
-                {{form.deploy_preference}}
-                <button class="btn btn-primary" type="submit">Vote</button>
-        </form>
-        {% endblock %}
+    ```
+    {% extends "layout.html" %}
+    {% block content %}
+    <h2>What is your favorite way to host an application on Azure?</h2>
+    <form action="" method="post" name="vote">
+        {{form.hidden_tag()}}
+            {{form.deploy_preference}}
+            <button class="btn btn-primary" type="submit">Vote</button>
+    </form>
+    {% endblock %}
+    ```
 
 7. 在 **templates** 文件夹中，将 **index.html** 的内容替换为以下内容。这将作为你的应用程序的登录页。
 
     html
 
-        {% extends "layout.html" %}
-        {% block content %}
-        <h2>Python + DocumentDB Voting Application.</h2>
-        <h3>This is a sample DocumentDB voting application using PyDocumentDB</h3>
-        <p><a href="{{ url_for('create') }}" class="btn btn-primary btn-large">Create/Clear the Voting Database &raquo;</a></p>
-        <p><a href="{{ url_for('vote') }}" class="btn btn-primary btn-large">Vote &raquo;</a></p>
-        {% endblock %}
+    ```
+    {% extends "layout.html" %}
+    {% block content %}
+    <h2>Python + DocumentDB Voting Application.</h2>
+    <h3>This is a sample DocumentDB voting application using PyDocumentDB</h3>
+    <p><a href="{{ url_for('create') }}" class="btn btn-primary btn-large">Create/Clear the Voting Database &raquo;</a></p>
+    <p><a href="{{ url_for('vote') }}" class="btn btn-primary btn-large">Vote &raquo;</a></p>
+    {% endblock %}
+    ```
 
 ### 添加配置文件并更改 \_\_init\_\_.py
 1. 在“解决方案资源管理器”中，右键单击 **tutorial** 项目，单击“添加”，再单击“新建项”，选择“空 Python 文件”，然后将该文件命名为 **config.py**。Flask 中的窗体需要此配置文件。也可将其用于提供密钥。但此教程不需要此密钥。
@@ -318,30 +338,36 @@ ms.author: syamk
 
     Python
 
-        CSRF_ENABLED = True
-        SECRET_KEY = 'you-will-never-guess'
+    ```
+    CSRF_ENABLED = True
+    SECRET_KEY = 'you-will-never-guess'
 
-        DOCUMENTDB_HOST = 'https://YOUR_DOCUMENTDB_NAME.documents.azure.com:443/'
-        DOCUMENTDB_KEY = 'YOUR_SECRET_KEY_ENDING_IN_=='
+    DOCUMENTDB_HOST = 'https://YOUR_DOCUMENTDB_NAME.documents.azure.com:443/'
+    DOCUMENTDB_KEY = 'YOUR_SECRET_KEY_ENDING_IN_=='
 
-        DOCUMENTDB_DATABASE = 'voting database'
-        DOCUMENTDB_COLLECTION = 'voting collection'
-        DOCUMENTDB_DOCUMENT = 'voting document'
+    DOCUMENTDB_DATABASE = 'voting database'
+    DOCUMENTDB_COLLECTION = 'voting collection'
+    DOCUMENTDB_DOCUMENT = 'voting document'
+    ```
 
 3. 在 [Azure 门户预览](https://portal.azure.cn/)中，单击“浏览”、“DocumentDB 帐户”导航到“密钥”边栏选项卡，双击要使用的帐户名，然后单击 **Essentials** 区域的“密钥”按钮。在“密钥”边栏选项卡中，复制 **URI** 值并将其粘贴到 **config.py** 文件中，作为 **DOCUMENTDB\_HOST** 属性的值。
 4. 返回到 Azure 门户预览，在“密钥”边栏选项卡中，复制“主密钥”或“辅助密钥”的值，并将其粘贴到 **config.py** 文件，作为 **DOCUMENTDB\_KEY** 属性的值。
 5. 在 **\_\_init\_\_.py** 文件中，添加以下行。
 
-        app.config.from_object('config')
+    ```
+    app.config.from_object('config')
+    ```
 
     因此，该文件的内容应为：
 
     Python
 
-        from flask import Flask
-        app = Flask(__name__)
-        app.config.from_object('config')
-        import tutorial.views
+    ```
+    from flask import Flask
+    app = Flask(__name__)
+    app.config.from_object('config')
+    import tutorial.views
+    ```
 
 6. 添加所有文件后，解决方案资源管理器应如下所示：
 
@@ -386,7 +412,9 @@ ms.author: syamk
 ## 故障排除
 如果这是你在计算机上运行的第一个 Python 应用程序，请确保下列文件夹（或等效的安装位置）包括在 PATH 变量中：
 
-    C:\Python27\site-packages;C:\Python27\;C:\Python27\Scripts;
+```
+C:\Python27\site-packages;C:\Python27\;C:\Python27\Scripts;
+```
 
 如果在投票页上收到了错误，并且已将项目命名为 **tutorial** 以外的名称，请确保 **\_\_init\_\_.py** 引用以下行中正确的项目名称：`import tutorial.view`。
 

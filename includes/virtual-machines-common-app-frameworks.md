@@ -34,8 +34,10 @@
 
 在将括号中的文本替换为资源组名称、位置、部署名称和模板名称以后，运行以下命令即可创建资源组和部署：
 
-    New-AzureRmResourceGroup -Name {resource-group-name} -Location {location}
-    New-AzureRmResourceGroupDeployment -Name {deployment-name} -ResourceGroupName {resource-group-name} -TemplateFile "/path/to/azuredeploy.json"
+```
+New-AzureRmResourceGroup -Name {resource-group-name} -Location {location}
+New-AzureRmResourceGroupDeployment -Name {deployment-name} -ResourceGroupName {resource-group-name} -TemplateFile "/path/to/azuredeploy.json"
+```
 
 运行 **New-AzureRmResourceGroupDeployment** 命令时，系统会提示你输入模板中参数的值。根据具体模板，Azure 可能需花费一些时间部署资源。
 
@@ -47,8 +49,10 @@
 
 在将括号中的文本替换为资源组名称、位置、部署名称和模板名称以后，运行以下命令即可创建资源组和部署：
 
-    azure group create {resource-group-name} {location}
-    azure group deployment create --template-file /path/to/azuredeploy.json {resource-group-name} {deployment-name}
+```
+azure group create {resource-group-name} {location}
+azure group deployment create --template-file /path/to/azuredeploy.json {resource-group-name} {deployment-name}
+```
 
 运行 **azure group deployment create** 命令时，系统会提示你输入模板中参数的值。根据具体模板，Azure 可能需花费一些时间部署资源。
 

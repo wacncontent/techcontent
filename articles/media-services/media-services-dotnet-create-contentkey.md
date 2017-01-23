@@ -38,100 +38,108 @@ ms.author: juliako
 
 创建内容密钥时必须设置的值之一是内容密钥类型。选择以下值之一。
 
-    public enum ContentKeyType
-    {
-        /// <summary>
-        /// Specifies a content key for common encryption.
-        /// </summary>
-        /// <remarks>This is the default value.</remarks>
-        CommonEncryption = 0,
+```
+public enum ContentKeyType
+{
+    /// <summary>
+    /// Specifies a content key for common encryption.
+    /// </summary>
+    /// <remarks>This is the default value.</remarks>
+    CommonEncryption = 0,
 
-        /// <summary>
-        /// Specifies a content key for storage encryption.
-        /// </summary>
-        StorageEncryption = 1,
+    /// <summary>
+    /// Specifies a content key for storage encryption.
+    /// </summary>
+    StorageEncryption = 1,
 
-        /// <summary>
-        /// Specifies a content key for configuration encryption.
-        /// </summary>
-        ConfigurationEncryption = 2,
+    /// <summary>
+    /// Specifies a content key for configuration encryption.
+    /// </summary>
+    ConfigurationEncryption = 2,
 
-        /// <summary>
-        /// Specifies a content key for Envelope encryption.  Only used internally.
-        /// </summary>
-        EnvelopeEncryption = 4
-    }
+    /// <summary>
+    /// Specifies a content key for Envelope encryption.  Only used internally.
+    /// </summary>
+    EnvelopeEncryption = 4
+}
+```
 
 ##<a id="envelope_contentkey"></a>创建信封类型 ContentKey
 
 以下代码段创建信封加密类型的内容密钥。然后，它会将密钥与指定的资产关联。
 
-    static public IContentKey CreateEnvelopeTypeContentKey(IAsset asset)
+```
+static public IContentKey CreateEnvelopeTypeContentKey(IAsset asset)
+{
+    // Create envelope encryption content key
+    Guid keyId = Guid.NewGuid();
+    byte[] contentKey = GetRandomBuffer(16);
+
+    IContentKey key = _context.ContentKeys.Create(
+                            keyId,
+                            contentKey,
+                            "ContentKey",
+                            ContentKeyType.EnvelopeEncryption);
+
+    asset.ContentKeys.Add(key);
+
+    return key;
+}
+
+static private byte[] GetRandomBuffer(int size)
+{
+    byte[] randomBytes = new byte[size];
+    using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
     {
-        // Create envelope encryption content key
-        Guid keyId = Guid.NewGuid();
-        byte[] contentKey = GetRandomBuffer(16);
-
-        IContentKey key = _context.ContentKeys.Create(
-                                keyId,
-                                contentKey,
-                                "ContentKey",
-                                ContentKeyType.EnvelopeEncryption);
-
-        asset.ContentKeys.Add(key);
-
-        return key;
+        rng.GetBytes(randomBytes);
     }
 
-    static private byte[] GetRandomBuffer(int size)
-    {
-        byte[] randomBytes = new byte[size];
-        using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-        {
-            rng.GetBytes(randomBytes);
-        }
-
-        return randomBytes;
-    }
+    return randomBytes;
+}
+```
 
 call
 
-    IContentKey key = CreateEnvelopeTypeContentKey(encryptedsset);
+```
+IContentKey key = CreateEnvelopeTypeContentKey(encryptedsset);
+```
 
 ##<a id="common_contentkey"></a>创建公共类型 ContentKey    
 
 以下代码段创建公共加密类型的内容密钥。然后，它会将密钥与指定的资产关联。
 
-    static public IContentKey CreateCommonTypeContentKey(IAsset asset)
+```
+static public IContentKey CreateCommonTypeContentKey(IAsset asset)
+{
+    // Create common encryption content key
+    Guid keyId = Guid.NewGuid();
+    byte[] contentKey = GetRandomBuffer(16);
+
+    IContentKey key = _context.ContentKeys.Create(
+                            keyId,
+                            contentKey,
+                            "ContentKey",
+                            ContentKeyType.CommonEncryption);
+
+    // Associate the key with the asset.
+    asset.ContentKeys.Add(key);
+
+    return key;
+}
+
+static private byte[] GetRandomBuffer(int length)
+{
+    var returnValue = new byte[length];
+
+    using (var rng =
+        new System.Security.Cryptography.RNGCryptoServiceProvider())
     {
-        // Create common encryption content key
-        Guid keyId = Guid.NewGuid();
-        byte[] contentKey = GetRandomBuffer(16);
-
-        IContentKey key = _context.ContentKeys.Create(
-                                keyId,
-                                contentKey,
-                                "ContentKey",
-                                ContentKeyType.CommonEncryption);
-
-        // Associate the key with the asset.
-        asset.ContentKeys.Add(key);
-
-        return key;
+        rng.GetBytes(returnValue);
     }
 
-    static private byte[] GetRandomBuffer(int length)
-    {
-        var returnValue = new byte[length];
-
-        using (var rng =
-            new System.Security.Cryptography.RNGCryptoServiceProvider())
-        {
-            rng.GetBytes(returnValue);
-        }
-
-        return returnValue;
-    }
+    return returnValue;
+}
+```
 call
 
     IContentKey key = CreateCommonTypeContentKey(encryptedsset); 

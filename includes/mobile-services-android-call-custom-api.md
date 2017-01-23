@@ -4,90 +4,104 @@
 
 2. 在第二个 **LinearLayout** 中，删除 **EditText** 元素，并将以下代码紧邻着添加到现有 **Button** 元素之后： 
 
+    ```
+    <Button
+        android:id="@+id/buttonCompleteItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="completeItem"
+        android:text="@string/complete_button_text" />
+    ```
+
+    这样可将新按钮添加到页面中的单独一行上，位于现有按钮旁边。
+
+3. 第二个 **LinearLayout** 现在如下所示：
+
+    ```
+     <LinearLayout
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:background="#71BCFA"
+        android:padding="6dip"  >
+        <Button
+            android:id="@+id/buttonAddToDo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addItem"
+            android:text="@string/add_button_text" />
         <Button
             android:id="@+id/buttonCompleteItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="completeItem"
             android:text="@string/complete_button_text" />
-
-    这样可将新按钮添加到页面中的单独一行上，位于现有按钮旁边。
-
-3. 第二个 **LinearLayout** 现在如下所示：
-
-         <LinearLayout
-            android:layout_width="match_parent" 
-            android:layout_height="wrap_content" 
-            android:background="#71BCFA"
-            android:padding="6dip"  >
-            <Button
-                android:id="@+id/buttonAddToDo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="addItem"
-                android:text="@string/add_button_text" />
-            <Button
-                android:id="@+id/buttonCompleteItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="completeItem"
-                android:text="@string/complete_button_text" />
-        </LinearLayout>
+    </LinearLayout>
+    ```
 
 4. 打开 res\values\string.xml 文件并添加以下代码行：
 
-        <string name="complete_button_text">Complete All</string>
+    ```
+    <string name="complete_button_text">Complete All</string>
+    ```
 
 5. 在 Package Explorer 的  *src* 文件夹中，右键单击项目名称 (`com.example.{your projects name}`)，然后依次选择**新建**、**类**。在对话框的类名称字段中，输入 **MarkAllResult**、选择"确定"，然后使用以下代码替代生成的类定义：
 
-        import com.google.gson.annotations.SerializedName;
+    ```
+    import com.google.gson.annotations.SerializedName;
 
-        public class MarkAllResult {
-            @SerializedName("count")
-            public int mCount;
+    public class MarkAllResult {
+        @SerializedName("count")
+        public int mCount;
 
-            public int getCount() {
-                return mCount;
-            }
-
-            public void setCount(int count) {
-                    this.mCount = count;
-            }
+        public int getCount() {
+            return mCount;
         }
+
+        public void setCount(int count) {
+                this.mCount = count;
+        }
+    }
+    ```
 
     此类用于保存自定义 API 返回的行计数值。 
 
 6. 找到 **ToDoActivity.java** 文件中的 **refreshItemsFromTable** 方法，并确认  `try` 块中的第一行代码如下所示：
 
-        final MobileServiceList<ToDoItem> result = mToDoTable.where().field("complete").eq(false).execute().get();
+    ```
+    final MobileServiceList<ToDoItem> result = mToDoTable.where().field("complete").eq(false).execute().get();
+    ```
 
     这样可以筛选项，使得查询不返回已完成的项。
 
 7. 请确保 **ToDoActivity.java** 文件的开头包含下列 import 语句：
 
-        import com.google.common.util.concurrent.FutureCallback;
-        import com.google.common.util.concurrent.Futures;
-        import com.google.common.util.concurrent.ListenableFuture;
+    ```
+    import com.google.common.util.concurrent.FutureCallback;
+    import com.google.common.util.concurrent.Futures;
+    import com.google.common.util.concurrent.ListenableFuture;
+    ```
 
 8. 在 **ToDoActivity.java** 文件中，添加以下方法：
 
-        public void completeItem(View view) {
+    ```
+    public void completeItem(View view) {
 
-            ListenableFuture<MarkAllResult> result = mClient.invokeApi( "completeAll2", MarkAllResult.class ); 
+        ListenableFuture<MarkAllResult> result = mClient.invokeApi( "completeAll2", MarkAllResult.class ); 
 
-            Futures.addCallback(result, new FutureCallback<MarkAllResult>() {
-                @Override
-                public void onFailure(Throwable exc) {
-                    createAndShowDialog((Exception) exc, "Error");
-                }
+        Futures.addCallback(result, new FutureCallback<MarkAllResult>() {
+            @Override
+            public void onFailure(Throwable exc) {
+                createAndShowDialog((Exception) exc, "Error");
+            }
 
-                @Override
-                public void onSuccess(MarkAllResult result) {
-                    createAndShowDialog(result.getCount() + " item(s) marked as complete.", "Completed Items");
-                    refreshItemsFromTable();	
-                }
-            });
-        }
+            @Override
+            public void onSuccess(MarkAllResult result) {
+                createAndShowDialog(result.getCount() + " item(s) marked as complete.", "Completed Items");
+                refreshItemsFromTable();	
+            }
+        });
+    }
+    ```
 
     此方法可处理新按钮的 **Click** 事件。**invokeApi** 方法在客户端上调用，该客户端向新的自定义 API 发送 POST 请求。与任何错误相同，自定义 API 返回的结果也显示在消息对话框中。
 

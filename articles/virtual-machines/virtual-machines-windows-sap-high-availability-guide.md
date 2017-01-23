@@ -704,17 +704,23 @@ _**图 9：**指定 SAP HA Azure Resource Manager 参数_
 
 可以使用以下 PowerShell 命令获取所有 Azure 网络子网的列表：
 
-    (Get-AzureRmVirtualNetwork -Name <azureVnetName>  -ResourceGroupName <ResourceGroupOfVNET>).Subnets
+```
+(Get-AzureRmVirtualNetwork -Name <azureVnetName>  -ResourceGroupName <ResourceGroupOfVNET>).Subnets
+```
 
 **SUBNETID** 显示在字段 ID 中。
 
 例如，可以使用以下 PowerShell 命令来检索所有 **SUBNETID** 的列表：
 
-    (Get-AzureRmVirtualNetwork -Name <azureVnetName>  -ResourceGroupName <ResourceGroupOfVNET>).Subnets.Id
+```
+(Get-AzureRmVirtualNetwork -Name <azureVnetName>  -ResourceGroupName <ResourceGroupOfVNET>).Subnets.Id
+```
 
 **SUBNETID** 如下所示：
 
-    /subscriptions/<SubscriptionId>/resourceGroups/<VPNName>/providers/Microsoft.Network/virtualNetworks/azureVnet/subnets/<SubnetName>
+```
+/subscriptions/<SubscriptionId>/resourceGroups/<VPNName>/providers/Microsoft.Network/virtualNetworks/azureVnet/subnets/<SubnetName>
+```
 
 ### <a name="7fe9af0e-3cce-495b-a5ec-dcb4d8e0a310"></a>SAP 实例的仅限云部署（用于测试/演示）
 
@@ -779,7 +785,9 @@ _**图 10：**配置 Azure VNET 的 DNS 服务器_
 
 为此可以使用 Azure 门户预览。在 Azure 门户预览中，导航到：
 
-    <Resource Group> -> <Network Card> -> Settings -> IP Address
+```
+<Resource Group> -> <Network Card> -> Settings -> IP Address
+```
 
 将字段“分配”从“动态”更改为“静态”，然后输入所需的 **IP 地址**。
 
@@ -1105,7 +1113,9 @@ _**图 38：**通过“添加角色和功能向导”安装 .Net Framework 3.5 �
 
 启用 .Net Framework 3.5 功能的第二种可能方法是使用命令行工具 _**dism.exe**_。对于这种类型的安装，需要将 Windows 安装媒体的“sxs”目录设置为可访问。需要在提升权限的命令行窗口中运行以下命令：
 
-    Dism /online /enable-feature /featurename:NetFx3 /All /Source:installation_media_drive:\sources\sxs /LimitAccess
+```
+Dism /online /enable-feature /featurename:NetFx3 /All /Source:installation_media_drive:\sources\sxs /LimitAccess
+```
 
 #### <a name="dd41d5a2-8083-415b-9878-839652812102"></a>安装 SIOS DataKeeper
 
@@ -1265,7 +1275,9 @@ _**图 55：**针对 SAP ASCS/SCS 群集配置列出的新虚拟名称和 TCP/IP
 
 需要添加一个新的配置文件参数。此配置文件参数可避免 SAP 工作进程与排队服务器之间的连接在空闲时间太长时关闭。本文档的**[在用于 SAP ASCS/SCS 实例的两个群集节点上添加注册表项][sap-ha-guide-8.11]**一章中已提到了出现该问题的情景。在该部分，我们还介绍了对一些基本 TCP/IP 连接参数所做的两项更改。在第二个步骤中，需要将排队服务器配置为发送 **keep\_alive** 信号，使连接不会达到 Azure ILB 的空闲阈值。为此，请将以下配置文件参数：
 
-    enque/encni/set_so_keepalive = true
+```
+enque/encni/set_so_keepalive = true
+```
 
 添加到 SAP ASCS/SCS 实例配置文件。在本例中，路径为：
 
@@ -1279,7 +1291,9 @@ _**图 55：**针对 SAP ASCS/SCS 群集配置列出的新虚拟名称和 TCP/IP
 
 为使整个群集配置能够与 Azure Load Balancer 配合工作，需要利用内部负载均衡器的探测功能。Azure 内部负载均衡器通常在参与方虚拟机之间平衡和平均分配传入的工作负荷。但是，这种工作方式在此类群集配置中不可行，因为只有一个实例处于主动状态，另一个处于被动状态，无法接受工作负荷。为了启用 Azure 内部负载均衡器只将工作分配给主动实例的配置，建立了探测功能。通过该功能，内部负载均衡器可以检查哪个实例处于主动状态，然后只将工作负荷发送到该实例。首先，让我们在参与群集配置的某个 VM 中执行以下 PowerShell 命令，检查当前的 _**ProbePort**_ 设置：
 
-    Get-ClusterResource „SAP PR1 IP" | Get-ClusterParameter 
+```
+Get-ClusterResource „SAP PR1 IP" | Get-ClusterParameter 
+```
 
 ![图 56：群集配置的探测端口默认为 0][sap-ha-guide-figure-3048]  
 
@@ -1289,17 +1303,23 @@ _**图 56：**群集配置的探测端口默认为 0_
 
 首先，获取 SAP 虚拟主机名群集资源 _**SAP WAC IP**_
 
-    $var = Get-ClusterResource | Where-Object {  $_.name -eq "SAP PR1 IP"  } 
+```
+$var = Get-ClusterResource | Where-Object {  $_.name -eq "SAP PR1 IP"  } 
+```
 
 然后，将探测端口设置为 62300
 
-    $var | Set-ClusterParameter -Multiple @{"Address"="10.0.0.43";"ProbePort"=62300;"Subnetmask"="255.255.255.0";"Network"="Cluster Network 1";"OverrideAddressMatch"=1;"EnableDhcp"=0}  
+```
+$var | Set-ClusterParameter -Multiple @{"Address"="10.0.0.43";"ProbePort"=62300;"Subnetmask"="255.255.255.0";"Network"="Cluster Network 1";"OverrideAddressMatch"=1;"EnableDhcp"=0}  
+```
 
 必须将 _**SAP PR1**_ 群集角色停止再启动，才能激活更改。
 
 将 _**SAP PR1**_ 群集角色联机后，检查 _**ProbePort**_ 是否已设置为新值：
 
-    Get-ClusterResource „SAP PR1 IP" | Get-ClusterParameter 
+```
+Get-ClusterResource „SAP PR1 IP" | Get-ClusterParameter 
+```
 
 ![图 57：更改后的群集探测端口][sap-ha-guide-figure-3049]  
 
@@ -1357,7 +1377,9 @@ _**图 60：**SIOS DataKeeper：将本地卷从群集节点 A 复制到群集节
 
 - 使用故障转移群集 PowerShell
 
-        Move-ClusterGroup -Name "SAP WAC" 
+    ```
+    Move-ClusterGroup -Name "SAP WAC" 
+    ```
 
 - 在 Windows 来宾 OS 中重新启动群集节点 A  
 （这会启动将 SAP <SID> 群集组从节点 A 故障转转到节点 B 的自动故障转移）  
@@ -1368,7 +1390,9 @@ _**图 60：**SIOS DataKeeper：将本地卷从群集节点 A 复制到群集节
 - 使用 Azure PowerShell 重新启动群集节点 A  
 （这会启动将 SAP <SID> 群集组从节点 A 故障转转到节点 B 的自动故障转移）
 
-        Restart-AzureVM -Name ascsha-clna -ServiceName ascsha-cluster
+    ```
+    Restart-AzureVM -Name ascsha-clna -ServiceName ascsha-cluster
+    ```
 
 ### <a name="755a6b93-0099-4533-9f6d-5c9a613878b5"></a>最终结果 – SAP ASCS/SCS 实例在群集节点 B 上运行
 

@@ -30,7 +30,9 @@ Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文
 2. 运行“快速打开”(Ctrl+P)
 3. 运行以下命令：
 
-        ext install azurerm-vscode-tools
+    ```
+    ext install azurerm-vscode-tools
+    ```
 4. 在系统提示时重新启动 VS Code 以启用该扩展。
 
     操作已完成！
@@ -90,14 +92,20 @@ Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文
 1. 打开 PowerShell 命令提示符
 2. 若要登录，请键入：
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud 
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud 
+    ```
 3. 如果有多个订阅，请使用以下命令获取订阅列表：
 
-        Get-AzureRmSubscription
+    ```
+    Get-AzureRmSubscription
+    ```
 
     选择要使用的订阅。
 
-        Select-AzureRmSubscription -SubscriptionId <Subscription Id>
+    ```
+    Select-AzureRmSubscription -SubscriptionId <Subscription Id>
+    ```
 4. 更新 parameters.json 文件中的参数
 5. 运行 Deploy.ps1 以在 Azure 上部署模板
 
@@ -105,14 +113,20 @@ Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文
 1. 打开终端窗口
 2. 若要登录，请键入：
 
-        azure login -e AzureChinaCloud 
+    ```
+    azure login -e AzureChinaCloud 
+    ```
 3. 如果有多个订阅，请使用以下命令选择适当的订阅：
 
-        azure account set <subscriptionNameOrId> 
+    ```
+    azure account set <subscriptionNameOrId> 
+    ```
 4. 更新 parameters.json 文件中的参数。
 5. 若要部署模板，请运行：
 
-        azure group deployment create -f <PathToTemplate> 
+    ```
+    azure group deployment create -f <PathToTemplate> 
+    ```
 
 ## 后续步骤
 * 若要详细了解模板，请参阅 [Authoring Azure Resource Manager templates](./resource-group-authoring-templates.md)（创作 Azure Resource Manager 模板）。

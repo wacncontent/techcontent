@@ -45,183 +45,193 @@ ms.author: sumuth
 
 1. 在创建过渡槽前，请设置应用程序代码以支持多个环境。若要在 WordPress 中支持多个环境，需要在本地开发 Web 应用上编辑 `wp-config.php`，并在文件的开头添加以下代码。此过程让应用程序能够根据所选环境选择正确的配置。
 
-        // Support multiple environments
-        // set the config file based on current environment
-        if (strpos($_SERVER['HTTP_HOST'],'localhost') !== false) {
-        // local development
-         $config_file = 'config/wp-config.local.php';
-        }
-        elseif ((strpos(getenv('WP_ENV'),'stage') !== false) || (strpos(getenv('WP_ENV'),'prod' )!== false ))
-        //single file for all azure development environments
-         $config_file = 'config/wp-config.azure.php';
-        }
-        $path = dirname(__FILE__). '/';
-        if (file_exists($path. $config_file)) {
-        // include the config file if it exists, otherwise WP is going to fail
-        require_once $path. $config_file;
+    ```
+    // Support multiple environments
+    // set the config file based on current environment
+    if (strpos($_SERVER['HTTP_HOST'],'localhost') !== false) {
+    // local development
+     $config_file = 'config/wp-config.local.php';
+    }
+    elseif ((strpos(getenv('WP_ENV'),'stage') !== false) || (strpos(getenv('WP_ENV'),'prod' )!== false ))
+    //single file for all azure development environments
+     $config_file = 'config/wp-config.azure.php';
+    }
+    $path = dirname(__FILE__). '/';
+    if (file_exists($path. $config_file)) {
+    // include the config file if it exists, otherwise WP is going to fail
+    require_once $path. $config_file;
+    ```
 
 2. 在 Web 应用的根目录下创建名为 `config` 的文件夹，并添加 `wp-config.azure.php` 和 `wp-config.local.php` 这两个文件，它们分别代表 Azure 环境和本地环境。
 
 3. 复制 `wp-config.local.php` 中的以下内容：
 
-        <?php
-        // MySQL settings
-        /** The name of the database for WordPress */
+    ```
+    <?php
+    // MySQL settings
+    /** The name of the database for WordPress */
 
-        define('DB_NAME', 'yourdatabasename');
+    define('DB_NAME', 'yourdatabasename');
 
-        /** MySQL database username */
-        define('DB_USER', 'yourdbuser');
+    /** MySQL database username */
+    define('DB_USER', 'yourdbuser');
 
-        /** MySQL database password */
-        define('DB_PASSWORD', 'yourpassword');
+    /** MySQL database password */
+    define('DB_PASSWORD', 'yourpassword');
 
-        /** MySQL hostname */
-        define('DB_HOST', 'localhost');
-        /**
-         * For developers: WordPress debugging mode.
-         * * Change this to true to enable the display of notices during development.
-         * It is strongly recommended that plugin and theme developers use WP_DEBUG
-         * in their development environments.
-         */
-        define('WP_DEBUG', true);
+    /** MySQL hostname */
+    define('DB_HOST', 'localhost');
+    /**
+     * For developers: WordPress debugging mode.
+     * * Change this to true to enable the display of notices during development.
+     * It is strongly recommended that plugin and theme developers use WP_DEBUG
+     * in their development environments.
+     */
+    define('WP_DEBUG', true);
 
-        //Security key settings
-        define('AUTH_KEY', 'put your unique phrase here');
-        define('SECURE_AUTH_KEY','put your unique phrase here');
-        define('LOGGED_IN_KEY','put your unique phrase here');
-        define('NONCE_KEY', 'put your unique phrase here');
-        define('AUTH_SALT', 'put your unique phrase here');
-        define('SECURE_AUTH_SALT', 'put your unique phrase here');
-        define('LOGGED_IN_SALT', 'put your unique phrase here');
-        define('NONCE_SALT', 'put your unique phrase here');
+    //Security key settings
+    define('AUTH_KEY', 'put your unique phrase here');
+    define('SECURE_AUTH_KEY','put your unique phrase here');
+    define('LOGGED_IN_KEY','put your unique phrase here');
+    define('NONCE_KEY', 'put your unique phrase here');
+    define('AUTH_SALT', 'put your unique phrase here');
+    define('SECURE_AUTH_SALT', 'put your unique phrase here');
+    define('LOGGED_IN_SALT', 'put your unique phrase here');
+    define('NONCE_SALT', 'put your unique phrase here');
 
-        /**
-         * WordPress Database Table prefix.
-         *
-         * You can have multiple installations in one database if you give each a unique
-         * prefix. Only numbers, letters, and underscores please!
-         */
-        $table_prefix = 'wp_';
+    /**
+     * WordPress Database Table prefix.
+     *
+     * You can have multiple installations in one database if you give each a unique
+     * prefix. Only numbers, letters, and underscores please!
+     */
+    $table_prefix = 'wp_';
+    ```
 
 设置如以上代码中所述的安全密钥可帮助防止 Web 应用受到黑客攻击，因此请使用唯一值。如果需要为代码中提及的安全密钥生成字符串，可[转到自动生成器](https://api.wordpress.org/secret-key/1.1/salt)，创建新的键/值对。
 
 4. 复制 `wp-config.azure.php` 中的以下代码：
 
-        <?php
-        // MySQL settings
-        /** The name of the database for WordPress */
+    ```
+    <?php
+    // MySQL settings
+    /** The name of the database for WordPress */
 
-        define('DB_NAME', getenv('DB_NAME'));
+    define('DB_NAME', getenv('DB_NAME'));
 
-        /** MySQL database username */
-        define('DB_USER', getenv('DB_USER'));
+    /** MySQL database username */
+    define('DB_USER', getenv('DB_USER'));
 
-        /** MySQL database password */
-        define('DB_PASSWORD', getenv('DB_PASSWORD'));
+    /** MySQL database password */
+    define('DB_PASSWORD', getenv('DB_PASSWORD'));
 
-        /** MySQL hostname */
-        define('DB_HOST', getenv('DB_HOST'));
+    /** MySQL hostname */
+    define('DB_HOST', getenv('DB_HOST'));
 
-        /**
-        * For developers: WordPress debugging mode.
-        *
-        * Change this to true to enable the display of notices during development.
-        * It is strongly recommended that plugin and theme developers use WP_DEBUG
-        * in their development environments.
-        * Turn on debug logging to investigate issues without displaying to end user. For WP_DEBUG_LOG to
-        * do anything, WP_DEBUG must be enabled (true). WP_DEBUG_DISPLAY should be used in conjunction
-        * with WP_DEBUG_LOG so that errors are not displayed on the page */
+    /**
+    * For developers: WordPress debugging mode.
+    *
+    * Change this to true to enable the display of notices during development.
+    * It is strongly recommended that plugin and theme developers use WP_DEBUG
+    * in their development environments.
+    * Turn on debug logging to investigate issues without displaying to end user. For WP_DEBUG_LOG to
+    * do anything, WP_DEBUG must be enabled (true). WP_DEBUG_DISPLAY should be used in conjunction
+    * with WP_DEBUG_LOG so that errors are not displayed on the page */
 
-        */
-        define('WP_DEBUG', getenv('WP_DEBUG'));
-        define('WP_DEBUG_LOG', getenv('TURN_ON_DEBUG_LOG'));
-        define('WP_DEBUG_DISPLAY',false);
+    */
+    define('WP_DEBUG', getenv('WP_DEBUG'));
+    define('WP_DEBUG_LOG', getenv('TURN_ON_DEBUG_LOG'));
+    define('WP_DEBUG_DISPLAY',false);
 
-        //Security key settings
-        /** If you need to generate the string for security keys mentioned above, you can go the automatic generator to create new keys/values: https://api.wordpress.org/secret-key/1.1/salt **/
-        define('AUTH_KEY',getenv('DB_AUTH_KEY'));
-        define('SECURE_AUTH_KEY', getenv('DB_SECURE_AUTH_KEY'));
-        define('LOGGED_IN_KEY', getenv('DB_LOGGED_IN_KEY'));
-        define('NONCE_KEY', getenv('DB_NONCE_KEY'));
-        define('AUTH_SALT', getenv('DB_AUTH_SALT'));
-        define('SECURE_AUTH_SALT', getenv('DB_SECURE_AUTH_SALT'));
-        define('LOGGED_IN_SALT',  getenv('DB_LOGGED_IN_SALT'));
-        define('NONCE_SALT',  getenv('DB_NONCE_SALT'));
+    //Security key settings
+    /** If you need to generate the string for security keys mentioned above, you can go the automatic generator to create new keys/values: https://api.wordpress.org/secret-key/1.1/salt **/
+    define('AUTH_KEY',getenv('DB_AUTH_KEY'));
+    define('SECURE_AUTH_KEY', getenv('DB_SECURE_AUTH_KEY'));
+    define('LOGGED_IN_KEY', getenv('DB_LOGGED_IN_KEY'));
+    define('NONCE_KEY', getenv('DB_NONCE_KEY'));
+    define('AUTH_SALT', getenv('DB_AUTH_SALT'));
+    define('SECURE_AUTH_SALT', getenv('DB_SECURE_AUTH_SALT'));
+    define('LOGGED_IN_SALT',  getenv('DB_LOGGED_IN_SALT'));
+    define('NONCE_SALT',  getenv('DB_NONCE_SALT'));
 
-        /**
-        * WordPress Database Table prefix.
-        *
-        * You can have multiple installations in one database if you give each a unique
-        * prefix. Only numbers, letters, and underscores please!
-        */
-        $table_prefix = getenv('DB_PREFIX');
+    /**
+    * WordPress Database Table prefix.
+    *
+    * You can have multiple installations in one database if you give each a unique
+    * prefix. Only numbers, letters, and underscores please!
+    */
+    $table_prefix = getenv('DB_PREFIX');
+    ```
 
 #### 使用相对路径
 最后需要在 WordPress 应用中配置的是相对路径。WordPress 在数据库中存储 URL 信息。此存储让从一个环境将内容移动到另一个环境的操作变得更加困难。每次从本地环境移到过渡环境或从过渡环境移到生产环境时，都需要更新数据库。若要降低每次在不同环境间部署数据库时造成问题的风险，请使用[相对根链接插件](https://wordpress.org/plugins/root-relative-urls/)，可使用 WordPress 管理员仪表板来安装该插件。
 
 将以下条目添加到 `wp-config.php` 文件中的 `That's all, stop editing!` 注释前面：
 
-        define('WP_HOME', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
-        define('WP_SITEURL', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
-        define('WP_CONTENT_URL', '/wp-content');
-        define('DOMAIN_CURRENT_SITE', filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
+```
+    define('WP_HOME', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
+    define('WP_SITEURL', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
+    define('WP_CONTENT_URL', '/wp-content');
+    define('DOMAIN_CURRENT_SITE', filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
+```
 
 通过 WordPress 管理员仪表板中的 `Plugins` 菜单激活该插件。保存 WordPress 应用的 permalink 设置。
 
 #### 最终的 `wp-config.php` 文件
 任何 WordPress 核心更新都不会影响 `wp-config.php`、`wp-config.azure.php` 和 `wp-config.local.php` 文件。下面是 `wp-config.php` 文件的最终版本：
 
-    <?php
-    /**
-     * The base configurations of the WordPress.
-     *
-     * This file has the following configurations: MySQL settings, Table Prefix,
-     * Secret Keys, and ABSPATH. You can find more information by visiting
-     *
-     * Codex page. You can get the MySQL settings from your web host.
-     *
-     * This file is used by the wp-config.php creation script during the
-     * installation. You don't have to use the web web app, you can just copy this file
-     * to "wp-config.php" and fill in the values.
-     *
-     * @package WordPress
-     */
+```
+<?php
+/**
+ * The base configurations of the WordPress.
+ *
+ * This file has the following configurations: MySQL settings, Table Prefix,
+ * Secret Keys, and ABSPATH. You can find more information by visiting
+ *
+ * Codex page. You can get the MySQL settings from your web host.
+ *
+ * This file is used by the wp-config.php creation script during the
+ * installation. You don't have to use the web web app, you can just copy this file
+ * to "wp-config.php" and fill in the values.
+ *
+ * @package WordPress
+ */
 
-    // Support multiple environments
-    // set the config file based on current environment
-    if (strpos($_SERVER['HTTP_HOST'],'localhost') !== false) { // local development
-      $config_file = 'config/wp-config.local.php';
-    }
-    elseif ((strpos(getenv('WP_ENV'),'stage') !== false) ||(strpos(getenv('WP_ENV'),'prod' )!== false )){
-      $config_file = 'config/wp-config.azure.php';
-    }
+// Support multiple environments
+// set the config file based on current environment
+if (strpos($_SERVER['HTTP_HOST'],'localhost') !== false) { // local development
+  $config_file = 'config/wp-config.local.php';
+}
+elseif ((strpos(getenv('WP_ENV'),'stage') !== false) ||(strpos(getenv('WP_ENV'),'prod' )!== false )){
+  $config_file = 'config/wp-config.azure.php';
+}
 
-    $path = dirname(__FILE__). '/';
-    if (file_exists($path. $config_file)) {
-      // include the config file if it exists, otherwise WP is going to fail
-      require_once $path. $config_file;
-    }
+$path = dirname(__FILE__). '/';
+if (file_exists($path. $config_file)) {
+  // include the config file if it exists, otherwise WP is going to fail
+  require_once $path. $config_file;
+}
 
-    /** Database Charset to use in creating database tables. */
-    define('DB_CHARSET', 'utf8');
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
 
-    /** The Database Collate type. Don't change this if in doubt. */
-    define('DB_COLLATE', '');
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
 
-    /* That's all, stop editing! Happy blogging. */
+/* That's all, stop editing! Happy blogging. */
 
-    define('WP_HOME', 'http://'. $_SERVER['HTTP_HOST']);
-    define('WP_SITEURL', 'http://'. $_SERVER['HTTP_HOST']);
-    define('WP_CONTENT_URL', '/wp-content');
-    define('DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST']);
+define('WP_HOME', 'http://'. $_SERVER['HTTP_HOST']);
+define('WP_SITEURL', 'http://'. $_SERVER['HTTP_HOST']);
+define('WP_CONTENT_URL', '/wp-content');
+define('DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST']);
 
-    /** Absolute path to the WordPress directory. */
-    if ( !defined('ABSPATH') )
-        define('ABSPATH', dirname(__FILE__). '/');
+/** Absolute path to the WordPress directory. */
+if ( !defined('ABSPATH') )
+    define('ABSPATH', dirname(__FILE__). '/');
 
-    /** Sets up WordPress vars and included files. */
-    require_once(ABSPATH. 'wp-settings.php');
+/** Sets up WordPress vars and included files. */
+require_once(ABSPATH. 'wp-settings.php');
+```
 
 #### 设置过渡环境
 1. 如果已经拥有在 Azure 订阅上运行的 WordPress Web 应用，请登录 [Azure 门户预览](http://portal.azure.cn)，然后转到该 WordPress Web 应用。如果没有 WordPress web 应用，可创建一个。单击“设置”>“部署槽”>“添加”，创建名为 *过渡* 的部署槽。部署槽是与前面创建的主 Web 应用共享相同资源的另一个 Web 应用程序。
@@ -339,32 +349,36 @@ ms.author: sumuth
 
 3. 若要配置包，需要更新 Web 应用的 **Config** 文件夹下的 courier.config 文件。
 
-        <!-- Repository connection settings -->
-         <!-- For each site, a custom repository must be configured, so Courier knows how to connect and authenticate-->
-         <repositories>
-            <!-- If a custom Umbraco Membership provider is used, specify login & password + set the passwordEncoding to clear: -->
-            <repository name="production web app" alias="stage" type="CourierWebserviceRepositoryProvider" visible="true">
-              <url>http://umbracositecms-1.chinacloudsites.cn</url>
-              <user>0</user>
-              <!--<login>user@email.com</login> -->
-              <!-- <password>user_password</password>-->
-              <!-- <passwordEncoding>Clear</passwordEncoding>-->
-              </repository>
-         </repositories>
+    ```
+    <!-- Repository connection settings -->
+     <!-- For each site, a custom repository must be configured, so Courier knows how to connect and authenticate-->
+     <repositories>
+        <!-- If a custom Umbraco Membership provider is used, specify login & password + set the passwordEncoding to clear: -->
+        <repository name="production web app" alias="stage" type="CourierWebserviceRepositoryProvider" visible="true">
+          <url>http://umbracositecms-1.chinacloudsites.cn</url>
+          <user>0</user>
+          <!--<login>user@email.com</login> -->
+          <!-- <password>user_password</password>-->
+          <!-- <passwordEncoding>Clear</passwordEncoding>-->
+          </repository>
+     </repositories>
+    ```
 
 4. 在 `<repositories>` 下面输入生产站点 URL 和用户信息。如果使用默认的 Umbraco 成员资格提供程序，则在 <user> 部分中添加管理用户的 ID。如果使用自定义的 Umbraco 成员资格提供程序，则使用 Courier2 模块中的 `<login>`、`<password>` 连接到生产站点。有关更多详细信息，[请参阅 Courier2 模块文档](http://umbraco.com/help-and-support/customer-area/courier-2-support-and-download/developer-documentation)。
 
 5. 同样，在生产站点上安装 Courier2 模块，并在其相应的 courier.config 文件中将其配置为指向过渡 Web 应用，如下所示。
 
-         <!-- Repository connection settings -->
-         <!-- For each site, a custom repository must be configured, so Courier knows how to connect and authenticate-->
-         <repositories>
-            <!-- If a custom Umbraco Membership provider is used, specify login & password + set the passwordEncoding to clear: -->
-            <repository name="Stage web app" alias="stage" type="CourierWebserviceRepositoryProvider" visible="true">
-              <url>http://umbracositecms-1-stage.chinacloudsites.cn</url>
-              <user>0</user>
-              </repository>
-         </repositories>
+    ```
+     <!-- Repository connection settings -->
+     <!-- For each site, a custom repository must be configured, so Courier knows how to connect and authenticate-->
+     <repositories>
+        <!-- If a custom Umbraco Membership provider is used, specify login & password + set the passwordEncoding to clear: -->
+        <repository name="Stage web app" alias="stage" type="CourierWebserviceRepositoryProvider" visible="true">
+          <url>http://umbracositecms-1-stage.chinacloudsites.cn</url>
+          <user>0</user>
+          </repository>
+     </repositories>
+    ```
 
 6. 单击 Umbraco CMS Web 应用仪表板上的“Courier2”选项卡，然后单击“位置”。可以看到 `courier.config` 中提到的存储库名称。在生产和过渡 Web 应用上均执行此过程。
 

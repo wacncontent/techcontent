@@ -547,9 +547,11 @@ if (error.code == MSErrorPreconditionFailed) {
 
 2. 使用 Cocoapods 安装 ADAL。编辑 Podfile 以包含以下定义，将 **YOUR-PROJECT** 替换为 Xcode 项目的名称：
 
-        source 'https://github.com/CocoaPods/Specs.git'
-        link_with ['YOUR-PROJECT']
-        xcodeproj 'YOUR-PROJECT'
+    ```
+    source 'https://github.com/CocoaPods/Specs.git'
+    link_with ['YOUR-PROJECT']
+    xcodeproj 'YOUR-PROJECT'
+    ```
 Pod：
 
         pod 'ADALiOS'
@@ -565,63 +567,67 @@ Pod：
 
 **Objective-C**：
 
-    #import <ADALiOS/ADAuthenticationContext.h>
-    #import <ADALiOS/ADAuthenticationSettings.h>
-    // ...
-    - (void) authenticate:(UIViewController*) parent
-               completion:(void (^) (MSUser*, NSError*))completionBlock;
-    {
-        NSString *authority = @"INSERT-AUTHORITY-HERE";
-        NSString *resourceId = @"INSERT-RESOURCE-ID-HERE";
-        NSString *clientId = @"INSERT-CLIENT-ID-HERE";
-        NSURL *redirectUri = [[NSURL alloc]initWithString:@"INSERT-REDIRECT-URI-HERE"];
-        ADAuthenticationError *error;
-        ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
-        authContext.parentController = parent;
-        [ADAuthenticationSettings sharedInstance].enableFullScreen = YES;
-        [authContext acquireTokenWithResource:resourceId
-                                     clientId:clientId
-                                  redirectUri:redirectUri
-                              completionBlock:^(ADAuthenticationResult *result) {
-                                  if (result.status != AD_SUCCEEDED)
-                                  {
-                                      completionBlock(nil, result.error);;
-                                  }
-                                  else
-                                  {
-                                      NSDictionary *payload = @{
-                                                                @"access_token" : result.tokenCacheStoreItem.accessToken
-                                                                };
-                                      [client loginWithProvider:@"aad" token:payload completion:completionBlock];
-                                  }
-                              }];
-    }
+```
+#import <ADALiOS/ADAuthenticationContext.h>
+#import <ADALiOS/ADAuthenticationSettings.h>
+// ...
+- (void) authenticate:(UIViewController*) parent
+           completion:(void (^) (MSUser*, NSError*))completionBlock;
+{
+    NSString *authority = @"INSERT-AUTHORITY-HERE";
+    NSString *resourceId = @"INSERT-RESOURCE-ID-HERE";
+    NSString *clientId = @"INSERT-CLIENT-ID-HERE";
+    NSURL *redirectUri = [[NSURL alloc]initWithString:@"INSERT-REDIRECT-URI-HERE"];
+    ADAuthenticationError *error;
+    ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
+    authContext.parentController = parent;
+    [ADAuthenticationSettings sharedInstance].enableFullScreen = YES;
+    [authContext acquireTokenWithResource:resourceId
+                                 clientId:clientId
+                              redirectUri:redirectUri
+                          completionBlock:^(ADAuthenticationResult *result) {
+                              if (result.status != AD_SUCCEEDED)
+                              {
+                                  completionBlock(nil, result.error);;
+                              }
+                              else
+                              {
+                                  NSDictionary *payload = @{
+                                                            @"access_token" : result.tokenCacheStoreItem.accessToken
+                                                            };
+                                  [client loginWithProvider:@"aad" token:payload completion:completionBlock];
+                              }
+                          }];
+}
+```
 
 **Swift**：
 
-    // add the following imports to your bridging header:
-    //		#import <ADALiOS/ADAuthenticationContext.h>
-    //		#import <ADALiOS/ADAuthenticationSettings.h>
+```
+// add the following imports to your bridging header:
+//		#import <ADALiOS/ADAuthenticationContext.h>
+//		#import <ADALiOS/ADAuthenticationSettings.h>
 
-    func authenticate(parent: UIViewController, completion: (MSUser?, NSError?) -> Void) {
-        let authority = "INSERT-AUTHORITY-HERE"
-        let resourceId = "INSERT-RESOURCE-ID-HERE"
-        let clientId = "INSERT-CLIENT-ID-HERE"
-        let redirectUri = NSURL(string: "INSERT-REDIRECT-URI-HERE")
-        var error: AutoreleasingUnsafeMutablePointer<ADAuthenticationError?> = nil
-        let authContext = ADAuthenticationContext(authority: authority, error: error)
-        authContext.parentController = parent
-        ADAuthenticationSettings.sharedInstance().enableFullScreen = true
-        authContext.acquireTokenWithResource(resourceId, clientId: clientId, redirectUri: redirectUri) { (result) in
-                if result.status != AD_SUCCEEDED {
-                    completion(nil, result.error)
-                }
-                else {
-                    let payload: [String: String] = ["access_token": result.tokenCacheStoreItem.accessToken]
-                    client.loginWithProvider("aad", token: payload, completion: completion)
-                }
+func authenticate(parent: UIViewController, completion: (MSUser?, NSError?) -> Void) {
+    let authority = "INSERT-AUTHORITY-HERE"
+    let resourceId = "INSERT-RESOURCE-ID-HERE"
+    let clientId = "INSERT-CLIENT-ID-HERE"
+    let redirectUri = NSURL(string: "INSERT-REDIRECT-URI-HERE")
+    var error: AutoreleasingUnsafeMutablePointer<ADAuthenticationError?> = nil
+    let authContext = ADAuthenticationContext(authority: authority, error: error)
+    authContext.parentController = parent
+    ADAuthenticationSettings.sharedInstance().enableFullScreen = true
+    authContext.acquireTokenWithResource(resourceId, clientId: clientId, redirectUri: redirectUri) { (result) in
+            if result.status != AD_SUCCEEDED {
+                completion(nil, result.error)
             }
-    }
+            else {
+                let payload: [String: String] = ["access_token": result.tokenCacheStoreItem.accessToken]
+                client.loginWithProvider("aad", token: payload, completion: completion)
+            }
+        }
+}
+```
 
 <!-- Anchors. -->
 

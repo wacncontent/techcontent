@@ -43,17 +43,19 @@ ms.author: wesmc
 
 你可以使用 [Azure 通知中心](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/) SDK 中 `Microsoft.Azure.NotificationHubs.NotificationHubClient` 类的 send notifications 方法将通知发送到标记。你还可以使用 Node.js 或推送通知 REST API。下面是使用 SDK 的示例。
 
-    Microsoft.Azure.NotificationHubs.NotificationOutcome outcome = null;
+```
+Microsoft.Azure.NotificationHubs.NotificationOutcome outcome = null;
 
-    // Windows 8.1 / Windows Phone 8.1
-    var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
-    "You requested a Beatles notification</text></binding></visual></toast>";
-    outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, "Beatles");
+// Windows 8.1 / Windows Phone 8.1
+var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
+"You requested a Beatles notification</text></binding></visual></toast>";
+outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, "Beatles");
 
-    // Windows 10
-    toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
-    "You requested a Wailers notification</text></binding></visual></toast>";
-    outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, "Wailers");
+// Windows 10
+toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
+"You requested a Wailers notification</text></binding></visual></toast>";
+outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, "Wailers");
+```
 
 标记不必进行预配，并且可以参考多个特定于应用的概念。例如，此示例应用程序的用户可以对乐队发表评论，并且不仅想要接收有关其喜爱乐队的评论的 toast，而且想要接收来自其好友的所有评论（不管他们在对哪个乐队发表评论）的 toast。下图显示了此方案的示例：
 
@@ -79,7 +81,9 @@ ms.author: wesmc
 
 考虑这样一个体育应用程序，它将向波士顿的所有用户发送有关红袜队和红雀队之间的比赛的提醒。如果客户端应用注册了有关感兴趣的球队和位置的标记，则通知应定向到波士顿中对红袜队或红雀队感兴趣的所有用户。此条件可以用以下布尔表达式表示：
 
-    (follows_RedSox || follows_Cardinals) && location_Boston
+```
+(follows_RedSox || follows_Cardinals) && location_Boston
+```
 
 ![](./media/notification-hubs-routing-tag-expressions/notification-hubs-tags4.png)
 
@@ -87,18 +91,20 @@ ms.author: wesmc
 
 下面是通过 SDK 使用标记表达式发送通知的示例。
 
-    Microsoft.Azure.NotificationHubs.NotificationOutcome outcome = null;
+```
+Microsoft.Azure.NotificationHubs.NotificationOutcome outcome = null;
 
-    String userTag = "(location_Boston && !follows_Cardinals)";	
+String userTag = "(location_Boston && !follows_Cardinals)";	
 
-    // Windows 8.1 / Windows Phone 8.1
-    var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
-    "You want info on the Red Socks</text></binding></visual></toast>";
-    outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
+// Windows 8.1 / Windows Phone 8.1
+var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
+"You want info on the Red Socks</text></binding></visual></toast>";
+outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
 
-    // Windows 10
-    toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
-    "You want info on the Red Socks</text></binding></visual></toast>";
-    outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
+// Windows 10
+toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
+"You want info on the Red Socks</text></binding></visual></toast>";
+outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
+```
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

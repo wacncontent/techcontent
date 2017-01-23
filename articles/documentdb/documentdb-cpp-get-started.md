@@ -83,19 +83,23 @@ ms.author: aasthan
 ## <a id="Connect"></a>步骤 4：连接到 DocumentDB 帐户
 1. 将以下标头和命名空间添加到源代码的 `#include "stdafx.h"` 后面。
 
-        #include <cpprest/json.h>
-        #include <documentdbcpp\DocumentClient.h>
-        #include <documentdbcpp\exceptions.h>
-        #include <documentdbcpp\TriggerOperation.h>
-        #include <documentdbcpp\TriggerType.h>
-        using namespace documentdb;
-        using namespace std;
-        using namespace web::json;
+    ```
+    #include <cpprest/json.h>
+    #include <documentdbcpp\DocumentClient.h>
+    #include <documentdbcpp\exceptions.h>
+    #include <documentdbcpp\TriggerOperation.h>
+    #include <documentdbcpp\TriggerType.h>
+    using namespace documentdb;
+    using namespace std;
+    using namespace web::json;
+    ```
 
 2. 接下来将以下代码添加到主函数，并替换帐户配置和主要密钥以匹配步骤 3 中的 DocumentDB 设置。
 
-        DocumentDBConfiguration conf (L"<account_configuration_uri>", L"<primary_key>");
-        DocumentClient client (conf);
+    ```
+    DocumentDBConfiguration conf (L"<account_configuration_uri>", L"<primary_key>");
+    DocumentClient client (conf);
+    ```
 
     现已获得用于初始化 documentdb 客户端的代码，接下来让我们看看如何使用 DocumentDB 资源。
 
@@ -104,30 +108,34 @@ ms.author: aasthan
 
 若要创建数据库和相应的集合，请将下面的代码添加到主函数末尾。这样可以使用上一步中声明的客户端配置创建名为“FamilyRegistry”的数据库和名为“FamilyCollection”的集合。
 
-    try {
-      shared_ptr<Database> db = client.CreateDatabase(L"FamilyRegistry");
-      shared_ptr<Collection> coll = db->CreateCollection(L"FamilyCollection");
-    } catch (DocumentDBRuntimeException ex) {
-      wcout << ex.message();
-    }
+```
+try {
+  shared_ptr<Database> db = client.CreateDatabase(L"FamilyRegistry");
+  shared_ptr<Collection> coll = db->CreateCollection(L"FamilyCollection");
+} catch (DocumentDBRuntimeException ex) {
+  wcout << ex.message();
+}
+```
 
 ## <a id="CreateDoc"></a>步骤 6：创建文档
 [文档](./documentdb-resources.md#documents)为用户定义的（任意）JSON 内容。现在，你可以将文档插入 DocumentDB。将下面的代码复制到主函数的末尾可创建一个文档。
 
-    try {
-      value document_family;
-      document_family[L"id"] = value::string(L"AndersenFamily");
-      document_family[L"FirstName"] = value::string(L"Thomas");
-      document_family[L"LastName"] = value::string(L"Andersen");
-      shared_ptr<Document> doc = coll->CreateDocumentAsync(document_family).get();
+```
+try {
+  value document_family;
+  document_family[L"id"] = value::string(L"AndersenFamily");
+  document_family[L"FirstName"] = value::string(L"Thomas");
+  document_family[L"LastName"] = value::string(L"Andersen");
+  shared_ptr<Document> doc = coll->CreateDocumentAsync(document_family).get();
 
-      document_family[L"id"] = value::string(L"WakefieldFamily");
-      document_family[L"FirstName"] = value::string(L"Lucy");
-      document_family[L"LastName"] = value::string(L"Wakefield");
-      doc = coll->CreateDocumentAsync(document_family).get();
-    } catch (ResourceAlreadyExistsException ex) {
-      wcout << ex.message();
-    }
+  document_family[L"id"] = value::string(L"WakefieldFamily");
+  document_family[L"FirstName"] = value::string(L"Lucy");
+  document_family[L"LastName"] = value::string(L"Wakefield");
+  doc = coll->CreateDocumentAsync(document_family).get();
+} catch (ResourceAlreadyExistsException ex) {
+  wcout << ex.message();
+}
+```
 
 总之，此代码创建可在 Azure 门户预览的文档资源管理器中查询的 DocumentDB 数据库、集合和文档。
 
@@ -138,131 +146,141 @@ DocumentDB 支持对存储在每个集合中的 JSON 文档进行各种[查询](
 
 此函数包含三个参数：数据库和集合的唯一标识符或资源 id 以及文档客户端。在主函数前面添加此代码。
 
-    void executesimplequery(const DocumentClient &client,
-                            const wstring dbresourceid,
-                            const wstring collresourceid) {
-      try {
-        client.GetDatabase(dbresourceid).get();
-        shared_ptr<Database> db = client.GetDatabase(dbresourceid);
-        shared_ptr<Collection> coll = db->GetCollection(collresourceid);
-        wstring coll_name = coll->id();
-        shared_ptr<DocumentIterator> iter =
-            coll->QueryDocumentsAsync(wstring(L"SELECT * FROM " + coll_name)).get();
-        wcout << "\n\nQuerying collection:";
-        while (iter->HasMore()) {
-          shared_ptr<Document> doc = iter->Next();
-          wstring doc_name = doc->id();
-          wcout << "\n\t" << doc_name << "\n";
-          wcout << "\t"
-                << "[{\"FirstName\":"
-                << doc->payload().at(U("FirstName")).as_string()
-                << ",\"LastName\":" << doc->payload().at(U("LastName")).as_string()
-                << "}]";
-        }
-      } catch (DocumentDBRuntimeException ex) {
-        wcout << ex.message();
-      }
+```
+void executesimplequery(const DocumentClient &client,
+                        const wstring dbresourceid,
+                        const wstring collresourceid) {
+  try {
+    client.GetDatabase(dbresourceid).get();
+    shared_ptr<Database> db = client.GetDatabase(dbresourceid);
+    shared_ptr<Collection> coll = db->GetCollection(collresourceid);
+    wstring coll_name = coll->id();
+    shared_ptr<DocumentIterator> iter =
+        coll->QueryDocumentsAsync(wstring(L"SELECT * FROM " + coll_name)).get();
+    wcout << "\n\nQuerying collection:";
+    while (iter->HasMore()) {
+      shared_ptr<Document> doc = iter->Next();
+      wstring doc_name = doc->id();
+      wcout << "\n\t" << doc_name << "\n";
+      wcout << "\t"
+            << "[{\"FirstName\":"
+            << doc->payload().at(U("FirstName")).as_string()
+            << ",\"LastName\":" << doc->payload().at(U("LastName")).as_string()
+            << "}]";
     }
+  } catch (DocumentDBRuntimeException ex) {
+    wcout << ex.message();
+  }
+}
+```
 
 ## <a id="Replace"></a>步骤 8：替换文档
 DocumentDB 支持替换 JSON 文档，如下面的代码所示。在 executesimplequery 函数后面添加此代码。
 
-    void replacedocument(const DocumentClient &client, const wstring dbresourceid,
-                         const wstring collresourceid,
-                         const wstring docresourceid) {
-      try {
-        client.GetDatabase(dbresourceid).get();
-        shared_ptr<Database> db = client.GetDatabase(dbresourceid);
-        shared_ptr<Collection> coll = db->GetCollection(collresourceid);
-        value newdoc;
-        newdoc[L"id"] = value::string(L"WakefieldFamily");
-        newdoc[L"FirstName"] = value::string(L"Lucy");
-        newdoc[L"LastName"] = value::string(L"Smith Wakefield");
-        coll->ReplaceDocument(docresourceid, newdoc);
-      } catch (DocumentDBRuntimeException ex) {
-        throw;
-      }
-    }
+```
+void replacedocument(const DocumentClient &client, const wstring dbresourceid,
+                     const wstring collresourceid,
+                     const wstring docresourceid) {
+  try {
+    client.GetDatabase(dbresourceid).get();
+    shared_ptr<Database> db = client.GetDatabase(dbresourceid);
+    shared_ptr<Collection> coll = db->GetCollection(collresourceid);
+    value newdoc;
+    newdoc[L"id"] = value::string(L"WakefieldFamily");
+    newdoc[L"FirstName"] = value::string(L"Lucy");
+    newdoc[L"LastName"] = value::string(L"Smith Wakefield");
+    coll->ReplaceDocument(docresourceid, newdoc);
+  } catch (DocumentDBRuntimeException ex) {
+    throw;
+  }
+}
+```
 
 ## <a id="Delete"></a>步骤 9：删除文档
 DocumentDB 支持删除 JSON 文档，可以复制下面的代码并将其粘贴到 replacedocument 函数后面来实现此操作。
 
-    void deletedocument(const DocumentClient &client, const wstring dbresourceid,
-                        const wstring collresourceid, const wstring docresourceid) {
-      try {
-        client.GetDatabase(dbresourceid).get();
-        shared_ptr<Database> db = client.GetDatabase(dbresourceid);
-        shared_ptr<Collection> coll = db->GetCollection(collresourceid);
-        coll->DeleteDocumentAsync(docresourceid).get();
-      } catch (DocumentDBRuntimeException ex) {
-        wcout << ex.message();
-      }
-    }
+```
+void deletedocument(const DocumentClient &client, const wstring dbresourceid,
+                    const wstring collresourceid, const wstring docresourceid) {
+  try {
+    client.GetDatabase(dbresourceid).get();
+    shared_ptr<Database> db = client.GetDatabase(dbresourceid);
+    shared_ptr<Collection> coll = db->GetCollection(collresourceid);
+    coll->DeleteDocumentAsync(docresourceid).get();
+  } catch (DocumentDBRuntimeException ex) {
+    wcout << ex.message();
+  }
+}
+```
 
 ## <a id="DeleteDB"></a>步骤 10：删除数据库
 删除已创建的数据库将删除该数据库及其所有子资源（集合、文档等）。
 
 复制以下代码片段（cleanup 函数）并将其粘贴到 deletedocument 函数后面，以删除数据库和所有子资源。
 
-    void deletedb(const DocumentClient &client, const wstring dbresourceid) {
-      try {
-        client.DeleteDatabase(dbresourceid);
-      } catch (DocumentDBRuntimeException ex) {
-        wcout << ex.message();
-      }
-    }
+```
+void deletedb(const DocumentClient &client, const wstring dbresourceid) {
+  try {
+    client.DeleteDatabase(dbresourceid);
+  } catch (DocumentDBRuntimeException ex) {
+    wcout << ex.message();
+  }
+}
+```
 
 ## <a id="Run"></a>步骤 11：一同运行所有 C++ 应用程序！
 我们已添加代码用于创建、查询、修改和删除不同的 DocumentDB 资源。现在通过在 hellodocumentdb.cpp 中的主函数中调用这些不同的函数和添加一些诊断消息，从而将这些代码连接到一起。
 
 可以通过将应用程序的主函数替换为以下代码来实现。这样会覆盖步骤 3 中复制到代码的 account\_configuration\_uri 和 primary\_key，因此请再次在门户中保存此代码行或复制这些值。
 
-    int main() {
+```
+int main() {
+    try {
+        // Start by defining your account's configuration
+        DocumentDBConfiguration conf (L"<account_configuration_uri>", L"<primary_key>");
+        // Create your client
+        DocumentClient client(conf);
+        // Create a new database
         try {
-            // Start by defining your account's configuration
-            DocumentDBConfiguration conf (L"<account_configuration_uri>", L"<primary_key>");
-            // Create your client
-            DocumentClient client(conf);
-            // Create a new database
-            try {
-                shared_ptr<Database> db = client.CreateDatabase(L"FamilyDB");
-                wcout << "\nCreating database:\n" << db->id();
-                // Create a collection inside database
-                shared_ptr<Collection> coll = db->CreateCollection(L"FamilyColl");
-                wcout << "\n\nCreating collection:\n" << coll->id();
-                value document_family;
-                document_family[L"id"] = value::string(L"AndersenFamily");
-                document_family[L"FirstName"] = value::string(L"Thomas");
-                document_family[L"LastName"] = value::string(L"Andersen");
-                shared_ptr<Document> doc =
-                    coll->CreateDocumentAsync(document_family).get();
-                wcout << "\n\nCreating document:\n" << doc->id();
-                document_family[L"id"] = value::string(L"WakefieldFamily");
-                document_family[L"FirstName"] = value::string(L"Lucy");
-                document_family[L"LastName"] = value::string(L"Wakefield");
-                doc = coll->CreateDocumentAsync(document_family).get();
-                wcout << "\n\nCreating document:\n" << doc->id();
-                executesimplequery(client, db->resource_id(), coll->resource_id());
-                replacedocument(client, db->resource_id(), coll->resource_id(),
-                    doc->resource_id());
-                wcout << "\n\nReplaced document:\n" << doc->id();
-                executesimplequery(client, db->resource_id(), coll->resource_id());
-                deletedocument(client, db->resource_id(), coll->resource_id(),
-                    doc->resource_id());
-                wcout << "\n\nDeleted document:\n" << doc->id();
-                deletedb(client, db->resource_id());
-                wcout << "\n\nDeleted db:\n" << db->id();
-                cin.get();
-            }
-            catch (ResourceAlreadyExistsException ex) {
-                wcout << ex.message();
-            }
+            shared_ptr<Database> db = client.CreateDatabase(L"FamilyDB");
+            wcout << "\nCreating database:\n" << db->id();
+            // Create a collection inside database
+            shared_ptr<Collection> coll = db->CreateCollection(L"FamilyColl");
+            wcout << "\n\nCreating collection:\n" << coll->id();
+            value document_family;
+            document_family[L"id"] = value::string(L"AndersenFamily");
+            document_family[L"FirstName"] = value::string(L"Thomas");
+            document_family[L"LastName"] = value::string(L"Andersen");
+            shared_ptr<Document> doc =
+                coll->CreateDocumentAsync(document_family).get();
+            wcout << "\n\nCreating document:\n" << doc->id();
+            document_family[L"id"] = value::string(L"WakefieldFamily");
+            document_family[L"FirstName"] = value::string(L"Lucy");
+            document_family[L"LastName"] = value::string(L"Wakefield");
+            doc = coll->CreateDocumentAsync(document_family).get();
+            wcout << "\n\nCreating document:\n" << doc->id();
+            executesimplequery(client, db->resource_id(), coll->resource_id());
+            replacedocument(client, db->resource_id(), coll->resource_id(),
+                doc->resource_id());
+            wcout << "\n\nReplaced document:\n" << doc->id();
+            executesimplequery(client, db->resource_id(), coll->resource_id());
+            deletedocument(client, db->resource_id(), coll->resource_id(),
+                doc->resource_id());
+            wcout << "\n\nDeleted document:\n" << doc->id();
+            deletedb(client, db->resource_id());
+            wcout << "\n\nDeleted db:\n" << db->id();
+            cin.get();
         }
-        catch (DocumentDBRuntimeException ex) {
+        catch (ResourceAlreadyExistsException ex) {
             wcout << ex.message();
         }
-        cin.get();
     }
+    catch (DocumentDBRuntimeException ex) {
+        wcout << ex.message();
+    }
+    cin.get();
+}
+```
 
 现在可以按 F5 在 Visual Studio 中生成并运行代码，或者通过查找应用程序并运行可执行文件在终端窗口中生成并运行代码。
 

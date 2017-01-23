@@ -104,11 +104,15 @@ ms.author: cephalin
 
 1. 接下来，可尝试访问 ASP.NET 项目中的 **~/Content/bootstrap.css** 文件。在浏览器窗口中，导航到 **http://*&lt;cdnName>*.azureedge.net/Content/bootstrap.css**。在我的设置中，此 URL 为：
 
-        http://az673227.azureedge.net/Content/bootstrap.css
+    ```
+    http://az673227.azureedge.net/Content/bootstrap.css
+    ```
 
     这对应于 CDN 终结点的以下源 URL：
 
-        http://cdnwebapp.chinacloudsites.cn/Content/bootstrap.css
+    ```
+    http://cdnwebapp.chinacloudsites.cn/Content/bootstrap.css
+    ```
 
     导航到 **http://*&lt;cdnName>*.azureedge.net/Content/bootstrap.css** 时，系统会提示下载 bootstrap.css，该文件来自你在 Azure 中的 Web 应用。
 
@@ -134,23 +138,27 @@ ms.author: cephalin
 
 通知在 Azure Web 应用中进行 Azure CDN 集成，你可以指定你所希望的在 CDN 终结点中缓存静态内容的方式。为此，请通过某个 ASP.NET 项目（例如 **cdnwebapp**）打开 *Web.config*，然后将 `<staticContent>` 元素添加到 `<system.webServer>`。以下 XML 将缓存配置为 3 天后过期。
 
-    <system.webServer>
-      <staticContent>
-        <clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="3.00:00:00"/>
-      </staticContent>
-      ...
-    </system.webServer>
+```
+<system.webServer>
+  <staticContent>
+    <clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="3.00:00:00"/>
+  </staticContent>
+  ...
+</system.webServer>
+```
 
 执行完此操作后，Azure Web 应用中的所有静态文件将会遵守 CDN 缓存中的同一规则。若要对缓存设置进行更细致的控制，可将 *Web.config* 文件添加到一个文件夹中，然后在该处添加你的设置。例如，可将 *Web.config* 文件添加到 *\\Content* 文件夹中，然后使用以下 XML 替换其中的内容：
 
-    <?xml version="1.0"?>
-    <configuration>
-      <system.webServer>
-        <staticContent>
-          <clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="15.00:00:00"/>
-        </staticContent>
-      </system.webServer>
-    </configuration>
+```
+<?xml version="1.0"?>
+<configuration>
+  <system.webServer>
+    <staticContent>
+      <clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="15.00:00:00"/>
+    </staticContent>
+  </system.webServer>
+</configuration>
+```
 
 此设置可以让 *\\Content* 文件夹中的所有静态文件缓存 15 天。
 
@@ -224,7 +232,9 @@ ms.author: cephalin
               }
             }
 
-            [OutputCache(VaryByParam = "*", Duration = 3600, Location = OutputCacheLocation.Downstream)]
+        ```
+[OutputCache(VaryByParam = "*", Duration = 3600, Location = OutputCacheLocation.Downstream)]
+```
             public ActionResult Generate(string top, string bottom)
             {
               string imageFilePath = HostingEnvironment.MapPath("~/Content/chuck.bmp");
@@ -277,50 +287,60 @@ ms.author: cephalin
 
 4. 打开这个新的 *Views\\MemeGenerator\\Index.cshtml*，将其中的内容替换为下面这个简单的 HTML，以便提交夸张元素：
 
-        <h2>Meme Generator</h2>
+    ```
+    <h2>Meme Generator</h2>
 
-        <form action="" method="post">
-            <input type="text" name="top" placeholder="Enter top text here" />
-            <br />
-            <input type="text" name="bottom" placeholder="Enter bottom text here" />
-            <br />
-            <input class="btn" type="submit" value="Generate meme" />
-        </form>
+    <form action="" method="post">
+        <input type="text" name="top" placeholder="Enter top text here" />
+        <br />
+        <input type="text" name="bottom" placeholder="Enter bottom text here" />
+        <br />
+        <input class="btn" type="submit" value="Generate meme" />
+    </form>
+    ```
 
 5. 重新发布到 Azure Web 应用，然后在浏览器中导航到 **http://*&lt;serviceName>*.chinacloudapp.cn/MemeGenerator/Index**。
 
 将窗体值提交到 `/MemeGenerator/Index` 时，`Index_Post` 操作方法会返回一个指向 `Show` 操作方法的链接，其中包含相应的输入标识符。单击该链接即可访问以下代码：
 
-    [OutputCache(VaryByParam = "*", Duration = 1, Location = OutputCacheLocation.Downstream)]
-    public ActionResult Show(string id)
-    {
-      Tuple<string, string> data = null;
-      if (!Memes.TryGetValue(id, out data))
-      {
-        return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-      }
+```
+[OutputCache(VaryByParam = "*", Duration = 1, Location = OutputCacheLocation.Downstream)]
+public ActionResult Show(string id)
+{
+  Tuple<string, string> data = null;
+  if (!Memes.TryGetValue(id, out data))
+  {
+    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+  }
 
-      if (Debugger.IsAttached) // Preserve the debug experience
-      {
-        return Redirect(string.Format("/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
-      }
-      else // Get content from Azure CDN
-      {
-        return Redirect(string.Format("http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
-      }
-    }
+  if (Debugger.IsAttached) // Preserve the debug experience
+  {
+    return Redirect(string.Format("/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
+  }
+  else // Get content from Azure CDN
+  {
+    return Redirect(string.Format("http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
+  }
+}
+```
 
 如果连接了本地调试器，就可以通过本地重定向获得常规的调试体验。如果是在 Azure Web 应用中运行，则会重定向到：
 
-    http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+```
+http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+```
 
 这对应于 CDN 终结点的以下源 URL：
 
-    http://<yourSiteName>.chinacloudsites.cn/cdn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+```
+http://<yourSiteName>.chinacloudsites.cn/cdn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+```
 
 由于已应用过 URL 重写规则，缓存到 CDN 终结点的实际文件为：
 
-    http://<yourSiteName>.chinacloudsites.cn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+```
+http://<yourSiteName>.chinacloudsites.cn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+```
 
 然后，可以使用 `Generate` 方法的 `OutputCacheAttribute` 属性来指定 Azure CDN 认可的操作结果缓存方式。以下代码指定缓存在 1 小时（3,600 秒）后过期。
 
@@ -342,24 +362,32 @@ ms.author: cephalin
 
 在[将 Azure CDN 终结点与 Azure Web 应用集成，通过 Azure CDN 在网页中提供静态内容](#deploy-a-web-app-to-azure-with-an-integrated-cdn-endpoint)部分创建的 ASP.NET 项目中，打开 *App\_Start\\BundleConfig.cs*，然后查看 `bundles.Add()` 方法调用情况。
 
-    public static void RegisterBundles(BundleCollection bundles)
-    {
-        bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                    "~/Scripts/jquery-{version}.js"));
-        ...
-    }
+```
+public static void RegisterBundles(BundleCollection bundles)
+{
+    bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jquery-{version}.js"));
+    ...
+}
+```
 
 第一个 `bundles.Add()` 语句将脚本捆绑包添加到了虚拟目录 `~/bundles/jquery`。然后，打开 *Views\\Shared\_Layout.cshtml* 以查看脚本捆绑包标记的呈现方式。你应该能够找到以下 Razor 代码行：
 
-    @Scripts.Render("~/bundles/jquery")
+```
+@Scripts.Render("~/bundles/jquery")
+```
 
 当该 Razor 代码在 Azure Web 应用中运行时，它会呈现脚本捆绑包的 `<script>` 标记，如下所示：
 
-    <script src="/bundles/jquery?v=FVs3ACwOLIVInrAl5sdzR2jrCDmVOWFbZMY6g6Q0ulE1"></script>
+```
+<script src="/bundles/jquery?v=FVs3ACwOLIVInrAl5sdzR2jrCDmVOWFbZMY6g6Q0ulE1"></script>
+```
 
 但是，通过键入 `F5` 而让其在 Visual Studio 中运行时，它会逐一呈现捆绑包中的每个脚本文件（在上述示例中，捆绑包中只有一个脚本文件）：
 
-    <script src="/Scripts/jquery-1.10.2.js"></script>
+```
+<script src="/Scripts/jquery-1.10.2.js"></script>
+```
 
 这样可以让你在开发环境中调试 JavaScript 代码时，减少生产环境中出现的并发客户端连接（绑定），改进文件下载性能（缩减）。这是一项很适合保留在 Azure CDN 集成中的功能。此外，由于呈现的捆绑包已包含自动生成的版本字符串，因此你希望能够复制该功能，这样当你通过 NuGet 更新 jQuery 版本时，就能够尽快在客户端进行相应的更新。
 
@@ -367,42 +395,48 @@ ms.author: cephalin
 
 1. 回到 *App\_Start\\BundleConfig.cs*，修改 `bundles.Add()` 方法以使用其他[捆绑包构造函数](http://msdn.microsoft.com/zh-cn/library/jj646464.aspx)来指定 CDN 地址。为此，请使用以下代码替换 `RegisterBundles` 方法定义：
 
-        public static void RegisterBundles(BundleCollection bundles)
-        {
-          bundles.UseCdn = true;
-          var version = System.Reflection.Assembly.GetAssembly(typeof(Controllers.HomeController))
-            .GetName().Version.ToString();
-          var cdnUrl = "http://<yourCDNName>.azureedge.net/{0}?" + version;
+    ```
+    public static void RegisterBundles(BundleCollection bundles)
+    {
+      bundles.UseCdn = true;
+      var version = System.Reflection.Assembly.GetAssembly(typeof(Controllers.HomeController))
+        .GetName().Version.ToString();
+      var cdnUrl = "http://<yourCDNName>.azureedge.net/{0}?" + version;
 
-          bundles.Add(new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery")).Include(
-                "~/Scripts/jquery-{version}.js"));
+      bundles.Add(new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery")).Include(
+            "~/Scripts/jquery-{version}.js"));
 
-          bundles.Add(new ScriptBundle("~/bundles/jqueryval", string.Format(cdnUrl, "bundles/jqueryval")).Include(
-                "~/Scripts/jquery.validate*"));
+      bundles.Add(new ScriptBundle("~/bundles/jqueryval", string.Format(cdnUrl, "bundles/jqueryval")).Include(
+            "~/Scripts/jquery.validate*"));
 
-          // Use the development version of Modernizr to develop with and learn from. Then, when you're
-          // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-          bundles.Add(new ScriptBundle("~/bundles/modernizr", string.Format(cdnUrl, "bundles/modernizr")).Include(
-                "~/Scripts/modernizr-*"));
+      // Use the development version of Modernizr to develop with and learn from. Then, when you're
+      // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+      bundles.Add(new ScriptBundle("~/bundles/modernizr", string.Format(cdnUrl, "bundles/modernizr")).Include(
+            "~/Scripts/modernizr-*"));
 
-          bundles.Add(new ScriptBundle("~/bundles/bootstrap", string.Format(cdnUrl, "bundles/bootstrap")).Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
+      bundles.Add(new ScriptBundle("~/bundles/bootstrap", string.Format(cdnUrl, "bundles/bootstrap")).Include(
+            "~/Scripts/bootstrap.js",
+            "~/Scripts/respond.js"));
 
-          bundles.Add(new StyleBundle("~/Content/css", string.Format(cdnUrl, "Content/css")).Include(
-                "~/Content/bootstrap.css",
-                "~/Content/site.css"));
-        }
+      bundles.Add(new StyleBundle("~/Content/css", string.Format(cdnUrl, "Content/css")).Include(
+            "~/Content/bootstrap.css",
+            "~/Content/site.css"));
+    }
+    ```
 
     请确保将 `<yourCDNName>` 替换为 Azure CDN 的名称。
 
     你要使用纯单词来设置 `bundles.UseCdn = true` 且已将仔细编写的 CDN URL 添加到每个捆绑包。例如，代码中的第一个构造函数：
 
-        new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery"))
+    ```
+    new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery"))
+    ```
 
     相当于：
 
-        new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "http://<yourCDNName>.azureedge.net/bundles/jquery?<W.X.Y.Z>"))
+    ```
+    new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "http://<yourCDNName>.azureedge.net/bundles/jquery?<W.X.Y.Z>"))
+    ```
 
     进行本地调试时，此构造函数会指示 ASP.NET 绑定和缩减功能呈现各个脚本文件，但会使用指定的 CDN 地址来访问相关脚本。不过，请注意这个仔细编写的 CDN URL 存在两个重要的特征：
 
@@ -411,7 +445,9 @@ ms.author: cephalin
 
 3. 查询字符串 `<W.X.Y.Z>` 的功能是从 ASP.NET 项目中的 *Properties\\AssemblyInfo.cs* 进行拉取。你可以建立一个部署工作流，这样当你每次将相关内容发布到 Azure 时，程序集版本就会递增一次。你也可以使用通配符“*”直接修改项目中的 *Properties\\AssemblyInfo.cs*，以便每次进行构建时让版本字符串自动递增。例如，如下所示更改 `AssemblyVersion`：
 
-        [assembly: AssemblyVersion("1.0.0.*")]
+    ```
+    [assembly: AssemblyVersion("1.0.0.*")]
+    ```
 
     在这里，可以使用任何其他的策略来简化部署过程中唯一字符串的生成。
 
@@ -419,27 +455,31 @@ ms.author: cephalin
 
 4. 查看页面的 HTML 代码。每次重新发布对 Azure Web 应用的更改时，都可以看到所呈现的 CDN URL，其中包含唯一版本字符串。例如：
 
-        ...
-        <link href="http://az673227.azureedge.net/Content/css?1.0.0.25449" rel="stylesheet"/>
-        <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25449"></script>
-        ...
-        <script src="http://az673227.azureedge.net/bundles/jquery?1.0.0.25449"></script>
-        <script src="http://az673227.azureedge.net/bundles/bootstrap?1.0.0.25449"></script>
-        ...
+    ```
+    ...
+    <link href="http://az673227.azureedge.net/Content/css?1.0.0.25449" rel="stylesheet"/>
+    <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25449"></script>
+    ...
+    <script src="http://az673227.azureedge.net/bundles/jquery?1.0.0.25449"></script>
+    <script src="http://az673227.azureedge.net/bundles/bootstrap?1.0.0.25449"></script>
+    ...
+    ```
 
 5. 在 Visual Studio 中，键入 `F5` 即可调试 ASP.NET 应用程序。
 
 6. 查看页面的 HTML 代码。你仍然会看到每个脚本文件独立呈现，因此，在 Visual Studio 中的调试体验是一致的。
 
-        ...
-        <link href="/Content/bootstrap.css" rel="stylesheet"/>
-        <link href="/Content/site.css" rel="stylesheet"/>
-        <script src="/Scripts/modernizr-2.6.2.js"></script>
-        ...
-        <script src="/Scripts/jquery-1.10.2.js"></script>
-        <script src="/Scripts/bootstrap.js"></script>
-        <script src="/Scripts/respond.js"></script>
-        ...    
+    ```
+    ...
+    <link href="/Content/bootstrap.css" rel="stylesheet"/>
+    <link href="/Content/site.css" rel="stylesheet"/>
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+    ...
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/respond.js"></script>
+    ...    
+    ```
 
 ## CDN URL 的回退机制 ##
 
@@ -449,37 +489,39 @@ ms.author: cephalin
 
 1. 在 ASP.NET 项目中打开 *App\_Start\\BundleConfig.cs*（你已在其中将 CDN URL 添加到了每个[捆绑包构造函数](http://msdn.microsoft.com/zh-cn/library/jj646464.aspx)），然后将 `CdnFallbackExpression` 代码添加到所示的四个位置，以便将回退机制添加到默认捆绑包中。
 
-        public static void RegisterBundles(BundleCollection bundles)
-        {
-          var version = System.Reflection.Assembly.GetAssembly(typeof(BundleConfig))
-            .GetName().Version.ToString();
-          var cdnUrl = "http://cdnurl.azureedge.net/.../{0}?" + version;
-          bundles.UseCdn = true;
+    ```
+    public static void RegisterBundles(BundleCollection bundles)
+    {
+      var version = System.Reflection.Assembly.GetAssembly(typeof(BundleConfig))
+        .GetName().Version.ToString();
+      var cdnUrl = "http://cdnurl.azureedge.net/.../{0}?" + version;
+      bundles.UseCdn = true;
 
-          bundles.Add(new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery")) 
-                { CdnFallbackExpression = "window.jquery" }
-                .Include("~/Scripts/jquery-{version}.js"));
+      bundles.Add(new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery")) 
+            { CdnFallbackExpression = "window.jquery" }
+            .Include("~/Scripts/jquery-{version}.js"));
 
-          bundles.Add(new ScriptBundle("~/bundles/jqueryval", string.Format(cdnUrl, "bundles/jqueryval")) 
-                { CdnFallbackExpression = "$.validator" }
-                .Include("~/Scripts/jquery.validate*"));
+      bundles.Add(new ScriptBundle("~/bundles/jqueryval", string.Format(cdnUrl, "bundles/jqueryval")) 
+            { CdnFallbackExpression = "$.validator" }
+            .Include("~/Scripts/jquery.validate*"));
 
-          // Use the development version of Modernizr to develop with and learn from. Then, when you're
-          // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-          bundles.Add(new ScriptBundle("~/bundles/modernizr", string.Format(cdnUrl, "bundles/modernizer")) 
-                { CdnFallbackExpression = "window.Modernizr" }
-                .Include("~/Scripts/modernizr-*"));
+      // Use the development version of Modernizr to develop with and learn from. Then, when you're
+      // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+      bundles.Add(new ScriptBundle("~/bundles/modernizr", string.Format(cdnUrl, "bundles/modernizer")) 
+            { CdnFallbackExpression = "window.Modernizr" }
+            .Include("~/Scripts/modernizr-*"));
 
-          bundles.Add(new ScriptBundle("~/bundles/bootstrap", string.Format(cdnUrl, "bundles/bootstrap"))     
-                { CdnFallbackExpression = "$.fn.modal" }
-                .Include(
-                        "~/Scripts/bootstrap.js",
-                        "~/Scripts/respond.js"));
+      bundles.Add(new ScriptBundle("~/bundles/bootstrap", string.Format(cdnUrl, "bundles/bootstrap"))     
+            { CdnFallbackExpression = "$.fn.modal" }
+            .Include(
+                    "~/Scripts/bootstrap.js",
+                    "~/Scripts/respond.js"));
 
-          bundles.Add(new StyleBundle("~/Content/css", string.Format(cdnUrl, "Content/css")).Include(
-                "~/Content/bootstrap.css",
-                "~/Content/site.css"));
-        }
+      bundles.Add(new StyleBundle("~/Content/css", string.Format(cdnUrl, "Content/css")).Include(
+            "~/Content/bootstrap.css",
+            "~/Content/site.css"));
+    }
+    ```
 
     当 `CdnFallbackExpression` 不为 null 时，会将脚本注入 HTML 中以测试捆绑包是否已成功加载，而如果没有成功加载，则会直接从源 Web 服务器访问捆绑包。需要将此属性设置成一个 JavaScript 表达式，以便测试相应的 CDN 捆绑包是否已正确加载。根据内容的不同，测试每个捆绑包所需的表达式也会有所不同。对于上面的默认捆绑包：
 
@@ -498,11 +540,13 @@ ms.author: cephalin
 
 3. 回到 `App_Start\BundleConfig.cs`，将最后一个 `bundles.Add` 语句替换为以下代码：
 
-        bundles.Add(new StyleBundle("~/Content/css", string.Format(cdnUrl, "Content/css"))
-          .IncludeFallback("~/Content/css", "sr-only", "width", "1px")
-          .Include(
-            "~/Content/bootstrap.css",
-            "~/Content/site.css"));
+    ```
+    bundles.Add(new StyleBundle("~/Content/css", string.Format(cdnUrl, "Content/css"))
+      .IncludeFallback("~/Content/css", "sr-only", "width", "1px")
+      .Include(
+        "~/Content/bootstrap.css",
+        "~/Content/site.css"));
+    ```
 
     这个新扩展方法使用相同的机制将脚本注入 HTML 中，以便查看 DOM 中是否存在匹配的类名、规则名和规则值（在 CSS 捆绑包中定义），如果没有找到匹配项，则会回退到源 Web 服务器。
 
@@ -528,7 +572,9 @@ ms.author: cephalin
                             }
                         }
                         return true;
-                    }())||document.write('<script src="/Content/css"><\/script>');</script>
+                ```
+    }())||document.write('<script src="/Content/css"><\/script>');</script>
+    ```
 
         <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25474"></script>
              <script>(window.Modernizr)||document.write('<script src="/bundles/modernizr"><\/script>');</script>

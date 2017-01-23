@@ -118,8 +118,10 @@ wacn.date: 06/14/2016
 
 7. SSH 连接到两台虚拟机，安装后 HTTP SERVER 并启动。比如 CentOS 是
 
-        sudo yum install httpd
-        sudo service httpd start
+    ```
+    sudo yum install httpd
+    sudo service httpd start
+    ```
 
 8. 在 newtest1 执行 echo “newtest1” > /var/www/html/index.html。 在 newtest2 执行 echo “newtest2” > /var/www/html/index.html。
 

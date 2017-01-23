@@ -254,9 +254,11 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
     下面是 dataset CSV 文件的示例：
 
-        BasePath,DstBlobPathOrPrefix,BlobType,Disposition,MetadataFile,PropertiesFile
-        "F:\50M_original\100M_1.csv.txt","containername/100M_1.csv.txt",BlockBlob,rename,"None",None
-        "F:\50M_original\","containername/",BlockBlob,rename,"None",None 
+    ```
+    BasePath,DstBlobPathOrPrefix,BlobType,Disposition,MetadataFile,PropertiesFile
+    "F:\50M_original\100M_1.csv.txt","containername/100M_1.csv.txt",BlockBlob,rename,"None",None
+    "F:\50M_original\","containername/",BlockBlob,rename,"None",None 
+    ```
 
     在上面的示例中, 100M\_1.csv.txt 将复制到名为“containername”的根容器中。如果名为“containername”的容器不存在，系统会创建一个。50M\_original 下的所有文件和文件夹将以递归方式复制到 containername。文件夹结构保持不变。
 
@@ -270,9 +272,11 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
     下面是 driveset CSV 文件的示例：
 
-        DriveLetter,FormatOption,SilentOrPromptOnFormat,Encryption,ExistingBitLockerKey
-        G,AlreadyFormatted,SilentMode,AlreadyEncrypted,060456-014509-132033-080300-252615-584177-672089-411631 |
-        H,Format,SilentMode,Encrypt,
+    ```
+    DriveLetter,FormatOption,SilentOrPromptOnFormat,Encryption,ExistingBitLockerKey
+    G,AlreadyFormatted,SilentMode,AlreadyEncrypted,060456-014509-132033-080300-252615-584177-672089-411631 |
+    H,Format,SilentMode,Encrypt,
+    ```
 
     在上面的示例中，假设附加了两个磁盘，并创建了盘符为 G:\\ 和 H:\\ 的基本 NFTS 卷。工具将格式化并加密托管 H:\\ 的磁盘，但不会格式化并加密托管卷 G: 的磁盘。
 
@@ -290,28 +294,40 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
 在第一个复制会话中使用新复制会话复制目录和/或文件的 WAImportExport 工具 PrepImport 命令：
 
-    WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] [/sk:<StorageAccountKey>] [/silentmode] [/InitialDriveSet:<driveset.csv>] DataSet:<dataset.csv>
+```
+WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] [/sk:<StorageAccountKey>] [/silentmode] [/InitialDriveSet:<driveset.csv>] DataSet:<dataset.csv>
+```
 
 **示例：**
 
-    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#1  /sk:************* /InitialDriveSet:driveset-1.csv /DataSet:dataset-1.csv /logdir:F:\logs
+```
+WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#1  /sk:************* /InitialDriveSet:driveset-1.csv /DataSet:dataset-1.csv /logdir:F:\logs
+```
 
 若要**添加更多驱动器**，可以创建一个新的 driveset 文件并运行以下命令。如果后续复制会话中的磁盘驱动器与 InitialDriveset .csv 中指定的不同，可以指定一个新的 driveset CSV 文件并将其作为值提供给 “AdditionalDriveSet” 参数。 使用 **同一日志文件**的名称并提供**新的会话 ID**。 AdditionalDriveset CSV 文件的格式与 InitialDriveSet 的格式相同。
 
-    WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> /AdditionalDriveSet:<driveset.csv>
+```
+WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> /AdditionalDriveSet:<driveset.csv>
+```
 
 **示例**
 
-    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#3  /AdditionalDriveSet:driveset-2.csv
+```
+WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#3  /AdditionalDriveSet:driveset-2.csv
+```
 
 若要向同一个的 driveset 添加更多数据，后续复制会话可以调用 WAImportExport 工具的 PrepImport 命令来复制其他文件/目录：
 对于 InitialDriveset .csv 文件中为相同硬盘驱动器指定的后续复制会话，请指定**同一日志文件**的名称并提供**新的会话 ID**；不需要提供存储帐户密钥。
 
-    WAImportExport PrepImport /j:<JournalFile> /id:<SessionId> /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] DataSet:<dataset.csv>
+```
+WAImportExport PrepImport /j:<JournalFile> /id:<SessionId> /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] DataSet:<dataset.csv>
+```
 
 **示例：**
 
-    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2  /DataSet:dataset-2.csv
+```
+WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2  /DataSet:dataset-2.csv
+```
 
 若要更详细了解如何使用 WAImportExport 工具，请参阅[为导入作业准备硬盘驱动器](./storage-import-export-tool-preparing-hard-drives-import.md)。
 

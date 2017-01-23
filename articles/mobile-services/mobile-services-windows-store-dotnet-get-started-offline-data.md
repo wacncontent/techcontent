@@ -80,101 +80,113 @@ ms.author: donnam
 
 5. 在解决方案资源管理器中，在共享项目中打开 MainPage.cs 文件。使用文件顶部的语句取消注释以下内容：
 
-        using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
-        using Microsoft.WindowsAzure.MobileServices.Sync;         // offline sync
+    ```
+    using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
+    using Microsoft.WindowsAzure.MobileServices.Sync;         // offline sync
+    ```
 
 6. 在 MainPage.cs 中，注释 `todoTable` 的定义，取消注释以下调用 `MobileServicesClient.GetSyncTable()` 的行上的定义：
 
-        //private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
-        private IMobileServiceSyncTable<TodoItem> todoTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
+    ```
+    //private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
+    private IMobileServiceSyncTable<TodoItem> todoTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
+    ```
 
 7. 在 MainPage.cs 中，在标记为 `Offline sync` 的区域中取消注释方法 `InitLocalStoreAsync` 和 `SyncAsync`。方法 `InitLocalStoreAsync` 使用 SQLite 存储初始化客户端同步上下文。
 
-        private async Task InitLocalStoreAsync()
+    ```
+    private async Task InitLocalStoreAsync()
+    {
+        if (!App.MobileService.SyncContext.IsInitialized)
         {
-            if (!App.MobileService.SyncContext.IsInitialized)
-            {
-                var store = new MobileServiceSQLiteStore("localstore.db");
-                store.DefineTable<TodoItem>();
-                await App.MobileService.SyncContext.InitializeAsync(store);
-            }
-
-            await SyncAsync();
+            var store = new MobileServiceSQLiteStore("localstore.db");
+            store.DefineTable<TodoItem>();
+            await App.MobileService.SyncContext.InitializeAsync(store);
         }
 
-        private async Task SyncAsync()
-        {
-            await App.MobileService.SyncContext.PushAsync();
-            await todoTable.PullAsync("todoItems", todoTable.CreateQuery());
-        }
+        await SyncAsync();
+    }
+
+    private async Task SyncAsync()
+    {
+        await App.MobileService.SyncContext.PushAsync();
+        await todoTable.PullAsync("todoItems", todoTable.CreateQuery());
+    }
+    ```
 
 8. 在 `OnNavigatedTo` 事件处理程序中，取消注释对 `InitLocalStoreAsync` 的调用：
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            await InitLocalStoreAsync(); // offline sync
-            await RefreshTodoItems();
-        }
+    ```
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
+    {
+        await InitLocalStoreAsync(); // offline sync
+        await RefreshTodoItems();
+    }
+    ```
 
 9. 在方法 `InsertTodoItem`、`UpdateCheckedTodoItem` 和 `ButtonRefresh_Click` 中取消注释对 `SyncAsync` 的 3 次调用：
 
-        private async Task InsertTodoItem(TodoItem todoItem)
-        {
-            await todoTable.InsertAsync(todoItem);
-            items.Add(todoItem);
+    ```
+    private async Task InsertTodoItem(TodoItem todoItem)
+    {
+        await todoTable.InsertAsync(todoItem);
+        items.Add(todoItem);
 
-            await SyncAsync(); // offline sync
-        }
+        await SyncAsync(); // offline sync
+    }
 
-        private async Task UpdateCheckedTodoItem(TodoItem item)
-        {
-            await todoTable.UpdateAsync(item);
-            items.Remove(item);
-            ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
+    private async Task UpdateCheckedTodoItem(TodoItem item)
+    {
+        await todoTable.UpdateAsync(item);
+        items.Remove(item);
+        ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
 
-            await SyncAsync(); // offline sync
-        }
+        await SyncAsync(); // offline sync
+    }
 
-        private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonRefresh.IsEnabled = false;
+    private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+    {
+        ButtonRefresh.IsEnabled = false;
 
-            await SyncAsync(); // offline sync
-            await RefreshTodoItems();
+        await SyncAsync(); // offline sync
+        await RefreshTodoItems();
 
-            ButtonRefresh.IsEnabled = true;
-        }
+        ButtonRefresh.IsEnabled = true;
+    }
+    ```
 
 10. 在 `SyncAsync` 方法中添加异常处理程序：
 
-        private async Task SyncAsync()
+    ```
+    private async Task SyncAsync()
+    {
+        String errorString = null;
+
+        try
         {
-            String errorString = null;
-
-            try
-            {
-                await App.MobileService.SyncContext.PushAsync();
-                await todoTable.PullAsync("todoItems", todoTable.CreateQuery()); // first param is query ID, used for incremental sync
-            }
-
-            catch (MobileServicePushFailedException ex)
-            {
-                errorString = "Push failed because of sync errors: " +
-                  ex.PushResult.Errors.Count + " errors, message: " + ex.Message;
-            }
-            catch (Exception ex)
-            {
-                errorString = "Pull failed: " + ex.Message +
-                  "\n\nIf you are still in an offline scenario, " +
-                  "you can try your Pull again when connected with your Mobile Serice.";
-            }
-
-            if (errorString != null)
-            {
-                MessageDialog d = new MessageDialog(errorString);
-                await d.ShowAsync();
-            }
+            await App.MobileService.SyncContext.PushAsync();
+            await todoTable.PullAsync("todoItems", todoTable.CreateQuery()); // first param is query ID, used for incremental sync
         }
+
+        catch (MobileServicePushFailedException ex)
+        {
+            errorString = "Push failed because of sync errors: " +
+              ex.PushResult.Errors.Count + " errors, message: " + ex.Message;
+        }
+        catch (Exception ex)
+        {
+            errorString = "Pull failed: " + ex.Message +
+              "\n\nIf you are still in an offline scenario, " +
+              "you can try your Pull again when connected with your Mobile Serice.";
+        }
+
+        if (errorString != null)
+        {
+            MessageDialog d = new MessageDialog(errorString);
+            await d.ShowAsync();
+        }
+    }
+    ```
 
     在此示例中，我们将检索远程 `todoTable` 中的所有记录，但也可以通过传递查询来筛选记录。`PullAsync` 的第一个参数是用于增量同步的查询 ID；增量同步使用 `UpdatedAt` 时间戳以仅获取自上次同步以来修改的记录。查询 ID 应对于你的应用程序中的每个逻辑查询都是唯一的描述性字符串。若选择不要增量同步，请传递 `null` 作为查询 ID。此命令会检索每个请求的操作，这是可能效率低下上的所有记录。
 
@@ -193,10 +205,12 @@ ms.author: donnam
 
 2. 编辑共享项目中的 App.xaml.cs。注释掉 **MobileServiceClient** 的初始化并添加使用无效移动服务 URL 的以下行：
 
-         public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://your-mobile-service.azure-mobile.xxx/",
-            "AppKey"
-        );
+    ```
+     public static MobileServiceClient MobileService = new MobileServiceClient(
+        "https://your-mobile-service.azure-mobile.xxx/",
+        "AppKey"
+    );
+    ```
 
 3. 在 `InitLocalStoreAsync()` 中，注释掉对 `SyncAsync()` 的调用，使应用不在启动时执行同步。
 

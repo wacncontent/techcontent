@@ -26,9 +26,11 @@ Azure 虚拟机代理（VM 代理）是一个安全的轻型进程，用于在�
 
 -   在现有 VM 实例上手动下载并安装 VM 代理（Windows 或 Linux 版本），然后使用 Powershell 或 REST 调用将 **ProvisionGuestAgent** 值设为 **true**。（如果在手动安装 VM 代理后未设置此值，则将无法正常检测到添加的 VM 代理。） 以下代码示例演示如何使用 PowerShell 执行此操作，其中 `$svc` 和 `$name` 参数已确定。
 
-        $vm = Get-AzureVM -serviceName $svc -Name $name
-        $vm.VM.ProvisionGuestAgent = $TRUE
-        Update-AzureVM -Name $name -VM $vm.VM -ServiceName $svc
+    ```
+    $vm = Get-AzureVM -serviceName $svc -Name $name
+    $vm.VM.ProvisionGuestAgent = $TRUE
+    Update-AzureVM -Name $name -VM $vm.VM -ServiceName $svc
+    ```
 
 -   创建安装了 VM 代理的 VM 映像，然后将它上载到 Azure。对于 Windows VM，下载 [Windows VM 代理 .msi 文件](http://go.microsoft.com/fwlink/?LinkID=394789)并安装 VM 代理。对于 Linux VM，将从位于 <https://github.com/Azure/WALinuxAgent> 的 Github 存储库安装它。有关如何在 Linux 上安装 VM 代理的详细信息，请参阅 [Azure Linux VM 代理用户指南](../articles/virtual-machines/virtual-machines-linux-agent-user-guide.md)。
 

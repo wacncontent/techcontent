@@ -47,11 +47,13 @@ ms.author: douglasl
 
 若要在服务器上手动启用 Stretch Database，请运行 **sp\_configure** 并打开 **remote data archive** 选项。以下示例通过将 **remote data archive** 选项的值设置为 1 来启用该选项。
 
-    EXEC sp_configure 'remote data archive' , '1';
-    GO
+```
+EXEC sp_configure 'remote data archive' , '1';
+GO
 
-    RECONFIGURE;
-    GO
+RECONFIGURE;
+GO
+```
 
 有关详细信息，请参阅[配置 remote data archive 服务器配置选项](https://msdn.microsoft.com/zh-cn/library/mt143175.aspx)和 [sp\_configure (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms188787.aspx)。
 
@@ -73,10 +75,12 @@ ms.author: douglasl
 
 3.  若要为延伸数据库配置某个 SQL Server 数据库，该数据库必须具有数据库主密钥。数据库主密钥用于保护延伸数据库在连接到远程数据库时所用的凭据。下面是一个示例，用于创建新的数据库主密钥。
 
-        USE <database>
-        GO
+    ```
+    USE <database>
+    GO
 
-        CREATE MASTER KEY ENCRYPTION BY PASSWORD ='<password>'
+    CREATE MASTER KEY ENCRYPTION BY PASSWORD ='<password>'
+    ```
 
     有关数据库主密钥的详细信息，请参阅 [CREATE MASTER KEY (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms174382.aspx) 和[创建数据库主密钥](https://msdn.microsoft.com/zh-cn/library/aa337551.aspx)。
 

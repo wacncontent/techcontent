@@ -31,11 +31,13 @@ ms.author: saurabh
 
 若要在通过资源管理器部署模型创建的现有虚拟机上启用 Azure 诊断扩展，可以使用 [Set-AzureRMVMDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/mt603499.aspx) powershell cmdlet，如下所示。
 
-    $vm_resourcegroup = "myvmresourcegroup"
-    $vm_name = "myvm"
-    $diagnosticsconfig_path = "DiagnosticsPubConfig.xml"
+```
+$vm_resourcegroup = "myvmresourcegroup"
+$vm_name = "myvm"
+$diagnosticsconfig_path = "DiagnosticsPubConfig.xml"
 
-    Set-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name -DiagnosticsConfigurationPath $diagnosticsconfig_path 
+Set-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name -DiagnosticsConfigurationPath $diagnosticsconfig_path 
+```
 
 *$diagnosticsconfig\_path* 是一个路径，指向内含 XML 格式诊断配置的文件，如以下[示例](#sample-diagnostics-configuration)所示。
 
@@ -45,18 +47,24 @@ ms.author: saurabh
 
 如果诊断存储帐户与虚拟机属于不同的订阅，则必须将 *StorageAccountName* 和 *StorageAccountKey* 参数显式传递给 cmdlet。当诊断存储帐户属于同一订阅时，不需要 *StorageAccountKey* 参数，因为在启用诊断扩展的情况下，cmdlet 可以自动查询和设置密钥值。但是，如果诊断存储帐户属于不同的订阅，则 cmdlet 可能无法自动获取密钥，你必须通过 *StorageAccountKey* 参数显式指定该密钥。
 
-    Set-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name -DiagnosticsConfigurationPath $diagnosticsconfig_path -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key	
+```
+Set-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name -DiagnosticsConfigurationPath $diagnosticsconfig_path -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key	
+```
 
 在 VM 上启用 Azure 诊断扩展以后，即可使用 [Get-AzureRMVmDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/mt603678.aspx) cmdlet 获取当前设置。
 
-    Get-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name
+```
+Get-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name
+```
 
 该 cmdlet 返回的 *PublicSettings* 包含 base64 编码格式的 XML 配置。若要读取该 XML，需对其解码。
 
-    $publicsettings = (Get-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name).PublicSettings
-    $encodedconfig = (ConvertFrom-Json -InputObject $publicsettings).xmlCfg
-    $xmlconfig = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedconfig))
-    Write-Host $xmlconfig
+```
+$publicsettings = (Get-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name).PublicSettings
+$encodedconfig = (ConvertFrom-Json -InputObject $publicsettings).xmlCfg
+$xmlconfig = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedconfig))
+Write-Host $xmlconfig
+```
 
 可以使用 [Remove-AzureRMVmDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/mt603782.aspx) cmdlet 从 VM 中删除该诊断扩展。
 
@@ -64,16 +72,20 @@ ms.author: saurabh
 
 可以使用 [Set-AzureVMDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/mt589189.aspx) cmdlet 在通过经典部署模型创建的虚拟机上启用 Azure 诊断扩展。下面的示例演示了在启用 Azure 诊断扩展的情况下，如何通过经典部署模型创建新的虚拟机。
 
-    $VM = New-AzureVMConfig -Name $VM -InstanceSize Small -ImageName $VMImage
-    $VM = Add-AzureProvisioningConfig -VM $VM -AdminUsername $Username -Password $Password -Windows
-    $VM = Set-AzureVMDiagnosticsExtension -DiagnosticsConfigurationPath $Config_Path -VM $VM -StorageContext $Storage_Context
-    New-AzureVM -Location $Location -ServiceName $Service_Name -VM $VM
+```
+$VM = New-AzureVMConfig -Name $VM -InstanceSize Small -ImageName $VMImage
+$VM = Add-AzureProvisioningConfig -VM $VM -AdminUsername $Username -Password $Password -Windows
+$VM = Set-AzureVMDiagnosticsExtension -DiagnosticsConfigurationPath $Config_Path -VM $VM -StorageContext $Storage_Context
+New-AzureVM -Location $Location -ServiceName $Service_Name -VM $VM
+```
 
 若要在现有虚拟机（经典）上启用 Azure 诊断扩展，请先使用 [Get-AzureVM](https://msdn.microsoft.com/zh-cn/library/mt589152.aspx) cmdlet 获取虚拟机配置。然后，使用 [Set-AzureVMDiagnosticsExtension](https://msdn.microsoft.com/library/mt589189.aspx) cmdlet 更新虚拟机配置，使之包括 Azure 诊断扩展。最后，通过 [Update-AzureVM](https://msdn.microsoft.com/library/mt589121.aspx) 将更新的配置应用于虚拟机。
 
-    $VM = Get-AzureVM -ServiceName $Service_Name -Name $VM_Name
-    $VM_Update = Set-AzureVMDiagnosticsExtension -DiagnosticsConfigurationPath $Config_Path -VM $VM -StorageContext $Storage_Context
-    Update-AzureVM -ServiceName $Service_Name -Name $VM_Name -VM $VM_Update.VM
+```
+$VM = Get-AzureVM -ServiceName $Service_Name -Name $VM_Name
+$VM_Update = Set-AzureVMDiagnosticsExtension -DiagnosticsConfigurationPath $Config_Path -VM $VM -StorageContext $Storage_Context
+Update-AzureVM -ServiceName $Service_Name -Name $VM_Name -VM $VM_Update.VM
+```
 
 ## <a name="sample-diagnostics-configuration"></a> 诊断配置示例
 

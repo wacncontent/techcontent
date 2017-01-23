@@ -35,100 +35,112 @@ ms.author: jeffstok
 1. 创建 Visual Studio C# .Net 控制台应用程序。
 2. 在程序包管理器控制台中运行以下命令以安装 NuGet 包。第一个是 Azure 流分析管理 .NET SDK。第二个是 Azure Insights SDK，用于启用监视功能。最后一个是用于进行身份验证的 Azure Active Directory 客户端。
 
-        Install-Package Microsoft.Azure.Management.StreamAnalytics
-        Install-Package Microsoft.Azure.Insights -Pre
-        Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
+    ```
+    Install-Package Microsoft.Azure.Management.StreamAnalytics
+    Install-Package Microsoft.Azure.Insights -Pre
+    Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
+    ```
 
 3. 将下面的 appSettings 部分添加到 App.config 文件。
 
-        <appSettings>
-            <!--CSM Prod related values-->
-            <add key="ResourceGroupName" value="RESOURCE GROUP NAME" />
-            <add key="JobName" value="YOUR JOB NAME" />
-            <add key="StorageAccountName" value="YOUR STORAGE ACCOUNT"/>
-            <add key="ActiveDirectoryEndpoint" value="https://login.chinacloudapi.cn/" />
-            <add key="ResourceManagerEndpoint" value="https://management.azure.com/" />
-            <add key="WindowsManagementUri" value="https://management.core.chinacloudapi.cn/" />
-            <add key="AsaClientId" value="1950a258-227b-4e31-a9cf-717495945fc2" />
-            <add key="RedirectUri" value="urn:ietf:wg:oauth:2.0:oob" />
-            <add key="SubscriptionId" value="YOUR AZURE SUBSCRIPTION ID" />
-            <add key="ActiveDirectoryTenantId" value="YOUR TENANT ID" />
-        </appSettings>
+    ```
+    <appSettings>
+        <!--CSM Prod related values-->
+        <add key="ResourceGroupName" value="RESOURCE GROUP NAME" />
+        <add key="JobName" value="YOUR JOB NAME" />
+        <add key="StorageAccountName" value="YOUR STORAGE ACCOUNT"/>
+        <add key="ActiveDirectoryEndpoint" value="https://login.chinacloudapi.cn/" />
+        <add key="ResourceManagerEndpoint" value="https://management.azure.com/" />
+        <add key="WindowsManagementUri" value="https://management.core.chinacloudapi.cn/" />
+        <add key="AsaClientId" value="1950a258-227b-4e31-a9cf-717495945fc2" />
+        <add key="RedirectUri" value="urn:ietf:wg:oauth:2.0:oob" />
+        <add key="SubscriptionId" value="YOUR AZURE SUBSCRIPTION ID" />
+        <add key="ActiveDirectoryTenantId" value="YOUR TENANT ID" />
+    </appSettings>
+    ```
 
     将 *SubscriptionId* 和 *ActiveDirectoryTenantId* 的值替换为 Azure 订阅和租户 ID。你可以通过运行以下 PowerShell cmdlet 来获取这些值：
 
-        Get-AzureAccount
+    ```
+    Get-AzureAccount
+    ```
 
 4. 将以下 using 语句添加到项目中的源文件 (Program.cs)。
 
-            using System;
-            using System.Configuration;
-            using System.Threading;
-            using Microsoft.Azure;
-            using Microsoft.Azure.Management.Insights;
-            using Microsoft.Azure.Management.Insights.Models;
-            using Microsoft.Azure.Management.StreamAnalytics;
-            using Microsoft.Azure.Management.StreamAnalytics.Models;
-            using Microsoft.IdentityModel.Clients.ActiveDirectory;
+    ```
+        using System;
+        using System.Configuration;
+        using System.Threading;
+        using Microsoft.Azure;
+        using Microsoft.Azure.Management.Insights;
+        using Microsoft.Azure.Management.Insights.Models;
+        using Microsoft.Azure.Management.StreamAnalytics;
+        using Microsoft.Azure.Management.StreamAnalytics.Models;
+        using Microsoft.IdentityModel.Clients.ActiveDirectory;
+    ```
 
 5. 添加一个身份验证帮助器方法。
 
-            public static string GetAuthorizationHeader()
+    ```
+        public static string GetAuthorizationHeader()
+            {
+                AuthenticationResult result = null;
+                var thread = new Thread(() =>
                 {
-                    AuthenticationResult result = null;
-                    var thread = new Thread(() =>
+                    try
                     {
-                        try
-                        {
-                            var context = new AuthenticationContext(
-                                ConfigurationManager.AppSettings["ActiveDirectoryEndpoint"] +
-                                ConfigurationManager.AppSettings["ActiveDirectoryTenantId"]);
+                        var context = new AuthenticationContext(
+                            ConfigurationManager.AppSettings["ActiveDirectoryEndpoint"] +
+                            ConfigurationManager.AppSettings["ActiveDirectoryTenantId"]);
 
-                            result = context.AcquireToken(
-                                resource: ConfigurationManager.AppSettings["WindowsManagementUri"],
-                                clientId: ConfigurationManager.AppSettings["AsaClientId"],
-                                redirectUri: new Uri(ConfigurationManager.AppSettings["RedirectUri"]),
-                                promptBehavior: PromptBehavior.Always);
-                        }
-                        catch (Exception threadEx)
-                        {
-                            Console.WriteLine(threadEx.Message);
-                        }
-                    });
-
-                    thread.SetApartmentState(ApartmentState.STA);
-                    thread.Name = "AcquireTokenThread";
-                    thread.Start();
-                    thread.Join();
-
-                    if (result != null)
-                    {
-                        return result.AccessToken;
+                        result = context.AcquireToken(
+                            resource: ConfigurationManager.AppSettings["WindowsManagementUri"],
+                            clientId: ConfigurationManager.AppSettings["AsaClientId"],
+                            redirectUri: new Uri(ConfigurationManager.AppSettings["RedirectUri"]),
+                            promptBehavior: PromptBehavior.Always);
                     }
+                    catch (Exception threadEx)
+                    {
+                        Console.WriteLine(threadEx.Message);
+                    }
+                });
 
-                    throw new InvalidOperationException("Failed to acquire token");
-            }
+                thread.SetApartmentState(ApartmentState.STA);
+                thread.Name = "AcquireTokenThread";
+                thread.Start();
+                thread.Join();
+
+                if (result != null)
+                {
+                    return result.AccessToken;
+                }
+
+                throw new InvalidOperationException("Failed to acquire token");
+        }
+    ```
 
 ## 创建管理客户端
 以下代码将设置必需变量和管理客户端。
 
-        string resourceGroupName = "<YOUR AZURE RESOURCE GROUP NAME>";
-        string streamAnalyticsJobName = "<YOUR STREAM ANALYTICS JOB NAME>";
+```
+    string resourceGroupName = "<YOUR AZURE RESOURCE GROUP NAME>";
+    string streamAnalyticsJobName = "<YOUR STREAM ANALYTICS JOB NAME>";
 
-        // Get authentication token
-        TokenCloudCredentials aadTokenCredentials =
-            new TokenCloudCredentials(
-                ConfigurationManager.AppSettings["SubscriptionId"],
-                GetAuthorizationHeader());
+    // Get authentication token
+    TokenCloudCredentials aadTokenCredentials =
+        new TokenCloudCredentials(
+            ConfigurationManager.AppSettings["SubscriptionId"],
+            GetAuthorizationHeader());
 
-        Uri resourceManagerUri = new
-        Uri(ConfigurationManager.AppSettings["ResourceManagerEndpoint"]);
+    Uri resourceManagerUri = new
+    Uri(ConfigurationManager.AppSettings["ResourceManagerEndpoint"]);
 
-        // Create Stream Analytics and Insights management client
-        StreamAnalyticsManagementClient streamAnalyticsClient = new
-        StreamAnalyticsManagementClient(aadTokenCredentials, resourceManagerUri);
-        InsightsManagementClient insightsClient = new
-        InsightsManagementClient(aadTokenCredentials, resourceManagerUri);
+    // Create Stream Analytics and Insights management client
+    StreamAnalyticsManagementClient streamAnalyticsClient = new
+    StreamAnalyticsManagementClient(aadTokenCredentials, resourceManagerUri);
+    InsightsManagementClient insightsClient = new
+    InsightsManagementClient(aadTokenCredentials, resourceManagerUri);
+```
 
 ## 为现有流分析作业启用监视功能
 
@@ -143,22 +155,24 @@ ms.author: jeffstok
 > 
 > 用于替换下面的 “<YOUR STORAGE ACCOUNT NAME>” 的存储帐户名称所代表的存储帐户应该与要启用监视功能的流分析作业属同一订阅。
 
-        // Get an existing Stream Analytics job
-        JobGetParameters jobGetParameters = new JobGetParameters()
-        {
-            PropertiesToExpand = "inputs,transformation,outputs"
-        };
-        JobGetResponse jobGetResponse = streamAnalyticsClient.StreamingJobs.Get(resourceGroupName, streamAnalyticsJobName, jobGetParameters);
+```
+    // Get an existing Stream Analytics job
+    JobGetParameters jobGetParameters = new JobGetParameters()
+    {
+        PropertiesToExpand = "inputs,transformation,outputs"
+    };
+    JobGetResponse jobGetResponse = streamAnalyticsClient.StreamingJobs.Get(resourceGroupName, streamAnalyticsJobName, jobGetParameters);
 
-        // Enable monitoring
-        ServiceDiagnosticSettingsPutParameters insightPutParameters = new ServiceDiagnosticSettingsPutParameters()
-        {
-                Properties = new ServiceDiagnosticSettings()
-                {
-                    StorageAccountName = "<YOUR STORAGE ACCOUNT NAME>"
-                }
-        };
-        insightsClient.ServiceDiagnosticSettingsOperations.Put(jobGetResponse.Job.Id, insightPutParameters);
+    // Enable monitoring
+    ServiceDiagnosticSettingsPutParameters insightPutParameters = new ServiceDiagnosticSettingsPutParameters()
+    {
+            Properties = new ServiceDiagnosticSettings()
+            {
+                StorageAccountName = "<YOUR STORAGE ACCOUNT NAME>"
+            }
+    };
+    insightsClient.ServiceDiagnosticSettingsOperations.Put(jobGetResponse.Job.Id, insightPutParameters);
+```
 
 ## 获取支持
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。

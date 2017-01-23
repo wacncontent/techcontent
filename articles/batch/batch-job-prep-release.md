@@ -75,37 +75,41 @@ Batch 作业通常需要一组通用的数据作为作业任务的输入。例�
 
 csharp
 
-    // Create the CloudJob for CloudPool "myPool"
-    CloudJob myJob =
-        myBatchClient.JobOperations.CreateJob(
-            "JobPrepReleaseSampleJob",
-            new PoolInformation() { PoolId = "myPool" });
+```
+// Create the CloudJob for CloudPool "myPool"
+CloudJob myJob =
+    myBatchClient.JobOperations.CreateJob(
+        "JobPrepReleaseSampleJob",
+        new PoolInformation() { PoolId = "myPool" });
 
-    // Specify the command lines for the job preparation and release tasks
-    string jobPrepCmdLine =
-        "cmd /c echo %AZ_BATCH_NODE_ID% > %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
-    string jobReleaseCmdLine =
-        "cmd /c del %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
+// Specify the command lines for the job preparation and release tasks
+string jobPrepCmdLine =
+    "cmd /c echo %AZ_BATCH_NODE_ID% > %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
+string jobReleaseCmdLine =
+    "cmd /c del %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
 
-    // Assign the job preparation task to the job
-    myJob.JobPreparationTask =
-        new JobPreparationTask { CommandLine = jobPrepCmdLine };
+// Assign the job preparation task to the job
+myJob.JobPreparationTask =
+    new JobPreparationTask { CommandLine = jobPrepCmdLine };
 
-    // Assign the job release task to the job
-    myJob.JobReleaseTask =
-        new JobPreparationTask { CommandLine = jobReleaseCmdLine };
+// Assign the job release task to the job
+myJob.JobReleaseTask =
+    new JobPreparationTask { CommandLine = jobReleaseCmdLine };
 
-    await myJob.CommitAsync();
+await myJob.CommitAsync();
+```
 
 如前所述，终止或删除作业时会执行释放任务。使用 [JobOperations.TerminateJobAsync][net_job_terminate] 终止作业。使用 [JobOperations.DeleteJobAsync][net_job_delete] 删除作业。通常在作业的任务完成时或者达到定义的超时时终止或删除操作。
 
 csharp
 
-    // Terminate the job to mark it as Completed; this will initiate the
-    // Job Release Task on any node that executed job tasks. Note that the
-    // Job Release Task is also executed when a job is deleted, thus you
-    // need not call Terminate if you typically delete jobs after task completion.
-    await myBatchClient.JobOperations.TerminateJobAsy("JobPrepReleaseSampleJob");
+```
+// Terminate the job to mark it as Completed; this will initiate the
+// Job Release Task on any node that executed job tasks. Note that the
+// Job Release Task is also executed when a job is deleted, thus you
+// need not call Terminate if you typically delete jobs after task completion.
+await myBatchClient.JobOperations.TerminateJobAsy("JobPrepReleaseSampleJob");
+```
 
 ## GitHub 上的代码示例
 
@@ -122,46 +126,48 @@ csharp
 
 示例应用程序的输出类似于：
 
-    Attempting to create pool: JobPrepReleaseSamplePool
-    Created pool JobPrepReleaseSamplePool with 2 small nodes
-    Checking for existing job JobPrepReleaseSampleJob...
-    Job JobPrepReleaseSampleJob not found, creating...
-    Submitting tasks and awaiting completion...
-    All tasks completed.
+```
+Attempting to create pool: JobPrepReleaseSamplePool
+Created pool JobPrepReleaseSamplePool with 2 small nodes
+Checking for existing job JobPrepReleaseSampleJob...
+Job JobPrepReleaseSampleJob not found, creating...
+Submitting tasks and awaiting completion...
+All tasks completed.
 
-    Contents of shared\job_prep_and_release.txt on tvm-2434664350_1-20160623t173951z:
-    -------------------------------------------
-    tvm-2434664350_1-20160623t173951z tasks:
-      task001
-      task004
-      task005
-      task006
+Contents of shared\job_prep_and_release.txt on tvm-2434664350_1-20160623t173951z:
+-------------------------------------------
+tvm-2434664350_1-20160623t173951z tasks:
+  task001
+  task004
+  task005
+  task006
 
-    Contents of shared\job_prep_and_release.txt on tvm-2434664350_2-20160623t173951z:
-    -------------------------------------------
-    tvm-2434664350_2-20160623t173951z tasks:
-      task008
-      task002
-      task003
-      task007
+Contents of shared\job_prep_and_release.txt on tvm-2434664350_2-20160623t173951z:
+-------------------------------------------
+tvm-2434664350_2-20160623t173951z tasks:
+  task008
+  task002
+  task003
+  task007
 
-    Waiting for job JobPrepReleaseSampleJob to reach state Completed
-    ...
+Waiting for job JobPrepReleaseSampleJob to reach state Completed
+...
 
-    tvm-2434664350_1-20160623t173951z:
-      Prep task exit code:    0
-      Release task exit code: 0
+tvm-2434664350_1-20160623t173951z:
+  Prep task exit code:    0
+  Release task exit code: 0
 
-    tvm-2434664350_2-20160623t173951z:
-      Prep task exit code:    0
-      Release task exit code: 0
+tvm-2434664350_2-20160623t173951z:
+  Prep task exit code:    0
+  Release task exit code: 0
 
-    Delete job? [yes] no
-    yes
-    Delete pool? [yes] no
-    yes
+Delete job? [yes] no
+yes
+Delete pool? [yes] no
+yes
 
-    Sample complete, hit ENTER to exit...
+Sample complete, hit ENTER to exit...
+```
 
 >[!NOTE]
 > 由于新池中各个节点的创建和启动时间并不一样（某些节点比其他节点更早做好任务准备），你可能看到不同的输出。具体而言，因为任务快速完成，池的某个节点可能执行作业的所有任务。如果发生这种情况，你会发现未执行任何任务的节点没有作业准备和作业释放任务存在。

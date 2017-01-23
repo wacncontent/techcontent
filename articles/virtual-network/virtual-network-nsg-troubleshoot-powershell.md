@@ -45,7 +45,9 @@ ms.author: anithaa
 
 2. 输入以下命令返回对资源组 *RG1* 中名为 *VM1-NIC1* 的 NIC 应用的所有 NSG 规则：
 
-        Get-AzureRmEffectiveNetworkSecurityGroup -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
+    ```
+    Get-AzureRmEffectiveNetworkSecurityGroup -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
+    ```
 
     >[!TIP]
     > 如果不知道 NIC 的名称，请输入以下命令检索资源组中所有 NIC 的名称：
@@ -54,102 +56,104 @@ ms.author: anithaa
 
     以下文本是针对 *VM1-NIC1* NIC 返回的有效规则输出示例：
 
-        NetworkSecurityGroup   : {
-                                   "Id": "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/networkSecurityGroups/VM1-NIC1-NSG"
-                                 }
-        Association            : {
-                                   "NetworkInterface": {
-                                     "Id": "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/networkInterfaces/VM1-NIC1"
-                                   }
-                                 }
-        EffectiveSecurityRules : [
-                                 {
-                                 "Name": "securityRules/allowRDP",
-                                 "Protocol": "Tcp",
-                                 "SourcePortRange": "0-65535",
-                                 "DestinationPortRange": "3389-3389",
-                                 "SourceAddressPrefix": "Internet",
-                                 "DestinationAddressPrefix": "0.0.0.0/0",
-                                 "ExpandedSourceAddressPrefix": [… ],
-                                 "ExpandedDestinationAddressPrefix": [],
-                                 "Access": "Allow",
-                                 "Priority": 1000,
-                                 "Direction": "Inbound"
-                                 },
-                                 {
-                                 "Name": "defaultSecurityRules/AllowVnetInBound",
-                                 "Protocol": "All",
-                                 "SourcePortRange": "0-65535",
-                                 "DestinationPortRange": "0-65535",
-                                 "SourceAddressPrefix": "VirtualNetwork",
-                                 "DestinationAddressPrefix": "VirtualNetwork",
-                                 "ExpandedSourceAddressPrefix": [
-                                  "10.9.0.0/16",
-                                  "168.63.129.16/32",
-                                  "10.0.0.0/16",
-                                  "10.1.0.0/16"
-                                  ],
-                                 "ExpandedDestinationAddressPrefix": [
-                                  "10.9.0.0/16",
-                                  "168.63.129.16/32",
-                                  "10.0.0.0/16",
-                                  "10.1.0.0/16"
-                                  ],
-                                  "Access": "Allow",
-                                  "Priority": 65000,
-                                  "Direction": "Inbound"
-                                  },…
-                         ]
+    ```
+    NetworkSecurityGroup   : {
+                               "Id": "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/networkSecurityGroups/VM1-NIC1-NSG"
+                             }
+    Association            : {
+                               "NetworkInterface": {
+                                 "Id": "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/networkInterfaces/VM1-NIC1"
+                               }
+                             }
+    EffectiveSecurityRules : [
+                             {
+                             "Name": "securityRules/allowRDP",
+                             "Protocol": "Tcp",
+                             "SourcePortRange": "0-65535",
+                             "DestinationPortRange": "3389-3389",
+                             "SourceAddressPrefix": "Internet",
+                             "DestinationAddressPrefix": "0.0.0.0/0",
+                             "ExpandedSourceAddressPrefix": [… ],
+                             "ExpandedDestinationAddressPrefix": [],
+                             "Access": "Allow",
+                             "Priority": 1000,
+                             "Direction": "Inbound"
+                             },
+                             {
+                             "Name": "defaultSecurityRules/AllowVnetInBound",
+                             "Protocol": "All",
+                             "SourcePortRange": "0-65535",
+                             "DestinationPortRange": "0-65535",
+                             "SourceAddressPrefix": "VirtualNetwork",
+                             "DestinationAddressPrefix": "VirtualNetwork",
+                             "ExpandedSourceAddressPrefix": [
+                              "10.9.0.0/16",
+                              "168.63.129.16/32",
+                              "10.0.0.0/16",
+                              "10.1.0.0/16"
+                              ],
+                             "ExpandedDestinationAddressPrefix": [
+                              "10.9.0.0/16",
+                              "168.63.129.16/32",
+                              "10.0.0.0/16",
+                              "10.1.0.0/16"
+                              ],
+                              "Access": "Allow",
+                              "Priority": 65000,
+                              "Direction": "Inbound"
+                              },…
+                     ]
 
-        NetworkSecurityGroup   : {
-                                   "Id": 
-                                 "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/networkSecurityGroups/Subnet1-NSG"
-                                 }
-        Association            : {
-                                   "Subnet": {
-                                     "Id": 
-                                 "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/ChinaNorth-VNet1/subnets/Subnet1"
-                                 }
-                                 }
-        EffectiveSecurityRules : [
-                                 {
-                                "Name": "securityRules/denyRDP",
-                                "Protocol": "Tcp",
-                                "SourcePortRange": "0-65535",
-                                "DestinationPortRange": "3389-3389",
-                                "SourceAddressPrefix": "Internet",
-                                "DestinationAddressPrefix": "0.0.0.0/0",
-                                "ExpandedSourceAddressPrefix": [
-                                   ... ],
-                                "ExpandedDestinationAddressPrefix": [],
-                                "Access": "Deny",
-                                "Priority": 1000,
-                                "Direction": "Inbound"
-                                },
-                                {
-                                "Name": "defaultSecurityRules/AllowVnetInBound",
-                                "Protocol": "All",
-                                "SourcePortRange": "0-65535",
-                                "DestinationPortRange": "0-65535",
-                                "SourceAddressPrefix": "VirtualNetwork",
-                                "DestinationAddressPrefix": "VirtualNetwork",
-                                "ExpandedSourceAddressPrefix": [
-                                "10.9.0.0/16",
-                                "168.63.129.16/32",
-                                "10.0.0.0/16",
-                                "10.1.0.0/16"
-                                ],
-                                "ExpandedDestinationAddressPrefix": [
-                                "10.9.0.0/16",
-                                "168.63.129.16/32",
-                                "10.0.0.0/16",
-                                "10.1.0.0/16"
-                                ],
-                                "Access": "Allow",
-                                "Priority": 65000,
-                                "Direction": "Inbound"
-                                },...
-                                ]
+    NetworkSecurityGroup   : {
+                               "Id": 
+                             "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/networkSecurityGroups/Subnet1-NSG"
+                             }
+    Association            : {
+                               "Subnet": {
+                                 "Id": 
+                             "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/virtualNetworks/ChinaNorth-VNet1/subnets/Subnet1"
+                             }
+                             }
+    EffectiveSecurityRules : [
+                             {
+                            "Name": "securityRules/denyRDP",
+                            "Protocol": "Tcp",
+                            "SourcePortRange": "0-65535",
+                            "DestinationPortRange": "3389-3389",
+                            "SourceAddressPrefix": "Internet",
+                            "DestinationAddressPrefix": "0.0.0.0/0",
+                            "ExpandedSourceAddressPrefix": [
+                               ... ],
+                            "ExpandedDestinationAddressPrefix": [],
+                            "Access": "Deny",
+                            "Priority": 1000,
+                            "Direction": "Inbound"
+                            },
+                            {
+                            "Name": "defaultSecurityRules/AllowVnetInBound",
+                            "Protocol": "All",
+                            "SourcePortRange": "0-65535",
+                            "DestinationPortRange": "0-65535",
+                            "SourceAddressPrefix": "VirtualNetwork",
+                            "DestinationAddressPrefix": "VirtualNetwork",
+                            "ExpandedSourceAddressPrefix": [
+                            "10.9.0.0/16",
+                            "168.63.129.16/32",
+                            "10.0.0.0/16",
+                            "10.1.0.0/16"
+                            ],
+                            "ExpandedDestinationAddressPrefix": [
+                            "10.9.0.0/16",
+                            "168.63.129.16/32",
+                            "10.0.0.0/16",
+                            "10.1.0.0/16"
+                            ],
+                            "Access": "Allow",
+                            "Priority": 65000,
+                            "Direction": "Inbound"
+                            },...
+                            ]
+    ```
 
     请注意输出中的以下信息：
 
@@ -163,8 +167,10 @@ ms.author: anithaa
 
 3. 为了方便筛选大量 NSG 规则，请输入以下命令进一步进行故障排除：
 
-        $NSGs = Get-AzureRmEffectiveNetworkSecurityGroup -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
-        $NSGs.EffectiveSecurityRules | Sort-Object Direction, Access, Priority | Out-GridView
+    ```
+    $NSGs = Get-AzureRmEffectiveNetworkSecurityGroup -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
+    $NSGs.EffectiveSecurityRules | Sort-Object Direction, Access, Priority | Out-GridView
+    ```
 
     下图向网格视图应用了 RDP 流量（TCP 端口 3389）筛选器：
 
@@ -179,7 +185,9 @@ ms.author: anithaa
 
     可以使用以下命令输出中的信息删除 NSG 中的规则：
 
-        Get-Help *-AzureRmNetworkSecurityRuleConfig
+    ```
+    Get-Help *-AzureRmNetworkSecurityRuleConfig
+    ```
 
 ## 注意事项
 

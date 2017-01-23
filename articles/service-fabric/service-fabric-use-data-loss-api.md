@@ -51,169 +51,173 @@ ms.author: lemai
 
 以下示例代码演示如何启动一个命令在特定的分区上导致数据丢失，然后检查该命令的进度。
 
-        static async Task PerformDataLossSample()
+```
+    static async Task PerformDataLossSample()
+    {
+        // Create a unique operation id for the command below
+        Guid operationId = Guid.NewGuid();
+
+        // Note: Use the appropriate overload for your configuration
+        FabricClient fabricClient = new FabricClient();
+
+        // The name of the target service
+        Uri targetServiceName = new Uri("fabric:/MyService");
+
+        // The id of the target partition inside the target service
+        Guid targetPartitionId = new Guid("00000000-0000-0000-0000-000002233445");
+
+        PartitionSelector partitionSelector = PartitionSelector.PartitionIdOf(targetServiceName, targetPartitionId);
+
+        // Start the command.  Retry OperationCanceledException and all FabricTransientException's.  Note when StartPartitionDataLossAsync completes
+        // successfully it only means the Fault Injection and Analysis Service has saved the intent to perform this work.  It does not say anything about the progress
+        // of the command.
+        while (true)
         {
-            // Create a unique operation id for the command below
-            Guid operationId = Guid.NewGuid();
-
-            // Note: Use the appropriate overload for your configuration
-            FabricClient fabricClient = new FabricClient();
-
-            // The name of the target service
-            Uri targetServiceName = new Uri("fabric:/MyService");
-
-            // The id of the target partition inside the target service
-            Guid targetPartitionId = new Guid("00000000-0000-0000-0000-000002233445");
-
-            PartitionSelector partitionSelector = PartitionSelector.PartitionIdOf(targetServiceName, targetPartitionId);
-
-            // Start the command.  Retry OperationCanceledException and all FabricTransientException's.  Note when StartPartitionDataLossAsync completes
-            // successfully it only means the Fault Injection and Analysis Service has saved the intent to perform this work.  It does not say anything about the progress
-            // of the command.
-            while (true)
+            try
             {
-                try
-                {
-                    await fabricClient.TestManager.StartPartitionDataLossAsync(operationId, partitionSelector, DataLossMode.FullDataLoss).ConfigureAwait(false);
-                    break;
-                }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (FabricTransientException)
-                {
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(1.0d)).ConfigureAwait(false);
+                await fabricClient.TestManager.StartPartitionDataLossAsync(operationId, partitionSelector, DataLossMode.FullDataLoss).ConfigureAwait(false);
+                break;
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (FabricTransientException)
+            {
             }
 
-            PartitionDataLossProgress progress = null;
-
-            // Poll the progress using GetPartitionDataLossProgressAsync until it is either Completed or Faulted.  In this example, we're assuming
-            // the command won't be cancelled.        
-
-            while (true)
-            {
-                try
-                {
-                    progress = await fabricClient.TestManager.GetPartitionDataLossProgressAsync(operationId).ConfigureAwait(false);
-                }
-                catch (OperationCanceledException)
-                {
-                    continue;
-                }
-                catch (FabricTransientException)
-                {
-                    continue;
-                }
-
-                if (progress.State == TestCommandProgressState.Completed)
-                {
-                    Console.WriteLine("Command '{0}' completed successfully", operationId);
-
-                    // In a terminal state .Result.SelectedPartition.PartitionId will have the chosen partition
-                    Console.WriteLine("  Printing selected partition='{0}'", progress.Result.SelectedPartition.PartitionId);
-                    break;
-                }
-                else if (progress.State == TestCommandProgressState.Faulted)
-                {
-                    // If State is Faulted, the progress object's Result property's Exception property will have the reason why.
-                    Console.WriteLine("Command '{0}' failed with '{1}'", operationId, progress.Result.Exception);
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Command '{0}' is currently Running", operationId);
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(5.0d)).ConfigureAwait(false);
-            }
+            await Task.Delay(TimeSpan.FromSeconds(1.0d)).ConfigureAwait(false);
         }
+
+        PartitionDataLossProgress progress = null;
+
+        // Poll the progress using GetPartitionDataLossProgressAsync until it is either Completed or Faulted.  In this example, we're assuming
+        // the command won't be cancelled.        
+
+        while (true)
+        {
+            try
+            {
+                progress = await fabricClient.TestManager.GetPartitionDataLossProgressAsync(operationId).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                continue;
+            }
+            catch (FabricTransientException)
+            {
+                continue;
+            }
+
+            if (progress.State == TestCommandProgressState.Completed)
+            {
+                Console.WriteLine("Command '{0}' completed successfully", operationId);
+
+                // In a terminal state .Result.SelectedPartition.PartitionId will have the chosen partition
+                Console.WriteLine("  Printing selected partition='{0}'", progress.Result.SelectedPartition.PartitionId);
+                break;
+            }
+            else if (progress.State == TestCommandProgressState.Faulted)
+            {
+                // If State is Faulted, the progress object's Result property's Exception property will have the reason why.
+                Console.WriteLine("Command '{0}' failed with '{1}'", operationId, progress.Result.Exception);
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Command '{0}' is currently Running", operationId);
+            }
+
+            await Task.Delay(TimeSpan.FromSeconds(5.0d)).ConfigureAwait(false);
+        }
+    }
+```
 
 下面的示例演示了如何使用 PartitionSelector 来选择指定服务的随机分区：
 
-        static async Task PerformDataLossUseSelectorSample()
+```
+    static async Task PerformDataLossUseSelectorSample()
+    {
+        // Create a unique operation id for the command below
+        Guid operationId = Guid.NewGuid();
+
+        // Note: Use the appropriate overload for your configuration
+        FabricClient fabricClient = new FabricClient();
+
+        // The name of the target service
+        Uri targetServiceName = new Uri("fabric:/SampleService ");
+
+        // Use a PartitionSelector that will have the Fault Injection and Analysis Service choose a random partition of “targetServiceName”
+        PartitionSelector partitionSelector = PartitionSelector.RandomOf(targetServiceName);
+
+        // Start the command.  Retry OperationCanceledException and all FabricTransientException's.  Note when StartPartitionDataLossAsync completes
+        // successfully it only means the Fault Injection and Analysis Service has saved the intent to perform this work.  It does not say anything about the progress
+        // of the command.
+        while (true)
         {
-            // Create a unique operation id for the command below
-            Guid operationId = Guid.NewGuid();
-
-            // Note: Use the appropriate overload for your configuration
-            FabricClient fabricClient = new FabricClient();
-
-            // The name of the target service
-            Uri targetServiceName = new Uri("fabric:/SampleService ");
-
-            // Use a PartitionSelector that will have the Fault Injection and Analysis Service choose a random partition of “targetServiceName”
-            PartitionSelector partitionSelector = PartitionSelector.RandomOf(targetServiceName);
-
-            // Start the command.  Retry OperationCanceledException and all FabricTransientException's.  Note when StartPartitionDataLossAsync completes
-            // successfully it only means the Fault Injection and Analysis Service has saved the intent to perform this work.  It does not say anything about the progress
-            // of the command.
-            while (true)
+            try
             {
-                try
-                {
-                    await fabricClient.TestManager.StartPartitionDataLossAsync(operationId, partitionSelector, DataLossMode.FullDataLoss).ConfigureAwait(false);
-                    break;
-                }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (FabricTransientException)
-                {
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Unexpected exception '{0}'", e);
-                    throw;
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(1.0d)).ConfigureAwait(false);
+                await fabricClient.TestManager.StartPartitionDataLossAsync(operationId, partitionSelector, DataLossMode.FullDataLoss).ConfigureAwait(false);
+                break;
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (FabricTransientException)
+            {
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unexpected exception '{0}'", e);
+                throw;
             }
 
-            PartitionDataLossProgress progress = null;
-
-            // Poll the progress using GetPartitionDataLossProgressAsync until it is either Completed or Faulted.  In this example, we're assuming
-            // the command won't be cancelled.
-
-            while (true)
-            {
-                try
-                {
-                    progress = await fabricClient.TestManager.GetPartitionDataLossProgressAsync(operationId).ConfigureAwait(false);
-                }
-                catch (OperationCanceledException)
-                {
-                    continue;
-                }
-                catch (FabricTransientException)
-                {
-                    continue;
-                }
-
-                if (progress.State == TestCommandProgressState.Completed)
-                {
-                    Console.WriteLine("Command '{0}' completed successfully", operationId);
-
-                    Console.WriteLine("Printing progress.Result:");
-                    Console.WriteLine("  Printing selected partition='{0}'", progress.Result.SelectedPartition.PartitionId);
-
-                    break;
-                }
-                else if (progress.State == TestCommandProgressState.Faulted)
-                {
-                    // If State is Faulted, the progress object's Result property's Exception property will have the reason why.
-                    Console.WriteLine("Command '{0}' failed with '{1}', SelectedPartition {2}", operationId, progress.Result.Exception, progress.Result.SelectedPartition);
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Command '{0}' is currently Running", operationId);
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(1.0d)).ConfigureAwait(false);
-            }
+            await Task.Delay(TimeSpan.FromSeconds(1.0d)).ConfigureAwait(false);
         }
+
+        PartitionDataLossProgress progress = null;
+
+        // Poll the progress using GetPartitionDataLossProgressAsync until it is either Completed or Faulted.  In this example, we're assuming
+        // the command won't be cancelled.
+
+        while (true)
+        {
+            try
+            {
+                progress = await fabricClient.TestManager.GetPartitionDataLossProgressAsync(operationId).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                continue;
+            }
+            catch (FabricTransientException)
+            {
+                continue;
+            }
+
+            if (progress.State == TestCommandProgressState.Completed)
+            {
+                Console.WriteLine("Command '{0}' completed successfully", operationId);
+
+                Console.WriteLine("Printing progress.Result:");
+                Console.WriteLine("  Printing selected partition='{0}'", progress.Result.SelectedPartition.PartitionId);
+
+                break;
+            }
+            else if (progress.State == TestCommandProgressState.Faulted)
+            {
+                // If State is Faulted, the progress object's Result property's Exception property will have the reason why.
+                Console.WriteLine("Command '{0}' failed with '{1}', SelectedPartition {2}", operationId, progress.Result.Exception, progress.Result.SelectedPartition);
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Command '{0}' is currently Running", operationId);
+            }
+
+            await Task.Delay(TimeSpan.FromSeconds(1.0d)).ConfigureAwait(false);
+        }
+    }
+```
 
 ## 历史记录和截断
 

@@ -54,10 +54,12 @@ ms.author: tomfitz
 
 若要快速执行这些步骤，请参阅以下 cmdlet：
 
-    $app = New-AzureRmADApplication -DisplayName "{app-name}" -HomePage "https://{your-domain}/{app-name}" -IdentifierUris "https://{your-domain}/{app-name}" -Password "{your-password}"
-    New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
-    Start-Sleep 15
-    New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+```
+$app = New-AzureRmADApplication -DisplayName "{app-name}" -HomePage "https://{your-domain}/{app-name}" -IdentifierUris "https://{your-domain}/{app-name}" -Password "{your-password}"
+New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
+Start-Sleep 15
+New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+```
 
 该脚本休眠 15 秒，让新的服务主体有时间传遍 Active Directory。如果脚本等待时长不足，将显示错误，称“PrincipalNotFound: 主体 {id} 不存在于目录中”。如果收到此错误，可以重新运行该 cmdlet，将其分配给一个角色。
 
@@ -65,11 +67,15 @@ ms.author: tomfitz
 
 1. 登录到你的帐户。
 
-        Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 
 2. 通过提供显示名称、用于描述应用程序的 URI、用于标识应用程序的 URI，以及应用程序标识的密码来创建新的 Active Directory 应用程序。
 
-        $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org/exampleapp" -IdentifierUris "https://www.contoso.org/exampleapp" -Password "{Your_Password}"
+    ```
+    $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org/exampleapp" -IdentifierUris "https://www.contoso.org/exampleapp" -Password "{Your_Password}"
+    ```
 
     对于单租户应用程序，不会验证 URI。
 
@@ -77,27 +83,35 @@ ms.author: tomfitz
 
 3. 检查新的应用程序对象。
 
-        $app
+    ```
+    $app
+    ```
 
     请特别注意 **ApplicationId** 属性，需要使用该属性来创建服务主体、进行角色分配以及获取访问令牌。
 
-        DisplayName             : exampleapp
-        ObjectId                : c95e67a3-403c-40ac-9377-115fa48f8f39
-        IdentifierUris          : {https://www.contoso.org/example}
-        HomePage                : https://www.contoso.org
-        Type                    : Application
-        ApplicationId           : 8bc80782-a916-47c8-a47e-4d76ed755275
-        AvailableToOtherTenants : False
-        AppPermissions          : 
-        ReplyUrls               : {}
+    ```
+    DisplayName             : exampleapp
+    ObjectId                : c95e67a3-403c-40ac-9377-115fa48f8f39
+    IdentifierUris          : {https://www.contoso.org/example}
+    HomePage                : https://www.contoso.org
+    Type                    : Application
+    ApplicationId           : 8bc80782-a916-47c8-a47e-4d76ed755275
+    AvailableToOtherTenants : False
+    AppPermissions          : 
+    ReplyUrls               : {}
+    ```
 
 4. 通过传入 Active Directory 应用程序的应用程序 ID 创建应用程序的服务主体。
 
-        New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
+    ```
+    New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
+    ```
 
 5. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)。对于 **ServicePrincipalName** 参数，请提供你在创建应用程序时使用的 **ApplicationId**。运行此 cmdlet 之前，必须留出一些时间让新服务主体传遍 Active Directory。手动运行这些 cmdlet 时，cmdlet 之间通常已经过足够的时间。在脚本中，应在 cmdlet 之间添加休眠步骤（如 `Start-Sleep 15`）。如果看到错误称“PrincipalNotFound: 主体 {id} 不存在于目录中”，请重新运行该 cmdlet。
 
-        New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+    ```
+    New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+    ```
 
 如果帐户没有足够权限来分配角色，将看到一条错误消息。该消息声明你的帐户**无权执行操作 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}'**。
 
@@ -108,7 +122,9 @@ ms.author: tomfitz
 
 1. 运行 **Get-Credential** 命令，以创建包含你的凭据的 **PSCredential** 对象。运行此命令之前需要 **ApplicationId**，所以请确保具有它以进行粘贴。
 
-        $creds = Get-Credential
+    ```
+    $creds = Get-Credential
+    ```
 
 2. 系统会提示你输入凭据。对于用户名，请使用你在创建应用程序时所用的 **ApplicationId**。对于密码，请使用你在创建帐户时指定的密码。
 
@@ -116,15 +132,21 @@ ms.author: tomfitz
 
 3. 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。如果只有一个订阅，可以使用：
 
-        $tenant = (Get-AzureRmSubscription).TenantId
+    ```
+$tenant = (Get-AzureRmSubscription).TenantId
+```
 
     如果有多个订阅，请指定 Active Directory 所在的订阅。有关详细信息，请参阅 [Azure 订阅与 Azure Active Directory 的关联方式](../active-directory/active-directory-how-subscriptions-associated-directory.md)。
 
-        $tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
+    ```
+$tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
+```
 
 4. 通过指定此帐户为服务主体并提供凭据对象来以服务主体身份登录。
 
-        Add-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $creds -ServicePrincipal -TenantId $tenant
+    ```
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $creds -ServicePrincipal -TenantId $tenant
+    ```
 
 现在，你已作为所创建 Active Directory 应用程序的服务主体进行身份验证。
 
@@ -133,12 +155,16 @@ ms.author: tomfitz
 
 1. 若要在以后的会话中使用当前访问令牌，请保存该配置文件。
 
-        Save-AzureRmProfile -Path c:\Users\exampleuser\profile\exampleSP.json
+    ```
+    Save-AzureRmProfile -Path c:\Users\exampleuser\profile\exampleSP.json
+    ```
 
     打开该配置文件，并检查其内容。请注意，它包含访问令牌。
 2. 无需再次手动登录，只需加载配置文件。
 
-        Select-AzureRmProfile -Path c:\Users\exampleuser\profile\exampleSP.json
+    ```
+    Select-AzureRmProfile -Path c:\Users\exampleuser\profile\exampleSP.json
+    ```
 
 > [!NOTE]
 访问令牌会过期，因此使用保存的配置文件仅适合在令牌有效期间使用。
@@ -155,12 +181,14 @@ ms.author: tomfitz
 
 若要在 Windows 10 或 Windows Server 2016 Technical Preview 上使用 Azure PowerShell 2.0 快速执行这些步骤，请参阅以下 cmdlet。
 
-    $cert = New-SelfSignedCertificate -CertStoreLocation "cert:\CurrentUser\My" -Subject "CN=exampleapp" -KeySpec KeyExchange
-    $keyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
-    $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
-    New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
-    Start-Sleep 15
-    New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+```
+$cert = New-SelfSignedCertificate -CertStoreLocation "cert:\CurrentUser\My" -Subject "CN=exampleapp" -KeySpec KeyExchange
+$keyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
+$app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
+New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
+Start-Sleep 15
+New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+```
 
 该脚本休眠 15 秒，让新的服务主体有时间传遍 Active Directory。如果脚本等待时长不足，将显示错误，称“PrincipalNotFound: 主体 {id} 不存在于目录中”。如果收到此错误，可以重新运行该 cmdlet，将其分配给一个角色。
 
@@ -171,37 +199,51 @@ ms.author: tomfitz
 
 * 如果使用 **Windows 10 或 Windows Server 2016 Technical Preview**，请运行以下命令以创建自签名证书：
 
-        $cert = New-SelfSignedCertificate -CertStoreLocation "cert:\CurrentUser\My" -Subject "CN=exampleapp" -KeySpec KeyExchange
+    ```
+    $cert = New-SelfSignedCertificate -CertStoreLocation "cert:\CurrentUser\My" -Subject "CN=exampleapp" -KeySpec KeyExchange
+    ```
 
 * 如果未使用 **Windows 10 或 Windows Server 2016 Technical Preview**，需要从 Microsoft 脚本中心下载[自签名证书生成器](https://gallery.technet.microsoft.com/scriptcenter/Self-signed-certificate-5920a7c6/)。解压其内容，并导入所需的 cmdlet。
 
-        # Only run if you could not use New-SelfSignedCertificate
-        Import-Module -Name c:\ExtractedModule\New-SelfSignedCertificateEx.ps1
+    ```
+    # Only run if you could not use New-SelfSignedCertificate
+    Import-Module -Name c:\ExtractedModule\New-SelfSignedCertificateEx.ps1
+    ```
 
     然后，生成证书。
 
-        $cert = New-SelfSignedCertificateEx -Subject "CN=exampleapp" -KeySpec "Exchange" -FriendlyName "exampleapp"
+    ```
+    $cert = New-SelfSignedCertificateEx -Subject "CN=exampleapp" -KeySpec "Exchange" -FriendlyName "exampleapp"
+    ```
 
 有了证书，可以继续创建 AD 应用。
 
 ### 创建 Active Directory 应用和服务主体
 1. 从证书检索密钥值。
 
-        $keyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
+    ```
+    $keyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
+    ```
 
 2. 登录到你的 Azure 帐户。
 
-        Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 
 3. 通过提供显示名称、用于描述应用程序的 URI、用于标识应用程序的 URI，以及应用程序标识的密码来创建新的 Active Directory 应用程序。
 
      如果有 Azure PowerShell 2.0（2016 年 8 月或之后发布），请使用以下 cmdlet：
 
-        $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore      
+    ```
+    $app
+    ``` = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore      
 
     如果有 Azure PowerShell 1.0，请使用以下 cmdlet：
 
-        $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -KeyValue $keyValue -KeyType AsymmetricX509Cert  -EndDate $cert.NotAfter -StartDate $cert.NotBefore
+    ```
+    $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -KeyValue $keyValue -KeyType AsymmetricX509Cert  -EndDate $cert.NotAfter -StartDate $cert.NotBefore
+    ```
 
     对于单租户应用程序，不会验证 URI。
 
@@ -213,23 +255,29 @@ ms.author: tomfitz
 
     请注意 **ApplicationId** 属性，需要使用该属性来创建服务主体、进行角色分配以及获取访问令牌。
 
-        DisplayName             : exampleapp
-        ObjectId                : c95e67a3-403c-40ac-9377-115fa48f8f39
-        IdentifierUris          : {https://www.contoso.org/example}
-        HomePage                : https://www.contoso.org
-        Type                    : Application
-        ApplicationId           : 8bc80782-a916-47c8-a47e-4d76ed755275
-        AvailableToOtherTenants : False
-        AppPermissions          : 
-        ReplyUrls               : {}
+    ```
+    DisplayName             : exampleapp
+    ObjectId                : c95e67a3-403c-40ac-9377-115fa48f8f39
+    IdentifierUris          : {https://www.contoso.org/example}
+    HomePage                : https://www.contoso.org
+    Type                    : Application
+    ApplicationId           : 8bc80782-a916-47c8-a47e-4d76ed755275
+    AvailableToOtherTenants : False
+    AppPermissions          : 
+    ReplyUrls               : {}
+    ```
 
 4. 通过传入 Active Directory 应用程序的应用程序 ID 创建应用程序的服务主体。
 
-        New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
+    ```
+    New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
+    ```
 
 5. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)。对于 **ServicePrincipalName** 参数，请提供你在创建应用程序时使用的 **ApplicationId**。运行此 cmdlet 之前，必须留出一些时间让新服务主体传遍 Active Directory。手动运行这些 cmdlet 时，cmdlet 之间通常已经过足够的时间。在脚本中，应在 cmdlet 之间添加休眠步骤（如 `Start-Sleep 15`）。如果看到错误称“PrincipalNotFound: 主体 {id} 不存在于目录中”，请重新运行该 cmdlet。
 
-        New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+    ```
+    New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.ApplicationId
+    ```
 
     如果帐户没有足够权限来分配角色，将看到一条错误消息。该消息声明你的帐户**无权执行操作 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}'**。
 
@@ -246,7 +294,9 @@ ms.author: tomfitz
 
 若要在脚本中进行身份验证，请指定帐户为服务主体，并提供证书指纹、应用程序 ID 和租户 ID。若要使脚本自动化，可以将这些值存储为环境变量并在执行操作期间检索它们，或者可以将其包含在脚本中。
 
-    Add-AzureRmAccount -EnvironmentName AzureChinaCloud -ServicePrincipal -CertificateThumbprint $cert.Thumbprint -ApplicationId $app.ApplicationId -TenantId $tenant
+```
+Add-AzureRmAccount -EnvironmentName AzureChinaCloud -ServicePrincipal -CertificateThumbprint $cert.Thumbprint -ApplicationId $app.ApplicationId -TenantId $tenant
+```
 
 现在，你已作为所创建 Active Directory 应用程序的服务主体进行身份验证。
 
@@ -256,15 +306,21 @@ ms.author: tomfitz
 
 若要删除应用程序的所有凭据，请使用：
 
-    Remove-AzureRmADAppCredential -ApplicationId 8bc80782-a916-47c8-a47e-4d76ed755275 -All
+```
+Remove-AzureRmADAppCredential -ApplicationId 8bc80782-a916-47c8-a47e-4d76ed755275 -All
+```
 
 若要添加密码，请使用：
 
-    New-AzureRmADAppCredential -ApplicationId 8bc80782-a916-47c8-a47e-4d76ed755275 -Password p@ssword!
+```
+New-AzureRmADAppCredential -ApplicationId 8bc80782-a916-47c8-a47e-4d76ed755275 -Password p@ssword!
+```
 
 若要添加证书值，请按本主题所示创建自签名证书。然后，使用：
 
-    New-AzureRmADAppCredential -ApplicationId 8bc80782-a916-47c8-a47e-4d76ed755275 -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
+```
+New-AzureRmADAppCredential -ApplicationId 8bc80782-a916-47c8-a47e-4d76ed755275 -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
+```
 
 ## <a name="sample-applications"></a> 示例应用程序
 以下示例应用程序演示如何以服务主体身份登录。

@@ -43,81 +43,103 @@ ms.author: jdial
 
 1. 运行以下命令，切换到经典模式：
 
-        azure config mode asm
+    ```
+    azure config mode asm
+    ```
 
     输出：
 
-        info:    New mode is asm
+    ```
+    info:    New mode is asm
+    ```
 
 2. 运行以下命令，为前端子网创建路由表：
 
-        azure network route-table create -n UDR-FrontEnd -l chinanorth
+    ```
+    azure network route-table create -n UDR-FrontEnd -l chinanorth
+    ```
 
     输出：
 
-        info:    Executing command network route-table create
-        info:    Creating route table "UDR-FrontEnd"
-        info:    Getting route table "UDR-FrontEnd"
-        data:    Name                            : UDR-FrontEnd
-        data:    Location                        : China North
-        info:    network route-table create command OK
+    ```
+    info:    Executing command network route-table create
+    info:    Creating route table "UDR-FrontEnd"
+    info:    Getting route table "UDR-FrontEnd"
+    data:    Name                            : UDR-FrontEnd
+    data:    Location                        : China North
+    info:    network route-table create command OK
+    ```
 
     参数：
 
-    * **-l（或 --location）**。要创建新 NSG 所在的 Azure 区域。对于我们的方案，为 *chinanorth* 。
-    * **-n（或 --name）**。新 NSG 的名称。对于我们的方案，为 *NSG-FrontEnd* 。
+   * **-l（或 --location）**。要创建新 NSG 所在的 Azure 区域。对于我们的方案，为 *chinanorth* 。
+   * **-n（或 --name）**。新 NSG 的名称。对于我们的方案，为 *NSG-FrontEnd* 。
 3. 运行以下命令，在路由表中创建路由，将流向后端子网 (192.168.2.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-        azure network route-table route set -r UDR-FrontEnd -n RouteToBackEnd -a 192.168.2.0/24 -t VirtualAppliance -p 192.168.0.4
+    ```
+    azure network route-table route set -r UDR-FrontEnd -n RouteToBackEnd -a 192.168.2.0/24 -t VirtualAppliance -p 192.168.0.4
+    ```
 
     输出：
 
-        info:    Executing command network route-table route set
-        info:    Getting route table "UDR-FrontEnd"
-        info:    Setting route "RouteToBackEnd" in a route table "UDR-FrontEnd"
-        info:    network route-table route set command OK
+    ```
+    info:    Executing command network route-table route set
+    info:    Getting route table "UDR-FrontEnd"
+    info:    Setting route "RouteToBackEnd" in a route table "UDR-FrontEnd"
+    info:    network route-table route set command OK
+    ```
 
     参数：
 
-    * **-r（或 --route-table-name）**。要添加路由的路由表的名称。对于我们的方案，为 *UDR-FrontEnd* 。
-    * **-a（或 --address-prefix）**。数据包目标子网的地址前缀。对于我们的方案，为 *192.168.2.0/24* 。
-    * **-t（或 --next-hop-type）**。要将流量发送到的对象的类型。可能的值为 *VirtualAppliance* 、 *VirtualNetworkGateway* 、 *VNETLocal* 、 *Internet* 或 *None* 。
-    * **-p（或 --next-hop-ip-address**）。下一个跃点的 IP 地址。对于我们的方案，为 *192.168.0.4* 。
+   * **-r（或 --route-table-name）**。要添加路由的路由表的名称。对于我们的方案，为 *UDR-FrontEnd* 。
+   * **-a（或 --address-prefix）**。数据包目标子网的地址前缀。对于我们的方案，为 *192.168.2.0/24* 。
+   * **-t（或 --next-hop-type）**。要将流量发送到的对象的类型。可能的值为 *VirtualAppliance* 、 *VirtualNetworkGateway* 、 *VNETLocal* 、 *Internet* 或 *None* 。
+   * **-p（或 --next-hop-ip-address**）。下一个跃点的 IP 地址。对于我们的方案，为 *192.168.0.4* 。
 4. 运行以下命令，将创建的路由表与 **FrontEnd** 子网关联：
 
-        azure network vnet subnet route-table add -t TestVNet -n FrontEnd -r UDR-FrontEnd
+    ```
+    azure network vnet subnet route-table add -t TestVNet -n FrontEnd -r UDR-FrontEnd
+    ```
 
     输出：
 
-        info:    Executing command network vnet subnet route-table add
-        info:    Looking up the subnet "FrontEnd"
-        info:    Looking up network configuration
-        info:    Looking up network gateway route tables in virtual network "TestVNet" subnet "FrontEnd"
-        info:    Associating route table "UDR-FrontEnd" and subnet "FrontEnd"
-        info:    Looking up network gateway route tables in virtual network "TestVNet" subnet "FrontEnd"
-        data:    Route table name                : UDR-FrontEnd
-        data:      Location                      : China North
-        data:      Routes:
-        info:    network vnet subnet route-table add command OK    
+    ```
+    info:    Executing command network vnet subnet route-table add
+    info:    Looking up the subnet "FrontEnd"
+    info:    Looking up network configuration
+    info:    Looking up network gateway route tables in virtual network "TestVNet" subnet "FrontEnd"
+    info:    Associating route table "UDR-FrontEnd" and subnet "FrontEnd"
+    info:    Looking up network gateway route tables in virtual network "TestVNet" subnet "FrontEnd"
+    data:    Route table name                : UDR-FrontEnd
+    data:      Location                      : China North
+    data:      Routes:
+    info:    network vnet subnet route-table add command OK    
+    ```
 
     参数：
 
-    * **-t（或 --vnet-name）**。子网所在的 VNet 的名称。对于我们的方案，为 *TestVNet* 。
-    * **-n（或 --subnet-name）**。将在其中添加路由表的子网的名称。对于我们的方案，为 *FrontEnd* 。
+   * **-t（或 --vnet-name）**。子网所在的 VNet 的名称。对于我们的方案，为 *TestVNet* 。
+   * **-n（或 --subnet-name）**。将在其中添加路由表的子网的名称。对于我们的方案，为 *FrontEnd* 。
 
 ## 为后端子网创建 UDR
 若要根据方案为后端子网创建所需的路由表和路由，请完成以下步骤：
 
 1. 运行以下命令，为后端子网创建路由表：
 
-        azure network route-table create -n UDR-BackEnd -l chinanorth
+    ```
+    azure network route-table create -n UDR-BackEnd -l chinanorth
+    ```
 
 2. 运行以下命令，在路由表中创建路由，将流向前端子网 (192.168.1.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-        azure network route-table route set -r UDR-BackEnd -n RouteToFrontEnd -a 192.168.1.0/24 -t VirtualAppliance -p 192.168.0.4
+    ```
+    azure network route-table route set -r UDR-BackEnd -n RouteToFrontEnd -a 192.168.1.0/24 -t VirtualAppliance -p 192.168.0.4
+    ```
 
 3. 运行以下命令，将路由表与 **BackEnd** 子网关联：
 
-        azure network vnet subnet route-table add -t TestVNet -n BackEnd -r UDR-BackEnd
+    ```
+    azure network vnet subnet route-table add -t TestVNet -n BackEnd -r UDR-BackEnd
+    ```
 
 <!---HONumber=Mooncake_1219_2016-->

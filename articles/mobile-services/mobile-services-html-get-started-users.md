@@ -50,7 +50,7 @@ ms.author: glenga
 
 5. （可选）打开 Web 浏览器的脚本调试程序，并重新加载页。检查是否发生了访问被拒绝错误。
 
-    接下来，你需要更新应用程序，以允许在从移动服务请求资源之前进行身份验证。
+   接下来，你需要更新应用程序，以允许在从移动服务请求资源之前进行身份验证。
 
 ## <a name="add-authentication"></a>向应用程序添加身份验证
 
@@ -59,49 +59,53 @@ ms.author: glenga
 
 1. 打开项目文件 index.html，找到 H1 元素，并在该元素的下面添加以下代码段：
 
-        <div id="logged-in">
-            You are logged in as <span id="login-name"></span>.
-            <button id="log-out">Log out</button>
-        </div>
-        <div id="logged-out">
-            You are not logged in.
-            <button>Log in</button>
-        </div>
+    ```
+    <div id="logged-in">
+        You are logged in as <span id="login-name"></span>.
+        <button id="log-out">Log out</button>
+    </div>
+    <div id="logged-out">
+        You are not logged in.
+        <button>Log in</button>
+    </div>
+    ```
 
     这样，你便可以从该页登录到移动服务。
 
 2. 在 page.js 文件中，找到位于文件最底部的、调用 refreshTodoItems 函数的代码行，并将它替换为以下代码：
 
-        function refreshAuthDisplay() {
-            var isLoggedIn = client.currentUser !== null;
-            $("#logged-in").toggle(isLoggedIn);
-            $("#logged-out").toggle(!isLoggedIn);
+    ```
+    function refreshAuthDisplay() {
+        var isLoggedIn = client.currentUser !== null;
+        $("#logged-in").toggle(isLoggedIn);
+        $("#logged-out").toggle(!isLoggedIn);
 
-            if (isLoggedIn) {
-                $("#login-name").text(client.currentUser.userId);
-                refreshTodoItems();
-            }
+        if (isLoggedIn) {
+            $("#login-name").text(client.currentUser.userId);
+            refreshTodoItems();
         }
+    }
 
-        function logIn() {
-            client.login("microsoftaccount").then(refreshAuthDisplay, function(error){
-                alert(error);
-            });
-        }
-
-        function logOut() {
-            client.logout();
-            refreshAuthDisplay();
-            $('#summary').html('<strong>You must login to access data.</strong>');
-        }
-
-        // On page init, fetch the data and set up event handlers
-        $(function () {
-            refreshAuthDisplay();
-            $('#summary').html('<strong>You must login to access data.</strong>');		    
-            $("#logged-out button").click(logIn);
-            $("#logged-in button").click(logOut);
+    function logIn() {
+        client.login("microsoftaccount").then(refreshAuthDisplay, function(error){
+            alert(error);
         });
+    }
+
+    function logOut() {
+        client.logout();
+        refreshAuthDisplay();
+        $('#summary').html('<strong>You must login to access data.</strong>');
+    }
+
+    // On page init, fetch the data and set up event handlers
+    $(function () {
+        refreshAuthDisplay();
+        $('#summary').html('<strong>You must login to access data.</strong>');		    
+        $("#logged-out button").click(logIn);
+        $("#logged-in button").click(logOut);
+    });
+    ```
 
     这将会创建一组用于处理身份验证过程的函数。将使用 microsoftaccount 登录对用户进行身份验证。如果使用的标识提供者不是 microsoftaccount，请将传递给上述 **login** 方法的值更改为 *aad*。
 

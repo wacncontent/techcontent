@@ -30,16 +30,20 @@ ms.author: cynthn
 
 1. 创建子网。此示例在资源组 **myResourceGroup** 中创建名为 **mySubNet** 的子网，并将子网地址前缀设置为 **10.0.0.0/24**。
 
-        $rgName = "myResourceGroup"
-        $subnetName = "mySubNet"
-        $singleSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix 10.0.0.0/24
+    ```
+    $rgName = "myResourceGroup"
+    $subnetName = "mySubNet"
+    $singleSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix 10.0.0.0/24
+    ```
 
 2. 创建 vNet。此示例将虚拟网络名称设置为 **myVnetName**，将位置设置为**中国北部**，将虚拟网络的地址前缀设置为 **10.0.0.0/16**。
 
-        $location = "China North"
-        $vnetName = "myVnetName"
-        $vnet = New-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName -Location $location `
-            -AddressPrefix 10.0.0.0/16 -Subnet $singleSubnet
+    ```
+    $location = "China North"
+    $vnetName = "myVnetName"
+    $vnet = New-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName -Location $location `
+        -AddressPrefix 10.0.0.0/16 -Subnet $singleSubnet
+    ```
 
 ## 创建公共 IP 地址和 NIC
 
@@ -47,15 +51,19 @@ ms.author: cynthn
 
 1. 创建公共 IP。在此示例中，公共 IP 地址名称设置为 **myIP**。
 
-        $ipName = "myIP"
-        $pip = New-AzureRmPublicIpAddress -Name $ipName -ResourceGroupName $rgName -Location $location `
-            -AllocationMethod Dynamic
+    ```
+    $ipName = "myIP"
+    $pip = New-AzureRmPublicIpAddress -Name $ipName -ResourceGroupName $rgName -Location $location `
+        -AllocationMethod Dynamic
+    ```
 
 2. 创建 NIC。在此示例中，NIC 名称设置为 **myNicName**。
 
-        $nicName = "myNicName"
-        $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName -Location $location `
-            -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id
+    ```
+    $nicName = "myNicName"
+    $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName -Location $location `
+        -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id
+    ```
 
 ## 创建网络安全组和 RDP 规则
 
@@ -63,15 +71,17 @@ ms.author: cynthn
 
 此示例将 NSG 名称设置为 **myNsg**，将 RDP 规则名称设置为 **myRdpRule**。
 
-    $nsgName = "myNsg"
+```
+$nsgName = "myNsg"
 
-    $rdpRule = New-AzureRmNetworkSecurityRuleConfig -Name myRdpRule -Description "Allow RDP" `
-        -Access Allow -Protocol Tcp -Direction Inbound -Priority 110 `
-        -SourceAddressPrefix Internet -SourcePortRange * `
-        -DestinationAddressPrefix * -DestinationPortRange 3389
+$rdpRule = New-AzureRmNetworkSecurityRuleConfig -Name myRdpRule -Description "Allow RDP" `
+    -Access Allow -Protocol Tcp -Direction Inbound -Priority 110 `
+    -SourceAddressPrefix Internet -SourcePortRange * `
+    -DestinationAddressPrefix * -DestinationPortRange 3389
 
-    $nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName $rgName -Location $location `
-        -Name $nsgName -SecurityRules $rdpRule
+$nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName $rgName -Location $location `
+    -Name $nsgName -SecurityRules $rdpRule
+```
 
 有关终结点和 NSG 规则的详细信息，请参阅 [Opening ports to a VM in Azure using PowerShell](./virtual-machines-windows-nsg-quickstart-powershell.md)（使用 PowerShell 在 Azure 中打开 VM 端口）。
 
@@ -79,29 +89,33 @@ ms.author: cynthn
 
 设置 VM 配置，以便将复制的 VHD 附加为 OS VHD。
 
-    # Set the URI for the VHD that you want to use. In this example, the VHD file named "myOsDisk.vhd" is kept
-    # in a storage account named "myStorageAccount" in a container named "myContainer".
-    $osDiskUri = "https://myStorageAccount.blob.core.chinacloudapi.cn/myContainer/myOsDisk.vhd"
+```
+# Set the URI for the VHD that you want to use. In this example, the VHD file named "myOsDisk.vhd" is kept
+# in a storage account named "myStorageAccount" in a container named "myContainer".
+$osDiskUri = "https://myStorageAccount.blob.core.chinacloudapi.cn/myContainer/myOsDisk.vhd"
 
-    # Set the VM name and size. This example sets the VM name to "myVM" and the VM size to "Standard_A2".
-    $vmName = "myVM"
-    $vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize "Standard_A2"
+# Set the VM name and size. This example sets the VM name to "myVM" and the VM size to "Standard_A2".
+$vmName = "myVM"
+$vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize "Standard_A2"
 
-    # Add the NIC
-    $vm = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $nic.Id
+# Add the NIC
+$vm = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $nic.Id
 
-    # Add the OS disk by using the URL of the copied OS VHD. In this example, when the OS disk is created, the
-    # term "osDisk" is appened to the VM name to create the OS disk name. This example also specifies that this
-    # Windows-based VHD should be attached to the VM as the OS disk.
-    $osDiskName = $vmName + "osDisk"
-    $vm = Set-AzureRmVMOSDisk -VM $vm -Name $osDiskName -VhdUri $osDiskUri -CreateOption attach -Windows
+# Add the OS disk by using the URL of the copied OS VHD. In this example, when the OS disk is created, the
+# term "osDisk" is appened to the VM name to create the OS disk name. This example also specifies that this
+# Windows-based VHD should be attached to the VM as the OS disk.
+$osDiskName = $vmName + "osDisk"
+$vm = Set-AzureRmVMOSDisk -VM $vm -Name $osDiskName -VhdUri $osDiskUri -CreateOption attach -Windows
+```
 
 如果需要将数据磁盘附加到 VM，还应该添加以下代码：
 
-    # Optional: Add data disks by using the URLs of the copied data VHDs at the appropriate Logical Unit
-    # Number (Lun).
-    $dataDiskName = $vmName + "dataDisk"
-    $vm = Add-AzureRmVMDataDisk -VM $vm -Name $dataDiskName -VhdUri $dataDiskUri -Lun 0 -CreateOption attach
+```
+# Optional: Add data disks by using the URLs of the copied data VHDs at the appropriate Logical Unit
+# Number (Lun).
+$dataDiskName = $vmName + "dataDisk"
+$vm = Add-AzureRmVMDataDisk -VM $vm -Name $dataDiskName -VhdUri $dataDiskUri -Lun 0 -CreateOption attach
+```
 
 数据磁盘和操作系统磁盘的 URL 类似于：`https://StorageAccountName.blob.core.chinacloudapi.cn/BlobContainerName/DiskName.vhd`。可通过以下方法在门户上找到此信息：浏览到目标存储容器，单击复制的操作系统或数据 VHD，然后复制 URL 的内容。
 
@@ -109,21 +123,27 @@ ms.author: cynthn
 
 使用刚刚创建的配置创建 VM。
 
-    #Create the new VM
-    New-AzureRmVM -ResourceGroupName $rgName -Location $location -VM $vm
+```
+#Create the new VM
+New-AzureRmVM -ResourceGroupName $rgName -Location $location -VM $vm
+```
 
 如果此命令成功，你将看到类似于下面的输出：
 
-    RequestId IsSuccessStatusCode StatusCode ReasonPhrase
-    --------- ------------------- ---------- ------------
-                            True         OK OK   
+```
+RequestId IsSuccessStatusCode StatusCode ReasonPhrase
+--------- ------------------- ---------- ------------
+                        True         OK OK   
+```
 
 ## 验证是否已创建 VM 
 
 应会在 [Azure 门户预览](https://portal.azure.cn)的“浏览”>“虚拟机”下看到新建的 VM，也可以使用以下 PowerShell 命令查看该 VM：
 
-    $vmList = Get-AzureRmVM -ResourceGroupName $rgName
-    $vmList.Name
+```
+$vmList = Get-AzureRmVM -ResourceGroupName $rgName
+$vmList.Name
+```
 
 ## 后续步骤
 

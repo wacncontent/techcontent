@@ -139,25 +139,31 @@ ms.author: larryfr
 
 2. 在命令提示符下，使用以下命令将 **eventhubs-storm-spout-0.9-jar-with-dependencies.jar** 文件安装到本地 Maven 存储。这样，你便可以在稍后的步骤中轻松地将其作为一个引用添加到 Storm 项目中。
 
-        mvn install:install-file -Dfile=target/eventhubs-storm-spout-0.9-jar-with-dependencies.jar -DgroupId=com.microsoft.eventhubs -DartifactId=eventhubs-storm-spout -Dversion=0.9 -Dpackaging=jar
+    ```
+    mvn install:install-file -Dfile=target/eventhubs-storm-spout-0.9-jar-with-dependencies.jar -DgroupId=com.microsoft.eventhubs -DartifactId=eventhubs-storm-spout -Dversion=0.9 -Dpackaging=jar
+    ```
 
 ## 下载并配置项目
 使用以下命令从 GitHub 中下载项目。
 
-    git clone https://github.com/Blackmist/hdinsight-eventhub-example
+```
+git clone https://github.com/Blackmist/hdinsight-eventhub-example
+```
 
 命令执行完毕后，你将得到以下目录结构：
 
-    hdinsight-eventhub-example/
-        TemperatureMonitor/ - this contains the topology
-            resources/
-                log4j2.xml - set logging to minimal
-                no-hbase.yaml - topology definition for local testing
-                with-hbase.yaml - topology definition that uses HBase in a virutal network
-            src/ - the Java bolts
-            dev.properties - contains configuration values for your environment
-        dashboard/nodejs/ - this is the node.js web dashboard
-        SendEvents/ - utilities to send fake sensor data
+```
+hdinsight-eventhub-example/
+    TemperatureMonitor/ - this contains the topology
+        resources/
+            log4j2.xml - set logging to minimal
+            no-hbase.yaml - topology definition for local testing
+            with-hbase.yaml - topology definition that uses HBase in a virutal network
+        src/ - the Java bolts
+        dev.properties - contains configuration values for your environment
+    dashboard/nodejs/ - this is the node.js web dashboard
+    SendEvents/ - utilities to send fake sensor data
+```
 
 > [!NOTE]
 本文档不会深入介绍本示例中包含的代码；但是，代码带有全面的注释。
@@ -166,10 +172,12 @@ ms.author: larryfr
 
 打开 **hdinsight-eventhub-example/TemperatureMonitor/dev.properties** 文件，将事件中心信息添加到以下行：
 
-    eventhub.read.policy.name: storm
-    eventhub.read.policy.key: KeyForTheStormPolicy
-    eventhub.namespace: YourNamespace
-    eventhub.name: sensordata
+```
+eventhub.read.policy.name: storm
+eventhub.read.policy.key: KeyForTheStormPolicy
+eventhub.namespace: YourNamespace
+eventhub.name: sensordata
+```
 
 > [!NOTE]
 此示例假定使用 **storm** 作为具有 **Listen** 声明的策略的名称，且事件中心的名称为 **sensordata**。
@@ -191,14 +199,20 @@ ms.author: larryfr
 ### 启动 Web 应用程序
 1. 打开新的命令提示符或终端，并将目录更改为 将目录更改为 **hdinsight-eventhub-example/dashboard**，并使用以下命令安装 Web 应用程序所需的依赖项：
 
-        npm install
+    ```
+    npm install
+    ```
 2. 使用以下命令启动 Web 应用程序：
 
-        node server.js
+    ```
+    node server.js
+    ```
 
     你应看到类似于下面的消息：
 
-        Server listening at port 3000
+    ```
+    Server listening at port 3000
+    ```
 3. 打开 Web 浏览器，并输入 http://localhost:3000/** 作为地址。你应看到类似于下面的页面：
 
     ![Web 仪表板](./media/hdinsight-storm-sensor-data-analysis/emptydashboard.png)  
@@ -213,46 +227,58 @@ ms.author: larryfr
 
 1. 打开新的命令提示符、shell 或终端，将目录更改为 **hdinsight-eventhub-example/SendEvents/nodejs**，然后使用以下命令安装应用程序所需的依赖项：
 
-        npm install
+    ```
+    npm install
+    ```
 2. 在文本编辑器中打开 **app.js** 文件，并添加你之前获取的事件中心信息：
 
-        // ServiceBus Namespace
-        var namespace = 'YourNamespace';
-        // Event Hub Name
-        var hubname ='sensordata';
-        // Shared access Policy name and key (from Event Hub configuration)
-        var my_key_name = 'devices';
-        var my_key = 'YourKey';
+    ```
+    // ServiceBus Namespace
+    var namespace = 'YourNamespace';
+    // Event Hub Name
+    var hubname ='sensordata';
+    // Shared access Policy name and key (from Event Hub configuration)
+    var my_key_name = 'devices';
+    var my_key = 'YourKey';
+    ```
 
-    > [!NOTE]
-    此示例假定已使用 **sensordata** 作为事件中心的名称并已使用**devices** 作为具有 **Send** 声明的策略的名称。
-    > 
-    > 
+   > [!NOTE]
+   此示例假定已使用 **sensordata** 作为事件中心的名称并已使用**devices** 作为具有 **Send** 声明的策略的名称。
+   > 
+   > 
 3. 使用以下命令在事件中心插入新条目：
 
-        node app.js
+    ```
+    node app.js
+    ```
 
     你应会看到包含发送到事件中心的数据的多个输出行。这些信息如下所示：
 
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"0","Temperature":7}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"1","Temperature":39}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"2","Temperature":86}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"3","Temperature":29}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"4","Temperature":30}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"5","Temperature":5}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"6","Temperature":24}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"7","Temperature":40}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"8","Temperature":43}
-        {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"9","Temperature":84}
+    ```
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"0","Temperature":7}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"1","Temperature":39}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"2","Temperature":86}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"3","Temperature":29}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"4","Temperature":30}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"5","Temperature":5}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"6","Temperature":24}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"7","Temperature":40}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"8","Temperature":43}
+    {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"9","Temperature":84}
+    ```
 
 ### 启动拓扑
 1. 打开新的命令提示符、shell 或终端，将目录更改为 **hdinsight-eventhub-example/TemperatureMonitor**，然后使用以下命令启动拓扑：
 
-        mvn compile exec:java -Dexec.args="--local -R /no-hbase.yaml --filter dev.properties"
+    ```
+    mvn compile exec:java -Dexec.args="--local -R /no-hbase.yaml --filter dev.properties"
+    ```
 
     如果使用的是 PowerShell，请使用以下命令：
 
-        mvn compile exec:java "-Dexec.args=--local -R /no-hbase.yaml --filter dev.properties"
+    ```
+    mvn compile exec:java "-Dexec.args=--local -R /no-hbase.yaml --filter dev.properties"
+    ```
 
     > [!NOTE]
     如果在 Linux/Unix/OS X 系统上，并且[已在开发环境中安装 Storm](http://storm.apache.org/releases/0.10.0/Setting-up-development-environment.html)，则可以使用以下命令：
@@ -278,7 +304,9 @@ ms.author: larryfr
 
 2. 打开 **hdinsight-eventhub-example\\TemperatureMonitor\\src\\main\\java\\com\\microsoft\\examples\\bolts\\DashboardBolt.java** 并将以下行更改为指向已发布仪表板的 URL：
 
-        socket = IO.socket("http://mywebsite.chinacloudsites.cn");
+    ```
+    socket = IO.socket("http://mywebsite.chinacloudsites.cn");
+    ```
 
 3. 保存 **DashboardBolt.java** 文件。
 
@@ -286,7 +314,9 @@ ms.author: larryfr
 
 1. 使用以下命令从你的项目中创建一个 JAR 程序包：
 
-        mvn package
+    ```
+    mvn package
+    ```
 
     此操作将在项目的 **target** 目录中创建一个名为 **TemperatureMonitor-1.0-SNAPSHOT.jar** 的文件。
 
@@ -368,13 +398,17 @@ ms.author: larryfr
 
 为了从 Storm 群集写入 HBase，你必须为 HBase 群集使用完全限定域名 (FQDN)。使用以下命令发现此信息：
 
-    curl -u <username>:<password> -k https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azurehdinsight.cn/services/hbase/components/hbrest
+```
+curl -u <username>:<password> -k https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azurehdinsight.cn/services/hbase/components/hbrest
+```
 
 在返回的 JSON 数据中, 找到 **"host\_name"** 条目。其中包含群集中节点的 FQDN，例如：
 
-    ...
-    "host_name": "wordkernode0.<clustername>.b1.chinacloudapp.cn
-    ...
+```
+...
+"host_name": "wordkernode0.<clustername>.b1.chinacloudapp.cn
+...
+```
 
 域名称中以群集名称开头的部分是 DNS 后缀，例如 **mycluster.b1.chinacloudapp.cn**。
 
@@ -382,7 +416,9 @@ ms.author: larryfr
 
 1. 打开 **hdinsight-eventhub-example\\TemperatureMonitor\\conf\\hbase-site.xml** 并将以下行中的 `suffix` 条目替换前面为 HBase 群集获取的 DNS 后缀。进行这些更改之后，保存该文件。
 
-        <value>zookeeper0.suffix,zookeeper1.suffix,zookeeper2.suffix</value>
+    ```
+    <value>zookeeper0.suffix,zookeeper1.suffix,zookeeper2.suffix</value>
+    ```
 
     这将用于通过 HBase bolt 与 HBase 群集通信。
 
@@ -396,8 +432,10 @@ ms.author: larryfr
 
 2. 从桌面中启动 HDInsight 命令行并输入以下命令。
 
-        cd %HBASE_HOME%
-        bin\hbase shell
+    ```
+    cd %HBASE_HOME%
+    bin\hbase shell
+    ```
 
 3. 从 HBase Shell 中，输入以下命令以创建存储传感器数据的表。
 

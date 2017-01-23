@@ -30,7 +30,9 @@ ms.author: iainfou
 
 请使用以下 Azure PowerShell 命令来重新部署虚拟机：
 
-    Set-AzureRmVM -Redeploy -ResourceGroupName $rgname -Name $vmname 
+```
+Set-AzureRmVM -Redeploy -ResourceGroupName $rgname -Name $vmname 
+```
 
 [!INCLUDE [virtual-machines-common-redeploy-to-new-node](../../includes/virtual-machines-common-redeploy-to-new-node.md)]
 

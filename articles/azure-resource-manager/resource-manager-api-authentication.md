@@ -70,15 +70,21 @@ Web 应用：
 
 以下示例演示如何使用 Azure PowerShell 注册应用。必须拥有最新版本（2016 年 8 月）Azure PowerShell 才能正常运行此命令。
 
-    $app = New-AzureRmADApplication -DisplayName "{app name}" -HomePage "https://{your domain}/{app name}" -IdentifierUris "https://{your domain}/{app name}" -Password "{your password}" -AvailableToOtherTenants $true
+```
+$app = New-AzureRmADApplication -DisplayName "{app name}" -HomePage "https://{your domain}/{app name}" -IdentifierUris "https://{your domain}/{app name}" -Password "{your password}" -AvailableToOtherTenants $true
+```
 
 若要以 AD 应用程序登录，需要使用应用程序的 ID 和密码。若要查看前一命令返回的应用程序 ID，请使用：
 
-    $app.ApplicationId
+```
+$app.ApplicationId
+```
 
 以下示例演示如何使用 Azure CLI 注册应用。
 
-    azure ad app create --name {app name} --home-page https://{your domain}/{app name} --identifier-uris https://{your domain}/{app name} --password {your password} --available true
+```
+azure ad app create --name {app name} --home-page https://{your domain}/{app name} --identifier-uris https://{your domain}/{app name} --password {your password} --available true
+```
 
 结果包含 AppId，以应用程序的形式进行身份验证时需要此数据。
 
@@ -90,7 +96,9 @@ Azure AD 还支持应用程序的证书凭据：创建自签名证书、保留�
 ## 从订阅 ID 获取租户 ID
 若要请求可用于调用 Resource Manager 的令牌，应用程序需要知道托管 Azure 订阅的 Azure AD 租户的租户 ID。用户可能知道其订阅 ID，但不知道其用于 Active Directory 的租户 ID。若要获取用户的租户 ID，请让用户提供订阅 ID。发送有关订阅的请求时，请提供该订阅 ID：
 
-    https://management.chinacloudapi.cn/subscriptions/{subscription-id}?api-version=2015-01-01
+```
+https://management.chinacloudapi.cn/subscriptions/{subscription-id}?api-version=2015-01-01
+```
 
 请求因为用户尚未登录而失败，但可以从响应中检索租户 ID。在该异常中，从 **WWW-Authenticate** 的响应标头值中检索租户 ID。可以在 [GetDirectoryForSubscription](https://github.com/dushyantgill/VipSwapper/blob/master/CloudSense/CloudSense/AzureResourceManagerUtil.cs#L20) 方法中看到此实现。
 
@@ -102,17 +110,23 @@ Azure AD 还支持应用程序的证书凭据：创建自签名证书、保留�
 ### 授权请求 (OAuth 2.0)
 将 Open ID Connect/OAuth2.0 授权请求发送到 Azure AD 授权终结点：
 
-    https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Authorize
+```
+https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Authorize
+```
 
 [request an authorization code](../active-directory/active-directory-protocols-oauth-code.md#request-an-authorization-code)（请求授权代码）主题中介绍了适用于此请求的查询字符串参数。
 
 以下示例演示如何请求 OAuth2.0 授权：
 
-    https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Authorize?client_id=a0448380-c346-4f9f-b897-c18733de9394&response_mode=query&response_type=code&redirect_uri=http%3a%2f%2fwww.vipswapper.com%2fcloudsense%2fAccount%2fSignIn&resource=https%3a%2f%2fgraph.chinacloudapi.cn%2f&domain_hint=live.com
+```
+https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Authorize?client_id=a0448380-c346-4f9f-b897-c18733de9394&response_mode=query&response_type=code&redirect_uri=http%3a%2f%2fwww.vipswapper.com%2fcloudsense%2fAccount%2fSignIn&resource=https%3a%2f%2fgraph.chinacloudapi.cn%2f&domain_hint=live.com
+```
 
 Azure AD 对用户进行身份验证，并根据需要请求用户向应用授予权限。它会将授权代码返回到应用程序的回复 URL。Azure AD 根据请求的 response\_mode，将数据发回到查询字符串，或作为发布数据发送。
 
-    code=AAABAAAAiL****FDMZBUwZ8eCAA&session_state=2d16bbce-d5d1-443f-acdf-75f6b0ce8850
+```
+code=AAABAAAAiL****FDMZBUwZ8eCAA&session_state=2d16bbce-d5d1-443f-acdf-75f6b0ce8850
+```
 
 ### 授权请求 (Open ID Connect)
 如果不只想要代表用户访问 Azure Resource Manager，而且还要允许用户使用其 Azure AD 帐户登录你的应用程序，请发出 Open ID Connect 授权请求。使用 Open ID Connect，应用程序也可以从 Azure AD 接收 id\_token，应用可以使用它来将用户登录。
@@ -121,29 +135,37 @@ Azure AD 对用户进行身份验证，并根据需要请求用户向应用授�
 
 下面是一个示例 Open ID Connect 请求：
 
-     https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Authorize?client_id=a0448380-c346-4f9f-b897-c18733de9394&response_mode=form_post&response_type=code+id_token&redirect_uri=http%3a%2f%2fwww.vipswapper.com%2fcloudsense%2fAccount%2fSignIn&resource=https%3a%2f%2fgraph.chinacloudapi.cn%2f&scope=openid+profile&nonce=63567Dc4MDAw&domain_hint=live.com&state=M_12tMyKaM8
+```
+ https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Authorize?client_id=a0448380-c346-4f9f-b897-c18733de9394&response_mode=form_post&response_type=code+id_token&redirect_uri=http%3a%2f%2fwww.vipswapper.com%2fcloudsense%2fAccount%2fSignIn&resource=https%3a%2f%2fgraph.chinacloudapi.cn%2f&scope=openid+profile&nonce=63567Dc4MDAw&domain_hint=live.com&state=M_12tMyKaM8
+```
 
 Azure AD 对用户进行身份验证，并根据需要请求用户向应用授予权限。它会将授权代码返回到应用程序的回复 URL。Azure AD 根据请求的 response\_mode，将数据发回到查询字符串，或作为发布数据发送。
 
 下面是一个示例 Open ID Connect 响应：
 
-    code=AAABAAAAiL*****I4rDWd7zXsH6WUjlkIEQxIAA&id_token=eyJ0eXAiOiJKV1Q*****T3GrzzSFxg&state=M_12tMyKaM8&session_state=2d16bbce-d5d1-443f-acdf-75f6b0ce8850
+```
+code=AAABAAAAiL*****I4rDWd7zXsH6WUjlkIEQxIAA&id_token=eyJ0eXAiOiJKV1Q*****T3GrzzSFxg&state=M_12tMyKaM8&session_state=2d16bbce-d5d1-443f-acdf-75f6b0ce8850
+```
 
 ### 令牌请求（OAuth2.0 代码授予流）
 既然应用程序已从 Azure AD 收到授权代码，现在你可以获取 Azure Resource Manager 的访问令牌。将 OAuth2.0 代码授予令牌请求发布到 Azure AD 令牌终结点：
 
-    https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Token
+```
+https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Token
+```
 
 [use the authorization code](../active-directory/active-directory-protocols-oauth-code.md#use-the-authorization-code-to-request-an-access-token)（使用授权代码）主题中介绍了适用于此请求的查询字符串参数。
 
 以下示例演示如何使用密码凭据来请求代码授予令牌：
 
-    POST https://login.chinacloudapi.cn/7fe877e6-a150-4992-bbfe-f517e304dfa0/oauth2/token HTTP/1.1
+```
+POST https://login.chinacloudapi.cn/7fe877e6-a150-4992-bbfe-f517e304dfa0/oauth2/token HTTP/1.1
 
-    Content-Type: application/x-www-form-urlencoded
-    Content-Length: 1012
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 1012
 
-    grant_type=authorization_code&code=AAABAAAAiL9Kn2Z*****L1nVMH3Z5ESiAA&redirect_uri=http%3A%2F%2Flocalhost%3A62080%2FAccount%2FSignIn&client_id=a0448380-c346-4f9f-b897-c18733de9394&client_secret=olna84E8*****goScOg%3D
+grant_type=authorization_code&code=AAABAAAAiL9Kn2Z*****L1nVMH3Z5ESiAA&redirect_uri=http%3A%2F%2Flocalhost%3A62080%2FAccount%2FSignIn&client_id=a0448380-c346-4f9f-b897-c18733de9394&client_secret=olna84E8*****goScOg%3D
+```
 
 使用证书凭据时，请使用应用程序证书凭据的私钥来创建 JSON Web 令牌 (JWT) 并签名 (RSA SHA256)。令牌的声明类型在 [JWT 令牌声明](../active-directory/active-directory-protocols-oauth-code.md#jwt-token-claims)中显示。请参考 [Active Directory Auth Library (.NET) code](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/blob/dev/src/ADAL.PCL.Desktop/CryptographyHelper.cs)（Active Directory 身份验证库 (.NET) 代码）来为客户端断言 JWT 令牌签名。
 
@@ -151,34 +173,42 @@ Azure AD 对用户进行身份验证，并根据需要请求用户向应用授�
 
 以下示例演示如何使用证书凭据来请求代码授予令牌：
 
-    POST https://login.chinacloudapi.cn/7fe877e6-a150-4992-bbfe-f517e304dfa0/oauth2/token HTTP/1.1
+```
+POST https://login.chinacloudapi.cn/7fe877e6-a150-4992-bbfe-f517e304dfa0/oauth2/token HTTP/1.1
 
-    Content-Type: application/x-www-form-urlencoded
-    Content-Length: 1012
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 1012
 
-    grant_type=authorization_code&code=AAABAAAAiL9Kn2Z*****L1nVMH3Z5ESiAA&redirect_uri=http%3A%2F%2Flocalhost%3A62080%2FAccount%2FSignIn&client_id=a0448380-c346-4f9f-b897-c18733de9394&client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&client_assertion=eyJhbG*****Y9cYo8nEjMyA
+grant_type=authorization_code&code=AAABAAAAiL9Kn2Z*****L1nVMH3Z5ESiAA&redirect_uri=http%3A%2F%2Flocalhost%3A62080%2FAccount%2FSignIn&client_id=a0448380-c346-4f9f-b897-c18733de9394&client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&client_assertion=eyJhbG*****Y9cYo8nEjMyA
+```
 
 代码授予令牌的示例响应：
 
-    HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 
-    {"token_type":"Bearer","expires_in":"3599","expires_on":"1432039858","not_before":"1432035958","resource":"https://management.core.chinacloudapi.cn/","access_token":"eyJ0eXAiOiJKV1Q****M7Cw6JWtfY2lGc5A","refresh_token":"AAABAAAAiL9Kn2Z****55j-sjnyYgAA","scope":"user_impersonation","id_token":"eyJ0eXAiOiJKV*****-drP1J3P-HnHi9Rr46kGZnukEBH4dsg"}
+{"token_type":"Bearer","expires_in":"3599","expires_on":"1432039858","not_before":"1432035958","resource":"https://management.core.chinacloudapi.cn/","access_token":"eyJ0eXAiOiJKV1Q****M7Cw6JWtfY2lGc5A","refresh_token":"AAABAAAAiL9Kn2Z****55j-sjnyYgAA","scope":"user_impersonation","id_token":"eyJ0eXAiOiJKV*****-drP1J3P-HnHi9Rr46kGZnukEBH4dsg"}
+```
 
 #### 处理代码授予令牌响应
 成功的令牌响应包含 Azure Resource Manager 的（用户 + 应用）访问令牌。应用程序使用此访问令牌来代表用户访问 Resource Manager。Azure AD 颁发的访问令牌生存期为一小时。Web 应用程序不太可能需要续订（用户 + 应用）访问令牌。如果需要续订访问令牌，请使用应用程序在令牌响应中收到的刷新令牌。将 OAuth2.0 令牌请求发布到 Azure AD 令牌终结点：
 
-    https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Token
+```
+https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Token
+```
 
 [refreshing the access token](../active-directory/active-directory-protocols-oauth-code.md#refreshing-the-access-tokens)（刷新访问令牌）中介绍了要在刷新请求中使用的参数。
 
 以下示例演示如何使用刷新令牌：
 
-    POST https://login.chinacloudapi.cn/7fe877e6-a150-4992-bbfe-f517e304dfa0/oauth2/token HTTP/1.1
+```
+POST https://login.chinacloudapi.cn/7fe877e6-a150-4992-bbfe-f517e304dfa0/oauth2/token HTTP/1.1
 
-    Content-Type: application/x-www-form-urlencoded
-    Content-Length: 1012
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 1012
 
-    grant_type=refresh_token&refresh_token=AAABAAAAiL9Kn2Z****55j-sjnyYgAA&client_id=a0448380-c346-4f9f-b897-c18733de9394&client_secret=olna84E8*****goScOg%3D
+grant_type=refresh_token&refresh_token=AAABAAAAiL9Kn2Z****55j-sjnyYgAA&client_id=a0448380-c346-4f9f-b897-c18733de9394&client_secret=olna84E8*****goScOg%3D
+```
 
 尽管刷新令牌可用于获取 Azure Resource Manager 的新访问令牌，但它们并不适合应用程序脱机访问。刷新令牌生存期有限，且刷新令牌绑定到用户。如果用户离开了组织，使用该刷新令牌的应用程序将失去访问权限。此方法不适合团队用来管理其 Azure 资源的应用程序。
 
@@ -191,15 +221,19 @@ ASP.NET MVC 示例应用的 [UserCanManagerAccessForSubscription](https://github
 
 以下示例演示如何请求用户对订阅的权限。83cfe939-2402-4581-b761-4f59b0a041e4 是订阅的 ID。
 
-    GET https://management.chinacloudapi.cn/subscriptions/83cfe939-2402-4581-b761-4f59b0a041e4/providers/microsoft.authorization/permissions?api-version=2015-07-01 HTTP/1.1
+```
+GET https://management.chinacloudapi.cn/subscriptions/83cfe939-2402-4581-b761-4f59b0a041e4/providers/microsoft.authorization/permissions?api-version=2015-07-01 HTTP/1.1
 
-    Authorization: Bearer eyJ0eXAiOiJKV1QiLC***lwO1mM7Cw6JWtfY2lGc5A
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC***lwO1mM7Cw6JWtfY2lGc5A
+```
 
 下面是请求获取用户对订阅的权限后返回的示例响应：
 
-    HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 
-    {"value":[{"actions":["*"],"notActions":["Microsoft.Authorization/*/Write","Microsoft.Authorization/*/Delete"]},{"actions":["*/read"],"notActions":[]}]}
+{"value":[{"actions":["*"],"notActions":["Microsoft.Authorization/*/Write","Microsoft.Authorization/*/Delete"]},{"actions":["*/read"],"notActions":[]}]}
+```
 
 权限 API 将返回多个权限。每个权限包括允许的操作 (actions) 和禁止的操作 (notactions)。如果某个操作出现在任何权限的允许操作列表中，并且不在该权限的禁止操作列表中，则用户可执行该操作。**microsoft.authorization/roleassignments/write** 是授予访问管理权限的操作。应用程序必须分析权限结果，以便在每个权限的 actions 和 notactions 中的此操作字符串上查找 regex 匹配项。
 
@@ -228,16 +262,20 @@ ASP.net MVC 示例应用程序的 [GetObjectIdOfServicePrincipalInOrganization](
 
 客户端凭据授予令牌的示例请求：
 
-    POST https://login.chinacloudapi.cn/62e173e9-301e-423e-bcd4-29121ec1aa24/oauth2/token HTTP/1.1
-    Content-Type: application/x-www-form-urlencoded
-    Content-Length: 187</pre>
-    <pre>grant_type=client_credentials&client_id=a0448380-c346-4f9f-b897-c18733de9394&resource=https%3A%2F%2Fgraph.chinacloudapi.cn%2F &client_secret=olna8C*****Og%3D
+```
+POST https://login.chinacloudapi.cn/62e173e9-301e-423e-bcd4-29121ec1aa24/oauth2/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 187</pre>
+<pre>grant_type=client_credentials&client_id=a0448380-c346-4f9f-b897-c18733de9394&resource=https%3A%2F%2Fgraph.chinacloudapi.cn%2F &client_secret=olna8C*****Og%3D
+```
 
 客户端凭据授予令牌的示例响应：
 
-    HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 
-    {"token_type":"Bearer","expires_in":"3599","expires_on":"1432039862","not_before":"1432035962","resource":"https://graph.chinacloudapi.cn/","access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLndpbmRv****G5gUTV-kKorR-pg"}
+{"token_type":"Bearer","expires_in":"3599","expires_on":"1432039862","not_before":"1432035962","resource":"https://graph.chinacloudapi.cn/","access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLndpbmRv****G5gUTV-kKorR-pg"}
+```
 
 ### 获取用户 Azure AD 中应用程序服务主体的 ObjectId
 现在，请使用仅限应用的访问令牌来查询 [Azure AD Graph 服务主体](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity) API，确定目录中应用程序服务主体的对象 ID。
@@ -246,15 +284,19 @@ ASP.net MVC 示例应用程序的 [GetObjectIdOfServicePrincipalInOrganization](
 
 以下示例演示如何请求应用程序的服务主体。a0448380-c346-4f9f-b897-c18733de9394 是应用程序的客户端 ID。
 
-    GET https://graph.chinacloudapi.cn/62e173e9-301e-423e-bcd4-29121ec1aa24/servicePrincipals?api-version=1.5&$filter=appId%20eq%20'a0448380-c346-4f9f-b897-c18733de9394' HTTP/1.1
+```
+GET https://graph.chinacloudapi.cn/62e173e9-301e-423e-bcd4-29121ec1aa24/servicePrincipals?api-version=1.5&$filter=appId%20eq%20'a0448380-c346-4f9f-b897-c18733de9394' HTTP/1.1
 
-    Authorization: Bearer eyJ0eXAiOiJK*****-kKorR-pg
+Authorization: Bearer eyJ0eXAiOiJK*****-kKorR-pg
+```
 
 以下示例演示了请求应用程序的服务主体后返回的响应
 
-    HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 
-    {"odata.metadata":"https://graph.chinacloudapi.cn/62e173e9-301e-423e-bcd4-29121ec1aa24/$metadata#directoryObjects/Microsoft.DirectoryServices.ServicePrincipal","value":[{"odata.type":"Microsoft.DirectoryServices.ServicePrincipal","objectType":"ServicePrincipal","objectId":"9b5018d4-6951-42ed-8a92-f11ec283ccec","deletionTimestamp":null,"accountEnabled":true,"appDisplayName":"CloudSense","appId":"a0448380-c346-4f9f-b897-c18733de9394","appOwnerTenantId":"62e173e9-301e-423e-bcd4-29121ec1aa24","appRoleAssignmentRequired":false,"appRoles":[],"displayName":"CloudSense","errorUrl":null,"homepage":"http://www.vipswapper.com/cloudsense","keyCredentials":[],"logoutUrl":null,"oauth2Permissions":[{"adminConsentDescription":"Allow the application to access CloudSense on behalf of the signed-in user.","adminConsentDisplayName":"Access CloudSense","id":"b7b7338e-683a-4796-b95e-60c10380de1c","isEnabled":true,"type":"User","userConsentDescription":"Allow the application to access CloudSense on your behalf.","userConsentDisplayName":"Access CloudSense","value":"user_impersonation"}],"passwordCredentials":[],"preferredTokenSigningKeyThumbprint":null,"publisherName":"vipswapper"quot;,"replyUrls":["http://www.vipswapper.com/cloudsense","http://www.vipswapper.com","http://vipswapper.com","http://vipswapper.azurewebsites.net","http://localhost:62080"],"samlMetadataUrl":null,"servicePrincipalNames":["http://www.vipswapper.com/cloudsense","a0448380-c346-4f9f-b897-c18733de9394"],"tags":["WindowsAzureActiveDirectoryIntegratedApp"]}]}
+{"odata.metadata":"https://graph.chinacloudapi.cn/62e173e9-301e-423e-bcd4-29121ec1aa24/$metadata#directoryObjects/Microsoft.DirectoryServices.ServicePrincipal","value":[{"odata.type":"Microsoft.DirectoryServices.ServicePrincipal","objectType":"ServicePrincipal","objectId":"9b5018d4-6951-42ed-8a92-f11ec283ccec","deletionTimestamp":null,"accountEnabled":true,"appDisplayName":"CloudSense","appId":"a0448380-c346-4f9f-b897-c18733de9394","appOwnerTenantId":"62e173e9-301e-423e-bcd4-29121ec1aa24","appRoleAssignmentRequired":false,"appRoles":[],"displayName":"CloudSense","errorUrl":null,"homepage":"http://www.vipswapper.com/cloudsense","keyCredentials":[],"logoutUrl":null,"oauth2Permissions":[{"adminConsentDescription":"Allow the application to access CloudSense on behalf of the signed-in user.","adminConsentDisplayName":"Access CloudSense","id":"b7b7338e-683a-4796-b95e-60c10380de1c","isEnabled":true,"type":"User","userConsentDescription":"Allow the application to access CloudSense on your behalf.","userConsentDisplayName":"Access CloudSense","value":"user_impersonation"}],"passwordCredentials":[],"preferredTokenSigningKeyThumbprint":null,"publisherName":"vipswapper"quot;,"replyUrls":["http://www.vipswapper.com/cloudsense","http://www.vipswapper.com","http://vipswapper.com","http://vipswapper.azurewebsites.net","http://localhost:62080"],"samlMetadataUrl":null,"servicePrincipalNames":["http://www.vipswapper.com/cloudsense","a0448380-c346-4f9f-b897-c18733de9394"],"tags":["WindowsAzureActiveDirectoryIntegratedApp"]}]}
+```
 
 ### 获取 Azure RBAC 角色标识符
 若要将适当的 RBAC 角色分配给服务主体，必须确定 Azure RBAC 角色的标识符。
@@ -274,19 +316,25 @@ ASP.net MVC 示例应用的 [GetRoleId](https://github.com/dushyantgill/VipSwapp
 
 以下请求示例演示如何获取 Azure RBAC 角色标识符。09cbd307-aa71-4aca-b346-5f253e6e3ebb 是订阅的 ID。
 
-    GET https://management.chinacloudapi.cn/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions?api-version=2015-07-01 HTTP/1.1
+```
+GET https://management.chinacloudapi.cn/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions?api-version=2015-07-01 HTTP/1.1
 
-    Authorization: Bearer eyJ0eXAiOiJKV*****fY2lGc5
+Authorization: Bearer eyJ0eXAiOiJKV*****fY2lGc5
+```
 
 响应格式如下：
 
-    HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 
-    {"value":[{"properties":{"roleName":"API Management Service Contributor","type":"BuiltInRole","description":"Lets you manage API Management services, but not access to them.","scope":"/","permissions":[{"actions":["Microsoft.ApiManagement/Services/*","Microsoft.Authorization/*/read","Microsoft.Resources/subscriptions/resources/read","Microsoft.Resources/subscriptions/resourceGroups/read","Microsoft.Resources/subscriptions/resourceGroups/resources/read","Microsoft.Resources/subscriptions/resourceGroups/deployments/*","Microsoft.Insights/alertRules/*","Microsoft.Support/*"],"notActions":[]}]},"id":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/312a565d-c81f-4fd8-895a-4e21e48d571c","type":"Microsoft.Authorization/roleDefinitions","name":"312a565d-c81f-4fd8-895a-4e21e48d571c"},{"properties":{"roleName":"Application Insights Component Contributor","type":"BuiltInRole","description":"Lets you manage Application Insights components, but not access to them.","scope":"/","permissions":[{"actions":["Microsoft.Insights/components/*","Microsoft.Insights/webtests/*","Microsoft.Authorization/*/read","Microsoft.Resources/subscriptions/resources/read","Microsoft.Resources/subscriptions/resourceGroups/read","Microsoft.Resources/subscriptions/resourceGroups/resources/read","Microsoft.Resources/subscriptions/resourceGroups/deployments/*","Microsoft.Insights/alertRules/*","Microsoft.Support/*"],"notActions":[]}]},"id":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/ae349356-3a1b-4a5e-921d-050484c6347e","type":"Microsoft.Authorization/roleDefinitions","name":"ae349356-3a1b-4a5e-921d-050484c6347e"}]}
+{"value":[{"properties":{"roleName":"API Management Service Contributor","type":"BuiltInRole","description":"Lets you manage API Management services, but not access to them.","scope":"/","permissions":[{"actions":["Microsoft.ApiManagement/Services/*","Microsoft.Authorization/*/read","Microsoft.Resources/subscriptions/resources/read","Microsoft.Resources/subscriptions/resourceGroups/read","Microsoft.Resources/subscriptions/resourceGroups/resources/read","Microsoft.Resources/subscriptions/resourceGroups/deployments/*","Microsoft.Insights/alertRules/*","Microsoft.Support/*"],"notActions":[]}]},"id":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/312a565d-c81f-4fd8-895a-4e21e48d571c","type":"Microsoft.Authorization/roleDefinitions","name":"312a565d-c81f-4fd8-895a-4e21e48d571c"},{"properties":{"roleName":"Application Insights Component Contributor","type":"BuiltInRole","description":"Lets you manage Application Insights components, but not access to them.","scope":"/","permissions":[{"actions":["Microsoft.Insights/components/*","Microsoft.Insights/webtests/*","Microsoft.Authorization/*/read","Microsoft.Resources/subscriptions/resources/read","Microsoft.Resources/subscriptions/resourceGroups/read","Microsoft.Resources/subscriptions/resourceGroups/resources/read","Microsoft.Resources/subscriptions/resourceGroups/deployments/*","Microsoft.Insights/alertRules/*","Microsoft.Support/*"],"notActions":[]}]},"id":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/ae349356-3a1b-4a5e-921d-050484c6347e","type":"Microsoft.Authorization/roleDefinitions","name":"ae349356-3a1b-4a5e-921d-050484c6347e"}]}
+```
 
 不需要持续调用此 API。一旦确定角色定义的已知 GUID，便可以将角色定义 ID 构造为：
 
-    /subscriptions/{subscription_id}/providers/Microsoft.Authorization/roleDefinitions/{well-known-role-guid}
+```
+/subscriptions/{subscription_id}/providers/Microsoft.Authorization/roleDefinitions/{well-known-role-guid}
+```
 
 下面是常用内置角色的已知 GUID：
 
@@ -309,13 +357,15 @@ ASP.net MVC 示例应用的 [GrantRoleToServicePrincipalOnSubscription](https://
 
 将 RBAC 角色分配到应用程序的示例请求：
 
-    PUT https://management.chinacloudapi.cn/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/microsoft.authorization/roleassignments/4f87261d-2816-465d-8311-70a27558df4c?api-version=2015-07-01 HTTP/1.1
+```
+PUT https://management.chinacloudapi.cn/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/microsoft.authorization/roleassignments/4f87261d-2816-465d-8311-70a27558df4c?api-version=2015-07-01 HTTP/1.1
 
-    Authorization: Bearer eyJ0eXAiOiJKV1QiL*****FlwO1mM7Cw6JWtfY2lGc5
-    Content-Type: application/json
-    Content-Length: 230
+Authorization: Bearer eyJ0eXAiOiJKV1QiL*****FlwO1mM7Cw6JWtfY2lGc5
+Content-Type: application/json
+Content-Length: 230
 
-    {"properties": {"roleDefinitionId":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7","principalId":"c3097b31-7309-4c59-b4e3-770f8406bad2"}}
+{"properties": {"roleDefinitionId":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7","principalId":"c3097b31-7309-4c59-b4e3-770f8406bad2"}}
+```
 
 在请求中使用以下值：
 
@@ -328,16 +378,20 @@ ASP.net MVC 示例应用的 [GrantRoleToServicePrincipalOnSubscription](https://
 
 响应格式如下：
 
-    HTTP/1.1 201 Created
+```
+HTTP/1.1 201 Created
 
-    {"properties":{"roleDefinitionId":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7","principalId":"c3097b31-7309-4c59-b4e3-770f8406bad2","scope":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb"},"id":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleAssignments/4f87261d-2816-465d-8311-70a27558df4c","type":"Microsoft.Authorization/roleAssignments","name":"4f87261d-2816-465d-8311-70a27558df4c"}
+{"properties":{"roleDefinitionId":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7","principalId":"c3097b31-7309-4c59-b4e3-770f8406bad2","scope":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb"},"id":"/subscriptions/09cbd307-aa71-4aca-b346-5f253e6e3ebb/providers/Microsoft.Authorization/roleAssignments/4f87261d-2816-465d-8311-70a27558df4c","type":"Microsoft.Authorization/roleAssignments","name":"4f87261d-2816-465d-8311-70a27558df4c"}
+```
 
 ### 获取 Azure Resource Manager 的仅限应用的访问令牌
 若要验证应用程序是否具有所需的订阅访问权限，请使用仅限应用的令牌对订阅执行测试任务。
 
 若要获取仅限应用的访问令牌，请根据 [Get app-only access token for Azure AD Graph API](#app-azure-ad-graph)（获取 Azure AD 图形 API 的仅限应用的访问令牌）中的说明为资源参数使用不同的值：
 
-    https://management.core.chinacloudapi.cn/
+```
+https://management.core.chinacloudapi.cn/
+```
 
 ASP.NET MVC 示例应用程序的 [ServicePrincipalHasReadAccessToSubscription](https://github.com/dushyantgill/VipSwapper/blob/master/CloudSense/CloudSense/AzureResourceManagerUtil.cs#L110) 方法使用适用于 .NET 的 Active Directory 身份验证库来获取 Azure Resource Manager 的仅限应用的访问令牌。
 

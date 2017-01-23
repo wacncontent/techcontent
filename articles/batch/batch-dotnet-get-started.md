@@ -91,18 +91,20 @@ ms.author: marsma
 
 csharp
 
-    // Update the Batch and Storage account credential strings below with the values
-    // unique to your accounts. These are used when constructing connection strings
-    // for the Batch and Storage client objects.
+```
+// Update the Batch and Storage account credential strings below with the values
+// unique to your accounts. These are used when constructing connection strings
+// for the Batch and Storage client objects.
 
-    // Batch account credentials
-    private const string BatchAccountName = "";
-    private const string BatchAccountKey  = "";
-    private const string BatchAccountUrl  = "";
+// Batch account credentials
+private const string BatchAccountName = "";
+private const string BatchAccountKey  = "";
+private const string BatchAccountUrl  = "";
 
-    // Storage account credentials
-    private const string StorageAccountName = "";
-    private const string StorageAccountKey  = "";
+// Storage account credentials
+private const string StorageAccountName = "";
+private const string StorageAccountKey  = "";
+```
 
 > [!IMPORTANT]
 > 如上所述，目前必须为 Azure 存储空间中的**常规用途**存储帐户指定凭据。Batch 应用程序使用**常规用途**存储帐户中的 Blob 存储。请不要为通过选择 *Blob 存储* 帐户类型创建的存储帐户指定凭据。
@@ -134,52 +136,58 @@ Batch 包含的内置支持支持与 Azure 存储空间交互。存储帐户中�
 
 csharp
 
-    // Construct the Storage account connection string
-    string storageConnectionString = String.Format(
-        "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.chinacloudapi.cn",
-        StorageAccountName,
-        StorageAccountKey);
+```
+// Construct the Storage account connection string
+string storageConnectionString = String.Format(
+    "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.chinacloudapi.cn",
+    StorageAccountName,
+    StorageAccountKey);
 
-    // Retrieve the storage account
-    CloudStorageAccount storageAccount =
-        CloudStorageAccount.Parse(storageConnectionString);
+// Retrieve the storage account
+CloudStorageAccount storageAccount =
+    CloudStorageAccount.Parse(storageConnectionString);
 
-    // Create the blob client, for use in obtaining references to
-    // blob storage containers
-    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+// Create the blob client, for use in obtaining references to
+// blob storage containers
+CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+```
 
 我们将在整个应用程序中使用 `blobClient` 引用，并将它作为参数传递给多个方法。在紧随上述代码的代码块中提供了示例，我们在其中调用 `CreateContainerIfNotExistAsync` 以实际创建容器。
 
 csharp
 
-    // Use the blob client to create the containers in Azure Storage if they don't
-    // yet exist
-    const string appContainerName    = "application";
-    const string inputContainerName  = "input";
-    const string outputContainerName = "output";
-    await CreateContainerIfNotExistAsync(blobClient, appContainerName);
-    await CreateContainerIfNotExistAsync(blobClient, inputContainerName);
-    await CreateContainerIfNotExistAsync(blobClient, outputContainerName);
+```
+// Use the blob client to create the containers in Azure Storage if they don't
+// yet exist
+const string appContainerName    = "application";
+const string inputContainerName  = "input";
+const string outputContainerName = "output";
+await CreateContainerIfNotExistAsync(blobClient, appContainerName);
+await CreateContainerIfNotExistAsync(blobClient, inputContainerName);
+await CreateContainerIfNotExistAsync(blobClient, outputContainerName);
+```
 
 csharp
 
-    private static async Task CreateContainerIfNotExistAsync(
-        CloudBlobClient blobClient,
-        string containerName)
-    {
-            CloudBlobContainer container =
-                blobClient.GetContainerReference(containerName);
+```
+private static async Task CreateContainerIfNotExistAsync(
+    CloudBlobClient blobClient,
+    string containerName)
+{
+        CloudBlobContainer container =
+            blobClient.GetContainerReference(containerName);
 
-            if (await container.CreateIfNotExistsAsync())
-            {
-                    Console.WriteLine("Container [{0}] created.", containerName);
-            }
-            else
-            {
-                    Console.WriteLine("Container [{0}] exists, skipping creation.",
-                        containerName);
-            }
-    }
+        if (await container.CreateIfNotExistsAsync())
+        {
+                Console.WriteLine("Container [{0}] created.", containerName);
+        }
+        else
+        {
+                Console.WriteLine("Container [{0}] exists, skipping creation.",
+                    containerName);
+        }
+}
+```
 
 创建容器之后，应用程序现在即可上载任务使用的文件。
 
@@ -194,37 +202,39 @@ csharp
 
 csharp
 
-    // Paths to the executable and its dependencies that will be executed by the tasks
-    List<string> applicationFilePaths = new List<string>
-    {
-        // The DotNetTutorial project includes a project reference to TaskApplication,
-        // allowing us to determine the path of the task application binary dynamically
-        typeof(TaskApplication.Program).Assembly.Location,
-        "Microsoft.WindowsAzure.Storage.dll"
-    };
+```
+// Paths to the executable and its dependencies that will be executed by the tasks
+List<string> applicationFilePaths = new List<string>
+{
+    // The DotNetTutorial project includes a project reference to TaskApplication,
+    // allowing us to determine the path of the task application binary dynamically
+    typeof(TaskApplication.Program).Assembly.Location,
+    "Microsoft.WindowsAzure.Storage.dll"
+};
 
-    // The collection of data files that are to be processed by the tasks
-    List<string> inputFilePaths = new List<string>
-    {
-        @"..\..\taskdata1.txt",
-        @"..\..\taskdata2.txt",
-        @"..\..\taskdata3.txt"
-    };
+// The collection of data files that are to be processed by the tasks
+List<string> inputFilePaths = new List<string>
+{
+    @"..\..\taskdata1.txt",
+    @"..\..\taskdata2.txt",
+    @"..\..\taskdata3.txt"
+};
 
-    // Upload the application and its dependencies to Azure Storage. This is the
-    // application that will process the data files, and will be executed by each
-    // of the tasks on the compute nodes.
-    List<ResourceFile> applicationFiles = await UploadFilesToContainerAsync(
-        blobClient,
-        appContainerName,
-        applicationFilePaths);
+// Upload the application and its dependencies to Azure Storage. This is the
+// application that will process the data files, and will be executed by each
+// of the tasks on the compute nodes.
+List<ResourceFile> applicationFiles = await UploadFilesToContainerAsync(
+    blobClient,
+    appContainerName,
+    applicationFilePaths);
 
-    // Upload the data files. This is the data that will be processed by each of
-    // the tasks that are executed on the compute nodes within the pool.
-    List<ResourceFile> inputFiles = await UploadFilesToContainerAsync(
-        blobClient,
-        inputContainerName,
-        inputFilePaths);
+// Upload the data files. This is the data that will be processed by each of
+// the tasks that are executed on the compute nodes within the pool.
+List<ResourceFile> inputFiles = await UploadFilesToContainerAsync(
+    blobClient,
+    inputContainerName,
+    inputFilePaths);
+```
 
 `Program.cs` 中有两个方法涉及到上载过程：
 
@@ -233,35 +243,37 @@ csharp
 
 csharp
 
-    private static async Task<ResourceFile> UploadFileToContainerAsync(
-        CloudBlobClient blobClient,
-        string containerName,
-        string filePath)
-    {
-            Console.WriteLine(
-                "Uploading file {0} to container [{1}]...", filePath, containerName);
+```
+private static async Task<ResourceFile> UploadFileToContainerAsync(
+    CloudBlobClient blobClient,
+    string containerName,
+    string filePath)
+{
+        Console.WriteLine(
+            "Uploading file {0} to container [{1}]...", filePath, containerName);
 
-            string blobName = Path.GetFileName(filePath);
+        string blobName = Path.GetFileName(filePath);
 
-            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
-            CloudBlockBlob blobData = container.GetBlockBlobReference(blobName);
-            await blobData.UploadFromFileAsync(filePath, FileMode.Open);
+        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+        CloudBlockBlob blobData = container.GetBlockBlobReference(blobName);
+        await blobData.UploadFromFileAsync(filePath, FileMode.Open);
 
-            // Set the expiry time and permissions for the blob shared access signature.
-            // In this case, no start time is specified, so the shared access signature
-            // becomes valid immediately
-            SharedAccessBlobPolicy sasConstraints = new SharedAccessBlobPolicy
-            {
-                    SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
-                    Permissions = SharedAccessBlobPermissions.Read
-            };
+        // Set the expiry time and permissions for the blob shared access signature.
+        // In this case, no start time is specified, so the shared access signature
+        // becomes valid immediately
+        SharedAccessBlobPolicy sasConstraints = new SharedAccessBlobPolicy
+        {
+                SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
+                Permissions = SharedAccessBlobPermissions.Read
+        };
 
-            // Construct the SAS URL for blob
-            string sasBlobToken = blobData.GetSharedAccessSignature(sasConstraints);
-            string blobSasUri = String.Format("{0}{1}", blobData.Uri, sasBlobToken);
+        // Construct the SAS URL for blob
+        string sasBlobToken = blobData.GetSharedAccessSignature(sasConstraints);
+        string blobSasUri = String.Format("{0}{1}", blobData.Uri, sasBlobToken);
 
-            return new ResourceFile(blobSasUri, blobName);
-    }
+        return new ResourceFile(blobSasUri, blobName);
+}
+```
 
 ### ResourceFiles
 [ResourceFile][net_resourcefile] 提供 Batch 中的任务，以及 Azure 存储空间中将在任务运行之前下载到计算节点的文件的 URL。[ResourceFile.BlobSource][net_resourcefile_blobsource] 属性指定存在于 Azure 存储空间的文件的完整 URL。该 URL 还可以包含用于对文件进行安全访问的共享访问签名 (SAS)。Batch .NET 中的大多数任务类型都包含 *ResourceFiles* 属性，这些类型包括：
@@ -291,57 +303,61 @@ Batch **池**是 Batch 执行作业任务时所在的计算节点（虚拟机）
 
 csharp
 
-    BatchSharedKeyCredentials cred = new BatchSharedKeyCredentials(
-        BatchAccountUrl,
-        BatchAccountName,
-        BatchAccountKey);
+```
+BatchSharedKeyCredentials cred = new BatchSharedKeyCredentials(
+    BatchAccountUrl,
+    BatchAccountName,
+    BatchAccountKey);
 
-    using (BatchClient batchClient = BatchClient.Open(cred))
-    {
-        ...
+using (BatchClient batchClient = BatchClient.Open(cred))
+{
+    ...
+```
 
 然后，调用 `CreatePoolAsync` 以在 Batch 帐户中创建计算节点池。`CreatePoolAsync` 使用 [BatchClient.PoolOperations.CreatePool][net_pool_create] 方法在 Batch 服务中实际创建该池。
 
 csharp
 
-    private static async Task CreatePoolAsync(
-        BatchClient batchClient,
-        string poolId,
-        IList<ResourceFile> resourceFiles)
+```
+private static async Task CreatePoolAsync(
+    BatchClient batchClient,
+    string poolId,
+    IList<ResourceFile> resourceFiles)
+{
+    Console.WriteLine("Creating pool [{0}]...", poolId);
+
+    // Create the unbound pool. Until we call CloudPool.Commit() or CommitAsync(),
+    // no pool is actually created in the Batch service. This CloudPool instance is
+    // therefore considered "unbound," and we can modify its properties.
+    CloudPool pool = batchClient.PoolOperations.CreatePool(
+            poolId: poolId,
+            targetDedicated: 3,           // 3 compute nodes
+            virtualMachineSize: "small",  // single-core, 1.75 GB memory, 224 GB disk
+            cloudServiceConfiguration:
+                new CloudServiceConfiguration(osFamily: "4")); // Win Server 2012 R2
+
+    // Create and assign the StartTask that will be executed when compute nodes join
+    // the pool. In this case, we copy the StartTask's resource files (that will be
+    // automatically downloaded to the node by the StartTask) into the shared
+    // directory that all tasks will have access to.
+    pool.StartTask = new StartTask
     {
-        Console.WriteLine("Creating pool [{0}]...", poolId);
+        // Specify a command line for the StartTask that copies the task application
+        // files to the node's shared directory. Every compute node in a Batch pool
+        // is configured with several pre-defined environment variables that you can
+        // reference by using commands or applications run by tasks.
 
-        // Create the unbound pool. Until we call CloudPool.Commit() or CommitAsync(),
-        // no pool is actually created in the Batch service. This CloudPool instance is
-        // therefore considered "unbound," and we can modify its properties.
-        CloudPool pool = batchClient.PoolOperations.CreatePool(
-                poolId: poolId,
-                targetDedicated: 3,           // 3 compute nodes
-                virtualMachineSize: "small",  // single-core, 1.75 GB memory, 224 GB disk
-                cloudServiceConfiguration:
-                    new CloudServiceConfiguration(osFamily: "4")); // Win Server 2012 R2
+        // Since a successful execution of robocopy can return a non-zero exit code
+        // (e.g. 1 when one or more files were successfully copied) we need to
+        // manually exit with a 0 for Batch to recognize StartTask execution success.
+        CommandLine = "cmd /c (robocopy %AZ_BATCH_TASK_WORKING_DIR% %AZ_BATCH_NODE_SHARED_DIR%) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
+        ResourceFiles = resourceFiles,
+        WaitForSuccess = true
+    };
 
-        // Create and assign the StartTask that will be executed when compute nodes join
-        // the pool. In this case, we copy the StartTask's resource files (that will be
-        // automatically downloaded to the node by the StartTask) into the shared
-        // directory that all tasks will have access to.
-        pool.StartTask = new StartTask
-        {
-            // Specify a command line for the StartTask that copies the task application
-            // files to the node's shared directory. Every compute node in a Batch pool
-            // is configured with several pre-defined environment variables that you can
-            // reference by using commands or applications run by tasks.
-
-            // Since a successful execution of robocopy can return a non-zero exit code
-            // (e.g. 1 when one or more files were successfully copied) we need to
-            // manually exit with a 0 for Batch to recognize StartTask execution success.
-            CommandLine = "cmd /c (robocopy %AZ_BATCH_TASK_WORKING_DIR% %AZ_BATCH_NODE_SHARED_DIR%) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
-            ResourceFiles = resourceFiles,
-            WaitForSuccess = true
-        };
-
-        await pool.CommitAsync();
-    }
+    await pool.CommitAsync();
+}
+```
 
 使用 [CreatePool][net_pool_create] 创建池时，需指定多个参数，例如计算节点数目、[节点大小](../cloud-services/cloud-services-sizes-specs.md)以及节点的操作系统。在 *DotNetTutorial* 中，我们使用 [CloudServiceConfiguration][net_cloudserviceconfiguration] 从[云服务](../cloud-services/cloud-services-guestos-update-matrix.md)指定 Windows Server 2012 R2。但是，如果指定 [VirtualMachineConfiguration][net_virtualmachineconfiguration]，则可以从应用商店映像（包括 Windows 和 Linux 映像）创建节点池—有关详细信息，请参阅[在 Azure 批处理池中预配 Linux 计算节点](./batch-linux-nodes.md)。
 
@@ -372,19 +388,21 @@ Batch **作业**是任务的集合，它与计算节点池相关联。作业中�
 
 csharp
 
-    private static async Task CreateJobAsync(
-        BatchClient batchClient,
-        string jobId,
-        string poolId)
-    {
-        Console.WriteLine("Creating job [{0}]...", jobId);
+```
+private static async Task CreateJobAsync(
+    BatchClient batchClient,
+    string jobId,
+    string poolId)
+{
+    Console.WriteLine("Creating job [{0}]...", jobId);
 
-        CloudJob job = batchClient.JobOperations.CreateJob();
-        job.Id = jobId;
-        job.PoolInformation = new PoolInformation { PoolId = poolId };
+    CloudJob job = batchClient.JobOperations.CreateJob();
+    job.Id = jobId;
+    job.PoolInformation = new PoolInformation { PoolId = poolId };
 
-        await job.CommitAsync();
-    }
+    await job.CommitAsync();
+}
+```
 
 创建作业后，可以添加任务来执行工作。
 
@@ -398,40 +416,42 @@ Batch **任务**是在计算节点上执行的各个工作单位。任务有一�
 
 csharp
 
-    private static async Task<List<CloudTask>> AddTasksAsync(
-        BatchClient batchClient,
-        string jobId,
-        List<ResourceFile> inputFiles,
-        string outputContainerSasUrl)
+```
+private static async Task<List<CloudTask>> AddTasksAsync(
+    BatchClient batchClient,
+    string jobId,
+    List<ResourceFile> inputFiles,
+    string outputContainerSasUrl)
+{
+    Console.WriteLine("Adding {0} tasks to job [{1}]...", inputFiles.Count, jobId);
+
+    // Create a collection to hold the tasks that we'll be adding to the job
+    List<CloudTask> tasks = new List<CloudTask>();
+
+    // Create each of the tasks. Because we copied the task application to the
+    // node's shared directory with the pool's StartTask, we can access it via
+    // the shared directory on the node that the task runs on.
+    foreach (ResourceFile inputFile in inputFiles)
     {
-        Console.WriteLine("Adding {0} tasks to job [{1}]...", inputFiles.Count, jobId);
+        string taskId = "topNtask" + inputFiles.IndexOf(inputFile);
+        string taskCommandLine = String.Format(
+            "cmd /c %AZ_BATCH_NODE_SHARED_DIR%\\TaskApplication.exe {0} 3 \"{1}\"",
+            inputFile.FilePath,
+            outputContainerSasUrl);
 
-        // Create a collection to hold the tasks that we'll be adding to the job
-        List<CloudTask> tasks = new List<CloudTask>();
-
-        // Create each of the tasks. Because we copied the task application to the
-        // node's shared directory with the pool's StartTask, we can access it via
-        // the shared directory on the node that the task runs on.
-        foreach (ResourceFile inputFile in inputFiles)
-        {
-            string taskId = "topNtask" + inputFiles.IndexOf(inputFile);
-            string taskCommandLine = String.Format(
-                "cmd /c %AZ_BATCH_NODE_SHARED_DIR%\\TaskApplication.exe {0} 3 \"{1}\"",
-                inputFile.FilePath,
-                outputContainerSasUrl);
-
-            CloudTask task = new CloudTask(taskId, taskCommandLine);
-            task.ResourceFiles = new List<ResourceFile> { inputFile };
-            tasks.Add(task);
-        }
-
-        // Add the tasks as a collection, as opposed to issuing a separate AddTask call
-        // for each. Bulk task submission helps to ensure efficient underlying API calls
-        // to the Batch service.
-        await batchClient.JobOperations.AddTaskAsync(jobId, tasks);
-
-        return tasks;
+        CloudTask task = new CloudTask(taskId, taskCommandLine);
+        task.ResourceFiles = new List<ResourceFile> { inputFile };
+        tasks.Add(task);
     }
+
+    // Add the tasks as a collection, as opposed to issuing a separate AddTask call
+    // for each. Bulk task submission helps to ensure efficient underlying API calls
+    // to the Batch service.
+    await batchClient.JobOperations.AddTaskAsync(jobId, tasks);
+
+    return tasks;
+}
+```
 
 > [!IMPORTANT]
 > 在访问环境变量（例如 `%AZ_BATCH_NODE_SHARED_DIR%`）或执行节点的 `PATH` 中找不到的应用程序时，任务命令行必须带有 `cmd /c` 前缀。这样才可以显式执行命令解释器，并指示其在执行命令后终止操作。如果任务在节点的 `PATH` 中执行应用程序（例如 *robocopy.exe* 或 *powershell.exe*），而且未使用任何环境变量，则不必要满足此要求。
@@ -444,38 +464,40 @@ csharp
 
 csharp
 
-    // NOTE: From project TaskApplication Program.cs
+```
+// NOTE: From project TaskApplication Program.cs
 
-    private static void UploadFileToContainer(string filePath, string containerSas)
-    {
-            string blobName = Path.GetFileName(filePath);
+private static void UploadFileToContainer(string filePath, string containerSas)
+{
+        string blobName = Path.GetFileName(filePath);
 
-            // Obtain a reference to the container using the SAS URI.
-            CloudBlobContainer container = new CloudBlobContainer(new Uri(containerSas));
+        // Obtain a reference to the container using the SAS URI.
+        CloudBlobContainer container = new CloudBlobContainer(new Uri(containerSas));
 
-            // Upload the file (as a new blob) to the container
-            try
-            {
-                    CloudBlockBlob blob = container.GetBlockBlobReference(blobName);
-                    blob.UploadFromFile(filePath, FileMode.Open);
+        // Upload the file (as a new blob) to the container
+        try
+        {
+                CloudBlockBlob blob = container.GetBlockBlobReference(blobName);
+                blob.UploadFromFile(filePath, FileMode.Open);
 
-                    Console.WriteLine("Write operation succeeded for SAS URL " + containerSas);
-                    Console.WriteLine();
-            }
-            catch (StorageException e)
-            {
+                Console.WriteLine("Write operation succeeded for SAS URL " + containerSas);
+                Console.WriteLine();
+        }
+        catch (StorageException e)
+        {
 
-                    Console.WriteLine("Write operation failed for SAS URL " + containerSas);
-                    Console.WriteLine("Additional error information: " + e.Message);
-                    Console.WriteLine();
+                Console.WriteLine("Write operation failed for SAS URL " + containerSas);
+                Console.WriteLine("Additional error information: " + e.Message);
+                Console.WriteLine();
 
-                    // Indicate that a failure has occurred so that when the Batch service
-                    // sets the CloudTask.ExecutionInformation.ExitCode for the task that
-                    // executed this application, it properly indicates that there was a
-                    // problem with the task.
-                    Environment.ExitCode = -1;
-            }
-    }
+                // Indicate that a failure has occurred so that when the Batch service
+                // sets the CloudTask.ExecutionInformation.ExitCode for the task that
+                // executed this application, it properly indicates that there was a
+                // problem with the task.
+                Environment.ExitCode = -1;
+        }
+}
+```
 
 ## <a name="step-6-monitor-tasks"></a>步骤 6：监视任务
 
@@ -494,92 +516,94 @@ csharp
 
 csharp
 
-    private static async Task<bool> MonitorTasks(
-        BatchClient batchClient,
-        string jobId,
-        TimeSpan timeout)
+```
+private static async Task<bool> MonitorTasks(
+    BatchClient batchClient,
+    string jobId,
+    TimeSpan timeout)
+{
+    bool allTasksSuccessful = true;
+    const string successMessage = "All tasks reached state Completed.";
+    const string failureMessage = "One or more tasks failed to reach the Completed state within the timeout period.";
+
+    // Obtain the collection of tasks currently managed by the job. Note that we use
+    // a detail level to specify that only the "id" property of each task should be
+    // populated. Using a detail level for all list operations helps to lower
+    // response time from the Batch service.
+    ODATADetailLevel detail = new ODATADetailLevel(selectClause: "id");
+    List<CloudTask> tasks =
+        await batchClient.JobOperations.ListTasks(JobId, detail).ToListAsync();
+
+    Console.WriteLine("Awaiting task completion, timeout in {0}...",
+        timeout.ToString());
+
+    // We use a TaskStateMonitor to monitor the state of our tasks. In this case, we
+    // will wait for all tasks to reach the Completed state.
+    TaskStateMonitor taskStateMonitor
+        = batchClient.Utilities.CreateTaskStateMonitor();
+
+    try
     {
-        bool allTasksSuccessful = true;
-        const string successMessage = "All tasks reached state Completed.";
-        const string failureMessage = "One or more tasks failed to reach the Completed state within the timeout period.";
-
-        // Obtain the collection of tasks currently managed by the job. Note that we use
-        // a detail level to specify that only the "id" property of each task should be
-        // populated. Using a detail level for all list operations helps to lower
-        // response time from the Batch service.
-        ODATADetailLevel detail = new ODATADetailLevel(selectClause: "id");
-        List<CloudTask> tasks =
-            await batchClient.JobOperations.ListTasks(JobId, detail).ToListAsync();
-
-        Console.WriteLine("Awaiting task completion, timeout in {0}...",
-            timeout.ToString());
-
-        // We use a TaskStateMonitor to monitor the state of our tasks. In this case, we
-        // will wait for all tasks to reach the Completed state.
-        TaskStateMonitor taskStateMonitor
-            = batchClient.Utilities.CreateTaskStateMonitor();
-
-        try
-        {
-            await taskStateMonitor.WhenAll(tasks, TaskState.Completed, timeout);
-        }
-        catch (TimeoutException)
-        {
-            await batchClient.JobOperations.TerminateJobAsync(jobId, failureMessage);
-            Console.WriteLine(failureMessage);
-            return false;
-        }
-
-        await batchClient.JobOperations.TerminateJobAsync(jobId, successMessage);
-
-        // All tasks have reached the "Completed" state, however, this does not
-        // guarantee all tasks completed successfully. Here we further check each task's
-        // ExecutionInfo property to ensure that it did not encounter a scheduling error
-        // or return a non-zero exit code.
-
-        // Update the detail level to populate only the task id and executionInfo
-        // properties. We refresh the tasks below, and need only this information for
-        // each task.
-        detail.SelectClause = "id, executionInfo";
-
-        foreach (CloudTask task in tasks)
-        {
-            // Populate the task's properties with the latest info from the
-            // Batch service
-            await task.RefreshAsync(detail);
-
-            if (task.ExecutionInformation.SchedulingError != null)
-            {
-                // A scheduling error indicates a problem starting the task on the node.
-                // It is important to note that the task's state can be "Completed," yet
-                // still have encountered a scheduling error.
-
-                allTasksSuccessful = false;
-
-                Console.WriteLine("WARNING: Task [{0}] encountered a scheduling error: {1}",
-                    task.Id,
-                    task.ExecutionInformation.SchedulingError.Message);
-            }
-            else if (task.ExecutionInformation.ExitCode != 0)
-            {
-                // A non-zero exit code may indicate that the application executed by
-                // the task encountered an error during execution. As not every
-                // application returns non-zero on failure by default (e.g. robocopy),
-                // your implementation of error checking may differ from this example.
-
-                allTasksSuccessful = false;
-
-                Console.WriteLine("WARNING: Task [{0}] returned a non-zero exit code - this may indicate task execution or completion failure.", task.Id);
-            }
-        }
-
-        if (allTasksSuccessful)
-        {
-            Console.WriteLine("Success! All tasks completed successfully within the specified timeout period.");
-        }
-
-        return allTasksSuccessful;
+        await taskStateMonitor.WhenAll(tasks, TaskState.Completed, timeout);
     }
+    catch (TimeoutException)
+    {
+        await batchClient.JobOperations.TerminateJobAsync(jobId, failureMessage);
+        Console.WriteLine(failureMessage);
+        return false;
+    }
+
+    await batchClient.JobOperations.TerminateJobAsync(jobId, successMessage);
+
+    // All tasks have reached the "Completed" state, however, this does not
+    // guarantee all tasks completed successfully. Here we further check each task's
+    // ExecutionInfo property to ensure that it did not encounter a scheduling error
+    // or return a non-zero exit code.
+
+    // Update the detail level to populate only the task id and executionInfo
+    // properties. We refresh the tasks below, and need only this information for
+    // each task.
+    detail.SelectClause = "id, executionInfo";
+
+    foreach (CloudTask task in tasks)
+    {
+        // Populate the task's properties with the latest info from the
+        // Batch service
+        await task.RefreshAsync(detail);
+
+        if (task.ExecutionInformation.SchedulingError != null)
+        {
+            // A scheduling error indicates a problem starting the task on the node.
+            // It is important to note that the task's state can be "Completed," yet
+            // still have encountered a scheduling error.
+
+            allTasksSuccessful = false;
+
+            Console.WriteLine("WARNING: Task [{0}] encountered a scheduling error: {1}",
+                task.Id,
+                task.ExecutionInformation.SchedulingError.Message);
+        }
+        else if (task.ExecutionInformation.ExitCode != 0)
+        {
+            // A non-zero exit code may indicate that the application executed by
+            // the task encountered an error during execution. As not every
+            // application returns non-zero on failure by default (e.g. robocopy),
+            // your implementation of error checking may differ from this example.
+
+            allTasksSuccessful = false;
+
+            Console.WriteLine("WARNING: Task [{0}] returned a non-zero exit code - this may indicate task execution or completion failure.", task.Id);
+        }
+    }
+
+    if (allTasksSuccessful)
+    {
+        Console.WriteLine("Success! All tasks completed successfully within the specified timeout period.");
+    }
+
+    return allTasksSuccessful;
+}
+```
 
 ## <a name="step-7-download-task-output"></a>步骤 7：下载任务输出
 
@@ -589,31 +613,33 @@ csharp
 
 csharp
 
-    private static async Task DownloadBlobsFromContainerAsync(
-        CloudBlobClient blobClient,
-        string containerName,
-        string directoryPath)
-    {
-            Console.WriteLine("Downloading all files from container [{0}]...", containerName);
+```
+private static async Task DownloadBlobsFromContainerAsync(
+    CloudBlobClient blobClient,
+    string containerName,
+    string directoryPath)
+{
+        Console.WriteLine("Downloading all files from container [{0}]...", containerName);
 
-            // Retrieve a reference to a previously created container
-            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+        // Retrieve a reference to a previously created container
+        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
 
-            // Get a flat listing of all the block blobs in the specified container
-            foreach (IListBlobItem item in container.ListBlobs(
-                        prefix: null,
-                        useFlatBlobListing: true))
-            {
-                    // Retrieve reference to the current blob
-                    CloudBlob blob = (CloudBlob)item;
+        // Get a flat listing of all the block blobs in the specified container
+        foreach (IListBlobItem item in container.ListBlobs(
+                    prefix: null,
+                    useFlatBlobListing: true))
+        {
+                // Retrieve reference to the current blob
+                CloudBlob blob = (CloudBlob)item;
 
-                    // Save blob contents to a file in the specified folder
-                    string localOutputFile = Path.Combine(directoryPath, blob.Name);
-                    await blob.DownloadToFileAsync(localOutputFile, FileMode.Create);
-            }
+                // Save blob contents to a file in the specified folder
+                string localOutputFile = Path.Combine(directoryPath, blob.Name);
+                await blob.DownloadToFileAsync(localOutputFile, FileMode.Create);
+        }
 
-            Console.WriteLine("All files downloaded to {0}", directoryPath);
-    }
+        Console.WriteLine("All files downloaded to {0}", directoryPath);
+}
+```
 
 > [!NOTE]
 > 对 *DotNetTutorial* 应用程序中 `DownloadBlobsFromContainerAsync` 的调用可以指定应将文件下载到 `%TEMP%` 文件夹。可以随意修改此输出位置。
@@ -623,31 +649,35 @@ csharp
 
 csharp
 
-    // Clean up Storage resources
-    await DeleteContainerAsync(blobClient, appContainerName);
-    await DeleteContainerAsync(blobClient, inputContainerName);
-    await DeleteContainerAsync(blobClient, outputContainerName);
+```
+// Clean up Storage resources
+await DeleteContainerAsync(blobClient, appContainerName);
+await DeleteContainerAsync(blobClient, inputContainerName);
+await DeleteContainerAsync(blobClient, outputContainerName);
+```
 
 该方法本身只获取对容器的引用，然后调用 [CloudBlobContainer.DeleteIfExistsAsync][net_container_delete]：
 
 csharp
 
-    private static async Task DeleteContainerAsync(
-        CloudBlobClient blobClient,
-        string containerName)
-    {
-        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+```
+private static async Task DeleteContainerAsync(
+    CloudBlobClient blobClient,
+    string containerName)
+{
+    CloudBlobContainer container = blobClient.GetContainerReference(containerName);
 
-        if (await container.DeleteIfExistsAsync())
-        {
-            Console.WriteLine("Container [{0}] deleted.", containerName);
-        }
-        else
-        {
-            Console.WriteLine("Container [{0}] does not exist, skipping deletion.",
-                containerName);
-        }
+    if (await container.DeleteIfExistsAsync())
+    {
+        Console.WriteLine("Container [{0}] deleted.", containerName);
     }
+    else
+    {
+        Console.WriteLine("Container [{0}] does not exist, skipping deletion.",
+            containerName);
+    }
+}
+```
 
 ## 步骤 9：删除作业和池
 在最后一个步骤，系统将提示用户删除 DotNetTutorial 应用程序创建的作业和池。虽然作业和任务本身不收费，但计算节点收费。因此，建议你只在需要的时候分配节点。在维护过程中，可能需要删除未使用的池。
@@ -656,21 +686,23 @@ BatchClient 的 [JobOperations][net_joboperations] 和 [PoolOperations][net_pool
 
 csharp
 
-    // Clean up the resources we've created in the Batch account if the user so chooses
-    Console.WriteLine();
-    Console.WriteLine("Delete job? [yes] no");
-    string response = Console.ReadLine().ToLower();
-    if (response != "n" && response != "no")
-    {
-        await batchClient.JobOperations.DeleteJobAsync(JobId);
-    }
+```
+// Clean up the resources we've created in the Batch account if the user so chooses
+Console.WriteLine();
+Console.WriteLine("Delete job? [yes] no");
+string response = Console.ReadLine().ToLower();
+if (response != "n" && response != "no")
+{
+    await batchClient.JobOperations.DeleteJobAsync(JobId);
+}
 
-    Console.WriteLine("Delete pool? [yes] no");
-    response = Console.ReadLine();
-    if (response != "n" && response != "no")
-    {
-        await batchClient.PoolOperations.DeletePoolAsync(PoolId);
-    }
+Console.WriteLine("Delete pool? [yes] no");
+response = Console.ReadLine();
+if (response != "n" && response != "no")
+{
+    await batchClient.PoolOperations.DeletePoolAsync(PoolId);
+}
+```
 
 > [!IMPORTANT]
 > 请记住，你需要支付计算资源的费用，而删除未使用的池可将费用降到最低。另请注意，删除池也会删除该池内的所有计算节点，并且删除池后，将无法恢复节点上的任何数据。
@@ -680,34 +712,36 @@ csharp
 
 以默认配置运行应用程序时，典型的执行时间**大约为 5 分钟**。
 
-    Sample start: 1/8/2016 09:42:58 AM
+```
+Sample start: 1/8/2016 09:42:58 AM
 
-    Container [application] created.
-    Container [input] created.
-    Container [output] created.
-    Uploading file C:\repos\azure-batch-samples\CSharp\ArticleProjects\DotNetTutorial\bin\Debug\TaskApplication.exe to container [application]...
-    Uploading file Microsoft.WindowsAzure.Storage.dll to container [application]...
-    Uploading file ..\..\taskdata1.txt to container [input]...
-    Uploading file ..\..\taskdata2.txt to container [input]...
-    Uploading file ..\..\taskdata3.txt to container [input]...
-    Creating pool [DotNetTutorialPool]...
-    Creating job [DotNetTutorialJob]...
-    Adding 3 tasks to job [DotNetTutorialJob]...
-    Awaiting task completion, timeout in 00:30:00...
-    Success! All tasks completed successfully within the specified timeout period.
-    Downloading all files from container [output]...
-    All files downloaded to C:\Users\USERNAME\AppData\Local\Temp
-    Container [application] deleted.
-    Container [input] deleted.
-    Container [output] deleted.
+Container [application] created.
+Container [input] created.
+Container [output] created.
+Uploading file C:\repos\azure-batch-samples\CSharp\ArticleProjects\DotNetTutorial\bin\Debug\TaskApplication.exe to container [application]...
+Uploading file Microsoft.WindowsAzure.Storage.dll to container [application]...
+Uploading file ..\..\taskdata1.txt to container [input]...
+Uploading file ..\..\taskdata2.txt to container [input]...
+Uploading file ..\..\taskdata3.txt to container [input]...
+Creating pool [DotNetTutorialPool]...
+Creating job [DotNetTutorialJob]...
+Adding 3 tasks to job [DotNetTutorialJob]...
+Awaiting task completion, timeout in 00:30:00...
+Success! All tasks completed successfully within the specified timeout period.
+Downloading all files from container [output]...
+All files downloaded to C:\Users\USERNAME\AppData\Local\Temp
+Container [application] deleted.
+Container [input] deleted.
+Container [output] deleted.
 
-    Sample end: 1/8/2016 09:47:47 AM
-    Elapsed time: 00:04:48.5358142
+Sample end: 1/8/2016 09:47:47 AM
+Elapsed time: 00:04:48.5358142
 
-    Delete job? [yes] no: yes
-    Delete pool? [yes] no: yes
+Delete job? [yes] no: yes
+Delete pool? [yes] no: yes
 
-    Sample complete, hit ENTER to exit...
+Sample complete, hit ENTER to exit...
+```
 
 ## 后续步骤
 你可以随意更改 *DotNetTutorial* 和 *TaskApplication*，以体验不同的计算方案。例如，尝试通过某个方法（例如使用 [Thread.Sleep][net_thread_sleep]）将执行延迟添加到 *TaskApplication*，以模拟长时间运行的任务并在门户中监视这些任务。尝试添加更多任务，或调整计算节点的数目。添加逻辑来检查并允许使用现有的池加速执行时间（*提示*：请查看 [azure-batch-samples][github_samples] 中 [Microsoft.Azure.Batch.Samples.Common][github_samples_common] 项目的 `ArticleHelpers.cs`）。

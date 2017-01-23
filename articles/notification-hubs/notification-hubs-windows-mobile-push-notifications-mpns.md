@@ -81,29 +81,33 @@ wacn.date: 11/22/2016
 
 4. 打开文件 App.xaml.cs 并添加以下 `using` 语句：
 
-        using Microsoft.Phone.Notification;
-        using Microsoft.WindowsAzure.Messaging;
+    ```
+    using Microsoft.Phone.Notification;
+    using Microsoft.WindowsAzure.Messaging;
+    ```
 
 5. 在 App.xaml.cs 中 **Application\_Launching** 方法的顶部添加以下代码：
 
-        var channel = HttpNotificationChannel.Find("MyPushChannel");
-        if (channel == null)
-        {
-            channel = new HttpNotificationChannel("MyPushChannel");
-            channel.Open();
-            channel.BindToShellToast();
-        }
+    ```
+    var channel = HttpNotificationChannel.Find("MyPushChannel");
+    if (channel == null)
+    {
+        channel = new HttpNotificationChannel("MyPushChannel");
+        channel.Open();
+        channel.BindToShellToast();
+    }
 
-        channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
-        {
-            var hub = new NotificationHub("<hub name>", "<connection string>");
-            var result = await hub.RegisterNativeAsync(args.ChannelUri.ToString());
+    channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
+    {
+        var hub = new NotificationHub("<hub name>", "<connection string>");
+        var result = await hub.RegisterNativeAsync(args.ChannelUri.ToString());
 
-            System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                MessageBox.Show("Registration :" + result.RegistrationId, "Registered", MessageBoxButton.OK);
-            });
+        System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+        {
+            MessageBox.Show("Registration :" + result.RegistrationId, "Registered", MessageBoxButton.OK);
         });
+    });
+    ```
 
     >[!NOTE]
     > 值 **MyPushChannel** 是用于查找 [HttpNotificationChannel](https://msdn.microsoft.com/zh-cn/library/windows/apps/microsoft.phone.notification.httpnotificationchannel.aspx) 集合中现有通道的索引。如果不存在，则使用该名称创建新条目。
@@ -126,8 +130,8 @@ wacn.date: 11/22/2016
 
 8. 关闭应用。
 
-    >[!NOTE]
-    > 若要接收 toast 推送通知，则应用程序不得在前台运行。
+   >[!NOTE]
+   > 若要接收 toast 推送通知，则应用程序不得在前台运行。
 
 ##从后端发送推送通知
 
@@ -149,28 +153,34 @@ wacn.date: 11/22/2016
 
 5.  在“包管理器控制台”窗口中，将“默认项目”设置为新的控制台应用程序项目，然后在控制台窗口中执行以下命令：
 
-        Install-Package Microsoft.Azure.NotificationHubs
+    ```
+    Install-Package Microsoft.Azure.NotificationHubs
+    ```
 
     这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 程序包</a>添加对 Azure 通知中心 SDK 的引用。
 
 6. 打开 `Program.cs` 文件并添加以下 `using` 语句：
 
-        using Microsoft.Azure.NotificationHubs;
+    ```
+    using Microsoft.Azure.NotificationHubs;
+    ```
 
 6. 在 `Program` 类中，添加以下方法：
 
-        private static async void SendNotificationAsync()
-        {
-            NotificationHubClient hub = NotificationHubClient
-                .CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
-            string toast = "<?xml version="1.0" encoding="utf-8"?>" +
-                "<wp:Notification xmlns:wp="WPNotification">" +
-                   "<wp:Toast>" +
-                        "<wp:Text1>Hello from a .NET App!</wp:Text1>" +
-                   "</wp:Toast> " +
-                "</wp:Notification>";
-            await hub.SendMpnsNativeNotificationAsync(toast);
-        }
+    ```
+    private static async void SendNotificationAsync()
+    {
+        NotificationHubClient hub = NotificationHubClient
+            .CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
+        string toast = "<?xml version="1.0" encoding="utf-8"?>" +
+            "<wp:Notification xmlns:wp="WPNotification">" +
+               "<wp:Toast>" +
+                    "<wp:Text1>Hello from a .NET App!</wp:Text1>" +
+               "</wp:Toast> " +
+            "</wp:Notification>";
+        await hub.SendMpnsNativeNotificationAsync(toast);
+    }
+    ```
 
     确保将 `<hub name>` 占位符替换为出现在门户中的通知中心名称。此外，使用你在“配置通知中心”部分中获取的名称为 **DefaultFullSharedAccessSignature** 的连接字符串替换连接字符串占位符。
 
@@ -179,8 +189,10 @@ wacn.date: 11/22/2016
 
 4. 在 `Main` 方法中添加以下行：
 
-         SendNotificationAsync();
-         Console.ReadLine();
+    ```
+     SendNotificationAsync();
+     Console.ReadLine();
+    ```
 
 5. 在 Windows Phone 模拟器正在运行且应用已关闭的情况下，将控制台应用程序项目设置为默认启动项目，然后按 `F5` 键运行应用。
 

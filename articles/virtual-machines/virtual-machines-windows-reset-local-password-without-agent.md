@@ -75,10 +75,12 @@ ms.author: iainfou
 
     - 将以下代码行添加到创建的 `gpt.ini` 文件中：
 
-            [General]
-            gPCFunctionalityVersion=2
-            gPCMachineExtensionNames=[{42B5FAAE-6536-11D2-AE5A-0000F87571E3}{40B6664F-4972-11D1-A7CA-0000F87571E3}]
-            Version=1
+        ```
+        [General]
+        gPCFunctionalityVersion=2
+        gPCMachineExtensionNames=[{42B5FAAE-6536-11D2-AE5A-0000F87571E3}{40B6664F-4972-11D1-A7CA-0000F87571E3}]
+        Version=1
+        ```
 
     ![创建 gpt.ini](./media/virtual-machines-windows-reset-local-password-without-guest-agent/create_gpt_ini.png)  
 
@@ -86,15 +88,19 @@ ms.author: iainfou
 
     - 将以下代码行添加到创建的 `scripts.ini` 文件：
 
-            [Startup]
-            0CmdLine=C:\Windows\System32\FixAzureVM.cmd
-            0Parameters=
+        ```
+        [Startup]
+        0CmdLine=C:\Windows\System32\FixAzureVM.cmd
+        0Parameters=
+        ```
 
     ![创建 scripts.ini](./media/virtual-machines-windows-reset-local-password-without-guest-agent/create_scripts_ini.png)  
 
 6. 在 `\Windows\System32` 中创建包含以下内容的 `FixAzureVM.cmd`，将 `<username>` 和 `<newpassword>` 替换为自己的值：
 
-        NET USER <username> <newpassword>
+    ```
+    NET USER <username> <newpassword>
+    ```
 
     ![创建 FixAzureVM.cmd](./media/virtual-machines-windows-reset-local-password-without-guest-agent/create_fixazure_cmd.png)  
 

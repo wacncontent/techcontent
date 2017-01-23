@@ -34,17 +34,23 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
 对于 Ubuntu，只需键入：
 
-    #sudo apt-get install walinuxagent
+```
+#sudo apt-get install walinuxagent
+```
 
 在 CentOS 中，请键入：
 
-    #sudo yum install waagent
+```
+#sudo yum install waagent
+```
 
 对于 Oracle Linux，请确保已启用 `Addons` 存储库。选择编辑文件 `/etc/yum.repo.d/public-yum-ol6.repo`(Oracle Linux 6) 或 `/etc/yum.repo.d/public-yum-ol7.repo`(Oracle Linux)，并在此文件中的 **[ol6\_addons]** 或 **[ol7\_addons]** 下将行 `enabled=0` 更改为 `enabled=1`。
 
 然后，要安装最新版本的 Azure Linux 代理，请键入：
 
-    #sudo yum install WALinuxAgent
+```
+#sudo yum install WALinuxAgent
+```
 
 如果找不到外接程序存储库，只需根据 Oracle Linux 的版本，将这些行添加到 .repo 文件末尾处：
 
@@ -58,7 +64,9 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
 然后键入：
 
-    #sudo yum update WALinuxAgent
+```
+#sudo yum update WALinuxAgent
+```
 
 通常完成上述这些步骤就行了，但如果因某种原因，你需要直接从 https://github.com 安装它，请使用以下步骤。
 
@@ -74,7 +82,9 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
 ### 对于版本 2.0.x，请键入：
 
-    #wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-[version]/waagent  
+```
+#wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-[version]/waagent  
+```
 
     以下行使用版本 2.0.14 作为示例：
 
@@ -82,9 +92,11 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
 ### 对于 2.1.x 或更高版本，请键入：
 
-    #wget https://github.com/Azure/WALinuxAgent/archive/WALinuxAgent-[version].zip
-    #unzip WALinuxAgent-[version].zip
-    #cd WALinuxAgent-[version]
+```
+#wget https://github.com/Azure/WALinuxAgent/archive/WALinuxAgent-[version].zip
+#unzip WALinuxAgent-[version].zip
+#cd WALinuxAgent-[version]
+```
 
     以下行使用版本 2.1.0 作为示例：
 
@@ -118,25 +130,35 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
 你可能需要先安装程序包 `setuptools`-- 详情请参阅[此处](https://pypi.python.org/pypi/setuptools)。然后运行：
 
-    #sudo python setup.py install
+```
+#sudo python setup.py install
+```
 
 ## 重新启动 waagent 服务
 
 对于大多数 Linux 发行版：
 
-    #sudo service waagent restart
+```
+#sudo service waagent restart
+```
 
 对于 Ubuntu，请使用：
 
-    #sudo service walinuxagent restart
+```
+#sudo service walinuxagent restart
+```
 
 对于 CoreOS，请使用：
 
-    #sudo systemctl restart waagent
+```
+#sudo systemctl restart waagent
+```
 
 ## 确认 Azure Linux 代理版本
 
-    #waagent -version
+```
+#waagent -version
+```
 
 对于 CoreOS，上面的命令可能无效。
 

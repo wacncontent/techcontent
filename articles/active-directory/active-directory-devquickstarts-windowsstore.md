@@ -79,35 +79,39 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
 C#
 
-    public MainPage()
-    {
-        ...
+```
+public MainPage()
+{
+    ...
 
-        authContext = new AuthenticationContext(authority);
-    }
+    authContext = new AuthenticationContext(authority);
+}
+```
 
 - 现在查找 `Search(...)` 方法，当用户在应用的 UI 中单击“搜索”按钮时，将调用该方法。此方法将向 Azure AD Graph API 发出 GET 请求，以查询其 UPN 以给定搜索词开头的用户。但是，若要查询 Graph API，你需要在请求的 `Authorization` 标头中包含 access\_token - 这是 ADAL 传入的位置。
 
 C#
 
-    private async void Search(object sender, RoutedEventArgs e)
+```
+private async void Search(object sender, RoutedEventArgs e)
+{
+    ...
+    AuthenticationResult result = null;
+    try
     {
-        ...
-        AuthenticationResult result = null;
-        try
-        {
-            result = await authContext.AcquireTokenAsync(graphResourceId, clientId, redirectURI, new PlatformParameters(PromptBehavior.Auto, false));
-        }
-        catch (AdalException ex)
-        {
-            if (ex.ErrorCode != "authentication_canceled")
-            {
-                ShowAuthError(string.Format("If the error continues, please contact your administrator.\n\nError: {0}\n\nError Description:\n\n{1}", ex.ErrorCode, ex.Message));
-            }
-            return;
-        }
-        ...
+        result = await authContext.AcquireTokenAsync(graphResourceId, clientId, redirectURI, new PlatformParameters(PromptBehavior.Auto, false));
     }
+    catch (AdalException ex)
+    {
+        if (ex.ErrorCode != "authentication_canceled")
+        {
+            ShowAuthError(string.Format("If the error continues, please contact your administrator.\n\nError: {0}\n\nError Description:\n\n{1}", ex.ErrorCode, ex.Message));
+        }
+        return;
+    }
+    ...
+}
+```
 
 - 当应用程序通过调用 `AcquireTokenAsync(...)` 请求令牌时，ADAL 将尝试返回一个令牌，而不要求用户输入凭据。如果 ADAL 确定用户需要登录以获取令牌，将显示登录对话框，收集用户的凭据，并在身份验证成功后返回令牌。如果 ADAL 出于任何原因无法返回令牌，`AuthenticationResult` 将处于错误状态。
 
@@ -115,27 +119,33 @@ C#
 
 C#
 
-    // Add the access token to the Authorization Header of the call to the Graph API, and call the Graph API.
-    httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", result.AccessToken);
+```
+// Add the access token to the Authorization Header of the call to the Graph API, and call the Graph API.
+httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", result.AccessToken);
+```
 
 - 你还可以使用 `AuthenticationResult` 对象在应用程序中显示有关用户的信息，例如，用户的 ID：
 
 C#
 
-    // Update the Page UI to represent the signed in user
-    ActiveUser.Text = result.UserInfo.DisplayableId;
+```
+// Update the Page UI to represent the signed in user
+ActiveUser.Text = result.UserInfo.DisplayableId;
+```
 
 - 最后，还可以使用 ADAL 将用户从应用程序中注销。当用户单击“注销”按钮时，我们希望确保 `AcquireTokenAsync(...)` 的后续调用会显示登录视图。使用 ADAL 时，只需清除令牌缓存即可：
 
 C#
 
-    private void SignOut()
-    {
-        // Clear session state from the token cache.
-        authContext.TokenCache.Clear();
+```
+private void SignOut()
+{
+    // Clear session state from the token cache.
+    authContext.TokenCache.Clear();
 
-        ...
-    }
+    ...
+}
+```
 
 祝贺你！ 现在，你已创建一个有效的 Windows 应用商店应用程序，它可以对用户进行身份验证，使用 OAuth 2.0 安全调用 Web API，并获取有关用户的基本信息。如果你尚未这样做，可以在租户中填充一些用户。运行你的 DirectorySearcher 应用程序，并使用这些用户之一进行登录。根据用户的 UPN 搜索其他用户。关闭应用程序，然后重新运行它。请注意，用户的会话将保持不变。注销（右键单击以显示底部栏），然后以另一用户的身份重新登录。
 

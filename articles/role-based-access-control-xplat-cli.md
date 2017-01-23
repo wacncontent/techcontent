@@ -42,20 +42,26 @@ wacn.date: 12/15/2015
 
 由于 RBAC 仅适用于 Azure 资源管理器，因此首先要做的是切换到 Azure 资源管理器模式。键入：
 
-    azure config mode arm
+```
+azure config mode arm
+```
 
 若要连接到 Azure 订阅，请键入：
 
-    azure login -e AzureChinaCloud -u <username> 
+```
+azure login -e AzureChinaCloud -u <username> 
+```
 
 在命令行提示符下，输入 Azure 帐户密码（仅使用组织帐户）。Azure CLI 将使用此帐户获取你拥有的所有订阅并将自己配置为使用第一个订阅作为默认订阅。请注意，使用基于角色的访问控制，你只有通过成为共同管理员或具有某种角色分配才能获取你有某些权限的订阅。
 
 如果你有多个订阅并且想要切换到另一个订阅，请键入：
 
-    # This will show you the subscriptions under the account.
-    azure account list
-    # Use the subscription name to select the one you want to work on.
-    azure account set <subscription name>
+```
+# This will show you the subscriptions under the account.
+azure account list
+# Use the subscription name to select the one you want to work on.
+azure account set <subscription name>
+```
 
 有关详细信息，请参阅[安装和配置 Azure CLI](./xplat-cli-install.md)。
 
@@ -63,7 +69,9 @@ wacn.date: 12/15/2015
 
 现在让我们来看一下订阅中已存在哪些角色分配。键入：
 
-    azure role assignment list
+```
+azure role assignment list
+```
 
 这将返回订阅中的所有角色分配。有两点需要注意：
 
@@ -72,7 +80,9 @@ wacn.date: 12/15/2015
 
 你还可以在特定范围内针对特定角色定义检查特定用户的现有角色分配。键入：
 
-    azure role assignment list -g group1 --upn <user email> -o Owner
+```
+azure role assignment list -g group1 --upn <user email> -o Owner
+```
 
 这将返回你的 Azure AD 目录中对资源组“group1”具有“所有者”角色分配的特定用户的所有角色分配。角色分配可以来自两个位置：
 
@@ -87,13 +97,15 @@ wacn.date: 12/15/2015
 
 - 要将角色分配给谁：可以使用以下 Azure Active Directory cmdlet 查看你在目录中拥有哪些用户、组和服务主体。
 
-        azure ad user list  
-        azure ad user show  
-        azure ad group list  
-        azure ad group show  
-        azure ad group member list  
-        azure ad sp list  
-        azure ad sp show  
+    ```
+    azure ad user list  
+    azure ad user show  
+    azure ad group list  
+    azure ad group show  
+    azure ad group member list  
+    azure ad sp list  
+    azure ad sp show  
+    ```
 
 - 你要分配哪些角色：可以使用以下 cmdlet 查看支持的角色定义。
 
@@ -123,8 +135,10 @@ wacn.date: 12/15/2015
 
 检查你的帐户具有一些角色分配后，你可以通过运行以下命令实际查看这些角色分配授予你的权限：
 
-        PS C:\> azure group list
-        PS C:\> azure resource list
+```
+    PS C:\> azure group list
+    PS C:\> azure resource list
+```
 
 这两个 cmdlet 将仅返回你具有读取权限的资源组或资源。并且它还会显示你具有的权限。
 

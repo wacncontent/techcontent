@@ -9,38 +9,42 @@
 
 2. 打开 push.register.cs 项目文件，并将 **UploadChannel** 方法替换为以下代码：
 
-        public async static void UploadChannel()
+    ```
+    public async static void UploadChannel()
+    {
+        var channel = 
+            await Windows.Networking.PushNotifications.PushNotificationChannelManager
+            .CreatePushNotificationChannelForApplicationAsync();
+
+        try
         {
-            var channel = 
-                await Windows.Networking.PushNotifications.PushNotificationChannelManager
-                .CreatePushNotificationChannelForApplicationAsync();
+            // Create a native push notification registration.
+            await App.MobileService.GetPush().RegisterNativeAsync(channel.Uri);		        
 
-            try
-            {
-                // Create a native push notification registration.
-                await App.MobileService.GetPush().RegisterNativeAsync(channel.Uri);		        
-
-            }
-            catch (Exception exception)
-            {
-                HandleRegisterException(exception);
-            }
         }
+        catch (Exception exception)
+        {
+            HandleRegisterException(exception);
+        }
+    }
+    ```
 
     这可以确保使用包含已验证用户凭据的同一客户端实例完成注册。否则，注册将会失败并返回“未授权(401)”错误。
 
 3. 打开共享的 MainPage.cs 项目文件中，并将 **ButtonLogin\_Click** 处理程序替换为以下内容：
 
-        private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
-        {
-            // Login the user and then load data from the mobile service.
-            await AuthenticateAsync();
-            todolistPush.UploadChannel();
+    ```
+    private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
+    {
+        // Login the user and then load data from the mobile service.
+        await AuthenticateAsync();
+        todolistPush.UploadChannel();
 
-            // Hide the login button and load items from the mobile service.
-            this.ButtonLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            await RefreshTodoItems();
-        }
+        // Hide the login button and load items from the mobile service.
+        this.ButtonLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+        await RefreshTodoItems();
+    }
+    ```
 
     这将确保在尝试注册推送之前进行身份验证。
 
@@ -56,16 +60,18 @@
 
 3. 打开共享的 MainPage.cs 项目文件中，并将 **ButtonLogin\_Click** 处理程序替换为以下内容：
 
-        private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
-        {
-            // Login the user and then load data from the mobile service.
-            await AuthenticateAsync();
-            App.InitNotificationsAsync();
+    ```
+    private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
+    {
+        // Login the user and then load data from the mobile service.
+        await AuthenticateAsync();
+        App.InitNotificationsAsync();
 
-            // Hide the login button and load items from the mobile service.
-            this.ButtonLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            await RefreshTodoItems();
-        }
+        // Hide the login button and load items from the mobile service.
+        this.ButtonLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+        await RefreshTodoItems();
+    }
+    ```
 
     这将确保在尝试注册推送之前进行身份验证。
 

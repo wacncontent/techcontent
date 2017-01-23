@@ -96,26 +96,30 @@ PM> Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -ProjectName
 
     C#
 
-        public static async Task<List<User>> SearchByAlias(string alias, IPlatformParameters parent)
-        {
+    ```
+    public static async Task<List<User>> SearchByAlias(string alias, IPlatformParameters parent)
+    {
+    ```
 
 - 接下来，初始化 `AuthenticationContext`（ADAL 的主类）。你将在此处传递 ADAL 与 Azure AD 通信时所需的坐标。然后调用 `AcquireTokenAsync(...)`，该类将会接受 `IPlatformParameters` 对象，并调用所需的身份验证流来向应用程序返回令牌。
 
     C#
 
-        ...
-        AuthenticationResult authResult = null;
-        try
-        {
-            AuthenticationContext authContext = new AuthenticationContext(authority);
-            authResult = await authContext.AcquireTokenAsync(graphResourceUri, clientId, returnUri, parent);
-        }
-        catch (Exception ee)
-        {
-            results.Add(new User { error = ee.Message });
-            return results;
-        }
-        ...
+    ```
+    ...
+    AuthenticationResult authResult = null;
+    try
+    {
+        AuthenticationContext authContext = new AuthenticationContext(authority);
+        authResult = await authContext.AcquireTokenAsync(graphResourceUri, clientId, returnUri, parent);
+    }
+    catch (Exception ee)
+    {
+        results.Add(new User { error = ee.Message });
+        return results;
+    }
+    ...
+    ```
 
 - `AcquireTokenAsync(...)` 首先会尝试返回请求资源（在本例中为 Graph API）的令牌，而不提示用户输入其凭据（通过缓存或刷新旧令牌）。仅在必要时，它才会在获取请求的令牌之前，向用户显示 Azure AD 登录页。
 
@@ -123,9 +127,11 @@ PM> Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -ProjectName
 
     C#
 
-        ...
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
-        ...
+    ```
+    ...
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
+    ...
+    ```
 
 这就是需要针对 `DirectorySearcher` PCL 和应用程序标识相关代码执行的所有操作。余下的操作是在每个平台的视图中调用 `SearchByAlias(...)` 方法，并根据需要添加代码来正确处理 UI 生命周期。
 
@@ -134,46 +140,56 @@ PM> Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -ProjectName
 
     C#
 
-        List<User> results = await DirectorySearcher.SearchByAlias(searchTermText.Text, new PlatformParameters(this));
+    ```
+    List<User> results = await DirectorySearcher.SearchByAlias(searchTermText.Text, new PlatformParameters(this));
+    ```
 
 - 还需要重写 `OnActivityResult` 生命周期方法，以将任何身份验证重定向转发回到相应的方法。ADAL 在 Android 中为此提供了帮助器方法：
 
     C#
 
-        ...
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-            AuthenticationAgentContinuationHelper.SetAuthenticationAgentContinuationEventArgs(requestCode, resultCode, data);
-        }
-        ...
+    ```
+    ...
+    protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+    {
+        base.OnActivityResult(requestCode, resultCode, data);
+        AuthenticationAgentContinuationHelper.SetAuthenticationAgentContinuationEventArgs(requestCode, resultCode, data);
+    }
+    ...
+    ```
 
 ####Windows 桌面：
 - 在 `MainWindow.xaml.cs` 中，只需调用 `SearchByAlias(...)`，并在桌面的 `PlatformParameters` 对象中传递 `WindowInteropHelper`：
 
     C#
 
-        List<User> results = await DirectorySearcher.SearchByAlias(
-          SearchTermText.Text,
-          new PlatformParameters(PromptBehavior.Auto, this.Handle));
+    ```
+    List<User> results = await DirectorySearcher.SearchByAlias(
+      SearchTermText.Text,
+      new PlatformParameters(PromptBehavior.Auto, this.Handle));
+    ```
 
 ####iOS：
 - 在 `DirSearchClient_iOSViewController.cs` 中，iOS `PlatformParameters` 对象只会引用视图控制器：
 
     C#
 
-        List<User> results = await DirectorySearcher.SearchByAlias(
-          SearchTermText.Text,
-          new PlatformParameters(PromptBehavior.Auto, this.Handle));
+    ```
+    List<User> results = await DirectorySearcher.SearchByAlias(
+      SearchTermText.Text,
+      new PlatformParameters(PromptBehavior.Auto, this.Handle));
+    ```
 
 ####Windows 通用：
 - 在 Windows 通用中，打开 `MainPage.xaml.cs` 并实现 `Search` 方法，该方法会根据需要，使用共享项目中的帮助器方法来更新 UI。
 
     C#
 
-        ...
-            List<User> results = await DirectorySearcherLib.DirectorySearcher.SearchByAlias(SearchTermText.Text, new PlatformParameters(PromptBehavior.Auto, false));
-        ...
+    ```
+    ...
+        List<User> results = await DirectorySearcherLib.DirectorySearcher.SearchByAlias(SearchTermText.Text, new PlatformParameters(PromptBehavior.Auto, false));
+    ...
+    ```
 
 祝贺你！ 现在，你已创建一个有效的 Xamarin 应用程序，它可以对用户进行身份验证，并使用 OAuth 2.0 在五个不同的平台上安全调用 Web API。如果你尚未这样做，可以在租户中填充一些用户。运行你的 DirectorySearcher 应用程序，并使用这些用户之一进行登录。根据用户的 UPN 搜索其他用户。
 

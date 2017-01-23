@@ -29,11 +29,15 @@ Azure Active Directory 的 v2.0 终结点可让你使用 [OAuth 2.0](./active-di
 ## 下载
 本教程的代码[在 GitHub 上](https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet/archive/skeleton.zip)，或克隆该骨架：
 
-    git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet.git
+```
+git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet.git
+```
 
 该骨架应用包含简单 API 应用的重复使用代码，但是缺少与标识相关的所有部分。如果你不想要延用该应用，可以克隆或[下载完整的示例](https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet/archive/skeleton.zip)。
 
-    git clone https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet.git
+```
+git clone https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet.git
+```
 
 ## 注册应用程序
 在 [apps.dev.microsoft.com](https://apps.dev.microsoft.com/?referrer=/documentation/articles&deeplink=/appList) 中创建新的应用程序，或遵循以下[详细步骤](./active-directory-v2-app-registration.md)。请确保：
@@ -61,75 +65,83 @@ Azure Active Directory 的 v2.0 终结点可让你使用 [OAuth 2.0](./active-di
 
 C#
 
-    public partial class Startup
+```
+public partial class Startup
+{
+    public void Configuration(IAppBuilder app)
     {
-        public void Configuration(IAppBuilder app)
-        {
-            ConfigureAuth(app);
-        }
+        ConfigureAuth(app);
     }
+}
+```
 
 - 打开文件 `App_Start\Startup.Auth.cs` 并实现 `ConfigureAuth(…)` 方法，以便将 Web API 设置为接受来自 v2.0 终结点的令牌。
 
 C#
 
-    public void ConfigureAuth(IAppBuilder app)
-    {
-            var tvps = new TokenValidationParameters
-            {
-                    // In this app, the TodoListClient and TodoListService
-                    // are represented using the same Application Id - we use
-                    // the Application Id to represent the audience, or the
-                    // intended recipient of tokens.
+```
+public void ConfigureAuth(IAppBuilder app)
+{
+        var tvps = new TokenValidationParameters
+        {
+                // In this app, the TodoListClient and TodoListService
+                // are represented using the same Application Id - we use
+                // the Application Id to represent the audience, or the
+                // intended recipient of tokens.
 
-                    ValidAudience = clientId,
+                ValidAudience = clientId,
 
-                    // In a real applicaiton, you might use issuer validation to
-                    // verify that the user's organization (if applicable) has
-                    // signed up for the app.  Here, we'll just turn it off.
+                // In a real applicaiton, you might use issuer validation to
+                // verify that the user's organization (if applicable) has
+                // signed up for the app.  Here, we'll just turn it off.
 
-                    ValidateIssuer = false,
-            };
+                ValidateIssuer = false,
+        };
 
-            // Set up the OWIN pipeline to use OAuth 2.0 Bearer authentication.
-            // The options provided here tell the middleware about the type of tokens
-            // that will be recieved, which are JWTs for the v2.0 endpoint.
+        // Set up the OWIN pipeline to use OAuth 2.0 Bearer authentication.
+        // The options provided here tell the middleware about the type of tokens
+        // that will be recieved, which are JWTs for the v2.0 endpoint.
 
-            // NOTE: The usual WindowsAzureActiveDirectoryBearerAuthenticaitonMiddleware uses a
-            // metadata endpoint which is not supported by the v2.0 endpoint.  Instead, this
-            // OpenIdConenctCachingSecurityTokenProvider can be used to fetch & use the OpenIdConnect
-            // metadata document.
+        // NOTE: The usual WindowsAzureActiveDirectoryBearerAuthenticaitonMiddleware uses a
+        // metadata endpoint which is not supported by the v2.0 endpoint.  Instead, this
+        // OpenIdConenctCachingSecurityTokenProvider can be used to fetch & use the OpenIdConnect
+        // metadata document.
 
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions
-            {
-                    AccessTokenFormat = new Microsoft.Owin.Security.Jwt.JwtFormat(tvps, new OpenIdConnectCachingSecurityTokenProvider("https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration")),
-            });
-    }
+        app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions
+        {
+                AccessTokenFormat = new Microsoft.Owin.Security.Jwt.JwtFormat(tvps, new OpenIdConnectCachingSecurityTokenProvider("https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration")),
+        });
+}
+```
 
 - 现在，你可以使用 `[Authorize]` 属性并结合 OAuth 2.0 持有者身份验证来保护控制器和操作。使用 authorize 标记修饰 `Controllers\TodoListController.cs` 类。这会强制用户在访问该页面之前登录。
 
 C#
 
-    [Authorize]
-    public class TodoListController : ApiController
-    {
+```
+[Authorize]
+public class TodoListController : ApiController
+{
+```
 
 - 如果已授权的调用方成功调用了某个 `TodoListController` API，该操作可能需要访问有关调用方的信息。OWIN 通过 `ClaimsPrincpal` 对象提供对持有者令牌中的声明的访问。
 
 C#
 
-    public IEnumerable<TodoItem> Get()
-    {
-        // You can use the ClaimsPrincipal to access information about the
-        // user making the call.  In this case, we use the 'sub' or
-        // NameIdentifier claim to serve as a key for the tasks in the data store.
+```
+public IEnumerable<TodoItem> Get()
+{
+    // You can use the ClaimsPrincipal to access information about the
+    // user making the call.  In this case, we use the 'sub' or
+    // NameIdentifier claim to serve as a key for the tasks in the data store.
 
-        Claim subject = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
+    Claim subject = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
 
-        return from todo in todoBag
-               where todo.Owner == subject.Value
-               select todo;
-    }
+    return from todo in todoBag
+           where todo.Owner == subject.Value
+           select todo;
+}
+```
 
 - 最后，打开位于 TodoListService 项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入你的配置值。
   - `ida:Audience` 是你在门户中为应用输入的**应用程序 ID**。
@@ -144,7 +156,9 @@ C#
 
 [此处以 .zip 格式提供了](https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet/archive/complete.zip)完整示例（不包括配置值），你也可以从 GitHub 克隆该示例：
 
-    git clone --branch complete https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet.git
+```
+git clone --branch complete https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet.git
+```
 
 ## 后续步骤
 现在，你可以转到其他主题。你可能想要尝试：

@@ -57,11 +57,15 @@ ms.author: danlep
 
 2. 若要将目录切换到配置脚本所在的位置，请键入以下命令：
 
-        cd $env:CCP_HOME\bin
+    ```
+    cd $env:CCP_HOME\bin
+    ```
 
 3. 若要配置 REST 接口并启动 HPC Web 服务，请键入以下命令：
 
-        .\Set-HPCWebComponents.ps1 -Service REST -enable 
+    ```
+    .\Set-HPCWebComponents.ps1 -Service REST -enable 
+    ```
 
 4. 在系统提示选择证书时，请选择与头节点的公共 DNS 名称对应的证书。例如，若使用经典部署模型部署头节点 VM，则证书名称将类似于：CN=&lt;HeadNodeDnsName&gt;.chinacloudapp.cn。若使用 Resource Manager 部署模型，则证书名称将类似于：CN=&lt;HeadNodeDnsName&gt;.&lt;region&gt;.chinacloudapp.cn。
 
@@ -70,12 +74,16 @@ ms.author: danlep
 
 5. 若要配置用于作业提交的 Web 门户，请键入以下命令：
 
-        .\Set-HPCWebComponents.ps1 -Service Portal -enable
+    ```
+    .\Set-HPCWebComponents.ps1 -Service Portal -enable
+    ```
 
 6. 脚本完成后，请键入以下命令停止并重启 HPC 作业计划程序服务：
 
-        net stop hpcscheduler
-        net start hpcscheduler
+    ```
+    net stop hpcscheduler
+    net start hpcscheduler
+    ```
 
 ## 步骤 2：在本地计算机上安装 HPC Pack 客户端实用工具
 
@@ -120,11 +128,15 @@ ms.author: danlep
 
 2. 键入示例命令。例如，若要列出群集中的所有作业，可键入如下所示的某个命令，具体取决于头节点的完整 DNS 名称：
 
-        job list /scheduler:https://<HeadNodeDnsName>.chinacloudapp.cn /all
+    ```
+    job list /scheduler:https://<HeadNodeDnsName>.chinacloudapp.cn /all
+    ```
 
     或
 
-        job list /scheduler:https://<HeadNodeDnsName>.<region>.chinacloudapp.cn /all
+    ```
+    job list /scheduler:https://<HeadNodeDnsName>.<region>.chinacloudapp.cn /all
+    ```
 
     >[!TIP]
     > 在计划程序 URL 中使用头节点的完整 DNS 名称，而不是 IP 地址。如果指定 IP 地址，将会出现类似于下面的错误：“服务器证书必须具有有效的信任链，或放置在受信任的根存储区中。”
@@ -153,11 +165,15 @@ ms.author: danlep
 
 1. 在客户端计算机上启动 Web 浏览器，输入以下任一地址，具体取决于头节点的完整 DNS 名称：
 
-        https://<HeadNodeDnsName>.chinacloudapp.cn/HpcPortal
+    ```
+    https://<HeadNodeDnsName>.chinacloudapp.cn/HpcPortal
+    ```
 
     或
 
-        https://<HeadNodeDnsName>.<region>.chinacloudapp.cn/HpcPortal
+    ```
+    https://<HeadNodeDnsName>.<region>.chinacloudapp.cn/HpcPortal
+    ```
 
 2. 在出现的安全性对话框中，键入 HPC 群集管理员的域凭据。（你还可以添加具有不同角色的其他群集用户。请参阅[管理群集用户](https://technet.microsoft.com/zh-cn/library/ff919335.aspx)。）
 

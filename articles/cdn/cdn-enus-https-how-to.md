@@ -70,11 +70,13 @@ The Azure CDN HTTPS acceleration service is only available to paid Azure users.
 
     **Return-to-source port for CDN node access to the source station**: Specify how the CDN node can return to origin source.
 
-        1) Only use HTTP to return to source
+    ```
+    1) Only use HTTP to return to source
 
-        2) Only use HTTPS to return to source
+    2) Only use HTTPS to return to source
 
-        3) Use both HTTP and HTTPS to return to source
+    3) Use both HTTP and HTTPS to return to source
+    ```
 
     **Test URL**: Enter a URL which can subsequently be used to check access. You must ensure that this URL on the source station is accessible.
 

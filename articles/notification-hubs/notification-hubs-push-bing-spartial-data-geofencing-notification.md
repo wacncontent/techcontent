@@ -40,7 +40,9 @@ ms.author: dendeli
 
 完成创建项目之后，你应该可以控制应用本身。现在让我们完成地域隔离基础结构所需的各项设置。由于我们要使用必应服务来完成此操作，可以使用公共 REST API 终结点来查询特定的位置框架：
 
-    http://spatial.virtualearth.net/REST/v1/data/
+```
+http://spatial.virtualearth.net/REST/v1/data/
+```
 
 需要指定以下参数才能让终结点正常工作：
 
@@ -62,9 +64,11 @@ ms.author: dendeli
 
 你可能想要知道什么是数据文件，以及应该上载哪些数据？ 对于本次测试，我们可以直接使用框住旧金山海滨区域的管状示例：
 
-    Bing Spatial Data Services, 1.0, TestBoundaries
-    EntityID(Edm.String,primaryKey)|Name(Edm.String)|Longitude(Edm.Double)|Latitude(Edm.Double)|Boundary(Edm.Geography)
-    1|SanFranciscoPier|||POLYGON ((-122.389825 37.776598,-122.389438 37.773087,-122.381885 37.771849,-122.382186 37.777022,-122.389825 37.776598))
+```
+Bing Spatial Data Services, 1.0, TestBoundaries
+EntityID(Edm.String,primaryKey)|Name(Edm.String)|Longitude(Edm.Double)|Latitude(Edm.Double)|Boundary(Edm.Geography)
+1|SanFranciscoPier|||POLYGON ((-122.389825 37.776598,-122.389438 37.773087,-122.381885 37.771849,-122.382186 37.777022,-122.389825 37.776598))
+```
 
 上述代码中显示了以下实体：
 
@@ -93,7 +97,9 @@ ms.author: dendeli
 
 在此处，我们要查找的是“查询 URL”。我们可以针对终结点执行查询，以检查设备目前是否在某个位置的边界内。若要执行此检查，只需针对查询 URL 执行 GET 调用并附加以下参数：
 
-    ?spatialFilter=intersects(%27POINT%20LONGITUDE%20LATITUDE)%27)&$format=json&key=QUERY_KEY
+```
+?spatialFilter=intersects(%27POINT%20LONGITUDE%20LATITUDE)%27)&$format=json&key=QUERY_KEY
+```
 
 这样就会指定取自设备的目标位置点，并且必应地图将自动执行计算，以确定设备是否位于地域隔离区内。通过浏览器（或 cURL）执行请求后，你将收到标准的 JSON 响应：
 
@@ -121,59 +127,65 @@ ms.author: dendeli
 
 目前，`LocationHelper` 类本身的作用相当简单 - 只是让我们通过系统 API 获取用户位置：
 
-    using System;
-    using System.Threading.Tasks;
-    using Windows.Devices.Geolocation;
+```
+using System;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
-    namespace NotificationHubs.Geofence.Core
+namespace NotificationHubs.Geofence.Core
+{
+    public class LocationHelper
     {
-        public class LocationHelper
+        private static readonly uint AppDesiredAccuracyInMeters = 10;
+
+        public async static Task<Geoposition> GetCurrentLocation()
         {
-            private static readonly uint AppDesiredAccuracyInMeters = 10;
-
-            public async static Task<Geoposition> GetCurrentLocation()
+            var accessStatus = await Geolocator.RequestAccessAsync();
+            switch (accessStatus)
             {
-                var accessStatus = await Geolocator.RequestAccessAsync();
-                switch (accessStatus)
-                {
-                    case GeolocationAccessStatus.Allowed:
-                        {
-                            Geolocator geolocator = new Geolocator { DesiredAccuracyInMeters = AppDesiredAccuracyInMeters };
+                case GeolocationAccessStatus.Allowed:
+                    {
+                        Geolocator geolocator = new Geolocator { DesiredAccuracyInMeters = AppDesiredAccuracyInMeters };
 
-                            return await geolocator.GetGeopositionAsync();
-                        }
-                    default:
-                        {
-                            return null;
-                        }
-                }
+                        return await geolocator.GetGeopositionAsync();
+                    }
+                default:
+                    {
+                        return null;
+                    }
             }
-
         }
+
     }
+}
+```
 
 若想详细了解如何在 UWP 应用中获取用户位置，请参阅官方 [MSDN 文档](https://msdn.microsoft.com/zh-cn/library/windows/apps/mt219698.aspx)。
 
 若要检查是否确实能够获取位置，请打开主页的代码端 (`MainPage.xaml.cs`)。在 `MainPage` 构造函数中为 `Loaded` 事件创建新的事件处理程序：
 
-    public MainPage()
-    {
-        this.InitializeComponent();
-        this.Loaded += MainPage_Loaded;
-    }
+```
+public MainPage()
+{
+    this.InitializeComponent();
+    this.Loaded += MainPage_Loaded;
+}
+```
 
 该事件处理程序的实现如下：
 
-    private async void MainPage_Loaded(object sender, RoutedEventArgs e)
-    {
-        var location = await LocationHelper.GetCurrentLocation();
+```
+private async void MainPage_Loaded(object sender, RoutedEventArgs e)
+{
+    var location = await LocationHelper.GetCurrentLocation();
 
-        if (location != null)
-        {
-            Debug.WriteLine(string.Concat(location.Coordinate.Longitude,
-                " ", location.Coordinate.Latitude));
-        }
+    if (location != null)
+    {
+        Debug.WriteLine(string.Concat(location.Coordinate.Longitude,
+            " ", location.Coordinate.Latitude));
     }
+}
+```
 
 请注意，我们已将处理程序声明为异步，原因是 `GetCurrentLocation` 可等待，因此需要以异步方式执行。此外，由于在某些情况下我们可能会得到 null 位置（例如位置服务已禁用或应用程序访问位置的权限被拒绝），因此我们需要确保使用 null 检查进行适当的处理。
 
@@ -189,17 +201,21 @@ ms.author: dendeli
 
 下一步是捕获位置更改。为此，让我们返回到 `LocationHelper` 类，并添加 `PositionChanged` 的事件处理程序：
 
-    geolocator.PositionChanged += Geolocator_PositionChanged;
+```
+geolocator.PositionChanged += Geolocator_PositionChanged;
+```
 
 实现将在“输出”窗口中显示位置坐标：
 
-    private static async void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+```
+private static async void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+{
+    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
     {
-        await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-        {
-            Debug.WriteLine(string.Concat(args.Position.Coordinate.Longitude, " ", args.Position.Coordinate.Latitude));
-        });
-    }
+        Debug.WriteLine(string.Concat(args.Position.Coordinate.Longitude, " ", args.Position.Coordinate.Latitude));
+    });
+}
+```
 
 ##设置后端
 
@@ -217,66 +233,72 @@ ms.author: dendeli
 
 这样，我们就能确保对象将完全按预期反序列化。生成的类集应类似于下面：
 
-    namespace AppBackend.Models
+```
+namespace AppBackend.Models
+{
+    public class Rootobject
     {
-        public class Rootobject
-        {
-            public D d { get; set; }
-        }
-
-        public class D
-        {
-            public string __copyright { get; set; }
-            public Result[] results { get; set; }
-        }
-
-        public class Result
-        {
-            public __Metadata __metadata { get; set; }
-            public string EntityID { get; set; }
-            public string Name { get; set; }
-            public float Longitude { get; set; }
-            public float Latitude { get; set; }
-            public string Boundary { get; set; }
-            public string Confidence { get; set; }
-            public string Locality { get; set; }
-            public string AddressLine { get; set; }
-            public string AdminDistrict { get; set; }
-            public string CountryRegion { get; set; }
-            public string PostalCode { get; set; }
-        }
-
-        public class __Metadata
-        {
-            public string uri { get; set; }
-        }
+        public D d { get; set; }
     }
+
+    public class D
+    {
+        public string __copyright { get; set; }
+        public Result[] results { get; set; }
+    }
+
+    public class Result
+    {
+        public __Metadata __metadata { get; set; }
+        public string EntityID { get; set; }
+        public string Name { get; set; }
+        public float Longitude { get; set; }
+        public float Latitude { get; set; }
+        public string Boundary { get; set; }
+        public string Confidence { get; set; }
+        public string Locality { get; set; }
+        public string AddressLine { get; set; }
+        public string AdminDistrict { get; set; }
+        public string CountryRegion { get; set; }
+        public string PostalCode { get; set; }
+    }
+
+    public class __Metadata
+    {
+        public string uri { get; set; }
+    }
+}
+```
 
 接下来，打开 `Controllers` > `NotificationsController.cs`。我们需要调整 Post 调用以说明目标经度和纬度。为此，只需将以下两个字符串添加到函数签名：`latitude` 和 `longitude`。
 
-    public async Task<HttpResponseMessage> Post(string pns, [FromBody]string message, string to_tag, string latitude, string longitude)
+```
+public async Task<HttpResponseMessage> Post(string pns, [FromBody]string message, string to_tag, string latitude, string longitude)
+```
 
 在名为 `ApiHelper.cs` 的项目中创建一个新类，我们将使用它来连接到必应，以检查位置点边界的交叉点。按如下所示实现 `IsPointWithinBounds` 函数：
 
-    public class ApiHelper
-    {
-        public static readonly string ApiEndpoint = "{YOUR_QUERY_ENDPOINT}?spatialFilter=intersects(%27POINT%20({0}%20{1})%27)&$format=json&key={2}";
-        public static readonly string ApiKey = "{YOUR_API_KEY}";
+```
+public class ApiHelper
+{
+    public static readonly string ApiEndpoint = "{YOUR_QUERY_ENDPOINT}?spatialFilter=intersects(%27POINT%20({0}%20{1})%27)&$format=json&key={2}";
+    public static readonly string ApiKey = "{YOUR_API_KEY}";
 
-        public static bool IsPointWithinBounds(string longitude,string latitude)
+    public static bool IsPointWithinBounds(string longitude,string latitude)
+    {
+        var json = new WebClient().DownloadString(string.Format(ApiEndpoint, longitude, latitude, ApiKey));
+        var result = JsonConvert.DeserializeObject<Rootobject>(json);
+        if (result.d.results != null && result.d.results.Count() > 0)
         {
-            var json = new WebClient().DownloadString(string.Format(ApiEndpoint, longitude, latitude, ApiKey));
-            var result = JsonConvert.DeserializeObject<Rootobject>(json);
-            if (result.d.results != null && result.d.results.Count() > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
+}
+```
 
 >[!NOTE]
 > 请务必将 API 终结点替换为前面从必应开发人员中心获取的查询 URL（这一点同样适用于 API 密钥）。
@@ -285,24 +307,26 @@ ms.author: dendeli
 
 回到 `NotificationsController.cs`，在 switch 语句前面创建检查：
 
-    if (ApiHelper.IsPointWithinBounds(longitude, latitude))
+```
+if (ApiHelper.IsPointWithinBounds(longitude, latitude))
+{
+    switch (pns.ToLower())
     {
-        switch (pns.ToLower())
-        {
-            case "wns":
-                //// Windows 8.1 / Windows Phone 8.1
-                var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
-                            "From " + user + ": " + message + "</text></binding></visual></toast>";
-                outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
+        case "wns":
+            //// Windows 8.1 / Windows Phone 8.1
+            var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
+                        "From " + user + ": " + message + "</text></binding></visual></toast>";
+            outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
 
-                // Windows 10 specific Action Center support
-                toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
-                            "From " + user + ": " + message + "</text></binding></visual></toast>";
-                outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
+            // Windows 10 specific Action Center support
+            toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
+                        "From " + user + ": " + message + "</text></binding></visual></toast>";
+            outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
 
-                break;
-        }
+            break;
     }
+}
+```
 
 这样，仅当位置点位于边界内时才发送通知。
 
@@ -310,24 +334,26 @@ ms.author: dendeli
 
 回到 UWP 应用，现在我们应该可以测试通知。在 `LocationHelper` 类中创建新函数 `SendLocationToBackend`：
 
-    public static async Task SendLocationToBackend(string pns, string userTag, string message, string latitude, string longitude)
-    {
-        var POST_URL = "http://localhost:8741/api/notifications?pns=" +
-            pns + "&to_tag=" + userTag + "&latitude=" + latitude + "&longitude=" + longitude;
+```
+public static async Task SendLocationToBackend(string pns, string userTag, string message, string latitude, string longitude)
+{
+    var POST_URL = "http://localhost:8741/api/notifications?pns=" +
+        pns + "&to_tag=" + userTag + "&latitude=" + latitude + "&longitude=" + longitude;
 
-        using (var httpClient = new HttpClient())
+    using (var httpClient = new HttpClient())
+    {
+        try
         {
-            try
-            {
-                await httpClient.PostAsync(POST_URL, new StringContent(""" + message + """,
-                    System.Text.Encoding.UTF8, "application/json"));
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            await httpClient.PostAsync(POST_URL, new StringContent(""" + message + """,
+                System.Text.Encoding.UTF8, "application/json"));
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
         }
     }
+}
+```
 
 >[!NOTE]
 > 将 `POST_URL` 切换为我们在上一部分创建的已部署 Web 应用程序的位置。现在，可以在本地运行该应用，但是由于你要着手部署公共版本，因此需要使用一个外部提供程序来托管该应用。
@@ -350,22 +376,26 @@ ms.author: dendeli
 
 为了进行测试，我们可以再次创建 `MainPage_Loaded` 事件处理程序，并在其中添加以下代码段：
 
-    var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+```
+var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
-    var hub = new NotificationHub("HUB_NAME", "HUB_LISTEN_CONNECTION_STRING");
-    var result = await hub.RegisterNativeAsync(channel.Uri);
+var hub = new NotificationHub("HUB_NAME", "HUB_LISTEN_CONNECTION_STRING");
+var result = await hub.RegisterNativeAsync(channel.Uri);
 
-    // Displays the registration ID so you know it was successful
-    if (result.RegistrationId != null)
-    {
-        Debug.WriteLine("Reg successful.");
-    }
+// Displays the registration ID so you know it was successful
+if (result.RegistrationId != null)
+{
+    Debug.WriteLine("Reg successful.");
+}
+```
 
 上述代码会将应用注册到通知中心。一切准备就绪！
 
 在 `LocationHelper` 的 `Geolocator_PositionChanged` 处理程序中，可以添加一段测试代码以强制将位置放入地域隔离区：
 
-    await LocationHelper.SendLocationToBackend("wns", "TEST_USER", "TEST", "37.7746", "-122.3858");
+```
+await LocationHelper.SendLocationToBackend("wns", "TEST_USER", "TEST", "37.7746", "-122.3858");
+```
 
 由于我们不传递实际坐标（目前可能不在边界内），而是使用预定义的测试值，因此在更新时你看到通知：
 

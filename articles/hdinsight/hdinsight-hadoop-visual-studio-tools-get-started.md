@@ -65,14 +65,14 @@ ms.author: jgao
 2. 在“视图”菜单中，单击“服务器资源管理器”，以打开“服务器资源管理器”窗口。
 3. 依次展开“Azure”和“HDInsight”。
 
-    > [!NOTE]
-    请注意，应打开“HDInsight 任务列表”窗口。如果你未看到它，则在“视图”菜单中，单击“其他窗口”，然后单击“HDInsight 任务列表”窗口。
-    > 
-    > 
+   > [!NOTE]
+   请注意，应打开“HDInsight 任务列表”窗口。如果你未看到它，则在“视图”菜单中，单击“其他窗口”，然后单击“HDInsight 任务列表”窗口。
+   > 
+   > 
 4. 输入 Azure 订阅凭据，然后单击“登录”。仅当尚未从此工作站上的 Visual Studio 连接到 Azure 订阅时，才需要此凭据。
 5. 在“服务器资源管理器”中，你将看到现有 HDInsight 群集的列表。如果没有任何群集，则可以通过使用 Azure 门户、Azure PowerShell 或 HDInsight SDK 创建群集。有关详细信息，请参阅[创建 HDInsight 群集][hdinsight-create-clusters]。
 
-    ![用于 Visual Studio 的 Data Lake 工具服务器资源管理器群集列表][5]  
+   ![用于 Visual Studio 的 Data Lake 工具服务器资源管理器群集列表][5]  
 
 6. 展开 HDInsight 群集。你将看到“Hive 数据库”、默认存储帐户、链接的存储帐户，以及“Hadoop 服务日志”。可进一步展开条目。
 
@@ -112,9 +112,9 @@ ms.author: jgao
 
      SELECT * FROM hivesampletable LIMIT 100
 
-    可自定义行计数。
+   可自定义行计数。
 
-    ![Data Lake 工具：HDinsight Hive Visual Studio 架构查询][6]
+   ![Data Lake 工具：HDinsight Hive Visual Studio 架构查询][6]
 
 ### 创建 Hive 表
 可使用 GUI 创建 Hive 表或使用 Hive 查询。有关使用 Hive 查询的信息，请参阅[运行 Hive 查询](#run.queries)。
@@ -143,10 +143,10 @@ ms.author: jgao
 
     ![Data Lake 工具：HDInsight Visual Studio Tools IntelliSense][14]
 
-    > [!NOTE]
-    只建议 HDInsight 工具栏中已选择的群集元数据。
-    > 
-    > 
+   > [!NOTE]
+   只建议 HDInsight 工具栏中已选择的群集元数据。
+   > 
+   > 
 4. （可选）：单击“验证脚本”以检查脚本语法错误。
 
     ![Data Lake 工具：用于 Visual Studio 的 Data Lake 工具本地验证][10]

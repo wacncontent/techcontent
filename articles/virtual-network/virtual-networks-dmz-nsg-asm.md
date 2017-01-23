@@ -70,74 +70,88 @@ ms.author: jonor;sivae
 
 1. 首先需要构建一个网络安全组来保存规则：
 
-        New-AzureNetworkSecurityGroup -Name $NSGName `
-            -Location $DeploymentLocation `
-            -Label "Security group for $VNetName subnets in $DeploymentLocation"
+    ```
+    New-AzureNetworkSecurityGroup -Name $NSGName `
+        -Location $DeploymentLocation `
+        -Label "Security group for $VNetName subnets in $DeploymentLocation"
+    ```
 
 2. 本示例中的第一个规则允许所有内部网络之间的 DNS 流量发往后端子网上的 DNS 服务器。该规则有一些重要参数：
   - “Type”表示此规则的流量作用方向；此方向是从子网或虚拟机的角度判断的（取决于此 NSG 绑定到的位置）。因此，如果 Type 是“Inbound”并且流量进入子网，此规则将适用，而离开子网的流量则不受此规则影响。
   - “Priority”设置流量的评估顺序。编号越低，优先级就越高。只要将某个规则应用于特定的流量，就不再处理其他规则。因此，如果优先级为 1 的规则允许流量，优先级为 2 的规则拒绝流量，并将这两个规则同时应用于流量，则允许流量流动（规则 1 的优先级更高，因此将发生作用，并且不再应用其他规则）。
   - “Action”表示是要阻止还是允许受此规则影响的流量。
 
-            Get-AzureNetworkSecurityGroup -Name $NSGName | `
-                Set-AzureNetworkSecurityRule -Name "Enable Internal DNS" `
-                -Type Inbound -Priority 100 -Action Allow `
-                -SourceAddressPrefix VIRTUAL_NETWORK -SourcePortRange '*' `
-                -DestinationAddressPrefix $VMIP[4] `
-                -DestinationPortRange '53' `
-                -Protocol *
+      ```
+        Get-AzureNetworkSecurityGroup -Name $NSGName | `
+            Set-AzureNetworkSecurityRule -Name "Enable Internal DNS" `
+            -Type Inbound -Priority 100 -Action Allow `
+            -SourceAddressPrefix VIRTUAL_NETWORK -SourcePortRange '*' `
+            -DestinationAddressPrefix $VMIP[4] `
+            -DestinationPortRange '53' `
+            -Protocol *
+      ```
 
 3. 此规则允许 RDP 流量从 Internet 发往 VNET 中任一子网上任何服务器的 RDP 端口。此规则使用两种特殊地址前缀：“VIRTUAL\_NETWORK”和“INTERNET”。这样就可以轻松处理较大类别的地址前缀。
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | `
-            Set-AzureNetworkSecurityRule -Name "Enable RDP to $VNetName VNet" `
-            -Type Inbound -Priority 110 -Action Allow `
-            -SourceAddressPrefix INTERNET -SourcePortRange '*' `
-            -DestinationAddressPrefix VIRTUAL_NETWORK `
-            -DestinationPortRange '3389' `
-            -Protocol *
+    ```
+    Get-AzureNetworkSecurityGroup -Name $NSGName | `
+        Set-AzureNetworkSecurityRule -Name "Enable RDP to $VNetName VNet" `
+        -Type Inbound -Priority 110 -Action Allow `
+        -SourceAddressPrefix INTERNET -SourcePortRange '*' `
+        -DestinationAddressPrefix VIRTUAL_NETWORK `
+        -DestinationPortRange '3389' `
+        -Protocol *
+    ```
 
 4. 此规则允许入站 Internet 流量抵达 Web 服务器。这不会更改路由行为；只允许目标为 IIS01 的流量通过。因此，如果来自 Internet 的流量将 Web 服务器作为其目标，此规则将允许流量，并停止处理其他规则。（在优先级为 140 的规则中，其他所有入站 Internet 流量均被阻止）。如果你只要处理 HTTP 流量，可将此规则进一步限制为只允许目标端口 80。
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | `
-            Set-AzureNetworkSecurityRule -Name "Enable Internet to $VMName[0]" `
-            -Type Inbound -Priority 120 -Action Allow `
-            -SourceAddressPrefix Internet -SourcePortRange '*' `
-            -DestinationAddressPrefix $VMIP[0] `
-            -DestinationPortRange '*' `
-            -Protocol *
+    ```
+    Get-AzureNetworkSecurityGroup -Name $NSGName | `
+        Set-AzureNetworkSecurityRule -Name "Enable Internet to $VMName[0]" `
+        -Type Inbound -Priority 120 -Action Allow `
+        -SourceAddressPrefix Internet -SourcePortRange '*' `
+        -DestinationAddressPrefix $VMIP[0] `
+        -DestinationPortRange '*' `
+        -Protocol *
+    ```
 
 5. 此规则允许流量从 IIS01 服务器传递到 AppVM01 服务器，后面的规则将阻止其他所有从前端到后端的流量。如果要添加的端口是已知的，则可以改善此规则。例如，如果 IIS 服务器只抵达 AppVM01 上的 SQL Server，并且 Web 应用程序曾遭到入侵，则目标端口范围应该从“*”（任何）更改为 1433（SQL 端口），以缩小 AppVM01 上的入站攻击面。
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | `
-            Set-AzureNetworkSecurityRule -Name "Enable $VMName[1] to $VMName[2]" `
-            -Type Inbound -Priority 130 -Action Allow `
-        -SourceAddressPrefix $VMIP[1] -SourcePortRange '*' `
-        -DestinationAddressPrefix $VMIP[2] `
-        -DestinationPortRange '*' `
-        -Protocol *
+    ```
+    Get-AzureNetworkSecurityGroup -Name $NSGName | `
+        Set-AzureNetworkSecurityRule -Name "Enable $VMName[1] to $VMName[2]" `
+        -Type Inbound -Priority 130 -Action Allow `
+    -SourceAddressPrefix $VMIP[1] -SourcePortRange '*' `
+    -DestinationAddressPrefix $VMIP[2] `
+    -DestinationPortRange '*' `
+    -Protocol *
+    ```
 
 6. 此规则将拒绝从 Internet 到网络上任何服务器的流量。结合优先级为 110 和 120 的规则，只允许入站 Internet 流量发往防火墙以及通过 RDP 端口发往其他服务器，除此之外的其他流量将被阻止。
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | `
-            Set-AzureNetworkSecurityRule `
-            -Name "Isolate the $VNetName VNet from the Internet" `
-            -Type Inbound -Priority 140 -Action Deny `
-            -SourceAddressPrefix INTERNET -SourcePortRange '*' `
-            -DestinationAddressPrefix VIRTUAL_NETWORK `
-            -DestinationPortRange '*' `
-            -Protocol *
+    ```
+    Get-AzureNetworkSecurityGroup -Name $NSGName | `
+        Set-AzureNetworkSecurityRule `
+        -Name "Isolate the $VNetName VNet from the Internet" `
+        -Type Inbound -Priority 140 -Action Deny `
+        -SourceAddressPrefix INTERNET -SourcePortRange '*' `
+        -DestinationAddressPrefix VIRTUAL_NETWORK `
+        -DestinationPortRange '*' `
+        -Protocol *
+    ```
 
 7. 最后一个规则拒绝从前端子网到后端子网的流量。这是仅限入站的规则，因此允许反向流量（从后端到前端）。
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | `
-            Set-AzureNetworkSecurityRule `
-            -Name "Isolate the $FESubnet subnet from the $BESubnet subnet" `
-            -Type Inbound -Priority 150 -Action Deny `
-            -SourceAddressPrefix $FEPrefix -SourcePortRange '*' `
-            -DestinationAddressPrefix $BEPrefix `
-            -DestinationPortRange '*' `
-            -Protocol * 
+    ```
+    Get-AzureNetworkSecurityGroup -Name $NSGName | `
+        Set-AzureNetworkSecurityRule `
+        -Name "Isolate the $FESubnet subnet from the $BESubnet subnet" `
+        -Type Inbound -Priority 150 -Action Deny `
+        -SourceAddressPrefix $FEPrefix -SourcePortRange '*' `
+        -DestinationAddressPrefix $BEPrefix `
+        -DestinationPortRange '*' `
+        -Protocol * 
+    ```
 
 ## 流量方案
 #### （*允许*）从 Web 访问 Web 服务器
@@ -251,293 +265,297 @@ ms.author: jonor;sivae
 >[!IMPORTANT]
 > 此脚本运行时，PowerShell 中可能会弹出警告或其他参考性消息。只有以红色字体显示的错误消息才需要引以关注。
 
-    <# 
-     .SYNOPSIS
-      Example of Network Security Groups in an isolated network (Azure only, no hybrid connections)
+```
+<# 
+ .SYNOPSIS
+  Example of Network Security Groups in an isolated network (Azure only, no hybrid connections)
 
-     .DESCRIPTION
-      This script will build out a sample DMZ setup containing:
-       - A default storage account for VM disks
-       - Two new cloud services
-       - Two Subnets (FrontEnd and BackEnd subnets)
-       - One server on the FrontEnd Subnet
-       - Three Servers on the BackEnd Subnet
-       - Network Security Groups to allow/deny traffic patterns as declared
+ .DESCRIPTION
+  This script will build out a sample DMZ setup containing:
+   - A default storage account for VM disks
+   - Two new cloud services
+   - Two Subnets (FrontEnd and BackEnd subnets)
+   - One server on the FrontEnd Subnet
+   - Three Servers on the BackEnd Subnet
+   - Network Security Groups to allow/deny traffic patterns as declared
 
-      Before running script, ensure the network configuration file is created in
-      the directory referenced by $NetworkConfigFile variable (or update the
-      variable to reflect the path and file name of the config file being used).
+  Before running script, ensure the network configuration file is created in
+  the directory referenced by $NetworkConfigFile variable (or update the
+  variable to reflect the path and file name of the config file being used).
 
-     .Notes
-      Security requirements are different for each use case and can be addressed in a
-      myriad of ways. Please be sure that any sensitive data or applications are behind
-      the appropriate layer(s) of protection. This script serves as an example of some
-      of the techniques that can be used, but should not be used for all scenarios. You
-      are responsible to assess your security needs and the appropriate protections
-      needed, and then effectively implement those protections.
+ .Notes
+  Security requirements are different for each use case and can be addressed in a
+  myriad of ways. Please be sure that any sensitive data or applications are behind
+  the appropriate layer(s) of protection. This script serves as an example of some
+  of the techniques that can be used, but should not be used for all scenarios. You
+  are responsible to assess your security needs and the appropriate protections
+  needed, and then effectively implement those protections.
 
-      FrontEnd Service (FrontEnd subnet 10.0.1.0/24)
-       IIS01      - 10.0.1.5
+  FrontEnd Service (FrontEnd subnet 10.0.1.0/24)
+   IIS01      - 10.0.1.5
 
-      BackEnd Service (BackEnd subnet 10.0.2.0/24)
-       DNS01      - 10.0.2.4
-       AppVM01    - 10.0.2.5
-       AppVM02    - 10.0.2.6
+  BackEnd Service (BackEnd subnet 10.0.2.0/24)
+   DNS01      - 10.0.2.4
+   AppVM01    - 10.0.2.5
+   AppVM02    - 10.0.2.6
 
-    #>
+#>
 
-    # Fixed Variables
-        $LocalAdminPwd = Read-Host -Prompt "Enter Local Admin Password to be used for all VMs"
-        $VMName = @()
-        $ServiceName = @()
-        $VMFamily = @()
-        $img = @()
-        $size = @()
-        $SubnetName = @()
-        $VMIP = @()
+# Fixed Variables
+    $LocalAdminPwd = Read-Host -Prompt "Enter Local Admin Password to be used for all VMs"
+    $VMName = @()
+    $ServiceName = @()
+    $VMFamily = @()
+    $img = @()
+    $size = @()
+    $SubnetName = @()
+    $VMIP = @()
 
-    # User Defined Global Variables
-      # These should be changes to reflect your subscription and services
-      # Invalid options will fail in the validation section
+# User Defined Global Variables
+  # These should be changes to reflect your subscription and services
+  # Invalid options will fail in the validation section
 
-      # Subscription Access Details
-        $subID = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  # Subscription Access Details
+    $subID = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
-      # VM Account, Location, and Storage Details
-        $LocalAdmin = "theAdmin"
-        $DeploymentLocation = "China North"
-        $StorageAccountName = "vmstore02"
+  # VM Account, Location, and Storage Details
+    $LocalAdmin = "theAdmin"
+    $DeploymentLocation = "China North"
+    $StorageAccountName = "vmstore02"
 
-      # Service Details
-        $FrontEndService = "FrontEnd001"
-        $BackEndService = "BackEnd001"
+  # Service Details
+    $FrontEndService = "FrontEnd001"
+    $BackEndService = "BackEnd001"
 
-      # Network Details
-        $VNetName = "CorpNetwork"
-        $FESubnet = "FrontEnd"
-        $FEPrefix = "10.0.1.0/24"
-        $BESubnet = "BackEnd"
-        $BEPrefix = "10.0.2.0/24"
-        $NetworkConfigFile = "C:\Scripts\NetworkConf1.xml"
+  # Network Details
+    $VNetName = "CorpNetwork"
+    $FESubnet = "FrontEnd"
+    $FEPrefix = "10.0.1.0/24"
+    $BESubnet = "BackEnd"
+    $BEPrefix = "10.0.2.0/24"
+    $NetworkConfigFile = "C:\Scripts\NetworkConf1.xml"
 
-      # VM Base Disk Image Details
-        $SrvImg = Get-AzureVMImage | Where {$_.ImageFamily -match 'Windows Server 2012 R2 Datacenter'} | sort PublishedDate -Descending | Select ImageName -First 1 | ForEach {$_.ImageName}
+  # VM Base Disk Image Details
+    $SrvImg = Get-AzureVMImage | Where {$_.ImageFamily -match 'Windows Server 2012 R2 Datacenter'} | sort PublishedDate -Descending | Select ImageName -First 1 | ForEach {$_.ImageName}
 
-      # NSG Details
-        $NSGName = "MyVNetSG"
+  # NSG Details
+    $NSGName = "MyVNetSG"
 
-    # User Defined VM Specific Config
-        # Note: To ensure proper NSG Rule creation later in this script:
-        #       - The Web Server must be VM 0
-        #       - The AppVM1 Server must be VM 1
-        #       - The DNS server must be VM 3
-        #
-        #       Otherwise the NSG rules in the last section of this
-        #       script will need to be changed to match the modified
-        #       VM array numbers ($i) so the NSG Rule IP addresses
-        #       are aligned to the associated VM IP addresses.
+# User Defined VM Specific Config
+    # Note: To ensure proper NSG Rule creation later in this script:
+    #       - The Web Server must be VM 0
+    #       - The AppVM1 Server must be VM 1
+    #       - The DNS server must be VM 3
+    #
+    #       Otherwise the NSG rules in the last section of this
+    #       script will need to be changed to match the modified
+    #       VM array numbers ($i) so the NSG Rule IP addresses
+    #       are aligned to the associated VM IP addresses.
 
-        # VM 0 - The Web Server
-          $VMName += "IIS01"
-          $ServiceName += $FrontEndService
-          $VMFamily += "Windows"
-          $img += $SrvImg
-          $size += "Standard_D3"
-          $SubnetName += $FESubnet
-          $VMIP += "10.0.1.5"
+    # VM 0 - The Web Server
+      $VMName += "IIS01"
+      $ServiceName += $FrontEndService
+      $VMFamily += "Windows"
+      $img += $SrvImg
+      $size += "Standard_D3"
+      $SubnetName += $FESubnet
+      $VMIP += "10.0.1.5"
 
-        # VM 1 - The First Application Server
-          $VMName += "AppVM01"
-          $ServiceName += $BackEndService
-          $VMFamily += "Windows"
-          $img += $SrvImg
-          $size += "Standard_D3"
-          $SubnetName += $BESubnet
-          $VMIP += "10.0.2.5"
+    # VM 1 - The First Application Server
+      $VMName += "AppVM01"
+      $ServiceName += $BackEndService
+      $VMFamily += "Windows"
+      $img += $SrvImg
+      $size += "Standard_D3"
+      $SubnetName += $BESubnet
+      $VMIP += "10.0.2.5"
 
-        # VM 2 - The Second Application Server
-          $VMName += "AppVM02"
-          $ServiceName += $BackEndService
-          $VMFamily += "Windows"
-          $img += $SrvImg
-          $size += "Standard_D3"
-          $SubnetName += $BESubnet
-          $VMIP += "10.0.2.6"
+    # VM 2 - The Second Application Server
+      $VMName += "AppVM02"
+      $ServiceName += $BackEndService
+      $VMFamily += "Windows"
+      $img += $SrvImg
+      $size += "Standard_D3"
+      $SubnetName += $BESubnet
+      $VMIP += "10.0.2.6"
 
-        # VM 3 - The DNS Server
-          $VMName += "DNS01"
-          $ServiceName += $BackEndService
-          $VMFamily += "Windows"
-          $img += $SrvImg
-          $size += "Standard_D3"
-          $SubnetName += $BESubnet
-          $VMIP += "10.0.2.4"
+    # VM 3 - The DNS Server
+      $VMName += "DNS01"
+      $ServiceName += $BackEndService
+      $VMFamily += "Windows"
+      $img += $SrvImg
+      $size += "Standard_D3"
+      $SubnetName += $BESubnet
+      $VMIP += "10.0.2.4"
 
-    # ----------------------------- #
-    # No User Defined Varibles or   #
-    # Configuration past this point #
-    # ----------------------------- #	
+# ----------------------------- #
+# No User Defined Varibles or   #
+# Configuration past this point #
+# ----------------------------- #	
 
-      # Get your Azure accounts
-        Add-AzureAccount -Environment AzureChinaCloud
-        Set-AzureSubscription –SubscriptionId $subID -ErrorAction Stop
-        Select-AzureSubscription -SubscriptionId $subID -Current -ErrorAction Stop
+  # Get your Azure accounts
+    Add-AzureAccount -Environment AzureChinaCloud
+    Set-AzureSubscription –SubscriptionId $subID -ErrorAction Stop
+    Select-AzureSubscription -SubscriptionId $subID -Current -ErrorAction Stop
 
-      # Create Storage Account
-        If (Test-AzureName -Storage -Name $StorageAccountName) { 
-            Write-Host "Fatal Error: This storage account name is already in use, please pick a diffrent name." -ForegroundColor Red
-            Return}
-        Else {Write-Host "Creating Storage Account" -ForegroundColor Cyan 
-              New-AzureStorageAccount -Location $DeploymentLocation -StorageAccountName $StorageAccountName}
-
-      # Update Subscription Pointer to New Storage Account
-        Write-Host "Updating Subscription Pointer to New Storage Account" -ForegroundColor Cyan 
-        Set-AzureSubscription –SubscriptionId $subID -CurrentStorageAccountName $StorageAccountName -ErrorAction Stop
-
-    # Validation
-    $FatalError = $false
-
-    If (-Not (Get-AzureLocation | Where {$_.DisplayName -eq $DeploymentLocation})) {
-         Write-Host "This Azure Location was not found or available for use" -ForegroundColor Yellow
-         $FatalError = $true}
-
-    If (Test-AzureName -Service -Name $FrontEndService) { 
-        Write-Host "The FrontEndService service name is already in use, please pick a different service name." -ForegroundColor Yellow
-        $FatalError = $true}
-    Else { Write-Host "The FrontEndService service name is valid for use." -ForegroundColor Green}
-
-    If (Test-AzureName -Service -Name $BackEndService) { 
-        Write-Host "The BackEndService service name is already in use, please pick a different service name." -ForegroundColor Yellow
-        $FatalError = $true}
-    Else { Write-Host "The BackEndService service name is valid for use." -ForegroundColor Green}
-
-    If (-Not (Test-Path $NetworkConfigFile)) { 
-        Write-Host 'The network config file was not found, please update the $NetworkConfigFile variable to point to the network config xml file.' -ForegroundColor Yellow
-        $FatalError = $true}
-    Else { Write-Host "The network config file was found" -ForegroundColor Green
-            If (-Not (Select-String -Pattern $DeploymentLocation -Path $NetworkConfigFile)) {
-                Write-Host 'The deployment location was not found in the network config file, please check the network config file to ensure the $DeploymentLocation varible is correct and the netowrk config file matches.' -ForegroundColor Yellow
-                $FatalError = $true}
-            Else { Write-Host "The deployment location was found in the network config file." -ForegroundColor Green}}
-
-    If ($FatalError) {
-        Write-Host "A fatal error has occured, please see the above messages for more information." -ForegroundColor Red
+  # Create Storage Account
+    If (Test-AzureName -Storage -Name $StorageAccountName) { 
+        Write-Host "Fatal Error: This storage account name is already in use, please pick a diffrent name." -ForegroundColor Red
         Return}
-    Else { Write-Host "Validation passed, now building the environment." -ForegroundColor Green}
+    Else {Write-Host "Creating Storage Account" -ForegroundColor Cyan 
+          New-AzureStorageAccount -Location $DeploymentLocation -StorageAccountName $StorageAccountName}
 
-    # Create VNET
-        Write-Host "Creating VNET" -ForegroundColor Cyan 
-        Set-AzureVNetConfig -ConfigurationPath $NetworkConfigFile -ErrorAction Stop
+  # Update Subscription Pointer to New Storage Account
+    Write-Host "Updating Subscription Pointer to New Storage Account" -ForegroundColor Cyan 
+    Set-AzureSubscription –SubscriptionId $subID -CurrentStorageAccountName $StorageAccountName -ErrorAction Stop
 
-    # Create Services
-        Write-Host "Creating Services" -ForegroundColor Cyan
-        New-AzureService -Location $DeploymentLocation -ServiceName $FrontEndService -ErrorAction Stop
-        New-AzureService -Location $DeploymentLocation -ServiceName $BackEndService -ErrorAction Stop
+# Validation
+$FatalError = $false
 
-    # Build VMs
-        $i=0
-        $VMName | Foreach {
-            Write-Host "Building $($VMName[$i])" -ForegroundColor Cyan
-            New-AzureVMConfig -Name $VMName[$i] -ImageName $img[$i] –InstanceSize $size[$i] | `
-                Add-AzureProvisioningConfig -Windows -AdminUsername $LocalAdmin -Password $LocalAdminPwd  | `
-                Set-AzureSubnet  –SubnetNames $SubnetName[$i] | `
-                Set-AzureStaticVNetIP -IPAddress $VMIP[$i] | `
-                Set-AzureVMMicrosoftAntimalwareExtension -AntimalwareConfiguration '{"AntimalwareEnabled" : true}' | `
-                Remove-AzureEndpoint -Name "PowerShell" | `
-                New-AzureVM –ServiceName $ServiceName[$i] -VNetName $VNetName -Location $DeploymentLocation
-                # Note: A Remote Desktop endpoint is automatically created when each VM is created.
-            $i++
-        }
-        # Add HTTP Endpoint for IIS01
-        Get-AzureVM -ServiceName $ServiceName[0] -Name $VMName[0] | Add-AzureEndpoint -Name HTTP -Protocol tcp -LocalPort 80 -PublicPort 80 | Update-AzureVM
+If (-Not (Get-AzureLocation | Where {$_.DisplayName -eq $DeploymentLocation})) {
+     Write-Host "This Azure Location was not found or available for use" -ForegroundColor Yellow
+     $FatalError = $true}
 
-    # Configure NSG
-        Write-Host "Configuring the Network Security Group (NSG)" -ForegroundColor Cyan
+If (Test-AzureName -Service -Name $FrontEndService) { 
+    Write-Host "The FrontEndService service name is already in use, please pick a different service name." -ForegroundColor Yellow
+    $FatalError = $true}
+Else { Write-Host "The FrontEndService service name is valid for use." -ForegroundColor Green}
 
-      # Build the NSG
-        Write-Host "Building the NSG" -ForegroundColor Cyan
-        New-AzureNetworkSecurityGroup -Name $NSGName -Location $DeploymentLocation -Label "Security group for $VNetName subnets in $DeploymentLocation"
+If (Test-AzureName -Service -Name $BackEndService) { 
+    Write-Host "The BackEndService service name is already in use, please pick a different service name." -ForegroundColor Yellow
+    $FatalError = $true}
+Else { Write-Host "The BackEndService service name is valid for use." -ForegroundColor Green}
 
-      # Add NSG Rules
-        Write-Host "Writing rules into the NSG" -ForegroundColor Cyan
-        Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable Internal DNS" -Type Inbound -Priority 100 -Action Allow `
-            -SourceAddressPrefix VIRTUAL_NETWORK -SourcePortRange '*' `
-            -DestinationAddressPrefix $VMIP[3] -DestinationPortRange '53' `
-            -Protocol *
+If (-Not (Test-Path $NetworkConfigFile)) { 
+    Write-Host 'The network config file was not found, please update the $NetworkConfigFile variable to point to the network config xml file.' -ForegroundColor Yellow
+    $FatalError = $true}
+Else { Write-Host "The network config file was found" -ForegroundColor Green
+        If (-Not (Select-String -Pattern $DeploymentLocation -Path $NetworkConfigFile)) {
+            Write-Host 'The deployment location was not found in the network config file, please check the network config file to ensure the $DeploymentLocation varible is correct and the netowrk config file matches.' -ForegroundColor Yellow
+            $FatalError = $true}
+        Else { Write-Host "The deployment location was found in the network config file." -ForegroundColor Green}}
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable RDP to $VNetName VNet" -Type Inbound -Priority 110 -Action Allow `
-            -SourceAddressPrefix INTERNET -SourcePortRange '*' `
-            -DestinationAddressPrefix VIRTUAL_NETWORK -DestinationPortRange '3389' `
-            -Protocol *
+If ($FatalError) {
+    Write-Host "A fatal error has occured, please see the above messages for more information." -ForegroundColor Red
+    Return}
+Else { Write-Host "Validation passed, now building the environment." -ForegroundColor Green}
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable Internet to $($VMName[0])" -Type Inbound -Priority 120 -Action Allow `
-            -SourceAddressPrefix Internet -SourcePortRange '*' `
-            -DestinationAddressPrefix $VMIP[0] -DestinationPortRange '*' `
-            -Protocol *
+# Create VNET
+    Write-Host "Creating VNET" -ForegroundColor Cyan 
+    Set-AzureVNetConfig -ConfigurationPath $NetworkConfigFile -ErrorAction Stop
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable $($VMName[0]) to $($VMName[1])" -Type Inbound -Priority 130 -Action Allow `
-            -SourceAddressPrefix $VMIP[0] -SourcePortRange '*' `
-            -DestinationAddressPrefix $VMIP[1] -DestinationPortRange '*' `
-            -Protocol *
+# Create Services
+    Write-Host "Creating Services" -ForegroundColor Cyan
+    New-AzureService -Location $DeploymentLocation -ServiceName $FrontEndService -ErrorAction Stop
+    New-AzureService -Location $DeploymentLocation -ServiceName $BackEndService -ErrorAction Stop
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Isolate the $VNetName VNet from the Internet" -Type Inbound -Priority 140 -Action Deny `
-            -SourceAddressPrefix INTERNET -SourcePortRange '*' `
-            -DestinationAddressPrefix VIRTUAL_NETWORK -DestinationPortRange '*' `
-            -Protocol *
+# Build VMs
+    $i=0
+    $VMName | Foreach {
+        Write-Host "Building $($VMName[$i])" -ForegroundColor Cyan
+        New-AzureVMConfig -Name $VMName[$i] -ImageName $img[$i] –InstanceSize $size[$i] | `
+            Add-AzureProvisioningConfig -Windows -AdminUsername $LocalAdmin -Password $LocalAdminPwd  | `
+            Set-AzureSubnet  –SubnetNames $SubnetName[$i] | `
+            Set-AzureStaticVNetIP -IPAddress $VMIP[$i] | `
+            Set-AzureVMMicrosoftAntimalwareExtension -AntimalwareConfiguration '{"AntimalwareEnabled" : true}' | `
+            Remove-AzureEndpoint -Name "PowerShell" | `
+            New-AzureVM –ServiceName $ServiceName[$i] -VNetName $VNetName -Location $DeploymentLocation
+            # Note: A Remote Desktop endpoint is automatically created when each VM is created.
+        $i++
+    }
+    # Add HTTP Endpoint for IIS01
+    Get-AzureVM -ServiceName $ServiceName[0] -Name $VMName[0] | Add-AzureEndpoint -Name HTTP -Protocol tcp -LocalPort 80 -PublicPort 80 | Update-AzureVM
 
-        Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Isolate the $FESubnet subnet from the $BESubnet subnet" -Type Inbound -Priority 150 -Action Deny `
-            -SourceAddressPrefix $FEPrefix -SourcePortRange '*' `
-            -DestinationAddressPrefix $BEPrefix -DestinationPortRange '*' `
-            -Protocol *
+# Configure NSG
+    Write-Host "Configuring the Network Security Group (NSG)" -ForegroundColor Cyan
 
-        # Assign the NSG to the Subnets
-            Write-Host "Binding the NSG to both subnets" -ForegroundColor Cyan
-            Set-AzureNetworkSecurityGroupToSubnet -Name $NSGName -SubnetName $FESubnet -VirtualNetworkName $VNetName
-            Set-AzureNetworkSecurityGroupToSubnet -Name $NSGName -SubnetName $BESubnet -VirtualNetworkName $VNetName
+  # Build the NSG
+    Write-Host "Building the NSG" -ForegroundColor Cyan
+    New-AzureNetworkSecurityGroup -Name $NSGName -Location $DeploymentLocation -Label "Security group for $VNetName subnets in $DeploymentLocation"
 
-    # Optional Post-script Manual Configuration
-      # Install Test Web App (Run Post-Build Script on the IIS Server)
-      # Install Backend resource (Run Post-Build Script on the AppVM01)
-      Write-Host
-      Write-Host "Build Complete!" -ForegroundColor Green
-      Write-Host
-      Write-Host "Optional Post-script Manual Configuration Steps" -ForegroundColor Gray
-      Write-Host " - Install Test Web App (Run Post-Build Script on the IIS Server)" -ForegroundColor Gray
-      Write-Host " - Install Backend resource (Run Post-Build Script on the AppVM01)" -ForegroundColor Gray
-      Write-Host
+  # Add NSG Rules
+    Write-Host "Writing rules into the NSG" -ForegroundColor Cyan
+    Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable Internal DNS" -Type Inbound -Priority 100 -Action Allow `
+        -SourceAddressPrefix VIRTUAL_NETWORK -SourcePortRange '*' `
+        -DestinationAddressPrefix $VMIP[3] -DestinationPortRange '53' `
+        -Protocol *
+
+    Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable RDP to $VNetName VNet" -Type Inbound -Priority 110 -Action Allow `
+        -SourceAddressPrefix INTERNET -SourcePortRange '*' `
+        -DestinationAddressPrefix VIRTUAL_NETWORK -DestinationPortRange '3389' `
+        -Protocol *
+
+    Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable Internet to $($VMName[0])" -Type Inbound -Priority 120 -Action Allow `
+        -SourceAddressPrefix Internet -SourcePortRange '*' `
+        -DestinationAddressPrefix $VMIP[0] -DestinationPortRange '*' `
+        -Protocol *
+
+    Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Enable $($VMName[0]) to $($VMName[1])" -Type Inbound -Priority 130 -Action Allow `
+        -SourceAddressPrefix $VMIP[0] -SourcePortRange '*' `
+        -DestinationAddressPrefix $VMIP[1] -DestinationPortRange '*' `
+        -Protocol *
+
+    Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Isolate the $VNetName VNet from the Internet" -Type Inbound -Priority 140 -Action Deny `
+        -SourceAddressPrefix INTERNET -SourcePortRange '*' `
+        -DestinationAddressPrefix VIRTUAL_NETWORK -DestinationPortRange '*' `
+        -Protocol *
+
+    Get-AzureNetworkSecurityGroup -Name $NSGName | Set-AzureNetworkSecurityRule -Name "Isolate the $FESubnet subnet from the $BESubnet subnet" -Type Inbound -Priority 150 -Action Deny `
+        -SourceAddressPrefix $FEPrefix -SourcePortRange '*' `
+        -DestinationAddressPrefix $BEPrefix -DestinationPortRange '*' `
+        -Protocol *
+
+    # Assign the NSG to the Subnets
+        Write-Host "Binding the NSG to both subnets" -ForegroundColor Cyan
+        Set-AzureNetworkSecurityGroupToSubnet -Name $NSGName -SubnetName $FESubnet -VirtualNetworkName $VNetName
+        Set-AzureNetworkSecurityGroupToSubnet -Name $NSGName -SubnetName $BESubnet -VirtualNetworkName $VNetName
+
+# Optional Post-script Manual Configuration
+  # Install Test Web App (Run Post-Build Script on the IIS Server)
+  # Install Backend resource (Run Post-Build Script on the AppVM01)
+  Write-Host
+  Write-Host "Build Complete!" -ForegroundColor Green
+  Write-Host
+  Write-Host "Optional Post-script Manual Configuration Steps" -ForegroundColor Gray
+  Write-Host " - Install Test Web App (Run Post-Build Script on the IIS Server)" -ForegroundColor Gray
+  Write-Host " - Install Backend resource (Run Post-Build Script on the AppVM01)" -ForegroundColor Gray
+  Write-Host
+```
 
 #### 网络配置文件
 使用更新的位置保存此 xml 文件，并将此文件的链接添加到上述脚本中的 $NetworkConfigFile 变量。
 
-    <NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
-      <VirtualNetworkConfiguration>
-        <Dns>
-          <DnsServers>
-            <DnsServer name="DNS01" IPAddress="10.0.2.4" />
-            <DnsServer name="Level3" IPAddress="209.244.0.3" />
-          </DnsServers>
-        </Dns>
-        <VirtualNetworkSites>
-          <VirtualNetworkSite name="CorpNetwork" Location="China North">
-            <AddressSpace>
-              <AddressPrefix>10.0.0.0/16</AddressPrefix>
-            </AddressSpace>
-            <Subnets>
-              <Subnet name="FrontEnd">
-                <AddressPrefix>10.0.1.0/24</AddressPrefix>
-              </Subnet>
-              <Subnet name="BackEnd">
-                <AddressPrefix>10.0.2.0/24</AddressPrefix>
-              </Subnet>
-            </Subnets>
-            <DnsServersRef>
-              <DnsServerRef name="DNS01" />
-              <DnsServerRef name="Level3" />
-            </DnsServersRef>
-          </VirtualNetworkSite>
-        </VirtualNetworkSites>
-      </VirtualNetworkConfiguration>
-    </NetworkConfiguration>
+```
+<NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
+  <VirtualNetworkConfiguration>
+    <Dns>
+      <DnsServers>
+        <DnsServer name="DNS01" IPAddress="10.0.2.4" />
+        <DnsServer name="Level3" IPAddress="209.244.0.3" />
+      </DnsServers>
+    </Dns>
+    <VirtualNetworkSites>
+      <VirtualNetworkSite name="CorpNetwork" Location="China North">
+        <AddressSpace>
+          <AddressPrefix>10.0.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="FrontEnd">
+            <AddressPrefix>10.0.1.0/24</AddressPrefix>
+          </Subnet>
+          <Subnet name="BackEnd">
+            <AddressPrefix>10.0.2.0/24</AddressPrefix>
+          </Subnet>
+        </Subnets>
+        <DnsServersRef>
+          <DnsServerRef name="DNS01" />
+          <DnsServerRef name="Level3" />
+        </DnsServersRef>
+      </VirtualNetworkSite>
+    </VirtualNetworkSites>
+  </VirtualNetworkConfiguration>
+</NetworkConfiguration>
+```
 
 #### 示例应用程序脚本
 如果你想要为本示例和其他外围网络示例安装示例应用程序，以下链接便已提供了一个：[示例应用程序脚本][SampleApp]

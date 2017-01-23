@@ -34,12 +34,14 @@ Contoso 是一家工业自动化公司，该公司已将其制造流程完全自
 
 数据的有效负载是 JSON 格式，如下所示：
 
-    {
-        "time": "2016-01-26T20:47:53.0000000",  
-        "dspl": "sensorE",  
-        "temp": 123,  
-        "hmdt": 34  
-    }  
+```
+{
+    "time": "2016-01-26T20:47:53.0000000",  
+    "dspl": "sensorE",  
+    "temp": 123,  
+    "hmdt": 34  
+}  
+```
 
 在实际情况下，其中可能有数百个传感器以流的形式生成事件。理想情况下，网关设备会运行代码，将这些事件推送到 [Azure 事件中心](https://www.azure.cn/home/features/event-hubs/)或 [Azure IoT 中心](https://www.azure.cn/home/features/iot-hub/)。流分析作业将从事件中心引入这些事件，并针对流运行实时分析查询。然后，可以将结果发送到[支持的输出](./stream-analytics-define-outputs.md)之一。
 

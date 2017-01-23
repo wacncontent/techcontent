@@ -66,50 +66,64 @@ ms.author: huvalo
 
 下面是你会在初始 Git 存储库找到的文件的概览，我们将在下一节中予以克隆。
 
-    \app\__init__.py
-    \app\forms.py
-    \app\models.py
-    \app\tests.py
-    \app\views.py
-    \app\static\content\
-    \app\static\fonts\
-    \app\static\scripts\
-    \app\templates\about.html
-    \app\templates\contact.html
-    \app\templates\index.html
-    \app\templates\layout.html
-    \app\templates\login.html
-    \app\templates\loginpartial.html
-    \DjangoWebProject\__init__.py
-    \DjangoWebProject\settings.py
-    \DjangoWebProject\urls.py
-    \DjangoWebProject\wsgi.py
+```
+\app\__init__.py
+\app\forms.py
+\app\models.py
+\app\tests.py
+\app\views.py
+\app\static\content\
+\app\static\fonts\
+\app\static\scripts\
+\app\templates\about.html
+\app\templates\contact.html
+\app\templates\index.html
+\app\templates\layout.html
+\app\templates\login.html
+\app\templates\loginpartial.html
+\DjangoWebProject\__init__.py
+\DjangoWebProject\settings.py
+\DjangoWebProject\urls.py
+\DjangoWebProject\wsgi.py
+```
 
 应用程序的的主要来源。包含具有母版布局的 3 页（索引、关于、联系人）。静态内容和脚本包括启动、 jquery、 modernizr 和响应。
 
-    \manage.py
+```
+\manage.py
+```
 
 本地管理和开发服务器支持。使用此功能可在本地运行应用程序，同步数据库，等等。
 
-    \db.sqlite3
+```
+\db.sqlite3
+```
 
 默认数据库。包括应用程序运行所必需的表，但不包含任何用户（同步数据库以创建用户）。
 
-    \DjangoWebProject.pyproj
-    \DjangoWebProject.sln
+```
+\DjangoWebProject.pyproj
+\DjangoWebProject.sln
+```
 
 用于 [Python Tools for Visual Studio] 的项目文件。
 
-    \ptvs_virtualenv_proxy.py
+```
+\ptvs_virtualenv_proxy.py
+```
 
 虚拟环境的 IIS 代理和 PTVS 远程调试支持。
 
-    \requirements.txt
+```
+\requirements.txt
+```
 
 此应用程序所需的外部软件包。部署脚本将对在此文件中列出的包进行 pip 安装。
 
-    \web.2.7.config
-    \web.3.4.config
+```
+\web.2.7.config
+\web.3.4.config
+```
 
 IIS 配置文件。部署脚本将使用适当的 web.x.y.config，并将其复制为 web.config。
 
@@ -125,11 +139,15 @@ IIS 配置文件。部署脚本将使用适当的 web.x.y.config，并将其复�
 
 某些文件存在于服务器上，但不会添加到 git 存储库。这些是由部署脚本创建的。
 
-    \web.config
+```
+\web.config
+```
 
 IIS 配置文件。每次部署中从 web.x.y.config 创建
 
-    \env\
+```
+\env\
+```
 
 Python 虚拟环境。如果在 Web 应用上尚不存在兼容的虚拟环境，请在部署期间创建。在 requirements.txt 中列出的软件包是 pip 安装的，但如果已安装软件包，pip 将跳过安装。
 
@@ -169,7 +187,9 @@ Python 虚拟环境。如果在 Web 应用上尚不存在兼容的虚拟环境�
 
 通过命令行从项目文件夹运行此命令：
 
-    env\scripts\python manage.py createsuperuser
+```
+env\scripts\python manage.py createsuperuser
+```
 
 按提示设置用户名、密码等。
 
@@ -221,9 +241,11 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 首先，使用在 Azure 门户预览中提供的 URL 来克隆存储库，并将 Azure 存储库添加为远程。有关详细信息，请参阅[从本地 Git 部署到 Azure 应用服务](./app-service-deploy-local-git.md)。
 
-    git clone <repo-url>
-    cd <repo-folder>
-    git remote add azure <repo-url>
+```
+git clone <repo-url>
+cd <repo-folder>
+git remote add azure <repo-url>
+```
 
 ### 创建虚拟环境
 
@@ -233,15 +255,21 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 对于 Python 2.7：
 
-    c:\python27\python.exe -m virtualenv env
+```
+c:\python27\python.exe -m virtualenv env
+```
 
 对于 Python 3.4：
 
-    c:\python34\python.exe -m venv env
+```
+c:\python34\python.exe -m venv env
+```
 
 安装应用程序所需的任何外部软件包。可以使用该存储库的根处 requirements.txt 文件在虚拟环境中安装软件包：
 
-    env\scripts\pip install -r requirements.txt
+```
+env\scripts\pip install -r requirements.txt
+```
 
 ### 创建超级用户
 
@@ -249,7 +277,9 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 通过命令行从项目文件夹运行此命令：
 
-    env\scripts\python manage.py createsuperuser
+```
+env\scripts\python manage.py createsuperuser
+```
 
 按提示设置用户名、密码等。
 
@@ -257,7 +287,9 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 你可以使用以下命令在开发服务器下启用应用程序：
 
-    env\scripts\python manage.py runserver
+```
+env\scripts\python manage.py runserver
+```
 
 控制台将显示服务器侦听的 URL 和端口：
 
@@ -273,8 +305,10 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 测试更改后，将其提交到 Git 存储库：
 
-    git add <modified-file>
-    git commit -m "<commit-comment>"
+```
+git add <modified-file>
+git commit -m "<commit-comment>"
+```
 
 ### 安装多个软件包
 
@@ -282,22 +316,30 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 你可以使用 pip 安装其他软件包。例如，要安装 Azure SDK for Python（使你可以访问 Azure 存储、 服务总线和其他 Azure 服务），请输入：
 
-    env\scripts\pip install azure
+```
+env\scripts\pip install azure
+```
 
 请确保更新 requirements.txt：
 
-    env\scripts\pip freeze > requirements.txt
+```
+env\scripts\pip freeze > requirements.txt
+```
 
 提交更改：
 
-    git add requirements.txt
-    git commit -m "Added azure package"
+```
+git add requirements.txt
+git commit -m "Added azure package"
+```
 
 ### 部署到 Azure
 
 要触发部署，请将更改推送到 Azure：
 
-    git push azure master
+```
+git push azure master
+```
 
 你将看到部署脚本的输出，包括虚拟环境创建，安装软件包，创建 web.config。
 
@@ -309,9 +351,11 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 首先，使用在 Azure 门户预览中提供的 URL 来克隆存储库，并将 Azure 存储库添加为远程。有关详细信息，请参阅[从本地 Git 部署到 Azure 应用服务](./app-service-deploy-local-git.md)。
 
-    git clone <repo-url>
-    cd <repo-folder>
-    git remote add azure <repo-url>
+```
+git clone <repo-url>
+cd <repo-folder>
+git remote add azure <repo-url>
+```
 
 ### 创建虚拟环境
 
@@ -321,19 +365,27 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 对于 Python 2.7：
 
-    python -m virtualenv env
+```
+python -m virtualenv env
+```
 
 对于 Python 3.4：
 
-    python -m venv env
+```
+python -m venv env
+```
 
 或
 
-    pyvenv env
+```
+pyvenv env
+```
 
 安装应用程序所需的任何外部软件包。可以使用该存储库的根处 requirements.txt 文件在虚拟环境中安装软件包：
 
-    env/bin/pip install -r requirements.txt
+```
+env/bin/pip install -r requirements.txt
+```
 
 ### 创建超级用户
 
@@ -341,7 +393,9 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 通过命令行从项目文件夹运行此命令：
 
-    env/bin/python manage.py createsuperuser
+```
+env/bin/python manage.py createsuperuser
+```
 
 按提示设置用户名、密码等。
 
@@ -349,7 +403,9 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 你可以使用以下命令在开发服务器下启用应用程序：
 
-    env/bin/python manage.py runserver
+```
+env/bin/python manage.py runserver
+```
 
 控制台将显示服务器侦听的 URL 和端口：
 
@@ -365,8 +421,10 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 测试更改后，将其提交到 Git 存储库：
 
-    git add <modified-file>
-    git commit -m "<commit-comment>"
+```
+git add <modified-file>
+git commit -m "<commit-comment>"
+```
 
 ### 安装多个软件包
 
@@ -374,22 +432,30 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 你可以使用 pip 安装其他软件包。例如，要安装 Azure SDK for Python（使你可以访问 Azure 存储、 服务总线和其他 Azure 服务），请输入：
 
-    env/bin/pip install azure
+```
+env/bin/pip install azure
+```
 
 请确保更新 requirements.txt：
 
-    env/bin/pip freeze > requirements.txt
+```
+env/bin/pip freeze > requirements.txt
+```
 
 提交更改：
 
-    git add requirements.txt
-    git commit -m "Added azure package"
+```
+git add requirements.txt
+git commit -m "Added azure package"
+```
 
 ### 部署到 Azure
 
 要触发部署，请将更改推送到 Azure：
 
-    git push azure master
+```
+git push azure master
+```
 
 你将看到部署脚本的输出，包括虚拟环境创建，安装软件包，创建 web.config。
 
@@ -417,11 +483,15 @@ Django 有收集静态文件的概念。这将从原始位置取用所有静态�
 
 如果你想要跳过为 Django 应用程序收集静态文件的操作：
 
-    \.skipDjango
+```
+\.skipDjango
+```
 
 然后，你将需要在本地计算机上手动收集：
 
-    env\scripts\python manage.py collectstatic
+```
+env\scripts\python manage.py collectstatic
+```
 
 然后，从 `.gitignore` 中删除 `\static` 文件夹，并将其添加到 Git 存储库。
 
@@ -433,19 +503,25 @@ Django 有收集静态文件的概念。这将从原始位置取用所有静态�
 
 若要禁用调试模式：
 
-    DEBUG = False
+```
+DEBUG = False
+```
 
 禁用调试后，需要更新 `ALLOWED_HOSTS` 的值，使之包括 Azure 主机名。例如：
 
-    ALLOWED_HOSTS = (
-        'pythonapp.chinacloudsites.cn',
-    )
+```
+ALLOWED_HOSTS = (
+    'pythonapp.chinacloudsites.cn',
+)
+```
 
 或者启用以下任一项：
 
-    ALLOWED_HOSTS = (
-        '*',
-    )
+```
+ALLOWED_HOSTS = (
+    '*',
+)
+```
 
 在实践中，可能需要做一些更复杂的事来处理调试和发布模式间的切换以及获取主机名。
 

@@ -37,20 +37,26 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
 
     若要创建或更新服务器级别防火墙规则，请使用以下内容执行 PUT 方法：
 
-        https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
+    ```
+    https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
+    ```
 
     请求正文
 
-        {
-         "properties": { 
-            "startIpAddress": "{start-ip-address}", 
-            "endIpAddress": "{end-ip-address}
-            }
-        } 
+    ```
+    {
+     "properties": { 
+        "startIpAddress": "{start-ip-address}", 
+        "endIpAddress": "{end-ip-address}
+        }
+    } 
+    ```
 
     若要删除现有服务器级别防火墙规则，请使用以下内容执行 DELETE 方法：
 
-        https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
+    ```
+    https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
+    ```
 
 ##<a name="manage-firewall-rules-using-the-service-management-rest-api"></a> 使用 REST API 管理防火墙规则
 

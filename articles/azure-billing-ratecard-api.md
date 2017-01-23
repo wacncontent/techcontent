@@ -52,59 +52,63 @@ GET | `https://https://management.chinacloudapi.cn/subscriptions/{subscription-I
 
 下面的例子显示了“随收随付”提供项查询，其中**提供项持久ID = MS-MC-AZR-0033P，用于中国地区，价格用人民币表示，元数据面向美国英语（en-US）地域文化。**
 
-    https://management.chinacloudapi.cn/subscriptions/{subscription-Id}/providers/Microsoft.Commerce/RateCard?api-version=2015-06-01-preview&$filter=OfferDurableId eq 'MS-MC-AZR-0033P' and Currency eq 'CNY' and Locale eq 'en-US' and RegionInfoeq 'CN'
+```
+https://management.chinacloudapi.cn/subscriptions/{subscription-Id}/providers/Microsoft.Commerce/RateCard?api-version=2015-06-01-preview&$filter=OfferDurableId eq 'MS-MC-AZR-0033P' and Currency eq 'CNY' and Locale eq 'en-US' and RegionInfoeq 'CN'
+```
 
 JSON
 
+```
+{
+"OfferTerms": [],
+"Meters": [
     {
-    "OfferTerms": [],
-    "Meters": [
-        {
-            "MeterId": "1822fcc4-6059-4cbb-a132-54a187aaac46",
-            "MeterName": "Compute Hours",
-            "MeterCategory": "Virtual Machines",
-            "MeterSubCategory": "Basic_D6 VM (Non-Windows)",
-            "Unit": "Hours",
-            "MeterTags": [],
-            "MeterRates": {
-                "0": 3.136
-            },
-            "EffectiveDate": "2015-02-01T00:00:00Z",
-            "IncludedQuantity": 0.0
+        "MeterId": "1822fcc4-6059-4cbb-a132-54a187aaac46",
+        "MeterName": "Compute Hours",
+        "MeterCategory": "Virtual Machines",
+        "MeterSubCategory": "Basic_D6 VM (Non-Windows)",
+        "Unit": "Hours",
+        "MeterTags": [],
+        "MeterRates": {
+            "0": 3.136
         },
-        {
-            "MeterId": "3c5324ad-eb8c-44c6-af9a-6741ae75fc90",
-            "MeterName": "Data Transfer Out at 500 Mbps (GB)",
-            "MeterCategory": "Networking",
-            "MeterSubCategory": "ExpressRoute (IXP)",
-            "Unit": "GB",
-            "MeterTags": [],
-            "MeterRates": {
-                "0": 0.1
-            },
-            "EffectiveDate": "2014-08-01T00:00:00Z",
-            "IncludedQuantity": 2048.0
+        "EffectiveDate": "2015-02-01T00:00:00Z",
+        "IncludedQuantity": 0.0
+    },
+    {
+        "MeterId": "3c5324ad-eb8c-44c6-af9a-6741ae75fc90",
+        "MeterName": "Data Transfer Out at 500 Mbps (GB)",
+        "MeterCategory": "Networking",
+        "MeterSubCategory": "ExpressRoute (IXP)",
+        "Unit": "GB",
+        "MeterTags": [],
+        "MeterRates": {
+            "0": 0.1
         },
+        "EffectiveDate": "2014-08-01T00:00:00Z",
+        "IncludedQuantity": 2048.0
+    },
 
-        {
-            "MeterId": "9ee077eb-c902-46ef-b7f9-2caeade852e0",
-            "MeterName": "Compute Hours",
-            "MeterCategory": "Cloud Services",
-            "MeterSubCategory": "A6 Cloud Services",
-            "Unit": "Hours",
-            "MeterTags": [],
-            "MeterRates": {
-            "0": 0.71
-            },
-            "EffectiveDate": "2013-12-01T00:00:00Z",
-            "IncludedQuantity": 0.0
+    {
+        "MeterId": "9ee077eb-c902-46ef-b7f9-2caeade852e0",
+        "MeterName": "Compute Hours",
+        "MeterCategory": "Cloud Services",
+        "MeterSubCategory": "A6 Cloud Services",
+        "Unit": "Hours",
+        "MeterTags": [],
+        "MeterRates": {
+        "0": 0.71
         },
-    …   
-    ]
-    "Currency": "CNY",
-    "Locale": "en-US",
-    "IsTaxIncluded": false,
-        }
+        "EffectiveDate": "2013-12-01T00:00:00Z",
+        "IncludedQuantity": 0.0
+    },
+…   
+]
+"Currency": "CNY",
+"Locale": "en-US",
+"IsTaxIncluded": false,
+    }
+```
 
 ## JSON元素定义
 

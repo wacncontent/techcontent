@@ -51,27 +51,29 @@ ms.author: adegeo
 
 1.  在你的开发环境中，打开服务定义文件 (CSDEF)，在 **WebRole** 节中添加 **Certificates** 节，并包含以下证书（和中间证书）的相关信息：
 
-        <WebRole name="CertificateTesting" vmsize="Small">
-        ...
-            <Certificates>
-                <Certificate name="SampleCertificate" 
-                             storeLocation="LocalMachine" 
-                             storeName="My"
-                             permissionLevel="limitedOrElevated" />
-                <!-- IMPORTANT! Unless your certificate is either
-                self-signed or signed directly by the CA root, you
-                must include all the intermediate certificates
-                here. You must list them here, even if they are
-                not bound to any endpoints. Failing to list any of
-                the intermediate certificates may cause hard-to-reproduce
-                interoperability problems on some clients.-->
-                <Certificate name="CAForSampleCertificate"
-                             storeLocation="LocalMachine"
-                             storeName="CA"
-                             permissionLevel="limitedOrElevated" />
-            </Certificates>
-        ...
-        </WebRole>
+    ```
+    <WebRole name="CertificateTesting" vmsize="Small">
+    ...
+        <Certificates>
+            <Certificate name="SampleCertificate" 
+                         storeLocation="LocalMachine" 
+                         storeName="My"
+                         permissionLevel="limitedOrElevated" />
+            <!-- IMPORTANT! Unless your certificate is either
+            self-signed or signed directly by the CA root, you
+            must include all the intermediate certificates
+            here. You must list them here, even if they are
+            not bound to any endpoints. Failing to list any of
+            the intermediate certificates may cause hard-to-reproduce
+            interoperability problems on some clients.-->
+            <Certificate name="CAForSampleCertificate"
+                         storeLocation="LocalMachine"
+                         storeName="CA"
+                         permissionLevel="limitedOrElevated" />
+        </Certificates>
+    ...
+    </WebRole>
+    ```
 
     **Certificates** 节定义了我们的证书的名称、其位置及其所在存储的名称。
 
@@ -84,45 +86,51 @@ ms.author: adegeo
 
 2.  在你的服务定义文件中，在** Endpoints** 节中添加 **InputEndpoint** 元素以启用 HTTPS：
 
-        <WebRole name="CertificateTesting" vmsize="Small">
-        ...
-            <Endpoints>
-                <InputEndpoint name="HttpsIn" protocol="https" port="443" 
-                    certificate="SampleCertificate" />
-            </Endpoints>
-        ...
-        </WebRole>
+    ```
+    <WebRole name="CertificateTesting" vmsize="Small">
+    ...
+        <Endpoints>
+            <InputEndpoint name="HttpsIn" protocol="https" port="443" 
+                certificate="SampleCertificate" />
+        </Endpoints>
+    ...
+    </WebRole>
+    ```
 
 3.  在你的服务定义文件中，在 **Sites** 节中添加 **Binding** 元素。此节添加 HTTPS 绑定以将终结点映射到您的网站：
 
-        <WebRole name="CertificateTesting" vmsize="Small">
-        ...
-            <Sites>
-                <Site name="Web">
-                    <Bindings>
-                        <Binding name="HttpsIn" endpointName="HttpsIn" />
-                    </Bindings>
-                </Site>
-            </Sites>
-        ...
-        </WebRole>
+    ```
+    <WebRole name="CertificateTesting" vmsize="Small">
+    ...
+        <Sites>
+            <Site name="Web">
+                <Bindings>
+                    <Binding name="HttpsIn" endpointName="HttpsIn" />
+                </Bindings>
+            </Site>
+        </Sites>
+    ...
+    </WebRole>
+    ```
 
     对服务定义文件进行的所有必需更改已完成，但还需要将证书信息添加到服务配置文件中。
 
 4.  在你的服务配置文件 (CSCFG) ServiceConfiguration.Cloud.cscfg 中，在** Role** 节中添加 **Certificates **节，并将下面显示的示例指纹值替换为你的证书的指纹值：
 
-        <Role name="Deployment">
-        ...
-            <Certificates>
-                <Certificate name="SampleCertificate" 
-                    thumbprint="9427befa18ec6865a9ebdc79d4c38de50e6316ff" 
-                    thumbprintAlgorithm="sha1" />
-                <Certificate name="CAForSampleCertificate"
-                    thumbprint="79d4c38de50e6316ff9427befa18ec6865a9ebdc" 
-                    thumbprintAlgorithm="sha1" />
-            </Certificates>
-        ...
-        </Role>
+    ```
+    <Role name="Deployment">
+    ...
+        <Certificates>
+            <Certificate name="SampleCertificate" 
+                thumbprint="9427befa18ec6865a9ebdc79d4c38de50e6316ff" 
+                thumbprintAlgorithm="sha1" />
+            <Certificate name="CAForSampleCertificate"
+                thumbprint="79d4c38de50e6316ff9427befa18ec6865a9ebdc" 
+                thumbprintAlgorithm="sha1" />
+        </Certificates>
+    ...
+    </Role>
+    ```
 
 （上面的示例将 **sha1** 用于指纹算法。请为证书的指纹算法指定适当的值。）
 

@@ -40,20 +40,24 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 
 下面显示了 App.config 文件示例：
 
-        <?xml version="1.0" encoding="utf-8" ?>
-        <configuration>
-              <appSettings>
-                <add key="Microsoft.ServiceBus.ConnectionString"
-                        value="Endpoint=sb://[namespace].servicebus.chinacloudapi.cn;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp" />
-                    <add key="EntityName" value="queue1" />
-            </appSettings>
-        </configuration>
+```
+    <?xml version="1.0" encoding="utf-8" ?>
+    <configuration>
+          <appSettings>
+            <add key="Microsoft.ServiceBus.ConnectionString"
+                    value="Endpoint=sb://[namespace].servicebus.chinacloudapi.cn;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp" />
+                <add key="EntityName" value="queue1" />
+        </appSettings>
+    </configuration>
+```
 
 ### 配置服务总线连接字符串
 
 **Microsoft.ServiceBus.ConnectionString** 设置的值是用于配置服务总线连接的服务总线连接字符串。其格式如下所示：
 
-        Endpoint=sb://[namespace].servicebus.chinacloudapi.cn;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp
+```
+    Endpoint=sb://[namespace].servicebus.chinacloudapi.cn;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp
+```
 
 其中 `[namespace]` 和 `[SAS key]` 是从 [Azure 经典管理门户][]获取的。有关详细信息，请参阅 [如何使用服务总线队列][]。
 
@@ -67,147 +71,151 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 
 以下示例向 Service Bus 队列发送消息以及从中接收消息。
 
-        // SimpleSenderReceiver.cs
+```
+    // SimpleSenderReceiver.cs
 
-        using System;
-        using System.Configuration;
-        using System.Threading;
-        using Microsoft.ServiceBus.Messaging;
+    using System;
+    using System.Configuration;
+    using System.Threading;
+    using Microsoft.ServiceBus.Messaging;
 
-        namespace SimpleSenderReceiver
+    namespace SimpleSenderReceiver
+    {
+        class SimpleSenderReceiver
         {
-            class SimpleSenderReceiver
-            {
-                private static string connectionString;
-                private static string entityName;
-                private static Boolean runReceiver = true;
-                private MessagingFactory factory;
-                private MessageSender sender;
-                private MessageReceiver receiver;
-                private MessageListener messageListener;
-                private Thread listenerThread;
+            private static string connectionString;
+            private static string entityName;
+            private static Boolean runReceiver = true;
+            private MessagingFactory factory;
+            private MessageSender sender;
+            private MessageReceiver receiver;
+            private MessageListener messageListener;
+            private Thread listenerThread;
 
-                static void Main(string[] args)
+            static void Main(string[] args)
+            {
+                try
+                {
+                    if ((args.Length > 0) && args[0].ToLower().Equals("sendonly"))
+                        runReceiver = false;
+
+                    string ConnectionStringKey = "Microsoft.ServiceBus.ConnectionString";
+                    string entityNameKey = "EntityName";
+                    entityName = ConfigurationManager.AppSettings[entityNameKey];
+                    connectionString = ConfigurationManager.AppSettings[ConnectionStringKey];
+                    SimpleSenderReceiver simpleSenderReceiver = new SimpleSenderReceiver();
+
+                    Console.WriteLine("Press [enter] to send a message. " +
+                        "Type 'exit' + [enter] to quit.");
+
+                    while (true)
+                    {
+                        string s = Console.ReadLine();
+                        if (s.ToLower().Equals("exit"))
+                        {
+                            simpleSenderReceiver.Close();
+                            System.Environment.Exit(0);
+                        }
+                        else
+                            simpleSenderReceiver.SendMessage();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Caught exception: " + e.Message);
+                }
+            }
+
+            public SimpleSenderReceiver()
+            {
+                factory = MessagingFactory.CreateFromConnectionString(connectionString);
+                sender = factory.CreateMessageSender(entityName);
+
+                if (runReceiver)
+                {
+                    receiver = factory.CreateMessageReceiver(entityName);
+                    messageListener = new MessageListener(receiver);
+                    listenerThread = new Thread(messageListener.Listen);
+                    listenerThread.Start();
+                }
+            }
+
+            public void Close()
+            {
+                messageListener.RequestStop();
+                listenerThread.Join();
+                factory.Close();
+            }
+
+            private void SendMessage()
+            {
+                BrokeredMessage message = new BrokeredMessage("Test AMQP message from .NET");
+                sender.Send(message);
+                Console.WriteLine("Sent message with MessageID = " 
+                    + message.MessageId);
+            }
+
+        }
+
+        public class MessageListener
+        {
+            private MessageReceiver messageReceiver;
+            public MessageListener(MessageReceiver receiver)
+            {
+                messageReceiver = receiver;
+            }
+
+            public void Listen()
+            {
+                while (!_shouldStop)
                 {
                     try
                     {
-                        if ((args.Length > 0) && args[0].ToLower().Equals("sendonly"))
-                            runReceiver = false;
-
-                        string ConnectionStringKey = "Microsoft.ServiceBus.ConnectionString";
-                        string entityNameKey = "EntityName";
-                        entityName = ConfigurationManager.AppSettings[entityNameKey];
-                        connectionString = ConfigurationManager.AppSettings[ConnectionStringKey];
-                        SimpleSenderReceiver simpleSenderReceiver = new SimpleSenderReceiver();
-
-                        Console.WriteLine("Press [enter] to send a message. " +
-                            "Type 'exit' + [enter] to quit.");
-
-                        while (true)
+                        BrokeredMessage message = 
+                            messageReceiver.Receive(new TimeSpan(0, 0, 10));
+                        if (message != null)
                         {
-                            string s = Console.ReadLine();
-                            if (s.ToLower().Equals("exit"))
-                            {
-                                simpleSenderReceiver.Close();
-                                System.Environment.Exit(0);
-                            }
-                            else
-                                simpleSenderReceiver.SendMessage();
+                            Console.WriteLine("Received message with MessageID = " + 
+                                message.MessageId);
+                            message.Complete();
                         }
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine("Caught exception: " + e.Message);
+                        break;
                     }
                 }
-
-                public SimpleSenderReceiver()
-                {
-                    factory = MessagingFactory.CreateFromConnectionString(connectionString);
-                    sender = factory.CreateMessageSender(entityName);
-
-                    if (runReceiver)
-                    {
-                        receiver = factory.CreateMessageReceiver(entityName);
-                        messageListener = new MessageListener(receiver);
-                        listenerThread = new Thread(messageListener.Listen);
-                        listenerThread.Start();
-                    }
-                }
-
-                public void Close()
-                {
-                    messageListener.RequestStop();
-                    listenerThread.Join();
-                    factory.Close();
-                }
-
-                private void SendMessage()
-                {
-                    BrokeredMessage message = new BrokeredMessage("Test AMQP message from .NET");
-                    sender.Send(message);
-                    Console.WriteLine("Sent message with MessageID = " 
-                        + message.MessageId);
-                }
-
             }
 
-            public class MessageListener
+            public void RequestStop()
             {
-                private MessageReceiver messageReceiver;
-                public MessageListener(MessageReceiver receiver)
-                {
-                    messageReceiver = receiver;
-                }
-
-                public void Listen()
-                {
-                    while (!_shouldStop)
-                    {
-                        try
-                        {
-                            BrokeredMessage message = 
-                                messageReceiver.Receive(new TimeSpan(0, 0, 10));
-                            if (message != null)
-                            {
-                                Console.WriteLine("Received message with MessageID = " + 
-                                    message.MessageId);
-                                message.Complete();
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Caught exception: " + e.Message);
-                            break;
-                        }
-                    }
-                }
-
-                public void RequestStop()
-                {
-                    _shouldStop = true;
-                }
-
-                private volatile bool _shouldStop;
+                _shouldStop = true;
             }
+
+            private volatile bool _shouldStop;
         }
+    }
+```
 
 ### 运行应用程序
 
 运行应用程序将产生以下形式的输出：
 
-        > SimpleSenderReceiver.exe
-        Press [enter] to send a message. Type 'exit' + [enter] to quit.
+```
+    > SimpleSenderReceiver.exe
+    Press [enter] to send a message. Type 'exit' + [enter] to quit.
 
-        Sent message with MessageID = fb7f5d3733704e4ba4bd55f759d9d7cf
-        Received message with MessageID = fb7f5d3733704e4ba4bd55f759d9d7cf
+    Sent message with MessageID = fb7f5d3733704e4ba4bd55f759d9d7cf
+    Received message with MessageID = fb7f5d3733704e4ba4bd55f759d9d7cf
 
-        Sent message with MessageID = d00e2e088f06416da7956b58310f7a06
-        Received message with MessageID = d00e2e088f06416da7956b58310f7a06
+    Sent message with MessageID = d00e2e088f06416da7956b58310f7a06
+    Received message with MessageID = d00e2e088f06416da7956b58310f7a06
 
-        Received message with MessageID = f27f79ec124548c196fd0db8544bca49
-        Sent message with MessageID = f27f79ec124548c196fd0db8544bca49
-        exit
+    Received message with MessageID = f27f79ec124548c196fd0db8544bca49
+    Sent message with MessageID = f27f79ec124548c196fd0db8544bca49
+    exit
+```
 
 ## JMS 和 .NET 之间的跨平台消息传送
 
@@ -228,21 +236,25 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 
 ### 从 JMS 应用程序输出
 
-        > java SimpleSenderReceiver sendonly
-        Press [enter] to send a message. Type 'exit' + [enter] to quit.
-        Sent message with JMSMessageID = ID:4364096528752411591
-        Sent message with JMSMessageID = ID:459252991689389983
-        Sent message with JMSMessageID = ID:1565011046230456854
-        exit
+```
+    > java SimpleSenderReceiver sendonly
+    Press [enter] to send a message. Type 'exit' + [enter] to quit.
+    Sent message with JMSMessageID = ID:4364096528752411591
+    Sent message with JMSMessageID = ID:459252991689389983
+    Sent message with JMSMessageID = ID:1565011046230456854
+    exit
+```
 
 ### 从 .NET 应用程序输出
 
-        > SimpleSenderReceiver.exe	
-        Press [enter] to send a message. Type 'exit' + [enter] to quit.
-        Received message with MessageID = 4364096528752411591
-        Received message with MessageID = 459252991689389983
-        Received message with MessageID = 1565011046230456854
-        exit
+```
+    > SimpleSenderReceiver.exe	
+    Press [enter] to send a message. Type 'exit' + [enter] to quit.
+    Received message with MessageID = 4364096528752411591
+    Received message with MessageID = 459252991689389983
+    Received message with MessageID = 1565011046230456854
+    exit
+```
 
 ## .NET 到 JMS
 
@@ -255,21 +267,25 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 
 #### 从 .NET 应用程序输出
 
-        > SimpleSenderReceiver.exe sendonly
-        Press [enter] to send a message. Type 'exit' + [enter] to quit.
-        Sent message with MessageID = d64e681a310a48a1ae0ce7b017bf1cf3	
-        Sent message with MessageID = 98a39664995b4f74b32e2a0ecccc46bb
-        Sent message with MessageID = acbca67f03c346de9b7893026f97ddeb
-        exit
+```
+    > SimpleSenderReceiver.exe sendonly
+    Press [enter] to send a message. Type 'exit' + [enter] to quit.
+    Sent message with MessageID = d64e681a310a48a1ae0ce7b017bf1cf3	
+    Sent message with MessageID = 98a39664995b4f74b32e2a0ecccc46bb
+    Sent message with MessageID = acbca67f03c346de9b7893026f97ddeb
+    exit
+```
 
 #### 从 JMS 应用程序输出
 
-        > java SimpleSenderReceiver	
-        Press [enter] to send a message. Type 'exit' + [enter] to quit.
-        Received message with JMSMessageID = ID:d64e681a310a48a1ae0ce7b017bf1cf3
-        Received message with JMSMessageID = ID:98a39664995b4f74b32e2a0ecccc46bb
-        Received message with JMSMessageID = ID:acbca67f03c346de9b7893026f97ddeb
-        exit
+```
+    > java SimpleSenderReceiver	
+    Press [enter] to send a message. Type 'exit' + [enter] to quit.
+    Received message with JMSMessageID = ID:d64e681a310a48a1ae0ce7b017bf1cf3
+    Received message with JMSMessageID = ID:98a39664995b4f74b32e2a0ecccc46bb
+    Received message with JMSMessageID = ID:acbca67f03c346de9b7893026f97ddeb
+    exit
+```
 
 ## <a name="unsupported-features-and-restrictions"></a>不支持的功能和限制
 

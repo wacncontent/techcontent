@@ -30,10 +30,12 @@ wacn.date: 11/10/2016
 
 3. 打开站点web.config文件，在aspNetCore节中，将processPath改为新上传的dotnet.exe路径并保存。
 
-          <system.webServer>
-            <handlers>
-              <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
-            </handlers>
-            <aspNetCore processPath="d:\home\site\wwwroot\dotnet\dotnet.exe" arguments=".\WebApplication1.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" forwardWindowsAuthToken="false" />
-          </system.webServer>
+    ```
+      <system.webServer>
+        <handlers>
+          <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+        </handlers>
+        <aspNetCore processPath="d:\home\site\wwwroot\dotnet\dotnet.exe" arguments=".\WebApplication1.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" forwardWindowsAuthToken="false" />
+      </system.webServer>
+    ```
 4. 重启站点。

@@ -151,17 +151,23 @@ ms.author: raynew
 1. 将提供程序安装文件和注册密钥下载到某个文件夹中。例如 C:\\ASR。
 2. 以管理员身份打开命令提示符并键入：
 
-        C:\Windows\System32> CD C:\ASR
-        C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
+    C:\Windows\System32> CD C:\ASR
+    C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
 
 3. 然后运行以下命令以安装提供程序：
 
-        C:\ASR> setupdr.exe /i
+    ```
+    C:\ASR> setupdr.exe /i
+    ```
 
 4. 运行以下命令以完成注册：
 
-        CD C:\Program Files\Microsoft Azure Site Recovery Provider
-        C:\Program Files\Microsoft Azure Site Recovery Provider> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>         
+    ```
+    CD C:\Program Files\Microsoft Azure Site Recovery Provider
+    C:\Program Files\Microsoft Azure Site Recovery Provider> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>         
+    ```
 
 其中的参数包括：
 

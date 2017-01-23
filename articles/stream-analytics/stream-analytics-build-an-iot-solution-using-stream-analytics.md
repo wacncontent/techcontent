@@ -311,9 +311,11 @@ PowerShell 脚本使用 TollApp 示例应用程序自动开始发送事件。你
 
 让我们看看能回答此问题的 Azure 流分析查询：
 
-    SELECT TollId, System.Timestamp AS WindowEnd, COUNT(*) AS Count
-    FROM EntryStream TIMESTAMP BY EntryTime
-    GROUP BY TUMBLINGWINDOW(minute, 3), TollId
+```
+SELECT TollId, System.Timestamp AS WindowEnd, COUNT(*) AS Count
+FROM EntryStream TIMESTAMP BY EntryTime
+GROUP BY TUMBLINGWINDOW(minute, 3), TollId
+```
 
 如你所见，Azure 流分析会使用类似 SQL 的查询语言，并添加几个扩展来指定与时间相关的查询方面。
 
@@ -351,11 +353,13 @@ PowerShell 脚本使用 TollApp 示例应用程序自动开始发送事件。你
 
 若要查找总时间，需要联接 EntryTime 流和 ExitTime 流。需要联接 TollId 和 LicencePlate 列中的流。**JOIN** 运算符要求指定弹性时间，说明联接事件之间可接受的时间差。使用 **DATEDIFF** 函数来指定事件之间的时间差不能超过 15 分钟。还会将 **DATEDIFF** 函数应用到出口和入口时间，以计算车辆通过收费站所需的实际时间。请注意在 **SELECT** 语句中（而非在 **JOIN** 条件中）使用 **DATEDIFF** 时，其使用方式的差异。
 
-    SELECT EntryStream.TollId, EntryStream.EntryTime, ExitStream.ExitTime, EntryStream.LicensePlate, DATEDIFF (minute , EntryStream.EntryTime, ExitStream.ExitTime) AS DurationInMinutes
-    FROM EntryStream TIMESTAMP BY EntryTime
-    JOIN ExitStream TIMESTAMP BY ExitTime
-    ON (EntryStream.TollId= ExitStream.TollId AND EntryStream.LicensePlate = ExitStream.LicensePlate)
-    AND DATEDIFF (minute, EntryStream, ExitStream ) BETWEEN 0 AND 15
+```
+SELECT EntryStream.TollId, EntryStream.EntryTime, ExitStream.ExitTime, EntryStream.LicensePlate, DATEDIFF (minute , EntryStream.EntryTime, ExitStream.ExitTime) AS DurationInMinutes
+FROM EntryStream TIMESTAMP BY EntryTime
+JOIN ExitStream TIMESTAMP BY ExitTime
+ON (EntryStream.TollId= ExitStream.TollId AND EntryStream.LicensePlate = ExitStream.LicensePlate)
+AND DATEDIFF (minute, EntryStream, ExitStream ) BETWEEN 0 AND 15
+```
 
 1. 若要测试此查询，请在作业的**查询**上更新该查询。按上文输入 **EntryStream** 的方式为 **ExitStream** 添加测试文件。
 
@@ -370,11 +374,13 @@ Azure 流分析可以使用静态数据快照来与临时数据流联接。若�
 
 如果某辆商用车已向收费公司登记，则可以直接通过收费亭，而不用停车接受检查。使用商用车登记查找表来识别登记已过期的所有商用车。
 
-    SELECT EntryStream.EntryTime, EntryStream.LicensePlate, EntryStream.TollId, Registration.RegistrationId
-    FROM EntryStream TIMESTAMP BY EntryTime
-    JOIN Registration
-    ON EntryStream.LicensePlate = Registration.LicensePlate
-    WHERE Registration.Expired = '1'
+```
+SELECT EntryStream.EntryTime, EntryStream.LicensePlate, EntryStream.TollId, Registration.RegistrationId
+FROM EntryStream TIMESTAMP BY EntryTime
+JOIN Registration
+ON EntryStream.LicensePlate = Registration.LicensePlate
+WHERE Registration.Expired = '1'
+```
 
 若要使用参考数据测试查询，需要定义参考数据的输入源（已完成定义）。
 
@@ -406,9 +412,11 @@ Azure 流分析可以使用静态数据快照来与临时数据流联接。若�
 ## 扩大 Azure 流分析作业
 Azure 流分析设计为能够弹性缩放，以便处理大量数据。Azure 流分析查询可以使用 **PARTITION BY** 子句来告诉系统此步骤将会扩展。**PartitionId** 是系统添加的特殊列，它与输入（事件中心）的分区 ID 匹配。
 
-    SELECT TollId, System.Timestamp AS WindowEnd, COUNT(*)AS Count
-    FROM EntryStream TIMESTAMP BY EntryTime PARTITION BY PartitionId
-    GROUP BY TUMBLINGWINDOW(minute,3), TollId, PartitionId
+```
+SELECT TollId, System.Timestamp AS WindowEnd, COUNT(*)AS Count
+FROM EntryStream TIMESTAMP BY EntryTime PARTITION BY PartitionId
+GROUP BY TUMBLINGWINDOW(minute,3), TollId, PartitionId
+```
 
 1. 停止当前作业，更新“查询”选项卡中的查询，然后打开作业仪表板中的“设置”齿轮。单击“缩放”。
 

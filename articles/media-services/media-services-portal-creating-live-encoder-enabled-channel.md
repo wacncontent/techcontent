@@ -223,15 +223,21 @@ ms.author: juliako
 
 默认情况下，流 URL 采用以下格式，你可以用它来播放平滑流资产：
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
 
 若要生成 HLS 流 URL，请将 (format=m3u8-aapl) 附加到 URL。
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
 
 若要生成 MPEG DASH 流 URL，请将 (format=mpd-time-csf) 追加到 URL。
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
 
 有关传送内容的详细信息，请参阅[传送内容](./media-services-deliver-content-overview.md)。
 

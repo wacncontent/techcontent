@@ -40,32 +40,36 @@ ms.author: kumud
 
 检查云部署生成的 .csdef 文件的代码片段，可以看到配置的外部终结点，以便在端口 10000、10001 和 10002 上使用端口 HTTP。
 
-    <ServiceDefinition name="Tenant">
-        <WorkerRole name="FERole" vmsize="Small">
-    <Endpoints>
-        <InputEndpoint name="FE_External_Http" protocol="http" port="10000" />
-        <InputEndpoint name="FE_External_Tcp"  protocol="tcp"  port="10001" />
-        <InputEndpoint name="FE_External_Udp"  protocol="udp"  port="10002" />
+```
+<ServiceDefinition name="Tenant">
+    <WorkerRole name="FERole" vmsize="Small">
+<Endpoints>
+    <InputEndpoint name="FE_External_Http" protocol="http" port="10000" />
+    <InputEndpoint name="FE_External_Tcp"  protocol="tcp"  port="10001" />
+    <InputEndpoint name="FE_External_Udp"  protocol="udp"  port="10002" />
 
-        <InputEndpointname="HTTP_Probe" protocol="http" port="80" loadBalancerProbe="MyProbe" />
+    <InputEndpointname="HTTP_Probe" protocol="http" port="80" loadBalancerProbe="MyProbe" />
 
-        <InstanceInputEndpoint name="InstanceEP" protocol="tcp" localPort="80">
-            <AllocatePublicPortFrom>
-                <FixedPortRange min="10110" max="10120"  />
-            </AllocatePublicPortFrom>
-        </InstanceInputEndpoint>
-        <InternalEndpoint name="FE_InternalEP_Tcp" protocol="tcp" />
-    </Endpoints>
-        </WorkerRole>
-    </ServiceDefinition>
+    <InstanceInputEndpoint name="InstanceEP" protocol="tcp" localPort="80">
+        <AllocatePublicPortFrom>
+            <FixedPortRange min="10110" max="10120"  />
+        </AllocatePublicPortFrom>
+    </InstanceInputEndpoint>
+    <InternalEndpoint name="FE_InternalEP_Tcp" protocol="tcp" />
+</Endpoints>
+    </WorkerRole>
+</ServiceDefinition>
+```
 
 ## <a name="check-load-balancer-health-status-for-cloud-services"></a> 检查云服务的负载均衡器运行状况状态
 
 下面是运行状况探测器的示例：
 
-    <LoadBalancerProbes>
-        <LoadBalancerProbe name="MyProbe" protocol="http" path="Probe.aspx" intervalInSeconds="5" timeoutInSeconds="100" />
-    </LoadBalancerProbes>
+```
+<LoadBalancerProbes>
+    <LoadBalancerProbe name="MyProbe" protocol="http" path="Probe.aspx" intervalInSeconds="5" timeoutInSeconds="100" />
+</LoadBalancerProbes>
+```
 
 负载均衡器组合了终结点信息和探测器信息，以便以 `http://{DIP of VM}:80/Probe.aspx` 格式创建可用于查询服务的运行状况的 URL。
 

@@ -57,9 +57,11 @@ SQL 数据仓库每隔 4 到 8 小时创建一次联机数据仓库的快照，�
 
 若要查看上一个快照的启动时间，可对联机 SQL 数据仓库运行以下查询。
 
-    select top 1 *
-    from sys.pdw_loader_backup_runs 
-    order by run_id desc;
+```
+select top 1 *
+from sys.pdw_loader_backup_runs 
+order by run_id desc;
+```
 
 若需保留某个快照 7 天以上的时间，可将还原点还原到新的数据仓库。还原完以后，SQL 数据仓库就会开始在新的数据仓库创建快照。如果不对新的数据仓库进行更改，则快照始终为空，因此快照费用最低。也可以暂停数据库，让 SQL 数据仓库暂时不再创建快照。
 

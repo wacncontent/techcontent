@@ -9,21 +9,25 @@
 
 3. 在 Visual Studio 中，打开 IIS Express 的 applicationhost.config 文件。此文件位于您的用户配置文件目录的以下子目录中。
 
-        C:\Users<your profile name>\Documents\IISExpress\config\applicationhost.config
+    ```
+    C:\Users<your profile name>\Documents\IISExpress\config\applicationhost.config
+    ```
 
 4. 配置 IIS Express 以允许向服务发出远程连接请求。为此，请在 applicationhost.config 文件中，查找你的移动服务的站点元素，并为使用你此前记下的 IP 地址的端口添加新的 `binding` 元素。然后保存 applicationhost.config 文件。
 
     已更新的站点元素应该如下所示：
 
-        <site name="todolist_Service(1)" id="2">
-            <application path="/" applicationPool="Clr4IntegratedAppPool">
-                <virtualDirectory path="/" physicalPath="C:\Archive\GetStartedDataWP8\C#\todolist_Service" />
-            </application>
-            <bindings>
-                <binding protocol="http" bindingInformation="*:58203:localhost" />
-                <binding protocol="http" bindingInformation="*:58203:192.168.137.72" />
-            </bindings>
-        </site>
+    ```
+    <site name="todolist_Service(1)" id="2">
+        <application path="/" applicationPool="Clr4IntegratedAppPool">
+            <virtualDirectory path="/" physicalPath="C:\Archive\GetStartedDataWP8\C#\todolist_Service" />
+        </application>
+        <bindings>
+            <binding protocol="http" bindingInformation="*:58203:localhost" />
+            <binding protocol="http" bindingInformation="*:58203:192.168.137.72" />
+        </bindings>
+    </site>
+    ```
 
 5. 打开 Windows 防火墙控制台，并创建新的端口规则以允许连接到端口。有关创建新的 Windows 防火墙端口规则的详细信息，请参阅[如何添加新的 Windows 防火墙端口规则]。
 

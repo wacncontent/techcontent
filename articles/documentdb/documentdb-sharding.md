@@ -44,54 +44,62 @@ SDK 还包括两个类，通过 [HashPartitionResolver](https://msdn.microsoft.c
 
 cs
 
-    // Create some collections to partition data.
-    DocumentCollection collection1 = await client.CreateDocumentCollectionAsync(...);
-    DocumentCollection collection2 = await client.CreateDocumentCollectionAsync(...);
+```
+// Create some collections to partition data.
+DocumentCollection collection1 = await client.CreateDocumentCollectionAsync(...);
+DocumentCollection collection2 = await client.CreateDocumentCollectionAsync(...);
 
-    // Initialize a HashPartitionResolver using the "UserId" property and the two collection self-links.
-    HashPartitionResolver hashResolver = new HashPartitionResolver(
-            u => ((UserProfile)u).UserId, 
-            new string[] { collection1.SelfLink, collection2.SelfLink });
+// Initialize a HashPartitionResolver using the "UserId" property and the two collection self-links.
+HashPartitionResolver hashResolver = new HashPartitionResolver(
+        u => ((UserProfile)u).UserId, 
+        new string[] { collection1.SelfLink, collection2.SelfLink });
 
-    // Register the PartitionResolver with the database.
-    this.client.PartitionResolvers[database.SelfLink] = hashResolver;
+// Register the PartitionResolver with the database.
+this.client.PartitionResolvers[database.SelfLink] = hashResolver;
+```
 
 ## 在分区中创建文档
 注册 PartitionResolver 后，你可以直接对数据库执行创建和查询，如下所示。在此示例中，SDK 使用 PartitionResolver 来提取 UserId，并对其进行哈希运算，然后使用该值将创建操作路由到正确的集合。
 
 cs
 
-    Document johnDocument = await this.client.CreateDocumentAsync(
-        database.SelfLink, new UserProfile("J1", "@John", Region.UnitedStatesEast));
-    Document ryanDocument = await this.client.CreateDocumentAsync(
-        database.SelfLink, new UserProfile("U4", "@Ryan", Region.AsiaPacific, UserStatus.AppearAway));
+```
+Document johnDocument = await this.client.CreateDocumentAsync(
+    database.SelfLink, new UserProfile("J1", "@John", Region.UnitedStatesEast));
+Document ryanDocument = await this.client.CreateDocumentAsync(
+    database.SelfLink, new UserProfile("U4", "@Ryan", Region.AsiaPacific, UserStatus.AppearAway));
+```
 
 ## 创建针对分区的查询
 可以使用 [CreateDocumentQuery](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.linq.documentqueryable.createdocumentquery.aspx) 方法，通过传入数据库和分区键进行查询。该查询对数据库内映射到分区键的所有集合返回单个结果集。
 
 cs
 
-    // Query for John's document by ID - uses PartitionResolver to restrict the query to the partitions 
-    // containing @John. Again the query uses the database self link, and relies on the hash resolver 
-    // to route the appropriate collection.
-    var query = this.client.CreateDocumentQuery<UserProfile>(
-        database.SelfLink, null, partitionResolver.GetPartitionKey(johnProfile))
-        .Where(u => u.UserName == "@John");
-    johnProfile = query.AsEnumerable().FirstOrDefault();
+```
+// Query for John's document by ID - uses PartitionResolver to restrict the query to the partitions 
+// containing @John. Again the query uses the database self link, and relies on the hash resolver 
+// to route the appropriate collection.
+var query = this.client.CreateDocumentQuery<UserProfile>(
+    database.SelfLink, null, partitionResolver.GetPartitionKey(johnProfile))
+    .Where(u => u.UserName == "@John");
+johnProfile = query.AsEnumerable().FirstOrDefault();
+```
 
 ## 在数据库中创建对所有集合的查询
 通过跳过分区键参数，你还可以查询数据库中的所有集合并枚举结果，如下所示。
 
 cs
 
-    // Query for all "Available" users. Here since there is no partition key, the query is serially executed 
-    // across each partition/collection and returns a single result-set. 
-    query = this.client.CreateDocumentQuery<UserProfile>(database.SelfLink)
-        .Where(u => u.Status == UserStatus.Available);
-    foreach (UserProfile activeUser in query)
-    {
-        Console.WriteLine(activeUser);
-    }
+```
+// Query for all "Available" users. Here since there is no partition key, the query is serially executed 
+// across each partition/collection and returns a single result-set. 
+query = this.client.CreateDocumentQuery<UserProfile>(database.SelfLink)
+    .Where(u => u.Status == UserStatus.Available);
+foreach (UserProfile activeUser in query)
+{
+    Console.WriteLine(activeUser);
+}
+```
 
 ## 哈希分区解析程序
 使用哈希分区，将基于哈希函数的值分配分配，这可让你跨大量分区均衡分配请求和数据。这种方法通常用于对在大量不同客户端中生成或使用的数据进行分区，对存储用户配置文件、目录项和 IoT（物联网）遥测数据非常有用。集合内的 DocumentDB 服务器端分区支持也使用哈希分区。

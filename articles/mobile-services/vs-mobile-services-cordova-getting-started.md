@@ -38,35 +38,41 @@ var todoTable = mobileServiceClient.getTable('TodoItem');
 
 将新的项目插入数据表。ID（类型字符串的 GUID）将自动创建为新行的主密钥。对返回的 **Promise** 对象调用 [done](https://msdn.microsoft.com/zh-cn/library/dn802826.aspx) 方法以获取插入对象的副本并处理任何错误。
 
-    function TodoItem(text) {
-        this.text = text;
-        this.complete = false;
-    }
+```
+function TodoItem(text) {
+    this.text = text;
+    this.complete = false;
+}
 
-    var items = new Array();
-    var insertTodoItem = function (todoItem) {
-        todoTable.insert(todoItem).done(function (item) {
-            items.push(item)
-        });
-    };
+var items = new Array();
+var insertTodoItem = function (todoItem) {
+    todoTable.insert(todoItem).done(function (item) {
+        items.push(item)
+    });
+};
+```
 
 ##读取或查询表
 
 以下代码将查询表以获取所有项目，按文本字段排序。您可以添加代码以处理 success 处理程序中的查询结果。在此情况下，将更新这些项目的本地数组。
 
-    todoTable.orderBy('text')
-        .read().done(function (results) {
-            items = results.slice();
-        });
+```
+todoTable.orderBy('text')
+    .read().done(function (results) {
+        items = results.slice();
+    });
+```
 
 您可以使用 where 方法来修改查询。下面是筛选出已完成项目的示例。
 
-    todoTable.where(function () {
-            return (this.complete === false);
-        })
-        .read().done(function (results) {
-            items = results.slice();
-        });
+```
+todoTable.where(function () {
+        return (this.complete === false);
+    })
+    .read().done(function (results) {
+        items = results.slice();
+    });
+```
 
 有关您可以使用的查询的更多示例，请参阅[查询](http://msdn.microsoft.com/zh-cn/library/azure/jj613353.aspx)对象。
 
@@ -74,17 +80,21 @@ var todoTable = mobileServiceClient.getTable('TodoItem');
 
 更新数据表中的行。在此代码中，当移动服务响应时，将从列表中删除项目。对返回的 **Promise** 对象调用 [done](https://msdn.microsoft.com/zh-cn/library/dn802826.aspx) 方法以获取插入对象的副本并处理任何错误。
 
-    todoTable.update(todoItem).done(function (item) {
-        // Update a local collection of items.
-        items.splice(items.indexOf(todoItem), 1, item);
-    });
+```
+todoTable.update(todoItem).done(function (item) {
+    // Update a local collection of items.
+    items.splice(items.indexOf(todoItem), 1, item);
+});
+```
 
 ##删除表项
 
 使用 **del** 方法删除数据表中的行。对返回的 **Promise** 对象调用 [done](https://msdn.microsoft.com/zh-cn/library/dn802826.aspx) 方法以获取插入对象的副本并处理任何错误。
 
-    todoTable.del(todoItem).done(function (item) {
-        items.splice(items.indexOf(todoItem), 1);
-    });
+```
+todoTable.del(todoItem).done(function (item) {
+    items.splice(items.indexOf(todoItem), 1);
+});
+```
 
 <!---HONumber=Mooncake_0905_2016-->

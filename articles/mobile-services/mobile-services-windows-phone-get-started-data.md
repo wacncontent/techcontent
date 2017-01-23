@@ -82,58 +82,74 @@ ms.author: glenga
 
 5. 在 Visual Studio 中，打开文件 App.xaml.cs 并添加或取消注释以下 `using` 语句：
 
-           using Microsoft.WindowsAzure.MobileServices;
+    ```
+       using Microsoft.WindowsAzure.MobileServices;
+    ```
 
 6. 在同一个文件中，取消注释以下定义 **MobileService** 变量的代码，并在 **MobileServiceClient** 构造函数中依次提供移动服务的 URL 和应用程序密钥。
 
-        //public static MobileServiceClient MobileService = new MobileServiceClient( 
-        //    "AppUrl", 
-        //    "AppKey" 
-        //); 
+    ```
+    //public static MobileServiceClient MobileService = new MobileServiceClient( 
+    //    "AppUrl", 
+    //    "AppKey" 
+    //); 
+    ```
 
       这将创建用于访问移动服务的 **MobileServiceClient** 的新实例。
 
 6. 在 MainPage.cs 文件中，添加或取消注释以下 `using` 语句：
 
-           using Microsoft.WindowsAzure.MobileServices;
-        using Newtonsoft.Json;
+    ```
+       using Microsoft.WindowsAzure.MobileServices;
+    using Newtonsoft.Json;
+    ```
 
 7. 在此 DataModel 文件夹中，将 **TodoItem** 类定义替换为以下代码：
 
-        public class TodoItem
-        {
-            public string Id { get; set; }
+    ```
+    public class TodoItem
+    {
+        public string Id { get; set; }
 
-            [JsonProperty(PropertyName = "text")]
-            public string Text { get; set; }
+        [JsonProperty(PropertyName = "text")]
+        public string Text { get; set; }
 
-            [JsonProperty(PropertyName = "complete")]
-            public bool Complete { get; set; }
-        }
+        [JsonProperty(PropertyName = "complete")]
+        public bool Complete { get; set; }
+    }
+    ```
 
 7. 注释定义现有 **items** 集合的行，然后取消注释以下行：
 
-        private MobileServiceCollection<TodoItem, TodoItem> items;
-        private IMobileServiceTable<TodoItem> todoTable = 
-            App.MobileService.GetTable<TodoItem>();
+    ```
+    private MobileServiceCollection<TodoItem, TodoItem> items;
+    private IMobileServiceTable<TodoItem> todoTable = 
+        App.MobileService.GetTable<TodoItem>();
+    ```
 
        此代码将创建一个移动服务感知型绑定集合 (**items**) 和 SQL 数据库表 **TodoItem** (**todoTable**) 的代理类。
 
 7. 在 **InsertTodoItem** 方法中，删除设置 **TodoItem**.**Id** 属性的代码行，为该方法添加 **async** 修饰符，然后取消注释以下代码行：
 
-        await todoTable.InsertAsync(todoItem);
+    ```
+    await todoTable.InsertAsync(todoItem);
+    ```
 
       此代码在表中插入一个新项。
 
 8. 在 **RefreshTodoItems** 方法中，为该方法添加 **async** 修饰符，然后取消注释以下代码行：
 
-        items = await todoTable.ToCollectionAsync();
+    ```
+    items = await todoTable.ToCollectionAsync();
+    ```
 
        这将设置 todoTable 中的项目集合的绑定，其中包含从移动服务返回的所有 TodoItem 对象。
 
 9. 在 **UpdateCheckedTodoItem** 方法中，为该方法添加 **async** 修饰符，然后取消注释以下代码行：
 
-         await todoTable.UpdateAsync(item);
+    ```
+     await todoTable.UpdateAsync(item);
+    ```
 
        这会将项更新发送给移动服务。
 

@@ -62,68 +62,78 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 
 1. 使用编辑器将以下代码保存为 **hivejob.ps1**。必须将 **CLUSTERNAME** 替换为 HDInsight 群集的名称。
 
-        #Specify the values
-        $clusterName = "CLUSTERNAME"
-        $httpUsername = "HTTPUSERNAME"
-        $httpUserPassword  = "HTTPUSERPASSWORD"
-        # Login to your Azure subscription
-        # Is there an active Azure subscription?
-        $sub = Get-AzureSubscription -ErrorAction SilentlyContinue
-        if(-not($sub))
-        {
-            Add-AzureAccount -Environment AzureChinaCloud
-        }
+    ```
+    #Specify the values
+    $clusterName = "CLUSTERNAME"
+    $httpUsername = "HTTPUSERNAME"
+    $httpUserPassword  = "HTTPUSERPASSWORD"
+    # Login to your Azure subscription
+    # Is there an active Azure subscription?
+    $sub = Get-AzureSubscription -ErrorAction SilentlyContinue
+    if(-not($sub))
+    {
+        Add-AzureAccount -Environment AzureChinaCloud
+    }
 
-        #HiveQL
-        $queryString = "DROP TABLE log4jLogs;" +
-                       "CREATE EXTERNAL TABLE log4jLogs(t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ' STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';" +
-                       "SELECT * FROM log4jLogs WHERE t4 = '[ERROR]';"
+    #HiveQL
+    $queryString = "DROP TABLE log4jLogs;" +
+                   "CREATE EXTERNAL TABLE log4jLogs(t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ' STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';" +
+                   "SELECT * FROM log4jLogs WHERE t4 = '[ERROR]';"
 
-        #Create an HDInsight Hive job definition
-        $hiveJobDefinition = New-AzureHDInsightHiveJobDefinition -Query $queryString 
+    #Create an HDInsight Hive job definition
+    $hiveJobDefinition = New-AzureHDInsightHiveJobDefinition -Query $queryString 
 
-        #Submit the job to the cluster
-        Write-Host "Start the Hive job..." -ForegroundColor Green
+    #Submit the job to the cluster
+    Write-Host "Start the Hive job..." -ForegroundColor Green
 
-        $passwd = ConvertTo-SecureString $httpUserPassword -AsPlainText -Force
-        $creds = New-Object System.Management.Automation.PSCredential ($httpUsername, $passwd)
-        $hiveJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $hiveJobDefinition -Credential $creds
+    $passwd = ConvertTo-SecureString $httpUserPassword -AsPlainText -Force
+    $creds = New-Object System.Management.Automation.PSCredential ($httpUsername, $passwd)
+    $hiveJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $hiveJobDefinition -Credential $creds
 
-        #Wait for the Hive job to complete
-        Write-Host "Wait for the job to complete..." -ForegroundColor Green
-        Wait-AzureHDInsightJob -Cluster $clusterName -JobId $hiveJob.JobId -Credential $creds
+    #Wait for the Hive job to complete
+    Write-Host "Wait for the job to complete..." -ForegroundColor Green
+    Wait-AzureHDInsightJob -Cluster $clusterName -JobId $hiveJob.JobId -Credential $creds
 
-        # Print the output
-        Write-Host "Display the standard output..." -ForegroundColor Green
-        Get-AzureHDInsightJobOutput -ClusterName $clusterName -JobId $hiveJob.JobId -StandardOutput 
+    # Print the output
+    Write-Host "Display the standard output..." -ForegroundColor Green
+    Get-AzureHDInsightJobOutput -ClusterName $clusterName -JobId $hiveJob.JobId -StandardOutput 
+    ```
 
 2. 打开一个新的 **Azure PowerShell** 命令提示符。将目录更改为 **hivejob.ps1** 文件的所在位置，然后使用以下命令来运行脚本：
 
-        .\hivejob.ps1
+    ```
+    .\hivejob.ps1
+    ```
 
     脚本运行时，系统将提示你输入你的群集的 HTTPS/Admin 帐户凭据。还可能会提示你登录到 Azure 订阅。
 
 7. 在作业完成时，它应返回如下信息：
 
-        Display the standard output...
-        2012-02-03      18:35:34        SampleClass0    [ERROR] incorrect       id
-        2012-02-03      18:55:54        SampleClass1    [ERROR] incorrect       id
-        2012-02-03      19:25:27        SampleClass4    [ERROR] incorrect       id
+    ```
+    Display the standard output...
+    2012-02-03      18:35:34        SampleClass0    [ERROR] incorrect       id
+    2012-02-03      18:55:54        SampleClass1    [ERROR] incorrect       id
+    2012-02-03      19:25:27        SampleClass4    [ERROR] incorrect       id
+    ```
 
 4. 如前所述，**Invoke-Hive** 可以用来运行查询，并等待响应。使用以下命令，并将 **CLUSTERNAME** 替换为群集的名称：
 
-        Use-AzureHDInsightCluster CLUSTERNAME
-        Invoke-Hive -Query @"
-        CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) STORED AS ORC;
-        INSERT OVERWRITE TABLE errorLogs SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
-        SELECT * FROM errorLogs;
-        "@
+    ```
+    Use-AzureHDInsightCluster CLUSTERNAME
+    Invoke-Hive -Query @"
+    CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) STORED AS ORC;
+    INSERT OVERWRITE TABLE errorLogs SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
+    SELECT * FROM errorLogs;
+    "@
+    ```
 
     输出将如下所示：
 
-        2012-02-03	18:35:34	SampleClass0	[ERROR]	incorrect	id
-        2012-02-03	18:55:54	SampleClass1	[ERROR]	incorrect	id
-        2012-02-03	19:25:27	SampleClass4	[ERROR]	incorrect	id
+    ```
+    2012-02-03	18:35:34	SampleClass0	[ERROR]	incorrect	id
+    2012-02-03	18:55:54	SampleClass1	[ERROR]	incorrect	id
+    2012-02-03	19:25:27	SampleClass4	[ERROR]	incorrect	id
+    ```
 
     > [!NOTE]
     > 对于较长的 HiveQL 查询，你可以使用 Azure PowerShell **Here-Strings** cmdlet 或 HiveQL 脚本文件。以下代码段显示了如何使用 **Invoke-Hive** cmdlet 来运行 HiveQL 脚本文件。HiveQL 脚本文件必须上载到 wasbs://。
@@ -134,9 +144,11 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 
 如果在作业完成时未返回任何信息，则可能表示处理期间发生错误。若要查看此作业的错误信息，请将以下内容添加到 **hivejob.ps1** 文件的末尾，保存，然后重新运行该文件。
 
-    # Print the output of the Hive job.
-    Write-Host "Display the standard output ..." -ForegroundColor Green
-    Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $hiveJob.JobId -StandardError
+```
+# Print the output of the Hive job.
+Write-Host "Display the standard output ..." -ForegroundColor Green
+Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $hiveJob.JobId -StandardError
+```
 
 在运行作业时，这将返回写入到服务器上的 STDERR 中的信息，该信息可帮助确定该作业失败的原因。
 

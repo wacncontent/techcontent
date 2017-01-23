@@ -142,9 +142,11 @@ Azure 移动应用允许在服务中配置 Azure Active Directory 和 Microsoft 
 
 版本间的其中一个主要更改是构造函数不再需要应用程序密钥。现在只需传入移动应用的 URL。例如，在 .NET 客户端中，`MobileServiceClient` 构造函数现在是：
 
-        public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://contoso.chinacloudsites.cn", // URL of the Mobile App
-        );
+```
+    public static MobileServiceClient MobileService = new MobileServiceClient(
+        "https://contoso.chinacloudsites.cn", // URL of the Mobile App
+    );
+```
 
 可以通过以下链接，阅读有关安装新 SDK 以及使用新结构的信息：
 

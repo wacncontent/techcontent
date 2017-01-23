@@ -55,34 +55,36 @@ SendGrid 是一项[基于云的电子邮件服务]，该服务提供了可靠的
 
 4. 将 insert 函数替换为以下代码：
 
-        var SendGrid = require('sendgrid').SendGrid;
+    ```
+    var SendGrid = require('sendgrid').SendGrid;
 
-        function insert(item, user, request) {    
-            request.execute({
-                success: function() {
-                    // After the record has been inserted, send the response immediately to the client
-                    request.respond();
-                    // Send the email in the background
-                    sendEmail(item);
+    function insert(item, user, request) {    
+        request.execute({
+            success: function() {
+                // After the record has been inserted, send the response immediately to the client
+                request.respond();
+                // Send the email in the background
+                sendEmail(item);
+            }
+        });
+
+        function sendEmail(item) {
+            var sendgrid = new SendGrid('**username**', '**password**');       
+
+            sendgrid.send({
+                to: '**email-address**',
+                from: '**from-address**',
+                subject: 'New to-do item',
+                text: 'A new to-do was added: ' + item.text
+            }, function(success, message) {
+                // If the email failed to send, log it as an error so we can investigate
+                if (!success) {
+                    console.error(message);
                 }
             });
-
-            function sendEmail(item) {
-                var sendgrid = new SendGrid('**username**', '**password**');       
-
-                sendgrid.send({
-                    to: '**email-address**',
-                    from: '**from-address**',
-                    subject: 'New to-do item',
-                    text: 'A new to-do was added: ' + item.text
-                }, function(success, message) {
-                    // If the email failed to send, log it as an error so we can investigate
-                    if (!success) {
-                        console.error(message);
-                    }
-                });
-            }
         }
+    }
+    ```
 
 5. 将上面脚本中的占位符替换为适当的值：
 

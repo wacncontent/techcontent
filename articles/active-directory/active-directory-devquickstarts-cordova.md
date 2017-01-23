@@ -100,33 +100,45 @@ Azure AD 只会向已知的应用程序颁发令牌。在从应用程序使用 A
 
 在 shell 或命令行中键入以下命令：
 
-    git clone -b skeleton https://github.com/AzureADQuickStarts/NativeClient-MultiTarget-Cordova.git
+```
+git clone -b skeleton https://github.com/AzureADQuickStarts/NativeClient-MultiTarget-Cordova.git
+```
 
 ## *3.创建 Cordova 应用程序*
 
 可通过多种方式创建 Cordova 应用程序。在本教程中，我们将使用 Cordova 命令行界面 (CLI)。
 在 shell 或命令行中键入以下命令：
 
-     cordova create DirSearchClient --copy-from="NativeClient-MultiTarget-Cordova/DirSearchClient"
+```
+ cordova create DirSearchClient --copy-from="NativeClient-MultiTarget-Cordova/DirSearchClient"
+```
 
 这会创建 Cordova 项目的文件夹结构和基架，并在 www 子文件夹中复制初学者项目的内容。
 切换到新的 DirSearchClient 文件夹。
 
-    cd .\DirSearchClient
+```
+cd .\DirSearchClient
+```
 
 添加调用 Graph API 时所需的允许列表插件。
 
-     cordova plugin add cordova-plugin-whitelist
+```
+ cordova plugin add cordova-plugin-whitelist
+```
 
 接下来，添加你要支持的所有平台。为了获得一个有效示例，至少需要执行下列其中一个命令。请注意，你无法在 Windows 上模拟 iOS，或者在 Mac 上模拟 Windows/Windows Phone。
 
-    cordova platform add android
-    cordova platform add ios
-    cordova platform add windows
+```
+cordova platform add android
+cordova platform add ios
+cordova platform add windows
+```
 
 最后，可以将 ADAL for Cordova 插件添加到项目。
 
-    cordova plugin add cordova-plugin-ms-adal
+```
+cordova plugin add cordova-plugin-ms-adal
+```
 
 ## *3.添加代码以便对用户进行身份验证并从 AAD 获取令牌*
 
@@ -136,11 +148,13 @@ Azure AD 只会向已知的应用程序颁发令牌。在从应用程序使用 A
 
 javascript
 
-    var authority = "https://login.chinacloudapi.cn/common",
-    redirectUri = "http://MyDirectorySearcherApp",
-    resourceUri = "https://graph.chinacloudapi.cn",
-    clientId = "a5d92493-ae5a-4a9f-bcbf-9f1d354067d3",
-    graphApiVersion = "2013-11-08";
+```
+var authority = "https://login.chinacloudapi.cn/common",
+redirectUri = "http://MyDirectorySearcherApp",
+resourceUri = "https://graph.chinacloudapi.cn",
+clientId = "a5d92493-ae5a-4a9f-bcbf-9f1d354067d3",
+graphApiVersion = "2013-11-08";
+```
 
 `redirectUri` 和 `clientId` 值应与 AAD 中用于描述应用程序的值匹配。如本教程前面步骤 1 中所述，你可以在 Azure 门户预览的"配置"选项卡中找到这些值。
 注意：如果你选择不在自己的租户中注册新应用程序，则只需按原样粘贴上述预配置值 - 这样你便可以看到示例的运行情况，不过，在生产环境中，你始终要为应用程序创建自己的条目。
@@ -149,33 +163,9 @@ javascript
 
 javascript
 
-    // Shows user authentication dialog if required.
-    authenticate: function (authCompletedCallback) {
-
-        app.context = new Microsoft.ADAL.AuthenticationContext(authority);
-        app.context.tokenCache.readItems().then(function (items) {
-            if (items.length > 0) {
-                authority = items[0].authority;
-                app.context = new Microsoft.ADAL.AuthenticationContext(authority);
-            }
-            // Attempt to authorize user silently
-            app.context.acquireTokenSilentAsync(resourceUri, clientId)
-            .then(authCompletedCallback, function () {
-                // We require user credentials so triggers authentication dialog
-                app.context.acquireTokenAsync(resourceUri, clientId, redirectUri)
-                .then(authCompletedCallback, function (err) {
-                    app.error("Failed to authenticate: " + err);
-                });
-            });
-        });
-
-    },
-
-让我们通过将它分解成两个主要部分来检查运行情况。
-此示例应适用于任何租户，而不只是与某个特定租户相关。它使用了“/common”终结点，因此，用户在身份验证时可以输入任何帐户，并可将请求定向到它所属的租户。
-该方法的第一部分将检查 ADAL 缓存，以确定是否已有一个存储的令牌 - 如果有，则使用该令牌的来源租户重新初始化 ADAL。要避免额外的提示，必须执行此操作，因为使用“/common”总会导致要求用户输入新帐户。
-
-javascript
+```
+// Shows user authentication dialog if required.
+authenticate: function (authCompletedCallback) {
 
     app.context = new Microsoft.ADAL.AuthenticationContext(authority);
     app.context.tokenCache.readItems().then(function (items) {
@@ -183,7 +173,35 @@ javascript
             authority = items[0].authority;
             app.context = new Microsoft.ADAL.AuthenticationContext(authority);
         }
+        // Attempt to authorize user silently
+        app.context.acquireTokenSilentAsync(resourceUri, clientId)
+        .then(authCompletedCallback, function () {
+            // We require user credentials so triggers authentication dialog
+            app.context.acquireTokenAsync(resourceUri, clientId, redirectUri)
+            .then(authCompletedCallback, function (err) {
+                app.error("Failed to authenticate: " + err);
+            });
         });
+    });
+
+},
+```
+
+让我们通过将它分解成两个主要部分来检查运行情况。
+此示例应适用于任何租户，而不只是与某个特定租户相关。它使用了“/common”终结点，因此，用户在身份验证时可以输入任何帐户，并可将请求定向到它所属的租户。
+该方法的第一部分将检查 ADAL 缓存，以确定是否已有一个存储的令牌 - 如果有，则使用该令牌的来源租户重新初始化 ADAL。要避免额外的提示，必须执行此操作，因为使用“/common”总会导致要求用户输入新帐户。
+
+javascript
+
+```
+app.context = new Microsoft.ADAL.AuthenticationContext(authority);
+app.context.tokenCache.readItems().then(function (items) {
+    if (items.length > 0) {
+        authority = items[0].authority;
+        app.context = new Microsoft.ADAL.AuthenticationContext(authority);
+    }
+    });
+```
 
 该方法的第二部分将执行适当的 tokewn 请求。
 `acquireTokenSilentAsync` 方法请求 ADAL 返回指定资源的令牌，且不显示任何 UX。如果缓存中已经存储了一个适当的访问令牌，或者有一个刷新令牌可用于获取新访问令牌且不显示任何提示，则可能会发生这种情况。
@@ -191,42 +209,46 @@ javascript
 
 javascript
 
-            // Attempt to authorize user silently
-            app.context.acquireTokenSilentAsync(resourceUri, clientId)
-            .then(authCompletedCallback, function () {
-                // We require user credentials so triggers authentication dialog
-                app.context.acquireTokenAsync(resourceUri, clientId, redirectUri)
-                .then(authCompletedCallback, function (err) {
-                    app.error("Failed to authenticate: " + err);
-                });
+```
+        // Attempt to authorize user silently
+        app.context.acquireTokenSilentAsync(resourceUri, clientId)
+        .then(authCompletedCallback, function () {
+            // We require user credentials so triggers authentication dialog
+            app.context.acquireTokenAsync(resourceUri, clientId, redirectUri)
+            .then(authCompletedCallback, function (err) {
+                app.error("Failed to authenticate: " + err);
             });
+        });
+```
 
 现在，我们已经获得了令牌，最后，我们可以调用 Graph API 并执行所需的搜索查询。在 `authenticate` 定义的正下方插入以下代码段。
 
 javascript
 
-    // Makes Api call to receive user list.
-        requestData: function (authResult, searchText) {
-            var req = new XMLHttpRequest();
-            var url = resourceUri + "/" + authResult.tenantId + "/users?api-version=" + graphApiVersion;
-            url = searchText ? url + "&$filter=mailNickname eq '" + searchText + "'" : url + "&$top=10";
+```
+// Makes Api call to receive user list.
+    requestData: function (authResult, searchText) {
+        var req = new XMLHttpRequest();
+        var url = resourceUri + "/" + authResult.tenantId + "/users?api-version=" + graphApiVersion;
+        url = searchText ? url + "&$filter=mailNickname eq '" + searchText + "'" : url + "&$top=10";
 
-            req.open("GET", url, true);
-            req.setRequestHeader('Authorization', 'Bearer ' + authResult.accessToken);
+        req.open("GET", url, true);
+        req.setRequestHeader('Authorization', 'Bearer ' + authResult.accessToken);
 
-            req.onload = function(e) {
-                if (e.target.status >= 200 && e.target.status < 300) {
-                    app.renderData(JSON.parse(e.target.response));
-                    return;
-                }
-                app.error('Data request failed: ' + e.target.response);
-            };
-            req.onerror = function(e) {
-                app.error('Data request failed: ' + e.error);
+        req.onload = function(e) {
+            if (e.target.status >= 200 && e.target.status < 300) {
+                app.renderData(JSON.parse(e.target.response));
+                return;
             }
+            app.error('Data request failed: ' + e.target.response);
+        };
+        req.onerror = function(e) {
+            app.error('Data request failed: ' + e.error);
+        }
 
-            req.send();
-        },
+        req.send();
+    },
+```
 
 起点文件提供了一个精简 UX 用于在文本框中输入用户的别名。此方法使用该值来构造查询，将该查询与访问令牌相结合，然后将其发送到 Graph 并分析结果。起点文件中已提供了一个负责可视化结果的 renderData 方法。
 
@@ -236,43 +258,43 @@ javascript
 
 ####Windows 10：
 
-    平板电脑/电脑：`cordova run windows --archs=x64 -- --appx=uap`
+   平板电脑/电脑：`cordova run windows --archs=x64 -- --appx=uap`
 
-    移动版（需要连接到电脑的 Windows10 移动版设备）：`cordova run windows --archs=arm -- --appx=uap --phone`
+   移动版（需要连接到电脑的 Windows10 移动版设备）：`cordova run windows --archs=arm -- --appx=uap --phone`
 
-    __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
+   __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
 
 ####Windows 8.1 平板电脑/电脑：
 
-    `cordova run windows`
+   `cordova run windows`
 
-    __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
+   __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
 
 ####Windows Phone 8.1：
 
-    在连接的设备上运行：`cordova run windows --device -- --phone`
+   在连接的设备上运行：`cordova run windows --device -- --phone`
 
-    在默认的模拟器上运行：`cordova emulate windows -- --phone`
+   在默认的模拟器上运行：`cordova emulate windows -- --phone`
 
-    使用 `cordova run windows --list -- --phone` 可查看所有可用目标，使用 `cordova run windows --target=<target_name> -- --phone` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run windows --target="Emulator 8.1 720P 4.7 inch" -- --phone`）。
+   使用 `cordova run windows --list -- --phone` 可查看所有可用目标，使用 `cordova run windows --target=<target_name> -- --phone` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run windows --target="Emulator 8.1 720P 4.7 inch" -- --phone`）。
 
 ####Android：
 
-    在连接的设备上运行：`cordova run android --device`
+   在连接的设备上运行：`cordova run android --device`
 
-    在默认的模拟器上运行：`cordova emulate android`
+   在默认的模拟器上运行：`cordova emulate android`
 
-    __注意__：请确保根据“先决条件”部分中所示，使用 *AVD Manager* 创建模拟器实例。
+   __注意__：请确保根据“先决条件”部分中所示，使用 *AVD Manager* 创建模拟器实例。
 
-    使用 `cordova run android --list` 可查看所有可用目标，使用 `cordova run android --target=<target_name>` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run android --target="Nexus4_emulator"`）。
+   使用 `cordova run android --list` 可查看所有可用目标，使用 `cordova run android --target=<target_name>` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run android --target="Nexus4_emulator"`）。
 
 ####iOS：
 
-    在连接的设备上运行：`cordova run ios --device`
+   在连接的设备上运行：`cordova run ios --device`
 
-    在默认的模拟器上运行：`cordova emulate ios`
+   在默认的模拟器上运行：`cordova emulate ios`
 
-    __注意__：请确保安装 `ios-sim` 包以在模拟器上运行。有关详细信息，请参阅“先决条件”部分。
+   __注意__：请确保安装 `ios-sim` 包以在模拟器上运行。有关详细信息，请参阅“先决条件”部分。
 
     Use `cordova run ios --list` to see all available targets and `cordova run ios --target=<target_name>` to run application on specific device or emulator (for example,  `cordova run android --target="iPhone-6"`).
 

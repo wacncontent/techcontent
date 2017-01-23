@@ -731,7 +731,9 @@ Microsoft 在 Azure 应用商店中提供已经包含 SQL Server 版本的 VM。
 
 所需的结果应如下所示：
 
-    Latin1-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non-Unicode Data
+```
+Latin1-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non-Unicode Data
+```
 
 如果不是这个结果，请停止部署 SAP，并调查为什么安装命令未按预期运行。**不**支持将 SAP NetWeaver 应用程序部署到 SQL Server 代码页与上述代码页不同的 SQL Server 实例。
 

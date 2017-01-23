@@ -74,11 +74,13 @@ ms.author: glenga
 <ol start="4">
 <li><p>在共享代码项目中，打开 App.xaml.cs 文件，找到创建 <a href="http://msdn.microsoft.com/zh-cn/library/Windowsazure/microsoft.windowsazure.mobileservices.mobileserviceclient.aspx" target="_blank">MobileServiceClient</a> 实例的代码，注释掉使用 <em>localhost</em> 创建此客户端的代码，然后取消注释使用如下所示远程移动服务 URL 创建客户端的代码：</p>
 
-        <pre><code>public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://todolist.azure-mobile.net/",
-            "XXXX-APPLICATION-KEY-XXXXX");</code></pre>
+```
+    <pre><code>public static MobileServiceClient MobileService = new MobileServiceClient(
+        "https://todolist.azure-mobile.net/",
+        "XXXX-APPLICATION-KEY-XXXXX");</code></pre>
 
-    <p>现在，客户端将会访问已发布到 Azure 的移动服务。</p></li>
+<p>现在，客户端将会访问已发布到 Azure 的移动服务。</p></li>
+```
 </ol>
 
 ## 针对 Azure 中托管的移动服务测试应用程序

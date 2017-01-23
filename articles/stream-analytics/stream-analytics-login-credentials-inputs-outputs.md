@@ -189,7 +189,9 @@ Azure 流分析目前不允许在作业运行时替换输入/输出上的凭据�
 
 你会获得以下确认：
 
-    Command(s) completed successfully.
+```
+Command(s) completed successfully.
+```
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=AzureStreamAnalytics)。

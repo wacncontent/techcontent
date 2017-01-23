@@ -63,11 +63,13 @@ ms.author: glenga
 
 &nbsp;&nbsp;6.注释掉此代码，并添加创建新的同名但在构造函数中使用本地主机 URL 的 [MobileServiceClient] 的代码，类似于如下代码：
 
-    // This MobileServiceClient has been configured to communicate with your local
-    // test project for debugging purposes.
-    public static MobileServiceClient todolistClient = new MobileServiceClient(
-        "http://localhost:4584"
-    );
+```
+// This MobileServiceClient has been configured to communicate with your local
+// test project for debugging purposes.
+public static MobileServiceClient todolistClient = new MobileServiceClient(
+    "http://localhost:4584"
+);
+```
 
 使用此 [MobileServiceClient]，应用将连接到本地服务（而不是 Azure 中托管的版本）。当你想要切换回来并针对 Azure 中托管的移动服务运行应用程序时，请更改回原始 [MobileServiceClient] 定义。
 

@@ -44,58 +44,62 @@ ms.author: juliako;cenkdin
 
 下面的代码演示如何使用 .NET 创建、更新、读取和删除资产筛选器。
 
-    string filterName = "GlobalFilter_" + Guid.NewGuid().ToString();
+```
+string filterName = "GlobalFilter_" + Guid.NewGuid().ToString();
 
-    List<FilterTrackSelectStatement> filterTrackSelectStatements = new List<FilterTrackSelectStatement>();
+List<FilterTrackSelectStatement> filterTrackSelectStatements = new List<FilterTrackSelectStatement>();
 
-    FilterTrackSelectStatement filterTrackSelectStatement = new FilterTrackSelectStatement();
-    filterTrackSelectStatement.PropertyConditions = new List<IFilterTrackPropertyCondition>();
-    filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackNameCondition("Track Name", FilterTrackCompareOperator.NotEqual));
-    filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackBitrateRangeCondition(new FilterTrackBitrateRange(0, 1), FilterTrackCompareOperator.NotEqual));
-    filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackTypeCondition(FilterTrackType.Audio, FilterTrackCompareOperator.NotEqual));
-    filterTrackSelectStatements.Add(filterTrackSelectStatement);
+FilterTrackSelectStatement filterTrackSelectStatement = new FilterTrackSelectStatement();
+filterTrackSelectStatement.PropertyConditions = new List<IFilterTrackPropertyCondition>();
+filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackNameCondition("Track Name", FilterTrackCompareOperator.NotEqual));
+filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackBitrateRangeCondition(new FilterTrackBitrateRange(0, 1), FilterTrackCompareOperator.NotEqual));
+filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackTypeCondition(FilterTrackType.Audio, FilterTrackCompareOperator.NotEqual));
+filterTrackSelectStatements.Add(filterTrackSelectStatement);
 
-    // Create
-    IStreamingFilter filter = _context.Filters.Create(filterName, new PresentationTimeRange(), filterTrackSelectStatements);
+// Create
+IStreamingFilter filter = _context.Filters.Create(filterName, new PresentationTimeRange(), filterTrackSelectStatements);
 
-    // Update
-    filter.PresentationTimeRange = new PresentationTimeRange(timescale: 500);
-    filter.Update();
+// Update
+filter.PresentationTimeRange = new PresentationTimeRange(timescale: 500);
+filter.Update();
 
-    // Read
-    var filterUpdated = _context.Filters.FirstOrDefault();
-    Console.WriteLine(filterUpdated.Name);
+// Read
+var filterUpdated = _context.Filters.FirstOrDefault();
+Console.WriteLine(filterUpdated.Name);
 
-    // Delete
-    filter.Delete();
+// Delete
+filter.Delete();
+```
 
 ##创建/更新/读取/删除资产筛选器
 
 下面的代码演示如何使用 .NET 创建、更新、读取和删除资产筛选器。
 
-    string assetName = "AssetFilter_" + Guid.NewGuid().ToString();
-    var asset = _context.Assets.Create(assetName, AssetCreationOptions.None);
+```
+string assetName = "AssetFilter_" + Guid.NewGuid().ToString();
+var asset = _context.Assets.Create(assetName, AssetCreationOptions.None);
 
-    string filterName = "AssetFilter_" + Guid.NewGuid().ToString();
+string filterName = "AssetFilter_" + Guid.NewGuid().ToString();
 
-    // Create
-    IStreamingAssetFilter filter = asset.AssetFilters.Create(filterName,
-                                        new PresentationTimeRange(), 
-                                        new List<FilterTrackSelectStatement>());
+// Create
+IStreamingAssetFilter filter = asset.AssetFilters.Create(filterName,
+                                    new PresentationTimeRange(), 
+                                    new List<FilterTrackSelectStatement>());
 
-    // Update
-    filter.PresentationTimeRange = 
-            new PresentationTimeRange(start: 6000000000, end: 72000000000);
+// Update
+filter.PresentationTimeRange = 
+        new PresentationTimeRange(start: 6000000000, end: 72000000000);
 
-    filter.Update();
+filter.Update();
 
-    // Read
-    asset = _context.Assets.Where(c => c.Id == asset.Id).FirstOrDefault();
-    var filterUpdated = asset.AssetFilters.FirstOrDefault();
-    Console.WriteLine(filterUpdated.Name);
+// Read
+asset = _context.Assets.Where(c => c.Id == asset.Id).FirstOrDefault();
+var filterUpdated = asset.AssetFilters.FirstOrDefault();
+Console.WriteLine(filterUpdated.Name);
 
-    // Delete
-    filterUpdated.Delete();
+// Delete
+filterUpdated.Delete();
+```
 
 ##生成使用筛选器的流式处理 URL
 
@@ -105,23 +109,33 @@ ms.author: juliako;cenkdin
 
 **MPEG DASH**
 
-    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf, filter=MyFilter)
+```
+http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf, filter=MyFilter)
+```
 
 **Apple HTTP 实时流 (HLS) V4**
 
-    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl, filter=MyFilter)
+```
+http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl, filter=MyFilter)
+```
 
 **Apple HTTP 实时流 (HLS) V3**
 
-    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3, filter=MyFilter)
+```
+http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3, filter=MyFilter)
+```
 
 **平滑流**
 
-    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(filter=MyFilter)
+```
+http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(filter=MyFilter)
+```
 
 **HDS**
 
-    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=f4m-f4f, filter=MyFilter)
+```
+http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=f4m-f4f, filter=MyFilter)
+```
 
 ##另请参阅 
 

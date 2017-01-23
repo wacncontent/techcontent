@@ -49,143 +49,151 @@ ms.author: davidmu
 
 5. 在 VirtualMachineTemplate.json 文件的左括号和右括号中，添加所需的架构元素和所需的 contentVersion 元素：
 
-        {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-          "contentVersion": "1.0.0.0",
-        }
+    ```
+    {
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+      "contentVersion": "1.0.0.0",
+    }
+    ```
 
 6. [参数](../azure-resource-manager/resource-group-authoring-templates.md#parameters)并非总是必需，但它们在部署参数时提供了一种输入值的方式。在 ContentVersion 元素后面添加 parameters 元素及其子元素：
 
-        {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-          "contentVersion": "1.0.0.0",
-          "parameters": {
-            "adminUserName": { "type": "string" },
-            "adminPassword": { "type": "securestring" }
-          },
-        }
+    ```
+    {
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "adminUserName": { "type": "string" },
+        "adminPassword": { "type": "securestring" }
+      },
+    }
+    ```
 
 7. 可以在模板中使用[变量](../azure-resource-manager/resource-group-authoring-templates.md#variables)来指定可能经常发生变化的值，或者需要从参数值的组合创建的值。在 parameters 节的后面添加 variables 元素：
 
-        {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-          "contentVersion": "1.0.0.0",
-          "parameters": {
-            "adminUsername": { "type": "string" },
-            "adminPassword": { "type": "securestring" }
-          },
-          "variables": {
-            "vnetID":"[resourceId('Microsoft.Network/virtualNetworks','myvn1')]",
-            "subnetRef": "[concat(variables('vnetID'),'/subnets/mysn1')]"  
-          },
-        }
+    ```
+    {
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "adminUsername": { "type": "string" },
+        "adminPassword": { "type": "securestring" }
+      },
+      "variables": {
+        "vnetID":"[resourceId('Microsoft.Network/virtualNetworks','myvn1')]",
+        "subnetRef": "[concat(variables('vnetID'),'/subnets/mysn1')]"  
+      },
+    }
+    ```
 
 8. 接下来将在模板中定义[资源](../azure-resource-manager/resource-group-authoring-templates.md#resources)，例如虚拟机、虚拟网络和存储帐户。在 variables 节的后面添加 resources 节：
 
+    ```
+    {
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "adminUsername": { "type": "string" },
+        "adminPassword": { "type": "securestring" }
+      },
+      "variables": {
+        "vnetID":"[resourceId('Microsoft.Network/virtualNetworks','myvn1')]",
+        "subnetRef": "[concat(variables('vnetID'),'/subnets/mysn1')]"
+      },
+      "resources": [
         {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-          "contentVersion": "1.0.0.0",
-          "parameters": {
-            "adminUsername": { "type": "string" },
-            "adminPassword": { "type": "securestring" }
-          },
-          "variables": {
-            "vnetID":"[resourceId('Microsoft.Network/virtualNetworks','myvn1')]",
-            "subnetRef": "[concat(variables('vnetID'),'/subnets/mysn1')]"
-          },
-          "resources": [
-            {
-              "type": "Microsoft.Storage/storageAccounts",
-              "name": "mystorage1",
-              "apiVersion": "2015-06-15",
-              "location": "[resourceGroup().location]",
-              "properties": { "accountType": "Standard_LRS" }
-            },
-            {
-              "apiVersion": "2016-03-30",
-              "type": "Microsoft.Network/publicIPAddresses",
-              "name": "myip1",
-              "location": "[resourceGroup().location]",
+          "type": "Microsoft.Storage/storageAccounts",
+          "name": "mystorage1",
+          "apiVersion": "2015-06-15",
+          "location": "[resourceGroup().location]",
+          "properties": { "accountType": "Standard_LRS" }
+        },
+        {
+          "apiVersion": "2016-03-30",
+          "type": "Microsoft.Network/publicIPAddresses",
+          "name": "myip1",
+          "location": "[resourceGroup().location]",
+          "properties": {
+            "publicIPAllocationMethod": "Dynamic",
+            "dnsSettings": { "domainNameLabel": "mydns1" }
+          }
+        },
+        {
+          "apiVersion": "2016-03-30",
+          "type": "Microsoft.Network/virtualNetworks",
+          "name": "myvnet1",
+          "location": "[resourceGroup().location]",
+          "properties": {
+            "addressSpace": { "addressPrefixes": [ "10.0.0.0/16" ] },
+            "subnets": [ {
+              "name": "mysn1",
+              "properties": { "addressPrefix": "10.0.0.0/24" }
+            } ]
+          }
+        },
+        {
+          "apiVersion": "2016-03-30",
+          "type": "Microsoft.Network/networkInterfaces",
+          "name": "mync1",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "Microsoft.Network/publicIPAddresses/myip1",
+            "Microsoft.Network/virtualNetworks/myvn1"
+          ],
+          "properties": {
+            "ipConfigurations": [ {
+              "name": "ipconfig1",
               "properties": {
-                "publicIPAllocationMethod": "Dynamic",
-                "dnsSettings": { "domainNameLabel": "mydns1" }
-              }
-            },
-            {
-              "apiVersion": "2016-03-30",
-              "type": "Microsoft.Network/virtualNetworks",
-              "name": "myvnet1",
-              "location": "[resourceGroup().location]",
-              "properties": {
-                "addressSpace": { "addressPrefixes": [ "10.0.0.0/16" ] },
-                "subnets": [ {
-                  "name": "mysn1",
-                  "properties": { "addressPrefix": "10.0.0.0/24" }
-                } ]
-              }
-            },
-            {
-              "apiVersion": "2016-03-30",
-              "type": "Microsoft.Network/networkInterfaces",
-              "name": "mync1",
-              "location": "[resourceGroup().location]",
-              "dependsOn": [
-                "Microsoft.Network/publicIPAddresses/myip1",
-                "Microsoft.Network/virtualNetworks/myvn1"
-              ],
-              "properties": {
-                "ipConfigurations": [ {
-                  "name": "ipconfig1",
-                  "properties": {
-                    "privateIPAllocationMethod": "Dynamic",
-                    "publicIPAddress": {
-                      "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'myip1')]"
-                    },
-                    "subnet": { "id": "[variables('subnetRef')]" }
-                  }
-                } ]
-              }
-            },
-            {
-              "apiVersion": "2016-03-30",
-              "type": "Microsoft.Compute/virtualMachines",
-              "name": "myvm1",
-              "location": "[resourceGroup().location]",
-              "dependsOn": [
-                "Microsoft.Network/networkInterfaces/mync1",
-                "Microsoft.Storage/storageAccounts/mystorage1"
-              ],
-              "properties": {
-                "hardwareProfile": { "vmSize": "Standard_A1" },
-                "osProfile": {
-                  "computerName": "myvm1",
-                  "adminUsername": "[parameters('adminUsername')]",
-                  "adminPassword": "[parameters('adminPassword')]"
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'myip1')]"
                 },
-                "storageProfile": {
-                  "imageReference": {
-                    "publisher": "MicrosoftWindowsServer",
-                    "offer": "WindowsServer",
-                    "sku": "2012-R2-Datacenter",
-                    "version" : "latest"
-                  },
-                  "osDisk": {
-                    "name": "myosdisk1",
-                    "vhd": {
-                      "uri": "https://mystorage1.blob.core.chinacloudapi.cn/vhds/myosdisk1.vhd"
-                    },
-                    "caching": "ReadWrite",
-                    "createOption": "FromImage"
-                  }
-                },
-                "networkProfile": {
-                  "networkInterfaces" : [ {
-                    "id": "[resourceId('Microsoft.Network/networkInterfaces','mync1')]"
-                  } ]
-                }
+                "subnet": { "id": "[variables('subnetRef')]" }
               }
             } ]
           }
+        },
+        {
+          "apiVersion": "2016-03-30",
+          "type": "Microsoft.Compute/virtualMachines",
+          "name": "myvm1",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "Microsoft.Network/networkInterfaces/mync1",
+            "Microsoft.Storage/storageAccounts/mystorage1"
+          ],
+          "properties": {
+            "hardwareProfile": { "vmSize": "Standard_A1" },
+            "osProfile": {
+              "computerName": "myvm1",
+              "adminUsername": "[parameters('adminUsername')]",
+              "adminPassword": "[parameters('adminPassword')]"
+            },
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2012-R2-Datacenter",
+                "version" : "latest"
+              },
+              "osDisk": {
+                "name": "myosdisk1",
+                "vhd": {
+                  "uri": "https://mystorage1.blob.core.chinacloudapi.cn/vhds/myosdisk1.vhd"
+                },
+                "caching": "ReadWrite",
+                "createOption": "FromImage"
+              }
+            },
+            "networkProfile": {
+              "networkInterfaces" : [ {
+                "id": "[resourceId('Microsoft.Network/networkInterfaces','mync1')]"
+              } ]
+            }
+          }
+        } ]
+      }
+    ```
 
 9. 保存创建的模板文件。
 
@@ -199,14 +207,16 @@ ms.author: davidmu
 
 3. 打开 parameters.json 文件，然后添加以下 JSON 内容：
 
-        {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-          "contentVersion": "1.0.0.0",
-          "parameters": {
-            "adminUserName": { "value": "mytestacct1" },
-            "adminPassword": { "value": "mytestpass1" }
-          }
-        }
+    ```
+    {
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "adminUserName": { "value": "mytestacct1" },
+        "adminPassword": { "value": "mytestpass1" }
+      }
+    }
+    ```
 
     >[!NOTE]
     > 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
@@ -231,33 +241,39 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
 
 1. 打开你为项目创建的 Program.cs 文件，然后在该文件的顶部添加以下 using 语句：
 
-        using Microsoft.Azure;
-        using Microsoft.IdentityModel.Clients.ActiveDirectory;
-        using Microsoft.Azure.Management.ResourceManager;
-        using Microsoft.Azure.Management.ResourceManager.Models;
-        using Microsoft.Rest;
-        using System.IO;
+    ```
+    using Microsoft.Azure;
+    using Microsoft.IdentityModel.Clients.ActiveDirectory;
+    using Microsoft.Azure.Management.ResourceManager;
+    using Microsoft.Azure.Management.ResourceManager.Models;
+    using Microsoft.Rest;
+    using System.IO;
+    ```
 
 2. 将以下方法添加到 Program 类，以获取创建凭据所需的令牌：
 
-        private static async Task<AuthenticationResult> GetAccessTokenAsync()
-        {
-          var cc = new ClientCredential("{client-id}", "{client-secret}");
-          var context = new AuthenticationContext("https://login.chinacloudapi.cn/{tenant-id}");
-          var token = await context.AcquireTokenAsync("https://management.chinacloudapi.cn/", cc);
-          if (token == null)
-          {
-            throw new InvalidOperationException("Could not get the token.");
-          }
-          return token;
-        }
+    ```
+    private static async Task<AuthenticationResult> GetAccessTokenAsync()
+    {
+      var cc = new ClientCredential("{client-id}", "{client-secret}");
+      var context = new AuthenticationContext("https://login.chinacloudapi.cn/{tenant-id}");
+      var token = await context.AcquireTokenAsync("https://management.chinacloudapi.cn/", cc);
+      if (token == null)
+      {
+        throw new InvalidOperationException("Could not get the token.");
+      }
+      return token;
+    }
+    ```
 
     将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
 
 3. 若要创建凭据，请将此代码添加到 Program.cs 文件中的 Main 方法：
 
-        var token = GetAccessTokenAsync();
-        var credential = new TokenCredentials(token.Result.AccessToken);
+    ```
+    var token = GetAccessTokenAsync();
+    var credential = new TokenCredentials(token.Result.AccessToken);
+    ```
 
 4. 保存 Program.cs 文件。
 
@@ -267,47 +283,53 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
 
 1. 将变量添加到 Program 类的 Main 方法，指定先前创建的资源组的名称、部署名称和订阅标识符：
 
-        var groupName = "resource group name";
-        var subscriptionId = "subsciption id";
-        var deploymentName = "deployment name";
+    ```
+    var groupName = "resource group name";
+    var subscriptionId = "subsciption id";
+    var deploymentName = "deployment name";
+    ```
 
     将 groupName 的值替换为资源组的名称。将 DeploymentName 的值替换为要用于部署的名称。可运行 Get-AzureRmSubscription 来查找订阅标识符。
 
 2. 若要使用定义的资源向资源组部署资源，请将以下方法添加到 Program 类：
 
-        public static async Task<DeploymentExtended> CreateTemplateDeploymentAsync(
-          TokenCredentials credential,
-          string groupName,
-          string deploymentName,
-          string subscriptionId)
-        {
-          Console.WriteLine("Creating the template deployment...");
-          var deployment = new Deployment();
-          deployment.Properties = new DeploymentProperties
-          {
-            Mode = DeploymentMode.Incremental,
-            Template = File.ReadAllText("..\\..\\VirtualMachineTemplate.json"),
-            Parameters = File.ReadAllText("..\\..\\Parameters.json")
-          };
-          var resourceManagementClient = new ResourceManagementClient(new Uri("https://management.chinacloudapi.cn/"), credential) 
-            { SubscriptionId = subscriptionId };
-          return await resourceManagementClient.Deployments.CreateOrUpdateAsync(
-            groupName,
-            deploymentName,
-            deployment);
-        }
+    ```
+    public static async Task<DeploymentExtended> CreateTemplateDeploymentAsync(
+      TokenCredentials credential,
+      string groupName,
+      string deploymentName,
+      string subscriptionId)
+    {
+      Console.WriteLine("Creating the template deployment...");
+      var deployment = new Deployment();
+      deployment.Properties = new DeploymentProperties
+      {
+        Mode = DeploymentMode.Incremental,
+        Template = File.ReadAllText("..\\..\\VirtualMachineTemplate.json"),
+        Parameters = File.ReadAllText("..\\..\\Parameters.json")
+      };
+      var resourceManagementClient = new ResourceManagementClient(new Uri("https://management.chinacloudapi.cn/"), credential) 
+        { SubscriptionId = subscriptionId };
+      return await resourceManagementClient.Deployments.CreateOrUpdateAsync(
+        groupName,
+        deploymentName,
+        deployment);
+    }
+    ```
 
     如果想要在存储帐户中部署模板，可将 Template 属性替换为 TemplateLink 属性。
 
 3. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        var dpResult = CreateTemplateDeploymentAsync(
-          credential,
-          groupName,
-          deploymentName,
-          subscriptionId);
-        Console.WriteLine(dpResult.Result.Properties.ProvisioningState);
-        Console.ReadLine();
+    ```
+    var dpResult = CreateTemplateDeploymentAsync(
+      credential,
+      groupName,
+      deploymentName,
+      subscriptionId);
+    Console.WriteLine(dpResult.Result.Properties.ProvisioningState);
+    Console.ReadLine();
+    ```
 
 ## 步骤 5：删除资源
 
@@ -315,24 +337,28 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
 
 1. 若要删除资源组，请将此方法添加到 Program 类：
 
-        public static async void DeleteResourceGroupAsync(
-          TokenCredentials credential,
-          string groupName,
-          string subscriptionId)
-        {
-          Console.WriteLine("Deleting resource group...");
-          var resourceManagementClient = new ResourceManagementClient(new Uri("https://management.chinacloudapi.cn/"), credential)
-            { SubscriptionId = subscriptionId };
-          await resourceManagementClient.ResourceGroups.DeleteAsync(groupName);
-        }
+    ```
+    public static async void DeleteResourceGroupAsync(
+      TokenCredentials credential,
+      string groupName,
+      string subscriptionId)
+    {
+      Console.WriteLine("Deleting resource group...");
+      var resourceManagementClient = new ResourceManagementClient(new Uri("https://management.chinacloudapi.cn/"), credential)
+        { SubscriptionId = subscriptionId };
+      await resourceManagementClient.ResourceGroups.DeleteAsync(groupName);
+    }
+    ```
 
 2. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        DeleteResourceGroupAsync(
-          credential,
-          groupName,
-          subscriptionId);
-        Console.ReadLine();
+    ```
+    DeleteResourceGroupAsync(
+      credential,
+      groupName,
+      subscriptionId);
+    Console.ReadLine();
+    ```
 
 ##步骤 6：运行控制台应用程序
 

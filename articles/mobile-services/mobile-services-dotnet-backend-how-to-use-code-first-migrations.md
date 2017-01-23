@@ -74,27 +74,35 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
 
 3. 在 Package Manager Console 中运行以下命令：
 
-        PM> Enable-Migrations
+    ```
+    PM> Enable-Migrations
+    ```
 
     这将为你的项目启用代码优先迁移。
 
 4. 在控制台中运行以下命令：
 
-        PM> Add-Migration Initial
+    ```
+    PM> Add-Migration Initial
+    ```
 
     这将创建一个名为 *Initial* 的新迁移。迁移代码存储在迁移项目文件夹中。
 
 5. 展开 App\_Start 文件夹，打开 WebApiConfig.cs 项目文件并添加以下 **using** 语句：
 
-        using System.Data.Entity.Migrations;
-        using todolistService.Migrations;
+    ```
+    using System.Data.Entity.Migrations;
+    using todolistService.Migrations;
+    ```
 
     在上述代码中，必须将 _todolistService_ 字符串替换为项目的命名空间，对于下载的快速入门项目，该命名空间为 <em>mobile&#95;service&#95;name</em>Service。
 
 6. 在这同一个代码文件中，注释掉对 **Database.SetInitializer** 方法的调用，并在该调用的后面添加以下代码：
 
-        var migrator = new DbMigrator(new Configuration());
-        migrator.Update();
+    ```
+    var migrator = new DbMigrator(new Configuration());
+    migrator.Update();
+    ```
 
     这样就会禁用用于删除然后重新创建数据库的默认 Code First 数据库初始值设定项，并将其替换为应用最新迁移的显式请求。此时，除非为数据创建了迁移，否则，在访问数据时，进行任何数据模型更改都会导致 InvalidOperationException。另外，你的服务必须使用 Code First 迁移将数据模型更改迁移到数据库。
 
@@ -104,7 +112,9 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
 
 8.   现在，对数据模型进行更改（例如，向 TodoItem 类型添加一个新的 UserId 属性），重新生成项目，然后在 Package Manager 中运行以下命令：
 
-        PM> Add-Migration NewUserId
+    ```
+    PM> Add-Migration NewUserId
+    ```
 
     这将创建一个名为 *NewUserId* 的新迁移。迁移文件夹中添加了一个用于实施此更改的新代码文件
 
@@ -121,11 +131,13 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
 ## 在没有初始值设定项的情况下使用 Code First 迁移
 在对 .NET 后端项目使用 Code First 迁移之前，应运行数据模型初始值设定项。如果不使用初始值设定项，在尝试应用迁移时可能会出现错误。如果你选择不使用预定义的数据模型初始值设定项之一，请确保在 Migrations\\Configuration.cs 文件中，将迁移配置为使用 EntityTableSqlGenerator 作为 SqlGenerator，如以下示例所示：
 
-    public Configuration()
-    {
-        AutomaticMigrationsEnabled = false;
-        SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
-    }
+```
+public Configuration()
+{
+    AutomaticMigrationsEnabled = false;
+    SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
+}
+```
 
 ##<a name="seeding"></a>在迁移中设定数据种子
 
@@ -135,29 +147,33 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
 
 以下代码将使用新的数据行设定 **TodoItems** 表的种子：
 
-        List<TodoItem> todoItems = new List<TodoItem>
-        {
-            new TodoItem { Id = "1", Text = "First item", Complete = false },
-            new TodoItem { Id = "2", Text = "Second item", Complete = false },
-        };
+```
+    List<TodoItem> todoItems = new List<TodoItem>
+    {
+        new TodoItem { Id = "1", Text = "First item", Complete = false },
+        new TodoItem { Id = "2", Text = "Second item", Complete = false },
+    };
 
-        foreach (TodoItem todoItem in todoItems)
-        {
-            context.Set<TodoItem>().Add(todoItem);
-        }
-        base.Seed(context);
+    foreach (TodoItem todoItem in todoItems)
+    {
+        context.Set<TodoItem>().Add(todoItem);
+    }
+    base.Seed(context);
+```
 
 ###设定表中新列的种子
 
 以下代码只设定 UserId 列的种子：
 
-        context.TodoItems.AddOrUpdate(
-            t => t.UserId,
-                new TodoItem { UserId = 1 },
-                new TodoItem { UserId = 1 },
-                new TodoItem { UserId = 2 }
-            );
-        base.Seed(context);
+```
+    context.TodoItems.AddOrUpdate(
+        t => t.UserId,
+            new TodoItem { UserId = 1 },
+            new TodoItem { UserId = 1 },
+            new TodoItem { UserId = 2 }
+        );
+    base.Seed(context);
+```
 
 此代码将调用 [AddOrUpdate] Helper 扩展方法，以向新的 UserId 列添加种子数据。使用 [AddOrUpdate] 时不会创建重复行。
 

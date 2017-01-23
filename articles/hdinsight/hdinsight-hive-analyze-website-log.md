@@ -41,7 +41,9 @@ ms.author: nitinme
 
 1. 在 Azure 经典管理门户中，单击要在其上运行示例的群集，然后单击底部的“查询控制台”。或者，也可以通过使用以下 URL 直接打开查询控制台：
 
-         https://<clustername>.azurehdinsight.cn
+    ```
+     https://<clustername>.azurehdinsight.cn
+    ```
 
     出现提示时，通过使用设置群集时所用的管理员用户名和密码进行身份验证。
 

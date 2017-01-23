@@ -58,7 +58,9 @@ ms.author: nitinme
 
 2. 登录后，请输入以下命令：
 
-        ambari-admin-password-reset
+    ```
+    ambari-admin-password-reset
+    ```
 
     出现提示时，请提供 Ambari 管理员帐户的密码。访问 Ambari Web UI 时要用到此密码。
 
@@ -66,15 +68,21 @@ ms.author: nitinme
 
 1. 与沙盒建立 SSH 连接后，使用以下命令启动 Hive shell：
 
-        hive
+    ```
+    hive
+    ```
 
 2. 启动 shell 后，使用以下命令查看随沙盒一起提供的表：
 
-        show tables;
+    ```
+    show tables;
+    ```
 
 3. 使用以下命令检索 `sample_07` 表中的 10 行数据：
 
-        select * from sample_07 limit 10;
+    ```
+    select * from sample_07 limit 10;
+    ```
 
 ## 后续步骤
 

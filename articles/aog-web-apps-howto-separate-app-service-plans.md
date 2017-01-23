@@ -34,13 +34,17 @@ wacn.date: 12/13/2016
 
 1. 运行以下命令登录中国版 Azure；
 
-        Login-AzureRmAccount -EnvironmentName "AzureChinaCloud"
+    ```
+    Login-AzureRmAccount -EnvironmentName "AzureChinaCloud"
+    ```
 
     ![powershell-login](./media/aog-web-apps-howto-separate-app-service-plans/powershell-login.png)
 
 2. 运行以下命令创建新的应用服务计划；
 
-        New-AzureRmAppServicePlan -Location ChinaEast -Name <YourAppServicePlanName> -ResourceGroupName <YourResouceGroupName> -Tier Free
+    ```
+    New-AzureRmAppServicePlan -Location ChinaEast -Name <YourAppServicePlanName> -ResourceGroupName <YourResouceGroupName> -Tier Free
+    ```
 
     >注: Location 参数可以选择 ChinaEast 或者 ChinaNorth。
 
@@ -50,7 +54,9 @@ wacn.date: 12/13/2016
 
 3. 运行以下命令将网站迁移到新的应用服务计划中;
 
-        Set-AzureRmResource -ResourceName <YourWebSiteName> -ResourceType Microsoft.Web/sites -Properties @{"serverFarmId"="/subscriptions/<SubscirptionID>/resourceGroups/<ResourceGroupName1>/providers/Microsoft.Web/serverfarms/TestAppServicePlan"} -ResourceGroupName <ResourceGroupName2>
+    ```
+    Set-AzureRmResource -ResourceName <YourWebSiteName> -ResourceType Microsoft.Web/sites -Properties @{"serverFarmId"="/subscriptions/<SubscirptionID>/resourceGroups/<ResourceGroupName1>/providers/Microsoft.Web/serverfarms/TestAppServicePlan"} -ResourceGroupName <ResourceGroupName2>
+    ```
 
     >[!NOTE]
     ><p>1. 将 `Properties` 参数中的 `serverFarmID` 的值替换成步骤 2 中返回的 `Id` 值；<p>2. 将参数`<ResourceGroupName1>`替换成应用服务计划所在的资源组名称，将参数`<ResourceGroupName2>`替换成 Web 应用所在的资源组名称。

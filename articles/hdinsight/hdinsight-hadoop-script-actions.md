@@ -35,52 +35,56 @@ ms.author: jgao
 
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
-    param (
-        [parameter(Mandatory)][string] $ConfigFileName,
-        [parameter(Mandatory)][string] $Name,
-        [parameter(Mandatory)][string] $Value,
-        [parameter()][string] $Description
-    )
+```
+param (
+    [parameter(Mandatory)][string] $ConfigFileName,
+    [parameter(Mandatory)][string] $Name,
+    [parameter(Mandatory)][string] $Value,
+    [parameter()][string] $Description
+)
 
-    if (!$Description) {
-        $Description = ""
-    }
+if (!$Description) {
+    $Description = ""
+}
 
-    $hdiConfigFiles = @{
-        "hive-site.xml" = "$env:HIVE_HOME\conf\hive-site.xml";
-        "core-site.xml" = "$env:HADOOP_HOME\etc\hadoop\core-site.xml";
-        "hdfs-site.xml" = "$env:HADOOP_HOME\etc\hadoop\hdfs-site.xml";
-        "mapred-site.xml" = "$env:HADOOP_HOME\etc\hadoop\mapred-site.xml";
-        "yarn-site.xml" = "$env:HADOOP_HOME\etc\hadoop\yarn-site.xml"
-    }
+$hdiConfigFiles = @{
+    "hive-site.xml" = "$env:HIVE_HOME\conf\hive-site.xml";
+    "core-site.xml" = "$env:HADOOP_HOME\etc\hadoop\core-site.xml";
+    "hdfs-site.xml" = "$env:HADOOP_HOME\etc\hadoop\hdfs-site.xml";
+    "mapred-site.xml" = "$env:HADOOP_HOME\etc\hadoop\mapred-site.xml";
+    "yarn-site.xml" = "$env:HADOOP_HOME\etc\hadoop\yarn-site.xml"
+}
 
-    if (!($hdiConfigFiles[$ConfigFileName])) {
-        Write-HDILog "Unable to configure $ConfigFileName because it is not part of the HDI configuration files."
-        return
-    }
+if (!($hdiConfigFiles[$ConfigFileName])) {
+    Write-HDILog "Unable to configure $ConfigFileName because it is not part of the HDI configuration files."
+    return
+}
 
-    [xml]$configFile = Get-Content $hdiConfigFiles[$ConfigFileName]
+[xml]$configFile = Get-Content $hdiConfigFiles[$ConfigFileName]
 
-    $existingproperty = $configFile.configuration.property | where {$_.Name -eq $Name}
+$existingproperty = $configFile.configuration.property | where {$_.Name -eq $Name}
 
-    if ($existingproperty) {
-        $existingproperty.Value = $Value
-        $existingproperty.Description = $Description
-    } else {
-        $newproperty = @($configFile.configuration.property)[0].Clone()
-        $newproperty.Name = $Name
-        $newproperty.Value = $Value
-        $newproperty.Description = $Description
-        $configFile.configuration.AppendChild($newproperty)
-    }
+if ($existingproperty) {
+    $existingproperty.Value = $Value
+    $existingproperty.Description = $Description
+} else {
+    $newproperty = @($configFile.configuration.property)[0].Clone()
+    $newproperty.Name = $Name
+    $newproperty.Value = $Value
+    $newproperty.Description = $Description
+    $configFile.configuration.AppendChild($newproperty)
+}
 
-    $configFile.Save($hdiConfigFiles[$ConfigFileName])
+$configFile.Save($hdiConfigFiles[$ConfigFileName])
 
-    Write-HDILog "$configFileName has been configured."
+Write-HDILog "$configFileName has been configured."
+```
 
 该脚本采用四个参数，即配置文件名称、要修改的属性、要设置的值以及说明。例如：
 
-    hive-site.xml hive.metastore.client.socket.timeout 90 
+```
+hive-site.xml hive.metastore.client.socket.timeout 90 
+```
 
 这些参数会在 hive-site.xml 文件中将 hive.metastore.client.socket.timeout 值设置为 90。默认值为 60 秒。
 
@@ -103,22 +107,24 @@ Name | 脚本
 
 脚本操作帮助器方法是可以在编写自定义脚本时使用的实用工具。这些方法在 [https://hdiconfigactions.blob.core.windows.net/configactionmodulev05/HDInsightUtilities-v05.psm1](https://hdiconfigactions.blob.core.windows.net/configactionmodulev05/HDInsightUtilities-v05.psm1) 中定义，可以使用以下语法将其包括在脚本中：
 
-    # Download config action module from a well-known directory.
-    $CONFIGACTIONURI = "https://hdiconfigactions.blob.core.windows.net/configactionmodulev05/HDInsightUtilities-v05.psm1";
-    $CONFIGACTIONMODULE = "C:\apps\dist\HDInsightUtilities.psm1";
-    $webclient = New-Object System.Net.WebClient;
-    $webclient.DownloadFile($CONFIGACTIONURI, $CONFIGACTIONMODULE);
+```
+# Download config action module from a well-known directory.
+$CONFIGACTIONURI = "https://hdiconfigactions.blob.core.windows.net/configactionmodulev05/HDInsightUtilities-v05.psm1";
+$CONFIGACTIONMODULE = "C:\apps\dist\HDInsightUtilities.psm1";
+$webclient = New-Object System.Net.WebClient;
+$webclient.DownloadFile($CONFIGACTIONURI, $CONFIGACTIONMODULE);
 
-    # (TIP) Import config action helper method module to make writing config action easy.
-    if (Test-Path ($CONFIGACTIONMODULE))
-    { 
-        Import-Module $CONFIGACTIONMODULE;
-    } 
-    else
-    {
-        Write-Output "Failed to load HDInsightUtilities module, exiting ...";
-        exit;
-    }
+# (TIP) Import config action helper method module to make writing config action easy.
+if (Test-Path ($CONFIGACTIONMODULE))
+{ 
+    Import-Module $CONFIGACTIONMODULE;
+} 
+else
+{
+    Write-Output "Failed to load HDInsightUtilities module, exiting ...";
+    exit;
+}
+```
 
 以下是通过此脚本提供的帮助器方法：
 
@@ -180,8 +186,10 @@ Name | 脚本
 
 通常，在脚本操作开发中，需要设置环境变量。例如，最可能的情况是，从外部站点下载二进制文件，将其安装在群集上，并将其安装位置添加到“PATH”环境变量中。以下代码段介绍了如何在自定义脚本中设置环境变量。
 
-    Write-HDILog "Starting environment variable setting at: $(Get-Date)";
-    [Environment]::SetEnvironmentVariable('MDS_RUNNER_CUSTOM_CLUSTER', 'true', 'Machine');
+```
+Write-HDILog "Starting environment variable setting at: $(Get-Date)";
+[Environment]::SetEnvironmentVariable('MDS_RUNNER_CUSTOM_CLUSTER', 'true', 'Machine');
+```
 
 此语句将环境变量 **MDS\_RUNNER\_CUSTOM\_CLUSTER** 设置为值“true”，同时将此变量的作用域设置为计算机范围。有时，在相应的作用域（计算机或用户）内设置环境变量很重要。有关设置环境变量的详细信息，请参考[此处][1]。
 
@@ -189,7 +197,9 @@ Name | 脚本
 
 用于自定义群集的脚本需要位于群集的默认存储帐户中，或其他任何存储帐户的公共只读容器中。如果你的脚本访问位于其他位置的资源，则这些资源需要具有公共可访问性（至少是公共只读性）。例如，你可能需要访问文件，并使用 SaveFile-HDI 命令保存该文件。
 
-    Save-HDIFile -SrcUri 'https://somestorageaccount.blob.core.chinacloudapi.cn/somecontainer/some-file.jar' -DestFile 'C:\apps\dist\hadoop-2.4.0.2.1.9.0-2196\share\hadoop\mapreduce\some-file.jar'
+```
+Save-HDIFile -SrcUri 'https://somestorageaccount.blob.core.chinacloudapi.cn/somecontainer/some-file.jar' -DestFile 'C:\apps\dist\hadoop-2.4.0.2.1.9.0-2196\share\hadoop\mapreduce\some-file.jar'
+```
 
 在此示例中，你必须确保可公开访问存储帐户“somestorageaccount”中的容器“somecontainer”。否则，该脚本将引发“未找到”异常并失败。
 
@@ -197,33 +207,41 @@ Name | 脚本
 
 要将多个参数传递给 Add-AzureHDInsightScriptAction cmdlet，需要将字符串值的格式设置为包含脚本的所有参数。例如：
 
-    "-CertifcateUri wasbs:///abc.pfx -CertificatePassword 123456 -InstallFolderName MyFolder"
+```
+"-CertifcateUri wasbs:///abc.pfx -CertificatePassword 123456 -InstallFolderName MyFolder"
+```
 
 或
 
-    $parameters = '-Parameters "{0};{1};{2}"' -f $CertificateName,$certUriWithSasToken,$CertificatePassword
+```
+$parameters = '-Parameters "{0};{1};{2}"' -f $CertificateName,$certUriWithSasToken,$CertificatePassword
+```
 
 ### 群集部署失败引发异常
 
 如果要获取群集自定义未按预期成功执行的正确通知，则必须引发异常，并且群集设置失败。例如，你可能需要处理文件（如果存在），并应对文件不存在的错误情况。这将确保脚本正确存在，并且群集的状态也已知正确。以下代码段提供如何实现此目标的示例：
 
-    If(Test-Path($SomePath)) {
-        #Process file in some way
-    } else {
-        # File does not exist; handle error case
-        # Print error message
-    exit
-    }
+```
+If(Test-Path($SomePath)) {
+    #Process file in some way
+} else {
+    # File does not exist; handle error case
+    # Print error message
+exit
+}
+```
 
 在此代码段中，如果文件不存在，则会导致脚本在列显错误消息后实际正常退出的状态，而群集将进入运行中状态（前提是它“成功”完成了群集自定义进程）。如果要准确知道群集自定义操作由于缺少文件而未按预期成功完成，就更适合引发异常并使群集自定义步骤失败。要达到这个目的，必须使用以下示例代码段。
 
-    If(Test-Path($SomePath)) {
-        #Process file in some way
-    } else {
-        # File does not exist; handle error case
-        # Print error message
-    throw
-    }
+```
+If(Test-Path($SomePath)) {
+    #Process file in some way
+} else {
+    # File does not exist; handle error case
+    # Print error message
+throw
+}
+```
 
 ## 有关部署脚本操作的清单
 下面是我们在准备部署这些脚本时执行的步骤：
@@ -245,7 +263,9 @@ Name | 脚本
 
 **设置 Azure PowerShell 的执行策略** - 打开 Azure PowerShell 并运行（以管理员身份）以下命令，以将执行策略设置为 *LocalMachine* 和 *Unrestricted*：
 
-    Set-ExecutionPolicy Unrestricted –Scope LocalMachine
+```
+Set-ExecutionPolicy Unrestricted –Scope LocalMachine
+```
 
 我们要求此策略不受限制，因为脚本未签名。
 

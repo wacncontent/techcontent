@@ -46,24 +46,28 @@ Azure 导入/导出服务可能无法将某些文件或某个文件的部分内�
 ## 使用 RepairImport 命令  
 若要通过网络流式传输导入数据来修复这些数据，必须使用 `/d` 参数指定包含导入的原始文件的目录。此外，必须指定从存储帐户下载的复制日志文件。下面显示了一个用于修复部分失败的导入作业的典型命令行：
 
-    WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bob\Pictures;X:\BobBackup\photos /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C2V.log  
+```
+WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bob\Pictures;X:\BobBackup\photos /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C2V.log  
+```
 
 下面是复制日志文件的示例。在此示例中，为导入作业寄送的驱动器上某个文件的 64K 内容已损坏。由于这只是指示失败，作业中剩余 Blob 已成功导入。
 
-    <?xml version="1.0" encoding="utf-8"?>  
-    <DriveLog>  
-     <DriveId>9WM35C2V</DriveId>  
-     <Blob Status=”CompletedWithErrors”>  
-     <BlobPath>pictures/animals/koala.jpg</BlobPath>  
-     <FilePath>\animals\koala.jpg</FilePath>  
-     <Length>163840</Length>  
-     <ImportDisposition Status=”Overwritten”>overwrite</ImportDisposition>  
-     <PageRangeList>  
-      <PageRange Offset=”65536” Length=”65536” Hash=”AA2585F6F6FD01C4AD4256E018240CD4” Status=”Corrupted” />  
-     </PageRangeList>  
-     </Blob>  
-     <Status>CompletedWithErrors</Status>  
-    </DriveLog>  
+```
+<?xml version="1.0" encoding="utf-8"?>  
+<DriveLog>  
+ <DriveId>9WM35C2V</DriveId>  
+ <Blob Status=”CompletedWithErrors”>  
+ <BlobPath>pictures/animals/koala.jpg</BlobPath>  
+ <FilePath>\animals\koala.jpg</FilePath>  
+ <Length>163840</Length>  
+ <ImportDisposition Status=”Overwritten”>overwrite</ImportDisposition>  
+ <PageRangeList>  
+  <PageRange Offset=”65536” Length=”65536” Hash=”AA2585F6F6FD01C4AD4256E018240CD4” Status=”Corrupted” />  
+ </PageRangeList>  
+ </Blob>  
+ <Status>CompletedWithErrors</Status>  
+</DriveLog>  
+```
 
 将此复制日志传递给 Azure 导入/导出工具后，该工具将尝试通过网络复制缺失的内容来完成此文件的导入。根据上面的示例，该工具将在 `C:\Users\bob\Pictures` 和 `X:\BobBackup\photos` 目录中查找原始文件 `\animals\koala.jpg`。如果文件 `C:\Users\bob\Pictures\animals\koala.jpg` 存在，Azure 导入/导出工具会将缺失的数据部分复制到对应的 Blob `http://bobmediaaccount.blob.core.chinacloudapi.cn/pictures/animals/koala.jpg`。
 
@@ -74,12 +78,16 @@ Azure 导入/导出服务可能无法将某些文件或某个文件的部分内�
 
 使用 `/PathMapFile` 选项可以解决这些错误。可以指定包含工具无法正确识别的文件列表的文件名称。下面是可填充 `9WM35C2V_pathmap.txt` 的示例命令行：
 
-    WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bob\Pictures;X:\BobBackup\photos /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C2V.log /PathMapFile:C:\WAImportExport\9WM35C2V_pathmap.txt  
+```
+WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bob\Pictures;X:\BobBackup\photos /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C2V.log /PathMapFile:C:\WAImportExport\9WM35C2V_pathmap.txt  
+```
 
 然后，工具会将有问题的文件路径写入 `9WM35C2V_pathmap.txt`（每行一个路径）。例如，在运行该命令后，该文件可能包含以下条目：
 
-    \animals\koala.jpg  
-    \animals\kangaroo.jpg  
+```
+\animals\koala.jpg  
+\animals\kangaroo.jpg  
+```
 
  对于列表中的每个文件，应尝试找到并打开该文件，确保工具可对其进行处理。若要明确告知工具可找到文件的位置，可以修改路径映射文件，并在同一行上添加每个文件的路径（制表符分隔）：
 

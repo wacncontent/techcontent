@@ -42,22 +42,24 @@ Azure 虚拟机库包括若干含有 Microsoft SQL Server 的映像。虚拟机�
 
 ![PowerShell](./media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif)以下 PowerShell 脚本返回 ImageName 中包含“SQL-Server”的 Azure 映像列表：
 
-    # assumes you have already uploaded a management certificate to your Azure Subscription. View the thumbprint value from the "settings" menu in Azure classic portal.
+```
+# assumes you have already uploaded a management certificate to your Azure Subscription. View the thumbprint value from the "settings" menu in Azure classic portal.
 
-    $subscriptionID = ""    # REQUIRED: Provide your subscription ID.
-    $subscriptionName = "" # REQUIRED: Provide your subscription name.
-    $thumbPrint = "" # REQUIRED: Provide your certificate thumbprint.
-    $certificate = Get-Item cert:\currentuser\my\$thumbPrint # REQUIRED: If your certificate is in a different store, provide it here.-Ser  store is the one specified with the -ss parameter on MakeCert
+$subscriptionID = ""    # REQUIRED: Provide your subscription ID.
+$subscriptionName = "" # REQUIRED: Provide your subscription name.
+$thumbPrint = "" # REQUIRED: Provide your certificate thumbprint.
+$certificate = Get-Item cert:\currentuser\my\$thumbPrint # REQUIRED: If your certificate is in a different store, provide it here.-Ser  store is the one specified with the -ss parameter on MakeCert
 
-    Set-AzureSubscription -SubscriptionName $subscriptionName -Certificate $certificate -SubscriptionID $subscriptionID
+Set-AzureSubscription -SubscriptionName $subscriptionName -Certificate $certificate -SubscriptionID $subscriptionID
 
-    Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2016"
-    Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2016*"} | select imagename,category, location, label, description
+Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2016"
+Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2016*"} | select imagename,category, location, label, description
 
-    Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2014"
-    Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2014*"} | select imagename,category, location, label, description
+Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2014"
+Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2014*"} | select imagename,category, location, label, description
+```
 
 有关 SQL Server 支持的版本和功能的详细信息，请参阅以下各部分：
 
@@ -91,7 +93,9 @@ Azure 虚拟机库包括若干含有 Microsoft SQL Server 的映像。虚拟机�
 
 ![PowerShell](./media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif) 运行以下 PowerShell 命令来获取服务名称中包含"SQL"的已安装服务列表。
 
-    get-service | Where-Object{ $_.DisplayName -like '*SQL*' } | Select DisplayName, status, servicetype, dependentservices | format-Table -AutoSize
+```
+get-service | Where-Object{ $_.DisplayName -like '*SQL*' } | Select DisplayName, status, servicetype, dependentservices | format-Table -AutoSize
+```
 
 ## 一般建议和最佳实践
 
@@ -368,7 +372,9 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 1. 若要验证在 VM 上已使用的端口和哪个进程正在使用该端口，请使用管理权限运行以下命令：
 
-        netstat /ao
+    ```
+    netstat /ao
+    ```
 
 1. 使用 SQL Server Management Studio 通过更新表格 AS 实例常规属性中的“端口”值来创建一个静态的 Analysis Services 命名实例端口。有关详细信息，请参阅[配置 Windows 防火墙以允许 Analysis Services 访问](https://msdn.microsoft.com/zh-cn/library/ms174937.aspx#bkmk_fixed)中的“对默认或命名实例使用固定端口”。
 

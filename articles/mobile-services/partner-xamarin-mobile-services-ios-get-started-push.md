@@ -195,85 +195,101 @@ APNS 使用证书对你的移动服务进行身份验证。按照以下说明创
 
 1. 在 Xamarin.Studio 中，打开 AppDelegate.cs 文件，并添加以下属性：
 
-        public string DeviceToken { get; set; }
+    ```
+    public string DeviceToken { get; set; }
+    ```
 
 2. 打开 **TodoItem** 类，并添加以下属性：
 
-        [JsonProperty(PropertyName = "deviceToken")]
-        public string DeviceToken { get; set; }
+    ```
+    [JsonProperty(PropertyName = "deviceToken")]
+    public string DeviceToken { get; set; }
+    ```
 
 3. 在 **QSTodoService** 中，将现有的客户端声明重写为：
 
-        public MobileServiceClient client { get; private set; }
+    ```
+    public MobileServiceClient client { get; private set; }
+    ```
 
 4. 然后添加以下方法，以便 **AppDelegate** 稍后可以获取客户端来注册推送通知：
 
-        public MobileServiceClient GetClient {
-            get{
-                return client;
-            }
+    ```
+    public MobileServiceClient GetClient {
+        get{
+            return client;
         }
+    }
+    ```
 
 5. 在 **AppDelegate** 中，重写 **FinishedLaunching** 事件：
 
-        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
-        {
-            // registers for push for iOS8
-            var settings = UIUserNotificationSettings.GetSettingsForTypes(
-                UIUserNotificationType.Alert
-                | UIUserNotificationType.Badge
-                | UIUserNotificationType.Sound,
-                new NSSet());
+    ```
+    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    {
+        // registers for push for iOS8
+        var settings = UIUserNotificationSettings.GetSettingsForTypes(
+            UIUserNotificationType.Alert
+            | UIUserNotificationType.Badge
+            | UIUserNotificationType.Sound,
+            new NSSet());
 
-            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-            UIApplication.SharedApplication.RegisterForRemoteNotifications();
+        UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+        UIApplication.SharedApplication.RegisterForRemoteNotifications();
 
-            return true;
-        }
+        return true;
+    }
+    ```
 
 6. 在 **AppDelegate** 中，重写 **RegisteredForRemoteNotifications** 事件：
 
-        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-        {
-            // Modify device token
-            DeviceToken = deviceToken.Description;
-            DeviceToken = DeviceToken.Trim ('<', '>').Replace (" ", "");
+    ```
+    public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+    {
+        // Modify device token
+        DeviceToken = deviceToken.Description;
+        DeviceToken = DeviceToken.Trim ('<', '>').Replace (" ", "");
 
-            // Get Mobile Services client
-            MobileServiceClient client = QSTodoService.DefaultService.GetClient;
+        // Get Mobile Services client
+        MobileServiceClient client = QSTodoService.DefaultService.GetClient;
 
-            // Register for push with Mobile Services
-            IEnumerable<string> tag = new List<string>() { "uniqueTag" };
-            var push = client.GetPush ();
-            push.RegisterNativeAsync (DeviceToken, tag);
-        }
+        // Register for push with Mobile Services
+        IEnumerable<string> tag = new List<string>() { "uniqueTag" };
+        var push = client.GetPush ();
+        push.RegisterNativeAsync (DeviceToken, tag);
+    }
+    ```
 
 7. 在 **AppDelegate** 中，重写 **ReceivedRemoteNotification** 事件：
 
-        public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+    ```
+    public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+    {
+        Debug.WriteLine(userInfo.ToString());
+        NSObject inAppMessage;
+
+        bool success = userInfo.TryGetValue(new NSString("inAppMessage"), out inAppMessage);
+
+        if (success)
         {
-            Debug.WriteLine(userInfo.ToString());
-            NSObject inAppMessage;
-
-            bool success = userInfo.TryGetValue(new NSString("inAppMessage"), out inAppMessage);
-
-            if (success)
-            {
-                var alert = new UIAlertView("Got push notification", inAppMessage.ToString(), null, "OK", null);
-                alert.Show();
-            }
+            var alert = new UIAlertView("Got push notification", inAppMessage.ToString(), null, "OK", null);
+            alert.Show();
         }
+    }
+    ```
 
 8. 在 **QSTodoListViewController** 中，修改 **OnAdd** 操作以获取存储在 **AppDelegeate** 中的设备标记，并将它存储到所添加的 **TodoItem** 中。
 
       string deviceToken = ((AppDelegate)UIApplication.SharedApplication.Delegate).DeviceToken;
 
-            var newItem = new TodoItem() 
-            {
-                Text = itemText.Text, 
-                Complete = false,
-                DeviceToken = deviceToken
-            };
+      ```
+        var newItem = new TodoItem() 
+        {
+            Text = itemText.Text, 
+            Complete = false,
+            DeviceToken = deviceToken
+        };
+      ```
 
 你的应用现已更新，可支持推送通知。
 
@@ -291,24 +307,26 @@ APNS 使用证书对你的移动服务进行身份验证。按照以下说明创
 
 3. 将 insert 函数替换为以下代码，然后单击“保存”：
 
-        function insert(item, user, request) {
-            request.execute();
-            // Set timeout to delay the notification, to provide time for the 
-            // app to be closed on the device to demonstrate toast notifications
-            setTimeout(function() {
-                push.apns.send("uniqueTag", {
-                    alert: "Toast: " + item.text,
-                    payload: {
-                        inAppMessage: "Hey, a new item arrived: '" + item.text + "'"
-                    }
-                });
-            }, 2500);
-        }
+    ```
+    function insert(item, user, request) {
+        request.execute();
+        // Set timeout to delay the notification, to provide time for the 
+        // app to be closed on the device to demonstrate toast notifications
+        setTimeout(function() {
+            push.apns.send("uniqueTag", {
+                alert: "Toast: " + item.text,
+                payload: {
+                    inAppMessage: "Hey, a new item arrived: '" + item.text + "'"
+                }
+            });
+        }, 2500);
+    }
+    ```
 
        这将会注册一个新的插入脚本，该脚本使用[apns 对象]将推送通知（插入的文本）发送到插入请求中提供的设备。
 
-    >[!NOTE]
-    >此脚本将延迟发送通知，使你有足够的时间关闭应用程序以接收 toast 通知。
+   >[!NOTE]
+   >此脚本将延迟发送通知，使你有足够的时间关闭应用程序以接收 toast 通知。
 
 ##  <a name="test"></a>在应用程序中测试推送通知
 

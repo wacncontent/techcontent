@@ -2,15 +2,21 @@
 
 - 若要将其他的地址前缀**添加**到已创建的但尚无网关连接的本地网关，请使用下面的示例。请确保将值更改为自己的值。
 
-        $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName `
-        Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $local `
-        -AddressPrefix @('10.0.0.0/24','20.0.0.0/24','30.0.0.0/24')
+    ```
+    $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName
+    ``` `
+    ```
+    Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $local `
+    -AddressPrefix @('10.0.0.0/24','20.0.0.0/24','30.0.0.0/24')
+    ```
 
 - 若要从没有 VPN 连接的本地网关**删除**地址前缀，请使用下面的示例。省去你不再需要的前缀。在此示例中，我们不再需要前缀 20.0.0.0/24（来自前面的示例），因此我们将更新本地网关并排除该前缀。
 
-        $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName `
-        Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $local `
-        -AddressPrefix @('10.0.0.0/24','30.0.0.0/24')
+    ```
+    $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName `
+    Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $local `
+    -AddressPrefix @('10.0.0.0/24','30.0.0.0/24')
+    ```
 
 ### <a name="withconnection"></a>如何添加或删除前缀 - 现有网关连接
 
@@ -21,7 +27,9 @@
 
 1. 删除连接。
 
-        Remove-AzureRmVirtualNetworkGatewayConnection -Name MyGWConnectionName -ResourceGroupName MyRGName
+    ```
+    Remove-AzureRmVirtualNetworkGatewayConnection -Name MyGWConnectionName -ResourceGroupName MyRGName
+    ```
 
 2. 修改本地网关的地址前缀。
 
@@ -42,10 +50,12 @@
 
     创建连接。请注意，此示例使用先前步骤中设置的 $local 变量。
 
-        New-AzureRmVirtualNetworkGatewayConnection -Name MyGWConnectionName `
-        -ResourceGroupName MyRGName -Location 'China North' `
-        -VirtualNetworkGateway1 $gateway1 -LocalNetworkGateway2 $local `
-        -ConnectionType IPsec `
-        -RoutingWeight 10 -SharedKey 'abc123'
+    ```
+    New-AzureRmVirtualNetworkGatewayConnection -Name MyGWConnectionName `
+    -ResourceGroupName MyRGName -Location 'China North' `
+    -VirtualNetworkGateway1 $gateway1 -LocalNetworkGateway2 $local `
+    -ConnectionType IPsec `
+    -RoutingWeight 10 -SharedKey 'abc123'
+    ```
 
 <!---HONumber=Mooncake_0822_2016-->

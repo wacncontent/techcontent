@@ -33,10 +33,12 @@ ms.author: krisragh
 
 2. 单击“脚本”，选择“Insert”操作，将现有脚本替换为以下函数，然后单击“保存”。
 
-        function insert(item, user, request) {
-          item.userId = user.userId;
-          request.execute();
-        }
+    ```
+    function insert(item, user, request) {
+      item.userId = user.userId;
+      request.execute();
+    }
+    ```
 
     在插入之前，此脚本会在项中添加已经过身份验证的用户的用户 ID。
 
@@ -45,10 +47,12 @@ ms.author: krisragh
 
 3. 同样，请将现有的 **Read** 操作替换为以下函数。此脚本将会筛选返回的 TodoItem 对象，使用户只会收到他们自己的插入项。
 
-        function read(query, user, request) {
-           query.where({ userId: user.userId });
-           request.execute();
-        }
+    ```
+    function read(query, user, request) {
+       query.where({ userId: user.userId });
+       request.execute();
+    }
+    ```
 
 ##  <a name="test-app"></a>测试应用程序
 

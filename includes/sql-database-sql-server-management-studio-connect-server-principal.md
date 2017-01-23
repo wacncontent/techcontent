@@ -11,7 +11,7 @@
  - **身份验证类型**：本文介绍如何使用 **SQL Server 身份验证**进行连接。有关使用 Azure Active Directory 进行连接的详细信息，请参阅[使用 Active Directory 集成身份验证进行连接](../articles/sql-database/sql-database-aad-authentication.md#connect-using-active-directory-integrated-authentication)、[使用 Active Directory 密码身份验证进行连接](../articles/sql-database/sql-database-aad-authentication.md#connect-using-active-directory-password-authentication)。
  - **用户名**：输入有权访问服务器上的数据库的用户名称（例如，创建服务器时设置的“服务器管理员”）。
  - **密码**：输入指定用户的密码（例如，创建服务器时设置的“密码”）。
-    ![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-sql-server-management-studio-connect-server-principal/connect.png)  
+   ![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-sql-server-management-studio-connect-server-principal/connect.png)  
 
 3. 单击“连接”。
 

@@ -166,11 +166,13 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 在上面的屏幕快照中，文件夹名称嵌入了 Hadoop 版本号。版本号可以根据群集上安装的 Hadoop 组件的版本而更改。可以使用 Hadoop 环境变量来引用这些文件夹。例如：
 
-    cd %hadoop_home%
-    cd %hive_home%
-    cd %pig_home%
-    cd %sqoop_home%
-    cd %hcatalog_home%
+```
+cd %hadoop_home%
+cd %hive_home%
+cd %pig_home%
+cd %sqoop_home%
+cd %hcatalog_home%
+```
 
 ##后续步骤
 在本文中，你学习了如何使用 Azure 经典管理门户创建 HDInsight 群集以及如何打开 Hadoop 命令行工具。若要了解更多信息，请参阅下列文章：

@@ -73,7 +73,9 @@ Azure 存储分析执行日志记录并为存储帐户提供指标数据。可�
 ### 日志命名约定
 用以下格式写入每个日志。
 
-    <service-name>/YYYY/MM/DD/hhmm/<counter>.log
+```
+<service-name>/YYYY/MM/DD/hhmm/<counter>.log
+```
 
 下表说明了日志名称中的每个属性。
 
@@ -89,11 +91,15 @@ Azure 存储分析执行日志记录并为存储帐户提供指标数据。可�
 
 可使用以下完整示例日志名称组合前述示例。
 
-    blob/2011/07/31/1800/000001.log
+```
+blob/2011/07/31/1800/000001.log
+```
 
 可使用以下示例 URI 访问前述日志。
 
-    https://<accountname>.blob.core.chinacloudapi.cn/$logs/blob/2011/07/31/1800/000001.log 
+```
+https://<accountname>.blob.core.chinacloudapi.cn/$logs/blob/2011/07/31/1800/000001.log 
+```
 
 记录存储请求时，生成的日志名称与完成请求的操作时间（小时）关联。例如，如果在 2011 年 7 月 31 日下午 6:30 完成 GetBlob 请求，则会写入具有以下前缀的日志：`blob/2011/07/31/1800/`
 

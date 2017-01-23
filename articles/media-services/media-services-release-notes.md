@@ -79,12 +79,14 @@ Azure 媒体服务现允许通过 Apple FairPlay 动态加密 HTTP Live Streamin
 
 适用于 .NET 的 Azure 媒体服务 SDK 最新版本 (3.5.3) 包含 Widevine 相关 Bug 修复。该问题是：无法对 Widevine 加密的多个资产重复使用 AssetDeliveryPolicy。为修复此 Bug，向 SDK 添加了以下属性：**WidevineBaseLicenseAcquisitionUrl**。
 
-    Dictionary<AssetDeliveryPolicyConfigurationKey, string> assetDeliveryPolicyConfiguration =
-        new Dictionary<AssetDeliveryPolicyConfigurationKey, string>
-    {
-        {AssetDeliveryPolicyConfigurationKey.WidevineBaseLicenseAcquisitionUrl,"http://testurl"},
+```
+Dictionary<AssetDeliveryPolicyConfigurationKey, string> assetDeliveryPolicyConfiguration =
+    new Dictionary<AssetDeliveryPolicyConfigurationKey, string>
+{
+    {AssetDeliveryPolicyConfigurationKey.WidevineBaseLicenseAcquisitionUrl,"http://testurl"},
 
-    };
+};
+```
 
 ##<a id="jan_changes_16"></a>2016 年 1 月版本
 
@@ -227,7 +229,9 @@ Azure 媒体服务 .NET SDK 当前版本为 3.1.0.1。
 
 此版本将默认的 Microsoft.WindowsAzure.MediaServices.Client.ContentKeyAuthorization.TokenRestrictionTemplate 构造函数标记为已过时。新的构造函数将 TokenType 作为参数。
 
-    TokenRestrictionTemplate template = new TokenRestrictionTemplate(TokenType.SWT);
+```
+TokenRestrictionTemplate template = new TokenRestrictionTemplate(TokenType.SWT);
+```
 
 ##<a id="december_changes_14"></a>2014 年 12 月版本
 

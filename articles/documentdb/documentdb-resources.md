@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 12/14/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: anhoh
 ---
 
@@ -219,51 +219,55 @@ DocumentDB 查询模型尝试在功能、效率和简单性之间取得平衡。
 
 创建集合之后即可使用 [Azure DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或任一[客户端 SDK](https://msdn.microsoft.com/zh-cn/library/azure/dn781482.aspx) 向集合注册存储过程、触发器和 UDF。注册后，你可以引用并执行它们。请考虑以下完全使用 JavaScript 编写的存储过程，此代码采用两个参数（书名和作者姓名），并创建了一个新文档，对文档进行查询，然后更新文档 — 所有这些操作都是在一个隐式的 ACID 事务内完成。在执行期间的任何时刻，如果引发 JavaScript 异常，则中止整个事务。
 
-    function businessLogic(name, author) {
-        var context = getContext();
-        var collectionManager = context.getCollection();        
-        var collectionLink = collectionManager.getSelfLink()
+```
+function businessLogic(name, author) {
+    var context = getContext();
+    var collectionManager = context.getCollection();        
+    var collectionLink = collectionManager.getSelfLink()
 
-        // create a new document.
-        collectionManager.createDocument(collectionLink,
-            {id: name, author: author},
-            function(err, documentCreated) {
-                if(err) throw new Error(err.message);
+    // create a new document.
+    collectionManager.createDocument(collectionLink,
+        {id: name, author: author},
+        function(err, documentCreated) {
+            if(err) throw new Error(err.message);
 
-                // filter documents by author
-                var filterQuery = "SELECT * from root r WHERE r.author = 'George R.'";
-                collectionManager.queryDocuments(collectionLink,
-                    filterQuery,
-                    function(err, matchingDocuments) {
-                        if(err) throw new Error(err.message);
+            // filter documents by author
+            var filterQuery = "SELECT * from root r WHERE r.author = 'George R.'";
+            collectionManager.queryDocuments(collectionLink,
+                filterQuery,
+                function(err, matchingDocuments) {
+                    if(err) throw new Error(err.message);
 
-                        context.getResponse().setBody(matchingDocuments.length);
+                    context.getResponse().setBody(matchingDocuments.length);
 
-                        // Replace the author name for all documents that satisfied the query.
-                        for (var i = 0; i < matchingDocuments.length; i++) {
-                            matchingDocuments[i].author = "George R. R. Martin";
-                            // we don’t need to execute a callback because they are in parallel
-                            collectionManager.replaceDocument(matchingDocuments[i]._self,
-                                matchingDocuments[i]);   
-                        }
-                    })
-            })
-    };
+                    // Replace the author name for all documents that satisfied the query.
+                    for (var i = 0; i < matchingDocuments.length; i++) {
+                        matchingDocuments[i].author = "George R. R. Martin";
+                        // we don’t need to execute a callback because they are in parallel
+                        collectionManager.replaceDocument(matchingDocuments[i]._self,
+                            matchingDocuments[i]);   
+                    }
+                })
+        })
+};
+```
 
 客户端可以将以上 JavaScript 逻辑“运送”到用于通过 HTTP POST 进行的事务性执行的数据库。有关使用 HTTP 方法的详细信息，请参阅 [RESTful interactions with DocumentDB resources](https://msdn.microsoft.com/zh-cn/library/azure/mt622086.aspx)（与 DocumentDB 资源进行 RESTful 交互）。
 
-    client.createStoredProcedureAsync(collection._self, {id: "CRUDProc", body: businessLogic})
-       .then(function(createdStoredProcedure) {
-            return client.executeStoredProcedureAsync(createdStoredProcedure.resource._self,
-                "NoSQL Distilled",
-                "Martin Fowler");
-        })
-        .then(function(result) {
-            console.log(result);
-        },
-        function(error) {
-            console.log(error);
-        });
+```
+client.createStoredProcedureAsync(collection._self, {id: "CRUDProc", body: businessLogic})
+   .then(function(createdStoredProcedure) {
+        return client.executeStoredProcedureAsync(createdStoredProcedure.resource._self,
+            "NoSQL Distilled",
+            "Martin Fowler");
+    })
+    .then(function(result) {
+        console.log(result);
+    },
+    function(error) {
+        console.log(error);
+    });
+```
 
 请注意，由于数据库本身能够识别 JSON 和 JavaScript，因此没有任何类型系统不匹配，也不需要“OR 映射”或代码生成方法。
 
@@ -277,127 +281,145 @@ DocumentDB 查询模型尝试在功能、效率和简单性之间取得平衡。
 ### 注册存储过程
 注册存储过程将通过 HTTP POST 在集合上创建新的存储过程资源。
 
-    var storedProc = {
-        id: "validateAndCreate",
-        body: function (documentToCreate) {
-            documentToCreate.id = documentToCreate.id.toUpperCase();
+```
+var storedProc = {
+    id: "validateAndCreate",
+    body: function (documentToCreate) {
+        documentToCreate.id = documentToCreate.id.toUpperCase();
 
-            var collectionManager = getContext().getCollection();
-            collectionManager.createDocument(collectionManager.getSelfLink(),
-                documentToCreate,
-                function(err, documentCreated) {
-                    if(err) throw new Error('Error while creating document: ' + err.message;
-                    getContext().getResponse().setBody('success - created ' + 
-                            documentCreated.name);
-                });
-        }
-    };
+        var collectionManager = getContext().getCollection();
+        collectionManager.createDocument(collectionManager.getSelfLink(),
+            documentToCreate,
+            function(err, documentCreated) {
+                if(err) throw new Error('Error while creating document: ' + err.message;
+                getContext().getResponse().setBody('success - created ' + 
+                        documentCreated.name);
+            });
+    }
+};
 
-    client.createStoredProcedureAsync(collection._self, storedProc)
-        .then(function (createdStoredProcedure) {
-            console.log("Successfully created stored procedure");
-        }, function(error) {
-            console.log("Error");
-        });
+client.createStoredProcedureAsync(collection._self, storedProc)
+    .then(function (createdStoredProcedure) {
+        console.log("Successfully created stored procedure");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 执行存储过程
 执行存储过程是针对现有的存储过程资源通过将参数传递给请求正文中的过程发出 HTTP POST 而实现的。
 
-    var inputDocument = {id : "document1", author: "G. G. Marquez"};
-    client.executeStoredProcedureAsync(createdStoredProcedure.resource._self, inputDocument)
-        .then(function(executionResult) {
-            assert.equal(executionResult, "success - created DOCUMENT1");
-        }, function(error) {
-            console.log("Error");
-        });
+```
+var inputDocument = {id : "document1", author: "G. G. Marquez"};
+client.executeStoredProcedureAsync(createdStoredProcedure.resource._self, inputDocument)
+    .then(function(executionResult) {
+        assert.equal(executionResult, "success - created DOCUMENT1");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 取消注册存储过程
 取消注册存储过程只需针对现有的存储过程资源发出 HTTP DELETE 即可完成。
 
-    client.deleteStoredProcedureAsync(createdStoredProcedure.resource._self)
-        .then(function (response) {
-            return;
-        }, function(error) {
-            console.log("Error");
-        });
+```
+client.deleteStoredProcedureAsync(createdStoredProcedure.resource._self)
+    .then(function (response) {
+        return;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 注册预触发器
 注册触发器将通过 HTTP POST 在集合上创建新的触发器资源。你可以指定触发器是前触发还是后触发，也可以指定与之关联的操作类型（例如创建、替换、删除或全部）。
 
-    var preTrigger = {
-        id: "upperCaseId",
-        body: function() {
-                var item = getContext().getRequest().getBody();
-                item.id = item.id.toUpperCase();
-                getContext().getRequest().setBody(item);
-        },
-        triggerType: TriggerType.Pre,
-        triggerOperation: TriggerOperation.All
-    }
+```
+var preTrigger = {
+    id: "upperCaseId",
+    body: function() {
+            var item = getContext().getRequest().getBody();
+            item.id = item.id.toUpperCase();
+            getContext().getRequest().setBody(item);
+    },
+    triggerType: TriggerType.Pre,
+    triggerOperation: TriggerOperation.All
+}
 
-    client.createTriggerAsync(collection._self, preTrigger)
-        .then(function (createdPreTrigger) {
-            console.log("Successfully created trigger");
-        }, function(error) {
-            console.log("Error");
-        });
+client.createTriggerAsync(collection._self, preTrigger)
+    .then(function (createdPreTrigger) {
+        console.log("Successfully created trigger");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 执行前触发
 触发器的执行是通过在通过请求标头发出文档资源的 POST/PUT/DELETE 请求时指定现有触发器名称完成的。
 
-    client.createDocumentAsync(collection._self, { id: "doc1", key: "Love in the Time of Cholera" }, { preTriggerInclude: "upperCaseId" })
-        .then(function(createdDocument) {
-            assert.equal(createdDocument.resource.id, "DOC1");
-        }, function(error) {
-            console.log("Error");
-        });
+```
+client.createDocumentAsync(collection._self, { id: "doc1", key: "Love in the Time of Cholera" }, { preTriggerInclude: "upperCaseId" })
+    .then(function(createdDocument) {
+        assert.equal(createdDocument.resource.id, "DOC1");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 取消注册前触发
 取消注册触发器只需针对现有的触发器资源发出 HTTP DELETE 即可完成。
 
-    client.deleteTriggerAsync(createdPreTrigger._self);
-        .then(function(response) {
-            return;
-        }, function(error) {
-            console.log("Error");
-        });
+```
+client.deleteTriggerAsync(createdPreTrigger._self);
+    .then(function(response) {
+        return;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 注册 UDF
 注册 UDF 将通过 HTTP POST 在集合上创建新的UDF 资源。
 
-    var udf = { 
-        id: "mathSqrt",
-        body: function(number) {
-                return Math.sqrt(number);
-        },
-    };
-    client.createUserDefinedFunctionAsync(collection._self, udf)
-        .then(function (createdUdf) {
-            console.log("Successfully created stored procedure");
-        }, function(error) {
-            console.log("Error");
-        });
+```
+var udf = { 
+    id: "mathSqrt",
+    body: function(number) {
+            return Math.sqrt(number);
+    },
+};
+client.createUserDefinedFunctionAsync(collection._self, udf)
+    .then(function (createdUdf) {
+        console.log("Successfully created stored procedure");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 执行作为查询的一部分的 UDF
 可以将 UDF 指定为 SQL 查询的一部分，将其用作一种扩展核心 [DocumentDB 的 SQL 查询语言](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)的方法。
 
-    var filterQuery = "SELECT udf.mathSqrt(r.Age) AS sqrtAge FROM root r WHERE r.FirstName='John'";
-    client.queryDocuments(collection._self, filterQuery).toArrayAsync();
-        .then(function(queryResponse) {
-            var queryResponseDocuments = queryResponse.feed;
-        }, function(error) {
-            console.log("Error");
-        });
+```
+var filterQuery = "SELECT udf.mathSqrt(r.Age) AS sqrtAge FROM root r WHERE r.FirstName='John'";
+client.queryDocuments(collection._self, filterQuery).toArrayAsync();
+    .then(function(queryResponse) {
+        var queryResponseDocuments = queryResponse.feed;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 取消注册 UDF
 取消注册 UDF 只需针对现有的 UDF 资源发出 HTTP DELETE 即可完成。
 
-    client.deleteUserDefinedFunctionAsync(createdUdf._self)
-        .then(function(response) {
-            return;
-        }, function(error) {
-            console.log("Error");
-        });
+```
+client.deleteUserDefinedFunctionAsync(createdUdf._self)
+    .then(function(response) {
+        return;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 尽管上面的代码段演示了通过 [DocumentDB JavaScript SDK](https://github.com/Azure/azure-documentdb-js) 注册 \(POST\)、取消注册 \(PUT\)、读取/列出 \(GET\) 和执行 \(POST\)，但也可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或其他[客户端 SDK](https://msdn.microsoft.com/zh-cn/library/azure/dn781482.aspx)。
 
@@ -462,3 +484,4 @@ DocumentDB 用户是指对权限进行分组的逻辑命名空间。DocumentDB �
 [3]: ./media/documentdb-resources/resources3.png
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: wording update -->

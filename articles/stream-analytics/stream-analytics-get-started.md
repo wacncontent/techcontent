@@ -68,11 +68,15 @@ ms.author: jeffstok
 
 3. 启动应用程序。用法如下：
 
-        telcodatagen.exe [#NumCDRsPerHour] [SIM Card Fraud Probability] [#DurationHours]
+    ```
+    telcodatagen.exe [#NumCDRsPerHour] [SIM Card Fraud Probability] [#DurationHours]
+    ```
 
 以下示例将生成 1000 个事件，在为时 2 小时的过程中，有 20% 的可能性会出现欺诈行为。
 
-    telcodatagen.exe 1000 .2 2
+```
+telcodatagen.exe 1000 .2 2
+```
 
 你会看到记录被发送到事件中心。将在此实时欺诈检测应用程序中使用的某些关键字段定义如下：
 
@@ -148,7 +152,9 @@ ms.author: jeffstok
 1. 单击流分析作业页顶部的**“查询”**。
 2. 将以下内容添加到代码编辑器：
 
-        SELECT * FROM CallStream
+    ```
+    SELECT * FROM CallStream
+    ```
 
     > 请确保输入源的名称与你此前指定的输入的名称相匹配。
 
@@ -164,8 +170,10 @@ ms.author: jeffstok
 
 1. 在代码编辑器中将查询更改为：
 
-        SELECT CallRecTime, SwitchNum, CallingIMSI, CallingNum, CalledNum
-        FROM CallStream
+    ```
+    SELECT CallRecTime, SwitchNum, CallingIMSI, CallingNum, CalledNum
+    FROM CallStream
+    ```
 
 2. 单击查询编辑器下的**“重新运行”**以查看查询结果。
 
@@ -177,9 +185,11 @@ ms.author: jeffstok
 
 1. 在代码编辑器中将查询更改为：
 
-        SELECT System.Timestamp as WindowEnd, SwitchNum, COUNT(*) as CallCount
-        FROM CallStream TIMESTAMP BY CallRecTime
-        GROUP BY TUMBLINGWINDOW(s, 5), SwitchNum
+    ```
+    SELECT System.Timestamp as WindowEnd, SwitchNum, COUNT(*) as CallCount
+    FROM CallStream TIMESTAMP BY CallRecTime
+    GROUP BY TUMBLINGWINDOW(s, 5), SwitchNum
+    ```
 
     此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，将根据每个事件到达事件中心的时间执行开窗操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
 
@@ -195,13 +205,15 @@ ms.author: jeffstok
 
 1. 在代码编辑器中将查询更改为：
 
-        SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
-        CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
-        FROM CallStream CS1 TIMESTAMP BY CallRecTime
-        JOIN CallStream CS2 TIMESTAMP BY CallRecTime
-        ON CS1.CallingIMSI = CS2.CallingIMSI
-        AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5
-        WHERE CS1.SwitchNum != CS2.SwitchNum
+    ```
+    SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
+    CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
+    FROM CallStream CS1 TIMESTAMP BY CallRecTime
+    JOIN CallStream CS2 TIMESTAMP BY CallRecTime
+    ON CS1.CallingIMSI = CS2.CallingIMSI
+    AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5
+    WHERE CS1.SwitchNum != CS2.SwitchNum
+    ```
 
 2. 单击查询编辑器下的**“重新运行”**以查看查询结果。
 

@@ -76,85 +76,87 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 4. 从 Hyper-V 站点中删除所有主机后，将该站点删除。在“Site Recovery 基础结构”>“对于 System Center VMM”>“Hyper-V 站点”中，右键单击站点 >“删除”。
 5. 在每个已删除的 Hyper-V 主机上运行以下脚本。该脚本清理服务器上的设置，并从保管库中取消注册该服务器。
 
-        pushd .
-        try
+    ```
+    pushd .
+    try
+    {
+         $windowsIdentity=[System.Security.Principal.WindowsIdentity]::GetCurrent()
+         $principal=new-object System.Security.Principal.WindowsPrincipal($windowsIdentity)
+         $administrators=[System.Security.Principal.WindowsBuiltInRole]::Administrator
+         $isAdmin=$principal.IsInRole($administrators)
+         if (!$isAdmin)
+         {
+            "Please run the script as an administrator in elevated mode."
+            $choice = Read-Host
+            return;       
+         }
+
+        $error.Clear()    
+        "This script will remove the old Azure Site Recovery Provider related properties. Do you want to continue (Y/N) ?"
+        $choice =  Read-Host
+
+        if (!($choice -eq 'Y' -or $choice -eq 'y'))
         {
-             $windowsIdentity=[System.Security.Principal.WindowsIdentity]::GetCurrent()
-             $principal=new-object System.Security.Principal.WindowsPrincipal($windowsIdentity)
-             $administrators=[System.Security.Principal.WindowsBuiltInRole]::Administrator
-             $isAdmin=$principal.IsInRole($administrators)
-             if (!$isAdmin)
-             {
-                "Please run the script as an administrator in elevated mode."
-                $choice = Read-Host
-                return;       
-             }
-
-            $error.Clear()    
-            "This script will remove the old Azure Site Recovery Provider related properties. Do you want to continue (Y/N) ?"
-            $choice =  Read-Host
-
-            if (!($choice -eq 'Y' -or $choice -eq 'y'))
-            {
-            "Stopping cleanup."
-            return;
-            }
-
-            $serviceName = "dra"
-            $service = Get-Service -Name $serviceName
-            if ($service.Status -eq "Running")
-            {
-                "Stopping the Azure Site Recovery service..."
-                net stop $serviceName
-            }
-
-            $asrHivePath = "HKLM:\SOFTWARE\Microsoft\Azure Site Recovery"
-            $registrationPath = $asrHivePath + '\Registration'
-            $proxySettingsPath = $asrHivePath + '\ProxySettings'
-            $draIdvalue = 'DraID'
-
-            if (Test-Path $asrHivePath)
-            {
-                if (Test-Path $registrationPath)
-                {
-                    "Removing registration related registry keys."	
-                    Remove-Item -Recurse -Path $registrationPath
-                }
-
-                if (Test-Path $proxySettingsPath)
-            {
-                    "Removing proxy settings"
-                    Remove-Item -Recurse -Path $proxySettingsPath
-                }
-
-                $regNode = Get-ItemProperty -Path $asrHivePath
-                if($regNode.DraID -ne $null)
-                {            
-                    "Removing DraId"
-                    Remove-ItemProperty -Path $asrHivePath -Name $draIdValue
-                }
-                "Registry keys removed."
-            }
-
-            # First retrive all the certificates to be deleted
-            $ASRcerts = Get-ChildItem -Path cert:\localmachine\my | where-object {$_.friendlyname.startswith('ASR_SRSAUTH_CERT_KEY_CONTAINER') -or $_.friendlyname.startswith('ASR_HYPER_V_HOST_CERT_KEY_CONTAINER')}
-            # Open a cert store object
-            $store = New-Object System.Security.Cryptography.X509Certificates.X509Store("My","LocalMachine")
-            $store.Open('ReadWrite')
-            # Delete the certs
-            "Removing all related certificates"
-            foreach ($cert in $ASRcerts)
-            {
-                $store.Remove($cert)
-            }
-        }catch
-        {	
-            [system.exception]
-            Write-Host "Error occured" -ForegroundColor "Red"
-            $error[0] 
-            Write-Host "FAILED" -ForegroundColor "Red"
+        "Stopping cleanup."
+        return;
         }
-        popd
+
+        $serviceName = "dra"
+        $service = Get-Service -Name $serviceName
+        if ($service.Status -eq "Running")
+        {
+            "Stopping the Azure Site Recovery service..."
+            net stop $serviceName
+        }
+
+        $asrHivePath = "HKLM:\SOFTWARE\Microsoft\Azure Site Recovery"
+        $registrationPath = $asrHivePath + '\Registration'
+        $proxySettingsPath = $asrHivePath + '\ProxySettings'
+        $draIdvalue = 'DraID'
+
+        if (Test-Path $asrHivePath)
+        {
+            if (Test-Path $registrationPath)
+            {
+                "Removing registration related registry keys."	
+                Remove-Item -Recurse -Path $registrationPath
+            }
+
+            if (Test-Path $proxySettingsPath)
+        {
+                "Removing proxy settings"
+                Remove-Item -Recurse -Path $proxySettingsPath
+            }
+
+            $regNode = Get-ItemProperty -Path $asrHivePath
+            if($regNode.DraID -ne $null)
+            {            
+                "Removing DraId"
+                Remove-ItemProperty -Path $asrHivePath -Name $draIdValue
+            }
+            "Registry keys removed."
+        }
+
+        # First retrive all the certificates to be deleted
+        $ASRcerts = Get-ChildItem -Path cert:\localmachine\my | where-object {$_.friendlyname.startswith('ASR_SRSAUTH_CERT_KEY_CONTAINER') -or $_.friendlyname.startswith('ASR_HYPER_V_HOST_CERT_KEY_CONTAINER')}
+        # Open a cert store object
+        $store = New-Object System.Security.Cryptography.X509Certificates.X509Store("My","LocalMachine")
+        $store.Open('ReadWrite')
+        # Delete the certs
+        "Removing all related certificates"
+        foreach ($cert in $ASRcerts)
+        {
+            $store.Remove($cert)
+        }
+    }catch
+    {	
+        [system.exception]
+        Write-Host "Error occured" -ForegroundColor "Red"
+        $error[0] 
+        Write-Host "FAILED" -ForegroundColor "Red"
+    }
+    popd
+    ```
 
 ## 禁用对物理服务器的保护
 
@@ -177,33 +179,43 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 
 若已选择“停止管理计算机”且要复制到辅助站点，则请在主服务器上运行此脚本，以便清理主虚拟机的设置。在 VMM 控制台中，单击“PowerShell”按钮打开 VMM PowerShell 控制台。将 SQLVM1 替换为你的虚拟机名称。
 
-         $vm = get-scvirtualmachine -Name "SQLVM1"
-         Set-SCVirtualMachine -VM $vm -ClearDRProtection
+```
+     $vm = get-scvirtualmachine -Name "SQLVM1"
+     Set-SCVirtualMachine -VM $vm -ClearDRProtection
+```
 
 2. 在辅助 VMM 服务器上，运行此脚本以清理辅助虚拟机的设置：
 
-        $vm = get-scvirtualmachine -Name "SQLVM1"
-        Remove-SCVirtualMachine -VM $vm -Force
+    ```
+    $vm = get-scvirtualmachine -Name "SQLVM1"
+    Remove-SCVirtualMachine -VM $vm -Force
+    ```
 
 3. 在辅助 VMM 服务器上刷新 Hyper-V 主机服务器上的虚拟机，以便在 VMM 控制台中重新检测辅助 VM。
 4. 上述步骤清理 VMM 服务器上的复制设置。若要停止虚拟机的复制，请在主 VM 和辅助 VM 上运行以下脚本。将 SQLVM1 替换为你的虚拟机名称。
 
-        Remove-VMReplication –VMName “SQLVM1”
+    ```
+    Remove-VMReplication –VMName “SQLVM1”
+    ```
 
 ### 清理保护设置 - 复制到 Azure
 
 1. 若已选择“停止管理计算机”且要复制到 Azure，请通过 VMM 控制台使用 PowerShell 在源 VMM 服务器上运行此脚本。
 
-        $vm = get-scvirtualmachine -Name "SQLVM1"
-        Set-SCVirtualMachine -VM $vm -ClearDRProtection
+    ```
+    $vm = get-scvirtualmachine -Name "SQLVM1"
+    Set-SCVirtualMachine -VM $vm -ClearDRProtection
+    ```
 
 2. 上述步骤清理 VMM 服务器上的复制设置。若要停止运行在 Hyper-V 主机服务器上的虚拟机的复制，请运行以下脚本。将 SQLVM1 替换为你的虚拟机的名称，将 host01.contoso.com 替换为 Hyper-V 主机服务器的名称。
 
-        $vmName = "SQLVM1"
-        $hostName  = "host01.contoso.com"
-        $vm = Get-WmiObject -Namespace "root\virtualization\v2" -Query "Select * From Msvm_ComputerSystem Where ElementName = '$vmName'" -computername $hostName
-        $replicationService = Get-WmiObject -Namespace "root\virtualization\v2"  -Query "Select * From Msvm_ReplicationService"  -computername $hostName
-        $replicationService.RemoveReplicationRelationship($vm.__PATH)
+    ```
+    $vmName = "SQLVM1"
+    $hostName  = "host01.contoso.com"
+    $vm = Get-WmiObject -Namespace "root\virtualization\v2" -Query "Select * From Msvm_ComputerSystem Where ElementName = '$vmName'" -computername $hostName
+    $replicationService = Get-WmiObject -Namespace "root\virtualization\v2"  -Query "Select * From Msvm_ReplicationService"  -computername $hostName
+    $replicationService.RemoveReplicationRelationship($vm.__PATH)
+    ```
 
 ## 在 Hyper-V 站点中禁用对 Hyper-V VM 的保护
 
@@ -212,13 +224,15 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 1. 在“受保护的项”>“复制的项”中，右键单击计算机 >“删除”。
 2. 在“删除计算机”中，可以选择以下选项：
 
-    - **禁用对计算机的保护(推荐)**。使用此选项可停止复制计算机。将自动清理 Site Recovery 设置。
-    - **停止管理计算机**。如果选择此选项，将仅从保管库删除计算机。不会影响虚拟机的本地保护设置。若要删除计算机上的设置并从 Azure 订阅中删除虚拟机，需手动清理设置。如果你选择删除虚拟机及其硬盘，将从目标位置删除它们。
+   - **禁用对计算机的保护(推荐)**。使用此选项可停止复制计算机。将自动清理 Site Recovery 设置。
+   - **停止管理计算机**。如果选择此选项，将仅从保管库删除计算机。不会影响虚拟机的本地保护设置。若要删除计算机上的设置并从 Azure 订阅中删除虚拟机，需手动清理设置。如果你选择删除虚拟机及其硬盘，将从目标位置删除它们。
 3. 若已选择“停止管理计算机”，请在源 Hyper-V 主机服务器上运行此脚本，删除虚拟机的复制。将 SQLVM1 替换为你的虚拟机名称。
 
-        $vmName = "SQLVM1"
-        $vm = Get-WmiObject -Namespace "root\virtualization\v2" -Query "Select * From Msvm_ComputerSystem Where ElementName = '$vmName'"
-        $replicationService = Get-WmiObject -Namespace "root\virtualization\v2"  -Query "Select * From Msvm_ReplicationService"
-        $replicationService.RemoveReplicationRelationship($vm.__PATH)
+    ```
+    $vmName = "SQLVM1"
+    $vm = Get-WmiObject -Namespace "root\virtualization\v2" -Query "Select * From Msvm_ComputerSystem Where ElementName = '$vmName'"
+    $replicationService = Get-WmiObject -Namespace "root\virtualization\v2"  -Query "Select * From Msvm_ReplicationService"
+    $replicationService.RemoveReplicationRelationship($vm.__PATH)
+    ```
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

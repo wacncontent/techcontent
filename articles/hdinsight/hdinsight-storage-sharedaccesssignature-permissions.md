@@ -90,7 +90,9 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 4. 运行该项目。将显示控制台窗口。生成 SAS 之后，将显示如下所示的信息：
 
-        Container SAS token using stored access policy: sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
+    ```
+    Container SAS token using stored access policy: sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
+    ```
 
     保存 SAS 策略令牌，因为在将存储帐户关联到 HDInsight 群集时需要用到此信息。你还需要使用存储帐户名称和容器名称。
 
@@ -110,7 +112,9 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 2. 运行该脚本。脚本完成后，将显示如下所示的 SAS 令牌：
 
-        sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
+    ```
+    sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
+    ```
 
     保存 SAS 策略令牌，因为在将存储帐户关联到 HDInsight 群集时需要用到此信息。你还需要使用存储帐户名称和容器名称。
 
@@ -128,22 +132,24 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 1. 在文本编辑器中打开 `CreateCluster\HDInsightSAS.ps1` 文件，然后修改位于文档开头的以下值。
 
-        # Replace 'mycluster' with the name of the cluster to be created
-        $clusterName = 'mycluster'
-        # Valid value is 'Windows'
-        $osType = 'Windows'
-        # Replace with the Azure data center you want to the cluster to live in
-        $location = 'China North'
-        # Replace with the name of the default storage account to be created
-        $defaultStorageAccountName = 'mystorageaccount'
-        # Replace with the name of the SAS container created earlier
-        $SASContainerName = 'sascontainer'
-        # Replace with the name of the SAS storage account created earlier
-        $SASStorageAccountName = 'sasaccount'
-        # Replace with the SAS token generated earlier
-        $SASToken = 'sastoken'
-        # Set the number of worker nodes in the cluster
-        $clusterSizeInNodes = 2
+    ```
+    # Replace 'mycluster' with the name of the cluster to be created
+    $clusterName = 'mycluster'
+    # Valid value is 'Windows'
+    $osType = 'Windows'
+    # Replace with the Azure data center you want to the cluster to live in
+    $location = 'China North'
+    # Replace with the name of the default storage account to be created
+    $defaultStorageAccountName = 'mystorageaccount'
+    # Replace with the name of the SAS container created earlier
+    $SASContainerName = 'sascontainer'
+    # Replace with the name of the SAS storage account created earlier
+    $SASStorageAccountName = 'sasaccount'
+    # Replace with the SAS token generated earlier
+    $SASToken = 'sastoken'
+    # Set the number of worker nodes in the cluster
+    $clusterSizeInNodes = 2
+    ```
 
     例如，将 `'mycluster'` 更改为要创建的群集的名称。创建存储帐户和 SAS 令牌时，SAS 值应该与先前步骤中的值匹配。
 
@@ -153,7 +159,9 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 2. 在提示符下，使用以下命令对 Azure 订阅进行身份验证：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
     出现提示时，请使用 Azure 订阅帐户登录。
 
@@ -161,7 +169,9 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 2. 在提示符下，将目录切换到包含 HDInsightSAS.ps1 文件的 `CreateCluster` 目录。然后使用以下命令运行该脚本
 
-        .\HDInsightSAS.ps1
+    ```
+    .\HDInsightSAS.ps1
+    ```
 
     脚本运行后，会在创建存储帐户时将输出记录到 PowerShell 提示符下。然后它会提示你输入 HDInsight 群集的 HTTP 用户。这是用于保护群集的 HTTP/s 访问的用户帐户。
 
@@ -186,33 +196,45 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 1. 在提示符下，键入以下命令。将 __SASCONTAINER__ 替换为针对 SAS 存储帐户创建的容器名称。将 __SASACCOUNTNAME__ 替换为用于 SAS 的存储帐户名称：
 
-        hdfs dfs -ls wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/
+    ```
+    hdfs dfs -ls wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/
+    ```
 
     这会列出容器的内容，其中应包含创建容器和 SAS 时上传的文件。
 
 2. 使用以下命令验证是否可以读取该文件的内容。如上一步所述替换 __SASCONTAINER__ 和 __SASACCOUNTNAME__。将 __FILENAME__ 替换为前一个命令中显示的名称：
 
-        hdfs dfs -text wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME
+    ```
+    hdfs dfs -text wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME
+    ```
 
     这会列出文件的内容。
 
 3. 使用以下命令将文件下载到本地文件系统：
 
-        hdfs dfs -get wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME testfile.txt
+    ```
+    hdfs dfs -get wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME testfile.txt
+    ```
 
     这会将该文件下载到名为 __testfile.txt__ 的本地文件中。
 
 4. 使用以下命令将本地文件上传到 SAS 存储上名为 __testupload.txt__ 的新文件中：
 
-        hdfs dfs -put testfile.txt wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/testupload.txt
+    ```
+    hdfs dfs -put testfile.txt wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/testupload.txt
+    ```
 
     你将收到如下所示的消息：
 
-        put: java.io.IOException
+    ```
+    put: java.io.IOException
+    ```
 
     发生此错误的原因是存储位置仅支持读取和列出。使用以下命令将数据放在群集的可写默认存储中：
 
-        hdfs dfs -put testfile.txt wasbs:///testupload.txt
+    ```
+    hdfs dfs -put testfile.txt wasbs:///testupload.txt
+    ```
 
     这一次操作应该会成功完成。
 
@@ -222,12 +244,14 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 __症状__：使用 PowerShell 脚本创建群集时，你可能会收到以下错误消息：
 
-    New-AzureHDInsightCluster : A task was canceled.
-    At C:\Users\larryfr\Documents\GitHub\hdinsight-azure-storage-sas\CreateCluster\HDInsightSAS.ps1:62 char:5
-    +     New-AzureHDInsightCluster `
-    +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        + CategoryInfo          : NotSpecified: (:) [New-AzureHDInsightCluster], CloudException
-        + FullyQualifiedErrorId : Hyak.Common.CloudException,Microsoft.Azure.Commands.HDInsight.NewAzureHDInsightClusterCommand
+```
+New-AzureHDInsightCluster : A task was canceled.
+At C:\Users\larryfr\Documents\GitHub\hdinsight-azure-storage-sas\CreateCluster\HDInsightSAS.ps1:62 char:5
++     New-AzureHDInsightCluster `
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [New-AzureHDInsightCluster], CloudException
+    + FullyQualifiedErrorId : Hyak.Common.CloudException,Microsoft.Azure.Commands.HDInsight.NewAzureHDInsightClusterCommand
+```
 
 __原因__：如果你使用群集管理员/HTTP 用户的密码，则可能发生此错误。
 

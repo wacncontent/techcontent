@@ -38,7 +38,9 @@ ms.author: jgao
 1. 从桌面打开 **Hadoop 命令行**。
 2. 运行以下命令以获取 DNS 后缀:
 
-        ipconfig
+    ```
+    ipconfig
+    ```
 
     记下**特定于连接的 DNS 后缀**。例如 *myhbasecluster.f5.internal.chinacloudapp.cn*。连接到 HBase 群集时，需要使用 FQDN 连接到某一 Zookeeper。每个 HDInsight 群集有 3 个 Zookeeper。它们分别是 *zookeeper0*、*zookeeper1* 和 *zookeeper2*。FQDN 类似于 *zookeeper2.myhbasecluster.f5.internal.chinacloudapp.cn*。
 
@@ -47,20 +49,24 @@ ms.author: jgao
 1. 从桌面打开 **Hadoop 命令行**。
 2. 运行以下命令以打开 SQLLine：
 
-        cd %phoenix_home%\bin
-        sqlline.py [The FQDN of one of the Zookeepers]
+    ```
+    cd %phoenix_home%\bin
+    sqlline.py [The FQDN of one of the Zookeepers]
+    ```
 
     ![hdinsight hbase phoenix sqlline][hdinsight-hbase-phoenix-sqlline]
 
     示例中使用的命令：
 
-        CREATE TABLE Company (COMPANY_ID INTEGER PRIMARY KEY, NAME VARCHAR(225));
+    ```
+    CREATE TABLE Company (COMPANY_ID INTEGER PRIMARY KEY, NAME VARCHAR(225));
 
-        !tables
+    !tables
 
-        UPSERT INTO Company VALUES(1, 'Microsoft');
+    UPSERT INTO Company VALUES(1, 'Microsoft');
 
-        SELECT * FROM Company;
+    SELECT * FROM Company;
+    ```
 
 有关详细信息，请参阅 [SQLLine 手册](http://sqlline.sourceforge.net/#manual)和 [Phoenix 语法](http://phoenix.apache.org/language/index.html)。
 
@@ -79,7 +85,9 @@ ms.author: jgao
 
 - 获取 HBase 群集的特定于连接的 DNS 后缀。若要获取该后缀，请与群集建立连接桌面连接 (RDP)，然后运行 IPConfig。DNS 后缀类似于：
 
-        myhbase.b7.internal.chinacloudapp.cn
+    ```
+    myhbase.b7.internal.chinacloudapp.cn
+    ```
 - 在工作站中下载并安装 [Microsoft Visual Studio Express 2013 for Windows Desktop](https://www.visualstudio.com/products/visual-studio-express-vs.aspx)。需要使用该程序包的 makecert 来创建证书。  
 - 在工作站中下载并安装 [Java 运行时环境](http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html)。SQuirrel SQL 客户端 3.0 和更高版本需要 JRE 1.6 或更高版本。  
 
@@ -102,7 +110,9 @@ ms.author: jgao
 
 Phoenix 驱动程序 jar 文件位于 HBase 群集上。根据具体的版本，其路径类似于：
 
-    C:\apps\dist\phoenix-4.0.0.2.1.11.0-2316\phoenix-4.0.0.2.1.11.0-2316-client.jar
+```
+C:\apps\dist\phoenix-4.0.0.2.1.11.0-2316\phoenix-4.0.0.2.1.11.0-2316-client.jar
+```
 需将其复制到工作站的 [SQuirrel 安装文件夹]/lib 路径下。最简单的方法是与群集建立 RDP，然后使用文件复制/粘贴功能（Ctrl+C 和 Ctrl+V）将其复制到工作站。
 
 **将 Phoenix 驱动程序添加到 SQuirrel**
@@ -145,7 +155,9 @@ Phoenix 驱动程序 jar 文件位于 HBase 群集上。根据具体的版本，
 1. 单击“对象”选项卡旁边的“SQL”选项卡。
 2. 复制并粘贴以下代码：
 
-        CREATE TABLE IF NOT EXISTS us_population (state CHAR(2) NOT NULL, city VARCHAR NOT NULL, population BIGINT  CONSTRAINT my_pk PRIMARY KEY (state, city))
+    ```
+    CREATE TABLE IF NOT EXISTS us_population (state CHAR(2) NOT NULL, city VARCHAR NOT NULL, population BIGINT  CONSTRAINT my_pk PRIMARY KEY (state, city))
+    ```
 3. 单击运行按钮。
 
     ![HBase Phoenix SQuirrel][img-squirrel-sql]

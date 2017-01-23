@@ -32,29 +32,31 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机 JSON](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L295)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(variables('vmName'),copyindex())]",
-      "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "virtualMachineLoop",
-        "count": "[parameters('numberOfInstances')]"
-      },
-      "tags": {
-        "displayName": "virtual-machine"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageName'))]",
-        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]",
-        "nicLoop"
-      ],
-      "properties": {
-        "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
-        },
-          ........<truncated>  
-        }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Compute/virtualMachines",
+  "name": "[concat(variables('vmName'),copyindex())]",
+  "location": "[resourceGroup().location]",
+  "copy": {
+    "name": "virtualMachineLoop",
+    "count": "[parameters('numberOfInstances')]"
+  },
+  "tags": {
+    "displayName": "virtual-machine"
+  },
+  "dependsOn": [
+    "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageName'))]",
+    "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]",
+    "nicLoop"
+  ],
+  "properties": {
+    "availabilitySet": {
+      "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
+    },
+      ........<truncated>  
+    }
+```
 
 部署后，可以在 Azure 门户预览中查看虚拟机属性。
 
@@ -66,31 +68,35 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [存储帐户](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L109)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('vhdStorageName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "storage-account"
-      },
-      "properties": {
-        "accountType": "[variables('vhdStorageType')]"
-      }
-    },
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Storage/storageAccounts",
+  "name": "[variables('vhdStorageName')]",
+  "location": "[resourceGroup().location]",
+  "tags": {
+    "displayName": "storage-account"
+  },
+  "properties": {
+    "accountType": "[variables('vhdStorageType')]"
+  }
+},
+```
 
 存储帐户与虚拟机 Resource Manager 模板声明中的某个虚拟机相关联。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机与存储帐户的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L341)。
 
-    "osDisk": {
-      "name": "osdisk",
-      "vhd": {
-        "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('vhdStorageName')), '2015-06-15').primaryEndpoints.blob,'vhds/osdisk', copyindex(), '.vhd')]"
-      },
-      "caching": "ReadWrite",
-      "createOption": "FromImage"
-    }
+```
+"osDisk": {
+  "name": "osdisk",
+  "vhd": {
+    "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('vhdStorageName')), '2015-06-15').primaryEndpoints.blob,'vhds/osdisk', copyindex(), '.vhd')]"
+  },
+  "caching": "ReadWrite",
+  "createOption": "FromImage"
+}
+```
 
 部署之后，可在 Azure 门户预览中查看存储帐户。
 
@@ -108,36 +114,38 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟网络和子网](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L136)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('virtualNetworkName')]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroup'))]"
-      ],
-      "tags": {
-        "displayName": "virtual-network"
-      },
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "10.0.0.0/24"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnetName')]",
-            "properties": {
-              "addressPrefix": "10.0.0.0/24",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroup'))]"
-              }
-            }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Network/virtualNetworks",
+  "name": "[variables('virtualNetworkName')]",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [
+    "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroup'))]"
+  ],
+  "tags": {
+    "displayName": "virtual-network"
+  },
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/24"
+      ]
+    },
+    "subnets": [
+      {
+        "name": "[variables('subnetName')]",
+        "properties": {
+          "addressPrefix": "10.0.0.0/24",
+          "networkSecurityGroup": {
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroup'))]"
           }
-        ]
+        }
       }
-    }
+    ]
+  }
+}
+```
 
 在 Azure 门户预览中，虚拟网络如下图所示。请注意，使用模板部署的所有虚拟机都已附加到虚拟网络。
 
@@ -196,13 +204,15 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机网络配置文件](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L350)。
 
-    "networkProfile": {
-      "networkInterfaces": [
-        {
-          "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('networkInterfaceNamePrefix'), copyindex()))]"
-        }
-      ]
+```
+"networkProfile": {
+  "networkInterfaces": [
+    {
+      "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('networkInterfaceNamePrefix'), copyindex()))]"
     }
+  ]
+}
+```
 
 在 Azure 门户预览中，网络接口如下图所示。可以在网络接口资源上看到内部 IP 地址与虚拟机的关联。
 
@@ -218,36 +228,38 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [Azure SQL 数据库](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L401)。
 
+```
+{
+  "apiVersion": "2014-04-01-preview",
+  "type": "Microsoft.Sql/servers",
+  "name": "[variables('musicStoreSqlName')]",
+  "location": "[resourceGroup().location]",
+
+  "dependsOn": [],
+  "tags": {
+    "displayName": "sql-music-store"
+  },
+  "properties": {
+    "administratorLogin": "[parameters('adminUsername')]",
+    "administratorLoginPassword": "[parameters('sqlAdminPassword')]"
+  },
+  "resources": [
     {
       "apiVersion": "2014-04-01-preview",
-      "type": "Microsoft.Sql/servers",
-      "name": "[variables('musicStoreSqlName')]",
+      "type": "firewallrules",
+      "name": "firewall-allow-azure",
       "location": "[resourceGroup().location]",
-
-      "dependsOn": [],
-      "tags": {
-        "displayName": "sql-music-store"
-      },
+      "dependsOn": [
+        "[concat('Microsoft.Sql/servers/', variables('musicStoreSqlName'))]"
+      ],
       "properties": {
-        "administratorLogin": "[parameters('adminUsername')]",
-        "administratorLoginPassword": "[parameters('sqlAdminPassword')]"
-      },
-      "resources": [
-        {
-          "apiVersion": "2014-04-01-preview",
-          "type": "firewallrules",
-          "name": "firewall-allow-azure",
-          "location": "[resourceGroup().location]",
-          "dependsOn": [
-            "[concat('Microsoft.Sql/servers/', variables('musicStoreSqlName'))]"
-          ],
-          "properties": {
-            "startIpAddress": "0.0.0.0",
-            "endIpAddress": "0.0.0.0"
-          }
-        }
-      ]
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "0.0.0.0"
+      }
     }
+  ]
+}
+```
 
 Azure 门户预览中显示的 SQL Server 和 MusicStore 数据库视图。
 

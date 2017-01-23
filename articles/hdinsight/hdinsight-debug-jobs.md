@@ -96,7 +96,9 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 5. 双击“hadoopservicelog”。
 6. 添加筛选器。例如：
 
-        TraceLevel eq 'ERROR'
+    ```
+    TraceLevel eq 'ERROR'
+    ```
 
     ![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-visual-studio-filter.png)
 

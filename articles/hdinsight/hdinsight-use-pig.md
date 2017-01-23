@@ -54,7 +54,9 @@ Pig Latin 还支持使用用户定义函数 (UDF) 来调用外部组件，以便
 
 本示例使用 *log4j* 示例文件，该文件存储在 Blob 存储容器的 **/example/data/sample.log** 中。该文件中的每个日志都包含一行字段，其中包含一个 `[LOG LEVEL]` 字段，用于显示类型和严重性，例如：
 
-    2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```
+2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```
 
 在前面的示例中，日志级别为 ERROR。
 
@@ -63,7 +65,9 @@ Pig Latin 还支持使用用户定义函数 (UDF) 来调用外部组件，以便
 
 示例数据存储在 Azure Blob 存储中，HDInsight 可以将该存储用作 Hadoop 群集的默认文件系统。HDInsight 可以使用 **wasb** 前缀来访问存储在 Blob 中的文件。例如，若要访问 sample.log 文件，可使用以下语法：
 
-    wasbs:///example/data/sample.log
+```
+wasbs:///example/data/sample.log
+```
 
 由于 WASB 是 HDInsight 的默认存储，你也可以使用 Pig Latin 中的 **/example/data/sample.log** 来访问该文件。
 
@@ -74,13 +78,15 @@ Pig Latin 还支持使用用户定义函数 (UDF) 来调用外部组件，以便
 
 下面的 Pig Latin 作业从 HDInsight 群集的默认存储加载 **sample.log** 文件。然后，它会执行一系列转换，以便对输入数据中出现的每个日志级别进行计数。结果转储到 STDOUT。
 
-    LOGS = LOAD 'wasbs:///example/data/sample.log';
-    LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
-    FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
-    GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
-    FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
-    RESULT = order FREQUENCIES by COUNT desc;
-    DUMP RESULT;
+```
+LOGS = LOAD 'wasbs:///example/data/sample.log';
+LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
+FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
+GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
+FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
+RESULT = order FREQUENCIES by COUNT desc;
+DUMP RESULT;
+```
 
 下同详细显示了每个转换对数据的影响。
 

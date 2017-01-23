@@ -128,61 +128,77 @@ ms.author: iainfou
 
     以下示例在位于 `ChinaNorth`、名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM 上重置 RDP 连接：
 
-        Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" `
-            -VMName "myVM" -Location Westus -Name "myVMAccessExtension"
+    ```
+    Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" `
+        -VMName "myVM" -Location Westus -Name "myVMAccessExtension"
+    ```
 
 2. **验证网络安全组规则**。此故障排除步骤验证网络安全组中是否存在允许 RDP 流量的规则。RDP 的默认端口为 TCP 端口 3389。创建 VM 时，可能不会自动创建允许 RDP 流量的规则。
 
     首先，将网络安全组的所有配置数据分配到 `$rules` 变量。以下示例在名为 `myResourceGroup` 的资源组中获取名为 `myNetworkSecurityGroup` 的网络安全组的相关信息：
 
-        $rules = Get-AzureRmNetworkSecurityGroup -ResourceGroupName "myResourceGroup" `
-            -Name "myNetworkSecurityGroup"
+    ```
+    $rules = Get-AzureRmNetworkSecurityGroup -ResourceGroupName "myResourceGroup" `
+        -Name "myNetworkSecurityGroup"
+    ```
 
     现在，查看针对此网络安全组配置的规则。验证是否存在一个允许使用 TCP 端口 3389 进行入站连接的规则，如下所示：
 
-        $rules.SecurityRules
+    ```
+    $rules.SecurityRules
+    ```
 
     以下示例显示了一个允许 RDP 流量的有效安全规则。可以看到其中已正确配置 `Protocol`、`DestinationPortRange`、`Access` 和 `Direction`：
 
-        Name                     : default-allow-rdp
-        Id                       : /subscriptions/guid/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup/securityRules/default-allow-rdp
-        Etag                     : 
-        ProvisioningState        : Succeeded
-        Description              : 
-        Protocol                 : TCP
-        SourcePortRange          : *
-        DestinationPortRange     : 3389
-        SourceAddressPrefix      : *
-        DestinationAddressPrefix : *
-        Access                   : Allow
-        Priority                 : 1000
-        Direction                : Inbound
+    ```
+    Name                     : default-allow-rdp
+    Id                       : /subscriptions/guid/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup/securityRules/default-allow-rdp
+    Etag                     : 
+    ProvisioningState        : Succeeded
+    Description              : 
+    Protocol                 : TCP
+    SourcePortRange          : *
+    DestinationPortRange     : 3389
+    SourceAddressPrefix      : *
+    DestinationAddressPrefix : *
+    Access                   : Allow
+    Priority                 : 1000
+    Direction                : Inbound
+    ```
 
     如果不存在允许 RDP 流量的规则，请[创建一个网络安全组规则](./virtual-machines-windows-nsg-quickstart-powershell.md)。允许 TCP 端口 3389。
 3. **重置用户凭据**。当你不确定或者忘了凭据时，可以使用此故障排除步骤重置指定的本地管理员帐户的密码。
 
     首先，通过将凭据分配到 `$cred` 变量来指定用户名和新密码，如下所示：
 
-        $cred=Get-Credential
+    ```
+    $cred=Get-Credential
+    ```
 
     接下来，更新 VM 上的凭据。以下示例在位于 `ChinaNorth`、名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM 上更新凭据：
 
-        Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" `
-            -VMName "myVM" -Location ChinaNorth -Name "myVMAccessExtension" `
-            -UserName $cred.GetNetworkCredential().Username `
-            -Password $cred.GetNetworkCredential().Password
+    ```
+    Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" `
+        -VMName "myVM" -Location ChinaNorth -Name "myVMAccessExtension" `
+        -UserName $cred.GetNetworkCredential().Username `
+        -Password $cred.GetNetworkCredential().Password
+    ```
 
 4. **重新启动 VM**。此故障排除步骤可以解决 VM 本身存在的任何基本问题。
 
     以下示例重新启动 `myResourceGroup` 资源组中名为 `myVM` 的 VM：
 
-        Restart-AzureRmVM -ResourceGroup "myResourceGroup" -Name "myVM"
+    ```
+    Restart-AzureRmVM -ResourceGroup "myResourceGroup" -Name "myVM"
+    ```
 
 5. **重新部署 VM**。此故障排除步骤可将 VM 重新部署到 Azure 中的另一台主机，从而解决平台或网络的任何基本问题。
 
     以下示例重新部署位于 `ChinaNorth`、名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM：
 
-        Set-AzureRmVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
+    ```
+    Set-AzureRmVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
+    ```
 
 如果仍遇到 RDP 问题，可以[开具支持请求](https://www.azure.cn/support/contact/)或阅读[更详细的 RDP 故障排除概念和步骤](./virtual-machines-windows-detailed-troubleshoot-rdp.md)。
 

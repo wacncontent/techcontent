@@ -104,12 +104,14 @@ Azure Active Directory (AD) 图形 API 通过 OData REST API 终结点提供对 
 
 5. 在“请求正文”字段中键入以下内容：
 
-        {
-            "displayName":"MyTestGroup",
-            "mailNickname":"MyTestGroup",
-            "mailEnabled":"false",
-            "securityEnabled": true
-        }
+    ```
+    {
+        "displayName":"MyTestGroup",
+        "mailNickname":"MyTestGroup",
+        "mailEnabled":"false",
+        "securityEnabled": true
+    }
+    ```
 
     有关创建组的详细信息，请参阅[创建组](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/groups-operations#CreateGroup)。
 

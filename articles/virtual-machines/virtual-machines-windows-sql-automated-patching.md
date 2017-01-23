@@ -96,11 +96,13 @@ ms.author: jroth
 
 以下示例使用 PowerShell 在现有的 SQL Server VM 上配置自动修补。**AzureRM.Compute\\New-AzureVMSqlServerAutoPatchingConfig** 命令将为自动更新配置新的维护时段。
 
-    $vmname = "vmname"
-    $resourcegroupname = "resourcegroupname"
-    $aps = AzureRM.Compute\New-AzureVMSqlServerAutoPatchingConfig -Enable -DayOfWeek "Thursday" -MaintenanceWindowStartingHour 11 -MaintenanceWindowDuration 120  -PatchCategory "Important"
+```
+$vmname = "vmname"
+$resourcegroupname = "resourcegroupname"
+$aps = AzureRM.Compute\New-AzureVMSqlServerAutoPatchingConfig -Enable -DayOfWeek "Thursday" -MaintenanceWindowStartingHour 11 -MaintenanceWindowDuration 120  -PatchCategory "Important"
 
-    Set-AzureRmVMSqlServerExtension -AutoPatchingSettings $aps -VMName $vmname -ResourceGroupName $resourcegroupname
+Set-AzureRmVMSqlServerExtension -AutoPatchingSettings $aps -VMName $vmname -ResourceGroupName $resourcegroupname
+```
 
 下表根据此示例描述了对目标 Azure VM 产生的实际效果：
 

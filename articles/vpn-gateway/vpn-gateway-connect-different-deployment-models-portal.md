@@ -161,7 +161,9 @@ VPN 类型 = 基于路由 <br>
 
 1. 在 PowerShell 控制台中，登录到您的 Azure 帐户。以下 cmdlet 将提示您提供 Azure 帐户的登录凭据。登录后将下载您的帐户设置，以便 Azure PowerShell 使用这些设置。
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 
      如果您有多个订阅，则获取您的 Azure 订阅的列表。
 
@@ -169,30 +171,40 @@ VPN 类型 = 基于路由 <br>
 
     指定要使用的订阅。
 
-        Select-AzureRmSubscription -SubscriptionName "Name of subscription"
+    ```
+    Select-AzureRmSubscription -SubscriptionName "Name of subscription"
+    ```
 
 2. 添加要使用经典 PowerShell cmdlet 的 Azure 帐户。若要执行此操作，请使用以下命令：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
 3. 通过运行下面的示例设置共享密钥。在此示例中，`-VNetName` 是经典 VNet 的名称，`-LocalNetworkSiteName` 是在经典管理门户中配置本地网络时为其指定的名称。`-SharedKey` 是您可以生成并指定的值。此处指定的值必须与下一步中创建连接时指定的值相同。
 
-        Set-AzureVNetGatewayKey -VNetName ClassicVNet `
-        -LocalNetworkSiteName RMVNetLocal -SharedKey abc123
+    ```
+    Set-AzureVNetGatewayKey -VNetName ClassicVNet `
+    -LocalNetworkSiteName RMVNetLocal -SharedKey abc123
+    ```
 
 4. 运行以下命令创建 VPN 连接：
 
     **设置变量**
 
-        $vnet01gateway = Get-AzureRMLocalNetworkGateway -Name ClassicVNetLocal -ResourceGroupName RG1
-        $vnet02gateway = Get-AzureRmVirtualNetworkGateway -Name RMGateway -ResourceGroupName RG1
+    ```
+    $vnet01gateway = Get-AzureRMLocalNetworkGateway -Name ClassicVNetLocal -ResourceGroupName RG1
+    $vnet02gateway = Get-AzureRmVirtualNetworkGateway -Name RMGateway -ResourceGroupName RG1
+    ```
 
     **创建连接**<br>请注意，`-ConnectionType` 为 IPsec，而不是 Vnet2Vnet。在此示例中，`-Name` 是想要调用连接的名称。下面的示例创建了名为 *rm-to-classic-connection* 的连接。
 
-        New-AzureRmVirtualNetworkGatewayConnection -Name rm-to-classic-connection -ResourceGroupName RG1 `
-        -Location "China East" -VirtualNetworkGateway1 `
-        $vnet02gateway -LocalNetworkGateway2 `
-        $vnet01gateway -ConnectionType IPsec -RoutingWeight 10 -SharedKey 'abc123'
+    ```
+    New-AzureRmVirtualNetworkGatewayConnection -Name rm-to-classic-connection -ResourceGroupName RG1 `
+    -Location "China East" -VirtualNetworkGateway1 `
+    $vnet02gateway -LocalNetworkGateway2 `
+    $vnet01gateway -ConnectionType IPsec -RoutingWeight 10 -SharedKey 'abc123'
+    ```
 
 ## 验证连接
 

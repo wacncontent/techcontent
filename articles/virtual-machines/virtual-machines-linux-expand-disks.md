@@ -24,7 +24,9 @@ ms.author: iainfou
 ## 先决条件
 需要安装[最新的 Azure CLI](../xplat-cli-install.md)，然后按如下所示，使用 Resource Manager 模式登录 [Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)：
 
-    azure config mode arm
+```
+azure config mode arm
+```
 
 在以下示例中，请将示例参数名称替换为你自己的值。示例参数名称包括 `myResourceGroup` 和 `myVM`。
 
@@ -32,25 +34,33 @@ ms.author: iainfou
 
 1. VM 正在运行时，无法在虚拟硬盘上执行操作。以下示例停止并解除分配名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM：
 
-        azure vm deallocate --resource-group myResourceGroup --name myVM
+    ```
+    azure vm deallocate --resource-group myResourceGroup --name myVM
+    ```
 
     > [!NOTE]
     > `azure vm stop` 不会释放计算资源。若要释放计算资源，请使用 `azure vm deallocate`。若要扩展虚拟硬盘，必须解除分配 VM。
 
 2. 使用 `azure vm set` 命令更新 OS 磁盘的大小。以下示例将名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM 更新为 `50` GB：
 
-        azure vm set --resource-group myResourceGroup --name myVM --new-os-disk-size 50
+    ```
+    azure vm set --resource-group myResourceGroup --name myVM --new-os-disk-size 50
+    ```
 
 3. 启动 VM，如下所示：
 
-        azure vm start --resource-group myResourceGroup --name myVM
+    ```
+    azure vm start --resource-group myResourceGroup --name myVM
+    ```
 
 4. 使用相应的凭据通过 SSH 连接到 VM。若要验证 OS 磁盘是否已调整大小，请使用 `df -h`。以下示例输出显示主分区 (`/dev/sda1`) 现在为 50 GB：
 
-        Filesystem      Size  Used Avail Use% Mounted on
-        udev            1.7G     0  1.7G   0% /dev
-        tmpfs           344M  5.0M  340M   2% /run
-        /dev/sda1        49G  1.3G   48G   3% /
+    ```
+    Filesystem      Size  Used Avail Use% Mounted on
+    udev            1.7G     0  1.7G   0% /dev
+    tmpfs           344M  5.0M  340M   2% /run
+    /dev/sda1        49G  1.3G   48G   3% /
+    ```
 
 ## 后续步骤
 如果需要附加存储，还可以[将数据磁盘添加到 Linux VM](./virtual-machines-linux-add-disk.md)。有关磁盘加密的详细信息，请参阅[使用 Azure CLI 加密 Linux VM 上的磁盘](./virtual-machines-linux-encrypt-disks.md)。

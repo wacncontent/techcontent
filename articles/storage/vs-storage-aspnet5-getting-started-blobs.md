@@ -34,120 +34,138 @@ Azure Blob 存储是一项可存储大量非结构化数据的服务，用户可
 
 1. 在你希望以编程方式访问 Azure 存储服务的任何 C# 文件中，将以下代码命名空间声明添加到文件的顶部。
 
-        using Microsoft.Extensions.Configuration;
-        using Microsoft.WindowsAzure.Storage;
-        using Microsoft.WindowsAzure.Storage.Blob;
-        using System.Threading.Tasks;
-        using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+    ```
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
+    using System.Threading.Tasks;
+    using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+    ```
 
 2. 获取表示存储帐户信息的 **CloudStorageAccount** 对象。使用下面的代码获取存储连接字符串和 Azure 服务配置中的存储帐户信息。
 
-         CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-           CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
+    ```
+     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+       CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
+    ```
 
     **注意：**在接下来的部分中，在代码的前面使用上述全部代码
 
 3. 使用 **CloudBlobClient** 对象在存储帐户中获取到的现有容器的 **CloudBlobContainer** 引用。
 
-        // Create a blob client.
-        CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+    ```
+    // Create a blob client.
+    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-        // Get a reference to a container named “mycontainer.”
-        CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
+    // Get a reference to a container named “mycontainer.”
+    CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
+    ```
 
 ##使用代码创建容器
 
 您还可以使用 **CloudBlobClient** 在存储帐户中创建容器。你需要做的就是按照以下代码为 **CreateIfNotExistsAsync** 添加调用：
 
-    // Create a blob client.
-    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+```
+// Create a blob client.
+CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-    // Get a reference to a container named “my-new-container.”
-    CloudBlobContainer container = blobClient.GetContainerReference("my-new-container");
+// Get a reference to a container named “my-new-container.”
+CloudBlobContainer container = blobClient.GetContainerReference("my-new-container");
 
-    // If “mycontainer” doesn’t exist, create it.
-    await container.CreateIfNotExistsAsync();
+// If “mycontainer” doesn’t exist, create it.
+await container.CreateIfNotExistsAsync();
+```
 
 **注意：**在 ASP.NET 5 中执行调出 Azure 存储的 API 是异步的。有关详细信息，请参阅[使用 Async 和 Await 进行异步编程](http://msdn.microsoft.com/zh-cn/library/hh191443.aspx)。下面的代码假定正在使用异步编程方法。
 
 如果要让容器中的文件可供所有人使用，则可以使用以下代码将容器设置为公共容器。
 
-    await container.SetPermissionsAsync(new BlobContainerPermissions
-    {
-        PublicAccess = BlobContainerPublicAccessType.Blob
-    });
+```
+await container.SetPermissionsAsync(new BlobContainerPermissions
+{
+    PublicAccess = BlobContainerPublicAccessType.Blob
+});
+```
 
 ##将 Blob 上载到容器中
 
 若要将 Blob 文件上载到容器中，请获取容器引用，并使用它来获取 Blob 引用。获取 blob 引用后，可以通过调用 **UploadFromStreamAsync** 方法将任何数据流上载到该 blob。此操作将创建 Blob（如果该 Blob 不存在），或者覆盖它（如果该 Blob 存在）。下面的示例演示了如何将 Blob 上载到容器中，并假定已创建容器。
 
-    // Get a reference to a blob named "myblob".
-    CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob");
+```
+// Get a reference to a blob named "myblob".
+CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob");
 
-    // Create or overwrite the "myblob" blob with the contents of a local file
-    // named “myfile”.
-    using (var fileStream = System.IO.File.OpenRead(@"path\myfile"))
-    {
-        await blockBlob.UploadFromStreamAsync(fileStream);
-    }
+// Create or overwrite the "myblob" blob with the contents of a local file
+// named “myfile”.
+using (var fileStream = System.IO.File.OpenRead(@"path\myfile"))
+{
+    await blockBlob.UploadFromStreamAsync(fileStream);
+}
+```
 
 ##列出容器中的 Blob
 若要列出容器中的 Blob，首先需要获取容器引用。然后，可以调用容器的 **ListBlobsSegmentedAsync** 方法检索 blob 和/或其中的目录。若要访问返回的 **IListBlobItem** 的丰富属性和方法，您必须将它转换到 **CloudBlockBlob**、**CloudPageBlob** 或 **CloudBlobDirectory** 对象。如果 Blob 类型未知，您可以使用类型检查来确定要将其转换为哪种类型。以下代码演示了如何检索和输出容器中每项的 URI。
 
-    BlobContinuationToken token = null;
-    do
+```
+BlobContinuationToken token = null;
+do
+{
+    BlobResultSegment resultSegment = await container.ListBlobsSegmentedAsync(token);
+    token = resultSegment.ContinuationToken;
+
+    foreach (IListBlobItem item in resultSegment.Results)
     {
-        BlobResultSegment resultSegment = await container.ListBlobsSegmentedAsync(token);
-        token = resultSegment.ContinuationToken;
-
-        foreach (IListBlobItem item in resultSegment.Results)
+        if (item.GetType() == typeof(CloudBlockBlob))
         {
-            if (item.GetType() == typeof(CloudBlockBlob))
-            {
-                CloudBlockBlob blob = (CloudBlockBlob)item;
-                Console.WriteLine("Block blob of length {0}: {1}", blob.Properties.Length, blob.Uri);
-            }
-
-            else if (item.GetType() == typeof(CloudPageBlob))
-            {
-                CloudPageBlob pageBlob = (CloudPageBlob)item;
-
-                Console.WriteLine("Page blob of length {0}: {1}", pageBlob.Properties.Length, pageBlob.Uri);
-            }
-
-            else if (item.GetType() == typeof(CloudBlobDirectory))
-            {
-                CloudBlobDirectory directory = (CloudBlobDirectory)item;
-
-                Console.WriteLine("Directory: {0}", directory.Uri);
-            }
+            CloudBlockBlob blob = (CloudBlockBlob)item;
+            Console.WriteLine("Block blob of length {0}: {1}", blob.Properties.Length, blob.Uri);
         }
-    } while (token != null);
+
+        else if (item.GetType() == typeof(CloudPageBlob))
+        {
+            CloudPageBlob pageBlob = (CloudPageBlob)item;
+
+            Console.WriteLine("Page blob of length {0}: {1}", pageBlob.Properties.Length, pageBlob.Uri);
+        }
+
+        else if (item.GetType() == typeof(CloudBlobDirectory))
+        {
+            CloudBlobDirectory directory = (CloudBlobDirectory)item;
+
+            Console.WriteLine("Directory: {0}", directory.Uri);
+        }
+    }
+} while (token != null);
+```
 
 还有其他方法来列出 Blob 容器内容。有关详细信息，请参阅[通过 .NET 开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md#list-the-blobs-in-a-container)。
 
 ##下载 Blob
 若要下载 blob，请首先获取对该 blob 引用，然后调用 **DownloadToStreamAsync** 方法。下面的示例使用 **DownloadToStreamAsync** 方法将 blob 内容传输到稍后可以另存为本地文件的流对象。
 
-    // Get a reference to a blob named "photo1.jpg".
-    CloudBlockBlob blockBlob = container.GetBlockBlobReference("photo1.jpg");
+```
+// Get a reference to a blob named "photo1.jpg".
+CloudBlockBlob blockBlob = container.GetBlockBlobReference("photo1.jpg");
 
-    // Save the blob contents to a file named “myfile”.
-    using (var fileStream = System.IO.File.OpenWrite(@"path\myfile"))
-    {
-        await blockBlob.DownloadToStreamAsync(fileStream);
-    }
+// Save the blob contents to a file named “myfile”.
+using (var fileStream = System.IO.File.OpenWrite(@"path\myfile"))
+{
+    await blockBlob.DownloadToStreamAsync(fileStream);
+}
+```
 
 还有其他方法将 Blob 另存为文件。有关详细信息，请参阅[通过 .NET 开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md#download-blobs)。
 
 ##删除 Blob
 若要删除 blob，请首先获取对该 blob 的引用，然后调用用于该 blob 的 **DeleteAsync** 方法。
 
-    // Get a reference to a blob named "myblob.txt".
-    CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob.txt");
+```
+// Get a reference to a blob named "myblob.txt".
+CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob.txt");
 
-    // Delete the blob.
-    await blockBlob.DeleteAsync();
+// Delete the blob.
+await blockBlob.DeleteAsync();
+```
 
 ## 后续步骤
 

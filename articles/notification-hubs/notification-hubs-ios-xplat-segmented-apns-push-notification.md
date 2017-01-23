@@ -49,83 +49,95 @@ ms.author: wesmc
 
 3. 为名为“subscribe”的按钮创建一个操作。ViewController.h 应包含以下内容：
 
-        @property (weak, nonatomic) IBOutlet UISwitch *WorldSwitch;
-        @property (weak, nonatomic) IBOutlet UISwitch *PoliticsSwitch;
-        @property (weak, nonatomic) IBOutlet UISwitch *BusinessSwitch;
-        @property (weak, nonatomic) IBOutlet UISwitch *TechnologySwitch;
-        @property (weak, nonatomic) IBOutlet UISwitch *ScienceSwitch;
-        @property (weak, nonatomic) IBOutlet UISwitch *SportsSwitch;
+    ```
+    @property (weak, nonatomic) IBOutlet UISwitch *WorldSwitch;
+    @property (weak, nonatomic) IBOutlet UISwitch *PoliticsSwitch;
+    @property (weak, nonatomic) IBOutlet UISwitch *BusinessSwitch;
+    @property (weak, nonatomic) IBOutlet UISwitch *TechnologySwitch;
+    @property (weak, nonatomic) IBOutlet UISwitch *ScienceSwitch;
+    @property (weak, nonatomic) IBOutlet UISwitch *SportsSwitch;
 
-        - (IBAction)subscribe:(id)sender;
+    - (IBAction)subscribe:(id)sender;
+    ```
 
 4. 创建名为 `Notifications` 的新 **Cocoa Touch 类**。在文件 Notifications.h 的接口部分中复制以下代码：
 
-        @property NSData* deviceToken;
+    ```
+    @property NSData* deviceToken;
 
-        - (id)initWithConnectionString:(NSString*)listenConnectionString HubName:(NSString*)hubName;
+    - (id)initWithConnectionString:(NSString*)listenConnectionString HubName:(NSString*)hubName;
 
-        - (void)storeCategoriesAndSubscribeWithCategories:(NSArray*)categories
-                    completion:(void (^)(NSError* error))completion;
+    - (void)storeCategoriesAndSubscribeWithCategories:(NSArray*)categories
+                completion:(void (^)(NSError* error))completion;
 
-        - (NSSet*)retrieveCategories;
+    - (NSSet*)retrieveCategories;
 
-        - (void)subscribeWithCategories:(NSSet*)categories completion:(void (^)(NSError *))completion;
+    - (void)subscribeWithCategories:(NSSet*)categories completion:(void (^)(NSError *))completion;
+    ```
 
 5. 将以下导入指令添加到 Notifications.m：
 
-        #import <WindowsAzureMessaging/WindowsAzureMessaging.h>
+    ```
+    #import <WindowsAzureMessaging/WindowsAzureMessaging.h>
+    ```
 
 6. 在文件 Notifications.m 的实现部分中复制以下代码。
 
-        SBNotificationHub* hub;
+    ```
+    SBNotificationHub* hub;
 
-        - (id)initWithConnectionString:(NSString*)listenConnectionString HubName:(NSString*)hubName{
+    - (id)initWithConnectionString:(NSString*)listenConnectionString HubName:(NSString*)hubName{
 
-            hub = [[SBNotificationHub alloc] initWithConnectionString:listenConnectionString
-                                        notificationHubPath:hubName];
+        hub = [[SBNotificationHub alloc] initWithConnectionString:listenConnectionString
+                                    notificationHubPath:hubName];
 
-            return self;
-        }
+        return self;
+    }
 
-        - (void)storeCategoriesAndSubscribeWithCategories:(NSSet *)categories completion:(void (^)(NSError *))completion {
-            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setValue:[categories allObjects] forKey:@"BreakingNewsCategories"];
+    - (void)storeCategoriesAndSubscribeWithCategories:(NSSet *)categories completion:(void (^)(NSError *))completion {
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setValue:[categories allObjects] forKey:@"BreakingNewsCategories"];
 
-            [self subscribeWithCategories:categories completion:completion];
-        }
+        [self subscribeWithCategories:categories completion:completion];
+    }
 
-        - (NSSet*)retrieveCategories {
-            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    - (NSSet*)retrieveCategories {
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
 
-            NSArray* categories = [defaults stringArrayForKey:@"BreakingNewsCategories"];
+        NSArray* categories = [defaults stringArrayForKey:@"BreakingNewsCategories"];
 
-            if (!categories) return [[NSSet alloc] init];
-            return [[NSSet alloc] initWithArray:categories];
-        }
+        if (!categories) return [[NSSet alloc] init];
+        return [[NSSet alloc] initWithArray:categories];
+    }
 
-        - (void)subscribeWithCategories:(NSSet *)categories completion:(void (^)(NSError *))completion
-        {
-           //[hub registerNativeWithDeviceToken:self.deviceToken tags:categories completion: completion];
+    - (void)subscribeWithCategories:(NSSet *)categories completion:(void (^)(NSError *))completion
+    {
+       //[hub registerNativeWithDeviceToken:self.deviceToken tags:categories completion: completion];
 
-            NSString* templateBodyAPNS = @"{"aps":{"alert":"$(messageParam)"}}";
+        NSString* templateBodyAPNS = @"{"aps":{"alert":"$(messageParam)"}}";
 
-            [hub registerTemplateWithDeviceToken:self.deviceToken name:@"simpleAPNSTemplate" 
-                jsonBodyTemplate:templateBodyAPNS expiryTemplate:@"0" tags:categories completion:completion];
-        }
+        [hub registerTemplateWithDeviceToken:self.deviceToken name:@"simpleAPNSTemplate" 
+            jsonBodyTemplate:templateBodyAPNS expiryTemplate:@"0" tags:categories completion:completion];
+    }
+    ```
 
     此类使用本地存储区存储和检索此设备将要接收的新闻类别。此外，它还包含了一个方法用于通过[模板](./notification-hubs-templates-cross-platform-push-messages.md)注册来注册这些类别。
 
 7. 在 AppDelegate.h 文件中，添加 Notifications.h 的导入语句，并添加 Notifications 类实例的属性：
 
-        #import "Notifications.h"
+    ```
+    #import "Notifications.h"
 
-        @property (nonatomic) Notifications* notifications;
+    @property (nonatomic) Notifications* notifications;
+    ```
 
 8. 在 AppDelegate.m 的 **didFinishLaunchingWithOptions** 方法中，于方法开头添加代码来初始化 notifications 实例：
 
     在 hubinfo.h 中定义的 `HUBNAME` 和 `HUBLISTENACCESS` 内，`<hub name>` 和 `<connection string with listen access>` 占位符应已替换为你的通知中心的名称和你之前获取的 *DefaultListenSharedAccessSignature* 的连接字符串。
 
-        self.notifications = [[Notifications alloc] initWithConnectionString:HUBLISTENACCESS HubName:HUBNAME];
+    ```
+    self.notifications = [[Notifications alloc] initWithConnectionString:HUBLISTENACCESS HubName:HUBNAME];
+    ```
 
     > [!NOTE]
     > 由于使用客户端应用程序分发的凭据通常是不安全的，你只应使用客户端应用程序分发具有侦听访问权限的密钥。侦听访问权限允许应用程序注册通知，但是无法修改现有注册，也无法发送通知。在受保护的后端服务中使用完全访问权限密钥，以便发送通知和更改现有注册。
@@ -135,76 +147,84 @@ ms.author: wesmc
     > [!NOTE]
     > 由于 Apple 推送通知服务 (APNS) 分配的设备标记随时可能更改，因此你应该经常注册通知以避免通知失败。此示例在每次应用程序启动时注册通知。对于经常运行（一天一次以上）的应用程序，如果每次注册间隔时间不到一天，你可以跳过注册来节省带宽。
 
-        self.notifications.deviceToken = deviceToken;
+    ```
+    self.notifications.deviceToken = deviceToken;
 
-        // Retrieves the categories from local storage and requests a registration for these categories
-        // each time the app starts and performs a registration.
+    // Retrieves the categories from local storage and requests a registration for these categories
+    // each time the app starts and performs a registration.
 
-        NSSet* categories = [self.notifications retrieveCategories];
-        [self.notifications subscribeWithCategories:categories completion:^(NSError* error) {
-            if (error != nil) {
-                NSLog(@"Error registering for notifications: %@", error);
-            }
-        }];
+    NSSet* categories = [self.notifications retrieveCategories];
+    [self.notifications subscribeWithCategories:categories completion:^(NSError* error) {
+        if (error != nil) {
+            NSLog(@"Error registering for notifications: %@", error);
+        }
+    }];
+    ```
 
     请注意，此时 **didRegisterForRemoteNotificationsWithDeviceToken** 方法中应没有其他代码。
 
 10. 完成[通知中心入门][get-started]教程时，以下方法应已经出现在 AppDelegate.m 中。否则，请添加这些方法。
 
-        -(void)MessageBox:(NSString *)title message:(NSString *)messageText
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:messageText delegate:self
-                cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
+    ```
+    -(void)MessageBox:(NSString *)title message:(NSString *)messageText
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:messageText delegate:self
+            cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
 
-        - (void)application:(UIApplication *)application didReceiveRemoteNotification:
-            (NSDictionary *)userInfo {
-            NSLog(@"%@", userInfo);
-            [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
-        }
+    - (void)application:(UIApplication *)application didReceiveRemoteNotification:
+        (NSDictionary *)userInfo {
+        NSLog(@"%@", userInfo);
+        [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
+    }
+    ```
 
     此方法通过显示简单的 **UIAlert** 处理运行应用程序时收到的通知。
 
 11. 在 ViewController.m 中，添加 AppDelegate.h 的导入语句，并将以下代码复制到 XCode 生成的 **subscribe** 方法中。此代码将更新通知注册，以使用用户在用户界面中选择的新类别标记。
 
-        #import "Notifications.h"
+    ```
+    #import "Notifications.h"
 
-        NSMutableArray* categories = [[NSMutableArray alloc] init];
+    NSMutableArray* categories = [[NSMutableArray alloc] init];
 
-        if (self.WorldSwitch.isOn) [categories addObject:@"World"];
-        if (self.PoliticsSwitch.isOn) [categories addObject:@"Politics"];
-        if (self.BusinessSwitch.isOn) [categories addObject:@"Business"];
-        if (self.TechnologySwitch.isOn) [categories addObject:@"Technology"];
-        if (self.ScienceSwitch.isOn) [categories addObject:@"Science"];
-        if (self.SportsSwitch.isOn) [categories addObject:@"Sports"];
+    if (self.WorldSwitch.isOn) [categories addObject:@"World"];
+    if (self.PoliticsSwitch.isOn) [categories addObject:@"Politics"];
+    if (self.BusinessSwitch.isOn) [categories addObject:@"Business"];
+    if (self.TechnologySwitch.isOn) [categories addObject:@"Technology"];
+    if (self.ScienceSwitch.isOn) [categories addObject:@"Science"];
+    if (self.SportsSwitch.isOn) [categories addObject:@"Sports"];
 
-        Notifications* notifications = [(AppDelegate*)[[UIApplication sharedApplication]delegate] notifications];
+    Notifications* notifications = [(AppDelegate*)[[UIApplication sharedApplication]delegate] notifications];
 
-        [notifications storeCategoriesAndSubscribeWithCategories:categories completion: ^(NSError* error) {
-            if (!error) {
-                [(AppDelegate*)[[UIApplication sharedApplication]delegate] MessageBox:@"Notification" message:@"Subscribed!"];
-            } else {
-                NSLog(@"Error subscribing: %@", error);
-            }
-        }];
+    [notifications storeCategoriesAndSubscribeWithCategories:categories completion: ^(NSError* error) {
+        if (!error) {
+            [(AppDelegate*)[[UIApplication sharedApplication]delegate] MessageBox:@"Notification" message:@"Subscribed!"];
+        } else {
+            NSLog(@"Error subscribing: %@", error);
+        }
+    }];
+    ```
 
     此方法创建一个类别的 **NSMutableArray** 并使用 **Notifications** 类将该列表存储在本地存储区中，将相应的标记注册到你的通知中心。更改类别时，使用新类别重新创建注册。
 
 12. 在 ViewController.m 中，于 **viewDidLoad** 方法中添加以下代码，以根据前面保存的类别来设置用户界面。
 
-        // This updates the UI on startup based on the status of previously saved categories.
+    ```
+    // This updates the UI on startup based on the status of previously saved categories.
 
-        Notifications* notifications = [(AppDelegate*)[[UIApplication sharedApplication]delegate] notifications];
+    Notifications* notifications = [(AppDelegate*)[[UIApplication sharedApplication]delegate] notifications];
 
-        NSSet* categories = [notifications retrieveCategories];
+    NSSet* categories = [notifications retrieveCategories];
 
-        if ([categories containsObject:@"World"]) self.WorldSwitch.on = true;
-        if ([categories containsObject:@"Politics"]) self.PoliticsSwitch.on = true;
-        if ([categories containsObject:@"Business"]) self.BusinessSwitch.on = true;
-        if ([categories containsObject:@"Technology"]) self.TechnologySwitch.on = true;
-        if ([categories containsObject:@"Science"]) self.ScienceSwitch.on = true;
-        if ([categories containsObject:@"Sports"]) self.SportsSwitch.on = true;
+    if ([categories containsObject:@"World"]) self.WorldSwitch.on = true;
+    if ([categories containsObject:@"Politics"]) self.PoliticsSwitch.on = true;
+    if ([categories containsObject:@"Business"]) self.BusinessSwitch.on = true;
+    if ([categories containsObject:@"Technology"]) self.TechnologySwitch.on = true;
+    if ([categories containsObject:@"Science"]) self.ScienceSwitch.on = true;
+    if ([categories containsObject:@"Sports"]) self.SportsSwitch.on = true;
+    ```
 
 应用程序现在可以在设备的本地存储区中存储一组类别，每当应用程序启动时，将使用这些类别注册到通知中心。用户可以在运行时更改选择的类别，然后单击 **subscribe** 方法来更新设备注册。接下来，你将更新应用程序，以直接从应用本身发送突发新闻通知。
 
@@ -220,79 +240,83 @@ ms.author: wesmc
 
 1. 在 ViewController.m 中，按如下所示更新 `SendNotificationRESTAPI` 方法，使其接受类别标记的参数并发送适当的[模板](./notification-hubs-templates-cross-platform-push-messages.md)通知。
 
-        - (void)SendNotificationRESTAPI:(NSString*)categoryTag
-        {
-            NSURLSession* session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
-                                     defaultSessionConfiguration] delegate:nil delegateQueue:nil];
+    ```
+    - (void)SendNotificationRESTAPI:(NSString*)categoryTag
+    {
+        NSURLSession* session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
+                                 defaultSessionConfiguration] delegate:nil delegateQueue:nil];
 
-            NSString *json;
+        NSString *json;
 
-            // Construct the messages REST endpoint
-            NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/messages/%@", HubEndpoint,
-                                               HUBNAME, API_VERSION]];
+        // Construct the messages REST endpoint
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/messages/%@", HubEndpoint,
+                                           HUBNAME, API_VERSION]];
 
-            // Generated the token to be used in the authorization header.
-            NSString* authorizationToken = [self generateSasToken:[url absoluteString]];
+        // Generated the token to be used in the authorization header.
+        NSString* authorizationToken = [self generateSasToken:[url absoluteString]];
 
-            //Create the request to add the template notification message to the hub
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-            [request setHTTPMethod:@"POST"];
+        //Create the request to add the template notification message to the hub
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
 
-            // Add the category as a tag
-            [request setValue:categoryTag forHTTPHeaderField:@"ServiceBusNotification-Tags"];
+        // Add the category as a tag
+        [request setValue:categoryTag forHTTPHeaderField:@"ServiceBusNotification-Tags"];
 
-            // Template notification
-            json = [NSString stringWithFormat:@"{"messageParam":"Breaking %@ News : %@"}",
-                    categoryTag, self.notificationMessage.text];
+        // Template notification
+        json = [NSString stringWithFormat:@"{"messageParam":"Breaking %@ News : %@"}",
+                categoryTag, self.notificationMessage.text];
 
-            // Signify template notification format
-            [request setValue:@"template" forHTTPHeaderField:@"ServiceBusNotification-Format"];
+        // Signify template notification format
+        [request setValue:@"template" forHTTPHeaderField:@"ServiceBusNotification-Format"];
 
-            // JSON Content-Type
-            [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        // JSON Content-Type
+        [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 
-            //Authenticate the notification message POST request with the SaS token
-            [request setValue:authorizationToken forHTTPHeaderField:@"Authorization"];
+        //Authenticate the notification message POST request with the SaS token
+        [request setValue:authorizationToken forHTTPHeaderField:@"Authorization"];
 
-            //Add the notification message body
-            [request setHTTPBody:[json dataUsingEncoding:NSUTF8StringEncoding]];
+        //Add the notification message body
+        [request setHTTPBody:[json dataUsingEncoding:NSUTF8StringEncoding]];
 
-            // Send the REST request
-            NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request
-                       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+        // Send the REST request
+        NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request
+                   completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+           {
+           NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+               if (error || httpResponse.statusCode != 200)
                {
-               NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
-                   if (error || httpResponse.statusCode != 200)
-                   {
-                       NSLog(@"\nError status: %d\nError: %@", httpResponse.statusCode, error);
-                   }
-                   if (data != NULL)
-                   {
-                       //xmlParser = [[NSXMLParser alloc] initWithData:data];
-                       //[xmlParser setDelegate:self];
-                       //[xmlParser parse];
-                   }
-               }];
+                   NSLog(@"\nError status: %d\nError: %@", httpResponse.statusCode, error);
+               }
+               if (data != NULL)
+               {
+                   //xmlParser = [[NSXMLParser alloc] initWithData:data];
+                   //[xmlParser setDelegate:self];
+                   //[xmlParser parse];
+               }
+           }];
 
-            [dataTask resume];
-        }
+        [dataTask resume];
+    }
+    ```
 
 2. 在 ViewController.m 中，更新“发送通知”操作（如以下代码所示）。因此，它将使用每个标记分别发送通知，并发送到多个平台。
 
-        - (IBAction)SendNotificationMessage:(id)sender
+    ```
+    - (IBAction)SendNotificationMessage:(id)sender
+    {
+        self.sendResults.text = @"";
+
+        NSArray* categories = [NSArray arrayWithObjects: @"World", @"Politics", @"Business",
+                                @"Technology", @"Science", @"Sports", nil];
+
+        // Lets send the message as breaking news for each category to WNS, GCM, and APNS
+        // using a template.
+        for(NSString* category in categories)
         {
-            self.sendResults.text = @"";
-
-            NSArray* categories = [NSArray arrayWithObjects: @"World", @"Politics", @"Business",
-                                    @"Technology", @"Science", @"Sports", nil];
-
-            // Lets send the message as breaking news for each category to WNS, GCM, and APNS
-            // using a template.
-            for(NSString* category in categories)
-            {
-                [self SendNotificationRESTAPI:category];
-            }
+            [self SendNotificationRESTAPI:category];
         }
+    }
+    ```
 
 3. 重新生成项目，并确定没有生成错误。
 

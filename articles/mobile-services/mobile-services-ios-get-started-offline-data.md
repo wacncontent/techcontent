@@ -84,18 +84,20 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
         {
           MSQuery *query = [self.syncTable query];
 
-          // Pulls data from the remote server into the local table.
-          // We're pulling all items and filtering in the view
-          // query ID is used for incremental sync
-          [self.syncTable pullWithQuery:query queryId:@"allTodoItems" completion:^(NSError *error) {
-              [self logErrorIfNotNil:error];
+```
+      // Pulls data from the remote server into the local table.
+      // We're pulling all items and filtering in the view
+      // query ID is used for incremental sync
+      [self.syncTable pullWithQuery:query queryId:@"allTodoItems" completion:^(NSError *error) {
+          [self logErrorIfNotNil:error];
 
-              // Let the caller know that we have finished
-              if (completion != nil) {
-                  dispatch_async(dispatch_get_main_queue(), completion);
-        }
-          }];
-        }
+          // Let the caller know that we have finished
+          if (completion != nil) {
+              dispatch_async(dispatch_get_main_queue(), completion);
+    }
+      }];
+    }
+```
 ```
 
 >[!NOTE]
@@ -197,8 +199,8 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 3. 查看远程 TodoItem 表的内容。验证新项是否未同步到服务器。
 
-    - 对于 JavaScript 后端，请转到 [Azure 经典管理门户](http://manage.windowsazure.cn)，然后单击“数据”选项卡查看 `TodoItem` 表的内容。
-    - 对于 .NET 后端，请使用 SQL 工具（如 SQL Server Management Studio）或 REST 客户端（如 Fiddler 或 Postman）查看表内容。
+   - 对于 JavaScript 后端，请转到 [Azure 经典管理门户](http://manage.windowsazure.cn)，然后单击“数据”选项卡查看 `TodoItem` 表的内容。
+   - 对于 .NET 后端，请使用 SQL 工具（如 SQL Server Management Studio）或 REST 客户端（如 Fiddler 或 Postman）查看表内容。
 
 4. 在 iOS 模拟器中打开 Wi-Fi。接下来，通过拉下项列表来执行刷新手势。你将看到旋转进度条和“正在同步...”文字。
 
@@ -212,9 +214,11 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 为了与服务器同步本地存储，你使用了 `MSSyncTable.pullWithQuery` 和 `MSClient.syncContext.pushWithCompletion`：
 
-        * 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
+```
+    * 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
 
-        * 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
+    * 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
+```
 
 ##  后续步骤
 

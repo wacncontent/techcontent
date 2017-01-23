@@ -59,9 +59,9 @@ Azure 需要至少 2048 位采用 **ssh-rsa** 格式的公钥和私钥。如果�
 以下是部署方案，以及你在每个方案中使用的文件类型：
 
 1. 使用 [Azure 门户预览](https://portal.azure.cn)的所有部署以及使用 [Azure CLI](../xplat-cli-install.md) 的 Resource Manager 部署都需要 **ssh-rsa** 密钥。
-    * 几乎所有部署人员都需要这些密钥。
+   * 几乎所有部署人员都需要这些密钥。
 2. 使用[经典管理门户](https://manage.windowsazure.cn)创建 VM 时，需要用到 `.pem` 文件。使用 [Azure CLI](../xplat-cli-install.md) 的经典部署也支持这些密钥。
-    * 仅当你要管理使用经典部署模型创建的资源时，才需要创建这些附加密钥和证书。
+   * 仅当你要管理使用经典部署模型创建的资源时，才需要创建这些附加密钥和证书。
 
 ## 安装 Git For Windows
 上一部分列出了包含适用于 Windows 的 `openssl` 工具的多个包。需要使用此工具来创建公钥和私钥。以下示例详细说明了如何安装和使用 **Git for Windows**，不过，你可以选择自己偏好的任何包。借助 **Git for Windows**，可以访问使用 Linux VM 时可能会带来帮助的其他一些开源软件 ([OSS](https://en.wikipedia.org/wiki/Open-source_software)) 工具和实用程序。
@@ -75,39 +75,49 @@ Azure 需要至少 2048 位采用 **ssh-rsa** 格式的公钥和私钥。如果�
 ## 创建私钥
 1. 在“Git Bash”窗口中，使用 `openssl.exe` 创建私钥。以下示例创建名为 `myPrivateKey` 的密钥，以及名为 `myCert.pem` 的证书：
 
-        openssl.exe req -x509 -nodes -days 365 -newkey rsa:2048 \
-            -keyout myPrivateKey.key -out myCert.pem
+    ```
+    openssl.exe req -x509 -nodes -days 365 -newkey rsa:2048 \
+        -keyout myPrivateKey.key -out myCert.pem
+    ```
 
     输出内容类似于下面的示例：
 
-        Generating a 2048 bit RSA private key
-        .......................................+++
-        .......................+++
-        writing new private key to 'myPrivateKey.key'
-        -----
-        You are about to be asked to enter information that will be incorporated
-        into your certificate request.
-        What you are about to enter is what is called a Distinguished Name or a DN.
-        There are quite a few fields but you can leave some blank
-        For some fields there will be a default value,
-        If you enter '.', the field will be left blank.
-        -----
-        Country Name (2 letter code) [AU]:
+    ```
+    Generating a 2048 bit RSA private key
+    .......................................+++
+    .......................+++
+    writing new private key to 'myPrivateKey.key'
+    -----
+    You are about to be asked to enter information that will be incorporated
+    into your certificate request.
+    What you are about to enter is what is called a Distinguished Name or a DN.
+    There are quite a few fields but you can leave some blank
+    For some fields there will be a default value,
+    If you enter '.', the field will be left blank.
+    -----
+    Country Name (2 letter code) [AU]:
+    ```
 
 2. 回答有关国家/地区名称、位置、组织名称等的提示问题。
 3. 新私钥和证书将在当前工作目录中创建。为了遵循安全最佳实践，应该对私钥设置权限，以便只有你才能访问它：
 
-        chmod 0600 myPrivateKey.key
+    ```
+    chmod 0600 myPrivateKey.key
+    ```
 
 4. [下一部分](#create-a-private-key-for-putty)详细说明了如何通过 PuTTYgen 来查看和使用公钥，以及专门创建一个私钥用于在 PuTTY 中通过 SSH 连接到 Linux VM。以下命令生成名为 `myPublicKey.key` 的、可立即使用的公钥文件：
 
-        openssl.exe rsa -pubout -in myPrivateKey.key -out myPublicKey.key
+    ```
+    openssl.exe rsa -pubout -in myPrivateKey.key -out myPublicKey.key
+    ```
 
 5. 如果还需要管理经典资源，请将 `myCert.pem` 转换为 `myCert.cer`（DER 编码的 X509 证书）。仅当需要专门管理旧的经典资源时，才执行这个可选步骤。
 
     使用以下命令转换证书：
 
-        openssl.exe  x509 -outform der -in myCert.pem -out myCert.cer
+    ```
+    openssl.exe  x509 -outform der -in myCert.pem -out myCert.cer
+    ```
 
 ## <a name="create-a-private-key-for-putty"></a> 为 PuTTY 创建私钥
 PuTTY 是适用于 Windows 的常用 SSH 客户端。不过，你可以根据需要使用任意 SSH 客户端。若要使用 PuTTY，需要创建一种附加密钥类型 - PuTTY 私钥 (PPK)。如果不想要使用 PuTTY，请跳过本部分。
@@ -116,11 +126,15 @@ PuTTY 是适用于 Windows 的常用 SSH 客户端。不过，你可以根据需
 
 1. 使用 **Git Bash** 将私钥转换为 PuTTYgen 可以识别的 RSA 私钥。以下示例基于名为 `myPrivateKey` 的现有密钥创建名为 `myPrivateKey_rsa` 的密钥：
 
-        openssl rsa -in ./myPrivateKey.key -out myPrivateKey_rsa
+    ```
+    openssl rsa -in ./myPrivateKey.key -out myPrivateKey_rsa
+    ```
 
     为了遵循安全最佳实践，应该对私钥设置权限，以便只有你才能访问它：
 
-        chmod 0600 myPrivateKey_rsa
+    ```
+    chmod 0600 myPrivateKey_rsa
+    ```
 
 2. 从以下位置下载并运行 PuTTYgen：[http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)
 3. 单击菜单：“文件”>“加载私钥”

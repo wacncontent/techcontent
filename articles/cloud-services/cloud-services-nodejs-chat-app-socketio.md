@@ -43,16 +43,22 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
 
 2. 创建一个名为 **c:\\node** 的目录。
 
-        PS C:\> md node
+    ```
+    PS C:\> md node
+    ```
 
 3. 将目录更改为 **c:\\node** 目录
 
-        PS C:\> cd node
+    ```
+    PS C:\> cd node
+    ```
 
 4. 输入以下命令以创建一个名为 **chatapp** 的新解决方案和一个名为 **WorkerRole1** 的辅助角色：
 
-        PS C:\node> New-AzureServiceProject chatapp
-        PS C:\Node> Add-AzureNodeWorkerRole
+    ```
+    PS C:\node> New-AzureServiceProject chatapp
+    PS C:\Node> Add-AzureNodeWorkerRole
+    ```
 
     会看到以下响应：
 
@@ -82,25 +88,31 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
 
 2.  在 server.js 的开头处查找 **Module dependencies** 节，将包含 **sio = require('..//..//lib//socket.io')** 的行改为 **sio = require('socket.io')**，如下所示：
 
-        var express = require('express')
-          , stylus = require('stylus')
-          , nib = require('nib')
-        //, sio = require('..//..//lib//socket.io'); //Original
-          , sio = require('socket.io');                //Updated
+    ```
+    var express = require('express')
+      , stylus = require('stylus')
+      , nib = require('nib')
+    //, sio = require('..//..//lib//socket.io'); //Original
+      , sio = require('socket.io');                //Updated
+    ```
 
 3.  为了确保应用程序侦听正确端口，请在记事本或你喜爱的编辑器中打开 server.js，然后通过将 **3000** 替换为 **process.env.port** 来更改以下行，如下所示：
 
-        //app.listen(3000, function () {            //Original
-        app.listen(process.env.port, function () {  //Updated
-          var addr = app.address();
-          console.log('   app listening on http://' + addr.address + ':' + addr.port);
-        });
+    ```
+    //app.listen(3000, function () {            //Original
+    app.listen(process.env.port, function () {  //Updated
+      var addr = app.address();
+      console.log('   app listening on http://' + addr.address + ':' + addr.port);
+    });
+    ```
 
 保存对 **server.js** 所做更改后，使用以下步骤安装所需的模块，然后在 Azure 模拟器中测试应用程序：
 
 1.  使用 **Azure PowerShell**，将目录切换到 **C:\\node\\chatapp\\WorkerRole1** 目录，然后使用以下命令安装此应用程序所需的模块：
 
-        PS C:\node\chatapp\WorkerRole1> npm install
+    ```
+    PS C:\node\chatapp\WorkerRole1> npm install
+    ```
 
     这将安装 package.json 文件中所列的模块。命令完成后，应该看到类似下面的输出：
 
@@ -108,13 +120,17 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
 
 4.  因为此示例最初是 Socket.IO GitHub 存储库的一部分，并通过相对路径直接引用了 Socket.IO 库，而 package.json 文件中未引用 Socket.IO，所以我们必须通过发出以下命令来安装它：
 
-        PS C:\node\chatapp\WorkerRole1> npm install socket.io --save
+    ```
+    PS C:\node\chatapp\WorkerRole1> npm install socket.io --save
+    ```
 
 ### 测试和部署
 
 1.  通过发出以下命令启动模拟器：
 
-        PS C:\node\chatapp\WorkerRole1> Start-AzureEmulator -Launch
+    ```
+    PS C:\node\chatapp\WorkerRole1> Start-AzureEmulator -Launch
+    ```
 
 2.  打开浏览器并导航到 ****http://127.0.0.1**。
 
@@ -124,11 +140,15 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
 
 3.  测试应用程序之后，发出以下命令停止模拟器：
 
-        PS C:\node\chatapp\WorkerRole1> Stop-AzureEmulator
+    ```
+    PS C:\node\chatapp\WorkerRole1> Stop-AzureEmulator
+    ```
 
 4.  若要将应用程序部署到 Azure，请使用 **Publish-AzureServiceProject** cmdlet。例如：
 
-        PS C:\node\chatapp\WorkerRole1> Publish-AzureServiceProject -ServiceName mychatapp -Location "China East" -Launch
+    ```
+    PS C:\node\chatapp\WorkerRole1> Publish-AzureServiceProject -ServiceName mychatapp -Location "China East" -Launch
+    ```
 
     > [!IMPORTANT]
     > 确保使用唯一名称，否则发布过程会失败。部署完成后，会打开浏览器并导航到已部署的服务。

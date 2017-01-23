@@ -51,11 +51,15 @@ Azure 虚拟网络站点到站点连接使用 VPN 网关通过 Ipsec/IKE 提供�
 
     运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
     如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
 
-        Select-AzureSubscription <AzureSubscriptionName>
+    ```
+    Select-AzureSubscription <AzureSubscriptionName>
+    ```
 
     [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
@@ -200,10 +204,12 @@ VNet 网关使用共享密钥对虚拟网络之间的连接进行身份验证。
 1. 在工作站中，打开 **Windows PowerShell ISE** 或 Windows PowerShell 控制台。
 2. 更新以下脚本中的参数，然后运行该脚本：
 
-        Add-AuzreAccount -Environment AzureChinaCloud
-        Select-AzureSubscription -[AzureSubscriptionName]
-        Set-AzureVNetGatewayKey -VNetName ContosoVNet-CN -LocalNetworkSiteName Contoso-LNet-CE -SharedKey A1b2C3D4
-        Set-AzureVNetGatewayKey -VNetName ContosoVNet-CE -LocalNetworkSiteName Contoso-LNet-CN -SharedKey A1b2C3D4 
+    ```
+    Add-AuzreAccount -Environment AzureChinaCloud
+    Select-AzureSubscription -[AzureSubscriptionName]
+    Set-AzureVNetGatewayKey -VNetName ContosoVNet-CN -LocalNetworkSiteName Contoso-LNet-CE -SharedKey A1b2C3D4
+    Set-AzureVNetGatewayKey -VNetName ContosoVNet-CE -LocalNetworkSiteName Contoso-LNet-CN -SharedKey A1b2C3D4 
+    ```
 
 ##检查 VPN 连接 
 

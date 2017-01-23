@@ -30,11 +30,15 @@ ms.author: dastrock
 
 若要开始，你需要下载并安装 [node.js](https://nodejs.org)。然后可以克隆或[下载](https://github.com/AzureADQuickStarts/AppModelv2-SinglePageApp-AngularJS-NodeJS/archive/skeleton.zip)骨架应用：
 
-    git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-SinglePageApp-AngularJS-NodeJS.git
+```
+git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-SinglePageApp-AngularJS-NodeJS.git
+```
 
 该骨架应用包含简单 AngularJS 应用的重复使用代码，但是缺少与标识相关的所有部分。如果你不想要延用该应用，可以克隆或[下载](https://github.com/AzureADQuickStarts/AppModelv2-SinglePageApp-AngularJS-NodeJS/archive/complete.zip)完整的示例。
 
-    git clone https://github.com/AzureADSamples/SinglePageApp-AngularJS-NodeJS.git
+```
+git clone https://github.com/AzureADSamples/SinglePageApp-AngularJS-NodeJS.git
+```
 
 ## 注册应用程序
 
@@ -49,7 +53,9 @@ ms.author: dastrock
 ## 安装 adal.js
 若要开始，请导航到下载的项目并安装 adal.js。如果已安装 [bower](http://bower.io/)，只要运行以下命令即可。如有任何依赖版本不匹配的情况，只需选择较高的版本。
 
-    bower install adal-angular#experimental
+```
+bower install adal-angular#experimental
+```
 
 或者，你可以手动下载 [adal.js](https://raw.githubusercontent.com/AzureAD/azure-activedirectory-library-for-js/experimental/dist/adal.min.js) 和 [adal-angular.js](https://raw.githubusercontent.com/AzureAD/azure-activedirectory-library-for-js/experimental/dist/adal-angular.min.js)。将这两个文件添加到 `app/lib/adal-angular-experimental/dist` 目录。
 
@@ -57,32 +63,38 @@ ms.author: dastrock
 
 html
 
-    <!--index.html-->
+```
+<!--index.html-->
 
-    ...
+...
 
-    <script src="App/bower_components/dist/adal.min.js"></script>
-    <script src="App/bower_components/dist/adal-angular.min.js"></script>
+<script src="App/bower_components/dist/adal.min.js"></script>
+<script src="App/bower_components/dist/adal-angular.min.js"></script>
 
-    ...
+...
+```
 
 ## 设置 REST API
 
 在设置的同时，让我们查看后端 REST API 的工作方式。在命令提示符下，通过运行以下命令安装所有必要的包（确保你处于项目的顶层目录）：
 
-    npm install
+```
+npm install
+```
 
 现在，请打开 `config.js` 并替换 `audience` 值：
 
 js
 
-    exports.creds = {
+```
+exports.creds = {
 
-         // TODO: Replace this value with the Application ID from the registration portal
-         audience: '<Your-application-id>',
+     // TODO: Replace this value with the Application ID from the registration portal
+     audience: '<Your-application-id>',
 
-         ...
-    }
+     ...
+}
+```
 
 REST API 使用此值来验证发出 AJAX 请求时从 Angular 应用收到的令牌。请注意，这个简单的 REST API 会在内存中存储数据 - 因此，每次停止服务器后，你将会丢失以前创建的所有任务。
 
@@ -93,117 +105,131 @@ REST API 使用此值来验证发出 AJAX 请求时从 Angular 应用收到的�
 
 js
 
-    // app/scripts/app.js
+```
+// app/scripts/app.js
 
-    angular.module('todoApp', ['ngRoute','AdalAngular'])
-    .config(['$routeProvider','$httpProvider', 'adalAuthenticationServiceProvider',
-     function ($routeProvider, $httpProvider, adalProvider) {
+angular.module('todoApp', ['ngRoute','AdalAngular'])
+.config(['$routeProvider','$httpProvider', 'adalAuthenticationServiceProvider',
+ function ($routeProvider, $httpProvider, adalProvider) {
 
-    ...
+...
+```
 
 现在可以使用应用程序 ID 初始化 `adalProvider`：
 
 js
 
-    // app/scripts/app.js
+```
+// app/scripts/app.js
 
-    ...
+...
 
-    adalProvider.init({
+adalProvider.init({
 
-            // Use this value for the public instance of Azure AD
-            instance: 'https://login.microsoftonline.com/', 
+        // Use this value for the public instance of Azure AD
+        instance: 'https://login.microsoftonline.com/', 
 
-            // The 'common' endpoint is used for multi-tenant applications like this one
-            tenant: 'common',
+        // The 'common' endpoint is used for multi-tenant applications like this one
+        tenant: 'common',
 
-            // Your application id from the registration portal
-            clientId: '<Your-application-id>',
+        // Your application id from the registration portal
+        clientId: '<Your-application-id>',
 
-            // If you're using IE, uncommment this line - the default HTML5 sessionStorage does not work for localhost.
-            //cacheLocation: 'localStorage',
+        // If you're using IE, uncommment this line - the default HTML5 sessionStorage does not work for localhost.
+        //cacheLocation: 'localStorage',
 
-        }, $httpProvider);
+    }, $httpProvider);
+```
 
 很好，现在 adal.js 有了保护应用和登录用户所需的所有信息。若要对应用中的特定路由强制登录，只需编写一行代码：
 
 js
 
-    // app/scripts/app.js
+```
+// app/scripts/app.js
 
-    ...
+...
 
-    }).when("/TodoList", {
-        controller: "todoListCtrl",
-        templateUrl: "/static/views/TodoList.html",
-        requireADLogin: true, // Ensures that the user must be logged in to access the route
-    })
+}).when("/TodoList", {
+    controller: "todoListCtrl",
+    templateUrl: "/static/views/TodoList.html",
+    requireADLogin: true, // Ensures that the user must be logged in to access the route
+})
 
-    ...
+...
+```
 
 现在，用户单击 `TodoList` 链接时，adal.js 会根据需要自动重定向到 Azure AD 以进行登录。你也可以通过在控制器中调用 adal.js，显式发送登录和注销请求：
 
 js
 
-    // app/scripts/homeCtrl.js
+```
+// app/scripts/homeCtrl.js
 
-    angular.module('todoApp')
-    // Load adal.js the same way for use in controllers and views   
-    .controller('homeCtrl', ['$scope', 'adalAuthenticationService','$location', function ($scope, adalService, $location) {
-        $scope.login = function () {
+angular.module('todoApp')
+// Load adal.js the same way for use in controllers and views   
+.controller('homeCtrl', ['$scope', 'adalAuthenticationService','$location', function ($scope, adalService, $location) {
+    $scope.login = function () {
 
-            // Redirect the user to sign in
-            adalService.login();
+        // Redirect the user to sign in
+        adalService.login();
 
-        };
-        $scope.logout = function () {
+    };
+    $scope.logout = function () {
 
-            // Redirect the user to log out    
-            adalService.logOut();
+        // Redirect the user to log out    
+        adalService.logOut();
 
-        };
-    ...
+    };
+...
+```
 
 ## 显示用户信息
 用户现已登录，你可能需要访问应用程序中已登录用户的身份验证数据。Adal.js 在 `userInfo` 对象中公开此信息。若要在视图中访问此对象，首先请将 adal.js 添加到相应控制器的根范围：
 
 js
 
-    // app/scripts/userDataCtrl.js
+```
+// app/scripts/userDataCtrl.js
 
-    angular.module('todoApp')
-    // Load ADAL for use in view
-    .controller('userDataCtrl', ['$scope', 'adalAuthenticationService', function ($scope, adalService) {}]);
+angular.module('todoApp')
+// Load ADAL for use in view
+.controller('userDataCtrl', ['$scope', 'adalAuthenticationService', function ($scope, adalService) {}]);
+```
 
 然后可以直接在视图中寻址 `userInfo` 对象：
 
 html
 
-    <!--app/views/UserData.html-->
+```
+<!--app/views/UserData.html-->
 
-    ...
+...
 
-        <!--Get the user's profile information from the ADAL userInfo object-->
-        <tr ng-repeat="(key, value) in userInfo.profile">
-            <td>{{key}}</td>
-            <td>{{value}}</td>
-        </tr>
-    ...
+    <!--Get the user's profile information from the ADAL userInfo object-->
+    <tr ng-repeat="(key, value) in userInfo.profile">
+        <td>{{key}}</td>
+        <td>{{value}}</td>
+    </tr>
+...
+```
 
 也可以使用 `userInfo` 对象来确定用户是否已登录。
 
 html
 
-    <!--index.html-->
+```
+<!--index.html-->
 
-    ...
+...
 
-        <!--Use the ADAL userInfo object to show the right login/logout button-->
-        <ul class="nav navbar-nav navbar-right">
-            <li><a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a></li>
-            <li><a class="btn btn-link" ng-hide="userInfo.isAuthenticated" ng-click="login()">Login</a></li>
-        </ul>
-    ...
+    <!--Use the ADAL userInfo object to show the right login/logout button-->
+    <ul class="nav navbar-nav navbar-right">
+        <li><a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a></li>
+        <li><a class="btn btn-link" ng-hide="userInfo.isAuthenticated" ng-click="login()">Login</a></li>
+    </ul>
+...
+```
 
 ## 调用 REST API
 最后，获取一些令牌并调用 REST API，以创建、读取、更新和删除任务。知道吗？ *什么事*都不用做。Adal.js 将自动为你获取、缓存和刷新令牌。它还会将这些令牌附加到发往 REST API 的传出 AJAX 请求。
@@ -214,15 +240,19 @@ html
 
 js
 
-    // app/scripts/todoListSvc.js
+```
+// app/scripts/todoListSvc.js
 
-    ...
-    return $http.get('/api/tasks');
-    ...
+...
+return $http.get('/api/tasks');
+...
+```
 
 祝贺你！ 你现已完成创建 Azure AD 集成的单页面应用。佩服吧！该应用可对用户进行身份验证，使用 OpenID Connect 安全调用其后端 REST API，并获取有关用户的基本信息。它原本就支持来自 Azure AD 的具有个人 Microsoft 帐户或工作/学校帐户的任何用户。运行以下命令以尝试使用该应用：
 
-    node server.js
+```
+node server.js
+```
 
 在浏览器中，导航到 `http://localhost:8080`。使用个人 Microsoft 帐户或工作/学校帐户登录。将任务添加到用户的待办事项列表，然后注销。尝试使用其他类型的帐户登录。如果需要一个 Azure AD 租户来创建工作/学校用户，请[在此处了解如何获取租户](./active-directory-howto-tenant.md)（免费）。
 

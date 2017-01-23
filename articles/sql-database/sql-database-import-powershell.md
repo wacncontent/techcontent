@@ -48,51 +48,63 @@ ms.author: sstein
 
 数据库名称是要为新数据库赋予的名称。
 
-    $ResourceGroupName = "resource group name"
-    $ServerName = "server name"
-    $DatabaseName = "database name"
+```
+$ResourceGroupName = "resource group name"
+$ServerName = "server name"
+$DatabaseName = "database name"
+```
 
 以下变量来自 BACPAC 所处的存储帐户。在 [Azure 门户预览](https://portal.azure.cn)中，浏览到存储帐户获取这些值。你可以单击存储帐户边栏选项卡中的“所有设置”，然后单击“密钥”，找到主访问密钥。
 
 Blob 名称是要从中创建数据库的现有 BACPAC 文件的名称。需要包括 .bacpac 扩展名。
 
-    $StorageName = "storageaccountname"
-    $StorageKeyType = "StorageAccessKey"
-    $StorageUri = "http://$StorageName.blob.core.chinacloudapi.cn/containerName/filename.bacpac"
-    $StorageKey = "primaryaccesskey"
+```
+$StorageName = "storageaccountname"
+$StorageKeyType = "StorageAccessKey"
+$StorageUri = "http://$StorageName.blob.core.chinacloudapi.cn/containerName/filename.bacpac"
+$StorageKey = "primaryaccesskey"
+```
 
 运行 [Get-Credential](https://msdn.microsoft.com/zh-cn/library/hh849815.aspx) cmdlet 会打开一个窗口，要求输入用户名和密码。请输入 SQL 数据库服务器的管理员登录名和密码（上述 $ServerName），而不是 Azure 帐户的用户名和密码。
 
-    $credential = Get-Credential
+```
+$credential = Get-Credential
+```
 
 ## 导入数据库
 
 此命令会将导入数据库请求提交到服务。根据数据库的大小，导入操作可能需要一些时间才能完成。
 
-    $importRequest = New-AzureRmSqlDatabaseImport –ResourceGroupName $ResourceGroupName –ServerName $ServerName –DatabaseName $DatabaseName –StorageKeytype $StorageKeyType –StorageKey $StorageKey -StorageUri $StorageUri –AdministratorLogin $credential.UserName –AdministratorLoginPassword $credential.Password –Edition Standard –ServiceObjectiveName S0 -DatabaseMaxSizeBytes 50000
+```
+$importRequest = New-AzureRmSqlDatabaseImport –ResourceGroupName $ResourceGroupName –ServerName $ServerName –DatabaseName $DatabaseName –StorageKeytype $StorageKeyType –StorageKey $StorageKey -StorageUri $StorageUri –AdministratorLogin $credential.UserName –AdministratorLoginPassword $credential.Password –Edition Standard –ServiceObjectiveName S0 -DatabaseMaxSizeBytes 50000
+```
 
 ## 监视导入操作的进度
 
 运行 [New-AzureRmSqlDatabaseImport](https://msdn.microsoft.com/zh-cn/library/mt707793.aspx) 后，可运行 [Get-AzureRmSqlDatabaseImportExportStatus](https://msdn.microsoft.com/zh-cn/library/mt707794.aspx) 查看请求的状态。
 
-    Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $importRequest.OperationStatusLink
+```
+Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $importRequest.OperationStatusLink
+```
 
 ## SQL 数据库 PowerShell 导入脚本
 
-    $ResourceGroupName = "resourceGroupName"
-    $ServerName = "servername"
-    $DatabaseName = "databasename"
+```
+$ResourceGroupName = "resourceGroupName"
+$ServerName = "servername"
+$DatabaseName = "databasename"
 
-    $StorageName = "storageaccountname"
-    $StorageKeyType = "StorageAccessKey"
-    $StorageUri = "http://$StorageName.blob.core.chinacloudapi.cn/containerName/filename.bacpac"
-    $StorageKey = "primaryaccesskey"
+$StorageName = "storageaccountname"
+$StorageKeyType = "StorageAccessKey"
+$StorageUri = "http://$StorageName.blob.core.chinacloudapi.cn/containerName/filename.bacpac"
+$StorageKey = "primaryaccesskey"
 
-    $credential = Get-Credential
+$credential = Get-Credential
 
-    $importRequest = New-AzureRmSqlDatabaseImport –ResourceGroupName $ResourceGroupName –ServerName $ServerName –DatabaseName $DatabaseName –StorageKeytype $StorageKeyType –StorageKey $StorageKey -StorageUri $StorageUri –AdministratorLogin $credential.UserName –AdministratorLoginPassword $credential.Password –Edition Standard –ServiceObjectiveName S0 -DatabaseMaxSizeBytes 50000
+$importRequest = New-AzureRmSqlDatabaseImport –ResourceGroupName $ResourceGroupName –ServerName $ServerName –DatabaseName $DatabaseName –StorageKeytype $StorageKeyType –StorageKey $StorageKey -StorageUri $StorageUri –AdministratorLogin $credential.UserName –AdministratorLoginPassword $credential.Password –Edition Standard –ServiceObjectiveName S0 -DatabaseMaxSizeBytes 50000
 
-    Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $importRequest.OperationStatusLink
+Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $importRequest.OperationStatusLink
+```
 
 ## 后续步骤
 

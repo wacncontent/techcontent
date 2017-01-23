@@ -30,9 +30,11 @@ wacn.date: 11/03/2016
 
 2.在 FTP 中登录时，所填信息类似如下：
 
-    Host：ftp://cnws-prod-bjb-001.ftp.chinacloudsites.chinacloudapi.cn
-    Username；amaytestcreate1011\AzureCIE
-    Password：XXXX[您自己的 FTP 密码]
+```
+Host：ftp://cnws-prod-bjb-001.ftp.chinacloudsites.chinacloudapi.cn
+Username；amaytestcreate1011\AzureCIE
+Password：XXXX[您自己的 FTP 密码]
+```
   ![](./media/aog-web-app-ftp-kudu-login/ftp-login.png)
 
 ### 使用发布配置文件进行 FTP 登录
@@ -90,9 +92,11 @@ https://amaydel1.scm.chinacloudsites.cn/
 
 2. 文本编辑器打开，获取必要信息
 
-        Kudu URL: https://amaydel1.scm.chinacloudsites.cn 
-        用户名：$amaydel1
-        密码：YnuEwRDLr3P6X1vCdKe2dNYyYQf7TJmfryubADvCbXXXXX
+    ```
+    Kudu URL: https://amaydel1.scm.chinacloudsites.cn 
+    用户名：$amaydel1
+    密码：YnuEwRDLr3P6X1vCdKe2dNYyYQf7TJmfryubADvCbXXXXX
+    ```
 
     ![](./media/aog-web-app-ftp-kudu-login/publish-settings-content.png)
 

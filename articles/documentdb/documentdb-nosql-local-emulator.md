@@ -15,7 +15,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/29/2016
-wacn.date: 01/16/2017
+wacn.date: 01/23/2017
 ms.author: arramac
 ---
 
@@ -54,8 +54,10 @@ DocumentDB 模拟器提供对 DocumentDB 服务的高保真模拟。它支持和
 ## 对 DocumentDB 模拟器的请求进行身份验证
 和云中的 Azure Document 一样，每个针对 DocumentDB 模拟器的请求都必须进行身份验证。DocumentDB 模拟器使用一个固定的帐户和公开的身份验证密钥进行主密钥身份验证。此帐户和密钥是允许用于 DocumentDB 模拟器的唯一凭据。它们具有以下特点：
 
-    Account name: localhost:<port>
-    Account key: C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
+```
+Account name: localhost:<port>
+Account key: C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
+```
 
 > [!NOTE]
 DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 模拟器中使用生产 DocumentDB 帐户和密钥。
@@ -83,18 +85,22 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 ## 使用 DocumentDB 模拟器进行开发
 在桌面上运行 DocumentDB 模拟器之后，可以使用任何支持的 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 或 [DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 与模拟器进行交互。DocumentDB 模拟器还包括内置的数据资源管理器，可用于创建集合、查看和编辑文档，而无需编写任何代码。
 
-    // Connect to the DocumentDB Emulator running locally
-    DocumentClient client = new DocumentClient(
-        new Uri("https://localhost:8081"), 
-        "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
-        new ConnectionPolicy { EnableEndpointDiscovery = false });
+```
+// Connect to the DocumentDB Emulator running locally
+DocumentClient client = new DocumentClient(
+    new Uri("https://localhost:8081"), 
+    "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
+    new ConnectionPolicy { EnableEndpointDiscovery = false });
+```
 
 > [!NOTE]
 连接到模拟器时，必须在连接配置中设置 EnableEndpointDiscovery = false。
 
 如果使用[具有 MongoDB 协议支持的 DocumentDB](./documentdb-protocol-mongodb.md)，请使用以下连接字符串：
 
-    mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10250/admin?ssl=true&3t.sslSelfSignedCerts=true
+```
+mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10250/admin?ssl=true&3t.sslSelfSignedCerts=true
+```
 
 可以使用现有工具如 [DocumentDB Studio](https://github.com/mingaliu/DocumentDBStudio) 连接到 DocumentDB 模拟器。用户还可以使用 [DocumentDB 数据迁移工具](https://github.com/azure/azure-documentdb-datamigrationtool)在 DocumentDB 模拟器和 Azure DocumentDB 服务之间迁移数据。
 
@@ -113,7 +119,9 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 
 ### 命令行语法
 
-    DocumentDB.Emulator.exe [/shutdown] [/datapath] [/port] [/mongoport] [/directports] [/key] [/?]
+```
+DocumentDB.Emulator.exe [/shutdown] [/datapath] [/port] [/mongoport] [/directports] [/key] [/?]
+```
 
 若要查看选项列表，请在命令提示符下键入 `DocumentDB.Emulator.exe /?`。
 
@@ -213,3 +221,4 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 - 若要开始使用 DocumentDB 模拟器进行开发，请下载一个[支持的 DocumentDB SDK](./documentdb-sdk-dotnet.md)。
 
 <!---HONumber=Mooncake_0109_2017-->
+<!---Update_Description: add content on how to Start the local emulator Data Explorer and export SSL certificate -->

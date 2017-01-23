@@ -132,8 +132,8 @@ HDInsight 工具可用于将 C# 或混合拓扑提交到 Storm 群集。以下�
 
 4. 在“解决方案资源管理器”中，右键单击项目，然后选择“提交到 Storm on HDInsight”。
 
-    > [!NOTE]
-    如果出现提示，请输入 Azure 订阅的登录凭据。如果有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
+   > [!NOTE]
+   如果出现提示，请输入 Azure 订阅的登录凭据。如果有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
 
 5. 从“Storm 群集”下拉列表中选择你的 Storm on HDInsight 群集，然后选择“提交”。你可以使用“输出”窗口监视提交是否成功。
 
@@ -141,18 +141,18 @@ HDInsight 工具可用于将 C# 或混合拓扑提交到 Storm 群集。以下�
 
     ![visual studio 监视器](./media/hdinsight-storm-deploy-monitor-topology/vsmonitor.png)
 
-    > [!NOTE]
-    你也可以依次展开“Azure”和“HDInsight”，右键单击 Storm on HDInsight 群集，然后选择“查看 Storm 拓扑”，从“服务器资源管理器”查看“Storm 拓扑”。
+   > [!NOTE]
+   你也可以依次展开“Azure”和“HDInsight”，右键单击 Storm on HDInsight 群集，然后选择“查看 Storm 拓扑”，从“服务器资源管理器”查看“Storm 拓扑”。
 
     选择 Spout 或 Bolt 的形状可查看有关这些组件的信息。 每选择一项都会打开一个新窗口。
 
-    > [!NOTE]
-    拓扑的名称是拓扑的类名（在此示例中为 `HelloWord`）并追加了时间戳。
+   > [!NOTE]
+   拓扑的名称是拓扑的类名（在此示例中为 `HelloWord`）并追加了时间戳。
 
 7. 从“拓扑摘要”视图中，选择“终止”以停止拓扑。
 
-    > [!NOTE]
-    Storm 拓扑会一直运行，直到它被停止，或者群集被删除。
+   > [!NOTE]
+   Storm 拓扑会一直运行，直到它被停止，或者群集被删除。
 
 ## REST API
 

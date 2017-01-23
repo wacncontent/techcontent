@@ -153,15 +153,17 @@ Azure 到 Hyper-V 站点 | 不支持 | 支持 | 不支持
 - **DHCP** — 如果虚拟机使用 DHCP，则应在测试 DHCP 服务器上更新测试 DNS 的 IP 地址。如果使用的网络类型为 Windows 网络虚拟化，则 VMM 服务器充当 DHCP 服务器。因此，应在测试性故障转移网络中更新 DNS 的 IP 地址。在这种情况下，虚拟机将向相关的 DNS 服务器注册自身。
 - **静态地址** — 如果虚拟机使用静态 IP 地址，则应在测试性故障转移网络中更新测试 DNS 服务器的 IP 地址。你可能需要使用测试虚拟机的 IP 地址更新 DNS。你可以使用以下示例脚本实现此目的：
 
-        Param(
-        [string]$Zone,
-        [string]$name,
-        [string]$IP
-        )
-        $Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
-        $newrecord = $record.clone()
-        $newrecord.RecordData[0].IPv4Address  =  $IP
-        Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
+    ```
+    Param(
+    [string]$Zone,
+    [string]$name,
+    [string]$IP
+    )
+    $Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
+    $newrecord = $record.clone()
+    $newrecord.RecordData[0].IPv4Address  =  $IP
+    Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
+    ```
 
 ## 运行计划的故障转移（主站点到辅助站点）
 

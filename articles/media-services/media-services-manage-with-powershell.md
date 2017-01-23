@@ -43,11 +43,15 @@ ms.author: juliako
 
 参数集：StorageAccountIdParamSet
 
-    New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccountId] <string> [-Tags <hashtable>]  [<CommonParameters>]
+```
+New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccountId] <string> [-Tags <hashtable>]  [<CommonParameters>]
+```
 
 参数集：StorageAccountsParamSet
 
-    New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccounts] <PSStorageAccount[]> [-Tags <hashtable>]  [<CommonParameters>]
+```
+New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccounts] <PSStorageAccount[]> [-Tags <hashtable>]  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -155,7 +159,9 @@ ms.author: juliako
 
 ### 语法
 
-    Set-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Tags <hashtable>] [-StorageAccounts <PSStorageAccount[]>]  [<CommonParameters>]
+```
+Set-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Tags <hashtable>] [-StorageAccounts <PSStorageAccount[]>]  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -234,7 +240,9 @@ ms.author: juliako
 
 ### 语法
 
-    Remove-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
+Remove-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -282,11 +290,15 @@ ms.author: juliako
 
 ParameterSet: ResourceGroupParameterSet
 
-    Get-AzureRmMediaService [-ResourceGroupName] <string>  [<CommonParameters>]	
+```
+Get-AzureRmMediaService [-ResourceGroupName] <string>  [<CommonParameters>]	
+```
 
 ParameterSet: AccountNameParameterSet
 
-    Get-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
+Get-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -334,7 +346,9 @@ ParameterSet: AccountNameParameterSet
 
 ### 语法
 
-    Get-AzureRmMediaServiceKeys [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
+Get-AzureRmMediaServiceKeys [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -380,7 +394,9 @@ ParameterSet: AccountNameParameterSet
 
 ### 语法
 
-    Set-AzureRmMediaServiceKey [-ResourceGroupName] <string> [-AccountName] <string> [-KeyType] <KeyType> {Primary | Secondary}  [<CommonParameters>]
+```
+Set-AzureRmMediaServiceKey [-ResourceGroupName] <string> [-AccountName] <string> [-KeyType] <KeyType> {Primary | Secondary}  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -440,7 +456,9 @@ ParameterSet: AccountNameParameterSet
 
 ### 语法
 
-    Sync-AzureRmMediaServiceStorageKeys [-ResourceGroupName] <string> [-MediaServiceAccountName] <string>    [-StorageAccountId] <string>  [<CommonParameters>]
+```
+Sync-AzureRmMediaServiceStorageKeys [-ResourceGroupName] <string> [-MediaServiceAccountName] <string>    [-StorageAccountId] <string>  [<CommonParameters>]
+```
 
 ### 参数
 

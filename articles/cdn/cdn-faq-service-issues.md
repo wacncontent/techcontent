@@ -39,8 +39,8 @@ wacn.lang: cn
 出现CDN加速域名不能访问时，为了尽快找出问题所在，需要您提供如下信息：
 
 1. 出问题时访问到的CDN节点IP
-    - 组合件Win键+R，输入cmd，点击“确定”后，弹出cmd.exe。
-    - 输入nslookup 域名，获取Addresss对应的IP地址。比如加速域名是www.cdntest.com，请在cmd.exe中输入nslookup www.cdntest.com，然后按回车键。
+   - 组合件Win键+R，输入cmd，点击“确定”后，弹出cmd.exe。
+   - 输入nslookup 域名，获取Addresss对应的IP地址。比如加速域名是www.cdntest.com，请在cmd.exe中输入nslookup www.cdntest.com，然后按回车键。
 
      ![][1]
 2. 提供可复制文本的问题URL，有时候出现的URL太长，排查人员需要可复制的URL 减少排查时间。类似：http://www.eaxmple.com/aaabbbb.jpg
@@ -56,10 +56,10 @@ wacn.lang: cn
 URL不能被缓存，通常有以下几个原因： 
 
 1. 源站的该URL响应Header里含有以下信息：
-    - Set-Cookie（且缓存规则里并未勾选忽略Set-Cookie选项）。注：Set-Cookie在用于用户登录和身份识别时是不能勾选忽略Set-Cookie选项的，否则可能引起功能性问题。
-    - Cache-Control：no-store/no-cache/private（且缓存规则里并未勾选忽略Cache-Control选项）。
-    - Expires的时间是过去的某个时间，Expires指定了缓存到期时间点，如果是过去时间，则将导致无法缓存。
-    - Max-age的值很小，Max-age指定了缓存时间长度，单位为秒，如果太小，如小于两位数，那么很快就会过期，导致无法缓存。
+   - Set-Cookie（且缓存规则里并未勾选忽略Set-Cookie选项）。注：Set-Cookie在用于用户登录和身份识别时是不能勾选忽略Set-Cookie选项的，否则可能引起功能性问题。
+   - Cache-Control：no-store/no-cache/private（且缓存规则里并未勾选忽略Cache-Control选项）。
+   - Expires的时间是过去的某个时间，Expires指定了缓存到期时间点，如果是过去时间，则将导致无法缓存。
+   - Max-age的值很小，Max-age指定了缓存时间长度，单位为秒，如果太小，如小于两位数，那么很快就会过期，导致无法缓存。
 
 2. 缓存规则里没有配置或配置错误，URL无法命中任何一个缓冲规则，例如，有用户不小心录入以下规则:"\[任意字符\]\(.gif|.jpg|.bmp\) (\.gif|.jpg|.bmp\)"，那么即使是图片类型也无法命中规则，因为扩展名重复。
 

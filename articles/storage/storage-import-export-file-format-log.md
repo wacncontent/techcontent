@@ -50,55 +50,57 @@ ms.author: renash
 
 详细日志格式如下所示。错误日志具有相同的结构，但可筛选出成功的操作。
 
-    <DriveLog Version="2014-11-01">  
-      <DriveId>drive-id</DriveId>  
-      [<Blob Status="blob-status">  
-       <BlobPath>blob-path</BlobPath>  
-       <FilePath>file-path</FilePath>  
-       [<Snapshot>snapshot</Snapshot>]  
-       <Length>length</Length>  
-       [<LastModified>last-modified</LastModified>]  
-       [<ImportDisposition Status="import-disposition-status">import-disposition</ImportDisposition>]  
-       [page-range-list-or-block-list]  
-       [metadata-status]  
-       [properties-status]  
-      </Blob>]  
-      [<Blob>  
-        . . .  
-      </Blob>]  
-      <Status>drive-status</Status>  
-    </DriveLog>  
+```
+<DriveLog Version="2014-11-01">  
+  <DriveId>drive-id</DriveId>  
+  [<Blob Status="blob-status">  
+   <BlobPath>blob-path</BlobPath>  
+   <FilePath>file-path</FilePath>  
+   [<Snapshot>snapshot</Snapshot>]  
+   <Length>length</Length>  
+   [<LastModified>last-modified</LastModified>]  
+   [<ImportDisposition Status="import-disposition-status">import-disposition</ImportDisposition>]  
+   [page-range-list-or-block-list]  
+   [metadata-status]  
+   [properties-status]  
+  </Blob>]  
+  [<Blob>  
+    . . .  
+  </Blob>]  
+  <Status>drive-status</Status>  
+</DriveLog>  
 
-    page-range-list-or-block-list ::= 
-      page-range-list | block-list  
+page-range-list-or-block-list ::= 
+  page-range-list | block-list  
 
-    page-range-list ::=   
-    <PageRangeList>  
-          [<PageRange Offset="page-range-offset" Length="page-range-length"   
-           [Hash="md5-hash"] Status="page-range-status"/>]  
-          [<PageRange Offset="page-range-offset" Length="page-range-length"   
-           [Hash="md5-hash"] Status="page-range-status"/>]  
-    </PageRangeList>  
+page-range-list ::=   
+<PageRangeList>  
+      [<PageRange Offset="page-range-offset" Length="page-range-length"   
+       [Hash="md5-hash"] Status="page-range-status"/>]  
+      [<PageRange Offset="page-range-offset" Length="page-range-length"   
+       [Hash="md5-hash"] Status="page-range-status"/>]  
+</PageRangeList>  
 
-    block-list ::=  
-    <BlockList>  
-          [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
-           [Hash="md5-hash"] Status="block-status"/>]  
-          [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
-           [Hash="md5-hash"] Status="block-status"/>]  
-    </BlockList>  
+block-list ::=  
+<BlockList>  
+      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
+       [Hash="md5-hash"] Status="block-status"/>]  
+      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
+       [Hash="md5-hash"] Status="block-status"/>]  
+</BlockList>  
 
-    metadata-status ::=  
-    <Metadata Status="metadata-status">  
-       [<GlobalPath Hash="md5-hash">global-metadata-file-path</GlobalPath>]  
-       [<Path Hash="md5-hash">metadata-file-path</Path>]  
-    </Metadata>  
+metadata-status ::=  
+<Metadata Status="metadata-status">  
+   [<GlobalPath Hash="md5-hash">global-metadata-file-path</GlobalPath>]  
+   [<Path Hash="md5-hash">metadata-file-path</Path>]  
+</Metadata>  
 
-    properties-status ::=  
-    <Properties Status="properties-status">  
-       [<GlobalPath Hash="md5-hash">global-properties-file-path</GlobalPath>]  
-       [<Path Hash="md5-hash">properties-file-path</Path>]  
-    </Properties>  
+properties-status ::=  
+<Properties Status="properties-status">  
+   [<GlobalPath Hash="md5-hash">global-properties-file-path</GlobalPath>]  
+   [<Path Hash="md5-hash">properties-file-path</Path>]  
+</Properties>  
+```
 
 下表介绍了日志文件的元素。
 
@@ -257,55 +259,59 @@ ms.author: renash
 ## 示例日志  
 下面是一个详细日志示例。
 
-    <?xml version="1.0" encoding="UTF-8"?>  
-    <DriveLog Version="2014-11-01">  
-        <DriveId>WD-WMATV123456</DriveId>  
-        <Blob Status="Completed">  
-           <BlobPath>pictures/bob/wild/desert.jpg</BlobPath>  
-           <FilePath>\Users\bob\Pictures\wild\desert.jpg</FilePath>  
-           <Length>98304</Length>  
-           <ImportDisposition Status="Created">overwrite</ImportDisposition>  
-           <BlockList>  
-              <Block Offset="0" Length="65536" Id="AAAAAA==" Hash=" 9C8AE14A55241F98533C4D80D85CDC68" Status="Completed"/>  
-              <Block Offset="65536" Length="32768" Id="AQAAAA==" Hash=" DF54C531C9B3CA2570FDDDB3BCD0E27D" Status="Completed"/>  
-           </BlockList>  
-           <Metadata Status="Completed">  
-              <GlobalPath Hash=" E34F54B7086BCF4EC1601D056F4C7E37">\Users\bob\Pictures\wild\metadata.xml</GlobalPath>  
-           </Metadata>  
-        </Blob>  
-        <Blob Status="CompletedWithErrors">  
-           <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
-           <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
-           <Length>163840</Length>  
-           <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
-           <PageRangeList>  
-              <PageRange Offset="0" Length="65536" Hash="19701B8877418393CB3CB567F53EE225" Status="Completed"/>  
-              <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
-              <PageRange Offset="131072" Length="4096" Hash="9BA552E1C3EEAFFC91B42B979900A996" Status="Completed"/>  
-           </PageRangeList>  
-           <Properties Status="Completed">  
-              <Path Hash="38D7AE80653F47F63C0222FEE90EC4E7">\Users\bob\Pictures\animals\koala.jpg.properties</Path>  
-           </Properties>  
-        </Blob>  
-        <Status>CompletedWithErrors</Status>  
-    </DriveLog>  
+```
+<?xml version="1.0" encoding="UTF-8"?>  
+<DriveLog Version="2014-11-01">  
+    <DriveId>WD-WMATV123456</DriveId>  
+    <Blob Status="Completed">  
+       <BlobPath>pictures/bob/wild/desert.jpg</BlobPath>  
+       <FilePath>\Users\bob\Pictures\wild\desert.jpg</FilePath>  
+       <Length>98304</Length>  
+       <ImportDisposition Status="Created">overwrite</ImportDisposition>  
+       <BlockList>  
+          <Block Offset="0" Length="65536" Id="AAAAAA==" Hash=" 9C8AE14A55241F98533C4D80D85CDC68" Status="Completed"/>  
+          <Block Offset="65536" Length="32768" Id="AQAAAA==" Hash=" DF54C531C9B3CA2570FDDDB3BCD0E27D" Status="Completed"/>  
+       </BlockList>  
+       <Metadata Status="Completed">  
+          <GlobalPath Hash=" E34F54B7086BCF4EC1601D056F4C7E37">\Users\bob\Pictures\wild\metadata.xml</GlobalPath>  
+       </Metadata>  
+    </Blob>  
+    <Blob Status="CompletedWithErrors">  
+       <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
+       <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
+       <Length>163840</Length>  
+       <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
+       <PageRangeList>  
+          <PageRange Offset="0" Length="65536" Hash="19701B8877418393CB3CB567F53EE225" Status="Completed"/>  
+          <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
+          <PageRange Offset="131072" Length="4096" Hash="9BA552E1C3EEAFFC91B42B979900A996" Status="Completed"/>  
+       </PageRangeList>  
+       <Properties Status="Completed">  
+          <Path Hash="38D7AE80653F47F63C0222FEE90EC4E7">\Users\bob\Pictures\animals\koala.jpg.properties</Path>  
+       </Properties>  
+    </Blob>  
+    <Status>CompletedWithErrors</Status>  
+</DriveLog>  
+```
 
 相应的错误日志如下所示。
 
-    <?xml version="1.0" encoding="UTF-8"?>  
-    <DriveLog Version="2014-11-01">  
-        <DriveId>WD-WMATV6965824</DriveId>  
-        <Blob Status="CompletedWithErrors">  
-           <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
-           <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
-           <Length>163840</Length>  
-           <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
-           <PageRangeList>  
-              <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
-           </PageRangeList>  
-        </Blob>  
-        <Status>CompletedWithErrors</Status>  
-    </DriveLog>  
+```
+<?xml version="1.0" encoding="UTF-8"?>  
+<DriveLog Version="2014-11-01">  
+    <DriveId>WD-WMATV6965824</DriveId>  
+    <Blob Status="CompletedWithErrors">  
+       <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
+       <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
+       <Length>163840</Length>  
+       <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
+       <PageRangeList>  
+          <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
+       </PageRangeList>  
+    </Blob>  
+    <Status>CompletedWithErrors</Status>  
+</DriveLog>  
+```
 
  以下导入作业的错误日志包含有关在导入驱动器上找不到的文件的错误。请注意，后续组件的状态为 `Cancelled`。
 
@@ -330,19 +336,21 @@ ms.author: renash
 
 以下导出作业的错误日志指示已将 Blob 内容成功写入驱动器，但在导出 Blob 的属性时出错。
 
-    <?xml version="1.0" encoding="utf-8"?>  
-    <DriveLog Version="2014-11-01">  
-      <DriveId>9WM35C3U</DriveId>  
-      <Blob Status="CompletedWithErrors">  
-        <BlobPath>pictures/wild/canyon.jpg</BlobPath>  
-        <FilePath>\pictures\wild\canyon.jpg</FilePath>  
-        <LastModified>2012-09-18T23:47:08Z</LastModified>  
-        <Length>163840</Length>  
-        <BlockList />  
-        <Properties Status="Failed" />  
-      </Blob>  
-      <Status>CompletedWithErrors</Status>  
-    </DriveLog>  
+```
+<?xml version="1.0" encoding="utf-8"?>  
+<DriveLog Version="2014-11-01">  
+  <DriveId>9WM35C3U</DriveId>  
+  <Blob Status="CompletedWithErrors">  
+    <BlobPath>pictures/wild/canyon.jpg</BlobPath>  
+    <FilePath>\pictures\wild\canyon.jpg</FilePath>  
+    <LastModified>2012-09-18T23:47:08Z</LastModified>  
+    <Length>163840</Length>  
+    <BlockList />  
+    <Properties Status="Failed" />  
+  </Blob>  
+  <Status>CompletedWithErrors</Status>  
+</DriveLog>  
+```
 
 ## 另请参阅  
 [存储导入/导出 REST](https://docs.microsoft.com/zh-CN/rest/api/storageservices/importexport/Storage-Import-Export-Service-REST-API-Reference)

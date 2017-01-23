@@ -52,19 +52,25 @@ ms.author: robb
 
 始终可以通过键入一个命令并将 -help 置于末尾来获取有关该命令的帮助信息。例如：
 
-    azure insights alerts -help
-    azure insights alerts actions email create -help
+```
+azure insights alerts -help
+azure insights alerts actions email create -help
+```
 
 ## 使用 CLI 创建警报规则
 1. 执行先决条件并登录到 Azure。请参阅 [Azure Monitor CLI 示例](./insights-cli-samples.md)。简而言之，就是安装 CLI 并运行以下命令。这些命令可帮助登录、显示当前使用的订阅，以及为运行 Azure Monitor 命令做好准备。
 
-        azure login -e AzureChinaCloud
-        azure account show
-        azure config mode arm 
+    ```
+    azure login -e AzureChinaCloud
+    azure account show
+    azure config mode arm 
+    ```
 
 2.  若要列出资源组上的现有规则，请使用以下形式：**azure insights alerts rule list** *[options] &lt;resourceGroup&gt;*
 
-        azure insights alerts rule list myresourcegroupname
+    ```
+    azure insights alerts rule list myresourcegroupname
+    ```
 
 3. 若要创建规则，需要首先获得以下几条重要信息。
     - 要为其设置警报的资源的**资源 ID**
@@ -73,11 +79,15 @@ ms.author: robb
     获取资源 ID 的方法是使用 Azure 门户预览。假定该资源已创建，则在门户预览中将其选中。然后，在下一个边栏选项卡中，在“设置”部分下选择“属性”。“资源 ID”是下一个边栏选项卡中的一个字段。
     下面是 Web 应用的一个示例资源 ID：
 
-        /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename
+    ```
+    /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename
+    ```
 
     对于前面的资源示例，若要获取可用指标的列表和这些指标的单位，请使用以下 CLI 命令：
 
-        azure insights metrics list /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename PT1M 
+    ```
+    azure insights metrics list /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename PT1M 
+    ```
 
     _PT1M_ 是可用度量的粒度（1 分钟时间间隔）。使用不同的粒度可以提供不同的指标选项。
 
@@ -87,15 +97,19 @@ ms.author: robb
 
     以下示例在一个网站资源上设置警报。当在 5 分钟内持续收到任何流量以及再次在 5 分钟内未收到任何流量时，警报将触发。
 
-        azure insights alerts rule metric set myrule eastus myreasourcegroup PT5M GreaterThan 2 /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename BytesReceived Total
+    ```
+    azure insights alerts rule metric set myrule eastus myreasourcegroup PT5M GreaterThan 2 /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename BytesReceived Total
+    ```
 
 5. 若要在警报触发时创建 Webhook 或发送电子邮件，请首先创建电子邮件和/或 Webhook。然后紧随其后创建规则。无法使用 CLI 将 Webhook 或电子邮件与已创建的规则相关联。
 
-        azure insights alerts actions email create --customEmails myemail@contoso.com
+    ```
+    azure insights alerts actions email create --customEmails myemail@contoso.com
 
-        azure insights alerts actions webhook create https://www.contoso.com
+    azure insights alerts actions webhook create https://www.contoso.com
 
-        azure insights alerts rule metric set myrulewithwebhookandemail chinaeast myreasourcegroup PT5M GreaterThan 2 /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename BytesReceived Total
+    azure insights alerts rule metric set myrulewithwebhookandemail chinaeast myreasourcegroup PT5M GreaterThan 2 /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename BytesReceived Total
+    ```
 
 6. 若要创建在活动日志中出现特定条件时触发的警报，请使用以下形式：
 
@@ -103,7 +117,9 @@ ms.author: robb
 
     例如
 
-        azure insights alerts rule log set myActivityLogRule eastus myresourceGroupName Microsoft.Storage/storageAccounts/listKeys/action
+    ```
+    azure insights alerts rule log set myActivityLogRule eastus myresourceGroupName Microsoft.Storage/storageAccounts/listKeys/action
+    ```
 
     operationName 对应于活动日志中某个条目的事件类型。示例有 *Microsoft.Compute/virtualMachines/delete* 和 *microsoft.insights/diagnosticSettings/write*。
 
@@ -111,7 +127,9 @@ ms.author: robb
 
 7. 可以通过查看各个规则来验证是否已正确创建了警报。
 
-        azure insights alerts rule list myresourcegroup --ruleName myrule
+    ```
+    azure insights alerts rule list myresourcegroup --ruleName myrule
+    ```
 
 8. 若要删除规则，请使用以下形式的命令：
 
@@ -119,9 +137,11 @@ ms.author: robb
 
     这些命令将删除本文中前面创建的规则。
 
-        azure insights alerts rule delete myresourcegroup myrule
-        azure insights alerts rule delete myresourcegroup myrulewithwebhookandemail
-        azure insights alerts rule delete myresourcegroup myActivityLogRule
+    ```
+    azure insights alerts rule delete myresourcegroup myrule
+    azure insights alerts rule delete myresourcegroup myrulewithwebhookandemail
+    azure insights alerts rule delete myresourcegroup myActivityLogRule
+    ```
 
 ## 后续步骤
 

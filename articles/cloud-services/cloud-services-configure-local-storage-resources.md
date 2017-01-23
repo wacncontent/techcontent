@@ -33,21 +33,23 @@ wacn.date: 12/16/2016
 
 下面的服务定义文件展示为一个 Web 角色声明的两个本地存储资源：
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <ServiceDefinition xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" name="MyService">
-      <WebRole name="MyService_WebRole" vmsize="Medium">
-        <InputEndpoints>
-          <InputEndpoint name="HttpIn" port="80" protocol="http" />
-        </InputEndpoints>
-        <ConfigurationSettings>
-          <Setting name="SimpleConfigSetting" />
-        </ConfigurationSettings>
-        <LocalResources>
-          <LocalStorage name="localStoreOne" sizeInMB="10" />
-          <LocalStorage name="localStoreTwo" sizeInMB="10" cleanOnRoleRecycle="false" />
-        </LocalResources>
-      </WebRole>
-    </ServiceDefinition>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" name="MyService">
+  <WebRole name="MyService_WebRole" vmsize="Medium">
+    <InputEndpoints>
+      <InputEndpoint name="HttpIn" port="80" protocol="http" />
+    </InputEndpoints>
+    <ConfigurationSettings>
+      <Setting name="SimpleConfigSetting" />
+    </ConfigurationSettings>
+    <LocalResources>
+      <LocalStorage name="localStoreOne" sizeInMB="10" />
+      <LocalStorage name="localStoreTwo" sizeInMB="10" cleanOnRoleRecycle="false" />
+    </LocalResources>
+  </WebRole>
+</ServiceDefinition>
+```
 
 有关服务定义文件的详细信息，请参阅 [Azure 服务定义架构（.csdef 文件）](https://msdn.microsoft.com/zh-cn/library/azure/ee758711.aspx)。
 
@@ -58,27 +60,29 @@ wacn.date: 12/16/2016
 
 若要访问本地存储资源，应用程序必须从 [GetLocalResource](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.getlocalresource.aspx) 方法检索路径。然后，你可以使用标准文件读取和写入操作来读取和写入本地存储资源的内容。例如，以下示例演示了如何从本地存储资源中读取名为 **MyTest.txt** 的文件的内容，并将其显示在 MVC 3 应用程序的主页上：
 
-    using Microsoft.WindowsAzure.ServiceRuntime;
-    using System;
-    using System.Text;
-    using System.Web.Mvc;
+```
+using Microsoft.WindowsAzure.ServiceRuntime;
+using System;
+using System.Text;
+using System.Web.Mvc;
 
-    namespace StartupExercise.Controllers
+namespace StartupExercise.Controllers
+{
+    public class HomeController : Controller
     {
-        public class HomeController : Controller
+        public ActionResult Index()
         {
-            public ActionResult Index()
-            {
-                string SlsPath = RoleEnvironment.GetLocalResource("StartupLocalStorage").RootPath;
+            string SlsPath = RoleEnvironment.GetLocalResource("StartupLocalStorage").RootPath;
 
-                string s = System.IO.File.ReadAllText(SlsPath + "\\MyTest.txt");
+            string s = System.IO.File.ReadAllText(SlsPath + "\\MyTest.txt");
 
-                ViewBag.Message = "Contents of MyTest.txt = " + s;
+            ViewBag.Message = "Contents of MyTest.txt = " + s;
 
-                return View();
-            }
+            return View();
         }
     }
+}
+```
 
 ## 在运行时访问本地存储资源
 
@@ -86,11 +90,15 @@ Azure 托管库提供了一些类，可用于从角色实例中运行的代码�
 
 由于 **LocalResource** 对象表示一个目录，你可以使用标准 .NET 文件 I/O 类对其执行读取和写入操作。若要确定本地存储资源目录的路径，请使用 [LocalResource.RootPath](https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.localresource.rootpath.aspx) 属性。此属性可返回本地存储资源的完整路径，包括命名资源目录。例如，如果服务在开发环境中运行，则会在本地文件系统中定义本地存储资源，并且 **RootPath** 属性返回的值与下面列出的类似：
 
-    C:\Users\myaccount\AppData\Local\dftmp\s0\deployment(1)\res\deployment(1).MyService.MyService_WebRole.0\directory\localStoreOne\
+```
+C:\Users\myaccount\AppData\Local\dftmp\s0\deployment(1)\res\deployment(1).MyService.MyService_WebRole.0\directory\localStoreOne\
+```
 
 将服务部署到 Azure 后，本地存储资源的路径包含部署 ID，并且 **RootPath** 属性返回的值与下面列出的类似：
 
-    C:\Resources\directory\f335471d5a5845aaa4e66d0359e69066.MyService_WebRole.localStoreOne\
+```
+C:\Resources\directory\f335471d5a5845aaa4e66d0359e69066.MyService_WebRole.localStoreOne\
+```
 
 角色实例中运行的代码在实例从联机到脱机期间可以访问为该角色定义的本地存储资源。
 

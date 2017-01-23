@@ -51,47 +51,51 @@ ms.author: vturecek
 ## 创建执行组件服务
 首先创建新的 Service Fabric 应用程序。适用于 Linux 的 Service Fabric SDK 包括一个 Yeoman 生成器，它为包含无状态服务的 Service Fabric 应用程序提供基架。首先，请运行以下 Yeoman 命令：
 
-    $ yo azuresfjava
+```
+$ yo azuresfjava
+```
 
 按照说明创建 **Reliable Actor 服务**。本教程将应用程序命名为“HelloWorldActorApplication”，将执行组件命名为“HelloWorldActor”。 将创建以下基架：
 
-    HelloWorldActorApplication/
-    ├── build.gradle
-    ├── HelloWorldActor
-    │   ├── build.gradle
-    │   ├── settings.gradle
-    │   └── src
-    │       └── reliableactor
-    │           ├── HelloWorldActorHost.java
-    │           └── HelloWorldActorImpl.java
-    ├── HelloWorldActorApplication
-    │   ├── ApplicationManifest.xml
-    │   └── HelloWorldActorPkg
-    │       ├── Code
-    │       │   ├── entryPoint.sh
-    │       │   └── _readme.txt
-    │       ├── Config
-    │       │   ├── _readme.txt
-    │       │   └── Settings.xml
-    │       ├── Data
-    │       │   └── _readme.txt
-    │       └── ServiceManifest.xml
-    ├── HelloWorldActorInterface
-    │   ├── build.gradle
-    │   └── src
-    │       └── reliableactor
-    │           └── HelloWorldActor.java
-    ├── HelloWorldActorTestClient
-    │   ├── build.gradle
-    │   ├── settings.gradle
-    │   ├── src
-    │   │   └── reliableactor
-    │   │       └── test
-    │   │           └── HelloWorldActorTestClient.java
-    │   └── testclient.sh
-    ├── install.sh
-    ├── settings.gradle
-    └── uninstall.sh
+```
+HelloWorldActorApplication/
+├── build.gradle
+├── HelloWorldActor
+│   ├── build.gradle
+│   ├── settings.gradle
+│   └── src
+│       └── reliableactor
+│           ├── HelloWorldActorHost.java
+│           └── HelloWorldActorImpl.java
+├── HelloWorldActorApplication
+│   ├── ApplicationManifest.xml
+│   └── HelloWorldActorPkg
+│       ├── Code
+│       │   ├── entryPoint.sh
+│       │   └── _readme.txt
+│       ├── Config
+│       │   ├── _readme.txt
+│       │   └── Settings.xml
+│       ├── Data
+│       │   └── _readme.txt
+│       └── ServiceManifest.xml
+├── HelloWorldActorInterface
+│   ├── build.gradle
+│   └── src
+│       └── reliableactor
+│           └── HelloWorldActor.java
+├── HelloWorldActorTestClient
+│   ├── build.gradle
+│   ├── settings.gradle
+│   ├── src
+│   │   └── reliableactor
+│   │       └── test
+│   │           └── HelloWorldActorTestClient.java
+│   └── testclient.sh
+├── install.sh
+├── settings.gradle
+└── uninstall.sh
+```
 
 ## Reliable Actors 基本构建基块
 
@@ -103,41 +107,45 @@ ms.author: vturecek
 
 `HelloWorldActorInterface/src/reliableactor/HelloWorldActor.java`：
 
-    public interface HelloWorldActor extends Actor {
-        @Readonly   
-        CompletableFuture<Integer> getCountAsync();
+```
+public interface HelloWorldActor extends Actor {
+    @Readonly   
+    CompletableFuture<Integer> getCountAsync();
 
-        CompletableFuture<?> setCountAsync(int count);
-    }
+    CompletableFuture<?> setCountAsync(int count);
+}
+```
 
 ### 执行组件服务 
 包含执行组件实现和执行组件注册代码。执行组件类实现执行组件接口。这是执行组件的工作位置。
 
 `HelloWorldActor/src/reliableactor/HelloWorldActorImpl`：
 
-    @ActorServiceAttribute(name = "HelloWorldActor.HelloWorldActorService")
-    @StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
-    public class HelloWorldActorImpl extends ReliableActor implements HelloWorldActor {
-        Logger logger = Logger.getLogger(this.getClass().getName());
+```
+@ActorServiceAttribute(name = "HelloWorldActor.HelloWorldActorService")
+@StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
+public class HelloWorldActorImpl extends ReliableActor implements HelloWorldActor {
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
-        protected CompletableFuture<?> onActivateAsync() {
-            logger.log(Level.INFO, "onActivateAsync");
+    protected CompletableFuture<?> onActivateAsync() {
+        logger.log(Level.INFO, "onActivateAsync");
 
-            return this.stateManager().tryAddStateAsync("count", 0);
-        }
-
-        @Override
-        public CompletableFuture<Integer> getCountAsync() {
-            logger.log(Level.INFO, "Getting current count value");
-            return this.stateManager().getStateAsync("count");
-        }
-
-        @Override
-        public CompletableFuture<?> setCountAsync(int count) {
-            logger.log(Level.INFO, "Setting current count value {0}", count);
-            return this.stateManager().addOrUpdateStateAsync("count", count, (key, value) -> count > value ? count : value);
-        }
+        return this.stateManager().tryAddStateAsync("count", 0);
     }
+
+    @Override
+    public CompletableFuture<Integer> getCountAsync() {
+        logger.log(Level.INFO, "Getting current count value");
+        return this.stateManager().getStateAsync("count");
+    }
+
+    @Override
+    public CompletableFuture<?> setCountAsync(int count) {
+        logger.log(Level.INFO, "Setting current count value {0}", count);
+        return this.stateManager().addOrUpdateStateAsync("count", count, (key, value) -> count > value ? count : value);
+    }
+}
+```
 
 ### 执行组件注册
 
@@ -145,21 +153,23 @@ ms.author: vturecek
 
 `HelloWorldActor/src/reliableactor/HelloWorldActorHost`：
 
-    public class HelloWorldActorHost {
+```
+public class HelloWorldActorHost {
 
-        public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-            try {
-                ActorRuntime.registerActorAsync(HelloWorldActorImpl.class, (context, actorType) -> new ActorServiceImpl(context, actorType, ()-> new HelloWorldActorImpl()), Duration.ofSeconds(10));
+        try {
+            ActorRuntime.registerActorAsync(HelloWorldActorImpl.class, (context, actorType) -> new ActorServiceImpl(context, actorType, ()-> new HelloWorldActorImpl()), Duration.ofSeconds(10));
 
-                Thread.sleep(Long.MAX_VALUE);
+            Thread.sleep(Long.MAX_VALUE);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw e;
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
     }
+}
+```
 
 ### 测试客户端
 
@@ -173,10 +183,14 @@ ms.author: vturecek
 
 Yeoman 基架包含一个用于构建应用程序的 gradle 脚本，以及一个用于部署和取消部署应用程序的 bash 脚本。若要运行应用程序，请先使用 gradle 构建应用程序：
 
-    $ gradle
+```
+$ gradle
+```
 
 这会生成可以使用 Service Fabric Azure CLI 部署的 Service Fabric 应用程序包。Install.sh 脚本包含用于部署应用程序包的 Azure CLI 命令。只需运行 install.sh 脚本即可部署：
 
-    $ ./install.sh
+```
+$ ./install.sh
+```
 
 <!---HONumber=Mooncake_1121_2016-->

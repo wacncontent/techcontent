@@ -217,7 +217,9 @@ ms.author: asaxton
         $HTTPport = 80 # change the value if you used a different port for the private HTTP endpoint when the VM was created.
 
         ## Set PowerShell execution policy to be able to run scripts
-        Set-ExecutionPolicy RemoteSigned -Force
+    ```
+    Set-ExecutionPolicy RemoteSigned
+    ``` -Force
 
         ## Utility method for verifying an operation's result
         function CheckResult
@@ -353,162 +355,166 @@ ms.author: asaxton
 
     然后，可以执行以下操作以验证策略：
 
-        Get-ExecutionPolicy
+    ```
+    Get-ExecutionPolicy
+    ```
 
 1. 在 Windows PowerShell ISE 中，单击“视图”菜单，然后单击“显示脚本窗格”。
 
 1. 复制以下脚本并将其粘贴到 Windows PowerShell ISE 脚本窗格。
 
-        ## This script configures the report server, including HTTPS
-        $ErrorActionPreference = "Stop"
-        $httpsport=443 # modify if you used a different port number when the HTTPS endpoint was created.
+    ```
+    ## This script configures the report server, including HTTPS
+    $ErrorActionPreference = "Stop"
+    $httpsport=443 # modify if you used a different port number when the HTTPS endpoint was created.
 
-        # You can run the following command to get (.chinacloudapp.cn certificates) so you can copy the thumbprint / certificate hash
-        #dir cert:\LocalMachine -rec | Select-Object * | where {$_.issuer -like "*cloudapp*" -and $_.pspath -like "*root*"} | select dnsnamelist, thumbprint, issuer
-        #
-        # The certifacte hash is a REQUIRED parameter
-        $certificatehash="" 
-        # the certificate hash should not contain spaces
+    # You can run the following command to get (.chinacloudapp.cn certificates) so you can copy the thumbprint / certificate hash
+    #dir cert:\LocalMachine -rec | Select-Object * | where {$_.issuer -like "*cloudapp*" -and $_.pspath -like "*root*"} | select dnsnamelist, thumbprint, issuer
+    #
+    # The certifacte hash is a REQUIRED parameter
+    $certificatehash="" 
+    # the certificate hash should not contain spaces
 
-        if ($certificatehash.Length -lt 1) 
-        {
-            write-error "certificatehash is a required parameter"
-        } 
-        # Certificates should be all lower case
-        $certificatehash=$certificatehash.ToLower()
-        $server = $env:COMPUTERNAME
-        # If the certificate is not a wildcard certificate, comment out the following line, and enable the full $DNSNAme reference.
-        $DNSName="+"
-        #$DNSName="$server.chinacloudapp.cn"
-        $DNSNameAndPort = $DNSName + ":$httpsport"
+    if ($certificatehash.Length -lt 1) 
+    {
+        write-error "certificatehash is a required parameter"
+    } 
+    # Certificates should be all lower case
+    $certificatehash=$certificatehash.ToLower()
+    $server = $env:COMPUTERNAME
+    # If the certificate is not a wildcard certificate, comment out the following line, and enable the full $DNSNAme reference.
+    $DNSName="+"
+    #$DNSName="$server.chinacloudapp.cn"
+    $DNSNameAndPort = $DNSName + ":$httpsport"
 
-        ## Utility method for verifying an operation's result
-        function CheckResult
-        {
-            param($wmi_result, $actionname)
-            if ($wmi_result.HRESULT -ne 0) {
-                write-error "$actionname failed. Error from WMI: $($wmi_result.Error)"
-            }
+    ## Utility method for verifying an operation's result
+    function CheckResult
+    {
+        param($wmi_result, $actionname)
+        if ($wmi_result.HRESULT -ne 0) {
+            write-error "$actionname failed. Error from WMI: $($wmi_result.Error)"
         }
+    }
 
-        $starttime=Get-Date
-        write-host -foregroundcolor DarkGray $starttime StartTime
+    $starttime=Get-Date
+    write-host -foregroundcolor DarkGray $starttime StartTime
 
-        ## ReportServer Database name - this can be changed if needed
-        $dbName='ReportServer'
+    ## ReportServer Database name - this can be changed if needed
+    $dbName='ReportServer'
 
-        write-host "The script will use $DNSNameAndPort as the DNS name and port" 
+    write-host "The script will use $DNSNameAndPort as the DNS name and port" 
 
-        ## Register for MSReportServer_ConfigurationSetting
-        ## Change the version portion of the path to "v11" to use the script for SQL Server 2012
-        $RSObject = Get-WmiObject -class "MSReportServer_ConfigurationSetting" -namespace "root\Microsoft\SqlServer\ReportServer\RS_MSSQLSERVER\v12\Admin"
+    ## Register for MSReportServer_ConfigurationSetting
+    ## Change the version portion of the path to "v11" to use the script for SQL Server 2012
+    $RSObject = Get-WmiObject -class "MSReportServer_ConfigurationSetting" -namespace "root\Microsoft\SqlServer\ReportServer\RS_MSSQLSERVER\v12\Admin"
 
-        ## Reporting Services Report Server Configuration Steps
+    ## Reporting Services Report Server Configuration Steps
 
-        ## 1. Setting the web service URL ##
-        write-host -foregroundcolor green "Setting the web service URL"
-        write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        $time=Get-Date
-        write-host -foregroundcolor DarkGray $time
+    ## 1. Setting the web service URL ##
+    write-host -foregroundcolor green "Setting the web service URL"
+    write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    $time=Get-Date
+    write-host -foregroundcolor DarkGray $time
 
-        ## SetVirtualDirectory for ReportServer site
-            write-host 'Calling SetVirtualDirectory'
-            $r = $RSObject.SetVirtualDirectory('ReportServerWebService','ReportServer',1033)
-            CheckResult $r "SetVirtualDirectory for ReportServer"
+    ## SetVirtualDirectory for ReportServer site
+        write-host 'Calling SetVirtualDirectory'
+        $r = $RSObject.SetVirtualDirectory('ReportServerWebService','ReportServer',1033)
+        CheckResult $r "SetVirtualDirectory for ReportServer"
 
-        ## ReserveURL for ReportServerWebService - port 80 (for local usage)
-            write-host 'Calling ReserveURL port 80'
-            $r = $RSObject.ReserveURL('ReportServerWebService','http://+:80',1033)
-            CheckResult $r "ReserveURL for ReportServer port 80" 
+    ## ReserveURL for ReportServerWebService - port 80 (for local usage)
+        write-host 'Calling ReserveURL port 80'
+        $r = $RSObject.ReserveURL('ReportServerWebService','http://+:80',1033)
+        CheckResult $r "ReserveURL for ReportServer port 80" 
 
-        ## ReserveURL for ReportServerWebService - port $httpsport
-            write-host "Calling ReserveURL port $httpsport, for URL: https://$DNSNameAndPort"
-            $r = $RSObject.ReserveURL('ReportServerWebService',"https://$DNSNameAndPort",1033)
-            CheckResult $r "ReserveURL for ReportServer port $httpsport" 
+    ## ReserveURL for ReportServerWebService - port $httpsport
+        write-host "Calling ReserveURL port $httpsport, for URL: https://$DNSNameAndPort"
+        $r = $RSObject.ReserveURL('ReportServerWebService',"https://$DNSNameAndPort",1033)
+        CheckResult $r "ReserveURL for ReportServer port $httpsport" 
 
-        ## CreateSSLCertificateBinding for ReportServerWebService port $httpsport
-            write-host "Calling CreateSSLCertificateBinding port $httpsport, with certificate hash: $certificatehash"
-            $r = $RSObject.CreateSSLCertificateBinding('ReportServerWebService',$certificatehash,'0.0.0.0',$httpsport,1033)
-            CheckResult $r "CreateSSLCertificateBinding for ReportServer port $httpsport" 
+    ## CreateSSLCertificateBinding for ReportServerWebService port $httpsport
+        write-host "Calling CreateSSLCertificateBinding port $httpsport, with certificate hash: $certificatehash"
+        $r = $RSObject.CreateSSLCertificateBinding('ReportServerWebService',$certificatehash,'0.0.0.0',$httpsport,1033)
+        CheckResult $r "CreateSSLCertificateBinding for ReportServer port $httpsport" 
 
-        ## 2. Setting the Database ##
-        write-host -foregroundcolor green "Setting the Database"
-        write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        $time=Get-Date
-        write-host -foregroundcolor DarkGray $time
+    ## 2. Setting the Database ##
+    write-host -foregroundcolor green "Setting the Database"
+    write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    $time=Get-Date
+    write-host -foregroundcolor DarkGray $time
 
-        ## GenerateDatabaseScript - for creating the database
-            write-host "Calling GenerateDatabaseCreationScript for database $dbName"
-            $r = $RSObject.GenerateDatabaseCreationScript($dbName,1033,$false)
-            CheckResult $r "GenerateDatabaseCreationScript"
-            $script = $r.Script
+    ## GenerateDatabaseScript - for creating the database
+        write-host "Calling GenerateDatabaseCreationScript for database $dbName"
+        $r = $RSObject.GenerateDatabaseCreationScript($dbName,1033,$false)
+        CheckResult $r "GenerateDatabaseCreationScript"
+        $script = $r.Script
 
-        ## Execute sql script to create the database
-            write-host 'Executing Database Creation Script'
-            $savedcvd = Get-Location
-            Import-Module SQLPS                    ## this automatically changes to sqlserver provider
-            Invoke-SqlCmd -Query $script
-            Set-Location $savedcvd
+    ## Execute sql script to create the database
+        write-host 'Executing Database Creation Script'
+        $savedcvd = Get-Location
+        Import-Module SQLPS                    ## this automatically changes to sqlserver provider
+        Invoke-SqlCmd -Query $script
+        Set-Location $savedcvd
 
-        ## GenerateGrantRightsScript 
-            $DBUser = "NT Service\ReportServer"
-            write-host "Calling GenerateDatabaseRightsScript with user $DBUser"
-            $r = $RSObject.GenerateDatabaseRightsScript($DBUser,$dbName,$false,$true)
-            CheckResult $r "GenerateDatabaseRightsScript"
-            $script = $r.Script
+    ## GenerateGrantRightsScript 
+        $DBUser = "NT Service\ReportServer"
+        write-host "Calling GenerateDatabaseRightsScript with user $DBUser"
+        $r = $RSObject.GenerateDatabaseRightsScript($DBUser,$dbName,$false,$true)
+        CheckResult $r "GenerateDatabaseRightsScript"
+        $script = $r.Script
 
-        ## Execute grant rights script
-            write-host 'Executing Database Rights Script'
-            $savedcvd = Get-Location
-            cd sqlserver:\
-            Invoke-SqlCmd -Query $script
-            Set-Location $savedcvd
+    ## Execute grant rights script
+        write-host 'Executing Database Rights Script'
+        $savedcvd = Get-Location
+        cd sqlserver:\
+        Invoke-SqlCmd -Query $script
+        Set-Location $savedcvd
 
-        ## SetDBConnection - uses Windows Service (type 2), username is ignored
-            write-host "Calling SetDatabaseConnection server $server, DB $dbName"
-            $r = $RSObject.SetDatabaseConnection($server,$dbName,2,'','')
-            CheckResult $r "SetDatabaseConnection"  
+    ## SetDBConnection - uses Windows Service (type 2), username is ignored
+        write-host "Calling SetDatabaseConnection server $server, DB $dbName"
+        $r = $RSObject.SetDatabaseConnection($server,$dbName,2,'','')
+        CheckResult $r "SetDatabaseConnection"  
 
-        ## 3. Setting the Report Manager URL ##
+    ## 3. Setting the Report Manager URL ##
 
-        write-host -foregroundcolor green "Setting the Report Manager URL"
-        write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        $time=Get-Date
-        write-host -foregroundcolor DarkGray $time
+    write-host -foregroundcolor green "Setting the Report Manager URL"
+    write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    $time=Get-Date
+    write-host -foregroundcolor DarkGray $time
 
-        ## SetVirtualDirectory for Reports (Report Manager) site
-            write-host 'Calling SetVirtualDirectory'
-            $r = $RSObject.SetVirtualDirectory('ReportManager','Reports',1033)
-            CheckResult $r "SetVirtualDirectory"
+    ## SetVirtualDirectory for Reports (Report Manager) site
+        write-host 'Calling SetVirtualDirectory'
+        $r = $RSObject.SetVirtualDirectory('ReportManager','Reports',1033)
+        CheckResult $r "SetVirtualDirectory"
 
-        ## ReserveURL for ReportManager  - port 80
-            write-host 'Calling ReserveURL for ReportManager, port 80'
-            $r = $RSObject.ReserveURL('ReportManager','http://+:80',1033)
-            CheckResult $r "ReserveURL for ReportManager port 80"
+    ## ReserveURL for ReportManager  - port 80
+        write-host 'Calling ReserveURL for ReportManager, port 80'
+        $r = $RSObject.ReserveURL('ReportManager','http://+:80',1033)
+        CheckResult $r "ReserveURL for ReportManager port 80"
 
-        ## ReserveURL for ReportManager - port $httpsport
-            write-host "Calling ReserveURL port $httpsport, for URL: https://$DNSNameAndPort"
-            $r = $RSObject.ReserveURL('ReportManager',"https://$DNSNameAndPort",1033)
-            CheckResult $r "ReserveURL for ReportManager port $httpsport" 
+    ## ReserveURL for ReportManager - port $httpsport
+        write-host "Calling ReserveURL port $httpsport, for URL: https://$DNSNameAndPort"
+        $r = $RSObject.ReserveURL('ReportManager',"https://$DNSNameAndPort",1033)
+        CheckResult $r "ReserveURL for ReportManager port $httpsport" 
 
-        ## CreateSSLCertificateBinding for ReportManager port $httpsport
-            write-host "Calling CreateSSLCertificateBinding port $httpsport with certificate hash: $certificatehash"
-            $r = $RSObject.CreateSSLCertificateBinding('ReportManager',$certificatehash,'0.0.0.0',$httpsport,1033)
-            CheckResult $r "CreateSSLCertificateBinding for ReportManager port $httpsport" 
+    ## CreateSSLCertificateBinding for ReportManager port $httpsport
+        write-host "Calling CreateSSLCertificateBinding port $httpsport with certificate hash: $certificatehash"
+        $r = $RSObject.CreateSSLCertificateBinding('ReportManager',$certificatehash,'0.0.0.0',$httpsport,1033)
+        CheckResult $r "CreateSSLCertificateBinding for ReportManager port $httpsport" 
 
-        write-host -foregroundcolor green "Open Firewall port for $httpsport"
-        write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        $time=Get-Date
-        write-host -foregroundcolor DarkGray $time
+    write-host -foregroundcolor green "Open Firewall port for $httpsport"
+    write-host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    $time=Get-Date
+    write-host -foregroundcolor DarkGray $time
 
-        ## Open Firewall port for $httpsport
-            New-NetFirewallRule -DisplayName “Report Server (TCP on port $httpsport)” -Direction Inbound –Protocol TCP –LocalPort $httpsport
-            write-host "Added rule Report Server (TCP on port $httpsport) in Windows Firewall"
+    ## Open Firewall port for $httpsport
+        New-NetFirewallRule -DisplayName “Report Server (TCP on port $httpsport)” -Direction Inbound –Protocol TCP –LocalPort $httpsport
+        write-host "Added rule Report Server (TCP on port $httpsport) in Windows Firewall"
 
-        write-host 'Operations completed, Report Server is ready'
-        write-host -foregroundcolor DarkGray $starttime StartTime
-        $time=Get-Date
-        write-host -foregroundcolor DarkGray $time
+    write-host 'Operations completed, Report Server is ready'
+    write-host -foregroundcolor DarkGray $starttime StartTime
+    $time=Get-Date
+    write-host -foregroundcolor DarkGray $time
+    ```
 
 1. 修改脚本中的 **$certificatehash** 参数：
 
@@ -516,7 +522,9 @@ ms.author: asaxton
 
         在 VM 上，打开 Windows PowerShell ISE 并运行以下命令：
 
-            dir cert:\LocalMachine -rec | Select-Object * | where {$_.issuer -like "*cloudapp*" -and $_.pspath -like "*root*"} | select dnsnamelist, thumbprint, issuer
+        ```
+        dir cert:\LocalMachine -rec | Select-Object * | where {$_.issuer -like "*cloudapp*" -and $_.pspath -like "*root*"} | select dnsnamelist, thumbprint, issuer
+        ```
 
         输出与以下内容类似：例如，如果该脚本返回一个空白行，则尚未为 VM 配置证书，请参阅[使用虚拟机自签名证书](#to-use-the-virtual-machines-self-signed-certificate)部分。
 
@@ -548,13 +556,17 @@ ms.author: asaxton
 
 **验证**：若要验证基本报表服务器功能是否正常工作，请参阅本主题中稍后的[验证配置](#verify-the-connection)部分。若要验证证书绑定，请使用具有管理权限的身份打开命令提示符，然后运行以下命令：
 
-    netsh http show sslcert
+```
+netsh http show sslcert
+```
 
 结果将包括以下内容：
 
-    IP:port                      : 0.0.0.0:443
+```
+IP:port                      : 0.0.0.0:443
 
-    Certificate Hash             : f98adf786994c1e4a153f53fe20f94210267d0e7
+Certificate Hash             : f98adf786994c1e4a153f53fe20f94210267d0e7
+```
 
 ### 使用配置管理器配置报表服务器
 
@@ -618,13 +630,17 @@ ms.author: asaxton
 
 1. 如果你在 VM 上配置 HTTPS 终结点时使用了非 443 的端口，则更新下面命令中的端口，然后运行命令：
 
-        New-NetFirewallRule -DisplayName “Report Server (TCP on port 443)” -Direction Inbound –Protocol TCP –LocalPort 443
+    ```
+    New-NetFirewallRule -DisplayName “Report Server (TCP on port 443)” -Direction Inbound –Protocol TCP –LocalPort 443
+    ```
 
 1. 命令完成后，将在命令提示符中显示 **Ok**。
 
 若要验证端口已打开，请打开 Windows PowerShell 窗口并运行以下命令：
 
-    get-netfirewallrule | where {$_.displayname -like "*report*"} | select displayname,enabled,action
+```
+get-netfirewallrule | where {$_.displayname -like "*report*"} | select displayname,enabled,action
+```
 
 ## <a name="verify-the-configuration" id="verify-the-connection"></a> 验证配置
 
@@ -632,19 +648,27 @@ ms.author: asaxton
 
 - 在 VM 上，浏览到报表服务器 URL：
 
-        http://localhost/reportserver
+    ```
+    http://localhost/reportserver
+    ```
 
 - 在 VM 上，浏览到报表管理器 URL：
 
-        http://localhost/Reports
+    ```
+    http://localhost/Reports
+    ```
 
 - 从本地计算机，浏览到 VM 上的**远程**报表管理器。相应地更新下面示例中的 DNS 名称。当系统提示输入密码时，使用你在设置 VM 时创建的管理员凭据。用户名采用 [域] [用户名] 格式，其中域为 VM 计算机名称，例如，ssrsnativecloud\\testuser。如果你使用的不是 HTTP**S**，请删除 URL 中的 **s**。有关在虚拟机上创建更多用户的信息，请参阅以下部分。
 
-        https://ssrsnativecloud.chinacloudapp.cn/Reports
+    ```
+    https://ssrsnativecloud.chinacloudapp.cn/Reports
+    ```
 
 - 从本地计算机，浏览到远程报表管理器 URL。相应地更新下面示例中的 DNS 名称。如果你使用的不是 HTTPS，请删除 URL 中的 s。
 
-        https://ssrsnativecloud.chinacloudapp.cn/ReportServer
+    ```
+    https://ssrsnativecloud.chinacloudapp.cn/ReportServer
+    ```
 
 ## 创建用户和分配角色
 

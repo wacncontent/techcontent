@@ -1,16 +1,22 @@
 ---
-title: 获取工具 (Ubuntu 16.04)
+title: 获取工具 (Ubuntu 16.04) | Azure
 description: 下载并安装适用于 Ubuntu 上 Pi 的第一个示例应用程序的必需工具和软件。
 services: iot-hub
 documentationcenter: 
 author: shizn
 manager: timlt
 tags: 
-keywords: 
+keywords: iot 开发, iot 软件, 物联网软件, 在 ubuntu 上安装 git, gulp 运行, 安装 node js ubuntu
 
+ms.assetid: 4d5e45c0-1db9-4662-a039-99ba26333085
 ms.service: iot-hub
-ms.date: 10/21/2016
-wacn.date: 12/19/2016
+ms.devlang: node
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/28/2016
+wacn.date: 01/13/2017
+ms.author: xshi
 ---
 
 # 获取工具 (Ubuntu 16.04)
@@ -41,17 +47,21 @@ wacn.date: 12/19/2016
 ## 安装 Git、Node.js 和 NPM
 使用键盘快捷方式 `Ctrl + Alt + T` 打开一个终端并运行以下命令：
 
-        sudo apt-get update
-        curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-        sudo apt-get install -y nodejs
-        sudo apt-get install git
+```
+    sudo apt-get update
+    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    sudo apt-get install git
+```
 
 ## 安装其他 Node.js 开发工具
 使用 [gulp.js](http://gulpjs.com) 将示例应用程序自动部署到 Pi。也可使用 [device-discovery-cli](https://github.com/Azure/device-discovery-cli) 检索有关 IoT 设备的网络信息。
 
 在终端运行以下命令，安装 `gulp` 和 `device-discovery-cli`：
 
-        sudo npm install -g device-discovery-cli gulp
+```
+    sudo npm install -g device-discovery-cli gulp
+```
 
 如果无法在 Ubuntu 上安装 Node.js 和这些额外的开发工具，请参阅[故障排除指南](./iot-hub-raspberry-pi-kit-node-troubleshooting.md)，了解常见问题的解决方案。
 
@@ -64,4 +74,5 @@ wacn.date: 12/19/2016
 ## 后续步骤
 [创建和部署 blink 示例应用程序](./iot-hub-raspberry-pi-kit-node-lesson1-deploy-blink-app.md)
 
-<!---HONumber=Mooncake_1212_2016-->
+<!---HONumber=Mooncake_0109_2017-->
+<!--Update_Description:update meta properties-->

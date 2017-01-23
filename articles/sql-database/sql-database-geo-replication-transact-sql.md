@@ -63,8 +63,10 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句使本地数据库成为具有 MySecondaryServer1 上不可读辅助数据库的异地复制主数据库，其中，MySecondaryServer1 是服务器的友好名称。
 
-        ALTER DATABASE <MyDB>
-           ADD SECONDARY ON SERVER <MySecondaryServer1> WITH (ALLOW_CONNECTIONS = NO);
+    ```
+    ALTER DATABASE <MyDB>
+       ADD SECONDARY ON SERVER <MySecondaryServer1> WITH (ALLOW_CONNECTIONS = NO);
+    ```
 
 4. 单击“执行”运行查询。
 
@@ -77,8 +79,10 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句使本地数据库成为辅助服务器上具有可读辅助数据库的异地复制主数据库。
 
-        ALTER DATABASE <MyDB>
-           ADD SECONDARY ON SERVER <MySecondaryServer2> WITH (ALLOW_CONNECTIONS = ALL);
+    ```
+    ALTER DATABASE <MyDB>
+       ADD SECONDARY ON SERVER <MySecondaryServer2> WITH (ALLOW_CONNECTIONS = ALL);
+    ```
 
 4. 单击“执行”运行查询。
 
@@ -92,9 +96,11 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句使本地数据库成为弹性池中辅助服务器上具有不可读辅助数据库的异地复制主数据库。
 
-        ALTER DATABASE <MyDB>
-           ADD SECONDARY ON SERVER <MySecondaryServer3> WITH (ALLOW_CONNECTIONS = NO
-           , SERVICE_OBJECTIVE = ELASTIC_POOL (name = MyElasticPool1));
+    ```
+    ALTER DATABASE <MyDB>
+       ADD SECONDARY ON SERVER <MySecondaryServer3> WITH (ALLOW_CONNECTIONS = NO
+       , SERVICE_OBJECTIVE = ELASTIC_POOL (name = MyElasticPool1));
+    ```
 
 4. 单击“执行”运行查询。
 
@@ -107,9 +113,11 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句使本地数据库成为弹性池中辅助服务器上具有可读辅助数据库的异地复制主数据库。
 
-        ALTER DATABASE <MyDB>
-           ADD SECONDARY ON SERVER <MySecondaryServer4> WITH (ALLOW_CONNECTIONS = ALL
-           , SERVICE_OBJECTIVE = ELASTIC_POOL (name = MyElasticPool2));
+    ```
+    ALTER DATABASE <MyDB>
+       ADD SECONDARY ON SERVER <MySecondaryServer4> WITH (ALLOW_CONNECTIONS = ALL
+       , SERVICE_OBJECTIVE = ELASTIC_POOL (name = MyElasticPool2));
+    ```
 
 4. 单击“执行”运行查询。
 
@@ -125,8 +133,10 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句来删除异地复制的辅助数据库。
 
-        ALTER DATABASE <MyDB>
-           REMOVE SECONDARY ON SERVER <MySecondaryServer1>;
+    ```
+    ALTER DATABASE <MyDB>
+       REMOVE SECONDARY ON SERVER <MySecondaryServer1>;
+    ```
 
 4. 单击“执行”运行查询。
 
@@ -142,19 +152,25 @@ ms.author: carlrab
 
 3. 使用以下语句显示具有异地复制链接的所有数据库。
 
-        SELECT database_id, start_date, modify_date, partner_server, partner_database, replication_state_desc, role, secondary_allow_connections_desc FROM [sys].geo_replication_links;
+    ```
+    SELECT database_id, start_date, modify_date, partner_server, partner_database, replication_state_desc, role, secondary_allow_connections_desc FROM [sys].geo_replication_links;
+    ```
 
 4. 单击“执行”运行查询。
 5. 打开“数据库”文件夹，展开“系统数据库”，右键单击“MyDB”，然后单击“新建查询”。
 6. 使用以下语句显示复制延迟和 MyDB 的辅助数据库上次复制的时间。
 
-        SELECT link_guid, partner_server, last_replication, replication_lag_sec FROM sys.dm_geo_replication_link_status
+    ```
+    SELECT link_guid, partner_server, last_replication, replication_lag_sec FROM sys.dm_geo_replication_link_status
+    ```
 
 7. 单击“执行”运行查询。
 8. 使用以下语句显示与 MyDB 数据库关联的最近异地复制操作。
 
-        SELECT * FROM sys.dm_operation_status where major_resource_id = 'MyDB'
-        ORDER BY start_time DESC
+    ```
+    SELECT * FROM sys.dm_operation_status where major_resource_id = 'MyDB'
+    ORDER BY start_time DESC
+    ```
 
 9. 单击“执行”运行查询。
 
@@ -167,12 +183,16 @@ ms.author: carlrab
 
 1. 首先，连接到辅助服务器，然后删除不可读辅助数据库：
 
-        DROP DATABASE <MyNonReadableSecondaryDB>;
+    ```
+    DROP DATABASE <MyNonReadableSecondaryDB>;
+    ```
 
 2. 现在，连接到主服务器，然后添加新的可读辅助数据库
 
-        ALTER DATABASE <MyDB>
-            ADD SECONDARY ON SERVER <MySecondaryServer> WITH (ALLOW_CONNECTIONS = ALL);
+    ```
+    ALTER DATABASE <MyDB>
+        ADD SECONDARY ON SERVER <MySecondaryServer> WITH (ALLOW_CONNECTIONS = ALL);
+    ```
 
 ## 后续步骤
 

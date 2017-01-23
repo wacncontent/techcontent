@@ -86,16 +86,18 @@ Visual Studio 编辑器提供了工具来帮助编辑 Resource Manager 模板。
 
 **storageType** 参数是使用允许的类型和默认类型预定义的。你可以保留或根据方案编辑这些值。如果不希望任何人通过此模板部署 **Premium\_LRS** 存储帐户，可从允许的类型中将其删除。
 
-    "storageType": {
-      "type": "string",
-      "defaultValue": "Standard_LRS",
-      "allowedValues": [
-        "Standard_LRS",
-        "Standard_ZRS",
-        "Standard_GRS",
-        "Standard_RAGRS"
-      ]
-    }
+```
+"storageType": {
+  "type": "string",
+  "defaultValue": "Standard_LRS",
+  "allowedValues": [
+    "Standard_LRS",
+    "Standard_ZRS",
+    "Standard_GRS",
+    "Standard_RAGRS"
+  ]
+}
+```
 
 Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以使用哪些属性。例如，若要编辑应用服务计划的属性，请导航到 **HostingPlan** 资源，并为 **properties** 添加值。请注意，Intellisense 显示可用的值，并提供该值的描述。
 
@@ -103,10 +105,12 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
 
 可以将 **numberOfWorkers** 设置为 1。
 
-    "properties": {
-      "name": "[parameters('hostingPlanName')]",
-      "numberOfWorkers": 1
-    }
+```
+"properties": {
+  "name": "[parameters('hostingPlanName')]",
+  "numberOfWorkers": 1
+}
+```
 
 ## 将资源组部署到 Azure
 现在你已准备好部署项目。部署 Azure 资源组项目时，请将其部署到 Azure 资源组。资源组是共享同一生命周期的资源的逻辑分组。
@@ -150,8 +154,10 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
     > 
 6. 部署可能需要几分钟的时间。在“输出”窗口中，可以看到部署的状态。完成部署后，最后一条消息使用类似如下的内容指示部署成功：
 
-        ... 
-        18:00:58 - Successfully deployed template 'c:\users\user\documents\visual studio 2015\projects\azureresourcegroup1\azureresourcegroup1\templates\websitesqldatabase.json' to resource group 'DemoSiteGroup'.
+    ```
+    ... 
+    18:00:58 - Successfully deployed template 'c:\users\user\documents\visual studio 2015\projects\azureresourcegroup1\azureresourcegroup1\templates\websitesqldatabase.json' to resource group 'DemoSiteGroup'.
+    ```
 7. 在浏览器中，打开 [Azure 门户预览](https://portal.azure.cn/)并登录帐户。若要查看资源组，请选择“资源组”，然后选择部署到的资源组。
 
     ![选择组](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/select-group.png)
@@ -196,9 +202,9 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
 
     属性包括：
 
-    * “其他属性”包含要推送到 Azure 存储的 Web 部署包暂存位置。请注意文件夹 (ExampleApp) 和文件 (package.zip)。部署应用时，会提供这些值作为参数。
-    * “包含文件路径”包含创建包所在的路径。“包含目标”包含部署执行的命令。
-    * 默认值“生成并打包”可让部署生成并创建 Web 部署包 (package.zip)。
+   * “其他属性”包含要推送到 Azure 存储的 Web 部署包暂存位置。请注意文件夹 (ExampleApp) 和文件 (package.zip)。部署应用时，会提供这些值作为参数。
+   * “包含文件路径”包含创建包所在的路径。“包含目标”包含部署执行的命令。
+   * 默认值“生成并打包”可让部署生成并创建 Web 部署包 (package.zip)。
 
      不需要使用发布配置文件，因为部署将从属性中获取所需的信息来创建包。
 7. 将资源添加到模板。

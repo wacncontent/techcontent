@@ -65,76 +65,80 @@ Batch 节点代理是一个程序，它在池中的每个节点上运行，并�
 
 python
 
-    # Import the required modules from the
-    # Azure Batch Client Library for Python
-    import azure.batch.batch_service_client as batch
-    import azure.batch.batch_auth as batchauth
-    import azure.batch.models as batchmodels
+```
+# Import the required modules from the
+# Azure Batch Client Library for Python
+import azure.batch.batch_service_client as batch
+import azure.batch.batch_auth as batchauth
+import azure.batch.models as batchmodels
 
-    # Specify Batch account credentials
-    account = "<batch-account-name>"
-    key = "<batch-account-key>"
-    batch_url = "<batch-account-url>"
+# Specify Batch account credentials
+account = "<batch-account-name>"
+key = "<batch-account-key>"
+batch_url = "<batch-account-url>"
 
-    # Pool settings
-    pool_id = "LinuxNodesSamplePoolPython"
-    vm_size = "STANDARD_A1"
-    node_count = 1
+# Pool settings
+pool_id = "LinuxNodesSamplePoolPython"
+vm_size = "STANDARD_A1"
+node_count = 1
 
-    # Initialize the Batch client
-    creds = batchauth.SharedKeyCredentials(account, key)
-    config = batch.BatchServiceClientConfiguration(creds, base_url = batch_url)
-    client = batch.BatchServiceClient(config)
+# Initialize the Batch client
+creds = batchauth.SharedKeyCredentials(account, key)
+config = batch.BatchServiceClientConfiguration(creds, base_url = batch_url)
+client = batch.BatchServiceClient(config)
 
-    # Create the unbound pool
-    new_pool = batchmodels.PoolAddParameter(id = pool_id, vm_size = vm_size)
-    new_pool.target_dedicated = node_count
+# Create the unbound pool
+new_pool = batchmodels.PoolAddParameter(id = pool_id, vm_size = vm_size)
+new_pool.target_dedicated = node_count
 
-    # Configure the start task for the pool
-    start_task = batchmodels.StartTask()
-    start_task.run_elevated = True
-    start_task.command_line = "printenv AZ_BATCH_NODE_STARTUP_DIR"
-    new_pool.start_task = start_task
+# Configure the start task for the pool
+start_task = batchmodels.StartTask()
+start_task.run_elevated = True
+start_task.command_line = "printenv AZ_BATCH_NODE_STARTUP_DIR"
+new_pool.start_task = start_task
 
-    # Create an ImageReference which specifies the Marketplace
-    # virtual machine image to install on the nodes.
-    ir = batchmodels.ImageReference(
-        publisher = "Canonical",
-        offer = "UbuntuServer",
-        sku = "14.04.2-LTS",
-        version = "latest")
+# Create an ImageReference which specifies the Marketplace
+# virtual machine image to install on the nodes.
+ir = batchmodels.ImageReference(
+    publisher = "Canonical",
+    offer = "UbuntuServer",
+    sku = "14.04.2-LTS",
+    version = "latest")
 
-    # Create the VirtualMachineConfiguration, specifying
-    # the VM image reference and the Batch node agent to
-    # be installed on the node.
-    vmc = batchmodels.VirtualMachineConfiguration(
-        image_reference = ir,
-        node_agent_sku_id = "batch.node.ubuntu 14.04")
+# Create the VirtualMachineConfiguration, specifying
+# the VM image reference and the Batch node agent to
+# be installed on the node.
+vmc = batchmodels.VirtualMachineConfiguration(
+    image_reference = ir,
+    node_agent_sku_id = "batch.node.ubuntu 14.04")
 
-    # Assign the virtual machine configuration to the pool
-    new_pool.virtual_machine_configuration = vmc
+# Assign the virtual machine configuration to the pool
+new_pool.virtual_machine_configuration = vmc
 
-    # Create pool in the Batch service
-    client.pool.add(new_pool)
+# Create pool in the Batch service
+client.pool.add(new_pool)
+```
 
 如上所述，我们建议不要显式创建 [ImageReference][py_imagereference]，而是使用 [list\_node\_agent\_skus][py_list_skus] 方法从当前支持的节点代理/应用商店映像组合中动态选择。以下 Python 代码片段演示此方法的用法。
 
 python
 
-    # Get the list of node agents from the Batch service
-    nodeagents = client.account.list\_node\_agent\_skus()
+```
+# Get the list of node agents from the Batch service
+nodeagents = client.account.list\_node\_agent\_skus()
 
-    # Obtain the desired node agent
-    ubuntu1404agent = next(agent for agent in nodeagents if "ubuntu 14.04" in agent.id)
+# Obtain the desired node agent
+ubuntu1404agent = next(agent for agent in nodeagents if "ubuntu 14.04" in agent.id)
 
-    # Pick the first image reference from the list of verified references
-    ir = ubuntu1404agent.verified_image_references[0]
+# Pick the first image reference from the list of verified references
+ir = ubuntu1404agent.verified_image_references[0]
 
-    # Create the VirtualMachineConfiguration, specifying the VM image
-    # reference and the Batch node agent to be installed on the node.
-    vmc = batchmodels.VirtualMachineConfiguration(
-        image_reference = ir,
-        node_agent_sku_id = ubuntu1404agent.id)
+# Create the VirtualMachineConfiguration, specifying the VM image
+# reference and the Batch node agent to be installed on the node.
+vmc = batchmodels.VirtualMachineConfiguration(
+    image_reference = ir,
+    node_agent_sku_id = ubuntu1404agent.id)
+```
 
 ## 创建 Linux 池：Batch .NET
 
@@ -144,61 +148,65 @@ python
 
 csharp
 
-    // Pool settings
-    const string poolId = "LinuxNodesSamplePoolDotNet";
-    const string vmSize = "STANDARD\_A1";
-    const int nodeCount = 1;
+```
+// Pool settings
+const string poolId = "LinuxNodesSamplePoolDotNet";
+const string vmSize = "STANDARD\_A1";
+const int nodeCount = 1;
 
-    // Obtain a collection of all available node agent SKUs.
-    // This allows us to select from a list of supported
-    // VM image/node agent combinations.
-    List<NodeAgentSku> nodeAgentSkus =
-        batchClient.PoolOperations.ListNodeAgentSkus().ToList();
+// Obtain a collection of all available node agent SKUs.
+// This allows us to select from a list of supported
+// VM image/node agent combinations.
+List<NodeAgentSku> nodeAgentSkus =
+    batchClient.PoolOperations.ListNodeAgentSkus().ToList();
 
-    // Define a delegate specifying properties of the VM image
-    // that we wish to use.
-    Func<ImageReference, bool> isUbuntu1404 = imageRef =>
-        imageRef.Publisher == "Canonical" &&
-        imageRef.Offer == "UbuntuServer" &&
-        imageRef.SkuId.Contains("14.04");
+// Define a delegate specifying properties of the VM image
+// that we wish to use.
+Func<ImageReference, bool> isUbuntu1404 = imageRef =>
+    imageRef.Publisher == "Canonical" &&
+    imageRef.Offer == "UbuntuServer" &&
+    imageRef.SkuId.Contains("14.04");
 
-    // Obtain the first node agent SKU in the collection that matches
-    // Ubuntu Server 14.04. Note that there are one or more image
-    // references associated with this node agent SKU.
-    NodeAgentSku ubuntuAgentSku = nodeAgentSkus.First(sku =>
-        sku.VerifiedImageReferences.Any(isUbuntu1404));
+// Obtain the first node agent SKU in the collection that matches
+// Ubuntu Server 14.04. Note that there are one or more image
+// references associated with this node agent SKU.
+NodeAgentSku ubuntuAgentSku = nodeAgentSkus.First(sku =>
+    sku.VerifiedImageReferences.Any(isUbuntu1404));
 
-    // Select an ImageReference from those available for node agent.
-    ImageReference imageReference =
-        ubuntuAgentSku.VerifiedImageReferences.First(isUbuntu1404);
+// Select an ImageReference from those available for node agent.
+ImageReference imageReference =
+    ubuntuAgentSku.VerifiedImageReferences.First(isUbuntu1404);
 
-    // Create the VirtualMachineConfiguration for use when actually
-    // creating the pool
-    VirtualMachineConfiguration virtualMachineConfiguration =
-        new VirtualMachineConfiguration(
-            imageReference: imageReference,
-            nodeAgentSkuId: ubuntuAgentSku.Id);
+// Create the VirtualMachineConfiguration for use when actually
+// creating the pool
+VirtualMachineConfiguration virtualMachineConfiguration =
+    new VirtualMachineConfiguration(
+        imageReference: imageReference,
+        nodeAgentSkuId: ubuntuAgentSku.Id);
 
-    // Create the unbound pool object using the VirtualMachineConfiguration
-    // created above
-    CloudPool pool = batchClient.PoolOperations.CreatePool(
-        poolId: poolId,
-        virtualMachineSize: vmSize,
-        virtualMachineConfiguration: virtualMachineConfiguration,
-        targetDedicated: nodeCount);
+// Create the unbound pool object using the VirtualMachineConfiguration
+// created above
+CloudPool pool = batchClient.PoolOperations.CreatePool(
+    poolId: poolId,
+    virtualMachineSize: vmSize,
+    virtualMachineConfiguration: virtualMachineConfiguration,
+    targetDedicated: nodeCount);
 
-    // Commit the pool to the Batch service
-    pool.Commit();
+// Commit the pool to the Batch service
+pool.Commit();
+```
 
 尽管上述代码片段使用了 [PoolOperations][net_pool_ops].[ListNodeAgentSkus][net_list_skus] 方法动态列出并从支持的映像和节点代理 SKU 组合中做出选择（建议的做法），但也可以显式配置 [ImageReference][net_imagereference]：
 
 csharp
 
-    ImageReference imageReference = new ImageReference(
-        publisher: "Canonical",
-        offer: "UbuntuServer",
-        skuId: "14.04.2-LTS",
-        version: "latest");
+```
+ImageReference imageReference = new ImageReference(
+    publisher: "Canonical",
+    offer: "UbuntuServer",
+    skuId: "14.04.2-LTS",
+    version: "latest");
+```
 
 ## 虚拟机映像列表  <a name="list-of-virtual-machine-images"></a>
 
@@ -241,68 +249,72 @@ csharp
 
 python
 
-    import datetime
-    import getpass
-    import azure.batch.batch_service_client as batch
-    import azure.batch.batch_auth as batchauth
-    import azure.batch.models as batchmodels
+```
+import datetime
+import getpass
+import azure.batch.batch_service_client as batch
+import azure.batch.batch_auth as batchauth
+import azure.batch.models as batchmodels
 
-    # Specify your own account credentials
-    batch_account_name = ''
-    batch_account_key = ''
-    batch_account_url = ''
+# Specify your own account credentials
+batch_account_name = ''
+batch_account_key = ''
+batch_account_url = ''
 
-    # Specify the ID of an existing pool containing Linux nodes
-    # currently in the 'idle' state
-    pool_id = ''
+# Specify the ID of an existing pool containing Linux nodes
+# currently in the 'idle' state
+pool_id = ''
 
-    # Specify the username and prompt for a password
-    username = 'linuxuser'
-    password = getpass.getpass()
+# Specify the username and prompt for a password
+username = 'linuxuser'
+password = getpass.getpass()
 
-    # Create a BatchClient
-    credentials = batchauth.SharedKeyCredentials(
-        batch_account_name,
-        batch_account_key
-    )
-    batch_client = batch.BatchServiceClient(
-            credentials,
-            base_url=batch_account_url
-    )
+# Create a BatchClient
+credentials = batchauth.SharedKeyCredentials(
+    batch_account_name,
+    batch_account_key
+)
+batch_client = batch.BatchServiceClient(
+        credentials,
+        base_url=batch_account_url
+)
 
-    # Create the user that will be added to each node in the pool
-    user = batchmodels.ComputeNodeUser(username)
-    user.password = password
-    user.is_admin = True
-    user.expiry_time = \
-        (datetime.datetime.today() + datetime.timedelta(days=30)).isoformat()
+# Create the user that will be added to each node in the pool
+user = batchmodels.ComputeNodeUser(username)
+user.password = password
+user.is_admin = True
+user.expiry_time = \
+    (datetime.datetime.today() + datetime.timedelta(days=30)).isoformat()
 
-    # Get the list of nodes in the pool
-    nodes = batch_client.compute_node.list(pool_id)
+# Get the list of nodes in the pool
+nodes = batch_client.compute_node.list(pool_id)
 
-    # Add the user to each node in the pool and print
-    # the connection information for the node
-    for node in nodes:
-        # Add the user to the node
-        batch_client.compute_node.add_user(pool_id, node.id, user)
+# Add the user to each node in the pool and print
+# the connection information for the node
+for node in nodes:
+    # Add the user to the node
+    batch_client.compute_node.add_user(pool_id, node.id, user)
 
-        # Obtain SSH login information for the node
-        login = batch_client.compute_node.get_remote_login_settings(pool_id,
-                                                                    node.id)
+    # Obtain SSH login information for the node
+    login = batch_client.compute_node.get_remote_login_settings(pool_id,
+                                                                node.id)
 
-        # Print the connection info for the node
-        print("{0} | {1} | {2} | {3}".format(node.id,
-                                             node.state,
-                                             login.remote_login_ip_address,
-                                             login.remote_login_port))
+    # Print the connection info for the node
+    print("{0} | {1} | {2} | {3}".format(node.id,
+                                         node.state,
+                                         login.remote_login_ip_address,
+                                         login.remote_login_port))
+```
 
 下面是针对包含四个 Linux 节点的池运行上述代码后的示例输出：
 
-    Password:
-    tvm-1219235766_1-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50000
-    tvm-1219235766_2-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50003
-    tvm-1219235766_3-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50002
-    tvm-1219235766_4-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50001
+```
+Password:
+tvm-1219235766_1-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50000
+tvm-1219235766_2-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50003
+tvm-1219235766_3-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50002
+tvm-1219235766_4-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50001
+```
 
 请注意，在节点上创建用户时不需要指定密码，而可以指定 SSH 公钥。在 Python SDK 中，此操作可通过在 [ComputeNodeUser][py_computenodeuser] 上使用 **ssh\_public\_key** 参数来完成。在 .NET 中，此操作可通过使用 [ComputeNodeUser][net_computenodeuser].[SshPublicKey][net_ssh_key] 属性来完成。
 

@@ -35,48 +35,66 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 - **Ubuntu**
 
-        sudo apt-get update
-        sudo apt-get install lvm2
+    ```
+    sudo apt-get update
+    sudo apt-get install lvm2
+    ```
 
 - **RHEL、CentOS 和 Oracle Linux**
 
-        sudo yum install lvm2
+    ```
+    sudo yum install lvm2
+    ```
 
 - **SLES 12 和 openSUSE**
 
-        sudo zypper install lvm2
+    ```
+    sudo zypper install lvm2
+    ```
 
 - **SLES 11**
 
-        sudo zypper install lvm2
+    ```
+    sudo zypper install lvm2
+    ```
 
     在 SLES11 上，还必须编辑 `/etc/sysconfig/lvm` 并将 `LVM_ACTIVATED_ON_DISCOVERED` 设置为“enable”：
 
-        LVM_ACTIVATED_ON_DISCOVERED="enable" 
+    ```
+    LVM_ACTIVATED_ON_DISCOVERED="enable" 
+    ```
 
 ## 配置 LVM
 在本指南中，我们假设已附加三个数据磁盘，分别为 `/dev/sdc`、`/dev/sdd` 和 `/dev/sde`。请注意，VM 中的路径名称不一定与上述相同。可以运行 `sudo fdisk -l` 或类似命令以列出可用的磁盘。
 
 1. 准备物理卷：
 
-        sudo pvcreate /dev/sd[cde]
-        Physical volume "/dev/sdc" successfully created
-        Physical volume "/dev/sdd" successfully created
-        Physical volume "/dev/sde" successfully created
+    ```
+    sudo pvcreate /dev/sd[cde]
+    Physical volume "/dev/sdc" successfully created
+    Physical volume "/dev/sdd" successfully created
+    Physical volume "/dev/sde" successfully created
+    ```
 
 2.  创建卷组。在本例中，我们将调用卷组 `data-vg01`：
 
-        sudo vgcreate data-vg01 /dev/sd[cde]
-        Volume group "data-vg01" successfully created
+    ```
+    sudo vgcreate data-vg01 /dev/sd[cde]
+    Volume group "data-vg01" successfully created
+    ```
 
 3. 创建一个或多个逻辑卷。以下命令将创建跨整个卷组的名为 `data-lv01` 的单个逻辑卷，但请注意，在卷组中创建多个逻辑卷也是可行的。
 
-        sudo lvcreate --extents 100%FREE --stripes 3 --name data-lv01 data-vg01
-        Logical volume "data-lv01" created.
+    ```
+    sudo lvcreate --extents 100%FREE --stripes 3 --name data-lv01 data-vg01
+    Logical volume "data-lv01" created.
+    ```
 
 4. 格式化逻辑卷
 
-        sudo mkfs -t ext4 /dev/data-vg01/data-lv01
+    ```
+    sudo mkfs -t ext4 /dev/data-vg01/data-lv01
+    ```
 
   >[!NOTE]
   > 在 SLES11 上，请使用 `-t ext3` 而不是 ext4。SLES11 仅支持对 ext4 文件系统进行只读访问。
@@ -88,32 +106,42 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 1. 为新文件系统创建所需的装入点，例如：
 
-        sudo mkdir /data
+    ```
+    sudo mkdir /data
+    ```
 
 2. 查找逻辑卷路径
 
-        lvdisplay
-        --- Logical volume ---
-        LV Path                /dev/data-vg01/data-lv01
-        ....
+    ```
+    lvdisplay
+    --- Logical volume ---
+    LV Path                /dev/data-vg01/data-lv01
+    ....
+    ```
 
 3. 在文本编辑器中打开 `/etc/fstab` 并为新文件系统添加新条目，例如：
 
-        /dev/data-vg01/data-lv01  /data  ext4  defaults  0  2
+    ```
+    /dev/data-vg01/data-lv01  /data  ext4  defaults  0  2
+    ```
 
     然后，保存并关闭 `/etc/fstab`。
 
 4. 测试该 `/etc/fstab` 条目是否正确：
 
-        sudo mount -a
+    ```
+    sudo mount -a
+    ```
 
     如果此命令导致错误消息，请检查 `/etc/fstab` 文件中的语法。
 
     接下来，运行 `mount` 命令以确保文件系统已装入：
 
-        mount
-        ......
-        /dev/mapper/data--vg01-data--lv01 on /data type ext4 (rw)
+    ```
+    mount
+    ......
+    /dev/mapper/data--vg01-data--lv01 on /data type ext4 (rw)
+    ```
 
 5. （可选）`/etc/fstab` 中的防故障引导参数
 
@@ -121,6 +149,8 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
     示例 (Ubuntu)：
 
-        /dev/data-vg01/data-lv01  /data  ext4  defaults,nobootwait  0  2
+    ```
+    /dev/data-vg01/data-lv01  /data  ext4  defaults,nobootwait  0  2
+    ```
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

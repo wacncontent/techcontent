@@ -50,17 +50,21 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 1. 安装 Azure PowerShell（如果尚未安装）。建议使用 Azure PowerShell cmdlet 最新版本。请查看[如何安装和配置 Azure PowerShell](../powershell-install-configure.md#Install) 以获取安装说明。
 2. 请打开 Azure PowerShell 并运行以下命令。请记住要使用自己的凭据替换 *ACCOUNT\_NAME* 和 *ACCOUNT\_KEY = =* 。将 *CONTAINER\_NAME* 替换为选择的名称。
 
-        $context = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName "ACCOUNT_NAME" -StorageAccountKey "ACCOUNT_KEY=="
+    ```
+    $context = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName "ACCOUNT_NAME" -StorageAccountKey "ACCOUNT_KEY=="
 
-        New-AzureStorageContainer CONTAINER_NAME -Permission Off -Context $context
+    New-AzureStorageContainer CONTAINER_NAME -Permission Off -Context $context
 
-        $now = Get-Date 
+    $now = Get-Date 
 
-        New-AzureStorageContainerSASToken -Name CONTAINER_NAME -Permission rwdl -ExpiryTime $now.AddDays(1.0) -Context $context -FullUri
+    New-AzureStorageContainerSASToken -Name CONTAINER_NAME -Permission rwdl -ExpiryTime $now.AddDays(1.0) -Context $context -FullUri
+    ```
 
 得到的新容器的共享访问签名 URI 应如下所示：
 
-    https://storageaccount.blob.core.chinacloudapi.cn/sascontainer?sv=2012-02-12&se=2015-07-08T00%3A12%3A08Z&sr=c&sp=wl&sig=t%2BbzU9%2B7ry4okULN9S0wst%2F8MCUhTjrHyV9rDNLSe8g%3Dsss
+```
+https://storageaccount.blob.core.chinacloudapi.cn/sascontainer?sv=2012-02-12&se=2015-07-08T00%3A12%3A08Z&sr=c&sp=wl&sig=t%2BbzU9%2B7ry4okULN9S0wst%2F8MCUhTjrHyV9rDNLSe8g%3Dsss
+```
 
 此示例中创建的共享访问签名的有效期为一天。该签名将授予对容器内 Blob 的完整权限（例如，读取、写入、删除和列出）。
 
@@ -86,15 +90,21 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 1. 单击“开始”按钮或按 **Windows** 键。开始键入 `Azure Storage Emulator`并在其启动存储模拟器命令行工具时将其选中。
 2. 在命令提示符窗口中，键入以下命令，其中 `<SQLServerInstance>` 是 SQL Server 实例的名称。若要使用 LocalDb，请指定 `(localdb)\v11.0` 作为 SQL Server 实例。
 
-        AzureStorageEmulator init /server <SQLServerInstance> 
+    ```
+    AzureStorageEmulator init /server <SQLServerInstance> 
+    ```
 
     也可以使用以下命令，该命令指示模拟器使用默认 SQL Server 实例：
 
-        AzureStorageEmulator init /server .\\ 
+    ```
+    AzureStorageEmulator init /server .\\ 
+    ```
 
     或者，可以使用以下命令将数据库重新初始化为默认的 LocalDB 实例：
 
-        AzureStorageEmulator init /forceCreate 
+    ```
+    AzureStorageEmulator init /forceCreate 
+    ```
 
 有关这些命令的详细信息，请参阅[存储模拟器命令行工具参考](#storage-emulator-command-line-tool-reference)。
 
@@ -104,30 +114,42 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 
 在对 Azure 存储帐户中的资源进行寻址时，可以使用以下方案，其中帐户名称是 URI 主机名的一部分，要寻址的资源是 URI 路径的一部分：
 
-    <http|https>://<account-name>.<service-name>.core.chinacloudapi.cn/<resource-path>
+```
+<http|https>://<account-name>.<service-name>.core.chinacloudapi.cn/<resource-path>
+```
 
 例如，下面的 URI 是 Azure 存储帐户的 Blob 中的有效地址：
 
-    https://myaccount.blob.core.chinacloudapi.cn/mycontainer/myblob.txt
+```
+https://myaccount.blob.core.chinacloudapi.cn/mycontainer/myblob.txt
+```
 
 在存储模拟器中，因为本地计算机不执行域名解析，帐户名称将是 URI 路径（而非主机名）的一部分。可以对在存储模拟器中运行的资源使用以下方案：
 
-    http://<local-machine-address>:<port>/<account-name>/<resource-path>
+```
+http://<local-machine-address>:<port>/<account-name>/<resource-path>
+```
 
 例如，以下地址可用于访问存储模拟器中的 blob：
 
-    http://127.0.0.1:10000/myaccount/mycontainer/myblob.txt
+```
+http://127.0.0.1:10000/myaccount/mycontainer/myblob.txt
+```
 
 存储模拟器的服务终结点是：
 
-    Blob Service: http://127.0.0.1:10000/<account-name>/<resource-path>
-    Queue Service: http://127.0.0.1:10001/<account-name>/<resource-path>
-    Table Service: http://127.0.0.1:10002/<account-name>/<resource-path>
+```
+Blob Service: http://127.0.0.1:10000/<account-name>/<resource-path>
+Queue Service: http://127.0.0.1:10001/<account-name>/<resource-path>
+Table Service: http://127.0.0.1:10002/<account-name>/<resource-path>
+```
 
 ### 使用 RA-GRS 对帐户辅助副本进行寻址
 存储模拟器从 3.1 版开始，支持读取访问地域冗余复制 (RA-GRS)。对于同时位于云中和本地模拟器中的存储资源，可以通过在帐户名称后面追加 -secondary 来访问辅助位置。例如，以下地址可用于访问使用存储模拟器中的只读辅助副本的 blob：
 
-    http://127.0.0.1:10000/myaccount-secondary/mycontainer/myblob.txt 
+```
+http://127.0.0.1:10000/myaccount-secondary/mycontainer/myblob.txt 
+```
 
 > [!NOTE]
 > 若要使用存储模拟器以编程方式访问辅助副本，请使用 Storage Client Library for .NET 3.2 版或更高版本。有关详细信息，请参阅[用于 .NET 的存储客户端库](https://msdn.microsoft.com/zh-cn/library/azure/dn261237.aspx)。
@@ -140,7 +162,9 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 > 如果已安装 Azure 计算模拟器，则在启动存储模拟器时，将显示一个系统任务栏图标。右键单击该图标可显示一个菜单，其中提供了启动和停止存储模拟器的图形化方式。
 
 ### 命令行语法
-    AzureStorageEmulator [start] [stop] [status] [clear] [init] [help]
+```
+AzureStorageEmulator [start] [stop] [status] [clear] [init] [help]
+```
 
 ### 选项
 若要查看选项列表，请在命令提示符下键入 `/help`。

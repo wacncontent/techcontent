@@ -39,7 +39,7 @@ Azure Active Directory 联合身份验证服务 (AD FS) 将在 Azure Active Dire
 1. 在任何 AD FS 服务器上，以管理员权限打开 PowerShell。
 2. 使用 **Set-AdfsRelyingPartyTrust** cmdlet 设置安全哈希算法。
 
-    <code>Set-AdfsRelyingPartyTrust -TargetName 'Microsoft Office 365 Identity Platform' -SignatureAlgorithm 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'</code>
+   <code>Set-AdfsRelyingPartyTrust -TargetName 'Microsoft Office 365 Identity Platform' -SignatureAlgorithm 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'</code>
 
 ## 另请参阅
 - [Repair Office 365 trust with Azure AD Connect（使用 Azure AD Connect 修复 Office 365 信任）](./active-directory-aadconnect-federation-management.md#repairthetrust)

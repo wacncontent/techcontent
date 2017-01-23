@@ -30,10 +30,12 @@ ms.author: v-livech
 
 ## 快速命令摘要
 
-    azure group create \
-        -n myResourceGroup \
-        -l chinanorth \
-        --template-file /path/to/azuredeploy.json
+```
+azure group create \
+    -n myResourceGroup \
+    -l chinanorth \
+    --template-file /path/to/azuredeploy.json
+```
 
 ## 详细演练
 使用模板可以在 Azure 上创建具有所需设置的 VM，这些设置可在启动过程中自定义，例如用户名和主机名。对于本文，我们将推出一个利用 Ubuntu VM 和网络安全组 (NSG) 并打开端口 22 用于 SSH 的 Azure 模板。
@@ -46,29 +48,33 @@ Azure Resource Manager 模板是可用于一次性简易任务（如启动 Ubunt
 >[!NOTE]
 > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-    azure group create \
-        --name myResourceGroup \
-        --location chinanorth \
-        --template-file /path/to/azuredeploy.json
+```
+azure group create \
+    --name myResourceGroup \
+    --location chinanorth \
+    --template-file /path/to/azuredeploy.json
+```
 
 输出应类似于以下输出块：
 
-    info:    Executing command group create
-    + Getting resource group myResourceGroup
-    + Creating resource group myResourceGroup
-    info:    Created resource group myResourceGroup
-    info:    Supply values for the following parameters
-    sshKeyData: ssh-rsa AAAAB3Nza<..ssh public key text..>VQgwjNjQ== myAdminUser@myVM
-    + Initializing template configurations and parameters
-    + Creating a deployment
-    info:    Created template deployment "azuredeploy"
-    data:    Id:                  /subscriptions/<..subid text..>/resourceGroups/myResourceGroup
-    data:    Name:                myResourceGroup
-    data:    Location:            chinanorth
-    data:    Provisioning State:  Succeeded
-    data:    Tags: null
-    data:
-    info:    group create command OK
+```
+info:    Executing command group create
++ Getting resource group myResourceGroup
++ Creating resource group myResourceGroup
+info:    Created resource group myResourceGroup
+info:    Supply values for the following parameters
+sshKeyData: ssh-rsa AAAAB3Nza<..ssh public key text..>VQgwjNjQ== myAdminUser@myVM
++ Initializing template configurations and parameters
++ Creating a deployment
+info:    Created template deployment "azuredeploy"
+data:    Id:                  /subscriptions/<..subid text..>/resourceGroups/myResourceGroup
+data:    Name:                myResourceGroup
+data:    Location:            chinanorth
+data:    Provisioning State:  Succeeded
+data:    Tags: null
+data:
+info:    group create command OK
+```
 
 该示例使用 `--template-file` 参数（模板文件的路径为自变量）部署了一个 VM。如果你确信该模板适用于 Azure 中国区，也可以使用 `--template-uri` 直接从 github 原始文件部署该模板。Azure CLI 将提示你输入模板所需的参数。
 

@@ -70,9 +70,11 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 
 -  **WebLogic Server 要求 T3 访问（例如，使用企业 JavaBean 时的 T3 访问）的公用端口和专用端口是相同的。** 请考虑多层方案，其中服务层 (EJB) 应用程序运行在 WebLogic Server 群集中，该群集包含名为 **SLWLS** 的云服务中的两个或更多个托管服务器。客户端层位于不同云服务中，该云服务运行尝试调用服务层中的 EJB 的简单 Java 程序。由于有必要对服务层进行负载均衡，因此需要为 WebLogic Server 群集中的虚拟机创建公共负载均衡终结点。如果为该终结点指定的专用端口不同于公用端口（例如，7006:7008），则会发生下面这样的错误：
 
-        [java] javax.naming.CommunicationException [Root exception is java.net.ConnectException: t3://example.chinacloudapp.cn:7006:
+    ```
+    [java] javax.naming.CommunicationException [Root exception is java.net.ConnectException: t3://example.chinacloudapp.cn:7006:
 
-        Bootstrap to: example.chinacloudapp.cn/138.91.142.178:7006' over: 't3' got an error or timed out]
+    Bootstrap to: example.chinacloudapp.cn/138.91.142.178:7006' over: 't3' got an error or timed out]
+    ```
 
     这是因为对于任何远程 T3 访问，WebLogic Server 都要求负载均衡器端口和 WebLogic 托管服务器端口是相同的。在上面的示例中，客户端访问端口 7006（负载均衡器端口），托管服务器侦听 7008（专用端口）。请注意，此限制仅适用于 T3 访问，而不适用于 HTTP。
 
@@ -82,7 +84,9 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 
     -  启动 WebLogic Server 时，请包括以下 JVM 参数：
 
-            -Dweblogic.rjvm.enableprotocolswitch=true
+        ```
+        -Dweblogic.rjvm.enableprotocolswitch=true
+        ```
 
 如需相关信息，请参阅 <http://support.oracle.com> 上的知识库文章 **860340.1**。
 

@@ -3,7 +3,7 @@
 2. 按“运行”按钮生成项目，并在 iOS 模拟器中启动应用。
 3. 在应用中键入有意义的文本（例如 *Complete the tutorial*），然后单击加号 (**+**) 图标。这会将一个 POST 请求发送到之前部署的 Azure 后端。请求中的后端数据插入到 TodoItem SQL 表中，并将新存储项的相关信息返回到移动应用中。移动应用会在列表中显示此数据。
 
-    ![在 iOS 上运行的快速启动应用](./media/app-service-mobile-ios-quickstart/mobile-quickstart-startup-ios.png)  
+   ![在 iOS 上运行的快速启动应用](./media/app-service-mobile-ios-quickstart/mobile-quickstart-startup-ios.png)  
 
 [Azure 门户预览]: https://portal.azure.cn/
 

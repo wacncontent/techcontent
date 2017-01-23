@@ -81,7 +81,9 @@ jti|有关此令牌的唯一标识符（每个令牌只能在 castLabs 系统中
 2. 将资产上传到 AMS。
 3. 从上传的资源中获取 UUID 并更改 Program.cs 文件中的第 32 行：
 
-         var objIAsset = _context.Assets.Where(x => x.Id == "nb:cid:UUID:dac53a5d-1500-80bd-b864-f1e4b62594cf").FirstOrDefault();
+    ```
+     var objIAsset = _context.Assets.Where(x => x.Id == "nb:cid:UUID:dac53a5d-1500-80bd-b864-f1e4b62594cf").FirstOrDefault();
+    ```
 
 4. 使用 AssetId 来命名 castLabs 系统中的资源（Program.cs 文件中的第 44 行）。
 

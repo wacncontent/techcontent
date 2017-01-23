@@ -46,33 +46,43 @@ Xrdp 是一个开源 RDP 服务器，支持你从 Windows 计算机通过远程�
 
 对于 Ubuntu，使用：
 
-    #sudo apt-get update
-    #sudo apt-get install ubuntu-desktop
+```
+#sudo apt-get update
+#sudo apt-get install ubuntu-desktop
+```
 
 对于 OpenSUSE，使用：
 
-    #sudo zypper install gnome-session
+```
+#sudo zypper install gnome-session
+```
 
 ##安装 xrdp
 
 对于 Ubuntu，使用：
 
-    #sudo apt-get install xrdp
+```
+#sudo apt-get install xrdp
+```
 
 对于 OpenSUSE，使用：
 
 > [!NOTE]
 >在下面的命令中，使用你正在使用的版本更新 OpenSUSE 版本，下面是 `OpenSUSE 13.2` 的一个示例命令。
 
-    #sudo zypper in http://download.opensuse.org/repositories/X11:/RemoteDesktop/openSUSE_13.2/x86_64/xrdp-0.9.0git.1401423964-2.1.x86_64.rpm
-    #sudo zypper install tigervnc xorg-x11-Xvnc xterm remmina-plugin-vnc
+```
+#sudo zypper in http://download.opensuse.org/repositories/X11:/RemoteDesktop/openSUSE_13.2/x86_64/xrdp-0.9.0git.1401423964-2.1.x86_64.rpm
+#sudo zypper install tigervnc xorg-x11-Xvnc xterm remmina-plugin-vnc
+```
 
 ##启动时启动 xrdp 并设置 xdrp 服务
 
 对于 OpenSUSE，使用：
 
-    #sudo systemctl start xrdp
-    #sudo systemctl enable xrdp
+```
+#sudo systemctl start xrdp
+#sudo systemctl enable xrdp
+```
 
 对于 Ubuntu，安装后，在启动时会自动启动并启用 xrdp。
 
@@ -82,21 +92,29 @@ Xrdp 是一个开源 RDP 服务器，支持你从 Windows 计算机通过远程�
 
 安装 `xfce`，使用：
 
-    #sudo apt-get install xubuntu-desktop
+```
+#sudo apt-get install xubuntu-desktop
+```
 
 然后启用 `xfce`，使用：
 
-    #echo xfce4-session >~/.xsession
+```
+#echo xfce4-session >~/.xsession
+```
 
 编辑配置文件 `/etc/xrdp/startwm.sh`，使用：
 
-    #sudo vi /etc/xrdp/startwm.sh   
+```
+#sudo vi /etc/xrdp/startwm.sh   
+```
 
 在 `/etc/X11/Xsession` 行之前添加 `xfce4-session` 行。
 
 重新启动 xrdp 服务，使用：
 
-    #sudo service xrdp restart
+```
+#sudo service xrdp restart
+```
 
 ##从 Windows 计算机连接 Linux VM
 在 Windows 计算机中，启动远程桌面客户端，输入 Linux VM DNS 名称，或转到 Azure 经典管理门户的 VM 的 `Dashboard`，单击 `Connect` 以连接 Linux VM，你将看到下面的登录窗口：

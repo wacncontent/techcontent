@@ -41,76 +41,86 @@ ms.author: sethm;shvija
 
 要创建的事件中心命名空间的名称。
 
-        "eventHubNamespaceName": {
-        "type": "string"
-        }
+```
+    "eventHubNamespaceName": {
+    "type": "string"
+    }
+```
 
 ### eventHubName
 
 在事件中心命名空间中创建的事件中心的名称。
 
-        "eventHubName": {
-        "type": "string"
-        }
+```
+    "eventHubName": {
+    "type": "string"
+    }
+```
 
 ### eventHubConsumerGroupName
 
 为事件中心创建的使用者组的名称。
 
-        "eventHubConsumerGroupName": {
-        "type": "string"
-        }
+```
+    "eventHubConsumerGroupName": {
+    "type": "string"
+    }
+```
 
 ### apiVersion
 
 模板的 API 版本。
 
-        "apiVersion": {
-        "type": "string"
-        }
+```
+    "apiVersion": {
+    "type": "string"
+    }
+```
 
 ## 要部署的资源
 
 创建包含事件中心和使用者组的 **EventHubs** 类型的命名空间。
 
-        "resources":[  
-              {  
-                 "apiVersion":"[variables('ehVersion')]",
-                 "name":"[parameters('namespaceName')]",
-                 "type":"Microsoft.EventHub/Namespaces",
-                 "location":"[variables('location')]",
-                 "sku":{  
-                    "name":"Standard",
-                    "tier":"Standard"
-                 },
-                 "resources":[  
-                    {  
-                       "apiVersion":"[variables('ehVersion')]",
-                       "name":"[parameters('eventHubName')]",
-                       "type":"EventHubs",
-                       "dependsOn":[  
-                          "[concat('Microsoft.EventHub/namespaces/', parameters('namespaceName'))]"
-                       ],
-                       "properties":{  
-                          "path":"[parameters('eventHubName')]"
-                       },
-                       "resources":[  
-                          {  
-                             "apiVersion":"[variables('ehVersion')]",
-                             "name":"[parameters('consumerGroupName')]",
-                             "type":"ConsumerGroups",
-                             "dependsOn":[  
-                                "[parameters('eventHubName')]"
-                             ],
-                             "properties":{  
+```
+    "resources":[  
+          {  
+             "apiVersion":"[variables('ehVersion')]",
+             "name":"[parameters('namespaceName')]",
+             "type":"Microsoft.EventHub/Namespaces",
+             "location":"[variables('location')]",
+             "sku":{  
+                "name":"Standard",
+                "tier":"Standard"
+             },
+             "resources":[  
+                {  
+                   "apiVersion":"[variables('ehVersion')]",
+                   "name":"[parameters('eventHubName')]",
+                   "type":"EventHubs",
+                   "dependsOn":[  
+                      "[concat('Microsoft.EventHub/namespaces/', parameters('namespaceName'))]"
+                   ],
+                   "properties":{  
+                      "path":"[parameters('eventHubName')]"
+                   },
+                   "resources":[  
+                      {  
+                         "apiVersion":"[variables('ehVersion')]",
+                         "name":"[parameters('consumerGroupName')]",
+                         "type":"ConsumerGroups",
+                         "dependsOn":[  
+                            "[parameters('eventHubName')]"
+                         ],
+                         "properties":{  
 
-                             }
-                          }
-                       ]
-                    }
-                 ]
-              }
-           ],
+                         }
+                      }
+                   ]
+                }
+             ]
+          }
+       ],
+```
 
 ## 运行部署的命令
 
@@ -118,13 +128,17 @@ ms.author: sethm;shvija
 
 ## PowerShell
 
-        New-AzureRmResourceGroupDeployment -ResourceGroupName \<resource-group-name\> -TemplateFile https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-event-hubs-create-event-hub-and-consumer-group/azuredeploy.json
+```
+    New-AzureRmResourceGroupDeployment -ResourceGroupName \<resource-group-name\> -TemplateFile https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-event-hubs-create-event-hub-and-consumer-group/azuredeploy.json
+```
 
 ## Azure CLI
 
-        azure config mode arm
+```
+    azure config mode arm
 
-        azure group deployment create \<my-resource-group\> \<my-deployment-name\> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-event-hubs-create-event-hub-and-consumer-group/azuredeploy.json
+    azure group deployment create \<my-resource-group\> \<my-deployment-name\> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-event-hubs-create-event-hub-and-consumer-group/azuredeploy.json
+```
 
 [创作 Azure Resource Manager 模板]: ../azure-resource-manager/resource-group-authoring-templates.md
 [将 Azure PowerShell 与 Azure 资源管理器配合使用]: ../azure-resource-manager/powershell-azure-resource-manager.md

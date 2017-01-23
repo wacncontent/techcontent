@@ -47,7 +47,9 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 2. 键入以下命令以创建服务总线命名空间。提供你自己的命名空间值，并指定与应用程序相同的区域。
 
-        New-AzureSBNamespace -Name 'yourexamplenamespace' -Location 'China East' -NamespaceType 'Messaging' -CreateACSNamespace $true
+    ```
+    New-AzureSBNamespace -Name 'yourexamplenamespace' -Location 'China East' -NamespaceType 'Messaging' -CreateACSNamespace $true
+    ```
 
     ![创建命名空间](./media/service-bus-ruby-how-to-use-queues/showcmdcreate.png)
 
@@ -79,14 +81,18 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 使用常用的文本编辑器将以下内容添加到要在其中使用存储的 Ruby 文件的顶部：
 
-    require "azure"
+```
+require "azure"
+```
 
 ## 设置 Azure 服务总线连接
 
 Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_SERVICEBUS\_ACCESS\_KEY** 以获取连接到服务总线命名空间所需的信息。如果未设置这些环境变量，则在使用 **Azure::ServiceBusService** 之前必须通过以下代码指定命名空间信息：
 
-    Azure.config.sb_namespace = "<your azure service bus namespace>"
-    Azure.config.sb_access_key = "<your azure service bus access key>"
+```
+Azure.config.sb_namespace = "<your azure service bus namespace>"
+Azure.config.sb_access_key = "<your azure service bus access key>"
+```
 
 将命名空间值设置为你创建的值，而不是整个 URL 的值。例如，使用 **"yourexamplenamespace"**，而不是 "yourexamplenamespace.servicebus.chinacloudapi.cn"。
 
@@ -94,20 +100,24 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 可以通过 **Azure::ServiceBusService** 对象处理队列。若要创建队列，请使用 **create\_queue()** 方法。以下示例将创建一个队列或输出任何错误。
 
-    azure_service_bus_service = Azure::ServiceBusService.new
-    begin
-      queue = azure_service_bus_service.create_queue("test-queue")
-    rescue
-      puts $!
-    end
+```
+azure_service_bus_service = Azure::ServiceBusService.new
+begin
+  queue = azure_service_bus_service.create_queue("test-queue")
+rescue
+  puts $!
+end
+```
 
 还可以通过其他选项传递 **Azure::ServiceBus::Queue** 对象，这些选项可让你重写默认队列设置，如消息保存时间或最大队列大小。以下示例演示如何将最大队列大小设置为 5GB，将生存时间设置为 1 分钟：
 
-    queue = Azure::ServiceBus::Queue.new("test-queue")
-    queue.max_size_in_megabytes = 5120
-    queue.default_message_time_to_live = "PT1M"
+```
+queue = Azure::ServiceBus::Queue.new("test-queue")
+queue.max_size_in_megabytes = 5120
+queue.default_message_time_to_live = "PT1M"
 
-    queue = azure_service_bus_service.create_queue(queue)
+queue = azure_service_bus_service.create_queue(queue)
+```
 
 ## 如何向队列发送消息
 
@@ -115,9 +125,11 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 以下示例演示了如何使用 **send\_queue\_message()** 向名为“test-queue”的队列发送测试消息：
 
-    message = Azure::ServiceBus::BrokeredMessage.new("test queue message")
-    message.correlation_id = "test-correlation-id"
-    azure_service_bus_service.send_queue_message("test-queue", message)
+```
+message = Azure::ServiceBus::BrokeredMessage.new("test queue message")
+message.correlation_id = "test-correlation-id"
+azure_service_bus_service.send_queue_message("test-queue", message)
+```
 
 服务总线队列在标准层中支持的最大消息大小为 256 KB。标头最大为 64 KB，其中包括标准和自定义应用程序属性。一个队列可包含的消息数不受限制，但消息的总大小受限。此队列大小是在创建时定义的，上限为 5 GB。
 
@@ -131,10 +143,12 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 以下示例演示如何使用 **receive\_queue\_message()** 接收和处理消息。该示例先通过将 **:peek\_lock** 设置为 **false** 接收并删除一条消息，然后再接收另一条消息，最后使用 **delete\_queue\_message()** 删除该消息：
 
-    message = azure_service_bus_service.receive_queue_message("test-queue", 
-      { :peek_lock => false })
-    message = azure_service_bus_service.receive_queue_message("test-queue")
-    azure_service_bus_service.delete_queue_message(message)
+```
+message = azure_service_bus_service.receive_queue_message("test-queue", 
+  { :peek_lock => false })
+message = azure_service_bus_service.receive_queue_message("test-queue")
+azure_service_bus_service.delete_queue_message(message)
+```
 
 ## 如何处理应用程序崩溃和不可读消息
 

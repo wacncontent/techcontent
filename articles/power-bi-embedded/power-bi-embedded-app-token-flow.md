@@ -28,7 +28,9 @@ Power BI Embedded 服务使用**密钥**和**应用令牌**进行身份验证和
 
 若要在 REST 调用中使用密钥，请添加以下授权标头：
 
-    Authorization: AppKey {your key}
+```
+Authorization: AppKey {your key}
+```
 
 **应用令牌** - 应用令牌用于所有嵌入请求。它们被设计为运行客户端，因此被限制到单个报表，并且最好设置一个过期时间。
 

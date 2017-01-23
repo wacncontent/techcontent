@@ -64,18 +64,20 @@ Azure Redis 缓存同时支持经典 VNet 和 ARM VNet。
 
 若要在使用 VNet 时连接到 Azure Redis 缓存实例，请在连接字符串中指定缓存主机名，如以下示例中所示。
 
-    private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
-    {
-        return ConnectionMultiplexer.Connect("contoso5premium.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=password");
-    });
+```
+private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+{
+    return ConnectionMultiplexer.Connect("contoso5premium.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=password");
+});
 
-    public static ConnectionMultiplexer Connection
+public static ConnectionMultiplexer Connection
+{
+    get
     {
-        get
-        {
-            return lazyConnection.Value;
-        }
+        return lazyConnection.Value;
     }
+}
+```
 
 ## Azure Redis 缓存 VNet 常见问题
 以下列表包含有关 Azure Redis 缓存缩放的常见问题的解答。

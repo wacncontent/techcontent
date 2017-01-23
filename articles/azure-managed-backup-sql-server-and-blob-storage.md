@@ -86,9 +86,11 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 
 4. 查询语句为：
 
-        CREATE CREDENTIAL 凭据名称            
-        WITH IDENTITY= '存储账户名称'          
-        , SECRET = '存储账户主密钥'   
+    ```
+    CREATE CREDENTIAL 凭据名称            
+    WITH IDENTITY= '存储账户名称'          
+    , SECRET = '存储账户主密钥'   
+    ```
 
 5. 单击**执行**按钮运行查询语句，获得以下执行结果。
 
@@ -100,16 +102,18 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 
 7. SQL 语句如下：
 
-        Use msdb; 
-        GO 
-        EXEC smart_admin.sp_set_db_backup 
-            @database_name='需要进行托管备份的数据库名称'
-            ,@retention_days=30 
-            ,@credential_name='凭据名称，与上个脚本中的一致'
-            ,@storage_url='blob服务访问终结点URL'
-            ,@encryption_algorithm= NO_ENCRYPTION 
-            ,@enable_backup=1 
-        GO
+    ```
+    Use msdb; 
+    GO 
+    EXEC smart_admin.sp_set_db_backup 
+        @database_name='需要进行托管备份的数据库名称'
+        ,@retention_days=30 
+        ,@credential_name='凭据名称，与上个脚本中的一致'
+        ,@storage_url='blob服务访问终结点URL'
+        ,@encryption_algorithm= NO_ENCRYPTION 
+        ,@enable_backup=1 
+    GO
+    ```
 
 8. 上述语句中，设置备份保存时间为 30 天，如需调整，只需修改 @retention_days 参数即可，范围为 1-30.
 

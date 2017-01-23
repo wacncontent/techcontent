@@ -37,7 +37,9 @@ SDK 提供两种方式来设置本地群集：Windows PowerShell 脚本和本地
 
 2. 从 SDK 文件夹运行群集设置脚本：
 
-        & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1"
+    ```
+    & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1"
+    ```
 
     群集设置需要一段时间。完成设置后，您应会看到类似于下面的输出：
 
@@ -54,22 +56,30 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 2. 导入 Service Fabric SDK PowerShell 模块。
 
-        Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
+    ```
+    Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
+    ```
 
 3. 创建一个目录，用于存储要下载和部署的应用程序，例如 C:\\ServiceFabric。
 
-        mkdir c:\ServiceFabric\
-        cd c:\ServiceFabric\
+    ```
+    mkdir c:\ServiceFabric\
+    cd c:\ServiceFabric\
+    ```
 
 4. [下载 WordCount 应用程序](http://aka.ms/servicefabric-wordcountapp)到创建的位置。注意：Microsoft Edge 浏览器以 *.zip* 扩展名保存文件。将文件扩展名更改为 *.sfpkg*。
 
 5. 连接到本地群集：
 
-        Connect-ServiceFabricCluster localhost:19000
+    ```
+    Connect-ServiceFabricCluster localhost:19000
+    ```
 
 6. 使用 SDK 的部署命令来创建新的应用程序，并提供应用程序包的名称和路径。
 
-        Publish-NewServiceFabricApplication -ApplicationPackagePath c:\ServiceFabric\WordCountV1.sfpkg -ApplicationName "fabric:/WordCount"
+    ```
+    Publish-NewServiceFabricApplication -ApplicationPackagePath c:\ServiceFabric\WordCountV1.sfpkg -ApplicationName "fabric:/WordCount"
+    ```
 
     如果一切正常，你应会看到如下所示的输出：
 
@@ -88,7 +98,9 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. 查询群集上所有已部署的应用程序：
 
-        Get-ServiceFabricApplication
+    ```
+    Get-ServiceFabricApplication
+    ```
 
     假设您只部署了 WordCount 应用，将看到类似于下面的内容：
 
@@ -96,7 +108,9 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 2. 通过查询 WordCount 应用程序中包含的服务集转到下一个级别。
 
-        Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
+    ```
+    Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
+    ```
 
     ![在 PowerShell 中列出应用程序的服务][ps-getsfsvc]
 
@@ -104,7 +118,9 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 3. 最后，看看 WordCountService 的分区列表：
 
-        Get-ServiceFabricPartition 'fabric:/WordCount/WordCountService'
+    ```
+    Get-ServiceFabricPartition 'fabric:/WordCount/WordCountService'
+    ```
 
     ![在 PowerShell 中查看服务分区][ps-getsfpartitions]
 
@@ -126,7 +142,9 @@ Service Fabric 在应用程序推出于群集时监视其运行状况，从而�
 
 2. 返回到 PowerShell 窗口并使用 SDK 的升级命令在群集中注册新版本。然后开始升级 fabric:/WordCount 应用程序。
 
-        Publish-UpgradedServiceFabricApplication -ApplicationPackagePath C:\ServiceFabric\WordCountV2.sfpkg -ApplicationName "fabric:/WordCount" -UpgradeParameters @{"FailureAction"="Rollback"; "UpgradeReplicaSetCheckTimeout"=1; "Monitored"=$true; "Force"=$true}
+    ```
+    Publish-UpgradedServiceFabricApplication -ApplicationPackagePath C:\ServiceFabric\WordCountV2.sfpkg -ApplicationName "fabric:/WordCount" -UpgradeParameters @{"FailureAction"="Rollback"; "UpgradeReplicaSetCheckTimeout"=1; "Monitored"=$true; "Force"=$true}
+    ```
 
     开始升级时，您应会在 PowerShell 中看到如下所示的输出。
 
@@ -140,7 +158,9 @@ Service Fabric 在应用程序推出于群集时监视其运行状况，从而�
 
 4. 如果对 fabric:/WordCount 应用程序中的服务集重新运行以前的查询，则会发现虽然 WordCountService 的版本已更改，但 WordCountWebService 的版本维持不变：
 
-        Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
+    ```
+    Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
+    ```
 
     ![升级后查询应用程序服务][ps-getsfsvc-postupgrade]
 
@@ -156,7 +176,9 @@ Service Fabric 在应用程序推出于群集时监视其运行状况，从而�
 
 1. 若要删除单个应用程序及其所有数据，请运行以下命令：
 
-        Unpublish-ServiceFabricApplication -ApplicationName "fabric:/WordCount"
+    ```
+    Unpublish-ServiceFabricApplication -ApplicationName "fabric:/WordCount"
+    ```
 
     或者在 Service Fabric Explorer 的“操作”菜单或左窗格中应用程序列表视图的上下文菜单内，删除应用程序。
 
@@ -164,8 +186,10 @@ Service Fabric 在应用程序推出于群集时监视其运行状况，从而�
 
 2. 从群集中删除应用程序后，可以注销 WordCount 应用程序类型的版本 1.0.0 和 2.0.0。删除操作将从群集的映像存储中删除该应用程序包，包括其代码和配置。
 
-        Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 2.0.0
-        Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 1.0.0
+    ```
+    Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 2.0.0
+    Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 1.0.0
+    ```
 
     或者，在 Service Fabric Explorer 中选择该应用程序对应的“取消预配类型”。
 
@@ -188,7 +212,9 @@ Service Fabric 在应用程序推出于群集时监视其运行状况，从而�
 
 2. 从 SDK 文件夹运行群集设置脚本：
 
-        & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1" -CreateOneNodeCluster
+    ```
+    & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1" -CreateOneNodeCluster
+    ```
 
     群集设置需要一段时间。完成设置后，您应会看到类似于下面的输出：
 

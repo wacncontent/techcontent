@@ -41,7 +41,9 @@ ms.author: robmcm
 
 3. 输入以下 Azure Powershell cmdlet：
 
-        Enable-AzureServiceProjectRemoteDesktop
+    ```
+    Enable-AzureServiceProjectRemoteDesktop
+    ```
 
 4. 在提示符处，输入用户名和密码。
 
@@ -49,7 +51,9 @@ ms.author: robmcm
 
 3.  输入以下 PowerShell cmdlet 以发布更改：
 
-        Publish-AzureServiceProject
+    ```
+    Publish-AzureServiceProject
+    ```
 
     ![publish-azureserviceproject][publish-project]
 
@@ -87,11 +91,15 @@ ms.author: robmcm
 
 1.  输入以下 Azure Powershell cmdlet：
 
-        Disable-AzureServiceProjectRemoteDesktop
+    ```
+    Disable-AzureServiceProjectRemoteDesktop
+    ```
 
 2.  输入以下 PowerShell cmdlet 以发布更改：
 
-        Publish-AzureServiceProject
+    ```
+    Publish-AzureServiceProject
+    ```
 
 ## 其他资源
 

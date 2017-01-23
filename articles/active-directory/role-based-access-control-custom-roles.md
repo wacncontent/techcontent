@@ -23,32 +23,34 @@ ms.author: kgremban
 
 下面是用于监视和重新启动虚拟机的自定义角色的一个示例：
 
-    {
-        "Name": "Virtual Machine Operator",
-        "Id": "cadb4a5a-4e7a-47be-84db-05cad13b6769",
-        "IsCustom": true,
-        "Description": "Can monitor and restart virtual machines.",
-        "Actions": [
-            "Microsoft.Storage/*/read",
-            "Microsoft.Network/*/read",
-            "Microsoft.Compute/*/read",
-            "Microsoft.Compute/virtualMachines/start/action",
-            "Microsoft.Compute/virtualMachines/restart/action",
-            "Microsoft.Authorization/*/read",
-            "Microsoft.Resources/subscriptions/resourceGroups/read",
-            "Microsoft.Insights/alertRules/*",
-            "Microsoft.Insights/diagnosticSettings/*",
-            "Microsoft.Support/*"
-        ],
-        "NotActions": [
+```
+{
+    "Name": "Virtual Machine Operator",
+    "Id": "cadb4a5a-4e7a-47be-84db-05cad13b6769",
+    "IsCustom": true,
+    "Description": "Can monitor and restart virtual machines.",
+    "Actions": [
+        "Microsoft.Storage/*/read",
+        "Microsoft.Network/*/read",
+        "Microsoft.Compute/*/read",
+        "Microsoft.Compute/virtualMachines/start/action",
+        "Microsoft.Compute/virtualMachines/restart/action",
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Insights/diagnosticSettings/*",
+        "Microsoft.Support/*"
+    ],
+    "NotActions": [
 
-        ],
-        "AssignableScopes": [
-            "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
-            "/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624",
-            "/subscriptions/34370e90-ac4a-4bf9-821f-85eeedeae1a2"
-        ]
-    }
+    ],
+    "AssignableScopes": [
+        "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
+        "/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624",
+        "/subscriptions/34370e90-ac4a-4bf9-821f-85eeedeae1a2"
+    ]
+}
+```
 
 ## 操作
 自定义角色的 **Actions** 属性指定该角色向其授予访问权限的 Azure 操作。它是操作字符串的集合，可标识 Azure 资源提供程序的安全对象操作。包含通配符 (*) 的操作字符串可以授权访问与该操作字符串相匹配的所有操作。例如：
@@ -60,15 +62,19 @@ ms.author: kgremban
 
 使用 `Get-AzureRmProviderOperation`（在 PowerShell 中）或 `azure provider operations show`（在 Azure CLI 中）列出 Azure 资源提供程序的操作。还可以使用这些命令来验证操作字符串是否有效，并展开通配符操作字符串。
 
-    Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName
+```
+Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName
 
-    Get-AzureRMProviderOperation Microsoft.Network/*
+Get-AzureRMProviderOperation Microsoft.Network/*
+```
 
 ![PowerShell 屏幕截图 - Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName](./media/role-based-access-control-configure/1-get-azurermprovideroperation-1.png)  
 
-    azure provider operations show "Microsoft.Compute/virtualMachines/*/action" --js on | jq '.[] | .operation'
+```
+azure provider operations show "Microsoft.Compute/virtualMachines/*/action" --js on | jq '.[] | .operation'
 
-    azure provider operations show "Microsoft.Network/*"
+azure provider operations show "Microsoft.Network/*"
+```
 
 ![Azure CLI 屏幕截图 - Azure 提供程序操作显示“Microsoft.Compute/virtualMachines/*/action”](./media/role-based-access-control-configure/1-azure-provider-operations-show.png)  
 

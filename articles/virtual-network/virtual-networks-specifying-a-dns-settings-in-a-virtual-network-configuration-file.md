@@ -31,24 +31,28 @@ ms.author: jdial
 
 [Dns 元素](https://msdn.microsoft.com/zh-cn/library/azure/jj157100)
 
-    <Dns>
-      <DnsServers>
-        <DnsServer name="ID1" IPAddress="IPAddress1" />
-        <DnsServer name="ID2" IPAddress="IPAddress2" />
-        <DnsServer name="ID3" IPAddress="IPAddress3" />
-      </DnsServers>
-    </Dns>
+```
+<Dns>
+  <DnsServers>
+    <DnsServer name="ID1" IPAddress="IPAddress1" />
+    <DnsServer name="ID2" IPAddress="IPAddress2" />
+    <DnsServer name="ID3" IPAddress="IPAddress3" />
+  </DnsServers>
+</Dns>
+```
 
 >[!WARNING]
 > **DnsServer** 元素中的 **name** 属性仅用作 **DnsServerRef** 元素的引用。它不表示 DNS 服务器的主机名。每个 **DnsServer** 属性值必须在整个 Azure 订阅中是唯一的
 
 [虚拟网络站点元素](https://msdn.microsoft.com/zh-cn/library/azure/jj157100)
 
-    <DnsServersRef>
-      <DnsServerRef name="ID1" />
-      <DnsServerRef name="ID2" />
-      <DnsServerRef name="ID3" />
-    </DnsServersRef>
+```
+<DnsServersRef>
+  <DnsServerRef name="ID1" />
+  <DnsServerRef name="ID2" />
+  <DnsServerRef name="ID3" />
+</DnsServersRef>
+```
 
 >[!NOTE]
 > 为了指定虚拟网络站点元素的此设置，它必须先前就在 DNS 元素中进行定义。虚拟网络站点元素中的 DnsServerRef *name* 必须引用 DNS 元素中针对 DnsServer *name* 指定的名称值。

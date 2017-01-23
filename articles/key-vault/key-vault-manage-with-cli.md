@@ -46,11 +46,13 @@ ms.author: bruceper
 
 可以使用 --help 或 -h 参数来查看特定命令的帮助。或者，也可以使用 azure help [命令] [选项] 格式返回相同信息。例如，以下命令都返回相同信息：
 
-    azure account set --help
+```
+azure account set --help
 
-    azure account set -h
+azure account set -h
 
-    azure help account set
+azure help account set
+```
 
 当你对某一命令所需的参数有疑问时，请使用 --help、-h 或 azure help [命令] 来查看帮助。
 
@@ -63,11 +65,15 @@ ms.author: bruceper
 
 要使用组织帐户登录，请使用以下命令：
 
-    azure login -u username -p password -e azurechinacloud
+```
+azure login -u username -p password -e azurechinacloud
+```
 
 或者
 
-    azure login -u username -e azurechinacloud
+```
+azure login -u username -e azurechinacloud
+```
 
 >[!NOTE]
 >  login 方法仅适用于组织帐户。组织帐户是指受组织管理、并在组织的 Azure Active Directory 租户中定义的用户。
@@ -84,11 +90,15 @@ ms.author: bruceper
 
 如果你有多个订阅，并想要指定其中一个订阅供 Azure 密钥保管库使用，请键入以下内容以查看帐户的订阅：
 
-    azure account list
+```
+azure account list
+```
 
 然后，若要指定要使用的订阅，请键入：
 
-    azure account set <subscription name>
+```
+azure account set <subscription name>
+```
 
 有关配置 Azure 跨平台命令行接口的详细信息，请参阅[如何安装和配置 Azure 跨平台命令行接口](../xplat-cli-install.md)。
 
@@ -96,13 +106,17 @@ ms.author: bruceper
 
 密钥保管库需要 Azure 资源管理器，因此请键入以下内容以切换到 Azure 资源管理器模式：
 
-    azure config mode arm
+```
+azure config mode arm
+```
 
 ## 创建新的资源组
 
 使用 Azure 资源管理器时，会在资源组中创建所有相关资源。在本教程中，我们将创建新资源组“ContosoResourceGroup”。
 
-    azure group create 'ContosoResourceGroup' 'China East'
+```
+azure group create 'ContosoResourceGroup' 'China East'
+```
 
 第一个参数是资源组名称，第二个参数是位置。对于位置，请使用命令 `azure location list` 来了解如何针对本示例中的位置指定替代位置。如需更多信息，请键入：`azure help location`
 
@@ -119,7 +133,9 @@ ms.author: bruceper
 
 例如，如果使用的保管库名称为 ContosoKeyVault，资源组名称为 ContosoResourceGroup，位置为中国东部，请键入：
 
-    azure keyvault create --vault-name 'ContosoKeyVault' --resource-group 'ContosoResourceGroup' --location 'China East'
+```
+azure keyvault create --vault-name 'ContosoKeyVault' --resource-group 'ContosoResourceGroup' --location 'China East'
+```
 
 此命令的输出会显示你刚刚创建的密钥保管库的属性。两个最重要的属性是：
 
@@ -132,17 +148,23 @@ ms.author: bruceper
 
 如果你希望 Azure 密钥保管库为你创建一个受软件保护的密钥，请使用 `azure key create` 命令，并键入以下内容：
 
-    azure keyvault key create --vault-name 'ContosoKeyVault' --key-name 'ContosoFirstKey' --destination software
+```
+azure keyvault key create --vault-name 'ContosoKeyVault' --key-name 'ContosoFirstKey' --destination software
+```
 
 但是，如果你在保存为本地文件的 .pem 文件（名为 softkey.pem）中有现有密钥要上载到 Azure 密钥保管库，请键入以下命令以从 .PEM 文件（通过密钥保管库服务中的软件保护密钥）中导入该密钥：
 
-    azure keyvault key import --vaultName 'ContosoKeyVault' --key-name 'ContosoFirstKey' --pem-file './softkey.pem' --password 'PaSSWORD' --destination software
+```
+azure keyvault key import --vaultName 'ContosoKeyVault' --key-name 'ContosoFirstKey' --pem-file './softkey.pem' --password 'PaSSWORD' --destination software
+```
 
 现在，你可以通过使用密钥的 URI，引用已创建或上载到 Azure 密钥保管库的密钥。使用 **https://ContosoKeyVault.vault.chinacloudapi.cn/keys/ContosoFirstKey** 可始终获取当前版本，而使用 **https://ContosoKeyVault.vault.chinacloudapi.cn/keys/ContosoFirstKey/cgacf4f763ar42ffb0a1gca546aygd87** 可获取此特定版本。
 
 若要将名为 SQLPassword 且其 Azure 密钥保管库的值为 Pa$$w0rd 的机密添加到保管库，请键入以下内容：
 
-    azure keyvault secret set --vault-name 'ContosoKeyVault' --secret-name 'SQLPassword' --value 'Pa$$w0rd'
+```
+azure keyvault secret set --vault-name 'ContosoKeyVault' --secret-name 'SQLPassword' --value 'Pa$$w0rd'
+```
 
 现在，你可以通过使用密码的 URI，引用已添加到 Azure 密钥保管库的此密码。使用 **https://ContosoVault.vault.chinacloudapi.cn/secrets/SQLPassword** 可始终获取当前版本，而使用 **https://ContosoVault.vault.chinacloudapi.cn/secrets/SQLPassword/90018dbb96a84117a0d2847ef8e7189d** 可获取此特定版本。
 
@@ -182,24 +204,32 @@ ms.author: bruceper
 
 例如，如果保管库名称是 ContosoKeyVault，要授权的应用程序的客户端 ID 为 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed，而你希望授权应用程序使用保管库中的密钥来进行解密和签名，那么，请执行以下操作：
 
-    azure keyvault set-policy --vault-name 'ContosoKeyVault' --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --perms-to-keys '["decrypt","sign"]'
+```
+azure keyvault set-policy --vault-name 'ContosoKeyVault' --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --perms-to-keys '["decrypt","sign"]'
+```
 
 >[!NOTE]
 > 如果你是在 Windows 命令提示符下运行，则应将单引号替换为双引号，并对内部双引号进行转义操作。例如："[\"decrypt\",\"sign\"]"。
 
 如果要授权同一应用程序读取保管库中的机密，请运行以下命令：
 
-    azure keyvault set-policy --vault-name 'ContosoKeyVault' --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --perms-to-secrets '["get"]'
+```
+azure keyvault set-policy --vault-name 'ContosoKeyVault' --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --perms-to-secrets '["get"]'
+```
 
 ## 删除密钥保管库以及关联的密钥和机密
 
 如果你不再需要密钥保管库及其包含的密钥或机密，可以使用 azure keyvault delete 命令来删除密钥保管库：
 
-    azure keyvault delete --vault-name 'ContosoKeyVault'
+```
+azure keyvault delete --vault-name 'ContosoKeyVault'
+```
 
 或者，你可以删除整个 Azure 资源组，其中包括密钥保管库和你加入该组的任何其他资源：
 
-    azure group delete --name 'ContosoResourceGroup'
+```
+azure group delete --name 'ContosoResourceGroup'
+```
 
 ## 其他 Azure 跨平台命令行接口命令
 
@@ -207,23 +237,33 @@ ms.author: bruceper
 
 此命令列出以表格形式显示的所有密钥和所选属性：
 
-    azure keyvault key list --vault-name 'ContosoKeyVault'
+```
+azure keyvault key list --vault-name 'ContosoKeyVault'
+```
 
 此命令显示特定密钥的完整属性列表：
 
-    azure keyvault key show --vault-name 'ContosoKeyVault' --key-name 'ContosoFirstKey'
+```
+azure keyvault key show --vault-name 'ContosoKeyVault' --key-name 'ContosoFirstKey'
+```
 
 此命令列出以表格形式显示的所有机密名称和所选属性：
 
-    azure keyvault secret list --vault-name 'ContosoKeyVault'
+```
+azure keyvault secret list --vault-name 'ContosoKeyVault'
+```
 
 下面是演示如何删除特定密钥的示例：
 
-    azure keyvault key delete --vault-name 'ContosoKeyVault' --key-name 'ContosoFirstKey'
+```
+azure keyvault key delete --vault-name 'ContosoKeyVault' --key-name 'ContosoFirstKey'
+```
 
 下面是演示如何删除特定机密的示例：
 
-    azure keyvault secret delete --vault-name 'ContosoKeyVault' --secret-name 'SQLPassword'
+```
+azure keyvault secret delete --vault-name 'ContosoKeyVault' --secret-name 'SQLPassword'
+```
 
 ## 后续步骤
 

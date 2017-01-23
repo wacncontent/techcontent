@@ -35,7 +35,9 @@ AzCopy 不可用于 Mac/Linux 操作系统。但是，Azure CLI 可用作将数�
 ## 编写第一条 AzCopy 命令
 AzCopy 命令的基本语法是：
 
-    AzCopy /Source:<source> /Dest:<destination> [Options]
+```
+AzCopy /Source:<source> /Dest:<destination> [Options]
+```
 
 打开一个命令窗口，然后导航到计算机上的 AzCopy 安装目录，该位置存放着可执行的 `AzCopy.exe`。如果需要，可以将 AzCopy 安装位置添加到系统路径。默认情况下，AzCopy 安装到 `%ProgramFiles(x86)%\Microsoft SDKs\Azure\AzCopy` 或 `%ProgramFiles%\Microsoft SDKs\Azure\AzCopy`。
 
@@ -43,121 +45,159 @@ AzCopy 命令的基本语法是：
 
 ## Blob：下载
 ### 下载单个 blob
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /Pattern:"abc.txt"
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /Pattern:"abc.txt"
+```
 
 请注意，如果文件夹 `C:\myfolder` 不存在，AzCopy 会创建该文件夹并将 `abc.txt ` 下载到新文件夹中。
 
 ### 从次要区域下载单个 blob
-    AzCopy /Source:https://myaccount-secondary.blob.core.chinacloudapi.cn/mynewcontainer /Dest:C:\myfolder /SourceKey:key /Pattern:abc.txt
+```
+AzCopy /Source:https://myaccount-secondary.blob.core.chinacloudapi.cn/mynewcontainer /Dest:C:\myfolder /SourceKey:key /Pattern:abc.txt
+```
 
 请注意，必须已启用读取访问异地冗余存储。
 
 ### 下载所有 blob
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /S
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /S
+```
 
 假定指定的容器中存在以下 blob：
 
-    abc.txt
-    abc1.txt
-    abc2.txt
-    vd1\a.txt
-    vd1\abcd.txt
+```
+abc.txt
+abc1.txt
+abc2.txt
+vd1\a.txt
+vd1\abcd.txt
+```
 
 在下载操作完成后，目录 `C:\myfolder` 中将包括以下文件：
 
-    C:\myfolder\abc.txt
-    C:\myfolder\abc1.txt
-    C:\myfolder\abc2.txt
-    C:\myfolder\vd1\a.txt
-    C:\myfolder\vd1\abcd.txt
+```
+C:\myfolder\abc.txt
+C:\myfolder\abc1.txt
+C:\myfolder\abc2.txt
+C:\myfolder\vd1\a.txt
+C:\myfolder\vd1\abcd.txt
+```
 
 如果未指定选项 `/S`，则不会下载任何 blob。
 
 ### 下载具有指定前缀的 blob
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /Pattern:a /S
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /Pattern:a /S
+```
 
 假定指定的容器中存在以下 blob。将下载所有以前缀 `a` 开头的 blob：
 
-    abc.txt
-    abc1.txt
-    abc2.txt
-    xyz.txt
-    vd1\a.txt
-    vd1\abcd.txt
+```
+abc.txt
+abc1.txt
+abc2.txt
+xyz.txt
+vd1\a.txt
+vd1\abcd.txt
+```
 
 在下载操作完成后，文件夹 `C:\myfolder` 中将包括以下文件：
 
-    C:\myfolder\abc.txt
-    C:\myfolder\abc1.txt
-    C:\myfolder\abc2.txt
+```
+C:\myfolder\abc.txt
+C:\myfolder\abc1.txt
+C:\myfolder\abc2.txt
+```
 
 前缀适用于虚拟目录，后者构成了 blob 名称的第一个部分。在上面所示的示例中，虚拟目录与指定的前缀不匹配，因此不会下载它。此外，如果未指定选项 `\S`，则 AzCopy 将不会下载任何 blob。
 
 ### 将已导出文件的上次修改时间设置为与源 blob 相同
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /MT
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /MT
+```
 
 还可以根据 blob 的上次修改时间将其从下载操作中排除例如，如果想要排除其上次修改时间与目标文件相同或晚于目标文件的 blob，则添加 `/XN` 选项：
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /MT /XN
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /MT /XN
+```
 
 或者，如果想要排除其上次修改时间与目标文件相同或早于目标文件的 blob，则添加 `/XO` 选项：
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /MT /XO
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /MT /XO
+```
 
 ##<a name="blob-upload"></a> Blob：上传
 
 ### 上传单个文件
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:"abc.txt"
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:"abc.txt"
+```
 
 如果指定的目标容器不存在，AzCopy 则将创建它并将文件上传到其中。
 
 ### 将单个文件上传到虚拟目录
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer/vd /DestKey:key /Pattern:abc.txt
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer/vd /DestKey:key /Pattern:abc.txt
+```
 
 如果指定的虚拟目录不存在，AzCopy 则将上传文件以在其名称中包括虚拟目录（ *例如* 上例中的 `vd/abc.txt`）。
 
 ### 上传全部文件
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /S
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /S
+```
 
 指定选项 `/S` 会以递归方式将指定目录的内容上传到 Blob 存储，这意味着也会上传所有的子文件夹及其文件。例如，假定以下文件存在于文件夹 `C:\myfolder` 中：
 
-    C:\myfolder\abc.txt
-    C:\myfolder\abc1.txt
-    C:\myfolder\abc2.txt
-    C:\myfolder\subfolder\a.txt
-    C:\myfolder\subfolder\abcd.txt
+```
+C:\myfolder\abc.txt
+C:\myfolder\abc1.txt
+C:\myfolder\abc2.txt
+C:\myfolder\subfolder\a.txt
+C:\myfolder\subfolder\abcd.txt
+```
 
 在上传操作完成后，容器中将包括以下文件：
 
-      abc.txt
-    abc1.txt
-    abc2.txt
-    subfolder\a.txt
-    subfolder\abcd.txt
+  ```
+abc.txt
+abc1.txt
+abc2.txt
+subfolder\a.txt
+subfolder\abcd.txt
+```
 
 如果未指定选项 `/S`，AzCopy 将不会以递归方式上传。在上传操作完成后，容器中将包括以下文件：
 
-    abc.txt
-    abc1.txt
-    abc2.txt
+```
+abc.txt
+abc1.txt
+abc2.txt
+```
 
 ### 上传与指定模式相匹配的文件
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:a* /S
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:a* /S
+```
 
 假定以下文件存在于文件夹 `C:\myfolder` 中：
 
-    C:\myfolder\abc.txt
-    C:\myfolder\abc1.txt
-    C:\myfolder\abc2.txt
-    C:\myfolder\xyz.txt
-    C:\myfolder\subfolder\a.txt
-    C:\myfolder\subfolder\abcd.txt
+```
+C:\myfolder\abc.txt
+C:\myfolder\abc1.txt
+C:\myfolder\abc2.txt
+C:\myfolder\xyz.txt
+C:\myfolder\subfolder\a.txt
+C:\myfolder\subfolder\abcd.txt
+```
 
 在上传操作完成后，容器中将包括以下文件：
 
@@ -169,56 +209,74 @@ AzCopy 命令的基本语法是：
 
 如果未指定选项 `/S`，AzCopy 将仅上传不会在虚拟目录中驻留的 blob：
 
-    C:\myfolder\abc.txt
-    C:\myfolder\abc1.txt
-    C:\myfolder\abc2.txt
+```
+C:\myfolder\abc.txt
+C:\myfolder\abc1.txt
+C:\myfolder\abc2.txt
+```
 
 ### 指定目标 blob 的 MIME 内容类型
 
 默认情况下，AzCopy 将目标 blob 的内容类型设置为 `application/octet-stream`。从 3.1.0 版开始，可以通过选项 `/SetContentType:[content-type]` 显示指定内容类型。此语法将在上传操作中设置所有 blob 的内容类型。
 
-    AzCopy /Source:C:\myfolder\ /Dest:https://myaccount.blob.core.chinacloudapi.cn/myContainer/ /DestKey:key /Pattern:ab /SetContentType:video/mp4
+```
+AzCopy /Source:C:\myfolder\ /Dest:https://myaccount.blob.core.chinacloudapi.cn/myContainer/ /DestKey:key /Pattern:ab /SetContentType:video/mp4
+```
 
 如果指定不带任何值的 `/SetContentType` ，AzCopy 将根据文件扩展名设置每个 Blob 或文件的内容类型。
 
-    AzCopy /Source:C:\myfolder\ /Dest:https://myaccount.blob.core.chinacloudapi.cn/myContainer/ /DestKey:key /Pattern:ab /SetContentType
+```
+AzCopy /Source:C:\myfolder\ /Dest:https://myaccount.blob.core.chinacloudapi.cn/myContainer/ /DestKey:key /Pattern:ab /SetContentType
+```
 
 ## Blob：复制
 
 ### 在存储帐户内复制单个 blob
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key /DestKey:key /Pattern:abc.txt
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key /DestKey:key /Pattern:abc.txt
+```
 
 在存储帐户内复制某个 blob 时，将执行[服务器端复制](http://blogs.msdn.com/b/windowsazurestorage/archive/2012/06/12/introducing-asynchronous-cross-account-copy-blob.aspx)操作。
 
 ### 跨存储帐户复制单个 blob
 
-    AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt
+```
+AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt
+```
 
 在跨存储帐户复制某个 blob 时，将执行[服务器端复制](http://blogs.msdn.com/b/windowsazurestorage/archive/2012/06/12/introducing-asynchronous-cross-account-copy-blob.aspx)操作。
 
 ### 将单个 blob 从次要区域复制到主要区域
 
-    AzCopy /Source:https://myaccount1-secondary.blob.core.chinacloudapi.cn/mynewcontainer1 /Dest:https://myaccount2.blob.core.chinacloudapi.cn/mynewcontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt
+```
+AzCopy /Source:https://myaccount1-secondary.blob.core.chinacloudapi.cn/mynewcontainer1 /Dest:https://myaccount2.blob.core.chinacloudapi.cn/mynewcontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt
+```
 
 请注意，必须已启用读取访问异地冗余存储。
 
 ### 跨存储帐户复制单个 blob 及其快照
 
-    AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt /Snapshot
+```
+AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt /Snapshot
+```
 
 在复制操作完成后，目标容器中将包括 blob 及其快照。假定上面的示例中的 blob 具有两个快照，则容器将包括以下 blob 和快照：
 
-    abc.txt
-    abc (2013-02-25 080757).txt
-    abc (2014-02-21 150331).txt
+```
+abc.txt
+abc (2013-02-25 080757).txt
+abc (2014-02-21 150331).txt
+```
 
 ### 跨存储帐户同步复制 blob
 默认情况下，AzCopy 以异步方式复制两个存储终结点之间的数据。因此，复制操作使用空闲的带宽容量在后台运行，没有规定 blob 复制速率的 SLA，AzCopy 将定期检查复制状态直到复制完成或失败。
 
 `/SyncCopy` 选项确保复制操作的速度一致。AzCopy 通过下载 blob，将 blob 从指定的源复制到本地内存，然后将上传到 Blob 存储目标，以实现同步复制。
 
-    AzCopy /Source:https://myaccount1.blob.core.chinacloudapi.cn/myContainer/ /Dest:https://myaccount2.blob.core.chinacloudapi.cn/myContainer/ /SourceKey:key1 /DestKey:key2 /Pattern:ab /SyncCopy
+```
+AzCopy /Source:https://myaccount1.blob.core.chinacloudapi.cn/myContainer/ /Dest:https://myaccount2.blob.core.chinacloudapi.cn/myContainer/ /SourceKey:key1 /DestKey:key2 /Pattern:ab /SyncCopy
+```
 
 与异步复制相比，`/SyncCopy` 可能会产生额外的对外费用，建议在与源存储帐户所在的同一区域的 Azure VM 中使用该选项，以避免对外费用。
 
@@ -226,13 +284,17 @@ AzCopy 命令的基本语法是：
 
 ### 下载单个文件
 
-    AzCopy /Source:https://myaccount.file.core.chinacloudapi.cn/myfileshare/myfolder1/ /Dest:C:\myfolder /SourceKey:key /Pattern:abc.txt
+```
+AzCopy /Source:https://myaccount.file.core.chinacloudapi.cn/myfileshare/myfolder1/ /Dest:C:\myfolder /SourceKey:key /Pattern:abc.txt
+```
 
 如果指定的源是 Azure 文件共享，则必须指定确切的文件名（ *例如* `abc.txt`）以下载单个文件，或者指定选项 `/S` 来以递归方式下载该共享中的所有文件。尝试同时指定文件模式和选项 `/S` 将导致错误。
 
 ### 下载所有文件
 
-    AzCopy /Source:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /Dest:C:\myfolder /SourceKey:key /S
+```
+AzCopy /Source:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /Dest:C:\myfolder /SourceKey:key /S
+```
 
 请注意，不会下载任何空文件夹。
 
@@ -240,39 +302,53 @@ AzCopy 命令的基本语法是：
 
 ### 上传单个文件
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /DestKey:key /Pattern:abc.txt
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /DestKey:key /Pattern:abc.txt
+```
 
 ### 上传全部文件
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /DestKey:key /S
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /DestKey:key /S
+```
 
 请注意，不会上传任何空文件夹。
 
 ### 上传与指定模式相匹配的文件
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /DestKey:key /Pattern:ab* /S
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.file.core.chinacloudapi.cn/myfileshare/ /DestKey:key /Pattern:ab* /S
+```
 
 ## 文件：复制
 
 ### 跨文件共享复制
 
-    AzCopy /Source:https://myaccount1.file.core.chinacloudapi.cn/myfileshare1/ /Dest:https://myaccount2.file.core.chinacloudapi.cn/myfileshare2/ /SourceKey:key1 /DestKey:key2 /S
+```
+AzCopy /Source:https://myaccount1.file.core.chinacloudapi.cn/myfileshare1/ /Dest:https://myaccount2.file.core.chinacloudapi.cn/myfileshare2/ /SourceKey:key1 /DestKey:key2 /S
+```
 
 ### 从文件共享复制到 blob
 
-    AzCopy /Source:https://myaccount1.file.core.chinacloudapi.cn/myfileshare/ /Dest:https://myaccount2.blob.core.chinacloudapi.cn/mycontainer/ /SourceKey:key1 /DestKey:key2 /S
+```
+AzCopy /Source:https://myaccount1.file.core.chinacloudapi.cn/myfileshare/ /Dest:https://myaccount2.blob.core.chinacloudapi.cn/mycontainer/ /SourceKey:key1 /DestKey:key2 /S
+```
 
 请注意，不支持从文件存储到页 Blob 的异步复制。
 
 ### 从 blob 复制到文件共享
 
-    AzCopy /Source:https://myaccount1.blob.core.chinacloudapi.cn/mycontainer/ /Dest:https://myaccount2.file.core.chinacloudapi.cn/myfileshare/ /SourceKey:key1 /DestKey:key2 /S
+```
+AzCopy /Source:https://myaccount1.blob.core.chinacloudapi.cn/mycontainer/ /Dest:https://myaccount2.file.core.chinacloudapi.cn/myfileshare/ /SourceKey:key1 /DestKey:key2 /S
+```
 
 ### 同步复制文件
 
 可以指定选项 `/SyncCopy`，以从文件存储到文件存储、从文件存储到 Blob 存储以及从 Blob 存储到文件存储同步复制数据，AzCopy 通过将源数据下载到本地内存并再将其上传到目标以实现此同步操作。
 
-    AzCopy /Source:https://myaccount1.file.core.chinacloudapi.cn/myfileshare1/ /Dest:https://myaccount2.file.core.chinacloudapi.cn/myfileshare2/ /SourceKey:key1 /DestKey:key2 /S /SyncCopy
+```
+AzCopy /Source:https://myaccount1.file.core.chinacloudapi.cn/myfileshare1/ /Dest:https://myaccount2.file.core.chinacloudapi.cn/myfileshare2/ /SourceKey:key1 /DestKey:key2 /S /SyncCopy
+```
 
 当从文件存储复制到 Blob 存储时，默认的 blob 类型是块 blob，用户可以指定选项 `/BlobType:page` 以更改目标 blob 类型。
 
@@ -282,19 +358,27 @@ AzCopy 命令的基本语法是：
 
 ### 导出表
 
-    AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key
+```
+AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key
+```
 
 AzCopy 将一个清单文件写入到指定的目标文件夹。在导入过程中使用该清单文件查找必要的数据文件并执行数据验证。默认情况下，清单文件使用以下命名约定：
 
-    <account name>_<table name>_<timestamp>.manifest
+```
+<account name>_<table name>_<timestamp>.manifest
+```
 
 用户还可以指定选项 `/Manifest:<manifest file name>` 以设置清单文件名。
 
-    AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key /Manifest:abc.manifest
+```
+AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key /Manifest:abc.manifest
+```
 
 ### 将导出拆分为多个文件
 
-    AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/mytable/ /Dest:C:\myfolder /SourceKey:key /S /SplitSize:100
+```
+AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/mytable/ /Dest:C:\myfolder /SourceKey:key /S /SplitSize:100
+```
 
 AzCopy 在已拆分的数据文件名称中使用 *卷索引* 来区分多个文件。卷索引由两个部分组成： *分区键范围索引* 和 *拆分文件索引* 。两个索引都是从零开始。
 
@@ -302,8 +386,10 @@ AzCopy 在已拆分的数据文件名称中使用 *卷索引* 来区分多个文
 
 例如，假设 AzCopy 在用户指定选项 `/SplitSize` 后生成了两个数据文件。生成的数据文件名称可能是：
 
-    myaccount_mytable_20140903T051850.8128447Z_0_0_C3040FE8.json
-    myaccount_mytable_20140903T051850.8128447Z_0_1_0AB9AC20.json
+```
+myaccount_mytable_20140903T051850.8128447Z_0_0_C3040FE8.json
+myaccount_mytable_20140903T051850.8128447Z_0_1_0AB9AC20.json
+```
 
 请注意，选项 `/SplitSize` 的最小可能值为 32 MB。如果指定的目标是 Blob 存储，无论用户是否指定了选项 `/SplitSize`，AzCopy 将在数据文件的大小达到 blob 的大小限制 (200 GB) 时拆分数据文件。
 
@@ -311,13 +397,17 @@ AzCopy 在已拆分的数据文件名称中使用 *卷索引* 来区分多个文
 
 默认情况下，AzCopy 会将表导出为 JSON 数据文件。可以指定选项 `/PayloadFormat:JSON|CSV` 以将表导出为 JSON 或 CSV。
 
-    AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key /PayloadFormat:CSV
+```
+AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key /PayloadFormat:CSV
+```
 
 指定 CSV 负载格式时，AzCopy 还将为每个数据文件生成文件扩展名为 `.schema.csv` 的架构文件。
 
 ### 并发导出表实体
 
-    AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key /PKRS:"aa#bb"
+```
+AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:C:\myfolder\ /SourceKey:key /PKRS:"aa#bb"
+```
 
 当用户指定了选项 `/PKRS` 时，AzCopy 将启动并发操作来导出实体。每个操作导出一个分区键范围。
 
@@ -325,11 +415,15 @@ AzCopy 在已拆分的数据文件名称中使用 *卷索引* 来区分多个文
 
 ### 将表导出到 blob
 
-    AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer/ /SourceKey:key1 /Destkey:key2
+```
+AzCopy /Source:https://myaccount.table.core.chinacloudapi.cn/myTable/ /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer/ /SourceKey:key1 /Destkey:key2
+```
 
 AzCopy 将使用以下命名约定在 blob 容器中生成一个 JSON 数据文件：
 
-    <account name>_<table name>_<timestamp>_<volume index>_<CRC>.json
+```
+<account name>_<table name>_<timestamp>_<volume index>_<CRC>.json
+```
 
 生成的 JSON 数据文件遵循最少元数据负载格式。有关此负载格式的详细信息，请参阅[表服务操作的有效负载格式](http://msdn.microsoft.com/zh-cn/library/azure/dn535600.aspx)。
 
@@ -339,7 +433,9 @@ AzCopy 将使用以下命名约定在 blob 容器中生成一个 JSON 数据文�
 
 ### 导入表
 
-    AzCopy /Source:C:\myfolder\ /Dest:https://myaccount.table.core.chinacloudapi.cn/mytable1/ /DestKey:key /Manifest:"myaccount_mytable_20140103T112020.manifest" /EntityOperation:InsertOrReplace
+```
+AzCopy /Source:C:\myfolder\ /Dest:https://myaccount.table.core.chinacloudapi.cn/mytable1/ /DestKey:key /Manifest:"myaccount_mytable_20140103T112020.manifest" /EntityOperation:InsertOrReplace
+```
 
 选项 `/EntityOperation` 指示如何将实体插入到表中。可能的值包括：
 
@@ -355,12 +451,16 @@ AzCopy 将使用以下命名约定在 blob 容器中生成一个 JSON 数据文�
 
 假定 Blob 容器包含如下内容：表示 Azure 表的 JSON 文件及其随附的清单文件。
 
-    myaccount_mytable_20140103T112020.manifest
-    myaccount_mytable_20140103T112020_0_0_0AF395F1DC42E952.json
+```
+myaccount_mytable_20140103T112020.manifest
+myaccount_mytable_20140103T112020_0_0_0AF395F1DC42E952.json
+```
 
 可以使用 blob 容器中的清单文件运行以下命令将实体导入表中：
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:https://myaccount.table.core.chinacloudapi.cn/mytable /SourceKey:key1 /DestKey:key2 /Manifest:"myaccount_mytable_20140103T112020.manifest" /EntityOperation:"InsertOrReplace"
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:https://myaccount.table.core.chinacloudapi.cn/mytable /SourceKey:key1 /DestKey:key2 /Manifest:"myaccount_mytable_20140103T112020.manifest" /EntityOperation:"InsertOrReplace"
+```
 
 ## AzCopy 的其他功能
 
@@ -368,70 +468,94 @@ AzCopy 将使用以下命名约定在 blob 容器中生成一个 JSON 数据文�
 
 `/XO` 和 `/XN` 参数分别用于阻止复制较早或较新的源资源。如果只想复制目标中不存在的源资源，可以在 AzCopy 命令中指定这两个参数：
 
-    /Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:<sourcekey> /S /XO /XN
+```
+/Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:<sourcekey> /S /XO /XN
 
-    /Source:C:\myfolder /Dest:http://myaccount.file.core.chinacloudapi.cn/myfileshare /DestKey:<destkey> /S /XO /XN
+/Source:C:\myfolder /Dest:http://myaccount.file.core.chinacloudapi.cn/myfileshare /DestKey:<destkey> /S /XO /XN
 
-    /Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:http://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /SourceKey:<sourcekey> /DestKey:<destkey> /S /XO /XN
+/Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:http://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /SourceKey:<sourcekey> /DestKey:<destkey> /S /XO /XN
+```
 
 注意：当源或目标为表时，则不支持此操作。
 
 ### 使用响应文件指定命令行参数
 
-    AzCopy /@:"C:\responsefiles\copyoperation.txt"
+```
+AzCopy /@:"C:\responsefiles\copyoperation.txt"
+```
 
 可以在响应文件中包括任何 AzCopy 命令行参数。AzCopy 会像处理在命令行上指定的参数一样处理该文件中的参数，使用该文件的内容执行直接替换。
 
 假定有一个名为 `copyoperation.txt` 的响应文件，其中包含以下行：可以在同一行或多行中指定
 
-    /Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:<sourcekey> /S /Y
+```
+/Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:<sourcekey> /S /Y
+```
 
 每个 AzCopy 参数：
 
-    /Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer
-    /Dest:C:\myfolder
-    /SourceKey:<sourcekey>
-    /S
-    /Y
+```
+/Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer
+/Dest:C:\myfolder
+/SourceKey:<sourcekey>
+/S
+/Y
+```
 
 如果将参数拆分到两行（如此处所示的 `/sourcekey` 参数），AzCopy 将会失败：
 
-    http://myaccount.blob.core.chinacloudapi.cn/mycontainer
-     C:\myfolder
-    /sourcekey:
-    <sourcekey>
-    /S
-    /Y
+```
+http://myaccount.blob.core.chinacloudapi.cn/mycontainer
+ C:\myfolder
+/sourcekey:
+<sourcekey>
+/S
+/Y
+```
 
 ### 使用多个响应文件指定命令行参数
 
 假定有一个名为 `source.txt` 的响应文件，该文件指定了一个源容器：
 
-    /Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer
+```
+/Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer
+```
 
 有一个名为 `dest.txt` 的响应文件，该文件在文件系统中指定了一个目标文件夹：
 
-    /Dest:C:\myfolder
+```
+/Dest:C:\myfolder
+```
 
 并且有一个名为 `options.txt` 的响应文件，该文件指定了 AzCopy 的选项：
 
-    /S /Y
+```
+/S /Y
+```
 
 要使用这些响应文件（都位于目录 `C:\responsefiles` 中）调用 AzCopy，请使用以下命令：
 
-    AzCopy /@:"C:\responsefiles\source.txt" /@:"C:\responsefiles\dest.txt" /SourceKey:<sourcekey> /@:"C:\responsefiles\options.txt"   
+```
+AzCopy /@:"C:\responsefiles\source.txt" /@:"C:\responsefiles\dest.txt" /SourceKey:<sourcekey> /@:"C:\responsefiles\options.txt"   
+```
 
 AzCopy 会像在命令行上包括了所有单个参数一样来处理此命令：
 
-    AzCopy /Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:<sourcekey> /S /Y
+```
+AzCopy /Source:http://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:<sourcekey> /S /Y
+```
 
 ### 指定共享访问签名 (SAS)
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceSAS:SAS1 /DestSAS:SAS2 /Pattern:abc.txt
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceSAS:SAS1 /DestSAS:SAS2 /Pattern:abc.txt
+```
 
 此外，还可以在容器 URI 上指定一个 SAS：
 
-    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1/?SourceSASToken /Dest:C:\myfolder /S
+```
+AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1/?SourceSASToken /Dest:C:\myfolder /S
+```
 
 ### 日志文件文件夹
 
@@ -441,31 +565,41 @@ AzCopy 会像在命令行上包括了所有单个参数一样来处理此命令�
 
 如果想要为日志文件使用默认位置：
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Z
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Z
+```
 
 如果省略了选项 `/Z`，或者指定了选项 `/Z` 但未指定文件夹路径（如上所示），AzCopy 则会在默认位置中创建恢复日志，默认位置为 `%SystemDrive%\Users\%username%\AppData\Local\Microsoft\Azure\AzCopy`。如果恢复日志已存在，AzCopy 则将继续根据恢复日志恢复操作。
 
 如果想要为恢复日志指定自定义位置：
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Z:C:\journalfolder\
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Z:C:\journalfolder\
+```
 
 如果恢复日志尚不存在，此示例将创建恢复日志。如果它已存在，AzCopy 则将根据该恢复日志恢复操作。
 
 如果想要恢复 AzCopy 操作：
 
-    AzCopy /Z:C:\journalfolder\
+```
+AzCopy /Z:C:\journalfolder\
+```
 
 此示例将恢复可能没有完成的上一操作。
 
 ### 生成日志文件
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /V
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /V
+```
 
 如果指定了选项 `/V` 但未提供详细日志的文件路径，AzCopy 则将在默认位置中创建日志文件，默认位置为 `%SystemDrive%\Users\%username%\AppData\Local\Microsoft\Azure\AzCopy`。
 
 或者，可以在自定义位置中创建日志文件：
 
-    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /V:C:\myfolder\azcopy1.log
+```
+AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /V:C:\myfolder\azcopy1.log
+```
 
 请注意，如果在选项 `/V` 后指定了相对路径，例如 `/V:test/azcopy1.log`，则会在当前工作目录中名为 `test` 的子文件夹内创建详细日志。
 
@@ -477,11 +611,15 @@ AzCopy 会像在命令行上包括了所有单个参数一样来处理此命令�
 
 可以针对 Blob 的 [Azure 存储模拟器](./storage-use-emulator.md)运行 AzCopy：
 
-    AzCopy /Source:https://127.0.0.1:10000/myaccount/mycontainer/ /Dest:C:\myfolder /SourceKey:key /SourceType:Blob /S
+```
+AzCopy /Source:https://127.0.0.1:10000/myaccount/mycontainer/ /Dest:C:\myfolder /SourceKey:key /SourceType:Blob /S
+```
 
 和针对表：
 
-    AzCopy /Source:https://127.0.0.1:10002/myaccount/mytable/ /Dest:C:\myfolder /SourceKey:key /SourceType:Table
+```
+AzCopy /Source:https://127.0.0.1:10002/myaccount/mytable/ /Dest:C:\myfolder /SourceKey:key /SourceType:Table
+```
 
 ##<a name="azcopy-parameters"></a> AzCopy 参数
 
@@ -825,12 +963,14 @@ AzCopy 旨在最大程度上利用计算机资源来加快数据传输，如果�
 
 可以创建属性为 `AzureStorageUseV1MD5` 的 app.config 文件 `AzCopy.exe.config`，并将其与 AzCopy.exe 分开放。
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <configuration>
-      <appSettings>
-        <add key="AzureStorageUseV1MD5" value="false"/>
-      </appSettings>
-    </configuration>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="AzureStorageUseV1MD5" value="false"/>
+  </appSettings>
+</configuration>
+```
 
 当属性“AzureStorageUseV1MD5”为 True（默认值）时，AzCopy 将使用 .NET MD5 实现；为 False 时，AzCopy 将使用兼容 FIPS 的 MD5 算法。
 

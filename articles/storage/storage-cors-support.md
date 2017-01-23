@@ -53,15 +53,17 @@ CORS 规则在服务级别设置，因此你需要分别为每个服务（Blob�
 
 下面是通过“设置服务属性”操作指定的一个 CORS 规则示例：
 
-    <Cors>    
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
-            <AllowedMethods>PUT,GET</AllowedMethods>
-            <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
-            <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
-            <MaxAgeInSeconds>200</MaxAgeInSeconds>
-        </CorsRule>
-    <Cors>
+```
+<Cors>    
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
+        <AllowedMethods>PUT,GET</AllowedMethods>
+        <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
+        <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
+        <MaxAgeInSeconds>200</MaxAgeInSeconds>
+    </CorsRule>
+<Cors>
+```
 
 下面描述了 CORS 规则中包含的每个元素：
 
@@ -97,29 +99,31 @@ Azure 存储服务支持为 **AllowedHeaders** 和 **ExposedHeaders** 两个元�
 ### 示例 – CORS 规则评估
 以下示例显示用于为存储服务设置 CORS 规则的操作的部分请求正文。有关构造请求的详细信息，请参阅[设置 Blob 服务属性](https://msdn.microsoft.com/zh-cn/library/hh452235.aspx)、[设置队列服务属性](https://msdn.microsoft.com/zh-cn/library/hh452232.aspx)和[设置表服务属性](https://msdn.microsoft.com/zh-cn/library/hh452240.aspx)。
 
-    <Cors>
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
-            <AllowedMethods>PUT,HEAD</AllowedMethods>
-            <MaxAgeInSeconds>5</MaxAgeInSeconds>
-            <ExposedHeaders>x-ms-*</ExposedHeaders>
-            <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
-        </CorsRule>
-        <CorsRule>
-            <AllowedOrigins>*</AllowedOrigins>
-            <AllowedMethods>PUT,GET</AllowedMethods>
-            <MaxAgeInSeconds>5</MaxAgeInSeconds>
-            <ExposedHeaders>x-ms-*</ExposedHeaders>
-            <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
-        </CorsRule>
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
-            <AllowedMethods>GET</AllowedMethods>
-            <MaxAgeInSeconds>5</MaxAgeInSeconds>
-            <ExposedHeaders>x-ms-*</ExposedHeaders>
-            <AllowedHeaders>x-ms-client-request-id</AllowedHeaders>
-        </CorsRule>
-    </Cors>
+```
+<Cors>
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
+        <AllowedMethods>PUT,HEAD</AllowedMethods>
+        <MaxAgeInSeconds>5</MaxAgeInSeconds>
+        <ExposedHeaders>x-ms-*</ExposedHeaders>
+        <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
+    </CorsRule>
+    <CorsRule>
+        <AllowedOrigins>*</AllowedOrigins>
+        <AllowedMethods>PUT,GET</AllowedMethods>
+        <MaxAgeInSeconds>5</MaxAgeInSeconds>
+        <ExposedHeaders>x-ms-*</ExposedHeaders>
+        <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
+    </CorsRule>
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
+        <AllowedMethods>GET</AllowedMethods>
+        <MaxAgeInSeconds>5</MaxAgeInSeconds>
+        <ExposedHeaders>x-ms-*</ExposedHeaders>
+        <AllowedHeaders>x-ms-client-request-id</AllowedHeaders>
+    </CorsRule>
+</Cors>
+```
 
 接下来，考虑以下 CORS 请求：
 

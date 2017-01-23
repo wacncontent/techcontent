@@ -27,18 +27,20 @@ ms.author: ddove
 ### 示例：将分片及其范围添加到现有的分片映射
 此示例使用 [TryGetShard](https://msdn.microsoft.com/zh-cn/library/azure/dn823929.aspx)、[CreateShard](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.createshard.aspx)、[CreateRangeMapping](https://msdn.microsoft.com/zh-cn/library/azure/dn807221.aspx#M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.RangeShardMap`1.CreateRangeMapping(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.RangeMappingCreationInfo{`0})) 方法，并创建 [ShardLocation](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardlocation.shardlocation.aspx#M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation.) 类的实例。在以下示例中，创建了一个名为 **sample\_shard\_2** 的数据库以及其中所有必要的架构对象，用于保存范围 [300, 400)。
 
-    // sm is a RangeShardMap object.
-    // Add a new shard to hold the range being added. 
-    Shard shard2 = null; 
+```
+// sm is a RangeShardMap object.
+// Add a new shard to hold the range being added. 
+Shard shard2 = null; 
 
-    if (!sm.TryGetShard(new ShardLocation(shardServer, "sample_shard_2"),out shard2)) 
-    { 
-        shard2 = sm.CreateShard(new ShardLocation(shardServer, "sample_shard_2"));  
-    } 
+if (!sm.TryGetShard(new ShardLocation(shardServer, "sample_shard_2"),out shard2)) 
+{ 
+    shard2 = sm.CreateShard(new ShardLocation(shardServer, "sample_shard_2"));  
+} 
 
-    // Create the mapping and associate it with the new shard 
-    sm.CreateRangeMapping(new RangeMappingCreationInfo<long> 
-                            (new Range<long>(300, 400), shard2, MappingStatus.Online)); 
+// Create the mapping and associate it with the new shard 
+sm.CreateRangeMapping(new RangeMappingCreationInfo<long> 
+                        (new Range<long>(300, 400), shard2, MappingStatus.Online)); 
+```
 
 可以使用 Powershell 作为替代方法来创建新的分片映射管理器。[此处](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)提供了一个示例。
 ## 为现有范围的空部分添加分片  
@@ -48,27 +50,29 @@ ms.author: ddove
 ### 示例：拆分范围并将空部分分配到新添加的分片
 已创建名为“sample\_shard\_2”的数据库以及其中所有必要的架构对象。
 
-    // sm is a RangeShardMap object.
-    // Add a new shard to hold the range we will move 
-    Shard shard2 = null; 
+```
+// sm is a RangeShardMap object.
+// Add a new shard to hold the range we will move 
+Shard shard2 = null; 
 
-    if (!sm.TryGetShard(new ShardLocation(shardServer, "sample_shard_2"),out shard2)) 
-    { 
+if (!sm.TryGetShard(new ShardLocation(shardServer, "sample_shard_2"),out shard2)) 
+{ 
 
-        shard2 = sm.CreateShard(new ShardLocation(shardServer, "sample_shard_2"));  
-    } 
+    shard2 = sm.CreateShard(new ShardLocation(shardServer, "sample_shard_2"));  
+} 
 
-    // Split the Range holding Key 25 
+// Split the Range holding Key 25 
 
-    sm.SplitMapping(sm.GetMappingForKey(25), 25); 
+sm.SplitMapping(sm.GetMappingForKey(25), 25); 
 
-    // Map new range holding [25-50) to different shard: 
-    // first take existing mapping offline 
-    sm.MarkMappingOffline(sm.GetMappingForKey(25)); 
-    // now map while offline to a different shard and take online 
-    RangeMappingUpdate upd = new RangeMappingUpdate(); 
-    upd.Shard = shard2; 
-    sm.MarkMappingOnline(sm.UpdateMapping(sm.GetMappingForKey(25), upd)); 
+// Map new range holding [25-50) to different shard: 
+// first take existing mapping offline 
+sm.MarkMappingOffline(sm.GetMappingForKey(25)); 
+// now map while offline to a different shard and take online 
+RangeMappingUpdate upd = new RangeMappingUpdate(); 
+upd.Shard = shard2; 
+sm.MarkMappingOnline(sm.UpdateMapping(sm.GetMappingForKey(25), upd)); 
+```
 
 **重要说明**：仅当你确定所更新映射的范围为空时，才使用此方法。上述方法不会检查数据中移动的范围，因此最好在代码中包含检查操作。如果要移动的范围中存在行，则实际的数据分布将与更新后的分片映射不匹配。在这种情况下，请改用[拆分/合并工具](./sql-database-elastic-scale-overview-split-and-merge.md)来执行操作。
 

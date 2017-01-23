@@ -83,28 +83,32 @@ ms.author: vturecek
 
 执行组件服务必须使用 Service Fabric 运行时中的服务类型注册。为了使执行组件服务能够运行执行组件实例，还必须向执行组件服务注册你的执行组件类型。`ActorRuntime` 注册方法将为执行组件执行此操作。
 
-    internal static class Program
+```
+internal static class Program
+{
+    private static void Main()
     {
-        private static void Main()
+        try
         {
-            try
-            {
-                ActorRuntime.RegisterActorAsync<MyActor>(
-                    (context, actorType) => new ActorService(context, actorType, () => new MyActor())).GetAwaiter().GetResult();
+            ActorRuntime.RegisterActorAsync<MyActor>(
+                (context, actorType) => new ActorService(context, actorType, () => new MyActor())).GetAwaiter().GetResult();
 
-                Thread.Sleep(Timeout.Infinite);
-            }
-            catch (Exception e)
-            {
-                ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
-                throw;
-            }
+            Thread.Sleep(Timeout.Infinite);
+        }
+        catch (Exception e)
+        {
+            ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
+            throw;
         }
     }
+}
+```
 
 如果在 Visual Studio 中从新项目开始，并且只有一个执行组件定义，那么默认情况下，在 Visual Studio 生成的代码中包含此注册。如果在服务中定义其他执行组件，则需要使用以下操作添加执行组件注册：
 
-    ActorRuntime.RegisterActorAsync<MyOtherActor>();
+```
+ActorRuntime.RegisterActorAsync<MyOtherActor>();
+```
 
 > [!TIP]
 > Service Fabric 执行组件运行时发出一些[与执行组件方法相关的事件和性能计数器](./service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters)。它们可用于进行诊断和性能监视。

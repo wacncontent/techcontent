@@ -42,42 +42,46 @@ ms.author: singhkay
 企业中常用的一种方案可能是，只允许其用户在经测试可与 LOB 应用程序兼容的特定操作系统中创建虚拟机。使用 Azure Resource Manager 策略可以通过几个步骤完成此任务。
 在此策略示例中，我们将只允许创建 Windows Server 2012 R2 数据中心虚拟机。策略定义如下所示
 
-    "if": {
-      "allOf": [
-        {
-          "field": "type",
-          "equals": "Microsoft.Compute/virtualMachines"
-        },
-        {
-          "not": {
-            "allOf": [
-              {
-                "field": "Microsoft.Compute/virtualMachines/imagePublisher",
-                "equals": "MicrosoftWindowsServer"
-              },
-              {
-                "field": "Microsoft.Compute/virtualMachines/imageOffer",
-                "equals": "WindowsServer"
-              },
-              {
-                "field": "Microsoft.Compute/virtualMachines/imageSku",
-                "equals": "2012-R2-Datacenter"
-              }
-            ]
-          }
-        }
-      ]
+```
+"if": {
+  "allOf": [
+    {
+      "field": "type",
+      "equals": "Microsoft.Compute/virtualMachines"
     },
-    "then": {
-      "effect": "deny"
+    {
+      "not": {
+        "allOf": [
+          {
+            "field": "Microsoft.Compute/virtualMachines/imagePublisher",
+            "equals": "MicrosoftWindowsServer"
+          },
+          {
+            "field": "Microsoft.Compute/virtualMachines/imageOffer",
+            "equals": "WindowsServer"
+          },
+          {
+            "field": "Microsoft.Compute/virtualMachines/imageSku",
+            "equals": "2012-R2-Datacenter"
+          }
+        ]
+      }
     }
+  ]
+},
+"then": {
+  "effect": "deny"
+}
+```
 
 可以轻松修改上述策略，以允许在虚拟机部署中使用经过以下更改的任何 Windows Server Datacenter 映像
 
-    {
-      "field": "Microsoft.Compute/virtualMachines/imageSku",
-      "like": "*Datacenter"
-    }
+```
+{
+  "field": "Microsoft.Compute/virtualMachines/imageSku",
+  "like": "*Datacenter"
+}
+```
 
 #### 虚拟机属性字段
 

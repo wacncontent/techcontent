@@ -88,11 +88,15 @@ wacn.date: 12/12/2016
 
 1. 打开命令提示符，然后将目录切换到 AzCopy 安装目录。此命令可将你切换到 64 位 Windows 客户端上的默认安装目录。
 
-        cd /d "%ProgramFiles(x86)%\Microsoft SDKs\Azure\AzCopy"
+    ```
+    cd /d "%ProgramFiles(x86)%\Microsoft SDKs\Azure\AzCopy"
+    ```
 
 1. 运行以下命令以上载该文件。指定 <blob service endpoint URL> 的 Blob 服务终结点 URL，以及 <azure_storage_account_key> 的 Azure 存储帐户密钥。
 
-        .\AzCopy.exe /Source:C:\Temp\ /Dest:<blob service endpoint URL> /datacontainer/datedimension/ /DestKey:<azure_storage_account_key> /Pattern:DimDate2.txt
+    ```
+    .\AzCopy.exe /Source:C:\Temp\ /Dest:<blob service endpoint URL> /datacontainer/datedimension/ /DestKey:<azure_storage_account_key> /Pattern:DimDate2.txt
+    ```
 
 另请参阅 [AzCopy 命令行实用程序入门][latest version of AzCopy]。
 
@@ -123,64 +127,66 @@ PolyBase 使用外部表来访问 Azure Blob 存储中的数据。由于数据�
 
 请针对你的 SQL 数据仓库数据库运行此查询。它将在 dbo 架构中创建指向 Azure Blob 存储中 DimDate2.txt 示例数据的、名为 DimDate2External 的外部表。
 
-    -- A: Create a master key.
-    -- Only necessary if one does not already exist.
-    -- Required to encrypt the credential secret in the next step.
+```
+-- A: Create a master key.
+-- Only necessary if one does not already exist.
+-- Required to encrypt the credential secret in the next step.
 
-    CREATE MASTER KEY;
+CREATE MASTER KEY;
 
-    -- B: Create a database scoped credential
-    -- IDENTITY: Provide any string, it is not used for authentication to Azure storage.
-    -- SECRET: Provide your Azure storage account key.
+-- B: Create a database scoped credential
+-- IDENTITY: Provide any string, it is not used for authentication to Azure storage.
+-- SECRET: Provide your Azure storage account key.
 
-    CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential
-    WITH
-        IDENTITY = 'user',
-        SECRET = '<azure_storage_account_key>'
-    ;
+CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential
+WITH
+    IDENTITY = 'user',
+    SECRET = '<azure_storage_account_key>'
+;
 
-    -- C: Create an external data source
-    -- TYPE: HADOOP - PolyBase uses Hadoop APIs to access data in Azure blob storage.
-    -- LOCATION: Provide Azure storage account name and blob container name.
-    -- CREDENTIAL: Provide the credential created in the previous step.
+-- C: Create an external data source
+-- TYPE: HADOOP - PolyBase uses Hadoop APIs to access data in Azure blob storage.
+-- LOCATION: Provide Azure storage account name and blob container name.
+-- CREDENTIAL: Provide the credential created in the previous step.
 
-    CREATE EXTERNAL DATA SOURCE AzureStorage
-    WITH (
-        TYPE = HADOOP,
-        LOCATION = 'wasbs://<blob_container_name>@<azure_storage_account_name>.blob.core.chinacloudapp.cn',
-        CREDENTIAL = AzureStorageCredential
-    );
+CREATE EXTERNAL DATA SOURCE AzureStorage
+WITH (
+    TYPE = HADOOP,
+    LOCATION = 'wasbs://<blob_container_name>@<azure_storage_account_name>.blob.core.chinacloudapp.cn',
+    CREDENTIAL = AzureStorageCredential
+);
 
-    -- D: Create an external file format
-    -- FORMAT_TYPE: Type of file format in Azure storage (supported: DELIMITEDTEXT, RCFILE, ORC, PARQUET).
-    -- FORMAT_OPTIONS: Specify field terminator, string delimiter, date format etc. for delimited text files.
-    -- Specify DATA_COMPRESSION method if data is compressed.
+-- D: Create an external file format
+-- FORMAT_TYPE: Type of file format in Azure storage (supported: DELIMITEDTEXT, RCFILE, ORC, PARQUET).
+-- FORMAT_OPTIONS: Specify field terminator, string delimiter, date format etc. for delimited text files.
+-- Specify DATA_COMPRESSION method if data is compressed.
 
-    CREATE EXTERNAL FILE FORMAT TextFile
-    WITH (
-        FORMAT_TYPE = DelimitedText,
-        FORMAT_OPTIONS (FIELD_TERMINATOR = ',')
-    );
+CREATE EXTERNAL FILE FORMAT TextFile
+WITH (
+    FORMAT_TYPE = DelimitedText,
+    FORMAT_OPTIONS (FIELD_TERMINATOR = ',')
+);
 
-    -- E: Create the external table
-    -- Specify column names and data types. This needs to match the data in the sample file.
-    -- LOCATION: Specify path to file or directory that contains the data (relative to the blob container).
-    -- To point to all files under the blob container, use LOCATION='.'
+-- E: Create the external table
+-- Specify column names and data types. This needs to match the data in the sample file.
+-- LOCATION: Specify path to file or directory that contains the data (relative to the blob container).
+-- To point to all files under the blob container, use LOCATION='.'
 
-    CREATE EXTERNAL TABLE dbo.DimDate2External (
-        DateId INT NOT NULL,
-        CalendarQuarter TINYINT NOT NULL,
-        FiscalQuarter TINYINT NOT NULL
-    )
-    WITH (
-        LOCATION='/datedimension/',
-        DATA_SOURCE=AzureStorage,
-        FILE_FORMAT=TextFile
-    );
+CREATE EXTERNAL TABLE dbo.DimDate2External (
+    DateId INT NOT NULL,
+    CalendarQuarter TINYINT NOT NULL,
+    FiscalQuarter TINYINT NOT NULL
+)
+WITH (
+    LOCATION='/datedimension/',
+    DATA_SOURCE=AzureStorage,
+    FILE_FORMAT=TextFile
+);
 
-    -- Run a query on the external table
+-- Run a query on the external table
 
-    SELECT count(*) FROM dbo.DimDate2External;
+SELECT count(*) FROM dbo.DimDate2External;
+```
 
 在 Visual Studio 的 SQL Server 对象资源管理器中，你可以看到外部文件格式、外部数据源和 DimDate2External 表。
 
@@ -207,9 +213,11 @@ SQL 数据仓库不会自动创建或自动更新统计信息。因此，若要�
 
 本示例将基于新的 DimDate2 表创建单列统计信息。
 
-    CREATE STATISTICS [DateId] on [DimDate2] ([DateId]);
-    CREATE STATISTICS [CalendarQuarter] on [DimDate2] ([CalendarQuarter]);
-    CREATE STATISTICS [FiscalQuarter] on [DimDate2] ([FiscalQuarter]);
+```
+CREATE STATISTICS [DateId] on [DimDate2] ([DateId]);
+CREATE STATISTICS [CalendarQuarter] on [DimDate2] ([CalendarQuarter]);
+CREATE STATISTICS [FiscalQuarter] on [DimDate2] ([FiscalQuarter]);
+```
 
 若要了解详细信息，请参阅[统计信息][]。
 

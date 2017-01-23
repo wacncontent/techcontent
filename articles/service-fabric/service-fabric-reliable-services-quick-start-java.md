@@ -43,32 +43,36 @@ ms.author: vturecek
 
 首先创建新的 Service Fabric 应用程序。适用于 Linux 的 Service Fabric SDK 包括一个 Yeoman 生成器，它为包含无状态服务的 Service Fabric 应用程序提供基架。首先，请运行以下 Yeoman 命令：
 
-    $ yo azuresfjava
+```
+$ yo azuresfjava
+```
 
 按照说明创建**可靠无状态服务**。本教程将应用程序命名为“HelloWorldApplication”，将服务命名为“HelloWorld”。结果包含 `HelloWorldApplication` 和 `HelloWorld` 的目录。
 
-    HelloWorldApplication/
-    ├── build.gradle
-    ├── HelloWorld
-    │   ├── build.gradle
-    │   └── src
-    │       └── statelessservice
-    │           ├── HelloWorldServiceHost.java
-    │           └── HelloWorldService.java
-    ├── HelloWorldApplication
-    │   ├── ApplicationManifest.xml
-    │   └── HelloWorldPkg
-    │       ├── Code
-    │       │   ├── entryPoint.sh
-    │       │   └── _readme.txt
-    │       ├── Config
-    │       │   └── _readme.txt
-    │       ├── Data
-    │       │   └── _readme.txt
-    │       └── ServiceManifest.xml
-    ├── install.sh
-    ├── settings.gradle
-    └── uninstall.sh
+```
+HelloWorldApplication/
+├── build.gradle
+├── HelloWorld
+│   ├── build.gradle
+│   └── src
+│       └── statelessservice
+│           ├── HelloWorldServiceHost.java
+│           └── HelloWorldService.java
+├── HelloWorldApplication
+│   ├── ApplicationManifest.xml
+│   └── HelloWorldPkg
+│       ├── Code
+│       │   ├── entryPoint.sh
+│       │   └── _readme.txt
+│       ├── Config
+│       │   └── _readme.txt
+│       ├── Data
+│       │   └── _readme.txt
+│       └── ServiceManifest.xml
+├── install.sh
+├── settings.gradle
+└── uninstall.sh
+```
 
 ## 实现服务
 
@@ -105,62 +109,70 @@ Service Fabric 将管理此业务流程，以便保持服务的高度可用和�
 
 `runAsync()` 中的代码必须能够根据 Service Fabric 的通知停止执行。当 Service Fabric 要求服务停止执行时，从 `runAsync()` 返回的 `CompletableFuture` 将被取消。以下示例演示如何处理取消事件：
 
-        @Override
-        protected CompletableFuture<?> runAsync() {
+```
+    @Override
+    protected CompletableFuture<?> runAsync() {
 
-            CompletableFuture<?> completableFuture = new CompletableFuture<>();
-            ExecutorService service = Executors.newFixedThreadPool(1);
+        CompletableFuture<?> completableFuture = new CompletableFuture<>();
+        ExecutorService service = Executors.newFixedThreadPool(1);
 
-            Future<?> userTask = service.submit(() -> {
-                while (!Thread.currentThread().isInterrupted()) {
-                    try
-                    {
-                       logger.log(Level.INFO, this.context().serviceName().toString());
-                       Thread.sleep(1000);
-                    }
-                    catch (InterruptedException ex)
-                    {
-                        logger.log(Level.INFO, this.context().serviceName().toString() + " interrupted. Exiting");
-                        return;
-                    }
+        Future<?> userTask = service.submit(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                try
+                {
+                   logger.log(Level.INFO, this.context().serviceName().toString());
+                   Thread.sleep(1000);
                 }
-             });
-
-            completableFuture.handle((r, ex) -> {
-                if (ex instanceof CancellationException) {
-                    userTask.cancel(true);
-                    service.shutdown();
+                catch (InterruptedException ex)
+                {
+                    logger.log(Level.INFO, this.context().serviceName().toString() + " interrupted. Exiting");
+                    return;
                 }
-                return null;
-            });
+            }
+         });
 
-            return completableFuture;
-       }
+        completableFuture.handle((r, ex) -> {
+            if (ex instanceof CancellationException) {
+                userTask.cancel(true);
+                service.shutdown();
+            }
+            return null;
+        });
+
+        return completableFuture;
+   }
+```
 
 ### 服务注册
 
 必须将服务类型注册到 Service Fabric 运行时。服务类型在 `ServiceManifest.xml` 中以及实现 `StatelessService` 的服务类中定义。服务注册在进程主入口点中执行。在本示例中，进程主入口点为 `HelloWorldServiceHost.java`：
 
-    public static void main(String[] args) throws Exception {
-        try {
-            ServiceRuntime.registerStatelessServiceAsync("HelloWorldType", (context) -> new HelloWorldService(), Duration.ofSeconds(10));
-            logger.log(Level.INFO, "Registered stateless service type HelloWorldType.");
-            Thread.sleep(Long.MAX_VALUE);
-        } 
-        catch (Exception ex) {
-            logger.log(Level.SEVERE, "Exception in registration: {0}", ex.toString());
-            throw ex;
-        }
+```
+public static void main(String[] args) throws Exception {
+    try {
+        ServiceRuntime.registerStatelessServiceAsync("HelloWorldType", (context) -> new HelloWorldService(), Duration.ofSeconds(10));
+        logger.log(Level.INFO, "Registered stateless service type HelloWorldType.");
+        Thread.sleep(Long.MAX_VALUE);
+    } 
+    catch (Exception ex) {
+        logger.log(Level.SEVERE, "Exception in registration: {0}", ex.toString());
+        throw ex;
     }
+}
+```
 
 ## 运行应用程序
 
 Yeoman 基架包含一个用于构建应用程序的 gradle 脚本，以及一个用于部署和取消部署应用程序的 bash 脚本。若要运行应用程序，请先使用 gradle 构建应用程序：
 
-    $ gradle
+```
+$ gradle
+```
 
 这会生成可以使用 Service Fabric Azure CLI 部署的 Service Fabric 应用程序包。Install.sh 脚本包含用于部署应用程序包的 Azure CLI 命令。只需运行 install.sh 脚本即可部署：
 
-    $ ./install.sh
+```
+$ ./install.sh
+```
 
 <!---HONumber=Mooncake_1121_2016-->

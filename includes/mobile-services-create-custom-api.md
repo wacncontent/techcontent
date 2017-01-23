@@ -11,17 +11,19 @@
 
 5. 单击“脚本”选项卡、将现有代码替换为以下代码，然后单击“保存”。这段代码使用 [mssql 对象] 来直接访问 **todoitem** 表，以在所有项上设置 `complete` 标志。由于使用了 **exports.post** 函数，客户端发送 POST 请求以执行操作。已更改行的数量将以整数值形式返回至客户端。
 
-        exports.post = function(request, response) {
-            var mssql = request.service.mssql;
-            var sql = "UPDATE todoitem SET complete = 1 " + 
-                "WHERE complete = 0; SELECT @@ROWCOUNT as count";
-            mssql.query(sql, {
-                success: function(results) {			
-                    if(results.length == 1)							
-                        response.send(200, results[0]);			
-                }
-            })
-        };
+    ```
+    exports.post = function(request, response) {
+        var mssql = request.service.mssql;
+        var sql = "UPDATE todoitem SET complete = 1 " + 
+            "WHERE complete = 0; SELECT @@ROWCOUNT as count";
+        mssql.query(sql, {
+            success: function(results) {			
+                if(results.length == 1)							
+                    response.send(200, results[0]);			
+            }
+        })
+    };
+    ```
 
 > [!NOTE]
 > 提供给自定义 API 函数的 [request](http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554218.aspx) 和 [response](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn303373.aspx) 对象由 [Express.js 库](http://go.microsoft.com/fwlink/p/?LinkId=309046)实现。

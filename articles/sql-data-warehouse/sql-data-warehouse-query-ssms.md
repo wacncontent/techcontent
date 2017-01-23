@@ -43,10 +43,10 @@ ms.author: elbutter;barbkess
 
     ![连接到服务器][2]  
 
-    * **服务器名称**。输入前面标识的**服务器名称**。
-    * **身份验证**。选择“SQL Server 身份验证”或“Active Directory 集成身份验证”。
-    * “用户名”和“密码”。如果上面选择了 SQL Server 身份验证，请输入用户名和密码。
-    * 单击“连接”。
+   * **服务器名称**。输入前面标识的**服务器名称**。
+   * **身份验证**。选择“SQL Server 身份验证”或“Active Directory 集成身份验证”。
+   * “用户名”和“密码”。如果上面选择了 SQL Server 身份验证，请输入用户名和密码。
+   * 单击“连接”。
 4. 若要浏览，请展开你的 Azure SQL 服务器。你可以查看与服务器关联的数据库。展开 AdventureWorksDW 以查看示例数据库中的表。
 
     ![浏览 AdventureWorksDW][3]  
@@ -61,7 +61,9 @@ ms.author: elbutter;barbkess
 
 3. 将以下 TSQL 查询复制到查询窗口中：
 
-        SELECT COUNT(*) FROM dbo.FactInternetSales;
+    ```
+    SELECT COUNT(*) FROM dbo.FactInternetSales;
+    ```
 
 4. 运行该查询。若要执行此操作，请单击 `Execute`，或使用以下快捷键：`F5`。
 

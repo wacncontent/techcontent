@@ -66,11 +66,13 @@ ms.author: jeffstok
 
 例如，你可以编写类似以下的查询：
 
-    SELECT
-        EventProcessedUtcTime,
-        EventEnqueuedUtcTime,
-        PartitionId
-    FROM Input
+```
+SELECT
+    EventProcessedUtcTime,
+    EventEnqueuedUtcTime,
+    PartitionId
+FROM Input
+```
 
 ## 创建 IoT 中心数据流输入
 
@@ -186,11 +188,13 @@ Azure Iot 中心是已针对 IoT 进行优化，具有高度可缩放性的发�
 
 例如，你可以编写类似以下的查询：
 
-    SELECT
-        BlobName,
-        EventProcessedUtcTime,
-        BlobLastModifiedUtcTime
-    FROM Input
+```
+SELECT
+    BlobName,
+    EventProcessedUtcTime,
+    BlobLastModifiedUtcTime
+FROM Input
+```
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。

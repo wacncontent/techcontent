@@ -176,13 +176,17 @@ ms.author: byvinyal
 
 2. 从 Azure PowerShell 提示符处，使用以下命令下载日志文件：
 
-        Save-AzureWebSiteLog -Name webappname
+    ```
+    Save-AzureWebSiteLog -Name webappname
+    ```
 
     这将下载 **webappname** 指定的 Web 应用的日志文件，并将这些文件保存到当前目录的 **log.zip** 文件中。
 
     还可以通过使用以下命令查看日志事件的实时流：
 
-        Get-AzureWebSiteLog -Name webappname -Tail
+    ```
+    Get-AzureWebSiteLog -Name webappname -Tail
+    ```
 
     这会在 Azure PowerShell 提示符出现时将日志信息显示给提示符。
 
@@ -190,13 +194,17 @@ ms.author: byvinyal
 
 打开新命令提示符、PowerShell、bash 或终端会话，并且使用以下命令下载日志文件：
 
-    azure site log download webappname
+```
+azure site log download webappname
+```
 
 这将下载 **webappname** 指定的 Web 应用的日志文件，并将这些文件保存到当前目录的 **log.zip** 文件中。
 
 还可以通过使用以下命令查看日志事件的实时流：
 
-    azure site log tail webappname
+```
+azure site log tail webappname
+```
 
 这会将日志信息显示给从其运行命令的命令提示符、PowerShell、bash 或终端会话。
 

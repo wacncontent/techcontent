@@ -96,7 +96,9 @@ Azure AD 直通身份验证为这些客户提供了一个简单的解决方案�
 2. 以管理员身份打开命令提示符。
 3. 运行以下命令，其中 /q 表示静默安装 — 此安装不会提示你接受最终用户许可协议。
 
-        AADApplicationProxyConnectorInstaller.exe REGISTERCONNECTOR="false" /q
+    ```
+    AADApplicationProxyConnectorInstaller.exe REGISTERCONNECTOR="false" /q
+    ```
 
 ### 步骤 2：向 Azure AD 注册连接器以进行直通身份验证
 
@@ -111,13 +113,17 @@ Azure AD 直通身份验证为这些客户提供了一个简单的解决方案�
 
 此外，可在 C:\\ProgramData\\Microsoft\\Microsoft AAD Application Proxy Connector\\Trace 中的连接器跟踪日志中查找其他信息。这些日志还包括单个用户的直通身份验证失败的原因，如下面的包括错误代码 1328 的条目：
 
-    ApplicationProxyConnectorService.exe Error: 0 : Passthrough Authentication request failed. RequestId: 'df63f4a4-68b9-44ae-8d81-6ad2d844d84e'. Reason: '1328'.
-        ThreadId=5
-        DateTime=xxxx-xx-xxTxx:xx:xx.xxxxxxZ
+```
+ApplicationProxyConnectorService.exe Error: 0 : Passthrough Authentication request failed. RequestId: 'df63f4a4-68b9-44ae-8d81-6ad2d844d84e'. Reason: '1328'.
+    ThreadId=5
+    DateTime=xxxx-xx-xxTxx:xx:xx.xxxxxxZ
+```
 
 可以通过启动命令提示符并运行以下命令来获取错误的详细信息。（将“1328”替换为请求中的错误号。）
 
-    Net helpmsg 1328
+```
+Net helpmsg 1328
+```
 
 结果如下所示。
 
@@ -125,11 +131,13 @@ Azure AD 直通身份验证为这些客户提供了一个简单的解决方案�
 
 如果启用了审核日志记录，则还可以在域控制器的安全日志中找到更多信息。对连接器的身份验证请求的简单查询如下所示：
 
-    <QueryList>
-    <Query Id="0" Path="Security">
-    <Select Path="Security">*[EventData[Data[@Name='ProcessName'] and (Data='C:\Program Files\Microsoft AAD App Proxy Connector\ApplicationProxyConnectorService.exe')]]</Select>
-    </Query>
-    </QueryList>
+```
+<QueryList>
+<Query Id="0" Path="Security">
+<Select Path="Security">*[EventData[Data[@Name='ProcessName'] and (Data='C:\Program Files\Microsoft AAD App Proxy Connector\ApplicationProxyConnectorService.exe')]]</Select>
+</Query>
+</QueryList>
+```
 
 以下列表详细描述了在 Azure AD 登录屏幕上报告的其他错误以及相应的解决方法步骤。
 

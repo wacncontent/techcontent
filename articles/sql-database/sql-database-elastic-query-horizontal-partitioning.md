@@ -46,10 +46,12 @@ ms.author: torsteng
 
 弹性查询使用此凭据连接到远程数据库。
 
-    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
-    CREATE DATABASE SCOPED CREDENTIAL <credential_name>  WITH IDENTITY = '<username>',  
-    SECRET = '<password>'
-    [;]
+```
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
+CREATE DATABASE SCOPED CREDENTIAL <credential_name>  WITH IDENTITY = '<username>',  
+SECRET = '<password>'
+[;]
+```
 
 **注意**：请确保“<username>”中不包括任何“@servername”后缀。
 
@@ -57,30 +59,36 @@ ms.author: torsteng
 
 语法：
 
-    <External_Data_Source> ::=    
-    CREATE EXTERNAL DATA SOURCE <data_source_name> WITH                               	           
-            (TYPE = SHARD_MAP_MANAGER,
-                       LOCATION = '<fully_qualified_server_name>',
-            DATABASE_NAME = ‘<shardmap_database_name>',
-            CREDENTIAL = <credential_name>, 
-            SHARD_MAP_NAME = ‘<shardmapname>’ 
-                   ) [;] 
+```
+<External_Data_Source> ::=    
+CREATE EXTERNAL DATA SOURCE <data_source_name> WITH                               	           
+        (TYPE = SHARD_MAP_MANAGER,
+                   LOCATION = '<fully_qualified_server_name>',
+        DATABASE_NAME = ‘<shardmap_database_name>',
+        CREDENTIAL = <credential_name>, 
+        SHARD_MAP_NAME = ‘<shardmapname>’ 
+               ) [;] 
+```
 
 ### 示例 
 
-    CREATE EXTERNAL DATA SOURCE MyExtSrc 
-    WITH 
-    ( 
-        TYPE=SHARD_MAP_MANAGER,
-        LOCATION='myserver.database.chinacloudapi.cn', 
-        DATABASE_NAME='ShardMapDatabase', 
-        CREDENTIAL= SMMUser, 
-        SHARD_MAP_NAME='ShardMap' 
-    );
+```
+CREATE EXTERNAL DATA SOURCE MyExtSrc 
+WITH 
+( 
+    TYPE=SHARD_MAP_MANAGER,
+    LOCATION='myserver.database.chinacloudapi.cn', 
+    DATABASE_NAME='ShardMapDatabase', 
+    CREDENTIAL= SMMUser, 
+    SHARD_MAP_NAME='ShardMap' 
+);
+```
 
 检索当前外部数据源的列表：
 
-    select * from sys.external_data_sources; 
+```
+select * from sys.external_data_sources; 
+```
 
 外部数据源引用分片映射。然后，弹性查询使用外部数据源和基础分片映射枚举数据层中参与的数据库。在弹性查询处理过程中，可使用相同的凭据读取分片映射并访问上分片的数据。
 
@@ -88,47 +96,55 @@ ms.author: torsteng
 
 语法：
 
-    CREATE EXTERNAL TABLE [ database_name . [ schema_name ] . | schema_name. ] table_name  
-        ( { <column_definition> } [ ,...n ])     
-        { WITH ( <sharded_external_table_options> ) }
-    ) [;]  
+```
+CREATE EXTERNAL TABLE [ database_name . [ schema_name ] . | schema_name. ] table_name  
+    ( { <column_definition> } [ ,...n ])     
+    { WITH ( <sharded_external_table_options> ) }
+) [;]  
 
-    <sharded_external_table_options> ::= 
-      DATA_SOURCE = <External_Data_Source>,       
-      [ SCHEMA_NAME = N'nonescaped_schema_name',] 
-      [ OBJECT_NAME = N'nonescaped_object_name',] 
-      DISTRIBUTION = SHARDED(<sharding_column_name>) | REPLICATED |ROUND_ROBIN
+<sharded_external_table_options> ::= 
+  DATA_SOURCE = <External_Data_Source>,       
+  [ SCHEMA_NAME = N'nonescaped_schema_name',] 
+  [ OBJECT_NAME = N'nonescaped_object_name',] 
+  DISTRIBUTION = SHARDED(<sharding_column_name>) | REPLICATED |ROUND_ROBIN
+```
 
 **示例**
 
-    CREATE EXTERNAL TABLE [dbo].[order_line]( 
-         [ol_o_id] int NOT NULL, 
-         [ol_d_id] tinyint NOT NULL,
-         [ol_w_id] int NOT NULL, 
-         [ol_number] tinyint NOT NULL, 
-         [ol_i_id] int NOT NULL, 
-         [ol_delivery_d] datetime NOT NULL, 
-         [ol_amount] smallmoney NOT NULL, 
-         [ol_supply_w_id] int NOT NULL, 
-         [ol_quantity] smallint NOT NULL, 
-         [ol_dist_info] char(24) NOT NULL 
-    ) 
+```
+CREATE EXTERNAL TABLE [dbo].[order_line]( 
+     [ol_o_id] int NOT NULL, 
+     [ol_d_id] tinyint NOT NULL,
+     [ol_w_id] int NOT NULL, 
+     [ol_number] tinyint NOT NULL, 
+     [ol_i_id] int NOT NULL, 
+     [ol_delivery_d] datetime NOT NULL, 
+     [ol_amount] smallmoney NOT NULL, 
+     [ol_supply_w_id] int NOT NULL, 
+     [ol_quantity] smallint NOT NULL, 
+     [ol_dist_info] char(24) NOT NULL 
+) 
 
-    WITH 
-    ( 
-        DATA_SOURCE = MyExtSrc, 
-         SCHEMA_NAME = 'orders', 
-         OBJECT_NAME = 'order_details', 
-        DISTRIBUTION=SHARDED(ol_w_id)
-    ); 
+WITH 
+( 
+    DATA_SOURCE = MyExtSrc, 
+     SCHEMA_NAME = 'orders', 
+     OBJECT_NAME = 'order_details', 
+    DISTRIBUTION=SHARDED(ol_w_id)
+); 
+```
 
 从当前数据库中检索外部表的列表：
 
-    SELECT * from sys.external_tables; 
+```
+SELECT * from sys.external_tables; 
+```
 
 删除外部表：
 
-    DROP EXTERNAL TABLE [ database_name . [ schema_name ] . | schema_name. ] table_name[;]
+```
+DROP EXTERNAL TABLE [ database_name . [ schema_name ] . | schema_name. ] table_name[;]
+```
 
 ### 备注
 
@@ -154,20 +170,22 @@ DISTRIBUTION 子句指定用于此表的数据分布。查询处理器利用 DIS
 
 下面的查询在仓库、订单和订单行之间执行三向联接，并使用多个聚合和选择性筛选器。它假定 (1) 进行水平分区（分片），(2) 对仓库、订单和订单行按仓库 ID 列进行分片，弹性查询可以在分片上共置联接，以及并行处理分片上成本较高部分的查询。
 
-    select  
-         w_id as warehouse,
-         o_c_id as customer,
-         count(*) as cnt_orderline,
-         max(ol_quantity) as max_quantity,
-         avg(ol_amount) as avg_amount, 
-         min(ol_delivery_d) as min_deliv_date
-    from warehouse 
-    join orders 
-    on w_id = o_w_id
-    join order_line 
-    on o_id = ol_o_id and o_w_id = ol_w_id 
-    where w_id > 100 and w_id < 200 
-    group by w_id, o_c_id 
+```
+select  
+     w_id as warehouse,
+     o_c_id as customer,
+     count(*) as cnt_orderline,
+     max(ol_quantity) as max_quantity,
+     avg(ol_amount) as avg_amount, 
+     min(ol_delivery_d) as min_deliv_date
+from warehouse 
+join orders 
+on w_id = o_w_id
+join order_line 
+on o_id = ol_o_id and o_w_id = ol_w_id 
+where w_id > 100 and w_id < 200 
+group by w_id, o_c_id 
+```
 
 ## 远程 T-SQL 执行的存储过程：sp\_execute\_remote
 
@@ -182,9 +200,11 @@ sp\_execute\_remote 使用调用参数中提供的外部数据源，以在远程
 
 示例：
 
-    EXEC sp_execute_remote
-        N'MyExtSrc',
-        N'select count(w_id) as foo from warehouse' 
+```
+EXEC sp_execute_remote
+    N'MyExtSrc',
+    N'select count(w_id) as foo from warehouse' 
+```
 
 ## 工具的连接  
 
