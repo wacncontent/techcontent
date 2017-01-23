@@ -62,7 +62,8 @@ Power BI Embedded 具有 Azure 标准 SLA。有关详细信息，请参阅[服�
 
 ## 什么是呈现以及它是如何计费的？
 
->[!NOTE] Power BI Embedded 在预览阶段提供了按呈现的折扣定价，但根据用户反馈，以后将停止使用这种定价方式，而采用按会话定价。从按呈现定价转换为按会话定价将从 2016 年 9 月 1 日起生效。
+>[!NOTE]
+> Power BI Embedded 在预览阶段提供了按呈现的折扣定价，但根据用户反馈，以后将停止使用这种定价方式，而采用按会话定价。从按呈现定价转换为按会话定价将从 2016 年 9 月 1 日起生效。
 
 呈现是显示给最终用户的可视元素，结果是产生对服务的查询。例如，如果一个用户查看包含 4 个视觉对象的报表，它将会产生 4 个呈现。如果用户刷新报表并且向服务发送更多的查询，它将会产生另外 4 个呈现。服务所有者将控制最终用户可以推动结果为付费呈现的新查询的程度，以限制成本风险并最小化静态数据方案中的成本。
 
@@ -98,13 +99,13 @@ Power BI Embedded 服务使用“应用令牌”进行身份验证和授权，�
 
 ## Power BI Embedded 当前支持哪些数据源？
 
-将支持通过直接查询对使用基本凭据的云数据源进行访问。这意味着目前支持的源有 Azure SQL DB 和 Azure SQL DW 等。在未来几个月中将添加对其他数据源和访问类型的支持。将在 Power BI 开发人员论坛 ([https://dev.powerbi.com](https://dev.powerbi.com/)) 上公布受支持的新数据源。
+将支持通过直接查询对使用基本凭据的云数据源进行访问。这意味着目前支持的源有 Azure SQL DB 和 Azure SQL DW 等。在未来几个月中将添加对其他数据源和访问类型的支持。将在 Power BI 开发人员论坛 ([https://dev.powerbi.com/](https://dev.powerbi.com/)) 上公布受支持的新数据源。
 
 ## Power BI Embedded 的租户模型如何工作？
 
 在 Power BI Embedded 模型中，明确要求 Azure AD 租户中必须存在客户。可以为客户选择是否需要 Azure AD。这样，应用程序的体系结构和基础结构就可以用来确定 Power BI Embedded 要求的租户模型。
 
-开发人员/员工操作或创建应用程序时将需要具有 AAD 用户帐户才能通过 Azure 门户预览管理 Azure 订阅和工作区集合。开发人员可以使用编程 API 导入报表、修改连接字符串、获取嵌入式 URL、改用应用令牌进行身份验证，因此无需使用 AAD。有关如何使用 API 和 Azure 门户预览的详细信息，请参阅 Azure.com 中的 [Power BI Embedded documentation](./index.md/)（Power BI Embedded 文档）页。
+开发人员/员工操作或创建应用程序时将需要具有 AAD 用户帐户才能通过 Azure 门户预览管理 Azure 订阅和工作区集合。开发人员可以使用编程 API 导入报表、修改连接字符串、获取嵌入式 URL、改用应用令牌进行身份验证，因此无需使用 AAD。有关如何使用 API 和 Azure 门户预览的详细信息，请参阅 Azure.com 中的 [Power BI Embedded documentation](./index.md)（Power BI Embedded 文档）页。
 
 ## 可以从何处了解详细信息？
 

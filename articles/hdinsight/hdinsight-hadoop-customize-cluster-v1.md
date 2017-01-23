@@ -21,7 +21,8 @@ ms.author: nitinme
 
 HDInsight 提供了一个称为**脚本操作**的配置选项，该脚本操作可调用自定义脚本，以定义设置过程中要在群集上执行自定义。这些脚本可用于在群集上安装额外的软件或更改群集上的应用程序配置。
 
-> [!NOTE]只有在随附 Windows 操作系统的 HDInsight 群集 3.1 或更高版本上才支持脚本操作。有关 HDInsight 群集版本的详细信息，请参阅 [HDInsight 群集版本](./hdinsight-component-versioning-v1.md)。
+> [!NOTE]
+>只有在随附 Windows 操作系统的 HDInsight 群集 3.1 或更高版本上才支持脚本操作。有关 HDInsight 群集版本的详细信息，请参阅 [HDInsight 群集版本](./hdinsight-component-versioning-v1.md)。
 
 你也可以使用多种其他方法来自定义 HDInsight 群集，例如包含其他存储帐户、更改 hadoop 配置文件（core-site.xml、hive-site.xml 等），或者将共享库（例如 Hive、Oozie）添加到群集中的共同位置。这些自定义可以通过使用 Azure PowerShell、Azure HDInsight .NET SDK 或 Azure 经典管理门户来完成。有关详细信息，请参阅[使用自定义选项在 HDInsight 中设置 Hadoop 群集][hdinsight-provision-cluster]。
 
@@ -33,7 +34,8 @@ HDInsight 提供了一个称为**脚本操作**的配置选项，该脚本操作
 
 当脚本运行时，群集进入 **ClusterCustomization** 阶段。在此阶段，脚本在系统管理员帐户下，以并行方式在群集中所有指定的节点上运行，而在节点上提供完全的系统管理员权限。
 
-> [!NOTE]因为你在 **ClusterCustomization** 阶段中于群集节点上拥有系统管理员权限，所以你可以使用脚本来运行作业，例如停止和启动服务，包括 Hadoop 相关服务。因此，在脚本中，你必须在脚本完成运行之前，确定 Ambari 服务及其他 Hadoop 相关服务已启动并且正在运行。这些服务必须在群集创建时，成功地确定群集的运行状况和状态。如果你更改群集上的任何影响这些服务的配置，必须使用所提供的帮助器函数。有关帮助器函数的详细信息，请参阅[为 HDInsight 开发脚本操作脚本][hdinsight-write-script]。
+> [!NOTE]
+>因为你在 **ClusterCustomization** 阶段中于群集节点上拥有系统管理员权限，所以你可以使用脚本来运行作业，例如停止和启动服务，包括 Hadoop 相关服务。因此，在脚本中，你必须在脚本完成运行之前，确定 Ambari 服务及其他 Hadoop 相关服务已启动并且正在运行。这些服务必须在群集创建时，成功地确定群集的运行状况和状态。如果你更改群集上的任何影响这些服务的配置，必须使用所提供的帮助器函数。有关帮助器函数的详细信息，请参阅[为 HDInsight 开发脚本操作脚本][hdinsight-write-script]。
 
 脚本的输出以及错误日志文件存储在你为群集指定的默认存储帐户中。这些日志存储在名为 **u<\\cluster-name-fragment><\\time-stamp>setuplog** 的表中。这是从群集中所有节点上（头节点和辅助节点）运行的脚本聚合的日志文件。
 
@@ -57,7 +59,7 @@ Name | 脚本
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所示：
 
     ![使用脚本操作自定义群集](./media/hdinsight-hadoop-customize-cluster-v1/HDI.CustomProvision.Page6.png "使用脚本操作自定义群集")
-    
+
     <table border='1'>
     <tr><th>属性</th><th>值</th></tr>
     <tr><td>名称</td>
@@ -73,7 +75,7 @@ Name | 脚本
     你可以添加多个脚本操作，以在群集上安装多个组件。
 
 3. 单击复选标记以开始设置群集。
-  
+
 <a name="call-scripts-using-azure-powershell" id="call_scripts_using_azure_powershell"></a>
 **从 Azure PowerShell cmdlet**
 
@@ -81,19 +83,23 @@ Name | 脚本
 
 使用以下 Azure PowerShell 命令可以在部署 HDInsight 群集时运行单个脚本操作：
 
-    $config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
+```
+$config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
 
-    $config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName –Uri http://uri.to/scriptaction.ps1 –Parameters MyScriptActionParameter -ClusterRoleCollection HeadNode,DataNode
+$config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName –Uri http://uri.to/scriptaction.ps1 –Parameters MyScriptActionParameter -ClusterRoleCollection HeadNode,DataNode
 
-    New-AzureHDInsightCluster -Config $config
+New-AzureHDInsightCluster -Config $config
+```
 
 使用以下 Azure PowerShell 命令可以在部署 HDInsight 群集时运行多个脚本操作：
 
-    $config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
+```
+$config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
 
-    $config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName1 –Uri http://uri.to/scriptaction1.ps1 –Parameters MyScriptAction1Parameters -ClusterRoleCollection HeadNode,DataNode | Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName2 –Uri http://uri.to/scriptaction2.ps1 -Parameters MyScriptAction2Parameters -ClusterRoleCollection HeadNode
+$config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName1 –Uri http://uri.to/scriptaction1.ps1 –Parameters MyScriptAction1Parameters -ClusterRoleCollection HeadNode,DataNode | Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName2 –Uri http://uri.to/scriptaction2.ps1 -Parameters MyScriptAction2Parameters -ClusterRoleCollection HeadNode
 
-    New-AzureHDInsightCluster -Config $config
+New-AzureHDInsightCluster -Config $config
+```
 
 <a name="call-scripts-using-net-sdk"></a>
 **从 HDInsight .NET SDK**
@@ -102,20 +108,24 @@ HDInsight .NET SDK 提供了 <a href="http://msdn.microsoft.com/zh-cn/library/mi
 
 1. 创建一个 Visual Studio 应用程序，然后从 Nuget 安装 SDK。在“工具”菜单中，单击“Nuget Package Manager”，然后单击“Package Manager Console”。在控制台中运行下列命令以安装程序包：
 
-        Install-Package Microsoft.WindowsAzure.Management.HDInsight
+    ```
+    Install-Package Microsoft.WindowsAzure.Management.HDInsight
+    ```
 
 2. 使用 SDK 创建群集。有关说明，请参阅[使用 .NET SDK 设置 HDInsight 群集](./hdinsight-provision-clusters-v1.md#sdk)。
 
 3. 使用 **ScriptAction** 类调用自定义脚本，如下所示：
 
-        var clusterInfo = new ClusterCreateParameters()
-        {
-            // Provide the cluster information, like
-            // name, Storage account, credentials,
-            // cluster size, and version		    
-            ...
-            ...
-        };
+    ```
+    var clusterInfo = new ClusterCreateParameters()
+    {
+        // Provide the cluster information, like
+        // name, Storage account, credentials,
+        // cluster size, and version		    
+        ...
+        ...
+    };
+    ```
 
 ## 支持 HDInsight 群集上使用的开放源代码软件
 Azure HDInsight 服务是一个弹性平台，可让你使用围绕着 Hadoop 形成的开放源代码技术生态系统，在云中生成大数据应用程序。Azure 为开放源代码技术提供一般级别的支持，如 <a href="https://www.azure.cn/support/faq/" target="_blank">Azure 支持常见问题 Web 应用</a>上的**支持范围**部分中所述。HDInsight 服务为如下所述的某些组件提供附加的支持级别。
@@ -152,5 +162,5 @@ HDInsight 服务提供多种方式来使用自定义组件。不论在群集上�
 [hdinsight-provision-cluster]: ./hdinsight-provision-clusters-v1.md
 [powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 [img-hdi-cluster-states]: ./media/hdinsight-hadoop-customize-cluster-v1/HDI-Cluster-state.png "群集设置过程中的阶段"
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

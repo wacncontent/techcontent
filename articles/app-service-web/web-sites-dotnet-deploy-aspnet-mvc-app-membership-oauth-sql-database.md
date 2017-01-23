@@ -38,7 +38,8 @@ ms.author: riande
 * 如何使用 Azure SQL 数据库在云中存储关系数据。
 * 如何部署 Web 项目，以便将数据库用于 Azure 应用服务中的 [Web 应用](./app-service-changes-existing-services.md)。
 
->[!NOTE] 本教程的篇幅较长。如果要快速了解 Azure 应用服务和 Visual Studio Web 项目，请参阅[在 Azure 应用服务中创建 ASP.NET Web 应用](./web-sites-dotnet-get-started.md)。有关疑难解答信息，请参阅[疑难解答](#troubleshooting)部分。
+>[!NOTE]
+> 本教程的篇幅较长。如果要快速了解 Azure 应用服务和 Visual Studio Web 项目，请参阅[在 Azure 应用服务中创建 ASP.NET Web 应用](./web-sites-dotnet-get-started.md)。有关疑难解答信息，请参阅[疑难解答](#troubleshooting)部分。
 
 ## 先决条件
 
@@ -57,7 +58,7 @@ ms.author: riande
 1. 在“新建项目”对话框中，展开“C#”并在“已安装的模板”下选择“Web”，然后选择“ASP.NET Web 应用程序”。将该应用程序命名为 **ContactManager**，然后单击“确定”。
 
     ![“新建项目”对话框](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/GS13newprojdb.png)
- 
+
     **注意：**请确保输入“ContactManager”。你稍后将复制的代码块假定项目名称为 ContactManager。
 
 1. 在“新建 ASP.NET 项目”对话框中，选择“MVC”模板。确认已将“身份验证”设置为“单个用户帐户”，并且已选中“在云中托管”和“应用服务”。
@@ -117,9 +118,9 @@ ms.author: riande
 1. 将 *Layout.cshtml* 文件中的 ActionLink 替换为以下代码。
 
     @Html.ActionLink("CM Demo", "Index", "Contacts", new { area = "" }, new { @class = "navbar-brand" })
-                   
+
     确保将第三个参数从“Home”更改为“Contacts”。上面的标记会在每个页面上创建一个“Contacts”链接，以转到 Contacts 控制器的 Index 方法。将页眉和页脚中的应用程序名称从“My ASP.NET Application”和“Application name”更改为“Contact Manager”和“CM Demo”。
- 
+
 ### 在本地运行应用程序
 
 1. 按 Ctrl+F5 运行应用程序。
@@ -135,7 +136,7 @@ ms.author: riande
 1. 在 Visual Studio 中，在“解决方案资源管理器”中右键单击该项目，从上下文菜单中选择“发布”。
 
     ![项目上下文菜单中的“发布”](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/GS13publish.png)
-    
+
     “发布 Web”向导将打开。
 
 1. 在“发布 Web”对话框中，单击“发布”。
@@ -157,7 +158,7 @@ ms.author: riande
     SSL URL 将为 https://localhost:44300/，除非你之前已创建 SSL Web 应用。
 
     ![启用 SSL][rxSSL]
- 
+
 1. 在“解决方案资源管理器”中，右键单击“Contact Manager”项目，然后单击“属性”。
 
 1. 单击“Web”选项卡。
@@ -165,7 +166,7 @@ ms.author: riande
 1. 将“项目 URL”更改为使用“SSL URL”，并保存页面 (Ctrl+S)。
 
     ![启用 SSL](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr1.png)
- 
+
 1. 验证 Internet Explorer 是否为 Visual Studio 所启动的浏览器，如下图所示：
 
     ![默认浏览器](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/ss12.PNG)
@@ -208,22 +209,24 @@ ms.author: riande
 
 3. 将 Contact.cs 文件的内容替换为以下代码。
 
-        using System.ComponentModel.DataAnnotations;
-        using System.Globalization;
-        namespace ContactManager.Models
+    ```
+    using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
+    namespace ContactManager.Models
+    {
+        public class Contact
         {
-            public class Contact
-            {
-                public int ContactId { get; set; }
-                public string Name { get; set; }
-                public string Address { get; set; }
-                public string City { get; set; }
-                public string State { get; set; }
-                public string Zip { get; set; }
-                [DataType(DataType.EmailAddress)]
-                public string Email { get; set; }
-            }
+            public int ContactId { get; set; }
+            public string Name { get; set; }
+            public string Address { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string Zip { get; set; }
+            [DataType(DataType.EmailAddress)]
+            public string Email { get; set; }
         }
+    }
+    ```
 **Contact** 类定义你将为每个联系人存储的数据以及数据库需要的主键 *ContactID*。
 
 ### 创建使应用程序用户可以使用联系人的网页
@@ -231,13 +234,13 @@ ms.author: riande
 ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新和删除 (CRUD) 操作的代码。
 
 1. 生成项目 **(Ctrl+Shift+B)**。（在使用基架机制前必须生成项目。）
- 
+
 1. 在“解决方案资源管理器”中，右键单击 Controllers 文件夹，单击“添加”，然后单击“控制器”。
 
     ![Controllers 文件夹上下文菜单中的“添加控制器”][addcode001]
 
 5. 在“添加基架”对话框中，选择“带视图的 MVC 5 控制器，使用 EF”，然后单击“添加”。
-    
+
     ![添加基架 dlg](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rr6.png)
 
 1. 在“模型类”下拉框中，选择“Contact (ContactManager.Models)”。（参阅下图。）
@@ -260,13 +263,17 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 2. 在“包管理器控制台”窗口中，输入以下命令：
 
-        enable-migrations
+    ```
+    enable-migrations
+    ```
 
     **enable-migrations** 命令将创建一个 *Migrations* 文件夹，并在该文件夹中放入一个可编辑以对数据库进行种子设定并配置迁移的 *Configuration.cs* 文件。
 
 2. 在“包管理器控制台”窗口中，输入以下命令：
 
-        add-migration Initial
+    ```
+    add-migration Initial
+    ```
 
     **add-migration Initial** 命令将在 *Migrations* 文件夹中生成一个名为 **&lt;date\_stamp&gt;Initial** 的文件。此文件中的代码将生成数据库表。第一个参数 (**Initial**) 用于创建文件的名称。你可以在“解决方案资源管理器”中查看新的类文件。
 
@@ -276,66 +283,72 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 4. 添加以下 `using` 语句：
 
-         using ContactManager.Models;
+    ```
+     using ContactManager.Models;
+    ```
 
 5. 将 *Seed* 方法替换为以下代码：
 
-        protected override void Seed(ContactManager.Models.ApplicationDbContext context)
-        {
-            context.Contacts.AddOrUpdate(p => p.Name,
-               new Contact
-               {
-                   Name = "Debra Garcia",
-                   Address = "1234 Main St",
-                   City = "Redmond",
-                   State = "WA",
-                   Zip = "10999",
-                   Email = "debra@example.com",
-               },
-                new Contact
-                {
-                    Name = "Thorsten Weinrich",
-                    Address = "5678 1st Ave W",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "thorsten@example.com",
-                },
-                new Contact
-                {
-                    Name = "Yuhong Li",
-                    Address = "9012 State st",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "yuhong@example.com",
-                },
-                new Contact
-                {
-                    Name = "Jon Orton",
-                    Address = "3456 Maple St",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "jon@example.com",
-                },
-                new Contact
-                {
-                    Name = "Diliana Alexieva-Bosseva",
-                    Address = "7890 2nd Ave E",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "diliana@example.com",
-                }
-                );
-        }
+    ```
+    protected override void Seed(ContactManager.Models.ApplicationDbContext context)
+    {
+        context.Contacts.AddOrUpdate(p => p.Name,
+           new Contact
+           {
+               Name = "Debra Garcia",
+               Address = "1234 Main St",
+               City = "Redmond",
+               State = "WA",
+               Zip = "10999",
+               Email = "debra@example.com",
+           },
+            new Contact
+            {
+                Name = "Thorsten Weinrich",
+                Address = "5678 1st Ave W",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "thorsten@example.com",
+            },
+            new Contact
+            {
+                Name = "Yuhong Li",
+                Address = "9012 State st",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "yuhong@example.com",
+            },
+            new Contact
+            {
+                Name = "Jon Orton",
+                Address = "3456 Maple St",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "jon@example.com",
+            },
+            new Contact
+            {
+                Name = "Diliana Alexieva-Bosseva",
+                Address = "7890 2nd Ave E",
+                City = "Redmond",
+                State = "WA",
+                Zip = "10999",
+                Email = "diliana@example.com",
+            }
+            );
+    }
+    ```
 
     此代码将用联系信息初始化数据库或对其进行种子设定。有关对数据库进行种子设定的详细信息，请参阅[对 Entity Framework (EF) 数据库进行种子设定和调试](http://blogs.msdn.com/b/rickandy/archive/2013/02/12/seeding-and-debugging-entity-framework-ef-dbs.aspx)。生成项目以验证没有任何编译错误。
 
 6. 在“包管理器控制台”窗口中，输入以下命令：
 
-        update-database
+    ```
+    update-database
+    ```
 
     ![“程序包管理器控制台”命令][addcode009]
 
@@ -349,7 +362,8 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 ## 添加 OAuth2 提供程序
 
->[!NOTE] 为了详细说明如何使用 Google 和 Facebook 开发人员门户网站，本教程提供了指向 ASP.NET 网站上的教程的链接。但是，Google 和 Facebook 更改其网站的频率比这些教程的更新频率更频繁，因此这些教程现在已过时。如果在使用这些指导时遇到困难，请参阅本教程末尾提供的 Disqus 注释以查看已更改项的列表。
+>[!NOTE]
+> 为了详细说明如何使用 Google 和 Facebook 开发人员门户网站，本教程提供了指向 ASP.NET 网站上的教程的链接。但是，Google 和 Facebook 更改其网站的频率比这些教程的更新频率更频繁，因此这些教程现在已过时。如果在使用这些指导时遇到困难，请参阅本教程末尾提供的 Disqus 注释以查看已更改项的列表。
 
 [OAuth](http://oauth.net/ "http://oauth.net/") 是一种开放协议，允许以一种简单而标准的方法从 Web、移动和桌面应用程序进行安全授权。ASP.NET MVC Internet 模板使用 OAuth 公开将 Facebook、Twitter、Google 和 Microsoft 作为身份验证提供程序。虽然本教程仅使用 Google 作为身份验证提供程序，但你可轻松修改代码以使用其中任一提供程序。实施其他提供程序的步骤与你将在本教程中看到的步骤非常类似。要将 Facebook 用作身份验证提供程序，请参阅[使用 Facebook、Twitter、LinkedIn 和 Google OAuth2 登录名创建 MVC 5 应用](http://www.asp.net/mvc/tutorials/mvc-5/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on)。
 
@@ -367,38 +381,44 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 1. 打开 *migrations\\ configuration.cs* 文件，并添加以下 `using` 语句：
 
-        using Microsoft.AspNet.Identity;
-        using Microsoft.AspNet.Identity.EntityFramework;
+    ```
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    ```
 
 1. 将以下 **AddUserAndRole** 方法添加到类：
 
-        bool AddUserAndRole(ContactManager.Models.ApplicationDbContext context)
+    ```
+    bool AddUserAndRole(ContactManager.Models.ApplicationDbContext context)
+    {
+        IdentityResult ir;
+        var rm = new RoleManager<IdentityRole>
+            (new RoleStore<IdentityRole>(context));
+        ir = rm.Create(new IdentityRole("canEdit"));
+        var um = new UserManager<ApplicationUser>(
+            new UserStore<ApplicationUser>(context));
+        var user = new ApplicationUser()
         {
-            IdentityResult ir;
-            var rm = new RoleManager<IdentityRole>
-                (new RoleStore<IdentityRole>(context));
-            ir = rm.Create(new IdentityRole("canEdit"));
-            var um = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(context));
-            var user = new ApplicationUser()
-            {
-                UserName = "user1@contoso.com",
-            };
-            ir = um.Create(user, "P_assw0rd1");
-            if (ir.Succeeded == false)
-                return ir.Succeeded;
-            ir = um.AddToRole(user.Id, "canEdit");
+            UserName = "user1@contoso.com",
+        };
+        ir = um.Create(user, "P_assw0rd1");
+        if (ir.Succeeded == false)
             return ir.Succeeded;
-        }
+        ir = um.AddToRole(user.Id, "canEdit");
+        return ir.Succeeded;
+    }
+    ```
 
 1. 从 **Seed** 方法调用新类：
 
-        protected override void Seed(ContactManager.Models.ApplicationDbContext context)
-        {
-            AddUserAndRole(context);
-            context.Contacts.AddOrUpdate(p => p.Name,
-                // Code removed for brevity
-        }
+    ```
+    protected override void Seed(ContactManager.Models.ApplicationDbContext context)
+    {
+        AddUserAndRole(context);
+        context.Contacts.AddOrUpdate(p => p.Name,
+            // Code removed for brevity
+    }
+    ```
 
     下图显示了对 *Seed* 方法所做的更改：
 
@@ -414,7 +434,9 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 1. 在调用 **SignInAsync** 之前，将以下调用添加到 **AddToRoleAsync**。
 
-        await UserManager.AddToRoleAsync(user.Id, "canEdit");
+    ```
+    await UserManager.AddToRoleAsync(user.Id, "canEdit");
+    ```
 
     上面的代码会将新注册的用户添加到“canEdit”角色，这为他们提供了对更改（编辑）数据的操作方法的访问权限。以下代码段根据上下文显示了新的代码行。
 
@@ -443,7 +465,9 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
                    if (result.Succeeded)
                    {
-                      await UserManager.AddToRoleAsync(user.Id, "canEdit");
+                  ```
+    await UserManager.AddToRoleAsync(user.Id, "canEdit");
+    ```
                       await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                       return RedirectToLocal(returnUrl);
                    }
@@ -458,7 +482,9 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 在“包装管理器控制台”中，点击向上箭头键显示以下命令：
 
-        Update-Database
+```
+    Update-Database
+```
 
 **Update-Database** 命令将运行 **Seed** 方法，而该方法将运行你前面添加的 **AddUserAndRole** 方法。**AddUserAndRole** 方法将创建用户 *user1@contoso.com*，并将其添加到 *canEdit* 角色。
 
@@ -468,71 +494,77 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 1. 打开 *App\_Start\\FilterConfig.cs* 文件，并将 *RegisterGlobalFilters* 方法替换为以下内容（其中添加了两个筛选器）：
 
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new HandleErrorAttribute());
-            filters.Add(new System.Web.Mvc.AuthorizeAttribute());
-            filters.Add(new RequireHttpsAttribute());
-        }
-        
+    ```
+    public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+    {
+        filters.Add(new HandleErrorAttribute());
+        filters.Add(new System.Web.Mvc.AuthorizeAttribute());
+        filters.Add(new RequireHttpsAttribute());
+    }
+    ```
+
     此代码将在应用程序中添加 [Authorize](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.authorizeattribute.aspx) 筛选器和 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 筛选器。[Authorize](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.authorizeattribute.aspx) 筛选器将阻止匿名用户访问应用程序的任何方法。你将使用 [AllowAnonymous](http://blogs.msdn.com/b/rickandy/archive/2012/03/23/securing-your-asp-net-mvc-4-app-and-the-new-allowanonymous-attribute.aspx) 属性选择取消几个方法中的授权要求，因此匿名用户可以登录并查看主页。[RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 要求对 Web 应用的所有访问都必须通过 HTTPS。
 
     或者，向每个控制器中添加 [Authorize](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.authorizeattribute.aspx) 和 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 属性，但最安全的做法是将这些属性应用于整个应用程序。通过全局添加这两个属性，你添加的每个新控制器和操作方法都将自动受到保护，你将无需记住应用它们。有关详细信息，请参阅[保护 ASP.NET MVC 应用和新的 AllowAnonymous 属性](http://blogs.msdn.com/b/rickandy/archive/2012/03/23/securing-your-asp-net-mvc-4-app-and-the-new-allowanonymous-attribute.aspx)。
 
 1. 将 [AllowAnonymous](http://blogs.msdn.com/b/rickandy/archive/2012/03/23/securing-your-asp-net-mvc-4-app-and-the-new-allowanonymous-attribute.aspx) 属性添加到主控制器的 **Index** 方法。[AllowAnonymous](http://blogs.msdn.com/b/rickandy/archive/2012/03/23/securing-your-asp-net-mvc-4-app-and-the-new-allowanonymous-attribute.aspx) 属性使你能够将要选择取消授权的方法加入允许列表。
 
-        public class HomeController : Controller
-        {
-          [AllowAnonymous]
-          public ActionResult Index()
-          {
-             return View();
-          }
+    ```
+    public class HomeController : Controller
+    {
+      [AllowAnonymous]
+      public ActionResult Index()
+      {
+         return View();
+      }
+    ```
 
     如果对 *AllowAnonymous* 执行全局搜索，你将看到它在 Account 控制器的登录和注册方法中使用。
 
 1. 在 *CmController.cs* 中，将 `[Authorize(Roles = "canEdit")]` 添加到 *Cm* 控制器中用于更改数据的 HttpGet 和 HttpPost 方法（Create、Edit、Delete，即除 Index 和 Details 外的每个操作方法）。下面显示了一部分已完成代码：
 
-        // GET: Cm/Create
-        [Authorize(Roles = "canEdit")]
-        public ActionResult Create()
+    ```
+    // GET: Cm/Create
+    [Authorize(Roles = "canEdit")]
+    public ActionResult Create()
+    {
+       return View(new Contact { Address = "123 N 456 W",
+        City="Great Falls", Email = "ab@cd.com", Name="Joe Smith", State="MT",
+       Zip = "59405"});
+    }
+    // POST: Cm/Create
+    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+     [Authorize(Roles = "canEdit")]
+    public ActionResult Create([Bind(Include = "ContactId,Name,Address,City,State,Zip,Email")] Contact contact)
+    {
+        if (ModelState.IsValid)
         {
-           return View(new Contact { Address = "123 N 456 W",
-            City="Great Falls", Email = "ab@cd.com", Name="Joe Smith", State="MT",
-           Zip = "59405"});
+            db.Contacts.Add(contact);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
-        // POST: Cm/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-         [Authorize(Roles = "canEdit")]
-        public ActionResult Create([Bind(Include = "ContactId,Name,Address,City,State,Zip,Email")] Contact contact)
+        return View(contact);
+    }
+    // GET: Cm/Edit/5
+    [Authorize(Roles = "canEdit")]
+    public ActionResult Edit(int? id)
+    {
+        if (id == null)
         {
-            if (ModelState.IsValid)
-            {
-                db.Contacts.Add(contact);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(contact);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-        // GET: Cm/Edit/5
-        [Authorize(Roles = "canEdit")]
-        public ActionResult Edit(int? id)
+        Contact contact = db.Contacts.Find(id);
+        if (contact == null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
+            return HttpNotFound();
         }
-        
+        return View(contact);
+    }
+    ```
+
 1. 按 Ctrl+F5 运行应用程序。
 
 1. 如果你仍然从上一个会话登录，请点击“注销”链接。
@@ -565,7 +597,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 单击“发布 Web”对话框左侧的“设置”选项卡。
 
 2. 在 **ApplicationDbContext** 下，选择在你创建项目时创建的数据库。
-   
+
 1. 在“ContactManagerContext”下，选择“执行 Code First 迁移”。
 
     ![设置](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrc2.png)
@@ -601,7 +633,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 5. 在“解决方案资源管理器”中，右键单击该项目并选择“发布”。
 
        ![项目上下文菜单中的“发布”](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/GS13publish.png)
-    
+
 4. 单击“开始预览”按钮。只会部署需要更新的文件。
 
 5. 从 Visual Studio 或门户启动 Web 应用。“Web 应用停止时无法发布”。
@@ -625,7 +657,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 单击“CM 演示”链接以导航到“Cm”控制器。或者，也可以将 *Cm* 附加到 URL。
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr4.png)
- 
+
 1. 单击“编辑”链接。
 
     你将被重定向到登录页。
@@ -643,15 +675,15 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 在“服务器资源管理器”中，导航到“Azure > SQL 数据库 > {你的数据库}”
 
 2. 右键单击数据库，然后选择“在 SQL Server 对象资源管理器中打开”。
- 
+
     ![在 SSOX 中打开](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr12.png)
- 
+
 3. 如果以前没有连接到此数据库，可能将提示你添加一个防火墙规则，以启用对当前 IP 地址的访问。将预先填充 IP 地址。只需单击“添加防火墙规则”即可启用访问。
 
     ![添加防火墙规则](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/addfirewallrule.png)
 
 3. 使用创建数据库服务器时指定的用户名和密码登录到数据库。
- 
+
 1. 右键单击“AspNetUsers”表，然后选择“查看数据”。
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr8.png)  
@@ -659,7 +691,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 记下你注册要成为 **canEdit** 角色的 Google 帐户中的 ID，并记下 *user1@contoso.com* 的 ID。这些 ID 应该是具有 **canEdit** 角色的唯一用户。（你将在下一步中对此进行验证。）
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/s2.png)
- 
+
 2. 在“SQL Server 对象资源管理器”中，右键单击“AspNetUserRoles”，然后选择“查看数据”。
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rs1.png)  
@@ -751,5 +783,5 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 [Next steps]: #nextsteps
 
 [ImportPublishSettings]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database-vs2013/ImportPublishSettings.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

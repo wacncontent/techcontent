@@ -32,11 +32,11 @@ Azure PowerShell 是一组模块，提供用于通过 Windows PowerShell 管理 
 Azure PowerShell 使用语义版本控制，这意味着如果版本 A > 版本 B，则版本 A 具有最新的 API。这还意味着主要版本的更改表示一个或多个 cmdlet 中有重大更改。例如，版本 1.7.0 是用于解决 Azure PowerShell 1.x 版本中重大更改问题的修补程序。
 
 有关 Azure PowerShell 中语义版本控制实践的详细信息，请参阅语义版本控制规范：http://semver.org
- 
+
 若要获取最新的 API，应使用版本 2.x。但是，如果针对版本 1.x 编写了脚本，而且不希望吸收 2.x [发行说明](https://github.com/Azure/azure-powershell/blob/dev/documentation/release-notes/migration-guide.2.0.0.md)中所述的版本 2.x 重大更改，则应安装 1.7.0。
 
 如果已安装配置文件模块的最新版本，并随后加载依赖于它的某个模块的早期版本，则会导致版本不匹配。解决此问题的最简单方法是从最新的 .msi 安装。.msi 会自动清理模块的较旧版本。
- 
+
 ###并行安装模块版本
 
 版本 2.1.0（以及 AzureStack 版本 1.2.6）是第一个设计为并行安装和使用的模块版本。Azure PowerShell 使用二进制模块，因此，必须打开新的 PowerShell 窗口并使用 **Import-Module** 来导入 AzureRM cmdlet 的特定版本：
@@ -58,11 +58,13 @@ Azure PowerShell 使用语义版本控制，这意味着如果版本 A > 版本 
 
 从 WebPI 安装 Azure PowerShell 1.0 和更高版本的方法与安装 0.9.x 版本是一样的。下载 [Azure PowerShell](http://aka.ms/webpi-azps) 并开始安装。如果安装了 Azure PowerShell 0.9.x，将在升级期间卸载版本 0.9.x。如果从 PowerShell 库安装了 Azure PowerShell 模块，安装程序将在安装之前自动删除这些模块，以确保 Azure PowerShell 环境一致。
 
-> [!NOTE] 如果之前从 PowerShell 库安装了 Azure 模块，安装程序将自动删除这些模块。这是为了防止混淆已安装的模块版本及其所在的位置。PowerShell 库模块通常安装在 **%ProgramFiles%\\WindowsPowerShell\\Modules** 中。相反，WebPI 安装程序会在 **%ProgramFiles(x86)%\\Microsoft SDKs\\Azure\\PowerShell** 中安装 Azure 模块。如果在安装过程中发生错误，可以手动删除 **%ProgramFiles%\\WindowsPowerShell\\Modules** 文件夹中的 Azure* 文件夹，然后重试安装。
+> [!NOTE]
+> 如果之前从 PowerShell 库安装了 Azure 模块，安装程序将自动删除这些模块。这是为了防止混淆已安装的模块版本及其所在的位置。PowerShell 库模块通常安装在 **%ProgramFiles%\\WindowsPowerShell\\Modules** 中。相反，WebPI 安装程序会在 **%ProgramFiles(x86)%\\Microsoft SDKs\\Azure\\PowerShell** 中安装 Azure 模块。如果在安装过程中发生错误，可以手动删除 **%ProgramFiles%\\WindowsPowerShell\\Modules** 文件夹中的 Azure* 文件夹，然后重试安装。
 
 安装完成后，```$env:PSModulePath``` 设置中应会有包含 Azure PowerShell cmdlet 的目录。
 
-> [!NOTE] 从 WebPI 安装时，会发生一个有关 PowerShell **$env:PSModulePath** 的已知问题。如果计算机因系统更新或其他安装而需要重启，有可能会导致更新 **$env:PSModulePath** 不包含 Azure PowerShell 的安装路径。如果发生这种情况，当你在安装或升级之后尝试使用 Azure PowerShell cmdlet 时，可能会看到“cmdlet 无法识别”消息。如果发生这种情况，重启计算机应该可以解决该问题。
+> [!NOTE]
+> 从 WebPI 安装时，会发生一个有关 PowerShell **$env:PSModulePath** 的已知问题。如果计算机因系统更新或其他安装而需要重启，有可能会导致更新 **$env:PSModulePath** 不包含 Azure PowerShell 的安装路径。如果发生这种情况，当你在安装或升级之后尝试使用 Azure PowerShell cmdlet 时，可能会看到“cmdlet 无法识别”消息。如果发生这种情况，重启计算机应该可以解决该问题。
 
 如果尝试加载或执行 cmdlet，会收到如下消息：
 
@@ -88,11 +90,13 @@ import-module "C:\\Program Files\\WindowsPowerShell\\Modules\\Azure\\XXXX\\expre
 
 在提升的 Windows PowerShell 或 PowerShell 集成脚本环境 (ISE) 提示符下，使用以下命令从 PowerShell 库安装 Azure PowerShell 1.3.0 或更高版本：
 
-    # Install the Azure Resource Manager modules from the PowerShell Gallery
-    Install-Module AzureRM
+```
+# Install the Azure Resource Manager modules from the PowerShell Gallery
+Install-Module AzureRM
 
-    # Install the Azure Service Management module from the PowerShell Gallery
-    Install-Module Azure
+# Install the Azure Service Management module from the PowerShell Gallery
+Install-Module Azure
+```
 
 ####有关这些命令的详细信息
 
@@ -111,34 +115,36 @@ import-module "C:\\Program Files\\WindowsPowerShell\\Modules\\Azure\\XXXX\\expre
 
 ###帮助入门的命令
 
-    # To make sure the Azure PowerShell module is available after you install
-    Get-Module –ListAvailable 
-    
-    # To login to Azure Resource Manager
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+# To make sure the Azure PowerShell module is available after you install
+Get-Module –ListAvailable 
 
-    # You can also use a specific Tenant if you would like a faster login experience
-    # Login-AzureRmAccount -EnvironmentName AzureChinaCloud -TenantId xxxx
+# To login to Azure Resource Manager
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
-    # To view all subscriptions for your account
-    Get-AzureRmSubscription
+# You can also use a specific Tenant if you would like a faster login experience
+# Login-AzureRmAccount -EnvironmentName AzureChinaCloud -TenantId xxxx
 
-    # To select a default subscription for your current session
-    Get-AzureRmSubscription –SubscriptionName “your sub” | Select-AzureRmSubscription
+# To view all subscriptions for your account
+Get-AzureRmSubscription
 
-    # View your current Azure PowerShell session context
-    # This session state is only applicable to the current session and will not affect other sessions
-    Get-AzureRmContext
+# To select a default subscription for your current session
+Get-AzureRmSubscription –SubscriptionName “your sub” | Select-AzureRmSubscription
 
-    # To select the default storage context for your current session
-    Set-AzureRmCurrentStorageAccount –ResourceGroupName “your resource group” –StorageAccountName “your storage account name”
+# View your current Azure PowerShell session context
+# This session state is only applicable to the current session and will not affect other sessions
+Get-AzureRmContext
 
-    # View your current Azure PowerShell session context
-    # Note: the CurrentStorageAccount is now set in your session context
-    Get-AzureRmContext
+# To select the default storage context for your current session
+Set-AzureRmCurrentStorageAccount –ResourceGroupName “your resource group” –StorageAccountName “your storage account name”
 
-    # To list all of the blobs in all of your containers in all of your accounts
-    Get-AzureRmStorageAccount | Get-AzureStorageContainer | Get-AzureStorageBlob
+# View your current Azure PowerShell session context
+# Note: the CurrentStorageAccount is now set in your session context
+Get-AzureRmContext
+
+# To list all of the blobs in all of your containers in all of your accounts
+Get-AzureRmStorageAccount | Get-AzureStorageContainer | Get-AzureStorageBlob
+```
 
 ## <a name="Connect"></a> 步骤 3：连接
 cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订阅，可以购买一个。有关说明，请参阅[如何购买 Azure](https://www.azure.cn/pricing/overview/)。
@@ -151,9 +157,12 @@ cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订
 
 登录到你的工作帐户或学校帐户：
 
-    $cred = Get-Credential
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $cred
-> [!NOTE] 如果你的组织帐户有多个关联的租户，请指定 TenantId 参数：
+```
+$cred = Get-Credential
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $cred
+```
+> [!NOTE]
+> 如果你的组织帐户有多个关联的租户，请指定 TenantId 参数：
 
     $loadersubscription = Get-AzureRmSubscription -SubscriptionName $YourSubscriptionName -TenantId $YourAssociatedSubscriptionTenantId
 

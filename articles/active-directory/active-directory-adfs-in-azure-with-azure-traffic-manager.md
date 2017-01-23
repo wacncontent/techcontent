@@ -70,11 +70,11 @@ ms.author: anandy;billmath
     * 优先级
     * 性能
     * 加权
-    
+
     **性能**是用于实现高响应 AD FS 基础结构的建议选项。但是，可以选择最适合部署需求的任何路由方法。AD FS 功能不受所选路由选项的影响。有关详细信息，请参阅[流量管理器流量路由方法](../traffic-manager/traffic-manager-routing-methods.md)。在上面的示例屏幕快照中，可以看到已选择“性能”方法。
-   
-3.	**配置终结点：**在流量管理器页中，单击终结点，然后选择“添加”。这将打开类似于以下屏幕快照的“添加终结点”页
- 
+
+3. **配置终结点：**在流量管理器页中，单击终结点，然后选择“添加”。这将打开类似于以下屏幕快照的“添加终结点”页
+
     ![配置终结点](./media/active-directory-adfs-in-azure-with-azure-traffic-manager/eastfsendpoint.png)  
 
     对于不同的输入，请遵循以下指南：
@@ -89,12 +89,13 @@ ms.author: anandy;billmath
 
     针对想要 Azure 流量管理器将流量路由到其中的每个地理区域，添加终结点。
     有关详细信息和如何在流量管理器中添加/配置终结点的详细步骤，请参阅[添加、禁用、启用或删除终结点](../traffic-manager/traffic-manager-endpoints.md)
-    
+
 4. **配置探测：**在流量管理器页中，单击“配置”。在配置页中，需要更改监视设置，以在 HTTP 端口 80 和相对路径 /adfs/probe 探测
 
     ![配置探测](./media/active-directory-adfs-in-azure-with-azure-traffic-manager/mystsconfig.png)  
 
-    >[!NOTE] **确保完成配置时，终结点的状态为“联机”**。如果所有终结点都处于“降级”状态，Azure 流量管理器会尽量尝试路由流量，但前提是诊断不正确，并且所有终结点都可访问。
+    >[!NOTE]
+    > **确保完成配置时，终结点的状态为“联机”**。如果所有终结点都处于“降级”状态，Azure 流量管理器会尽量尝试路由流量，但前提是诊断不正确，并且所有终结点都可访问。
 
 5. **修改 Azure 流量管理器的 DNS 记录：**联合身份验证服务应该是 Azure 流量管理器 DNS 名称的 CNAME。在公共 DNS 记录中创建 CNAME，以使尝试访问联合身份验证服务的人员实际访问 Azure 流量管理器。
 
@@ -113,11 +114,11 @@ ms.author: anandy;billmath
 ###AD FS 登录测试
 
 若要测试 AD FS，最简单的方法是使用 IdpInitiatedSignon.aspx 页。若要执行此操作，必须在 AD FS 属性中启用 IdpInitiatedSignOn。请遵循以下步骤来验证你的 AD FS 设置
- 
+
 1. 使用 PowerShell 在 AD FS 服务器上运行以下 cmdlet，以将它设置为启用。
-    
+
     Set-AdfsProperties -EnableIdPInitiatedSignonPage $true
-    
+
 2. 从任何外部计算机访问 https://<yourfederationservicedns>/adfs/ls/IdpInitiatedSignon.aspx
 
 3. 你应会看到如下所示的 AD FS 页：

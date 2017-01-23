@@ -61,11 +61,13 @@ ms.author: rachelap
 
 有关可设置 CORS 属性的 Azure Resource Manager 模板的示例，请打开[本教程的示例应用程序存储库中的 azuredeploy.json 文件](https://github.com/azure-samples/app-service-api-dotnet-todo-list/blob/master/azuredeploy.json)。找到如以下示例中所示的模板部分：
 
-        "cors": {
-            "allowedOrigins": [
-                "todolistangular.chinacloudsites.cn"
-            ]
-        }
+```
+    "cors": {
+        "allowedOrigins": [
+            "todolistangular.chinacloudsites.cn"
+        ]
+    }
+```
 
 ## <a id="tutorialstart"></a>继续学习 .NET 入门教程
 
@@ -79,24 +81,26 @@ ms.author: rachelap
 
 在 [ToDoList 示例应用程序](https://github.com/Azure-Samples/app-service-api-dotnet-todo-list)中，ToDoListAngular 项目是一个简单的 AngularJS 客户端，它调用中间层 ToDoListAPI Web API 项目。*app/scripts/todoListSvc.js* 文件中的 JavaScript 代码使用 AngularJS HTTP 提供程序调用 API。
 
-        angular.module('todoApp')
-        .factory('todoListSvc', ['$http', function ($http) {
+```
+    angular.module('todoApp')
+    .factory('todoListSvc', ['$http', function ($http) {
 
-            $http.defaults.useXDomain = true;
-            delete $http.defaults.headers.common['X-Requested-With']; 
-        
-            return {
-                getItems : function(){
-                    return $http.get(apiEndpoint + '/api/TodoList');
-                },
+        $http.defaults.useXDomain = true;
+        delete $http.defaults.headers.common['X-Requested-With']; 
 
-                /* Get by ID, Put, and Delete methods not shown */
+        return {
+            getItems : function(){
+                return $http.get(apiEndpoint + '/api/TodoList');
+            },
 
-                postItem : function(item){
-                    return $http.post(apiEndpoint + '/api/TodoList', item);
-                }
-            };
-        }]);
+            /* Get by ID, Put, and Delete methods not shown */
+
+            postItem : function(item){
+                return $http.post(apiEndpoint + '/api/TodoList', item);
+            }
+        };
+    }]);
+```
 
 ### 为 ToDoListAngular 项目创建新的 Web 应用
 
@@ -140,33 +144,37 @@ ms.author: rachelap
 
     用于获取设置值的代码位于 *index.cshtml* 中：
 
-        <script type="text/javascript">
-            var apiEndpoint = "@System.Configuration.ConfigurationManager.AppSettings["toDoListAPIURL"]";
-        </script>
-        <script src="app/scripts/todoListSvc.js"></script>
+    ```
+    <script type="text/javascript">
+        var apiEndpoint = "@System.Configuration.ConfigurationManager.AppSettings["toDoListAPIURL"]";
+    </script>
+    <script src="app/scripts/todoListSvc.js"></script>
+    ```
 
     *todoListSvc.js* 中的代码使用该设置：
 
-        return {
-            getItems : function(){
-                return $http.get(apiEndpoint + '/api/TodoList');
-            },
-            getItem : function(id){
-                return $http.get(apiEndpoint + '/api/TodoList/' + id);
-            },
-            postItem : function(item){
-                return $http.post(apiEndpoint + '/api/TodoList', item);
-            },
-            putItem : function(item){
-                return $http.put(apiEndpoint + '/api/TodoList/', item);
-            },
-            deleteItem : function(id){
-                return $http({
-                    method: 'DELETE',
-                    url: apiEndpoint + '/api/TodoList/' + id
-                });
-            }
-        };
+    ```
+    return {
+        getItems : function(){
+            return $http.get(apiEndpoint + '/api/TodoList');
+        },
+        getItem : function(id){
+            return $http.get(apiEndpoint + '/api/TodoList/' + id);
+        },
+        postItem : function(item){
+            return $http.post(apiEndpoint + '/api/TodoList', item);
+        },
+        putItem : function(item){
+            return $http.put(apiEndpoint + '/api/TodoList/', item);
+        },
+        deleteItem : function(id){
+            return $http({
+                method: 'DELETE',
+                url: apiEndpoint + '/api/TodoList/' + id
+            });
+        }
+    };
+    ```
 
 ### 将 ToDoListAngular Web 项目部署到新 Web 应用
 
@@ -219,10 +227,11 @@ ms.author: rachelap
 ## 应用服务 CORS 与 Web API CORS
 
 在 Web API 项目中，可以安装 [Microsoft.AspNet.WebApi.Cors](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Cors/) NuGet 包，以便在代码中指定 API 接受来自哪些域的 JavaScript 调用。
- 
+
 Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码中可为不同操作方法指定不同的接受来源，但对于应用服务 CORS，只能为所有 API 应用的方法指定一组接受的来源。
 
-> [!NOTE] 请不要尝试在一个 API 应用中同时使用 Web API CORS 和应用服务 CORS。否则，会优先使用应用服务 CORS，而 Web API CORS 不起作用。例如，如果在应用服务中启用一个来源域，同时在 Web API 代码中启用所有来源域，则 Azure API 应用仅接受来自 Azure 中指定的域的调用。
+> [!NOTE]
+> 请不要尝试在一个 API 应用中同时使用 Web API CORS 和应用服务 CORS。否则，会优先使用应用服务 CORS，而 Web API CORS 不起作用。例如，如果在应用服务中启用一个来源域，同时在 Web API 代码中启用所有来源域，则 Azure API 应用仅接受来自 Azure 中指定的域的调用。
 
 ### 如何在 Web API 代码中启用 CORS
 
@@ -232,40 +241,44 @@ Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码�
 
 1. 在 **WebApiConfig** 类的 **Register** 方法中添加 `config.EnableCors()` 代码行，如以下示例中所示。
 
-        public static class WebApiConfig
+    ```
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
         {
-            public static void Register(HttpConfiguration config)
-            {
-                // Web API configuration and services
-                
-                // The following line enables you to control CORS by using Web API code
-                config.EnableCors();
-    
-                // Web API routes
-                config.MapHttpAttributeRoutes();
-    
-                config.Routes.MapHttpRoute(
-                    name: "DefaultApi",
-                    routeTemplate: "api/{controller}/{id}",
-                    defaults: new { id = RouteParameter.Optional }
-                );
-            }
+            // Web API configuration and services
+
+            // The following line enables you to control CORS by using Web API code
+            config.EnableCors();
+
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
         }
+    }
+    ```
 
 1. 在 Web API 控制器中，为 `System.Web.Http.Cors` 命名空间添加 `using` 语句，将 `EnableCors` 属性添加到控制器类或各个操作方法。在以下示例中，CORS 支持适用于整个控制器。
 
-        namespace ToDoListAPI.Controllers 
-        {
-            [HttpOperationExceptionFilterAttribute]
-            [EnableCors(origins:"https://todolistangular0121.chinacloudsites.cn", headers:"accept,content-type,origin,x-my-header", methods: "get,post")]
-            public class ToDoListController : ApiController
- 
+    ```
+    namespace ToDoListAPI.Controllers 
+    {
+        [HttpOperationExceptionFilterAttribute]
+        [EnableCors(origins:"https://todolistangular0121.chinacloudsites.cn", headers:"accept,content-type,origin,x-my-header", methods: "get,post")]
+        public class ToDoListController : ApiController
+    ```
+
 ## 将 Azure API 管理与 API 应用配合使用
 
 如果将 Azure API 管理与 API 应用配合使用，请在 API 管理而不是 API 应用中配置 CORS。有关详细信息，请参阅以下资源：
 
 * [API Management cross domain policies](https://msdn.microsoft.com/zh-cn/library/azure/dn894084.aspx#CORS)（API 管理跨域策略）
- 
+
 ## 故障排除
 
 如果在学习本教程的过程中遇到问题，请参考下面列出的一些故障排除思路。

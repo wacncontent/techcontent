@@ -75,7 +75,7 @@ ms.author: cherylmc
 ## <a name="config"></a>为 ExpressRoute 配置现有的经典 VNet
 
 如果你已经有一个经典的 VNet，则可将其配置为在经典管理门户中连接到 ExpressRoute。设置如以上部分所述，因此请通读这些部分以熟悉所需设置。如果想要创建 ExpressRoute/站点到站点共存连接，请参阅[此文](./expressroute-howto-coexist-classic.md)以了解相关步骤。这些步骤不同于本文中的步骤。
- 
+
 1. 需要先创建本地网络，然后才能更新 VNet 设置的其余部分。若要创建新的本地网络（这是通过经典管理门户配置 ExpressRoute 所必需的），请单击“新建”>“网络服务”>“虚拟网络”>“添加本地网络”。按照向导步骤创建本地网络。
 
 2. 使用“配置”页更新 VNet 的设置的其余部分，并将 VNet 关联到本地网络。
@@ -84,7 +84,7 @@ ms.author: cherylmc
 
 ## 后续步骤
 
-- 如果要将虚拟机添加到虚拟网络，请参阅[虚拟机学习路径](../virtual-machines/index.md/)。
+- 如果要将虚拟机添加到虚拟网络，请参阅[虚拟机学习路径](../virtual-machines/index.md)。
 - 如果要了解有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 概述](./expressroute-introduction.md)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

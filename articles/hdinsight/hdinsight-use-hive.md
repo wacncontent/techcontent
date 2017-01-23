@@ -62,30 +62,38 @@ Hive 知道如何处理结构化和半结构化数据，例如字段以特定字
 
 本示例使用 *log4j* 示例文件，该文件存储在 Blob 存储容器的 **/example/data/sample.log** 中。该文件中的每个日志都由一行字段组成，其中包含一个用于显示类型和严重性的 `[LOG LEVEL]` 字段，例如：
 
-    2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```
+2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```
 
 在前面的示例中，日志级别为 ERROR。
 
-> [!NOTE] 也可以使用 [Apache Log4j](http://zh.wikipedia.org/wiki/Log4j) 日志记录工具生成 log4j 文件，然后将该文件上传到 Blob 容器。请参阅[将数据上传到 HDInsight](./hdinsight-upload-data.md) 以了解相关说明。有关如何将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](./hdinsight-hadoop-use-blob-storage.md)。
+> [!NOTE]
+> 也可以使用 [Apache Log4j](http://zh.wikipedia.org/wiki/Log4j) 日志记录工具生成 log4j 文件，然后将该文件上传到 Blob 容器。请参阅[将数据上传到 HDInsight](./hdinsight-upload-data.md) 以了解相关说明。有关如何将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](./hdinsight-hadoop-use-blob-storage.md)。
 
 示例数据存储在 Azure Blob 存储中，HDInsight 将其用作默认文件系统。HDInsight 可以使用 **wasb** 前缀来访问存储在 Blob 中的文件。例如，若要访问 sample.log 文件，可使用以下语法：
 
-    wasbs:///example/data/sample.log
+```
+wasbs:///example/data/sample.log
+```
 
 Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL 中的 **/example/data/sample.log** 访问该文件。
 
-> [!NOTE] 语法 **wasbs:///** 用于访问存储在 HDInsight 群集的默认存储容器中的文件。如果你在预配群集时指定了其他存储帐户，并且想要访问存储在这些帐户中的文件，可以通过指定容器名称和存储帐户地址来访问数据，例如： **wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/sample.log**。
+> [!NOTE]
+> 语法 **wasbs:///** 用于访问存储在 HDInsight 群集的默认存储容器中的文件。如果你在预配群集时指定了其他存储帐户，并且想要访问存储在这些帐户中的文件，可以通过指定容器名称和存储帐户地址来访问数据，例如： **wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/sample.log**。
 
 ##<a id="job"></a>示例作业：将列投影到分隔数据
 
 以下 HiveQL 语句将列投影到 **wasbs:///example/data** 目录中存储的分隔数据：
 
-    set hive.execution.engine=tez;
-    DROP TABLE log4jLogs;
-    CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
-    ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
-    STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
-    SELECT t4 AS sev, COUNT(*) AS count FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log' GROUP BY t4;
+```
+set hive.execution.engine=tez;
+DROP TABLE log4jLogs;
+CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
+STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
+SELECT t4 AS sev, COUNT(*) AS count FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log' GROUP BY t4;
+```
 
 在上例中，HiveQL 语句执行以下操作：
 
@@ -98,15 +106,18 @@ Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL �
 * **SELECT**：选择 **t4** 列表包含值 **[ERROR]** 的所有行的计数。这应会返回值 **3**，因为有三个行包含此值。
 * **INPUT\_\_FILE\_\_NAME LIKE '%.log'** - 告知 Hive 我们应只返回以 .log 结尾的文件中的数据。此项将搜索限定于包含数据的 sample.log 文件，并阻止搜索返回与所定义架构不匹配的其他示例数据文件中的数据。
 
-> [!NOTE] 如果想要通过外部源（例如自动化数据上传过程）或其他 MapReduce 操作更新基础数据，并且始终希望 Hive 查询使用最新数据，则应该使用外部表。<p>删除外部表**不会**删除数据，只会删除表定义。
+> [!NOTE]
+> 如果想要通过外部源（例如自动化数据上传过程）或其他 MapReduce 操作更新基础数据，并且始终希望 Hive 查询使用最新数据，则应该使用外部表。<p>删除外部表**不会**删除数据，只会删除表定义。
 
 创建外部表后，以下语句可用于创建**内部**表。
 
-    set hive.execution.engine=tez;
-    CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
-    STORED AS ORC;
-    INSERT OVERWRITE TABLE errorLogs
-    SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
+```
+set hive.execution.engine=tez;
+CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
+STORED AS ORC;
+INSERT OVERWRITE TABLE errorLogs
+SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
+```
 
 这些语句可执行以下操作：
 
@@ -114,13 +125,15 @@ Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL �
 * **STORED AS ORC**：以优化行纵栏表 (ORC) 格式存储数据。这是高度优化且有效的 Hive 数据存储格式。
 * **INSERT OVERWRITE ...SELECT**：从包含 **[ERROR]** 的 **log4jLogs** 表中选择行，然后将数据插入 **errorLogs** 表中。
 
-> [!NOTE] 与外部表不同，删除内部表会同时删除基础数据。
+> [!NOTE]
+> 与外部表不同，删除内部表会同时删除基础数据。
 
 ##<a id="usetez"></a>使用 Apache Tez 提高性能
 
 [Apache Tez](http://tez.apache.org) 是让数据密集型应用程序（例如 Hive）能够大规模高效运行的框架。在最新版的 HDInsight 中，Hive 支持在 Tez 上运行。
 
-> [!NOTE] 对于基于 Windows 的 HDInsight 群集来说，Tez 目前默认处于关闭状态，因此必须启用。为了使用 Tez，必须为 Hive 查询设置以下值：<p>```set hive.execution.engine=tez;``` <p>将此值置于查询的开头可以按每个查询提交它。也可以在创建群集时通过设置配置值，将此值设置为在群集上默认打开。可以在[预配 HDInsight 群集](./hdinsight-provision-clusters-v1.md)中找到详细信息。
+> [!NOTE]
+> 对于基于 Windows 的 HDInsight 群集来说，Tez 目前默认处于关闭状态，因此必须启用。为了使用 Tez，必须为 Hive 查询设置以下值：<p>```set hive.execution.engine=tez;``` <p>将此值置于查询的开头可以按每个查询提交它。也可以在创建群集时通过设置配置值，将此值设置为在群集上默认打开。可以在[预配 HDInsight 群集](./hdinsight-provision-clusters-v1.md)中找到详细信息。
 
 [Tez 上的 Hive 设计文档](https://cwiki.apache.org/confluence/display/Hive/Hive+on+Tez)包含有关实现选项和优化配置的详细信息。
 

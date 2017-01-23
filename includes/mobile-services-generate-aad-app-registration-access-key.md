@@ -1,5 +1,5 @@
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中单击目录页上的“应用程序”选项卡。
-  
+
 2. 单击集成的应用程序注册。
 
 3. 单击应用程序页上的“配置”，然后向下滚动到页的“密钥”部分。
@@ -30,5 +30,5 @@
     </table><br/>
 
     ![](./media/mobile-services-generate-aad-app-registration-access-key/aad-app-settings.png)
-  
+
 <!---HONumber=Mooncake_0118_2016-->

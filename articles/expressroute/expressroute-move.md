@@ -46,7 +46,8 @@ ms.author: ganesr
 - 无论是在 Resource Manager 部署模型还是经典部署模型中创建的，ExpressRoute 线路始终都可以访问 Resource Manager 部署模型。这意味着，你可以根据[如何链接虚拟网络](./expressroute-howto-linkvnet-arm.md)中的说明，与 Resource Manager 部署模型中创建的虚拟网络建立连接。
 - 对经典部署模型的访问权限由 ExpressRoute 线路中的 **allowClassicOperations** 参数控制。
 
->[!IMPORTANT] 将应用[服务限制](../azure-subscription-service-limits.md)页中所述的所有配额。例如，标准线路最多可以有 10 个跨经典部署模型和 Resource Manager 部署模型的虚拟网络链接/连接。
+>[!IMPORTANT]
+> 将应用[服务限制](../azure-subscription-service-limits.md)页中所述的所有配额。例如，标准线路最多可以有 10 个跨经典部署模型和 Resource Manager 部署模型的虚拟网络链接/连接。
 
 ## 控制对经典部署模型的访问权限
 

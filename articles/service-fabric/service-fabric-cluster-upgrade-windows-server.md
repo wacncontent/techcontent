@@ -31,7 +31,8 @@ ms.author: chackdan
 
 为此，可将“fabricClusterAutoupgradeEnabled”群集配置设置为 true 或 false。
 
->[!NOTE] 请确保群集始终运行受支持的 Service Fabric 版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
+>[!NOTE]
+> 请确保群集始终运行受支持的 Service Fabric 版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
 
 仅当使用的是生产形式的节点配置（每个 Service Fabric 节点在独立的物理机或虚拟机上分配）时，才可以将群集升级到最新版本。如果使用的是开发群集（单个物理机或虚拟机上有多个 Service Fabric 节点），则必须先解除该群集，然后使用新版本重新创建该群集。
 
@@ -48,26 +49,30 @@ ms.author: chackdan
 “对当前群集版本 [版本号] 的支持将在 [日期] 结束”。群集运行最新版本后，该警告将会消失。
 
 #### 群集升级工作流。
- 
+
 看到群集运行状况警告后，需要执行以下操作：
 
 1. 从对群集配置文件中列为节点的所有计算机拥有管理员访问权限的任何计算机连接到该群集。运行此脚本的计算机不必要是群集的一部分
 
-        ###### connect to the secure cluster using certs
-        $ClusterName= "mysecurecluster.something.com:19000"
-        $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7FG2D630F8F3" 
-        Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveIntervalInSec 10 `
-            -X509Credential `
-            -ServerCertThumbprint $CertThumbprint  `
-            -FindType FindByThumbprint `
-            -FindValue $CertThumbprint `
-            -StoreLocation CurrentUser `
-            -StoreName My
+    ```
+    ###### connect to the secure cluster using certs
+    $ClusterName= "mysecurecluster.something.com:19000"
+    $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7FG2D630F8F3" 
+    Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveIntervalInSec 10 `
+        -X509Credential `
+        -ServerCertThumbprint $CertThumbprint  `
+        -FindType FindByThumbprint `
+        -FindValue $CertThumbprint `
+        -StoreLocation CurrentUser `
+        -StoreName My
+    ```
 
 2. 获取可升级到的 Service Fabric 版本列表
 
-        ###### Get the list of available service fabric versions 
-        Get-ServiceFabricRegisteredClusterCodeVersion
+    ```
+    ###### Get the list of available service fabric versions 
+    Get-ServiceFabricRegisteredClusterCodeVersion
+    ```
 
     应会看到类似于下面的输出：
 
@@ -75,12 +80,14 @@ ms.author: chackdan
 
 3. 开始使用 [Start-ServiceFabricClusterUpgrade PowerShell 命令](https://msdn.microsoft.com/zh-cn/library/mt125872.aspx)，将群集升级到可用的版本之一
 
-        Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion <codeversion#> -Monitored -FailureAction Rollback
+    ```
+    Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion <codeversion#> -Monitored -FailureAction Rollback
 
-        ###### Here is a filled out example
+    ###### Here is a filled out example
 
-        Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion 5.3.301.9590 -Monitored -FailureAction Rollback
-    
+    Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion 5.3.301.9590 -Monitored -FailureAction Rollback
+    ```
+
     可以在 Service Fabric Explorer 中或者通过运行以下 PowerShell 命令来监视升级进度
 
     Get-ServiceFabricClusterUpgrade
@@ -93,59 +100,74 @@ ms.author: chackdan
 
 如果群集节点**未**与 [http://download.microsoft.com](http://download.microsoft.com) 建立 Internet 连接，可以使用以下步骤将群集升级到支持的版本
 
->[!NOTE]如果运行的群集未连接到 Internet，必须关注 Service Fabric 团队博客获取有关新版的通知。在此情况下，系统**不会**发出任何群集运行状况警告。
+>[!NOTE]
+>如果运行的群集未连接到 Internet，必须关注 Service Fabric 团队博客获取有关新版的通知。在此情况下，系统**不会**发出任何群集运行状况警告。
 
 1. 请修改群集配置，将以下属性设置为 false。
 
-        "fabricClusterAutoupgradeEnabled": false,
+    ```
+    "fabricClusterAutoupgradeEnabled": false,
+    ```
 
 然后开始升级配置。有关用法详细信息，请参阅 [Start-ServiceFabricClusterUpgrade PS 命令](https://msdn.microsoft.com/zh-cn/library/mt125872.aspx)。群集清单版本是 clusterConfig.JSON 中指定的版本。请务必在开始升级配置之前更新该版本。
 
-    Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureAction Rollback -Monitored 
+```
+Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureAction Rollback -Monitored 
+```
 
 #### 群集升级工作流。
- 
+
 1. 通过 [Create service fabric cluster for windows server](./service-fabric-cluster-creation-for-windows-server.md)（创建适用于 Windows Server 的 Service Fabric 群集）下载最新的包版本
 
 1. 从对群集配置文件中列为节点的所有计算机拥有管理员访问权限的任何计算机连接到该群集。运行此脚本的计算机不必要是群集的一部分
 
-        ###### connect to the cluster
-        $ClusterName= "mysecurecluster.something.com:19000"
-        $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7FG2D630F8F3" 
-        Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveIntervalInSec 10 `
-            -X509Credential `
-            -ServerCertThumbprint $CertThumbprint  `
-            -FindType FindByThumbprint `
-            -FindValue $CertThumbprint `
-            -StoreLocation CurrentUser `
-            -StoreName My
+    ```
+    ###### connect to the cluster
+    $ClusterName= "mysecurecluster.something.com:19000"
+    $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7FG2D630F8F3" 
+    Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveIntervalInSec 10 `
+        -X509Credential `
+        -ServerCertThumbprint $CertThumbprint  `
+        -FindType FindByThumbprint `
+        -FindValue $CertThumbprint `
+        -StoreLocation CurrentUser `
+        -StoreName My
+    ```
 
 2. 将下载的包复制到群集映像存储中。
 
-        ###### Get the list of available service fabric versions 
-        Copy-ServiceFabricClusterPackage -Code -CodePackagePath <name of the .cab file including the path to it> -ImageStoreConnectionString "fabric:ImageStore"
+    ```
+    ###### Get the list of available service fabric versions 
+    Copy-ServiceFabricClusterPackage -Code -CodePackagePath <name of the .cab file including the path to it> -ImageStoreConnectionString "fabric:ImageStore"
 
-        ###### Here is a filled out example
-        Copy-ServiceFabricClusterPackage -Code -CodePackagePath .\MicrosoftAzureServiceFabric.5.3.301.9590.cab -ImageStoreConnectionString "fabric:ImageStore"
+    ###### Here is a filled out example
+    Copy-ServiceFabricClusterPackage -Code -CodePackagePath .\MicrosoftAzureServiceFabric.5.3.301.9590.cab -ImageStoreConnectionString "fabric:ImageStore"
+    ```
 
 2. 注册复制的包
 
-        ###### Get the list of available service fabric versions 
-        Register-ServiceFabricClusterPackage -Code -CodePackagePath <name of the .cab file> 
+    ```
+    ###### Get the list of available service fabric versions 
+    Register-ServiceFabricClusterPackage -Code -CodePackagePath <name of the .cab file> 
 
-        ###### Here is a filled out example
-        Register-ServiceFabricClusterPackage -Code -CodePackagePath MicrosoftAzureServiceFabric.5.3.301.9590.cab
+    ###### Here is a filled out example
+    Register-ServiceFabricClusterPackage -Code -CodePackagePath MicrosoftAzureServiceFabric.5.3.301.9590.cab
+    ```
 
 3. 开始将群集升级到可用的版本之一。
 
-        Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion <codeversion#> -Monitored -FailureAction Rollback
+    ```
+    Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion <codeversion#> -Monitored -FailureAction Rollback
 
-        ###### Here is a filled out example
-        Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion 5.3.301.9590 -Monitored -FailureAction Rollback
-        
+    ###### Here is a filled out example
+    Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion 5.3.301.9590 -Monitored -FailureAction Rollback
+    ```
+
 可以在 Service Fabric Explorer 中或者通过运行以下 PowerShell 命令来监视升级进度
 
-        Get-ServiceFabricClusterUpgrade
+```
+    Get-ServiceFabricClusterUpgrade
+```
 
 如果不符合现行的群集运行状况策略，则回滚升级。此时，可以指定自定义运行状况策略。有关 start-serviceFabricClusterUpgrade 命令的详细信息，请参阅[此文档](https://msdn.microsoft.com/zh-cn/library/mt125872.aspx)。
 

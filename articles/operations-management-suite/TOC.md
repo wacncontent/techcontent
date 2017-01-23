@@ -62,4 +62,3 @@
 #### [Update Management](oms-solution-update-management.md)
 ### Security & compliance
 #### [Antimalware Assessment](../log-analytics/log-analytics-malware.md?toc=%2fazure%2foperations-management-suite%2ftoc.json)
-

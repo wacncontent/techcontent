@@ -23,7 +23,8 @@ ms.author: cbrooks
 
 可以通过调用[设置 Blob 服务属性](https://msdn.microsoft.com/zh-cn/library/hh452235.aspx)、[设置队列服务属性](https://msdn.microsoft.com/zh-cn/library/hh452232.aspx)和[设置表服务属性](https://msdn.microsoft.com/zh-cn/library/hh452240.aspx)，分别为每个存储服务设置 CORS 规则。为服务设置 CORS 规则后，将会对从另一个域对服务发出的经过正确身份验证的请求进行评估，以根据你指定的规则确定是否允许该请求。
 
->[!NOTE] 请注意，CORS 不是一种身份验证机制。在启用 CORS 的情况下针对存储资源发出的任何请求必须具有适当的身份验证签名，或者必须是针对公共资源发出的。
+>[!NOTE]
+> 请注意，CORS 不是一种身份验证机制。在启用 CORS 的情况下针对存储资源发出的任何请求必须具有适当的身份验证签名，或者必须是针对公共资源发出的。
 
 ## 了解 CORS 请求
 来自源域的 CORS 请求可能由两个单独的请求组成：
@@ -52,15 +53,17 @@ CORS 规则在服务级别设置，因此你需要分别为每个服务（Blob�
 
 下面是通过“设置服务属性”操作指定的一个 CORS 规则示例：
 
-    <Cors>    
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
-            <AllowedMethods>PUT,GET</AllowedMethods>
-            <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
-            <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
-            <MaxAgeInSeconds>200</MaxAgeInSeconds>
-        </CorsRule>
-    <Cors>
+```
+<Cors>    
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
+        <AllowedMethods>PUT,GET</AllowedMethods>
+        <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
+        <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
+        <MaxAgeInSeconds>200</MaxAgeInSeconds>
+    </CorsRule>
+<Cors>
+```
 
 下面描述了 CORS 规则中包含的每个元素：
 
@@ -96,29 +99,31 @@ Azure 存储服务支持为 **AllowedHeaders** 和 **ExposedHeaders** 两个元�
 ### 示例 – CORS 规则评估
 以下示例显示用于为存储服务设置 CORS 规则的操作的部分请求正文。有关构造请求的详细信息，请参阅[设置 Blob 服务属性](https://msdn.microsoft.com/zh-cn/library/hh452235.aspx)、[设置队列服务属性](https://msdn.microsoft.com/zh-cn/library/hh452232.aspx)和[设置表服务属性](https://msdn.microsoft.com/zh-cn/library/hh452240.aspx)。
 
-    <Cors>
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
-            <AllowedMethods>PUT,HEAD</AllowedMethods>
-            <MaxAgeInSeconds>5</MaxAgeInSeconds>
-            <ExposedHeaders>x-ms-*</ExposedHeaders>
-            <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
-        </CorsRule>
-        <CorsRule>
-            <AllowedOrigins>*</AllowedOrigins>
-            <AllowedMethods>PUT,GET</AllowedMethods>
-            <MaxAgeInSeconds>5</MaxAgeInSeconds>
-            <ExposedHeaders>x-ms-*</ExposedHeaders>
-            <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
-        </CorsRule>
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
-            <AllowedMethods>GET</AllowedMethods>
-            <MaxAgeInSeconds>5</MaxAgeInSeconds>
-            <ExposedHeaders>x-ms-*</ExposedHeaders>
-            <AllowedHeaders>x-ms-client-request-id</AllowedHeaders>
-        </CorsRule>
-    </Cors>
+```
+<Cors>
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
+        <AllowedMethods>PUT,HEAD</AllowedMethods>
+        <MaxAgeInSeconds>5</MaxAgeInSeconds>
+        <ExposedHeaders>x-ms-*</ExposedHeaders>
+        <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
+    </CorsRule>
+    <CorsRule>
+        <AllowedOrigins>*</AllowedOrigins>
+        <AllowedMethods>PUT,GET</AllowedMethods>
+        <MaxAgeInSeconds>5</MaxAgeInSeconds>
+        <ExposedHeaders>x-ms-*</ExposedHeaders>
+        <AllowedHeaders>x-ms-blob-content-type, x-ms-blob-content-disposition</AllowedHeaders>
+    </CorsRule>
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com</AllowedOrigins>
+        <AllowedMethods>GET</AllowedMethods>
+        <MaxAgeInSeconds>5</MaxAgeInSeconds>
+        <ExposedHeaders>x-ms-*</ExposedHeaders>
+        <AllowedHeaders>x-ms-client-request-id</AllowedHeaders>
+    </CorsRule>
+</Cors>
+```
 
 接下来，考虑以下 CORS 请求：
 
@@ -135,7 +140,8 @@ Azure 存储服务支持为 **AllowedHeaders** 和 **ExposedHeaders** 两个元�
 
 第三个请求与第二条规则中的源域和方法相匹配，因此不再评估其他规则。但是，第二条规则不允许 *x-ms-client-request-id header* 标头，因此，尽管第三条规则的语义允许它成功，但该请求仍然失败。
 
->[!NOTE] 虽然此示例先显示一个限制性较弱的规则，然后显示一个限制性更强的规则，但通常情况下，最佳做法是先列出限制性最强的规则。
+>[!NOTE]
+> 虽然此示例先显示一个限制性较弱的规则，然后显示一个限制性更强的规则，但通常情况下，最佳做法是先列出限制性最强的规则。
 
 ## 了解如何设置 Vary 标头
 *Vary* 标头是一个由一组请求标头字段组成的标准 HTTP/1.1 标头，这些字段可告知浏览器或用户代理服务器选择用于处理该请求的条件。*Vary* 标头主要用于代理、浏览器和 CDN 缓存，它们使用该标头来确定应如何缓存响应。有关详细信息，请参阅 [Vary 标头](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)的规范。

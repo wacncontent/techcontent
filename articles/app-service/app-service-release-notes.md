@@ -42,7 +42,7 @@ ms.author: juliako
     - 改进了对 Hive 作业的调试。现在，访问 Visual Studio 中的 Yarn 日志即可调试 Hive 作业。如果应用程序存在性能问题，查看 YARN 日志可以获取有用信息。
     - （公开预览版）针对 Hive 的关键字自动完成功能和 IntelliSense 支持。用于 Visual Studio 的 HDInsight 工具增加了针对 Hive 的关键字自动完成功能和 IntelliSense 支持，方便用户创作 Hive 脚本。
     - Storm 支持。现在可通过用于 Visual Studio 的 HDInsight 工具在 C# 中开发 Storm 拓扑/Spout/Bolt。然后即可将已开发拓扑提交到 Storm 群集，并查看拓扑/bolt/spout 状态。可以通过系统日志和客户日志对 Storm 拓扑/Bolt/Spout 进行故障排除。也可使用 Storm on HDInsight 中的现有 JAVA 资产。
-    
+
     有关详细信息，请参阅 [用于 Visual Studio 的 HDInsight Hadoop 工具入门](../hdinsight/hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 ##<a id="known_issues_2_5_1"></a> 用于 .NET 2.5.1 的 Azure SDK 的已知问题和限制

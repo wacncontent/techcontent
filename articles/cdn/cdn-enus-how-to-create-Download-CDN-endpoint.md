@@ -58,13 +58,13 @@ The Azure CDN sets default cache rules (see below) for Download Acceleration. Yo
     If the origin domain type is a storage account, the corresponding return to source host header is:
 
     ![007](./media/cdn-doc/download-en-003.png)  
-    
+
     If the origin domain type is a custom origin domain, the corresponding return to source host header is:
 
     ![013](./media/cdn-doc/download-en-004.png)
-    
+
 8. In “ICP Number,” enter the corresponding ICP record number for the custom domain that you entered (e.g., Jing ICP Bei XXXXXXXX Hao-X).
-     
+
     ![009](./media/cdn-doc/download-en-005.png)
 
 9. Click “Create” to create the new endpoint.

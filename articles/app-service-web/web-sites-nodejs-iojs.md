@@ -32,7 +32,8 @@ GitHub 上提供了 [io.js 部署脚本]。若要在 Web 应用上启用 io.js�
 
 第一个文件 **.deployment** 指示 Web 应用在部署后要运行 **deploy.cmd**。此脚本将针对 Node.js 应用程序运行所有常见步骤，但还会下载最新版本的 io.js。最后，**IISNode.yml** 将 Web 应用配置为使用刚刚下载的 io.js 二进制文件，而不是预装的 Node.js 二进制文件。
 
-> [!NOTE]若要更新使用的 io.js 二进制文件，只需重新部署你的应用程序 - 每次部署应用程序后，脚本将下载 io.js 的新版本。
+> [!NOTE]
+>若要更新使用的 io.js 二进制文件，只需重新部署你的应用程序 - 每次部署应用程序后，脚本将下载 io.js 的新版本。
 
 <a id="manualinstallation"></a>
 ## 使用手动安装
@@ -41,14 +42,17 @@ GitHub 上提供了 [io.js 部署脚本]。若要在 Web 应用上启用 io.js�
 
 若要将 Web 应用配置为使用 **iojs.exe** 而不是预装的 Node 版本，请在应用程序的根目录中创建一个 **IISNode.yml** 文件，并添加以下行。
 
-    nodeProcessCommandLine: "D:\home\site\wwwroot\bin\iojs\iojs.exe"
+```
+nodeProcessCommandLine: "D:\home\site\wwwroot\bin\iojs\iojs.exe"
+```
 
 <a id="nextsteps"></a>
 ## 后续步骤
 
 在本文中，你已学习如何使用提供的部署脚本以及手动安装方法，将 io.js 与 App Service Web 应用配合使用。
 
-> [!NOTE]io.js 正在紧张的开发中，其更新频率超过了 Node.js。许多 Node.js 模块可能并不适用于 io.js - 若要进行故障排除，请查阅 [GitHub 上的 io.js]。
+> [!NOTE]
+>io.js 正在紧张的开发中，其更新频率超过了 Node.js。许多 Node.js 模块可能并不适用于 io.js - 若要进行故障排除，请查阅 [GitHub 上的 io.js]。
 
 [io.js]: https://iojs.org
 [io.js 分发包]: https://iojs.org/dist/

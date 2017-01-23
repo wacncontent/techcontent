@@ -20,7 +20,8 @@ ms.author: cephalin
 
 # 使用 Azure 流量管理器控制 Azure Web 应用流量
 
-> [!NOTE]因为 Azure 流量管理器与 Azure App Service Web 应用相关，本文提供了有关 Azure 流量管理器的摘要信息。有关 Azure Traffic Manager 本身的更多信息，请访问本文结尾处的链接。
+> [!NOTE]
+>因为 Azure 流量管理器与 Azure App Service Web 应用相关，本文提供了有关 Azure 流量管理器的摘要信息。有关 Azure Traffic Manager 本身的更多信息，请访问本文结尾处的链接。
 
 ## 介绍
 你可以使用 Azure 流量管理器控制如何将来自 Web 客户端的请求分发到 Azure App Service。将 Web 应用终结点添加到 Azure 流量管理器配置文件后，Azure 流量管理器会跟踪 Web 应用的状态（正在运行、已停止或已删除），这样它就能确定那些终结点中有哪些应该接收流量。
@@ -29,9 +30,9 @@ ms.author: cephalin
 Azure 流量管理器使用三种不同的负载均衡方法。以下列表描述了与 Azure Web 应用相关的这些方法。
 
 * **故障转移**：如果你在不同区域有克隆的 Web 应用，可使用此方法配置一个 Web 应用来服务所有的 Web 客户端流量，并配置另一区域的另一 Web 应用在前一个Web 应用不可用时服务该流量。 
-    
+
 * **轮循机制**：如果你在不同区域有克隆的 Web 应用，可使用此方法在不同区域的 Web 应用间均等地分布流量。
-    
+
 * **性能**：“性能”方法根据到客户端的最短往返行程时间来分布流量。“性能”方法可用于同一区域或不同区域中的 Web 应用。
 
 有关 Azure 流量管理器中负载均衡的详细信息，请参阅[关于流量管理器负载均衡方法](../traffic-manager/traffic-manager-routing-methods.md)。
@@ -62,5 +63,5 @@ Azure 流量管理器使用三种不同的负载均衡方法。以下列表描�
 有关 Azure 流量管理器中负载均衡的详细信息，请参阅[关于流量管理器负载均衡方法](../traffic-manager/traffic-manager-routing-methods.md)。
 
 有关将流量管理器用于 Web 应用的详细信息，请参阅博客文章[将 Azure 流量管理器用于 Azure Web 应用](http://blogs.msdn.com/b/waws/archive/2014/03/18/using-windows-azure-traffic-manager-with-waws.aspx)和 [Azure 流量管理器现在可以与 Azure Web 应用集成](http://azure.microsoft.com/blog/2014/03/27/azure-traffic-manager-can-now-integrate-with-azure-web-sites/)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

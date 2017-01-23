@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-database-include-connection-string-20-portalshots.md
 
@@ -16,7 +15,7 @@ Latest Freshness check:  2015-09-02 , GeneMi.
 2. 在“SQL 数据库”边栏选项卡左上角附近的筛选器文本框中输入你的数据库的名称。
 
 3. 单击数据库所对应的行。
- 
+
     ![用于隔离数据库的筛选器][10-FilterDatabase]
 
 5. 单击“查看 ADO .Net、ODBC、PHP 和 JDBC 的 SQL 数据库连接字符串”。

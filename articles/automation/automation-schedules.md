@@ -40,7 +40,8 @@ ms.author: mgoedtel
 
 可以使用经典管理门户或 Windows PowerShell 为 Runbook 创建新计划。也可以在使用 Azure 经典管理门户将 Runbook 链接到计划时，选择创建新计划。
 
->[!NOTE] 将计划与 Runbook 相关联时，自动化会将模块的当前版本存储在你的帐户中，并将模块链接到该计划。这意味着，如果在创建计划时你的帐户中有 1.0 版的模块，然后将模块更新到版本 2.0，该计划将继续使用 1.0 版。若要使用更新后的模块版本，必须创建新计划。
+>[!NOTE]
+> 将计划与 Runbook 相关联时，自动化会将模块的当前版本存储在你的帐户中，并将模块链接到该计划。这意味着，如果在创建计划时你的帐户中有 1.0 版的模块，然后将模块更新到版本 2.0，该计划将继续使用 1.0 版。若要使用更新后的模块版本，必须创建新计划。
 
 ### 在 Azure 经典管理门户中创建新计划
 
@@ -57,10 +58,12 @@ ms.author: mgoedtel
 
 以下示例命令演示了如何使用 Azure 服务管理 cmdlet 创建一个从 2015 年 1 月 20 日开始在每天下午 3:30 运行的新计划。
 
-    $automationAccountName = "MyAutomationAccount"
-    $scheduleName = "Sample-DailySchedule"
-    New-AzureAutomationSchedule -AutomationAccountName $automationAccountName -Name `
-    $scheduleName -StartTime "1/20/2016 15:30:00" -DayInterval 1
+```
+$automationAccountName = "MyAutomationAccount"
+$scheduleName = "Sample-DailySchedule"
+New-AzureAutomationSchedule -AutomationAccountName $automationAccountName -Name `
+$scheduleName -StartTime "1/20/2016 15:30:00" -DayInterval 1
+```
 
 ## 将计划链接到 Runbook
 
@@ -81,12 +84,14 @@ ms.author: mgoedtel
 
 以下示例命令演示了如何使用带参数的 Azure 服务管理 cmdlet 链接计划。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Test-Runbook"
-    $scheduleName = "Sample-DailySchedule"
-    $params = @{"FirstName"="Joe";"LastName"="Smith";"RepeatCount"=2;"Show"=$true}
-    Register-AzureAutomationScheduledRunbook -AutomationAccountName $automationAccountName `
-    -Name $runbookName -ScheduleName $scheduleName -Parameters $params
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Test-Runbook"
+$scheduleName = "Sample-DailySchedule"
+$params = @{"FirstName"="Joe";"LastName"="Smith";"RepeatCount"=2;"Show"=$true}
+Register-AzureAutomationScheduledRunbook -AutomationAccountName $automationAccountName `
+-Name $runbookName -ScheduleName $scheduleName -Parameters $params
+```
 
 ## 禁用计划
 
@@ -107,10 +112,12 @@ ms.author: mgoedtel
 
 以下示例命令演示了如何使用 Azure 服务管理 cmdlet 禁用计划。
 
-    $automationAccountName = "MyAutomationAccount"
-    $scheduleName = "Sample-DailySchedule"
-    Set-AzureAutomationSchedule -AutomationAccountName $automationAccountName `
-    -Name $scheduleName -IsEnabled $false
+```
+$automationAccountName = "MyAutomationAccount"
+$scheduleName = "Sample-DailySchedule"
+Set-AzureAutomationSchedule -AutomationAccountName $automationAccountName `
+-Name $scheduleName -IsEnabled $false
+```
 
 ## 后续步骤
 

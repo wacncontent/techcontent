@@ -21,17 +21,19 @@ ms.author: marsma
 
 与许多 Azure 服务一样，Batch 服务也会在某些资源的生命周期内针对这些资源生成日志事件。可以启用 Azure Batch 诊断日志来记录资源（诸如池和任务）的事件，然后使用日志进行进行诊断评估和监视。Batch 诊断日志中包括诸如池创建、池删除、任务启动、任务完成之类的事件和其他事件。
 
->[!NOTE] 本文讨论了 Batch 帐户资源本身的日志记录事件，没有讨论作业和任务输出数据。有关如何存储作业和任务的输出数据的详细信息，请参阅[保存 Azure Batch 作业和任务输出](./batch-task-output.md)。
+>[!NOTE]
+> 本文讨论了 Batch 帐户资源本身的日志记录事件，没有讨论作业和任务输出数据。有关如何存储作业和任务的输出数据的详细信息，请参阅[保存 Azure Batch 作业和任务输出](./batch-task-output.md)。
 
 ## 先决条件
 
 * [Azure Batch 帐户](./batch-account-create-portal.md)
 
-* [Azure 存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)
+* [Azure 存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)
 
   若要暂留 Batch 诊断日志，必须创建一个将用来存储日志的 Azure 存储帐户。可以在为 Batch 帐户[启用诊断日志记录](#enable-diagnostic-logging)时指定此存储帐户。启用日志收集时指定的存储帐户与[应用程序包](./batch-application-packages.md)和[任务输出暂留](./batch-task-output.md)文章中所提到的链接存储帐户不是同一个。
 
-  >[!WARNING] 对于存储在 Azure 存储帐户中的数据，将会向你**收费**。这包括本文中讨论的诊断日志。在设计日志保留策略时请记住这一点。
+  >[!WARNING]
+  > 对于存储在 Azure 存储帐户中的数据，将会向你**收费**。这包括本文中讨论的诊断日志。在设计日志保留策略时请记住这一点。
 
 ## 启用诊断日志记录  <a name="enable-diagnostic-logging"></a>
 
@@ -43,25 +45,27 @@ Azure Batch 服务日志包含 Azure Batch 服务在 Batch 资源（诸如池或
 
 json
 
-    {
-        "poolId": "myPool1",
-        "displayName": "Production Pool",
-        "vmSize": "Small",
-        "cloudServiceConfiguration": {
-            "osFamily": "4",
-            "targetOsVersion": "*"
-        },
-        "networkConfiguration": {
-            "subnetId": " "
-        },
-        "resizeTimeout": "300000",
-        "targetDedicated": 2,
-        "maxTasksPerNode": 1,
-        "vmFillType": "Spread",
-        "enableAutoscale": false,
-        "enableInterNodeCommunication": false,
-        "isAutoPool": false
-    }
+```
+{
+    "poolId": "myPool1",
+    "displayName": "Production Pool",
+    "vmSize": "Small",
+    "cloudServiceConfiguration": {
+        "osFamily": "4",
+        "targetOsVersion": "*"
+    },
+    "networkConfiguration": {
+        "subnetId": " "
+    },
+    "resizeTimeout": "300000",
+    "targetDedicated": 2,
+    "maxTasksPerNode": 1,
+    "vmFillType": "Spread",
+    "enableAutoscale": false,
+    "enableInterNodeCommunication": false,
+    "isAutoPool": false
+}
+```
 
 每个事件正文都位于指定 Azure 存储帐户中的一个 .json 文件中。
 

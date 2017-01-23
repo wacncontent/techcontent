@@ -39,11 +39,15 @@ ms.author: kumud
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到经典模式，如下所示。
 
-        azure config mode asm
+    ```
+    azure config mode asm
+    ```
 
     预期输出：
 
-        info:    New mode is asm
+    ```
+    info:    New mode is asm
+    ```
 
 ## 创建终结点和负载均衡器集
 
@@ -54,69 +58,79 @@ ms.author: kumud
 
 使用 `azure network vm endpoint create` 为虚拟机“web1”创建第一个终结点和负载均衡器集。
 
-    azure vm endpoint create web1 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
+```
+azure vm endpoint create web1 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
+```
 
 ## 步骤 2
 
 将第二个虚拟机“web2”添加到负载均衡器集。
 
-    azure vm endpoint create web2 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
+```
+azure vm endpoint create web2 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
+```
 
 ## 步骤 3
 
 使用 `azure vm show` 验证负载均衡器配置。
 
-    azure vm show web1
+```
+azure vm show web1
+```
 
 输出将为：
 
-    data:    DNSName "contoso.chinacloudapp.cn"
-    data:    Location "China East"
-    data:    VMName "web1"
-    data:    IPAddress "10.0.0.5"
-    data:    InstanceStatus "ReadyRole"
-    data:    InstanceSize "Standard_D1"
-    data:    Image "a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-R2-2015
-    6-en.us-127GB.vhd"
-    data:    OSDisk hostCaching "ReadWrite"
-    data:    OSDisk name "joaoma-1-web1-0-201509251804250879"
-    data:    OSDisk mediaLink "https://XXXXXXXXXXXXXXX.blob.core.chinacloudapi.cn
-    /vhds/joaomatest-web1-2015-09-25.vhd"
-    data:    OSDisk sourceImageName "a699494373c04fc0bc8f2bb1389d6106__Windows-Se
-    r-2012-R2-20150916-en.us-127GB.vhd"
-    data:    OSDisk operatingSystem "Windows"
-    data:    OSDisk iOType "Standard"
-    data:    ReservedIPName ""
-    data:    VirtualIPAddresses 0 address "XXXXXXXXXXXXXXXX"
-    data:    VirtualIPAddresses 0 name "XXXXXXXXXXXXXXXXXXXX"
-    data:    VirtualIPAddresses 0 isDnsProgrammed true
-    data:    Network Endpoints 0 loadBalancedEndpointSetName "lbset"
-    data:    Network Endpoints 0 localPort 80
-    data:    Network Endpoints 0 name "tcp-80-80"
-    data:    Network Endpoints 0 port 80
-    data:    Network Endpoints 0 loadBalancerProbe port 80
-    data:    Network Endpoints 0 loadBalancerProbe protocol "tcp"
-    data:    Network Endpoints 0 loadBalancerProbe intervalInSeconds 15
-    data:    Network Endpoints 0 loadBalancerProbe timeoutInSeconds 31
-    data:    Network Endpoints 0 protocol "tcp"
-    data:    Network Endpoints 0 virtualIPAddress "XXXXXXXXXXXX"
-    data:    Network Endpoints 0 enableDirectServerReturn false
-    data:    Network Endpoints 1 localPort 5986
-    data:    Network Endpoints 1 name "PowerShell"
-    data:    Network Endpoints 1 port 5986
-    data:    Network Endpoints 1 protocol "tcp"
-    data:    Network Endpoints 1 virtualIPAddress "XXXXXXXXXXXX"
-    data:    Network Endpoints 1 enableDirectServerReturn false
-    data:    Network Endpoints 2 localPort 3389
-    data:    Network Endpoints 2 name "Remote Desktop"
-    data:    Network Endpoints 2 port 58081
-    info:    vm show command OK
+```
+data:    DNSName "contoso.chinacloudapp.cn"
+data:    Location "China East"
+data:    VMName "web1"
+data:    IPAddress "10.0.0.5"
+data:    InstanceStatus "ReadyRole"
+data:    InstanceSize "Standard_D1"
+data:    Image "a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-R2-2015
+6-en.us-127GB.vhd"
+data:    OSDisk hostCaching "ReadWrite"
+data:    OSDisk name "joaoma-1-web1-0-201509251804250879"
+data:    OSDisk mediaLink "https://XXXXXXXXXXXXXXX.blob.core.chinacloudapi.cn
+/vhds/joaomatest-web1-2015-09-25.vhd"
+data:    OSDisk sourceImageName "a699494373c04fc0bc8f2bb1389d6106__Windows-Se
+r-2012-R2-20150916-en.us-127GB.vhd"
+data:    OSDisk operatingSystem "Windows"
+data:    OSDisk iOType "Standard"
+data:    ReservedIPName ""
+data:    VirtualIPAddresses 0 address "XXXXXXXXXXXXXXXX"
+data:    VirtualIPAddresses 0 name "XXXXXXXXXXXXXXXXXXXX"
+data:    VirtualIPAddresses 0 isDnsProgrammed true
+data:    Network Endpoints 0 loadBalancedEndpointSetName "lbset"
+data:    Network Endpoints 0 localPort 80
+data:    Network Endpoints 0 name "tcp-80-80"
+data:    Network Endpoints 0 port 80
+data:    Network Endpoints 0 loadBalancerProbe port 80
+data:    Network Endpoints 0 loadBalancerProbe protocol "tcp"
+data:    Network Endpoints 0 loadBalancerProbe intervalInSeconds 15
+data:    Network Endpoints 0 loadBalancerProbe timeoutInSeconds 31
+data:    Network Endpoints 0 protocol "tcp"
+data:    Network Endpoints 0 virtualIPAddress "XXXXXXXXXXXX"
+data:    Network Endpoints 0 enableDirectServerReturn false
+data:    Network Endpoints 1 localPort 5986
+data:    Network Endpoints 1 name "PowerShell"
+data:    Network Endpoints 1 port 5986
+data:    Network Endpoints 1 protocol "tcp"
+data:    Network Endpoints 1 virtualIPAddress "XXXXXXXXXXXX"
+data:    Network Endpoints 1 enableDirectServerReturn false
+data:    Network Endpoints 2 localPort 3389
+data:    Network Endpoints 2 name "Remote Desktop"
+data:    Network Endpoints 2 port 58081
+info:    vm show command OK
+```
 
 ## 为虚拟机创建远程桌面终结点
 
 你可以使用 `azure vm endpoint create` 创建远程桌面终结点，将网络流量从公共端口转发到特定虚拟机的本地端口。
 
-    azure vm endpoint create web1 54580 -k 3389
+```
+azure vm endpoint create web1 54580 -k 3389
+```
 
 ## 从负载均衡器中删除虚拟机
 
@@ -124,7 +138,9 @@ ms.author: kumud
 
 使用上面的示例，你可以使用命令 `azure vm endpoint delete` 从负载均衡器“lbset”中删除为虚拟机“web1”创建的终结点。
 
-    azure vm endpoint delete web1 tcp-80-80
+```
+azure vm endpoint delete web1 tcp-80-80
+```
 
 > [!NOTE]
 你可以使用命令 `azure vm endpoint --help` 浏览管理终结点的更多选项

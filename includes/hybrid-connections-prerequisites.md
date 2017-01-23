@@ -1,4 +1,3 @@
-
 - **Visual Studio 2013**<br/>若要下载 Visual Studio 2013 免费试用版，请参阅 [Visual Studio 下载](http://www.visualstudio.com/downloads/download-visual-studio-vs)。 
 
 - **SQL Server 2014 Express with Tools**<br/>从 [Microsoft SQL Server Express Edition 页](http://www.microsoft.com/zh-CN/server-cloud/Products/sql-server-editions/sql-server-express.aspx)免费下载 Microsoft SQL Server Express。选择“下载 SQL Server Express”并填写你的个人资料，选择“SQL Server 2014 Express with Tools”，然后单击“继续”。随后将开始下载 SQL Server Express 和 SQL Server Express 管理工具的安装程序。将安装程序包保存到本地计算机。

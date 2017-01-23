@@ -51,4 +51,3 @@ Security and Compliance helps you identify, assess, and mitigate security risks 
 * Learn about [Azure Automation](../automation/automation-intro.md).
 * Learn about [Azure Backup](http://azure.microsoft.com/documentation/services/backup).
 * Learn about [Azure Site Recovery](http://azure.microsoft.com/documentation/services/site-recovery).
-

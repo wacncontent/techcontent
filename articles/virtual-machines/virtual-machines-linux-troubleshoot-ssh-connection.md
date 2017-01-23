@@ -67,7 +67,9 @@ ms.author: iainfou
 ## <a name="using-the-azure-cli"></a> 使用 Azure CLI
 [安装 Azure CLI 并连接到 Azure 订阅](../xplat-cli-install.md)（如果尚未这样做）。确保按如下所示使用 Resource Manager 模式：
 
-    azure config mode arm
+```
+azure config mode arm
+```
 
 如果创建并上载了自定义 Linux 磁盘映像，请确保已安装 [Azure Linux 代理](./virtual-machines-linux-agent-user-guide.md) 2.0.5 或更高版本。在使用库映像创建的 VM 上，系统已自动安装并配置了此访问扩展。
 
@@ -76,19 +78,25 @@ SSHD 配置本身可能有误或服务遇到错误。你可以重置 SSHD 以确
 
 以下示例重置 `myResourceGroup` 资源组中名为 `myVM` 的 VM 上的 SSHD。请使用自己的 VM 和资源组名称，如下所示：
 
-    azure vm reset-access --resource-group myResourceGroup --name myVM \
-        --reset-ssh
+```
+azure vm reset-access --resource-group myResourceGroup --name myVM \
+    --reset-ssh
+```
 
 ### 重置用户的 SSH 凭据
 如果 SSHD 看上去运行正常，可以重置给定用户的密码。以下示例在 `myResourceGroup` 中名为 `myVM` 的 VM 上，将 `myUsername` 的凭据重置为 `myPassword` 中指定的值。请如下所示使用自己的值：
 
-    azure vm reset-access --resource-group myResourceGroup --name myVM \
-        --username myUsername --password myPassword
+```
+azure vm reset-access --resource-group myResourceGroup --name myVM \
+    --username myUsername --password myPassword
+```
 
 如果使用 SSH 密钥身份验证，可以重置给定用户的 SSH 密钥。以下示例在 `myResourceGroup` 中名为 `myVM` 的 VM 上，更新 `~/.ssh/azure_id_rsa.pub` 中为用户 `myUsername` 存储的 SSH 密钥。请如下所示使用自己的值：
 
-    azure vm reset-access --resource-group myResourceGroup --name myVM \
-        --username myUsername --ssh-key-file ~/.ssh/azure_id_rsa.pub
+```
+azure vm reset-access --resource-group myResourceGroup --name myVM \
+    --username myUsername --ssh-key-file ~/.ssh/azure_id_rsa.pub
+```
 
 ## <a name="using-the-vmaccess-extension"></a> 使用 VMAccess 扩展
 适用于 Linux 的 VM 访问扩展可以读入用于定义待执行操作的 json 文件。这些操作包括重置 SSHD、重置 SSH 密钥或添加用户。你仍要使用 Azure CLI 调用 VMAccess 扩展，但可以根据需要在多个 VM 上重复使用该 json 文件。使用这种方法可以创建 json 文件存储库，然后，可以在给定的方案中调用这些文件。
@@ -96,22 +104,28 @@ SSHD 配置本身可能有误或服务遇到错误。你可以重置 SSHD 以确
 ### 重置 SSHD
 创建包含以下内容的名为 `PrivateConf.json` 的文件：
 
-    {  
-        "reset_ssh":"True"
-    }
+```
+{  
+    "reset_ssh":"True"
+}
+```
 
 使用 Azure CLI，然后调用 `VMAccessForLinux` 扩展并指定 json 文件来重置 SSHD 连接。以下示例重置 `myResourceGroup` 中名为 `myVM` 的 VM 上的 SSHD。请如下所示使用自己的值：
 
-    azure vm extension set myResourceGroup myVM \
-        VMAccessForLinux Microsoft.OSTCExtensions "1.2" \
-        --private-config-path PrivateConf.json
+```
+azure vm extension set myResourceGroup myVM \
+    VMAccessForLinux Microsoft.OSTCExtensions "1.2" \
+    --private-config-path PrivateConf.json
+```
 
 ### 重置用户的 SSH 凭据
 如果 SSHD 看上去运行正常，可以重置给定用户的凭据。若要重置用户的密码，请创建名为 `PrivateConf.json` 的文件。以下示例将 `myUsername` 的凭据重置为 `myPassword` 中指定的值。在 `PrivateConf.json` 文件中使用自己的值输入以下行：
 
-    {
-        "username":"myUsername", "password":"myPassword"
-    }
+```
+{
+    "username":"myUsername", "password":"myPassword"
+}
+```
 若要重置用户的 SSH 密钥，请先创建名为 `PrivateConf.json` 的文件。以下示例在 `myResourceGroup` 中名为 `myVM` 的 VM 上，将 `myUsername` 的凭据重置为 `myPassword` 中指定的值。在 `PrivateConf.json` 文件中使用自己的值输入以下行：
 
     {
@@ -120,9 +134,11 @@ SSHD 配置本身可能有误或服务遇到错误。你可以重置 SSHD 以确
 
 创建 json 文件之后，使用 Azure CLI 调用 `VMAccessForLinux` 扩展并指定 json 文件来重置 SSH 用户凭据。以下示例重置 `myResourceGroup` 中名为 `myVM` 的 VM 上的凭据。请如下所示使用自己的值：
 
-    azure vm extension set myResourceGroup myVM \
-        VMAccessForLinux Microsoft.OSTCExtensions "1.2" \
-        --private-config-path PrivateConf.json
+```
+azure vm extension set myResourceGroup myVM \
+    VMAccessForLinux Microsoft.OSTCExtensions "1.2" \
+    --private-config-path PrivateConf.json
+```
 
 ## 重新启动 VM
 如果已重置 SSH 配置和用户凭据，或者在执行此操作期间遇到错误，可以尝试重新启动 VM 来解决基本的计算问题。
@@ -135,12 +151,15 @@ SSHD 配置本身可能有误或服务遇到错误。你可以重置 SSHD 以确
 ### Azure CLI
 以下示例重新启动 `myResourceGroup` 资源组中名为 `myVM` 的 VM。请如下所示使用自己的值：
 
-    azure vm restart --resource-group myResourceGroup --name myVM
+```
+azure vm restart --resource-group myResourceGroup --name myVM
+```
 
 ## 重新部署 VM
 你可以将 VM 重新部署到 Azure 中的另一个节点，这可能可以更正任何潜在的网络问题。有关重新部署 VM 的信息，请参阅[将虚拟机重新部署到新的 Azure 节点](./virtual-machines-windows-redeploy-to-new-node.md)。
 
-> [!NOTE] 完成此操作后，临时磁盘数据会丢失，并且系统会更新与虚拟机关联的动态 IP 地址。
+> [!NOTE]
+> 完成此操作后，临时磁盘数据会丢失，并且系统会更新与虚拟机关联的动态 IP 地址。
 
 ### Azure 门户预览
 若要使用 Azure 门户预览重新部署 VM，请选择你的 VM，然后向下滚动到“支持 + 故障排除”部分。单击“重新部署”按钮，如以下示例中所示：
@@ -150,7 +169,9 @@ SSHD 配置本身可能有误或服务遇到错误。你可以重置 SSHD 以确
 ### Azure CLI
 以下示例重新部署 `myResourceGroup` 资源组中名为 `myVM` 的 VM。请如下所示使用自己的值：
 
-    azure vm redeploy --resource-group myResourceGroup --name myVM
+```
+azure vm redeploy --resource-group myResourceGroup --name myVM
+```
 
 ## 使用经典部署模型创建的 VM
 

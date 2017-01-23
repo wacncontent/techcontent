@@ -37,7 +37,7 @@ wacn.date: 01/06/2017
 | 可选配置 | 说明 |
 | --- | --- |
 | 使用现有的 SQL Server |允许指定 SQL Server 名称和实例名称。如果已有一个要使用的数据库服务器，请选择此选项。如果 SQL Server 没有启用浏览，请在“实例名称”中输入实例名称，后接逗号和端口号。 |
-| 使用现有的服务帐户 |默认情况下，Azure AD Connect 将为同步服务创建要使用的本地服务帐户。密码是自动生成的，而安装 Azure AD Connect 的人员并不知道该密码。如果使用远程 SQL 服务器或使用需要身份验证的代理，则需要在域中创建一个服务帐户并知道密码。在这些情况下，请输入要使用的服务帐户。确保运行安装的用户是 SQL 中的 SA，以便可以创建服务帐户的登录名。请参阅 [Azure AD Connect 帐户和权限](./active-directory-aadconnect-accounts-permissions.md#custom-settings-installation/) |
+| 使用现有的服务帐户 |默认情况下，Azure AD Connect 将为同步服务创建要使用的本地服务帐户。密码是自动生成的，而安装 Azure AD Connect 的人员并不知道该密码。如果使用远程 SQL 服务器或使用需要身份验证的代理，则需要在域中创建一个服务帐户并知道密码。在这些情况下，请输入要使用的服务帐户。确保运行安装的用户是 SQL 中的 SA，以便可以创建服务帐户的登录名。请参阅 [Azure AD Connect 帐户和权限](./active-directory-aadconnect-accounts-permissions.md#custom-settings-installation) |
 | 指定自定义同步组 |默认情况下，在安装同步服务时，Azure AD Connect 将在服务器本地创建四个组。这些组是：管理员组、操作员组、浏览组和密码重置组。在此可以指定自己的组。组必须在服务器本地，并且不能位于域中。 |
 
 ### 用户登录
@@ -68,7 +68,7 @@ wacn.date: 01/06/2017
 ## “同步”部分下的页面
 
 ### 连接你的目录
-若要连接到你的 Active Directory 域服务，Azure AD Connect 工具需要使用具有足够权限的帐户的凭据。可以采用 NetBios 或 FQDN 格式输入域部分，即 FABRIKAM\\syncuser 或 fabrikam.com\\syncuser。此帐户可以是普通的用户帐户，因为该帐户只需默认的读取权限。不过，根据你的情况，可能会需要更多权限。若要了解详细信息，请参阅 [Azure AD Connect 帐户和权限](./active-directory-aadconnect-accounts-permissions.md#create-the-ad-ds-account/)
+若要连接到你的 Active Directory 域服务，Azure AD Connect 工具需要使用具有足够权限的帐户的凭据。可以采用 NetBios 或 FQDN 格式输入域部分，即 FABRIKAM\\syncuser 或 fabrikam.com\\syncuser。此帐户可以是普通的用户帐户，因为该帐户只需默认的读取权限。不过，根据你的情况，可能会需要更多权限。若要了解详细信息，请参阅 [Azure AD Connect 帐户和权限](./active-directory-aadconnect-accounts-permissions.md#create-the-ad-ds-account)
 
 ![连接目录](./media/active-directory-aadconnect-get-started-custom/connectdir.png)
 
@@ -89,7 +89,7 @@ wacn.date: 01/06/2017
 ### 域和 OU 筛选 <a name="domain-and-ou-filtering"></a>
 默认情况下将同步所有域和 OU。如果不想将某些域或 OU 同步到 Azure AD，可以取消选择这些域和 OU。
 ![DomainOU 筛选](./media/active-directory-aadconnect-get-started-custom/domainoufiltering.png)向导中的此页面用于配置基于域的筛选。
-若要了解详细信息，请参阅[基于域的筛选](./active-directory-aadconnectsync-configure-filtering.md#domain-based-filtering/)。
+若要了解详细信息，请参阅[基于域的筛选](./active-directory-aadconnectsync-configure-filtering.md#domain-based-filtering)。
 
 由于防火墙限制，也可能无法连接到某些域。默认情况下未选择这些域，并且会出现警告。
 ![不可访问的域](./media/active-directory-aadconnect-get-started-custom/unreachable.png)
@@ -102,13 +102,13 @@ wacn.date: 01/06/2017
 
 | 设置 | 说明 |
 | --- | --- |
-| [用户在所有林中只呈现一次](./active-directory-aadconnect-topologies.md#multiple-forests-single-azure-ad-tenant/) |将所有用户在 Azure AD 中创建为单独的对象。不会在 Metaverse 中联接对象。 |
-| [邮件属性](./active-directory-aadconnect-topologies.md#multiple-forests-single-azure-ad-tenant/) |如果邮件属性在不同的林中具有相同的值，此选项将联接用户和联系人。当已使用 GALSync 创建了联系人时，请使用此选项。 |
-| [ObjectSID 和 msExchangeMasterAccountSID/ msRTCSIP-OriginatorSid](./active-directory-aadconnect-topologies.md#multiple-forests-single-azure-ad-tenant/) |此选项将帐户林中的已启用用户与资源林中的已禁用用户进行联接。在 Exchange 中，此配置称为链接邮箱。如果只使用 Lync 并且资源林中没有 Exchange，也可以使用此选项。 |
+| [用户在所有林中只呈现一次](./active-directory-aadconnect-topologies.md#multiple-forests-single-azure-ad-tenant) |将所有用户在 Azure AD 中创建为单独的对象。不会在 Metaverse 中联接对象。 |
+| [邮件属性](./active-directory-aadconnect-topologies.md#multiple-forests-single-azure-ad-tenant) |如果邮件属性在不同的林中具有相同的值，此选项将联接用户和联系人。当已使用 GALSync 创建了联系人时，请使用此选项。 |
+| [ObjectSID 和 msExchangeMasterAccountSID/ msRTCSIP-OriginatorSid](./active-directory-aadconnect-topologies.md#multiple-forests-single-azure-ad-tenant) |此选项将帐户林中的已启用用户与资源林中的已禁用用户进行联接。在 Exchange 中，此配置称为链接邮箱。如果只使用 Lync 并且资源林中没有 Exchange，也可以使用此选项。 |
 | sAMAccountName 和 MailNickName |此选项根据预期可以在其中找到用户登录 ID 的属性进行联接。 |
 | 特定的属性 |此选项允许选择自己的属性。**限制：**确保选择已可在 Metaverse 中找到的属性。如果选择自定义属性（不在 Metaverse 中），向导将无法完成。 |
 
-**源定位点** - sourceAnchor 属性是一个在用户对象的生命周期内不会改变的属性。它是链接本地用户与 Azure AD 中用户的主密钥。由于无法更改该属性，因此必须规划好要使用的合适属性。objectGUID 就是不错的候选项。除非在林/域之间移动用户帐户，否则此属性不会更改。在要在林间移动帐户的多林环境中，必须使用另一个属性，例如具有 employeeID 的属性。避免某人结婚时会改变的属性，或避免会更改分配的属性。由于不可以使用带有 @ 符号的属性，因此无法使用 email 和 userPrincipalName。属性也区分大小写，因此在林间移动对象时，请务必保留大小写。二进制属性采用 base64 编码，但其他属性类型会保留未编码状态。在联合方案和某些 Azure AD 接口中，此属性也称为 immutableID。可以在[设计概念](./active-directory-aadconnect-design-concepts.md#sourceanchor/)中找到有关源定位点的详细信息。
+**源定位点** - sourceAnchor 属性是一个在用户对象的生命周期内不会改变的属性。它是链接本地用户与 Azure AD 中用户的主密钥。由于无法更改该属性，因此必须规划好要使用的合适属性。objectGUID 就是不错的候选项。除非在林/域之间移动用户帐户，否则此属性不会更改。在要在林间移动帐户的多林环境中，必须使用另一个属性，例如具有 employeeID 的属性。避免某人结婚时会改变的属性，或避免会更改分配的属性。由于不可以使用带有 @ 符号的属性，因此无法使用 email 和 userPrincipalName。属性也区分大小写，因此在林间移动对象时，请务必保留大小写。二进制属性采用 base64 编码，但其他属性类型会保留未编码状态。在联合方案和某些 Azure AD 接口中，此属性也称为 immutableID。可以在[设计概念](./active-directory-aadconnect-design-concepts.md#sourceanchor)中找到有关源定位点的详细信息。
 
 ### 根据组同步筛选
 按组筛选功能可让你只同步一小部分的对象来进行试验。若要使用此功能，请在本地 Active Directory 中针对此目的创建一个组。然后添加应该以直属成员身份与 Azure AD 同步的用户和组。稍后可以在此组中添加和删除用户，以维护应该要在 Azure AD 中显示的对象列表。要同步的所有对象必须是组的直属成员。用户、组、联系人和计算机/设备都必须是直属成员。系统不会解析嵌套组成员身份。添加某个组作为成员时，只会添加该组本身，而不添加其成员。
@@ -130,18 +130,18 @@ wacn.date: 01/06/2017
 
 | 可选功能 | 说明 |
 | --- | --- |
-| Exchange 混合部署 |Exchange 混合部署功能使 Exchange 邮箱能够在本地和 Office 365 中共存。Azure AD Connect 将特定的[属性](./active-directory-aadconnectsync-attributes-synchronized.md#exchange-hybrid-writeback/)集从 Azure AD 同步回本地目录。 |
+| Exchange 混合部署 |Exchange 混合部署功能使 Exchange 邮箱能够在本地和 Office 365 中共存。Azure AD Connect 将特定的[属性](./active-directory-aadconnectsync-attributes-synchronized.md#exchange-hybrid-writeback)集从 Azure AD 同步回本地目录。 |
 | Azure AD 应用程序和属性筛选 |通过启用 Azure AD 应用和属性筛选，可以定制同步的属性集。此选项将在向导中额外添加两个配置页。有关详细信息，请参阅 [Azure AD 应用程序和属性筛选](#azure-ad-app-and-attribute-filtering)。 |
 | 密码同步 |如果选择了联合作为登录解决方案，则可以启用此选项。然后，可将密码同步用作备份选项。若要了解其他信息，请参阅[密码同步](./active-directory-aadconnectsync-implement-password-synchronization.md)。</br></br>如果选择了直通身份验证，则默认情况下启用此选项，以确保支持旧客户端，并将其作为备用选项。若要了解其他信息，请参阅[密码同步](./active-directory-aadconnectsync-implement-password-synchronization.md)。|
 | 密码写回 |通过启用密码写回，源自 Azure AD 的密码更改将写回到本地目录。若要了解详细信息，请参阅[密码管理入门](./active-directory-passwords-getting-started.md)。 |
-| 组写回 |如果你使用了“Office 365 组”功能，则可以在本地 Active Directory 中呈现这些组。仅当本地 Active Directory 中存在 Exchange 时，才可以使用此选项。若要了解详细信息，请参阅[组写回](./active-directory-aadconnect-feature-preview.md#group-writeback/)。 |
+| 组写回 |如果你使用了“Office 365 组”功能，则可以在本地 Active Directory 中呈现这些组。仅当本地 Active Directory 中存在 Exchange 时，才可以使用此选项。若要了解详细信息，请参阅[组写回](./active-directory-aadconnect-feature-preview.md#group-writeback)。 |
 | 目录扩展属性同步 |通过启用目录扩展属性同步，可将指定的属性同步到 Azure AD。若要了解详细信息，请参阅[目录扩展](./active-directory-aadconnectsync-feature-directory-extensions.md)。 |
 
 ### 启用单一登录 (SSO)
 配置单一登录以将其用于密码同步或直通身份验证是一个简单的过程，只需为要同步到 Azure AD 的每个林完成一次即可。配置过程包括以下两个步骤：
 
-1.	在本地 Active Directory 中创建必需的计算机帐户。
-2.	配置客户端计算机的 Intranet 区域来支持单一登录。
+1. 在本地 Active Directory 中创建必需的计算机帐户。
+2. 配置客户端计算机的 Intranet 区域来支持单一登录。
 
 #### 在 Active Directory 中创建计算机帐户
 对于已通过 AAD Connect 工具添加的每个林，需要提供域管理员凭据，以便可以在每个林中创建计算机帐户。该凭据仅用于创建帐户，并不存储或用于任何其他操作。只需在 AAD Connect 向导的“启用单一登录”页面上添加此凭据，如下所示：
@@ -154,20 +154,22 @@ wacn.date: 01/06/2017
 #### 配置客户端计算机的 Intranet 区域
 若要确保客户端在 Intranet 区域中自动登录，需要确保要访问的 URL 是 Intranet 区域的一部分。这样可以确保加入域的桌面计算机在连接到公司网络时自动向其发送 Kerberos 票证。在安装了组策略管理工具的计算机上执行以下操作。
 
-1.	打开组策略管理工具
-2.	编辑将应用于所有用户的组策略。例如，默认域策略。
-3.	导航到“当前用户\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”，如下图所示。
-4.	启用策略，并在对话框中输入以下两项。
-   
-        Value: https://autologon.microsoftazuread-sso.com
-        Data: 1
-        Value: https://aadg.chinacloudapi.cn.nsatc.net 
-        Data: 1
+1. 打开组策略管理工具
+2. 编辑将应用于所有用户的组策略。例如，默认域策略。
+3. 导航到“当前用户\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”，如下图所示。
+4. 启用策略，并在对话框中输入以下两项。
 
-5.	结果如下图所示：
+    ```
+    Value: https://autologon.microsoftazuread-sso.com
+    Data: 1
+    Value: https://aadg.chinacloudapi.cn.nsatc.net 
+    Data: 1
+    ```
+
+5. 结果如下图所示：
 ![Intranet 区域](./media/active-directory-aadconnect-get-started-custom/sitezone.png)
 
-6.	单击两次“确定”。
+6. 单击两次“确定”。
 
 ### Azure AD 应用程序和属性筛选 <a name="azure-ad-app-and-attribute-filtering"></a>
 如果想要限制同步到 Azure AD 的属性，请通过选择正在使用的服务来启动。如果在此页面上进行配置更改，必须通过重新运行安装向导来明确选择新的服务。
@@ -179,7 +181,7 @@ wacn.date: 01/06/2017
 ![可选功能 - 属性](./media/active-directory-aadconnect-get-started-custom/azureadattributes2.png)  
 
 >[!WARNING]
-删除属性可能会影响功能。若要了解最佳做法和建议，请参阅[同步的属性](./active-directory-aadconnectsync-attributes-synchronized.md#attributes-to-synchronize/)。
+删除属性可能会影响功能。若要了解最佳做法和建议，请参阅[同步的属性](./active-directory-aadconnectsync-attributes-synchronized.md#attributes-to-synchronize)。
 
 ### 目录扩展属性同步
 可以使用组织添加的自定义属性或 Active Directory 中的其他属性，在 Azure AD 中扩展架构。若要使用这项功能，请在“可选功能”页上选择“目录扩展属性同步”。可以在此页上选择要同步的其他属性。
@@ -196,7 +198,7 @@ wacn.date: 01/06/2017
 - 要使用的联合身份验证服务名称（例如 sts.contoso.com）的 SSL 证书
 
 ### AD FS 配置先决条件 <a name="ad-fs-configuration-pre-requisites"></a>
-若要使用 Azure AD Connect 配置 AD FS 场，请确保已在远程服务器上启用 WinRM。此外，请仔细查看[表 3 - Azure AD Connect 和联合服务器/WAP](./active-directory-aadconnect-ports.md#table-3---azure-ad-connect-and-ad-fs-federation-serverswap/) 中列出的端口要求。
+若要使用 Azure AD Connect 配置 AD FS 场，请确保已在远程服务器上启用 WinRM。此外，请仔细查看[表 3 - Azure AD Connect 和联合服务器/WAP](./active-directory-aadconnect-ports.md#table-3---azure-ad-connect-and-ad-fs-federation-serverswap) 中列出的端口要求。
 
 ### 创建新的 AD FS 场或使用现有的 AD FS 场
 可以使用现有的 AD FS 场，或选择创建新的 AD FS 场。如果选择创建新的场，则需要提供 SSL 证书。如果 SSL 证书受密码保护，系统会提示你输入密码。
@@ -258,7 +260,7 @@ AD Connect 尝试在配置阶段验证域。如果继续进行配置但未添加
 在此页上进行配置。
 
 > [!NOTE]
-继续安装之前，如果配置了联合服务器，请确保已配置[联合服务器的名称解析](./active-directory-aadconnect-prerequisites.md#name-resolution-for-federation-servers/)。
+继续安装之前，如果配置了联合服务器，请确保已配置[联合服务器的名称解析](./active-directory-aadconnect-prerequisites.md#name-resolution-for-federation-servers)。
 >
 >
 
@@ -271,7 +273,7 @@ AD Connect 尝试在配置阶段验证域。如果继续进行配置但未添加
 
 在过渡模式下，可以对同步引擎进行所需的更改，并复查要导出的内容。如果配置看起来正常，请再次运行安装向导，并禁用过渡模式。现在，已将数据从此服务器导出到 Azure AD。确保同时禁用其他服务器，以便只有一台服务器在主动导出。
 
-若要了解详细信息，请参阅[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)。
+若要了解详细信息，请参阅[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode)。
 
 ### 验证联合配置
 单击“验证”按钮后，Azure AD Connect 会验证 DNS 设置。

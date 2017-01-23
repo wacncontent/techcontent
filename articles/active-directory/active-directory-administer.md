@@ -54,7 +54,7 @@ Azure AD 在大多数 Microsoft 云服务的后面提供核心目录和身份管
 
 ### 将 Azure AD 目录与新的 Azure 订阅相关联
 
-可以将新的 Azure 订阅，与用于对现有 Office 365 或 Microsoft Intune 订阅的登录进行身份验证的相同目录进行关联。请使用你的工作或学校帐户登录到 Azure 管理门户。管理门户将返回一条消息，指出找不到该帐户的任何订阅。选择“注册 Azure”，你的目录将可用于在门户中进行管理。有关详细信息，请参阅[在 Azure 中管理 Office 365 订阅的目录](./active-directory-how-subscriptions-associated-directory.md#manage-the-directory-for-your-office-365-subscription-in-azure/)。
+可以将新的 Azure 订阅，与用于对现有 Office 365 或 Microsoft Intune 订阅的登录进行身份验证的相同目录进行关联。请使用你的工作或学校帐户登录到 Azure 管理门户。管理门户将返回一条消息，指出找不到该帐户的任何订阅。选择“注册 Azure”，你的目录将可用于在门户中进行管理。有关详细信息，请参阅[在 Azure 中管理 Office 365 订阅的目录](./active-directory-how-subscriptions-associated-directory.md#manage-the-directory-for-your-office-365-subscription-in-azure)。
 
 ### 通过以组织名义注册 Microsoft 云服务来创建 Azure AD 目录
 

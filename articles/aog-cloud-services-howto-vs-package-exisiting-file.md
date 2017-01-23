@@ -24,15 +24,15 @@ wacn.date: 12/16/2016
 
 **设置操作步骤：**  
 
-1.	首先加入一个外部的文件到解决方案中。
+1. 首先加入一个外部的文件到解决方案中。
 
     ![import-extra-file](./media/aog-cloud-services-howto-vs-package-exisiting-file/import-extra-file.png)
 
-2.	设置文件的 “生成操作” 属性为 “内容”。
+2. 设置文件的 “生成操作” 属性为 “内容”。
 
     ![build-action](./media/aog-cloud-services-howto-vs-package-exisiting-file/build-action.png)
 
-3.	设置文件的 “复制到输出目录” 属性为 “如果较新则复制”。
+3. 设置文件的 “复制到输出目录” 属性为 “如果较新则复制”。
 
     ![copy-to-output-directory](./media/aog-cloud-services-howto-vs-package-exisiting-file/copy-to-output-directory.png)
 

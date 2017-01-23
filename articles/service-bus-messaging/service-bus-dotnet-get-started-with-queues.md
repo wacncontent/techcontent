@@ -105,13 +105,13 @@ wacn.date: 10/24/2016
     ```
     using Microsoft.ServiceBus.Messaging;
     ```
-    
+
 2. 将以下代码添加到 `Main` 方法，并将 **connectionString** 变量设置为创建命名空间时获取的连接字符串，以及将 **queueName** 设置为创建队列时使用的队列名称。
 
     ```
     var connectionString = "<Your connection string>";
     var queueName = "<Your queue name>";
-  
+
     var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
     var message = new BrokeredMessage("This is a test message!");
     client.Send(message);
@@ -132,43 +132,45 @@ wacn.date: 10/24/2016
                 var connectionString = "<Your connection string>";
                 var queueName = "<Your queue name>";
 
-                var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
-                var message = new BrokeredMessage("This is a test message!");
+    ```
+            var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
+            var message = new BrokeredMessage("This is a test message!");
 
-                client.Send(message);
-            }
+            client.Send(message);
         }
     }
     ```
-  
+    }
+    ```
+
 3. 运行该程序，并检查 Azure 经典管理门户。请注意，**队列长度**值现在应为 1。
-    
+
       ![队列长度][queue-length-send]
-    
+
 ## 从队列接收消息
 
 1. 创建新的控制台应用程序并添加对服务总线 NuGet 包的引用，类似于上面的发送应用程序。
 
 2. 在 Program.cs 文件顶部添加以下 `using` 语句。
-  
+
     ```
     using Microsoft.ServiceBus.Messaging;
     ```
-  
+
 3. 将以下代码添加到 `Main` 方法，并将 **connectionString** 变量设置为创建命名空间时获取的连接字符串，以及将 **queueName** 设置为创建队列时使用的队列名称。
 
     ```
     var connectionString = "";
     var queueName = "samplequeue";
-  
+
     var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
-  
+
     client.OnMessage(message =>
     {
       Console.WriteLine(String.Format("Message body: {0}", message.GetBody<String>()));
       Console.WriteLine(String.Format("Message id: {0}", message.MessageId));
     });
-  
+
     Console.ReadLine();
     ```
 
@@ -177,7 +179,7 @@ wacn.date: 10/24/2016
     ```
     using System;
     using Microsoft.ServiceBus.Messaging;
-  
+
     namespace GettingStartedWithQueues
     {
       class Program
@@ -186,25 +188,27 @@ wacn.date: 10/24/2016
         {
           var connectionString = "";
           var queueName = "samplequeue";
-  
-          var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
-  
-          client.OnMessage(message =>
-          {
-            Console.WriteLine(String.Format("Message body: {0}", message.GetBody<String>()));
-            Console.WriteLine(String.Format("Message id: {0}", message.MessageId));
-          });
-  
-          Console.ReadLine();
-        }
+
+    ```
+      var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
+
+      client.OnMessage(message =>
+      {
+        Console.WriteLine(String.Format("Message body: {0}", message.GetBody<String>()));
+        Console.WriteLine(String.Format("Message id: {0}", message.MessageId));
+      });
+
+      Console.ReadLine();
+    }
+    ```
       }
     }
     ```
-  
+
 4. 运行该程序，并检查门户。请注意，**队列长度**值现在应为 0。
 
     ![队列长度][queue-length-receive]
-  
+
 祝贺你！ 你已创建队列、发送和接收消息。
 
 ## 后续步骤

@@ -40,7 +40,8 @@ ms.author: cephalin
 
 在每个 TiP 方案的基本级别中，将预定义百分比的实际流量路由到非生产部署槽。为此，请执行以下步骤：
 
->[!NOTE] 此处的步骤假设已有[非生产部署槽](./web-sites-staged-publishing.md)，并且所需的 Web 应用内容[已部署](./web-sites-deploy.md)给它。
+>[!NOTE]
+> 此处的步骤假设已有[非生产部署槽](./web-sites-staged-publishing.md)，并且所需的 Web 应用内容[已部署](./web-sites-deploy.md)给它。
 
 1. 登录到 [Azure 门户预览](https://portal.azure.cn/)。
 2. 在 Web 应用的边栏选项卡中，单击“设置”>“流量路由”。![](./media/app-service-web-test-in-production/01-traffic-routing.png)
@@ -68,7 +69,9 @@ ms.author: cephalin
 
 例如，若要让用户选择退出 beta 应用，你可以在网页中插入以下链接：
 
-    <a href="<webappname>.chinacloudsites.cn/?x-ms-routing-name=self">Go back to production app</a>
+```
+<a href="<webappname>.chinacloudsites.cn/?x-ms-routing-name=self">Go back to production app</a>
+```
 
 字符串 `x-ms-routing-name=self` 指定生产槽。一旦客户端浏览器访问此链接，不仅浏览器会重定向到生产槽，后续每个请求也都包含将会话固定到生产槽的 `x-ms-routing-name=self` Cookie。
 
@@ -78,12 +81,14 @@ ms.author: cephalin
 
 若要让用户选择加入 beta 应用，请将相同的查询参数设置为非生产槽的名称，例如：
 
-        <webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
+```
+    <webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
+```
 
 ## 更多资源 ##
 
 -   [为 Azure App Service 中的 Web 应用设置过渡环境](./web-sites-staged-publishing.md)
--	[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)
+- [通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)
 -   [使用 Azure App Service 进行敏捷软件开发](./app-service-agile-software-development.md)
--	[对 Web 应用有效使用 DevOps 环境](./app-service-web-staged-publishing-realworld-scenarios.md)
+- [对 Web 应用有效使用 DevOps 环境](./app-service-web-staged-publishing-realworld-scenarios.md)
 <!---HONumber=Mooncake_0328_2016-->

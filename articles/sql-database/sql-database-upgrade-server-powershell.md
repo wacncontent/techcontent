@@ -53,7 +53,9 @@ SQL 数据库 V12 是最新版本，因此我们建议升级到 SQL 数据库 V1
 
 若要针对 Azure 订阅运行 PowerShell cmdlet，必须先与 Azure 帐户建立访问连接。运行以下命令，然后就会出现一个要求输入凭据的登录屏幕。使用登录 Azure 门户时所用的相同电子邮件和密码。
 
-    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 成功登录后，你会在屏幕上看到一些信息，其中包括登录时使用的 ID，以及有权访问的 Azure 订阅。
 
@@ -61,7 +63,9 @@ SQL 数据库 V12 是最新版本，因此我们建议升级到 SQL 数据库 V1
 
 使用订阅信息运行以下 cmdlet 来设置当前订阅：
 
-    Set-AzureRmContext -SubscriptionId 4cac86b0-1e56-bbbb-aaaa-000000000000
+```
+Set-AzureRmContext -SubscriptionId 4cac86b0-1e56-bbbb-aaaa-000000000000
+```
 
 以下命令将针对上方所选的订阅运行。
 
@@ -69,7 +73,9 @@ SQL 数据库 V12 是最新版本，因此我们建议升级到 SQL 数据库 V1
 
 若要获取有关服务器升级的建议，请运行以下 cmdlet：
 
-    $hint = Get-AzureRmSqlServerUpgradeHint -ResourceGroupName “resourcegroup1” -ServerName “server1”
+```
+$hint = Get-AzureRmSqlServerUpgradeHint -ResourceGroupName “resourcegroup1” -ServerName “server1”
+```
 
 有关详细信息，请参阅 [创建弹性数据库池](./sql-database-elastic-pool-create-powershell.md)。
 
@@ -77,33 +83,37 @@ SQL 数据库 V12 是最新版本，因此我们建议升级到 SQL 数据库 V1
 
 若要开始服务器升级，请运行以下 cmdlet：
 
-    Start-AzureRmSqlServerUpgrade -ResourceGroupName “resourcegroup1” -ServerName “server1” -ServerVersion 12.0 -DatabaseCollection $hint.Databases -ElasticPoolCollection $hint.ElasticPools  
+```
+Start-AzureRmSqlServerUpgrade -ResourceGroupName “resourcegroup1” -ServerName “server1” -ServerVersion 12.0 -DatabaseCollection $hint.Databases -ElasticPoolCollection $hint.ElasticPools  
+```
 
 运行此命令时，升级过程将开始。你可以自定义建议的输出并将已编辑的建议提供给此 cmdlet 。
 
 ## 升级服务器
 
-    # Adding the account
-    #
-    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+# Adding the account
+#
+Add-AzureRmAccount -EnvironmentName AzureChinaCloud
 
-    # Setting the variables
-    #
-    $SubscriptionName = 'YOUR_SUBSCRIPTION'
-    $ResourceGroupName = 'YOUR_RESOURCE_GROUP'
-    $ServerName = 'YOUR_SERVER'
+# Setting the variables
+#
+$SubscriptionName = 'YOUR_SUBSCRIPTION'
+$ResourceGroupName = 'YOUR_RESOURCE_GROUP'
+$ServerName = 'YOUR_SERVER'
 
-    # Selecting the right subscription
-    #
-    Set-AzureRmContext -SubscriptionName $SubscriptionName
+# Selecting the right subscription
+#
+Set-AzureRmContext -SubscriptionName $SubscriptionName
 
-    # Getting the upgrade recommendations
-    #
-    $hint = Get-AzureRmSqlServerUpgradeHint -ResourceGroupName $ResourceGroupName -ServerName $ServerName
+# Getting the upgrade recommendations
+#
+$hint = Get-AzureRmSqlServerUpgradeHint -ResourceGroupName $ResourceGroupName -ServerName $ServerName
 
-    # Starting the upgrade process
-    #
-    Start-AzureRmSqlServerUpgrade -ResourceGroupName $ResourceGroupName -ServerName $ServerName -ServerVersion 12.0 -DatabaseCollection $hint.Databases -ElasticPoolCollection $hint.ElasticPools  
+# Starting the upgrade process
+#
+Start-AzureRmSqlServerUpgrade -ResourceGroupName $ResourceGroupName -ServerName $ServerName -ServerVersion 12.0 -DatabaseCollection $hint.Databases -ElasticPoolCollection $hint.ElasticPools  
+```
 
 ## 自定义升级映射
 
@@ -111,32 +121,34 @@ SQL 数据库 V12 是最新版本，因此我们建议升级到 SQL 数据库 V1
 
 ElasticPoolCollection 和 DatabaseCollection 参数是可选的：
 
-    # Creating elastic pool mapping
-    #
-    $elasticPool = New-Object -TypeName Microsoft.Azure.Management.Sql.Models.UpgradeRecommendedElasticPoolProperties
-    $elasticPool.DatabaseDtuMax = 100
-    $elasticPool.DatabaseDtuMin = 0
-    $elasticPool.Dtu = 800
-    $elasticPool.Edition = "Standard"
-    $elasticPool.DatabaseCollection = ("DB1", “DB2”, “DB3”, “DB4”)
-    $elasticPool.Name = "elasticpool_1"
-    $elasticPool.StorageMb = 800
+```
+# Creating elastic pool mapping
+#
+$elasticPool = New-Object -TypeName Microsoft.Azure.Management.Sql.Models.UpgradeRecommendedElasticPoolProperties
+$elasticPool.DatabaseDtuMax = 100
+$elasticPool.DatabaseDtuMin = 0
+$elasticPool.Dtu = 800
+$elasticPool.Edition = "Standard"
+$elasticPool.DatabaseCollection = ("DB1", “DB2”, “DB3”, “DB4”)
+$elasticPool.Name = "elasticpool_1"
+$elasticPool.StorageMb = 800
 
-    # Creating single database mapping for 2 databases. DBMain1 mapped to S0 and DBMain2 mapped to S2
-    #
-    $databaseMap1 = New-Object -TypeName Microsoft.Azure.Management.Sql.Models.UpgradeDatabaseProperties
-    $databaseMap1.Name = "DBMain1"
-    $databaseMap1.TargetEdition = "Standard"
-    $databaseMap1.TargetServiceLevelObjective = "S0"
+# Creating single database mapping for 2 databases. DBMain1 mapped to S0 and DBMain2 mapped to S2
+#
+$databaseMap1 = New-Object -TypeName Microsoft.Azure.Management.Sql.Models.UpgradeDatabaseProperties
+$databaseMap1.Name = "DBMain1"
+$databaseMap1.TargetEdition = "Standard"
+$databaseMap1.TargetServiceLevelObjective = "S0"
 
-    $databaseMap2 = New-Object -TypeName Microsoft.Azure.Management.Sql.Models.UpgradeDatabaseProperties
-    $databaseMap2.Name = "DBMain2"
-    $databaseMap2.TargetEdition = "Standard"
-    $databaseMap2.TargetServiceLevelObjective = "S2"
+$databaseMap2 = New-Object -TypeName Microsoft.Azure.Management.Sql.Models.UpgradeDatabaseProperties
+$databaseMap2.Name = "DBMain2"
+$databaseMap2.TargetEdition = "Standard"
+$databaseMap2.TargetServiceLevelObjective = "S2"
 
-    # Starting the upgrade
-    #
-    Start-AzureRmSqlServerUpgrade –ResourceGroupName resourcegroup1 –ServerName server1 -ServerVersion 12.0 -DatabaseCollection @($databaseMap1, $databaseMap2) -ElasticPoolCollection @($elasticPool)
+# Starting the upgrade
+#
+Start-AzureRmSqlServerUpgrade –ResourceGroupName resourcegroup1 –ServerName server1 -ServerVersion 12.0 -DatabaseCollection @($databaseMap1, $databaseMap2) -ElasticPoolCollection @($elasticPool)
+```
 
 ## 升级到 SQL 数据库 V12 后监视数据库
 
@@ -146,14 +158,16 @@ ElasticPoolCollection 和 DatabaseCollection 参数是可选的：
 
 **资源消耗数据：**对于基本、标准和高级数据库，可通过用户数据库中的 [sys.dm_ db_ resource\_stats](http://msdn.microsoft.com/zh-cn/library/azure/dn800981.aspx) DMV 查看资源消耗数据。此 DMV 针对前一小时的操作，以 15 秒的粒度提供接近实时的资源消耗信息。每个间隔的 DTU 消耗百分比将计算为 CPU、IO 和日志维度的最大消耗百分比。下面是用于计算过去一小时平均 DTU 消耗百分比的查询：
 
-    SELECT end_time
-         , (SELECT Max(v)
-             FROM (VALUES (avg_cpu_percent)
-                         , (avg_data_io_percent)
-                         , (avg_log_write_percent)
-           ) AS value(v)) AS [avg_DTU_percent]
-    FROM sys.dm_db_resource_stats
-    ORDER BY end_time DESC;
+```
+SELECT end_time
+     , (SELECT Max(v)
+         FROM (VALUES (avg_cpu_percent)
+                     , (avg_data_io_percent)
+                     , (avg_log_write_percent)
+       ) AS value(v)) AS [avg_DTU_percent]
+FROM sys.dm_db_resource_stats
+ORDER BY end_time DESC;
+```
 
 其他监视信息：
 

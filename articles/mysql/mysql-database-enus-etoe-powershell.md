@@ -85,7 +85,8 @@ If you already have resource groups, you can create a server directly or edit an
 New-AzureResourceGroup -Name "resourcegroupChinaEast" -Location "chinaeast"
 ```
 
->[!NOTE] **The default location option is “chinanorth.” For performance and security, choose services that are in the same region as your resource group.**
+>[!NOTE]
+> **The default location option is “chinanorth.” For performance and security, choose services that are in the same region as your resource group.**
 
 ## <a id="step5"></a>Step 5: Create servers
 Edit and run the following commands to set information, including your server name, location, version, and other details, in order to finish creating the server.
@@ -94,7 +95,8 @@ Edit and run the following commands to set information, including your server na
 New-AzureResource -ResourceType "Microsoft.MySql/servers" -ResourceName testPSH -ApiVersion 2015-09-01 -ResourceGroupName resourcegroupChinaEast -Location chinaeast -SkuObject @{name='MS4'} -PropertyObject @{version = '5.5'} 
 ```
 
->[!NOTE] **“-ApiVersion 2015-09-01” specifies the API version and is essential. It is also important to note that running the above commands will finish creating the MySQL server but not the user. You must create user settings and privileges in the subsequent steps, which is a different process than that used by the Azure portal.**
+>[!NOTE]
+> **“-ApiVersion 2015-09-01” specifies the API version and is essential. It is also important to note that running the above commands will finish creating the MySQL server but not the user. You must create user settings and privileges in the subsequent steps, which is a different process than that used by the Azure portal.**
 
 ## <a id="step6"></a>Step 6: Create server firewall rules
 Edit and run the following commands to set information, including your firewall rule names and safe IP range (start IP address and end IP address), in order to finish creating the firewall rules.

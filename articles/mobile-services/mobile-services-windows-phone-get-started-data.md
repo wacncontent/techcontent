@@ -37,7 +37,8 @@ ms.author: glenga
 
 1. 从[开发人员代码示例站点]下载 GetStartedWithData 示例应用程序项目。 
 
-    >[!NOTE]若要创建 Windows Phone Silverlght 8.1 应用程序，只需在下载的 Windows Phone Silverlight 8 应用程序项目中将目标操作系统更改为 Windows Phone 8.1。若要创建 Windows Phone 应用商店应用程序，请下载 GetStartedWithData 示例应用程序项目的 [Windows Phone 应用商店应用程序版本](http://go.microsoft.com/fwlink/p/?LinkId=397372)。
+    >[!NOTE]
+    >若要创建 Windows Phone Silverlght 8.1 应用程序，只需在下载的 Windows Phone Silverlight 8 应用程序项目中将目标操作系统更改为 Windows Phone 8.1。若要创建 Windows Phone 应用商店应用程序，请下载 GetStartedWithData 示例应用程序项目的 [Windows Phone 应用商店应用程序版本](http://go.microsoft.com/fwlink/p/?LinkId=397372)。
 
 2. 在 Visual Studio 中打开下载的项目，然后检查 MainPage.xaml.cs 文件。
 
@@ -81,58 +82,74 @@ ms.author: glenga
 
 5. 在 Visual Studio 中，打开文件 App.xaml.cs 并添加或取消注释以下 `using` 语句：
 
-           using Microsoft.WindowsAzure.MobileServices;
+    ```
+       using Microsoft.WindowsAzure.MobileServices;
+    ```
 
 6. 在同一个文件中，取消注释以下定义 **MobileService** 变量的代码，并在 **MobileServiceClient** 构造函数中依次提供移动服务的 URL 和应用程序密钥。
 
-        //public static MobileServiceClient MobileService = new MobileServiceClient( 
-        //    "AppUrl", 
-        //    "AppKey" 
-        //); 
+    ```
+    //public static MobileServiceClient MobileService = new MobileServiceClient( 
+    //    "AppUrl", 
+    //    "AppKey" 
+    //); 
+    ```
 
       这将创建用于访问移动服务的 **MobileServiceClient** 的新实例。
 
 6. 在 MainPage.cs 文件中，添加或取消注释以下 `using` 语句：
 
-           using Microsoft.WindowsAzure.MobileServices;
-        using Newtonsoft.Json;
+    ```
+       using Microsoft.WindowsAzure.MobileServices;
+    using Newtonsoft.Json;
+    ```
 
 7. 在此 DataModel 文件夹中，将 **TodoItem** 类定义替换为以下代码：
 
-        public class TodoItem
-        {
-            public string Id { get; set; }
+    ```
+    public class TodoItem
+    {
+        public string Id { get; set; }
 
-            [JsonProperty(PropertyName = "text")]
-            public string Text { get; set; }
+        [JsonProperty(PropertyName = "text")]
+        public string Text { get; set; }
 
-            [JsonProperty(PropertyName = "complete")]
-            public bool Complete { get; set; }
-        }
+        [JsonProperty(PropertyName = "complete")]
+        public bool Complete { get; set; }
+    }
+    ```
 
 7. 注释定义现有 **items** 集合的行，然后取消注释以下行：
 
-        private MobileServiceCollection<TodoItem, TodoItem> items;
-        private IMobileServiceTable<TodoItem> todoTable = 
-            App.MobileService.GetTable<TodoItem>();
+    ```
+    private MobileServiceCollection<TodoItem, TodoItem> items;
+    private IMobileServiceTable<TodoItem> todoTable = 
+        App.MobileService.GetTable<TodoItem>();
+    ```
 
        此代码将创建一个移动服务感知型绑定集合 (**items**) 和 SQL 数据库表 **TodoItem** (**todoTable**) 的代理类。
 
 7. 在 **InsertTodoItem** 方法中，删除设置 **TodoItem**.**Id** 属性的代码行，为该方法添加 **async** 修饰符，然后取消注释以下代码行：
 
-        await todoTable.InsertAsync(todoItem);
+    ```
+    await todoTable.InsertAsync(todoItem);
+    ```
 
       此代码在表中插入一个新项。
 
 8. 在 **RefreshTodoItems** 方法中，为该方法添加 **async** 修饰符，然后取消注释以下代码行：
 
-        items = await todoTable.ToCollectionAsync();
+    ```
+    items = await todoTable.ToCollectionAsync();
+    ```
 
        这将设置 todoTable 中的项目集合的绑定，其中包含从移动服务返回的所有 TodoItem 对象。
 
 9. 在 **UpdateCheckedTodoItem** 方法中，为该方法添加 **async** 修饰符，然后取消注释以下代码行：
 
-         await todoTable.UpdateAsync(item);
+    ```
+     await todoTable.UpdateAsync(item);
+    ```
 
        这会将项更新发送给移动服务。
 
@@ -151,7 +168,7 @@ ms.author: glenga
 4. 单击“数据”选项卡，然后单击“浏览”。
 
        ![][9]
-  
+
        可以看到，**TodoItem** 表现在包含了数据以及移动服务生成的 ID 值，并且已在该表中自动添加了列，以匹配应用程序中的 TodoItem 类。
 
 本教程到此结束。
@@ -165,10 +182,10 @@ ms.author: glenga
 
 * [向应用程序添加推送通知](./mobile-services-javascript-backend-windows-phone-get-started-push.md)
   <br/>了解如何使用移动服务将非常基本的推送通知发送到应用程序。
- 
+
 * [移动服务 C# 操作方法概念性参考 ](./mobile-services-dotnet-how-to-use-client-library.md)
   <br/>了解有关如何将移动服务与 .NET 一起使用的详细信息。
- 
+
 <!-- Anchors. -->
 [Download the Windows Phone 8 app project]: #download-app
 [Create the mobile service]: #create-service
@@ -190,5 +207,5 @@ ms.author: glenga
 [Mobile Services SDK]: http://go.microsoft.com/fwlink/p/?LinkID=268375
 [Developer Code Samples site]: http://go.microsoft.com/fwlink/p/?LinkId=271146
 [开发人员代码示例站点]: http://go.microsoft.com/fwlink/p/?LinkId=271146
- 
+
 <!---HONumber=Mooncake_0118_2016-->

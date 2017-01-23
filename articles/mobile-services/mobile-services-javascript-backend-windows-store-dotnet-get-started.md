@@ -62,7 +62,8 @@ ms.author: glenga
 
 [!INCLUDE [mobile-services-javascript-backend-run-app](../../includes/mobile-services-javascript-backend-run-app.md)]
 
->[!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 MainPage.xaml.cs 文件中。
+>[!NOTE]
+>你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 MainPage.xaml.cs 文件中。
 
 ## 后续步骤
 完成快速入门后，请了解如何在移动服务中执行其他重要任务：
@@ -97,5 +98,5 @@ ms.author: glenga
 [Visual Studio 2013 Express for Windows]: http://go.microsoft.com/fwlink/?LinkId=257546
 [Mobile Services SDK]: http://go.microsoft.com/fwlink/?LinkId=257545
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
- 
+
 <!---HONumber=Mooncake_0118_2016-->

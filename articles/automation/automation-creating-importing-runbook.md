@@ -40,9 +40,11 @@ ms.author: magoedte;bwren
 
 以下示例命令演示了如何创建新的空 Runbook。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Sample-TestRunbook"
-    New-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Sample-TestRunbook"
+New-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+```
 
 ## <a name="ImportRunbook"></a> 将 Runbook 从文件导入 Azure 自动化
 
@@ -67,12 +69,14 @@ ms.author: magoedte;bwren
 
 下面的示例命令演示了如何将脚本文件导入到 Runbook 中。
 
-    $automationAccountName = "AutomationAccount"
-    $runbookName = "Sample-TestRunbook"
-    $scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
+```
+$automationAccountName = "AutomationAccount"
+$runbookName = "Sample-TestRunbook"
+$scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
 
-    Set-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Path $ scriptPath -Overwrite
-    Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+Set-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Path $ scriptPath -Overwrite
+Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+```
 
 ## <a name="publishing-a-runbook"></a> 发布 Runbook
 
@@ -88,10 +92,12 @@ ms.author: magoedte;bwren
 
 可以使用 Windows PowerShell，通过 [Publish-AzureAutomationRunbook](https://msdn.microsoft.com/zh-cn/library/dn690266.aspx) cmdlet 来发布 Runbook。以下示例命令显示了如何发布示例 Runbook。
 
-    $automationAccountName = "AutomationAccount"
-    $runbookName = "Sample_TestRunbook"
-    
-    Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+```
+$automationAccountName = "AutomationAccount"
+$runbookName = "Sample_TestRunbook"
+
+Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+```
 
 ## 后续步骤
 - 若要了解你可以如何从 Runbook 和 PowerShell 模块库中受益，请参阅 [Runbook and module galleries for Azure Automation](./automation-runbook-gallery.md)（Azure 自动化的 Runbook 和模块库）

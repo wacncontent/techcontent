@@ -23,7 +23,8 @@ ms.author: glenga
 
 本主题说明如何结合使用 Azure 移动服务和 JavaScript 后端向通用 Windows 应用程序发送推送通知。在本教程中，你将在通用 Windows 应用程序项目中使用 Azure 通知中心来启用推送通知。完成后，当每次在 TodoList 表中插入一条记录时，你的移动服务将从 JavaScript 后端向所有已注册的 Windows 应用商店和 Windows Phone 应用商店应用发送一条推送通知。创建的通知中心可在移动服务中任意使用，可独立于移动服务进行管理，并可供其他应用程序和服务使用。
 
->[!NOTE]本主题演示如何在 Visual Studio 2013 Update 3 中使用此工具，以便从移动服务向通用 Windows 应用程序添加推送通知的支持。可以使用相同的步骤将推送通知从移动服务添加到 Windows 应用商店或 Windows Phone 应用商店 8.1 应用程序。若要将推送通知添加到 Windows Phone 8 或 Windows Phone Silverlight 8.1 应用程序，请参阅此版本的[移动服务中的推送通知入门](./mobile-services-javascript-backend-windows-phone-get-started-push.md)。
+>[!NOTE]
+>本主题演示如何在 Visual Studio 2013 Update 3 中使用此工具，以便从移动服务向通用 Windows 应用程序添加推送通知的支持。可以使用相同的步骤将推送通知从移动服务添加到 Windows 应用商店或 Windows Phone 应用商店 8.1 应用程序。若要将推送通知添加到 Windows Phone 8 或 Windows Phone Silverlight 8.1 应用程序，请参阅此版本的[移动服务中的推送通知入门](./mobile-services-javascript-backend-windows-phone-get-started-push.md)。
 
 本教程将指导你完成启用推送通知的以下基本步骤：
 

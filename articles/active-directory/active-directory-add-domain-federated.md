@@ -35,7 +35,7 @@ wacn.date: 01/09/2017
 
 5. 选择“添加”。
 
-运行 Azure AD Connect 工具以获取 Azure AD 用来验证域的 DNS 条目。可以在向导中的“Azure AD 域”步骤内看到该 DNS 条目。[这些说明](./active-directory-aadconnect-get-started-custom.md#verify-the-azure-ad-domain-selected-for-federation/)中示范了向导中该步骤的大致情形。如果你没有 Azure AD Connect 工具，可以[在此处下载](http://go.microsoft.com/fwlink/?LinkId=615771)。
+运行 Azure AD Connect 工具以获取 Azure AD 用来验证域的 DNS 条目。可以在向导中的“Azure AD 域”步骤内看到该 DNS 条目。[这些说明](./active-directory-aadconnect-get-started-custom.md#verify-the-azure-ad-domain-selected-for-federation)中示范了向导中该步骤的大致情形。如果你没有 Azure AD Connect 工具，可以[在此处下载](http://go.microsoft.com/fwlink/?LinkId=615771)。
 
 ## 在域名注册机构中为域添加 DNS 条目
 
@@ -59,11 +59,11 @@ wacn.date: 01/09/2017
 
 如果无法验证自定义域名，请尝试以下方法。我们从最常见到最不常见的原因逐一分析。
 
-1.	**等待一小时**。必须先传播 DNS 记录，Azure AD 才能验证域。这可能需要一小时以上。
+1. **等待一小时**。必须先传播 DNS 记录，Azure AD 才能验证域。这可能需要一小时以上。
 
-2.	**确保已输入正确的 DNS 记录**。请在该域的域名注册机构网站上完成此步骤。如果 DNS 条目不在 DNS 区域文件中，或者与 Azure AD 提供给你的 DNS 条目不完全匹配，则 Azure AD 无法验证域名。如果你无权访问域名注册机构以更新域的 DNS 记录，请与组织内具有此访问权限的个人或团队共享 DNS 条目，并请他们添加 DNS 条目。
+2. **确保已输入正确的 DNS 记录**。请在该域的域名注册机构网站上完成此步骤。如果 DNS 条目不在 DNS 区域文件中，或者与 Azure AD 提供给你的 DNS 条目不完全匹配，则 Azure AD 无法验证域名。如果你无权访问域名注册机构以更新域的 DNS 记录，请与组织内具有此访问权限的个人或团队共享 DNS 条目，并请他们添加 DNS 条目。
 
-3.	**从 Azure AD 的另一个目录删除域名**。域名只能在单个目录中验证。如果域名先前在另一个目录中验证过，则必须先在那里将其删除后，才可在新的目录中验证。若要了解如何删除域名，请阅读 [Manage custom domain names](./active-directory-add-manage-domain-names.md)（管理自定义域名）。
+3. **从 Azure AD 的另一个目录删除域名**。域名只能在单个目录中验证。如果域名先前在另一个目录中验证过，则必须先在那里将其删除后，才可在新的目录中验证。若要了解如何删除域名，请阅读 [Manage custom domain names](./active-directory-add-manage-domain-names.md)（管理自定义域名）。
 
 ## 添加更多自定义域名
 

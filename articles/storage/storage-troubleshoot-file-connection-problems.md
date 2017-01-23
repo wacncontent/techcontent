@@ -89,7 +89,8 @@ ms.author: genli
 
 **{96c345ef-3cac-477b-8fcd-bea1a564241c} REG\_DWORD 0x1**
 
-> [!NOTE]自 2015 年 12 月起，Azure 应用商店中的 Windows Server 2012 R2 映像默认安装有修补程序 KB3114025。
+> [!NOTE]
+>自 2015 年 12 月起，Azure 应用商店中的 Windows Server 2012 R2 映像默认安装有修补程序 KB3114025。
 
 <a id="additional"></a>
 

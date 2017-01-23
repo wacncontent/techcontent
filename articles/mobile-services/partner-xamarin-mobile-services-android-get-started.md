@@ -32,7 +32,8 @@ ms.author: donnam
 
 下载的快速入门项目包含适用于 Xamarin.Android 的 Azure 移动服务组件。尽管此项目面向 Android 4.2 或更高版本，但移动服务 SDK 只需要 Android 2.2 或更高版本。
 
-> [!IMPORTANT]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。
+> [!IMPORTANT]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。
 
 ##  <a name="create-new-service"></a>创建新的移动服务
 
@@ -70,7 +71,8 @@ ms.author: donnam
 
 3. 按“运行”按钮生成项目并启动应用程序。系统将要求你选择模拟器或已连接的 USB 设备。
 
-    > [!NOTE]若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
+    > [!NOTE]
+    >若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
 
 4. 在应用程序中键入有意义的文本（例如 _完成本教程_），然后单击“添加”。
 

@@ -66,5 +66,5 @@ wacn.date: 12/16/2016
 [live-overview1]: ./media/media-services-live-streaming-workflow/media-services-live-streaming-new.png
 
 [live-overview2]: ./media/media-services-live-streaming-workflow/media-services-live-streaming-current.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

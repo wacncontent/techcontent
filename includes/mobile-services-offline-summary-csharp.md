@@ -7,7 +7,7 @@
 *  为了将更改推送到服务器中，我们调用了  `IMobileServiceSyncContext.PushAsync()`。此方法属于  `IMobileServicesSyncContext`（而不是同步表），因为它会将更改推送到所有表中。
 
     只有已在本地以某种方式修改（通过 CUD 操作来完成）的记录才会发送到服务器。
-   
+
 * 为了从服务器上的表中将数据拉取到应用，我们调用了  `IMobileServiceSyncTable.PullAsync`。
 
     拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。
@@ -18,7 +18,9 @@
 
     例如，如果要对 userid 进行过滤，它需要是查询 ID 的一部分：
 
-        await PullAsync("todoItems" + userid, syncTable.Where(u => u.UserId = userid));
+    ```
+    await PullAsync("todoItems" + userid, syncTable.Where(u => u.UserId = userid));
+    ```
 
     如果您想要选择退出增量同步，请将  `null` 作为查询 ID 进行传递。在此情况下，在对  `PullAsync` 的每次调用中检索所有记录，这可能效率低下。
 

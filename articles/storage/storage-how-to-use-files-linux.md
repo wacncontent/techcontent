@@ -28,7 +28,8 @@ Azure 文件存储使用标准 SMB 协议在云中提供文件共享。使用 Az
 
 文件存储现已正式推出并同时支持 SMB 2.1 和 SMB 3.0。有关文件存储的更多详细信息，请参阅[文件服务 REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn167006.aspx)。
 
->[!NOTE] 由于 Linux SMB 客户端尚不支持加密，从 Linux 装载文件共享仍需要客户端与文件共享在同一 Azure 区域中。但是，Linux 的加密支持已经在负责 SMB 功能的 Linux 开发人员的路线图上。将来支持加密的 Linux 分发也将能够从任何位置装载 Azure 文件共享。
+>[!NOTE]
+> 由于 Linux SMB 客户端尚不支持加密，从 Linux 装载文件共享仍需要客户端与文件共享在同一 Azure 区域中。但是，Linux 的加密支持已经在负责 SMB 功能的 Linux 开发人员的路线图上。将来支持加密的 Linux 分发也将能够从任何位置装载 Azure 文件共享。
 
 ## 选择要使用的 Linux 分发
 在 Azure 中创建 Linux 虚拟机时，可以从 Azure 映像库指定支持 SMB 2.1 或更高版本的 Linux 映像。下面是建议的 Linux 映像的列表：
@@ -44,11 +45,15 @@ Azure 文件存储使用标准 SMB 协议在云中提供文件共享。使用 Az
 ## 装载文件共享
 若要从运行 Linux 的虚拟机装载文件共享，可能需要安装 SMB/CIFS 客户端（如果你使用的分发没有内置的客户端）。这是 Ubuntu 中的命令，用于安装一个选择 cifs-utils：
 
-    sudo apt-get install cifs-utils
+```
+sudo apt-get install cifs-utils
+```
 
 接下来，你需要设置装入点 (mkdir mymountpoint)，然后发出类似于下面所示的装载命令：
 
-     sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename ./mymountpoint -o vers=3.0,username=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
+```
+ sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename ./mymountpoint -o vers=3.0,username=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
+```
 
 你还可以在 /etc/fstab 中添加设置以装载共享。
 
@@ -56,33 +61,41 @@ Azure 文件存储使用标准 SMB 协议在云中提供文件共享。使用 Az
 
 另外要使文件共享在重新启动后装载，可以在 /etc/fstab 中添加如下设置：
 
-    //myaccountname.file.core.chinacloudapi.cn/mysharename /mymountpoint cifs vers=3.0,username= myaccountname,password= StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
+```
+//myaccountname.file.core.chinacloudapi.cn/mysharename /mymountpoint cifs vers=3.0,username= myaccountname,password= StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
+```
 
 例如，如果你是使用 Linux 映像 Ubuntu Server 15.04（可从 Azure 映像库中获得）创建的 Azure VM，则可以按如下所示装载文件：
 
-    azureuser@azureconubuntu:~$ sudo apt-get install cifs-utils
-    azureuser@azureconubuntu:~$ sudo mkdir /mnt/mountpoint
-    azureuser@azureconubuntu:~$ sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename /mnt/mountpoint -o vers=3.0,user=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
-    azureuser@azureconubuntu:~$ df -h /mnt/mountpoint
-    Filesystem  Size  Used Avail Use% Mounted on
-    //myaccountname.file.core.chinacloudapi.cn/mysharename  5.0T   64K  5.0T   1% /mnt/mountpoint
+```
+azureuser@azureconubuntu:~$ sudo apt-get install cifs-utils
+azureuser@azureconubuntu:~$ sudo mkdir /mnt/mountpoint
+azureuser@azureconubuntu:~$ sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename /mnt/mountpoint -o vers=3.0,user=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
+azureuser@azureconubuntu:~$ df -h /mnt/mountpoint
+Filesystem  Size  Used Avail Use% Mounted on
+//myaccountname.file.core.chinacloudapi.cn/mysharename  5.0T   64K  5.0T   1% /mnt/mountpoint
+```
 
 如果你使用 CentOS 7.1，则可以按如下所示装载文件：
 
-    [azureuser@AzureconCent ~]$ sudo yum install samba-client samba-common cifs-utils
-    [azureuser@AzureconCent ~]$ sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename /mnt/mountpoint -o vers=3.0,user=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
-    [azureuser@AzureconCent ~]$ df -h /mnt/mountpoint
-    Filesystem  Size  Used Avail Use% Mounted on
-    //myaccountname.file.core.chinacloudapi.cn/mysharename  5.0T   64K  5.0T   1% /mnt/mountpoint
+```
+[azureuser@AzureconCent ~]$ sudo yum install samba-client samba-common cifs-utils
+[azureuser@AzureconCent ~]$ sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename /mnt/mountpoint -o vers=3.0,user=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
+[azureuser@AzureconCent ~]$ df -h /mnt/mountpoint
+Filesystem  Size  Used Avail Use% Mounted on
+//myaccountname.file.core.chinacloudapi.cn/mysharename  5.0T   64K  5.0T   1% /mnt/mountpoint
+```
 
 如果你使用 Open SUSE 13.2，则可以按如下所示装载文件：
 
-    azureuser@AzureconSuse:~> sudo zypper install samba*  
-    azureuser@AzureconSuse:~> sudo mkdir /mnt/mountpoint
-    azureuser@AzureconSuse:~> sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename /mnt/mountpoint -o vers=3.0,user=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
-    azureuser@AzureconSuse:~> df -h /mnt/mountpoint
-    Filesystem  Size  Used Avail Use% Mounted on
-    //myaccountname.file.core.chinacloudapi.cn/mysharename  5.0T   64K  5.0T   1% /mnt/mountpoint
+```
+azureuser@AzureconSuse:~> sudo zypper install samba*  
+azureuser@AzureconSuse:~> sudo mkdir /mnt/mountpoint
+azureuser@AzureconSuse:~> sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename /mnt/mountpoint -o vers=3.0,user=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
+azureuser@AzureconSuse:~> df -h /mnt/mountpoint
+Filesystem  Size  Used Avail Use% Mounted on
+//myaccountname.file.core.chinacloudapi.cn/mysharename  5.0T   64K  5.0T   1% /mnt/mountpoint
+```
 
 ## 管理文件共享
 [Azure 门户预览](https://portal.azure.cn)提供用于管理 Azure 文件存储的用户界面。你可以从 Web 浏览器中执行以下操作：

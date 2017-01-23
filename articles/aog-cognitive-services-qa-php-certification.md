@@ -18,7 +18,9 @@ wacn.date: 12/05/2016
 
 在使用 PHP 的 http 客户端工具（如 Guzzle）调用认知服务时出现证书认证问题，错误信息如下：
 
-    Fatal error: Uncaught exception 'GuzzleHttp\Exception\RequestException' with message 'cURL error 60: SSL certificate problem: unable to get local issuer certificate
+```
+Fatal error: Uncaught exception 'GuzzleHttp\Exception\RequestException' with message 'cURL error 60: SSL certificate problem: unable to get local issuer certificate
+```
 
 ### 解决方法 ###
 
@@ -30,6 +32,6 @@ wacn.date: 12/05/2016
 
 所以可以通过下载证书的方式解决该问题，具体操作方法如下：
 
-1.	下载证书保存到本地，下载地址：[https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem)
-2.	配置 php.ini 文件：`curl.cainfo =<filepath>/cacert.pem`
-3.	重启 Apache 服务器，问题即可解决。
+1. 下载证书保存到本地，下载地址：[https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem)
+2. 配置 php.ini 文件：`curl.cainfo =<filepath>/cacert.pem`
+3. 重启 Apache 服务器，问题即可解决。

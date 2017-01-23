@@ -34,7 +34,8 @@ Azure SQL 数据仓库最近推出了[具有更好的性能可预测性的高级
 ## 自动迁移的详细信息
 默认情况下，我们将在[自动迁移计划][automatic migration schedule]期间，在用户所在地区当地时间的下午 6:00 至早上 6:00 期间，对用户的数据库进行迁移。迁移期间，用户的现有数据仓库将不可用。此迁移对于每个数据仓库中的每 TB 的存储将需要大约 1 小时。自动迁移过程中的任何部分都不会向用户收取费用。
 
-> [!NOTE] 迁移完成后，用户的数据仓库将恢复联机状态并可用。
+> [!NOTE]
+> 迁移完成后，用户的数据仓库将恢复联机状态并可用。
 
 我们将执行以下步骤来完成迁移（这些步骤不需要用户参与）。在本示例中，假设用户在标准存储上的现有数据仓库目前名为“MyDW”。
 
@@ -43,8 +44,9 @@ Azure SQL 数据仓库最近推出了[具有更好的性能可预测性的高级
 3. 我们将在步骤 2 进行的备份中，在高级存储上创建一个名为“MyDW”的新数据仓库。还原完成之前，“MyDW”不会出现。
 4. 还原完成后，“MyDW”将返回到迁移之前的相同数据仓库单位和状态（“暂停”或“活动”）。
 5. 我们将删除“MyDW\_DO\_NOT\_USE\_[Timestamp]”。
-    
-> [!NOTE] 这些设置不会作为迁移的一部分执行：
+
+> [!NOTE]
+> 这些设置不会作为迁移的一部分执行：
 > 
 >	-  需要重新启用数据库级别的审核
 >	-  需要重新添加**数据库**级别的防火墙规则。**服务器**级别的防火墙规则将不受影响
@@ -67,7 +69,8 @@ Azure SQL 数据仓库最近推出了[具有更好的性能可预测性的高级
 2. 从最新的快照进行[还原][Restore]。
 3. 删除标准存储上的现有数据仓库。**如果此步骤操作失败，用户将需要为两个数据仓库支付费用。**
 
-> [!NOTE] 这些设置不会作为迁移的一部分执行：
+> [!NOTE]
+> 这些设置不会作为迁移的一部分执行：
 > 
 > * 需要重新启用数据库级别的审核。
 > * 需要重新添加数据库级别的防火墙规则。服务器级别的防火墙规则将不受影响。
@@ -94,45 +97,47 @@ ALTER DATABASE CurrentDatabasename MODIFY NAME = NewDatabaseName;
 - 执行脚本的用户应为 [mediumrc 角色][mediumrc role]或更高级角色。若要将用户添加到此角色中，请执行下列语句：
         a. `EXEC sp_addrolemember 'xlargerc', 'MyUser'`
 
-            -------------------------------------------------------------------------------
-            -- 步骤 1：创建表来控制索引重新生成
-            -- 在 mediumrc 或更高版本中以用户身份运行
-            --------------------------------------------------------------------------------
-            create table sql_statements
-            WITH (distribution = round_robin)
-            as select 
-                'alter index all on ' + s.name + '.' + t.NAME + ' rebuild;' as statement,
-                row_number() over (order by s.name, t.name) as sequence
-            from 
-                sys.schemas s
-                inner join sys.tables t
-                    on s.schema_id = t.schema_id
-            where
-                is_external = 0
-            ;
-            go
-            
-            --------------------------------------------------------------------------------
-            -- 步骤 2：执行索引重新生成。如果脚本失败，可以重新运行以下语句以从上次中断的地方重新启动。
-            -- 在 mediumrc 或更高版本中以用户身份运行
-            --------------------------------------------------------------------------------
+    ```
+        -------------------------------------------------------------------------------
+        -- 步骤 1：创建表来控制索引重新生成
+        -- 在 mediumrc 或更高版本中以用户身份运行
+        --------------------------------------------------------------------------------
+        create table sql_statements
+        WITH (distribution = round_robin)
+        as select 
+            'alter index all on ' + s.name + '.' + t.NAME + ' rebuild;' as statement,
+            row_number() over (order by s.name, t.name) as sequence
+        from 
+            sys.schemas s
+            inner join sys.tables t
+                on s.schema_id = t.schema_id
+        where
+            is_external = 0
+        ;
+        go
 
-            declare @nbr_statements int = (select count(*) from sql_statements)
-            declare @i int = 1
-            while(@i <= @nbr_statements)
-            begin
-                declare @statement nvarchar(1000)= (select statement from sql_statements where sequence = @i)
-                print cast(getdate() as nvarchar(1000)) + ' Executing... ' + @statement
-                exec (@statement)
-                delete from sql_statements where sequence = @i
-                set @i += 1
-            end;
-            go
-            -------------------------------------------------------------------------------
-            -- 步骤 3：清理步骤 1 中创建的表
-            --------------------------------------------------------------------------------
-            drop table sql_statements;
-            go
+        --------------------------------------------------------------------------------
+        -- 步骤 2：执行索引重新生成。如果脚本失败，可以重新运行以下语句以从上次中断的地方重新启动。
+        -- 在 mediumrc 或更高版本中以用户身份运行
+        --------------------------------------------------------------------------------
+
+        declare @nbr_statements int = (select count(*) from sql_statements)
+        declare @i int = 1
+        while(@i <= @nbr_statements)
+        begin
+            declare @statement nvarchar(1000)= (select statement from sql_statements where sequence = @i)
+            print cast(getdate() as nvarchar(1000)) + ' Executing... ' + @statement
+            exec (@statement)
+            delete from sql_statements where sequence = @i
+            set @i += 1
+        end;
+        go
+        -------------------------------------------------------------------------------
+        -- 步骤 3：清理步骤 1 中创建的表
+        --------------------------------------------------------------------------------
+        drop table sql_statements;
+        go
+    ```
 
 如果有任何关于数据仓库的问题，请[在线提交工单][在线提交工单]，并参阅“迁移到高级存储”寻找可能的原因。
 

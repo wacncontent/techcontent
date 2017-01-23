@@ -58,52 +58,54 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 2. 将 **Program.cs** 的内容替换为以下内容：
 
-        using System;
-        using System.Security.Cryptography;
-        using System.Text;
-        using System.Threading.Tasks;
+    ```
+    using System;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Threading.Tasks;
 
-        namespace HiveCSharp
+    namespace HiveCSharp
+    {
+        class Program
         {
-            class Program
+            static void Main(string[] args)
             {
-                static void Main(string[] args)
+                string line;
+                // Read stdin in a loop
+                while ((line = Console.ReadLine()) != null)
                 {
-                    string line;
-                    // Read stdin in a loop
-                    while ((line = Console.ReadLine()) != null)
-                    {
-                        // Parse the string, trimming line feeds
-                        // and splitting fields at tabs
-                        line = line.TrimEnd('\n');
-                        string[] field = line.Split('\t');
-                        string phoneLabel = field[1] + ' ' + field[2];
-                        // Emit new data to stdout, delimited by tabs
-                        Console.WriteLine("{0}\t{1}\t{2}", field[0], phoneLabel, GetMD5Hash(phoneLabel));
-                    }
-                }
-                /// <summary>
-                /// Returns an MD5 hash for the given string
-                /// </summary>
-                /// <param name="input">string value</param>
-                /// <returns>an MD5 hash</returns>
-                static string GetMD5Hash(string input)
-                {
-                    // Step 1, calculate MD5 hash from input
-                    MD5 md5 = System.Security.Cryptography.MD5.Create();
-                    byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-                    byte[] hash = md5.ComputeHash(inputBytes);
-
-                    // Step 2, convert byte array to hex string
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < hash.Length; i++)
-                    {
-                        sb.Append(hash[i].ToString("x2"));
-                    }
-                    return sb.ToString();
+                    // Parse the string, trimming line feeds
+                    // and splitting fields at tabs
+                    line = line.TrimEnd('\n');
+                    string[] field = line.Split('\t');
+                    string phoneLabel = field[1] + ' ' + field[2];
+                    // Emit new data to stdout, delimited by tabs
+                    Console.WriteLine("{0}\t{1}\t{2}", field[0], phoneLabel, GetMD5Hash(phoneLabel));
                 }
             }
+            /// <summary>
+            /// Returns an MD5 hash for the given string
+            /// </summary>
+            /// <param name="input">string value</param>
+            /// <returns>an MD5 hash</returns>
+            static string GetMD5Hash(string input)
+            {
+                // Step 1, calculate MD5 hash from input
+                MD5 md5 = System.Security.Cryptography.MD5.Create();
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hash = md5.ComputeHash(inputBytes);
+
+                // Step 2, convert byte array to hex string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    sb.Append(hash[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
+    }
+    ```
 
 3. 生成项目。
 
@@ -137,13 +139,15 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 6. 请使用以下内容执行 Hive 查询：
 
-        add file wasb:///HiveCSharp.exe;
+    ```
+    add file wasb:///HiveCSharp.exe;
 
-        SELECT TRANSFORM (clientid, devicemake, devicemodel)
-        USING 'HiveCSharp.exe' AS
-        (clientid string, phoneLabel string, phoneHash string)
-        FROM hivesampletable
-        ORDER BY clientid LIMIT 50;
+    SELECT TRANSFORM (clientid, devicemake, devicemodel)
+    USING 'HiveCSharp.exe' AS
+    (clientid string, phoneLabel string, phoneHash string)
+    FROM hivesampletable
+    ORDER BY clientid LIMIT 50;
+    ```
 
     这将从 `hivesampletable` 中选择 `clientid`、`devicemake` 和 `devicemodel` 字段，并将这些字段传递到 HiveCSharp.exe 应用程序。该查询预期应用程序返回三个字段，它们将存储为 `clientid`、`phoneLabel` 和 `phoneHash`。该查询还预期在默认存储容器的根目录中找到 HiveCSharp.exe (`add file wasbs:///HiveCSharp.exe`)。
 
@@ -159,32 +163,34 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 2. 将 **Program.cs** 文件的内容替换为以下内容：
 
-        using System;
+    ```
+    using System;
 
-        namespace PigUDF
+    namespace PigUDF
+    {
+        class Program
         {
-            class Program
+            static void Main(string[] args)
             {
-                static void Main(string[] args)
+                string line;
+                // Read stdin in a loop
+                while ((line = Console.ReadLine()) != null)
                 {
-                    string line;
-                    // Read stdin in a loop
-                    while ((line = Console.ReadLine()) != null)
+                    // Fix formatting on lines that begin with an exception
+                    if(line.StartsWith("java.lang.Exception"))
                     {
-                        // Fix formatting on lines that begin with an exception
-                        if(line.StartsWith("java.lang.Exception"))
-                        {
-                            // Trim the error info off the beginning and add a note to the end of the line
-                            line = line.Remove(0, 21) + " - java.lang.Exception";
-                        }
-                        // Split the fields apart at tab characters
-                        string[] field = line.Split('\t');
-                        // Put fields back together for writing
-                        Console.WriteLine(String.Join("\t",field));
+                        // Trim the error info off the beginning and add a note to the end of the line
+                        line = line.Remove(0, 21) + " - java.lang.Exception";
                     }
+                    // Split the fields apart at tab characters
+                    string[] field = line.Split('\t');
+                    // Put fields back together for writing
+                    Console.WriteLine(String.Join("\t",field));
                 }
             }
         }
+    }
+    ```
 
     此应用程序将分析 Pig 发送的行，并对以 `java.lang.Exception` 开头的行重新设置格式。
 
@@ -202,30 +208,37 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 2. 使用以下命令启动 Pig 命令行：
 
-        cd %PIG_HOME%
-        bin\pig
+    ```
+    cd %PIG_HOME%
+    bin\pig
+    ```
 
     系统将显示 `grunt>` 提示符。
 
 3. 输入以下命令以使用 .NET Framework 应用程序运行简单的 Pig 作业：
 
-        DEFINE streamer `pigudf.exe` SHIP('pigudf.exe');
-        LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
-        LOG = FILTER LOGS by LINE is not null;
-        DETAILS = STREAM LOG through streamer as (col1, col2, col3, col4, col5);
-        DUMP DETAILS;
+    ```
+    DEFINE streamer `pigudf.exe` SHIP('pigudf.exe');
+    LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
+    LOG = FILTER LOGS by LINE is not null;
+    DETAILS = STREAM LOG through streamer as (col1, col2, col3, col4, col5);
+    DUMP DETAILS;
+    ```
 
     `DEFINE` 语句为 pigudf.exe 应用程序创建别名 `streamer`，`SHIP` 将其在群集的节点中进行分发。以后，可以将 `streamer` 与 `STREAM` 运算符配合使用，以便处理 LOG 中包含的单一行，并将数据返回为一系列的列。
 
-> [!NOTE]用于流式处理的应用程序名称在使用别名时必须用 `（反引号）字符括起来，当与 `SHIP` 一起使用时，必须用 '（单引号）括起来。
+> [!NOTE]
+>用于流式处理的应用程序名称在使用别名时必须用 `（反引号）字符括起来，当与 `SHIP` 一起使用时，必须用 '（单引号）括起来。
 
 3. 输入最后一行后，该作业应该启动。最终，它将返回类似于以下内容的输出：
 
-        (2012-02-03 20:11:56 SampleClass5 [WARN] problem finding id 1358451042 - java.lang.Exception)
-        (2012-02-03 20:11:56 SampleClass5 [DEBUG] detail for id 1976092771)
-        (2012-02-03 20:11:56 SampleClass5 [TRACE] verbose detail for id 1317358561)
-        (2012-02-03 20:11:56 SampleClass5 [TRACE] verbose detail for id 1737534798)
-        (2012-02-03 20:11:56 SampleClass7 [DEBUG] detail for id 1475865947)
+    ```
+    (2012-02-03 20:11:56 SampleClass5 [WARN] problem finding id 1358451042 - java.lang.Exception)
+    (2012-02-03 20:11:56 SampleClass5 [DEBUG] detail for id 1976092771)
+    (2012-02-03 20:11:56 SampleClass5 [TRACE] verbose detail for id 1317358561)
+    (2012-02-03 20:11:56 SampleClass5 [TRACE] verbose detail for id 1737534798)
+    (2012-02-03 20:11:56 SampleClass7 [DEBUG] detail for id 1475865947)
+    ```
 
 ##摘要
 

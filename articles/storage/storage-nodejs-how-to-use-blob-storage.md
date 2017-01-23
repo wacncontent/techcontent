@@ -37,7 +37,7 @@ ms.author: marsma
 ### 使用 Node 包管理器 (NPM) 可获取包
 1. 使用 **PowerShell** (Windows)、**Terminal** (Mac) 或 **Bash** (Unix) 等命令行接口导航到在其中创建了示例应用程序的文件夹。
 2. 在命令窗口中键入 **npm install azure-storage**。该命令的输出类似于以下代码示例。
-   
+
   azure-storage@0.5.0 node_modules\azure-storage
   +-- extend@1.2.1
   +-- xmlbuilder@0.4.3
@@ -54,7 +54,9 @@ ms.author: marsma
 ### 导入包
 使用记事本或其他文本编辑器将以下内容添加到要在其中使用存储的应用程序的 **server.js** 文件的顶部：
 
-    var azure = require('azure-storage');
+```
+var azure = require('azure-storage');
+```
 
 ## 设置 Azure 存储连接
 Azure 模块将读取环境变量 `AZURE_STORAGE_ACCOUNT`、`AZURE_STORAGE_ACCESS_KEY` 或 `AZURE_STORAGE_CONNECTION_STRING`，以获取连接到 Azure 存储帐户所需的信息。如果未设置这些环境变量，则在调用 **createBlobService** 时必须指定帐户信息。
@@ -64,19 +66,24 @@ Azure 模块将读取环境变量 `AZURE_STORAGE_ACCOUNT`、`AZURE_STORAGE_ACCES
 ## 创建容器
 使用 **BlobService** 对象可以对容器和 Blob 进行操作。以下代码创建 **BlobService** 对象。将以下内容添加到 **server.js** 顶部附近。
 
-    var blobSvc = azure.createBlobService();
+```
+var blobSvc = azure.createBlobService();
+```
 
-> [!NOTE] 可以匿名访问 Blob，只需使用 **createBlobServiceAnonymous** 并提供主机地址即可。例如，使用 `var blobSvc = azure.createBlobServiceAnonymous('https://myblob.blob.core.chinacloudapi.cn/');`。
+> [!NOTE]
+> 可以匿名访问 Blob，只需使用 **createBlobServiceAnonymous** 并提供主机地址即可。例如，使用 `var blobSvc = azure.createBlobServiceAnonymous('https://myblob.blob.core.chinacloudapi.cn/');`。
 
 [!INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
 
 若要创建一个新的容器，请使用 **createContainerIfNotExists**。以下代码示例将创建名为“mycontainer”的新容器：
 
-    blobSvc.createContainerIfNotExists('mycontainer', function(error, result, response){
-        if(!error){
-              // Container exists and is private
-        }
-    });
+```
+blobSvc.createContainerIfNotExists('mycontainer', function(error, result, response){
+    if(!error){
+          // Container exists and is private
+    }
+});
+```
 
 如果该容器是新建的，则 `result.created` 为 true。如果该容器已存在，则 `result.created` 为 false。`response` 包含有关操作的信息，包括容器的 ETag 信息。
 
@@ -88,39 +95,49 @@ Azure 模块将读取环境变量 `AZURE_STORAGE_ACCOUNT`、`AZURE_STORAGE_ACCES
 
 以下代码示例演示了如何将访问级别设置为“Blob”：
 
-    blobSvc.createContainerIfNotExists('mycontainer', {publicAccessLevel : 'blob'}, function(error, result, response){
-        if(!error){
-          // Container exists and allows
-          // anonymous read access to blob
-          // content and metadata within this container
-        }
-    });
+```
+blobSvc.createContainerIfNotExists('mycontainer', {publicAccessLevel : 'blob'}, function(error, result, response){
+    if(!error){
+      // Container exists and allows
+      // anonymous read access to blob
+      // content and metadata within this container
+    }
+});
+```
 
 另外，可以通过使用 **setContainerAcl** 指定访问级别来修改容器的访问级别。以下代码示例将访问级别更改为“容器”：
 
-    blobSvc.setContainerAcl('mycontainer', null /* signedIdentifiers */, {publicAccessLevel : 'container'} /* publicAccessLevel*/, function(error, result, response){
-      if(!error){
-        // Container access level set to 'container'
-      }
-    });
+```
+blobSvc.setContainerAcl('mycontainer', null /* signedIdentifiers */, {publicAccessLevel : 'container'} /* publicAccessLevel*/, function(error, result, response){
+  if(!error){
+    // Container access level set to 'container'
+  }
+});
+```
 
 结果将包含有关操作的信息，包括容器的当前 **ETag**。
 
 ### 筛选器
 可以向使用 **BlobService** 执行的操作应用可选的筛选操作。筛选操作可包括日志记录、自动重试等。筛选器是实现具有签名的方法的对象：
 
-    function handle (requestOptions, next)
+```
+function handle (requestOptions, next)
+```
 
 在对请求选项执行预处理后，该方法需要调用“next”并且传递具有以下签名的回调：
 
-    function (returnObject, finalCallback, next)
+```
+function (returnObject, finalCallback, next)
+```
 
 在此回调中并且在处理 returnObject（来自对服务器请求的响应）后，回调需要调用 next（如果它已存在）以继续处理其他筛选器或只调用 finalCallback 以便结束服务调用。
 
 Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别是 **ExponentialRetryPolicyFilter** 和 **LinearRetryPolicyFilter**。下面的代码将创建一个 **BlobService** 对象，该对象使用 **ExponentialRetryPolicyFilter**：
 
-    var retryOperations = new azure.ExponentialRetryPolicyFilter();
-    var blobSvc = azure.createBlobService().withFilter(retryOperations);
+```
+var retryOperations = new azure.ExponentialRetryPolicyFilter();
+var blobSvc = azure.createBlobService().withFilter(retryOperations);
+```
 
 ## 将 Blob 上传到容器中
 有三种类型的 Blob：块 Blob、页 Blob 和追加 Blob。块 Blob 能够实现更高效地上传大型数据。追加 Blob 针对追加操作进行了优化。页 Blob 针对读取/写入操作进行了优化。有关详细信息，请参阅[了解块 Blob、追加 Blob 和页 Blob](http://msdn.microsoft.com/zh-cn/library/azure/ee691964.aspx)。
@@ -135,11 +152,13 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myblob** 中。
 
-    blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', function(error, result, response){
-      if(!error){
-        // file uploaded
-      }
-    });
+```
+blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', function(error, result, response){
+  if(!error){
+    // file uploaded
+  }
+});
+```
 
 这些方法返回的 `result` 将包含有关操作的信息，例如 Blob 的 **ETag**。
 
@@ -153,11 +172,13 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myappendblob** 中。
 
-    blobSvc.createAppendBlobFromLocalFile('mycontainer', 'myappendblob', 'test.txt', function(error, result, response){
-      if(!error){
-        // file uploaded
-      }
-    });
+```
+blobSvc.createAppendBlobFromLocalFile('mycontainer', 'myappendblob', 'test.txt', function(error, result, response){
+  if(!error){
+    // file uploaded
+  }
+});
+```
 
 若要将块追加到现有追加 Blob，请使用以下方法：
 
@@ -167,15 +188,18 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 * **appendBlockFromStream** - 将流的内容追加到现有追加 Blob
 * **appendBlockFromText** - 将字符串的内容追加到现有追加 Blob
 
-> [!NOTE] appendFromXXX API 将会执行某些客户端验证以快速失败，从而避免不必要的服务器调用。而 appendBlockFromXXX 则不会如此。
+> [!NOTE]
+> appendFromXXX API 将会执行某些客户端验证以快速失败，从而避免不必要的服务器调用。而 appendBlockFromXXX 则不会如此。
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myappendblob** 中。
 
-    blobSvc.appendFromText('mycontainer', 'myappendblob', 'text to be appended', function(error, result, response){
-      if(!error){
-        // text appended
-      }
-    });
+```
+blobSvc.appendFromText('mycontainer', 'myappendblob', 'text to be appended', function(error, result, response){
+  if(!error){
+    // text appended
+  }
+});
+```
 
 ### 页 Blob
 若要将数据上传到页 Blob，可使用以下方法：
@@ -188,23 +212,28 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 以下代码示例将 **test.txt** 文件的内容上传到 **mypageblob** 中。
 
-    blobSvc.createPageBlobFromLocalFile('mycontainer', 'mypageblob', 'test.txt', function(error, result, response){
-      if(!error){
-        // file uploaded
-      }
-    });
+```
+blobSvc.createPageBlobFromLocalFile('mycontainer', 'mypageblob', 'test.txt', function(error, result, response){
+  if(!error){
+    // file uploaded
+  }
+});
+```
 
-> [!NOTE] 页 Blob 包含 512 字节的“页面”。如果上传大小不是 512 倍数的数据，则会收到错误。
+> [!NOTE]
+> 页 Blob 包含 512 字节的“页面”。如果上传大小不是 512 倍数的数据，则会收到错误。
 
 ## 列出容器中的 Blob
 若要列出容器中的 Blob，请使用 **listBlobsSegmented** 方法。如果想要返回带特定前缀的 Blob，请使用 **listBlobsSegmentedWithPrefix**。
 
-    blobSvc.listBlobsSegmented('mycontainer', null, function(error, result, response){
-      if(!error){
-          // result.entries contains the entries
-          // If not all blobs were returned, result.continuationToken has the continuation token.
-      }
-    });
+```
+blobSvc.listBlobsSegmented('mycontainer', null, function(error, result, response){
+  if(!error){
+      // result.entries contains the entries
+      // If not all blobs were returned, result.continuationToken has the continuation token.
+  }
+});
+```
 
 `result` 包含一个 `entries` 集合，该集合是一组用于描述每个 Blob 的对象。如果不能返回所有 Blob，`result` 还将提供 `continuationToken`，这可用作第二个参数来检索其他条目。
 
@@ -218,23 +247,27 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 以下代码示例演示了如何使用 **getBlobToStream** 下载 **myblob** Blob 的内容，并使用一个流将其存储到 **output.txt** 文件：
 
-    var fs = require('fs');
-    blobSvc.getBlobToStream('mycontainer', 'myblob', fs.createWriteStream('output.txt'), function(error, result, response){
-      if(!error){
-        // blob retrieved
-      }
-    });
+```
+var fs = require('fs');
+blobSvc.getBlobToStream('mycontainer', 'myblob', fs.createWriteStream('output.txt'), function(error, result, response){
+  if(!error){
+    // blob retrieved
+  }
+});
+```
 
 `result` 包含有关 Blob 的信息，包括 **ETag** 信息。
 
 ## 删除 Blob
 最后，若要删除 Blob，请调用 **deleteBlob**。以下代码示例将删除名为 **myblob** 的 Blob。
 
-    blobSvc.deleteBlob(containerName, 'myblob', function(error, response){
-      if(!error){
-        // Blob has been deleted
-      }
-    });
+```
+blobSvc.deleteBlob(containerName, 'myblob', function(error, response){
+  if(!error){
+    // Blob has been deleted
+  }
+});
+```
 
 ## 并发访问
 若要允许从多个客户端或多个进程实例并发访问某个 Blob，可以使用 **ETag** 或**租约**。
@@ -247,11 +280,13 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 可以使用可选的 `options.accessConditions` 参数设置 ETag 条件。如果 Blob 已存在且具有 `etagToMatch` 所包含的 ETag 值，则以下代码示例将仅上传 **test.txt** 文件。
 
-    blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', { accessConditions: { EtagMatch: etagToMatch} }, function(error, result, response){
-        if(!error){
-        // file uploaded
-      }
-    });
+```
+blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', { accessConditions: { EtagMatch: etagToMatch} }, function(error, result, response){
+    if(!error){
+    // file uploaded
+  }
+});
+```
 
 当使用 ETag 时，常规模式为：
 
@@ -264,53 +299,61 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 新的租约可使用 **acquireLease** 方法获取，只需指定希望获取其租约的 Blob 或容器即可。例如，以下代码将获取 **myblob** 的租约。
 
-    blobSvc.acquireLease('mycontainer', 'myblob', function(error, result, response){
-      if(!error) {
-        console.log('leaseId: ' + result.id);
-      }
-    });
+```
+blobSvc.acquireLease('mycontainer', 'myblob', function(error, result, response){
+  if(!error) {
+    console.log('leaseId: ' + result.id);
+  }
+});
+```
 
 对 **myblob** 的后续操作必须提供 `options.leaseId` 参数。租约 ID 作为 `result.id` 从 **acquireLease** 返回。
 
-> [!NOTE] 默认情况下，租约期限为无期。可以指定一个有限的租期（15 到 60 秒），只需提供 `options.leaseDuration` 参数即可。
+> [!NOTE]
+> 默认情况下，租约期限为无期。可以指定一个有限的租期（15 到 60 秒），只需提供 `options.leaseDuration` 参数即可。
 
 若要删除租约，请使用 **releaseLease**。若要中断租约，但又要防止其他人在原始租约到期之前获得新租约，则可使用 **breakLease**。
 
 ## 使用共享访问签名
 共享访问签名 (SAS) 是一种安全的方法，用于对 Blob 和容器进行细致访问而无需提供存储帐户名或密钥。通常使用共享访问签名来提供对数据的有限访问权限，例如允许移动应用程序访问 Blob。
 
-> [!NOTE] 虽然也可以允许匿名访问 Blob，但共享访问签名可以允许提供更受控制的访问，因为必须生成 SAS。
+> [!NOTE]
+> 虽然也可以允许匿名访问 Blob，但共享访问签名可以允许提供更受控制的访问，因为必须生成 SAS。
 
 受信任的应用程序（例如基于云的服务）可使用 **BlobService** 的 **generateSharedAccessSignature** 生成共享访问签名，然后将其提供给不受信任的或不完全受信任的应用程序，例如移动应用。共享访问签名可使用策略生成，该策略描述了共享访问签名的生效日期和失效日期，以及授予共享访问签名持有者的访问级别。
 
 以下代码示例生成了一个新的共享访问策略，该策略将允许共享访问签名持有者对 **myblob** Blob 执行读取操作，并且在创建后 100 分钟过期。
 
-    var startDate = new Date();
-    var expiryDate = new Date(startDate);
-    expiryDate.setMinutes(startDate.getMinutes() + 100);
-    startDate.setMinutes(startDate.getMinutes() - 100);
+```
+var startDate = new Date();
+var expiryDate = new Date(startDate);
+expiryDate.setMinutes(startDate.getMinutes() + 100);
+startDate.setMinutes(startDate.getMinutes() - 100);
 
-    var sharedAccessPolicy = {
-      AccessPolicy: {
-        Permissions: azure.BlobUtilities.SharedAccessPermissions.READ,
-        Start: startDate,
-        Expiry: expiryDate
-      },
-    };
+var sharedAccessPolicy = {
+  AccessPolicy: {
+    Permissions: azure.BlobUtilities.SharedAccessPermissions.READ,
+    Start: startDate,
+    Expiry: expiryDate
+  },
+};
 
-    var blobSAS = blobSvc.generateSharedAccessSignature('mycontainer', 'myblob', sharedAccessPolicy);
-    var host = blobSvc.host;
+var blobSAS = blobSvc.generateSharedAccessSignature('mycontainer', 'myblob', sharedAccessPolicy);
+var host = blobSvc.host;
+```
 
 请注意，还必须提供主机信息，因为共享访问签名持有者尝试访问容器时，必须提供该信息。
 
 然后，客户端应用程序将共享访问签名用于 **BlobServiceWithSAS**，以便针对 Blob 执行操作。以下语句获取有关 **myblob** 的信息。
 
-    var sharedBlobSvc = azure.createBlobServiceWithSas(host, blobSAS);
-    sharedBlobSvc.getBlobProperties('mycontainer', 'myblob', function (error, result, response) {
-      if(!error) {
-        // retrieved info
-      }
-    });
+```
+var sharedBlobSvc = azure.createBlobServiceWithSas(host, blobSAS);
+sharedBlobSvc.getBlobProperties('mycontainer', 'myblob', function (error, result, response) {
+  if(!error) {
+    // retrieved info
+  }
+});
+```
 
 由于共享访问签名在生成时具有只读访问权限，因此如果尝试修改 Blob，则会返回错误。
 
@@ -319,36 +362,42 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID。以下代码示例定义了两个策略，一个用于“user1”，一个用于“user2”：
 
-    var sharedAccessPolicy = {
-      user1: {
-        Permissions: azure.BlobUtilities.SharedAccessPermissions.READ,
-        Start: startDate,
-        Expiry: expiryDate
-      },
-      user2: {
-        Permissions: azure.BlobUtilities.SharedAccessPermissions.WRITE,
-        Start: startDate,
-        Expiry: expiryDate
-      }
-    };
+```
+var sharedAccessPolicy = {
+  user1: {
+    Permissions: azure.BlobUtilities.SharedAccessPermissions.READ,
+    Start: startDate,
+    Expiry: expiryDate
+  },
+  user2: {
+    Permissions: azure.BlobUtilities.SharedAccessPermissions.WRITE,
+    Start: startDate,
+    Expiry: expiryDate
+  }
+};
+```
 
 以下代码示例将获取 **mycontainer** 的当前 ACL，然后使用 **setBlobAcl** 添加新策略。此方法具有以下用途：
 
-    var extend = require('extend');
-    blobSvc.getBlobAcl('mycontainer', function(error, result, response) {
+```
+var extend = require('extend');
+blobSvc.getBlobAcl('mycontainer', function(error, result, response) {
+  if(!error){
+    var newSignedIdentifiers = extend(true, result.signedIdentifiers, sharedAccessPolicy);
+    blobSvc.setBlobAcl('mycontainer', newSignedIdentifiers, function(error, result, response){
       if(!error){
-        var newSignedIdentifiers = extend(true, result.signedIdentifiers, sharedAccessPolicy);
-        blobSvc.setBlobAcl('mycontainer', newSignedIdentifiers, function(error, result, response){
-          if(!error){
-            // ACL set
-          }
-        });
+        // ACL set
       }
     });
+  }
+});
+```
 
 设置 ACL 后，可以根据某个策略的 ID 创建共享访问签名。以下代码示例将为“user2”创建新的共享访问签名：
 
-    blobSAS = blobSvc.generateSharedAccessSignature('mycontainer', { Id: 'user2' });
+```
+blobSAS = blobSvc.generateSharedAccessSignature('mycontainer', { Id: 'user2' });
+```
 
 ## 后续步骤
 有关详细信息，请参阅以下资源。
@@ -370,5 +419,5 @@ ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID�
 [使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
 [Azure Storage Team Blog]: http://blogs.msdn.com/b/windowsazurestorage/
 [Azure Storage SDK for Node API Reference]: http://azure.github.io/azure-storage-node/
- 
+
 <!---HONumber=Mooncake_0103_2017-->

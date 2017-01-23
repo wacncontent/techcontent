@@ -82,10 +82,12 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 6. 单击“编辑”按钮启用对资源的编辑。
 7. 查找 **allowedExternalRedirectUrls** 元素，此元素应为 null。在数组中添加 URL：
 
-         "allowedExternalRedirectUrls": [
-             "http://localhost:3000",
-             "https://localhost:3000"
-         ],
+    ```
+     "allowedExternalRedirectUrls": [
+         "http://localhost:3000",
+         "https://localhost:3000"
+     ],
+    ```
 
     将数组中的 URL 替换为服务的 URL，在本示例中为本地 Node.js 示例服务的 `http://localhost:3000`。对于 Ripple 服务，也可以根据应用的配置方式，使用 `http://localhost:4400` 或其他某个 URL。
 
@@ -98,7 +100,7 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 3. 在“API”菜单中单击“CORS”。
 4. 在空的“允许的来源”文本框中输入每个 URL。将创建新的文本框。
 5. 单击“保存”
-    
+
 后端更新后，可以在应用中使用新的环回 URL。
 
 <!-- URLs. -->

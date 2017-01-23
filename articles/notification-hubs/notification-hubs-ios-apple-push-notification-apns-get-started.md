@@ -24,7 +24,8 @@ wacn.date: 11/22/2016
 
 ##概述
 
-> [!NOTE] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
+> [!NOTE]
+> 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 本教程演示如何使用 Azure 通知中心将推送通知发送到 iOS 应用程序。你将创建一个空白 iOS 应用，它使用 Apple 推送通知服务 (APNS) 接收推送通知。
 
@@ -45,7 +46,8 @@ wacn.date: 11/22/2016
 + 支持 iOS 8（或更高版本）的设备
 + [Apple 开发人员计划](https://developer.apple.com/programs/)成员身份。
 
-   > [!NOTE] 由于推送通知的配置要求，你必须在物理 iOS 的设备（iPhone 或 iPad）而不是在 iOS 模拟器上部署和测试推送通知。
+   > [!NOTE]
+   > 由于推送通知的配置要求，你必须在物理 iOS 的设备（iPhone 或 iPad）而不是在 iOS 模拟器上部署和测试推送通知。
 
 完成本教程是学习有关 iOS 应用的所有其他通知中心教程的先决条件。
 
@@ -87,68 +89,81 @@ wacn.date: 11/22/2016
 
 4. 下载[移动服务 iOS SDK 版本 1.2.4]，然后将文件解压缩。在 Xcode 中，右键单击你的项目，然后单击“将文件添加到”选项，将 **WindowsAzureMessaging.framework** 文件夹添加到 Xcode 项目。选择“需要时复制项”，然后单击“添加”。
 
-    >[!NOTE] 通知中心 SDK 目前不支持 Xcode 7 上的 Bitcode。你必须在项目的“构建选项”中将“启用 Bitcode”设置为“否”。
+    >[!NOTE]
+    > 通知中心 SDK 目前不支持 Xcode 7 上的 Bitcode。你必须在项目的“构建选项”中将“启用 Bitcode”设置为“否”。
 
        ![解压缩 Azure SDK][10]  
 
 5. 将新的标头文件添加到名为 `HubInfo.h` 的项目。此文件将保存通知中心的常量。添加以下定义，然后将字符串文本占位符替换为你的 *中心名称* 以及前面记下的 *DefaultListenSharedAccessSignature*。
 
-        #ifndef HubInfo_h
-        #define HubInfo_h
-        
-            #define HUBNAME @"<Enter the name of your hub>"
-            #define HUBLISTENACCESS @"<Enter your DefaultListenSharedAccess connection string"
-        
-        #endif /* HubInfo_h */
+    ```
+    #ifndef HubInfo_h
+    #define HubInfo_h
+
+        #define HUBNAME @"<Enter the name of your hub>"
+        #define HUBLISTENACCESS @"<Enter your DefaultListenSharedAccess connection string"
+
+    #endif /* HubInfo_h */
+    ```
 
 6. 打开 `AppDelegate.h` 文件并添加以下导入指令：
 
-         #import <WindowsAzureMessaging/WindowsAzureMessaging.h> 
-         #import "HubInfo.h"
-        
+    ```
+     #import <WindowsAzureMessaging/WindowsAzureMessaging.h> 
+     #import "HubInfo.h"
+    ```
+
 7. 根据 iOS 版本，在 `AppDelegate.m file` 的 `didFinishLaunchingWithOptions` 方法中添加以下代码。此代码将向 APNs 注册设备句柄：
 
     对于 iOS 8：
 
-         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound |
-                                                UIUserNotificationTypeAlert | UIUserNotificationTypeBadge categories:nil];
+    ```
+     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound |
+                                            UIUserNotificationTypeAlert | UIUserNotificationTypeBadge categories:nil];
 
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    ```
 
     对于 iOS 8 之前的版本：
 
-         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    ```
+     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    ```
 
 8. 在同一文件中，添加以下方法。此代码将使用你在 HubInfo.h 中指定的连接信息连接到通知中心。然后，它向通知中心提供设备令牌，使通知中心能够发送通知：
 
-        - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *) deviceToken {
-            SBNotificationHub* hub = [[SBNotificationHub alloc] initWithConnectionString:HUBLISTENACCESS
-                                        notificationHubPath:HUBNAME];
+    ```
+    - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *) deviceToken {
+        SBNotificationHub* hub = [[SBNotificationHub alloc] initWithConnectionString:HUBLISTENACCESS
+                                    notificationHubPath:HUBNAME];
 
-            [hub registerNativeWithDeviceToken:deviceToken tags:nil completion:^(NSError* error) {
-                if (error != nil) {
-                    NSLog(@"Error registering for notifications: %@", error);
-                }
-                else {
-                    [self MessageBox:@"Registration Status" message:@"Registered"];
-                }
-            }];
-        }
+        [hub registerNativeWithDeviceToken:deviceToken tags:nil completion:^(NSError* error) {
+            if (error != nil) {
+                NSLog(@"Error registering for notifications: %@", error);
+            }
+            else {
+                [self MessageBox:@"Registration Status" message:@"Registered"];
+            }
+        }];
+    }
 
-        -(void)MessageBox:(NSString *)title message:(NSString *)messageText
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:messageText delegate:self
-                cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
+    -(void)MessageBox:(NSString *)title message:(NSString *)messageText
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:messageText delegate:self
+            cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    ```
 
 9. 在同一文件中，添加以下方法以便在应用处于活动状态时收到通知的情况下显示 **UIAlert**：
 
-        - (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
-            NSLog(@"%@", userInfo);
-            [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
-        }
+    ```
+    - (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
+        NSLog(@"%@", userInfo);
+        [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
+    }
+    ```
 
 10. 在设备上生成并运行应用，以验证是否不会失败。
 
@@ -162,7 +177,8 @@ wacn.date: 11/22/2016
 
 ## （可选）从应用发送推送通知
 
->[!IMPORTANT] 提供这个从客户端应用发送通知查询的示例仅供学习。由于这需要将 `DefaultFullSharedAccessSignature` 呈现在客户端应用中，这使您的通知中心面临这样的风险：即用户可能会获得相应访问权限将未经授权的通知发送到您的客户端。
+>[!IMPORTANT]
+> 提供这个从客户端应用发送通知查询的示例仅供学习。由于这需要将 `DefaultFullSharedAccessSignature` 呈现在客户端应用中，这使您的通知中心面临这样的风险：即用户可能会获得相应访问权限将未经授权的通知发送到您的客户端。
 
 如果你要从应用内发送推送通知，本节提供如何使用 REST 接口执行此操作的示例。
 
@@ -180,246 +196,265 @@ wacn.date: 11/22/2016
 
     ViewController.h 文件应如下所示：
 
-        #import <UIKit/UIKit.h>
+    ```
+    #import <UIKit/UIKit.h>
 
-        @interface ViewController : UIViewController <UITextFieldDelegate, NSXMLParserDelegate>
-        {
-            NSXMLParser *xmlParser;
-        }
+    @interface ViewController : UIViewController <UITextFieldDelegate, NSXMLParserDelegate>
+    {
+        NSXMLParser *xmlParser;
+    }
 
-        // Make sure these outlets are connected to your UI by ctrl+dragging
-        @property (weak, nonatomic) IBOutlet UITextField *notificationMessage;
-        @property (weak, nonatomic) IBOutlet UILabel *sendResults;
+    // Make sure these outlets are connected to your UI by ctrl+dragging
+    @property (weak, nonatomic) IBOutlet UITextField *notificationMessage;
+    @property (weak, nonatomic) IBOutlet UILabel *sendResults;
 
-        @property (copy, nonatomic) NSString *statusResult;
-        @property (copy, nonatomic) NSString *currentElement;
+    @property (copy, nonatomic) NSString *statusResult;
+    @property (copy, nonatomic) NSString *currentElement;
 
-        @end
+    @end
+    ```
 
 3. 打开 `HubInfo.h` 并添加以下常量，用于向中心发送通知。将占位符字符串文本替换为实际的 *DefaultFullSharedAccessSignature* 连接字符串。
 
-        #define API_VERSION @"?api-version=2015-01"
-        #define HUBFULLACCESS @"<Enter Your DefaultFullSharedAccess Connection string>"
+    ```
+    #define API_VERSION @"?api-version=2015-01"
+    #define HUBFULLACCESS @"<Enter Your DefaultFullSharedAccess Connection string>"
+    ```
 
 4. 向 `ViewController.h` 文件添加以下 `#import` 语句。
 
-        #import <CommonCrypto/CommonHMAC.h>
-        #import "HubInfo.h"
+    ```
+    #import <CommonCrypto/CommonHMAC.h>
+    #import "HubInfo.h"
+    ```
 
 5. 在 `ViewController.m` 中，将以下代码添加到接口实现。此代码将会分析你的 *DefaultFullSharedAccessSignature* 连接字符串。如 [REST API 参考](http://msdn.microsoft.com/zh-cn/library/azure/dn495627.aspx)中所述，此类已分析的信息将用于生成 **Authorization** 请求标头的 SaS 令牌。
 
-        NSString *HubEndpoint;
-        NSString *HubSasKeyName;
-        NSString *HubSasKeyValue;
+    ```
+    NSString *HubEndpoint;
+    NSString *HubSasKeyName;
+    NSString *HubSasKeyValue;
 
-        -(void)ParseConnectionString
+    -(void)ParseConnectionString
+    {
+        NSArray *parts = [HUBFULLACCESS componentsSeparatedByString:@";"];
+        NSString *part;
+
+        if ([parts count] != 3)
         {
-            NSArray *parts = [HUBFULLACCESS componentsSeparatedByString:@";"];
-            NSString *part;
+            NSException* parseException = [NSException exceptionWithName:@"ConnectionStringParseException"
+                reason:@"Invalid full shared access connection string" userInfo:nil];
 
-            if ([parts count] != 3)
+            @throw parseException;
+        }
+
+        for (part in parts)
+        {
+            if ([part hasPrefix:@"Endpoint"])
             {
-                NSException* parseException = [NSException exceptionWithName:@"ConnectionStringParseException"
-                    reason:@"Invalid full shared access connection string" userInfo:nil];
-
-                @throw parseException;
+                HubEndpoint = [NSString stringWithFormat:@"https%@",[part substringFromIndex:11]];
             }
-
-            for (part in parts)
+            else if ([part hasPrefix:@"SharedAccessKeyName"])
             {
-                if ([part hasPrefix:@"Endpoint"])
-                {
-                    HubEndpoint = [NSString stringWithFormat:@"https%@",[part substringFromIndex:11]];
-                }
-                else if ([part hasPrefix:@"SharedAccessKeyName"])
-                {
-                    HubSasKeyName = [part substringFromIndex:20];
-                }
-                else if ([part hasPrefix:@"SharedAccessKey"])
-                {
-                    HubSasKeyValue = [part substringFromIndex:16];
-                }
+                HubSasKeyName = [part substringFromIndex:20];
+            }
+            else if ([part hasPrefix:@"SharedAccessKey"])
+            {
+                HubSasKeyValue = [part substringFromIndex:16];
             }
         }
+    }
+    ```
 
 6. 在 `ViewController.m` 中更新 `viewDidLoad` 方法，以便在加载视图时解析连接字符串。此外，将如下所示的实用程序方法添加到接口实现。
 
-        - (void)viewDidLoad
-        {
-            [super viewDidLoad];
-            [self ParseConnectionString];
-            [_notificationMessage setDelegate:self];
-        }
+    ```
+    - (void)viewDidLoad
+    {
+        [super viewDidLoad];
+        [self ParseConnectionString];
+        [_notificationMessage setDelegate:self];
+    }
 
-        -(NSString *)CF_URLEncodedString:(NSString *)inputString
-        {
-           return (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)inputString,
-                NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
-        }
+    -(NSString *)CF_URLEncodedString:(NSString *)inputString
+    {
+       return (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)inputString,
+            NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
+    }
 
-        -(void)MessageBox:(NSString *)title message:(NSString *)messageText
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:messageText delegate:self
-                cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
+    -(void)MessageBox:(NSString *)title message:(NSString *)messageText
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:messageText delegate:self
+            cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    ```
 
 7. 如 [REST API 参考](http://msdn.microsoft.com/zh-cn/library/azure/dn495627.aspx)中所述，在 `ViewController.m` 中，将以下代码添加到接口实现，以生成将在 **Authorization** 标头中提供的 SaS 授权令牌。
 
-        -(NSString*) generateSasToken:(NSString*)uri
+    ```
+    -(NSString*) generateSasToken:(NSString*)uri
+    {
+        NSString *targetUri;
+        NSString* utf8LowercasedUri = NULL;
+        NSString *signature = NULL;
+        NSString *token = NULL;
+
+        @try
         {
-            NSString *targetUri;
-            NSString* utf8LowercasedUri = NULL;
-            NSString *signature = NULL;
-            NSString *token = NULL;
+            // Add expiration
+            uri = [uri lowercaseString];
+            utf8LowercasedUri = [self CF_URLEncodedString:uri];
+            targetUri = [utf8LowercasedUri lowercaseString];
+            NSTimeInterval expiresOnDate = [[NSDate date] timeIntervalSince1970];
+            int expiresInMins = 60; // 1 hour
+            expiresOnDate += expiresInMins * 60;
+            UInt64 expires = trunc(expiresOnDate);
+            NSString* toSign = [NSString stringWithFormat:@"%@\n%qu", targetUri, expires];
 
-            @try
-            {
-                // Add expiration
-                uri = [uri lowercaseString];
-                utf8LowercasedUri = [self CF_URLEncodedString:uri];
-                targetUri = [utf8LowercasedUri lowercaseString];
-                NSTimeInterval expiresOnDate = [[NSDate date] timeIntervalSince1970];
-                int expiresInMins = 60; // 1 hour
-                expiresOnDate += expiresInMins * 60;
-                UInt64 expires = trunc(expiresOnDate);
-                NSString* toSign = [NSString stringWithFormat:@"%@\n%qu", targetUri, expires];
+            // Get an hmac_sha1 Mac instance and initialize with the signing key
+            const char *cKey  = [HubSasKeyValue cStringUsingEncoding:NSUTF8StringEncoding];
+            const char *cData = [toSign cStringUsingEncoding:NSUTF8StringEncoding];
+            unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+            CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+            NSData *rawHmac = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+            signature = [self CF_URLEncodedString:[rawHmac base64EncodedStringWithOptions:0]];
 
-                // Get an hmac_sha1 Mac instance and initialize with the signing key
-                const char *cKey  = [HubSasKeyValue cStringUsingEncoding:NSUTF8StringEncoding];
-                const char *cData = [toSign cStringUsingEncoding:NSUTF8StringEncoding];
-                unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
-                CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
-                NSData *rawHmac = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
-                signature = [self CF_URLEncodedString:[rawHmac base64EncodedStringWithOptions:0]];
-
-                // Construct authorization token string
-                token = [NSString stringWithFormat:@"SharedAccessSignature sig=%@&se=%qu&skn=%@&sr=%@",
-                    signature, expires, HubSasKeyName, targetUri];
-            }
-            @catch (NSException *exception)
-            {
-                [self MessageBox:@"Exception Generating SaS Token" message:[exception reason]];
-            }
-            @finally
-            {
-                if (utf8LowercasedUri != NULL)
-                    CFRelease((CFStringRef)utf8LowercasedUri);
-                if (signature != NULL)
-                CFRelease((CFStringRef)signature);
-            }
-
-            return token;
+            // Construct authorization token string
+            token = [NSString stringWithFormat:@"SharedAccessSignature sig=%@&se=%qu&skn=%@&sr=%@",
+                signature, expires, HubSasKeyName, targetUri];
         }
+        @catch (NSException *exception)
+        {
+            [self MessageBox:@"Exception Generating SaS Token" message:[exception reason]];
+        }
+        @finally
+        {
+            if (utf8LowercasedUri != NULL)
+                CFRelease((CFStringRef)utf8LowercasedUri);
+            if (signature != NULL)
+            CFRelease((CFStringRef)signature);
+        }
+
+        return token;
+    }
+    ```
 
 8. 按住 Ctrl 并从“发送通知”按钮拖到 `ViewController.m`，为 **Touch Down** 事件添加名为 **SendNotificationMessage** 的操作。使用以下代码更新方法，以使用 REST API 发送通知。
 
-        - (IBAction)SendNotificationMessage:(id)sender
+    ```
+    - (IBAction)SendNotificationMessage:(id)sender
+    {
+        self.sendResults.text = @"";
+        [self SendNotificationRESTAPI];
+    }
+
+    - (void)SendNotificationRESTAPI
+    {
+        NSURLSession* session = [NSURLSession
+                         sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                         delegate:nil delegateQueue:nil];
+
+        // Apple Notification format of the notification message
+        NSString *json = [NSString stringWithFormat:@"{"aps":{"alert":"%@"}}",
+                            self.notificationMessage.text];
+
+        // Construct the message's REST endpoint
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/messages/%@", HubEndpoint,
+                                            HUBNAME, API_VERSION]];
+
+        // Generate the token to be used in the authorization header
+        NSString* authorizationToken = [self generateSasToken:[url absoluteString]];
+
+        //Create the request to add the APNs notification message to the hub
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+
+        // Signify Apple notification format
+        [request setValue:@"apple" forHTTPHeaderField:@"ServiceBusNotification-Format"];
+
+        //Authenticate the notification message POST request with the SaS token
+        [request setValue:authorizationToken forHTTPHeaderField:@"Authorization"];
+
+        //Add the notification message body
+        [request setHTTPBody:[json dataUsingEncoding:NSUTF8StringEncoding]];
+
+        // Send the REST request
+        NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request
+            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
         {
-            self.sendResults.text = @"";
-            [self SendNotificationRESTAPI];
-        }
-
-        - (void)SendNotificationRESTAPI
-        {
-            NSURLSession* session = [NSURLSession
-                             sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                             delegate:nil delegateQueue:nil];
-
-            // Apple Notification format of the notification message
-            NSString *json = [NSString stringWithFormat:@"{"aps":{"alert":"%@"}}",
-                                self.notificationMessage.text];
-
-            // Construct the message's REST endpoint
-            NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/messages/%@", HubEndpoint,
-                                                HUBNAME, API_VERSION]];
-
-            // Generate the token to be used in the authorization header
-            NSString* authorizationToken = [self generateSasToken:[url absoluteString]];
-
-            //Create the request to add the APNs notification message to the hub
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-            [request setHTTPMethod:@"POST"];
-            [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-
-            // Signify Apple notification format
-            [request setValue:@"apple" forHTTPHeaderField:@"ServiceBusNotification-Format"];
-
-            //Authenticate the notification message POST request with the SaS token
-            [request setValue:authorizationToken forHTTPHeaderField:@"Authorization"];
-
-            //Add the notification message body
-            [request setHTTPBody:[json dataUsingEncoding:NSUTF8StringEncoding]];
-
-            // Send the REST request
-            NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request
-                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+            NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+            if (error || (httpResponse.statusCode != 200 && httpResponse.statusCode != 201))
             {
-                NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
-                if (error || (httpResponse.statusCode != 200 && httpResponse.statusCode != 201))
-                {
-                    NSLog(@"\nError status: %d\nError: %@", httpResponse.statusCode, error);
-                }
-                if (data != NULL)
-                {
-                    xmlParser = [[NSXMLParser alloc] initWithData:data];
-                    [xmlParser setDelegate:self];
-                       [xmlParser parse];
-                }
-            }];
-            [dataTask resume];
-        }
+                NSLog(@"\nError status: %d\nError: %@", httpResponse.statusCode, error);
+            }
+            if (data != NULL)
+            {
+                xmlParser = [[NSXMLParser alloc] initWithData:data];
+                [xmlParser setDelegate:self];
+                   [xmlParser parse];
+            }
+        }];
+        [dataTask resume];
+    }
+    ```
 
 9. 在 `ViewController.m` 中，添加以下委托方法，以支持关闭文本字段的键盘。按住 Ctrl 并从文本字段拖到接口设计器中的视图控制器图标，以将视图控制器设为容器委派。
 
-        //===[ Implement UITextFieldDelegate methods ]===
+    ```
+    //===[ Implement UITextFieldDelegate methods ]===
 
-        -(BOOL)textFieldShouldReturn:(UITextField *)textField
-        {
-            [textField resignFirstResponder];
-            return YES;
-        }
+    -(BOOL)textFieldShouldReturn:(UITextField *)textField
+    {
+        [textField resignFirstResponder];
+        return YES;
+    }
+    ```
 
 10. 在 `ViewController.m` 中添加以下委托方法，以支持使用 `NSXMLParser` 解析响应。
 
-        //===[ Implement NSXMLParserDelegate methods ]===
+    ```
+    //===[ Implement NSXMLParserDelegate methods ]===
 
-        -(void)parserDidStartDocument:(NSXMLParser *)parser
+    -(void)parserDidStartDocument:(NSXMLParser *)parser
+    {
+        self.statusResult = @"";
+    }
+
+    -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
+        namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+        attributes:(NSDictionary *)attributeDict
+    {
+        NSString * element = [elementName lowercaseString];
+        NSLog(@"*** New element parsed : %@ ***",element);
+
+        if ([element isEqualToString:@"code"] | [element isEqualToString:@"detail"])
         {
-            self.statusResult = @"";
+            self.currentElement = element;
         }
+    }
 
-        -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
-            namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-            attributes:(NSDictionary *)attributeDict
-        {
-            NSString * element = [elementName lowercaseString];
-            NSLog(@"*** New element parsed : %@ ***",element);
+    -(void) parser:(NSXMLParser *)parser foundCharacters:(NSString *)parsedString
+    {
+        self.statusResult = [self.statusResult stringByAppendingString:
+            [NSString stringWithFormat:@"%@ : %@\n", self.currentElement, parsedString]];
+    }
 
-            if ([element isEqualToString:@"code"] | [element isEqualToString:@"detail"])
-            {
-                self.currentElement = element;
-            }
-        }
-
-        -(void) parser:(NSXMLParser *)parser foundCharacters:(NSString *)parsedString
-        {
-            self.statusResult = [self.statusResult stringByAppendingString:
-                [NSString stringWithFormat:@"%@ : %@\n", self.currentElement, parsedString]];
-        }
-
-        -(void)parserDidEndDocument:(NSXMLParser *)parser
-        {
-            // Set the status label text on the UI thread
-            dispatch_async(dispatch_get_main_queue(),
-            ^{
-                [self.sendResults setText:self.statusResult];
-            });
-        }
+    -(void)parserDidEndDocument:(NSXMLParser *)parser
+    {
+        // Set the status label text on the UI thread
+        dispatch_async(dispatch_get_main_queue(),
+        ^{
+            [self.sendResults setText:self.statusResult];
+        });
+    }
+    ```
 
 11. 生成项目并确认没有错误。
 
-> [!NOTE] 如果在 Xcode7 中遇到有关 bitcode 支持的生成错误，应该在 Xcode 中将“生成设置”>“启用 Bitcode (ENABLE\_BITCODE)”更改为“否”。通知中心 SDK 目前不支持 Bitcode。
+> [!NOTE]
+> 如果在 Xcode7 中遇到有关 bitcode 支持的生成错误，应该在 Xcode 中将“生成设置”>“启用 Bitcode (ENABLE\_BITCODE)”更改为“否”。通知中心 SDK 目前不支持 Bitcode。
 
 可以在 Apple [本地和推送通知编程指南]中查看所有可能的通知负载。
 

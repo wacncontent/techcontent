@@ -25,14 +25,15 @@ ms.author: carlrab
 - [SSMS](./sql-database-cloud-migrate-determine-compatibility-ssms.md)
 - [升级顾问](http://www.microsoft.com/download/details.aspx?id=48119)
 - [SAMW](./sql-database-cloud-migrate-fix-compatibility-issues.md)
- 
+
 在本文中，你将了解如何使用 SQL Server Management Studio 中的“导出数据层应用程序”向导确定要迁移到 SQL 数据库的 SQL Server 数据库是否兼容。
 
 ##<a name="using-sql-server-management-studio"></a> 使用 SQL Server Management Studio
 
 1. 确认你安装了最新版本的 SQL Server Management Studio。Management Studio 的新版本将每月更新一次，以与 Azure 门户的更新保持同步。
 
-      > [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+      > [!IMPORTANT]
+      > 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 2. 打开 Management Studio 并连接到你在对象资源管理器中的源数据库。
 3. 右键单击对象资源管理器中的源数据库、指向“任务”，然后单击“导出数据层应用程序...”
@@ -54,7 +55,7 @@ ms.author: carlrab
 7. 如果未显示任何错误，则数据库是兼容的，你已可以进行迁移。如果有错误，则需要修复它们。若要查看错误，请单击“验证架构”所对应的错误。
     ![导出设置](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSSMS05.png)
 
-8.	如果 *.BACPAC 文件已成功生成，则数据库与 SQL 数据库兼容，并可随时进行迁移。
+8. 如果 *.BACPAC 文件已成功生成，则数据库与 SQL 数据库兼容，并可随时进行迁移。
 
 ## 后续步骤
 

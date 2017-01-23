@@ -29,29 +29,33 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [可用性集](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L387)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Compute/availabilitySets",
-      "name": "[variables('availabilitySetName')]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [],
-      "tags": {
-        "displayName": "avalibility-set"
-      },
-      "properties": {
-        "platformUpdateDomainCount": 5,
-        "platformFaultDomainCount": 3
-      }
-    }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Compute/availabilitySets",
+  "name": "[variables('availabilitySetName')]",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [],
+  "tags": {
+    "displayName": "avalibility-set"
+  },
+  "properties": {
+    "platformUpdateDomainCount": 5,
+    "platformFaultDomainCount": 3
+  }
+}
+```
 
 可用性集声明为虚拟机资源的属性。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [可用性集与虚拟机的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L313)。
 
-    "properties": {
-      "availabilitySet": {
-        "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
-      }
+```
+"properties": {
+  "availabilitySet": {
+    "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
+  }
+```
 
 Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及其配置的详细信息。
 
@@ -64,31 +68,35 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络负载均衡器](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L208)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/loadBalancers",
-      "name": "[variables('loadBalancerName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "load-balancer-front"
-      },
-      ........<truncated>
-    }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Network/loadBalancers",
+  "name": "[variables('loadBalancerName')]",
+  "location": "[resourceGroup().location]",
+  "tags": {
+    "displayName": "load-balancer-front"
+  },
+  ........<truncated>
+}
+```
 
 由于示例应用程序通过公共 IP 地址向 Internet 公开，因此，此地址与负载均衡器关联。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络负载均衡器与公共 IP 地址的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L221)。
 
-    "frontendIPConfigurations": [
-      {
-        "properties": {
-          "publicIPAddress": {
-            "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicipaddressName'))]"
-          }
-        },
-        "name": "LoadBalancerFrontend"
+```
+"frontendIPConfigurations": [
+  {
+    "properties": {
+      "publicIPAddress": {
+        "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicipaddressName'))]"
       }
-    ]
+    },
+    "name": "LoadBalancerFrontend"
+  }
+]
+```
 
 在 Azure 门户预览中，网络负载均衡器概述显示了与公共 IP 地址的关联。
 
@@ -99,27 +107,29 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [负载均衡器规则](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L270)。
 
-    "loadBalancingRules": [
-      {
-        "name": "[variables('loadBalencerRule')]",
-        "properties": {
-          "frontendIPConfiguration": {
-            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('loadBalancerName')), '/frontendIPConfigurations/LoadBalancerFrontend')]"
-          },
-          "backendAddressPool": {
-            "id": "[variables('lbPoolID')]"
-          },
-          "protocol": "Tcp",
-          "frontendPort": 80,
-          "backendPort": 80,
-          "enableFloatingIP": false,
-          "idleTimeoutInMinutes": 5,
-          "probe": {
-            "id": "[variables('lbProbeID')]"
-          }
-        }
+```
+"loadBalancingRules": [
+  {
+    "name": "[variables('loadBalencerRule')]",
+    "properties": {
+      "frontendIPConfiguration": {
+        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('loadBalancerName')), '/frontendIPConfigurations/LoadBalancerFrontend')]"
+      },
+      "backendAddressPool": {
+        "id": "[variables('lbPoolID')]"
+      },
+      "protocol": "Tcp",
+      "frontendPort": 80,
+      "backendPort": 80,
+      "enableFloatingIP": false,
+      "idleTimeoutInMinutes": 5,
+      "probe": {
+        "id": "[variables('lbProbeID')]"
       }
-    ]
+    }
+  }
+]
+```
 
 门户中显示的网络负载均衡器规则。
 
@@ -130,17 +140,19 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [负载均衡器探测](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L257)。
 
-    "probes": [
-      {
-        "properties": {
-          "protocol": "Tcp",
-          "port": 80,
-          "intervalInSeconds": 15,
-          "numberOfProbes": 2
-        },
-        "name": "lbprobe"
-      }
-    ]
+```
+"probes": [
+  {
+    "properties": {
+      "protocol": "Tcp",
+      "port": 80,
+      "intervalInSeconds": 15,
+      "numberOfProbes": 2
+    },
+    "name": "lbprobe"
+  }
+]
+```
 
 Azure 门户预览中显示的负载均衡器探测。
 
@@ -153,31 +165,33 @@ Azure 门户预览中显示的负载均衡器探测。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [入站 NAT 规则](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L270)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/loadBalancers/inboundNatRules",
-      "name": "[concat(variables('loadBalancerName'), '/', 'SSH-VM', copyIndex())]",
-      "tags": {
-        "displayName": "load-balancer-nat-rule"
-      },
-      "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "lbNatLoop",
-        "count": "[parameters('numberOfInstances')]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Network/loadBalancers/', variables('loadBalancerName'))]"
-      ],
-      "properties": {
-        "frontendIPConfiguration": {
-          "id": "[variables('ipConfigID')]"
-        },
-        "protocol": "tcp",
-        "frontendPort": "[copyIndex(5000)]",
-        "backendPort": 22,
-        "enableFloatingIP": false
-      }
-    }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Network/loadBalancers/inboundNatRules",
+  "name": "[concat(variables('loadBalancerName'), '/', 'SSH-VM', copyIndex())]",
+  "tags": {
+    "displayName": "load-balancer-nat-rule"
+  },
+  "location": "[resourceGroup().location]",
+  "copy": {
+    "name": "lbNatLoop",
+    "count": "[parameters('numberOfInstances')]"
+  },
+  "dependsOn": [
+    "[concat('Microsoft.Network/loadBalancers/', variables('loadBalancerName'))]"
+  ],
+  "properties": {
+    "frontendIPConfiguration": {
+      "id": "[variables('ipConfigID')]"
+    },
+    "protocol": "tcp",
+    "frontendPort": "[copyIndex(5000)]",
+    "backendPort": 22,
+    "enableFloatingIP": false
+  }
+}
+```
 
 Azure 门户预览中显示的一个示例入站 NAT 规则。在部署中为每个虚拟机创建一个 SSH NAT 规则。
 
@@ -190,47 +204,53 @@ Azure 门户预览中显示的一个示例入站 NAT 规则。在部署中为每
 
 音乐应用商店示例模板中已定义一个提取实例计数的参数。创建虚拟机和相关资源时，将在整个模板中使用此数字。
 
-    "numberOfInstances": {
-      "type": "int",
-      "minValue": 1,
-      "defaultValue": 1,
-      "metadata": {
-        "description": "Number of VM instances to be created behind load balancer."
-      }
-    }
+```
+"numberOfInstances": {
+  "type": "int",
+  "minValue": 1,
+  "defaultValue": 1,
+  "metadata": {
+    "description": "Number of VM instances to be created behind load balancer."
+  }
+}
+```
 
 在虚拟机资源中，复制循环已命名，实例参数数目用于控制生成的副本数目。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机复制函数](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L300)。
 
-    "apiVersion": "2015-06-15",
-    "type": "Microsoft.Compute/virtualMachines",
-    "name": "[concat(variables('vmName'),copyindex())]",
-    "location": "[resourceGroup().location]",
-    "copy": {
-      "name": "virtualMachineLoop",
-      "count": "[parameters('numberOfInstances')]"
-    }
+```
+"apiVersion": "2015-06-15",
+"type": "Microsoft.Compute/virtualMachines",
+"name": "[concat(variables('vmName'),copyindex())]",
+"location": "[resourceGroup().location]",
+"copy": {
+  "name": "virtualMachineLoop",
+  "count": "[parameters('numberOfInstances')]"
+}
+```
 
 可以使用 `copyIndex()` 函数访问复制函数的当前迭代。复制索引函数的值可用于命名虚拟机和其他资源。例如，如果部署了两个虚拟机实例，它们需要不同的名称。可将 `copyIndex()` 函数用作虚拟机名称的一部分来创建唯一名称。在虚拟机资源中可以看到一个用于命名目的的 `copyindex()` 函数示例。此处的计算机名称由 `vmName` 参数和 `copyIndex()` 函数串连而成。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [复制索引函数](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L319)。
 
-    "osProfile": {
-      "computerName": "[concat(parameters('vmName'),copyindex())]",
-      "adminUsername": "[parameters('adminUsername')]",
-      "linuxConfiguration": {
-        "disablePasswordAuthentication": "true",
-        "ssh": {
-          "publicKeys": [
-            {
-              "path": "[variables('sshKeyPath')]",
-              "keyData": "[parameters('sshKeyData')]"
-            }
-          ]
+```
+"osProfile": {
+  "computerName": "[concat(parameters('vmName'),copyindex())]",
+  "adminUsername": "[parameters('adminUsername')]",
+  "linuxConfiguration": {
+    "disablePasswordAuthentication": "true",
+    "ssh": {
+      "publicKeys": [
+        {
+          "path": "[variables('sshKeyPath')]",
+          "keyData": "[parameters('sshKeyData')]"
         }
-      }
+      ]
     }
+  }
+}
+```
 
 `copyIndex` 函数在音乐应用商店示例模板中多次使用。利用 `copyIndex` 的资源和函数包括特定于单个虚拟机实例的任何对象，例如网络接口、负载均衡器规则以及依赖于函数的任何对象。
 

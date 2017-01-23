@@ -28,42 +28,44 @@ ms.author: sstein
 
 以下 PowerShell 脚本创建 Active Directory (AD) 应用程序，以及对 C# 应用进行身份验证时所需的服务主体。该脚本将输出前面 C# 示例所需的值。有关详细信息，请参阅[使用 Azure PowerShell 创建用于访问资源的服务主体](../azure-resource-manager/resource-group-authenticate-service-principal.md)。
 
-    # Sign in to Azure.
-    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
-    
-    # If you have multiple subscriptions, uncomment and set to the subscription you want to work with.
-    #$subscriptionId = "{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}"
-    #Set-AzureRmContext -SubscriptionId $subscriptionId
-    
-    # Provide these values for your new AAD app.
-    # $appName is the display name for your app, must be unique in your directory.
-    # $uri does not need to be a real uri.
-    # $secret is a password you create.
-    
-    $appName = "{app-name}"
-    $uri = "http://{app-name}"
-    $secret = "{app-password}"
-    
-    # Create a AAD app
-    $azureAdApplication = New-AzureRmADApplication -DisplayName $appName -HomePage $Uri -IdentifierUris $Uri -Password $secret
-    
-    # Create a Service Principal for the app
-    $svcprincipal = New-AzureRmADServicePrincipal -ApplicationId $azureAdApplication.ApplicationId
-    
-    # To avoid a PrincipalNotFound error, I pause here for 15 seconds.
-    Start-Sleep -s 15
-    
-    # If you still get a PrincipalNotFound error, then rerun the following until successful. 
-    $roleassignment = New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $azureAdApplication.ApplicationId.Guid
-    
-    # Output the values we need for our C# application to successfully authenticate
-    
-    Write-Output "Copy these values into the C# sample app"
-    
-    Write-Output "_subscriptionId:" (Get-AzureRmContext).Subscription.SubscriptionId
-    Write-Output "_tenantId:" (Get-AzureRmContext).Tenant.TenantId
-    Write-Output "_applicationId:" $azureAdApplication.ApplicationId.Guid
-    Write-Output "_applicationSecret:" $secret
+```
+# Sign in to Azure.
+Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+
+# If you have multiple subscriptions, uncomment and set to the subscription you want to work with.
+#$subscriptionId = "{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}"
+#Set-AzureRmContext -SubscriptionId $subscriptionId
+
+# Provide these values for your new AAD app.
+# $appName is the display name for your app, must be unique in your directory.
+# $uri does not need to be a real uri.
+# $secret is a password you create.
+
+$appName = "{app-name}"
+$uri = "http://{app-name}"
+$secret = "{app-password}"
+
+# Create a AAD app
+$azureAdApplication = New-AzureRmADApplication -DisplayName $appName -HomePage $Uri -IdentifierUris $Uri -Password $secret
+
+# Create a Service Principal for the app
+$svcprincipal = New-AzureRmADServicePrincipal -ApplicationId $azureAdApplication.ApplicationId
+
+# To avoid a PrincipalNotFound error, I pause here for 15 seconds.
+Start-Sleep -s 15
+
+# If you still get a PrincipalNotFound error, then rerun the following until successful. 
+$roleassignment = New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $azureAdApplication.ApplicationId.Guid
+
+# Output the values we need for our C# application to successfully authenticate
+
+Write-Output "Copy these values into the C# sample app"
+
+Write-Output "_subscriptionId:" (Get-AzureRmContext).Subscription.SubscriptionId
+Write-Output "_tenantId:" (Get-AzureRmContext).Tenant.TenantId
+Write-Output "_applicationId:" $azureAdApplication.ApplicationId.Guid
+Write-Output "_applicationSecret:" $secret
+```
 
 ## 另请参阅
 

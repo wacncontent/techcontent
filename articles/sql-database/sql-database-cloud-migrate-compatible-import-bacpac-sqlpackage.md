@@ -28,13 +28,15 @@ ms.author: carlrab
 
 本文说明如何使用 [SqlPackage](https://msdn.microsoft.com/zh-cn/library/hh550080.aspx) 命令行实用程序从 [BACPAC](https://msdn.microsoft.com/zh-cn/library/ee210546.aspx#Anchor_4) 文件导入到 SQL 数据库。此实用程序随 [SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx) 和[用于 Visual Studio 的 SQL Server Data Tools](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) 的最新版本提供，也可直接从 Microsoft 下载中心下载 [SqlPackage](https://www.microsoft.com/zh-cn/download/details.aspx?id=53876) 的最新版本。
 
-> [!NOTE] 以下步骤假定用户已预配 SQL 数据库服务器，手头有连接信息，并且已验证源数据库兼容。
+> [!NOTE]
+> 以下步骤假定用户已预配 SQL 数据库服务器，手头有连接信息，并且已验证源数据库兼容。
 
 ##<a name="import-from-a-bacpac-file-into-azure-sql-database-using-sqlpackage"></a> 使用 SqlPackage 从 BACPAC 文件导入到 Azure SQL 数据库
 
 使用以下步骤通过 [SqlPackage.exe](https://msdn.microsoft.com/zh-cn/library/hh550080.aspx) 命令行实用程序从 BACPAC 文件导入兼容的 SQL Server 数据库（或 Azure SQL 数据库）。
 
-> [!NOTE] 以下步骤假定用户已预配 Azure SQL 数据库服务器并且手头有连接信息。
+> [!NOTE]
+> 以下步骤假定用户已预配 Azure SQL 数据库服务器并且手头有连接信息。
 
 1. 打开命令提示符并更改包含 sqlpackage.exe 命令行实用程序的目录 - 此实用程序随 Visual Studio 和 SQL Server 一起提供。
 2. 结合环境的以下参数执行以下 sqlpackage.exe 命令：

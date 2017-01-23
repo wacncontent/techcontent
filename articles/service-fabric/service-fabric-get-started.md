@@ -38,7 +38,8 @@ ms.author: ryanwi
 - Windows Server 2012 R2
 - Windows 10
 
->[!NOTE] 默认情况下，Windows 7 仅包含 Windows PowerShell 2.0。Service Fabric PowerShell cmdlet 需要 PowerShell 3.0 或更高版本。可以从 Microsoft 下载中心[下载 Windows PowerShell 5.0][powershell5-download]。
+>[!NOTE]
+> 默认情况下，Windows 7 仅包含 Windows PowerShell 2.0。Service Fabric PowerShell cmdlet 需要 PowerShell 3.0 或更高版本。可以从 Microsoft 下载中心[下载 Windows PowerShell 5.0][powershell5-download]。
 
 ## 安装运行时、SDK 和工具
 Web 平台安装程序为 Service Fabric 开发提供两种配置：
@@ -50,7 +51,9 @@ Web 平台安装程序为 Service Fabric 开发提供两种配置：
 
 Service Fabric 使用 Windows PowerShell 脚本创建本地开发群集和部署 Visual Studio 中的应用程序。默认情况下，Windows 会阻止这些脚本运行。若要启用它们，你必须修改你的 PowerShell 执行策略。以管理员身份打开 PowerShell 并输入以下命令：
 
-    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
+```
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
+```
 
 ## 后续步骤
 完成设置开发环境之后，便可开始生成和运行应用。

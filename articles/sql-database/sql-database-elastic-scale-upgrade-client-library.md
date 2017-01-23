@@ -52,21 +52,23 @@ ms.author: ddove
 4. 从[脚本中心](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-Database-Elastic-6442e6a9)下载弹性数据库客户端升级 scriptlet，并将其保存到包含 DLL 的同一文件夹中。
 
 5. 在命令提示符下从该文件夹运行“PowerShell .\\upgrade.ps1”，并按照提示进行操作。
- 
+
 ***选项 2：使用 C# 升级元数据***
 
 或者，创建一个 Visual Studio 应用程序，它打开 ShardMapManager，循环访问所有分片并通过调用 [UpgradeLocalStore](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.upgradelocalstore.aspx) 和 [UpgradeGlobalStore](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.upgradeglobalstore.aspx) 方法执行元数据升级，如此示例所示：
 
-    ShardMapManager smm =
-       ShardMapManagerFactory.GetSqlShardMapManager
-       (connStr, ShardMapManagerLoadPolicy.Lazy); 
-    smm.UpgradeGlobalStore(); 
-    
-    foreach (ShardLocation loc in
-     smm.GetDistinctShardLocations()) 
-    {   
-       smm.UpgradeLocalStore(loc); 
-    } 
+```
+ShardMapManager smm =
+   ShardMapManagerFactory.GetSqlShardMapManager
+   (connStr, ShardMapManagerLoadPolicy.Lazy); 
+smm.UpgradeGlobalStore(); 
+
+foreach (ShardLocation loc in
+ smm.GetDistinctShardLocations()) 
+{   
+   smm.UpgradeLocalStore(loc); 
+} 
+```
 
 可以多次应用这些元数据升级技术，不会造成危害。例如，如果在已更新后，旧的客户端版本无意中创建了一个分片，则可以对所有分片再次运行升级，以确保最新的元数据版本在整个基础结构中存在。
 
@@ -80,5 +82,5 @@ ms.author: ddove
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-upgrade-client-library/nuget-upgrade.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

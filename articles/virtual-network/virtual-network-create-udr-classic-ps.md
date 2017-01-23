@@ -44,57 +44,73 @@ ms.author: jdial
 
 1. 运行以下命令，为前端子网创建路由表：
 
-        New-AzureRouteTable -Name UDR-FrontEnd -Location chinanorth `
-        -Label "Route table for front end subnet"
+    ```
+    New-AzureRouteTable -Name UDR-FrontEnd -Location chinanorth `
+    -Label "Route table for front end subnet"
+    ```
 
     输出：
-   
-        Name         Location   Label                          
-        ----         --------   -----                          
-        UDR-FrontEnd China North    Route table for front end subnet
+
+    ```
+    Name         Location   Label                          
+    ----         --------   -----                          
+    UDR-FrontEnd China North    Route table for front end subnet
+    ```
 2. 运行以下命令，在路由表中创建路由，将流向后端子网 (192.168.2.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-        Get-AzureRouteTable UDR-FrontEnd `
-        |Set-AzureRoute -RouteName RouteToBackEnd -AddressPrefix 192.168.2.0/24 `
-        -NextHopType VirtualAppliance `
-        -NextHopIpAddress 192.168.0.4
+    ```
+    Get-AzureRouteTable UDR-FrontEnd `
+    |Set-AzureRoute -RouteName RouteToBackEnd -AddressPrefix 192.168.2.0/24 `
+    -NextHopType VirtualAppliance `
+    -NextHopIpAddress 192.168.0.4
+    ```
 
     输出：
-   
-        Name     : UDR-FrontEnd
-        Location : China North
-        Label    : Route table for frontend subnet
-        Routes   : 
-                   Name                 Address Prefix    Next hop type        Next hop IP address
-                   ----                 --------------    -------------        -------------------
-                   RouteToBackEnd       192.168.2.0/24    VirtualAppliance     192.168.0.4  
+
+    ```
+    Name     : UDR-FrontEnd
+    Location : China North
+    Label    : Route table for frontend subnet
+    Routes   : 
+               Name                 Address Prefix    Next hop type        Next hop IP address
+               ----                 --------------    -------------        -------------------
+               RouteToBackEnd       192.168.2.0/24    VirtualAppliance     192.168.0.4  
+    ```
 3. 运行以下命令，将路由表与 **FrontEnd** 子网关联：
 
-        Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
-        -SubnetName FrontEnd `
-        -RouteTableName UDR-FrontEnd
+    ```
+    Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
+    -SubnetName FrontEnd `
+    -RouteTableName UDR-FrontEnd
+    ```
 
 ## 为后端子网创建 UDR
 若要根据方案为后端子网创建所需的路由表和路由，请完成以下步骤：
 
 1. 运行以下命令，为后端子网创建路由表：
 
-        New-AzureRouteTable -Name UDR-BackEnd `
-        -Location chinanorth `
-        -Label "Route table for back end subnet"
+    ```
+    New-AzureRouteTable -Name UDR-BackEnd `
+    -Location chinanorth `
+    -Label "Route table for back end subnet"
+    ```
 
 2. 运行以下命令，在路由表中创建路由，将流向前端子网 (192.168.1.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-        Get-AzureRouteTable UDR-BackEnd `
-        |Set-AzureRoute -RouteName RouteToFrontEnd -AddressPrefix 192.168.1.0/24 `
-        -NextHopType VirtualAppliance `
-        -NextHopIpAddress 192.168.0.4
+    ```
+    Get-AzureRouteTable UDR-BackEnd `
+    |Set-AzureRoute -RouteName RouteToFrontEnd -AddressPrefix 192.168.1.0/24 `
+    -NextHopType VirtualAppliance `
+    -NextHopIpAddress 192.168.0.4
+    ```
 
 3. 运行以下命令，将路由表与 **BackEnd** 子网关联：
 
-        Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
-        -SubnetName BackEnd `
-        -RouteTableName UDR-BackEnd
+    ```
+    Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
+    -SubnetName BackEnd `
+    -RouteTableName UDR-BackEnd
+    ```
 
 ## 在 FW1 VM 上启用 IP 转发
 
@@ -102,15 +118,21 @@ ms.author: jdial
 
 1. 运行以下命令，检查 IP 转发的状态：
 
-        Get-AzureVM -Name FW1 -ServiceName TestRGFW `
-        | Get-AzureIPForwarding
+    ```
+    Get-AzureVM -Name FW1 -ServiceName TestRGFW `
+    | Get-AzureIPForwarding
+    ```
 
     输出：
-   
-        Disabled
+
+    ```
+    Disabled
+    ```
 2. 运行以下命令，为 *FW1* VM 启用 IP 转发：
 
-        Get-AzureVM -Name FW1 -ServiceName TestRGFW `
-        | Set-AzureIPForwarding -Enable
+    ```
+    Get-AzureVM -Name FW1 -ServiceName TestRGFW `
+    | Set-AzureIPForwarding -Enable
+    ```
 
 <!---HONumber=Mooncake_1219_2016-->

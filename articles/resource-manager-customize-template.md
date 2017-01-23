@@ -27,58 +27,60 @@ ms.author: tomfitz
 
 如果你尚未完成前面的演练，请创建一个名为 **template.json** 的文件，并将导出模板中的以下内容添加到该文件。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "virtualNetworks_VNET_name": {
-                "defaultValue": "VNET",
-                "type": "String"
-            },
-            "storageAccounts_storagetf05092016_name": {
-                "defaultValue": "storagetf05092016",
-                "type": "String"
-            }
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_VNET_name": {
+            "defaultValue": "VNET",
+            "type": "String"
         },
-        "variables": {},
-        "resources": [
-            {
-                "comments": "Generalized from resource in walkthrough.",
-                "type": "Microsoft.Network/virtualNetworks",
-                "name": "[parameters('virtualNetworks_VNET_name')]",
-                "apiVersion": "2015-06-15",
-                "location": "northeurope",
-                "properties": {
-                    "addressSpace": {
-                        "addressPrefixes": [
-                            "10.0.0.0/16"
-                        ]
-                    },
-                    "subnets": [
-                        {
-                            "name": "default",
-                            "properties": {
-                                "addressPrefix": "10.0.0.0/24"
-                            }
-                        }
+        "storageAccounts_storagetf05092016_name": {
+            "defaultValue": "storagetf05092016",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource in walkthrough.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_VNET_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "northeurope",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
                     ]
                 },
-                "dependsOn": []
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
             },
-            {
-                "comments": "Generalized from resource in walkthrough.",
-                "type": "Microsoft.Storage/storageAccounts",
-                "name": "[parameters('storageAccounts_storagetf05092016_name')]",
-                "apiVersion": "2015-06-15",
-                "location": "northeurope",
-                "tags": {},
-                "properties": {
-                    "accountType": "Standard_RAGRS"
-                },
-                "dependsOn": []
-            }
-        ]
-    }
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource in walkthrough.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageAccounts_storagetf05092016_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "northeurope",
+            "tags": {},
+            "properties": {
+                "accountType": "Standard_RAGRS"
+            },
+            "dependsOn": []
+        }
+    ]
+}
+```
 
 如果你要在虚拟网络所在的区域中创建相同类型的存储帐户以使用相同的地址前缀和相同的子网前缀进行每个部署，则 template.json 模板将能很好地工作。但是，Resource Manager 提供相关选项，因此使用它部署模板比这具有更大的灵活性。例如，在部署期间，你可能需要指定要创建的存储帐户的类型或要用于虚拟网络地址前缀和子网前缀的值。
 
@@ -88,82 +90,88 @@ ms.author: tomfitz
 
 1. 若要能够传入在部署过程中可能需要指定的值，请将 **parameters** 节替换为以下参数定义。请注意 **storageAccount\_accountType** 的 **allowedValues** 的值。如果你意外地提供了无效的值，则在部署开始之前将识别该错误。另请注意，你仅提供存储帐户名称的前缀，该前缀限制为 11 个字符。将前缀限制为 11 个字符时，可确保完整名称不会超过存储帐户的最大字符数。使用前缀，可将命名约定应用于存储帐户。在下一步中，你将了解如何创建唯一名称。
 
-        "parameters": {
-          "storageAccount_prefix": {
-            "type": "string",
-            "maxLength": 11
-          },
-          "storageAccount_accountType": {
-            "defaultValue": "Standard_RAGRS",
-            "type": "string",
-            "allowedValues": [
-              "Standard_LRS",
-              "Standard_ZRS",
-              "Standard_GRS",
-              "Standard_RAGRS",
-              "Premium_LRS"
-            ]
-          },
-          "virtualNetwork_name": {
-            "type": "string"
-          },
-          "addressPrefix": {
-            "defaultValue": "10.0.0.0/16",
-            "type": "string"
-          },
-          "subnetName": {
-            "defaultValue": "subnet-1",
-            "type": "string"
-          },
-          "subnetAddressPrefix": {
-            "defaultValue": "10.0.0.0/24",
-            "type": "string"
-          }
-        },
+    ```
+    "parameters": {
+      "storageAccount_prefix": {
+        "type": "string",
+        "maxLength": 11
+      },
+      "storageAccount_accountType": {
+        "defaultValue": "Standard_RAGRS",
+        "type": "string",
+        "allowedValues": [
+          "Standard_LRS",
+          "Standard_ZRS",
+          "Standard_GRS",
+          "Standard_RAGRS",
+          "Premium_LRS"
+        ]
+      },
+      "virtualNetwork_name": {
+        "type": "string"
+      },
+      "addressPrefix": {
+        "defaultValue": "10.0.0.0/16",
+        "type": "string"
+      },
+      "subnetName": {
+        "defaultValue": "subnet-1",
+        "type": "string"
+      },
+      "subnetAddressPrefix": {
+        "defaultValue": "10.0.0.0/24",
+        "type": "string"
+      }
+    },
+    ```
 
 2. 模板的 **variables** 节当前为空。将此节替换为以下代码。在 **variables** 节中，你作为模板作者可以创建值，以简化模板的其余部分的语法。**StorageAccount\_name** 变量将参数中的前缀连接成一个唯一字符串，该字符串将基于资源组的标识符生成。
 
-        "variables": {
-          "storageAccount_name": "[concat(parameters('storageAccount_prefix'), uniqueString(resourceGroup().id))]"
-        },
+    ```
+    "variables": {
+      "storageAccount_name": "[concat(parameters('storageAccount_prefix'), uniqueString(resourceGroup().id))]"
+    },
+    ```
 
 3. 若要在资源定义中使用参数和变量，请将 **resources** 节替换为以下定义。请注意，除了分配给资源属性的值外，实际上资源定义中只发生了非常少的更改。属性与导出的模板中的属性完全相同。你只需为参数值分配属性，而不是对值进行硬编码。资源的位置通过 **resourceGroup().location** 表达式设置为使用资源组所在的位置。为存储帐户名称创建的变量通过 **variables** 表达式进行引用。
 
-        "resources": [
-          {
-            "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetwork_name')]",
-            "apiVersion": "2015-06-15",
-            "location": "[resourceGroup().location]",
-            "properties": {
-              "addressSpace": {
-                "addressPrefixes": [
-                  "[parameters('addressPrefix')]"
-                ]
-              },
-              "subnets": [
-                {
-                  "name": "[parameters('subnetName')]",
-                  "properties": {
-                    "addressPrefix": "[parameters('subnetAddressPrefix')]"
-                  }
-                }
-              ]
-            },
-            "dependsOn": []
+    ```
+    "resources": [
+      {
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('virtualNetwork_name')]",
+        "apiVersion": "2015-06-15",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('addressPrefix')]"
+            ]
           },
-          {
-            "type": "Microsoft.Storage/storageAccounts",
-            "name": "[variables('storageAccount_name')]",
-            "apiVersion": "2015-06-15",
-            "location": "[resourceGroup().location]",
-            "tags": {},
-            "properties": {
-                "accountType": "[parameters('storageAccount_accountType')]"
-            },
-            "dependsOn": []
-          }
-        ]
+          "subnets": [
+            {
+              "name": "[parameters('subnetName')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnetAddressPrefix')]"
+              }
+            }
+          ]
+        },
+        "dependsOn": []
+      },
+      {
+        "type": "Microsoft.Storage/storageAccounts",
+        "name": "[variables('storageAccount_name')]",
+        "apiVersion": "2015-06-15",
+        "location": "[resourceGroup().location]",
+        "tags": {},
+        "properties": {
+            "accountType": "[parameters('storageAccount_accountType')]"
+        },
+        "dependsOn": []
+      }
+    ]
+    ```
 
 ## 修复参数文件
 
@@ -171,18 +179,20 @@ ms.author: tomfitz
 
 将 parameters.json 文件的内容替换为以下内容：
 
-    {
-      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-      "contentVersion": "1.0.0.0",
-      "parameters": {
-        "storageAccount_prefix": {
-          "value": "storage"
-        },
-        "virtualNetwork_name": {
-          "value": "VNET"
-        }
-      }
+```
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccount_prefix": {
+      "value": "storage"
+    },
+    "virtualNetwork_name": {
+      "value": "VNET"
     }
+  }
+}
+```
 
 更新后的参数文件仅为没有默认值的参数提供值。如果你需要不同于默认值的值，则可以为其他参数提供值。
 

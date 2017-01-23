@@ -37,7 +37,9 @@ ms.author: adrianha
 
 本指南假设已创建了包含表的后端。本指南假设该表的架构与这些教程中的表相同。本指南还假设已将 Apache Cordova 插件添加到代码。如果尚未这样做，可以在命令行中将 Apache Cordova 插件添加到项目：
 
-    cordova plugin add cordova-plugin-ms-azure-mobile-apps
+```
+cordova plugin add cordova-plugin-ms-azure-mobile-apps
+```
 
 有关创建[第一个 Apache Cordova 应用]的详细信息，请参阅相关文档。
 
@@ -75,10 +77,12 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 6. 单击“编辑”
 7. 查找“allowedExternalRedirectUrls”元素。它可能被设置为 null 或值数组。将该值更改为以下值：
 
-         "allowedExternalRedirectUrls": [
-             "http://localhost:3000",
-             "https://localhost:3000"
-         ],
+    ```
+     "allowedExternalRedirectUrls": [
+         "http://localhost:3000",
+         "https://localhost:3000"
+     ],
+    ```
 
     将 URL 替换为自己服务的 URL。示例包括“http://localhost:3000”（适用于 Node.js 示例服务）或“http://localhost:4400”（适用于 Ripple 服务）。但是，这些 URL 是示例，根据不同的情况（包括示例中提到的服务）可能会有差异。
 8. 单击屏幕右上角的“读/写”按钮。

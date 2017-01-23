@@ -33,7 +33,7 @@ ms.author: jeffstok
 
 ## 通过事件中心创建数据流输入
 
-[Azure 事件中心](../event-hubs/index.md/)是具有高扩展性的发布-订阅事件引入器。事件中心每秒可收集数百万个事件，使你能够处理和分析互连设备与应用程序生成的海量数据。事件中心是最常见的流分析输入。事件中心和流分析一起为客户提供端到端的解决方案以进行实时分析。事件中心允许客户实时将事件输入到 Azure 中，流分析作业可实时处理这些事件。例如，客户可以将 Web 点击操作、传感器读数、联机日志事件发送到事件中心，然后创建流分析作业，将事件中心用作输入数据流，以便进行实时筛选、聚合和关联操作。
+[Azure 事件中心](../event-hubs/index.md)是具有高扩展性的发布-订阅事件引入器。事件中心每秒可收集数百万个事件，使你能够处理和分析互连设备与应用程序生成的海量数据。事件中心是最常见的流分析输入。事件中心和流分析一起为客户提供端到端的解决方案以进行实时分析。事件中心允许客户实时将事件输入到 Azure 中，流分析作业可实时处理这些事件。例如，客户可以将 Web 点击操作、传感器读数、联机日志事件发送到事件中心，然后创建流分析作业，将事件中心用作输入数据流，以便进行实时筛选、聚合和关联操作。
 
 需要注意的是，来自流分析中事件中心的事件默认时间戳是事件到达事件中心的时间戳，即 EventEnqueuedUtcTime。若要在事件负载中使用时间戳以流方式处理数据，必须使用 [TIMESTAMP BY](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx) 关键字。
 
@@ -66,17 +66,20 @@ ms.author: jeffstok
 
 例如，你可以编写类似以下的查询：
 
-    SELECT
-        EventProcessedUtcTime,
-        EventEnqueuedUtcTime,
-        PartitionId
-    FROM Input
+```
+SELECT
+    EventProcessedUtcTime,
+    EventEnqueuedUtcTime,
+    PartitionId
+FROM Input
+```
 
 ## 创建 IoT 中心数据流输入
 
 Azure Iot 中心是已针对 IoT 进行优化，具有高度可缩放性的发布-订阅事件引入器。需要注意的是，来自流分析中 IoT 中心的事件默认时间戳是事件到达 IoT 中心的时间戳，即 EventEnqueuedUtcTime。若要在事件负载中使用时间戳以流方式处理数据，必须使用 [TIMESTAMP BY](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx) 关键字。
 
-> [!NOTE] 只能处理使用 DeviceClient 属性发送的消息。
+> [!NOTE]
+> 只能处理使用 DeviceClient 属性发送的消息。
 
 ### 使用者组
 
@@ -113,13 +116,14 @@ Azure Iot 中心是已针对 IoT 进行优化，具有高度可缩放性的发�
 
 ## 创建 Blob 存储数据流输入
 
-对于需要将大量非结构化数据存储在云中的情况，Blob 存储提供了一种经济高效且可伸缩的解决方案。通常情况下，可以将 [Blob 存储](../storage/index.md/)中的数据视为“静态”数据，但这些数据可以作为数据流由流分析进行处理。流分析使用 Blob 存储输入的一种常见情况是进行日志处理，即首先从某个系统捕获遥测数据，然后根据需要对这些数据进行分析和处理以提取有意义的数据。
+对于需要将大量非结构化数据存储在云中的情况，Blob 存储提供了一种经济高效且可伸缩的解决方案。通常情况下，可以将 [Blob 存储](../storage/index.md)中的数据视为“静态”数据，但这些数据可以作为数据流由流分析进行处理。流分析使用 Blob 存储输入的一种常见情况是进行日志处理，即首先从某个系统捕获遥测数据，然后根据需要对这些数据进行分析和处理以提取有意义的数据。
 
 需要注意的是，流分析中 Blob 存储事件的默认时间戳是上次修改 blob 的时间戳，即 *isBlobLastModifiedUtcTime*。若要在事件负载中使用时间戳以流方式处理数据，必须使用 [TIMESTAMP BY](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx) 关键字。
 
 另请注意，CSV 格式的输入**需要**标头行，以便为数据集定义字段。而且，标头行字段必须都**唯一**。
 
-> [!NOTE] 流分析不支持将内容添加到现有 Blob。流分析只会查看 Blob 一次，在这项读取操作后所做的任何更改都不会得到处理。最佳实践是一次性上载所有数据，而不要在 Blob 存储中添加其他任何事件。
+> [!NOTE]
+> 流分析不支持将内容添加到现有 Blob。流分析只会查看 Blob 一次，在这项读取操作后所做的任何更改都不会得到处理。最佳实践是一次性上载所有数据，而不要在 Blob 存储中添加其他任何事件。
 
 下表在属性说明中介绍了 Blob 存储输入选项卡中的每个属性：
 
@@ -184,11 +188,13 @@ Azure Iot 中心是已针对 IoT 进行优化，具有高度可缩放性的发�
 
 例如，你可以编写类似以下的查询：
 
-    SELECT
-        BlobName,
-        EventProcessedUtcTime,
-        BlobLastModifiedUtcTime
-    FROM Input
+```
+SELECT
+    BlobName,
+    EventProcessedUtcTime,
+    BlobLastModifiedUtcTime
+FROM Input
+```
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。

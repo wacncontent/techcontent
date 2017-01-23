@@ -1,4 +1,3 @@
-
 ### 注册 Blitline 帐户
 
 1. 登录到 [Azure 经典管理门户](https://manage.windowsazure.cn).

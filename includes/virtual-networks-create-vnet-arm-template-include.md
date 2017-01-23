@@ -20,8 +20,9 @@
     | **subnet2Name** | 第二个 VNet 的名称 |
     | **subnet2Prefix** | 第二个子网的 CIDR 块 |
 
-    >[!IMPORTANT] 在 github 中维护的 ARM 模板可能随着时间的推移发生变化。请确保在使用该模板之前对其进行检查。
-    
+    >[!IMPORTANT]
+    > 在 github 中维护的 ARM 模板可能随着时间的推移发生变化。请确保在使用该模板之前对其进行检查。
+
 6. 查看 **resources** 下的内容，并注意以下项：
 
     - **type**。模板创建的资源的类型。在此实例中为 **Microsoft.Network/virtualNetworks**，表示 VNet。
@@ -33,29 +34,31 @@
 9. 将该文件保存到你计算机上的本地文件夹。
 10. 打开刚保存的文件并编辑参数的值。使用以下值来部署我们的方案中所述的 VNet。
 
-        {
-          "location": {
-            "value": "China North"
-          },
-          "vnetName": {
-              "value": "TestVNet"
-          },
-          "addressPrefix": {
-              "value": "192.168.0.0/16"
-          },
-          "subnet1Name": {
-              "value": "FrontEnd"
-          },
-          "subnet1Prefix": {
-            "value": "192.168.1.0/24"
-          },
-          "subnet2Name": {
-              "value": "BackEnd"
-          },
-          "subnet2Prefix": {
-              "value": "192.168.2.0/24"
-          }
-        }
+    ```
+    {
+      "location": {
+        "value": "China North"
+      },
+      "vnetName": {
+          "value": "TestVNet"
+      },
+      "addressPrefix": {
+          "value": "192.168.0.0/16"
+      },
+      "subnet1Name": {
+          "value": "FrontEnd"
+      },
+      "subnet1Prefix": {
+        "value": "192.168.1.0/24"
+      },
+      "subnet2Name": {
+          "value": "BackEnd"
+      },
+      "subnet2Prefix": {
+          "value": "192.168.2.0/24"
+      }
+    }
+    ```
 
 11. 保存文件。
 

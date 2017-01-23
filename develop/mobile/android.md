@@ -52,11 +52,11 @@ wacn.date: 11/02/2015
 - [在 Blob 存储中存储二进制数据](../../articles/storage/storage-java-how-to-use-blob-storage.md)
 - [使用表存储来存储简单结构化数据](../../articles/storage/storage-java-how-to-use-table-storage.md)
 
-查看服务：[移动服务](../../articles/mobile-services/index.md/) | [存储](../../articles/storage/index.md/)
+查看服务：[移动服务](../../articles/mobile-services/index.md) | [存储](../../articles/storage/index.md)
 
 ###推送
 
-查看服务： [通知中心](../../articles/notification-hubs/index.md/)
+查看服务： [通知中心](../../articles/notification-hubs/index.md)
 
 <!--
 ###分析</h3>
@@ -74,4 +74,3 @@ wacn.date: 11/02/2015
 -->
 
 - [论坛询问问题、分享见解和讨论平台](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=windowsazurezhchs)
-

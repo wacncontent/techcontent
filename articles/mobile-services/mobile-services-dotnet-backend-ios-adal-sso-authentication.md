@@ -27,7 +27,8 @@ ms.author: mahender
 
 若要能够对用户进行身份验证，必须向 Azure Active Directory (AAD) 注册你的应用程序。此过程分为两个步骤。首先，你必须注册你的移动服务，并公开其上的权限。其次，你必须注册你的 iOS 应用程序，并授予它对这些权限的访问权限
 
->[!NOTE]本教程旨在帮助你更好地了解如何使用移动服务对 iOS 应用程序进行单一登录 Azure Active Directory 身份验证。如果这是你第一次体验移动服务，请先完成[移动服务入门]教程。
+>[!NOTE]
+>本教程旨在帮助你更好地了解如何使用移动服务对 iOS 应用程序进行单一登录 Azure Active Directory 身份验证。如果这是你第一次体验移动服务，请先完成[移动服务入门]教程。
 
 ##先决条件
 
@@ -51,42 +52,46 @@ ms.author: mahender
 
 2. 在 QSTodoListViewController 中包含具有以下项的 ADAL：
 
-        #import "ADALiOS/ADAuthenticationContext.h"
+    ```
+    #import "ADALiOS/ADAuthenticationContext.h"
+    ```
 
 2. 然后，添加以下方法：
 
-        - (void) loginAndGetData
-        {
-            MSClient *client = self.todoService.client;
-            if (client.currentUser != nil) {
+    ```
+    - (void) loginAndGetData
+    {
+        MSClient *client = self.todoService.client;
+        if (client.currentUser != nil) {
+            return;
+        }
+
+        NSString *authority = @"<INSERT-AUTHORITY-HERE>";
+        NSString *resourceURI = @"<INSERT-RESOURCE-URI-HERE>";
+        NSString *clientID = @"<INSERT-CLIENT-ID-HERE>";
+        NSString *redirectURI = @"<INSERT-REDIRECT-URI-HERE>";
+
+        ADAuthenticationError *error;
+        ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
+        NSURL *redirectUri = [[NSURL alloc]initWithString:redirectURI];
+
+        [authContext acquireTokenWithResource:resourceURI clientId:clientID redirectUri:redirectUri completionBlock:^(ADAuthenticationResult *result) {
+            if (result.tokenCacheStoreItem == nil)
+            {
                 return;
             }
-
-            NSString *authority = @"<INSERT-AUTHORITY-HERE>";
-            NSString *resourceURI = @"<INSERT-RESOURCE-URI-HERE>";
-            NSString *clientID = @"<INSERT-CLIENT-ID-HERE>";
-            NSString *redirectURI = @"<INSERT-REDIRECT-URI-HERE>";
-
-            ADAuthenticationError *error;
-            ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
-            NSURL *redirectUri = [[NSURL alloc]initWithString:redirectURI];
-
-            [authContext acquireTokenWithResource:resourceURI clientId:clientID redirectUri:redirectUri completionBlock:^(ADAuthenticationResult *result) {
-                if (result.tokenCacheStoreItem == nil)
-                {
-                    return;
-                }
-                else
-                {
-                    NSDictionary *payload = @{
-                        @"access_token" : result.tokenCacheStoreItem.accessToken
-                    };
-                    [client loginWithProvider:@"windowsazureactivedirectory" token:payload completion:^(MSUser *user, NSError *error) {
-                        [self refresh];
-                    }];
-                }
-            }];
-        }
+            else
+            {
+                NSDictionary *payload = @{
+                    @"access_token" : result.tokenCacheStoreItem.accessToken
+                };
+                [client loginWithProvider:@"windowsazureactivedirectory" token:payload completion:^(MSUser *user, NSError *error) {
+                    [self refresh];
+                }];
+            }
+        }];
+    }
+    ```
 
 4. 在上面的 `loginAndGetData` 方法的代码中，将 **INSERT-AUTHORITY-HERE** 替换为在其中进行应用程序设置的租户的名称，格式应为 https://login.chinacloudapi.cn/tenant-name.onmicrosoft.com。可以在 [Azure 经典管理门户]中从 Azure Active Directory 的“域”选项卡复制此值。
 
@@ -98,7 +103,9 @@ ms.author: mahender
 
 8. 在 QSTodoListViewController 中修改 `ViewDidLoad`，方法是将 `[self refresh]` 替换为以下内容：
 
-        [self loginAndGetData];
+    ```
+    [self loginAndGetData];
+    ```
 
 ##测试使用身份验证的客户端
 

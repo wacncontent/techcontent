@@ -42,14 +42,16 @@ Dash.js 是用 JavaScript 编写的开源 MPEG-DASH 视频播放器。其目标�
 
 第一步是创建一个包含 **video** 元素的标准 HTML 页面，将此文件保存为 basicPlayer.html，如以下示例所示：
 
-    <!DOCTYPE html>
-    <html>
-      <head><title>Adaptive Streaming in HTML5</title></head>
-      <body>
-        <h1>Adaptive Streaming with HTML5</h1>
-        <video id="videoplayer" controls></video>
-      </body>
-    </html>
+```
+<!DOCTYPE html>
+<html>
+  <head><title>Adaptive Streaming in HTML5</title></head>
+  <body>
+    <h1>Adaptive Streaming with HTML5</h1>
+    <video id="videoplayer" controls></video>
+  </body>
+</html>
+```
 
 ##添加 DASH.js 播放器
 
@@ -57,22 +59,26 @@ Dash.js 是用 JavaScript 编写的开源 MPEG-DASH 视频播放器。其目标�
 
 若要将 dash.js 播放器添加到你的应用程序，请将脚本标记添加到 basicPlayer.html 的 head 部分中：
 
-    <!-- DASH-AVC/265 reference implementation -->
-    < script src="js/dash.all.js"></script>
+```
+<!-- DASH-AVC/265 reference implementation -->
+< script src="js/dash.all.js"></script>
+```
 
 接下来，创建一个函数以便在加载页面时初始化播放器。在加载 dash.all.js 的代码行后添加以下脚本：
 
-    <script>
-    // setup the video element and attach it to the Dash player
-    function setupVideo() {
-      var url = "http://wams.edgesuite.net/media/MPTExpressionData02/BigBuckBunny_1080p24_IYUV_2ch.ism/manifest(format=mpd-time-csf)";
-      var context = new Dash.di.DashContext();
-      var player = new MediaPlayer(context);
-                      player.startup();
-                      player.attachView(document.querySelector("#videoplayer"));
-                      player.attachSource(url);
-    }
-    </script>
+```
+<script>
+// setup the video element and attach it to the Dash player
+function setupVideo() {
+  var url = "http://wams.edgesuite.net/media/MPTExpressionData02/BigBuckBunny_1080p24_IYUV_2ch.ism/manifest(format=mpd-time-csf)";
+  var context = new Dash.di.DashContext();
+  var player = new MediaPlayer(context);
+                  player.startup();
+                  player.attachView(document.querySelector("#videoplayer"));
+                  player.attachSource(url);
+}
+</script>
+```
 
 此函数首先创建一个 DashContext。此项用于为特定运行时环境配置应用程序。从技术角度看，它定义在构造应用程序时，依赖关系注入框架应使用的类。在大多数情况下，你将使用 Dash.di.DashContext。
 
@@ -82,16 +88,20 @@ Dash.js 是用 JavaScript 编写的开源 MPEG-DASH 视频播放器。其目标�
 
 将 MPD 文件的 URL 传递到 MediaPlayer，这样后者便了解有关它应播放的视频的信息。页面完全加载后，将需要执行刚创建的 setupVideo() 函数。可通过使用 body 元素的 onload 事件来执行此操作。将 <body> 元素更改为：
 
-    <body onload="setupVideo()">
+```
+<body onload="setupVideo()">
+```
 
 最后，使用 CSS 设置 video 元素的大小。在自适应流式处理环境中，这一点尤其重要，因为当播放适应不断变化的网络条件时，所播放的视频的大小可能会更改。在此简单演示中，直接通过将以下 CSS 添加到页面的 head 部分来强制将 video 元素设为可用浏览器窗口的 80%：
-    
-    <style>
-    video {
-      width: 80%;
-      height: 80%;
-    }
-    </style>
+
+```
+<style>
+video {
+  width: 80%;
+  height: 80%;
+}
+</style>
+```
 
 ##播放视频
 

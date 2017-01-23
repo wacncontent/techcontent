@@ -25,7 +25,8 @@ ms.author: marsma
 
 ![门户中“保存的输出文件”和“保存的日志”选择器][1]  
 
->[!NOTE] 本文中所述的 [Azure Batch 文件约定][nuget_package] .NET 类库目前以预览版提供。在正式版推出之前，本文所述的某些功能可能会更改。
+>[!NOTE]
+> 本文中所述的 [Azure Batch 文件约定][nuget_package] .NET 类库目前以预览版提供。在正式版推出之前，本文所述的某些功能可能会更改。
 
 ## 任务输出注意事项
 
@@ -55,11 +56,12 @@ ms.author: marsma
 
 可以从 [NuGet][nuget_package] 获取该库，其中包含新类并使用新方法扩展了 [CloudJob][net_cloudjob] 和 [CloudTask][net_cloudtask] 类。你可以使用 [NuGet 库包管理器][nuget_manager]将它添加到 Visual Studio 项目。
 
->[!TIP] 可以在 GitHub 上的用于 .NET 的 Azure SDK 存储库中找到 Azure Batch 文件约定库的[源代码][github_file_conventions]。
+>[!TIP]
+> 可以在 GitHub 上的用于 .NET 的 Azure SDK 存储库中找到 Azure Batch 文件约定库的[源代码][github_file_conventions]。
 
 ## 要求：链接的存储帐户  <a name="requirement-linked-storage-account"></a>
 
-若要使用文件约定库将输出存储到持久性存储并在 Azure 门户预览中查看这些输出，必须[将 Azure 存储帐户链接](./batch-application-packages.md#link-a-storage-account/)到 Batch 帐户。如果尚未这样做，请使用 Azure 门户预览将存储帐户链接到 Batch 帐户：
+若要使用文件约定库将输出存储到持久性存储并在 Azure 门户预览中查看这些输出，必须[将 Azure 存储帐户链接](./batch-application-packages.md#link-a-storage-account)到 Batch 帐户。如果尚未这样做，请使用 Azure 门户预览将存储帐户链接到 Batch 帐户：
 
 “Batch 帐户”边栏选项卡 >“设置”>“存储帐户”>“存储帐户”（无）> 在你的订阅中选择一个存储帐户
 
@@ -69,7 +71,8 @@ ms.author: marsma
 
 使用文件约定库保存作业和任务输出时需要执行两个主要操作：创建存储容器，将输出保存到容器。
 
->[!WARNING] 由于所有作业和任务输出将存储在同一个容器中，因此，如果有大量的任务同时尝试保存文件，则可能会强制实施[存储节流限制](../storage/storage-performance-checklist.md#blobs/)。
+>[!WARNING]
+> 由于所有作业和任务输出将存储在同一个容器中，因此，如果有大量的任务同时尝试保存文件，则可能会强制实施[存储节流限制](../storage/storage-performance-checklist.md#blobs)。
 
 ### 创建存储容器
 
@@ -79,16 +82,18 @@ ms.author: marsma
 
 csharp
 
-    CloudJob job = batchClient.JobOperations.CreateJob(
-        "myJob",
-        new PoolInformation { PoolId = "myPool" });
-    
-    // Create reference to the linked Azure Storage account
-    CloudStorageAccount linkedStorageAccount =
-        new CloudStorageAccount(myCredentials, true);
-    
-    // Create the blob storage container for the outputs
-    await job.PrepareOutputStorageAsync(linkedStorageAccount);
+```
+CloudJob job = batchClient.JobOperations.CreateJob(
+    "myJob",
+    new PoolInformation { PoolId = "myPool" });
+
+// Create reference to the linked Azure Storage account
+CloudStorageAccount linkedStorageAccount =
+    new CloudStorageAccount(myCredentials, true);
+
+// Create the blob storage container for the outputs
+await job.PrepareOutputStorageAsync(linkedStorageAccount);
+```
 
 ### 存储任务输出
 
@@ -98,23 +103,26 @@ csharp
 
 csharp
 
-    CloudStorageAccount linkedStorageAccount = new CloudStorageAccount(myCredentials);
-    string jobId = Environment.GetEnvironmentVariable("AZ_BATCH_JOB_ID");
-    string taskId = Environment.GetEnvironmentVariable("AZ_BATCH_TASK_ID");
-    
-    TaskOutputStorage taskOutputStorage = new TaskOutputStorage(
-        linkedStorageAccount, jobId, taskId);
-    
-    /* Code to process data and produce output file(s) */
-    
-    await taskOutputStorage.SaveAsync(TaskOutputKind.TaskOutput, "frame_full_res.jpg");
-    await taskOutputStorage.SaveAsync(TaskOutputKind.TaskPreview, "frame_low_res.jpg");
+```
+CloudStorageAccount linkedStorageAccount = new CloudStorageAccount(myCredentials);
+string jobId = Environment.GetEnvironmentVariable("AZ_BATCH_JOB_ID");
+string taskId = Environment.GetEnvironmentVariable("AZ_BATCH_TASK_ID");
+
+TaskOutputStorage taskOutputStorage = new TaskOutputStorage(
+    linkedStorageAccount, jobId, taskId);
+
+/* Code to process data and produce output file(s) */
+
+await taskOutputStorage.SaveAsync(TaskOutputKind.TaskOutput, "frame_full_res.jpg");
+await taskOutputStorage.SaveAsync(TaskOutputKind.TaskPreview, "frame_low_res.jpg");
+```
 
 “output kind”参数可保存的文件分类。有四个预定义的 [TaskOutputKind][net_taskoutputkind] 类型：“TaskOutput”、“TaskPreview”、“TaskLog”和“TaskIntermediate”。 你还可以指定自定义类型（如果在工作流中有用的话）。
 
 以后在 Batch 中查询给定任务的已保存输出时，可以使用这些输出类型来指定要列出哪种类型的输出。换而言之，当你列出某个任务的输出时，可以根据某种输出类型来筛选列表。例如，“列出任务 *109* 的 *预览* 输出。” 本文稍后的[检索输出](#retrieve-output)部分中详细介绍了如何列出和检索输出。
 
->[!TIP] 输出类型还会指定特定的文件将显示在 Azure 门户预览中的哪个位置： *TaskOutput* 分类的文件将显示在“任务输出文件”中，*TaskLog* 文件将显示在“任务日志”中。
+>[!TIP]
+> 输出类型还会指定特定的文件将显示在 Azure 门户预览中的哪个位置： *TaskOutput* 分类的文件将显示在“任务输出文件”中，*TaskLog* 文件将显示在“任务日志”中。
 
 ### 存储作业输出
 
@@ -122,11 +130,13 @@ csharp
 
 通过调用 [JobOutputStorage][net_joboutputstorage].[SaveAsync][net_joboutputstorage_saveasync] 方法存储作业输出，并指定 [JobOutputKind][net_joboutputkind] 和文件名：
 
-    CloudJob job = await batchClient.JobOperations.GetJobAsync(jobId);
-    JobOutputStorage jobOutputStorage = job.OutputStorage(linkedStorageAccount);
-    
-    await jobOutputStorage.SaveAsync(JobOutputKind.JobOutput, "mymovie.mp4");
-    await jobOutputStorage.SaveAsync(JobOutputKind.JobPreview, "mymovie_preview.mp4");
+```
+CloudJob job = await batchClient.JobOperations.GetJobAsync(jobId);
+JobOutputStorage jobOutputStorage = job.OutputStorage(linkedStorageAccount);
+
+await jobOutputStorage.SaveAsync(JobOutputKind.JobOutput, "mymovie.mp4");
+await jobOutputStorage.SaveAsync(JobOutputKind.JobPreview, "mymovie_preview.mp4");
+```
 
 与用于任务输出的 TaskOutputKind 一样，你可以使用 [JobOutputKind][net_joboutputkind] 参数来分类作业的保存文件。以后可以使用此参数查询（列出）特定的输出类型。JobOutputKind 包括输出和预览类型，并支持创建自定义类型。
 
@@ -138,32 +148,35 @@ csharp
 
 csharp
 
-    TimeSpan stdoutFlushDelay = TimeSpan.FromSeconds(3);
-    string logFilePath = Path.Combine(
-        Environment.GetEnvironmentVariable("AZ_BATCH_TASK_DIR"), "stdout.txt");
+```
+TimeSpan stdoutFlushDelay = TimeSpan.FromSeconds(3);
+string logFilePath = Path.Combine(
+    Environment.GetEnvironmentVariable("AZ_BATCH_TASK_DIR"), "stdout.txt");
 
-    // The primary task logic is wrapped in a using statement that sends updates to
-    // the stdout.txt blob in Storage every 15 seconds while the task code runs.
-    using (ITrackedSaveOperation stdout =
-            await taskStorage.SaveTrackedAsync(
-            TaskOutputKind.TaskLog,
-            logFilePath,
-            "stdout.txt",
-            TimeSpan.FromSeconds(15)))
-    {
-        /* Code to process data and produce output file(s) */
+// The primary task logic is wrapped in a using statement that sends updates to
+// the stdout.txt blob in Storage every 15 seconds while the task code runs.
+using (ITrackedSaveOperation stdout =
+        await taskStorage.SaveTrackedAsync(
+        TaskOutputKind.TaskLog,
+        logFilePath,
+        "stdout.txt",
+        TimeSpan.FromSeconds(15)))
+{
+    /* Code to process data and produce output file(s) */
 
-        // We are tracking the disk file to save our standard output, but the
-        // node agent may take up to 3 seconds to flush the stdout stream to
-        // disk. So give the file a moment to catch up.
-         await Task.Delay(stdoutFlushDelay);
-    }
+    // We are tracking the disk file to save our standard output, but the
+    // node agent may take up to 3 seconds to flush the stdout stream to
+    // disk. So give the file a moment to catch up.
+     await Task.Delay(stdoutFlushDelay);
+}
+```
 
 `Code to process data and produce output file(s)` 只是任务通常会执行的代码的占位符。例如，代码可能会从 Azure 存储下载数据，并对其执行转换或计算。此代码片段的重要部分演示了如何在 `using` 中包装此类代码，以定期使用 [SaveTrackedAsync][net_savetrackedasync] 更新文件。
 
 `Task.Delay` 必须位于此 `using` 块的末尾，确保节点代理有时间将标准输出的内容刷新到节点上的 stdout.txt 文件（节点代理是在池中的每个节点上运行，在节点与 Batch 服务之间提供命令和控制接口的程序）。若没有此延迟，可能会遗漏最后几秒的输出。并非所有文件都需要此延迟。
 
->[!NOTE] 启用 SaveTrackedAsync 文件跟踪时，只会在 Azure 存储空间中保存被跟踪文件的 *追加* 内容。此方法只应该用于跟踪非轮转的日志文件或追加到的其他文件，也就是说，数据在更新时只会添加到文件末尾。
+>[!NOTE]
+> 启用 SaveTrackedAsync 文件跟踪时，只会在 Azure 存储空间中保存被跟踪文件的 *追加* 内容。此方法只应该用于跟踪非轮转的日志文件或追加到的其他文件，也就是说，数据在更新时只会添加到文件末尾。
 
 ## 检索输出  <a name="retrieve-output"></a>
 
@@ -173,19 +186,21 @@ csharp
 
 csharp
 
-    foreach (CloudTask task in myJob.ListTasks())
+```
+foreach (CloudTask task in myJob.ListTasks())
+{
+    foreach (TaskOutputStorage output in
+        task.OutputStorage(storageAccount).ListOutputs(
+            TaskOutputKind.TaskOutput))
     {
-        foreach (TaskOutputStorage output in
-            task.OutputStorage(storageAccount).ListOutputs(
-                TaskOutputKind.TaskOutput))
-        {
-            Console.WriteLine($"output file: {output.FilePath}");
-    
-            output.DownloadToFileAsync(
-                $"{jobId}-{output.FilePath}",
-                System.IO.FileMode.Create).Wait();
-        }
+        Console.WriteLine($"output file: {output.FilePath}");
+
+        output.DownloadToFileAsync(
+            $"{jobId}-{output.FilePath}",
+            System.IO.FileMode.Create).Wait();
     }
+}
+```
 
 ## 任务输出和 Azure 门户预览
 

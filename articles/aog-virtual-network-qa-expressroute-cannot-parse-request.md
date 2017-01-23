@@ -25,17 +25,19 @@ wacn.date: 12/13/2016
 
 ![powershell-link-vnet-er](./media/aog-virtual-network-qa-expressroute-cannot-parse-request/powershell-link-vnet-er.png)
 
-    PS C:\Users\crane> New-AzureRmVirtualNetworkGatewayConnection -Name ERConnection -ResourceGroupName craneARMERtest -Location "China East" -VirtualNetworkGateway1 $gw -PeerId $id -ConnectionType ExpressRoute -AuthorizationKey "d3d7375f-aa95-4a97-97bf-cd4a68278189" 
-    WARNING: The output object type of this cmdlet will be modified in a future release.
-    New-AzureRmVirtualNetworkGatewayConnection : Cannot parse the request.
-    StatusCode: 400
-    ReasonPhrase: Bad Request
-    OperationID : '827b1999-b489-4278-b526-fbf0df64e64b'
-    At line:1 char:1
-    + New-AzureRmVirtualNetworkGatewayConnection -Name ERConnection -Resour ...
-    + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        + CategoryInfo          : CloseError: (:) [New-AzureRmVirt...tewayConnection], NetworkCloudException
-        + FullyQualifiedErrorId : Microsoft.Azure.Commands.Network.NewAzureVirtualNetworkGatewayConnectionCommand
+```
+PS C:\Users\crane> New-AzureRmVirtualNetworkGatewayConnection -Name ERConnection -ResourceGroupName craneARMERtest -Location "China East" -VirtualNetworkGateway1 $gw -PeerId $id -ConnectionType ExpressRoute -AuthorizationKey "d3d7375f-aa95-4a97-97bf-cd4a68278189" 
+WARNING: The output object type of this cmdlet will be modified in a future release.
+New-AzureRmVirtualNetworkGatewayConnection : Cannot parse the request.
+StatusCode: 400
+ReasonPhrase: Bad Request
+OperationID : '827b1999-b489-4278-b526-fbf0df64e64b'
+At line:1 char:1
++ New-AzureRmVirtualNetworkGatewayConnection -Name ERConnection -Resour ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : CloseError: (:) [New-AzureRmVirt...tewayConnection], NetworkCloudException
+    + FullyQualifiedErrorId : Microsoft.Azure.Commands.Network.NewAzureVirtualNetworkGatewayConnectionCommand
+```
 
 ### 解决方法 ###
 
@@ -43,15 +45,19 @@ wacn.date: 12/13/2016
 
 **登录订阅**
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 **创建授权**
 
-    $circuit=Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER"
-    Add-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name "MyAuthorization"
-    Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $circuit
-    $auth1=Get-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name MyAuthorization 
- 
+```
+$circuit=Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER"
+Add-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name "MyAuthorization"
+Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $circuit
+$auth1=Get-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name MyAuthorization 
+```
+
 **获取授权ID**
 
 `$ID=(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").id`
@@ -60,14 +66,19 @@ wacn.date: 12/13/2016
 
 **登录到另外一个订阅 WATSTEST02**
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
- 
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+
 **兑现授权**
 
-    $gw=Get-AzureRmVirtualNetworkGateway -Name CraneARMERtestGW -ResourceGroupName craneARMERtest 
-    New-AzureRmVirtualNetworkGatewayConnection -Name ERConnection -ResourceGroupName craneARMERtest -Location "China East" -VirtualNetworkGateway1 $gw -PeerId $ID -ConnectionType ExpressRoute -AuthorizationKey "d3d7375f-aa95-4a97-97bf-cd4a68278189" 
+```
+$gw=Get-AzureRmVirtualNetworkGateway -Name CraneARMERtestGW -ResourceGroupName craneARMERtest 
+New-AzureRmVirtualNetworkGatewayConnection -Name ERConnection -ResourceGroupName craneARMERtest -Location "China East" -VirtualNetworkGateway1 $gw -PeerId $ID -ConnectionType ExpressRoute -AuthorizationKey "d3d7375f-aa95-4a97-97bf-cd4a68278189" 
+```
 
->[!NOTE]<p>此处的 `$ID` 赋值应为 `(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").id` 即：`"/subscriptions/8775dxxxxxxxxxxxxxxxxxxxxxxxxx518/resourceGroups/CraneER/providers/Microsoft.Network/expressRouteCircuits/21VDemoSH"`
+>[!NOTE]
+><p>此处的 `$ID` 赋值应为 `(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").id` 即：`"/subscriptions/8775dxxxxxxxxxxxxxxxxxxxxxxxxx518/resourceGroups/CraneER/providers/Microsoft.Network/expressRouteCircuits/21VDemoSH"`
 <p>而不是：`(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").Authorizations.id` 即：`"/subscriptions/8775dxxxxxxxxxxxxxxxxxxxxxxxxx518/resourceGroups/CraneER/providers/Microsoft.Network/expressRouteCircuits/21VDemoSH/authorizations/MyAuthorization"`。
 
 出现 “`Cannot parse the request`” 的错误是因为 `$ID` 赋错值了。在 `Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER"` 的输出中会有如下两个参数： `id` 及 `Authorizations.id` 。
@@ -77,4 +88,3 @@ wacn.date: 12/13/2016
 ### 其它资源 ###
 
 [将虚拟网络链接到 ExpressRoute 线路](./expressroute/expressroute-howto-linkvnet-arm.md)
-

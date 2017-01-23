@@ -43,48 +43,56 @@ Resource Manager 锁仅适用于管理平面内发生的操作，包括发送到
 
 提供的类型特定于资源类型。对于存储，将类型设置为“Microsoft.Storage/storageaccounts/providers/locks”。
 
-    {
-      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-      "contentVersion": "1.0.0.0",
-      "parameters": {
-        "lockedResource": {
-          "type": "string"
-        }
-      },
-      "resources": [
-        {
-          "name": "[concat(parameters('lockedResource'), '/Microsoft.Authorization/myLock')]",
-          "type": "Microsoft.Storage/storageAccounts/providers/locks",
-          "apiVersion": "2015-01-01",
-          "properties": {
-            "level": "CannotDelete"
-          }
-        }
-      ]
+```
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "lockedResource": {
+      "type": "string"
     }
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('lockedResource'), '/Microsoft.Authorization/myLock')]",
+      "type": "Microsoft.Storage/storageAccounts/providers/locks",
+      "apiVersion": "2015-01-01",
+      "properties": {
+        "level": "CannotDelete"
+      }
+    }
+  ]
+}
+```
 
 ## 使用 REST API 创建锁
 你可以使用[管理锁的 REST API](https://docs.microsoft.com/rest/api/resources/managementlocks) 锁定已部署的资源。REST API 使您可以创建和删除锁，并且检索有关现有锁的信息。
 
 若要创建一个锁，请运行：
 
-    PUT https://management.chinacloudapi.cn/{scope}/providers/Microsoft.Authorization/locks/{lock-name}?api-version={api-version}
+```
+PUT https://management.chinacloudapi.cn/{scope}/providers/Microsoft.Authorization/locks/{lock-name}?api-version={api-version}
+```
 
 作用域可能是订阅、资源组或资源。锁名称可以是您想要对该锁使用的任何称谓。对于 api 版本，请使用 **2015-01-01**。
 
 在请求中，包括指定锁属性的 JSON 对象。
 
-    {
-      "properties": {
-        "level": "CanNotDelete",
-        "notes": "Optional text notes."
-      }
-    } 
+```
+{
+  "properties": {
+    "level": "CanNotDelete",
+    "notes": "Optional text notes."
+  }
+} 
+```
 
 ## 使用 Azure PowerShell 创建一个锁
 可以通过使用 **New-AzureRmResourceLock** 在 Azure PowerShell 中锁定已部署的资源，如以下示例中所示。
 
-    New-AzureRmResourceLock -LockLevel CanNotDelete -LockName LockSite -ResourceName examplesite -ResourceType Microsoft.Web/sites -ResourceGroupName exampleresourcegroup
+```
+New-AzureRmResourceLock -LockLevel CanNotDelete -LockName LockSite -ResourceName examplesite -ResourceType Microsoft.Web/sites -ResourceGroupName exampleresourcegroup
+```
 
 Azure PowerShell 提供了其他用于使用锁的命令，如 **Set-AzureRmResourceLock** 用来更新锁，而 **Remove-AzureRmResourceLock** 用来删除锁。
 

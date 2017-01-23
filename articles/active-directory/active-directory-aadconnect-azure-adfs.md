@@ -16,7 +16,7 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.date: 10/03/2016
 ms.author: anandy;billmath
-wacn.date: 12/13/2016
+wacn.date: 01/19/2017
 ---
 
 # Azure 中的 AD FS 部署
@@ -141,7 +141,8 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 **6.1.创建 ILB**
 
 若要部署 ILB，请在 Azure 门户预览选择“负载均衡器”，然后单击“添加”(+)。
->[!NOTE] 如果菜单中未显示“负载均衡器”，请单击门户左下角的“浏览”并向下滚动，直到看到“负载均衡器”。然后，单击黄色星号将它添加到菜单中。现在，请选择新负载均衡器的图标打开面板，并开始配置负载均衡器。
+>[!NOTE]
+> 如果菜单中未显示“负载均衡器”，请单击门户左下角的“浏览”并向下滚动，直到看到“负载均衡器”。然后，单击黄色星号将它添加到菜单中。现在，请选择新负载均衡器的图标打开面板，并开始配置负载均衡器。
 
 ![浏览负载均衡器](./media/active-directory-aadconnect-azure-adfs/browseloadbalancer.png)
 
@@ -176,11 +177,11 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 1. 单击“添加”
 2. 提供探测详细信息 
-   a.**名称**：探测名称 
-   b.**协议**：TCP 
-   c.**端口**：443 (HTTPS) 
-   d.**间隔**：5（默认值）- 这是 ILB 在后端池中探测计算机的间隔
-   e.**不正常阈值限制**：2（默认值）- 这是连续探测失败阈值，达到此阈值后，ILB 会将后端池中的计算机声明为无响应，并停止向它发送流量。
+    a.**名称**：探测名称 
+    b.**协议**：TCP 
+    c.**端口**：443 (HTTPS) 
+    d.**间隔**：5（默认值）- 这是 ILB 在后端池中探测计算机的间隔
+    e.**不正常阈值限制**：2（默认值）- 这是连续探测失败阈值，达到此阈值后，ILB 会将后端池中的计算机声明为无响应，并停止向它发送流量。
 
 ![配置 ILB 探测](./media/active-directory-aadconnect-azure-adfs/ilbdeployment4.png)  
 
@@ -191,12 +192,12 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 1. 在 ILB 的设置面板中选择“负载均衡规则”
 2. 在“负载均衡规则”面板中单击“添加”
 3. 在“添加负载均衡规则”面板中，指定以下值：
-   a.**名称**：提供规则的名称
-   b.**协议**：选择“TCP”
-   c.**端口**：443 
-   d.**后端端口**：443 
-   e.**后端池**：选择前面为 AD FS 群集创建的池 
-   f.**探测**：选择前面为 AD FS 服务器创建的探测
+    a.**名称**：提供规则的名称
+    b.**协议**：选择“TCP”
+    c.**端口**：443 
+    d.**后端端口**：443 
+    e.**后端池**：选择前面为 AD FS 群集创建的池 
+    f.**探测**：选择前面为 AD FS 服务器创建的探测
 
 ![配置 ILB 平衡规则](./media/active-directory-aadconnect-azure-adfs/ilbdeployment5.png)
 
@@ -279,7 +280,8 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 ![EXT 访问规则（入站）](./media/active-directory-aadconnect-azure-adfs/nsg_dmz.png)  
 
->[!NOTE] 如果需要使用客户端用户证书身份验证（使用 X509 用户证书进行 clientTLS 身份验证），则 AD FS 要求为入站访问启用 TCP 端口 49443。
+>[!NOTE]
+> 如果需要使用客户端用户证书身份验证（使用 X509 用户证书进行 clientTLS 身份验证），则 AD FS 要求为入站访问启用 TCP 端口 49443。
 
 ### 10\.测试 AD FS 登录
 测试 AD FS 的最简单方法是使用 IdpInitiatedSignon.aspx 页。若要执行此操作，必须在 AD FS 属性中启用 IdpInitiatedSignOn。请遵循以下步骤来验证你的 AD FS 设置

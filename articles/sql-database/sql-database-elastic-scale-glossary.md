@@ -89,5 +89,5 @@ Azure SQL 数据库中的[弹性数据库工具](./sql-database-elastic-scale-in
 [1]: ./media/sql-database-elastic-scale-glossary/glossary.png
 [2]: ./media/sql-database-elastic-scale-glossary/mappings.png
 [3]: ./media/sql-database-elastic-scale-glossary/h_versus_vert.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

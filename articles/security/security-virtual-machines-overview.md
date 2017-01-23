@@ -72,7 +72,7 @@ Microsoft 反恶意软件是一个针对应用程序和租户环境所提供的�
 
 ## 硬件安全模块
 
-加密和身份验证无法提高安全性，除非密钥本身也受到保护。通过将关键密码和密钥存储在 Azure 密钥保管库中，可以简化此类密码和密钥的管理和保护。密钥保管库使你可以将密钥存储在 FIPS 140-2 级别 2 标准认证的硬件安全模块 (HSM) 中。用于备份或[透明数据加密](https://msdn.microsoft.com/zh-cn/library/bb934049.aspx)的 SQL Server 加密密钥可以存储在密钥保管库中，此外还可存储应用程序中的任意密钥或机密。对这些受保护项的权限和访问权限通过 [Azure Active Directory](../active-directory/index.md/) 进行管理。
+加密和身份验证无法提高安全性，除非密钥本身也受到保护。通过将关键密码和密钥存储在 Azure 密钥保管库中，可以简化此类密码和密钥的管理和保护。密钥保管库使你可以将密钥存储在 FIPS 140-2 级别 2 标准认证的硬件安全模块 (HSM) 中。用于备份或[透明数据加密](https://msdn.microsoft.com/zh-cn/library/bb934049.aspx)的 SQL Server 加密密钥可以存储在密钥保管库中，此外还可存储应用程序中的任意密钥或机密。对这些受保护项的权限和访问权限通过 [Azure Active Directory](../active-directory/index.md) 进行管理。
 
 了解详细信息：
 

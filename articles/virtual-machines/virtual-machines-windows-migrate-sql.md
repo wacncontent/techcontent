@@ -47,7 +47,8 @@ ms.author: carlasab
 
 如果不能使用上述方法，请手动迁移你的数据库。使用此方法时，你通常先进行数据库备份，接下来将数据库备份复制到 Azure，然后执行数据库还原。你还可以将数据库文件本身复制到 Azure，然后附加这些文件。你可以通过多种方法完成将数据库迁移到 Azure VM 的这一手动流程。
 
-> [!NOTE] 从较旧版本的 SQL Server 升级到 SQL Server 2014 或 SQL Server 2016 时，应考虑是否需要做一些更改。建议在迁移项目时处理好不受新版 SQL Server 支持的功能上的所有依赖项。有关受支持的版本和方案的详细信息，请参阅[升级到 SQL Server](https://msdn.microsoft.com/zh-cn/library/bb677622.aspx)。
+> [!NOTE]
+> 从较旧版本的 SQL Server 升级到 SQL Server 2014 或 SQL Server 2016 时，应考虑是否需要做一些更改。建议在迁移项目时处理好不受新版 SQL Server 支持的功能上的所有依赖项。有关受支持的版本和方案的详细信息，请参阅[升级到 SQL Server](https://msdn.microsoft.com/zh-cn/library/bb677622.aspx)。
 
 下表列出了各种主要迁移方法，并讨论了最适合使用该方法的场合。
 
@@ -141,10 +142,10 @@ ms.author: carlasab
 
 如果因为要迁移到 SQL Server 2014 之前的 SQL Server 版本或者备份文件大于 1 TB 而无法使用“将 SQL Server 数据库部署到 Azure VM”向导，可使用此方法。如果备份文件大于 1 TB，则必须对其进行条带化，因为 VM 磁盘的最大大小是 1 TB。使用此手动方法按照下列常规步骤迁移用户数据库：
 
-1.	执行到本地位置的完整数据库备份。
-2.	创建或上载具有所需 SQL Server 版本的虚拟机。
-3.	根据你的要求设置连接。请参阅[连接到 Azure 上的 SQL Server 虚拟机（Resource Manager）](./virtual-machines-windows-classic-sql-connect.md)。
-4.	使用远程桌面、Windows 资源管理器或命令提示符处的复制命令将备份文件复制到 VM。
+1. 执行到本地位置的完整数据库备份。
+2. 创建或上载具有所需 SQL Server 版本的虚拟机。
+3. 根据你的要求设置连接。请参阅[连接到 Azure 上的 SQL Server 虚拟机（Resource Manager）](./virtual-machines-windows-classic-sql-connect.md)。
+4. 使用远程桌面、Windows 资源管理器或命令提示符处的复制命令将备份文件复制到 VM。
 
 ##<a name="backup-to-url-and-restore"></a>备份到 URL 并还原
 
@@ -154,19 +155,20 @@ ms.author: carlasab
 
 如果计划[使用 Azure Blob 存储服务存储这些文件](https://msdn.microsoft.com/zh-cn/library/dn385720.aspx)并将它们附加到 Azure VM 中运行的 SQL Server，可以使用此方法（尤其是对于超大型数据库）。使用此手动方法按照下列常规步骤迁移用户数据库：
 
-1.	从本地数据库实例拆离数据库文件。
-2.	使用 [AZCopy 命令行实用工具](../storage/storage-use-azcopy.md)将拆离的数据库文件复制到 Azure Blob 存储。
-3.	从 Azure URL 将数据库文件附加到 Azure VM 中的 SQL Server 实例。
+1. 从本地数据库实例拆离数据库文件。
+2. 使用 [AZCopy 命令行实用工具](../storage/storage-use-azcopy.md)将拆离的数据库文件复制到 Azure Blob 存储。
+3. 从 Azure URL 将数据库文件附加到 Azure VM 中的 SQL Server 实例。
 
 ##<a name="convert-to-vm-and-upload-to-url-and-deploy-as-new-vm"></a>转换为 VM、上载到 URL 并部署为新的 VM
 
 使用此方法可将本地 SQL Server 实例中的所有系统数据库和用户数据库迁移到 Azure 虚拟机。请使用此手动方法并按照下列常规步骤迁移整个 SQL Server 实例：
 
-1.	使用 [Microsoft 虚拟机转换器](http://technet.microsoft.com/zh-cn/library/dn873998.aspx)将物理或虚拟机转换为 Hyper-V VHD。
-2.	使用 [Add-AzureVHD cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn495173.aspx) 将 VHD 文件上载到 Azure 存储空间。
-3.	使用上载的 VHD 部署新的虚拟机。
+1. 使用 [Microsoft 虚拟机转换器](http://technet.microsoft.com/zh-cn/library/dn873998.aspx)将物理或虚拟机转换为 Hyper-V VHD。
+2. 使用 [Add-AzureVHD cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn495173.aspx) 将 VHD 文件上载到 Azure 存储空间。
+3. 使用上载的 VHD 部署新的虚拟机。
 
-> [!NOTE] 若要迁移整个应用程序，请考虑使用 [Azure Site Recovery](../site-recovery/site-recovery-overview.md)。
+> [!NOTE]
+> 若要迁移整个应用程序，请考虑使用 [Azure Site Recovery](../site-recovery/site-recovery-overview.md)。
 
 ## 后续步骤
 

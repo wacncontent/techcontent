@@ -1,4 +1,3 @@
-
 ---
 title: Kudu 管理和诊断 azure web 应用
 description: Kudu 管理和诊断 azure web 应用。
@@ -79,25 +78,28 @@ Tools选项卡下面提供了一些其他在线工具：
 
     单击此按钮可以下载 web 应用的重要日志文件。
 * Log stream：
-   
+
     输出实时日志到页面, 此功能也可以通过 curl 命令行 启动。
 
-        curl -u {username} https://{sitename}.scm.chinacloudsites.cn/logstream
+    ```
+    curl -u {username} https://{sitename}.scm.chinacloudsites.cn/logstream
+    ```
 
     页面打印如下格式的日志信息：
 
     ![](./media/aog-web-app-diagnostics-kudu/log-stream.png)
 
-    >[!NOTE]如果通过 Kudu 站点启动 Log stream，由于浏览器会缓存响应数据，用户需要等到日志填满缓冲区后，才可以看到实时日志输出到页面。 Log stream 会持续 12 小时开启应用程序文件日志 (错误模式) ,用户可以在 Azure portal 上手动关闭。
-    
+    >[!NOTE]
+    >如果通过 Kudu 站点启动 Log stream，由于浏览器会缓存响应数据，用户需要等到日志填满缓冲区后，才可以看到实时日志输出到页面。 Log stream 会持续 12 小时开启应用程序文件日志 (错误模式) ,用户可以在 Azure portal 上手动关闭。
+
 * WebJobs dashboard： 
 
     进入 WebJobs dashboard 页面后，单击 WebJobs 的 NAME 链接，可以显示 web Job 历史运行情况。
-    
+
     ![](./media/aog-web-app-diagnostics-kudu/webjobs-deshboard.png)
 
 * Download deployment script：
-  
+
     如果 web 应用是通过 Git 部署，用户点击此按钮可以下载部署脚本。
 
 ## <a id="ext"></a>Web 应用扩展
@@ -105,4 +107,3 @@ Tools选项卡下面提供了一些其他在线工具：
 Kudu 站点提供了 web 应用扩展界面，用户可以查看已经安装的扩展或者安装新的扩展。
 
 ![Web extension](./media/aog-web-app-diagnostics-kudu/web-extension.png)
-

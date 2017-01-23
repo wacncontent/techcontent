@@ -28,10 +28,10 @@ ms.author: skwan;bryanla
 
 将应用程序转换成 Azure AD 多租户应用包括四个简单的步骤：
 
-1.	将应用程序注册更新为多租户
-2.	将代码更新为向 /common 终结点发送请求
-3.	将代码更新为处理多个颁发者值
-4.	了解用户和管理员的同意意向并进行适当的代码更改
+1. 将应用程序注册更新为多租户
+2. 将代码更新为向 /common 终结点发送请求
+3. 将代码更新为处理多个颁发者值
+4. 了解用户和管理员的同意意向并进行适当的代码更改
 
 让我们详细了解每个步骤。你也可以直接跳转到[此多租户示例列表][AAD-Samples-MT]。
 
@@ -45,11 +45,15 @@ Azure AD 中的 Web 应用/API 注册默认为单租户。可以将注册转换�
 ## 将代码更新为向 /common 发送请求
 在单租户应用程序中，登录请求将发送到租户的登录终结点。以 contoso.partner.onmschina.cn 为例，终结点将是：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
 
 发送到租户终结点的请求可以让该租户中的用户（或来宾）登录该租户中的应用程序。使用多租户应用程序时，应用程序事先并不知道用户来自哪个租户，因此无法将请求发送到租户的终结点。取而代之的是，请求将发送到在所有 Azure AD 租户之间多路复用的终结点：
 
-    https://login.microsoftonline.com/common
+```
+https://login.microsoftonline.com/common
+```
 
 当 Azure AD 在 /common 终结点上收到请求时，将会使用户登录，因而可以发现用户来自哪个租户。/common 终结点可与 Azure AD 支持的所有身份验证协议配合使用：OpenID Connect、OAuth 2.0、SAML 2.0 和 WS 联合身份验证。
 
@@ -64,19 +68,26 @@ Azure AD 中的 Web 应用/API 注册默认为单租户。可以将注册转换�
 ## 将代码更新为处理多个颁发者值
 Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
-> [!NOTE] 尽管本机客户端应用程序从 Azure AD 请求并接收令牌，但它们这样做是为了将令牌发送到 API 来进行验证。本机应用程序不会验证令牌，并且必须将它们视为不透明。
+> [!NOTE]
+> 尽管本机客户端应用程序从 Azure AD 请求并接收令牌，但它们这样做是为了将令牌发送到 API 来进行验证。本机应用程序不会验证令牌，并且必须将它们视为不透明。
 
 让我们看看应用程序如何验证它从 Azure AD 接收的令牌。单租户应用程序通常采用类似于下面的终结点值：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
 
 并使用该值构造元数据 URL（在本例中为 OpenID Connect），例如：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn/.well-known/openid-configuration
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn/.well-known/openid-configuration
+```
 
 以下载用于验证令牌的两项关键信息：租户的签名密钥和颁发者值。每个 Azure AD 租户使用以下格式的唯一颁发者值：
 
-    https://sts.chinacloudapi.cn/31537af4-6d77-4bb9-a681-d2394888ea26/
+```
+https://sts.chinacloudapi.cn/31537af4-6d77-4bb9-a681-d2394888ea26/
+```
 
 其中，GUID 值是租户的租户 ID 重命名安全版本。如果你单击上面的 `contoso.partner.onmschina.cn` 元数据链接，就可以在文档中看到此颁发者值。
 
@@ -84,7 +95,9 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 由于 /common 终结点既不对应于租户也不是颁发者，因此在检查 /common 的元数据中的颁发者值时，它拥有的是一个模板化的 URL 而不是实际值：
 
-    https://sts.chinacloudapi.cn/{tenantid}/
+```
+https://sts.chinacloudapi.cn/{tenantid}/
+```
 
 因此，多租户应用程序无法仅通过将元数据中的颁发者值与令牌中的 `issuer` 值进行匹配来验证令牌。多租户应用程序需要一个逻辑来根据颁发者值的租户 ID 部分来确定哪些颁发者值有效、哪些颁发者值无效。
 
@@ -121,14 +134,17 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 租户管理员可以禁用普通用户同意应用程序的能力。如果禁用此功能，则始终需要管理员同意，才能在租户中设置应用程序。如果想要在禁用普通用户同意的情况下测试应用程序，可以在 [Azure 经典管理门户][AZURE-classic-portal]的 Azure AD 租户配置部分中找到配置开关。
 
-> [!NOTE] 某些应用程序想要提供一种体验，让普通用户能够一开始即表示同意，然后应用程序可让管理员参与操作并请求需要管理员同意的权限。目前在 Azure AD 中还没有任何办法可以使用单个应用程序注册来实现此目的。即将推出的 Azure AD v2 终结点可允许应用程序在运行时（而不是在注册时）请求权限，这样会使这种方案成为可能。有关详细信息，请参阅 [Azure AD App Model v2 Developer Guide][AAD-V2-Dev-Guide]（Azure AD 应用模型 v2 开发人员指南）。
+> [!NOTE]
+> 某些应用程序想要提供一种体验，让普通用户能够一开始即表示同意，然后应用程序可让管理员参与操作并请求需要管理员同意的权限。目前在 Azure AD 中还没有任何办法可以使用单个应用程序注册来实现此目的。即将推出的 Azure AD v2 终结点可允许应用程序在运行时（而不是在注册时）请求权限，这样会使这种方案成为可能。有关详细信息，请参阅 [Azure AD App Model v2 Developer Guide][AAD-V2-Dev-Guide]（Azure AD 应用模型 v2 开发人员指南）。
 
 ### 同意和多层应用程序
 应用程序可能有多个层，每一层由其自身在 Azure AD 中的注册来表示。例如，一个调用 Web API 的本机应用程序，或者一个调用 Web API 的 Web 应用程序。在这两种情况下，客户端（本机应用或 Web 应用）将请求调用资源 (Web API) 的权限。要让客户端成功获得客户同意添加到其租户中，请求权限的所有资源必须都已在于客户的租户中。如果不符合此条件，Azuer AD 将返回错误，指出必须先添加资源。
 
 如果逻辑应用程序包含两个或更多个应用程序注册（例如独立的客户端和资源），这可能造成问题。如何先将资源添加到客户租户中？ Azure AD 通过以单个步骤对客户端和资源行使同意权的方式来处理此情况，其中用户在同意页上看到客户端和资源两者所请求的权限的总和。若要启用此行为，资源的应用程序注册必须在其应用程序清单中以 `knownClientApplications` 形式包含客户端的应用 ID。例如：
 
-    knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
+```
+knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
+```
 
 可以通过资源[应用程序的清单][AAD-App-Manifest]更新此属性，本文末尾的[相关内容](#related-content)部分中的多层本机客户端调用 Web API 示例中也提供了此属性的相关演示。下图提供了同意多层应用的概览：
 

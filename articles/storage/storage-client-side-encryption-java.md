@@ -51,7 +51,8 @@ ms.author: dineshm
 
 在加密过程中，客户端库将生成 16 个字节的随机初始化向量 (IV) 和 32 个字节的随机内容加密密钥 (CEK) 并将使用此信息对 Blob 数据执行信封加密。然后，已包装的 CEK 和一些附加加密元数据将与服务上的已加密 Blob 一起存储为 Blob 元数据。
 
->[!WARNING] 如果你要针对 Blob 编辑或上传自己的元数据，需要确保此元数据已保留。如果你在没有此元数据的情况下上传新元数据，则已包装的 CEK、IV 和其他元数据将丢失，而 Blob 内容将永远无法再检索。
+>[!WARNING]
+> 如果你要针对 Blob 编辑或上传自己的元数据，需要确保此元数据已保留。如果你在没有此元数据的情况下上传新元数据，则已包装的 CEK、IV 和其他元数据将丢失，而 Blob 内容将永远无法再检索。
 
 下载已加密的 Blob 需要使用 **download*/openInputStream** 便捷方法检索整个 Blob 的内容。将已包装的 CEK 解包，与 IV（在本示例中存储为 Blob 元数据）一起使用将解密后的数据返回给用户。
 
@@ -64,14 +65,17 @@ ms.author: dineshm
 
 在加密过程中，客户端库将生成 16 个字节的随机 IV 和 32 个字节的随机 CEK，并使用此信息对队列消息文本执行信封加密。然后，将已包装的 CEK 和一些附加加密元数据添加到已加密的队列消息中。此修改后的消息（如下所示）将存储在服务中。
 
-    <MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
+```
+<MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
+```
 
 在解密过程中，将从队列消息中提取已包装的密钥并将其解包。还将从队列消息中提取 IV，与解包的密钥一起用于对队列消息数据进行解密。请注意，加密元数据很少（不到 500 个字节），因此虽然它计入队列消息的 64KB 限制，但影响应是可管理的。
 
 ### 表
 客户端库支持对插入和替换操作的实体属性进行加密。
 
->[!NOTE] 当前不支持合并。由于属性的子集可能以前已使用不同的密钥加密，因此只合并新属性和更新元数据将导致数据丢失。合并需要进行额外的服务调用以从服务中读取预先存在的实体，或者需要为属性使用一个新密钥，由于性能方面的原因，这两种方案都不适用。
+>[!NOTE]
+> 当前不支持合并。由于属性的子集可能以前已使用不同的密钥加密，因此只合并新属性和更新元数据将导致数据丢失。合并需要进行额外的服务调用以从服务中读取预先存在的实体，或者需要为属性使用一个新密钥，由于性能方面的原因，这两种方案都不适用。
 
 表数据加密的工作方式如下：
 
@@ -79,9 +83,9 @@ ms.author: dineshm
 2. 客户端库为每个实体生成 16 个字节的随机初始化向量 (IV) 和 32 个字节的随机内容加密密钥 (CEK)，并通过为每个属性派生新的 IV 对要加密的单独属性执行信封加密。加密的属性存储为二进制数据。
 3. 然后，已包装的 CEK 和一些附加加密元数据将存储为两个附加保留属性。第一个保留属性 (\_ClientEncryptionMetadata1) 是一个字符串属性，保存有关 IV、版本和已包装密钥的信息。第二个保留属性 (\_ClientEncryptionMetadata2) 是一个二进制属性，保存有关已加密属性的信息。第二个属性 (\_ClientEncryptionMetadata2) 中的信息本身是已加密。
 4. 由于加密需要这两个附加保留属性，用户现在可能只有 250 个自定义属性，而不是 252 个。实体的总大小必须小于 1MB。
-   
+
    请注意，只有字符串属性可以加密。如果要对其他类型的属性进行加密，必须将它们转换为字符串。加密的字符串作为二进制属性存储在服务中，并在解密之后转换回字符串。
-   
+
    对于表，除了加密策略以外，用户还必须指定要加密的属性。可以通过指定 [Encrypt] 属性（适用于从 TableEntity 派生的 POCO 实体）或在请求选项中指定加密解析程序来完成此操作。加密解析程序是一个委托，它接受分区键、行键和属性名称，并返回一个布尔值以指示是否应加密该属性。在加密过程中，客户端库将使用此信息确定是否应在写入到网络时加密属性。该委托还可以围绕如何加密属性实现逻辑的可能性。（例如，如果 X，则加密属性 A，否则加密属性 A 和 B。） 请注意，在读取或查询实体时，不需要提供此信息。
 
 ### 批处理操作
@@ -101,7 +105,7 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 * azure-keyvault-core 包含 IKey 和 IKeyResolver。它是没有依赖项的小型包。用于 Java 的存储客户端库将其定义为一个依赖项。
 * azure-keyvault 包含密钥保管库 REST 客户端。
 * azure-keyvault-extensions 包含扩展代码，其中包括加密算法以及 RSAKey 和 SymmetricKey 的实现。它依赖于 Core 和 KeyVault 命名空间，并提供用于定义聚合解析程序（在用户想要使用多个密钥提供程序时）和缓存密钥解析程序的功能。虽然存储客户端库不直接依赖于此包，但是如果用户想要使用 Azure 密钥保管库存储其密钥或通过密钥保管库扩展来使用本地和云加密提供程序，则他们将需要此包。
-  
+
   密钥保管库专为高价值主密钥设计，每个密钥保管库的限流限制的设计也考虑了这一点。使用密钥保管库执行客户端加密时，首选模型是使用在密钥保管库中作为机密存储并在本地缓存的对称主密钥。用户必须执行以下操作：
 
 1. 脱机创建一个机密并将其上传到密钥保管库。
@@ -111,7 +115,8 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ## 最佳实践
 仅在用于 Java 的存储客户端库中提供加密支持。
 
->[!IMPORTANT] 使用客户端加密时，请注意以下要点：
+>[!IMPORTANT]
+> 使用客户端加密时，请注意以下要点：
 > 
 > * 读取或写入到已加密的 Blob 时，请使用完整 Blob 上传命令和范围/完整 Blob 下载命令。避免使用协议操作（如“放置块”、“放置块列表”、“写入页”、“清除页”或“追加块”）写入到已加密的 Blob，否则可能会损坏已加密的 Blob 并使其不可读。
 > * 对于表，存在类似的约束。请注意，不要在未更新加密元数据的情况下更新已加密的属性。
@@ -123,10 +128,10 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 
 * 对于加密，始终使用该密钥，而没有密钥将导致错误。
 * 对于解密：
-  
+
   * 如果指定为获取密钥，则将调用密钥解析程序。如果指定了解析程序，但该解析程序不具有密钥标识符的映射，则将引发错误。
   * 如果未指定解析程序，但指定了密钥，则在该密钥的标识符与所需密钥标识符匹配时使用该密钥。如果标识符不匹配，则将引发错误。
-    
+
     [加密示例](https://github.com/Azure/azure-storage-net/tree/master/Samples/GettingStarted/EncryptionSamples) <fix URL>演示了针对 Blob、队列和表的更详细端到端方案，以及密钥保管库集成。
 
 ### RequireEncryption 模式
@@ -137,89 +142,97 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ### Blob 服务加密
 创建 **BlobEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-    // Create the IKey used for encryption.
-    RsaKey key = new RsaKey("private:key1" /* key identifier */);
+```
+// Create the IKey used for encryption.
+RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
-    // Create the encryption policy to be used for upload and download.
-    BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
+// Create the encryption policy to be used for upload and download.
+BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
 
-    // Set the encryption policy on the request options.
-    BlobRequestOptions options = new BlobRequestOptions();
-    options.setEncryptionPolicy(policy);
+// Set the encryption policy on the request options.
+BlobRequestOptions options = new BlobRequestOptions();
+options.setEncryptionPolicy(policy);
 
-    // Upload the encrypted contents to the blob.
-    blob.upload(stream, size, null, options, null);
+// Upload the encrypted contents to the blob.
+blob.upload(stream, size, null, options, null);
 
-    // Download and decrypt the encrypted contents from the blob.
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    blob.download(outputStream, null, options, null);
+// Download and decrypt the encrypted contents from the blob.
+ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+blob.download(outputStream, null, options, null);
+```
 
 ### 队列服务加密  
 创建 **QueueEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-    // Create the IKey used for encryption.
-    RsaKey key = new RsaKey("private:key1" /* key identifier */);
+```
+// Create the IKey used for encryption.
+RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
-    // Create the encryption policy to be used for upload and download.
-    QueueEncryptionPolicy policy = new QueueEncryptionPolicy(key, null);
+// Create the encryption policy to be used for upload and download.
+QueueEncryptionPolicy policy = new QueueEncryptionPolicy(key, null);
 
-    // Add message
-    QueueRequestOptions options = new QueueRequestOptions();
-    options.setEncryptionPolicy(policy);
+// Add message
+QueueRequestOptions options = new QueueRequestOptions();
+options.setEncryptionPolicy(policy);
 
-    queue.addMessage(message, 0, 0, options, null);
+queue.addMessage(message, 0, 0, options, null);
 
-    // Retrieve message
-    CloudQueueMessage retrMessage = queue.retrieveMessage(30, options, null);
+// Retrieve message
+CloudQueueMessage retrMessage = queue.retrieveMessage(30, options, null);
+```
 
 ### 表服务加密  
 除了创建加密策略和在请求选项上设置它以外，你还必须在 **TableRequestOptions** 中指定 **EncryptionResolver**，或在实体的 getter 和 setter 上设置 [Encrypt] 特性。
 
 ### 使用解析程序  
 
-    // Create the IKey used for encryption.
-    RsaKey key = new RsaKey("private:key1" /* key identifier */);
+```
+// Create the IKey used for encryption.
+RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
-    // Create the encryption policy to be used for upload and download.
-    TableEncryptionPolicy policy = new TableEncryptionPolicy(key, null);
+// Create the encryption policy to be used for upload and download.
+TableEncryptionPolicy policy = new TableEncryptionPolicy(key, null);
 
-    TableRequestOptions options = new TableRequestOptions()
-    options.setEncryptionPolicy(policy);
-    options.setEncryptionResolver(new EncryptionResolver() {
-        public boolean encryptionResolver(String pk, String rk, String key) {
-            if (key == "foo")
-            {
-                return true;
-            }
-            return false;
+TableRequestOptions options = new TableRequestOptions()
+options.setEncryptionPolicy(policy);
+options.setEncryptionResolver(new EncryptionResolver() {
+    public boolean encryptionResolver(String pk, String rk, String key) {
+        if (key == "foo")
+        {
+            return true;
         }
-    });
+        return false;
+    }
+});
 
-    // Insert Entity
-    currentTable.execute(TableOperation.insert(ent), options, null);
+// Insert Entity
+currentTable.execute(TableOperation.insert(ent), options, null);
 
-    // Retrieve Entity
-    // No need to specify an encryption resolver for retrieve
-    TableRequestOptions retrieveOptions = new TableRequestOptions()
-    retrieveOptions.setEncryptionPolicy(policy);
+// Retrieve Entity
+// No need to specify an encryption resolver for retrieve
+TableRequestOptions retrieveOptions = new TableRequestOptions()
+retrieveOptions.setEncryptionPolicy(policy);
 
-    TableOperation operation = TableOperation.retrieve(ent.PartitionKey, ent.RowKey, DynamicTableEntity.class);
-    TableResult result = currentTable.execute(operation, retrieveOptions, null);
+TableOperation operation = TableOperation.retrieve(ent.PartitionKey, ent.RowKey, DynamicTableEntity.class);
+TableResult result = currentTable.execute(operation, retrieveOptions, null);
+```
 
 ### 使用属性  
 如上所述，如果实体实现了 TableEntity，则可以使用 [Encrypt] 特性修饰属性 getter 和 setter，而不用指定 **EncryptionResolver**。
 
-    private string encryptedProperty1;
+```
+private string encryptedProperty1;
 
-    @Encrypt
-    public String getEncryptedProperty1 () {
-        return this.encryptedProperty1;
-    }
+@Encrypt
+public String getEncryptedProperty1 () {
+    return this.encryptedProperty1;
+}
 
-    @Encrypt
-    public void setEncryptedProperty1(final String encryptedProperty1) {
-        this.encryptedProperty1 = encryptedProperty1;
-    }
+@Encrypt
+public void setEncryptedProperty1(final String encryptedProperty1) {
+    this.encryptedProperty1 = encryptedProperty1;
+}
+```
 
 ## 加密和性能
 注意，加密你的存储数据会导致额外的性能开销。必须生成内容密钥和 IV，内容本身必须进行加密，并且其他元数据必须进行格式化并上传。此开销将因所加密的数据量而有所不同。我们建议客户在开发过程中始终测试其应用程序的性能。

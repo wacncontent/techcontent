@@ -59,7 +59,9 @@ ms.author: adrianha
 
 1. 编辑共享项目中的 App.xaml.cs。注释掉 **MobileServiceClient** 的初始化并添加使用无效移动应用 URL 的以下行：
 
-         public static MobileServiceClient MobileService = new MobileServiceClient("https://your-service.azurewebsites.fail");
+    ```
+     public static MobileServiceClient MobileService = new MobileServiceClient("https://your-service.azurewebsites.fail");
+    ```
 
     还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
 

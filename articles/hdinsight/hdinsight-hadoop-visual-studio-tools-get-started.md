@@ -31,16 +31,16 @@ ms.author: jgao
 若要完成本教程并使用 Visual Studio 中的 Data Lake 工具，需要以下项：
 
 * Azure HDInsight 群集：基于 Windows 的群集可用于本文档中的步骤。有关创建群集的详细信息，请参阅下列主题之一：
-  
+
   * [开始使用基于 Windows 的 HDInsight](./hdinsight-hadoop-tutorial-get-started-windows-v1.md)
 * 安装有以下软件的工作站：
-  
+
   * Windows 8.1、Windows 8 或 Windows 7
   * Visual Studio（以下版本之一）：
-    
+
     * 包含 [Update 4](https://www.microsoft.com/download/details.aspx?id=44921) 的 Visual Studio 2013 Community/Professional/Premium/Ultimate
     * Visual Studio 2015 (Community/Enterprise)
-    
+
     > [!NOTE]
     目前，用于 Visual Studio 的 Data Lake 工具仅有英文版本。
     > 
@@ -64,14 +64,14 @@ ms.author: jgao
 1. 打开 Visual Studio。
 2. 在“视图”菜单中，单击“服务器资源管理器”，以打开“服务器资源管理器”窗口。
 3. 依次展开“Azure”和“HDInsight”。
-   
+
    > [!NOTE]
    请注意，应打开“HDInsight 任务列表”窗口。如果你未看到它，则在“视图”菜单中，单击“其他窗口”，然后单击“HDInsight 任务列表”窗口。
    > 
    > 
 4. 输入 Azure 订阅凭据，然后单击“登录”。仅当尚未从此工作站上的 Visual Studio 连接到 Azure 订阅时，才需要此凭据。
 5. 在“服务器资源管理器”中，你将看到现有 HDInsight 群集的列表。如果没有任何群集，则可以通过使用 Azure 门户、Azure PowerShell 或 HDInsight SDK 创建群集。有关详细信息，请参阅[创建 HDInsight 群集][hdinsight-create-clusters]。
-   
+
    ![用于 Visual Studio 的 Data Lake 工具服务器资源管理器群集列表][5]  
 
 6. 展开 HDInsight 群集。你将看到“Hive 数据库”、默认存储帐户、链接的存储帐户，以及“Hadoop 服务日志”。可进一步展开条目。
@@ -109,11 +109,11 @@ ms.author: jgao
 
 1. 在“服务器资源管理器”中，展开“Azure”>“HDInsight”> 所选的群集 >“Hive 数据库”>“默认值”>“hivesampletable”，以查看表架构。
 2. 右键单击“hivesampletable”，然后单击“查看前 100 行”以列出行。这相当于使用 Hive ODBC 驱动程序运行以下 Hive 查询：
-   
+
      SELECT * FROM hivesampletable LIMIT 100
-   
+
    可自定义行计数。
-   
+
    ![Data Lake 工具：HDinsight Hive Visual Studio 架构查询][6]
 
 ### 创建 Hive 表
@@ -124,7 +124,7 @@ ms.author: jgao
 1. 在“服务器资源管理器”中，展开“Azure”>“HDInsight 群集” > HDInsight 群集 >“Hive 数据库”，然后右键单击“默认值”，再单击“创建表”。
 2. 配置该表。
 3. 单击“创建表”来提交创建新 Hive 表的作业。
-   
+
     ![Data Lake 工具：HDInsight Visual Studio 工具创建 hive 表][7]
 
 ### <a name="run.queries"></a>验证和运行 Hive 查询
@@ -138,24 +138,24 @@ ms.author: jgao
 1. 在“服务器资源管理器”中，展开“Azure”，然后展开“HDInsight 群集”。
 2. 右键单击要运行查询的群集，然后单击“编写 Hive 查询”。
 3. 输入 Hive 查询。请注意，Hive 编辑器支持 IntelliSense。用于 Visual Studio 的 Data Lake 工具支持在用户编辑 Hive 脚本时加载远程元数据。例如，当你键入“SELECT * FROM”时，IntelliSense 将列出所有建议的表名称。在指定表名称后，IntelliSense 将列出列名称。该工具几乎支持所有 Hive DML 语句、子查询和内置 UDF。
-   
+
     ![Data Lake 工具：HDInsight Visual Studio Tools IntelliSense][13]  
 
     ![Data Lake 工具：HDInsight Visual Studio Tools IntelliSense][14]
-   
+
    > [!NOTE]
    只建议 HDInsight 工具栏中已选择的群集元数据。
    > 
    > 
 4. （可选）：单击“验证脚本”以检查脚本语法错误。
-   
+
     ![Data Lake 工具：用于 Visual Studio 的 Data Lake 工具本地验证][10]
 5. 单击“提交”或“提交(高级)”。使用高级提交选项，可针对脚本配置“作业名称”、“参数”、“其他配置”和“状态目录”：
-   
+
     ![HDInsight Hadoop hive 查询][9]
-   
+
     在提交作业后，你会看到“Hive 作业摘要”窗口。
-   
+
     ![HDInsight Hadoop Hive 查询摘要][8]
 6. 使用“刷新”按钮来更新状态，直到作业状态更改为“已完成”。
 7. 单击底部的链接可查看以下内容：**作业查询**、**作业输出**、**作业日志**或 **Yarn 日志**。
@@ -164,7 +164,7 @@ ms.author: jgao
 
 1. 在“文件”菜单中，单击“新建”，然后单击“项目”。
 2. 从左窗格中选择“HDInsight”，在中间窗格中选择“Hive 应用程序”，输入属性，然后单击“确定”。
-   
+
     ![Data Lake 工具：HDInsight Visual Studio 工具新建 hive 项目][11]
 3. 在“解决方案资源管理器”中，双击 **Script.hql** 以将其打开。
 4. 若要验证 Hive 脚本，可单击“验证脚本”按钮，或在 Hive 编辑器中右键单击该脚本，然后在上下文菜单中单击“验证脚本”。
@@ -179,7 +179,7 @@ ms.author: jgao
 1. 在“服务器资源管理器”中，展开“Azure”，然后展开“HDInsight”。
 2. 右键单击 HDInsight 群集，然后单击“查看作业”。你将看到群集上运行的 Hive 作业的列表。
 3. 单击作业列表中的作业以将其选定，然后使用“Hive 作业摘要”窗口以打开“作业查询”、“作业输出”、“作业日志”或“Yarn 日志”。
-   
+
     ![Data Lake 工具：HDInsight Visual Studio 工具新建 hive 作业][12]
 
 ### 通过 HiveServer2 的更快路径 Hive 执行

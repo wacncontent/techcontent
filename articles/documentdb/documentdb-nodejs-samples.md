@@ -15,7 +15,7 @@ ms.devlang: na
 ms.topic: article
 ms.date: 10/03/2016
 ms.author: moderakh
-wacn.date: 11/29/2016
+wacn.date: 01/19/2017
 ---
 
 # DocumentDB Node.js 示例
@@ -37,7 +37,8 @@ wacn.date: 11/29/2016
     - 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)：获取用于试用付费版 Azure 服务的信用额度。
 2. 还需要 [Node.js SDK](./documentdb-sdk-node.md)。
 
-    > [!NOTE] 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，这些示例对 [DocumentClient.createCollection](http://azure.github.io/azure-documentdb-node/DocumentClient.html#createCollection) 发出多个调用。每次执行完此操作，均会按照正在创建的集合的性能层，向你的订阅收取使用 1 小时的费用。
+    > [!NOTE]
+    > 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，这些示例对 [DocumentClient.createCollection](http://azure.github.io/azure-documentdb-node/DocumentClient.html#createCollection) 发出多个调用。每次执行完此操作，均会按照正在创建的集合的性能层，向你的订阅收取使用 1 小时的费用。
 
 ## <a name="database-examples"></a>数据库示例
 

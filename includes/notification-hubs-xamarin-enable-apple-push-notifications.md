@@ -1,5 +1,3 @@
-
-
 若要通过 Apple Push Notification 服务 (APNS) 为应用注册推送通知，必须在 Apple 开发人员门户上为项目创建新的推送证书、应用 ID 和预配配置文件。你的应用可以使用应用 ID 中包含的配置设置来发送和接收推送通知。这些设置包括发送和接收推送通知时，在 Apple Push Notification 服务 (APNS) 上进行身份验证所需的推送通知证书。有关这些概念的详细信息，请参阅 [Apple Push Notification 服务](http://go.microsoft.com/fwlink/p/?LinkId=272584)文档。
 
 #### 为推送证书生成证书签名请求文件
@@ -33,14 +31,14 @@
 2. 更新新应用的以下三个字段，然后单击“Continue”（继续）：
 
     * **Name（名称）**：在“App ID Description”（应用 ID 说明）部分的“Name”（名称）字段中为应用键入一个描述性名称。
-    
+
     * **Bundle Identifier（捆绑标识符）**：在“Explicit App ID”（显式应用 ID）部分下，使用[应用分发指南](https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/ConfiguringYourApp/ConfiguringYourApp.html#//apple_ref/doc/uid/TP40012582-CH28-SW8)中所述的 `<Organization Identifier>.<Product Name>` 格式输入“Bundle Identifier”（捆绑标识符）。此标识符必须与应用的 XCode 或 Xamarin 项目中使用的标识符匹配。
-     
+
     * **Push Notifications（推送通知）**：在“App Services”（应用程序服务）部分中选中“Push Notifications”（推送通知）选项。
 
     ![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-new-appid-info.png)
 
-3.	在“Confirm your App ID”（确认你的应用 ID）屏幕上检查设置，确认后，请单击“Submit”（提交）
+3. 在“Confirm your App ID”（确认你的应用 ID）屏幕上检查设置，确认后，请单击“Submit”（提交）
 
 4. 	提交新应用 ID 后，你将会看到“Registration complete”（注册已完成）屏幕。单击“Done”（完成）。
 
@@ -52,7 +50,8 @@
 
        此时将显示“Add iOS Certificate”（添加 iOS 证书）助手。
 
-    > [!NOTE]本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
+    > [!NOTE]
+    >本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
 
 7. 单击“Choose File”（选择文件），浏览到推送证书 CSR 保存到的位置。然后单击“Generate”（生成）。
 
@@ -66,13 +65,15 @@
 
       ![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-cert-downloaded.png)
 
-    > [!NOTE]默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
+    > [!NOTE]
+    >默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
 
 9. 双击下载的推送证书 **aps\_development.cer**。将在 Keychain 中安装新证书，如下所示：
 
        ![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-cert-in-keychain.png)
 
-    > [!NOTE]证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
+    > [!NOTE]
+    >证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
 
 10. 在 Keychain Access 中，右键单击你在“Certificates”（证书）类别中创建的新推送证书。单击“Export”（导出），为文件命名，选择“.p12”格式，然后单击“Save”（保存）。
 

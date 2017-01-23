@@ -37,7 +37,8 @@ ms.tgt_pltfrm: NA
  - 在导出期间终止所有读取和写入活动。
  - 对所有大型表格上的非 null 值使用[聚集索引](https://msdn.microsoft.com/zh-cn/library/ms190457.aspx)。如果不使用聚集索引，当时间超过 6-12 个小时时，导出可能会失败。原因是导出服务需要完成表格扫描才能尝试导出整个表格。确认表格是否已就导出进行优化的好方法是运行 **DBCC SHOW\_STATISTICS** 并确保 *RANGE\_HI\_KEY* 不是 null 且其值分布良好。有关详细信息，请参阅 [DBCC SHOW\_STATISTICS](https://msdn.microsoft.com/zh-cn/library/ms174384.aspx)。
 
-> [!NOTE] BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅[业务连续性概述](./sql-database-business-continuity.md)。
+> [!NOTE]
+> BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅[业务连续性概述](./sql-database-business-continuity.md)。
 
 若要完成本文，你需要以下各项：
 
@@ -49,12 +50,13 @@ ms.tgt_pltfrm: NA
 
 打开要导出的数据库对应的 SQL 数据库边栏选项卡。
 
-> [!IMPORTANT] 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](./sql-database-copy.md)，然后导出该数据库副本。
+> [!IMPORTANT]
+> 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](./sql-database-copy.md)，然后导出该数据库副本。
 
-1.	转到 [Azure 门户预览](https://portal.azure.cn)。
-2.	单击“SQL 数据库”。
-3.	单击要存档的数据库。
-4.	在“SQL 数据库”边栏选项卡中，单击“导出”以打开“导出数据库”边栏选项卡：
+1. 转到 [Azure 门户预览](https://portal.azure.cn)。
+2. 单击“SQL 数据库”。
+3. 单击要存档的数据库。
+4. 在“SQL 数据库”边栏选项卡中，单击“导出”以打开“导出数据库”边栏选项卡：
 
     ![导出按钮][1]
 
@@ -70,18 +72,18 @@ ms.tgt_pltfrm: NA
 
 ## 监视导出操作的进度
 
-1.	单击“SQL Server”。
-2.	单击包含你刚存档的原始（源）数据库的服务器。
+1. 单击“SQL Server”。
+2. 单击包含你刚存档的原始（源）数据库的服务器。
 3.  向下滚动到操作。
-4.	在“SQL Server”边栏选项卡中，单击“导入/导出历史记录”：
+4. 在“SQL Server”边栏选项卡中，单击“导入/导出历史记录”：
 
     ![导入导出历史记录][4]
 
 ## 确认 BACPAC 位于你的存储容器中
 
-1.	单击“存储帐户”。
-2.	单击你在其中存储 BACPAC 存档的存储帐户。
-3.	单击“容器”，然后选择数据库所导出到的容器以了解详细信息（从这里可以下载和保存 BACPAC）。
+1. 单击“存储帐户”。
+2. 单击你在其中存储 BACPAC 存档的存储帐户。
+3. 单击“容器”，然后选择数据库所导出到的容器以了解详细信息（从这里可以下载和保存 BACPAC）。
 
     ![.bacpac 文件详细信息][5]
 

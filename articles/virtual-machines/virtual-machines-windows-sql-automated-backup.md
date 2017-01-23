@@ -50,7 +50,8 @@ ms.author: jroth
 
 - 如果你打算使用 PowerShell 配置自动备份，请[安装最新的 Azure PowerShell 命令](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
->[!NOTE] 自动备份依赖 SQL Server IaaS 代理扩展。当前的 SQL 虚拟机库映像默认添加此扩展。有关详细信息，请参阅 [SQL Server IaaS 代理扩展](./virtual-machines-windows-sql-server-agent-extension.md)。
+>[!NOTE]
+> 自动备份依赖 SQL Server IaaS 代理扩展。当前的 SQL 虚拟机库映像默认添加此扩展。有关详细信息，请参阅 [SQL Server IaaS 代理扩展](./virtual-machines-windows-sql-server-agent-extension.md)。
 
 ## 设置
 
@@ -89,7 +90,8 @@ ms.author: jroth
 
 当你首次启用自动备份时，Azure 将在后台配置 SQL Server IaaS 代理。在此期间，Azure 门户预览可能不会显示自动备份已配置。请等待几分钟，以便安装和配置代理。之后，Azure 门户预览将反映新设置。
 
->[!NOTE] 你也可以使用模板来配置自动备份。有关详细信息，请参阅 [Azure quickstart template for Automated Backup（用于自动备份的 Azure 快速入门模板）](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-sql-existing-autobackup-update)。
+>[!NOTE]
+> 你也可以使用模板来配置自动备份。有关详细信息，请参阅 [Azure quickstart template for Automated Backup（用于自动备份的 Azure 快速入门模板）](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-sql-existing-autobackup-update)。
 
 ## 使用 PowerShell 进行配置
 
@@ -97,27 +99,32 @@ ms.author: jroth
 
 在下面的 PowerShell 示例中，为现有 SQL Server 2014 VM 配置了自动备份。**AzureRM.Compute\\New-AzureVMSqlServerAutoBackupConfig** 命令将自动备份设置配置为在与虚拟机相关联的 Azure 存储帐户中存储备份。这些备份将保留 10 天。**Set-AzureRmVMSqlServerExtension** 命令使用这些设置更新指定的 Azure VM。
 
-    $vmname = "vmname"
-    $resourcegroupname = "resourcegroupname"
-    $autobackupconfig = AzureRM.Compute\New-AzureVMSqlServerAutoBackupConfig -Enable -RetentionPeriodInDays 10 -ResourceGroupName $resourcegroupname
+```
+$vmname = "vmname"
+$resourcegroupname = "resourcegroupname"
+$autobackupconfig = AzureRM.Compute\New-AzureVMSqlServerAutoBackupConfig -Enable -RetentionPeriodInDays 10 -ResourceGroupName $resourcegroupname
 
-    Set-AzureRmVMSqlServerExtension -AutoBackupSettings $autobackupconfig -VMName $vmname -ResourceGroupName $resourcegroupname
+Set-AzureRmVMSqlServerExtension -AutoBackupSettings $autobackupconfig -VMName $vmname -ResourceGroupName $resourcegroupname
+```
 
 可能需要花费几分钟来安装和配置 SQL Server IaaS 代理。
 
 若要启用加密，请修改上述脚本，使其将 **EnableEncryption** 参数连同 **CertificatePassword** 参数的密码（安全字符串）一起传递。以下脚本启用上一示例中的自动备份设置，并添加加密。
 
-    $vmname = "vmname"
-    $resourcegroupname = "resourcegroupname"
-    $password = "P@ssw0rd"
-    $encryptionpassword = $password | ConvertTo-SecureString -AsPlainText -Force  
-    $autobackupconfig = AzureRM.Compute\New-AzureVMSqlServerAutoBackupConfig -Enable -RetentionPeriod 10 -EnableEncryption -CertificatePassword $encryptionpassword -ResourceGroupName $resourcegroupname
+```
+$vmname = "vmname"
+$resourcegroupname = "resourcegroupname"
+$password = "P@ssw0rd"
+$encryptionpassword = $password | ConvertTo-SecureString -AsPlainText -Force  
+$autobackupconfig = AzureRM.Compute\New-AzureVMSqlServerAutoBackupConfig -Enable -RetentionPeriod 10 -EnableEncryption -CertificatePassword $encryptionpassword -ResourceGroupName $resourcegroupname
 
-    Set-AzureRmVMSqlServerExtension -AutoBackupSettings $autobackupconfig -VMName $vmname -ResourceGroupName $resourcegroupname
+Set-AzureRmVMSqlServerExtension -AutoBackupSettings $autobackupconfig -VMName $vmname -ResourceGroupName $resourcegroupname
+```
 
 若要禁用自动备份，请对 **AzureRM.Compute\\New-AzureVMSqlServerAutoBackupConfig** 命令运行不带 **-Enable** 参数的同一个脚本。缺少 **-Enable** 参数将向该命令发出指示以禁用此功能。与安装一样，可能需要花费几分钟时间来禁用自动备份。
 
->[!NOTE] 删除 SQL Server IaaS 代理不会删除以前配置的自动备份设置。应该在禁用或卸载 SQL Server IaaS 代理之前禁用自动备份。
+>[!NOTE]
+> 删除 SQL Server IaaS 代理不会删除以前配置的自动备份设置。应该在禁用或卸载 SQL Server IaaS 代理之前禁用自动备份。
 
 ## 后续步骤
 

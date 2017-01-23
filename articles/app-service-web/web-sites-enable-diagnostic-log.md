@@ -39,7 +39,9 @@ Azure 提供内置诊断功能，可帮助调试[应用服务 Web 应用](./app-
 ### 应用程序诊断
 应用程序诊断可以捕获由 Web 应用程序产生的信息。ASP.NET 应用程序可使用 [System.Diagnostics.Trace](http://msdn.microsoft.com/zh-cn/library/36hhw2t6.aspx) 类将信息记录到应用程序诊断日志。例如：
 
-    System.Diagnostics.Trace.TraceError("If you're seeing this, something bad happened");
+```
+System.Diagnostics.Trace.TraceError("If you're seeing this, something bad happened");
+```
 
 在运行时，可以检索这些日志帮助进行故障排除。有关详细信息，请参阅[在 Visual Studio 中对 Azure Web 应用进行故障故障](./web-sites-dotnet-troubleshoot-visual-studio.md)。
 
@@ -110,7 +112,9 @@ Azure 提供内置诊断功能，可帮助调试[应用服务 Web 应用](./app-
 ### 使用 Azure PowerShell 下载
 若要下载日志文件，请启动 Azure PowerShell 的新实例并使用以下命令：
 
-    Save-AzureWebSiteLog -Name webappname
+```
+Save-AzureWebSiteLog -Name webappname
+```
 
 这会将 **-Name** 参数指定的 Web 应用的日志保存到当前目录中名为 **logs.zip** 的文件。
 
@@ -122,7 +126,9 @@ Azure 提供内置诊断功能，可帮助调试[应用服务 Web 应用](./app-
 ### 使用 Azure 命令行接口下载
 若要使用 Azure 命令行接口下载日志文件，请打开新的命令提示符、PowerShell、Bash 或终端会话，并输入以下命令：
 
-    azure site log download webappname
+```
+azure site log download webappname
+```
 
 这会将名为“webappname”的 Web 应用的日志保存到当前目录中名为 **diagnostics.zip** 的文件。
 
@@ -145,17 +151,23 @@ Azure 提供内置诊断功能，可帮助调试[应用服务 Web 应用](./app-
 ### 使用 Azure PowerShell 进行流式传输
 若要流式传输日志记录信息，请启动新的 Azure PowerShell 实例并使用以下命令：
 
-    Get-AzureWebSiteLog -Name webappname -Tail
+```
+Get-AzureWebSiteLog -Name webappname -Tail
+```
 
 这将连接到 **-Name** 参数指定的 Web 应用，并在该 Web 应用上出现日志事件时开始将信息流式传输到 PowerShell 窗口。写入以 .txt、.log 或 .htm 结尾并存储在 /LogFiles 目录 (d:/home/logfiles) 中文件的所有信息将流式传输至本地控制台。
 
 若要筛选特定事件（如错误），请使用 **-Message** 参数。例如：
 
-    Get-AzureWebSiteLog -Name webappname -Tail -Message Error
+```
+Get-AzureWebSiteLog -Name webappname -Tail -Message Error
+```
 
 若要筛选特定日志类型（如 HTTP），请使用 **-Path** 参数。例如：
 
-    Get-AzureWebSiteLog -Name webappname -Tail -Path http
+```
+Get-AzureWebSiteLog -Name webappname -Tail -Path http
+```
 
 若要查看可用的路径列表，请使用 -ListPath 参数。
 
@@ -167,17 +179,23 @@ Azure 提供内置诊断功能，可帮助调试[应用服务 Web 应用](./app-
 ### 使用 Azure 命令行接口进行流式传输
 若要流式传输日志记录信息，请打开新的命令行提示、PowerShell、Bash 或终端会话并输入以下命令：
 
-    azure site log tail webappname
+```
+azure site log tail webappname
+```
 
 这将连接到名为“webappname”的 Web 应用，并在该 Web 应用上出现日志事件时开始将信息流式传输到窗口。写入以 .txt、.log 或 .htm 结尾并存储在 /LogFiles 目录 (d:/home/logfiles) 中文件的所有信息将流式传输至本地控制台。
 
 若要筛选特定事件（如错误），请使用 **--Filter** 参数。例如：
 
-    azure site log tail webappname --filter Error
+```
+azure site log tail webappname --filter Error
+```
 
 若要筛选特定日志类型（如 HTTP），请使用 **--Path** 参数。例如：
 
-    azure site log tail webappname --path http
+```
+azure site log tail webappname --path http
+```
 
 > [!NOTE]
 如果尚未安装 Azure 命令行接口，或尚未将其配置为使用 Azure 订阅，请参阅 [How to Use Azure Command-Line Interface（如何使用 Azure 命令行接口）](../xplat-cli-install.md)。
@@ -192,11 +210,15 @@ Azure 提供内置诊断功能，可帮助调试[应用服务 Web 应用](./app-
 
 记录到文件系统或使用流式传输收到的每行都将采用以下格式：
 
-    {Date}  PID[{process id}] {event type/level} {message}
+```
+{Date}  PID[{process id}] {event type/level} {message}
+```
 
 例如，错误事件可能类似如下所示：
 
-    2014-01-30T16:36:59  PID[3096] Error       Fatal error on the page!
+```
+2014-01-30T16:36:59  PID[3096] Error       Fatal error on the page!
+```
 
 记录到文件系统可提供三种可用方法的最基本信息，仅提供时间、进程 ID、事件级别以及消息。
 
@@ -236,8 +258,10 @@ Azure 提供内置诊断功能，可帮助调试[应用服务 Web 应用](./app-
 
 存储在 Blob 中的数据如下所示：
 
-    date,level,applicationName,instanceId,eventTickCount,eventId,pid,tid,message
-    2014-01-30T16:36:52,Error,mywebapp,6ee38a,635266966128818593,0,3096,9,An error occurred
+```
+date,level,applicationName,instanceId,eventTickCount,eventId,pid,tid,message
+2014-01-30T16:36:52,Error,mywebapp,6ee38a,635266966128818593,0,3096,9,An error occurred
+```
 
 > [!NOTE]
 日志的第一行将包含列标题，如示例中所示。
@@ -268,5 +292,5 @@ Azure Web 应用生成的日志不支持 **s-computername**、**s-ip** 或 **cs-
 ## 更改内容
 * 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 * 有关从旧门户更改为新门户的指导，请参阅：[有关在 Azure 门户预览中导航的参考](./app-service-web-app-azure-portal.md)
- 
+
 <!---HONumber=Mooncake_1128_2016-->

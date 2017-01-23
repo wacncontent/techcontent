@@ -32,36 +32,40 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [公共 IP 地址](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L121)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('publicipaddressName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "public-ip-front"
-      },
-      "properties": {
-        "publicIPAllocationMethod": "Dynamic",
-        "dnsSettings": {
-          "domainNameLabel": "[parameters('publicipaddressDnsName')]"
-        }
-      }
-    },
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Network/publicIPAddresses",
+  "name": "[variables('publicipaddressName')]",
+  "location": "[resourceGroup().location]",
+  "tags": {
+    "displayName": "public-ip-front"
+  },
+  "properties": {
+    "publicIPAllocationMethod": "Dynamic",
+    "dnsSettings": {
+      "domainNameLabel": "[parameters('publicipaddressDnsName')]"
+    }
+  }
+},
+```
 
 公共 IP 地址可与虚拟网络适配器或负载均衡器关联。在本示例中，由于音乐应用商店网站的负载在多个虚拟机之间均衡，因此公共 IP 地址已附加到负载均衡器。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [公共 IP 地址与负载均衡器的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L208)。
 
-    "frontendIPConfigurations": [
-      {
-        "properties": {
-          "publicIPAddress": {
-            "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicipaddressName'))]"
-          }
-        },
-        "name": "LoadBalancerFrontend"
+```
+"frontendIPConfigurations": [
+  {
+    "properties": {
+      "publicIPAddress": {
+        "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicipaddressName'))]"
       }
-    ],
+    },
+    "name": "LoadBalancerFrontend"
+  }
+],
+```
 
 Azure 门户预览中显示的公共 IP 地址。请注意，公共 IP 地址与负载均衡器而不是虚拟机关联。本系列教程的下一篇文档详细介绍了网络负载均衡器。
 
@@ -75,49 +79,53 @@ Azure 门户预览中显示的公共 IP 地址。请注意，公共 IP 地址与
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络安全组](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L68)。
 
-    {
-      "apiVersion": "2015-05-01-preview",
-      "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[variables('nsgfront')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "nsg-front"
+```
+{
+  "apiVersion": "2015-05-01-preview",
+  "type": "Microsoft.Network/networkSecurityGroups",
+  "name": "[variables('nsgfront')]",
+  "location": "[resourceGroup().location]",
+  "tags": {
+    "displayName": "nsg-front"
+  },
+  "properties": {
+    "securityRules": [
+      {
+        "name": "http",
+        "properties": {
+          "description": "http endpoint",
+          "protocol": "Tcp",
+          "sourcePortRange": "*",
+          "destinationPortRange": "80",
+          "sourceAddressPrefix": "*",
+          "destinationAddressPrefix": "*",
+          "access": "Allow",
+          "priority": 100,
+          "direction": "Inbound"
+        }
       },
-      "properties": {
-        "securityRules": [
-          {
-            "name": "http",
-            "properties": {
-              "description": "http endpoint",
-              "protocol": "Tcp",
-              "sourcePortRange": "*",
-              "destinationPortRange": "80",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 100,
-              "direction": "Inbound"
-            }
-          },
-          ........<truncated> 
-        ]
-      }
-    },
+      ........<truncated> 
+    ]
+  }
+},
+```
 
 在本示例中，网络安全组与虚拟网络资源中声明的子网对象关联。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络安全组与虚拟网络的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L158)。
 
-    "subnets": [
-      {
-        "name": "[variables('subnetName')]",
-        "properties": {
-          "addressPrefix": "10.0.0.0/24",
-          "networkSecurityGroup": {
-            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroup'))]"
-          }
-        }
+```
+"subnets": [
+  {
+    "name": "[variables('subnetName')]",
+    "properties": {
+      "addressPrefix": "10.0.0.0/24",
+      "networkSecurityGroup": {
+        "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroup'))]"
       }
+    }
+  }
+```
 
 Azure 门户预览中的网络安全组如下所示。请注意，NSG 可与子网和/或网络接口关联。在本例中，NSG 与子网关联。在此配置中，入站规则应用到与子网连接的所有虚拟机。
 

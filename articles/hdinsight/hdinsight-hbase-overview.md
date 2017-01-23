@@ -37,16 +37,16 @@ HDInsight 实施利用 HBase 的横向扩展架构来提供表自动分片、使
 创建 BigTable 以及延伸开来的 HBase 的典型用例就是 Web 搜索。搜索引擎构建索引，将词语映射到包含这些词语的网页。但 HBase 还适用于其他众多用例，本节中列出了其中几个。
 
 * 键值存储
-  
+
     HBase 可用作键值存储，适用于管理消息系统。Facebook 使用 HBase 作为消息系统，适用于存储和管理 Internet 通信。WebTable 使用 HBase 搜索和管理从网页中提取的表。
 * 传感器数据
-  
+
     HBase 用于捕获从各种源逐步收集的数据。这包括社交分析、时间序列、使交互式仪表板与趋势和计数器保持同步，以及管理审核日志系统。具体示例包括：Bloomberg 交易终端以及开放时间序列数据库 (Open Time Series Database, OpenTSDB)，后者用于存储所收集的服务器系统运行状况指标并对其进行访问。
 * 实时查询
-  
+
     [Phoenix](http://phoenix.apache.org/) 是 Apache HBase 的 SQL 查询引擎。该引擎以 JDBC 驱动程序的形式供用户访问，并且支持使用 SQL 来查询和管理 HBase 表。
 * HBase 即平台
-  
+
     应用程序可以将 HBase 作为数据存储库而在其上运行。具体示例包括 Phoenix、OpenTSDB、Kiji 和 Titan。应用程序也可以与 HBase 集成。具体示例包括：Hive、Pig、Solr、Storm、Flume、Impala、Ganglia 和 Drill。
 
 ## <a name="next-steps"></a>后续步骤

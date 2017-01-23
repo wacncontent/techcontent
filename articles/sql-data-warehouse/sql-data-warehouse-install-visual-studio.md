@@ -22,7 +22,8 @@ ms.author: sonyama;barbkess
 
 使用装有 SSDT 的 Visual Studio 让你可以使用 SQL Server 对象资源管理器以可视化方式浏览 SQL 数据仓库中的表格、视图、存储过程和其他更多对象，并运行查询。
 
-> [!NOTE] SQL 数据仓库尚不支持 Visual Studio 数据库项目。将来的版本会添加此功能。
+> [!NOTE]
+> SQL 数据仓库尚不支持 Visual Studio 数据库项目。将来的版本会添加此功能。
 
 ## 步骤 1：安装 Visual Studio 2015
 遵循以下链接来下载并安装 Visual Studio 2015。如果你已安装 Visual Studio 2013 或 2015，请跳到步骤 2 以安装 SSDT。

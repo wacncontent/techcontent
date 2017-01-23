@@ -25,7 +25,8 @@ ms.author: robb
 
 可以在门户中进行缩放，也可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn931953.aspx) 或 [.NET SDK](https://www.nuget.org/packages/Microsoft.Azure.Insights/) 手动或自动调整规模。
 
-> [!NOTE] 本文介绍了如何在位于 [http://portal.azure.cn](http://portal.azure.cn) 的门户预览中创建手动缩放设置，门户预览尚不支持创建自动缩放，需要创建自动缩放的用户要在 Azure 经典管理门户 ([http://manage.windowsazure.cn](http://manage.windowsazure.cn)) 中进行设置，但 Azure 经典管理门户及其基础后端具有限制。
+> [!NOTE]
+> 本文介绍了如何在位于 [http://portal.azure.cn](http://portal.azure.cn) 的门户预览中创建手动缩放设置，门户预览尚不支持创建自动缩放，需要创建自动缩放的用户要在 Azure 经典管理门户 ([http://manage.windowsazure.cn](http://manage.windowsazure.cn)) 中进行设置，但 Azure 经典管理门户及其基础后端具有限制。
 
 ## 手动缩放
 
@@ -34,7 +35,7 @@ ms.author: robb
 2. 点击 “应用服务计划”中的“扩大（应用服务计划）”磁贴来设置手动缩放实例计数。
 
     ![“缩放”分页](./media/insights-how-to-scale/Insights_ScaleBladeDayZero.png)
-    
+
 4. 可以使用滑块手动调整“实例”数。
 5. 单击“保存”命令，几乎可以立即缩放到该实例数。
 

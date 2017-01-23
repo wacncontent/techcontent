@@ -33,19 +33,19 @@ ms.author: markvi
 
 ###若要添加组织的公共 IP 地址范围，请执行以下步骤： 
 
-1.	登录到 [Azure 管理门户](https://manage.windowsazure.cn)。
+1. 登录到 [Azure 管理门户](https://manage.windowsazure.cn)。
 
-2.	在左窗格中，单击“Active Directory”。<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-01.png)
+2. 在左窗格中，单击“Active Directory”。<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-01.png)
 
-3.	在“目录”选项卡中，选择你的目录。
+3. 在“目录”选项卡中，选择你的目录。
 
-4.	在顶部菜单中，单击“配置”。<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-02.png)
+4. 在顶部菜单中，单击“配置”。<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-02.png)
 
-5.	在“配置”选项卡上，转到“组织公共 IP 地址范围”<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-03.png)
+5. 在“配置”选项卡上，转到“组织公共 IP 地址范围”<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-03.png)
 
-6.	单击“添加已知的 IP 地址范围”。
+6. 单击“添加已知的 IP 地址范围”。
 
-7.	在出现的对话框中添加地址范围，然后在完成时单击选中按钮。<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-04.png)
+7. 在出现的对话框中添加地址范围，然后在完成时单击选中按钮。<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-04.png)
 
 **其他资源**
 

@@ -39,7 +39,9 @@ ms.author: jodebrui
 
 或者，使用以下查询来显示内存中存储的使用率：
 
-    SELECT xtp_storage_percent FROM sys.dm_db_resource_stats
+```
+SELECT xtp_storage_percent FROM sys.dm_db_resource_stats
+```
 
 ## 更正内存不足情况 - 错误 41823
 

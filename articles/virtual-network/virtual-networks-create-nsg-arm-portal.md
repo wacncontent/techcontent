@@ -42,7 +42,7 @@ ms.author: jdial
     ![Azure 门户预览 - NSG](./media/virtual-networks-create-nsg-arm-pportal/figure11.png)
 
 3. 在“网络安全组”边栏选项卡中，单击“添加”。
-  
+
     ![Azure 门户预览 - NSG](./media/virtual-networks-create-nsg-arm-pportal/figure12.png)
 
 4. 在“创建网络安全组”边栏选项卡中，在 “RG-NSG” 资源组中创建名为 “NSG-FrontEnd” 的 NSG，然后单击“创建”。

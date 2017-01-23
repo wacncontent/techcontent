@@ -25,19 +25,19 @@ wacn.date: 12/23/2016
 
 ## 解决方法
 
-1.	通过 Azure 门户预览查看 Web 应用使用应用服务计划所在的资源组信息。
+1. 通过 Azure 门户预览查看 Web 应用使用应用服务计划所在的资源组信息。
 
     ![portal-1](./media/aog-web-apps-qa-portal-change-app-service-plans/portal-1.jpg)
 
-2.	在同一个区域和资源组创建新的应用服务计划。
+2. 在同一个区域和资源组创建新的应用服务计划。
 
     ![portal-2](./media/aog-web-apps-qa-portal-change-app-service-plans/portal-2.jpg)
 
-3.	转到需要移动的 Web 应用，在“设置”菜单上，选择“更改应用服务计划”以打开“应用服务计划”选择器。此时可以选取现有的应用服务计划，也可以在此新建一个。
+3. 转到需要移动的 Web 应用，在“设置”菜单上，选择“更改应用服务计划”以打开“应用服务计划”选择器。此时可以选取现有的应用服务计划，也可以在此新建一个。
 
     ![portal-3](./media/aog-web-apps-qa-portal-change-app-service-plans/portal-3.jpg)
 
-4.	切换之后可以通过[经典管理门户](https://manage.windowsazure.cn)查看该 Web 应用是否已经独立存在于新应用服务计划中。
+4. 切换之后可以通过[经典管理门户](https://manage.windowsazure.cn)查看该 Web 应用是否已经独立存在于新应用服务计划中。
 
     ![classic](./media/aog-web-apps-qa-portal-change-app-service-plans/classic.jpg)
 

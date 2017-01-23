@@ -65,7 +65,8 @@ ms.author: juliako
 | <p>**H264Layer**</p><p> minOccurs="0" maxOccurs="unbounded"</p> |[H264Layer](./media-services-mes-schema.md#H264Layer) |H264 层的集合。 |
 
 ## <a name="H264Layer"></a> H264Layer
-> [!NOTE]视频限制基于 [H264 级别](https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Levels)表中描述的值。
+> [!NOTE]
+>视频限制基于 [H264 级别](https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Levels)表中描述的值。
 
 ### 元素
 | 名称 | 类型 | 说明 |
@@ -120,7 +121,7 @@ ms.author: juliako
 **AACLC**|<p>1:</p><p> - 11025 : 8 &lt;= bitrate &lt; 16</p><p> - 12000 : 8 &lt;= bitrate &lt; 16</p><p> - 16000 : 8 &lt;= bitrate &lt;32</p><p>- 22050 : 24 &lt;= bitrate &lt; 32</p><p> - 24000 : 24 &lt;= bitrate &lt; 32</p><p> - 32000 : 32 &lt;= bitrate &lt;= 192</p><p> - 44100 : 56 &lt;= bitrate &lt;= 288</p><p> - 48000 : 56 &lt;= bitrate &lt;= 288</p><p> - 88200 : 128 &lt;= bitrate &lt;= 288</p><p> - 96000 : 128 &lt;= bitrate &lt;= 288</p><p> 2:</p><p> - 11025 : 16 &lt;= bitrate &lt; 24</p><p> - 12000 : 16 &lt;= bitrate &lt; 24</p><p> - 16000 : 16 &lt;= bitrate &lt; 40</p><p> - 22050 : 32 &lt;= bitrate &lt; 40</p><p> - 24000 : 32 &lt;= bitrate &lt; 40</p><p> - 32000 : 40 &lt;= bitrate &lt;= 384</p><p> - 44100 : 96 &lt;= bitrate &lt;= 576</p><p> - 48000 : 96 &lt;= bitrate &lt;= 576</p><p> - 88200 : 256 &lt;= bitrate &lt;= 576</p><p> - 96000 : 256 &lt;= bitrate &lt;= 576</p><p> 5/6:</p><p> - 32000 : 160 &lt;= bitrate &lt;= 896</p><p> - 44100 : 240 &lt;= bitrate &lt;= 1024</p><p> - 48000 : 240 &lt;= bitrate &lt;= 1024</p><p> - 88200 : 640 &lt;= bitrate &lt;= 1024</p><p> - 96000 : 640 &lt;= bitrate &lt;= 1024</p><p> 8:</p><p> - 32000 : 224 &lt;= bitrate &lt;= 1024</p><p> - 44100 : 384 &lt;= bitrate &lt;= 1024</p><p> - 48000 : 384 &lt;= bitrate &lt;= 1024</p><p> - 88200 : 896 &lt;= bitrate &lt;= 1024</p><p> - 96000 : 896 &lt;= bitrate &lt;= 1024</p>
 **HEAACV1**|<p>1:</p><p> - 22050 : bitrate = 8</p><p> - 24000 : 8 &lt;= bitrate &lt;= 10</p><p> - 32000 : 12 &lt;= bitrate &lt;= 64</p><p> - 44100 : 20 &lt;= bitrate &lt;= 64</p><p> - 48000 : 20 &lt;= bitrate &lt;= 64</p><p> - 88200 : bitrate = 64</p><p> 2:</p><p> - 32000 : 16 &lt;= bitrate &lt;= 128</p><p> - 44100 : 16 &lt;= bitrate &lt;= 128</p><p> - 48000 : 16 &lt;= bitrate &lt;= 128</p><p> - 88200 : 96 &lt;= bitrate &lt;= 128</p><p> - 96000 : 96 &lt;= bitrate &lt;= 128</p><p> 5/6:</p><p> - 32000 : 64 &lt;= bitrate &lt;= 320</p><p> - 44100 : 64 &lt;= bitrate &lt;= 320</p><p> - 48000 : 64 &lt;= bitrate &lt;= 320</p><p> - 88200 : 256 &lt;= bitrate &lt;= 320</p><p> - 96000 : 256 &lt;= bitrate &lt;= 320</p><p> 8:</p><p> - 32000 : 96 &lt;= bitrate &lt;= 448</p><p> - 44100 : 96 &lt;= bitrate &lt;= 448</p><p> - 48000 : 96 &lt;= bitrate &lt;= 448</p><p> - 88200 : 384 &lt;= bitrate &lt;= 448</p><p> - 96000 : 384 &lt;= bitrate &lt;= 448 </p>
 **HEAACV2**|<p>2:</p><p> - 22050 : 8 &lt;= bitrate &lt;= 10</p><p> - 24000 : 8 &lt;= bitrate &lt;= 10</p><p> - 32000 : 12 &lt;= bitrate &lt;= 64</p><p> - 44100 : 20 &lt;= bitrate &lt;= 64</p><p> - 48000 : 20 &lt;= bitrate &lt;= 64</p><p> - 88200 : 64 &lt;= bitrate &lt;= 64</p> 
-  
+
 ## <a name="Clip"></a> 剪辑
 ### 属性
 | 名称 | 类型 | 说明 |

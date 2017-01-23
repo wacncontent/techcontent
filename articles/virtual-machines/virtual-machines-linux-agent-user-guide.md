@@ -26,7 +26,8 @@ ms.author: szark
 
 Azure Linux 代理 (waagent) 可以管理 Linux 与 FreeBSD 预配，以及 VM 与 Azure 结构控制器之间的交互。它针对 Linux 和 FreeBSD IaaS 部署提供以下功能：
 
-> [!NOTE] 有关其他详细信息，请参阅 Azure Linux 代理的[自述文件](https://github.com/Azure/WALinuxAgent/blob/master/README.md)。
+> [!NOTE]
+> 有关其他详细信息，请参阅 Azure Linux 代理的[自述文件](https://github.com/Azure/WALinuxAgent/blob/master/README.md)。
 
 * **映像设置**
   - 创建用户帐户
@@ -67,7 +68,8 @@ Azure Linux 代理 (waagent) 可以管理 Linux 与 FreeBSD 预配，以及 VM �
 ## 要求
 以下系统已经过测试并确认兼容 Azure Linux 代理：
 
-> [!NOTE] 此列表可能不同于 Azure Platform 所支持系统的官方列表，详见以下网页：[http://support.microsoft.com/kb/2805216](http://support.microsoft.com/kb/2805216)
+> [!NOTE]
+> 此列表可能不同于 Azure Platform 所支持系统的官方列表，详见以下网页：[http://support.microsoft.com/kb/2805216](http://support.microsoft.com/kb/2805216)
 
 * CoreOS
 * CentOS 6.3+
@@ -116,7 +118,8 @@ Azure Linux 代理 (waagent) 可以管理 Linux 与 FreeBSD 预配，以及 VM �
  * 缓存的 DHCP 客户端租用
  * 将主机名重置为 localhost.localdomain
 
-> [!WARNING] 取消预配无法保证清除映像中的所有敏感信息且适用于分发版。
+> [!WARNING]
+> 取消预配无法保证清除映像中的所有敏感信息且适用于分发版。
 
 - deprovision+user：执行 -deprovision（上述）下的所有操作，还将删除最后预配的用户帐户（获取自 /var/lib/waagent 中）和关联数据。此参数是取消对以前在 Azure 中预配的映像预配，以捕获并重新使用该映像时的参数。
 
@@ -132,27 +135,29 @@ Azure Linux 代理 (waagent) 可以管理 Linux 与 FreeBSD 预配，以及 VM �
 
 配置文件 (/etc/waagent.conf) 可控制 waagent 的操作。下面显示了示例配置文件：
 
-    Provisioning.Enabled=y
-    Provisioning.DeleteRootPassword=n
-    Provisioning.RegenerateSshHostKeyPair=y
-    Provisioning.SshHostKeyPairType=rsa
-    Provisioning.MonitorHostName=y
-    Provisioning.DecodeCustomData=n
-    Provisioning.ExecuteCustomData=n
-    Provisioning.PasswordCryptId=6
-    Provisioning.PasswordCryptSaltLength=10
-    ResourceDisk.Format=y
-    ResourceDisk.Filesystem=ext4
-    ResourceDisk.MountPoint=/mnt/resource
-    ResourceDisk.MountOptions=None
-    ResourceDisk.EnableSwap=n
-    ResourceDisk.SwapSizeMB=0
-    LBProbeResponder=y
-    Logs.Verbose=n
-    OS.RootDeviceScsiTimeout=300
-    OS.OpensslPath=None
-    HttpProxy.Host=None
-    HttpProxy.Port=None
+```
+Provisioning.Enabled=y
+Provisioning.DeleteRootPassword=n
+Provisioning.RegenerateSshHostKeyPair=y
+Provisioning.SshHostKeyPairType=rsa
+Provisioning.MonitorHostName=y
+Provisioning.DecodeCustomData=n
+Provisioning.ExecuteCustomData=n
+Provisioning.PasswordCryptId=6
+Provisioning.PasswordCryptSaltLength=10
+ResourceDisk.Format=y
+ResourceDisk.Filesystem=ext4
+ResourceDisk.MountPoint=/mnt/resource
+ResourceDisk.MountOptions=None
+ResourceDisk.EnableSwap=n
+ResourceDisk.SwapSizeMB=0
+LBProbeResponder=y
+Logs.Verbose=n
+OS.RootDeviceScsiTimeout=300
+OS.OpensslPath=None
+HttpProxy.Host=None
+HttpProxy.Port=None
+```
 
 下面详细描述了各种配置选项。配置选项分为三种类型：布尔值、字符串或整数。布尔值配置选项可指定为“y”或“n”。特殊关键字“无”可用于某些字符串类型配置条目，详细信息如下所示。
 
@@ -160,7 +165,8 @@ Azure Linux 代理 (waagent) 可以管理 Linux 与 FreeBSD 预配，以及 VM �
 
 这允许用户在代理中启用或禁用预配功能。有效值为“y”或“n”。如果禁用预配，则会保留映像中的 SSH 主机和用户密钥，并忽略 Azure 预配 API 中指定的所有配置。
 
-> [!NOTE] `Provisioning.Enabled` 参数在使用 cloud-init 进行预配的 Ubuntu 云映像上默认为“n”。
+> [!NOTE]
+> `Provisioning.Enabled` 参数在使用 cloud-init 进行预配的 Ubuntu 云映像上默认为“n”。
 
 **Provisioning.DeleteRootPassword：**类型：布尔值，默认值：n
 

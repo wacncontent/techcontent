@@ -65,9 +65,10 @@ ms.author: femila
 
 将 Azure 虚拟机连回本地企业网络需要 Azure 虚拟网络，其中包括可无缝连接 Azure 虚拟机和本地虚拟机的站点到站点或站点到点虚拟专用网络 (VPN) 组件。此 VPN 组件还可使本地域成员计算机可访问在 Azure 虚拟机上独占托管其域控制器的 Windows Server Active Directory 域。但是，如果 VPN 失败，则依赖于 Windows Server Active Directory 的身份验证和其他操作也将失败，注意到这一点很重要。虽然用户也许能够使用现有缓存的凭据进行登录，但其票证尚未发出或已过时的所有对等或客户端对服务器身份验证尝试都将失败。
 
-请参阅[虚拟网络](../virtual-network/index.md/)，观看演示视频并获得分步教程的列表，包括在 Azure 门户预览中[配置站点到站点 VPN](../vpn-gateway/vpn-gateway-site-to-site-create.md)。
+请参阅[虚拟网络](../virtual-network/index.md)，观看演示视频并获得分步教程的列表，包括在 Azure 门户预览中[配置站点到站点 VPN](../vpn-gateway/vpn-gateway-site-to-site-create.md)。
 
-> [!NOTE] 也可以在未与本地网络连接的 Azure 虚拟网络上部署 Windows Server Active Directory。但是，本主题中的准则假设使用 Azure 虚拟网络，因为它提供对 Windows Server 至关重要的 IP 寻址功能。
+> [!NOTE]
+> 也可以在未与本地网络连接的 Azure 虚拟网络上部署 Windows Server Active Directory。但是，本主题中的准则假设使用 Azure 虚拟网络，因为它提供对 Windows Server 至关重要的 IP 寻址功能。
 
 ### 必须使用 Azure PowerShell 配置静态 IP 地址。
 
@@ -111,7 +112,8 @@ ms.author: femila
 
 从 Windows Server 2012 开始，[AD DS 中内置了额外的安全保护](https://technet.microsoft.com/zh-cn/library/hh831734.aspx)。只要底层虚拟机监控程序平台支持 VM-GenerationID，这些安全保护就可以防止虚拟化域控制器出现上述问题。Azure 支持 VM-GenerationID，这意味着 Azure 虚拟机上运行 Windows Server 2012 或更高版本的域控制器具有额外的安全防护措施。
 
-> [!NOTE] 应在来宾操作系统中关闭并重新启动 Azure 中运行域控制器角色的 VM，而不是使用 Azure 经典管理门户中的“关闭”选项。目前，使用经典管理门户关闭 VM 会导致解除分配 VM。解除分配 VM 的优点是不会产生费用，但也会重置 VM-GenerationID，这对于 DC 来说是不希望发生的。重置 VM-GenerationID 时，也会重置 AD DS 数据库的 invocationID，RID 池将被丢弃，SYSVOL 将标记为非权威性。有关详细信息，请参阅 [Introduction to Active Directory Domain Services (AD DS) Virtualization](https://technet.microsoft.com/zh-cn/library/hh831734.aspx)（Active Directory 域服务 (AD DS) 虚拟化简介和 [Safely Virtualizing DFSR](http://blogs.technet.com/b/filecab/archive/2013/04/05/safely-virtualizing-dfsr.aspx)（安全虚拟化 DFSR）。
+> [!NOTE]
+> 应在来宾操作系统中关闭并重新启动 Azure 中运行域控制器角色的 VM，而不是使用 Azure 经典管理门户中的“关闭”选项。目前，使用经典管理门户关闭 VM 会导致解除分配 VM。解除分配 VM 的优点是不会产生费用，但也会重置 VM-GenerationID，这对于 DC 来说是不希望发生的。重置 VM-GenerationID 时，也会重置 AD DS 数据库的 invocationID，RID 池将被丢弃，SYSVOL 将标记为非权威性。有关详细信息，请参阅 [Introduction to Active Directory Domain Services (AD DS) Virtualization](https://technet.microsoft.com/zh-cn/library/hh831734.aspx)（Active Directory 域服务 (AD DS) 虚拟化简介和 [Safely Virtualizing DFSR](http://blogs.technet.com/b/filecab/archive/2013/04/05/safely-virtualizing-dfsr.aspx)（安全虚拟化 DFSR）。
 
 ## 为什么要在 Azure 虚拟机上部署 Windows Server AD DS？
 
@@ -121,7 +123,8 @@ Azure 也很适合替代其他情况下成本高昂的灾难恢复 (DR) 站点�
 
 最后，你可能要在 Azure 上部署需要 Windows Server Active Directory、但不依赖本地网络或企业 Windows Server Active Directory 的网络应用程序，如 SharePoint。在这种情况下，最好在 Azure 上部署一个独立的林以满足 SharePoint 服务器的要求。同样，也支持部署需要连接到本地网络和企业 Active Directory 的网络应用程序。
 
-> [!NOTE] 由于提供 3 层连接，因此在 Azure 虚拟网络与本地网络之间提供连接的 VPN 组件还可使在本地运行的成员服务器利用在 Azure 虚拟网络上作为 Azure 虚拟机运行的 DC。但是，如果没有 VPN 可用，则在本地计算机与基于 Azure 的域控制器之间将无法通信，从而导致身份验证错误和各种其他错误。
+> [!NOTE]
+> 由于提供 3 层连接，因此在 Azure 虚拟网络与本地网络之间提供连接的 VPN 组件还可使在本地运行的成员服务器利用在 Azure 虚拟网络上作为 Azure 虚拟机运行的 DC。但是，如果没有 VPN 可用，则在本地计算机与基于 Azure 的域控制器之间将无法通信，从而导致身份验证错误和各种其他错误。
 
 ## 在 Azure 虚拟机上部署的 Windows Server Active Directory 域控制器与本地部署的域控制器之间的比较
 
@@ -131,7 +134,8 @@ Azure 也很适合替代其他情况下成本高昂的灾难恢复 (DR) 站点�
 
 - 在虚拟网络上部署 VM 并不意味着（或要求）连回本地网络；虚拟网络仅产生这种可能性。必须创建一个虚拟网络，供 Azure 与本地网络之间进行专用通信。需要在本地网络上部署 VPN 终结点。打开的 VPN 从 Azure 通向本地网络。有关详细信息，请参阅 [Virtual Network Overview](../virtual-network/virtual-networks-overview.md)（虚拟网络概述）和 [Configure a Site-to-Site VPN in the Azure Portal](../vpn-gateway/vpn-gateway-site-to-site-create.md)（在 Azure 门户预览中配置站点到站点 VPN）。
 
-> [!NOTE] 有一个[创建点到站点 VPN](../vpn-gateway/vpn-gateway-point-to-site-create.md) 的选项可将单独的基于 Windows 的计算机直接连接到 Azure 虚拟网络。
+> [!NOTE]
+> 有一个[创建点到站点 VPN](../vpn-gateway/vpn-gateway-point-to-site-create.md) 的选项可将单独的基于 Windows 的计算机直接连接到 Azure 虚拟网络。
 
 - 无论是否创建虚拟网络，Azure 均按传出流量收费，而不按传入流量收费。选择各种 Windows Server Active Directory 设计都会影响部署生成多少传出流量。例如，部署只读域控制器 (RODC) 将限制传出流量，因为它在出站时不进行复制。但部署 RODC 的决定将需要根据是否需要对 DC 执行写入操作以及站点中的应用程序和服务与 RODC 的[兼容性](https://technet.microsoft.com/zh-cn/library/cc755190)来进行权衡。有关流量收费的详细信息，请参阅 [Azure pricing at-a-glance](https://www.azure.cn/pricing/)（Azure 价格一览表）。
 
@@ -209,7 +213,8 @@ Azure 也很适合替代其他情况下成本高昂的灾难恢复 (DR) 站点�
 - Azure 内部负载均衡器。
 - 本地网络上的管理员的 IP 地址。
 
-> [!WARNING] 在设计上，必须阻止 Web 应用程序代理节点访问 Azure 虚拟网络中的其他任何 VM 或本地网络中的任何位置。为此，可以在本地设备中针对 Express Route 连接或者在 VPN 设备上针对站点到站点 VPN 连接配置防火墙规则。
+> [!WARNING]
+> 在设计上，必须阻止 Web 应用程序代理节点访问 Azure 虚拟网络中的其他任何 VM 或本地网络中的任何位置。为此，可以在本地设备中针对 Express Route 连接或者在 VPN 设备上针对站点到站点 VPN 连接配置防火墙规则。
 
 这种做法的一个缺点是需要为多个设备（包括内部负载均衡器、AD FS 服务器，以及添加到虚拟网络中的其他任何服务器）配置网络 ACL。如果在部署中添加了任何设备但未将网络 ACL 配置为限制向该设备传送流量，则整个部署可能会面临风险。如果 Web 应用程序代理节点的 IP 地址发生变化，则必须重置网络 ACL（这意味着，应该将代理配置为使用[静态动态 IP 地址](http://azure.microsoft.com/blog/static-internal-ip-address-for-virtual-machines/)）。
 
@@ -253,7 +258,8 @@ Azure 也很适合替代其他情况下成本高昂的灾难恢复 (DR) 站点�
 
 - 如果你决定使用 Azure 固有的服务器负载均衡功能为 AD FS 服务器提供高可用性，则请注意，负载均衡提供用于确定云服务中虚拟机的运行状况的探测。就 Azure 虚拟机（相对于 Web 或辅助角色）而言，必须使用自定义探测，因为 Azure 虚拟机上没有可响应自定义探测的代理。为简单起见，可使用自定义 TCP 探测 - 此方式只需成功建立 TCP 连接（使用 TCP SYN ACK 段发送和响应的 TCP SYN 段）即可确定虚拟机运行状况。可配置自定义探测以使其使用任何当前正在侦听虚拟机的 TCP 端口。
 
-> [!NOTE] 需要直接向 Internet公开同一组端口（如端口 80 和 443）的虚拟机无法共享同一云服务。因此，建议为 Windows Server AD FS 服务器创建一个专用的云服务，以避免应用程序与 Windows Server AD FS 的端口要求之间可能发生重叠。
+> [!NOTE]
+> 需要直接向 Internet公开同一组端口（如端口 80 和 443）的虚拟机无法共享同一云服务。因此，建议为 Windows Server AD FS 服务器创建一个专用的云服务，以避免应用程序与 Windows Server AD FS 的端口要求之间可能发生重叠。
 
 ## 部署方案
 
@@ -315,7 +321,8 @@ SharePoint 部署在 Azure 虚拟机上，并且该应用程序不依赖企业�
 
 - [网络拓扑](#BKMK_NetworkTopology)：创建 Azure 虚拟网络并[配置跨界连接](../vpn-gateway/vpn-gateway-site-to-site-create.md)。
 
- > [!NOTE] 对于每个 Windows Server AD FS 证书，确保在 Azure 上运行的 Windows Server AD FS 实例可访问在证书模板和所得证书中定义的 URL。这可能需要与 PKI 基础结构的各部分具有跨界连接。例如，如果 CRL 的终结点基于 LDAP，并以独占方式托管在本地，则将需要跨界连接。如果这样不可取，则可能必须使用可通过 Internet 访问其 CRL 的 CA 颁发的证书。
+ > [!NOTE]
+ > 对于每个 Windows Server AD FS 证书，确保在 Azure 上运行的 Windows Server AD FS 实例可访问在证书模板和所得证书中定义的 URL。这可能需要与 PKI 基础结构的各部分具有跨界连接。例如，如果 CRL 的终结点基于 LDAP，并以独占方式托管在本地，则将需要跨界连接。如果这样不可取，则可能必须使用可通过 Internet 访问其 CRL 的 CA 颁发的证书。
 
 - [云服务配置](#BKMK_CloudSvcConfig)：确保有两个云服务以提供两个经过负载均衡的虚拟 IP 地址。第一个云服务的虚拟 IP 地址将定向到端口 80 和 443 上的两个 Windows Server AD FS 代理 VM。Windows Server AD FS 代理 VM 将配置为指向面向 Windows Server AD FS STS 的本地负载均衡器的 IP 地址。第二个云服务的虚拟 IP 地址将再次定向到端口 80 和 443 上两个运行 Web 前端的 VM。配置自定义探测以确保负载均衡器将流量仅定向到正常运行的 Windows Server AD FS 代理和 Web 前端 VM。
 
@@ -437,7 +444,8 @@ SharePoint 部署在 Azure 虚拟机上，并且该应用程序不依赖企业�
 
 要进行名称解析，请部署自己的（或利用现有的）DNS 服务器基础结构；Azure 提供的 DNS 不满足 Windows Server AD DS 的高级名称解析需要。例如，它不支持动态 SRV 记录等。名称解析是 DC 和加入域的客户端的关键配置项。DC 必须能够注册资源记录和解析其他 DC 的资源记录。出于容错和性能原因，最好将 Windows Server DNS 服务安装在 Azure 上运行的 DC 上。那么，使用 DNS 服务器的名称和 IP 地址配置 Azure 虚拟网络属性。虚拟网络上的其他 VM 启动时，将使用动态 IP 地址分配中的 DNS 服务器配置它们的 DNS 客户端解析器设置。
 
-> [!NOTE] 无法将本地计算机加入通过 Internet 直接托管在 Azure 上的 Windows Server AD DS Active Directory 域。Active Directory 的端口要求和加入域的操作使直接向 Internet 公开必要的接口变得不现实，并且实际上公开整个 DC 也不现实。
+> [!NOTE]
+> 无法将本地计算机加入通过 Internet 直接托管在 Azure 上的 Windows Server AD DS Active Directory 域。Active Directory 的端口要求和加入域的操作使直接向 Internet 公开必要的接口变得不现实，并且实际上公开整个 DC 也不现实。
 
 VM 在启动时或名称发生更改时自动注册其 DNS 名称。
 
@@ -487,7 +495,8 @@ RODC 在 HBI 和 PII 问题方面具有其他优势，因为可向 RODC 筛选�
 
 选择 Windows Server AD DS 数据库、日志和 SYSVOL 位于何处。必须将其部署在 Azure 数据磁盘上。
 
-> [!NOTE] Azure 数据磁盘最大容量限制为 1 TB。
+> [!NOTE]
+> Azure 数据磁盘最大容量限制为 1 TB。
 
 数据磁盘驱动器默认情况下不对写入进行缓存。附加到 VM 的数据磁盘驱动器使用写通式缓存。写通式缓存确保在从 VM 操作系统的角度认为事务完成前将写入提交到持久的 Azure 存储空间。它具有持续性，代价是写入速度略有下降。
 
@@ -557,6 +566,7 @@ Windows Server AD FS 联合服务器 (STS) 的配置在某种程度上依赖于�
 
 请参阅 [AD FS 2.0 Design Guide](https://technet.microsoft.com/zh-cn/library/dd807036)（AD FS 2.0 设计指南）中的 [AD FS 2.0 deployment topology considerations](https://technet.microsoft.com/zh-cn/library/gg982489)（AD FS 2.0 部署拓扑注意事项），决定哪些部署配置选项最适合特定需要。
 
-> [!NOTE] 若要为 Azure 上的 Windows Server AD FS 终结点实现负载均衡，请在同一云服务中配置 Windows Server AD FS 场的所有成员，并将 Azure 的负载均衡功能用于 HTTP（默认 80）和 HTTPS 端口（默认 443）。有关详细信息，请参阅 [Azure load-balancer probe](https://msdn.microsoft.com/zh-cn/library/azure/jj151530)（Azure 负载均衡器探测）。Azure 不支持 Windows Server 网络负载均衡 (NLB)。
+> [!NOTE]
+> 若要为 Azure 上的 Windows Server AD FS 终结点实现负载均衡，请在同一云服务中配置 Windows Server AD FS 场的所有成员，并将 Azure 的负载均衡功能用于 HTTP（默认 80）和 HTTPS 端口（默认 443）。有关详细信息，请参阅 [Azure load-balancer probe](https://msdn.microsoft.com/zh-cn/library/azure/jj151530)（Azure 负载均衡器探测）。Azure 不支持 Windows Server 网络负载均衡 (NLB)。
 
 <!---HONumber=Mooncake_1024_2016-->

@@ -48,7 +48,7 @@ ms.author: rachelap
 将 Swagger 集成到 Azure API 应用的好处之一是自动生成代码。使用生成的客户端类可以更轻松地编写调用 API 应用的代码。
 
 可以使用 Visual Studio 或命令行为 API 应用生成客户端代码。有关如何在 Visual Studio 中为 ASP.NET Web API 项目生成客户端类的信息，请参阅 [Get started with API Apps and ASP.NET](./app-service-api-dotnet-get-started.md#codegen)（API 应用和 ASP.NET 入门）。有关如何通过命令行为所有支持的语言执行此操作的信息，请参阅 GitHub.com 上 [Azure/autorest](https://github.com/azure/autorest) 存储库的自述文件。
- 
+
 ## 后续步骤
 
 有关指导如何创建、部署和使用 API 应用的分步教程，请参阅 [Get started with API Apps in Azure App Service](./app-service-api-dotnet-get-started.md)（Azure 应用服务中的 API 应用入门）。

@@ -26,7 +26,8 @@ ms.author: cynthn
 
 <br>
 
-> [!IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。学习如何[使用资源管理器模型执行这些步骤](./virtual-machines-windows-ps-create.md)。
+> [!IMPORTANT]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。学习如何[使用资源管理器模型执行这些步骤](./virtual-machines-windows-ps-create.md)。
 
 这些步骤演示了如何使用构建基块方法自定义一组 Azure PowerShell 命令以创建和预配置基于 Windows 的 Azure 虚拟机。可以使用此过程快速创建用于基于 Windows 的新虚拟机的命令集并扩展现有部署，或者创建多个命令集以快速构建出自定义开发/测试或 IT 专业环境。
 
@@ -45,10 +46,12 @@ ms.author: cynthn
 
 通过在 Windows PowerShell 命令提示符处运行以下命令，设置你的 Azure 订阅和存储帐户。将引号内的所有内容（包括 < and > 字符）替换为相应的名称。
 
-    $subscr="<subscription name>"
-    $staccount="<storage account name>"
-    Select-AzureSubscription -SubscriptionName $subscr -Current
-    Set-AzureSubscription -Environment AzureChinaCloud -SubscriptionName $subscr -CurrentStorageAccountName $staccount
+```
+$subscr="<subscription name>"
+$staccount="<storage account name>"
+Select-AzureSubscription -SubscriptionName $subscr -Current
+Set-AzureSubscription -Environment AzureChinaCloud -SubscriptionName $subscr -CurrentStorageAccountName $staccount
+```
 
 你可以从 **Get-AzureSubscription** 命令输出的 SubscriptionName 属性获取相应的订阅名称。运行 **Select-AzureSubscription** 命令后，你可以从 **Get-AzureStorageAccount** 命令输出的 Label 属性获取相应的存储帐户名称。
 
@@ -56,7 +59,9 @@ ms.author: cynthn
 
 接下来，你需要确定与要创建的 Azure 虚拟机对应的特定映像的 ImageFamily 或 Label 值。你可以使用此命令获取可用 ImageFamily 值的列表。
 
-    Get-AzureVMImage | select ImageFamily -Unique
+```
+Get-AzureVMImage | select ImageFamily -Unique
+```
 
 下面是基于 Windows 的计算机的 ImageFamily 值的一些示例：
 
@@ -67,17 +72,23 @@ ms.author: cynthn
 
 如果你找到要查找的映像，请打开所选文本编辑器的一个新实例或 PowerShell 集成脚本环境 (ISE)。将以下内容复制到新的文本文件或 PowerShell ISE，并替换 ImageFamily 值。
 
-    $family="<ImageFamily value>"
-    $image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+```
+$family="<ImageFamily value>"
+$image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+```
 
 在某些情况下，映像名称在 Label 属性中，而不是 ImageFamily 值。如果你使用 ImageFamily 属性找不到要查找的映像，请使用此命令按映像的 Label 属性列出映像。
 
-    Get-AzureVMImage | select Label -Unique
+```
+Get-AzureVMImage | select Label -Unique
+```
 
 如果使用此命令找到正确的映像，请打开所选文本编辑器的一个新实例或 PowerShell ISE。将以下内容复制到新的文本文件或 PowerShell ISE，并替换 Label 值。
 
-    $label="<Label value>"
-    $image = Get-AzureVMImage | where { $_.Label -eq $label } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+```
+$label="<Label value>"
+$image = Get-AzureVMImage | where { $_.Label -eq $label } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+```
 
 ## 步骤 4：构建命令集
 
@@ -87,83 +98,105 @@ ms.author: cynthn
 
 选项 1：指定虚拟机名称和大小。
 
-    $vmname="<machine name>"
-    $vmsize="<Specify one: Small, Medium, Large, ExtraLarge, A5, A6, A7>"
-    $vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
+```
+$vmname="<machine name>"
+$vmsize="<Specify one: Small, Medium, Large, ExtraLarge, A5, A6, A7>"
+$vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
+```
 
 选项 2：指定名称、大小和可用性集名称。
 
-    $vmname="<machine name>"
-    $vmsize="<Specify one: Small, Medium, Large, ExtraLarge, A5, A6, A7>"
-    $availset="<set name>"
-    $vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image -AvailabilitySetName $availset
+```
+$vmname="<machine name>"
+$vmsize="<Specify one: Small, Medium, Large, ExtraLarge, A5, A6, A7>"
+$availset="<set name>"
+$vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image -AvailabilitySetName $availset
+```
 
 有关 D、DS 或 G 系列虚拟机的 InstanceSize 值，请参阅 [Azure 的虚拟机和云服务大小](../cloud-services/cloud-services-sizes-specs.md)。
 
 （可选）为独立 Windows 计算机指定本地管理员帐户和密码。
 
-    $cred=Get-Credential -Message "Type the name and password of the local administrator account."
-    $vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.Username -Password $cred.GetNetworkCredential().Password
+```
+$cred=Get-Credential -Message "Type the name and password of the local administrator account."
+$vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.Username -Password $cred.GetNetworkCredential().Password
+```
 
  选择一个强密码。
 
 （可选）若要将 Windows 计算机添加到现有的 Active Directory 域，请指定本地管理员帐户和密码、域以及域帐户的名称和密码。
 
-    $cred1=Get-Credential -Message "Type the name and password of the local administrator account."
-    $cred2=Get-Credential -Message "Now type the name (not including the domain) and password of an account that has permission to add the machine to the domain."
-    $domaindns="<FQDN of the domain that the machine is joining>"
-    $domacctdomain="<domain of the account that has permission to add the machine to the domain>"
-    $vm1 | Add-AzureProvisioningConfig -AdminUsername $cred1.Username -Password $cred1.GetNetworkCredential().Password -WindowsDomain -Domain $domacctdomain -DomainUserName $cred2.Username -DomainPassword $cred2.GetNetworkCredential().Password -JoinDomain $domaindns
+```
+$cred1=Get-Credential -Message "Type the name and password of the local administrator account."
+$cred2=Get-Credential -Message "Now type the name (not including the domain) and password of an account that has permission to add the machine to the domain."
+$domaindns="<FQDN of the domain that the machine is joining>"
+$domacctdomain="<domain of the account that has permission to add the machine to the domain>"
+$vm1 | Add-AzureProvisioningConfig -AdminUsername $cred1.Username -Password $cred1.GetNetworkCredential().Password -WindowsDomain -Domain $domacctdomain -DomainUserName $cred2.Username -DomainPassword $cred2.GetNetworkCredential().Password -JoinDomain $domaindns
+```
 
 有关基于 Windows 的虚拟机的其他预配置选项，请参阅 [Add-AzureProvisioningConfig](https://msdn.microsoft.com/zh-cn/library/azure/dn495299.aspx) 中 **Windows** 和 **WindowsDomain** 参数集的语法。
 
 （可选）为虚拟机分配一个特定 IP 地址（称为静态 DIP）。
 
-    $vm1 | Set-AzureStaticVNetIP -IPAddress <IP address>
+```
+$vm1 | Set-AzureStaticVNetIP -IPAddress <IP address>
+```
 
 可以使用以下命令来验证特定 IP 地址是否可用：
 
-    Test-AzureStaticVNetIP -VNetName <VNet name> -IPAddress <IP address>
+```
+Test-AzureStaticVNetIP -VNetName <VNet name> -IPAddress <IP address>
+```
 
 （可选）将虚拟机分配到 Azure 虚拟网络中的特定子网。
 
-    $vm1 | Set-AzureSubnet -SubnetNames "<name of the subnet>"
+```
+$vm1 | Set-AzureSubnet -SubnetNames "<name of the subnet>"
+```
 
 （可选）将单个数据磁盘添加到虚拟机。
 
-    $disksize=<size of the disk in GB>
-    $disklabel="<the label on the disk>"
-    $lun=<Logical Unit Number (LUN) of the disk>
-    $hcaching="<Specify one: ReadOnly, ReadWrite, None>"
-    $vm1 | Add-AzureDataDisk -CreateNew -DiskSizeInGB $disksize -DiskLabel $disklabel -LUN $lun -HostCaching $hcaching
+```
+$disksize=<size of the disk in GB>
+$disklabel="<the label on the disk>"
+$lun=<Logical Unit Number (LUN) of the disk>
+$hcaching="<Specify one: ReadOnly, ReadWrite, None>"
+$vm1 | Add-AzureDataDisk -CreateNew -DiskSizeInGB $disksize -DiskLabel $disklabel -LUN $lun -HostCaching $hcaching
+```
 
 对于 Active Directory 域控制器，将 $hcaching 设为“None”。
 
 （可选）将虚拟机添加到用于外部流量的现有负载均衡集。
 
-    $protocol="<Specify one: tcp, udp>"
-    $localport=<port number of the internal port>
-    $pubport=<port number of the external port>
-    $endpointname="<name of the endpoint>"
-    $lbsetname="<name of the existing load-balanced set>"
-    $probeprotocol="<Specify one: tcp, http>"
-    $probeport=<TCP or HTTP port number of probe traffic>
-    $probepath="<URL path for probe traffic>"
-    $vm1 | Add-AzureEndpoint -Name $endpointname -Protocol $protocol -LocalPort $localport -PublicPort $pubport -LBSetName $lbsetname -ProbeProtocol $probeprotocol -ProbePort $probeport -ProbePath $probepath
+```
+$protocol="<Specify one: tcp, udp>"
+$localport=<port number of the internal port>
+$pubport=<port number of the external port>
+$endpointname="<name of the endpoint>"
+$lbsetname="<name of the existing load-balanced set>"
+$probeprotocol="<Specify one: tcp, http>"
+$probeport=<TCP or HTTP port number of probe traffic>
+$probepath="<URL path for probe traffic>"
+$vm1 | Add-AzureEndpoint -Name $endpointname -Protocol $protocol -LocalPort $localport -PublicPort $pubport -LBSetName $lbsetname -ProbeProtocol $probeprotocol -ProbePort $probeport -ProbePath $probepath
+```
 
 最后，请选择这些必需的命令块之一来创建虚拟机。
 
 选项 1：在现有云服务中创建虚拟机。
 
-    New-AzureVM -ServiceName "<short name of the cloud service>" -VMs $vm1
+```
+New-AzureVM -ServiceName "<short name of the cloud service>" -VMs $vm1
+```
 
 云服务的短名称是在 Azure 经典管理门户的云服务列表中或 Azure 门户预览的资源组列表中显示的名称。
 
 选项 2：在现有的云服务和虚拟网络中创建虚拟机。
 
-    $svcname="<short name of the cloud service>"
-    $vnetname="<name of the virtual network>"
-    New-AzureVM -ServiceName $svcname -VMs $vm1 -VNetName $vnetname
+```
+$svcname="<short name of the cloud service>"
+$vnetname="<name of the virtual network>"
+New-AzureVM -ServiceName $svcname -VMs $vm1 -VNetName $vnetname
+```
 
 ## 步骤 5：运行命令集
 
@@ -194,28 +227,30 @@ ms.author: cynthn
 
 下面是用于创建此虚拟机的相应 Azure PowerShell 命令集，为了便于阅读，每个程序块之间留有空行。
 
-    $family="Windows Server 2012 R2 Datacenter"
-    $image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
-    $vmname="AZDC1"
-    $vmsize="Medium"
-    $vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
+```
+$family="Windows Server 2012 R2 Datacenter"
+$image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+$vmname="AZDC1"
+$vmsize="Medium"
+$vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
 
-    $cred=Get-Credential -Message "Type the name and password of the local administrator account."
-    $vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.Username -Password $cred.GetNetworkCredential().Password
+$cred=Get-Credential -Message "Type the name and password of the local administrator account."
+$vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.Username -Password $cred.GetNetworkCredential().Password
 
-    $vm1 | Set-AzureSubnet -SubnetNames "BackEnd"
+$vm1 | Set-AzureSubnet -SubnetNames "BackEnd"
 
-    $vm1 | Set-AzureStaticVNetIP -IPAddress 192.168.244.4
+$vm1 | Set-AzureStaticVNetIP -IPAddress 192.168.244.4
 
-    $disksize=20
-    $disklabel="DCData"
-    $lun=0
-    $hcaching="None"
-    $vm1 | Add-AzureDataDisk -CreateNew -DiskSizeInGB $disksize -DiskLabel $disklabel -LUN $lun -HostCaching $hcaching
+$disksize=20
+$disklabel="DCData"
+$lun=0
+$hcaching="None"
+$vm1 | Add-AzureDataDisk -CreateNew -DiskSizeInGB $disksize -DiskLabel $disklabel -LUN $lun -HostCaching $hcaching
 
-    $svcname="Azure-TailspinToys"
-    $vnetname="AZDatacenter"
-    New-AzureVM -ServiceName $svcname -VMs $vm1 -VNetName $vnetname
+$svcname="Azure-TailspinToys"
+$vnetname="AZDatacenter"
+New-AzureVM -ServiceName $svcname -VMs $vm1 -VNetName $vnetname
+```
 
 ### 示例 2
 
@@ -230,29 +265,31 @@ ms.author: cynthn
 
 下面是用于创建此虚拟机的相应 Azure PowerShell 命令集。
 
-    $family="Windows Server 2012 R2 Datacenter"
-    $image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
-    $vmname="LOB1"
-    $vmsize="Large"
-    $vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
+```
+$family="Windows Server 2012 R2 Datacenter"
+$image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+$vmname="LOB1"
+$vmsize="Large"
+$vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
 
-    $cred1=Get-Credential -Message "Type the name and password of the local administrator account."
-    $cred2=Get-Credential -Message "Now type the name (not including the domain) and password of an account that has permission to add the machine to the domain."
-    $domaindns="corp.contoso.com"
-    $domacctdomain="CORP"
-    $vm1 | Add-AzureProvisioningConfig -AdminUsername $cred1.Username -Password $cred1.GetNetworkCredential().Password -WindowsDomain -Domain $domacctdomain -DomainUserName $cred2.Username -DomainPassword $cred2.GetNetworkCredential().Password -JoinDomain $domaindns
+$cred1=Get-Credential -Message "Type the name and password of the local administrator account."
+$cred2=Get-Credential -Message "Now type the name (not including the domain) and password of an account that has permission to add the machine to the domain."
+$domaindns="corp.contoso.com"
+$domacctdomain="CORP"
+$vm1 | Add-AzureProvisioningConfig -AdminUsername $cred1.Username -Password $cred1.GetNetworkCredential().Password -WindowsDomain -Domain $domacctdomain -DomainUserName $cred2.Username -DomainPassword $cred2.GetNetworkCredential().Password -JoinDomain $domaindns
 
-    $vm1 | Set-AzureSubnet -SubnetNames "FrontEnd"
+$vm1 | Set-AzureSubnet -SubnetNames "FrontEnd"
 
-    $disksize=200
-    $disklabel="LOBData"
-    $lun=0
-    $hcaching="ReadWrite"
-    $vm1 | Add-AzureDataDisk -CreateNew -DiskSizeInGB $disksize -DiskLabel $disklabel -LUN $lun -HostCaching $hcaching
+$disksize=200
+$disklabel="LOBData"
+$lun=0
+$hcaching="ReadWrite"
+$vm1 | Add-AzureDataDisk -CreateNew -DiskSizeInGB $disksize -DiskLabel $disklabel -LUN $lun -HostCaching $hcaching
 
-    $svcname="Azure-TailspinToys"
-    $vnetname="AZDatacenter"
-    New-AzureVM -ServiceName $svcname -VMs $vm1 -VNetName $vnetname
+$svcname="Azure-TailspinToys"
+$vnetname="AZDatacenter"
+New-AzureVM -ServiceName $svcname -VMs $vm1 -VNetName $vnetname
+```
 
 ## 后续步骤
 

@@ -34,13 +34,17 @@ ms.author: danlep
 
     * **导入 Azure 发布设置文件**。为此，在头节点上运行以下 Azure PowerShell cmdlet：
 
-            Get-AzurePublishSettingsFile
+        ```
+        Get-AzurePublishSettingsFile
 
-            Import-AzurePublishSettingsFile -PublishSettingsFile <publish settings file>
+        Import-AzurePublishSettingsFile -PublishSettingsFile <publish settings file>
+        ```
 
     * **在头节点上配置 Azure 管理证书**。如果你有 .cer 文件，将其导入至 CurrentUser\\My certificate store，然后为 Azure 环境（AzureCloud 或 AzureChinaCloud）运行以下 Azure PowerShell cmdlet：
 
-            Set-AzureSubscription -SubscriptionName <Sub Name> -SubscriptionId <Sub ID> -Certificate (Get-Item Cert:\CurrentUser\My<Cert Thrumbprint>) -Environment <AzureCloud | AzureChinaCloud>
+        ```
+        Set-AzureSubscription -SubscriptionName <Sub Name> -SubscriptionId <Sub ID> -Certificate (Get-Item Cert:\CurrentUser\My<Cert Thrumbprint>) -Environment <AzureCloud | AzureChinaCloud>
+        ```
 
 ## 添加计算节点 VM
 
@@ -48,9 +52,11 @@ ms.author: danlep
 
 ### 语法
 
-    Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String> `
-        [-Quantity] <Int32> [-InstanceSize] <String> [-DomainUserName] <String> [[-DomainUserPassword] <String>] `
-        [[-NodeNameSeries] <String>] [<CommonParameters>]
+```
+Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String> `
+    [-Quantity] <Int32> [-InstanceSize] <String> [-DomainUserName] <String> [[-DomainUserPassword] <String>] `
+    [[-NodeNameSeries] <String>] [<CommonParameters>]
+```
 
 ### Parameters
 
@@ -78,9 +84,11 @@ ms.author: danlep
 
 下面的示例基于 VM 映像 *hpccnimage1*，在云服务 *hpcservice1* 中添加了 20 个大型计算节点 VM。
 
-    Add-HPCIaaSNode.ps1 -ServiceName hpcservice1 -ImageName hpccniamge1 `
-        -Quantity 20 -InstanceSize Large -DomainUserName <username> `
-        -DomainUserPassword <password> `
+```
+Add-HPCIaaSNode.ps1 -ServiceName hpcservice1 -ImageName hpccniamge1 `
+    -Quantity 20 -InstanceSize Large -DomainUserName <username> `
+    -DomainUserPassword <password> `
+```
 
 ## 删除计算节点 VM
 
@@ -88,9 +96,11 @@ ms.author: danlep
 
 ### 语法
 
-    Remove-HPCIaaSNode.ps1 -Name <String[]> [-DeleteVHD] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+Remove-HPCIaaSNode.ps1 -Name <String[]> [-DeleteVHD] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 
-    Remove-HPCIaaSNode.ps1 -Node <Object> [-DeleteVHD] [-Force] [-Confirm] [<CommonParameters>]
+Remove-HPCIaaSNode.ps1 -Node <Object> [-DeleteVHD] [-Force] [-Confirm] [<CommonParameters>]
+```
 
 ### Parameters
 
@@ -110,7 +120,9 @@ ms.author: danlep
 
 下面的示例强制名称以 *HPCNode-CN-* 开头的脱机节点，然后删除这些节点及其关联磁盘。
 
-    Remove-HPCIaaSNode.ps1 -Name HPCNodeCN-* -DeleteVHD -Force
+```
+Remove-HPCIaaSNode.ps1 -Name HPCNodeCN-* -DeleteVHD -Force
+```
 
 ## 启动计算节点 VM
 
@@ -118,9 +130,11 @@ ms.author: danlep
 
 ### 语法
 
-    Start-HPCIaaSNode.ps1 -Name <String[]> [<CommonParameters>]
+```
+Start-HPCIaaSNode.ps1 -Name <String[]> [<CommonParameters>]
 
-    Start-HPCIaaSNode.ps1 -Node <Object> [<CommonParameters>]
+Start-HPCIaaSNode.ps1 -Node <Object> [<CommonParameters>]
+```
 
 ### Parameters
 
@@ -132,7 +146,9 @@ ms.author: danlep
 
 下面的示例启动名称以 *HPCNode-CN-* 开头的节点。
 
-    Start-HPCIaaSNode.ps1 -Name HPCNodeCN-*
+```
+Start-HPCIaaSNode.ps1 -Name HPCNodeCN-*
+```
 
 ## 停止计算节点 VM
 
@@ -140,9 +156,11 @@ ms.author: danlep
 
 ### 语法
 
-    Stop-HPCIaaSNode.ps1 -Name <String[]> [-Force] [<CommonParameters>]
+```
+Stop-HPCIaaSNode.ps1 -Name <String[]> [-Force] [<CommonParameters>]
 
-    Stop-HPCIaaSNode.ps1 -Node <Object> [-Force] [<CommonParameters>]
+Stop-HPCIaaSNode.ps1 -Node <Object> [-Force] [<CommonParameters>]
+```
 
 ### Parameters
 
@@ -156,7 +174,9 @@ ms.author: danlep
 
 下面的示例强制名称以 *HPCNode-CN-* 开头的脱机节点，然后停止这些节点。
 
-    Stop-HPCIaaSNode.ps1 -Name HPCNodeCN-* -Force
+```
+Stop-HPCIaaSNode.ps1 -Name HPCNodeCN-* -Force
+```
 
 ## 后续步骤
 

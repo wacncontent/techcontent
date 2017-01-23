@@ -40,10 +40,12 @@ ms.author: bwren
 
 以下示例命令演示了如何使用 Azure 服务管理 cmdlet 创建一个从 2015 年 1 月 20 日开始在每天下午 3:30 运行的新计划。
 
-    $automationAccountName = "MyAutomationAccount"
-    $scheduleName = "Sample-DailySchedule"
-    New-AzureAutomationSchedule -AutomationAccountName $automationAccountName -Name `
-    $scheduleName -StartTime "1/20/2016 15:30:00" -DayInterval 1
+```
+$automationAccountName = "MyAutomationAccount"
+$scheduleName = "Sample-DailySchedule"
+New-AzureAutomationSchedule -AutomationAccountName $automationAccountName -Name `
+$scheduleName -StartTime "1/20/2016 15:30:00" -DayInterval 1
+```
 
 ## 将计划链接到 Runbook
 
@@ -64,12 +66,14 @@ ms.author: bwren
 
 以下示例命令演示了如何使用带参数的 Azure 服务管理 cmdlet 链接计划。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Test-Runbook"
-    $scheduleName = "Sample-DailySchedule"
-    $params = @{"FirstName"="Joe";"LastName"="Smith";"RepeatCount"=2;"Show"=$true}
-    Register-AzureAutomationScheduledRunbook -AutomationAccountName $automationAccountName `
-    -Name $runbookName -ScheduleName $scheduleName -Parameters $params
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Test-Runbook"
+$scheduleName = "Sample-DailySchedule"
+$params = @{"FirstName"="Joe";"LastName"="Smith";"RepeatCount"=2;"Show"=$true}
+Register-AzureAutomationScheduledRunbook -AutomationAccountName $automationAccountName `
+-Name $runbookName -ScheduleName $scheduleName -Parameters $params
+```
 
 ## 禁用计划
 
@@ -90,10 +94,12 @@ ms.author: bwren
 
 以下示例命令演示了如何使用 Azure 服务管理 cmdlet 禁用计划。
 
-    $automationAccountName = "MyAutomationAccount"
-    $scheduleName = "Sample-DailySchedule"
-    Set-AzureAutomationSchedule -AutomationAccountName $automationAccountName `
-    -Name $scheduleName -IsEnabled $false
+```
+$automationAccountName = "MyAutomationAccount"
+$scheduleName = "Sample-DailySchedule"
+Set-AzureAutomationSchedule -AutomationAccountName $automationAccountName `
+-Name $scheduleName -IsEnabled $false
+```
 
 ## 后续步骤
 

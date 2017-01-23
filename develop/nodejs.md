@@ -38,7 +38,7 @@ wacn.date: 04/07/2016
 - [在表中存储键/值对](../articles/storage/storage-nodejs-how-to-use-table-storage.md)
 - [连接到表存储](../articles/app-service-web/storage-nodejs-use-table-storage-web-site.md)
 - [全部显示](/develop/nodejs/data)
-  
+
 ###应用服务
 
 -  [使用 Service Bus 的发布/订阅应用程序](../articles/service-bus-messaging/service-bus-nodejs-how-to-use-topics-subscriptions.md)
@@ -59,4 +59,3 @@ wacn.date: 04/07/2016
 - [表服务](../articles/storage/storage-nodejs-how-to-use-table-storage.md) / [API](http://go.microsoft.com/fwlink/?linkid=401538&clcid=0x804) / [REST](http://msdn.microsoft.com/zh-cn/library/azure/dd179355)
 - [命令行工具](../articles/xplat-cli-install.md)
 - [PowerShell Cmdlet](../articles/powershell-install-configure.md)
-

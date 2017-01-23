@@ -36,7 +36,9 @@ ms.author: kgremban
 ###	列出所有可用的角色
 若要列出所有可用的角色，请使用：
 
-    azure role list
+```
+azure role list
+```
 
 以下示例显示了“所有可用的角色”的列表。
 
@@ -45,7 +47,9 @@ ms.author: kgremban
 ###	列出角色的操作
 若要列出角色的操作，请使用：
 
-    azure role show "<role name>"
+```
+azure role show "<role name>"
+```
 
 以下示例显示了“参与者”和“虚拟机参与者”角色的操作。
 
@@ -55,7 +59,9 @@ ms.author: kgremban
 ###	列出资源组上有效的角色分配
 若要列出资源组中存在的角色分配，请使用：
 
-    azure role assignment list --resource-group <resource group name>
+```
+azure role assignment list --resource-group <resource group name>
+```
 
 以下示例显示了 *pharma-sales-projecforcast* 组中的角色分配。
 
@@ -64,11 +70,15 @@ ms.author: kgremban
 ###	列出对用户的角色分配，包括对用户的组的角色分配
 若要列出特定用户的角色分配，请使用：
 
-    azure role assignment list --signInName <user email>
+```
+azure role assignment list --signInName <user email>
+```
 
 还可通过修改命令查看从组继承的角色分配：
 
-    azure role assignment list --expandPrincipalGroups --signInName <user email>
+```
+azure role assignment list --expandPrincipalGroups --signInName <user email>
+```
 
 以下示例显示了授予用户 *sameert@aaddemo.com* 的角色分配。这包括直接分配到用户的角色，也包括从组中继承的角色。
 
@@ -77,12 +87,16 @@ ms.author: kgremban
 ##	授予访问权限
 标识出想分配的角色后，若要授予访问权限，请使用：
 
-    azure role assignment create
+```
+azure role assignment create
+```
 
 ###	将角色分配给订阅范围内的组
 若要将角色分配给订阅范围内的组，请使用：
 
-    azure role assignment create --objectId  <group object id> --roleName <name of role> --subscription <subscription> --scope <subscription/subscription id>
+```
+azure role assignment create --objectId  <group object id> --roleName <name of role> --subscription <subscription> --scope <subscription/subscription id>
+```
 
 以下示例在订阅范围内将读者角色分配给Christine Koch 的团队。
 
@@ -91,7 +105,9 @@ ms.author: kgremban
 ###	将角色分配给订阅范围内的应用程序
 若要将角色分配给订阅范围内的应用程序，请使用：
 
-    azure role assignment create --objectId  <applications object id> --roleName <name of role> --subscription <subscription> --scope <subscription/subscription id>
+```
+azure role assignment create --objectId  <applications object id> --roleName <name of role> --subscription <subscription> --scope <subscription/subscription id>
+```
 
 以下示例在所选订阅上将参与者角色授予 *Azure AD* 应用程序。
 
@@ -100,7 +116,9 @@ ms.author: kgremban
 ###	将角色分配给资源组范围内的用户
 若要将角色分配给资源组范围内的用户，请使用：
 
-    azure role assignment create --signInName  <user's email address> --subscription <subscription> --roleName <name of role in quotes> --resourceGroup <resource group name>
+```
+azure role assignment create --signInName  <user's email address> --subscription <subscription> --roleName <name of role in quotes> --resourceGroup <resource group name>
+```
 
 以下示例在 *Pharma-Sales-ProjectForcast* 资源组范围内将虚拟机参与者角色授予用户 *samert@aaddemo.com*。
 
@@ -109,7 +127,9 @@ ms.author: kgremban
 ###	将角色分配给资源范围内的组
 若要将角色分配给资源范围内的组，请使用：
 
-    azure role assignment create --objectId <group id> --role "<name of role>" --resource-name <resource group name> --resource-type <resource group type> --parent <resource group parent> --resource-group <resource group>
+```
+azure role assignment create --objectId <group id> --role "<name of role>" --resource-name <resource group name> --resource-type <resource group type> --parent <resource group parent> --resource-group <resource group>
+```
 
 以下示例在子网上将虚拟机参与者角色授予 *Azure AD* 组。
 
@@ -118,7 +138,9 @@ ms.author: kgremban
 ##	删除访问权限
 若要删除角色分配，请使用：
 
-    azure role assignment delete --objectId <object id to from which to remove role> --roleName "<role name>"
+```
+azure role assignment delete --objectId <object id to from which to remove role> --roleName "<role name>"
+```
 
 以下示例在 *Pharma-Sales-ProjectForcast* 资源组上从 *sammert@aaddemo.com* 删除虚拟机参与者角色分配。
 然后，从订阅上的组中删除该角色分配。

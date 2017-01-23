@@ -29,18 +29,20 @@ ms.author: mlearned
 
 以下代码将创建对表（`todoTable`，其中包含 TodoItem 的数据）的引用，你可以将该引用用于后续操作以便读取和更新数据表。您将需要 TodoItem 类，并将其属性设置为解释移动服务为响应您的查询而发送的 JSON。
 
-    public class TodoItem
-    {
-        public string Id { get; set; }
+```
+public class TodoItem
+{
+    public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "text")]
-        public string Text { get; set; }
+    [JsonProperty(PropertyName = "text")]
+    public string Text { get; set; }
 
-        [JsonProperty(PropertyName = "complete")]
-        public bool Complete { get; set; }
-    }
+    [JsonProperty(PropertyName = "complete")]
+    public bool Complete { get; set; }
+}
 
-    IMobileServiceTable<TodoItem> todoTable = App.<yourClient>.GetTable<TodoItem>();
+IMobileServiceTable<TodoItem> todoTable = App.<yourClient>.GetTable<TodoItem>();
+```
 
 如果您的表权限已设置为**具有应用程序密钥的任何人**，则此代码有效。如果您更改权限以保护您的移动服务，您将需要添加用户身份验证支持。请参阅[身份验证入门](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md)。
 
@@ -48,36 +50,44 @@ ms.author: mlearned
 
 将新的项目插入数据表。
 
-    TodoItem todoItem = new TodoItem() { Text = "My first to do item", Complete = false };
-    await todoTable.InsertAsync(todoItem);
+```
+TodoItem todoItem = new TodoItem() { Text = "My first to do item", Complete = false };
+await todoTable.InsertAsync(todoItem);
+```
 
 ##读取或查询表
 
 以下代码将查询表以获取所有项目。请注意，它仅返回数据的第一页，默认为 50 个项目。因为它是一个可选的参数，您可以传入所需的页大小。
 
-    List<TodoItem> items;
-    try
-    {
-        // Query that returns all items.   
-        items = await todoTable.ToListAsync();             
-    }
-    catch (MobileServiceInvalidOperationException e)
-    {
-        // handle exception
-    }
+```
+List<TodoItem> items;
+try
+{
+    // Query that returns all items.   
+    items = await todoTable.ToListAsync();             
+}
+catch (MobileServiceInvalidOperationException e)
+{
+    // handle exception
+}
+```
 
 ##更新表项
 
 更新数据表中的行。参数项是指要更新的 TodoItem 对象。
 
-    await todoTable.UpdateAsync(item);
+```
+await todoTable.UpdateAsync(item);
+```
 
 ##删除表项
 
 删除数据库中的行。参数项是指要删除的 TodoItem 对象。
 
-    await todoTable.DeleteAsync(item);
+```
+await todoTable.DeleteAsync(item);
+```
 
-[详细了解移动服务](./index.md/)
+[详细了解移动服务](./index.md)
 
 <!---HONumber=Mooncake_0215_2016-->

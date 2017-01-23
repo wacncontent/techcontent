@@ -117,4 +117,4 @@
 ##关于作者
 
 David Chappell 是位于加利福尼亚州旧金山市的 Chappell & Associates [www.davidchappell.com](http://www.davidchappell.com) 的负责人。他通过演讲、写作和咨询，帮助全球的人们了解、使用新技术并围绕新技术做出更好的决策。
-<!--HONumber=43--> 
+<!--HONumber=43-->

@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-database-include-connection-string-40-config.md
 
@@ -22,25 +21,27 @@ Latest Freshness check:  2015-09-04 , GeneMi.
 - {your\_serverName\_here}
 - {your\_databaseName\_here}
 
-        <?xml version="1.0" encoding="utf-8" ?>
-        <configuration>
-            <startup> 
-                <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
-            </startup>
-        
-            <connectionStrings>
-                <clear />
-                <add name="ConnectionString4NoUserIDNoPassword"
-                providerName="System.Data.ProviderName"
-        
-                connectionString=
-                "Server=tcp:{your_serverName_here}.database.chinacloudapi.cn,1433;
-                Database={your_databaseName_here};
-                Connection Timeout=30;
-                Encrypt=True;
-                TrustServerCertificate=False;" />
-            </connectionStrings>
-        </configuration>
+    ```
+    <?xml version="1.0" encoding="utf-8" ?>
+    <configuration>
+        <startup> 
+            <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+        </startup>
+
+        <connectionStrings>
+            <clear />
+            <add name="ConnectionString4NoUserIDNoPassword"
+            providerName="System.Data.ProviderName"
+
+            connectionString=
+            "Server=tcp:{your_serverName_here}.database.chinacloudapi.cn,1433;
+            Database={your_databaseName_here};
+            Connection Timeout=30;
+            Encrypt=True;
+            TrustServerCertificate=False;" />
+        </connectionStrings>
+    </configuration>
+    ```
 
 在本演示中，我们选择省略两个参数：
 

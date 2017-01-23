@@ -23,7 +23,8 @@ ms.author: robinsh
 
 可在 [Azure 门户预览](https://portal.azure.cn)中监视存储帐户。配置存储帐户以便通过门户进行监视时，Azure 存储使用[存储分析](http://msdn.microsoft.com/zh-cn/library/azure/hh343270.aspx)跟踪帐户和日志请求数据的指标。
 
-> [!NOTE] 在 [Azure 门户预览](https://portal.azure.cn)中查看监视数据会产生相关的额外费用。有关详细信息，请参阅<a href="http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx">存储分析和计费</a>。<br />
+> [!NOTE]
+> 在 [Azure 门户预览](https://portal.azure.cn)中查看监视数据会产生相关的额外费用。有关详细信息，请参阅<a href="http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx">存储分析和计费</a>。<br />
 
 > Azure 文件存储目前支持存储分析指标，但尚不支持日志记录。可以通过 [Azure 门户预览](https://portal.azure.cn)为 Azure 文件存储启用指标。
 
@@ -97,7 +98,8 @@ ms.author: robinsh
 
     ![Monitoring\_VerboseDisplay](./media/storage-monitor-storage-account/Storage_Monitoring_VerboseDisplay.png)
 
-    > [!NOTE] 选择指标时应考虑成本。在刷新监视视图时会产生相关的事务和数据传出费用。有关详细信息，请参阅[存储分析和计费](http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx)。
+    > [!NOTE]
+    > 选择指标时应考虑成本。在刷新监视视图时会产生相关的事务和数据传出费用。有关详细信息，请参阅[存储分析和计费](http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx)。
 
 3. 单击“添加指标”。
 
@@ -127,7 +129,7 @@ ms.author: robinsh
 
 2. 要在相对值（仅显示最终值）和绝对值（显示 Y 轴）之间切换图表，请选择图表顶部的“相对”或“绝对”。
 
-3.	要更改指标图表显示的时间范围，请在图表顶部选择“6 小时”、“24 小时”或者“7 天”。
+3. 要更改指标图表显示的时间范围，请在图表顶部选择“6 小时”、“24 小时”或者“7 天”。
 
 ## 如何：配置日志记录
 

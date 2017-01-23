@@ -97,6 +97,6 @@ ms.author: cherylmc
 
 ## 后续步骤
 
-- 连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md/)。
+- 连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md)。
 
 <!---HONumber=Mooncake_1031_2016-->

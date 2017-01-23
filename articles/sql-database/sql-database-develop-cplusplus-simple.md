@@ -81,12 +81,14 @@ Azure 目前有两个用于托管 SQL Server 工作负荷的选项：Azure SQL �
 
 以下步骤为分发安装 SQL 和 ODBC 所需的库：
 
-    sudo su
-    sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.cn/repos/mssql-ubuntu-test/ xenial main" > /etc/apt/sources.list.d/mssqlpreview.list'
-    sudo apt-key adv --keyserver apt-mo.trafficmanager.cn --recv-keys 417A0893
-    apt-get update
-    apt-get install msodbcsql
-    apt-get install unixodbc-dev-utf16 #this step is optional but recommended*
+```
+sudo su
+sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.cn/repos/mssql-ubuntu-test/ xenial main" > /etc/apt/sources.list.d/mssqlpreview.list'
+sudo apt-key adv --keyserver apt-mo.trafficmanager.cn --recv-keys 417A0893
+apt-get update
+apt-get install msodbcsql
+apt-get install unixodbc-dev-utf16 #this step is optional but recommended*
+```
 
 启动 Visual Studio 2015。在“工具”->“选项”->“跨平台”->“C++”->“连接管理器”下，将连接添加到 Linux 框中：
 
@@ -98,11 +100,13 @@ Azure 目前有两个用于托管 SQL Server 工作负荷的选项：Azure SQL �
 
 然后，可以添加[新的 C 源文件，并将其替换为此内容](https://github.com/Microsoft/VCSamples/blob/master/VC2015Samples/ODBC%20database%20sample%20%28linux%29/odbcconnector/odbcconnector.c)。使用 ODBC API SQLAllocHandle、SQLSetConnectAttr 和 SQLDriverConnect 时，应能够初始化并建立与数据库的连接。和 Windows ODBC 示例一样，需要使用数据库连接字符串参数的详细信息（之前从 Azure 门户预览复制）替换 SQLDriverConnect 调用。
 
-     retcode = SQLDriverConnect(
-        hdbc, NULL, "Driver=ODBC Driver 13 for SQL"
-                    "Server;Server=<yourserver>;Uid=<yourusername>;Pwd=<"
-                    "yourpassword>;database=<yourdatabase>",
-        SQL_NTS, outstr, sizeof(outstr), &outstrlen, SQL_DRIVER_NOPROMPT);
+```
+ retcode = SQLDriverConnect(
+    hdbc, NULL, "Driver=ODBC Driver 13 for SQL"
+                "Server;Server=<yourserver>;Uid=<yourusername>;Pwd=<"
+                "yourpassword>;database=<yourdatabase>",
+    SQL_NTS, outstr, sizeof(outstr), &outstrlen, SQL_DRIVER_NOPROMPT);
+```
 
 编译前需要完成的最后一步是将 **odbc** 作为库依赖项添加：
 

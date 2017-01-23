@@ -34,33 +34,38 @@ ms.author: seanmck
 
 Service Fabric 应用程序由服务实例的集合组成。尽管你可以先创建一个空应用程序，然后动态创建所有服务实例，但是，大多数应用程序都有一套核心服务，这些服务始终应该在实例化应用程序时创建。这些服务称为“默认服务”。它们在应用程序清单中指定。方括号中包含每个环境配置的占位符：
 
-    <DefaultServices>
-        <Service Name="Stateful1">
-            <StatefulService
-                ServiceTypeName="Stateful1Type"
-                TargetReplicaSetSize="[Stateful1_TargetReplicaSetSize]"
-                MinReplicaSetSize="[Stateful1_MinReplicaSetSize]">
+```
+<DefaultServices>
+    <Service Name="Stateful1">
+        <StatefulService
+            ServiceTypeName="Stateful1Type"
+            TargetReplicaSetSize="[Stateful1_TargetReplicaSetSize]"
+            MinReplicaSetSize="[Stateful1_MinReplicaSetSize]">
 
-                <UniformInt64Partition
-                    PartitionCount="[Stateful1_PartitionCount]"
-                    LowKey="-9223372036854775808"
-                    HighKey="9223372036854775807"
-                />
-        </StatefulService>
-    </Service>
+            <UniformInt64Partition
+                PartitionCount="[Stateful1_PartitionCount]"
+                LowKey="-9223372036854775808"
+                HighKey="9223372036854775807"
+            />
+    </StatefulService>
+</Service>
+```
   </DefaultServices>
 
 必须在应用程序清单的 Parameters 元素中定义每个命名参数：
 
-    <Parameters>
-        <Parameter Name="Stateful1_MinReplicaSetSize" DefaultValue="2" />
-        <Parameter Name="Stateful1_PartitionCount" DefaultValue="1" />
-        <Parameter Name="Stateful1_TargetReplicaSetSize" DefaultValue="3" />
-    </Parameters>
+```
+<Parameters>
+    <Parameter Name="Stateful1_MinReplicaSetSize" DefaultValue="2" />
+    <Parameter Name="Stateful1_PartitionCount" DefaultValue="1" />
+    <Parameter Name="Stateful1_TargetReplicaSetSize" DefaultValue="3" />
+</Parameters>
+```
 
 DefaultValue 属性指定当给定的环境缺少更具体的参数时所要使用的值。
 
->[!NOTE] 并非所有的服务实例参数都适用于每个环境配置。在上述示例中，已针对服务的所有实例显式定义服务分区方案的 LowKey 和 HighKey 值，因为分区范围与数据域而不是与环境相关。
+>[!NOTE]
+> 并非所有的服务实例参数都适用于每个环境配置。在上述示例中，已针对服务的所有实例显式定义服务分区方案的 LowKey 和 HighKey 值，因为分区范围与数据域而不是与环境相关。
 
 ### 每个环境的服务配置设置
 
@@ -68,39 +73,46 @@ DefaultValue 属性指定当给定的环境缺少更具体的参数时所要使�
 
 假设`Stateful1`服务的 Config\\Settings.xml 文件中存在以下设置：
 
-    <Section Name="MyConfigSection">
-      <Parameter Name="MaxQueueSize" Value="25" />
-    </Section>
+```
+<Section Name="MyConfigSection">
+  <Parameter Name="MaxQueueSize" Value="25" />
+</Section>
+```
 
 若要重写特定应用程序/环境对的此值，请在应用程序清单中导入服务清单时创建 `ConfigOverride`。
 
-    <ConfigOverrides>
-     <ConfigOverride Name="Config">
-        <Settings>
-           <Section Name="MyConfigSection">
-              <Parameter Name="MaxQueueSize" Value="[Stateful1_MaxQueueSize]" />
-           </Section>
-        </Settings>
-     </ConfigOverride>
+```
+<ConfigOverrides>
+ <ConfigOverride Name="Config">
+    <Settings>
+       <Section Name="MyConfigSection">
+          <Parameter Name="MaxQueueSize" Value="[Stateful1_MaxQueueSize]" />
+       </Section>
+    </Settings>
+ </ConfigOverride>
+```
   </ConfigOverrides>
 
 然后可根据上面所示，按环境配置此参数。为此，可以在应用程序清单的 parameters 节中声明该参数，并在应用程序参数文件中指定特定于环境的值。
 
->[!NOTE] 对于服务配置设置，可在三个位置设置键的值：服务配置包、应用程序清单和应用程序参数文件。Service Fabric 始终先从应用程序参数文件（如果已指定）进行选择，再从应用程序清单选择，最后从配置包选择。
+>[!NOTE]
+> 对于服务配置设置，可在三个位置设置键的值：服务配置包、应用程序清单和应用程序参数文件。Service Fabric 始终先从应用程序参数文件（如果已指定）进行选择，再从应用程序清单选择，最后从配置包选择。
 
 ### 应用程序参数文件
 
 Service Fabric 应用程序项目可以包含一个或多个应用程序参数文件。每个文件为应用程序清单中定义的参数定义特定值：
 
-    <!-- ApplicationParameters\Local.xml -->
+```
+<!-- ApplicationParameters\Local.xml -->
 
-    <Application Name="fabric:/Application1" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-        <Parameters>
-            <Parameter Name ="Stateful1_MinReplicaSetSize" Value="2" />
-            <Parameter Name="Stateful1_PartitionCount" Value="1" />
-            <Parameter Name="Stateful1_TargetReplicaSetSize" Value="3" />
-        </Parameters>
-    </Application>
+<Application Name="fabric:/Application1" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+    <Parameters>
+        <Parameter Name ="Stateful1_MinReplicaSetSize" Value="2" />
+        <Parameter Name="Stateful1_PartitionCount" Value="1" />
+        <Parameter Name="Stateful1_TargetReplicaSetSize" Value="3" />
+    </Parameters>
+</Application>
+```
 
 默认情况下，新应用程序包含三个应用程序参数文件，分别名为 Local.1Node.xml、Local.5Node.xml 和 Cloud.xml：
 
@@ -122,8 +134,10 @@ Service Fabric 应用程序项目可以包含一个或多个应用程序参数�
 
 应用程序项目模板中包含的 `Deploy-FabricApplication.ps1` PowerShell 脚本可接受发布配置文件作为参数，而 PublishProfile 包含对应用程序参数文件的引用。
 
-    ./Deploy-FabricApplication -ApplicationPackagePath <app_package_path> -PublishProfileFile <publishprofile_path>
-  
+```
+./Deploy-FabricApplication -ApplicationPackagePath <app_package_path> -PublishProfileFile <publishprofile_path>
+```
+
 ## 后续步骤
 
 若要深入了解本主题中所述的某些核心概念，请参阅 [Service Fabric 技术概述](./service-fabric-technical-overview.md)。有关 Visual Studio 中其他可用应用管理功能的信息，请参阅[在 Visual Studio 中管理 Service Fabric 应用程序](./service-fabric-manage-application-in-visual-studio.md)。

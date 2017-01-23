@@ -129,4 +129,3 @@ Azure 的 VPN 有两种类型，分别为基于策略的 VPN（PolicyBased）和
 [详细介绍](./vpn-gateway/vpn-gateway-about-vpngateways.md)
 
 [VPN 网关常见问题](./vpn-gateway/vpn-gateway-vpn-faq.md)
-

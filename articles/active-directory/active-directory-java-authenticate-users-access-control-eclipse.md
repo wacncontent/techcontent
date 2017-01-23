@@ -110,7 +110,7 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
 1. 在 ACS 管理门户上，单击“信赖方应用程序”。
 2. 在“信赖方应用程序”页上，单击“添加”。
 3. 在“添加信赖方应用程序”页上，执行下列操作：
-   
+
    1. 在“名称”中，键入 RP 的名称。在本教程中，请键入 **Azure Web App**。
    2. 在“模式”中，选择“手动输入设置”。
    3. 在“领域”中，键入 ACS 所颁发的安全令牌将应用于的 URI。对于此任务，请键入 **http://localhost:8080/**。![要在计算仿真程序中使用的信赖方领域][relying_party_realm_emulator]
@@ -156,32 +156,34 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
 
 ## <a name="create-java-app"></a>创建 Java Web 应用程序
 1. 在 Eclipse 中的菜单上，依次单击“文件”、“新建”和“动态 Web 项目”。（如果你在单击“文件”和“新建”后未看到“动态 Web 项目”作为可用项目列出，请执行下列操作：依次单击“文件”、“新建”和“项目”，展开“Web”，再单击“动态 Web 项目”，然后单击“下一步”。） 在本教程中，将项目命名为 **MyACSHelloWorld**。（请务必使用此名称，因为本教程中的后续步骤会将你的 WAR 文件命名为 MyACSHelloWorld）。你的屏幕应与下图中所示类似：
-   
+
     ![为 ACS 示例创建 Hello World 项目][create_acs_hello_world]
-   
+
     单击“完成”。
 2. 在 Eclipse 的项目资源管理器视图中，展开 **MyACSHelloWorld**。右键单击“WebContent”，单击“新建”，然后单击“JSP 文件”。
 3. 在“新建 JSP 文件”对话框中，将文件命名为 **index.jsp**。将父文件夹保留为 MyACSHelloWorld/WebContent，如下所示：
-   
+
     ![为 ACS 示例添加 JSP 文件][add_jsp_file_acs]
-   
+
     单击**“下一步”**。
 4. 在“选择 JSP 模板”对话框中，选择“新建 JSP 文件 (html)”，然后单击“完成”。
 5. 在 Eclipse 中打开 index.jsp 文件后，添加文本以便在现有 `<body>` 元素中显示 **Hello ACS World!**。更新后的 `<body>` 内容应与下图中所示类似：
-   
-        <body>
-          <b><% out.println("Hello ACS World!"); %></b>
-        </body>
-   
+
+    ```
+    <body>
+      <b><% out.println("Hello ACS World!"); %></b>
+    </body>
+    ```
+
     保存 index.jsp。
-  
+
 ## <a name="add_acs_filter_library"></a>将 ACS 筛选器库添加到你的应用程序
 
 1. 在 Eclipse 的项目资源管理器中，右键单击“MyACSHelloWorld”，单击“生成路径”，然后单击“配置生成路径”。
 2. 在“Java 生成路径”对话框中，单击“库”选项卡。
 3. 单击“添加库”。
 4. 单击“Azure 访问控制服务筛选器(由 MS Open Tech 提供)”，然后单击“下一步”。将显示“Azure 访问控制服务筛选器”对话框。（“位置”字段可能包含其他路径（取决于 Eclipse 的安装位置），并且版本号可能不同（取决于软件更新）。）
-   
+
     ![添加 ACS 筛选器库][add_acs_filter_lib]
 5. 使用已打开管理门户的“登录页集成”页的浏览器，复制“选项 1: 链接到托管 ACS 的登录页”字段中列出的 URL，并将其粘贴到 Eclipse 对话框的“ACS 身份验证终结点”字段。
 6. 使用已打开管理门户的“编辑信赖方应用程序”页的浏览器，复制“领域”字段中列出的 URL，并将其复制到 Eclipse 对话框的“信赖方领域”字段。
@@ -189,7 +191,7 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
 8. 选中“在 WAR 文件中嵌入证书”。以此方式嵌入证书会将证书包含在部署中，而不需要你将证书作为组件手动添加。（相反，如果你必须从 WAR 文件外部存储证书，则可将证书作为角色组件添加并取消选中“在 WAR 文件中嵌入证书”。）
 9. [可选] 让“需要 HTTPS 连接”保持选中状态。如果你设置此选项，则将需要使用 HTTPS 协议访问你的应用程序。如果你不需要 HTTPS 连接，请取消选中此选项。
 10. 对于到计算模拟器的部署，你的“Azure ACS 筛选器”设置与下图中所示类似。
-    
+
     ![用于部署到计算模拟器的 Azure ACS 筛选器设置][add_acs_filter_lib_emulator]
 11. 单击“完成”。
 12. 当出现一个说明将创建 web.xml 文件的对话框时，请单击“是”。
@@ -211,10 +213,10 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
 若要部署到 Azure，你将需要更改 ACS 命名空间的信赖方领域和返回 URL。
 
 1. 在 Azure 管理门户的“编辑信赖方应用程序”页中，将“领域”修改为你已部署站点的 URL。将 **example** 替换为你为部署指定的 DNS 名称。
-   
+
     ![要在生产中使用的信赖方领域][relying_party_realm_production]
 2. 将“返回 URL”修改为你应用程序的 URL。将 **example** 替换为你为部署指定的 DNS 名称。
-   
+
     ![要在生产中使用的信赖方返回 URL][relying_party_return_url_production]
 3. 单击“保存”保存已更新的信赖方领域和返回 URL 更改。
 4. 使“登录页集成”页在浏览器中保持打开状态，你很快将需要从中进行复制。
@@ -226,7 +228,7 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
 10. 让“在 WAR 文件中嵌入证书”保持选中状态，假使你要在 WAR 文件中嵌入证书。
 11. [可选] 让“需要 HTTPS 连接”保持选中状态。如果你设置此选项，则将需要使用 HTTPS 协议访问你的应用程序。如果你不需要 HTTPS 连接，请取消选中此选项。
 12. 对于到 Azure 的部署，你的 Azure ACS 筛选器设置将与下图中所示类似。
-    
+
     ![用于生产部署的 Azure ACS 筛选器设置][add_acs_filter_lib_production]
 13. 单击“完成”关闭“编辑库”对话框。
 14. 单击“确定”关闭“MyACSHelloWorld 的属性”对话框。
@@ -245,7 +247,7 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
 2. 在部署中将证书作为组件复制：在 Eclipse 的项目资源管理器中，展开“MyAzureACSProject”，右键单击“WorkerRole1”，单击“属性”，展开“Azure 角色”，然后单击“组件”。
 3. 单击**“添加”**。
 4. 在“添加组件”对话框中：
-   
+
    1. 在“导入”部分中：
       1. 使用“文件”按钮导航到要使用的证书。
       2. 对于“方法”，请选择“复制”。
@@ -254,7 +256,7 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
       1. 对于“方法”，请选择“复制”。
       2. 对于“目标目录”，请键入 **%JAVA\_HOME%**。
    4. 你的“添加组件”对话框将与下图中所示类似。
-      
+
        ![添加证书组件][add_cert_component]
    5. 单击**“确定”**。
 

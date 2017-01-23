@@ -78,7 +78,7 @@ ms.author: spyros;sethm
 [逻辑应用]: https://azure.microsoft.com/home/features/app-service/logic/
 [Azure 通知中心]: https://www.azure.cn/home/features/notification-hubs/
 [Azure Stream Analytics]: https://www.azure.cn/home/features/stream-analytics/
- 
+
 [1]: ./media/event-hubs-sensors-notify-users/event-hubs-sensor-alert.png
 [2]: ./media/event-hubs-sensors-notify-users/event-hubs-erp-alert.png
 

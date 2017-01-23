@@ -41,101 +41,127 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 根据需要用于部署的值更改以下变量的值。以下值映射到本文中使用的方案：
 
-    # Set variables resource group
-    $rgName                = "IaaSStory"
-    $location              = "China North"
+```
+# Set variables resource group
+$rgName                = "IaaSStory"
+$location              = "China North"
 
-    # Set variables for VNet
-    $vnetName              = "WTestVNet"
-    $vnetPrefix            = "192.168.0.0/16"
-    $subnetName            = "FrontEnd"
-    $subnetPrefix          = "192.168.1.0/24"
+# Set variables for VNet
+$vnetName              = "WTestVNet"
+$vnetPrefix            = "192.168.0.0/16"
+$subnetName            = "FrontEnd"
+$subnetPrefix          = "192.168.1.0/24"
 
-    # Set variables for storage
-    $stdStorageAccountName = "iaasstorystorage"
+# Set variables for storage
+$stdStorageAccountName = "iaasstorystorage"
 
-    # Set variables for VM
-    $vmSize                = "Standard_A1"
-    $diskSize              = 127
-    $publisher             = "MicrosoftWindowsServer"
-    $offer                 = "WindowsServer"
-    $sku                   = "2012-R2-Datacenter"
-    $version               = "latest"
-    $vmName                = "WEB1"
-    $osDiskName            = "osdisk"
-    $nicName               = "NICWEB1"
-    $privateIPAddress      = "192.168.1.101"
-    $pipName               = "PIPWEB1"
-    $dnsName               = "iaasstoryws1"
+# Set variables for VM
+$vmSize                = "Standard_A1"
+$diskSize              = 127
+$publisher             = "MicrosoftWindowsServer"
+$offer                 = "WindowsServer"
+$sku                   = "2012-R2-Datacenter"
+$version               = "latest"
+$vmName                = "WEB1"
+$osDiskName            = "osdisk"
+$nicName               = "NICWEB1"
+$privateIPAddress      = "192.168.1.101"
+$pipName               = "PIPWEB1"
+$dnsName               = "iaasstoryws1"
+```
 
 ## 步骤 2 - 为你的 VM 创建必要的资源
 在创建 VM 之前，你需要可供 VM 使用的资源组、VNet、公共 IP 和 NIC。
 
 1. 创建新的资源组。
 
-        New-AzureRmResourceGroup -Name $rgName -Location $location
+    ```
+    New-AzureRmResourceGroup -Name $rgName -Location $location
+    ```
 
 2. 创建 VNet 和子网。
 
-        $vnet = New-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName `
-            -AddressPrefix $vnetPrefix -Location $location
+    ```
+    $vnet = New-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName `
+        -AddressPrefix $vnetPrefix -Location $location
 
-        Add-AzureRmVirtualNetworkSubnetConfig -Name $subnetName `
-            -VirtualNetwork $vnet -AddressPrefix $subnetPrefix
+    Add-AzureRmVirtualNetworkSubnetConfig -Name $subnetName `
+        -VirtualNetwork $vnet -AddressPrefix $subnetPrefix
 
-        Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
+    Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
+    ```
 
 3. 创建公共 IP 资源。
 
-        $pip = New-AzureRmPublicIpAddress -Name $pipName -ResourceGroupName $rgName `
-            -AllocationMethod Static -DomainNameLabel $dnsName -Location $location
+    ```
+    $pip = New-AzureRmPublicIpAddress -Name $pipName -ResourceGroupName $rgName `
+        -AllocationMethod Static -DomainNameLabel $dnsName -Location $location
+    ```
 
 4. 使用公共 IP 为上面创建的子网中的 VM 创建网络接口 (NIC)。请注意第一个用于从 Azure 检索 VNet 的 cmdlet。该 cmdlet 是必需的，因为现有 VNet 是通过执行 `Set-AzureRmVirtualNetwork` 进行更改的。
 
-        $vnet = Get-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
-        $subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
-        $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName `
-            -Subnet $subnet -Location $location -PrivateIpAddress $privateIPAddress `
-            -PublicIpAddress $pip
+    ```
+    $vnet = Get-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
+    $subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
+    $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName `
+        -Subnet $subnet -Location $location -PrivateIpAddress $privateIPAddress `
+        -PublicIpAddress $pip
+    ```
 
 5. 创建存储帐户，以托管 VM OS 驱动器。
 
-        $stdStorageAccount = New-AzureRmStorageAccount -Name $stdStorageAccountName `
-        -ResourceGroupName $rgName -Type Standard_LRS -Location $location
+    ```
+    $stdStorageAccount = New-AzureRmStorageAccount -Name $stdStorageAccountName `
+    -ResourceGroupName $rgName -Type Standard_LRS -Location $location
+    ```
 
 ## 步骤 3 - 创建 VM
 现在，所有必需的资源均已就绪，你可以创建新的 VM 了。
 
 1. 创建 VM 配置对象。
 
-        $vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize $vmSize
+    ```
+    $vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize $vmSize
+    ```
 
 2. 获取 VM 本地管理员帐户的凭据。
 
-        $cred = Get-Credential -Message "Type the name and password for the local administrator account."
+    ```
+    $cred = Get-Credential -Message "Type the name and password for the local administrator account."
+    ```
 
 3. 创建 VM 配置对象。
 
-        $vmConfig = Set-AzureRmVMOperatingSystem -VM $vmConfig -Windows -ComputerName $vmName `
-            -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
+    ```
+    $vmConfig = Set-AzureRmVMOperatingSystem -VM $vmConfig -Windows -ComputerName $vmName `
+        -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
+    ```
 
 4. 设置 VM 的操作系统映像。
 
-        $vmConfig = Set-AzureRmVMSourceImage -VM $vmConfig -PublisherName $publisher `
-            -Offer $offer -Skus $sku -Version $version
+    ```
+    $vmConfig = Set-AzureRmVMSourceImage -VM $vmConfig -PublisherName $publisher `
+        -Offer $offer -Skus $sku -Version $version
+    ```
 
 5. 配置 OS 磁盘。
 
-        $osVhdUri = $stdStorageAccount.PrimaryEndpoints.Blob.ToString() + "vhds/" + $osDiskName + ".vhd"
-        $vmConfig = Set-AzureRmVMOSDisk -VM $vmConfig -Name $osDiskName -VhdUri $osVhdUri -CreateOption fromImage
+    ```
+    $osVhdUri = $stdStorageAccount.PrimaryEndpoints.Blob.ToString() + "vhds/" + $osDiskName + ".vhd"
+    $vmConfig = Set-AzureRmVMOSDisk -VM $vmConfig -Name $osDiskName -VhdUri $osVhdUri -CreateOption fromImage
+    ```
 
 6. 将 NIC 添加到 VM。
 
-        $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $nic.Id -Primary
+    ```
+    $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $nic.Id -Primary
+    ```
 
 7. 创建 VM。
 
-        New-AzureRmVM -VM $vmConfig -ResourceGroupName $rgName -Location $location
+    ```
+    New-AzureRmVM -VM $vmConfig -ResourceGroupName $rgName -Location $location
+    ```
 
 8. 保存脚本文件。
 
@@ -144,77 +170,79 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 在 PowerShell 控制台或 PowerShell ISE 中，运行上述脚本。
 2. 几分钟后，应显示以下输出：
-   
-        ResourceGroupName : IaaSStory
-        Location          : chinanorth
-        ProvisioningState : Succeeded
-        Tags              : 
-        ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory
-   
-        AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
-        DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
-        Subnets           : {FrontEnd}
-        ProvisioningState : Succeeded
-        AddressSpaceText  : {
-                              "AddressPrefixes": [
-                                "192.168.0.0/16"
-                              ]
-                            }
-        DhcpOptionsText   : {}
-        SubnetsText       : [
-                              {
-                                "Name": "FrontEnd",
-                                "AddressPrefix": "192.168.1.0/24"
-                              }
-                            ]
-        ResourceGroupName : IaaSStory
-        Location          : chinanorth
-        ResourceGuid      : [Id]
-        Tag               : {}
-        TagsTable         : 
-        Name              : WTestVNet
-        Etag              : W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-        Id                : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
-   
-        AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
-        DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
-        Subnets           : {FrontEnd}
-        ProvisioningState : Succeeded
-        AddressSpaceText  : {
-                              "AddressPrefixes": [
-                                "192.168.0.0/16"
-                              ]
-                            }
-        DhcpOptionsText   : {
-                              "DnsServers": []
-                            }
-        SubnetsText       : [
-                              {
-                                "Name": "FrontEnd",
-                                "Etag": [Id],
-                                "Id": "/subscriptions/[Subscription ID]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet/subnets/FrontEnd",
-                                "AddressPrefix": "192.168.1.0/24",
-                                "IpConfigurations": [],
-                                "ProvisioningState": "Succeeded"
-                              }
-                            ]
-        ResourceGroupName : IaaSStory
-        Location          : chinanorth
-        ResourceGuid      : [Id]
-        Tag               : {}
-        TagsTable         : 
-        Name              : WTestVNet
-        Etag              : [Id]
-        Id                : /subscriptions/[Subscription Id]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
-   
-        TrackingOperationId : [Id]
-        RequestId           : [Id]
-        Status              : Succeeded
-        StatusCode          : OK
-        Output              : 
-        StartTime           : [Subscription Id]
-        EndTime             : [Subscription Id]
-        Error               : 
-        ErrorText           : 
+
+    ```
+    ResourceGroupName : IaaSStory
+    Location          : chinanorth
+    ProvisioningState : Succeeded
+    Tags              : 
+    ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory
+
+    AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
+    DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
+    Subnets           : {FrontEnd}
+    ProvisioningState : Succeeded
+    AddressSpaceText  : {
+                          "AddressPrefixes": [
+                            "192.168.0.0/16"
+                          ]
+                        }
+    DhcpOptionsText   : {}
+    SubnetsText       : [
+                          {
+                            "Name": "FrontEnd",
+                            "AddressPrefix": "192.168.1.0/24"
+                          }
+                        ]
+    ResourceGroupName : IaaSStory
+    Location          : chinanorth
+    ResourceGuid      : [Id]
+    Tag               : {}
+    TagsTable         : 
+    Name              : WTestVNet
+    Etag              : W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    Id                : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
+
+    AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
+    DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
+    Subnets           : {FrontEnd}
+    ProvisioningState : Succeeded
+    AddressSpaceText  : {
+                          "AddressPrefixes": [
+                            "192.168.0.0/16"
+                          ]
+                        }
+    DhcpOptionsText   : {
+                          "DnsServers": []
+                        }
+    SubnetsText       : [
+                          {
+                            "Name": "FrontEnd",
+                            "Etag": [Id],
+                            "Id": "/subscriptions/[Subscription ID]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet/subnets/FrontEnd",
+                            "AddressPrefix": "192.168.1.0/24",
+                            "IpConfigurations": [],
+                            "ProvisioningState": "Succeeded"
+                          }
+                        ]
+    ResourceGroupName : IaaSStory
+    Location          : chinanorth
+    ResourceGuid      : [Id]
+    Tag               : {}
+    TagsTable         : 
+    Name              : WTestVNet
+    Etag              : [Id]
+    Id                : /subscriptions/[Subscription Id]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
+
+    TrackingOperationId : [Id]
+    RequestId           : [Id]
+    Status              : Succeeded
+    StatusCode          : OK
+    Output              : 
+    StartTime           : [Subscription Id]
+    EndTime             : [Subscription Id]
+    Error               : 
+    ErrorText           : 
+    ```
 
 <!---HONumber=Mooncake_1219_2016-->

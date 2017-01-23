@@ -41,7 +41,8 @@ ms.author: dastrock
 
 你可以选择在“配置文件”部分中自定义登录页面的外观。在继续操作之前，请务必单击“保存”。
 
-> [!NOTE] 当你使用 [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com) 创建应用程序时，系统将会在你用来登录门户的帐户的主租户中注册该应用程序。这表示你不能使用 Microsoft 个人帐户在 Azure AD 租户中注册应用程序。如果你明确地想要在特定的租户中注册应用程序，请使用最初在该租户中创建的帐户登录。
+> [!NOTE]
+> 当你使用 [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com) 创建应用程序时，系统将会在你用来登录门户的帐户的主租户中注册该应用程序。这表示你不能使用 Microsoft 个人帐户在 Azure AD 租户中注册应用程序。如果你明确地想要在特定的租户中注册应用程序，请使用最初在该租户中创建的帐户登录。
 
 ## 生成快速启动应用
 你现在已有 Microsoft 应用，你可以完成我们提供的其中一个 v2.0 快速启动教程。以下是一些建议：

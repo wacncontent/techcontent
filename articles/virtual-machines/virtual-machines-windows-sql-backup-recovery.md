@@ -30,7 +30,8 @@ ms.author: jroth
 
 从 SQL Server 2014 开始，你可以备份和还原到 Azure Blob 存储。SQL Server 2016 进一步增强了此选项。此外，对于 Azure Blob 存储中存储的数据库文件，SQL Server 2016 提供了一个选项，你可以使用 Azure 快照进行近实时备份和快速还原。本文将概述这些选项，你可以在[使用 Azure Blob 存储服务执行 SQL Server 备份和还原](https://msdn.microsoft.com/zh-cn/library/jj919148.aspx)中找到更多信息。
 
->[!NOTE] 有关用于备份极大型数据库的选项的介绍，请参阅[适用于 Azure 虚拟机的多 TB SQL Server 数据库备份策略](http://blogs.msdn.com/b/igorpag/archive/2015/07/28/multi-terabyte-sql-server-database-backup-strategies-for-azure-virtual-machines.aspx)。
+>[!NOTE]
+> 有关用于备份极大型数据库的选项的介绍，请参阅[适用于 Azure 虚拟机的多 TB SQL Server 数据库备份策略](http://blogs.msdn.com/b/igorpag/archive/2015/07/28/multi-terabyte-sql-server-database-backup-strategies-for-azure-virtual-machines.aspx)。
 
 下列部分介绍特定于 Azure 虚拟机中支持的不同 SQL Server 版本的信息。
 

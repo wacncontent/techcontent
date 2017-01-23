@@ -29,37 +29,43 @@ ms.author: v-livech
 ## 快速命令
 创建 cloud-init.txt 脚本，用于设置主机名、更新所有包，并将 sudo 用户添加到 Linux。
 
-    #cloud-config
-    hostname: myVMhostname
-    apt_upgrade: true
-    users:
-      - name: myNewAdminUser
-        groups: sudo
-        shell: /bin/bash
-        sudo: ['ALL=(ALL) NOPASSWD:ALL']
-        ssh-authorized-keys:
-          - ssh-rsa AAAAB3<snip>==myAdminUser@myVM
+```
+#cloud-config
+hostname: myVMhostname
+apt_upgrade: true
+users:
+  - name: myNewAdminUser
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3<snip>==myAdminUser@myVM
+```
 
 创建要在其中启动 VM 的资源组。
 
-    azure group create myResourceGroup chinanorth
+```
+azure group create myResourceGroup chinanorth
+```
 
 使用 cloud-init 创建要在启动过程中进行配置的 Linux VM。
 
-    azure vm create \
-      -g myResourceGroup \
-      -n myVM \
-      -l chinanorth \
-      -y Linux \
-      -f myVMnic \
-      -F myVNet \
-      -P 10.0.0.0/22 \
-      -j mySubnet \
-      -k 10.0.0.0/24 \
-      -Q canonical:ubuntuserver:14.04.2-LTS:latest \
-      -M ~/.ssh/id_rsa.pub \
-      -u myAdminUser \
-      -C cloud-init.txt
+```
+azure vm create \
+  -g myResourceGroup \
+  -n myVM \
+  -l chinanorth \
+  -y Linux \
+  -f myVMnic \
+  -F myVNet \
+  -P 10.0.0.0/22 \
+  -j mySubnet \
+  -k 10.0.0.0/24 \
+  -Q canonical:ubuntuserver:14.04.2-LTS:latest \
+  -M ~/.ssh/id_rsa.pub \
+  -u myAdminUser \
+  -C cloud-init.txt
+```
 
 ## 详细演练
 ### 介绍
@@ -99,136 +105,160 @@ Microsoft 正在与合作伙伴合作，将 cloud-init 包含在用户向 Azure 
 
 创建要在其中启动 VM 的资源组。
 
-    azure group create myResourceGroup chinanorth
+```
+azure group create myResourceGroup chinanorth
+```
 
 使用 cloud-init 创建要在启动过程中进行配置的 Linux VM。
 
-    azure vm create \
-      --resource-group myResourceGroup \
-      --name myVM \
-      --location chinanorth \
-      --os-type Linux \
-      --nic-name myVMnic \
-      --vnet-name myVNet \
-      --vnet-address-prefix 10.0.0.0/22 \
-      --vnet-subnet-name mySubnet \
-      --vnet-subnet-address-prefix 10.0.0.0/24 \
-      --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
-      --ssh-publickey-file ~/.ssh/id_rsa.pub \
-      --admin-username myAdminUser \
-      --custom-data cloud-init.txt
+```
+azure vm create \
+  --resource-group myResourceGroup \
+  --name myVM \
+  --location chinanorth \
+  --os-type Linux \
+  --nic-name myVMnic \
+  --vnet-name myVNet \
+  --vnet-address-prefix 10.0.0.0/22 \
+  --vnet-subnet-name mySubnet \
+  --vnet-subnet-address-prefix 10.0.0.0/24 \
+  --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
+  --ssh-publickey-file ~/.ssh/id_rsa.pub \
+  --admin-username myAdminUser \
+  --custom-data cloud-init.txt
+```
 
 ## 创建 cloud-init 脚本以设置 Linux VM 的主机名
 对任何 Linux VM 而言，其中一个最简单且最重要的设置就是主机名。使用 cloud-init 和此脚本就可以轻松设置此项。
 
 ### 名为 `cloud_config_hostname.txt` 的示例 cloud-init 脚本。
 
-    #cloud-config
-    hostname: myservername
+```
+#cloud-config
+hostname: myservername
+```
 
 初始启动 VM 期间，此 cloud-init 脚本将主机名设置为 `myservername`。
 
-    azure vm create \
-      --resource-group myResourceGroup \
-      --name myVM \
-      --location chinanorth \
-      --os-type Linux \
-      --nic-name myVMnic \
-      --vnet-name myVNet \
-      --vnet-address-prefix 10.0.0.0/22 \
-      --vnet-subnet-name mySubNet \
-      --vnet-subnet-address-prefix 10.0.0.0/24 \
-      --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
-      --ssh-publickey-file ~/.ssh/id_rsa.pub \
-      --admin-username myAdminUser \
-      --custom-data cloud_config_hostname.txt
+```
+azure vm create \
+  --resource-group myResourceGroup \
+  --name myVM \
+  --location chinanorth \
+  --os-type Linux \
+  --nic-name myVMnic \
+  --vnet-name myVNet \
+  --vnet-address-prefix 10.0.0.0/22 \
+  --vnet-subnet-name mySubNet \
+  --vnet-subnet-address-prefix 10.0.0.0/24 \
+  --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
+  --ssh-publickey-file ~/.ssh/id_rsa.pub \
+  --admin-username myAdminUser \
+  --custom-data cloud_config_hostname.txt
+```
 
 登录并验证新 VM 的主机名。
 
-    ssh myVM
-    hostname
-    myservername
+```
+ssh myVM
+hostname
+myservername
+```
 
 ## 创建 cloud-init 脚本以更新 Linux
 为了安全，用户希望 Ubuntu VM 在首次启动时更新。根据所用的 Linux 分发，我们可以使用 cloud-init 和以下脚本执行此操作。
 
 ### 适用于 Debian 系列的示例 cloud-init 脚本 `cloud_config_apt_upgrade.txt`
 
-    #cloud-config
-    apt_upgrade: true
+```
+#cloud-config
+apt_upgrade: true
+```
 
 Linux 启动后，所有已安装的包将通过 `apt-get` 进行更新。
 
-    azure vm create \
-      --resource-group myResourceGroup \
-      --name myVM \
-      --location chinanorth \
-      --os-type Linux \
-      --nic-name myVMnic \
-      --vnet-name myVNet \
-      --vnet-address-prefix 10.0.0.0/22 \
-      --vnet-subnet-name mySubNet \
-      --vnet-subnet-address-prefix 10.0.0.0/24 \
-      --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
-      --ssh-publickey-file ~/.ssh/id_rsa.pub \
-      --admin-username myAdminUser \
-      --custom-data cloud_config_apt_upgrade.txt
+```
+azure vm create \
+  --resource-group myResourceGroup \
+  --name myVM \
+  --location chinanorth \
+  --os-type Linux \
+  --nic-name myVMnic \
+  --vnet-name myVNet \
+  --vnet-address-prefix 10.0.0.0/22 \
+  --vnet-subnet-name mySubNet \
+  --vnet-subnet-address-prefix 10.0.0.0/24 \
+  --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
+  --ssh-publickey-file ~/.ssh/id_rsa.pub \
+  --admin-username myAdminUser \
+  --custom-data cloud_config_apt_upgrade.txt
+```
 
 登录并验证所有包是否都已更新。
 
-    ssh myUbuntuVM
-    sudo apt-get upgrade
-    Reading package lists... Done
-    Building dependency tree
-    Reading state information... Done
-    Calculating upgrade... Done
-    The following packages have been kept back:
-      linux-generic linux-headers-generic linux-image-generic
-    0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+```
+ssh myUbuntuVM
+sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following packages have been kept back:
+  linux-generic linux-headers-generic linux-image-generic
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+```
 
 ## 创建 cloud-init 脚本以将用户添加到 Linux
 任何新 Linux VM 的首要任务之一，就是为自己添加用户或避免使用 `root`。对于安全性和易用性来说，SSH 密钥是最佳做法，可以使用此 cloud-init 脚本将它们添加到 `~/.ssh/authorized_keys` 文件。
 
 ### 适用于 Debian 系列的示例 cloud-init 脚本 `cloud_config_add_users.txt`
 
-    #cloud-config
-    users:
-      - name: myCloudInitAddedAdminUser
-        groups: sudo
-        shell: /bin/bash
-        sudo: ['ALL=(ALL) NOPASSWD:ALL']
-        ssh-authorized-keys:
-          - ssh-rsa AAAAB3<snip>==myAdminUser@myUbuntuVM
+```
+#cloud-config
+users:
+  - name: myCloudInitAddedAdminUser
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3<snip>==myAdminUser@myUbuntuVM
+```
 
 Linux 启动后，所有列出的用户都已创建并添加到 sudo 组。
 
-    azure vm create \
-      --resource-group myResourceGroup \
-      --name myVM \
-      --location chinanorth \
-      --os-type Linux \
-      --nic-name myVMnic \
-      --vnet-name myVNet \
-      --vnet-address-prefix 10.0.0.0/22 \
-      --vnet-subnet-name mySubNet \
-      --vnet-subnet-address-prefix 10.0.0.0/24 \
-      --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
-      --ssh-publickey-file ~/.ssh/id_rsa.pub \
-      --admin-username myAdminUser \
-      --custom-data cloud_config_add_users.txt
+```
+azure vm create \
+  --resource-group myResourceGroup \
+  --name myVM \
+  --location chinanorth \
+  --os-type Linux \
+  --nic-name myVMnic \
+  --vnet-name myVNet \
+  --vnet-address-prefix 10.0.0.0/22 \
+  --vnet-subnet-name mySubNet \
+  --vnet-subnet-address-prefix 10.0.0.0/24 \
+  --image-urn canonical:ubuntuserver:14.04.2-LTS:latest \
+  --ssh-publickey-file ~/.ssh/id_rsa.pub \
+  --admin-username myAdminUser \
+  --custom-data cloud_config_add_users.txt
+```
 
 登录并验证新建的用户。
 
-    ssh myVM
-    cat /etc/group
+```
+ssh myVM
+cat /etc/group
+```
 
 输出
 
-    root:x:0:
-    <snip />
-    sudo:x:27:myCloudInitAddedAdminUser
-    <snip />
-    myCloudInitAddedAdminUser:x:1000:
+```
+root:x:0:
+<snip />
+sudo:x:27:myCloudInitAddedAdminUser
+<snip />
+myCloudInitAddedAdminUser:x:1000:
+```
 
 ## 后续步骤
 Cloud-init 正成为在 Linux VM 启动时对其进行修改的一种标准方法。Azure 还提供 VM 扩展，使用这些扩展可以在 LinuxVM 启动或运行时对其进行修改。例如，可以使用 Azure VMAccessExtension 在 VM 运行时重置 SSH 或用户信息。使用 cloud-init，需要重新启动才能重置密码。

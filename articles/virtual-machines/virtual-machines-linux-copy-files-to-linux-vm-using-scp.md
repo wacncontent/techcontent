@@ -33,11 +33,15 @@ ms.author: v-livech
 
 将文件向上复制到 Linux VM
 
-    scp file user@host:directory/targetfile
+```
+scp file user@host:directory/targetfile
+```
 
 从 Linux VM 向下复制文件
 
-    scp user@host:directory/file targetfile
+```
+scp user@host:directory/file targetfile
+```
 
 ## 详细演练
 
@@ -53,13 +57,17 @@ SCP 将 SSH 用于传输层。通过使用 SSH 进行传输，SSH 处理目标�
 
 在第一个示例中，我们将 Azure 凭据文件向上复制到用于部署自动化的 Linux VM。由于此文件包含包括机密在内的 Azure API 凭据，因此安全性很重要，SSH 提供的加密隧道用于保护文件的内容。
 
-    scp ~/.azure/credentials myserver:/home/ahmet/.azure/credentials
+```
+scp ~/.azure/credentials myserver:/home/ahmet/.azure/credentials
+```
 
 ## 通过 SCP 从 Linux VM 复制目录
 
 在此示例中，我们会将装满日志文件的目录从 Linux VM 向下复制到工作站。日志文件不一定包含敏感或机密数据，使用 SCP 可确保对日志文件的内容进行加密。使用 SCP 安全地传输文件是将日志目录和文件获取到工作站上同时确保安全的最简单方法。
 
-    scp -r myserver:/home/ahmet/logs/ /tmp/.
+```
+scp -r myserver:/home/ahmet/logs/ /tmp/.
+```
 
 `-r` cli 标志指示 SCP 从命令中列出目录的时点起以递归方式复制文件和目录。另请注意，命令行语法类似于 `cp` 复制命令。
 

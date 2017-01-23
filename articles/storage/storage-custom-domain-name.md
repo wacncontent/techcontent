@@ -22,7 +22,8 @@ ms.author: marsma
 ## 概述
 你可以配置自定义域以便访问 Azure 存储帐户中的 Blob 数据。Blob 存储的默认终结点是 `<storage-account-name>.blob.core.chinacloudapi.cn`。如果你将自定义域和子域（例如 **www.contoso.com**）映射到你的存储帐户的 Blob 终结点，则你的用户也可以使用该域访问你的存储帐户中的 Blob 数据。
 
->[!IMPORTANT] Azure 存储空间尚不支持对自定义域使用 HTTPS。我们已注意到客户对这项功能感兴趣，会在将来的版本中添加。
+>[!IMPORTANT]
+> Azure 存储空间尚不支持对自定义域使用 HTTPS。我们已注意到客户对这项功能感兴趣，会在将来的版本中添加。
 
 有两种方法可用于将你的自定义域指向你的存储帐户的 Blob 终结点。最简单方法是创建一个 CNAME 记录，将你的自定义域和子域映射到 Blob 终结点。CNAME 记录是一种 DNS 功能，用于将源域映射到目标域。在此情况下，源域是你的自定义域和子域 -- 请注意，始终需要子域。目标域是你的 Blob 服务终结点。
 
@@ -54,7 +55,7 @@ Blob|**默认 URL**：http://mystorageaccount.blob.core.chinacloudapi.cn/myconta
 7. 创建一个新的 CNAME 记录，并且提供子域别名，例如 **www** 或 **photos**。然后以 **mystorageaccount.blob.core.chinacloudapi.cn** 格式（其中，**mystorageaccount** 是你的存储帐户的名称）提供主机名，这是你的 Blob 服务终结点。在“管理自定义域”对话框的文本中为你提供了要使用的主机名。
 8. 在创建该 CNAME 记录后，返回到“管理自定义域”对话框，并且在“自定义域名”字段中输入你的自定义域（包括子域）的名称。例如，如果你的域是 **contoso.com** 并且你的子域是 **www**，则输入 **www.contoso.com**；如果你的子域是 **photos**，则输入 **photos.contoso.com**。请注意，子域是必需的。
 9. 单击“注册”按钮以注册你的自定义域。
-   
+
 如果注册成功，你将看到消息**你的自定义域处于活动状态**。用户现在可以查看你的自定义域上的 Blob 数据，只要用户具有适当的权限。
 
 ##<a name="register-a-custom-domain-for-your-storage-account-using-the-intermediary-asverify-subdomain"></a> 使用中间 asverify 子域为你的存储帐户注册自定义域
@@ -79,7 +80,7 @@ Blob|**默认 URL**：http://mystorageaccount.blob.core.chinacloudapi.cn/myconta
 
 8.  在创建该 CNAME 记录后，返回到“管理自定义域”对话框，并且在“自定义域名”字段中输入你的自定义域的名称。例如，如果你的域是 **contoso.com** 并且你的子域是 **www**，则输入 **www.contoso.com**；如果你的子域是 **photos**，则输入 **photos.contoso.com**。请注意，子域是必需的。
 
-9.	单击“高级：使用 'asverify' 子域预先注册自定义域”复选框。
+9. 单击“高级：使用 'asverify' 子域预先注册自定义域”复选框。
 
 10. 单击“注册”按钮以预先注册你的自定义域。
 
@@ -94,11 +95,15 @@ Blob|**默认 URL**：http://mystorageaccount.blob.core.chinacloudapi.cn/myconta
 ## 验证该自定义域引用你的 Blob 服务终结点
 若要验证你的自定义域是否确实已映射到你的 Blob 服务终结点，请在你的存储帐户内的公共容器中创建一个 Blob。然后在 Web 浏览器中，使用以下格式的 URI 来访问该 Blob：
 
-    http://<*subdomain.customdomain*>/<*mycontainer*>/<*myblob*>
+```
+http://<*subdomain.customdomain*>/<*mycontainer*>/<*myblob*>
+```
 
 例如，你可以使用以下 URI 来通过映射到 **myforms** 容器中的 Blob 的自定义子域 **photos.contoso.com** 访问 Web 窗体：
 
-    http://photos.contoso.com/myforms/applicationform.htm
+```
+http://photos.contoso.com/myforms/applicationform.htm
+```
 
 ## 取消注册存储帐户的自定义域
 若要取消注册自定义域，请执行以下步骤：

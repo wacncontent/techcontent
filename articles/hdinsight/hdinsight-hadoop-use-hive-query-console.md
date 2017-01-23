@@ -24,7 +24,8 @@ ms.author: larryfr
 
 本文介绍如何在浏览器中使用 HDInsight 查询控制台在 HDInsight Hadoop 群集上运行 Hive 查询。
 
-> [!NOTE] 查询控制台只能在基于 Windows 的 HDInsight 群集上使用。
+> [!NOTE]
+> 查询控制台只能在基于 Windows 的 HDInsight 群集上使用。
 
 ## <a id="prereq"></a>先决条件
 
@@ -44,19 +45,22 @@ ms.author: larryfr
 
     将文本 `Select * from hivesampletable` 替换为以下 HiveQL 语句：
 
-        set hive.execution.engine=tez;
-        DROP TABLE log4jLogs;
-        CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
-        ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
-        STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
-        SELECT t4 AS sev, COUNT(*) AS count FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log' GROUP BY t4;
+    ```
+    set hive.execution.engine=tez;
+    DROP TABLE log4jLogs;
+    CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
+    STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
+    SELECT t4 AS sev, COUNT(*) AS count FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log' GROUP BY t4;
+    ```
 
     这些语句可执行以下操作：
 
     * **DROP TABLE**：删除表和数据文件（如果该表已存在）。
     * **CREATE EXTERNAL TABLE**：在 Hive 中创建新“外部”表。外部表仅在 Hive 中存储表定义；数据会保留在原始位置。
 
-    > [!NOTE] 如果希望以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据，则必须使用外部表。
+    > [!NOTE]
+    > 如果希望以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据，则必须使用外部表。
     > <p>删除外部表**不会**删除数据，只会删除表定义。
 
     * **ROW FORMAT**：告知 Hive 如何设置数据的格式。在此情况下，每个日志中的字段以空格分隔。

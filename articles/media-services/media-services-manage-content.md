@@ -66,7 +66,7 @@ ms.author: juliako
 1. 选择要编制索引的文件。
 
     如果此文件类型支持索引，则“内容”页底部将启用“处理”按钮。
-    
+
 1. 按“处理”按钮。
 2. 在“处理”对话框中，选择“Azure 媒体索引器”处理器。
 3. 然后，在“处理”对话框中，填写输入媒体文件的详细**标题**和**说明**信息。
@@ -151,23 +151,32 @@ ms.author: juliako
 
 SAS URL 采用以下格式：
 
-    {blob container name}/{asset name}/{file name}/{SAS signature}
+```
+{blob container name}/{asset name}/{file name}/{SAS signature}
+```
 
 流式处理 URL 采用以下格式，可用于播放平滑流资产：
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
 
 若要生成 HLS 流式处理 URL，请将 (format=m3u8-aapl) 附加到 URL。
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
 
 若要生成 MPEG DASH 流式处理 URL，请将 (format=mpd-time-csf) 追加到 URL。
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
 
 附带到期日期的定位符。使用门户发布资产时，会创建到期日期在 100 年以后的定位符。
 
->[!NOTE] 如果在 2015 年 3 月之前使用了门户创建定位符，则会创建到期日期在两年以后的定位符。
+>[!NOTE]
+> 如果在 2015 年 3 月之前使用了门户创建定位符，则会创建到期日期在两年以后的定位符。
 
 若要更新定位符的到期日期，请使用 [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator) 或 [.NET] (https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.ilocator.update(v=azure.10).aspx) API。请注意，更新 SAS 定位符的到期日期时，URL 会发生变化。
 
@@ -177,7 +186,7 @@ SAS URL 采用以下格式：
 
 1. 选择资源。
 2. 然后单击“发布”按钮。
-    
+
  ![PublishedContent][publishedcontent]  
 
 ## 如何：从门户播放内容
@@ -185,7 +194,7 @@ SAS URL 采用以下格式：
 **Azure 经典管理门户**提供了可用于测试视频的内容播放器。
 
 单击所需的视频，然后单击门户底部的“播放”按钮。
- 
+
 请注意以下事项：
 
 - 确保视频已发布。

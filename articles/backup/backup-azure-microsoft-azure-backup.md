@@ -26,11 +26,13 @@ ms.author: jimpark;trinadhk;pullabhk;markgal
 
 本文介绍如何准备环境，以使用 Azure 备份服务器来备份工作负荷。
 
-> [!NOTE] Azure 有两种用于创建和使用资源的部署模型：[Resource Manager 和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文提供有关还原使用 Resource Manager 模型部署的 VM 的信息和过程。
+> [!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[Resource Manager 和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文提供有关还原使用 Resource Manager 模型部署的 VM 的信息和过程。
 
 使用 Azure 备份服务器，可以从单个控制台保护应用程序工作负荷，例如 Hyper-V VM、Microsoft SQL Server、SharePoint Server、Microsoft Exchange 和 Windows 客户端。
 
->[!WARNING] Azure 备份服务器继承了 Data Protection Manager (DPM) 的工作负荷备份功能。本文提供了其中一些功能的 DPM 文档链接。不过，Azure 备份服务器不能在磁带上提供保护，也没有与 System Center 集成。
+>[!WARNING]
+> Azure 备份服务器继承了 Data Protection Manager (DPM) 的工作负荷备份功能。本文提供了其中一些功能的 DPM 文档链接。不过，Azure 备份服务器不能在磁带上提供保护，也没有与 System Center 集成。
 
 ## 1\.Windows Server 计算机
 
@@ -41,7 +43,8 @@ ms.author: jimpark;trinadhk;pullabhk;markgal
 | Azure | Azure IaaS 虚拟机<br><br>A2 标准：双核，3.5GB RAM | 可以先从 Windows Server 2012 R2 Datacenter 的简单库映像着手。[使用 Azure 备份服务器 (DPM) 保护 IaaS 工作负荷](https://technet.microsoft.com/zh-cn/library/jj852163.aspx)有许多细节需要注意。部署计算机之前，请务必阅读相关文章。 |
 | 本地 | Hyper-V VM、<br>VMWare VM<br> 或物理主机<br><br>双核，4GB RAM | 可以使用 Windows Server 重复数据删除来删除 DPM 存储中的重复数据。了解有关在 Hyper-V VM 中部署时，[DPM 和重复数据删除](https://technet.microsoft.com/zh-cn/library/dn891438.aspx)如何配合工作的详细信息。 |
 
-> [!NOTE] 建议在包含 Windows Server 2012 R2 Datacenter 的计算机上安装 Azure 备份服务器。最新版本的 Windows 操作系统会自动安装许多必备组件。
+> [!NOTE]
+> 建议在包含 Windows Server 2012 R2 Datacenter 的计算机上安装 Azure 备份服务器。最新版本的 Windows 操作系统会自动安装许多必备组件。
 
 如果你打算在将来某个时间将此服务器加入域中，建议在安装 Azure 备份服务器之前完成域加入活动。部署之后，不支持将现有 Azure 备份服务器计算机移到新域中。
 
@@ -49,33 +52,45 @@ ms.author: jimpark;trinadhk;pullabhk;markgal
 
 1. 首先使用以下命令行登录你的 Azure 订阅。
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 
 1. 如果你是首次使用 Azure 备份，则必须使用 **[Register-AzureRMResourceProvider](https://msdn.microsoft.com/zh-cn/library/mt603685.aspx)** cmdlet 注册用于订阅的 Azure 恢复服务提供程序。
 
-        Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.RecoveryServices"
+    ```
+    Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.RecoveryServices"
+    ```
 
 2. 恢复服务保管库是一种 Resource Manager 资源，因此需要将它放在资源组中。你可以使用现有的资源组，也可以使用 **[New-AzureRmResourceGroup](https://msdn.microsoft.com/zh-cn/library/mt603739.aspx)** cmdlet 创建新的资源组。创建新的资源组时，请指定资源组的名称和位置。
 
-        New-AzureRmResourceGroup –Name "test-rg" –Location "China North"
+    ```
+    New-AzureRmResourceGroup –Name "test-rg" –Location "China North"
+    ```
 
 3. 使用 **[New-AzureRmRecoveryServicesVault](https://msdn.microsoft.com/zh-cn/library/mt643910.aspx)** cmdlet 创建新的保管库。确保为保管库指定的位置与用于资源组的位置是相同的。
 
-        New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "West US"
+    ```
+    New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "West US"
+    ```
 
 4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
-        $vault1 = Get-AzureRmRecoveryServicesVault –Name "testVault"
-        Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
+    ```
+    $vault1 = Get-AzureRmRecoveryServicesVault –Name "testVault"
+    Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
+    ```
 
 ## 3\.软件包
 
 ### 下载软件包
 1. 使用以下 PowerShell 脚本下载保管库凭据。
 
-        $vault1 = Get-AzureRmRecoveryServicesVault –Name “testVault”
-        $credspath = "C:\downloads"
-        $credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $vault1 -Path  $credspath
+    ```
+    $vault1 = Get-AzureRmRecoveryServicesVault –Name “testVault”
+    $credspath = "C:\downloads"
+    $credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $vault1 -Path  $credspath
+    ```
 
 1. 点击[这里](https://go.microsoft.com/fwLink/?LinkID=626082&clcid=0x0409)下载软件包。
 
@@ -89,7 +104,8 @@ ms.author: jimpark;trinadhk;pullabhk;markgal
 
 下载所有文件之后，单击“MicrosoftAzureBackupInstaller.exe”。这将启动“Microsoft Azure 备份安装向导”，并将安装程序文件解压缩到指定的位置。继续运行向导，然后单击“解压缩”按钮开始解压缩过程。
 
-> [!WARNING] 至少需要有 4GB 的可用空间才能解压缩安装程序文件。
+> [!WARNING]
+> 至少需要有 4GB 的可用空间才能解压缩安装程序文件。
 
 ![Microsoft Azure 备份安装向导](./media/backup-azure-microsoft-azure-backup/extract/03.png)
 
@@ -111,7 +127,8 @@ ms.author: jimpark;trinadhk;pullabhk;markgal
 
     如果发生故障并且系统建议重新启动计算机，请按说明操作，然后单击“再次检查”。
 
-    > [!NOTE] Azure 备份服务器不能与远程 SQL Server 实例配合使用。Azure 备份服务器使用的实例需在本地。
+    > [!NOTE]
+    > Azure 备份服务器不能与远程 SQL Server 实例配合使用。Azure 备份服务器使用的实例需在本地。
 
 4. 提供 Microsoft Azure 备份服务器文件的安装位置，然后单击“下一步”。
 
@@ -125,7 +142,8 @@ ms.author: jimpark;trinadhk;pullabhk;markgal
 
 6. 选择是否要使用 Microsoft 更新来检查更新，然后单击“下一步”。
 
-    >[!NOTE] 我们建议让 Windows 更新重定向到 Microsoft 更新，此网站为 Windows 和 Microsoft Azure 备份服务器等其他产品提供了安全更新与重要更新。
+    >[!NOTE]
+    > 我们建议让 Windows 更新重定向到 Microsoft 更新，此网站为 Windows 和 Microsoft Azure 备份服务器等其他产品提供了安全更新与重要更新。
 
     ![Microsoft Azure 备份先决条件 2](./media/backup-azure-microsoft-azure-backup/update-opt-screen2.png)
 
@@ -149,7 +167,8 @@ ms.author: jimpark;trinadhk;pullabhk;markgal
 
 第一个备份副本保存在已附加到 Azure 备份服务器计算机的存储中。有关添加磁盘的详细信息，请参阅[配置存储池和磁盘存储](https://technet.microsoft.com/zh-cn/library/hh758075.aspx)。
 
-> [!NOTE] 即使你打算将数据发送到 Azure，也需要添加备份存储。在当前的 Azure 备份服务器体系结构中，Azure 备份保管库将保存数据的第二个副本，而本地存储将保存第一个（必需的）备份副本。
+> [!NOTE]
+> 即使你打算将数据发送到 Azure，也需要添加备份存储。在当前的 Azure 备份服务器体系结构中，Azure 备份保管库将保存数据的第二个副本，而本地存储将保存第一个（必需的）备份副本。
 
 ## 4\.网络连接
 

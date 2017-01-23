@@ -43,97 +43,112 @@ ms.author: dobett
 
 2. 在 remote\_monitoring.js 文件中，你可以查看现有温度、湿度和外部温度遥测的基本数据值。如下添加 **rpm** 的基本数据值：
 
-        // Sensors data
-        var temperature = 50;
-        var humidity = 50;
-        var externalTemperature = 55;
-        var rpm = 200;
+    ```
+    // Sensors data
+    var temperature = 50;
+    var humidity = 50;
+    var externalTemperature = 55;
+    var rpm = 200;
+    ```
 
 3. Node.js 模拟设备使用 remote\_monitoring.js 文件中的 **generateRandomIncrement** 函数，向基本数据值添加随机增量。在现有随机化后面添加一行代码，以将 **rpm** 的值随机化，如下所示：
 
-        temperature += generateRandomIncrement();
-        externalTemperature += generateRandomIncrement();
-        humidity += generateRandomIncrement();
-        rpm += generateRandomIncrement();
+    ```
+    temperature += generateRandomIncrement();
+    externalTemperature += generateRandomIncrement();
+    humidity += generateRandomIncrement();
+    rpm += generateRandomIncrement();
+    ```
 
 4. 将新的 rpm 值添加到设备发送给 IoT 中心的 JSON 有效负载：
 
-        var data = JSON.stringify({
-          'DeviceID': deviceId,
-          'Temperature': temperature,
-          'Humidity': humidity,
-          'ExternalTemperature': externalTemperature,
-          'RPM': rpm
-        });
+    ```
+    var data = JSON.stringify({
+      'DeviceID': deviceId,
+      'Temperature': temperature,
+      'Humidity': humidity,
+      'ExternalTemperature': externalTemperature,
+      'RPM': rpm
+    });
+    ```
 
 5. 使用以下命令运行 Node.js 模拟设备：
 
-        node remote_monitoring.js
+    ```
+    node remote_monitoring.js
+    ```
 
 6. 观察仪表板中图表上显示的新 RPM 遥测类型：
 
     ![将 RPM 添加到仪表板][image3]  
 
-> [!NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
+> [!NOTE]
+> 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
 
 ## 自定义仪表板显示内容
 
 **Device-Info** 消息可以包含设备可发送给 IoT 中心的遥测数据的相关元数据。此元数据可指定设备发送的遥测类型。修改 remote\_monitoring.js 文件中的 **deviceMetaData** 值，在 **Commands** 定义后附加 **Telemetry** 定义。以下代码片段显示 **Commands** 定义（务必在 **Commands** 定义后添加 `,`）：
 
-        'Commands': [{
-          'Name': 'SetTemperature',
-          'Parameters': [{
-            'Name': 'Temperature',
-            'Type': 'double'
-          }]
-        },
-        {
-          'Name': 'SetHumidity',
-          'Parameters': [{
-            'Name': 'Humidity',
-            'Type': 'double'
-          }]
-        }],
-        'Telemetry': [{
-          'Name': 'Temperature',
-          'Type': 'double'
-        },
-        {
-          'Name': 'Humidity',
-          'Type': 'double'
-        },
-        {
-          'Name': 'ExternalTemperature',
-          'Type': 'double'
-        }]
+```
+    'Commands': [{
+      'Name': 'SetTemperature',
+      'Parameters': [{
+        'Name': 'Temperature',
+        'Type': 'double'
+      }]
+    },
+    {
+      'Name': 'SetHumidity',
+      'Parameters': [{
+        'Name': 'Humidity',
+        'Type': 'double'
+      }]
+    }],
+    'Telemetry': [{
+      'Name': 'Temperature',
+      'Type': 'double'
+    },
+    {
+      'Name': 'Humidity',
+      'Type': 'double'
+    },
+    {
+      'Name': 'ExternalTemperature',
+      'Type': 'double'
+    }]
+```
 
-> [!NOTE] 远程监视解决方案会比较元数据定义和遥测流中的数据并区分大小写。
+> [!NOTE]
+> 远程监视解决方案会比较元数据定义和遥测流中的数据并区分大小写。
 
 按以上代码片段中所述添加 **Telemetry** 定义不会影响仪表板的行为。但是，元数据也可以包含 **DisplayName** 属性来自定义仪表板中的显示内容。如以下片段中所述更新 **Telemetry** 元数据定义：
 
-        'Telemetry': [
-        {
-          'Name': 'Temperature',
-          'Type': 'double',
-          'DisplayName': 'Temperature (C*)'
-        },
-        {
-          'Name': 'Humidity',
-          'Type': 'double',
-          'DisplayName': 'Humidity (relative)'
-        },
-        {
-          'Name': 'ExternalTemperature',
-          'Type': 'double',
-          'DisplayName': 'Outdoor Temperature (C*)'
-        }
-        ]
+```
+    'Telemetry': [
+    {
+      'Name': 'Temperature',
+      'Type': 'double',
+      'DisplayName': 'Temperature (C*)'
+    },
+    {
+      'Name': 'Humidity',
+      'Type': 'double',
+      'DisplayName': 'Humidity (relative)'
+    },
+    {
+      'Name': 'ExternalTemperature',
+      'Type': 'double',
+      'DisplayName': 'Outdoor Temperature (C*)'
+    }
+    ]
+```
 
 以下屏幕截图演示了此项更改如何修改仪表板上的图表图例：
 
 ![自定义图表图例][image4]  
 
-> [!NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
+> [!NOTE]
+> 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
 
 ## 筛选遥测类型
 
@@ -141,23 +156,25 @@ ms.author: dobett
 
 若要使图表只显示温度和湿度遥测数据，请省略 **Device-Info** **Telemetry** 元数据中的 **ExternalTemperature**，如下所示：
 
-        'Telemetry': [
-        {
-          'Name': 'Temperature',
-          'Type': 'double',
-          'DisplayName': 'Temperature (C*)'
-        },
-        {
-          'Name': 'Humidity',
-          'Type': 'double',
-          'DisplayName': 'Humidity (relative)'
-        },
-        //{
-        //  'Name': 'ExternalTemperature',
-        //  'Type': 'double',
-        //  'DisplayName': 'Outdoor Temperature (C*)'
-        //}
-        ]
+```
+    'Telemetry': [
+    {
+      'Name': 'Temperature',
+      'Type': 'double',
+      'DisplayName': 'Temperature (C*)'
+    },
+    {
+      'Name': 'Humidity',
+      'Type': 'double',
+      'DisplayName': 'Humidity (relative)'
+    },
+    //{
+    //  'Name': 'ExternalTemperature',
+    //  'Type': 'double',
+    //  'DisplayName': 'Outdoor Temperature (C*)'
+    //}
+    ]
+```
 
 **室外温度**不再显示在图表上：
 
@@ -165,7 +182,8 @@ ms.author: dobett
 
 此更改仅影响图表的显示效果。仍会存储 **ExternalTemperature** 数据值，并可用于任何后端处理。
 
-> [!NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
+> [!NOTE]
+> 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
 
 ## 处理错误
 

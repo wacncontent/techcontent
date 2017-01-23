@@ -29,8 +29,10 @@ Azure CLI 可通过 npm 包、提供发行版的程序包或 Docker 容器跨平
 - [Create a Linux VM from the Azure CLI for dev and test](./virtual-machines-linux-quick-create-cli.md)（从 Azure CLI 创建用于开发和测试的 Linux VM）
     - 以下示例使用名为 `azure_id_rsa.pub` 的公钥创建 CoreOS VM：
 
-            azure vm quick-create -ssh-publickey-file ~/.ssh/azure_id_rsa.pub \
-                --image-urn CoreOS
+        ```
+        azure vm quick-create -ssh-publickey-file ~/.ssh/azure_id_rsa.pub \
+            --image-urn CoreOS
+        ```
 
 - [使用 Azure 模板创建受保护的 Linux VM](./virtual-machines-linux-create-ssh-secured-vm-from-template.md)
     - 以下示例使用 GitHub 上存储的模板创建 VM：
@@ -62,19 +64,27 @@ Azure CLI 可通过 npm 包、提供发行版的程序包或 Docker 容器跨平
 
 列出可用的发布者，如下所示：
 
-    azure vm image list-publishers --location ChinaNorth
+```
+azure vm image list-publishers --location ChinaNorth
+```
 
 列出特定发布者的可用产品，如下所示：
 
-    azure vm image list-offers --location ChinaNorth --publisher Canonical
+```
+azure vm image list-offers --location ChinaNorth --publisher Canonical
+```
 
 列出给定产品的可用 SKU （分发版），如下所示：
 
-    azure vm image list-skus --location ChinaNorth --publisher Canonical --offer UbuntuServer
+```
+azure vm image list-skus --location ChinaNorth --publisher Canonical --offer UbuntuServer
+```
 
 列出给定版本的所有可用映像，如下所示：
 
-    azure vm image list --location ChinaNorth --publisher Canonical --offer UbuntuServer --sku 16.04.0-LTS
+```
+azure vm image list --location ChinaNorth --publisher Canonical --offer UbuntuServer --sku 16.04.0-LTS
+```
 
 有关浏览和使用可用映像的更多示例，请参阅[使用 Azure CLI 导航并选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
 

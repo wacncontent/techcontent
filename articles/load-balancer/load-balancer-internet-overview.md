@@ -1,4 +1,3 @@
-
 ---
 title: 面向 Internet 的负载均衡器概述 | Azure 
 description: 面向 Internet 的负载均衡器及其功能的概述。使用虚拟机和云服务的 Azure 的负载均衡器的工作原理。

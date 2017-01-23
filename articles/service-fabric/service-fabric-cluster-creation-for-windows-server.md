@@ -23,7 +23,8 @@ ms.author: dkshir;chackdan
 
 本文逐步讲解如何使用 Service Fabric 的独立包在本地完成创建群集的步骤，不过，也可以针对其他任何环境（例如其他云提供商）轻松调整这些步骤。
 
->[!NOTE] 此独立 Windows Server 包中的功能目前为预览版，不支持用于商用目的。若要查看预览版功能的列表，请参阅“此包中的预览版功能”。 也可以立即[下载一份 EULA](http://go.microsoft.com/fwlink/?LinkID=733084)。
+>[!NOTE]
+> 此独立 Windows Server 包中的功能目前为预览版，不支持用于商用目的。若要查看预览版功能的列表，请参阅“此包中的预览版功能”。 也可以立即[下载一份 EULA](http://go.microsoft.com/fwlink/?LinkID=733084)。
 
 <a id="downloadpackage"></a>
 ## 下载 Service Fabric 独立包
@@ -119,36 +120,41 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
-    PS C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer> .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json
-    Trace folder already exists. Traces will be written to existing trace folder: C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer\DeploymentTraces
-    Running Best Practices Analyzer...
-    Best Practices Analyzer completed successfully.
+```
+PS C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer> .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json
+Trace folder already exists. Traces will be written to existing trace folder: C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer\DeploymentTraces
+Running Best Practices Analyzer...
+Best Practices Analyzer completed successfully.
 
-    LocalAdminPrivilege        : True
-    IsJsonValid                : True
-    IsCabValid                 : True
-    RequiredPortsOpen          : True
-    RemoteRegistryAvailable    : True
-    FirewallAvailable          : True
-    RpcCheckPassed             : True
-    NoConflictingInstallations : True
-    FabricInstallable          : True
-    Passed                     : True
+LocalAdminPrivilege        : True
+IsJsonValid                : True
+IsCabValid                 : True
+RequiredPortsOpen          : True
+RemoteRegistryAvailable    : True
+FirewallAvailable          : True
+RpcCheckPassed             : True
+NoConflictingInstallations : True
+FabricInstallable          : True
+Passed                     : True
+```
 
 ### 步骤 3：运行创建群集脚本
 在 JSON 文档中修改群集配置并在其中添加所有节点信息后，请运行包文件夹中用于创建群集的 *CreateServiceFabricCluster.ps1* PowerShell 脚本，并传入 JSON 配置文件的路径。完成此操作后，请接受 EULA。
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
-    #Create an unsecured local development cluster
+```
+#Create an unsecured local development cluster
 
-    .\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json -AcceptEULA
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json -AcceptEULA
 
-    #Create an unsecured multi-machine cluster
+#Create an unsecured multi-machine cluster
 
-    .\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json -AcceptEULA
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json -AcceptEULA
+```
 
->[!NOTE] 运行 CreateServiceFabricCluster Powershell 的 VM/计算机会在本地提供部署日志。这些日志位于运行 PowerShell 命令的文件夹下名为 DeploymentTraces 的子文件夹中。若要查看 Service Fabric 是否已正确部署到某个计算机，可在 C:\\ProgramData 目录中查找已安装的文件，并且可在任务管理器中查看正在运行的 FabricHost.exe 和 Fabric.exe 进程。
+>[!NOTE]
+> 运行 CreateServiceFabricCluster Powershell 的 VM/计算机会在本地提供部署日志。这些日志位于运行 PowerShell 命令的文件夹下名为 DeploymentTraces 的子文件夹中。若要查看 Service Fabric 是否已正确部署到某个计算机，可在 C:\\ProgramData 目录中查找已安装的文件，并且可在任务管理器中查看正在运行的 FabricHost.exe 和 Fabric.exe 进程。
 
 ### 步骤 4：连接到群集
 
@@ -156,9 +162,11 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 
 若要连接到非安全群集，请运行以下 PowerShell 命令：
 
-    Connect-ServiceFabricCluster -ConnectionEndpoint <*IPAddressofaMachine*>:<Client connection end point port>
+```
+Connect-ServiceFabricCluster -ConnectionEndpoint <*IPAddressofaMachine*>:<Client connection end point port>
 
-    Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000
+Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000
+```
 
 ### 步骤 5：打开 Service Fabric Explorer
 
@@ -174,7 +182,9 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
-    .\RemoveServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json   
+```
+.\RemoveServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json   
+```
 
 <a id="telemetry"></a>
 ## 收集的遥测数据以及如何选择禁用遥测
@@ -213,7 +223,8 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 
 无。
 
->[!NOTE] 使用新的[适用于 Windows Server 的独立群集正式版（版本 5.3.204.x）](https://azure.microsoft.com/blog/azure-service-fabric-for-windows-server-now-ga/)，可以手动或自动将群集升级到将来的版本。由于预览版不提供此功能，因此需要使用正式版创建群集，然后从预览版群集中迁移数据和应用程序。请持续关注有关此功能的详细信息。
+>[!NOTE]
+> 使用新的[适用于 Windows Server 的独立群集正式版（版本 5.3.204.x）](https://azure.microsoft.com/blog/azure-service-fabric-for-windows-server-now-ga/)，可以手动或自动将群集升级到将来的版本。由于预览版不提供此功能，因此需要使用正式版创建群集，然后从预览版群集中迁移数据和应用程序。请持续关注有关此功能的详细信息。
 
 ## 后续步骤
 - [Windows 独立群集的配置设置](./service-fabric-cluster-manifest.md)

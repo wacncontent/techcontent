@@ -94,7 +94,7 @@ Following are common scenarios and corresponding solutions.
 MySQL on Azure now provides offsite recovery features to help you maintain service continuity when regional disasters occur. Examples of a regional disaster might be the loss of power or a fire in a large area of computer rooms, an earthquake, or other unanticipated events.
 
 ### There are currently two solution types for disaster recovery: ###
- 
+
 * When regional outage, MySQL PaaS team will analyze the root cause of the outage, if the outage duration will be longer than RPO, MySQL PaaS level failover will be implemented (in a shorter time than the RPO). If it is not possible to perform a quick restore, MySQL on Azure will perform an offsite database restore on all affected instances. The point in time to be restored will be the closest possible restore point to the time at which the fault occurred.
 
 * Self-service disaster recovery: If you are using a production environment with higher requirements in terms of recovery times, you can use the PowerShell command line to manually restore the affected instances offsite when a disaster occurs.
@@ -104,7 +104,8 @@ When incidents happen, user can either rely on self-service by specifying the po
 
 ### Offsite recovery performance indicators: ###
 ERT<3 hours，RPO< 1 hour. <br>
->[!NOTE] ERT, RTO, and RPO are project indicators that are intended only for reference purposes. These indicators only appear in regional disasters and are not part of the MySQL database service’s service level agreement (SLA).
+>[!NOTE]
+> ERT, RTO, and RPO are project indicators that are intended only for reference purposes. These indicators only appear in regional disasters and are not part of the MySQL database service’s service level agreement (SLA).
 
 ### User self-service process: ###
 If a disaster occurs and you can use the Azure portal, you can use the offsite restore process in [backup and restore](./mysql-database-point-in-time-restore.md) to perform the operation. However, if regional disasters occur frequently, it will not be possible to obtain correct information on the instance in the Azure portal. In such a situation, we recommend that you perform an offsite restore operation on the instance by using PowerShell:

@@ -55,9 +55,11 @@ ms.author: magoedte
 ## 在 Runbook 中使用凭据
 可以使用 [Get-AutomationPSCredential](./automation-credentials.md) 活动检索 Runbook 中的凭据，然后将它与 [Add-AzureAccount](http://msdn.microsoft.com/zh-cn/library/azure/dn722528.aspx) 配合使用以连接到 Azure 订阅。如果该凭据是多个 Azure 订阅的管理员，则还应使用 [Select-AzureSubscription](http://msdn.microsoft.com/zh-cn/library/dn495203.aspx) 来指定正确的订阅。下面所示的 Windows PowerShell 通常出现在大多数 Azure 自动化 Runbook 的顶部。
 
-    $cred = Get-AutomationPSCredential -Name "myuseraccount.partner.onmschina.cn"
-    Add-AzureAccount -Environment AzureChinaCloud -Credential $cred
-    Select-AzureSubscription -SubscriptionName "My Subscription"
+```
+$cred = Get-AutomationPSCredential -Name "myuseraccount.partner.onmschina.cn"
+Add-AzureAccount -Environment AzureChinaCloud -Credential $cred
+Select-AzureSubscription -SubscriptionName "My Subscription"
+```
 
 应该在 Runbook 中任何[检查点](http://technet.microsoft.com/zh-cn/library/dn469257.aspx#bk_Checkpoints)的后面重复这些行。如果 Runbook 已挂起，然后在另一个工作线程上恢复，则它需要再次执行身份验证。
 

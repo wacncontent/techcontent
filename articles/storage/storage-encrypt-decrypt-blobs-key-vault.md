@@ -62,69 +62,80 @@ ms.author: lakasa;robinsh
 
 在 Package Manager Console 中添加必要的 Nuget 包。
 
-    Install-Package WindowsAzure.Storage
+```
+Install-Package WindowsAzure.Storage
 
-    // This is the latest stable release for ADAL.
-    Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -Version 2.16.204221202
+// This is the latest stable release for ADAL.
+Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -Version 2.16.204221202
 
-    Install-Package Microsoft.Azure.KeyVault
-    Install-Package Microsoft.Azure.KeyVault.Extensions
+Install-Package Microsoft.Azure.KeyVault
+Install-Package Microsoft.Azure.KeyVault.Extensions
+```
 
 将 AppSettings 添加到 App.Config。
 
-    <appSettings>
-        <add key="accountName" value="myaccount"/>
-        <add key="accountKey" value="theaccountkey"/>
-        <add key="clientId" value="theclientid"/>
-        <add key="clientSecret" value="theclientsecret"/>
-        <add key="container" value="stuff"/>
-    </appSettings>
+```
+<appSettings>
+    <add key="accountName" value="myaccount"/>
+    <add key="accountKey" value="theaccountkey"/>
+    <add key="clientId" value="theclientid"/>
+    <add key="clientSecret" value="theclientsecret"/>
+    <add key="container" value="stuff"/>
+</appSettings>
+```
 
 添加以下 `using` 语句并确保将对 System.Configuration 的引用添加到项目中。
 
-    using Microsoft.IdentityModel.Clients.ActiveDirectory;
-    using System.Configuration;
-    using Microsoft.WindowsAzure.Storage.Auth;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
-    using Microsoft.Azure.KeyVault;
-    using System.Threading;		
-    using System.IO;
+```
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using System.Configuration;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.Azure.KeyVault;
+using System.Threading;		
+using System.IO;
+```
 
 ## 添加方法以便为控制台应用程序获取令牌
 以下方法由密钥保管库类使用，这些类需要进行身份验证才能访问密钥保管库。
 
-    private async static Task<string> GetToken(string authority, string resource, string scope)
-    {
-        var authContext = new AuthenticationContext(authority);
-        ClientCredential clientCred = new ClientCredential(
-            ConfigurationManager.AppSettings["clientId"],
-            ConfigurationManager.AppSettings["clientSecret"]);
-        AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
+```
+private async static Task<string> GetToken(string authority, string resource, string scope)
+{
+    var authContext = new AuthenticationContext(authority);
+    ClientCredential clientCred = new ClientCredential(
+        ConfigurationManager.AppSettings["clientId"],
+        ConfigurationManager.AppSettings["clientSecret"]);
+    AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
 
-        if (result == null)
-            throw new InvalidOperationException("Failed to obtain the JWT token");
+    if (result == null)
+        throw new InvalidOperationException("Failed to obtain the JWT token");
 
-        return result.AccessToken;
-    }
+    return result.AccessToken;
+}
+```
 
 ## 在程序中访问存储和密钥保管库
 在 Main 函数中，添加以下代码。
 
-    // This is standard code to interact with Blob storage.
-    StorageCredentials creds = new StorageCredentials(
-        ConfigurationManager.AppSettings["accountName"],
-           ConfigurationManager.AppSettings["accountKey"]);
-    CloudStorageAccount account = new CloudStorageAccount(creds, useHttps: true);
-    CloudBlobClient client = account.CreateCloudBlobClient();
-    CloudBlobContainer contain = client.GetContainerReference(ConfigurationManager.AppSettings["container"]);
-    contain.CreateIfNotExists();
+```
+// This is standard code to interact with Blob storage.
+StorageCredentials creds = new StorageCredentials(
+    ConfigurationManager.AppSettings["accountName"],
+       ConfigurationManager.AppSettings["accountKey"]);
+CloudStorageAccount account = new CloudStorageAccount(creds, useHttps: true);
+CloudBlobClient client = account.CreateCloudBlobClient();
+CloudBlobContainer contain = client.GetContainerReference(ConfigurationManager.AppSettings["container"]);
+contain.CreateIfNotExists();
 
-    // The Resolver object is used to interact with Key Vault for Azure Storage.
-    // This is where the GetToken method from above is used.
-    KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(GetToken);
+// The Resolver object is used to interact with Key Vault for Azure Storage.
+// This is where the GetToken method from above is used.
+KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(GetToken);
+```
 
-> [!NOTE] 密钥保管库对象模型
+> [!NOTE]
+> 密钥保管库对象模型
 >
 >务必了解，实际上有两个密钥保管库对象模型：一个基于 REST API（KeyVault 命名空间），另一个是客户端加密的扩展。
 
@@ -135,27 +146,30 @@ ms.author: lakasa;robinsh
 ## 加密 Blob 和上传
 添加以下代码以加密 Blob 并将其上传到 Azure 存储帐户。使用的 **ResolveKeyAsync** 方法会返回 IKey。
 
-    // Retrieve the key that you created previously.
-    // The IKey that is returned here is an RsaKey.
-    // Remember that we used the names contosokeyvault and testrsakey1.
-    var rsa = cloudResolver.ResolveKeyAsync("https://contosokeyvault.vault.chinacloudapi.cn/keys/TestRSAKey1", CancellationToken.None).GetAwaiter().GetResult();
+```
+// Retrieve the key that you created previously.
+// The IKey that is returned here is an RsaKey.
+// Remember that we used the names contosokeyvault and testrsakey1.
+var rsa = cloudResolver.ResolveKeyAsync("https://contosokeyvault.vault.chinacloudapi.cn/keys/TestRSAKey1", CancellationToken.None).GetAwaiter().GetResult();
 
-    // Now you simply use the RSA key to encrypt by setting it in the BlobEncryptionPolicy.
-    BlobEncryptionPolicy policy = new BlobEncryptionPolicy(rsa, null);
-    BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
+// Now you simply use the RSA key to encrypt by setting it in the BlobEncryptionPolicy.
+BlobEncryptionPolicy policy = new BlobEncryptionPolicy(rsa, null);
+BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
 
-    // Reference a block blob.
-    CloudBlockBlob blob = contain.GetBlockBlobReference("MyFile.txt");
+// Reference a block blob.
+CloudBlockBlob blob = contain.GetBlockBlobReference("MyFile.txt");
 
-    // Upload using the UploadFromStream method.
-    using (var stream = System.IO.File.OpenRead(@"C:\data\MyFile.txt"))
-        blob.UploadFromStream(stream, stream.Length, null, options, null);
+// Upload using the UploadFromStream method.
+using (var stream = System.IO.File.OpenRead(@"C:\data\MyFile.txt"))
+    blob.UploadFromStream(stream, stream.Length, null, options, null);
+```
 
 下面是一个 blob 的 [Azure 经典管理门户](https://manage.windowsazure.cn)的屏幕截图，该 blob 已使用客户端加密通过密钥保管库中存储的密钥进行加密。**KeyId** 属性是密钥保管库中充当 KEK 的密钥的 URI。**EncryptedKey** 属性包含 CEK 的加密版本。
 
 ![显示包含加密元数据的 Blob 元数据的屏幕截图](./media/storage-encrypt-decrypt-blobs-key-vault/blobmetadata.png)
 
-> [!NOTE] 如果查看 BlobEncryptionPolicy 构造函数，将看到它可以接受密钥和/或解析程序。请注意，现在无法将解析程序用于加密，因为它当前不支持默认密钥。
+> [!NOTE]
+> 如果查看 BlobEncryptionPolicy 构造函数，将看到它可以接受密钥和/或解析程序。请注意，现在无法将解析程序用于加密，因为它当前不支持默认密钥。
 
 ## 解密 Blob 并下载
 当使用解析程序类有意义时，实际上就是解密。用于加密的密钥的 ID 与其元数据中的 Blob 相关联，因此没有理由检索该密钥，请记住密钥与 Blob 之间的关联关系。只需确保该密钥保留在密钥保管库中。
@@ -164,15 +178,18 @@ RSA 密钥的私钥则保留在密钥保管库中，因此，为了进行解密�
 
 添加以下代码以解密刚刚上传的 Blob。
 
-    // In this case, we will not pass a key and only pass the resolver because
-    // this policy will only be used for downloading / decrypting.
-    BlobEncryptionPolicy policy = new BlobEncryptionPolicy(null, cloudResolver);
-    BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
+```
+// In this case, we will not pass a key and only pass the resolver because
+// this policy will only be used for downloading / decrypting.
+BlobEncryptionPolicy policy = new BlobEncryptionPolicy(null, cloudResolver);
+BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
 
-    using (var np = File.Open(@"C:\data\MyFileDecrypted.txt", FileMode.Create))
-        blob.DownloadToStream(np, null, options, null);
+using (var np = File.Open(@"C:\data\MyFileDecrypted.txt", FileMode.Create))
+    blob.DownloadToStream(np, null, options, null);
+```
 
-> [!NOTE] 可以通过几个其他类型的解析程序来简化密钥管理，其中包括：AggregateKeyResolver 和 CachingKeyResolver。
+> [!NOTE]
+> 可以通过几个其他类型的解析程序来简化密钥管理，其中包括：AggregateKeyResolver 和 CachingKeyResolver。
 
 ## 使用密钥保管库密码
 将密码用于客户端加密的方式是通过 SymmetricKey 类，因为密码实际上是一种对称密钥。但是，如上所述，密钥保管库中的密码不会完全映射到 SymmetricKey。这里要注意几个问题：
@@ -183,22 +200,26 @@ RSA 密钥的私钥则保留在密钥保管库中，因此，为了进行解密�
 
 以下是使用 PowerShell 在密钥保管库中创建可用作 SymmetricKey 的密钥的示例。注意：硬编码值 $key 仅用于演示目的。在你自己的代码中需要生成此密钥。
 
-    // Here we are making a 128-bit key so we have 16 characters.
-    // 	The characters are in the ASCII range of UTF8 so they are
-    //	each 1 byte. 16 x 8 = 128.
-    $key = "qwertyuiopasdfgh"
-    $b = [System.Text.Encoding]::UTF8.GetBytes($key)
-    $enc = [System.Convert]::ToBase64String($b)
-    $secretvalue = ConvertTo-SecureString $enc -AsPlainText -Force
+```
+// Here we are making a 128-bit key so we have 16 characters.
+// 	The characters are in the ASCII range of UTF8 so they are
+//	each 1 byte. 16 x 8 = 128.
+$key = "qwertyuiopasdfgh"
+$b = [System.Text.Encoding]::UTF8.GetBytes($key)
+$enc = [System.Convert]::ToBase64String($b)
+$secretvalue = ConvertTo-SecureString $enc -AsPlainText -Force
 
-    // Substitute the VaultName and Name in this command.
-    $secret = Set-AzureKeyVaultSecret -VaultName 'ContoseKeyVault' -Name 'TestSecret2' -SecretValue $secretvalue -ContentType "application/octet-stream"
+// Substitute the VaultName and Name in this command.
+$secret = Set-AzureKeyVaultSecret -VaultName 'ContoseKeyVault' -Name 'TestSecret2' -SecretValue $secretvalue -ContentType "application/octet-stream"
+```
 
 在控制台应用程序中，可以使用与之前相同的调用将此密钥作为 SymmetricKey 进行检索。
 
-    SymmetricKey sec = (SymmetricKey) cloudResolver.ResolveKeyAsync(
-        "https://contosokeyvault.vault.chinacloudapi.cn/secrets/TestSecret2/", 
-        CancellationToken.None).GetAwaiter().GetResult();
+```
+SymmetricKey sec = (SymmetricKey) cloudResolver.ResolveKeyAsync(
+    "https://contosokeyvault.vault.chinacloudapi.cn/secrets/TestSecret2/", 
+    CancellationToken.None).GetAwaiter().GetResult();
+```
 
 就这么简单。请尽情享受其中的乐趣！
 

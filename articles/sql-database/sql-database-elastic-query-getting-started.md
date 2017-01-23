@@ -63,11 +63,13 @@ ms.author: SilviaDoomra
 1. 在 Visual Studio 中打开 SQL Server Management Studio 或 SQL Server Data Tools。
 2. 连接到 ElasticDBQuery 数据库，并执行以下 T-SQL 命令：
 
-        CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>';
+    ```
+    CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>';
 
-        CREATE DATABASE SCOPED CREDENTIAL ElasticDBQueryCred
-        WITH IDENTITY = '<username>',
-        SECRET = '<password>';
+    CREATE DATABASE SCOPED CREDENTIAL ElasticDBQueryCred
+    WITH IDENTITY = '<username>',
+    SECRET = '<password>';
+    ```
 
     “username”和“password”应与[弹性数据库工具入门](./sql-database-elastic-scale-get-started.md)中[下载并运行示例应用](./sql-database-elastic-scale-get-started.md#Getting-started-with-elastic-database-tools)的步骤 6 中所使用的登录信息相同。
 
@@ -75,13 +77,15 @@ ms.author: SilviaDoomra
 
 若要创建外部数据源，请对 ElasticDBQuery 数据库执行以下命令：
 
-    CREATE EXTERNAL DATA SOURCE MyElasticDBQueryDataSrc WITH
-      (TYPE = SHARD_MAP_MANAGER,
-      LOCATION = '<server_name>.database.chinacloudapi.cn',
-      DATABASE_NAME = 'ElasticScaleStarterKit_ShardMapManagerDb',
-      CREDENTIAL = ElasticDBQueryCred,
-       SHARD_MAP_NAME = 'CustomerIDShardMap'
-    ) ;
+```
+CREATE EXTERNAL DATA SOURCE MyElasticDBQueryDataSrc WITH
+  (TYPE = SHARD_MAP_MANAGER,
+  LOCATION = '<server_name>.database.chinacloudapi.cn',
+  DATABASE_NAME = 'ElasticScaleStarterKit_ShardMapManagerDb',
+  CREDENTIAL = ElasticDBQueryCred,
+   SHARD_MAP_NAME = 'CustomerIDShardMap'
+) ;
+```
 
  如果使用弹性数据库工具示例创建了分片映射和分片映射管理器，“CustomerIDShardMap”则是分片映射的名称。但是，如果为此示例使用了自定义设置，则它应该是在应用程序中所选择的分片映射名称。
 
@@ -89,14 +93,16 @@ ms.author: SilviaDoomra
 
 通过对 ElasticDBQuery 数据库执行以下命令，创建与分片上的客户表匹配的外部表：
 
-    CREATE EXTERNAL TABLE [dbo].[Customers]
-    ( [CustomerId] [int] NOT NULL,
-      [Name] [nvarchar](256) NOT NULL,
-      [RegionId] [int] NOT NULL)
-    WITH
-    ( DATA_SOURCE = MyElasticDBQueryDataSrc,
-      DISTRIBUTION = SHARDED([CustomerId])
-    ) ;
+```
+CREATE EXTERNAL TABLE [dbo].[Customers]
+( [CustomerId] [int] NOT NULL,
+  [Name] [nvarchar](256) NOT NULL,
+  [RegionId] [int] NOT NULL)
+WITH
+( DATA_SOURCE = MyElasticDBQueryDataSrc,
+  DISTRIBUTION = SHARDED([CustomerId])
+) ;
+```
 
 ## 执行示例弹性数据库 T-SQL 查询
 
@@ -104,7 +110,9 @@ ms.author: SilviaDoomra
 
 对 ElasticDBQuery 数据库执行以下查询：
 
-    select count(CustomerId) from [dbo].[Customers]
+```
+select count(CustomerId) from [dbo].[Customers]
+```
 
 用户将注意到，查询会从所有分片聚合结果并输出以下内容：
 

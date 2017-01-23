@@ -1,4 +1,3 @@
-
 ---
 title: Service Fabric 群集安全性：客户端角色 | Azure
 description: 本文介绍两个客户端角色以及提供给这些角色的权限。

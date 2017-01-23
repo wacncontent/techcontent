@@ -82,17 +82,17 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 -   存储的角色包括（但不限于）：
 
-    -	所有者 – 他们可以管理一切，包括访问权限。
+    - 所有者 – 他们可以管理一切，包括访问权限。
 
-    -	参与者 – 他们可以执行所有者可执行的所有操作，但分配访问权限除外。拥有此角色的用户可以查看和重新生成存储帐户密钥。他们可以使用存储帐户密钥来访问数据对象。
+    - 参与者 – 他们可以执行所有者可执行的所有操作，但分配访问权限除外。拥有此角色的用户可以查看和重新生成存储帐户密钥。他们可以使用存储帐户密钥来访问数据对象。
 
-    -	读者 – 他们可以查看有关存储帐户的信息（机密除外）。例如，如果将存储帐户中拥有读者权限的角色分配给某个用户，该用户就可以查看存储帐户的属性，但无法对属性进行任何更改或查看存储帐户密钥。
+    - 读者 – 他们可以查看有关存储帐户的信息（机密除外）。例如，如果将存储帐户中拥有读者权限的角色分配给某个用户，该用户就可以查看存储帐户的属性，但无法对属性进行任何更改或查看存储帐户密钥。
 
-    -	存储帐户参与者 - 他们可以管理存储帐户，既可读取订阅的资源组和资源，又可创建和管理订阅资源组部署。他们也可以访问存储帐户密钥，这又意味着他们可以访问数据平面。
+    - 存储帐户参与者 - 他们可以管理存储帐户，既可读取订阅的资源组和资源，又可创建和管理订阅资源组部署。他们也可以访问存储帐户密钥，这又意味着他们可以访问数据平面。
 
-    -	用户访问管理员 – 他们可以管理对存储帐户的用户访问。例如，他们可将“读者”权限授予特定用户。
+    - 用户访问管理员 – 他们可以管理对存储帐户的用户访问。例如，他们可将“读者”权限授予特定用户。
 
-    -	虚拟机参与者 – 他们可以管理虚拟机，但无法管理已连接的存储帐户。此角色可以列出存储帐户密钥，意味着分配此角色的用户可以更新数据平面。
+    - 虚拟机参与者 – 他们可以管理虚拟机，但无法管理已连接的存储帐户。此角色可以列出存储帐户密钥，意味着分配此角色的用户可以更新数据平面。
 
         为了让用户能够创建虚拟机，他们必须能够在存储帐户中创建相应的 VHD 文件。为此，他们需要能够检索存储帐户密钥，并将它传递给创建 VM 的 API。因此，他们必须拥有此权限才能列出存储帐户密钥。
 
@@ -230,15 +230,17 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 其中提供有关允许的访问权限的信息，以及准许该访问权限的时间长度。下面提供了一个示例：此 URI 将提供对 Blob 的读取权限，期限为五分钟。请注意，SAS 查询参数必须以 URL 编码，例如 %3A 表示冒号 (:)，%20 表示空格。
 
-    http://mystorage.blob.core.chinacloudapi.cn/mycontainer/myblob.txt (URL to the blob)
-    ?sv=2015-04-05 (storage service version)
-    &st=2015-12-10T22%3A18%3A26Z (start time, in UTC time and URL encoded)
-    &se=2015-12-10T22%3A23%3A26Z (end time, in UTC time and URL encoded)
-    &sr=b (resource is a blob)
-    &sp=r (read access)
-    &sip=168.1.5.60-168.1.5.70 (requests can only come from this range of IP addresses)
-    &spr=https (only allow HTTPS requests)
-    &sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D (signature used for the authentication of the SAS)
+```
+http://mystorage.blob.core.chinacloudapi.cn/mycontainer/myblob.txt (URL to the blob)
+?sv=2015-04-05 (storage service version)
+&st=2015-12-10T22%3A18%3A26Z (start time, in UTC time and URL encoded)
+&se=2015-12-10T22%3A23%3A26Z (end time, in UTC time and URL encoded)
+&sr=b (resource is a blob)
+&sp=r (read access)
+&sip=168.1.5.60-168.1.5.70 (requests can only come from this range of IP addresses)
+&spr=https (only allow HTTPS requests)
+&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D (signature used for the authentication of the SAS)
+```
 
 ####Azure 存储服务如何对共享访问签名进行身份验证
 
@@ -248,9 +250,9 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 ####共享访问签名的类型
 
--	服务级别 SAS 可用于访问存储帐户中的特定资源。其中的一些示例是检索容器中的 Blob 列表、下载 Blob、更新表中条目、将消息添加到队列，或将文件上传到文件共享。
+- 服务级别 SAS 可用于访问存储帐户中的特定资源。其中的一些示例是检索容器中的 Blob 列表、下载 Blob、更新表中条目、将消息添加到队列，或将文件上传到文件共享。
 
--	帐户级别 SAS 可用于访问服务级别 SAS 可用的任何功能。此外，它可以为服务级别 SAS 不准许的资源提供选项，例如，能够创建容器、表、队列及文件共享。也可一次性指定对多个服务的访问权限。例如，可授权某人访问你存储帐户中的 Blob 和文件。
+- 帐户级别 SAS 可用于访问服务级别 SAS 可用的任何功能。此外，它可以为服务级别 SAS 不准许的资源提供选项，例如，能够创建容器、表、队列及文件共享。也可一次性指定对多个服务的访问权限。例如，可授权某人访问你存储帐户中的 Blob 和文件。
 
 ####创建 SAS URI
 
@@ -278,30 +280,30 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 -   下面是参考文章。
 
-    -	[服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140256.aspx)
+    - [服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140256.aspx)
 
         此文提供有关使用服务级别 SAS 配合 Blob、队列、表范围和文件的示例。
 
-    -	[构造服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140255.aspx)
+    - [构造服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140255.aspx)
 
-    -	[构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/mt584140.aspx)
+    - [构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/mt584140.aspx)
 
 -   这些是使用 .NET 客户端库来创建共享访问签名和存储访问策略的教程。
 
-    -	[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)
-    -	[共享访问签名，第 2 部分：创建 SAS 并将 SAS 用于 Blob 服务](./storage-dotnet-shared-access-signature-part-2.md)
+    - [使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)
+    - [共享访问签名，第 2 部分：创建 SAS 并将 SAS 用于 Blob 服务](./storage-dotnet-shared-access-signature-part-2.md)
 
         此文包含 SAS 模型的说明、共享访问签名的示例，以及 SAS 用法最佳实践的建议。还介绍了如何撤销授予的权限。
-    
+
 -   按 IP 地址限制访问 (IP ACL)
 
-    -	[什么是终结点访问控制列表 (ACL)？](../virtual-network/virtual-networks-acl.md)
+    - [什么是终结点访问控制列表 (ACL)？](../virtual-network/virtual-networks-acl.md)
 
-    -	[构造服务 SAS](https://msdn.microsoft.com/zh-cn/library/azure/dn140255.aspx)
+    - [构造服务 SAS](https://msdn.microsoft.com/zh-cn/library/azure/dn140255.aspx)
 
         这是适用于服务级别 SAS 的参考文章，其中包括执行 IP ACL 的示例。
 
-    -	[构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/azure/mt584140.aspx)
+    - [构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/azure/mt584140.aspx)
 
         这是适用于帐户级别 SAS 的参考文章，其中包括执行 IP ACL 的示例。
 
@@ -311,7 +313,7 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 -   共享访问签名入门教程
 
-    -	[SAS 入门教程](https://github.com/Azure-Samples/storage-dotnet-sas-getting-started)
+    - [SAS 入门教程](https://github.com/Azure-Samples/storage-dotnet-sas-getting-started)
 
 ##<a id="encryption-in-transit"></a>传输中加密
 
@@ -533,15 +535,17 @@ Azure 存储允许启用 CORS – 跨域资源共享。对于每个存储帐户�
 
 默认情况下，对所有服务禁用了 CORS。可以使用 REST API 或存储客户端库调用某个方法来设置服务策略，以启用 CORS。执行该操作时，将在 XML 中包含 CORS 规则。以下示例将针对存储帐户的 Blob 服务使用“设置服务属性”操作来设置 CORS 规则。可以使用存储客户端库或 REST API 针对 Azure 存储执行该操作。
 
-    <Cors>    
-        <CorsRule>
-            <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
-            <AllowedMethods>PUT,GET</AllowedMethods>
-            <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
-            <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
-            <MaxAgeInSeconds>200</MaxAgeInSeconds>
-        </CorsRule>
-    <Cors>
+```
+<Cors>    
+    <CorsRule>
+        <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
+        <AllowedMethods>PUT,GET</AllowedMethods>
+        <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
+        <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
+        <MaxAgeInSeconds>200</MaxAgeInSeconds>
+    </CorsRule>
+<Cors>
+```
 
 下面是每一行的含义：
 
@@ -578,7 +582,7 @@ Azure 存储允许启用 CORS – 跨域资源共享。对于每个存储帐户�
     如果出于任何原因需要使用 HTTP 而不是 HTTPS，并且正在使用块 Blob，可以使用 MD5 检查来帮助验证传输中 Blob 的完整性。这将有助于防止网络/传输层错误，但不一定可帮助防止中间攻击。
 
     如果可以使用提供传输级安全的 HTTPS，则使用 MD5 检查就很多余且不必要。
-    
+
     有关详细信息，请查看 [Azure Blob MD5 Overview](http://blogs.msdn.com/b/windowsazurestorage/archive/2011/02/18/windows-azure-blob-md5-overview.aspx)（Azure Blob MD5 概述）。
 
 2.  **美国政府实施的 FIPS 合规性要求是怎样的？**
@@ -589,7 +593,7 @@ Azure 存储允许启用 CORS – 跨域资源共享。对于每个存储帐户�
 
     **资源**
 
--	[为什么我们不再建议使用“FIPS 模式”](http://blogs.technet.com/b/secguide/archive/2014/04/07/why-we-re-not-recommending-fips-mode-anymore.aspx)
+- [为什么我们不再建议使用“FIPS 模式”](http://blogs.technet.com/b/secguide/archive/2014/04/07/why-we-re-not-recommending-fips-mode-anymore.aspx)
 
     此博客文章提供 FIPS 概述，并说明他们为什么默认不启用 FIPS 模式。
 

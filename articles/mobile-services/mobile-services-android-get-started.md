@@ -24,7 +24,7 @@ ms.author: ricksal
 本教程说明如何使用 Azure 移动服务向 Android 应用程序添加基于云的后端服务。在本教程中，你将要创建一个新的移动服务，以及一个在新移动服务中存储应用程序数据的简单**待办事项列表**应用程序。
 
 以下是完成的应用程序的屏幕快照：
-    
+
 ![](./media/mobile-services-android-get-started/mobile-quickstart-completed-android.png)
 
 ## 先决条件
@@ -33,7 +33,8 @@ ms.author: ricksal
 
 下载的快速入门项目包含适用于 Android 的 Azure 移动服务 SDK。
 
-> [!IMPORTANT]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
+> [!IMPORTANT]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ## 创建新的移动服务
 

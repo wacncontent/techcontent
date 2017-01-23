@@ -40,37 +40,39 @@ ms.author: adrianha
 ##<a name="add-authentication"></a>向应用程序添加身份验证
 
 1. 在 UWP 应用项目文件 MainPage.cs 中，将以下代码片段添加到 MainPage 类：
-    
-        // Define a member variable for storing the signed-in user. 
-        private MobileServiceUser user;
 
-        // Define a method that performs the authentication process
-        // using a Microsoft sign-in. 
-        private async System.Threading.Tasks.Task<bool> AuthenticateAsync()
+    ```
+    // Define a member variable for storing the signed-in user. 
+    private MobileServiceUser user;
+
+    // Define a method that performs the authentication process
+    // using a Microsoft sign-in. 
+    private async System.Threading.Tasks.Task<bool> AuthenticateAsync()
+    {
+        string message;
+        bool success = false;
+        try
         {
-            string message;
-            bool success = false;
-            try
-            {
-                // Change 'MobileService' to the name of your MobileServiceClient instance.
-                // Sign-in using Microsoft authentication.
-                user = await App.MobileService
-                    .LoginAsync(MobileServiceAuthenticationProvider.Microsoft);
-                message =
-                    string.Format("You are now signed in - {0}", user.UserId);
+            // Change 'MobileService' to the name of your MobileServiceClient instance.
+            // Sign-in using Microsoft authentication.
+            user = await App.MobileService
+                .LoginAsync(MobileServiceAuthenticationProvider.Microsoft);
+            message =
+                string.Format("You are now signed in - {0}", user.UserId);
 
-                success = true;
-            }
-            catch (InvalidOperationException)
-            {
-                message = "You must log in. Login Required";
-            }
-
-            var dialog = new MessageDialog(message);
-            dialog.Commands.Add(new UICommand("OK"));
-            await dialog.ShowAsync();
-            return success;
+            success = true;
         }
+        catch (InvalidOperationException)
+        {
+            message = "You must log in. Login Required";
+        }
+
+        var dialog = new MessageDialog(message);
+        dialog.Commands.Add(new UICommand("OK"));
+        await dialog.ShowAsync();
+        return success;
+    }
+    ```
 
     此代码使用 Microsoft 登录对用户进行身份验证。如果使用的标识提供者不是 Microsoft，请将上述 **MobileServiceAuthenticationProvider** 的值更改为提供者的值。
 
@@ -78,35 +80,39 @@ ms.author: adrianha
 
 4. 将以下代码段添加到 MainPage 类：
 
-        private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
+    ```
+    private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
+    {
+        // Login the user and then load data from the mobile app.
+        if (await AuthenticateAsync())
         {
-            // Login the user and then load data from the mobile app.
-            if (await AuthenticateAsync())
-            {
-                // Switch the buttons and load items from the mobile app.
-                ButtonLogin.Visibility = Visibility.Collapsed;
-                ButtonSave.Visibility = Visibility.Visible;
-                //await InitLocalStoreAsync(); //offline sync support.
-                await RefreshTodoItems();
-            }
+            // Switch the buttons and load items from the mobile app.
+            ButtonLogin.Visibility = Visibility.Collapsed;
+            ButtonSave.Visibility = Visibility.Visible;
+            //await InitLocalStoreAsync(); //offline sync support.
+            await RefreshTodoItems();
         }
-        
+    }
+    ```
+
 5. 打开 MainPage.xaml 项目文件，找到定义“保存”按钮的元素，将其替换为以下代码：
 
-        <Button Name="ButtonSave" Visibility="Collapsed" Margin="0,8,8,0" 
-                Click="ButtonSave_Click">
-            <StackPanel Orientation="Horizontal">
-                <SymbolIcon Symbol="Add"/>
-                <TextBlock Margin="5">Save</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Name="ButtonLogin" Visibility="Visible" Margin="0,8,8,0" 
-                Click="ButtonLogin_Click" TabIndex="0">
-            <StackPanel Orientation="Horizontal">
-                <SymbolIcon Symbol="Permissions"/>
-                <TextBlock Margin="5">Sign in</TextBlock> 
-            </StackPanel>
-        </Button>
+    ```
+    <Button Name="ButtonSave" Visibility="Collapsed" Margin="0,8,8,0" 
+            Click="ButtonSave_Click">
+        <StackPanel Orientation="Horizontal">
+            <SymbolIcon Symbol="Add"/>
+            <TextBlock Margin="5">Save</TextBlock>
+        </StackPanel>
+    </Button>
+    <Button Name="ButtonLogin" Visibility="Visible" Margin="0,8,8,0" 
+            Click="ButtonLogin_Click" TabIndex="0">
+        <StackPanel Orientation="Horizontal">
+            <SymbolIcon Symbol="Permissions"/>
+            <TextBlock Margin="5">Sign in</TextBlock> 
+        </StackPanel>
+    </Button>
+    ```
 
 9. 按 F5 键运行该应用，单击“登录”按钮，然后使用所选的标识提供者登录到该应用。成功登录后，该应用运行时不会出错，用户能够查询后端，并对数据进行更新。
 
@@ -114,7 +120,8 @@ ms.author: adrianha
 
 前一示例显示了标准登录，这要求在该应用每次启动时客户端同时联系标识提供者和应用服务。此方法不仅效率低下，而且如果很多客户尝试同时启动你的应用，你会遇到关于使用率的问题。更好的方法是缓存应用服务返回的授权令牌，然后在使用基于提供者的登录之前首先尝试使用此令牌。
 
->[!NOTE]无论使用的是客户端管理的还是服务管理的身份验证，都可以缓存应用服务颁发的令牌。本教程使用服务管理的身份验证。
+>[!NOTE]
+>无论使用的是客户端管理的还是服务管理的身份验证，都可以缓存应用服务颁发的令牌。本教程使用服务管理的身份验证。
 
 [!INCLUDE [mobile-windows-universal-dotnet-authenticate-app-with-token](../../includes/mobile-windows-universal-dotnet-authenticate-app-with-token.md)]
 

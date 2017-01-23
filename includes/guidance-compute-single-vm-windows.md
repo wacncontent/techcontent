@@ -42,7 +42,9 @@ Azure 可提供多种虚拟机大小，但建议使用 DS 和 GS 系列，因为
 
 预配 VM 和其他资源时，必须指定区域。通常应选择离内部用户或客户最近的区域。但是，并非所有 VM 大小都可在所有区域中使用。若要查看给定区域中的可用 VM 大小列表，请运行以下 Azure 命令行接口 \(CLI\) 命令：
 
-    azure vm sizes --location <location>
+```
+azure vm sizes --location <location>
+```
 
 有关选择已发布的 VM 映像的信息，请参阅[使用 PowerShell 或 CLI 在 Azure 中浏览和选择 Windows 虚拟机映像][select-vm-image]。
 
@@ -91,13 +93,17 @@ VHD 存储在 [Azure 存储空间][azure-storage]中，Azure 存储空间将进�
 
 以下 CLI 命令可启用诊断：
 
-    azure vm enable-diag <resource-group> <vm-name>
+```
+azure vm enable-diag <resource-group> <vm-name>
+```
 
 **停止 VM。** Azure 对“已停止”和“已解除分配”状态进行了区分。VM 状态为“已停止”时，将计费，但 VM 为“已解除分配”状态时，则不计费。
 
 使用以下 CLI 命令可解除分配 VM：
 
-    azure vm deallocate <resource-group> <vm-name>
+```
+azure vm deallocate <resource-group> <vm-name>
+```
 
 在 Azure 门户预览中，“停止”按钮将解除分配 VM。但是，如果在已登录时通过 OS 关闭，VM 将停止，但*不*会解除分配，因此仍将向你收费。
 
@@ -120,7 +126,9 @@ RBAC 不限制已登录到 VM 的用户可以执行的操作。这些权限由�
 
 若要重置本地管理员密码，请运行 `vm reset-access` Azure CLI 命令。
 
-    azure vm reset-access -u <user> -p <new-password> <resource-group> <vm-name>
+```
+azure vm reset-access -u <user> -p <new-password> <resource-group> <vm-name>
+```
 
 使用[审核日志][audit-logs]可查看预配操作和其他 VM 事件。
 
@@ -130,7 +138,7 @@ RBAC 不限制已登录到 VM 的用户可以执行的操作。这些权限由�
 
 1. 右键单击下面的按钮，然后选择“在新选项卡中打开链接”或“在新窗口中打开链接”。[![部署到 Azure](./media/guidance-compute-single-vm-windows/deploybutton.png)](https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fguidance-compute-single-vm%2Fazuredeploy.json)
 2. 链接在 Azure 门户预览中打开后，必须输入某些设置的值：
-   
+
     * 参数文件中已定义了“资源组”名称，因此选择“新建”并在文本框中输入 `ra-single-vm-rg`。
     * 从“位置”下拉框中选择区域。
     * 请勿编辑“模板根 URI”或“参数根 URI”文本框。

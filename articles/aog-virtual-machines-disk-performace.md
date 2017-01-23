@@ -21,7 +21,7 @@ Azure 提供了标准存储和高级存储两种存储服务。针对于生产�
 - [高级存储简介](./storage/storage-premium-storage.md "https://www.azure.cn/documentation/articles/storage-premium-storage/")
 - [Azure 虚拟运行 SQL 服务的最佳实践](./virtual-machines/virtual-machines-windows-sql-performance.md "https://www.azure.cn/documentation/articles/virtual-machines-windows-sql-performance/")
 - [在 SQL 虚拟机中使用 Azure 高级存储](./virtual-machines/virtual-machines-windows-classic-sql-server-premium-storage.md "https://www.azure.cn/documentation/articles/virtual-machines-windows-classic-sql-server-premium-storage/")
-    
+
 然而在现实环境中，由于种种条件所限，很多用户暂时无法使用高级存储来达到最佳的存储性能。本文的目的在于帮助目前仍然使用标准存储的用户如何准确理解虚拟机的存储性能，从而在发生存储性能问题时快速有效的从支持部门得到帮助。
 
 首先，由于虚拟机运行在 Azure 平台，我们需要了解 [Azure 存储空间可伸缩性和性能目标](./storage/storage-scalability-targets.md "https://www.azure.cn/documentation/articles/storage-scalability-targets/")：
@@ -86,16 +86,18 @@ Azure 提供了标准存储和高级存储两种存储服务。针对于生产�
 
 在现实中，为了得到稳定的磁盘数据，通常建议使用 DiskSPD 或是 IOMeter 等工具。
 
-- DiskSPD: [https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223](https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223 "https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223") 
-- IOMeter: [http://www.iometer.org/](http://www.iometer.org/ "http://www.iometer.org/") 
+- DiskSPD: [https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223 "https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223"](https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223 "https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223") 
+- IOMeter: [http://www.iometer.org/ "http://www.iometer.org/"](http://www.iometer.org/ "http://www.iometer.org/") 
 
 这些工具大多数都是使用服务器的 CPU 资源产生多个工作线程，每个线程根据设定的 IO 读或写的比例，IO 请求的大小，顺序读写或随机读写等，产生大量的并发请求，直接作用于目标存储设备。
 
 以同一个测试服务器为例，通过以下命令分别对于 D,E,F 和 N 卷进行 4K，8K，64K 大小的随机读写 IO 压力测试（80% 读操作，20% 写操作）
 
-    diskspd -c50G -d300 -F16 -w20 -r -b4k -o4 [X]:\DiskSpd.dat
-    diskspd -c50G -d300 -F16 -w20 -r -b8k -o4 [X]:\DiskSpd.dat
-    diskspd -c50G -d300 -F16 -w20 -r -b64k -o4 [X]:\DiskSpd.dat
+```
+diskspd -c50G -d300 -F16 -w20 -r -b4k -o4 [X]:\DiskSpd.dat
+diskspd -c50G -d300 -F16 -w20 -r -b8k -o4 [X]:\DiskSpd.dat
+diskspd -c50G -d300 -F16 -w20 -r -b64k -o4 [X]:\DiskSpd.dat
+```
 
 由于篇幅所限，仅仅将 4K 大小的结果总结如下:
 

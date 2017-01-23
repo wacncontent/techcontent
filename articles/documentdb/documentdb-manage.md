@@ -43,18 +43,20 @@ Azure DocumentDB 是一个全面托管的，面向可扩展文档的针对 JSON 
 DocumentDB 自动将集合分区到一个或多个物理服务器。创建集合时，你可以指定预配吞吐量（根据每秒的请求单位数）和分区键属性。DocumentDB 会使用此属性的值在分区和路由请求（例如查询）之间分配文档。分区键值还可作为存储过程和触发器的事务边界。每个集合都有该集合特定的保留吞吐量，且不会与相同帐户中的其他集合共享。因此，你可以在存储和吞吐量方面扩大你的应用程序。
 
 可以通过 [Azure 门户预览](./documentdb-create-collection.md)或任意一个 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 创建集合。
- 
+
 ## 请求单位数和数据库操作
 
 创建集合时，可以根据每秒的[请求单位 (RU) 数](./documentdb-request-units.md)保留吞吐量。与考虑和管理硬件资源不同的是，可以考虑将**请求单位**作为所需资源的单个措施，以执行各种数据库操作和服务应用程序请求。不管集合中存储的项数有多少，或者同时运行的并发请求数有多少，读取 1 KB 的文档都要使用 1 个 RU。所有针对 DocumentDB 的请求，包括复杂的操作如 SQL 查询，都有一个可预测的 RU 值，该值可在开发时确定。如果你知道用于支持你的应用程序的文档的大小以及每个操作（读取、写入和查询）的频率，那么你可以设置恰到好处的吞吐量来满足应用程序需求，并且随着性能需求的变化增大和减小数据库的规模。
 
 每个集合可以预留每秒 100 的倍数请求单位的数据块的吞吐量，每秒从几百到几百万个请求单位。可以在集合的整个生命周期内调整设置的吞吐量，以适应不断变化的应用程序的处理需求和访问模式。有关详细信息，请参阅 [DocumentDB performance levels](./documentdb-performance-levels.md)（DocumentDB 性能级别）。
 
->[!IMPORTANT] 集合是计费实体。集合的成本由集合的设置的吞吐量（以每秒的请求单位数来衡量）和总占用存储空间（以千兆字节为单位）决定。
+>[!IMPORTANT]
+> 集合是计费实体。集合的成本由集合的设置的吞吐量（以每秒的请求单位数来衡量）和总占用存储空间（以千兆字节为单位）决定。
 
-一个特定操作如插入、删除、查询或存储过程执行会消耗多少个请求单位？ 请求单位是请求处理成本的规范化的度量。读取 1 KB 文档需要 1 个 RU，但是插入、替换或删除同一文档的请求却要占用服务的更多处理，因此需要更多请求单位。来自服务的每个响应包括一个自定义标头 (`x-ms-request-charge`)，其中报告了请求所要使用的请求单位数。此标头也可通过 [SDK](./documentdb-sdk-dotnet.md) 防问。在 .NET SDK 中，[RequestCharge](https://msdn.microsoft.com/zh-cn/library/azure/dn933057.aspx#P:Microsoft.Azure.Documents.Client.ResourceResponse`1.RequestCharge) 是 [ResourceResponse](https://msdn.microsoft.com/zh-cn/library/azure/dn799209.aspx) 对象的属性。如果要在进行单个调用前估计吞吐量需求，可以使用 [Capacity Planner](./documentdb-request-units.md#estimating-throughput-needs/) 来帮助进行此估计。
+一个特定操作如插入、删除、查询或存储过程执行会消耗多少个请求单位？ 请求单位是请求处理成本的规范化的度量。读取 1 KB 文档需要 1 个 RU，但是插入、替换或删除同一文档的请求却要占用服务的更多处理，因此需要更多请求单位。来自服务的每个响应包括一个自定义标头 (`x-ms-request-charge`)，其中报告了请求所要使用的请求单位数。此标头也可通过 [SDK](./documentdb-sdk-dotnet.md) 防问。在 .NET SDK 中，[RequestCharge](https://msdn.microsoft.com/zh-cn/library/azure/dn933057.aspx#P:Microsoft.Azure.Documents.Client.ResourceResponse`1.RequestCharge) 是 [ResourceResponse](https://msdn.microsoft.com/zh-cn/library/azure/dn799209.aspx) 对象的属性。如果要在进行单个调用前估计吞吐量需求，可以使用 [Capacity Planner](./documentdb-request-units.md#estimating-throughput-needs) 来帮助进行此估计。
 
->[!NOTE] 用于 1 KB 文档的 1 个请求单位基准与使用[会话一致性](./documentdb-consistency-levels.md)的简单的文档 GET 命令相对应。
+>[!NOTE]
+> 用于 1 KB 文档的 1 个请求单位基准与使用[会话一致性](./documentdb-consistency-levels.md)的简单的文档 GET 命令相对应。
 
 影响针对某个 DocumentDB 数据库帐户的操作所使用的请求单位数的因素有多个。这些因素包括：
 
@@ -120,7 +122,7 @@ DocumentDB 自动将集合分区到一个或多个物理服务器。创建集合
 ## 一致性级别的选择和吞吐量  <a name="ProvThroughput"></a>
 默认一致性级别的选择会影响吞吐量和延迟。可以编程方式和通过 Azure 门户预览设置默认的一致性级别。你还可以重写单个请求的一致性级别。默认情况下一致性级别设置为**会话**，该级别提供单调读取/写入和读取最新写入内容的保证。会话一致性非常适用于以用户为中心的应用程序，可提供一致性和性能的完美平衡。
 
-有关在 Azure 门户预览上更改一致性级别的说明，请参阅[如何管理 DocumentDB 帐户](./documentdb-manage-account.md#consistency/)。或者，有关一致性级别的详细信息，请参阅[使用一致性级别](./documentdb-consistency-levels.md)。
+有关在 Azure 门户预览上更改一致性级别的说明，请参阅[如何管理 DocumentDB 帐户](./documentdb-manage-account.md#consistency)。或者，有关一致性级别的详细信息，请参阅[使用一致性级别](./documentdb-consistency-levels.md)。
 
 ## 设置的文档存储和索引开销 <a name="IndexOverhead"></a>
 DocumentDB 支持创建单个分区和已分区的集合。DocumentDB 中的每个分区支持高达 10 GB 的 SSD 支持的存储空间。10 GB 文档存储空间包含文档和索引的存储。默认情况下，DocumentDB 集合配置为自动为所有文档创建索引，且没有明确要求任何二级索引或架构。根据使用 DocumentDB 的应用程序，索引开销通常介于 2-20%。DocumentDB 使用的索引技术可以确保无论属性值是多少，索引开销都不会超过具有默认设置的文档大小的 80% 以上。
@@ -132,5 +134,5 @@ DocumentDB 支持创建单个分区和已分区的集合。DocumentDB 中的每�
 若要继续学习 DocumentDB 的工作原理，请参阅 [Partitioning and scaling in Azure DocumentDB](./documentdb-partition-data.md)（Azure DocumentDB 中的分区和缩放）。
 
 有关在 Azure 门户预览中监视性能级别的说明，请参阅[监视 DocumentDB 帐户](./documentdb-monitor-accounts.md)。有关选择集合的性能级别的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

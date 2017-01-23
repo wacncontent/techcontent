@@ -22,21 +22,23 @@ Service Fabric 群集资源管理器可用于报告动态负载、对群集中�
 
 与均衡相关的第一组控件是一组计时器。这些计时器控制群集资源管理器针对需要处理的事项检查群集状态的频率。共有三种不同的工作类别，每一种都有对应的计时器。它们具有以下特点：
 
-1.	放置 - 此阶段负责放置任何遗漏的有状态副本或无状态实例。这包括两项新服务，可处理已失败且需要重新创建的有状态副本或无状态实例。删除和丢弃副本或实例的操作也在此处处理。
-2.	约束检查 – 此阶段检查并更正系统中不同放置约束（规则）的违规情况。规则示例包括确保节点不超出容量，以及符合服务的放置约束（稍后详细说明）。
-3.	平衡 - 此阶段根据针对不同指标配置的所需平衡级别查看是否需要主动式重新平衡，如果需要，则尝试查找群集中更平衡的排列方式。
+1. 放置 - 此阶段负责放置任何遗漏的有状态副本或无状态实例。这包括两项新服务，可处理已失败且需要重新创建的有状态副本或无状态实例。删除和丢弃副本或实例的操作也在此处处理。
+2. 约束检查 – 此阶段检查并更正系统中不同放置约束（规则）的违规情况。规则示例包括确保节点不超出容量，以及符合服务的放置约束（稍后详细说明）。
+3. 平衡 - 此阶段根据针对不同指标配置的所需平衡级别查看是否需要主动式重新平衡，如果需要，则尝试查找群集中更平衡的排列方式。
 
 ## 配置群集资源管理器的步骤和计时器
 群集资源管理器可以运行的每种不同类型的修复都由不同的计时器控制，控管修复频率。例如，如果只想要处理每小时在群集中放置新的服务工作负荷（进行批处理），但同时想要每隔几秒钟定期均衡检查，则可以配置该行为。激发每个计时器时，将会计划任务。默认情况下，资源管理器每隔 1/10 秒扫描其状态并应用更新（针对所有在上次扫描后发生的更改进行批处理，例如察觉到节点已关闭），每隔一秒设置放置和约束检查标志，每隔 5 秒设置均衡标志。
 
 ClusterManifest.xml：
 
-        <Section Name="PlacementAndLoadBalancing">
-            <Parameter Name="PLBRefreshGap" Value="0.1" />
-            <Parameter Name="MinPlacementInterval" Value="1.0" />
-            <Parameter Name="MinConstraintCheckInterval" Value="1.0" />
-            <Parameter Name="MinLoadBalancingInterval" Value="5.0" />
-        </Section>
+```
+    <Section Name="PlacementAndLoadBalancing">
+        <Parameter Name="PLBRefreshGap" Value="0.1" />
+        <Parameter Name="MinPlacementInterval" Value="1.0" />
+        <Parameter Name="MinConstraintCheckInterval" Value="1.0" />
+        <Parameter Name="MinLoadBalancingInterval" Value="5.0" />
+    </Section>
+```
 
 今天我们只按顺序一次执行这些操作中的一个（这就是为什么我们将这些配置称为“最小间隔”）。例如，我们已响应任何挂起的请求，已在继续均衡群集之前创建新副本。如此处所示，可以根据指定的默认时间间隔扫描并检查我们需要非常频繁执行的任何操作，这意味着我们在每个步骤结束时所做的更改集通常比较小：我们不是扫描群集中数小时的更改并尝试一次更正全部，并尝试在事情发生时进行处理，而是在同时有许多事情发生时进行某种批处理。这使得 Service Fabric 资源管理器对于群集中发生的事情保持极高的响应度。
 
@@ -49,10 +51,12 @@ ClusterManifest.xml：
 
 ClusterManifest.xml
 
-    <Section Name="MetricBalancingThresholds">
-      <Parameter Name="MetricName1" Value="2"/>
-      <Parameter Name="MetricName2" Value="3.5"/>
-    </Section>
+```
+<Section Name="MetricBalancingThresholds">
+  <Parameter Name="MetricName1" Value="2"/>
+  <Parameter Name="MetricName2" Value="3.5"/>
+</Section>
+```
 
 指标的平衡阈值是一个比率。如果负载最重的节点的负载量除以负载最轻的节点的负载量超过此数目，此群集将被视为不均衡，在群集资源管理器下一次检查时将触发均衡（默认情况下为每 5 秒，由 MinLoadBalancingInterval 控制，如上所示）。
 
@@ -77,9 +81,11 @@ ClusterManifest.xml
 
 ClusterManifest.xml
 
-    <Section Name="MetricActivityThresholds">
-      <Parameter Name="Memory" Value="1536"/>
-    </Section>
+```
+<Section Name="MetricActivityThresholds">
+  <Parameter Name="Memory" Value="1536"/>
+</Section>
+```
 
 请注意，均衡和活动阈值都绑定到指标，并且只有在同一个指标的均衡和活动阈值都超过时才触发均衡。因此，如果超过内存的均衡阈值和 CPU 的活动阈值，只要其余阈值未超过（CPU 的均衡阈值和内存的活动阈值），就不触发均衡。
 

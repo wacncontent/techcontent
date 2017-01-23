@@ -28,38 +28,50 @@ ms.author: iainfou
 
 登录 Azure 帐户：
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 在以下示例中，请将示例参数名称替换为你自己的值。示例参数名称包括 `myResourceGroup`、`myNetworkSecurityGroup` 和 `myVnet`。
 
 创建规则。以下示例创建名为 `myNetworkSecurityGroupRule` 的规则，以便允许在端口 80 上传输 TCP 流量：
 
-    $httprule = New-AzureRmNetworkSecurityRuleConfig -Name "myNetworkSecurityGroupRule" `
-        -Description "Allow HTTP" -Access "Allow" -Protocol "Tcp" -Direction "Inbound" `
-        -Priority "100" -SourceAddressPrefix "Internet" -SourcePortRange * `
-        -DestinationAddressPrefix * -DestinationPortRange 80
+```
+$httprule = New-AzureRmNetworkSecurityRuleConfig -Name "myNetworkSecurityGroupRule" `
+    -Description "Allow HTTP" -Access "Allow" -Protocol "Tcp" -Direction "Inbound" `
+    -Priority "100" -SourceAddressPrefix "Internet" -SourcePortRange * `
+    -DestinationAddressPrefix * -DestinationPortRange 80
+```
 
 接下来，创建网络安全组，并按如下所示分配刚刚创建的 HTTP 规则。以下示例创建名为 `myNetworkSecurityGroup` 的网络安全组：
 
-    $nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName "myResourceGroup" `
-        -Location "ChinaNorth" -Name "myNetworkSecurityGroup" -SecurityRules $httprule
+```
+$nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName "myResourceGroup" `
+    -Location "ChinaNorth" -Name "myNetworkSecurityGroup" -SecurityRules $httprule
+```
 
 现在将网络安全组分配给子网。以下示例将名为 `myVnet` 的现有虚拟网络分配给变量 `$vnet`：
 
-    $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName "myResourceGroup" `
-        -Name "myVnet"
+```
+$vnet = Get-AzureRmVirtualNetwork -ResourceGroupName "myResourceGroup" `
+    -Name "myVnet"
+```
 
 将网络安全组与子网相关联。以下示例将名为 `mySubnet` 的子网与网络安全组相关联：
 
-    $subnetPrefix = $vnet.Subnets|?{$_.Name -eq 'mySubnet'}
+```
+$subnetPrefix = $vnet.Subnets|?{$_.Name -eq 'mySubnet'}
 
-    Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "mySubnet" `
-        -AddressPrefix $subnetPrefix.AddressPrefix `
-        -NetworkSecurityGroup $nsg
+Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "mySubnet" `
+    -AddressPrefix $subnetPrefix.AddressPrefix `
+    -NetworkSecurityGroup $nsg
+```
 
 最后，更新虚拟网络以使做出的更改生效：
 
-    Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
+```
+Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
+```
 
 ## <a name="more-information-on-network-security-groups"></a> 有关网络安全组的详细信息
 利用此处的快速命令，可以让流向 VM 的流量开始正常运行。网络安全组提供许多出色的功能和粒度来控制资源的访问。请参阅[创建网络安全组和 ACL 规则](../virtual-network/virtual-networks-create-nsg-arm-ps.md)了解更多信息。

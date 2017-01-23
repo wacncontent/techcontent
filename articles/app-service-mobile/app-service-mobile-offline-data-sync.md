@@ -80,8 +80,10 @@ ms.author: adrianha
 
   如果查询具有参数，创建唯一查询名称的方法之一是包含该参数值。例如，如果要按 userid 筛选，可以使用如下所示的查询名称（在 C# 中）：
 
-        await todoTable.PullAsync("todoItems" + userid,
-            syncTable.Where(u => u.UserId == userid));
+  ```
+    await todoTable.PullAsync("todoItems" + userid,
+        syncTable.Where(u => u.UserId == userid));
+  ```
 
   如果想要选择退出增量同步，请将 `null` 作为查询 ID 传递。在此情况下，在对 `PullAsync` 的每次调用中将检索所有记录，从而可能会降低效率。
 

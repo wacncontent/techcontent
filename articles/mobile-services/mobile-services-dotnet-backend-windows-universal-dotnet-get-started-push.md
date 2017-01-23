@@ -34,12 +34,13 @@ ms.author: glenga
 [!INCLUDE [mobile-services-create-new-push-vs2013](../../includes/mobile-services-create-new-push-vs2013.md)]
 
 &nbsp;&nbsp;6.浏览到 `\Services\MobileServices\your_service_name` 项目文件夹，打开生成的 push.register.cs 代码文件，并检查 **UploadChannel** 方法是否将设备的通道 URL 注册到通知中心。
- 
+
 &nbsp;&nbsp;7.打开共享的 App.xaml.cs 代码文件，可以看到已在 **OnLaunched** 事件处理程序中添加了对新的 **UploadChannel** 方法的调用。这可确保每次启动应用程序时都尝试注册设备。
 
 &nbsp;&nbsp;8.重复执行前面的步骤为 Windows Phone 应用商店应用项目添加推送通知，然后在共享的 App.xaml.cs 文件中，删除对 **UploadChannel** 和剩余 `#if...#endif` 条件包装的额外调用。现在，这两个项目可以共用对 **UploadChannel** 的单一调用。
 
-> [!NOTE]此外，你还可以通过将 `#if...#endif` 包装的 [MobileServiceClient](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient.aspx) 定义统一为单个解包的定义供这两个版本的应用程序使用来简化生成的代码。
+> [!NOTE]
+>此外，你还可以通过将 `#if...#endif` 包装的 [MobileServiceClient](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient.aspx) 定义统一为单个解包的定义供这两个版本的应用程序使用来简化生成的代码。
 
 现在可以在应用程序中启用推送通知，你必须更新移动服务以发送推送通知。
 
@@ -55,17 +56,20 @@ ms.author: glenga
 
 本节中的剩余步骤是可选的。使用这些步骤可以针对本地计算机上运行的移动服务测试你的应用程序。如果你计划使用 Azure 中运行的移动服务测试推送通知，则可以直接跳到最后一节。这是因为“添加推送通知”向导已将你的应用程序配置为连接到 Azure 中运行的服务。
 
->[!NOTE]永远不要使用生产用移动服务进行测试和开发工作。始终将你的移动服务项目发布到单独的临时服务进行测试。
+>[!NOTE]
+>永远不要使用生产用移动服务进行测试和开发工作。始终将你的移动服务项目发布到单独的临时服务进行测试。
 
 &nbsp;&nbsp;5.打开共享的 App.xaml.cs 项目文件，找到创建 [MobileServiceClient] 类的新实例以访问 Azure 中运行的移动服务的代码行。
 
 &nbsp;&nbsp;6.注释掉此代码，并添加创建新的同名但在构造函数中使用本地主机 URL 的 [MobileServiceClient] 的代码，类似于如下代码：
 
-    // This MobileServiceClient has been configured to communicate with your local
-    // test project for debugging purposes.
-    public static MobileServiceClient todolistClient = new MobileServiceClient(
-        "http://localhost:4584"
-    );
+```
+// This MobileServiceClient has been configured to communicate with your local
+// test project for debugging purposes.
+public static MobileServiceClient todolistClient = new MobileServiceClient(
+    "http://localhost:4584"
+);
+```
 
 使用此 [MobileServiceClient]，应用将连接到本地服务（而不是 Azure 中托管的版本）。当你想要切换回来并针对 Azure 中托管的移动服务运行应用程序时，请更改回原始 [MobileServiceClient] 定义。
 

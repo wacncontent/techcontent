@@ -27,7 +27,7 @@ ms.author: rachelap
 
 ## 先决条件
 
-1. Azure 帐户（[在此处建立免费帐户](https://www.azure.cn/pricing/1rmb-trial/)）
+1. Azure 帐户（[在此处建立使用帐户](https://www.azure.cn/pricing/1rmb-trial/)）
 1. 已安装 [Node.js](http://nodejs.org)（本示例假设使用 Node.js 4.2.2 版）
 2. 已安装 [Git](https://git-scm.com/)
 1. [GitHub](https://github.com/) 帐户
@@ -40,7 +40,9 @@ ms.author: rachelap
 
 1. 导航到可供本地 Git 存储库使用的文件夹，然后克隆[包含示例代码的 GitHub 存储库](https://github.com/Azure-Samples/app-service-api-node-contact-list)。
 
-        git clone https://github.com/Azure-Samples/app-service-api-node-contact-list.git
+    ```
+    git clone https://github.com/Azure-Samples/app-service-api-node-contact-list.git
+    ```
 
     示例 API 提供两个终结点：针对 `/contacts` 的 Get 请求返回包含名称和电子邮件地址的 JSON 格式列表，`/contacts/{id}` 只返回所选的联系人。
 
@@ -48,47 +50,60 @@ ms.author: rachelap
 
 [Swagger](http://swagger.io/) 是描述 RESTful API 的元数据的文件格式。Azure 应用服务提供 [Swagger 元数据的内置支持](./app-service-api-metadata.md)。本教程部分为 API 开发工作流建模，将在其中先创建 Swagger 元数据，然后以此创建（自动生成）API 服务器代码基架。
 
->[!NOTE] 如果不想要了解如何从 Swagger 元数据文件创建 Node.js 代码基架，可以跳过本部分。如果只想将示例代码部署到新 API 应用，请直接转到[在 Azure 中创建 API 应用](#createapiapp)部分。
+>[!NOTE]
+> 如果不想要了解如何从 Swagger 元数据文件创建 Node.js 代码基架，可以跳过本部分。如果只想将示例代码部署到新 API 应用，请直接转到[在 Azure 中创建 API 应用](#createapiapp)部分。
 
 ### 安装并执行 Swaggerize
 
 1. 执行以下命令，全局安装 **yo** 和 **generator-swaggerize** NPM 模块。
 
-        npm install -g yo
-        npm install -g generator-swaggerize
+    ```
+    npm install -g yo
+    npm install -g generator-swaggerize
+    ```
 
     Swaggerize 是一款工具，可生成 Swagger 元数据文件描述的 API 服务器代码。要使用的 Swagger 文件名为 *api.json* ，它位于克隆的存储库的 *start* 文件夹中。
 
 2. 导航到 *start* 文件夹，然后执行 `yo swaggerize` 命令。Swaggerize 将询问一系列问题。请在 **what to call this project** 中输入“contactlist”、在 **path to swagger document** 中输入“api.json”，在 **Express, Hapi, or Restify** 中输入“express”。
 
-        yo swaggerize
+    ```
+    yo swaggerize
+    ```
 
     ![Swaggerize 命令行](./media/app-service-api-nodejs-api-app/swaggerize-command-line.png)
-    
+
     **注意**：如果在此步骤中遇到错误，下一步骤将解释如何进行修复。
 
     Swaggerize 将创建应用程序文件夹、创建处理程序和配置文件的基架，并生成 **package.json** 文件。快速视图引擎用于生成 Swagger 帮助页。
 
 3. 如果 `swaggerize` 命令失败并出现“意外的令牌”或“无效的转义序列”错误，请通过编辑所生成的 *package.json* 文件来解决错误原因。在 `scripts` 下面的 `regenerate` 行中，将 *api.json* 前面的反斜杠更改为正斜杠，使该行如以下示例所示：
 
-         "regenerate": "yo swaggerize --only=handlers,models,tests --framework express --apiPath config/api.json"
+    ```
+     "regenerate": "yo swaggerize --only=handlers,models,tests --framework express --apiPath config/api.json"
+    ```
 
 1. 导航到包含基架代码的文件夹（在本例中为 *ContactList* 子文件夹）。
 
 1. 运行 `npm install`。
-    
-        npm install
-        
+
+    ```
+    npm install
+    ```
+
 2. 安装 **jsonpath** NPM 模块。
 
-        npm install --save jsonpath
-        
+    ```
+    npm install --save jsonpath
+    ```
+
     ![Jsonpath 安装](./media/app-service-api-nodejs-api-app/jsonpath-install.png)
 
 1. 安装 **swaggerize-ui** NPM 模块。
 
-        npm install --save swaggerize-ui
-        
+    ```
+    npm install --save swaggerize-ui
+    ```
+
     ![Swaggerize UI 安装](./media/app-service-api-nodejs-api-app/swaggerize-ui-install.png)
 
 ### 自定义基架代码
@@ -99,68 +114,76 @@ ms.author: rachelap
 
     此代码使用 **lib/contactRepository.js** 提供的 **lib/contacts.json** 文件中存储的 JSON 数据。新 contacts.js 代码将响应 HTTP 请求，获取所有联系人并将其以 JSON 有效负载的形式返回。
 
-        'use strict';
-        
-        var repository = require('../lib/contactRepository');
-        
-        module.exports = {
-            get: function contacts_get(req, res) {
-                res.json(repository.all())
-            }
-        };
+    ```
+    'use strict';
+
+    var repository = require('../lib/contactRepository');
+
+    module.exports = {
+        get: function contacts_get(req, res) {
+            res.json(repository.all())
+        }
+    };
+    ```
 
 1. 将 **handlers/contacts/{id}.js** 文件中的代码替换为以下代码。
 
-        'use strict';
+    ```
+    'use strict';
 
-        var repository = require('../../lib/contactRepository');
-        
-        module.exports = {
-            get: function contacts_get(req, res) {
-                res.json(repository.get(req.params['id']));
-            }    
-        };
+    var repository = require('../../lib/contactRepository');
+
+    module.exports = {
+        get: function contacts_get(req, res) {
+            res.json(repository.get(req.params['id']));
+        }    
+    };
+    ```
 
 1. 将 **server.js** 中的代码替换为以下代码。
 
     对 server.js 文件进行的更改都带有注释，方便查看所做的更改。
 
-        'use strict';
+    ```
+    'use strict';
 
-        var port = process.env.PORT || 8000; // first change
+    var port = process.env.PORT || 8000; // first change
 
-        var http = require('http');
-        var express = require('express');
-        var bodyParser = require('body-parser');
-        var swaggerize = require('swaggerize-express');
-        var swaggerUi = require('swaggerize-ui'); // second change
-        var path = require('path');
+    var http = require('http');
+    var express = require('express');
+    var bodyParser = require('body-parser');
+    var swaggerize = require('swaggerize-express');
+    var swaggerUi = require('swaggerize-ui'); // second change
+    var path = require('path');
 
-        var app = express();
+    var app = express();
 
-        var server = http.createServer(app);
+    var server = http.createServer(app);
 
-        app.use(bodyParser.json());
+    app.use(bodyParser.json());
 
-        app.use(swaggerize({
-            api: path.resolve('./config/api.json'), // third change
-            handlers: path.resolve('./handlers'),
-            docspath: '/swagger' // fourth change
-        }));
+    app.use(swaggerize({
+        api: path.resolve('./config/api.json'), // third change
+        handlers: path.resolve('./handlers'),
+        docspath: '/swagger' // fourth change
+    }));
 
-        // change four
-        app.use('/docs', swaggerUi({
-          docs: '/swagger'  
-        }));
+    // change four
+    app.use('/docs', swaggerUi({
+      docs: '/swagger'  
+    }));
 
-        server.listen(port, function () { // fifth and final change
-        });
+    server.listen(port, function () { // fifth and final change
+    });
+    ```
 
 ### 使用本地运行的 API 测试
 
 1. 使用 Node.js 命令行可执行文件激活服务器。
 
-        node server.js
+    ```
+    node server.js
+    ```
 
 1. 浏览到 **http://localhost:8000/contacts** 时，可以看到联系人列表的 JSON 输出（或者系统会提示下载，具体取决于所用的浏览器）。
 
@@ -248,26 +271,34 @@ ms.author: rachelap
 
 1. 在命令行工具中导航到新文件夹，然后执行以下命令创建新的本地 Git 存储库。
 
-        git init
+    ```
+    git init
+    ```
 
      ![新的本地 Git 存储库](./media/app-service-api-nodejs-api-app/new-local-git-repo.png)
 
 1. 执行以下命令添加 API 应用存储库的 Git 远程设置。
 
-        git remote add azure YOUR_GIT_CLONE_URL_HERE
+    ```
+    git remote add azure YOUR_GIT_CLONE_URL_HERE
+    ```
 
     **注意**：请将“YOUR\_GIT\_CLONE\_URL\_HERE”字符串替换为前面复制的 Git 克隆 URL。
 
 1. 执行以下命令创建包含所有代码的提交内容。
 
-        git add .
-        git commit -m "initial revision"
+    ```
+    git add .
+    git commit -m "initial revision"
+    ```
 
     ![Git 提交输出](./media/app-service-api-nodejs-api-app/git-commit-output.png)
 
 1. 运行以下命令将代码推送到 Azure。当系统提示输入密码时，请输入前面在 Azure 门户预览中创建的密码。
 
-        git push azure master
+    ```
+    git push azure master
+    ```
 
     这会触发 API 应用的部署。
 
@@ -280,7 +311,7 @@ ms.author: rachelap
     完成部署后，“部署”页面将显示已在 API 应用中成功部署代码更改。
 
 ## 使用 Azure 中运行的 API 测试
- 
+
 3. 复制“API 应用”边栏选项卡的“概要”部分中的“URL”。
 
     ![部署已完成](./media/app-service-api-nodejs-api-app/deployment-completed.png)

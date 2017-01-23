@@ -46,14 +46,18 @@ ms.author: glenga
 
 4. 使用以下命令创建新 Git 存储库的本地副本，并将 `<your_git_URL>` 替换为移动服务的 Git 存储库的 URL：
 
-        git clone <your_git_URL>
+    ```
+    git clone <your_git_URL>
+    ```
 
 5. 出现提示时，请键入你在移动服务中启用源代码管理时设置的用户名和密码。身份验证成功后，你将看到类似于下面的一系列响应：
 
-        remote: Counting objects: 8, done.
-        remote: Compressing objects: 100% (4/4), done.
-        remote: Total 8 (delta 1), reused 0 (delta 0)
-        Unpacking objects: 100% (8/8), done.
+    ```
+    remote: Counting objects: 8, done.
+    remote: Compressing objects: 100% (4/4), done.
+    remote: Total 8 (delta 1), reused 0 (delta 0)
+    Unpacking objects: 100% (8/8), done.
+    ```
 
 6. 浏览到你从中运行了 `git clone` 命令的目录，可以发现，已创建了一个与移动服务同名的新目录。对于 .NET 后端移动服务，git 存储库最初是空的。
 
@@ -68,19 +72,25 @@ ms.author: glenga
 2. 删除所有 NuGet 包文件夹，只保留 packages.config 文件。
 
     移动服务将基于 packages.confign 文件自动还原 NuGet 包。你还可以定义一个 .gitignore 文件，以防止添加包目录。
- 
+
 3. 在 Git 命令提示符下，键入以下命令以开始跟踪新脚本文件：
 
-        $ git add .
-    
+    ```
+    $ git add .
+    ```
+
 4. 键入以下命令以提交更改：
 
-        $ git commit -m "adding the .NET backend service project"
+    ```
+    $ git commit -m "adding the .NET backend service project"
+    ```
 
 5. 键入以下命令以将更改上载到远程存储库，并提供你的凭据：
 
-        $ git push origin master
-    
+    ```
+    $ git push origin master
+    ```
+
     你应会看到一系列命令，它们指示已将项目部署到移动服务、已添加包，并且已重新启动服务。
 
 6. 浏览到 .NET 后端移动服务的 URL，你应会看到：

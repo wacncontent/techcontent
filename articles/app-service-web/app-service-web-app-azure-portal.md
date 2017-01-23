@@ -22,7 +22,7 @@ ms.author: jaime-espinosa
 Azure 网站现在称为 [App Service Web Apps](./app-service-changes-existing-services.md)。我们正在更新所有文档以反应此名称更改，并为 Azure 门户预览提供说明。完成该过程之前，你可以使用此文档作为在新 Azure 门户预览中使用 Web Apps 的指南。
 
 [!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
- 
+
 ## Azure 经典门户的未来趋势
 
 当你发现 Azure 经典门户中品牌改变时，该门户正处于被 Azure 门户预览替代的过程中。由于正在淘汰经典门户，因此新的开发工作重点将转移到 Azure 门户预览。所有即将发布的 Web Apps 新功能将出现在 Azure 门户预览中。开始使用 Azure 门户预览以利用 Web Apps 提供最新最全的功能。
@@ -66,7 +66,7 @@ Azure 门户预览则可以利用多个服务中的组件端对端地轻松构�
 若要启用诊断，请单击“设置”边栏选项卡中的“诊断日志”。
 
 ![](./media/app-service-web-app-azure-portal/Diagnostics.png)
- 
+
 若要配置应用程序设置，请单击“设置”边栏选项卡中的“应用程序设置”。
 
 ![](./media/app-service-web-app-azure-portal/AppSettingsPreview.png)
@@ -82,5 +82,5 @@ Azure 门户预览则可以利用多个服务中的组件端对端地轻松构�
 
 ## 发生的更改
 * 有关从网站更改为 App Service 的指南，请参阅：[Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
- 
+
 <!---HONumber=Mooncake_0328_2016-->

@@ -20,10 +20,12 @@
         "files": [
           "**/*.png",
           "**/*.jpg",
+          "**/*.jpeg",
           "**/*.svg",
           "**/*.gif",
           "../includes/**/*.png",
           "../includes/**/*.jpg",
+          "../includes/**/*.jpeg",
           "../includes/**/*.svg",
           "../includes/**/*.gif"
         ],

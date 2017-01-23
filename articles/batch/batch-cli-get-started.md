@@ -31,7 +31,8 @@ ms.author: marsma
 
 * 切换到 **资源管理器模式**：`azure config mode arm`
 
->[!TIP] 建议经常更新 Azure CLI 安装，利用服务更新和增强功能。
+>[!TIP]
+> 建议经常更新 Azure CLI 安装，利用服务更新和增强功能。
 
 ## 命令帮助
 
@@ -47,17 +48,24 @@ ms.author: marsma
 
 用法：
 
-    azure batch account create [options] <name>
+```
+azure batch account create [options] <name>
+```
 
 示例：
 
-    azure batch account create --location "China North"  --resource-group "resgroup001" "batchaccount001"
+```
+azure batch account create --location "China North"  --resource-group "resgroup001" "batchaccount001"
+```
 
 使用指定的参数创建新的 Batch 帐户。必须至少指定一个位置、资源组和帐户名。如果没有资源组，请运行 `azure group create` 创建资源组，并为 `--location` 选项指定一个 Azure 区域（例如“China North”）。例如：
 
-    azure group create --name "resgroup001" --location "China North"
+```
+azure group create --name "resgroup001" --location "China North"
+```
 
-> [!NOTE] Batch 帐户名必须是创建帐户的 Azure 区域内的唯一名称。它只能包含小写字母数字字符，且长度必须为 3-24 个字符。不能在 Batch 帐户名中使用 `-` 或 `_` 等特殊字符。
+> [!NOTE]
+> Batch 帐户名必须是创建帐户的 Azure 区域内的唯一名称。它只能包含小写字母数字字符，且长度必须为 3-24 个字符。不能在 Batch 帐户名中使用 `-` 或 `_` 等特殊字符。
 
 ### 链接存储帐户（自动存储） <a name="linked-storage-account-autostorage"></a>
 
@@ -67,21 +75,29 @@ ms.author: marsma
 
 首先，显示存储帐户的详细信息：
 
-    azure storage account show --resource-group "resgroup001" "storageaccount001"
+```
+azure storage account show --resource-group "resgroup001" "storageaccount001"
+```
 
 然后，为 `--autostorage-account-id` 选项使用 **Url** 值。Url 值以 "/subscriptions/" 开头，包含订阅 ID 和存储帐户的资源路径：
 
-    azure batch account create --location "China North"  --resource-group "resgroup001" --autostorage-account-id "/subscriptions/8ffffff8-4444-4444-bfbf-8ffffff84444/resourceGroups/resgroup001/providers/Microsoft.Storage/storageAccounts/storageaccount001" "batchaccount001"
+```
+azure batch account create --location "China North"  --resource-group "resgroup001" --autostorage-account-id "/subscriptions/8ffffff8-4444-4444-bfbf-8ffffff84444/resourceGroups/resgroup001/providers/Microsoft.Storage/storageAccounts/storageaccount001" "batchaccount001"
+```
 
 ## 删除批处理帐户
 
 用法：
 
-    azure batch account delete [options] <name>
+```
+azure batch account delete [options] <name>
+```
 
 示例：
 
-    azure batch account delete --resource-group "resgroup001" "batchaccount001"
+```
+azure batch account delete --resource-group "resgroup001" "batchaccount001"
+```
 
 删除指定的 Batch 帐户。出现提示时，请确认删除帐户（删除帐户可能需要一段时间才能完成）。
 
@@ -93,11 +109,15 @@ ms.author: marsma
 
 用法：
 
-    azure batch account keys list [options] <name>
+```
+azure batch account keys list [options] <name>
+```
 
 示例：
 
-    azure batch account keys list --resource-group "resgroup001" "batchaccount001"
+```
+azure batch account keys list --resource-group "resgroup001" "batchaccount001"
+```
 
 列出给定 Batch 帐户的帐户密钥。
 
@@ -105,11 +125,15 @@ ms.author: marsma
 
 用法：
 
-    azure batch account keys renew [options] --<primary|secondary> <name>
+```
+azure batch account keys renew [options] --<primary|secondary> <name>
+```
 
 示例：
 
-    azure batch account keys renew --resource-group "resgroup001" --primary "batchaccount001"
+```
+azure batch account keys renew --resource-group "resgroup001" --primary "batchaccount001"
+```
 
 为给定的 Batch 帐户重新生成指定的帐户密钥。
 
@@ -121,7 +145,8 @@ ms.author: marsma
 
 可以设置 `AZURE_BATCH_ACCOUNT`、`AZURE_BATCH_ACCESS_KEY` 和 `AZURE_BATCH_ENDPOINT` 环境变量，而无需每次执行命令时在命令行上指定 `-a`、`-k` 和 `-u` 选项。Batch CLI 将使用这些变量（如果已设置），因此可以省略 `-a`、`-k` 和 `-u` 选项。本文的余下部分假设使用这些环境变量。
 
->[!TIP] 使用 `azure batch account keys list` 列出密钥，使用 `azure batch account show` 显示帐户的终结点。
+>[!TIP]
+> 使用 `azure batch account keys list` 列出密钥，使用 `azure batch account show` 显示帐户的终结点。
 
 ### JSON 文件  <a name="json-files"></a>
 
@@ -133,56 +158,74 @@ ms.author: marsma
 
 若要查找创建资源所需的 JSON，请参阅 MSDN 上的 [Batch REST API reference][rest_api]（Batch REST API 参考）文档。每个“Add *resource type*”（添加 <资源类型>）主题都包含用于创建资源的示例 JSON，可将它用作 JSON 文件的模板。例如，在 [Add a pool to an account][rest_add_pool]（将池添加到帐户）中可以找到用于创建池的 JSON。
 
->[!NOTE] 如果在创建资源时指定 JSON 文件，则会忽略在命令行上为该资源指定的所有其他参数。
+>[!NOTE]
+> 如果在创建资源时指定 JSON 文件，则会忽略在命令行上为该资源指定的所有其他参数。
 
 ## 创建池
 
 用法：
 
-    azure batch pool create [options] [json-file]
+```
+azure batch pool create [options] [json-file]
+```
 
 示例（虚拟机配置）：
 
-    azure batch pool create --id "pool001" --target-dedicated 1 --vm-size "STANDARD_A1" --image-publisher "Canonical" --image-offer "UbuntuServer" --image-sku "14.04.2-LTS" --node-agent-id "batch.node.ubuntu 14.04"
+```
+azure batch pool create --id "pool001" --target-dedicated 1 --vm-size "STANDARD_A1" --image-publisher "Canonical" --image-offer "UbuntuServer" --image-sku "14.04.2-LTS" --node-agent-id "batch.node.ubuntu 14.04"
+```
 
 示例（云服务配置）：
 
-    azure batch pool create --id "pool002" --target-dedicated 1 --vm-size "small" --os-family "4"
+```
+azure batch pool create --id "pool002" --target-dedicated 1 --vm-size "small" --os-family "4"
+```
 
 在 Batch 服务中创建计算节点的池。
 
-如 [Batch feature overview](./batch-api-basics.md#pool/)（Batch 功能概述）中所述，为池中的节点选择操作系统时，可以使用两个选项：“虚拟机配置”和“云服务配置”。使用 `--image-*` 选项可创建虚拟机配置池，使用 `--os-family` 可创建云服务配置池。不能同时指定 `--os-family` 和 `--image-*` 选项。
+如 [Batch feature overview](./batch-api-basics.md#pool)（Batch 功能概述）中所述，为池中的节点选择操作系统时，可以使用两个选项：“虚拟机配置”和“云服务配置”。使用 `--image-*` 选项可创建虚拟机配置池，使用 `--os-family` 可创建云服务配置池。不能同时指定 `--os-family` 和 `--image-*` 选项。
 
-可以指定池[应用程序包](./batch-application-packages.md)以及[启动任务](./batch-api-basics.md#start-task/)的命令行。若要指定启动任务的资源文件，必须改用 [JSON 文件](#json-files)。
+可以指定池[应用程序包](./batch-application-packages.md)以及[启动任务](./batch-api-basics.md#start-task)的命令行。若要指定启动任务的资源文件，必须改用 [JSON 文件](#json-files)。
 
 使用以下命令删除池：
 
-    azure batch pool delete [pool-id]
+```
+azure batch pool delete [pool-id]
+```
 
->[!TIP] 在[虚拟机映像列表](./batch-linux-nodes.md#list-of-virtual-machine-images/)中检查适合 `--image-*` 选项的值。
+>[!TIP]
+> 在[虚拟机映像列表](./batch-linux-nodes.md#list-of-virtual-machine-images)中检查适合 `--image-*` 选项的值。
 
 ## 创建作业
 
 用法：
 
-    azure batch job create [options] [json-file]
+```
+azure batch job create [options] [json-file]
+```
 
 示例：
 
-    azure batch job create --id "job001" --pool-id "pool001"
+```
+azure batch job create --id "job001" --pool-id "pool001"
+```
 
 将作业添加到 Batch 帐户，指定执行其任务的池。
 
 使用以下命令删除作业：
 
-    azure batch job delete [job-id]
+```
+azure batch job delete [job-id]
+```
 
 ## 列出池、作业、任务和其他资源
 
 每个 Batch 资源类型都支持 `list` 命令，该命令可查询 Batch 帐户并列出该类型的资源。例如，可以列出帐户中的池以及作业中的任务：
 
-    azure batch pool list
-    azure batch task list --job-id "job001"
+```
+azure batch pool list
+azure batch task list --job-id "job001"
+```
 
 ### 有效列出资源
 
@@ -190,7 +233,9 @@ ms.author: marsma
 
 例如，以下命令只返回 ID 以“renderTask”开头的池：
 
-    azure batch task list --job-id "job001" --filter-clause "startswith(id, 'renderTask')"
+```
+azure batch task list --job-id "job001" --filter-clause "startswith(id, 'renderTask')"
+```
 
 Batch CLI 支持 Batch 服务所支持的所有三个子句：
 
@@ -208,15 +253,21 @@ Batch CLI 支持 Batch 服务所支持的所有三个子句：
 
 **创建**应用程序：
 
-    azure batch application create "resgroup001" "batchaccount001" "MyTaskApplication"
+```
+azure batch application create "resgroup001" "batchaccount001" "MyTaskApplication"
+```
 
 **添加**应用程序包：
 
-    azure batch application package create "resgroup001" "batchaccount001" "MyTaskApplication" "1.10-beta3" package001.zip
+```
+azure batch application package create "resgroup001" "batchaccount001" "MyTaskApplication" "1.10-beta3" package001.zip
+```
 
 **激活**包：
 
-    azure batch application package activate "resgroup002" "azbatch002" "MyTaskApplication" "1.10-beta3" zip
+```
+azure batch application package activate "resgroup002" "azbatch002" "MyTaskApplication" "1.10-beta3" zip
+```
 
 ### 部署应用程序包
 
@@ -224,11 +275,14 @@ Batch CLI 支持 Batch 服务所支持的所有三个子句：
 
 此命令在创建池时指定包，并在每个节点加入新池时部署该包：
 
-    azure batch pool create --id "pool001" --target-dedicated 1 --vm-size "small" --os-family "4" --app-package-ref "MyTaskApplication"
+```
+azure batch pool create --id "pool001" --target-dedicated 1 --vm-size "small" --os-family "4" --app-package-ref "MyTaskApplication"
+```
 
 目前无法使用命令行选项指定要部署的包版本。必须先使用 Azure 门户预览设置应用程序的默认版本，才可以将应用程序分配到池。在 [Application deployment with Azure Batch application packages](./batch-application-packages.md)（使用 Azure Batch 应用程序包部署应用程序）中了解如何设置默认版本。但是，如果在创建池时使用 [JSON 文件](#json-files)而不是命令行选项，则可以指定默认版本。
 
->[!IMPORTANT] 若要使用应用程序包，必须[将 Azure 存储帐户链接](#linked-storage-account-autostorage)到 Batch 帐户。
+>[!IMPORTANT]
+> 若要使用应用程序包，必须[将 Azure 存储帐户链接](#linked-storage-account-autostorage)到 Batch 帐户。
 
 ## 故障排除提示
 

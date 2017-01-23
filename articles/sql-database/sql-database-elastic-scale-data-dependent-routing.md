@@ -33,9 +33,11 @@ ms.author: torsteng
 
 应用程序应使用工厂调用 **[GetSQLShardMapManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.getsqlshardmapmanager.aspx)**，在初始化期间实例化 **ShardMapManager**。在本示例中，将同时初始化 **ShardMapManager** 以及它所包含的特定 **ShardMap**。本例演示 GetSqlShardMapManager 和 [GetRangeShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn824173.aspx) 方法。
 
-    ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnnectionString, 
-                      ShardMapManagerLoadPolicy.Lazy);
-    RangeShardMap<int> customerShardMap = smm.GetRangeShardMap<int>("customerMap"); 
+```
+ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnnectionString, 
+                  ShardMapManagerLoadPolicy.Lazy);
+RangeShardMap<int> customerShardMap = smm.GetRangeShardMap<int>("customerMap"); 
+```
 
 ### 尽可能使用最低特权凭据来获取分片映射
 
@@ -45,12 +47,14 @@ ms.author: torsteng
 
 **[ShardMap.OpenConnectionForKey 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.openconnectionforkey.aspx)** 将返回 ADO.Net 连接，该连接可随时基于 **key** 参数的值将命令分发到相应的数据库中。**ShardMapManager** 将分片信息缓存在应用程序中，因此这些请求通常不会针对**全局分片映射**数据库调用数据库查找。
 
-    // Syntax: 
-    public SqlConnection OpenConnectionForKey<TKey>(
-        TKey key,
-        string connectionString,
-        ConnectionOptions options
-    )
+```
+// Syntax: 
+public SqlConnection OpenConnectionForKey<TKey>(
+    TKey key,
+    string connectionString,
+    ConnectionOptions options
+)
+```
 
 * **key** 参数在分片映射中用作查找键，以确定该请求的相应数据库。
 
@@ -64,24 +68,26 @@ ms.author: torsteng
 
 本示例使用整数键 **CustomerID** 的值，并使用名为 **customerShardMap** 的 **ShardMap** 对象。
 
-    int customerId = 12345; 
-    int newPersonId = 4321; 
+```
+int customerId = 12345; 
+int newPersonId = 4321; 
 
-    // Connect to the shard for that customer ID. No need to call a SqlConnection 
-    // constructor followed by the Open method.
-    using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, 
-        Configuration.GetCredentialsConnectionString(), ConnectionOptions.Validate)) 
-    { 
-        // Execute a simple command. 
-        SqlCommand cmd = conn.CreateCommand(); 
-        cmd.CommandText = @"UPDATE Sales.Customer 
-                            SET PersonID = @newPersonID 
-                            WHERE CustomerID = @customerID"; 
+// Connect to the shard for that customer ID. No need to call a SqlConnection 
+// constructor followed by the Open method.
+using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, 
+    Configuration.GetCredentialsConnectionString(), ConnectionOptions.Validate)) 
+{ 
+    // Execute a simple command. 
+    SqlCommand cmd = conn.CreateCommand(); 
+    cmd.CommandText = @"UPDATE Sales.Customer 
+                        SET PersonID = @newPersonID 
+                        WHERE CustomerID = @customerID"; 
 
-        cmd.Parameters.AddWithValue("@customerID", customerId); 
-        cmd.Parameters.AddWithValue("@newPersonID", newPersonId); 
-        cmd.ExecuteNonQuery(); 
-    }  
+    cmd.Parameters.AddWithValue("@customerID", customerId); 
+    cmd.Parameters.AddWithValue("@newPersonID", newPersonId); 
+    cmd.ExecuteNonQuery(); 
+}  
+```
 
 **OpenConnectionForKey** 方法返回与正确数据库建立的、新的且已打开的连接。此方法中所采用的连接仍然可以充分利用 ADO.Net 连接池。如果一个分片一次可满足事务和请求，则只需在已使用 ADO.Net 的应用程序中进行此唯一修改。
 
@@ -90,7 +96,7 @@ ms.author: torsteng
 ## 与暂时性故障处理集成 
 
 在云中开发数据访问应用程序的最佳实践是，确保暂时性故障由应用引起，并且确保在引发错误之前重试几次这些操作。[暂时性故障处理](https://msdn.microsoft.com/zh-cn/library/dn440719(v=pandp.60).aspx) 中讨论了云应用程序的暂时性故障处理。
- 
+
 暂时性故障处理在本质上可以与依赖于数据的路由模式共存。关键需求是重试整个数据访问请求，包括已获取依赖于数据的路由连接的 **using** 块。可按照如下方式重写上面的示例（请注意突出显示的更改）。
 
 ### 示例 - 依赖于数据的路由与暂时性故障处理 
@@ -107,16 +113,18 @@ int newPersonId = 4321;
             // Execute a simple command 
             SqlCommand cmd = conn.CreateCommand(); 
 
-            cmd.CommandText = @"UPDATE Sales.Customer 
-                            SET PersonID = @newPersonID 
-                            WHERE CustomerID = @customerID"; 
+```
+        cmd.CommandText = @"UPDATE Sales.Customer 
+                        SET PersonID = @newPersonID 
+                        WHERE CustomerID = @customerID"; 
 
-            cmd.Parameters.AddWithValue("@customerID", customerId); 
-            cmd.Parameters.AddWithValue("@newPersonID", newPersonId); 
-            cmd.ExecuteNonQuery(); 
+        cmd.Parameters.AddWithValue("@customerID", customerId); 
+        cmd.Parameters.AddWithValue("@newPersonID", newPersonId); 
+        cmd.ExecuteNonQuery(); 
 
-            Console.WriteLine("Update completed"); 
-        } 
+        Console.WriteLine("Update completed"); 
+    } 
+```
 <span style="background-color:  #FFFF00">    }); </span> 
 </code></pre>
 
@@ -130,5 +138,5 @@ int newPersonId = 4321;
 若要分离分片或重新附加分片，请参阅[使用 RecoveryManager 类解决分片映射问题](./sql-database-elastic-database-recovery-manager.md)
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

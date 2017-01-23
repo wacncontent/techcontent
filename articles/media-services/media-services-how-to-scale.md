@@ -36,6 +36,6 @@ wacn.date: 12/16/2016
 
 ##<a id="storage"></a>缩放存储
 
-有关详细信息，请参阅[跨多个存储帐户管理媒体服务资产](./meda-services-managing-multiple-storage-accounts.md)和[使用 Azure 存储空间](../storage/index.md/)。
+有关详细信息，请参阅[跨多个存储帐户管理媒体服务资产](./meda-services-managing-multiple-storage-accounts.md)和[使用 Azure 存储空间](../storage/index.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

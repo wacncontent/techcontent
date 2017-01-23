@@ -123,7 +123,7 @@ Azure 带宽虽然是共享带宽，其价格还是非常具有竞争优势的�
 所谓计算服务，就是提供 CPU 和内存的计算能力。  
 
 熟悉 Azure 平台的读者都知道，在 Azure 平台的计算服务分为三种： 
- 
+
 (1) Azure Web 应用  
 
 (2) Azure 虚拟机  
@@ -362,7 +362,7 @@ D系列虚拟机的类型如下：
 (2) 静态资源可以直接访问 Azure 存储。  
 
    通过将静态内容请求发送到 Azure 存储，将动态内容请求发送到 Azure 云主机，可以大大减少云主机独享带宽的压力。
- 
+
 ###<a id="azure-cloud-service-cost-analysis"></a>1.9 Azure 云服务成本分析
 
 Azure 云服务按照分钟计费，计费的单价为每小时。  
@@ -411,4 +411,3 @@ Azure 云服务运行时，会收取计算费用；关闭后，继续收取计�
 [3]: ./media/azure-cloud-services-user-manual-part-1/3.png
 [4]: ./media/azure-cloud-services-user-manual-part-1/4.png
 [5]: ./media/azure-cloud-services-user-manual-part-1/5.png
-

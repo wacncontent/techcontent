@@ -37,51 +37,55 @@ ms.author: tomfitz
 
 以下示例显示了一个包含标记的存储帐户。
 
-    "resources": [
+```
+"resources": [
+    {
+        "type": "Microsoft.Storage/storageAccounts",
+        "apiVersion": "2015-06-15",
+        "name": "[concat('storage', uniqueString(resourceGroup().id))]",
+        "location": "[resourceGroup().location]",
+        "tags": {
+            "dept": "Finance"
+        },
+        "properties": 
         {
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2015-06-15",
-            "name": "[concat('storage', uniqueString(resourceGroup().id))]",
-            "location": "[resourceGroup().location]",
-            "tags": {
-                "dept": "Finance"
-            },
-            "properties": 
-            {
-                "accountType": "Standard_LRS"
-            }
+            "accountType": "Standard_LRS"
         }
-    ]
+    }
+]
+```
 
 Resource Manager 当前不支持处理标记名称和值对象。可以传递标记值对象，但仍需指定标记名称，如以下示例所示。
 
-    {
-      "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-      "contentVersion": "1.0.0.0",
-      "parameters": {
-        "tagvalues": {
-          "type": "object",
-          "defaultValue": {
-            "dept": "Finance",
-            "project": "Test"
-          }
-        }
-      },
-      "resources": [
-      {
-        "apiVersion": "2015-06-15",
-        "type": "Microsoft.Storage/storageAccounts",
-        "name": "examplestorage",
-        "tags": {
-          "dept": "[parameters('tagvalues').dept]",
-          "project": "[parameters('tagvalues').project]"
-        },
-        "location": "[resourceGroup().location]",
-        "properties": {
-          "accountType": "Standard_LRS"
-        }
-      }]
+```
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "tagvalues": {
+      "type": "object",
+      "defaultValue": {
+        "dept": "Finance",
+        "project": "Test"
+      }
     }
+  },
+  "resources": [
+  {
+    "apiVersion": "2015-06-15",
+    "type": "Microsoft.Storage/storageAccounts",
+    "name": "examplestorage",
+    "tags": {
+      "dept": "[parameters('tagvalues').dept]",
+      "project": "[parameters('tagvalues').project]"
+    },
+    "location": "[resourceGroup().location]",
+    "properties": {
+      "accountType": "Standard_LRS"
+    }
+  }]
+}
+```
 
 ## 门户
 [!INCLUDE [resource-manager-tag-resource](../../includes/resource-manager-tag-resources.md)]

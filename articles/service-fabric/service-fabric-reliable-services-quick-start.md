@@ -72,26 +72,29 @@ Azure Service Fabric 应用程序包含一个或多个运行你的代码的服�
 
 在本教程中，我们将重点放在 `RunAsync()` 入口点方法上。这是你可以立即开始运行代码的位置。项目模板包括 `RunAsync()` 的示例实现，该实现递增滚动计数。
 
-> [!NOTE] 有关如何使用通信堆栈的详细信息，请参阅 [Service Fabric Web API 服务与 OWIN 自托管](./service-fabric-reliable-services-communication-webapi.md)
+> [!NOTE]
+> 有关如何使用通信堆栈的详细信息，请参阅 [Service Fabric Web API 服务与 OWIN 自托管](./service-fabric-reliable-services-communication-webapi.md)
 
 ### RunAsync
 
-    protected override async Task RunAsync(CancellationToken cancellationToken)
+```
+protected override async Task RunAsync(CancellationToken cancellationToken)
+{
+    // TODO: Replace the following sample code with your own logic
+    //       or remove this RunAsync override if it's not needed in your service.
+
+    long iterations = 0;
+
+    while (true)
     {
-        // TODO: Replace the following sample code with your own logic
-        //       or remove this RunAsync override if it's not needed in your service.
+        cancellationToken.ThrowIfCancellationRequested();
 
-        long iterations = 0;
+        ServiceEventSource.Current.ServiceMessage(this, "Working-{0}", ++iterations);
 
-        while (true)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            ServiceEventSource.Current.ServiceMessage(this, "Working-{0}", ++iterations);
-
-            await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
-        }
+        await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
     }
+}
+```
 
 当服务实例已放置并且可以执行时，平台将调用此方法。对于无状态服务，这就意味着打开服务实例。需要关闭服务实例时，将提供取消标记进行协调。在 Service Fabric 中，服务实例的此打开-关闭循环可能会在服务的整个生存期内出现多次。发生这种情况的原因多种多样，包括：
 
@@ -132,7 +135,9 @@ Service Fabric 引入了一种新的有状态服务。有状态服务能够可�
         // TODO: Replace the following sample code with your own logic
         //       or remove this RunAsync override if it's not needed in your service.
 
-        var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
+    ```
+var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
+```
 
         while (true)
         {
@@ -176,14 +181,16 @@ Service Fabric 引入了一种新的有状态服务。有状态服务能够可�
 
 ### 事务和异步操作
 
-    using (ITransaction tx = this.StateManager.CreateTransaction())
-    {
-        var result = await myDictionary.TryGetValueAsync(tx, "Counter-1");
+```
+using (ITransaction tx = this.StateManager.CreateTransaction())
+{
+    var result = await myDictionary.TryGetValueAsync(tx, "Counter-1");
 
-        await myDictionary.AddOrUpdateAsync(tx, "Counter-1", 0, (k, v) => ++v);
+    await myDictionary.AddOrUpdateAsync(tx, "Counter-1", 0, (k, v) => ++v);
 
-        await tx.CommitAsync();
-    }
+    await tx.CommitAsync();
+}
+```
 
 可靠集合具有许多与其 `System.Collections.Generic` 和 `System.Collections.Concurrent` 对应项相同的操作，LINQ 除外。可靠集合上的操作是异步的。这是因为可靠集合的写入操作执行 I/O 操作，以将数据复制并保存到磁盘。
 
@@ -194,7 +201,8 @@ Service Fabric 引入了一种新的有状态服务。有状态服务能够可�
 
 服务开始运行之后，可以在“诊断事件”窗口中查看生成的 Windows 事件跟踪 (ETW) 事件。请注意，应用程序中会同时显示无状态服务和有状态服务的事件。可以通过单击“暂停”按钮来暂停流。然后，可以通过展开该消息来检查消息的详细信息。
 
->[!NOTE] 在运行应用程序之前，请确保正在运行本地开发群集。有关设置本地环境的信息，请查看[入门指南](./service-fabric-get-started.md)。
+>[!NOTE]
+> 在运行应用程序之前，请确保正在运行本地开发群集。有关设置本地环境的信息，请查看[入门指南](./service-fabric-get-started.md)。
 
 ![在 Visual Studio 中查看诊断事件](./media/service-fabric-reliable-services-quick-start/hello-stateful-Output.png)  
 

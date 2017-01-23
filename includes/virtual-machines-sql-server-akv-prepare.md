@@ -1,9 +1,9 @@
 ## 准备 AKV 集成
 若要使用 Azure 密钥保管库集成来配置 SQL Server VM，有以下几个先决条件：
 
-1.	[安装 Azure Powershell](#install-azure-powershell)
-2.	[创建 Azure Active Directory](#create-an-azure-active-directory)
-3.	[创建密钥保管库](#create-a-key-vault)
+1. [安装 Azure Powershell](#install-azure-powershell)
+2. [创建 Azure Active Directory](#create-an-azure-active-directory)
+3. [创建密钥保管库](#create-a-key-vault)
 
 以下各节描述了这些先决条件，以及稍后运行 PowerShell cmdlet 需要收集的信息。
 
@@ -17,7 +17,7 @@
 
 - 添加应用程序后，在“配置”选项卡上找到**客户端 ID**。 
     ![Azure Active Directory 客户端 ID](./media/virtual-machines-sql-server-akv-prepare/aad-client-id.png)
-    
+
     稍后会将该客户端 ID 分配给 PowerShell 脚本中的 **$spName**（服务主体名称）参数，以启用 Azure 密钥保管库集成。 
 - 此外，在执行这些步骤期间，请在创建密钥时复制密钥的密码，如下面的屏幕截图中所示。稍后会将此密钥密码分配给 PowerShell 脚本中的 **$spSecret**（服务主体密码）参数。  
     ![Azure Active Directory 密码](./media/virtual-machines-sql-server-akv-prepare/aad-sp-secret.png)
@@ -28,7 +28,9 @@
 
 进行创建密钥保管库的步骤时，请注意返回的 **vaultUri** 属性，它是密钥保管库 URL。下面显示了该步骤中提供的示例，其中的密钥保管库名称是 ContosoKeyVault，因此密钥保管库 URL 将为 https://contosokeyvault.vault.chinacloudapi.cn/。
 
-    New-AzureRmKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'China East'
+```
+New-AzureRmKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'China East'
+```
 
 稍后会将该密钥保管库 URL 分配给 PowerShell 脚本中的 **$akvURL** 参数，以启用 Azure 密钥保管库集成。
 

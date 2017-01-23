@@ -43,7 +43,7 @@ wacn.date: 09/29/2016
     - AzureTools
     - WinDBG
     - Intellitrace
-    
+
 这儿有个简短的 Channel 9 视频演示了一些本篇博客提到的文件位置以及使用 SDP 包的方法[https://channel9.msdn.com/Series/DIY-Windows-Azure-Troubleshooting/Windows-Azure-PaaS-Diagnostics-Data](https://channel9.msdn.com/Series/DIY-Windows-Azure-Troubleshooting/Windows-Azure-PaaS-Diagnostics-Data).
 
 ## 诊断数据的位置
@@ -119,7 +119,7 @@ Azure 开发支持团队已经创建了一个 SDP(Support Diagnostics Platform �
 * **Windows Azure Guest OS Family 2 & 3** (Windows Server 2008 R2 and Windows Server 2012.  Powershell v2) – [2625.CTS_AzurePaaSLogs_global.DiagCab](http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab)
 * **Windows Azure Guest OS Family 1** (Windows Server 2008.  Powershell v1) – [5635.CTS_AzurePaaSLogs_en-US_OSFamily1.EXE](http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_en-Windows2008.EXE)
 
-*您可以在这篇文章中找到更多关于 SDP 的内容：[http://support.microsoft.com/kb/2772488](http://support.microsoft.com/zh-cn/kb/2772488).  
+*您可以在这篇文章中找到更多关于 SDP 的内容：[http://support.microsoft.com/zh-cn/kb/2772488](http://support.microsoft.com/zh-cn/kb/2772488).  
 
 ### 为 Windows Azure Guest OS Family 2 & 3 获取 SDP 组件
 
@@ -129,10 +129,12 @@ Azure 开发支持团队已经创建了一个 SDP(Support Diagnostics Platform �
 2. **打开 Powershell**
 3. **复制/黏贴并执行以下代码**
 
-        md c:\Diagnostics; 
-        md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
-        Import-Module bitstransfer; 
-        explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
+    ```
+    md c:\Diagnostics; 
+    md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
+    Import-Module bitstransfer; 
+    explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
+    ```
 
 这行代码会做以下的事情:
 

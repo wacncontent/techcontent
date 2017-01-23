@@ -51,83 +51,95 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ## 如何在 VM 创建期间使用 PowerShell 请求 ILPIP
 下面的 PowerShell 脚本将创建名为 *FTPService* 的全新云服务，然后从 Azure 中检索映像，并使用检索到的映像创建名为 *FTPInstance* 的 VM，接着将 VM 设置为使用 ILPIP，最后再将 VM 添加到新服务：
 
-    New-AzureService -ServiceName FTPService -Location "China North"
+```
+New-AzureService -ServiceName FTPService -Location "China North"
 
-    $image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"} `
-    New-AzureVMConfig -Name FTPInstance -InstanceSize Small -ImageName $image.ImageName `
-    | Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
-    | Set-AzurePublicIP -PublicIPName ftpip | New-AzureVM -ServiceName FTPService -Location "China North"
+$image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"} `
+New-AzureVMConfig -Name FTPInstance -InstanceSize Small -ImageName $image.ImageName `
+| Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
+| Set-AzurePublicIP -PublicIPName ftpip | New-AzureVM -ServiceName FTPService -Location "China North"
+```
 
 ## 如何检索 VM 的 ILPIP 信息
 若要查看使用以上脚本创建的 VM 的 ILPIP 信息，请运行以下 PowerShell 命令，然后观察 *PublicIPAddress* 和 *PublicIPName* 的值：
 
-    Get-AzureVM -Name FTPInstance -ServiceName FTPService
+```
+Get-AzureVM -Name FTPInstance -ServiceName FTPService
+```
 
 预期输出：
- 
-    DeploymentName              : FTPService
-    Name                        : FTPInstance
-    Label                       : 
-    VM                          : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
-    InstanceStatus              : ReadyRole
-    IpAddress                   : 100.74.118.91
-    InstanceStateDetails        : 
-    PowerState                  : Started
-    InstanceErrorCode           : 
-    InstanceFaultDomain         : 0
-    InstanceName                : FTPInstance
-    InstanceUpgradeDomain       : 0
-    InstanceSize                : Small
-    HostName                    : FTPInstance
-    AvailabilitySetName         : 
-    DNSName                     : http://ftpservice888.chinacloudapp.cn/
-    Status                      : ReadyRole
-    GuestAgentStatus            : 	Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
-    ResourceExtensionStatusList : {Microsoft.Compute.BGInfo}
-    PublicIPAddress             : 104.43.142.188
-    PublicIPName                : ftpip
-    NetworkInterfaces           : {}
-    ServiceName                 : FTPService
-    OperationDescription        : Get-AzureVM
-    OperationId                 : 568d88d2be7c98f4bbb875e4d823718e
-    OperationStatus             : OK
+
+```
+DeploymentName              : FTPService
+Name                        : FTPInstance
+Label                       : 
+VM                          : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
+InstanceStatus              : ReadyRole
+IpAddress                   : 100.74.118.91
+InstanceStateDetails        : 
+PowerState                  : Started
+InstanceErrorCode           : 
+InstanceFaultDomain         : 0
+InstanceName                : FTPInstance
+InstanceUpgradeDomain       : 0
+InstanceSize                : Small
+HostName                    : FTPInstance
+AvailabilitySetName         : 
+DNSName                     : http://ftpservice888.chinacloudapp.cn/
+Status                      : ReadyRole
+GuestAgentStatus            : 	Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
+ResourceExtensionStatusList : {Microsoft.Compute.BGInfo}
+PublicIPAddress             : 104.43.142.188
+PublicIPName                : ftpip
+NetworkInterfaces           : {}
+ServiceName                 : FTPService
+OperationDescription        : Get-AzureVM
+OperationId                 : 568d88d2be7c98f4bbb875e4d823718e
+OperationStatus             : OK
+```
 
 ## 如何删除 VM 的 ILPIP
 若要删除在以上脚本中添加到 VM 的 ILPIP，请运行以下 PowerShell 命令：
 
-    Get-AzureVM -ServiceName FTPService -Name FTPInstance | Remove-AzurePublicIP | Update-AzureVM
+```
+Get-AzureVM -ServiceName FTPService -Name FTPInstance | Remove-AzurePublicIP | Update-AzureVM
+```
 
 ## 如何向现有 VM 添加 ILPIP
 若要向使用以上脚本创建的 VM 添加 ILPIP，请运行以下命令：
 
-    Get-AzureVM -ServiceName FTPService -Name FTPInstance | Set-AzurePublicIP -PublicIPName ftpip2 | Update-AzureVM
+```
+Get-AzureVM -ServiceName FTPService -Name FTPInstance | Set-AzurePublicIP -PublicIPName ftpip2 | Update-AzureVM
+```
 
 ## 如何使用服务配置文件将 ILPIP 关联到 VM
 你可以使用服务配置 (CSCFG) 文件将 ILPIP 关联到 VM。下面的示例 xml 显示了如何将云服务配置为使用名为 *MyPublicIP* 的 ILPIP充当角色实例：
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <ServiceConfiguration serviceName="ReservedIPSample" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
-      <Role name="WebRole1">
-        <Instances count="1" />
-        <ConfigurationSettings>
-          <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-        </ConfigurationSettings>
-      </Role>
-      <NetworkConfiguration>
-        <VirtualNetworkSite name="VNet"/>
-        <AddressAssignments>
-          <InstanceAddress roleName="VMRolePersisted">
-            <Subnets>
-              <Subnet name="Subnet1"/>
-              <Subnet name="Subnet2"/>
-            </Subnets>
-            <PublicIPs>
-              <PublicIP name="MyPublicIP" domainNameLabel="MyPublicIP" />
-            </PublicIPs>
-          </InstanceAddress>
-        </AddressAssignments>
-      </NetworkConfiguration>
-    </ServiceConfiguration>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="ReservedIPSample" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
+  <Role name="WebRole1">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+  <NetworkConfiguration>
+    <VirtualNetworkSite name="VNet"/>
+    <AddressAssignments>
+      <InstanceAddress roleName="VMRolePersisted">
+        <Subnets>
+          <Subnet name="Subnet1"/>
+          <Subnet name="Subnet2"/>
+        </Subnets>
+        <PublicIPs>
+          <PublicIP name="MyPublicIP" domainNameLabel="MyPublicIP" />
+        </PublicIPs>
+      </InstanceAddress>
+    </AddressAssignments>
+  </NetworkConfiguration>
+</ServiceConfiguration>
+```
 
 ## 后续步骤
 * 了解 [IP 寻址](./virtual-network-ip-addresses-overview-classic.md)在经典部署模型中的工作原理。

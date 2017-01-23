@@ -21,4 +21,3 @@
 
 # Resources
 ##[Azure AD Connect Health FAQ](active-directory-aadconnect-health-faq.md)
-

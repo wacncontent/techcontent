@@ -52,7 +52,8 @@ HDInsight 使用各种 Hadoop 组件。有关已获得验证和支持的组件�
 - 在群集设置期间使用 HDInsight .NET SDK 或 Azure PowerShell 中的群集自定义参数。这样，这些配置更改将在群集的整个生存期内保留，并且不受 Azure 平台在维护时定期执行的群集节点重置映像影响。有关使用群集自定义参数的详细信息，请参阅[预配 HDInsight 群集](./hdinsight-provision-clusters-v1.md)。
 - 一些本机 Java 组件（如 Mahout 和 Cascading）可以在群集上作为 JAR 文件运行。可以通过 Hadoop 作业提交机制将这些 JAR 文件分发到 Azure Blob 存储，并提交到 HDInsight 群集。有关详细信息，请参阅[以编程方式提交 Hadoop 作业](./hdinsight-submit-hadoop-jobs-programmatically.md)。
 
-    >[!NOTE]如果你在将 JAR 文件部署到 HDInsight 群集或调用 HDInsight 群集上的 JAR 文件时遇到问题，请联系 [Microsoft 技术支持](https://www.azure.cn/support/contact/)。
+    >[!NOTE]
+    >如果你在将 JAR 文件部署到 HDInsight 群集或调用 HDInsight 群集上的 JAR 文件时遇到问题，请联系 [Microsoft 技术支持](https://www.azure.cn/support/contact/)。
 
     > Cascading 不受 HDInsight 支持，因此不符合 Microsoft 技术支持的条件。有关支持的组件的列表，请参阅 [HDInsight 提供的群集版本有哪些新功能？](./hdinsight-component-versioning-v1.md)。
 
@@ -88,9 +89,11 @@ HDInsight 群集可以有两个用户帐户。HDInsight 群集用户帐户是在
 
     ![HDI.CreateRDPUser][image-hdi-create-rpd-user]
 
-> [!NOTE]也可以使用 HDInsight .NET SDK 在群集上启用远程桌面。按以下方式使用 HDInsight 客户端对象上的 **EnableRdp** 方法：**client.EnableRdp(clustername, location, "rdpuser", "rdppassword", DateTime.Now.AddDays(6))**。同样，若要在群集上禁用远程桌面，可以使用 **client.DisableRdp(clustername, location)**。有关这些方法的详细信息，请参阅 [HDInsight .NET SDK 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx)。这仅适用于在 Windows 上运行的 HDInsight 群集。
+> [!NOTE]
+>也可以使用 HDInsight .NET SDK 在群集上启用远程桌面。按以下方式使用 HDInsight 客户端对象上的 **EnableRdp** 方法：**client.EnableRdp(clustername, location, "rdpuser", "rdppassword", DateTime.Now.AddDays(6))**。同样，若要在群集上禁用远程桌面，可以使用 **client.DisableRdp(clustername, location)**。有关这些方法的详细信息，请参阅 [HDInsight .NET SDK 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx)。这仅适用于在 Windows 上运行的 HDInsight 群集。
 
-> [!NOTE]为群集启用 RDP 后，必须刷新页面，然后才能连接到群集。
+> [!NOTE]
+>为群集启用 RDP 后，必须刷新页面，然后才能连接到群集。
 
 **使用 RDP 连接到群集**
 
@@ -126,7 +129,8 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 默认情况下，将授权这些服务进行访问。你可以从 Azure 经典管理门户撤消/授予访问权限。
 
->[!NOTE]授予/撤消访问权限时，你将重设群集用户的用户名和密码。
+>[!NOTE]
+>授予/撤消访问权限时，你将重设群集用户的用户名和密码。
 
 **授予/撤消 HTTP Web 服务访问权限**
 
@@ -162,11 +166,13 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 在上面的屏幕快照中，文件夹名称嵌入了 Hadoop 版本号。版本号可以根据群集上安装的 Hadoop 组件的版本而更改。可以使用 Hadoop 环境变量来引用这些文件夹。例如：
 
-    cd %hadoop_home%
-    cd %hive_home%
-    cd %pig_home%
-    cd %sqoop_home%
-    cd %hcatalog_home%
+```
+cd %hadoop_home%
+cd %hive_home%
+cd %pig_home%
+cd %sqoop_home%
+cd %hcatalog_home%
+```
 
 ##后续步骤
 在本文中，你学习了如何使用 Azure 经典管理门户创建 HDInsight 群集以及如何打开 Hadoop 命令行工具。若要了解更多信息，请参阅下列文章：

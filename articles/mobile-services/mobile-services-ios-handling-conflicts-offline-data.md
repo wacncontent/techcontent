@@ -23,7 +23,8 @@ ms.author: krisragh;donnam
 
 本主题演示在使用 Azure 移动服务的脱机功能时如何同步数据和处理冲突。本教程基于[脱机数据入门]教程编写。
 
->[!NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=AE564AB28" target="_blank">Azure 试用</a>。
+>[!NOTE]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=AE564AB28" target="_blank">Azure 试用</a>。
 
 ## 下载 iOS 项目
 
@@ -40,60 +41,68 @@ ms.author: krisragh;donnam
 
 1. 在 **QSTodoListViewController.m** 中，编辑 **viewDidLoad**。将对 **defaultService** 的调用替换为对 **defaultServiceWithDelegate** 的调用：
 
-        self.todoService = [QSTodoService defaultServiceWithDelegate:self];
+    ```
+    self.todoService = [QSTodoService defaultServiceWithDelegate:self];
+    ```
 
 2. 在 **QSTodoListViewController.h** 中，将 **&lt;MSSyncContextDelegate&gt;** 添加到接口声明，以便实现 **MSSyncContextDelegate** 协议。
 
-        @interface QSTodoListViewController : UITableViewController<MSSyncContextDelegate, NSFetchedResultsControllerDelegate>
+    ```
+    @interface QSTodoListViewController : UITableViewController<MSSyncContextDelegate, NSFetchedResultsControllerDelegate>
+    ```
 
 3. 在 **QSTodoListViewController.m** 的顶部添加以下 import 语句：
 
-        #import "QSUIAlertViewWithBlock.h"
+    ```
+    #import "QSUIAlertViewWithBlock.h"
+    ```
 
 4. 最后，让我们将以下两项操作添加到 **QSTodoListViewController.m**，以便使用此帮助器类，并提示用户以三种方式之一协调冲突。
 
-        - (void)tableOperation:(MSTableOperation *)operation onComplete:(MSSyncItemBlock)completion
-        {
-            [self doOperation:operation complete:completion];
-        }
+    ```
+    - (void)tableOperation:(MSTableOperation *)operation onComplete:(MSSyncItemBlock)completion
+    {
+        [self doOperation:operation complete:completion];
+    }
 
-        -(void)doOperation:(MSTableOperation *)operation complete:(MSSyncItemBlock)completion
-        {
-            [operation executeWithCompletion:^(NSDictionary *item, NSError *error) {
+    -(void)doOperation:(MSTableOperation *)operation complete:(MSSyncItemBlock)completion
+    {
+        [operation executeWithCompletion:^(NSDictionary *item, NSError *error) {
 
-                NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
+            NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
 
-                if (error.code == MSErrorPreconditionFailed) {
-                    QSUIAlertViewWithBlock *alert = [[QSUIAlertViewWithBlock alloc] initWithCallback:^(NSInteger buttonIndex) {
-                        if (buttonIndex == 1) { // Client
-                            NSMutableDictionary *adjustedItem = [operation.item mutableCopy];
+            if (error.code == MSErrorPreconditionFailed) {
+                QSUIAlertViewWithBlock *alert = [[QSUIAlertViewWithBlock alloc] initWithCallback:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) { // Client
+                        NSMutableDictionary *adjustedItem = [operation.item mutableCopy];
 
-                            [adjustedItem setValue:[serverItem objectForKey:MSSystemColumnVersion] forKey:MSSystemColumnVersion];
-                            operation.item = adjustedItem;
+                        [adjustedItem setValue:[serverItem objectForKey:MSSystemColumnVersion] forKey:MSSystemColumnVersion];
+                        operation.item = adjustedItem;
 
-                            [self doOperation:operation complete:completion];
-                            return;
+                        [self doOperation:operation complete:completion];
+                        return;
 
-                        } else if (buttonIndex == 2) { // Server
-                            NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
-                            completion(serverItem, nil);
-                        } else { // Cancel
-                            [operation cancelPush];
-                            completion(nil, error);
-                        }
-                    }];
+                    } else if (buttonIndex == 2) { // Server
+                        NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
+                        completion(serverItem, nil);
+                    } else { // Cancel
+                        [operation cancelPush];
+                        completion(nil, error);
+                    }
+                }];
 
-                    NSString *message = [NSString stringWithFormat:@"Client value: %@\nServer value: %@", operation.item[@"text"], serverItem[@"text"]];
+                NSString *message = [NSString stringWithFormat:@"Client value: %@\nServer value: %@", operation.item[@"text"], serverItem[@"text"]];
 
-                    [alert showAlertWithTitle:@"Server Conflict"
-                                      message:message
-                            cancelButtonTitle:@"Cancel"
-                            otherButtonTitles:[NSArray arrayWithObjects:@"Use Client", @"Use Server", nil]];
-                } else {
-                    completion(item, error);
-                }
-            }];
-        }
+                [alert showAlertWithTitle:@"Server Conflict"
+                                  message:message
+                        cancelButtonTitle:@"Cancel"
+                        otherButtonTitles:[NSArray arrayWithObjects:@"Use Client", @"Use Server", nil]];
+            } else {
+                completion(item, error);
+            }
+        }];
+    }
+    ```
 
 ## <a name="test-app"></a>测试应用程序
 
@@ -138,5 +147,5 @@ ms.author: krisragh;donnam
 [Getting Started Offline iOS Sample]: https://github.com/Azure/mobile-services-samples/tree/master/TodoOffline/iOS/blog20140611
 [脱机数据入门]: ./mobile-services-ios-get-started-offline-data.md
 [Get started with Mobile Services]: ./mobile-services-ios-get-started.md
- 
+
 <!---HONumber=Mooncake_0118_2016-->

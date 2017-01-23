@@ -76,7 +76,8 @@ ms.author: jimpark;markgal
 
 从“配置”选项卡中，可以选择适当的存储冗余选项。选择存储冗余选项的最佳时机是在创建保管库之后、将任何计算机注册到保管库之前。
 
->[!WARNING] 将某个项注册到保管库后，存储冗余选项将会锁定且不能修改。
+>[!WARNING]
+> 将某个项注册到保管库后，存储冗余选项将会锁定且不能修改。
 
 ![配置](./media/backup-azure-manage-windows-server-classic/configure.png)
 
@@ -99,7 +100,8 @@ ms.author: jimpark;markgal
 
 ![代理控制台操作](./media/backup-azure-manage-windows-server-classic/console-actions.png)
 
->[!NOTE] 若要**恢复数据**，请参阅 [Restore files to a Windows server or Windows client machine](./backup-azure-restore-windows-server.md)（将文件还原到 Windows Server 或 Windows 客户端计算机）。
+>[!NOTE]
+> 若要**恢复数据**，请参阅 [Restore files to a Windows server or Windows client machine](./backup-azure-restore-windows-server.md)（将文件还原到 Windows Server 或 Windows 客户端计算机）。
 
 ### 修改现有备份
 
@@ -125,7 +127,8 @@ ms.author: jimpark;markgal
 
     ![指定备份计划](./media/backup-azure-manage-windows-server-classic/specify-backup-schedule-modify-close.png)  
 
-    >[!NOTE] [此文](./backup-azure-backup-cloud-as-tape.md)中详细介绍了如何指定备份计划。
+    >[!NOTE]
+    > [此文](./backup-azure-backup-cloud-as-tape.md)中详细介绍了如何指定备份计划。
 
 6. 选择备份副本的“保留策略”，然后单击“下一步”。
 

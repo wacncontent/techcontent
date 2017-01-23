@@ -48,51 +48,55 @@ SQL DB 的弹性数据库事务可让应用程序对多个不同 SQL 数据库�
 
 以下示例代码使用你熟悉的 .NET System.Transactions 编程体验。TransactionScope 类在 .NET 中创建环境事务。（“环境事务”是位于当前线程中的事务）。 在 TransactionScope 内打开的所有连接都参与该事务。如果有不同的数据库参与，事务将自动提升为分布式事务。通过设置完成范围来指示提交，即可控制事务的结果。
 
-    using (var scope = new TransactionScope())
+```
+using (var scope = new TransactionScope())
+{
+    using (var conn1 = new SqlConnection(connStrDb1))
     {
-        using (var conn1 = new SqlConnection(connStrDb1))
-        {
-            conn1.Open();
-            SqlCommand cmd1 = conn1.CreateCommand();
-            cmd1.CommandText = string.Format("insert into T1 values(1)");
-            cmd1.ExecuteNonQuery();
-        }
-
-        using (var conn2 = new SqlConnection(connStrDb2))
-        {
-            conn2.Open();
-            var cmd2 = conn2.CreateCommand();
-            cmd2.CommandText = string.Format("insert into T2 values(2)");
-            cmd2.ExecuteNonQuery();
-        }
-
-        scope.Complete();
+        conn1.Open();
+        SqlCommand cmd1 = conn1.CreateCommand();
+        cmd1.CommandText = string.Format("insert into T1 values(1)");
+        cmd1.ExecuteNonQuery();
     }
+
+    using (var conn2 = new SqlConnection(connStrDb2))
+    {
+        conn2.Open();
+        var cmd2 = conn2.CreateCommand();
+        cmd2.CommandText = string.Format("insert into T2 values(2)");
+        cmd2.ExecuteNonQuery();
+    }
+
+    scope.Complete();
+}
+```
 
 ### 分片数据库应用程序
- 
+
 SQL DB 的弹性数据库事务还支持协调分布式事务，这需要使用弹性数据库客户端库的 OpenConnectionForKey 方法，打开扩大的数据层的连接。假设你需要保证事务一致性，以使更改跨多个不同的分片键值。与托管不同分片键值的分片的连接由 OpenConnectionForKey 来中转。一般情况下，可以连接到不同的分片，以确保事务保证需要分布式事务。以下代码示例演示了此方法。假设使用一个名为 shardmap 的变量代表来自弹性数据库客户端库的分片映射：
 
-    using (var scope = new TransactionScope())
+```
+using (var scope = new TransactionScope())
+{
+    using (var conn1 = shardmap.OpenConnectionForKey(tenantId1, credentialsStr))
     {
-        using (var conn1 = shardmap.OpenConnectionForKey(tenantId1, credentialsStr))
-        {
-            conn1.Open();
-            SqlCommand cmd1 = conn1.CreateCommand();
-            cmd1.CommandText = string.Format("insert into T1 values(1)");
-            cmd1.ExecuteNonQuery();
-        }
-        
-        using (var conn2 = shardmap.OpenConnectionForKey(tenantId2, credentialsStr))
-        {
-            conn2.Open();
-            var cmd2 = conn2.CreateCommand();
-            cmd2.CommandText = string.Format("insert into T1 values(2)");
-            cmd2.ExecuteNonQuery();
-        }
-
-        scope.Complete();
+        conn1.Open();
+        SqlCommand cmd1 = conn1.CreateCommand();
+        cmd1.CommandText = string.Format("insert into T1 values(1)");
+        cmd1.ExecuteNonQuery();
     }
+
+    using (var conn2 = shardmap.OpenConnectionForKey(tenantId2, credentialsStr))
+    {
+        conn2.Open();
+        var cmd2 = conn2.CreateCommand();
+        cmd2.CommandText = string.Format("insert into T1 values(2)");
+        cmd2.ExecuteNonQuery();
+    }
+
+    scope.Complete();
+}
+```
 
 ## 适用于 Azure 云服务的 .NET 安装
 
@@ -102,25 +106,27 @@ Azure 为托管 .NET 应用程序提供了多个产品。不同产品的比较�
 
 请注意，与 .NET 4.6 的安装程序相比，.NET 4.6.1 的安装程序在 Azure 云服务上执行引导过程时，可能需要更多的临时存储空间。为了确保安装成功，需要在 ServiceDefinition.csdef 文件中启动任务的 LocalResources 部分和环境设置中，增加 Azure 云服务的临时存储，如以下示例所示：
 
-    <LocalResources>
+```
+<LocalResources>
+...
+    <LocalStorage name="TEMP" sizeInMB="5000" cleanOnRoleRecycle="false" />
+    <LocalStorage name="TMP" sizeInMB="5000" cleanOnRoleRecycle="false" />
+</LocalResources>
+<Startup>
+    <Task commandLine="install.cmd" executionContext="elevated" taskType="simple">
+        <Environment>
     ...
-        <LocalStorage name="TEMP" sizeInMB="5000" cleanOnRoleRecycle="false" />
-        <LocalStorage name="TMP" sizeInMB="5000" cleanOnRoleRecycle="false" />
-    </LocalResources>
-    <Startup>
-        <Task commandLine="install.cmd" executionContext="elevated" taskType="simple">
-            <Environment>
-        ...
-                <Variable name="TEMP">
-                    <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='TEMP']/@path" />
-                </Variable>
-                <Variable name="TMP">
-                    <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='TMP']/@path" />
-                </Variable>
-            </Environment>
-        </Task>
-    </Startup>
-    
+            <Variable name="TEMP">
+                <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='TEMP']/@path" />
+            </Variable>
+            <Variable name="TMP">
+                <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='TMP']/@path" />
+            </Variable>
+        </Environment>
+    </Task>
+</Startup>
+```
+
 ## 跨多个服务器的事务
 
 Azure SQL 数据库中支持跨不同逻辑服务器的弹性数据库事务。事务跨越逻辑服务器边界时，参与的服务器将首先需要进入相互通信关系。一旦建立了通信关系，任意两个服务器中的任何数据库都可以与另一服务器中的数据库参与弹性事务。事务跨越两个以上的逻辑服务器时，需要准备好任意逻辑服务器对之间的通信关系。
@@ -134,7 +140,7 @@ Azure SQL 数据库中支持跨不同逻辑服务器的弹性数据库事务。�
 ## 监视事务状态
 
 使用 SQL DB 中的动态管理视图 (DMV) 来监视正在进行的弹性数据库事务的状态和进度。与事务相关的所有 DMV 都与 SQL DB 中的分布式事务相关。可以在此处找到相应的 DMV 列表：[事务相关的动态管理视图和函数 (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms178621.aspx)。
- 
+
 这些 DMV 特别有用：
 
 * **sys.dm\_tran\_active\_transactions**：列出当前正在使用的事务及其状态。UOW（工作单位）列可以标识属于同一分布式事务的不同子事务。同一分布式事务中的所有事务具有相同的 UOW 值。有关详细信息，请参阅 [DMV 文档](https://msdn.microsoft.com/zh-cn/library/ms174302.aspx)。

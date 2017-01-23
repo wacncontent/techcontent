@@ -1,11 +1,9 @@
-
-
 Azure 上有多个标准大小可供选择。其中某些大小的注意事项包括：
 
 * D 系列的 VM 旨在运行需要更高计算能力和临时磁盘性能的应用程序。D 系列 VM 可为临时磁盘提供更快的处理器、更高的内存内核比和固态驱动器 (SSD)。有关详细信息，请参阅 Azure 博客[新的 D 系列虚拟机大小](https://azure.microsoft.com/blog/2014/09/22/new-d-series-virtual-machine-sizes/)上的公告。
 * Dv2 系列是原 D 系列的后续系列，其特点是 CPU 功能更强大。Dv2 系列 CPU 比 D 系列 CPU 快大约 35%。该系列基于最新一代的 2.4 GHz Intel Xeon® E5-2673 v3 (Haswell) 处理器，通过 Intel Turbo Boost Technology 2.0 可以达到 3.1 GHz。Dv2 系列的内存和磁盘配置与 D 系列相同。
 * F 系列基于 2.4 GHz Intel Xeon® E5-2673 v3 (Haswell) 处理器，该处理器使用 Intel Turbo Boost 技术 2.0，可实现高达 3.1 GHz 的时钟速度。此 CPU 性能与 Dv2 系列的 VM 相同。根据每个核心的 Azure 计算单位 (ACU)，在较低的小时价列表中，F 系列在 Azure 产品组合中具有最高性价比。
-  
+
     F 系列还为 Azure 的 VM 大小命名引入了新标准。对于将来发布的此系列和 VM 大小，系列名称字母后面的数字与 CPU 核心数量一致。其他功能，如针对高级存储进行了优化，使用 CPU 核心计数后面的字母指定。此命名格式将用于将来发布的 VM 大小，但是不会追溯更改任何已发布的现有的 VM 大小的名称。
 
 * DS 系列、DSv2 系列和 Fs 系列的 VM 可使用高级存储，从而为 I/O 密集型工作负荷提供高性能、低延迟的存储。这些 VM 使用固态硬盘 (SSD) 托管虚拟机的磁盘，并提供本地 SSD 磁盘高速缓存。高级存储在某些区域可用。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](../articles/storage/storage-premium-storage.md)。

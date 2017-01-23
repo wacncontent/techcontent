@@ -22,7 +22,8 @@ Azure VM 支持附加多个高级存储磁盘，使你的应用程序可以具�
 
 使用高级存储，Azure 提供的功能可真正将要求苛刻的企业应用程序（如 Dynamics AX、Dynamics CRM、Exchange Server、SharePoint 场和 SAP Business Suite）转移到云。你可以运行各种需要高级存储的一致高性能和低延迟的性能密集型数据库工作负荷，如 SQL Server、Oracle、MongoDB、MySQL、Redis。
 
->[!NOTE]建议将任何需要高 IOPS 的虚拟机磁盘迁移到 Azure 高级存储，以便你的应用程序实现最佳性能。如果你的磁盘不需要高 IOPS，你可以通过在标准存储（将虚拟机磁盘数据存储在硬盘驱动器 (HDD) 上而不是 SSD 上）中对其进行维护来限制成本。
+>[!NOTE]
+>建议将任何需要高 IOPS 的虚拟机磁盘迁移到 Azure 高级存储，以便你的应用程序实现最佳性能。如果你的磁盘不需要高 IOPS，你可以通过在标准存储（将虚拟机磁盘数据存储在硬盘驱动器 (HDD) 上而不是 SSD 上）中对其进行维护来限制成本。
 
 若要开始使用 Azure 高级存储，请访问[开始免费试用](https://www.azure.cn/pricing/1rmb-trial/)页。有关将现有的虚拟机迁移到高级存储的信息，请参阅[迁移到 Azure 高级存储](./storage-migration-to-premium-storage.md)。
 
@@ -66,10 +67,11 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。换句话�
 - 确保 VM 上有足够的带宽来驱动磁盘通信。例如，STANDARD_DS1 VM 为高级存储磁盘通信提供每秒 32 MB 的专用带宽。这意味着，附加到此 VM 的 P10 高级存储磁盘最高只能达到每秒 32 MB，而不能像 P10 磁盘那样最高达到每秒 100 MB。同样，STANDARD_DS13 VM 可跨所有磁盘最高达到每秒 256 MB。目前，DS 系列上的最大 VM 是 STANDARD_DS14，它可以跨所有磁盘最高提供每秒 512 MB。
 
     请注意，这些限制只适用于磁盘流量，而不包括缓存命中和网络流量。VM 网络通信可以使用单独的带宽，这不同于高级存储磁盘的专用带宽。
-    
+
     有关 DS 系列 VM 的最大 IOPS 与吞吐量（带宽）的最新信息，请参阅 [Azure 的虚拟机和云服务大小](../virtual-machines/virtual-machines-windows-sizes.md)。若要了解高级存储磁盘及其 IOPS 和吞吐量限制，请参阅本文的[使用高级存储时的可伸缩性和性能目标](#scalability-and-performance-targets-when-using-premium-storage)部分中的表格。
 
-> [!NOTE]缓存命中数不受到磁盘配置 IOPS/吞吐量的限制。也就是说，当你在 DS 系列 VM 上使用具有 ReadOnly 缓存设置的数据磁盘时，缓存提供的读取数不受高级存储磁盘限制的约束。因此，如果工作负荷以读取为主，可以从磁盘获得极高的吞吐量。请注意，缓存根据 VM 大小受到 VM 级别不同的 IOPS / 吞吐量的限制。DS 系列 VM 大约有 4000 IOPS，缓存与本地 SSD IO 是每个核心 33 MB/秒。
+> [!NOTE]
+>缓存命中数不受到磁盘配置 IOPS/吞吐量的限制。也就是说，当你在 DS 系列 VM 上使用具有 ReadOnly 缓存设置的数据磁盘时，缓存提供的读取数不受高级存储磁盘限制的约束。因此，如果工作负荷以读取为主，可以从磁盘获得极高的吞吐量。请注意，缓存根据 VM 大小受到 VM 级别不同的 IOPS / 吞吐量的限制。DS 系列 VM 大约有 4000 IOPS，缓存与本地 SSD IO 是每个核心 33 MB/秒。
 
 - 可以在同一个 DS 系列 VM 中同时使用高级和标准存储磁盘。
 - 使用高级存储时，可以设置 DS 系列 VM 并将多个持久性数据磁盘附加到 VM。如有需要，可以跨磁盘条带化，以增加卷的容量与性能。如果你使用[存储空间](http://technet.microsoft.com/zh-cn/library/hh831739.aspx)来条带化高级存储数据磁盘，应该以使用的每个磁盘一个列的方式来配置它。否则，条带化卷的整体性能可能会低于预期，因为磁盘之间的通信分配不平均。默认情况下，服务器管理器用户界面 (UI) 可让你设置最多包含 8 个磁盘的列。但如果磁盘超过 8 个，则你必须使用 PowerShell 来创建卷，并手动指定列数。否则，即使你有更多磁盘，服务器管理器 UI 仍会继续使用 8 个列。例如，如果在一个条带集中有 32 个磁盘，则你应该指定 32 列。可以使用 [New-VirtualDisk](http://technet.microsoft.com/zh-cn/library/hh848643.aspx) PowerShell cmdlet 的 *NumberOfColumns* 参数来指定虚拟磁盘使用的列数。有关详细信息，请参阅[存储空间概述](http://technet.microsoft.com/zh-cn/library/jj822938.aspx)和[存储空间常见问题](http://social.technet.microsoft.com/wiki/contents/articles/11382.storage-spaces-frequently-asked-questions-faq.aspx)。
@@ -116,7 +118,8 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。换句话�
 </tbody>
 </table>
 
-> [!NOTE]请确保 VM 上有足够的带宽可用来驱动磁盘通信，如本文前面的[使用高级存储磁盘](#using-premium-storage-for-disks)部分中所述。否则，将会根据 VM 限制而不是上表中提到的磁盘限制，将磁盘吞吐量和 IOPS 约束为较小值。
+> [!NOTE]
+>请确保 VM 上有足够的带宽可用来驱动磁盘通信，如本文前面的[使用高级存储磁盘](#using-premium-storage-for-disks)部分中所述。否则，将会根据 VM 限制而不是上表中提到的磁盘限制，将磁盘吞吐量和 IOPS 约束为较小值。
 
 Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高级存储磁盘选项。例如，大小为 100 GB 的磁盘会分类为 P10 选项，每秒最多可执行 500 个 IO 单位，每秒吞吐量可达 100 MB。同样地，大小为 400 GB 的磁盘会分类为 P20 选项，每秒最多可执行 2300 个 IO 单位，每秒吞吐量可达 150 MB。
 
@@ -126,7 +129,8 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 当你在 Azure 创建磁盘后，请根据应用程序的容量、性能、缩放性和高峰负载需求来选择最适合的高级存储磁盘产品。
 
-> [!NOTE]你可以轻松增加现有磁盘的大小。例如，如果你想要将 30 GB 大小的磁盘增加到 128 GB 或 1 TB。或者，如果想要将 P20 磁盘转换为 P30 磁盘，因为需要更多容量或更多的 IOPS 和吞吐量。可以使用“Update-AzureDisk”PowerShell 命令配合“-ResizedSizeInGB”属性来扩展磁盘。若要执行此操作，需要先从 VM 分离磁盘或停止 VM。
+> [!NOTE]
+>你可以轻松增加现有磁盘的大小。例如，如果你想要将 30 GB 大小的磁盘增加到 128 GB 或 1 TB。或者，如果想要将 P20 磁盘转换为 P30 磁盘，因为需要更多容量或更多的 IOPS 和吞吐量。可以使用“Update-AzureDisk”PowerShell 命令配合“-ResizedSizeInGB”属性来扩展磁盘。若要执行此操作，需要先从 VM 分离磁盘或停止 VM。
 
 下表描述高级存储帐户的缩放性目标：
 
@@ -276,8 +280,10 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 运行 OpenLogic CentOS VM 的客户应该运行以下命令来安装最新的驱动程序：
 
-    sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
-    sudo yum install microsoft-hyper-v
+```
+sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
+sudo yum install microsoft-hyper-v
+```
 
 需要重新启动才能激活新的驱动程序。
 
@@ -302,31 +308,37 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 1. 根据[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中提供的步骤设置 PowerShell 环境。
 2. 启动 PowerShell 控制台，连接到订阅，并在控制台窗口中运行以下 PowerShell cmdlet。如此 PowerShell 语句中所示，当你创建高级存储帐户时，必须将 **Type** 参数指定为 **Premium_LRS**。
 
-        New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+    ```
+    New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+    ```
 
 3. 接下来，请创建新的 DS 系列 VM，并在控制台窗口中运行以下 PowerShell cmdlet 以指定你要使用高级存储：
 
-        $storageAccount = "yourpremiumaccount"
-        $adminName = "youradmin"
-        $adminPassword = "yourpassword"
-        $vmName ="yourVM"
-        $location = "China East"
-        $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20150726-en.us-127GB.vhd"
-        $vmSize ="Standard_DS2"
-        $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
-        $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
-        Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
-        New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+    ```
+    $storageAccount = "yourpremiumaccount"
+    $adminName = "youradmin"
+    $adminPassword = "yourpassword"
+    $vmName ="yourVM"
+    $location = "China East"
+    $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20150726-en.us-127GB.vhd"
+    $vmSize ="Standard_DS2"
+    $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
+    $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
+    Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
+    New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+    ```
 
 4. 如果希望 VM 有更多的磁盘空间，请在创建虚拟机后于控制台窗口中运行以下 PowerShell cmdlet 以将新的数据磁盘附加到现有 DS 系列 VM。
 
-        $storageAccount = "yourpremiumaccount"
-        $vmName ="yourVM"
-        $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
-        $LunNo = 1
-        $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
-        $label = "Disk " + $LunNo
-        Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+    ```
+    $storageAccount = "yourpremiumaccount"
+    $vmName ="yourVM"
+    $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
+    $LunNo = 1
+    $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
+    $label = "Disk " + $LunNo
+    Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+    ```
 
 ### 通过 Azure 命令行界面使用高级存储创建 Azure 虚拟机
 
@@ -334,24 +346,34 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 #### 创建高级存储帐户
 
-    azure storage account create "premiumtestaccount" -l "china east" --type PLRS
+```
+azure storage account create "premiumtestaccount" -l "china east" --type PLRS
+```
 
 #### 创建 DS 系列虚拟机
 
-    azure vm create -z "Standard_DS2" -l "china east" -e 22 "premium-test-vm"
-        "b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB" -u "myusername" -p "passwd@123"
+```
+azure vm create -z "Standard_DS2" -l "china east" -e 22 "premium-test-vm"
+    "b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB" -u "myusername" -p "passwd@123"
+```
 
 #### 显示有关虚拟机的信息
 
-    azure vm show premium-test-vm
+```
+azure vm show premium-test-vm
+```
 
 #### 附加新的数据磁盘
 
-    azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+```
+azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+```
 
 #### 显示有关新数据磁盘的信息
 
-    azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+```
+azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+```
 
 ## 后续步骤
 
@@ -361,7 +383,7 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 [Azure 的虚拟机和云服务大小](../virtual-machines/virtual-machines-windows-sizes.md)
 
-[存储服务文档](./index.md/)
+[存储服务文档](./index.md)
 
 [Image1]: ./media/storage-premium-storage-preview-portal/Azure_pricing_tier.png
 

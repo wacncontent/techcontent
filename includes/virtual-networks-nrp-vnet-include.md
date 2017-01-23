@@ -1,7 +1,8 @@
 ## 虚拟网络
 虚拟网络 (VNET) 和子网资源可帮助定义 Azure 中运行的工作负载的安全边界。VNet 的特征包括一个地址空间（定义为 CIDR 块）的集合。
 
->[!NOTE]网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解详细信息](http://whatismyipaddress.com/cidr)。
+>[!NOTE]
+>网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解详细信息](http://whatismyipaddress.com/cidr)。
 
 ![包含多个子网的 VNet](./media/resource-groups-networking/Figure4.png)
 
@@ -27,47 +28,49 @@ VNet 包含以下属性。
 
 采用 JSON 格式的示例 VNet：
 
-    {
-        "name": "TestVNet",
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet",
-        "etag": "W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"",
-        "type": "Microsoft.Network/virtualNetworks",
-        "location": "chinanorth",
-        "tags": {
-            "displayName": "VNet"
+```
+{
+    "name": "TestVNet",
+    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet",
+    "etag": "W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"",
+    "type": "Microsoft.Network/virtualNetworks",
+    "location": "chinanorth",
+    "tags": {
+        "displayName": "VNet"
+    },
+    "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "addressSpace": {
+            "addressPrefixes": [
+                "192.168.0.0/16"
+            ]
         },
-        "properties": {
-            "provisioningState": "Succeeded",
-            "resourceGuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            "addressSpace": {
-                "addressPrefixes": [
-                    "192.168.0.0/16"
-                ]
+        "subnets": [
+            {
+                "name": "FrontEnd",
+                "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd",
+                "etag": "W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "addressPrefix": "192.168.1.0/24",
+                    "networkSecurityGroup": {
+                        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-BackEnd"
+                    },
+                    "routeTable": {
+                        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/routeTables/UDR-FrontEnd"
+                    },
+                    "ipConfigurations": [
+                        {
+                            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICWEB1/ipConfigurations/ipconfig1"
+                        },
+                        ...]
+                }
             },
-            "subnets": [
-                {
-                    "name": "FrontEnd",
-                    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd",
-                    "etag": "W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"",
-                    "properties": {
-                        "provisioningState": "Succeeded",
-                        "addressPrefix": "192.168.1.0/24",
-                        "networkSecurityGroup": {
-                            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-BackEnd"
-                        },
-                        "routeTable": {
-                            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/routeTables/UDR-FrontEnd"
-                        },
-                        "ipConfigurations": [
-                            {
-                                "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICWEB1/ipConfigurations/ipconfig1"
-                            },
-                            ...]
-                    }
-                },
-                ...]
-        }
+            ...]
     }
+}
+```
 
 ### 其他资源
 

@@ -46,9 +46,9 @@ ms.tgt_pltfrm: NA
 
 打开要增加或减少的数据库的 SQL 数据库边栏选项卡：
 
-1.	在 [Azure 门户预览](https://portal.azure.cn)中，依次单击“更多服务”>“SQL 数据库”。
-2.	单击要更改的数据库。
-3.	在“SQL 数据库”边栏选项卡中单击“定价层(缩放 DTU)”：
+1. 在 [Azure 门户预览](https://portal.azure.cn)中，依次单击“更多服务”>“SQL 数据库”。
+2. 单击要更改的数据库。
+3. 在“SQL 数据库”边栏选项卡中单击“定价层(缩放 DTU)”：
 
     ![定价层][1]
 
@@ -56,11 +56,12 @@ ms.tgt_pltfrm: NA
 
     单击“选择”将提交更改定价层的缩放请求。根据数据库的大小，缩放操作可能需要一些时间才能完成（请参阅本文顶部的信息）。
 
-    > [!NOTE] 更改数据库定价层不会更改数据库最大大小。若要更改数据库最大大小，请使用 [Transact-SQL (T-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 或 [PowerShell](https://msdn.microsoft.com/zh-cn/library/mt619433.aspx)。
+    > [!NOTE]
+    > 更改数据库定价层不会更改数据库最大大小。若要更改数据库最大大小，请使用 [Transact-SQL (T-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 或 [PowerShell](https://msdn.microsoft.com/zh-cn/library/mt619433.aspx)。
 
     ![选择定价层][2]
 
-3.	单击右上角中的通知图标（铃铛）：
+3. 单击右上角中的通知图标（铃铛）：
 
     ![通知][3]
 
@@ -76,7 +77,7 @@ ms.tgt_pltfrm: NA
 ## 其他资源
 
 - [业务连续性概述](./sql-database-business-continuity.md)
-- [SQL 数据库文档](./index.md/)
+- [SQL 数据库文档](./index.md)
 
 <!--Image references-->
 [1]: ./media/sql-database-scale-up/new-tier.png

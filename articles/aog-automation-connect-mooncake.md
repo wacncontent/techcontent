@@ -69,7 +69,8 @@ Azure 自动化是通过 Windows PowserShell 工作流（也称为 Runbook）来
 
 在创作的过程中使用下面的指令来实现授权，“Powercredential”为在定义凭据时使用的名称。
 
-    $Cred = Get-AutomationPSCredential -Name "Powercredential"; 
-    Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
-    Select-AzureSubscription -SubscriptionName "<subscription name>";  
-
+```
+$Cred = Get-AutomationPSCredential -Name "Powercredential"; 
+Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
+Select-AzureSubscription -SubscriptionName "<subscription name>";
+```

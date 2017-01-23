@@ -27,7 +27,8 @@ ms.author: juliako;anilmur
 
 如果你的输出资产已经过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)。
 
->[!NOTE]MES 将生成一个输出文件，其名称包含输入文件名的前 32 个字符。该名称基于预设文件中指定的内容。例如，"FileName": "{Basename}\_{Index}{Extension}"。{Basename} 将替换为输入文件名的前 32 个字符。
+>[!NOTE]
+>MES 将生成一个输出文件，其名称包含输入文件名的前 32 个字符。该名称基于预设文件中指定的内容。例如，"FileName": "{Basename}\_{Index}{Extension}"。{Basename} 将替换为输入文件名的前 32 个字符。
 
 ###MES 格式
 
@@ -59,77 +60,79 @@ ms.author: juliako;anilmur
 - 创建将包含所编码资产的输出资产。
 - 添加事件处理程序以检查作业进度。
 - 提交作业。
-        
-        static public IAsset EncodeToAdaptiveBitrateMP4Set(IAsset asset)
+
+    ```
+    static public IAsset EncodeToAdaptiveBitrateMP4Set(IAsset asset)
+    {
+        // Declare a new job.
+        IJob job = _context.Jobs.Create("Media Encoder Standard Job");
+        // Get a media processor reference, and pass to it the name of the 
+        // processor to use for the specific task.
+        IMediaProcessor processor = GetLatestMediaProcessorByName("Media Encoder Standard");
+
+        // Create a task with the encoding details, using a string preset.
+        // In this case "H264 Multiple Bitrate 720p" preset is used.
+        ITask task = job.Tasks.AddNew("My encoding task",
+            processor,
+            "H264 Multiple Bitrate 720p",
+            TaskOptions.None);
+
+        // Specify the input asset to be encoded.
+        task.InputAssets.Add(asset);
+        // Add an output asset to contain the results of the job. 
+        // This output is specified as AssetCreationOptions.None, which 
+        // means the output asset is not encrypted. 
+        task.OutputAssets.AddNew("Output asset",
+            AssetCreationOptions.None);
+
+        job.StateChanged += new EventHandler<JobStateChangedEventArgs>(JobStateChanged);
+        job.Submit();
+        job.GetExecutionProgressTask(CancellationToken.None).Wait();
+
+        return job.OutputMediaAssets[0];
+    }
+
+    private static void JobStateChanged(object sender, JobStateChangedEventArgs e)
+    {
+        Console.WriteLine("Job state changed event:");
+        Console.WriteLine("  Previous state: " + e.PreviousState);
+        Console.WriteLine("  Current state: " + e.CurrentState);
+        switch (e.CurrentState)
         {
-            // Declare a new job.
-            IJob job = _context.Jobs.Create("Media Encoder Standard Job");
-            // Get a media processor reference, and pass to it the name of the 
-            // processor to use for the specific task.
-            IMediaProcessor processor = GetLatestMediaProcessorByName("Media Encoder Standard");
-        
-            // Create a task with the encoding details, using a string preset.
-            // In this case "H264 Multiple Bitrate 720p" preset is used.
-            ITask task = job.Tasks.AddNew("My encoding task",
-                processor,
-                "H264 Multiple Bitrate 720p",
-                TaskOptions.None);
-        
-            // Specify the input asset to be encoded.
-            task.InputAssets.Add(asset);
-            // Add an output asset to contain the results of the job. 
-            // This output is specified as AssetCreationOptions.None, which 
-            // means the output asset is not encrypted. 
-            task.OutputAssets.AddNew("Output asset",
-                AssetCreationOptions.None);
-        
-            job.StateChanged += new EventHandler<JobStateChangedEventArgs>(JobStateChanged);
-            job.Submit();
-            job.GetExecutionProgressTask(CancellationToken.None).Wait();
-        
-            return job.OutputMediaAssets[0];
+            case JobState.Finished:
+                Console.WriteLine();
+                Console.WriteLine("Job is finished. Please wait while local tasks or downloads complete...");
+                break;
+            case JobState.Canceling:
+            case JobState.Queued:
+            case JobState.Scheduled:
+            case JobState.Processing:
+                Console.WriteLine("Please wait...\n");
+                break;
+            case JobState.Canceled:
+            case JobState.Error:
+
+                // Cast sender as a job.
+                IJob job = (IJob)sender;
+
+                // Display or log error details as needed.
+                break;
+            default:
+                break;
         }
-        
-        private static void JobStateChanged(object sender, JobStateChangedEventArgs e)
-        {
-            Console.WriteLine("Job state changed event:");
-            Console.WriteLine("  Previous state: " + e.PreviousState);
-            Console.WriteLine("  Current state: " + e.CurrentState);
-            switch (e.CurrentState)
-            {
-                case JobState.Finished:
-                    Console.WriteLine();
-                    Console.WriteLine("Job is finished. Please wait while local tasks or downloads complete...");
-                    break;
-                case JobState.Canceling:
-                case JobState.Queued:
-                case JobState.Scheduled:
-                case JobState.Processing:
-                    Console.WriteLine("Please wait...\n");
-                    break;
-                case JobState.Canceled:
-                case JobState.Error:
-        
-                    // Cast sender as a job.
-                    IJob job = (IJob)sender;
-        
-                    // Display or log error details as needed.
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        private static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
-        {
-            var processor = _context.MediaProcessors.Where(p => p.Name == mediaProcessorName).
-            ToList().OrderBy(p => new Version(p.Version)).LastOrDefault();
-        
-            if (processor == null)
-                throw new ArgumentException(string.Format("Unknown media processor", mediaProcessorName));
-        
-            return processor;
-        }
+    }
+
+    private static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
+    {
+        var processor = _context.MediaProcessors.Where(p => p.Name == mediaProcessorName).
+        ToList().OrderBy(p => new Version(p.Version)).LastOrDefault();
+
+        if (processor == null)
+            throw new ArgumentException(string.Format("Unknown media processor", mediaProcessorName));
+
+        return processor;
+    }
+    ```
 
 ##另请参阅 
 

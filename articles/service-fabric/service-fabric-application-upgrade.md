@@ -60,7 +60,7 @@ Azure Service Fabric 应用程序是多个服务的集合。在升级期间，Se
 参考[高级主题](./service-fabric-application-upgrade-advanced.md)，了解如何在升级应用程序时使用高级功能
 
 参考[对应用程序升级进行故障排除](./service-fabric-application-upgrade-troubleshooting.md)中的步骤来解决应用程序升级时的常见问题。
- 
+
 [image]: ./media/service-fabric-application-upgrade/service-fabric-application-upgrade-flowchart.png
- 
+
 <!---HONumber=Mooncake_1219_2016-->

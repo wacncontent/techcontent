@@ -23,7 +23,8 @@ ms.author: krisragh
 
 本指南介绍如何使用 Azure 移动服务 [iOS SDK] 执行常见任务。如果你不熟悉移动服务，请先完成[移动服务快速入门]，以配置你的帐户、创建表，并创建移动服务。
 
-> [!NOTE]本指南使用最新的 [iOS 移动服务 SDK](https://go.microsoft.com/fwLink/?LinkID=266533&clcid=0x409)。如果你的项目使用旧版 SDK，请先升级 Xcode 中的框架。
+> [!NOTE]
+>本指南使用最新的 [iOS 移动服务 SDK](https://go.microsoft.com/fwLink/?LinkID=266533&clcid=0x409)。如果你的项目使用旧版 SDK，请先升级 Xcode 中的框架。
 
 [!INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
 
@@ -124,9 +125,9 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 移动服务可以限制单个响应中返回的记录量。若要控制显示给用户的记录数，你必须实施一个分页系统。你可以使用 **MSQuery** 对象的以下三个属性来执行分页：
 
 ```
-+	`BOOL includeTotalCount`
-+	`NSInteger fetchLimit`
-+	`NSInteger fetchOffset`
++ `BOOL includeTotalCount`
++ `NSInteger fetchLimit`
++ `NSInteger fetchOffset`
 ```
 
 在以下示例中，一个简单函数会向服务器请求 5 条记录，然后将这些记录附加到先前加载记录的本地集合：
@@ -142,23 +143,25 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 {
     MSQuery *query = [self.table query];
 
-        query.includeTotalCount = YES;
-    query.fetchLimit = 5;
-        query.fetchOffset = self.loadedItems.count;
+```
+    query.includeTotalCount = YES;
+query.fetchLimit = 5;
+    query.fetchOffset = self.loadedItems.count;
 
-    [query readWithCompletion:^(MSQueryResult *result, NSError *error) {
-            if(!error) {
-                // Add the items to our local copy
-            [self.loadedItems addObjectsFromArray:result.items];
+[query readWithCompletion:^(MSQueryResult *result, NSError *error) {
+        if(!error) {
+            // Add the items to our local copy
+        [self.loadedItems addObjectsFromArray:result.items];
 
-            // Set a flag to keep track if there are any additional records we need to load
-            self.moreResults = (self.loadedItems.count <= result.totalCount);
-            }
-        }];
-    }
+        // Set a flag to keep track if there are any additional records we need to load
+        self.moreResults = (self.loadedItems.count <= result.totalCount);
+        }
+    }];
+}
+```
 
 ```
- 
+
 ##  <a name="selecting"></a><a name="parameters"></a>如何：使用 MSQuery 限制字段和展开查询字符串参数
 
 若要限制在查询中返回的字段，请在 **selectFields** 属性中指定字段的名称。这样，便只会返回文本和已完成的字段：
@@ -253,7 +256,7 @@ Azure 移动服务支持两种身份验证工作流：
 - **服务器托管登录**：Azure 移动服务将代表应用程序管理登录过程。它会显示提供者特定的登录页，并使用选择的提供者进行身份验证。
 
 - **客户端托管登录**：_应用程序_必须从标识提供者请求令牌，然后将此令牌提供给 Azure 移动服务以进行身份验证。
-        
+
 当身份验证成功时，你将获得具有用户 ID 值和身份验证令牌的用户对象。若要使用此用户 ID 来授权用户，请参阅[服务器端授权]。若要将表访问权限限制给已经过身份验证的用户，请参阅[权限]。
 
 ###  服务器托管登录
@@ -267,7 +270,7 @@ Azure 移动服务支持两种身份验证工作流：
 你可以在移动服务客户端外部执行登录过程来启用单一登录，或者使应用程序能够直接联系标识提供者。在这种情况下，你可以通过提供单独从受支持标识提供者获取的令牌来登录到移动服务。
 
 以下示例使用 [Live Connect SDK] 为 iOS 应用程序启用单一登录。该示例假设你前面在控制器中创建了名为 `liveClient` 的 **LiveConnectClient** 实例，并且用户已登录。
-    
+
 ```
     [client loginWithProvider:@"microsoftaccount" 
         token:@{@"authenticationToken" : self.liveClient.session.authenticationToken}
@@ -331,5 +334,5 @@ Azure 移动服务支持两种身份验证工作流：
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
 [CLI to manage Mobile Services tables]: ../virtual-machines-command-line-tools.md#Mobile_Tables
 [冲突处理程序]: ./mobile-services-ios-handling-conflicts-offline-data.md#add-conflict-handling
- 
+
 <!---HONumber=Mooncake_0215_2016-->

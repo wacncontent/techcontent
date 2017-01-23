@@ -20,7 +20,7 @@ wacn.date: 11/17/2016
 ###通过 WNS 发送推送通知
 
 [入门教程](../../articles/mobile-services/mobile-services-javascript-backend-windows-store-javascript-get-started.md)
-  
+
   向用户发送推送通知
 
 - [iOS 开发人员中心](/develop/mobile/ios)
@@ -47,18 +47,18 @@ wacn.date: 11/17/2016
 
 - [在 SQL 数据库 中使用移动服务存储结构化数据](../../articles/mobile-services/mobile-services-windows-phone-get-started-data.md)
 
-查看服务：[移动服务](../../articles/mobile-services/index.md/) | [存储](../../articles/storage/index.md/)
+查看服务：[移动服务](../../articles/mobile-services/index.md) | [存储](../../articles/storage/index.md)
 
 ###同步
 
-查看服务：[移动服务](../../articles/mobile-services/index.md/)
+查看服务：[移动服务](../../articles/mobile-services/index.md)
 
 ###推送
 
 - [通知中心入门](../../articles/notification-hubs/notification-hubs-windows-mobile-push-notifications-mpns.md)
 - [通过通知中心发送有针对性的通知](../../articles/notification-hubs/notification-hubs-windows-phone-push-xplat-segmented-mpns-notification.md)
 
-查看服务： [通知中心](../../articles/notification-hubs/index.md/)
+查看服务： [通知中心](../../articles/notification-hubs/index.md)
 
 ###媒体
 
@@ -71,4 +71,3 @@ wacn.date: 11/17/2016
 <!--- [Windows 参考查找针对客户端库和服务器脚本的文档](/develop/mobile/reference-wp8)-->
 <!--- [Windows 示例了解丰富的可下载示例应用程序](/develop/mobile/wp8-samples)-->
 - [论坛询问问题、分享见解和讨论平台](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=windowsazurezhchs)
-

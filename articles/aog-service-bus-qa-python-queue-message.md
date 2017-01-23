@@ -36,19 +36,21 @@ wacn.date: 12/15/2016
 2. 在 CMD 中使用 `pip` 命令引用 `azure-servicebus V0.20.3`。
 
 3. 下载 Python Tools for Visual Studio 插件并安装。
-  
+
 **代码如下：**  
 
-    from azure.servicebus import ServiceBusService, Message, Queue
-    bus_service = ServiceBusService(
-        service_namespace='xhservicebus',
-        host_base='.servicebus.chinacloudapi.cn',
-        shared_access_key_name='RootManageSharedAccessKey',
-    shared_access_key_value='TWJwaQugbYZfu3qnbgXIGNWSGayn1tq9pIXeN3MLRZE=')
-    bus_service.create_queue('xuhuaq1')
-    msg = Message(b'Test Message')
-    bus_service.send_queue_message('xuhuaq1', msg)
-    msg = bus_service.receive_queue_message('xuhuaq1')
-    print(msg.body)
+```
+from azure.servicebus import ServiceBusService, Message, Queue
+bus_service = ServiceBusService(
+    service_namespace='xhservicebus',
+    host_base='.servicebus.chinacloudapi.cn',
+    shared_access_key_name='RootManageSharedAccessKey',
+shared_access_key_value='TWJwaQugbYZfu3qnbgXIGNWSGayn1tq9pIXeN3MLRZE=')
+bus_service.create_queue('xuhuaq1')
+msg = Message(b'Test Message')
+bus_service.send_queue_message('xuhuaq1', msg)
+msg = bus_service.receive_queue_message('xuhuaq1')
+print(msg.body)
+```
 
 就可以正常的获取 Azure 服务总线队列里的消息。

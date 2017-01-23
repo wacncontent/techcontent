@@ -52,7 +52,8 @@ Apache Storm on HDInsight 是集成到 Azure 环境中的托管群集。它提�
 
 可在分钟数设置好新的 Storm on HDInsight 群集。指定群集名称、大小、管理员帐户和存储帐户。Azure 将创建该群集，包括示例拓扑和 Web 管理仪表板。
 
-> [!NOTE] 也可使用 [Azure CLI](../xplat-cli-install.md) 或 [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 预配 Storm 群集。
+> [!NOTE]
+> 也可使用 [Azure CLI](../xplat-cli-install.md) 或 [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 预配 Storm 群集。
 
 提交请求后 15 分钟内，即可运行新的 Storm 群集，并可建立第一个实时分析管道。
 
@@ -96,7 +97,8 @@ Apache Storm 默认配置为仅有一个 Nimbus 节点。Storm on HDInsight 可�
 
 虽然可以在创建过程中指定群集中的节点数，但可能需要扩大或收缩群集以匹配工作负载。所有 HDInsight 群集都允许更改群集中的节点数，即使在处理数据时。
 
-> [!NOTE] 若要利用通过缩放添加的新节点，需要重新平衡在增加大小之前启动的拓扑。
+> [!NOTE]
+> 若要利用通过缩放添加的新节点，需要重新平衡在增加大小之前启动的拓扑。
 
 ###支持
 
@@ -132,7 +134,8 @@ Apache Storm 运行**拓扑**，而不是 HDInsight 或 Hadoop 中用户熟悉�
 
 * **Spout**：使用数据源中的数据并发出一个或多个**流**。
 
-    > [!NOTE] 在许多情况下，从 Kafka、Azure Service Bus 队列或事件中心等队列中读取数据。队列确保发生中断时数据持续不断。
+    > [!NOTE]
+    > 在许多情况下，从 Kafka、Azure Service Bus 队列或事件中心等队列中读取数据。队列确保发生中断时数据持续不断。
 
 * **Bolt**：使用**流**，处理**元组**，并可以发出**流**。Bolt 还负责将数据编写到外部存储，比如队列、HDInsight HBase、Blob 或其他数据存储。
 
@@ -180,7 +183,9 @@ Storm 可以提供不同级别的有保证的消息处理。例如，基本 Stor
 
 在以下 Java 实例中，fieldsGrouping 用于将来自组件“1”、“2”和“3”的元组路由至 **MyJoiner** bolt。
 
-    builder.setBolt("join", new MyJoiner(), parallelism) .fieldsGrouping("1", new Fields("joinfield1", "joinfield2")) .fieldsGrouping("2", new Fields("joinfield1", "joinfield2")) .fieldsGrouping("3", new Fields("joinfield1", "joinfield2"));
+```
+builder.setBolt("join", new MyJoiner(), parallelism) .fieldsGrouping("1", new Fields("joinfield1", "joinfield2")) .fieldsGrouping("2", new Fields("joinfield1", "joinfield2")) .fieldsGrouping("3", new Fields("joinfield1", "joinfield2"));
+```
 
 ###批处理
 

@@ -29,7 +29,8 @@ ms.author: adrianha
 
 [!INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
 
->[!TIP] 建议在升级之前先[执行迁移](./app-service-mobile-migrating-from-mobile-services.md)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
+>[!TIP]
+> 建议在升级之前先[执行迁移](./app-service-mobile-migrating-from-mobile-services.md)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
 
 ###移动应用 .NET 服务器 SDK 改进
 
@@ -47,7 +48,8 @@ ms.author: adrianha
 
 在许多情况下，只需切换到新的移动应用服务器 SDK 并将代码重新发布到新的移动应用实例，即可完成升级。但在某些情况下则需要一些额外的配置，例如高级身份验证方案和使用计划作业。后续部分将逐一介绍。
 
->[!TIP] 建议先阅读并充分了解本主题的余下内容，然后再开始升级。请记下以下概括的所有功能。
+>[!TIP]
+> 建议先阅读并充分了解本主题的余下内容，然后再开始升级。请记下以下概括的所有功能。
 
 移动服务客户端 SDK 与新的移动应用服务器 SDK **不**兼容。为了提供应用程序的服务连续性，不应该将更改发布到当前正在为发布的客户端提供服务的站点。而应该创建新的移动应用作为副本。可以在同一个应用服务计划中放置此应用程序，以免产生额外的财务成本。
 
@@ -83,20 +85,25 @@ ms.author: adrianha
 
 然后，在 WebApiConfig.cs 中，将：
 
-        // Use this class to set configuration options for your mobile service
-        ConfigOptions options = new ConfigOptions();
+```
+    // Use this class to set configuration options for your mobile service
+    ConfigOptions options = new ConfigOptions();
 
-        // Use this class to set WebAPI configuration options
-        HttpConfiguration config = ServiceConfig.Initialize(new ConfigBuilder(options));
+    // Use this class to set WebAPI configuration options
+    HttpConfiguration config = ServiceConfig.Initialize(new ConfigBuilder(options));
+```
 
 替换为
 
-        HttpConfiguration config = new HttpConfiguration();
-        new MobileAppConfiguration()
-            .UseDefaultConfiguration()
-        .ApplyTo(config);
+```
+    HttpConfiguration config = new HttpConfiguration();
+    new MobileAppConfiguration()
+        .UseDefaultConfiguration()
+    .ApplyTo(config);
+```
 
->[!NOTE] 如果想要详细了解新的 .NET 服务器 SDK 以及如何在应用中添加/删除功能，请参阅 [How to use the .NET server SDK]（如何使用 .NET 服务器 SDK）主题。
+>[!NOTE]
+> 如果想要详细了解新的 .NET 服务器 SDK 以及如何在应用中添加/删除功能，请参阅 [How to use the .NET server SDK]（如何使用 .NET 服务器 SDK）主题。
 
 如果应用使用身份验证功能，则还需要注册 OWIN 中间件。在此情况下，应该将上述配置代码移入新的 OWIN 启动类。
 
@@ -106,8 +113,10 @@ ms.author: adrianha
 
 确保 `Configuration()` 方法的末尾为：
 
-        app.UseWebApi(config)
-        app.UseAppServiceAuthentication(config);
+```
+    app.UseWebApi(config)
+    app.UseAppServiceAuthentication(config);
+```
 
 存在其他一些与身份验证相关的更改，下面的完全身份验证部分将介绍这些内容。
 
@@ -117,7 +126,9 @@ ms.author: adrianha
 
 若要确保架构与以前引用的一样，请使用以下代码设置 DbContext 中适用于应用程序的架构：
 
-        string schema = System.Configuration.ConfigurationManager.AppSettings.Get("MS_MobileServiceName");
+```
+    string schema = System.Configuration.ConfigurationManager.AppSettings.Get("MS_MobileServiceName");
+```
 
 如果执行上述操作，请确保设置 MS\_MobileServiceName。如果应用程序以前已自定义此架构，则也可以提供其他架构名称。
 
@@ -168,28 +179,30 @@ ms.author: adrianha
 
 例如，以下示例定义 `TodoItem` 且不使用任何系统属性：
 
-    using System.ComponentModel.DataAnnotations.Schema;
+```
+using System.ComponentModel.DataAnnotations.Schema;
 
-    public class TodoItem : ITableData
-    {
-        public string Text { get; set; }
+public class TodoItem : ITableData
+{
+    public string Text { get; set; }
 
-        public bool Complete { get; set; }
+    public bool Complete { get; set; }
 
-        public string Id { get; set; }
+    public string Id { get; set; }
 
-        [NotMapped]
-        public DateTimeOffset? CreatedAt { get; set; }
+    [NotMapped]
+    public DateTimeOffset? CreatedAt { get; set; }
 
-        [NotMapped]
-        public DateTimeOffset? UpdatedAt { get; set; }
+    [NotMapped]
+    public DateTimeOffset? UpdatedAt { get; set; }
 
-        [NotMapped]
-        public bool Deleted { get; set; }
+    [NotMapped]
+    public bool Deleted { get; set; }
 
-        [NotMapped]
-        public byte[] Version { get; set; }
-    }
+    [NotMapped]
+    public byte[] Version { get; set; }
+}
+```
 
 注意：如果收到有关 `NotMapped` 的错误，请添加对程序集 `System.ComponentModel.DataAnnotations` 的引用。
 
@@ -210,12 +223,16 @@ ms.author: adrianha
 
 `ApiServices` 对象不再是 SDK 的一部分。若要访问移动应用设置，可以使用以下代码：
 
-    MobileAppSettingsDictionary settings = this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
+```
+MobileAppSettingsDictionary settings = this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
+```
 
 同样，现在可以使用标准的 ASP.NET 跟踪写入实现日志记录：
 
-    ITraceWriter traceWriter = this.Configuration.Services.GetTraceWriter();
-    traceWriter.Info("Hello, World");  
+```
+ITraceWriter traceWriter = this.Configuration.Services.GetTraceWriter();
+traceWriter.Info("Hello, World");  
+```
 
 ##<a name="authentication"></a>身份验证注意事项
 
@@ -230,11 +247,15 @@ ms.author: adrianha
 
 可以获取其他用户信息，包括通过 `GetAppServiceIdentityAsync()` 方法访问令牌：
 
-        MicrosoftCredentials creds = await this.User.GetAppServiceIdentityAsync<MicrosoftCredentials>();
+```
+    MicrosoftCredentials creds = await this.User.GetAppServiceIdentityAsync<MicrosoftCredentials>();
+```
 
 此外，如果应用程序依赖于用户 ID（例如，将它们存储在数据库中），请务必注意，移动服务与应用服务移动应用之间的用户 ID 是不相同的。但是，仍然可以获取移动服务用户 ID。所有 ProviderCredentials 子类具有 UserId 属性。继续分析前面的示例：
 
-        string mobileServicesUserId = creds.Provider + ":" + creds.UserId;
+```
+    string mobileServicesUserId = creds.Provider + ":" + creds.UserId;
+```
 
 如果应用程序依赖于用户 ID，必须尽可能使用相同的标识提供者注册。用户 ID 的范围通常限定在已使用的应用程序注册，因此引入新的注册可能会让用户在匹配其数据时发生问题。
 
@@ -247,9 +268,11 @@ ms.author: adrianha
 
 版本间的其中一个主要更改是构造函数不再需要应用程序密钥。现在只需传入移动应用的 URL。例如，在 .NET 客户端中，`MobileServiceClient` 构造函数现在是：
 
-        public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://contoso.chinacloudsites.cn", // URL of the Mobile App
-        );
+```
+    public static MobileServiceClient MobileService = new MobileServiceClient(
+        "https://contoso.chinacloudsites.cn", // URL of the Mobile App
+    );
+```
 
 可以通过以下链接，阅读有关安装新 SDK 以及使用新结构的信息：
 
@@ -270,7 +293,7 @@ ms.author: adrianha
 [Create a Mobile App]: ./app-service-mobile-xamarin-ios-get-started.md
 [Add push notifications to your mobile app]: ./app-service-mobile-xamarin-ios-get-started-push.md
 [Add authentication to your mobile app]: ./app-service-mobile-xamarin-ios-get-started-users.md
-[Azure 计划程序]: ../scheduler/index.md/
+[Azure 计划程序]: ../scheduler/index.md
 [Web 作业]: ../app-service-web/websites-webjobs-resources.md
 [How to use the .NET server SDK]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [Migrate from Mobile Services to an App Service Mobile App]: ./app-service-mobile-migrating-from-mobile-services.md

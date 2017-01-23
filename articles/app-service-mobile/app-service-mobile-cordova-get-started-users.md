@@ -51,8 +51,10 @@ ms.author: adrianha
 
     下面显示了 Content-Security-Policy（针对 Azure Active Directory 实现）的示例：
 
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'
-            data: gap: https://login.chinacloudapi.cn https://yourapp.chinacloudsites.cn; style-src 'self'">
+    ```
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'
+        data: gap: https://login.chinacloudapi.cn https://yourapp.chinacloudsites.cn; style-src 'self'">
+    ```
 
     应该将 `https://login.chinacloudapi.cn` 替换为上表中的 OAuth 主机。有关此元标记的详细信息，请参阅 [Content-Security-Policy 文档]。
 
@@ -60,25 +62,27 @@ ms.author: adrianha
 
 3. 打开 `www/js/index.js` 文件进行编辑，找到 `onDeviceReady()` 方法，然后在客户端创建代码下面添加以下内容：
 
-        // Login to the service
-        client.login('SDK_Provider_Name')
-            .then(function () {
+    ```
+    // Login to the service
+    client.login('SDK_Provider_Name')
+        .then(function () {
 
-                // BEGINNING OF ORIGINAL CODE
+            // BEGINNING OF ORIGINAL CODE
 
-                // Create a table reference
-                todoItemTable = client.getTable('todoitem');
+            // Create a table reference
+            todoItemTable = client.getTable('todoitem');
 
-                // Refresh the todoItems
-                refreshDisplay();
+            // Refresh the todoItems
+            refreshDisplay();
 
-                // Wire up the UI Event Handler for the Add Item
-                $('#add-item').submit(addItemHandler);
-                $('#refresh').on('click', refreshDisplay);
+            // Wire up the UI Event Handler for the Add Item
+            $('#add-item').submit(addItemHandler);
+            $('#refresh').on('click', refreshDisplay);
 
-                // END OF ORIGINAL CODE
+            // END OF ORIGINAL CODE
 
-            }, handleError);
+        }, handleError);
+    ```
 
     请注意，此代码将替换用于创建表引用和刷新 UI 的现有代码。
 

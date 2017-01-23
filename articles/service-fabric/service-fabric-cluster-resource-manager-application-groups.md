@@ -44,35 +44,39 @@ Service Fabric 的群集资源管理器通常通过将负载（通过指标表�
 
 Powershell
 
-    New-ServiceFabricApplication -ApplicationName fabric:/AppName -ApplicationTypeName AppType1 -ApplicationTypeVersion 1.0.0.0 -MaximumNodes 3
-    Update-ServiceFabricApplication –Name fabric:/AppName –MaximumNodes 5
+```
+New-ServiceFabricApplication -ApplicationName fabric:/AppName -ApplicationTypeName AppType1 -ApplicationTypeVersion 1.0.0.0 -MaximumNodes 3
+Update-ServiceFabricApplication –Name fabric:/AppName –MaximumNodes 5
+```
 
 C#
 
-    ApplicationDescription ad = new ApplicationDescription();
-    ad.ApplicationName = new Uri("fabric:/AppName");
-    ad.ApplicationTypeName = "AppType1";
-    ad.ApplicationTypeVersion = "1.0.0.0";
-    ad.MaximumNodes = 3;
-    fc.ApplicationManager.CreateApplicationAsync(ad);
-    
-    ApplicationUpdateDescription adUpdate = new ApplicationUpdateDescription(new Uri("fabric:/AppName"));
-    adUpdate.MaximumNodes = 5;
-    fc.ApplicationManager.UpdateApplicationAsync(adUpdate);
-    
-    var appMetric = new ApplicationMetricDescription();
-    appMetric.Name = "Metric1";
-    appMetric.TotalApplicationCapacity = 1000;
-    
-    adUpdate.Metrics.Add(appMetric);
+```
+ApplicationDescription ad = new ApplicationDescription();
+ad.ApplicationName = new Uri("fabric:/AppName");
+ad.ApplicationTypeName = "AppType1";
+ad.ApplicationTypeVersion = "1.0.0.0";
+ad.MaximumNodes = 3;
+fc.ApplicationManager.CreateApplicationAsync(ad);
+
+ApplicationUpdateDescription adUpdate = new ApplicationUpdateDescription(new Uri("fabric:/AppName"));
+adUpdate.MaximumNodes = 5;
+fc.ApplicationManager.UpdateApplicationAsync(adUpdate);
+
+var appMetric = new ApplicationMetricDescription();
+appMetric.Name = "Metric1";
+appMetric.TotalApplicationCapacity = 1000;
+
+adUpdate.Metrics.Add(appMetric);
+```
 
 ## 应用程序指标、负载和容量
 应用程序组还允许你定义与特定应用程序实例关联的指标，以及这些指标相关的应用程序的容量。因此，举例来说，你可以根据需要定义任意数量的指标，只要不超过可在其中创建指标的服务数即可
 
 对于每个指标，可将 2 个值设置为描述该应用程序实例的容量：
 
--	应用程序容量总计 – 代表特定指标的应用程序容量总计。Service Fabric CRM 尝试将此应用程序的服务的指标负载总计限制为指定值；此外，如果应用程序的服务已消耗超过此限制的负载，Service Fabric 群集资源管理器将不允许创建任何新的服务或分区，这会造成总负载超出此限制。
--	最大节点容量 – 指定单个节点上应用程序的服务副本的最大总负载。如果节点上的总负载超过此容量，Service Fabric CRM 会尝试将副本移到其他节点，以便遵守容量限制。
+- 应用程序容量总计 – 代表特定指标的应用程序容量总计。Service Fabric CRM 尝试将此应用程序的服务的指标负载总计限制为指定值；此外，如果应用程序的服务已消耗超过此限制的负载，Service Fabric 群集资源管理器将不允许创建任何新的服务或分区，这会造成总负载超出此限制。
+- 最大节点容量 – 指定单个节点上应用程序的服务副本的最大总负载。如果节点上的总负载超过此容量，Service Fabric CRM 会尝试将副本移到其他节点，以便遵守容量限制。
 
 ## 保留容量
 应用程序组的另一个常见用途是确保针对指定的应用程序实例保留群集中的资源，即使该应用程序实例在该群集中没有服务，或者它们尚未消耗资源。让我们看一下具体的工作原理。
@@ -98,40 +102,50 @@ C#
 
 例如，可以使用以下 PowerShell cmdlet 检索负载：
 
-    Get-ServiceFabricApplicationLoad –ApplicationName fabric:/MyApplication1
+```
+Get-ServiceFabricApplicationLoad –ApplicationName fabric:/MyApplication1
+```
 
 此查询的输出包含已针对应用程序指定的应用程序容量的基本信息，例如最小节点数和最大节点数。另外还提供有关应用程序当前使用的节点数的信息。因此，将会针对每个负载指标提供以下相关信息：
 - 指标名称：指标的名称。
--	保留容量：在群集中为此应用程序保留的群集容量。
--	应用程序负载：此应用程序的子副本的总负载。
--	应用程序容量：允许的最大应用程序负载值。
+- 保留容量：在群集中为此应用程序保留的群集容量。
+- 应用程序负载：此应用程序的子副本的总负载。
+- 应用程序容量：允许的最大应用程序负载值。
 
 ## 删除应用程序容量
 为应用程序设置应用程序容量参数后，可以使用更新应用程序 API 或 PowerShell cmdlet 来删除这些参数。例如：
 
-    Update-ServiceFabricApplication –Name fabric:/MyApplication1 –RemoveApplicationCapacity
+```
+Update-ServiceFabricApplication –Name fabric:/MyApplication1 –RemoveApplicationCapacity
+```
 
 此命令从应用程序删除所有应用程序容量参数，Service Fabric 群集资源管理器开始将此应用程序视为群集中未定义这些参数的任何其他应用程序。该命令将立即产生效果，群集资源管理器将删除此应用程序的所有应用程序容量参数；再次指定它们需要使用适当的参数调用更新应用程序 API。
 
 ## 应用程序容量的限制
 必须遵守应用程序容量参数的几项限制。发生验证错误时，创建或更新应用程序的操作将被拒绝并出错。所有整数参数必须为非负数。此外，单个参数的限制如下：
 
--	MinimumNodes 不得大于 MaximumNodes。
--	如果已定义负载指标的容量，则这些容量必须遵守以下规则：
+- MinimumNodes 不得大于 MaximumNodes。
+- 如果已定义负载指标的容量，则这些容量必须遵守以下规则：
   - 节点保留容量不得大于最大节点容量。例如，尝试在每个节点上保留 3 个单位时，不能将节点上的指标“CPU”的容量限制为 2 个单位。
   - 如果已指定 MaximumNodes，则 MaximumNodes 和最大节点容量的积不得大于应用程序容量总计。例如，如果将负载指标“CPU”的最大节点容量设置为 8，并将最大节点数设置为 10，则此负载指标的应用程序容量总计必须大于 80。
 
 在（客户端）创建应用程序和在（服务器端）更新应用程序期间都会强制实施限制。在创建期间，这是明显违反要求的一个例子，因为 MaximumNodes 小于 MinimumNodes，在将请求发送到 Service Fabric 群集之前，客户端中的命令就会失败：
 
-    New-ServiceFabricApplication –Name fabric:/MyApplication1 –MinimumNodes 6 –MaximumNodes 2
+```
+New-ServiceFabricApplication –Name fabric:/MyApplication1 –MinimumNodes 6 –MaximumNodes 2
+```
 
 无效更新的示例如下。如果我们采用现有应用程序并将最大节点数更新为某个值，则会传递更新：
 
-    Update-ServiceFabricApplication –Name fabric:/MyApplication1 6 –MaximumNodes 2
+```
+Update-ServiceFabricApplication –Name fabric:/MyApplication1 6 –MaximumNodes 2
+```
 
 接下来，我们可以尝试更新最小节点数：
 
-    Update-ServiceFabricApplication –Name fabric:/MyApplication1 6 –MinimumNodes 6
+```
+Update-ServiceFabricApplication –Name fabric:/MyApplication1 6 –MinimumNodes 6
+```
 
 客户端不提供有关应用程序的足够上下文，因此允许将更新传递到 Service Fabric 群集。但是，在群集中，Service Fabric 将验证新参数与现有参数，由于最小节点数的值大于最大节点数的值，因此更新操作将会失败。在此情况下，应用程序容量参数将保持不变。
 
@@ -139,8 +153,8 @@ C#
 
 ## 在哪些情况下不应使用应用程序容量
 
--	不要使用应用程序容量将应用程序限制为特定的节点子集：尽管 Service Fabric 确保对于已指定应用程序容量的每个应用程序遵守最大节点数，用户无法确定它实例化所在的节点。这可以使用服务的放置约束来实现。
--	不要使用应用程序容量来确保相同应用程序的两个服务始终放在一起。这可通过使用服务之间的相关性关系来实现，相关性可以限制为实际应该放在一起的服务。
+- 不要使用应用程序容量将应用程序限制为特定的节点子集：尽管 Service Fabric 确保对于已指定应用程序容量的每个应用程序遵守最大节点数，用户无法确定它实例化所在的节点。这可以使用服务的放置约束来实现。
+- 不要使用应用程序容量来确保相同应用程序的两个服务始终放在一起。这可通过使用服务之间的相关性关系来实现，相关性可以限制为实际应该放在一起的服务。
 
 ## 后续步骤
 - 有关可用于配置服务的其他选项的详细信息，请查看 [Learn about configuring Services](./service-fabric-cluster-resource-manager-configure-services.md)（了解如何配置服务）中提供的其他群集资源管理器配置的相关主题

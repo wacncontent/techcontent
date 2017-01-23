@@ -20,7 +20,8 @@ ms.author: hanuk;robmcm
 
 # 在 Azure 上将 Cassandra 与 Linux 一起运行以及通过 Node.js 对其进行访问 
 
-> [!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。学习如何[使用资源管理器模型执行这些步骤](https://github.com/Azure/azure-quickstart-templates/tree/master/datastax)
+> [!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。学习如何[使用资源管理器模型执行这些步骤](https://github.com/Azure/azure-quickstart-templates/tree/master/datastax)
 
 ## 概述
 Azure 是一种开放式的云平台，该平台运行 Microsoft 软件和非 Microsoft 软件，其中包括：操作系统、应用程序服务器、消息传递中间件，以及 SQL 数据库和 NoSQL 数据库，采用商业模型和开源模型。在包括 Azure 在内的公共云上构建可复原的服务需要针对应用程序服务器和存储层进行仔细的规划和周到的体系结构设计。Cassandra 具有分布式的存储体系结构，这自然有助于构建可用性高的系统，此类系统在发生群集故障时容错性很强。Cassandra 是云级别的 NoSQL 数据库，由 Apache Software Foundation 在 cassandra.apache.org 上进行维护；Cassandra 是以 Java 编写的，因此可以运行在 Windows 和 Linux 平台上。
@@ -106,7 +107,7 @@ Cassandra 的上述数据中心感知型复制和一致性模型可以很方便�
 | 一致性级别（读取） | LOCAL\_QUORUM ((RF/2) +1) = 2 公式结果向下舍入 | 读取请求仅从一个区域满足；在将响应发送回客户端之前，读取 2 个节点。 |
 | 复制策略 | NetworkTopologyStrategy 请参阅 Cassandra 文档中的[数据复制](http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html)以了解更多信息 | 了解部署拓扑，并将副本置于节点上，以便确保最终不会让所有副本位于同一机架上 |
 | Snitch | GossipingPropertyFileSnitch 请参阅 Cassandra 文档中的 [Snitch](http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureSnitchesAbout_c.html) 以获取更多信息 | NetworkTopologyStrategy 使用 snitch 这个概念来了解拓扑。在将每个节点映射到数据中心和机架时，使用 GossipingPropertyFileSnitch 可以更好地进行控制。然后，该群集使用 gossip 来传播此信息。相对于 PropertyFileSnitch，此方法在进行动态 IP 设置时要简单得多 | 
- 
+
 ##软件配置
 在部署过程中使用以下软件版本：
 
@@ -169,103 +170,111 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
 ####步骤 2：准备目录结构并提取存档
 使用以下 bash 脚本以超级用户身份登录到 VM，然后创建目录结构并提取软件：
 
-    #!/bin/bash
-    CASS_INSTALL_DIR="/opt/cassandra"
-    JRE_INSTALL_DIR="/opt/java"
-    CASS_DATA_DIR="/var/lib/cassandra"
-    CASS_LOG_DIR="/var/log/cassandra"
-    DOWNLOADS_DIR="~/downloads"
-    JRE_TARBALL="server-jre-8u5-linux-x64.tar.gz"
-    CASS_TARBALL="apache-cassandra-2.0.8-bin.tar.gz"
-    SVC_USER="localadmin"
-    
-    RESET_ERROR=1
-    MKDIR_ERROR=2
-    
-    reset_installation ()
-    {
-       rm -rf $CASS_INSTALL_DIR 2> /dev/null
-       rm -rf $JRE_INSTALL_DIR 2> /dev/null
-       rm -rf $CASS_DATA_DIR 2> /dev/null
-       rm -rf $CASS_LOG_DIR 2> /dev/null
-    }
-    make_dir ()
-    {
-       if [ -z "$1" ]
-       then
-          echo "make_dir: invalid directory name"
-          exit $MKDIR_ERROR
-       fi
-       
-       if [ -d "$1" ]
-       then
-          echo "make_dir: directory already exists"
-          exit $MKDIR_ERROR
-       fi
-    
-       mkdir $1 2>/dev/null
-       if [ $? != 0 ]
-       then
-          echo "directory creation failed"
-          exit $MKDIR_ERROR
-       fi
-    }
-    
-    unzip()
-    {
-       if [ $# == 2 ]
-       then
-          tar xzf $1 -C $2
-       else
-          echo "archive error"
-       fi
-       
-    }
-    
-    if [ -n "$1" ]
-    then
-       SVC_USER=$1
-    fi
-    
-    reset_installation 
-    make_dir $CASS_INSTALL_DIR
-    make_dir $JRE_INSTALL_DIR
-    make_dir $CASS_DATA_DIR
-    make_dir $CASS_LOG_DIR
-    
-    #unzip JRE and Cassandra 
-    unzip $HOME/downloads/$JRE_TARBALL $JRE_INSTALL_DIR
-    unzip $HOME/downloads/$CASS_TARBALL $CASS_INSTALL_DIR
-    
-    #Change the ownership to the service credentials
-    
-    chown -R $SVC_USER:$GROUP $CASS_DATA_DIR
-    chown -R $SVC_USER:$GROUP $CASS_LOG_DIR
-    echo "edit /etc/profile to add JRE to the PATH"
-    echo "installation is complete"
+```
+#!/bin/bash
+CASS_INSTALL_DIR="/opt/cassandra"
+JRE_INSTALL_DIR="/opt/java"
+CASS_DATA_DIR="/var/lib/cassandra"
+CASS_LOG_DIR="/var/log/cassandra"
+DOWNLOADS_DIR="~/downloads"
+JRE_TARBALL="server-jre-8u5-linux-x64.tar.gz"
+CASS_TARBALL="apache-cassandra-2.0.8-bin.tar.gz"
+SVC_USER="localadmin"
+
+RESET_ERROR=1
+MKDIR_ERROR=2
+
+reset_installation ()
+{
+   rm -rf $CASS_INSTALL_DIR 2> /dev/null
+   rm -rf $JRE_INSTALL_DIR 2> /dev/null
+   rm -rf $CASS_DATA_DIR 2> /dev/null
+   rm -rf $CASS_LOG_DIR 2> /dev/null
+}
+make_dir ()
+{
+   if [ -z "$1" ]
+   then
+      echo "make_dir: invalid directory name"
+      exit $MKDIR_ERROR
+   fi
+
+   if [ -d "$1" ]
+   then
+      echo "make_dir: directory already exists"
+      exit $MKDIR_ERROR
+   fi
+
+   mkdir $1 2>/dev/null
+   if [ $? != 0 ]
+   then
+      echo "directory creation failed"
+      exit $MKDIR_ERROR
+   fi
+}
+
+unzip()
+{
+   if [ $# == 2 ]
+   then
+      tar xzf $1 -C $2
+   else
+      echo "archive error"
+   fi
+
+}
+
+if [ -n "$1" ]
+then
+   SVC_USER=$1
+fi
+
+reset_installation 
+make_dir $CASS_INSTALL_DIR
+make_dir $JRE_INSTALL_DIR
+make_dir $CASS_DATA_DIR
+make_dir $CASS_LOG_DIR
+
+#unzip JRE and Cassandra 
+unzip $HOME/downloads/$JRE_TARBALL $JRE_INSTALL_DIR
+unzip $HOME/downloads/$CASS_TARBALL $CASS_INSTALL_DIR
+
+#Change the ownership to the service credentials
+
+chown -R $SVC_USER:$GROUP $CASS_DATA_DIR
+chown -R $SVC_USER:$GROUP $CASS_LOG_DIR
+echo "edit /etc/profile to add JRE to the PATH"
+echo "installation is complete"
+```
 
 如果将此脚本粘贴到 vim 窗口中，请确保使用以下命令删除回车符 ('\\r')：
 
-    tr -d '\r' <infile.sh >outfile.sh
+```
+tr -d '\r' <infile.sh >outfile.sh
+```
 
 ####步骤 3：编辑 etc/profile
 将以下内容附加到结尾：
 
-    JAVA_HOME=/opt/java/jdk1.8.0_05 
-    CASS_HOME= /opt/cassandra/apache-cassandra-2.0.8
-    PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$CASS_HOME/bin
-    export JAVA_HOME
-    export CASS_HOME
-    export PATH
+```
+JAVA_HOME=/opt/java/jdk1.8.0_05 
+CASS_HOME= /opt/cassandra/apache-cassandra-2.0.8
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$CASS_HOME/bin
+export JAVA_HOME
+export CASS_HOME
+export PATH
+```
 
 ####第 4 步：为生产系统安装 JNA
 使用以下命令顺序：以下命令会将 jna-3.2.7.jar 和 jna-platform-3.2.7.jar 安装到 /usr/share.java 目录 sudo apt-get install libjna-java
 
 在 $CASS\_HOME/lib 目录中创建符号链接，以便 Cassandra 启动脚本能够找到这些 jar：
 
-    ln -s /usr/share/java/jna-3.2.7.jar $CASS_HOME/lib/jna.jar
+```
+ln -s /usr/share/java/jna-3.2.7.jar $CASS_HOME/lib/jna.jar
 
-    ln -s /usr/share/java/jna-platform-3.2.7.jar $CASS_HOME/lib/jna-platform.jar
+ln -s /usr/share/java/jna-platform-3.2.7.jar $CASS_HOME/lib/jna-platform.jar
+```
 
 ####步骤 5：配置 cassandra.yaml
 编辑每个 VM 上的 cassandra.yaml，使之能够反映所有虚拟机所需的配置 [在实际预配过程中，我们会对此进行调整]：
@@ -340,84 +349,92 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
 创建以上 VM 列表需要完成以下过程：
 
 1.  在特定区域创建空的云服务
-2.	从以前捕获的映像创建 VM，然后将其附加到以前创建的虚拟网络；对所有 VM 重复此过程
-3.	将内部负载均衡器添加到云服务，然后将其附加到“数据”子网
-4.	对于以前创建的每个 VM，可以通过一个已连接到以前创建的内部负载均衡器的负载均衡集添加进行 Thrift 通信的负载均衡终结点
+2. 从以前捕获的映像创建 VM，然后将其附加到以前创建的虚拟网络；对所有 VM 重复此过程
+3. 将内部负载均衡器添加到云服务，然后将其附加到“数据”子网
+4. 对于以前创建的每个 VM，可以通过一个已连接到以前创建的内部负载均衡器的负载均衡集添加进行 Thrift 通信的负载均衡终结点
 
 以上过程可以通过 Azure 经典管理门户来执行；使用 Windows 计算机（如果无法访问 Windows 计算机，则可使用 Azure 上的 VM）；使用以下 PowerShell 脚本自动预配所有 8 个 VM。
 
 **列表 1：适用于预配虚拟机的 PowerShell 脚本**
-        
-        #Tested with Azure Powershell - November 2014	
-        #This powershell script deployes a number of VMs from an existing image inside an Azure region
-        #Import your Azure subscription into the current Powershell session before proceeding
-        #The process: 1. create Azure Storage account, 2. create virtual network, 3.create the VM template, 2. crate a list of VMs from the template
-        
-        #fundamental variables - change these to reflect your subscription
-        $country="china"; $region="north"; $vnetName = "your_vnet_name";$storageAccount="your_storage_account"
-        $numVMs=8;$prefix = "hk-cass";$ilbIP="your_ilb_ip"
-        $subscriptionName = "Azure_subscription_name"; 
-        $vmSize="ExtraSmall"; $imageName="your_linux_image_name"
-        $ilbName="ThriftInternalLB"; $thriftEndPoint="ThriftEndPoint"
-        
-        #generated variables
-        $serviceName = "$prefix-svc-$country-$region"; $azureRegion = "$country $region"
-        
-        $vmNames = @()
-        for ($i=0; $i -lt $numVMs; $i++)
-        {
-           $vmNames+=("$prefix-vm"+($i+1) + "$country-$region" );
-        }
-        
-        #select an Azure subscription already imported into Powershell session
-        Select-AzureSubscription -SubscriptionName $subscriptionName -Current
-        Set-AzureSubscription -Environment AzureChinaCloud -SubscriptionName $subscriptionName -CurrentStorageAccountName $storageAccount
-        
-        #create an empty cloud service
-        New-AzureService -ServiceName $serviceName -Label "hkcass$region" -Location $azureRegion
-        Write-Host "Created $serviceName"
-        
-        $VMList= @()   # stores the list of azure vm configuration objects
-        #create the list of VMs
-        foreach($vmName in $vmNames)
-        {
-           $VMList += New-AzureVMConfig -Name $vmName -InstanceSize ExtraSmall -ImageName $imageName |
-           Add-AzureProvisioningConfig -Linux -LinuxUser "localadmin" -Password "Local123" |
-           Set-AzureSubnet "data"
-        }
-        
-        New-AzureVM -ServiceName $serviceName -VNetName $vnetName -VMs $VMList
-        
-        #Create internal load balancer
-        Add-AzureInternalLoadBalancer -ServiceName $serviceName -InternalLoadBalancerName $ilbName -SubnetName "data" -StaticVNetIPAddress "$ilbIP"
-        Write-Host "Created $ilbName"
-        #Add add the thrift endpoint to the internal load balancer for all the VMs
-        foreach($vmName in $vmNames)
-        {
-            Get-AzureVM -ServiceName $serviceName -Name $vmName |
-                Add-AzureEndpoint -Name $thriftEndPoint -LBSetName "ThriftLBSet" -Protocol tcp -LocalPort 9160 -PublicPort 9160 -ProbePort 9160 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 -InternalLoadBalancerName $ilbName | 
-                Update-AzureVM 
-        
-            Write-Host "created $vmName"     
-        }
+
+```
+    #Tested with Azure Powershell - November 2014	
+    #This powershell script deployes a number of VMs from an existing image inside an Azure region
+    #Import your Azure subscription into the current Powershell session before proceeding
+    #The process: 1. create Azure Storage account, 2. create virtual network, 3.create the VM template, 2. crate a list of VMs from the template
+
+    #fundamental variables - change these to reflect your subscription
+    $country="china"; $region="north"; $vnetName = "your_vnet_name";$storageAccount="your_storage_account"
+    $numVMs=8;$prefix = "hk-cass";$ilbIP="your_ilb_ip"
+    $subscriptionName = "Azure_subscription_name"; 
+    $vmSize="ExtraSmall"; $imageName="your_linux_image_name"
+    $ilbName="ThriftInternalLB"; $thriftEndPoint="ThriftEndPoint"
+
+    #generated variables
+    $serviceName = "$prefix-svc-$country-$region"; $azureRegion = "$country $region"
+
+    $vmNames = @()
+    for ($i=0; $i -lt $numVMs; $i++)
+    {
+       $vmNames+=("$prefix-vm"+($i+1) + "$country-$region" );
+    }
+
+    #select an Azure subscription already imported into Powershell session
+    Select-AzureSubscription -SubscriptionName $subscriptionName -Current
+    Set-AzureSubscription -Environment AzureChinaCloud -SubscriptionName $subscriptionName -CurrentStorageAccountName $storageAccount
+
+    #create an empty cloud service
+    New-AzureService -ServiceName $serviceName -Label "hkcass$region" -Location $azureRegion
+    Write-Host "Created $serviceName"
+
+    $VMList= @()   # stores the list of azure vm configuration objects
+    #create the list of VMs
+    foreach($vmName in $vmNames)
+    {
+       $VMList += New-AzureVMConfig -Name $vmName -InstanceSize ExtraSmall -ImageName $imageName |
+       Add-AzureProvisioningConfig -Linux -LinuxUser "localadmin" -Password "Local123" |
+       Set-AzureSubnet "data"
+    }
+
+    New-AzureVM -ServiceName $serviceName -VNetName $vnetName -VMs $VMList
+
+    #Create internal load balancer
+    Add-AzureInternalLoadBalancer -ServiceName $serviceName -InternalLoadBalancerName $ilbName -SubnetName "data" -StaticVNetIPAddress "$ilbIP"
+    Write-Host "Created $ilbName"
+    #Add add the thrift endpoint to the internal load balancer for all the VMs
+    foreach($vmName in $vmNames)
+    {
+        Get-AzureVM -ServiceName $serviceName -Name $vmName |
+            Add-AzureEndpoint -Name $thriftEndPoint -LBSetName "ThriftLBSet" -Protocol tcp -LocalPort 9160 -PublicPort 9160 -ProbePort 9160 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 -InternalLoadBalancerName $ilbName | 
+            Update-AzureVM 
+
+        Write-Host "created $vmName"     
+    }
+```
 
 **步骤 3：在每个 VM 上配置 Cassandra**
 
 登录到 VM 并执行以下操作：
 
 * 编辑 $CASS\_HOME/conf/cassandra-rackdc.properties 以指定数据中心和机架属性：
-      
-        dc =CHINAEAST, rack =rack1
+
+    ```
+    dc =CHINAEAST, rack =rack1
+    ```
 
 * 编辑 cassandra.yaml，将种子节点配置如下：
-     
-        Seeds: "10.1.2.4,10.1.2.6,10.1.2.8,10.1.2.10"
+
+    ```
+    Seeds: "10.1.2.4,10.1.2.6,10.1.2.8,10.1.2.10"
+    ```
 
 **步骤 4：启动 VM 并测试群集**
 
 登录到其中一个节点（例如 hk-c1-china-north），然后运行以下命令以查看群集的状态：
-       
-        nodetool -h 10.1.2.4 -p 7199 status 
+
+```
+    nodetool -h 10.1.2.4 -p 7199 status 
+```
 
 对于 8 节点群集，你所看到的显示内容将如下所示：
 
@@ -437,17 +454,19 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
 使用以下步骤测试群集：
 
 1.    使用 Powershell 命令 Get-AzureInternalLoadbalancer cmdlet 获取内部负载均衡器的 IP 地址（例如 10.1.2.101）。该命令的语法如下所示：Get-AzureLoadbalancer -ServiceName "hk-c-svc-china-north" [显示内部负载均衡器及其 IP 地址的详细信息]
-2.	使用 Putty 或 ssh 登录到 Web 场 VM（例如 hk-w1-china-north）
-3.	执行 $CASS\_HOME/bin/cqlsh 10.1.2.101 9160 
-4.	使用以下 CQL 命令验证群集是否正常工作：
+2. 使用 Putty 或 ssh 登录到 Web 场 VM（例如 hk-w1-china-north）
+3. 执行 $CASS\_HOME/bin/cqlsh 10.1.2.101 9160 
+4. 使用以下 CQL 命令验证群集是否正常工作：
 
-        CREATE KEYSPACE customers_ks WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };	
-        USE customers_ks;
-        CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
-        INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
-        INSERT INTO Customers(customer_id, firstname, lastname) VALUES (2, 'Jane', 'Doe');
-        
-        SELECT * FROM Customers;
+    ```
+    CREATE KEYSPACE customers_ks WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };	
+    USE customers_ks;
+    CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
+    INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
+    INSERT INTO Customers(customer_id, firstname, lastname) VALUES (2, 'Jane', 'Doe');
+
+    SELECT * FROM Customers;
+    ```
 
 你应该看到如下所示的显示内容：
 
@@ -537,17 +556,23 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
 
 1. 编辑 $CASS\_HOME/conf/cassandra-rackdc.properties 以指定下述格式的数据中心和机架属性：
 
-        dc =CHINAEAST
-        rack =rack1
+    ```
+    dc =CHINAEAST
+    rack =rack1
+    ```
 
 2. 编辑 cassandra.yaml 以配置种子节点：
 
-        Seeds: "10.1.2.4,10.1.2.6,10.1.2.8,10.1.2.10,10.2.2.4,10.2.2.6,10.2.2.8,10.2.2.10"
+    ```
+    Seeds: "10.1.2.4,10.1.2.6,10.1.2.8,10.1.2.10,10.2.2.4,10.2.2.6,10.2.2.8,10.2.2.10"
+    ```
 
 ###步骤 10：启动 Cassandra
 登录到每个 VM，然后通过运行以下命令在后台启动 Cassandra：
 
-    $CASS\_HOME/bin/cassandra
+```
+$CASS\_HOME/bin/cassandra
+```
 
 ## 测试多区域群集
 到目前为止，Cassandra 已部署到 16 个节点，每个 Azure 区域 8 个节点。这些节点具有通用的群集名称和种子节点配置，因此属于同一群集。使用以下过程测试群集：
@@ -560,15 +585,17 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
 
 ###步骤 2：登录到 hk-w1-china-north 以后，在北部地区执行以下命令
 1.    执行 $CASS\_HOME/bin/cqlsh 10.1.2.101 9160 
-2.	执行以下 CQL 命令：
+2. 执行以下 CQL 命令：
 
         CREATE KEYSPACE customers_ks
         WITH REPLICATION = { 'class' : 'NetworkToplogyStrategy', 'CHINANORTH' : 3, 'CHINAEAST' : 3};
-        USE customers_ks;
-        CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
-        INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
-        INSERT INTO Customers(customer_id, firstname, lastname) VALUES (2, 'Jane', 'Doe');
-        SELECT * FROM Customers;
+    ```
+    USE customers_ks;
+    CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
+    INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
+    INSERT INTO Customers(customer_id, firstname, lastname) VALUES (2, 'Jane', 'Doe');
+    SELECT * FROM Customers;
+    ```
 
 你应该看到如下所示的显示内容：
 
@@ -579,7 +606,7 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
 
 ###步骤 3：登录到 hk-w1-china-east 以后，在东部地区执行以下命令：
 1.    执行 $CASS\_HOME/bin/cqlsh 10.2.2.101 9160 
-2.	执行以下 CQL 命令：
+2. 执行以下 CQL 命令：
 
         USE customers_ks;
         CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
@@ -605,88 +632,90 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
 2. 使用 npm 安装节点包“cassandra-client”
 3. 在显示已检索数据的 json 字符串的 shell 提示符下执行以下脚本： 
 
-        var pooledCon = require('cassandra-client').PooledConnection;
-        var ksName = "custsupport_ks";
-        var cfName = "customers_cf";
-        var hostList = ['internal_loadbalancer_ip:9160'];
-        var ksConOptions = { hosts: hostList,
-                             keyspace: ksName, use_bigints: false };
-        
-        function createKeyspace(callback){
-           var cql = 'CREATE KEYSPACE ' + ksName + ' WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=1';
-           var sysConOptions = { hosts: hostList,  
-                                 keyspace: 'system', use_bigints: false };
-           var con = new pooledCon(sysConOptions);
-           con.execute(cql,[],function(err) {
-           if (err) {
-             console.log("Failed to create Keyspace: " + ksName);
+    ```
+    var pooledCon = require('cassandra-client').PooledConnection;
+    var ksName = "custsupport_ks";
+    var cfName = "customers_cf";
+    var hostList = ['internal_loadbalancer_ip:9160'];
+    var ksConOptions = { hosts: hostList,
+                         keyspace: ksName, use_bigints: false };
+
+    function createKeyspace(callback){
+       var cql = 'CREATE KEYSPACE ' + ksName + ' WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=1';
+       var sysConOptions = { hosts: hostList,  
+                             keyspace: 'system', use_bigints: false };
+       var con = new pooledCon(sysConOptions);
+       con.execute(cql,[],function(err) {
+       if (err) {
+         console.log("Failed to create Keyspace: " + ksName);
+         console.log(err);
+       }
+       else {
+         console.log("Created Keyspace: " + ksName);
+         callback(ksConOptions, populateCustomerData);
+       }
+       });
+       con.shutdown();
+    } 
+
+    function createColumnFamily(ksConOptions, callback){
+      var params = ['customers_cf','custid','varint','custname',
+                    'text','custaddress','text'];
+      var cql = 'CREATE COLUMNFAMILY ? (? ? PRIMARY KEY,? ?, ? ?)';
+    var con =  new pooledCon(ksConOptions);
+      con.execute(cql,params,function(err) {
+          if (err) {
+             console.log("Failed to create column family: " + params[0]);
              console.log(err);
-           }
-           else {
-             console.log("Created Keyspace: " + ksName);
-             callback(ksConOptions, populateCustomerData);
-           }
-           });
-           con.shutdown();
-        } 
-        
-        function createColumnFamily(ksConOptions, callback){
-          var params = ['customers_cf','custid','varint','custname',
-                        'text','custaddress','text'];
-          var cql = 'CREATE COLUMNFAMILY ? (? ? PRIMARY KEY,? ?, ? ?)';
-        var con =  new pooledCon(ksConOptions);
-          con.execute(cql,params,function(err) {
-              if (err) {
-                 console.log("Failed to create column family: " + params[0]);
-                 console.log(err);
-              }
-              else {
-                 console.log("Created column family: " + params[0]);
-                 callback();
-              }
-          });
-          con.shutdown();
-        } 
-        
-        //populate Data
-        function populateCustomerData() {
-           var params = ['John','Infinity Dr, TX', 1];
-           updateCustomer(ksConOptions,params);
-        
-           params = ['Tom','Fermat Ln, WA', 2];
-           updateCustomer(ksConOptions,params);
-        }
-        
-        //update will also insert the record if none exists
-        function updateCustomer(ksConOptions,params)
-        {
-          var cql = 'UPDATE customers_cf SET custname=?,custaddress=? where custid=?';
-          var con = new pooledCon(ksConOptions);
-          con.execute(cql,params,function(err) {
-              if (err) console.log(err);
-              else console.log("Inserted customer : " + params[0]);
-          });
-          con.shutdown();
-        }
-        
-        //read the two rows inserted above
-        function readCustomer(ksConOptions)
-        {
-          var cql = 'SELECT * FROM customers_cf WHERE custid IN (1,2)';
-          var con = new pooledCon(ksConOptions);
-          con.execute(cql,[],function(err,rows) {
-              if (err) 
-                 console.log(err);
-              else 
-                 for (var i=0; i<rows.length; i++)
-                    console.log(JSON.stringify(rows[i]));
-            });
-           con.shutdown();
-        }
-        
-        //exectue the code
-        createKeyspace(createColumnFamily);
-        readCustomer(ksConOptions)
+          }
+          else {
+             console.log("Created column family: " + params[0]);
+             callback();
+          }
+      });
+      con.shutdown();
+    } 
+
+    //populate Data
+    function populateCustomerData() {
+       var params = ['John','Infinity Dr, TX', 1];
+       updateCustomer(ksConOptions,params);
+
+       params = ['Tom','Fermat Ln, WA', 2];
+       updateCustomer(ksConOptions,params);
+    }
+
+    //update will also insert the record if none exists
+    function updateCustomer(ksConOptions,params)
+    {
+      var cql = 'UPDATE customers_cf SET custname=?,custaddress=? where custid=?';
+      var con = new pooledCon(ksConOptions);
+      con.execute(cql,params,function(err) {
+          if (err) console.log(err);
+          else console.log("Inserted customer : " + params[0]);
+      });
+      con.shutdown();
+    }
+
+    //read the two rows inserted above
+    function readCustomer(ksConOptions)
+    {
+      var cql = 'SELECT * FROM customers_cf WHERE custid IN (1,2)';
+      var con = new pooledCon(ksConOptions);
+      con.execute(cql,[],function(err,rows) {
+          if (err) 
+             console.log(err);
+          else 
+             for (var i=0; i<rows.length; i++)
+                console.log(JSON.stringify(rows[i]));
+        });
+       con.shutdown();
+    }
+
+    //exectue the code
+    createKeyspace(createColumnFamily);
+    readCustomer(ksConOptions)
+    ```
 
 ## 结束语 
 Azure 是一个灵活的平台，你可以在其中运行本练习所演示的 Microsoft 软件和开源软件。将群集节点分散到多个容错域即可在单个数据中心部署高度可用的 Cassandra 群集。也可以将 Cassandra 群集部署到多个地理距离遥远的 Azure 区域，以便建立防灾系统。使用 Azure 和 Cassandra 能够建立高度可伸缩、高度可用且灾难恢复性强的云服务，满足当今 Internet 缩放服务的需求。

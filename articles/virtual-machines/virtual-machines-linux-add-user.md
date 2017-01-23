@@ -33,32 +33,38 @@ ms.author: v-livech
     sudo useradd -G sudo exampleUser
 
     # Set a password
-    sudo passwd exampleUser
-    Enter new UNIX password:
-    Retype new UNIX password:
-    passwd: password updated successfully
+```
+sudo passwd exampleUser
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+```
 
     # Copy the SSH Public Key to the new user
-    ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
+ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
 
     # Change sudoers to allow no password
-    # Execute visudo as root to edit the /etc/sudoers file
-    visudo
+```
+# Execute visudo as root to edit the /etc/sudoers file
+visudo
 
-    # On RedHat family distros uncomment this line:
-    ## Same thing without a password
-    # %wheel        ALL=(ALL)       NOPASSWD: ALL
+# On RedHat family distros uncomment this line:
+## Same thing without a password
+# %wheel        ALL=(ALL)       NOPASSWD: ALL
 
-    # to this
-    ## Same thing without a password
-    %wheel        ALL=(ALL)       NOPASSWD: ALL
+# to this
+## Same thing without a password
+%wheel        ALL=(ALL)       NOPASSWD: ALL
 
-    # On Debian family distros change this line:
-    # Allow members of group sudo to execute any command
-    %sudo   ALL=(ALL:ALL) ALL
+# On Debian family distros change this line:
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
 
-    # to this
-    %sudo   ALL=(ALL) NOPASSWD:ALL
+# to this
+%sudo   ALL=(ALL) NOPASSWD:ALL
+```
 
     # Verify everything
     # Verify the SSH keys & User account
@@ -90,11 +96,13 @@ ms.author: v-livech
 
 #### 添加用户
 
-    # On RedHat family distros
-    sudo useradd -G wheel exampleUser
+```
+# On RedHat family distros
+sudo useradd -G wheel exampleUser
 
-    # On Debian family distros
-    sudo useradd -G sudo exampleUser
+# On Debian family distros
+sudo useradd -G sudo exampleUser
+```
 
 #### 设置密码
 
@@ -139,10 +147,12 @@ ms.author: v-livech
 
 ### 验证用户、ssh 密钥和 sudo
 
-    # Verify the SSH keys & User account
-    ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
+# Verify the SSH keys & User account
+ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
 
-    # Verify sudo access
-    sudo top
+# Verify sudo access
+sudo top
+```
 
 <!---HONumber=Mooncake_1017_2016-->

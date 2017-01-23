@@ -26,7 +26,8 @@ ms.author: danlep
 
 ### Azure 模板
 
->[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.chinacloudapi.cn”替换为“blob.core.chinacloudapi.cn”，将“chinacloudapp.cn”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.chinacloudapi.cn”替换为“blob.core.chinacloudapi.cn”，将“chinacloudapp.cn”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 * （快速入门）[创建 HPC 群集](https://github.com/Azure/azure-quickstart-templates/tree/master/create-hpc-cluster)
 

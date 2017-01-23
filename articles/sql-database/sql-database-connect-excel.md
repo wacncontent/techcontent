@@ -33,21 +33,22 @@ ms.author: joseidz
 
 ## 将 Excel 连接到 SQL 数据库并创建 odc 文件
 
-1.	若要将 Excel 连接到 SQL 数据库，请打开 Excel，然后创建新的工作簿或打开现有的 Excel 工作簿。
+1. 若要将 Excel 连接到 SQL 数据库，请打开 Excel，然后创建新的工作簿或打开现有的 Excel 工作簿。
 
-2.	在页面顶部的菜单栏中单击“数据”、单击“从其他源”，然后单击“从 SQL Server”。
+2. 在页面顶部的菜单栏中单击“数据”、单击“从其他源”，然后单击“从 SQL Server”。
 
     ![选择数据源：将 Excel 连接到 SQL 数据库。](./media/sql-database-connect-excel/excel_data_source.png)
 
     “数据连接”向导打开。
 
-3.	在“连接到数据库服务器”对话框中，以格式 <*服务器名称*>**.database.chinacloudapi.cn** 键入要连接到的 SQL 数据库**服务器名称**。例如 **adworkserver.database.chinacloudapi.cn**。
+3. 在“连接到数据库服务器”对话框中，以格式 <*服务器名称*>**.database.chinacloudapi.cn** 键入要连接到的 SQL 数据库**服务器名称**。例如 **adworkserver.database.chinacloudapi.cn**。
 
-4.	在“登录凭据”下，单击“使用以下用户名和密码”、键入在创建 SQL 数据库服务器时为其设置的**用户名**和**密码**，然后单击“下一步”。
+4. 在“登录凭据”下，单击“使用以下用户名和密码”、键入在创建 SQL 数据库服务器时为其设置的**用户名**和**密码**，然后单击“下一步”。
 
     ![键入服务器名称和登录凭据](./media/sql-database-connect-excel/connect-to-server.png)
 
-    > [!TIP] 根据你的网络环境，你可能无法连接；如果 SQL 数据库服务器不允许来自客户端 IP 地址的流量，你可能会断开连接。转到 [Azure 经典管理门户](https://manage.windowsazure.cn)，依次单击“SQL 服务器”、你的服务器、“设置”下面的“防火墙”，然后添加客户端 IP 地址。有关详细信息，请参阅[如何配置防火墙设置](./sql-database-configure-firewall-settings-powershell.md)。
+    > [!TIP]
+    > 根据你的网络环境，你可能无法连接；如果 SQL 数据库服务器不允许来自客户端 IP 地址的流量，你可能会断开连接。转到 [Azure 经典管理门户](https://manage.windowsazure.cn)，依次单击“SQL 服务器”、你的服务器、“设置”下面的“防火墙”，然后添加客户端 IP 地址。有关详细信息，请参阅[如何配置防火墙设置](./sql-database-configure-firewall-settings-powershell.md)。
 
 5. 在“选择数据库和表”对话框中，从列表中选择要使用的数据库、单击要使用的表或视图（我们选择了 **vGetAllCategories**），然后单击“下一步”。
 
@@ -74,7 +75,8 @@ ms.author: joseidz
 
     ![配置数据库报表。](./media/sql-database-connect-excel/power-pivot-results.png)
 
-> [!TIP] 如果要将其他 Excel 工作簿和工作表连接到数据库，请依次单击“数据”、“连接”、“添加”，从列表中选择你创建的连接，然后单击“打开”。
+> [!TIP]
+> 如果要将其他 Excel 工作簿和工作表连接到数据库，请依次单击“数据”、“连接”、“添加”，从列表中选择你创建的连接，然后单击“打开”。
 > ![从另一个工作簿打开连接](./media/sql-database-connect-excel/open-from-another-workbook.png)
 
 ## 后续步骤

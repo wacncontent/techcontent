@@ -43,11 +43,11 @@ wacn.date: 11/11/2016
   <tr>
     <td><a href="./articles/virtual-machines/windows/index.md">Windows 虚拟机</a></td>
     <td><a href="./articles/virtual-machines/linux/index.md">Linux 虚拟机</a></td>
-    <td><a href="./articles/cloud-services/index.md/">云服务</a></td>
-    <td><a href="./articles/batch/index.md/">批处理（Batch）</a></td>
+    <td><a href="./articles/cloud-services/index.md">云服务</a></td>
+    <td><a href="./articles/batch/index.md">批处理（Batch）</a></td>
   </tr>
   <tr>
-    <td><a href="./articles/service-fabric/index.md/">Service Fabric</a></td>
+    <td><a href="./articles/service-fabric/index.md">Service Fabric</a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
@@ -58,13 +58,13 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/app-service/index.md/">应用服务</a></td>
+    <td><a href="./articles/app-service/index.md">应用服务</a></td>
     <td><a href="./articles/app-service-web/index.md">Web 应用</a></td>
     <td><a href="./articles/app-service-mobile/index.md">移动应用</a></td>
-    <td><a href="./articles/index.md">API 应用</a></td>
+    <td><a href="./articles/app-service-api/index.md">API 应用</a></td>
   </tr>
   <tr col>
-    <td><a href="./articles/mobile-services/index.md/">移动服务</a></td>
+    <td><a href="./articles/mobile-services/index.md">移动服务</a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
@@ -75,15 +75,15 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/sql-database/index.md/">SQL 数据库</a></td>
-    <td><a href="./articles/redis-cache/index.md/">Redis 缓存</a></td>
-    <td><a href="./articles/storage/index.md/">存储</a></td>
-    <td><a href="./articles/mysql/index.md/">MySQL Database on Azure</a></td>
+    <td><a href="./articles/sql-database/index.md">SQL 数据库</a></td>
+    <td><a href="./articles/redis-cache/index.md">Redis 缓存</a></td>
+    <td><a href="./articles/storage/index.md">存储</a></td>
+    <td><a href="./articles/mysql/index.md">MySQL Database on Azure</a></td>
   </tr>
   <tr>
-    <td><a href="./articles/sql-data-warehouse/index.md/">SQL 数据仓库</a></td>
-    <td><a href="./articles/sql-server-stretch-database/index.md/">SQL Server Stretch Database</a></td>
-    <td><a href="./articles/documentdb/index.md/">DocumentDB</a></td>
+    <td><a href="./articles/sql-data-warehouse/index.md">SQL 数据仓库</a></td>
+    <td><a href="./articles/sql-server-stretch-database/index.md">SQL Server Stretch Database</a></td>
+    <td><a href="./articles/documentdb/index.md">DocumentDB</a></td>
     <td><a href=""></a></td>
   </tr>
 </table>
@@ -92,10 +92,10 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/hdinsight/index.md/">HDInsight</a></td>
-    <td><a href="./articles/stream-analytics/index.md/">流分析</a></td>
-    <td><a href="./articles/cognitive-services/index.md/">认知服务</a></td>
-    <td><a href="./articles/event-hubs/index.md/">事件中心</a></td>
+    <td><a href="./articles/hdinsight/index.md">HDInsight</a></td>
+    <td><a href="./articles/stream-analytics/index.md">流分析</a></td>
+    <td><a href="./articles/cognitive-services/index.md">认知服务</a></td>
+    <td><a href="./articles/event-hubs/index.md">事件中心</a></td>
   </tr>
 </table>
 
@@ -103,14 +103,13 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/iot-suite/index.md/">Azure IoT 套件</a></td>
-    <td><a href="./articles/iot-hub/index.md/">Azure IoT 中心</a></td>
-    <td><a href="./articles/event-hubs/index.md/">事件中心</a></td>
-    <td><a href="./articles/stream-analytics/index.md/">流分析</a></td>
+    <td><a href="./articles/iot-suite/index.md">Azure IoT 套件</a></td>
+    <td><a href="./articles/iot-hub/index.md">Azure IoT 中心</a></td>
+    <td><a href="./articles/event-hubs/index.md">事件中心</a></td>
+    <td><a href="./articles/stream-analytics/index.md">流分析</a></td>
   </tr>
   <tr>
-
-    <td><a href="./articles/notification-hubs/index.md/">通知中心</a></td>
+    <td><a href="./articles/notification-hubs/index.md">通知中心</a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
@@ -121,14 +120,14 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/virtual-network/index.md/">虚拟网络</a></td>
-    <td><a href="./articles/expressroute/index.md/">ExpressRoute</a></td>
-    <td><a href="./articles/traffic-manager/index.md/">流量管理器</a></td>
-    <td><a href="./articles/vpn-gateway/index.md/">VPN 网关</a></td>
+    <td><a href="./articles/virtual-network/index.md">虚拟网络</a></td>
+    <td><a href="./articles/expressroute/index.md">ExpressRoute</a></td>
+    <td><a href="./articles/traffic-manager/index.md">流量管理器</a></td>
+    <td><a href="./articles/vpn-gateway/index.md">VPN 网关</a></td>
   </tr>
   <tr>
-    <td><a href="./articles/application-gateway/index.md/">应用程序网关</a></td>
-    <td><a href="./articles/load-balancer/index.md/">负载均衡器</a></td>
+    <td><a href="./articles/application-gateway/index.md">应用程序网关</a></td>
+    <td><a href="./articles/load-balancer/index.md">负载均衡器</a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
   </tr>
@@ -138,8 +137,8 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/media-services/index.md/">媒体服务</a></td>
-    <td><a href="./articles/cdn/index.md/">CDN</a></td>
+    <td><a href="./articles/media-services/index.md">媒体服务</a></td>
+    <td><a href="./articles/cdn/index.md">CDN</a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
   </tr>
@@ -149,9 +148,9 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/service-bus/index.md/">服务总线</a></td>
-    <td><a href="./articles/backup/index.md/">备份</a></td>
-    <td><a href="./articles/site-recovery/index.md/">站点恢复</a></td>
+    <td><a href="./articles/service-bus/index.md">服务总线</a></td>
+    <td><a href="./articles/backup/index.md">备份</a></td>
+    <td><a href="./articles/site-recovery/index.md">站点恢复</a></td>
     <td><a href=""></a></td>
   </tr>
 </table>
@@ -160,8 +159,8 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/active-directory/index.md/">Active Directory</a></td>
-    <td><a href="./articles/multi-factor-authentication/index.md/">多重身份验证</a></td>
+    <td><a href="./articles/active-directory/index.md">Active Directory</a></td>
+    <td><a href="./articles/multi-factor-authentication/index.md">多重身份验证</a></td>
     <td><a href=""></a></td>
     <td><a href=""></a></td>
   </tr>
@@ -171,9 +170,9 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-    <td><a href="./articles/scheduler/index.md/">计划程序</a></td>
-    <td><a href="./articles/automation/index.md/">自动化</a></td>
-    <td><a href="./articles/key-vault/index.md/">密钥保管库</a></td>
+    <td><a href="./articles/scheduler/index.md">计划程序</a></td>
+    <td><a href="./articles/automation/index.md">自动化</a></td>
+    <td><a href="./articles/key-vault/index.md">密钥保管库</a></td>
     <td><a href=""></a></td>
   </tr>
 </table>
@@ -203,7 +202,7 @@ wacn.date: 11/11/2016
 
 ##[工具下载](/downloads/)
 
-##[常用操作指南](./articles/azure-operations-guide/index.md/)
+##[常用操作指南](./articles/azure-operations-guide/index.md)
 <!--
 ##故障排除-->
 
@@ -227,47 +226,46 @@ wacn.date: 11/11/2016
     <th align="left" scope="col">网络服务</th>
   </tr>
   <tr>
-    <td><a href="./articles/virtual-machines/index.md/">虚拟机</a></td>
-    <td><a href="./articles/storage/index.md/">存储</a></td>
-    <td><a href="./articles/service-bus/index.md/">服务总线</a></td>
-    <td><a href="./articles/virtual-network/index.md/">虚拟网络</a></td>
+    <td><a href="./articles/virtual-machines/index.md">虚拟机</a></td>
+    <td><a href="./articles/storage/index.md">存储</a></td>
+    <td><a href="./articles/service-bus/index.md">服务总线</a></td>
+    <td><a href="./articles/virtual-network/index.md">虚拟网络</a></td>
   </tr>
   <tr>
-    <td><a href="./articles/app-service-web/index.md/">网站</a></td>
-    <td><a href="./articles/sql-database/index.md/">SQL数据库</a></td>
-    <td><a href="./articles/active-directory/index.md/">Active Directory</a></td>
-    <td><a href="./articles/traffic-manager/index.md/">流量管理器</a></td>
+    <td><a href="./articles/app-service-web/index.md">网站</a></td>
+    <td><a href="./articles/sql-database/index.md">SQL数据库</a></td>
+    <td><a href="./articles/active-directory/index.md">Active Directory</a></td>
+    <td><a href="./articles/traffic-manager/index.md">流量管理器</a></td>
   </tr>
   <tr>
-    <td><a href="./articles/cloud-services/index.md/">云服务</a></td>
-    <td><a href="./articles/hdinsight/index.md/">HDInsight</a></td>
-    <td><a href="./articles/scheduler/index.md/">计划程序</a></td>
+    <td><a href="./articles/cloud-services/index.md">云服务</a></td>
+    <td><a href="./articles/hdinsight/index.md">HDInsight</a></td>
+    <td><a href="./articles/scheduler/index.md">计划程序</a></td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="./articles/mobile-services/index.md/">移动服务</a></td>
-    <td><a href="./articles/backup/index.md/">备份</a></td>
-    <td><a href="./articles/cdn/index.md/">CDN</a></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><a href="./articles/site-recovery/index.md/">站点恢复</a></td>
-    <td><a href="./articles/media-services/index.md/">媒体服务</a></td>
+    <td><a href="./articles/mobile-services/index.md">移动服务</a></td>
+    <td><a href="./articles/backup/index.md">备份</a></td>
+    <td><a href="./articles/cdn/index.md">CDN</a></td>
     <td></td>
   </tr>
   <tr>
     <td></td>
+    <td><a href="./articles/site-recovery/index.md">站点恢复</a></td>
+    <td><a href="./articles/media-services/index.md">媒体服务</a></td>
     <td></td>
-    <td><a href="./articles/notification-hubs/index.md/">通知中心</a></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><a href="./articles/notification-hubs/index.md">通知中心</a></td>
     <td></td>
   </tr>  
   <tr>
     <td></td>
     <td></td>
-    <td><a href="./articles/automation/index.md/">自动化</a></td>
+    <td><a href="./articles/automation/index.md">自动化</a></td>
     <td></td>  
   </tr>
 </table>
 -->
-

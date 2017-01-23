@@ -30,7 +30,9 @@ pageTitle
 description
     115-145 characters. Duplicate of the first sentence in the introduction. This is the abstract of the article that displays under the title when searching in Bing or Google. 
 
-    Example: "SQL Database automatically creates a local database backup every few minutes and uses Azure read-access geo-redundant storage for geo-redundancy."
+```
+Example: "SQL Database automatically creates a local database backup every few minutes and uses Azure read-access geo-redundant storage for geo-redundancy."
+```
 
 TEMPLATE GUIDELINES for feature topics
 
@@ -51,19 +53,23 @@ DON'T explain this:
 
 GUIDELINES for the H1 
 
-    The H1 should answer the question "What is in this topic?" Write the H1 heading in conversational language and use search key words as much as possible. Since this is a learning topic, make sure the title indicates that and doesn't mislead people to think this will tell them how to do tasks.  
+```
+The H1 should answer the question "What is in this topic?" Write the H1 heading in conversational language and use search key words as much as possible. Since this is a learning topic, make sure the title indicates that and doesn't mislead people to think this will tell them how to do tasks.  
 
-    To help people understand this is a learning topic and not an action topic, start the title with "Learn about ... "
+To help people understand this is a learning topic and not an action topic, start the title with "Learn about ... "
 
-    Heading must use an industry standard term. If your feature is a proprietary name like "Elastic database pools", use a synonym. For example:    "Learn about elastic database pools for multi-tenant databases". In this case multi-tenant database is the industry-standard term that will be an anchor for finding the topic.
+Heading must use an industry standard term. If your feature is a proprietary name like "Elastic database pools", use a synonym. For example:    "Learn about elastic database pools for multi-tenant databases". In this case multi-tenant database is the industry-standard term that will be an anchor for finding the topic.
+```
 
 GUIDELINES for introduction
 
-    The introduction is 1-2 sentences.  It is optimized for search and sets proper expectations about what to expect in the article. It should contain the top key words that you are using throughout the article.The introduction should be brief and to the point of what the feature is, what it is used for, and what's in the article. 
+```
+The introduction is 1-2 sentences.  It is optimized for search and sets proper expectations about what to expect in the article. It should contain the top key words that you are using throughout the article.The introduction should be brief and to the point of what the feature is, what it is used for, and what's in the article. 
 
-    If the introduction is short enough, your article can pop to the top in Google Instant Answers.
+If the introduction is short enough, your article can pop to the top in Google Instant Answers.
 
-    In this example:
+In this example:
+```
 
 Sentence #1 Explains what the article will cover, which is what the feature is or does. This is also the metadata description. 
     SQL Database automatically creates a database backup every five minutes and uses Azure read-access geo-redundant storage (RA-GRS) to provide geo-redundancy. 
@@ -86,9 +92,11 @@ This diagram shows SQL Database running in the US East region. It creates a data
 <!---------------
 GUIDELINES for the first ## H2.
 
-    The first ## describes what the feature encompasses and how it is used. It points to related task articles.
+```
+The first ## describes what the feature encompasses and how it is used. It points to related task articles.
 
-    For consistency, being the heading with "What is ... "
+For consistency, being the heading with "What is ... "
+```
 ----------------->
 
 ## 什么是 SQL 数据库备份？
@@ -121,7 +129,8 @@ SQL 数据库使用 SQL Server 技术创建[完整](https://msdn.microsoft.com/z
     Explicit list of what to do with a geo-redundant backup. "Use a ..." helps people to scan the topic and find the uses quickly.
 ---------------->
 
->[!NOTE] 在 Azure 存储中，术语“复制”是指将文件从一个位置复制到另一个位置。SQL 的“数据库复制”是指让多个辅助数据库与主数据库同步。
+>[!NOTE]
+> 在 Azure 存储中，术语“复制”是指将文件从一个位置复制到另一个位置。SQL 的“数据库复制”是指让多个辅助数据库与主数据库同步。
 
 <!----------------
     The next ## H2's discuss key characteristics of how the feature works. The title is in conversational language and asks the question that will be answered.
@@ -141,7 +150,9 @@ SQL 数据库提供的备份存储容量高达最大预配数据库存储空间�
 
 <!------------------
 
-    Using a list so the information is easy to find when scanning.
+```
+Using a list so the information is easy to find when scanning.
+```
 ------------------->
 
 * 基本服务层为 7 天。
@@ -154,7 +165,8 @@ SQL 数据库提供的备份存储容量高达最大预配数据库存储空间�
 
 如果删除了某个数据库，SQL 数据库将以保存联机数据库的相同方式保存其备份。例如删除了保留期为 7 天的某个基本数据库。已保存 4 天的备份将继续保存 3 天。
 
-> [!IMPORTANT] 如果删除了托管 SQL 数据库的 Azure SQL 服务器，则属于该服务器的所有数据库也将被删除且不可恢复。无法还原已删除的服务器。
+> [!IMPORTANT]
+> 如果删除了托管 SQL 数据库的 Azure SQL 服务器，则属于该服务器的所有数据库也将被删除且不可恢复。无法还原已删除的服务器。
 
 <!-------------------
 OPTIONAL section
@@ -194,9 +206,11 @@ OPTIONAL section
 <!-------------------
 GUIDELINES for Next Steps
 
-    The last section is Next Steps. Give a next step that would be relevant to the customer after they have learned about the feature and the tasks associated with it.  Perhaps point them to one or two key scenarios that use this feature.
+```
+The last section is Next Steps. Give a next step that would be relevant to the customer after they have learned about the feature and the tasks associated with it.  Perhaps point them to one or two key scenarios that use this feature.
 
-    You don't need to repeat links you have already given them.
+You don't need to repeat links you have already given them.
+```
 --------------------->
 
 ## 后续步骤

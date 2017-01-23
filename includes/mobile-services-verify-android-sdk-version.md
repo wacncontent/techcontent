@@ -11,10 +11,12 @@
 3. 在 Android Studio 中，单击“工具”=>“Android”=>“SDK Manager”。如果您尚未安装最新版本的 SDK 平台，请单击安装。记下版本号。
 
 4. 在“项目资源管理器”选项卡中的“Gradle 脚本”下，打开文件 **build.gradle (modeule: app)**。确保 **compileSdkVersion** 和 **buildToolsVersion** 设置为安装的最新 SDK 版本。标记可能如下所示：
- 
-             compileSdkVersion 'Google Inc.:Google APIs:21'
-            buildToolsVersion "21.1.2"
-    
+
+    ```
+         compileSdkVersion 'Google Inc.:Google APIs:21'
+        buildToolsVersion "21.1.2"
+    ```
+
 5. 在 Android Studio 项目资源管理器中，右键单击项目节点，选择“属性”，并在左栏中选择“Android”。确认“项目生成目标”设置为与 **targetSdkVersion** 相同的 SDK 版本。
 
 6. 与 Eclipse 的情况不同，在 Android Studio 中，清单文件不再用于指定目标 SDK 版本和最低 SDK 版本。

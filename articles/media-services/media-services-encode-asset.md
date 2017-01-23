@@ -75,7 +75,7 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 ###另请参阅
 
 [媒体服务博客](https://azure.microsoft.com/blog/2015/07/16/announcing-the-general-availability-of-media-encoder-standard/)
- 
+
 ##媒体编码器高级工作流
 
 ###概述

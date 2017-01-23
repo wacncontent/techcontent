@@ -63,11 +63,11 @@ Service Fabric 执行组件是虚拟的，这表示其生存期不依赖于其�
 执行组件框架为你管理分区方案和键范围设置。这可以简化一些选择，但同时也要注意以下情况：
 
  - Reliable Services 允许你选择分区方案、键范围（当使用范围分区方案时）和分区计数。Reliable Actors 仅限于使用范围分区方案（统一 Int64 方案），要求你使用完整的 Int64 键范围。
- 
+
  - 默认情况下，执行组件被随机放到分区中，因此而形成统一分布。
- 
+
  - 因为执行组件是随机分布的，所以预计执行组件的操作将始终需要网络通信，包括对方法调用数据的序列化和反序列化，这会产生延迟和开销。
- 
+
  - 在高级方案中，可使用映射到特定分区的 Int64 执行组件 ID 控制执行组件分区放置。但是，这样做会导致分区间的执行组件的分布不平衡。
 
 有关如何对执行组件服务进行分区的详细信息，请参阅[执行组件的分区概念](./service-fabric-reliable-actors-platform.md#service-fabric-partition-concepts-for-actors)。
@@ -80,14 +80,16 @@ Service Fabric 执行组件是虚拟的，这表示其生存期不依赖于其�
 #### 执行组件代理
 Reliable Actors 客户端 API 提供一个执行组件实例和一个执行组件客户端之间的通信。若要与执行组件进行通信，客户端需创建实现执行组件接口的执行组件代理对象。客户端通过调用代理对象上的方法与执行组件进行交互。执行组件代理可以用于从客户端到执行组件以及从执行组件到执行组件的通信。
 
-    // Create a randomly distributed actor ID
-    ActorId actorId = ActorId.CreateRandom();
+```
+// Create a randomly distributed actor ID
+ActorId actorId = ActorId.CreateRandom();
 
-    // This only creates a proxy object, it does not activate an actor or invoke any methods yet.
-    IMyActor myActor = ActorProxy.Create<IMyActor>(actorId, new Uri("fabric:/MyApp/MyActorService"));
+// This only creates a proxy object, it does not activate an actor or invoke any methods yet.
+IMyActor myActor = ActorProxy.Create<IMyActor>(actorId, new Uri("fabric:/MyApp/MyActorService"));
 
-    // This will invoke a method on the actor. If an actor with the given ID does not exist, it will be activated by this method call.
-    await myActor.DoWorkAsync();
+// This will invoke a method on the actor. If an actor with the given ID does not exist, it will be activated by this method call.
+await myActor.DoWorkAsync();
+```
 
 请注意用于创建执行组件代理对象的两条信息为执行组件 ID 和应用程序名称。执行组件 ID 唯一标识执行组件，而应用程序名称标识在其中部署执行组件的 [Service Fabric 应用程序](./service-fabric-reliable-actors-platform.md#application-model)。
 

@@ -109,8 +109,9 @@ Azure Site Recovery 服务有助于业务连续性和灾难恢复 (BCDR) 策略�
 1. 在“快速启动”>“准备 VMM 服务器”中，单击“下载用于在 VMM 服务器上安装的 Microsoft Azure Site Recovery 提供程序”来获取最新版本的提供程序安装文件。
 2. 在源 VMM 服务器上运行此文件。
 
-    >[!NOTE] 如果 VMM 部署到群集中并且你是首次安装该提供程序，请将其安装在一个活动节点上并完成安装以在保管库中注册 VMM 服务器。然后在其他节点上安装该提供程序。请注意，如果你是在升级提供程序，则需要在所有节点上进行升级，因为所有节点都应当运行相同的提供程序版本。
-    
+    >[!NOTE]
+    > 如果 VMM 部署到群集中并且你是首次安装该提供程序，请将其安装在一个活动节点上并完成安装以在保管库中注册 VMM 服务器。然后在其他节点上安装该提供程序。请注意，如果你是在升级提供程序，则需要在所有节点上进行升级，因为所有节点都应当运行相同的提供程序版本。
+
 3. 安装程序将执行先决条件检查，并请求授权停止 VMM 服务以开始安装提供程序。VMM 服务将在安装程序完成时自动重新启动。如果你是在 VMM 群集上进行安装，则会提示你停止群集角色。
 
 4. 在“Microsoft 更新”中，你可以选择获取更新。当启用了此设置时，将根据你的 Microsoft 更新策略自动安装提供程序更新。
@@ -160,17 +161,23 @@ Azure Site Recovery 服务有助于业务连续性和灾难恢复 (BCDR) 策略�
 2. 停止 System Center Virtual Machine Manager 服务
 3. 从提升的命令提示符处，使用下列命令提取提供程序安装程序：
 
-        C:\Windows\System32> CD C:\ASR
-        C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
+    C:\Windows\System32> CD C:\ASR
+    C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
 
 4. 安装提供程序，如下所示：
 
-        C:\ASR> setupdr.exe /i
+    ```
+    C:\ASR> setupdr.exe /i
+    ```
 
 5. 注册提供程序，如下所示：
 
-        CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
-        C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>       
+    ```
+    CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
+    C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>       
+    ```
 
 参数如下所示：
 
@@ -188,7 +195,8 @@ Azure Site Recovery 服务有助于业务连续性和灾难恢复 (BCDR) 策略�
 
     ![存储帐户](./media/site-recovery-vmm-to-azure-classic/storage.png)  
 
-> [!NOTE] [迁移存储账户](../azure-resource-manager/resource-group-move-resources.md)用于部署 Site Recovery 的存储帐户不可在同一订阅的不同资源组之间或者跨订阅进行。
+> [!NOTE]
+> [迁移存储账户](../azure-resource-manager/resource-group-move-resources.md)用于部署 Site Recovery 的存储帐户不可在同一订阅的不同资源组之间或者跨订阅进行。
 
 ## 步骤 5：安装 Azure 恢复服务代理
 
@@ -212,7 +220,9 @@ Azure Site Recovery 服务有助于业务连续性和灾难恢复 (BCDR) 策略�
 
 你也可以使用下列命令，从命令行安装 Azure 恢复服务代理：
 
-    marsagentinstaller.exe /q /nu
+```
+marsagentinstaller.exe /q /nu
+```
 
 ## 步骤 6：配置云保护设置
 在注册 VMM 服务器后，你可以配置云保护设置。你在安装提供程序时启用了“将云数据与保管库同步”选项，所以 VMM 服务器上的所有云都将出现在保管库中的“受保护的项”选项卡中。<b></b>
@@ -289,7 +299,8 @@ Azure Site Recovery 服务有助于业务连续性和灾难恢复 (BCDR) 策略�
 
     ![修改网络属性](./media/site-recovery-vmm-to-azure-classic/multi-nic.png)
 
->[!NOTE] 不支持具有静态 IP 地址的 Linux 虚拟机。
+>[!NOTE]
+> 不支持具有静态 IP 地址的 Linux 虚拟机。
 
 ## 测试部署
 
@@ -300,7 +311,8 @@ Azure Site Recovery 服务有助于业务连续性和灾难恢复 (BCDR) 策略�
 - 如果想要在故障转移之后使用远程桌面连接到 Azure 中的虚拟机，请在虚拟机上启用远程桌面连接，然后运行测试故障转移。
 - 在故障转移后，你将使用公共 IP 地址通过远程桌面连接到 Azure 中的虚拟机。如果要执行此操作，请确保没有任何域策略阻止你使用公共地址连接到虚拟机。
 
->[!NOTE] 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在[此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
+>[!NOTE]
+> 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在[此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
 
 ### 创建恢复计划
 

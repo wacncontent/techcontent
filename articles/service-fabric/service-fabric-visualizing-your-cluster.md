@@ -25,7 +25,8 @@ Service Fabric Explorer 是一个用于检验和管理 Azure Service Fabric 群�
 
 如果你已根据说明[准备开发环境](./service-fabric-get-started.md)，则可以通过导航到 http://localhost:19080/Explorer 启动本地群集上的 Service Fabric Explorer。
 
->[!NOTE] 如果你结合使用 Internet Explorer 与 Service Fabric Explorer 管理远程群集，需要配置一些 Internet Explorer 设置。转到“工具”>“兼容性视图设置”，然后取消选中“在兼容性视图中显示 Intranet 站点”，以确保正确加载所有信息。
+>[!NOTE]
+> 如果你结合使用 Internet Explorer 与 Service Fabric Explorer 管理远程群集，需要配置一些 Internet Explorer 设置。转到“工具”>“兼容性视图设置”，然后取消选中“在兼容性视图中显示 Intranet 站点”，以确保正确加载所有信息。
 
 ## 了解 Service Fabric Explorer 布局
 可以使用左侧的树导航 Service Fabric Explorer。在树根中，群集仪表板提供了群集的概述，包括应用程序和节点运行状况的摘要。
@@ -62,7 +63,8 @@ Service Fabric Explorer 提供用于对群集中的节点、应用程序和服�
 
 ![在 Service Fabric Explorer 中删除应用程序][sfx-delete-application]
 
->[!TIP] 可以通过单击每个元素旁边的省略号执行相同的操作。
+>[!TIP]
+> 可以通过单击每个元素旁边的省略号执行相同的操作。
 
 下表列出了可对每个实体执行的操作：
 
@@ -79,13 +81,15 @@ Service Fabric Explorer 提供用于对群集中的节点、应用程序和服�
 
 由于许多操作都具有破坏性，因此在完成该操作之前，系统可能会请求你确认意图。
 
->[!TIP] 可以通过 Service Fabric Explorer 执行的每个操作也可以通过 PowerShell 或 REST API 执行，以实现自动化。
+>[!TIP]
+> 可以通过 Service Fabric Explorer 执行的每个操作也可以通过 PowerShell 或 REST API 执行，以实现自动化。
 
 你还可以使用 Service Fabric Explorer 为指定应用程序类型和版本创建新的应用程序实例。在树视图中选择应用程序类型，然后在右侧窗格中单击所需版本旁边的“创建应用实例”链接。
 
 ![在 Service Fabric Explorer 中创建应用程序实例][sfx-create-app-instance]
 
->[!NOTE] 当前无法对通过 Service Fabric Explorer 创建的应用程序实例进行参数化。它们是使用默认参数值创建的。
+>[!NOTE]
+> 当前无法对通过 Service Fabric Explorer 创建的应用程序实例进行参数化。它们是使用默认参数值创建的。
 
 ## 连接到远程 Service Fabric 群集
 由于 Service Fabric Explorer 是基于 Web 的工具并且在群集内部运行，因此你只要知道群集的终结点且有足够的访问权限，就可以从任何浏览器访问它。

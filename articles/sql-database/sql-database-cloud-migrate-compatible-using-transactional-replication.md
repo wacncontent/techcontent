@@ -47,7 +47,8 @@ ms.author: carlrab
  - SQL Server 2012 SP2 CU8 和更高版本
  - SQL Server 2012 SP3 和更高版本
 
-> [!IMPORTANT] 使用最新版本的 SQL Server Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。较旧版本的 SQL Server Management Studio 不能将 SQL 数据库设置为订阅服务器。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 使用最新版本的 SQL Server Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。较旧版本的 SQL Server Management Studio 不能将 SQL 数据库设置为订阅服务器。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 后续步骤
 

@@ -55,7 +55,7 @@ wacn.date: 01/06/2017
 ## 还原
 | 操作 | 错误详细信息 | 解决方法 |
 | -------- | -------- | -------|
-| 还原 | 发生云内部错误，还原失败 | <ol><li>使用 DNS 设置配置了你正在尝试还原的云服务。你可以检查 <br>$deployment = Get-AzureDeployment -ServiceName "ServiceName" -Slot "Production" Get-AzureDns -DnsSettings $deployment.DnsSettings<br>如果配置了地址，则表示配置了 DNS 设置。<br> <li>尝试还原的云服务配置了 ReservedIP，且云服务中现有的 VM 处于停止状态。<br>可以使用以下 PowerShell cmdlet 检查云服务是否有保留的 IP：<br>$deployment = Get-AzureDeployment -ServiceName "servicename" -Slot "Production" $dep.ReservedIPName<br><li>正在尝试还原同一云服务中具有以下特殊网络配置的虚拟机。<br>- 采用负载均衡器配置的虚拟机（内部和外部）<br>- 具有多个保留 IP 的虚拟机<br>- 具有多个 NIC 的虚拟机<br>请在 UI 中选择新的云服务，或者参阅[还原注意事项](./backup-azure-restore-vms.md#restoring-vms-with-special-network-configurations/)，了解具有特殊网络配置的 VM</ol> |
+| 还原 | 发生云内部错误，还原失败 | <ol><li>使用 DNS 设置配置了你正在尝试还原的云服务。你可以检查 <br>$deployment = Get-AzureDeployment -ServiceName "ServiceName" -Slot "Production" Get-AzureDns -DnsSettings $deployment.DnsSettings<br>如果配置了地址，则表示配置了 DNS 设置。<br> <li>尝试还原的云服务配置了 ReservedIP，且云服务中现有的 VM 处于停止状态。<br>可以使用以下 PowerShell cmdlet 检查云服务是否有保留的 IP：<br>$deployment = Get-AzureDeployment -ServiceName "servicename" -Slot "Production" $dep.ReservedIPName<br><li>正在尝试还原同一云服务中具有以下特殊网络配置的虚拟机。<br>- 采用负载均衡器配置的虚拟机（内部和外部）<br>- 具有多个保留 IP 的虚拟机<br>- 具有多个 NIC 的虚拟机<br>请在 UI 中选择新的云服务，或者参阅[还原注意事项](./backup-azure-restore-vms.md#restoring-vms-with-special-network-configurations)，了解具有特殊网络配置的 VM</ol> |
 | 还原 | 所选 DNS 名称已被使用 - 请指定其他 DNS 名称，然后重试。 | 此处的 DNS 名称是指云服务名称（通常以 .chinacloudapp.cn 结尾）。此名称必须是唯一名称。如果遇到此错误，则需在还原过程中选择其他 VM 名称。<br><br>请注意，此错误仅显示给 Azure 门户预览用户。通过 PowerShell 进行的还原操作会成功，因为它只还原磁盘，不创建 VM。如果在磁盘还原操作之后显式创建 VM，则会遇到该错误。 |
 | 还原 | 指定的虚拟网络配置不正确 - 请指定其他虚拟网络配置，然后重试。 | 无 |
 | 还原 | 指定的云服务使用的是保留 IP，这不符合要还原的虚拟机的配置 - 请指定其他不使用保留 IP 的云服务，或者选择其他用于还原的恢复点。 | 无 |
@@ -104,11 +104,13 @@ wacn.date: 01/06/2017
 ## 排查 VM 快照问题
 VM 备份依赖于向底层存储发出快照命令。如果无法访问存储或者快照任务执行延迟，则备份可能会失败。以下因素可能会导致快照任务失败。
 
-1. 使用 NSG 阻止对存储进行网络访问<br>详细了解如何使用 IP 白名单或通过代理服务器对存储[启用网络访问](./backup-azure-vms-prepare.md#2-network-connectivity/)。
+1. 使用 NSG 阻止对存储进行网络访问<br>详细了解如何使用 IP 白名单或通过代理服务器对存储[启用网络访问](./backup-azure-vms-prepare.md#2-network-connectivity)。
 2.  配置了 SQL Server 备份的 VM 可导致快照任务延迟<br>默认情况下，VM 备份将在 Windows VM 上发出 VSS 完整备份命令。在运行 SQL Server 且已配置 SQL Server 备份的 VM 上，这可能会造成快照执行延迟。如果由于快照问题而导致备份失败，请设置以下注册表项。
 
-        [HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\BCDRAGENT]
-        "USEVSSCOPYBACKUP"="TRUE"
+    ```
+    [HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\BCDRAGENT]
+    "USEVSSCOPYBACKUP"="TRUE"
+    ```
 
 3.  由于在 RDP 中关闭了 VM，VM 状态报告不正确。<br>如果在 RDP 中关闭了虚拟机，请返回门户检查是否正确反映了 VM 的状态。如果没有，请在门户中使用 VM 仪表板上的“关机”选项关闭 VM。
 4.  如果四个以上的 VM 共享同一云服务，请配置多个备份策略以将备份时间错开，避免同时启动四个以上的 VM 备份。尝试使策略之间的备份开始时间相差一个小时。
@@ -130,9 +132,10 @@ VM 备份依赖于向底层存储发出快照命令。如果无法访问存储�
     - 使用 [New-NetRoute](https://technet.microsoft.com/zh-cn/library/hh826148.aspx) cmdlet 取消阻止 IP。在 Azure VM 上提升权限的 PowerShell 窗口中运行此 cmdlet（以管理员身份运行）。
     - 向 NSG 添加规则（如果已创建规则），以允许访问这些 IP。
 2. 为 HTTP 流量创建路径
-    - 如果你指定了某种网络限制（例如网络安全组），请部署 HTTP 代理服务器来路由流量。可在[此处](./backup-azure-vms-prepare.md#2-network-connectivity/)找到部署 HTTP 代理服务器的步骤。
+    - 如果你指定了某种网络限制（例如网络安全组），请部署 HTTP 代理服务器来路由流量。可在[此处](./backup-azure-vms-prepare.md#2-network-connectivity)找到部署 HTTP 代理服务器的步骤。
     - 向 NSG 添加规则（如果已创建规则），以允许从 HTTP 代理访问 INTERNET。
 
->[!NOTE] 必须在来宾内启用 DHCP，才能正常进行 IaaS VM 备份。如果需要静态专用 IP 地址，你应该通过平台配置该 IP。VM 内的 DHCP 选项应保持启用。查看有关[设置静态内部专用 IP](../virtual-network/virtual-networks-reserved-private-ip.md) 的详细信息。
+>[!NOTE]
+> 必须在来宾内启用 DHCP，才能正常进行 IaaS VM 备份。如果需要静态专用 IP 地址，你应该通过平台配置该 IP。VM 内的 DHCP 选项应保持启用。查看有关[设置静态内部专用 IP](../virtual-network/virtual-networks-reserved-private-ip.md) 的详细信息。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

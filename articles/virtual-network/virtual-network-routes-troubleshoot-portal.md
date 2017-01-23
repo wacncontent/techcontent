@@ -42,7 +42,8 @@ ms.author: anithaa
 
 本文说明如何使用 Azure Resource Manager 部署模型中的有效路由功能确定连接失败的原因。尽管本示例只使用系统路由，但可以使用相同的步骤判断任何路由类型的入站和出站连接失败情况。
 
->[!NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
+>[!NOTE]
+> 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
 
 ### 查看虚拟机的有效路由
 
@@ -67,16 +68,17 @@ ms.author: anithaa
 
     如果 VM 只有一个 NIC，则默认已选择该 NIC。如果有多个 NIC，请选择要查看其有效路由的 NIC。
 
-    >[!NOTE] 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
+    >[!NOTE]
+    > 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
 
     请注意输出中的以下信息：
     - **Source**：表示路由的类型。系统路由显示为 *Default*，UDR 显示为 *User*，网关路由（静态或 BGP）显示为 *VPNGateway*。
     - **State**：表示有效路由的状态。可能的值为 *Active* 或 *Invalid*。
     - **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
     - **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
-    
+
 7. 上一步骤的图片中没有列出从 *ChinaNorth-VNet1*（前缀 10.9.0.0/16）到 *ChinaNorth-VNET3* VNet（前缀 10.10.0.0/16）的路由。在下图中，对等互连链接处于 *Disconnected* 状态：
-    
+
     ![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
 
     对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。
@@ -95,7 +97,7 @@ ms.author: anithaa
 2. 单击“更多服务”，然后单击“网络接口”。
 3. 在列表中搜索 NIC 的名称，或者从显示的列表中选择 NIC。本示例选择了 **VM1-NIC1**。
 4. 在“网络接口”边栏选项卡中选择“有效路由”，如下图所示：
-   
+
        ![](./media/virtual-network-routes-troubleshoot-portal/image6.png)  
 
     “范围”默认设置为选定的网络接口。
@@ -124,7 +126,8 @@ ms.author: anithaa
 
     ![](./media/virtual-network-routes-troubleshoot-portal/image10.png)  
 
-    >[!NOTE] 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
+    >[!NOTE]
+    > 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
 
 ## <a name="Considerations"></a>注意事项
 

@@ -25,7 +25,8 @@ ms.author: ganesr
 
 本文将指导你完成相关步骤，以便了解 ExpressRoute 线路的 ARP 表。
 
->[!IMPORTANT] 本文档旨在帮助你诊断和修复简单问题。它不是为了替代 Azure 支持部门。如果你无法通过下述指南解决问题，则必须[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单。
+>[!IMPORTANT]
+> 本文档旨在帮助你诊断和修复简单问题。它不是为了替代 Azure 支持部门。如果你无法通过下述指南解决问题，则必须[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单。
 
 ## 地址解析协议 (ARP) 和 ARP 表
 地址解析协议 (ARP) 是在 [RFC 826](https://tools.ietf.org/html/rfc826) 中定义的第二层协议。ARP 用于映射以太网地址（MAC 地址）和 IP 地址。
@@ -40,10 +41,12 @@ ARP 表可帮助验证第 2 层配置，并可针对第 2 层的基本连接问�
 
 ARP 表示例：
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+     10 On-Prem           10.0.0.1 ffff.eeee.dddd
+      0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
 
 以下部分介绍如何查看供 ExpressRoute 边缘路由器查看的 ARP 表。
 
@@ -62,42 +65,50 @@ ARP 表示例：
 ### Azure 专用对等互连的 ARP 表
 以下 cmdlet 为 Azure 专用对等互连提供 ARP 表
 
-        # Required Variables
-        $RG = "<Your Resource Group Name Here>"
-        $Name = "<Your ExpressRoute Circuit Name Here>"
-        
-        # ARP table for Azure private peering - Primary path
-        Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePrivatePeering -DevicePath Primary
-        
-        # ARP table for Azure private peering - Secodary path
-        Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePrivatePeering -DevicePath Secondary 
+```
+    # Required Variables
+    $RG = "<Your Resource Group Name Here>"
+    $Name = "<Your ExpressRoute Circuit Name Here>"
+
+    # ARP table for Azure private peering - Primary path
+    Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePrivatePeering -DevicePath Primary
+
+    # ARP table for Azure private peering - Secodary path
+    Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePrivatePeering -DevicePath Secondary 
+```
 
 下面为其中一个路径显示了示例性输出
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+     10 On-Prem           10.0.0.1 ffff.eeee.dddd
+      0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
 
 ### Azure 公共对等互连的 ARP 表
 以下 cmdlet 为 Azure 公共对等互连提供 ARP 表
 
-        # Required Variables
-        $RG = "<Your Resource Group Name Here>"
-        $Name = "<Your ExpressRoute Circuit Name Here>"
-        
-        # ARP table for Azure public peering - Primary path
-        Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePublicPeering -DevicePath Primary
-        
-        # ARP table for Azure public peering - Secodary path
-        Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePublicPeering -DevicePath Secondary 
+```
+    # Required Variables
+    $RG = "<Your Resource Group Name Here>"
+    $Name = "<Your ExpressRoute Circuit Name Here>"
+
+    # ARP table for Azure public peering - Primary path
+    Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePublicPeering -DevicePath Primary
+
+    # ARP table for Azure public peering - Secodary path
+    Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePublicPeering -DevicePath Secondary 
+```
 
 下面为其中一个路径显示了示例性输出
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           64.0.0.1 ffff.eeee.dddd
-          0 Microsoft         64.0.0.2 aaaa.bbbb.cccc
+```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+     10 On-Prem           64.0.0.1 ffff.eeee.dddd
+      0 Microsoft         64.0.0.2 aaaa.bbbb.cccc
+```
 
 ## 如何使用此信息
 对等互连的 ARP 表可用于确定/验证第 2 层配置和连接。本部分概述了不同方案的 ARP 表的外观。
@@ -122,7 +133,8 @@ ARP 表示例：
         --- ----------------- ---------  ----------    
           0 Microsoft         65.0.0.2 aaaa.bbbb.cccc
 
->[!NOTE] 通过你的连接提供商提出支持请求，以便进行此类问题的调试。
+>[!NOTE]
+> 通过你的连接提供商提出支持请求，以便进行此类问题的调试。
 
 ### 当 Azure 端出现问题时的 ARP 表
 

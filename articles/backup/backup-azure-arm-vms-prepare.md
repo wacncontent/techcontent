@@ -28,7 +28,8 @@ ms.author: trinadhk; jimpark; markgal;
 
 Azure 备份服务提供两种类型的保管库（备份保管库和恢复服务保管库）来保护 VM。备份保管库保护使用经典部署模型部署的 VM。恢复服务保管库保护**经典部署和资源管理器部署的 VM**。必须使用恢复服务保管库来保护资源管理器部署的 VM。
 
->[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。有关使用经典部署模型 VM 的详细信息，请参阅[准备好环境以备份 Azure 虚拟机](./backup-azure-vms-prepare.md)。
+>[!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。有关使用经典部署模型 VM 的详细信息，请参阅[准备好环境以备份 Azure 虚拟机](./backup-azure-vms-prepare.md)。
 
 请确保符合以下先决条件，这样才能保护或备份资源管理器部署的虚拟机 (VM)：
 
@@ -52,8 +53,8 @@ Azure 备份服务提供两种类型的保管库（备份保管库和恢复服�
 - 只可以备份选定操作系统版本的虚拟机：
   - **Linux**：Azure 备份支持 [Azure 认可的分发版列表](../virtual-machines/virtual-machines-linux-endorsed-distros.md)，但 Core OS Linux 除外。只要虚拟机上装有 VM 代理且支持 Python，其他自带的 Linux 分发版也可能会正常运行。
   - **Windows Server**：不支持低于 Windows Server 2008 R2 的版本。
-- 仅支持通过 PowerShell 还原属于多 DC 配置的域控制器 (DC) VM。阅读有关[还原多 DC 域控制器](./backup-azure-restore-vms.md#restoring-domain-controller-vms/)的详细信息。
-- 仅支持通过 PowerShell 还原采用以下特殊网络配置的虚拟机。还原操作完成后，在 UI 中使用还原工作流创建的 VM 将不采用这些网络配置。若要了解详细信息，请参阅[还原采用特殊网络配置的 VM](./backup-azure-restore-vms.md#restoring-vms-with-special-netwrok-configurations/)。
+- 仅支持通过 PowerShell 还原属于多 DC 配置的域控制器 (DC) VM。阅读有关[还原多 DC 域控制器](./backup-azure-restore-vms.md#restoring-domain-controller-vms)的详细信息。
+- 仅支持通过 PowerShell 还原采用以下特殊网络配置的虚拟机。还原操作完成后，在 UI 中使用还原工作流创建的 VM 将不采用这些网络配置。若要了解详细信息，请参阅[还原采用特殊网络配置的 VM](./backup-azure-restore-vms.md#restoring-vms-with-special-netwrok-configurations)。
   - 采用负载均衡器配置的虚拟机（内部和外部）
   - 使用多个保留 IP 地址的虚拟机
   - 使用多个网络适配器的虚拟机
@@ -62,7 +63,7 @@ Azure 备份服务提供两种类型的保管库（备份保管库和恢复服�
 
 恢复服务保管库是用于存储在不同时间创建的备份和恢复点的实体。恢复服务保管库还包含与受保护虚拟机关联的备份策略。
 
-Azure 门户预览版目前不支持 Azure 中国区的恢复服务。若要创建恢复服务保管库，请遵循[此处](./backup-azure-vms-automation.md#create-a-recovery-services-vault/)的 PowerShell 步骤
+Azure 门户预览版目前不支持 Azure 中国区的恢复服务。若要创建恢复服务保管库，请遵循[此处](./backup-azure-vms-automation.md#create-a-recovery-services-vault)的 PowerShell 步骤
 
 ## 在虚拟机中安装 VM 代理
 
@@ -107,7 +108,8 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
 ### 使用 HTTP 代理进行 VM 备份
 备份 VM 时，VM 上的备份扩展会使用 HTTPS API 将快照管理命令发送到 Azure 存储空间。将通过 HTTP 代理路由备份扩展流量，因为它是为了访问公共 Internet 而配置的唯一组件。
 
->[!NOTE] 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
+>[!NOTE]
+> 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
 
 以下示例图像显示了使用 HTTP 代理所要执行的三个配置步骤：
 
@@ -127,7 +129,9 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
 1. 下载 [PsExec](https://technet.microsoft.com/sysinternals/bb897553)
 2. 在权限提升的提示符下运行以下命令：
 
-        psexec -i -s "c:\Program Files\Internet Explorer\iexplore.exe"
+    ```
+    psexec -i -s "c:\Program Files\Internet Explorer\iexplore.exe"
+    ```
 
      该命令将打开 Internet Explorer 窗口。
 3. 转到“工具”->“Internet 选项”->“连接”->“LAN 设置”。
@@ -138,25 +142,32 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
 
 如果已在当前用户帐户（非本地系统帐户）中设置代理服务器，请使用以下脚本将设置应用到 SYSTEMACCOUNT：
 
-    $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections"
-    Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name DefaultConnectionSettings -Value $obj.DefaultConnectionSettings
-    Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name SavedLegacySettings -Value $obj.SavedLegacySettings
-    $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
-    Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
-    Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
+```
+$obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections"
+Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name DefaultConnectionSettings -Value $obj.DefaultConnectionSettings
+Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name SavedLegacySettings -Value $obj.SavedLegacySettings
+$obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
+Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
+Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
+```
 
->[!NOTE] 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
+>[!NOTE]
+> 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
 
 ######对于 Linux 计算机
 
 将以下代码行添加到 ```/etc/environment``` 文件：
 
-    http_proxy=http://<proxy IP>:<proxy port>
+```
+http_proxy=http://<proxy IP>:<proxy port>
+```
 
 将以下代码行添加到 ```/etc/waagent.conf``` 文件：
 
-    HttpProxy.Host=<proxy IP>
-    HttpProxy.Port=<proxy port>
+```
+HttpProxy.Host=<proxy IP>
+HttpProxy.Port=<proxy port>
+```
 
 #### 步骤 2.在代理服务器上允许传入连接：
 
@@ -187,8 +198,10 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
 
 以下命令将在 NSG 中添加一个例外。此例外允许从 10.0.0.5 上的任何端口流向端口 80 (HTTP) 或 443 (HTTPS) 上的任何 Internet 地址的 TCP 流量。如果需要访问公共 Internet 中的特定端口，请确保也将该端口添加到 ```-DestinationPortRange```。
 
-    Get-AzureNetworkSecurityGroup -Name "NSG-lockdown" |
-    Set-AzureNetworkSecurityRule -Name "allow-proxy " -Action Allow -Protocol TCP -Type Outbound -Priority 200 -SourceAddressPrefix "10.0.0.5/32" -SourcePortRange "*" -DestinationAddressPrefix Internet -DestinationPortRange "80-443"
+```
+Get-AzureNetworkSecurityGroup -Name "NSG-lockdown" |
+Set-AzureNetworkSecurityRule -Name "allow-proxy " -Action Allow -Protocol TCP -Type Outbound -Priority 200 -SourceAddressPrefix "10.0.0.5/32" -SourcePortRange "*" -DestinationAddressPrefix Internet -DestinationPortRange "80-443"
+```
 
 *这些步骤使用本示例中的特定名称和值。在输入或者将详细信息剪切并粘贴到代码中时，请使用部署的名称和值。*
 

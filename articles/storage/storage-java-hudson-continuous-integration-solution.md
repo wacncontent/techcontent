@@ -41,18 +41,18 @@ Hudson 通过允许开发人员轻松地集成其代码更改以及自动和频�
 你将需要以下内容才能将 Blob 服务用于 Hudson CI 解决方案：
 
 * 一个 Hudson 持续集成解决方案。
-  
+
     如果你当前没有 Hudson CI 解决方案，可以使用以下技术运行一个 Hudson CI 解决方案：
-  
+
   1. 在已启用 Java 的计算机上，从 <http://hudson-ci.org/> 下载 Hudson WAR。
   2. 在打开到包含 Hudson WAR 的文件夹的命令提示符下，运行 Hudson WAR。例如，如果你下载了版本 3.1.2：
-     
+
       `java -jar hudson-3.1.2.war`
 
   3. 在浏览器中，打开 `http://localhost:8080/`。这将打开 Hudson 仪表板。
   4. 首次使用 Hudson 时，在 `http://localhost:8080/` 上完成初始设置。
   5. 在完成初始设置后，取消 Hudson WAR 的正在运行的实例、再次启动 Hudson WAR，然后重新打开 Hudson 仪表板 (`http://localhost:8080/`)，你将使用它安装和配置 Azure 存储插件。
-     
+
       虽然典型 Hudson CI 解决方案将设置为作为一个服务运行，但在本教程中，通过命令行运行 Hudson WAR 就足够了。
 * 一个 Azure 帐户。注册 Azure 帐户的位置位于 <https://www.azure.cn>。
 * 一个 Azure 存储帐户。如果你还没有存储帐户，则可使用[创建存储帐户](./storage-create-storage-account.md#create-a-storage-account)中的步骤创建一个。
@@ -95,18 +95,20 @@ Hudson 通过允许开发人员轻松地集成其代码更改以及自动和频�
 3. 在作业配置的“生成”部分，单击“添加生成步骤”并选择“执行 Windows 批处理命令”。
 4. 在“命令”中，使用下列命令：
 
-        md text
-        cd text
-        echo Hello Azure Storage from Hudson > hello.txt
-        date /t > date.txt
-        time /t >> date.txt
+    ```
+    md text
+    cd text
+    echo Hello Azure Storage from Hudson > hello.txt
+    date /t > date.txt
+    time /t >> date.txt
+    ```
 
 5. 在作业配置的“后期生成操作”部分，单击“将项目上载到 Azure Blob 存储”。
 6. 对于“存储帐户名称”，选择要使用的存储帐户。
 7. 对于“容器名称”，请指定容器名称。（如果上传生成项目时不存在该容器，则将创建该容器。） 你可使用环境变量，因此在此示例中，请输入 **${JOB\_NAME}** 作为容器名称。
-   
+
     **提示**
-   
+
     在你为“执行 Windows 批处理命令”输入脚本的“命令”部分下方，有一个指向 Hudson 所识别环境变量的链接。单击此链接可了解环境变量名称和说明。请注意，不允许将包含特殊字符的环境变量（如 **BUILD\_URL** 环境变量）用作容器名称或通用虚拟路径。
 8. 对于此示例，请单击“默认将新容器设为公开的”。（如果要使用私有容器，你将需要创建共享访问签名以允许访问。这超出了本文的范围。可以在[创建共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)中了解有关共享访问签名的详细信息。
 9. [可选]如果你希望在上载生成项目之前清除容器的内容，请单击“在上载前清除容器”（如果你不希望清除容器的内容，则使该复选框保持未选中状态）。
@@ -123,7 +125,7 @@ Hudson 通过允许开发人员轻松地集成其代码更改以及自动和频�
     c.单击你用于 Hudson 的存储帐户名称。
 
     d.单击“容器”。
-    
+
     e.单击名为 **myjob** 的容器，该名称是你创建 Hudson 作业时分配的作业名称的小写形式。在 Azure 存储中，容器名称和 Blob 名称都采用小写形式（并且区分大小写）。在名为 **myjob** 的容器的 Blob 列表中，你应该能看到 **hello.txt** 和 **date.txt**。复制这两项中任一项的 URL 并在浏览器中打开。你将看到已作为生成项目上传的文本文件。
 
 每个作业只能创建一个用于将项目上传到 Azure Blob 存储的生成后操作。请注意，用来将项目上传到 Azure Blob 存储的单个生成后操作可以在“要上传的项目列表”中使用分号作为分隔符指定不同的文件（包括通配符）和文件路径。例如，如果你的 Hudson 生成在你的工作区的 **build** 文件夹中生成了 JAR 文件和 TXT 文件，并且你希望将这两者都上传到 Azure Blob 存储，请使用以下项作为“要上传的项目列表”值：**build/*.jar;build/*.txt**。你还可以使用双冒号语法指定要在 Blob 名称内使用的路径。例如，如果你希望在 Blob 路径中使用 **binaries** 以上载 JAR 并在 Blob 路径中使用 **notices** 以上载 TXT 文件，请使用以下项作为“要上载的项目列表”值：**build/*.jar::binaries;build/*.txt::notices**。
@@ -148,9 +150,9 @@ Hudson 通过允许开发人员轻松地集成其代码更改以及自动和频�
 * **容器**：一个容器包含一组 blob 集。所有 blob 必须位于相应的容器中。一个帐户可以包含无限个容器。一个容器可以存储无限个 Blob。
 * **Blob**：任何类型和大小的文件。可将两类 Blob 存储到 Azure 存储中：块 Blob 和页 Blob。大部分文件都是块 blob。单个块 Blob 最大可以为 200 GB。本教程使用块 Blob。另一种 Blob 类型为页 Blob，其大小可以达 1 TB，在对文件中的一系列字节进行频繁修改时，这种 Blob 类型更加高效。有关 Blob 的更多信息，请参阅[了解块 Blob、追加 Blob 和页 Blob](http://msdn.microsoft.com/zh-cn/library/azure/ee691964.aspx)。
 * **URL 格式**：可使用以下 URL 格式对 Blob 寻址：
-  
+
     `http://storageaccount.blob.core.chinacloudapi.cn/container_name/blob_name`
-    
+
     （以上格式适用于公共 Azure 云。如果你在使用其他 Azure 云，请使用 [Azure 门户预览](https://portal.azure.cn)中的终结点来确定你的 URL 终结点。）
 
     在以上格式中，`storageaccount` 表示存储帐户的名称，`container_name` 表示容器的名称，而 `blob_name` 表示 Blob 的名称。在容器名称中，你可具有多个由正斜杠 ** /** 分隔的路径。本教程的示例容器名称为 **MyJob**，**${BUILD\_ID}/${BUILD\_NUMBER}** 用于通用虚拟路径，从而导致 Blob 具有以下格式的 URL：

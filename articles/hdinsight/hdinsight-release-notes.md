@@ -1174,15 +1174,15 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 
 ## 2014 年 8 月 24 日发行说明
 * 我们正在添加以下 WebHCat 配置 (HIVE-7155)，该配置可将 Templeton 控制器作业的默认内存限制设置为 1 GB：（以前的默认值是 512 MB。）
-  
+
      templeton.mapper.memory.mb (=1024)
-  
+
   * 这项更改解决了某些 Hive 查询由于内存限制较低而遇到的以下错误：“容器即将超出物理内存限制”。
   * 要恢复到旧默认值，你可以在创建群集时使用以下命令通过 Azure PowerShell 将此配置值设置为 512：
-    
+
       Add-AzureRmHDInsightConfigValues -Core @{"templeton.mapper.memory.mb"="512";}
 * zookeeper 角色的主机名已更改为 *zookeeper*。这会影响群集内部的名称解析，但不会影响外部 REST API。如果你的组件使用了 *zookeepernode* 主机名，则需更新这些组件，让其使用新名称。三个 zookeeper 节点的新名称为：
-  
+
   * zookeeper0
   * zookeeper1
   * zookeeper2
@@ -1220,17 +1220,21 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 ### Apache Mahout 已预装在 HDInsight 3.1 上
  [Mahout](http://hortonworks.com/hadoop/mahout/) 已预装在 HDInsight 3.1 Hadoop 群集上，从而无需任何其他群集配置，就能运行 Mahout 作业。例如，可以使用远程桌面协议 (RDP) 远程访问 Hadoop 群集，并且无需执行附加的步骤就能运行 Hello World Mahout 命令：
 
-        mahout org.apache.mahout.classifier.df.tools.Describe -p /user/hdp/glass.data -f /user/hdp/glass.info -d I 9 N L  
+ ```
+    mahout org.apache.mahout.classifier.df.tools.Describe -p /user/hdp/glass.data -f /user/hdp/glass.info -d I 9 N L  
 
-        mahout org.apache.mahout.classifier.df.BreimanExample -d /user/hdp/glass.data -ds /user/hdp/glass.info -i 10 -t 100
+    mahout org.apache.mahout.classifier.df.BreimanExample -d /user/hdp/glass.data -ds /user/hdp/glass.info -i 10 -t 100
+ ```
 
 有关此过程的更完整说明，请参阅 Apache Mahout 网站上的 [Breiman 示例](https://mahout.apache.org/users/classification/breiman-example.html)文档。
 
 ### Hive 查询可以在 HDInsight 3.1 中使用 Tez
 Hive 0.13 已在 HDInsight 3.1 中提供，并且能够使用 Tez 运行查询，这带来了极大的性能改善。默认情况下，没有为 Hive 查询启用 Tez。要使用 Tez，必须选择启用它。可以通过运行以下代码片段来启用 Tez：
 
-        set hive.execution.engine=tez;
-        select sc_status, count(*), histogram_numeric(sc_bytes,5) from website_logs_orc_local group by sc_status;
+```
+    set hive.execution.engine=tez;
+    select sc_status, count(*), histogram_numeric(sc_bytes,5) from website_logs_orc_local group by sc_status;
+```
 
 Hortonworks 发布了使用以标准基准版提供的 Tez 后，Hive 查询性能得到增强的明细。有关详细信息，请参阅[适用于 Enterprise Hadoop 的 Apache Hive 13 基准](http://hortonworks.com/blog/benchmarking-apache-hive-13-enterprise-hadoop/)。
 

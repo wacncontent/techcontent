@@ -38,7 +38,7 @@ ms.author: kgremban
   对于旧版 PhoneFactor 客户，如果有疑问或需要重置密码方面的帮助，请使用[密码重置](mailto:phonefactorsupport@microsoft.com)链接建立支持案例。
 
 - [Azure 多重身份验证服务器 (PhoneFactor) 支持](https://support.microsoft.com/zh-cn/oas/default.aspx?prid=14947)
-  
+
   使用此链接可联系 Microsoft 支持专业人员。他们会询问一些问题来帮助确定支持选项，这些选项可能包括电子邮件、在线提交或电话支持。
 
 **问：Azure 多重身份验证服务器如何处理用户数据？**
@@ -117,7 +117,8 @@ Azure 多重身份验证可作为独立的服务购买，按照每位用户和�
 
 获取有关创建应用密码的详细信息，以及其他[有关应用密码的帮助](./multi-factor-authentication-end-user-app-passwords.md)。
 
->[!NOTE] 适用于 Office 2013 客户端的新式验证
+>[!NOTE]
+> 适用于 Office 2013 客户端的新式验证
 >
 > Office 2013 客户端（包括 Outlook）支持新式验证协议。可以将 Office 2013 配置为支持多重身份验证。配置 Office 2013 之后，Office 2013 客户端就不需要应用密码。有关详细信息，请参阅 [Office 2013 modern authentication public preview announcement](https://blogs.office.com/2015/03/23/office-2013-modern-authentication-public-preview-announced/)（Office 2013 新式验证公共预览版发布声明）。
 

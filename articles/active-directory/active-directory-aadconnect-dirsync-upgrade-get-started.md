@@ -36,7 +36,8 @@ Azure AD Connect 是 DirSync 的后继产品。本主题介绍从 DirSync 升级
 [就地升级](#in-place-upgrade) | 如果升级预期少于 3 小时，则为首选选项。
 [并行部署](#parallel-deployment) | 如果升级预期超过 3 小时，则为首选选项。
 
->[!NOTE] 当你规划从 DirSync 升级到 Azure AD Connect 时，在升级之前请勿自行卸载 DirSync。Azure AD Connect 将读取和迁移 DirSync 的配置，并在检查服务器之后卸载 DirSync。
+>[!NOTE]
+> 当你规划从 DirSync 升级到 Azure AD Connect 时，在升级之前请勿自行卸载 DirSync。Azure AD Connect 将读取和迁移 DirSync 的配置，并在检查服务器之后卸载 DirSync。
 
 **就地升级** 向导会显示完成升级预计所需的时间。根据假设，预计需要 3 小时才能完成包含 50,000 个对象（用户、联系人和组）的数据库的升级。如果数据库中的对象数少于 50,000 个，Azure AD Connect 会建议进行就地升级。如果确定继续，升级期间会自动应用当前设置，服务器也会自动恢复活动的同步。
 
@@ -59,7 +60,7 @@ DirSync 支持以下配置更改，并且将会升级：
 
 ![已阻止升级](./media/active-directory-aadconnect-dirsync-upgrade-get-started/analysisblocked.png)  
 
-在这种情况下，建议在[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)下安装新的 Azure AD Connect 服务器，验证旧的 DirSync 和新的 Azure AD Connect 配置。使用自定义配置重新应用所有更改，如 [Azure AD Connect 同步自定义配置](./active-directory-aadconnectsync-whatis.md)中所述。
+在这种情况下，建议在[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode)下安装新的 Azure AD Connect 服务器，验证旧的 DirSync 和新的 Azure AD Connect 配置。使用自定义配置重新应用所有更改，如 [Azure AD Connect 同步自定义配置](./active-directory-aadconnectsync-whatis.md)中所述。
 
 无法检索且不会迁移 DirSync 用于服务帐户的密码。这些密码会在升级期间重置。
 
@@ -138,11 +139,12 @@ DirSync 支持以下配置更改，并且将会升级：
     - 现有 SQL Server 实例（默认值：Azure AD Connect 将安装 SQL Server 2012 Express）。请不要使用与 DirSync 服务器相同的数据库实例。
     - 用于连接 SQL Server 的服务帐户（如果你的 SQL Server 数据库位于远程，则此帐户必须是域服务帐户）。可以在此屏幕上看到以下选项：![输入你的 Azure AD 凭据](./media/active-directory-aadconnect-dirsync-upgrade-get-started/advancedsettings.png)
 7. 单击“下一步”。
-8. 在“已准备好配置”页上，保留选中“配置完成后立即开始同步过程”。服务器当前为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)，更改不会导出到 Azure AD。
+8. 在“已准备好配置”页上，保留选中“配置完成后立即开始同步过程”。服务器当前为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode)，更改不会导出到 Azure AD。
 9. 单击“安装”。
 10. 安装完成后，请注销并再次登录到 Windows，然后即可使用同步服务管理器或同步规则编辑器，或者尝试进行其他任何配置更改。
 
->[!NOTE] 将会开始同步 Windows Server Active Directory 和 Azure Active Directory，但不会将更改导出到 Azure AD。每次只能有一个同步工具在主动导出更改。这种状态称为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)。
+>[!NOTE]
+> 将会开始同步 Windows Server Active Directory 和 Azure Active Directory，但不会将更改导出到 Azure AD。每次只能有一个同步工具在主动导出更改。这种状态称为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode)。
 
 ### 验证 Azure AD Connect 是否已准备好开始同步
 
@@ -159,7 +161,7 @@ DirSync 支持以下配置更改，并且将会升级：
 
 检查这些操作的结果，并确保没有任何错误。
 
-若要查看并检查即将导出到 Azure AD 的更改，请阅读“如何在[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)下验证配置”的主题。进行所需的配置更改，直到没有任何意外的错误。
+若要查看并检查即将导出到 Azure AD 的更改，请阅读“如何在[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode)下验证配置”的主题。进行所需的配置更改，直到没有任何意外的错误。
 
 完成上述步骤并获得满意的结果后，即可从 DirSync 切换到 Azure AD。
 

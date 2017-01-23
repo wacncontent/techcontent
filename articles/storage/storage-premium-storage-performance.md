@@ -235,7 +235,8 @@ Azure 高级存储目前提供了三种磁盘大小。每种磁盘大小对 IOPS
 ## 磁盘缓存  
 利用 Azure 高级存储的高规格 VM 使用名为 BlobCache 的多层缓存技术。BlobCache 使用虚拟机 RAM 和本地 SSD 的组合进行缓存。此缓存适用于高级存储的永久性磁盘和 VM 本地磁盘。默认情况下，此缓存设置已设置为允许对 OS 磁盘进行读/写操作，允许对托管在高级存储中的数据磁盘进行只读操作。在高级存储磁盘上启用磁盘缓存后，高规格 VM 可以达到相当高的性能级别，超出基础磁盘性能。
 
->[!WARNING] 更改 Azure 磁盘的缓存设置可分离和重新附加目标磁盘。如果它是操作系统磁盘，将重启 VM。更改磁盘缓存设置前，停止所有可能受此中断影响的应用程序/服务。
+>[!WARNING]
+> 更改 Azure 磁盘的缓存设置可分离和重新附加目标磁盘。如果它是操作系统磁盘，将重启 VM。更改磁盘缓存设置前，停止所有可能受此中断影响的应用程序/服务。
 
 若要详细了解 BlobCache 的工作方式，请参阅内部的 [Azure 高级存储](https://azure.microsoft.com/blog/azure-premium-storage-now-generally-available-2/)博客文章。
 
@@ -423,32 +424,36 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 针对 Ubuntu 运行以下命令：
 
-        apt-get install fio
+```
+    apt-get install fio
+```
 
 我们将在磁盘上使用 4 个工作线程来执行写入操作，4 个工作线程来执行读取操作。写入工作线程将推动“nocache”卷上的流量，该卷有 10 个磁盘的缓存设置为“无”。读取工作线程将推动“readcache”卷上的流量，该卷有 1 个磁盘的缓存设置为“ReadOnly”。
 
 *最大写入 IOPS*  
 使用以下规范创建作业文件，以便获得最大写入 IOPS。将其命名为“fiowrite.ini”。
 
-    [global]
-    size=30g
-    direct=1
-    iodepth=256
-    ioengine=libaio
-    bs=8k
-    
-    [writer1]
-    rw=randwrite
-    directory=/mnt/nocache
-    [writer2]
-    rw=randwrite
-    directory=/mnt/nocache
-    [writer3]
-    rw=randwrite
-    directory=/mnt/nocache
-    [writer4]
-    rw=randwrite
-    directory=/mnt/nocache
+```
+[global]
+size=30g
+direct=1
+iodepth=256
+ioengine=libaio
+bs=8k
+
+[writer1]
+rw=randwrite
+directory=/mnt/nocache
+[writer2]
+rw=randwrite
+directory=/mnt/nocache
+[writer3]
+rw=randwrite
+directory=/mnt/nocache
+[writer4]
+rw=randwrite
+directory=/mnt/nocache
+```
 
 请注意以下重要事项，这些事项必须符合前面部分讨论的设计准则。这些规范是实现最大 IOPS 所必需的。
 
@@ -458,7 +463,9 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 运行以下命令，开始进行 30 秒的 FIO 测试：
 
-    sudo fio --runtime 30 fiowrite.ini
+```
+sudo fio --runtime 30 fiowrite.ini
+```
 
 进行测试时，可看到 VM 和高级磁盘传送的写入 IOPS 数。如以下示例所示，DS14 VM 传送的写入 IOPS 达到了最大限制：50,000 IOPS。  
     ![](./media/storage-premium-storage-performance/image11.png)
@@ -466,25 +473,27 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 *最大读取 IOPS*  
 使用以下规范创建作业文件，以便获得最大读取 IOPS。将其命名为“fioread.ini”。
 
-    [global]
-    size=30g
-    direct=1
-    iodepth=256
-    ioengine=libaio
-    bs=8k
-    
-    [reader1]
-    rw=randread
-    directory=/mnt/readcache
-    [reader2]
-    rw=randread
-    directory=/mnt/readcache
-    [reader3]
-    rw=randread
-    directory=/mnt/readcache
-    [reader4]
-    rw=randread
-    directory=/mnt/readcache
+```
+[global]
+size=30g
+direct=1
+iodepth=256
+ioengine=libaio
+bs=8k
+
+[reader1]
+rw=randread
+directory=/mnt/readcache
+[reader2]
+rw=randread
+directory=/mnt/readcache
+[reader3]
+rw=randread
+directory=/mnt/readcache
+[reader4]
+rw=randread
+directory=/mnt/readcache
+```
 请注意以下重要事项，这些事项必须符合前面部分讨论的设计准则。这些规范是实现最大 IOPS 所必需的。
 
 * 较高的队列深度：256。
@@ -493,7 +502,9 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 运行以下命令，开始进行 30 秒的 FIO 测试：
 
-    sudo fio --runtime 30 fioread.ini
+```
+sudo fio --runtime 30 fioread.ini
+```
 
 进行测试时，可看到 VM 和高级磁盘传送的读取 IOPS 数。如以下示例所示，DS14 VM 传送了 64,000 个以上的读取 IOPS。这是磁盘和缓存性能相结合。  
     ![](./media/storage-premium-storage-performance/image12.png)
@@ -507,35 +518,37 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
     ioengine=libaio
     bs=4k
 
-    [reader1]
-    rw=randread
-    directory=/mnt/readcache
-    [reader2]
-    rw=randread
-    directory=/mnt/readcache
-    [reader3]
-    rw=randread
-    directory=/mnt/readcache
-    [reader4]
-    rw=randread
-    directory=/mnt/readcache
+```
+[reader1]
+rw=randread
+directory=/mnt/readcache
+[reader2]
+rw=randread
+directory=/mnt/readcache
+[reader3]
+rw=randread
+directory=/mnt/readcache
+[reader4]
+rw=randread
+directory=/mnt/readcache
 
-    [writer1]
-    rw=randwrite
-    directory=/mnt/nocache
-    rate_iops=12500
-    [writer2]
-    rw=randwrite
-    directory=/mnt/nocache
-    rate_iops=12500
-    [writer3]
-    rw=randwrite
-    directory=/mnt/nocache
-    rate_iops=12500
-    [writer4]
-    rw=randwrite
-    directory=/mnt/nocache
-    rate_iops=12500
+[writer1]
+rw=randwrite
+directory=/mnt/nocache
+rate_iops=12500
+[writer2]
+rw=randwrite
+directory=/mnt/nocache
+rate_iops=12500
+[writer3]
+rw=randwrite
+directory=/mnt/nocache
+rate_iops=12500
+[writer4]
+rw=randwrite
+directory=/mnt/nocache
+rate_iops=12500
+```
 
 请注意以下重要事项，这些事项必须符合前面部分讨论的设计准则。这些规范是实现最大 IOPS 所必需的。
 
@@ -545,7 +558,9 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 运行以下命令，开始进行 30 秒的 FIO 测试：
 
-    sudo fio --runtime 30 fioreadwrite.ini
+```
+sudo fio --runtime 30 fioreadwrite.ini
+```
 
 进行测试时，可看到 VM 和高级磁盘传送的读取和写入 IOPS 数之和。如以下示例所示，DS14 VM 传送了 100,000 个以上的读写组合 IOPS。这是磁盘和缓存性能相结合。  
     ![](./media/storage-premium-storage-performance/image13.png)

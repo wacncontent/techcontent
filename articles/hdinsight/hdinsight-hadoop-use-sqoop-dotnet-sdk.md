@@ -39,71 +39,75 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 1. 在 Visual Studio 中创建 C# 控制台应用程序。
 2. 在 Visual Studio 包管理器控制台中，运行以下 Nuget 命令以导入包。
 
-        Install-Package Microsoft.Azure.Management.HDInsight.Job -Pre
-        
+    ```
+    Install-Package Microsoft.Azure.Management.HDInsight.Job -Pre
+    ```
+
 3. 在 Program.cs 文件中使用以下代码：
 
-        using System.Collections.Generic;
-        using Microsoft.Azure.Management.HDInsight.Job;
-        using Microsoft.Azure.Management.HDInsight.Job.Models;
-        using Hyak.Common;
+    ```
+    using System.Collections.Generic;
+    using Microsoft.Azure.Management.HDInsight.Job;
+    using Microsoft.Azure.Management.HDInsight.Job.Models;
+    using Hyak.Common;
 
-        namespace SubmitHDInsightJobDotNet
+    namespace SubmitHDInsightJobDotNet
+    {
+        class Program
         {
-            class Program
+            private static HDInsightJobManagementClient _hdiJobManagementClient;
+
+            private const string ExistingClusterName = "<Your HDInsight Cluster Name>";
+            private const string ExistingClusterUri = ExistingClusterName + ".azurehdinsight.cn";
+            private const string ExistingClusterUsername = "<Cluster Username>";
+            private const string ExistingClusterPassword = "<Cluster User Password>";
+
+            static void Main(string[] args)
             {
-                private static HDInsightJobManagementClient _hdiJobManagementClient;
+                System.Console.WriteLine("The application is running ...");
 
-                private const string ExistingClusterName = "<Your HDInsight Cluster Name>";
-                private const string ExistingClusterUri = ExistingClusterName + ".azurehdinsight.cn";
-                private const string ExistingClusterUsername = "<Cluster Username>";
-                private const string ExistingClusterPassword = "<Cluster User Password>";
+                var clusterCredentials = new BasicAuthenticationCloudCredentials { Username = ExistingClusterUsername, Password = ExistingClusterPassword };
+                _hdiJobManagementClient = new HDInsightJobManagementClient(ExistingClusterUri, clusterCredentials);
 
-                static void Main(string[] args)
+                SubmitSqoopJob();
+
+                System.Console.WriteLine("Press ENTER to continue ...");
+                System.Console.ReadLine();
+            }
+
+            private static void SubmitSqoopJob()
+            {
+                var sqlDatabaseServerName = "<SQLDatabaseServerName>";
+                var sqlDatabaseLogin = "<SQLDatabaseLogin>";
+                var sqlDatabaseLoginPassword = "<SQLDatabaseLoginPassword>";
+                var sqlDatabaseDatabaseName = "<DatabaseName>";
+
+                var tableName = "<TableName>";
+                var exportDir = "/tutorials/usesqoop/data";
+
+                // Connection string for using Azure SQL Database.
+                // Comment if using SQL Server
+                var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ".database.chinacloudapi.cn;user=" + sqlDatabaseLogin + "@" + sqlDatabaseServerName + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
+                // Connection string for using SQL Server.
+                // Uncomment if using SQL Server
+                //var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ";user=" + sqlDatabaseLogin + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
+
+                var parameters = new SqoopJobSubmissionParameters
                 {
-                    System.Console.WriteLine("The application is running ...");
+                    Command = "export --connect " + connectionString + " --table " + tableName + "_mobile --export-dir " + exportDir + "_mobile --fields-terminated-by \\t -m 1"
+                };
 
-                    var clusterCredentials = new BasicAuthenticationCloudCredentials { Username = ExistingClusterUsername, Password = ExistingClusterPassword };
-                    _hdiJobManagementClient = new HDInsightJobManagementClient(ExistingClusterUri, clusterCredentials);
-
-                    SubmitSqoopJob();
-
-                    System.Console.WriteLine("Press ENTER to continue ...");
-                    System.Console.ReadLine();
-                }
-
-                private static void SubmitSqoopJob()
-                {
-                    var sqlDatabaseServerName = "<SQLDatabaseServerName>";
-                    var sqlDatabaseLogin = "<SQLDatabaseLogin>";
-                    var sqlDatabaseLoginPassword = "<SQLDatabaseLoginPassword>";
-                    var sqlDatabaseDatabaseName = "<DatabaseName>";
-
-                    var tableName = "<TableName>";
-                    var exportDir = "/tutorials/usesqoop/data";
-
-                    // Connection string for using Azure SQL Database.
-                    // Comment if using SQL Server
-                    var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ".database.chinacloudapi.cn;user=" + sqlDatabaseLogin + "@" + sqlDatabaseServerName + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
-                    // Connection string for using SQL Server.
-                    // Uncomment if using SQL Server
-                    //var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ";user=" + sqlDatabaseLogin + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
-
-                    var parameters = new SqoopJobSubmissionParameters
-                    {
-                        Command = "export --connect " + connectionString + " --table " + tableName + "_mobile --export-dir " + exportDir + "_mobile --fields-terminated-by \\t -m 1"
-                    };
-
-                    System.Console.WriteLine("Submitting the Sqoop job to the cluster...");
-                    var response = _hdiJobManagementClient.JobManagement.SubmitSqoopJob(parameters);
-                    System.Console.WriteLine("Validating that the response is as expected...");
-                    System.Console.WriteLine("Response status code is " + response.StatusCode);
-                    System.Console.WriteLine("Validating the response object...");
-                    System.Console.WriteLine("JobId is " + response.JobSubmissionJsonResponse.Id);
-                }
+                System.Console.WriteLine("Submitting the Sqoop job to the cluster...");
+                var response = _hdiJobManagementClient.JobManagement.SubmitSqoopJob(parameters);
+                System.Console.WriteLine("Validating that the response is as expected...");
+                System.Console.WriteLine("Response status code is " + response.StatusCode);
+                System.Console.WriteLine("Validating the response object...");
+                System.Console.WriteLine("JobId is " + response.JobSubmissionJsonResponse.Id);
             }
         }
-        
+    }
+    ```
+
 4. 按 **F5** 运行程序。
 
 ##后续步骤

@@ -22,7 +22,8 @@ ms.author: v-jibran@microsoft.com
 
 Azure Active Directory (AD) 图形 API 通过 OData REST API 终结点提供对 Azure AD 的编程访问权限。应用程序可以使用图形 API 对目录数据和对象执行创建、读取、更新和删除 (CRUD) 操作。例如，可以使用图形 API 来创建新用户、查看或更新用户的属性、更改用户的密码、检查基于角色的访问的组成员身份、禁用或删除用户。有关图形 API 功能和应用方案的详细信息，请参阅 [Azure AD 图形 API](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/api-catalog) 和 [Azure AD 图形 API 先决条件](https://msdn.microsoft.com/zh-cn/library/hh974476.aspx)。
 
-> [!IMPORTANT] 也可以通过 [Microsoft Graph](https://graph.microsoft.io/) 访问 Azure AD 图形 API 功能。Microsoft Graph 是统一的 API，其中包含 Outlook、OneDrive、OneNote、Planner 和 Office Graph 等其他 Microsoft 服务中的 API，可通过单个终结点和单个访问令牌进行访问。
+> [!IMPORTANT]
+> 也可以通过 [Microsoft Graph](https://graph.microsoft.io/) 访问 Azure AD 图形 API 功能。Microsoft Graph 是统一的 API，其中包含 Outlook、OneDrive、OneNote、Planner 和 Office Graph 等其他 Microsoft 服务中的 API，可通过单个终结点和单个访问令牌进行访问。
 
 ## 如何构造图形 API URL
 
@@ -53,7 +54,8 @@ Azure Active Directory (AD) 图形 API 通过 OData REST API 终结点提供对 
 
 生成应用程序时，可以使用 Azure AD 图形 API 的图形资源管理器来查询目录数据。
 
-> [!IMPORTANT] 图形资源管理器不支持在目录中写入或删除数据。使用图形资源管理器时只能对 Azure AD 目录执行读取操作。
+> [!IMPORTANT]
+> 图形资源管理器不支持在目录中写入或删除数据。使用图形资源管理器时只能对 Azure AD 目录执行读取操作。
 
 下面是导航到图形资源管理器，选择“使用演示公司”，并输入 `https://graph.chinacloudapi.cn/GraphDir1.partner.onmschina.cn/users?api-version=1.6` 显示演示目录中所有用户时会看到的输出：
 
@@ -88,7 +90,8 @@ Azure Active Directory (AD) 图形 API 通过 OData REST API 终结点提供对 
 2. 由于你要创建新的安全组，因此请从下拉菜单中选择“发布”作为 HTTP 方法。有关对组对象的操作和权限的详细信息，请参阅 [Azure AD Graph REST API 参考](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/api-catalog)中的[组](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#GroupEntity)。
 3. 在“发布”旁边的字段中，键入以下内容作为请求 URL：`https://graph.chinacloudapi.cn/mytenantdomain/groups?api-version=1.6`。
 
-    > [!NOTE] 必须将 mytenantdomain 替换为你自己的 Azure AD 目录的域名。
+    > [!NOTE]
+    > 必须将 mytenantdomain 替换为你自己的 Azure AD 目录的域名。
 
 4. 在紧靠在“发布”下拉列表下面的字段中，键入以下内容：
 
@@ -96,16 +99,19 @@ Azure Active Directory (AD) 图形 API 通过 OData REST API 终结点提供对 
     Authorization: your access token
     Content-Type: application/json
 
-    > [!NOTE] 将 &lt;your access token&gt; 替换为你的 Azure AD 目录的访问令牌。
+    > [!NOTE]
+    > 将 &lt;your access token&gt; 替换为你的 Azure AD 目录的访问令牌。
 
 5. 在“请求正文”字段中键入以下内容：
 
-        {
-            "displayName":"MyTestGroup",
-            "mailNickname":"MyTestGroup",
-            "mailEnabled":"false",
-            "securityEnabled": true
-        }
+    ```
+    {
+        "displayName":"MyTestGroup",
+        "mailNickname":"MyTestGroup",
+        "mailEnabled":"false",
+        "securityEnabled": true
+    }
+    ```
 
     有关创建组的详细信息，请参阅[创建组](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/groups-operations#CreateGroup)。
 

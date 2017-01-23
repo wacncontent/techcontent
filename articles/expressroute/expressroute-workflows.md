@@ -58,22 +58,28 @@ ms.author: cherylmc
 
 运行 PowerShell cmdlet 创建 ExpressRoute 线路后，很快就会看到 ExpressRoute 线路处于以下状态。
 
-    ServiceProviderProvisioningState : NotProvisioned
-    Status                           : Enabled
+```
+ServiceProviderProvisioningState : NotProvisioned
+Status                           : Enabled
+```
 
 #### 当连接服务提供商正在预配线路时
 
 将服务密钥传递给连接服务提供商并且他们已启动预配过程时，很快就会看到 ExpressRoute 线路处于以下状态。
 
-    ServiceProviderProvisioningState : Provisioning
-    Status                           : Enabled
+```
+ServiceProviderProvisioningState : Provisioning
+Status                           : Enabled
+```
 
 #### 当连接服务提供商完成预配过程时
 
 当连接服务提供商完成预配过程后，很快就会看到 ExpressRoute 线路处于以下状态。
 
-    ServiceProviderProvisioningState : Provisioned
-    Status                           : Enabled
+```
+ServiceProviderProvisioningState : Provisioned
+Status                           : Enabled
+```
 
 线路只有处于 Provisioned 和 Enabled 状态时才可供使用。如果你使用第 2 层服务提供商，则只有在线路处于此状态时才能配置路由。
 
@@ -81,12 +87,15 @@ ms.author: cherylmc
 
 如果已请求服务提供商取消预配 ExpressRoute 线路，当服务提供商完成取消预配过程后，将看到线路已设置为以下状态。
 
-    ServiceProviderProvisioningState : NotProvisioned
-    Status                           : Enabled
+```
+ServiceProviderProvisioningState : NotProvisioned
+Status                           : Enabled
+```
 
 如果需要，你可以选择重新启用线路，或运行 PowerShell cmdlet 删除线路。
 
->[!IMPORTANT] 当 ServiceProviderProvisioningState 为 Provisioning 或 Provisioned 时，如果运行该 PowerShell cmdlet 来删除线路，操作将会失败。请先让连接服务提供商取消 ExpressRoute 线路，然后删除线路。在运行 PowerShell cmdlet 删除线路之前，Azure 会持续收取线路费用。
+>[!IMPORTANT]
+> 当 ServiceProviderProvisioningState 为 Provisioning 或 Provisioned 时，如果运行该 PowerShell cmdlet 来删除线路，操作将会失败。请先让连接服务提供商取消 ExpressRoute 线路，然后删除线路。在运行 PowerShell cmdlet 删除线路之前，Azure 会持续收取线路费用。
 
 ##<a name="routing-session-configuration-state"></a> 路由会话配置状态
 
@@ -96,7 +105,8 @@ BGP 预配状态可让你知道  Azure 边缘是否已启用 BGP 会话。必须
 
 如果播发的公共前缀状态设置为*需要验证*状态，则不会启用 BGP 会话，因为播发的前缀不符合任何路由注册表中的 AS 编号。
 
->[!IMPORTANT] 如果播发的公共前缀状态是*手动验证*状态，则你必须[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单，并提供拥有播发 IP 地址的证明以及相关的自治系统编号。
+>[!IMPORTANT]
+> 如果播发的公共前缀状态是*手动验证*状态，则你必须[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单，并提供拥有播发 IP 地址的证明以及相关的自治系统编号。
 
 ## 后续步骤
 

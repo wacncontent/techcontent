@@ -73,7 +73,9 @@ PathPattern：要匹配的路径模式列表。每个模式必须以 / 开头，
 
 登录到 Azure
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 系统会提示使用凭据进行身份验证。<BR>
 
@@ -81,23 +83,31 @@ PathPattern：要匹配的路径模式列表。每个模式必须以 / 开头，
 
 检查帐户的订阅。
 
-    Get-AzureRmSubscription
+```
+Get-AzureRmSubscription
+```
 
 ### 步骤 3
 
 选择要使用的 Azure 订阅。<BR>
 
-    Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
+```
+Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
+```
 
 ### 步骤 4
 
 创建资源组（如果要使用现有的资源组，请跳过此步骤）。
 
-    New-AzureRmResourceGroup -Name appgw-RG -Location "China North"
+```
+New-AzureRmResourceGroup -Name appgw-RG -Location "China North"
+```
 
 或者，可以为应用程序网关的资源组创建标记：
 
-    $resourceGroup = New-AzureRmResourceGroup -Name appgw-RG -Location "China North" -Tags @{Name = "testtag"; Value = "Application Gateway URL routing"} 
+```
+$resourceGroup = New-AzureRmResourceGroup -Name appgw-RG -Location "China North" -Tags @{Name = "testtag"; Value = "Application Gateway URL routing"} 
+```
 
 Azure Resource Manager 要求所有资源组指定一个位置。此位置将用作该资源组中的资源的默认位置。请确保用于创建应用程序网关的所有命令都使用相同的资源组。
 
@@ -116,25 +126,33 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 将地址范围 10.0.0.0/24 分配给用于创建虚拟网络的子网变量。
 
-    $subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
+```
+$subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
+```
 
 ### 步骤 2
 
 使用前缀 10.0.0.0/16 和子网 10.0.0.0/24，在中国北部区域的“appgw-rg”资源组中创建名为“appgwvnet”的虚拟网络。
 
-    $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-RG -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnet
+```
+$vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-RG -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnet
+```
 
 ### 步骤 3
 
 分配子网变量，便于完成后面的创建应用程序网关的步骤。
 
-    $subnet=$vnet.Subnets[0]
+```
+$subnet=$vnet.Subnets[0]
+```
 
 ## 创建前端配置的公共 IP 地址
 
 在中国北部区域的“appgw-rg”资源组中创建公共 IP 资源“publicIP01”。
 
-    $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -name publicIP01 -location "China North" -AllocationMethod Dynamic
+```
+$publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -name publicIP01 -location "China North" -AllocationMethod Dynamic
+```
 
 服务启动时，会将一个 IP 地址分配到应用程序网关。
 
@@ -146,15 +164,19 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 创建名为“gatewayIP01”的应用程序网关 IP 配置。当应用程序网关启动时，它会从配置的子网获取 IP 地址，再将网络流量路由到后端 IP 池中的 IP 地址。请记住，每个实例需要一个 IP 地址。
 
-    $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
+```
+$gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
+```
 
 ### 步骤 2
 
 分别配置名为“pool01”和“pool2”的后端 IP 地址池，其中，“pool1”的 IP 地址为“134.170.185.46”、“134.170.188.221”、“134.170.185.50”；“pool2”的 IP 地址为“134.170.186.46”、“134.170.189.221”、“134.170.186.50”。
 
-    $pool1 = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
+```
+$pool1 = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
 
-    $pool2 = New-AzureRmApplicationGatewayBackendAddressPool -Name pool02 -BackendIPAddresses 134.170.186.46, 134.170.189.221,134.170.186.50
+$pool2 = New-AzureRmApplicationGatewayBackendAddressPool -Name pool02 -BackendIPAddresses 134.170.186.46, 134.170.189.221,134.170.186.50
+```
 
 在本示例中，会有两个后端池根据 URL 路径路由网络流量。一个池接收来自 URL 路径“/video”的流量，另一个池接收来自路径“/image”的流量。替换上述 IP 地址，添加自己的应用程序 IP 地址终结点。
 
@@ -162,27 +184,35 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 为后端池中进行了负载均衡的网络流量配置应用程序网关设置“poolsetting01”和“poolsetting02”。在本示例中，将为后端池配置不同的后端池设置。每个后端池可有自身的后端池设置。
 
-    $poolSetting01 = New-AzureRmApplicationGatewayBackendHttpSettings -Name "besetting01" -Port 80 -Protocol Http -CookieBasedAffinity Disabled -RequestTimeout 120
+```
+$poolSetting01 = New-AzureRmApplicationGatewayBackendHttpSettings -Name "besetting01" -Port 80 -Protocol Http -CookieBasedAffinity Disabled -RequestTimeout 120
 
-    $poolSetting02 = New-AzureRmApplicationGatewayBackendHttpSettings -Name "besetting02" -Port 80 -Protocol Http -CookieBasedAffinity Enabled -RequestTimeout 240
+$poolSetting02 = New-AzureRmApplicationGatewayBackendHttpSettings -Name "besetting02" -Port 80 -Protocol Http -CookieBasedAffinity Enabled -RequestTimeout 240
+```
 
 ### 步骤 4
 
 使用公共 IP 终结点配置前端 IP。
 
-    $fipconfig01 = New-AzureRmApplicationGatewayFrontendIPConfig -Name "frontend1" -PublicIPAddress $publicip
+```
+$fipconfig01 = New-AzureRmApplicationGatewayFrontendIPConfig -Name "frontend1" -PublicIPAddress $publicip
+```
 
 ### 步骤 5
 
 配置应用程序网关的前端端口。
 
-    $fp01 = New-AzureRmApplicationGatewayFrontendPort -Name "fep01" -Port 80
+```
+$fp01 = New-AzureRmApplicationGatewayFrontendPort -Name "fep01" -Port 80
+```
 
 ### 步骤 6
 
 配置侦听器。此步骤针对用于接收传入网络流量的公共 IP 地址和连接端口配置侦听器。
 
-    $listener = New-AzureRmApplicationGatewayHttpListener -Name "listener01" -Protocol Http -FrontendIPConfiguration $fipconfig01 -FrontendPort $fp01
+```
+$listener = New-AzureRmApplicationGatewayHttpListener -Name "listener01" -Protocol Http -FrontendIPConfiguration $fipconfig01 -FrontendPort $fp01
+```
 
 ### 步骤 7
 
@@ -190,59 +220,73 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 以下示例将创建两个规则：一个用于将流量路由到后端“pool1”的“/image/”路径，另一个用于将流量路由到后端“pool2”的“/video/”路径。
 
-    $imagePathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "pathrule1" -Paths "/image/*" -BackendAddressPool $pool1 -BackendHttpSettings $poolSetting01
+```
+$imagePathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "pathrule1" -Paths "/image/*" -BackendAddressPool $pool1 -BackendHttpSettings $poolSetting01
 
-    $videoPathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "pathrule2" -Paths "/video/*" -BackendAddressPool $pool2 -BackendHttpSettings $poolSetting02
+$videoPathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "pathrule2" -Paths "/video/*" -BackendAddressPool $pool2 -BackendHttpSettings $poolSetting02
+```
 
 如果路径不符合任何预定义的路径规则，规则路径映射配置也会配置默认的后端地址池。
 
-    $urlPathMap = New-AzureRmApplicationGatewayUrlPathMapConfig -Name "urlpathmap" -PathRules $videoPathRule, $imagePathRule -DefaultBackendAddressPool $pool1 -DefaultBackendHttpSettings $poolSetting02
+```
+$urlPathMap = New-AzureRmApplicationGatewayUrlPathMapConfig -Name "urlpathmap" -PathRules $videoPathRule, $imagePathRule -DefaultBackendAddressPool $pool1 -DefaultBackendHttpSettings $poolSetting02
+```
 
 ### 步骤 8
 
 创建规则设置。此步骤将应用程序网关配置为使用基于 URL 路径的路由。
 
-    $rule01 = New-AzureRmApplicationGatewayRequestRoutingRule -Name "rule1" -RuleType PathBasedRouting -HttpListener $listener -UrlPathMap $urlPathMap
+```
+$rule01 = New-AzureRmApplicationGatewayRequestRoutingRule -Name "rule1" -RuleType PathBasedRouting -HttpListener $listener -UrlPathMap $urlPathMap
+```
 
 ### 步骤 9
 
 配置实例数目和应用程序网关的大小。
 
-    $sku = New-AzureRmApplicationGatewaySku -Name "Standard_Small" -Tier Standard -Capacity 2
+```
+$sku = New-AzureRmApplicationGatewaySku -Name "Standard_Small" -Tier Standard -Capacity 2
+```
 
 ## 创建应用程序网关
 
 创建包含前述步骤中所有配置对象的应用程序网关。
 
-    $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-RG -Location "China North" -BackendAddressPools $pool1,$pool2 -BackendHttpSettingsCollection $poolSetting01, $poolSetting02 -FrontendIpConfigurations $fipconfig01 -GatewayIpConfigurations $gipconfig -FrontendPorts $fp01 -HttpListeners $listener -UrlPathMaps $urlPathMap -RequestRoutingRules $rule01 -Sku $sku
+```
+$appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-RG -Location "China North" -BackendAddressPools $pool1,$pool2 -BackendHttpSettingsCollection $poolSetting01, $poolSetting02 -FrontendIpConfigurations $fipconfig01 -GatewayIpConfigurations $gipconfig -FrontendPorts $fp01 -HttpListeners $listener -UrlPathMaps $urlPathMap -RequestRoutingRules $rule01 -Sku $sku
+```
 
 ## 获取应用程序网关 DNS 名称
 
 创建网关后，下一步是配置用于通信的前端。使用公共 IP 时，应用程序网关需要动态分配的 DNS 名称，这会造成不方便。若要确保最终用户能够访问应用程序网关，可以使用指向应用程序网关的公共终结点的 CNAME 记录。若要配置前端 IP CNAME 记录，可使用附加到应用程序网关的 PublicIPAddress 元素检索应用程序网关及其关联的 IP/DNS 名称的详细信息。应使用应用程序网关的 DNS 名称来创建 CNAME 记录，使两个 Web 应用程序都指向此 DNS 名称。不建议使用 A 记录，因为重新启动应用程序网关后 VIP 可能会变化。
 
-    Get-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -Name publicIP01
+```
+Get-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -Name publicIP01
+```
 
 <br/>
 
-    Name                     : publicIP01
-    ResourceGroupName        : appgw-RG
-    Location                 : chinanorth
-    Id                       : /subscriptions/<subscription_id>/resourceGroups/appgw-RG/providers/Microsoft.Network/publicIPAddresses/publicIP01
-    Etag                     : W/"00000d5b-54ed-4907-bae8-99bd5766d0e5"
-    ResourceGuid             : 00000000-0000-0000-0000-000000000000
-    ProvisioningState        : Succeeded
-    Tags                     : 
-    PublicIpAllocationMethod : Dynamic
-    IpAddress                : xx.xx.xxx.xx
-    PublicIpAddressVersion   : IPv4
-    IdleTimeoutInMinutes     : 4
-    IpConfiguration          : {
-                                    "Id": "/subscriptions/<subscription_id>/resourceGroups/appgw-RG/providers/Microsoft.Network/applicationGateways/appgwtest/frontendIP
-                                Configurations/frontend1"
-                                }
-    DnsSettings              : {
-                                    "Fqdn": "00000000-0000-xxxx-xxxx-xxxxxxxxxxxx.chinacloudapp.cn"
-                                }
+```
+Name                     : publicIP01
+ResourceGroupName        : appgw-RG
+Location                 : chinanorth
+Id                       : /subscriptions/<subscription_id>/resourceGroups/appgw-RG/providers/Microsoft.Network/publicIPAddresses/publicIP01
+Etag                     : W/"00000d5b-54ed-4907-bae8-99bd5766d0e5"
+ResourceGuid             : 00000000-0000-0000-0000-000000000000
+ProvisioningState        : Succeeded
+Tags                     : 
+PublicIpAllocationMethod : Dynamic
+IpAddress                : xx.xx.xxx.xx
+PublicIpAddressVersion   : IPv4
+IdleTimeoutInMinutes     : 4
+IpConfiguration          : {
+                                "Id": "/subscriptions/<subscription_id>/resourceGroups/appgw-RG/providers/Microsoft.Network/applicationGateways/appgwtest/frontendIP
+                            Configurations/frontend1"
+                            }
+DnsSettings              : {
+                                "Fqdn": "00000000-0000-xxxx-xxxx-xxxxxxxxxxxx.chinacloudapp.cn"
+                            }
+```
 
 ## 后续步骤
 

@@ -64,13 +64,15 @@ ms.author: rclaus
 
 做出更改后，需要重新启动 waagent 或重新启动 Linux VM 才能使这些更改生效。若要了解更改是否已实现、是否创建了交换文件，可以使用 `free` 命令查看可用空间。以下示例在修改 waagent.conf 文件后创建了 512MB 的交换文件。
 
-    admin@mylinuxvm:~$ free
-                total       used       free     shared    buffers     cached
-    Mem:       3525156     804168    2720988        408       8428     633192
-    -/+ buffers/cache:     162548    3362608
-    Swap:       524284          0     524284
-    admin@mylinuxvm:~$
- 
+```
+admin@mylinuxvm:~$ free
+            total       used       free     shared    buffers     cached
+Mem:       3525156     804168    2720988        408       8428     633192
+-/+ buffers/cache:     162548    3362608
+Swap:       524284          0     524284
+admin@mylinuxvm:~$
+```
+
 ## 高级存储的 I/O 调度算法
 
 随着 2.6.18 Linux 内核的推出，默认 I/O 调度算法已从 Deadline 更改为 CFQ（完全公平的队列算法）。对于随机访问 I/O 模式，CFQ 与 Deadline 之间的性能差异可忽略不计。对于磁盘 I/O 模式以循序为主的基于 SSD 的磁盘，切换回到 NOOP 或 Deadline 算法可以实现更好的 I/O 性能。
@@ -79,37 +81,48 @@ ms.author: rclaus
 
 请使用以下命令：
 
-    admin@mylinuxvm:~# cat /sys/block/sda/queue/scheduler
+```
+admin@mylinuxvm:~# cat /sys/block/sda/queue/scheduler
+```
 
 你将看到以下输出，指示当前的计划程序。
 
-    noop [deadline] cfq
+```
+noop [deadline] cfq
+```
 
 ###更改当前设备 (/dev/sda) 的 I/O 计划算法
 
 使用以下命令：
 
-    azureuser@mylinuxvm:~$ sudo su -
-    root@mylinuxvm:~# echo "noop" >/sys/block/sda/queue/scheduler
-    root@mylinuxvm:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
-    root@mylinuxvm:~# update-grub
+```
+azureuser@mylinuxvm:~$ sudo su -
+root@mylinuxvm:~# echo "noop" >/sys/block/sda/queue/scheduler
+root@mylinuxvm:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
+root@mylinuxvm:~# update-grub
+```
 
->[!NOTE] 对 /dev/sda 单独进行此设置毫无用处。需要在循序 I/O 是主导的 I/O 模式的所有数据磁盘上设置此项。
+>[!NOTE]
+> 对 /dev/sda 单独进行此设置毫无用处。需要在循序 I/O 是主导的 I/O 模式的所有数据磁盘上设置此项。
 
 你应该会看到以下输出，指示已成功重新生成 grub.cfg 并且默认计划程序已更新为 NOOP。
 
-    Generating grub configuration file ...
-    Found linux image: /boot/vmlinuz-3.13.0-34-generic
-    Found initrd image: /boot/initrd.img-3.13.0-34-generic
-    Found linux image: /boot/vmlinuz-3.13.0-32-generic
-    Found initrd image: /boot/initrd.img-3.13.0-32-generic
-    Found memtest86+ image: /memtest86+.elf
-    Found memtest86+ image: /memtest86+.bin
-    done
+```
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.13.0-34-generic
+Found initrd image: /boot/initrd.img-3.13.0-34-generic
+Found linux image: /boot/vmlinuz-3.13.0-32-generic
+Found initrd image: /boot/initrd.img-3.13.0-32-generic
+Found memtest86+ image: /memtest86+.elf
+Found memtest86+ image: /memtest86+.bin
+done
+```
 
 对于 Redhat 系列分发版本，只需以下命令：
 
-    echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
+```
+echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
+```
 
 ## 使用软件 RAID 来实现更高的 I/Ops
 

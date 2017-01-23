@@ -20,7 +20,8 @@ ms.author: szark
 
 #Azure 认可的分发中的 Linux
 
-> [!NOTE] 如果有时间，请参加这个有关体验的[快速调查](https://aka.ms/linuxdocsurvey)，帮助我们改进 Azure Linux VM 文档。每个回答都将帮助我们帮助你完成工作。
+> [!NOTE]
+> 如果有时间，请参加这个有关体验的[快速调查](https://aka.ms/linuxdocsurvey)，帮助我们改进 Azure Linux VM 文档。每个回答都将帮助我们帮助你完成工作。
 
 Azure 库或应用商店中的 Linux 映像由很多合作伙伴提供，并且我们正在与各个 Linux 社区合作，以便向“认可的分发”列表添加更多风格。在此期间，对于该库未提供的分发，你始终可以按照[本页](./virtual-machines-linux-classic-create-upload-vhd.md)中的指南自备 Linux。
 

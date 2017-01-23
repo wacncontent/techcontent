@@ -38,17 +38,22 @@ ms.author: larryfr
 
 ##<a id="curl"></a>使用 Curl 运行 Pig 作业
 
-> [!NOTE] 使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集的管理员用户名和密码对请求进行身份验证。此外，还必须使用群集名称作为用来向服务器发送请求的统一资源标识符 (URI) 的一部分。
+> [!NOTE]
+> 使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集的管理员用户名和密码对请求进行身份验证。此外，还必须使用群集名称作为用来向服务器发送请求的统一资源标识符 (URI) 的一部分。
 ><p> 对于本部分中的命令，请将 **USERNAME** 替换为对群集进行身份验证的用户，并将 **PASSWORD** 替换为用户帐户的密码。将 **CLUSTERNAME** 替换为群集名称。
 ><p> REST API 通过[基本访问身份验证](http://en.wikipedia.org/wiki/Basic_access_authentication)进行保护。你始终应该使用安全 HTTP (HTTPS) 发出请求，以帮助确保安全地将凭据发送到服务器。
 
 1. 在命令行中，使用以下命令验证是否可以连接到 HDInsight 群集。
 
-        curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/status
+    ```
+    curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/status
+    ```
 
     你应会收到类似于下面的响应：
 
-        {"status":"ok","version":"v1"}
+    ```
+    {"status":"ok","version":"v1"}
+    ```
 
     此命令中使用的参数如下：
 
@@ -59,7 +64,9 @@ ms.author: larryfr
 
 2. 使用以下代码将 Pig Latin 作业提交到群集：
 
-        curl -u USERNAME:PASSWORD -d user.name=USERNAME -d execute="LOGS=LOAD+'wasbs:///example/data/sample.log';LEVELS=foreach+LOGS+generate+REGEX_EXTRACT($0,'(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)',1)+as+LOGLEVEL;FILTEREDLEVELS=FILTER+LEVELS+by+LOGLEVEL+is+not+null;GROUPEDLEVELS=GROUP+FILTEREDLEVELS+by+LOGLEVEL;FREQUENCIES=foreach+GROUPEDLEVELS+generate+group+as+LOGLEVEL,COUNT(FILTEREDLEVELS.LOGLEVEL)+as+count;RESULT=order+FREQUENCIES+by+COUNT+desc;DUMP+RESULT;" -d statusdir="wasbs:///example/pigcurl" https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/pig
+    ```
+    curl -u USERNAME:PASSWORD -d user.name=USERNAME -d execute="LOGS=LOAD+'wasbs:///example/data/sample.log';LEVELS=foreach+LOGS+generate+REGEX_EXTRACT($0,'(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)',1)+as+LOGLEVEL;FILTEREDLEVELS=FILTER+LEVELS+by+LOGLEVEL+is+not+null;GROUPEDLEVELS=GROUP+FILTEREDLEVELS+by+LOGLEVEL;FREQUENCIES=foreach+GROUPEDLEVELS+generate+group+as+LOGLEVEL,COUNT(FILTEREDLEVELS.LOGLEVEL)+as+count;RESULT=order+FREQUENCIES+by+COUNT+desc;DUMP+RESULT;" -d statusdir="wasbs:///example/pigcurl" https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/pig
+    ```
 
     此命令中使用的参数如下：
 
@@ -69,19 +76,25 @@ ms.author: larryfr
         * **execute**：要执行的 Pig Latin 语句
         * **statusdir**：此作业的状态要写入到的目录
 
-    > [!NOTE] 请注意，在与 Curl 配合使用时，将使用 `+` 字符替换 Pig Latin 语句中的空格。
+    > [!NOTE]
+    > 请注意，在与 Curl 配合使用时，将使用 `+` 字符替换 Pig Latin 语句中的空格。
 
     此命令应返回可用来检查作业状态的作业 ID，例如：
 
-        {"id":"job_1415651640909_0026"}
+    ```
+    {"id":"job_1415651640909_0026"}
+    ```
 
 3. 若要检查作业的状态，请使用以下命令。将 **JOBID** 替换为上一步骤返回的值。例如，如果返回值为 `{"id":"job_1415651640909_0026"}`，则 **JOBID** 将是 `job_1415651640909_0026`。
 
-        curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
+    ```
+    curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
+    ```
 
     如果作业已完成，状态将是 **SUCCEEDED**。
 
-    > [!NOTE] 此 Curl 请求返回具有作业相关信息的 JavaScript 对象表示法 (JSON) 文档；使用 jq 可以仅检索状态值。
+    > [!NOTE]
+    > 此 Curl 请求返回具有作业相关信息的 JavaScript 对象表示法 (JSON) 文档；使用 jq 可以仅检索状态值。
 
 ##<a id="results"></a>查看结果
 
@@ -89,13 +102,18 @@ ms.author: larryfr
 
 可以使用 [Azure CLI](../xplat-cli-install.md) 列出并下载这些文件。例如，若要列出 **example/pigcurl** 中的文件，请使用以下命令：
 
-    azure storage blob list <container-name> example/pigcurl
+```
+azure storage blob list <container-name> example/pigcurl
+```
 
 若要下载文件，请使用以下命令：
 
-    azure storage blob download <container-name> <blob-name> <destination-file>
+```
+azure storage blob download <container-name> <blob-name> <destination-file>
+```
 
-> [!NOTE] 你必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。
+> [!NOTE]
+> 你必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。
 
 ##<a id="summary"></a>摘要
 

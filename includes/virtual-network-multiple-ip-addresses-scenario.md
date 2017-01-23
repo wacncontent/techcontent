@@ -4,7 +4,7 @@
 * **IPConfig-1：**分配一个*动态*专用 IP 地址（默认）和一个*静态*公共 IP 地址。
 * **IPConfig-2：**分配一个*静态*专用 IP 地址和一个*静态*公共 IP 地址。
 * **IPConfig-3：**分配一个*动态*专用 IP 地址，不分配公共 IP 地址。
-  
+
     ![多个 IP 地址](./media/virtual-network-multiple-ip-addresses-scenario/OneNIC-3IP.png)  
 
 IP 配置在创建 NIC 时关联到 NIC，NIC 在创建 VM 时附加到 VM。本方案使用的 IP 地址类型用于演示目的。可分配需要的任何 IP 地址和分配类型。

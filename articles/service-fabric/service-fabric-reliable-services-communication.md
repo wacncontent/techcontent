@@ -26,38 +26,44 @@ ms.author: vturecek
 
 Reliable Services API 为服务通信使用一个简单的接口。若要打开服务的终结点，只需实现此接口即可：
 
-    public interface ICommunicationListener
-    {
-        Task<string> OpenAsync(CancellationToken cancellationToken);
+```
+public interface ICommunicationListener
+{
+    Task<string> OpenAsync(CancellationToken cancellationToken);
 
-        Task CloseAsync(CancellationToken cancellationToken);
+    Task CloseAsync(CancellationToken cancellationToken);
 
-        void Abort();
-    }
+    void Abort();
+}
+```
 
 然后，可以通过在基于服务的类方法重写中返回通信侦听器实现来添加该实现。
 
 对于无状态服务：
 
-    class MyStatelessService : StatelessService
+```
+class MyStatelessService : StatelessService
+{
+    protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
     {
-        protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
-        {
-            ...
-        }
         ...
     }
+    ...
+}
+```
 
 对于有状态服务：
 
-    class MyStatefulService : StatefulService
+```
+class MyStatefulService : StatefulService
+{
+    protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
     {
-        protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
-        {
-            ...
-        }
         ...
     }
+    ...
+}
+```
 
 在这两种情况下，都将返回侦听器的集合。这可让你的服务通过多个侦听器，可能使用不同的协议在多个终结点上侦听。例如，你可能有一个 HTTP 侦听器和一个单独的 WebSocket 侦听器。客户端请求服务实例或分区的侦听地址时，每个侦听器会获取一个名称，生成的*名称 : 地址*对集合以 JSON 对象的形式表示。
 
@@ -65,64 +71,75 @@ Reliable Services API 为服务通信使用一个简单的接口。若要打开�
 
 例如，你可以创建一个只在主副本上接受 RPC 调用的 ServiceRemotingListener，并创建另一个可通过 HTTP 在辅助副本上接受读取请求的自定义侦听器：
 
-    protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
+```
+protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
+{
+    return new[]
     {
-        return new[]
-        {
-            new ServiceReplicaListener(context =>
-                new MyCustomHttpListener(context),
-                "HTTPReadonlyEndpoint",
-                true),
+        new ServiceReplicaListener(context =>
+            new MyCustomHttpListener(context),
+            "HTTPReadonlyEndpoint",
+            true),
 
-            new ServiceReplicaListener(context =>
-                this.CreateServiceRemotingListener(context),
-                "rpcPrimaryEndpoint",
-                false)
-        };
-    }
+        new ServiceReplicaListener(context =>
+            this.CreateServiceRemotingListener(context),
+            "rpcPrimaryEndpoint",
+            false)
+    };
+}
+```
 
-> [!NOTE] 为一个服务创建多个侦听器时，**必须**为每个侦听器指定一个唯一名称。
+> [!NOTE]
+> 为一个服务创建多个侦听器时，**必须**为每个侦听器指定一个唯一名称。
 
 最后，在[服务清单](./service-fabric-application-model.md)中有关终结点的部分下面描述服务所需的终结点。
 
-    <Resources>
-        <Endpoints>
-          <Endpoint Name="WebServiceEndpoint" Protocol="http" Port="80" />
-          <Endpoint Name="OtherServiceEndpoint" Protocol="tcp" Port="8505" />
-        <Endpoints>
-    </Resources>
+```
+<Resources>
+    <Endpoints>
+      <Endpoint Name="WebServiceEndpoint" Protocol="http" Port="80" />
+      <Endpoint Name="OtherServiceEndpoint" Protocol="tcp" Port="8505" />
+    <Endpoints>
+</Resources>
+```
 
 通信侦听器可以从 `ServiceContext` 中的 `CodePackageActivationContext` 访问分配给它的终结点资源。然后侦听器在打开时开始侦听请求。
 
-    var codePackageActivationContext = serviceContext.CodePackageActivationContext;
-    var port = codePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;
+```
+var codePackageActivationContext = serviceContext.CodePackageActivationContext;
+var port = codePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;
+```
 
-> [!NOTE] 终结点资源对于整个服务包是通用的，由 Service Fabric 在激活服务包时分配。托管在同一 ServiceHost 中的多个服务副本可能共享同一个端口。这意味着通信侦听器应支持端口共享。实现此目标的一种推荐方法是通信侦听器在生成侦听地址时使用分区 ID 和副本/实例 ID。
+> [!NOTE]
+> 终结点资源对于整个服务包是通用的，由 Service Fabric 在激活服务包时分配。托管在同一 ServiceHost 中的多个服务副本可能共享同一个端口。这意味着通信侦听器应支持端口共享。实现此目标的一种推荐方法是通信侦听器在生成侦听地址时使用分区 ID 和副本/实例 ID。
 
 ### 服务地址注册
 名为*命名服务*的系统服务在 Service Fabric 群集上运行。命名服务是服务及其地址（服务的每个实例或副本正在其上侦听）的注册机构。`ICommunicationListener` 的 `OpenAsync` 方法完成时，它的返回值会在命名服务中注册。这个在命名服务中发布的返回值是一个字符串，其值完全可以是任何内容。此字符串值是客户端向命名服务请求服务的地址时将看到的内容。
 
-    public Task<string> OpenAsync(CancellationToken cancellationToken)
-    {
-        EndpointResourceDescription serviceEndpoint = serviceContext.CodePackageActivationContext.GetEndpoint("ServiceEndpoint");
-        int port = serviceEndpoint.Port;
+```
+public Task<string> OpenAsync(CancellationToken cancellationToken)
+{
+    EndpointResourceDescription serviceEndpoint = serviceContext.CodePackageActivationContext.GetEndpoint("ServiceEndpoint");
+    int port = serviceEndpoint.Port;
 
-        this.listeningAddress = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "http://+:{0}/",
-                    port);
-                        
-        this.publishAddress = this.listeningAddress.Replace("+", FabricRuntime.GetNodeContext().IPAddressOrFQDN);
-            
-        this.webApp = WebApp.Start(this.listeningAddress, appBuilder => this.startup.Invoke(appBuilder));
-    
-        // the string returned here will be published in the Naming Service.
-        return Task.FromResult(this.publishAddress);
-    }
+    this.listeningAddress = string.Format(
+                CultureInfo.InvariantCulture,
+                "http://+:{0}/",
+                port);
+
+    this.publishAddress = this.listeningAddress.Replace("+", FabricRuntime.GetNodeContext().IPAddressOrFQDN);
+
+    this.webApp = WebApp.Start(this.listeningAddress, appBuilder => this.startup.Invoke(appBuilder));
+
+    // the string returned here will be published in the Naming Service.
+    return Task.FromResult(this.publishAddress);
+}
+```
 
 Service Fabric 提供了许多 API，使客户端和其他服务随后可以通过服务名称请求此地址。这一点很重要，因为服务地址不是静态的。服务为了资源平衡和可用性目的在群集中移动。这是允许客户端为服务解析侦听地址的机制。
 
-> [!NOTE] 有关如何编写 `ICommunicationListener` 的完整演练，请参阅 [Service Fabric Web API 服务与 OWIN 自托管](./service-fabric-reliable-services-communication-webapi.md)
+> [!NOTE]
+> 有关如何编写 `ICommunicationListener` 的完整演练，请参阅 [Service Fabric Web API 服务与 OWIN 自托管](./service-fabric-reliable-services-communication-webapi.md)
 
 ## 与服务通信
 Reliable Services API 提供以下库来编写与服务通信的客户端。
@@ -132,26 +149,36 @@ Reliable Services API 提供以下库来编写与服务通信的客户端。
 
 若要连接到群集内的服务，可使用默认设置创建 `ServicePartitionResolver`。这是针对大多数情况的建议用法：
 
-    ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
+```
+ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
+```
 
 若要连接到其他群集中的服务，可利用一组群集网关终结点来创建 `ServicePartitionResolver`。请注意，网关终结点只是可用来连接到相同群集的不同终结点。例如：
 
-    ServicePartitionResolver resolver = new  ServicePartitionResolver("mycluster.chinacloudapp.cn:19000", "mycluster.chinacloudapp.cn:19001");
+```
+ServicePartitionResolver resolver = new  ServicePartitionResolver("mycluster.chinacloudapp.cn:19000", "mycluster.chinacloudapp.cn:19001");
+```
 
 或者，可为 `ServicePartitionResolver` 指定一个函数来创建 `FabricClient`，以便在内部使用：
- 
-    public delegate FabricClient CreateFabricClientDelegate();
+
+```
+public delegate FabricClient CreateFabricClientDelegate();
+```
 
 `FabricClient` 是用于与 Service Fabric 群集通信，以便在群集上实现各种管理操作的对象。想要更好地控制 `ServicePartitionResolver` 与群集交互的方式时，这非常有用。`FabricClient` 会在内部执行缓存，但创建成本通常很高，因此一定要尽可能重复使用 `FabricClient` 实例。
 
-    ServicePartitionResolver resolver = new  ServicePartitionResolver(() => CreateMyFabricClient());
+```
+ServicePartitionResolver resolver = new  ServicePartitionResolver(() => CreateMyFabricClient());
+```
 
 接下来，使用解析方法来检索服务的地址或已分区服务的服务分区的地址。
 
-    ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
+```
+ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
 
-    ResolvedServicePartition partition =
-        await resolver.ResolveAsync(new Uri("fabric:/MyApp/MyService"), new ServicePartitionKey(), cancellationToken);
+ResolvedServicePartition partition =
+    await resolver.ResolveAsync(new Uri("fabric:/MyApp/MyService"), new ServicePartitionKey(), cancellationToken);
+```
 
 可以使用 `ServicePartitionResolver` 轻松解析服务地址，但需要执行更多操作，才能确保可以正确使用解析的地址。你的客户端必须检测连接尝试是因暂时性错误而失败且可重试（例如，服务已移动或暂时不可用），还是因永久错误而失败（例如，已删除服务或请求的资源不再存在）。服务实例或副本可出于多种原因随时在节点之间移动。通过 `ServicePartitionResolver` 解析的服务地址可能会在客户端代码尝试连接之前过时。再回到这种情况，客户端必须重新解析地址。如果提供先前的 `ResolvedServicePartition`，则表示解析程序需要重试，而不只是检索缓存的地址。
 
@@ -164,35 +191,39 @@ Reliable Services API 提供以下库来编写与服务通信的客户端。
 
 通信客户端只接收地址，并使用它来连接到服务。客户端可以使用它想要的任何协议。
 
-    class MyCommunicationClient : ICommunicationClient
-    {
-        public ResolvedServiceEndpoint Endpoint { get; set; }
+```
+class MyCommunicationClient : ICommunicationClient
+{
+    public ResolvedServiceEndpoint Endpoint { get; set; }
 
-        public string ListenerName { get; set; }
+    public string ListenerName { get; set; }
 
-        public ResolvedServicePartition ResolvedServicePartition { get; set; }
-    }
+    public ResolvedServicePartition ResolvedServicePartition { get; set; }
+}
+```
 
 客户端工厂主要负责创建通信客户端。对于不会维持持续连接的客户端（例如 HTTP 客户端），工厂只需创建并返回客户端。其他会维持持续连接的协议（例如某些二进制协议）也应该由工厂验证，以确定是否需要重新创建连接。
 
-    public class MyCommunicationClientFactory : CommunicationClientFactoryBase<MyCommunicationClient>
+```
+public class MyCommunicationClientFactory : CommunicationClientFactoryBase<MyCommunicationClient>
+{
+    protected override void AbortClient(MyCommunicationClient client)
     {
-        protected override void AbortClient(MyCommunicationClient client)
-        {
-        }
-
-        protected override Task<MyCommunicationClient> CreateClientAsync(string endpoint, CancellationToken cancellationToken)
-        {
-        }
-
-        protected override bool ValidateClient(MyCommunicationClient clientChannel)
-        {
-        }
-
-        protected override bool ValidateClient(string endpoint, MyCommunicationClient client)
-        {
-        }
     }
+
+    protected override Task<MyCommunicationClient> CreateClientAsync(string endpoint, CancellationToken cancellationToken)
+    {
+    }
+
+    protected override bool ValidateClient(MyCommunicationClient clientChannel)
+    {
+    }
+
+    protected override bool ValidateClient(string endpoint, MyCommunicationClient client)
+    {
+    }
+}
+```
 
 最后，异常处理程序负责确定发生异常时要采取的操作。异常分为**可重试**和**不可重试**两种类型。
 
@@ -202,41 +233,45 @@ Reliable Services API 提供以下库来编写与服务通信的客户端。
   - **非暂时性**异常是需要重新解析服务终结点地址的异常。这类异常包括指出无法访问服务终结点（表示服务已移至其他节点）的异常。
 
 `TryHandleException` 针对给定异常做出决定。如果它**不知道**要对异常做出哪些决定，则应返回 **false**。如果它**知道**要做出哪些决定，则应该相应地设置结果并返回 **true**。
- 
-    class MyExceptionHandler : IExceptionHandler
+
+```
+class MyExceptionHandler : IExceptionHandler
+{
+    public bool TryHandleException(ExceptionInformation exceptionInformation, OperationRetrySettings retrySettings, out ExceptionHandlingResult result)
     {
-        public bool TryHandleException(ExceptionInformation exceptionInformation, OperationRetrySettings retrySettings, out ExceptionHandlingResult result)
-        {
-            // if exceptionInformation.Exception is known and is transient (can be retried without re-resolving)
-            result = new ExceptionHandlingRetryResult(exceptionInformation.Exception, true, retrySettings, retrySettings.DefaultMaxRetryCount);
-            return true;
+        // if exceptionInformation.Exception is known and is transient (can be retried without re-resolving)
+        result = new ExceptionHandlingRetryResult(exceptionInformation.Exception, true, retrySettings, retrySettings.DefaultMaxRetryCount);
+        return true;
 
-            // if exceptionInformation.Exception is known and is not transient (indicates a new service endpoint address must be resolved)
-            result = new ExceptionHandlingRetryResult(exceptionInformation.Exception, false, retrySettings, retrySettings.DefaultMaxRetryCount);
-            return true;
+        // if exceptionInformation.Exception is known and is not transient (indicates a new service endpoint address must be resolved)
+        result = new ExceptionHandlingRetryResult(exceptionInformation.Exception, false, retrySettings, retrySettings.DefaultMaxRetryCount);
+        return true;
 
-            // if exceptionInformation.Exception is unknown (let the next IExceptionHandler attempt to handle it)
-            result = null;
-            return false;
-        }
+        // if exceptionInformation.Exception is unknown (let the next IExceptionHandler attempt to handle it)
+        result = null;
+        return false;
     }
+}
+```
 
 ### 汇总
 使用根据通信协议生成的 `ICommunicationClient`、`ICommunicationClientFactory` 和 `IExceptionHandler` 时，`ServicePartitionClient` 会将它全部包装在一起，并为这些组件提供错误处理和服务分区地址解析循环。
 
-    private MyCommunicationClientFactory myCommunicationClientFactory;
-    private Uri myServiceUri;
+```
+private MyCommunicationClientFactory myCommunicationClientFactory;
+private Uri myServiceUri;
 
-    var myServicePartitionClient = new ServicePartitionClient<MyCommunicationClient>(
-        this.myCommunicationClientFactory,
-        this.myServiceUri,
-        myPartitionKey);
+var myServicePartitionClient = new ServicePartitionClient<MyCommunicationClient>(
+    this.myCommunicationClientFactory,
+    this.myServiceUri,
+    myPartitionKey);
 
-    var result = await myServicePartitionClient.InvokeWithRetryAsync(async (client) =>
-       {
-          // Communicate with the service using the client.
-       },
-       CancellationToken.None);
+var result = await myServicePartitionClient.InvokeWithRetryAsync(async (client) =>
+   {
+      // Communicate with the service using the client.
+   },
+   CancellationToken.None);
+```
 
 ## 后续步骤
  - 请参阅 [GitHUb 上的示例项目](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/tree/master/Services/WordCount)中服务之间的 HTTP 通信示例。

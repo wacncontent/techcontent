@@ -25,7 +25,7 @@ ms.author: tomfitz
 - [门户](./resource-group-create-service-principal-portal.md)
 
 当应用程序需要访问或修改资源时，必须设置 Active Directory (AD) 应用程序，并为其分配所需的权限。本主题演示如何通过门户执行这些步骤。重点介绍单租户应用程序，其中应用程序只应在一个组织内运行。通常会将单租户应用程序作为在组织中运行的业务线应用程序使用。
- 
+
 ## <a name="required-permissions"></a> 所需的权限
 为完成本主题，必须具有足够的权限向 Active Directory 注册应用程序，并将应用程序分配到 Azure 订阅中的角色。请确保你拥有适当的权限来执行这些步骤。
 

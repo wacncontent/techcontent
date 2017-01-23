@@ -90,7 +90,8 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 下载文件后，将 **php\_memcache.dll** 解压缩并上传到 **d:\\home\\site\\wwwroot\\bin\\ext\** 目录。将 php\_memcache.dll 上载到 Web 应用后，你需要启用 PHP 运行时的扩展。若要在 Azure 门户预览中启用 Memcache 扩展，请打开 Web 应用的“应用程序设置”边栏选项卡，然后添加密钥为 **PHP\_EXTENSIONS**、值为 **bin\\ext\\php\_memcache.dll** 的新应用设置。
 
-> [!NOTE] 如果 Web 应用需要加载多个 PHP 扩展，则 PHP\_EXTENSIONS 的值应为由逗号分隔的 DLL 文件相对路径的列表。
+> [!NOTE]
+> 如果 Web 应用需要加载多个 PHP 扩展，则 PHP\_EXTENSIONS 的值应为由逗号分隔的 DLL 文件相对路径的列表。
 
 ![Web 应用 AppSetting PHP\_EXTENSIONS](./media/web-sites-connect-to-redis-using-memcache-protocol/9-azure-website-appsettings-php-extensions.png)
 
@@ -98,7 +99,8 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 ## 安装 Memcache WordPress 插件
 
-> [!NOTE] 你也可以从 WordPress.org 下载 [Memcached 对象缓存插件](https://wordpress.org/plugins/memcached/)。
+> [!NOTE]
+> 你也可以从 WordPress.org 下载 [Memcached 对象缓存插件](https://wordpress.org/plugins/memcached/)。
 
 在 WordPress 插件页上，单击“添加新项”。
 
@@ -114,13 +116,16 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 ### 启用 Memcache WordPress 插件
 
->[!NOTE] 按照此博客中关于[如何启用 Web 应用中的站点扩展][8]的说明，安装 Visual Studio Team Services。
+>[!NOTE]
+> 按照此博客中关于[如何启用 Web 应用中的站点扩展][8]的说明，安装 Visual Studio Team Services。
 
 在 `wp-config.php` 文件中，将以下代码添加到该文件末尾附近停止编辑备注的上方。
 
-    $memcached_servers = array(
-        'default' => array('localhost:' . getenv("MEMCACHESHIM_PORT"))
-    );
+```
+$memcached_servers = array(
+    'default' => array('localhost:' . getenv("MEMCACHESHIM_PORT"))
+);
+```
 
 粘贴此代码后，monaco 会自动保存该文档。
 
@@ -138,7 +143,8 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 ### 启用 Azure Redis 缓存中的非 SSL 端口支持
 
->[!NOTE] 撰写本文时，Redis CLI 尚不支持 SSL 连接，因此以下步骤是必需的。
+>[!NOTE]
+> 撰写本文时，Redis CLI 尚不支持 SSL 连接，因此以下步骤是必需的。
 
 在 Azure 门户预览中，浏览到为此 Web 应用创建的 Redis 缓存实例。打开缓存边栏选项卡后，单击“设置”图标。
 
@@ -158,11 +164,14 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 ### 从 redis-cli 连接到 Azure Redis 缓存
 
->[!NOTE] 此步骤假定 redis 已通过本地方式安装在你的开发计算机上。[按以下说明在本地安装 Redis][9]。
+>[!NOTE]
+> 此步骤假定 redis 已通过本地方式安装在你的开发计算机上。[按以下说明在本地安装 Redis][9]。
 
 打开你选择的命令行控制台并键入以下命令：
 
-    redis-cli -h <hostname-for-redis-cache> -a <primary-key-for-redis-cache> -p 6379
+```
+redis-cli -h <hostname-for-redis-cache> -a <primary-key-for-redis-cache> -p 6379
+```
 
 将 **&lt;hostname-for-redis-cache&gt;** 替换为实际的 xxxxx.redis.cache.chinacloudapi.cn 主机名，将 **&lt;primary-key-for-redis-cache&gt;** 替换为缓存的访问密钥，然后按 **Enter**。CLI 连接到 Redis 缓存实例后，发出任何 Redis 命令。在下面的屏幕截图中，我已选择列出密钥。
 

@@ -22,7 +22,8 @@ ms.author: singhkay
 
 本文编录了社区提供的工具，这些工具适用于将 IaaS 资源从 Azure 服务管理迁移到 Azure Resource Manager 堆栈。
 
->[!NOTE]Microsoft 支持服务并不正式支持这些工具。因此 Github 上提供了其开放源代码，我们很乐意接受有关修复或其他方案的 PR。若要报告问题，请使用 Github 问题功能。
+>[!NOTE]
+>Microsoft 支持服务并不正式支持这些工具。因此 Github 上提供了其开放源代码，我们很乐意接受有关修复或其他方案的 PR。若要报告问题，请使用 Github 问题功能。
 >
 > 使用这些工具进行迁移会造成经典虚拟机停机。若要了解平台支持的迁移，请访问
 >

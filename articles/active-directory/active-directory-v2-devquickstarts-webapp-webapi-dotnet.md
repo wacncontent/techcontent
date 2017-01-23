@@ -21,7 +21,7 @@ wacn.date: 12/12/2016
 # 从 .NET Web 应用调用 API
 通过 v2.0 终结点，可以快速地将身份验证添加 Web 应用和 Web API，同时支持个人 Microsoft 帐户以及工作或学校帐户。此外，我们将构建一个借助 Microsoft OWIN 中间件使用 OpenID Connect 将用户登录的 MVC Web 应用。该 Web 应用程序将获取受 OAuth 2.0 保护的 Web API 的 OAuth 2.0 访问令牌，用于创建、读取和删除给定用户的“待办事项列表”。
 
-本教程着重介绍如何通过 MSAL 获取和使用 Web 应用中的访问令牌，在[此处](./active-directory-v2-flows.md#web-apps/)可找到完整介绍。可能必须先了解如何[将基本登录添加到 Web 应用](./active-directory-v2-devquickstarts-dotnet-web.md)，或者如何[正确保护 Web API](./active-directory-v2-devquickstarts-dotnet-api.md)。
+本教程着重介绍如何通过 MSAL 获取和使用 Web 应用中的访问令牌，在[此处](./active-directory-v2-flows.md#web-apps)可找到完整介绍。可能必须先了解如何[将基本登录添加到 Web 应用](./active-directory-v2-devquickstarts-dotnet-web.md)，或者如何[正确保护 Web API](./active-directory-v2-devquickstarts-dotnet-api.md)。
 
 > [!NOTE]
 v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
@@ -29,11 +29,15 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要
 ## 下载示例代码
 本教程的代码[在 GitHub 上](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIdConnect-DotNet)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIdConnect-DotNet/archive/skeleton.zip)，或克隆该骨架：
 
-    git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIdConnect-DotNet.git
+```
+git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIdConnect-DotNet.git
+```
 
 或者，可以[将已完成的应用以 .zip 格式下载](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIdConnect-DotNet/archive/complete.zip)，或克隆已完成的应用：
 
-    git clone --branch complete https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIdConnect-DotNet.git
+```
+git clone --branch complete https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIdConnect-DotNet.git
+```
 
 ## 注册应用程序
 在 [apps.dev.microsoft.com](https://apps.dev.microsoft.com/?referrer=/documentation/articles&deeplink=/appList) 中创建新的应用程序，或遵循以下[详细步骤](./active-directory-v2-app-registration.md)。请确保：
@@ -46,9 +50,11 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要
 ## 安装 OWIN
 使用包管理器控制台将 OWIN 中间件 NuGet 包添加到 `TodoList-WebApp` 项目。OWIN 中间件将用于发出登录和注销请求、管理用户的会话、获取有关用户的信息，等等。
 
-    PM> Install-Package Microsoft.Owin.Security.OpenIdConnect -ProjectName TodoList-WebApp
-    PM> Install-Package Microsoft.Owin.Security.Cookies -ProjectName TodoList-WebApp
-    PM> Install-Package Microsoft.Owin.Host.SystemWeb -ProjectName TodoList-WebApp
+```
+PM> Install-Package Microsoft.Owin.Security.OpenIdConnect -ProjectName TodoList-WebApp
+PM> Install-Package Microsoft.Owin.Security.Cookies -ProjectName TodoList-WebApp
+PM> Install-Package Microsoft.Owin.Host.SystemWeb -ProjectName TodoList-WebApp
+```
 
 ## 登录用户
 现在，我们要将 OWIN 中间件配置为使用 [OpenID Connect 身份验证协议](./active-directory-v2-protocols.md)。
@@ -63,41 +69,43 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要
 
 C#
 
-    public void ConfigureAuth(IAppBuilder app)
-    {
-        app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
-    
-        app.UseCookieAuthentication(new CookieAuthenticationOptions());
-    
-        app.UseOpenIdConnectAuthentication(
-            new OpenIdConnectAuthenticationOptions
-            {
+```
+public void ConfigureAuth(IAppBuilder app)
+{
+    app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
-                        // The `Authority` represents the v2.0 endpoint - https://login.microsoftonline.com/common/v2.0
-                        // The `Scope` describes the permissions that your app will need.  See https://azure.cn/documentation/articles/active-directory-v2-scopes/
-                        // In a real application you could use issuer validation for additional checks, like making sure the user's organization has signed up for your app, for instance.
+    app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
-                        ClientId = clientId,
-                        Authority = String.Format(CultureInfo.InvariantCulture, aadInstance, "common", "/v2.0 "),
-                        Scope = "openid email profile offline_access",
-                        RedirectUri = redirectUri,
-                        PostLogoutRedirectUri = redirectUri,
-                        TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateIssuer = false,
-                        },
+    app.UseOpenIdConnectAuthentication(
+        new OpenIdConnectAuthenticationOptions
+        {
 
-                        // The `AuthorizationCodeReceived` notification is used to capture and redeem the authorization_code that the v2.0 endpoint returns to your app.
+                    // The `Authority` represents the v2.0 endpoint - https://login.microsoftonline.com/common/v2.0
+                    // The `Scope` describes the permissions that your app will need.  See https://azure.cn/documentation/articles/active-directory-v2-scopes/
+                    // In a real application you could use issuer validation for additional checks, like making sure the user's organization has signed up for your app, for instance.
 
-                        Notifications = new OpenIdConnectAuthenticationNotifications
-                        {
-                            AuthenticationFailed = OnAuthenticationFailed,
-                            AuthorizationCodeReceived = OnAuthorizationCodeReceived,
-                        }
+                    ClientId = clientId,
+                    Authority = String.Format(CultureInfo.InvariantCulture, aadInstance, "common", "/v2.0 "),
+                    Scope = "openid email profile offline_access",
+                    RedirectUri = redirectUri,
+                    PostLogoutRedirectUri = redirectUri,
+                    TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                    },
 
-            });
-    }
-    // ...
+                    // The `AuthorizationCodeReceived` notification is used to capture and redeem the authorization_code that the v2.0 endpoint returns to your app.
+
+                    Notifications = new OpenIdConnectAuthenticationNotifications
+                    {
+                        AuthenticationFailed = OnAuthenticationFailed,
+                        AuthorizationCodeReceived = OnAuthorizationCodeReceived,
+                    }
+
+        });
+}
+// ...
+```
 
 ## 使用 MSAL 获取访问令牌
 在 `AuthorizationCodeReceived` 通知中，我们想要使用[与 OpenID Connect 串联的 OAuth 2.0](./active-directory-v2-protocols.md)，以兑换待办事项列表服务的访问令牌的 authorization\_code。MSAL 可以简化此过程：
@@ -111,18 +119,20 @@ C#
 
 C#
 
-    private async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedNotification notification)
-    {
-            string userObjectId = notification.AuthenticationTicket.Identity.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
-            string tenantID = notification.AuthenticationTicket.Identity.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
-            string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenantID, string.Empty);
-            ClientCredential cred = new ClientCredential(clientId, clientSecret);
+```
+private async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedNotification notification)
+{
+        string userObjectId = notification.AuthenticationTicket.Identity.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+        string tenantID = notification.AuthenticationTicket.Identity.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+        string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenantID, string.Empty);
+        ClientCredential cred = new ClientCredential(clientId, clientSecret);
 
-            // Here you ask for a token using the web app's clientId as the scope, since the web app and service share the same clientId.
-            app = new ConfidentialClientApplication(Startup.clientId, redirectUri, cred, new NaiveSessionCache(userObjectId, notification.OwinContext.Environment["System.Web.HttpContextBase"] as HttpContextBase)) {};
-            var authResult = await app.AcquireTokenByAuthorizationCodeAsync(new string[] { clientId }, notification.Code);
-    }
-    // ...
+        // Here you ask for a token using the web app's clientId as the scope, since the web app and service share the same clientId.
+        app = new ConfidentialClientApplication(Startup.clientId, redirectUri, cred, new NaiveSessionCache(userObjectId, notification.OwinContext.Environment["System.Web.HttpContextBase"] as HttpContextBase)) {};
+        var authResult = await app.AcquireTokenByAuthorizationCodeAsync(new string[] { clientId }, notification.Code);
+}
+// ...
+```
 
 - 在 Web 应用中，MSAL 具有可扩展的令牌缓存，可用于存储令牌。此示例实现使用 http 会话存储来缓存令牌的 `NaiveSessionCache`。
 
@@ -132,51 +142,57 @@ C#
 现在可以实际使用在步骤 3 中获取的 access\_token。打开 Web 应用的 `Controllers\TodoListController.cs` 文件，此文件可向待办事项列表 API 发出所有 CRUD 请求。
 
 - 此处可再次使用 MSAL，从 MSAL 缓存检索 access\_tokens。首先，将 MSAL 的 `using` 语句添加到此文件。
-  
+
     `using Microsoft.Identity.Client;`  
 
 - 在 `Index` 操作中，使用 MSAL 的 `AcquireTokenSilentAsync` 方法获取可用于读取待办事项列表服务数据的 access\_token：
 
 C#
 
-    ...
-    string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
-    string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
-    string authority = String.Format(CultureInfo.InvariantCulture, Startup.aadInstance, tenantID, string.Empty);
-    ClientCredential credential = new ClientCredential(Startup.clientId, Startup.clientSecret);
-    
-    // Here you ask for a token using the web app's clientId as the scope, since the web app and service share the same clientId.
-    app = new ConfidentialClientApplication(Startup.clientId, redirectUri, credential, new NaiveSessionCache(userObjectID, this.HttpContext)){};
-    result = await app.AcquireTokenSilentAsync(new string[] { Startup.clientId });
-    // ...
+```
+...
+string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+string authority = String.Format(CultureInfo.InvariantCulture, Startup.aadInstance, tenantID, string.Empty);
+ClientCredential credential = new ClientCredential(Startup.clientId, Startup.clientSecret);
+
+// Here you ask for a token using the web app's clientId as the scope, since the web app and service share the same clientId.
+app = new ConfidentialClientApplication(Startup.clientId, redirectUri, credential, new NaiveSessionCache(userObjectID, this.HttpContext)){};
+result = await app.AcquireTokenSilentAsync(new string[] { Startup.clientId });
+// ...
+```
 
 - 此示例接下来将生成的令牌添加到 HTTP GET 请求作为 `Authorization` 标头，让待办事项列表服务用于身份验证请求。
 - 如果待办事项列表服务返回 `401 Unauthorized` 响应，则表示 MSAL 的 access\_tokens 由于某种原因而失效。在此情况下，你应该删除所有来自 MSAL 缓存的 access\_tokens，并向用户显示消息告知可能需要再次登录，而这会重新启动令牌获取流。
 
 C#
 
-    // ...
-    // If the call failed with access denied, then drop the current access token from the cache,
-    // and show the user an error indicating they might need to sign-in again.
-    if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-    {
-            app.AppTokenCache.Clear(Startup.clientId);
+```
+// ...
+// If the call failed with access denied, then drop the current access token from the cache,
+// and show the user an error indicating they might need to sign-in again.
+if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+{
+        app.AppTokenCache.Clear(Startup.clientId);
 
-            return new RedirectResult("/Error?message=Error: " + response.ReasonPhrase + " You might need to sign in again.");
-    }
-    // ...
+        return new RedirectResult("/Error?message=Error: " + response.ReasonPhrase + " You might need to sign in again.");
+}
+// ...
+```
 
 - 同样，如果 MSAL 由于任何原因而无法返回 access\_token，则应再次指示用户登录。这就像获取任何 `MSALException` 一样简单：
 
 C#
 
-    // ...
-    catch (MsalException ee)
-    {
-            // If MSAL could not get a token silently, show the user an error indicating they might need to sign in again.
-            return new RedirectResult("/Error?message=An Error Occurred Reading To Do List: " + ee.Message + " You might need to log out and log back in.");
-    }
-    // ...
+```
+// ...
+catch (MsalException ee)
+{
+        // If MSAL could not get a token silently, show the user an error indicating they might need to sign in again.
+        return new RedirectResult("/Error?message=An Error Occurred Reading To Do List: " + ee.Message + " You might need to log out and log back in.");
+}
+// ...
+```
 
 - 完全一样的 `AcquireTokenSilentAsync` 调用在 `Create` 和 `Delete` 操作中实现。在 Web 应用中，只要应用程序有需要，就可以使用此 MSAL 方法获取 access\_tokens。MSAL 将为用户获取、缓存和刷新令牌。
 

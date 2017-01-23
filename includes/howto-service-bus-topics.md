@@ -29,7 +29,8 @@
 
 5.  在确保命名空间名称可用后，选择应承载您的命名空间的国家或地区（确保使用在其中部署计算资源的同一国家/地区）。
 
-    > [!IMPORTANT] 选取要选择用于部署应用程序的**相同区域**。这将为你提供最佳性能。
+    > [!IMPORTANT]
+    > 选取要选择用于部署应用程序的**相同区域**。这将为你提供最佳性能。
 
 6. 	将对话框中的其他字段保留其默认值（“消息传送”和“标准层”），然后单击“确定”复选标记。系统现已创建命名空间并已将其启用。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
 
@@ -60,7 +61,7 @@
   [2]: ./media/howto-service-bus-topics/sb-queues-04.png
   [3]: ./media/howto-service-bus-topics/sb-queues-09.png
   [4]: ./media/howto-service-bus-topics/sb-queues-06.png
-  
+
   [6]: ./media/howto-service-bus-topics/getting-started-multi-tier-27.png
 
 <!---HONumber=82-->

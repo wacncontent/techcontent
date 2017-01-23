@@ -45,7 +45,8 @@ ms.author: glenga
 
 3. 在 Visual Studio 2013 中，打开 *mobile-services-samples\\TodoOffline\\WindowsUniversal\\TodoOffline-Universal.sln* 解决方案文件。按 **F5** 键重新生成并运行项目。验证是否还原了 NuGet 包以及是否正确设置了引用。
 
-    >[!NOTE]可能需要删除对 SQLite 运行时的任何旧引用，并将其替换为已更新的引用（如[脱机数据入门]教程中所述）。
+    >[!NOTE]
+    >可能需要删除对 SQLite 运行时的任何旧引用，并将其替换为已更新的引用（如[脱机数据入门]教程中所述）。
 
 4. 在应用中，在“插入 TodoItem”中键入一些文本，然后单击“保存”将某些 todo 项添加到本地存储中。然后关闭应用程序。
 
@@ -59,10 +60,12 @@ ms.author: glenga
 
 2. 在 Visual Studio 的解决方案资源管理器中，打开客户端示例项目中的 App.xaml.cs 文件。更改 **MobileServiceClient** 的初始化以使用你的移动服务 URL 和应用程序密钥：
 
-         public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://your-mobile-service.azure-mobile.net/",
-            "Your AppKey"
-        );
+    ```
+     public static MobileServiceClient MobileService = new MobileServiceClient(
+        "https://your-mobile-service.azure-mobile.net/",
+        "Your AppKey"
+    );
+    ```
 
 3. 在 Visual Studio 中，按 **F5** 键重新生成并运行应用。
 
@@ -72,18 +75,19 @@ ms.author: glenga
 
 在实际情况中，当一个应用程序将更新推送到数据库中的一条记录，然后另一个应用程序尝试使用该记录中过时的版本字段将更新推送到同一条记录时，会发生同步冲突。如[脱机数据入门]中所述，要支持脱机同步功能需要版本系统属性。通过每次数据库更新检查此版本信息。如果应用的实例尝试使用过时版本更新记录，则将发生冲突，并且会在应用中捕获为 `MobileServicePreconditionFailedException`。如果应用未捕获 `MobileServicePreconditionFailedException`，则最终将引发 `MobileServicePushFailedException`，描述遇到了多少同步错误。
 
->[!NOTE]若要通过脱机数据同步支持同步已删除的记录，应启用“[软删除](./mobile-services-using-soft-delete.md)”。否则，必须手动删除本地存储中的记录，或者调用 `IMobileServiceSyncTable::PurgeAsync()` 以清除本地存储。
+>[!NOTE]
+>若要通过脱机数据同步支持同步已删除的记录，应启用“[软删除](./mobile-services-using-soft-delete.md)”。否则，必须手动删除本地存储中的记录，或者调用 `IMobileServiceSyncTable::PurgeAsync()` 以清除本地存储。
 
 下面的步骤演示使用示例同时运行 Windows Phone 8.1 和 Windows 应用商店 8.1 客户端以引发冲突并解决冲突。
 
 1. 在 Visual Studio 中，右键单击 Windows Phone 8.1 项目，然后单击“设为启动项目”。然后按 **Ctrl+F5** 键以运行 Windows Phone 8.1 客户端而不进行调试。在模拟器中运行 Windows Phone 8.1 客户端之后，单击“拉取”按钮将本地存储与数据库的当前状态同步。
- 
+
     ![][3]
- 
+
 2. 在 Visual Studio 中，右键单击 Windows 8.1 运行时项目，然后单击“设为启动项目”以将其重设为启动项目。然后按 **F5** 运行该项目。在运行 Windows 应用商店 8.1 客户端之后，单击“拉取”按钮将本地存储与数据库的当前状态同步。
 
     ![][4]
- 
+
 3. 此时，两个客户端都将与数据库同步。这两个客户端的代码还使用增量同步，以便仅同步不完整的 todo 项。已完成的 todo 项将被忽略。选择其中的一个项，并在两个客户端中将同一个项的文本编辑为不同的值。单击“推送”按钮将这两个更改与服务器上的数据库同步。
 
     ![][5]
@@ -98,26 +102,34 @@ ms.author: glenga
 
 若要使用移动服务脱机功能，必须在本地数据库和数据传输对象中都包括版本列。这是通过更新 `TodoItem` 类的以下成员实现的：
 
-        [Version]
-        public string Version { get; set; }
+```
+    [Version]
+    public string Version { get; set; }
+```
 
 当使用 `TodoItem` 类来定义本地存储时，`__version` 列包括在本地数据库的 `OnNavigatedTo()` 方法中。
 
 若要使用代码处理脱机同步冲突，请创建一个实现 `IMobileServiceSyncHandler` 的类。调用 `MobileServiceClient.SyncContext.InitializeAsync()` 时传递这种类型的对象。在示例的 `OnNavigatedTo()` 方法中也会发生这种情况。
 
-     await App.MobileService.SyncContext.InitializeAsync(store, new SyncHandler(App.MobileService));
+```
+ await App.MobileService.SyncContext.InitializeAsync(store, new SyncHandler(App.MobileService));
+```
 
 **SyncHandler.cs** 中的类 `SyncHandler` 实现了 `IMobileServiceSyncHandler`。将每个推送操作发送到服务器时均调用 `ExecuteTableOperationAsync` 方法。如果引发了 `MobileServicePreconditionFailedException` 类型的异常，则意味着某个项目的本地版本和远程版本之间存在冲突。
 
 若要在解决冲突时考虑到本地项目，则只需重试该操作。发生冲突后，需更新本地项目版本，使之与服务器版本匹配，因此重新执行该操作将使用本地更改覆盖服务器更改：
 
-    await operation.ExecuteAsync(); 
+```
+await operation.ExecuteAsync(); 
+```
 
 若要在解决冲突时考虑到服务器项目，则只需从 `ExecuteTableOperationAsync` 返回。将放弃该对象的本地版本，将其替换为服务器中的值。
 
 若要停止推送操作（但保留已排队的更改），请使用方法 `AbortPush()`：
 
-    operation.AbortPush();
+```
+operation.AbortPush();
+```
 
 这将停止当前的推送操作，但会保留所有挂起的更改，包括当前操作（如果从 `ExecuteTableOperationAsync` 调用了 `AbortPush`）。下次调用 `PushAsync()` 时，这些更改将发送到服务器。
 

@@ -58,11 +58,11 @@ SSO 是通过 AAD Connect 启用的一项功能，该功能用于密码哈希同
 
 首先，用户尝试访问资源。资源可以是一台计算机或一个 URL。就 Azure AD 而言，它是服务的 URL，如 SharePoint online，下面将其描述为“Azure AD 资源”。
 
-1.	Azure AD 资源通过“401 未授权”响应质询客户端，以提供 Kerberos 票证。
-2.	客户端为 Azure AD 资源从 Active Directory 请求票证。
-3.	Active Directory 定位与 Azure AD 资源关联的计算机帐户，并将使用此计算机帐户的密码加密的 Kerberos 票证返回给客户端。此票证包括当前登录到此计算机的用户的标识。
-4.	客户端将其从 Active Directory 获取的 Kerberos 票证发送到 Azure AD。
-5.	Azure AD 使用以前共享的密钥解密 Kerberos 票证，然后向用户返回令牌或要求用户提供其他证明，例如资源所需的多重身份验证。
+1. Azure AD 资源通过“401 未授权”响应质询客户端，以提供 Kerberos 票证。
+2. 客户端为 Azure AD 资源从 Active Directory 请求票证。
+3. Active Directory 定位与 Azure AD 资源关联的计算机帐户，并将使用此计算机帐户的密码加密的 Kerberos 票证返回给客户端。此票证包括当前登录到此计算机的用户的标识。
+4. 客户端将其从 Active Directory 获取的 Kerberos 票证发送到 Azure AD。
+5. Azure AD 使用以前共享的密钥解密 Kerberos 票证，然后向用户返回令牌或要求用户提供其他证明，例如资源所需的多重身份验证。
 
 单一登录是机会性功能，这表示如果因为某些原因无法使用该功能，用户只需和平常一样在登录页输入密码。
 
@@ -84,21 +84,23 @@ Azure AD Connect 提供了简单的过程来为直通身份验证或密码哈希
 
 由于用于 Azure AD 中的单一登录的 URL 包含句点，它们是全局可路由的主机名，因此需要将它们显式添加到计算机的 Intranet 区域，以便浏览器将当前已登录的用户的凭据以 Kerberos 票证的形式自动发送到 Azure AD。将所需的 URL 添加到 Intranet 区域的最简单方法是仅在 Active Directory 中创建组策略。
 
-1.	打开组策略管理工具
-2.	编辑将应用于所有用户的组策略。例如，默认域策略。
-3.	导航到“用户配置\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”。
+1. 打开组策略管理工具
+2. 编辑将应用于所有用户的组策略。例如，默认域策略。
+3. 导航到“用户配置\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”。
 ![单一登录](./media/active-directory-aadconnect-sso/sso6.png)</br>
-4.	启用策略，并在对话框中输入以下值/数据。</br>
-        
-        Value: https://autologon.microsoftazuread-sso.com
-        Data: 1
-        Value: https://aadg.chinacloudapi.cn.nsatc.net 
-        Data: 1'
-5.	如下图所示：
+4. 启用策略，并在对话框中输入以下值/数据。</br>
+
+    ```
+    Value: https://autologon.microsoftazuread-sso.com
+    Data: 1
+    Value: https://aadg.chinacloudapi.cn.nsatc.net 
+    Data: 1'
+    ```
+5. 如下图所示：
 
     ![单一登录](./media/active-directory-aadconnect-sso/sso7.png)  
 
-6.	请单击两次“确定”。
+6. 请单击两次“确定”。
 
 现在已为用户准备好单一登录。
 
@@ -108,21 +110,23 @@ Azure AD Connect 提供了简单的过程来为直通身份验证或密码哈希
 ## 单一登录故障排除
 请务必确保客户端正确配置单一登录，其中包括：
 
-1.	在 Intranet 区域内定义了 https://autologon.microsoftazuread-sso.com 和 https://aadg.chinacloudapi.cn.nsatc.net。
-2.	确保工作站加入到域。
-3.	确保用户使用域帐户登录。
-4.	请确保计算机已连接到公司网络
-5.	确保计算机的时间与 Active Directory 同步，并且域控制器时间与正确时间的误差在 5 分钟内。
+1. 在 Intranet 区域内定义了 https://autologon.microsoftazuread-sso.com 和 https://aadg.chinacloudapi.cn.nsatc.net。
+2. 确保工作站加入到域。
+3. 确保用户使用域帐户登录。
+4. 请确保计算机已连接到公司网络
+5. 确保计算机的时间与 Active Directory 同步，并且域控制器时间与正确时间的误差在 5 分钟内。
 
 如果能够确认上述要求，则可以查看浏览器的控制台日志以了解其他信息。可以在开发人员工具下找到控制台日志。该日志有助于确定潜在问题。
 
 ## 事件日志条目
 如果启用了正确的审核功能，那么用户每次使用单一登录登录时，就会在域控制器的事件日志中记录一个条目。若要查找这些事件，可以查看与计算机帐户 AzureADSSOAcc$ 关联的安全性事件 4769 的事件日志。下面的筛选器查找与此计算机帐户关联的所有安全性事件：
 
-    <QueryList>
-      <Query Id="0" Path="Security">
-    <Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
-      </Query>
-    </QueryList>
+```
+<QueryList>
+  <Query Id="0" Path="Security">
+<Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
+  </Query>
+</QueryList>
+```
 
 <!---HONumber=Mooncake_1226_2016-->

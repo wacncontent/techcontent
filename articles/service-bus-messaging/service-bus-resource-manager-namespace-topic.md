@@ -25,7 +25,8 @@ wacn.date: 12/26/2016
 
 有关完整的模板，请参阅[包含主题和订阅的服务总线命名空间][]模板。
 
->[!NOTE] 以下 Azure Resource Manager 模板可供下载和部署。
+>[!NOTE]
+> 以下 Azure Resource Manager 模板可供下载和部署。
 > 
 > -  [创建服务总线命名空间](./service-bus-resource-manager-namespace.md)
 > -  [创建包含队列的服务总线命名空间](./service-bus-resource-manager-namespace-queue.md)
@@ -52,68 +53,78 @@ wacn.date: 12/26/2016
 
 要创建的服务总线命名空间的名称。
 
-        "serviceBusNamespaceName": {
-        "type": "string"
-        }
+```
+    "serviceBusNamespaceName": {
+    "type": "string"
+    }
+```
 
 ### serviceBusTopicName
 
 在服务总线命名空间中创建的主题的名称。
 
-        "serviceBusTopicName": {
-        "type": "string"
-        }
+```
+    "serviceBusTopicName": {
+    "type": "string"
+    }
+```
 
 ### serviceBusSubscriptionName
 
 在服务总线命名空间中创建的订阅的名称。
 
-        "serviceBusSubscriptionName": {
-        "type": "string"
-        }
+```
+    "serviceBusSubscriptionName": {
+    "type": "string"
+    }
+```
 
 ### serviceBusApiVersion
 
 模板的服务总线 API 版本。
 
-        "serviceBusApiVersion": {
-        "type": "string"
-        }
+```
+    "serviceBusApiVersion": {
+    "type": "string"
+    }
+```
 ## 要部署的资源
 
 创建类型为 **Messaging** 的包含主题和订阅的标准服务总线命名空间。
 
-        "resources ": [{
+```
+    "resources ": [{
+            "apiVersion": "[variables('sbVersion')]",
+            "name": "[parameters('serviceBusNamespaceName')]",
+            "type": "Microsoft.ServiceBus/Namespaces",
+            "location": "[variables('location')]",
+            "kind": "Messaging",
+            "sku": {
+                "name": "StandardSku",
+                "tier": "Standard"
+            },
+            "resources": [{
                 "apiVersion": "[variables('sbVersion')]",
-                "name": "[parameters('serviceBusNamespaceName')]",
-                "type": "Microsoft.ServiceBus/Namespaces",
-                "location": "[variables('location')]",
-                "kind": "Messaging",
-                "sku": {
-                    "name": "StandardSku",
-                    "tier": "Standard"
+                "name": "[parameters('serviceBusTopicName')]",
+                "type": "Topics",
+                "dependsOn": [
+                    "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
+                ],
+                "properties": {
+                    "path": "[parameters('serviceBusTopicName')]",
                 },
                 "resources": [{
                     "apiVersion": "[variables('sbVersion')]",
-                    "name": "[parameters('serviceBusTopicName')]",
-                    "type": "Topics",
+                    "name": "[parameters('serviceBusSubscriptionName')]",
+                    "type": "Subscriptions",
                     "dependsOn": [
-                        "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
+                        "[parameters('serviceBusTopicName')]"
                     ],
-                    "properties": {
-                        "path": "[parameters('serviceBusTopicName')]",
-                    },
-                    "resources": [{
-                        "apiVersion": "[variables('sbVersion')]",
-                        "name": "[parameters('serviceBusSubscriptionName')]",
-                        "type": "Subscriptions",
-                        "dependsOn": [
-                            "[parameters('serviceBusTopicName')]"
-                        ],
-                        "properties": {}
-                    }]
+                    "properties": {}
                 }]
             }]
+        }]
+```
 
 ## 运行部署的命令
 
@@ -121,13 +132,17 @@ wacn.date: 12/26/2016
 
 ## PowerShell
 
-        New-AzureResourceGroupDeployment -Name <deployment-name> -ResourceGroupName <resource-group-name> -TemplateUri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-and-subscription/azuredeploy.json>
+```
+    New-AzureResourceGroupDeployment -Name <deployment-name> -ResourceGroupName <resource-group-name> -TemplateUri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-and-subscription/azuredeploy.json>
+```
 
 ## Azure CLI
 
-        azure config mode arm
+```
+    azure config mode arm
 
-        azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-and-subscription/azuredeploy.json>
+    azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-and-subscription/azuredeploy.json>
+```
 
 ## 后续步骤
 

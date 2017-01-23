@@ -45,9 +45,11 @@ ms.tgt_pltfrm: NA
 
 此命令将 Database1 复制到同一服务器上名为 Database2 的新数据库。根据数据库的大小，复制操作可能需要一些时间才能完成。
 
-    -- Execute on the master database.
-    -- Start copying.
-    CREATE DATABASE Database1_copy AS COPY OF Database1;
+```
+-- Execute on the master database.
+-- Start copying.
+CREATE DATABASE Database1_copy AS COPY OF Database1;
+```
 
 ### 将 SQL 数据库复制到不同的服务器
 
@@ -55,10 +57,12 @@ ms.tgt_pltfrm: NA
 
 此命令将 server1 上的 Database1 复制到 server2 上名为 Database2 的新数据库。根据数据库的大小，复制操作可能需要一些时间才能完成。
 
-    -- Execute on the master database of the target server (server2)
-    -- Start copying from Server1 to Server2
-    CREATE DATABASE Database1_copy AS COPY OF server1.Database1;
-    
+```
+-- Execute on the master database of the target server (server2)
+-- Start copying from Server1 to Server2
+CREATE DATABASE Database1_copy AS COPY OF server1.Database1;
+```
+
 ## 监视复制操作的进度
 
 通过查询 sys.databases 和 sys.dm\_database\_copies 视图来监视复制过程。在复制过程中，新数据库的 sys.databases 视图的 state\_desc 列将设置为 COPYING。
@@ -66,7 +70,8 @@ ms.tgt_pltfrm: NA
 - 如果复制失败，新数据库的 sys.databases 视图的 state\_desc 列将设置为 SUSPECT。在这种情况下，对新数据库执行 DROP 语句并稍后重试。
 - 如果复制成功，新数据库的 sys.databases 视图的 state\_desc 列将设置为 ONLINE。在这种情况下，复制已完成并且新数据库是一个常规数据库，可独立于源数据库进行更改。
 
-> [!NOTE] - 如果决定在复制过程中取消复制，请对新数据库执行 [DROP DATABASE](https://msdn.microsoft.com/zh-cn/library/ms178613.aspx) 语句。此外，对源数据库执行 DROP DATABASE 语句也将取消复制过程。
+> [!NOTE]
+> - 如果决定在复制过程中取消复制，请对新数据库执行 [DROP DATABASE](https://msdn.microsoft.com/zh-cn/library/ms178613.aspx) 语句。此外，对源数据库执行 DROP DATABASE 语句也将取消复制过程。
 
 ##<a name="resolve-logins-after-the-copy-operation-completes"></a> 在复制操作完成后解析登录名
 
@@ -87,6 +92,6 @@ ms.tgt_pltfrm: NA
 - [使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](./sql-database-connect-query-ssms.md)
 - [将数据库导出到 BACPAC](./sql-database-export-powershell.md)
 - [业务连续性概述](./sql-database-business-continuity.md)
-- [SQL 数据库文档](./index.md/)
+- [SQL 数据库文档](./index.md)
 
 <!---HONumber=Mooncake_1024_2016-->

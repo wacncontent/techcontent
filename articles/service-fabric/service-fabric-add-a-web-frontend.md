@@ -25,7 +25,8 @@ ms.author: seanmck
 ## 将 ASP.NET Core 服务添加到应用程序
 ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web UI 和 Web API。让我们将 ASP.NET Web API 项目添加到现有的应用程序。
 
->[!NOTE] 若要完成本教程，需要[安装 .NET Core 1.0][dotnetcore-install]。
+>[!NOTE]
+> 若要完成本教程，需要[安装 .NET Core 1.0][dotnetcore-install]。
 
 1. 在解决方案资源管理器中，右键单击应用程序项目中的“服务”，然后选择“添加”>“新建 Service Fabric 服务”。
 
@@ -41,7 +42,8 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     创建 Web API 项目后，应用程序中会有两个服务。随着你不断构建应用程序，将以完全相同的方式添加更多服务。每个服务都可以单独进行版本控制和升级。
 
->[!TIP] 若要了解有关构建 ASP.NET Core 服务的详细信息，请参阅 [ASP.NET Core 文档](https://docs.asp.net)。
+>[!TIP]
+> 若要了解有关构建 ASP.NET Core 服务的详细信息，请参阅 [ASP.NET Core 文档](https://docs.asp.net)。
 
 ## 运行应用程序
 
@@ -81,15 +83,17 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 5. 在类库中，使用单个方法 `GetCountAsync` 创建接口，并从 IService 扩展接口。
 
-        namespace MyStatefulService.Interfaces
+    ```
+    namespace MyStatefulService.Interfaces
+    {
+        using Microsoft.ServiceFabric.Services.Remoting;
+
+        public interface ICounter: IService
         {
-            using Microsoft.ServiceFabric.Services.Remoting;
-    
-            public interface ICounter: IService
-            {
-                Task<long> GetCountAsync();
-            }
+            Task<long> GetCountAsync();
         }
+    }
+    ```
 
 ### 在有状态服务中实现接口
 
@@ -101,50 +105,57 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 2. 找到继承自 `StatefulService` 的类（例如 `MyStatefulService`），然后扩展它以实现 `ICounter` 接口。
 
-        using MyStatefulService.Interfaces;
-    
-        ...
-    
-        public class MyStatefulService : StatefulService, ICounter
-        {        
-              // ...
-        }
+    ```
+    using MyStatefulService.Interfaces;
+
+    ...
+
+    public class MyStatefulService : StatefulService, ICounter
+    {        
+          // ...
+    }
+    ```
 
 3. 现在实现 `ICounter` 接口中定义的单个方法，即 `GetCountAsync`。
 
-        public async Task<long> GetCountAsync()
-        {
-          var myDictionary =
-            await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-    
-            using (var tx = this.StateManager.CreateTransaction())
-            {          
-                var result = await myDictionary.TryGetValueAsync(tx, "Counter");
-                return result.HasValue ? result.Value : 0;
-            }
+    ```
+    public async Task<long> GetCountAsync()
+    {
+      var myDictionary =
+        await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
+
+        using (var tx = this.StateManager.CreateTransaction())
+        {          
+            var result = await myDictionary.TryGetValueAsync(tx, "Counter");
+            return result.HasValue ? result.Value : 0;
         }
+    }
+    ```
 
 ### 使用服务远程侦听器公开有状态服务
 
 实现 `ICounter` 接口后，使有状态服务可从其他服务调用的最后一个步骤是打开通信通道。对于有状态服务，Service Fabric 提供了名为 `CreateServiceReplicaListeners` 的可重写方法。通过此方法，你可以根据想要为服务启用的通信类型指定一个或多个通信侦听器。
 
->[!NOTE] 用于打开无状态服务的通信通道的等效方法名为 `CreateServiceInstanceListeners`。
+>[!NOTE]
+> 用于打开无状态服务的通信通道的等效方法名为 `CreateServiceInstanceListeners`。
 
 在本例中，我们将替换现有的 `CreateServiceReplicaListeners` 方法，并提供 `ServiceRemotingListener` 的实例，该实例通过 `ServiceProxy` 来创建可从客户端调用的 RPC 终结点。
 
-    using Microsoft.ServiceFabric.Services.Remoting.Runtime;
-    
-    ...
-    
-    protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
+```
+using Microsoft.ServiceFabric.Services.Remoting.Runtime;
+
+...
+
+protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
+{
+    return new List<ServiceReplicaListener>()
     {
-        return new List<ServiceReplicaListener>()
-        {
-            new ServiceReplicaListener(
-                (context) =>
-                    this.CreateServiceRemotingListener(context))
-        };
-    }
+        new ServiceReplicaListener(
+            (context) =>
+                this.CreateServiceRemotingListener(context))
+    };
+}
+```
 
 ### 使用 ServiceProxy 类来与服务交互
 
@@ -164,20 +175,22 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 4. 在 **Controllers** 文件夹中，打开 `ValuesController` 类。请注意，`Get` 方法目前只返回“value1”和“value2”的硬编码字符串数组，这符合前面在浏览器中看到的内容。使用以下代码替换此实现：
 
-        using MyStatefulService.Interfaces;
-        using Microsoft.ServiceFabric.Services.Remoting.Client;
-    
-        ...
-    
-        public async Task<IEnumerable<string>> Get()
-        {
-            ICounter counter =
-                    ServiceProxy.Create<ICounter>(new Uri("fabric:/MyApplication/MyStatefulService"), new ServicePartitionKey(0));
-    
-            long count = await counter.GetCountAsync();
-    
-            return new string[] { count.ToString() };
-        }
+    ```
+    using MyStatefulService.Interfaces;
+    using Microsoft.ServiceFabric.Services.Remoting.Client;
+
+    ...
+
+    public async Task<IEnumerable<string>> Get()
+    {
+        ICounter counter =
+                ServiceProxy.Create<ICounter>(new Uri("fabric:/MyApplication/MyStatefulService"), new ServicePartitionKey(0));
+
+        long count = await counter.GetCountAsync();
+
+        return new string[] { count.ToString() };
+    }
+    ```
 
     第一行代码是关键代码。若要创建有状态服务的 ICounter Proxy，必须提供两项信息：分区 ID 和服务名称。
 
@@ -195,7 +208,8 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     定期刷新浏览器，以查看计数器更新值。
 
->[!WARNING] 模板中提供的 ASP.NET Core Web 服务器称为 Kestrel，[目前尚不支持处理直接 Internet 流量](https://docs.asp.net/en/latest/fundamentals/servers.html#kestrel)。请注意，IIS 中的部署不支持 Service Fabric。
+>[!WARNING]
+> 模板中提供的 ASP.NET Core Web 服务器称为 Kestrel，[目前尚不支持处理直接 Internet 流量](https://docs.asp.net/en/latest/fundamentals/servers.html#kestrel)。请注意，IIS 中的部署不支持 Service Fabric。
 
 ## 执行组件的情况如何？
 

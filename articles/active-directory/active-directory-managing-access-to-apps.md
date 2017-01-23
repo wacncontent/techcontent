@@ -13,8 +13,8 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 10/13/2016
-wacn.date: 11/08/2016
 ms.author: femila
+wacn.date: 01/19/2017
 ---
 
 # 管理对应用的访问
@@ -50,7 +50,7 @@ ms.author: femila
 
 首先，如果你未用过 Azure AD 并且你是 IT 管理员：
 
- - [立即试用！](./index.md/) — 现在就可以使用此链接注册 30 天试用版，然后在不到 5 分钟内部署第一个云解决方案
+ - [立即试用！](./index.md) — 现在就可以使用此链接注册 30 天试用版，然后在不到 5 分钟内部署第一个云解决方案
 
 支持帐户共享的 Azure AD 功能包括：
 

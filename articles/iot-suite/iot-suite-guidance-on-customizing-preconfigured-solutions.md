@@ -26,7 +26,7 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 预配置解决方案的源代码可在以下 GitHub 存储库获得：
 
-- 远程监视：[https://www.github.com/Azure/azure-iot-remote-monitoring](https://github.com/Azure/azure-iot-remote-monitoring)
+- 远程监视：[https://github.com/Azure/azure-iot-remote-monitoring](https://github.com/Azure/azure-iot-remote-monitoring)
 
 提供预配置解决方案源代码的目的，在于演示实现使用 Azure IoT 套件的 IoT 解决方案的端到端功能时所采用的模式和做法。你可以找到有关如何在 GitHub 存储库中生成和部署解决方案的详细信息。
 
@@ -37,7 +37,7 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 [远程监视预配置解决方案演练](./iot-suite-remote-monitoring-sample-walkthrough.md)深入介绍了这三个流分析作业及其语法。
 
 你可以直接编辑这些作业以更改逻辑，或添加特定于你的方案的逻辑。你可以按以下方式查找流分析作业：
- 
+
 1. 转到 [Azure 门户预览](https://portal.azure.cn)。
 2. 导航到名称与 IoT 解决方案相同的资源组。
 3. 选择要修改的 Azure 流分析作业。
@@ -48,7 +48,8 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 6. 启动作业
 
-> [!NOTE] 远程监视仪表板依赖特定数据，因此更改作业可能会导致仪表板出现故障。
+> [!NOTE]
+> 远程监视仪表板依赖特定数据，因此更改作业可能会导致仪表板出现故障。
 
 ## 添加你自己的规则
 
@@ -109,32 +110,36 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 7. 这会将一个 .json 文件下载到本地计算机。在所选的文本编辑器中打开此文件进行编辑。
 
 8. 在 .json 文件的第三行，你会看到：
- 
-        "appRoles" : [],
- 
+
+    ```
+    "appRoles" : [],
+    ```
+
       将此代码替换为以下代码：
 
-          "appRoles": [
-          {
-          "allowedMemberTypes": [
-          "User"
-          ],
-          "description": "Administrator access to the application",
-          "displayName": "Admin",
-          "id": "a400a00b-f67c-42b7-ba9a-f73d8c67e433",
-          "isEnabled": true,
-          "value": "Admin"
-          },
-          {
-          "allowedMemberTypes": [
-          "User"
-          ],
-          "description": "Read only access to device information",
-          "displayName": "Read Only",
-          "id": "e5bbd0f5-128e-4362-9dd1-8f253c6082d7",
-          "isEnabled": true,
-          "value": "ReadOnly"
-          } ],
+      ```
+      "appRoles": [
+      {
+      "allowedMemberTypes": [
+      "User"
+      ],
+      "description": "Administrator access to the application",
+      "displayName": "Admin",
+      "id": "a400a00b-f67c-42b7-ba9a-f73d8c67e433",
+      "isEnabled": true,
+      "value": "Admin"
+      },
+      {
+      "allowedMemberTypes": [
+      "User"
+      ],
+      "description": "Read only access to device information",
+      "displayName": "Read Only",
+      "id": "e5bbd0f5-128e-4362-9dd1-8f253c6082d7",
+      "isEnabled": true,
+      "value": "ReadOnly"
+      } ],
+      ```
 
 9. 保存更新后的 .json 文件（可以覆盖现有文件）。
 

@@ -82,14 +82,14 @@ UpgradeAbortedSyncExeInUse | 服务器上打开了 [Synchronization Service Mana
 UpgradeAbortedSyncOrConfigurationInProgress | 安装向导正在运行，或者在计划程序外部计划了同步。
 **UpgradeNotSupported** |
 UpgradeNotSupportedCustomizedSyncRules | 你已将自己的自定义规则添加到配置中。
-UpgradeNotSupportedGroupWritebackEnabled | 你已启用[组写回](./active-directory-aadconnect-feature-preview.md#group-writeback/)功能。
+UpgradeNotSupportedGroupWritebackEnabled | 你已启用[组写回](./active-directory-aadconnect-feature-preview.md#group-writeback)功能。
 UpgradeNotSupportedInvalidPersistedState | 安装不是快速设置或 DirSync 升级。
 UpgradeNotSupportedMetaverseSizeExceeeded | Metaverse 中的对象超过 100,000 个。
 UpgradeNotSupportedMultiForestSetup | 你正在连接到多个林。快速安装只会连接到一个林。
 UpgradeNotSupportedNonLocalDbInstall | 你使用的不是 SQL Server Express LocalDB 数据库。
-UpgradeNotSupportedNonMsolAccount | [AD 连接器帐户](./active-directory-aadconnect-accounts-permissions.md#active-directory-account/)不再是默认的 MSOL\_ 帐户。
-UpgradeNotSupportedStagingModeEnabled | 服务器已设置为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)。
-UpgradeNotSupportedUserWritebackEnabled | 你已启用[用户写回](./active-directory-aadconnect-feature-preview.md#user-writeback/)功能。
+UpgradeNotSupportedNonMsolAccount | [AD 连接器帐户](./active-directory-aadconnect-accounts-permissions.md#active-directory-account)不再是默认的 MSOL\_ 帐户。
+UpgradeNotSupportedStagingModeEnabled | 服务器已设置为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode)。
+UpgradeNotSupportedUserWritebackEnabled | 你已启用[用户写回](./active-directory-aadconnect-feature-preview.md#user-writeback)功能。
 
 ## 后续步骤
 了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。

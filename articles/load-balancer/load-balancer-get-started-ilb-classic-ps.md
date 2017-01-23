@@ -46,12 +46,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 对于现有的云服务或在区域虚拟网络下部署的云服务，可以使用以下 Windows PowerShell 命令创建内部负载均衡实例：
 
-    $svc="<Cloud Service Name>"
-    $ilb="<Name of your ILB instance>"
-    $subnet="<Name of the subnet within your virtual network>"
-    $IP="<The IPv4 address to use on the subnet-optional>"
+```
+$svc="<Cloud Service Name>"
+$ilb="<Name of your ILB instance>"
+$subnet="<Name of the subnet within your virtual network>"
+$IP="<The IPv4 address to use on the subnet-optional>"
 
-    Add-AzureInternalLoadBalancer -ServiceName $svc -InternalLoadBalancerName $ilb -SubnetName $subnet -StaticVNetIPAddress $IP
+Add-AzureInternalLoadBalancer -ServiceName $svc -InternalLoadBalancerName $ilb -SubnetName $subnet -StaticVNetIPAddress $IP
+```
 
 请注意，这次使用的 [Add-AzureEndpoint](https://msdn.microsoft.com/zh-cn/library/dn495300.aspx) Windows PowerShell cmdlet 使用的是 DefaultProbe 参数集。有关其他参数集的详细信息，请参阅 [Add-AzureEndpoint](https://msdn.microsoft.com/zh-cn/library/dn495300.aspx)。
 
@@ -59,15 +61,17 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 下面是一个示例：
 
-    $svc="mytestcloud"
-    $vmname="DB1"
-    $epname="TCP-1433-1433"
-    $lbsetname="lbset"
-    $prot="tcp"
-    $locport=1433
-    $pubport=1433
-    $ilb="ilbset"
-    Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -Lbset $lbsetname -Protocol $prot -LocalPort $locport -PublicPort $pubport -DefaultProbe -InternalLoadBalancerName $ilb | Update-AzureVM
+```
+$svc="mytestcloud"
+$vmname="DB1"
+$epname="TCP-1433-1433"
+$lbsetname="lbset"
+$prot="tcp"
+$locport=1433
+$pubport=1433
+$ilb="ilbset"
+Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -Lbset $lbsetname -Protocol $prot -LocalPort $locport -PublicPort $pubport -DefaultProbe -InternalLoadBalancerName $ilb | Update-AzureVM
+```
 
 ### 步骤 3：配置服务器，将其流量发送到新的内部负载均衡终结点
 
@@ -75,13 +79,17 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 如果在创建内部负载均衡实例期间指定了 IP 地址，则你已有 VIP。否则，你可以通过以下命令查看 VIP：
 
-    $svc="<Cloud Service Name>"
-    Get-AzureService -ServiceName $svc | Get-AzureInternalLoadBalancer
+```
+$svc="<Cloud Service Name>"
+Get-AzureService -ServiceName $svc | Get-AzureInternalLoadBalancer
+```
 
 若要使用这些命令，请填充值并删除 \< 和 \>。下面是一个示例：
 
-    $svc="mytestcloud"
-    Get-AzureService -ServiceName $svc | Get-AzureInternalLoadBalancer
+```
+$svc="mytestcloud"
+Get-AzureService -ServiceName $svc | Get-AzureInternalLoadBalancer
+```
 
 通过显示 Get-AzureInternalLoadBalancer 命令，请记下 IP 地址，并对服务器或 DNS 记录进行必要的更改，以确保将流量发送到 VIP。
 
@@ -106,59 +114,71 @@ Azure Platform 对各种管理方案使用一个公开可路由的静态 IPv4 �
 
 以下命令将配置名为 **ILBset** 的新内部负载均衡实例，并向对应于两个数据库服务器的虚拟机添加终结点：
 
-    $svc="mytestcloud"
-    $ilb="ilbset"
-    Add-AzureInternalLoadBalancer -ServiceName $svc -InternalLoadBalancerName $ilb
-    $prot="tcp"
-    $locport=1433
-    $pubport=1433
-    $epname="TCP-1433-1433"
-    $lbsetname="lbset"
-    $vmname="DB1"
-    Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -LbSetName $lbsetname -Protocol $prot -LocalPort $locport -PublicPort $pubport -DefaultProbe -InternalLoadBalancerName $ilb | Update-AzureVM
+```
+$svc="mytestcloud"
+$ilb="ilbset"
+Add-AzureInternalLoadBalancer -ServiceName $svc -InternalLoadBalancerName $ilb
+$prot="tcp"
+$locport=1433
+$pubport=1433
+$epname="TCP-1433-1433"
+$lbsetname="lbset"
+$vmname="DB1"
+Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -LbSetName $lbsetname -Protocol $prot -LocalPort $locport -PublicPort $pubport -DefaultProbe -InternalLoadBalancerName $ilb | Update-AzureVM
 
-    $epname="TCP-1433-1433-2"
-    $vmname="DB2"
-    Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -LbSetName $lbsetname -Protocol $prot -LocalPort $locport -PublicPort $pubport -DefaultProbe -InternalLoadBalancerName $ilb | Update-AzureVM
+$epname="TCP-1433-1433-2"
+$vmname="DB2"
+Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -LbSetName $lbsetname -Protocol $prot -LocalPort $locport -PublicPort $pubport -DefaultProbe -InternalLoadBalancerName $ilb | Update-AzureVM
+```
 
 ## 删除内部负载均衡配置
 
 若要从内部负载均衡器实例删除作为终结点的虚拟机，请使用以下命令：
 
-    $svc="<Cloud service name>"
-    $vmname="<Name of the VM>"
-    $epname="<Name of the endpoint>"
-    Get-AzureVM -ServiceName $svc -Name $vmname | Remove-AzureEndpoint -Name $epname | Update-AzureVM
+```
+$svc="<Cloud service name>"
+$vmname="<Name of the VM>"
+$epname="<Name of the endpoint>"
+Get-AzureVM -ServiceName $svc -Name $vmname | Remove-AzureEndpoint -Name $epname | Update-AzureVM
+```
 
 若要使用这些命令，请填充值并删除 \< 和 \>。
 
 下面是一个示例：
 
-    $svc="mytestcloud"
-    $vmname="DB1"
-    $epname="TCP-1433-1433"
-    Get-AzureVM -ServiceName $svc -Name $vmname | Remove-AzureEndpoint -Name $epname | Update-AzureVM
+```
+$svc="mytestcloud"
+$vmname="DB1"
+$epname="TCP-1433-1433"
+Get-AzureVM -ServiceName $svc -Name $vmname | Remove-AzureEndpoint -Name $epname | Update-AzureVM
+```
 
 若要从云服务中删除内部负载均衡器实例，请使用以下命令：
 
-    $svc="<Cloud service name>"
-    Remove-AzureInternalLoadBalancer -ServiceName $svc
+```
+$svc="<Cloud service name>"
+Remove-AzureInternalLoadBalancer -ServiceName $svc
+```
 
 若要使用这些命令，请填充值并删除 \< 和 \>。
 
 下面是一个示例：
 
-    $svc="mytestcloud"
-    Remove-AzureInternalLoadBalancer -ServiceName $svc
+```
+$svc="mytestcloud"
+Remove-AzureInternalLoadBalancer -ServiceName $svc
+```
 
 ## 有关内部负载均衡器 cmdlet 的其他信息
 
 若要获取有关内部负载均衡 cmdlet 的其他信息，请在 Windows PowerShell 提示符处运行以下命令：
 
-    Get-Help New-AzureInternalLoadBalancerConfig -full
-    Get-Help Add-AzureInternalLoadBalancer -full
-    Get-Help Get-AzureInternalLoadbalancer -full
-    Get-Help Remove-AzureInternalLoadBalancer -full
+```
+Get-Help New-AzureInternalLoadBalancerConfig -full
+Get-Help Add-AzureInternalLoadBalancer -full
+Get-Help Get-AzureInternalLoadbalancer -full
+Get-Help Remove-AzureInternalLoadBalancer -full
+```
 
 ## 后续步骤
 

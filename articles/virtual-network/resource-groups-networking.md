@@ -83,7 +83,9 @@ Azure 资源管理器依靠不同的资源提供程序提供对你的资源的�
 
 Rest API 符合 HTTP 1.1 协议规范。下面显示了该 API 的常规 URI 结构：
 
-    https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/{resource-provider-namespace}/locations/{region-location}/register?api-version={api-version}
+```
+https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/{resource-provider-namespace}/locations/{region-location}/register?api-version={api-version}
+```
 
 大括号中的参数代表以下元素：
 
@@ -104,128 +106,134 @@ Rest API 符合 HTTP 1.1 协议规范。下面显示了该 API 的常规 URI 结
 
 下面提供了模板的示例表示形式 -
 
-    {
-      "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
-      "contentVersion": "<version-number-of-template>",
-      "parameters": { <parameter-definitions-of-template> },
-      "variables": { <variable-definitions-of-template> },
-      "resources": [ { <definition-of-resource-to-deploy> } ],
-      "outputs": { <output-of-template> }    
-    }
+```
+{
+  "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+  "contentVersion": "<version-number-of-template>",
+  "parameters": { <parameter-definitions-of-template> },
+  "variables": { <variable-definitions-of-template> },
+  "resources": [ { <definition-of-resource-to-deploy> } ],
+  "outputs": { <output-of-template> }    
+}
+```
 
 该模板主要是资源和通过参数注入的实例值的 JSON 说明。可以使用以下示例创建包含 2 个子网的虚拟网络。
 
-    {
-        "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/VNET.json",
-        "contentVersion": "1.0.0.0",
-        "parameters" : {
-          "location": {
-            "type": "String",
-            "allowedValues": ["China East", "China North"],
-            "metadata" : {
-              "Description" : "Deployment location"
-            }
-          },
-          "virtualNetworkName":{
-            "type" : "string",
-            "defaultValue":"myVNET",
-            "metadata" : {
-              "Description" : "VNET name"
-            }
-          },
-          "addressPrefix":{
-            "type" : "string",
-            "defaultValue" : "10.0.0.0/16",
-            "metadata" : {
-              "Description" : "Address prefix"
-            }
-
-          },
-          "subnet1Name": {
-            "type" : "string",
-            "defaultValue" : "Subnet-1",
-            "metadata" : {
-              "Description" : "Subnet 1 Name"
-            }
-          },
-          "subnet2Name": {
-            "type" : "string",
-            "defaultValue" : "Subnet-2",
-            "metadata" : {
-              "Description" : "Subnet 2 name"
-            }
-          },
-          "subnet1Prefix" : {
-            "type" : "string",
-            "defaultValue" : "10.0.0.0/24",
-            "metadata" : {
-              "Description" : "Subnet 1 Prefix"
-            }
-          },
-          "subnet2Prefix" : {
-            "type" : "string",
-            "defaultValue" : "10.0.1.0/24",
-            "metadata" : {
-              "Description" : "Subnet 2 Prefix"
-            }
-          }
-        },
-        "resources": [
-        {
-          "apiVersion": "2015-05-01-preview",
-          "type": "Microsoft.Network/virtualNetworks",
-          "name": "[parameters('virtualNetworkName')]",
-          "location": "[parameters('location')]",
-          "properties": {
-            "addressSpace": {
-              "addressPrefixes": [
-                "[parameters('addressPrefix')]"
-              ]
-            },
-            "subnets": [
-              {
-                "name": "[parameters('subnet1Name')]",
-                "properties" : {
-                  "addressPrefix": "[parameters('subnet1Prefix')]"
-                }
-              },
-              {
-                "name": "[parameters('subnet2Name')]",
-                "properties" : {
-                  "addressPrefix": "[parameters('subnet2Prefix')]"
-                }
-              }
-            ]
-          }
+```
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/VNET.json",
+    "contentVersion": "1.0.0.0",
+    "parameters" : {
+      "location": {
+        "type": "String",
+        "allowedValues": ["China East", "China North"],
+        "metadata" : {
+          "Description" : "Deployment location"
         }
+      },
+      "virtualNetworkName":{
+        "type" : "string",
+        "defaultValue":"myVNET",
+        "metadata" : {
+          "Description" : "VNET name"
+        }
+      },
+      "addressPrefix":{
+        "type" : "string",
+        "defaultValue" : "10.0.0.0/16",
+        "metadata" : {
+          "Description" : "Address prefix"
+        }
+
+      },
+      "subnet1Name": {
+        "type" : "string",
+        "defaultValue" : "Subnet-1",
+        "metadata" : {
+          "Description" : "Subnet 1 Name"
+        }
+      },
+      "subnet2Name": {
+        "type" : "string",
+        "defaultValue" : "Subnet-2",
+        "metadata" : {
+          "Description" : "Subnet 2 name"
+        }
+      },
+      "subnet1Prefix" : {
+        "type" : "string",
+        "defaultValue" : "10.0.0.0/24",
+        "metadata" : {
+          "Description" : "Subnet 1 Prefix"
+        }
+      },
+      "subnet2Prefix" : {
+        "type" : "string",
+        "defaultValue" : "10.0.1.0/24",
+        "metadata" : {
+          "Description" : "Subnet 2 Prefix"
+        }
+      }
+    },
+    "resources": [
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[parameters('virtualNetworkName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('subnet1Name')]",
+            "properties" : {
+              "addressPrefix": "[parameters('subnet1Prefix')]"
+            }
+          },
+          {
+            "name": "[parameters('subnet2Name')]",
+            "properties" : {
+              "addressPrefix": "[parameters('subnet2Prefix')]"
+            }
+          }
         ]
+      }
     }
+    ]
+}
+```
 
 你可以选择在使用模板时手动提供参数值，或者使用参数文件。以下示例演示可与上述模板一起使用的参数值集：
 
-    {
-      "location": {
-          "value": "China East"
-      },
-      "virtualNetworkName": {
-          "value": "VNET1"
-      },
-      "subnet1Name": {
-          "value": "Subnet1"
-      },
-      "subnet2Name": {
-          "value": "Subnet2"
-      },
-      "addressPrefix": {
-          "value": "192.168.0.0/16"
-      },
-      "subnet1Prefix": {
-          "value": "192.168.1.0/24"
-      },
-      "subnet2Prefix": {
-          "value": "192.168.2.0/24"
-      }
-    }
+```
+{
+  "location": {
+      "value": "China East"
+  },
+  "virtualNetworkName": {
+      "value": "VNET1"
+  },
+  "subnet1Name": {
+      "value": "Subnet1"
+  },
+  "subnet2Name": {
+      "value": "Subnet2"
+  },
+  "addressPrefix": {
+      "value": "192.168.0.0/16"
+  },
+  "subnet1Prefix": {
+      "value": "192.168.1.0/24"
+  },
+  "subnet2Prefix": {
+      "value": "192.168.2.0/24"
+  }
+}
+```
 
 使用模板的主要优势在于：
 
@@ -242,7 +250,8 @@ Rest API 符合 HTTP 1.1 协议规范。下面显示了该 API 的常规 URI 结
 ### 使用模板
 可以使用 PowerShell 或 AzureCLI，将服务从模板部署到 Azure。若要从 GitHub 中的模板部署服务，请下载[模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vnet-two-subnets)，执行一些必要的修改，然后使用 Azure CLI 进行部署。
 
->[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 ## 后续步骤
 [Azure 资源管理器模板语言](../azure-resource-manager/resource-group-authoring-templates.md)

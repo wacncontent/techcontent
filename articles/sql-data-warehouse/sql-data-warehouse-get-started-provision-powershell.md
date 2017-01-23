@@ -34,21 +34,28 @@ ms.author: lodipalm;barbkess;sonyama
 - **资源组**：可使用同一资源组作为 Azure SQL Server，或参阅[如何创建资源组][how to create a resource group]。
 - **PowerShell 1.0.3 或更高版本**：可以通过运行 **Get-Module -ListAvailable -Name Azure** 来检查版本。可以通过 [Microsoft Web 平台安装程序][Microsoft Web Platform Installer]安装最新版本。有关安装最新版本的详细信息，请参阅[如何安装和配置 Azure PowerShell][How to install and configure Azure PowerShell]。
 
-> [!NOTE] 创建 SQL 数据仓库可能会导致新的计费服务。有关定价的详细信息，请参阅 [SQL 数据仓库定价][]。
+> [!NOTE]
+> 创建 SQL 数据仓库可能会导致新的计费服务。有关定价的详细信息，请参阅 [SQL 数据仓库定价][]。
 
 ## 创建 SQL 数据仓库
 1. 打开 Windows PowerShell。
 2. 运行此 cmdlet 以登录到 Azure Resource Manager 中。
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+
 3. 选择要用于当前会话的订阅。
 
-        Get-AzureRmSubscription	-SubscriptionName "MySubscription" | Select-AzureRmSubscription
+    ```
+    Get-AzureRmSubscription	-SubscriptionName "MySubscription" | Select-AzureRmSubscription
+    ```
 
 4.  创建数据库。此示例将在名为“mywesteuroperesgp1”的资源组中的名为“sqldwserver1”的服务器中创建一个名为“mynewsqldw”且服务目标级别为“DW400”的新数据库。**注意：创建新的 SQL 数据仓库数据库可能会导致新的计费费用。有关定价的详细信息，请参阅 [SQL 数据仓库定价][]。**
 
-        New-AzureRmSqlDatabase -RequestedServiceObjectiveName "DW400" -DatabaseName "mynewsqldw" -ServerName "sqldwserver1" -ResourceGroupName "mywesteuroperesgp1" -Edition "DataWarehouse"
+    ```
+    New-AzureRmSqlDatabase -RequestedServiceObjectiveName "DW400" -DatabaseName "mynewsqldw" -ServerName "sqldwserver1" -ResourceGroupName "mywesteuroperesgp1" -Edition "DataWarehouse"
+    ```
 
 所需的参数包括：
 

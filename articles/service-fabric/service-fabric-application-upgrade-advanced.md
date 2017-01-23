@@ -25,7 +25,8 @@ ms.author: subramar
 
 ## 手动升级模式
 
-> [!NOTE]  只应针对已失败或暂停的升级考虑使用不受监视的手动模式。受监视模式是建议用于 Service Fabric 应用程序的升级模式。
+> [!NOTE]
+>  只应针对已失败或暂停的升级考虑使用不受监视的手动模式。受监视模式是建议用于 Service Fabric 应用程序的升级模式。
 
 Azure Service Fabric 提供了多个升级模式，可支持开发和生产群集。选择的部署选项可根据不同的环境而有所不同。
 
@@ -55,29 +56,35 @@ Service Fabric 应用程序可以通过预配一个完整且独立的应用程�
 
 例如，让我们从以下应用程序开始（为便于理解，这里提供了版本号）：
 
-    app1       	1.0.0
-      service1 	1.0.0
-        code   	1.0.0
-        config 	1.0.0
-      service2 	1.0.0
-        code   	1.0.0
-        config 	1.0.0
+```
+app1       	1.0.0
+  service1 	1.0.0
+    code   	1.0.0
+    config 	1.0.0
+  service2 	1.0.0
+    code   	1.0.0
+    config 	1.0.0
+```
 
 现在，假设你只想要使用 PowerShell 和差异包来更新 service1 的代码包。现在，更新的应用程序使用以下文件夹结构：
 
-    app1       	2.0.0      <-- new version
-      service1 	2.0.0      <-- new version
-        code   	2.0.0      <-- new version
-        config 	1.0.0
-      service2 	1.0.0
-        code   	1.0.0
-        config 	1.0.0
+```
+app1       	2.0.0      <-- new version
+  service1 	2.0.0      <-- new version
+    code   	2.0.0      <-- new version
+    config 	1.0.0
+  service2 	1.0.0
+    code   	1.0.0
+    config 	1.0.0
+```
 
 在本例中，你已将应用程序清单更新为 2.0.0，并更新了 service1 的服务清单以反映代码包更新。应用程序包的文件夹使用以下结构：
 
-    app1/
-      service1/
-        code/
+```
+app1/
+  service1/
+    code/
+```
 
 ## 后续步骤
 
@@ -90,5 +97,5 @@ Service Fabric 应用程序可以通过预配一个完整且独立的应用程�
 了解如何使用[数据序列化](./service-fabric-application-upgrade-data-serialization.md)，使应用程序在升级后保持兼容。
 
 参考 [Troubleshooting Application Upgrades](./service-fabric-application-upgrade-troubleshooting.md)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
- 
+
 <!---HONumber=Mooncake_1219_2016-->

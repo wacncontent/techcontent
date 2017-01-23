@@ -24,59 +24,61 @@
 
 采用 Json 格式的流量管理器示例：
 
-        {
-            "apiVersion": "[variables('tmApiVersion')]",
-            "type": "Microsoft.Network/trafficManagerProfiles",
-            "name": "VMEndpointExample",
-            "location": "global",
-            "dependsOn": [
-                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), '0')]",
-                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), '1')]",
-                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), '2')]",
-            ],
-            "properties": {
-                "profileStatus": "Enabled",
-                "trafficRoutingMethod": "Weighted",
-                "dnsConfig": {
-                    "relativeName": "[parameters('dnsname')]",
-                    "ttl": 30
-                },
-                "monitorConfig": {
-                    "protocol": "http",
-                    "port": 80,
-                    "path": "/"
-                },
-                "endpoints": [
-                    {
-                        "name": "endpoint0",
-                        "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
-                        "properties": {
-                            "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), 0))]",
-                            "endpointStatus": "Enabled",
-                            "weight": 1
-                        }
-                    },
-                    {
-                        "name": "endpoint1",
-                        "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
-                        "properties": {
-                            "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), 1))]",
-                            "endpointStatus": "Enabled",
-                            "weight": 1
-                        }
-                    },
-                    {
-                        "name": "endpoint2",
-                        "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
-                        "properties": {
-                            "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), 2))]",
-                            "endpointStatus": "Enabled",
-                            "weight": 1
-                        }
+```
+    {
+        "apiVersion": "[variables('tmApiVersion')]",
+        "type": "Microsoft.Network/trafficManagerProfiles",
+        "name": "VMEndpointExample",
+        "location": "global",
+        "dependsOn": [
+            "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), '0')]",
+            "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), '1')]",
+            "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), '2')]",
+        ],
+        "properties": {
+            "profileStatus": "Enabled",
+            "trafficRoutingMethod": "Weighted",
+            "dnsConfig": {
+                "relativeName": "[parameters('dnsname')]",
+                "ttl": 30
+            },
+            "monitorConfig": {
+                "protocol": "http",
+                "port": 80,
+                "path": "/"
+            },
+            "endpoints": [
+                {
+                    "name": "endpoint0",
+                    "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+                    "properties": {
+                        "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), 0))]",
+                        "endpointStatus": "Enabled",
+                        "weight": 1
                     }
-                ]
-            }
+                },
+                {
+                    "name": "endpoint1",
+                    "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+                    "properties": {
+                        "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), 1))]",
+                        "endpointStatus": "Enabled",
+                        "weight": 1
+                    }
+                },
+                {
+                    "name": "endpoint2",
+                    "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+                    "properties": {
+                        "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), 2))]",
+                        "endpointStatus": "Enabled",
+                        "weight": 1
+                    }
+                }
+            ]
         }
+    }
+```
 
 ## 其他资源
 

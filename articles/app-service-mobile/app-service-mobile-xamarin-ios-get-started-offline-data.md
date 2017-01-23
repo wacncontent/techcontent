@@ -45,7 +45,9 @@ ms.author: adrianha
 
 1. 在共享项目中编辑 QSToDoService.cs。将 **applicationURL** 更改为指向无效的 URL：
 
-         const string applicationURL = @"https://your-service.azurewebsites.fail";
+    ```
+     const string applicationURL = @"https://your-service.azurewebsites.fail";
+    ```
 
     还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
 
@@ -81,16 +83,18 @@ ms.author: adrianha
 
     `DefineTable` 方法与所提供的类型中的字段相匹配的本地存储中创建一个表 `ToDoItem` 这种情况下。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
 
-        // QSTodoService.cs
+    ```
+    // QSTodoService.cs
 
-        public async Task InitializeStoreAsync()
-        {
-            var store = new MobileServiceSQLiteStore(localDbPath);
-            store.DefineTable<ToDoItem>();
+    public async Task InitializeStoreAsync()
+    {
+        var store = new MobileServiceSQLiteStore(localDbPath);
+        store.DefineTable<ToDoItem>();
 
-            // Uses the default conflict handler, which fails on conflict
-            await client.SyncContext.InitializeAsync(store);
-        }
+        // Uses the default conflict handler, which fails on conflict
+        await client.SyncContext.InitializeAsync(store);
+    }
+    ```
 
 * `QSTodoService` 的 `todoTable` 成员属于 `IMobileServiceSyncTable` 类型而不是 `IMobileServiceTable` 类型。IMobileServiceSyncTable 会将所有创建、读取、更新和删除 (CRUD) 表操作定向到本地存储数据库。
 
@@ -103,21 +107,23 @@ ms.author: adrianha
     <!-- Need updated conflict handling info : `InitializeAsync` uses the default conflict handler, which fails whenever there is a conflict. To provide a custom conflict handler, see the tutorial [Handling conflicts with offline support for Mobile Services].
     -->
 
-        // QSTodoService.cs
+    ```
+    // QSTodoService.cs
 
-        public async Task SyncAsync()
+    public async Task SyncAsync()
+    {
+        try
         {
-            try
-            {
-                await client.SyncContext.PushAsync();
-                await todoTable.PullAsync("allTodoItems", todoTable.CreateQuery()); // query ID is used for incremental sync
-            }
-
-            catch (MobileServiceInvalidOperationException e)
-            {
-                Console.Error.WriteLine(@"Sync Failed: {0}", e.Message);
-            }
+            await client.SyncContext.PushAsync();
+            await todoTable.PullAsync("allTodoItems", todoTable.CreateQuery()); // query ID is used for incremental sync
         }
+
+        catch (MobileServiceInvalidOperationException e)
+        {
+            Console.Error.WriteLine(@"Sync Failed: {0}", e.Message);
+        }
+    }
+    ```
 
 ## 其他资源
 

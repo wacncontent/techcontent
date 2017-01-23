@@ -48,7 +48,7 @@ Azure 可让你将虚拟机和设备放在 Azure 虚拟网络上，从而将它�
 
 ## 以逻辑方式分段子网
 
-[Azure 虚拟网络](../virtual-network/index.md/)类似于本地网络上的 LAN。Azure 虚拟网络背后的思路是创建单个基于空间的专用 IP 地址网络，将所有 [Azure 虚拟机](../virtual-machines/index.md/)置于其上。可用的专用 IP 地址空间位于类别 A (10.0.0.0/8)、类别 B (172.16.0.0/12) 和类别 C (192.168.0.0/16) 范围内。
+[Azure 虚拟网络](../virtual-network/index.md)类似于本地网络上的 LAN。Azure 虚拟网络背后的思路是创建单个基于空间的专用 IP 地址网络，将所有 [Azure 虚拟机](../virtual-machines/index.md)置于其上。可用的专用 IP 地址空间位于类别 A (10.0.0.0/8)、类别 B (172.16.0.0/12) 和类别 C (192.168.0.0/16) 范围内。
 
 类似于在本地执行的操作，需要将较大的地址空间分段成子网。可以使用基于 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) 的子网原理来创建子网。
 
@@ -72,7 +72,8 @@ Azure 可让你将虚拟机和设备放在 Azure 虚拟网络上，从而将它�
 
 建议你在部署虚拟网络安全设备时配置“用户定义的路由”，我们将在后面的最佳实践中进行介绍。
 
-> [!NOTE] 不需要用户定义的路由，默认系统路由适用于大多数情况。
+> [!NOTE]
+> 不需要用户定义的路由，默认系统路由适用于大多数情况。
 
 有关用户定义的路由及其配置方法的详细信息，请阅读 [What are User Defined Routes and IP Forwarding](../virtual-network/virtual-networks-udr-overview.md)（什么是用户定义的路由和 IP 转发）。
 
@@ -175,7 +176,7 @@ Azure 网络安全设备可通过网络级别控件提供的功能来提供大�
 ## 使用全局负载均衡
 使用公有云计算可部署遍布全球的应用程序，其组件位于世界各地的数据中心。由于 Azure 有全局数据中心，因此这种方案在 Azure 上可行。相比于前面提到的负载均衡技术，全局负载均衡可让服务即使在整个数据中心可能不可用时也能使用。
 
-可以使用 [Azure 流量管理器](../traffic-manager/index.md/)在 Azure 中实现这种类型的全局负载均衡。流量管理器可以根据用户的位置，对服务的连接进行负载均衡。
+可以使用 [Azure 流量管理器](../traffic-manager/index.md)在 Azure 中实现这种类型的全局负载均衡。流量管理器可以根据用户的位置，对服务的连接进行负载均衡。
 
 例如，如果用户从欧盟对服务发出请求，此连接将被定向到位于欧盟数据中心的服务。这一部分的流量管理器全局负载均衡有助于改善性能，因为连接到最近的数据中心比连接到远处的数据中心还要快。
 
@@ -204,7 +205,7 @@ Azure 网络安全设备可通过网络级别控件提供的功能来提供大�
 
 [站点到站点 VPN](../vpn-gateway/vpn-gateway-site-to-site-create.md) 通过 Internet 将整个网络连接到另一个网络。可以使用站点到站点 VPN 将本地网络连接到 Azure 虚拟网络。如果部署站点到站点 VPN，本地网络上的用户能够通过站点到站点 VPN 连接、使用 RDP 或 SSH 协议来连接到 Azure 虚拟网络上的虚拟机，而不需要你允许通过 Internet 的直接 RDP 或 SSH 访问。
 
-也可以使用专用的 WAN 链接提供类似于站点到站点 VPN 的功能。主要差异在于：1. 专用 WAN 链接不会遍历 Internet，2. 专用 WAN 链接通常更加稳定且性能更好。Azure 提供 [ExpressRoute](../expressroute/index.md/) 形式的专用 WAN 链接解决方案。
+也可以使用专用的 WAN 链接提供类似于站点到站点 VPN 的功能。主要差异在于：1. 专用 WAN 链接不会遍历 Internet，2. 专用 WAN 链接通常更加稳定且性能更好。Azure 提供 [ExpressRoute](../expressroute/index.md) 形式的专用 WAN 链接解决方案。
 
 ## 安全地将数据中心扩展到 Azure
 许多企业 IT 组织都希望扩展到云中，而不是扩建其本地数据中心。这种扩展意味着要将现有 IT 基础结构扩展到公有云。使用跨界连接选项，可将 Azure 虚拟网络视为本地网络基础结构上的另一个子网。

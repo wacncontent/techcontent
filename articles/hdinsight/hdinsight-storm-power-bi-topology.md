@@ -52,7 +52,8 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 * **IISLogsTable.sql**：Transact-SQL 语句，用于生成存储数据的数据库。
 
-> [!WARNING] 在 HDInsight 群集上启动该拓扑前，必须先在 SQL 数据库中创建表。
+> [!WARNING]
+> 在 HDInsight 群集上启动该拓扑前，必须先在 SQL 数据库中创建表。
 
 ## 下载示例
 
@@ -72,12 +73,16 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 1. 替换以下示例中“{”与“}”之间的值，构建正确的 __ADO.NET（SQL 身份验证）__信息。
 
-        Server=tcp:{your_dns}.database.chinacloudapi.cn,1433;Data Source={your_dns}.database.chinacloudapi.cn;Initial Catalog=j{your_dns};Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    ```
+    Server=tcp:{your_dns}.database.chinacloudapi.cn,1433;Data Source={your_dns}.database.chinacloudapi.cn;Initial Catalog=j{your_dns};Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    ```
 
 1. 在 Visual Studio 中打开该示例。在“解决方案资源管理器”中打开“App.config”文件，然后找到以下条目：
 
-        <add key="SqlAzureConnectionString" value="##TOBEFILLED##" />
-    
+    ```
+    <add key="SqlAzureConnectionString" value="##TOBEFILLED##" />
+    ```
+
     将 __##TOBEFILLED##__ 值替换为上一步中复制的数据库连接字符串。将 __{your\_username}__ 和 __{your\_password}__ 替换为数据库的用户名和密码。
 
 2. 保存并关闭文件。
@@ -86,7 +91,8 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 1. 在“解决方案资源管理器”中，右键单击“StormToSQL”项目，然后选择“提交到 Storm on HDInsight”。从“Storm 群集”下拉对话框中选择 HDInsight 群集。
 
-    > [!NOTE] “Storm 群集”下拉对话框中填充服务器名称可能需要几秒钟时间。
+    > [!NOTE]
+    > “Storm 群集”下拉对话框中填充服务器名称可能需要几秒钟时间。
     ><p>
     ><p> 如果出现提示，请输入 Azure 订阅的登录凭据。如果有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
 
@@ -98,16 +104,20 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 3. 在拓扑运行几分钟后，请返回用于创建数据库的 SQL 查询窗口。将现有语句替换为以下内容。
 
-        select * from iislogs;
-    
+    ```
+    select * from iislogs;
+    ```
+
     按 Ctrl+Shift+E 执行查询，应显示类似如下的结果。
-    
-        1	2016-05-27 17:57:14.797	255.255.255.255	/bar	GET	200
-        2	2016-05-27 17:57:14.843	127.0.0.1	/spam/eggs	POST	500
-        3	2016-05-27 17:57:14.850	123.123.123.123	/eggs	DELETE	200
-        4	2016-05-27 17:57:14.853	127.0.0.1	/foo	POST	404
-        5	2016-05-27 17:57:14.853	10.9.8.7	/bar	GET	200
-        6	2016-05-27 17:57:14.857	192.168.1.1	/spam	DELETE	200
+
+    ```
+    1	2016-05-27 17:57:14.797	255.255.255.255	/bar	GET	200
+    2	2016-05-27 17:57:14.843	127.0.0.1	/spam/eggs	POST	500
+    3	2016-05-27 17:57:14.850	123.123.123.123	/eggs	DELETE	200
+    4	2016-05-27 17:57:14.853	127.0.0.1	/foo	POST	404
+    5	2016-05-27 17:57:14.853	10.9.8.7	/bar	GET	200
+    6	2016-05-27 17:57:14.857	192.168.1.1	/spam	DELETE	200
+    ```
 
     这是从 Storm 拓扑写入的数据。
 
@@ -121,7 +131,8 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 4. 输入信息以连接到 Azure SQL 数据库。可以通过访问 [Azure 经典管理门户](https://manage.windowsazure.cn)并选择 SQL 数据库查找此信息。
 
-    > [!NOTE] 还可以通过在连接对话框中使用“启用高级选项”，以设置刷新间隔和自定义筛选器。
+    > [!NOTE]
+    > 还可以通过在连接对话框中使用“启用高级选项”，以设置刷新间隔和自定义筛选器。
 
 5. 连接后，将显示一个名称与连接的数据库相同的新数据集。选择该数据集以开始设计报表。
 

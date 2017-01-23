@@ -33,21 +33,26 @@ ms.author: krisragh
 
 2. 单击“脚本”，选择“Insert”操作，将现有脚本替换为以下函数，然后单击“保存”。
 
-        function insert(item, user, request) {
-          item.userId = user.userId;
-          request.execute();
-        }
+    ```
+    function insert(item, user, request) {
+      item.userId = user.userId;
+      request.execute();
+    }
+    ```
 
     在插入之前，此脚本会在项中添加已经过身份验证的用户的用户 ID。
 
-    >[!NOTE] 请确保已启用“[动态架构](https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx)”。否则，不会自动添加 userId 列。默认情况下，已经为新的移动服务启用了此设置。
+    >[!NOTE]
+    > 请确保已启用“[动态架构](https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx)”。否则，不会自动添加 userId 列。默认情况下，已经为新的移动服务启用了此设置。
 
 3. 同样，请将现有的 **Read** 操作替换为以下函数。此脚本将会筛选返回的 TodoItem 对象，使用户只会收到他们自己的插入项。
 
-        function read(query, user, request) {
-           query.where({ userId: user.userId });
-           request.execute();
-        }
+    ```
+    function read(query, user, request) {
+       query.where({ userId: user.userId });
+       request.execute();
+    }
+    ```
 
 ##  <a name="test-app"></a>测试应用程序
 
@@ -70,5 +75,5 @@ ms.author: krisragh
 [向现有移动服务应用添加身份验证]: ./mobile-services-ios-get-started-users.md
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
- 
+
 <!---HONumber=Mooncake_0118_2016-->

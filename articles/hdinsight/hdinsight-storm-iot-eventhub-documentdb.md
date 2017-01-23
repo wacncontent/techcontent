@@ -49,7 +49,8 @@ Azure 事件中心可用于处理传感器生成的大量数据，而 Apache Sto
 
 ![storm 拓扑](./media/hdinsight-storm-iot-eventhub-documentdb/iottopology.png)
 
-> [!NOTE]这是一个简化的关系图，解决方案中的每个组件可能有多个实例。例如，拓扑中每个组件的多个实例分布在 Storm on HDInsight 群集的多个节点中。
+> [!NOTE]
+>这是一个简化的关系图，解决方案中的每个组件可能有多个实例。例如，拓扑中每个组件的多个实例分布在 Storm on HDInsight 群集的多个节点中。
 
 ##实现
 

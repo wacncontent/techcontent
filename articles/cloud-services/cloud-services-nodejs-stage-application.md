@@ -21,7 +21,8 @@ ms.author: robmcm
 
 可以先将要测试的已打包应用程序部署到 Azure 中的过渡环境，然后再将该应用程序移动到用户可通过 Internet 进行访问的生产环境。除只能使用 Azure 生成的经过模糊处理的 URL 访问暂存应用程序以外，过渡环境与生产环境完全相同。在验证应用程序能够正常运行后，可以通过执行虚拟 IP (VIP) 交换将其部署到生产环境。
 
-> [!NOTE] 本文中的步骤仅适用于作为 Azure 云服务托管的 Node 应用程序。
+> [!NOTE]
+> 本文中的步骤仅适用于作为 Azure 云服务托管的 Node 应用程序。
 
 ## 步骤 1：暂存应用程序
 
@@ -29,7 +30,9 @@ ms.author: robmcm
 
 1.  发布服务时，只需将 **-Slot** 参数传递到 **Publish-AzureServiceProject** cmdlet。
 
-        Publish-AzureServiceProject -Slot staging
+    ```
+    Publish-AzureServiceProject -Slot staging
+    ```
 
 2.  登录到 [Azure 经典管理门户]，然后选择“云服务”。创建云服务并将“过渡”列状态更新为“正在运行”后，单击服务名称。
 
@@ -49,7 +52,8 @@ ms.author: robmcm
 
 在过渡环境中验证应用程序的升级版本后，可以通过交换过渡和生产环境的虚拟 IP (VIP) 来快速使应用程序可用于生产环境。
 
-> [!NOTE] 此步骤假定已将应用程序部署到生产环境，并且已暂存其升级版本。
+> [!NOTE]
+> 此步骤假定已将应用程序部署到生产环境，并且已暂存其升级版本。
 
 1.  登录到 [Azure 经典管理门户]，单击“云服务”，然后选择服务名称。
 

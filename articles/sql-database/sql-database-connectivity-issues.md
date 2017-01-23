@@ -251,21 +251,23 @@ ADO.NET 4.6.1：
  - （将示例值更改为你的 IP 地址。）
 
 在 Windows 上，[PortQry.exe](http://www.microsoft.com/en-us/download/details.aspx?id=17148) 实用程序可能很有用。以下是在 Azure SQL 数据库服务器上查询端口情况，以及在便携式计算机上运行的的示例执行：
- 
-    [C:\Users\johndoe\]
-    >> portqry.exe -n johndoesvr9.database.chinacloudapi.cn -p tcp -e 1433
 
-    Querying target system called:
-     johndoesvr9.database.chinacloudapi.cn
+```
+[C:\Users\johndoe\]
+>> portqry.exe -n johndoesvr9.database.chinacloudapi.cn -p tcp -e 1433
 
-    Attempting to resolve name to IP address...
-    Name resolved to 23.100.117.95
+Querying target system called:
+ johndoesvr9.database.chinacloudapi.cn
 
-    querying...
-    TCP port 1433 (ms-sql-s service): LISTENING
+Attempting to resolve name to IP address...
+Name resolved to 23.100.117.95
 
-    [C:\Users\johndoe\]
-    >>
+querying...
+TCP port 1433 (ms-sql-s service): LISTENING
+
+[C:\Users\johndoe\]
+>>
+```
 
 <a id="g-diagnostics-log-your-errors" name="g-diagnostics-log-your-errors"></a>
 
@@ -296,36 +298,40 @@ Enterprise Library 6 (EntLib60) 提供了 .NET 托管类来帮助进行日志记
 
 可以在 Azure SQL 数据库的日志中搜索有关问题事件的条目。在 **master** 数据库中尝试运行以下 Transact-SQL SELECT 语句：
 
-    SELECT
-       object_name
-      ,CAST(f.event_data as XML).value
-          ('(/event/@timestamp)[1]', 'datetime2')                      AS [timestamp]
-      ,CAST(f.event_data as XML).value
-          ('(/event/data[@name="error"]/value)[1]', 'int')             AS [error]
-      ,CAST(f.event_data as XML).value
-          ('(/event/data[@name="state"]/value)[1]', 'int')             AS [state]
-      ,CAST(f.event_data as XML).value
-          ('(/event/data[@name="is_success"]/value)[1]', 'bit')        AS [is_success]
-      ,CAST(f.event_data as XML).value
-          ('(/event/data[@name="database_name"]/value)[1]', 'sysname') AS [database_name]
-    FROM
-      sys.fn_xe_telemetry_blob_target_read_file('el', null, null, null) AS f
-    WHERE
-      object_name != 'login_event'  -- Login events are numerous.
-      and
-      '2015-06-21' < CAST(f.event_data as XML).value
-            ('(/event/@timestamp)[1]', 'datetime2')
-    ORDER BY
-      [timestamp] DESC
-    ;
+```
+SELECT
+   object_name
+  ,CAST(f.event_data as XML).value
+      ('(/event/@timestamp)[1]', 'datetime2')                      AS [timestamp]
+  ,CAST(f.event_data as XML).value
+      ('(/event/data[@name="error"]/value)[1]', 'int')             AS [error]
+  ,CAST(f.event_data as XML).value
+      ('(/event/data[@name="state"]/value)[1]', 'int')             AS [state]
+  ,CAST(f.event_data as XML).value
+      ('(/event/data[@name="is_success"]/value)[1]', 'bit')        AS [is_success]
+  ,CAST(f.event_data as XML).value
+      ('(/event/data[@name="database_name"]/value)[1]', 'sysname') AS [database_name]
+FROM
+  sys.fn_xe_telemetry_blob_target_read_file('el', null, null, null) AS f
+WHERE
+  object_name != 'login_event'  -- Login events are numerous.
+  and
+  '2015-06-21' < CAST(f.event_data as XML).value
+        ('(/event/@timestamp)[1]', 'datetime2')
+ORDER BY
+  [timestamp] DESC
+;
+```
 
 #### 将返回 sys.fn\_xe\_telemetry\_blob\_target\_read\_file 中的若干行
 
 下面是返回行的类似内容。显示的 null 值在其他行中通常不是 null。
 
-    object_name                   timestamp                    error  state  is_success  database_name
+```
+object_name                   timestamp                    error  state  is_success  database_name
 
-    database_xml_deadlock_report  2015-10-16 20:28:01.0090000  NULL   NULL   NULL        AdventureWorks
+database_xml_deadlock_report  2015-10-16 20:28:01.0090000  NULL   NULL   NULL        AdventureWorks
+```
 
 <a id="l-enterprise-library-6" name="l-enterprise-library-6"></a>
 
@@ -339,7 +345,8 @@ Enterprise Library 6 (EntLib60) 是 .NET 类的框架，可帮助你实施云服
 
 - [4 - 坚持不懈是一切成功的秘密：使用暂时性故障处理应用程序块](http://msdn.microsoft.com/zh-cn/library/dn440719%28v=pandp.60%29.aspx)
 
-> [!NOTE] EntLib60 的源代码可公开[下载](http://go.microsoft.com/fwlink/p/?LinkID=290898)。Microsoft 不打算对 EntLib 做进一步的功能更新或维护更新。
+> [!NOTE]
+> EntLib60 的源代码可公开[下载](http://go.microsoft.com/fwlink/p/?LinkID=290898)。Microsoft 不打算对 EntLib 做进一步的功能更新或维护更新。
 
 <a id="entlib60-classes-for-transient-errors-and-retry" name="entlib60-classes-for-transient-errors-and-retry"></a>
 
@@ -392,69 +399,71 @@ Enterprise Library 6 (EntLib60) 是 .NET 类的框架，可帮助你实施云服
 
 为了注重易读性，我们在此副本中删除了大量的 **//comment** 行。
 
-    public bool IsTransient(Exception ex)
+```
+public bool IsTransient(Exception ex)
+{
+  if (ex != null)
+  {
+    SqlException sqlException;
+    if ((sqlException = ex as SqlException) != null)
     {
-      if (ex != null)
+      // Enumerate through all errors found in the exception.
+      foreach (SqlError err in sqlException.Errors)
       {
-        SqlException sqlException;
-        if ((sqlException = ex as SqlException) != null)
+        switch (err.Number)
         {
-          // Enumerate through all errors found in the exception.
-          foreach (SqlError err in sqlException.Errors)
-          {
-            switch (err.Number)
-            {
-                // SQL Error Code: 40501
-                // The service is currently busy. Retry the request after 10 seconds.
-                // Code: (reason code to be decoded).
-              case ThrottlingCondition.ThrottlingErrorNumber:
-                // Decode the reason code from the error message to
-                // determine the grounds for throttling.
-                var condition = ThrottlingCondition.FromError(err);
+            // SQL Error Code: 40501
+            // The service is currently busy. Retry the request after 10 seconds.
+            // Code: (reason code to be decoded).
+          case ThrottlingCondition.ThrottlingErrorNumber:
+            // Decode the reason code from the error message to
+            // determine the grounds for throttling.
+            var condition = ThrottlingCondition.FromError(err);
 
-                // Attach the decoded values as additional attributes to
-                // the original SQL exception.
-                sqlException.Data[condition.ThrottlingMode.GetType().Name] =
-                  condition.ThrottlingMode.ToString();
-                sqlException.Data[condition.GetType().Name] = condition;
+            // Attach the decoded values as additional attributes to
+            // the original SQL exception.
+            sqlException.Data[condition.ThrottlingMode.GetType().Name] =
+              condition.ThrottlingMode.ToString();
+            sqlException.Data[condition.GetType().Name] = condition;
 
-                return true;
+            return true;
 
-              case 10928:
-              case 10929:
-              case 10053:
-              case 10054:
-              case 10060:
-              case 40197:
-              case 40540:
-              case 40613:
-              case 40143:
-              case 233:
-              case 64:
-                // DBNETLIB Error Code: 20
-                // The instance of SQL Server you attempted to connect to
-                // does not support encryption.
-              case (int)ProcessNetLibErrorCode.EncryptionNotSupported:
-                return true;
-            }
-          }
-        }
-        else if (ex is TimeoutException)
-        {
-          return true;
-        }
-        else
-        {
-          EntityException entityException;
-          if ((entityException = ex as EntityException) != null)
-          {
-            return this.IsTransient(entityException.InnerException);
-          }
+          case 10928:
+          case 10929:
+          case 10053:
+          case 10054:
+          case 10060:
+          case 40197:
+          case 40540:
+          case 40613:
+          case 40143:
+          case 233:
+          case 64:
+            // DBNETLIB Error Code: 20
+            // The instance of SQL Server you attempted to connect to
+            // does not support encryption.
+          case (int)ProcessNetLibErrorCode.EncryptionNotSupported:
+            return true;
         }
       }
-
-      return false;
     }
+    else if (ex is TimeoutException)
+    {
+      return true;
+    }
+    else
+    {
+      EntityException entityException;
+      if ((entityException = ex as EntityException) != null)
+      {
+        return this.IsTransient(entityException.InnerException);
+      }
+    }
+  }
+
+  return false;
+}
+```
 
 ## 后续步骤
 

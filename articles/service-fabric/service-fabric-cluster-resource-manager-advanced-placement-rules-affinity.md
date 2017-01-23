@@ -26,8 +26,8 @@ ms.author: masnider
 然后就是“惊叹”。“惊叹”通常是由下列原因之一导致的：
 
 1. 单体式应用中的某个组件 X 原本与我们刚刚转换成独立服务的组件 Y 之间具有未记录的依赖关系。由于这些组件现在群集中不同的节点上运行，因此这种依赖关系已破坏。
-2.	这些组件通过（本地命名管道 | 共享内存 | 磁盘上的文件）进行通信，但我确实需要能够独立更新它，以便能够更快地结束任务。稍后我将删除硬依赖性。
-3.	一切都没问题，但事实上，这两个组件之间的对话非常频繁且性能敏感。将它们移到独立的服务时，整体应用程序性能将受到严重影响，或者延迟会增大。因此，整个应用程序不符合预期。
+2. 这些组件通过（本地命名管道 | 共享内存 | 磁盘上的文件）进行通信，但我确实需要能够独立更新它，以便能够更快地结束任务。稍后我将删除硬依赖性。
+3. 一切都没问题，但事实上，这两个组件之间的对话非常频繁且性能敏感。将它们移到独立的服务时，整体应用程序性能将受到严重影响，或者延迟会增大。因此，整个应用程序不符合预期。
 
 在这种情况下，我们不想要失去重构工作，也不想回到单体结构，但确实需要某种意义上的定位。这种情况会持续到可以重新设计组件，使其像服务一样自然运行，或持续到可以通过其他某种方式达到性能预期（如果可能）为止。
 
@@ -36,11 +36,13 @@ ms.author: masnider
 ## 如何配置相关性
 若要设置相关性，可以定义两个不同服务之间的相关性关系。可以将相关性想象成在一个服务上“指向”另一个服务，同时假设“这个服务只有在那个服务正在运行时才能运行”。 有时我们将这种相关性称为父子关系（将子级指向父级）。相关性确保将一个服务的副本或实例放置在与另一个服务的副本或实例相同的节点上。
 
-    ServiceCorrelationDescription affinityDescription = new ServiceCorrelationDescription();
-    affinityDescription.Scheme = ServiceCorrelationScheme.Affinity;
-    affinityDescription.ServiceName = new Uri("fabric:/otherApplication/parentService");
-    serviceDescription.Correlations.Add(affinityDescription);
-    await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
+```
+ServiceCorrelationDescription affinityDescription = new ServiceCorrelationDescription();
+affinityDescription.Scheme = ServiceCorrelationScheme.Affinity;
+affinityDescription.ServiceName = new Uri("fabric:/otherApplication/parentService");
+serviceDescription.Correlations.Add(affinityDescription);
+await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
+```
 
 ## 不同的相关性选项
 相关性通过多种相互关联的架构之一来表示，有两种不同的模式。相关性的最常见模式是所谓的 NonAlignedAffinity 模式。在 NonAlignedAffinity 下，不同服务的副本或实例放在同一个节点上。另一种模式是 AlignedAffinity。对齐的相关性仅适用于有状态服务。配置两个有状态服务实现对齐的相关性，可确保这些服务的主副本与其他服务的主副本位于相同的节点上。它还能确保这些服务的每个辅助副本对位于相同的节点上。也可以针对有状态服务配置 NonAlignedAffinity（但不太常见）。使用 NonAlignedAffinity 时，会将两个有状态服务的不同副本共置在相同的节点上，但不尝试对齐它们的主副本或辅助副本。

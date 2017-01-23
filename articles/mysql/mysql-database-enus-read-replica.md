@@ -40,8 +40,8 @@ Notes:
 5. In order to ensure that data remains consistent between the master and subordinate instances, subordinate instances are read-only instances. All MySQL links on subordinate instances are read-only links. You cannot create, modify, or delete databases or database accounts on the subordinate instance. You can perform these operations on the master instance, and the system will automatically synchronize them to the subordinate instances.
 
 ## Create read-only (subordinate) instances
-1.	Select an existing instance, and then click **Replicate**.
-2.	Click **Add slave instance** at the bottom, and enter the name of the subordinate server. Confirm that you understand the effect on the charges, and then click **Submit**.
+1. Select an existing instance, and then click **Replicate**.
+2. Click **Add slave instance** at the bottom, and enter the name of the subordinate server. Confirm that you understand the effect on the charges, and then click **Submit**.
 ![Add slave instances][1]
 
 Note: **MySQL Database on Azure** performs a backup of the master instance during the process of creating subordinate instances. To prevent a failure during backup, make sure that no queries or changes that take a long time are running on the master instance.
@@ -59,48 +59,50 @@ Select a subordinate instance and click **Replicate**. This page shows the repli
 ## Implement read/write separation in applications
 A Java sample program for read/write separation at the application end is shown below:
 
-    package test1;
-    
-    import java.sql.Connection;
-    import java.sql.ResultSet;
-    import java.sql.Statement;
-    import java.util.Properties;
-    
-    import com.mysql.jdbc.Driver;
-    import com.mysql.jdbc.ReplicationDriver;;
-    
-    public class ConnectionDemo {
-    
-      public static void main(String[] args) throws Exception {
-        
-        ReplicationDriver driver = new ReplicationDriver();
-        String url = "jdbc:mysql:replication://address=(protocol=tcp)(type=master)(host=masterhost)(port=3306)(user=masteruser),address=(protocol=tcp)(type=slave)(host=slavehost)(port=3306)(user=slaveuser)/yourdb";
-        Properties props = new Properties();    
-        props.put("password", "yourpassword");
-        try (Connection conn = driver.connect(url, props))
+```
+package test1;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Properties;
+
+import com.mysql.jdbc.Driver;
+import com.mysql.jdbc.ReplicationDriver;;
+
+public class ConnectionDemo {
+
+  public static void main(String[] args) throws Exception {
+
+    ReplicationDriver driver = new ReplicationDriver();
+    String url = "jdbc:mysql:replication://address=(protocol=tcp)(type=master)(host=masterhost)(port=3306)(user=masteruser),address=(protocol=tcp)(type=slave)(host=slavehost)(port=3306)(user=slaveuser)/yourdb";
+    Properties props = new Properties();    
+    props.put("password", "yourpassword");
+    try (Connection conn = driver.connect(url, props))
+    {
+        // Perform read/write work on the master
+        conn.setReadOnly(false);
+        conn.setAutoCommit(false);
+        conn.createStatement().executeUpdate("update t1 set id = id+1;");
+        conn.commit();    
+
+        // Set up connection to subordinate;
+        conn.setReadOnly(true);
+
+        // Now, do a query from a subordinate
+        try (Statement statement = conn.createStatement())
         {
-            // Perform read/write work on the master
-            conn.setReadOnly(false);
-            conn.setAutoCommit(false);
-            conn.createStatement().executeUpdate("update t1 set id = id+1;");
-            conn.commit();    
-    
-            // Set up connection to subordinate;
-            conn.setReadOnly(true);
-            
-            // Now, do a query from a subordinate
-            try (Statement statement = conn.createStatement())
-            {
-                ResultSet res = statement.executeQuery("show tables");
-                System.out.println("There are below tables:");
-                while (res.next()) {
-                    String tblName = res.getString(1);
-                    System.out.println(tblName);
-                }
-            } 
-        }
-      }
+            ResultSet res = statement.executeQuery("show tables");
+            System.out.println("There are below tables:");
+            while (res.next()) {
+                String tblName = res.getString(1);
+                System.out.println(tblName);
+            }
+        } 
     }
+  }
+}
+```
 
 A PHP sample program for read/write separation at the application end is shown below:
 
@@ -109,98 +111,102 @@ A PHP sample program for read/write separation at the application end is shown b
 *  Install PECL/mysqlnd_ms, Details can be found <a href="http://php.net/manual/en/mysqlnd-ms.quickstart.configuration.php" target="_blank">here</a>.
 *  Create PECL/mysqlnd_ms plugin config file as follows:
 
-        File mysqlnd_ms_plugin.ini:
-        {
-            "myapp": {
-                   "master": {
-                    "master_0": {
-                        "host": "<your master host>",
-                        "port": "<your master port>",
-                        "user": "<your master username>",
-                        "password": "<your master password>"
-                        }
-                },
-                "slave": {
-                    "slave_0": {
-                        "host": "<your slave host>",
-                        "port": "<your slave port>",
-                        "user": "<your slave username>",
-                        "password": "<your slave password>"
+    ```
+    File mysqlnd_ms_plugin.ini:
+    {
+        "myapp": {
+               "master": {
+                "master_0": {
+                    "host": "<your master host>",
+                    "port": "<your master port>",
+                    "user": "<your master username>",
+                    "password": "<your master password>"
                     }
+            },
+            "slave": {
+                "slave_0": {
+                    "host": "<your slave host>",
+                    "port": "<your slave port>",
+                    "user": "<your slave username>",
+                    "password": "<your slave password>"
                 }
-        }
+            }
+    }
+    ```
 
 * PHP sample program:
 
-        <?php
-        function is_select($query)
-        {
-          switch (mysqlnd_ms_query_is_select($query))
-          {
-            case MYSQLND_MS_QUERY_USE_MASTER:
-              printf("'%s' should be run on the master.<br>\n", $query);
-              break;
-            case MYSQLND_MS_QUERY_USE_SLAVE:
-              printf("'%s' should be run on a slave.<br>\n", $query);
-              break;
-            case MYSQLND_MS_QUERY_USE_LAST_USED:
-              printf("'%s' should be run on the server that has run the previous query.<br>\n", $query);
-              break;
-            default:
-              printf("No suggestion where to run the '%s', fallback to master recommended.<br>\n", $query);
-              break;
-          }
-        }
-        
-        if (!($mysqli = new mysqli("myapp", "<your username>", "<your password>", "<your db>")) || mysqli_connect_errno())
-        {
-          die(sprintf("Failed to connect: [%d] %s\n", mysqli_connect_errno(), mysqli_connect_error()));
-        }
-        $query = "INSERT INTO user(name, num) VALUES ('test', 1)";
-        is_select($query);
-        
-        if (!($res = $mysqli->query($query)))
-        {
-          printf("Failed to insert: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
-        }
-        
-        $query = "SELECT * FROM user";
-        is_select($query);
-        if (!($res = $mysqli->query($query)))
-        {
-          printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
-        }
-        else
-        {
-          for ($i=0; $row = $res->fetch_assoc(); $i++)
-          {
-            $value[$i] = $row;
-          }
-          print_r($value);
-          printf("<br>\n");
-          $res->close();
-        }
-        
-        $query = "/*" . MYSQLND_MS_LAST_USED_SWITCH . "*/SELECT * FROM user limit 1";
-        is_select($query);
-        if (!($res = $mysqli->query($query)))
-        {
-          printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
-        }
-        else
-        {
-          $value = $res->fetch_assoc();
-          print_r($value);
-          printf("<br>\n");
-          $res->close();
-        }
-        $mysqli->close();
-        ?>
+    ```
+    <?php
+    function is_select($query)
+    {
+      switch (mysqlnd_ms_query_is_select($query))
+      {
+        case MYSQLND_MS_QUERY_USE_MASTER:
+          printf("'%s' should be run on the master.<br>\n", $query);
+          break;
+        case MYSQLND_MS_QUERY_USE_SLAVE:
+          printf("'%s' should be run on a slave.<br>\n", $query);
+          break;
+        case MYSQLND_MS_QUERY_USE_LAST_USED:
+          printf("'%s' should be run on the server that has run the previous query.<br>\n", $query);
+          break;
+        default:
+          printf("No suggestion where to run the '%s', fallback to master recommended.<br>\n", $query);
+          break;
+      }
+    }
+
+    if (!($mysqli = new mysqli("myapp", "<your username>", "<your password>", "<your db>")) || mysqli_connect_errno())
+    {
+      die(sprintf("Failed to connect: [%d] %s\n", mysqli_connect_errno(), mysqli_connect_error()));
+    }
+    $query = "INSERT INTO user(name, num) VALUES ('test', 1)";
+    is_select($query);
+
+    if (!($res = $mysqli->query($query)))
+    {
+      printf("Failed to insert: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
+    }
+
+    $query = "SELECT * FROM user";
+    is_select($query);
+    if (!($res = $mysqli->query($query)))
+    {
+      printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
+    }
+    else
+    {
+      for ($i=0; $row = $res->fetch_assoc(); $i++)
+      {
+        $value[$i] = $row;
+      }
+      print_r($value);
+      printf("<br>\n");
+      $res->close();
+    }
+
+    $query = "/*" . MYSQLND_MS_LAST_USED_SWITCH . "*/SELECT * FROM user limit 1";
+    is_select($query);
+    if (!($res = $mysqli->query($query)))
+    {
+      printf("Failed to query: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
+    }
+    else
+    {
+      $value = $res->fetch_assoc();
+      print_r($value);
+      printf("<br>\n");
+      $res->close();
+    }
+    $mysqli->close();
+    ?>
+    ```
 
 ## Upgrade subordinate instances
 You can upgrade a subordinate instance to an online read/write instance. After you upgrade the instance, changes on the master instance will no longer be replicated to this instance. You can perform read/write operations on this instance.
-1.	Select the subordinate instance that you need to upgrade, and click **Replicate**.
-2.	Click **Upgrade** at the bottom of the page, and then click **Confirm**.
+1. Select the subordinate instance that you need to upgrade, and click **Replicate**.
+2. Click **Upgrade** at the bottom of the page, and then click **Confirm**.
 ![Upgrade subordinate instances][4]
 
 ## Master-subordinate replication FAQs

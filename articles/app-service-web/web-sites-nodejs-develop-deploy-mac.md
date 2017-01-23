@@ -72,7 +72,7 @@ ms.author: robmcm
     有关应用服务计划的详细信息，请参阅 [Azure App Service 计划概述](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)
 
 8. 单击“创建”。
-   
+
     ![][portal-quick-create2]
 
     不久之后（通常不到一分钟），Azure 将创建出新的 Web 应用。
@@ -84,7 +84,7 @@ ms.author: robmcm
 3. 选择“从源控件设置部署”。在“设置部署”对话框中，选择“本地 Git 存储库”选项，然后单击“确定”。随后将创建在 Azure 中运行的、与应用关联的 Git 存储库。每次将代码提交到 Git 存储库的 *master* 分支时，代码就会发布到实时运行的 API 应用实例。
 
 1. 回到 [Azure 门户预览](https://portal.azure.cn)。 在“Web 应用”边栏选项卡中，单击“设置”，然后单击“属性”。
- 
+
     推送到远程 Git 存储库即可发布。存储库的 URL 将在“GIT URL”下列出。本教程的后面部分需使用此 URL。
 
     ![][git-url]
@@ -99,16 +99,20 @@ ms.author: robmcm
 
 2. 将以下代码复制到 **server.js** 文件，然后保存该文件：
 
-        var http = require('http')
-        var port = process.env.PORT || 1337;
-        http.createServer(function(req, res) {
-          res.writeHead(200, { 'Content-Type': 'text/plain' });
-          res.end('Hello World\n');
-        }).listen(port);
+    ```
+    var http = require('http')
+    var port = process.env.PORT || 1337;
+    http.createServer(function(req, res) {
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('Hello World\n');
+    }).listen(port);
+    ```
 
 3. 打开命令行，并使用以下命令在本地启动 Web 应用。
 
-        node server.js
+    ```
+    node server.js
+    ```
 
 4. 打开 Web 浏览器并导航到 http://localhost:1337。
 
@@ -124,36 +128,46 @@ ms.author: robmcm
 
 1. 从命令行中，将目录更改为 **helloworld** 目录，然后输入以下命令来初始化本地 Git 存储库。
 
-        git init
+    ```
+    git init
+    ```
 
 2. 使用以下命令将文件添加到存储库中：
 
-        git add .
-        git commit -m "initial commit"
+    ```
+    git add .
+    git commit -m "initial commit"
+    ```
 
 3. 使用以下命令添加 Git remote，以便将更新推送到你之前创建的 Web 应用：
 
-        git remote add azure [URL for remote repository]
+    ```
+    git remote add azure [URL for remote repository]
+    ```
 
 4. 使用以下命令将更改推送到 Azure：
 
-        git push azure master
+    ```
+    git push azure master
+    ```
 
     系统将提示你输入之前创建的密码。输出类似于以下示例。
 
-        Counting objects: 3, done.
-        Delta compression using up to 8 threads.
-        Compressing objects: 100% (2/2), done.
-        Writing objects: 100% (3/3), 374 bytes, done.
-        Total 3 (delta 0), reused 0 (delta 0)
-        remote: New deployment received.
-        remote: Updating branch 'master'.
-        remote: Preparing deployment for commit id '5ebbe250c9'.
-        remote: Preparing files for deployment.
-        remote: Deploying Web.config to enable Node.js activation.
-        remote: Deployment successful.
-        To https://user@testsite.scm.chinacloudsites.cn/testsite.git
-         * [new branch]      master -> master
+    ```
+    Counting objects: 3, done.
+    Delta compression using up to 8 threads.
+    Compressing objects: 100% (2/2), done.
+    Writing objects: 100% (3/3), 374 bytes, done.
+    Total 3 (delta 0), reused 0 (delta 0)
+    remote: New deployment received.
+    remote: Updating branch 'master'.
+    remote: Preparing deployment for commit id '5ebbe250c9'.
+    remote: Preparing files for deployment.
+    remote: Deploying Web.config to enable Node.js activation.
+    remote: Deployment successful.
+    To https://user@testsite.scm.chinacloudsites.cn/testsite.git
+     * [new branch]      master -> master
+    ```
 
 5. 若要查看你的应用，请在 Azure 门户预览的“Web 应用”部分中单击“浏览”按钮。
 
@@ -169,9 +183,11 @@ ms.author: robmcm
 
 2. 从命令行中，将目录更改为 **helloworld** 目录，然后运行以下命令：
 
-        git add .
-        git commit -m "changing to hello azure"
-        git push azure master
+    ```
+    git add .
+    git commit -m "changing to hello azure"
+    git push azure master
+    ```
 
     系统将再次提示你输入密码。
 

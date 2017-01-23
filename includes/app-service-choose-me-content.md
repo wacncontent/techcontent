@@ -6,7 +6,7 @@ Azure 虚拟机可以处理各种云托管任务。但是，创建和管理 VM �
 对于许多类型的应用程序工作负荷而言，App Service 是最佳选择。企业可能想要构建或迁移可处理每周数以百万次点击的商业 Web 应用，该 Web 应用部署在全国两个数据中心。同一企业可能还部署了业务线应用用于从企业 Active Directory 跟踪已经过身份验证的用户的费用报告，应用可能包含移动设备组件并连接到本地资源和业务流程。费用报告可能需要使用周期性的后台作业来计算和汇总大量信息。IT 顾问可以采用常用的开放源应用程序为小型企业设置内容管理系统。下图显示了一些可以在 Azure App Service 中运行的 Web 应用类型。
 
 <a name="appservice_diagram"></a> ![App Service 图](./media/app-service-choose-me-content/diagram.png)
- 
+
 **图：Azure App Service 支持通过各种技术构建的静态网页、常用 Web 应用和自定义 Web 应用。你还可以运行移动后端、API 应用和非 Web 计算工作负荷（使用 Web 作业）。**
 
 借助 Azure App Service，你还可以使用 [WebJobs](../articles/app-service-web/websites-webjobs-resources.md) 功能运行任何类型的计算工作负荷。

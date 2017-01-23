@@ -34,17 +34,21 @@ AMQP 1.0 支持在服务总线 SDK 2.1 版或更高版本中提供。为确保�
 
 应用程序使用 App.config 配置文件存储设置是一个很好的做法。对于服务总线应用程序，你可以使用 App.config 来存储服务总线 **ConnectionString** 值的设置。示例 App.config 文件如下所示：
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <configuration>
-        <appSettings>
-            <add key="Microsoft.ServiceBus.ConnectionString"
-                 value="Endpoint=sb://[namespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp" />
-        </appSettings>
-    </configuration>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <appSettings>
+        <add key="Microsoft.ServiceBus.ConnectionString"
+             value="Endpoint=sb://[namespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp" />
+    </appSettings>
+</configuration>
+```
 
 `Microsoft.ServiceBus.ConnectionString` 设置的值是用于配置服务总线连接的服务总线连接字符串。其格式如下所示：
 
-    Endpoint=sb://[namespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp
+```
+Endpoint=sb://[namespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[SAS key];TransportType=Amqp
+```
 
 其中 `[namespace]` 和 `SharedAccessKey` 从 [Azure 门户预览][]获取。有关详细信息，请参阅[服务总线队列入门][]。
 

@@ -25,7 +25,8 @@ ms.author: ganesr
 
 本文将指导你完成为 Azure ExpressRoute 线路获取地址解析协议 (ARP) 表的步骤。
 
->[!IMPORTANT] 本文档旨在帮助你诊断和修复简单问题。它不是为了替代 Azure 支持部门。如果你使用以下指南无法解决问题，请使用 [Azure 帮助+支持](https://portal.azure.cn/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade)建立支持请求。
+>[!IMPORTANT]
+> 本文档旨在帮助你诊断和修复简单问题。它不是为了替代 Azure 支持部门。如果你使用以下指南无法解决问题，请使用 [Azure 帮助+支持](https://portal.azure.cn/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade)建立支持请求。
 
 ## 地址解析协议 (ARP) 和 ARP 表
 ARP 是 [RFC 826](https://tools.ietf.org/html/rfc826) 中定义的第 2 层协议。ARP 用于将以太网地址（MAC 地址）映射到 IP 地址。
@@ -40,10 +41,12 @@ ARP 表可帮助验证第 2 层配置，并可针对第 2 层的基本连接问�
 
 下面是一个 ARP 表的示例：
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+     10 On-Prem           10.0.0.1 ffff.eeee.dddd
+      0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
 
 以下部分介绍如何查看供 ExpressRoute 边缘路由器查看的 ARP 表。
 
@@ -63,47 +66,57 @@ ARP 表可帮助验证第 2 层配置，并可针对第 2 层的基本连接问�
 ### Azure 专用对等互连的 ARP 表
 以下 cmdlet 提供 Azure 专用对等互连的 ARP 表：
 
-        # Required Variables
-        $ckt = "<your Service Key here>
+```
+    # Required Variables
+    $ckt = "<your Service Key here>
 
-        # ARP table for Azure private peering--primary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Primary
+    # ARP table for Azure private peering--primary path
+    Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Primary
 
-        # ARP table for Azure private peering--secondary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Secondary
+    # ARP table for Azure private peering--secondary path
+    Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Secondary
+```
 
 下面是其中一条路径的示例输出：
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+     10 On-Prem           10.0.0.1 ffff.eeee.dddd
+      0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
 
 ### Azure 公共对等互连的 ARP 表：
 以下 cmdlet 提供 Azure 公共对等互连的 ARP 表：
 
-        # Required Variables
-        $ckt = "<your Service Key here>
+```
+    # Required Variables
+    $ckt = "<your Service Key here>
 
-        # ARP table for Azure public peering--primary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Primary
+    # ARP table for Azure public peering--primary path
+    Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Primary
 
-        # ARP table for Azure public peering--secondary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Secondary
-
-下面是其中一条路径的示例输出：
-
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+    # ARP table for Azure public peering--secondary path
+    Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Secondary
+```
 
 下面是其中一条路径的示例输出：
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           64.0.0.1 ffff.eeee.dddd
-          0 Microsoft         64.0.0.2 aaaa.bbbb.cccc
+```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+     10 On-Prem           10.0.0.1 ffff.eeee.dddd
+      0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```
+
+下面是其中一条路径的示例输出：
+
+```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+     10 On-Prem           64.0.0.1 ffff.eeee.dddd
+      0 Microsoft         64.0.0.2 aaaa.bbbb.cccc
+```
 
 ## 如何使用此信息
 对等互连的 ARP 表可用于验证第 2 层配置和连接。本部分概述了不同情况下的 ARP 表的外观。
@@ -124,11 +137,14 @@ ARP 表可帮助验证第 2 层配置，并可针对第 2 层的基本连接问�
 
  ARP 表中只显示一个条目。它显示在 Microsoft 端使用的 MAC 地址与 IP 地址之间的映射。
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-          0 Microsoft         65.0.0.2 aaaa.bbbb.cccc
+ ```
+    Age InterfaceProperty IpAddress  MacAddress    
+    --- ----------------- ---------  ----------    
+      0 Microsoft         65.0.0.2 aaaa.bbbb.cccc
+ ```
 
->[!NOTE] 如果你遇到此类问题，请通过连接提供商联系建立支持请求以解决它。
+>[!NOTE]
+> 如果你遇到此类问题，请通过连接提供商联系建立支持请求以解决它。
 
 ### 当 Azure 端出现问题时的 ARP 表
 

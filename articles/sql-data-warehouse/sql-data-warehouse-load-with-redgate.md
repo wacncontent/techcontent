@@ -26,7 +26,8 @@ ms.author: mausher;barbkess
 
 本教程介绍如何使用 [Redgate 的 Data Platform Studio](http://www.red-gate.com/products/azure-development/data-platform-studio/) (DPS) 将数据从本地 SQL Server 迁移到 Azure SQL 数据仓库。Data Platform Studio 应用了适当的兼容性修补程序和优化措施，可以快速启动 SQL 数据仓库操作。
 
-> [!NOTE] [Redgate](http://www.red-gate.com) 是 Microsoft 的长期合作伙伴，提供各种 SQL Server 工具。Data Platform Studio 中的此功能免费提供，可作商业和非商业用途。
+> [!NOTE]
+> [Redgate](http://www.red-gate.com) 是 Microsoft 的长期合作伙伴，提供各种 SQL Server 工具。Data Platform Studio 中的此功能免费提供，可作商业和非商业用途。
 
 ## 开始之前
 ### 创建或标识资源
@@ -36,12 +37,14 @@ ms.author: mausher;barbkess
 - **Azure 存储帐户**：Data Platform Studio 先将数据暂存在 Azure Blob 存储中，然后再将其加载到 SQL 数据仓库。存储帐户必须使用“Resource Manager”部署模型（默认）而非“经典”部署模型。如果还没有存储帐户，请学习如何创建一个存储帐户。
 - **SQL 数据仓库**：本教程将数据从本地 SQL Server 移到 SQL 数据仓库，因此用户需要有一个联机数据仓库。如果还没有数据仓库，请学习如何创建 Azure SQL 数据仓库。
 
-> [!NOTE] 如果在同一区域创建存储帐户和数据仓库，则可提高性能。
+> [!NOTE]
+> 如果在同一区域创建存储帐户和数据仓库，则可提高性能。
 
 ## 步骤 1：使用 Azure 帐户登录到 Data Platform Studio
 打开 Web 浏览器，导航到 [Data Platform Studio](https://www.dataplatformstudio.com/) 网站。使用 Azure 帐户登录，该帐户也用于创建过存储帐户和数据仓库。如果电子邮件地址与工作/学校帐户和 Microsoft 帐户均有关联，请务必选择能够访问资源的帐户。
 
-> [!NOTE] 如果这是用户第一次使用 Data Platform Studio，系统会要求用户授予管理其 Azure 资源所需的应用程序权限。
+> [!NOTE]
+> 如果这是用户第一次使用 Data Platform Studio，系统会要求用户授予管理其 Azure 资源所需的应用程序权限。
 
 ## 步骤 2：启动导入向导
 在 DPS 主屏幕中选择“导入到 Azure SQL 数据仓库”链接，启动导入向导。
@@ -56,7 +59,8 @@ ms.author: mausher;barbkess
 
 ![][2]  
 
-> [!NOTE] 该网关可以安装在能够通过网络访问源 SQL Server 数据库的任何计算机上。它可以使用当前用户的凭据通过 Windows 身份验证访问 SQL Server 数据库。
+> [!NOTE]
+> 该网关可以安装在能够通过网络访问源 SQL Server 数据库的任何计算机上。它可以使用当前用户的凭据通过 Windows 身份验证访问 SQL Server 数据库。
 
 安装以后，网关状态变为“已连接”，此时可选择“下一步”。
 
@@ -70,7 +74,8 @@ DPS 会检查所选数据库中是否存在要导入的表。DPS 默认导入数
 ## 步骤 5：选择要暂存数据的存储帐户
 DPS 会提示用户输入暂存数据的位置。从订阅中选择一个现有的存储帐户，然后选择“下一步”。
 
-> [!NOTE] DPS 会在所选存储帐户中创建新的 blob 容器，并且每次导入都会使用不同的文件夹。
+> [!NOTE]
+> DPS 会在所选存储帐户中创建新的 blob 容器，并且每次导入都会使用不同的文件夹。
 
 ![][4]  
 
@@ -79,7 +84,8 @@ DPS 会提示用户输入暂存数据的位置。从订阅中选择一个现有�
 
 ![][5]  
 
-> [!NOTE] DPS 将源数据表合并到数据仓库中。如果表名称相同，导致 DPS 必须覆盖数据仓库中的现有表，DPS 会警告用户。用户可以选择删除数据仓库中的任何现有对象，只需在导入之前勾选“删除所有现有对象”即可。
+> [!NOTE]
+> DPS 将源数据表合并到数据仓库中。如果表名称相同，导致 DPS 必须覆盖数据仓库中的现有表，DPS 会警告用户。用户可以选择删除数据仓库中的任何现有对象，只需在导入之前勾选“删除所有现有对象”即可。
 
 ## 步骤 7：导入数据
 DPS 会确认用户是否要导入数据。直接单击“开始导入”按钮，开始数据导入过程。

@@ -13,7 +13,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 08/03/2016
-wacn.date: 09/05/2016
+wacn.date: 01/19/2017
 ms.author: kgremban
 ---
 
@@ -33,7 +33,7 @@ ms.author: kgremban
 
 - 获取 Azure AD 识别的应用程序标识
 - 获取应用程序可用于向 AD 验证其身份的一个或多个机密/密钥
-- 在 Azure 门户中使用自定义名称、徽标等指定应用程序的品牌。
+- 在 Azure 门户预览中使用自定义名称、徽标等指定应用程序的品牌。
 - 对应用应用 Azure AD 授权功能，包括：
   - 基于角色的访问控制 (RBAC)
   - 使用 Azure Active Directory 作为 oAuth 授权服务器（保护应用程序公开的 API）
@@ -42,7 +42,8 @@ ms.author: kgremban
       - 应用权限（仅限全局管理员）。例如：另一个 Azure AD 应用程序中的角色成员身份，或相对于 Azure 资源、资源组或订阅的角色成员身份
       - 委派的权限（任何用户）。例如：Azure AD、登录和读取配置文件
 
-> [!NOTE]默认情况下，任何成员都可以注册应用程序。若要了解如何限定只有特定成员拥有注册应用程序的权限，请参阅 [How applications are added to Azure AD（如何将应用程序添加到 Azure AD）](./active-directory-how-applications-are-added.md#who-has-permission-to-add-applications-to-my-azure-ad-instance)文档。
+> [!NOTE]
+>默认情况下，任何成员都可以注册应用程序。若要了解如何限定只有特定成员拥有注册应用程序的权限，请参阅 [How applications are added to Azure AD（如何将应用程序添加到 Azure AD）](./active-directory-how-applications-are-added.md#who-has-permission-to-add-applications-to-my-azure-ad-instance)文档。
 
 下面是全局管理员需要执行哪些操作，才能帮助开发人员将其应用程序投放到生产环境：
 
@@ -60,7 +61,7 @@ ms.author: kgremban
 
 [要求用户分配](./active-directory-applications-guiding-developers-requiring-user-assignment.md)
 
-如果你是 Azure AD Premium 或 Enterprise Mobility Suite (EMS) 的订阅者，我们强烈建议利用组。将组分配到应用程序可让你将持续进行的访问管理委派给组所有者。你可以创建组，或使用组管理功能请求组织中负责人创建组。
+如果你是 Azure AD Premium 或 Enterprise Mobility Suite (EMS) 的订阅者，我们强烈建议使用组。将组分配到应用程序可让你将持续进行的访问管理委派给组所有者。你可以创建组，或使用组管理功能请求组织中负责人创建组。
 
 [将用户分配到应用程序](./active-directory-applications-guiding-developers-assigning-users.md)  
 
@@ -76,4 +77,4 @@ ms.author: kgremban
 
 - [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 
-<!---HONumber=Mooncake_0606_2016-->
+<!---HONumber=Mooncake_0829_2016-->

@@ -263,4 +263,3 @@
 # Resources
 ## [Best practices](app-service-best-practices.md)
 ## [List of WebJob resources](websites-webjobs-resources.md)
-

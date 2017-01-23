@@ -24,17 +24,19 @@ ms.author: tomfitz
 ## 架构格式
 若要创建链接，请将以下架构添加到模板的资源节中。
 
+```
+{
+    "type": enum,
+    "apiVersion": "2015-01-01",
+    "name": string,
+    "dependsOn": [ array values ],
+    "properties":
     {
-        "type": enum,
-        "apiVersion": "2015-01-01",
-        "name": string,
-        "dependsOn": [ array values ],
-        "properties":
-        {
-            "targetId": string,
-            "notes": string
-        }
+        "targetId": string,
+        "notes": string
     }
+}
+```
 
 ## 值
 下表描述了需要在架构中设置的值。
@@ -62,60 +64,64 @@ ms.author: tomfitz
 
 使用以下 Azure PowerShell 命令可查看订阅中的所有链接。你可以提供其他参数来限制结果。
 
-    Get-AzureRmResource -ResourceType Microsoft.Resources/links -isCollection -ResourceGroupName <YourResourceGroupName>
+```
+Get-AzureRmResource -ResourceType Microsoft.Resources/links -isCollection -ResourceGroupName <YourResourceGroupName>
+```
 
 ## 示例
 以下示例将只读锁应用于 Web 应用。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "hostingPlanName": {
-                "type": "string"
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hostingPlanName": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "siteName": "[concat('site',uniqueString(resourceGroup().id))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-08-01",
+            "type": "Microsoft.Web/serverfarms",
+            "name": "[parameters('hostingPlanName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "tier": "Free",
+                "name": "f1",
+                "capacity": 0
+            },
+            "properties": {
+                "numberOfWorkers": 1
             }
         },
-        "variables": {
-            "siteName": "[concat('site',uniqueString(resourceGroup().id))]"
-        },
-        "resources": [
-            {
-                "apiVersion": "2015-08-01",
-                "type": "Microsoft.Web/serverfarms",
-                "name": "[parameters('hostingPlanName')]",
-                "location": "[resourceGroup().location]",
-                "sku": {
-                    "tier": "Free",
-                    "name": "f1",
-                    "capacity": 0
-                },
-                "properties": {
-                    "numberOfWorkers": 1
-                }
-            },
-            {
-                "apiVersion": "2015-08-01",
-                "name": "[variables('siteName')]",
-                "type": "Microsoft.Web/sites",
-                "location": "[resourceGroup().location]",
-                "dependsOn": [ "[parameters('hostingPlanName')]" ],
-                "properties": {
-                    "serverFarmId": "[parameters('hostingPlanName')]"
-                }
-            },
-            {
-                "type": "Microsoft.Web/sites/providers/links",
-                "apiVersion": "2015-01-01",
-                "name": "[concat(variables('siteName'),'/Microsoft.Resources/SiteToStorage')]",
-                "dependsOn": [ "[variables('siteName')]" ],
-                "properties": {
-                    "targetId": "[resourceId('Microsoft.Storage/storageAccounts','storagecontoso')]",
-                    "notes": "This web site uses the storage account to store user information."
-                }
+        {
+            "apiVersion": "2015-08-01",
+            "name": "[variables('siteName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [ "[parameters('hostingPlanName')]" ],
+            "properties": {
+                "serverFarmId": "[parameters('hostingPlanName')]"
             }
-        ],
-        "outputs": {}
-    }
+        },
+        {
+            "type": "Microsoft.Web/sites/providers/links",
+            "apiVersion": "2015-01-01",
+            "name": "[concat(variables('siteName'),'/Microsoft.Resources/SiteToStorage')]",
+            "dependsOn": [ "[variables('siteName')]" ],
+            "properties": {
+                "targetId": "[resourceId('Microsoft.Storage/storageAccounts','storagecontoso')]",
+                "notes": "This web site uses the storage account to store user information."
+            }
+        }
+    ],
+    "outputs": {}
+}
+```
 
 ## 后续步骤
 * 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。

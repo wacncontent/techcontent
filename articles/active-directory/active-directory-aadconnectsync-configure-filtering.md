@@ -22,14 +22,15 @@ wacn.date: 01/09/2017
 
 有某些情况下，需要对默认配置进行一些更改。下面是一些示例：
 
-- 打算使用[多重 Azure AD 目录拓扑](./active-directory-aadconnect-topologies.md#each-object-only-once-in-an-azure-ad-directory/)。然后，你需要应用筛选器以控制要将哪些对象同步到特定的 Azure AD 目录。
+- 打算使用[多重 Azure AD 目录拓扑](./active-directory-aadconnect-topologies.md#each-object-only-once-in-an-azure-ad-directory)。然后，你需要应用筛选器以控制要将哪些对象同步到特定的 Azure AD 目录。
 - 要试用 Azure 或 Office 365，因此只想在 Azure AD 中创建少量的用户。在进行小规模试用时，无需使用完整全局地址列表即可演示功能。
 - Azure AD 中有很多不需要的服务帐户和其他非个人帐户。
 - 出于合规性的原因，不能删除任何本地用户帐户，而只能禁用它们。但是，在 Azure AD 中，你只希望存在活动的帐户。
 
 本文介绍如何配置不同的筛选方法。
 
-> [!IMPORTANT]Microsoft 不支持在正式记录的这些操作之外修改或操作 Azure AD Connect 同步。其中的任何操作都可能会导致 Azure AD Connect 同步出现不一致或不受支持状态，并由此导致 Microsoft 无法提供这种部署的技术支持。
+> [!IMPORTANT]
+>Microsoft 不支持在正式记录的这些操作之外修改或操作 Azure AD Connect 同步。其中的任何操作都可能会导致 Azure AD Connect 同步出现不一致或不受支持状态，并由此导致 Microsoft 无法提供这种部署的技术支持。
 
 ## 基础知识和重要说明
 在 Azure AD Connect 同步中，你可以随时启用筛选。如果你从目录同步的默认配置开始并在此后配置了筛选，则筛选出的对象不再同步到 Azure AD。由于这种变化，Azure AD 中前面已同步，但之后进行筛选的任何对象会在 Azure AD 中进行删除。
@@ -40,7 +41,7 @@ wacn.date: 01/09/2017
 
 为了防止意外删除许多对象，默认情况下已打开[防止意外删除](./active-directory-aadconnectsync-feature-prevent-accidental-deletes.md)功能。如果由于筛选而删除了许多对象（默认为 500 个），则需要遵循本文中的步骤来允许将删除结果传播到 Azure AD。
 
-如果使用 2015 年 11 月 ([1\.0.9125](./active-directory-aadconnect-version-history.md#1091250/)) 之前的内部版本、更改筛选器配置或使用密码同步，则在完成配置之后，需要触发所有密码的完全同步。有关如何触发密码完全同步的步骤，请参阅 [Trigger a full sync of all passwords](./active-directory-aadconnectsync-implement-password-synchronization.md#trigger-a-full-sync-of-all-passwords/)（触发所有密码的完全同步）。如果使用 1.0.9125 或更高版本，则常规的**完全同步**操作也会计算是否应同步密码，因此不再需要执行这个额外的步骤。
+如果使用 2015 年 11 月 ([1\.0.9125](./active-directory-aadconnect-version-history.md#1091250)) 之前的内部版本、更改筛选器配置或使用密码同步，则在完成配置之后，需要触发所有密码的完全同步。有关如何触发密码完全同步的步骤，请参阅 [Trigger a full sync of all passwords](./active-directory-aadconnectsync-implement-password-synchronization.md#trigger-a-full-sync-of-all-passwords)（触发所有密码的完全同步）。如果使用 1.0.9125 或更高版本，则常规的**完全同步**操作也会计算是否应同步密码，因此不再需要执行这个额外的步骤。
 
 如果在 Azure AD 中由于筛选错误导致**用户**对象被无意中删除，可以通过删除筛选配置，然后再次同步目录，在 Azure AD 中重新创建用户对象。此操作可以从 Azure AD 的回收站中还原用户。但是，你无法取消删除其他对象类型。例如，如果意外删除了某个安全组，而该组用于将资源加入 ACL，则无法恢复该组及其 ACL。
 
@@ -71,7 +72,7 @@ Azure AD Connect 只删除其曾经认为在范围中的对象。如果 Azure AD
 ## 筛选选项
 可将以下筛选配置类型应用到目录同步工具：
 
-- [**基于组**](./active-directory-aadconnect-get-started-custom.md#sync-filtering-based-on-groups/)：初始安装时只能使用安装向导配置基于单个组的筛选。本主题不进一步讨论此类型。
+- [**基于组**](./active-directory-aadconnect-get-started-custom.md#sync-filtering-based-on-groups)：初始安装时只能使用安装向导配置基于单个组的筛选。本主题不进一步讨论此类型。
 
 - [**基于域**](#domain-based-filtering)：使用此选项可以选择要将哪些域同步到 Azure AD。如果在安装 Azure AD Connect 同步之后对本地基础结构进行更改，此选项还可让你在同步引擎配置中添加和删除域。
 
@@ -84,7 +85,7 @@ Azure AD Connect 只删除其曾经认为在范围中的对象。如果 Azure AD
 ## 基于域的筛选 <a name="domain-based-filtering"></a>
 本部分提供配置域筛选器时需要执行的步骤。如果安装 Azure AD Connect 之后在林中添加或删除域，则也必须更新筛选配置。
 
-更改基于域的筛选的首选方法是运行安装向导并更改[域和 OU 筛选](./active-directory-aadconnect-get-started-custom.md#domain-and-ou-filtering/)。使用安装向导可以自动执行本主题中所述的所有任务。
+更改基于域的筛选的首选方法是运行安装向导并更改[域和 OU 筛选](./active-directory-aadconnect-get-started-custom.md#domain-and-ou-filtering)。使用安装向导可以自动执行本主题中所述的所有任务。
 
 仅当你出于某种原因而无法运行安装向导时，才遵循以下步骤。
 
@@ -137,7 +138,7 @@ Azure AD Connect 只删除其曾经认为在范围中的对象。如果 Azure AD
 - 若要完成配置设置，请参阅[应用并验证更改](#apply-and-verify-changes)。
 
 ## 基于组织单位的筛选 <a name="organizational-unitbased-filtering"></a>
-更改基于 OU 的筛选的首选方法是运行安装向导并更改[域和 OU 筛选](./active-directory-aadconnect-get-started-custom.md#domain-and-ou-filtering/)。使用安装向导可以自动执行本主题中所述的所有任务。
+更改基于 OU 的筛选的首选方法是运行安装向导并更改[域和 OU 筛选](./active-directory-aadconnect-get-started-custom.md#domain-and-ou-filtering)。使用安装向导可以自动执行本主题中所述的所有任务。
 
 仅当你出于某种原因而无法运行安装向导时，才遵循以下步骤。
 
@@ -157,7 +158,7 @@ Azure AD Connect 只删除其曾经认为在范围中的对象。如果 Azure AD
 8. 若要完成配置设置，请参阅[应用并验证更改](#apply-and-verify-changes)。
 
 ## 基于属性的筛选 <a name="attribute-based-filtering"></a>
-为了正常执行这些步骤，请确保使用 2015 年 11 月 ([1\.0.9125](./active-directory-aadconnect-version-history.md#1091250/)) 或更高版本。
+为了正常执行这些步骤，请确保使用 2015 年 11 月 ([1\.0.9125](./active-directory-aadconnect-version-history.md#1091250)) 或更高版本。
 
 基于属性的筛选是最灵活的对象筛选方式。将对象同步到 Azure AD 时，可以使用[声明性预配](./active-directory-aadconnectsync-understanding-declarative-provisioning.md)功能来控制几乎每个方面的问题。
 

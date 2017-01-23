@@ -30,15 +30,21 @@ ms.author: memccror
 
 你可以使用以下命令查看给定虚拟机的所有属性，包括标记：
 
-        azure vm show -g MyResourceGroup -n MyTestVM
+```
+    azure vm show -g MyResourceGroup -n MyTestVM
+```
 
 若要通过 Azure CLI 添加新的 VM 标记，可以使用 `azure vm set` 命令以及标记参数 **-t**：
 
-        azure vm set -g MyResourceGroup -n MyTestVM -t myNewTagName1=myNewTagValue1;myNewTagName2=myNewTagValue2
+```
+    azure vm set -g MyResourceGroup -n MyTestVM -t myNewTagName1=myNewTagValue1;myNewTagName2=myNewTagValue2
+```
 
 若要删除所有标记，可以在 `azure vm set` 命令中使用 **-T** 参数。
 
-        azure vm set - g MyResourceGroup -n MyTestVM -T
+```
+    azure vm set - g MyResourceGroup -n MyTestVM -T
+```
 
 既然我们已通过 Azure CLI 和门户预览将标记应用到资源中，那就让我们看一看使用情况详细信息，以在计费门户中的查看标记。
 

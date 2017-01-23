@@ -49,21 +49,25 @@ ms.author: wesmc
 
 在较高级别上，模板是指定特定设备应如何接收通知的一种方法。模板通过引用作为你应用程序后端所发消息的一部分的属性，指定确切的负载格式。在我们的示例中，我们将发送包含所有支持的语言的区域设置未知的消息：
 
-    {
-        "News_English": "...",
-        "News_French": "...",
-        "News_Mandarin": "..."
-    }
+```
+{
+    "News_English": "...",
+    "News_French": "...",
+    "News_Mandarin": "..."
+}
+```
 
 然后我们将确保设备注册到引用正确属性的模板。例如，要接收简单的 toast 消息的 Windows 应用商店应用将注册以下包含任何相应标记的模板：
 
-    <toast>
-      <visual>
-        <binding template=\"ToastText01\">
-          <text id=\"1\">$(News_English)</text>
-        </binding>
-      </visual>
-    </toast>
+```
+<toast>
+  <visual>
+    <binding template=\"ToastText01\">
+      <text id=\"1\">$(News_English)</text>
+    </binding>
+  </visual>
+</toast>
+```
 
 模板是很强大的功能，你可以在[模板](./notification-hubs-templates-cross-platform-push-messages.md)一文中了解其更多信息。
 
@@ -75,61 +79,65 @@ ms.author: wesmc
 
 更改 MainPage.xaml 以包含区域设置组合框：
 
-    <Grid Margin="120, 58, 120, 80"  
-            Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  TextWrapping="Wrap" Text="Breaking News" FontSize="42" VerticalAlignment="Top"/>
-        <ComboBox Name="Locale" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Grid.Row="1" Grid.Column="0">
-            <x:String>English</x:String>
-            <x:String>French</x:String>
-            <x:String>Mandarin</x:String>
-        </ComboBox>
-        <ToggleSwitch Header="World" Name="WorldToggle" Grid.Row="2" Grid.Column="0"/>
-        <ToggleSwitch Header="Politics" Name="PoliticsToggle" Grid.Row="3" Grid.Column="0"/>
-        <ToggleSwitch Header="Business" Name="BusinessToggle" Grid.Row="4" Grid.Column="0"/>
-        <ToggleSwitch Header="Technology" Name="TechnologyToggle" Grid.Row="2" Grid.Column="1"/>
-        <ToggleSwitch Header="Science" Name="ScienceToggle" Grid.Row="3" Grid.Column="1"/>
-        <ToggleSwitch Header="Sports" Name="SportsToggle" Grid.Row="4" Grid.Column="1"/>
-        <Button Content="Subscribe" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Click="SubscribeButton_Click" />
-    </Grid>
+```
+<Grid Margin="120, 58, 120, 80"  
+        Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  TextWrapping="Wrap" Text="Breaking News" FontSize="42" VerticalAlignment="Top"/>
+    <ComboBox Name="Locale" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Grid.Row="1" Grid.Column="0">
+        <x:String>English</x:String>
+        <x:String>French</x:String>
+        <x:String>Mandarin</x:String>
+    </ComboBox>
+    <ToggleSwitch Header="World" Name="WorldToggle" Grid.Row="2" Grid.Column="0"/>
+    <ToggleSwitch Header="Politics" Name="PoliticsToggle" Grid.Row="3" Grid.Column="0"/>
+    <ToggleSwitch Header="Business" Name="BusinessToggle" Grid.Row="4" Grid.Column="0"/>
+    <ToggleSwitch Header="Technology" Name="TechnologyToggle" Grid.Row="2" Grid.Column="1"/>
+    <ToggleSwitch Header="Science" Name="ScienceToggle" Grid.Row="3" Grid.Column="1"/>
+    <ToggleSwitch Header="Sports" Name="SportsToggle" Grid.Row="4" Grid.Column="1"/>
+    <Button Content="Subscribe" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Click="SubscribeButton_Click" />
+</Grid>
+```
 
 ##构建 Windows 应用商店客户端应用程序
 
 1. 在 Notifications 类中，将一个区域设置参数添加到 *StoreCategoriesAndSubscribe* 和 *SubscribeToCateories* 方法。
 
-        public async Task<Registration> StoreCategoriesAndSubscribe(string locale, IEnumerable<string> categories)
+    ```
+    public async Task<Registration> StoreCategoriesAndSubscribe(string locale, IEnumerable<string> categories)
+    {
+        ApplicationData.Current.LocalSettings.Values["categories"] = string.Join(",", categories);
+        ApplicationData.Current.LocalSettings.Values["locale"] = locale;
+        return await SubscribeToCategories(categories);
+    }
+
+    public async Task<Registration> SubscribeToCategories(string locale, IEnumerable<string> categories = null)
+    {
+        var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+        if (categories == null)
         {
-            ApplicationData.Current.LocalSettings.Values["categories"] = string.Join(",", categories);
-            ApplicationData.Current.LocalSettings.Values["locale"] = locale;
-            return await SubscribeToCategories(categories);
+            categories = RetrieveCategories();
         }
 
-        public async Task<Registration> SubscribeToCategories(string locale, IEnumerable<string> categories = null)
-        {
-            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+        // Using a template registration. This makes supporting notifications across other platforms much easier.
+        // Using the localized tags based on locale selected.
+        string templateBodyWNS = String.Format("<toast><visual><binding template="ToastText01"><text id="1">$(News_{0})</text></binding></visual></toast>", locale);
 
-            if (categories == null)
-            {
-                categories = RetrieveCategories();
-            }
-
-            // Using a template registration. This makes supporting notifications across other platforms much easier.
-            // Using the localized tags based on locale selected.
-            string templateBodyWNS = String.Format("<toast><visual><binding template="ToastText01"><text id="1">$(News_{0})</text></binding></visual></toast>", locale);
-
-            return await hub.RegisterTemplateAsync(channel.Uri, templateBodyWNS, "localizedWNSTemplateExample", categories);
-        }
+        return await hub.RegisterTemplateAsync(channel.Uri, templateBodyWNS, "localizedWNSTemplateExample", categories);
+    }
+    ```
 
     请注意，不是调用 *RegisterNativeAsync* 方法，我们调用的是 *RegisterTemplateAsync*：我们将注册特定的通知格式，在其中模板依赖于区域设置。我们还提供模板的名称（“localizedWNSTemplateExample”），因为我们可能要注册多个模板（例如一个用于 toast 通知，一个用于磁贴），需要命名它们以便可以更新或删除它们。
 
@@ -137,49 +145,55 @@ ms.author: wesmc
 
 2. 添加以下方法来检索存储的区域设置：
 
-        public string RetrieveLocale()
-        {
-            var locale = (string) ApplicationData.Current.LocalSettings.Values["locale"];
-            return locale != null ? locale : "English";
-        }
+    ```
+    public string RetrieveLocale()
+    {
+        var locale = (string) ApplicationData.Current.LocalSettings.Values["locale"];
+        return locale != null ? locale : "English";
+    }
+    ```
 
 3. 在你的 MainPage.xaml.cs 中，通过检索“区域设置”组合框的当前值并将它提供给对 Notifications 类的调用，更新按钮单击处理程序，如下所示：
 
-        private async void SubscribeButton_Click(object sender, RoutedEventArgs e)
-        {
-            var locale = (string)Locale.SelectedItem;
+    ```
+    private async void SubscribeButton_Click(object sender, RoutedEventArgs e)
+    {
+        var locale = (string)Locale.SelectedItem;
 
-            var categories = new HashSet<string>();
-            if (WorldToggle.IsOn) categories.Add("World");
-            if (PoliticsToggle.IsOn) categories.Add("Politics");
-            if (BusinessToggle.IsOn) categories.Add("Business");
-            if (TechnologyToggle.IsOn) categories.Add("Technology");
-            if (ScienceToggle.IsOn) categories.Add("Science");
-            if (SportsToggle.IsOn) categories.Add("Sports");
+        var categories = new HashSet<string>();
+        if (WorldToggle.IsOn) categories.Add("World");
+        if (PoliticsToggle.IsOn) categories.Add("Politics");
+        if (BusinessToggle.IsOn) categories.Add("Business");
+        if (TechnologyToggle.IsOn) categories.Add("Technology");
+        if (ScienceToggle.IsOn) categories.Add("Science");
+        if (SportsToggle.IsOn) categories.Add("Sports");
 
-            var result = await ((App)Application.Current).notifications.StoreCategoriesAndSubscribe(locale,
-                 categories);
+        var result = await ((App)Application.Current).notifications.StoreCategoriesAndSubscribe(locale,
+             categories);
 
-            var dialog = new MessageDialog("Locale: " + locale + " Subscribed to: " + 
-                string.Join(",", categories) + " on registration Id: " + result.RegistrationId);
-            dialog.Commands.Add(new UICommand("OK"));
-            await dialog.ShowAsync();
-        }
+        var dialog = new MessageDialog("Locale: " + locale + " Subscribed to: " + 
+            string.Join(",", categories) + " on registration Id: " + result.RegistrationId);
+        dialog.Commands.Add(new UICommand("OK"));
+        await dialog.ShowAsync();
+    }
+    ```
 
 4. 最后，在 App.xaml.cs 文件中，确保更新 `InitNotificationsAsync` 方法以检索区域设置，并在订阅时使用该区域设置：
 
-        private async void InitNotificationsAsync()
-        {
-            var result = await notifications.SubscribeToCategories(notifications.RetrieveLocale());
+    ```
+    private async void InitNotificationsAsync()
+    {
+        var result = await notifications.SubscribeToCategories(notifications.RetrieveLocale());
 
-            // Displays the registration ID so you know it was successful
-            if (result.RegistrationId != null)
-            {
-                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                dialog.Commands.Add(new UICommand("OK"));
-                await dialog.ShowAsync();
-            }
+        // Displays the registration ID so you know it was successful
+        if (result.RegistrationId != null)
+        {
+            var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+            dialog.Commands.Add(new UICommand("OK"));
+            await dialog.ShowAsync();
         }
+    }
+    ```
 
 ##从后端发送本地化的通知
 

@@ -36,34 +36,38 @@ ms.author: jgao
 
 需要以下 Nuget 包：
 
-    Install-Package Microsoft.WindowsAzure.Management.HDInsight
+```
+Install-Package Microsoft.WindowsAzure.Management.HDInsight
+```
 
 以下代码示例演示如何先连接到 Azure，然后管理 Azure 订阅下面的 HDInsight 群集。
 
-    using System;
-    using Microsoft.WindowsAzure.Management.HDInsight;
-    using System.Security.Cryptography.X509Certificates;
+```
+using System;
+using Microsoft.WindowsAzure.Management.HDInsight;
+using System.Security.Cryptography.X509Certificates;
 
-    namespace HDInsightManagement
+namespace HDInsightManagement
+{
+    class Program
     {
-        class Program
+        private static IHDInsightClient _hdinsightClient;
+        private static String SubscriptionId = "<Your Azure Subscription ID>";
+        private static Uri baseUri = new Uri("https://management.core.chinacloudapi.cn");
+        private static X509Certificate2 cert = new X509Certificate2("c:/path/to/cert.cer");
+
+        static void Main(string[] args)
         {
-            private static IHDInsightClient _hdinsightClient;
-            private static String SubscriptionId = "<Your Azure Subscription ID>";
-            private static Uri baseUri = new Uri("https://management.core.chinacloudapi.cn");
-            private static X509Certificate2 cert = new X509Certificate2("c:/path/to/cert.cer");
+            _hdinsightClient = HDInsightClient.Connect(new HDInsightCertificateCredential(new Guid(SubscriptionId), cert, baseUri));
 
-            static void Main(string[] args)
-            {
-                _hdinsightClient = HDInsightClient.Connect(new HDInsightCertificateCredential(new Guid(SubscriptionId), cert, baseUri));
+            // insert code here
 
-                // insert code here
-
-                System.Console.WriteLine("Press ENTER to continue");
-                System.Console.ReadLine();
-            }
+            System.Console.WriteLine("Press ENTER to continue");
+            System.Console.ReadLine();
         }
     }
+}
+```
 
 若要使用此代码段，需要创建证书文件并将其上传到 Azure。有关详细信息，请参阅[上传 Azure Management API 管理证书](../azure-api-management-certs.md)。
 
@@ -71,20 +75,24 @@ ms.author: jgao
 
 以下代码片段列出了群集和一些属性：
 
-    var results = _hdinsightClient.ListClusters();
-    foreach (var name in results) {
-        Console.WriteLine("Cluster Name: " + name.Name);
-        Console.WriteLine("\t Cluster type: " + name.ClusterType);
-        Console.WriteLine("\t Cluster location: " + name.Location);
-        Console.WriteLine("\t Cluster version: " + name.Version);
-    }
+```
+var results = _hdinsightClient.ListClusters();
+foreach (var name in results) {
+    Console.WriteLine("Cluster Name: " + name.Name);
+    Console.WriteLine("\t Cluster type: " + name.ClusterType);
+    Console.WriteLine("\t Cluster location: " + name.Location);
+    Console.WriteLine("\t Cluster version: " + name.Version);
+}
+```
 
 ##删除群集
 
 使用以下代码片段以同步或异步方式删除群集：
 
-    _hdinsightClient.DeleteCluster("<Cluster Name>");
-    _hdinsightClient.DeleteClusterAsync("<Cluster Name>");
+```
+_hdinsightClient.DeleteCluster("<Cluster Name>");
+_hdinsightClient.DeleteClusterAsync("<Cluster Name>");
+```
 
 ## <a name="grant/revoke-access"></a>授予/撤消访问权限
 
@@ -97,14 +105,19 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 默认情况下，将授权这些服务进行访问。你可以撤消/授予访问权限。若要撤消：
 
-    var cluster = _hdinsightClient.GetCluster("<Cluster Name>");
-    _hdinsightClient.DisableHttp(cluster.Name, cluster.Location);
+```
+var cluster = _hdinsightClient.GetCluster("<Cluster Name>");
+_hdinsightClient.DisableHttp(cluster.Name, cluster.Location);
+```
 
 若要授予：
 
-    _hdinsightClient.EnableHttp(cluster.Name, cluster.Location, "admin","<password>");
+```
+_hdinsightClient.EnableHttp(cluster.Name, cluster.Location, "admin","<password>");
+```
 
->[!NOTE] 通过授予/撤消访问权限，你将重置群集用户名和密码。
+>[!NOTE]
+> 通过授予/撤消访问权限，你将重置群集用户名和密码。
 
 也可以通过经典管理门户完成此操作。请参阅[使用 Azure 经典管理门户管理 HDInsight][hdinsight-admin-portal]。
 
@@ -116,8 +129,10 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 以下代码片段演示如何获取群集的默认存储帐户名称和默认存储帐户密钥。
 
-    var cluster = _hdinsightClient.GetCluster("<Cluster Name>");
-    var storageKey = cluster.DefaultStorageAccount.Key;
+```
+var cluster = _hdinsightClient.GetCluster("<Cluster Name>");
+var storageKey = cluster.DefaultStorageAccount.Key;
+```
 
 ##提交作业
 

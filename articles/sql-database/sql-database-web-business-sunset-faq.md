@@ -55,7 +55,7 @@ Azure SQL Web 和企业数据库现已停用。基本、标准、高级和弹性
 
 ## 另请参阅
 
-[Azure SQL 数据库](./index.md/)
+[Azure SQL 数据库](./index.md)
 
 [Web 和企业定价](https://www.azure.cn/pricing/details/sql-database/)
 

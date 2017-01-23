@@ -2,12 +2,15 @@
 
 请考虑以下示例，其中显示了 `lsscsi` 输出的代码片段：
 
-    [5:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sdc 
-    [5:0:0:1]    disk    Msft     Virtual Disk     1.0   /dev/sdd 
+```
+[5:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sdc 
+[5:0:0:1]    disk    Msft     Virtual Disk     1.0   /dev/sdd 
+```
 
 两个数据磁盘位于 LUN 0 和 LUN 1（`lsscsi` 中的第一列输出了详细信息 `[host:channel:target:lun]`）。两个磁盘应该都是可从 VM 内部访问的磁盘。如果你手动指定了要在 LUN 1 位置添加第一个磁盘并在 LUN 2 位置添加第二个磁盘，则可能无法从 VM 内部正常查看这些磁盘。
 
-> [!NOTE] 在这些示例中，Azure `host` 值为 5，但此值可能根据所选存储类型的不同而异。
+> [!NOTE]
+> 在这些示例中，Azure `host` 值为 5，但此值可能根据所选存储类型的不同而异。
 
 此磁盘行为不是 Azure 的问题，而是因为 Linux 内核遵循了 SCSI 规范。当 Linux 内核在 SCSI 总线中扫描附加的设备时，必须能够在 LUN 0 位置找到设备，系统才能继续扫描是否有其他设备。因此：
 

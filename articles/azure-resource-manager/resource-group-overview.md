@@ -86,21 +86,29 @@ Resource Manager 通过 Azure PowerShell、Azure CLI、Azure 门户预览、REST
 
 可以使用以下 PowerShell cmdlet 检索所有资源提供程序：
 
-    Get-AzureRmResourceProvider -ListAvailable
+```
+Get-AzureRmResourceProvider -ListAvailable
+```
 
 如果使用 Azure CLI，则可以运行以下命令检索所有资源提供程序：
 
-    azure provider list
+```
+azure provider list
+```
 
 可以浏览返回的列表，找到需要使用的资源提供程序。
 
 若要获取有关资源提供程序的详细信息，请在命令中添加提供程序命名空间。该命令返回资源提供程序支持的资源类型，以及每种资源类型支持的位置和 API 版本。以下 PowerShell cmdlet 获取有关 Microsoft.Compute 的详细信息：
 
-    (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Compute).ResourceTypes
+```
+(Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Compute).ResourceTypes
+```
 
 如果使用 Azure CLI，请运行以下命令检索 Microsoft.Compute 支持的资源类型、位置和 API 版本：
 
-    azure provider show Microsoft.Compute --json > c:\Azure\compute.json
+```
+azure provider show Microsoft.Compute --json > c:\Azure\compute.json
+```
 
 有关详细信息，请参阅 [Resource Manager 提供程序、区域、API 版本和架构](./resource-manager-supported-services.md)。
 
@@ -111,35 +119,39 @@ Resource Manager 通过 Azure PowerShell、Azure CLI、Azure 门户预览、REST
 
 Resource Manager 处理模板的方式与处理其他任何请求一样（请参阅[一致的管理层](#consistent-management-layer)中的图像）。它会分析模板，并将其语法转换为相应资源提供程序所需的 REST API 操作。例如，当 Resource Manager 收到具有以下资源定义的模板时：
 
-    "resources": [
-      {
-        "apiVersion": "2016-01-01",
-        "type": "Microsoft.Storage/storageAccounts",
-        "name": "mystorageaccount",
-        "location": "chinanorth",
-        "sku": {
-          "name": "Standard_LRS"
-        },
-        "kind": "Storage",
-        "properties": {
-        }
-      }
-      ]
+```
+"resources": [
+  {
+    "apiVersion": "2016-01-01",
+    "type": "Microsoft.Storage/storageAccounts",
+    "name": "mystorageaccount",
+    "location": "chinanorth",
+    "sku": {
+      "name": "Standard_LRS"
+    },
+    "kind": "Storage",
+    "properties": {
+    }
+  }
+  ]
+```
 
 它会将该定义转换为以下 REST API 操作，然后，该操作将发送到 Microsoft.Storage 资源提供程序：
 
-    PUT
-    https://management.chinacloudapi.cn/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2016-01-01
-    REQUEST BODY
-    {
-      "location": "chinanorth",
-      "properties": {
-      }
-      "sku": {
-        "name": "Standard_LRS"
-      },   
-      "kind": "Storage"
-    }
+```
+PUT
+https://management.chinacloudapi.cn/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2016-01-01
+REQUEST BODY
+{
+  "location": "chinanorth",
+  "properties": {
+  }
+  "sku": {
+    "name": "Standard_LRS"
+  },   
+  "kind": "Storage"
+}
+```
 
 模板和资源组的定义方式全由你决定，解决方案的管理方式也是如此。例如，可以通过单个模板在单个资源组中部署三层式应用程序。
 
@@ -179,26 +191,32 @@ Azure Resource Manager 会分析依赖关系，以确保按正确的顺序创建
 
 以下示例显示了应用到虚拟机的标记。
 
-    "resources": [    
-      {
-        "type": "Microsoft.Compute/virtualMachines",
-        "apiVersion": "2015-06-15",
-        "name": "SimpleWindowsVM",
-        "location": "[resourceGroup().location]",
-        "tags": {
-            "costCenter": "Finance"
-        },
-        ...
-      }
-    ]
+```
+"resources": [    
+  {
+    "type": "Microsoft.Compute/virtualMachines",
+    "apiVersion": "2015-06-15",
+    "name": "SimpleWindowsVM",
+    "location": "[resourceGroup().location]",
+    "tags": {
+        "costCenter": "Finance"
+    },
+    ...
+  }
+]
+```
 
 若要检索具有标记值的所有资源，请使用以下 PowerShell cmdlet：
 
-    Find-AzureRmResource -TagName costCenter -TagValue Finance
+```
+Find-AzureRmResource -TagName costCenter -TagValue Finance
+```
 
 或者运行以下 Azure CLI 命令：
 
-    azure resource list -t costCenter=Finance --json
+```
+azure resource list -t costCenter=Finance --json
+```
 
 还可通过 Azure 门户预览查看标记的资源。
 
@@ -249,17 +267,19 @@ Resource Manager 记录所有创建、修改或删除资源的操作。在进行
 
 以下示例中显示的策略通过指定所有资源都必须包含 costCenter 标记来确保标记一致性。
 
-    {
-      "if": {
-        "not" : {
-          "field" : "tags",
-          "containsKey" : "costCenter"
-        }
-      },
-      "then" : {
-        "effect" : "deny"
-      }
+```
+{
+  "if": {
+    "not" : {
+      "field" : "tags",
+      "containsKey" : "costCenter"
     }
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}
+```
 
 还可以创建其他类型的策略。有关详细信息，请参阅[使用策略来管理资源和控制访问](./resource-manager-policy.md)。
 

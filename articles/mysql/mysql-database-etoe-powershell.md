@@ -88,7 +88,8 @@ New-AzureResourceGroup -Name "resourcegroupChinaEast" -Location "chinaeast"
 ```
 New-AzureRmResourceGroup -Name "resourcegroupChinaEast" -Location "chinaeast"
 ```
->[!NOTE] ** 注意:Location的默认选项为chinanorth, 处于性能以及安全性考虑，强烈建议您将资源组中的服务选择在同一个地域中。**
+>[!NOTE]
+> ** 注意:Location的默认选项为chinanorth, 处于性能以及安全性考虑，强烈建议您将资源组中的服务选择在同一个地域中。**
 
 ##<a id="step5"></a>步骤5： 创建服务器
 编辑运行以下命令，定义您的服务器名称、位置、版本等信息来完成服务器创建。
@@ -100,7 +101,8 @@ New-AzureResource -ResourceType "Microsoft.MySql/servers" -ResourceName testPSH 
 ```
 New-AzureRmResource -ResourceType "Microsoft.MySql/servers" -ResourceName testPSH -ApiVersion 2015-09-01 -ResourceGroupName resourcegroupChinaEast -Location chinaeast -PropertyObject @{version = '5.5'} 
 ```
->[!NOTE] ** 注意:“-ApiVersion 2015-09-01”指定了API的版本，是必要的。另外，运行上述命令可以完成MySQL服务器的创建，但没有用户，须在后续步骤中创建用户设置权限，这一点和使用Azure管理门户创建稍有不同**
+>[!NOTE]
+> ** 注意:“-ApiVersion 2015-09-01”指定了API的版本，是必要的。另外，运行上述命令可以完成MySQL服务器的创建，但没有用户，须在后续步骤中创建用户设置权限，这一点和使用Azure管理门户创建稍有不同**
 
 ##<a id="step6"></a>步骤6： 创建服务器防火墙原则
 编辑运行以下命令，定义您的防火墙原则名称、IP白名单范围（起始IP地址，终止IP地址）等信息来完成防火墙原则的创建。
@@ -146,4 +148,3 @@ New-AzureResource -ResourceType "Microsoft.MySql/servers/databases/privileges" -
 New-AzureRmResource -ResourceType "Microsoft.MySql/servers/databases/privileges" -ResourceName testPSH/demodb/admin -ApiVersion 2015-09-01 -ResourceGroupName resourcegroupChinaEast -PropertyObject @{level='ReadWrite'}
 ```
 通过上述操作，您已经完成了服务器、数据库、用户、防火墙原则等的创建工作，可以开始使用MySQL Database on Azure的数据库服务。在使用过程中，如需更多创建、查看、删除、更改的操作，您可以查看[使用PowerShell管理MySQL Database on Azure](./mysql-database-commandlines.md)。
-

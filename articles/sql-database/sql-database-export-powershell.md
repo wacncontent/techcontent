@@ -33,7 +33,8 @@ ms.tgt_pltfrm: NA
  - 在导出期间终止所有读取和写入活动。
  - 对所有大型表格上的非 null 值使用[聚集索引](https://msdn.microsoft.com/zh-cn/library/ms190457.aspx)。如果不使用聚集索引，当时间超过 6-12 个小时时，导出可能会失败。这是因为导出服务需要完成表格扫描，才能尝试导出整个表格。确认表格是否针对导出进行优化的一个好方法是，运行 **DBCC SHOW\_STATISTICS**，确保 *RANGE\_HI\_KEY* 不是 null 并且值分布良好。有关详细信息，请参阅 [DBCC SHOW\_STATISTICS](https://msdn.microsoft.com/zh-cn/library/ms174384.aspx)。
 
-> [!NOTE] BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)。
+> [!NOTE]
+> BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)。
 
 若要完成本文，需要以下各项：
 
@@ -47,17 +48,22 @@ ms.tgt_pltfrm: NA
 
 [New-AzureRmSqlDatabaseExport](https://msdn.microsoft.com/zh-cn/library/mt707796.aspx) cmdlet 向服务提交导出数据库请求。根据数据库的大小，导出操作可能需要一些时间才能完成。
 
-> [!IMPORTANT] 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](./sql-database-copy-powershell.md)，然后导出该数据库副本。
+> [!IMPORTANT]
+> 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](./sql-database-copy-powershell.md)，然后导出该数据库副本。
 
-     $exportRequest = New-AzureRmSqlDatabaseExport –ResourceGroupName $ResourceGroupName –ServerName $ServerName `
-       –DatabaseName $DatabaseName –StorageKeytype $StorageKeytype –StorageKey $StorageKey -StorageUri $BacpacUri `
-       –AdministratorLogin $creds.UserName –AdministratorLoginPassword $creds.Password
+```
+ $exportRequest = New-AzureRmSqlDatabaseExport –ResourceGroupName $ResourceGroupName –ServerName $ServerName `
+   –DatabaseName $DatabaseName –StorageKeytype $StorageKeytype –StorageKey $StorageKey -StorageUri $BacpacUri `
+   –AdministratorLogin $creds.UserName –AdministratorLoginPassword $creds.Password
+```
 
 ## 监视导出操作的进度
 
 运行 **New-AzureRmSqlDatabaseExport** 后，可运行 [Get-AzureRmSqlDatabaseImportExportStatus](https://msdn.microsoft.com/zh-cn/library/mt707794.aspx) 来查看请求的状态。如果请求后立即运行，通常会返回“状态: 处理中”。显示“状态 : 成功”时，表示导出完毕。
 
-    Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $exportRequest.OperationStatusLink
+```
+Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $exportRequest.OperationStatusLink
+```
 
 ## 导出 SQL 数据库示例
 
@@ -67,36 +73,38 @@ ms.tgt_pltfrm: NA
 
 将以下 `VARIABLE-VALUES` 替换为特定 Azure 资源中的值。数据库名称就是要导出的现有数据库。
 
-    $subscriptionId = "YOUR AZURE SUBSCRIPTION ID"
+```
+$subscriptionId = "YOUR AZURE SUBSCRIPTION ID"
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Set-AzureRmContext -SubscriptionId $subscriptionId
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+Set-AzureRmContext -SubscriptionId $subscriptionId
 
-    # Database to export
-    $DatabaseName = "DATABASE-NAME"
-    $ResourceGroupName = "RESOURCE-GROUP-NAME"
-    $ServerName = "SERVER-NAME"
-    $serverAdmin = "ADMIN-NAME"
-    $serverPassword = "ADMIN-PASSWORD" 
-    $securePassword = ConvertTo-SecureString –String $serverPassword –AsPlainText -Force
-    $creds = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $serverAdmin, $securePassword
+# Database to export
+$DatabaseName = "DATABASE-NAME"
+$ResourceGroupName = "RESOURCE-GROUP-NAME"
+$ServerName = "SERVER-NAME"
+$serverAdmin = "ADMIN-NAME"
+$serverPassword = "ADMIN-PASSWORD" 
+$securePassword = ConvertTo-SecureString –String $serverPassword –AsPlainText -Force
+$creds = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $serverAdmin, $securePassword
 
-    # Generate a unique filename for the BACPAC
-    $bacpacFilename = $DatabaseName + (Get-Date).ToString("yyyyMMddHHmm") + ".bacpac"
+# Generate a unique filename for the BACPAC
+$bacpacFilename = $DatabaseName + (Get-Date).ToString("yyyyMMddHHmm") + ".bacpac"
 
-    # Storage account info for the BACPAC
-    $BaseStorageUri = "https://STORAGE-NAME.blob.core.chinacloudapi.cn/BLOB-CONTAINER-NAME/"
-    $BacpacUri = $BaseStorageUri + $bacpacFilename
-    $StorageKeytype = "StorageAccessKey"
-    $StorageKey = "YOUR STORAGE KEY"
+# Storage account info for the BACPAC
+$BaseStorageUri = "https://STORAGE-NAME.blob.core.chinacloudapi.cn/BLOB-CONTAINER-NAME/"
+$BacpacUri = $BaseStorageUri + $bacpacFilename
+$StorageKeytype = "StorageAccessKey"
+$StorageKey = "YOUR STORAGE KEY"
 
-    $exportRequest = New-AzureRmSqlDatabaseExport –ResourceGroupName $ResourceGroupName –ServerName $ServerName `
-       –DatabaseName $DatabaseName –StorageKeytype $StorageKeytype –StorageKey $StorageKey -StorageUri $BacpacUri `
-       –AdministratorLogin $creds.UserName –AdministratorLoginPassword $creds.Password
-    $exportRequest
+$exportRequest = New-AzureRmSqlDatabaseExport –ResourceGroupName $ResourceGroupName –ServerName $ServerName `
+   –DatabaseName $DatabaseName –StorageKeytype $StorageKeytype –StorageKey $StorageKey -StorageUri $BacpacUri `
+   –AdministratorLogin $creds.UserName –AdministratorLoginPassword $creds.Password
+$exportRequest
 
-    # Check status of the export
-    Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $exportRequest.OperationStatusLink
+# Check status of the export
+Get-AzureRmSqlDatabaseImportExportStatus -OperationStatusLink $exportRequest.OperationStatusLink
+```
 
 ## 后续步骤
 

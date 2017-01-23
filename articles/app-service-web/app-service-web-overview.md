@@ -38,7 +38,7 @@ ms.author: rachelap
 - **多种语言和框架** — 应用服务为 ASP.NET、Node.js、Java、PHP 和 Python 提供一流支持。也可以在应用服务 VM 上运行 [PowerShell 和其他脚本或可执行文件](./web-sites-create-web-jobs.md)。
 
 - **DevOps 优化** — 使用 GitHub 设置[持续集成和部署](./app-service-continuous-deployment.md)。通过[测试和过渡环境](./web-sites-staged-publishing.md)提升更新。执行 [A/B 测试](./app-service-web-test-in-production-get-start.md)。使用 [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 或[跨平台命令行接口 (CLI)](../xplat-cli-install.md) 在应用服务中管理应用。
- 
+
 - **具有高可用性的全局缩放** — 以手动或自动方式[增加](./web-sites-scale.md)或[扩大](../monitoring-and-diagnostics/insights-how-to-scale.md)。在 Azure.cn 全国数据中心基础结构中的任意位置托管应用，并且应用服务 [SLA](https://www.azure.cn/support/sla/app-service/) 承诺高可用性。
 
 - **连接到 SaaS 平台和本地数据** — 从适用于企业系统（例如 SAP、Siebel 和 Oracle）的 50 多个连接器、SaaS 服务（例如 Salesforce 和 Office 365）以及 Internet 服务中进行选择。使用 [Azure 虚拟网络](./app-service-vnet-integration-powershell.md)访问本地数据。
@@ -49,7 +49,7 @@ ms.author: rachelap
 
 此外，Web 应用可以利用 [API 应用](../app-service-api/app-service-api-apps-why-best-platform.md)提供的功能（例如 CORS 支持）和[移动应用](../app-service-mobile/app-service-mobile-value-prop.md)提供的功能（例如推送通知）。有关应用服务中应用类型的详细信息，请参阅 [Azure App Service 概述](../app-service/app-service-value-prop-what-is.md)。
 
-除了应用服务中的 Web 应用，Azure 还提供可用来托管网站和 Web 应用程序的其他服务。大多数情况下，Web Apps 是最佳选择。对于微服务体系结构，请考虑使用 [Service Fabric](../service-fabric/index.md/)；如果需要更好地控制运行代码的 VM，请考虑使用 [Azure 虚拟机](../virtual-machines/index.md/)。有关如何在这些 Azure 服务之间做出选择的详细信息，请参阅 [Azure App Service、虚拟机、Service Fabric 和云服务的比较](./choose-web-site-cloud-service-vm.md)。
+除了应用服务中的 Web 应用，Azure 还提供可用来托管网站和 Web 应用程序的其他服务。大多数情况下，Web Apps 是最佳选择。对于微服务体系结构，请考虑使用 [Service Fabric](../service-fabric/index.md)；如果需要更好地控制运行代码的 VM，请考虑使用 [Azure 虚拟机](../virtual-machines/index.md)。有关如何在这些 Azure 服务之间做出选择的详细信息，请参阅 [Azure App Service、虚拟机、Service Fabric 和云服务的比较](./choose-web-site-cloud-service-vm.md)。
 
 ## 入门
 

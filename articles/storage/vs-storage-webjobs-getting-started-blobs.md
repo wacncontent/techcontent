@@ -34,31 +34,39 @@ ms.author: tarcher
 
 以下代码示例将 *input* 容器中显示的文本 Blob 复制到 *output* 容器中：
 
-        public static void CopyBlob([BlobTrigger("input/{name}")] TextReader input,
-            [Blob("output/{name}")] out string output)
-        {
-            output = input.ReadToEnd();
-        }
+```
+    public static void CopyBlob([BlobTrigger("input/{name}")] TextReader input,
+        [Blob("output/{name}")] out string output)
+    {
+        output = input.ReadToEnd();
+    }
+```
 
 属性构造函数采用指定容器名称的字符串参数和 Blob 名称的占位符。在此示例中，如果在 *input* 容器中创建了名为 *Blob1.txt* 的 Blob，则该函数将在 *output* 容器中创建名为 *Blob1.txt* 的 Blob。
 
 你可以指定包含 Blob 名称占位符的名称模式，如以下代码示例中所示：
 
-        public static void CopyBlob([BlobTrigger("input/original-{name}")] TextReader input,
-            [Blob("output/copy-{name}")] out string output)
-        {
-            output = input.ReadToEnd();
-        }
+```
+    public static void CopyBlob([BlobTrigger("input/original-{name}")] TextReader input,
+        [Blob("output/copy-{name}")] out string output)
+    {
+        output = input.ReadToEnd();
+    }
+```
 
 此代码只会复制名称以“original-”开头的 Blob。例如，将 *input* 容器中的 *original-Blob1.txt* 复制到 *output* 容器中的 *copy-Blob1.txt*。
 
 如果你需要为名称中包含大括号的 Blob 名称指定名称模式，则使用双倍的大括号。例如，如果你想要在 *images* 容器中查找具有以下类似名称的 Blob：
 
-        {20140101}-soundfile.mp3
+```
+    {20140101}-soundfile.mp3
+```
 
 为模式使用以下代码：
 
-        images/{{20140101}}-{name}
+```
+    images/{{20140101}}-{name}
+```
 
 在示例中，*name* 占位符值将为 *soundfile.mp3*。
 
@@ -66,16 +74,18 @@ ms.author: tarcher
 
 以下代码示例在将 *input* 容器中显示的 Blob 复制到 *output* 容器中时更改文件扩展名。该代码将记录 *input* Blob 的扩展名，并将 *output* Blob 的扩展名设置为 *.txt*。
 
-        public static void CopyBlobToTxtFile([BlobTrigger("input/{name}.{ext}")] TextReader input,
-            [Blob("output/{name}.txt")] out string output,
-            string name,
-            string ext,
-            TextWriter logger)
-        {
-            logger.WriteLine("Blob name:" + name);
-            logger.WriteLine("Blob extension:" + ext);
-            output = input.ReadToEnd();
-        }
+```
+    public static void CopyBlobToTxtFile([BlobTrigger("input/{name}.{ext}")] TextReader input,
+        [Blob("output/{name}.txt")] out string output,
+        string name,
+        string ext,
+        TextWriter logger)
+    {
+        logger.WriteLine("Blob name:" + name);
+        logger.WriteLine("Blob extension:" + ext);
+        output = input.ReadToEnd();
+    }
+```
 
 ## <a id="types"></a> 可绑定到 blob 的类型
 
@@ -95,52 +105,58 @@ ms.author: tarcher
 
 如果需要文本 blob，可将 **BlobTrigger** 应用到 **string** 参数。以下代码示例将文本 blob 绑定到名为 **logMessage** 的 **string** 参数。函数使用该参数将 Blob 的内容写入 WebJobs SDK 仪表板。
 
-        public static void WriteLog([BlobTrigger("input/{name}")] string logMessage,
-            string name,
-            TextWriter logger)
-        {
-             logger.WriteLine("Blob name: {0}", name);
-             logger.WriteLine("Content:");
-             logger.WriteLine(logMessage);
-        }
+```
+    public static void WriteLog([BlobTrigger("input/{name}")] string logMessage,
+        string name,
+        TextWriter logger)
+    {
+         logger.WriteLine("Blob name: {0}", name);
+         logger.WriteLine("Content:");
+         logger.WriteLine(logMessage);
+    }
+```
 
 ## <a id="getting-serialized-blob-content-by-using-icloudblobstreambinder"></a> 使用 ICloudBlobStreamBinder 获取序列化 blob 内容
 
 以下代码示例使用实现 **ICloudBlobStreamBinder** 的类来启用 **BlobTrigger** 属性，将 blob 绑定到 **WebImage** 类型。
 
-        public static void WaterMark(
-            [BlobTrigger("images3/{name}")] WebImage input,
-            [Blob("images3-watermarked/{name}")] out WebImage output)
-        {
-            output = input.AddTextWatermark("WebJobs SDK",
-                horizontalAlign: "Center", verticalAlign: "Middle",
-                fontSize: 48, opacity: 50);
-        }
-        public static void Resize(
-            [BlobTrigger("images3-watermarked/{name}")] WebImage input,
-            [Blob("images3-resized/{name}")] out WebImage output)
-        {
-            var width = 180;
-            var height = Convert.ToInt32(input.Height * 180 / input.Width);
-            output = input.Resize(width, height);
-        }
+```
+    public static void WaterMark(
+        [BlobTrigger("images3/{name}")] WebImage input,
+        [Blob("images3-watermarked/{name}")] out WebImage output)
+    {
+        output = input.AddTextWatermark("WebJobs SDK",
+            horizontalAlign: "Center", verticalAlign: "Middle",
+            fontSize: 48, opacity: 50);
+    }
+    public static void Resize(
+        [BlobTrigger("images3-watermarked/{name}")] WebImage input,
+        [Blob("images3-resized/{name}")] out WebImage output)
+    {
+        var width = 180;
+        var height = Convert.ToInt32(input.Height * 180 / input.Width);
+        output = input.Resize(width, height);
+    }
+```
 
 **WebImage** 绑定代码在 **WebImageBinder** 类中提供，该类派生自 **ICloudBlobStreamBinder**。
 
-        public class WebImageBinder : ICloudBlobStreamBinder<WebImage>
+```
+    public class WebImageBinder : ICloudBlobStreamBinder<WebImage>
+    {
+        public Task<WebImage> ReadFromStreamAsync(Stream input,
+            System.Threading.CancellationToken cancellationToken)
         {
-            public Task<WebImage> ReadFromStreamAsync(Stream input,
-                System.Threading.CancellationToken cancellationToken)
-            {
-                return Task.FromResult<WebImage>(new WebImage(input));
-            }
-            public Task WriteToStreamAsync(WebImage value, Stream output,
-                System.Threading.CancellationToken cancellationToken)
-            {
-                var bytes = value.GetBytes();
-                return output.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
-            }
+            return Task.FromResult<WebImage>(new WebImage(input));
         }
+        public Task WriteToStreamAsync(WebImage value, Stream output,
+            System.Threading.CancellationToken cancellationToken)
+        {
+            var bytes = value.GetBytes();
+            return output.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
+        }
+    }
+```
 
 ## <a id="poison"></a> 如何处理有害 blob
 
@@ -158,34 +174,38 @@ ms.author: tarcher
 
 在下面的代码示例中，**CopyBlob** 函数的代码导致它每次调用时都失败。SDK 进行最大重试次数的调用之后，有害 blob 队列中会创建消息，该消息通过 **LogPoisonBlob** 函数进行处理。
 
-        public static void CopyBlob([BlobTrigger("input/{name}")] TextReader input,
-            [Blob("textblobs/output-{name}")] out string output)
-        {
-            throw new Exception("Exception for testing poison blob handling");
-            output = input.ReadToEnd();
-        }
+```
+    public static void CopyBlob([BlobTrigger("input/{name}")] TextReader input,
+        [Blob("textblobs/output-{name}")] out string output)
+    {
+        throw new Exception("Exception for testing poison blob handling");
+        output = input.ReadToEnd();
+    }
 
-        public static void LogPoisonBlob(
-        [QueueTrigger("webjobs-blobtrigger-poison")] PoisonBlobMessage message,
-            TextWriter logger)
-        {
-            logger.WriteLine("FunctionId: {0}", message.FunctionId);
-            logger.WriteLine("BlobType: {0}", message.BlobType);
-            logger.WriteLine("ContainerName: {0}", message.ContainerName);
-            logger.WriteLine("BlobName: {0}", message.BlobName);
-            logger.WriteLine("ETag: {0}", message.ETag);
-        }
+    public static void LogPoisonBlob(
+    [QueueTrigger("webjobs-blobtrigger-poison")] PoisonBlobMessage message,
+        TextWriter logger)
+    {
+        logger.WriteLine("FunctionId: {0}", message.FunctionId);
+        logger.WriteLine("BlobType: {0}", message.BlobType);
+        logger.WriteLine("ContainerName: {0}", message.ContainerName);
+        logger.WriteLine("BlobName: {0}", message.BlobName);
+        logger.WriteLine("ETag: {0}", message.ETag);
+    }
+```
 
 SDK 自动反序列化 JSON 消息。下面是 **PoisonBlobMessage** 类：
 
-        public class PoisonBlobMessage
-        {
-            public string FunctionId { get; set; }
-            public string BlobType { get; set; }
-            public string ContainerName { get; set; }
-            public string BlobName { get; set; }
-            public string ETag { get; set; }
-        }
+```
+    public class PoisonBlobMessage
+    {
+        public string FunctionId { get; set; }
+        public string BlobType { get; set; }
+        public string ContainerName { get; set; }
+        public string BlobName { get; set; }
+        public string ETag { get; set; }
+    }
+```
 
 ### <a id="polling"></a> Blob 轮询算法
 
@@ -228,5 +248,5 @@ Blob 回执存储在 AzureWebJobsStorage 连接字符串指定的 Azure 存储�
 ## <a id="nextsteps"></a>后续步骤
 
 本文提供了代码示例，演示如何处理用于操作 Azure blob 的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](../app-service-web/websites-webjobs-resources.md)。
- 
+
 <!---HONumber=Mooncake_0103_2017-->

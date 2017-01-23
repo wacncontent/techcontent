@@ -41,13 +41,13 @@ Visual Studio Service Fabric 工具支持所有用于连接到群集来进行发
 
 ### 连接到安全群集
 
-1.	请确保你可以访问目标群集所信任的某个客户端证书。证书通常以个人信息交换 (.pfx) 文件的形式共享。
+1. 请确保你可以访问目标群集所信任的某个客户端证书。证书通常以个人信息交换 (.pfx) 文件的形式共享。
 
-2.	安装受信任的证书。为此，请双击 .pfx 文件，或使用 PowerShell 脚本 Import-PfxCertificate 来导入证书。将证书安装到 **Cert:\\LocalMachine\\My**。导入证书时，可以接受所有默认设置。
+2. 安装受信任的证书。为此，请双击 .pfx 文件，或使用 PowerShell 脚本 Import-PfxCertificate 来导入证书。将证书安装到 **Cert:\\LocalMachine\\My**。导入证书时，可以接受所有默认设置。
 
-3.	在项目的快捷菜单上选择“发布...”命令打开“发布 Azure应用程序”对话框，然后选择目标群集。该工具将自动解析连接，并将安全连接参数保存在发布配置文件中。
+3. 在项目的快捷菜单上选择“发布...”命令打开“发布 Azure应用程序”对话框，然后选择目标群集。该工具将自动解析连接，并将安全连接参数保存在发布配置文件中。
 
-4.	[可选]：可以编辑发布配置文件以指定安全群集连接。
+4. [可选]：可以编辑发布配置文件以指定安全群集连接。
 
     由于你正在手动编辑“发布配置文件”XML 文件以指定证书信息，因此请务必记下证书存储名称、存储位置以及证书指纹。稍后需要为证书的存储名称和存储位置提供这些值。有关详细信息，请参阅 [如何：检索证书的指纹](https://msdn.microsoft.com/zh-cn/library/ms734695(v=vs.110).aspx)。
 
@@ -59,16 +59,18 @@ Visual Studio Service Fabric 工具支持所有用于连接到群集来进行发
 
     下面是连接到基于 x509 证书的安全群集的示例：
 
-        <ClusterConnectionParameters
-        ConnectionEndpoint="mycluster.chinaeast.chinacloudapp.cn:19000"
-        X509Credential="true"
-        ServerCertThumbprint="0123456789012345678901234567890123456789"
-        FindType="FindByThumbprint"
-        FindValue="9876543210987654321098765432109876543210"
-        StoreLocation="CurrentUser"
-        StoreName="My" />
-        
-5.	编辑其他任何所需的设置（例如升级参数和应用程序参数文件位置），然后从 Visual Studio 中的“发布 Service Fabric应用程序”对话框发布应用程序。
+    ```
+    <ClusterConnectionParameters
+    ConnectionEndpoint="mycluster.chinaeast.chinacloudapp.cn:19000"
+    X509Credential="true"
+    ServerCertThumbprint="0123456789012345678901234567890123456789"
+    FindType="FindByThumbprint"
+    FindValue="9876543210987654321098765432109876543210"
+    StoreLocation="CurrentUser"
+    StoreName="My" />
+    ```
+
+5. 编辑其他任何所需的设置（例如升级参数和应用程序参数文件位置），然后从 Visual Studio 中的“发布 Service Fabric应用程序”对话框发布应用程序。
 
 ## 后续步骤
 有关访问 Service Fabric 群集的详细信息，请参阅[使用 Service Fabric 资源管理器可视化群集](./service-fabric-visualizing-your-cluster.md)。

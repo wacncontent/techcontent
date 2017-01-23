@@ -51,7 +51,7 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 ## 先决条件
 
 若要开始使用 Azure 媒体服务，应该具备以下条件：
- 
+
 3. 一个 Azure 帐户。如果没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 2. Azure 媒体服务帐户。使用 Azure 经典管理门户、.NET 或 REST API 创建 Azure 媒体服务帐户。有关详细信息，请参阅[创建帐户](./media-services-create-account.md)。
 3. （可选）设置开发环境。为开发环境选择“.NET”或“REST API”。有关详细信息，请参阅[设置环境](./media-services-dotnet-how-to-use.md)。
@@ -74,15 +74,15 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 ###保护存储中的内容并以明文（非加密）形式交付流式处理媒体
 
 1. 将优质夹层文件上传到资产中。
-    
+
     建议向资产应用存储加密选项，以便在内容上传期间和内容在存储中处于静态时，为其提供保护。
- 
+
 1. 编码为一组自适应比特率 MP4 文件。
 
     建议向输出资产应用存储加密选项，以便保护静态内容。
-    
+
 1. 配置资产传送策略（由动态打包使用）。
-    
+
     如果资产已经过存储加密，则**必须**配置资产传送策略。
 
 1. 通过创建 OnDemand 定位符发布资产。
@@ -109,7 +109,7 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 
 1. 将优质夹层文件上传到资产中。
 2. 使用下述媒体分析服务之一来处理视频：
-    
+
     - **Hyperlapse** – [Hyperlapse 媒体文件与 Azure Media Hyperlapse](./media-services-hyperlapse-content.md)
     - **动作检测** – [Azure 媒体分析的动作检测](./media-services-motion-detection.md)。
     - **面部检测和面部情绪** – [Azure 媒体分析的面部和情绪检测](./media-services-face-and-emotion-detection.md)。
@@ -124,7 +124,7 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
     如果使用 OnDemand 定位符，请确保要从中以渐进方式下载内容的流式处理终结点上至少有一个串流保留单元。
 
     如果使用 SAS 定位符，可从 Azure blob 存储中下载内容。在这种情况下，不需要串流保留单元。
-  
+
 1. 渐进式下载内容。
 
 ##<a id="live_scenarios"></a>使用 Azure 媒体服务传送实时流式处理事件
@@ -153,7 +153,8 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 
 - 本地实时编码器将多比特率 **RTMP** 或**平滑流式处理**（分片 MP4）发送到经配置可以进行**直通**传递的通道。**直通**传递是指引入的流将会直接通过**通道**，而不会经过任何进一步的处理。可以使用以下输出多比特率平滑流的实时编码器：Elemental、Envivio、Cisco。以下实时编码器输出 RTMP：Adobe Flash Live、Telestream Wirecast 和 Tricaster 转码器。实时编码器也可将单比特率流发送到并未启用实时编码的通道，但不建议这样做。收到请求时，媒体服务会将该流传送给客户。
 
->[!NOTE] 需要长时间处理多个事件，并且已经在本地编码器上进行了投入时，可以使用直通这种最经济的方法来实时传送视频流。请参阅[定价](https://www.azure.cn/pricing/details/media-services/)详细信息。
+>[!NOTE]
+> 需要长时间处理多个事件，并且已经在本地编码器上进行了投入时，可以使用直通这种最经济的方法来实时传送视频流。请参阅[定价](https://www.azure.cn/pricing/details/media-services/)详细信息。
 
 - 本地实时编码器（采用以下格式之一：RTP \(MPEG-TS\)、RTMP 或平滑流式处理 （分片 MP4））将单比特率流发送至能够使用媒体服务执行实时编码的通道。然后，频道将对传入的单比特率流执行实时编码，使之转换为多比特率（自适应）视频流。收到请求时，媒体服务会将该流传送给客户。
 
@@ -211,6 +212,6 @@ Azure 媒体服务提供所需的工具，以便创建适用于大多数平台�
 [vod-overview]: ./media/media-services-video-on-demand-workflow/media-services-video-on-demand.png
 [live-overview1]: ./media/media-services-live-streaming-workflow/media-services-live-streaming-new.png
 [live-overview2]: ./media/media-services-live-streaming-workflow/media-services-live-streaming-current.png
- 
+
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: remove HDS ralated content; add references links of Media Service analytics features; add introduction of Media Service Odata model-->

@@ -23,7 +23,7 @@ ms.author: tarcher
 > [!div class="op_single_selector"]
 > - [入门](./vs-active-directory-dotnet-getting-started.md)
 > - [发生了什么情况](./vs-active-directory-dotnet-what-happened.md)
- 
+
 ## 访问控制器需要身份验证 
 
 您项目中的所有控制器均带有 **Authorize** 属性。此属性要求用户先进行身份验证，然后才能访问这些控制器。若要允许匿名访问控制器，请从控制器删除此属性。如果您想要更详细地设置这些权限，请将该属性应用到需要身份验证的每个方法，而不是将它应用到控制器类。

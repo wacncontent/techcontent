@@ -66,7 +66,7 @@ Azure AD 中的应用程序是使用 2 个对象表示的：应用程序对象�
 ![演示应用程序对象和服务主体如何与 Azure AD 实例共存的关系图。][apps_service_principals_directory]
 
 从上面的关系图中可以看出，Microsoft 在内部维护了两个用于发布应用程序的目录（左侧）。
- 
+
 * 一个目录用于 Microsoft 应用程序（Microsoft 服务目录）
 * 一个目录用于预先集成的第三方应用程序（应用程序库目录）
 

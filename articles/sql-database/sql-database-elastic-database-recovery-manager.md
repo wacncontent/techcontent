@@ -48,9 +48,11 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
 第一个步骤是创建 RecoveryManager 实例。[GetRecoveryManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.getrecoverymanager.aspx) 方法返回当前 [ShardMapManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.aspx) 实例的恢复管理器。为了解决分片映射中的任何不一致性，必须先检索特定分片映射的 RecoveryManager。
 
-    ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnnectionString,  
-             ShardMapManagerLoadPolicy.Lazy);
-             RecoveryManager rm = smm.GetRecoveryManager(); 
+```
+ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnnectionString,  
+         ShardMapManagerLoadPolicy.Lazy);
+         RecoveryManager rm = smm.GetRecoveryManager(); 
+```
 
 在此示例中，RecoveryManager 已从 ShardMapManager 进行了初始化。包含 ShardMap 的 ShardMapManager 也已进行了初始化。
 
@@ -67,7 +69,9 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
 此示例从分片映射删除分片。
 
-    rm.DetachShard(s.Location, customerMap); 
+```
+rm.DetachShard(s.Location, customerMap); 
+```
 
 在删除分片前，先映射 GSM 中的分片位置。由于已删除分片，因此假设这是有意而为之的，且分片键范围已不再使用。如果不是这样，则可以执行时间点还原，以从较早的时间点恢复分片。（在这种情况下，请查看以下部分了解如何检测分片的不一致性。） 若要恢复，请参阅[时点恢复](./sql-database-point-in-time-restore-portal.md)。
 
@@ -77,7 +81,9 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
 [DetectMappingDifferences 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.recovery.recoverymanager.detectmappingdifferences.aspx)可选择并返回其中一个分片映射（本地或全局）做为真实源，并调解两个分片映射（GSM 和 LSM）上的映射。
 
-    rm.DetectMappingDifferences(location, shardMapName);
+```
+rm.DetectMappingDifferences(location, shardMapName);
+```
 
 * *location* 指定服务器名称和数据库名称。
 * *shardMapName* 参数是分片映射名称。仅当多个分片映射由同一分片映射管理器管理时，才需要此参数。可选。
@@ -86,8 +92,10 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
 [ResolveMappingDifferences 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.recovery.recoverymanager.resolvemappingdifferences.aspx)可选择其中一个分片映射（本地或全局）做为真实源，并调解两个分片映射（GSM 和 LSM）上的映射。
 
-    ResolveMappingDifferences (RecoveryToken, MappingDifferenceResolution.KeepShardMapping);
-   
+```
+ResolveMappingDifferences (RecoveryToken, MappingDifferenceResolution.KeepShardMapping);
+```
+
 * *RecoveryToken* 参数枚举特定分片的 GSM 与 LSM 之间映射的差异。
 
 * [MappingDifferenceResolution 枚举](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.recovery.mappingdifferenceresolution.aspx)指示用于解决分片映射之间差异的方法。
@@ -97,19 +105,23 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
 [AttachShard 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.recovery.recoverymanager.attachshard.aspx)可将给定的分片附加到分片映射。然后，它将检测分片映射的任何不一致性，并更新映射以匹配分片还原时间点的分片。假设对数据库也进行了重命名以反映原始数据库名称（在还原分片之前），因为时间点还原默认为追加时间戳的新数据库。
 
-    rm.AttachShard(location, shardMapName) 
+```
+rm.AttachShard(location, shardMapName) 
+```
 
 * *location* 参数是要附加的分片的服务器名称和数据库名称。
 * *shardMapName* 参数是分片映射名称。仅当多个分片映射由同一分片映射管理器管理时，才需要此参数。可选。
 
 此示例将分片添加到最近从较早时间点还原的分片映射。由于已还原分片（也就是 LSM 中的分片映射），因此该分片可能与 GSM 中的分片条目不一致。在此示例代码之外，分片已还原并已重命名为数据库的原始名称。由于它已还原，因此假设 LSM 中的映射为受信任的映射。
 
-    rm.AttachShard(s.Location, customerMap); 
-    var gs = rm.DetectMappingDifferences(s.Location); 
-      foreach (RecoveryToken g in gs) 
-       { 
-       rm.ResolveMappingDifferences(g, MappingDifferenceResolution.KeepShardMapping); 
-       } 
+```
+rm.AttachShard(s.Location, customerMap); 
+var gs = rm.DetectMappingDifferences(s.Location); 
+  foreach (RecoveryToken g in gs) 
+   { 
+   rm.ResolveMappingDifferences(g, MappingDifferenceResolution.KeepShardMapping); 
+   } 
+```
 
 ## 在分片异地故障转移（还原）之后更新分片位置
 发生异地故障转移时，使辅助数据库可供写入访问，并成为新的主数据库。服务器的名称（根据具体的配置，有时还包括数据库的名称）可能与原始主副本不同。因此，必须修复 GSM 和 LSM 中分片的映射条目。同样，如果数据库还原到不同的名称或位置，或还原到较早的时间点，则可能会造成分片映射中出现不一致性。分片映射管理器会将打开的连接分发给正确的数据库。这种分发基于分片映射中的数据以及作为应用程序请求目标的分片键值。异地故障转移之后，必须使用准确的服务器名称、数据库名称和已恢复数据库的分片映射更新这些信息。
@@ -136,18 +148,20 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
      if (s.Location.Server == Configuration.PrimaryServer) 
          { 
           ShardLocation slNew = new ShardLocation(Configuration.SecondaryServer, s.Location.Database); 
-        
-          rm.DetachShard(s.Location); 
-        
-          rm.AttachShard(slNew); 
-        
-          var gs = rm.DetectMappingDifferences(slNew); 
-    
-          foreach (RecoveryToken g in gs) 
-            { 
-               rm.ResolveMappingDifferences(g, MappingDifferenceResolution.KeepShardMapping); 
-            } 
+
+    ```
+      rm.DetachShard(s.Location); 
+
+      rm.AttachShard(slNew); 
+
+      var gs = rm.DetectMappingDifferences(slNew); 
+
+      foreach (RecoveryToken g in gs) 
+        { 
+           rm.ResolveMappingDifferences(g, MappingDifferenceResolution.KeepShardMapping); 
         } 
+    } 
+    ```
     }
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
@@ -155,5 +169,5 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 <!--Image references-->
 
 [1]: ./media/sql-database-elastic-database-recovery-manager/recovery-manager.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

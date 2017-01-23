@@ -15,7 +15,8 @@ wacn.date: 08/31/2016
 #修改 Linux VM 中单个用户最大进程数的限制
 
 在部署有并发任务执行的虚机上, 会遇到 SSH 无法访问的问题. 本文将帮助你找出其中一种比较特殊的原因, 并提供解决方案。  
->[!NOTE] 以下案例分析基于 CentOS 7, 对于其他版本的 Linux 操作系统, 会略有不同, 请注意。
+>[!NOTE]
+> 以下案例分析基于 CentOS 7, 对于其他版本的 Linux 操作系统, 会略有不同, 请注意。
 
 ##症状描述
 
@@ -31,13 +32,14 @@ wacn.date: 08/31/2016
 - 重启虚拟机并以管理员登陆虚拟机，切换成 root 用户
 - 查看文件 /etc/security/limits.d/20-nproc.conf， 默认应该为如下内容
 
-        # Default limit for number of user's processes to prevent
-        # accidental fork bombs.
-        # See rhbz #432903 for reasoning.	
-        *          soft    nproc     4096
-        root       soft    nproc     unlimited
+    ```
+    # Default limit for number of user's processes to prevent
+    # accidental fork bombs.
+    # See rhbz #432903 for reasoning.	
+    *          soft    nproc     4096
+    root       soft    nproc     unlimited
+    ```
 
 - 编辑文件 /etc/security/limits.d/20-nproc.conf，将高亮显示行内的 4096，调整为相应的值，或者改成 unlimited.
 
 更多详细介绍， 请参考[这篇文档](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Migration_Planning_Guide/sect-Red_Hat_Enterprise_Linux-Migration_Planning_Guide-System_Management.html)
-

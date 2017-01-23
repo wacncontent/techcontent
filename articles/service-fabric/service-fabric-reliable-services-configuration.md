@@ -36,13 +36,15 @@ ms.author: sumukhs
 
 ### 群集清单节示例
 
-       <Section Name="KtlLogger">
-         <Parameter Name="WriteBufferMemoryPoolMinimumInKB" Value="8192" />
-         <Parameter Name="WriteBufferMemoryPoolMaximumInKB" Value="8192" />
-         <Parameter Name="SharedLogId" Value="{7668BB54-FE9C-48ed-81AC-FF89E60ED2EF}"/>
-         <Parameter Name="SharedLogPath" Value="f:\SharedLog.Log"/>
-         <Parameter Name="SharedLogSizeInMB" Value="16383"/>
-       </Section>
+```
+   <Section Name="KtlLogger">
+     <Parameter Name="WriteBufferMemoryPoolMinimumInKB" Value="8192" />
+     <Parameter Name="WriteBufferMemoryPoolMaximumInKB" Value="8192" />
+     <Parameter Name="SharedLogId" Value="{7668BB54-FE9C-48ed-81AC-FF89E60ED2EF}"/>
+     <Parameter Name="SharedLogPath" Value="f:\SharedLog.Log"/>
+     <Parameter Name="SharedLogSizeInMB" Value="16383"/>
+   </Section>
+```
 
 ### 备注
 记录器具有一个从未分页的内核内存分配的内存全局池，节点上的所有 Reliable Services 都可以使用该池在将状态数据写入与可靠服务副本关联的专用日志之前缓存这些数据。池大小由 WriteBufferMemoryPoolMinimumInKB 和 WriteBufferMemoryPoolMaximumInKB 设置控制。WriteBufferMemoryPoolMinimumInKB 指定此内存池的初始大小，以及内存池可以缩小到的大小下限。WriteBufferMemoryPoolMaximumInKB 是内存池可以增长到的大小上限。每个打开的可靠服务副本都可能会增加内存池的大小，增加幅度从系统决定的数量到 WriteBufferMemoryPoolMaximumInKB。如果内存池的内存需求大于可用的内存，则会延迟内存请求，直到有可用的内存。因此，如果写入缓冲区内存池对特定配置而言太小，则性能可能会受到影响。
@@ -59,7 +61,8 @@ SharedLogSizeInMB 指定要预先分配给所有节点上的默认共享日志�
 
 默认情况下，Azure Service Fabric 运行时在 Settings.xml 文件中查找预定义的节名称，并在创建基础运行时组件时使用这些配置值。
 
->[!NOTE] 请**勿**删除 Visual Studio 解决方案中生成的 Settings.xml 文件中的以下配置的节名称，除非你打算通过代码配置你的服务。配置 ReliableStateManager 时，重命名配置包名称或节名称需要进行代码更改。
+>[!NOTE]
+> 请**勿**删除 Visual Studio 解决方案中生成的 Settings.xml 文件中的以下配置的节名称，除非你打算通过代码配置你的服务。配置 ReliableStateManager 时，重命名配置包名称或节名称需要进行代码更改。
 
 ### 复制器安全配置
 复制器安全配置用于保护在复制过程中使用的通信通道的安全。这意味着服务将无法看到对方的复制流量，从而确保高度可用的数据也处于安全状态。默认情况下，空的安全配置节会影响复制安全。
@@ -67,7 +70,8 @@ SharedLogSizeInMB 指定要预先分配给所有节点上的默认共享日志�
 ### 默认节名称
 ReplicatorSecurityConfig
 
->[!NOTE] 若要更改此节名称，请在创建此服务的 ReliableStateManager 时，将 replicatorSecuritySectionName 参数重写为 ReliableStateManagerConfiguration 构造函数。
+>[!NOTE]
+> 若要更改此节名称，请在创建此服务的 ReliableStateManager 时，将 replicatorSecuritySectionName 参数重写为 ReliableStateManagerConfiguration 构造函数。
 
 ### 复制器配置
 复制器配置用于配置通过在本地复制和保持状态，负责使有状态 Reliable Service 的状态高度可靠的复制器。默认配置由 Visual Studio 模板生成，并应已足够。本部分介绍了可用于调整复制器的其他配置。
@@ -75,7 +79,8 @@ ReplicatorSecurityConfig
 ### 默认节名称
 ReplicatorConfig
 
->[!NOTE] 若要更改此节名称，请在创建此服务的 ReliableStateManager 时，将 replicatorSettingsSectionName 参数重写为 ReliableStateManagerConfiguration 构造函数。
+>[!NOTE]
+> 若要更改此节名称，请在创建此服务的 ReliableStateManager 时，将 replicatorSettingsSectionName 参数重写为 ReliableStateManagerConfiguration 构造函数。
 
 ### 配置名称
 |Name|计价单位|默认值|备注|
@@ -96,52 +101,56 @@ ReplicatorConfig
 
 ### 通过代码进行配置的示例
 
-    class Program
+```
+class Program
+{
+    /// <summary>
+    /// This is the entry point of the service host process.
+    /// </summary>
+    static void Main()
     {
-        /// <summary>
-        /// This is the entry point of the service host process.
-        /// </summary>
-        static void Main()
-        {
-            ServiceRuntime.RegisterServiceAsync("HelloWorldStatefulType",
-                context => new HelloWorldStateful(context, 
-                    new ReliableStateManager(context, 
-            new ReliableStateManagerConfiguration(
-                            new ReliableStateManagerReplicatorSettings()
-                {
-                    RetryInterval = TimeSpan.FromSeconds(3)
-                            }
-                )))).GetAwaiter().GetResult();
-        }
-    }    
-
-    class MyStatefulService : StatefulService
-    {
-        public MyStatefulService(StatefulServiceContext context, IReliableStateManagerReplica stateManager)
-            : base(context, stateManager)
-        { }
-        ...
+        ServiceRuntime.RegisterServiceAsync("HelloWorldStatefulType",
+            context => new HelloWorldStateful(context, 
+                new ReliableStateManager(context, 
+        new ReliableStateManagerConfiguration(
+                        new ReliableStateManagerReplicatorSettings()
+            {
+                RetryInterval = TimeSpan.FromSeconds(3)
+                        }
+            )))).GetAwaiter().GetResult();
     }
+}    
+
+class MyStatefulService : StatefulService
+{
+    public MyStatefulService(StatefulServiceContext context, IReliableStateManagerReplica stateManager)
+        : base(context, stateManager)
+    { }
+    ...
+}
+```
 
 ### 示例配置文件
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-       <Section Name="ReplicatorConfig">
-          <Parameter Name="ReplicatorEndpoint" Value="ReplicatorEndpoint" />
-          <Parameter Name="BatchAcknowledgementInterval" Value="0.05"/>
-          <Parameter Name="CheckpointThresholdInMB" Value="512" />
-       </Section>
-       <Section Name="ReplicatorSecurityConfig">
-          <Parameter Name="CredentialType" Value="X509" />
-          <Parameter Name="FindType" Value="FindByThumbprint" />
-          <Parameter Name="FindValue" Value="9d c9 06 b1 69 dc 4f af fd 16 97 ac 78 1e 80 67 90 74 9d 2f" />
-          <Parameter Name="StoreLocation" Value="LocalMachine" />
-          <Parameter Name="StoreName" Value="My" />
-          <Parameter Name="ProtectionLevel" Value="EncryptAndSign" />
-          <Parameter Name="AllowedCommonNames" Value="My-Test-SAN1-Alice,My-Test-SAN1-Bob" />
-       </Section>
-    </Settings>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <Section Name="ReplicatorConfig">
+      <Parameter Name="ReplicatorEndpoint" Value="ReplicatorEndpoint" />
+      <Parameter Name="BatchAcknowledgementInterval" Value="0.05"/>
+      <Parameter Name="CheckpointThresholdInMB" Value="512" />
+   </Section>
+   <Section Name="ReplicatorSecurityConfig">
+      <Parameter Name="CredentialType" Value="X509" />
+      <Parameter Name="FindType" Value="FindByThumbprint" />
+      <Parameter Name="FindValue" Value="9d c9 06 b1 69 dc 4f af fd 16 97 ac 78 1e 80 67 90 74 9d 2f" />
+      <Parameter Name="StoreLocation" Value="LocalMachine" />
+      <Parameter Name="StoreName" Value="My" />
+      <Parameter Name="ProtectionLevel" Value="EncryptAndSign" />
+      <Parameter Name="AllowedCommonNames" Value="My-Test-SAN1-Alice,My-Test-SAN1-Bob" />
+   </Section>
+</Settings>
+```
 
 ### 备注
 BatchAcknowledgementInterval 控制复制延迟。“0”值导致可能的最低延迟，但代价是牺牲吞吐量（因为必须发送和处理更多的确认消息，每个包含较少的确认）。BatchAcknowledgementInterval 的值越大，整体复制吞吐量就越高，但代价是导致更高的操作延迟。这直接转换为事务提交的延迟。

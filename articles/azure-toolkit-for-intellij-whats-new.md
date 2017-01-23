@@ -21,7 +21,8 @@ ms.author: robmcm;asirveda;martinsawicki
 ## Azure Toolkit for IntelliJ 版本
 本文包含有关 Azure Toolkit for IntelliJ 的不同版本和最新更新的信息。
 
-> [!NOTE] 另外还有 Azure Toolkit for Eclipse IDE。有关详细信息，请参阅 [Azure Toolkit for Eclipse]。
+> [!NOTE]
+> 另外还有 Azure Toolkit for Eclipse IDE。有关详细信息，请参阅 [Azure Toolkit for Eclipse]。
 
 ### 2016 年 8 月 26 日
 用于 IntelliJ 的 Azure 工具包 - 2016 年 8 月版包含以下增强功能：

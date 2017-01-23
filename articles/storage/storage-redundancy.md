@@ -41,7 +41,8 @@ ms.author: marsma
 
 有关不同冗余选项的定价信息，请参阅 [Azure 存储空间定价](https://www.azure.cn/pricing/details/storage/)。
 
->[!NOTE] 高级存储仅支持本地冗余存储 (LRS)。有关高级存储的信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。
+>[!NOTE]
+> 高级存储仅支持本地冗余存储 (LRS)。有关高级存储的信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。
 
 ##<a name="locally-redundant-storage"></a> 本地冗余存储
 本地冗余存储 (LRS) 会在存储扩展单元内复制三次数据，其中该单元托管在创建存储帐户的区域中的某数据中心内。写入请求仅在写入到全部 3 个副本中后才会成功返回。这三个副本各驻留在一个存储扩展单元的单独容错域和升级域中。
@@ -74,7 +75,7 @@ LRS 的成本最低，与其他选项相比，存储的持久性最小。如果�
 | ---------------   |----------------
 |中国北部 |中国东部
 |中国东部 |中国北部 
- 
+
 ##<a id="read-access-geo-redundant-storage"></a> 读取访问异地冗余存储
 
 除了在 GRS 所提供的两个区域之间进行复制外，读取访问异地冗余存储 (RA-GRS) 还提供对辅助位置中的数据的只读访问权限，从而在最大程度上提高存储帐户的可用性。
@@ -92,5 +93,5 @@ LRS 的成本最低，与其他选项相比，存储的持久性最小。如果�
 - [Azure 存储可伸缩性和性能目标](./storage-scalability-targets.md)
 - [Azure 存储冗余选项和读取访问异地冗余存储](http://blogs.msdn.com/b/windowsazurestorage/archive/2013/12/11/introducing-read-access-geo-replicated-storage-ra-grs-for-windows-azure-storage.aspx)  
 - [SOSP 论文 - Azure 存储空间：具有高度一致性的高可用云存储服务](http://blogs.msdn.com/b/windowsazurestorage/archive/2011/11/20/windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency.aspx)
- 
+
 <!---HONumber=Mooncake_0103_2017-->

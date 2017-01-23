@@ -46,12 +46,16 @@ Azure 移动应用 Node SDK 支持两个数据库驱动程序 - node-mssql 驱�
 
 1. 在命令窗口或 PowerShell 窗口中，为项目创建目录。
 
-        mkdir basicapp
+    ```
+    mkdir basicapp
+    ```
 
 2. 运行 npm init 初始化包结构。
 
-        cd basicapp
-        npm init
+    ```
+    cd basicapp
+    npm init
+    ```
 
     Npm init 命令将提出一系列问题以初始化项目。查看示例输出：
 
@@ -59,24 +63,28 @@ Azure 移动应用 Node SDK 支持两个数据库驱动程序 - node-mssql 驱�
 
 3. 从 npm 存储库安装 express 和 azure-mobile-apps 库。
 
-        npm install --save express azure-mobile-apps
+    ```
+    npm install --save express azure-mobile-apps
+    ```
 
 4. 创建 app.js 文件，实现基本移动服务器。
 
-        var express = require('express'),
-            azureMobileApps = require('azure-mobile-apps');
+    ```
+    var express = require('express'),
+        azureMobileApps = require('azure-mobile-apps');
 
-        var app = express(),
-            mobile = azureMobileApps();
+    var app = express(),
+        mobile = azureMobileApps();
 
-        // Define a TodoItem table
-        mobile.tables.add('TodoItem');
+    // Define a TodoItem table
+    mobile.tables.add('TodoItem');
 
-        // Add the mobile API so it is accessible as a Web API
-        app.use(mobile);
+    // Add the mobile API so it is accessible as a Web API
+    app.use(mobile);
 
-        // Start listening on HTTP
-        app.listen(process.env.PORT || 3000);
+    // Start listening on HTTP
+    app.listen(process.env.PORT || 3000);
+    ```
 
 此应用程序创建具有单个终结点 (`/tables/TodoItem`) 的移动优化 WebAPI，让用户使用动态架构访问基础 SQL 数据存储，而无需经过身份验证。它适用于以下客户端库快速入门：
 
@@ -116,17 +124,21 @@ Visual Studio 2015 需要使用一个扩展在 IDE 中开发 Node.js 应用程�
 
 9. 打开 _app.js_ 文件，添加对 Azure 移动应用 SDK 的支持。在库 require 语句底部的第 6 行，添加以下代码：
 
-        var bodyParser = require('body-parser');
-        var azureMobileApps = require('azure-mobile-apps');
+    ```
+    var bodyParser = require('body-parser');
+    var azureMobileApps = require('azure-mobile-apps');
+    ```
 
     在其他 app.use 语句之后大约第 27 行，添加以下代码：
 
-        app.use('/users', users);
+    ```
+    app.use('/users', users);
 
-        // Azure Mobile Apps Initialization
-        var mobile = azureMobileApps();
-        mobile.tables.add('TodoItem');
-        app.use(mobile);
+    // Azure Mobile Apps Initialization
+    var mobile = azureMobileApps();
+    mobile.tables.add('TodoItem');
+    app.use(mobile);
+    ```
 
     保存文件。
 
@@ -152,14 +164,18 @@ Visual Studio 2015 需要使用一个扩展在 IDE 中开发 Node.js 应用程�
 
 4. 使用 Git 克隆 URL 执行 `git clone` 命令，并根据需要输入密码，如以下示例所示：
 
-        $ git clone https://username@todolist.scm.chinacloudsites.cn:443/todolist.git
+    ```
+    $ git clone https://username@todolist.scm.chinacloudsites.cn:443/todolist.git
+    ```
 
 5. 浏览到本地目录（在前面的示例中为 /todolist），可以看到项目文件已下载。在 `/tables` 目录中定位到 `todoitem.json` 文件。此文件定义对表的权限。此外，可在同一目录中找到 `todoitem.js` 文件，它定义表的 CRUD 操作脚本。
 
 6. 更改项目文件之后，请执行以下命令添加、提交更改，然后将更改上载到站点：
 
-        $ git commit -m "updated the table script"
-        $ git push origin master
+    ```
+    $ git commit -m "updated the table script"
+    $ git push origin master
+    ```
 
     将新文件添加到项目时，必须先执行 `git add .` 命令。
 
@@ -178,7 +194,9 @@ Azure 应用服务提供有关 Node.js 应用程序的具体建议，请在部�
 
 许多应用程序是 Web 和移动应用的组合，ExpressJS 框架允许组合两个方面。但有时，我们可能只想要实现移动接口。移动接口用于提供登录页，确保应用服务已启动并在运行。可以提供自己的主页，或启用临时主页。若要启用临时主页，请使用以下内容对 Azure 移动应用进行实例化：
 
-    var mobile = azureMobileApps({ homePage: true });
+```
+var mobile = azureMobileApps({ homePage: true });
+```
 
 如果要让此选项仅在本地开发时可供使用，可将此设置添加到 `azureMobile.js` 文件。
 
@@ -202,33 +220,37 @@ azure-mobile-apps Node.js Server SDK 提供将存储在 Azure SQL 数据库中�
 
 根据最佳实践，应在表目录中的 Javascript 文件内定义每个表，然后使用 tables.import() 方法导入表。扩展基本应用后，调整 app.js 文件：
 
-    var express = require('express'),
-        azureMobileApps = require('azure-mobile-apps');
+```
+var express = require('express'),
+    azureMobileApps = require('azure-mobile-apps');
 
-    var app = express(),
-        mobile = azureMobileApps();
+var app = express(),
+    mobile = azureMobileApps();
 
-    // Define the database schema that is exposed
-    mobile.tables.import('./tables');
+// Define the database schema that is exposed
+mobile.tables.import('./tables');
 
-    // Provide initialization of any tables that are statically defined
-    mobile.tables.initialize().then(function () {
-        // Add the mobile API so it is accessible as a Web API
-        app.use(mobile);
+// Provide initialization of any tables that are statically defined
+mobile.tables.initialize().then(function () {
+    // Add the mobile API so it is accessible as a Web API
+    app.use(mobile);
 
-        // Start listening on HTTP
-        app.listen(process.env.PORT || 3000);
-    });
+    // Start listening on HTTP
+    app.listen(process.env.PORT || 3000);
+});
+```
 
 在 ./tables/TodoItem.js 中定义表：
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    var table = azureMobileApps.table();
+var table = azureMobileApps.table();
 
-    // Additional configuration for the table goes here
+// Additional configuration for the table goes here
 
-    module.exports = table;
+module.exports = table;
+```
 
 表默认使用动态架构。若要全局关闭动态架构，可在 Azure 门户预览中将应用设置 **MS\_DynamicSchema** 设置为 false。
 
@@ -238,20 +260,22 @@ azure-mobile-apps Node.js Server SDK 提供将存储在 Azure SQL 数据库中�
 
 可以将列显式定义为通过 WebAPI 公开。azure-mobile-apps Node.js SDK 会自动将脱机数据同步所需的任何其他列添加到提供的列表。例如，快速入门客户端应用程序需要包含两个列的表：text（字符串）和 complete（布尔值）。该表可在表定义 JavaScript 文件中（位于表目录中）定义，如下所示：
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    var table = azureMobileApps.table();
+var table = azureMobileApps.table();
 
-    // Define the columns within the table
-    table.columns = {
-        "text": "string",
-        "complete": "boolean"
-    };
+// Define the columns within the table
+table.columns = {
+    "text": "string",
+    "complete": "boolean"
+};
 
-    // Turn off dynamic schema
-    table.dynamicSchema = false;
+// Turn off dynamic schema
+table.dynamicSchema = false;
 
-    module.exports = table;
+module.exports = table;
+```
 
 如果以静态方式定义表，则还必须调用 tables.initialize() 方法，在启动时创建数据库架构。tables.initialize() 方法返回 [Promise]，以便 Web 服务不会在数据库初始化之前处理请求。
 
@@ -265,7 +289,8 @@ Azure 移动应用：Azure 移动应用 Node SDK 提供三种现成可用的数�
 
 Azure 移动应用 Node.js SDK 利用 [mssql Node.js 包]来建立和使用 SQL Express 与 SQL 数据库的连接。若要使用此包，需要在 SQL Express 实例上启用 TCP 连接。
 
-> [!TIP] 内存驱动程序不提供完整的测试工具集。若要在本地测试后端，建议使用 SQL Express 数据存储和 mssql 驱动程序。
+> [!TIP]
+> 内存驱动程序不提供完整的测试工具集。若要在本地测试后端，建议使用 SQL Express 数据存储和 mssql 驱动程序。
 
 1. 下载并安装 [Microsoft SQL Server 2014 Express]。请务必安装 SQL Server 2014 Express with Tools 版。除非确实需要 64 位支持，否则请使用 32 位版本，因为它在运行时消耗的内存更少。
 
@@ -278,7 +303,9 @@ Azure 移动应用 Node.js SDK 利用 [mssql Node.js 包]来建立和使用 SQL 
   5. 单击“IP 地址”选项卡。
   6. 找到“IPAll”节点。在“TCP 端口”字段中输入 **1433**。
 
-          ![Configure SQL Express for TCP/IP][3]
+      ```
+      ![Configure SQL Express for TCP/IP][3]
+      ```
 
   7. 单击“确定”。在弹出对话框中单击“确定”。
   8. 在左侧的树菜单中，单击“SQL Server 服务”。
@@ -292,14 +319,18 @@ Azure 移动应用 Node.js SDK 利用 [mssql Node.js 包]来建立和使用 SQL 
   3. 确保已选择“SQL Server 和 Windows 身份验证模式”
   4. 单击“确定”
 
-          ![Configure SQL Express Authentication][4]
+      ```
+      ![Configure SQL Express Authentication][4]
+      ```
 
   5. 在对象资源管理器中展开“安全性”>“登录”。
   6. 右键单击“登录”，然后选择“新建登录名...”
   7. 输入登录名。选择“SQL Server 身份验证”。输入密码，然后在“确认密码”中输入相同的密码。密码必须符合 Windows 复杂性要求。
   8. 单击“确定”
 
-          ![Add a new user to SQL Express][5]
+      ```
+      ![Add a new user to SQL Express][5]
+      ```
 
   9. 右键单击新登录名并选择“属性”
   10. 选择“服务器角色”页
@@ -311,7 +342,9 @@ Azure 移动应用 Node.js SDK 利用 [mssql Node.js 包]来建立和使用 SQL 
 
 Node.js 应用程序将读取 **SQLCONNSTR\_MS\_TableConnectionString** 环境变量，读取此数据库的连接字符串。可在环境内设置此变量。例如，可以使用 PowerShell 设置此环境变量：
 
-    $env:SQLCONNSTR_MS_TableConnectionString = "Server=127.0.0.1; Database=mytestdatabase; User Id=azuremobile; Password=T3stPa55word;"
+```
+$env:SQLCONNSTR_MS_TableConnectionString = "Server=127.0.0.1; Database=mytestdatabase; User Id=azuremobile; Password=T3stPa55word;"
+```
 
 通过 TCP/IP 连接访问数据库，并为连接提供用户名和密码。
 
@@ -325,21 +358,23 @@ Azure 移动应用从本地文件系统读取名为 _azureMobile.js_ 的 JavaScr
 
 下面是实现前面的数据库设置的 _azureMobile.js_ 文件示例：
 
-    module.exports = {
-        cors: {
-            origins: [ 'localhost' ]
-        },
-        data: {
-            provider: 'mssql',
-            server: '127.0.0.1',
-            database: 'mytestdatabase',
-            user: 'azuremobile',
-            password: 'T3stPa55word'
-        },
-        logging: {
-            level: 'verbose'
-        }
-    };
+```
+module.exports = {
+    cors: {
+        origins: [ 'localhost' ]
+    },
+    data: {
+        provider: 'mssql',
+        server: '127.0.0.1',
+        database: 'mytestdatabase',
+        user: 'azuremobile',
+        password: 'T3stPa55word'
+    },
+    logging: {
+        level: 'verbose'
+    }
+};
+```
 
 建议将 _azureMobile.js_ 添加到 _.gitignore_ 文件（或其他源代码管理 ignore 文件），防止将密码存储在云中。请始终在 [Azure 门户预览]中的“应用设置”内配置生产设置。
 
@@ -388,7 +423,8 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 创建移动应用后端后，可以选择将现有的 SQL 数据库连接到移动应用后端，或创建新的 SQL 数据库。在本部分中，将创建 SQL 数据库。
 
-> [!NOTE] 如果在与移动应用后端相同的位置已有一个数据库，可选择“使用现有数据库”，然后选中该数据库。因为会产生更高的延迟，所以不建议使用位于不同位置的数据库。
+> [!NOTE]
+> 如果在与移动应用后端相同的位置已有一个数据库，可选择“使用现有数据库”，然后选中该数据库。因为会产生更高的延迟，所以不建议使用位于不同位置的数据库。
 
 6. 在新移动应用后端中，单击“设置”>“移动应用”>“数据”>“+添加”。
 
@@ -417,23 +453,25 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 每个表都有一个访问属性用于控制对表的访问。以下示例显示了以静态方式定义的、要求身份验证的表。
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    var table = azureMobileApps.table();
+var table = azureMobileApps.table();
 
-    // Define the columns within the table
-    table.columns = {
-        "text": "string",
-        "complete": "boolean"
-    };
+// Define the columns within the table
+table.columns = {
+    "text": "string",
+    "complete": "boolean"
+};
 
-    // Turn off dynamic schema
-    table.dynamicSchema = false;
+// Turn off dynamic schema
+table.dynamicSchema = false;
 
-    // Require authentication to access the table
-    table.access = 'authenticated';
+// Require authentication to access the table
+table.access = 'authenticated';
 
-    module.exports = table;
+module.exports = table;
+```
 
 访问属性可接受三个值中的一个
 
@@ -449,58 +487,60 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 例如，如果设置 Microsoft 帐户身份验证并请求电子邮件地址声明，可使用以下表控制器将电子邮件地址添加到记录：
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    // Create a new table definition
-    var table = azureMobileApps.table();
+// Create a new table definition
+var table = azureMobileApps.table();
 
-    table.columns = {
-        "emailAddress": "string",
-        "text": "string",
-        "complete": "boolean"
-    };
-    table.dynamicSchema = false;
-    table.access = 'authenticated';
+table.columns = {
+    "emailAddress": "string",
+    "text": "string",
+    "complete": "boolean"
+};
+table.dynamicSchema = false;
+table.access = 'authenticated';
 
-    /**
-    * Limit the context query to those records with the authenticated user email address
-    * @param {Context} context the operation context
-    * @returns {Promise} context execution Promise
-    */
-    function queryContextForEmail(context) {
-        return context.user.getIdentity().then((data) => {
-            context.query.where({ emailAddress: data.microsoftaccount.claims.emailaddress });
-            return context.execute();
-        });
-    }
+/**
+* Limit the context query to those records with the authenticated user email address
+* @param {Context} context the operation context
+* @returns {Promise} context execution Promise
+*/
+function queryContextForEmail(context) {
+    return context.user.getIdentity().then((data) => {
+        context.query.where({ emailAddress: data.microsoftaccount.claims.emailaddress });
+        return context.execute();
+    });
+}
 
-    /**
-    * Adds the email address from the claims to the context item - used for
-    * insert operations
-    * @param {Context} context the operation context
-    * @returns {Promise} context execution Promise
-    */
-    function addEmailToContext(context) {
-        return context.user.getIdentity().then((data) => {
-            context.item.emailAddress = data.microsoftaccount.claims.emailaddress;
-            return context.execute();
-        });
-    }
+/**
+* Adds the email address from the claims to the context item - used for
+* insert operations
+* @param {Context} context the operation context
+* @returns {Promise} context execution Promise
+*/
+function addEmailToContext(context) {
+    return context.user.getIdentity().then((data) => {
+        context.item.emailAddress = data.microsoftaccount.claims.emailaddress;
+        return context.execute();
+    });
+}
 
-    // Configure specific code when the client does a request
-    // READ - only return records belonging to the authenticated user
-    table.read(queryContextForEmail);
+// Configure specific code when the client does a request
+// READ - only return records belonging to the authenticated user
+table.read(queryContextForEmail);
 
-    // CREATE - add or overwrite the userId based on the authenticated user
-    table.insert(addEmailToContext);
+// CREATE - add or overwrite the userId based on the authenticated user
+table.insert(addEmailToContext);
 
-    // UPDATE - only allow updating of record belong to the authenticated user
-    table.update(queryContextForEmail);
+// UPDATE - only allow updating of record belong to the authenticated user
+table.update(queryContextForEmail);
 
-    // DELETE - only allow deletion of records belong to the authenticated uer
-    table.delete(queryContextForEmail);
+// DELETE - only allow deletion of records belong to the authenticated uer
+table.delete(queryContextForEmail);
 
-    module.exports = table;
+module.exports = table;
+```
 
 若要查看哪些声明可用，请使用 Web 浏览器查看站点的 `/.auth/me` 终结点。
 
@@ -515,79 +555,87 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 例如，可能想要提供未经身份验证的只读表：
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    var table = azureMobileApps.table();
+var table = azureMobileApps.table();
 
-    // Read-Only table - only allow READ operations
-    table.read.access = 'anonymous';
-    table.insert.access = 'disabled';
-    table.update.access = 'disabled';
-    table.delete.access = 'disabled';
+// Read-Only table - only allow READ operations
+table.read.access = 'anonymous';
+table.insert.access = 'disabled';
+table.update.access = 'disabled';
+table.delete.access = 'disabled';
 
-    module.exports = table;
+module.exports = table;
+```
 
 ### <a name="howto-tables-query"></a>如何调整与表操作配合使用的查询
 
 表操作的常见要求是提供受限制的数据视图。例如，可提供标有已进行身份验证的用户 ID 的表，以便只允许用户读取或更新其自己的记录。以下表定义将提供此功能：
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    var table = azureMobileApps.table();
+var table = azureMobileApps.table();
 
-    // Define a static schema for the table
-    table.columns = {
-        "userId": "string",
-        "text": "string",
-        "complete": "boolean"
-    };
-    table.dynamicSchema = false;
+// Define a static schema for the table
+table.columns = {
+    "userId": "string",
+    "text": "string",
+    "complete": "boolean"
+};
+table.dynamicSchema = false;
 
-    // Require authentication for this table
-    table.access = 'authenticated';
+// Require authentication for this table
+table.access = 'authenticated';
 
-    // Ensure that only records for the authenticated user are retrieved
-    table.read(function (context) {
-        context.query.where({ userId: context.user.id });
-        return context.execute();
-    });
+// Ensure that only records for the authenticated user are retrieved
+table.read(function (context) {
+    context.query.where({ userId: context.user.id });
+    return context.execute();
+});
 
-    // When adding records, add or overwrite the userId with the authenticated user
-    table.insert(function (context) {
-        context.item.userId = context.user.id;
-        return context.execute();
-    });
+// When adding records, add or overwrite the userId with the authenticated user
+table.insert(function (context) {
+    context.item.userId = context.user.id;
+    return context.execute();
+});
 
-    module.exports = table;
+module.exports = table;
+```
 
 正常执行查询的操作有可使用 Where 子句来调整的查询属性。查询属性是一种 [QueryJS] 对象，用于将 OData 查询转换成数据后端可以处理的某种形式。在简单的等同性方案中（如前例），可使用映射。也可添加特定的 SQL 子句：
 
-    context.query.where('myfield eq ?', 'value');
+```
+context.query.where('myfield eq ?', 'value');
+```
 
 ### <a name="howto-tables-softdelete"></a>如何在表中配置软删除
 
 软删除并不实际删除记录。它将已删除的列设置为 true，将记录标记为已在数据库中删除。Azure 移动应用 SDK 自动从结果中删除已软删除的记录，除非 Mobile Client SDK 使用 IncludeDeleted()。若要配置软删除的表，请在表定义文件中设置 `softDelete` 属性：
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    var table = azureMobileApps.table();
+var table = azureMobileApps.table();
 
-    // Define the columns within the table
-    table.columns = {
-        "text": "string",
-        "complete": "boolean"
-    };
+// Define the columns within the table
+table.columns = {
+    "text": "string",
+    "complete": "boolean"
+};
 
-    // Turn off dynamic schema
-    table.dynamicSchema = false;
+// Turn off dynamic schema
+table.dynamicSchema = false;
 
-    // Turn on Soft Delete
-    table.softDelete = true;
+// Turn on Soft Delete
+table.softDelete = true;
 
-    // Require authentication to access the table
-    table.access = 'authenticated';
+// Require authentication to access the table
+table.access = 'authenticated';
 
-    module.exports = table;
+module.exports = table;
+```
 
 应建立记录清除机制 - 从客户端应用程序、通过 Web 作业或通过自定义 API。
 
@@ -595,27 +643,29 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 在创建新应用程序时，可能需要在表中植入数据。这可以在表定义 JavaScript 文件中实现，如下所示：
 
-    var azureMobileApps = require('azure-mobile-apps');
+```
+var azureMobileApps = require('azure-mobile-apps');
 
-    var table = azureMobileApps.table();
+var table = azureMobileApps.table();
 
-    // Define the columns within the table
-    table.columns = {
-        "text": "string",
-        "complete": "boolean"
-    };
-    table.seed = [
-        { text: 'Example 1', complete: false },
-        { text: 'Example 2', complete: true }
-    ];
+// Define the columns within the table
+table.columns = {
+    "text": "string",
+    "complete": "boolean"
+};
+table.seed = [
+    { text: 'Example 1', complete: false },
+    { text: 'Example 2', complete: true }
+];
 
-    // Turn off dynamic schema
-    table.dynamicSchema = false;
+// Turn off dynamic schema
+table.dynamicSchema = false;
 
-    // Require authentication to access the table
-    table.access = 'authenticated';
+// Require authentication to access the table
+table.access = 'authenticated';
 
-    module.exports = table;
+module.exports = table;
+```
 
 仅当表是由 Azure 移动应用 SDK 所创建时，才能植入数据。如果表已在数据库中，则不会在表中插入任何数据。如果打开了动态架构，将从植入的数据推断架构。
 
@@ -625,15 +675,21 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 Azure 应用服务移动应用随附内置的 [Swagger] 支持。若要启用 Swagger 支持，请先安装 swagger-ui 作为依赖项：
 
-    npm install --save swagger-ui
+```
+npm install --save swagger-ui
+```
 
 安装后，可以在 Azure 移动应用构造函数中启用 Swagger 支持：
 
-    var mobile = azureMobileApps({ swagger: true });
+```
+var mobile = azureMobileApps({ swagger: true });
+```
 
 可能只想要在开发版本中启用 Swagger 支持。为此，可以利用 `NODE_ENV` 应用设置：
 
-    var mobile = azureMobileApps({ swagger: process.env.NODE_ENV !== 'production' });
+```
+var mobile = azureMobileApps({ swagger: process.env.NODE_ENV !== 'production' });
+```
 
 Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以通过 `/swagger/ui` 终结点访问 Swagger UI。请注意，如果选择要求在整个应用程序中进行身份验证，Swagger 将生成 / 终结点错误。为获得最佳效果，请在“Azure 应用服务身份验证/授权”设置中选择允许未经身份验证的请求通过，然后使用 `table.access` 属性控制身份验证。
 
@@ -647,47 +703,53 @@ Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以
 
 以下代码演示如何使用推送对象向已注册的 iOS 设备发送广播推送通知：
 
-    // Create an APNS payload.
-    var payload = '{"aps": {"alert": "This is an APNS payload."}}';
+```
+// Create an APNS payload.
+var payload = '{"aps": {"alert": "This is an APNS payload."}}';
 
-    // Only do the push if configured
-    if (context.push) {
-        // Send a push notification using APNS.
-        context.push.apns.send(null, payload, function (error) {
-            if (error) {
-                // Do something or log the error.
-            }
-        });
-    }
+// Only do the push if configured
+if (context.push) {
+    // Send a push notification using APNS.
+    context.push.apns.send(null, payload, function (error) {
+        if (error) {
+            // Do something or log the error.
+        }
+    });
+}
+```
 
 通过从客户端创建模板推送注册，可以改为向所有受支持平台上的设备发送模板推送消息。以下代码演示如何发送模板通知：
 
-    // Define the template payload.
-    var payload = '{"messageParam": "This is a template payload."}';
+```
+// Define the template payload.
+var payload = '{"messageParam": "This is a template payload."}';
 
-    // Only do the push if configured
-    if (context.push) {
-        // Send a template notification.
-        context.push.send(null, payload, function (error) {
-            if (error) {
-                // Do something or log the error.
-            }
-        });
-    }
+// Only do the push if configured
+if (context.push) {
+    // Send a template notification.
+    context.push.send(null, payload, function (error) {
+        if (error) {
+            // Do something or log the error.
+        }
+    });
+}
+```
 
 ###<a name="push-user"></a>如何使用标记将推送通知发送到经过身份验证的用户
 
 当经过身份验证的用户注册推送通知时，用户 ID 标记将自动添加到注册中。使用此标记可以向特定用户注册的所有设备发送推送通知。以下代码获取发出请求的用户的 SID，并将模板推送通知发送到该用户的每个设备注册：
 
-    // Only do the push if configured
-    if (context.push) {
-        // Send a notification to the current user.
-        context.push.send(context.user.id, payload, function (error) {
-            if (error) {
-                // Do something or log the error.
-            }
-        });
-    }
+```
+// Only do the push if configured
+if (context.push) {
+    // Send a notification to the current user.
+    context.push.send(context.user.id, payload, function (error) {
+        if (error) {
+            // Do something or log the error.
+        }
+    });
+}
+```
 
 在注册来自经过身份验证客户端的推送通知时，请确保在尝试注册之前身份验证已完成。
 
@@ -710,31 +772,35 @@ Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以
 
 下面是根据前面使用的基本应用示例所做的原型 api 定义。
 
-    var express = require('express'),
-        azureMobileApps = require('azure-mobile-apps');
+```
+var express = require('express'),
+    azureMobileApps = require('azure-mobile-apps');
 
-    var app = express(),
-        mobile = azureMobileApps();
+var app = express(),
+    mobile = azureMobileApps();
 
-    // Import the Custom API
-    mobile.api.import('./api');
+// Import the Custom API
+mobile.api.import('./api');
 
-    // Add the mobile API so it is accessible as a Web API
-    app.use(mobile);
+// Add the mobile API so it is accessible as a Web API
+app.use(mobile);
 
-    // Start listening on HTTP
-    app.listen(process.env.PORT || 3000);
+// Start listening on HTTP
+app.listen(process.env.PORT || 3000);
+```
 
 让我们使用一个通过 _Date.now()_ 方法返回服务器日期的示例 API。下面是 api/date.js 文件：
 
-    var api = {
-        get: function (req, res, next) {
-            var date = { currentTime: Date.now() };
-            res.status(200).type('application/json').send(date);
-        });
-    };
+```
+var api = {
+    get: function (req, res, next) {
+        var date = { currentTime: Date.now() };
+        res.status(200).type('application/json').send(date);
+    });
+};
 
-    module.exports = api;
+module.exports = api;
+```
 
 每个参数是标准的 RESTful 谓词之一 - GET、POST、PATCH 或 DELETE。此方法是发送所需输出的标准 [ExpressJS 中间件]函数。
 
@@ -742,29 +808,33 @@ Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以
 
 Azure 移动应用 SDK 对表终结点和自定义 API 使用相同的方式实现身份验证。若要在前一部分开发的 API 中添加身份验证，请添加 **access** 属性：
 
-    var api = {
-        get: function (req, res, next) {
-            var date = { currentTime: Date.now() };
-            res.status(200).type('application/json').send(date);
-        });
-    };
-    // All methods must be authenticated.
-    api.access = 'authenticated';
+```
+var api = {
+    get: function (req, res, next) {
+        var date = { currentTime: Date.now() };
+        res.status(200).type('application/json').send(date);
+    });
+};
+// All methods must be authenticated.
+api.access = 'authenticated';
 
-    module.exports = api;
+module.exports = api;
+```
 
 也可以指定对特定操作的身份验证：
 
-    var api = {
-        get: function (req, res, next) {
-            var date = { currentTime: Date.now() };
-            res.status(200).type('application/json').send(date);
-        }
-    };
-    // The GET methods must be authenticated.
-    api.get.access = 'authenticated';
+```
+var api = {
+    get: function (req, res, next) {
+        var date = { currentTime: Date.now() };
+        res.status(200).type('application/json').send(date);
+    }
+};
+// The GET methods must be authenticated.
+api.get.access = 'authenticated';
 
-    module.exports = api;
+module.exports = api;
+```
 
 对于要求身份验证的自定义 API，必须使用与表终结点相同的令牌。
 
@@ -772,25 +842,27 @@ Azure 移动应用 SDK 对表终结点和自定义 API 使用相同的方式实�
 
 Azure 移动应用 SDK 使用[正文分析器中间件](https://github.com/expressjs/body-parser)来接受和解码提交件的正文内容。可以将正文分析器预先配置为接受大型文件上载：
 
-    var express = require('express'),
-        bodyParser = require('body-parser'),
-        azureMobileApps = require('azure-mobile-apps');
+```
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    azureMobileApps = require('azure-mobile-apps');
 
-    var app = express(),
-        mobile = azureMobileApps();
+var app = express(),
+    mobile = azureMobileApps();
 
-    // Set up large body content handling
-    app.use(bodyParser.json({ limit: '50mb' }));
-    app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+// Set up large body content handling
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-    // Import the Custom API
-    mobile.api.import('./api');
+// Import the Custom API
+mobile.api.import('./api');
 
-    // Add the mobile API so it is accessible as a Web API
-    app.use(mobile);
+// Add the mobile API so it is accessible as a Web API
+app.use(mobile);
 
-    // Start listening on HTTP
-    app.listen(process.env.PORT || 3000);
+// Start listening on HTTP
+app.listen(process.env.PORT || 3000);
+```
 
 传输前，该文件采用 Base-64 编码。这将增加实际上传大小，因此必须考虑其大小。
 
@@ -798,32 +870,34 @@ Azure 移动应用 SDK 使用[正文分析器中间件](https://github.com/expre
 
 Azure 移动应用 SDK 允许通过请求对象访问整个上下文，使用户能够轻松针对定义的数据提供程序执行参数化的 SQL 语句：
 
-    var api = {
-        get: function (request, response, next) {
-            // Check for parameters - if not there, pass on to a later API call
-            if (typeof request.params.completed === 'undefined')
-                return next();
+```
+var api = {
+    get: function (request, response, next) {
+        // Check for parameters - if not there, pass on to a later API call
+        if (typeof request.params.completed === 'undefined')
+            return next();
 
-            // Define the query - anything that can be handled by the mssql
-            // driver is allowed.
-            var query = {
-                sql: 'UPDATE TodoItem SET complete=@completed',
-                parameters: [{
-                    completed: request.params.completed
-                }]
-            };
+        // Define the query - anything that can be handled by the mssql
+        // driver is allowed.
+        var query = {
+            sql: 'UPDATE TodoItem SET complete=@completed',
+            parameters: [{
+                completed: request.params.completed
+            }]
+        };
 
-            // Execute the query.  The context for Azure Mobile Apps is available through
-            // request.azureMobile - the data object contains the configured data provider.
-            request.azureMobile.data.execute(query)
-            .then(function (results) {
-                response.json(results);
-            });
-        }
-    };
+        // Execute the query.  The context for Azure Mobile Apps is available through
+        // request.azureMobile - the data object contains the configured data provider.
+        request.azureMobile.data.execute(query)
+        .then(function (results) {
+            response.json(results);
+        });
+    }
+};
 
-    api.get.access = 'authenticated';
-    module.exports = api;
+api.get.access = 'authenticated';
+module.exports = api;
+```
 
 ## <a name="Debugging"></a>调试、简易表和简易 API
 

@@ -184,17 +184,23 @@ Site Recovery 是一项 Azure 服务，可通过协调从本地物理服务器�
 2. 停止 System Center Virtual Machine Manager 服务
 3. 从提升的命令提示符处，使用下列命令提取提供程序安装程序：
 
-        C:\Windows\System32> CD C:\ASR
-        C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
+    C:\Windows\System32> CD C:\ASR
+    C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
 
 4. 安装提供程序，如下所示：
 
-        C:\ASR> setupdr.exe /i
+    ```
+    C:\ASR> setupdr.exe /i
+    ```
 
 5. 注册提供程序，如下所示：
 
-        CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
-        C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>       
+    ```
+    CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
+    C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>       
+    ```
 
 参数如下所示：
 
@@ -228,15 +234,17 @@ Site Recovery 是一项 Azure 服务，可通过协调从本地物理服务器�
 
 4. 在“安装设置”页上，指定要安装代理的位置，并选择将在其中安装备份元数据的缓存位置。然后单击“安装”。
 5. 安装完成之后，单击“关闭”以完成向导。
-    
+
     ![注册 MARS 代理](./media/site-recovery-vmm-to-azure/agent-register.png)
 
 ### 命令行安装 
 
 你也可以使用下列命令，从命令行安装 Azure 恢复服务代理：
 
-    marsagentinstaller.exe /q /nu
-    
+```
+marsagentinstaller.exe /q /nu
+```
+
 ## 步骤 6：配置云保护设置
 
 在注册 VMM 服务器后，你可以配置云保护设置。你在安装提供程序时启用了“将云数据与保管库同步”选项，所以 VMM 服务器上的所有云都将出现在保管库中的“受保护的项”选项卡中。<b></b>
@@ -313,7 +321,8 @@ Site Recovery 是一项 Azure 服务，可通过协调从本地物理服务器�
 
     ![修改网络属性](./media/site-recovery-vmm-to-azure/multi-nic.png)
 
->[!NOTE] 不支持具有静态 IP 地址的 Linux 虚拟机。
+>[!NOTE]
+> 不支持具有静态 IP 地址的 Linux 虚拟机。
 
 ##<a name="step-7-test-your-deployment"></a> 测试部署
 

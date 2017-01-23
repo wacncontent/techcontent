@@ -135,7 +135,7 @@ Azure IoT 库在以下操作系统平台上进行了测试：
 - [使用网关 SDK 模拟设备][lnk-gateway]
 - [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
-[lnk-iot-suite]: ../iot-suite/index.md/
+[lnk-iot-suite]: ../iot-suite/index.md
 
 [lnk-protocols]: ./iot-hub-protocol-gateway.md
 [lnk-compare]: ./iot-hub-compare-event-hubs.md

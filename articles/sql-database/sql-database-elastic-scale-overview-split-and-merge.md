@@ -87,19 +87,21 @@ ms.author: ddove
 
 有关引用表和分片表对比的信息可由分片映射上的 **SchemaInfo** API 提供。以下示例说明了如何在给定分片映射管理器对象 smm 上使用这些 API：
 
-    // Create the schema annotations 
-    SchemaInfo schemaInfo = new SchemaInfo(); 
+```
+// Create the schema annotations 
+SchemaInfo schemaInfo = new SchemaInfo(); 
 
-    // Reference tables 
-    schemaInfo.Add(new ReferenceTableInfo("dbo", "region")); 
-    schemaInfo.Add(new ReferenceTableInfo("dbo", "nation")); 
+// Reference tables 
+schemaInfo.Add(new ReferenceTableInfo("dbo", "region")); 
+schemaInfo.Add(new ReferenceTableInfo("dbo", "nation")); 
 
-    // Sharded tables 
-    schemaInfo.Add(new ShardedTableInfo("dbo", "customer", "C_CUSTKEY")); 
-    schemaInfo.Add(new ShardedTableInfo("dbo", "orders", "O_CUSTKEY")); 
+// Sharded tables 
+schemaInfo.Add(new ShardedTableInfo("dbo", "customer", "C_CUSTKEY")); 
+schemaInfo.Add(new ShardedTableInfo("dbo", "orders", "O_CUSTKEY")); 
 
-    // Publish 
-    smm.GetSchemaInfoCollection().Add(Configuration.ShardMapName, schemaInfo); 
+// Publish 
+smm.GetSchemaInfoCollection().Add(Configuration.ShardMapName, schemaInfo); 
+```
 
 将表“region”和表“nation”定义为引用表，并使用拆分/合并/移动操作复制它们。而将“customer”和“orders”定义为分片表。C\_CUSTKEY 和 O\_CUSTKEY 将用作分片键。
 
@@ -146,11 +148,11 @@ ms.author: ddove
 * 在请求处理过程中，一些 shardlet 数据可能会同时存在于源分片和目标分片上。为了防止在 shardlet 移动过程中出现故障，这是必需的。拆分/合并与分片映射功能的集成可以确保在分片映射上使用 **OpenConnectionForKey** 方法通过依赖于数据的路由 API 建立的连接不会显示任何不一致的中间状态。但是，在不使用 **OpenConnectionForKey** 方法连接到源分片或目标分片时，如果正在执行拆分/合并/移动请求，则不一致的中间状态可能可见。这些连接可能会显示部分或重复的结果，具体取决于时间设置或进行基础连接的分片。此限制当前包括由弹性缩放多分片查询建立的连接。
 
 * 不能在不同的角色之间共享用于拆分/合并服务的元数据数据库。例如，在过渡环境中运行的拆分/合并服务的角色需要指向其他元数据数据库而不是生产角色。
- 
+
 ## 计费 
 
 在 Azure 订阅中拆分/合并服务作为云服务运行。因此将对你的服务实例收取云服务费用。除非你频繁地执行拆分/合并/移动操作，否则建议删除你的拆分/合并云服务。这可以节省用于运行中的或已部署的云服务实例的成本。只要你需要执行拆分或合并操作，你就可以重新部署和启用已准备好的可运行配置。
- 
+
 ## 监视 
 ### 状态表 
 
@@ -176,23 +178,25 @@ ms.author: ddove
 
 针对 NuGet 包所提供的 Web 和辅助角色，若要使用诊断配置启用监视和诊断，请使用 Azure PowerShell 运行以下命令：
 
-    $storage_name = "<YourAzureStorageAccount>" 
-    
-    $key = "<YourAzureStorageAccountKey" 
-    
-    $storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key  
-    
-    $config_path = "<YourFilePath>\SplitMergeWebContent.diagnostics.xml" 
-    
-    $service_name = "<YourCloudServiceName>" 
-    
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWeb" 
-    
-    $config_path = "<YourFilePath>\SplitMergeWorkerContent.diagnostics.xml" 
-    
-    $service_name = "<YourCloudServiceName>" 
-    
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWorker" 
+```
+$storage_name = "<YourAzureStorageAccount>" 
+
+$key = "<YourAzureStorageAccountKey" 
+
+$storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key  
+
+$config_path = "<YourFilePath>\SplitMergeWebContent.diagnostics.xml" 
+
+$service_name = "<YourCloudServiceName>" 
+
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWeb" 
+
+$config_path = "<YourFilePath>\SplitMergeWorkerContent.diagnostics.xml" 
+
+$service_name = "<YourCloudServiceName>" 
+
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWorker" 
+```
 
 可以在此处找到有关如何配置和部署诊断设置的详细信息：[在 Azure 云服务和虚拟机中启用诊断](../cloud-services/cloud-services-dotnet-diagnostics.md)。
 
@@ -224,7 +228,7 @@ ms.author: ddove
 无需预配新的元数据数据库，即可升级拆分/合并。新版本会自动将现有的元数据数据库升级到新版本。
 
 ## 最佳实践和疑难解答
- 
+
 -    定义一个测试租户，并使用该测试租户在几个分片上对最重要的拆分/合并/移动操作进行实验。确保已在你的分片映射中正确定义所有元数据，并且这些操作不违反约束或外键。
 -    请使测试租户的数据大小始终大于最大租户的最大数据大小，以确保你不会遇到与数据大小有关的问题。这将会帮助你评估移动单个租户所需时间的上限。
 -    确保你的架构允许删除操作。拆分/合并服务要求在将数据成功地复制到目标分片后，能够从源分片中删除数据。例如，**删除触发器**可以阻止该服务删除源分片上的数据，并且可能导致操作失败。
@@ -238,5 +242,5 @@ ms.author: ddove
 [1]: ./media/sql-database-elastic-scale-overview-split-and-merge/split-merge-overview.png
 [2]: ./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics.png
 [3]: ./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics-config.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

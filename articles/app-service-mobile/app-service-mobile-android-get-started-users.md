@@ -34,7 +34,7 @@ ms.author: yuaxu
 [!INCLUDE [app-service-mobile-restrict-permissions-dotnet-backend](../../includes/app-service-mobile-restrict-permissions-dotnet-backend.md)]
 
 * 在 Android Studio 中，打开通过[移动应用入门]教程完成的项目。从“运行”菜单中单击“运行应用”，然后验证启动该应用后，是否会引发状态代码为 401（“未授权”）的未经处理的异常。
-  
+
      发生此异常的原因是应用尝试以未经身份验证的用户身份访问后端，但 *TodoItem* 表现在要求身份验证。
 
 接下来，更新应用程序，以便在从移动应用后端请求资源之前对用户进行身份验证。

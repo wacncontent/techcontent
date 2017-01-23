@@ -19,7 +19,7 @@ wacn.date: 08/10/2016
 ##Step 1：直播基础配置
 
 1. 首先登录 [Azure 经典管理门户](https://manage.windowsazure.cn/)，在管理页面左侧的服务列表中点击**媒体服务**，然后选择**创建媒体服务账户**即可。
-    
+
     ![1](./media/azure-media-services-live-streaming/1.png)
 
     ![2](./media/azure-media-services-live-streaming/2.png)
@@ -71,7 +71,7 @@ wacn.date: 08/10/2016
     创建完成后，点击频道进入配置页面，设置**插入 URL 允许的 IP 地址**和**预览 URL 允许的 IP 地址**， 确保当前计算机的 IP 地址被允许。 
 
     ![11](./media/azure-media-services-live-streaming/11.png)
- 
+
     在频道页面，点击插入 URL 右侧的**复制**按钮。将 URL 保存至剪贴板。
 
     ![12](./media/azure-media-services-live-streaming/12.png)
@@ -146,7 +146,8 @@ wacn.date: 08/10/2016
 
 ![26](./media/azure-media-services-live-streaming/26.png)
 
->[!NOTE]后续的公开课都可以在已创建的频道直播，只需要再按照 Step 2 的 3、4 操作即可。
+>[!NOTE]
+>后续的公开课都可以在已创建的频道直播，只需要再按照 Step 2 的 3、4 操作即可。
 
 ##Step4: 使用 CDN 为视频直播加速
 
@@ -155,4 +156,3 @@ wacn.date: 08/10/2016
 ##常见问题与相关文档
 
 [如何使用AMS进行实时编码](./media-services/media-services-portal-creating-live-encoder-enabled-channel.md)
-

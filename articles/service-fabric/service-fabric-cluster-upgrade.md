@@ -31,7 +31,8 @@ ms.author: chackdan
 
 为此，请门户上设置“upgradeMode”群集配置，或者在创建时或稍后在实时群集上使用 Resource Manager 进行设置。
 
->[!NOTE] 请确保群集始终运行受支持的结构版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
+>[!NOTE]
+> 请确保群集始终运行受支持的结构版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
 
 群集运行的版本过期前 14 天，系统会生成运行状况事件，使群集进入警告运行状况状态。在升级到支持的结构版本之前，群集将保持警告状态。
 
@@ -44,7 +45,7 @@ ms.author: chackdan
 在实时群集上，可以使用管理体验将群集设置为自动或手动。
 
 #### 在设置为手动模式的群集上，通过门户升级到新版本。
- 
+
 若要升级到新版本，只需从下拉列表中选择可用的版本并保存即可。结构升级将自动开始。在升级过程中，将遵守群集运行状况策略（节点运行状况和所有在群集中运行的应用程序的运行状况的组合）。
 
 如果不符合现行的群集运行状况策略，则回滚升级。请在本文档中向下滚动，详细了解如何设置这些自定义运行状况策略。
@@ -56,11 +57,11 @@ ms.author: chackdan
 ### 通过 Resource Manager 模板设置升级模式 
 
 将“upgradeMode”配置添加到 Microsoft.ServiceFabric/clusters 资源定义，将“clusterCodeVersion”设置为支持的结构版本之一，如下所示，然后部署模板。“upgradeMode”的有效值为“Manual”或“Automatic”。
- 
+
 ![ARMUpgradeMode][ARMUpgradeMode]  
 
 #### 在设置为手动模式的群集上，通过 Resource Manager 模板升级到新版本。
- 
+
 当群集处于手动模式时，若要升级到新版本，请将“clusterCodeVersion”更改为支持的版本，然后部署该版本。部署模板时，将自动开始结构升级。在升级过程中，将遵守群集运行状况策略（节点运行状况和所有在群集中运行的应用程序的运行状况的组合）。
 
 如果不符合现行的群集运行状况策略，则回滚升级。请在本文档中向下滚动，详细了解如何设置这些自定义运行状况策略。
@@ -73,43 +74,45 @@ ms.author: chackdan
 
 “supportExpiryUtc”告知给定的版本即将过期或已过期。最新版本没有有效日期 - 它的值为“9999-12-31T23:59:59.9999999”，这只是表示尚未设置过期日期。
 
-    GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
+```
+GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
 
-    Output:
-    {
-                      "value": [
-                        {
-                          "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.0.1427.9490",
-                          "name": "5.0.1427.9490",
-                          "type": "Microsoft.ServiceFabric/environments/clusterVersions",
-                          "properties": {
-                            "codeVersion": "5.0.1427.9490",
-                            "supportExpiryUtc": "2016-11-26T23:59:59.9999999",
-                            "environment": "Windows"
-                          }
-                        },
-                        {
-                          "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.0.1427.9490",
-                          "name": "5.1.1427.9490",
-                          "type": " Microsoft.ServiceFabric/environments/clusterVersions",
-                          "properties": {
-                            "codeVersion": "5.1.1427.9490",
-                            "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                            "environment": "Windows"
-                          }
-                        },
-                        {
-                          "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.4.1427.9490",
-                          "name": "4.4.1427.9490",
-                          "type": " Microsoft.ServiceFabric/environments/clusterVersions",
-                          "properties": {
-                            "codeVersion": "4.4.1427.9490",
-                            "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                            "environment": "Linux"
-                          }
-                        }
-                      ]
+Output:
+{
+                  "value": [
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.0.1427.9490",
+                      "name": "5.0.1427.9490",
+                      "type": "Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "5.0.1427.9490",
+                        "supportExpiryUtc": "2016-11-26T23:59:59.9999999",
+                        "environment": "Windows"
+                      }
+                    },
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.0.1427.9490",
+                      "name": "5.1.1427.9490",
+                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "5.1.1427.9490",
+                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                        "environment": "Windows"
+                      }
+                    },
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.4.1427.9490",
+                      "name": "4.4.1427.9490",
+                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "4.4.1427.9490",
+                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                        "environment": "Linux"
+                      }
                     }
+                  ]
+                }
+```
 
 ## 群集升级模式为“自动”时的结构升级行为
 
@@ -187,7 +190,8 @@ Microsoft 将维护 Azure 群集中运行的结构代码和配置。我们将根
 
 对于每个节点类型，可以添加要在应用程序中使用的自定义放置属性。NodeType 是无需显式添加即可使用的默认属性。
 
->[!NOTE] 有关使用放置约束、节点属性以及如何定义它们的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](./service-fabric-cluster-resource-manager-cluster-description.md)中的“放置约束和节点属性”部分。
+>[!NOTE]
+> 有关使用放置约束、节点属性以及如何定义它们的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](./service-fabric-cluster-resource-manager-cluster-description.md)中的“放置约束和节点属性”部分。
 
 ### 容量度量值
 

@@ -76,16 +76,16 @@ App Service Web Apps 构建于一种“平台即服务”模型之上，可大�
 
 ### 企业类托管 ###
 
-App Service Web Apps 提供了一个稳定、可靠的平台，后者已被证实能够满足从小型内部开发和测试工作负荷到高度可扩展的高流量网站的各种业务需求。通过使用 Web Apps，你可以使用与 Microsoft 公司用于处理高价值 Web 工作负荷相同的企业类托管平台。Web Apps 以及 Azure 平台上的所有服务均符合安全要求和遵从法规要求，如 ISO (ISO/IEC 27001:2005）；SOC1 和 SOC2 SSAE 16/ISAE 3402 Attestations、HIPAA BAA、PCI 和 Fedramp，是每个元素和功能的核心，有关详细信息，请参阅[http://aka.ms/azurecompliance](https://www.azure.cn/support/trust-center/compliance/)。
+App Service Web Apps 提供了一个稳定、可靠的平台，后者已被证实能够满足从小型内部开发和测试工作负荷到高度可扩展的高流量网站的各种业务需求。通过使用 Web Apps，你可以使用与 Microsoft 公司用于处理高价值 Web 工作负荷相同的企业类托管平台。Web Apps 以及 Azure 平台上的所有服务均符合安全要求和遵从法规要求，如 ISO (ISO/IEC 27001:2005）；SOC1 和 SOC2 SSAE 16/ISAE 3402 Attestations、HIPAA BAA、PCI 和 Fedramp，是每个元素和功能的核心，有关详细信息，请参阅[https://www.azure.cn/support/trust-center/compliance/](https://www.azure.cn/support/trust-center/compliance/)。
 
-Azure 平台支持基于角色的身份验证控制，从而支持对 Web 应用内的资源进行企业级控制。RBAC 支持企业在 Azure 环境中为其所有资产实施自己的访问管理策略，将用户分配到组并反过来根据 Web 应用等资产将所需的权限分配给这些组。关于 Azure 中 RBAC 的详细信息，请参阅 [http://aka.ms/azurerbac](../active-directory/role-based-access-control-configure.md)。通过利用 Web Apps，你可以确保将 Web 应用程序部署在安全可靠的环境中，并完全地控制要将资产部署到的区域。
+Azure 平台支持基于角色的身份验证控制，从而支持对 Web 应用内的资源进行企业级控制。RBAC 支持企业在 Azure 环境中为其所有资产实施自己的访问管理策略，将用户分配到组并反过来根据 Web 应用等资产将所需的权限分配给这些组。关于 Azure 中 RBAC 的详细信息，请参阅 [../active-directory/role-based-access-control-configure.md](../active-directory/role-based-access-control-configure.md)。通过利用 Web Apps，你可以确保将 Web 应用程序部署在安全可靠的环境中，并完全地控制要将资产部署到的区域。
 
 通过支持往回连接到你的内部资源（如数据仓库或 SharePoint 环境），应用服务 Web 应用还能够充分利用你的本地投资。如之前在[高级别的解决方案](#high-level-solution)中所讨论的，用户可以使用混合连接和虚拟网络连接建立到本地基础结构和服务的连接。
 
 ## 解决方案详细信息 ##
 
 让我们看一个应用程序迁移方案的示例。这概述了 App Service Web Apps 的各种功能如何协同提供出色解决方案和业务价值的详细信息。
- 
+
 在整个示例中，我们要讨论的业务线应用程序是一个支出报表应用程序，它使员工能够提交费用进行报销。该应用程序托管于运行 IIS6 的 Windows Server 2003 R2 上，数据库是 SQL Server 2005 数据库。我们选择较旧服务器的原因在于 Windows Server 2003 R2 和 SQL Server 2005 的服务即将到期。基于这一点，此示例中所使用的模式将适用于各种迁移场景。
 
 ### 使用 Azure SQL 数据库的替代方法 ###
@@ -109,7 +109,7 @@ Azure 平台提供了一些替代方法，可以将 Azure SQL 数据库用作 We
 App Service Web Apps 提供了一款灵活、经济高效、响应迅速的解决方案在快速发展的环境中满足企业不断变化的需求。Web Apps 帮助企业利用托管平台以及现代化的 DevOps 功能和减少的人工管理提高了生产力和效率，同时提供企业扩展功能、弹性、安全性以及与本地资产的集成。
 
 ## 行动号召 ##
-有关 Azure App Service Web Apps 服务的详细信息，请访问 [http://aka.ms/enterprisewebsites](https://www.azure.cn/home/features/app-service/web-apps/)，在这里你可以查看更多信息；并登录 [https://www.azure.cn/pricing/1rmb-trial/](https://www.azure.cn/pricing/1rmb-trial/) 立即注册试用版，评估该服务并发现为你企业带来的优势。
+有关 Azure App Service Web Apps 服务的详细信息，请访问 [https://www.azure.cn/home/features/app-service/web-apps/](https://www.azure.cn/home/features/app-service/web-apps/)，在这里你可以查看更多信息；并登录 [https://www.azure.cn/pricing/1rmb-trial/](https://www.azure.cn/pricing/1rmb-trial/) 立即注册试用版，评估该服务并发现为你企业带来的优势。
 
 [!INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
 

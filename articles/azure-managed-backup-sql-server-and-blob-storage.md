@@ -86,9 +86,11 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 
 4. 查询语句为：
 
-        CREATE CREDENTIAL 凭据名称            
-        WITH IDENTITY= '存储账户名称'          
-        , SECRET = '存储账户主密钥'   
+    ```
+    CREATE CREDENTIAL 凭据名称            
+    WITH IDENTITY= '存储账户名称'          
+    , SECRET = '存储账户主密钥'   
+    ```
 
 5. 单击**执行**按钮运行查询语句，获得以下执行结果。
 
@@ -100,16 +102,18 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 
 7. SQL 语句如下：
 
-        Use msdb; 
-        GO 
-        EXEC smart_admin.sp_set_db_backup 
-            @database_name='需要进行托管备份的数据库名称'
-            ,@retention_days=30 
-            ,@credential_name='凭据名称，与上个脚本中的一致'
-            ,@storage_url='blob服务访问终结点URL'
-            ,@encryption_algorithm= NO_ENCRYPTION 
-            ,@enable_backup=1 
-        GO
+    ```
+    Use msdb; 
+    GO 
+    EXEC smart_admin.sp_set_db_backup 
+        @database_name='需要进行托管备份的数据库名称'
+        ,@retention_days=30 
+        ,@credential_name='凭据名称，与上个脚本中的一致'
+        ,@storage_url='blob服务访问终结点URL'
+        ,@encryption_algorithm= NO_ENCRYPTION 
+        ,@enable_backup=1 
+    GO
+    ```
 
 8. 上述语句中，设置备份保存时间为 30 天，如需调整，只需修改 @retention_days 参数即可，范围为 1-30.
 
@@ -145,7 +149,8 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 
     ![22](./media/azure-managed-backup-sql-server-and-blob-storage/22.png)
 
-    >[!NOTE]初次配置时选择**配置**选项。
+    >[!NOTE]
+    >初次配置时选择**配置**选项。
 
 3. 勾选**启用托管备份**。
 
@@ -196,7 +201,7 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 - 日志链中断。SQL Server 托管备份到 Azure 会定期进行检查，通过比较备份文件的第一个和最后一个 LSN 确定日志链是否完整。如果日志链因为任何原因而存在中断，则 SQL Server 托管备份到 Azure 会安排一次完整数据库备份。日志链断裂的最常见原因可能是使用 Transact-SQL 或通过 SQL Server Management Studio 中的备份任务发出了备份命令。其他常见的情况包括意外删除了备份文件或意外的备份覆盖。
 
 **事务日志备份**：如果以下任何情况属实，则 SQL Server 托管备份到 Azure 将安排一次日志备份：
-    
+
 - 找不到日志备份历史记录。在首次启动 SQL Server 托管备份到 Azure 时通常存在这种情况。
 - 使用的事务日志空间为 5 MB 或更大。
 - 距上次日志备份达到 2 小时的最大时间间隔。

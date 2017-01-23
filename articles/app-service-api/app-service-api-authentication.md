@@ -21,7 +21,8 @@ ms.author: rachelap
 
 ## 概述 
 
-> [!NOTE] 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
+> [!NOTE]
+> 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
 
 Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 2.0](#oauth) 和 [OpenID Connect](#oauth)。本文介绍 Azure 应用服务中 API 应用可用的服务和选项。
 
@@ -43,7 +44,7 @@ Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 
 
 * X-MS-CLIENT-PRINCIPAL-NAME
 * X-MS-CLIENT-PRINCIPAL-ID
- 
+
 在 .NET API 中，可以使用 `Authorize` 属性，如果想要更精细的授权，可以基于声明轻松编写代码，因为 .NET 类中已经填充了声明信息。
 
 ## <a name="multiple-protection-options"></a>多个保护选项
@@ -59,7 +60,7 @@ Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 
 2. 允许所有请求进入 API 应用，但会验证经过身份验证的请求，并在 HTTP 标头中传递身份验证信息。
 
     使用此选项可以更灵活地处理匿名请求，但如果想要防止匿名用户使用 API，则必须编写代码。由于最常用的声明在 HTTP 请求的标头中传递，因此授权代码相对简单。
-    
+
 3. 允许所有请求进入 API，不处理请求中的身份验证信息。
 
     此选项将身份验证和授权任务全部交由应用程序代码来处理。
@@ -73,7 +74,7 @@ Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 
 ![](./media/app-service-api-authentication/actiontotake.png)
 
 有关如何配置身份验证的详细信息，请参阅 [How to configure your App Service application to use Azure Active Directory login](../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。此文章适用于 API 应用和移动应用，并链接到有关其他身份验证提供程序的其他文章。
- 
+
 ## <a id="internal"></a>服务帐户身份验证
 
 应用服务身份验证适用于从某个 API 应用调用另一个 API 应用之类的内部方案。在此方案中，可以使用服务帐户凭据（而不是用户凭据）来获取令牌。在 Azure Active Directory 中，服务帐户也称为 *服务主体* ，使用此类帐户的身份验证也称为服务到服务方案。
@@ -85,7 +86,7 @@ Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 
 ## 移动客户端身份验证
 
 有关如何处理来自移动客户端的身份验证的信息，请参阅[有关移动应用身份验证的文档](../app-service-mobile/app-service-mobile-ios-get-started-users.md)。移动应用和 API 应用的应用服务身份验证运用相同的工作原理。
-  
+
 ## 详细信息
 
 有关 Azure 应用服务中的身份验证和授权的详细信息，请参阅以下资源：

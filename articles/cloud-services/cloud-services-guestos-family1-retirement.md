@@ -37,13 +37,15 @@ ms.author: raiye
 
 若要了解哪些云服务正在运行哪个 OS 系列，可以在 Azure PowerShell 中运行以下脚本，但必须首先[设置 Azure PowerShell](../powershell-install-configure.md)。
 
-        foreach($subscription in Get-AzureSubscription) {
-            Select-AzureSubscription -SubscriptionName $subscription.SubscriptionName 
-            
-            $deployments=get-azureService | get-azureDeployment -ErrorAction Ignore | where {$_.SdkVersion -NE ""} 
-        
-            $deployments | ft @{Name="SubscriptionName";Expression={$subscription.SubscriptionName}}, ServiceName, SdkVersion, Slot, @{Name="osFamily";Expression={(select-xml -content $_.configuration -xpath "/ns:ServiceConfiguration/@osFamily" -namespace $namespace).node.value }}, osVersion, Status, URL
-        }
+```
+    foreach($subscription in Get-AzureSubscription) {
+        Select-AzureSubscription -SubscriptionName $subscription.SubscriptionName 
+
+        $deployments=get-azureService | get-azureDeployment -ErrorAction Ignore | where {$_.SdkVersion -NE ""} 
+
+        $deployments | ft @{Name="SubscriptionName";Expression={$subscription.SubscriptionName}}, ServiceName, SdkVersion, Slot, @{Name="osFamily";Expression={(select-xml -content $_.configuration -xpath "/ns:ServiceConfiguration/@osFamily" -namespace $namespace).node.value }}, osVersion, Status, URL
+    }
+```
 
 如果脚本输出中的 osFamily 列为空或者包含“1”，则表示 OS 系列 1 的停用将影响云服务。
 

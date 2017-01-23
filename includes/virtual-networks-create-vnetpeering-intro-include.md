@@ -4,8 +4,10 @@ VNet 对等互连是一种通过 Azure 主干网络在同一区域连接两个�
 
 VNet 对等互连提供公共预览版，须用以下命令注册后才可使用：
 
-    Register-AzureRmProviderFeature -FeatureName AllowVnetPeering -ProviderNamespace Microsoft.Network
+```
+Register-AzureRmProviderFeature -FeatureName AllowVnetPeering -ProviderNamespace Microsoft.Network
 
-    Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Network
+Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Network
+```
 
 <!---HONumber=Mooncake_0919_2016-->

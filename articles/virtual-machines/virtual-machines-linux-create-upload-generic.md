@@ -62,22 +62,29 @@ ms.author: szark
 
 首先，备份现有 initrd 映像：
 
-    # cd /boot
-    # sudo cp initrd-`uname -r`.img  initrd-`uname -r`.img.bak
+```
+# cd /boot
+# sudo cp initrd-`uname -r`.img  initrd-`uname -r`.img.bak
+```
 
 接下来，使用 `hv_vmbus` 和 `hv_storvsc` 内核模块重新生成 initrd：
 
-    # sudo mkinitrd --preload=hv_storvsc --preload=hv_vmbus -v -f initrd-`uname -r`.img `uname -r`
+```
+# sudo mkinitrd --preload=hv_storvsc --preload=hv_vmbus -v -f initrd-`uname -r`.img `uname -r`
+```
 
 ### 调整 VHD 大小 ###
 
 Azure 上的 VHD 映像必须已将虚拟大小调整为 1 MB。通常情况下，使用 Hyper-V 创建的 VHD 应已正确调整。如果未正确调整 VHD，则在你尝试基于 VHD 创建*映像*时，可能会收到如下错误消息：
 
-    "The VHD http://<mystorageaccount>.blob.core.chinacloudapi.cn/vhds/MyLinuxVM.vhd has an unsupported virtual size of 21475270656 bytes. The size must be a whole number (in MBs)."
+```
+"The VHD http://<mystorageaccount>.blob.core.chinacloudapi.cn/vhds/MyLinuxVM.vhd has an unsupported virtual size of 21475270656 bytes. The size must be a whole number (in MBs)."
+```
 
 若要修正此问题，可使用 Hyper-V 管理器控制台或 [Resize-VHD](http://technet.microsoft.com/zh-cn/library/hh848535.aspx) Powershell cmdlet 调整 VM 大小。如果你未在 Windows 环境中运行，则建议使用 qemu-img 转换（如果需要）并调整 VHD 大小。
 
-> [!NOTE] qemu-img 版本 2.2.1 或更高版本中存在已知 bug，会导致 VHD 格式不正确。QEMU 2.6 中已修复此问题。建议使用 qemu-img 2.2.0 或更低版本，或者更新到 2.6 或更高版本。参考：https://bugs.launchpad.net/qemu/+bug/1490611。
+> [!NOTE]
+> qemu-img 版本 2.2.1 或更高版本中存在已知 bug，会导致 VHD 格式不正确。QEMU 2.6 中已修复此问题。建议使用 qemu-img 2.2.0 或更低版本，或者更新到 2.6 或更高版本。参考：https://bugs.launchpad.net/qemu/+bug/1490611。
 
  1. 直接使用工具（如 `qemu-img` 或 `vbox-manage`）调整 VHD 大小可能会生成无法启动的 VHD。因此，建议先将 VHD 转换为 RAW 磁盘映像。如果已将 VM 映像创建为 RAW 磁盘映像（对于 KVM 等某些虚拟机监控程序，这是默认设置），则可以跳过此步骤：
 
@@ -111,17 +118,19 @@ Hyper-V 和 Azure 的 Linux 集成服务 (LIS) 驱动程序会直接影响上游
 
 如果需要自定义内核，建议使用较新的内核版本（即 **3.8+**）。对于这些分发或维护自己的内核的供应商，将需要执行一些操作，以便定期将 LIS 驱动程序从上游内核向后移植到自定义内核。即使你已运行相对较新的内核版本，也强烈建议你跟踪 LIS 驱动程序中的任何上游修复程序，并根据需要向后移植这些修复程序。LIS 驱动程序源文件的位置可在 Linux 内核源树中的 [MAINTAINER](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/MAINTAINERS) 文件中找到：
 
-    F:	arch/x86/include/asm/mshyperv.h
-    F:	arch/x86/include/uapi/asm/hyperv.h
-    F:	arch/x86/kernel/cpu/mshyperv.c
-    F:	drivers/hid/hid-hyperv.c
-    F:	drivers/hv/
-    F:	drivers/input/serio/hyperv-keyboard.c
-    F:	drivers/net/hyperv/
-    F:	drivers/scsi/storvsc_drv.c
-    F:	drivers/video/fbdev/hyperv_fb.c
-    F:	include/linux/hyperv.h
-    F:	tools/hv/
+```
+F:	arch/x86/include/asm/mshyperv.h
+F:	arch/x86/include/uapi/asm/hyperv.h
+F:	arch/x86/kernel/cpu/mshyperv.c
+F:	drivers/hid/hid-hyperv.c
+F:	drivers/hv/
+F:	drivers/input/serio/hyperv-keyboard.c
+F:	drivers/net/hyperv/
+F:	drivers/scsi/storvsc_drv.c
+F:	drivers/video/fbdev/hyperv_fb.c
+F:	include/linux/hyperv.h
+F:	tools/hv/
+```
 
 至少，缺少以下修补程序已知会在 Azure 上导致问题，因此必须在内核中包含这些修补程序。对于所有分发而言，此列表并不详尽或完整：
 
@@ -149,13 +158,17 @@ Hyper-V 和 Azure 的 Linux 集成服务 (LIS) 驱动程序会直接影响上游
 
 - 修改 GRUB 或 GRUB2 中的内核引导行，以便包含以下参数。这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题：
 
-        console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300
+    ```
+    console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300
+    ```
 
     这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 支持人员调试问题。
 
     除此之外，建议*删除*以下参数（如果存在）：
 
-        rhgb quiet crashkernel=auto
+    ```
+    rhgb quiet crashkernel=auto
+    ```
 
     图形和静默引导不适用于要将所有日志发送到串行端口的云环境。
 
@@ -171,19 +184,24 @@ Hyper-V 和 Azure 的 Linux 集成服务 (LIS) 驱动程序会直接影响上游
 
     Azure Linux 代理可使用在 Azure 上设置后附加到 VM 的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是*临时*磁盘，并可能在取消设置 VM 时被清空。在安装 Azure Linux 代理（请参见前一步骤）后，相应地在 /etc/waagent.conf 中修改以下参数：
 
-        ResourceDisk.Format=y
-        ResourceDisk.Filesystem=ext4
-        ResourceDisk.MountPoint=/mnt/resource
-        ResourceDisk.EnableSwap=y
-        ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
+    ResourceDisk.Format=y
+    ResourceDisk.Filesystem=ext4
+    ResourceDisk.MountPoint=/mnt/resource
+    ResourceDisk.EnableSwap=y
+    ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
+    ```
 
 - 最后一步，请运行以下命令以取消设置虚拟机：
 
-        # sudo waagent -force -deprovision
-        # export HISTSIZE=0
-        # logout
+    ```
+    # sudo waagent -force -deprovision
+    # export HISTSIZE=0
+    # logout
+    ```
 
-    >[!NOTE] 运行“waagent -force -deprovision”之后，在 Virtualbox 上可能看到以下错误：`[Errno 5] Input/output error`。此错误消息并不关键，可以忽略。
+    >[!NOTE]
+    > 运行“waagent -force -deprovision”之后，在 Virtualbox 上可能看到以下错误：`[Errno 5] Input/output error`。此错误消息并不关键，可以忽略。
 
 - 然后，需要关闭虚拟机并将 VHD 上载到 Azure。
 

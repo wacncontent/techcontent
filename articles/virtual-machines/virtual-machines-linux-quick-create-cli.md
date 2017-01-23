@@ -41,63 +41,75 @@ Azure CLI 2.0 预览版是下一代的多平台 CLI。欢迎通过 [GitHub 项�
 
 首先，键入 [az resource group create](https://docs.microsoft.com/cli/azure/group#create) 创建包含所有已部署资源的资源组：
 
-    az resource group create -n myResourceGroup -l chinanorth
+```
+az resource group create -n myResourceGroup -l chinanorth
+```
 
 输出如下所示（如果需要，可以选择一个不同的 `--output` 选项）：
 
-    {
-      "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup",
-      "location": "chinanorth",
-      "name": "myResourceGroup",
-      "properties": {
-        "provisioningState": "Succeeded"
-      },
-      "tags": null
-    }
+```
+{
+  "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup",
+  "location": "chinanorth",
+  "name": "myResourceGroup",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null
+}
+```
 
 ## 使用最新的 Debian 映像创建 VM
 
 现在，可以创建 VM 及其环境。请记得将 `----public-ip-address-dns-name` 值替换为唯一值；下面的值可能已被使用。
 
-    az vm create \
-    --image credativ:Debian:8:latest \
-    --admin-username ops \
-    --ssh-key-value ~/.ssh/id_rsa.pub \
-    --public-ip-address-dns-name mydns \
-    --resource-group myResourceGroup \
-    --location chinanorth \
-    --name myVM
+```
+az vm create \
+--image credativ:Debian:8:latest \
+--admin-username ops \
+--ssh-key-value ~/.ssh/id_rsa.pub \
+--public-ip-address-dns-name mydns \
+--resource-group myResourceGroup \
+--location chinanorth \
+--name myVM
+```
 
 输出如下所示。请注意通过 **ssh** 连接到 VM 时使用的 `publicIpAddress` 或 `fqdn` 值。
 
-    {
-      "fqdn": "mydns.chinanorth.chinacloudapp.cn",
-      "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-      "macAddress": "00-0D-3A-32-05-07",
-      "privateIpAddress": "10.0.0.4",
-      "publicIpAddress": "40.112.217.29",
-      "resourceGroup": "myResourceGroup"
-    }
+```
+{
+  "fqdn": "mydns.chinanorth.chinacloudapp.cn",
+  "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+  "macAddress": "00-0D-3A-32-05-07",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "40.112.217.29",
+  "resourceGroup": "myResourceGroup"
+}
+```
 
 使用输出中列出的公共 IP 地址登录到 VM。可以使用列出的完全限定域名 (FQDN)。
 
-    ssh ops@mydns.chinanorth.chinacloudapp.cn
+```
+ssh ops@mydns.chinanorth.chinacloudapp.cn
+```
 
 根据所选的分发版，应会显示类似于下面的输出：
 
-    The authenticity of host 'mydns.chinanorth.chinacloudapp.cn (40.112.217.29)' can't be established.
-    RSA key fingerprint is SHA256:xbVC//lciRvKild64lvup2qIRimr/GB8C43j0tSHWnY.
-    Are you sure you want to continue connecting (yes/no)? yes
-    Warning: Permanently added 'mydns.chinanorth.chinacloudapp.cn,40.112.217.29' (RSA) to the list of known hosts.
+```
+The authenticity of host 'mydns.chinanorth.chinacloudapp.cn (40.112.217.29)' can't be established.
+RSA key fingerprint is SHA256:xbVC//lciRvKild64lvup2qIRimr/GB8C43j0tSHWnY.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'mydns.chinanorth.chinacloudapp.cn,40.112.217.29' (RSA) to the list of known hosts.
 
-    The programs included with the Debian GNU/Linux system are free software;
-    the exact distribution terms for each program are described in the
-    individual files in /usr/share/doc/*/copyright.
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
 
-    Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-    permitted by applicable law.
-    ops@mynewvm:~$ ls /
-    bin  boot  dev  etc  home  initrd.img  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var  vmlinuz
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+ops@mynewvm:~$ ls /
+bin  boot  dev  etc  home  initrd.img  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var  vmlinuz
+```
 
 ## 后续步骤
 使用 `az vm create` 命令可以快速部署 VM，以便可以登录到 bash shell 开始工作。但是，使用 `az vm create` 不会为用户提供广泛的控制，也不会让用户创建更复杂的环境。若要部署针对基础结构自定义的 Linux VM，可以遵循下列任一文章操作：

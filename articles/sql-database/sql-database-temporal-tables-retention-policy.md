@@ -25,7 +25,9 @@ ms.author: bonova
 
 定义保留策略后，Azure SQL 数据库将开始定期检查是否有符合自动数据清理条件的历史行。匹配行的识别以及从历史记录表中删除这些行的过程在系统计划和运行的后台任务中发生。历史记录表行的期限条件根据表示 SYSTEM\_TIME 期限结束时间的列进行检查。例如，如果保留期设置为六个月，则可以清理符合以下条件的表行：
 
-    ValidTo < DATEADD (MONTH, -6, SYSUTCDATETIME())
+```
+ValidTo < DATEADD (MONTH, -6, SYSUTCDATETIME())
+```
 
 在上面的示例中，假设 **ValidTo** 列对应于 SYSTEM\_TIME 期限结束时间。
 
@@ -33,57 +35,69 @@ ms.author: bonova
 
 在为临时表配置保留策略之前，请先检查是否*在数据库级别*启用了临时历史记录保留策略。
 
-    SELECT is_temporal_history_retention_enabled, name
-    FROM sys.databases
+```
+SELECT is_temporal_history_retention_enabled, name
+FROM sys.databases
+```
 
 数据库标志 **is\_temporal\_history\_retention\_enabled** 默认设置为 ON，但用户可以使用 ALTER DATABASE 语句更改此值。在执行时间点还原操作后，它会自动设置为 OFF。若要为数据库启用临时历史记录保留策略清理，请执行以下语句：
 
-    ALTER DATABASE <myDB>
-    SET TEMPORAL_HISTORY_RETENTION  ON
+```
+ALTER DATABASE <myDB>
+SET TEMPORAL_HISTORY_RETENTION  ON
+```
 
-> [!IMPORTANT] 即使 **is\_temporal\_history\_retention\_enabled** 设置为 OFF，也可以为临时表配置保留策略，但在这种情况下，不会针对陈旧的行触发自动清理。
+> [!IMPORTANT]
+> 即使 **is\_temporal\_history\_retention\_enabled** 设置为 OFF，也可以为临时表配置保留策略，但在这种情况下，不会针对陈旧的行触发自动清理。
 
 在创建表的过程中，可以通过指定 HISTORY\_RETENTION\_PERIOD 参数的值来配置保留策略：
 
-    CREATE TABLE dbo.WebsiteUserInfo
-    (  
-        [UserID] int NOT NULL PRIMARY KEY CLUSTERED
-      , [UserName] nvarchar(100) NOT NULL
-      , [PagesVisited] int NOT NULL
-      , [ValidFrom] datetime2 (0) GENERATED ALWAYS AS ROW START
-      , [ValidTo] datetime2 (0) GENERATED ALWAYS AS ROW END
-      , PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo)
-     )  
-     WITH
+```
+CREATE TABLE dbo.WebsiteUserInfo
+(  
+    [UserID] int NOT NULL PRIMARY KEY CLUSTERED
+  , [UserName] nvarchar(100) NOT NULL
+  , [PagesVisited] int NOT NULL
+  , [ValidFrom] datetime2 (0) GENERATED ALWAYS AS ROW START
+  , [ValidTo] datetime2 (0) GENERATED ALWAYS AS ROW END
+  , PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo)
+ )  
+ WITH
+ (
+     SYSTEM_VERSIONING = ON
      (
-         SYSTEM_VERSIONING = ON
-         (
-            HISTORY_TABLE = dbo.WebsiteUserInfoHistory,
-            HISTORY_RETENTION_PERIOD = 6 MONTHS
-         )
-     );
+        HISTORY_TABLE = dbo.WebsiteUserInfoHistory,
+        HISTORY_RETENTION_PERIOD = 6 MONTHS
+     )
+ );
+```
 
 Azure SQL 数据库允许使用不同的时间单位指定保留策略：DAYS、WEEKS、MONTHS 和 YEARS。如果省略 HISTORY\_RETENTION\_PERIOD，则假设保留期限为 INFINITE（无限期）。也可以显式使用 INFINITE 关键字。
 
 在某些情况下，你可能想要在创建表后配置保留策略或更改以前配置的值。在这种情况下，请使用 ALTER TABLE 语句：
 
-    ALTER TABLE dbo.WebsiteUserInfo
-    SET (SYSTEM_VERSIONING = ON (HISTORY_RETENTION_PERIOD = 9 MONTHS));
+```
+ALTER TABLE dbo.WebsiteUserInfo
+SET (SYSTEM_VERSIONING = ON (HISTORY_RETENTION_PERIOD = 9 MONTHS));
+```
 
-> [!IMPORTANT]  将 SYSTEM\_VERSIONING 设置为 OFF *不会保存*保留期值。在未显式指定 HISTORY\_RETENTION\_PERIOD 的情况下将 SYSTEM\_VERSIONING 设置为 ON 会导致保留期为 INFINITE。
+> [!IMPORTANT]
+>  将 SYSTEM\_VERSIONING 设置为 OFF *不会保存*保留期值。在未显式指定 HISTORY\_RETENTION\_PERIOD 的情况下将 SYSTEM\_VERSIONING 设置为 ON 会导致保留期为 INFINITE。
 
 若要查看保留策略的当前状态，请使用以下查询，该查询将数据库级别的临时保留启用标志与单个表的保留期相联接：
 
-    SELECT DB.is_temporal_history_retention_enabled,
-    SCHEMA_NAME(T1.schema_id) AS TemporalTableSchema,
-    T1.name as TemporalTableName,  SCHEMA_NAME(T2.schema_id) AS HistoryTableSchema,
-    T2.name as HistoryTableName,T1.history_retention_period,
-    T1.history_retention_period_unit_desc
-    FROM sys.tables T1  
-    OUTER APPLY (select is_temporal_history_retention_enabled from sys.databases
-    where name = DB_NAME()) AS DB
-    LEFT JOIN sys.tables T2   
-    ON T1.history_table_id = T2.object_id WHERE T1.temporal_type = 2
+```
+SELECT DB.is_temporal_history_retention_enabled,
+SCHEMA_NAME(T1.schema_id) AS TemporalTableSchema,
+T1.name as TemporalTableName,  SCHEMA_NAME(T2.schema_id) AS HistoryTableSchema,
+T2.name as HistoryTableName,T1.history_retention_period,
+T1.history_retention_period_unit_desc
+FROM sys.tables T1  
+OUTER APPLY (select is_temporal_history_retention_enabled from sys.databases
+where name = DB_NAME()) AS DB
+LEFT JOIN sys.tables T2   
+ON T1.history_table_id = T2.object_id WHERE T1.temporal_type = 2
+```
 
 ##SQL 数据库如何删除陈旧行？
 
@@ -111,17 +125,21 @@ Azure SQL 数据库允许使用不同的时间单位指定保留策略：DAYS、
 
 避免在具有有限保留期的历史记录表中重建聚集列存储索引，因为这可能会改变行组中由系统版本控制操作施加的固有顺序。如果需要在历史记录表中重建聚集列存储索引，请在符合条件的 B 树索引顶层创建该索引，同时保留行组的顺序，以便能够执行常规数据清理。如果要使用具有聚集列索引且数据顺序没有保证的现有历史记录表创建临时表，则应采用同样的方法：
 
-    /*Create B-tree ordered by the end of period column*/
-    CREATE CLUSTERED INDEX IX_WebsiteUserInfoHistory ON WebsiteUserInfoHistory (ValidTo)
-    WITH (DROP_EXISTING = ON);
-    GO
-    /*Re-create clustered columnstore index*/
-    CREATE CLUSTERED COLUMNSTORE INDEX IX_WebsiteUserInfoHistory ON WebsiteUserInfoHistory
-    WITH (DROP_EXISTING = ON);
+```
+/*Create B-tree ordered by the end of period column*/
+CREATE CLUSTERED INDEX IX_WebsiteUserInfoHistory ON WebsiteUserInfoHistory (ValidTo)
+WITH (DROP_EXISTING = ON);
+GO
+/*Re-create clustered columnstore index*/
+CREATE CLUSTERED COLUMNSTORE INDEX IX_WebsiteUserInfoHistory ON WebsiteUserInfoHistory
+WITH (DROP_EXISTING = ON);
+```
 
 为具有聚集列存储索引的历史记录表配置有限保留期时，无法在该表表创建附加的非聚集 B 树索引：
 
-    CREATE NONCLUSTERED INDEX IX_WebHistNCI ON WebsiteUserInfoHistory ([UserName])
+```
+CREATE NONCLUSTERED INDEX IX_WebHistNCI ON WebsiteUserInfoHistory ([UserName])
+```
 
 尝试执行上述语句将会失败并出现以下错误：
 
@@ -134,7 +152,9 @@ Azure SQL 数据库允许使用不同的时间单位指定保留策略：DAYS、
 
 下图显示一个简单查询的查询计划：
 
-    SELECT * FROM dbo.WebsiteUserInfo FROM SYSTEM_TIME ALL;
+```
+SELECT * FROM dbo.WebsiteUserInfo FROM SYSTEM_TIME ALL;
+```
 
 该查询计划包含的附加筛选器已应用到历史记录表上“聚集索引扫描”运算符中的期限结束时间列 (ValidTo)（已突出显示）。此示例假设已在 WebsiteUserInfo 表中设置了 1 个月 (1 MONTH) 的保留期。
 
@@ -154,8 +174,10 @@ Azure SQL 数据库允许使用不同的时间单位指定保留策略：DAYS、
 
 如果想要激活临时保留清理，请在执行时间点还原后运行以下 Transact-SQL 语句：
 
-    ALTER DATABASE <myDB>
-    SET TEMPORAL_HISTORY_RETENTION  ON
+```
+ALTER DATABASE <myDB>
+SET TEMPORAL_HISTORY_RETENTION  ON
+```
 
 ##后续步骤
 

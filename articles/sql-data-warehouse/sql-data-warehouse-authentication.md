@@ -44,7 +44,8 @@ ms.author: rickbyh;barbkess;sonyama
 - 在 SSDT、SSMS 或应用程序连接字符串中将您的服务器注册到 SQL Server 对象资源管理器时指定默认数据库。例如，包含 ODBC 连接的 InitialCatalog 参数。
 - 在 SSDT 中创建会话之前先突出显示用户数据库。
 
-> [!NOTE] 不支持使用 Transact-SQL 语句 **USE MyDatabase;** 更改连接的数据库。有关使用 SSDT 连接到 SQL 数据仓库的指南，请参阅[使用 Visual Studio 进行查询][]一文。
+> [!NOTE]
+> 不支持使用 Transact-SQL 语句 **USE MyDatabase;** 更改连接的数据库。有关使用 SSDT 连接到 SQL 数据仓库的指南，请参阅[使用 Visual Studio 进行查询][]一文。
 
 ## Azure Active Directory (AAD) 身份验证
 
@@ -63,7 +64,8 @@ Azure Active Directory 的优点包括：
 - 支持对连接到 SQL 数据仓库的应用程序进行基于令牌的身份验证。
 - 支持通过用于 SQL Server Management Studio 的 Active Directory 通用身份验证进行多重身份验证。
 
-> [!NOTE] Azure Active Directory 仍然相对较新，具有某些限制。若要确保 Azure Active Directory 适用于环境，请参阅 [Azure AD features and limitations][]（Azure AD 功能和限制），尤其是那些需要额外考虑的内容。
+> [!NOTE]
+> Azure Active Directory 仍然相对较新，具有某些限制。若要确保 Azure Active Directory 适用于环境，请参阅 [Azure AD features and limitations][]（Azure AD 功能和限制），尤其是那些需要额外考虑的内容。
 
 ### 配置步骤
 
@@ -77,7 +79,7 @@ Azure Active Directory 的优点包括：
 6. 使用 Azure AD 标识连接到数据仓库
 
 目前，Azure Active Directory 用户不会显示在 SSDT 对象资源管理器中。解决方法是在 [sys.database\_principals](https://msdn.microsoft.com/zh-cn/library/ms187328.aspx) 中查看这些用户。
-  
+
 ### 查看详细信息
 - 完成详细步骤。配置和使用 Azure Active Directory 身份验证的详细步骤与适用于 Azure SQL 数据库和 Azure SQL 数据仓库的步骤几乎完全相同。请遵循主题[使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库](../sql-database/sql-database-aad-authentication.md)中的详细步骤。
 - 创建自定义数据库角色，并向角色添加用户。然后授予角色具体权限。有关详细信息，请参阅[数据库引擎权限入门](https://msdn.microsoft.com/zh-cn/library/mt667986.aspx)。

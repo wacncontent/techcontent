@@ -44,34 +44,44 @@ Azure Service Fabric 群集是你拥有的资源。为了防止未经授权访�
 ### 步骤 2.3
 打开 PowerShell 窗口并转到模块下载到的目录。然后使用以下命令导入该模块。
 
-    Import-Module .\ServiceFabricRPHelpers.psm1
+```
+Import-Module .\ServiceFabricRPHelpers.psm1
+```
 
 ### 步骤 2.4
 如果要使用以前获取的证书，请遵循此步骤中的过程。否则，请跳到步骤 2.5，该步骤说明了如何创建自签名证书，并将自签名证书部署到密钥保管库。
 
 可以使用现有的资源组和密钥保管库来存储证书，或者，如果资源组和/或密钥保管库不存在，你可以新建一个。必须先使用此脚本将现有密钥保管库配置为支持部署。
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
-    Set-AzureRmKeyVaultAccessPolicy -VaultName <Name of the Vault> -ResourceGroupName <string> -EnabledForDeployment
+Set-AzureRmKeyVaultAccessPolicy -VaultName <Name of the Vault> -ResourceGroupName <string> -EnabledForDeployment
+```
 
 若要将证书上载到资源组和密钥保管库，请运行以下脚本。如果资源组和密钥保管库尚不存在，该脚本将予以创建。
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Invoke-AddCertToKeyVault -SubscriptionId <your subscription id> -ResourceGroupName <string> -Location <region> -VaultName <Name of the Vault> -CertificateName <Name of the Certificate> -Password <Certificate password> -UseExistingCertificate -ExistingPfxFilePath <Full path to the .pfx file>
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+Invoke-AddCertToKeyVault -SubscriptionId <your subscription id> -ResourceGroupName <string> -Location <region> -VaultName <Name of the Vault> -CertificateName <Name of the Certificate> -Password <Certificate password> -UseExistingCertificate -ExistingPfxFilePath <Full path to the .pfx file>
+```
 
 以下是已填充脚本的示例。
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Invoke-AddCertToKeyVault -SubscriptionId 35389201-c0b3-405e-8a23-9f1450994307 -ResourceGroupName chackdankeyvault4doc -Location westus -VaultName chackdankeyvault4doc  -CertificateName chackdantestcertificate2 -Password abcd123 -UseExistingCertificate -ExistingPfxFilePath C:\MyCertificates\ChackdanTestCertificate.pfx
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+Invoke-AddCertToKeyVault -SubscriptionId 35389201-c0b3-405e-8a23-9f1450994307 -ResourceGroupName chackdankeyvault4doc -Location westus -VaultName chackdankeyvault4doc  -CertificateName chackdantestcertificate2 -Password abcd123 -UseExistingCertificate -ExistingPfxFilePath C:\MyCertificates\ChackdanTestCertificate.pfx
+```
 
 该脚本成功完成时，你将看到类似于下面的输出，执行步骤 3（配置安全群集）时将用到这些数据。
 
-    Certificate Thumbprint: 2118C3BCE6541A54A0236E14ED2CCDD77EA4567A
+```
+Certificate Thumbprint: 2118C3BCE6541A54A0236E14ED2CCDD77EA4567A
 
-    SourceVault /Resource ID of the key vault :  /subscriptions/35389201-c0b3-405e-8a23-9f1450994307/resourceGroups/chackdankeyvault4doc/providers/Microsoft.KeyVault/vaults/chackdankeyvault4doc
+SourceVault /Resource ID of the key vault :  /subscriptions/35389201-c0b3-405e-8a23-9f1450994307/resourceGroups/chackdankeyvault4doc/providers/Microsoft.KeyVault/vaults/chackdankeyvault4doc
 
-    Certificate URL /URL to the certificate location in the key vault : https://chackdankeyvalut4doc.vault.chinacloudapi.cn:443/secrets/chackdantestcertificate3/ebc8df6300834326a95d05d90e0701ea
+Certificate URL /URL to the certificate location in the key vault : https://chackdankeyvalut4doc.vault.chinacloudapi.cn:443/secrets/chackdantestcertificate3/ebc8df6300834326a95d05d90e0701ea
+```
 
 现在你已拥有设置安全群集所需的信息。请转到步骤 3。
 
@@ -80,28 +90,36 @@ Azure Service Fabric 群集是你拥有的资源。为了防止未经授权访�
 
 可以使用现有的资源组和密钥保管库来存储证书，或者，如果资源组和/或密钥保管库不存在，你可以新建一个。必须先使用此脚本将现有密钥保管库配置为支持部署。
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Set-AzureRmKeyVaultAccessPolicy -VaultName <Name of the Vault> -ResourceGroupName <string> -EnabledForDeployment
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+Set-AzureRmKeyVaultAccessPolicy -VaultName <Name of the Vault> -ResourceGroupName <string> -EnabledForDeployment
+```
 
 以下脚本将创建新的资源组和/或密钥保管库（如果尚不存在）、创建自签名证书并将其上载到密钥保管库，然后将新证书输出到 *OutputPath*。
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Invoke-AddCertToKeyVault -SubscriptionId <you subscription id> -ResourceGroupName <string> -Location <region> -VaultName <Name of the Vault> -CertificateName <Name of the Certificate> -Password <Certificate password> -CreateSelfSignedCertificate -DnsName <string- see note below.> -OutputPath <Full path to the .pfx file>
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+Invoke-AddCertToKeyVault -SubscriptionId <you subscription id> -ResourceGroupName <string> -Location <region> -VaultName <Name of the Vault> -CertificateName <Name of the Certificate> -Password <Certificate password> -CreateSelfSignedCertificate -DnsName <string- see note below.> -OutputPath <Full path to the .pfx file>
+```
 
 *DnsName* 字符串指定一个或多个 DNS 名称，以便在 CloneCert 参数中未指定要复制的证书时放入证书的使用者可选名称扩展中。第一个 DNS 名称还将保存为使用者名称。如果未指定任何签名证书，则第一个 DNS 名称还将保存为颁发者名称。*Invoke-AddCertToKeyVault* cmdlet 使用 [New-SelfSignedCertificate](https://technet.microsoft.com/zh-cn/library/hh848633.aspx) cmdlet 来创建自签名证书。
 
 以下是已填充脚本的示例。
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Invoke-AddCertToKeyVault -SubscriptionId 35389201-c0b3-405e-8a23-9f1450994307 -ResourceGroupName chackdankeyvault4doc -Location westus -VaultName chackdankeyvault4doc  -CertificateName chackdantestcertificate3 -Password abcd123 -CreateSelfSignedCertificate -DnsName www.chackdan.chinaeast.chinacloudapi.cn -OutputPath C:\MyCertificates
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+Invoke-AddCertToKeyVault -SubscriptionId 35389201-c0b3-405e-8a23-9f1450994307 -ResourceGroupName chackdankeyvault4doc -Location westus -VaultName chackdankeyvault4doc  -CertificateName chackdantestcertificate3 -Password abcd123 -CreateSelfSignedCertificate -DnsName www.chackdan.chinaeast.chinacloudapi.cn -OutputPath C:\MyCertificates
+```
 
 脚本成功完成时，你将看到类似于下面的输出。执行步骤 3 时需要用到这些数据。
 
-    Certificate Thumbprint: 64881409F4D86498C88EEC3697310C15F8F1540F
+```
+Certificate Thumbprint: 64881409F4D86498C88EEC3697310C15F8F1540F
 
-    SourceVault /Resource ID of the key vault : /subscriptions/35389201-c0b3-405e-8a23-9f1450994307/resourceGroups/chackdankeyvault4doc/providers/Microsoft.KeyVault/vaults/chackdankeyvault4doc
+SourceVault /Resource ID of the key vault : /subscriptions/35389201-c0b3-405e-8a23-9f1450994307/resourceGroups/chackdankeyvault4doc/providers/Microsoft.KeyVault/vaults/chackdankeyvault4doc
 
-    Certificate URL /URL to the certificate location in the key vault: https://chackdankeyvalut4doc.vault.chinacloudapi.cn:443/secrets/chackdantestcertificate3/fvc8df6300834326a95d05d90e0720ea
+Certificate URL /URL to the certificate location in the key vault: https://chackdankeyvalut4doc.vault.chinacloudapi.cn:443/secrets/chackdantestcertificate3/fvc8df6300834326a95d05d90e0720ea
+```
 
 ## 步骤 3：设置安全群集
 
@@ -118,14 +136,18 @@ Azure Service Fabric 群集是你拥有的资源。为了防止未经授权访�
 - **群集保护级别**：请参阅此[保护级别文档](https://msdn.microsoft.com/zh-cn/library/aa347692.aspx)，了解每个值的含义。尽管我们允许在此处使用三个值（EncryptAndSign、Sign 和 None），但除非你知道的意图，否则最好保留默认值 EncryptAndSign。
 - **源保管库**：这是密钥保管库的资源 ID。其格式应该是：
 
-        /subscriptions/<Sub ID>/resourceGroups/<Resource group name>/providers/Microsoft.KeyVault/vaults/<vault name>
-    
+    ```
+    /subscriptions/<Sub ID>/resourceGroups/<Resource group name>/providers/Microsoft.KeyVault/vaults/<vault name>
+    ```
+
 - **证书 URL**：这是密钥保管库中证书所上载到的位置 URL。其格式应该是：
 
-        https://<name of the vault>.vault.chinacloudapi.cn:443/secrets/<exact location>
-    
-        https://chackdan-kmstest-eastus.vault.chinacloudapi.cn:443/secrets/MyCert/6b5cc15a753644e6835cb3g3486b3812
-    
+    ```
+    https://<name of the vault>.vault.chinacloudapi.cn:443/secrets/<exact location>
+
+    https://chackdan-kmstest-eastus.vault.chinacloudapi.cn:443/secrets/MyCert/6b5cc15a753644e6835cb3g3486b3812
+    ```
+
 - **证书指纹**：这是证书的指纹，可以在前面指定的 URL 中找到。
 
 ### 可选参数

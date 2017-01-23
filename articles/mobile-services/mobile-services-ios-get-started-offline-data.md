@@ -31,7 +31,8 @@ ms.author: krisragh;donnam
 * 跨多个设备同步数据
 * 在两个设备修改同一条记录时检测冲突
 
-> [!NOTE] 若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并获取[免费的移动服务，即使在试用期结束之后仍可继续使用这些服务](https://www.azure.cn/pricing/details/mobile-services/)。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
+> [!NOTE]
+> 若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并获取[免费的移动服务，即使在试用期结束之后仍可继续使用这些服务](https://www.azure.cn/pricing/details/mobile-services/)。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 本教程是在[移动服务快速入门教程]的基础之上制作的，所以必须先完成该教程。首先，让我们回顾“快速入门”中与脱机同步相关的代码。
 
@@ -83,21 +84,24 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
         {
           MSQuery *query = [self.syncTable query];
 
-          // Pulls data from the remote server into the local table.
-          // We're pulling all items and filtering in the view
-          // query ID is used for incremental sync
-          [self.syncTable pullWithQuery:query queryId:@"allTodoItems" completion:^(NSError *error) {
-              [self logErrorIfNotNil:error];
+```
+      // Pulls data from the remote server into the local table.
+      // We're pulling all items and filtering in the view
+      // query ID is used for incremental sync
+      [self.syncTable pullWithQuery:query queryId:@"allTodoItems" completion:^(NSError *error) {
+          [self logErrorIfNotNil:error];
 
-              // Let the caller know that we have finished
-              if (completion != nil) {
-                  dispatch_async(dispatch_get_main_queue(), completion);
-        }
-          }];
-        }
+          // Let the caller know that we have finished
+          if (completion != nil) {
+              dispatch_async(dispatch_get_main_queue(), completion);
+    }
+      }];
+    }
+```
 ```
 
->[!NOTE] 若要从设备本地存储区中删除已在移动设备数据库中删除的记录，应启用“[软删除]”。否则，你的应用程序应定期调用 `MSSyncTable.purgeWithQuery` 以清除本地存储。
+>[!NOTE]
+> 若要从设备本地存储区中删除已在移动设备数据库中删除的记录，应启用“[软删除]”。否则，你的应用程序应定期调用 `MSSyncTable.purgeWithQuery` 以清除本地存储。
 
 * 在 **QSTodoService.m** 中，`addItem` 和 `completeItem` 方法会在修改数据后调用 `syncData`。在 **QSTodoListViewController.m** 中，`refresh` 方法也会调用 `syncData`，使 UI 在每次刷新和启动时（**init** 调用 `refresh`）显示最新数据。
 
@@ -114,7 +118,8 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
       * MS\_TableConfig：用于跟踪所有提取操作最后一次同步操作的上次更新时间
       * TodoItem：用于储存 todo 项。系统列 **ms\_createdAt**、**ms\_updatedAt** 和 **ms\_version** 是可选的系统属性。
 
->[!NOTE]移动服务 SDK 会保留以“**`ms_`**”开头的列名称。请不要在系统列以外的项中使用此前缀。否则，列名称会在使用远程服务时被修改。
+>[!NOTE]
+>移动服务 SDK 会保留以“**`ms_`**”开头的列名称。请不要在系统列以外的项中使用此前缀。否则，列名称会在使用远程服务时被修改。
 
 - 使用脱机同步功能时，必须先定义系统表，如下所示。
 
@@ -209,9 +214,11 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 为了与服务器同步本地存储，你使用了 `MSSyncTable.pullWithQuery` 和 `MSClient.syncContext.pushWithCompletion`：
 
-        * 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
+```
+    * 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
 
-        * 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
+    * 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
+```
 
 ##  后续步骤
 
@@ -264,5 +271,5 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 [Aazure Friday：Azure 移动服务中支持脱机的应用]: http://azure.microsoft.com/documentation/videos/azure-mobile-services-offline-enabled-apps-with-donna-malayeri/
 
 [移动服务快速入门教程]: ./mobile-services-ios-get-started.md
- 
+
 <!---HONumber=Mooncake_0215_2016-->

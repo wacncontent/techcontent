@@ -69,7 +69,8 @@ Visual Studio 解决方案包含三个项目：
 
     ![Azure App Tools 版本](./media/app-service-api-dotnet-get-started/apiversion.png)  
 
-    >[!NOTE] 根据计算机上已有 SDK 依赖项数量的不同，安装 SDK 可能耗时较长，从几分钟到半小时或更长时间不等。	
+    >[!NOTE]
+    > 根据计算机上已有 SDK 依赖项数量的不同，安装 SDK 可能耗时较长，从几分钟到半小时或更长时间不等。	
 
 ## 下载示例应用程序
 
@@ -114,50 +115,54 @@ ASP.NET Web API 项目可以使用 [Swashbuckle](https://www.nuget.org/packages/
 
     以下示例显示了 API 的 Swagger 元数据的第一个部分（包含 Get 方法的定义）。在以下步骤中使用的 Swagger UI 由此元数据驱动，本教程稍后的部分将使用它来自动生成客户端代码。
 
-        {
-          "swagger": "2.0",
-          "info": {
-            "version": "v1",
-            "title": "ToDoListDataAPI"
+    ```
+    {
+      "swagger": "2.0",
+      "info": {
+        "version": "v1",
+        "title": "ToDoListDataAPI"
+      },
+      "host": "localhost:45914",
+      "schemes": [ "http" ],
+      "paths": {
+        "/api/ToDoList": {
+          "get": {
+            "tags": [ "ToDoList" ],
+            "operationId": "ToDoList_GetByOwner",
+            "consumes": [ ],
+            "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+            "parameters": [
+              {
+                "name": "owner",
+                "in": "query",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/ToDoItem" }
+                }
+              }
+            },
+            "deprecated": false
           },
-          "host": "localhost:45914",
-          "schemes": [ "http" ],
-          "paths": {
-            "/api/ToDoList": {
-              "get": {
-                "tags": [ "ToDoList" ],
-                "operationId": "ToDoList_GetByOwner",
-                "consumes": [ ],
-                "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
-                "parameters": [
-                  {
-                    "name": "owner",
-                    "in": "query",
-                    "required": true,
-                    "type": "string"
-                  }
-                ],
-                "responses": {
-                  "200": {
-                    "description": "OK",
-                    "schema": {
-                      "type": "array",
-                      "items": { "$ref": "#/definitions/ToDoItem" }
-                    }
-                  }
-                },
-                "deprecated": false
-              },
+    ```
 
 4. 关闭浏览器并停止 Visual Studio 调试。
 
 5. 在“解决方案资源管理器”的 ToDoListDataAPI 项目中打开 *App\_Start\\SwaggerConfig.cs* 文件，然后向下滚动到第 174 行并将以下代码取消注释。
 
-        /*
-            })
-        .EnableSwaggerUi(c =>
-            {
-        */
+    ```
+    /*
+        })
+    .EnableSwaggerUi(c =>
+        {
+    */
+    ```
 
     *SwaggerConfig.cs* 文件是在项目中安装 Swashbuckle 包时创建的。该文件提供配置 Swashbuckle 的多种方式。
 
@@ -191,11 +196,13 @@ ASP.NET Web API 项目可以使用 [Swashbuckle](https://www.nuget.org/packages/
 
 12. 按以下示例中所示，在 `todo` 参数输入框中更改 JSON，或者使用自己的描述文本替代：
 
-        {
-          "ID": 2,
-          "Description": "buy the dog a toy",
-          "Owner": "*"
-        }
+    ```
+    {
+      "ID": 2,
+      "Description": "buy the dog a toy",
+      "Owner": "*"
+    }
+    ```
 
 13. 单击“试用”。
 
@@ -211,7 +218,8 @@ ASP.NET Web API 项目可以使用 [Swashbuckle](https://www.nuget.org/packages/
 
 Swashbuckle 可用于任何 ASP.NET Web API 项目。如果要将 Swagger 元数据生成添加到现有项目，只需安装 Swashbuckle 包。
 
->[!NOTE] Swagger 元数据包含每个 API 操作的唯一 ID。默认情况下，Swashbuckle 可能为 Web API 控制器方法生成重复的 Swagger 操作 ID。如果控制器有重载的 HTTP 方法（例如 `Get()` 和 `Get(id)`），就会发生这种情况。有关如何处理重载的信息，请参阅 [Customize Swashbuckle-generated API definitions](./app-service-api-dotnet-swashbuckle-customize.md)（自定义 Swashbuckle 生成的 API 定义）。如果在 Visual Studio 中使用 Azure API 应用模板创建 Web API 项目，*SwaggerConfig.cs* 文件中会自动添加用于生成唯一操作 ID 的代码。
+>[!NOTE]
+> Swagger 元数据包含每个 API 操作的唯一 ID。默认情况下，Swashbuckle 可能为 Web API 控制器方法生成重复的 Swagger 操作 ID。如果控制器有重载的 HTTP 方法（例如 `Get()` 和 `Get(id)`），就会发生这种情况。有关如何处理重载的信息，请参阅 [Customize Swashbuckle-generated API definitions](./app-service-api-dotnet-swashbuckle-customize.md)（自定义 Swashbuckle 生成的 API 定义）。如果在 Visual Studio 中使用 Azure API 应用模板创建 Web API 项目，*SwaggerConfig.cs* 文件中会自动添加用于生成唯一操作 ID 的代码。
 
 ## <a id="createapiapp"></a>在 Azure 中创建 API 应用并向其部署代码
 
@@ -365,7 +373,8 @@ ToDoListAPI 项目已有生成的客户端代码，但在以下步骤中，要�
 
     ![API 定义 URL](./media/app-service-api-dotnet-get-started/codegenurlplugged.png)
 
-    >[!TIP] 获取用于生成代码的元数据的另一种方法是直接输入 URL，而无需通过浏览对话框。或者，如果要在部署到 Azure 之前生成客户端代码，可以在本地运行 Web API 项目，转到可提供 Swagger JSON 文件的 URL，保存文件，然后使用“选择现有的 Swagger 元数据文件”选项。
+    >[!TIP]
+    > 获取用于生成代码的元数据的另一种方法是直接输入 URL，而无需通过浏览对话框。或者，如果要在部署到 Azure 之前生成客户端代码，可以在本地运行 Web API 项目，转到可提供 Swagger JSON 文件的 URL，保存文件，然后使用“选择现有的 Swagger 元数据文件”选项。
 
 5. 在“添加 REST API 客户端”对话框中，单击“确定”。
 
@@ -377,39 +386,45 @@ ToDoListAPI 项目已有生成的客户端代码，但在以下步骤中，要�
 
     以下代码片段演示此代码如何实例化客户端对象和调用 Get 方法。
 
-        private static ToDoListDataAPI NewDataAPIClient()
-        {
-            var client = new ToDoListDataAPI(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
-            return client;
-        }
+    ```
+    private static ToDoListDataAPI NewDataAPIClient()
+    {
+        var client = new ToDoListDataAPI(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
+        return client;
+    }
 
-        public async Task<IEnumerable<ToDoItem>> Get()
+    public async Task<IEnumerable<ToDoItem>> Get()
+    {
+        using (var client = NewDataAPIClient())
         {
-            using (var client = NewDataAPIClient())
+            var results = await client.ToDoList.GetByOwnerAsync(owner);
+            return results.Select(m => new ToDoItem
             {
-                var results = await client.ToDoList.GetByOwnerAsync(owner);
-                return results.Select(m => new ToDoItem
-                {
-                    Description = m.Description,
-                    ID = (int)m.ID,
-                    Owner = m.Owner
-                });
-            }
+                Description = m.Description,
+                ID = (int)m.ID,
+                Owner = m.Owner
+            });
         }
+    }
+    ```
 
     构造函数参数从 `toDoListDataAPIURL` 应用设置获取终结点 URL。在 Web.config 文件中，该值设置为 API 项目的本地 IIS Express URL，因此可在本地运行应用程序。如果省略构造函数参数，默认终结点是生成代码的 URL。
 
 7. 将会根据 API 应用名称，以不同的名称生成客户端类；在 *Controllers\\ToDoListController.cs* 中更改代码，使类型名称与项目中生成的内容匹配。例如，如果将 API 应用命名为 ToDoListDataAPI071316，请将以下代码：
 
-        private static ToDoListDataAPI NewDataAPIClient()
-        {
-            var client = new ToDoListDataAPI(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
+    ```
+    private static ToDoListDataAPI NewDataAPIClient()
+    {
+        var client = new ToDoListDataAPI(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
+    ```
 
 更改为：
 
-        private static ToDoListDataAPI071316 NewDataAPIClient()
-        {
-            var client = new ToDoListDataAPI071316(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
+```
+    private static ToDoListDataAPI071316 NewDataAPIClient()
+    {
+        var client = new ToDoListDataAPI071316(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
+```
 
 ## 创建用于托管中间层的 API 应用
 

@@ -58,13 +58,17 @@ ms.author: gwallace
 
 ### 步骤 1
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 ### 步骤 2
 
 检查帐户的订阅。
 
-    Get-AzureRmSubscription
+```
+Get-AzureRmSubscription
+```
 
 系统会提示使用凭据进行身份验证。
 
@@ -72,13 +76,17 @@ ms.author: gwallace
 
 选择要使用的 Azure 订阅。
 
-    Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
+```
+Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
+```
 
 ### 步骤 4
 
 创建新的资源组（如果要使用现有的资源组，请跳过此步骤）。
 
-    New-AzureRmResourceGroup -Name appgw-rg -location "China North"
+```
+New-AzureRmResourceGroup -Name appgw-rg -location "China North"
+```
 
 Azure Resource Manager 要求所有资源组指定一个位置。此位置将用作该资源组中的资源的默认位置。请确保用于创建应用程序网关的所有命令都使用相同的资源组。
 
@@ -90,19 +98,25 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 ### 步骤 1
 
-    $subnetconfig = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
+```
+$subnetconfig = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
+```
 
 此步骤会将地址范围 10.0.0.0/24 分配给用于创建虚拟网络的子网变量。
 
 ### 步骤 2
 
-    $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnetconfig
+```
+$vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnetconfig
+```
 
 此步骤会使用前缀 10.0.0.0/16 和子网 10.0.0.0/24，在中国北部区域的“appgw-rg”资源组中创建名为“appgwvnet”的虚拟网络。
 
 ### 步骤 3
 
-    $subnet = $vnet.subnets[0]
+```
+$subnet = $vnet.subnets[0]
+```
 
 此步骤会将子网对象分配到变量 $subnet 以完成后续步骤。
 
@@ -110,49 +124,65 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 ### 步骤 1
 
-    $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
+```
+$gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
+```
 
 此步骤会创建名为“gatewayIP01”的应用程序网关 IP 配置。当应用程序网关启动时，它会从配置的子网获取 IP 地址，再将网络流量路由到后端 IP 池中的 IP 地址。请记住，每个实例需要一个 IP 地址。
 
 ### 步骤 2
 
-    $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
+```
+$pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
+```
 
 此步骤会配置名为“pool01”的后端 IP 地址池，其 IP 地址为“134.170.185.46, 134.170.188.221,134.170.185.50”。这些 IP 地址将接收来自前端 IP 终结点的网络流量。替换上述 IP 地址，添加自己的应用程序 IP 地址终结点。
 
 ### 步骤 3
 
-    $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsetting01 -Port 80 -Protocol Http -CookieBasedAffinity Disabled
+```
+$poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsetting01 -Port 80 -Protocol Http -CookieBasedAffinity Disabled
+```
 
 此步骤会为后端池中进行了负载均衡的网络流量配置应用程序网关设置“poolsetting01”。
 
 ### 步骤 4
 
-    $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 80
+```
+$fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 80
+```
 
 此步骤会为 ILB 配置名为“frontendport01”的前端 IP 端口。
 
 ### 步骤 5
 
-    $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -Subnet $subnet
+```
+$fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -Subnet $subnet
+```
 
 此步骤会创建名为“fipconfig01”的前端 IP 配置，并将其与当前虚拟网络子网中的某个专用 IP 相关联。
 
 ### 步骤 6
 
-    $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protocol Http -FrontendIPConfiguration $fipconfig -FrontendPort $fp
+```
+$listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protocol Http -FrontendIPConfiguration $fipconfig -FrontendPort $fp
+```
 
 此步骤会创建名为“listener01”的侦听器，并将前端端口与前端 IP 配置相关联。
 
 ### 步骤 7
 
-    $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
+```
+$rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
+```
 
 此步骤会创建名为“rule01”的负载均衡器路由规则，用于配置负载均衡器的行为。
 
 ### 步骤 8
 
-    $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
+```
+$sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
+```
 
 此步骤会配置应用程序网关的实例大小。
 
@@ -163,7 +193,9 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 创建包含上述步骤中所有配置项目的应用程序网关。示例中的应用程序网关名为“appgwtest”。
 
-    $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location "China North" -BackendAddressPools $pool -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku
+```
+$appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location "China North" -BackendAddressPools $pool -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku
+```
 
 此步骤会创建包含上述步骤中所有配置项目的应用程序网关。示例中的应用程序网关名为“appgwtest”。
 
@@ -179,46 +211,60 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 获取应用程序网关对象，并将其关联到变量“$getgw”。
 
-    $getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
+```
+$getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
+```
 
 ### 步骤 2
 
 使用 `Stop-AzureRmApplicationGateway` 停止应用程序网关。此示例在第一行显示 `Stop-AzureRmApplicationGateway` cmdlet，接着显示输出。
 
-    Stop-AzureRmApplicationGateway -ApplicationGateway $getgw  
+```
+Stop-AzureRmApplicationGateway -ApplicationGateway $getgw  
+```
 
 <br/>  
 
-    VERBOSE: 9:49:34 PM - Begin Operation: Stop-AzureApplicationGateway
-    VERBOSE: 10:10:06 PM - Completed Operation: Stop-AzureApplicationGateway
-    Name       HTTP Status Code     Operation ID                             Error
-    ----       ----------------     ------------                             ----
-    Successful OK                   ce6c6c95-77b4-2118-9d65-e29defadffb8
+```
+VERBOSE: 9:49:34 PM - Begin Operation: Stop-AzureApplicationGateway
+VERBOSE: 10:10:06 PM - Completed Operation: Stop-AzureApplicationGateway
+Name       HTTP Status Code     Operation ID                             Error
+----       ----------------     ------------                             ----
+Successful OK                   ce6c6c95-77b4-2118-9d65-e29defadffb8
+```
 
 应用程序网关进入停止状态后，请使用 `Remove-AzureRmApplicationGateway` cmdlet 删除该服务。
 
-    Remove-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Force
+```
+Remove-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Force
+```
 
 <br/>  
 
-    VERBOSE: 10:49:34 PM - Begin Operation: Remove-AzureApplicationGateway
-    VERBOSE: 10:50:36 PM - Completed Operation: Remove-AzureApplicationGateway
-    Name       HTTP Status Code     Operation ID                             Error
-    ----       ----------------     ------------                             ----
-    Successful OK                   055f3a96-8681-2094-a304-8d9a11ad8301
+```
+VERBOSE: 10:49:34 PM - Begin Operation: Remove-AzureApplicationGateway
+VERBOSE: 10:50:36 PM - Completed Operation: Remove-AzureApplicationGateway
+Name       HTTP Status Code     Operation ID                             Error
+----       ----------------     ------------                             ----
+Successful OK                   055f3a96-8681-2094-a304-8d9a11ad8301
+```
 
 > [!NOTE]
 可以使用 **-force** 开关来禁止显示该删除的确认消息。
 
 若要验证是否已删除服务，可以使用 `Get-AzureRmApplicationGateway` cmdlet。此步骤不是必需的。
 
-    Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
+```
+Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
+```
 
 <br/>  
 
-    VERBOSE: 10:52:46 PM - Begin Operation: Get-AzureApplicationGateway
+```
+VERBOSE: 10:52:46 PM - Begin Operation: Get-AzureApplicationGateway
 
-    Get-AzureApplicationGateway : ResourceNotFound: The gateway does not exist.
+Get-AzureApplicationGateway : ResourceNotFound: The gateway does not exist.
+```
 
 ## 后续步骤
 
@@ -228,7 +274,7 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 如需大体上更详细地了解负载均衡选项，请参阅：
 
-* [Azure Load Balancer](../load-balancer/index.md/)
-* [Azure 流量管理器](../traffic-manager/index.md/)
+* [Azure Load Balancer](../load-balancer/index.md)
+* [Azure 流量管理器](../traffic-manager/index.md)
 
 <!---HONumber=Mooncake_1226_2016-->

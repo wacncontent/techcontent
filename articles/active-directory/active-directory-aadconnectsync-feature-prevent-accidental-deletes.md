@@ -24,7 +24,7 @@ wacn.date: 01/09/2017
 
 经常出现删除操作的情景包括：
 
-- 在取消选择整个 [OU](./active-directory-aadconnectsync-configure-filtering.md#organizational-unitbased-filtering/) 或[域](./active-directory-aadconnectsync-configure-filtering.md#domain-based-filtering/)的情况下更改[筛选](./active-directory-aadconnectsync-configure-filtering.md)设置。
+- 在取消选择整个 [OU](./active-directory-aadconnectsync-configure-filtering.md#organizational-unitbased-filtering) 或[域](./active-directory-aadconnectsync-configure-filtering.md#domain-based-filtering)的情况下更改[筛选](./active-directory-aadconnectsync-configure-filtering.md)设置。
 - 已删除 OU 中的所有对象。
 - 已重命名某个 OU，因此其中的所有对象被视为超出同步范围。
 

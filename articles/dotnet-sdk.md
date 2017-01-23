@@ -94,7 +94,8 @@ Azure 模拟器模拟云服务环境，这样您就可以先在本地计算机�
 * [将控制台应用程序项目发布到 Azure WebJobs](./app-service-web/websites-dotnet-deploy-webjobs.md)。
 * 在创建新的 Web 项目或发布 Web 项目时创建 Azure 网站和 SQL 数据库资源。
 
->[!NOTE] 无需安装用于 .NET 的 Azure SDK 即可使用这些功能；它们还包括在 Visual Studio 更新中。
+>[!NOTE]
+> 无需安装用于 .NET 的 Azure SDK 即可使用这些功能；它们还包括在 Visual Studio 更新中。
 
 ##<a id="notincluded"></a>在安装用于 .NET 的 Azure SDK 时未获得的内容
 

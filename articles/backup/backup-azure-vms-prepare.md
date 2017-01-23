@@ -34,7 +34,8 @@ wacn.date: 01/06/2017
 
 ## 备份和还原 VM 时的限制
 
->[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。以下列表提供了在经典模型中部署时的限制。
+>[!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。以下列表提供了在经典模型中部署时的限制。
 
 - 不支持备份超过 16 个数据磁盘的虚拟机。
 - 不支持备份使用保留 IP 地址且未定义终结点的虚拟机。
@@ -45,8 +46,8 @@ wacn.date: 01/06/2017
 - 只有特定的操作系统版本才支持使用 Azure 备份服务备份虚拟机。
   - **Linux**：Azure 备份支持 [Azure 认可的分发版列表](../virtual-machines/virtual-machines-linux-endorsed-distros.md)，但 Core OS Linux 除外。只要虚拟机上装有 VM 代理且支持 Python，其他自带的 Linux 分发版也可能会正常运行。
   - **Windows Server**：不支持低于 Windows Server 2008 R2 的版本。
-- 仅支持通过 PowerShell 还原属于多 DC 配置的域控制器 (DC) VM。阅读有关[还原多 DC 域控制器](./backup-azure-restore-vms.md#restoring-domain-controller-vms/)的详细信息。
-- 仅支持通过 PowerShell 还原采用以下特殊网络配置的虚拟机。还原操作完成后，在 UI 中使用还原工作流创建的虚拟机将不采用这些网络配置。若要了解详细信息，请参阅[还原采用特殊网络配置的 VM](./backup-azure-restore-vms.md#restoring-vms-with-special-netwrok-configurations/)。
+- 仅支持通过 PowerShell 还原属于多 DC 配置的域控制器 (DC) VM。阅读有关[还原多 DC 域控制器](./backup-azure-restore-vms.md#restoring-domain-controller-vms)的详细信息。
+- 仅支持通过 PowerShell 还原采用以下特殊网络配置的虚拟机。还原操作完成后，在 UI 中使用还原工作流创建的虚拟机将不采用这些网络配置。若要了解详细信息，请参阅[还原采用特殊网络配置的 VM](./backup-azure-restore-vms.md#restoring-vms-with-special-netwrok-configurations)。
     - 采用负载均衡器配置的虚拟机（内部和外部）
     - 使用多个保留 IP 地址的虚拟机
     - 使用多个网络适配器的虚拟机
@@ -104,7 +105,8 @@ wacn.date: 01/06/2017
 ### 使用 HTTP 代理进行 VM 备份 <a name="using-an-http-proxy-for-vm-backups"></a>
 备份 VM 时，VM 上的备份扩展会使用 HTTPS API 将快照管理命令发送到 Azure 存储空间。将通过 HTTP 代理路由备份扩展流量，因为它是为了访问公共 Internet 而配置的唯一组件。
 
->[!NOTE] 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
+>[!NOTE]
+> 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
 
 以下示例图像显示了使用 HTTP 代理所要执行的三个配置步骤：
 
@@ -123,7 +125,9 @@ wacn.date: 01/06/2017
 1. 下载 [PsExec](https://technet.microsoft.com/sysinternals/bb897553)
 2. 在权限提升的提示符下运行以下命令：
 
-         psexec -i -s "c:\Program Files\Internet Explorer\iexplore.exe"
+    ```
+     psexec -i -s "c:\Program Files\Internet Explorer\iexplore.exe"
+    ```
      该命令将打开 Internet Explorer 窗口。
 3. 转到“工具”->“Internet 选项”->“连接”->“LAN 设置”。
 4. 验证系统帐户的代理设置。设置代理 IP 和端口。
@@ -133,25 +137,32 @@ wacn.date: 01/06/2017
 
 如果已在当前用户帐户（非本地系统帐户）中设置代理服务器，请使用以下脚本将设置应用到 SYSTEMACCOUNT：
 
-       $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections"
-       Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name DefaultConnectionSettings -Value $obj.DefaultConnectionSettings
-       Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name SavedLegacySettings -Value $obj.SavedLegacySettings
-       $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
-       Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
-       Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
+```
+   $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections"
+   Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name DefaultConnectionSettings -Value $obj.DefaultConnectionSettings
+   Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name SavedLegacySettings -Value $obj.SavedLegacySettings
+   $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
+   Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
+   Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
+```
 
->[!NOTE] 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
+>[!NOTE]
+> 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
 
 ######对于 Linux 计算机
 
 将以下代码行添加到 ```/etc/environment``` 文件：
 
-    http_proxy=http://<proxy IP>:<proxy port>
+```
+http_proxy=http://<proxy IP>:<proxy port>
+```
 
 将以下代码行添加到 ```/etc/waagent.conf``` 文件：
 
-    HttpProxy.Host=<proxy IP>
-    HttpProxy.Port=<proxy port>
+```
+HttpProxy.Host=<proxy IP>
+HttpProxy.Port=<proxy port>
+```
 
 #### 步骤 2.在代理服务器上允许传入连接：
 
@@ -183,8 +194,10 @@ wacn.date: 01/06/2017
 
 以下命令将在 NSG 中添加一个例外。此例外允许从 10.0.0.5 上的任何端口流向端口 80 (HTTP) 或 443 (HTTPS) 上的任何 Internet 地址的 TCP 流量。如果需要访问公共 Internet 中的特定端口，请确保也将该端口添加到 ```-DestinationPortRange```。
 
-    Get-AzureNetworkSecurityGroup -Name "NSG-lockdown" |
-    Set-AzureNetworkSecurityRule -Name "allow-proxy " -Action Allow -Protocol TCP -Type Outbound -Priority 200 -SourceAddressPrefix "10.0.0.5/32" -SourcePortRange "*" -DestinationAddressPrefix Internet -DestinationPortRange "80-443"
+```
+Get-AzureNetworkSecurityGroup -Name "NSG-lockdown" |
+Set-AzureNetworkSecurityRule -Name "allow-proxy " -Action Allow -Protocol TCP -Type Outbound -Priority 200 -SourceAddressPrefix "10.0.0.5/32" -SourcePortRange "*" -DestinationAddressPrefix Internet -DestinationPortRange "80-443"
+```
 
 *确保使用与你的部署相对应的详细信息替换示例中的名称。*
 

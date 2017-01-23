@@ -36,7 +36,7 @@ ms.author: jeffstok
 * 或者，从 [GitHub](https://aka.ms/azure-stream-analytics-telcogenerator) 获取事件生成器的源代码
 
 ## 创建 Azure 事件中心输入和使用者组
-示例应用程序会生成事件并将其推送到事件中心实例进行实时处理。Service Bus 事件中心是适合流分析的首选事件引入方法。有关事件中心的详细信息，可参阅 [Azure 服务总线文档](../service-bus/index.md/)。
+示例应用程序会生成事件并将其推送到事件中心实例进行实时处理。Service Bus 事件中心是适合流分析的首选事件引入方法。有关事件中心的详细信息，可参阅 [Azure 服务总线文档](../service-bus/index.md)。
 
 创建事件中心：
 
@@ -55,7 +55,8 @@ ms.author: jeffstok
 
 1. 下载 [TelcoGenerator.zip 文件](http://download.microsoft.com/download/8/B/D/8BD50991-8D54-4F59-AB83-3354B69C8A7E/TelcoGenerator.zip)，将其解压缩到某个目录。
 
-    > [!NOTE] Windows 可能会阻止下载的 zip 文件。右键单击该文件，选择“属性”。如果看到“此文件来自其他计算机，可能被阻止以帮助保护该计算机。”消息，则选中“取消阻止”框，然后在该 zip 文件上单击“应用”。
+    > [!NOTE]
+    > Windows 可能会阻止下载的 zip 文件。右键单击该文件，选择“属性”。如果看到“此文件来自其他计算机，可能被阻止以帮助保护该计算机。”消息，则选中“取消阻止”框，然后在该 zip 文件上单击“应用”。
 
 2. 将 telcodatagen.exe.config 中的 Microsoft.ServiceBus.ConnectionString 和 EventHubName 值替换为事件中心的连接字符串和名称。
 
@@ -66,7 +67,9 @@ ms.author: jeffstok
 
 以下示例会生成 1,000 个事件，在长达两个小时的过程中，有 20% 的可能性会出现欺诈行为。
 
-    telcodatagen.exe 1000 .2 2
+```
+telcodatagen.exe 1000 .2 2
+```
 
 会看到记录被发送到事件中心。将在此实时欺诈检测应用程序中使用的某些关键字段定义如下：
 
@@ -136,7 +139,8 @@ ms.author: jeffstok
 
      SELECT * FROM CallStream
 
-    > [!IMPORTANT] 请确保输入源的名称与此前指定的输入的名称相匹配。
+    > [!IMPORTANT]
+    > 请确保输入源的名称与此前指定的输入的名称相匹配。
 
 3. 单击查询编辑器下的**“测试”**。
 4. 提供测试文件。可以使用在前面步骤中创建的文件，也可以使用 [telco.json](https://github.com/Azure/azure-stream-analytics/blob/master/Samples/SampleDataFiles/Telco.json)。
@@ -168,7 +172,7 @@ ms.author: jeffstok
     此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，则会根据每个事件到达事件中心的时间执行窗口化操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
 
     请注意，你可以使用 **System.Timestamp** 属性访问每个窗口结束时的时间戳。
-    
+
 2. 单击查询编辑器下的**“重新运行”**以查看查询结果。
 
    ![Timestand By 的查询结果](./media/stream-analytics-real-time-fraud-detection/stream-ananlytics-query-editor-rerun.png)
@@ -178,13 +182,15 @@ ms.author: jeffstok
 
 1. 在代码编辑器中将查询更改为：
 
-         SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
-         CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
-         FROM CallStream CS1 TIMESTAMP BY CallRecTime
-         JOIN CallStream CS2 TIMESTAMP BY CallRecTime
-         ON CS1.CallingIMSI = CS2.CallingIMSI
-         AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5 
-         WHERE CS1.SwitchNum != CS2.SwitchNum
+    ```
+     SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
+     CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
+     FROM CallStream CS1 TIMESTAMP BY CallRecTime
+     JOIN CallStream CS2 TIMESTAMP BY CallRecTime
+     ON CS1.CallingIMSI = CS2.CallingIMSI
+     AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5 
+     WHERE CS1.SwitchNum != CS2.SwitchNum
+    ```
 2. 单击查询编辑器下的**“重新运行”**以查看查询结果。
 
    ![联接的查询结果](./media/stream-analytics-real-time-fraud-detection/stream-ananlytics-query-editor-join.png)

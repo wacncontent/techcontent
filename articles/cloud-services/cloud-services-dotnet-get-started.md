@@ -39,7 +39,7 @@ ms.author: adegeo
 
 ## 替代体系结构：网站和 Web 作业
 
-本教程演示如何在 Azure 云服务中运行前端和后端。一种替代方法是在 [Azure 网站](../app-service-web/index.md/)中运行前端，并为后端使用 [Web 作业](../app-service-web/websites-webjobs-resources.md)功能（目前以预览版提供）。有关如何使用 Web 作业的教程，请参阅 [Azure WebJobs SDK 入门](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md)。有关如何选择最适合你方案的服务信息，请参阅 [Azure 网站、云服务和虚拟机的比较](../app-service-web/choose-web-site-cloud-service-vm.md)。
+本教程演示如何在 Azure 云服务中运行前端和后端。一种替代方法是在 [Azure 网站](../app-service-web/index.md)中运行前端，并为后端使用 [Web 作业](../app-service-web/websites-webjobs-resources.md)功能（目前以预览版提供）。有关如何使用 Web 作业的教程，请参阅 [Azure WebJobs SDK 入门](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md)。有关如何选择最适合你方案的服务信息，请参阅 [Azure 网站、云服务和虚拟机的比较](../app-service-web/choose-web-site-cloud-service-vm.md)。
 
 ## 学习内容
 
@@ -220,14 +220,17 @@ Web 项目和辅助角色项目自身具有数据库连接字符串，并且当�
 
 你将为 Web 角色使用 [Web.config 转换](http://www.asp.net/mvc/tutorials/deployment/visual-studio-web-deployment/web-config-transformations)，为辅助角色使用云服务环境设置。
 
->[!NOTE] 在本部分和下一部分中，你将在项目文件中存储凭据。[不要将敏感数据存储在公共源代码存储库中](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control#secrets)。
+>[!NOTE]
+> 在本部分和下一部分中，你将在项目文件中存储凭据。[不要将敏感数据存储在公共源代码存储库中](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control#secrets)。
 
 1. 在 ContosoAdsWeb 项目中，为应用程序 *Web.config* 文件打开 *Web.Release.config* 转换文件，删除包含 `<connectionStrings>` 元素的注释块，并在其原位置粘贴下面的代码。
 
-        <connectionStrings>
-            <add name="ContosoAdsContext" connectionString="{connectionstring}"
-            providerName="System.Data.SqlClient" xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/>
-        </connectionStrings>
+    ```
+    <connectionStrings>
+        <add name="ContosoAdsContext" connectionString="{connectionstring}"
+        providerName="System.Data.SqlClient" xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/>
+    </connectionStrings>
+    ```
 
     保持文件打开进行编辑。
 
@@ -297,28 +300,32 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 例如，ServiceDefinition.csdef 包括以下定义：
 
-        <ConfigurationSettings>
-          <Setting name="StorageConnectionString" />
-          <Setting name="ContosoAdsDbConnectionString" />
-        </ConfigurationSettings>
+```
+    <ConfigurationSettings>
+      <Setting name="StorageConnectionString" />
+      <Setting name="ContosoAdsDbConnectionString" />
+    </ConfigurationSettings>
+```
 
 *ServiceConfiguration.Cloud.cscfg* 文件包括你为 Visual Studio 中的设置输入的值。
 
-        <Role name="ContosoAdsWorker">
-          <Instances count="1" />
-          <ConfigurationSettings>
-            <Setting name="StorageConnectionString" value="{yourconnectionstring}" />
-            <Setting name="ContosoAdsDbConnectionString" value="{yourconnectionstring}" />
-            <!-- other settings not shown -->
-          </ConfigurationSettings>
-          <!-- other settings not shown -->
-        </Role>
+```
+    <Role name="ContosoAdsWorker">
+      <Instances count="1" />
+      <ConfigurationSettings>
+        <Setting name="StorageConnectionString" value="{yourconnectionstring}" />
+        <Setting name="ContosoAdsDbConnectionString" value="{yourconnectionstring}" />
+        <!-- other settings not shown -->
+      </ConfigurationSettings>
+      <!-- other settings not shown -->
+    </Role>
+```
 
 `<Instances>` 设置指定 Azure 将在其上运行辅助角色代码的虚拟机的数量。[后续步骤](#next-steps)部分包括有关向外缩放云服务的详细信息的链接。
 
 ###  将项目部署到 Azure
 
-1.	在“解决方案资源管理器”中，右键单击“ContosoAdsCloudService”云项目并选择“发布”。
+1. 在“解决方案资源管理器”中，右键单击“ContosoAdsCloudService”云项目并选择“发布”。
 
     ![发布菜单](./media/cloud-services-dotnet-get-started/pubmenu.png)
 
@@ -348,7 +355,8 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 7. 就像在本地运行应用程序一样，现在可以通过创建、查看和编辑一些广告测试应用程序。
 
->[!NOTE] 完成测试后，删除或停止云服务。即使你不使用云服务，也会产生费用，因为要为它保留虚拟机资源。如果保持运行云服务，找到你 URL 的任何人都可以创建和查看广告。在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，转到云服务的“仪表板”选项卡，然后单击页面底部的“删除”按钮。如果你只是想要暂时防止其他人访问站点，请单击“停止”。在这种情况下，会继续产生费用。当你不再需要 SQL 数据库和存储帐户时，可以遵循类似的过程将其删除。
+>[!NOTE]
+> 完成测试后，删除或停止云服务。即使你不使用云服务，也会产生费用，因为要为它保留虚拟机资源。如果保持运行云服务，找到你 URL 的任何人都可以创建和查看广告。在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，转到云服务的“仪表板”选项卡，然后单击页面底部的“删除”按钮。如果你只是想要暂时防止其他人访问站点，请单击“停止”。在这种情况下，会继续产生费用。当你不再需要 SQL 数据库和存储帐户时，可以遵循类似的过程将其删除。
 
 ## 从头开始创建应用程序
 
@@ -430,9 +438,11 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 1. 在 ContosoAdsWeb 项目中，打开应用程序 Web.config 文件，并在 `configSections` 元素后面插入以下 `connectionStrings` 元素。
 
-        <connectionStrings>
-          <add name="ContosoAdsContext" connectionString="Data Source=(localdb)\v11.0; Initial Catalog=ContosoAds; Integrated Security=True; MultipleActiveResultSets=True;" providerName="System.Data.SqlClient" />
-        </connectionStrings>
+    ```
+    <connectionStrings>
+      <add name="ContosoAdsContext" connectionString="Data Source=(localdb)\v11.0; Initial Catalog=ContosoAds; Integrated Security=True; MultipleActiveResultSets=True;" providerName="System.Data.SqlClient" />
+    </connectionStrings>
+    ```
 
     如果你使用的是 Visual Studio 2015，请将“v11.0”替换为“MSSQLLocalDB”。
 
@@ -460,7 +470,9 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
     * 类型：字符串
     * 值：粘贴用于 Web 角色项目的相同连接字符串。（以下示例适用于 Visual Studio 2013；如果你使用 Visual Studio 2015 并想要复制此示例，请记得更改数据源。）
 
-            Data Source=(localdb)\v11.0; Initial Catalog=ContosoAds; Integrated Security=True; MultipleActiveResultSets=True;
+        ```
+        Data Source=(localdb)\v11.0; Initial Catalog=ContosoAds; Integrated Security=True; MultipleActiveResultSets=True;
+        ```
 
 ### 添加代码文件
 
@@ -491,60 +503,64 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 Ad.cs 文件为 ad 类别定义一个枚举，为 ad 信息定义一个 POCO 实体类。
 
-        public enum Category
-        {
-            Cars,
-            [Display(Name="Real Estate")]
-            RealEstate,
-            [Display(Name = "Free Stuff")]
-            FreeStuff
-        }
+```
+    public enum Category
+    {
+        Cars,
+        [Display(Name="Real Estate")]
+        RealEstate,
+        [Display(Name = "Free Stuff")]
+        FreeStuff
+    }
 
-        public class Ad
-        {
-            public int AdId { get; set; }
+    public class Ad
+    {
+        public int AdId { get; set; }
 
-            [StringLength(100)]
-            public string Title { get; set; }
+        [StringLength(100)]
+        public string Title { get; set; }
 
-            public int Price { get; set; }
+        public int Price { get; set; }
 
-            [StringLength(1000)]
-            [DataType(DataType.MultilineText)]
-            public string Description { get; set; }
+        [StringLength(1000)]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
 
-            [StringLength(1000)]
-            [DisplayName("Full-size Image")]
-            public string ImageURL { get; set; }
+        [StringLength(1000)]
+        [DisplayName("Full-size Image")]
+        public string ImageURL { get; set; }
 
-            [StringLength(1000)]
-            [DisplayName("Thumbnail")]
-            public string ThumbnailURL { get; set; }
+        [StringLength(1000)]
+        [DisplayName("Thumbnail")]
+        public string ThumbnailURL { get; set; }
 
-            [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-            public DateTime PostedDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime PostedDate { get; set; }
 
-            public Category? Category { get; set; }
-            [StringLength(12)]
-            public string Phone { get; set; }
-        }
+        public Category? Category { get; set; }
+        [StringLength(12)]
+        public string Phone { get; set; }
+    }
+```
 
 ### ContosoAdsCommon - ContosoAdsContext.cs
 
 ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存储在 SQL 数据库中。
 
-        public class ContosoAdsContext : DbContext
+```
+    public class ContosoAdsContext : DbContext
+    {
+        public ContosoAdsContext() : base("name=ContosoAdsContext")
         {
-            public ContosoAdsContext() : base("name=ContosoAdsContext")
-            {
-            }
-            public ContosoAdsContext(string connString)
-                : base(connString)
-            {
-            }
-            public System.Data.Entity.DbSet<Ad> Ads { get; set; }
         }
+        public ContosoAdsContext(string connString)
+            : base(connString)
+        {
+        }
+        public System.Data.Entity.DbSet<Ad> Ads { get; set; }
+    }
+```
 
 类具有两个构造函数。其中第一个由 web 项目使用，并指定存储在 Web.config 文件中的连接字符串的名称。第二个构造函数允许你在实际的连接字符串中传递。程序需要辅助角色项目，因为它没有 Web.config 文件。你以前看到存储此连接字符串的位置，并且稍后你将看到连接字符串在实例化 DbContext 类时代码如何检索它。
 
@@ -554,27 +570,33 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 此代码通过使用来自 *.cscfg* 文件的存储连接字符串获取存储帐户的访问权限。
 
-        var storageAccount = CloudStorageAccount.Parse
-            (RoleEnvironment.GetConfigurationSettingValue("StorageConnectionString"));
+```
+    var storageAccount = CloudStorageAccount.Parse
+        (RoleEnvironment.GetConfigurationSettingValue("StorageConnectionString"));
+```
 
 然后，它获取对*图像* Blob 容器的引用，创建尚不存在的容器，并在新容器上设置访问权限。默认情况下，新容器只允许带存储帐户凭据的客户端访问 Blob。网站需要 Blob 是公共的，以便它可以使用指向图像 Blob 的 Url 显示图像。
 
-        var blobClient = storageAccount.CreateCloudBlobClient();
-        var imagesBlobContainer = blobClient.GetContainerReference("images");
-        if (imagesBlobContainer.CreateIfNotExists())
-        {
-            imagesBlobContainer.SetPermissions(
-                new BlobContainerPermissions
-                {
-                    PublicAccess =BlobContainerPublicAccessType.Blob
-                });
-        }
+```
+    var blobClient = storageAccount.CreateCloudBlobClient();
+    var imagesBlobContainer = blobClient.GetContainerReference("images");
+    if (imagesBlobContainer.CreateIfNotExists())
+    {
+        imagesBlobContainer.SetPermissions(
+            new BlobContainerPermissions
+            {
+                PublicAccess =BlobContainerPublicAccessType.Blob
+            });
+    }
+```
 
 类似代码获取对*图像*队列的引用并创建一个新队列。这种情况不需要权限更改。
 
-        CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-        var imagesQueue = queueClient.GetQueueReference("images");
-        imagesQueue.CreateIfNotExists();
+```
+    CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+    var imagesQueue = queueClient.GetQueueReference("images");
+    imagesQueue.CreateIfNotExists();
+```
 
 ### ContosoAdsWeb - \_Layout.cshtml
 
@@ -584,10 +606,12 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 *Views\\Home\\Index.cshtml* 文件在主页上显示类别链接。链接将查询字符串变量中的 `Category` 枚举的整数值传递到“广告索引”页面。
 
-        <li>@Html.ActionLink("Cars", "Index", "Ad", new { category = (int)Category.Cars }, null)</li>
-        <li>@Html.ActionLink("Real estate", "Index", "Ad", new { category = (int)Category.RealEstate }, null)</li>
-        <li>@Html.ActionLink("Free stuff", "Index", "Ad", new { category = (int)Category.FreeStuff }, null)</li>
-        <li>@Html.ActionLink("All", "Index", "Ad", null, null)</li>
+```
+    <li>@Html.ActionLink("Cars", "Index", "Ad", new { category = (int)Category.Cars }, null)</li>
+    <li>@Html.ActionLink("Real estate", "Index", "Ad", new { category = (int)Category.RealEstate }, null)</li>
+    <li>@Html.ActionLink("Free stuff", "Index", "Ad", new { category = (int)Category.FreeStuff }, null)</li>
+    <li>@Html.ActionLink("All", "Index", "Ad", null, null)</li>
+```
 
 ### ContosoAdsWeb - AdController.cs
 
@@ -595,101 +619,125 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 然后，代码获取对*图像* Blob 容器的引用，正如你之前在 *Global.asax.cs* 中看到的。在执行该操作时，它设置适用于 Web 应用程序的默认[重试策略](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/transient-fault-handling)。对于超过暂时性故障反复重试超过一分钟的 Web 应用程序，默认指数回退重试策略将其可能挂起。此处指定的重试策略将在每次尝试后等待 3 秒，最多可尝试 3 次。
 
-        var blobClient = storageAccount.CreateCloudBlobClient();
-        blobClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
-        imagesBlobContainer = blobClient.GetContainerReference("images");
+```
+    var blobClient = storageAccount.CreateCloudBlobClient();
+    blobClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
+    imagesBlobContainer = blobClient.GetContainerReference("images");
+```
 
 类似代码获取对*图像*队列的引用。
 
-        CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-        queueClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
-        imagesQueue = queueClient.GetQueueReference("images");
+```
+    CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+    queueClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
+    imagesQueue = queueClient.GetQueueReference("images");
+```
 
 大部分控制器代码通常用于使用 DbContext 类的实体框架数据模型。例外情况是 HttpPost `Create` 方法，它上载文件并将其保存在 Blob 存储中。模型联编程序为该方法提供一个 [HttpPostedFileBase](http://msdn.microsoft.com/zh-cn/library/system.web.httppostedfilebase.aspx) 对象。
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(
-            [Bind(Include = "Title,Price,Description,Category,Phone")] Ad ad,
-            HttpPostedFileBase imageFile)
+```
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Create(
+        [Bind(Include = "Title,Price,Description,Category,Phone")] Ad ad,
+        HttpPostedFileBase imageFile)
+```
 
 如果用户选择要上载的文件，则代码上载该文件，将其保存在 Blob 中，并使用指向 Blob 的 URL 更新广告数据库记录。
 
-        if (imageFile != null && imageFile.ContentLength != 0)
-        {
-            blob = await UploadAndSaveBlobAsync(imageFile);
-            ad.ImageURL = blob.Uri.ToString();
-        }
+```
+    if (imageFile != null && imageFile.ContentLength != 0)
+    {
+        blob = await UploadAndSaveBlobAsync(imageFile);
+        ad.ImageURL = blob.Uri.ToString();
+    }
+```
 
 执行上载的代码位于 `UploadAndSaveBlobAsync` 方法中。它将创建 Blob 的 GUID 名称，上载和保存该文件，并将引用返回已保存的 Blob。
 
-        private async Task<CloudBlockBlob> UploadAndSaveBlobAsync(HttpPostedFileBase imageFile)
+```
+    private async Task<CloudBlockBlob> UploadAndSaveBlobAsync(HttpPostedFileBase imageFile)
+    {
+        string blobName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+        CloudBlockBlob imageBlob = imagesBlobContainer.GetBlockBlobReference(blobName);
+        using (var fileStream = imageFile.InputStream)
         {
-            string blobName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-            CloudBlockBlob imageBlob = imagesBlobContainer.GetBlockBlobReference(blobName);
-            using (var fileStream = imageFile.InputStream)
-            {
-                await imageBlob.UploadFromStreamAsync(fileStream);
-            }
-            return imageBlob;
+            await imageBlob.UploadFromStreamAsync(fileStream);
         }
+        return imageBlob;
+    }
+```
 
 之后 HttpPost `Create` 方法上载 Blob 并更新数据库，它会创建队列消息，以通知后端进程图像已准备好转换为一个缩略图。
 
-        string queueMessageString = ad.AdId.ToString();
-        var queueMessage = new CloudQueueMessage(queueMessageString);
-        await queue.AddMessageAsync(queueMessage);
+```
+    string queueMessageString = ad.AdId.ToString();
+    var queueMessage = new CloudQueueMessage(queueMessageString);
+    await queue.AddMessageAsync(queueMessage);
+```
 
 HttpPost `Edit` 方法的代码和它类似，不同之处在于如果用户选择新图像文件，则必须删除已存在的任何 blob。
 
-        if (imageFile != null && imageFile.ContentLength != 0)
-        {
-            await DeleteAdBlobsAsync(ad);
-            imageBlob = await UploadAndSaveBlobAsync(imageFile);
-            ad.ImageURL = imageBlob.Uri.ToString();
-        }
+```
+    if (imageFile != null && imageFile.ContentLength != 0)
+    {
+        await DeleteAdBlobsAsync(ad);
+        imageBlob = await UploadAndSaveBlobAsync(imageFile);
+        ad.ImageURL = imageBlob.Uri.ToString();
+    }
+```
 
 以下示例演示了当你删除广告时删除 Blob 的代码：
 
-        private async Task DeleteAdBlobsAsync(Ad ad)
+```
+    private async Task DeleteAdBlobsAsync(Ad ad)
+    {
+        if (!string.IsNullOrWhiteSpace(ad.ImageURL))
         {
-            if (!string.IsNullOrWhiteSpace(ad.ImageURL))
-            {
-                Uri blobUri = new Uri(ad.ImageURL);
-                await DeleteAdBlobAsync(blobUri);
-            }
-            if (!string.IsNullOrWhiteSpace(ad.ThumbnailURL))
-            {
-                Uri blobUri = new Uri(ad.ThumbnailURL);
-                await DeleteAdBlobAsync(blobUri);
-            }
+            Uri blobUri = new Uri(ad.ImageURL);
+            await DeleteAdBlobAsync(blobUri);
         }
-        private static async Task DeleteAdBlobAsync(Uri blobUri)
+        if (!string.IsNullOrWhiteSpace(ad.ThumbnailURL))
         {
-            string blobName = blobUri.Segments[blobUri.Segments.Length - 1];
-            CloudBlockBlob blobToDelete = imagesBlobContainer.GetBlockBlobReference(blobName);
-            await blobToDelete.DeleteAsync();
+            Uri blobUri = new Uri(ad.ThumbnailURL);
+            await DeleteAdBlobAsync(blobUri);
         }
+    }
+    private static async Task DeleteAdBlobAsync(Uri blobUri)
+    {
+        string blobName = blobUri.Segments[blobUri.Segments.Length - 1];
+        CloudBlockBlob blobToDelete = imagesBlobContainer.GetBlockBlobReference(blobName);
+        await blobToDelete.DeleteAsync();
+    }
+```
 
 ### ContosoAdsWeb - Views\\Ad\\Index.cshtml 和 Details.cshtml
 
 *Index.cshtml* 文件显示带有其他广告数据的缩略图。
 
-        <img  src="@Html.Raw(item.ThumbnailURL)" />
+```
+    <img  src="@Html.Raw(item.ThumbnailURL)" />
+```
 
 *Details.cshtml* 文件显示完全尺寸的图像。
 
-        <img src="@Html.Raw(Model.ImageURL)" />
+```
+    <img src="@Html.Raw(Model.ImageURL)" />
+```
 
 ### ContosoAdsWeb - Views\\Ad\\Create.cshtml 和 Edit.cshtml
 
 *Create.cshtml* 和 *Edit.cshtml* 文件指定窗体编码，允许控制器获取 `HttpPostedFileBase` 对象。
 
-        @using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+```
+    @using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+```
 
 `<input>` 元素通知浏览器提供文件选择对话框。
 
-        <input type="file" name="imageFile" accept="image/*" class="form-control fileupload" />
+```
+    <input type="file" name="imageFile" accept="image/*" class="form-control fileupload" />
+```
 
 ### ContosoAdsWorker - WorkerRole.cs - OnStart 方法
 
@@ -697,8 +745,10 @@ Azure 辅助角色环境在辅助角色启动时调用 `WorkerRole` 类中的 `O
 
 `OnStart` 方法从 *.cscfg* 文件获取数据库连接字符串，并将其传递给实体框架 DbContext 类。在默认情况下使用 SQLClient 提供程序，因此不需要指定提供程序。
 
-        var dbConnString = CloudConfigurationManager.GetSetting("ContosoAdsDbConnectionString");
-        db = new ContosoAdsContext(dbConnString);
+```
+    var dbConnString = CloudConfigurationManager.GetSetting("ContosoAdsDbConnectionString");
+    db = new ContosoAdsContext(dbConnString);
+```
 
 之后，该方法获取对存储帐户的引用，并创建 blob 容器和队列（如果它们不存在）。此代码类似于你已在 web 角色 `Application_Start` 方法中看到的内容。
 
@@ -706,34 +756,36 @@ Azure 辅助角色环境在辅助角色启动时调用 `WorkerRole` 类中的 `O
 
 `Run` 方法完成其初始化工作时调用 `OnStart` 方法。该方法执行监视新队列消息的一个无限循环，并在它们到达时进行处理。
 
-        public override void Run()
-        {
-            CloudQueueMessage msg = null;
+```
+    public override void Run()
+    {
+        CloudQueueMessage msg = null;
 
-            while (true)
+        while (true)
+        {
+            try
             {
-                try
+                msg = this.imagesQueue.GetMessage();
+                if (msg != null)
                 {
-                    msg = this.imagesQueue.GetMessage();
-                    if (msg != null)
-                    {
-                        ProcessQueueMessage(msg);
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(1000);
-                    }
+                    ProcessQueueMessage(msg);
                 }
-                catch (StorageException e)
+                else
                 {
-                    if (msg != null && msg.DequeueCount > 5)
-                    {
-                        this.imagesQueue.DeleteMessage(msg);
-                    }
-                    System.Threading.Thread.Sleep(5000);
+                    System.Threading.Thread.Sleep(1000);
                 }
             }
+            catch (StorageException e)
+            {
+                if (msg != null && msg.DequeueCount > 5)
+                {
+                    this.imagesQueue.DeleteMessage(msg);
+                }
+                System.Threading.Thread.Sleep(5000);
+            }
         }
+    }
+```
 
 循环每次迭代后，如果不找到任何队列消息，该程序休眠一秒钟。此举防止辅助角色导致过多的 CPU 时间和存储事务成本。Microsoft 客户顾问团队讲过一个故事，一位开发人员忘记此操作，部署到生产环境，并去度假了。当他回来时，他的监督费用超过了度假费用。
 
@@ -741,36 +793,39 @@ Azure 辅助角色环境在辅助角色启动时调用 `WorkerRole` 类中的 `O
 
 找到队列消息时调用 `ProcessQueueMessage`。
 
-        private void ProcessQueueMessage(CloudQueueMessage msg)
+```
+    private void ProcessQueueMessage(CloudQueueMessage msg)
+    {
+        var adId = int.Parse(msg.AsString);
+        Ad ad = db.Ads.Find(adId);
+        if (ad == null)
         {
-            var adId = int.Parse(msg.AsString);
-            Ad ad = db.Ads.Find(adId);
-            if (ad == null)
-            {
-                throw new Exception(String.Format("AdId {0} not found, can't create thumbnail", adId.ToString()));
-            }
-
-            CloudBlockBlob inputBlob = this.imagesBlobContainer.GetBlockBlobReference(ad.ImageURL);
-
-            string thumbnailName = Path.GetFileNameWithoutExtension(inputBlob.Name) + "thumb.jpg";
-            CloudBlockBlob outputBlob = this.imagesBlobContainer.GetBlockBlobReference(thumbnailName);
-
-            using (Stream input = inputBlob.OpenRead())
-            using (Stream output = outputBlob.OpenWrite())
-            {
-                ConvertImageToThumbnailJPG(input, output);
-                outputBlob.Properties.ContentType = "image/jpeg";
-            }
-
-            ad.ThumbnailURL = outputBlob.Uri.ToString();
-            db.SaveChanges();
-
-            this.imagesQueue.DeleteMessage(msg);
+            throw new Exception(String.Format("AdId {0} not found, can't create thumbnail", adId.ToString()));
         }
+
+        CloudBlockBlob inputBlob = this.imagesBlobContainer.GetBlockBlobReference(ad.ImageURL);
+
+        string thumbnailName = Path.GetFileNameWithoutExtension(inputBlob.Name) + "thumb.jpg";
+        CloudBlockBlob outputBlob = this.imagesBlobContainer.GetBlockBlobReference(thumbnailName);
+
+        using (Stream input = inputBlob.OpenRead())
+        using (Stream output = outputBlob.OpenWrite())
+        {
+            ConvertImageToThumbnailJPG(input, output);
+            outputBlob.Properties.ContentType = "image/jpeg";
+        }
+
+        ad.ThumbnailURL = outputBlob.Uri.ToString();
+        db.SaveChanges();
+
+        this.imagesQueue.DeleteMessage(msg);
+    }
+```
 
 此代码读取数据库以获取图像 URL、将图像转换为一个缩略图、在 blob 中保存缩略图、用缩略图 blob URL 更新数据库并删除队列消息。
 
->[!NOTE] 为简单起见，`ConvertImageToThumbnailJPG` 方法中的代码使用 System.Drawing 命名空间中的类。但是，此命名空间中的类已设计用于 Windows 窗体。不支持在 Windows 或 ASP.NET 服务中使用。有关图像处理选项的详细信息，请参阅[动态图像生成](http://www.hanselman.com/blog/BackToBasicsDynamicImageGenerationASPNETControllersRoutingIHttpHandlersAndRunAllManagedModulesForAllRequests.aspx)和[深入学习图像大小调整](http://www.hanselminutes.com/313/deep-inside-image-resizing-and-scaling-with-aspnet-and-iis-with-imageresizingnet-author-na)。
+>[!NOTE]
+> 为简单起见，`ConvertImageToThumbnailJPG` 方法中的代码使用 System.Drawing 命名空间中的类。但是，此命名空间中的类已设计用于 Windows 窗体。不支持在 Windows 或 ASP.NET 服务中使用。有关图像处理选项的详细信息，请参阅[动态图像生成](http://www.hanselman.com/blog/BackToBasicsDynamicImageGenerationASPNETControllersRoutingIHttpHandlersAndRunAllManagedModulesForAllRequests.aspx)和[深入学习图像大小调整](http://www.hanselminutes.com/313/deep-inside-image-resizing-and-scaling-with-aspnet-and-iis-with-imageresizingnet-author-na)。
 
 ## 故障排除
 
@@ -812,6 +867,6 @@ Contoso 广告应用程序有意保持入门教程的简单性。例如，它没
 
 * [Azure 云服务的第 1 部分：简介](http://justazure.com/microsoft-azure-cloud-services-part-1-introduction)
 * [如何管理云服务](./cloud-services-how-to-manage.md)
-* [Azure 存储空间](../storage/index.md/)
+* [Azure 存储空间](../storage/index.md)
 
 <!---HONumber=Mooncake_1226_2016-->

@@ -57,7 +57,7 @@ VM 无法根据部署要求访问 Internet，或者现有的限制阻止访问 A
 1. 如果你指定了网络限制（例如 NSG），请部署 HTTP 代理服务器来路由流量。
 2. 如果你有网络安全组 (NSG)，请添加规则来允许从 HTTP 代理访问 Internet 。
 
-了解如何[为 VM 备份设置 HTTP 代理](./backup-azure-vms-prepare.md#using-an-http-proxy-for-vm-backups/)。
+了解如何[为 VM 备份设置 HTTP 代理](./backup-azure-vms-prepare.md#using-an-http-proxy-for-vm-backups)。
 
 ## 原因 2：VM 中安装的 Azure VM 代理已过时（适用于 Linux VM）
 ### 解决方案
@@ -65,18 +65,18 @@ VM 无法根据部署要求访问 Internet，或者现有的限制阻止访问 A
 
 1. [安装最新的 Azure VM 代理](https://github.com/Azure/WALinuxAgent)。
 2. 确保 Azure 代理在 VM 上运行。为此，请运行以下命令：```ps -e```
-   
+
     如果此进程未运行，请使用以下命令来重新启动它。
-   
+
     对于 Ubuntu：```service walinuxagent start```
-   
+
     对于其他分发版：```service waagent start
    ```
 3. [配置自动重新启动代理](https://github.com/Azure/WALinuxAgent/wiki/Known-Issues#mitigate_agent_crash)。
 4. 运行新的测试备份。如果失败持续发生，请从以下文件夹收集日志，以做进一步调试。
-   
+
     我们需要从客户的 VM 收集以下日志：
-   
+
    - /var/lib/waagent/*.xml
    - /var/log/waagent.log
    - /var/log/azure/*
@@ -84,7 +84,7 @@ VM 无法根据部署要求访问 Internet，或者现有的限制阻止访问 A
 如果我们需要 waagent 的详细日志，请遵循以下步骤来启用此功能：
 
 1. 在 /etc/waagent.conf 文件中找到以下行：
-   
+
     Enable verbose logging (y|n)
 2. 将 **Logs.Verbose** 值从 n 更改为 y。
 3. 保存更改，然后遵循本部分前面的步骤重新启动 waagent。

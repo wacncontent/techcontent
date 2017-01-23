@@ -9,39 +9,45 @@
 
 要创建的网站的名称。
 
-    "siteName":{
-      "type":"string"
-    }
+```
+"siteName":{
+  "type":"string"
+}
+```
 
 ### hostingPlanName
 
 用于托管网站的 App Service 计划的名称。
-    
-    "hostingPlanName":{
-      "type":"string"
-    }
+
+```
+"hostingPlanName":{
+  "type":"string"
+}
+```
 
 ### sku
 
 托管计划的定价层。
 
-    "sku": {
-      "type": "string",
-      "allowedValues": [
-        "F1",
-        "D1",
-        "B1",
-        "B2",
-        "B3",
-        "S1",
-        "S2",
-        "S3"
-      ],
-      "defaultValue": "S1",
-      "metadata": {
-        "description": "The pricing tier for the hosting plan."
-      }
-    }
+```
+"sku": {
+  "type": "string",
+  "allowedValues": [
+    "F1",
+    "D1",
+    "B1",
+    "B2",
+    "B3",
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "defaultValue": "S1",
+  "metadata": {
+    "description": "The pricing tier for the hosting plan."
+  }
+}
+```
 
 模板将定义此参数允许的值，如果未指定任何值，则分配默认值 (S1)。
 
@@ -49,16 +55,18 @@
 
 托管计划的实例大小（small、medium 或 large）。
 
-    "workerSize":{
-      "type":"string",
-      "allowedValues":[
-        "0",
-        "1",
-        "2"
-      ],
-      "defaultValue":"0"
-    }
-    
+```
+"workerSize":{
+  "type":"string",
+  "allowedValues":[
+    "0",
+    "1",
+    "2"
+  ],
+  "defaultValue":"0"
+}
+```
+
 模板将定义此参数允许的值（0、1 或 2），如果未指定任何值，则分配默认值 (0)。这些值分别对应于 small、medium 和 large。
 
 <!---HONumber=Mooncake_0118_2016-->

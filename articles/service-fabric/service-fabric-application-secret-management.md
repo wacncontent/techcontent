@@ -1,4 +1,3 @@
-
 ---
 title: 管理 Service Fabric 应用程序中的密码 | Azure
 description: 本文介绍如何保护 Service Fabric 应用程序中的密码。
@@ -45,7 +44,7 @@ ms.author: vturecek
  - 证书必须包含私钥。
  - 必须为密钥交换创建证书，并且该证书可导出到个人信息交换 (.pfx) 文件。
  - 证书密钥用途必须包括数据加密 (10)，不应包括服务器身份验证或客户端身份验证。
- 
+
  例如，使用 PowerShell 创建自签名证书时，`KeyUsage` 标志必须设置为 `DataEncipherment`：
 
     New-SelfSignedCertificate -Type DocumentEncryptionCert -KeyUsage DataEncipherment -Subject mydataenciphermentcert -Provider 'Microsoft Enhanced Cryptographic Provider v1.0'
@@ -58,16 +57,20 @@ Service Fabric SDK 提供内置的机密加密和解密函数。可以在生成�
 
 以下 PowerShell 命令用于加密机密。若要生成机密值的密文，必须使用群集中安装的同一个加密证书：
 
-    Invoke-ServiceFabricEncryptText -CertStore -CertThumbprint "<thumbprint>" -Text "mysecret" -StoreLocation CurrentUser -StoreName My
+```
+Invoke-ServiceFabricEncryptText -CertStore -CertThumbprint "<thumbprint>" -Text "mysecret" -StoreLocation CurrentUser -StoreName My
+```
 
 生成的 base-64 字符串包含机密密文，以及用来将其加密的证书相关信息。当 `IsEncrypted` 属性设置为 `true` 时，可将 base-64 编码字符串插入服务 Settings.xml 配置文件中的参数内：
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-      <Section Name="MySettings">
-        <Parameter Name="MySecret" IsEncrypted="true" Value="I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM=" />
-      </Section>
-    </Settings>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Section Name="MySettings">
+    <Parameter Name="MySecret" IsEncrypted="true" Value="I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM=" />
+  </Section>
+</Settings>
+```
 
 ### 将应用程序机密插入应用程序实例  
 
@@ -77,83 +80,96 @@ Service Fabric SDK 提供内置的机密加密和解密函数。可以在生成�
 
 Settings.xml 配置文件允许使用可在创建应用程序时提供的可重写参数。使用 `MustOverride` 属性而不要提供参数值：
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-      <Section Name="MySettings">
-        <Parameter Name="MySecret" IsEncrypted="true" Value="" MustOverride="true" />
-      </Section>
-    </Settings>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Section Name="MySettings">
+    <Parameter Name="MySecret" IsEncrypted="true" Value="" MustOverride="true" />
+  </Section>
+</Settings>
+```
 
 若要重写 Settings.xml 中的值，可在 ApplicationManifest.xml 中声明服务的 override 参数：
 
-    <ApplicationManifest ... >
-      <Parameters>
-        <Parameter Name="MySecret" DefaultValue="" />
-      </Parameters>
-      <ServiceManifestImport>
-        <ServiceManifestRef ServiceManifestName="Stateful1Pkg" ServiceManifestVersion="1.0.0" />
-        <ConfigOverrides>
-          <ConfigOverride Name="Config">
-            <Settings>
-              <Section Name="MySettings">
-                <Parameter Name="MySecret" Value="[MySecret]" IsEncrypted="true" />
-              </Section>
-            </Settings>
-          </ConfigOverride>
-        </ConfigOverrides>
-      </ServiceManifestImport>
+```
+<ApplicationManifest ... >
+  <Parameters>
+    <Parameter Name="MySecret" DefaultValue="" />
+  </Parameters>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="Stateful1Pkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="MySettings">
+            <Parameter Name="MySecret" Value="[MySecret]" IsEncrypted="true" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+```
 
 现在，可以在创建应用程序实例时将值指定为*应用程序参数*。可以使用 PowerShell 或 C# 编写用于创建应用程序实例的脚本，方便在生成过程中轻松集成。
 
 使用 PowerShell 时，参数将以[哈希表](https://technet.microsoft.com/zh-cn/library/ee692803.aspx)的形式提供给 `New-ServiceFabricApplication`：
 
-    PS C:\Users\vturecek> New-ServiceFabricApplication -ApplicationName fabric:/MyApp -ApplicationTypeName MyAppType -ApplicationTypeVersion 1.0.0 -ApplicationParameter @{"MySecret" = "I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM="}
+```
+PS C:\Users\vturecek> New-ServiceFabricApplication -ApplicationName fabric:/MyApp -ApplicationTypeName MyAppType -ApplicationTypeVersion 1.0.0 -ApplicationParameter @{"MySecret" = "I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM="}
+```
 
 使用 C# 时，应用程序参数将以 `NameValueCollection` 的形式在 `ApplicationDescription` 中指定：
 
-    FabricClient fabricClient = new FabricClient();
+```
+FabricClient fabricClient = new FabricClient();
 
-    NameValueCollection applicationParameters = new NameValueCollection();
-    applicationParameters["MySecret"] = "I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM=";
+NameValueCollection applicationParameters = new NameValueCollection();
+applicationParameters["MySecret"] = "I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM=";
 
-    ApplicationDescription applicationDescription = new ApplicationDescription(
-        applicationName: new Uri("fabric:/MyApp"),
-        applicationTypeName: "MyAppType",
-        applicationTypeVersion: "1.0.0",
-        applicationParameters: applicationParameters)
-    );
+ApplicationDescription applicationDescription = new ApplicationDescription(
+    applicationName: new Uri("fabric:/MyApp"),
+    applicationTypeName: "MyAppType",
+    applicationTypeVersion: "1.0.0",
+    applicationParameters: applicationParameters)
+);
 
-    await fabricClient.ApplicationManager.CreateApplicationAsync(applicationDescription);
+await fabricClient.ApplicationManager.CreateApplicationAsync(applicationDescription);
+```
 
 ## 解密服务代码中的机密
 在 Windows 上，Service Fabric 中的服务默认在“网络服务”下运行，如果未提供额外的设置，它们无权访问节点上安装的证书。
 
 使用数据加密证书时，需确保“网络服务”或运行服务的任何用户帐户可以访问该证书的私钥。如果提供了相应的配置，Service Fabric 可自动处理服务授权。可以通过在 ApplicationManifest.xml 中定义用户和证书安全策略来完成此配置。在以下示例中，已授予“网络服务”帐户对某个按指纹定义的证书的读取访问权限：
 
-    <ApplicationManifest … >
-        <Principals>
-            <Users>
-                <User Name="Service1" AccountType="NetworkService" />
-            </Users>
-        </Principals>
-      <Policies>
-        <SecurityAccessPolicies>
-          <SecurityAccessPolicy GrantRights=”Read” PrincipalRef="Service1" ResourceRef="MyCert" ResourceType="Certificate"/>
-        </SecurityAccessPolicies>
-      </Policies>
-      <Certificates>
-        <SecretsCertificate Name="MyCert" X509FindType="FindByThumbprint" X509FindValue="[YourCertThumbrint]"/>
-      </Certificates>
-    </ApplicationManifest>
+```
+<ApplicationManifest … >
+    <Principals>
+        <Users>
+            <User Name="Service1" AccountType="NetworkService" />
+        </Users>
+    </Principals>
+  <Policies>
+    <SecurityAccessPolicies>
+      <SecurityAccessPolicy GrantRights=”Read” PrincipalRef="Service1" ResourceRef="MyCert" ResourceType="Certificate"/>
+    </SecurityAccessPolicies>
+  </Policies>
+  <Certificates>
+    <SecretsCertificate Name="MyCert" X509FindType="FindByThumbprint" X509FindValue="[YourCertThumbrint]"/>
+  </Certificates>
+</ApplicationManifest>
+```
 
-> [!NOTE] 在 Windows 上从证书存储管理单元中复制证书指纹时，将在证书指纹字符串的开头添加一个不可见的字符。尝试按指纹查找证书时，此不可见字符可能导致出错，因此请务必删除这个附加字符。
+> [!NOTE]
+> 在 Windows 上从证书存储管理单元中复制证书指纹时，将在证书指纹字符串的开头添加一个不可见的字符。尝试按指纹查找证书时，此不可见字符可能导致出错，因此请务必删除这个附加字符。
 
 ### 在服务代码中使用应用程序机密
 
 借助用于访问配置包中 Settings.xml 内的配置值的 API，可以轻松解密 `IsEncrypted` 属性设置为 `true` 的值。由于加密的文本包含用于加密的证书相关信息，因此不需要手动查找证书。只需在运行服务的节点上安装该证书。调用 `DecryptValue()` 方法即可检索原始机密值：
 
-    ConfigurationPackage configPackage = this.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
-    SecureString mySecretValue = configPackage.Settings.Sections["MySettings"].Parameters["MySecret"].DecryptValue()
+```
+ConfigurationPackage configPackage = this.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+SecureString mySecretValue = configPackage.Settings.Sections["MySettings"].Parameters["MySecret"].DecryptValue()
+```
 
 ## 后续步骤
 

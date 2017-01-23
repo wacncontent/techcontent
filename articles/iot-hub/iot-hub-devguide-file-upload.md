@@ -1,24 +1,24 @@
 ---
-title: 开发人员指南 - 文件上载 | Azure
-description: Azure IoT 中心开发人员指南 - 将文件从设备上载到 IoT 中心
+title: 了解 Azure IoT 中心文件上传 | Azure
+description: 开发人员指南 - 使用 IoT 中心的文件上传功能，可将文件从设备上传到 Azure 存储 blob 容器。
 services: iot-hub
-documentationCenter: .net
-authors: dominicbetts
+documentationcenter: .net
+author: dominicbetts
 manager: timlt
 editor: 
 
+ms.assetid: a0427925-3e40-4fcd-96c1-2a31d1ddc14b
 ms.service: iot-hub
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 09/30/2016
-wacn.date: 12/12/2016
+wacn.date: 01/13/2017
 ms.author: dobett
 ---
 
-# 从设备上载文件
-
+# 使用 IoT 中心上传文件
 ## 概述
 
 如 [IoT Hub endpoints][lnk-endpoints]（IoT 中心终结点）一文所述，设备可以通过面向设备的终结点 (**/devices/{deviceId}/files**) 发送通知以启动文件上载。当设备通知 IoT 中心已完成上载时，IoT 中心将生成文件上载通知，你可以通过面向服务的终结点 (**/messages/servicebound/filenotifications**) 将其作为消息接收。
@@ -37,7 +37,8 @@ IoT 中心本身不中转消息，而是充当关联 Azure 存储帐户的调度
 ## <a name="associate-an-azure-storage-account-with-iot-hub"></a> 将 Azure 存储帐户与 IoT 中心相关联
 若要使用文件上传功能，必须首先将 Azure 存储帐户链接到 IoT 中心。可以通过 [Azure 门户预览][lnk-management-portal]实现此操作，或通过 [IoT 中心资源提供程序 REST API][lnk-resource-provider-apis] 以编程方式实现此操作。将 Azure 存储帐户与 IoT 中心关联后，当设备启动文件上传请求时，此服务将向该设备返回 SAS URI。
 
-> [!NOTE] [Azure IoT 中心 SDK][lnk-sdks] 自动处理检索 SAS URI、上载文件和通知 IoT 中心已完成上载。
+> [!NOTE]
+> [Azure IoT 中心 SDK][lnk-sdks] 自动处理检索 SAS URI、上载文件和通知 IoT 中心已完成上载。
 
 ## <a name="initialize-a-file-upload"></a> 初始化文件上传
 
@@ -63,7 +64,8 @@ IoT 中心返回以下内容，供设备用来上载文件：
 
 ### 已弃用：使用 GET 初始化文件上载
 
-> [!NOTE] 本部分介绍已弃用的功能，这些功能用于从 IoT 中心接收 SAS URI。请使用上述 POST 方法。
+> [!NOTE]
+> 本部分介绍已弃用的功能，这些功能用于从 IoT 中心接收 SAS URI。请使用上述 POST 方法。
 
 IoT 中心有两个 REST 终结点支持文件上传，一个用于获取存储空间的 SAS URI，另一个用于通知 IoT 中心已完成上传。设备通过在 `{iot hub}.azure-devices.cn/devices/{deviceId}/files/{filename}` 向 IoT 中心发送 GET 来启动文件上载过程。该中心将返回特定于要上载的文件的 SAS URI，以及上载完成时要使用的相关性 ID。
 
@@ -125,20 +127,18 @@ IoT 中心有两个 REST 终结点支持文件上传，一个用于获取存储�
 | **fileNotifications.maxDeliveryCount** |文件上传通知队列的最大传递计数。 |1 到 100。默认值：100。 |
 
 ## 其他参考资料
+IoT 中心开发人员指南中的其他参考主题包括：
 
-开发人员指南中的其他参考主题包括：
-
-- [IoT 中心终结点][lnk-endpoints]，说明了每个 IoT 中心针对运行时和管理操作公开的各种终结点。
-- [限制和配额][lnk-quotas]，说明了适用于 IoT 中心服务的配额，以及使用服务时预期会碰到的限制行为。
-- [IoT 中心设备和服务 SDK][lnk-sdks]，列出了在开发与 IoT 中心交互的设备和服务应用程序时可以使用的各种语言 SDK。
-- [设备孪生、方法和作业的 IoT 中心查询语言][lnk-query]介绍从 IoT 中心检索有关设备孪生、方法和作业的信息时可以使用的查询语言。
-- [IoT 中心 MQTT 支持][lnk-devguide-mqtt]提供有关 IoT 中心对 MQTT 协议的支持的详细信息。
+* [IoT 中心终结点][lnk-endpoints]，介绍了每个 IoT 中心针对运行时和管理操作公开的各种终结点。
+* [限制和配额][lnk-quotas]，说明了适用于 IoT 中心服务的配额，以及使用服务时预期会碰到的限制行为。
+* [Azure IoT 设备和服务 SDK][lnk-sdks]，列出了在开发与 IoT 中心交互的设备和服务应用时可使用的各种语言 SDK。
+* [设备孪生和作业的 IoT 中心查询语言][lnk-query]，介绍了在 IoT 中心检索设备孪生和作业相关信息时可使用的 IoT 中心查询语言。
+* [IoT 中心 MQTT 支持][lnk-devguide-mqtt]提供有关 IoT 中心对 MQTT 协议的支持的详细信息。
 
 ## 后续步骤
+了解如何使用 IoT 中心从设备上传文件以后，可以根据兴趣参阅以下 IoT 中心开发人员指南主题：
 
-了解如何使用 IoT 中心从设备上载文件以后，可以根据兴趣参阅以下开发人员指南主题：
-
-- [管理 IoT 中心的设备标识][lnk-devguide-identities]
+- [管理 IoT 中心中的设备标识][lnk-devguide-identities]
 - [控制 IoT 中心的访问权限][lnk-devguide-security]
 - [使用设备孪生同步状态和配置][lnk-devguide-device-twins]
 - [在设备上调用直接方法][lnk-devguide-directmethods]
@@ -169,4 +169,5 @@ IoT 中心有两个 REST 终结点支持文件上传，一个用于获取存储�
 [lnk-devguide-directmethods]: ./iot-hub-devguide-direct-methods.md
 [lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
 
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_0109_2017-->
+<!--Update_Description:update wording-->

@@ -36,29 +36,31 @@ ms.author: torsteng
 
 以下代码使用给定的 **ShardMap**（名为*myShardMap*）演示多分片查询的用法。
 
-    using (MultiShardConnection conn = new MultiShardConnection( 
-                                        myShardMap.GetShards(), 
-                                        myShardConnectionString) 
-          ) 
-    { 
-    using (MultiShardCommand cmd = conn.CreateCommand())
-           { 
-            cmd.CommandText = "SELECT c1, c2, c3 FROM ShardedTable"; 
-            cmd.CommandType = CommandType.Text; 
-            cmd.ExecutionOptions = MultiShardExecutionOptions.IncludeShardNameColumn; 
-            cmd.ExecutionPolicy = MultiShardExecutionPolicy.PartialResults; 
+```
+using (MultiShardConnection conn = new MultiShardConnection( 
+                                    myShardMap.GetShards(), 
+                                    myShardConnectionString) 
+      ) 
+{ 
+using (MultiShardCommand cmd = conn.CreateCommand())
+       { 
+        cmd.CommandText = "SELECT c1, c2, c3 FROM ShardedTable"; 
+        cmd.CommandType = CommandType.Text; 
+        cmd.ExecutionOptions = MultiShardExecutionOptions.IncludeShardNameColumn; 
+        cmd.ExecutionPolicy = MultiShardExecutionPolicy.PartialResults; 
 
-            using (MultiShardDataReader sdr = cmd.ExecuteReader()) 
-                { 
-                    while (sdr.Read())
-                        { 
-                            var c1Field = sdr.GetString(0); 
-                            var c2Field = sdr.GetFieldValue<int>(1); 
-                            var c3Field = sdr.GetFieldValue<Int64>(2);
-                        } 
-                 } 
-           } 
-    } 
+        using (MultiShardDataReader sdr = cmd.ExecuteReader()) 
+            { 
+                while (sdr.Read())
+                    { 
+                        var c1Field = sdr.GetString(0); 
+                        var c2Field = sdr.GetFieldValue<int>(1); 
+                        var c3Field = sdr.GetFieldValue<Int64>(2);
+                    } 
+             } 
+       } 
+} 
+```
 
 主要区别在于多分片连接的构建。其中 **SqlConnection** 在单一数据库上进行操作，而 **MultiShardConnection** 将***分片集合***用作其输入。填充分片映射中的分片集合。然后，使用 **UNION ALL** 语义组成一个总体结果，在分片集合上执行查询。或者，也可以在命令上使用 **ExecutionOptions** 属性，将行所源自的分片的名称添加到输出。
 

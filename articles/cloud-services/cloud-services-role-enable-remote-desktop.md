@@ -33,20 +33,21 @@ Azure 经典管理门户使用远程桌面扩展方法，即使在部署应用�
 
     ![云服务远程](./media/cloud-services-role-enable-remote-desktop/CloudServices_Remote.png)  
 
-    > [!WARNING] 首次启用远程桌面并单击“确定”（复选标记）时，所有角色实例会重新启动。为避免重新启动，必须在角色上安装用于对密码进行加密的证书。若要避免重新启动，请[上载云服务的证书](./cloud-services-configure-ssl-certificate.md#step-3-upload-a-certificate)，然后返回到此对话框。
-    
+    > [!WARNING]
+    > 首次启用远程桌面并单击“确定”（复选标记）时，所有角色实例会重新启动。为避免重新启动，必须在角色上安装用于对密码进行加密的证书。若要避免重新启动，请[上载云服务的证书](./cloud-services-configure-ssl-certificate.md#step-3-upload-a-certificate)，然后返回到此对话框。
+
 3. 在“角色”中，选择要更新的角色，或选择“全部”以选择所有角色。
 
 4. 进行以下任何更改：
-    
+
     - 若要启用远程桌面，请选中“启用远程桌面”复选框。若要禁用远程桌面，请清除该复选框。
-    
+
     - 创建一个要在角色实例的远程桌面连接中使用的帐户。
-    
+
     - 更新现有帐户的密码。
-    
+
     - 选择要用于身份验证的已上载证书（使用“证书”页上的“上载”），或者创建新证书。
-    
+
     - 更改远程桌面配置的到期日期。
 
 5. 当你完成配置更新时，请单击“确认”（复选标记）。
@@ -55,7 +56,7 @@ Azure 经典管理门户使用远程桌面扩展方法，即使在部署应用�
 对角色启用远程桌面后，可以通过各种工具远程连接到角色实例。
 
 若要从经典管理门户连接到角色实例，请执行以下操作：
-    
+
   1.   单击“实例”打开“实例”页。
   2.   选择一个已配置远程桌面的角色实例。
   3.   单击“连接”，并按照说明打开桌面。
@@ -89,25 +90,27 @@ Azure 经典管理门户使用远程桌面扩展方法，即使在部署应用�
 
 服务定义文件应类似于下面的示例，并添加 `<Imports>` 元素。
 
-        <ServiceDefinition name="<name-of-cloud-service>" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
-            <WebRole name="WebRole1" vmsize="Small">
-                <Sites>
-                    <Site name="Web">
-                        <Bindings>
-                            <Binding name="Endpoint1" endpointName="Endpoint1" />
-                        </Bindings>
-                    </Site>
-                </Sites>
-                <Endpoints>
-                    <InputEndpoint name="Endpoint1" protocol="http" port="80" />
-                </Endpoints>
-                <Imports>
-                    <Import moduleName="Diagnostics" />
-                    <Import moduleName="RemoteAccess" />
-                    <Import moduleName="RemoteForwarder" />
-                </Imports>
-            </WebRole>
-        </ServiceDefinition>
+```
+    <ServiceDefinition name="<name-of-cloud-service>" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
+        <WebRole name="WebRole1" vmsize="Small">
+            <Sites>
+                <Site name="Web">
+                    <Bindings>
+                        <Binding name="Endpoint1" endpointName="Endpoint1" />
+                    </Bindings>
+                </Site>
+            </Sites>
+            <Endpoints>
+                <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+            </Endpoints>
+            <Imports>
+                <Import moduleName="Diagnostics" />
+                <Import moduleName="RemoteAccess" />
+                <Import moduleName="RemoteForwarder" />
+            </Imports>
+        </WebRole>
+    </ServiceDefinition>
+```
 [ServiceConfiguration.cscfg](./cloud-services-model-and-package.md#cscfg) 文件应类似于下面的示例，请注意 `<ConfigurationSettings>` 和 `<Certificates>` 元素。指定的证书必须 [已上载到云服务](./cloud-services-how-to-create-deploy.md#how-to-upload-a-certificate-for-a-cloud-service)。
 
         <?xml version="1.0" encoding="utf-8"?>

@@ -45,7 +45,8 @@ ms.author: cherylmc
 
 ### 2\.创建新的 ExpressRoute 线路
 
->[!IMPORTANT] 从发布服务密钥的那一刻起，将对 ExpressRoute 线路进行计费。确保连接服务提供商准备好预配线路后就执行此操作。
+>[!IMPORTANT]
+> 从发布服务密钥的那一刻起，将对 ExpressRoute 线路进行计费。确保连接服务提供商准备好预配线路后就执行此操作。
 
 1. 你可以通过选择创建新资源的选项来创建 ExpressRoute 线路。单击“新建”>“网络”>“ExpressRoute”，如下图所示：
 
@@ -64,7 +65,7 @@ ms.author: cherylmc
 **查看所有线路**
 
 在左侧菜单中选择“所有资源”即可查看创建的所有线路。
-    
+
 ![查看线路](./media/expressroute-howto-circuit-portal-resource-manager/listresource.png)
 
 **查看属性**
@@ -104,7 +105,8 @@ ms.author: cherylmc
 
 有关分步说明，请参阅 [ExpressRoute circuit routing configuration](./expressroute-howto-routing-portal-resource-manager.md)（ExpressRoute 线路路由配置）一文，了解如何创建和修改线路对等互连。
 
->[!IMPORTANT] 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IP VPN，如 MPLS），则连接服务提供商将为你配置和管理路由。
+>[!IMPORTANT]
+> 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IP VPN，如 MPLS），则连接服务提供商将为你配置和管理路由。
 
 ### 7\.将虚拟网络链接到 ExpressRoute 线路
 

@@ -1,5 +1,5 @@
 ## NIC
- 
+
 网络接口卡 (NIC) 资源提供与虚拟网络资源中现有子网的网络连接。尽管可以将 NIC 作为独立对象来创建，但你需要将其关联到另一个对象才能实际提供连接。NIC 可以用于将 VM 连接到一个子网、公共 IP 地址或负载均衡器。
 
 |属性|说明|示例值|
@@ -28,49 +28,51 @@ NIC 具有一个名为 **ipConfigurations** 的子对象，包含以下属性：
 
 采用 JSON 格式的示例公共 IP 地址：
 
-    {
-        "name": "lb-nic1-be",
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/networkInterfaces/lb-nic1-be",
-        "etag": "W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"",
-        "type": "Microsoft.Network/networkInterfaces",
-        "location": "eastus",
-        "properties": {
-            "provisioningState": "Succeeded",
-            "resourceGuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            "ipConfigurations": [
-                {
-                    "name": "NIC-config",
-                    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/networkInterfaces/lb-nic1-be/ipConfigurations/NIC-config",
-                    "etag": "W/"0027f1a2-3ac8-49de-b5d5-fd46550500b1"",
-                    "properties": {
-                        "provisioningState": "Succeeded",
-                        "privateIPAddress": "10.0.0.4",
-                        "privateIPAllocationMethod": "Dynamic",
-                        "subnet": {
-                            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/NRPRG/providers/Microsoft.Network/virtualNetworks/NRPVnet/subnets/NRPVnetSubnet"
-                        },
-                        "loadBalancerBackendAddressPools": [
-                            {
-                                "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool"
-                            }
-                        ],
-                        "loadBalancerInboundNatRules": [
-                            {
-                                "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp1"
-                            }
-                        ]
-                    }
+```
+{
+    "name": "lb-nic1-be",
+    "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/networkInterfaces/lb-nic1-be",
+    "etag": "W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"",
+    "type": "Microsoft.Network/networkInterfaces",
+    "location": "eastus",
+    "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "ipConfigurations": [
+            {
+                "name": "NIC-config",
+                "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/networkInterfaces/lb-nic1-be/ipConfigurations/NIC-config",
+                "etag": "W/"0027f1a2-3ac8-49de-b5d5-fd46550500b1"",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAddress": "10.0.0.4",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "subnet": {
+                        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/NRPRG/providers/Microsoft.Network/virtualNetworks/NRPVnet/subnets/NRPVnetSubnet"
+                    },
+                    "loadBalancerBackendAddressPools": [
+                        {
+                            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool"
+                        }
+                    ],
+                    "loadBalancerInboundNatRules": [
+                        {
+                            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp1"
+                        }
+                    ]
                 }
-            ],
-            "dnsSettings": { ... },
-            "macAddress": "00-0D-3A-10-F1-29",
-            "enableIPForwarding": false,
-            "primary": true,
-            "virtualMachine": {
-                "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Compute/virtualMachines/web1"
             }
+        ],
+        "dnsSettings": { ... },
+        "macAddress": "00-0D-3A-10-F1-29",
+        "enableIPForwarding": false,
+        "primary": true,
+        "virtualMachine": {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/nrprg/providers/Microsoft.Compute/virtualMachines/web1"
         }
     }
+}
+```
 
 ### 其他资源
 

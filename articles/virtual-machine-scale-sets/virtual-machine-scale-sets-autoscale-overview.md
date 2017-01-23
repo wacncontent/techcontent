@@ -32,11 +32,13 @@ ms.author: davidmu
 
 在模板中，可以指定容量元素：
 
-    "sku": {
-      "name": "Standard_A0",
-      "tier": "Standard",
-      "capacity": 3
-    },
+```
+"sku": {
+  "name": "Standard_A0",
+  "tier": "Standard",
+  "capacity": 3
+},
+```
 
 容量会识别规模集中的虚拟机数目。您可以部署具有不同值的模板，以便手动更改容量。如果部署模板只是为了更改容量，则可以仅包含具有更新容量的 SKU 元素。
 
@@ -48,40 +50,44 @@ ms.author: davidmu
 
 此示例显示在模板中用来配置诊断扩展的变量：
 
-    "diagnosticsStorageAccountName": "[concat(parameters('resourcePrefix'), 'saa')]",
-    "accountid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/', resourceGroup().name,'/providers/', 'Microsoft.Storage/storageAccounts/', variables('diagnosticsStorageAccountName'))]",
-    "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB="4096" xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter="Error"/> <WindowsEventLog scheduledTransferPeriod="PT1M" > <DataSource name="Application!*[System[(Level = 1 or Level = 2)]]" /> <DataSource name="Security!*[System[(Level = 1 or Level = 2)]]" /> <DataSource name="System!*[System[(Level = 1 or Level = 2)]]" /></WindowsEventLog>",
-    "wadperfcounter": "<PerformanceCounters scheduledTransferPeriod="PT1M"><PerformanceCounterConfiguration counterSpecifier="\\Processor(_Total)\\Thread Count" sampleRate="PT15S" unit="Percent"><annotation displayName="Thread Count" locale="en-us"/></PerformanceCounterConfiguration></PerformanceCounters>",
-    "wadcfgxstart": "[concat(variables('wadlogs'),variables('wadperfcounter'),'<Metrics resourceId="')]",
-    "wadmetricsresourceid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name ,'/providers/','Microsoft.Compute/virtualMachineScaleSets/',parameters('vmssName'))]",
-    "wadcfgxend": "[concat('"><MetricAggregation scheduledTransferPeriod="PT1H"/><MetricAggregation scheduledTransferPeriod="PT1M"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>')]"
+```
+"diagnosticsStorageAccountName": "[concat(parameters('resourcePrefix'), 'saa')]",
+"accountid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/', resourceGroup().name,'/providers/', 'Microsoft.Storage/storageAccounts/', variables('diagnosticsStorageAccountName'))]",
+"wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB="4096" xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter="Error"/> <WindowsEventLog scheduledTransferPeriod="PT1M" > <DataSource name="Application!*[System[(Level = 1 or Level = 2)]]" /> <DataSource name="Security!*[System[(Level = 1 or Level = 2)]]" /> <DataSource name="System!*[System[(Level = 1 or Level = 2)]]" /></WindowsEventLog>",
+"wadperfcounter": "<PerformanceCounters scheduledTransferPeriod="PT1M"><PerformanceCounterConfiguration counterSpecifier="\\Processor(_Total)\\Thread Count" sampleRate="PT15S" unit="Percent"><annotation displayName="Thread Count" locale="en-us"/></PerformanceCounterConfiguration></PerformanceCounters>",
+"wadcfgxstart": "[concat(variables('wadlogs'),variables('wadperfcounter'),'<Metrics resourceId="')]",
+"wadmetricsresourceid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name ,'/providers/','Microsoft.Compute/virtualMachineScaleSets/',parameters('vmssName'))]",
+"wadcfgxend": "[concat('"><MetricAggregation scheduledTransferPeriod="PT1H"/><MetricAggregation scheduledTransferPeriod="PT1M"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>')]"
+```
 
 部署模板时需要提供参数。在此示例中，提供了存储帐户（在其中存储数据）和规模集（从其中收集数据）的名称。此外，在此 Windows Server 示例中，只会收集 Thread Count 性能计数器。Windows 或 Linux 中所有可用的性能计数器都可以用来收集诊断信息，并且可以包含在扩展配置中。
 
 此示例显示模板中扩展的定义：
 
-    "extensionProfile": {
-      "extensions": [
-        {
-          "name": "Microsoft.Insights.VMDiagnosticsSettings",
-          "properties": {
-            "publisher": "Microsoft.Azure.Diagnostics",
-            "type": "IaaSDiagnostics",
-            "typeHandlerVersion": "1.5",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "xmlCfg": "[base64(concat(variables('wadcfgxstart'),variables('wadmetricsresourceid'),variables('wadcfgxend')))]",
-              "storageAccount": "[variables('diagnosticsStorageAccountName')]"
-            },
-            "protectedSettings": {
-              "storageAccountName": "[variables('diagnosticsStorageAccountName')]",
-              "storageAccountKey": "[listkeys(variables('accountid'), variables('apiVersion')).key1]",
-              "storageAccountEndPoint": "https://core.chinacloudapi.cn"
-            }
-          }
+```
+"extensionProfile": {
+  "extensions": [
+    {
+      "name": "Microsoft.Insights.VMDiagnosticsSettings",
+      "properties": {
+        "publisher": "Microsoft.Azure.Diagnostics",
+        "type": "IaaSDiagnostics",
+        "typeHandlerVersion": "1.5",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "xmlCfg": "[base64(concat(variables('wadcfgxstart'),variables('wadmetricsresourceid'),variables('wadcfgxend')))]",
+          "storageAccount": "[variables('diagnosticsStorageAccountName')]"
+        },
+        "protectedSettings": {
+          "storageAccountName": "[variables('diagnosticsStorageAccountName')]",
+          "storageAccountKey": "[listkeys(variables('accountid'), variables('apiVersion')).key1]",
+          "storageAccountEndPoint": "https://core.chinacloudapi.cn"
         }
-      ]
+      }
     }
+  ]
+}
+```
 
 当诊断扩展运行时，会将数据收集到一个表中，该表位于您指定的存储帐户中。在 WADPerformanceCounters 表中，可以找到收集的数据：
 
@@ -93,70 +99,72 @@ autoscaleSettings 资源使用诊断扩展中的信息，以决定是增加规�
 
 此示例显示模板中资源的配置：
 
-    {
-      "type": "Microsoft.Insights/autoscaleSettings",
-      "apiVersion": "2015-04-01",
-      "name": "[concat(parameters('resourcePrefix'),'as1')]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachineScaleSets/',parameters('vmSSName'))]"
-      ],
-      "properties": {
-        "enabled": true,
-        "name": "[concat(parameters('resourcePrefix'),'as1')]",
-        "profiles": [
+```
+{
+  "type": "Microsoft.Insights/autoscaleSettings",
+  "apiVersion": "2015-04-01",
+  "name": "[concat(parameters('resourcePrefix'),'as1')]",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [
+    "[concat('Microsoft.Compute/virtualMachineScaleSets/',parameters('vmSSName'))]"
+  ],
+  "properties": {
+    "enabled": true,
+    "name": "[concat(parameters('resourcePrefix'),'as1')]",
+    "profiles": [
+      {
+        "name": "Profile1",
+        "capacity": {
+          "minimum": "1",
+          "maximum": "10",
+          "default": "1"
+        },
+        "rules": [
           {
-            "name": "Profile1",
-            "capacity": {
-              "minimum": "1",
-              "maximum": "10",
-              "default": "1"
+            "metricTrigger": {
+              "metricName": "\\Process(_Total)\\Thread Count",
+              "metricNamespace": "",
+              "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
+              "timeGrain": "PT1M",
+              "statistic": "Average",
+              "timeWindow": "PT5M",
+              "timeAggregation": "Average",
+              "operator": "GreaterThan",
+              "threshold": 650
             },
-            "rules": [
-              {
-                "metricTrigger": {
-                  "metricName": "\\Process(_Total)\\Thread Count",
-                  "metricNamespace": "",
-                  "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
-                  "timeGrain": "PT1M",
-                  "statistic": "Average",
-                  "timeWindow": "PT5M",
-                  "timeAggregation": "Average",
-                  "operator": "GreaterThan",
-                  "threshold": 650
-                },
-                "scaleAction": {
-                  "direction": "Increase",
-                  "type": "ChangeCount",
-                  "value": "1",
-                  "cooldown": "PT5M"
-                }
-              },
-              {
-                "metricTrigger": {
-                  "metricName": "\\Process(_Total)\\Thread Count",
-                  "metricNamespace": "",
-                  "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
-                  "timeGrain": "PT1M",
-                  "statistic": "Average",
-                  "timeWindow": "PT5M",
-                  "timeAggregation": "Average",
-                  "operator": "LessThan",
-                  "threshold": 550
-                },
-                "scaleAction": {
-                  "direction": "Decrease",
-                  "type": "ChangeCount",
-                  "value": "1",
-                  "cooldown": "PT5M"
-                }
-              }
-            ]
+            "scaleAction": {
+              "direction": "Increase",
+              "type": "ChangeCount",
+              "value": "1",
+              "cooldown": "PT5M"
+            }
+          },
+          {
+            "metricTrigger": {
+              "metricName": "\\Process(_Total)\\Thread Count",
+              "metricNamespace": "",
+              "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
+              "timeGrain": "PT1M",
+              "statistic": "Average",
+              "timeWindow": "PT5M",
+              "timeAggregation": "Average",
+              "operator": "LessThan",
+              "threshold": 550
+            },
+            "scaleAction": {
+              "direction": "Decrease",
+              "type": "ChangeCount",
+              "value": "1",
+              "cooldown": "PT5M"
+            }
           }
-        ],
-        "targetResourceUri": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]"
+        ]
       }
-    }
+    ],
+    "targetResourceUri": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]"
+  }
+}
+```
 
 在上述示例中，创建了两个规则来定义自动缩放操作。第一个规则定义扩大操作，第二个规则定义缩小操作。在规则中提供了这些值：
 
@@ -183,11 +191,13 @@ autoscaleSettings 资源使用诊断扩展中的信息，以决定是增加规�
 
 触发扩大操作，使规模集的容量增加 1：
 
-    "sku": {
-      "name": "Standard_A0",
-      "tier": "Standard",
-      "capacity": 4
-    },
+```
+"sku": {
+  "name": "Standard_A0",
+  "tier": "Standard",
+  "capacity": 4
+},
+```
 
 向规模集添加一个虚拟机。
 
@@ -206,9 +216,11 @@ autoscaleSettings 资源使用诊断扩展中的信息，以决定是增加规�
 - [Azure 门户预览](https://portal.azure.cn) - 当前使用门户可获取有限数量的信息。
 - Azure PowerShell - 使用此命令可获取一些信息：
 
-        Get-AzureRmResource -name vmsstest1 -ResourceGroupName vmsstestrg1 -ResourceType Microsoft.Compute/virtualMachineScaleSets -ApiVersion 2015-06-15
-        Get-Autoscalesetting -ResourceGroup rainvmss -DetailedOutput
-        
+    ```
+    Get-AzureRmResource -name vmsstest1 -ResourceGroupName vmsstestrg1 -ResourceType Microsoft.Compute/virtualMachineScaleSets -ApiVersion 2015-06-15
+    Get-Autoscalesetting -ResourceGroup rainvmss -DetailedOutput
+    ```
+
 - 就像连接任何其他虚拟机一样连接到 jumpbox 虚拟机，然后可以远程访问规模集中的虚拟机，以监视单个进程。
 
 ## 后续步骤

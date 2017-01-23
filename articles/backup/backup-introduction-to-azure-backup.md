@@ -20,7 +20,7 @@ ms.author: jimpark; trinadhk
 ---
 
 # 什么是 Azure 备份？
-Azure 备份是基于 Azure 的服务，可用于备份（或保护）和还原 Microsoft 云中的数据。Azure 备份取代了现有的本地或异地备份解决方案，并且是可靠、安全、高性价比的基于云的解决方案。Azure 备份提供多个组件，可将其下载并部署到适当的计算机、服务器或云中。可根据要保护的内容选择部署的组件或代理。无论是保护本地数据还是云数据，所有 Azure 备份组件均可用于将数据备份到 Azure 的备份保管库中。请参阅本文稍后提供的 [Azure 备份组件表格](./backup-introduction-to-azure-backup.md#which-azure-backup-components-should-i-use/)，了解保护特定数据、应用程序或工作负荷所用的组件。
+Azure 备份是基于 Azure 的服务，可用于备份（或保护）和还原 Microsoft 云中的数据。Azure 备份取代了现有的本地或异地备份解决方案，并且是可靠、安全、高性价比的基于云的解决方案。Azure 备份提供多个组件，可将其下载并部署到适当的计算机、服务器或云中。可根据要保护的内容选择部署的组件或代理。无论是保护本地数据还是云数据，所有 Azure 备份组件均可用于将数据备份到 Azure 的备份保管库中。请参阅本文稍后提供的 [Azure 备份组件表格](./backup-introduction-to-azure-backup.md#which-azure-backup-components-should-i-use)，了解保护特定数据、应用程序或工作负荷所用的组件。
 
 ## 为何使用 Azure 备份？
 传统的备份解决方案已演变成将云视为类似于磁盘/磁带的终结点或静态存储目标。该方法很简单，但用途有限，不能充分利用基础云平台，由此变成了一种效率低的昂贵解决方案。其他解决方案也很昂贵，因为你最终会为错误的存储类型或不需要的存储投资。其他解决方案的效率通常不高，因为它们不会提供所需的存储类型/存储量，或者管理任务需要耗费太多时间。与此相反，Azure 备份具有以下主要优势：
@@ -29,7 +29,7 @@ Azure 备份是基于 Azure 的服务，可用于备份（或保护）和还原 
 
 **无限缩放** - Azure 备份利用 Azure 云的基础功能和无限缩放功能实现高可用性 - 无需维护或监视开销。可设置警报来获取相关事件信息，但无需担忧云数据的高可用性。
 
-**多种存储选项** - 高可用性的一个方面是存储复制。Azure 备份提供两种类型的复制：[本地冗余存储](../storage/storage-redundancy.md#locally-redundant-storage/)和[异地复制存储](../storage/storage-redundancy.md#geo-redundant-storage/)。根据需要选择备份存储选项：
+**多种存储选项** - 高可用性的一个方面是存储复制。Azure 备份提供两种类型的复制：[本地冗余存储](../storage/storage-redundancy.md#locally-redundant-storage)和[异地复制存储](../storage/storage-redundancy.md#geo-redundant-storage)。根据需要选择备份存储选项：
 
 - 本地冗余存储 (LRS) 将同一区域的配对数据中心内的数据复制三次（创建三个数据副本）。LRS 选项成本低廉，适合注重价格的客户，因为它保护数据免受本地硬件故障的损害。
 - 异地复制存储 (GRS) 将数据复制在源数据主位置数英里之外的次要区域中。GRS 的成本比 LRS 的高，但它可让数据更为持久，即使出现区域性中断也是如此。
@@ -93,9 +93,10 @@ Azure 备份可保护高级存储 VM。Azure 高级存储是基于固态硬盘 (
 ### 备份高级存储 VM <a name="back-up-and-restore-premium-storage-vms"></a>
 在备份高级存储 VM 时，备份服务在高级存储帐户中创建临时暂存位置。名为“AzureBackup-”的暂存位置相当于连接到 VM 的高级磁盘的数据大小总计。
 
->[!NOTE] 请不要修改或编辑暂存位置。
+>[!NOTE]
+> 请不要修改或编辑暂存位置。
 
-备份作业完成后，将删除暂存位置。用于暂存位置的存储的价格与所有[高级存储定价](../storage/storage-premium-storage.md#pricing-and-billing/)一致。
+备份作业完成后，将删除暂存位置。用于暂存位置的存储的价格与所有[高级存储定价](../storage/storage-premium-storage.md#pricing-and-billing)一致。
 
 ### 还原高级存储 VM
 可以将高级存储 VM 还原为高级存储或常规存储。将高级存储 VM 的恢复点还原到高级存储是典型的还原过程。但是，将高级存储 VM 的恢复点还原到标准存储更符合成本效益。如果需要 VM 中的一部分文件，可以使用这种还原类型。

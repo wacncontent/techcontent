@@ -37,17 +37,19 @@ This course will help you to understand how to use the Azure portal to quickly c
 - [Subsequent steps](#nextstep)
 
 ##<a id="step1"></a>Step 1: Sign in to the Azure portal and create a MySQL server
-1.	Sign in to the Azure portal, and then select MySQL Database on Azure in the navigation bar on the right. 
-2.	Click “Create” at the bottom of the page. A list of content that can be created will then be displayed.
-3.	Click “MySQL Database on Azure,” and then click on “Quick Create.”
- 
+1. Sign in to the Azure portal, and then select MySQL Database on Azure in the navigation bar on the right. 
+2. Click “Create” at the bottom of the page. A list of content that can be created will then be displayed.
+3. Click “MySQL Database on Azure,” and then click on “Quick Create.”
+
 ![Creating MySQL servers](./media/mysql-database-get-started/create-mysql-server-en.png)
 
->[!NOTE]**Your username is composed of “server name%username”. Ensure that you fill in the complete username when you connect to the database. **
+>[!NOTE]
+>**Your username is composed of “server name%username”. Ensure that you fill in the complete username when you connect to the database. **
 
 Enter the parameters that are required to create a new server, and then click “Create.” In a minute or two, you will have a new MySQL server.
 
->[!NOTE]** We strongly recommend that you put Azure services in the same region and select the location closest to you. **
+>[!NOTE]
+>** We strongly recommend that you put Azure services in the same region and select the location closest to you. **
 
 ##<a id="step2"></a>Step 2: Configure the firewall
 Before you connect to MySQL Database on Azure from your client for the first time, you must configure the firewall and add the client’s public network IP address (or IP address range) to the whitelist. In the portal, click your instance, and then click “Configure.” You can then add the IP addresses by using the interface below.
@@ -68,7 +70,8 @@ Users can create multiple databases within a MySQL server. There is no limit to 
 
 ##<a id="step5"></a>Step 5: Connect to the database
 You can find the server address by using the “dashboard” in the Azure portal, and can connect to your MySQL Database on Azure database by using the app.
->[!NOTE]MySQL Database on Azure supports SSL connections. If your app is not in the same Azure datacenter as the MySQL database, we recommend that you use SSL connections to increase security.
+>[!NOTE]
+>MySQL Database on Azure supports SSL connections. If your app is not in the same Azure datacenter as the MySQL database, we recommend that you use SSL connections to increase security.
 
 ##<a id="step6"></a>Step 6: Migrate data (optional)
 If you need to migrate the database from another location to MySQL Database on Azure and the amount of data involved is considerable, we recommend using the following migration procedure. 

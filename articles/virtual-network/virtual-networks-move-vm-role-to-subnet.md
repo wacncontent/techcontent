@@ -27,30 +27,36 @@ ms.author: jdial
 
 若要移动 VM，请使用以下示例作为模板运行 Set-AzureSubnet PowerShell cmdlet。在以下示例中，要将 TestVM 从其当前的子网移到 Subnet-2。请务必编辑此示例以反映所处环境。请注意，每当在过程中运行 Update-AzureVM cmdlet 时，都会在更新过程中重新启动 VM。
 
-    Get-AzureVM –ServiceName TestVMCloud –Name TestVM `
-    | Set-AzureSubnet –SubnetNames Subnet-2 `
-    | Update-AzureVM
+```
+Get-AzureVM –ServiceName TestVMCloud –Name TestVM `
+| Set-AzureSubnet –SubnetNames Subnet-2 `
+| Update-AzureVM
+```
 
 如果为 VM 指定了静态 DIP，则必须清除该设置，然后才能将 VM 移到新子网。在这种情况下，请使用以下代码：
 
-    Get-AzureVM -ServiceName TestVMCloud -Name TestVM `
-    | Remove-AzureStaticVNetIP `
-    | Update-AzureVM
-    Get-AzureVM -ServiceName TestVMCloud -Name TestVM `
-    | Set-AzureSubnet -SubnetNames Subnet-2 `
-    | Update-AzureVM
+```
+Get-AzureVM -ServiceName TestVMCloud -Name TestVM `
+| Remove-AzureStaticVNetIP `
+| Update-AzureVM
+Get-AzureVM -ServiceName TestVMCloud -Name TestVM `
+| Set-AzureSubnet -SubnetNames Subnet-2 `
+| Update-AzureVM
+```
 
 ## 将角色实例移到另一个子网
 
 若要移动角色实例，请编辑 CSCFG 文件。在以下示例中，要将虚拟网络 *VNETName* 中的“Role0”从其当前的子网移到 *Subnet-2*。由于已部署角色实例，只需将子网名称更改为“Subnet-2”。请务必编辑此示例以反映所处环境。
 
-    <NetworkConfiguration>
-        <VirtualNetworkSite name="VNETName" />
-        <AddressAssignments>
-           <InstanceAddress roleName="Role0">
-                <Subnets><Subnet name="Subnet-2" /></Subnets>
-           </InstanceAddress>
-        </AddressAssignments>
-    </NetworkConfiguration> 
+```
+<NetworkConfiguration>
+    <VirtualNetworkSite name="VNETName" />
+    <AddressAssignments>
+       <InstanceAddress roleName="Role0">
+            <Subnets><Subnet name="Subnet-2" /></Subnets>
+       </InstanceAddress>
+    </AddressAssignments>
+</NetworkConfiguration> 
+```
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

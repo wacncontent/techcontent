@@ -48,7 +48,9 @@ If your system can accept a relatively long period of downtime (for example, 1-2
 
 7\. Export the application database from the current database server to a file. You can use a tool that you are familiar with, such as mysqldump or Workbench. The following example uses mysqldump to export a database:
 
-    mysqldump --databases <database name> --single-transaction --order-by-primary -r <backup file name> --routines -h<server address> -P<port number> –u<user name> -p<password> 
+```
+mysqldump --databases <database name> --single-transaction --order-by-primary -r <backup file name> --routines -h<server address> -P<port number> –u<user name> -p<password> 
+```
 
 8\. If the database file is relatively large, first transfer the database file to a VM (which should be in the same data center) on Azure. You can do this using a data transfer tool that you are familiar with, such as FTP or AzCopy. This method prevents the entire database transfer process from failing if the Internet connection drops out. If the backup file is very large, you can compress it before uploading.
 
@@ -56,11 +58,15 @@ If your system can accept a relatively long period of downtime (for example, 1-2
 
 9\.1 Connect to the newly created MySQL server on your client using mysql.exe (note: if you are not importing the data from a VM on Azure, you need to add the client to the IP safe list):
 
-    mysql -h<server address> -P<port number> –u<user name> -p<password>
- 
+```
+mysql -h<server address> -P<port number> –u<user name> -p<password>
+```
+
 9\.2 Import the data from the SQL command line:
 
-    source <backup file name>; 
+```
+source <backup file name>; 
+```
 
 10\. Direct the newly deployed application to the migrated database and complete the remaining application migration steps.
 
@@ -70,21 +76,24 @@ Database import and export is relatively simple, but involves a relatively long 
 
 1\. Synchronize the database to MySQL Database on Azure. You can configure the database server running on MySQL Database on Azure as a subordinate server. For the specific steps involved in configuring and synchronizing databases, see Configure SQL Data Sync to replicate to MySQL Database on Azure.
 
->[!NOTE] **Note: You will need to open up external access to the current database server. We strongly recommend that you configure SSL and only permit external access using SSL.**
+>[!NOTE]
+> **Note: You will need to open up external access to the current database server. We strongly recommend that you configure SSL and only permit external access using SSL.**
 
 2\. Deploy the new application on Azure and direct it to the newly created database on Azure.
 
-[!WARNING] As the database on Azure is running in read-only mode at this time, the functionality of the application may be limited.
+>[!WARNING]
+> As the database on Azure is running in read-only mode at this time, the functionality of the application may be limited.
 
 3\. Confirm that the database on Azure has reached a synchronized state. You can confirm the synchronization status based on the replication status and latency on the replication page.
 ![Migrate][1]
 
 4\. Close the old application or make the application run in read-only mode (if it supports read-only mode).
-    
+
 5\. Stop the database synchronization replication. Click **Disable**, and then save on the page below.
 ![Migrate][2]
 
->[!NOTE] **Note: This operation restarts the database server.**
+>[!NOTE]
+> **Note: This operation restarts the database server.**
 
 6\. Enable the new application.
 

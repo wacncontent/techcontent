@@ -49,7 +49,7 @@ ms.author: glenga
 + [移动服务 .NET 操作方法概念性参考](./mobile-services-dotnet-how-to-use-client-library.md)
 
      了解有关如何将移动服务与 .NET 一起使用的详细信息
- 
+
 <!-- Anchors. -->
 [Install the Storage Client library]: #install-storage-client
 [Update the client app to capture images]: #add-select-images
@@ -66,5 +66,5 @@ ms.author: glenga
 [Azure 经典管理门户]: https://manage.windowsazure.cn
 [How To Create a Storage Account]: ../storage/storage-create-storage-account.md
 [Azure Storage Client library for Store apps]: http://go.microsoft.com/fwlink/p/?LinkId=276866
- 
+
 <!---HONumber=Mooncake_0118_2016-->

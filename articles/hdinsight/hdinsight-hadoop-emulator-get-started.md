@@ -51,29 +51,38 @@ ms.author: nitinme
 
 1. 在“Hortonworks 沙盒”页的“开始”步骤中，选择“查看高级选项”。使用此页上的信息通过 SSH 登录到沙盒。使用提供的名称和密码。
 
-    > [!NOTE] 如果未安装 SSH 客户端，可以使用虚拟机在 \_\_http://localhost:4200/__ 上提供的基于 Web 的 SSH。
+    > [!NOTE]
+    > 如果未安装 SSH 客户端，可以使用虚拟机在 \_\_http://localhost:4200/__ 上提供的基于 Web 的 SSH。
 
     首次使用 SSH 建立连接时，系统会提示更改 root 帐户的密码。输入新密码，将来使用 SSH 登录时要用到它。
 
 2. 登录后，请输入以下命令：
 
-        ambari-admin-password-reset
-    
+    ```
+    ambari-admin-password-reset
+    ```
+
     出现提示时，请提供 Ambari 管理员帐户的密码。访问 Ambari Web UI 时要用到此密码。
 
 ## 使用 hive 命令
 
 1. 与沙盒建立 SSH 连接后，使用以下命令启动 Hive shell：
 
-        hive
+    ```
+    hive
+    ```
 
 2. 启动 shell 后，使用以下命令查看随沙盒一起提供的表：
 
-        show tables;
+    ```
+    show tables;
+    ```
 
 3. 使用以下命令检索 `sample_07` 表中的 10 行数据：
 
-        select * from sample_07 limit 10;
+    ```
+    select * from sample_07 limit 10;
+    ```
 
 ## 后续步骤
 

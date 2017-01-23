@@ -42,19 +42,19 @@ ms.author: huvalo
 
 1. 在 Visual Studio 中，依次选择“文件”和“新建项目”。
 2. 可以从“Python”>“示例”下面获取“[Python Tools 2.2 for Visual Studio 示例 VSIX]”中的项目模板。选择“轮询 Flask Web 项目”，然后单击“确定”创建项目。
-   
+
      ![新建项目对话框](./media/web-sites-python-ptvs-flask-table-storage/PollsFlaskNewProject.png)
 3. 系统将提示安装外部软件包。选择“安装到虚拟环境”。
-   
+
      ![外部包对话框](./media/web-sites-python-ptvs-flask-table-storage/PollsFlaskExternalPackages.png)  
 
 4. 选择“Python 2.7”或“Python 3.4”作为基础解释器。
-   
+
      ![添加虚拟环境对话框](./media/web-sites-python-ptvs-flask-table-storage/PollsCommonAddVirtualEnv.png)  
 
 5. 按 `F5` 确认应用程序可正常运行。默认情况下，该应用程序使用内存中存储库，不需要任何配置。停止 web 服务器时，所有数据都会丢失。
 6. 单击“创建样本轮询”，然后单击一个轮询进行投票。
-   
+
      ![Web 浏览器](./media/web-sites-python-ptvs-flask-table-storage/PollsFlaskInMemoryBrowser.png)  
 
 ## 创建 Azure 存储帐户
@@ -62,40 +62,42 @@ ms.author: huvalo
 
 1. 登录到 [Azure 门户预览](https://portal.azure.cn/)。
 2. 单击门户左下角的“新建”图标，然后单击“数据 + 存储”>“存储帐户”。单击“创建”，然后为存储帐户指定一个唯一名称，并为其新建一个[资源组](../azure-resource-manager/resource-group-overview.md)。
-   
+
       ![快速创建](./media/web-sites-python-ptvs-flask-table-storage/PollsCommonAzureStorageCreate.png)  
 
     创建存储帐户后，**通知**按钮将呈绿色闪烁**成功**，且存储帐户的边栏选项卡处于打开状态以显示你创建的新资源组。
 3. 在存储帐户的边栏选项卡中单击“访问密钥”部分。记下帐户名和 key1。
-   
+
       ![密钥](./media/web-sites-python-ptvs-flask-table-storage/PollsCommonAzureStorageKeys.png)
-   
+
     我们需要使用此信息在下一部分中配置你的项目。
 
 ## 配置项目
 在此部分中，我们将配置应用程序以使用我们刚刚创建的存储帐户。我们将了解如何从 Azure 门户预览中获取连接设置。然后我们将在本地运行应用程序。
 
 1. 在 Visual Studio 中，右键单击“解决方案资源管理器”中的项目节点，然后选择“属性”。单击“调试”选项卡。
-   
+
      ![项目调试设置](./media/web-sites-python-ptvs-flask-table-storage/PollsFlaskAzureTableStorageProjectDebugSettings.png)
 2. 在**调试服务器命令**、**环境**中设置应用程序所需的环境变量的值。
-   
-        REPOSITORY\_NAME=azuretablestorage
-        STORAGE\_NAME=<存储帐户名称>
-        STORAGE\_KEY=<主访问密钥>
-   
+
+    ```
+    REPOSITORY\_NAME=azuretablestorage
+    STORAGE\_NAME=<存储帐户名称>
+    STORAGE\_KEY=<主访问密钥>
+    ```
+
     当您**开始调试**时，这便会设置环境变量。如果想在**启动但不调试**时设置变量，请在**运行服务器命令**下设置相同的值。
-   
+
     还可以使用 Windows 控制面板来定义环境变量。如果不想将凭据存储在源代码中/项目文件中，这是更好的选择。请注意，需要重新启动 Visual Studio 以使新环境值可用于应用程序。
 3. 实施 Azure 表存储库的代码位于 **models/azuretablestorage.py** 中。请参阅[文档]以了解如何从 Python 使用表服务的更多信息。
 4. 使用 `F5` 运行应用程序。使用“创建样本轮询”创建的轮询以及通过投票提交的数据会在 Azure 表存储中进行序列化。
-   
+
     > [!NOTE]
     在 Visual Studio 中，Python 2.7 虚拟环境可能会导致异常中断。按 `F5` 继续加载该 Web 项目。
     > 
     > 
 5. 转到“关于”页面，验证应用程序是否在使用 **Azure 表存储库**。
-   
+
      ![Web 浏览器](./media/web-sites-python-ptvs-flask-table-storage/PollsFlaskAzureTableStorageAbout.png)  
 
 ## 了解 Azure 表存储
@@ -107,24 +109,24 @@ ms.author: huvalo
 > 
 
 1. 打开“云资源管理器”。依次展开“Azure”、你的存储帐户、“表”。
-   
+
      ![云资源管理器](./media/web-sites-python-ptvs-bottle-table-storage/PollsCommonServerExplorer.png)  
 
 2. 双击“轮询”或“选择”表，在文档窗口中查看表的内容，以及添加/删除/编辑实体。
-   
+
      ![表查询结果](./media/web-sites-python-ptvs-bottle-table-storage/PollsCommonServerExplorerTable.png)
 
 ## 将 Web 应用发布到 Azure App Service
 借助 Azure.NET SDK，可以轻松将 Web 应用部署到 Azure App Service 中。
 
 1. 在“解决方案资源管理器”中，右键单击项目节点，然后选择“发布”。
-   
+
      ![发布 Web 对话框](./media/web-sites-python-ptvs-bottle-table-storage/PollsCommonPublishWebSiteDialog.png)  
 
 2. 单击“Azure Web 应用”。
 3. 单击“新建”，新建一个 Web 应用。
 4. 填写以下字段，然后单击“创建”。
-   
+
     * **Web 应用名称**
     * **App Service 计划**
     * **资源组**
@@ -132,7 +134,7 @@ ms.author: huvalo
     * 保持“数据库服务器”的“无数据库”设置不变
 5. 接受其他所有默认值，然后单击**发布**。
 6. 此时，Web 浏览器会自动打开已发布的 Web 应用。如果您转到“关于”页面，则会看到它使用的是**内存**存储库，而不是 **Azure 表存储库**。
-   
+
     这是因为未在 Azure App Service 的 Web 应用实例上设置环境变量，因此它使用的是 **settings.py** 中指定的默认值。
 
 ## 配置 Web 应用实例
@@ -141,13 +143,13 @@ ms.author: huvalo
 1.  在 [Azure 门户预览](https://portal.azure.cn)中，单击“浏览”>“应用服务”和 Web 应用名称，打开 Web 应用的边栏选项卡。
 2. 在 Web 应用的边栏选项卡中，依次单击“所有设置”和“应用程序设置”。
 3. 向下滚动到“应用设置”部分并设置 **REPOSITORY\_NAME**、**STORAGE\_NAME** 和 **STORAGE\_KEY** 的值（如上面**配置项目**部分中所述）。
-   
+
      ![应用设置](./media/web-sites-python-ptvs-bottle-table-storage/PollsCommonWebSiteConfigureSettingsTableStorage.png)
 4. 单击“保存”。收到更改已应用的通知后，单击 Web 应用主边栏选项卡中的“浏览”。
 5. 您应该会看到 Web 应用使用 **Azure 表存储库**按预期方式运行。
-   
+
     祝贺你！
-   
+
      ![Web Browser](./media/web-sites-python-ptvs-flask-table-storage/PollsFlaskAzureBrowser.png)
 
 ## 后续步骤
@@ -186,7 +188,7 @@ ms.author: huvalo
 [在 Azure 中进行远程调试]: http://go.microsoft.com/fwlink/?LinkId=624026
 [Web 项目]: http://go.microsoft.com/fwlink/?LinkId=624027
 [云服务项目]: http://go.microsoft.com/fwlink/?LinkId=624028
-[Azure 存储空间]: ../storage/index.md/
+[Azure 存储空间]: ../storage/index.md
 [Azure SDK for Python]: https://github.com/Azure/azure-sdk-for-python
- 
+
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

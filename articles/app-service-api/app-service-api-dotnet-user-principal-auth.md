@@ -57,7 +57,7 @@ ms.author: rachelap
 5. 选择一个或多个**身份验证提供程序**。
 
     下图显示要求所有调用方必须经过 Azure AD 身份验证的选项。
- 
+
     ![Azure 门户预览中的“身份验证/授权”边栏选项卡](./media/app-service-api-dotnet-user-principal-auth/authblade.png)
 
     选择身份验证提供程序后，门户将显示该提供程序的配置边栏选项卡。
@@ -80,12 +80,13 @@ ms.author: rachelap
 
 如果想要遵循本教程，但又不想完成第一篇和第二篇教程，请执行以下步骤，其中说明了如何开始使用自动化过程部署示例应用程序。
 
->[!NOTE] 执行以下步骤可以建立学习起点，就好像已完成前两篇教程一样，但只有一点例外：Visual Studio 不知道每个项目已部署到哪些 Web 应用或 API 应用。这意味着，无法在本教程中获得有关如何部署到正确目标的确切说明。如果不太了解自行部署的步骤，最好遵循系列教程中的[第一篇教程](./app-service-api-dotnet-get-started.md)，而不要从此自动化部署过程开始。
+>[!NOTE]
+> 执行以下步骤可以建立学习起点，就好像已完成前两篇教程一样，但只有一点例外：Visual Studio 不知道每个项目已部署到哪些 Web 应用或 API 应用。这意味着，无法在本教程中获得有关如何部署到正确目标的确切说明。如果不太了解自行部署的步骤，最好遵循系列教程中的[第一篇教程](./app-service-api-dotnet-get-started.md)，而不要从此自动化部署过程开始。
 
 1. 确保满足[第一篇教程](./app-service-api-dotnet-get-started.md)中所列的所有先决条件。除了所列的先决条件以外，这些身份验证教程还假设读者在 Visual Studio 和 Azure 门户预览中用过应用服务 Web 应用和 API 应用。
 
 2. 在[待办事项列表示例存储库自述文件](https://github.com/azure-samples/app-service-api-dotnet-todo-list/blob/master/readme.md)中单击“部署到 Azure”按钮，部署 API 应用和 Web 应用。记下创建的 Azure 资源组，因为稍后可以用它来查找 Web 应用和 API 应用名称。
- 
+
 3. 下载或克隆[待办事项示例存储库](https://github.com/Azure-Samples/app-service-api-dotnet-todo-list)，获取要在 Visual Studio 中本地使用的代码。
 
 ## <a id="azureauth"></a>在应用服务和 Azure AD 中设置身份验证
@@ -97,7 +98,7 @@ ms.author: rachelap
 * 配置 Azure AD 应用程序，使其在登录后将持有者令牌发送到 AngularJS 前端。
 
 如果遵循教程指导时遇到问题，请参阅教程末尾的[故障排除](#troubleshooting)部分。
- 
+
 ### 为中间层 API 应用配置身份验证
 
 1. 在 [Azure 门户预览](https://portal.azure.cn/)中，导航到要为 ToDoListAPI 项目创建的 API 应用的“设置”边栏选项卡，找到“功能”部分，然后单击“身份验证/授权”。
@@ -127,7 +128,7 @@ ms.author: rachelap
     ![Azure 门户预览中的 Azure AD 设置](./media/app-service-api-dotnet-user-principal-auth/aadsettings2.png)
 
     Azure 将自动在 Azure AD 租户中创建使用指定名称的 Azure AD 应用程序。默认情况下，Azure AD 应用程序的名称与 API 应用相同。如果需要，也可以输入不同的名称。
- 
+
 7. 单击**“确定”**。
 
 7. 在“身份验证/授权”边栏选项卡中，单击“保存”。
@@ -154,7 +155,8 @@ ms.author: rachelap
 
 配置 Azure AD 身份验证时，应用服务已创建 Azure AD 应用程序。默认情况下，新 Azure AD 应用程序配置为将持有者令牌提供给 API 应用的 URL。在本部分，将 Azure AD 应用程序配置为向 AngularJS 前端提供持有者令牌，而不是直接提供给中间层 API 应用。AngularJS 前端在调用 API 应用时，会将令牌发送到 API 应用。
 
->[!NOTE] 为了尽可能简化过程，本教程为前端和中间层 API 应用使用单个 Azure AD 应用程序。另一种做法是使用两个 Azure AD 应用程序。在此情况下，必须授予前端 Azure AD 应用程序调用中间层 Azure AD 应用程序的权限。使用这种多重应用程序方法可以更精细地控制每层的权限。
+>[!NOTE]
+> 为了尽可能简化过程，本教程为前端和中间层 API 应用使用单个 Azure AD 应用程序。另一种做法是使用两个 Azure AD 应用程序。在此情况下，必须授予前端 Azure AD 应用程序调用中间层 Azure AD 应用程序的权限。使用这种多重应用程序方法可以更精细地控制每层的权限。
 
 11. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，转到“Azure Active Directory”。
 
@@ -218,8 +220,10 @@ ms.author: rachelap
 
 2. 取消注释引用适用于 JS 的 Active Directory 身份验证库 (ADAL) 脚本的代码行。
 
-        <script src="app/scripts/adal.js"></script>
-        <script src="app/scripts/adal-angular.js"></script>
+    ```
+    <script src="app/scripts/adal.js"></script>
+    <script src="app/scripts/adal-angular.js"></script>
+    ```
 
 1. 打开 *app/scripts/app.js* 文件。
 
@@ -231,24 +235,28 @@ ms.author: rachelap
 
     现在，代码类似于以下示例。
 
-        var endpoints = {
-            "https://todolistapi0121.chinacloudsites.cn/": "1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3"
-        };
+    ```
+    var endpoints = {
+        "https://todolistapi0121.chinacloudsites.cn/": "1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3"
+    };
+    ```
 
 9. 在 `adalProvider.init` 的调用中，将 `tenant` 设置为租户名称，将 `clientId` 设置为上一步骤使用的相同值。
 
     现在，代码类似于以下示例。
 
-        adalProvider.init(
-            {
-                instance: 'https://login.chinacloudapi.cn/', 
-                tenant: 'contoso.partner.onmschina.cn',
-                clientId: '1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3',
-                extraQueryParameter: 'nux=1',
-                endpoints: endpoints
-            },
-            $httpProvider
-            );
+    ```
+    adalProvider.init(
+        {
+            instance: 'https://login.chinacloudapi.cn/', 
+            tenant: 'contoso.partner.onmschina.cn',
+            clientId: '1cf55bc9-9ed8-4df31cf55bc9-9ed8-4df3',
+            extraQueryParameter: 'nux=1',
+            endpoints: endpoints
+        },
+        $httpProvider
+        );
+    ```
 
     对 `app.js` 所做的这些更改指定调用方代码和被调用 API 应位于同一个 Azure AD 应用程序中。
 
@@ -280,7 +288,9 @@ ms.author: rachelap
 
 1. 打开 *Controllers/ToDoListController.cs* 文件，取消注释每个操作方法中用于将 `owner` 设置为 Azure AD `NameIdentifier` 声明值的代码行。例如：
 
-        owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+    ```
+    owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+    ```
 
     **重要说明**：不要取消注释 `ToDoListDataAPI` 方法中的代码；稍后要在服务主体身份验证教程中执行这些代码。
 

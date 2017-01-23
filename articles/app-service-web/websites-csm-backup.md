@@ -49,49 +49,54 @@ ms.author: nicking
 
 在请求的正文中提供 JSON 对象，以指定要使用哪个存储帐户存储备份。JSON 对象必须具有一个名为 **storageAccountUrl** 的属性，其中包含将写入访问权限授予包含备份 blob 的 Azure 存储容器的 [SAS URL](../storage/storage-dotnet-shared-access-signature-part-1.md)。如果要备份数据库，还必须提供一个包含要备份的数据库的名称、类型和连接字符串的列表。
 
+```
+{
+    "properties":
     {
-        "properties":
-        {
-            "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl",
-            "databases": [
-                {
-                    "databaseType": "SqlAzure",
-                    "name": "MyDatabase1",
-                        "connectionString": "<your database connection string>"
-                }
-            ]
-        }
+        "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl",
+        "databases": [
+            {
+                "databaseType": "SqlAzure",
+                "name": "MyDatabase1",
+                    "connectionString": "<your database connection string>"
+            }
+        ]
     }
+}
+```
 
 收到该请求后，将立即开始备份应用。备份过程可能需要很长时间才能完成。HTTP 响应包含一个 ID，可以在另一个请求中使用此 ID 来查看备份的状态。下面是针对我们的备份请求的 HTTP 响应的正文示例。
 
-    {
-        "id": "/subscriptions/00001111-2222-3333-4444-555566667777/resourceGroups/Default-Web-ChinaNorth/providers/Microsoft.Web/sites/backuprestoreapiexamples",
-        "name": " backuprestoreapiexamples ",
-        "type": "Microsoft.Web/sites",
-        "location": "ChinaNorth",
-        "properties":    {
-            "id": 1,
-            "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl",
-            "blobName": "backup_201509291825.zip",
-            "name": "backup_201509291825",
-            "status": 4,
-            "sizeInBytes": 0,
-            "created": "2015-09-29T18:25:26.3992707Z",
-            "log": null,
-            "databases": [
-                {
-                    "databaseType": "SqlAzure",
-                    "name": "MyDatabase1",
-                    "connectionString": "<your database connection string>"
-                }
-            ],
-            "scheduled": false,
-            "correlationId": "ea730f4d-dd06-4f7f-a090-9aa09k662h36",
-        }
+```
+{
+    "id": "/subscriptions/00001111-2222-3333-4444-555566667777/resourceGroups/Default-Web-ChinaNorth/providers/Microsoft.Web/sites/backuprestoreapiexamples",
+    "name": " backuprestoreapiexamples ",
+    "type": "Microsoft.Web/sites",
+    "location": "ChinaNorth",
+    "properties":    {
+        "id": 1,
+        "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl",
+        "blobName": "backup_201509291825.zip",
+        "name": "backup_201509291825",
+        "status": 4,
+        "sizeInBytes": 0,
+        "created": "2015-09-29T18:25:26.3992707Z",
+        "log": null,
+        "databases": [
+            {
+                "databaseType": "SqlAzure",
+                "name": "MyDatabase1",
+                "connectionString": "<your database connection string>"
+            }
+        ],
+        "scheduled": false,
+        "correlationId": "ea730f4d-dd06-4f7f-a090-9aa09k662h36",
     }
+}
+```
 
->[!NOTE] 可以在 HTTP 响应的 log 属性中找到错误消息。
+>[!NOTE]
+> 可以在 HTTP 响应的 log 属性中找到错误消息。
 
 ## <a name="schedule-automatic-backups"></a>计划自动备份
 除了按需备份应用外，还可以计划自动进行的备份。
@@ -103,21 +108,23 @@ ms.author: nicking
 
 请求正文必须包含指定备份配置的 JSON 对象。下面是包含所有必需参数的一个示例。
 
+```
+{
+    "location": "ChinaNorth",
+    "properties": // Represents an app restore request
     {
-        "location": "ChinaNorth",
-        "properties": // Represents an app restore request
-        {
-            "backupSchedule": { // Required for automatically scheduled backups
-                "frequencyInterval": "7",
-                "frequencyUnit": "Day",
-                "keepAtLeastOneBackup": "True",
-                "retentionPeriodInDays": "10",
-            },
-            "enabled": "True", // Must be set to true to enable automatic backups
-            "name": "mysitebackup",
-            "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl"
-        }
+        "backupSchedule": { // Required for automatically scheduled backups
+            "frequencyInterval": "7",
+            "frequencyUnit": "Day",
+            "keepAtLeastOneBackup": "True",
+            "retentionPeriodInDays": "10",
+        },
+        "enabled": "True", // Must be set to true to enable automatic backups
+        "name": "mysitebackup",
+        "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl"
     }
+}
+```
 
 此示例将应用配置为每 7 天自动备份一次。参数 **frequencyInterval** 和 **frequencyUnit** 共同确定备份发生的频率。**frequencyUnit** 的有效值为 **hour** 和 **day**。例如，若要每 12 个小时备份一次应用，请将 frequencyInterval 设为 12 并将 frequencyUnit 设为 hour。
 
@@ -137,22 +144,24 @@ ms.author: nicking
 
 响应正文包含类似于此示例的 JSON 对象。
 
-    {
-        "properties":  {
-            "id": 1,
-            "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl",
-            "blobName": "backup_201509291734.zip",
-            "name": "backup_201509291734",
-            "status": 2,
-            "sizeInBytes": 151973,
-            "created": "2015-09-29T17:34:57.2091605",
-            "scheduled": false,
-            "lastRestoreTimeStamp": null,
-            "finishedTimeStamp": "2015-09-29T17:35:11.3293602",
-            "correlationId": "2379fc13-418a-4b9c-920d-d06e73c5028d",
-            "websiteSizeInBytes": 209920
-        }
+```
+{
+    "properties":  {
+        "id": 1,
+        "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl",
+        "blobName": "backup_201509291734.zip",
+        "name": "backup_201509291734",
+        "status": 2,
+        "sizeInBytes": 151973,
+        "created": "2015-09-29T17:34:57.2091605",
+        "scheduled": false,
+        "lastRestoreTimeStamp": null,
+        "finishedTimeStamp": "2015-09-29T17:35:11.3293602",
+        "correlationId": "2379fc13-418a-4b9c-920d-d06e73c5028d",
+        "websiteSizeInBytes": 209920
     }
+}
+```
 
 备份状态是一个枚举类型。下面是每种可能的状态。
 
@@ -174,20 +183,22 @@ ms.author: nicking
 
 在请求正文中，发送包含还原操作的属性的 JSON 对象。下面是一个包含所有必需属性的示例：
 
+```
+{
+    "location": "ChinaNorth",
+    "properties":
     {
-        "location": "ChinaNorth",
-        "properties":
-        {
-            "blobName": "backup_201509280431.zip",
-            "databases": [ // Not required unless you're restoring databases
-                {
-                "databaseType": "SqlAzure",
-                "name": "MyDatabase1"
-            }],
-            "overwrite": "true",
-            "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl" // SAS URL to storage container containing your website backup
-        }
+        "blobName": "backup_201509280431.zip",
+        "databases": [ // Not required unless you're restoring databases
+            {
+            "databaseType": "SqlAzure",
+            "name": "MyDatabase1"
+        }],
+        "overwrite": "true",
+        "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl" // SAS URL to storage container containing your website backup
     }
+}
+```
 
 ### 还原到新应用
 有时你可能想要在还原备份时创建新应用，而不是覆盖现有的应用。为此，请更改请求 URL 以指向要创建的新应用，并将 JSON 中的 **overwrite** 属性更改为 **false**。
@@ -204,14 +215,17 @@ Azure App Service 会尝试使用创建备份时提供的 SAS URL 从 Azure 存�
 
 在请求正文中，发送包含新 SAS URL 的 JSON 对象。下面是一个示例。
 
+```
+{
+    "properties":
     {
-        "properties":
-        {
-            "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl"
-        }
+        "storageAccountUrl": "https://account.blob.core.chinacloudapi.cn/backups?sv=2015-02-21&sr=c&sig=DzlkBl7h32C8qCv%2BifdBRxE63r4iv0kZ9L7E0qP16sY%3D&se=2016-09-15T22%3A46%3A54Z&sp=rwdl"
     }
+}
+```
 
->[!NOTE] 出于安全原因，在为特定备份发送 GET 请求时，将不返回与该备份关联的 SAS URL。如果要查看与备份关联的 SAS URL，请向上述同一 URL 发送 POST 请求。在请求正文中包含空 JSON 对象。服务器响应包含该备份的所有信息，包括其 SAS URL。
+>[!NOTE]
+> 出于安全原因，在为特定备份发送 GET 请求时，将不返回与该备份关联的 SAS URL。如果要查看与备份关联的 SAS URL，请向上述同一 URL 发送 POST 请求。在请求正文中包含空 JSON 对象。服务器响应包含该备份的所有信息，包括其 SAS URL。
 
 <!-- IMAGES -->
 [SampleWebsiteInformation]: ./media/websites-csm-backup/01siteconfig.png

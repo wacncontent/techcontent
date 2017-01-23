@@ -38,60 +38,74 @@ ms.author: v-livech
 
 ## 创建资源组和 Linux VM
 
-    azure group create myResourceGroup chinanorth
+```
+azure group create myResourceGroup chinanorth
+```
 
 ## 创建 Debian VM
 
-    azure vm quick-create \
-      -M ~/.ssh/id_rsa.pub \
-      -u myAdminUser \
-      -g myResourceGroup \
-      -l chinanorth \
-      -y Linux \
-      -n myVM \
-      -Q Debian
+```
+azure vm quick-create \
+  -M ~/.ssh/id_rsa.pub \
+  -u myAdminUser \
+  -g myResourceGroup \
+  -l chinanorth \
+  -y Linux \
+  -n myVM \
+  -Q Debian
+```
 
 ## 重置根密码
 重置根密码：
 
-    azure vm reset-access \
-      -g myResourceGroup \
-      -n myVM \
-      -u root \
-      -p myNewPassword
+```
+azure vm reset-access \
+  -g myResourceGroup \
+  -n myVM \
+  -u root \
+  -p myNewPassword
+```
 
 ## SSH 密钥重置
 重置非根用户的 SSH 密钥：
 
-    azure vm reset-access \
-      -g myResourceGroup \
-      -n myVM \
-      -u myAdminUser \
-      -M ~/.ssh/id_rsa.pub
+```
+azure vm reset-access \
+  -g myResourceGroup \
+  -n myVM \
+  -u myAdminUser \
+  -M ~/.ssh/id_rsa.pub
+```
 
 ## 创建用户
 创建用户：
 
-    azure vm reset-access \
-      -g myResourceGroup \
-      -n myVM \
-      -u myAdminUser \
-      -p myAdminUserPassword
+```
+azure vm reset-access \
+  -g myResourceGroup \
+  -n myVM \
+  -u myAdminUser \
+  -p myAdminUserPassword
+```
 
 ## 删除用户
 
-    azure vm reset-access \
-      -g myResourceGroup \
-      -n myVM \
-      -R myRemovedUser
+```
+azure vm reset-access \
+  -g myResourceGroup \
+  -n myVM \
+  -R myRemovedUser
+```
 
 ## 重置 SSHD
 重置 SSHD 配置：
 
-    azure vm reset-access \
-      -g myResourceGroup \
-      -n myVM
-      -r
+```
+azure vm reset-access \
+  -g myResourceGroup \
+  -n myVM
+  -r
+```
 
 ## 详细演练
 ### 定义的 VMAccess：
@@ -106,19 +120,23 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
 
 `disk_check_repair.json`  
 
-    {
-      "check_disk": "true",
-      "repair_disk": "true, user-disk-name"
-    }
+```
+{
+  "check_disk": "true",
+  "repair_disk": "true, user-disk-name"
+}
+```
 
 结合以下参数执行 VMAccess 脚本：
 
-    azure vm extension set \
-      myResourceGroup \
-      myVM \
-      VMAccessForLinux \
-      Microsoft.OSTCExtensions * \
-      --private-config-path disk_check_repair.json
+```
+azure vm extension set \
+  myResourceGroup \
+  myVM \
+  VMAccessForLinux \
+  Microsoft.OSTCExtensions * \
+  --private-config-path disk_check_repair.json
+```
 
 ### 使用 VMAccess 重置 Linux 的用户访问权限
 如果已失去 Linux VM 的根访问权限，可以启动 VMAccess 脚本重置根密码。
@@ -127,37 +145,45 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
 
 `reset_root_password.json`  
 
-    {
-      "username":"root",
-      "password":"myNewPassword",   
-    }
+```
+{
+  "username":"root",
+  "password":"myNewPassword",   
+}
+```
 
 结合以下参数执行 VMAccess 脚本：
 
-    azure vm extension set \
-      myResourceGroup \
-      myVM \
-      VMAccessForLinux \
-      Microsoft.OSTCExtensions * \
-      --private-config-path reset_root_password.json
+```
+azure vm extension set \
+  myResourceGroup \
+  myVM \
+  VMAccessForLinux \
+  Microsoft.OSTCExtensions * \
+  --private-config-path reset_root_password.json
+```
 
 若要重置非根用户的 SSH 密钥，请使用此 VMAccess 脚本：
 
 `reset_ssh_key.json`  
 
-    {
-      "username":"myAdminUser",
-      "ssh_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ3S7gGp3rcbKmG2Y4vGZFMuMZCwoUzZNG1vHY7P2XV2x9FfAhy8iGD+lF8UdjFX3t5ebMm6BnnMh8fHwkTRdOt3LDQq8o8ElTBrZaKPxZN2thMZnODs5Hlemb2UX0oRIGRcvWqsd4oJmxsXa/Si98Wa6RHWbc9QZhw80KAcOVhmndZAZAGR+Wq6yslNo5TMOr1/ZyQAook5C4FtcSGn3Y+WczaoGWIxG4ZaWk128g79VIeJcIQqOjPodHvQAhll7qDlItVvBfMOben3GyhYTm7k4YwlEdkONm4yV/UIW0la1rmyztSBQIm9sZmSq44XXgjVmDHNF8UfCZ1ToE4r2SdwTmZv00T2i5faeYnHzxiLPA3Enub7iUo5IdwFArnqad7MO1SY1kLemhX9eFjLWN4mJe56Fu4NiWJkR9APSZQrYeKaqru4KUC68QpVasNJHbuxPSf/PcjF3cjO1+X+4x6L1H5HTPuqUkyZGgDO4ynUHbko4dhlanALcriF7tIfQR9i2r2xOyv5gxJEW/zztGqWma/d4rBoPjnf6tO7rLFHXMt/DVTkAfn5woYtLDwkn5FMyvThRmex3BDf0gujoI1y6cOWLe9Y5geNX0oj+MXg/W0cXAtzSFocstV1PoVqy883hNoeQZ3mIGB3Q0rIUm5d9MA2bMMt31m1g3Sin6EQ== myAdminUser@myVM",   
-    }
+```
+{
+  "username":"myAdminUser",
+  "ssh_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ3S7gGp3rcbKmG2Y4vGZFMuMZCwoUzZNG1vHY7P2XV2x9FfAhy8iGD+lF8UdjFX3t5ebMm6BnnMh8fHwkTRdOt3LDQq8o8ElTBrZaKPxZN2thMZnODs5Hlemb2UX0oRIGRcvWqsd4oJmxsXa/Si98Wa6RHWbc9QZhw80KAcOVhmndZAZAGR+Wq6yslNo5TMOr1/ZyQAook5C4FtcSGn3Y+WczaoGWIxG4ZaWk128g79VIeJcIQqOjPodHvQAhll7qDlItVvBfMOben3GyhYTm7k4YwlEdkONm4yV/UIW0la1rmyztSBQIm9sZmSq44XXgjVmDHNF8UfCZ1ToE4r2SdwTmZv00T2i5faeYnHzxiLPA3Enub7iUo5IdwFArnqad7MO1SY1kLemhX9eFjLWN4mJe56Fu4NiWJkR9APSZQrYeKaqru4KUC68QpVasNJHbuxPSf/PcjF3cjO1+X+4x6L1H5HTPuqUkyZGgDO4ynUHbko4dhlanALcriF7tIfQR9i2r2xOyv5gxJEW/zztGqWma/d4rBoPjnf6tO7rLFHXMt/DVTkAfn5woYtLDwkn5FMyvThRmex3BDf0gujoI1y6cOWLe9Y5geNX0oj+MXg/W0cXAtzSFocstV1PoVqy883hNoeQZ3mIGB3Q0rIUm5d9MA2bMMt31m1g3Sin6EQ== myAdminUser@myVM",   
+}
+```
 
 结合以下参数执行 VMAccess 脚本：
 
-    azure vm extension set \
-      myResourceGroup \
-      myVM \
-      VMAccessForLinux \
-      Microsoft.OSTCExtensions * \
-      --private-config-path reset_ssh_key.json
+```
+azure vm extension set \
+  myResourceGroup \
+  myVM \
+  VMAccessForLinux \
+  Microsoft.OSTCExtensions * \
+  --private-config-path reset_ssh_key.json
+```
 
 ### 使用 VMAccess 管理 Linux 上的用户帐户
 VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而不需要登录和使用 sudo 或根帐户。
@@ -166,37 +192,45 @@ VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而�
 
 `create_new_user.json`  
 
-    {
-    "username":"myNewUser",
-    "ssh_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ3S7gGp3rcbKmG2Y4vGZFMuMZCwoUzZNG1vHY7P2XV2x9FfAhy8iGD+lF8UdjFX3t5ebMm6BnnMh8fHwkTRdOt3LDQq8o8ElTBrZaKPxZN2thMZnODs5Hlemb2UX0oRIGRcvWqsd4oJmxsXa/Si98Wa6RHWbc9QZhw80KAcOVhmndZAZAGR+Wq6yslNo5TMOr1/ZyQAook5C4FtcSGn3Y+WczaoGWIxG4ZaWk128g79VIeJcIQqOjPodHvQAhll7qDlItVvBfMOben3GyhYTm7k4YwlEdkONm4yV/UIW0la1rmyztSBQIm9sZmSq44XXgjVmDHNF8UfCZ1ToE4r2SdwTmZv00T2i5faeYnHzxiLPA3Enub7iUo5IdwFArnqad7MO1SY1kLemhX9eFjLWN4mJe56Fu4NiWJkR9APSZQrYeKaqru4KUC68QpVasNJHbuxPSf/PcjF3cjO1+X+4x6L1H5HTPuqUkyZGgDO4ynUHbko4dhlanALcriF7tIfQR9i2r2xOyv5gxJEW/zztGqWma/d4rBoPjnf6tO7rLFHXMt/DVTkAfn5woYtLDwkn5FMyvThRmex3BDf0gujoI1y6cOWLe9Y5geNX0oj+MXg/W0cXAtzSFocstV1PoVqy883hNoeQZ3mIGB3Q0rIUm5d9MA2bMMt31m1g3Sin6EQ== myNewUser@myVM",
-    "password":"myNewUserPassword",
-    }
+```
+{
+"username":"myNewUser",
+"ssh_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ3S7gGp3rcbKmG2Y4vGZFMuMZCwoUzZNG1vHY7P2XV2x9FfAhy8iGD+lF8UdjFX3t5ebMm6BnnMh8fHwkTRdOt3LDQq8o8ElTBrZaKPxZN2thMZnODs5Hlemb2UX0oRIGRcvWqsd4oJmxsXa/Si98Wa6RHWbc9QZhw80KAcOVhmndZAZAGR+Wq6yslNo5TMOr1/ZyQAook5C4FtcSGn3Y+WczaoGWIxG4ZaWk128g79VIeJcIQqOjPodHvQAhll7qDlItVvBfMOben3GyhYTm7k4YwlEdkONm4yV/UIW0la1rmyztSBQIm9sZmSq44XXgjVmDHNF8UfCZ1ToE4r2SdwTmZv00T2i5faeYnHzxiLPA3Enub7iUo5IdwFArnqad7MO1SY1kLemhX9eFjLWN4mJe56Fu4NiWJkR9APSZQrYeKaqru4KUC68QpVasNJHbuxPSf/PcjF3cjO1+X+4x6L1H5HTPuqUkyZGgDO4ynUHbko4dhlanALcriF7tIfQR9i2r2xOyv5gxJEW/zztGqWma/d4rBoPjnf6tO7rLFHXMt/DVTkAfn5woYtLDwkn5FMyvThRmex3BDf0gujoI1y6cOWLe9Y5geNX0oj+MXg/W0cXAtzSFocstV1PoVqy883hNoeQZ3mIGB3Q0rIUm5d9MA2bMMt31m1g3Sin6EQ== myNewUser@myVM",
+"password":"myNewUserPassword",
+}
+```
 
 结合以下参数执行 VMAccess 脚本：
 
-    azure vm extension set \
-      myResourceGroup \
-      myVM \
-      VMAccessForLinux \
-      Microsoft.OSTCExtensions * \
-      --private-config-path create_new_user.json
+```
+azure vm extension set \
+  myResourceGroup \
+  myVM \
+  VMAccessForLinux \
+  Microsoft.OSTCExtensions * \
+  --private-config-path create_new_user.json
+```
 
 若要删除用户，请使用此 VMAccess 脚本：
 
 `remove_user.json`  
 
-    {
-    "remove_user":"myDeletedUser",
-    }
+```
+{
+"remove_user":"myDeletedUser",
+}
+```
 
 结合以下参数执行 VMAccess 脚本：
 
-    azure vm extension set \
-      myResourceGroup \
-      myVM \
-      VMAccessForLinux \
-      Microsoft.OSTCExtensions * \
-      --private-config-path remove_user.json
+```
+azure vm extension set \
+  myResourceGroup \
+  myVM \
+  VMAccessForLinux \
+  Microsoft.OSTCExtensions * \
+  --private-config-path remove_user.json
+```
 
 ### 使用 VMAccess 重置 SSHD 配置
 如果你更改了 Linux VM SSHD 配置，并在验证更改之前关闭了 SSH 连接，则可能无法恢复 SSH 操作。使用 VMAccess 可将 SSHD 配置重置回已知正常的配置，而无需通过 SSH 登录。
@@ -205,18 +239,22 @@ VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而�
 
 `reset_sshd.json`  
 
-    {
-      "reset_ssh": true
-    }
+```
+{
+  "reset_ssh": true
+}
+```
 
 结合以下参数执行 VMAccess 脚本：
 
-    azure vm extension set \
-      myResourceGroup \
-      myVM \
-      VMAccessForLinux \
-      Microsoft.OSTCExtensions * \
-      --private-config-path reset_sshd.json
+```
+azure vm extension set \
+  myResourceGroup \
+  myVM \
+  VMAccessForLinux \
+  Microsoft.OSTCExtensions * \
+  --private-config-path reset_sshd.json
+```
 
 ## 后续步骤
 使用 Azure VMAccess 扩展更新 Linux 是一种对正在运行的 Linux VM 进行更改的方法。还可以使用 cloud-init 和 Azure 模板之类的工具在 Linux VM 启动时对其进行修改。

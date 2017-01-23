@@ -30,14 +30,15 @@ ms.author: adegeo
 -   [OnStart](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx) 和 [OnStop](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstop.aspx) 方法返回布尔值，因此可以从这些方法返回 **false**。
 
      如果代码返回 **false**，则该角色进程会突然终止，而不会运行可能拥有的任何关闭序列。一般来说，应该避免从 **OnStart** 方法返回 **false**。
-     
+
 -   **RoleEntryPoint** 方法重载中未捕获的任何异常都被视为未处理的异常。
 
      如果某个生命周期方法中发生异常，Azure 将引发 [UnhandledException](https://msdn.microsoft.com/zh-cn/library/system.appdomain.unhandledexception.aspx) 事件，然后进程会终止。角色脱机后，Azure 会将它重新启动。如果出现未处理的异常，则不会引发 [Stopping](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.stopping.aspx) 事件，并且不会调用 **OnStop** 方法。
 
 如果角色未启动，或者在初始化、繁忙和停止状态之间循环，可能是因为每次角色重新启动生命周期事件时，代码都引发了未处理的异常。在这种情况下，请使用 [UnhandledException](https://msdn.microsoft.com/zh-cn/library/system.appdomain.unhandledexception.aspx) 事件来确定异常的原因并采用适当的方法进行处理。角色也可能会从 [Run](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.run.aspx) 方法返回，从而促使角色重新启动。有关部署状态的详细信息，请参阅[导致角色回收的常见问题](https://msdn.microsoft.com/zh-cn/library/azure/gg465402.aspx)。
 
-> [!NOTE]如果使用 [Azure Tools for Microsoft Visual Studio](https://msdn.microsoft.com/zh-cn/library/azure/ee405484.aspx) 开发应用程序，则角色项目模板将自动在 WebRole.cs 和 WorkerRole.cs 文件中扩展 **RoleEntryPoint** 类。
+> [!NOTE]
+>如果使用 [Azure Tools for Microsoft Visual Studio](https://msdn.microsoft.com/zh-cn/library/azure/ee405484.aspx) 开发应用程序，则角色项目模板将自动在 WebRole.cs 和 WorkerRole.cs 文件中扩展 **RoleEntryPoint** 类。
 
 ## OnStart 方法
 
@@ -46,24 +47,27 @@ Azure 使角色实例联机时，会调用 **OnStart** 方法。OnStart 代码�
 如果 **OnStart** 返回 **true**，则该实例已成功初始化，并且 Azure 已调用 **RoleEntryPoint.Run** 方法。如果 **OnStart** 返回 **false**，则角色将立即终止，而不执行任何计划中的关闭序列。
 
 下面的代码示例演示如何重写 **OnStart** 方法。当角色实例启动并设置将日志记录数据传输到存储帐户时，此方法将配置并启动诊断监视器：
-    
-    public override bool OnStart()
-    {
-        var config = DiagnosticMonitor.GetDefaultInitialConfiguration();
-    
-        config.DiagnosticInfrastructureLogs.ScheduledTransferLogLevelFilter = LogLevel.Error;
-        config.DiagnosticInfrastructureLogs.ScheduledTransferPeriod = TimeSpan.FromMinutes(5);
-    
-        DiagnosticMonitor.Start("DiagnosticsConnectionString", config);
-    
-        return true;
-    }
+
+```
+public override bool OnStart()
+{
+    var config = DiagnosticMonitor.GetDefaultInitialConfiguration();
+
+    config.DiagnosticInfrastructureLogs.ScheduledTransferLogLevelFilter = LogLevel.Error;
+    config.DiagnosticInfrastructureLogs.ScheduledTransferPeriod = TimeSpan.FromMinutes(5);
+
+    DiagnosticMonitor.Start("DiagnosticsConnectionString", config);
+
+    return true;
+}
+```
 
 ## OnStop 方法
 
 **OnStop** 方法在 Azure 使角色实例脱机之后并且在进程退出之前被调用。可以重写此方法来调用角色实例所需的代码，以便彻底关闭此角色实例。
 
-> [!IMPORTANT]如果出于某些原因而不是用户启动的关闭而调用 **OnStop** 方法，则此方法中运行的代码必须在有限的时间内完成。这段时间过后，进程将被终止，因此必须确保 **OnStop** 方法中的代码能够快速运行或者不必完全运行。引发 **Stopping** 事件后，会调用 **OnStop** 方法。
+> [!IMPORTANT]
+>如果出于某些原因而不是用户启动的关闭而调用 **OnStop** 方法，则此方法中运行的代码必须在有限的时间内完成。这段时间过后，进程将被终止，因此必须确保 **OnStop** 方法中的代码能够快速运行或者不必完全运行。引发 **Stopping** 事件后，会调用 **OnStop** 方法。
 
 ## Run 方法
 

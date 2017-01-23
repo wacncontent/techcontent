@@ -63,11 +63,14 @@ SQL Server IaaS 代理扩展支持以下管理任务：
 
 如果你创建仅有 OS 的 Windows Server 虚拟机，可以使用“Set-AzureVMSqlServerExtension”PowerShell cmdlet 手动安装扩展。例如，以下命令将在仅限操作系统的 Windows Server VM 上安装扩展，并将其命名为“SQLIaaSExtension”。
 
-    Set-AzureRmVMSqlServerExtension -ResourceGroupName "resourcegroupname" -VMName "vmname" -Name "SQLIaasExtension" -Version "1.2"
+```
+Set-AzureRmVMSqlServerExtension -ResourceGroupName "resourcegroupname" -VMName "vmname" -Name "SQLIaasExtension" -Version "1.2"
+```
 
 如果更新到最新版本的 SQL IaaS 代理扩展，则必须在更新该扩展后重启虚拟机。
 
->[!NOTE] 如果在 Windows Server VM 上手动安装 SQL Server IaaS 代理扩展，必须通过 PowerShell 命令使用和管理该扩展的功能。门户界面仅适用于 SQL Server 库映像。
+>[!NOTE]
+> 如果在 Windows Server VM 上手动安装 SQL Server IaaS 代理扩展，必须通过 PowerShell 命令使用和管理该扩展的功能。门户界面仅适用于 SQL Server 库映像。
 
 ## 状态
 
@@ -77,13 +80,17 @@ SQL Server IaaS 代理扩展支持以下管理任务：
 
 也可以使用“Get-AzureVMSqlServerExtension”Azure Powershell cmdlet。
 
-    Get-AzureRmVMSqlServerExtension -VMName "vmname" -ResourceGroupName "resourcegroupname"
+```
+Get-AzureRmVMSqlServerExtension -VMName "vmname" -ResourceGroupName "resourcegroupname"
+```
 
 上一个命令确认已安装代理并提供常规状态信息。还可使用以下命令获取有关自动备份和修补的特定状态信息。
 
-    $sqlext = Get-AzureRmVMSqlServerExtension -VMName "vmname" -ResourceGroupName "resourcegroupname"
-    $sqlext.AutoPatchingSettings
-    $sqlext.AutoBackupSettings
+```
+$sqlext = Get-AzureRmVMSqlServerExtension -VMName "vmname" -ResourceGroupName "resourcegroupname"
+$sqlext.AutoPatchingSettings
+$sqlext.AutoBackupSettings
+```
 
 ## 删除   
 
@@ -93,7 +100,9 @@ SQL Server IaaS 代理扩展支持以下管理任务：
 
 也可以使用“Remove-AzureRmVMSqlServerExtension”Powershell cmdlet。
 
-    Remove-AzureRmVMSqlServerExtension -ResourceGroupName "resourcegroupname" -VMName "vmname" -Name "SQLIaasExtension"
+```
+Remove-AzureRmVMSqlServerExtension -ResourceGroupName "resourcegroupname" -VMName "vmname" -Name "SQLIaasExtension"
+```
 
 ## 后续步骤
 

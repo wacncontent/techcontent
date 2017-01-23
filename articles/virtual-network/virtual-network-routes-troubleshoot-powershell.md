@@ -42,7 +42,8 @@ ms.author: anithaa
 
 本文说明如何使用 Azure Resource Manager 部署模型中的有效路由功能确定连接失败的原因。尽管本示例只使用系统路由，但可以使用相同的步骤判断任何路由类型的入站和出站连接失败情况。
 
->[!NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
+>[!NOTE]
+> 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
 
 ### 查看虚拟机的有效路由
 
@@ -56,25 +57,32 @@ ms.author: anithaa
 
 2.  以下命令返回对资源组 *RG1* 中名为 *VM1-NIC1* 的网络接口应用的所有路由：
 
-        Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
+    ```
+    Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
+    ```
 
-    >[!TIP] 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
+    >[!TIP]
+    > 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
 
-        Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name
+    ```
+    Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name
+    ```
 
     以下输出类似于应用到 NIC 所连接子网的每个路由的输出：
 
-        Name :
-        State : Active
-        AddressPrefix : {10.9.0.0/16}
-        NextHopType : VNetLocal
-        NextHopIpAddress : {}
+    ```
+    Name :
+    State : Active
+    AddressPrefix : {10.9.0.0/16}
+    NextHopType : VNetLocal
+    NextHopIpAddress : {}
 
-        Name :
-        State : Active
-        AddressPrefix : {0.0.0.0/16}
-        NextHopType : Internet
-        NextHopIpAddress : {}
+    Name :
+    State : Active
+    AddressPrefix : {0.0.0.0/16}
+    NextHopType : Internet
+    NextHopIpAddress : {}
+    ```
 
     请注意输出中的以下信息：
     - **Name**：用户定义的路由，除非显式指定，否则有效路由的名称可能为空。
@@ -82,33 +90,41 @@ ms.author: anithaa
     - **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
     - **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
     - **NextHopIpAddress**：指定有效路由下一跃点的 IP 地址。
-    
+
     以下命令在一个方便查看的表中返回路由：
 
-        Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1 | Format-Table
+    ```
+    Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1 | Format-Table
+    ```
 
     以下输出是上述方案收到的一部分输出：
 
-        Name State AddressPrefix NextHopType NextHopIpAddress
-        ---- ----- ------------- ----------- ----------------
-        Active {10.9.0.0/16} VnetLocal {}
-        Active {0.0.0.0/0} Internet {}
-    
+    ```
+    Name State AddressPrefix NextHopType NextHopIpAddress
+    ---- ----- ------------- ----------- ----------------
+    Active {10.9.0.0/16} VnetLocal {}
+    Active {0.0.0.0/0} Internet {}
+    ```
+
 3. 上一步骤的输出没有列出*从 *ChinaNorth-VNet1*（前缀 10.9.0.0/16）* 到 *ChinaNorth-VNet3* VNet（前缀 10.10.0.0/16）的路由。如下图所示，包含 *ChinaNorth-VNet3* VNet 的 VNet 对等互连链接处于 *Disconnected* 状态。
-    
+
     ![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
 
     对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。为 *ChinaNorth-VNet1* 和 *ChinaNorth-VNet3* VNet 再次设置双向对等互连链接。正确建立 VNet 对等互连链接后，返回的输出如下所示：
 
-        Name State AddressPrefix NextHopType NextHopIpAddress
-        ---- ----- ------------- ----------- ----------------
-        Active {10.9.0.0/16} VnetLocal {}
-        Active {10.10.0.0/16} VNetPeering {}
-        Active {0.0.0.0/0} Internet {}
-        
+    ```
+    Name State AddressPrefix NextHopType NextHopIpAddress
+    ---- ----- ------------- ----------- ----------------
+    Active {10.9.0.0/16} VnetLocal {}
+    Active {10.10.0.0/16} VNetPeering {}
+    Active {0.0.0.0/0} Internet {}
+    ```
+
     确定问题后，可以添加、删除或更改路由和路由表。键入以下命令，查看用于执行这些操作的命令：
 
-        Get-Help *-AzureRmRouteConfig
+    ```
+    Get-Help *-AzureRmRouteConfig
+    ```
 
 ## 注意事项
 

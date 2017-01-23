@@ -21,7 +21,8 @@ ms.author: chackdan
 
 Service Fabric 群集由群集资源本身及众多其他 Azure 资源组成。因此，若要彻底删除 Service Fabric 群集，还需删除组成该群集的所有资源。可使用两种方法：删除该群集所在的资源组（此操作将删除该资源组中的群集资源及其他任何资源），或特定删除群集资源及其关联资源（而不删除资源组中的其他资源）。
 
->[!NOTE] 删除群集资源**不会**删除组成 Service Fabric 的其他所有资源。
+>[!NOTE]
+> 删除群集资源**不会**删除组成 Service Fabric 的其他所有资源。
 
 ## 删除 Service Fabric 群集所在的整个资源组 (RG)
 
@@ -33,9 +34,11 @@ Service Fabric 群集由群集资源本身及众多其他 Azure 资源组成。�
 
 打开 PowerShell 窗口并运行以下 PS cmdlet：
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    
-    Remove-AzureRmResourceGroup -Name <name of ResouceGroup> -Force
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+
+Remove-AzureRmResourceGroup -Name <name of ResouceGroup> -Force
+```
 
 如果未使用 *-Force* 选项，则将提示你确认删除。确认后，即删除 RG 及其包含的所有资源。
 
@@ -80,15 +83,21 @@ Service Fabric 群集由群集资源本身及众多其他 Azure 资源组成。�
 
 打开 PowerShell 窗口并运行以下 PS cmdlet：
 
-    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 对要删除的每项资源，运行以下命令：
 
-    Remove-AzureRmResource -ResourceName "<name of the Resource>" -ResourceType "<Resource Type>" -ResourceGroupName "<name of the resource group>" -Force
+```
+Remove-AzureRmResource -ResourceName "<name of the Resource>" -ResourceType "<Resource Type>" -ResourceGroupName "<name of the resource group>" -Force
+```
 
 若要删除群集资源，请运行以下命令：
 
-    Remove-AzureRmResource -ResourceName "<name of the Resource>" -ResourceType "Microsoft.ServiceFabric/clusters" -ResourceGroupName "<name of the resource group>" -Force
+```
+Remove-AzureRmResource -ResourceName "<name of the Resource>" -ResourceType "Microsoft.ServiceFabric/clusters" -ResourceGroupName "<name of the resource group>" -Force
+```
 
 ## 后续步骤
 参阅以下文章以了解如何升级群集以及对服务进行分区：

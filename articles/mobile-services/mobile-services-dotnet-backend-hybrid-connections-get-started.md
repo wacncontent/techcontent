@@ -52,32 +52,37 @@ ms.author: glenga
     若要了解如何下载 .NET 后端项目，请参阅[移动服务入门](./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md)。
 
 2. 在“解决方案资源管理器”中打开 Web.config 文件，找到 **connectionStrings** 节，添加类似于以下内容的新 SqlClient 项目，此项目指向本地 SQL Server 数据库：
-    
-        <add name="OnPremisesDBConnection" 
-         connectionString="Data Source=OnPremisesServer,1433;
-         Initial Catalog=OnPremisesDB;
-         User ID=HybridConnectionLogin;
-         Password=<**secure_password**>;
-         MultipleActiveResultSets=True"
-         providerName="System.Data.SqlClient" />
+
+    ```
+    <add name="OnPremisesDBConnection" 
+     connectionString="Data Source=OnPremisesServer,1433;
+     Initial Catalog=OnPremisesDB;
+     User ID=HybridConnectionLogin;
+     Password=<**secure_password**>;
+     MultipleActiveResultSets=True"
+     providerName="System.Data.SqlClient" />
+    ```
 
     请记得将这个字符串中的 `<**secure_password**>` 替换成你为 *HbyridConnectionLogin* 创建的密码。
-    
+
 3. 在 Visual Studio 中单击“保存”以保存 Web.config 文件。
 
-    > [!NOTE]在本地计算机上运行时，使用此连接设置。在 Azure 中运行时，则以门户中定义的连接设置覆盖此设置。
+    > [!NOTE]
+    >在本地计算机上运行时，使用此连接设置。在 Azure 中运行时，则以门户中定义的连接设置覆盖此设置。
 
 4. 展开“Models”文件夹并打开文件名以 *Context.cs* 结尾的数据模型文件。
 
 5. 修改 **DbContext** 实例构造函数，以将 `OnPremisesDBConnection` 值传递到类似于以下代码段的基本 **DbContext** 构造函数：
 
-        public class hybridService1Context : DbContext
+    ```
+    public class hybridService1Context : DbContext
+    {
+        public hybridService1Context()
+            : base("OnPremisesDBConnection")
         {
-            public hybridService1Context()
-                : base("OnPremisesDBConnection")
-            {
-            }
         }
+    }
+    ```
 
     现在，服务将使用新的 SQL Server 数据库连接。
 ##在本地测试数据库连接
@@ -98,7 +103,9 @@ ms.author: glenga
 
 3. 添加名为 `OnPremisesDBConnection` 的新 **SQL Server** 连接字符串，其值如下：
 
-        Server=OnPremisesServer,1433;Database=OnPremisesDB;User ID=HybridConnectionsLogin;Password=<**secure_password**>
+    ```
+    Server=OnPremisesServer,1433;Database=OnPremisesDB;User ID=HybridConnectionsLogin;Password=<**secure_password**>
+    ```
 
     将 `<**secure_password**>` 替换为 *HybridConnectionLogin* 的安全密码。
 
@@ -110,7 +117,8 @@ ms.author: glenga
 
 6. 与前面一样，使用启动页上的“立即试用”按钮，或使用连接到移动服务的客户端应用程序，调用可生成数据库更改的某些操作。
 
-    >[!NOTE]当你使用“立即试用”按钮来启动帮助 API 页时，请记得提供应用程序密钥作为密码（用户名为空白）。
+    >[!NOTE]
+    >当你使用“立即试用”按钮来启动帮助 API 页时，请记得提供应用程序密钥作为密码（用户名为空白）。
 
 7. 在 SQL Server Management Studio 中连接到 SQL Server 实例，打开对象资源管理器，然后依次展开“OnPremisesDB”数据库和“表”。
 
@@ -119,7 +127,7 @@ ms.author: glenga
     请注意，移动服务已使用混合连接将应用中生成的更改保存到本地数据库。
 
 ##另请参阅##
- 
+
 + [混合连接网站](http://azure.microsoft.com/zh-cn/services/biztalk-services/)
 <!--+ [BizTalk 服务：“仪表板”、“监视”、“缩放”、“配置”和“混合连接”选项卡](/documentation/articles/biztalk-dashboard-monitor-scale-tabs/)-->
 + [如何对 .NET 后端移动服务进行数据模型更改](./mobile-services-dotnet-backend-how-to-use-code-first-migrations.md)

@@ -32,7 +32,7 @@ Azure 目前不支持 Oracle 数据库的 Oracle Real Application Clusters (RAC)
 
 ### 没有静态内部 IP
 
-Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络的一部分，否则虚拟机的 IP 地址就是动态的，在虚拟机重启后可能会更改。这会导致问题，因为 Oracle 数据库需要静态的 IP 地址。若要避免此问题，请考虑将虚拟机添加到 Azure 虚拟网络中。有关详细信息，请参阅[虚拟网络](../virtual-network/index.md/)和[在 Azure 中创建虚拟网络](../virtual-network/virtual-networks-create-vnet-classic-portal.md)。
+Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络的一部分，否则虚拟机的 IP 地址就是动态的，在虚拟机重启后可能会更改。这会导致问题，因为 Oracle 数据库需要静态的 IP 地址。若要避免此问题，请考虑将虚拟机添加到 Azure 虚拟网络中。有关详细信息，请参阅[虚拟网络](../virtual-network/index.md)和[在 Azure 中创建虚拟网络](../virtual-network/virtual-networks-create-vnet-classic-portal.md)。
 
 ### 附加磁盘配置选项
 
@@ -47,13 +47,14 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 - **Oracle ASM 本身**与使用磁盘数组的方法相比，可能会导致更好的写操作性能，但会导致更差的读操作 IOPS。下图在逻辑上描绘了此安排。  
     ![](./media/virtual-machines-windows-classic-oracle-considerations/image2.png)
 
->[!IMPORTANT]逐条评估写性能和读性能之间的得失。使用这方法时的实际结果可能会有所不同。
+>[!IMPORTANT]
+>逐条评估写性能和读性能之间的得失。使用这方法时的实际结果可能会有所不同。
 
 ### 高可用性和灾难恢复注意事项
 
 在 Azure 虚拟机中使用 Oracle 数据库时，你负责实现高可用性和灾难恢复解决方案，以避免任何停机。你还负责备份自己的数据和应用程序。
 
-可以在 Azure 上使用[数据防护、活动数据防护](http://www.oracle.com/technetwork/articles/oem/dataguardoverview-083155.html)或 [Oracle Golden Gate](http://www.oracle.com/technetwork/middleware/goldengate) 实现 Oracle 数据库企业版（不带 RAC）的高可用性和灾难恢复，其中两个数据库位于两个单独的虚拟机中。这两个虚拟机都位于相同的[云服务](./virtual-machines-windows-classic-connect-vms.md)和相同的[虚拟网络](../virtual-network/index.md/)中，这样可确保它们能够通过专用的持久性 IP 地址相互访问。另外，我们建议你将虚拟机放在同一[可用性集](./virtual-machines-windows-manage-availability.md)中，以便 Azure 将它们置于不同的容错域和升级域中。请注意，只有同一云服务中的虚拟机可加入同一可用性集。每台虚拟机必须至少具有 2 GB 内存和 5 GB 磁盘空间。
+可以在 Azure 上使用[数据防护、活动数据防护](http://www.oracle.com/technetwork/articles/oem/dataguardoverview-083155.html)或 [Oracle Golden Gate](http://www.oracle.com/technetwork/middleware/goldengate) 实现 Oracle 数据库企业版（不带 RAC）的高可用性和灾难恢复，其中两个数据库位于两个单独的虚拟机中。这两个虚拟机都位于相同的[云服务](./virtual-machines-windows-classic-connect-vms.md)和相同的[虚拟网络](../virtual-network/index.md)中，这样可确保它们能够通过专用的持久性 IP 地址相互访问。另外，我们建议你将虚拟机放在同一[可用性集](./virtual-machines-windows-manage-availability.md)中，以便 Azure 将它们置于不同的容错域和升级域中。请注意，只有同一云服务中的虚拟机可加入同一可用性集。每台虚拟机必须至少具有 2 GB 内存和 5 GB 磁盘空间。
 
 有了 Oracle 数据防护，可以通过一个虚拟机中的主数据库、另一个虚拟机中的辅助（备用）数据库和它们之间的单向复制设置实现高可用性。结果是对数据库副本的读取访问权限。使用 Oracle GoldenGate，可以配置两个数据库之间的双向复制。若要了解如何使用这些工具为数据库设置高可用性解决方案，请参阅 Oracle 网站上的[活动数据防护](http://www.oracle.com/technetwork/database/features/availability/data-guard-documentation-152848.html)和 [GoldenGate](http://docs.oracle.com/goldengate/1212/gg-winux/index.html) 文档。如果你需要对数据库副本的读写访问权限，则可以使用 [Oracle 活动数据防护](http://www.oracle.com/uk/products/database/options/active-data-guard/overview/index.html)。
 
@@ -69,9 +70,11 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 
 -  **WebLogic Server 要求 T3 访问（例如，使用企业 JavaBean 时的 T3 访问）的公用端口和专用端口是相同的。** 请考虑多层方案，其中服务层 (EJB) 应用程序运行在 WebLogic Server 群集中，该群集包含名为 **SLWLS** 的云服务中的两个或更多个托管服务器。客户端层位于不同云服务中，该云服务运行尝试调用服务层中的 EJB 的简单 Java 程序。由于有必要对服务层进行负载均衡，因此需要为 WebLogic Server 群集中的虚拟机创建公共负载均衡终结点。如果为该终结点指定的专用端口不同于公用端口（例如，7006:7008），则会发生下面这样的错误：
 
-        [java] javax.naming.CommunicationException [Root exception is java.net.ConnectException: t3://example.chinacloudapp.cn:7006:
+    ```
+    [java] javax.naming.CommunicationException [Root exception is java.net.ConnectException: t3://example.chinacloudapp.cn:7006:
 
-        Bootstrap to: example.chinacloudapp.cn/138.91.142.178:7006' over: 't3' got an error or timed out]
+    Bootstrap to: example.chinacloudapp.cn/138.91.142.178:7006' over: 't3' got an error or timed out]
+    ```
 
     这是因为对于任何远程 T3 访问，WebLogic Server 都要求负载均衡器端口和 WebLogic 托管服务器端口是相同的。在上面的示例中，客户端访问端口 7006（负载均衡器端口），托管服务器侦听 7008（专用端口）。请注意，此限制仅适用于 T3 访问，而不适用于 HTTP。
 
@@ -81,7 +84,9 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 
     -  启动 WebLogic Server 时，请包括以下 JVM 参数：
 
-            -Dweblogic.rjvm.enableprotocolswitch=true
+        ```
+        -Dweblogic.rjvm.enableprotocolswitch=true
+        ```
 
 如需相关信息，请参阅 <http://support.oracle.com> 上的知识库文章 **860340.1**。
 

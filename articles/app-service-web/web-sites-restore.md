@@ -26,37 +26,38 @@ ms.author: cephalin
 ## <a name="PreviousBackup"></a>从现有备份还原应用
 
 1. 在 Azure 门户预览中应用的“设置”边栏选项卡上，单击“备份”以显示“备份”边栏选项卡。然后单击命令栏中的“立即还原”。
-    
+
     ![选择“立即还原”][ChooseRestoreNow]
 
 3. 在“还原”边栏选项卡中，首先选择备份源。
 
     ![](./media/web-sites-restore/021ChooseSource.png)
-    
+
     “应用备份”选项显示当前应用的所有现有备份，使你能够轻松地选择一个。“存储”选项使你能够从任何现有 Azure 存储帐户和订阅中的容器中选择任何备份 ZIP 文件。如果正在尝试还原其他应用的备份，请使用“存储”选项。
 
 4. 然后，在“还原目标”中指定应用还原的目标。
 
     ![](./media/web-sites-restore/022ChooseDestination.png)
-    
-    >[!WARNING] 如果选择“覆盖”，将清除当前应用中所有的现有数据。在单击“确定”之前，请确保该操作正是想要执行的操作。
-    
+
+    >[!WARNING]
+    > 如果选择“覆盖”，将清除当前应用中所有的现有数据。在单击“确定”之前，请确保该操作正是想要执行的操作。
+
     可选择“现有应用”将应用备份还原到同一资源组中的其他应用。使用此选项之前，应已使用应用备份中定义的镜像数据库配置在资源组中创建了其他应用。
-    
+
 5. 单击**“确定”**。
 
 ## <a name="StorageAccount"></a>从存储帐户中下载或删除备份
-    
+
 1. 在 Azure 门户预览的主“浏览”边栏选项卡中，选择“存储帐户”。
-    
+
     将显示现有存储帐户的列表。
-    
+
 2. 选择包含要下载或删除的备份的存储帐户。
-    
+
     将显示存储帐户的边栏选项卡。
 
 3. 在存储帐户边栏选项卡中，选择所需的容器
-    
+
     ![查看容器][ViewContainers]
 
 4. 选择要下载或删除的备份文件。
@@ -66,15 +67,15 @@ ms.author: cephalin
 5. 单击“下载”还是“删除”具体取决于要执行的操作。
 
 ## <a name="OperationLogs"></a>监视还原操作
-    
+
 1. 若要查看有关应用还原操作成功与否的详细信息，请导航到 Azure 门户预览中的“审核日志”边栏选项卡。
-    
+
     “审核日志”边栏选项卡将显示所有的操作，以及级别、状态、资源和时间的详细信息。
-    
+
 2. 向下滚动以查找所需的还原操作，然后单击以选中。
 
 “详细信息”边栏选项卡将显示与还原操作相关的可用信息。
-    
+
 ## 后续步骤
 
 还可以使用 REST API 备份和还原应用服务应用（请参阅[使用 REST 备份和还原应用服务应用](./websites-csm-backup.md)）。
@@ -94,5 +95,5 @@ ms.author: cephalin
 [ManagementServicesOperationLogsList]: ./media/web-sites-restore/11ManagementServicesOperationLogsList.png
 [DetailsButton]: ./media/web-sites-restore/12DetailsButton.png
 [OperationDetails]: ./media/web-sites-restore/13OperationDetails.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

@@ -32,7 +32,8 @@ Azure SDK for PHP 包括允许你针对 Azure 开发、部署和管理 PHP 应�
 
 本主题中的说明假定您已安装 [PHP][install-php]。
 
-> [!NOTE] 若要使用 Azure 的 PHP 客户端库，则必须安装 PHP 5.5 或更高版本。
+> [!NOTE]
+> 若要使用 Azure 的 PHP 客户端库，则必须安装 PHP 5.5 或更高版本。
 
 ##Azure 的 PHP 客户端库
 
@@ -44,23 +45,29 @@ Azure 的 PHP 客户端库提供了一个用于从任何操作系统访问 Azure
 
 1. [安装 Git][install-git]。
 
-    > [!NOTE] 在 Windows 上，您还需要向您的 PATH 环境变量添加 Git 可执行文件。
+    > [!NOTE]
+    > 在 Windows 上，您还需要向您的 PATH 环境变量添加 Git 可执行文件。
 
 2. 在你的项目的根目录中创建一个名为 **composer.json** 的文件并向其添加以下代码：
 
-        {
-            "require": {
-                "microsoft/windowsazure": "^0.4"
-            }
+    ```
+    {
+        "require": {
+            "microsoft/windowsazure": "^0.4"
         }
+    }
+    ```
 
 3. 将 **[composer.phar][composer-phar]** 下载到您的项目根目录中。
 
 4. 打开命令提示符并在项目根目录中执行该文件
 
-        php composer.phar install
+    ```
+    php composer.phar install
+    ```
 
->[!NOTE] 安装完毕后，需要对终结点做一个全局的替换--把“windows.net”替换为“chinacloudapi.cn”，不然工具将会尝试连接到 Azure 全球，而不是 Azure 中国。
+>[!NOTE]
+> 安装完毕后，需要对终结点做一个全局的替换--把“windows.net”替换为“chinacloudapi.cn”，不然工具将会尝试连接到 Azure 全球，而不是 Azure 中国。
 
 ##Azure PowerShell 和 Azure 模拟器
 

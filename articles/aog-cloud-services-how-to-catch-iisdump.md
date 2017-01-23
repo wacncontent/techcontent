@@ -24,15 +24,19 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 
 如果您 IIS 日志在问题期间返回 200，则证明 IIS 可以正常处理请求，如：  
 
-    2016-6-31 22:14:00 W3SVC1273337584 RD77890D5837721 xx.xxx.xxx.x POST  
-    /Api/Aggregator/MemberInfoQuery - 80 - xx.xxx.xxx.xxx HTTP/1.1 - - -   
-    yourcloudservicename.chinacloudapp.cn 200 0 0 1574 453 140
+```
+2016-6-31 22:14:00 W3SVC1273337584 RD77890D5837721 xx.xxx.xxx.x POST  
+/Api/Aggregator/MemberInfoQuery - 80 - xx.xxx.xxx.xxx HTTP/1.1 - - -   
+yourcloudservicename.chinacloudapp.cn 200 0 0 1574 453 140
+```
 
 如果您的 IIS 日志在问题期间返回 503 或者 404，则说明您的 IIS server 无法正常成功处理请求，比如 503.2，它表示您当前时间的并发请求超过了限定数，也就是您的 web 应用因为某些原因对外面的请求处理不过来，至于为什么我们就必须通过生成 dump 文件来分析。  
 
-    2016-6-31 01:52:25 W3SVC1273337584 RD77890D5837721 xx.xxx.xxx.x POST  
-    /Api/Aggregator/LogisticCodeQuery - 80 - xx.xxx.xxx.xxx HTTP/1.0 - - -  
-    yourcloudservicename.chinacloudapp.cn 503 2 0 214 354 106
+```
+2016-6-31 01:52:25 W3SVC1273337584 RD77890D5837721 xx.xxx.xxx.x POST  
+/Api/Aggregator/LogisticCodeQuery - 80 - xx.xxx.xxx.xxx HTTP/1.0 - - -  
+yourcloudservicename.chinacloudapp.cn 503 2 0 214 354 106
+```
 
 ## RDP 到 role 上抓取 dump 文件：
 
@@ -50,32 +54,36 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 2. 打开 web.config, 可以将以下高亮部分 &lt;traceFailedRequests&gt; 粘贴到您的 web.config 里的 &lt;system.webServer&gt; 内。
 &lt;traceFailedRequests&gt; 是用来定义一个 web 请求到 IIS server 如果超时、失败（404/500）时记录相应的状态，详细的使用方法您可以参考[链接](https://www.iis.net/configreference/system.webserver/tracing/tracefailedrequests/add/failuredefinitions)。下面我们以一个请求响应超过 40s 则生成 dump 为例。
 
-        <configuration>
-        <system.webServer>
-                    
-        <tracing>
-          <traceFailedRequests>
-            <remove path="*" />
-            <add path="*" customActionExe="C:\dump\IISdump\procdump.exe" customActionParams="-ma -accepteula %1% C:\dump\IISdump" customActionTriggerLimit="10">
-              <traceAreas>
-                <add provider="ASP" verbosity="Verbose" />
-                <add provider="ASPNET" areas="Infrastructure,Module,Page,AppServices" verbosity="Verbose" />
-                <add provider="ISAPI Extension" verbosity="Verbose" />
-                <add provider="WWW Server" areas="Authentication,Security,Filter,StaticFile,CGI,Compression,Cache,RequestNotifications,Module,FastCGI" verbosity="Verbose" />
-              </traceAreas>
-              <failureDefinitions timeTaken="00:00:40" />
-            </add>
-          </traceFailedRequests>
-        </tracing>
-                    
-        </system.webServer>
-        </configuration>
+    ```
+    <configuration>
+    <system.webServer>
+
+    <tracing>
+      <traceFailedRequests>
+        <remove path="*" />
+        <add path="*" customActionExe="C:\dump\IISdump\procdump.exe" customActionParams="-ma -accepteula %1% C:\dump\IISdump" customActionTriggerLimit="10">
+          <traceAreas>
+            <add provider="ASP" verbosity="Verbose" />
+            <add provider="ASPNET" areas="Infrastructure,Module,Page,AppServices" verbosity="Verbose" />
+            <add provider="ISAPI Extension" verbosity="Verbose" />
+            <add provider="WWW Server" areas="Authentication,Security,Filter,StaticFile,CGI,Compression,Cache,RequestNotifications,Module,FastCGI" verbosity="Verbose" />
+          </traceAreas>
+          <failureDefinitions timeTaken="00:00:40" />
+        </add>
+      </traceFailedRequests>
+    </tracing>
+
+    </system.webServer>
+    </configuration>
+    ```
 
     >**注意：**failureDefinitions 部分可以设置生成 dump 的触发条件，我们这边是以 IIS 处理请求超过 40s 则生成 dump 为例，您可以根据自己的需求做一些改动。`C:\dump\IISdump`为生成 dump 的存放位置，您也可以根据自己的需求做修改。 
 3. 修改目录 D:\Windows\System32\inetsrv\config 下的 applicationHost.config 文件  
   在 system.applicationHost 部分做如下修改，添加 customActionsEnabled="true"
 
-         <traceFailedRequestsLogging enabled="true"  maxLogFiles="1000" customActionsEnabled="true" />
+    ```
+     <traceFailedRequestsLogging enabled="true"  maxLogFiles="1000" customActionsEnabled="true" />
+    ```
     >**注意:** customActionsEnabled 是需要添加的参数，因为我们是做 customize 的 dump 生成，如果不加，则 dump 无法自动生成。
 
 4. 如果您是像我的示例那样，将 dump 生成在 C 盘的某个位置，会因为要在 C 盘上写数据被 denial 掉，所以我们需要把该文件添加 everyone 权限，并且设置成 full control，但是如果您选择 dump 文件是生成在 E 盘或者其他非系统盘的位置，则可以不用做这一步。  
@@ -83,4 +91,3 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 
 5. 验证该问题，可以生成 dump 文件：  
  ![iis-dump](./media/aog-cloud-services-how-to-catch-iisdump/iis-dump.png "iis-dump")
-    

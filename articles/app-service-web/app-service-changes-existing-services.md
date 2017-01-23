@@ -74,6 +74,6 @@ App Service 将以下现有 Azure 服务 - [网站](https://www.azure.cn/home/fe
 </tbody>
 </table>
 
-要了解详细信息，请访问 [App Service 文档](../app-service/index.md/)。
+要了解详细信息，请访问 [App Service 文档](../app-service/index.md)。
 
 <!---HONumber=Mooncake_0328_2016-->

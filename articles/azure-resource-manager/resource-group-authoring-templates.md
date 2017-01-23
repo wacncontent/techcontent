@@ -30,14 +30,16 @@ ms.author: tomfitz
 ## <a name="template-format"></a> 模板格式
 使用最简单的结构时，模板包含以下元素：
 
-    {
-       "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-       "contentVersion": "",
-       "parameters": {  },
-       "variables": {  },
-       "resources": [  ],
-       "outputs": {  }
-    }
+```
+{
+   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+   "contentVersion": "",
+   "parameters": {  },
+   "variables": {  },
+   "resources": [  ],
+   "outputs": {  }
+}
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -57,11 +59,13 @@ ms.author: tomfitz
 
 以下示例演示如何在构造值时使用一些函数：
 
-    "variables": {
-       "location": "[resourceGroup().location]",
-       "usernameAndPassword": "[concat('parameters('username'), ':', parameters('password'))]",
-       "authorizationHeader": "[concat('Basic ', base64(variables('usernameAndPassword')))]"
-    }
+```
+"variables": {
+   "location": "[resourceGroup().location]",
+   "usernameAndPassword": "[concat('parameters('username'), ':', parameters('password'))]",
+   "authorizationHeader": "[concat('Basic ', base64(variables('usernameAndPassword')))]"
+}
+```
 
 有关模板函数的完整列表，请参阅 [Azure 资源管理器模板函数](./resource-group-template-functions.md)。
 
@@ -72,20 +76,22 @@ ms.author: tomfitz
 
 使用以下结构定义参数：
 
-    "parameters": {
-       "<parameter-name>" : {
-         "type" : "<type-of-parameter-value>",
-         "defaultValue": "<default-value-of-parameter>",
-         "allowedValues": [ "<array-of-allowed-values>" ],
-         "minValue": <minimum-value-for-int>,
-         "maxValue": <maximum-value-for-int>,
-         "minLength": <minimum-length-for-string-or-array>,
-         "maxLength": <maximum-length-for-string-or-array-parameters>,
-         "metadata": {
-             "description": "<description-of-the parameter>" 
-         }
-       }
-    }
+```
+"parameters": {
+   "<parameter-name>" : {
+     "type" : "<type-of-parameter-value>",
+     "defaultValue": "<default-value-of-parameter>",
+     "allowedValues": [ "<array-of-allowed-values>" ],
+     "minValue": <minimum-value-for-int>,
+     "maxValue": <maximum-value-for-int>,
+     "minLength": <minimum-length-for-string-or-array>,
+     "maxLength": <maximum-length-for-string-or-array-parameters>,
+     "metadata": {
+         "description": "<description-of-the parameter>" 
+     }
+   }
+}
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -119,44 +125,45 @@ ms.author: tomfitz
 > 例如，部署历史记录中的以下条目将显示字符串和对象的值，但不会显示 secureString 和 secureObject 的值。
 ><p>
 > ![显示部署值](./media/resource-group-authoring-templates/show-parameters.png)  
-
 >
 
 以下示例演示如何定义参数：
 
-    "parameters": {
-      "siteName": {
-        "type": "string",
-        "defaultValue": "[concat('site', uniqueString(resourceGroup().id))]"
-      },
-      "hostingPlanName": {
-        "type": "string",
-        "defaultValue": "[concat(parameters('siteName'),'-plan')]"
-      },
-      "skuName": {
-        "type": "string",
-        "defaultValue": "F1",
-        "allowedValues": [
-          "F1",
-          "D1",
-          "B1",
-          "B2",
-          "B3",
-          "S1",
-          "S2",
-          "S3",
-          "P1",
-          "P2",
-          "P3",
-          "P4"
-        ]
-      },
-      "skuCapacity": {
-        "type": "int",
-        "defaultValue": 1,
-        "minValue": 1
-      }
-    }
+```
+"parameters": {
+  "siteName": {
+    "type": "string",
+    "defaultValue": "[concat('site', uniqueString(resourceGroup().id))]"
+  },
+  "hostingPlanName": {
+    "type": "string",
+    "defaultValue": "[concat(parameters('siteName'),'-plan')]"
+  },
+  "skuName": {
+    "type": "string",
+    "defaultValue": "F1",
+    "allowedValues": [
+      "F1",
+      "D1",
+      "B1",
+      "B2",
+      "B3",
+      "S1",
+      "S2",
+      "S3",
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+    ]
+  },
+  "skuCapacity": {
+    "type": "int",
+    "defaultValue": 1,
+    "minValue": 1
+  }
+}
+```
 
 若要了解如何在部署过程中输入参数值，请参阅 [Deploy an application with Azure Resource Manager template](./resource-group-template-deploy.md)（使用 Azure Resource Manager 模板部署应用程序）。
 
@@ -165,72 +172,80 @@ ms.author: tomfitz
 
 使用以下结构定义变量：
 
-    "variables": {
-       "<variable-name>": "<variable-value>",
-       "<variable-name>": { 
-           <variable-complex-type-value> 
-       }
-    }
+```
+"variables": {
+   "<variable-name>": "<variable-value>",
+   "<variable-name>": { 
+       <variable-complex-type-value> 
+   }
+}
+```
 
 以下示例演示如何定义从两个参数值构造出的变量：
 
-    "variables": {
-        "connectionString": "[concat('Name=', parameters('username'), ';Password=', parameters('password'))]"
-    }
+```
+"variables": {
+    "connectionString": "[concat('Name=', parameters('username'), ';Password=', parameters('password'))]"
+}
+```
 
 下一个示例演示一个属于复杂的 JSON 类型的变量，以及从其他变量构造出的变量：
 
-    "parameters": {
-       "environmentName": {
-         "type": "string",
-         "allowedValues": [
-           "test",
-           "prod"
-         ]
-       }
-    },
-    "variables": {
-       "environmentSettings": {
-         "test": {
-           "instancesSize": "Small",
-           "instancesCount": 1
-         },
-         "prod": {
-           "instancesSize": "Large",
-           "instancesCount": 4
-         }
-       },
-       "currentEnvironmentSettings": "[variables('environmentSettings')[parameters('environmentName')]]",
-       "instancesSize": "[variables('currentEnvironmentSettings').instancesSize]",
-       "instancesCount": "[variables('currentEnvironmentSettings').instancesCount]"
-    }
+```
+"parameters": {
+   "environmentName": {
+     "type": "string",
+     "allowedValues": [
+       "test",
+       "prod"
+     ]
+   }
+},
+"variables": {
+   "environmentSettings": {
+     "test": {
+       "instancesSize": "Small",
+       "instancesCount": 1
+     },
+     "prod": {
+       "instancesSize": "Large",
+       "instancesCount": 4
+     }
+   },
+   "currentEnvironmentSettings": "[variables('environmentSettings')[parameters('environmentName')]]",
+   "instancesSize": "[variables('currentEnvironmentSettings').instancesSize]",
+   "instancesCount": "[variables('currentEnvironmentSettings').instancesCount]"
+}
+```
 
 ## <a name="resources"></a> 资源
 在 resources 节，可以定义部署或更新的资源。此节可能比较复杂，因为用户必须了解要部署哪些类型才能提供正确的值。
 
 使用以下结构定义资源：
 
-    "resources": [
-       {
-         "apiVersion": "<api-version-of-resource>",
-         "type": "<resource-provider-namespace/resource-type-name>",
-         "name": "<name-of-the-resource>",
-         "location": "<location-of-resource>",
-         "tags": "<name-value-pairs-for-resource-tagging>",
-         "comments": "<your-reference-notes>",
-         "dependsOn": [
-           "<array-of-related-resource-names>"
-         ],
-         "properties": "<settings-for-the-resource>",
-         "copy": {
-           "name": "<name-of-copy-loop>",
-           "count": "<number-of-iterations>"
-         }
-         "resources": [
-           "<array-of-child-resources>"
-         ]
-       }
-    ]
+```
+"resources": [
+   {
+     "apiVersion": "<api-version-of-resource>",
+     "type": "<resource-provider-namespace/resource-type-name>",
+     "name": "<name-of-the-resource>",
+     "location": "<location-of-resource>",
+     "tags": "<name-value-pairs-for-resource-tagging>",
+     "comments": "<your-reference-notes>",
+     "dependsOn": [
+       "<array-of-related-resource-names>"
+     ],
+     "properties": "<settings-for-the-resource>",
+     "copy": {
+       "name": "<name-of-copy-loop>",
+       "count": "<number-of-iterations>"
+     }
+     "resources": [
+       "<array-of-child-resources>"
+     ]
+   }
+]
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -249,124 +264,144 @@ ms.author: tomfitz
 
 若要通过 **PowerShell** 获取所有资源提供程序，请使用：
 
-    Get-AzureRmResourceProvider -ListAvailable
+```
+Get-AzureRmResourceProvider -ListAvailable
+```
 
 从返回的列表中，找到感兴趣的资源提供程序。若要获取资源提供程序（如存储）的资源类型，请使用：
 
-    (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes
+```
+(Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes
+```
 
 若要获取资源类型（如存储帐户）的 API 版本，请使用：
 
-    ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).ApiVersions
+```
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).ApiVersions
+```
 
 若要获取资源类型支持的位置，请使用：
 
-    ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).Locations
+```
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).Locations
+```
 
 若要通过 **Azure CLI** 获取所有资源提供程序，请使用：
 
-    azure provider list
+```
+azure provider list
+```
 
 从返回的列表中，找到感兴趣的资源提供程序。若要获取资源提供程序（如存储）的资源类型，请使用：
 
-    azure provider show Microsoft.Storage
+```
+azure provider show Microsoft.Storage
+```
 
 若要获取支持的位置和 API 版本，请使用：
 
-    azure provider show Microsoft.Storage --details --json
+```
+azure provider show Microsoft.Storage --details --json
+```
 
 若要详细了解资源提供程序，请参阅 [Resource Manager 提供程序、区域、API 版本和架构](./resource-manager-supported-services.md)。
 
 resources 节包含要部署的资源数组。在每个资源内，还可以定义子资源数组。因此，resources 节的结构可能类似于：
 
-    "resources": [
-       {
-           "name": "resourceA",
-       },
-       {
-           "name": "resourceB",
-           "resources": [
-               {
-                   "name": "firstChildResourceB",
-               },
-               {   
-                   "name": "secondChildResourceB",
-               }
-           ]
-       },
-       {
-           "name": "resourceC",
-       }
-    ]
+```
+"resources": [
+   {
+       "name": "resourceA",
+   },
+   {
+       "name": "resourceB",
+       "resources": [
+           {
+               "name": "firstChildResourceB",
+           },
+           {   
+               "name": "secondChildResourceB",
+           }
+       ]
+   },
+   {
+       "name": "resourceC",
+   }
+]
+```
 
 以下示例演示了 **Microsoft.Web/serverfarms** 资源，以及一个包含 **Extensions** 子资源的 **Microsoft.Web/sites** 资源。请注意，站点标记为依赖于服务器场，因为只有该服务器场存在，才能部署该站点。另请注意，**Extensions** 资源是站点的子级。
 
+```
+"resources": [
+  {
+    "apiVersion": "2015-08-01",
+    "name": "[parameters('hostingPlanName')]",
+    "type": "Microsoft.Web/serverfarms",
+    "location": "[resourceGroup().location]",
+    "tags": {
+      "displayName": "HostingPlan"
+    },
+    "sku": {
+      "name": "[parameters('skuName')]",
+      "capacity": "[parameters('skuCapacity')]"
+    },
+    "properties": {
+      "name": "[parameters('hostingPlanName')]",
+      "numberOfWorkers": 1
+    }
+  },
+  {
+    "apiVersion": "2015-08-01",
+    "type": "Microsoft.Web/sites",
+    "name": "[parameters('siteName')]",
+    "location": "[resourceGroup().location]",
+    "tags": {
+      "environment": "test",
+      "team": "Web"
+    },
+    "dependsOn": [
+      "[concat(parameters('hostingPlanName'))]"
+    ],
+    "properties": {
+      "name": "[parameters('siteName')]",
+      "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+    },
     "resources": [
       {
         "apiVersion": "2015-08-01",
-        "name": "[parameters('hostingPlanName')]",
-        "type": "Microsoft.Web/serverfarms",
-        "location": "[resourceGroup().location]",
-        "tags": {
-          "displayName": "HostingPlan"
-        },
-        "sku": {
-          "name": "[parameters('skuName')]",
-          "capacity": "[parameters('skuCapacity')]"
-        },
-        "properties": {
-          "name": "[parameters('hostingPlanName')]",
-          "numberOfWorkers": 1
-        }
-      },
-      {
-        "apiVersion": "2015-08-01",
-        "type": "Microsoft.Web/sites",
-        "name": "[parameters('siteName')]",
-        "location": "[resourceGroup().location]",
-        "tags": {
-          "environment": "test",
-          "team": "Web"
-        },
+        "type": "extensions",
+        "name": "MSDeploy",
         "dependsOn": [
-          "[concat(parameters('hostingPlanName'))]"
+          "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
         ],
         "properties": {
-          "name": "[parameters('siteName')]",
-          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
-        },
-        "resources": [
-          {
-            "apiVersion": "2015-08-01",
-            "type": "extensions",
-            "name": "MSDeploy",
-            "dependsOn": [
-              "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
-            ],
-            "properties": {
-              "packageUri": "https://auxmktplceprod.blob.core.windows.net/packages/StarterSite-modified.zip",
-              "dbType": "None",
-              "connectionString": "",
-              "setParameters": {
-                "Application Path": "[parameters('siteName')]"
-              }
-            }
+          "packageUri": "https://auxmktplceprod.blob.core.windows.net/packages/StarterSite-modified.zip",
+          "dbType": "None",
+          "connectionString": "",
+          "setParameters": {
+            "Application Path": "[parameters('siteName')]"
           }
-        ]
+        }
       }
     ]
+  }
+]
+```
 
 ## Outputs
 在 Outputs 节中，可以指定从部署返回的值。例如，可能会返回用于访问已部署资源的 URI。
 
 以下示例演示了输出定义的结构：
 
-    "outputs": {
-       "<outputName>" : {
-         "type" : "<type-of-output-value>",
-         "value": "<output-value-expression>"
-       }
-    }
+```
+"outputs": {
+   "<outputName>" : {
+     "type" : "<type-of-output-value>",
+     "value": "<output-value-expression>"
+   }
+}
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -376,12 +411,14 @@ resources 节包含要部署的资源数组。在每个资源内，还可以定�
 
 以下示例演示了 Outputs 节中返回的值。
 
-    "outputs": {
-       "siteUri" : {
-         "type" : "string",
-         "value": "[concat('http://',reference(resourceId('Microsoft.Web/sites', parameters('siteName'))).hostNames[0])]"
-       }
-    }
+```
+"outputs": {
+   "siteUri" : {
+     "type" : "string",
+     "value": "[concat('http://',reference(resourceId('Microsoft.Web/sites', parameters('siteName'))).hostNames[0])]"
+   }
+}
+```
 
 有关如何处理输出的详细信息，请参阅 [Sharing state in Azure Resource Manager templates](./best-practices-resource-manager-state.md)（在 Azure Resource Manager 模板中共享状态）。
 

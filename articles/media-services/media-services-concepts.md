@@ -65,7 +65,8 @@ ms.author: juliako
 
 一个 Blob 容器包含一组 Blob 集。Blob 容器用作媒体服务中的访问控制分界点和资产上的共享访问签名 (SAS) 定位符。一个 Azure 存储帐户可以包含无数个 Blob 容器。一个容器可以存储无数个 Blob。
 
->[!NOTE]在不使用媒体服务 API 的情况下，不应该尝试更改媒体服务生成的 blob 容器内容。
+>[!NOTE]
+>在不使用媒体服务 API 的情况下，不应该尝试更改媒体服务生成的 blob 容器内容。
 
 ###<a id="locators"></a>定位符
 
@@ -77,7 +78,7 @@ ms.author: juliako
 
 ###存储帐户
 
-对 Azure 存储空间进行的所有访问都要通过存储帐户完成。一个媒体服务帐户可与一个或多个存储帐户相关联。一个帐户可以包含无限个容器，只要每个帐户的容器总大小不超过 500TB 即可。媒体服务提供 SDK 级工具，可用于管理多个存储帐户，并在上传到这些帐户时基于指标或随机分发使资产分发达到负载均衡。有关详细信息，请参阅[使用 Azure 存储空间](../storage/index.md/)。
+对 Azure 存储空间进行的所有访问都要通过存储帐户完成。一个媒体服务帐户可与一个或多个存储帐户相关联。一个帐户可以包含无限个容器，只要每个帐户的容器总大小不超过 500TB 即可。媒体服务提供 SDK 级工具，可用于管理多个存储帐户，并在上传到这些帐户时基于指标或随机分发使资产分发达到负载均衡。有关详细信息，请参阅[使用 Azure 存储空间](../storage/index.md)。
 
 ##作业和任务
 
@@ -96,7 +97,7 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 若要使用[动态打包](./media-services-dynamic-packaging-overview.md)，必须执行下列操作：
 
 - 将夹层（源）文件编码成一组自适应比特率 MP4 文件或自适应比特率平滑流文件（本教程稍后将演示编码步骤）。
-- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints/)。
+- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 媒体服务支持将在本文中介绍的以下按需编码器：
 
@@ -193,7 +194,9 @@ StreamingEndpoint 表示一个流服务，该服务可以直接将内容传送�
 
 若要为用户提供渐进式下载 URL，必须先创建一个 OnDemandOrigin 定位符。创建定位符可以生成资产的基本路径。然后，需要追加 MP4 文件的名称。例如：
 
-    http://amstest1.streaming.mediaservices.chinacloudapi.cn/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4
+```
+http://amstest1.streaming.mediaservices.chinacloudapi.cn/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4
+```
 
 ###流式处理 URL
 
@@ -209,25 +212,33 @@ StreamingEndpoint 表示一个流服务，该服务可以直接将内容传送�
 
     {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest
 
-        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest
+    ```
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest
+    ```
 
 - MPEG DASH
 
     {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=mpd-time-csf)
 
-        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf)
+    ```
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf)
+    ```
 
 - Apple HTTP 实时流 (HLS) V4
 
     {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=m3u8-aapl)
 
-        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl)
+    ```
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl)
+    ```
 
 - Apple HTTP 实时流 (HLS) V3
 
     {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=m3u8-aapl-v3)
 
-        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3)
+    ```
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3)
+    ```
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: remove HDS related content-->

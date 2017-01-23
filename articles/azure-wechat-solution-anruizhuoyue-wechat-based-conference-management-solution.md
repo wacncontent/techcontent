@@ -54,23 +54,23 @@ wacn.date: 01/17/2017
 3. 参考下图所示配置修改网站配置文件（web.config）中 AppSettings 配置项；
 
     ![1](./media/azure-wechat-solution-anruizhuoyue-wechat-based-conference-management-solution/1.png)
- 
+
 ### 微信配置
 
-1.	打开微信服务好开发模式；
+1. 打开微信服务好开发模式；
 
-2.	按照下图所示配置，配置服务号的服务器基本配置；
+2. 按照下图所示配置，配置服务号的服务器基本配置；
 
     ![2](./media/azure-wechat-solution-anruizhuoyue-wechat-based-conference-management-solution/2.png)
- 
-3.	参考下图完成微信公众号业务域名、JS 接口安全域名及网页授权配置。
+
+3. 参考下图完成微信公众号业务域名、JS 接口安全域名及网页授权配置。
 
     ![3](./media/azure-wechat-solution-anruizhuoyue-wechat-based-conference-management-solution/3.png)
- 
-4.	参考下图修改配置文件（web.config）AppSettigs 中微信相关配置项。
+
+4. 参考下图修改配置文件（web.config）AppSettigs 中微信相关配置项。
 
     ![4](./media/azure-wechat-solution-anruizhuoyue-wechat-based-conference-management-solution/4.png)
- 
+
 ### 系统初始化
 
 系统部署完成后，在浏览器中打开 http://yourwebapp.chinacloudsites.cn ，系统会自动完成初始化的工作，包括数据库初始化，微信底部菜单初始化。
@@ -81,4 +81,3 @@ wacn.date: 01/17/2017
 2. 签到管理页面：http://yourwebapp.chinacloudsites.cn/checkin/allusers
 
 3. 微信自动回复服务URL：http://yourwebapp.chinacloudsites.cn/wce/
-

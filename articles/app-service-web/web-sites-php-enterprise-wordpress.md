@@ -49,7 +49,8 @@ Azure App Service 为大规模的关键任务 [WordPress][wordpress] 站点提�
 
 若要将流量复制并路由到多个 MySQL 数据库，可使用 [MySQL Cluster Carrier Grade Edition (CGE)][cge]（MySQL 群集运营级版本 (CGE)）。
 
->[!NOTE] 对于多区域部署，需要在 IaaS 虚拟机中托管 MySQL 群集。Azure 上的 MySQL 数据库不支持多区域部署。
+>[!NOTE]
+> 对于多区域部署，需要在 IaaS 虚拟机中托管 MySQL 群集。Azure 上的 MySQL 数据库不支持多区域部署。
 
 ### 使用媒体存储和缓存的多区域部署
 如果该站点接受上传或主机媒体文件，请使用 Azure Blob 存储。如果你需要进行缓存，可考虑 [Redis 缓存][rediscache]。
@@ -205,7 +206,7 @@ Azure App Service 为大规模的关键任务 [WordPress][wordpress] 站点提�
 [trafficmanager]: ../traffic-manager/traffic-manager-overview.md
 [backup]: ./web-sites-backup.md
 [restore]: ./web-sites-restore.md
-[rediscache]: ../redis-cache/index.md/
+[rediscache]: ../redis-cache/index.md
 [managedcache]: http://msdn.microsoft.com/zh-cn/library/azure/dn386122.aspx
 [websitescale]: ./web-sites-scale.md
 [managedcachescale]: http://msdn.microsoft.com/zh-cn/library/azure/dn386113.aspx

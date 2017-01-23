@@ -80,7 +80,9 @@ ms.author: v-livech
 
 [如何在 Azure 上的 Windows 中使用 SSH 密钥](./virtual-machines-linux-ssh-from-windows.md)
 
-    ssh -i ~/.ssh/azure_id_rsa ubuntu@13.91.99.206
+```
+ssh -i ~/.ssh/azure_id_rsa ubuntu@13.91.99.206
+```
 
 ## 后续步骤
 现在，已快速创建了用于测试或演示的 Linux VM。若要根据基础结构创建自定义的 Linux VM，可根据下列任一文章所述执行操作。

@@ -19,7 +19,7 @@ ms.author: syamk
 ---
 
 # DocumentDB 中的请求单位
-现已推出：DocumentDB [请求单位计算器](https://www.documentdb.com/capacityplanner)。详细了解如何[估计吞吐量需求](./documentdb-request-units.md#estimating-throughput-needs/)。
+现已推出：DocumentDB [请求单位计算器](https://www.documentdb.com/capacityplanner)。详细了解如何[估计吞吐量需求](./documentdb-request-units.md#estimating-throughput-needs)。
 
 ![吞吐量计算器][5]
 
@@ -57,7 +57,8 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 ##估计吞吐量需求 <a name="estimating-throughput-needs"></a>
 请求单位是请求处理成本的规范化的度量。单个请求单位用于表示读取（通过自链接或 ID）一个包含 10 个唯一属性值（系统属性除外）的 1 KB JSON 文档所需的处理容量。插入、替换或删除同一文档的请求要占用服务的更多处理，因此需要更多请求单位。
 
-> [!NOTE] 用于 1 KB 文档的 1 个请求单位基线通过自链接或文档的ID 与简单的 GET 对应。
+> [!NOTE]
+> 用于 1 KB 文档的 1 个请求单位基线通过自链接或文档的ID 与简单的 GET 对应。
 
 ### 使用请求单位计算器
 若要帮助客户微调其吞吐量估算，可以使用一个基于 Web 的[请求单位计算器](https://www.documentdb.com/capacityplanner)来帮助估计典型操作的请求单位要求，包括：
@@ -72,17 +73,18 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 该工具易于使用：
 
 1. 上载一个或多个有代表性的 JSON 文档。
-   
+
     ![将文档上载到请求单位计算器][2]
 2. 若要预估数据存储需求，请输入你预期要存储的文档总数。
 3. 输入所需的文档创建、读取、更新和删除操作数目（以秒为单位）。若要预估文档更新操作的请求单位费用，请上载上述步骤 1 中包含典型字段更新的示例文档的副本。例如，如果文档更新通常会修改名为 lastLogin 和 userVisits 的两个属性，则只要复制示例文档、更新这两个属性的值，并上载复制的文档。
-   
+
     ![在请求单位计算器中输入吞吐量要求][3]
 4. 单击“计算”，然后查看结果。
-   
+
     ![请求单位计算器结果][4]
 
->[!NOTE]如果你有多种文档类型，它们的索引属性大小和数目截然不同，则将每种*类型*的典型文档的示例上载到该工具，然后计算结果。
+>[!NOTE]
+>如果你有多种文档类型，它们的索引属性大小和数目截然不同，则将每种*类型*的典型文档的示例上载到该工具，然后计算结果。
 
 ### 使用 DocumentDB 请求费用响应标头
 每个来自 DocumentDB 服务的响应都包含一个包含用于请求的请求单位的自定义标头 (x-ms-request-charge)。此标头也可通过 DocumentDB SDK 访问。在 .NET SDK 中，RequestCharge 是 ResourceResponse 对象的属性。对于查询，在 Azure 门户预览中的 DocumentDB 查询资源管理器提供了用于执行的查询的请求费用信息。
@@ -91,7 +93,8 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 
 基于这一点，有一种方法可以估计应用程序所需的保留的吞吐量：记录与针对应用程序所使用的代表性文档运行典型操作相关联的请求单位费用，然后估计你预计每秒执行的操作数。也要确保测算并包含典型查询和 DocumentDB 脚本使用情况。
 
->[!NOTE]如果你有多种文档类型，它们的索引属性大小和数目截然不同，则记录与每种*类型*的典型文档相关联的适用操作请求单位费用。
+>[!NOTE]
+>如果你有多种文档类型，它们的索引属性大小和数目截然不同，则记录与每种*类型*的典型文档相关联的适用操作请求单位费用。
 
 例如：
 
@@ -105,55 +108,58 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 ## 请求单位估计示例
 请考虑以下 ~1 KB 文档：
 
+```
+{
+ "id": "08259",
+  "description": "Cereals ready-to-eat, KELLOGG, KELLOGG'S CRISPIX",
+  "tags": [
     {
-     "id": "08259",
-      "description": "Cereals ready-to-eat, KELLOGG, KELLOGG'S CRISPIX",
-      "tags": [
-        {
-          "name": "cereals ready-to-eat"
-        },
-        {
-          "name": "kellogg"
-        },
-        {
-          "name": "kellogg's crispix"
-        }
-    ],
-      "version": 1,
-      "commonName": "Includes USDA Commodity B855",
-      "manufacturerName": "Kellogg, Co.",
-      "isFromSurvey": false,
-      "foodGroup": "Breakfast Cereals",
-      "nutrients": [
-        {
-          "id": "262",
-          "description": "Caffeine",
-          "nutritionValue": 0,
-          "units": "mg"
-        },
-        {
-          "id": "307",
-          "description": "Sodium, Na",
-          "nutritionValue": 611,
-          "units": "mg"
-        },
-        {
-          "id": "309",
-          "description": "Zinc, Zn",
-          "nutritionValue": 5.2,
-          "units": "mg"
-        }
-      ],
-      "servings": [
-        {
-          "amount": 1,
-          "description": "cup (1 NLEA serving)",
-          "weightInGrams": 29
-        }
-      ]
+      "name": "cereals ready-to-eat"
+    },
+    {
+      "name": "kellogg"
+    },
+    {
+      "name": "kellogg's crispix"
     }
+],
+  "version": 1,
+  "commonName": "Includes USDA Commodity B855",
+  "manufacturerName": "Kellogg, Co.",
+  "isFromSurvey": false,
+  "foodGroup": "Breakfast Cereals",
+  "nutrients": [
+    {
+      "id": "262",
+      "description": "Caffeine",
+      "nutritionValue": 0,
+      "units": "mg"
+    },
+    {
+      "id": "307",
+      "description": "Sodium, Na",
+      "nutritionValue": 611,
+      "units": "mg"
+    },
+    {
+      "id": "309",
+      "description": "Zinc, Zn",
+      "nutritionValue": 5.2,
+      "units": "mg"
+    }
+  ],
+  "servings": [
+    {
+      "amount": 1,
+      "description": "cup (1 NLEA serving)",
+      "weightInGrams": 29
+    }
+  ]
+}
+```
 
->[!NOTE]文档在 DocumentDB 中已缩小，所以系统计算的上述文档的大小略小于 1 KB。
+>[!NOTE]
+>文档在 DocumentDB 中已缩小，所以系统计算的上述文档的大小略小于 1 KB。
 
 下表显示了此文档的典型操作的请求单位大概费用（假定帐户一致性级别设置为“会话”且所有文档都自动编制索引）：
 
@@ -172,7 +178,8 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 | 按食品组选择并按重量排序 |~70 RU |100 |
 | 选择食品组中的前 10 个食品 |~10 RU |10 |
 
->[!NOTE]RU 费用取决于返回的文档数。
+>[!NOTE]
+>RU 费用取决于返回的文档数。
 
 使用此信息，我们可以根据预计的每秒操作和查询数量来估计此应用程序的 RU 需求：
 
@@ -189,9 +196,11 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 ## <a id="RequestRateTooLarge"></a>超过保留的吞吐量限制
 前面提到，请求单位消耗以每秒速率进行评估。对于超过集合设置的请求单位速率的应用程序，将限制对该集合的请求数，直到速率降低到保留级别之下。被限制时，服务器将抢先结束请求、引发 RequestRateTooLargeException（HTTP 状态代码 429）并返回 x-ms-retry-after-ms 标头，该标头指示重试请求前用户必须等待的时间（以毫秒为单位）。
 
-    HTTP Status 429
-    Status Line: RequestRateTooLarge
-    x-ms-retry-after-ms :100
+```
+HTTP Status 429
+Status Line: RequestRateTooLarge
+x-ms-retry-after-ms :100
+```
 
 如果使用的是 .NET 客户端 SDK 和 LINQ 查询，则大多数情况下都不需要处理此异常，因为 .NET 客户端 SDK 的当前版本会隐式捕获此响应，并会遵循服务器指定的 retry-after 标头，然后重试请求。除非多个客户端同时访问你的帐户，否则下次重试就会成功。
 
@@ -205,7 +214,7 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 - [对 DocumentDB 中的数据进行建模](./documentdb-modeling-data.md)
 - [DocumentDB 性能级别](./documentdb-partition-data.md)
 
-若要了解有关 DocumentDB 的详细信息，请参阅 Azure DocumentDB [文档](./index.md/)。
+若要了解有关 DocumentDB 的详细信息，请参阅 Azure DocumentDB [文档](./index.md)。
 
 若要开始使用 DocumentDB 进行规模和性能测试，请参阅[使用 Azure DocumentDB 进行性能和规模测试](./documentdb-performance-testing.md)。
 

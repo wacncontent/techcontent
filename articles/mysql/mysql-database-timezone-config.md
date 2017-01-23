@@ -32,6 +32,6 @@ MySQL Database on Azure目前支持用户通过修改参数设定的方式来进
 以用户变更到北京时间为例， 用户可以将以下图中time_zone的参数设置为：+08：00.
 ![北京时间设置](./media/mysql-database-timezone-config/time_zone.png)
 
->[!NOTE]**目前暂不支持已命名时区如"Europe/Helsinki", "US/Eastern" or "MET"等**
+>[!NOTE]
+>**目前暂不支持已命名时区如"Europe/Helsinki", "US/Eastern" or "MET"等**
 *
-

@@ -27,7 +27,8 @@ ms.author: glenga
 
 本教程基于移动服务快速入门。你还必须先完成教程[将移动服务添加到现有应用程序]。
 
->[!NOTE]本教程演示如何管理移动服务使用各种标识提供程序的身份验证流。此方法易于配置，并支持多个提供者。通过使用客户端管理身份验证，你的应用程序有权访问所维护的标识提供程序的其他用户数据。你可以通过移动服务中获取相同的用户数据，通过调用 **user.getIdentities()** 服务器脚本中的函数。有关详细信息，请参阅[此文章](http://go.microsoft.com/fwlink/p/?LinkId=506605)。
+>[!NOTE]
+>本教程演示如何管理移动服务使用各种标识提供程序的身份验证流。此方法易于配置，并支持多个提供者。通过使用客户端管理身份验证，你的应用程序有权访问所维护的标识提供程序的其他用户数据。你可以通过移动服务中获取相同的用户数据，通过调用 **user.getIdentities()** 服务器脚本中的函数。有关详细信息，请参阅[此文章](http://go.microsoft.com/fwlink/p/?LinkId=506605)。
 
 ## <a name="register"></a>注册应用程序以进行身份验证并配置移动服务
 
@@ -73,5 +74,5 @@ ms.author: glenga
 [Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
 [将移动服务添加到现有应用程序]: ./mobile-services-windows-phone-get-started-data.md
 [Authorize users with scripts]: /documentation/articles/mobile-services-windows-phone-authorize-users-in-scripts/
- 
+
 <!---HONumber=Mooncake_0118_2016-->

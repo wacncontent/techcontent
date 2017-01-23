@@ -35,12 +35,13 @@ SQL 数据库使用 [SQL 数据库自动备份](./sql-database-automated-backups
  - 需要重新播放以恢复到还原点的活动数量
  - 还原到不同区域时的网络带宽
  - 目标区域中正在处理的并行还原请求数。
- 
+
  对于非常大和/或活动的数据库，还原可能要花费几个小时。如果一个区域出现长时间的服务中断，则可能是因为存在大量正在由其他区域处理的异地还原请求。如果存在大量请求，则可能会延长该区域中数据库还原的时间。大部分数据库还原操作可在 12 小时内完成。
 
  没有任何内置功能用于执行批量还原。[Azure SQL 数据库：完全恢复服务器](https://gallery.technet.microsoft.com/Azure-SQL-Database-Full-82941666)脚本是完成此任务的一种方法示例。
 
-> [!IMPORTANT] 若要使用自动备份进行恢复，用户必须是订阅中的 SQL Server 参与者角色的成员或是订阅所有者。可使用 Azure 门户预览、PowerShell 或 REST API 进行恢复。但不能使用 Transact-SQL。
+> [!IMPORTANT]
+> 若要使用自动备份进行恢复，用户必须是订阅中的 SQL Server 参与者角色的成员或是订阅所有者。可使用 Azure 门户预览、PowerShell 或 REST API 进行恢复。但不能使用 Transact-SQL。
 
 ##<a id="point-in-time-restore"></a> 时间点还原
 
@@ -59,7 +60,8 @@ SQL 数据库使用 [SQL 数据库自动备份](./sql-database-automated-backups
 
 使用已删除的数据库还原，可以通过 [SQL 数据库自动备份](./sql-database-automated-backups.md)将已删除的数据库还原到同一逻辑服务器上已删除的数据库的删除时间。
 
-> [!IMPORTANT] 如果删除 Azure SQL 数据库服务器实例，其所有数据库也会一并删除，并且无法恢复。目前不支持还原已删除的服务器。
+> [!IMPORTANT]
+> 如果删除 Azure SQL 数据库服务器实例，其所有数据库也会一并删除，并且无法恢复。目前不支持还原已删除的服务器。
 
 可以对还原的数据库使用相同的或新的数据库名称。可以使用 [Azure 门户预览](./sql-database-restore-deleted-database-portal.md)、[PowerShell](./sql-database-restore-deleted-database-powershell.md) 或 [REST (createMode=Restore)](https://msdn.microsoft.com/zh-cn/library/azure/mt163685.aspx)。
 
@@ -73,7 +75,8 @@ SQL 数据库使用 [SQL 数据库自动备份](./sql-database-automated-backups
 
 有关使用异地还原在中断后恢复的详细信息，请参阅[在中断后恢复](./sql-database-disaster-recovery.md)
 
-> [!IMPORTANT] 虽然异地还原在所有服务层中均可用，但它是 SQL 数据库中提供的最基本的灾难恢复解决方案，具有最长的 RPO 和估计恢复时间 (ERT)。对于最大为 2GB 的基本数据库，异地还原提供了 ERT 为 12 小时的合理灾难恢复解决方案。对于较大的标准或高级数据库，如果需要在很短的恢复时间内恢复，或要减少数据丢失的可能性，应考虑使用活动异地复制。活动异地复制可提供低得多的 RPO 和 ERT，因为它只需要你启动故障转移，以故障转移到连续复制的辅助数据库。有关详细信息，请参阅[活动异地复制](./sql-database-geo-replication-overview.md)。
+> [!IMPORTANT]
+> 虽然异地还原在所有服务层中均可用，但它是 SQL 数据库中提供的最基本的灾难恢复解决方案，具有最长的 RPO 和估计恢复时间 (ERT)。对于最大为 2GB 的基本数据库，异地还原提供了 ERT 为 12 小时的合理灾难恢复解决方案。对于较大的标准或高级数据库，如果需要在很短的恢复时间内恢复，或要减少数据丢失的可能性，应考虑使用活动异地复制。活动异地复制可提供低得多的 RPO 和 ERT，因为它只需要你启动故障转移，以故障转移到连续复制的辅助数据库。有关详细信息，请参阅[活动异地复制](./sql-database-geo-replication-overview.md)。
 
 ## 使用自动备份以编程方式执行恢复
 如上所述，除了使用 Azure 门户外，还可以使用 Azure PowerShell 和 REST API 以编程方式执行数据库恢复。下表介绍可用的命令集。

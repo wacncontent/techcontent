@@ -34,7 +34,7 @@ ms.author: cynthn
 3. 在“系统准备工具”对话框中，选择“进入系统全新体验(OOBE)”，确保已选中“通用化”复选框。
 4. 在**“关机选项”**中选择**“关机”**。
 5. 单击**“确定”**。
-   
+
     ![启动 Sysprep](./media/virtual-machines-windows-upload-image/sysprepgeneral.png)  
 
 6. 在 Sysprep 完成时，它会关闭虚拟机。

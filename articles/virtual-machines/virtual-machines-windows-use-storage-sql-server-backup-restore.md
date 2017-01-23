@@ -62,7 +62,8 @@ SQL Server 2016 引入了新功能；你可以使用[文件快照备份](http://
 | **代码** | URL 指定到唯一备份文件的统一资源标识符 (URI)。URL 用于提供 SQL Server 备份文件的位置和名称。URL 必须指向实际 blob，而不是仅指向容器。如果 blob 不存在，则会创建一个。如果指定了现有 blob，除非指定了 > WITH FORMAT 选项，否则 BACKUP 将失败。以下是你会在 BACKUP 命令中指定的 URL 示例：**http[s]://[storageaccount].blob.core.chinacloudapi.cn/[container]/[FILENAME.bak]**。HTTPS 不是必需的，但建议使用它。 |
 | **凭据** | 连接到 Azure Blob 存储服务并通过其进行身份验证所需的信息将存储为凭据。为了使 SQL Server 将备份写入 Azure Blob 或从中进行还原，必须创建 SQL Server 凭据。有关详细信息，请参阅 [SQL Server 凭据](https://msdn.microsoft.com/zh-cn/library/ms189522.aspx)。 |
 
-> [!NOTE] 如果你选择将备份文件复制并上载到 Azure Blob 存储服务中，并且打算使用此文件执行还原操作，则必须将页 Blob 类型作为存储选项。从块 Blob 类型执行 RESTORE 命令将失败并报错。
+> [!NOTE]
+> 如果你选择将备份文件复制并上载到 Azure Blob 存储服务中，并且打算使用此文件执行还原操作，则必须将页 Blob 类型作为存储选项。从块 Blob 类型执行 RESTORE 命令将失败并报错。
 
 ## 后续步骤
 

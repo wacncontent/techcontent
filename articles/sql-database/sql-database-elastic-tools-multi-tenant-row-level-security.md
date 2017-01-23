@@ -62,123 +62,129 @@ ms.author: thmullan;torsteng
 
 对于使用实体框架的应用程序，最简单的方法是根据[使用 EF DbContext 进行依赖于数据的路由](./sql-database-elastic-scale-use-entity-framework-applications-visual-studio.md#data-dependent-routing-using-ef-dbcontext)中所述，在 ElasticScaleContext 重写中设置 SESSION\_CONTEXT。在返回通过依赖于数据的路由代理的连接之前，只需创建并执行一个 SqlCommand，以便将 SESSION\_CONTEXT 中的“TenantId”设置为针对该连接指定的 shardingKey。这样，只需编写代码一次就能设置 SESSION\_CONTEXT。
 
-    // ElasticScaleContext.cs 
-    // ... 
-    // C'tor for data dependent routing. This call will open a validated connection routed to the proper 
-    // shard by the shard map manager. Note that the base class c'tor call will fail for an open connection 
-    // if migrations need to be done and SQL credentials are used. This is the reason for the  
-    // separation of c'tors into the DDR case (this c'tor) and the internal c'tor for new shards. 
-    public ElasticScaleContext(ShardMap shardMap, T shardingKey, string connectionStr)
-        : base(OpenDDRConnection(shardMap, shardingKey, connectionStr), true /* contextOwnsConnection */)
+```
+// ElasticScaleContext.cs 
+// ... 
+// C'tor for data dependent routing. This call will open a validated connection routed to the proper 
+// shard by the shard map manager. Note that the base class c'tor call will fail for an open connection 
+// if migrations need to be done and SQL credentials are used. This is the reason for the  
+// separation of c'tors into the DDR case (this c'tor) and the internal c'tor for new shards. 
+public ElasticScaleContext(ShardMap shardMap, T shardingKey, string connectionStr)
+    : base(OpenDDRConnection(shardMap, shardingKey, connectionStr), true /* contextOwnsConnection */)
+{
+}
+
+public static SqlConnection OpenDDRConnection(ShardMap shardMap, T shardingKey, string connectionStr)
+{
+    // No initialization
+    Database.SetInitializer<ElasticScaleContext<T>>(null);
+
+    // Ask shard map to broker a validated connection for the given key
+    SqlConnection conn = null;
+    try
     {
+        conn = shardMap.OpenConnectionForKey(shardingKey, connectionStr, ConnectionOptions.Validate);
+
+        // Set TenantId in SESSION_CONTEXT to shardingKey to enable Row-Level Security filtering
+        SqlCommand cmd = conn.CreateCommand();
+        cmd.CommandText = @"exec sp_set_session_context @key=N'TenantId', @value=@shardingKey";
+        cmd.Parameters.AddWithValue("@shardingKey", shardingKey);
+        cmd.ExecuteNonQuery();
+
+        return conn;
     }
-    
-    public static SqlConnection OpenDDRConnection(ShardMap shardMap, T shardingKey, string connectionStr)
+    catch (Exception)
     {
-        // No initialization
-        Database.SetInitializer<ElasticScaleContext<T>>(null);
-    
-        // Ask shard map to broker a validated connection for the given key
-        SqlConnection conn = null;
-        try
+        if (conn != null)
         {
-            conn = shardMap.OpenConnectionForKey(shardingKey, connectionStr, ConnectionOptions.Validate);
-    
-            // Set TenantId in SESSION_CONTEXT to shardingKey to enable Row-Level Security filtering
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"exec sp_set_session_context @key=N'TenantId', @value=@shardingKey";
-            cmd.Parameters.AddWithValue("@shardingKey", shardingKey);
-            cmd.ExecuteNonQuery();
-    
-            return conn;
+            conn.Dispose();
         }
-        catch (Exception)
-        {
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
-    
-            throw;
-        }
-    } 
-    // ... 
+
+        throw;
+    }
+} 
+// ... 
+```
 
 现在，每当调用 ElasticScaleContext 时，系统就会自动将 SESSION\_CONTEXT 设置为指定的 TenantId：
 
-    // Program.cs 
-    SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() => 
-    {   
-        using (var db = new ElasticScaleContext<int>(sharding.ShardMap, tenantId, connStrBldr.ConnectionString))   
-        {     
-            var query = from b in db.Blogs
-                        orderby b.Name
-                        select b;
-            
-            Console.WriteLine("All blogs for TenantId {0}:", tenantId);     
-            foreach (var item in query)     
-            {       
-                Console.WriteLine(item.Name);     
-            }   
-        } 
-    }); 
+```
+// Program.cs 
+SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() => 
+{   
+    using (var db = new ElasticScaleContext<int>(sharding.ShardMap, tenantId, connStrBldr.ConnectionString))   
+    {     
+        var query = from b in db.Blogs
+                    orderby b.Name
+                    select b;
+
+        Console.WriteLine("All blogs for TenantId {0}:", tenantId);     
+        foreach (var item in query)     
+        {       
+            Console.WriteLine(item.Name);     
+        }   
+    } 
+}); 
+```
 
 ### ADO.NET SqlClient 
 
 对于使用 ADO.NET SqlClient 的应用程序，建议的方法是围绕 ShardMap.OpenConnectionForKey() 创建一个包装函数，用于在返回连接之前将 SESSION\_CONTEXT 中的“TenantId”自动设置为正确的 TenantId。为确保始终设置 SESSION\_CONTEXT，应只使用此包装函数打开连接。
 
-    // Program.cs
-    // ...
-    
-    // Wrapper function for ShardMap.OpenConnectionForKey() that automatically sets SESSION_CONTEXT with the correct
-    // tenantId before returning a connection. As a best practice, you should only open connections using this 
-    // method to ensure that SESSION_CONTEXT is always set before executing a query.
-    public static SqlConnection OpenConnectionForTenant(ShardMap shardMap, int tenantId, string connectionStr)
+```
+// Program.cs
+// ...
+
+// Wrapper function for ShardMap.OpenConnectionForKey() that automatically sets SESSION_CONTEXT with the correct
+// tenantId before returning a connection. As a best practice, you should only open connections using this 
+// method to ensure that SESSION_CONTEXT is always set before executing a query.
+public static SqlConnection OpenConnectionForTenant(ShardMap shardMap, int tenantId, string connectionStr)
+{
+    SqlConnection conn = null;
+    try
     {
-        SqlConnection conn = null;
-        try
+        // Ask shard map to broker a validated connection for the given key
+        conn = shardMap.OpenConnectionForKey(tenantId, connectionStr, ConnectionOptions.Validate);
+
+        // Set TenantId in SESSION_CONTEXT to shardingKey to enable Row-Level Security filtering
+        SqlCommand cmd = conn.CreateCommand();
+        cmd.CommandText = @"exec sp_set_session_context @key=N'TenantId', @value=@shardingKey";
+        cmd.Parameters.AddWithValue("@shardingKey", tenantId);
+        cmd.ExecuteNonQuery();
+
+        return conn;
+    }
+    catch (Exception)
+    {
+        if (conn != null)
         {
-            // Ask shard map to broker a validated connection for the given key
-            conn = shardMap.OpenConnectionForKey(tenantId, connectionStr, ConnectionOptions.Validate);
-    
-            // Set TenantId in SESSION_CONTEXT to shardingKey to enable Row-Level Security filtering
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"exec sp_set_session_context @key=N'TenantId', @value=@shardingKey";
-            cmd.Parameters.AddWithValue("@shardingKey", tenantId);
-            cmd.ExecuteNonQuery();
-    
-            return conn;
+            conn.Dispose();
         }
-        catch (Exception)
+
+        throw;
+    }
+}
+
+// ...
+
+// Example query via ADO.NET SqlClient
+// If row-level security is enabled, only Tenant 4's blogs will be listed
+SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() =>
+{
+    using (SqlConnection conn = OpenConnectionForTenant(sharding.ShardMap, tenantId4, connStrBldr.ConnectionString))
+    {
+        SqlCommand cmd = conn.CreateCommand();
+        cmd.CommandText = @"SELECT * FROM Blogs";
+
+        Console.WriteLine("--\nAll blogs for TenantId {0} (using ADO.NET SqlClient):", tenantId4);
+        SqlDataReader reader = cmd.ExecuteReader();
+        while (reader.Read())
         {
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
-    
-            throw;
+            Console.WriteLine("{0}", reader["Name"]);
         }
     }
-
-    // ...
-
-    // Example query via ADO.NET SqlClient
-    // If row-level security is enabled, only Tenant 4's blogs will be listed
-    SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() =>
-    {
-        using (SqlConnection conn = OpenConnectionForTenant(sharding.ShardMap, tenantId4, connStrBldr.ConnectionString))
-        {
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM Blogs";
-    
-            Console.WriteLine("--\nAll blogs for TenantId {0} (using ADO.NET SqlClient):", tenantId4);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Console.WriteLine("{0}", reader["Name"]);
-            }
-        }
-    });
+});
+```
 
 ## 步骤 2) 数据层：创建行级安全策略
 
@@ -190,92 +196,104 @@ RLS 在 T-SQL 中实现：用户定义的函数用于定义访问逻辑，安全
 
 若要启用 RLS，请使用 Visual Studio (SSDT)、SSMS 或项目中包含的 PowerShell 脚本对所有分片执行以下 T-SQL：
 
-    CREATE SCHEMA rls -- separate schema to organize RLS objects 
-    GO
-    
-    CREATE FUNCTION rls.fn_tenantAccessPredicate(@TenantId int)     
-        RETURNS TABLE     
-        WITH SCHEMABINDING
-    AS
-        RETURN SELECT 1 AS fn_accessResult          
-            WHERE DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('dbo') -- the user in your application’s connection string (dbo is only for demo purposes!)         
-            AND CAST(SESSION_CONTEXT(N'TenantId') AS int) = @TenantId
-    GO
-    
-    CREATE SECURITY POLICY rls.tenantAccessPolicy
-        ADD FILTER PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Blogs,
-        ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Blogs,
-        ADD FILTER PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Posts,
-        ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Posts
-    GO 
+```
+CREATE SCHEMA rls -- separate schema to organize RLS objects 
+GO
 
-> [!TIP] 对于需要在数百个表中添加谓词的更复杂项目，你可以使用一个帮助程序存储过程，通过在架构中的所有表内添加谓词自动生成安全策略。请参阅[向所有表应用行级安全性 – 帮助程序脚本（博客）](http://blogs.msdn.com/b/sqlsecurity/archive/2015/03/31/apply-row-level-security-to-all-tables-helper-script)。
+CREATE FUNCTION rls.fn_tenantAccessPredicate(@TenantId int)     
+    RETURNS TABLE     
+    WITH SCHEMABINDING
+AS
+    RETURN SELECT 1 AS fn_accessResult          
+        WHERE DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('dbo') -- the user in your application’s connection string (dbo is only for demo purposes!)         
+        AND CAST(SESSION_CONTEXT(N'TenantId') AS int) = @TenantId
+GO
+
+CREATE SECURITY POLICY rls.tenantAccessPolicy
+    ADD FILTER PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Blogs,
+    ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Blogs,
+    ADD FILTER PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Posts,
+    ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Posts
+GO 
+```
+
+> [!TIP]
+> 对于需要在数百个表中添加谓词的更复杂项目，你可以使用一个帮助程序存储过程，通过在架构中的所有表内添加谓词自动生成安全策略。请参阅[向所有表应用行级安全性 – 帮助程序脚本（博客）](http://blogs.msdn.com/b/sqlsecurity/archive/2015/03/31/apply-row-level-security-to-all-tables-helper-script)。
 
 现在如果你再次运行示例应用程序，租户将只能看到属于他们的行。此外，应用程序只能插入当前已连接到分片数据库的租户的行，而不能插入属于其他租户的行，并且不能将可见行更新为使用其他 TenantId。如果应用程序尝试执行上述任一操作，将会引发 DbUpdateException。
 
 如果以后添加了新表，只需更改安全策略，并在新表中添加筛选和阻止谓词：
 
-    ALTER SECURITY POLICY rls.tenantAccessPolicy     
-        ADD FILTER PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.MyNewTable,
-        ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.MyNewTable
-    GO 
+```
+ALTER SECURITY POLICY rls.tenantAccessPolicy     
+    ADD FILTER PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.MyNewTable,
+    ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.MyNewTable
+GO 
+```
 
 ### 添加默认约束以自动填充 INSERT 的 TenantId 
 
 你可以对每个表施加默认约束，以便在插入行时向 TenantId 自动填充当前存储在 SESSION\_CONTEXT 中的值。例如：
 
-    -- Create default constraints to auto-populate TenantId with the value of SESSION_CONTEXT for inserts 
-    ALTER TABLE Blogs     
-        ADD CONSTRAINT df_TenantId_Blogs      
-        DEFAULT CAST(SESSION_CONTEXT(N'TenantId') AS int) FOR TenantId 
-    GO
-    
-    ALTER TABLE Posts     
-        ADD CONSTRAINT df_TenantId_Posts      
-        DEFAULT CAST(SESSION_CONTEXT(N'TenantId') AS int) FOR TenantId 
-    GO 
+```
+-- Create default constraints to auto-populate TenantId with the value of SESSION_CONTEXT for inserts 
+ALTER TABLE Blogs     
+    ADD CONSTRAINT df_TenantId_Blogs      
+    DEFAULT CAST(SESSION_CONTEXT(N'TenantId') AS int) FOR TenantId 
+GO
+
+ALTER TABLE Posts     
+    ADD CONSTRAINT df_TenantId_Posts      
+    DEFAULT CAST(SESSION_CONTEXT(N'TenantId') AS int) FOR TenantId 
+GO 
+```
 
 现在，应用程序在插入行时不需要指定 TenantId：
 
-    SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() => 
-    {   
-        using (var db = new ElasticScaleContext<int>(sharding.ShardMap, tenantId, connStrBldr.ConnectionString))
-        {
-            var blog = new Blog { Name = name }; // default constraint sets TenantId automatically     
-            db.Blogs.Add(blog);     
-            db.SaveChanges();   
-        } 
-    }); 
+```
+SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() => 
+{   
+    using (var db = new ElasticScaleContext<int>(sharding.ShardMap, tenantId, connStrBldr.ConnectionString))
+    {
+        var blog = new Blog { Name = name }; // default constraint sets TenantId automatically     
+        db.Blogs.Add(blog);     
+        db.SaveChanges();   
+    } 
+}); 
+```
 
-> [!NOTE] 如果你对实体框架项目使用默认约束，则不建议在 EF 数据模型中包括 TenantId 列。这是因为实体框架查询会自动提供默认值，而这些值会重写 T-SQL 中创建的、使用 SESSION\_CONTEXT 的默认约束。举例来说，若要在示例项目中使用默认约束，你应该从 DataClasses.cs 中删除 TenantId（并在程序包管理器控制台中运行 Add-Migration），然后使用 T-SQL 来确保该字段仅存在于数据库表中。这样，在插入数据时，EF 不会自动提供错误的默认值。
+> [!NOTE]
+> 如果你对实体框架项目使用默认约束，则不建议在 EF 数据模型中包括 TenantId 列。这是因为实体框架查询会自动提供默认值，而这些值会重写 T-SQL 中创建的、使用 SESSION\_CONTEXT 的默认约束。举例来说，若要在示例项目中使用默认约束，你应该从 DataClasses.cs 中删除 TenantId（并在程序包管理器控制台中运行 Add-Migration），然后使用 T-SQL 来确保该字段仅存在于数据库表中。这样，在插入数据时，EF 不会自动提供错误的默认值。
 
 ### （可选）启用“超级用户”来访问所有行
 有些应用程序可能需要创建一个能够访问所有行的“超级用户”，例如，为了跨所有分片上的所有租户来生成报告，或在涉及到数据库之间移动租户行的分片上执行拆分/合并操作。为此，你应该在每个分片数据库中新建 SQL 用户（在本例中为“超级用户”）。然后使用新的谓词函数更改安全策略，以允许此用户访问所有行：
 
-    -- New predicate function that adds superuser logic
-    CREATE FUNCTION rls.fn_tenantAccessPredicateWithSuperUser(@TenantId int)
-        RETURNS TABLE
-        WITH SCHEMABINDING
-    AS
-        RETURN SELECT 1 AS fn_accessResult 
-            WHERE 
-            (
-                DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('dbo') -- note, should not be dbo!
-                AND CAST(SESSION_CONTEXT(N'TenantId') AS int) = @TenantId
-            ) 
-            OR
-            (
-                DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('superuser')
-            )
-    GO
-    
-    -- Atomically swap in the new predicate function on each table
-    ALTER SECURITY POLICY rls.tenantAccessPolicy
-        ALTER FILTER PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Blogs,
-        ALTER BLOCK PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Blogs,
-        ALTER FILTER PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Posts,
-        ALTER BLOCK PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Posts
-    GO
+```
+-- New predicate function that adds superuser logic
+CREATE FUNCTION rls.fn_tenantAccessPredicateWithSuperUser(@TenantId int)
+    RETURNS TABLE
+    WITH SCHEMABINDING
+AS
+    RETURN SELECT 1 AS fn_accessResult 
+        WHERE 
+        (
+            DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('dbo') -- note, should not be dbo!
+            AND CAST(SESSION_CONTEXT(N'TenantId') AS int) = @TenantId
+        ) 
+        OR
+        (
+            DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('superuser')
+        )
+GO
+
+-- Atomically swap in the new predicate function on each table
+ALTER SECURITY POLICY rls.tenantAccessPolicy
+    ALTER FILTER PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Blogs,
+    ALTER BLOCK PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Blogs,
+    ALTER FILTER PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Posts,
+    ALTER BLOCK PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Posts
+GO
+```
 
 ### 维护 
 

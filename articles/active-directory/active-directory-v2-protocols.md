@@ -13,8 +13,8 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 09/16/2016
-wacn.date: 11/30/2016
 ms.author: dastrock
+wacn.date: 01/19/2017
 ---
 
 # v2.0 协议 - OAuth 2.0 和 OpenID Connect  <a name="oauth2-authorization-code-flow"></a>
@@ -47,8 +47,10 @@ v2.0 终结点可以使用 Azure AD，通过行业标准协议（OpenID Connect 
 ## 终结点  <a name="endpoints"></a>
 注册后，应用将通过向 v2.0 终结点发送请求来与 Azure AD 通信：
 
-    https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
-    https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+```
+https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+```
 
 其中 `{tenant}` 可以接受以下四个不同值之一：
 

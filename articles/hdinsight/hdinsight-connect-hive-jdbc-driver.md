@@ -44,7 +44,9 @@ ms.author: larryfr
 
 JDBC 通过 443 连接到 Azure 上的 HDInsight 群集，并使用 SSL 保护通信安全。公用网关（群集位于其后）会将通信重定向到 HiveServer2 实际进行侦听的端口。因此，典型连接字符串将如下所示：
 
-    jdbc:hive2://CLUSTERNAME.azurehdinsight.cn:443/default;ssl=true?hive.server2.transport.mode=http;hive.server2.thrift.http.path=/hive2
+```
+jdbc:hive2://CLUSTERNAME.azurehdinsight.cn:443/default;ssl=true?hive.server2.transport.mode=http;hive.server2.thrift.http.path=/hive2
+```
 
 将 __CLUSTERNAME__ 替换为 HDInsight 群集的名称。
 
@@ -54,7 +56,9 @@ JDBC 通过 443 连接到 Azure 上的 HDInsight 群集，并使用 SSL 保护�
 
 从 Java 应用程序建立连接时，必须使用该名称和密码。例如，以下 Java 代码使用连接字符串、管理员名称和密码打开新连接：
 
-    DriverManager.getConnection(connectionString,clusterAdmin,clusterPassword);
+```
+DriverManager.getConnection(connectionString,clusterAdmin,clusterPassword);
+```
 
 ##使用 SQuirreL SQL 客户端进行连接
 
@@ -76,7 +80,8 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
             * C:\\apps\\dist\\hadoop-2.6.0.2.2.9.1-7\\share\\hadoop\\common\\hadoop-common-2.6.0.2.2.9.1-7.jar
             * C:\\apps\\dist\\hadoop-2.6.0.2.2.9.1-7\\share\\hadoop\\common\\lib\\hadoop-auth-2.6.0.2.2.9.1-7.jar
 
-            > [!NOTE] 群集的路径和文件名中包含的版本号可能会有所不同。
+            > [!NOTE]
+            > 群集的路径和文件名中包含的版本号可能会有所不同。
 
         4. 文件复制完成后，断开远程桌面会话的连接。
 
@@ -126,7 +131,9 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
 
 9. 连接后，在 SQL 查询对话框中输入以下查询，然后选择“运行”图标。结果区域会显示查询的结果。
 
-        select * from hivesampletable limit 10;
+    ```
+    select * from hivesampletable limit 10;
+    ```
 
     ![sql 查询对话框，其中包括结果](./media/hdinsight-connect-hive-jdbc-driver/sqlquery.png)
 
@@ -134,7 +141,8 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
 
 使用 Java 客户端查询 Hive on HDInsight 的示例位于 [https://github.com/Azure-Samples/hdinsight-java-hive-jdbc](https://github.com/Azure-Samples/hdinsight-java-hive-jdbc)。按照存储库中的说明生成并运行该示例。
 
->[!NOTE] 此示例是针对全球 Azure 编写。对于 Azure 中国区，需要在连接字符串中将“azurehdinsight.net”替换为“azurehdinsight.cn”。
+>[!NOTE]
+> 此示例是针对全球 Azure 编写。对于 Azure 中国区，需要在连接字符串中将“azurehdinsight.net”替换为“azurehdinsight.cn”。
 
 ##故障排除
 
@@ -142,9 +150,11 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
 
 __症状__：连接到 HDInsight 群集 3.3 版或 3.4 版时，可能会遇到意外错误。此错误的堆栈跟踪将以下列行为开头：
 
-    java.util.concurrent.ExecutionException: java.lang.RuntimeException: java.lang.NoSuchMethodError: org.apache.commons.codec.binary.Base64.<init>(I)V
-    at java.util.concurrent.FutureTas...(FutureTask.java:122)
-    at java.util.concurrent.FutureTask.get(FutureTask.java:206)
+```
+java.util.concurrent.ExecutionException: java.lang.RuntimeException: java.lang.NoSuchMethodError: org.apache.commons.codec.binary.Base64.<init>(I)V
+at java.util.concurrent.FutureTas...(FutureTask.java:122)
+at java.util.concurrent.FutureTask.get(FutureTask.java:206)
+```
 
 __原因__：之所以出现此错误，是因为 SQuirreL 使用的 commons-codec.jar 文件版本与 Hive JDBC 组件所需的、从 HDInsight 群集下载的文件版本不匹配。
 
@@ -152,7 +162,9 @@ __解决方法__：要解决此错误，请使用以下步骤。
 
 1. 从 HDInsight 群集下载 commons-codec jar 文件。
 
-        scp USERNAME@CLUSTERNAME:/usr/hdp/current/hive-client/lib/commons-codec*.jar ./commons-codec.jar
+    ```
+    scp USERNAME@CLUSTERNAME:/usr/hdp/current/hive-client/lib/commons-codec*.jar ./commons-codec.jar
+    ```
 
 2. 退出 SQuirreL，然后转到系统上安装 SQuirreL 的目录。在 SquirreL 目录的 `lib` 目录下，将现有的 commons-codec.jar 替换为从 HDInsight 群集下载的文件。
 

@@ -74,11 +74,15 @@ Windows PowerShell 连接器用于存储同步服务数据库中的每个脚本�
 
 若要从 MAData 文件夹加载名为 FIMPowerShellConnectorModule.psm1 的模块，请使用以下语句：
 
-    Import-Module (Join-Path -Path [Microsoft.MetadirectoryServices.MAUtils]::MAFolder -ChildPath "FIMPowerShellConnectorModule.psm1")
+```
+Import-Module (Join-Path -Path [Microsoft.MetadirectoryServices.MAUtils]::MAFolder -ChildPath "FIMPowerShellConnectorModule.psm1")
+```
 
 若要从 %TEMP% 文件夹加载名为 FIMPowerShellConnectorModule.psm1 的模块，请使用以下语句：
 
-    Import-Module (Join-Path -Path $env:TEMP -ChildPath "FIMPowerShellConnectorModule.psm1")
+```
+Import-Module (Join-Path -Path $env:TEMP -ChildPath "FIMPowerShellConnectorModule.psm1")
+```
 
 **参数验证**  
 验证脚本是可选的 Windows PowerShell 脚本，可用于确保管理员提供的连接器配置参数有效。验证服务器、连接凭据和连接参数是验证脚本的常见用途。如果修改以下选项卡和对话框，将会调用验证脚本：
@@ -297,9 +301,11 @@ NewPassword | 字符串 | 填充脚本应该设置的对象新密码。
 - HKEY\_USERS\\[SynchronizationServiceServiceAccountSID]\\Environment
 
 若要确定同步服务服务帐户的安全标识符 (SID)，请运行以下 PowerShell 命令：
-    
-    $account = New-Object System.Security.Principal.NTAccount "<domain><username>"
-    $account.Translate([System.Security.Principal.SecurityIdentifier]).Value
+
+```
+$account = New-Object System.Security.Principal.NTAccount "<domain><username>"
+$account.Translate([System.Security.Principal.SecurityIdentifier]).Value
+```
 
 对以下文件系统文件夹的读取权限：
 
@@ -311,7 +317,7 @@ NewPassword | 字符串 | 填充脚本应该设置的对象新密码。
 
 ## 故障排除
 
--	有关如何启用记录来排查连接器问题的信息，请参阅[如何启用连接器的 ETW 跟踪](http://go.microsoft.com/fwlink/?LinkId=335731)。
+- 有关如何启用记录来排查连接器问题的信息，请参阅[如何启用连接器的 ETW 跟踪](http://go.microsoft.com/fwlink/?LinkId=335731)。
 
 <!--Reference style links - using these makes the source content way more readable than using inline links-->
 [cpp]: https://msdn.microsoft.com/zh-cn/library/windows/desktop/microsoft.metadirectoryservices.configparameterpage.aspx

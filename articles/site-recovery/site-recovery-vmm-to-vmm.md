@@ -59,7 +59,7 @@ ms.author: raynew
 2. 展开“数据服务”>“恢复服务”，并单击“Site Recovery 保管库”。
 
 3. 单击“新建”>“快速创建”。
-    
+
 4. 在“名称”中，输入一个友好名称以标识此保管库。
 
 5. 在“区域”中，为保管库选择地理区域。若要查看支持的区域，请参阅 [Azure Site Recovery 定价详细信息](https://www.azure.cn/home/features/site-recovery/#home_rec_pri)中的“上市地区”。</a>
@@ -82,7 +82,7 @@ ms.author: raynew
 3. 在“准备 VMM 服务器”中，单击“生成注册密钥文件”。密钥文件将自动生成并且自生成后在 5 天内有效。如果你不是从 VMM 服务器访问 Azure 门户，则需要将此文件复制到服务器。
 
     ![注册密钥](./media/site-recovery-vmm-to-vmm/register-key.png)
-    
+
 ##<a id="step-3-install-the-azure-site-recovery-provider"></a> 步骤 3：安装 Azure 站点恢复 提供程序	
 
 4. 在“快速启动”页面上的“准备 VMM 服务器”中，单击“下载用于在 VMM 服务器上安装的 Azure Site Recovery 提供程序”来获取最新版本的提供程序安装文件。
@@ -129,7 +129,7 @@ ms.author: raynew
 
 11.  在“服务器名称”中，指定一个友好名称以在保管库中标识该 VMM 服务器。在群集配置中，请指定 VMM 群集角色名称。
 12.  在“同步云元数据”中，选择是否要将 VMM 服务器上所有云的元数据与保管库进行同步。此操作在每个服务器上只需执行一次。如果你不希望同步所有云，可以将此设置保留为未选中状态并在 VMM 控制台中的云属性中分别同步各个云。
- 
+
     ![服务器注册](./media/site-recovery-vmm-to-vmm/friendly-name.png)
 
 13.  单击“下一步”以完成此过程。注册后，Azure Site Recovery 将检索 VMM 服务器中的元数据。服务器显示在保管库中“服务器”页上的“VMM 服务器”选项卡中。
@@ -142,17 +142,23 @@ ms.author: raynew
 2. 停止 System Center Virtual Machine Manager 服务
 3. 使用 **Administrator** 权限从命令提示符处运行以下命令，以便提取提供程序安装程序：
 
-        C:\Windows\System32> CD C:\ASR
-        C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
+    C:\Windows\System32> CD C:\ASR
+    C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
 
 4. 通过运行以下命令来安装提供程序：
 
-        C:\ASR> setupdr.exe /i
+    ```
+    C:\ASR> setupdr.exe /i
+    ```
 
 5. 通过运行以下命令来注册提供程序：
 
-        CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
-        C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>     
+    ```
+    CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
+    C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>     
+    ```
 
 其中的参数如下：
 
@@ -251,8 +257,9 @@ ms.author: raynew
 3. 在“作业”选项卡中跟踪“启用保护”操作的进度，包括初始复制。在“完成保护”作业运行之后，虚拟机就可以进行故障转移了。在启用保护并复制虚拟机后，你将能够在 Azure 中查看它们。
 
     ![虚拟机保护作业](./media/site-recovery-vmm-to-vmm/vm-jobs.png)
-    
->[!NOTE] 你还可以在 VMM 控制台中为虚拟机启用保护。在虚拟机属性的“Azure Site Recovery”选项卡中，在工具栏上单击“启用保护”。
+
+>[!NOTE]
+> 你还可以在 VMM 控制台中为虚拟机启用保护。在虚拟机属性的“Azure Site Recovery”选项卡中，在工具栏上单击“启用保护”。
 
 ### 将现有虚拟机加入进来
 
@@ -296,22 +303,26 @@ ms.author: raynew
 #### 检索 IP 地址
 运行此示例脚本来检索 IP 地址。
 
-        $vm = Get-SCVirtualMachine -Name <VM_NAME>
-        $na = $vm[0].VirtualNetworkAdapters>
-        $ip = Get-SCIPAddress -GrantToObjectID $na[0].id
-        $ip.address  
+```
+    $vm = Get-SCVirtualMachine -Name <VM_NAME>
+    $na = $vm[0].VirtualNetworkAdapters>
+    $ip = Get-SCIPAddress -GrantToObjectID $na[0].id
+    $ip.address  
+```
 
 #### 更新 DNS
 运行此示例脚本来更新 DNS 并指定你通过前一个示例脚本检索到的 IP 地址。
 
-        string]$Zone,
-        [string]$name,
-        [string]$IP
-        )
-        $Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
-        $newrecord = $record.clone()
-        $newrecord.RecordData[0].IPv4Address  =  $IP
-        Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
+```
+    string]$Zone,
+    [string]$name,
+    [string]$IP
+    )
+    $Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
+    $newrecord = $record.clone()
+    $newrecord.RecordData[0].IPv4Address  =  $IP
+    Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
+```
 
 ## 后续步骤
 设置并运行部署后，请[详细了解](./site-recovery-failover.md)不同类型的故障转移。

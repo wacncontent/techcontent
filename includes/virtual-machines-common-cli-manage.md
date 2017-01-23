@@ -6,7 +6,8 @@
 
 本文章介绍配合 Azure CLI 来管理 Azure 订阅中的 ARM 资源（主要是 VM）并与其交互的基本命令。有关特定命令行开关和选项的详细帮助，可以通过键入 `azure <command> <subcommand> --help` 或 `azure help <command> <subcommand>` 来使用联机命令帮助和选项。
 
-> [!NOTE] 这些示例不包括通常为资源管理器中的 VM 部署建议的基于模板的操作。有关信息，请参阅 [将 Azure CLI 与 Azure 资源管理器配合使用](../articles/azure-resource-manager/xplat-cli-azure-resource-manager.md)和 [使用 Azure Resource Manager 模板和 Azure CLI 部署和管理虚拟机](../articles/virtual-machines/virtual-machines-linux-cli-deploy-templates.md)。
+> [!NOTE]
+> 这些示例不包括通常为资源管理器中的 VM 部署建议的基于模板的操作。有关信息，请参阅 [将 Azure CLI 与 Azure 资源管理器配合使用](../articles/azure-resource-manager/xplat-cli-azure-resource-manager.md)和 [使用 Azure Resource Manager 模板和 Azure CLI 部署和管理虚拟机](../articles/virtual-machines/virtual-machines-linux-cli-deploy-templates.md)。
 
 任务 | 资源管理器
 -------------- | ----------- | -------------------------

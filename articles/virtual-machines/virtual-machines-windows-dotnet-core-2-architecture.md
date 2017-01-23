@@ -31,32 +31,35 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机 JSON](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L285)。
 
->[!NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-    {
-      {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(variables('vmName'),copyindex())]",
-      "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "virtualMachineLoop",
-        "count": "[parameters('numberOfInstances')]"
-      },
-      "tags": {
-        "displayName": "virtual-machine"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageName'))]",
-        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]",
-        "nicLoop"
-      ],
-      "properties": {
-        "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
-        },
-      ........<truncated>  
-    }
+```
+{
+  {
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Compute/virtualMachines",
+  "name": "[concat(variables('vmName'),copyindex())]",
+  "location": "[resourceGroup().location]",
+  "copy": {
+    "name": "virtualMachineLoop",
+    "count": "[parameters('numberOfInstances')]"
+  },
+  "tags": {
+    "displayName": "virtual-machine"
+  },
+  "dependsOn": [
+    "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageName'))]",
+    "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]",
+    "nicLoop"
+  ],
+  "properties": {
+    "availabilitySet": {
+      "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
+    },
+  ........<truncated>  
+}
+```
 
 部署后，可以在 Azure 门户预览中查看虚拟机属性。
 
@@ -67,31 +70,35 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [存储帐户](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L98)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('vhdStorageName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "storage-account"
-      },
-      "properties": {
-        "accountType": "[variables('vhdStorageType')]"
-      }
-    }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Storage/storageAccounts",
+  "name": "[variables('vhdStorageName')]",
+  "location": "[resourceGroup().location]",
+  "tags": {
+    "displayName": "storage-account"
+  },
+  "properties": {
+    "accountType": "[variables('vhdStorageType')]"
+  }
+}
+```
 
 存储帐户与虚拟机 Resource Manager 模板声明中的某个虚拟机相关联。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机与存储帐户的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L321)。
 
-    "osDisk": {
-      "name": "osdisk",
-      "vhd": {
-        "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('vhdStorageName')), '2015-06-15').primaryEndpoints.blob,'vhds/osdisk', copyindex(), '.vhd')]"
-      },
-      "caching": "ReadWrite",
-      "createOption": "FromImage"
-    }
+```
+"osDisk": {
+  "name": "osdisk",
+  "vhd": {
+    "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('vhdStorageName')), '2015-06-15').primaryEndpoints.blob,'vhds/osdisk', copyindex(), '.vhd')]"
+  },
+  "caching": "ReadWrite",
+  "createOption": "FromImage"
+}
+```
 
 部署之后，可在 Azure 门户预览中查看存储帐户。
 
@@ -101,43 +108,45 @@ ms.author: nepeters
 
 ![虚拟硬盘](./media/virtual-machines-windows-dotnet-core/vhd-win.png)  
 
-有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md/)。
+有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md)。
 
 ## 虚拟网络
 如果虚拟机需要内部网络功能（例如与其他虚拟机和 Azure 资源通信的功能），则需要配置 Azure 虚拟网络。创建虚拟网络不意味着能够从 Internet 访问虚拟机。公共连接需要一个公共 IP 地址，本系列教程的后续文章会详细说明。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟网络和子网](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L126)。
 
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('virtualNetworkName')]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroup'))]"
-      ],
-      "tags": {
-        "displayName": "virtual-network"
-      },
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "10.0.0.0/24"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnetName')]",
-            "properties": {
-              "addressPrefix": "10.0.0.0/24",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroup'))]"
-              }
-            }
+```
+{
+  "apiVersion": "2015-06-15",
+  "type": "Microsoft.Network/virtualNetworks",
+  "name": "[variables('virtualNetworkName')]",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [
+    "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroup'))]"
+  ],
+  "tags": {
+    "displayName": "virtual-network"
+  },
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/24"
+      ]
+    },
+    "subnets": [
+      {
+        "name": "[variables('subnetName')]",
+        "properties": {
+          "addressPrefix": "10.0.0.0/24",
+          "networkSecurityGroup": {
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroup'))]"
           }
-        ]
+        }
       }
-    }
+    ]
+  }
+}
+```
 
 在 Azure 门户预览中，虚拟网络如下图所示。请注意，使用模板部署的所有虚拟机都已附加到虚拟网络。
 
@@ -195,19 +204,21 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机网络配置文件](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L330)。
 
-    "networkProfile": {
-      "networkInterfaces": [
-        {
-          "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('networkInterfaceName'), copyindex()))]"
-        }
-      ]
+```
+"networkProfile": {
+  "networkInterfaces": [
+    {
+      "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('networkInterfaceName'), copyindex()))]"
     }
+  ]
+}
+```
 
 在 Azure 门户预览中，网络接口如下图所示。可以在网络接口资源上看到内部 IP 地址与虚拟机的关联。
 
 ![网络接口](./media/virtual-machines-windows-dotnet-core/nic-win.png)  
 
-有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md/)。
+有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md)。
 
 ## Azure SQL 数据库
 除了部署托管音乐应用商店网站的虚拟机以外，还需要部署一个 Azure SQL 数据库来托管音乐应用商店数据库。利用 Azure SQL 数据库的好处在于不需要构建另一组虚拟机，可将缩放性和可用性内置在服务中。
@@ -216,41 +227,43 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [Azure SQL 数据库](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L379)。
 
+```
+{
+  "apiVersion": "2014-04-01-preview",
+  "type": "Microsoft.Sql/servers",
+  "name": "[variables('musicstoresqlName')]",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [],
+  "tags": {
+    "displayName": "sql-music-store"
+  },
+  "properties": {
+    "administratorLogin": "[parameters('adminUsername')]",
+    "administratorLoginPassword": "[parameters('adminPassword')]"
+  },
+  "resources": [
     {
       "apiVersion": "2014-04-01-preview",
-      "type": "Microsoft.Sql/servers",
-      "name": "[variables('musicstoresqlName')]",
+      "type": "firewallrules",
+      "name": "firewall-allow-azure",
       "location": "[resourceGroup().location]",
-      "dependsOn": [],
-      "tags": {
-        "displayName": "sql-music-store"
-      },
+      "dependsOn": [
+        "[concat('Microsoft.Sql/servers/', variables('musicstoresqlName'))]"
+      ],
       "properties": {
-        "administratorLogin": "[parameters('adminUsername')]",
-        "administratorLoginPassword": "[parameters('adminPassword')]"
-      },
-      "resources": [
-        {
-          "apiVersion": "2014-04-01-preview",
-          "type": "firewallrules",
-          "name": "firewall-allow-azure",
-          "location": "[resourceGroup().location]",
-          "dependsOn": [
-            "[concat('Microsoft.Sql/servers/', variables('musicstoresqlName'))]"
-          ],
-          "properties": {
-            "startIpAddress": "0.0.0.0",
-            "endIpAddress": "0.0.0.0"
-          }
-        }
-      ]
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "0.0.0.0"
+      }
     }
+  ]
+}
+```
 
 Azure 门户预览中显示的 SQL Server 和 MusicStore 数据库视图。
 
 ![SQL Server](./media/virtual-machines-windows-dotnet-core/sql-win.png)  
 
-有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md/)。
+有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md)。
 
 ## 后续步骤
 <hr>

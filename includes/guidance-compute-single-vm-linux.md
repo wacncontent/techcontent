@@ -41,7 +41,9 @@ Azure 可提供多种虚拟机大小，但建议使用 DS 和 GS 系列，因为
 
 预配 VM 和其他资源时，必须指定区域。通常应选择离内部用户或客户最近的区域。但是，并非所有 VM 大小都可在所有区域中使用。有关详细信息，请参阅 [Services by region][services-by-region]（按区域列出的服务）。若要列出给定区域中的可用 VM 大小，请运行以下 Azure 命令行接口 \(CLI\) 命令：
 
-    azure vm sizes --location <location>
+```
+azure vm sizes --location <location>
+```
 
 若要了解如何选择发布的 VM 映像，请参阅[利用 Azure CLI 选择 Linux VM 映像][select-vm-image]。
 
@@ -53,15 +55,17 @@ Azure 可提供多种虚拟机大小，但建议使用 DS 和 GS 系列，因为
 
 添加一个或多个数据磁盘。刚创建的 VHD 尚未格式化，请登录 VM 格式化该磁盘。在 Linux shell 中，数据磁盘显示为 `/dev/sdc`、`/dev/sdd` 等。你可以运行 `lsblk` 以列出块设备，包括磁盘。若要使用数据磁盘，请创建一个分区和文件系统，然后装载磁盘。例如：
 
-    # Create a partition.
-    sudo fdisk /dev/sdc     # Enter 'n' to partition, 'w' to write the change.     
+```
+# Create a partition.
+sudo fdisk /dev/sdc     # Enter 'n' to partition, 'w' to write the change.     
 
-    # Create a file system.
-    sudo mkfs -t ext3 /dev/sdc1
+# Create a file system.
+sudo mkfs -t ext3 /dev/sdc1
 
-    # Mount the drive.
-    sudo mkdir /data1
-    sudo mount /dev/sdc1 /data1
+# Mount the drive.
+sudo mkdir /data1
+sudo mount /dev/sdc1 /data1
+```
 
 如果你有大量数据磁盘，请注意存储帐户的总 I/O 限制。有关详细信息，请参阅 [virtual machine disk limits][vm-disk-limits]（虚拟机磁盘限制）。
 
@@ -108,13 +112,17 @@ VHD 存储在 [Azure 存储空间][azure-storage]中，Azure 存储空间将进�
 
 以下 CLI 命令可启用诊断：
 
-    azure vm enable-diag <resource-group> <vm-name>
+```
+azure vm enable-diag <resource-group> <vm-name>
+```
 
 **停止 VM。** Azure 对“已停止”和“已解除分配”状态进行了区分。VM 状态为“已停止”时，将计费，但 VM 为“已解除分配”状态时，则不计费。
 
 使用以下 CLI 命令可解除分配 VM：
 
-    azure vm deallocate <resource-group> <vm-name>
+```
+azure vm deallocate <resource-group> <vm-name>
+```
 
 在 Azure 门户预览中，“停止”按钮将解除分配 VM。但是，如果在已登录时通过 OS 关闭，VM 将停止，但*不*会解除分配，因此仍将向你收费。
 
@@ -144,7 +152,7 @@ RBAC 不限制已登录到 VM 的用户可以执行的操作。这些权限由�
 1. 右键单击下面的按钮，然后选择“在新选项卡中打开链接”或“在新窗口中打开链接”。
     [![部署到 Azure](./media/guidance-compute-single-vm-linux/deploybutton.png)](https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fguidance-compute-single-vm%2Fazuredeploy.json)
 2. 链接在 Azure 门户预览中打开后，必须输入某些设置的值：
-   
+
     * 参数文件中已定义了“资源组”名称，因此选择“新建”并在文本框中输入 `ra-single-vm-rg`。
     * 从“位置”下拉框中选择区域。
     * 请勿编辑“模板根 URI”或“参数根 URI”文本框。

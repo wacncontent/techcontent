@@ -25,7 +25,8 @@ wacn.date: 01/03/2017
 2. 在域名注册机构中为域名添加 DNS 条目
 3. 在 Azure AD 中验证自定义域名
 
-> [!NOTE] 如果打算配置自定义域名以搭配 Active Directory 联合身份验证服务 (AD FS) 或公司网络上的其他安全令牌服务 (STS) 使用，请按照[添加和配置域以便与 Azure Active Directory 联盟](./active-directory-add-domain-federated.md)中的说明操作。如果打算将公司目录中的用户同步到 Azure AD，但[密码哈希同步](./active-directory-aadconnectsync-implement-password-synchronization.md)不符合要求，这样做将非常有用。
+> [!NOTE]
+> 如果打算配置自定义域名以搭配 Active Directory 联合身份验证服务 (AD FS) 或公司网络上的其他安全令牌服务 (STS) 使用，请按照[添加和配置域以便与 Azure Active Directory 联盟](./active-directory-add-domain-federated.md)中的说明操作。如果打算将公司目录中的用户同步到 Azure AD，但[密码哈希同步](./active-directory-aadconnectsync-implement-password-synchronization.md)不符合要求，这样做将非常有用。
 
 ## 将自定义域名添加到目录 <a name="add-a-custom-domain-name-to-your-directory"></a>
 
@@ -73,11 +74,11 @@ wacn.date: 01/03/2017
 
 如果无法验证自定义域名，请尝试以下方法。我们从最常见到最不常见的原因逐一分析。
 
-1.	**等候一小时**。必须先传播 DNS 记录，Azure AD 才能验证域。这可能需要一小时以上。
+1. **等候一小时**。必须先传播 DNS 记录，Azure AD 才能验证域。这可能需要一小时以上。
 
-2.	**确保已输入正确的 DNS 记录**。请在该域的域名注册机构网站上完成此步骤。如果 DNS 条目不在 DNS 区域文件中，或者与 Azure AD 提供给你的 DNS 条目不完全匹配，则 Azure AD 无法验证域名。如果你无权访问域名注册机构以更新域的 DNS 记录，请与组织内具有此访问权限的个人或团队共享 DNS 条目，并请他们添加 DNS 条目。
+2. **确保已输入正确的 DNS 记录**。请在该域的域名注册机构网站上完成此步骤。如果 DNS 条目不在 DNS 区域文件中，或者与 Azure AD 提供给你的 DNS 条目不完全匹配，则 Azure AD 无法验证域名。如果你无权访问域名注册机构以更新域的 DNS 记录，请与组织内具有此访问权限的个人或团队共享 DNS 条目，并请他们添加 DNS 条目。
 
-3.	**从 Azure AD 的另一个目录删除域名**。域名只能在单个目录中验证。如果域名先前在另一个目录中验证过，则必须先在那里将其删除后，才可在新的目录中验证。若要了解如何删除域名，请参阅[管理自定义域名](./active-directory-add-manage-domain-names.md)。
+3. **从 Azure AD 的另一个目录删除域名**。域名只能在单个目录中验证。如果域名先前在另一个目录中验证过，则必须先在那里将其删除后，才可在新的目录中验证。若要了解如何删除域名，请参阅[管理自定义域名](./active-directory-add-manage-domain-names.md)。
 
 ## 添加更多自定义域名
 

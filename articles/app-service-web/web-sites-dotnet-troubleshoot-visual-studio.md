@@ -72,7 +72,7 @@ ms.author: rachelap
     ![“Azure Web 应用”窗口](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-configtab.png)  
 
     本教程将介绍如何使用日志记录和跟踪下拉列表。其中，还将用到远程调试，但会通过不同方式启用该调试。
-   
+
     有关该窗口中“应用程序设置”和“连接字符串”框的信息，请参阅 [Azure Web 应用：应用程序字符串和连接字符串的工作原理](http://blogs.msdn.com/b/windowsazure/archive/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work.aspx)。
 
     如果要执行的 Web 应用管理任务无法在此窗口进行，请单击“在管理门户中打开”，以便在浏览器窗口中打开 Azure 门户预览。
@@ -133,12 +133,14 @@ ms.author: rachelap
 
 2. 删除 `About()` 方法并在其位置插入以下代码。
 
-        public ActionResult About()
-        {
-            string currentTime = DateTime.Now.ToLongTimeString();
-            ViewBag.Message = "The current time is " + currentTime;
-            return View();
-        }
+    ```
+    public ActionResult About()
+    {
+        string currentTime = DateTime.Now.ToLongTimeString();
+        ViewBag.Message = "The current time is " + currentTime;
+        return View();
+    }
+    ```
 
 2. 在 `ViewBag.Message` 行上[设置一个断点](http://www.visualstudio.com/get-started/debug-your-app-vs.aspx)。
 
@@ -252,10 +254,12 @@ ms.author: rachelap
 
 * 请确保 *Web.config* 文件中 `compilation` 元素的 `debug` 属性设置为 true。在发布调试版本配置时，默认设置为 true。
 
-        <system.web>
-          <compilation debug="true" targetFramework="4.5" />
-          <httpRuntime targetFramework="4.5" />
-        </system.web>
+    ```
+    <system.web>
+      <compilation debug="true" targetFramework="4.5" />
+      <httpRuntime targetFramework="4.5" />
+    </system.web>
+    ```
 
 * 如果发现调试程序并未针对希望调试的代码展开行动，可能需要更改“仅我的代码”设置。有关详细信息，请参阅[限制为仅逐行调试我的代码](http://msdn.microsoft.com/zh-cn/library/vstudio/y740d9d3.aspx#BKMK_Restrict_stepping_to_Just_My_Code)。
 
@@ -271,7 +275,7 @@ ms.author: rachelap
 * **Web 服务器日志**<br/>Web 服务器为每一个对 Web 应用的 HTTP 请求创建一个日志条目。
 * **详细的错误消息日志**<br/>Web 服务器为失败的 HTTP 请求（导致状态代码 400 或更大数字的请求）创建带有一些额外信息的 HTML 页面。
 * **失败请求跟踪日志**<br/>Web 服务器为失败的 HTTP 请求创建带有详细跟踪信息的 XML 文件。Web 服务器还可提供 XSL 文件以格式化浏览器中的 XML。
-  
+
 日志记录会影响 Web 应用性能，因此 Azure 允许提供根据需要启用或禁用各种类型的日志。对于应用程序日志，可以指定只写入特定严重级别以上的日志。创建新的 Web 应用时，默认为禁用所有日志记录功能。
 
 日志将写入 Web 应用文件系统中 *LogFiles* 文件夹内的文件，并可通过 FTP 访问。Web 服务器日志和应用程序日志也可写入 Azure 存储帐户。可在存储帐户中为日志留出大于文件系统预留量的空间。使用文件系统时，最多可存储 100 兆字节的日志。（文件系统日志仅适合短期保留。达到限制后，Azure 将删除旧日志文件以便为新日志腾出空间。）
@@ -290,35 +294,37 @@ ms.author: rachelap
 
 1. 打开 *Controllers\HomeController.cs* 并将 `Index`、`About` 和 `Contact` 方法替换为以下代码，以便为 `System.Diagnostics` 添加 `Trace` 语句和 `using` 语句：
 
-        public ActionResult Index()
-        {
-            Trace.WriteLine("Entering Index method");
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            Trace.TraceInformation("Displaying the Index page at " + DateTime.Now.ToLongTimeString());
-            Trace.WriteLine("Leaving Index method");
-            return View();
-        }
-        
-        public ActionResult About()
-        {
-            Trace.WriteLine("Entering About method");
-            ViewBag.Message = "Your app description page.";
-            Trace.TraceWarning("Transient error on the About page at " + DateTime.Now.ToShortTimeString());
-            Trace.WriteLine("Leaving About method");
-            return View();
-        }
-        
-        public ActionResult Contact()
-        {
-            Trace.WriteLine("Entering Contact method");
-            ViewBag.Message = "Your contact page.";
-            Trace.TraceError("Fatal error on the Contact page at " + DateTime.Now.ToLongTimeString());
-            Trace.WriteLine("Leaving Contact method");
-            return View();
-        }		
+    ```
+    public ActionResult Index()
+    {
+        Trace.WriteLine("Entering Index method");
+        ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+        Trace.TraceInformation("Displaying the Index page at " + DateTime.Now.ToLongTimeString());
+        Trace.WriteLine("Leaving Index method");
+        return View();
+    }
+
+    public ActionResult About()
+    {
+        Trace.WriteLine("Entering About method");
+        ViewBag.Message = "Your app description page.";
+        Trace.TraceWarning("Transient error on the About page at " + DateTime.Now.ToShortTimeString());
+        Trace.WriteLine("Leaving About method");
+        return View();
+    }
+
+    public ActionResult Contact()
+    {
+        Trace.WriteLine("Entering Contact method");
+        ViewBag.Message = "Your contact page.";
+        Trace.TraceError("Fatal error on the Contact page at " + DateTime.Now.ToLongTimeString());
+        Trace.WriteLine("Leaving Contact method");
+        return View();
+    }		
+    ```
 
 2. 将 `using System.Diagnostics;` 语句添加到文件顶部。
-                
+
 ### 本地查看跟踪输出
 
 3. 按 F5 以调试模式运行应用程序。
@@ -331,24 +337,28 @@ ms.author: rachelap
 
 2. 打开应用程序 Web.config 文件（位于项目文件夹中），将 `<system.diagnostics>` 元素添加到文件末尾的关闭 `</configuration>` 元素之前：
 
-          <system.diagnostics>
-            <trace>
-              <listeners>
-                <add name="WebPageTraceListener"
-                    type="System.Web.WebPageTraceListener, 
-                    System.Web, 
-                    Version=4.0.0.0, 
-                    Culture=neutral,
-                    PublicKeyToken=b03f5f7f11d50a3a" />
-              </listeners>
-            </trace>
-          </system.diagnostics>
+    ```
+      <system.diagnostics>
+        <trace>
+          <listeners>
+            <add name="WebPageTraceListener"
+                type="System.Web.WebPageTraceListener, 
+                System.Web, 
+                Version=4.0.0.0, 
+                Culture=neutral,
+                PublicKeyToken=b03f5f7f11d50a3a" />
+          </listeners>
+        </trace>
+      </system.diagnostics>
+    ```
 
     `WebPageTraceListener` 允许通过浏览至 `/trace.axd` 查看跟踪输出。
 
 3. 将<a href="http://msdn.microsoft.com/zh-cn/library/vstudio/6915t83k(v=vs.100).aspx">跟踪元素</a>添加到 Web.config file 文件中的 `<system.web>` 下面，如下所示：
 
-        <trace enabled="true" writeToDiagnosticsTrace="true" mostRecent="true" pageOutput="false" />
+    ```
+    <trace enabled="true" writeToDiagnosticsTrace="true" mostRecent="true" pageOutput="false" />
+    ```
 
 3. 按 Ctrl+F5 运行应用程序。
 
@@ -364,7 +374,9 @@ ms.author: rachelap
 
     默认情况下，`trace.axd` 仅供本地使用。如果希望可以从远程 Web 应用使用，可将 `localOnly="false"` 添加到 `trace` 元素（位于 *Web.config* 文件中），如下所示：
 
-        <trace enabled="true" writeToDiagnosticsTrace="true" localOnly="false" mostRecent="true" pageOutput="false" />
+    ```
+    <trace enabled="true" writeToDiagnosticsTrace="true" localOnly="false" mostRecent="true" pageOutput="false" />
+    ```
 
     然而，出于安全考虑，一般不建议在生产 Web 应用中启用 `trace.axd`，在随后的内容中将了解一种在 Azure Web 应用中更为便捷地读取跟踪日志的方法。
 
@@ -399,7 +411,7 @@ ms.author: rachelap
 4. 在“服务器资源管理器”中，右键单击 Web 应用，然后如之前所做单击“查看设置”。
 
 5. 将“应用程序日志记录(文件系统)”更改为“详细”，然后单击“保存”。
- 
+
     ![将跟踪级别设置为详细](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-applogverbose.png)  
 
 6. 现在，在显示“联系人”页面的浏览器窗口中，单击“主页”，然后依次单击“关于”和“联系人”。
@@ -437,7 +449,7 @@ Web 服务器日志将记录 Web 应用上所有的 HTTP 活动。若要在“�
     ![启用 Web 服务器日志记录](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-webserverloggingon.png)
 
 2. 在“输出”窗口中，单击“指定要监视的 Azure 日志”按钮。
-    
+
     ![指定要监视的 Azure 日志。](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-specifylogs.png)  
 
 3. 在“Azure 日志记录选项”对话框中，选择“Web 服务器日志”，然后单击“确定”。
@@ -582,7 +594,7 @@ Web 服务器日志将记录 Web 应用上所有的 HTTP 活动。若要在“�
 8. 单击“查看所有应用程序日志”。
 
     跟踪日志表将显示在 Azure 存储表查看器中。
-   
+
     （如果收到“序列未包含任何元素”错误，请打开“服务器资源管理器”，展开 Azure 节点下你的存储帐户节点，然后右键单击“表”并单击“刷新”。）
 
     ![表视图中的存储日志](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-tracelogtableview.png)  
@@ -691,15 +703,17 @@ Internet 上对于 ASP.NET 跟踪没有全面且最新的介绍。最佳做法�
 * [演练：集成 ASP.NET 跟踪与 System.Diagnostics 跟踪](http://msdn.microsoft.com/zh-cn/library/b0ectfxd.aspx)<br/>此工具已不时兴，但包括一些介绍性文章未涵盖的额外信息。
 * [在 ASP.NET MVC Razor 视图中进行跟踪](http://blogs.msdn.com/b/webdev/archive/2013/07/16/tracing-in-asp-net-mvc-razor-views.aspx)<br/>除了在 Razor 视图中进行跟踪，文章还介绍了如何创建错误筛选器以便在 MVC 应用程序中记录所有未经处理的异常。有关如何在 Web 窗体应用程序中记录所有未经处理的异常，请参阅 MSDN 上的[错误处理程序的完整示例](http://msdn.microsoft.com/zh-cn/library/bb397417.aspx)中的 Global.asax 示例。在 MVC 或 Web 窗体中，如果希望记录特定异常但想让默认框架对其进行处理，可捕获并重新引发异常，如下例所示：
 
-        try
-        {
-           // Your code that might cause an exception to be thrown.
-        }
-        catch (Exception ex)
-        {
-            Trace.TraceError("Exception: " + ex.ToString());
-            throw;
-        } 
+    ```
+    try
+    {
+       // Your code that might cause an exception to be thrown.
+    }
+    catch (Exception ex)
+    {
+        Trace.TraceError("Exception: " + ex.ToString());
+        throw;
+    } 
+    ```
 
 * [从 Azure 命令行流式传输诊断跟踪日志记录（加上 Glimpse！）](http://www.hanselman.com/blog/StreamingDiagnosticsTraceLoggingFromTheAzureCommandLinePlusGlimpse.aspx)<br/> 如何使用命令行实现本教程中通过 Visual Studio 完成的任务。[Glimpse](http://www.hanselman.com/blog/IfYoureNotUsingGlimpseWithASPNETForDebuggingAndProfilingYoureMissingOut.aspx) 是一个用于调试 ASP.NET 应用程序的工具。
 
@@ -722,5 +736,5 @@ Microsoft TechNet 网站包含的[使用失败请求跟踪](http://www.iis.net/l
 
 [GetStarted]: ./web-sites-dotnet-get-started.md
 [GetStartedWJ]: ./websites-dotnet-webjobs-sdk.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

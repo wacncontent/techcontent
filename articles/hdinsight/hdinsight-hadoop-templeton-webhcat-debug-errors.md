@@ -28,7 +28,8 @@ ms.author: larryfr
 
 ## <a name="modifying-configuration"></a> 修改配置
 
-> [!IMPORTANT]本文档中列出的几大错误之所以发生，是因为超出了配置的最大值。当解决步骤提到你可以更改一个值时，必须使用下列选项之一来执行更改：
+> [!IMPORTANT]
+>本文档中列出的几大错误之所以发生，是因为超出了配置的最大值。当解决步骤提到你可以更改一个值时，必须使用下列选项之一来执行更改：
 
 * 对于 **Windows** 群集：使用脚本操作在群集创建过程中配置值。有关详细信息，请参阅[开发脚本操作](./hdinsight-hadoop-script-actions.md)。
 
@@ -83,5 +84,5 @@ ms.author: larryfr
 [maximum-applications]: http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.1.3/bk_system-admin-guide/content/setting_application_limits.html
 [max-procs]: https://hive.apache.org/javadocs/hcat-r0.5.0/configuration.html
 [max-age-ms]: http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.0.6.0/ds_Hadoop/hadoop-mapreduce-client/hadoop-mapreduce-client-core/mapred-default.xml
- 
+
 <!---HONumber=Mooncake_1207_2015-->

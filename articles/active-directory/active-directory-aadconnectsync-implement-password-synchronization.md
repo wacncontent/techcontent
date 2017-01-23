@@ -42,7 +42,8 @@ wacn.date: 12/15/2016
 
 有关详细信息，请参阅 [Integrating your on-premises identities with Azure Active Directory](./active-directory-aadconnect.md)（将本地标识与 Azure Active Directory 集成）
 
-> [!NOTE] 有关为 FIPS 和密码同步配置的 Active Directory 域服务的更多详细信息，请参阅 [Password Sync and FIPS](#password-synchronization-and-fips)（密码同步和 FIPS）。
+> [!NOTE]
+> 有关为 FIPS 和密码同步配置的 Active Directory 域服务的更多详细信息，请参阅 [Password Sync and FIPS](#password-synchronization-and-fips)（密码同步和 FIPS）。
 
 ## 密码同步的工作原理
 Active Directory 域服务以实际用户密码的哈希值表示形式存储密码。哈希值是单向数学函数（“ *哈希算法* ”）的计算结果。没有任何方法可将单向函数的结果还原为纯文本版本的密码。无法使用密码哈希来登录本地网络。
@@ -59,7 +60,8 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 同步密码对当前登录的用户没有任何影响。
 当前的云服务会话不会立即受到已同步密码更改的影响，而是在你登录云服务时才受到影响。但是，当云服务要求你再次身份验证时，就需要提供新的密码。
 
-> [!NOTE] 只有 Active Directory 的对象类型用户才支持密码同步。不支持 iNetOrgPerson 对象类型。
+> [!NOTE]
+> 只有 Active Directory 的对象类型用户才支持密码同步。不支持 iNetOrgPerson 对象类型。
 
 ### 密码同步在 Azure AD 域服务中的工作原理
 也可以使用密码同步功能将本地密码同步到 Azure AD 域服务。此方案可让 Azure AD 域服务以本地 AD 中所有可用的方法验证云中的用户。此方案的体验类似于在本地环境中使用 Active Directory 迁移工具 (ADMT)。
@@ -78,7 +80,8 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 **密码复杂性策略**
 启用密码同步时，本地 Active Directory 中的密码复杂性策略会覆盖云中可能为同步的用户定义的复杂性策略。可以使用本地 Active Directory 的所有有效密码来访问 Azure AD 服务。
 
-> [!NOTE] 直接在云中创建的用户的密码仍受到云中定义的密码策略的约束。
+> [!NOTE]
+> 直接在云中创建的用户的密码仍受到云中定义的密码策略的约束。
 
 **密码过期策略**
 如果用户属于密码同步的范围，云帐户密码则设置为“永不过期”。
@@ -110,11 +113,13 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 
 下面显示了此代码片段的大致情况供参考：
 
-    <configuration>
-        <runtime>
-            <enforceFIPSPolicy enabled="false"/>
-        </runtime>
-    </configuration>
+```
+<configuration>
+    <runtime>
+        <enforceFIPSPolicy enabled="false"/>
+    </runtime>
+</configuration>
+```
 
 有关安全性与 FIPS 的信息，请参阅 [AAD Password Sync, Encryption and FIPS compliance](https://blogs.technet.microsoft.com/enterprisemobility/2014/06/28/aad-password-sync-encryption-and-fips-compliance/)（AAD 密码同步、加密和 FIPS 合规性）
 
@@ -139,7 +144,7 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 4. 选择“搜索连接器空间”。
 5. 找到你要查找的用户。
 6. 选择“沿袭”选项卡，确保至少有一个同步规则的“密码同步”显示为 **True**。在默认配置中，同步规则的名称为 **In from AD - User AccountEnabled**。![有关用户的沿袭信息](./media/active-directory-aadconnectsync-implement-password-synchronization/cspasswordsync.png)
-7. 然后，从 Metaverse 到 Azure AD 连接器空间一直[跟踪用户](./active-directory-aadconnectsync-service-manager-ui-connectors.md#follow-an-object-and-its-data-through-the-system/)。连接器空间对象应存在一个“密码同步”设置为 **True** 的出站规则。在默认配置中，同步规则的名称为 **Out to AAD - User Join**。
+7. 然后，从 Metaverse 到 Azure AD 连接器空间一直[跟踪用户](./active-directory-aadconnectsync-service-manager-ui-connectors.md#follow-an-object-and-its-data-through-the-system)。连接器空间对象应存在一个“密码同步”设置为 **True** 的出站规则。在默认配置中，同步规则的名称为 **Out to AAD - User Join**。
 ![用户的连接器空间属性](./media/active-directory-aadconnectsync-implement-password-synchronization/cspasswordsync2.png)
 8. 若要查看对象在过去一周的密码同步详细信息，请单击“日志...”。
 ![对象日志详细信息](./media/active-directory-aadconnectsync-implement-password-synchronization/csobjectlog.png)
@@ -164,71 +169,75 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 
 #### 获取密码同步设置的状态 <a name="get-the-status-of-password-sync-settings"></a>
 
-    Import-Module ADSync
-    $connectors = Get-ADSyncConnector
-    $aadConnectors = $connectors | Where-Object {$_.SubType -eq "Azure Active Directory (Microsoft)"}
-    $adConnectors = $connectors | Where-Object {$_.ConnectorTypeName -eq "AD"}
-    if ($aadConnectors -ne $null -and $adConnectors -ne $null)
+```
+Import-Module ADSync
+$connectors = Get-ADSyncConnector
+$aadConnectors = $connectors | Where-Object {$_.SubType -eq "Azure Active Directory (Microsoft)"}
+$adConnectors = $connectors | Where-Object {$_.ConnectorTypeName -eq "AD"}
+if ($aadConnectors -ne $null -and $adConnectors -ne $null)
+{
+    if ($aadConnectors.Count -eq 1)
     {
-        if ($aadConnectors.Count -eq 1)
+        $features = Get-ADSyncAADCompanyFeature -ConnectorName $aadConnectors[0].Name
+        Write-Host
+        Write-Host "Password sync feature enabled in your Azure AD directory: "  $features.PasswordHashSync
+        foreach ($adConnector in $adConnectors)
         {
-            $features = Get-ADSyncAADCompanyFeature -ConnectorName $aadConnectors[0].Name
             Write-Host
-            Write-Host "Password sync feature enabled in your Azure AD directory: "  $features.PasswordHashSync
-            foreach ($adConnector in $adConnectors)
+            Write-Host "Password sync channel status BEGIN ------------------------------------------------------- "
+            Write-Host
+            Get-ADSyncAADPasswordSyncConfiguration -SourceConnector $adConnector.Name
+            Write-Host
+            $pingEvents =
+                    Get-EventLog -LogName "Application" -Source "Directory Synchronization" -InstanceId 654  -After (Get-Date).AddHours(-3) |
+                    Where-Object { $_.Message.ToUpperInvariant().Contains($adConnector.Identifier.ToString("D").ToUpperInvariant()) } |
+                    Sort-Object { $_.Time } -Descending
+            if ($pingEvents -ne $null)
             {
-                Write-Host
-                Write-Host "Password sync channel status BEGIN ------------------------------------------------------- "
-                Write-Host
-                Get-ADSyncAADPasswordSyncConfiguration -SourceConnector $adConnector.Name
-                Write-Host
-                $pingEvents =
-                        Get-EventLog -LogName "Application" -Source "Directory Synchronization" -InstanceId 654  -After (Get-Date).AddHours(-3) |
-                        Where-Object { $_.Message.ToUpperInvariant().Contains($adConnector.Identifier.ToString("D").ToUpperInvariant()) } |
-                        Sort-Object { $_.Time } -Descending
-                if ($pingEvents -ne $null)
-                {
-                    Write-Host "Latest heart beat event (within last 3 hours). Time " $pingEvents[0].TimeWritten
-                }
-                else
-                {
-                    Write-Warning "No ping event found within last 3 hours."
-                }
-                Write-Host
-                Write-Host "Password sync channel status END ------------------------------------------------------- "
-                Write-Host
+                Write-Host "Latest heart beat event (within last 3 hours). Time " $pingEvents[0].TimeWritten
             }
+            else
+            {
+                Write-Warning "No ping event found within last 3 hours."
+            }
+            Write-Host
+            Write-Host "Password sync channel status END ------------------------------------------------------- "
+            Write-Host
         }
-        else
-        {
-            Write-Warning "More than one Azure AD Connectors found. Please update the script to use the appropriate Connector."
-        }
     }
-    Write-Host
-    if ($aadConnectors -eq $null)
+    else
     {
-        Write-Warning "No Azure AD Connector was found."
+        Write-Warning "More than one Azure AD Connectors found. Please update the script to use the appropriate Connector."
     }
-    if ($adConnectors -eq $null)
-    {
-        Write-Warning "No AD DS Connector was found."
-    }
-    Write-Host
+}
+Write-Host
+if ($aadConnectors -eq $null)
+{
+    Write-Warning "No Azure AD Connector was found."
+}
+if ($adConnectors -eq $null)
+{
+    Write-Warning "No AD DS Connector was found."
+}
+Write-Host
+```
 
 #### 触发所有密码的完全同步 <a name="trigger-a-full-sync-of-all-passwords"></a>
 可以使用以下脚本对所有密码触发完全同步：
 
-    $adConnector = "<CASE SENSITIVE AD CONNECTOR NAME>"
-    $aadConnector = "<CASE SENSITIVE AAD CONNECTOR NAME>"
-    Import-Module adsync
-    $c = Get-ADSyncConnector -Name $adConnector
-    $p = New-Object Microsoft.IdentityManagement.PowerShell.ObjectModel.ConfigurationParameter "Microsoft.Synchronize.ForceFullPasswordSync", String, ConnectorGlobal, $null, $null, $null
-    $p.Value = 1
-    $c.GlobalParameters.Remove($p.Name)
-    $c.GlobalParameters.Add($p)
-    $c = Add-ADSyncConnector -Connector $c
-    Set-ADSyncAADPasswordSyncConfiguration -SourceConnector $adConnector -TargetConnector $aadConnector -Enable $false
-    Set-ADSyncAADPasswordSyncConfiguration -SourceConnector $adConnector -TargetConnector $aadConnector -Enable $true
+```
+$adConnector = "<CASE SENSITIVE AD CONNECTOR NAME>"
+$aadConnector = "<CASE SENSITIVE AAD CONNECTOR NAME>"
+Import-Module adsync
+$c = Get-ADSyncConnector -Name $adConnector
+$p = New-Object Microsoft.IdentityManagement.PowerShell.ObjectModel.ConfigurationParameter "Microsoft.Synchronize.ForceFullPasswordSync", String, ConnectorGlobal, $null, $null, $null
+$p.Value = 1
+$c.GlobalParameters.Remove($p.Name)
+$c.GlobalParameters.Add($p)
+$c = Add-ADSyncConnector -Connector $c
+Set-ADSyncAADPasswordSyncConfiguration -SourceConnector $adConnector -TargetConnector $aadConnector -Enable $false
+Set-ADSyncAADPasswordSyncConfiguration -SourceConnector $adConnector -TargetConnector $aadConnector -Enable $true
+```
 
 ## 后续步骤
 - [Azure AD Connect Sync：自定义同步选项](./active-directory-aadconnectsync-whatis.md)

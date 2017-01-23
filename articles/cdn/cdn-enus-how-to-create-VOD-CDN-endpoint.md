@@ -41,7 +41,7 @@ The Azure CDN sets default cache rules (see below) for VOD Acceleration. You can
 2. MP3 and WMA files are cached for 1 day.
 3. MWV, HTML, HTM, SHTML, HML, GIF, SWF, PNG, BMP and JS files are cached for 1 hour.
 4. Files with the extensions 7Z, APK, WDF, CAB, DHP, EXE, FLV, GZ, IPA, ISO, MPK, MPQ, PBCV, PXL, QNP, R00, RAR, XY, XY2, ZIP, and CAB are cached for one month.
-      
+
 ###**Create VOD acceleration domain names**
 
 1. In the navigation pane of the Azure Management Portal, click “CDN.”
@@ -49,7 +49,7 @@ The Azure CDN sets default cache rules (see below) for VOD Acceleration. You can
 3. Select “VOD Acceleration” from the “Acceleration Type” drop-down list.
 4. In the “Origin Domain Type” drop-down list, select cloud service, storage account, web app, media services, or a customized origin domain.
 5. In the “Origin Domain” drop-down list, select one option from the list of available storage accounts and media services for use in creating the CDN endpoint.
-  
+
     ![017](./media/cdn-doc/VOD-en-001.png)
 
     If the selected “Origin Domain Type” is “Customized Origin Domain,” input your own origin domain address under “Origin Domain.” You can enter one or multiple origin domain IP addresses (separate multiple addresses with semicolons, e.g. “126.1.1.1;172.1.1.1”), or an origin domain name such as “origin.chazuretest.com.”
@@ -62,13 +62,13 @@ The Azure CDN sets default cache rules (see below) for VOD Acceleration. You can
     If the origin domain type is media services, the corresponding return to source host header is:
 
     ![020](./media/cdn-doc/VOD-en-003.png)
-    
+
     If the origin domain type is a custom origin domain, the corresponding return to source host header is:
 
     ![019](./media/cdn-doc/VOD-en-004.png)
-          
+
 8. In “ICP Number,” enter the corresponding ICP record number for the custom domain that you entered (e.g., Jing ICP Bei XXXXXXXX Hao-X).
-     
+
     ![021](./media/cdn-doc/VOD-en-006.png)
 
 9. Click “Create” to create the new endpoint.

@@ -53,7 +53,8 @@ ms.author: jdial
 
 VNet 和子网资源可帮助定义 Azure 中运行的工作负荷的安全边界。VNet 的特征包括一个地址空间（定义为 CIDR 块）的集合。
 
->[!NOTE] 网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解它的详细信息](http://whatismyipaddress.com/cidr)。
+>[!NOTE]
+> 网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解它的详细信息](http://whatismyipaddress.com/cidr)。
 
 VNet 包含以下属性。
 
@@ -93,7 +94,8 @@ VNet 包含以下属性。
 
 就虚拟网络而言，具有**网络参与者**角色的用户可以完全控制 Azure Resource Manager 虚拟网络资源。同样，具有**经典网络参与者**角色的用户可以完全控制经典虚拟网络资源。
 
->[!NOTE] 你还可以[创建自己的角色](../active-directory/role-based-access-control-configure.md)来分离管理需求。
+>[!NOTE]
+> 你还可以[创建自己的角色](../active-directory/role-based-access-control-configure.md)来分离管理需求。
 
 ## 设计
 
@@ -182,7 +184,7 @@ VNet 包含以下属性。
 3. 你是否需要在 Azure VNet 和在本地数据中心之间提供通信？
 
     是的。因为连接到本地数据中心的用户必须能够通过加密隧道访问应用程序。
- 
+
 4. 你需要将多少个 IaaS VM 用于你的解决方案？
 
     200 个 IaaS VM。App1、App2 和 App3 各需要 5 个 Web 服务器、2 个应用程序服务器和 2 个数据库服务器。每个应用程序总共需要 9 个 IaaS VM，或总共需要 36 个 IaaS VM。App5 和 App6 各需要 5 个 Web 服务器和 2 个数据库服务器。每个应用程序总共需要 7 个 IaaS VM，或总共需要 14 个 IaaS VM。因此，每个 Azure 区域中的所有应用程序需要 50 个 IaaS VM。由于我们需要使用 4 个区域，因此将有 200 个 IaaS VM。

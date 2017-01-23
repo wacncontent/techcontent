@@ -56,7 +56,9 @@ SNAT 端口是可能会被耗尽的有限资源。因此了解它们的使用方
 
 有多种方法来确定出站连接的公共源 IP 地址。OpenDNS 提供了一种服务可以向你显示 VM 的公共 IP 地址。使用 nslookup 命令，可以将名称 myip.opendns.com 的 DNS 查询发送到 OpenDNS 解析程序。该服务返回用于发送此查询的源 IP 地址。在 VM 中执行以下查询时，返回的是用于该 VM 的公共 IP。
 
-    nslookup myip.opendns.com resolver1.opendns.com
+```
+nslookup myip.opendns.com resolver1.opendns.com
+```
 
 ## <a name="preventing-public-connectivity"></a> 阻止公共连接
 

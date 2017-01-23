@@ -24,7 +24,8 @@ ms.author: jroth
 
 本文提供了有关如何通过使用 PowerShell cmdlet 在 Azure 中创建 SQL Server 虚拟机的步骤。
 
-> [!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。有关此主题中的 Resource Manager 版本，请参阅[使用 Azure PowerShell Resource Manager 预配 SQL Server 虚拟机](./virtual-machines-windows-ps-sql-create.md)。
+> [!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。有关此主题中的 Resource Manager 版本，请参阅[使用 Azure PowerShell Resource Manager 预配 SQL Server 虚拟机](./virtual-machines-windows-ps-sql-create.md)。
 
 ### 安装和配置 PowerShell：
 
@@ -34,7 +35,9 @@ ms.author: jroth
 
 3. 启动 Windows PowerShell，并通过 **Add-AzureAccount** 命令将其连接到 Azure 订阅。
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
 ## 确定你的目标 Azure 区域
 
@@ -42,48 +45,65 @@ ms.author: jroth
 
 1. 确定你要用于托管 SQL Server VM 的数据中心。以下 PowerShell 命令将显示可用区域的详细信息，末尾提供摘要列表。
 
-        Get-AzureLocation
-        (Get-AzureLocation).Name
+    ```
+    Get-AzureLocation
+    (Get-AzureLocation).Name
+    ```
 
 2.  确定首选位置后，为该区域设置一个名为 **$dcLocation** 的变量。
 
-        $dcLocation = "<region name>"
+    ```
+    $dcLocation = "<region name>"
+    ```
 
 ## 设置订阅和存储帐户
 
 1. 确定将用于新虚拟机的 Azure 订阅。
 
-        (Get-AzureSubscription).SubscriptionName
+    ```
+    (Get-AzureSubscription).SubscriptionName
+    ```
 
 1. 向 **$subscr** 变量分配目标 Azure 订阅。然后将其设置为当前 Azure 订阅。
 
-        $subscr="<subscription name>"
-        Select-AzureSubscription -SubscriptionName $subscr -Current
+    ```
+    $subscr="<subscription name>"
+    Select-AzureSubscription -SubscriptionName $subscr -Current
+    ```
 
 1. 然后检查现有存储帐户。以下脚本显示所选区域中存在的所有存储帐户：
 
-        (Get-AzureStorageAccount | where { $_.GeoPrimaryLocation -eq $dcLocation }).StorageAccountName
+    ```
+    (Get-AzureStorageAccount | where { $_.GeoPrimaryLocation -eq $dcLocation }).StorageAccountName
+    ```
 
-    >[!NOTE] 如果需要新的存储帐户，请先使用 New-AzureStorageAccoun 命令创建全部小写的存储帐户名称，如下例中所示：**New-AzureStorageAccount -StorageAccountName "<storage account name>" -Location $dcLocation**
+    >[!NOTE]
+    > 如果需要新的存储帐户，请先使用 New-AzureStorageAccoun 命令创建全部小写的存储帐户名称，如下例中所示：**New-AzureStorageAccount -StorageAccountName "<storage account name>" -Location $dcLocation**
 
 1. 将目标存储帐户名称分配给 **$staccount**。然后使用 **Set-azuresubscription** 设置订阅和当前存储帐户。
 
-        $staccount="<storage account name>"
-        Set-AzureSubscription -SubscriptionName $subscr -CurrentStorageAccountName $staccount
+    ```
+    $staccount="<storage account name>"
+    Set-AzureSubscription -SubscriptionName $subscr -CurrentStorageAccountName $staccount
+    ```
 
 ## 选择 SQL Server 虚拟机映像
 
 1. 从库中找出可用的 SQL Server 虚拟机映像的列表。这些映像都具有以“SQL”开头的 **ImageFamily** 属性。下面的查询显示你可用的预安装 SQL Server 的映像系列。
 
-        Get-AzureVMImage | where { $_.ImageFamily -like "SQL*" } | select ImageFamily -Unique | Sort-Object -Property ImageFamily
+    ```
+    Get-AzureVMImage | where { $_.ImageFamily -like "SQL*" } | select ImageFamily -Unique | Sort-Object -Property ImageFamily
+    ```
 
 1. 当发现虚拟机映像系列时，该系列中可能有多个已发布的映像。使用以下脚本查你所选映像系列所发布的最新虚拟机映像名称，例如 **Windows Server 2012 R2 上的 SQL Server 2016 RTM Enterprise**：
 
-        $family="<ImageFamily value>"
-        $image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+    ```
+    $family="<ImageFamily value>"
+    $image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
 
-        echo "Selected SQL Server image name:"
-        echo "   $image"
+    echo "Selected SQL Server image name:"
+    echo "   $image"
+    ```
 
 ## 创建虚拟机
 
@@ -91,72 +111,87 @@ ms.author: jroth
 
 1. 创建一个云服务托管新 VM。请注意，还可以改用现有云服务。使用云服务的短名称创建新变量 **$svcname**。
 
-        $svcname = "<cloud service name>"
-        New-AzureService -ServiceName $svcname -Label $svcname -Location $dcLocation
+    ```
+    $svcname = "<cloud service name>"
+    New-AzureService -ServiceName $svcname -Label $svcname -Location $dcLocation
+    ```
 
 2. 指定虚拟机名称和大小。有关虚拟机大小的更多信息，请参见[适用于 Azure 的虚拟机大小](./virtual-machines-windows-sizes.md)。
 
-        $vmname="<machine name>"
-        $vmsize="<Specify one: Large, ExtraLarge, A5, A6, A7, or see the link to the other VM sizes>"
-        $vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
+    ```
+    $vmname="<machine name>"
+    $vmsize="<Specify one: Large, ExtraLarge, A5, A6, A7, or see the link to the other VM sizes>"
+    $vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
+    ```
 
 3. 制定本地管理员帐户和密码。
 
-        $cred=Get-Credential -Message "Type the name and password of the local administrator account."
-        $vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.GetNetworkCredential().Username -Password $cred.GetNetworkCredential().Password
+    ```
+    $cred=Get-Credential -Message "Type the name and password of the local administrator account."
+    $vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.GetNetworkCredential().Username -Password $cred.GetNetworkCredential().Password
+    ```
 
 4. 运行以下脚本来创建虚拟机。
 
-        New-AzureVM -ServiceName $svcname -VMs $vm1
+    ```
+    New-AzureVM -ServiceName $svcname -VMs $vm1
+    ```
 
->[!NOTE] 有关更多说明和配置选项，请参阅[使用 Azure PowerShell 创建和预配置基于 Windows 的虚拟机](./virtual-machines-windows-classic-create-powershell.md)中的**构建你的命令集**部分。
+>[!NOTE]
+> 有关更多说明和配置选项，请参阅[使用 Azure PowerShell 创建和预配置基于 Windows 的虚拟机](./virtual-machines-windows-classic-create-powershell.md)中的**构建你的命令集**部分。
 
 ## PowerShell 脚本示例
 
 以下脚本提供了一个完整脚本的示例，该脚本在 **Windows Server 2012 R2 虚拟机上创建 SQL Server 2016 RTM Enterprise**。如果使用此脚本，则必须根据本主题中先前的步骤自定义初始变量。
 
-    # Customize these variables based on your settings and requirements:
-    $dcLocation = "China East"
-    $subscr="mysubscription"
-    $staccount="mystorageaccount"
-    $family="SQL Server 2016 RTM Enterprise on Windows Server 2012 R2"
-    $svcname = "mycloudservice"
-    $vmname="myvirtualmachine"
-    $vmsize="A5"
+```
+# Customize these variables based on your settings and requirements:
+$dcLocation = "China East"
+$subscr="mysubscription"
+$staccount="mystorageaccount"
+$family="SQL Server 2016 RTM Enterprise on Windows Server 2012 R2"
+$svcname = "mycloudservice"
+$vmname="myvirtualmachine"
+$vmsize="A5"
 
-    # Set the current subscription and storage account
-    # Comment out the New-AzureStorageAccount line if the account already exists
-    Select-AzureSubscription -SubscriptionName $subscr -Current
-    New-AzureStorageAccount -StorageAccountName $staccount -Location $dcLocation
-    Set-AzureSubscription -SubscriptionName $subscr -CurrentStorageAccountName $staccount
+# Set the current subscription and storage account
+# Comment out the New-AzureStorageAccount line if the account already exists
+Select-AzureSubscription -SubscriptionName $subscr -Current
+New-AzureStorageAccount -StorageAccountName $staccount -Location $dcLocation
+Set-AzureSubscription -SubscriptionName $subscr -CurrentStorageAccountName $staccount
 
-    # Select the most recent VM image in this image family:
-    $image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
+# Select the most recent VM image in this image family:
+$image=Get-AzureVMImage | where { $_.ImageFamily -eq $family } | sort PublishedDate -Descending | select -ExpandProperty ImageName -First 1
 
-    # Create the new cloud service; comment out this line if cloud service exists already:
-    New-AzureService -ServiceName $svcname -Label $svcname -Location $dcLocation
+# Create the new cloud service; comment out this line if cloud service exists already:
+New-AzureService -ServiceName $svcname -Label $svcname -Location $dcLocation
 
-    # Create the VM config:
-    $vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
+# Create the VM config:
+$vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image
 
-    # Set administrator credentials:
-    $cred=Get-Credential -Message "Type the name and password of the local administrator account."
-    $vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.GetNetworkCredential().Username -Password $cred.GetNetworkCredential().Password
+# Set administrator credentials:
+$cred=Get-Credential -Message "Type the name and password of the local administrator account."
+$vm1 | Add-AzureProvisioningConfig -Windows -AdminUsername $cred.GetNetworkCredential().Username -Password $cred.GetNetworkCredential().Password
 
-    # Create the SQL Server VM:
-    New-AzureVM -ServiceName $svcname -VMs $vm1
+# Create the SQL Server VM:
+New-AzureVM -ServiceName $svcname -VMs $vm1
+```
 
 ## 使用远程桌面进行连接
 
 1. 在当前用户的文档文件夹中创建 .RDP 文件，以启动这些虚拟机完成安装：
 
-        $documentspath = [environment]::getfolderpath("mydocuments")
-        Get-AzureRemoteDesktopFile -ServiceName $svcname -Name $vmname -LocalPath "$documentspath\vm1.rdp"
+    ```
+    $documentspath = [environment]::getfolderpath("mydocuments")
+    Get-AzureRemoteDesktopFile -ServiceName $svcname -Name $vmname -LocalPath "$documentspath\vm1.rdp"
+    ```
 
 1. 在文档目录中启动 RDP 文件。使用之前提供的管理员用户名和密码进行连接（例如，如果你的用户名称是 VMAdmin，请指定“\\VMAdmin”作为用户并提供密码）。
 
-        cd $documentspath
-        .\vm1.rdp
+    ```
+    cd $documentspath
+    .\vm1.rdp
+    ```
 
 ## 为远程访问完成 SQL Server 计算机的配置
 

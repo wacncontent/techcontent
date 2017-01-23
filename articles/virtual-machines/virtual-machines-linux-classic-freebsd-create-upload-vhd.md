@@ -35,7 +35,8 @@ ms.author: kyliel
 
 - **安装在 .vhd 文件中的 FreeBSD 操作系统** - 必须将受支持的 FreeBSD 操作系统安装到虚拟硬盘。可使用多个工具创建 .vhd 文件。例如，可使用虚拟化解决方案（如 Hyper-V）创建 .vhd 文件并安装操作系统。有关如何安装和使用 Hyper-V 的说明，请参阅[安装 Hyper-V 和创建虚拟机](http://technet.microsoft.com/zh-cn/library/hh846766.aspx)。
 
-> [!NOTE] Azure 不支持更新的 VHDX 格式。可使用 Hyper-V 管理器或 [convert-vhd](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) cmdlet 将磁盘转换为 VHD 格式。此外，MSDN 上还有[有关如何将 FreeBSD 与 Hyper-V 配合使用的教程](http://blogs.msdn.com/b/kylie/archive/2014/12/25/running-freebsd-on-hyper-v.aspx)。
+> [!NOTE]
+> Azure 不支持更新的 VHDX 格式。可使用 Hyper-V 管理器或 [convert-vhd](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) cmdlet 将磁盘转换为 VHD 格式。此外，MSDN 上还有[有关如何将 FreeBSD 与 Hyper-V 配合使用的教程](http://blogs.msdn.com/b/kylie/archive/2014/12/25/running-freebsd-on-hyper-v.aspx)。
 
 此任务包括以下五个步骤。
 
@@ -45,78 +46,99 @@ ms.author: kyliel
 
 1. 启用 DHCP。
 
-        # echo 'ifconfig_hn0="SYNCDHCP"' >> /etc/rc.conf
-        # service netif restart
+    ```
+    # echo 'ifconfig_hn0="SYNCDHCP"' >> /etc/rc.conf
+    # service netif restart
+    ```
 
 2. 启用 SSH。
 
     从光盘安装后，将默认启用 SSH。如果由于某种原因未启用它，或者如果直接使用 FreeBSD VHD，请键入以下命令：
 
-        # echo 'sshd_enable="YES"' >> /etc/rc.conf
-        # ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
-        # ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
-        # service sshd restart
+    ```
+    # echo 'sshd_enable="YES"' >> /etc/rc.conf
+    # ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+    # ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+    # service sshd restart
+    ```
 
 3. 设置串行控制台。
 
-        # echo 'console="comconsole vidconsole"' >> /boot/loader.conf
-        # echo 'comconsole_speed="115200"' >> /boot/loader.conf
+    ```
+    # echo 'console="comconsole vidconsole"' >> /boot/loader.conf
+    # echo 'comconsole_speed="115200"' >> /boot/loader.conf
+    ```
 
 4. 安装 sudo。
 
     在 Azure 中禁用根帐户。这意味着你需要通过无特权用户利用 sudo 使用提升的权限运行命令。
 
-        # pkg install sudo
+    ```
+    # pkg install sudo
+    ```
 
 5. Azure 代理的先决条件。
 
-        # pkg install python27  
-        # pkg install Py27-setuptools27   
-        # ln -s /usr/local/bin/python2.7 /usr/bin/python   
-        # pkg install git
+    ```
+    # pkg install python27  
+    # pkg install Py27-setuptools27   
+    # ln -s /usr/local/bin/python2.7 /usr/bin/python   
+    # pkg install git
+    ```
 
 6. 安装 Azure 代理。
 
     可以始终在 [github](https://github.com/Azure/WALinuxAgent/releases) 上找到 Azure 代理的最新版本。2.0.10 + 版正式支持 FreeBSD 10 和 10.1，2.1.4 版正式支持 FreeBSD 10.2 和更高版本。
 
-        # git clone https://github.com/Azure/WALinuxAgent.git  
-        # cd WALinuxAgent  
-        # git tag  
-        …
-        WALinuxAgent-2.0.16
-        …
-        v2.1.4
-        v2.1.4.rc0
-        v2.1.4.rc1
+    ```
+    # git clone https://github.com/Azure/WALinuxAgent.git  
+    # cd WALinuxAgent  
+    # git tag  
+    …
+    WALinuxAgent-2.0.16
+    …
+    v2.1.4
+    v2.1.4.rc0
+    v2.1.4.rc1
+    ```
 
     对于 2.0，让我们使用 2.0.16 作为示例：
 
-        # git checkout WALinuxAgent-2.0.16
-        # python setup.py install  
-        # ln -sf /usr/local/sbin/waagent /usr/sbin/waagent  
+    ```
+    # git checkout WALinuxAgent-2.0.16
+    # python setup.py install  
+    # ln -sf /usr/local/sbin/waagent /usr/sbin/waagent  
+    ```
 
     对于 2.1，让我们使用 2.1.4 作为示例：
 
-        # git checkout v2.1.4
-        # python setup.py install  
-        # ln -sf /usr/local/sbin/waagent /usr/sbin/waagent  
-        # ln -sf /usr/local/sbin/waagent2.0 /usr/sbin/waagent2.0
+    ```
+    # git checkout v2.1.4
+    # python setup.py install  
+    # ln -sf /usr/local/sbin/waagent /usr/sbin/waagent  
+    # ln -sf /usr/local/sbin/waagent2.0 /usr/sbin/waagent2.0
+    ```
 
-    >[!IMPORTANT] 安装 Azure 代理之后，验证它是否正在运行是一个好主意：
+    >[!IMPORTANT]
+    > 安装 Azure 代理之后，验证它是否正在运行是一个好主意：
 
-        # waagent -version
-        WALinuxAgent-2.1.4 running on freebsd 10.3
-        Python: 2.7.11
-        # service -e | grep waagent
-        /etc/rc.d/waagent
-        # cat /var/log/waagent.log
+    ```
+    # waagent -version
+    WALinuxAgent-2.1.4 running on freebsd 10.3
+    Python: 2.7.11
+    # service -e | grep waagent
+    /etc/rc.d/waagent
+    # cat /var/log/waagent.log
+    ```
 
 7. 取消预配系统。
 
     取消预配系统以清除系统并使其适用于重新预配。以下命令还会删除上次预配的用户帐户和关联数据：
 
-        # echo "y" |  /usr/local/sbin/waagent -deprovision+user  
-        # echo  'waagent_enable="YES"' >> /etc/rc.conf
+    ```
+    # echo "y" |  /usr/local/sbin/waagent -deprovision+user  
+    # echo  'waagent_enable="YES"' >> /etc/rc.conf
+    ```
 
     现在，你可以关闭你的 VM 了。
 
@@ -158,7 +180,8 @@ ms.author: kyliel
 
     ![容器名称](./media/virtual-machines-linux-classic-freebsd-create-upload-vhd/storageaccount_containervalues.png)
 
-    > [!NOTE] 默认情况下，该容器是专用容器，只能由帐户所有者访问。若要允许对容器中的 Blob 进行公共读取访问，但不允许对容器属性和元数据进行公共读取访问，请使用“公共 Blob”选项。若要允许对容器和 Blob 进行完全公共读取访问，请使用“公共容器”选项。
+    > [!NOTE]
+    > 默认情况下，该容器是专用容器，只能由帐户所有者访问。若要允许对容器中的 Blob 进行公共读取访问，但不允许对容器属性和元数据进行公共读取访问，请使用“公共 Blob”选项。若要允许对容器和 Blob 进行完全公共读取访问，请使用“公共容器”选项。
 
 ## 步骤 3：准备连接到 Azure
 
@@ -207,16 +230,21 @@ ms.author: kyliel
 
 从你在上一步中使用的 Azure PowerShell 窗口中，键入：
 
-        Add-AzureVhd -Destination "<BlobStorageURL>/<YourImagesFolder>/<VHDName>.vhd" -LocalFilePath <PathToVHDFile>
+```
+    Add-AzureVhd -Destination "<BlobStorageURL>/<YourImagesFolder>/<VHDName>.vhd" -LocalFilePath <PathToVHDFile>
+```
 
 ## 步骤 5：使用上载的 .vhd 文件创建 VM
 上载 .vhd 文件后，你可以将其作为映像添加到与订阅关联的自定义映像列表，并使用此自定义映像创建虚拟机。
 
 1. 从你在上一步中使用的 Azure PowerShell 窗口中，键入：
 
-        Add-AzureVMImage -ImageName <Your Image's Name> -MediaLocation <location of the VHD> -OS <Type of the OS on the VHD>
+    ```
+    Add-AzureVMImage -ImageName <Your Image's Name> -MediaLocation <location of the VHD> -OS <Type of the OS on the VHD>
+    ```
 
-    > [!NOTE]使用 Linux 作为 OS 类型。当前的 Azure PowerShell 版本只接受“Linux”或“Windows”作为参数。
+    > [!NOTE]
+    >使用 Linux 作为 OS 类型。当前的 Azure PowerShell 版本只接受“Linux”或“Windows”作为参数。
 
 2. 完成前面的步骤后，当你在 Azure 经典管理门户上选择“映像”选项卡时，将列出新映像。
 

@@ -108,7 +108,8 @@ ms.author: iainfou
 
 ## <a name="source-3-cloud-service-endpoint-and-acl"></a> 来源 3：云服务终结点和 ACL
 
-> [!NOTE] 此来源仅适用于使用经典部署模型创建的 VM。对于使用 Resource Manager 创建的 VM，请跳转到[来源 4：网络安全组](#nsg)。
+> [!NOTE]
+> 此来源仅适用于使用经典部署模型创建的 VM。对于使用 Resource Manager 创建的 VM，请跳转到[来源 4：网络安全组](#nsg)。
 
 若要将云服务终结点和 ACL 从失败原因中排除，请验证同一虚拟网络中的其他 Azure VM 是否可与 VM 建立 SSH 连接。
 

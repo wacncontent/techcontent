@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.devlang: Java
 ms.topic: article
 ms.date: 11/01/2016
-wacn.date: 12/12/2016
+wacn.date: 01/19/2017
 ms.author: robmcm
 ---
 
@@ -47,135 +47,137 @@ Azure 访问服务控制筛选器是一个社区技术预览版。作为预发�
 
 修改 **index.jsp** 以使用以下代码。
 
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-        pageEncoding="UTF-8"%>
-        <%@ page import="javax.xml.parsers.*"
-                 import="javax.xml.transform.*"
-                 import="org.w3c.dom.*"
-                 import="java.io.*"
-                 import="javax.xml.transform.stream.*"
-                 import="javax.xml.transform.dom.*"
-                 import="javax.xml.xpath.*"
-                 import="javax.servlet.jsp.JspWriter" %>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-    <html>
-    <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Sample ACS Filter</title>
-    </head>
-    <body>
-        <h3>SAML information from sample ACS program</h3>
-        <%!
-        void displaySAMLInfo(Node node, String parent, JspWriter out)
-        {
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="javax.xml.parsers.*"
+             import="javax.xml.transform.*"
+             import="org.w3c.dom.*"
+             import="java.io.*"
+             import="javax.xml.transform.stream.*"
+             import="javax.xml.transform.dom.*"
+             import="javax.xml.xpath.*"
+             import="javax.servlet.jsp.JspWriter" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Sample ACS Filter</title>
+</head>
+<body>
+    <h3>SAML information from sample ACS program</h3>
+    <%!
+    void displaySAMLInfo(Node node, String parent, JspWriter out)
+    {
 
-            try
-            {
-                String nodeName;
-                int nChild, i;
-
-                nodeName = node.getNodeName();
-                out.println("<br>");
-                out.println("<u>Examining <b>" + parent + nodeName + "</b></u><br>");
-
-                   // Attributes.
-                   NamedNodeMap attribsMap = node.getAttributes();
-                   if (null != attribsMap)
-                   {
-                         for (i=0; i < attribsMap.getLength(); i++)
-                         {
-                                Node attrib = attribsMap.item(i);
-                                out.println("Attribute: <b>" + attrib.getNodeName() + "</b>: " + attrib.getNodeValue()  + "<br>");
-                         }
-                   }
-
-                   // Child nodes.
-                   NodeList list = node.getChildNodes();
-                   if (null != list)
-                    {
-                          nChild = list.getLength();
-                          if (nChild > 0)
-                          {                    
-
-                                 // If it is a text node, just print the text.
-                                 if (list.item(0).getNodeName() == "#text")
-                                 {
-                                     out.println("Text value: <b>" + list.item(0).getTextContent() + "</b><br>");
-                                 }
-                                 else
-                                 {
-                                     // Print out the child node names.
-                                     out.print("Contains " + nChild + " child node(s): ");   
-                                        for (i=0; i < nChild; i++)
-                                     {
-                                        Node temp = list.item(i);
-
-                                        out.print("<b>" + temp.getNodeName() + "</b>");
-                                        if (i < nChild - 1)
-                                        {
-                                            // Separate the names.
-                                            out.print(", ");
-                                        }
-                                        else
-                                        {
-                                            // Finish the sentence.
-                                            out.print(".");
-                                        }
-
-                                     }
-                                     out.println("<br>");
-
-                                     // Process the child nodes.
-                                     for (i=0; i < nChild; i++)
-                                     {
-                                        Node temp = list.item(i);
-                                        displaySAMLInfo(temp, parent + nodeName + "\", out);
-                                     }
-                               }
-                          }
-                      }
-                  }
-                catch (Exception e)
-                {
-                    System.out.println("Exception encountered.");
-                    e.printStackTrace();            
-                }
-            }
-        %>
-
-        <%
         try
         {
-            String data  = (String) request.getAttribute("ACSSAML");
+            String nodeName;
+            int nChild, i;
 
-            DocumentBuilder docBuilder;
-            Document doc = null;
-            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-            docBuilderFactory.setIgnoringElementContentWhitespace(true);
-            docBuilder = docBuilderFactory.newDocumentBuilder();
-            byte[] xmlDATA = data.getBytes();
+            nodeName = node.getNodeName();
+            out.println("<br>");
+            out.println("<u>Examining <b>" + parent + nodeName + "</b></u><br>");
 
-            ByteArrayInputStream in = new ByteArrayInputStream(xmlDATA);
-            doc = docBuilder.parse(in);
-            doc.getDocumentElement().normalize();
+               // Attributes.
+               NamedNodeMap attribsMap = node.getAttributes();
+               if (null != attribsMap)
+               {
+                     for (i=0; i < attribsMap.getLength(); i++)
+                     {
+                            Node attrib = attribsMap.item(i);
+                            out.println("Attribute: <b>" + attrib.getNodeName() + "</b>: " + attrib.getNodeValue()  + "<br>");
+                     }
+               }
 
-            // Iterate the child nodes of the doc.
-            NodeList list = doc.getChildNodes();
+               // Child nodes.
+               NodeList list = node.getChildNodes();
+               if (null != list)
+                {
+                      nChild = list.getLength();
+                      if (nChild > 0)
+                      {                    
 
-            for (int i=0; i < list.getLength(); i++)
+                             // If it is a text node, just print the text.
+                             if (list.item(0).getNodeName() == "#text")
+                             {
+                                 out.println("Text value: <b>" + list.item(0).getTextContent() + "</b><br>");
+                             }
+                             else
+                             {
+                                 // Print out the child node names.
+                                 out.print("Contains " + nChild + " child node(s): ");   
+                                    for (i=0; i < nChild; i++)
+                                 {
+                                    Node temp = list.item(i);
+
+                                    out.print("<b>" + temp.getNodeName() + "</b>");
+                                    if (i < nChild - 1)
+                                    {
+                                        // Separate the names.
+                                        out.print(", ");
+                                    }
+                                    else
+                                    {
+                                        // Finish the sentence.
+                                        out.print(".");
+                                    }
+
+                                 }
+                                 out.println("<br>");
+
+                                 // Process the child nodes.
+                                 for (i=0; i < nChild; i++)
+                                 {
+                                    Node temp = list.item(i);
+                                    displaySAMLInfo(temp, parent + nodeName + "\", out);
+                                 }
+                           }
+                      }
+                  }
+              }
+            catch (Exception e)
             {
-                displaySAMLInfo(list.item(i), "", out);
+                System.out.println("Exception encountered.");
+                e.printStackTrace();            
             }
         }
-        catch (Exception e)
-        {
-            out.println("Exception encountered.");
-            e.printStackTrace();
-        }
+    %>
 
-        %>
-    </body>
-    </html>
+    <%
+    try
+    {
+        String data  = (String) request.getAttribute("ACSSAML");
+
+        DocumentBuilder docBuilder;
+        Document doc = null;
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        docBuilderFactory.setIgnoringElementContentWhitespace(true);
+        docBuilder = docBuilderFactory.newDocumentBuilder();
+        byte[] xmlDATA = data.getBytes();
+
+        ByteArrayInputStream in = new ByteArrayInputStream(xmlDATA);
+        doc = docBuilder.parse(in);
+        doc.getDocumentElement().normalize();
+
+        // Iterate the child nodes of the doc.
+        NodeList list = doc.getChildNodes();
+
+        for (int i=0; i < list.getLength(); i++)
+        {
+            displaySAMLInfo(list.item(i), "", out);
+        }
+    }
+    catch (Exception e)
+    {
+        out.println("Exception encountered.");
+        e.printStackTrace();
+    }
+
+    %>
+</body>
+</html>
+```
 
 ## <a name="run_application"></a>运行应用程序
 1. 按照如何[使用 Eclipse 在 Azure 访问控制服务中对 Web 用户进行身份验证](./active-directory-java-authenticate-users-access-control-eclipse.md)主题所述的步骤，在计算模拟器中运行应用程序或部署到 Azure。

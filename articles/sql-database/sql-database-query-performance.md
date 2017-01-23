@@ -48,7 +48,8 @@ Query Performance Insight 非常易于使用：
 
     ![性能仪表板](./media/sql-database-query-performance/performance.png)
 
-> [!NOTE] SQL 数据库的查询存储需要捕获几个小时的数据，才能提供查询性能见解。如果在某段时间内数据库没有任何活动，或查询存储不处于活动状态，则显示该时间段的图表为空。如果查询存储未运行，可随时启用它。
+> [!NOTE]
+> SQL 数据库的查询存储需要捕获几个小时的数据，才能提供查询性能见解。如果在某段时间内数据库没有任何活动，或查询存储不处于活动状态，则显示该时间段的图表为空。如果查询存储未运行，可随时启用它。
 
 ##<a name="review-top-cpu-consuming-queries"></a> 查看 DTU 消耗量靠前的查询
 
@@ -66,10 +67,10 @@ Query Performance Insight 非常易于使用：
 
     底部网格表示可见查询的聚合信息。
 
-    -	查询 ID - 数据库内查询的唯一标识符。
-    -	每个查询在可观察到的时间间隔内使用的 CPU（取决于聚合函数）。
-    -	每个查询的持续时间（取决于聚合函数）。
-    -	特定查询的执行总次数。
+    - 查询 ID - 数据库内查询的唯一标识符。
+    - 每个查询在可观察到的时间间隔内使用的 CPU（取决于聚合函数）。
+    - 每个查询的持续时间（取决于聚合函数）。
+    - 特定查询的执行总次数。
 
     选择或清除图表要包含或排除的单个查询。
 
@@ -89,7 +90,7 @@ Query Performance Insight 非常易于使用：
 4. 详细信息视图随即打开，查询 CPU 消耗已按时间细分。
 3. 单击图表以获取详细信息。<br>最前面一行显示整体 DTU 百分比，条形是所选查询消耗的 CPU 百分比。
 4. 检查数据以查看详细度量值，包括运行查询的每个间隔持续时间、运行次数、资源消耗百分比。
-    
+
     ![查询详细信息][3]
 
 1. 可选择单击“设置”以自定义 CPU 消耗数据的显示方式，或显示不同的时间段。
@@ -104,9 +105,9 @@ Query Performance Insight 非常易于使用：
 
 查询存储无法收集新数据时，通常会显示这些消息。若要解决这些问题，你有以下几种选择：
 
--	更改查询存储的保留和捕获策略
--	增加查询存储的大小
--	清除查询存储
+- 更改查询存储的保留和捕获策略
+- 增加查询存储的大小
+- 清除查询存储
 
 ### 建议的保留和捕获策略
 
@@ -120,26 +121,32 @@ Query Performance Insight 非常易于使用：
 - **所有** - 捕获所有查询。**所有**是默认选项。
 - **自动** - 忽略不频繁的查询以及编译和执行持续时间很短的查询。执行计数、编译和运行时持续时间的阈值由内部决定。
 - **无** - 查询存储停止捕获新的查询。
-    
+
 建议将所有策略设置为“自动”，并将清除策略设置为“30 天”：
 
-    ALTER DATABASE [YourDB] 
-    SET QUERY_STORE (SIZE_BASED_CLEANUP_MODE = AUTO);
-        
-    ALTER DATABASE [YourDB] 
-    SET QUERY_STORE (CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30));
-    
-    ALTER DATABASE [YourDB] 
-    SET QUERY_STORE (QUERY_CAPTURE_MODE = AUTO);
+```
+ALTER DATABASE [YourDB] 
+SET QUERY_STORE (SIZE_BASED_CLEANUP_MODE = AUTO);
+
+ALTER DATABASE [YourDB] 
+SET QUERY_STORE (CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30));
+
+ALTER DATABASE [YourDB] 
+SET QUERY_STORE (QUERY_CAPTURE_MODE = AUTO);
+```
 
 通过连接到数据库并发出以下查询，增加查询存储的大小：
 
-    ALTER DATABASE [YourDB]
-    SET QUERY_STORE (MAX_STORAGE_SIZE_MB = 1024);
+```
+ALTER DATABASE [YourDB]
+SET QUERY_STORE (MAX_STORAGE_SIZE_MB = 1024);
+```
 
 清除查询存储。删除查询存储中的所有当前信息：
 
-    ALTER DATABASE [YourDB] SET QUERY_STORE CLEAR;
+```
+ALTER DATABASE [YourDB] SET QUERY_STORE CLEAR;
+```
 
 ## 摘要
 

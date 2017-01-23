@@ -42,13 +42,13 @@ ms.author: jeffstok
 易并行作业是我们在 Azure 流分析中具有的最具可扩展性的方案。它将查询的一个实例的输入的一个分区连接到输出的一个分区。实现此并行需要以下几个条件：
 
 1.  如果查询逻辑取决于同一个查询实例正在处理的相同密钥，则必须确保事件转到你的输入的同一个分区。对于事件中心，这意味着事件数据需要具有 **PartitionKey** 集或者你可以使用已分区的发件人。对于 Blob，这意味着这些事件被发送到相同的分区文件夹。如果你的查询逻辑不需要由同一个查询实例处理相同密钥，则可以忽略此要求。此示例是一个简单的选择/项目/筛选查询。
-2.	一旦数据按它在输入端上需要的样式进行布局，则我们需要确保你的查询已进行分区。这要求你在所有步骤中使用 **Partition By**。允许采用多个步骤，但它们都必须由相同的密钥进行分区。另一个需要注意的问题是，目前，需要将分区键设置为“PartitionId”才能够进行完全并行作业。
-3.	当前仅事件中心和 Blob 支持已分区的输出。对于事件中心输出，你需要将“PartitionKey”字段配置为“PartitionId”。对于 Blob，你不必执行任何操作。
-4.	另外还要注意，输入分区数必须等于的输出分区数。Blob 输出当前不支持分区，但这也没关系，因为它将继承上游查询的分区方案。将允许完全并行作业的分区值的示例：
-    1.	8 个事件中心输入分区和 8 个事件中心输出分区
-    2.	8 个事件中心输入分区和 Blob 输出
-    3.	8 个 Blob 输入分区和 Blob 输出
-    4.	8 个 Blob 输入分区和 8 个事件中心输出分区
+2. 一旦数据按它在输入端上需要的样式进行布局，则我们需要确保你的查询已进行分区。这要求你在所有步骤中使用 **Partition By**。允许采用多个步骤，但它们都必须由相同的密钥进行分区。另一个需要注意的问题是，目前，需要将分区键设置为“PartitionId”才能够进行完全并行作业。
+3. 当前仅事件中心和 Blob 支持已分区的输出。对于事件中心输出，你需要将“PartitionKey”字段配置为“PartitionId”。对于 Blob，你不必执行任何操作。
+4. 另外还要注意，输入分区数必须等于的输出分区数。Blob 输出当前不支持分区，但这也没关系，因为它将继承上游查询的分区方案。将允许完全并行作业的分区值的示例：
+    1. 8 个事件中心输入分区和 8 个事件中心输出分区
+    2. 8 个事件中心输入分区和 Blob 输出
+    3. 8 个 Blob 输入分区和 Blob 输出
+    4. 8 个 Blob 输入分区和 8 个事件中心输出分区
 
 以下是一些易并行的示例方案。
 
@@ -57,9 +57,11 @@ ms.author: jeffstok
 
 **查询：**
 
-    SELECT TollBoothId
-    FROM Input1 Partition By PartitionId
-    WHERE TollBoothId > 100
+```
+SELECT TollBoothId
+FROM Input1 Partition By PartitionId
+WHERE TollBoothId > 100
+```
 
 此查询是一个简单的筛选器，并在这种情况下，我们不需要担心对我们发送到事件中心的输入的分区。你会注意到该查询具有 **PartitionId** 的 **Partition By**，因此我们满足上述要求 #2。对于输出，我们需要配置作业中的事件中心输出，将“PartitionKey”字段设置为“PartitionId”。一个上次检查、输入分区 == 输出分区。此拓扑是易并行。
 
@@ -68,9 +70,11 @@ ms.author: jeffstok
 
 **查询：**
 
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+SELECT COUNT(*) AS Count, TollBoothId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
 
 此查询具有分组键，在这种情况下，相同的密钥需要由同一个查询实例进行处理。这意味着我们需要以分区的方式将我们事件发送到事件中心。我们关注哪个键？ **PartitionId** 是作业的逻辑概念，我们所关心的真正键是 **TollBoothId**。这意味着我们应将发送到事件中心的事件数据的 **PartitionKey** 设置为事件的 **TollBoothId**。该查询具有 **PartitionId** 的 **Partition By**，所以我们没有问题。对于输出，因为它是 Blob，所以我们不需要担心如何配置 **PartitionKey**。对于要求 #4，同样由于这是 Blob，因此我们无需担心。此拓扑是易并行。
 
@@ -79,15 +83,17 @@ ms.author: jeffstok
 
 **查询：**
 
-    WITH Step1 AS (
-    SELECT COUNT(*) AS Count, TollBoothId, PartitionId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
-    
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+WITH Step1 AS (
+SELECT COUNT(*) AS Count, TollBoothId, PartitionId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+)
+
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
 
 此查询具有分组键，在这种情况下，相同的密钥需要由同一个查询实例进行处理。我们可以使用与前面的查询相同的策略。查询包含多个步骤。是否每个步骤都包含 ** PartitionId** 的 **Partition By**？ 是的，因此我们没问题。对于输出，我们需要如上文所述，将 **PartitionKey** 设置为 **PartitionId**，我们还可以看到它的分区数与输入的相同。此拓扑是易并行。
 
@@ -108,16 +114,18 @@ PowerBI 输出当前不支持分区。
 
 **查询：**
 
-    WITH Step1 AS (
-    SELECT COUNT(*) AS Count, TollBoothId, PartitionId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
-    
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1 Partition By TollBoothId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId
-    
+```
+WITH Step1 AS (
+SELECT COUNT(*) AS Count, TollBoothId, PartitionId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+)
+
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1 Partition By TollBoothId
+GROUP BY TumblingWindow(minute, 3), TollBoothId
+```
+
 正如所见，第二步使用 **TollBoothId** 作为分区键。这与第一步不相同，因此将要求我们执行随机选择。
 
 这些是流分析作业的一些示例和反例，流分析作业能够实现易并行拓扑并有可能达到最大规模。对于不适合这些配置文件中的任何一个的作业，以后将会推出更新，其中会详细说明如何最大化缩放某些其他规范的流分析方案。
@@ -130,19 +138,24 @@ PowerBI 输出当前不支持分区。
 ### 查询中的步骤
 查询可以有一个或多个步骤。每一步都是一个使用 **WITH** 关键字定义的子查询。位于 **WITH** 关键字外的唯一查询也计为一步，例如以下查询中的 **SELECT** 语句：
 
-    WITH Step1 AS (
-        SELECT COUNT(*) AS Count, TollBoothId
-        FROM Input1 Partition By PartitionId
-        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
+```
+WITH Step1 AS (
+```
+SELECT COUNT(*) AS Count, TollBoothId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+)
 
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1
-    GROUP BY TumblingWindow(minute,3), TollBoothId
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1
+GROUP BY TumblingWindow(minute,3), TollBoothId
+```
 
 前面的查询有两步。
 
-> [!NOTE] 此示例查询将在本文后面部分介绍。
+> [!NOTE]
+> 此示例查询将在本文后面部分介绍。
 
 ### 对步骤进行分区
 
@@ -199,9 +212,11 @@ PowerBI 输出当前不支持分区。
 ### 缩放示例
 以下查询计算三分钟时段内通过收费站（总共三个收费亭）的车辆数。此查询可以扩展到 6 个流式处理单位。
 
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+SELECT COUNT(*) AS Count, TollBoothId
+FROM Input1
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
 
 若要对查询使用更多的流式处理单位，必须对数据流输入和查询进行分区。如果将数据流分区设置为 3，则可将以下修改的查询扩展到 18 个流式处理单位：
 
@@ -213,19 +228,22 @@ PowerBI 输出当前不支持分区。
 
 将通过流分析对每个 Input1 分区分开进行处理，并会在相同的翻转窗口中为同一收费亭创建多个有关已通过车辆计数的记录。如果不能更改输入分区键，则可通过添加额外的不分区步骤来解决此问题，例如：
 
-    WITH Step1 AS (
-        SELECT COUNT(*) AS Count, TollBoothId
-        FROM Input1 Partition By PartitionId
-        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
+```
+WITH Step1 AS (
+    SELECT COUNT(*) AS Count, TollBoothId
+    FROM Input1 Partition By PartitionId
+    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+)
 
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1
-    GROUP BY TumblingWindow(minute, 3), TollBoothId
+SELECT SUM(Count) AS Count, TollBoothId
+FROM Step1
+GROUP BY TumblingWindow(minute, 3), TollBoothId
+```
 
 此查询可以扩展到 24 个流式处理单位。
 
->[!NOTE] 如果要联接两个流，请确保流是按进行联接的列的分区键分区的，并且两个流中的分区数目是相同的。
+>[!NOTE]
+> 如果要联接两个流，请确保流是按进行联接的列的分区键分区的，并且两个流中的分区数目是相同的。
 
 ## 配置流分析作业分区
 
@@ -256,16 +274,20 @@ PowerBI 输出当前不支持分区。
 
 客户端将综合性的传感器数据发送到事件中心，事件中心再以 JSON 格式将数据发送给流分析，数据输出也采用 JSON 格式。下面是示例数据看起来的样子：
 
-    {"devicetime":"2014-12-11T02:24:56.8850110Z","hmdt":42.7,"temp":72.6,"prss":98187.75,"lght":0.38,"dspl":"R-PI Olivier's Office"}
+```
+{"devicetime":"2014-12-11T02:24:56.8850110Z","hmdt":42.7,"temp":72.6,"prss":98187.75,"lght":0.38,"dspl":"R-PI Olivier's Office"}
+```
 
 查询：“关灯时发送警报”
 
-    SELECT AVG(lght),
-     “LightOff” as AlertText
-    FROM input TIMESTAMP
-    BY devicetime
-     WHERE
-        lght< 0.05 GROUP BY TumblingWindow(second, 1)
+```
+SELECT AVG(lght),
+ “LightOff” as AlertText
+FROM input TIMESTAMP
+BY devicetime
+ WHERE
+    lght< 0.05 GROUP BY TumblingWindow(second, 1)
+```
 
 衡量吞吐量：在这种情况下，吞吐量是指由流分析在固定的时间（10 分钟）内处理的输入数据的量。若要使输入数据达到最佳的处理吞吐量，必须对数据流输入和查询进行分区。此外，还需在查询中添加 **COUNT()**，以便度量所处理的输入事件数。为了确保作业不会单纯地等待输入事件的到来，输入事件中心的每个分区已预先加载了足够的输入数据（大约 300MB）。
 
@@ -342,5 +364,5 @@ PowerBI 输出当前不支持分区。
 [stream.analytics.get.started]: ./stream-analytics-get-started.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: http://go.microsoft.com/fwlink/?LinkId=517301
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

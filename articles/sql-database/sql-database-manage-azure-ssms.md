@@ -27,7 +27,8 @@ ms.author: sstein
 
 建议你每当使用 Azure SQL 数据库时，都使用最新版本的 SSMS。
 
-> [!IMPORTANT] 由于 SSMS 不断改进以便配合 Azure 和 SQL 数据库的最新更新，因此请始终使用 SSMS 的最新版本。若要获取最新版本，请参阅 [下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 由于 SSMS 不断改进以便配合 Azure 和 SQL 数据库的最新更新，因此请始终使用 SSMS 的最新版本。若要获取最新版本，请参阅 [下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 创建和管理 Azure SQL 数据库
 
@@ -37,29 +38,38 @@ ms.author: sstein
 
 -   使用 **CREATE DATABASE** 语句可创建数据库。有关详细信息，请参阅 [CREATE DATABASE（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/dn268335.aspx)。以下语句将创建名为 **myTestDB** 的数据库，并指定它是默认大小上限为 250 GB 的“标准 S0 版本”数据库。
 
-        CREATE DATABASE myTestDB
-        (EDITION='Standard',
-         SERVICE_OBJECTIVE='S0');
+    ```
+    CREATE DATABASE myTestDB
+    (EDITION='Standard',
+     SERVICE_OBJECTIVE='S0');
+    ```
 
 单击“执行”运行查询。
 
 -   例如，如果要更改数据库的名称和版本，请使用 **ALTER DATABASE** 语句修改现有数据库。有关详细信息，请参阅 [ALTER DATABASE（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms174269.aspx)。以下语句将修改前一步骤中创建的数据库，将版本更改为“标准 S1”。
 
-        ALTER DATABASE myTestDB
-        MODIFY
-        (SERVICE_OBJECTIVE='S1');
+    ```
+    ALTER DATABASE myTestDB
+    MODIFY
+    (SERVICE_OBJECTIVE='S1');
+    ```
 
 -   使用 **DROP DATABASE** 语句可删除现有数据库。有关详细信息，请参阅 [DROP DATABASE（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms178613.aspx)。以下语句将删除 **myTestDB** 数据库，但暂时请不要删除此数据库，因为下一步骤会用它来创建登录名。
 
-        DROP DATABASE myTestBase;
+    ```
+    DROP DATABASE myTestBase;
+    ```
 
 -   master 数据库具有你可用于查看有关所有数据库的详细信息的 **sys.databases** 视图。若要查看所有现有数据库，请执行以下语句：
 
-        SELECT * FROM sys.databases;
+    ```
+    SELECT * FROM sys.databases;
+    ```
 
 -   在 SQL 数据库中，不支持将 **USE** 语句用于在数据库之间切换。您需要改为建立直接到目标数据库的连接。
 
->[!NOTE] 创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面特定于语句的信息。
+>[!NOTE]
+> 创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面特定于语句的信息。
 
 ## 创建并管理登录名
 
@@ -67,7 +77,9 @@ ms.author: sstein
 
 -   使用 **CREATE LOGIN** 语句可以创建服务器级别的登录名。有关详细信息，请参阅 [CREATE LOGIN（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms189751.aspx)。以下语句创建名为 **login1** 的登录名。将 **password1** 替换为你选择的密码。
 
-        CREATE LOGIN login1 WITH password='password1';
+    ```
+    CREATE LOGIN login1 WITH password='password1';
+    ```
 
 -   使用 **CREATE USER** 语句授予数据库级别权限。所有登录名必须在 **master** 数据库中创建。要使登录名可连接到不同的数据库，必须对该数据库使用 **CREATE USER** 语句授予此登录名数据库级别的权限。有关详细信息，请参阅 [CREATE USER（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms173463.aspx)。
 
@@ -81,25 +93,35 @@ ms.author: sstein
 
     3.  对 myTestDB 数据库执行以下语句来创建与服务器级别登录名 **login1** 对应的名为 **login1User** 的数据库用户。
 
-            CREATE USER login1User FROM LOGIN login1;
+        ```
+        CREATE USER login1User FROM LOGIN login1;
+        ```
 
 -   使用 **sp\_addrolemember** 存储过程为用户帐户提供对数据库的适当级别的权限。有关详细信息，请参阅 [sp\_addrolemember (Transact-SQL)](http://msdn.microsoft.com/zh-cn/library/ms187750.aspx)。以下语句通过将 **login1User** 添加到 **db\_datareader** 角色，为 **login1User** 提供对数据库的只读权限。
 
-        exec sp_addrolemember 'db_datareader', 'login1User';    
+    ```
+    exec sp_addrolemember 'db_datareader', 'login1User';    
+    ```
 
 -   例如，如果要更改用于登录的密码，请使用 **ALTER LOGIN** 语句修改现有登录名。有关详细信息，请参阅 [ALTER LOGIN（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms189828.aspx)。应对 **master** 数据库运行 **ALTER LOGIN** 语句。切换回连接到该数据库的查询窗口。以下语句修改 **login1** 登录名来重置密码。将 **newPassword** 替换为你选择的密码，并将 **oldPassword** 替换为登录名的当前密码。
 
-        ALTER LOGIN login1
-        WITH PASSWORD = 'newPassword'
-        OLD_PASSWORD = 'oldPassword';
+    ```
+    ALTER LOGIN login1
+    WITH PASSWORD = 'newPassword'
+    OLD_PASSWORD = 'oldPassword';
+    ```
 
 -   使用 **DROP LOGIN** 语句可删除现有登录名。删除处于服务器级别的登录名还会删除任何关联的数据库用户帐户。有关详细信息，请参阅 [DROP DATABASE（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms178613.aspx)。应对 **master** 数据库运行 **DROP LOGIN** 语句。该语句将删除 **login1** 登录名。
 
-        DROP LOGIN login1;
+    ```
+    DROP LOGIN login1;
+    ```
 
 -   master 数据库具有可用于查看登录名的 **sys.sql\_logins**。若要查看所有现有登录名，请执行以下语句：
 
-        SELECT * FROM sys.sql_logins;
+    ```
+    SELECT * FROM sys.sql_logins;
+    ```
 
 ## 使用动态管理视图监视 SQL 数据库
 
@@ -107,41 +129,49 @@ SQL 数据库支持多个您可用于监视单个数据库的动态管理视图�
 
 -   查询动态管理视图需要 **VIEW DATABASE STATE** 权限。若要向特定数据库用户授予 **VIEW DATABASE STATE** 权限，请连接到该数据库并对其执行以下语句：
 
-        GRANT VIEW DATABASE STATE TO login1User;
+    ```
+    GRANT VIEW DATABASE STATE TO login1User;
+    ```
 
 -   使用 **sys.dm\_db\_partition\_stats** 视图计算数据库大小。**sys.dm\_db\_partition\_stats** 视图返回数据库中每个分区的页和行计数信息，你可以使用这些信息来计算数据库大小。下面的查询返回您的数据库的大小（以 MB 为单位）：
 
-        SELECT SUM(reserved_page_count)*8.0/1024
-        FROM sys.dm_db_partition_stats;   
+    ```
+    SELECT SUM(reserved_page_count)*8.0/1024
+    FROM sys.dm_db_partition_stats;   
+    ```
 
 -   使用 **sys.dm\_exec\_connections** 和 **sys.dm\_exec\_sessions** 视图可检索与数据库关联的当前用户连接和内部任务的相关信息。下面的查询返回有关当前连接的信息：
 
-        SELECT
-            e.connection_id,
-            s.session_id,
-            s.login_name,
-            s.last_request_end_time,
-            s.cpu_time
-        FROM
-            sys.dm_exec_sessions s
-            INNER JOIN sys.dm_exec_connections e
-              ON s.session_id = e.session_id;
+    ```
+    SELECT
+        e.connection_id,
+        s.session_id,
+        s.login_name,
+        s.last_request_end_time,
+        s.cpu_time
+    FROM
+        sys.dm_exec_sessions s
+        INNER JOIN sys.dm_exec_connections e
+          ON s.session_id = e.session_id;
+    ```
 
 -   使用 **sys.dm\_exec\_query\_stats** 视图可检索缓存的查询计划的总体性能统计信息。下面的查询返回有关按平均 CPU 时间排名的前五个查询的信息。
 
-        SELECT TOP 5 query_stats.query_hash AS "Query Hash",
-            SUM(query_stats.total_worker_time), SUM(query_stats.execution_count) AS "Avg CPU Time",
-            MIN(query_stats.statement_text) AS "Statement Text"
-        FROM
-            (SELECT QS.*,
-            SUBSTRING(ST.text, (QS.statement_start_offset/2) + 1,
-            ((CASE statement_end_offset
-                WHEN -1 THEN DATALENGTH(ST.text)
-                ELSE QS.statement_end_offset END
-                    - QS.statement_start_offset)/2) + 1) AS statement_text
-             FROM sys.dm_exec_query_stats AS QS
-             CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
-        GROUP BY query_stats.query_hash
-        ORDER BY 2 DESC;
- 
+    ```
+    SELECT TOP 5 query_stats.query_hash AS "Query Hash",
+        SUM(query_stats.total_worker_time), SUM(query_stats.execution_count) AS "Avg CPU Time",
+        MIN(query_stats.statement_text) AS "Statement Text"
+    FROM
+        (SELECT QS.*,
+        SUBSTRING(ST.text, (QS.statement_start_offset/2) + 1,
+        ((CASE statement_end_offset
+            WHEN -1 THEN DATALENGTH(ST.text)
+            ELSE QS.statement_end_offset END
+                - QS.statement_start_offset)/2) + 1) AS statement_text
+         FROM sys.dm_exec_query_stats AS QS
+         CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
+    GROUP BY query_stats.query_hash
+    ORDER BY 2 DESC;
+    ```
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

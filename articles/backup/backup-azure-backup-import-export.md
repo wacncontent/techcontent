@@ -28,12 +28,13 @@ Azure 备份的脱机种子设定与 [Azure 导入/导出服务](../storage/stor
 
 [Azure 备份 2016 年 8 月更新版（和更高版本）](http://go.microsoft.com/fwlink/?LinkID=229525)包含名为 AzureOfflineBackupDiskPrep 的 *Azure 磁盘准备工具* ：
 
-   - 可帮助使用 Azure 导入/导出工具为驱动器做好运行 Azure 导入的准备。
-   - 可在 [Azure 经典管理门户](https://manage.windowsazure.cn)上自动创建 Azure 导入/导出服务的 Azure 导入作业，而不是像旧版 Azure 备份一样通过手动方式创建相同的作业。
+    - 可帮助使用 Azure 导入/导出工具为驱动器做好运行 Azure 导入的准备。
+    - 可在 [Azure 经典管理门户](https://manage.windowsazure.cn)上自动创建 Azure 导入/导出服务的 Azure 导入作业，而不是像旧版 Azure 备份一样通过手动方式创建相同的作业。
 
 将备份数据上载到 Azure 之后，Azure 备份将备份数据复制到备份保管库，并计划增量备份。
 
-  > [!NOTE] 若要使用 Azure 磁盘准备工具，请确保已安装 Azure 备份 2016 年 8 月更新版（或更高版本），然后使用该软件执行工作流的所有步骤。如果使用旧版 Azure 备份，可以使用本文后续部分详述的 Azure 导入/导出工具来准备 SATA 驱动器。
+  > [!NOTE]
+  > 若要使用 Azure 磁盘准备工具，请确保已安装 Azure 备份 2016 年 8 月更新版（或更高版本），然后使用该软件执行工作流的所有步骤。如果使用旧版 Azure 备份，可以使用本文后续部分详述的 Azure 导入/导出工具来准备 SATA 驱动器。
 
 ## 先决条件
 
@@ -68,7 +69,8 @@ Azure 备份的脱机种子设定与 [Azure 导入/导出服务](../storage/stor
     - **Azure 存储帐户**：提供的 Azure 订阅中与 Azure 导入作业关联的经典类型存储帐户。
     - **Azure 存储容器**：Azure 存储帐户中导入此作业数据的目标存储 Blob 的名称。
 
-    > [!NOTE] 如果已通过 [Azure 门户预览](https://portal.azure.cn)在 Azure 恢复服务保管库中为备份注册了服务器，并且不是在云解决方案提供商 (CSP) 订阅上，则仍可以通过 Azure 门户预览创建经典类型的存储帐户，然后将它用于脱机备份工作流。
+    > [!NOTE]
+    > 如果已通过 [Azure 门户预览](https://portal.azure.cn)在 Azure 恢复服务保管库中为备份注册了服务器，并且不是在云解决方案提供商 (CSP) 订阅上，则仍可以通过 Azure 门户预览创建经典类型的存储帐户，然后将它用于脱机备份工作流。
 
     请保存所有这些信息，因为在后续步骤中需要再次输入这些信息。如果使用 Azure 磁盘准备工具来准备磁盘，则只需要*暂存位置*。
 
@@ -87,7 +89,7 @@ Azure 备份的脱机种子设定与 [Azure 导入/导出服务](../storage/stor
 ### 使用 Azure 磁盘准备工具准备 SATA 驱动器并创建 Azure 导入作业
 Azure 磁盘准备工具可在恢复服务代理（2016 年 8 月更新版和更高版本）的安装目录中获取，其路径如下。
 
-   *\Microsoft* *Azure* *Recovery* *Services* *Agent\Utils\*
+    *\Microsoft* *Azure* *Recovery* *Services* *Agent\Utils\*
 
 1. 转到该目录，将 **AzureOfflineBackupDiskPrep** 目录复制到装载了要准备的驱动器的副本计算机上。确保满足以下与副本计算机相关的要求：
 
@@ -108,33 +110,35 @@ Azure 磁盘准备工具可在恢复服务代理（2016 年 8 月更新版和更
 |s:< *暂存位置路径* > | 必需的输入，用于提供在**启动脱机备份**工作流中所输入的暂存位置路径。 |
 |p:< *发布设置文件的路径* > | 可选的输入，用于提供在**启动脱机备份**工作流中所输入的 **Azure 发布设置**文件路径。 |
 
-> [!NOTE] 复制计算机与源计算机不同时，&lt;发布设置文件的路径&gt; 值是必需的。
+> [!NOTE]
+> 复制计算机与源计算机不同时，&lt;发布设置文件的路径&gt; 值是必需的。
 
 运行该命令时，该工具将请求选择需要准备的驱动器对应的 Azure 导入作业。如果只有一个与提供的暂存位置关联的导入作业，将显示如下所示的屏幕。
 
-   ![Azure 磁盘准备工具输入](./media/backup-azure-backup-import-export/azureDiskPreparationToolDriveInput.png) <br/>
+    ![Azure 磁盘准备工具输入](./media/backup-azure-backup-import-export/azureDiskPreparationToolDriveInput.png) <br/>
 3. 输入想要准备传输到 Azure 的已装载磁盘的驱动器号（不要包含尾部的冒号）。出现提示时，请确认格式化驱动器。
 
 工具随后便开始使用备份数据准备磁盘。可能需要工具的提示附加其他磁盘，以免提供的磁盘没有足够空间来容纳备份数据。<br/>
 
 在工具成功执行结束时，所提供的一个或多个磁盘便已准备好可以寄送到 Azure。此外，Azure 经典管理门户上创建以在创建**启动脱机备份**工作流期间提供的名称来命名的导入作业。最后，工具上还显示磁盘所要寄送到的 Azure 数据中心的寄送地址，以及用于找到 Azure 经典管理门户上的导入作业的链接。
 
-   ![Azure 磁盘准备已完成](./media/backup-azure-backup-import-export/azureDiskPreparationToolSuccess.png)
+    ![Azure 磁盘准备已完成](./media/backup-azure-backup-import-export/azureDiskPreparationToolSuccess.png)
 4. 将磁盘寄送到工具提供的地址，保留跟踪号码供日后参考。<br/>
 5. 转到此工具显示的链接时，可以看到在**启动脱机备份**工作流中指定的 Azure 存储帐户。可以在存储帐户的“导入/导出”选项卡中看到新建的导入作业。
 
-   ![创建导入作业](./media/backup-azure-backup-import-export/ImportJobCreated.png)
+    ![创建导入作业](./media/backup-azure-backup-import-export/ImportJobCreated.png)
 6. 单击页面底部的“寄送信息”更新联系人详细信息，如以下屏幕所示。当导入作业完成时，Microsoft 使用此信息寄回磁盘。
 
-   ![联系信息](./media/backup-azure-backup-import-export/contactInfoAddition.PNG)
+    ![联系信息](./media/backup-azure-backup-import-export/contactInfoAddition.PNG)
 7. 在下一个屏幕中输入寄送详细信息。提供寄送到 Azure 数据中心的磁盘的对应“快递承运人”和“跟踪号”详细信息。
 
-   ![寄送信息](./media/backup-azure-backup-import-export/shippingInfoAddition.PNG)
+    ![寄送信息](./media/backup-azure-backup-import-export/shippingInfoAddition.PNG)
 
 ### 完成工作流
 导入作业完成后，存储帐户中的初始备份数据可供使用。然后，恢复服务代理将此帐户中的数据内容复制到备份保管库或恢复服务保管库（根据何者较合适）。在下一个计划备份时间，Azure 备份代理针对初始的备份副本来执行增量备份。
 
-> [!NOTE] 以下部分适用于无法访问 Azure 磁盘准备工具的旧版 Azure 备份用户。
+> [!NOTE]
+> 以下部分适用于无法访问 Azure 磁盘准备工具的旧版 Azure 备份用户。
 
 ### 准备 SATA 驱动器
 
@@ -144,7 +148,8 @@ Azure 磁盘准备工具可在恢复服务代理（2016 年 8 月更新版和更
 
     *.\WAImportExport.exe PrepImport /j:<*JournalFile*>.jrn /id: <*SessionId*> /sk:<*StorageAccountKey*> /BlobType:**PageBlob** /t:<*TargetDriveLetter*> /format /encrypt /srcdir:<*staging location*> /dstdir: <*DestinationBlobVirtualDirectory*>/*
 
-    > [!NOTE] 如果已安装 Azure 备份的 2016 年 8 月更新版（或更高版本），请确保输入的暂存位置与“立即备份”屏幕上的位置相同，且包含 AIB 和基本 Blob 文件。
+    > [!NOTE]
+    > 如果已安装 Azure 备份的 2016 年 8 月更新版（或更高版本），请确保输入的暂存位置与“立即备份”屏幕上的位置相同，且包含 AIB 和基本 Blob 文件。
 
 | 参数 | 说明
 |-------------|-------------|
@@ -158,7 +163,8 @@ Azure 磁盘准备工具可在恢复服务代理（2016 年 8 月更新版和更
 |/srcdir:< *SourceDirectory* > | 包含要复制到目标驱动器中的文件的源目录。确保指定的目录名称包含完整路径而不是相对路径。|
 |/dstdir:< *DestinationBlobVirtualDirectory* > | Azure 存储帐户中的目标虚拟目录的路径。在指定目标虚拟目录或 Blob 时，请确保使用有效的容器名称。请记住，容器名称必须是小写的。此容器名称应与创建备份策略/保护组期间输入的名称相同。|
 
-  > [!NOTE] 捕获整个工作流的信息的 WAImportExport 文件夹中创建日志文件。在 Azure 门户中创建导入作业时，需要此文件。
+  > [!NOTE]
+  > 捕获整个工作流的信息的 WAImportExport 文件夹中创建日志文件。在 Azure 门户中创建导入作业时，需要此文件。
 
   ![PowerShell 输出](./media/backup-azure-backup-import-export/psoutput.png)  
 

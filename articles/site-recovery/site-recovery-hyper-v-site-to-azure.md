@@ -63,7 +63,7 @@ ms.author: raynew
     - *.backup.windowsazure.cn
     - *.blob.core.chinacloudapi.cn
     - *.store.core.chinacloudapi.cn
-    
+
 - 若要使用自定义代理，请在安装提供程序之前设置代理服务器。在设置提供程序期间，你需要指定代理服务器地址和端口，以及用于访问的凭据。请注意，不支持基于 HTTPS 的代理。
 
 此图显示了站点恢复用来完成业务流程和复制的不同通信通道和端口
@@ -151,17 +151,23 @@ ms.author: raynew
 1. 将提供程序安装文件和注册密钥下载到某个文件夹中。例如 C:\\ASR。
 2. 以管理员身份打开命令提示符并键入：
 
-        C:\Windows\System32> CD C:\ASR
-        C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
+    C:\Windows\System32> CD C:\ASR
+    C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
 
 3. 然后运行以下命令以安装提供程序：
 
-        C:\ASR> setupdr.exe /i
+    ```
+    C:\ASR> setupdr.exe /i
+    ```
 
 4. 运行以下命令以完成注册：
 
-        CD C:\Program Files\Microsoft Azure Site Recovery Provider
-        C:\Program Files\Microsoft Azure Site Recovery Provider> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>         
+    ```
+    CD C:\Program Files\Microsoft Azure Site Recovery Provider
+    C:\Program Files\Microsoft Azure Site Recovery Provider> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>         
+    ```
 
 其中的参数包括：
 
@@ -197,7 +203,8 @@ ms.author: raynew
 
 将虚拟机添加到保护组以启用虚拟机保护。
 
->[!NOTE] 不支持保护运行 Linux 的、使用静态 IP 地址的 VM。
+>[!NOTE]
+> 不支持保护运行 Linux 的、使用静态 IP 地址的 VM。
 
 1. 在保护组的“计算机”选项卡上，单击“将虚拟机添加到保护组以启用保护”。
 2. 在“启用虚拟机保护”页上，选择你要保护的虚拟机。
@@ -247,7 +254,8 @@ ms.author: raynew
 
 按如下所述运行测试故障转移：
 
->[!NOTE] 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在 [此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
+>[!NOTE]
+> 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在 [此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
 
 1. 在“恢复计划”选项卡上，选择该计划并单击“测试故障转移”。
 2. 在“确认测试故障转移”页上，选择“无”或选择一个特定的 Azure 网络。请注意，如果你选择了“无”，则测试故障转移将检查虚拟机是否可以正确复制到 Azure，但不会检查你的复制网络配置。

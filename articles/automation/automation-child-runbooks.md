@@ -35,8 +35,10 @@ ms.author: magoedte;bwren
 
 下面的示例将调用一个测试子 Runbook，该 Runbook 接受三个参数：一个复杂对象、一个整数和一个布尔值。该子 Runbook 的输出将分配到某个变量。在本示例中，子 Runbook 属于 PowerShell 工作流 Runbook
 
-    $vm = Get-AzureRmVM -ResourceGroupName "LabRG" -Name "MyVM"
-    $output = PSWF-ChildRunbook -VM $vm -RepeatCount 2 -Restart $true
+```
+$vm = Get-AzureRmVM -ResourceGroupName "LabRG" -Name "MyVM"
+$output = PSWF-ChildRunbook -VM $vm -RepeatCount 2 -Restart $true
+```
 
 ##  使用 cmdlet 启动子 Runbook
 
@@ -50,17 +52,19 @@ ms.author: magoedte;bwren
 
 以下示例将启动一个包含参数的子 Runbook，然后等待其完成。完成后，父 Runbook 的作业将收集其输出。
 
-    $params = @{"VMName"="MyVM";"RepeatCount"=2;"Restart"=$true}
-    $job = Start-AzureAutomationRunbook –AutomationAccountName "MyAutomationAccount" –Name "Test-ChildRunbook" –Parameters $params
-    
-    $doLoop = $true
-    While ($doLoop) {
-       $job = Get-AzureAutomationJob –AutomationAccountName "MyAutomationAccount" -Id $job.Id
-       $status = $job.Status
-       $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped") 
-    }
-    
-    Get-AzureAutomationJobOutput –AutomationAccountName "MyAutomationAccount" -Id $job.Id –Stream Output
+```
+$params = @{"VMName"="MyVM";"RepeatCount"=2;"Restart"=$true}
+$job = Start-AzureAutomationRunbook –AutomationAccountName "MyAutomationAccount" –Name "Test-ChildRunbook" –Parameters $params
+
+$doLoop = $true
+While ($doLoop) {
+   $job = Get-AzureAutomationJob –AutomationAccountName "MyAutomationAccount" -Id $job.Id
+   $status = $job.Status
+   $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped") 
+}
+
+Get-AzureAutomationJobOutput –AutomationAccountName "MyAutomationAccount" -Id $job.Id –Stream Output
+```
 
 [Start-ChildRunbook](http://gallery.technet.microsoft.com/scriptcenter/Start-Azure-Automation-1ac858a9) 是 TechNet 库中提供的一个帮助器 Runbook，用于从 cmdlet 启动 Runbook。使用该 Runbook，你可以选择等待子 Runbook 完成，然后检索其输出。除了可在你自己的 Azure 自动化环境中使用此 Runbook 以外，还可以使用此 Runbook 作为参考来处理 Runbook 和使用 cmdlet 执行作业。该帮助器 Runbook 本身必须以内嵌方式调用，因为它要求使用一个哈希表参数来接受子 Runbook 的参数值。
 

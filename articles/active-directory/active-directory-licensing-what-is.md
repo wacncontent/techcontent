@@ -25,11 +25,13 @@ Azure Active Directory (Azure AD) 是 Microsoft 的标识即服务 (IDaaS) 解�
 
 [立即试用 Azure AD 高级版。](https://portal.office.com/Signup/Signup.aspx?OfferId=01824d11-5ad8-447f-8523-666b0848b381&ali=1#0)
 
-> [!NOTE] Azure AD 经典管理门户是 Azure 经典管理门户的一部分。尽管使用 Azure AD 无需购买任何 Azure，但访问此门户需要有效的 Azure 订阅或 [Azure 试用版订阅](https://www.azure.cn/pricing/1rmb-trial/)。
+> [!NOTE]
+> Azure AD 经典管理门户是 Azure 经典管理门户的一部分。尽管使用 Azure AD 无需购买任何 Azure，但访问此门户需要有效的 Azure 订阅或 [Azure 试用版订阅](https://www.azure.cn/pricing/1rmb-trial/)。
 
 有关 Azure AD 服务功能的一般概述，请参阅[什么是 Azure AD](./active-directory-whatis.md)。[了解有关 Azure AD 服务级别的详细信息](https://www.azure.cn/support/legal/sla/)
 
-> [!NOTE]  Azure 即付即用订阅则不相同：尽管也在目录中显示，但是这些订阅可以创建 Azure 资源并将资源映射到付款方式。在这种情况下，不存在与订阅关联的许可证计数。用户与订阅的关联就是用户管理订阅资源的访问权限，是通过授予用户权限，使他们能够操作已映射到订阅的 Azure 资源来实现的。
+> [!NOTE]
+>  Azure 即付即用订阅则不相同：尽管也在目录中显示，但是这些订阅可以创建 Azure 资源并将资源映射到付款方式。在这种情况下，不存在与订阅关联的许可证计数。用户与订阅的关联就是用户管理订阅资源的访问权限，是通过授予用户权限，使他们能够操作已映射到订阅的 Azure 资源来实现的。
 
 ##Azure AD 许可的工作原理
 
@@ -41,7 +43,8 @@ Azure Active Directory (Azure AD) 是 Microsoft 的标识即服务 (IDaaS) 解�
 
 一般而言，可以通过 Azure 经典管理门户中特定目录的“许可证”选项卡管理Azure AD 订阅信息。Azure AD 订阅（Azure AD Premium 除外）不会显示在 Office 门户中。
 
-> [!IMPORTANT] Azure AD Premium 和 Basic 以及 Enterprise Mobility Suite 订阅局限于其预配的目录/租户。订阅不能在目录之间拆分，也不能用于向其他目录中的用户授权。可以在目录之间移动订阅，但是需要提交支持票证，如果订阅是直接购买的，则需要取消并重新购买。
+> [!IMPORTANT]
+> Azure AD Premium 和 Basic 以及 Enterprise Mobility Suite 订阅局限于其预配的目录/租户。订阅不能在目录之间拆分，也不能用于向其他目录中的用户授权。可以在目录之间移动订阅，但是需要提交支持票证，如果订阅是直接购买的，则需要取消并重新购买。
 
 > 通过批量许可购买 Azure AD 或 Enterprise Mobility Suite 时，如果协议包含其他 Microsoft Online 服务（例如 Office 365），将自动激活订阅。
 
@@ -66,7 +69,8 @@ Azure AD 很容易入门；你始终可以在注册免费 Azure 试用版过程�
 - 如果你已在使用 Microsoft 的任何组织服务，则已经获得了一个 Azure AD 目录。在此情况下，应该为其他服务继续使用相同的目录，以便可以跨服务使用核心标识管理（包括预配和混合 SSO）。用户将获得单一登录体验，并且可以受益于更丰富的跨服务功能。因此，如果你决定为员工购买 Azure AD 付费服务，建议使用相同的目录。
 - 如果计划为一组不同的用户（合作伙伴、客户等）使用 Azure AD，或者想要评估 Azure AD 服务，并想要隔离生产服务，或者想要为服务设置沙盒环境，则建议先通过 Azure 经典管理门户创建新的目录。[详细了解如何在 Azure 经典管理门户中创建新的 Azure AD 目录](./active-directory-licensing-directory-independence.md)。你可以使用自己的帐户，以具有全局管理员权限的外部用户身份创建新目录。使用此帐户登录 Azure 经典管理门户时，将能够看到这个目录，并且能够访问所有目录管理任务。我们建议创建一个具有适当权限的本地帐户，用于管理其他 Microsoft 服务（即无法通过 Azure 经典管理门户访问的服务）。[详细了解如何在 Azure AD 中创建用户帐户](./active-directory-create-users.md)。
 
-> [!NOTE] Azure AD 支持“外部用户”，这是在 Azure AD 实例中使用 Microsoft 帐户 (MSA) 或另一个目录中的 Azure AD 标识所创建的用户帐户。尽管我们正在努力将此功能扩展到所有 Microsoft 的组织服务，但目前某些服务体验不支持这些帐户；例如，Office 365 系统管理门户目前不支持这些用户。因此，使用 Microsoft 帐户的外部用户将无法访问 Office 365 系统管理门户，而来自其他 Azure AD 目录的外部用户将被忽略。在后一种情况下，只有用户的本地帐户（最初创建用户的 Azure AD 或 Office 365 目录）才能通过这些体验进行访问。
+> [!NOTE]
+> Azure AD 支持“外部用户”，这是在 Azure AD 实例中使用 Microsoft 帐户 (MSA) 或另一个目录中的 Azure AD 标识所创建的用户帐户。尽管我们正在努力将此功能扩展到所有 Microsoft 的组织服务，但目前某些服务体验不支持这些帐户；例如，Office 365 系统管理门户目前不支持这些用户。因此，使用 Microsoft 帐户的外部用户将无法访问 Office 365 系统管理门户，而来自其他 Azure AD 目录的外部用户将被忽略。在后一种情况下，只有用户的本地帐户（最初创建用户的 Azure AD 或 Office 365 目录）才能通过这些体验进行访问。
 
 如前所述，Azure AD 有不同的付费版本。这些版本在其可购性方面略有不同：
 

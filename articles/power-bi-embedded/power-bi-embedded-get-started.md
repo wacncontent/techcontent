@@ -29,19 +29,19 @@ wacn.date: 01/13/2017
 ## 创建工作区集合
 **工作区集合**是顶层的 Azure 资源，是要嵌入到应用程序中的内容的容器。可采用两种方式创建**工作区集合**：
 
-   -	使用 Azure 门户预览手动创建
-   -	使用 Azure资源管理器(ARM) API 以编程方式创建
+   - 使用 Azure 门户预览手动创建
+   - 使用 Azure资源管理器(ARM) API 以编程方式创建
 
 接下来将完成使用 Azure 门户预览构建**工作区集合**的步骤。
 
-   1.	打开并登录到 **Azure 门户预览**：[http://portal.azure.cn](http://portal.azure.cn)。
+   1. 打开并登录到 **Azure 门户预览**：[http://portal.azure.cn](http://portal.azure.cn)。
 
-   2.	在顶部面板上单击“+ 新建”。
+   2. 在顶部面板上单击“+ 新建”。
 
        ![](./media/power-bi-embedded-get-started/create-workspace-1.png)  
 
-   3.	在“数据 + 分析”下单击“Power BI Embedded”。
-   4.	在“创建”边栏选项卡上输入所需的信息。有关**定价**信息，请参阅 [Power BI Embedded 定价](http://go.microsoft.com/fwlink/?LinkID=760527)。
+   3. 在“数据 + 分析”下单击“Power BI Embedded”。
+   4. 在“创建”边栏选项卡上输入所需的信息。有关**定价**信息，请参阅 [Power BI Embedded 定价](http://go.microsoft.com/fwlink/?LinkID=760527)。
 
        ![](./media/power-bi-embedded-get-started/create-workspace-2.png)  
 
@@ -85,17 +85,18 @@ wacn.date: 01/13/2017
 
 在 **Power BI Desktop** 中保存工作后，将创建一个 PBIX 文件。此文件包含报表。此外，如果导入数据，则 PBIX 包含完整数据集；而如果使用 **DirectQuery**，PBIX 只包含数据集架构。使用 [Power BI 导入 API](https://msdn.microsoft.com/zh-cn/library/mt711504.aspx) 以编程方式将 PBIX 部署到工作区。
 
-> [!NOTE] **Power BI Embedded** 具有其他一些 API，用于更改数据集所指向的服务器和数据库，以及设置数据集将用于连接数据库的服务帐户凭据。请参阅 [Post SetAllConnections](https://msdn.microsoft.com/zh-cn/library/mt711505.aspx)（发布 SetAllConnections）和 [Patch Gateway Datasource](https://msdn.microsoft.com/zh-cn/library/mt711498.aspx)（修补网关数据源）。
+> [!NOTE]
+> **Power BI Embedded** 具有其他一些 API，用于更改数据集所指向的服务器和数据库，以及设置数据集将用于连接数据库的服务帐户凭据。请参阅 [Post SetAllConnections](https://msdn.microsoft.com/zh-cn/library/mt711505.aspx)（发布 SetAllConnections）和 [Patch Gateway Datasource](https://msdn.microsoft.com/zh-cn/library/mt711498.aspx)（修补网关数据源）。
 
 ## 后续步骤
 在前面的步骤中已创建了工作区集合以及第一个报表和数据集。现在是时候了解如何为 **Power BI Embedded** 编写代码了。为了帮助用户入门，已创建了一个示例 Web 应用程序：[示例入门](./power-bi-embedded-get-started-sample.md)。此示例介绍了如何执行以下操作：
 
-  -	预配内容
+  - 预配内容
       - 创建工作区
       - 导入 PBIX 文件
       - 更新连接字符串并设置数据集的凭据。
 
-  -	安全地嵌入报表
+  - 安全地嵌入报表
 
 ## 另请参阅
 - [示例入门](./power-bi-embedded-get-started-sample.md)

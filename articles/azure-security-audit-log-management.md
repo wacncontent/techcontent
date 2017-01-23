@@ -14,7 +14,7 @@ wacn.date: 01/29/2016
 
 # Azure 安全和审核日志管理
 
-Azure 使客户能够在其订阅中执行从 Azure 服务架构 (IaaS) 和平台即服务 (PaaS) 角色到中央存储的安全事件生成和收集。然后，客户就可以使用 [HDInsight](./hdinsight/index.md/) 来聚合和分析所收集的事件。此外，这些收集的事件可以导出到本地安全信息和事件管理 (SIEM) 系统以便进行持续监视。
+Azure 使客户能够在其订阅中执行从 Azure 服务架构 (IaaS) 和平台即服务 (PaaS) 角色到中央存储的安全事件生成和收集。然后，客户就可以使用 [HDInsight](./hdinsight/index.md) 来聚合和分析所收集的事件。此外，这些收集的事件可以导出到本地安全信息和事件管理 (SIEM) 系统以便进行持续监视。
 
 Azure 安全日志记录、分析和监视生命周期包括：
 
@@ -28,7 +28,8 @@ Azure 安全日志记录、分析和监视生命周期包括：
 ## 日志生成
 Windows 事件日志中引发了虚拟机中有关**系统**、**安全**和**应用程序**通道的安全事件。若要确保在不出现数据丢失的情况下记录事件，请务必正确配置事件日志的大小。根据审核策略设置生成的事件数量和事件收集策略定义的事件数量来设置事件日志的大小。有关详细信息，请参阅[安全审核监视和管理规划](http://technet.microsoft.com/zh-cn/library/ee513968.aspx#BKMK_4)。
 
->[!NOTE]在使用 Windows 事件转发 (WEF) 或 Azure 诊断（如[日志收集](#log-collection)部分所述）从云服务或虚拟机中拉取日志时，请考虑系统中断的潜在影响。例如，如果您的 WEF 环境在一段时间内出现故障，您要么确保日志大小足以应对更长的持续时间，要么就需要做好日志数据可能丢失的准备。
+>[!NOTE]
+>在使用 Windows 事件转发 (WEF) 或 Azure 诊断（如[日志收集](#log-collection)部分所述）从云服务或虚拟机中拉取日志时，请考虑系统中断的潜在影响。例如，如果您的 WEF 环境在一段时间内出现故障，您要么确保日志大小足以应对更长的持续时间，要么就需要做好日志数据可能丢失的准备。
 
 对于在 Azure 中部署的云服务应用程序和从 <!--[-->Azure 虚拟机应用商店<!--](/marketplace/virtual-machines/#microsoft)-->创建的虚拟机，默认情况下启用一组操作系统安全事件。客户可以通过自定义操作系统审核策略来添加、删除或修改要审核的事件。有关详细信息，请参阅[安全策略设置参考](http://technet.microsoft.com/zh-cn/library/jj852210.aspx)。
 
@@ -42,15 +43,19 @@ Windows 事件日志中引发了虚拟机中有关**系统**、**安全**和**�
 
 要作为启动任务运行的任务文件（即以下示例中的 EnableLogOnAudit.cmd）需要包含在您的生成包中。如果您使用是的 Visual Studio，请将文件添加到您的云项目，右键单击该文件名，单击“属性”，然后将“复制到输出目录”设置为“始终复制”。
 
-    <Startup>
-        <Task commandLine="EnableLogOnAudit.cmd" executionContext="elevated" taskType="simple" />
-    </Startup>
+```
+<Startup>
+    <Task commandLine="EnableLogOnAudit.cmd" executionContext="elevated" taskType="simple" />
+</Startup>
+```
 
 EnableLogOnAudit.cmd 的内容：
 
-    @echo off
-    auditpol.exe /set /category:"Logon/Logoff" /success:enable /failure:enable
-    Exit /B 0
+```
+@echo off
+auditpol.exe /set /category:"Logon/Logoff" /success:enable /failure:enable
+Exit /B 0
+```
 
 前面示例中使用的 [Auditpol.exe](https://technet.microsoft.com/zh-cn/library/cc731451.aspx) 是 Windows Server 操作系统中包含的命令行工具，该操作系统允许您管理审核策略设置。
 
@@ -60,16 +65,20 @@ EnableLogOnAudit.cmd 的内容：
 
 更新 IIS 配置的任务需要包含在 Web 角色的服务定义文件中。对服务定义文件的以下更改运行一个启动任务，该启动任务通过运行名为 ConfigureIISLogging.cmd 的脚本来配置 IIS 日志记录。
 
-    <Startup>
-        <Task commandLine="ConfigureIISLogging.cmd" executionContext="elevated" taskType="simple" />
-    </Startup>
+```
+<Startup>
+    <Task commandLine="ConfigureIISLogging.cmd" executionContext="elevated" taskType="simple" />
+</Startup>
+```
 
 ConfigureIISLogging:cmd 的内容
 
-    @echo off
-    appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /dontLog:"True" /commit:apphost
-    appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /selectiveLogging:"LogAll" /commit
-    Exit /B 0
+```
+@echo off
+appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /dontLog:"True" /commit:apphost
+appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /selectiveLogging:"LogAll" /commit
+Exit /B 0
+```
 
 ## <a name="log-collection"></a>日志收集
 通过以下两种主要方法来从云服务或 Azure 中的虚拟机收集安全事件和日志：
@@ -88,7 +97,7 @@ ConfigureIISLogging:cmd 的内容
 ##	使用 Windows 事件转发进行的安全事件数据收集
 对于已加入域的 Azure 虚拟机，可以使用组策略设置配置 WEF（与配置本地已加入域的计算机的方法相同）。有关详细信息，请参阅[混合云](http://www.microsoft.com/server-cloud/solutions/hybrid-cloud.aspx)。
 
-组织可以使用此方法购买 IaaS 订阅，通过使用 [ExpressRoute](./expressroute/index.md/) 或站点到站点 VPN 将其连接到公司网络，然后将已在 Azure 中的虚拟机加入到企业域。之后，您可以从已加入域的计算机配置 WEF。
+组织可以使用此方法购买 IaaS 订阅，通过使用 [ExpressRoute](./expressroute/index.md) 或站点到站点 VPN 将其连接到公司网络，然后将已在 Azure 中的虚拟机加入到企业域。之后，您可以从已加入域的计算机配置 WEF。
 
 事件转发拆分为两个部分：源和收集器。源是在其中生成安全日志的计算机。收集器是收集并合并事件日志的集中式服务器。IT 管理员可以订阅事件，以便他们可以接收和存储从远程计算机（事件源）转发的事件。有关详细信息，请参阅[配置计算机以转发和收集事件](http://technet.microsoft.com/zh-cn/library/cc748890.aspx)。
 
@@ -125,16 +134,18 @@ Azure PowerShell SDK 提供用于配置 Azure 虚拟机上的 Azure 诊断的 cm
 
 可以在配置文件中指定存储帐户，也可以在运行 Azure PowerShell cmdlet 设置 Azure 诊断时将存储帐户指定为参数。
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-        <WadCfg>
-            <DiagnosticMonitorConfiguration overallQuotaInMB="10000">
-                <WindowsEventLog scheduledTransferPeriod="PT1M">
-                    <DataSource name="Security!*[System[(EventID=4624 or EventID=4625)]]" />
-                </WindowsEventLog>
-            </DiagnosticMonitorConfiguration>
-        </WadCfg>
-    </PublicConfig>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+    <WadCfg>
+        <DiagnosticMonitorConfiguration overallQuotaInMB="10000">
+            <WindowsEventLog scheduledTransferPeriod="PT1M">
+                <DataSource name="Security!*[System[(EventID=4624 or EventID=4625)]]" />
+            </WindowsEventLog>
+        </DiagnosticMonitorConfiguration>
+    </WadCfg>
+</PublicConfig>
+```
 
 在将以前的内容保存为 XML 文件时，将编码设置为 **UTF-8**。如果您使用的是记事本，将在“另存为”对话框中看到编码选项。下表列出了配置文件中一些需要注意的关键属性。
 
@@ -158,14 +169,14 @@ Azure PowerShell SDK 提供用于配置 Azure 虚拟机上的 Azure 诊断的 cm
   - 按 F4 打开“属性”
   - 依次单击“架构”和“添加”，选择要下载的架构文件 (WadConfigSchema.XSD)，然后单击“确定”
 
-3.	在“视图”菜单中，单击“错误列表”查看是否存在任何验证错误。
+3. 在“视图”菜单中，单击“错误列表”查看是否存在任何验证错误。
 
 ##### <a name="step4"></a> 步骤 4：配置 Azure 诊断
  使用以下步骤启用 Azure 诊断并启动数据收集：
 
- 1.	若要打开 Azure PowerShell，键入 **Add-AzureAccount**，然后按 ENTER。
- 2.	使用您的 Azure 帐户进行登录。
- 3.	运行以下 PowerShell 脚本。请确保更新 storage\_name、key、config\_path、service\_name 和 vm\_name。
+ 1. 若要打开 Azure PowerShell，键入 **Add-AzureAccount**，然后按 ENTER。
+ 2. 使用您的 Azure 帐户进行登录。
+ 3. 运行以下 PowerShell 脚本。请确保更新 storage\_name、key、config\_path、service\_name 和 vm\_name。
 
  ```PowerShell
 $storage_name ="<Storage Name>"
@@ -184,9 +195,9 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
  若要生成这些事件，请执行以下操作：
 
-1.	打开到您虚拟机的 RDP 会话。
-2.	输入不正确的凭据以生成一些失败的登录事件（事件 ID 4625）。
-3.	尝试几次失败登录后，输入正确的凭据以生成成功登录事件（事件 ID 4624）。
+1. 打开到您虚拟机的 RDP 会话。
+2. 输入不正确的凭据以生成一些失败的登录事件（事件 ID 4625）。
+3. 尝试几次失败登录后，输入正确的凭据以生成成功登录事件（事件 ID 4624）。
 
 ##### 步骤 6：查看数据
 完成前面的步骤约五分钟后，数据应根据 XML 文件中的配置开始流向客户存储帐户。有许多工具可用于从 Azure 存储空间查看数据。有关详细信息，请参阅：
@@ -196,12 +207,12 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 若要查看数据，请执行以下操作：
 
-1.	在 Visual Studio（2013、2012 和 2010 SP1）中，单击“视图”，然后单击“服务器资源管理器”。
-2.	导航到您的存储帐户。
-3.	单击“表”，然后双击相应的表来查看从虚拟机中收集的安全日志。
+1. 在 Visual Studio（2013、2012 和 2010 SP1）中，单击“视图”，然后单击“服务器资源管理器”。
+2. 导航到您的存储帐户。
+3. 单击“表”，然后双击相应的表来查看从虚拟机中收集的安全日志。
 ![][2]
 
-4.	右键单击名为 WADWindowsEventLogsTable 的表，然后单击“查看数据”以打开表视图，如下所示：
+4. 右键单击名为 WADWindowsEventLogsTable 的表，然后单击“查看数据”以打开表视图，如下所示：
 
 ![][3]
 
@@ -214,7 +225,8 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 - 时间戳是在服务器上维护的日期/时间值，用来跟踪实体上次修改的时间。
 
->[!NOTE]Azure 存储空间表中的最大行大小被限制为 1 MB。如果帐户在 2012 年 6 月之后创建，则存储帐户可以包含多达 200 TB 的 blob、队列和表中的数据。因此，如果 blob 和队列没有任何存储空间，则表大小可以增长至 200 TB。在 2012 年 6 月之前创建的帐户具有 100 TB 的限制。
+>[!NOTE]
+>Azure 存储空间表中的最大行大小被限制为 1 MB。如果帐户在 2012 年 6 月之后创建，则存储帐户可以包含多达 200 TB 的 blob、队列和表中的数据。因此，如果 blob 和队列没有任何存储空间，则表大小可以增长至 200 TB。在 2012 年 6 月之前创建的帐户具有 100 TB 的限制。
 
 您还可以选择在存储资源管理器中编辑表数据。双击表视图中的特定行以打开“编辑实体”窗口，如下所示：
 
@@ -226,14 +238,17 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 ##### 步骤 1：更新配置文件以包括感兴趣的事件
 需要更新上一示例中创建的 Azure 诊断文件以包括 Windows 应用程序事件日志错误类型。
 
->[!NOTE]需要将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。在新文件中定义的设置将覆盖现有的配置。
+>[!NOTE]
+>需要将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。在新文件中定义的设置将覆盖现有的配置。
 
 若要检索现有配置设置，可以使用 **Get-AzureVMDiagnosticsExtension** cmdlet。下面是一个用于检索现有配置的示例 Azure PowerShell 脚本：
 
-    $service_name="<VM Name>"
-    $VM1 = Get-AzureVM -ServiceName $service_name
-    $config = Get-AzureVMDiagnosticsExtension -VM $VM1 | Select -Expand PublicConfiguration | % {$_.substring($_.IndexOf(':"')+2,$_.LastIndexOf('",')-$_.IndexOf(':"')-2)}
-    [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($config))
+```
+$service_name="<VM Name>"
+$VM1 = Get-AzureVM -ServiceName $service_name
+$config = Get-AzureVMDiagnosticsExtension -VM $VM1 | Select -Expand PublicConfiguration | % {$_.substring($_.IndexOf(':"')+2,$_.LastIndexOf('",')-$_.IndexOf(':"')-2)}
+[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($config))
+```
 更新 Azure 诊断配置以收集 Windows 应用程序事件日志错误和关键事件，如下所示：
 
     <?xml version="1.0" encoding="utf-8" ?>
@@ -256,14 +271,18 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 ##### 步骤 3：验证配置设置
 运行以下命令来验证配置设置是否已更新：
 
-    $service_name="<VM Name>"
-    $VM1 = Get-AzureVM -ServiceName $service_name
-    Get-AzureVMDiagnosticsExtension -VM $VM1
+```
+$service_name="<VM Name>"
+$VM1 = Get-AzureVM -ServiceName $service_name
+Get-AzureVMDiagnosticsExtension -VM $VM1
+```
 
 ##### 步骤 4：生成事件
 针对本例，请运行以下命令来生成类型为**错误**的应用程序事件日志：
 
-    eventcreate /t error /id 100 /l application /d "Create event in application log for Demo Purpose"
+```
+eventcreate /t error /id 100 /l application /d "Create event in application log for Demo Purpose"
+```
 
 ![][5]
 
@@ -280,23 +299,23 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 我们现在将使用 Azure 诊断来从 Azure 云服务浏览相同的两个日志收集方案，如前面的虚拟机 (IaaS) 部分所示：
 
-1.	设置云服务中的安全日志管道的新实例。
-2.	使用云服务中的新配置更新现有的日志收集管道。
+1. 设置云服务中的安全日志管道的新实例。
+2. 使用云服务中的新配置更新现有的日志收集管道。
 
 本部分中的分步演练包括：
 
-1.	构建云服务。
-2.	使用 Azure 诊断配置用于安全日志收集的云服务。
-3.	说明云服务上安全事件的生成和收集：
+1. 构建云服务。
+2. 使用 Azure 诊断配置用于安全日志收集的云服务。
+3. 说明云服务上安全事件的生成和收集：
 
     - 向具有提升权限的本地组添加一个管理员
     - 创建新进程
-4.	更新云服务中的现有日志收集管道：
+4. 更新云服务中的现有日志收集管道：
 
     - 使用 Auditpol 启用主机防火墙事件的审核（作为网络安全事件的一个示例）
     - 配置要收集的防火墙审核数据，并在客户存储帐户中显示所收集的事件
-5.	显示 Windows 安全事件分发和峰值检测。
-6.	配置 IIS 日志收集并验证数据。
+5. 显示 Windows 安全事件分发和峰值检测。
+6. 配置 IIS 日志收集并验证数据。
 
 所有事件和日志将收集到 Azure 中的客户存储帐户中。客户可以查看这些事件并将其导出到本地 SIEM 系统。可以使用 HDInsight 对这些事件进行聚合和分析。
 
@@ -305,16 +324,16 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 1：创建云服务（Web 角色）和部署
 
-1.	在开发计算机上启动 Visual Studio 2013。
-2.	创建一个新的云服务项目（我们的示例中使用的是 ContosoWebRole）。
-3.	选择 **ASP.NET** Web 角色。
-4.	选择 **MVC** 项目。
-5.	在解决方案资源管理器中，单击“角色”，然后双击“Web 角色” (WebRole1) 以打开“属性”窗口。
-6.	在“配置”选项卡上，清除“启用诊断”复选框以禁用 Visual Studio 2013 随附的 Azure 诊断版本。 ![][8]
+1. 在开发计算机上启动 Visual Studio 2013。
+2. 创建一个新的云服务项目（我们的示例中使用的是 ContosoWebRole）。
+3. 选择 **ASP.NET** Web 角色。
+4. 选择 **MVC** 项目。
+5. 在解决方案资源管理器中，单击“角色”，然后双击“Web 角色” (WebRole1) 以打开“属性”窗口。
+6. 在“配置”选项卡上，清除“启用诊断”复选框以禁用 Visual Studio 2013 随附的 Azure 诊断版本。 ![][8]
 
-7.	生成你的解决方案，以确认不会出错。
-8.	打开 WebRole1/Controllers/HomeController.cs 文件。
-9.	添加以下方法来使示例应用程序将 HTTP 状态代码 500 记录为示例 IIS 日志事件（这将在稍后的 IIS 示例中使用）：
+7. 生成你的解决方案，以确认不会出错。
+8. 打开 WebRole1/Controllers/HomeController.cs 文件。
+9. 添加以下方法来使示例应用程序将 HTTP 状态代码 500 记录为示例 IIS 日志事件（这将在稍后的 IIS 示例中使用）：
 
     ```
     public ActionResult StatusCode500()
@@ -323,7 +342,7 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
         }
     ```
 
-10.	 右键单击云服务项目的名称，然后单击“发布”。
+10.  右键单击云服务项目的名称，然后单击“发布”。
 
 #### 步骤 2：准备配置文件
 我们现在将准备 Azure 诊断配置文件以添加可以帮助检测以下情况下的事件：
@@ -349,27 +368,31 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 #### 步骤 4：配置 Azure 诊断
 运行以下 Azure PowerShell 脚本来启用 Azure 诊断（请确保更新 storage\_name、key、config\_path 和 service\_name）。
 
-    $storage_name = "<storage account name>"
-    $key = " <storage key>"
-    $config_path="<path to configuration XML file>"
-    $service_name="<Cloud Service Name>"
-    $storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
+$storage_name = "<storage account name>"
+$key = " <storage key>"
+$config_path="<path to configuration XML file>"
+$service_name="<Cloud Service Name>"
+$storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
 
 若要验证您的服务是否具有最新的诊断配置，请运行以下 Azure PowerShell 命令：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 5：生成事件
 若要生成事件，请执行以下操作：
 
-1.	若要启动到云服务实例的远程桌面会话，请在 Visual Studio 中打开服务器资源管理器，右键单击该角色实例，然后单击“使用远程桌面连接”。
-2.	打开提升的命令提示符并运行以下命令以创建虚拟机上的本地管理员帐户：
+1. 若要启动到云服务实例的远程桌面会话，请在 Visual Studio 中打开服务器资源管理器，右键单击该角色实例，然后单击“使用远程桌面连接”。
+2. 打开提升的命令提示符并运行以下命令以创建虚拟机上的本地管理员帐户：
 
     net user contosoadmin <enterpassword> /add
     net localgroup administrators contosoadmin /add
 
-3.	打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 4732，如下所示：
+3. 打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 4732，如下所示：
 
 ![][9]
 
@@ -392,25 +415,30 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 若要检测防火墙更改，我们将更新现有配置以包括防火墙更改事件。
 
 #### 步骤 1：获取现有配置
->[!NOTE]新的配置设置将覆盖现有配置。因此，请务必将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。
+>[!NOTE]
+>新的配置设置将覆盖现有配置。因此，请务必将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。
 
 若要检索现有配置设置，可以使用 **Get-AzureServiceDiagnosticsExtension** cmdlet：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 2：更新配置 XML 以包括防火墙事件
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-    <WadCfg>
-        <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
-        <WindowsEventLog scheduledTransferPeriod="PT1M">
-            <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
-            <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
-        </WindowsEventLog>
-        </DiagnosticMonitorConfiguration>
-    </WadCfg>
-    </PublicConfig>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+<WadCfg>
+    <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
+    <WindowsEventLog scheduledTransferPeriod="PT1M">
+        <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
+        <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
+    </WindowsEventLog>
+    </DiagnosticMonitorConfiguration>
+</WadCfg>
+</PublicConfig>
+```
 
 通过使用前面[步骤 3：验证配置 XML 文件](#step3)中所述的相同验证过程来验证 XML 内容。
 
@@ -418,22 +446,26 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 运行以下 Azure PowerShell 脚本来更新 Azure 诊断以使用新配置（请确保使用您的云服务信息更新 storage\_name、key、config\_path 和 service\_name)。
 
-    Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
-    $storage_name = "<storage account name>"
-    $key = " <storage key>"
-    $config_path="<path to configuration XML file>"
-    $service_name="<Cloud Service Name>"
-    $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
+Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
+$storage_name = "<storage account name>"
+$key = " <storage key>"
+$config_path="<path to configuration XML file>"
+$service_name="<Cloud Service Name>"
+$storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
 
 若要验证您的服务是否具有最新的诊断配置，请运行以下 Azure PowerShell 命令：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 4：启用防火墙事件
 
-1.	打开到您的云服务实例的远程桌面会话。
-2.	打开提升的命令提示符并运行以下命令：
+1. 打开到您的云服务实例的远程桌面会话。
+2. 打开提升的命令提示符并运行以下命令：
 
     ```
     auditpol.exe /set /category:"Policy Change" /subcategory:"MPSSVC rule-level Policy Change" /success:enable /failure:enable
@@ -441,11 +473,11 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 5：生成事件
 
-1.	打开“Windows 防火墙”，然后单击“入站规则”。
-2.	单击“添加新规则”，然后单击“端口”。
-3.	在“本地端口”字段中，键入 **5000**，然后单击“下一步”三次。
-4.	在“名称”字段中键入 **Test5000**，然后单击“完成”。
-5.	打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 ID 4946，如下所示：
+1. 打开“Windows 防火墙”，然后单击“入站规则”。
+2. 单击“添加新规则”，然后单击“端口”。
+3. 在“本地端口”字段中，键入 **5000**，然后单击“下一步”三次。
+4. 在“名称”字段中键入 **Test5000**，然后单击“完成”。
+5. 打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 ID 4946，如下所示：
 
 ![][13]
 
@@ -466,20 +498,22 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 1：更新配置文件以包括 IIS 日志收集
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-    <WadCfg>
-        <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
-        <Directories scheduledTransferPeriod="PT5M">
-        <IISLogs containerName="iislogs" />
-        </Directories>
-        <WindowsEventLog scheduledTransferPeriod="PT1M">
-            <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
-            <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
-        </WindowsEventLog>
-        </DiagnosticMonitorConfiguration>
-    </WadCfg>
-    </PublicConfig>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+<WadCfg>
+    <DiagnosticMonitorConfiguration overallQuotaInMB="25000">
+    <Directories scheduledTransferPeriod="PT5M">
+    <IISLogs containerName="iislogs" />
+    </Directories>
+    <WindowsEventLog scheduledTransferPeriod="PT1M">
+        <DataSource name="Security!*[System[(EventID=4732 or EventID=4733 or EventID=4688)]]" />
+        <DataSource name="Security!*[System[(EventID &gt;= 4944 and EventID &lt;= 4958)]]" />
+    </WindowsEventLog>
+    </DiagnosticMonitorConfiguration>
+</WadCfg>
+</PublicConfig>
+```
 
 在前面的 Azure 诊断配置中，**containerName** 是在客户的存储帐户内要将日志移动到的 blob 容器名称。
 
@@ -488,35 +522,39 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 #### 步骤 2：更新 Azure 诊断以使用新配置
 运行以下 Azure PowerShell 脚本来更新 Azure 诊断以使用新配置（请确保使用您的云服务信息更新 storage\_name、key、config\_path 和 service\_name)。
 
-    Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
-    $storage_name = "<storage account name>"
-    $key = " <storage key>"
-    $config_path="<path to configuration XML file>"
-    $service_name="<Cloud Service Name>"
-    $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
+Remove-AzureServiceDiagnosticsExtension -ServiceName <ServiceName> -Role <RoleName>
+$storage_name = "<storage account name>"
+$key = " <storage key>"
+$config_path="<path to configuration XML file>"
+$service_name="<Cloud Service Name>"
+$storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storage_name -StorageAccountKey $key
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name
+```
 
 若要验证您的服务是否具有最新的诊断配置，请运行以下 Azure PowerShell 命令：
 
-    Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
+Get-AzureServiceDiagnosticsExtension -ServiceName <ServiceName>
+```
 
 #### 步骤 3：生成 IIS 日志
 
-1.	打开 Web 浏览器并导航到云服务 Web 角色（例如，http://contosowebrole.chinacloudapp.cn/)）。
-2.	导航到“关于”和“联系人”页面以创建部分日志事件。
-3.	导航到生成状态代码 500 的页面（例如，http://contosowebrole.chinacloudapp.cn/Home/StatusCode500 ）。您应该会看到一个错误，如下所示。请记住，我们在标题为“设置云服务名上日志收集管道的新实例”部分的步骤 1 中为 **StatusCode500** 添加了代码。
+1. 打开 Web 浏览器并导航到云服务 Web 角色（例如，http://contosowebrole.chinacloudapp.cn/)）。
+2. 导航到“关于”和“联系人”页面以创建部分日志事件。
+3. 导航到生成状态代码 500 的页面（例如，http://contosowebrole.chinacloudapp.cn/Home/StatusCode500 ）。您应该会看到一个错误，如下所示。请记住，我们在标题为“设置云服务名上日志收集管道的新实例”部分的步骤 1 中为 **StatusCode500** 添加了代码。
 ![][16]
-4.	打开到您的云服务实例的远程桌面会话。
-5.	打开 IIS 管理器。
-6.	默认情况下，启用 IIS 日志记录并将其设置为每小时生成包含 W3C 格式中的所有字段的文件。单击“浏览”，至少会显示一个日志文件，如下所示：
+4. 打开到您的云服务实例的远程桌面会话。
+5. 打开 IIS 管理器。
+6. 默认情况下，启用 IIS 日志记录并将其设置为每小时生成包含 W3C 格式中的所有字段的文件。单击“浏览”，至少会显示一个日志文件，如下所示：
 ![][17]
 
-7.	等待大约五分钟以便 Azure 诊断代理将日志文件推送到 blob 容器。若要验证此数据，请打开“服务器资源管理器”>“存储”>“存储帐户”>“Blob”。如此处所示，创建了 blob **iislogs**：
+7. 等待大约五分钟以便 Azure 诊断代理将日志文件推送到 blob 容器。若要验证此数据，请打开“服务器资源管理器”>“存储”>“存储帐户”>“Blob”。如此处所示，创建了 blob **iislogs**：
 ![][18]
 
-8.	右键单击并选中“查看 Blob 容器”以显示存储在 blob 中的 IIS 日志文件：
+8. 右键单击并选中“查看 Blob 容器”以显示存储在 blob 中的 IIS 日志文件：
 ![][19]
-9.	在 IIS 事件都位于客户的存储帐户后，利用 HDInsight 分析的应用程序可以用于执行事件聚合。下面的折线图是显示 HTTP 状态代码 500 的事件聚合任务的一个示例：
+9. 在 IIS 事件都位于客户的存储帐户后，利用 HDInsight 分析的应用程序可以用于执行事件聚合。下面的折线图是显示 HTTP 状态代码 500 的事件聚合任务的一个示例：
 ![][20]
 
 ## 安全日志收集的建议
@@ -527,15 +565,19 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 - 将现有的 Azure 诊断配置设置与您所做的更改进行合并。新的配置文件将覆盖现有的配置设置。
 - 明智地选择“计划传输时间段”间隔。较短的传输时间将会提高数据相关性，但可能会增加存储成本和处理开销。
 
->[!NOTE]将会显著影响收集的数据量的另一个变量是日志记录级别。下面举例说明如何通过日志记录级别筛选日志：
+>[!NOTE]
+>将会显著影响收集的数据量的另一个变量是日志记录级别。下面举例说明如何通过日志记录级别筛选日志：
 
-    System!*[System[(Level =2)]]
+```
+System!*[System[(Level =2)]]
+```
 
 日志记录级别是累积的。如果将筛选器设置为**警告**，则还会收集**错误**和**严重**事件。
 
 - 如果不再需要诊断数据，请定期将其从 Azure 存储空间中清除。
 
->[!NOTE]若要了解有关诊断数据的详细信息，请参阅[在 Azure 存储空间中存储和查看诊断数据](https://msdn.microsoft.com/zh-cn/library/azure/hh411534.aspx)。容器和存储诊断数据的表就像其他容器和表一样，您可以采用对其他数据采用的相同方法来删除其中的 blob 和实体。您可以采用编程方式通过其中一个存储客户端库或采用直观的方式通过[存储资源管理器客户端](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)来删除诊断数据。
+>[!NOTE]
+>若要了解有关诊断数据的详细信息，请参阅[在 Azure 存储空间中存储和查看诊断数据](https://msdn.microsoft.com/zh-cn/library/azure/hh411534.aspx)。容器和存储诊断数据的表就像其他容器和表一样，您可以采用对其他数据采用的相同方法来删除其中的 blob 和实体。您可以采用编程方式通过其中一个存储客户端库或采用直观的方式通过[存储资源管理器客户端](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)来删除诊断数据。
 
 - 它是将服务数据和安全日志数据存储在单独的存储帐户的最佳做法。这种隔离可确保安全日志数据的保存不会影响生产服务数据的存储性能。
 - 基于组织的合规性策略、数据分析和监视要求选择日志保留期。

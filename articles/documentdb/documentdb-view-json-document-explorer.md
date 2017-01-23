@@ -29,7 +29,7 @@ ms.author: kirillg
 1. 在 Azure 门户预览的跳转栏中，单击“DocumentDB (NoSQL)”。如果“DocumentDB (NoSQL)”不可见，则单击“更多服务”，再单击“DocumentDB (NoSQL)”。
 
 2. 在资源菜单中，单击“文档资源管理器”。
- 
+
     ![文档资源管理器命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorercommand.png)  
 
     在“文档资源管理器”边栏选项卡上，将根据在其中启动文档资源管理器的上下文对“数据库”和“集合”下拉列表进行预填充。
@@ -48,7 +48,8 @@ ms.author: kirillg
 
     ![文档资源管理器“保存”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/savedocument1.png)  
 
-    > [!NOTE] 如果你不提供“id”属性，文档资源管理器将自动添加 id 属性并生成一个 GUID 作为 id 值。
+    > [!NOTE]
+    > 如果你不提供“id”属性，文档资源管理器将自动添加 id 属性并生成一个 GUID 作为 id 值。
 
     如果已有来自 JSON 文件、MongoDB、SQL Server、CSV 文件、Azure 表存储、Amazon DynamoDB、HBase 或其他 DocumentDB 集合的数据，你可以使用 DocumentDB 的[数据迁移工具](./documentdb-import-data.md)快速导入数据。
 
@@ -86,7 +87,8 @@ ms.author: kirillg
 
 ![文档资源管理器文档属性视图的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentproperties.png)  
 
-> [!NOTE] 时间戳 (\_ts) 属性在内部表示为新纪元时间，但文档资源管理器以方便阅读的 GMT 格式显示该值。
+> [!NOTE]
+> 时间戳 (\_ts) 属性在内部表示为新纪元时间，但文档资源管理器以方便阅读的 GMT 格式显示该值。
 
 ## 筛选文档
 文档资源管理器还支持多种导航选项和高级设置。
@@ -115,7 +117,8 @@ ms.author: kirillg
 
     ![文档资源管理器的屏幕截图，其中包含了筛选结果](./media/documentdb-view-JSON-document-explorer/documentexplorerfilterresults.png)
 
-    > [!IMPORTANT] 文档资源管理器的筛选器功能仅从***当前***加载的文档集中进行筛选，而并不对当前所选集合执行查询。
+    > [!IMPORTANT]
+    > 文档资源管理器的筛选器功能仅从***当前***加载的文档集中进行筛选，而并不对当前所选集合执行查询。
 
 4. 若要刷新由文档资源管理器加载的文档列表，请单击边栏选项卡顶部的“刷新”。
 
@@ -137,7 +140,8 @@ ms.author: kirillg
 
     ![文档资源管理器批量引入过程的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument2.png)  
 
-    > [!NOTE] 文档资源管理器当前仅支持每个单独上传操作最多上传 100 个 JSON 文档。
+    > [!NOTE]
+    > 文档资源管理器当前仅支持每个单独上传操作最多上传 100 个 JSON 文档。
 
 3. 选好之后，单击“上载”按钮。这些文档将自动添加到“文档资源管理器”网格，上传结果显示为操作进度。导入失败将报告为单独的文件。
 
@@ -147,7 +151,7 @@ ms.author: kirillg
 
 ## 在门户外使用 JSON 文档
 
-Azure 门户预览中的文档资源管理器只是在 DocumentDB 中使用文档的一种方法。你也可以通过 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt489082.aspx) 或[客户端 SDK](./documentdb-sdk-dotnet.md) 来处理文档。有关代码示例，请参阅 [.NET SDK 文档示例](./documentdb-dotnet-samples.md#document-examples/)和 [Node.js SDK 文档示例](./documentdb-nodejs-samples.md#document-examples/)。
+Azure 门户预览中的文档资源管理器只是在 DocumentDB 中使用文档的一种方法。你也可以通过 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt489082.aspx) 或[客户端 SDK](./documentdb-sdk-dotnet.md) 来处理文档。有关代码示例，请参阅 [.NET SDK 文档示例](./documentdb-dotnet-samples.md#document-examples)和 [Node.js SDK 文档示例](./documentdb-nodejs-samples.md#document-examples)。
 
 如果需要从其他源（JSON 文件、MongoDB、SQL Server、CSV 文件、Azure 表存储、Amazon DynamoDB 或 HBase）导入或迁移文件，你可以使用 DocumentDB 的[数据迁移工具](./documentdb-import-data.md)将数据快速导入到 DocumentDB。
 
@@ -157,7 +161,7 @@ Azure 门户预览中的文档资源管理器只是在 DocumentDB 中使用文�
 
 **解决方案**：确保已选择正确的订阅、已插入文档的数据库和集合。另外，请检查以确保在吞吐量配额内运行。如果在最大吞吐量级别运行并受到限制，请减少应用程序使用量，以便在集合的最大吞吐量配额下运行。
 
-**说明**：门户是一个应用程序，就像任何其他应用程序一样，对 DocumentDB 数据库和集合进行调用。如果当前由于从单独的应用程序进行调用，请求受到限制，门户可能也同样受到限制，导致资源未显示在门户中。若要解决此问题，需解决高吞吐量使用率的原因，然后刷新门户边栏选项卡。有关如何测量和降低吞吐量使用率的信息，请参阅[性能提示](./documentdb-performance-tips.md)一文的[吞吐量](./documentdb-performance-tips.md#measure-rus/)部分。
+**说明**：门户是一个应用程序，就像任何其他应用程序一样，对 DocumentDB 数据库和集合进行调用。如果当前由于从单独的应用程序进行调用，请求受到限制，门户可能也同样受到限制，导致资源未显示在门户中。若要解决此问题，需解决高吞吐量使用率的原因，然后刷新门户边栏选项卡。有关如何测量和降低吞吐量使用率的信息，请参阅[性能提示](./documentdb-performance-tips.md)一文的[吞吐量](./documentdb-performance-tips.md#measure-rus)部分。
 
 ## 后续步骤
 

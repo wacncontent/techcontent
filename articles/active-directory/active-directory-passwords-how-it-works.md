@@ -19,7 +19,8 @@ ms.author: asteen
 
 # 密码管理的工作原理
 
-> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+> [!IMPORTANT]
+> **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 Azure Active Directory 中的密码管理包含如下所述的几个逻辑组件。请单击每个链接以了解有关该组件的详细信息。
 
@@ -119,5 +120,5 @@ Azure Active Directory 中的密码管理包含如下所述的几个逻辑组件
 [005]: ./media/active-directory-passwords-how-it-works/005.jpg "Image_005.jpg"
 [006]: ./media/active-directory-passwords-how-it-works/006.jpg "Image_006.jpg"
 [007]: ./media/active-directory-passwords-how-it-works/007.jpg "Image_007.jpg"
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

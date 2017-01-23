@@ -25,20 +25,26 @@ Microsoft 标识平台使用开放式标准，例如 OAuth2 和 OpenID Connect�
 
 如果你是 OAuth2 或 OpenID Connect 新手，此示例配置可能不太适合你。建议阅读 [2\.0 协议 — OAuth 2.0 授权代码流](./active-directory-v2-protocols-oauth-code.md)了解背景信息。
 
-> [!NOTE] 我们平台中的有些功能（例如条件访问和 Intune 策略管理）采用 OAuth2 或 OpenID Connect 标准中的表达式，所以会要求使用开放源代码 Azure 标识库。
+> [!NOTE]
+> 我们平台中的有些功能（例如条件访问和 Intune 策略管理）采用 OAuth2 或 OpenID Connect 标准中的表达式，所以会要求使用开放源代码 Azure 标识库。
 
 v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
-> [!NOTE] 若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+> [!NOTE]
+> 若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
 ## 从 GitHub 下载代码。
 本教程的代码[在 GitHub 上](https://github.com/azure-samples/active-directory-android-native-oidcandroidlib-v2)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git/archive/skeleton.zip)，或克隆该骨架：
 
-    git clone --branch skeleton git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
+git clone --branch skeleton git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
 
 你也可以下载以下示例，并立即开始使用：
 
-    git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
+git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+```
 
 ## 注册应用程序
 在[应用程序注册门户](https://apps.dev.microsoft.com)创建新的应用，或按照[如何使用 v2.0 终结点注册应用](./active-directory-v2-app-registration.md)中的详细步骤操作。请确保：
@@ -54,7 +60,9 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 将 OIDCAndroidLib 副本克隆到你的计算机。
 
-    git@github.com:kalemontes/OIDCAndroidLib.git
+```
+git@github.com:kalemontes/OIDCAndroidLib.git
+```
 
 ![androidStudio](./media/active-directory-android-native-oidcandroidlib-v2/emotes-url.png)  
 
@@ -124,31 +132,39 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
     xml
 
-        <bool name="oidc_oauth2only">true</bool>
-    
+    ```
+    <bool name="oidc_oauth2only">true</bool>
+    ```
+
 2. 配置从注册门户收到的客户端 ID。
 
     xml
 
-        <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
-        <string name="oidc_clientSecret"></string>
-    
+    ```
+    <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
+    <string name="oidc_clientSecret"></string>
+    ```
+
 3. 使用下面的文本配置重定向 URI。
 
     xml
 
-        <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
-    
+    ```
+    <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
+    ```
+
 4. 配置访问图形 API 所需的范围。
 
     xml
 
-        <string-array name="oidc_scopes">
-            <item>openid</item>
-            <item>https://graph.microsoft.com/User.Read</item>
-            <item>offline_access</item>
-        </string-array>
-    
+    ```
+    <string-array name="oidc_scopes">
+        <item>openid</item>
+        <item>https://graph.microsoft.com/User.Read</item>
+        <item>offline_access</item>
+    </string-array>
+    ```
+
 `oidc_scopes` 中的 `User.Read` 值允许读取已登录用户的基本配置文件。
 你可以在 [Microsoft Graph 权限范围](https://graph.microsoft.io/docs/authorization/permission_scopes)中了解有关所有可用范围的详细信息。
 
@@ -160,14 +176,16 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 xml
 
-    <!-- Stores OpenID Connect provider endpoints. -->
-    <resources>
-        <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
-        <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
-        <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
-        <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
-    </resources>
-    
+```
+<!-- Stores OpenID Connect provider endpoints. -->
+<resources>
+    <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
+    <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
+    <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
+    <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
+</resources>
+```
+
 如果你使用 OAuth2 作为你的协议，应始终不更改这些终结点。
 
 > [!NOTE]
@@ -179,9 +197,11 @@ xml
 
 Java
 
-       //TODO: set your protected resource url
-        private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
-    
+```
+   //TODO: set your protected resource url
+    private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
+```
+
 此处简单的图形 API 调用将返回我们的信息。
 
 这些是你需要执行的所有更改。运行 `oidlib-sample` 应用程序，然后单击“登录”。

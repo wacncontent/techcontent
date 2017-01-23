@@ -47,7 +47,7 @@ ms.author: cephalin;riande
 还需要安装移动浏览器模拟器。以下版本均可：
 
 * [Internet Explorer 11 F12 开发人员工具][EmulatorIE11]中的浏览器模拟器（所有移动浏览器屏幕截图都使用此工具）。它为 Windows Phone 8、Windows Phone 7 和 Apple iPad 提供用户代理字符串预设。
--	Google Chrome DevTools 中的浏览器模拟器。它包含众多 Android 设备以及 Apple iPhone、Apple iPad 和 Amazon Kindle Fire 的预设。它还会模拟触控事件。
+- Google Chrome DevTools 中的浏览器模拟器。它包含众多 Android 设备以及 Apple iPhone、Apple iPad 和 Amazon Kindle Fire 的预设。它还会模拟触控事件。
 * [Opera Mobile Emulator][EmulatorOpera]
 
 本主题附带提供包含 C# 源代码的 Visual Studio 项目：
@@ -62,41 +62,41 @@ ms.author: cephalin;riande
 4. 右键单击 ZIP 文件，选择“全部提取”来解压缩该文件。
 5. 在 Visual Studio 中，打开 *C#\\Mvc5Mobile.sln* 文件。
 6. 在“解决方案资源管理器”中，右键单击该项目并单击“发布”。
-   
+
     ![][DeployClickPublish]  
 
 7. 在“发布 Web”中单击“Azure 应用服务”。
-   
+
     ![][DeployClickWebSites]  
 
 8. 如果尚未登录到 Azure，请单击“添加帐户”。
-   
+
     ![][DeploySignIn]  
 
 9. 按照提示操作以登录到你的 Azure 帐户。
 10. “应用服务”对话框现在会显示用户已登录。单击“新建”。
-    
+
     ![][DeployNewWebsite]  
 
 11. 在“Web 应用名称”字段中，指定唯一的应用名称前缀。完全限定的 Web 应用名称为 *&lt;前缀>*.chinacloudsites.cn。另外，可在“资源组”中选择或指定新的资源组名称。然后，单击“新建”创建新的应用服务计划。
-    
+
     ![][DeploySiteSettings]  
 
 12. 配置新的应用服务计划，然后单击“确定”。
-    
+
     ![](./media/web-sites-dotnet-deploy-aspnet-mvc-mobile-app/deploy-to-azure-website-7a.png)  
 
 13. 回到“创建应用服务”对话框，单击“创建”。
-    
+
     ![](./media/web-sites-dotnet-deploy-aspnet-mvc-mobile-app/deploy-to-azure-website-7b.png)  
 
 14. 创建 Azure 资源以后，“发布 Web”对话框中将填充新应用的设置。单击“发布”。
-    
+
     ![][DeployPublishSite]
-    
+
     在 Visual Studio 完成将初学者项目发布到 Azure Web 应用后，将打开桌面浏览器并显示实时 Web 应用。
 15. 启动移动浏览器模拟器，将会议应用程序 (*<前缀>*.chinacloudsites.cn) URL 复制到模拟器，然后单击右上角的按钮并选择“按标签浏览”。如果使用 Internet Explorer 11 作为默认浏览器，则只需依次键入 `F12` 和 `Ctrl+8`，然后将浏览器配置文件更改为“Windows Phone”。下图显示纵向模式下的 *AllTags* 视图（选择“按标签浏览”后显示）。
-    
+
     ![][AllTags]  
 
 > [!TIP]
@@ -115,13 +115,15 @@ Bootstrap 支持是 MVC 5 模板中内置的新功能。你已经看到了它如
 
 要在没有 Bootstrap 的情况下查看 Web 应用的外观，请打开 *App\_Start\\BundleConfig.cs* 并注释掉包含 *bootstrap.js* 和 *bootstrap.css* 的行。以下代码显示了更改后 `RegisterBundles` 方法的最后两个语句：
 
-     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-              //"~/Scripts/bootstrap.js",
-              "~/Scripts/respond.js"));
+```
+ bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+          //"~/Scripts/bootstrap.js",
+          "~/Scripts/respond.js"));
 
-    bundles.Add(new StyleBundle("~/Content/css").Include(
-              //"~/Content/bootstrap.css",
-              "~/Content/site.css"));
+bundles.Add(new StyleBundle("~/Content/css").Include(
+          //"~/Content/bootstrap.css",
+          "~/Content/site.css"));
+```
 
 按 `Ctrl+F5` 运行应用程序。
 
@@ -146,16 +148,20 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 
 在导航栏的每个 `Html.ActionLink` 调用中，删除每个链接 *ActionLink* 中的“浏览者”。以下代码显示移动布局文件的已完成 `<ul class="nav navbar-nav">` 标记。
 
-    <ul class="nav navbar-nav">
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("Date", "AllDates", "Home")</li>
-        <li>@Html.ActionLink("Speaker", "AllSpeakers", "Home")</li>
-        <li>@Html.ActionLink("Tag", "AllTags", "Home")</li>
-    </ul>
+```
+<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Date", "AllDates", "Home")</li>
+    <li>@Html.ActionLink("Speaker", "AllSpeakers", "Home")</li>
+    <li>@Html.ActionLink("Tag", "AllTags", "Home")</li>
+</ul>
+```
 
 将 *Views\\Home\\AllTags.cshtml* 文件复制到 *Views\\Home\\AllTags.Mobile.cshtml*。打开此新文件，并将 `<h2>` 元素从“Tags”更改为“Tags (M)”：
 
-    <h2>Tags (M)</h2>
+```
+<h2>Tags (M)</h2>
+```
 
 使用桌面浏览器和移动浏览器模拟器浏览到标签页。移动浏览器模拟器将显示你所做的两项更改（*\_Layout.Mobile.cshtml* 和 *AllTags.Mobile.cshtml* 中的标题）。
 
@@ -170,11 +176,13 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 
 打开 *Global.asax* 文件，并将以下代码添加到 `Application_Start` 方法的底部。
 
-    DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("iPhone")
-    {
-        ContextCondition = (context => context.GetOverriddenUserAgent().IndexOf
-            ("iPhone", StringComparison.OrdinalIgnoreCase) >= 0)
-    });
+```
+DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("iPhone")
+{
+    ContextCondition = (context => context.GetOverriddenUserAgent().IndexOf
+        ("iPhone", StringComparison.OrdinalIgnoreCase) >= 0)
+});
+```
 
 此代码定义要与每个传入请求匹配的名为“iPhone”的新显示模式。如果传入请求与定义的条件（即，如果用户代理包含字符串“iPhone”）匹配，则 ASP.NET MVC 将查找名称包含“iPhone”后缀的视图。
 
@@ -189,7 +197,9 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 
 或者，也可以简单地将以下行手动添加到文件的 `using` 章节。
 
-    using System.Web.WebPages;
+```
+using System.Web.WebPages;
+```
 
 保存更改。将 *Views\\Shared\\_Layout.Mobile.cshtml* 文件复制到 *Views\\Shared\\_Layout.iPhone.cshtml*。打开新文件，然后将标题从 `MVC5 Application (Mobile)` 更改为 `MVC5 Application (iPhone)`。
 
@@ -211,10 +221,12 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 
 通过在 *Views\\_ViewStart.cshtml* 文件中将 `RequireConsistentDisplayMode` 设置为 `true`，可以全局禁止默认（非移动）视图在移动布局内呈现，如下所示：
 
-    @{
-        Layout = "~/Views/Shared/_Layout.cshtml";
-        DisplayModeProvider.Instance.RequireConsistentDisplayMode = true;
-    }
+```
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DisplayModeProvider.Instance.RequireConsistentDisplayMode = true;
+}
+```
 
 当 `RequireConsistentDisplayMode` 设置为 `true` 时，移动布局 (*\_Layout.Mobile.cshtml*) 只用于移动视图（即，视图文件为 ***ViewName**.Mobile.cshtml* 形式。）你可能需要将 `RequireConsistentDisplayMode` 设置为 `true`（如果你的移动布局不太适合你的非移动视图）。下面的屏幕截图显示当 `RequireConsistentDisplayMode` 设置为 `true` 时，如何呈现“Speakers”页面（顶部导航栏中没有字符串“(Mobile)”）。**
 
@@ -222,12 +234,14 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 
 你可以通过在视图文件中将 `RequireConsistentDisplayMode` 设置为 `false` 来禁用特定视图中一致的显示模式。*Views\\Home\\AllSpeakers.cshtml* 文件中的以下标记将 `RequireConsistentDisplayMode` 设置为 `false`：
 
-    @model IEnumerable<string>
+```
+@model IEnumerable<string>
 
-    @{
-        ViewBag.Title = "All speakers";
-        DisplayModeProvider.Instance.RequireConsistentDisplayMode = false;
-    }
+@{
+    ViewBag.Title = "All speakers";
+    DisplayModeProvider.Instance.RequireConsistentDisplayMode = false;
+}
+```
 
 在本节中，我们已了解如何创建移动布局和视图，以及如何为特定的设备（如 iPhone）创建布局和视图。但是，Bootstrap CSS 框架的主要优势是响应式布局，也就是说，可以跨桌面、电话和平板电脑浏览器应用单个样式表，以创建一致的外观。在下一节中，你将了解如何利用 Bootstrap 来创建适合移动的视图。
 
@@ -236,20 +250,22 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 
 你可以使用 Bootstrap [链接列表组][linked list group]样式来改进“发言人”视图。在 *Views\\Home\\AllSpeakers.cshtml* 中，将 Razor 文件的内容替换为以下代码。
 
-     @model IEnumerable<string>
+```
+ @model IEnumerable<string>
 
-    @{
-        ViewBag.Title = "All Speakers";
+@{
+    ViewBag.Title = "All Speakers";
+}
+
+<h2>Speakers</h2>
+
+<div class="list-group">
+    @foreach (var speaker in Model)
+    {
+        @Html.ActionLink(speaker, "SessionsBySpeaker", new { speaker }, new { @class = "list-group-item" })
     }
-
-    <h2>Speakers</h2>
-
-    <div class="list-group">
-        @foreach (var speaker in Model)
-        {
-            @Html.ActionLink(speaker, "SessionsBySpeaker", new { speaker }, new { @class = "list-group-item" })
-        }
-    </div>
+</div>
+```
 
 `<div>` 标记中的 `class="list-group"` 属性将应用 Bootstrap 列表样式，`class="input-group-item"` 属性将向每个链接应用 Bootstrap 列表项样式。
 
@@ -263,64 +279,70 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 
 尽管移动浏览器视图得到了改进，但很难在较长的发言人列表中导航。Bootstrap 未提供现成的搜索筛选器功能，但你只需使用几行代码就能添加此功能。首先，将一个搜索框添加到视图，然后与筛选函数的 JavaScript 代码相挂接。在 *Views\\Home\\AllSpeakers.cshtml* 中，将 <form\> 标记添加到 <h2\> 标记的后面，如下所示：
 
-    @model IEnumerable<string>
+```
+@model IEnumerable<string>
 
-    @{
-        ViewBag.Title = "All Speakers";
+@{
+    ViewBag.Title = "All Speakers";
+}
+
+<h2>Speakers</h2>
+
+<form class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+    <input type="text" class="form-control" placeholder="Search speaker">
+</form>
+<br />
+<div class="list-group">
+    @foreach (var speaker in Model)
+    {
+        @Html.ActionLink(speaker, 
+                         "SessionsBySpeaker", 
+                         new { speaker }, 
+                         new { @class = "list-group-item" })
     }
-
-    <h2>Speakers</h2>
-
-    <form class="input-group">
-        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-        <input type="text" class="form-control" placeholder="Search speaker">
-    </form>
-    <br />
-    <div class="list-group">
-        @foreach (var speaker in Model)
-        {
-            @Html.ActionLink(speaker, 
-                             "SessionsBySpeaker", 
-                             new { speaker }, 
-                             new { @class = "list-group-item" })
-        }
-    </div>
+</div>
+```
 
 请注意，`<form>` 和 `<input>` 标记都应用了 Bootstrap 样式。`<span>` 元素用于将 Bootstrap [glyphicon][glyphicon] 添加到搜索框。
 
 在*脚本*文件夹中，添加一个名为 *filter.js* 的 JavaScript 文件。打开该文件并在其中粘贴以下代码：
 
-    $(function () {
+```
+$(function () {
 
-        // reset the search form when the page loads
-        $("form").each(function () {
-            this.reset();
-        });
-
-        // wire up the events to the <input> element for search/filter
-        $("input").bind("keyup change", function () {
-            var searchtxt = this.value.toLowerCase();
-            var items = $(".list-group-item");
-
-            // show all speakers that begin with the typed text and hide others
-            for (var i = 0; i < items.length; i++) {
-                var val = items[i].text.toLowerCase();
-                val = val.substring(0, searchtxt.length);
-                if (val == searchtxt) {
-                    $(items[i]).show();
-                }
-                else {
-                    $(items[i]).hide();
-                }
-            }
-        });
+    // reset the search form when the page loads
+    $("form").each(function () {
+        this.reset();
     });
+
+    // wire up the events to the <input> element for search/filter
+    $("input").bind("keyup change", function () {
+        var searchtxt = this.value.toLowerCase();
+        var items = $(".list-group-item");
+
+        // show all speakers that begin with the typed text and hide others
+        for (var i = 0; i < items.length; i++) {
+            var val = items[i].text.toLowerCase();
+            val = val.substring(0, searchtxt.length);
+            if (val == searchtxt) {
+                $(items[i]).show();
+            }
+            else {
+                $(items[i]).hide();
+            }
+        }
+    });
+});
+```
 
 你还需要在注册的绑定中包含 filter.js。打开 *App\_Start\\BundleConfig.cs* 并更改第一个捆绑。更改第一个 `bundles.Add` 语句（用于 **jquery** 捆绑），以包含 *Scripts\\filter.js*，如下所示：
 
-     bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js",
-                "~/Scripts/filter.js"));
+```
+ bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            "~/Scripts/jquery-{version}.js",
+            "~/Scripts/filter.js"));
+```
 
 **jquery** 捆绑默认已由 *\_Layout* 视图呈现。稍后，你可以利用相同的 JavaScript 代码向其他列表视图应用筛选器功能。
 
@@ -331,10 +353,12 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 ## <a name="bkmk_improvetags"></a> 改进标记列表
 与默认“发言人”视图一样，“标记”视图虽然可读，但链接字迹小，不易在移动设备上点击。如果你使用前面所述的代码更改，你可以使用与修复“发言人”视图相同的方式来修复“标记”视图，但是需要在 *Views\\Home\\AllTags.cshtml* 中使用以下 `Html.ActionLink` 方法语法：
 
-    @Html.ActionLink(tag, 
-                     "SessionsByTag", 
-                     new { tag }, 
-                     new { @class = "list-group-item" })
+```
+@Html.ActionLink(tag, 
+                 "SessionsByTag", 
+                 new { tag }, 
+                 new { @class = "list-group-item" })
+```
 
 刷新的桌面浏览器如下所示：
 
@@ -352,10 +376,12 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 ## <a name="bkmk_improvedates"></a> 改进日期列表
 如果你使用前面所述的代码更改，你可以使用与改进“发言人”视图和“标记”视图相同的方式来修复“日期”视图，但是需要在 *Views\\Home\\AllDates.cshtml* 中使用以下 `Html.ActionLink` 方法语法：
 
-    @Html.ActionLink(date.ToString("ddd, MMM dd, h:mm tt"), 
-                     "SessionsByDate", 
-                     new { date }, 
-                     new { @class = "list-group-item" })
+```
+@Html.ActionLink(date.ToString("ddd, MMM dd, h:mm tt"), 
+                 "SessionsByDate", 
+                 new { date }, 
+                 new { @class = "list-group-item" })
+```
 
 你将获得如下所示的已刷新移动浏览器视图：
 
@@ -363,31 +389,33 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 
 你可以通过按日期组织日期时间值来进一步改进“日期”视图。这可以使用 Bootstrap [面板][panels]样式来实现。将 *Views\\Home\\AllDates.cshtml* 文件的内容替换为下列代码：
 
-    @model IEnumerable<DateTime>
+```
+@model IEnumerable<DateTime>
 
-    @{
-        ViewBag.Title = "All Dates";
-    }
+@{
+    ViewBag.Title = "All Dates";
+}
 
-    <h2>Dates</h2>
+<h2>Dates</h2>
 
-    @foreach (var dategroup in Model.GroupBy(x=>x.Date))
-    {
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                @dategroup.Key.ToString("ddd, MMM dd")
-            </div>
-            <div class="panel-body list-group">
-                @foreach (var date in dategroup)
-                {
-                    @Html.ActionLink(date.ToString("h:mm tt"), 
-                                     "SessionsByDate", 
-                                     new { date }, 
-                                     new { @class = "list-group-item" })
-                }
-            </div>
+@foreach (var dategroup in Model.GroupBy(x=>x.Date))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            @dategroup.Key.ToString("ddd, MMM dd")
         </div>
-    }
+        <div class="panel-body list-group">
+            @foreach (var date in dategroup)
+            {
+                @Html.ActionLink(date.ToString("h:mm tt"), 
+                                 "SessionsByDate", 
+                                 new { date }, 
+                                 new { @class = "list-group-item" })
+            }
+        </div>
+    </div>
+}
+```
 
 此代码为列表中的每个非重复日期创建一个单独的 `<div class="panel panel-primary">` 标记，并像前面一样为相应的链接使用[链接列表组][linked list group]。当此代码运行时，移动浏览器看起来像这样：
 
@@ -410,36 +438,38 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 
 正如你所看到的，显示的内容采用表格式，这种格式当前设计为在桌面浏览器中查看。但是，在移动浏览器中，这种格式不太便于阅读。要解决此问题，请打开 *Views\\Home\\SessionsTable.cshtml*，然后使用以下代码替换该文件的内容：
 
-    @model IEnumerable<Mvc5Mobile.Models.Session>
+```
+@model IEnumerable<Mvc5Mobile.Models.Session>
 
-    <h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title</h2>
 
-    <div class="container">
-        <div class="row">
-            @foreach (var session in Model)
-            {
-                <div class="col-md-4">
-                    <div class="list-group">
-                        @Html.ActionLink(session.Title, 
-                                         "SessionByCode", 
-                                         new { session.Code }, 
-                                         new { @class="list-group-item active" })
-                        <div class="list-group-item">
-                            <div class="list-group-item-text">
-                                @Html.Partial("_SpeakersLinks", session)
-                            </div>
-                            <div class="list-group-item-info">
-                                @session.DateText
-                            </div>
-                            <div class="list-group-item-info small hidden-xs">
-                                @Html.Partial("_TagsLinks", session)
-                            </div>
+<div class="container">
+    <div class="row">
+        @foreach (var session in Model)
+        {
+            <div class="col-md-4">
+                <div class="list-group">
+                    @Html.ActionLink(session.Title, 
+                                     "SessionByCode", 
+                                     new { session.Code }, 
+                                     new { @class="list-group-item active" })
+                    <div class="list-group-item">
+                        <div class="list-group-item-text">
+                            @Html.Partial("_SpeakersLinks", session)
+                        </div>
+                        <div class="list-group-item-info">
+                            @session.DateText
+                        </div>
+                        <div class="list-group-item-info small hidden-xs">
+                            @Html.Partial("_TagsLinks", session)
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>
+```
 
 该代码执行 3 项操作：
 
@@ -476,43 +506,45 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 
 打开 *Views\\Home\\SessionByCode.cshtml* 并将内容替换为以下标记：
 
-    @model Mvc5Mobile.Models.Session
+```
+@model Mvc5Mobile.Models.Session
 
-    @{
-        ViewBag.Title = "Session details";
+@{
+    ViewBag.Title = "Session details";
+}
+<h3>@Model.Title (@Model.Code)</h3>
+<p>
+    <strong>@Model.DateText</strong> in <strong>@Model.Room</strong>
+</p>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Speakers
+    </div>
+    @foreach (var speaker in Model.Speakers)
+    {
+        @Html.ActionLink(speaker, 
+                         "SessionsBySpeaker", 
+                         new { speaker }, 
+                         new { @class="panel-body" })
     }
-    <h3>@Model.Title (@Model.Code)</h3>
-    <p>
-        <strong>@Model.DateText</strong> in <strong>@Model.Room</strong>
-    </p>
+</div>
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            Speakers
-        </div>
-        @foreach (var speaker in Model.Speakers)
-        {
-            @Html.ActionLink(speaker, 
-                             "SessionsBySpeaker", 
-                             new { speaker }, 
-                             new { @class="panel-body" })
-        }
+<p>@Model.Abstract</p>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Tags
     </div>
-
-    <p>@Model.Abstract</p>
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            Tags
-        </div>
-        @foreach (var tag in Model.Tags)
-        {
-            @Html.ActionLink(tag, 
-                             "SessionsByTag", 
-                             new { tag }, 
-                             new { @class = "panel-body" })
-        }
-    </div>
+    @foreach (var tag in Model.Tags)
+    {
+        @Html.ActionLink(tag, 
+                         "SessionsByTag", 
+                         new { tag }, 
+                         new { @class = "panel-body" })
+    }
+</div>
+```
 
 新的标记使用 Bootstrap 面板样式改进移动视图。
 

@@ -36,13 +36,15 @@ ms.author: mahender
 5. 在“平台”下，单击“添加平台”，然后选择“Web”。
 
 6. 在“重定向 URI”下，提供应用程序的终结点，然后单击“保存”。
- 
-    >[!NOTE] 重定向 URI 是应用程序 URL 加上路径 _/.auth/login/microsoftaccount/callback_。例如，`https://contoso.chinacloudsites.cn/.auth/login/microsoftaccount/callback`。
+
+    >[!NOTE]
+    > 重定向 URI 是应用程序 URL 加上路径 _/.auth/login/microsoftaccount/callback_。例如，`https://contoso.chinacloudsites.cn/.auth/login/microsoftaccount/callback`。
     >请务必使用 HTTPS 方案。
 
 7. 在“应用程序机密”下，单击“生成新密码”。请记下显示的值。关闭页面后，就不再显示该值。
 
-    > [!IMPORTANT] 密码是一个非常重要的安全凭据。请不要与任何人共享密码或者在客户端应用程序中分发它。
+    > [!IMPORTANT]
+    > 密码是一个非常重要的安全凭据。请不要与任何人共享密码或者在客户端应用程序中分发它。
 
 ## <a name="secrets"></a>将 Microsoft 帐户信息添加到应用服务应用程序
 

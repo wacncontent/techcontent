@@ -118,8 +118,10 @@ wacn.date: 06/14/2016
 
 7. SSH 连接到两台虚拟机，安装后 HTTP SERVER 并启动。比如 CentOS 是
 
-        sudo yum install httpd
-        sudo service httpd start
+    ```
+    sudo yum install httpd
+    sudo service httpd start
+    ```
 
 8. 在 newtest1 执行 echo “newtest1” > /var/www/html/index.html。 在 newtest2 执行 echo “newtest2” > /var/www/html/index.html。
 
@@ -135,9 +137,8 @@ wacn.date: 06/14/2016
 
     ![22](./media/open-source-azure-virtual-machines-configure-availability-set/22.png)
 
-12. 再度访问[http://newtest1.chinacloudapp.cn](http://newtest1.chinacloudapp.cn/) 还是能够访问。
+12. 再度访问[http://newtest1.chinacloudapp.cn/](http://newtest1.chinacloudapp.cn/) 还是能够访问。
 
     ![23](./media/open-source-azure-virtual-machines-configure-availability-set/23.png)
 
     配置成功。
-

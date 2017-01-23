@@ -48,38 +48,52 @@ ms.author: aelnably
 
 使用此 cmdlet 的示例：
 
-    azure appserviceplan create --name ContosoAppServicePlan --location "China East" --resource-group ContosoAzureResourceGroup --sku P1 --instances 10
+```
+azure appserviceplan create --name ContosoAppServicePlan --location "China East" --resource-group ContosoAzureResourceGroup --sku P1 --instances 10
+```
 
 ### 列出现有的 App Service 计划
 若要列出现有的应用服务计划，请使用 **azure appserviceplan list** 命令。
 
 若要列出特定资源组之下的所有 App Service 计划，请使用：
 
-    azure appserviceplan list --resource-group ContosoAzureResourceGroup
+```
+azure appserviceplan list --resource-group ContosoAzureResourceGroup
+```
 
 若要获取特定的应用服务计划，请使用 **azure appserviceplan show** 命令：
 
-    azure appserviceplan show --name ContosoAppServicePlan --resource-group chinaeast
+```
+azure appserviceplan show --name ContosoAppServicePlan --resource-group chinaeast
+```
 
 ### 配置现有的 App Service 计划
 若要更改现有应用服务计划的设置，请使用 **azure appserviceplan config** 命令。可更改 SKU 和辅助角色数目
 
-    azure appserviceplan config --name ContosoAppServicePlan --resource-group ContosoAzureResourceGroup --sku S1 --instances 9
+```
+azure appserviceplan config --name ContosoAppServicePlan --resource-group ContosoAzureResourceGroup --sku S1 --instances 9
+```
 
 #### 缩放 App Service 计划
 若要缩放现有的 App Service 计划，请使用：
 
-    azure appserviceplan config --name ContosoAppServicePlan --resource-group ContosoAzureResourceGroup --instances 9
+```
+azure appserviceplan config --name ContosoAppServicePlan --resource-group ContosoAzureResourceGroup --instances 9
+```
 
 #### 更改应用服务计划的 SKU
 若要更改现有应用服务计划的 SKU，请使用：
 
-    azure appserviceplan config --name ContosoAppServicePlan --resource-group ContosoAzureResourceGroup --sku S1
+```
+azure appserviceplan config --name ContosoAppServicePlan --resource-group ContosoAzureResourceGroup --sku S1
+```
 
 ### 删除现有的 App Service 计划
 若要删除现有的应用服务计划，请先移动或删除所有已分配的应用。然后使用 **azure webapp delete** 命令删除应用服务计划。
 
-    azure appserviceplan delete --name ContosoAppServicePlan --resource-group chinaeast
+```
+azure appserviceplan delete --name ContosoAppServicePlan --resource-group chinaeast
+```
 
 ## 管理应用服务应用
 ### 创建 Web 应用
@@ -94,34 +108,46 @@ ms.author: aelnably
 
 使用此 cmdlet 的示例：
 
-    azure webapp create --name ContosoWebApp --resource-group ContosoAzureResourceGroup --plan ContosoAppServicePlan --location "China East"
+```
+azure webapp create --name ContosoWebApp --resource-group ContosoAzureResourceGroup --plan ContosoAppServicePlan --location "China East"
+```
 
 ### 删除现有应用
 若要删除现有应用，可使用 **azure webapp delete** 命令。需要指定应用名称和资源组名称。
 
-    azure webapp delete --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
+azure webapp delete --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
 
 ### 列出现有应用
 若要列出现有应用，请使用 **azure webapp list** 命令。
 
 若要列出特定资源组中的所有应用，请使用：
 
-    azure webapp list --resource-group ContosoAzureResourceGroup
+```
+azure webapp list --resource-group ContosoAzureResourceGroup
+```
 
 若要获取特定应用，请使用 **azure webapp show** 命令。
 
-    azure webapp show --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
+azure webapp show --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
 
 ### 配置现有应用
 若要更改现有应用的设置和配置，请使用 **azure webapp config set** 命令。
 
 示例 (1)：更改应用的 php 版本
 
-    azure webapp config set --name ContosoWebApp --resource-group ContosoAzureResourceGroup --phpversion 5.6
+```
+azure webapp config set --name ContosoWebApp --resource-group ContosoAzureResourceGroup --phpversion 5.6
+```
 
 示例 (2)：添加或更改应用设置
 
-    webapp config appsettings set --name ContosoWebApp --resource-group ContosoAzureResourceGroup appsetting1=appsetting1value,appsetting2=appsetting2value
+```
+webapp config appsettings set --name ContosoWebApp --resource-group ContosoAzureResourceGroup appsetting1=appsetting1value,appsetting2=appsetting2value
+```
 
 若要了解可更改的其他配置，请使用 **azure webapp config set -h** 命令。
 
@@ -129,17 +155,23 @@ ms.author: aelnably
 #### 重启应用
 若要重启应用，必须指定应用的名称和资源组。
 
-    azure webapp restart --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
+azure webapp restart --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
 
 #### 停止应用
 若要停止应用，必须指定应用的名称和资源组。
 
-    azure webapp stop --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
+azure webapp stop --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
 
 #### 启动应用
 若要启动应用，必须指定应用的名称和资源组。
 
-    azure webapp start --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
+azure webapp start --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
 
 ### 管理应用的发布配置文件
 每个应用都具有可用于发布代码的发布配置文件。
@@ -147,7 +179,9 @@ ms.author: aelnably
 #### 获取发布配置文件
 若要获取应用的发布配置文件，请使用：
 
-    azure webapp publishingprofile --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
+azure webapp publishingprofile --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
 
 此命令会向命令行回显发布配置文件用户名和密码。
 
@@ -157,17 +191,23 @@ ms.author: aelnably
 #### 列出主机名绑定
 若要获取应用的当前主机名绑定，请使用：
 
-    azure webapp config hostnames list --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
+azure webapp config hostnames list --name ContosoWebApp --resource-group ContosoAzureResourceGroup
+```
 
 #### 添加主机名绑定
 若要将主机名绑定添加到应用，请使用：
 
-    azure webapp config hostnames add --name ContosoWebApp --resource-group ContosoAzureResourceGroup --hostname www.contoso.com
+```
+azure webapp config hostnames add --name ContosoWebApp --resource-group ContosoAzureResourceGroup --hostname www.contoso.com
+```
 
 #### 删除主机名绑定
 若要删除主机名绑定，请使用：
 
-    azure webapp config hostnames delete --name ContosoWebApp --resource-group ContosoAzureResourceGroup --hostname www.contoso.com
+```
+azure webapp config hostnames delete --name ContosoWebApp --resource-group ContosoAzureResourceGroup --hostname www.contoso.com
+```
 
 ## 后续步骤
 * 若要了解 Azure Resource Manager CLI 支持的相关信息，请参阅[使用 Azure CLI 管理 Azure 资源和资源组](../azure-resource-manager/xplat-cli-azure-resource-manager.md)。

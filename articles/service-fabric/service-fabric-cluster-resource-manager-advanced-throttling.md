@@ -25,8 +25,8 @@ ms.author: masnider
 ##配置限制
 下面是默认包含的限制：
 
--	GlobalMovementThrottleThreshold – 控制一段时间内群集中移动的总数（已定义为 GlobalMovementThrottleCountingInterval，以秒为单位的值）
--	MovementPerPartitionThrottleThreshold – 控制一段时间内针对任何服务分区区的移动总数（MovementPerPartitionThrottleCountingInterval，以秒为单位的值）
+- GlobalMovementThrottleThreshold – 控制一段时间内群集中移动的总数（已定义为 GlobalMovementThrottleCountingInterval，以秒为单位的值）
+- MovementPerPartitionThrottleThreshold – 控制一段时间内针对任何服务分区区的移动总数（MovementPerPartitionThrottleCountingInterval，以秒为单位的值）
 
     <Section Name="PlacementAndLoadBalancing">
          <Parameter Name="GlobalMovementThrottleThreshold" Value="1000" />

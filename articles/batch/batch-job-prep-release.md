@@ -29,7 +29,8 @@ ms.author: marsma
 
 以下部分介绍如何使用 [Batch .NET][api_net] 库中的 [JobPreparationTask][net_job_prep] 和 [JobReleaseTask][net_job_release] 类。
 
-> [!TIP] 作业准备和释放任务在“共享池”环境中特别有用。在这些环境中，计算节点池在任务运行之间保留，并由许多作业使用。
+> [!TIP]
+> 作业准备和释放任务在“共享池”环境中特别有用。在这些环境中，计算节点池在任务运行之间保留，并由许多作业使用。
 
 ## 何时使用作业准备和释放任务
 
@@ -47,7 +48,8 @@ Batch 作业通常需要一组通用的数据作为作业任务的输入。例�
 
 你可能想要保留任务生成的日志文件的副本，或失败应用程序可能生成的崩溃转储文件。在这种情况下，使用**作业释放任务**可将这些数据压缩并上载到 [Azure 存储][azure_storage]帐户。
 
->[!TIP] 保存日志及其他作业和任务输出数据的另一种方法是使用 [Azure Batch 文件约定](./batch-task-output.md)库。
+>[!TIP]
+> 保存日志及其他作业和任务输出数据的另一种方法是使用 [Azure Batch 文件约定](./batch-task-output.md)库。
 
 ## 作业准备任务
 
@@ -55,13 +57,15 @@ Batch 作业通常需要一组通用的数据作为作业任务的输入。例�
 
 作业准备任务只会在计划运行任务的节点上运行。例如，这可以防止未分配任务的节点不必要地执行准备任务，当作业的任务数小于池中的节点数时，可能会出现这种情况。此外，这也适用于在任务计数小于可能的并行任务总数的情况下启用[并行任务执行](./batch-parallel-node-tasks.md)，从而留出一些空闲节点的情况。不在空闲节点上运行作业准备任务可以节省数据传输费用。
 
-> [!NOTE] [JobPreparationTask][net\_job\_prep\_cloudjob] 与 [CloudPool.StartTask][pool_starttask] 的不同之处在于，JobPreparationTask 在每个作业启动时执行，而 StartTask 只在计算节点首次加入池或重新启动时执行。
+> [!NOTE]
+> [JobPreparationTask][net\_job\_prep\_cloudjob] 与 [CloudPool.StartTask][pool_starttask] 的不同之处在于，JobPreparationTask 在每个作业启动时执行，而 StartTask 只在计算节点首次加入池或重新启动时执行。
 
 ## 作业释放任务
 
 将作业标记为完成后，作业释放任务将在池中至少运行了一个任务的每个节点上执行。可以通过发出终止请求将作业标记为已完成。然后，Batch 服务会将作业状态设置为 *正在终止* ，终止与任务关联的任何活动任务或正在运行的任务，并运行作业释放任务。然后，该作业将进入 *已完成* 状态。
 
-> [!NOTE] 作业删除操作也会执行作业释放任务。但是，如果已经终止了某个作业，则以后删除该作业时，释放任务不会再次运行。
+> [!NOTE]
+> 作业删除操作也会执行作业释放任务。但是，如果已经终止了某个作业，则以后删除该作业时，释放任务不会再次运行。
 
 ## 使用 Batch .NET 执行作业准备和释放任务
 
@@ -71,37 +75,41 @@ Batch 作业通常需要一组通用的数据作为作业任务的输入。例�
 
 csharp
 
-    // Create the CloudJob for CloudPool "myPool"
-    CloudJob myJob =
-        myBatchClient.JobOperations.CreateJob(
-            "JobPrepReleaseSampleJob",
-            new PoolInformation() { PoolId = "myPool" });
+```
+// Create the CloudJob for CloudPool "myPool"
+CloudJob myJob =
+    myBatchClient.JobOperations.CreateJob(
+        "JobPrepReleaseSampleJob",
+        new PoolInformation() { PoolId = "myPool" });
 
-    // Specify the command lines for the job preparation and release tasks
-    string jobPrepCmdLine =
-        "cmd /c echo %AZ_BATCH_NODE_ID% > %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
-    string jobReleaseCmdLine =
-        "cmd /c del %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
+// Specify the command lines for the job preparation and release tasks
+string jobPrepCmdLine =
+    "cmd /c echo %AZ_BATCH_NODE_ID% > %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
+string jobReleaseCmdLine =
+    "cmd /c del %AZ_BATCH_NODE_SHARED_DIR%\\shared_file.txt";
 
-    // Assign the job preparation task to the job
-    myJob.JobPreparationTask =
-        new JobPreparationTask { CommandLine = jobPrepCmdLine };
+// Assign the job preparation task to the job
+myJob.JobPreparationTask =
+    new JobPreparationTask { CommandLine = jobPrepCmdLine };
 
-    // Assign the job release task to the job
-    myJob.JobReleaseTask =
-        new JobPreparationTask { CommandLine = jobReleaseCmdLine };
+// Assign the job release task to the job
+myJob.JobReleaseTask =
+    new JobPreparationTask { CommandLine = jobReleaseCmdLine };
 
-    await myJob.CommitAsync();
+await myJob.CommitAsync();
+```
 
 如前所述，终止或删除作业时会执行释放任务。使用 [JobOperations.TerminateJobAsync][net_job_terminate] 终止作业。使用 [JobOperations.DeleteJobAsync][net_job_delete] 删除作业。通常在作业的任务完成时或者达到定义的超时时终止或删除操作。
 
 csharp
 
-    // Terminate the job to mark it as Completed; this will initiate the
-    // Job Release Task on any node that executed job tasks. Note that the
-    // Job Release Task is also executed when a job is deleted, thus you
-    // need not call Terminate if you typically delete jobs after task completion.
-    await myBatchClient.JobOperations.TerminateJobAsy("JobPrepReleaseSampleJob");
+```
+// Terminate the job to mark it as Completed; this will initiate the
+// Job Release Task on any node that executed job tasks. Note that the
+// Job Release Task is also executed when a job is deleted, thus you
+// need not call Terminate if you typically delete jobs after task completion.
+await myBatchClient.JobOperations.TerminateJobAsy("JobPrepReleaseSampleJob");
+```
 
 ## GitHub 上的代码示例
 
@@ -118,48 +126,51 @@ csharp
 
 示例应用程序的输出类似于：
 
-    Attempting to create pool: JobPrepReleaseSamplePool
-    Created pool JobPrepReleaseSamplePool with 2 small nodes
-    Checking for existing job JobPrepReleaseSampleJob...
-    Job JobPrepReleaseSampleJob not found, creating...
-    Submitting tasks and awaiting completion...
-    All tasks completed.
-    
-    Contents of shared\job_prep_and_release.txt on tvm-2434664350_1-20160623t173951z:
-    -------------------------------------------
-    tvm-2434664350_1-20160623t173951z tasks:
-      task001
-      task004
-      task005
-      task006
-    
-    Contents of shared\job_prep_and_release.txt on tvm-2434664350_2-20160623t173951z:
-    -------------------------------------------
-    tvm-2434664350_2-20160623t173951z tasks:
-      task008
-      task002
-      task003
-      task007
-    
-    Waiting for job JobPrepReleaseSampleJob to reach state Completed
-    ...
-    
-    tvm-2434664350_1-20160623t173951z:
-      Prep task exit code:    0
-      Release task exit code: 0
-    
-    tvm-2434664350_2-20160623t173951z:
-      Prep task exit code:    0
-      Release task exit code: 0
-    
-    Delete job? [yes] no
-    yes
-    Delete pool? [yes] no
-    yes
-    
-    Sample complete, hit ENTER to exit...
+```
+Attempting to create pool: JobPrepReleaseSamplePool
+Created pool JobPrepReleaseSamplePool with 2 small nodes
+Checking for existing job JobPrepReleaseSampleJob...
+Job JobPrepReleaseSampleJob not found, creating...
+Submitting tasks and awaiting completion...
+All tasks completed.
 
->[!NOTE] 由于新池中各个节点的创建和启动时间并不一样（某些节点比其他节点更早做好任务准备），你可能看到不同的输出。具体而言，因为任务快速完成，池的某个节点可能执行作业的所有任务。如果发生这种情况，你会发现未执行任何任务的节点没有作业准备和作业释放任务存在。
+Contents of shared\job_prep_and_release.txt on tvm-2434664350_1-20160623t173951z:
+-------------------------------------------
+tvm-2434664350_1-20160623t173951z tasks:
+  task001
+  task004
+  task005
+  task006
+
+Contents of shared\job_prep_and_release.txt on tvm-2434664350_2-20160623t173951z:
+-------------------------------------------
+tvm-2434664350_2-20160623t173951z tasks:
+  task008
+  task002
+  task003
+  task007
+
+Waiting for job JobPrepReleaseSampleJob to reach state Completed
+...
+
+tvm-2434664350_1-20160623t173951z:
+  Prep task exit code:    0
+  Release task exit code: 0
+
+tvm-2434664350_2-20160623t173951z:
+  Prep task exit code:    0
+  Release task exit code: 0
+
+Delete job? [yes] no
+yes
+Delete pool? [yes] no
+yes
+
+Sample complete, hit ENTER to exit...
+```
+
+>[!NOTE]
+> 由于新池中各个节点的创建和启动时间并不一样（某些节点比其他节点更早做好任务准备），你可能看到不同的输出。具体而言，因为任务快速完成，池的某个节点可能执行作业的所有任务。如果发生这种情况，你会发现未执行任何任务的节点没有作业准备和作业释放任务存在。
 
 ### 在 Azure 门户预览中检查作业准备和释放任务
 

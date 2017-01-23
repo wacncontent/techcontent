@@ -28,15 +28,15 @@ wacn.lang: cn
 - [兼容性问题](./mysql-database-compatibilityinquiry.md)
 
 ### **数据备份占用存储限额吗?**
-  
+
 数据备份不会占用您存储限额。
 
 ### **一个服务器是否限制数据库的数量?**
 
 在一个MySQL服务器中，用户可创建多个数据库，数量上没有限制，但是多个数据库会共享服务器资源，如数据库数量较多，性能需求较高，建议创建多个MySQL服务器。
-    
+
 ### **MySQL Database on Azure目前有哪些限制?**
-    
+
 了解更多[MySQL Database on Azure服务限制](./mysql-database-operation-limitation.md)
 
 ### **为什么MySQL Database on Azure不支持MYISAM格式的数据库?**
@@ -50,9 +50,9 @@ wacn.lang: cn
 5. MySQL的发展也是在向InnoDB转移,在最新的5.7中MySQL可以完全不是MyISAM,系统的数据库也被转移到了InnoDB。
 
 ### **为什么新建的空的数据库服务器默认大小为530M? 为什么数据库显示使用存储空间大于实际使用的存储空间?**
-    
+
 出于性能考虑，我们为新创建的数据库实例配置使用两个256M的日志文件。因此您在管理门户中看到的存储空间使用统计包括了日志文件的大小。但是日志文件大小在使用过程中不会改变。
-    
+
 ### **MYSQL Database on Azure 是否支持用户通过命令行设置权限**
 
 支持,虽然我们的[管理门户](https://manage.windowsazure.cn/) 以及PowerShell 命令行在创建用户或数据库时只支持对整个数据库设置读写权限，但你可以用“grant”命令对用户权限进行更细化的设置。
@@ -64,10 +64,10 @@ MySQL on Azure目前默认采用UTC 协调世界时作为系统时间System， �
 
 MySQL on Azure 全面兼容MySQL社区版本，关于5.7的新功能，请参考MySQL 5.7 Release Notes了解更多。MySQL on Azure兼容上述绝大功能的更新，但下述功能尚不支持：
 
--	暂不支持5.7中关于Replication功能的改进 （由于MySQL on Azure的主从同步复制功能并未直接采用MySQL Replication技术，而是在其基础上针对MySQL on Azure服务进行了一定的改良）。
--	暂不支持5.7中关于InnoDB Buffer Pool Online Resize的功能。
--	暂不支持Query Rewrite Plugin。
--	暂不支持InnoDB Transparent Page Level Compression
+- 暂不支持5.7中关于Replication功能的改进 （由于MySQL on Azure的主从同步复制功能并未直接采用MySQL Replication技术，而是在其基础上针对MySQL on Azure服务进行了一定的改良）。
+- 暂不支持5.7中关于InnoDB Buffer Pool Online Resize的功能。
+- 暂不支持Query Rewrite Plugin。
+- 暂不支持InnoDB Transparent Page Level Compression
 -   暂不支持password expiration
 
 ### **如何在管理门户上创建MySQL 5.7的实例？**

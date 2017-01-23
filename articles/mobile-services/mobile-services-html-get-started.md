@@ -43,7 +43,7 @@ ms.author: glenga
     +  **在 Windows 上**：IIS Express。可通过 [Microsoft Web 平台安装程序]安装 IIS Express。   
     +  **在 MacOS X 上**：Python，该服务器事先应已安装。
     +  **在 Linux 上**：Python。必须安装[最新版本的 Python]。 
-    
+
     你可以使用任何 Web 服务器来托管应用程序，但是这些 Web 服务器必须受下载的脚本支持。
 
 + 支持 HTML5 的 Web 浏览器。
@@ -79,7 +79,8 @@ ms.author: glenga
 
       ![][9]
 
-    > [!IMPORTANT] 如果将快速入门应用程序部署到除 localhost 以外的 Web 服务器，则必须将该 Web 服务器的主机名添加到“允许来自主机名的请求”列表。有关详细信息，请参阅[跨域资源共享](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn155871.aspx)。
+    > [!IMPORTANT]
+    > 如果将快速入门应用程序部署到除 localhost 以外的 Web 服务器，则必须将该 Web 服务器的主机名添加到“允许来自主机名的请求”列表。有关详细信息，请参阅[跨域资源共享](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn155871.aspx)。
 
 ##  托管和运行 HTML 应用程序
 
@@ -91,7 +92,8 @@ ms.author: glenga
     + **launch-mac.command**（Mac OS X 计算机）
     + **launch-linux.sh**（Linux 计算机）
 
-    > [!NOTE]在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
+    > [!NOTE]
+    >在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
 
     随后将在本地计算机上启动用于托管新应用程序的 Web 服务器。
 
@@ -103,7 +105,8 @@ ms.author: glenga
 
        这样可向在 Azure 中托管的新移动服务发送 POST 请求。来自请求的数据被插入到 TodoItem 表。移动服务返回存储在表中的项，数据显示在应用的第二列中。
 
-    > [!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 page.js 文件中。
+    > [!NOTE]
+    >你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 page.js 文件中。
 
 4. 返回 [Azure 经典管理门户]，单击“数据”选项卡，然后单击“TodoItems”表。
 

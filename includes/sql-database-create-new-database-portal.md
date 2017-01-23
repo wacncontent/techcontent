@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-database-create-new-database-portal.md
 

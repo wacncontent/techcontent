@@ -35,5 +35,5 @@ wacn.date: 09/12/2016
 <li>单击“Done”（完成）。</li>
 
 <center>![Setup](./media/multi-factor-authentication-end-user-first-time-office-phone/app.png)</center>
- 
+
 <!---HONumber=Mooncake_0905_2016-->

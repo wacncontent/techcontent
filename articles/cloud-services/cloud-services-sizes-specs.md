@@ -21,7 +21,8 @@ ms.author: adegeo
 
 本主题介绍云服务角色实例（Web 角色和辅助角色）的可用大小和选项。此外，还提供了在计划使用这些资源时要考虑的部署注意事项。每个大小都具有要放在[服务定义文件](./cloud-services-model-and-package.md#csdef)中的 ID。[云服务定价](https://www.azure.cn/pricing/details/cloud-services/)页提供每种大小的价格。
 
-> [!NOTE]若要查看相关的 Azure 限制，请参阅 [Azure 订阅和服务限制、配额与约束](../azure-subscription-service-limits.md)
+> [!NOTE]
+>若要查看相关的 Azure 限制，请参阅 [Azure 订阅和服务限制、配额与约束](../azure-subscription-service-limits.md)
 
 ## Web 角色实例和辅助角色实例的大小
 Azure 上有多个标准大小可供选择。其中某些大小的注意事项包括：
@@ -175,9 +176,11 @@ Azure H 系列虚拟机是下一代高性能计算 VM，旨在满足高端计算
 
 下面是一个将 Web 角色实例的角色大小设置为 Standard_D2 的示例：
 
-    <WorkerRole name="Worker1" vmsize="Standard_D2">
-    ...
-    </WorkerRole>
+```
+<WorkerRole name="Worker1" vmsize="Standard_D2">
+...
+</WorkerRole>
+```
 
 ## 更改现有角色的大小
 

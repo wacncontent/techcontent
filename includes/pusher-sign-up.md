@@ -37,7 +37,7 @@
 若要修改您的订阅计划或查看 Pusher 联系人设置，请单击 Pusher 服务的名称以打开 Pusher 外接程序仪表板。
 
 ![pusher-add-on-dashboard][pusher-add-on-dashboard]
-    
+
 在使用 Pusher 时，您将需要提供 Pusher 应用连接设置。
 
 ### 查找 Pusher 连接设置 ###

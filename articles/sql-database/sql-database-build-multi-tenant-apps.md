@@ -64,7 +64,7 @@ ms.author: carlrab
 ## 其他资源
 
 浏览所有 [SQL 数据库的功能](https://www.azure.cn/home/features/sql-database/)。
- 
+
 查看 [SQL 数据库技术概述](./sql-database-technical-overview.md)。
 
 <!---HONumber=Mooncake_1024_2016-->

@@ -46,10 +46,10 @@ RLS 是在 Power BI Desktop 中编写的。打开数据集和报表时，可以�
 
 下面是此架构的一些注意事项：
 
--	所有度量值，例如“总销售额”，存储在“销售”事实表中。
--	有四个附加的相关维度表：“项”、“时间”、“商店”和“区域”。
--	关系线的箭头表示筛选器可以从一个表流向另一个表的方向。例如，如果筛选器是针对当前架构中的 **Time[Date]** 设置的，则它只向下筛选“销售”表中的值。其他表不受此筛选器的影响，因为关系线的所有箭头都指向销售表，未指向其他方向。
--	“区域”表指明谁是每个区域的经理：
+- 所有度量值，例如“总销售额”，存储在“销售”事实表中。
+- 有四个附加的相关维度表：“项”、“时间”、“商店”和“区域”。
+- 关系线的箭头表示筛选器可以从一个表流向另一个表的方向。例如，如果筛选器是针对当前架构中的 **Time[Date]** 设置的，则它只向下筛选“销售”表中的值。其他表不受此筛选器的影响，因为关系线的所有箭头都指向销售表，未指向其他方向。
+- “区域”表指明谁是每个区域的经理：
 
     ![](./media/power-bi-embedded-rls/pbi-embedded-rls-district-table-4.png)  
 
@@ -57,16 +57,16 @@ RLS 是在 Power BI Desktop 中编写的。打开数据集和报表时，可以�
 
 方法如下：
 
-1.	在“建模”选项卡中，单击“管理角色”。
+1. 在“建模”选项卡中，单击“管理角色”。
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-modeling-tab-5.png)
 
-2.	创建名为“管理员”的新角色。
+2. 创建名为“管理员”的新角色。
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-manager-role-6.png)
 
-3.	在“区域”表中输入以下 DAX 表达式：**[District Manager] = USERNAME()**
+3. 在“区域”表中输入以下 DAX 表达式：**[District Manager] = USERNAME()**
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-manager-role-7.png)
 
-4.	为确保规则正常运行，请在“建模”选项卡中单击“以角色身份查看”，然后输入以下内容：
+4. 为确保规则正常运行，请在“建模”选项卡中单击“以角色身份查看”，然后输入以下内容：
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-view-as-roles-8.png)
 
     报表随即会显示数据，与使用 **Andrew Ma** 登录时的情况一样。
@@ -85,14 +85,14 @@ RLS 是在 Power BI Desktop 中编写的。打开数据集和报表时，可以�
 
 **注意：**如果针对数据使用 DirectQuery 模式，必须选择以下两个选项来启用双向交叉筛选：
 
-1.	“文件”->“选项和设置”->“预览功能”->“为 DirectQuery 启用两个方向的交叉筛选”。
-2.	“文件”->“选项和设置”->“DirectQuery”->“允许 DirectQuery 模式下不受限制的度量”。
+1. “文件”->“选项和设置”->“预览功能”->“为 DirectQuery 启用两个方向的交叉筛选”。
+2. “文件”->“选项和设置”->“DirectQuery”->“允许 DirectQuery 模式下不受限制的度量”。
 
 若要了解有关双向交叉筛选的详细信息，请下载 [Bidirectional cross-filtering in SQL Server Analysis Services 2016 and Power BI Desktop]（SQL Server Analysis Services 2016 和 Power BI Desktop 中的双向交叉筛选）白皮书 (http://download.microsoft.com/download/2/7/8/2782DF95-3E0D-40CD-BFC8-749A2882E109/Bidirectional cross-filtering in Analysis Services 2016 and Power BI.docx)。
 
 这就是需要在 Power BI Desktop 中完成的所有工作，但要使定义的 RLS 规则能够在 Power BI Embedded 中正常运行，还有一个小问题需要解决。用户由应用程序进行身份验证和授权，应用令牌用于授予用户对特定 Power BI Embedded 报表的访问权限。Power BI Embedded 并不具体地知道谁是用户。要使 RLS 正常运行，需要将一些附加上下文作为应用令牌的一部分传递：
--	**username**（可选）- 与 RLS 一起使用，这是一个字符串，可以在应用 RLS 规则时帮助标识用户。请参阅“Using Row Level Security with Power BI Embedded”（在 Power BI Embedded 中使用行级别安全性）
--	**roles** – 一个字符串，包含当应用行级别安全性规则时可选择的角色。如果传递多个角色，则应当以字符串数组形式传递它们。
+- **username**（可选）- 与 RLS 一起使用，这是一个字符串，可以在应用 RLS 规则时帮助标识用户。请参阅“Using Row Level Security with Power BI Embedded”（在 Power BI Embedded 中使用行级别安全性）
+- **roles** – 一个字符串，包含当应用行级别安全性规则时可选择的角色。如果传递多个角色，则应当以字符串数组形式传递它们。
 
 如果提供 username 属性，则也必须在角色中至少传递一个值。
 

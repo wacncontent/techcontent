@@ -1,4 +1,3 @@
-
 ---
 title: 使用 Azure 移动服务开发 Android 应用程序入门
 description: 遵照本教程开始使用 Azure 移动服务进行 Android 开发。
@@ -32,7 +31,8 @@ ms.author: ricksal
 
 下载的快速入门项目包含适用于 Android 的移动服务 SDK。
 
-> [!IMPORTANT]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
+> [!IMPORTANT]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ## <a name="create-new-service"></a>创建新的移动服务
 
@@ -67,7 +67,7 @@ ms.author: ricksal
 1. 在 [Azure 经典管理门户]中单击“移动服务”，然后单击你刚刚创建的移动服务。
 
 2. 在快速入门选项卡中，单击“选择平台”下的“Android”，然后展开“创建新的 Android 应用程序”。
- 
+
     ![][2]
 
 3. 在本地计算机或虚拟机上下载并安装 [Android 开发人员工具][Android SDK]（如果尚未这么做）。

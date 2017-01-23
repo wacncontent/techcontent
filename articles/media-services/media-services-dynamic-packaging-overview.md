@@ -32,7 +32,8 @@ Azure 媒体服务可用于向多种客户端技术（例如，iOS、XBOX、Silv
 
 ![动态编码](./media/media-services-dynamic-packaging-overview/media-services-dynamic-packaging.png)
 
->[!NOTE]若要利用动态打包，首先必须获取你计划从中传送内容的流式处理终结点的至少一个点播流单元。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
+>[!NOTE]
+>若要利用动态打包，首先必须获取你计划从中传送内容的流式处理终结点的至少一个点播流单元。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 ##常见方案
 

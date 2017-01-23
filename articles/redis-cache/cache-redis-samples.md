@@ -29,14 +29,14 @@ ms.author: sdanie
 
 此示例演示如何：
 
--	使用不同的连接选项
--	使用同步和异步操作与缓存相互读取和写入对象
--	使用 Redis MGET/MSET 命令返回指定键的值
--	执行 Redis 事务操作
--	处理 Redis 列表和排序集
--	使用 JsonConvert 序列化程序存储.NET 对象
--	使用 Redis 集实现标记
--	使用 Redis 群集
+- 使用不同的连接选项
+- 使用同步和异步操作与缓存相互读取和写入对象
+- 使用 Redis MGET/MSET 命令返回指定键的值
+- 执行 Redis 事务操作
+- 处理 Redis 列表和排序集
+- 使用 JsonConvert 序列化程序存储.NET 对象
+- 使用 Redis 集实现标记
+- 使用 Redis 群集
 
 有关详细信息，请参阅 github 上的 [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis)；有关更多的使用方案，请参阅 [StackExchange.Redis.Tests](https://github.com/StackExchange/StackExchange.Redis/tree/master/StackExchange.Redis.Tests) 单位测试。
 
@@ -52,8 +52,8 @@ ms.author: sdanie
 
 此示例对从缓存访问数据与从持久存储访问数据时的性能进行了比较。此示例有两个项目。
 
--	[展示 Redis Cache 如何通过对数据进行缓存提高性能](https://github.com/rustd/RedisSamples/tree/master/RedisCacheCustomerQuerySample)
--	[为进行展示创立数据库和缓存](https://github.com/rustd/RedisSamples/tree/master/SeedCacheForCustomerQuerySample)
+- [展示 Redis Cache 如何通过对数据进行缓存提高性能](https://github.com/rustd/RedisSamples/tree/master/RedisCacheCustomerQuerySample)
+- [为进行展示创立数据库和缓存](https://github.com/rustd/RedisSamples/tree/master/SeedCacheForCustomerQuerySample)
 
 ## ASP.NET 会话状态和输出缓存
 

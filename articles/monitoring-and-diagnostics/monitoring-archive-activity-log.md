@@ -152,7 +152,8 @@ azure insights logprofile add --name my_log_profile --storageId /subscriptions/s
 | location | 位置所在的区域（或全局）。 |
 | properties | `<Key, Value>` 对集合（即字典），描述事件的详细信息。 |
 
-> [!NOTE] 这些属性的属性和使用情况各不相同，具体取决于资源。
+> [!NOTE]
+> 这些属性的属性和使用情况各不相同，具体取决于资源。
 
 ## 后续步骤
 - [下载 blob 进行分析](../storage/storage-dotnet-how-to-use-blobs.md#download-blobs)

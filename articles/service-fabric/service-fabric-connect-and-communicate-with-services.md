@@ -58,48 +58,50 @@ Azure 中的 Service Fabric 群集位于 Azure Load Balancer 之后。发送到�
 例如，若要在端口 **80** 上接受外部流量，必须配置以下项：
 
 1. 编写侦听端口 80 的服务。在服务的 ServiceManifest.xml 中配置端口 80，并在服务中打开一个侦听器，例如自承载的 Web 服务器。
- 
-        <Resources>
-            <Endpoints>
-                <Endpoint Name="WebEndpoint" Protocol="http" Port="80" />
-            </Endpoints>
-        </Resources>
 
-        class HttpCommunicationListener : ICommunicationListener
+    ```
+    <Resources>
+        <Endpoints>
+            <Endpoint Name="WebEndpoint" Protocol="http" Port="80" />
+        </Endpoints>
+    </Resources>
+
+    class HttpCommunicationListener : ICommunicationListener
+    {
+        ...
+
+        public Task<string> OpenAsync(CancellationToken cancellationToken)
         {
-            ...
-            
-            public Task<string> OpenAsync(CancellationToken cancellationToken)
-            {
-                EndpointResourceDescription endpoint = 
-                    serviceContext.CodePackageActivationContext.GetEndpoint("WebEndpoint");
+            EndpointResourceDescription endpoint = 
+                serviceContext.CodePackageActivationContext.GetEndpoint("WebEndpoint");
 
-                string uriPrefix = $"{endpoint.Protocol}://+:{endpoint.Port}/myapp/";
+            string uriPrefix = $"{endpoint.Protocol}://+:{endpoint.Port}/myapp/";
 
-                this.httpListener = new HttpListener();
-                this.httpListener.Prefixes.Add(uriPrefix);
-                this.httpListener.Start();
+            this.httpListener = new HttpListener();
+            this.httpListener.Prefixes.Add(uriPrefix);
+            this.httpListener.Start();
 
-                string uriPublished = uriPrefix.Replace("+", FabricRuntime.GetNodeContext().IPAddressOrFQDN);
+            string uriPublished = uriPrefix.Replace("+", FabricRuntime.GetNodeContext().IPAddressOrFQDN);
 
-                return Task.FromResult(this.publishUri);
-            }
-            
-            ...
+            return Task.FromResult(this.publishUri);
         }
-        
-        class WebService : StatelessService
+
+        ...
+    }
+
+    class WebService : StatelessService
+    {
+        ...
+
+        protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
         {
-            ...
-            
-            protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
-            {
-                return new[] {new ServiceInstanceListener(context => new HttpCommunicationListener(context))};
-            }
-            
-            ...
+            return new[] {new ServiceInstanceListener(context => new HttpCommunicationListener(context))};
         }
-    
+
+        ...
+    }
+    ```
+
 2. 在 Azure 中创建 Service Fabric 群集，并将端口 **80** 指定为将承载服务的节点类型的自定义终结点端口。如果具有多种节点类型，则可以对服务设置*放置约束*，以确保它只在打开了自定义终结点端口的节点类型上运行。
 
     ![在节点类型上打开端口][4]

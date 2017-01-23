@@ -49,54 +49,63 @@ ms.author: adrianha
         using UIKit;
     ```
 
-        // Logged in user
-        private MobileServiceUser user;
-        public MobileServiceUser User { get { return user; } }
+    ```
+    // Logged in user
+    private MobileServiceUser user;
+    public MobileServiceUser User { get { return user; } }
+    ```
 
 2. 使用以下定义向 **QSTodoService** 添加名为 **Authenticate** 的新方法：
 
-        public async Task Authenticate(UIViewController view)
+    ```
+    public async Task Authenticate(UIViewController view)
+    {
+        try
         {
-            try
-            {
-                user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.Microsoft);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
-            }
+            user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.Microsoft);
         }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
+        }
+    }
+    ```
 
-    >[!NOTE] 如果使用的标识提供者不是 Microsoft，请将传递给上述 **LoginAsync** 的值更改为下列其中一项：_MicrosoftAccount_ 或 _WindowsAzureActiveDirectory_。
+    >[!NOTE]
+    > 如果使用的标识提供者不是 Microsoft，请将传递给上述 **LoginAsync** 的值更改为下列其中一项：_MicrosoftAccount_ 或 _WindowsAzureActiveDirectory_。
 
 3. 打开 **QSTodoListViewController.cs**。修改 **ViewDidLoad** 的方法定义，删除接近结尾处对 **RefreshAsync()** 的调用：
 
-        public override async void ViewDidLoad ()
-        {
-            base.ViewDidLoad ();
+    ```
+    public override async void ViewDidLoad ()
+    {
+        base.ViewDidLoad ();
 
-            todoService = QSTodoService.DefaultService;
-           await todoService.InitializeStoreAsync ();
+        todoService = QSTodoService.DefaultService;
+       await todoService.InitializeStoreAsync ();
 
-           RefreshControl.ValueChanged += async (sender, e) => {
-                await RefreshAsync ();
-           }
+       RefreshControl.ValueChanged += async (sender, e) => {
+            await RefreshAsync ();
+       }
 
-            // Comment out the call to RefreshAsync
-            // await RefreshAsync ();
-        }
+        // Comment out the call to RefreshAsync
+        // await RefreshAsync ();
+    }
+    ```
 
 4. 修改方法 **RefreshAsync**，以便在 **User** 属性为 null 时进行身份验证。将以下代码添加到方法定义顶部：
 
-        // start of RefreshAsync method
+    ```
+    // start of RefreshAsync method
+    if (todoService.User == null) {
+        await QSTodoService.DefaultService.Authenticate (this);
         if (todoService.User == null) {
-            await QSTodoService.DefaultService.Authenticate (this);
-            if (todoService.User == null) {
-                Console.WriteLine ("couldn't login!!");
-                return;
-            }
+            Console.WriteLine ("couldn't login!!");
+            return;
         }
-        // rest of RefreshAsync method
+    }
+    // rest of RefreshAsync method
+    ```
 
 5. 在已连接到 Mac 上的 Xamarin 生成主机的 Visual Studio 或 Xamarin Studio 中，针对设备或模拟器运行客户端项目。验证应用程序是否未显示任何数据。
 

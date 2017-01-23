@@ -134,7 +134,7 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 
 ### 门户
 从订阅边栏选项卡选择“资源提供程序”即可轻松查看支持的资源提供程序列表。若要向资源提供程序注册订阅，请选择“注册”链接。
-   
+
 ![列出资源提供程序](./media/resource-manager-supported-services/view-resource-providers.png)  
 
 ### REST API
@@ -143,47 +143,63 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 ### PowerShell
 以下示例说明如何获取所有可用的资源提供程序。
 
-    Get-AzureRmResourceProvider -ListAvailable
+```
+Get-AzureRmResourceProvider -ListAvailable
+```
 
 以下示例演示如何获取特定资源提供程序的资源类型。
 
-    (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes
+```
+(Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes
+```
 
 输出类似于：
 
-    ResourceTypeName                Locations                                         
-    ----------------                ---------                                         
-    sites/extensions                {China North, China East} 
-    sites/slots/extensions          {China North, China East} .
-    ...
+```
+ResourceTypeName                Locations                                         
+----------------                ---------                                         
+sites/extensions                {China North, China East} 
+sites/slots/extensions          {China North, China East} .
+...
+```
 
 若要注册资源提供程序，请提供命名空间：
 
-    Register-AzureRmResourceProvider -ProviderNamespace Microsoft.ApiManagement
+```
+Register-AzureRmResourceProvider -ProviderNamespace Microsoft.ApiManagement
+```
 
 ### Azure CLI
 以下示例说明如何获取所有可用的资源提供程序。
 
-    azure provider list
+```
+azure provider list
+```
 
 输出类似于：
 
-    info:    Executing command provider list
-    + Getting registered providers
-    data:    Namespace                        Registered
-    data:    -------------------------------  -------------
-    data:    Microsoft.ApiManagement          Unregistered
-    data:    Microsoft.AppService             Registered
-    data:    Microsoft.Authorization          Registered
-    ...
+```
+info:    Executing command provider list
++ Getting registered providers
+data:    Namespace                        Registered
+data:    -------------------------------  -------------
+data:    Microsoft.ApiManagement          Unregistered
+data:    Microsoft.AppService             Registered
+data:    Microsoft.Authorization          Registered
+...
+```
 
 可使用以下命令将特定资源提供程序的信息保存到文件：
 
-    azure provider show Microsoft.Web -vv --json > c:\temp.json
+```
+azure provider show Microsoft.Web -vv --json > c:\temp.json
+```
 
 若要注册资源提供程序，请提供命名空间：
 
-    azure provider register -n Microsoft.ServiceBus
+```
+azure provider register -n Microsoft.ServiceBus
+```
 
 ## <a name="supported-regions"></a> 支持的区域
 部署资源时，通常需要指定资源的区域。所有区域都支持资源管理器，但部署的资源可能无法在所有区域中受到支持。此外，订阅可能存在一些限制，以防止用户使用某些支持该资源的区域。这些限制可能与所在国家/地区的税务问题有关，或者与由订阅管理员所放置，只能使用特定区域的策略结果有关。
@@ -192,15 +208,15 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 执行以下步骤即可查看某种资源类型支持的区域：
 
 1. 选择“更多服务”>“资源浏览器”。
-   
+
     ![资源浏览器](./media/resource-manager-supported-services/select-resource-explorer.png)  
 
 2. 打开“提供程序”节点。
-   
+
     ![选择提供程序](./media/resource-manager-supported-services/select-providers.png)  
 
 3. 选择资源提供程序，然后查看支持的区域和 API 版本。
-   
+
     ![查看提供程序](./media/resource-manager-supported-services/view-provider.png)  
 
 ### REST API
@@ -209,28 +225,38 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 ### PowerShell
 以下示例演示如何获取支持网站的区域。
 
-    ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).Locations
+```
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).Locations
+```
 
 输出类似于：
 
-    China East
-    China North
+```
+China East
+China North
+```
 
 ### Azure CLI
 以下示例返回每个资源类型支持的所有位置。
 
-    azure location list
+```
+azure location list
+```
 
 也可以使用 [jq](https://stedolan.github.io/jq/) 之类的 JSON 实用工具来筛选位置结果。
 
-    azure location list --json | jq '.[] | select(.name == "Microsoft.Web/sites")'
+```
+azure location list --json | jq '.[] | select(.name == "Microsoft.Web/sites")'
+```
 
 将返回：
 
-    {
-      "name": "Microsoft.Web/sites",
-      "location": "China East,China North"
-    }
+```
+{
+  "name": "Microsoft.Web/sites",
+  "location": "China East,China North"
+}
+```
 
 ## <a name="supported-api-versions"></a> 支持的 API 版本
 部署模板时，必须指定要用于创建每个资源的 API 版本。API 版本对应于资源提供程序发布的 REST API 操作版本。资源提供程序启用新功能时，会发布 REST API 的新版本。因此，在模板中指定的 API 版本会影响你可以在模板中指定的属性。通常，在创建模板时，需要选择最新的 API 版本。对于现有模板，你可以决定是要继续使用以前的 API 版本，还是要选择最新版本来更新模板以利用新功能。
@@ -244,25 +270,31 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 ### PowerShell
 以下示例演示如何获取特定资源类型可用的 API 版本。
 
-    ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).ApiVersions
+```
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).ApiVersions
+```
 
 输出类似于：
 
-    2015-08-01
-    2015-07-01
-    2015-06-01
-    2015-05-01
-    2015-04-01
-    2015-02-01
-    2014-11-01
-    2014-06-01
-    2014-04-01-preview
-    2014-04-01
+```
+2015-08-01
+2015-07-01
+2015-06-01
+2015-05-01
+2015-04-01
+2015-02-01
+2014-11-01
+2014-06-01
+2014-04-01-preview
+2014-04-01
+```
 
 ### Azure CLI
 可使用以下命令将资源提供程序的信息（包括可用的 API 版本）保存到文件：
 
-    azure provider show Microsoft.Web -vv --json > c:\temp.json
+```
+azure provider show Microsoft.Web -vv --json > c:\temp.json
+```
 
 你可以打开该文件并查找 **apiVersions** 元素
 

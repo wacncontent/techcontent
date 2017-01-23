@@ -70,7 +70,8 @@ wacn.date: 12/15/2016
 2. 只有 Worker Role，没有 Web Role；  
 3. 既有 Web Role，又有 Worker Role。
 
-> [!NOTE] 上图中的 Worker Role 分为三类 (Worker Role, Cache Worker Role 和 Worker Role with Service Bus Queue)。本文只介绍 Worker Role。
+> [!NOTE]
+> 上图中的 Worker Role 分为三类 (Worker Role, Cache Worker Role 和 Worker Role with Service Bus Queue)。本文只介绍 Worker Role。
 
 为什么 Azure 有 Web Role / Worker Role？它的好处在哪里？接下来举例说明。
 
@@ -138,7 +139,7 @@ wacn.date: 12/15/2016
 
     Azure Cache Worker Role 功能会在 2016 年 11 月 30 日下线。 
 
-    如果用户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](./redis-cache/index.md/)。
+    如果用户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](./redis-cache/index.md)。
 
 5. 然后可以根据需求，选择相应的 ASP.NET 模板。这里选择 Web Forms，如下图：  
 
@@ -267,7 +268,8 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 4. Enable Diagnostics — 表示在 Azure 云服务 Web Role 启用诊断功能，可以点击 Configure 按钮，设置需要诊断的具体参数；  
 5. Specify the storage account credentials for the Diagnostics result — 表示需要把诊断的结果数据，保存到 Azure 表存储中。这里需要配置 Azure 存储的连接字符串。  
 
-    > [!NOTE] Azure 云服务背后运行的是非持久化虚拟机，任何保存在非持久化虚拟机本地磁盘的文件都会有丢失风险，所以需要把诊断数据保存到 Azure 表存储中。  
+    > [!NOTE]
+    > Azure 云服务背后运行的是非持久化虚拟机，任何保存在非持久化虚拟机本地磁盘的文件都会有丢失风险，所以需要把诊断数据保存到 Azure 表存储中。  
 
 6. 以上图为例，把 Web Role 横向扩展为 10 台，每台计算节点的 CPU 内存为 2 Core/3.5 GB (A 系列)。如果是 D 系列虚拟机，显示如下： 
 
@@ -628,7 +630,9 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 
 2. 以管理员身份，运行 Azure PowerShell，执行以下命令:  
 
-        Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
+    Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
 
     请注意上图中-Environment 部分的命令，与国际版 Azure 不同，是专为中国版 Azure 的 PowerShell 做的特殊的参数。  
     输入命令后，计算机会弹出新的 IE 窗口，导航至中国版 Azure 网站，并要求我们输入 Org ID 和密码进行登陆。
@@ -699,55 +703,57 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 
 上图红色区域的发布输出，如下：
 
-    15:27:37 - Warning: There are package validation warnings.
-    15:27:37 - Checking for Remote Desktop certificate...
-    15:27:38 - Uploading Certificates...
-    15:27:56 - Applying Diagnostics extension.
-    15:28:35 - Preparing deployment for AzureCloudService1 - 2016/6/8 15:27:12 with Subscription ID 'e2eaa986-29d9-48c9-8302-1e2900a4504b' using Service Management URL 'https://management.core.chinacloudapi.cn/'...
-    15:28:35 - Connecting...
-    15:28:35 - Verifying storage account 'leicloudservice'...
-    15:28:37 - Uploading Package...
-    15:28:45 - Creating...
-    15:29:21 - Created Deployment ID: f9f99ee5f486449995afc75178d8faa1.
-    15:29:21 - Instance 0 of role WebRole1 is stopped
-    15:29:21 - Instance 1 of role WebRole1 is creating the virtual machine
-    15:29:21 - Instance 0 of role WorkerRole1 is creating the virtual machine
-    15:29:21 - Instance 1 of role WorkerRole1 is creating the virtual machine
-    15:29:21 - Starting...
-    15:29:42 - Initializing...
-    15:29:42 - Instance 0 of role WebRole1 is creating the virtual machine
-    15:29:42 - Instance 1 of role WebRole1 is starting the virtual machine
-    15:29:42 - Instance 0 of role WorkerRole1 is starting the virtual machine
-    15:29:42 - Instance 1 of role WorkerRole1 is starting the virtual machine
-    15:30:14 - Instance 0 of role WebRole1 is starting the virtual machine
-    15:31:48 - Instance 0 of role WebRole1 is in an unknown state
-    15:31:48 - Instance 1 of role WebRole1 is busy
-        Details: Preparing to start role... System is initializing. [2016-06-08T07:31:35Z]
-    15:31:48 - Instance 0 of role WorkerRole1 is in an unknown state
-    15:31:48 - Instance 1 of role WorkerRole1 is busy
-        Details: Preparing to start role... System is initializing. [2016-06-08T07:31:40Z]
-    15:32:19 - Instance 0 of role WebRole1 is busy
-        Details: Initializing role... System is initializing. [2016-06-08T07:31:45Z]
-    15:32:19 - Instance 1 of role WebRole1 is busy
-        Details: Initializing role... System is initializing. [2016-06-08T07:31:35Z]
-    15:32:19 - Instance 0 of role WorkerRole1 is busy
-        Details: Initializing role... System is initializing. [2016-06-08T07:31:43Z]
-    15:32:19 - Instance 1 of role WorkerRole1 is busy
-        Details: Initializing role... System is initializing. [2016-06-08T07:31:40Z]
-    15:33:53 - Instance 0 of role WebRole1 is busy
-        Details: Bringing role online... Calling OnRoleRun. [2016-06-08T07:33:40Z]
-    15:33:53 - Instance 1 of role WebRole1 is busy
-        Details: Bringing role online... Calling OnRoleRun. [2016-06-08T07:33:31Z]
-    15:33:53 - Instance 0 of role WorkerRole1 is busy
-        Details: Bringing role online... Calling OnRoleRun. [2016-06-08T07:33:46Z]
-    15:33:53 - Instance 1 of role WorkerRole1 is busy
-        Details: Waiting for role to start... Calling OnRoleRun. [2016-06-08T07:33:48Z]
-    15:35:58 - Instance 0 of role WebRole1 is ready
-    15:35:58 - Instance 1 of role WebRole1 is ready
-    15:35:58 - Instance 0 of role WorkerRole1 is ready
-    15:35:58 - Instance 1 of role WorkerRole1 is ready
-    15:35:58 - Created web app URL: http://leicloudservice.chinacloudapp.cn/ 
-    15:35:58 - Complete.
+```
+15:27:37 - Warning: There are package validation warnings.
+15:27:37 - Checking for Remote Desktop certificate...
+15:27:38 - Uploading Certificates...
+15:27:56 - Applying Diagnostics extension.
+15:28:35 - Preparing deployment for AzureCloudService1 - 2016/6/8 15:27:12 with Subscription ID 'e2eaa986-29d9-48c9-8302-1e2900a4504b' using Service Management URL 'https://management.core.chinacloudapi.cn/'...
+15:28:35 - Connecting...
+15:28:35 - Verifying storage account 'leicloudservice'...
+15:28:37 - Uploading Package...
+15:28:45 - Creating...
+15:29:21 - Created Deployment ID: f9f99ee5f486449995afc75178d8faa1.
+15:29:21 - Instance 0 of role WebRole1 is stopped
+15:29:21 - Instance 1 of role WebRole1 is creating the virtual machine
+15:29:21 - Instance 0 of role WorkerRole1 is creating the virtual machine
+15:29:21 - Instance 1 of role WorkerRole1 is creating the virtual machine
+15:29:21 - Starting...
+15:29:42 - Initializing...
+15:29:42 - Instance 0 of role WebRole1 is creating the virtual machine
+15:29:42 - Instance 1 of role WebRole1 is starting the virtual machine
+15:29:42 - Instance 0 of role WorkerRole1 is starting the virtual machine
+15:29:42 - Instance 1 of role WorkerRole1 is starting the virtual machine
+15:30:14 - Instance 0 of role WebRole1 is starting the virtual machine
+15:31:48 - Instance 0 of role WebRole1 is in an unknown state
+15:31:48 - Instance 1 of role WebRole1 is busy
+    Details: Preparing to start role... System is initializing. [2016-06-08T07:31:35Z]
+15:31:48 - Instance 0 of role WorkerRole1 is in an unknown state
+15:31:48 - Instance 1 of role WorkerRole1 is busy
+    Details: Preparing to start role... System is initializing. [2016-06-08T07:31:40Z]
+15:32:19 - Instance 0 of role WebRole1 is busy
+    Details: Initializing role... System is initializing. [2016-06-08T07:31:45Z]
+15:32:19 - Instance 1 of role WebRole1 is busy
+    Details: Initializing role... System is initializing. [2016-06-08T07:31:35Z]
+15:32:19 - Instance 0 of role WorkerRole1 is busy
+    Details: Initializing role... System is initializing. [2016-06-08T07:31:43Z]
+15:32:19 - Instance 1 of role WorkerRole1 is busy
+    Details: Initializing role... System is initializing. [2016-06-08T07:31:40Z]
+15:33:53 - Instance 0 of role WebRole1 is busy
+    Details: Bringing role online... Calling OnRoleRun. [2016-06-08T07:33:40Z]
+15:33:53 - Instance 1 of role WebRole1 is busy
+    Details: Bringing role online... Calling OnRoleRun. [2016-06-08T07:33:31Z]
+15:33:53 - Instance 0 of role WorkerRole1 is busy
+    Details: Bringing role online... Calling OnRoleRun. [2016-06-08T07:33:46Z]
+15:33:53 - Instance 1 of role WorkerRole1 is busy
+    Details: Waiting for role to start... Calling OnRoleRun. [2016-06-08T07:33:48Z]
+15:35:58 - Instance 0 of role WebRole1 is ready
+15:35:58 - Instance 1 of role WebRole1 is ready
+15:35:58 - Instance 0 of role WorkerRole1 is ready
+15:35:58 - Instance 1 of role WorkerRole1 is ready
+15:35:58 - Created web app URL: http://leicloudservice.chinacloudapp.cn/ 
+15:35:58 - Complete.
+```
 
 #####<a id="azure-cloud-service-publish-result"></a>2.12.4.2 发布结果
 
@@ -840,7 +846,7 @@ Azure 关闭 Role Instance 时，会触发 Stopping 事件，并调用 Role 的 
 
 这个概念非常重要，下面举一个例子供大家参考和理解。  
 
-1.	假设开发一个会员系统，通过 Azure 云服务的 Web Role 部署到 Azure 平台； 
+1. 假设开发一个会员系统，通过 Azure 云服务的 Web Role 部署到 Azure 平台； 
 2. Web Role 通过 CSPKG 和 CSCFG 部署到 Azure 云服务；  
 3. 第一次部署的时间为 2016 年 1 月 1 日，Web Role 的 ASP.NET 项目，一共包含 3 个文件夹；  
 4. 项目部署完毕后，Internet 用户开始使用这个会员系统，用户把头像、照片上传到云端虚拟机的本地磁盘，ASP.NET 项目变为 5 个文件夹。请注意，新增加的 2 个文件夹，并没有包含在 CSPKG 文件里；  
@@ -851,7 +857,7 @@ Azure 关闭 Role Instance 时，会触发 Stopping 事件，并调用 Role 的 
 
 ###<a id="azure-cloud-service-summary"></a>2.14 总结
 
-1.	Azure 云服务是非持久化虚拟机，应用系统运行期间产生的增量文件，请保存到 Azure 存储账号中；  
+1. Azure 云服务是非持久化虚拟机，应用系统运行期间产生的增量文件，请保存到 Azure 存储账号中；  
 2. Azure 云服务，可以同时包含 Web Role 和 Worker Role，或者只包含两者中的一种；  
 3. Web Role 响应前端用户请求；  
 4. Worker Role 在后端做任务处理；  
@@ -878,7 +884,7 @@ Azure 云服务是 Azure 的一个 PAAS 平台，同样支持多种不同的语�
 
 本文简单介绍如何使用 Azure 提供的 Java Eclipse 插件，快速在 Azure 云服务中部署 Java Web 应用。正式使用此功能前，希望用户能了解以下限制，更好的设计云端体系架构：  
 
-1.	目前 Azure 云服务底层的虚拟机是 Windows 2008/2012，如果一些跑在 Linux 上的应用需要迁移到 Azure 云服务，并且依赖于一些 Linux 的系统调用，那么需要进行代码修改；  
+1. 目前 Azure 云服务底层的虚拟机是 Windows 2008/2012，如果一些跑在 Linux 上的应用需要迁移到 Azure 云服务，并且依赖于一些 Linux 的系统调用，那么需要进行代码修改；  
 2. Java 应用在云服务目前只能是 workrole，没有 .Net 中 Web Role 和 work role 的定义和机制，但对于各项诸如队列，存储，数据库等云服务的使用并不受限，可通过开发实现。
 
 首先需安装 JDK，Eclipse，用户应有 Azure 账号，这些基础部分不再赘述。关于 Azure 账号申请，请登录官方网页或者联系 IT 相关管理人员（如果公司已购买 Azure 服务） 
@@ -921,7 +927,7 @@ Azure 云服务是 Azure 的一个 PAAS 平台，同样支持多种不同的语�
 接上文
 
 9. 发布前，需要对订阅做一些设置，因为默认情况下，Azure 的 service end 指向的是国际版 Azure 的站点。如果要将服务发布在 Azure 的中国站点，需要对其进行简单的设置：在 Eclipse 中，打开偏好设置（preference），找到 Azure，在 service endpoint 页面中，选择 ”windowsazure.cn（China)，选择确定：  
-    
+
      ![service end][86]
 
 10. 回到项目，选择 myazuredeploy 并单击右键，选择 Azure，properties,第一项是选择是否配置远程访问，因为云服务底层实际上是 Windows Server，所以本处实际是配置 RDP 访问，可以在 Azure portal 直接配置，本例选择不配置；  
@@ -987,7 +993,7 @@ Azure 云服务是 Azure 的一个 PAAS 平台，同样支持多种不同的语�
 ###<a id="azure-cloud-service-enhanced-content-register-third-party"></a>4.3 注册第三方组件
 
 在做 Web 应用部署的时候，经常会遇到需要额外安装的第三方软件，比如安装 Office 和 FTP Server。而 Azure 云服务无法安装软件： 
- 
+
 ####4.3.1 使用 Startup 注册 COM 组件
 Azure 提供了 role start up 功能，方便我们在云平台注册 COM 组件。
 
@@ -1002,15 +1008,17 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 4. 将 64 位版本的 LegacyCOM.dll 复制"amd64"文件夹下，将 32 位版本的 dll 复制到"x86"文件夹下。
 
 5. 将这两个 dll 包含在 VS 项目里(include in project)，并且将属性中的"Copy to Output Directory"设置成"Copy always"。
-    
+
     ![Copy Always][100]
 
 6. 在 Web Application 工程下新建文件，文件夹设置成 Register.cmd。
 
 7. Register.cmd 的内容如下，主要的功能是在 Azure VM 上注册这个 dll 组件。
 
-        echo off
-        regsvr32.exe /s "%~dp0%PROCESSOR_ARCHITECTURE%\LegacyCOM.dll"
+    ```
+    echo off
+    regsvr32.exe /s "%~dp0%PROCESSOR_ARCHITECTURE%\LegacyCOM.dll"
+    ```
 
     如果发现服务器 OS 是 64 位的，Register.cmd 会注册**amd64 文件夹下的 dll,否则注册 x86 下的 dll。**
 
@@ -1037,29 +1045,33 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 
 10. 在 Default.aspx 添加 TextBox,Button 和 Label，并且在 Button_Click 添加如下代码：
 
-        LegacyCOMLib.Helper helper = new LegacyCOMLib.Helper();
-        Message.Text = helper.Greeting(Username.Text);
+    ```
+    LegacyCOMLib.Helper helper = new LegacyCOMLib.Helper();
+    Message.Text = helper.Greeting(Username.Text);
+    ```
 
 11. 按 F5 运行 VS 工程，在 pre-build 过程中，Azure Project 会先侦察 CSDEF 是否有 Startup 节点，如果有的话则执行 CommandLine 指向的 cmd 文件。我们这里的 cmd 文件的功能是：根据操作系统的版本，自动注册所对应的dll。并且会弹出窗口，表明注册成功。我们按"OK"，让项目继续执行。
 
     ![Copy Always][103]
 
 12. 在 aspx 页面里，用户在 textbox 输入 name 的值，然后按"Greet me!"，dll 会调用自动返回一串字符串并且显示在页面上。
-    
+
     ![Copy Always][104]
 
 通过 Startup 功能，用户还可以通过系统命令修改系统配置，或者通过 PowerShell 执行更加复杂的操作(比如使用 InstallUtil 注册 Windows Service)。另外和通过远程桌面手动修改系统配置不同，Startup 功能会在系统迁移、故障恢复的时候自动执行，因此可以作为持久化的操作。
 
 再回顾一下 Windows Azure Startup Task
 
-    <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
-           <WebRole name="WebRole1">
-              <Startup>
-                 <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple">
-                 </Task>
-              </Startup>
-           </WebRole>
-    </ServiceDefinition>
+```
+<ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+       <WebRole name="WebRole1">
+          <Startup>
+             <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple">
+             </Task>
+          </Startup>
+       </WebRole>
+</ServiceDefinition>
+```
 
 在以上代码中，最核心的就是 Startup.cmd，这个 cmd 可以是 PowerShell scripts。在这个 cmd 文件中你可以执行您自己的逻辑，比如
 
@@ -1094,15 +1106,19 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 
 5. 在 changetimezone.cmd，设置如下逻辑：
 
-        tzutil /s "China Standard Time" 
+    ```
+    tzutil /s "China Standard Time" 
+    ```
 
 6. 修改 ServiceDefinition.csdef，修改 Startup 节点，让 Cloud Service 项目启动的时候，执行changetimezone.cmd 命令。如下图：
 
     ![Copy Always][106]
-    
+
 7. 最后我们在 aspx 页面中，输出当前的系统时间：
 
-        Label1.Text = DateTime.Now.ToString();
+    ```
+    Label1.Text = DateTime.Now.ToString();
+    ```
 
 8. 最后我们部署 Cloud Service，显示如下：
 
@@ -1123,23 +1139,25 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 
 3. 修改 public override bool OnStart()方法（位于 WebRole.cs），调用 Microsoft.Web.Administration 命名空间下面的操作设置 IIS。参考以下示例代码（Cloud Service IIS 站点的名称格式为：RoleEnvironment.CurrentRoleInstance.Id + "_Web"）：
 
-        using (ServerManager serverManager = new ServerManager())
+    ```
+    using (ServerManager serverManager = new ServerManager())
+          {
+              var siteName = RoleEnvironment.CurrentRoleInstance.Id + "_Web";
+              Trace.Write(string.Format("Site Name: {0}.", siteName));
+              var siteApplication = serverManager.Sites[RoleEnvironment.CurrentRoleInstance.Id + "_Web"].Applications.First();
+
+              Trace.Write(string.Format("Application Pool: {0}.", siteApplication.ApplicationPoolName));
+
+              var appPoolName = siteApplication.ApplicationPoolName;
+              var appPool = serverManager.ApplicationPools[appPoolName];
+
+              if (appPool != null)
               {
-                  var siteName = RoleEnvironment.CurrentRoleInstance.Id + "_Web";
-                  Trace.Write(string.Format("Site Name: {0}.", siteName));
-                  var siteApplication = serverManager.Sites[RoleEnvironment.CurrentRoleInstance.Id + "_Web"].Applications.First();
-
-                  Trace.Write(string.Format("Application Pool: {0}.", siteApplication.ApplicationPoolName));
-
-                  var appPoolName = siteApplication.ApplicationPoolName;
-                  var appPool = serverManager.ApplicationPools[appPoolName];
-
-                  if (appPool != null)
-                  {
-                      appPool.ManagedPipelineMode = ManagedPipelineMode.Classic;
-                      serverManager.CommitChanges();
-                  }
+                  appPool.ManagedPipelineMode = ManagedPipelineMode.Classic;
+                  serverManager.CommitChanges();
               }
+          }
+    ```
 
 4. 部署云服务，成功修改云服务 IIS 托管管道模式为 4.0 经典模式。
 
@@ -1197,7 +1215,7 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 ![Copy Always][118]
 
 上图中，点击 Add，增加新的存储账号信息：
-    
+
 在弹出窗口中，输入以下信息:
 
 ![Copy Always][119]
@@ -1219,7 +1237,7 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 点击上图中的 Upload 就可以上传一个文件或者文件夹。
 
 注意：文件夹默认是递归复制的，也就是把文件夹下的多级目录都上传到 Azure Storage 中。
-    
+
 上传完毕后，点击右侧列表中的文件。右键属性。如下图：
 
 ![Copy Always][121]
@@ -1252,11 +1270,15 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
     以管理员身份运行 CMD，使用 Makecert 命令，安装 Azure 证书。具体的命令如下：
 
-        makecert -sky exchange -r -n "CN=<CertificateName>" -pe -a sha1 -len 2048 -ss My "<CertificateName>.cer"
+    ```
+    makecert -sky exchange -r -n "CN=<CertificateName>" -pe -a sha1 -len 2048 -ss My "<CertificateName>.cer"
+    ```
 
     比如创建一个证书名叫 SSLCertificate:
 
-        makecert -sky exchange -r -n "CN=SSLCertificate" -pe -a sha1 -len 2048 -ss My "SSLCertificate.cer"
+    ```
+    makecert -sky exchange -r -n "CN=SSLCertificate" -pe -a sha1 -len 2048 -ss My "SSLCertificate.cer"
+    ```
 
 2. 导出私钥；
 
@@ -1314,23 +1336,31 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
 1. 以管理员身份，运行 Azure PowerShell，下载 publishsettings 文件；
 
-        Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
+    Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    ```
 
-    如果不想运行 Azure PoweShell 的话，请在浏览器中输入地址：[http://go.microsoft.com/fwlink/?LinkID=301776](http://go.microsoft.com/fwlink/?LinkID=301776 "http://go.microsoft.com/fwlink/?LinkID=301776")，在登陆框中，输入你的OrgID和密码。
+    如果不想运行 Azure PoweShell 的话，请在浏览器中输入地址：[http://go.microsoft.com/fwlink/?LinkID=301776 "http://go.microsoft.com/fwlink/?LinkID=301776"](http://go.microsoft.com/fwlink/?LinkID=301776 "http://go.microsoft.com/fwlink/?LinkID=301776")，在登陆框中，输入你的OrgID和密码。
 
 2. 将 publishsettings 下载到本地磁盘，然后执行上传 publishsettings 命令；
 
-        Import-AzurePublishSettingsFile <PathToFile>
+    ```
+    Import-AzurePublishSettingsFile <PathToFile>
+    ```
 
     上面步骤 1、2 执行成功后，下次运行 Azure PowerShell 不必再次运行上面的运行，接下来可以运行命令。
 
 3. 创建新的存储账号(步骤略)，选择当前的订阅，并设置存储账号；
 
-        Set-AzureSubscription -SubscriptionName '[SubscriptionName]' -CurrentStorageAccount '[StorageName]'
+    ```
+    Set-AzureSubscription -SubscriptionName '[SubscriptionName]' -CurrentStorageAccount '[StorageName]'
+    ```
 
 4. 在上海数据中心(China East)，获得固定的 Public IPV4 地址；
 
-        $NginxReservedIP = New-AzureReservedIP -ReservedIPName 'NginxPublicIP' -Label 'NginxPublicIP' -Location 'China East'
+    ```
+    $NginxReservedIP = New-AzureReservedIP -ReservedIPName 'NginxPublicIP' -Label 'NginxPublicIP' -Location 'China East'
+    ```
     查看这个 IP 地址
 
         Get-AzureReservedIP -ReservedIPName 'NginxPublicIP'
@@ -1344,10 +1374,12 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
 6. 通过模糊查询，查询到 CentOS 7.0 镜像；
 
-        $imageList = Get-AzureVMImage `
-        | where {$_.ImageName -like "*CentOS-70*"}
+    ```
+    $imageList = Get-AzureVMImage `
+    | where {$_.ImageName -like "*CentOS-70*"}
 
-        $image=$imageList[0]
+    $image=$imageList[0]
+    ```
 7. 创建 3 台虚拟机：
     * DNS 为 MyNginx，并且绑定 Public IP (NginxPublicIP)；
     * 机器名分别为 Nginx01，Nginx02 和 Nginx03；
@@ -1359,20 +1391,24 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
     创建第 1 台虚拟机(Nginx01，内网 IP 是 10.0.0.4)的命令如下：
 
-            New-AzureVMConfig -Name 'Nginx01' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
+    ```
+        New-AzureVMConfig -Name 'Nginx01' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
+    ```
     创建第 2 台虚拟机(Nginx02，内网 IP 是 10.0.0.5)的命令如下：
 
             New-AzureVMConfig -Name 'Nginx02' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.5' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
     创建第 3 台虚拟机(Nginx03，内网 IP 是 10.0.0.6)的命令如下：
 
             New-AzureVMConfig -Name 'Nginx03' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.6' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
- 
+
 8. 以上介绍的是创建 Linux 虚拟机，接下来介绍一下如何使用 PowerShell，创建 Windows 虚拟机。从上面的步骤 6开始，通过模糊查询，查询到 Windows Server 2012虚拟机；
 
-        $imageList = Get-AzureVMImage `
-        | where {$_.ImageName -like "*Windows-Server-2012-Datacenter*"}
+    ```
+    $imageList = Get-AzureVMImage `
+    | where {$_.ImageName -like "*Windows-Server-2012-Datacenter*"}
 
-        $image=$imageList[0]
+    $image=$imageList[0]
+    ```
 或者通过精确查询，查询到 Windows Server 2008 R2 SP 中文版 OS；
 
         $imageList = Get-AzureVMImage `
@@ -1392,7 +1428,9 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
     创建 LeiVM01 的 PowerShell 如下：
 
-            New-AzureVMConfig -Name 'LeiVM01' -InstanceSize Large -ImageName $image.ImageName -AvailabilitySetName 'LeiAvbSet' ` | Add-AzureProvisioningConfig -Windows -AdminUsername 'adminuser' -Password 'MyVM@6789' | Set-AzureSubnet -SubnetNames 'Subnet-1' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'LeiVM' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
+    ```
+        New-AzureVMConfig -Name 'LeiVM01' -InstanceSize Large -ImageName $image.ImageName -AvailabilitySetName 'LeiAvbSet' ` | Add-AzureProvisioningConfig -Windows -AdminUsername 'adminuser' -Password 'MyVM@6789' | Set-AzureSubnet -SubnetNames 'Subnet-1' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'LeiVM' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
+    ```
     创建 LeiVM02 的 PowerShell 如下：
 
             New-AzureVMConfig -Name 'LeiVM02' -InstanceSize Large -ImageName $image.ImageName -AvailabilitySetName 'LeiAvbSet' ` | Add-AzureProvisioningConfig -Windows -AdminUsername 'adminuser' -Password 'MyVM@6789' | Set-AzureSubnet -SubnetNames 'Subnet-1' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'LeiVM' -VNetName 'MyVNet'
@@ -1451,45 +1489,51 @@ Web Role 已经加入了 Web-Subnet 子网。
 1. 先创建一个 Cloud Project 并且添加一个 Web Role；
 2. 在 Default.aspx 里添加一个如下内容：
 
-        <asp:TextBox ID="txbInput" runat="server"></asp:TextBox>
-       
-        <asp:Button ID="btnOK" runat="server" Text="确认" onclick="btnOK_Click" />
+    ```
+    <asp:TextBox ID="txbInput" runat="server"></asp:TextBox>
+
+    <asp:Button ID="btnOK" runat="server" Text="确认" onclick="btnOK_Click" />
+    ```
 
 3. 在 Default.aspx.cs 添加如下代码：
 
-        public override bool OnStart()
-        {
-            // 获取用于Windows Azure诊断的默认初始配置
+    ```
+    public override bool OnStart()
+    {
+        // 获取用于Windows Azure诊断的默认初始配置
 
-            DiagnosticMonitorConfiguration diagConfig = DiagnosticMonitor.GetDefaultInitialConfiguration();
-            diagConfig.Logs.ScheduledTransferLogLevelFilter = LogLevel.Verbose;
+        DiagnosticMonitorConfiguration diagConfig = DiagnosticMonitor.GetDefaultInitialConfiguration();
+        diagConfig.Logs.ScheduledTransferLogLevelFilter = LogLevel.Verbose;
 
-            // 制定预定传输间隔
-            diagConfig.Logs.ScheduledTransferPeriod = System.TimeSpan.FromMinutes(1);
+        // 制定预定传输间隔
+        diagConfig.Logs.ScheduledTransferPeriod = System.TimeSpan.FromMinutes(1);
 
-            // 制定预定传输间隔
-            DiagnosticMonitor.Start("Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString", diagConfig);
+        // 制定预定传输间隔
+        DiagnosticMonitor.Start("Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString", diagConfig);
 
-            // For information on handling configuration changes
-            // see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
+        // For information on handling configuration changes
+        // see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
 
-            return base.OnStart();
+        return base.OnStart();
 
-        }
+    }
+    ```
 4. 在 WebRole.cs 中添加如下代码：
 
-        System.Diagnostics.Trace.WriteLine(System.DateTime.Now.ToLongTimeString() + "Page_Load is called");
-        }
+    ```
+    System.Diagnostics.Trace.WriteLine(System.DateTime.Now.ToLongTimeString() + "Page_Load is called");
+    }
 
-        protected void btnOK_Click(object sender, EventArgs e)
+    protected void btnOK_Click(object sender, EventArgs e)
+    {
+        string inputValue = txbInput.Text.Trim();
+
+        if (!string.IsNullOrEmpty(inputValue))
         {
-            string inputValue = txbInput.Text.Trim();
-
-            if (!string.IsNullOrEmpty(inputValue))
-            {
-                System.Diagnostics.Trace.WriteLine(System.DateTime.Now.ToLongTimeString() + "Your Input is " + inputValue);
-            }
+            System.Diagnostics.Trace.WriteLine(System.DateTime.Now.ToLongTimeString() + "Your Input is " + inputValue);
         }
+    }
+    ```
 5. 分析代码：
 
     我们需要关心的代码主要有：
@@ -1709,4 +1753,3 @@ Web Role 已经加入了 Web-Subnet 子网。
 [141]: ./media/azure-cloud-services-user-manual-part-2/141.png
 [142]: ./media/azure-cloud-services-user-manual-part-2/142.png
 [143]: ./media/azure-cloud-services-user-manual-part-2/143.png
-

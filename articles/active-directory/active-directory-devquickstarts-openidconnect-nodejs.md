@@ -47,7 +47,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 - 单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
 - 根据提示创建一个新的 **Web 应用程序和/或 WebAPI**。
     - 应用程序的**名称**向最终用户描述你的应用程序
-    -	“登录 URL”是应用程序的基本 URL。框架的默认值为 http://localhost:3000/auth/openid/return``。
+    - “登录 URL”是应用程序的基本 URL。框架的默认值为 http://localhost:3000/auth/openid/return``。
     - “应用程序 ID URI”是应用程序的唯一标识符。约定是使用 `https://<tenant-domain>/<app-name>`，例如 `https://contoso.partner.onmschina.cn/my-first-aad-app`
 - 完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在后面的部分中将会用到此值，因此，请从“配置”选项卡复制此值。
 
@@ -73,63 +73,67 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 ## 3\.将应用设置为使用 passport-node-js 策略
 在这里，我们要将 Express 中间件配置为使用 OpenID Connect 身份验证协议。Passport 将用于发出登录和注销请求、管理用户的会话、获取有关用户的信息，等等。
 
--	首先，打开位于项目根目录中的 `config.js` 文件，并在 `exports.creds` 节中输入应用的配置值。
-    -	`clientID:` 是在注册门户中为应用分配的**应用程序 ID**。
-    -	`returnURL` 是在门户中输入的**重定向 URI**。
+- 首先，打开位于项目根目录中的 `config.js` 文件，并在 `exports.creds` 节中输入应用的配置值。
+    - `clientID:` 是在注册门户中为应用分配的**应用程序 ID**。
+    - `returnURL` 是在门户中输入的**重定向 URI**。
     - `clientSecret` 是在门户中生成的密码。
 
 - 接下来，打开项目根目录中的 `app.js` 文件，并添加以下调用以调用 `passport-azure-ad` 随附的 `OIDCStrategy` 策略
 
 JavaScript
 
-    var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
+```
+var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 
-    // add a logger
+// add a logger
 
-    var log = bunyan.createLogger({
-        name: 'Microsoft OIDC Example Web Application'
-    });
+var log = bunyan.createLogger({
+    name: 'Microsoft OIDC Example Web Application'
+});
+```
 
 - 然后，使用我们刚刚提到的策略来处理登录请求
 
 JavaScript
 
-    // Use the OIDCStrategy within Passport. (Section 2) 
-    // 
-    //   Strategies in passport require a `validate` function, which accept
-    //   credentials (in this case, an OpenID identifier), and invoke a callback
-    //   with a user object.
-    passport.use(new OIDCStrategy({
-        callbackURL: config.creds.returnURL,
-        realm: config.creds.realm,
-        clientID: config.creds.clientID,
-        clientSecret: config.creds.clientSecret,
-        oidcIssuer: config.creds.issuer,
-        identityMetadata: config.creds.identityMetadata,
-        skipUserProfile: config.creds.skipUserProfile,
-        responseType: config.creds.responseType,
-        responseMode: config.creds.responseMode
-      },
-      function(iss, sub, profile, accessToken, refreshToken, done) {
-        if (!profile.email) {
-          return done(new Error("No email found"), null);
+```
+// Use the OIDCStrategy within Passport. (Section 2) 
+// 
+//   Strategies in passport require a `validate` function, which accept
+//   credentials (in this case, an OpenID identifier), and invoke a callback
+//   with a user object.
+passport.use(new OIDCStrategy({
+    callbackURL: config.creds.returnURL,
+    realm: config.creds.realm,
+    clientID: config.creds.clientID,
+    clientSecret: config.creds.clientSecret,
+    oidcIssuer: config.creds.issuer,
+    identityMetadata: config.creds.identityMetadata,
+    skipUserProfile: config.creds.skipUserProfile,
+    responseType: config.creds.responseType,
+    responseMode: config.creds.responseMode
+  },
+  function(iss, sub, profile, accessToken, refreshToken, done) {
+    if (!profile.email) {
+      return done(new Error("No email found"), null);
+    }
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+      findByEmail(profile.email, function(err, user) {
+        if (err) {
+          return done(err);
         }
-        // asynchronous verification, for effect...
-        process.nextTick(function () {
-          findByEmail(profile.email, function(err, user) {
-            if (err) {
-              return done(err);
-            }
-            if (!user) {
-              // "Auto-registration"
-              users.push(profile);
-              return done(null, profile);
-            }
-            return done(null, user);
-          });
-        });
-      }
-    ));
+        if (!user) {
+          // "Auto-registration"
+          users.push(profile);
+          return done(null, profile);
+        }
+        return done(null, user);
+      });
+    });
+  }
+));
+```
 
 Passport 使用适用于它的所有策略（Twitter、Facebook 等），所有策略写入器都依循类似的模式。查看该策略，你会发现，我们已将它作为 function() 来传递，其中包含一个令牌和一个用作参数的 done。策略完成所有工作之后，便尽责地返回。完成后，我们需要存储用户并隐藏令牌，因此不需要再次请求它。
 
@@ -140,103 +144,109 @@ Passport 使用适用于它的所有策略（Twitter、Facebook 等），所有�
 
 JavaScript
 
-    // Passport session setup. (Section 2)
+```
+// Passport session setup. (Section 2)
 
-    //   To support persistent login sessions, Passport needs to be able to
-    //   serialize users into and deserialize users out of the session.  Typically,
-    //   this will be as simple as storing the user ID when serializing, and finding
-    //   the user by ID when deserializing.
-    passport.serializeUser(function(user, done) {
-      done(null, user.email);
-    });
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.
+passport.serializeUser(function(user, done) {
+  done(null, user.email);
+});
 
-    passport.deserializeUser(function(id, done) {
-      findByEmail(id, function (err, user) {
-        done(err, user);
-      });
-    });
+passport.deserializeUser(function(id, done) {
+  findByEmail(id, function (err, user) {
+    done(err, user);
+  });
+});
 
-    // array to hold logged in users
-    var users = [];
+// array to hold logged in users
+var users = [];
 
-    var findByEmail = function(email, fn) {
-      for (var i = 0, len = users.length; i < len; i++) {
-        var user = users[i];
-       log.info('we are using user: ', user);
-        if (user.email === email) {
-          return fn(null, user);
-        }
-      }
-      return fn(null, null);
-    };
+var findByEmail = function(email, fn) {
+  for (var i = 0, len = users.length; i < len; i++) {
+    var user = users[i];
+   log.info('we are using user: ', user);
+    if (user.email === email) {
+      return fn(null, user);
+    }
+  }
+  return fn(null, null);
+};
+```
 
 - 接下来，让我们添加可加载 Express 引擎的代码。在此处，你将看到我们使用了 Express 提供的默认 /views 和 /routes 模式。
 
 JavaScript
 
-    // configure Express (Section 2)
+```
+// configure Express (Section 2)
 
-    var app = express();
+var app = express();
 
-    app.configure(function() {
-      app.set('views', __dirname + '/views');
-      app.set('view engine', 'ejs');
-      app.use(express.logger());
-      app.use(express.methodOverride());
-      app.use(cookieParser());
-      app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
-      app.use(bodyParser.urlencoded({ extended : true }));
-      // Initialize Passport!  Also use passport.session() middleware, to support
-      // persistent login sessions (recommended).
-      app.use(passport.initialize());
-      app.use(passport.session());
-      app.use(app.router);
-      app.use(express.static(__dirname + '/../../public'));
-    });
+app.configure(function() {
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'ejs');
+  app.use(express.logger());
+  app.use(express.methodOverride());
+  app.use(cookieParser());
+  app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
+  app.use(bodyParser.urlencoded({ extended : true }));
+  // Initialize Passport!  Also use passport.session() middleware, to support
+  // persistent login sessions (recommended).
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+  app.use(express.static(__dirname + '/../../public'));
+});
+```
 
 - 最后，让我们添加路由，以便将实际的登录请求递交到 `passport-azure-ad` 引擎：
 
 JavaScript
 
-    // Our Auth routes (Section 3)
+```
+// Our Auth routes (Section 3)
 
-    // GET /auth/openid
-    //   Use passport.authenticate() as route middleware to authenticate the
-    //   request.  The first step in OpenID authentication will involve redirecting
-    //   the user to their OpenID provider.  After authenticating, the OpenID
-    //   provider will redirect the user back to this application at
-    //   /auth/openid/return
-    app.get('/auth/openid',
-      passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
-      function(req, res) {
-        log.info('Authentication was called in the Sample');
-        res.redirect('/');
-      });
+// GET /auth/openid
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  The first step in OpenID authentication will involve redirecting
+//   the user to their OpenID provider.  After authenticating, the OpenID
+//   provider will redirect the user back to this application at
+//   /auth/openid/return
+app.get('/auth/openid',
+  passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
+  function(req, res) {
+    log.info('Authentication was called in the Sample');
+    res.redirect('/');
+  });
 
-    // GET /auth/openid/return
-    //   Use passport.authenticate() as route middleware to authenticate the
-    //   request.  If authentication fails, the user will be redirected back to the
-    //   login page.  Otherwise, the primary route function function will be called,
-    //   which, in this example, will redirect the user to the home page.
-    app.get('/auth/openid/return',
-      passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
-      function(req, res) {
-        log.info('We received a return from AzureAD.');
-        res.redirect('/');
-      });
+// GET /auth/openid/return
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+app.get('/auth/openid/return',
+  passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
+  function(req, res) {
+    log.info('We received a return from AzureAD.');
+    res.redirect('/');
+  });
 
-    // POST /auth/openid/return
-    //   Use passport.authenticate() as route middleware to authenticate the
-    //   request.  If authentication fails, the user will be redirected back to the
-    //   login page.  Otherwise, the primary route function function will be called,
-    //   which, in this example, will redirect the user to the home page.
-    app.post('/auth/openid/return',
-      passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
-      function(req, res) {
-        log.info('We received a return from AzureAD.');
-        res.redirect('/');
-      });
-  
+// POST /auth/openid/return
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+app.post('/auth/openid/return',
+  passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
+  function(req, res) {
+    log.info('We received a return from AzureAD.');
+    res.redirect('/');
+  });
+```
+
 ## 4\.使用 Passport 向 Azure AD 发出登录和注销请求
 
 现在，应用已正确配置为使用 OpenID Connect 身份验证协议与 v2.0 终结点通信。`passport-azure-ad` 会代你处理有关创建身份验证消息、验证 Azure AD 提供的令牌以及保留用户会话的繁琐细节。你要做的一切就是提供某种方式让用户登录和注销，以及收集有关已登录用户的其他信息。
@@ -245,30 +255,32 @@ JavaScript
 
 JavaScript
 
-    //Routes (Section 4)
+```
+//Routes (Section 4)
 
-    app.get('/', function(req, res){
-      res.render('index', { user: req.user });
-    });
+app.get('/', function(req, res){
+  res.render('index', { user: req.user });
+});
 
-    app.get('/account', ensureAuthenticated, function(req, res){
-      res.render('account', { user: req.user });
-    });
+app.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user });
+});
 
-    app.get('/login',
-      passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
-      function(req, res) {
-        log.info('Login was called in the Sample');
-        res.redirect('/');
-    });
+app.get('/login',
+  passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
+  function(req, res) {
+    log.info('Login was called in the Sample');
+    res.redirect('/');
+});
 
-    app.get('/logout', function(req, res){
-      req.logout();
-      res.redirect('/');
-    });
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+```
 
--	我们详细探讨一下：
-    -	`/` 路由将重定向到 index.ejs 视图，并在请求中传递用户（如果存在）
+- 我们详细探讨一下：
+    - `/` 路由将重定向到 index.ejs 视图，并在请求中传递用户（如果存在）
     - `/account` 路由首先***确保我们已经过身份验证***（下面我们将会实现），然后在请求中传递用户，以便我们可以获取有关该用户的其他信息。
     - `/login` 路由将从 `passport-azuread` 调用 azuread-openidconnect 验证器，如果该操作不成功，则将用户重定向回到 /login
     - `/logout` 只是调用 logout.ejs（和路由），以便清除 Cookie 并将用户返回到 index.ejs
@@ -277,22 +289,26 @@ JavaScript
 
 JavaScript
 
-    // Simple route middleware to ensure user is authenticated. (Section 4)
+```
+// Simple route middleware to ensure user is authenticated. (Section 4)
 
-    //   Use this route middleware on any resource that needs to be protected.  If
-    //   the request is authenticated (typically via a persistent login session),
-    //   the request will proceed.  Otherwise, the user will be redirected to the
-    //   login page.
-    function ensureAuthenticated(req, res, next) {
-      if (req.isAuthenticated()) { return next(); }
-      res.redirect('/login')
-    }
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}
+```
 
 - 最后，在 `app.js` 中实际创建服务器本身：
 
 JavaScript
 
-    app.listen(3000);
+```
+app.listen(3000);
+```
 
 ## 5\.在 Express 中创建视图与路由，以在网站中显示用户
 
@@ -302,25 +318,29 @@ JavaScript
 
 JavaScript
 
-    /*
-     * GET home page.
-     */
+```
+/*
+ * GET home page.
+ */
 
-    exports.index = function(req, res){
-      res.render('index', { title: 'Express' });
-    };
+exports.index = function(req, res){
+  res.render('index', { title: 'Express' });
+};
+```
 
 - 在根目录下创建 `/routes/user.js` 路由
 
 JavaScript
 
-    /*
-     * GET users listing.
-     */
+```
+/*
+ * GET users listing.
+ */
 
-    exports.list = function(req, res){
-      res.send("respond with a resource");
-    };
+exports.list = function(req, res){
+  res.send("respond with a resource");
+};
+```
 
 这些简单路由只将请求传递到我们的视图，包括用户（如果存在）。
 
@@ -328,59 +348,65 @@ JavaScript
 
 JavaScript
 
-    <% if (!user) { %>
-        <h2>Welcome! Please log in.</h2>
-        <a href="/login">Log In</a>
-    <% } else { %>
-        <h2>Hello, <%= user.displayName %>.</h2>
-        <a href="/account">Account Info</a></br>
-        <a href="/logout">Log Out</a>
-    <% } %>
+```
+<% if (!user) { %>
+    <h2>Welcome! Please log in.</h2>
+    <a href="/login">Log In</a>
+<% } else { %>
+    <h2>Hello, <%= user.displayName %>.</h2>
+    <a href="/account">Account Info</a></br>
+    <a href="/logout">Log Out</a>
+<% } %>
+```
 
 - 在根目录下创建 `/views/account.ejs` 视图，以便能够查看 `passport-azuread` 放置在用户请求中的其他信息。
 
 Javascript
 
-    <% if (!user) { %>
-        <h2>Welcome! Please log in.</h2>
-        <a href="/login">Log In</a>
-    <% } else { %>
-    <p>displayName: <%= user.displayName %></p>
-    <p>givenName: <%= user.name.givenName %></p>
-    <p>familyName: <%= user.name.familyName %></p>
-    <p>UPN: <%= user._json.upn %></p>
-    <p>Profile ID: <%= user.id %></p>
-    <p>Full Claimes</p>
-    <%- JSON.stringify(user) %>
-    <p></p>
-    <a href="/logout">Log Out</a>
-    <% } %>
-        
+```
+<% if (!user) { %>
+    <h2>Welcome! Please log in.</h2>
+    <a href="/login">Log In</a>
+<% } else { %>
+<p>displayName: <%= user.displayName %></p>
+<p>givenName: <%= user.name.givenName %></p>
+<p>familyName: <%= user.name.familyName %></p>
+<p>UPN: <%= user._json.upn %></p>
+<p>Profile ID: <%= user.id %></p>
+<p>Full Claimes</p>
+<%- JSON.stringify(user) %>
+<p></p>
+<a href="/logout">Log Out</a>
+<% } %>
+```
+
 - 最后，可以通过添加布局，使视图变得美观。在根目录下创建 '/views/layout.ejs' 视图
 
 HTML
 
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Passport-OpenID Example</title>
-        </head>
-        <body>
-            <% if (!user) { %>
-                <p>
-                <a href="/">Home</a> | 
-                <a href="/login">Log In</a>
-                </p>
-            <% } else { %>
-                <p>
-                <a href="/">Home</a> | 
-                <a href="/account">Account</a> | 
-                <a href="/logout">Log Out</a>
-                </p>
-            <% } %>
-            <%- body %>
-        </body>
-    </html>
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Passport-OpenID Example</title>
+    </head>
+    <body>
+        <% if (!user) { %>
+            <p>
+            <a href="/">Home</a> | 
+            <a href="/login">Log In</a>
+            </p>
+        <% } else { %>
+            <p>
+            <a href="/">Home</a> | 
+            <a href="/account">Account</a> | 
+            <a href="/logout">Log Out</a>
+            </p>
+        <% } %>
+        <%- body %>
+    </body>
+</html>
+```
 
 最后，生成并运行应用程序！
 
@@ -390,7 +416,9 @@ HTML
 
 [此处以 .zip 格式提供了](https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS/archive/complete.zip)完整示例（不包括配置值），你也可以从 GitHub 克隆该示例：
 
-    git clone --branch complete https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS.git
+```
+git clone --branch complete https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS.git
+```
 
 现在，可以转到更高级的主题。你可能想要尝试：
 

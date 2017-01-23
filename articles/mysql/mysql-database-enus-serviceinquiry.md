@@ -28,15 +28,15 @@ wacn.lang: en
 - [Compatibility issues](./mysql-database-enus-compatibilityinquiry.md)
 
 ### **Is the amount of storage space for data backups limited?**
-  
+
 Data backups do not count towards your storage limit.
 
 ### **Is there a limit to the number of databases on a single server?**
 
 Users can create multiple databases on a single MySQL server, and there is no limit to the number of databases that can be created. However, multiple databases share server resources, and performance requirements rise as the number of databases grows. We recommend that you create multiple MySQL servers.
-    
+
 ### **What are the current limitations of MySQL Database on Azure?**
-    
+
 For details, see [service limitations of MySQL Database on Azure](./mysql-database-operation-limitation.md).
 
 ### **Why doesn’t MySQL Database on Azure support databases in MyISAM format?**
@@ -50,9 +50,9 @@ The reasons include the following:
 - The development of MySQL is also moving towards InnoDB. For example, MySQL 5.7 doesn’t use MyISAM at all, and the system database has also been transitioned to InnoDB.
 
 ### **Why is the default size for new, empty database servers set to 530 MB? Why is the displayed amount of storage space used for the database larger than the amount of storage space actually used?**
-    
+
 For performance reasons, we use two 256 MB log files for new database instance configurations. Consequently, the storage space usage figure that you see in the Azure portal includes the size of the log files. However, the size of the log files will not change during usage.
-    
+
 ### **Does MYSQL Database on Azure support setting privileges via the command line?**
 
 Yes. While our [Management Portal](https://manage.windowsazure.cn/) and the PowerShell command line only support setting read/write privileges for the entire database when creating users or databases, you can use the **grant** command to fine-tune user privilege settings.

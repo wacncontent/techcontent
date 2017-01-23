@@ -31,7 +31,8 @@ ms.author: subramar
 ## 步骤 1：构建和部署视觉对象示例
 单击右键应用程序项目 **VisualObjectsApplication**，然后选择“发布”命令生成并发布应用程序。有关详细信息，请参阅 [Service Fabric 应用程序升级教程](./service-fabric-application-upgrade-tutorial.md)。或者，也可以使用 PowerShell 来部署应用程序。
 
-> [!NOTE] 要在 PowerShell 中使用任何 Service Fabric 命令，必须先使用 `Connect-ServiceFabricCluster` cmdlet 连接到群集。同样，假设已在本地计算机上设置了群集。请参阅[设置 Service Fabric 部署环境](./service-fabric-get-started.md)上的文章。
+> [!NOTE]
+> 要在 PowerShell 中使用任何 Service Fabric 命令，必须先使用 `Connect-ServiceFabricCluster` cmdlet 连接到群集。同样，假设已在本地计算机上设置了群集。请参阅[设置 Service Fabric 部署环境](./service-fabric-get-started.md)上的文章。
 
 在 Visual Studio 中构建项目后，可以使用 PowerShell 命令 **Copy-ServiceFabricApplicationPackage** 将应用程序包复制到 ImageStore。下一个步骤是使用 **Register-ServiceFabricApplicationPackage** cmdlet 将应用程序注册到 Service Fabric 运行时。最后一个步骤是使用 **New-ServiceFabricApplication** cmdlet 启动应用程序的实例。这三个步骤类似于使用 Visual Studio 中的“部署”菜单项。
 
@@ -46,15 +47,19 @@ ms.author: subramar
 
 完成更改后，清单应该如下所示（突出显示的部分即为所做的更改）：
 
-    <ServiceManifestName="VisualObjects.ActorService" Version="2.0" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    
-    <CodePackageName="Code" Version="2.0">
+```
+<ServiceManifestName="VisualObjects.ActorService" Version="2.0" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<CodePackageName="Code" Version="2.0">
+```
 
 现在，*ApplicationManifest.xml* 文件（位于 **VisualObjects** 解决方案下的 **VisualObjects** 项目下）已更新为 **VisualObjects.ActorService** 项目的 2.0 版。此外，应用程序版本已从 1.0.0.0 更新为 2.0.0.0。*ApplicationManifest.xml* 应类似于以下代码片段：
 
-    <ApplicationManifestxmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="VisualObjects" ApplicationTypeVersion="2.0.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-    
-     <ServiceManifestRefServiceManifestName="VisualObjects.ActorService" ServiceManifestVersion="2.0" />
+```
+<ApplicationManifestxmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="VisualObjects" ApplicationTypeVersion="2.0.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+
+ <ServiceManifestRefServiceManifestName="VisualObjects.ActorService" ServiceManifestVersion="2.0" />
+```
 
 现在请生成项目，方法是选择 **ActorService** 项目，然后单击右键并选择 Visual Studio 中的“生成”选项。如果选择“全部重新生成”，应该更新所有项目的版本，因为代码已更改。接下来，将更新的应用程序打包，方法是右键单击“VisualObjectsApplication”，选择 Service Fabric 菜单，然后选择“打包”。此操作将创建可部署的应用程序包。更新的应用程序已准备就绪，可供部署。
 
@@ -80,19 +85,25 @@ UpgradeTimeout = 3000
 
 现在，让我们将更新的应用程序包复制到 Service Fabric ImageStore（Service Fabric 存储应用程序包的位置）。参数 *ApplicationPackagePathInImageStore* 告知 Service Fabric 可在何处找到应用程序包。我们已使用以下命令将更新的应用程序放入“VisualObjects\_V2”（可能需要再次相应地修改路径）。
 
-    Copy-ServiceFabricApplicationPackage  -ApplicationPackagePath .\Samples\Services\Stateful\VisualObjects\VisualObjects\obj\x64\Debug\Package
-    -ImageStoreConnectionString fabric:ImageStore   -ApplicationPackagePathInImageStore "VisualObjects\_V2"
+```
+Copy-ServiceFabricApplicationPackage  -ApplicationPackagePath .\Samples\Services\Stateful\VisualObjects\VisualObjects\obj\x64\Debug\Package
+-ImageStoreConnectionString fabric:ImageStore   -ApplicationPackagePathInImageStore "VisualObjects\_V2"
+```
 
 下一步是向 Service Fabric 注册此应用程序，可使用以下命令执行此操作：
 
-    Register-ServiceFabricApplicationType -ApplicationPathInImageStore "VisualObjects\_V2"
+```
+Register-ServiceFabricApplicationType -ApplicationPathInImageStore "VisualObjects\_V2"
+```
 
 如果上面的命令未成功，可能需要重新生成所有服务。如步骤 2 中所述，你可能还需要更新 WebService 版本。
 
 ## 步骤 5：启动应用程序升级
 现在，我们将使用以下命令启动应用程序升级：
 
-    Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/VisualObjects -ApplicationTypeVersion 2.0.0.0 -HealthCheckStableDurationSec 60 -UpgradeDomainTimeoutSec 1200 -UpgradeTimeout 3000   -FailureAction Rollback -Monitored
+```
+Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/VisualObjects -ApplicationTypeVersion 2.0.0.0 -HealthCheckStableDurationSec 60 -UpgradeDomainTimeoutSec 1200 -UpgradeTimeout 3000   -FailureAction Rollback -Monitored
+```
 
 应用程序名称与 *ApplicationManifest.xml* 文件中所述的相同。Service Fabric 使用此名称来确定升级的应用程序。如果设置的超时太短，则可能遇到一条说明该问题的失败消息。请参阅故障排除部分，或增加超时值。
 

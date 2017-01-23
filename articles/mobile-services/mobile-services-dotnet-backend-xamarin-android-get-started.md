@@ -23,7 +23,8 @@ ms.author: donnam
 
 本教程说明如何使用 Azure 移动服务向 Xamarin Android 应用程序添加基于云的后端服务。在本教程中，你将要创建一个新的移动服务，以及一个在新移动服务中存储应用程序数据的简单_待办事项列表_应用程序。要创建的移动服务将使用支持的 .NET 语言，你可以使用 Visual Studio 来提供服务器端业务逻辑和管理移动服务。若要创建允许以 JavaScript 编写服务器端业务逻辑的移动服务，请参阅本主题的 [JavaScript 后端版本]。
 
->[!NOTE]本主题演示如何使用 Azure 经典管理门户创建新的移动服务项目。通过使用 Visual Studio 2013 Update 2，还可以向现有的 Visual Studio 解决方案添加新的移动服务项目。有关详细信息，请参阅[快速入门：添加移动服务（.NET 后端）](http://msdn.microsoft.com/zh-cn/library/windows/apps/dn629482.aspx)
+>[!NOTE]
+>本主题演示如何使用 Azure 经典管理门户创建新的移动服务项目。通过使用 Visual Studio 2013 Update 2，还可以向现有的 Visual Studio 解决方案添加新的移动服务项目。有关详细信息，请参阅[快速入门：添加移动服务（.NET 后端）](http://msdn.microsoft.com/zh-cn/library/windows/apps/dn629482.aspx)
 
 以下是完成的应用程序的屏幕快照：
 
@@ -31,7 +32,8 @@ ms.author: donnam
 
 只有在完成本教程后，才可以学习有关 Xamarin Android 应用程序的所有其他移动服务教程。
 
->[!NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial">Azure 试用</a>。<br />本教程需要安装 <a href="https://go.microsoft.com/fwLink/p/?LinkID=257546" target="_blank">Visual Studio Professional 2013</a>。可以使用免费试用版。
+>[!NOTE]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial">Azure 试用</a>。<br />本教程需要安装 <a href="https://go.microsoft.com/fwLink/p/?LinkID=257546" target="_blank">Visual Studio Professional 2013</a>。可以使用免费试用版。
 >本教程需要安装 [Visual Studio Professional 2013](https://go.microsoft.com/fwLink/p/?LinkID=257546)。可以使用免费试用版。
 
 ## 创建新的移动服务
@@ -77,7 +79,8 @@ ms.author: donnam
 
 2. 按“运行”按钮生成项目并启动应用程序。系统将要求你选择模拟器或已连接的 USB 设备。
 
-    > [!NOTE]若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
+    > [!NOTE]
+    >若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
 
 3. 在应用中键入有意义的文本（例如 _完成本教程_），然后单击加号 (**+**) 图标。
 
@@ -87,7 +90,7 @@ ms.author: donnam
 
     > [!NOTE] 
        你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 ToDoActivity.cs C# 文件中。
-    
+
 ## 后续步骤
 完成快速入门后，请了解如何在移动服务中执行其他重要任务：
 

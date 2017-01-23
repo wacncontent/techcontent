@@ -53,39 +53,46 @@ ms.author: donnam
 
 1. 在客户端项目中，打开文件 **QSTodoService.cs** 并将以下声明添加到 QSTodoService：
 
-        // Mobile Service logged in user
-        private MobileServiceUser user; 
-        public MobileServiceUser User { get { return user; } }
+    ```
+    // Mobile Service logged in user
+    private MobileServiceUser user; 
+    public MobileServiceUser User { get { return user; } }
+    ```
 
 2. 使用以下定义向 **QSTodoService** 添加新方法 **Authenticate**：
 
-        private async Task Authenticate(UIViewController view)
+    ```
+    private async Task Authenticate(UIViewController view)
+    {
+        try
         {
-            try
-            {
-                user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.Facebook);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
-            }
+            user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.Facebook);
         }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
+        }
+    }
+    ```
 
-    > [!NOTE] 如果使用的标识提供者不是 Facebook，请将传递给上述 **LoginAsync** 的值更改为下列其中一项：_MicrosoftAccount_ 或 _WindowsAzureActiveDirectory_。
+    > [!NOTE]
+    > 如果使用的标识提供者不是 Facebook，请将传递给上述 **LoginAsync** 的值更改为下列其中一项：_MicrosoftAccount_ 或 _WindowsAzureActiveDirectory_。
 
 3. 打开 **QSTodoListViewController.cs**，并修改 **ViewDidLoad** 的方法定义以删除或注释禁止接近结尾处对 **RefreshAsync()** 的调用。
 
 4. 在 **RefreshAsync** 方法定义的顶部添加以下代码：
 
-        // Add at the start of the RefreshAsync method.
+    ```
+    // Add at the start of the RefreshAsync method.
+    if (todoService.User == null) {
+        await QSTodoService.DefaultService.Authenticate (this);
         if (todoService.User == null) {
-            await QSTodoService.DefaultService.Authenticate (this);
-            if (todoService.User == null) {
-                Console.WriteLine ("You must sign in.");
-                return;
-            }
+            Console.WriteLine ("You must sign in.");
+            return;
         }
-        
+    }
+    ```
+
     这会在“User”属性为 null 时显示登录屏幕来尝试进行身份验证。登录成功时，“User”即设置完毕。
 
 5. 按“运行”按钮以生成项目，并在 iPhone 模拟器中启动应用程序。验证应用程序是否未显示任何数据。此时尚未调用 **RefreshAsync()**。

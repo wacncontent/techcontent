@@ -106,7 +106,8 @@ Site Recovery 将协调 VMM 云中 Hyper-V 主机服务器上的虚拟机的保�
 - [如何选择用于在 VMM 中创建逻辑单元的方法](https://technet.microsoft.com/zh-cn/library/gg610624.aspx)
 - [如何在 VMM 中设置存储逻辑单元](https://technet.microsoft.com/zh-cn/library/gg696973.aspx)
 
-    >[!NOTE] 启用计算机的复制后，不应添加 VHD 到没有位于站点恢复复制组中的 LUN。如果这样做，站点恢复将不会检测到它们。
+    >[!NOTE]
+    > 启用计算机的复制后，不应添加 VHD 到没有位于站点恢复复制组中的 LUN。如果这样做，站点恢复将不会检测到它们。
 
 2. 然后，向 Hyper-V 主机群集分配存储容量，使 VMM 能够将虚拟机数据部署到设置的存储中：
 
@@ -210,17 +211,23 @@ Site Recovery 将协调 VMM 云中 Hyper-V 主机服务器上的虚拟机的保�
 2. 停止 System Center Virtual Machine Manager 服务
 3. 使用**管理员**特权从命令提示符处运行以下命令，以便提取提供程序安装程序：
 
-        C:\Windows\System32> CD C:\ASR
-        C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
+    C:\Windows\System32> CD C:\ASR
+    C:\ASR> AzureSiteRecoveryProvider.exe /x:. /q
+    ```
 
 4. 运行以下命令以安装提供程序：
 
-        C:\ASR> setupdr.exe /i
+    ```
+    C:\ASR> setupdr.exe /i
+    ```
 
 5. 运行以下命令以注册提供程序：
 
-        CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
-        C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>         
+    ```
+    CD C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin
+    C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin> DRConfigurator.exe /r  /Friendlyname <friendly name of the server> /Credentials <path of the credentials file> /EncryptionEnabled <full file name to save the encryption certificate>         
+    ```
 
 其中的参数如下：
 
@@ -296,7 +303,8 @@ Site Recovery 将协调 VMM 云中 Hyper-V 主机服务器上的虚拟机的保�
 
 为虚拟机启用保护后，它们将显示在 Azure Site Recovery 控制台中。你可以查看虚拟机属性，跟踪状态，以及故障转移包含多个虚拟机的复制组。请注意，在 SAN 复制中，与复制组关联的所有虚拟机必须一起故障转移。这是因为，故障转移会先在存储层发生。必须正确组合复制组，并只将关联的虚拟机放置在一起。
 
->[!NOTE] 启用计算机的复制后，不应添加 VHD 到没有位于站点恢复复制组中的 LUN。如果这样做，站点恢复将不会检测到它们。
+>[!NOTE]
+> 启用计算机的复制后，不应添加 VHD 到没有位于站点恢复复制组中的 LUN。如果这样做，站点恢复将不会检测到它们。
 
 你可以在“作业”选项卡中跟踪“启用保护”操作的进度，包括初始复制。在“完成保护”作业运行之后，虚拟机就可以进行故障转移了。
 
@@ -323,21 +331,25 @@ Site Recovery 将协调 VMM 云中 Hyper-V 主机服务器上的虚拟机的保�
 9. 在复制之后，副本虚拟机将具有与主虚拟机的 IP 地址不同的 IP 地址。如果你是通过 DHCP 颁发地址，则 DNS 将自动更新。如果你未使用 DHCP 并且希望确保地址相同，则需要运行两个脚本。
 10. 运行此示例脚本来检索 IP 地址。
 
-        $vm = Get-SCVirtualMachine -Name <VM_NAME>
-        $na = $vm[0].VirtualNetworkAdapters>
-        $ip = Get-SCIPAddress -GrantToObjectID $na[0].id
-        $ip.address  
+    ```
+    $vm = Get-SCVirtualMachine -Name <VM_NAME>
+    $na = $vm[0].VirtualNetworkAdapters>
+    $ip = Get-SCIPAddress -GrantToObjectID $na[0].id
+    $ip.address  
+    ```
 
 11. 运行此示例脚本来更新 DNS 并指定你通过前一个示例脚本检索到的 IP 地址。
 
-        [string]$Zone,
-        [string]$name,
-        [string]$IP
-        )
-        $Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
-        $newrecord = $record.clone()
-        $newrecord.RecordData[0].IPv4Address  =  $IP
-        Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
+    ```
+    [string]$Zone,
+    [string]$name,
+    [string]$IP
+    )
+    $Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
+    $newrecord = $record.clone()
+    $newrecord.RecordData[0].IPv4Address  =  $IP
+    Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
+    ```
 
 ## 后续步骤
 

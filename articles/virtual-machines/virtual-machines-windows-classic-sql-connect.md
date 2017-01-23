@@ -37,7 +37,8 @@ ms.author: jroth
 - [通过 Internet 连接到 SQL Server](#connect-to-sql-server-over-the-internet)
 - [连接到同一虚拟网络中的 SQL Server](#connect-to-sql-server-in-the-same-virtual-network)
 
->[!NOTE] 使用下列任一方法进行连接之前，必须遵循[本文中的步骤配置连接](#steps-for-configuring-sql-server-connectivity-in-an-azure-vm)。
+>[!NOTE]
+> 使用下列任一方法进行连接之前，必须遵循[本文中的步骤配置连接](#steps-for-configuring-sql-server-connectivity-in-an-azure-vm)。
 
 ### <a name="connect-to-sql-server-in-the-same-cloud-service"></a> 连接到同一云服务中的 SQL Server
 
@@ -45,7 +46,9 @@ ms.author: jroth
 
 在此方案中，你可以使用 VM **名称**（在门户中也显示为**计算机名**或**主机名**）进行连接。这是你在创建 VM 时为其提供的名称。例如，如果你将 SQL VM 命名为 **mysqlvm**，则同一云服务中的客户端 VM 可以使用以下连接字符串进行连接：
 
-    "Server=mysqlvm;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
+```
+"Server=mysqlvm;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
+```
 
 ### <a name="connect-to-sql-server-over-the-internet"></a> 通过 Internet 连接到 SQL Server
 
@@ -55,11 +58,14 @@ ms.author: jroth
 
 例如，若是名为 **mysqlvm** 的经典虚拟机，其 DNS 名称为 **mysqlvm7777.chinacloudapp.cn**，VM 终结点为 **57500**。假设正确配置了连接性，则可从 Internet 上的任意位置使用以下连接字符串访问该虚拟机：
 
-    "Server=mycloudservice.chinacloudapp.cn,57500;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
+```
+"Server=mycloudservice.chinacloudapp.cn,57500;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
+```
 
 尽管客户端可通过 Internet 进行连接，但这并不意味着任何人都可以连接到 SQL Server。外部客户端必须有正确的用户名和密码。为了提高安全性，请不要对公共虚拟机终结点使用常用的 1433 端口。如果可能，请考虑在终结点上添加 ACL 以将流量限制到你允许的客户端。有关在终结点上使用 ACL 的说明，请参阅[管理终结点上的 ACL](./virtual-machines-windows-classic-setup-endpoints.md#manage-the-acl-on-an-endpoint)。
 
->[!NOTE] 务必注意，使用此方法与 SQL Server 通信时，Azure 数据中心的所有传出数据都将基于[出站数据传输定价](https://www.azure.cn/pricing/details/data-transfer/)产生费用。
+>[!NOTE]
+> 务必注意，使用此方法与 SQL Server 通信时，Azure 数据中心的所有传出数据都将基于[出站数据传输定价](https://www.azure.cn/pricing/details/data-transfer/)产生费用。
 
 ### <a name="connect-to-sql-server-in-the-same-virtual-network"></a> 连接到同一虚拟网络中的 SQL Server
 
@@ -69,7 +75,9 @@ ms.author: jroth
 
 如果要配置域环境和 Windows 身份验证，则不需要使用本文中的步骤来配置公共终结点或 SQL 身份验证和登录名。在此方案中，你可以在连接字符串中指定 SQL Server VM 名称以连接 SQL Server 实例。以下示例假设同时已配置 Windows 身份验证，并且用户已获得访问 SQL Server 实例的权限。
 
-    "Server=mysqlvm;Integrated Security=true"
+```
+"Server=mysqlvm;Integrated Security=true"
+```
 
 ## <a name="steps-for-configuring-sql-server-connectivity-in-an-azure-vm"></a> 在 Azure VM 中配置 SQL Server 连接的步骤
 

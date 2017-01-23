@@ -37,103 +37,107 @@ Scalding 是一种 Scala 库，它可以让你轻松地创建 Hadoop MapReduce �
 
 1. 使用以下命令新建 Maven 项目：
 
-        mvn archetype:generate -DgroupId=com.microsoft.example -DartifactId=scaldingwordcount -DarchetypeGroupId=org.scala-tools.archetypes -DarchetypeArtifactId=scala-archetype-simple -DinteractiveMode=false
+    ```
+    mvn archetype:generate -DgroupId=com.microsoft.example -DartifactId=scaldingwordcount -DarchetypeGroupId=org.scala-tools.archetypes -DarchetypeArtifactId=scala-archetype-simple -DinteractiveMode=false
+    ```
 
     此命令将新建名为 **scaldingwordcount** 的目录，并创建 Scala 应用程序的基架。
 
 2. 在 **scaldingwordcount** 目录中，打开 **pom.xml** 文件并将其内容替换为以下内容：
 
-        <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-          <modelVersion>4.0.0</modelVersion>
-          <groupId>com.microsoft.example</groupId>
-          <artifactId>scaldingwordcount</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <name>${project.artifactId}</name>
-          <properties>
-            <maven.compiler.source>1.6</maven.compiler.source>
-            <maven.compiler.target>1.6</maven.compiler.target>
-            <encoding>UTF-8</encoding>
-          </properties>
-          <repositories>
-            <repository>
-              <id>conjars</id>
-              <url>http://conjars.org/repo</url>
-            </repository>
-            <repository>
-              <id>maven-central</id>
-              <url>http://repo1.maven.org/maven2</url>
-            </repository>
-          </repositories>
-          <dependencies>
-            <dependency>
-              <groupId>com.twitter</groupId>
-              <artifactId>scalding-core_2.11</artifactId>
-              <version>0.13.1</version>
-            </dependency>
-            <dependency>
-              <groupId>org.apache.hadoop</groupId>
-              <artifactId>hadoop-core</artifactId>
-              <version>1.2.1</version>
-              <scope>provided</scope>
-            </dependency>
-          </dependencies>
-          <build>
-            <sourceDirectory>src/main/scala</sourceDirectory>
-            <plugins>
-              <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <version>2.15.2</version>
-                <executions>
-                  <execution>
-                    <id>scala-compile-first</id>
-                    <phase>process-resources</phase>
-                    <goals>
-                      <goal>add-source</goal>
-                      <goal>compile</goal>
-                    </goals>
-                  </execution>
-                </executions>
-              </plugin>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
+    ```
+    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <groupId>com.microsoft.example</groupId>
+      <artifactId>scaldingwordcount</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <name>${project.artifactId}</name>
+      <properties>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <encoding>UTF-8</encoding>
+      </properties>
+      <repositories>
+        <repository>
+          <id>conjars</id>
+          <url>http://conjars.org/repo</url>
+        </repository>
+        <repository>
+          <id>maven-central</id>
+          <url>http://repo1.maven.org/maven2</url>
+        </repository>
+      </repositories>
+      <dependencies>
+        <dependency>
+          <groupId>com.twitter</groupId>
+          <artifactId>scalding-core_2.11</artifactId>
+          <version>0.13.1</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-core</artifactId>
+          <version>1.2.1</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <plugins>
+          <plugin>
+            <groupId>org.scala-tools</groupId>
+            <artifactId>maven-scala-plugin</artifactId>
+            <version>2.15.2</version>
+            <executions>
+              <execution>
+                <id>scala-compile-first</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>add-source</goal>
+                  <goal>compile</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>2.3</version>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer">
+                </transformer>
+              </transformers>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>shade</goal>
+                </goals>
                 <configuration>
                   <transformers>
-                    <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer">
+                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                      <mainClass>com.twitter.scalding.Tool</mainClass>
                     </transformer>
                   </transformers>
-                  <filters>
-                    <filter>
-                      <artifact>*:*</artifact>
-                      <excludes>
-                        <exclude>META-INF/*.SF</exclude>
-                        <exclude>META-INF/*.DSA</exclude>
-                        <exclude>META-INF/*.RSA</exclude>
-                      </excludes>
-                    </filter>
-                  </filters>
                 </configuration>
-                <executions>
-                  <execution>
-                    <phase>package</phase>
-                    <goals>
-                      <goal>shade</goal>
-                    </goals>
-                    <configuration>
-                      <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                          <mainClass>com.twitter.scalding.Tool</mainClass>
-                        </transformer>
-                      </transformers>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
-        </project>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </project>
+    ```
 
     此文件描述了项目、依赖关系和插件。以下是重要条目：
 
@@ -155,25 +159,27 @@ Scalding 是一种 Scala 库，它可以让你轻松地创建 Hadoop MapReduce �
 
 4. 打开 **src/main/scala/com/microsoft/example/app.scala** 文件，并将其内容替换为以下内容：
 
-        package com.microsoft.example
+    ```
+    package com.microsoft.example
 
-        import com.twitter.scalding._
+    import com.twitter.scalding._
 
-        class WordCount(args : Args) extends Job(args) {
-          // 1. Read lines from the specified input location
-          // 2. Extract individual words from each line
-          // 3. Group words and count them
-          // 4. Write output to the specified output location
-          TextLine(args("input"))
-            .flatMap('line -> 'word) { line : String => tokenize(line) }
-            .groupBy('word) { _.size }
-            .write(Tsv(args("output")))
+    class WordCount(args : Args) extends Job(args) {
+      // 1. Read lines from the specified input location
+      // 2. Extract individual words from each line
+      // 3. Group words and count them
+      // 4. Write output to the specified output location
+      TextLine(args("input"))
+        .flatMap('line -> 'word) { line : String => tokenize(line) }
+        .groupBy('word) { _.size }
+        .write(Tsv(args("output")))
 
-          //Tokenizer to split sentance into words
-          def tokenize(text : String) : Array[String] = {
-            text.toLowerCase.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+")
-          }
-        }
+      //Tokenizer to split sentance into words
+      def tokenize(text : String) : Array[String] = {
+        text.toLowerCase.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+")
+      }
+    }
+    ```
 
     这将会实现基本的单词计数作业。
 
@@ -181,13 +187,16 @@ Scalding 是一种 Scala 库，它可以让你轻松地创建 Hadoop MapReduce �
 
 6. 使用以下命令从 **scaldingwordcount** 目录生成并打包应用程序：
 
-        mvn package
+    ```
+    mvn package
+    ```
 
     完成此作业后，可以在 **target/scaldingwordcount-1.0-SNAPSHOT.jar** 中找到包含 WordCount 应用程序的程序包。
 
 ## 在基于 Windows 的群集上运行作业
 
-> [!NOTE] 以下步骤使用 Windows PowerShell。有关运行 MapReduce 作业的其他方法，请参阅[在 HDInsight 上的 Hadoop 中使用 MapReduce](./hdinsight-use-mapreduce.md)。
+> [!NOTE]
+> 以下步骤使用 Windows PowerShell。有关运行 MapReduce 作业的其他方法，请参阅[在 HDInsight 上的 Hadoop 中使用 MapReduce](./hdinsight-use-mapreduce.md)。
 
 1. [安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
@@ -195,44 +204,56 @@ Scalding 是一种 Scala 库，它可以让你轻松地创建 Hadoop MapReduce �
 
 3. 打开一个新的 **Azure PoweShell** 会话并输入以下命令。如果 hdinsight-tools.psm1 不在当前目录中，请提供该文件的路径：
 
-        import-module hdinsight-tools.psm1
+    ```
+    import-module hdinsight-tools.psm1
+    ```
 
     这将会导入多个函数用于处理 HDInsight 中的文件。
 
 4. 使用以下命令上载包含 WordCount 作业的 jar 文件。将 `CLUSTERNAME` 替换为 HDInsight 群集的名称。
 
-        $clusterName="CLUSTERNAME"
-        Add-HDInsightFile -clusterName $clusterName -localPath \path\to\scaldingwordcount-1.0-SNAPSHOT.jar -destinationPath example/jars/scaldingwordcount-1.0-SNAPSHOT.jar
+    ```
+    $clusterName="CLUSTERNAME"
+    Add-HDInsightFile -clusterName $clusterName -localPath \path\to\scaldingwordcount-1.0-SNAPSHOT.jar -destinationPath example/jars/scaldingwordcount-1.0-SNAPSHOT.jar
+    ```
 
 5. 完成上载后，使用以下命令运行作业：
 
-        $jobDef=New-AzureHDInsightMapReduceJobDefinition -JobName ScaldingWordCount -JarFile wasbs:///example/jars/scaldingwordcount-1.0-SNAPSHOT.jar -ClassName com.microsoft.example.WordCount -arguments "--hdfs", "--input", "wasbs:///example/data/gutenberg/davinci.txt", "--output", "wasbs:///example/wordcountout"
-        $job = start-azurehdinsightjob -cluster $clusterName -jobdefinition $jobDef
-        wait-azurehdinsightjob -Job $job -waittimeoutinseconds 3600
+    ```
+    $jobDef=New-AzureHDInsightMapReduceJobDefinition -JobName ScaldingWordCount -JarFile wasbs:///example/jars/scaldingwordcount-1.0-SNAPSHOT.jar -ClassName com.microsoft.example.WordCount -arguments "--hdfs", "--input", "wasbs:///example/data/gutenberg/davinci.txt", "--output", "wasbs:///example/wordcountout"
+    $job = start-azurehdinsightjob -cluster $clusterName -jobdefinition $jobDef
+    wait-azurehdinsightjob -Job $job -waittimeoutinseconds 3600
+    ```
 
 6. 完成作业后，使用以下命令下载作业输出：
 
-        Get-HDInsightFile -clusterName $clusterName -remotePath example/wordcountout/part-00000 -localPath output.txt
+    ```
+    Get-HDInsightFile -clusterName $clusterName -remotePath example/wordcountout/part-00000 -localPath output.txt
+    ```
 
 7. 输出中包括制表符分隔的单词和计数值。使用以下命令以显示结果。
 
-        cat output.txt
+    ```
+    cat output.txt
+    ```
 
     该文件应包含如下所示的值：
 
-        writers 9
-        writes  18
-        writhed 1
-        writing 51
-        writings        24
-        written 208
-        writtenthese    1
-        wrong   11
-        wrongly 2
-        wrongplace      1
-        wrote   34
-        wrotefootnote   1
-        wrought 7
+    ```
+    writers 9
+    writes  18
+    writhed 1
+    writing 51
+    writings        24
+    written 208
+    writtenthese    1
+    wrong   11
+    wrongly 2
+    wrongplace      1
+    wrote   34
+    wrotefootnote   1
+    wrought 7
+    ```
 
 ## 后续步骤
 

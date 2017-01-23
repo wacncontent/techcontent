@@ -46,13 +46,16 @@ Service Fabric 反向代理在群集的所有节点上运行。它会代表客�
 
 ![外部通信][0]
 
->[!WARNING] 在负载均衡器上配置反向代理的端口以后，即可从群集外部访问群集中公开了 HTTP 终结点的所有微服务。
+>[!WARNING]
+> 在负载均衡器上配置反向代理的端口以后，即可从群集外部访问群集中公开了 HTTP 终结点的所有微服务。
 
 ## 通过反向代理进行服务寻址的 URI 格式
 
 反向代理使用特定的 URI 格式来确定传入请求所应转发到的服务分区：
 
-    http(s)://<Cluster FQDN | internal IP>:Port/<ServiceInstanceName>/<Suffix path>?PartitionKey=<key>&PartitionKind=<partitionkind>&Timeout=<timeout_in_seconds>
+```
+http(s)://<Cluster FQDN | internal IP>:Port/<ServiceInstanceName>/<Suffix path>?PartitionKey=<key>&PartitionKind=<partitionkind>&Timeout=<timeout_in_seconds>
+```
 
  - **http(s):** 可以将反向代理配置为接受 HTTP 或 HTTPS 流量。如果为 HTTPS 流量，则会在反向代理中出现 SSL 终止的情况。由反向代理转发到群集中服务的请求是通过 HTTP 进行的。
  - **群集 FQDN| internal IP:** For external clients, the reverse proxy can be configured so that it is reachable through the cluster domain (e.g., mycluster.chinaeast.chinacloudapp.cn). By default the reverse proxy runs on every node, so for internal traffic it can be reached on localhost or on any internal node IP (e.g., 10.0.0.1).
@@ -67,7 +70,9 @@ Service Fabric 反向代理在群集的所有节点上运行。它会代表客�
 
 以服务 **fabric:/MyApp/MyService** 为例，该服务可针对以下 URL 打开一个 HTTP 侦听器：
 
-    http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
+```
+http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
+```
 
 使用以下资源：
 
@@ -129,140 +134,152 @@ Service Fabric 反向代理在群集的所有节点上运行。它会代表客�
 
 1. 在模板的[“参数”部分](../azure-resource-manager/resource-group-authoring-templates.md)定义反向代理的端口。
 
-        "SFReverseProxyPort": {
-            "type": "int",
-            "defaultValue": 19008,
-            "metadata": {
-                "description": "Endpoint for Service Fabric Reverse proxy"
-            }
-        },
+    ```
+    "SFReverseProxyPort": {
+        "type": "int",
+        "defaultValue": 19008,
+        "metadata": {
+            "description": "Endpoint for Service Fabric Reverse proxy"
+        }
+    },
+    ```
 
 2. 为**群集**的[“资源类型”部分](../azure-resource-manager/resource-group-authoring-templates.md)中的每个 nodetype 对象指定端口
 
     对于“2016-09-01”以前的 apiVersion，端口由参数名称 ***httpApplicationGatewayEndpointPort*** 标识
 
-        {
-            "apiVersion": "2016-03-01",
-            "type": "Microsoft.ServiceFabric/clusters",
-            "name": "[parameters('clusterName')]",
-            "location": "[parameters('clusterLocation')]",
+    ```
+    {
+        "apiVersion": "2016-03-01",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "name": "[parameters('clusterName')]",
+        "location": "[parameters('clusterLocation')]",
+        ...
+           "nodeTypes": [
+             {
             ...
-               "nodeTypes": [
-                 {
-                ...
-                "httpApplicationGatewayEndpointPort": "[parameters('SFReverseProxyPort')]",
-                ...
-                 },
+            "httpApplicationGatewayEndpointPort": "[parameters('SFReverseProxyPort')]",
             ...
-            ],
-            ...
-        }
+             },
+        ...
+        ],
+        ...
+    }
+    ```
 
     对于“2016-09-01”或以后的 apiVersion，端口由参数名称 ***reverseProxyEndpointPort*** 标识
 
-        {
-            "apiVersion": "2016-09-01",
-            "type": "Microsoft.ServiceFabric/clusters",
-            "name": "[parameters('clusterName')]",
-            "location": "[parameters('clusterLocation')]",
-            ...
-           "nodeTypes": [
-              {
-               ...
-               "reverseProxyEndpointPort": "[parameters('SFReverseProxyPort')]",
-               ...
-              },
-            ...
-            ],
-            ...
-        }
+    ```
+    {
+        "apiVersion": "2016-09-01",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "name": "[parameters('clusterName')]",
+        "location": "[parameters('clusterLocation')]",
+        ...
+       "nodeTypes": [
+          {
+           ...
+           "reverseProxyEndpointPort": "[parameters('SFReverseProxyPort')]",
+           ...
+          },
+        ...
+        ],
+        ...
+    }
+    ```
 
 3. 若要从 Azure 群集外部与反向代理通信，请为步骤 1 中指定的端口设置 **Azure 负载均衡器规则**。
 
-        {
-            "apiVersion": "[variables('lbApiVersion')]",
-            "type": "Microsoft.Network/loadBalancers",
+    ```
+    {
+        "apiVersion": "[variables('lbApiVersion')]",
+        "type": "Microsoft.Network/loadBalancers",
+        ...
+        ...
+        "loadBalancingRules": [
             ...
-            ...
-            "loadBalancingRules": [
-                ...
-                {
-                    "name": "LBSFReverseProxyRule",
-                    "properties": {
-                        "backendAddressPool": {
-                            "id": "[variables('lbPoolID0')]"
-                        },
-                        "backendPort": "[parameters('SFReverseProxyPort')]",
-                        "enableFloatingIP": "false",
-                        "frontendIPConfiguration": {
-                            "id": "[variables('lbIPConfig0')]"
-                        },
-                        "frontendPort": "[parameters('SFReverseProxyPort')]",
-                        "idleTimeoutInMinutes": "5",
-                        "probe": {
-                            "id": "[concat(variables('lbID0'),'/probes/SFReverseProxyProbe')]"
-                        },
-                        "protocol": "tcp"
-                    }
+            {
+                "name": "LBSFReverseProxyRule",
+                "properties": {
+                    "backendAddressPool": {
+                        "id": "[variables('lbPoolID0')]"
+                    },
+                    "backendPort": "[parameters('SFReverseProxyPort')]",
+                    "enableFloatingIP": "false",
+                    "frontendIPConfiguration": {
+                        "id": "[variables('lbIPConfig0')]"
+                    },
+                    "frontendPort": "[parameters('SFReverseProxyPort')]",
+                    "idleTimeoutInMinutes": "5",
+                    "probe": {
+                        "id": "[concat(variables('lbID0'),'/probes/SFReverseProxyProbe')]"
+                    },
+                    "protocol": "tcp"
                 }
-            ],
-            "probes": [
-                ...
-                {
-                    "name": "SFReverseProxyProbe",
-                    "properties": {
-                            "intervalInSeconds": 5,
-                            "numberOfProbes": 2,
-                            "port":     "[parameters('SFReverseProxyPort')]",
-                            "protocol": "tcp"
-                    }
-                }  
-            ]
-        }
+            }
+        ],
+        "probes": [
+            ...
+            {
+                "name": "SFReverseProxyProbe",
+                "properties": {
+                        "intervalInSeconds": 5,
+                        "numberOfProbes": 2,
+                        "port":     "[parameters('SFReverseProxyPort')]",
+                        "protocol": "tcp"
+                }
+            }  
+        ]
+    }
+    ```
 
 4. 若要在反向代理的端口上配置 SSL 证书，请在**群集**的[“资源类型”部分](../azure-resource-manager/resource-group-authoring-templates.md)将证书添加到 httpApplicationGatewayCertificate 属性中
 
     对于“2016-09-01”以前的 apiVersion，证书由参数名称 ***httpApplicationGatewayCertificate*** 标识
 
-        {
-            "apiVersion": "2016-03-01",
-            "type": "Microsoft.ServiceFabric/clusters",
-            "name": "[parameters('clusterName')]",
-            "location": "[parameters('clusterLocation')]",
-            "dependsOn": [
-                    "[concat('Microsoft.Storage/storageAccounts/', parameters('supportLogStorageAccountName'))]"
-            ],
-            "properties": {
-                    ...
-                    "httpApplicationGatewayCertificate": {
-                        "thumbprint": "[parameters('sfReverseProxyCertificateThumbprint')]",
-                        "x509StoreName": "[parameters('sfReverseProxyCertificateStoreName')]"
-                    },
-                    ...
-                    "clusterState": "Default",
-            }
-        }
-
-    对于“2016-09-01”或以后的 apiVersion，证书由参数名称 ***reverseProxyCertificate*** 标识
-    
-        {
-            "apiVersion": "2016-09-01",
-            "type": "Microsoft.ServiceFabric/clusters",
-            "name": "[parameters('clusterName')]",
-            "location": "[parameters('clusterLocation')]",
-            "dependsOn": [
+    ```
+    {
+        "apiVersion": "2016-03-01",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "name": "[parameters('clusterName')]",
+        "location": "[parameters('clusterLocation')]",
+        "dependsOn": [
                 "[concat('Microsoft.Storage/storageAccounts/', parameters('supportLogStorageAccountName'))]"
-            ],
-            "properties": {
+        ],
+        "properties": {
                 ...
-                "reverseProxyCertificate": {
+                "httpApplicationGatewayCertificate": {
                     "thumbprint": "[parameters('sfReverseProxyCertificateThumbprint')]",
                     "x509StoreName": "[parameters('sfReverseProxyCertificateStoreName')]"
                 },
                 ...
                 "clusterState": "Default",
-            }
         }
+    }
+    ```
+
+    对于“2016-09-01”或以后的 apiVersion，证书由参数名称 ***reverseProxyCertificate*** 标识
+
+    ```
+    {
+        "apiVersion": "2016-09-01",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "name": "[parameters('clusterName')]",
+        "location": "[parameters('clusterLocation')]",
+        "dependsOn": [
+            "[concat('Microsoft.Storage/storageAccounts/', parameters('supportLogStorageAccountName'))]"
+        ],
+        "properties": {
+            ...
+            "reverseProxyCertificate": {
+                "thumbprint": "[parameters('sfReverseProxyCertificateThumbprint')]",
+                "x509StoreName": "[parameters('sfReverseProxyCertificateStoreName')]"
+            },
+            ...
+            "clusterState": "Default",
+        }
+    }
+    ```
 
 ## 后续步骤
  - 请参阅 [GitHUb 上的示例项目](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/tree/master/Services/WordCount)中服务之间的 HTTP 通信示例。

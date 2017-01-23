@@ -33,7 +33,8 @@ ms.author: seanmck
 
 ![Service Fabric Explorer 中分散在容错域之间的节点][sfx-cluster-map]
 
->[!NOTE] 群集映射中的另一个轴显示升级域，升级域以逻辑方式根据计划的维护活动将节点分组。Azure 中的 Service Fabric 群集始终分布在五个升级域之间。
+>[!NOTE]
+> 群集映射中的另一个轴显示升级域，升级域以逻辑方式根据计划的维护活动将节点分组。Azure 中的 Service Fabric 群集始终分布在五个升级域之间。
 
 ### 地理分布
 
@@ -53,7 +54,8 @@ ms.author: seanmck
 #### 仲裁丢失
 如果有状态服务分区的大多数副本关闭，则该分区将进入所谓的“仲裁丢失”状态。 此时，Service Fabric 会停止允许写入该分区，以确保其状态保持一致且可靠。实际上，我们会选择接受一段不可用的时间，以确保客户端不被告知其数据已保存（但事实并非如此）。请注意，如果选择允许从该有状态服务的辅助副本读取，可以在此状态下继续执行读取操作。分区保持仲裁丢失的状态，直到恢复足量的副本，或群集管理员强迫系统继续使用 [Repair-ServiceFabricPartition API][repair-partition-ps] 为止。
 
->[!WARNING] 在主要副本关闭时执行修复操作将导致数据丢失。
+>[!WARNING]
+> 在主要副本关闭时执行修复操作将导致数据丢失。
 
 系统服务也会遭受仲裁丢失，同时对相关服务造成特定影响。例如，命名服务的仲裁丢失将影响名称解析，而故障转移管理器服务的仲裁丢失将阻止创建新服务与故障转移。请注意，我们并*不*建议您像修复自己的服务一样尝试修复系统服务。而最好是单纯地等待，直到关闭的副本恢复为止。
 
@@ -71,11 +73,13 @@ ms.author: seanmck
 
 若要防范这种可能性，请务必定期[将状态备份到](./service-fabric-reliable-services-backup-restore.md)异地冗余存储，并确保已验证您能够还原备份。执行备份的频率取决于恢复点目标 (RPO)。即使尚未完全实现备份和还原，但还是应该实现 `OnDataLoss` 事件的处理程序，以便在发生该事件时进行记录，如下所示：
 
-    protected virtual Task<bool> OnDataLoss(CancellationToken cancellationToken)
-    {
-      ServiceEventSource.Current.ServiceMessage(this, "OnDataLoss event received.");
-      return Task.FromResult(false);
-    }
+```
+protected virtual Task<bool> OnDataLoss(CancellationToken cancellationToken)
+{
+  ServiceEventSource.Current.ServiceMessage(this, "OnDataLoss event received.");
+  return Task.FromResult(false);
+}
+```
 
 ### 软件故障和其他数据丢失根源
 在数据丢失的原因中，服务的代码缺陷、人为操作失误和安全违规比大范围的数据中心故障更为常见。但是，在所有情况下，恢复策略都一样：定期备份所有的有状态服务并运用还原该状态的能力。

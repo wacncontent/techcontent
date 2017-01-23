@@ -34,9 +34,9 @@ ms.author: dastrock
 v2.0 终结点目前不支持以下类型的应用。有关受支持应用类型的说明，请参阅[此文](./active-directory-v2-flows.md)。
 
 ##### 独立 Web API
-在 v2.0 终结点中，你可以[构建使用 OAuth 2.0 保护的 Web API](./active-directory-v2-flows.md#web-apis/)。但是，该 Web API 只能从共享相同应用程序 ID 的应用程序接收令牌。不支持构建从具有不同应用程序 ID 的客户端访问的 Web API。该客户端无法请求或获取对 Web API 的权限。
+在 v2.0 终结点中，你可以[构建使用 OAuth 2.0 保护的 Web API](./active-directory-v2-flows.md#web-apis)。但是，该 Web API 只能从共享相同应用程序 ID 的应用程序接收令牌。不支持构建从具有不同应用程序 ID 的客户端访问的 Web API。该客户端无法请求或获取对 Web API 的权限。
 
-若要了解如何构建从具有相同应用 ID 的客户端接受令牌的 Web API，请参阅[入门](./active-directory-appmodel-v2-overview.md#getting-started/)中的 v2.0 终结点 Web API 示例。
+若要了解如何构建从具有相同应用 ID 的客户端接受令牌的 Web API，请参阅[入门](./active-directory-appmodel-v2-overview.md#getting-started)中的 v2.0 终结点 Web API 示例。
 
 ##### Web API 代理流
 许多体系结构包含需要调用另一个下游 Web API 的 Web API，这两者都受 v2.0 终结点的保护。此情况常见于具有 Web API 后端的本机客户端，该后端反过来调用 Microsoft Online 服务或另一个支持 Azure AD 的自定义构建的 Web API。
@@ -91,7 +91,7 @@ v2.0 终结点目前不支持以下类型的应用。有关受支持应用类型
 ## 服务和 API 限制
 v2.0 终结点目前支持登录所有已在新应用程序注册门户中注册的应用，前提是该应用已在[支持的身份验证流](./active-directory-v2-flows.md)列表中列出。但是，这些应用只能获取 OAuth 2.0 访问令牌来访问非常有限的资源集。v2.0 终结点只为以下项目颁发 access\_token：
 
-- 请求令牌的应用。如果逻辑应用包含多个不同的组件或层，则应用可为自身获取 access\_token。若要查看此方案的工作方式，请参阅[入门](./active-directory-appmodel-v2-overview.md#getting-started/)教程。
+- 请求令牌的应用。如果逻辑应用包含多个不同的组件或层，则应用可为自身获取 access\_token。若要查看此方案的工作方式，请参阅[入门](./active-directory-appmodel-v2-overview.md#getting-started)教程。
 - Outlook 邮件、日历和联系人 REST API，全都位于 https://outlook.office.com。若要了解如何编写访问这些 API 的应用，请参阅 [Office 入门](https://www.msdn.com/office/office365/howto/authenticate-Office-365-APIs-using-v2)教程。
 - Microsoft 图形 API。若要了解 Microsoft Graph 和可用的所有数据，请访问 [https://graph.microsoft.io](https://graph.microsoft.io)。
 
@@ -100,7 +100,7 @@ v2.0 终结点目前支持登录所有已在新应用程序注册门户中注册
 ## 库和 SDK 限制
 当前，对 v2.0 终结点的库支持非常有限。如果你想要在生产应用程序中使用 v2.0 终结点，可使用以下选项：
 
-- 如果你要构建 Web 应用程序，可以放心使用我们的正式版服务器端中间件来执行登录和令牌验证。其中包括适用于 ASP.NET 的 OWIN Open ID Connect 中间件和 NodeJS Passport 插件。[入门](./active-directory-appmodel-v2-overview.md#getting-started/)部分中也提供了有关使用这些中间件的代码示例。
+- 如果你要构建 Web 应用程序，可以放心使用我们的正式版服务器端中间件来执行登录和令牌验证。其中包括适用于 ASP.NET 的 OWIN Open ID Connect 中间件和 NodeJS Passport 插件。[入门](./active-directory-appmodel-v2-overview.md#getting-started)部分中也提供了有关使用这些中间件的代码示例。
 - 对于其他平台以及本机与移动应用程序，你还可以通过直接在应用程序代码中发送和接收协议消息来与 v2.0 终结点集成。v2.0 OpenID Connect 和 OAuth 协议[有明确的说明文档](./active-directory-v2-protocols.md)，可帮助你执行这种集成。
 - 最后，你可以使用开源 Open ID Connect 和 OAuth 库来与 v2.0 终结点集成。v2.0 协议应与许多开源协议库兼容，不需要你进行重大更改。此类库的可用性根据语言和平台而有所不同，[Open ID Connect](http://openid.net/connect/) 和 [OAuth 2.0](http://oauth.net/2/) 网站维护了一份常见的实现列表。有关详细信息和经过 v2.0 终结点检验的开放源代码客户端库和示例列表，请参阅 [Azure Active Directory (AD) v2.0 和身份验证库](./active-directory-v2-libraries.md)。
 

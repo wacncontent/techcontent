@@ -27,7 +27,8 @@ wacn.date: 12/26/2016
 
 Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数据库。可在 SQL 数据库服务器中为 master 数据库或用户数据库定义服务器级别和数据库级别防火墙设置，从而有选择地允许对数据库的访问。
 
-> [!IMPORTANT] 若要允许来自 Azure 的应用程序连接到数据库服务器，必须启用 Azure 连接。有关防火墙规则和启用来自 Azure 的连接的详细信息，请参阅 [Azure SQL 数据库防火墙](./sql-database-firewall-configure.md)。如果要在 Azure 云边界内建立连接，可能需要打开一些其他 TCP 端口。有关详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](./sql-database-develop-direct-route-ports-adonet-v12.md)中的“SQL 数据库 V12：内部与外部”部分
+> [!IMPORTANT]
+> 若要允许来自 Azure 的应用程序连接到数据库服务器，必须启用 Azure 连接。有关防火墙规则和启用来自 Azure 的连接的详细信息，请参阅 [Azure SQL 数据库防火墙](./sql-database-firewall-configure.md)。如果要在 Azure 云边界内建立连接，可能需要打开一些其他 TCP 端口。有关详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](./sql-database-develop-direct-route-ports-adonet-v12.md)中的“SQL 数据库 V12：内部与外部”部分
 
 [!INCLUDE [启动 PowerShell 会话](../../includes/sql-database-powershell.md)]
 
@@ -37,15 +38,21 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
 
 若要创建新的服务器级别防火墙规则，请执行 New-AzureRmSqlServerFirewallRule cmdlet。以下示例启用服务器 Contoso 上的某一 IP 地址范围。
 
-    New-AzureRmSqlServerFirewallRule -ResourceGroupName 'resourcegroup1' -ServerName 'Contoso' -FirewallRuleName "ContosoFirewallRule" -StartIpAddress '192.168.1.1' -EndIpAddress '192.168.1.10'		
+```
+New-AzureRmSqlServerFirewallRule -ResourceGroupName 'resourcegroup1' -ServerName 'Contoso' -FirewallRuleName "ContosoFirewallRule" -StartIpAddress '192.168.1.1' -EndIpAddress '192.168.1.10'		
+```
 
 若要修改现有服务器级别防火墙规则，请执行 Set-AzureSqlDatabaseServerFirewallRule cmdlet。以下示例更改名为 ContosoFirewallRule 的规则的可接受 IP 地址的范围。
 
-    Set-AzureRmSqlServerFirewallRule -ResourceGroupName 'resourcegroup1' –StartIPAddress 192.168.1.4 –EndIPAddress 192.168.1.10 –RuleName 'ContosoFirewallRule' –ServerName 'Contoso'
+```
+Set-AzureRmSqlServerFirewallRule -ResourceGroupName 'resourcegroup1' –StartIPAddress 192.168.1.4 –EndIPAddress 192.168.1.10 –RuleName 'ContosoFirewallRule' –ServerName 'Contoso'
+```
 
 若要删除现有服务器级别防火墙规则，请执行 Remove-AzureSqlDatabaseServerFirewallRule cmdlet。以下示例删除名为 ContosoFirewallRule 的规则。
 
-    Remove-AzureRmSqlServerFirewallRule –RuleName 'ContosoFirewallRule' –ServerName 'Contoso'
+```
+Remove-AzureRmSqlServerFirewallRule –RuleName 'ContosoFirewallRule' –ServerName 'Contoso'
+```
 
 ##<a name="manage-firewall-rules-using-powershell"></a> 使用 PowerShell 管理防火墙规则
 

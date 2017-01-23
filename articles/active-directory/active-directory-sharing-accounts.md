@@ -49,7 +49,7 @@ Azure AD 支持任何 Enterprise Mobility Suite (EMS)、高级或基本许可用
 
 支持帐户共享的 Azure AD 功能包括：
 
-- [密码单一登录](./active-directory-appssoaccess-whatis.md#password-based-single-sign-on/)
+- [密码单一登录](./active-directory-appssoaccess-whatis.md#password-based-single-sign-on)
 - 密码单一登录代理
 
 ## 共享帐户

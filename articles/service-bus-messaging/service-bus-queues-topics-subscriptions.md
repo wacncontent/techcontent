@@ -28,37 +28,45 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 创建队列是一个多步骤过程。你可以通过 [Microsoft.ServiceBus.NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类执行服务总线消息传送实例（队列和主题）的管理操作，该类可通过提供服务总线命名空间的基址和用户凭据进行构建。[NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 提供了创建、枚举和删除消息传送实体的方法。在使用 SAS 名称和密钥创建 [Microsoft.ServiceBus.TokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.aspx) 对象（服务命名空间管理对象）之后，你可以使用 [Microsoft.ServiceBus.NamespaceManager.CreateQueue](https://msdn.microsoft.com/zh-cn/library/azure/hh293157.aspx) 方法以创建队列。例如：
 
-        // Create management credentials
-        TokenProvider credentials = TokenProvider. CreateSharedAccessSignatureTokenProvider(sasKeyName,sasKeyValue);
-        // Create namespace client
-        NamespaceManager namespaceClient = new NamespaceManager(ServiceBusEnvironment.CreateServiceUri("sb", ServiceNamespace, string.Empty), credentials);
+```
+    // Create management credentials
+    TokenProvider credentials = TokenProvider. CreateSharedAccessSignatureTokenProvider(sasKeyName,sasKeyValue);
+    // Create namespace client
+    NamespaceManager namespaceClient = new NamespaceManager(ServiceBusEnvironment.CreateServiceUri("sb", ServiceNamespace, string.Empty), credentials);
+```
 
 你可以随后创建一个队列对象和消息工厂，将服务总线 URI 用作参数。例如：
 
-        QueueDescription myQueue;
-        myQueue = namespaceClient.CreateQueue("TestQueue");
-        MessagingFactory factory = MessagingFactory.Create(ServiceBusEnvironment.CreateServiceUri("sb", ServiceNamespace, string.Empty), credentials); 
-        QueueClient myQueueClient = factory.CreateQueueClient("TestQueue");
+```
+    QueueDescription myQueue;
+    myQueue = namespaceClient.CreateQueue("TestQueue");
+    MessagingFactory factory = MessagingFactory.Create(ServiceBusEnvironment.CreateServiceUri("sb", ServiceNamespace, string.Empty), credentials); 
+    QueueClient myQueueClient = factory.CreateQueueClient("TestQueue");
+```
 
 你可以随后向队列发送消息。例如，如果具有名为 `MessageList` 的中转消息列表，将出现此代码，类似如下形式：
 
-        for (int count = 0; count < 6; count++)
-        {
-            var issue = MessageList[count];
-            issue.Label = issue.Properties["IssueTitle"].ToString();
-            myQueueClient.Send(issue);
-        }
+```
+    for (int count = 0; count < 6; count++)
+    {
+        var issue = MessageList[count];
+        issue.Label = issue.Properties["IssueTitle"].ToString();
+        myQueueClient.Send(issue);
+    }
+```
 
 你可以随后接收来自队列的消息，如下所示：
 
-        while ((message = myQueueClient.Receive(new TimeSpan(hours: 0, minutes: 0, seconds: 5))) != null)
-            {
-                Console.WriteLine(string.Format("Message received: {0}, {1}, {2}", message.SequenceNumber, message.Label, message.MessageId));
-                message.Complete();
+```
+    while ((message = myQueueClient.Receive(new TimeSpan(hours: 0, minutes: 0, seconds: 5))) != null)
+        {
+            Console.WriteLine(string.Format("Message received: {0}, {1}, {2}", message.SequenceNumber, message.Label, message.MessageId));
+            message.Complete();
 
-                Console.WriteLine("Processing message (sleeping...)");
-                Thread.Sleep(1000);
-            }
+            Console.WriteLine("Processing message (sleeping...)");
+            Thread.Sleep(1000);
+        }
+```
 
 当使用 [ReceiveAndDelete](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.receivemode.aspx) 模式时，接收操作是一个单一快照。即，当服务总线收到请求时，它会将该消息标记为“已使用”并将其返回给应用程序。[ReceiveAndDelete](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.receivemode.aspx) 模式是最简单的模式，最适合应用程序允许出现故障时不处理消息的方案。为了理解这一点，可以考虑这样一种情形：使用方发出接收请求，但在处理该请求前发生了崩溃。由于服务总线会将消息标记为“已使用”，因此当应用程序重新启动并重新开始使用消息时，它会漏掉在发生崩溃前使用的消息。
 
@@ -78,48 +86,58 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 创建主题类似于创建队列，如前一节中的示例所示。创建服务 URI，然后使用 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类来创建命名空间客户端。然后，你可以使用 [CreateTopic](https://msdn.microsoft.com/zh-cn/library/azure/hh293080.aspx) 方法创建主题。例如：
 
-        TopicDescription dataCollectionTopic = namespaceClient.CreateTopic("DataCollectionTopic");
+```
+    TopicDescription dataCollectionTopic = namespaceClient.CreateTopic("DataCollectionTopic");
+```
 
 接下来，根据需要添加订阅：
 
-        SubscriptionDescription myAgentSubscription = namespaceClient.CreateSubscription(myTopic.Path, "Inventory");
-        SubscriptionDescription myAuditSubscription = namespaceClient.CreateSubscription(myTopic.Path, "Dashboard");
+```
+    SubscriptionDescription myAgentSubscription = namespaceClient.CreateSubscription(myTopic.Path, "Inventory");
+    SubscriptionDescription myAuditSubscription = namespaceClient.CreateSubscription(myTopic.Path, "Dashboard");
+```
 
 然后可以创建主题客户端。例如：
 
-        MessagingFactory factory = MessagingFactory.Create(serviceUri, tokenProvider);
-        TopicClient myTopicClient = factory.CreateTopicClient(myTopic.Path)
+```
+    MessagingFactory factory = MessagingFactory.Create(serviceUri, tokenProvider);
+    TopicClient myTopicClient = factory.CreateTopicClient(myTopic.Path)
+```
 
 通过消息发送方，你可以将消息发送至主题和从主题接收消息，如上一节所述。例如：
 
-        foreach (BrokeredMessage message in messageList)
-        {
-            myTopicClient.Send(message);
-            Console.WriteLine(
-            string.Format("Message sent: Id = {0}, Body = {1}", message.MessageId, message.GetBody<string>()));
-        }
+```
+    foreach (BrokeredMessage message in messageList)
+    {
+        myTopicClient.Send(message);
+        Console.WriteLine(
+        string.Format("Message sent: Id = {0}, Body = {1}", message.MessageId, message.GetBody<string>()));
+    }
+```
 
 与队列类似，可使用 [SubscriptionClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.subscriptionclient.aspx) 对象而不是 [QueueClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx) 对象接收来自订阅的消息。创建订阅客户端，将主题的名称、订阅的名称和（可选）接收模式作为参数传递。例如，对于“库存”订阅：
 
-        // Create the subscription client
-        MessagingFactory factory = MessagingFactory.Create(serviceUri, tokenProvider); 
+```
+    // Create the subscription client
+    MessagingFactory factory = MessagingFactory.Create(serviceUri, tokenProvider); 
 
-        SubscriptionClient agentSubscriptionClient = factory.CreateSubscriptionClient("IssueTrackingTopic", "Inventory", ReceiveMode.PeekLock);
-        SubscriptionClient auditSubscriptionClient = factory.CreateSubscriptionClient("IssueTrackingTopic", "Dashboard", ReceiveMode.ReceiveAndDelete); 
+    SubscriptionClient agentSubscriptionClient = factory.CreateSubscriptionClient("IssueTrackingTopic", "Inventory", ReceiveMode.PeekLock);
+    SubscriptionClient auditSubscriptionClient = factory.CreateSubscriptionClient("IssueTrackingTopic", "Dashboard", ReceiveMode.ReceiveAndDelete); 
 
-        while ((message = agentSubscriptionClient.Receive(TimeSpan.FromSeconds(5))) != null)
-        {
-            Console.WriteLine("\nReceiving message from Inventory...");
-            Console.WriteLine(string.Format("Message received: Id = {0}, Body = {1}", message.MessageId, message.GetBody<string>()));
-            message.Complete();
-        }          
+    while ((message = agentSubscriptionClient.Receive(TimeSpan.FromSeconds(5))) != null)
+    {
+        Console.WriteLine("\nReceiving message from Inventory...");
+        Console.WriteLine(string.Format("Message received: Id = {0}, Body = {1}", message.MessageId, message.GetBody<string>()));
+        message.Complete();
+    }          
 
-        // Create a receiver using ReceiveAndDelete mode
-        while ((message = auditSubscriptionClient.Receive(TimeSpan.FromSeconds(5))) != null)
-        {
-            Console.WriteLine("\nReceiving message from Dashboard...");
-            Console.WriteLine(string.Format("Message received: Id = {0}, Body = {1}", message.MessageId, message.GetBody<string>()));
-        }
+    // Create a receiver using ReceiveAndDelete mode
+    while ((message = auditSubscriptionClient.Receive(TimeSpan.FromSeconds(5))) != null)
+    {
+        Console.WriteLine("\nReceiving message from Dashboard...");
+        Console.WriteLine(string.Format("Message received: Id = {0}, Body = {1}", message.MessageId, message.GetBody<string>()));
+    }
+```
 
 ### 规则和操作
 
@@ -127,7 +145,9 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 使用上述示例，要仅筛选来自 **Store1** 的消息，如下所示创建“仪表板”订阅：
 
-        namespaceManager.CreateSubscription("IssueTrackingTopic", "Dashboard", new SqlFilter("StoreName = 'Store1'"));
+```
+    namespaceManager.CreateSubscription("IssueTrackingTopic", "Dashboard", new SqlFilter("StoreName = 'Store1'"));
+```
 
 通过此订阅筛选器，只有 `StoreName` 属性设置为 `Store1` 的消息将复制到 `Dashboard` 订阅的虚拟队列。
 
@@ -135,7 +155,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 ## 事件中心
 
-[事件中心](https://www.azure.cn/home/features/event-hubs/)是一种事件处理服务，用于向 Azure 提供大规模的事件与遥测数据入口，并且具有较低的延迟和较高的可靠性。在应用程序检测、用户体验或工作流处理以及[物联网 (IoT)](../iot-hub/index.md/) 方案中，将此服务与其他下游服务结合使用可以带来极好的效果。
+[事件中心](https://www.azure.cn/home/features/event-hubs/)是一种事件处理服务，用于向 Azure 提供大规模的事件与遥测数据入口，并且具有较低的延迟和较高的可靠性。在应用程序检测、用户体验或工作流处理以及[物联网 (IoT)](../iot-hub/index.md) 方案中，将此服务与其他下游服务结合使用可以带来极好的效果。
 
 事件中心是消息流式处理构造，尽管它们看上去类似于队列和主题，但其特征却迥然不同。例如，事件中心不提供消息 TTL、死信、事务或确认，因为这些是传统中转消息传送功能，而是流处理功能。事件中心可提供其他与流相关的功能（例如分区、保留顺序和流重播）。
 
@@ -146,7 +166,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 - [服务总线消息传送概述](./service-bus-messaging-overview.md)
 - [服务总线中转消息传送 .NET 教程](./service-bus-brokered-tutorial-dotnet.md)
 - [服务总线中转消息传送 REST 教程](./service-bus-brokered-tutorial-rest.md)
-- [事件中心文档](../event-hubs/index.md/)
+- [事件中心文档](../event-hubs/index.md)
 - [事件中心开发人员指南](../event-hubs/event-hubs-programming-guide.md)
 - [主题筛选器示例](https://github.com/Azure-Samples/azure-servicebus-messaging-samples/tree/master/TopicFilters)
 - [中转消息传送：高级筛选器](http://code.msdn.microsoft.com/Brokered-Messaging-6b0d2749)

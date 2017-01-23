@@ -34,13 +34,15 @@
 
     你可以单击虚拟机映像名称，在页面右侧查看映像的相关信息。
 
-    >[!NOTE] 无法将虚拟机映像添加到“公共映像”或“MSDN 映像”列表，因为它们是只读的。创建的所有虚拟机都将添加到“专用映像”列表。
+    >[!NOTE]
+    > 无法将虚拟机映像添加到“公共映像”或“MSDN 映像”列表，因为它们是只读的。创建的所有虚拟机都将添加到“专用映像”列表。
 
 1. 在“虚拟机基本设置”页上，输入计算机名称，然后添加虚拟机的规格（包含大小）以及用户名和密码。完成后，单击“下一步”。
 
     将通过远程桌面使用新名称和密码来登录计算机，因此最好能记下新名称和密码，以免忘记。在 Visual Studio 中创建 Azure 虚拟机之后，可以在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中更改其大小和其他设置。
 
-    >[!NOTE] 如果选择更大的虚拟机规模，可能需要支付额外费用。有关详细信息，请参阅[虚拟机定价详细信息](https://www.azure.cn/pricing/details/virtual-machines/)。
+    >[!NOTE]
+    > 如果选择更大的虚拟机规模，可能需要支付额外费用。有关详细信息，请参阅[虚拟机定价详细信息](https://www.azure.cn/pricing/details/virtual-machines/)。
 
 1. 在 Visual Studio 中创建的虚拟机需要云服务。在“云服务设置”页上，选择虚拟机的云服务，如果还没有云服务或想要使用新的云服务，请单击下拉列表中的“<新建...>”。还需要一个存储帐户，因此请在“存储帐户”下拉列表框中选择存储帐户（或创建新的存储帐户）。有关详细信息，请参阅 [Microsoft Azure 存储空间简介](../articles/storage/storage-introduction.md)。
 
@@ -58,7 +60,8 @@
 
     可用的终结点取决于为虚拟机选择的云服务。有关详细信息，请参阅 [Windows](../articles/virtual-machines/virtual-machines-windows-classic-setup-endpoints.md) 或 [Linux](../articles/virtual-machines/virtual-machines-linux-classic-setup-endpoints.md) VM 的 Azure 服务终结点。
 
-    >[!NOTE] 启用公共终结点后，便可以通过 Internet 使用你虚拟机上的服务。请务必在虚拟机上安装并正确配置终结点和服务，例如，为终结点设置访问控制列表 (ACL)。有关详细信息，请参阅如何为 [Windows](../articles/virtual-machines/virtual-machines-windows-classic-setup-endpoints.md) 或 [Linux](../articles/virtual-machines/virtual-machines-linux-classic-setup-endpoints.md) 虚拟机设置终结点。
+    >[!NOTE]
+    > 启用公共终结点后，便可以通过 Internet 使用你虚拟机上的服务。请务必在虚拟机上安装并正确配置终结点和服务，例如，为终结点设置访问控制列表 (ACL)。有关详细信息，请参阅如何为 [Windows](../articles/virtual-machines/virtual-machines-windows-classic-setup-endpoints.md) 或 [Linux](../articles/virtual-machines/virtual-machines-linux-classic-setup-endpoints.md) 虚拟机设置终结点。
 
 1. 配置完虚拟机设置后，请选择“创建”按钮以创建虚拟机。
 

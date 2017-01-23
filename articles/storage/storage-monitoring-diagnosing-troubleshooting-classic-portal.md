@@ -135,7 +135,8 @@ ms.author: jahogg;robinsh
 
 存储度量值仅存储 Blob 服务的容量度量值，因为 Blob 通常占所存储数据的最大比例（撰写本文时，尚不能使用存储度量值监视表和队列的容量）。如果你已为 Blob 服务启用监视，则可以在 **$MetricsCapacityBlob** 表中找到此数据。存储度量值每天记录一次此数据，然后你可以使用 **RowKey** 的值确定某行是否包含与用户数据（值 **data**）或分析数据（值 **analytics**）相关的实体。每个存储的实体均包含有关所用的存储量（**Capacity**，以字节为单位）、当前的容器数 (**ContainerCount**) 以及存储帐户中正在使用的 Blob 数 (**ObjectCount**) 的信息。有关 **$MetricsCapacityBlob** 表中存储的容量度量值的详细信息，请参阅 MSDN 上的<a href="http://msdn.microsoft.com/zh-cn/library/azure/hh343264.aspx" target="_blank">存储分析度量表架构</a>。
 
-> [!NOTE] 你应监视这些值，以便获取“你已接近存储帐户的容量限制”的早期警告。在 Azure 经典管理门户中你的存储帐户的“监视”页上，你可以添加警报规则，以便在聚合存储使用量超过或低于你指定的阈值时通知你。
+> [!NOTE]
+> 你应监视这些值，以便获取“你已接近存储帐户的容量限制”的早期警告。在 Azure 经典管理门户中你的存储帐户的“监视”页上，你可以添加警报规则，以便在聚合存储使用量超过或低于你指定的阈值时通知你。
 
 若要帮助估算各种存储对象（如 Blob）的大小，请参阅博客文章<a href="http://blogs.msdn.com/b/windowsazurestorage/archive/2010/07/09/understanding-windows-azure-storage-billing-bandwidth-transactions-and-capacity.aspx" target="_blank">了解 Azure 存储计费 - 带宽、事务和容量</a>。
 
@@ -197,7 +198,8 @@ ms.author: jahogg;robinsh
 
 应用程序用户可能会向你通知客户端应用程序报告的错误。存储度量值还会记录来自存储服务的不同错误类型（如 **NetworkError**、**ClientTimeoutError** 或 **AuthorizationError**）的计数。虽然存储度量值仅记录不同错误类型的计数，但你可以通过检查服务器端日志、客户端日志和网络日志获取有关单独请求的详细信息。通常，存储服务返回的 HTTP 状态代码将指示请求失败的原因。
 
-> [!NOTE] 请记住，你应该会看到一些间歇性错误：例如，因暂时性的网络状况导致的错误或应用程序错误。
+> [!NOTE]
+> 请记住，你应该会看到一些间歇性错误：例如，因暂时性的网络状况导致的错误或应用程序错误。
 
 MSDN 上的以下资源对了解与存储相关的状态和错误代码很有帮助：
 
@@ -218,7 +220,8 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 
 通过用于 .NET 的存储客户端库，可以收集与应用程序执行的存储操作相关的客户端日志数据。有关如何启用客户端日志记录和访问日志数据的详细信息，请参阅 MSDN 上的<a href="https://msdn.microsoft.com/zh-cn/library/dn782839.aspx" target="_blank">使用存储客户端库进行客户端日志记录</a>。
 
-> [!NOTE] 在某些情况下（如 SAS 授权失败），用户可能会报告一个错误，而你可能在服务器端存储日志中未找到该错误所对应的请求数据。你可以使用存储客户端库的日志记录功能调查该问题的原因是否出在客户端上，或者使用网络监视工具调查网络。
+> [!NOTE]
+> 在某些情况下（如 SAS 授权失败），用户可能会报告一个错误，而你可能在服务器端存储日志中未找到该错误所对应的请求数据。你可以使用存储客户端库的日志记录功能调查该问题的原因是否出在客户端上，或者使用网络监视工具调查网络。
 
 ### <a name="using-network-logging-tools"></a>使用网络日志记录工具
 
@@ -247,7 +250,8 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 - 在网络跟踪（如 Fiddler 捕获的网络跟踪）中，客户端请求 ID 将作为 **x-ms-client-request-id** HTTP 标头值出现在请求消息中。
 - 在服务器端存储日志记录日志中，客户端请求 ID 将出现在“客户端请求 ID”列中。
 
-> [!NOTE] 多个请求可以共享同一客户端请求 ID，因为客户端可以分配此值（尽管存储客户端库会自动分配一个新值）。如果从客户端重试，所有尝试都共享相同的客户端请求 ID。如果从客户端发送批处理，批处理有单个客户端请求 ID。
+> [!NOTE]
+> 多个请求可以共享同一客户端请求 ID，因为客户端可以分配此值（尽管存储客户端库会自动分配一个新值）。如果从客户端重试，所有尝试都共享相同的客户端请求 ID。如果从客户端发送批处理，批处理有单个客户端请求 ID。
 
 ### <a name="server-request-id"></a>服务器请求 ID
 
@@ -257,41 +261,44 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 - 在网络跟踪（如 Fiddler 捕获的网络跟踪）中，服务器请求 ID 将作为 **x-ms-request-id** 标头值出现在响应消息中。
 - 在存储客户端库创建的客户端日志中，服务器请求 ID 将出现在显示服务器响应详细信息的日志条目的“操作文本”列中。
 
-> [!NOTE] 存储服务始终为它接收的每个请求分配唯一的服务器请求 ID，因此客户端进行的每次重试尝试和批处理中包含的每个操作均使用唯一的服务器请求 ID。
+> [!NOTE]
+> 存储服务始终为它接收的每个请求分配唯一的服务器请求 ID，因此客户端进行的每次重试尝试和批处理中包含的每个操作均使用唯一的服务器请求 ID。
 
 如果存储客户端库在客户端上引发 **StorageException**，则 **RequestInformation** 属性将包含 **RequestResult** 对象（其中包含 **ServiceRequestID** 属性）。你也可以通过 **OperationContext** 实例访问 **RequestResult** 对象。
 
 下面的代码示例演示如何通过附加 **OperationContext** 对象（向存储服务发出的请求）设置自定义 **ClientRequestId** 值。它还演示了如何从响应消息中检索 **ServerRequestId** 值。
 
-    //Parse the connection string for the storage account.
-    const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
-    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
-    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+```
+//Parse the connection string for the storage account.
+const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
+CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
+CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-    // Create an Operation Context that includes custom ClientRequestId string based on constants defined within the application along with a Guid.
-    OperationContext oc = new OperationContext();
-    oc.ClientRequestID = String.Format("{0} {1} {2} {3}", HOSTNAME, APPNAME, USERID, Guid.NewGuid().ToString());
+// Create an Operation Context that includes custom ClientRequestId string based on constants defined within the application along with a Guid.
+OperationContext oc = new OperationContext();
+oc.ClientRequestID = String.Format("{0} {1} {2} {3}", HOSTNAME, APPNAME, USERID, Guid.NewGuid().ToString());
 
-    try
+try
+{
+    CloudBlobContainer container = blobClient.GetContainerReference("democontainer");
+    ICloudBlob blob = container.GetBlobReferenceFromServer("testImage.jpg", null, null, oc);  
+    var downloadToPath = string.Format("./{0}", blob.Name);
+    using (var fs = File.OpenWrite(downloadToPath))
     {
-        CloudBlobContainer container = blobClient.GetContainerReference("democontainer");
-        ICloudBlob blob = container.GetBlobReferenceFromServer("testImage.jpg", null, null, oc);  
-        var downloadToPath = string.Format("./{0}", blob.Name);
-        using (var fs = File.OpenWrite(downloadToPath))
-        {
-            blob.DownloadToStream(fs, null, null, oc);
-            Console.WriteLine("\t Blob downloaded to file: {0}", downloadToPath);
-        }
+        blob.DownloadToStream(fs, null, null, oc);
+        Console.WriteLine("\t Blob downloaded to file: {0}", downloadToPath);
     }
-    catch (StorageException storageException)
+}
+catch (StorageException storageException)
+{
+    Console.WriteLine("Storage exception {0} occurred", storageException.Message);
+    // Multiple results may exist due to client side retry logic - each retried operation will have a unique ServiceRequestId
+    foreach (var result in oc.RequestResults)
     {
-        Console.WriteLine("Storage exception {0} occurred", storageException.Message);
-        // Multiple results may exist due to client side retry logic - each retried operation will have a unique ServiceRequestId
-        foreach (var result in oc.RequestResults)
-        {
-                Console.WriteLine("HttpStatus: {0}, ServiceRequestId {1}", result.HttpStatusCode, result.ServiceRequestID);
-        }
+            Console.WriteLine("HttpStatus: {0}, ServiceRequestId {1}", result.HttpStatusCode, result.ServiceRequestID);
     }
+}
+```
 
 ### <a name="timestamps"></a>时间戳
 
@@ -362,7 +369,8 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 
 请注意，存储服务仅对成功的请求计算度量值 **AverageE2ELatency**，与 **AverageServerLatency** 不同，它包括客户端发送数据及从存储服务接收确认所需的时间。因此，**AverageE2ELatency** 和 **AverageServerLatency** 之间的差异可能是由于客户端应用程序响应速度慢，或者是由网络上的情况而导致。
 
-> [!NOTE] 你还可以在存储日志记录日志数据中查看单独存储操作的 **E2ELatency** 和 **ServerLatency**。
+> [!NOTE]
+> 你还可以在存储日志记录日志数据中查看单独存储操作的 **E2ELatency** 和 **ServerLatency**。
 
 #### 调查客户端性能问题
 
@@ -370,11 +378,13 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 
 对于表和队列服务，Nagle 算法也可能会导致高 **AverageE2ELatency**（与 **AverageServerLatency** 相比）：有关详细信息，请参阅 Azure 存储团队博客上的文章 <a href="http://blogs.msdn.com/b/windowsazurestorage/archive/2010/06/25/nagle-s-algorithm-is-not-friendly-towards-small-requests.aspx" target="_blank">Nagle 算法对小请求不友好</a>。你可以通过使用 **System.Net** 命名空间中的 **ServicePointManager** 类在代码中禁用 Nagle 算法。应在应用程序中进行任何表或队列服务调用之前执行此操作，因为这样做不会影响已打开的连接。下面的示例来自辅助角色中的 **Application\_Start** 方法。
 
-    var storageAccount = CloudStorageAccount.Parse(connStr);
-    ServicePoint tableServicePoint = ServicePointManager.FindServicePoint(storageAccount.TableEndpoint);
-    tableServicePoint.UseNagleAlgorithm = false;
-    ServicePoint queueServicePoint = ServicePointManager.FindServicePoint(storageAccount.QueueEndpoint);
-    queueServicePoint.UseNagleAlgorithm = false;
+```
+var storageAccount = CloudStorageAccount.Parse(connStr);
+ServicePoint tableServicePoint = ServicePointManager.FindServicePoint(storageAccount.TableEndpoint);
+tableServicePoint.UseNagleAlgorithm = false;
+ServicePoint queueServicePoint = ServicePointManager.FindServicePoint(storageAccount.QueueEndpoint);
+queueServicePoint.UseNagleAlgorithm = false;
+```
 
 你应查看客户端日志以了解客户端应用程序正在提交多少个请求，并检查客户端中一般与 .NET 相关的性能瓶颈（如 CPU、.NET 垃圾回收、网络利用率或内存（作为排查 .NET 客户端应用程序问题的起点，请参阅 MSDN 上的<a href="http://msdn.microsoft.com/zh-cn/library/7fe0dd2y(v=vs.110).aspx" target="_blank">调试、跟踪和分析</a>）。
 
@@ -406,7 +416,8 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 
 高 **AverageServerLatency** 值也可能是设计欠佳的表或查询的症状，它会导致扫描操作或执行追加/前面预置反模式。有关详细信息，请参阅“[度量值显示 PercentThrottlingError 增加]”。
 
-> [!NOTE] 你可以在此处找到一份全面的性能清单：[Azure 存储性能和可伸缩性清单](./storage-performance-checklist.md)。
+> [!NOTE]
+> 你可以在此处找到一份全面的性能清单：[Azure 存储性能和可伸缩性清单](./storage-performance-checklist.md)。
 
 ### <a name="you-are-experiencing-unexpected-delays-in-message-delivery"></a>队列上的消息传递出现意外延迟
 
@@ -433,7 +444,8 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 
 如果你看到 **PercentThrottlingError** 的值达到峰值的时间与应用程序活动的高峰期保持一致，则应在客户端中对重试实施指数（而非线性）退让策略：这将减少分区上的即时负载，并帮助你的应用程序消除流量峰值。有关如何使用存储客户端库实现重试策略的详细信息，请参阅 MSDN 上的 <a href="http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.storage.retrypolicies.aspx" target="_blank">Microsoft.WindowsAzure.Storage.RetryPolicies 命名空间</a>。
 
-> [!NOTE] 你可能也会看到 **PercentThrottlingError** 的值达到峰值的时间与应用程序活动的高峰期不一致：这种情况最可能的原因是存储服务正在移动分区以改进负载均衡。
+> [!NOTE]
+> 你可能也会看到 **PercentThrottlingError** 的值达到峰值的时间与应用程序活动的高峰期不一致：这种情况最可能的原因是存储服务正在移动分区以改进负载均衡。
 
 #### <a name="permanent-increase-in-PercentThrottlingError"></a>PercentThrottlingError 错误永久增加
 
@@ -443,13 +455,15 @@ Azure SDK 包括一个存储模拟器，你可以在开发工作站上运行它�
 
 低效的查询设计也会导致你达到表分区的可伸缩性限制。例如，一个使用筛选器的查询仅选择分区中百分之一的实体，但却扫描该分区中的所有实体，这将需要访问每个实体。读取的每个实体均将计入该分区中的事务总数；因此，很容易就会达到可伸缩性目标。
 
-> [!NOTE] 性能测试应显示你的应用程序中的任何低效查询设计。
+> [!NOTE]
+> 性能测试应显示你的应用程序中的任何低效查询设计。
 
 ### <a name="metrics-show-an-increase-in-PercentTimeoutError"></a>度量值显示 PercentTimeoutError 增加
 
 你的度量值显示其中一个存储服务的 **PercentTimeoutError** 增加。同时，客户端将收到存储操作发出的大量“500 操作超时”HTTP 状态消息。
 
-> [!NOTE] 当存储服务通过将分区移到新服务器来对请求进行负载均衡时，你可能会临时看到超时错误。
+> [!NOTE]
+> 当存储服务通过将分区移到新服务器来对请求进行负载均衡时，你可能会临时看到超时错误。
 
 **PercentTimeoutError** 度量值是以下度量值的聚合：**ClientTimeoutError**、**AnonymousClientTimeoutError**、**SASClientTimeoutError**、**ServerTimeoutError**、**AnonymousServerTimeoutError** 和 **SASServerTimeoutError**。
 
@@ -609,10 +623,13 @@ e2d06d78-... | 重试策略不允许重试。操作失败，远程服务器返�
 
 如果你使用的是 JavaScript 客户端并且存储服务返回 HTTP 404 消息，则应在浏览器中检查以下 JavaScript 错误：
 
-    SEC7120: Origin http://localhost:56309 not found in Access-Control-Allow-Origin header.
-    SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
+```
+SEC7120: Origin http://localhost:56309 not found in Access-Control-Allow-Origin header.
+SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
+```
 
-> [!NOTE] 在排查客户端 JavaScript 问题时，可以使用 Internet Explorer 中的 F12 开发人员工具跟踪浏览器与存储服务之间交换的消息。
+> [!NOTE]
+> 在排查客户端 JavaScript 问题时，可以使用 Internet Explorer 中的 F12 开发人员工具跟踪浏览器与存储服务之间交换的消息。
 
 之所以发生这些错误是因为 Web 浏览器实施了“<a href="http://www.w3.org/Security/wiki/Same_Origin_Policy" target="_blank">同源策略</a>”安全限制，以防止网页调用与它来自的域不同的域中的 API。
 
@@ -620,19 +637,21 @@ e2d06d78-... | 重试策略不允许重试。操作失败，远程服务器返�
 
 下面的代码示例演示如何配置 Blob 服务，以允许在 Contoso 域中运行的 JavaScript 访问 Blob 存储服务中的 Blob：
 
-    CloudBlobClient client = new CloudBlobClient(blobEndpoint, new StorageCredentials(accountName, accountKey));
-    // Set the service properties.
-    ServiceProperties sp = client.GetServiceProperties();
-    sp.DefaultServiceVersion = "2013-08-15";
-    CorsRule cr = new CorsRule();
-    cr.AllowedHeaders.Add("*");
-    cr.AllowedMethods = CorsHttpMethods.Get | CorsHttpMethods.Put;
-    cr.AllowedOrigins.Add("http://www.contoso.com");
-    cr.ExposedHeaders.Add("x-ms-*");
-    cr.MaxAgeInSeconds = 5;
-    sp.Cors.CorsRules.Clear();
-    sp.Cors.CorsRules.Add(cr);
-    client.SetServiceProperties(sp);
+```
+CloudBlobClient client = new CloudBlobClient(blobEndpoint, new StorageCredentials(accountName, accountKey));
+// Set the service properties.
+ServiceProperties sp = client.GetServiceProperties();
+sp.DefaultServiceVersion = "2013-08-15";
+CorsRule cr = new CorsRule();
+cr.AllowedHeaders.Add("*");
+cr.AllowedMethods = CorsHttpMethods.Get | CorsHttpMethods.Put;
+cr.AllowedOrigins.Add("http://www.contoso.com");
+cr.ExposedHeaders.Add("x-ms-*");
+cr.MaxAgeInSeconds = 5;
+sp.Cors.CorsRules.Clear();
+sp.Cors.CorsRules.Add(cr);
+client.SetServiceProperties(sp);
+```
 
 #### <a name="network-failure"></a>网络故障
 
@@ -719,10 +738,12 @@ e2d06d78-... | 重试策略不允许重试。操作失败，远程服务器返�
 
 原因是现有 LocalDB 安装有问题。默认情况下，存储模拟器在模拟 Azure 存储服务时使用 LocalDB 持久保存数据。你可以在尝试安装 SDK 之前，通过在命令提示符窗口中运行以下命令，重置 LocalDB 实例。
 
-    sqllocaldb stop v11.0
-    sqllocaldb delete v11.0
-    delete %USERPROFILE%\WAStorageEmulatorDb3*.*
-    sqllocaldb create v11.0
+```
+sqllocaldb stop v11.0
+sqllocaldb delete v11.0
+delete %USERPROFILE%\WAStorageEmulatorDb3*.*
+sqllocaldb create v11.0
+```
 
 **delete** 命令可从以前安装的存储模拟器中删除任何旧的数据库文件。
 
@@ -748,7 +769,8 @@ e2d06d78-... | 重试策略不允许重试。操作失败，远程服务器返�
 
 Fiddler 是一个有用的工具，用于分析客户端应用程序与你所用的 Azure 存储服务之间的 HTTP 和 HTTPS 流量。你可以从 <a href="http://www.telerik.com/fiddler" target="_blank">http://www.telerik.com/fiddler</a> 下载 Fiddler。
 
-> [!NOTE] Fiddler 可以解码 HTTPS 流量；你应仔细阅读 Fiddler 文档，了解它如何执行此操作并了解安全隐患。
+> [!NOTE]
+> Fiddler 可以解码 HTTPS 流量；你应仔细阅读 Fiddler 文档，了解它如何执行此操作并了解安全隐患。
 
 本附录提供了一个简要演练，介绍如何配置 Fiddler 以捕获已安装 Fiddler 的本地计算机与 Azure 存储服务之间的流量。
 
@@ -767,16 +789,16 @@ Wireshark 是一种网络协议分析器，可用于查看各种网络协议的�
 
 以下过程演示，对于从安装 Wireshark 的本地计算机到 Azure 存储帐户中的表服务的流量，如何捕获其详细数据包信息。
 
-1.	在本地计算机上启动 Wireshark。
-2.	在“启动”部分中，选择本地网络接口或连接到 Internet 的接口。
-3.	单击“捕获选项”。
-4.	将一个筛选器添加到“捕获筛选器”文本框中。例如，**host contosoemaildist.table.core.chinacloudapi.cn** 会将 Wireshark 配置为只捕获发送到 **contosoemaildist** 存储帐户中的表服务终结点或从该终结点发送的数据包。有关捕获筛选器的完整列表，请参阅 <a href="http://wiki.wireshark.org/CaptureFilters" target="_blank">http://wiki.wireshark.org/CaptureFilters</a>。
+1. 在本地计算机上启动 Wireshark。
+2. 在“启动”部分中，选择本地网络接口或连接到 Internet 的接口。
+3. 单击“捕获选项”。
+4. 将一个筛选器添加到“捕获筛选器”文本框中。例如，**host contosoemaildist.table.core.chinacloudapi.cn** 会将 Wireshark 配置为只捕获发送到 **contosoemaildist** 存储帐户中的表服务终结点或从该终结点发送的数据包。有关捕获筛选器的完整列表，请参阅 <a href="http://wiki.wireshark.org/CaptureFilters" target="_blank">http://wiki.wireshark.org/CaptureFilters</a>。
 
     ![][6]  
 
-5.	单击“启动”。现在，当你在本地计算机上使用客户端应用程序时，Wireshark 将捕获发送到表服务终结点或从该终结点发送的所有数据包。
-6.	完成后，在主菜单上，依次单击“捕获”和“停止”。
-7.	若要将捕获的数据保存到 Wireshark 捕获文件中，请在主菜单上依次单击“文件”和“保存”。
+5. 单击“启动”。现在，当你在本地计算机上使用客户端应用程序时，Wireshark 将捕获发送到表服务终结点或从该终结点发送的所有数据包。
+6. 完成后，在主菜单上，依次单击“捕获”和“停止”。
+7. 若要将捕获的数据保存到 Wireshark 捕获文件中，请在主菜单上依次单击“文件”和“保存”。
 
 WireShark 将在 **packetlist** 窗口中突出显示存在的任何错误。你还可以使用“专家信息”窗口（依次单击“分析”、“专家信息”）查看错误和警告的摘要。
 
@@ -786,7 +808,8 @@ WireShark 将在 **packetlist** 窗口中突出显示存在的任何错误。你
 
 ![][8]  
 
-> [!NOTE] 有关使用 Wireshark 的详细信息，请参阅 <a href="http://www.wireshark.org/docs/wsug_html_chunked/" target="_blank">Wireshark 用户指南</a>。
+> [!NOTE]
+> 有关使用 Wireshark 的详细信息，请参阅 <a href="http://www.wireshark.org/docs/wsug_html_chunked/" target="_blank">Wireshark 用户指南</a>。
 
 ### <a name="appendix-3"></a>附录 3：使用 Microsoft Message Analyzer 捕获网络流量
 
@@ -796,9 +819,12 @@ WireShark 将在 **packetlist** 窗口中突出显示存在的任何错误。你
 
 若要使用 Microsoft Message Analyzer 为 HTTP 和 HTTPS 流量配置 Web 跟踪会话，请运行 Microsoft Message Analyzer 应用程序，然后在“文件”菜单上单击“捕获/跟踪”。在可用的跟踪方案列表中，选择“Web 代理”。然后在“跟踪方案配置”面板的 **HostnameFilter** 文本框中，添加存储终结点的名称（你可以在 Azure 经典管理门户中查找这些名称）。例如，如果你的 Azure 存储帐户的名称是 **contosodata**，则应将以下内容添加到 **HostnameFilter** 文本框：
 
-    contosodata.blob.core.chinacloudapi.cn contosodata.table.core.chinacloudapi.cn contosodata.queue.core.chinacloudapi.cn
+```
+contosodata.blob.core.chinacloudapi.cn contosodata.table.core.chinacloudapi.cn contosodata.queue.core.chinacloudapi.cn
+```
 
-> [!NOTE] 空格字符分隔主机名。
+> [!NOTE]
+> 空格字符分隔主机名。
 
 当你准备好开始收集跟踪数据时，请单击“就此开始”按钮。
 

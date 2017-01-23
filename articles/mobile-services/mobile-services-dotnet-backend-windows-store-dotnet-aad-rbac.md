@@ -27,7 +27,8 @@ ms.author: wesmc
 
 本教程将演示基于角色的访问控制，检查每个用户在 Azure Active Directory (AAD) 中定义的“销售”组的成员资格。访问检查将在 .NET 移动服务后端中使用 Azure Active Directory 的 [Graph REST API] 来完成。只有属于“销售”组的用户才能查询数据。
 
->[!NOTE]本教程旨在扩充身份验证知识以加入授权实践。你应该先使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。本教程将继续更新[向应用程序添加身份验证]教程中使用的 TodoItem 应用程序。
+>[!NOTE]
+>本教程旨在扩充身份验证知识以加入授权实践。你应该先使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。本教程将继续更新[向应用程序添加身份验证]教程中使用的 TodoItem 应用程序。
 
 ##先决条件
 
@@ -35,7 +36,7 @@ ms.author: wesmc
 
 * 在 Windows 8.1 上运行的 Visual Studio 2013。
 * 使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。
- 
+
 ##为集成的应用程序生成密钥
 
 在学习[向应用程序添加身份验证]教程的过程中，你在完成[注册以使用 Azure Active Directory 登录名]步骤时为集成的应用程序创建了注册。在本部分中，你将生成在使用该集成应用程序客户端 ID 读取目录信息时所用的密钥。
@@ -62,252 +63,268 @@ ms.author: wesmc
 
 5. 在 AuthorizeAadRole.cs 文件的顶部添加以下 `using` 语句。
 
-        using System.Net;
-        using System.Net.Http;
-        using System.Web.Http;
-        using System.Web.Http.Controllers;
-        using System.Web.Http.Filters;
-        using Newtonsoft.Json;
-        using Microsoft.WindowsAzure.Mobile.Service.Security;
-        using Microsoft.WindowsAzure.Mobile.Service;
-        using Microsoft.IdentityModel.Clients.ActiveDirectory;
-        using System.Globalization;
-        using System.IO;
+    ```
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+    using System.Web.Http.Controllers;
+    using System.Web.Http.Filters;
+    using Newtonsoft.Json;
+    using Microsoft.WindowsAzure.Mobile.Service.Security;
+    using Microsoft.WindowsAzure.Mobile.Service;
+    using Microsoft.IdentityModel.Clients.ActiveDirectory;
+    using System.Globalization;
+    using System.IO;
+    ```
 
 6. 在 AuthorizeAadRole.cs 中，将以下枚举类型添加到 Utilities 命名空间。在此示例中，我们只需处理 **Sales** 角色。其他各项只是你可能要使用的组的示例。
 
-        public enum AadRoles
-        {
-            Sales,
-            Management,
-            Development
-        }
+    ```
+    public enum AadRoles
+    {
+        Sales,
+        Management,
+        Development
+    }
+    ```
 
 7. 在 AuthorizeAadRole.cs 中，将以下 `AuthorizeAadRole` 类定义添加到 Utilities 命名空间。
 
-        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-        public class AuthorizeAadRole : AuthorizationFilterAttribute
+    ```
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public class AuthorizeAadRole : AuthorizationFilterAttribute
+    {
+        private bool isInitialized;
+        private bool isHosted;
+        private ApiServices services = null;
+
+        // Constants used with ADAL and the Graph REST API for AAD
+        private const string AadInstance = "https://login.chinacloudapi.cn/{0}";
+        private const string GraphResourceId = "https://graph.chinacloudapi.cn/";
+        private const string APIVersion = "?api-version=2013-04-05";
+
+        // App settings pulled from the Mobile Service
+        private string tenantdomain;
+        private string clientid;
+        private string clientkey;
+        private Dictionary<int, string> groupIds = new Dictionary<int, string>();
+
+        private string token = null;
+
+        public AuthorizeAadRole(AadRoles role)
         {
-            private bool isInitialized;
-            private bool isHosted;
-            private ApiServices services = null;
-    
-            // Constants used with ADAL and the Graph REST API for AAD
-            private const string AadInstance = "https://login.chinacloudapi.cn/{0}";
-            private const string GraphResourceId = "https://graph.chinacloudapi.cn/";
-            private const string APIVersion = "?api-version=2013-04-05";
-    
-            // App settings pulled from the Mobile Service
-            private string tenantdomain;
-            private string clientid;
-            private string clientkey;
-            private Dictionary<int, string> groupIds = new Dictionary<int, string>();
-    
-            private string token = null;
-
-            public AuthorizeAadRole(AadRoles role)
-            {
-                this.Role = role;
-            }
-
-            // private class used to serialize the Graph REST API web response
-            private class MembershipResponse
-            {
-                public bool value;
-            }
-
-            public AadRoles Role { get; private set; }
-
-            // Generate a local dictionary for the role group ids configured as 
-            // Mobile Service app settings
-            private void InitGroupIds()
-            {
-            }
-
-            // Use ADAL and the authentication app settings from the Mobile Service to 
-            // get an AAD access token
-            private string GetAADToken()
-            {
-            }
-
-            // Given an AAD user id, check membership against the group associated with the role.
-            private bool CheckMembership(string memberId)
-            {
-            }
-
-            // Called when the user is attempting authorization
-            public override void OnAuthorization(HttpActionContext actionContext)
-            {
-            }
+            this.Role = role;
         }
+
+        // private class used to serialize the Graph REST API web response
+        private class MembershipResponse
+        {
+            public bool value;
+        }
+
+        public AadRoles Role { get; private set; }
+
+        // Generate a local dictionary for the role group ids configured as 
+        // Mobile Service app settings
+        private void InitGroupIds()
+        {
+        }
+
+        // Use ADAL and the authentication app settings from the Mobile Service to 
+        // get an AAD access token
+        private string GetAADToken()
+        {
+        }
+
+        // Given an AAD user id, check membership against the group associated with the role.
+        private bool CheckMembership(string memberId)
+        {
+        }
+
+        // Called when the user is attempting authorization
+        public override void OnAuthorization(HttpActionContext actionContext)
+        {
+        }
+    }
+    ```
 
 8. 在 AuthorizeAadRole.cs 中，按如下所示更新 `AuthorizeAadRole` 类中的 `InitGroupIds` 方法。此方法会创建一个字典，以将组 ID 映射到每个角色。
 
-        private void InitGroupIds()
-        {
-            string groupId;
-            
-            if (services == null)
-                return;
+    ```
+    private void InitGroupIds()
+    {
+        string groupId;
 
-            if (!groupIds.ContainsKey((int)AadRoles.Sales))
+        if (services == null)
+            return;
+
+        if (!groupIds.ContainsKey((int)AadRoles.Sales))
+        {
+            if (services.Settings.TryGetValue("AAD_SALES_GROUP_ID", out groupId))
             {
-                if (services.Settings.TryGetValue("AAD_SALES_GROUP_ID", out groupId))
-                {
-                    groupIds.Add((int)AadRoles.Sales, groupId);
-                }
-                else
-                    services.Log.Error("AAD_SALES_GROUP_ID app setting not found.");
+                groupIds.Add((int)AadRoles.Sales, groupId);
             }
+            else
+                services.Log.Error("AAD_SALES_GROUP_ID app setting not found.");
         }
+    }
+    ```
 
 9. 在 AuthorizeAadRole.cs 中，更新 `AuthorizeAadRole` 类中的 `GetAADToken` 方法。此方法使用存储在移动服务中的应用程序设置来获取从 ADAL 访问 AAD 的令牌。
 
-    >[!NOTE]默认情况下，ADAL for .NET 包含内存中令牌缓存，以帮助减轻 Active Directory 的额外网络流量。但是，你可以编写自己的缓存实现，或完全禁用缓存。有关详细信息，请参阅 [ADAL for .NET]。
+    >[!NOTE]
+    >默认情况下，ADAL for .NET 包含内存中令牌缓存，以帮助减轻 Active Directory 的额外网络流量。但是，你可以编写自己的缓存实现，或完全禁用缓存。有关详细信息，请参阅 [ADAL for .NET]。
 
-        // Use ADAL and the authentication app settings from the Mobile Service to get an AAD access token
-        private async Task<string> GetAADToken()
+    ```
+    // Use ADAL and the authentication app settings from the Mobile Service to get an AAD access token
+    private async Task<string> GetAADToken()
+    {
+        // Try to get the required AAD authentication app settings from the mobile service.  
+        if (!(services.Settings.TryGetValue("AAD_CLIENT_ID", out clientid) &
+              services.Settings.TryGetValue("AAD_CLIENT_KEY", out clientkey) &
+              services.Settings.TryGetValue("AAD_TENANT_DOMAIN", out tenantdomain)))
         {
-            // Try to get the required AAD authentication app settings from the mobile service.  
-            if (!(services.Settings.TryGetValue("AAD_CLIENT_ID", out clientid) &
-                  services.Settings.TryGetValue("AAD_CLIENT_KEY", out clientkey) &
-                  services.Settings.TryGetValue("AAD_TENANT_DOMAIN", out tenantdomain)))
-            {
-                services.Log.Error("GetAADToken() : Could not retrieve mobile service app settings.");
-                return null;
-            }
-
-            ClientCredential clientCred = new ClientCredential(clientid, clientkey);
-            string authority = String.Format(CultureInfo.InvariantCulture, AadInstance, tenantdomain);
-            AuthenticationContext authContext = new AuthenticationContext(authority);
-            AuthenticationResult result = await authContext.AcquireTokenAsync(GraphResourceId, clientCred);
-
-            if (result != null)
-                token = result.AccessToken;
-            else
-                services.Log.Error("GetAADToken() : Failed to return a token.");
-
-            return token;
+            services.Log.Error("GetAADToken() : Could not retrieve mobile service app settings.");
+            return null;
         }
+
+        ClientCredential clientCred = new ClientCredential(clientid, clientkey);
+        string authority = String.Format(CultureInfo.InvariantCulture, AadInstance, tenantdomain);
+        AuthenticationContext authContext = new AuthenticationContext(authority);
+        AuthenticationResult result = await authContext.AcquireTokenAsync(GraphResourceId, clientCred);
+
+        if (result != null)
+            token = result.AccessToken;
+        else
+            services.Log.Error("GetAADToken() : Failed to return a token.");
+
+        return token;
+    }
+    ```
 
 10. 在 AuthorizeAadRole.cs 中，更新 `AuthorizeAadRole` 类中的 `CheckMembership` 方法。此方法接收用户的对象 ID。然后，它使用 AAD Graph Rest API 来检查该对象 ID，以查看组的成员 ID 是否与 `AuthorizeAadRole` 类中选择的角色相关联。
 
-        private bool CheckMembership(string memberId)
+    ```
+    private bool CheckMembership(string memberId)
+    {
+        bool membership = false;
+        string url = GraphResourceId + tenantdomain + "/isMemberOf" + APIVersion;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+        // Use the Graph REST API to check group membership in the AAD
+        try
         {
-            bool membership = false;
-            string url = GraphResourceId + tenantdomain + "/isMemberOf" + APIVersion;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-
-            // Use the Graph REST API to check group membership in the AAD
-            try
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            request.Headers.Add("Authorization", token);
+            using (var sw = new StreamWriter(request.GetRequestStream()))
             {
-                request.Method = "POST";
-                request.ContentType = "application/json";
-                request.Headers.Add("Authorization", token);
-                using (var sw = new StreamWriter(request.GetRequestStream()))
-                {
-                    // Request body must have the group id and a member id to check for membership
-                    string body = String.Format(""groupId":"{0}","memberId":"{1}"",
-                        groupIds[(int)Role], memberId);
-                    sw.Write("{" + body + "}");
-                }
-
-                WebResponse response = request.GetResponse();
-                StreamReader sr = new StreamReader(response.GetResponseStream());
-                string json = sr.ReadToEnd();
-                MembershipResponse membershipResponse = JsonConvert.DeserializeObject<MembershipResponse>(json);
-                membership = membershipResponse.value;
-            }
-            catch (Exception e)
-            {
-                services.Log.Error("OnAuthorization() exception : " + e.Message);
+                // Request body must have the group id and a member id to check for membership
+                string body = String.Format(""groupId":"{0}","memberId":"{1}"",
+                    groupIds[(int)Role], memberId);
+                sw.Write("{" + body + "}");
             }
 
-            return membership;
+            WebResponse response = request.GetResponse();
+            StreamReader sr = new StreamReader(response.GetResponseStream());
+            string json = sr.ReadToEnd();
+            MembershipResponse membershipResponse = JsonConvert.DeserializeObject<MembershipResponse>(json);
+            membership = membershipResponse.value;
         }
+        catch (Exception e)
+        {
+            services.Log.Error("OnAuthorization() exception : " + e.Message);
+        }
+
+        return membership;
+    }
+    ```
 
 11. 在 AuthorizeAadRole.cs 中，使用以下代码更新 `AuthorizeAadRole` 类中的 `OnAuthorization` 方法。此代码要求调用移动服务的用户已在 AAD 上完成身份验证。然后，此代码将获取用户的 AAD 对象 ID，检查与该角色对应的 Active Directory 组的成员资格。
 
-    >[!NOTE]你可以按名称查找 Active Directory 组。但是，在许多情况下，将组 ID 存储为移动服务应用程序设置是较好的做法。这是因为组名称很可能会更改，而 ID 会保持相同。
+    >[!NOTE]
+    >你可以按名称查找 Active Directory 组。但是，在许多情况下，将组 ID 存储为移动服务应用程序设置是较好的做法。这是因为组名称很可能会更改，而 ID 会保持相同。
 
-        public override void OnAuthorization(HttpActionContext actionContext)
+    ```
+    public override void OnAuthorization(HttpActionContext actionContext)
+    {
+        if (actionContext == null)
         {
-            if (actionContext == null)
-            {
-                throw new ArgumentNullException("actionContext");
-            }
+            throw new ArgumentNullException("actionContext");
+        }
 
-            services = new ApiServices(actionContext.ControllerContext.Configuration);
+        services = new ApiServices(actionContext.ControllerContext.Configuration);
 
-            // Check whether we are running in a mode where local host access is allowed 
-            // through without authentication.
-            if (!this.isInitialized)
-            {
-                HttpConfiguration config = actionContext.ControllerContext.Configuration;
-                this.isHosted = config.GetIsHosted();
-                this.isInitialized = true;
-            }
+        // Check whether we are running in a mode where local host access is allowed 
+        // through without authentication.
+        if (!this.isInitialized)
+        {
+            HttpConfiguration config = actionContext.ControllerContext.Configuration;
+            this.isHosted = config.GetIsHosted();
+            this.isInitialized = true;
+        }
 
-            // No security when hosted locally
-            if (!this.isHosted && actionContext.RequestContext.IsLocal)
-            {
-                services.Log.Warn("AuthorizeAadRole: Local Hosting.");
-                return;
-            }
+        // No security when hosted locally
+        if (!this.isHosted && actionContext.RequestContext.IsLocal)
+        {
+            services.Log.Warn("AuthorizeAadRole: Local Hosting.");
+            return;
+        }
 
-            ApiController controller = actionContext.ControllerContext.Controller as ApiController;
-            if (controller == null)
-            {
-                services.Log.Error("AuthorizeAadRole: No ApiController.");
-            }
+        ApiController controller = actionContext.ControllerContext.Controller as ApiController;
+        if (controller == null)
+        {
+            services.Log.Error("AuthorizeAadRole: No ApiController.");
+        }
 
-            bool isAuthorized = false;
-            try
-            {
-                // Initialize a mapping for the group id to our enumerated type
-                InitGroupIds();
+        bool isAuthorized = false;
+        try
+        {
+            // Initialize a mapping for the group id to our enumerated type
+            InitGroupIds();
 
-                // Retrieve a AAD token from ADAL
-                GetAADToken();
-                if (token == null)
+            // Retrieve a AAD token from ADAL
+            GetAADToken();
+            if (token == null)
+        {
+                services.Log.Error("AuthorizeAadRole: Failed to get an AAD access token.");
+        }
+            else
             {
-                    services.Log.Error("AuthorizeAadRole: Failed to get an AAD access token.");
-            }
-                else
+        // Check group membership to see if the user is part of the group that corresponds to the role
+                if (!string.IsNullOrEmpty(groupIds[(int)Role]))
+        {
+            ServiceUser serviceUser = controller.User as ServiceUser;
+            if (serviceUser != null && serviceUser.Level == AuthorizationLevel.User)
+            {
+                var idents = serviceUser.GetIdentitiesAsync().Result;
+                        AzureActiveDirectoryCredentials clientAadCredentials =
+                            idents.OfType<AzureActiveDirectoryCredentials>().FirstOrDefault();
+                if (clientAadCredentials != null)
                 {
-            // Check group membership to see if the user is part of the group that corresponds to the role
-                    if (!string.IsNullOrEmpty(groupIds[(int)Role]))
-            {
-                ServiceUser serviceUser = controller.User as ServiceUser;
-                if (serviceUser != null && serviceUser.Level == AuthorizationLevel.User)
-                {
-                    var idents = serviceUser.GetIdentitiesAsync().Result;
-                            AzureActiveDirectoryCredentials clientAadCredentials =
-                                idents.OfType<AzureActiveDirectoryCredentials>().FirstOrDefault();
-                    if (clientAadCredentials != null)
-                    {
-                                isAuthorized = CheckMembership(clientAadCredentials.ObjectId);
-                        }
+                            isAuthorized = CheckMembership(clientAadCredentials.ObjectId);
                     }
                 }
             }
-            }
-            catch (Exception e)
-            {
-                services.Log.Error(e.Message);
-            }
-            finally
-            {
-                if (isAuthorized == false)
-            {
-                    services.Log.Error("Denying access");
+        }
+        }
+        catch (Exception e)
+        {
+            services.Log.Error(e.Message);
+        }
+        finally
+        {
+            if (isAuthorized == false)
+        {
+                services.Log.Error("Denying access");
 
-                actionContext.Response = actionContext.Request
-                    .CreateErrorResponse(HttpStatusCode.Forbidden, 
-                        "User is not logged in or not a member of the required group");
-            }
+            actionContext.Response = actionContext.Request
+                .CreateErrorResponse(HttpStatusCode.Forbidden, 
+                    "User is not logged in or not a member of the required group");
         }
-        }
+    }
+    }
+    ```
 
 12. 保存对 AuthorizeAadRole.cs 所做的更改。
 
@@ -317,36 +334,42 @@ ms.author: wesmc
 
 2. 在 TodoItemController.cs 中，为包含自定义授权属性的 utilities 命名空间添加 `using` 语句。
 
-        using todolistService.Utilities;
+    ```
+    using todolistService.Utilities;
+    ```
 
 3. 在 TodoItemController.cs 中，可以根据检查访问权限的方式，将属性添加到控制器类或单个方法。如果你要让所有控制器操作根据相同的角色来检查访问权限，只需将属性添加到类。请按如下所示将属性添加到类，以测试本教程。
 
-        [AuthorizeAadRole(AadGroups.Sales)]
-        public class TodoItemController : TableController<TodoItem>
+    ```
+    [AuthorizeAadRole(AadGroups.Sales)]
+    public class TodoItemController : TableController<TodoItem>
+    ```
 
     如果你只想要检查插入、更新和删除操作的访问权限，则应使用以下方式仅设置这些方法的属性。
 
-        // PATCH tables/TodoItem
-        [AuthorizeAadRole(AadGroups.Sales)]
-        public Task<TodoItem> PatchTodoItem(string id, Delta<TodoItem> patch)
-        {
-            return UpdateAsync(id, patch);
-        }
+    ```
+    // PATCH tables/TodoItem
+    [AuthorizeAadRole(AadGroups.Sales)]
+    public Task<TodoItem> PatchTodoItem(string id, Delta<TodoItem> patch)
+    {
+        return UpdateAsync(id, patch);
+    }
 
-        // POST tables/TodoItem
-        [AuthorizeAadRole(AadGroups.Sales)]
-        public async Task<IHttpActionResult> PostTodoItem(TodoItem item)
-        {
-            TodoItem current = await InsertAsync(item);
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
-        }
+    // POST tables/TodoItem
+    [AuthorizeAadRole(AadGroups.Sales)]
+    public async Task<IHttpActionResult> PostTodoItem(TodoItem item)
+    {
+        TodoItem current = await InsertAsync(item);
+        return CreatedAtRoute("Tables", new { id = current.Id }, current);
+    }
 
-        // DELETE tables/TodoItem
-        [AuthorizeAadRole(AadGroups.Sales)]
-        public Task DeleteTodoItem(string id)
-        {
-            return DeleteAsync(id);
-        }
+    // DELETE tables/TodoItem
+    [AuthorizeAadRole(AadGroups.Sales)]
+    public Task DeleteTodoItem(string id)
+    {
+        return DeleteAsync(id);
+    }
+    ```
 
 4. 保存 TodoItemController.cs 并生成移动服务，以验证是否没有语法错误。
 5. 将移动服务发布到 Azure 帐户。

@@ -17,7 +17,7 @@
 单词"blob"是"二进制大型对象"的缩写，它能够精确说明 blob 的含义：二进制信息的集合。虽然 blob 很简单，但它们非常有用。[图 1](#Fig1) 说明 Azure Blob 存储的基础知识。
 
 <a name="Fig1"></a>![Diagram of Blobs][blobs]
- 
+
 **图 1：Azure Blob 存储在容器中存储二进制数据 - blob。**
 
 若要使用 blob，必须先创建 Azure *storage account*。在创建帐户期间，需要指定将存储你使用此帐户创建的对象的 Azure 数据中心。无论所创建的每个 blob 位于何处，它都属于存储帐户中的某个容器。若要访问 blob，应用程序应提供以下形式的 URL：
@@ -49,7 +49,7 @@ Azure 提供了两个不同种类的 blob。选项有：
 当今许多应用程序都依赖某种数据库管理系统 (DBMS)。关系系统（如 SQL Server）是最常用的选择，但非关系方法（通常称为 *NoSQL* 技术）变得日益流行。为了让云应用程序能够使用这些数据管理方式，Azure 虚拟机允许你在 VM 中运行 DBMS（关系或 NoSQL）。[图 2](#Fig2) 以 SQL Server 为例说明了这种情况。
 
 <a name="Fig2"></a>![Diagram of SQL Server in a Virtual Machine][SQLSvr-vm]
- 
+
 **图 2：Azure 虚拟机允许在 VM 中运行 DBMS，并且通过 blob 实现永久存储。**
 
 对开发人员和数据库管理员来说，此方案非常类似于在他们自己的数据中心中运行同一软件。例如，在此处显示的示例中，可以使用 SQL Server 的几乎所有功能，并且你对系统具有完全管理访问权限。当然，你还负责管理数据库服务器，就好像它在本地运行一样。
@@ -63,7 +63,7 @@ Azure 提供了两个不同种类的 blob。选项有：
 对许多人来说，在 VM 中运行 DBMS 是所能想到的、在云中管理结构化数据的第一种方式。但它不是唯一选择，也不总是最佳选择。在一些情况下，使用"平台即服务"(PaaS) 方法管理数据更有意义。Azure 提供了称为 SQL 数据库 的 PaaS 技术，该技术允许你对关系数据进行管理。[图 3](#Fig3) 说明了此方式。 
 
 <a name="Fig3"></a>![Diagram of SQL 数据库][SQL-db]
- 
+
 **图 3：SQL 数据库 提供了共享的 PaaS 关系存储服务。**
 
 SQL 数据库 不为每个客户提供自己的 SQL Server 物理实例。相反，它为每个客户提供多租户服务和逻辑 SQL 数据库 服务器。所有客户共享该服务提供的计算和存储容量。与 Blob 存储一样，SQL 数据库 中的所有数据都存储在 Azure 数据中心的三台独立计算机上，从而为你的数据库提供内置的高可用性 (HA)。
@@ -89,7 +89,7 @@ SQL 数据库 可由运行在 Azure 上或其他位置（例如你的本地数�
 虽然 SQL 数据库 在单个 Azure 数据中心中保存了每个数据库的三个副本，但它不会在 Azure 数据中心之间自动复制数据。它提供了 SQL 数据同步，您可以使用该服务实现此目的。[图 4](#Fig4) 显示了这种情况。
 
 <a name="Fig4"></a>![Diagram of SQL data sync][SQL-datasync]
- 
+
 **图 4：SQL 数据同步将 SQL 数据库 中的数据与其他 Azure 和本地数据中心中的数据进行同步。**
 
 正如图中所示，SQL 数据同步可以同步不同位置的数据。例如，假定你在多个 Azure 数据中心中运行应用程序，并且数据存储在 SQL 数据库 中。您可以使用 SQL 数据同步来使该数据保持同步。SQL 数据同步还可以在 Azure 数据中心和运行在本地数据中心中的 SQL Server 的实例之间同步数据。这可能对同时保存本地应用程序所用数据的本地副本和运行在 Azure 上的应用程序所使用的云副本很有用。虽然图中未显示，但 SQL 数据同步还可用于在 SQL 数据库 和运行在 Azure 上或其他位置的 VM 中的 SQL Server 之间同步数据。
@@ -121,7 +121,7 @@ Azure VM 上的 SSRS 为你提供完整的功能，可以在云中充当报告�
 例如，Azure 表存储就是一种 NoSQL 方法。尽管其名称为表存储，但它不支持标准关系表，而是提供 *key/value store*，即，将一组数据与特定键相关联，然后让应用程序通过提供该键来访问这些数据。[图 6](#Fig6) 演示了基本原理。
 
 <a name="Fig6"></a>![Diagram of table storage][SQL-tblstor]
- 
+
 **图 6：Azure 表存储是支持快速轻松地访问大量数据的键/值存储。**
 
 与 blob 相似，每个表与一个 Azure 存储帐户相关联。表的命名也与 blob 非常相似，使用以下形式的 URL
@@ -176,4 +176,4 @@ Microsoft 还为 Excel 提供了 HiveQL 驱动程序。使用 Excel 外接程序
 [SQL-report]: ./media/cloud-storage/Data_05_SQLReporting.png
 [SQL-tblstor]: ./media/cloud-storage/Data_06_TblStorage.png
 [hadoop]: ./media/cloud-storage/Data_07_Hadoop.png
-<!--HONumber=43--> 
+<!--HONumber=43-->

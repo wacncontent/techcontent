@@ -25,7 +25,8 @@ Azure 基于角色的访问控制 (RBAC) 附带以下可分配到用户、组和
 
 下表提供内置角色的简短说明。单击角色名称查看该角色**操作**和**不操作**的详细列表。**操作**属性指定对 Azure 资源允许的操作。操作字符串可以使用通配符。**不操作**属性指定从允许的操作中排除的操作。
 
->[!NOTE] Azure 角色定义不断演化。本文尽可能地保持处于最新状态，但你总是可在 Azure PowerShell 中找到最新的角色定义。若适用，请使用 cmdlet `(get-azurermroledefinition "<role name>").actions` 或 `(get-azurermroledefinition "<role name>").notactions`。
+>[!NOTE]
+> Azure 角色定义不断演化。本文尽可能地保持处于最新状态，但你总是可在 Azure PowerShell 中找到最新的角色定义。若适用，请使用 cmdlet `(get-azurermroledefinition "<role name>").actions` 或 `(get-azurermroledefinition "<role name>").notactions`。
 
 | 角色名称 | 说明 |
 | --------- | ----------- |

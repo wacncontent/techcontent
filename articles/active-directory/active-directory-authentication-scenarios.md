@@ -1,4 +1,3 @@
-
 ---
 title: Azure AD 的身份验证方案 | Azure
 description: Azure Active Directory (AAD) 的五个最常见身份验证方案概述
@@ -58,11 +57,13 @@ Azure Active Directory (Azure AD) 通过以下方式简化了对开发人员的�
 
 • 在用户通过身份验证后，应用程序必须对用户的安全令牌进行验证以确保身份验证对于目标方是成功的。开发人员可以使用所提供的身份验证库来处理 Azure AD 提供的令牌的验证，包括 JSON Web 令牌 (JWT) 或 SAML 2.0。如果希望手动执行验证，请参阅 [JWT Token Handler](https://msdn.microsoft.com/zh-cn/library/dn205065.aspx)（JWT 令牌处理程序）文档。
 
-> [!IMPORTANT] Azure AD 使用公钥加密对令牌进行签名以及验证它们是否有效。应用程序必须实施必要的逻辑才能确保始终使用最新密钥进行更新，此方面的详细信息，请参阅有关 [Azure AD 中签名密钥滚动更新的重要信息](./active-directory-signing-key-rollover.md)。
+> [!IMPORTANT]
+> Azure AD 使用公钥加密对令牌进行签名以及验证它们是否有效。应用程序必须实施必要的逻辑才能确保始终使用最新密钥进行更新，此方面的详细信息，请参阅有关 [Azure AD 中签名密钥滚动更新的重要信息](./active-directory-signing-key-rollover.md)。
 
 • 身份验证过程的请求和响应流是由所使用的身份验证协议（例如 OAuth 2.0、OpenID Connect、WS-Federation 或 SAML 2.0）决定的。[Azure Active Directory 身份验证协议](./active-directory-authentication-protocols.md)主题和下面的部分中更详细地讨论了这些协议。
 
-> [!NOTE] Azure AD 支持 OAuth 2.0 和 OpenID Connect 标准，这些标准广泛使用持有者令牌，包括表示为 JWT 的持有者令牌。持有者令牌是一种轻型安全令牌，它授予对受保护资源的“持有者”访问权限。从这个意义上来说，“持有者”是可以提供令牌的任何一方。虽然某一方必须首先通过 Azure AD 的身份验证才能收到持有者令牌，但如果不采取必要的步骤在传输过程和存储中对令牌进行保护，令牌可能会被意外的某一方拦截并使用。虽然某些安全令牌具有内置机制来防止未经授权方使用它们，但是持有者令牌没有这一机制，因此必须在安全的通道（例如传输层安全 (HTTPS)）中进行传输。如果持有者令牌以明文传输，则恶意方可以利用中间人攻击来获得令牌并使用它来对受保护资源进行未经授权的访问。当存储或缓存持有者令牌供以后使用时，也应遵循同样的安全原则。请始终确保你的应用程序以安全的方式传输和存储持有者令牌。有关持有者令牌的更多安全注意事项，请参阅 [RFC 6750 第 5 部分](http://tools.ietf.org/html/rfc6750)。
+> [!NOTE]
+> Azure AD 支持 OAuth 2.0 和 OpenID Connect 标准，这些标准广泛使用持有者令牌，包括表示为 JWT 的持有者令牌。持有者令牌是一种轻型安全令牌，它授予对受保护资源的“持有者”访问权限。从这个意义上来说，“持有者”是可以提供令牌的任何一方。虽然某一方必须首先通过 Azure AD 的身份验证才能收到持有者令牌，但如果不采取必要的步骤在传输过程和存储中对令牌进行保护，令牌可能会被意外的某一方拦截并使用。虽然某些安全令牌具有内置机制来防止未经授权方使用它们，但是持有者令牌没有这一机制，因此必须在安全的通道（例如传输层安全 (HTTPS)）中进行传输。如果持有者令牌以明文传输，则恶意方可以利用中间人攻击来获得令牌并使用它来对受保护资源进行未经授权的访问。当存储或缓存持有者令牌供以后使用时，也应遵循同样的安全原则。请始终确保你的应用程序以安全的方式传输和存储持有者令牌。有关持有者令牌的更多安全注意事项，请参阅 [RFC 6750 第 5 部分](http://tools.ietf.org/html/rfc6750)。
 
 现在你已概要了解了基本知识，请阅读下面几部分来了解在 Azure AD 中如何进行设置，以及 Azure AD 支持的常见方案。
 
@@ -113,7 +114,7 @@ Azure AD 颁发的安全令牌包含与经过授权的使用者有关的信息�
 
 - 单租户应用程序：单租户应用程序预定在单个组织中使用。它们通常是由企业开发人员编写的业务线 (LoB) 应用程序。单租户应用程序只需要供单个目录中的用户进行访问，因此，只需要将其设置在单个目录中。这些应用程序通常由组织中的开发人员进行注册。
 
-- 多租户应用程序：多租户应用程序预定在许多组织中使用，而不仅是在单个组织中使用。它们通常是由独立软件供应商 (ISV) 编写的软件即服务 (SaaS) 应用程序。多租户应用程序需要设置在将使用它们的每个目录中，需要经过用户或管理员许可才能注册它们。当在目录中注册应用程序并向其授予对 Graph API 或者另一可能的 Web API 的访问权限时，此许可过程即已开始。当其他组织的用户或管理员注册使用应用程序时，会向他们显示一个对话框，其中显示了应用程序要求的权限。然后，用户或管理员可以许可应用程序的要求，这将向应用程序授予对指定数据的访问权限，并最终在其目录中注册该应用程序。有关详细信息，请参阅[许可框架概述](./active-directory-integrating-applications.md#overview-of-the-consent-framework/)。
+- 多租户应用程序：多租户应用程序预定在许多组织中使用，而不仅是在单个组织中使用。它们通常是由独立软件供应商 (ISV) 编写的软件即服务 (SaaS) 应用程序。多租户应用程序需要设置在将使用它们的每个目录中，需要经过用户或管理员许可才能注册它们。当在目录中注册应用程序并向其授予对 Graph API 或者另一可能的 Web API 的访问权限时，此许可过程即已开始。当其他组织的用户或管理员注册使用应用程序时，会向他们显示一个对话框，其中显示了应用程序要求的权限。然后，用户或管理员可以许可应用程序的要求，这将向应用程序授予对指定数据的访问权限，并最终在其目录中注册该应用程序。有关详细信息，请参阅[许可框架概述](./active-directory-integrating-applications.md#overview-of-the-consent-framework)。
 
 与开发单租户应用程序相比，当开发多租户应用程序时，会出现一些额外的注意事项。例如，如果要使你的应用程序可供多个目录中的用户使用，你需要一种机制来确定用户在哪个租户中。单租户应用程序只需要在其自己的目录中查找用户，而多租户应用程序需要从 Azure AD 中的所有目录来识别特定用户。为此，Azure AD 提供了一个任何多租户应用程序都可以在其中对登录请求进行定向的通用身份验证终结点，而不是提供特定于租户的终结点。对于 Azure AD 中的所有目录，该终结点都是 https://login.microsoftonline.com/common，而特定于租户的终结点可能是 https://login.microsoftonline.com/contoso.partner.onmschina.cn。在开发应用程序时考虑通用终结点尤为重要，因为在登录、注销和令牌验证期间你将需要必要的逻辑来处理多租户。
 
@@ -158,7 +159,7 @@ Azure AD 颁发的安全令牌包含与经过授权的使用者有关的信息�
 
 #### 代码示例
 
-请参阅 Web 浏览器到 Web 应用程序方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。[Web 浏览器到 Web 应用程序](./active-directory-code-samples.md#web-browser-to-web-application/)。
+请参阅 Web 浏览器到 Web 应用程序方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。[Web 浏览器到 Web 应用程序](./active-directory-code-samples.md#web-browser-to-web-application)。
 
 #### 注册
 
@@ -199,7 +200,7 @@ Azure AD 颁发的安全令牌包含与经过授权的使用者有关的信息�
 
 #### 代码示例
 
-请参阅单页面应用程序 (SPA) 方案的代码示例。请经常回来查看 - 我们会不时地添加新示例。[单页面应用程序 (SPA)](./active-directory-code-samples.md#single-page-application-spa/)。
+请参阅单页面应用程序 (SPA) 方案的代码示例。请经常回来查看 - 我们会不时地添加新示例。[单页面应用程序 (SPA)](./active-directory-code-samples.md#single-page-application-spa)。
 
 #### 注册
 
@@ -239,11 +240,12 @@ Azure AD 颁发的安全令牌包含与经过授权的使用者有关的信息�
 
 6. 当访问令牌过期时，客户端应用程序将收到一个错误，指出用户需要重新进行身份验证。如果应用程序具有有效的刷新令牌，则可以使用它来获取新的访问令牌，系统不会提示用户重新登录。如果刷新令牌过期，则应用程序将再次需要以交互方式对用户进行身份验证。
 
-> [!NOTE] Azure AD 颁发的刷新令牌可以用来访问多个资源。例如，如果你的某个客户端应用程序有权调用两个 Web API，则同样可以使用刷新令牌来获取其他 Web API 的访问令牌。
+> [!NOTE]
+> Azure AD 颁发的刷新令牌可以用来访问多个资源。例如，如果你的某个客户端应用程序有权调用两个 Web API，则同样可以使用刷新令牌来获取其他 Web API 的访问令牌。
 
 #### 代码示例
 
-请参阅本机应用程序到 Web API 方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。[本机应用程序到 Web API](./active-directory-code-samples.md#native-application-to-web-api/)。
+请参阅本机应用程序到 Web API 方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。[本机应用程序到 Web API](./active-directory-code-samples.md#native-application-to-web-api)。
 
 #### 注册
 
@@ -309,7 +311,7 @@ Azure AD 颁发的安全令牌包含与经过授权的使用者有关的信息�
 
 #### 代码示例
 
-请参阅 Web 应用程序到 Web API 方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。Web [应用程序到 Web API](./active-directory-code-samples.md#web-application-to-web-api/)。
+请参阅 Web 应用程序到 Web API 方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。Web [应用程序到 Web API](./active-directory-code-samples.md#web-application-to-web-api)。
 
 #### 注册
 
@@ -357,7 +359,7 @@ Azure AD 颁发的安全令牌包含与经过授权的使用者有关的信息�
 
 #### 代码示例
 
-请参阅后台或服务器应用程序到 Web API 方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。[服务器或守护程序应用程序到 Web API](./active-directory-code-samples.md#server-or-daemon-application-to-web-api/)
+请参阅后台或服务器应用程序到 Web API 方案的代码示例。另外，请经常回来查看 - 我们会不时地添加新示例。[服务器或守护程序应用程序到 Web API](./active-directory-code-samples.md#server-or-daemon-application-to-web-api)
 
 #### 注册
 

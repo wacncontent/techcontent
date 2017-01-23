@@ -21,7 +21,7 @@ ms.author: jgao
 # 在 HDInsight Hadoop 群集上安装并使用 R
 
 了解如何使用 R 通过脚本操作来自定义基于 Windows 的 HDInsight 群集，以及如何在 HDInsight 群集上使用 R。HDInsight 的[高级级别](https://www.azure.cn/pricing/details/hdinsight/)产品/服务包括 HDInsight 群集中的 R Server。
- 
+
 你可以使用*脚本操作*，在 Azure HDInsight 的任何一种群集（Hadoop、Storm、HBase）上安装 R。用于在 HDInsight 群集上安装 R 的示例脚本可通过 [https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1](https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1) 上的只读 Azure 存储 Blob 获得。
 
 **相关文章**
@@ -40,7 +40,8 @@ R 与 Azure Blob 存储 (WASB) 兼容，这样，存储在此的数据可以在 
 
 用于在 HDInsight 群集上安装 R 的[示例脚本](https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1)可从 Azure 存储中的只读 Blob 获得。本部分提供有关如何在使用 Azure 经典管理门户创建群集时使用示例脚本的说明。
 
-> [!NOTE] 示例脚本是随同 HDInsight 群集版本 3.1 一起引入的。有关 HDInsight 群集版本的详细信息，请参阅 [HDInsight 群集版本](./hdinsight-component-versioning-v1.md)。
+> [!NOTE]
+> 示例脚本是随同 HDInsight 群集版本 3.1 一起引入的。有关 HDInsight 群集版本的详细信息，请参阅 [HDInsight 群集版本](./hdinsight-component-versioning-v1.md)。
 
 1. 根据[使用自定义选项预配群集](./hdinsight-provision-clusters-v1.md#portal)中的说明，使用“自定义创建”选项开始预配群集。 
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所述：
@@ -70,22 +71,26 @@ R 与 Azure Blob 存储 (WASB) 兼容，这样，存储在此的数据可以在 
 
 3. **运行 R 脚本**：通过粘贴并选择 R 脚本，然后按 ENTER，可以从 R 控制台直接运行该脚本。下面是一个简单的示例脚本，该脚本将生成 1 到 100 的数字，然后将其乘以 2。
 
-        library(rmr2)
-        library(rhdfs)
-        ints = to.dfs(1:100)
-        calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
-        from.dfs(calc)
+    ```
+    library(rmr2)
+    library(rhdfs)
+    ints = to.dfs(1:100)
+    calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
+    from.dfs(calc)
+    ```
 
 前两行调用随 R 一起安装的 RHadoop 库。最后一行将结果打印到控制台。输出应如下所示：
 
-    [1,]  1 2
-    [2,]  2 4
-    .
-    .
-    .
-    [98,]  98 196
-    [99,]  99 198
-    [100,] 100 200
+```
+[1,]  1 2
+[2,]  2 4
+.
+.
+.
+[98,]  98 196
+[99,]  99 198
+[100,] 100 200
+```
 
 ## 使用 Azure PowerShell 安装 R
 

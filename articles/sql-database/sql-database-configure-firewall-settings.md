@@ -28,7 +28,8 @@ ms.author: rickbyh;carlrab
 
 Azure SQL Server 通过防火墙规则允许连接到服务器和数据库。可在 Azure SQL Server 逻辑服务器中为 master 数据库或用户数据库定义服务器级别和数据库级别的防火墙设置，从而有选择地允许对数据库的访问。本主题讨论服务器级防火墙规则。
 
-> [!IMPORTANT] 若要允许来自 Azure 的应用程序连接到 Azure SQL Server，则必须启用 Azure 连接。若要了解防火墙规则的工作方式，请参阅[如何配置 Azure SQL 服务器防火墙 - 概述](./sql-database-firewall-configure.md)。如果要在 Azure 云边界内建立连接，可能需要打开一些其他 TCP 端口。有关详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](./sql-database-develop-direct-route-ports-adonet-v12.md)中的 **SQL 数据库 V12：内部与外部**部分
+> [!IMPORTANT]
+> 若要允许来自 Azure 的应用程序连接到 Azure SQL Server，则必须启用 Azure 连接。若要了解防火墙规则的工作方式，请参阅[如何配置 Azure SQL 服务器防火墙 - 概述](./sql-database-firewall-configure.md)。如果要在 Azure 云边界内建立连接，可能需要打开一些其他 TCP 端口。有关详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](./sql-database-develop-direct-route-ports-adonet-v12.md)中的 **SQL 数据库 V12：内部与外部**部分
 
 **建议：**如果多个数据库具有相同的访问要求，并且不想花时间分别设置每个数据库，则使用管理员的服务器级防火墙规则。Azure 建议尽量使用数据库级防火墙规则，以增强安全性并提高数据库的可移植性。
 

@@ -1,4 +1,3 @@
-
 现在，你已了解有关 Azure Blob 存储的基础知识，可单击下面的链接来了解更复杂的存储任务。
 
 - 有关可用 API 的完整详细信息，请查看[用于 .NET 的 Azure 存储客户端库](http://go.microsoft.com/fwlink/?LinkID=390731)参考中的 Blob 服务参考文档。

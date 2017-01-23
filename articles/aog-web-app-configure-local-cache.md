@@ -43,23 +43,23 @@ Azure web 应用内容（包括代码文件，资源文件等）默认并不是�
 
 ## 如何启用 web 应用本地缓存
 
-1.	登录 Portal，进入 web 应用的配置界面，为应用设置添加如下参数:
+1. 登录 Portal，进入 web 应用的配置界面，为应用设置添加如下参数:
 
      ![](./media/aog-web-app-configure-local-cache/portal.png)
 
-    >[!NOTE]默认 local cache 大小为 300MB，最大支持 1G(1024MB)
+    >[!NOTE]
+    >默认 local cache 大小为 300MB，最大支持 1G(1024MB)
 
-2.	重启 web 应用后配置生效
+2. 重启 web 应用后配置生效
 
 ## 验证 Web 应用是否已经切换到本地缓存
 
-1.	登录 web 应用的 SCM 站点：https://yourwebsitename.scm.chinacloudsites.cn
-2.	进入 Process explorer 面板
- 
+1. 登录 web 应用的 SCM 站点：https://yourwebsitename.scm.chinacloudsites.cn
+2. 进入 Process explorer 面板
+
     ![](./media/aog-web-app-configure-local-cache/kudu.png)
 
-3.	点击 w3wp.exe 进程的 Properties 按钮，进入 Environment Variables 面板
-4.	如果存在环境变量 `WEBSITE_LOCALCACHE_READY = True`，则说明 web 应用已经成功切换到本地缓存模式。
+3. 点击 w3wp.exe 进程的 Properties 按钮，进入 Environment Variables 面板
+4. 如果存在环境变量 `WEBSITE_LOCALCACHE_READY = True`，则说明 web 应用已经成功切换到本地缓存模式。
 
     ![](./media/aog-web-app-configure-local-cache/local-ready.png)
-

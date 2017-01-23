@@ -40,9 +40,9 @@ Power BI Embedded 是一项 **Azure 服务**，使 ISV 能够在其自己的应�
 
 **工作区集合**是一个顶级 Azure 资源容器，包含 0 个或多个**工作区**。**工作区****集合**具有所有标准 Azure 属性和下列内容：
 
--	**访问密钥** - 安全地调用 Power BI API 时使用的密钥（后面的部分中进行了介绍）。
--	**用户** - 具有管理员权限的 Azure Active Directory (AAD) 用户，通过 Azure 门户预览或 ARM API 管理 Power BI 工作区集合。
--	**区域** - 在预配**工作区集合**的过程中，可以选择要在其中预配的区域。有关详细信息，请参阅 [Azure 区域](https://azure.microsoft.com/regions/)。
+- **访问密钥** - 安全地调用 Power BI API 时使用的密钥（后面的部分中进行了介绍）。
+- **用户** - 具有管理员权限的 Azure Active Directory (AAD) 用户，通过 Azure 门户预览或 ARM API 管理 Power BI 工作区集合。
+- **区域** - 在预配**工作区集合**的过程中，可以选择要在其中预配的区域。有关详细信息，请参阅 [Azure 区域](https://azure.microsoft.com/regions/)。
 
 ## 工作区
 
@@ -57,15 +57,15 @@ Power BI Embedded 是一项 **Azure 服务**，使 ISV 能够在其自己的应�
 
 ## 使用应用令牌进行身份验证和授权
 
-**Power BI Embedded** 委托应用程序来执行所有必要的用户身份验证和授权。没有明确要求最终用户必须是 Azure Active directory (Azure AD) 的客户。相反，应用程序通过使用**应用程序身份验证令牌（应用令牌）**向 **Power BI Embedded** 表明自己获得了呈现 Power BI 报表的授权。当应用想要呈现报表时，可以根据需要创建这些**应用令牌**。请参阅[应用令牌](./power-bi-embedded-get-started-sample.md#key-flow/)。
+**Power BI Embedded** 委托应用程序来执行所有必要的用户身份验证和授权。没有明确要求最终用户必须是 Azure Active directory (Azure AD) 的客户。相反，应用程序通过使用**应用程序身份验证令牌（应用令牌）**向 **Power BI Embedded** 表明自己获得了呈现 Power BI 报表的授权。当应用想要呈现报表时，可以根据需要创建这些**应用令牌**。请参阅[应用令牌](./power-bi-embedded-get-started-sample.md#key-flow)。
 
 ![](./media/powerbi-embedded-whats-is/app-tokens.png)  
 
 **应用程序身份验证令牌（应用令牌）**用于向 **Power BI Embedded** 表明身份。有三种类型的**应用令牌**：
 
-1.	预配令牌 - 在**工作区集合**中预配新的**工作区**时使用
-2.	开发令牌 - 直接调用 **Power BI REST API** 时使用
-3.	嵌入令牌 - 进行调用以在嵌入式 iframe 中呈现报表时使用
+1. 预配令牌 - 在**工作区集合**中预配新的**工作区**时使用
+2. 开发令牌 - 直接调用 **Power BI REST API** 时使用
+3. 嵌入令牌 - 进行调用以在嵌入式 iframe 中呈现报表时使用
 
 这些令牌适用于与 **Power BI Embedded** 进行交互的各种阶段。这些令牌经过专门设计，以便可以将应用中的权限委托给 Power BI。有关详细信息，请参阅[应用令牌流](./power-bi-embedded-app-token-flow.md)。
 

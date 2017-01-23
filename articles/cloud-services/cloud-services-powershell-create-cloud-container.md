@@ -24,20 +24,27 @@ ms.author: cawa
 2. 打开 PowerShell 命令提示符。
 3. 使用 [Add-AzureAccount](https://msdn.microsoft.com/zh-cn/library/dn495128.aspx) 登录。
 
-    > [!NOTE] 有关安装 Azure PowerShell cmdlet 和连接到 Azure 订阅的更多说明，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
+    > [!NOTE]
+    > 有关安装 Azure PowerShell cmdlet 和连接到 Azure 订阅的更多说明，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
 4. 使用 **New-AzureService** cmdlet 创建空的 Azure 云服务容器。
 
-        New-AzureService [-ServiceName] <String> [-AffinityGroup] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
-        New-AzureService [-ServiceName] <String> [-Location] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
+    ```
+    New-AzureService [-ServiceName] <String> [-AffinityGroup] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
+    New-AzureService [-ServiceName] <String> [-Location] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
+    ```
 
 5. 请按照本示例操作以调用 cmdlet：
 
-        New-AzureService -ServiceName "mytestcloudservice" -Location "China North" -Label "mytestcloudservice"
+    ```
+    New-AzureService -ServiceName "mytestcloudservice" -Location "China North" -Label "mytestcloudservice"
+    ```
 
     有关创建 Azure 云服务的详细信息，请运行：
 
-        Get-help New-AzureService
+    ```
+    Get-help New-AzureService
+    ```
 
 ### 后续步骤
 

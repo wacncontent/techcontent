@@ -30,10 +30,10 @@ ms.author: marsma
 1. 若要编译和生成应用程序，你需要在你的计算机上安装 [Visual Studio](https://www.visualstudio.com/)。
 2. 安装最新版的 [用于 .NET 的 Azure SDK](/downloads/)。SDK 包括 Azure 快速入门示例项目、Azure 存储模拟器和[用于 .NET 的 Azure 存储空间客户端库](https://msdn.microsoft.com/zh-cn/library/azure/dn261237.aspx)。
 3. 确保在你的计算机上安装了 [.NET Framework 4.5](http://www.microsoft.com/download/details.aspx?id=30653)，因为我们将在本教程中使用的 Azure 快速入门示例项目需要它。
-   
+
     如果你不确定计算机上安装了哪个版本的 .NET Framework，请参阅[如何：确定安装的 .NET Framework 版本](https://msdn.microsoft.com/zh-cn/vstudio/hh925568.aspx)。或者，按“开始”按钮或 Windows 键，并键入“控制面板”。然后，单击“程序” > “程序和功能”，然后在已安装程序中确定是否列出 .NET Framework 4.5。
 4. 你将需要 Azure 订阅和 Azure 存储帐户。
-   
+
     - 若要获取 Azure 订阅，请参阅 [1rmb 试用版](https://www.azure.cn/pricing/1rmb-trial/)、[购买选项](https://www.azure.cn/pricing/overview/)。
     - 若要在 Azure 中创建存储帐户，请参阅[如何创建存储帐户](./storage-create-storage-account.md#create-a-storage-account)。
 
@@ -47,25 +47,25 @@ ms.author: marsma
     a.选择以下模板之一：**Azure 存储空间：Blob**、**Azure 存储空间：文件**、**Azure 存储空间：队列**或 **Azure 存储空间：表**。
     b.确保选择 **.NET Framework 4.5** 作为目标框架。
     c.为你的项目指定一个名称并创建新的 Visual Studio 解决方案，如下所示：
-    
+
     ![Azure 快速启动][Image1]
 
 你可能想要在运行应用程序之前检查源代码。若要查看代码，请在 Visual Studio 中的“查看”菜单上选择“解决方案资源管理器”。然后双击 Program.cs 文件。
 
 接下来，运行示例应用程序：
 
-1.	在 Visual Studio 中的“查看”菜单上，选择“解决方案资源管理器”。打开 App.config 文件并注释掉 Azure 存储模拟器的连接字符串：
+1. 在 Visual Studio 中的“查看”菜单上，选择“解决方案资源管理器”。打开 App.config 文件并注释掉 Azure 存储模拟器的连接字符串：
 
     `<!--<add key="StorageConnectionString" value = "UseDevelopmentStorage=true;"/>-->`
 
-2.	取消注释 Azure 存储服务的连接字符串，并在 App.config 文件中提供存储帐户名称和访问密钥：
+2. 取消注释 Azure 存储服务的连接字符串，并在 App.config 文件中提供存储帐户名称和访问密钥：
     `<add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[AccountName];AccountKey=[AccountKey];EndpointSuffix=core.chinacloudapi.cn"`
 
     若要检索存储帐户访问密钥，请参阅[管理存储访问密钥](./storage-create-storage-account.md#manage-your-storage-access-keys)。
 
-3.	在 App.config 文件中提供存储帐户名称和访问密钥后,在“文件” 菜单中，单击“全部保存”以保存所有项目文件。
-4.	在“生成”菜单中，单击“生成解决方案”。
-5.	在“调试”菜单中，按 **F11** 逐步运行该解决方案，或按 **F5** 运行该解决方案。
+3. 在 App.config 文件中提供存储帐户名称和访问密钥后,在“文件” 菜单中，单击“全部保存”以保存所有项目文件。
+4. 在“生成”菜单中，单击“生成解决方案”。
+5. 在“调试”菜单中，按 **F11** 逐步运行该解决方案，或按 **F5** 运行该解决方案。
 
 ##<a id="run-your-first-azure-storage-application-locally-against-the-azure-storage-emulator"></a> 使用 Azure 存储模拟器在本地运行你的第一个 Azure 存储空间应用程序
 
@@ -79,10 +79,10 @@ ms.author: marsma
     a.选择以下模板之一：**Azure 存储空间：Blob**、**Azure 存储空间：文件**、**Azure 存储空间：队列**或 **Azure 存储空间：表**。
     b.确保选择 **.NET Framework 4.5** 作为目标框架。
     c.为你的项目指定一个名称并创建新的 Visual Studio 解决方案，如下所示：
-    
+
     ![Azure 快速启动][Image1]
 
-4.	在 Visual Studio 中的“查看”菜单上，选择“解决方案资源管理器”。打开 App.config 文件并注释掉 Azure 存储帐户的连接字符串（如果已添加）。然后取消注释 Azure 存储模拟器的连接字符串：
+4. 在 Visual Studio 中的“查看”菜单上，选择“解决方案资源管理器”。打开 App.config 文件并注释掉 Azure 存储帐户的连接字符串（如果已添加）。然后取消注释 Azure 存储模拟器的连接字符串：
 
     `<add key="StorageConnectionString" value = "UseDevelopmentStorage=true;"/>`
 
@@ -90,9 +90,9 @@ ms.author: marsma
 
 接下来，在 Azure 存储模拟器中运行示例应用程序:
 
-1.	按“开始”按钮或 Windows 键，然后搜索 Azure 存储模拟器 并启动该应用程序。当模拟器启动时，你将在“Windows 任务视图”区域看到图标和通知。
-2.	在 Visual Studio 中，单击“生成”菜单上的“生成解决方案”。
-3.	在“调试”**菜单**上，按 **F11** 逐步运行该解决方案，或按 **F5** 从头到尾运行该解决方案。
+1. 按“开始”按钮或 Windows 键，然后搜索 Azure 存储模拟器 并启动该应用程序。当模拟器启动时，你将在“Windows 任务视图”区域看到图标和通知。
+2. 在 Visual Studio 中，单击“生成”菜单上的“生成解决方案”。
+3. 在“调试”**菜单**上，按 **F11** 逐步运行该解决方案，或按 **F5** 从头到尾运行该解决方案。
 
 ##<a id="next-steps"></a> 后续步骤
 
@@ -104,7 +104,7 @@ ms.author: marsma
 * [通过 .NET 开始使用 Azure 队列存储](./storage-dotnet-how-to-use-queues.md)
 * [在 Windows 上开始使用 Azure 文件存储](./storage-dotnet-how-to-use-files.md)
 * [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
-* [Azure 存档文档](./index.md/)
+* [Azure 存档文档](./index.md)
 * [适用于 .NET 的 Azure 存储空间客户端库](https://msdn.microsoft.com/zh-cn/library/azure/dn261237.aspx)
 * [Azure 存储 REST API](https://msdn.microsoft.com/zh-cn/library/azure/dd179355.aspx)
 

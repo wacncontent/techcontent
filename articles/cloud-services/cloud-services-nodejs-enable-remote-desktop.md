@@ -21,7 +21,8 @@ ms.author: robmcm
 
 你可以通过远程桌面访问 Azure 中运行的角色实例的桌面。也可以使用远程桌面连接配置虚拟机，或者排查应用程序问题。
 
-> [!NOTE] 本文适用于托管为 Azure 云服务的 Node.js 应用程序。
+> [!NOTE]
+> 本文适用于托管为 Azure 云服务的 Node.js 应用程序。
 
 ## 先决条件
 
@@ -40,7 +41,9 @@ ms.author: robmcm
 
 3. 输入以下 Azure Powershell cmdlet：
 
-        Enable-AzureServiceProjectRemoteDesktop
+    ```
+    Enable-AzureServiceProjectRemoteDesktop
+    ```
 
 4. 在提示符处，输入用户名和密码。
 
@@ -48,7 +51,9 @@ ms.author: robmcm
 
 3.  输入以下 PowerShell cmdlet 以发布更改：
 
-        Publish-AzureServiceProject
+    ```
+    Publish-AzureServiceProject
+    ```
 
     ![publish-azureserviceproject][publish-project]
 
@@ -86,11 +91,15 @@ ms.author: robmcm
 
 1.  输入以下 Azure Powershell cmdlet：
 
-        Disable-AzureServiceProjectRemoteDesktop
+    ```
+    Disable-AzureServiceProjectRemoteDesktop
+    ```
 
 2.  输入以下 PowerShell cmdlet 以发布更改：
 
-        Publish-AzureServiceProject
+    ```
+    Publish-AzureServiceProject
+    ```
 
 ## 其他资源
 
@@ -107,8 +116,8 @@ ms.author: robmcm
 [5]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-12.png
 [6]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-13.png
 [7]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-14.png
-  
+
 [远程访问 Azure 中的角色实例]: http://msdn.microsoft.com/zh-cn/library/windowsazure/hh124107.aspx
 [将远程桌面与 Azure 角色一起使用]: http://msdn.microsoft.com/zh-cn/library/windowsazure/gg443832.aspx
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

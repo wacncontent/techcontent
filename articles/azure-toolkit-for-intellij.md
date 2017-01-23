@@ -23,7 +23,8 @@ ms.author: robmcm;asirveda
 
 * <https://github.com/microsoft/azure-tools-for-java>
 
-> [!NOTE] 另外还有 Azure Toolkit for Eclipse IDE。有关详细信息，请参阅 [Azure Toolkit for Eclipse]。
+> [!NOTE]
+> 另外还有 Azure Toolkit for Eclipse IDE。有关详细信息，请参阅 [Azure Toolkit for Eclipse]。
 
 ## Azure Toolkit for IntelliJ 入门
 

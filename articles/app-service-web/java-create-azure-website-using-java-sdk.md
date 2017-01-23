@@ -80,16 +80,20 @@ Azure SDK for Java 使用管理证书在 Azure 订阅中进行身份验证。对
 
 创建 .pfx 文件：
 
-    <java-install-dir>/bin/keytool -genkey -alias <keystore-id>
-     -keystore <cert-store-dir>/<cert-file-name>.pfx -storepass <password>
-     -validity 3650 -keyalg RSA -keysize 2048 -storetype pkcs12
-     -dname "CN=Self Signed Certificate 20141118170652"
+```
+<java-install-dir>/bin/keytool -genkey -alias <keystore-id>
+ -keystore <cert-store-dir>/<cert-file-name>.pfx -storepass <password>
+ -validity 3650 -keyalg RSA -keysize 2048 -storetype pkcs12
+ -dname "CN=Self Signed Certificate 20141118170652"
+```
 
 创建 .cer 文件：
 
-    <java-install-dir>/bin/keytool -export -alias <keystore-id>
-     -storetype pkcs12 -keystore <cert-store-dir>/<cert-file-name>.pfx
-     -storepass <password> -rfc -file <cert-store-dir>/<cert-file-name>.cer
+```
+<java-install-dir>/bin/keytool -export -alias <keystore-id>
+ -storetype pkcs12 -keystore <cert-store-dir>/<cert-file-name>.pfx
+ -storepass <password> -rfc -file <cert-store-dir>/<cert-file-name>.cer
+```
 
 其中：
 
@@ -110,10 +114,12 @@ Azure SDK for Java 使用管理证书在 Azure 订阅中进行身份验证。对
 
 在 Windows 命令提示符下（以管理员身份运行），键入 cd 转到包含证书的目录，然后运行以下命令，其中，`<java-install-dir>` 是计算机安装 Java 的目录：
 
-    <java-install-dir>/bin/keytool.exe -importkeystore
-     -srckeystore <cert-store-dir>/<cert-file-name>.pfx
-     -destkeystore <cert-store-dir>/<cert-file-name>.jks
-     -srcstoretype pkcs12 -deststoretype JKS
+```
+<java-install-dir>/bin/keytool.exe -importkeystore
+ -srckeystore <cert-store-dir>/<cert-file-name>.pfx
+ -destkeystore <cert-store-dir>/<cert-file-name>.jks
+ -srcstoretype pkcs12 -deststoretype JKS
+```
 
 1. 出现提示时，输入目标密钥库密码；这将是 JKS 文件的密码。
 
@@ -146,13 +152,15 @@ Azure SDK for Java 使用管理证书在 Azure 订阅中进行身份验证。对
 5. 打开“全局存储库”，右键单击“中央”存储库，然后选择“重新生成索引”。
 
     ![][1]
-    
+
     此步骤可能需要几分钟时间，具体取决于你的连接速度。重新生成索引后，**中心** Maven 存储库中应会显示 Azure 包。
 
 6. 在“依赖项”中，单击“添加”。在“输入组 ID...”中输入 `azure-management`。选择基础管理和应用服务 Web 应用管理所用的包：
 
-        com.microsoft.azure  azure-management
-        com.microsoft.azure  azure-management-websites
+    ```
+    com.microsoft.azure  azure-management
+    com.microsoft.azure  azure-management-websites
+    ```
 
     > **注意：**如果在新版本发布后更新依赖项，则需要重新添加此列表中的每个依赖项。单击“添加”后，选择每个依赖项，则会在“依赖项”列表中显示新的版本号。
 
@@ -176,27 +184,29 @@ Azure SDK for Java 使用管理证书在 Azure 订阅中进行身份验证。对
 
 在 WebCreator.java 中添加以下导入；使用这些导入可以访问使用 Azure API 的管理库中的类：
 
-    // General imports
-    import java.net.URI;
-    import java.util.ArrayList;
-    
-    // Imports for Exceptions
-    import java.io.IOException;
-    import java.net.URISyntaxException;
-    import javax.xml.parsers.ParserConfigurationException;
-    import com.microsoft.windowsazure.exception.ServiceException;
-    import org.xml.sax.SAXException;
-    
-    // Imports for Azure App Service management configuration
-    import com.microsoft.windowsazure.Configuration;
-    import com.microsoft.windowsazure.management.configuration.ManagementConfiguration;
-    
-    // Service management imports for App Service Web Apps creation
-    import com.microsoft.windowsazure.management.websites.*;
-    import com.microsoft.windowsazure.management.websites.models.*;
-    
-    // Imports for authentication
-    import com.microsoft.windowsazure.core.utils.KeyStoreType;
+```
+// General imports
+import java.net.URI;
+import java.util.ArrayList;
+
+// Imports for Exceptions
+import java.io.IOException;
+import java.net.URISyntaxException;
+import javax.xml.parsers.ParserConfigurationException;
+import com.microsoft.windowsazure.exception.ServiceException;
+import org.xml.sax.SAXException;
+
+// Imports for Azure App Service management configuration
+import com.microsoft.windowsazure.Configuration;
+import com.microsoft.windowsazure.management.configuration.ManagementConfiguration;
+
+// Service management imports for App Service Web Apps creation
+import com.microsoft.windowsazure.management.websites.*;
+import com.microsoft.windowsazure.management.websites.models.*;
+
+// Imports for authentication
+import com.microsoft.windowsazure.core.utils.KeyStoreType;
+```
 
 #### 定义主入口点类
 
@@ -204,19 +214,21 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 
 为 Web 应用和 Web 空间添加以下参数定义。你将需要提供你自己的 Azure 订阅 ID 和证书信息。
 
-    public class WebAppCreator {
-    
-        // Parameter definitions used for authentication.
-        private static String uri = "https://management.core.chinacloudapi.cn/";
-        private static String subscriptionId = "<subscription-id>";
-        private static String keyStoreLocation = "<certificate-store-path>";
-        private static String keyStorePassword = "<certificate-password>";
-    
-        // Define web app parameter values.
-        private static String webAppName = "WebDemoWebApp";
-        private static String domainName = ".chinacloudsites.cn";
-        private static String webSpaceName = WebSpaceNames.WESTUSWEBSPACE;
-        private static String appServicePlanName = "WebDemoAppServicePlan";
+```
+public class WebAppCreator {
+
+    // Parameter definitions used for authentication.
+    private static String uri = "https://management.core.chinacloudapi.cn/";
+    private static String subscriptionId = "<subscription-id>";
+    private static String keyStoreLocation = "<certificate-store-path>";
+    private static String keyStorePassword = "<certificate-password>";
+
+    // Define web app parameter values.
+    private static String webAppName = "WebDemoWebApp";
+    private static String domainName = ".chinacloudsites.cn";
+    private static String webSpaceName = WebSpaceNames.WESTUSWEBSPACE;
+    private static String appServicePlanName = "WebDemoAppServicePlan";
+```
 
 其中：
 
@@ -234,64 +246,66 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 
 接下来，定义用于创建 Web 应用的方法。此方法 `createWebApp` 指定 Web 应用的参数和 Web 空间。它还会创建并配置 App Service Web Apps 管理客户端，该客户端由 [WebSiteManagementClient][] 对象进行定义。管理客户端对于创建 Web Apps 至关重要。它提供 RESTful web 服务，使应用程序能够通过调用服务管理 API 来管理 Web Apps（执行创建、更新和删除等操作）。
 
-    private static void createWebApp() throws Exception {
+```
+private static void createWebApp() throws Exception {
 
-        // Specify configuration settings for the App Service management client.
-        Configuration config = ManagementConfiguration.configure(
-            new URI(uri),
-            subscriptionId,
-            keyStoreLocation,  // Path to the JKS file
-            keyStorePassword,  // Password for the JKS file
-            KeyStoreType.jks   // Flag that you are using a JKS keystore
-        );
+    // Specify configuration settings for the App Service management client.
+    Configuration config = ManagementConfiguration.configure(
+        new URI(uri),
+        subscriptionId,
+        keyStoreLocation,  // Path to the JKS file
+        keyStorePassword,  // Password for the JKS file
+        KeyStoreType.jks   // Flag that you are using a JKS keystore
+    );
 
-        // Create the App Service Web Apps management client to call Azure APIs
-        // and pass it the App Service management configuration object.
-        WebSiteManagementClient webAppManagementClient = WebSiteManagementService.create(config);
+    // Create the App Service Web Apps management client to call Azure APIs
+    // and pass it the App Service management configuration object.
+    WebSiteManagementClient webAppManagementClient = WebSiteManagementService.create(config);
 
-        // Create an App Service plan for the web app with the specified parameters.
-        WebHostingPlanCreateParameters appServicePlanParams = new WebHostingPlanCreateParameters();
-        appServicePlanParams.setName(appServicePlanName);
-        appServicePlanParams.setSKU(SkuOptions.Free);
-        webAppManagementClient.getWebHostingPlansOperations().create(webSpaceName, appServicePlanParams);
+    // Create an App Service plan for the web app with the specified parameters.
+    WebHostingPlanCreateParameters appServicePlanParams = new WebHostingPlanCreateParameters();
+    appServicePlanParams.setName(appServicePlanName);
+    appServicePlanParams.setSKU(SkuOptions.Free);
+    webAppManagementClient.getWebHostingPlansOperations().create(webSpaceName, appServicePlanParams);
 
-        // Set webspace parameters.
-        WebSiteCreateParameters.WebSpaceDetails webSpaceDetails = new WebSiteCreateParameters.WebSpaceDetails();
-        webSpaceDetails.setGeoRegion(GeoRegionNames.WESTUS);
-        webSpaceDetails.setPlan(WebSpacePlanNames.VIRTUALDEDICATEDPLAN);
-        webSpaceDetails.setName(webSpaceName);
+    // Set webspace parameters.
+    WebSiteCreateParameters.WebSpaceDetails webSpaceDetails = new WebSiteCreateParameters.WebSpaceDetails();
+    webSpaceDetails.setGeoRegion(GeoRegionNames.WESTUS);
+    webSpaceDetails.setPlan(WebSpacePlanNames.VIRTUALDEDICATEDPLAN);
+    webSpaceDetails.setName(webSpaceName);
 
-        // Set web app parameters.
-        // Note that the server farm name takes the Azure App Service plan name.
-        WebSiteCreateParameters webAppCreateParameters = new WebSiteCreateParameters();
-        webAppCreateParameters.setName(webAppName);
-        webAppCreateParameters.setServerFarm(appServicePlanName);
-        webAppCreateParameters.setWebSpace(webSpaceDetails);
+    // Set web app parameters.
+    // Note that the server farm name takes the Azure App Service plan name.
+    WebSiteCreateParameters webAppCreateParameters = new WebSiteCreateParameters();
+    webAppCreateParameters.setName(webAppName);
+    webAppCreateParameters.setServerFarm(appServicePlanName);
+    webAppCreateParameters.setWebSpace(webSpaceDetails);
 
-        // Set usage metrics attributes.
-        WebSiteGetUsageMetricsResponse.UsageMetric usageMetric = new WebSiteGetUsageMetricsResponse.UsageMetric();
-        usageMetric.setSiteMode(WebSiteMode.Basic);
-        usageMetric.setComputeMode(WebSiteComputeMode.Shared);
+    // Set usage metrics attributes.
+    WebSiteGetUsageMetricsResponse.UsageMetric usageMetric = new WebSiteGetUsageMetricsResponse.UsageMetric();
+    usageMetric.setSiteMode(WebSiteMode.Basic);
+    usageMetric.setComputeMode(WebSiteComputeMode.Shared);
 
-        // Define the web app object.
-        ArrayList<String> fullWebAppName = new ArrayList<String>();
-        fullWebAppName.add(webAppName + domainName);
-        WebSite webApp = new WebSite();
-        webApp.setHostNames(fullWebAppName);
+    // Define the web app object.
+    ArrayList<String> fullWebAppName = new ArrayList<String>();
+    fullWebAppName.add(webAppName + domainName);
+    WebSite webApp = new WebSite();
+    webApp.setHostNames(fullWebAppName);
 
-        // Create the web app.
-        WebSiteCreateResponse webAppCreateResponse = webAppManagementClient.getWebSitesOperations().create(webSpaceName, webAppCreateParameters);
+    // Create the web app.
+    WebSiteCreateResponse webAppCreateResponse = webAppManagementClient.getWebSitesOperations().create(webSpaceName, webAppCreateParameters);
 
-        // Output the HTTP status code of the response; 200 indicates the request succeeded; 4xx indicates failure.
-        System.out.println("----------");
-        System.out.println("Web app created - HTTP response " + webAppCreateResponse.getStatusCode() + "\n");
+    // Output the HTTP status code of the response; 200 indicates the request succeeded; 4xx indicates failure.
+    System.out.println("----------");
+    System.out.println("Web app created - HTTP response " + webAppCreateResponse.getStatusCode() + "\n");
 
-        // Output the name of the web app that this application created.
-        String shinyNewWebAppName = webAppCreateResponse.getWebSite().getName();
-        System.out.println("----------\n");
-        System.out.println("Name of web app created: " + shinyNewWebAppName + "\n");
-        System.out.println("----------\n");
-    }
+    // Output the name of the web app that this application created.
+    String shinyNewWebAppName = webAppCreateResponse.getWebSite().getName();
+    System.out.println("----------\n");
+    System.out.println("Name of web app created: " + shinyNewWebAppName + "\n");
+    System.out.println("----------\n");
+}
+```
 
 代码将输出指示成功或失败的 HTTP 响应状态；如果成功，则输出创建的 Web 应用的名称。
 
@@ -301,29 +315,33 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 
 最后，从 `main` 调用 `createWebApp`：
 
-        public static void main(String[] args)
-            throws IOException, URISyntaxException, ServiceException,
-            ParserConfigurationException, SAXException, Exception {
+```
+    public static void main(String[] args)
+        throws IOException, URISyntaxException, ServiceException,
+        ParserConfigurationException, SAXException, Exception {
 
-            // Create web app
-            createWebApp();
+        // Create web app
+        createWebApp();
 
-        }  // end of main()
+    }  // end of main()
 
-    }  // end of WebAppCreator class
+}  // end of WebAppCreator class
+```
 
 #### 运行应用程序并验证 Web 应用创建
 
 若要验证应用程序是否运行，请单击“运行 > 运行”。在应用程序完成运行后，你应该会在 Eclipse 控制台中看到以下输出：
 
-    ----------
-    Web app created - HTTP response 200
-    
-    ----------
-    
-    Name of web app created: WebDemoWebApp
-    
-    ----------
+```
+----------
+Web app created - HTTP response 200
+
+----------
+
+Name of web app created: WebDemoWebApp
+
+----------
+```
 
 登录到 Azure 经典管理门户并单击“Web Apps”。在数分钟内，新 Web 应用应会出现在“Web Apps”列表中。
 
@@ -349,14 +367,16 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 
 4. 在 index.jsp 中，在 `<head>` 和 `<body>` 标记部分中添加以下代码：
 
-        <head>
-          ...
-          java.util.Date date = new java.util.Date();
-        </head>
-    
-        <body>
-          Hello, the time is <%= date %> 
-        </body>
+    ```
+    <head>
+      ...
+      java.util.Date date = new java.util.Date();
+    </head>
+
+    <body>
+      Hello, the time is <%= date %> 
+    </body>
+    ```
 
 #### 在 localhost 中运行 Hello World 应用程序
 
@@ -394,9 +414,11 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 
 将 Web 项目文件导出为 Web 存档 (WAR) 文件，以便可以将它部署到 Web 应用。以下 web 项目文件驻留在 WebContent 文件夹中：
 
-    META-INF
-    WEB-INF
-    index.jsp
+```
+META-INF
+WEB-INF
+index.jsp
+```
 
 1. 右键单击 WebContent 文件夹并选择“导出”。
 
@@ -446,15 +468,17 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 
 2. 在 XML 编辑器或文本编辑器中打开 .publishsettings 文件并找到包含 `publishMethod="FTP"` 的 `<publishProfile>` 元素。该元素应类似于：
 
-        <publishProfile
-            profileName="WebDemoWebApp - FTP"
-            publishMethod="FTP"
-            publishUrl="ftp://waws-prod-bay-NNN.ftp.azurewebsites.chinacloudapi.cn/site/wwwroot"
-            ftpPassiveMode="True"
-            userName="WebDemoWebApp\$WebDemoWebApp"
-            userPWD="<deployment-password>"
-            ...
-        </publishProfile>
+    ```
+    <publishProfile
+        profileName="WebDemoWebApp - FTP"
+        publishMethod="FTP"
+        publishUrl="ftp://waws-prod-bay-NNN.ftp.azurewebsites.chinacloudapi.cn/site/wwwroot"
+        ftpPassiveMode="True"
+        userName="WebDemoWebApp\$WebDemoWebApp"
+        userPWD="<deployment-password>"
+        ...
+    </publishProfile>
+    ```
 
 3. 请注意，Web 应用的 `publishProfile` 设置将按如下所示映射到 FileZilla 站点管理员设置：
 
@@ -565,7 +589,7 @@ JSPHello.war 自身首先会显示在目录区域中：
   [8]: ./media/java-create-azure-website-using-java-sdk/kudu-console-drag-drop.png
   [9]: ./media/java-create-azure-website-using-java-sdk/kudu-console-jsphello-war-1.png
   [10]: ./media/java-create-azure-website-using-java-sdk/kudu-console-jsphello-war-2.png
- 
+
 [Azure App Service]: ./app-service-changes-existing-services.md
 [Web 平台安装程序]: http://go.microsoft.com/fwlink/?LinkID=252838
 [Azure Toolkit for Eclipse]: ../azure-toolkit-for-eclipse-installation.md

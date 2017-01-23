@@ -37,7 +37,8 @@ wacn.date: 11/22/2016
 - [使用 CLI 创建和管理密钥保管库](./key-vault-manage-with-cli.md)
 - [通过 Azure 资源管理器模板创建密钥保管库并添加机密](../azure-resource-manager/resource-manager-template-keyvault.md)
 
->[!NOTE] 针对密钥保管库执行的操作通过 AAD 进行身份验证并通过密钥保管库自己的访问策略（按保管库定义）进行授权。
+>[!NOTE]
+> 针对密钥保管库执行的操作通过 AAD 进行身份验证并通过密钥保管库自己的访问策略（按保管库定义）进行授权。
 
 ## 使用密钥保管库进行编码
 

@@ -25,59 +25,65 @@ ms.author: vturecek
 ## 自定义数据类型
 在此示例中，以下执行组件接口定义了一个返回自定义数据类型（名为 `VoicemailBox`）的方法。
 
-    public interface IVoiceMailBoxActor : IActor
-    {
-        Task<VoicemailBox> GetMailBoxAsync();
-    }
+```
+public interface IVoiceMailBoxActor : IActor
+{
+    Task<VoicemailBox> GetMailBoxAsync();
+}
+```
 
 此接口由使用状态管理器来存储 `VoicemailBox` 对象的执行组件实现：
 
-    [StatePersistence(StatePersistence.Persisted)]
-    public class VoiceMailBoxActor : Actor, IVoicemailBoxActor
+```
+[StatePersistence(StatePersistence.Persisted)]
+public class VoiceMailBoxActor : Actor, IVoicemailBoxActor
+{
+    public VoiceMailBoxActor(ActorService actorService, ActorId actorId)
+        : base(actorService, actorId)
     {
-        public VoiceMailBoxActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
-        {
-        }
-        public Task<VoicemailBox> GetMailboxAsync()
-        {
-            return this.StateManager.GetStateAsync<VoicemailBox>("Mailbox");
-        }
     }
+    public Task<VoicemailBox> GetMailboxAsync()
+    {
+        return this.StateManager.GetStateAsync<VoicemailBox>("Mailbox");
+    }
+}
+```
 
 在此示例中，如果 `VoicemailBox` 对象出现以下情况，则序列化该对象：
  - 在执行组件实例和调用方之间传输该对象。
  - 该对象保存在状态管理器中，即持久保存在磁盘中，并且已复制到其他节点。
- 
+
 Reliable Actor 框架使用 DataContract 序列化。因此，自定义数据对象及其成员必须分别使用 **DataContract** 和 **DataMember** 属性进行批注
 
-    [DataContract]
-    public class Voicemail
+```
+[DataContract]
+public class Voicemail
+{
+    [DataMember]
+    public Guid Id { get; set; }
+
+    [DataMember]
+    public string Message { get; set; }
+
+    [DataMember]
+    public DateTime ReceivedAt { get; set; }
+}
+
+[DataContract]
+public class VoicemailBox
+{
+    public VoicemailBox()
     {
-        [DataMember]
-        public Guid Id { get; set; }
-
-        [DataMember]
-        public string Message { get; set; }
-
-        [DataMember]
-        public DateTime ReceivedAt { get; set; }
+        this.MessageList = new List<Voicemail>();
     }
 
-    [DataContract]
-    public class VoicemailBox
-    {
-        public VoicemailBox()
-        {
-            this.MessageList = new List<Voicemail>();
-        }
+    [DataMember]
+    public List<Voicemail> MessageList { get; set; }
 
-        [DataMember]
-        public List<Voicemail> MessageList { get; set; }
-
-        [DataMember]
-        public string Greeting { get; set; }
-    }
+    [DataMember]
+    public string Greeting { get; set; }
+}
+```
 
 ## 后续步骤
  - [执行组件生命周期和垃圾回收](./service-fabric-reliable-actors-lifecycle.md)

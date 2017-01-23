@@ -33,7 +33,9 @@ ms.author: szark
 
 在 Azure 上部署虚拟机实例的过程中指定的用户帐户是特权帐户。此帐户由 Azure Linux 代理配置为能够使用 `sudo` 实用工具提升根（超级用户帐户）的特权。在使用此用户帐户登录后，你将能够使用命令语法以根用户身份运行命令。
 
-    # sudo <COMMAND>
+```
+# sudo <COMMAND>
+```
 
 可以选择使用 **sudo -s** 获取根 shell。
 
@@ -53,7 +55,9 @@ Azure 提供了一个入站数据包筛选器，用于限制与经典管理门�
 
 如果在部署虚拟机后需要更改主机名，请使用命令
 
-    # sudo hostname <newname>
+```
+# sudo hostname <newname>
+```
 
 Azure Linux 代理包含自动检测此名称更改的功能，并会相应地配置虚拟机以保留此更改以及将此更改发布到平台 DNS 服务器。
 
@@ -85,7 +89,8 @@ Azure Linux 代理包含自动检测此名称更改的功能，并会相应地�
 
 在 Linux 上，资源磁盘通常由 Azure Linux 代理管理并且自动装载到 **/mnt/resource**（或 Ubuntu 映像上的 **/mnt**）。
 
->[!NOTE]请注意，资源磁盘是**临时**磁盘，并可能在重新启动 VM 时被删除或重新格式化。
+>[!NOTE]
+>请注意，资源磁盘是**临时**磁盘，并可能在重新启动 VM 时被删除或重新格式化。
 
 在 Linux 上，数据磁盘可能由内核命名为 `/dev/sdc`，并且用户需要对该资源进行分区、格式化和装载。在[如何将数据磁盘附加到虚拟机](./virtual-machines-linux-classic-attach-disk.md)的教程中对此进行了分步说明。
 

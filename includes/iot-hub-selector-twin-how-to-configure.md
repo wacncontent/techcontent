@@ -9,66 +9,74 @@
 
 从较高层面讲，使用设备克隆允许解决方案后端指定托管设备所需配置，而不发送特定命令。这个方法让设备负责确定更新其配置的最佳方法（对于特定设备条件影响即时执行特定命令的能力的 IoT 方案而言十分重要），同时继续向后端报告更新过程的当前状态和潜在错误条件。此模式能够帮助管理大量设备，因为它让后端能够跨所有设备完全掌握配置流程状态。
 
-> [!NOTE] 在以更具交互性的方式控制设备的方案中（通过用户控制的应用打开风扇），请考虑使用[直接方法][lnk-methods]。
+> [!NOTE]
+> 在以更具交互性的方式控制设备的方案中（通过用户控制的应用打开风扇），请考虑使用[直接方法][lnk-methods]。
 
 在本教程中，应用程序后端更改目标设备的遥测配置，这样一来，设备应用会执行多步流程来应用配置更新（例如，要求软件模块重启），这在本教程中以简单的延迟进行模拟。
 
 后端采用以下方式将配置存储在设备克隆的所需属性中：
 
-        {
+```
+    {
+        ...
+        "properties": {
             ...
-            "properties": {
-                ...
-                "desired": {
-                    "telemetryConfig": {
-                        "configId": "{id of the configuration}",
-                        "sendFrequency": "{config}"
-                    }
+            "desired": {
+                "telemetryConfig": {
+                    "configId": "{id of the configuration}",
+                    "sendFrequency": "{config}"
                 }
-                ...
             }
             ...
         }
+        ...
+    }
+```
 
-> [!NOTE] 由于配置可能会是复杂对象，通常会为它们分配唯一 ID（哈希值或 [GUID][lnk-guid]），以简化其比较。
+> [!NOTE]
+> 由于配置可能会是复杂对象，通常会为它们分配唯一 ID（哈希值或 [GUID][lnk-guid]），以简化其比较。
 
 设备应用以镜像报告属性中的所需属性 **telemetryConfig** 的形式报告其当前配置：
 
-        {
-            "properties": {
-                ...
-                "reported": {
-                    "telemetryConfig": {
-                        "changeId": "{id of the current configuration}",
-                        "sendFrequency": "{current configuration}",
-                        "status": "Success",
-                    }
+```
+    {
+        "properties": {
+            ...
+            "reported": {
+                "telemetryConfig": {
+                    "changeId": "{id of the current configuration}",
+                    "sendFrequency": "{current configuration}",
+                    "status": "Success",
                 }
-                ...
             }
+            ...
         }
+    }
+```
 
 请注意，报告的 **telemetryConfig** 拥有 **status** 这个其他属性，该属性用于报告配置更新流程的状态。
 
 收到新的所需配置时，设备应用通过更改以下信息报告挂起的配置：
 
-        {
-            "properties": {
-                ...
-                "reported": {
-                    "telemetryConfig": {
-                        "changeId": "{id of the current configuration}",
-                        "sendFrequency": "{current configuration}",
-                        "status": "Pending",
-                        "pendingConfig": {
-                            "changeId": "{id of the pending configuration}",
-                            "sendFrequency": "{pending configuration}"
-                        }
+```
+    {
+        "properties": {
+            ...
+            "reported": {
+                "telemetryConfig": {
+                    "changeId": "{id of the current configuration}",
+                    "sendFrequency": "{current configuration}",
+                    "status": "Pending",
+                    "pendingConfig": {
+                        "changeId": "{id of the pending configuration}",
+                        "sendFrequency": "{pending configuration}"
                     }
                 }
-                ...
             }
+            ...
         }
+    }
+```
 
 然后，在稍后的某个时间，设备应用通过更新上述属性报告此操作的成功或失败状态。请注意，后端可以在任何时候跨所有设备查询配置流程的状态。
 

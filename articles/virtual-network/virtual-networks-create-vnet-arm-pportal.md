@@ -24,7 +24,7 @@ ms.author: jdial
 [!INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnet-intro-include.md)]
 
 Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)一文。
- 
+
 本文介绍如何使用 Azure 门户预览通过 Resource Manager 部署模型创建 VNet。还可以使用其他工具通过 Resource Manager 创建 VNet，或通过从以下列表中选择不同的选项使用经典部署模型创建 VNet：
 > [!div class="op_single_selector"]
 - [门户](./virtual-networks-create-vnet-arm-pportal.md)
@@ -64,7 +64,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
     ![添加子网](./media/virtual-network-create-vnet-arm-pportal/5.png)  
 
 7. 已列出两个子网，如下图所示：
-    
+
     ![VNet 中的子网列表](./media/virtual-network-create-vnet-arm-pportal/6.png)  
 
 本文介绍如何创建具有两个子网的虚拟网络，以便将其用于测试。在创建用于生产使用的虚拟网络之前，建议阅读[虚拟网络概述](./virtual-networks-overview.md)和[虚拟网络规划和设计](./virtual-network-vnet-plan-design-arm.md)文章，充分了解虚拟网络和所有设置。

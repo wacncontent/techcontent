@@ -46,33 +46,35 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 
 以下示例说明可用于限制资源部署位置的策略：
 
-    {
-      "properties": {
-        "parameters": {
-          "listOfAllowedLocations": {
-            "type": "array",
-            "metadata": {
-              "description": "An array of permitted locations for resources.",
-              "strongType": "location",
-              "displayName": "List of locations"
-            }
-          }
-        },
-        "displayName": "Geo-compliance policy template",
-        "description": "This policy enables you to restrict the locations your organization can specify when deploying resources. Use to enforce your geo-compliance requirements.",
-        "policyRule": {
-          "if": {
-            "not": {
-              "field": "location",
-              "in": "[parameters('listOfAllowedLocations')]"
-            }
-          },
-          "then": {
-            "effect": "deny"
-          }
+```
+{
+  "properties": {
+    "parameters": {
+      "listOfAllowedLocations": {
+        "type": "array",
+        "metadata": {
+          "description": "An array of permitted locations for resources.",
+          "strongType": "location",
+          "displayName": "List of locations"
         }
       }
+    },
+    "displayName": "Geo-compliance policy template",
+    "description": "This policy enables you to restrict the locations your organization can specify when deploying resources. Use to enforce your geo-compliance requirements.",
+    "policyRule": {
+      "if": {
+        "not": {
+          "field": "location",
+          "in": "[parameters('listOfAllowedLocations')]"
+        }
+      },
+      "then": {
+        "effect": "deny"
+      }
     }
+  }
+}
+```
 
 基本而言，策略包含以下部分：
 
@@ -82,14 +84,16 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 
 **影响**：条件满足时会发生的情况 – 拒绝或审核。审核效果会发出警告事件服务日志。例如，管理员可以创建策略，即使有人创建大型 VM，此策略也会引发审核事件，然后管理员可以审查日志。
 
-    {
-      "if" : {
-          <condition> | <logical operator>
-      },
-      "then" : {
-          "effect" : "deny | audit | append"
-      }
-    }
+```
+{
+  "if" : {
+      <condition> | <logical operator>
+  },
+  "then" : {
+      "effect" : "deny | audit | append"
+  }
+}
+```
 
 ## 策略评估
 创建资源时会对策略进行评估。部署模板时，将在模板中的每个资源创建期间评估策略。
@@ -104,24 +108,28 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 
 在创建策略定义时声明参数。
 
-    "parameters": {
-      "listOfLocations": {
-        "type": "array",
-        "metadata": {
-          "description": "An array of permitted locations for resources.",
-          "displayName": "List Of Locations"
-        }
-      }
+```
+"parameters": {
+  "listOfLocations": {
+    "type": "array",
+    "metadata": {
+      "description": "An array of permitted locations for resources.",
+      "displayName": "List Of Locations"
     }
+  }
+}
+```
 
 参数类型可以是字符串，也可以是数组。Azure 门户预览等工具使用元数据属性显示用户友好信息。
 
 在策略规则中，可按照与模板类似的方式引用参数。例如：
-        
-    { 
-        "field" : "location",
-        "in" : "[parameters(listOfLocations)]"
-    }
+
+```
+{ 
+    "field" : "location",
+    "in" : "[parameters(listOfLocations)]"
+}
+```
 
 ## 逻辑运算符
 支持的逻辑运算符和语法包括：
@@ -156,30 +164,34 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 ### 属性别名
 属性别名可在策略定义中用于访问资源类型特定属性，例如设置和 SKU。它适用于所有具有属性的 API 版本。可以通过 REST API 检索别名（将来会增加 Powershell 支持）：
 
-    GET /subscriptions/{id}/providers?$expand=resourceTypes/aliases&api-version=2015-11-01
+```
+GET /subscriptions/{id}/providers?$expand=resourceTypes/aliases&api-version=2015-11-01
+```
 
 以下示例演示了别名的定义。如你所见，别名在不同的 API 版本中定义路径，无论属性名称是否更改。
 
-    "aliases": [
+```
+"aliases": [
+    {
+      "name": "Microsoft.Storage/storageAccounts/sku.name",
+      "paths": [
         {
-          "name": "Microsoft.Storage/storageAccounts/sku.name",
-          "paths": [
-            {
-              "path": "properties.accountType",
-              "apiVersions": [
-                "2015-06-15",
-                "2015-05-01-preview"
-              ]
-            },
-            {
-              "path": "sku.name",
-              "apiVersions": [
-                "2016-01-01"
-              ]
-            }
+          "path": "properties.accountType",
+          "apiVersions": [
+            "2015-06-15",
+            "2015-05-01-preview"
+          ]
+        },
+        {
+          "path": "sku.name",
+          "apiVersions": [
+            "2016-01-01"
           ]
         }
-    ]
+      ]
+    }
+]
+```
 
 目前，支持的别名为：
 
@@ -213,13 +225,15 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 
 对于 **append**，必须提供以下详细信息：
 
-    "effect": "append",
-    "details": [
-      {
-        "field": "field name",
-        "value": "value of the field"
-      }
-    ]
+```
+"effect": "append",
+"details": [
+  {
+    "field": "field name",
+    "value": "value of the field"
+  }
+]
+```
 
 值可以是字符串或 JSON 格式对象。
 
@@ -229,173 +243,189 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 ### 费用分摊：要求提供部门标记
 以下策略拒绝其标记不包含“costCenter”键的请求。
 
-    {
-      "if": {
-        "not" : {
-          "field" : "tags",
-          "containsKey" : "costCenter"
-        }
-      },
-      "then" : {
-        "effect" : "deny"
-      }
+```
+{
+  "if": {
+    "not" : {
+      "field" : "tags",
+      "containsKey" : "costCenter"
     }
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}
+```
 
 不存在任何标记时，以下策略会附加使用预定义值的 costCenter 标记。
 
-    {
-      "if": {
+```
+{
+  "if": {
+    "field": "tags",
+    "exists": "false"
+  },
+  "then": {
+    "effect": "append",
+    "details": [
+      {
         "field": "tags",
-        "exists": "false"
-      },
-      "then": {
-        "effect": "append",
-        "details": [
-          {
-            "field": "tags",
-            "value": {"costCenter":"myDepartment" }
-          }
-        ]
+        "value": {"costCenter":"myDepartment" }
       }
-    }
+    ]
+  }
+}
+```
 
 不存在 costCenter 标记但存在其他标记时，以下策略会附加使用预定义值的 costCenter 标记。
 
-    {
-      "if": {
-        "allOf": [
-          {
-            "field": "tags",
-            "exists": "true"
-          },
-          {
-            "field": "tags.costCenter",
-            "exists": "false"
-          }
-        ]
-
+```
+{
+  "if": {
+    "allOf": [
+      {
+        "field": "tags",
+        "exists": "true"
       },
-      "then": {
-        "effect": "append",
-        "details": [
-          {
-            "field": "tags.costCenter",
-            "value": "myDepartment"
-          }
-        ]
+      {
+        "field": "tags.costCenter",
+        "exists": "false"
       }
-    }
+    ]
+
+  },
+  "then": {
+    "effect": "append",
+    "details": [
+      {
+        "field": "tags.costCenter",
+        "value": "myDepartment"
+      }
+    ]
+  }
+}
+```
 
 ### 遵循地区：确保资源位置
 以下示例中的策略拒绝位置不是中国北部或西欧的请求。
 
-    {
-      "if" : {
-        "not" : {
-          "field" : "location",
-          "in" : ["northeurope" , "westeurope"]
-        }
-      },
-      "then" : {
-        "effect" : "deny"
-      }
+```
+{
+  "if" : {
+    "not" : {
+      "field" : "location",
+      "in" : ["northeurope" , "westeurope"]
     }
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}
+```
 
 ### 服务策展：选择服务目录
 以下示例显示的策略只允许对 Microsoft.Resources/\*、Microsoft.Compute/\*、Microsoft.Storage/\*、Microsoft.Network/\* 类型的服务执行操作。其他类型的服务都会被拒绝。
 
-    {
-      "if" : {
-        "not" : {
-          "anyOf" : [
-            {
-              "field" : "type",
-              "like" : "Microsoft.Resources/*"
-            },
-            {
-              "field" : "type",
-              "like" : "Microsoft.Compute/*"
-            },
-            {
-              "field" : "type",
-              "like" : "Microsoft.Storage/*"
-            },
-            {
-              "field" : "type",
-              "like" : "Microsoft.Network/*"
-            }
-          ]
+```
+{
+  "if" : {
+    "not" : {
+      "anyOf" : [
+        {
+          "field" : "type",
+          "like" : "Microsoft.Resources/*"
+        },
+        {
+          "field" : "type",
+          "like" : "Microsoft.Compute/*"
+        },
+        {
+          "field" : "type",
+          "like" : "Microsoft.Storage/*"
+        },
+        {
+          "field" : "type",
+          "like" : "Microsoft.Network/*"
         }
-      },
-      "then" : {
-        "effect" : "deny"
-      }
+      ]
     }
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}
+```
 
 ### 使用批准的 SKU
 以下示例演示如何使用属性别名限制 SKU。在示例中，只有 Standard\_LRS 和 Standard\_GRS 被批准用于存储帐户。
 
-    {
-      "if": {
-        "allOf": [
-          {
-            "field": "type",
-            "equals": "Microsoft.Storage/storageAccounts"
-          },
-          {
-            "not": {
-              "allof": [
-                {
-                  "field": "Microsoft.Storage/storageAccounts/sku.name",
-                  "in": ["Standard_LRS", "Standard_GRS"]
-                }
-              ]
-            }
-          }
-        ]
+```
+{
+  "if": {
+    "allOf": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Storage/storageAccounts"
       },
-      "then": {
-        "effect": "deny"
+      {
+        "not": {
+          "allof": [
+            {
+              "field": "Microsoft.Storage/storageAccounts/sku.name",
+              "in": ["Standard_LRS", "Standard_GRS"]
+            }
+          ]
+        }
       }
-    }
+    ]
+  },
+  "then": {
+    "effect": "deny"
+  }
+}
+```
 
 ### 命名约定
 以下示例演示如何使用“like”条件支持的通配符。该条件指明，如果名称符合所述模式 (namePrefix*nameSuffix)，则拒绝请求。
 
-    {
-      "if" : {
-        "not" : {
-          "field" : "name",
-          "like" : "namePrefix*nameSuffix"
-        }
-      },
-      "then" : {
-        "effect" : "deny"
-      }
+```
+{
+  "if" : {
+    "not" : {
+      "field" : "name",
+      "like" : "namePrefix*nameSuffix"
     }
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}
+```
 
 ### 只要求对存储资源使用标记
 以下示例演示在只要求对存储资源使用应用程序标记的情况下，如何嵌套逻辑运算符。
 
-    {
-        "if": {
-            "allOf": [
-              {
-                "not": {
-                  "field": "tags",
-                  "containsKey": "application"
-                }
-              },
-              {
-                "field": "type",
-                "equals": "Microsoft.Storage/storageAccounts"
-              }
-            ]
-        },
-        "then": {
-            "effect": "audit"
-        }
+```
+{
+    "if": {
+        "allOf": [
+          {
+            "not": {
+              "field": "tags",
+              "containsKey": "application"
+            }
+          },
+          {
+            "field": "type",
+            "equals": "Microsoft.Storage/storageAccounts"
+          }
+        ]
+    },
+    "then": {
+        "effect": "audit"
     }
+}
+```
 
 ## <a name="create-and-assign-a-policy"></a> 创建并分配策略
 应用策略时，需要先创建策略定义，然后将其应用到某个范围。
@@ -405,88 +435,104 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 
 若要创建策略，请运行：
 
-    PUT https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.authorization/policydefinitions/{policyDefinitionName}?api-version={api-version}
+```
+PUT https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.authorization/policydefinitions/{policyDefinitionName}?api-version={api-version}
+```
 
 对于 api-version，请使用 *2016-04-01* 或 *2016-12-01* 。包括类似于以下示例的请求正文：
 
-    {
-      "properties": {
-        "parameters": {
-          "listOfAllowedLocations": {
-            "type": "array",
-            "metadata": {
-              "description": "An array of permitted locations for resources.",
-              "strongType": "location",
-              "displayName": "List Of Locations"
-            }
-          }
-        },
-        "displayName": "Geo-compliance policy template",
-        "description": "This policy enables you to restrict the locations your organization can specify when deploying resources. Use to enforce your geo-compliance requirements.",
-        "policyRule": {
-          "if": {
-            "not": {
-              "field": "location",
-              "in": "[parameters('listOfAllowedLocations')]"
-            }
-          },
-          "then": {
-            "effect": "deny"
-          }
+```
+{
+  "properties": {
+    "parameters": {
+      "listOfAllowedLocations": {
+        "type": "array",
+        "metadata": {
+          "description": "An array of permitted locations for resources.",
+          "strongType": "location",
+          "displayName": "List Of Locations"
         }
       }
+    },
+    "displayName": "Geo-compliance policy template",
+    "description": "This policy enables you to restrict the locations your organization can specify when deploying resources. Use to enforce your geo-compliance requirements.",
+    "policyRule": {
+      "if": {
+        "not": {
+          "field": "location",
+          "in": "[parameters('listOfAllowedLocations')]"
+        }
+      },
+      "then": {
+        "effect": "deny"
+      }
     }
+  }
+}
+```
 
 可以通过[用于策略分配的 REST API](https://docs.microsoft.com/rest/api/resources/policyassignments)，在所需范围内应用策略定义。REST API 可让你创建和删除策略分配，以及获取现有分配的信息。
 
 若要创建策略分配，请运行：
 
-    PUT https://management.chinacloudapi.cn /subscriptions/{subscription-id}/providers/Microsoft.authorization/policyassignments/{policyAssignmentName}?api-version={api-version}
+```
+PUT https://management.chinacloudapi.cn /subscriptions/{subscription-id}/providers/Microsoft.authorization/policyassignments/{policyAssignmentName}?api-version={api-version}
+```
 
 {policy-assignment} 是策略分配的名称。对于 api-version，请使用 *2016-04-01* 或 *2016-12-01* （用于参数）。
 
 使用类似于以下示例的请求正文：
 
-    {
-      "properties":{
-        "displayName":"China North only policy assignment on the subscription ",
-        "description":"Resources can only be provisioned in China North regions",
-        "parameters": {
-             "listOfAllowedLocations": { "value": ["China North", "China North 2"] }
-         },
-        "policyDefinitionId":"/subscriptions/########/providers/Microsoft.Authorization/policyDefinitions/testdefinition",
-        "scope":"/subscriptions/########-####-####-####-############"
-      },
-    }
+```
+{
+  "properties":{
+    "displayName":"China North only policy assignment on the subscription ",
+    "description":"Resources can only be provisioned in China North regions",
+    "parameters": {
+         "listOfAllowedLocations": { "value": ["China North", "China North 2"] }
+     },
+    "policyDefinitionId":"/subscriptions/########/providers/Microsoft.Authorization/policyDefinitions/testdefinition",
+    "scope":"/subscriptions/########-####-####-####-############"
+  },
+}
+```
 
 ### PowerShell
 可以使用 New-AzureRmPolicyDefinition cmdlet 创建策略定义。以下示例创建只允许使用中国北部和西欧资源的策略。
 
-    $policy = New-AzureRmPolicyDefinition -Name regionPolicyDefinition -Description "Policy to allow resource creation only in certain regions" -Policy '{    
-      "if" : {
-        "not" : {
-          "field" : "location",
-          "in" : ["northeurope" , "westeurope"]
-        }
-      },
-      "then" : {
-        "effect" : "deny"
-      }
-    }'            
+```
+$policy = New-AzureRmPolicyDefinition -Name regionPolicyDefinition -Description "Policy to allow resource creation only in certain regions" -Policy '{    
+  "if" : {
+    "not" : {
+      "field" : "location",
+      "in" : ["northeurope" , "westeurope"]
+    }
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}'            
+```
 
 执行输出将存储在 $policy 对象中，稍后可在分配策略期间使用。对于策略参数，也可以提供包含策略的 .json 文件的路径，而不是指定内联策略。
 
-    New-AzureRmPolicyDefinition -Name regionPolicyDefinition -Description "Policy to allow resource creation only in certain     regions" -Policy "path-to-policy-json-on-disk"
+```
+New-AzureRmPolicyDefinition -Name regionPolicyDefinition -Description "Policy to allow resource creation only in certain     regions" -Policy "path-to-policy-json-on-disk"
+```
 
 可以使用 New-AzureRmPolicyAssignment cmdlet 将策略应用到所需范围：
 
-    New-AzureRmPolicyAssignment -Name regionPolicyAssignment -PolicyDefinition $policy -Scope    /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
+New-AzureRmPolicyAssignment -Name regionPolicyAssignment -PolicyDefinition $policy -Scope    /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
 
 此处的 $policy 是执行 New-AzureRmPolicyDefinition cmdlet 后返回的策略对象。此处的范围是指定的资源组的名称。
 
 若要删除策略分配，请使用：
 
-    Remove-AzureRmPolicyAssignment -Name regionPolicyAssignment -Scope /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
+Remove-AzureRmPolicyAssignment -Name regionPolicyAssignment -Scope /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
 
 可以分别通过 Get-AzureRmPolicyDefinition、Set-AzureRmPolicyDefinition 和 Remove-AzureRmPolicyDefinition cmdlet 获取、更改或删除策略定义。
 
@@ -495,33 +541,43 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 ### Azure CLI
 可以将 Azure CLI 与策略定义命令配合使用，创建策略定义。以下示例创建只允许使用中国北部和西欧资源的策略。
 
-    azure policy definition create --name regionPolicyDefinition --description "Policy to allow resource creation only in certain regions" --policy-string '{    
-      "if" : {
-        "not" : {
-          "field" : "location",
-          "in" : ["northeurope" , "westeurope"]
-        }
-      },
-      "then" : {
-        "effect" : "deny"
-      }
-    }'    
+```
+azure policy definition create --name regionPolicyDefinition --description "Policy to allow resource creation only in certain regions" --policy-string '{    
+  "if" : {
+    "not" : {
+      "field" : "location",
+      "in" : ["northeurope" , "westeurope"]
+    }
+  },
+  "then" : {
+    "effect" : "deny"
+  }
+}'    
+```
 
 可以指定包含策略的 .json 文件的路径，不必指定内联策略。
 
-    azure policy definition create --name regionPolicyDefinition --description "Policy to allow resource creation only in certain regions" --policy "path-to-policy-json-on-disk"
+```
+azure policy definition create --name regionPolicyDefinition --description "Policy to allow resource creation only in certain regions" --policy "path-to-policy-json-on-disk"
+```
 
 可以使用策略分配命令将策略应用到所需范围：
 
-    azure policy assignment create --name regionPolicyAssignment --policy-definition-id /subscriptions/########-####-####-####-############/providers/Microsoft.Authorization/policyDefinitions/<policy-name> --scope    /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
+azure policy assignment create --name regionPolicyAssignment --policy-definition-id /subscriptions/########-####-####-####-############/providers/Microsoft.Authorization/policyDefinitions/<policy-name> --scope    /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
 
 此处的范围是指定的资源组的名称。如果参数 policy-definition-id 的值未知，可通过 Azure CLI 获取。
 
-    azure policy definition show <policy-name>
+```
+azure policy definition show <policy-name>
+```
 
 若要删除策略分配，请使用：
 
-    azure policy assignment delete --name regionPolicyAssignment --scope /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
+azure policy assignment delete --name regionPolicyAssignment --scope /subscriptions/########-####-####-####-############/resourceGroups/<resource-group-name>
+```
 
 可以分别通过策略定义的 show、set 和 delete 命令获取、更改或删除策略定义。
 
@@ -533,20 +589,28 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 ### PowerShell
 若要查看与拒绝效果相关的所有事件，可以使用以下 PowerShell 命令：
 
-    Get-AzureRmLog | where {$_.OperationName -eq "Microsoft.Authorization/policies/deny/action"} 
+```
+Get-AzureRmLog | where {$_.OperationName -eq "Microsoft.Authorization/policies/deny/action"} 
+```
 
 若要查看与审核效果相关的所有事件，可以使用以下命令：
 
-    Get-AzureRmLog | where {$_.OperationName -eq "Microsoft.Authorization/policies/audit/action"} 
+```
+Get-AzureRmLog | where {$_.OperationName -eq "Microsoft.Authorization/policies/audit/action"} 
+```
 
 ### Azure CLI
 若要查看资源组中与拒绝效果相关的所有事件，可以使用以下 CLI 命令：
 
-    azure group log show ExampleGroup --json | jq ".[] | select(.operationName.value == "Microsoft.Authorization/policies/deny/action")"
+```
+azure group log show ExampleGroup --json | jq ".[] | select(.operationName.value == "Microsoft.Authorization/policies/deny/action")"
+```
 
 若要查看与审核效果相关的所有事件，可以使用以下 CLI 命令：
 
-    azure group log show ExampleGroup --json | jq ".[] | select(.operationName.value == "Microsoft.Authorization/policies/audit/action")"
+```
+azure group log show ExampleGroup --json | jq ".[] | select(.operationName.value == "Microsoft.Authorization/policies/audit/action")"
+```
 
 ## 查看策略
 可以使用 PowerShell、Azure CLI 或 REST API 查看策略。可能需要在部署失败后查看策略，并需查看拒绝了部署的规则。错误消息包含策略定义的 ID。
@@ -554,14 +618,18 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 ### PowerShell
 若要获取策略，请使用以下 cmdlet：
 
-    (Get-AzureRmPolicyAssignment -Id "/subscriptions/{guid}/providers/Microsoft.Authorization/policyDefinitions/{definition-name}").Properties.policyRule | ConvertTo-Json
+```
+(Get-AzureRmPolicyAssignment -Id "/subscriptions/{guid}/providers/Microsoft.Authorization/policyDefinitions/{definition-name}").Properties.policyRule | ConvertTo-Json
+```
 
 该 cmdlet 返回策略定义的 JSON。
 
 ### Azure CLI
 若要获取策略，请使用以下命令：
 
-    azure policy definition show {definition-name} --json
+```
+azure policy definition show {definition-name} --json
+```
 
 ### REST API
 若要获取策略，请使用[获取策略定义](https://docs.microsoft.com/rest/api/resources/policydefinitions#PolicyDefinitions_Get)操作。

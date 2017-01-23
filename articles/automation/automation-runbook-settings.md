@@ -46,11 +46,13 @@ Azure 自动化中的每个 Runbook 都提供了多个设置用于帮助标识�
 
 以下示例命令演示了如何设置 Runbook 的属性。此示例向现有标记添加了三个标记，并指定应该记录详细记录。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Sample-TestRunbook"
-    $tags = (Get-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName).Tags
-    $tags += "Tag1,Tag2,Tag3"
-    Set-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName -LogVerbose $true -Tags $tags
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Sample-TestRunbook"
+$tags = (Get-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName).Tags
+$tags += "Tag1,Tag2,Tag3"
+Set-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName -LogVerbose $true -Tags $tags
+```
 
 ## 后续步骤
 * 若要学习如何创建输出和错误消息以及从 Runbook 检索此类消息，请参阅 [Runbook 输出和消息](./automation-runbook-output-and-messages.md)

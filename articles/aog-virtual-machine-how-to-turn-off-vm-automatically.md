@@ -72,7 +72,7 @@ $stopAzureVM = "Stop-AzureVM -Name " + $VMName + " -ServiceName " + $ServiceName
 $stopTaskTrigger = New-ScheduledTaskTrigger -Daily -At $At
 $stopTaskAction = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument $stopAzureVM
 $startTaskSettingsSet = New-ScheduledTaskSettingsSet  -AllowStartIfOnBatteries 
- 
+
 $stopScheduledTask = New-ScheduledTask -Action $stopTaskAction -Trigger $stopTaskTrigger -Settings $startTaskSettingsSet
 
 # Register the scheduled tasks to start and stop the VM(s).
@@ -92,11 +92,11 @@ Register-ScheduledTask -TaskName $TaskName -InputObject $stopScheduledTask
 然后到计划任务列表里就能刷出这个定时关机的任务了，可以测一下：
 
 ![](./media/aog-virtual-machine-how-to-turn-off-vm-automatically/powershell-add-task-to-system.png)
- 
+
 到指定时间 powershell 开始执行关闭虚拟机的操作。
 
 ![](./media/aog-virtual-machine-how-to-turn-off-vm-automatically/powershell-turn-down-vm.png)
- 
+
 到 Portal 里验证一下，已经成功关机了.
- 
+
 ![](./media/aog-virtual-machine-how-to-turn-off-vm-automatically/powershell-turn-down-result.png)

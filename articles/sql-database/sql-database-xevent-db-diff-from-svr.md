@@ -30,7 +30,8 @@ ms.author: genemi
 
 *XEvents* 不是正式名称，有时在博客或其他非正式场合表示“扩展的事件”。
 
-> [!NOTE] 从 2015 年 10 月开始，扩展事件会话功能已在 Azure SQL 数据库的预览级激活。正式发布 (GA) 日期尚未确定。
+> [!NOTE]
+> 从 2015 年 10 月开始，扩展事件会话功能已在 Azure SQL 数据库的预览级激活。正式发布 (GA) 日期尚未确定。
 
 下面提供了 Azure SQL 数据库和 Microsoft SQL Server 的扩展事件的其他相关信息：
 
@@ -119,23 +120,25 @@ Azure SQL 数据库具有支持扩展事件的[动态管理视图 (DMV)](http://
 
 可运行简单的 SQL **SELECT** 来获取可用事件、操作和目标的列表。
 
-    SELECT
-            o.object_type,
-            p.name         AS [package_name],
-            o.name         AS [db_object_name],
-            o.description  AS [db_obj_description]
-        FROM
-                       sys.dm_xe_objects  AS o
-            INNER JOIN sys.dm_xe_packages AS p  ON p.guid = o.package_guid
-        WHERE
-            o.object_type in
-                (
-                'action',  'event',  'target'
-                )
-        ORDER BY
-            o.object_type,
-            p.name,
-            o.name;
+```
+SELECT
+        o.object_type,
+        p.name         AS [package_name],
+        o.name         AS [db_object_name],
+        o.description  AS [db_obj_description]
+    FROM
+                   sys.dm_xe_objects  AS o
+        INNER JOIN sys.dm_xe_packages AS p  ON p.guid = o.package_guid
+    WHERE
+        o.object_type in
+            (
+            'action',  'event',  'target'
+            )
+    ORDER BY
+        o.object_type,
+        p.name,
+        o.name;
+```
 
 <a name="AzureXEventsTargets" id="AzureXEventsTargets"></a>
 

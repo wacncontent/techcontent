@@ -27,7 +27,8 @@ Azure Active Directory (Azure AD) 可在云中创建属于你的标识布局。�
 
 你可以将 Azure AD 中的帐户看作是云中的驾照：它是你用来访问联机服务的唯一 ID。从这种意义上讲，Azure AD 类似于云中颁发这些驾照的私用注册机构。它可以实现在云中任何位置使用相应的标识，并可提高访问本地资源的用户的移动性。 
 
-> [!NOTE] 若要使用 Azure Active Directory，你需要一个 Azure 帐户。如果你没有帐户，可以[注册 Azure 试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
+> [!NOTE]
+> 若要使用 Azure Active Directory，你需要一个 Azure 帐户。如果你没有帐户，可以[注册 Azure 试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
 
 ## Azure AD 如何为 Office 365、Microsoft Intune 和其他 Azure 服务提供支持？
 Azure 门户、Office 365 管理中心、Microsoft Intune 帐户门户和 Azure AD PowerShell 模块中的 cmdlet 都在与你目录关联的 Azure AD 的单个共享实例中读取和写入数据。门户（或 cmdlet）充当前端接口，它可以输入或更改目录信息。

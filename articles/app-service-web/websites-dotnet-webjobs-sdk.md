@@ -30,7 +30,7 @@ ms.author: tdykstra
 WebJobs SDK 包括以下组件：
 
 * **NuGet 程序包**。添加到 Visual Studio 控制台应用程序项目的 NuGet 包可提供一个框架，代码可通过使用 WebJobs SDK 属性修饰方法使用此框架。
-  
+
 * **仪表板**。Azure 应用服务中包含 WebJobs SDK 的一部分，它可针对使用 NuGet 程序包的程序提供丰富的监视和诊断功能。无需编写代码即可使用这些监视和诊断功能。
 
 ## <a id="scenarios"></a>方案
@@ -72,7 +72,9 @@ WebJobs SDK 包括以下组件：
         public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")] string inputText, 
             [Blob("containername/blobname")]TextWriter writer)
         {
-            writer.WriteLine(inputText);
+    ```
+    writer.WriteLine(inputText);
+```
         }
 
 `JobHost` 对象是一组后台函数的容器。`JobHost` 对象可监视函数，观察触发函数的事件，并在发生触发事件时执行函数。可调用 `JobHost` 方法，指示要在当前线程或后台线程中执行容器进程。在此示例中，`RunAndBlock` 方法将在当前线程中持续运行该进程。
@@ -81,8 +83,10 @@ WebJobs SDK 包括以下组件：
 
 `QueueTrigger` 属性将 `inputText` 参数绑定到队列消息的值。`Blob` 将 `TextWriter` 对象绑定到“containername”容器中名为“blobname”的 Blob。
 
-        public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")]] string inputText, 
-            [Blob("containername/blobname")]TextWriter writer)
+```
+    public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")]] string inputText, 
+        [Blob("containername/blobname")]TextWriter writer)
+```
 
 然后，该函数使用这些参数将队列消息的值写入 Blob：
 
@@ -92,63 +96,67 @@ WebJobs SDK 的触发器和绑定器功能可大幅简化编写代码。处理�
 
 以下代码示例显示了一个 Web 作业中的各种触发器：`QueueTrigger`、`FileTrigger`、`WebHookTrigger` 和 `ErrorTrigger`。
 
-    public class Functions
+```
+public class Functions
+{
+    public static void ProcessQueueMessage([QueueTrigger("queue")] string message,
+    TextWriter log)
     {
-        public static void ProcessQueueMessage([QueueTrigger("queue")] string message,
-        TextWriter log)
-        {
-            log.WriteLine(message);
-        }
-
-        public static void ProcessFileAndUploadToBlob(
-            [FileTrigger(@"import\{name}", "*.*", autoDelete: true)] Stream file,
-            [Blob(@"processed/{name}", FileAccess.Write)] Stream output,
-            string name,
-            TextWriter log)
-        {
-            output = file;
-            file.Close();
-            log.WriteLine(string.Format("Processed input file '{0}'!", name));
-        }
-
-        [Singleton]
-        public static void ProcessWebHookA([WebHookTrigger] string body, TextWriter log)
-        {
-            log.WriteLine(string.Format("WebHookA invoked! Body: {0}", body));
-        }
-
-        public static void ProcessGitHubWebHook([WebHookTrigger] string body, TextWriter log)
-        {
-            dynamic issueEvent = JObject.Parse(body);
-            log.WriteLine(string.Format("GitHub WebHook invoked! ('{0}', '{1}')",
-                issueEvent.issue.title, issueEvent.action));
-        }
-
-        public static void ErrorMonitor(
-        [ErrorTrigger("00:01:00", 1)] TraceFilter filter, TextWriter log,
-        [SendGrid(
-            To = "admin@emailaddress.com",
-            Subject = "Error!")]
-         SendGridMessage message)
-        {
-            // log last 5 detailed errors to the Dashboard
-            log.WriteLine(filter.GetDetailedMessage(5));
-            message.Text = filter.GetDetailedMessage(1);
-        }
+        log.WriteLine(message);
     }
+
+    public static void ProcessFileAndUploadToBlob(
+        [FileTrigger(@"import\{name}", "*.*", autoDelete: true)] Stream file,
+        [Blob(@"processed/{name}", FileAccess.Write)] Stream output,
+        string name,
+        TextWriter log)
+    {
+        output = file;
+        file.Close();
+        log.WriteLine(string.Format("Processed input file '{0}'!", name));
+    }
+
+    [Singleton]
+    public static void ProcessWebHookA([WebHookTrigger] string body, TextWriter log)
+    {
+        log.WriteLine(string.Format("WebHookA invoked! Body: {0}", body));
+    }
+
+    public static void ProcessGitHubWebHook([WebHookTrigger] string body, TextWriter log)
+    {
+        dynamic issueEvent = JObject.Parse(body);
+        log.WriteLine(string.Format("GitHub WebHook invoked! ('{0}', '{1}')",
+            issueEvent.issue.title, issueEvent.action));
+    }
+
+    public static void ErrorMonitor(
+    [ErrorTrigger("00:01:00", 1)] TraceFilter filter, TextWriter log,
+    [SendGrid(
+        To = "admin@emailaddress.com",
+        Subject = "Error!")]
+     SendGridMessage message)
+    {
+        // log last 5 detailed errors to the Dashboard
+        log.WriteLine(filter.GetDetailedMessage(5));
+        message.Text = filter.GetDetailedMessage(1);
+    }
+}
+```
 
 ## <a id="schedule"></a> 计划
 
 使用 `TimerTrigger` 属性可以触发要按计划运行的函数。可通过 Azure 从整体上计划 Web 作业，也可使用 WebJobs SDK `TimerTrigger` 计划 Web 作业的各个函数。下面是代码示例。
 
-    public class Functions
+```
+public class Functions
+{
+    public static void ProcessTimer([TimerTrigger("*/15 * * * * *", RunOnStartup = true)]
+    TimerInfo info, [Queue("queue")] out string message)
     {
-        public static void ProcessTimer([TimerTrigger("*/15 * * * * *", RunOnStartup = true)]
-        TimerInfo info, [Queue("queue")] out string message)
-        {
-            message = info.FormatNextOccurrences(1);
-        }
+        message = info.FormatNextOccurrences(1);
     }
+}
+```
 
 有关更多示例代码，请参阅 GitHub.com 上 azure-webjobs-sdk-extensions 存储库中的 [TimerSamples.cs](https://github.com/Azure/azure-webjobs-sdk-extensions/blob/master/src/ExtensionsSample/Samples/TimerSamples.cs)。
 
@@ -177,5 +185,5 @@ WebJobs SDK 的触发器和绑定器功能可大幅简化编写代码。处理�
 有关 WebJobs SDK 的详细信息，请参阅[Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
 
 有关 WebJobs SDK 的最新增强功能的信息，请参阅[发行说明](https://github.com/Azure/azure-webjobs-sdk/wiki/Release-Notes)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

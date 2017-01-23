@@ -39,7 +39,9 @@ ms.author: dariagrigoriu
 
 3. 使用以下命令可初始化新的 Git 存储库：
 
-        git init
+    ```
+    git init
+    ```
 
 ## <a id="Step2"></a>步骤 2：提交内容
 
@@ -49,14 +51,18 @@ ms.author: dariagrigoriu
 
     - 使用文本编辑器，在 Git 存储库的根中创建一个名为 **index.html** 的新文件。
     - 添加以下文本作为 index.html 文件的内容并保存该文件： *Hello Git!* 
-        
+
 2. 在命令行中，验证当前位置是否在 Git 存储库的根目录下。然后使用以下命令将文件添加到存储库中：
 
-        git add -A 
+    ```
+    git add -A 
+    ```
 
 4. 接下来，使用以下命令将更改提交到存储库：
 
-        git commit -m "Hello Azure App Service"
+    ```
+    git commit -m "Hello Azure App Service"
+    ```
 
 ## <a id="Step3"></a>步骤 3：启用应用服务应用存储库
 
@@ -84,19 +90,24 @@ ms.author: dariagrigoriu
 
 3. 使用 `git remote` 添加步骤 1 的 **Git URL** 中所列的远程引用。使用的命令应类似于：
 
-        git remote add azure https://<username>@localgitdeployment.scm.chinacloudsites.cn:443/localgitdeployment.git         
-    > [!NOTE] **remote** 命令可将命名引用添加到远程存储库。在本示例中，它为 Web 应用的存储库创建名为“azure”的引用。
+    ```
+    git remote add azure https://<username>@localgitdeployment.scm.chinacloudsites.cn:443/localgitdeployment.git         
+    ```
+    > [!NOTE]
+    > **remote** 命令可将命名引用添加到远程存储库。在本示例中，它为 Web 应用的存储库创建名为“azure”的引用。
 
 4. 使用刚刚创建的新 **azure** 远程命令将内容推送到应用服务。
 
-        git push azure master
+    ```
+git push azure master
+```
 
     当你在 Azure 门户预览中重置部署凭据时，系统将提示你输入以前创建的密码。输入该密码（请注意，在键入密码时，Gitbash 不会将星号回显到控制台）。
-       
+
 5. 返回到 Azure 经典管理门户。最近推送的日志条目应显示在“部署”页中。
 
 6. 单击“仪表板”的 URL 来验证是否已部署内容。
-    
+
 ## <a id="Step5"></a>故障排除
 
 以下是使用 Git 发布到 Azure 中的应用服务应用时遇到的常见错误或问题：
@@ -125,7 +136,9 @@ ms.author: dariagrigoriu
 
 **解决方法**：请再次执行推送操作，并指定 master 分支。例如：
 
-    git push azure master
+```
+git push azure master
+```
 
 ****
 

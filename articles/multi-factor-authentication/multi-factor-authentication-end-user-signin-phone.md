@@ -1,4 +1,3 @@
-
 ---
 title: 在 Azure Multi-Factor Authentication 中使用办公电话或手机呼叫进行登录
 description: 本页介绍用户如何使用手机登录。

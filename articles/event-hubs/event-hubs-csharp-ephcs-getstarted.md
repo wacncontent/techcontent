@@ -46,9 +46,9 @@ ms.author: jotaub;sethm
 1. 从 Visual Studio 中，打开之前创建的“Receiver”项目。
 
 2. 右键单击“Receiver”解决方案，单击“添加”，然后单击“现有项目”。
- 
+
 3. 找到现有的 Sender.csproj 文件，然后双击该文件以将其添加到解决方案中。
- 
+
 4. 再次右键单击“Receiver”解决方案，然后单击“属性”。随即显示“Receiver”属性页面。
 
 5. 单击“启动项目”，然后单击“多个启动项目”按钮。将“Receiver”和“Sender”项目的“操作”框设置为“启动”。
@@ -61,11 +61,11 @@ ms.author: jotaub;sethm
 
 7. 单击“确定”，关闭“属性”对话框。
 
-1.	从 Visual Studio 中，按 F5 运行“Receiver”项目，然后等待它为所有分区启动接收方。
+1. 从 Visual Studio 中，按 F5 运行“Receiver”项目，然后等待它为所有分区启动接收方。
 
     ![][21]  
 
-2.	“Sender”项目将自动运行。在控制台窗口中按“Enter”，便会看到事件出现在接收方窗口中。
+2. “Sender”项目将自动运行。在控制台窗口中按“Enter”，便会看到事件出现在接收方窗口中。
 
     ![][22]  
 
@@ -93,5 +93,5 @@ ms.author: jotaub;sethm
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 [使用事件中心扩大事件处理]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-45f43fc3
 [queued messaging solution]: ../service-bus-messaging/service-bus-dotnet-multi-tier-app-using-service-bus-queues.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

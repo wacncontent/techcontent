@@ -25,4 +25,4 @@ wacn.date: 11/03/2016
 
 **解决方法：**
 
-在发布 URL 后添加后缀 .m3u8 如：http://xxxxxxxx.streaming.mediaservices.chinacloudapi.cn/4254b276-aa65-463f-9d75-778999e7b36f/0dfe8107-b22a-49ca-94ce-dea54989da4c.ism/manifest(format=m3u8-aapl-v3).m3u8 
+在发布 URL 后添加后缀 .m3u8 如：http://xxxxxxxx.streaming.mediaservices.chinacloudapi.cn/4254b276-aa65-463f-9d75-778999e7b36f/0dfe8107-b22a-49ca-94ce-dea54989da4c.ism/manifest(format=m3u8-aapl-v3).m3u8

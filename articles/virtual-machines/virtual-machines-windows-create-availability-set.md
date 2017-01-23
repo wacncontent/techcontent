@@ -64,8 +64,10 @@ ms.author: cynthn
 
 此示例将在位于**中国北部**的 **RMResGroup** 资源组中创建一个可用性集。此操作需在创建属于该集的第一个 VM 之前完成。
 
-    New-AzureRmAvailabilitySet -ResourceGroupName "RMResGroup" -Name "AvailabilitySet03" -Location "China North"
-    
+```
+New-AzureRmAvailabilitySet -ResourceGroupName "RMResGroup" -Name "AvailabilitySet03" -Location "China North"
+```
+
 有关详细信息，请参阅 [New-AzureRmAvailabilitySet](https://msdn.microsoft.com/zh-cn/library/mt619453.aspx)。
 
 ## 故障排除

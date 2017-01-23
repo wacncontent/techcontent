@@ -1,4 +1,3 @@
-
 ---
 title: 应用程序升级：升级参数 | Azure
 description: 描述与升级 Service Fabric 应用程序有关的参数，包括要执行的运行状况检查和用于自动撤消升级的策略。
@@ -66,5 +65,5 @@ MaxPercentUnhealthyServices、MaxPercentUnhealthyPartitionsPerService 和 MaxPer
 参考[高级主题](./service-fabric-application-upgrade-advanced.md)，了解如何在升级应用程序时使用高级功能。
 
 参考[对应用程序升级进行故障排除](./service-fabric-application-upgrade-troubleshooting.md)中的步骤来解决应用程序升级时的常见问题。
- 
+
 <!---HONumber=Mooncake_1219_2016-->

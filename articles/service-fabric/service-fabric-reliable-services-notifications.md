@@ -49,29 +49,34 @@ ms.author: mcoskun
 
 若要注册事务通知和/或状态管理器通知，需要在可靠状态管理器上注册 **TransactionChanged** 或 **StateManagerChanged** 事件。注册这些事件处理程序的常见位置是有状态服务的构造函数。如果在构造函数上注册，也不会错过 **IReliableStateManager** 生存期内的更改导致的任何通知。
 
-    public MyService(StatefulServiceContext context)
-            : base(MyService.EndpointName, context, CreateReliableStateManager(context))
-    {
-            this.StateManager.TransactionChanged += this.OnTransactionChangedHandler;
-            this.StateManager.StateManagerChanged += this.OnStateManagerChangedHandler;
-    }
+```
+public MyService(StatefulServiceContext context)
+        : base(MyService.EndpointName, context, CreateReliableStateManager(context))
+{
+        this.StateManager.TransactionChanged += this.OnTransactionChangedHandler;
+        this.StateManager.StateManagerChanged += this.OnStateManagerChangedHandler;
+}
+```
 
 **TransactionChanged** 事件处理程序使用 **NotifyTransactionChangedEventArgs** 来提供有关事件的详细信息。它包含用于指定更改类型的操作属性（例如，**NotifyTransactionChangedAction.Commit**）。也包含提供对已更改事务的引用的事务属性。
 
->[!NOTE] 现在，只有提交事务才会引发 **TransactionChanged** 事件。此操作等同于 **NotifyTransactionChangedAction.Commit**。但是在未来，可能会有其他类型的事务状态更改可以引发事件。建议你检查操作，仅在你预期的事件发生时处理事件。
+>[!NOTE]
+> 现在，只有提交事务才会引发 **TransactionChanged** 事件。此操作等同于 **NotifyTransactionChangedAction.Commit**。但是在未来，可能会有其他类型的事务状态更改可以引发事件。建议你检查操作，仅在你预期的事件发生时处理事件。
 
 以下是 **TransactionChanged** 事件处理程序示例。
 
-    private void OnTransactionChangedHandler(object sender, NotifyTransactionChangedEventArgs e)
-    {
-            if (e.Action == NotifyTransactionChangedAction.Commit)
-            {
-                this.lastCommitLsn = e.Transaction.CommitSequenceNumber;
-                this.lastTransactionId = e.Transaction.TransactionId;
+```
+private void OnTransactionChangedHandler(object sender, NotifyTransactionChangedEventArgs e)
+{
+        if (e.Action == NotifyTransactionChangedAction.Commit)
+        {
+            this.lastCommitLsn = e.Transaction.CommitSequenceNumber;
+            this.lastTransactionId = e.Transaction.TransactionId;
 
-                this.lastCommittedTransactionList.Add(e.Transaction.TransactionId);
-            }
-    }
+            this.lastCommittedTransactionList.Add(e.Transaction.TransactionId);
+        }
+}
+```
 
 **StateManagerChanged** 事件处理程序使用 **NotifyStateManagerChangedEventArgs** 来提供有关事件的详细信息。**NotifyStateManagerChangedEventArgs** 有两个子类：**NotifyStateManagerRebuildEventArgs** 和 **NotifyStateManagerSingleEntityChangedEventArgs**。使用 **NotifyStateManagerChangedEventArgs** 中的操作属性将 **NotifyStateManagerChangedEventArgs** 转换为正确的子类：
 
@@ -80,17 +85,19 @@ ms.author: mcoskun
 
 以下是 **StateManagerChanged** 通知处理程序示例。
 
-    public void OnStateManagerChangedHandler(object sender, NotifyStateManagerChangedEventArgs e)
-    {
-            if (e.Action == NotifyStateManagerChangedAction.Rebuild)
-            {
-                this.ProcessStataManagerRebuildNotification(e);
+```
+public void OnStateManagerChangedHandler(object sender, NotifyStateManagerChangedEventArgs e)
+{
+        if (e.Action == NotifyStateManagerChangedAction.Rebuild)
+        {
+            this.ProcessStataManagerRebuildNotification(e);
 
-                return;
-            }
+            return;
+        }
 
-            this.ProcessStateManagerSingleEntityNotification(e);
-    }
+        this.ProcessStateManagerSingleEntityNotification(e);
+}
+```
 
 ## 可靠字典通知
 可靠字典为以下事件提供通知：
@@ -103,40 +110,46 @@ ms.author: mcoskun
 
 若要获取可靠字典通知，需要在 **IReliableDictionary** 上注册 **DictionaryChanged** 事件处理程序。通常在 **ReliableStateManager.StateManagerChanged** 添加通知中注册这些事件处理程序。在将 **IReliableDictionary** 添加到 **IReliableStateManager** 时注册，可确保不会错过任何通知。
 
-    private void ProcessStateManagerSingleEntityNotification(NotifyStateManagerChangedEventArgs e)
-    {
-            var operation = e as NotifyStateManagerSingleEntityChangedEventArgs;
+```
+private void ProcessStateManagerSingleEntityNotification(NotifyStateManagerChangedEventArgs e)
+{
+        var operation = e as NotifyStateManagerSingleEntityChangedEventArgs;
 
-            if (operation.Action == NotifyStateManagerChangedAction.Add)
+        if (operation.Action == NotifyStateManagerChangedAction.Add)
+        {
+            if (operation.ReliableState is IReliableDictionary<TKey, TValue>)
             {
-                if (operation.ReliableState is IReliableDictionary<TKey, TValue>)
-                {
-                        var dictionary = (IReliableDictionary<TKey, TValue>)operation.ReliableState;
-                        dictionary.RebuildNotificationAsyncCallback = this.OnDictionaryRebuildNotificationHandlerAsync;
-                        dictionary.DictionaryChanged += this.OnDictionaryChangedHandler;
-                        }
-                }
+                    var dictionary = (IReliableDictionary<TKey, TValue>)operation.ReliableState;
+                    dictionary.RebuildNotificationAsyncCallback = this.OnDictionaryRebuildNotificationHandlerAsync;
+                    dictionary.DictionaryChanged += this.OnDictionaryChangedHandler;
+                    }
             }
-    }
+        }
+}
+```
 
->[!NOTE] **ProcessStateManagerSingleEntityNotification** 是上述 **OnStateManagerChangedHandler** 示例所调用的示例方法。
+>[!NOTE]
+> **ProcessStateManagerSingleEntityNotification** 是上述 **OnStateManagerChangedHandler** 示例所调用的示例方法。
 
 上述代码会设置 **IReliableNotificationAsyncCallback** 接口以及 **DictionaryChanged**。**NotifyDictionaryRebuildEventArgs** 包含需要以异步方式枚举的 **IAsyncEnumerable** 接口，因此，会通过 **RebuildNotificationAsyncCallback**（而不是 **OnDictionaryChangedHandler**）来触发重新生成通知。
 
-    public async Task OnDictionaryRebuildNotificationHandlerAsync(
-            IReliableDictionary<TKey, TValue> origin,
-            NotifyDictionaryRebuildEventArgs<TKey, TValue> rebuildNotification)
-    {
-            this.secondaryIndex.Clear();
+```
+public async Task OnDictionaryRebuildNotificationHandlerAsync(
+        IReliableDictionary<TKey, TValue> origin,
+        NotifyDictionaryRebuildEventArgs<TKey, TValue> rebuildNotification)
+{
+        this.secondaryIndex.Clear();
 
-            var enumerator = e.State.GetAsyncEnumerator();
-            while (await enumerator.MoveNextAsync(CancellationToken.None))
-            {
-                this.secondaryIndex.Add(enumerator.Current.Key, enumerator.Current.Value);
-            }
-    }
+        var enumerator = e.State.GetAsyncEnumerator();
+        while (await enumerator.MoveNextAsync(CancellationToken.None))
+        {
+            this.secondaryIndex.Add(enumerator.Current.Key, enumerator.Current.Value);
+        }
+}
+```
 
->[!NOTE] 在上述代码中，在处理重新生成通知的过程中，会先清除所维护的聚合状态。由于正在利用新状态重新生成可靠集合，因此与以前的所有通知不相关。
+>[!NOTE]
+> 在上述代码中，在处理重新生成通知的过程中，会先清除所维护的聚合状态。由于正在利用新状态重新生成可靠集合，因此与以前的所有通知不相关。
 
 **DictionaryChanged** 事件处理程序使用 **NotifyDictionaryChangedEventArgs** 来提供有关事件的详细信息。**NotifyDictionaryChangedEventArgs** 有五个子类。使用 **NotifyDictionaryChangedEventArgs** 中的操作属性将 **NotifyDictionaryChangedEventArgs** 转换为正确的子类：
 
@@ -146,34 +159,36 @@ ms.author: mcoskun
 - **NotifyDictionaryChangedAction.Update**：**NotifyDictionaryItemUpdatedEventArgs**
 - **NotifyDictionaryChangedAction.Remove**：**NotifyDictionaryItemRemovedEventArgs**
 
-        public void OnDictionaryChangedHandler(object sender, NotifyDictionaryChangedEventArgs<TKey, TValue> e)
-        {
-                switch (e.Action)
-                {
-                    case NotifyDictionaryChangedAction.Clear:
-                            var clearEvent = e as NotifyDictionaryClearEventArgs<TKey, TValue>;
-                            this.ProcessClearNotification(clearEvent);
-                            return;
-    
-                    case NotifyDictionaryChangedAction.Add:
-                            var addEvent = e as NotifyDictionaryItemAddedEventArgs<TKey, TValue>;
-                            this.ProcessAddNotification(addEvent);
-                            return;
-    
-                    case NotifyDictionaryChangedAction.Update:
-                            var updateEvent = e as NotifyDictionaryItemUpdatedEventArgs<TKey, TValue>;
-                            this.ProcessUpdateNotification(updateEvent);
-                            return;
-    
-                    case NotifyDictionaryChangedAction.Remove:
-                            var deleteEvent = e as NotifyDictionaryItemRemovedEventArgs<TKey, TValue>;
-                            this.ProcessRemoveNotification(deleteEvent);
-                            return;
-    
-                    default:
-                            break;
-                }
-        }
+    ```
+    public void OnDictionaryChangedHandler(object sender, NotifyDictionaryChangedEventArgs<TKey, TValue> e)
+    {
+            switch (e.Action)
+            {
+                case NotifyDictionaryChangedAction.Clear:
+                        var clearEvent = e as NotifyDictionaryClearEventArgs<TKey, TValue>;
+                        this.ProcessClearNotification(clearEvent);
+                        return;
+
+                case NotifyDictionaryChangedAction.Add:
+                        var addEvent = e as NotifyDictionaryItemAddedEventArgs<TKey, TValue>;
+                        this.ProcessAddNotification(addEvent);
+                        return;
+
+                case NotifyDictionaryChangedAction.Update:
+                        var updateEvent = e as NotifyDictionaryItemUpdatedEventArgs<TKey, TValue>;
+                        this.ProcessUpdateNotification(updateEvent);
+                        return;
+
+                case NotifyDictionaryChangedAction.Remove:
+                        var deleteEvent = e as NotifyDictionaryItemRemovedEventArgs<TKey, TValue>;
+                        this.ProcessRemoveNotification(deleteEvent);
+                        return;
+
+                default:
+                        break;
+            }
+    }
+    ```
 
 ## 建议
 

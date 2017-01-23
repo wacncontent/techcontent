@@ -27,11 +27,11 @@ ms.author: vturecek
 若要开始使用 Reliable Actors，只需了解几个基本概念：
 
  * **执行组件服务**。可以在 Service Fabric 基础结构中部署的 Reliable Services 中封装了 Reliable Actors。执行组件服务在命名的服务实例中激活。
- 
+
  * **执行组件注册**。与 Reliable Services 一样，Reliable Actor 服务也需要注册到 Service Fabric 运行时。此外，需要将执行组件类型注册到执行组件运行时。
- 
+
  * **执行组件接口**。执行组件接口用于定义执行组件的强类型公共接口。在 Reliable Actor 模型术语中，执行组件接口用于定义执行组件可以理解并处理的消息类型。其他执行组件或客户端应用程序使用此执行组件接口将消息“发送”到（异步方式）此执行组件。Reliable Actors 可实现多个接口。
- 
+
  * **ActorProxy 类**。客户端应用程序使用 ActorProxy 类调用通过执行组件接口公开的方法。ActorProxy 类提供两个重要功能：
     * 名称解析：能够在群集中找到执行组件（查找托管它的群集节点）。
     * 故障处理：例如，在需要将执行组件重新定位到群集中另一个节点的故障之后，它可以重试方法调用和重新解析执行组件的位置。
@@ -83,30 +83,35 @@ ms.author: vturecek
 
 执行组件服务必须使用 Service Fabric 运行时中的服务类型注册。为了使执行组件服务能够运行执行组件实例，还必须向执行组件服务注册你的执行组件类型。`ActorRuntime` 注册方法将为执行组件执行此操作。
 
-    internal static class Program
+```
+internal static class Program
+{
+    private static void Main()
     {
-        private static void Main()
+        try
         {
-            try
-            {
-                ActorRuntime.RegisterActorAsync<MyActor>(
-                    (context, actorType) => new ActorService(context, actorType, () => new MyActor())).GetAwaiter().GetResult();
+            ActorRuntime.RegisterActorAsync<MyActor>(
+                (context, actorType) => new ActorService(context, actorType, () => new MyActor())).GetAwaiter().GetResult();
 
-                Thread.Sleep(Timeout.Infinite);
-            }
-            catch (Exception e)
-            {
-                ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
-                throw;
-            }
+            Thread.Sleep(Timeout.Infinite);
+        }
+        catch (Exception e)
+        {
+            ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
+            throw;
         }
     }
+}
+```
 
 如果在 Visual Studio 中从新项目开始，并且只有一个执行组件定义，那么默认情况下，在 Visual Studio 生成的代码中包含此注册。如果在服务中定义其他执行组件，则需要使用以下操作添加执行组件注册：
 
-    ActorRuntime.RegisterActorAsync<MyOtherActor>();
+```
+ActorRuntime.RegisterActorAsync<MyOtherActor>();
+```
 
-> [!TIP] Service Fabric 执行组件运行时发出一些[与执行组件方法相关的事件和性能计数器](./service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters)。它们可用于进行诊断和性能监视。
+> [!TIP]
+> Service Fabric 执行组件运行时发出一些[与执行组件方法相关的事件和性能计数器](./service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters)。它们可用于进行诊断和性能监视。
 
 ## 调试
 

@@ -120,7 +120,8 @@ ms.author: wesmc;ricksal
 
 有时，版本会因为引用了所需程序集的不同主要版本而发生冲突（允许不同的次要版本）。当 NuGet 提示你升级到移动服务 .NET 后端所用某个包的最新版本时，经常发生此情况。
 
->[!NOTE]移动服务目前只与 ASP.NET 5.1 兼容；当前不支持 ASP.NET 5.2。部署后，将 ASP.NET NuGet 包升级到 5.2.* 可能会导致错误。
+>[!NOTE]
+>移动服务目前只与 ASP.NET 5.1 兼容；当前不支持 ASP.NET 5.2。部署后，将 ASP.NET NuGet 包升级到 5.2.* 可能会导致错误。
 
 如果升级了任何此类的包，当你将更新的服务发布到 Azure 时，将会看到指出冲突的警告页：
 
@@ -128,7 +129,9 @@ ms.author: wesmc;ricksal
 
 同时，将在服务日志中记录如下所示的异常消息：
 
-    Found conflicts between different versions of the same dependent assembly 'Microsoft.ServiceBus': 2.2.0.0, 2.3.0.0. Please change your project to use version '2.2.0.0' which is the one currently supported by the hosting environment.
+```
+Found conflicts between different versions of the same dependent assembly 'Microsoft.ServiceBus': 2.2.0.0, 2.3.0.0. Please change your project to use version '2.2.0.0' which is the one currently supported by the hosting environment.
+```
 
 此问题很容易解决：只需恢复到所需程序集的支持版本，然后重新发布服务。
 

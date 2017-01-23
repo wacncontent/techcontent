@@ -93,6 +93,6 @@ ms.author: cherylmc
 配置虚拟网络网关，创建安全的站点到站点连接。请参阅[在 Azure 经典管理门户中配置虚拟网络网关](./vpn-gateway-configure-vpn-gateway-mp.md)。
 
 ## 后续步骤
-连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md/)文档。
+连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md)文档。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -26,11 +26,11 @@ wacn.date: 11/28/2016
 
 在完成此 Power BI 教程后，你将能够回答以下问题：
 
--	我可以如何使用 Power BI Desktop 生成包含 DocumentDB 的数据的报表？
--	如何在 Power BI Desktop 中连接到 DocumentDB 帐户？
--	如何在 Power BI Desktop 中从集合检索数据？
--	如何在 Power BI Desktop 中转换嵌套的 JSON 数据？
--	如何在 PowerBI.com 中发布和共享我的报表？
+- 我可以如何使用 Power BI Desktop 生成包含 DocumentDB 的数据的报表？
+- 如何在 Power BI Desktop 中连接到 DocumentDB 帐户？
+- 如何在 Power BI Desktop 中从集合检索数据？
+- 如何在 Power BI Desktop 中转换嵌套的 JSON 数据？
+- 如何在 PowerBI.com 中发布和共享我的报表？
 
 ## 先决条件
 
@@ -48,22 +48,24 @@ wacn.date: 11/28/2016
 ## 让我们开始吧
 在本教程中，让我们假设你是一位研究世界各地的火山的地理学家。火山数据存储在 DocumentDB 帐户中且 JSON 文档的外观如下所示。
 
-    {
-        "Volcano Name": "Rainier",
-           "Country": "United States",
-          "Region": "US-Washington",
-          "Location": {
-            "type": "Point",
-            "coordinates": [
-              -121.758,
-              46.87
-            ]
-          },
-          "Elevation": 4392,
-          "Type": "Stratovolcano",
-          "Status": "Dendrochronology",
-          "Last Known Eruption": "Last known eruption from 1800-1899, inclusive"
-    }
+```
+{
+    "Volcano Name": "Rainier",
+       "Country": "United States",
+      "Region": "US-Washington",
+      "Location": {
+        "type": "Point",
+        "coordinates": [
+          -121.758,
+          46.87
+        ]
+      },
+      "Elevation": 4392,
+      "Type": "Stratovolcano",
+      "Status": "Dendrochronology",
+      "Last Known Eruption": "Last known eruption from 1800-1899, inclusive"
+}
+```
 
 你想从 DocumentDB 帐户中检索火山数据并在如下交互式 Power BI 报表中将数据可视化。
 
@@ -86,15 +88,15 @@ wacn.date: 11/28/2016
 
     ![Power BI Desktop 获取数据 - Power BI 连接器](./media/documentdb-powerbi-visualize/power_bi_connector_pbigetdata.png)  
 
-6. 如下所示指定你想要从其中检索数据的 DocumentDB 帐户终结点 URL，然后单击“确定”。可以在 Azure 门户预览的“密钥”边栏选项卡上的“URI”框中检索 URL，或者使用演示帐户，在本例中，URL 为 `https://analytics.documents.azure.com`。**[](./documentdb-manage-account.md#keys/)**
+6. 如下所示指定你想要从其中检索数据的 DocumentDB 帐户终结点 URL，然后单击“确定”。可以在 Azure 门户预览的“密钥”边栏选项卡上的“URI”框中检索 URL，或者使用演示帐户，在本例中，URL 为 `https://analytics.documents.azure.com`。**[](./documentdb-manage-account.md#keys)**
 
     数据库名称、集合名称和 SQL 语句都可留空，因为这些字段是可选的。我们将使用导航器来选择数据库和集合并指定数据来源。
 
     ![DocumentDB Power BI 连接器的 Power BI 教程 - 桌面连接窗口](./media/documentdb-powerbi-visualize/power_bi_connector_pbiconnectwindow.png)  
 
-7. 如果你是首次连接到此终结点，则将提示你输入帐户密钥。可以在 Azure 门户预览的“只读密钥”边栏选项卡上的“主密钥”框中检索密钥，或者使用演示帐户，在本例中，密钥为 `RcEBrRI2xVnlWheejXncHId6QRcKdCGQSW6uSUEgroYBWVnujW3YWvgiG2ePZ0P0TppsrMgscoxsO7cf6mOpcA==`。**[](./documentdb-manage-account.md#keys/)**输入帐户密钥并单击“连接”。
+7. 如果你是首次连接到此终结点，则将提示你输入帐户密钥。可以在 Azure 门户预览的“只读密钥”边栏选项卡上的“主密钥”框中检索密钥，或者使用演示帐户，在本例中，密钥为 `RcEBrRI2xVnlWheejXncHId6QRcKdCGQSW6uSUEgroYBWVnujW3YWvgiG2ePZ0P0TppsrMgscoxsO7cf6mOpcA==`。**[](./documentdb-manage-account.md#keys)**输入帐户密钥并单击“连接”。
 
-    我们建议你在生成报表时使用只读密钥。这将防止主密钥不必要地暴露于潜在的安全风险中。只读密钥在 Azure 门户预览的“密钥”边栏选项卡中提供，或者，可以使用上面提供的演示帐户信息。[](./documentdb-manage-account.md#keys/)
+    我们建议你在生成报表时使用只读密钥。这将防止主密钥不必要地暴露于潜在的安全风险中。只读密钥在 Azure 门户预览的“密钥”边栏选项卡中提供，或者，可以使用上面提供的演示帐户信息。[](./documentdb-manage-account.md#keys)
 
     ![DocumentDB Power BI 连接器的 Power BI 教程 - 帐户密钥](./media/documentdb-powerbi-visualize/power_bi_connector_pbidocumentdbkey.png)  
 
@@ -238,11 +240,11 @@ wacn.date: 11/28/2016
 4. 输入该数据集的密钥连接到 DocumentDB 帐户，然后单击“登录”。
 
 5. 展开“计划刷新”，并设置数据集的刷新计划。
-  
+
 6. 单击“应用”即可完成计划刷新的设置。
 
 ## 后续步骤
 - 有关 Power BI 的详细信息，请参阅 [Get started with Power BI](https://powerbi.microsoft.com/documentation/powerbi-service-get-started/)（Power BI 入门）。
-- 有关 DocumentDB 的详细信息，请参阅 [DocumentDB 文档登录页](./index.md/)。
+- 有关 DocumentDB 的详细信息，请参阅 [DocumentDB 文档登录页](./index.md)。
 
 <!---HONumber=Mooncake_1121_2016-->

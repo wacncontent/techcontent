@@ -56,11 +56,13 @@ Azure 服务总线支持一组基于云的、面向消息的中间件技术，�
         Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", "test-blog", string.Empty);
         string name = "RootManageSharedAccessKey";
         string key = "abcdefghijklmopqrstuvwxyz";
-     
-        TokenProvider tokenProvider = TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
-        NamespaceManager namespaceManager = new NamespaceManager(uri, tokenProvider);
- 
-        namespaceManager.CreateTopic("DataCollectionTopic");
+
+```
+    TokenProvider tokenProvider = TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
+    NamespaceManager namespaceManager = new NamespaceManager(uri, tokenProvider);
+
+    namespaceManager.CreateTopic("DataCollectionTopic");
+```
 ```
 
 请注意，存在 [CreateTopic](https://msdn.microsoft.com/zh-cn/library/azure/hh293080.aspx) 方法的重载，你可通过该方法设置主题的属性。例如，可为发送给主题的消息设置默认生存期 (TTL) 值。接下来，添加“库存”和“仪表板”订阅。

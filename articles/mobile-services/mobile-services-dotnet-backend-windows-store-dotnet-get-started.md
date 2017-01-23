@@ -25,7 +25,8 @@ ms.author: glenga
 
 在本教程中，你将要创建一个新的移动服务，以及一个在新移动服务中存储应用程序数据的简单*待办事项列表*应用程序。要创建的移动服务将使用支持的 .NET 语言，你可以使用 Visual Studio 来提供服务器端业务逻辑和管理移动服务。若要创建允许以 JavaScript 编写服务器端业务逻辑的移动服务，请参阅本主题中的 JavaScript 后端版本。
 
->[!NOTE]本主题说明如何使用 Azure 经典管理门户创建新的移动服务项目和通用 Windows 应用。通过使用 Visual Studio 2013 Update 3，还可以向现有的 Visual Studio 解决方案添加新的移动服务项目。有关详细信息，请参阅[将移动服务添加到现有应用程序](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-data.md)。
+>[!NOTE]
+>本主题说明如何使用 Azure 经典管理门户创建新的移动服务项目和通用 Windows 应用。通过使用 Visual Studio 2013 Update 3，还可以向现有的 Visual Studio 解决方案添加新的移动服务项目。有关详细信息，请参阅[将移动服务添加到现有应用程序](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-data.md)。
 
 >若要将移动服务添加到 Windows Phone 8.0 或 Windows Phone Silverlight 8.1 应用程序项目，请参阅[将移动服务添加到现有的 Windows Phone 应用程序](./mobile-services-windows-phone-get-started-data.md)。
 [!INCLUDE [mobile-services-windows-universal-get-started](../../includes/mobile-services-windows-universal-get-started.md)]
@@ -63,7 +64,8 @@ ms.author: glenga
 
 [!INCLUDE [mobile-services-dotnet-backend-test-local-service-dotnet](../../includes/mobile-services-dotnet-backend-test-local-service-dotnet.md)]
 
->[!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 MainPage.xaml.cs 文件中。
+>[!NOTE]
+>你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 MainPage.xaml.cs 文件中。
 
 ## <a name="publish-your-mobile-service"></a> 发布移动服务
 
@@ -72,11 +74,13 @@ ms.author: glenga
 <ol start="4">
 <li><p>在共享代码项目中，打开 App.xaml.cs 文件，找到创建 <a href="http://msdn.microsoft.com/zh-cn/library/Windowsazure/microsoft.windowsazure.mobileservices.mobileserviceclient.aspx" target="_blank">MobileServiceClient</a> 实例的代码，注释掉使用 <em>localhost</em> 创建此客户端的代码，然后取消注释使用如下所示远程移动服务 URL 创建客户端的代码：</p>
 
-        <pre><code>public static MobileServiceClient MobileService = new MobileServiceClient(
-            "https://todolist.azure-mobile.net/",
-            "XXXX-APPLICATION-KEY-XXXXX");</code></pre>
+```
+    <pre><code>public static MobileServiceClient MobileService = new MobileServiceClient(
+        "https://todolist.azure-mobile.net/",
+        "XXXX-APPLICATION-KEY-XXXXX");</code></pre>
 
-    <p>现在，客户端将会访问已发布到 Azure 的移动服务。</p></li>
+<p>现在，客户端将会访问已发布到 Azure 的移动服务。</p></li>
+```
 </ol>
 
 ## 针对 Azure 中托管的移动服务测试应用程序

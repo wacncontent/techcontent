@@ -1,5 +1,3 @@
-
-
 有关 VM 代理以及它们如何工作以支持 VM 扩展的详细信息，请参阅 VM 代理和 VM 扩展概述：[Windows](../articles/virtual-machines/virtual-machines-windows-classic-manage-extensions.md) 或者 [Linux](../articles/virtual-machines/virtual-machines-linux-classic-manage-extensions.md)。
 
 ##Azure VM 扩展

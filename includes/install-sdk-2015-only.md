@@ -4,6 +4,7 @@
 
 如果你尚未安装 Visual Studio，则将与 SDK 一起安装 Visual Studio Express for Web。
 
->[!NOTE]根据计算机上已有 SDK 依赖项数量的不同，安装 SDK 可能耗时较长，从几分钟到半小时或更长时间不等。
+>[!NOTE]
+>根据计算机上已有 SDK 依赖项数量的不同，安装 SDK 可能耗时较长，从几分钟到半小时或更长时间不等。
 
 <!---HONumber=Mooncake_1207_2015-->

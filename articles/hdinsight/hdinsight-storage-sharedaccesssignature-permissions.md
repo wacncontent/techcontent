@@ -30,7 +30,7 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 * C# 或 Python。已提供 C# 示例代码作为 Visual Studio 解决方案。
 
     * Visual Studio 的版本必须是 2013 或 2015。
-    
+
     * Python 的版本必须是 2.7 或更高版本
 
 * [Azure PowerShell][powershell] - 可以使用 Azure PowerShell 新建群集，并在创建群集期间添加共享访问签名。
@@ -38,9 +38,9 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 * [https://github.com/Azure-Samples/hdinsight-dotnet-python-azure-storage-shared-access-signature](https://github.com/Azure-Samples/hdinsight-dotnet-python-azure-storage-shared-access-signature) 中的示例文件。此存储库包含以下项目：
 
     * Visual Studio 项目，可以创建存储容器、存储策略，以及与 HDInsight 配合使用的 SAS
-    
+
     * Python 脚本，可以创建存储容器、存储策略，以及与 HDInsight 配合使用的 SAS
-    
+
     * PowerShell 脚本，可以新建 HDInsight 群集并将其配置为使用 SAS。
 
 ##共享访问签名
@@ -61,7 +61,8 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 4. 将重新生成用于创建 SAS 的帐户密钥。请注意，这样做将导致使用该帐户密钥的所有应用程序组件身份验证失败，直到这些组件更新为使用其他有效帐户密钥或者重新生成的新帐户密钥。
 
-> [!IMPORTANT] 共享访问签名 URI 与用于创建签名的帐户密钥和关联的存储访问策略（如果有）相关联。如果未指定存储访问策略，则吊销共享访问签名的唯一方法是更改帐户密钥。
+> [!IMPORTANT]
+> 共享访问签名 URI 与用于创建签名的帐户密钥和关联的存储访问策略（如果有）相关联。如果未指定存储访问策略，则吊销共享访问签名的唯一方法是更改帐户密钥。
 
 建议始终使用存储访问策略，以便可以根据需要吊销签名或延长过期日期。本文档中的步骤使用存储访问策略生成 SAS。
 
@@ -80,39 +81,43 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 3. 选择“设置”，并添加以下条目的值：
 
     * StorageConnectionString：想要为其创建存储策略和 SAS 的存储帐户的连接字符串。其格式应为 `DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=mykey`，其中 `myaccount` 是存储帐户名称，`mykey` 是存储帐户密钥。
-    
+
     * ContainerName：想要限制访问的存储帐户中的容器。
-    
+
     * SASPolicyName：要创建的存储策略所用的名称。
-    
+
     * FileToUpload：将上传到容器的文件的路径。
-    
+
 4. 运行该项目。将显示控制台窗口。生成 SAS 之后，将显示如下所示的信息：
 
-        Container SAS token using stored access policy: sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
-        
+    ```
+    Container SAS token using stored access policy: sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
+    ```
+
     保存 SAS 策略令牌，因为在将存储帐户关联到 HDInsight 群集时需要用到此信息。你还需要使用存储帐户名称和容器名称。
-    
+
 ###使用 Python 创建存储策略和 SAS
 
 1. 打开 SASToken.py 文件并更改以下值：
 
     * policy\_name：要创建的存储策略所用的名称。
-    
+
     * storage\_account\_name：存储帐户的名称。
-    
+
     * storage\_account\_key：存储帐户的密钥。
-    
+
     * storage\_container\_name：想要限制访问的存储帐户中的容器。
-    
+
     * example\_file\_path：将上传到容器的文件的路径。
 
 2. 运行该脚本。脚本完成后，将显示如下所示的 SAS 令牌：
 
-        sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
-    
+    ```
+    sr=c&si=policyname&sig=dOAi8CXuz5Fm15EjRUu5dHlOzYNtcK3Afp1xqxniEps%3D&sv=2014-02-14
+    ```
+
     保存 SAS 策略令牌，因为在将存储帐户关联到 HDInsight 群集时需要用到此信息。你还需要使用存储帐户名称和容器名称。
-    
+
 ##将 SAS 与 HDInsight 配合使用
 
 创建 HDInsight 群集时，必须指定主存储帐户，可以选择性地指定其他存储帐户。这两种添加存储的方法都需要对所用存储帐户和容器拥有完全访问权限。
@@ -127,44 +132,51 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 1. 在文本编辑器中打开 `CreateCluster\HDInsightSAS.ps1` 文件，然后修改位于文档开头的以下值。
 
-        # Replace 'mycluster' with the name of the cluster to be created
-        $clusterName = 'mycluster'
-        # Valid value is 'Windows'
-        $osType = 'Windows'
-        # Replace with the Azure data center you want to the cluster to live in
-        $location = 'China North'
-        # Replace with the name of the default storage account to be created
-        $defaultStorageAccountName = 'mystorageaccount'
-        # Replace with the name of the SAS container created earlier
-        $SASContainerName = 'sascontainer'
-        # Replace with the name of the SAS storage account created earlier
-        $SASStorageAccountName = 'sasaccount'
-        # Replace with the SAS token generated earlier
-        $SASToken = 'sastoken'
-        # Set the number of worker nodes in the cluster
-        $clusterSizeInNodes = 2
-        
+    ```
+    # Replace 'mycluster' with the name of the cluster to be created
+    $clusterName = 'mycluster'
+    # Valid value is 'Windows'
+    $osType = 'Windows'
+    # Replace with the Azure data center you want to the cluster to live in
+    $location = 'China North'
+    # Replace with the name of the default storage account to be created
+    $defaultStorageAccountName = 'mystorageaccount'
+    # Replace with the name of the SAS container created earlier
+    $SASContainerName = 'sascontainer'
+    # Replace with the name of the SAS storage account created earlier
+    $SASStorageAccountName = 'sasaccount'
+    # Replace with the SAS token generated earlier
+    $SASToken = 'sastoken'
+    # Set the number of worker nodes in the cluster
+    $clusterSizeInNodes = 2
+    ```
+
     例如，将 `'mycluster'` 更改为要创建的群集的名称。创建存储帐户和 SAS 令牌时，SAS 值应该与先前步骤中的值匹配。
-    
+
     更改值之后，请保存该文件。
 
 1. 打开新的 Azure PowerShell 提示符。如果你不熟悉或尚未安装 Azure PowerShell，请参阅[安装和配置 Azure PowerShell][powershell]。
 
 2. 在提示符下，使用以下命令对 Azure 订阅进行身份验证：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
     出现提示时，请使用 Azure 订阅帐户登录。
-    
+
     如果你的登录名与多个 Azure 订阅关联，你可能需要使用 `Select-AzureSubscription` 选择想要使用的订阅。
 
 2. 在提示符下，将目录切换到包含 HDInsightSAS.ps1 文件的 `CreateCluster` 目录。然后使用以下命令运行该脚本
-        
-        .\HDInsightSAS.ps1
-    
+
+    ```
+    .\HDInsightSAS.ps1
+    ```
+
     脚本运行后，会在创建存储帐户时将输出记录到 PowerShell 提示符下。然后它会提示你输入 HDInsight 群集的 HTTP 用户。这是用于保护群集的 HTTP/s 访问的用户帐户。
 
-    > [!IMPORTANT] 出现输入 HTTP/s 用户名和密码的提示时，必须提供符合以下条件的密码：
+    > [!IMPORTANT]
+    > 出现输入 HTTP/s 用户名和密码的提示时，必须提供符合以下条件的密码：
     ><p> - 长度必须至少为 10 个字符
     ><p> - 必须至少包含一个数字
     ><p> - 必须至少包含一个非字母数字字符
@@ -184,48 +196,62 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 1. 在提示符下，键入以下命令。将 __SASCONTAINER__ 替换为针对 SAS 存储帐户创建的容器名称。将 __SASACCOUNTNAME__ 替换为用于 SAS 的存储帐户名称：
 
-        hdfs dfs -ls wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/
-    
+    ```
+    hdfs dfs -ls wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/
+    ```
+
     这会列出容器的内容，其中应包含创建容器和 SAS 时上传的文件。
-    
+
 2. 使用以下命令验证是否可以读取该文件的内容。如上一步所述替换 __SASCONTAINER__ 和 __SASACCOUNTNAME__。将 __FILENAME__ 替换为前一个命令中显示的名称：
 
-        hdfs dfs -text wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME
-        
+    ```
+    hdfs dfs -text wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME
+    ```
+
     这会列出文件的内容。
-    
+
 3. 使用以下命令将文件下载到本地文件系统：
 
-        hdfs dfs -get wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME testfile.txt
-    
+    ```
+    hdfs dfs -get wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/FILENAME testfile.txt
+    ```
+
     这会将该文件下载到名为 __testfile.txt__ 的本地文件中。
 
 4. 使用以下命令将本地文件上传到 SAS 存储上名为 __testupload.txt__ 的新文件中：
 
-        hdfs dfs -put testfile.txt wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/testupload.txt
-    
+    ```
+    hdfs dfs -put testfile.txt wasbs://SASCONTAINER@SASACCOUNTNAME.blob.core.chinacloudapi.cn/testupload.txt
+    ```
+
     你将收到如下所示的消息：
-    
-        put: java.io.IOException
-        
+
+    ```
+    put: java.io.IOException
+    ```
+
     发生此错误的原因是存储位置仅支持读取和列出。使用以下命令将数据放在群集的可写默认存储中：
-    
-        hdfs dfs -put testfile.txt wasbs:///testupload.txt
-        
+
+    ```
+    hdfs dfs -put testfile.txt wasbs:///testupload.txt
+    ```
+
     这一次操作应该会成功完成。
-    
+
 ##故障排除
 
 ###任务已取消
 
 __症状__：使用 PowerShell 脚本创建群集时，你可能会收到以下错误消息：
 
-    New-AzureHDInsightCluster : A task was canceled.
-    At C:\Users\larryfr\Documents\GitHub\hdinsight-azure-storage-sas\CreateCluster\HDInsightSAS.ps1:62 char:5
-    +     New-AzureHDInsightCluster `
-    +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        + CategoryInfo          : NotSpecified: (:) [New-AzureHDInsightCluster], CloudException
-        + FullyQualifiedErrorId : Hyak.Common.CloudException,Microsoft.Azure.Commands.HDInsight.NewAzureHDInsightClusterCommand
+```
+New-AzureHDInsightCluster : A task was canceled.
+At C:\Users\larryfr\Documents\GitHub\hdinsight-azure-storage-sas\CreateCluster\HDInsightSAS.ps1:62 char:5
++     New-AzureHDInsightCluster `
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [New-AzureHDInsightCluster], CloudException
+    + FullyQualifiedErrorId : Hyak.Common.CloudException,Microsoft.Azure.Commands.HDInsight.NewAzureHDInsightClusterCommand
+```
 
 __原因__：如果你使用群集管理员/HTTP 用户的密码，则可能发生此错误。
 

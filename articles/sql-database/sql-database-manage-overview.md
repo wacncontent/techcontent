@@ -29,7 +29,8 @@ ms.author: sstein
 ## Visual Studio 中的 SQL Server Management Studio 和 SQL Server Data Tools
 SQL Server Management Studio (SSMS) 和 SQL Server Data Tools (SSDT) 是在计算机上运行的客户端工具，可用于管理和开发云中的数据库。如果你是熟悉 Visual Studio 或其他集成开发环境 (IDE) 的应用程序开发人员，请[尝试使用 Visual Studio 中的 SSDT](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx)。许多数据库管理员都熟悉 SSMS（可用于 Azure SQL 数据库）。[下载最新版本的 SSMS](https://msdn.microsoft.com/zh-cn/library/mt238290)，在使用 Azure SQL 数据库时始终使用该最新版本。有关使用 SSMS 管理 Azure SQL 数据库的详细信息，请参阅[使用 SSMS 管理 SQL 数据库](./sql-database-manage-azure-ssms.md)。
 
-> [!IMPORTANT] 始终使用最新版 [SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290) 和 [SQL Server Data Tools](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) 以与 Azure 和 SQL 数据库的更新保持同步。
+> [!IMPORTANT]
+> 始终使用最新版 [SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290) 和 [SQL Server Data Tools](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) 以与 Azure 和 SQL 数据库的更新保持同步。
 
 ## PowerShell
 你可以使用 PowerShell 管理数据库和弹性数据库池，并自动执行 Azure 资源部署。Azure 建议在生产环境中使用此工具来管理大量的数据库并自动进行部署和资源更改。
@@ -41,9 +42,9 @@ SQL Server Management Studio (SSMS) 和 SQL Server Data Tools (SSDT) 是在计�
 
 * 使用[拆分-合并工具](./sql-database-elastic-scale-overview-split-and-merge.md)将多租户模型数据库移至单租户模型
 * 使用[弹性扩展客户端库](./sql-database-elastic-database-client-library.md)管理单租户模型或多租户模型中的数据库。
- 
+
 ## 其他资源
-* [Azure 自动化](../automation/index.md/)
-* [Azure 计划程序](../scheduler/index.md/)
+* [Azure 自动化](../automation/index.md)
+* [Azure 计划程序](../scheduler/index.md)
 
 <!---HONumber=Mooncake_1212_2016-->

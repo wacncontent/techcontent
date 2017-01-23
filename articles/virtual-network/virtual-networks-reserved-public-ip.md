@@ -58,46 +58,58 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 在使用保留 IP 之前，必须先将其添加到订阅。若要从 *中国北部* 位置中提供的公共 IP 地址池创建保留 IP，请运行以下命令：
 
-    New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North"
+```
+New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North"
+```
 
 但请注意，你不能指定要保留的具体 IP。若要查看你的订阅中哪些 IP 地址为保留 IP 地址，请运行以下 PowerShell 命令，然后注意观察 *ReservedIPName* 和 *Address* 的值：
 
-    Get-AzureReservedIP
+```
+Get-AzureReservedIP
+```
 
 预期输出：
 
-    ReservedIPName       : MyReservedIP
-    Address              : 23.101.114.211
-    Id                   : d73be9dd-db12-4b5e-98c8-bc62e7c42041
-    Label                :
-    Location             : China North
-    State                : Created
-    InUse                : False
-    ServiceName          :
-    DeploymentName       :
-    OperationDescription : Get-AzureReservedIP
-    OperationId          : 55e4f245-82e4-9c66-9bd8-273e815ce30a
-    OperationStatus      : Succeeded
+```
+ReservedIPName       : MyReservedIP
+Address              : 23.101.114.211
+Id                   : d73be9dd-db12-4b5e-98c8-bc62e7c42041
+Label                :
+Location             : China North
+State                : Created
+InUse                : False
+ServiceName          :
+DeploymentName       :
+OperationDescription : Get-AzureReservedIP
+OperationId          : 55e4f245-82e4-9c66-9bd8-273e815ce30a
+OperationStatus      : Succeeded
+```
 
 某个 IP 成为保留 IP 后，它就会始终与你的订阅相关联，直至将它删除。若要删除如上所示的保留 IP，请运行以下 PowerShell 命令：
 
-    Remove-AzureReservedIP -ReservedIPName "MyReservedIP"
+```
+Remove-AzureReservedIP -ReservedIPName "MyReservedIP"
+```
 
 ## 保留现有云服务的 IP 地址
 可通过添加 `-ServiceName` 参数保留现有云服务的 IP 地址。若要在中国北部位置中保留云服务 *TestService* 的 IP 地址，请运行以下 PowerShell 命令：
 
-    New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North" -ServiceName TestService
+```
+New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North" -ServiceName TestService
+```
 
 ## 将保留 IP 关联到新的云服务
 下面的脚本将创建新的保留 IP，然后将其关联到新的名为 *TestService* 的云服务。
 
-    New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North"
+```
+New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North"
 
-    $image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
+$image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
 
-    New-AzureVMConfig -Name TestVM -InstanceSize Small -ImageName $image.ImageName `
-    | Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
-    | New-AzureVM -ServiceName TestService -ReservedIPName MyReservedIP -Location "China North"
+New-AzureVMConfig -Name TestVM -InstanceSize Small -ImageName $image.ImageName `
+| Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
+| New-AzureVM -ServiceName TestService -ReservedIPName MyReservedIP -Location "China North"
+```
 
 > [!NOTE]
 创建用于云服务的保留 IP 时，仍需使用 *VIP:&lt;端口号>* 来引用 VM，以便进行入站通信。使用保留 IP 并不意味着你可以直接连接到 VM。保留 IP 将分配给 VM 所部署到的云服务。如果你想要直接通过 IP 连接到 VM，则必须配置实例层级公共 IP。实例层级公共 IP 是一类可直接分配给 VM 的公共 IP（称为 ILPIP）。它不能保留。有关详细信息，请参阅[实例层级公共 IP (ILPIP)](./virtual-networks-instance-level-public-ip.md)。
@@ -106,7 +118,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ## 从正在运行的部署中删除保留 IP
 若要删除已添加到以上脚本中创建的新服务中的保留 IP，请运行以下 PowerShell 命令：
 
-    Remove-AzureReservedIPAssociation -ReservedIPName MyReservedIP -ServiceName TestService
+```
+Remove-AzureReservedIPAssociation -ReservedIPName MyReservedIP -ServiceName TestService
+```
 
 > [!NOTE]
 从正在运行的部署中删除保留 IP 并不会从你的订阅中删除保留 IP。它只是释放该 IP，以供订阅中的其他资源使用。
@@ -115,33 +129,37 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ## 将保留 IP 关联到正在运行的部署
 以下命令将新建名为 *TestService2* 的云服务，以及名为 *TestVM2* 的 VM，然后将名为 *MyReservedIP* 的现有保留 IP 关联到云服务：
 
-    $image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
+```
+$image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
 
-    New-AzureVMConfig -Name TestVM2 -InstanceSize Small -ImageName $image.ImageName `
-    | Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
-    | New-AzureVM -ServiceName TestService2 -Location "China North"
+New-AzureVMConfig -Name TestVM2 -InstanceSize Small -ImageName $image.ImageName `
+| Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
+| New-AzureVM -ServiceName TestService2 -Location "China North"
 
-    Set-AzureReservedIPAssociation -ReservedIPName MyReservedIP -ServiceName TestService2
+Set-AzureReservedIPAssociation -ReservedIPName MyReservedIP -ServiceName TestService2
+```
 
 ## 使用服务配置文件将保留 IP 关联到云服务
 你也可以使用服务配置 (CSCFG) 文件将保留 IP 关联到云服务。下面的示例 xml 显示了如何将云服务配置为使用名为 *MyReservedIP* 的保留 VIP：
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <ServiceConfiguration serviceName="ReservedIPSample" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
-      <Role name="WebRole1">
-        <Instances count="1" />
-        <ConfigurationSettings>
-          <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-        </ConfigurationSettings>
-      </Role>
-      <NetworkConfiguration>
-        <AddressAssignments>
-          <ReservedIPs>
-           <ReservedIP name="MyReservedIP"/>
-          </ReservedIPs>
-        </AddressAssignments>
-      </NetworkConfiguration>
-    </ServiceConfiguration>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="ReservedIPSample" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
+  <Role name="WebRole1">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+  <NetworkConfiguration>
+    <AddressAssignments>
+      <ReservedIPs>
+       <ReservedIP name="MyReservedIP"/>
+      </ReservedIPs>
+    </AddressAssignments>
+  </NetworkConfiguration>
+</ServiceConfiguration>
+```
 
 ## 后续步骤
 * 了解 [IP 寻址](./virtual-network-ip-addresses-overview-classic.md)在经典部署模型中的工作原理。

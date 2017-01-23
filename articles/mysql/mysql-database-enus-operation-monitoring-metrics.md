@@ -64,7 +64,7 @@ that use the Azure portal -> MySQL Database on Azure. Select the required perfor
     <td width="96" valign="top"><p align="center">Insert Per Second</p></td>
     <td width="306" valign="top"><p>The average number of insert queries per second </p></td>
   </tr>
-   <tr>
+    <tr>
     <td width="96" valign="top"><p align="center">Peak Insert Per Second</p></td>
     <td width="306" valign="top"><p>The peak number of insert queries per second </p></td>
   </tr>

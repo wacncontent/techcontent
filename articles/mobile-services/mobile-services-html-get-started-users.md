@@ -39,7 +39,8 @@ ms.author: glenga
     + **launch-mac.command**（Mac OS X 计算机）
     + **launch-linux.sh**（Linux 计算机）
 
-    >[!NOTE]在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
+    >[!NOTE]
+    >在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
 
     随后将在本地计算机上启动用于托管新应用程序的 Web 服务器。
 
@@ -53,57 +54,63 @@ ms.author: glenga
 
 ## <a name="add-authentication"></a>向应用程序添加身份验证
 
->[!NOTE]由于登录是在弹出窗口中执行的，因此你应该从按钮的 click 事件调用 **login** 方法。否则，许多浏览器都会隐藏登录窗口。
+>[!NOTE]
+>由于登录是在弹出窗口中执行的，因此你应该从按钮的 click 事件调用 **login** 方法。否则，许多浏览器都会隐藏登录窗口。
 
 1. 打开项目文件 index.html，找到 H1 元素，并在该元素的下面添加以下代码段：
 
-        <div id="logged-in">
-            You are logged in as <span id="login-name"></span>.
-            <button id="log-out">Log out</button>
-        </div>
-        <div id="logged-out">
-            You are not logged in.
-            <button>Log in</button>
-        </div>
+    ```
+    <div id="logged-in">
+        You are logged in as <span id="login-name"></span>.
+        <button id="log-out">Log out</button>
+    </div>
+    <div id="logged-out">
+        You are not logged in.
+        <button>Log in</button>
+    </div>
+    ```
 
     这样，你便可以从该页登录到移动服务。
 
 2. 在 page.js 文件中，找到位于文件最底部的、调用 refreshTodoItems 函数的代码行，并将它替换为以下代码：
-    
-        function refreshAuthDisplay() {
-            var isLoggedIn = client.currentUser !== null;
-            $("#logged-in").toggle(isLoggedIn);
-            $("#logged-out").toggle(!isLoggedIn);
 
-            if (isLoggedIn) {
-                $("#login-name").text(client.currentUser.userId);
-                refreshTodoItems();
-            }
+    ```
+    function refreshAuthDisplay() {
+        var isLoggedIn = client.currentUser !== null;
+        $("#logged-in").toggle(isLoggedIn);
+        $("#logged-out").toggle(!isLoggedIn);
+
+        if (isLoggedIn) {
+            $("#login-name").text(client.currentUser.userId);
+            refreshTodoItems();
         }
+    }
 
-        function logIn() {
-            client.login("microsoftaccount").then(refreshAuthDisplay, function(error){
-                alert(error);
-            });
-        }
-
-        function logOut() {
-            client.logout();
-            refreshAuthDisplay();
-            $('#summary').html('<strong>You must login to access data.</strong>');
-        }
-
-        // On page init, fetch the data and set up event handlers
-        $(function () {
-            refreshAuthDisplay();
-            $('#summary').html('<strong>You must login to access data.</strong>');		    
-            $("#logged-out button").click(logIn);
-            $("#logged-in button").click(logOut);
+    function logIn() {
+        client.login("microsoftaccount").then(refreshAuthDisplay, function(error){
+            alert(error);
         });
+    }
+
+    function logOut() {
+        client.logout();
+        refreshAuthDisplay();
+        $('#summary').html('<strong>You must login to access data.</strong>');
+    }
+
+    // On page init, fetch the data and set up event handlers
+    $(function () {
+        refreshAuthDisplay();
+        $('#summary').html('<strong>You must login to access data.</strong>');		    
+        $("#logged-out button").click(logIn);
+        $("#logged-in button").click(logOut);
+    });
+    ```
 
     这将会创建一组用于处理身份验证过程的函数。将使用 microsoftaccount 登录对用户进行身份验证。如果使用的标识提供者不是 microsoftaccount，请将传递给上述 **login** 方法的值更改为 *aad*。
 
-    >[!IMPORTANT]在 PhoneGap 应用程序中，还必须向项目中添加以下插件：
+    >[!IMPORTANT]
+    >在 PhoneGap 应用程序中，还必须向项目中添加以下插件：
     ><ul><li><code>phonegap 插件添加 https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git</code></li>
     > <li><code>phonegap 插件添加 https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git</code></li></ul>
 
@@ -111,7 +118,8 @@ ms.author: glenga
 
        当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。
 
-    >[!NOTE]如果使用 Internet Explorer，可能会在登录后收到错误：<code>无法访问窗口打开程序。它可能位于不同的 Internet Explorer 区域</code>。发生此错误的原因是因为弹出窗口在与本地主机 (Intranet) 不同的安全区域 (Internet) 上运行。这只在使用本地主机开发期间影响应用程序。As a workaround, open the **Security** tab of **Internet Options**, click **Local Intranet**, click **Sites**, and disable **Automatically detect intranet network**.完成测试后，请记得将此设置更改回来。
+    >[!NOTE]
+    >如果使用 Internet Explorer，可能会在登录后收到错误：<code>无法访问窗口打开程序。它可能位于不同的 Internet Explorer 区域</code>。发生此错误的原因是因为弹出窗口在与本地主机 (Intranet) 不同的安全区域 (Internet) 上运行。这只在使用本地主机开发期间影响应用程序。As a workaround, open the **Security** tab of **Internet Options**, click **Local Intranet**, click **Sites**, and disable **Automatically detect intranet network**.完成测试后，请记得将此设置更改回来。
 
 ##  <a name="next-steps"></a>后续步骤
 
@@ -137,5 +145,5 @@ ms.author: glenga
 [使用脚本为用户授权]: ./mobile-services-javascript-backend-service-side-authorization.md
 
 [移动服务 HTML/JavaScript 操作方法概念性参考]: ./mobile-services-html-how-to-use-client-library.md
- 
+
 <!---HONumber=Mooncake_0118_2016-->

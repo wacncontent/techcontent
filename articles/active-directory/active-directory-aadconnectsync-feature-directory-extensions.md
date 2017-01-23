@@ -13,8 +13,8 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 08/19/2016
-wacn.date: 10/11/2016
-ms.author: billmath
+ms.author: andkjell
+wacn.date: 01/19/2017
 ---
 
 # Azure AD Connect 同步：目录扩展
@@ -26,15 +26,15 @@ ms.author: billmath
 ![架构扩展向导](./media/active-directory-aadconnectsync-feature-directory-extensions/extension2.png) 
 安装显示以下属性，它们是有效的候选项：
 
-- "用户"和"组"对象类型
+- “用户”和“组”对象类型
 - 单值属性：String、Boolean、Integer、Binary
 - 多值属性：String、Binary
 
-属性列表是安装 Azure AD Connect 过程中从缓存读取的。如果已使用附加属性扩展 Active Directory 架构，则只有在[刷新架构](./active-directory-aadconnectsync-installation-wizard.md)后，这些新属性才可见。
+属性列表是安装 Azure AD Connect 过程中从缓存读取的。如果已使用附加属性扩展 Active Directory 架构，则只有在[刷新架构](./active-directory-aadconnectsync-installation-wizard.md#refresh-directory-schema)后，这些新属性才可见。
 
 对象最多可以有 100 个目录扩展属性。最大长度为 250 个字符。如果属性值更长，它将被同步引擎截断。
 
-在安装 Azure AD Connect 期间，将会注册可以使用这些属性的应用程序。可以在 Azure 门户中看到此应用程序。  
+在安装 Azure AD Connect 期间，将会注册可以使用这些属性的应用程序。可以在 Azure 门户预览中看到此应用程序。  
 ![架构扩展应用](./media/active-directory-aadconnectsync-feature-directory-extensions/extension3.png)
 
 现在可以通过 Graph 使用这些属性：

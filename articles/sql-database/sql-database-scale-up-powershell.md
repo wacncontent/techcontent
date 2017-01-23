@@ -47,35 +47,39 @@ ms.tgt_pltfrm: NA
 
 运行 **Set-AzureRmSqlDatabase** cmdlet 并将 **-RequestedServiceObjectiveName** 设置为所需定价层的性能级别；例如 *S0* 、 *S1* 、 *S2* 、 *S3* 、 *P1* 、 *P2* ...
 
-    $ResourceGroupName = "resourceGroupName"
-    
-    $ServerName = "serverName"
-    $DatabaseName = "databaseName"
+```
+$ResourceGroupName = "resourceGroupName"
 
-    $NewEdition = "Standard"
-    $NewPricingTier = "S2"
+$ServerName = "serverName"
+$DatabaseName = "databaseName"
 
-    Set-AzureRmSqlDatabase -DatabaseName $DatabaseName -ServerName $ServerName -ResourceGroupName $ResourceGroupName -Edition $NewEdition -RequestedServiceObjectiveName $NewPricingTier
+$NewEdition = "Standard"
+$NewPricingTier = "S2"
+
+Set-AzureRmSqlDatabase -DatabaseName $DatabaseName -ServerName $ServerName -ResourceGroupName $ResourceGroupName -Edition $NewEdition -RequestedServiceObjectiveName $NewPricingTier
+```
 
 ##<a name="sample-powershell-script-to-change-the-service-tier-and-performance-level-of-your-sql-database"></a> 用于更改 SQL 数据库的服务层和性能级别的示例 PowerShell 脚本
 
 将 `{variables}` 替换为自己的值（不含大括号）。
-    
-    $SubscriptionId = "{4cac86b0-1e56-bbbb-aaaa-000000000000}"
-    
-    $ResourceGroupName = "{resourceGroup}"
-    $Location = "{AzureRegion}"
-    
-    $ServerName = "{server}"
-    $DatabaseName = "{database}"
-    
-    $NewEdition = "{Standard}"
-    $NewPricingTier = "{S2}"
-    
-    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
-    Set-AzureRmContext -SubscriptionId $SubscriptionId
-    
-    Set-AzureRmSqlDatabase -DatabaseName $DatabaseName -ServerName $ServerName -ResourceGroupName $ResourceGroupName -Edition $NewEdition -RequestedServiceObjectiveName $NewPricingTier
+
+```
+$SubscriptionId = "{4cac86b0-1e56-bbbb-aaaa-000000000000}"
+
+$ResourceGroupName = "{resourceGroup}"
+$Location = "{AzureRegion}"
+
+$ServerName = "{server}"
+$DatabaseName = "{database}"
+
+$NewEdition = "{Standard}"
+$NewPricingTier = "{S2}"
+
+Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+Set-AzureRmContext -SubscriptionId $SubscriptionId
+
+Set-AzureRmSqlDatabase -DatabaseName $DatabaseName -ServerName $ServerName -ResourceGroupName $ResourceGroupName -Edition $NewEdition -RequestedServiceObjectiveName $NewPricingTier
+```
 
 ## 后续步骤
 
@@ -86,7 +90,7 @@ ms.tgt_pltfrm: NA
 ## 其他资源
 
 - [业务连续性概述](./sql-database-business-continuity.md)
-- [SQL 数据库文档](./index.md/)
+- [SQL 数据库文档](./index.md)
 - [Azure SQL 数据库 Cmdlet](http://msdn.microsoft.com/zh-cn/library/mt574084.aspx)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -43,7 +43,9 @@ ms.author: tomfitz
 
 若要检查 Azure 资源模块的版本，请使用以下 cmdlet：
 
-    Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
+```
+Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
+```
 
 本主题已针对版本 3.3.0 更新。如果使用更旧的版本，体验可能与本主题中所示步骤不完全相同。有关此版本中 cmdlet 的文档，请参阅 [AzureRM.Resources 模块](https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.3.0/azurerm.resources)。
 
@@ -52,66 +54,84 @@ ms.author: tomfitz
 
 若要登录到 Azure 帐户，请使用 **Add-AzureRmAccount -EnvironmentName AzureChinaCloud** cmdlet。
 
-    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
+Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+```
 
 该 cmdlet 将提示您提供您的 Azure 帐户的登录凭据。登录后它会下载你的帐户设置，供 Azure PowerShell 使用。
 
 该 cmdlet 将返回有关你的帐户和要用于任务的订阅的信息。
 
-    Environment           : AzureCloud
-    Account               : example@contoso.com
-    TenantId              : {guid}
-    SubscriptionId        : {guid}
-    SubscriptionName      : Example Subscription One
-    CurrentStorageAccount :
+```
+Environment           : AzureCloud
+Account               : example@contoso.com
+TenantId              : {guid}
+SubscriptionId        : {guid}
+SubscriptionName      : Example Subscription One
+CurrentStorageAccount :
+```
 
 如果有多个订阅，可切换到其他订阅。首先，请看你的帐户的所有订阅。
 
-    Get-AzureRmSubscription
+```
+Get-AzureRmSubscription
+```
 
 它将返回已启用和已禁用的订阅。
 
-    SubscriptionName : Example Subscription One
-    SubscriptionId   : {guid}
-    TenantId         : {guid}
-    State            : Enabled
+```
+SubscriptionName : Example Subscription One
+SubscriptionId   : {guid}
+TenantId         : {guid}
+State            : Enabled
 
-    SubscriptionName : Example Subscription Two
-    SubscriptionId   : {guid}
-    TenantId         : {guid}
-    State            : Enabled
+SubscriptionName : Example Subscription Two
+SubscriptionId   : {guid}
+TenantId         : {guid}
+State            : Enabled
 
-    SubscriptionName : Example Subscription Three
-    SubscriptionId   : {guid}
-    TenantId         : {guid}
-    State            : Disabled
+SubscriptionName : Example Subscription Three
+SubscriptionId   : {guid}
+TenantId         : {guid}
+State            : Disabled
+```
 
 若要切换到其他订阅，请使用 **Set-AzureRmContext** cmdlet 提供订阅名称。
 
-    Set-AzureRmContext -SubscriptionName "Example Subscription Two"
+```
+Set-AzureRmContext -SubscriptionName "Example Subscription Two"
+```
 
 ## 创建资源组
 将任何资源部署到订阅之前，必须先创建将包含资源的资源组。
 
 若要创建资源组，请使用 **New-AzureRmResourceGroup** cmdlet。该命令使用 **Name** 参数来指定资源组的名称，并使用 **Location** 参数来指定其位置。
 
-    New-AzureRmResourceGroup -Name TestRG1 -Location "China East"
+```
+New-AzureRmResourceGroup -Name TestRG1 -Location "China East"
+```
 
 输入格式如下：
 
-    ResourceGroupName : TestRG1
-    Location          : chinaeast
-    ProvisioningState : Succeeded
-    Tags              :
-    ResourceId        : /subscriptions/{guid}/resourceGroups/TestRG1
+```
+ResourceGroupName : TestRG1
+Location          : chinaeast
+ProvisioningState : Succeeded
+Tags              :
+ResourceId        : /subscriptions/{guid}/resourceGroups/TestRG1
+```
 
 如果稍后需要检索资源组，请使用以下 cmdlet：
 
-    Get-AzureRmResourceGroup -ResourceGroupName TestRG1
+```
+Get-AzureRmResourceGroup -ResourceGroupName TestRG1
+```
 
 若要获取订阅中的所有资源组，请勿指定名称：
 
-    Get-AzureRmResourceGroup
+```
+Get-AzureRmResourceGroup
+```
 
 ## 将资源添加到资源组
 若要将资源添加到资源组中，可使用 **New-AzureRmResource** cmdlet 或特定于要创建的资源类型的 cmdlet（例如 **New-AzureRmStorageAccount**）。使用特定于资源类型的 cmdlet 可能更轻松，因为它包含新资源组所需属性的参数。若要使用 **New-AzureRmResource**，必须了解将不会提示而设置所有属性。
@@ -120,11 +140,15 @@ ms.author: tomfitz
 
 以下 cmdlet 可创建存储帐户。请勿使用示例所示的名称，而是为存储帐户提供唯一名称。此名称必须为 3 到 24 个字符，只能使用数字和小写字母。如果使用示例所示名称，将收到错误，因为该名称被使用。
 
-    New-AzureRmStorageAccount -ResourceGroupName TestRG1 -AccountName mystoragename -Type "Standard_LRS" -Location "China East"
+```
+New-AzureRmStorageAccount -ResourceGroupName TestRG1 -AccountName mystoragename -Type "Standard_LRS" -Location "China East"
+```
 
 如果稍后需要检索此资源组，请使用以下 cmdlet：
 
-    Get-AzureRmResource -ResourceName mystoragename -ResourceGroupName TestRG1
+```
+Get-AzureRmResource -ResourceName mystoragename -ResourceGroupName TestRG1
+```
 
 ## 添加标记
 
@@ -132,13 +156,17 @@ ms.author: tomfitz
 
 以下 cmdlet 将向你的存储帐户应用两个标记：
 
-    Set-AzureRmResource -Tag @{ Dept="IT"; Environment="Test" } -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts
+```
+Set-AzureRmResource -Tag @{ Dept="IT"; Environment="Test" } -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts
+```
 
 各个标记作为单个对象更新。若要向已包含标记的资源添加标记，请首先检索现有标记。将新标记添加到包含现有标记的对象，并将所有标记重新应用到资源。
 
-    $tags = (Get-AzureRmResource -ResourceName mystoragename -ResourceGroupName TestRG1).Tags
-    $tags += @{Status="Approved"}
-    Set-AzureRmResource -Tag $tags -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts
+```
+$tags = (Get-AzureRmResource -ResourceName mystoragename -ResourceGroupName TestRG1).Tags
+$tags += @{Status="Approved"}
+Set-AzureRmResource -Tag $tags -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts
+```
 
 ## 搜索资源
 
@@ -146,19 +174,27 @@ ms.author: tomfitz
 
 * 若要按名称获取资源，请提供 **ResourceNameContains** 参数：
 
-        Find-AzureRmResource -ResourceNameContains mystoragename
+    ```
+    Find-AzureRmResource -ResourceNameContains mystoragename
+    ```
 
 * 若要获取资源组中的所有资源，请提供 **ResourceGroupNameContains** 参数：
 
-        Find-AzureRmResource -ResourceGroupNameContains TestRG1
+    ```
+    Find-AzureRmResource -ResourceGroupNameContains TestRG1
+    ```
 
 * 若要获取具有某个标记名称和值的所有资源，请提供 **TagName** 和 **TagValue** 参数：
 
-        Find-AzureRmResource -TagName Dept -TagValue IT
+    ```
+    Find-AzureRmResource -TagName Dept -TagValue IT
+    ```
 
 * 若要获取具有特定资源类型的所有资源，请提供 **ResourceType** 参数：
 
-        Find-AzureRmResource -ResourceType Microsoft.Storage/storageAccounts
+    ```
+    Find-AzureRmResource -ResourceType Microsoft.Storage/storageAccounts
+    ```
 
 ## 锁定资源
 
@@ -168,11 +204,15 @@ ms.author: tomfitz
 
 若要应用锁定，请使用以下 cmdlet：
 
-    New-AzureRmResourceLock -LockLevel CanNotDelete -LockName LockStorage -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
+```
+New-AzureRmResourceLock -LockLevel CanNotDelete -LockName LockStorage -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
+```
 
 上例中，在删除锁之前，无法删除锁定的资源。若要删除所，请使用：
 
-    Remove-AzureRmResourceLock -LockName LockStorage -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
+```
+Remove-AzureRmResourceLock -LockName LockStorage -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
+```
 
 有关设置锁的详细信息，请参阅[使用 Azure Resource Manager 锁定资源](./resource-group-lock-resources.md)。
 
@@ -189,7 +229,9 @@ ms.author: tomfitz
 
 若要查看资源组的模板，请运行 **Export-AzureRmResourceGroup** cmdlet。
 
-    Export-AzureRmResourceGroup -ResourceGroupName TestRG1 -Path c:\Azure\Templates\Downloads\TestRG1.json
+```
+Export-AzureRmResourceGroup -ResourceGroupName TestRG1 -Path c:\Azure\Templates\Downloads\TestRG1.json
+```
 
 可使用许多选项和方案导出 Resource Manager 模板。有关详细信息，请参阅[从现有资源导出 Azure Resource Manager 模板](./resource-manager-export-template.md)。
 
@@ -198,11 +240,15 @@ ms.author: tomfitz
 
 * 若要从资源组中删除资源，请使用 **Remove-AzureRmResource** cmdlet。此 cmdlet 将删除该资源，但不会删除该资源组。
 
-        Remove-AzureRmResource -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
+    ```
+    Remove-AzureRmResource -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
+    ```
 
 * 若要删除资源组及其所有资源，请使用 **Remove-AzureRmResourceGroup** cmdlet。
 
-        Remove-AzureRmResourceGroup -Name TestRG1
+    ```
+    Remove-AzureRmResourceGroup -Name TestRG1
+    ```
 
 使用这两个 cmdlet，都会要求你确认要删除的资源或资源组。如果操作成功删除资源或资源组，将返回 **True**。
 

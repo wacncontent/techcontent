@@ -29,7 +29,8 @@ Azure IoT 套件预配置解决方案是你可以使用订阅部署到 Azure 的
 
 除了在 Azure 中部署和运行解决方案，你还可以下载完整的源代码，然后自定义并扩展解决方案以满足特定的 IoT 要求。
 
-> [!NOTE] 要部署其中一个预配置的解决方案，请访问 [Azure IoT 套件][lnk-azureiotsuite]。[IoT 预配置解决方案入门][lnk-getstarted-preconfigured]这篇文章介绍了有关如何部署并运行其中一个解决方案的详细信息。
+> [!NOTE]
+> 要部署其中一个预配置的解决方案，请访问 [Azure IoT 套件][lnk-azureiotsuite]。[IoT 预配置解决方案入门][lnk-getstarted-preconfigured]这篇文章介绍了有关如何部署并运行其中一个解决方案的详细信息。
 
 下表显示了如何将解决方案映射到特定的 IoT 功能：
 
@@ -121,7 +122,7 @@ IoT 中心通过服务端遥测数据读取终结点使收到的遥测数据可�
 [img-remote-monitoring-arch]: ./media/iot-suite-what-are-preconfigured-solutions/remote-monitoring-arch1.png
 [img-dashboard]: ./media/iot-suite-what-are-preconfigured-solutions/dashboard.png
 [lnk-what-is-azure-iot]: ./iot-suite-what-is-azure-iot.md
-[lnk-asa]: ../stream-analytics/index.md/
+[lnk-asa]: ../stream-analytics/index.md
 [lnk-event-processor]: ../event-hubs/event-hubs-programming-guide.md#event-processor-host
 [lnk-web-job]: ../app-service-web/web-sites-create-web-jobs.md
 [lnk-identity-registry]: ../iot-hub/iot-hub-devguide-identity-registry.md

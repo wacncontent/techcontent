@@ -31,7 +31,7 @@ Azure 平台提供各式各样的灵活 DevOps（开发运营）工作流。在�
 
 ## 创建 Web 应用程序和启用连续部署
 
-创建一个要在本教程余下部分中使用的、包含 [Azure App Service](../app-service/index.md/) 的 Web 应用。首先，你要启用从源代码存储库到正在运行的 Azure 环境的连续部署。
+创建一个要在本教程余下部分中使用的、包含 [Azure App Service](../app-service/index.md) 的 Web 应用。首先，你要启用从源代码存储库到正在运行的 Azure 环境的连续部署。
 
 1.  登录到 Azure 门户
 

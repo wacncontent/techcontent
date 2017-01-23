@@ -24,7 +24,7 @@ ms.author: jdial
 [!INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnet-intro-include.md)]
 
 Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)一文。
- 
+
 本文介绍如何使用 Azure 命令行接口 (CLI) 通过 Resource Manager 部署模型创建 VNet。还可以使用其他工具通过 Resource Manager 创建 VNet，或通过从以下列表中选择不同的选项使用经典部署模型创建 VNet：
 > [!div class="op_single_selector"]
 - [门户](./virtual-networks-create-vnet-arm-pportal.md)
@@ -44,15 +44,19 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 2. 运行以下命令创建 VNet 和子网：
 
-        azure network vnet create --vnet TestVNet -e 192.168.0.0 -i 16 -n FrontEnd -p 192.168.1.0 -r 24 -l "China North"
+    ```
+    azure network vnet create --vnet TestVNet -e 192.168.0.0 -i 16 -n FrontEnd -p 192.168.1.0 -r 24 -l "China North"
+    ```
 
     预期输出：
-   
-            info:    Executing command network vnet create
-            + Looking up network configuration
-            + Looking up locations
-            + Setting network configuration
-            info:    network vnet create command OK
+
+    ```
+        info:    Executing command network vnet create
+        + Looking up network configuration
+        + Looking up locations
+        + Setting network configuration
+        info:    network vnet create command OK
+    ```
 
     使用的参数：
 
@@ -65,19 +69,23 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
    * **-l（或 --location）**。要在其中创建 VNet 的 Azure 区域 。在我们的方案中为中国北部。
 3. 运行以下命令创建子网：
 
-        azure network vnet subnet create -t TestVNet -n BackEnd -a 192.168.2.0/24
+    ```
+    azure network vnet subnet create -t TestVNet -n BackEnd -a 192.168.2.0/24
+    ```
 
     预期输出：
 
-            info:    Executing command network vnet subnet create
-            + Looking up network configuration
-            + Creating subnet "BackEnd"
-            + Setting network configuration
-            + Looking up the subnet "BackEnd"
-            + Looking up network configuration
-            data:    Name                            : BackEnd
-            data:    Address prefix                  : 192.168.2.0/24
-            info:    network vnet subnet create command OK
+    ```
+        info:    Executing command network vnet subnet create
+        + Looking up network configuration
+        + Creating subnet "BackEnd"
+        + Setting network configuration
+        + Looking up the subnet "BackEnd"
+        + Looking up network configuration
+        data:    Name                            : BackEnd
+        data:    Address prefix                  : 192.168.2.0/24
+        info:    network vnet subnet create command OK
+    ```
 
     使用的参数：
 
@@ -86,25 +94,29 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
    * **-a（或 --address-prefix）**。子网 CIDR 块。对于我们的方案，为 *192.168.2.0/24* 。
 4. 运行以下命令查看新 VNet 的属性：
 
-        azure network vnet show
+    ```
+    azure network vnet show
+    ```
 
     预期输出：
-   
-            info:    Executing command network vnet show
-            Virtual network name: TestVNet
-            + Looking up the virtual network sites
-            data:    Name                            : TestVNet
-            data:    Location                        : China North
-            data:    State                           : Created
-            data:    Address space                   : 192.168.0.0/16
-            data:    Subnets:
-            data:      Name                          : FrontEnd
-            data:      Address prefix                : 192.168.1.0/24
-            data:
-            data:      Name                          : BackEnd
-            data:      Address prefix                : 192.168.2.0/24
-            data:
-            info:    network vnet show command OK
+
+    ```
+        info:    Executing command network vnet show
+        Virtual network name: TestVNet
+        + Looking up the virtual network sites
+        data:    Name                            : TestVNet
+        data:    Location                        : China North
+        data:    State                           : Created
+        data:    Address space                   : 192.168.0.0/16
+        data:    Subnets:
+        data:      Name                          : FrontEnd
+        data:      Address prefix                : 192.168.1.0/24
+        data:
+        data:      Name                          : BackEnd
+        data:      Address prefix                : 192.168.2.0/24
+        data:
+        info:    network vnet show command OK
+    ```
 
 ## 后续步骤
 

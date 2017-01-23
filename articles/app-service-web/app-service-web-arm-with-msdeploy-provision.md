@@ -35,88 +35,96 @@ ms.author: john.dehavilland
 
 下一步是创建用于将 Web 应用部署到 Azure 的包。为此，请保存你的项目，然后从命令行运行以下命令：
 
-    msbuild yourwebapp.csproj /t:Package /p:PackageLocation="path\to\package.zip"
+```
+msbuild yourwebapp.csproj /t:Package /p:PackageLocation="path\to\package.zip"
+```
 
 这将在 PackageLocation 文件夹下创建一个压缩包。现在，应用程序可供部署，你可以构建 Azure 资源管理器模板来执行此操作。
 
 ### 创建 ARM 模板
 首先，让我们创建一个基本的 ARM 模板，以便创建 Web 应用程序和托管计划（请注意，为求简洁，此处并未显示参数和变量）。
 
-    {
-        "name": "[parameters('appServicePlanName')]",
-        "type": "Microsoft.Web/serverfarms",
-        "location": "[resourceGroup().location]",
-        "apiVersion": "2014-06-01",
-        "dependsOn": [ ],
-        "tags": {
-            "displayName": "appServicePlan"
-        },
-        "properties": {
-            "name": "[parameters('appServicePlanName')]",
-            "sku": "[parameters('appServicePlanSKU')]",
-            "workerSize": "[parameters('appServicePlanWorkerSize')]",
-            "numberOfWorkers": 1
-        }
+```
+{
+    "name": "[parameters('appServicePlanName')]",
+    "type": "Microsoft.Web/serverfarms",
+    "location": "[resourceGroup().location]",
+    "apiVersion": "2014-06-01",
+    "dependsOn": [ ],
+    "tags": {
+        "displayName": "appServicePlan"
     },
-    {
-        "name": "[variables('webAppName')]",
-        "type": "Microsoft.Web/sites",
-        "location": "[resourceGroup().location]",
-        "apiVersion": "2015-08-01",
-        "dependsOn": [
-            "[concat('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
-        ],
-        "tags": {
-            "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]": "Resource",
-            "displayName": "webApp"
-        },
-        "properties": {
-            "name": "[variables('webAppName')]",
-            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
-        }
+    "properties": {
+        "name": "[parameters('appServicePlanName')]",
+        "sku": "[parameters('appServicePlanSKU')]",
+        "workerSize": "[parameters('appServicePlanWorkerSize')]",
+        "numberOfWorkers": 1
     }
+},
+{
+    "name": "[variables('webAppName')]",
+    "type": "Microsoft.Web/sites",
+    "location": "[resourceGroup().location]",
+    "apiVersion": "2015-08-01",
+    "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
+    ],
+    "tags": {
+        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]": "Resource",
+        "displayName": "webApp"
+    },
+    "properties": {
+        "name": "[variables('webAppName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
+    }
+}
+```
 
 接下来，需要修改 Web 应用资源，以使用嵌套的 MSDeploy 资源。这样便可以引用前面创建的包，并指示 Azure 资源管理器使用 MSDeploy 将包部署到 Azure WebApp。下面显示了包含嵌套 MSDeploy 资源的 Microsoft.Web/sites 资源：
 
-    {
+```
+{
+    "name": "[variables('webAppName')]",
+    "type": "Microsoft.Web/sites",
+    "location": "[resourceGroup().location]",
+    "apiVersion": "2015-08-01",
+    "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
+    ],
+    "tags": {
+        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]": "Resource",
+        "displayName": "webApp"
+    },
+    "properties": {
         "name": "[variables('webAppName')]",
-        "type": "Microsoft.Web/sites",
-        "location": "[resourceGroup().location]",
-        "apiVersion": "2015-08-01",
-        "dependsOn": [
-            "[concat('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
-        ],
-        "tags": {
-            "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]": "Resource",
-            "displayName": "webApp"
-        },
-        "properties": {
-            "name": "[variables('webAppName')]",
-            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
-        },
-        "resources": [
-            {
-                "name": "MSDeploy",
-                "type": "extensions",
-                "location": "[resourceGroup().location]",
-                "apiVersion": "2015-08-01",
-                "dependsOn": [
-                    "[concat('Microsoft.Web/sites/', variables('webAppName'))]"
-                ],
-                "tags": {
-                    "displayName": "webDeploy"
-                },
-                "properties": {
-                    "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]",
-                    "dbType": "None",
-                    "connectionString": "",
-                    "setParameters": {
-                        "IIS Web Application Name": "[variables('webAppName')]"
-                    }
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
+    },
+    "resources": [
+        {
+            "name": "MSDeploy",
+            "type": "extensions",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2015-08-01",
+            "dependsOn": [
+                "[concat('Microsoft.Web/sites/', variables('webAppName'))]"
+            ],
+            "tags": {
+                "displayName": "webDeploy"
+            },
+            "properties": {
+            ```
+"packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]"
+```,
+                "dbType": "None",
+                "connectionString": "",
+                "setParameters": {
+                    "IIS Web Application Name": "[variables('webAppName')]"
                 }
             }
-        ]
-    }
+        }
+    ]
+}
+```
 
 现在，你会注意到 MSDeploy 资源使用了如下定义的 **packageUri** 属性：
 
@@ -126,38 +134,44 @@ ms.author: john.dehavilland
 
 接下来，需要加入其他嵌套资源，以设置主机名绑定来利用自定义域。首先，需要确保拥有该主机名，然后对它进行设置，使 Azure 能够验证你是否拥有它 - 请参阅[在 Azure App Service 中配置自定义域名](./web-sites-custom-domain-name.md)。完成此操作后，可以将以下内容添加到模板中的 Microsoft.Web/sites 资源部分下：
 
-    {
-        "apiVersion": "2015-08-01",
-        "type": "hostNameBindings",
-        "name": "www.yourcustomdomain.com",
-        "dependsOn": [
-            "[concat('Microsoft.Web/sites/', variables('webAppName'))]"
-        ],
-        "properties": {
-            "domainId": null,
-            "hostNameType": "Verified",
-            "siteName": "variables('webAppName')"
-        }
+```
+{
+    "apiVersion": "2015-08-01",
+    "type": "hostNameBindings",
+    "name": "www.yourcustomdomain.com",
+    "dependsOn": [
+        "[concat('Microsoft.Web/sites/', variables('webAppName'))]"
+    ],
+    "properties": {
+        "domainId": null,
+        "hostNameType": "Verified",
+        "siteName": "variables('webAppName')"
     }
+}
+```
 
 最后，需要添加另一个顶级资源，即 Microsoft.Web/certificates。此资源将包含你的 SSL 证书，并与 Web 应用和托管计划位于同一级别。
 
-    {
-        "name": "[parameters('certificateName')]",
-        "apiVersion": "2014-04-01",
-        "type": "Microsoft.Web/certificates",
-        "location": "[resourceGroup().location]",
-        "properties": {
-            "pfxBlob": "pfx base64 blob",
-            "password": "some pass"
-        }
+```
+{
+    "name": "[parameters('certificateName')]",
+    "apiVersion": "2014-04-01",
+    "type": "Microsoft.Web/certificates",
+    "location": "[resourceGroup().location]",
+    "properties": {
+        "pfxBlob": "pfx base64 blob",
+        "password": "some pass"
     }
+}
+```
 
 需要具备有效的 SSL 证书才能设置此资源。获得有效的证书后，需要提取 base64 字符串形式的 pfx 字节。提取此信息的方法之一是使用以下 PowerShell 命令：
 
-    $fileContentBytes = get-content 'C:\path\to\cert.pfx' -Encoding Byte
+```
+$fileContentBytes = get-content 'C:\path\to\cert.pfx' -Encoding Byte
 
-    [System.Convert]::ToBase64String($fileContentBytes) | Out-File 'pfx-bytes.txt'
+[System.Convert]::ToBase64String($fileContentBytes) | Out-File 'pfx-bytes.txt'
+```
 
 然后，可将此信息作为参数传递给 ARM 部署模板。
 
@@ -169,33 +183,35 @@ ms.author: john.dehavilland
 
 以下 PowerShell 显示了调用 Deploy-AzureResourceGroup.ps1 的完整部署：
 
-    #Set resource group name
-    $rgName = "Name-of-resource-group"
+```
+#Set resource group name
+$rgName = "Name-of-resource-group"
 
-    #call deploy-azureresourcegroup script to deploy web app
+#call deploy-azureresourcegroup script to deploy web app
 
-    .\Deploy-AzureResourceGroup.ps1 -ResourceGroupLocation "China East" `
-                                    -ResourceGroupName $rgName `
-                                    -UploadArtifacts "container-name" `
-                                    -StorageAccountName "name-of-storage-acct-for-package" `
-                                    -StorageAccountResourceGroupName "resource-group-name-storage-acct" `
-                                    -TemplateFile "web-app-deploy.json" `
-                                    -TemplateParametersFile "web-app-deploy-parameters.json" `
-                                    -ArtifactStagingDirectory "C:\path\to\packagefolder"
+.\Deploy-AzureResourceGroup.ps1 -ResourceGroupLocation "China East" `
+                                -ResourceGroupName $rgName `
+                                -UploadArtifacts "container-name" `
+                                -StorageAccountName "name-of-storage-acct-for-package" `
+                                -StorageAccountResourceGroupName "resource-group-name-storage-acct" `
+                                -TemplateFile "web-app-deploy.json" `
+                                -TemplateParametersFile "web-app-deploy-parameters.json" `
+                                -ArtifactStagingDirectory "C:\path\to\packagefolder"
 
-    #update web app to bind ssl certificate to hostname. This has to be done after creation above.
+#update web app to bind ssl certificate to hostname. This has to be done after creation above.
 
-    $cert = Get-PfxCertificate -FilePath C:\path\to\certificate.pfx
+$cert = Get-PfxCertificate -FilePath C:\path\to\certificate.pfx
 
-    $ar = Get-AzureRmResource -Name nameofwebsite -ResourceGroupName $rgName -ResourceType Microsoft.Web/sites -ApiVersion 2014-11-01
+$ar = Get-AzureRmResource -Name nameofwebsite -ResourceGroupName $rgName -ResourceType Microsoft.Web/sites -ApiVersion 2014-11-01
 
-    $props = $ar.Properties
+$props = $ar.Properties
 
-    $props.HostNameSslStates[2].'SslState' = 1
-    $props.HostNameSslStates[2].'thumbprint' = $cert.Thumbprint
-    $props.hostNameSslStates[2].'toUpdate' = $true
+$props.HostNameSslStates[2].'SslState' = 1
+$props.HostNameSslStates[2].'thumbprint' = $cert.Thumbprint
+$props.hostNameSslStates[2].'toUpdate' = $true
 
-    Set-AzureRmResource -ApiVersion 2014-11-01 -Name nameofwebsite -ResourceGroupName $rgName -ResourceType Microsoft.Web/sites -PropertyObject $props
+Set-AzureRmResource -ApiVersion 2014-11-01 -Name nameofwebsite -ResourceGroupName $rgName -ResourceType Microsoft.Web/sites -PropertyObject $props
+```
 
 此时，应用程序应已部署，你可以通过 https://www.yourcustomdomain.com 浏览它
 

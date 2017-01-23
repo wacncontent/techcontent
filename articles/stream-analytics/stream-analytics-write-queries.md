@@ -32,32 +32,33 @@ ms.author: jeffstok
 
     ![选择查询预览](./media/stream-analytics-write-queries/query-preview-portal.png)  
 
-2.	新的作业有一个查询模板来帮助你开始。查询模板执行一种“传递”查询，将来自输入的所有字段投射到输出。
+2. 新的作业有一个查询模板来帮助你开始。查询模板执行一种“传递”查询，将来自输入的所有字段投射到输出。
 
     - 如果你已经为你的作业定义了至少一个输入和一个输出，则可以用你希望首先使用的输入和输出的别名代替占位符 "[YourOutputAlias]" 和 "[YourInputAlias]"。此外，仍然可以在 Azure 经典管理门户中编写和测试，查询无需在作业上定义输入和输出。
     - 如果你希望执行除简单传递以外的更多处理，则可以编辑查询定义。要开始编写查询，请阅读[此处](./stream-analytics-stream-analytics-query-patterns.md)提供的某些常见查询模式。
-  
+
     ![查询数据窗口](./media/stream-analytics-write-queries/2-stream-analytics-write-queries.png)  
 
 ## 若要验证查询数据是否正常工作，请执行以下操作： ##
 
 可以通过在浏览器中使用一个或多个包含测试数据的本地 JSON 文件来运行查询，从而测试查询的行为。这不会启动作业，也不会对计费有任何影响。
 
-> [!NOTE] 当前 Azure 门户预览不支持浏览器内查询测试。
+> [!NOTE]
+> 当前 Azure 门户预览不支持浏览器内查询测试。
 
-1.	确保查询没有任何错误（否则“测试”按钮将被禁用），然后单击“测试”按钮。
+1. 确保查询没有任何错误（否则“测试”按钮将被禁用），然后单击“测试”按钮。
 
     ![查询数据测试](./media/stream-analytics-write-queries/3-stream-analytics-write-queries.png)  
 
-2.	系统将提示你为查询中引用的每个输入指定文件。在本示例中，模板查询保持原样，因此对话框提示提供一个名为 "yourinputalias" 的输入。
+2. 系统将提示你为查询中引用的每个输入指定文件。在本示例中，模板查询保持原样，因此对话框提示提供一个名为 "yourinputalias" 的输入。
 
     ![测试数据查询](./media/stream-analytics-write-queries/4-stream-analytics-write-queries.png)  
 
-3.	浏览到一个测试文件。[github](https://github.com/Azure/azure-stream-analytics/tree/master/Sample%20Data) 提供了几个样本文件，你还可以通过输入选项卡上的“样本数据”功能，从你自己的数据流输入获取样本数据。
+3. 浏览到一个测试文件。[github](https://github.com/Azure/azure-stream-analytics/tree/master/Sample%20Data) 提供了几个样本文件，你还可以通过输入选项卡上的“样本数据”功能，从你自己的数据流输入获取样本数据。
 
     ![查询输入](./media/stream-analytics-write-queries/5-stream-analytics-write-queries.png)  
 
-4.	在关闭对话框后，你的查询将使用测试数据运行，并且你将在“查询”页的底部看到结果。
+4. 在关闭对话框后，你的查询将使用测试数据运行，并且你将在“查询”页的底部看到结果。
 
     ![查询摘要](./media/stream-analytics-write-queries/6-stream-analytics-write-queries.png)  
 

@@ -18,42 +18,54 @@
     * 单击“高级”按钮，然后添加其他 IP 地址。使用为主 IP 地址指定的相同子网，为 NIC 添加步骤 8 中列出的每个辅助专用 IP 地址。
     * 单击“确定”关闭“TCP/IP 设置”，然后再次单击“确定”关闭适配器设置。此时会重新建立 RDP 连接。
 6. 在命令提示符下键入 *ipconfig /all*。此时将显示添加的所有 IP 地址，DHCP 已关闭。
-    
+
 ### Linux (Ubuntu)
 
 1. 打开终端窗口。
 2. 请确保以 root 用户身份操作。如果不是，请输入以下命令：
 
-        sudo -i
+    ```
+    sudo -i
+    ```
 
 3. 更新网络接口（假设为“eth0”）的配置文件。
 
     * 保留 dhcp 的现有行项。主 IP 地址会保留之前的配置。
     * 使用以下命令添加其他静态 IP 地址的配置：
 
-            cd /etc/network/interfaces.d/
-            ls
+        ```
+        cd /etc/network/interfaces.d/
+        ls
+        ```
 
     应会看到一个 .cfg 文件。
 4. 打开该文件：vi *文件名*。
 
     该文件的末尾应会显示以下命令行：
 
-        auto eth0
-        iface eth0 inet dhcp
+    ```
+    auto eth0
+    iface eth0 inet dhcp
+    ```
 
 5. 在此文件包含的命令行后面添加以下命令行：
 
-        iface eth0 inet static
-        address <your private IP address here>
+    ```
+    iface eth0 inet static
+    address <your private IP address here>
+    ```
 
 6. 使用以下命令保存该文件：
 
-        :wq
+    ```
+    :wq
+    ```
 
 7. 使用以下命令重置网络接口：
 
-        sudo ifdown eth0 && sudo ifup eth0
+    ```
+    sudo ifdown eth0 && sudo ifup eth0
+    ```
 
     > [!IMPORTANT]
     > 如果使用远程连接，请在同一行中同时运行 ifdown 和 ifup。
@@ -61,48 +73,66 @@
 
 8. 使用以下命令验证 IP 地址是否已添加到网络接口：
 
-        Ip addr list eth0
+    ```
+    Ip addr list eth0
+    ```
 
 应会在列表中看到添加的 IP 地址。
-    
+
 ### Linux（Redhat、CentOS 和其他操作系统）
 
 1. 打开终端窗口。
 2. 请确保以 root 用户身份操作。如果不是，请输入以下命令：
 
-        sudo -i
+    ```
+    sudo -i
+    ```
 
 3. 输入密码，根据提示的说明操作。切换为 root 用户后，使用以下命令导航到网络脚本文件夹：
 
-        cd /etc/sysconfig/network-scripts
+    ```
+    cd /etc/sysconfig/network-scripts
+    ```
 
 4. 使用以下命令列出相关的 ifcfg 文件：
 
-        ls ifcfg-*
+    ```
+    ls ifcfg-*
+    ```
 
     应会看到其中一个文件是 *ifcfg-eth0*。
 
 5. 使用以下命令复制 *ifcfg-eth0* 文件并将它命名为 *ifcfg-eth0:0*：
 
-        cp ifcfg-eth0 ifcfg-eth0:0
+    ```
+    cp ifcfg-eth0 ifcfg-eth0:0
+    ```
 
 6. 使用以下命令编辑 *ifcfg-eth0:0* 文件：
 
-        vi ifcfg-eth1
+    ```
+    vi ifcfg-eth1
+    ```
 
 7. 使用以下命令在文件中将设备更改为适当的名称，在本例中为 *eth0:0*：
 
-        DEVICE=eth0:0
+    ```
+    DEVICE=eth0:0
+    ```
 
 8. 更改 *IPADDR = YourPrivateIPAddress* 行以反映 IP 地址。
 9. 使用以下命令保存该文件：
 
-        :wq
+    ```
+    :wq
+    ```
 
 10. 运行以下命令重新启动网络服务，确保更改成功：
 
-        /etc/init.d/network restart
-        Ipconfig
+    ```
+    /etc/init.d/network restart
+    Ipconfig
+    ```
 
 应会在返回的列表中看到添加的 IP 地址 *eth0:0*。
 

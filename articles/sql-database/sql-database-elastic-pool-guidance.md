@@ -22,7 +22,8 @@ ms.tgt_pltfrm: NA
 
 - 有关池的概述，请参阅 [SQL 数据库弹性数据库池](./sql-database-elastic-pool.md)。
 
-> [!NOTE] 弹性数据库池仅适用于 SQL 数据库 V12 服务器。
+> [!NOTE]
+> 弹性数据库池仅适用于 SQL 数据库 V12 服务器。
 
 ## 弹性数据库池
 
@@ -41,7 +42,7 @@ Azure SQL 数据库中的弹性池可使 SaaS 开发人员将一组数据库的�
 
 下图显示了一个数据库示例，该数据库有大量的闲置时间，但也会定期出现活动高峰。这是非常适合池的使用模式：
 
-   ![适用于池的单一数据库](./media/sql-database-elastic-pool-guidance/one-database.png)
+    ![适用于池的单一数据库](./media/sql-database-elastic-pool-guidance/one-database.png)
 
 对于如上所示的五分钟时间段内，DB1 高峰最高达到 90 个 DTU，但其整体平均使用量低于五个 DTU。在单一数据库中，运行此工作负荷需要 S3 性能级别，但在低活动期间，大多数资源都处在未使用的状态。
 
@@ -49,9 +50,9 @@ Azure SQL 数据库中的弹性池可使 SaaS 开发人员将一组数据库的�
 
 以上一个示例为基础，假设有其他数据库具有与 DB1 类似的使用模式。在接下来的两个图形中，4 个数据库和 20 个数据库的使用量分层放在相同的图形上，以说明随时间推移，它们的使用率非重叠的性质：
 
-   ![使用模式适用于池的 4 个数据库](./media/sql-database-elastic-pool-guidance/four-databases.png)
+    ![使用模式适用于池的 4 个数据库](./media/sql-database-elastic-pool-guidance/four-databases.png)
 
-   ![使用模式适用于池的 20 个数据库](./media/sql-database-elastic-pool-guidance/twenty-databases.png)
+    ![使用模式适用于池的 20 个数据库](./media/sql-database-elastic-pool-guidance/twenty-databases.png)
 
 在上图中，黑线表示跨所有 20 个数据库的聚合 DTU 使用量。其中表明聚合 DTU 使用量永远不会超过 100 个 DTU，并指出 20 个数据库可以在此时间段内共享 100 个 eDTU。相比于将每个数据库放在单一数据库的 S3 性能级别，这会导致 DTU 减少 20 倍，价格降低 13 倍。
 
@@ -112,15 +113,15 @@ SQL数据库自动评估现有 SQL 数据库服务器中数据库的历史资源
 
 在无法使用工具的情况下，以下分步步骤有助于评估池是否比单一数据库更具成本效益：
 
-1.	通过如下方式来估算池所需的 eDTU：
+1. 通过如下方式来估算池所需的 eDTU：
 
     MAX（<数据库的总数目 X 每一数据库的平均 DTU 使用率>、<br>
     <并发高峰数据库的数目 X 每一数据库的高峰 DTU 使用率）
 
-2.	通过将池内所有的数据库所需的字节数相加来估算池所需要的存储空间。然后，确定提供此存储量的 eDTU 池的大小。有关基于 eDTU 池大小的池存储限制，请参阅[弹性数据库池和弹性数据库的 eDTU 和存储限制](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)。
-3.	选择步骤 1 和步骤 2 中 eDTU 估算值中较大的那个。
-4.	请参阅 [SQL 数据库定价页面](https://www.azure.cn/pricing/details/sql-database/)，查找大于步骤 3 中估计值的最低 eDTU 池大小。
-5.	将步骤 5 的池价格与单一数据库适当性能级别的价格相比较。
+2. 通过将池内所有的数据库所需的字节数相加来估算池所需要的存储空间。然后，确定提供此存储量的 eDTU 池的大小。有关基于 eDTU 池大小的池存储限制，请参阅[弹性数据库池和弹性数据库的 eDTU 和存储限制](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)。
+3. 选择步骤 1 和步骤 2 中 eDTU 估算值中较大的那个。
+4. 请参阅 [SQL 数据库定价页面](https://www.azure.cn/pricing/details/sql-database/)，查找大于步骤 3 中估计值的最低 eDTU 池大小。
+5. 将步骤 5 的池价格与单一数据库适当性能级别的价格相比较。
 
 ## 摘要
 

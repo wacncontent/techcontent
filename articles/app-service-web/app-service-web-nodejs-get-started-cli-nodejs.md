@@ -40,14 +40,18 @@ ms.author: cephalin
 
 ## 创建并部署简单的 Node.js Web 应用
 1. 打开所选的命令行终端并安装[适用于 Yeoman 的 Express 生成器]。
-   
-        npm install -g generator-express
+
+    ```
+    npm install -g generator-express
+    ```
 2. 通过 `CD` 进入工作目录，并使用下列语法生成 express 应用：
-   
-        yo express
-   
+
+    ```
+    yo express
+    ```
+
     出现提示时选择以下选项：
-   
+
     `? Would you like to create a new directory for your project?` **Yes**<br/>
     `? Enter directory name` **{appname}**<br/>
     `? Select a version to install:` **MVC**<br/>
@@ -56,60 +60,76 @@ ms.author: cephalin
     `? Select a database to use:` **None**<br/>
     `? Select a build tool to use:` **Grunt**
 3. 通过 `CD` 进入新应用的根目录，并将它启动以确保它在开发环境中运行：
-   
-        npm start
-   
+
+    ```
+    npm start
+    ```
+
     在浏览器中导航到 <http://localhost:3000> 以确保可以看到 Express 主页。确认应用正常运行后，请使用 `Ctrl-C` 将它停止。
 4. 更改为 ASM 模式并登录 Azure（需要 [Azure CLI](#prereq)）：
-   
-        azure config mode asm
-        azure login -e AzureChinaCloud
-   
+
+    ```
+    azure config mode asm
+    azure login -e AzureChinaCloud
+    ```
+
     根据提示，在浏览器中继续使用具有 Azure 订阅的 Microsoft 帐户登录。
 
 3. 设置应用服务的部署用户。稍后使用凭据部署代码。
-   
-        azure site deployment user set --username <username> --pass <password>
+
+    ```
+    azure site deployment user set --username <username> --pass <password>
+    ```
 
 5. 确保仍在应用的根目录中，然后使用下一个命令，以唯一的应用名称在 Azure 中创建应用服务应用资源。例如：http://{appname}.chinacloudsites.cn
-   
-        azure site create --git {appname}
-   
+
+    ```
+    azure site create --git {appname}
+    ```
+
     根据提示选择要部署到的 Azure 区域。
 6. 从应用程序根目录打开 ./config/config.js 文件，并将生产端口更改为 `process.env.port`；`config` 对象中的 `production` 属性应类似下面的示例：
-   
-        production: {
-            root: rootPath,
-            app: {
-                name: 'express1'
-            },
-            port: process.env.port,
-        }
-   
+
+    ```
+    production: {
+        root: rootPath,
+        app: {
+            name: 'express1'
+        },
+        port: process.env.port,
+    }
+    ```
+
     > [!NOTE] 
     默认情况下，Azure App Service 使用 `production` 环境变量 (`process.env.NODE_ENV="production"`) 运行 Node.js 应用程序。因此，此处的配置让 Azure 中的 Node.js 应用能够在 iisnode 侦听的默认端口上响应 Web 请求。
     >
     >
 
 7. 打开 ./package.json，添加 `engines` 属性，[指定所需的 Node.js 版本](#version)。
-   
-        "engines": {
-            "node": "6.9.1"
-        }, 
+
+    ```
+    "engines": {
+        "node": "6.9.1"
+    }, 
+    ```
 8. 保存更改，然后使用 git 将应用部署到 Azure。出现提示时，使用前面创建的用户凭据。
-   
-        git add .
-        git add -f config
-        git commit -m "{your commit message}"
-        git push azure master
-   
+
+    ```
+    git add .
+    git add -f config
+    git commit -m "{your commit message}"
+    git push azure master
+    ```
+
     Express 生成器已提供 .gitignore 文件，因此 `git push` 不会占用带宽来尝试上传 node\_modules/ 目录。
 9. 最后，在浏览器中启动实时 Azure 应用：
-   
-        azure site browse
-   
+
+    ```
+    azure site browse
+    ```
+
     现在，应该会看到 Node.js Web 应用在 Azure App Service 中实时运行。
-   
+
     ![浏览到已部署应用程序的示例。][deployed-express-app]  
 
 ## 更新 Node.js Web 应用
@@ -120,7 +140,7 @@ Azure App Service 使用 [iisnode] 运行 Node.js 应用。Azure CLI 和 Kudu �
 
 * `azure site create --git` 可识别 server.js 或 app.js 的常见 Node.js 模式，并在根目录中创建 iisnode.yml。你可以使用此文件来自定义 iisnode。
 * 在 `git push azure master` 中，Kudu 可自动完成以下部署任务：
-  
+
   * 如果 package.json 位于存储库根目录中，请运行 `npm install --production`。
   * 在 package.json 中为指向启动脚本的 iisnode 生成 Web.config（例如 server.js 或 app.js）。
   * 自定义 Web.config 以让应用程序准备好使用 Node-Inspector 进行调试。
@@ -137,9 +157,11 @@ Azure App Service 使用 [iisnode] 运行 Node.js 应用。Azure CLI 和 Kudu �
 ## <a name="version"></a>使用特定 Node.js 引擎
 与平常在 package.json 中所做的一样，可以在典型工作流中告知应用服务使用特定的 Node.js 引擎。例如：
 
-    "engines": {
-        "node": "6.9.1"
-    }, 
+```
+"engines": {
+    "node": "6.9.1"
+}, 
+```
 
 Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
 
@@ -149,7 +171,9 @@ Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
 
 有关 Azure App Service 中所有受支持的 Node.js/NPM 版本的更新列表，请访问针对应用的以下 URL：
 
-    https://<app_name>.scm.chinacloudsites.cn/api/diagnostics/runtime
+```
+https://<app_name>.scm.chinacloudsites.cn/api/diagnostics/runtime
+```
 
 > [!NOTE]
 建议显式定义所需的 Node.js 引擎。默认的 Node.js 版本可以更改，并且可能会因为默认的 Node.js 版本不适合应用而在 Azure Web 应用中收到错误。
@@ -166,32 +190,38 @@ Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
 
 1. 打开 Azure CLI 提供的 iisnode.yml 文件。
 2. 设置以下两个参数：
-   
-        loggingEnabled: true
-        logDirectory: iisnode
-   
+
+    ```
+    loggingEnabled: true
+    logDirectory: iisnode
+    ```
+
     结合这两个参数可告知应用服务中的 iisnode 将其 stdout 和 stderror 输出放在 D:\\home\\site\\wwwroot**iisnode** 目录中。
 3. 保存更改，然后使用以下 Git 命令将更改推送到 Azure：
-   
-        git add .
-        git commit -m "{your commit message}"
-        git push azure master
-   
+
+    ```
+    git add .
+    git commit -m "{your commit message}"
+    git push azure master
+    ```
+
     现已配置 iisnode。接下来的步骤演示如何访问这些日志。
 4. 在浏览器中访问应用的 Kudu 调试控制台，位置为：
-   
-        https://{appname}.scm.chinacloudsites.cn/DebugConsole 
-   
+
+    ```
+    https://{appname}.scm.chinacloudsites.cn/DebugConsole 
+    ```
+
     此 URL 不同于 Web 应用 URL，它的 DNS 名称中包含“ *.scm* ”。如果在 URL 中省略此部分，你将收到 404 错误。
 5. 导航到 D:\\home\\site\\wwwroot\\iisnode
-   
+
     ![导航到 iisnode 日志文件所在的位置。][iislog-kudu-console-find]
 6. 单击要读取的日志的“编辑”图标。如果需要，也可以单击“下载”或“删除”。
-   
+
     ![打开 iisnode 日志文件。][iislog-kudu-console-open]  
 
     现在可以查看日志，帮助调试应用服务部署。
-   
+
     ![检查 iisnode 日志文件。][iislog-kudu-console-read]  
 
 ## 使用 Node-Inspector 调试应用
@@ -200,21 +230,29 @@ Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
 若要启用 Node-Inspector，请遵循以下步骤：
 
 1. 打开位于存储库根目录中的 iisnode.yml，并指定以下参数：
-   
-        debuggingEnabled: true
-        debuggerExtensionDll: iisnode-inspector.dll
+
+    ```
+    debuggingEnabled: true
+    debuggerExtensionDll: iisnode-inspector.dll
+    ```
 2. 保存更改，然后使用以下 Git 命令将更改推送到 Azure：
-   
-        git add .
-        git commit -m "{your commit message}"
-        git push azure master
+
+    ```
+    git add .
+    git commit -m "{your commit message}"
+    git push azure master
+    ```
 3. 现在，只需在 URL 中添加 /debug 以导航到 package.json 中的启动脚本指定的应用启动文件。例如，
-   
-        http://{appname}.chinacloudsites.cn/server.js/debug
-   
+
+    ```
+    http://{appname}.chinacloudsites.cn/server.js/debug
+    ```
+
     或者，
-   
-        http://{appname}.chinacloudsites.cn/app.js/debug
+
+    ```
+    http://{appname}.chinacloudsites.cn/app.js/debug
+    ```
 
 ## 更多资源
 * [在 Azure 应用程序中指定 Node.js 版本](../nodejs-specify-node-version-azure-apps.md)

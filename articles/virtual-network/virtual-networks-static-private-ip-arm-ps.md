@@ -35,150 +35,172 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 1. 为要使用的存储帐户、位置、资源组和凭据设置变量。需要为 VM 输入用户名和密码。存储帐户和资源组必须已存在。
 
-        $stName  = "vnetstorage"
-        $locName = "China North"
-        $rgName  = "TestRG"
-        $cred    = Get-Credential -Message "Type the name and password of the local administrator account."
+    ```
+    $stName  = "vnetstorage"
+    $locName = "China North"
+    $rgName  = "TestRG"
+    $cred    = Get-Credential -Message "Type the name and password of the local administrator account."
+    ```
 
 2. 检索要在其中创建 VM 的虚拟网络和子网。
 
-        $vnet   = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
-        $subnet = $vnet.Subnets[0].Id
+    ```
+    $vnet   = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
+    $subnet = $vnet.Subnets[0].Id
+    ```
 
 3. 如有必要，创建用于从 Internet 访问 VM 的公共 IP 地址。
 
-        $pip = New-AzureRmPublicIpAddress -Name TestPIP -ResourceGroupName $rgName `
-        -Location $locName -AllocationMethod Dynamic
+    ```
+    $pip = New-AzureRmPublicIpAddress -Name TestPIP -ResourceGroupName $rgName `
+    -Location $locName -AllocationMethod Dynamic
+    ```
 
 4. 使用要分配给 VM 的静态专用 IP 地址创建 NIC。确保 IP 处于要将 VM 添加到的子网范围中。这是本文的主要步骤，其中将专用 IP 设为静态。
 
-        $nic = New-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName $rgName `
-        -Location $locName -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id `
-        -PrivateIpAddress 192.168.1.101
+    ```
+    $nic = New-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName $rgName `
+    -Location $locName -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id `
+    -PrivateIpAddress 192.168.1.101
+    ```
 
 5. 使用前面创建的 NIC 创建 VM。
 
-        $vm = New-AzureRmVMConfig -VMName DNS01 -VMSize "Standard_A1"
-        $vm = Set-AzureRmVMOperatingSystem -VM $vm -Windows -ComputerName DNS01 `
-        -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
-        $vm = Set-AzureRmVMSourceImage -VM $vm -PublisherName MicrosoftWindowsServer `
-        -Offer WindowsServer -Skus 2012-R2-Datacenter -Version "latest"
-        $vm = Add-AzureRmVMNetworkInterface -VM $vm -Id $nic.Id
-        $osDiskUri = $storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/WindowsVMosDisk.vhd"
-        $vm = Set-AzureRmVMOSDisk -VM $vm -Name "windowsvmosdisk" -VhdUri $osDiskUri `
-        -CreateOption fromImage
-        New-AzureRmVM -ResourceGroupName $rgName -Location $locName -VM $vm 
+    ```
+    $vm = New-AzureRmVMConfig -VMName DNS01 -VMSize "Standard_A1"
+    $vm = Set-AzureRmVMOperatingSystem -VM $vm -Windows -ComputerName DNS01 `
+    -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
+    $vm = Set-AzureRmVMSourceImage -VM $vm -PublisherName MicrosoftWindowsServer `
+    -Offer WindowsServer -Skus 2012-R2-Datacenter -Version "latest"
+    $vm = Add-AzureRmVMNetworkInterface -VM $vm -Id $nic.Id
+    $osDiskUri = $storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/WindowsVMosDisk.vhd"
+    $vm = Set-AzureRmVMOSDisk -VM $vm -Name "windowsvmosdisk" -VhdUri $osDiskUri `
+    -CreateOption fromImage
+    New-AzureRmVM -ResourceGroupName $rgName -Location $locName -VM $vm 
+    ```
 
     预期输出：
-    
-        EndTime             : [Date and time]
-        Error               : 
-        Output              : 
-        StartTime           : [Date and time]
-        Status              : Succeeded
-        TrackingOperationId : [Id]
-        RequestId           : [Id]
-        StatusCode          : OK 
+
+    ```
+    EndTime             : [Date and time]
+    Error               : 
+    Output              : 
+    StartTime           : [Date and time]
+    Status              : Succeeded
+    TrackingOperationId : [Id]
+    RequestId           : [Id]
+    StatusCode          : OK 
+    ```
 
 ## 检索 VM 的静态专用 IP 地址信息
 若要查看使用上述脚本创建的 VM 的静态专用 IP 地址信息，请运行以下 PowerShell 命令并观察 *PrivateIpAddress* 和 *PrivateIpAllocationMethod* 的值：
 
-    Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
+```
+Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
+```
 
 预期输出：
 
-    Name                 : TestNIC
-    ResourceGroupName    : TestRG
-    Location             : chinaeast
-    Id                   : /subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC
-    Etag                 : W/"[Id]"
-    ProvisioningState    : Succeeded
-    Tags                 : 
-    VirtualMachine       : {
-                             "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/DNS01"
-                           }
-    IpConfigurations     : [
-                             {
-                               "Name": "ipconfig1",
-                               "Etag": "W/"[Id]"",
-                               "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC/ipConfigurations/ipconfig1",
-                               "PrivateIpAddress": "192.168.1.101",
-                               "PrivateIpAllocationMethod": "Static",
-                               "Subnet": {
-                                 "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd"
-                               },
-                               "PublicIpAddress": {
-                                 "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/TestPIP"
-                               },
-                               "LoadBalancerBackendAddressPools": [],
-                               "LoadBalancerInboundNatRules": [],
-                               "ProvisioningState": "Succeeded"
-                             }
-                           ]
-    DnsSettings          : {
-                             "DnsServers": [],
-                             "AppliedDnsServers": [],
-                             "InternalDnsNameLabel": null,
-                             "InternalFqdn": null
-                           }
-    EnableIPForwarding   : False
-    NetworkSecurityGroup : null
-    Primary              : True
+```
+Name                 : TestNIC
+ResourceGroupName    : TestRG
+Location             : chinaeast
+Id                   : /subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC
+Etag                 : W/"[Id]"
+ProvisioningState    : Succeeded
+Tags                 : 
+VirtualMachine       : {
+                         "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/DNS01"
+                       }
+IpConfigurations     : [
+                         {
+                           "Name": "ipconfig1",
+                           "Etag": "W/"[Id]"",
+                           "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC/ipConfigurations/ipconfig1",
+                           "PrivateIpAddress": "192.168.1.101",
+                           "PrivateIpAllocationMethod": "Static",
+                           "Subnet": {
+                             "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd"
+                           },
+                           "PublicIpAddress": {
+                             "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/TestPIP"
+                           },
+                           "LoadBalancerBackendAddressPools": [],
+                           "LoadBalancerInboundNatRules": [],
+                           "ProvisioningState": "Succeeded"
+                         }
+                       ]
+DnsSettings          : {
+                         "DnsServers": [],
+                         "AppliedDnsServers": [],
+                         "InternalDnsNameLabel": null,
+                         "InternalFqdn": null
+                       }
+EnableIPForwarding   : False
+NetworkSecurityGroup : null
+Primary              : True
+```
 
 ## 从 VM 中删除静态专用 IP 地址
 若要删除使用上述脚本添加到 VM 的静态专用 IP 地址，请运行以下 PowerShell 命令：
 
-    $nic=Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
-    $nic.IpConfigurations[0].PrivateIpAllocationMethod = "Dynamic"
-    Set-AzureRmNetworkInterface -NetworkInterface $nic
+```
+$nic=Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
+$nic.IpConfigurations[0].PrivateIpAllocationMethod = "Dynamic"
+Set-AzureRmNetworkInterface -NetworkInterface $nic
+```
 
 预期输出：
 
-    Name                 : TestNIC
-    ResourceGroupName    : TestRG
-    Location             : chinaeast
-    Id                   : /subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC
-    Etag                 : W/"[Id]"
-    ProvisioningState    : Succeeded
-    Tags                 : 
-    VirtualMachine       : {
-                             "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/WindowsVM"
-                           }
-    IpConfigurations     : [
-                             {
-                               "Name": "ipconfig1",
-                               "Etag": "W/"[Id]"",
-                               "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC/ipConfigurations/ipconfig1",
-                               "PrivateIpAddress": "192.168.1.101",
-                               "PrivateIpAllocationMethod": "Dynamic",
-                               "Subnet": {
-                                 "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd"
-                               },
-                               "PublicIpAddress": {
-                                 "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/TestPIP"
-                               },
-                               "LoadBalancerBackendAddressPools": [],
-                               "LoadBalancerInboundNatRules": [],
-                               "ProvisioningState": "Succeeded"
-                             }
-                           ]
-    DnsSettings          : {
-                             "DnsServers": [],
-                             "AppliedDnsServers": [],
-                             "InternalDnsNameLabel": null,
-                             "InternalFqdn": null
-                           }
-    EnableIPForwarding   : False
-    NetworkSecurityGroup : null
-    Primary              : True
+```
+Name                 : TestNIC
+ResourceGroupName    : TestRG
+Location             : chinaeast
+Id                   : /subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC
+Etag                 : W/"[Id]"
+ProvisioningState    : Succeeded
+Tags                 : 
+VirtualMachine       : {
+                         "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/WindowsVM"
+                       }
+IpConfigurations     : [
+                         {
+                           "Name": "ipconfig1",
+                           "Etag": "W/"[Id]"",
+                           "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/TestNIC/ipConfigurations/ipconfig1",
+                           "PrivateIpAddress": "192.168.1.101",
+                           "PrivateIpAllocationMethod": "Dynamic",
+                           "Subnet": {
+                             "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd"
+                           },
+                           "PublicIpAddress": {
+                             "Id": "/subscriptions/[Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/TestPIP"
+                           },
+                           "LoadBalancerBackendAddressPools": [],
+                           "LoadBalancerInboundNatRules": [],
+                           "ProvisioningState": "Succeeded"
+                         }
+                       ]
+DnsSettings          : {
+                         "DnsServers": [],
+                         "AppliedDnsServers": [],
+                         "InternalDnsNameLabel": null,
+                         "InternalFqdn": null
+                       }
+EnableIPForwarding   : False
+NetworkSecurityGroup : null
+Primary              : True
+```
 
 ## 将静态专用 IP 地址添加到现有 VM
 若要向使用上述脚本创建的 VM 添加静态专用 IP 地址，请运行以下命令：
 
-    $nic=Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
-    $nic.IpConfigurations[0].PrivateIpAllocationMethod = "Static"
-    $nic.IpConfigurations[0].PrivateIpAddress = "192.168.1.101"
-    Set-AzureRmNetworkInterface -NetworkInterface $nic
+```
+$nic=Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
+$nic.IpConfigurations[0].PrivateIpAllocationMethod = "Static"
+$nic.IpConfigurations[0].PrivateIpAddress = "192.168.1.101"
+Set-AzureRmNetworkInterface -NetworkInterface $nic
+```
 
 ## 后续步骤
 * 了解[保留公共 IP](./virtual-networks-reserved-public-ip.md) 地址。

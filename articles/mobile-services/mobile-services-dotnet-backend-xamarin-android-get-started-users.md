@@ -43,8 +43,10 @@ ms.author: donnam
 
 <ol start="6">
 <li><p>在 Visual Studio 或 Xamarin Studio 中，运行设备或模拟器中的客户端项目。验证在应用程序启动后是否引发状态代码为 401（“未授权”）的未处理异常。</p>
-   
-       <p>发生此异常的原因是应用程序尝试以未经身份验证的用户身份访问移动服务，但 <em>TodoItem</em> 表现在要求身份验证。</p></li>
+
+```
+   <p>发生此异常的原因是应用程序尝试以未经身份验证的用户身份访问移动服务，但 <em>TodoItem</em> 表现在要求身份验证。</p></li>
+```
 </ol>
 
 接下来，你需要更新应用程序，以便在从移动服务请求资源之前对用户进行身份验证。
@@ -53,30 +55,37 @@ ms.author: donnam
 
 1. 将以下属性添加到 **TodoActivity** 类：
 
-            private MobileServiceUser user;
+    ```
+        private MobileServiceUser user;
+    ```
 
 2. 将以下方法添加到 **ToDoActivity** 类：
 
-            private async Task Authenticate()
+    ```
+        private async Task Authenticate()
+        {
+            try
             {
-                try
-                {
-                    user = await client.LoginAsync(this, MobileServiceAuthenticationProvider.MicrosoftAccount);
-                    CreateAndShowDialog(string.Format("you are now logged in - {0}", user.UserId), "Logged in!");
-                }
-                catch (Exception ex)
-                {
-                    CreateAndShowDialog(ex, "Authentication failed");
-                }
+                user = await client.LoginAsync(this, MobileServiceAuthenticationProvider.MicrosoftAccount);
+                CreateAndShowDialog(string.Format("you are now logged in - {0}", user.UserId), "Logged in!");
             }
+            catch (Exception ex)
+            {
+                CreateAndShowDialog(ex, "Authentication failed");
+            }
+        }
+    ```
 
     这将会创建一个用于处理身份验证过程的新方法。将使用 MicrosoftAccount 登录对用户进行身份验证。此时将出现一个对话框，其中显示了已经过身份验证的用户的 ID。
 
-    > [!NOTE]如果使用的标识提供程序不是 MicrosoftAccount，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
+    > [!NOTE]
+    >如果使用的标识提供程序不是 MicrosoftAccount，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
 
 3. 在 **OnCreate** 方法中，在实例化 `MobileServiceClient` 对象的代码后面添加以下代码行。
 
-        await Authenticate(); // add this line
+    ```
+    await Authenticate(); // add this line
+    ```
 
     此调用启动身份验证过程，并以异步方式等待它。
 

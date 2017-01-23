@@ -80,7 +80,7 @@ Azure DocumentDB 是从无到有开发出来的，其设计考虑到了全局分
 2. 在“DocumentDB (NoSQL)”边栏选项卡中，选择要修改的数据库帐户。
 3. 在帐户边栏选项卡中，单击“默认一致性”。
 4. 在“默认一致性”边栏选项卡中，选择新的一致性级别，然后单击“保存”。
-   
+
     ![屏幕截图：突出显示“设置”图标和默认一致性条目](./media/documentdb-consistency-levels/database-consistency-level-1.png)  
 
 > [!NOTE]
@@ -100,11 +100,11 @@ Azure DocumentDB 是从无到有开发出来的，其设计考虑到了全局分
 ## 后续步骤
 如果想详细了解一致性级别和权衡方案，建议参阅下列资源：
 
--	Doug Terry。Replicated Data Consistency explained through baseball（借助棒球解释重复数据一致性）。[http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf](http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf)
--	Doug Terry。Session Guarantees for Weakly Consistent Replicated Data（弱一致性重复数据的会话保证）。[http://dl.acm.org/citation.cfm?id=383631](http://dl.acm.org/citation.cfm?id=383631)
--	Daniel Abadi。Consistency Tradeoffs in Modern Distributed Database Systems Design: CAP is only part of the story”（现代分布式数据库系统设计中的一致性平衡方案：CAP 只是冰山一角）。[http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html](http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html)
--	Peter Bailis、Shivaram Venkataraman、Michael J. Franklin、Joseph M. Hellerstein、Ion Stoica。Probabilistic Bounded Staleness (PBS) for Practical Partial Quorums（实用部分仲裁的概率性有限过期性 (PBS)）。[http://vldb.org/pvldb/vol5/p776\_peterbailis\_vldb2012.pdf](http://vldb.org/pvldb/vol5/p776_peterbailis_vldb2012.pdf)
--	Werner Vogels。Eventual Consistent - Revisited（最终一致 - 重新访问）。[http://allthingsdistributed.com/2008/12/eventually\_consistent.html](http://allthingsdistributed.com/2008/12/eventually_consistent.html)
+- Doug Terry。Replicated Data Consistency explained through baseball（借助棒球解释重复数据一致性）。[http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf](http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf)
+- Doug Terry。Session Guarantees for Weakly Consistent Replicated Data（弱一致性重复数据的会话保证）。[http://dl.acm.org/citation.cfm?id=383631](http://dl.acm.org/citation.cfm?id=383631)
+- Daniel Abadi。Consistency Tradeoffs in Modern Distributed Database Systems Design: CAP is only part of the story”（现代分布式数据库系统设计中的一致性平衡方案：CAP 只是冰山一角）。[http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html](http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html)
+- Peter Bailis、Shivaram Venkataraman、Michael J. Franklin、Joseph M. Hellerstein、Ion Stoica。Probabilistic Bounded Staleness (PBS) for Practical Partial Quorums（实用部分仲裁的概率性有限过期性 (PBS)）。[http://vldb.org/pvldb/vol5/p776_peterbailis_vldb2012.pdf](http://vldb.org/pvldb/vol5/p776_peterbailis_vldb2012.pdf)
+- Werner Vogels。Eventual Consistent - Revisited（最终一致 - 重新访问）。[http://allthingsdistributed.com/2008/12/eventually_consistent.html](http://allthingsdistributed.com/2008/12/eventually_consistent.html)
 
 [1]: ./media/documentdb-consistency-levels/consistency-tradeoffs.png
 

@@ -86,11 +86,13 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 将以下 `import` 语句添加到 Java 文件顶部：
 
-        // Include the following imports to use Service Bus APIs
-        import com.microsoft.windowsazure.services.servicebus.*;
-        import com.microsoft.windowsazure.services.servicebus.models.*;
-        import com.microsoft.windowsazure.core.*;
-        import javax.xml.datatype.*;
+```
+    // Include the following imports to use Service Bus APIs
+    import com.microsoft.windowsazure.services.servicebus.*;
+    import com.microsoft.windowsazure.services.servicebus.models.*;
+    import com.microsoft.windowsazure.core.*;
+    import javax.xml.datatype.*;
+```
 
 ## 创建队列
 
@@ -98,33 +100,37 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 **ServiceBusService** 类提供了创建、枚举和删除队列的方法。以下示例演示了如何通过名为“HowToSample”的命名空间，使用 **ServiceBusService** 对象创建名为“TestQueue”的队列：
 
-        Configuration config =
-            ServiceBusConfiguration.configureWithSASAuthentication(
-                    "HowToSample",
-                    "RootManageSharedAccessKey",
-                    "SAS_key_value",
-                    ".servicebus.chinacloudapi.cn"
-                    );
+```
+    Configuration config =
+        ServiceBusConfiguration.configureWithSASAuthentication(
+                "HowToSample",
+                "RootManageSharedAccessKey",
+                "SAS_key_value",
+                ".servicebus.chinacloudapi.cn"
+                );
 
-    ServiceBusContract service = ServiceBusService.create(config);
-    QueueInfo queueInfo = new QueueInfo("TestQueue");
-    try
-    {
-        CreateQueueResult result = service.createQueue(queueInfo);
-    }
-    catch (ServiceException e)
-    {
-        System.out.print("ServiceException encountered: ");
-        System.out.println(e.getMessage());
-        System.exit(-1);
-    }
+ServiceBusContract service = ServiceBusService.create(config);
+QueueInfo queueInfo = new QueueInfo("TestQueue");
+try
+{
+    CreateQueueResult result = service.createQueue(queueInfo);
+}
+catch (ServiceException e)
+{
+    System.out.print("ServiceException encountered: ");
+    System.out.println(e.getMessage());
+    System.exit(-1);
+}
+```
 
 可对 **QueueInfo** 执行某些方法，以调整队列的属性（例如，将默认的生存时间 (TTL) 值设置为应用于发送到队列的消息）。以下示例演示了如何创建最大大小为 5GB 且名为 `TestQueue` 的队列：
 
-    long maxSizeInMegabytes = 5120;
-    QueueInfo queueInfo = new QueueInfo("TestQueue");
-    queueInfo.setMaxSizeInMegabytes(maxSizeInMegabytes);
-    CreateQueueResult result = service.createQueue(queueInfo);
+```
+long maxSizeInMegabytes = 5120;
+QueueInfo queueInfo = new QueueInfo("TestQueue");
+queueInfo.setMaxSizeInMegabytes(maxSizeInMegabytes);
+CreateQueueResult result = service.createQueue(queueInfo);
+```
 
 注意：你可以对 **ServiceBusContract** 对象使用 **listQueues** 方法来检查具有指定名称的队列在某个服务命名空间中是否已存在。
 
@@ -132,31 +138,35 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 若要将消息发送到服务总线队列，你的应用程序将获得 **ServiceBusContract** 对象。以下代码演示了如何将消息发送到先前在 `HowToSample` 命名空间中创建的 `TestQueue` 队列。
 
-    try
-    {
-        BrokeredMessage message = new BrokeredMessage("MyMessage");
-        service.sendQueueMessage("TestQueue", message);
-    }
-    catch (ServiceException e) 
-    {
-        System.out.print("ServiceException encountered: ");
-        System.out.println(e.getMessage());
-        System.exit(-1);
-    }
+```
+try
+{
+    BrokeredMessage message = new BrokeredMessage("MyMessage");
+    service.sendQueueMessage("TestQueue", message);
+}
+catch (ServiceException e) 
+{
+    System.out.print("ServiceException encountered: ");
+    System.out.println(e.getMessage());
+    System.exit(-1);
+}
+```
 
 在服务总线队列中发送和接收的消息是 [BrokeredMessage][] 类的实例。[BrokeredMessage][] 对象包含一组标准属性（如 [Label](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.label.aspx) 和 [TimeToLive](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx)）、一个用来保存自定义应用程序特定属性的词典以及大量随机应用程序数据。应用程序可通过将任何可序列化对象传入到 [BrokeredMessage][] 的构造函数中来设置消息的正文，然后将使用适当的序列化程序来序列化对象。或者，你可以提供 **java.IO.InputStream** 对象。
 
 以下示例演示了如何将五条测试消息发送到在前面的代码段中获取的 `TestQueue` **MessageSender**：
 
-    for (int i=0; i<5; i++)
-    {
-         // Create message, passing a string message for the body.
-         BrokeredMessage message = new BrokeredMessage("Test message " + i);
-         // Set an additional app-specific property.
-         message.setProperty("MyProperty", i); 
-         // Send message to the queue
-         service.sendQueueMessage("TestQueue", message);
-    }
+```
+for (int i=0; i<5; i++)
+{
+     // Create message, passing a string message for the body.
+     BrokeredMessage message = new BrokeredMessage("Test message " + i);
+     // Set an additional app-specific property.
+     message.setProperty("MyProperty", i); 
+     // Send message to the queue
+     service.sendQueueMessage("TestQueue", message);
+}
+```
 
 服务总线队列在标准层中支持的最大消息大小为 256 KB。标头最大为 64 KB，其中包括标准和自定义应用程序属性。一个队列可包含的消息数不受限制，但消息的总大小受限。此队列大小是在创建时定义的，上限为 5 GB。
 
@@ -170,56 +180,58 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 以下示例演示如何使用 **PeekLock** 模式（非默认模式）接收和处理消息。下面的示例将执行无限循环并在消息达到我们的“TestQueue”后进行处理：
 
-        try
-    {
-        ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;
-        opts.setReceiveMode(ReceiveMode.PEEK_LOCK);
-    
-        while(true)  { 
-             ReceiveQueueMessageResult resultQM = 
-                     service.receiveQueueMessage("TestQueue", opts);
-            BrokeredMessage message = resultQM.getValue();
-            if (message != null && message.getMessageId() != null)
+```
+    try
+{
+    ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;
+    opts.setReceiveMode(ReceiveMode.PEEK_LOCK);
+
+    while(true)  { 
+         ReceiveQueueMessageResult resultQM = 
+                 service.receiveQueueMessage("TestQueue", opts);
+        BrokeredMessage message = resultQM.getValue();
+        if (message != null && message.getMessageId() != null)
+        {
+            System.out.println("MessageID: " + message.getMessageId());    
+            // Display the queue message.
+            System.out.print("From queue: ");
+            byte[] b = new byte[200];
+            String s = null;
+            int numRead = message.getBody().read(b);
+            while (-1 != numRead)
             {
-                System.out.println("MessageID: " + message.getMessageId());    
-                // Display the queue message.
-                System.out.print("From queue: ");
-                byte[] b = new byte[200];
-                String s = null;
-                int numRead = message.getBody().read(b);
-                while (-1 != numRead)
-                {
-                    s = new String(b);
-                    s = s.trim();
-                    System.out.print(s);
-                    numRead = message.getBody().read(b);
-                }
-                System.out.println();
-                System.out.println("Custom Property: " + 
-                    message.getProperty("MyProperty"));
-                // Remove message from queue.
-                System.out.println("Deleting this message.");
-                //service.deleteMessage(message);
-            }  
-            else  
-            {        
-                System.out.println("Finishing up - no more messages.");        
-                break; 
-                // Added to handle no more messages.
-                // Could instead wait for more messages to be added.
+                s = new String(b);
+                s = s.trim();
+                System.out.print(s);
+                numRead = message.getBody().read(b);
             }
+            System.out.println();
+            System.out.println("Custom Property: " + 
+                message.getProperty("MyProperty"));
+            // Remove message from queue.
+            System.out.println("Deleting this message.");
+            //service.deleteMessage(message);
+        }  
+        else  
+        {        
+            System.out.println("Finishing up - no more messages.");        
+            break; 
+            // Added to handle no more messages.
+            // Could instead wait for more messages to be added.
         }
     }
-    catch (ServiceException e) {
-        System.out.print("ServiceException encountered: ");
-        System.out.println(e.getMessage());
-        System.exit(-1);
-    }
-    catch (Exception e) {
-        System.out.print("Generic exception encountered: ");
-        System.out.println(e.getMessage());
-        System.exit(-1);
-    } 	
+}
+catch (ServiceException e) {
+    System.out.print("ServiceException encountered: ");
+    System.out.println(e.getMessage());
+    System.exit(-1);
+}
+catch (Exception e) {
+    System.out.print("Generic exception encountered: ");
+    System.out.println(e.getMessage());
+    System.exit(-1);
+} 	
+```
 
 ## 如何处理应用程序崩溃和不可读消息
 

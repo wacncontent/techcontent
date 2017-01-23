@@ -56,7 +56,8 @@ ms.author: jroth
 
 DS 系列 VM 支持[高级存储](../storage/storage-premium-storage.md)。对于所有生产工作负荷，建议使用高级存储。
 
-> [!WARNING] 标准存储具有不同的延迟和带宽，建议仅用于开发/测试工作负荷。生产工作负荷应使用高级存储。
+> [!WARNING]
+> 标准存储具有不同的延迟和带宽，建议仅用于开发/测试工作负荷。生产工作负荷应使用高级存储。
 
 此外，我们建议在 SQL Server 虚拟机所在的数据中心内创建 Azure 存储帐户，以减小传输延迟。创建存储帐户时应禁用异地复制，因为无法保证在多个磁盘上的写入顺序一致。相反，请考虑在两个 Azure 数据中心之间配置一个 SQL Server 灾难恢复技术。有关详细信息，请参阅 [Azure 虚拟机中 SQL Server 的高可用性和灾难恢复](./virtual-machines-windows-sql-high-availability-dr.md)。
 
@@ -100,13 +101,15 @@ D 系列、Dv2 系列和 G 系列 VM 上的临时驱动器基于 SSD。如果工
 
 - **缓存策略**：对于高级存储数据磁盘，请只在托管数据文件和 TempDB 的数据磁盘上启用读取缓存。如果使用的不是高级存储，请不要在任何数据磁盘上启用任何缓存。有关配置磁盘缓存的说明，请参阅以下主题：[Set-AzureOSDisk](https://msdn.microsoft.com/zh-cn/library/azure/jj152847) 和 [Set-AzureDataDisk](https://msdn.microsoft.com/zh-cn/library/azure/jj152851.aspx)。
 
-    >[!WARNING] 请在更改 Azure VM 磁盘的缓存设置时停止 SQL Server 服务，以免出现任何数据库损坏的情况。
+    >[!WARNING]
+    > 请在更改 Azure VM 磁盘的缓存设置时停止 SQL Server 服务，以免出现任何数据库损坏的情况。
 
 - **NTFS 分配单元大小**：当格式化数据磁盘时，建议为数据和日志文件以及 TempDB 使用 64-KB 分配单元大小。
 
 - **磁盘管理最佳实践**：删除数据磁盘或更改其缓存类型时，请在更改过程中停止 SQL Server 服务。在 OS 磁盘上更改缓存设置时，Azure 会先停止 VM，在更改缓存类型后再重新启动 VM。更改数据磁盘的缓存设置时，不会停止 VM，但会在更改期间将数据磁盘从 VM 分离，完成后再重新附加该数据磁盘。
 
-    >[!WARNING] 在进行这些操作时，如果无法停止 SQL Server 服务，则会导致数据库损坏。
+    >[!WARNING]
+    > 在进行这些操作时，如果无法停止 SQL Server 服务，则会导致数据库损坏。
 
 ## <a name="io-guidance"></a> I/O 指导原则
 

@@ -40,7 +40,8 @@ ms.author: barbkess;sonyama
 
 ### 安装最新版本的 Azure PowerShell
 
-> [!NOTE]  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。若要验证当前版本，请运行命令 **Get-Module -ListAvailable -Name Azure**。可以从 [Microsoft Web 平台安装程序][]安装最新的版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
+> [!NOTE]
+>  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。若要验证当前版本，请运行命令 **Get-Module -ListAvailable -Name Azure**。可以从 [Microsoft Web 平台安装程序][]安装最新的版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
 
 ### Azure PowerShell cmdlet 入门
 
@@ -49,9 +50,11 @@ ms.author: barbkess;sonyama
 1. 打开 Azure PowerShell。
 2. 在 PowerShell 提示符下，运行以下命令以登录到 Azure Resource Manager，然后选择你的订阅。
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-        Get-AzureRmSubscription
-        Select-AzureRmSubscription -SubscriptionName "MySubscription"
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    Get-AzureRmSubscription
+    Select-AzureRmSubscription -SubscriptionName "MySubscription"
+    ```
 
 <a name="scale-performance-bk"></a>
 <a name="scale-compute-bk"></a>
@@ -62,7 +65,9 @@ ms.author: barbkess;sonyama
 
 若要更改 DWU，请使用 [Set-AzureRmSqlDatabase][] PowerShell cmdlet。以下示例将托管在服务器 MyServer 上的数据库 MySQLDW 的服务级别目标设置为 DW1000。
 
-    Set-AzureRmSqlDatabase -DatabaseName "MySQLDW" -ServerName "MyServer" -RequestedServiceObjectiveName "DW1000"
+```
+Set-AzureRmSqlDatabase -DatabaseName "MySQLDW" -ServerName "MyServer" -RequestedServiceObjectiveName "DW1000"
+```
 
 <a name="pause-compute-bk"></a>
 
@@ -72,17 +77,22 @@ ms.author: barbkess;sonyama
 
 若要暂停数据库，请使用 [Suspend-AzureRmSqlDatabase][] cmdlet。以下示例将暂停 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
-> [!NOTE] 注意，如果服务器是 foo.database.chinacloudapi.cn，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
+> [!NOTE]
+> 注意，如果服务器是 foo.database.chinacloudapi.cn，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
 
-    Suspend-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
-    –ServerName "Server01" –DatabaseName "Database02"
+```
+Suspend-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
+–ServerName "Server01" –DatabaseName "Database02"
+```
 
 一种变异，下一个示例将数据库检索到 $database 对象中。然后，它通过管道将该对象传递给 [Suspend-AzureRmSqlDatabase][]。结果存储在对象 resultDatabase 中。最后一个命令显示结果。
 
-    $database = Get-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
-    –ServerName "Server01" –DatabaseName "Database02"
-    $resultDatabase = $database | Suspend-AzureRmSqlDatabase
-    $resultDatabase
+```
+$database = Get-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
+–ServerName "Server01" –DatabaseName "Database02"
+$resultDatabase = $database | Suspend-AzureRmSqlDatabase
+$resultDatabase
+```
 
 <a name="resume-compute-bk"></a>
 
@@ -92,15 +102,19 @@ ms.author: barbkess;sonyama
 
 若要启动数据库，请使用 [Resume-AzureRmSqlDatabase][] cmdlet。以下示例将启动 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
-    Resume-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
-    –ServerName "Server01" -DatabaseName "Database02"
+```
+Resume-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
+–ServerName "Server01" -DatabaseName "Database02"
+```
 
 一种变异，下一个示例将数据库检索到 $database 对象中。然后，它通过管道将对象传递给 [Resume-AzureRmSqlDatabase][]，并将结果存储在 $resultDatabase 中。最后一个命令显示结果。
 
-    $database = Get-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
-    –ServerName "Server01" –DatabaseName "Database02"
-    $resultDatabase = $database | Resume-AzureRmSqlDatabase
-    $resultDatabase
+```
+$database = Get-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
+–ServerName "Server01" –DatabaseName "Database02"
+$resultDatabase = $database | Resume-AzureRmSqlDatabase
+$resultDatabase
+```
 
 <a name="next-steps-bk"></a>
 

@@ -30,11 +30,13 @@ ms.author: seanmck
 
 在运行 DevClusterSetup 脚本时，你看到了类似下面的错误：
 
-    Cannot clean up C:\SfDevCluster\Log fully as references are likely being held to items in it. Please remove those and run this script again.
-    At line:1 char:1 + .\DevClusterSetup.ps1
-    + ~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo : NotSpecified: (:) [Write-Error], WriteErrorException
-    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DevClusterSetup.ps1
+```
+Cannot clean up C:\SfDevCluster\Log fully as references are likely being held to items in it. Please remove those and run this script again.
+At line:1 char:1 + .\DevClusterSetup.ps1
++ ~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : NotSpecified: (:) [Write-Error], WriteErrorException
++ FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DevClusterSetup.ps1
+```
 
 #### 解决方案
 
@@ -52,7 +54,8 @@ ms.author: seanmck
 
 始终直接从 Windows PowerShell 运行 Service Fabric cmdlet。
 
->[!NOTE] 最新版本的 Azure PowerShell 不创建特殊的快捷方式，因此不会再出现此问题。
+>[!NOTE]
+> 最新版本的 Azure PowerShell 不创建特殊的快捷方式，因此不会再出现此问题。
 
 ### 类型初始化异常
 
@@ -70,12 +73,14 @@ ms.author: seanmck
 
 对 Connect-ServiceFabricCluster 的调用失败，并显示类似下面的错误：
 
-    Connect-ServiceFabricCluster : The object is closed.
-    At line:1 char:1
-    + Connect-ServiceFabricCluster
-    + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo : InvalidOperation: (:) [Connect-ServiceFabricCluster], FabricObjectClosedException
-    + FullyQualifiedErrorId : CreateClusterConnectionErrorId,Microsoft.ServiceFabric.Powershell.ConnectCluster
+```
+Connect-ServiceFabricCluster : The object is closed.
+At line:1 char:1
++ Connect-ServiceFabricCluster
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : InvalidOperation: (:) [Connect-ServiceFabricCluster], FabricObjectClosedException
++ FullyQualifiedErrorId : CreateClusterConnectionErrorId,Microsoft.ServiceFabric.Powershell.ConnectCluster
+```
 
 #### 解决方案
 
@@ -93,7 +98,8 @@ ms.author: seanmck
 
 确保在你的解决方案中没有将任何服务项目设置为启动项目。只应将 Service Fabric 应用程序项目设置为启动项目。
 
->[!TIP] 如果本地群集在设置后开始出现异常行为，则可使用本地群集管理器系统托盘应用程序来重置它。该操作将删除现有群集，然后设置一个新的。请注意，所有部署的应用程序和关联的数据都会被删除。
+>[!TIP]
+> 如果本地群集在设置后开始出现异常行为，则可使用本地群集管理器系统托盘应用程序来重置它。该操作将删除现有群集，然后设置一个新的。请注意，所有部署的应用程序和关联的数据都会被删除。
 
 ## 后续步骤
 

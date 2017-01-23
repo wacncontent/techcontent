@@ -13,7 +13,7 @@ ms.tgt_pltfrm: mobile-windows
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 06/29/2016
-wacn.date: 07/12/2016
+wacn.date: 01/19/2017
 ms.author: wesmc
 ---
 
@@ -47,7 +47,7 @@ ms.author: wesmc
 ###好处：
 
 1. 接收方（通过通知中心的移动应用/服务）和发送方（后端系统）之间的这种解耦使得只需要最小的更改即可集成其他后端系统。
-2. 这还使得采用多个移动应用的方案能够从一个或多个后端系统接收事件。  
+2. 这还使得采用多个移动应用的方案能够从一个或多个后端系统接收事件。
 
 ## 示例：
 
@@ -67,145 +67,157 @@ ms.author: wesmc
 
     b.这是一个简单 C# 控制台应用，模拟启动要传送到移动应用的消息的 LoB 系统。
 
-        static void Main(string[] args)
-        {
-            string connectionString =
-                CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
+    ```
+    static void Main(string[] args)
+    {
+        string connectionString =
+            CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
 
-            // Create the topic where we will send notifications
-            CreateTopic(connectionString);
+        // Create the topic where we will send notifications
+        CreateTopic(connectionString);
 
-            // Send message
-            SendMessage(connectionString);
-        }
+        // Send message
+        SendMessage(connectionString);
+    }
+    ```
 
     c. `CreateTopic` 用于创建我们将消息发送到的服务总线主题。
 
-        public static void CreateTopic(string connectionString)
+    ```
+    public static void CreateTopic(string connectionString)
+    {
+        // Create the topic if it does not exist already
+
+        var namespaceManager =
+            NamespaceManager.CreateFromConnectionString(connectionString);
+
+        if (!namespaceManager.TopicExists(sampleTopic))
         {
-            // Create the topic if it does not exist already
-
-            var namespaceManager =
-                NamespaceManager.CreateFromConnectionString(connectionString);
-
-            if (!namespaceManager.TopicExists(sampleTopic))
-            {
-                namespaceManager.CreateTopic(sampleTopic);
-            }
+            namespaceManager.CreateTopic(sampleTopic);
         }
+    }
+    ```
 
     d. `SendMessage` 用于将消息发送到此服务总线主题。出于本示例的目的，此处我们只定期向此主题发送一组随机消息。通常将有在事件发生时发送消息的后端系统。
 
-        public static void SendMessage(string connectionString)
+    ```
+    public static void SendMessage(string connectionString)
+    {
+        TopicClient client =
+            TopicClient.CreateFromConnectionString(connectionString, sampleTopic);
+
+        // Sends random messages every 10 seconds to the topic
+        string[] messages =
         {
-            TopicClient client =
-                TopicClient.CreateFromConnectionString(connectionString, sampleTopic);
+            "Employee Id '{0}' has joined.",
+            "Employee Id '{0}' has left.",
+            "Employee Id '{0}' has switched to a different team."
+        };
 
-            // Sends random messages every 10 seconds to the topic
-            string[] messages =
-            {
-                "Employee Id '{0}' has joined.",
-                "Employee Id '{0}' has left.",
-                "Employee Id '{0}' has switched to a different team."
-            };
+        while (true)
+        {
+            Random rnd = new Random();
+            string employeeId = rnd.Next(10000, 99999).ToString();
+            string notification = String.Format(messages[rnd.Next(0,messages.Length)], employeeId);
 
-            while (true)
-            {
-                Random rnd = new Random();
-                string employeeId = rnd.Next(10000, 99999).ToString();
-                string notification = String.Format(messages[rnd.Next(0,messages.Length)], employeeId);
+            // Send Notification
+            BrokeredMessage message = new BrokeredMessage(notification);
+            client.Send(message);
 
-                // Send Notification
-                BrokeredMessage message = new BrokeredMessage(notification);
-                client.Send(message);
+            Console.WriteLine("{0} Message sent - '{1}'", DateTime.Now, notification);
 
-                Console.WriteLine("{0} Message sent - '{1}'", DateTime.Now, notification);
-
-                System.Threading.Thread.Sleep(new TimeSpan(0, 0, 10));
-            }
+            System.Threading.Thread.Sleep(new TimeSpan(0, 0, 10));
         }
+    }
+    ```
 
 2. **ReceiveAndSendNotification**
 
     a.此项目使用 *WindowsAzure.ServiceBus* 和 *Microsoft.Web.WebJobs.Publish* Nuget 包，并基于[服务总线 Pub/Sub 编程]构建。
 
     b.这是另一个 C# 控制台应用，我们将它作为 [Azure WebJob] 运行，因为它必须连续运行以侦听来自 LoB/后端系统的消息。它将是移动后端的一部分。
-    
-            static void Main(string[] args)
-            {
-                string connectionString =
-                         CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
-    
-                // Create the subscription which will receive messages
-                CreateSubscription(connectionString);
-    
-                // Receive message
-                ReceiveMessageAndSendNotification(connectionString);
-            }
+
+    ```
+        static void Main(string[] args)
+        {
+            string connectionString =
+                     CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
+
+            // Create the subscription which will receive messages
+            CreateSubscription(connectionString);
+
+            // Receive message
+            ReceiveMessageAndSendNotification(connectionString);
+        }
+    ```
 
     c. `CreateSubscription` 用于为后端系统将消息发送到的主题创建服务总线订阅。此组件将根据业务方案，为相应主题创建一个或多个订阅（例如，一些订阅可能从人力资源系统接收消息，一些订阅从财务系统接收消息，等等）
 
-            static void CreateSubscription(string connectionString)
+    ```
+        static void CreateSubscription(string connectionString)
+        {
+            // Create the subscription if it does not exist already
+            var namespaceManager =
+                NamespaceManager.CreateFromConnectionString(connectionString);
+
+            if (!namespaceManager.SubscriptionExists(sampleTopic, sampleSubscription))
             {
-                // Create the subscription if it does not exist already
-                var namespaceManager =
-                    NamespaceManager.CreateFromConnectionString(connectionString);
-    
-                if (!namespaceManager.SubscriptionExists(sampleTopic, sampleSubscription))
-                {
-                    namespaceManager.CreateSubscription(sampleTopic, sampleSubscription);
-                }
+                namespaceManager.CreateSubscription(sampleTopic, sampleSubscription);
             }
+        }
+    ```
 
     d.ReceiveMessageAndSendNotification 用于从使用其订阅的主题读取消息，如果读取成功，则构建要使用 Azure 通知中心发送到移动应用程序的通知（在此示例方案中为 Windows 本机 toast 通知）。
 
-            static void ReceiveMessageAndSendNotification(string connectionString)
+    ```
+        static void ReceiveMessageAndSendNotification(string connectionString)
+        {
+            // Initialize the Notification Hub
+            string hubConnectionString = CloudConfigurationManager.GetSetting
+                    ("Microsoft.NotificationHub.ConnectionString");
+            hub = NotificationHubClient.CreateClientFromConnectionString
+                    (hubConnectionString, "enterprisepushservicehub");
+
+            SubscriptionClient Client =
+                SubscriptionClient.CreateFromConnectionString
+                        (connectionString, sampleTopic, sampleSubscription);
+
+            Client.Receive();
+
+            // Continuously process messages received from the subscription
+            while (true)
             {
-                // Initialize the Notification Hub
-                string hubConnectionString = CloudConfigurationManager.GetSetting
-                        ("Microsoft.NotificationHub.ConnectionString");
-                hub = NotificationHubClient.CreateClientFromConnectionString
-                        (hubConnectionString, "enterprisepushservicehub");
-    
-                SubscriptionClient Client =
-                    SubscriptionClient.CreateFromConnectionString
-                            (connectionString, sampleTopic, sampleSubscription);
-    
-                Client.Receive();
-    
-                // Continuously process messages received from the subscription
-                while (true)
+                BrokeredMessage message = Client.Receive();
+                var toastMessage = @"<toast><visual><binding template=""ToastText01""><text id=""1"">{messagepayload}</text></binding></visual></toast>";
+
+                if (message != null)
                 {
-                    BrokeredMessage message = Client.Receive();
-                    var toastMessage = @"<toast><visual><binding template=""ToastText01""><text id=""1"">{messagepayload}</text></binding></visual></toast>";
-    
-                    if (message != null)
+                    try
                     {
-                        try
-                        {
-                            Console.WriteLine(message.MessageId);
-                            Console.WriteLine(message.SequenceNumber);
-                            string messageBody = message.GetBody<string>();
-                            Console.WriteLine("Body: " + messageBody + "\n");
-    
-                            toastMessage = toastMessage.Replace("{messagepayload}", messageBody);
-                            SendNotificationAsync(toastMessage);
-    
-                            // Remove message from subscription
-                            message.Complete();
-                        }
-                        catch (Exception)
-                        {
-                            // Indicate a problem, unlock message in subscription
-                            message.Abandon();
-                        }
+                        Console.WriteLine(message.MessageId);
+                        Console.WriteLine(message.SequenceNumber);
+                        string messageBody = message.GetBody<string>();
+                        Console.WriteLine("Body: " + messageBody + "\n");
+
+                        toastMessage = toastMessage.Replace("{messagepayload}", messageBody);
+                        SendNotificationAsync(toastMessage);
+
+                        // Remove message from subscription
+                        message.Complete();
+                    }
+                    catch (Exception)
+                    {
+                        // Indicate a problem, unlock message in subscription
+                        message.Abandon();
                     }
                 }
             }
-            static async void SendNotificationAsync(string message)
-            {
-                await hub.SendWindowsNativeNotificationAsync(message);
-            }
+        }
+        static async void SendNotificationAsync(string message)
+        {
+            await hub.SendWindowsNativeNotificationAsync(message);
+        }
+    ```
 
     e.若要将此项发布为 **WebJob**，请右键单击 Visual Studio 中的解决方案，然后选择“发布为 WebJob”
 
@@ -215,7 +227,7 @@ ms.author: wesmc
 
     ![][3]
 
-    g.将该作业配置为“连续运行”，以便在你登录到 [Azure 经典门户]时，应看到如下内容：
+    g.将该作业配置为“连续运行”，以便在你登录到 [Azure 经典管理门户]时，应看到如下内容：
 
     ![][4]
 
@@ -227,21 +239,23 @@ ms.author: wesmc
 
     c.确保在应用启动时（替换 *HubName* 和 *DefaultListenSharedAccessSignature* 后）调用以下通知中心注册代码：
 
-            private async void InitNotificationsAsync()
+    ```
+        private async void InitNotificationsAsync()
+        {
+            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+            var hub = new NotificationHub("[HubName]", "[DefaultListenSharedAccessSignature]");
+            var result = await hub.RegisterNativeAsync(channel.Uri);
+
+            // Displays the registration ID so you know it was successful
+            if (result.RegistrationId != null)
             {
-                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-    
-                var hub = new NotificationHub("[HubName]", "[DefaultListenSharedAccessSignature]");
-                var result = await hub.RegisterNativeAsync(channel.Uri);
-    
-                // Displays the registration ID so you know it was successful
-                if (result.RegistrationId != null)
-                {
-                    var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                    dialog.Commands.Add(new UICommand("OK"));
-                    await dialog.ShowAsync();
-                }
+                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                dialog.Commands.Add(new UICommand("OK"));
+                await dialog.ShowAsync();
             }
+        }
+    ```
 
 ### 运行示例：
 
@@ -251,7 +265,7 @@ ms.author: wesmc
 
     ![][5]
 
-4. 消息最初发送到正被 WebJob 中的服务总线订阅监视的服务总线主题。收到消息后，将创建通知并将其发送到移动应用。当你转到 [Azure 经典门户]中 Web 作业的“日志”链接时，可以仔细查看 Web 作业日志来确认处理：
+4. 消息最初发送到正被 WebJob 中的服务总线订阅监视的服务总线主题。收到消息后，将创建通知并将其发送到移动应用。当你转到 [Azure 经典管理门户]中 Web 作业的“日志”链接时，可以仔细查看 Web 作业日志来确认处理：
 
     ![][6]
 
@@ -265,11 +279,11 @@ ms.author: wesmc
 
 <!-- Links -->
 [通知中心示例]: https://github.com/Azure/azure-notificationhubs-samples
-[Azure 移动服务]: ../mobile-services/index.md/
+[Azure 移动服务]: ../mobile-services/index.md
 [Azure 服务总线]: ../service-bus-messaging/service-bus-fundamentals-hybrid-solutions.md
 [服务总线 Pub/Sub 编程]: ../service-bus-messaging/service-bus-dotnet-how-to-use-topics-subscriptions.md
 [Azure WebJob]: ../app-service-web/web-sites-create-web-jobs.md
 [通知中心 - Windows 通用教程]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
-[Azure 经典门户]: https://manage.windowsazure.cn/
+[Azure 经典管理门户]: https://manage.windowsazure.cn/
 
 <!---HONumber=Mooncake_0801_2016-->

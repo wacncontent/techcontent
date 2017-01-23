@@ -37,7 +37,8 @@ ms.author: adrianha
 
 * 安装了 Xcode v7.0 版或更高版本以及 Xamarin Studio Community 的 Mac。请参阅[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx) 和 [Mac 用户的设置、安装和验证](https://msdn.microsoft.com/zh-cn/library/mt488770.aspx) (MSDN)。
 
->[!NOTE] 如果要在注册 Azure 帐户之前就开始使用 Azure 应用服务，请转到 [Try App Service](https://tryappservice.azure.com/?appServiceName=mobile)（试用应用服务）。可以立即在应用服务中创建短期的入门级移动应用，无需信用卡，也无需做出承诺。
+>[!NOTE]
+> 如果要在注册 Azure 帐户之前就开始使用 Azure 应用服务，请转到 [Try App Service](https://tryappservice.azure.com/?appServiceName=mobile)（试用应用服务）。可以立即在应用服务中创建短期的入门级移动应用，无需信用卡，也无需做出承诺。
 
 ## 创建 Azure 移动应用后端
 
@@ -75,7 +76,8 @@ ms.author: adrianha
 
     来自请求的数据被插入到 TodoItem 表。移动应用后端返回存储在表中的项，数据显示在列表中。
 
->[!NOTE]可以在 QSTodoService.cs C# 文件中查看用于访问移动应用后端以查询和插入数据的代码。
+>[!NOTE]
+>可以在 QSTodoService.cs C# 文件中查看用于访问移动应用后端以查询和插入数据的代码。
 
 ## 后续步骤
 

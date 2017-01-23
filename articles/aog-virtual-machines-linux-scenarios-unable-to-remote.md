@@ -25,18 +25,20 @@ wacn.date: 07/26/2016
 ##<a id="scenario01"></a>场景1 
 在配置文件（/etc/sysconfig/network-scripts/ifcfg-eth0）中配置固定的IP地址或MAC地址：
 
-    DHCP_HOSTNAME=DanCentOS65
-    DEVICE=eth0
-    ONBOOT=yes
-    BOOTPROTO=static
-    IPADDR=10.0.0.36
-    NETMASK=255.255.255.224
-    GATEWAY=10.0.0.33
-    HWADDR=00:0C:29:13:5D:74
-    TYPE=Ethernet
-    USERCTL=no
-    PEERDNS=yes
-    IPV6INIT=no
+```
+DHCP_HOSTNAME=DanCentOS65
+DEVICE=eth0
+ONBOOT=yes
+BOOTPROTO=static
+IPADDR=10.0.0.36
+NETMASK=255.255.255.224
+GATEWAY=10.0.0.33
+HWADDR=00:0C:29:13:5D:74
+TYPE=Ethernet
+USERCTL=no
+PEERDNS=yes
+IPV6INIT=no
+```
 
 修改后，在界面上关机后再开机，虚拟机会无法ssh登陆。（针对固定IP的情况，如果配置文件中写入的IP与虚拟机启动后DHCP获取到的IP恰巧一致，这种情况下可以链接，但是如果再次重启的时候，DHCP获取到的IP可能会变化，所以仍然存在风险）
 
@@ -48,11 +50,11 @@ wacn.date: 07/26/2016
 由于针对该文件的修改方法多种多样，所以这里只举例说明，例如我们在修改sshd配置文件的时候，在某一行手误多输入了一个字母：
 
 ![](./media/aog-virtual-machines-linux-scenarios-unable-to-remote/scenario-02-01.png) 
- 
+
 结果sshd服务就无法正常启动了：
 
  ![](./media/aog-virtual-machines-linux-scenarios-unable-to-remote/scenario-02-02.png) 
- 
+
  注：本场景测试环境为CentOS 6.5, 如果您当前使用的非该版本, 请注意版本的差异性。
  
 ##<a id="scenario03"></a>场景3
@@ -67,7 +69,7 @@ wacn.date: 07/26/2016
   ![](./media/aog-virtual-machines-linux-scenarios-unable-to-remote/scenario-04-01.png) 
 
   ![](./media/aog-virtual-machines-linux-scenarios-unable-to-remote/scenario-04-02.png) 
- 
+
 因此如果将虚拟机的系统盘挂载到用相同平台映像创建其他机器上作为数据盘，不要使用UUID挂载（可以使用device名称来挂载），否则可能因为UUID相同导致挂载错误的系统盘引起启动失败，导致无法连接（如果这种情况发生，分离磁盘可能会将正常的系统盘分离下来）。
 
 注：本场景测试环境为CentOS 6.5, 如果您当前使用的非该版本, 请注意版本的差异性。
@@ -83,11 +85,9 @@ wacn.date: 07/26/2016
 `mdadm --create /dev/md2 --level 0 --raid-devices 2 /dev/md0 /dev/md1`
 
 创建完成后，如果虚拟机重启，device名称会发生变化，从127开始向前递减：
- 
+
   ![](./media/aog-virtual-machines-linux-scenarios-unable-to-remote/scenario-05-01.png) 
 
 如果在fstab文件中使用device名称进行挂载，会导致重启后，系统找不到/dev/md0，/dev/md1，/dev/md2，从而挂载失败无法启动。所以建议使用UUID进行挂载。
 
 注：本场景测试环境为CentOS 6.5, 如果您当前使用的非该版本, 请注意版本的差异性。
- 
-

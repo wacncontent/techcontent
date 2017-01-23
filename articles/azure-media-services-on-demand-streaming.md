@@ -73,7 +73,8 @@ wacn.date: 08/10/2016
 
 ![12](./media/azure-media-services-on-demand-streaming/12.png)
 
->[!NOTE]开启流式处理端点需要 20 分钟左右的时间。
+>[!NOTE]
+>开启流式处理端点需要 20 分钟左右的时间。
 
 ##Step 5: 发布视频
 
@@ -99,7 +100,8 @@ wacn.date: 08/10/2016
 
     ![18](./media/azure-media-services-on-demand-streaming/18.png)
 
->[!NOTE]您也可以使用 Azure Media Player 模拟视频 APP，测试已编码视频是否可正常播放，打开 Azure Media Player 页面，在 URL 框中输入 Azure 媒体服务生成的**发布 URL**，并点击 **Update Player** 按钮。即可实现自适应码率视频的播放。 [下载　Azure Media Player](http://ampdemo.azureedge.net/azuremediaplayer.html)
+>[!NOTE]
+>您也可以使用 Azure Media Player 模拟视频 APP，测试已编码视频是否可正常播放，打开 Azure Media Player 页面，在 URL 框中输入 Azure 媒体服务生成的**发布 URL**，并点击 **Update Player** 按钮。即可实现自适应码率视频的播放。 [下载　Azure Media Player](http://ampdemo.azureedge.net/azuremediaplayer.html)
 
 如需上传并编码多个视频，按照 Step2、3 的操作即可。
 

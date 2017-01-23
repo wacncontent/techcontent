@@ -25,7 +25,8 @@ ms.author: juliako
 
 ![使用 PlayReady 进行保护](./media/media-services-content-protection-overview/media-services-content-protection-with-multi-drm.png)  
 
->[!NOTE]若要使用动态加密，首先必须获取你想要从中流式传输加密内容的流式处理终结点的至少一个流式处理保留单元。
+>[!NOTE]
+>若要使用动态加密，首先必须获取你想要从中流式传输加密内容的流式处理终结点的至少一个流式处理保留单元。
 
 本主题介绍与了解如何使用 AMS 保护内容相关的[概念和术语](./media-services-content-protection-overview.md)。本主题还包含说明如何完成内容保护任务的主题的[链接](./media-services-content-protection-overview.md#common-scenarios)。
 
@@ -41,7 +42,8 @@ Azure 媒体服务支持传送使用 AES 明文密钥和 DRM 加密（Microsoft 
 
 播放器请求流时，媒体服务会使用指定的密钥通过 AES 明文密钥或 DRM 加密来动态加密内容。为了解密流，播放器将从密钥传送服务请求密钥。为了确定用户是否被授权获取密钥，服务将评估你为密钥指定的授权策略。
 
->[!NOTE]若要利用动态加密，首先必须获取你计划从中传送内容的流式处理终结点的至少一个点播流单元。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
+>[!NOTE]
+>若要利用动态加密，首先必须获取你计划从中传送内容的流式处理终结点的至少一个点播流单元。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 ##存储加密
 

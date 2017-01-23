@@ -1,16 +1,22 @@
 ---
-title: 配置设备
+title: 配置设备 | Azure
 description: 对 Raspberry Pi 3 进行首次使用配置，并安装 Raspbian OS，这是一个免费操作系统，已针对 Raspberry Pi 硬件优化。
 services: iot-hub
 documentationcenter: 
 author: shizn
 manager: timlt
 tags: 
-keywords: 
+keywords: 安装 raspbian, raspbian 下载, 如何安装 raspbian, raspbian 安装程序, raspberry pi 安装 raspbian, raspberry pi 安装 os, raspberry pi sd 卡安装, raspberry pi 连接, 连接到 raspberry pi, raspberry pi 连接
 
+ms.assetid: 43f7c2cf-f1a5-4dd5-93f0-7e546c6dc91e
 ms.service: iot-hub
-ms.date: 10/21/2016
-wacn.date: 12/19/2016
+ms.devlang: node
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/28/2016
+wacn.date: 01/13/2017
+ms.author: xshi
 ---
 
 # 配置设备
@@ -42,7 +48,7 @@ wacn.date: 12/19/2016
 用户还需要：
 
 * 适合 Pi 连接的有线或无线连接。
-* USB-SD 适配器或 miniSD 卡，用于将 OS 映像刻录到 microSD 卡中。
+* USB-SD 适配器或 miniSD 卡，用于将操作系统映像刻录到 microSD 卡中。
 * 运行 Windows、Mac 或 Linux 的计算机。该计算机用于将 Raspbian 安装在 microSD 卡上。
 * Internet 连接，用于下载必需的工具和软件。
 
@@ -70,7 +76,8 @@ wacn.date: 12/19/2016
 
 ![开启](./media/iot-hub-raspberry-pi-lessons/lesson1/micro_usb_power_on.jpg)  
 
-> [!NOTE] 必须使用工具包中至少为 2 安 的电源，确保 Raspberry 有正常运行所需的足够电力。
+> [!NOTE]
+> 必须使用工具包中至少为 2 安 的电源，确保 Raspberry 有正常运行所需的足够电力。
 > 
 > 
 
@@ -108,4 +115,5 @@ wacn.date: 12/19/2016
 ## 后续步骤
 [获取工具](./iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-win32.md)
 
-<!---HONumber=Mooncake_1212_2016-->
+<!---HONumber=Mooncake_0109_2017-->
+<!--Update_Description:update wording-->

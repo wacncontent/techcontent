@@ -59,10 +59,12 @@ wacn.date: 12/27/2016
 
     分配所有新的流式处理单位大约需要 20 分钟才能完成。
 
-    >[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将按需流式处理功能禁用最多 1 小时。
+    >[!NOTE]
+    > 当前，将流式处理单位的任何正值设置回“无”可将按需流式处理功能禁用最多 1 小时。
 
-    >[!NOTE] 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
-    
+    >[!NOTE]
+    > 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
+
 ##<a name="configure_streaming_endpoints"></a>配置流式处理终结点
 
 当你拥有至少 1 个缩放单位时，通过流式处理终结点可以配置以下属性：
@@ -80,11 +82,11 @@ wacn.date: 12/27/2016
 
 1. 选择要配置的流式处理终结点。
 1. 选择“配置”选项卡。
-  
+
 后面提供了字段的简要说明。
 
 ![配置来源][configure-origin]
-  
+
 1. 设置在 HTTP 响应的缓存控制标头中指定的最长缓存期。此值将不覆盖在 blob 内容上显式设置的最大缓存值。
 
 2. 指定将允许连接到发布的流式处理终结点的 IP 地址。如果未指定 IP 地址，则任何 IP 地址都可以连接。
@@ -118,12 +120,12 @@ wacn.date: 12/27/2016
 - 为流式处理终结点启用 CDN 时，客户端不能从原点直接请求内容。如果需要能够分别使用或不使用 CDN 测试内容，则可以创建另一个不启用 CDN 的流式处理终结点。
 - 流式处理终结点主机名在启用 CDN 后仍保持不变。启用 CDN 后，不需要对媒体服务工作流进行任何更改。例如，如果流式处理终结点主机名是 strasbourg.streaming.mediaservices.chinacloudapi.cn，则启用 CDN 后使用完全相同的主机名。
 - 对于新的流式处理终结点，只需通过创建新的终结点即可启用 CDN；对于现有流式处理终结点，则需要首先停止该终结点，然后再启用 CDN。
- 
+
 有关详细信息，请参阅[通过 Azure CDN（内容传送网络）宣布 Azure 媒体服务集成](http://azure.microsoft.com/zh-cn/blog/2015/03/17/announcing-azure-media-services-integration-with-azure-cdn-content-delivery-network/)。
 
 [streaming-endpoint-enable-cdn]: ./media/media-services-manage-origins/media-services-origins-enable-cdn.png
 [streaming-endpoint]: ./media/media-services-manage-origins/media-services-origins-page.png
 [configure-origin]: ./media/media-services-manage-origins/media-services-origins-configure.png
 [configure-origin-configure-custom-host-names]: ./media/media-services-manage-origins/media-services-configure-custom-host-names.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

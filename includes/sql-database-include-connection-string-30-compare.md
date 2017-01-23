@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-database-include-connection-string-30-compare.md
 

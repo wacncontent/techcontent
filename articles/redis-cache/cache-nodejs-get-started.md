@@ -36,7 +36,9 @@ Azure Redis 缓存允许访问 Microsoft 管理的、专用安全的 Redis 缓�
 
 安装 [node\_redis](https://github.com/mranney/node_redis)：
 
-    npm install redis
+```
+npm install redis
+```
 
 本教程使用的是 [node\_redis](https://github.com/mranney/node_redis)。有关使用其他 Node.js 客户端的示例，请使用与 [Node.js Redis 客户端](http://redis.io/clients#nodejs)中列出的 Node.js 客户端对应的各个文档。
 
@@ -52,32 +54,38 @@ Azure Redis 缓存允许访问 Microsoft 管理的、专用安全的 Redis 缓�
 
 最新版本的 [node\_redis](https://github.com/mranney/node_redis) 支持使用 SSL 连接到 Azure Redis 缓存。以下示例显示了如何使用 SSL 终结点 6380 连接到 Azure Redis 缓存。将 `<name>` 替换为缓存名称，将 `<key>` 替换为主密钥或辅助密钥，如前面的[检索主机名和访问密钥](#retrieve-the-host-name-and-access-keys)部分中所述。
 
-     var redis = require("redis");
-    
-      // Add your cache name and access key.
-    var client = redis.createClient(6380,'<name>.redis.cache.chinacloudapi.cn', {auth_pass: '<key>', tls: {servername: '<name>.redis.cache.chinacloudapi.cn'}});
+```
+ var redis = require("redis");
+
+  // Add your cache name and access key.
+var client = redis.createClient(6380,'<name>.redis.cache.chinacloudapi.cn', {auth_pass: '<key>', tls: {servername: '<name>.redis.cache.chinacloudapi.cn'}});
+```
 
 ## 在缓存中添加一些内容并检索此内容
 
 以下示例显示了如何连接到 Azure Redis 缓存实例，以及如何在缓存中存储并检索项目。有关将 Redis 与 [node\_redis](https://github.com/mranney/node_redis) 客户端一起使用的更多示例，请参阅 [http://redis.js.org/](http://redis.js.org/)。
 
-     var redis = require("redis");
-    
-      // Add your cache name and access key.
-    var client = redis.createClient(6380,'<name>.redis.cache.chinacloudapi.cn', {auth_pass: '<key>', tls: {servername: '<name>.redis.cache.chinacloudapi.cn'}});
-    
-    client.set("key1", "value", function(err, reply) {
-            console.log(reply);
-        });
-    
-    client.get("key1",  function(err, reply) {
-            console.log(reply);
-        });
+```
+ var redis = require("redis");
+
+  // Add your cache name and access key.
+var client = redis.createClient(6380,'<name>.redis.cache.chinacloudapi.cn', {auth_pass: '<key>', tls: {servername: '<name>.redis.cache.chinacloudapi.cn'}});
+
+client.set("key1", "value", function(err, reply) {
+        console.log(reply);
+    });
+
+client.get("key1",  function(err, reply) {
+        console.log(reply);
+    });
+```
 
 输出：
 
-    OK
-    value
+```
+OK
+value
+```
 
 ## 后续步骤
 

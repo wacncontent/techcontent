@@ -4,9 +4,11 @@ DNS 系统基于 *records*。记录将特定的 *name*（例如 **contoso.com**�
 
 当您创建 Azure Web 应用时，DNS 名称将自动分配到站点。此名称采用 **&lt;yoursitename&gt;.chinacloudsites.cn** 的格式。当您将您的 Web 应用添加为 Azure Traffic Manager 终结点时，将可以通过 **&lt;yourtrafficmanagerprofile&gt;.trafficmanager.cn** 域访问您的 Web 应用。
 
-> [WACOM.NOTE] 当您的 Web 应用配置为 Traffic Manager 终结点时，您将在创建 DNS 记录时使用 **.trafficmanager.cn** 地址。
+> [!NOTE]
+> 当您的 Web 应用配置为 Traffic Manager 终结点时，您将在创建 DNS 记录时使用 **.trafficmanager.cn** 地址。
 
-> [WACOM.NOTE] 您只能为 Traffic Manager 使用 CNAME 记录。
+> [!NOTE]
+> 您只能为 Traffic Manager 使用 CNAME 记录。
 
 此外还有多种类型的记录，每种类型都有其自己的功能和限制，但是对于配置为 Traffic Manager 终结点的 Web 应用，我们只关心一种；即  *CNAME* 记录。
 
@@ -16,5 +18,6 @@ CNAME 记录将  *specific* DNS 名称（例如 **mail.contoso.com** 或 **www.c
 
 一旦流量到达 Traffic Manager，后者随后会使用它为流量配置的负载均衡方法，将该流量路由到您的 Web 应用。这对您的 Web 应用访问者完全透明。他们将只在浏览器中看到自定义域。
 
-> [WACOM.NOTE] 某些域注册机构只允许您在使用 CNAME 记录（例如 **www.contoso.com**）而不是根名称（例如 **contoso.com**）时映射子域。有关 CNAME 记录的详细信息，请参阅由您的注册机构提供的文档、<a href="http://en.wikipedia.org/wiki/CNAME_record">关于 CNAME 记录的 Wikipedia 条目</a>或 <a href="http://tools.ietf.org/html/rfc1035">IETF 域名 - 实现和规范</a>文档。
+> [!NOTE]
+> 某些域注册机构只允许您在使用 CNAME 记录（例如 **www.contoso.com**）而不是根名称（例如 **contoso.com**）时映射子域。有关 CNAME 记录的详细信息，请参阅由您的注册机构提供的文档、<a href="http://en.wikipedia.org/wiki/CNAME_record">关于 CNAME 记录的 Wikipedia 条目</a>或 <a href="http://tools.ietf.org/html/rfc1035">IETF 域名 - 实现和规范</a>文档。
 <!--HONumber=41-->

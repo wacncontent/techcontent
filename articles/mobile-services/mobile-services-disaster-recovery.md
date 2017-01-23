@@ -28,11 +28,11 @@ ms.author: christopheranderson
 + **在 Azure 移动服务 SQL 数据库中备份数据**  
 
     移动服务应用程序数据存储在 Azure SQL 数据库中。我们建议你根据 [SQL 数据库业务连续性指南]中的说明备份这些数据。
-    
+
 + **备份移动服务脚本**
 
     我们建议你将移动服务脚本存储在源代码管理系统（例如 [Team Foundation Service] 或 [GitHub]）中，而不只是依赖于移动服务自身中的副本。你可以使用移动服务[源代码管理功能]或[使用 Azure CLI] 通过 Azure 经典管理门户下载这些脚本。请特别注意 Azure 经典管理门户中标记为“预览”的功能，因为不保证你能够恢复这些脚本，你可能需要从自己的源代码管理原件进行恢复。
-    
+
 + **保留辅助移动服务**
 
     当移动服务发生可用性问题时，你可能需要将它重新部署到备用的 Azure 区域。为确保有可用容量（例如，在极少见的情况下，整个区域都会丢失），建议你在备用区域中创建一个辅助移动服务，并将其模式设置为等同于或者高于主服务的模式。（如果主服务处于基本模式，则你可以将辅助服务设置为基本或标准模式。但如果主服务处于标准模式，则辅助服务也必须处于标准模式。）
@@ -49,7 +49,7 @@ ms.author: christopheranderson
 ## <a name="recover"></a>发生灾难后进行恢复
 
 出现问题时，请使用服务仪表板来获取指导和更新。
- 
+
 当服务仪表板发出提示时，请执行以下步骤，以便在备用 Azure 区域中将移动服务还原到某种运行状态。如果你提前创建了辅助服务，则会使用它的容量来还原主服务。由于主服务的 URL 和应用程序密钥在恢复后不会更改，因此你不需要更新引用该 URL 和密钥的应用程序。
 
 若要在发生中断后恢复移动服务，请执行以下操作：
@@ -64,22 +64,27 @@ ms.author: christopheranderson
 
 4. 现在，你可以使用辅助服务来恢复主服务。
 
-    > [!IMPORTANT]除了迁移文件以外，迁移命令还会将主服务的主机名更新为指向辅助服务，因此客户端应用程序不需要更新。但是，主机名解析为新服务最长需要 30 分钟时间。因此，建议只在灾难恢复方案中使用迁移命令。
+    > [!IMPORTANT]
+    >除了迁移文件以外，迁移命令还会将主服务的主机名更新为指向辅助服务，因此客户端应用程序不需要更新。但是，主机名解析为新服务最长需要 30 分钟时间。因此，建议只在灾难恢复方案中使用迁移命令。
 
-    > [!IMPORTANT]当你执行此步骤中的命令时，将会删除辅助服务，以便能够使用它的容量来恢复主服务。我们建议你在运行该命令之前备份脚本和设置（如果你想要保留的话）。
+    > [!IMPORTANT]
+    >当你执行此步骤中的命令时，将会删除辅助服务，以便能够使用它的容量来恢复主服务。我们建议你在运行该命令之前备份脚本和设置（如果你想要保留的话）。
 
     准备就绪后，执行以下命令：
 
-        azure mobile migrate PrimaryService SecondaryService
-        info:    Executing command mobile migrate
-        Warning: this action will use the capacity from the mobile service 'SecondaryService' and delete it and the host name for 'PrimaryService' may not resolve for up to 30 minutes. Do you want to migrate the mobile service 'PrimaryService'? [y/n]: y
-        + Performing migration
-        + Migration with id '0123456789abcdef0123456789abcdef' started. The migration may take several minutes to complete.
-        + Cleaning up
-        info:    Migration complete. It may take 30 minutes for DNS to resolve to the migrated site.
-        info:    mobile migrate command OK
+    ```
+    azure mobile migrate PrimaryService SecondaryService
+    info:    Executing command mobile migrate
+    Warning: this action will use the capacity from the mobile service 'SecondaryService' and delete it and the host name for 'PrimaryService' may not resolve for up to 30 minutes. Do you want to migrate the mobile service 'PrimaryService'? [y/n]: y
+    + Performing migration
+    + Migration with id '0123456789abcdef0123456789abcdef' started. The migration may take several minutes to complete.
+    + Cleaning up
+    info:    Migration complete. It may take 30 minutes for DNS to resolve to the migrated site.
+    info:    mobile migrate command OK
+    ```
 
-    > [!NOTE] 完成该命令后，可能需要经过几分钟时间，你才能在 Azure 经典管理门户中看到更改。
+    > [!NOTE]
+    > 完成该命令后，可能需要经过几分钟时间，你才能在 Azure 经典管理门户中看到更改。
 
 5. 验证是否已正确恢复所有脚本，方法是将其与源代码管理中的原件进行比较。大多数情况下，脚本会自动恢复且不会丢失数据，但如果你发现存在差异，可以手动恢复该脚本。
 

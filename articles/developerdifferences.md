@@ -26,7 +26,7 @@ wacn.date: 11/18/2016
 本文档概述了这两种服务的区别，并为中国 [Azure 门户](https://www.azure.cn)提供补充信息。同时，官方信息也会通过多个途径发布，例如 Azure [海报](http://www.microsoft.com/zh-cn/download/details.aspx?id=35473)以及博客。本文目标读者为在中国部署、托管数据中心的合作伙伴及开发人员。
 
 有关中国区 Azure 服务功能的更新，请访问中国 [Azure 门户](https://www.azure.cn)。有关当前 Azure 内容信息，请参阅本文档[附录](#appendix)。 
- 
+
 ##<a name="dev-guide"></a>开发人员指南
 
 目前微软公司提供的大部分英文技术文档中，应用程序都针对境外 Azure 开发，而非中国区 Azure，因此开发人员必须了解两者主要区别：
@@ -52,38 +52,42 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 步骤如下：
 
 1. 请使用以下注册表文件： 
-    
+
     Azure.reg
 
-            Windows Registry Editor Version 5.00
+    ```
+        Windows Registry Editor Version 5.00
 
-            [HKEY_CURRENT_USER\Software\Microsoft\VSCommon\ConnectedUser]
-            "AadInstance"="https://login.chinacloudapi.cn/"
-            "adaluri"="https://management.core.chinacloudapi.cn"
-            "AzureRMEndpoint"="https://management.chinacloudapi.cn"
-            "AzureRMAudienceEndpoint"="https://management.core.chinacloudapi.cn"
-            "EnableAzureRMIdentity"="true"
-            "GraphUrl"="graph.chinacloudapi.cn"
-    
+        [HKEY_CURRENT_USER\Software\Microsoft\VSCommon\ConnectedUser]
+        "AadInstance"="https://login.chinacloudapi.cn/"
+        "adaluri"="https://management.core.chinacloudapi.cn"
+        "AzureRMEndpoint"="https://management.chinacloudapi.cn"
+        "AzureRMAudienceEndpoint"="https://management.core.chinacloudapi.cn"
+        "EnableAzureRMIdentity"="true"
+        "GraphUrl"="graph.chinacloudapi.cn"
+    ```
+
     若要将 Reg 值返回境外 Azure，请使用此处的注册表文件：
 
     TargetProduction.reg
-            
-            Windows Registry Editor Version 5.00
 
-            [HKEY_CURRENT_USER\Software\Microsoft\VSCommon\ConnectedUser]
-            "Uri"=-
-            "AadInstance"=-
-            "adaluri"=-
-            "AzureRMEndpoint"=-
-            "AzureRMAudienceEndpoint"=-
-            "EnableAzureRMIdentity"=-
-            "GraphUrl"=-
-            "AadApplicationTenant"=-
+    ```
+        Windows Registry Editor Version 5.00
 
-            [HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0\MicrosoftAzureServices]
-            "Resource Management Audience Endpoint"=-
-            "Service Management Endpoint"=-
+        [HKEY_CURRENT_USER\Software\Microsoft\VSCommon\ConnectedUser]
+        "Uri"=-
+        "AadInstance"=-
+        "adaluri"=-
+        "AzureRMEndpoint"=-
+        "AzureRMAudienceEndpoint"=-
+        "EnableAzureRMIdentity"=-
+        "GraphUrl"=-
+        "AadApplicationTenant"=-
+
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0\MicrosoftAzureServices]
+        "Resource Management Audience Endpoint"=-
+        "Service Management Endpoint"=-
+    ```
 
 2. 双击 Azure.reg 文件，同意弹出信息，允许注册表值更改；
 
@@ -145,7 +149,7 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 ###<a name="endpointmap"></a>端点映射<a name="endpointmap"></a>
 
 下表指导用户将境外 Azure 资源端点映射到中国特定端点。
- 
+
 服务类型|在境外由微软运营的 Microsoft Azure URI|由世纪互联运营的 Microsoft Azure URI
 :--|:--|:--
 Azure - 常规 | *.windows.net | *.chinacloudapi.cn
@@ -176,65 +180,73 @@ SQL 数据库导入/导出服务映射端点 | | <p>1. 中国东部：[https://s
 
 例如，在 Cloud Services 应用程序的服务配置文件（.cscfg）中，设置自定义数据连接字符串，指向中国区 Azure 的 blob，队列和表存储 URI。 以下代码为自定义端点的示例，其中 `<AccountKey>` 变量必须由特定的存储帐户键替换。 字符串 mystorageaccount 是在订阅下创建的存储帐户示例。
 
-    <Setting name="DataConnectionString" 
-    value="BlobEndpoint=https://mystorageaccount.blob.core.chinacloudapi.cn/;QueueEndpoint=https://mystorageaccount.queue.core.chinacloudapi.cn/;TableEndpoint=https://mystorageaccount.table.core.chinacloudapi.cn/;AccountName=mystorageaccount;AccountKey=<AccountKey> " />
+```
+<Setting name="DataConnectionString" 
+value="BlobEndpoint=https://mystorageaccount.blob.core.chinacloudapi.cn/;QueueEndpoint=https://mystorageaccount.queue.core.chinacloudapi.cn/;TableEndpoint=https://mystorageaccount.table.core.chinacloudapi.cn/;AccountName=mystorageaccount;AccountKey=<AccountKey> " />
+```
 
 ###在 Visual Studio 中创建自定义端点
 
 用户可通过 Azure 云服务应用程序，为连接字符串创建自定义端点：
 
-1.	打开含一个或多个角色的 Azure 解决方案；
-2.	右键单击 Solution Explorer 中的任意角色，弹出该角色的配置；
-3.	单击 Settings；
-4.	单击 Add Setting；
-5.	为设置键入名称；
-6.	选择连接字符串的类型；
-7.	单击…弹出 Storage Account Connection String 对话框；
-8.	选择 Enter storage account credentials；
-9.	输入正确的存储帐户名和密钥；
-10.	选择 Use custom endpoints，然后为 blob、表和队列端点输入正确的 https 字符串；
-11.	单击 OK。
+1. 打开含一个或多个角色的 Azure 解决方案；
+2. 右键单击 Solution Explorer 中的任意角色，弹出该角色的配置；
+3. 单击 Settings；
+4. 单击 Add Setting；
+5. 为设置键入名称；
+6. 选择连接字符串的类型；
+7. 单击…弹出 Storage Account Connection String 对话框；
+8. 选择 Enter storage account credentials；
+9. 输入正确的存储帐户名和密钥；
+10. 选择 Use custom endpoints，然后为 blob、表和队列端点输入正确的 https 字符串；
+11. 单击 OK。
 
 Visual Studio 在服务配置文件中创建自定义存储端点，开发人员可以从角色代码中使用此存储端点。
 
 以下代码通过使用为中国区 Azure 特定的自定义 URL，以编程方式连接到存储帐户。
 
-    CloudStorageAccount Account = new CloudStorageAccount( 
-    new StorageCredentialsAccountAndKey(ACCOUNTNAME, ACCOUNTKEY), 
-    new Uri("http://ACCOUNTNAME.blob.core.chinacloudapi.cn/"), 
-    new Uri("http://ACCOUNTNAME.queue.core.chinacloudapi.cn/"), 
-    new Uri("http://ACCOUNTNAME.table.core.chinacloudapi.cn/")
-    );
-    CloudBlobClient BlobClient = Account.CreateCloudBlobClient(); 
+```
+CloudStorageAccount Account = new CloudStorageAccount( 
+new StorageCredentialsAccountAndKey(ACCOUNTNAME, ACCOUNTKEY), 
+new Uri("http://ACCOUNTNAME.blob.core.chinacloudapi.cn/"), 
+new Uri("http://ACCOUNTNAME.queue.core.chinacloudapi.cn/"), 
+new Uri("http://ACCOUNTNAME.table.core.chinacloudapi.cn/")
+);
+CloudBlobClient BlobClient = Account.CreateCloudBlobClient(); 
+```
 
 ##Azure 云服务应用程序中的端口绑定
 
 端口绑定同样使用以 `.cloudapp.net` 结尾的 DNS 名称。用户必须更改这些名称，指向 `.chinacloudapp.cn`。以下显示了包括端口说明的部分服务定义文件：
 
-    <Sites>
-           <Site name="MySite" physcalDirectory="..\WebSite1">
-              <Bindings>
-                <Binding name="My" endpointName="HttpIn" hostHeader="WebSite1.mysite.Chinacloudapp.cn" /> 
-              </Bindings>
-           </Site>
-           <Site name="Web">
-              <Bindings>
-                 <Binding name="HttpIn" endpointName="HttpIn" />
-              </Bindings>
-           </Site>
-    </Sites>
+```
+<Sites>
+       <Site name="MySite" physcalDirectory="..\WebSite1">
+          <Bindings>
+            <Binding name="My" endpointName="HttpIn" hostHeader="WebSite1.mysite.Chinacloudapp.cn" /> 
+          </Bindings>
+       </Site>
+       <Site name="Web">
+          <Bindings>
+             <Binding name="HttpIn" endpointName="HttpIn" />
+          </Bindings>
+       </Site>
+</Sites>
+```
 
 ##连接 SQL 数据库服务器
 
 SQL 数据库服务器名称将由 `*.database.windows.net` 更改为 `*.database.chinacloudapi.cn`。 所有客户端应用程序或工具都必须使用新名称命名其连接字符串，连接到数据库。 对于未在中国区 Azure 运行的应用程序，可参照 SQL 数据库服务器的值，该值可以是服务定义文件中的 DataConnectionString 值，或 .NET 其它配置文件中的值。 例如：
 
-    <configuration>
-          <connectionStrings>
-            <add name="SQLAzure" connectionString="Server=tcp:yourserver.database.chinacloudapi.cn,1433;
-            Database=Test;User ID=login@server;Password=yourPassword;
-            Trusted_Connection=False;Encrypt=True;"/>
-          </connectionStrings>
-    </configuration>
+```
+<configuration>
+      <connectionStrings>
+        <add name="SQLAzure" connectionString="Server=tcp:yourserver.database.chinacloudapi.cn,1433;
+        Database=Test;User ID=login@server;Password=yourPassword;
+        Trusted_Connection=False;Encrypt=True;"/>
+      </connectionStrings>
+</configuration>
+```
 
 ##Active Directory 和服务总线
 
@@ -249,7 +261,8 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 - 中国区 Azure 不包含访问控制（Access Control）命名空间。要集成应用程序以及与 Azure 身份验证服务同步的目录，需要使用 Azure 中的 Active Directory。在 Azure 经典管理门户中，单击" Active Directory”。
 - ACS 管理门户仅适用于服务总线命名空间。
 - 除了这些自定义带来的差异，中国区 Azure 中的 Azure AD 设计与境外 Azure 全部一致。
->[!NOTE]中国区 Azure 在预览期间，其创建的访问控制命名空间既不能操作，也不能访问。 但是，类似的功能可在 Azure 管理门户的 Active Directory 中使用。
+>[!NOTE]
+>中国区 Azure 在预览期间，其创建的访问控制命名空间既不能操作，也不能访问。 但是，类似的功能可在 Azure 管理门户的 Active Directory 中使用。
 
 ###<a name="srvbusconf"></a>服务总线配置
 
@@ -289,23 +302,28 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 1. 考虑变量设置的级别。 对于整个计算机、单个用户或运行单个应用程序的环境，其环境变量设置的含义都不相同。
 2. 以适当的级别设置以下环境变量：
 
-        RELAYHOST=servicebus.chinacloudapi.cn
-        STSHOST=accesscontrol.chinacloudapi.cn 
-        RELAYENV=Custom
+    ```
+    RELAYHOST=servicebus.chinacloudapi.cn
+    STSHOST=accesscontrol.chinacloudapi.cn 
+    RELAYENV=Custom
+    ```
 
->[!WARNING] 通过 csdef 文件中的 `<environment>` 标记为 Web 角色添加环境变量时，此选项不可用。 Web 角色在 w3wp.exe 的上下文中运行。 环境变量不会传播到 w3wp.exe 环境。 请参阅 Web 角色的选项 3。
+>[!WARNING]
+> 通过 csdef 文件中的 `<environment>` 标记为 Web 角色添加环境变量时，此选项不可用。 Web 角色在 w3wp.exe 的上下文中运行。 环境变量不会传播到 w3wp.exe 环境。 请参阅 Web 角色的选项 3。
 
 ####选项 2：使用 ServiceBus.config 文件重定向单个应用程序：
 
 1. 创建如下的 ServiceBus.config 文件，其中包含适当的主机信息。
 
-        <?xml version="1.0" encoding="utf-8"?>
-        <configuration>
-              <Microsoft.ServiceBus>
-                <relayHostName>servicebus.chinacloudapi.cn</relayHostName>
-                <stsHostName>accesscontrol.chinacloudapi.cn</stsHostName>    
-              </Microsoft.ServiceBus>
-        </configuration>
+    ```
+    <?xml version="1.0" encoding="utf-8"?>
+    <configuration>
+          <Microsoft.ServiceBus>
+            <relayHostName>servicebus.chinacloudapi.cn</relayHostName>
+            <stsHostName>accesscontrol.chinacloudapi.cn</stsHostName>    
+          </Microsoft.ServiceBus>
+    </configuration>
+    ```
 
 2. 将 ServiceBus.config 文件与服务总线 / ACS应用程序的 .exe 文件放置在同一目录中。
 
@@ -351,12 +369,14 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 
 开发人员只有了解角色使用的框架，才能指向特定的框架目录。 但是，以下脚本概括了使用 Web 角色的复制过程。 如果 servicebus.config 文件存在，该脚本会将此文件复制到每个 .NET 目录中。
 
-    @echo off
-    pushd .
-    cd %windir%\Microsoft.Net\Framework64\
-    REM set copylocal=true on servicebus.config so its present in bin dir
-    for /f %%i in ('dir /s /b config') do copy /y %~dp0servicebus.config %%~fi
-    popd
+```
+@echo off
+pushd .
+cd %windir%\Microsoft.Net\Framework64\
+REM set copylocal=true on servicebus.config so its present in bin dir
+for /f %%i in ('dir /s /b config') do copy /y %~dp0servicebus.config %%~fi
+popd
+```
 
 ##<a name="srvapi"></a>使用服务管理 API
 
@@ -364,22 +384,24 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 
 境外 Azure 编写代码使用的路径为：<a href="https://management.core.windows.net">https://management.core.windows.net</a>。中国区 Azure 编写代码使用的路径为：<span class="Italic">
   <a href="https://management.core.chinacloudapi.cn">https://management.core.chinacloudapi.cn</a>。
- 
+
 ##<a name="dnsred"></a>重定将自定义域名定位到中国区 Azure 的托管服务中
 
 如果用户使用的自定义域名被转发到境外 Azure 中运行的托管服务，并将该托管服务移至中国区 Azure，必须更新转发域，指向新的中国特定终端点。
 
 例如，如果要将 www.contoso.com 重定向到运行在 contoso.cloudapp.net 的 web 角色中，那么现在就必须将其重定向到 contoso.chinacloudapp.cn 中。
- 
+
 ##<a name="wadig"></a>使用 Azure 诊断
 
 Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存储帐户，存储诊断信息。
 
 在* .cscfg 文件中添加以下配置信息：
 
-    <ConfigurationSettings>
-          <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="<YourStorageString>" />
-    </ConfigurationSettings>
+```
+<ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="<YourStorageString>" />
+</ConfigurationSettings>
+```
 
 `<YourStorageString>` 的值是个自定义端点，将URI并入中国区 Azure。
 
@@ -395,17 +417,23 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
 
 - ASM 模式：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
 - ARM 模式
 
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
 
 ##使用 Azure CLI
 
 在命令提示符下键入以下命令，登录 Azure China Cloud：
 
-    azure login -e AzureChinaCloud
+```
+azure login -e AzureChinaCloud
+```
 
 ##<a name="nodejs"></a>为 Node.js 使用 Azure SDK
 
@@ -414,18 +442,22 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
 ###存储、服务总线和通知总线
 存储、服务总线和通知中心都接受各自的连接字符串，可通过管理门户或使用 CLI 获取该值。
 
-    var tableService = azure.createTableService(storageConn);
-    var blobService= azure.createBlobService(storageConn);
-    var queueService = azure.createQueueService(storageConn);
-    var serviceBusService = azure.createServiceBusService(sbConn);
-    var notificationHubService = azure.createNotificationHubService(nhConn);
+```
+var tableService = azure.createTableService(storageConn);
+var blobService= azure.createBlobService(storageConn);
+var queueService = azure.createQueueService(storageConn);
+var serviceBusService = azure.createServiceBusService(sbConn);
+var notificationHubService = azure.createNotificationHubService(nhConn);
+```
 
 ###SQL 
 
 要管理 SQL 数据库服务器，可以使用此配置：
 
-    var sqlManagementService = azure.createSqlManagementService(subscriptionId, authentication, hostOptions);
- 
+```
+var sqlManagementService = azure.createSqlManagementService(subscriptionId, authentication, hostOptions);
+```
+
 ##<a name="appendix"></a>附录：Azure 的内容库
 
 以下列出了 Azure 当前可用的所有内容资产，并指明该资产是否专门针对中国区 Azure。
@@ -515,4 +547,3 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
     </tr>
   </tbody>
 </table>
- 

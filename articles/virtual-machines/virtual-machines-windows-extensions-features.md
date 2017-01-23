@@ -51,7 +51,9 @@ Azure VM 代理可管理 Azure 虚拟机与 Azure 结构控制器之间的交互
 ## 发现 VM 扩展
 有许多不同的 VM 扩展可与 Azure 虚拟机配合使用。若要查看完整列表，请使用 Azure PowerShell 模块运行以下命令。
 
-    Get-AzureVMAvailableExtension | Select ExtensionName, Version
+```
+Get-AzureVMAvailableExtension | Select ExtensionName, Version
+```
 
 ## 运行 VM 扩展
 
@@ -63,39 +65,47 @@ Azure 虚拟机扩展可以在现有虚拟机上运行，当需要在已部署�
 
 存在多个用于运行单个扩展的 PowerShell 命令。若要查看列表，请运行以下 PowerShell 命令：
 
-    get-command Set-AzureRM*Extension* -Module AzureRM.Compute
+```
+get-command Set-AzureRM*Extension* -Module AzureRM.Compute
+```
 
 这提供类似如下的输出：
 
-        CommandType     Name                                               Version    Source
-        -----------     ----                                               -------    ------
-        Cmdlet          Set-AzureRmVMAccessExtension                       2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMADDomainExtension                     2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMAEMExtension                          2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMBackupExtension                       2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMBginfoExtension                       2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMChefExtension                         2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMCustomScriptExtension                 2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMDiagnosticsExtension                  2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMDiskEncryptionExtension               2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMDscExtension                          2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMExtension                             2.2.0      AzureRM.Compute
-        Cmdlet          Set-AzureRmVMSqlServerExtension                    2.2.0      AzureRM.Compute
+```
+    CommandType     Name                                               Version    Source
+    -----------     ----                                               -------    ------
+    Cmdlet          Set-AzureRmVMAccessExtension                       2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMADDomainExtension                     2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMAEMExtension                          2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMBackupExtension                       2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMBginfoExtension                       2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMChefExtension                         2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMCustomScriptExtension                 2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMDiagnosticsExtension                  2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMDiskEncryptionExtension               2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMDscExtension                          2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMExtension                             2.2.0      AzureRM.Compute
+    Cmdlet          Set-AzureRmVMSqlServerExtension                    2.2.0      AzureRM.Compute
+```
 
 以下示例使用自定义脚本扩展从 GitHub 存储库将脚本下载到目标虚拟机上，然后运行该脚本。有关 VM 访问扩展的详细信息，请参阅[自定义脚本扩展概述](./virtual-machines-windows-extensions-customscript.md)。
 
-    Set-AzureRmVMCustomScriptExtension -ResourceGroupName "myResourceGroup" `
-        -VMName "myVM" -Name "myCustomScript" `
-        -FileUri "https://raw.githubusercontent.com/neilpeterson/nepeters-azure-templates/master/windows-custom-script-simple/support-scripts/Create-File.ps1" `
-        -Run "Create-File.ps1" -Location "China North"
+```
+Set-AzureRmVMCustomScriptExtension -ResourceGroupName "myResourceGroup" `
+    -VMName "myVM" -Name "myCustomScript" `
+    -FileUri "https://raw.githubusercontent.com/neilpeterson/nepeters-azure-templates/master/windows-custom-script-simple/support-scripts/Create-File.ps1" `
+    -Run "Create-File.ps1" -Location "China North"
+```
 
 在此示例中，VM 访问扩展用于重置 Windows 虚拟机的管理密码。有关 VM 访问扩展的详细信息，请参阅[重置 Windows VM 中的远程桌面服务](./virtual-machines-windows-reset-rdp.md)。
 
-    $cred=Get-Credential
+```
+$cred=Get-Credential
 
-    Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" -VMName "myVM" -Name "myVMAccess" `
-        -Location ChinaNorth -UserName $cred.GetNetworkCredential().Username `
-        -Password $cred.GetNetworkCredential().Password -typeHandlerVersion "2.0"
+Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" -VMName "myVM" -Name "myVMAccess" `
+    -Location ChinaNorth -UserName $cred.GetNetworkCredential().Username `
+    -Password $cred.GetNetworkCredential().Password -typeHandlerVersion "2.0"
+```
 
 `Set-AzureRmVMExtension` 命令可用作“捕获全部”命令或用于启动任何 VM 扩展的常规命令。有关详细信息，请参阅 [Set-AzureRmVMExtension 参考](https://msdn.microsoft.com/zh-cn/library/mt603745.aspx)。
 
@@ -113,35 +123,38 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 可以在[此处](https://github.com/Microsoft/dotnet-core-sample-templates/tree/master/dotnet-core-music-windows)找到完整 Resource Manager 模板。
 
->[!NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-    {
-        "apiVersion": "2015-06-15",
-        "type": "extensions",
-        "name": "config-app",
-        "location": "[resourceGroup().location]",
-        "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),copyindex())]",
-        "[variables('musicstoresqlName')]"
-        ],
-        "tags": {
-        "displayName": "config-app"
-        },
-        "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.4",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-            "fileUris": [
-            "https://raw.githubusercontent.com/Microsoft/dotnet-core-sample-templates/master/dotnet-core-music-windows/scripts/configure-music-app.ps1"
-            ]
-        },
-        "protectedSettings": {
-            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File configure-music-app.ps1 -user ',parameters('adminUsername'),' -password ',parameters('adminPassword'),' -sqlserver ',variables('musicstoresqlName'),'.database.chinacloudapi.cn')]"
-        }
-        }
+```
+{
+    "apiVersion": "2015-06-15",
+    "type": "extensions",
+    "name": "config-app",
+    "location": "[resourceGroup().location]",
+    "dependsOn": [
+    "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),copyindex())]",
+    "[variables('musicstoresqlName')]"
+    ],
+    "tags": {
+    "displayName": "config-app"
+    },
+    "properties": {
+    "publisher": "Microsoft.Compute",
+    "type": "CustomScriptExtension",
+    "typeHandlerVersion": "1.4",
+    "autoUpgradeMinorVersion": true,
+    "settings": {
+        "fileUris": [
+        "https://raw.githubusercontent.com/Microsoft/dotnet-core-sample-templates/master/dotnet-core-music-windows/scripts/configure-music-app.ps1"
+        ]
+    },
+    "protectedSettings": {
+        "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File configure-music-app.ps1 -user ',parameters('adminUsername'),' -password ',parameters('adminPassword'),' -sqlserver ',variables('musicstoresqlName'),'.database.chinacloudapi.cn')]"
     }
+    }
+}
+```
 
 有关详细信息，请参阅[使用 Windows VM 扩展创作 Azure Resource Manager 模板](./virtual-machines-windows-extensions-authoring-templates.md)。
 
@@ -155,26 +168,30 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 针对虚拟机运行虚拟机扩展后，使用以下 PowerShell 命令返回扩展状态。请将示例参数名称替换为你自己的值。`Name` 参数采用执行时提供给扩展的名称。
 
-    Get-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
+```
+Get-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
+```
 
 输出与下面类似：
 
-    ResourceGroupName       : myResourceGroup
-    VMName                  : myVM
-    Name                    : myExtensionName
-    Location                : chinanorth
-    Etag                    : null
-    Publisher               : Microsoft.Azure.Extensions
-    ExtensionType           : DockerExtension
-    TypeHandlerVersion      : 1.0
-    Id                      : /subscriptions/mySubscriptionIS/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myExtensionName
-    PublicSettings          : 
-    ProtectedSettings       :
-    ProvisioningState       : Succeeded
-    Statuses                :
-    SubStatuses             :
-    AutoUpgradeMinorVersion : False
-    ForceUpdateTag          :
+```
+ResourceGroupName       : myResourceGroup
+VMName                  : myVM
+Name                    : myExtensionName
+Location                : chinanorth
+Etag                    : null
+Publisher               : Microsoft.Azure.Extensions
+ExtensionType           : DockerExtension
+TypeHandlerVersion      : 1.0
+Id                      : /subscriptions/mySubscriptionIS/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myExtensionName
+PublicSettings          : 
+ProtectedSettings       :
+ProvisioningState       : Succeeded
+Statuses                :
+SubStatuses             :
+AutoUpgradeMinorVersion : False
+ForceUpdateTag          :
+```
 
 此外，还可以在 Azure 门户预览中找到扩展执行状态。若要查看扩展的状态，请选择“虚拟机”>“扩展”>选择所需的扩展。
 
@@ -182,7 +199,9 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 在某些情况下，可能需要重新运行虚拟机扩展。这可以通过删除扩展，然后使用所选执行方法重新运行扩展来实现。若要删除扩展，请使用 Azure PowerShell 模块运行以下命令。请将示例参数名称替换为你自己的值。
 
-    Remove-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
+```
+Remove-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
+```
 
 此外，还可以使用 Azure 门户预览来删除扩展。为此，请选择“虚拟机”>“扩展”>所需的扩展>“卸载”。
 

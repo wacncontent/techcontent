@@ -49,27 +49,39 @@ ms.author: danlep
 
 **启用 AutoGrowShrink 属性**
 
-    Set-HpcClusterProperty -EnableGrowShrink 1
+```
+Set-HpcClusterProperty -EnableGrowShrink 1
+```
 
 **禁用 AutoGrowShrink 属性**
 
-    Set-HpcClusterProperty -EnableGrowShrink 0
+```
+Set-HpcClusterProperty -EnableGrowShrink 0
+```
 
 **更改扩展间隔（以分钟为单位）**
 
-    Set-HpcClusterProperty -GrowInterval <interval>
+```
+Set-HpcClusterProperty -GrowInterval <interval>
+```
 
 **更改收缩间隔（以分钟为单位）**
 
-    Set-HpcClusterProperty -ShrinkInterval <interval>
+```
+Set-HpcClusterProperty -ShrinkInterval <interval>
+```
 
 **查看 AutoGrowShrink 的当前配置**
 
-    Get-HpcClusterProperty -AutoGrowShrink
+```
+Get-HpcClusterProperty -AutoGrowShrink
+```
 
 **从 AutoGrowShrink 中排除节点组**
 
-    Set-HpcClusterProperty -ExcludeNodeGroups <group1,group2,group3>
+```
+Set-HpcClusterProperty -ExcludeNodeGroups <group1,group2,group3>
+```
 
 >[!NOTE] 
 从 HPC Pack 2016 开始支持此参数
@@ -103,7 +115,7 @@ ms.author: danlep
   从 HPC Pack 2012 R2 Update 3 开始支持此参数。
   >
 * **ExcludeNodeGroups** - 指定的节点组中的节点不会自动扩展和收缩。
-  
+
   > [!NOTE]
   从 HPC Pack 2016 开始支持此参数。
   >
@@ -111,7 +123,9 @@ ms.author: danlep
 ### MPI 示例
 默认情况下，HPC Pack 针对 MPI 作业额外扩展 1% 的节点（**ExtraNodesGrowRatio** 设置为 1）。原因是 MPI 可能需要多个节点，且只有在准备好所有节点时才能运行该作业。当 Azure 启动节点时，一个节点偶尔可能需要比其他节点更多的时间才能启动，使得其他节点在等待该节点就绪前空闲。通过额外扩展节点，HPC Pack 可减少此资源等待时间，并可能会节省成本。若要增加针对 MPI 作业的额外节点百分比（例如，10%），请运行类似于下面的命令
 
-    Set-HpcClusterProperty -ExtraNodesGrowRatio 10
+```
+Set-HpcClusterProperty -ExtraNodesGrowRatio 10
+```
 
 ### SOA 示例
 默认情况下，**SoaJobGrowThreshold** 设置为 50000，**SoaRequestsPerCore** 设置为 200000。如果提交一个包含 70000 个请求的 SOA 作业，则会创建一个排队任务，并且传入请求数为 70000。在此情况下，HPC Pack 将会针对排队任务扩展 1 个核心，并针对传入请求扩展 (70000 - 50000)/20000 = 1 个核心，因此总共将为此 SOA 作业扩展 2 个核心。
@@ -126,18 +140,20 @@ ms.author: danlep
 
 ### 语法
 
-    AzureAutoGrowShrink.ps1 [-NodeTemplates <String[]>] [-JobTemplates <String[]>] [-NodeType <String>]
-        -NumOfActiveQueuedTasksPerNodeToGrow <Single> [-NumOfActiveQueuedTasksToGrowThreshold <Int32>]
-        [-NumOfInitialNodesToGrow <Int32>] [-GrowCheckIntervalMins <Int32>] [-ShrinkCheckIntervalMins <Int32>]
-        [-ShrinkCheckIdleTimes <Int32>] [-ExtraNodesGrowRatio <Int32>] [-ArgFile <String>] [-LogFilePrefix <String>]
-        [<CommonParameters>]
+```
+AzureAutoGrowShrink.ps1 [-NodeTemplates <String[]>] [-JobTemplates <String[]>] [-NodeType <String>]
+    -NumOfActiveQueuedTasksPerNodeToGrow <Single> [-NumOfActiveQueuedTasksToGrowThreshold <Int32>]
+    [-NumOfInitialNodesToGrow <Int32>] [-GrowCheckIntervalMins <Int32>] [-ShrinkCheckIntervalMins <Int32>]
+    [-ShrinkCheckIdleTimes <Int32>] [-ExtraNodesGrowRatio <Int32>] [-ArgFile <String>] [-LogFilePrefix <String>]
+    [<CommonParameters>]
 
-    AzureAutoGrowShrink.ps1 [-NodeTemplates <String[]>] [-JobTemplates <String[]>] [-NodeType <String>]
-        -NumOfQueuedJobsPerNodeToGrow <Single> [-NumOfQueuedJobsToGrowThreshold <Int32>] [-NumOfInitialNodesToGrow
-        <Int32>] [-GrowCheckIntervalMins <Int32>] [-ShrinkCheckIntervalMins <Int32>] [-ShrinkCheckIdleTimes <Int32>]
-        [-ExtraNodesGrowRatio <Int32>] [-ArgFile <String>] [-LogFilePrefix <String>] [<CommonParameters>]
+AzureAutoGrowShrink.ps1 [-NodeTemplates <String[]>] [-JobTemplates <String[]>] [-NodeType <String>]
+    -NumOfQueuedJobsPerNodeToGrow <Single> [-NumOfQueuedJobsToGrowThreshold <Int32>] [-NumOfInitialNodesToGrow
+    <Int32>] [-GrowCheckIntervalMins <Int32>] [-ShrinkCheckIntervalMins <Int32>] [-ShrinkCheckIdleTimes <Int32>]
+    [-ExtraNodesGrowRatio <Int32>] [-ArgFile <String>] [-LogFilePrefix <String>] [<CommonParameters>]
 
-    AzureAutoGrowShrink.ps1 -UseLastConfigurations [-ArgFile <String>] [-LogFilePrefix <String>] [<CommonParameters>]
+AzureAutoGrowShrink.ps1 -UseLastConfigurations [-ArgFile <String>] [-LogFilePrefix <String>] [<CommonParameters>]
+```
 
 ### 参数
 * **NodeTemplates** - 节点模板名称，可定义节点增加和减少的范围。如果没有指定（默认值是 @()），则在 **NodeType** 的值为 AzureNodes 时，**AzureNodes** 节点组中的所有节点都在范围内，在 **NodeType** 的值为 ComputeNodes 时，**ComputeNodes** 节点组中的所有节点都在范围内。
@@ -162,14 +178,18 @@ ms.author: danlep
 ### 示例 1
 下面的示例可将使用默认 AzureNode 模板部署的 Azure 突发节点配置为自动扩展和收缩。如果所有节点最初都处于**未部署**状态，则至少启动了 3 个节点。如果已排队作业的数量超过 8 个，则脚本会启动节点，直至节点数量超过已排队作业与 **NumOfQueuedJobsPerNodeToGrow** 的比。如果连续 3 次发现一个节点闲置，则会停止此节点。
 
-    .\AzureAutoGrowShrink.ps1 -NodeTemplates @('Default AzureNode
-    Template') -NodeType AzureNodes -NumOfQueuedJobsPerNodeToGrow 5
-    -NumOfQueuedJobsToGrowThreshold 8 -NumOfInitialNodesToGrow 3
-    -GrowCheckIntervalMins 1 -ShrinkCheckIntervalMins 1 -ShrinkCheckIdleTimes 3
+```
+.\AzureAutoGrowShrink.ps1 -NodeTemplates @('Default AzureNode
+Template') -NodeType AzureNodes -NumOfQueuedJobsPerNodeToGrow 5
+-NumOfQueuedJobsToGrowThreshold 8 -NumOfInitialNodesToGrow 3
+-GrowCheckIntervalMins 1 -ShrinkCheckIntervalMins 1 -ShrinkCheckIdleTimes 3
+```
 
 ### 示例 2
 下面的示例可将使用默认 ComputeNode 模板部署的 Azure 计算节点 VM 配置为自动扩展和收缩。由默认作业模板配置的作业可定义群集上工作负荷的范围。如果所有节点最初都处于已停止状态，则至少启动了 5 个节点。如果活动已排队任务的数量超过 15 个，则脚本会启动节点，直至节点数量超过活动已排队任务与 **NumOfActiveQueuedTasksPerNodeToGrow** 的比。如果连续 10 次发现一个节点闲置，则会停止此节点。
 
-    .\AzureAutoGrowShrink.ps1 -NodeTemplates 'Default ComputeNode Template' -JobTemplates 'Default' -NodeType ComputeNodes -NumOfActiveQueuedTasksPerNodeToGrow 10 -NumOfActiveQueuedTasksToGrowThreshold 15 -NumOfInitialNodesToGrow 5 -GrowCheckIntervalMins 1 -ShrinkCheckIntervalMins 1 -ShrinkCheckIdleTimes 10 -ArgFile 'IaaSVMComputeNodes_Arg.xml' -LogFilePrefix 'IaaSVMComputeNodes_log'
+```
+.\AzureAutoGrowShrink.ps1 -NodeTemplates 'Default ComputeNode Template' -JobTemplates 'Default' -NodeType ComputeNodes -NumOfActiveQueuedTasksPerNodeToGrow 10 -NumOfActiveQueuedTasksToGrowThreshold 15 -NumOfInitialNodesToGrow 5 -GrowCheckIntervalMins 1 -ShrinkCheckIntervalMins 1 -ShrinkCheckIdleTimes 10 -ArgFile 'IaaSVMComputeNodes_Arg.xml' -LogFilePrefix 'IaaSVMComputeNodes_log'
+```
 
 <!---HONumber=Mooncake_1212_2016-->

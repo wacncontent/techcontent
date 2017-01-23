@@ -71,53 +71,71 @@ ms.author: cherylmc
 在本部分，可以登录并声明用于此配置的值。声明的值将在示例脚本中使用。根据自己的环境更改值。或者，可以使用声明的值，以练习的形式逐步执行每个步骤。
 
 1. 在 PowerShell 控制台中，登录到你的 Azure 帐户。该 cmdlet 将提示你提供 Azure 帐户的登录凭据。登录后它会下载你的帐户设置，以便这些信息可供 Azure PowerShell 使用。
-   
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud 
+
+    ```
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud 
+    ```
 2. 获取 Azure 订阅的列表。
-   
-        Get-AzureRmSubscription
+
+    ```
+    Get-AzureRmSubscription
+    ```
 3. 指定要使用的订阅。
-   
-        Select-AzureRmSubscription -SubscriptionName "Name of subscription"
+
+    ```
+    Select-AzureRmSubscription -SubscriptionName "Name of subscription"
+    ```
 4. 声明要使用的变量。使用以下示例，根据需要将值替换为自己的值。
-   
-        $VNetName  = "VNet1"
-        $FESubName = "FrontEnd"
-        $BESubName = "Backend"
-        $GWSubName = "GatewaySubnet"
-        $VNetPrefix1 = "192.168.0.0/16"
-        $VNetPrefix2 = "10.254.0.0/16"
-        $FESubPrefix = "192.168.1.0/24"
-        $BESubPrefix = "10.254.1.0/24"
-        $GWSubPrefix = "192.168.200.0/26"
-        $VPNClientAddressPool = "172.16.201.0/24"
-        $RG = "TestRG"
-        $Location = "China East"
-        $DNS = "8.8.8.8"
-        $GWName = "VNet1GW"
-        $GWIPName = "VNet1GWPIP"
-        $GWIPconfName = "gwipconf"
+
+    ```
+    $VNetName  = "VNet1"
+    $FESubName = "FrontEnd"
+    $BESubName = "Backend"
+    $GWSubName = "GatewaySubnet"
+    $VNetPrefix1 = "192.168.0.0/16"
+    $VNetPrefix2 = "10.254.0.0/16"
+    $FESubPrefix = "192.168.1.0/24"
+    $BESubPrefix = "10.254.1.0/24"
+    $GWSubPrefix = "192.168.200.0/26"
+    $VPNClientAddressPool = "172.16.201.0/24"
+    $RG = "TestRG"
+    $Location = "China East"
+    $DNS = "8.8.8.8"
+    $GWName = "VNet1GW"
+    $GWIPName = "VNet1GWPIP"
+    $GWIPconfName = "gwipconf"
+    ```
 
 ## <a name="ConfigureVNet"></a>第 2 部分 - 配置 VNet
 1. 创建资源组。
-   
-        New-AzureRmResourceGroup -Name $RG -Location $Location
+
+    ```
+    New-AzureRmResourceGroup -Name $RG -Location $Location
+    ```
 2. 为虚拟网络创建子网配置，并将其命名为 *FrontEnd*、*BackEnd* 和 *GatewaySubnet*。这些前缀必须是声明的 VNet 地址空间的一部分。
-   
-        $fesub = New-AzureRmVirtualNetworkSubnetConfig -Name $FESubName -AddressPrefix $FESubPrefix
-        $besub = New-AzureRmVirtualNetworkSubnetConfig -Name $BESubName -AddressPrefix $BESubPrefix
-        $gwsub = New-AzureRmVirtualNetworkSubnetConfig -Name $GWSubName -AddressPrefix $GWSubPrefix
+
+    ```
+    $fesub = New-AzureRmVirtualNetworkSubnetConfig -Name $FESubName -AddressPrefix $FESubPrefix
+    $besub = New-AzureRmVirtualNetworkSubnetConfig -Name $BESubName -AddressPrefix $BESubPrefix
+    $gwsub = New-AzureRmVirtualNetworkSubnetConfig -Name $GWSubName -AddressPrefix $GWSubPrefix
+    ```
 3. 创建虚拟网络。指定的 DNS 服务器应该是可以解析所连接的资源名称的 DNS 服务器。在本示例中，我们使用了公共 IP 地址。请务必使用自己的值。
-   
-        New-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $RG -Location $Location -AddressPrefix $VNetPrefix1,$VNetPrefix2 -Subnet $fesub, $besub, $gwsub -DnsServer $DNS
+
+    ```
+    New-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $RG -Location $Location -AddressPrefix $VNetPrefix1,$VNetPrefix2 -Subnet $fesub, $besub, $gwsub -DnsServer $DNS
+    ```
 4. 为创建的虚拟网络指定变量。
-   
-        $vnet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $RG
-        $subnet = Get-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet
+
+    ```
+    $vnet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $RG
+    $subnet = Get-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet
+    ```
 5. 请求动态分配的公共 IP 地址。网关需要此 IP 地址才能正常运行。稍后要将网关连接到网关 IP 配置。
-   
-        $pip = New-AzureRmPublicIpAddress -Name $GWIPName -ResourceGroupName $RG -Location $Location -AllocationMethod Dynamic
-        $ipconf = New-AzureRmVirtualNetworkGatewayIpConfig -Name $GWIPconfName -Subnet $subnet -PublicIpAddress $pip
+
+    ```
+    $pip = New-AzureRmPublicIpAddress -Name $GWIPName -ResourceGroupName $RG -Location $Location -AllocationMethod Dynamic
+    $ipconf = New-AzureRmVirtualNetworkGatewayIpConfig -Name $GWIPconfName -Subnet $subnet -PublicIpAddress $pip
+    ```
 
 ## <a name="Certificates"></a>第 3 部分 - 证书
 Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从企业证书解决方案生成的根证书或自签名根证书将公共证书数据（不是私钥）导出为 Base-64 编码 X.509 .cer 文件。然后从根证书将公共证书数据导入到 Azure。此外，需要从客户端的根证书生成客户端证书。每个要使用 P2S 连接连接到虚拟网络的客户端都必须已安装从根证书生成的客户端证书。
@@ -149,38 +167,48 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 ### <a name="upload"></a>4.上载根证书 .cer 文件
 声明证书名称的变量，并将值替换为你自己的值：
 
-        $P2SRootCertName = "Mycertificatename.cer"
+```
+    $P2SRootCertName = "Mycertificatename.cer"
+```
 
 将根证书的公共证书数据添加到 Azure。最多可以上载 20 个根证书的文件。不要将根证书的私钥上载到 Azure。上载 .Cer 文件后，Azure 将使用它来对连接到虚拟网络的客户端进行身份验证。
 
 将文件路径替换为你自己的值，然后运行这些 cmdlet。
 
-        $filePathForCert = "C:\cert\Mycertificatename.cer"
-        $cert = new-object System.Security.Cryptography.X509Certificates.X509Certificate2($filePathForCert)
-        $CertBase64 = [system.convert]::ToBase64String($cert.RawData)
-        $p2srootcert = New-AzureRmVpnClientRootCertificate -Name $P2SRootCertName -PublicCertData $CertBase64
+```
+    $filePathForCert = "C:\cert\Mycertificatename.cer"
+    $cert = new-object System.Security.Cryptography.X509Certificates.X509Certificate2($filePathForCert)
+    $CertBase64 = [system.convert]::ToBase64String($cert.RawData)
+    $p2srootcert = New-AzureRmVpnClientRootCertificate -Name $P2SRootCertName -PublicCertData $CertBase64
+```
 
 ## <a name="creategateway"></a>第 4 部分 - 创建 VPN 网关
 配置并创建 VNet 的虚拟网络网关。*-GatewayType* 必须是 **Vpn**，*-VpnType* 必须是 **RouteBased**。此步骤最多需要 45 分钟才能完成。
 
-        New-AzureRmVirtualNetworkGateway -Name $GWName -ResourceGroupName $RG `
-        -Location $Location -IpConfigurations $ipconf -GatewayType Vpn `
-        -VpnType RouteBased -EnableBgp $false -GatewaySku Standard `
-        -VpnClientAddressPool $VPNClientAddressPool -VpnClientRootCertificates $p2srootcert
+```
+    New-AzureRmVirtualNetworkGateway -Name $GWName -ResourceGroupName $RG `
+    -Location $Location -IpConfigurations $ipconf -GatewayType Vpn `
+    -VpnType RouteBased -EnableBgp $false -GatewaySku Standard `
+    -VpnClientAddressPool $VPNClientAddressPool -VpnClientRootCertificates $p2srootcert
+```
 
 ## <a name="clientconfig"></a>第 5 部分 - 下载 VPN 客户端配置包
 使用 P2S 连接到 Azure 的客户端必须安装客户端证书和 VPN 客户端配置包。Windows 客户端有可用的 VPN 客户端配置包。VPN 客户端包中包含的信息可用于配置 Windows 内置的 VPN 客户端软件，与要连接到的特定 VPN 相关。该程序包不安装额外的软件。有关详细信息，请参阅 [VPN Gateway FAQ](./vpn-gateway-vpn-faq.md#point-to-site-connections)（VPN 网关常见问题）。
 
 1. 创建网关后，可以下载客户端配置包。此示例为 64 位客户端下载程序包。如果要下载 32 位客户端，请将“Amd64”替换为“x86”。还可以使用 Azure 门户预览下载 VPN 客户端。
-   
-        Get-AzureRmVpnClientPackage -ResourceGroupName $RG `
-        -VirtualNetworkGatewayName $GWName -ProcessorArchitecture Amd64
+
+    ```
+    Get-AzureRmVpnClientPackage -ResourceGroupName $RG `
+    -VirtualNetworkGatewayName $GWName -ProcessorArchitecture Amd64
+    ```
 2. PowerShell cmdlet 返回 URL 链接。下面示范了返回的 URL 形式：
-   
-        "https://mdsbrketwprodsn1prod.blob.core.chinacloudapi.cn/cmakexe/4a431aa7-b5c2-45d9-97a0-859940069d3f/amd64/4a431aa7-b5c2-45d9-97a0-859940069d3f.exe?sv=2014-02-14&sr=b&sig=jSNCNQ9aUKkCiEokdo%2BqvfjAfyhSXGnRG0vYAv4efg0%3D&st=2016-01-08T07%3A10%3A08Z&se=2016-01-08T08%3A10%3A08Z&sp=r&fileExtension=.exe"
+
+    ```
+    "https://mdsbrketwprodsn1prod.blob.core.chinacloudapi.cn/cmakexe/4a431aa7-b5c2-45d9-97a0-859940069d3f/amd64/4a431aa7-b5c2-45d9-97a0-859940069d3f.exe?sv=2014-02-14&sr=b&sig=jSNCNQ9aUKkCiEokdo%2BqvfjAfyhSXGnRG0vYAv4efg0%3D&st=2016-01-08T07%3A10%3A08Z&se=2016-01-08T08%3A10%3A08Z&sp=r&fileExtension=.exe"
+    ```
 3. 复制并粘贴 Web 浏览器中返回的链接以下载包。然后在客户端计算机上安装该包。如果显示 SmartScreen 弹出窗口，请单击“更多信息”，然后单击“仍要运行”以安装该包。
 4. 在客户端计算机上，导航到“网络设置”，然后单击“VPN”。此时将会列出连接。其中显示了要连接到的虚拟网络的名称，如以下示例所示：
-   
+
     ![VPN 客户端](./media/vpn-gateway-howto-point-to-site-rm-ps/vpn.png "VPN 客户端")  
 
 ## <a name="clientcertificate"></a>第 6 部分 - 安装客户端证书
@@ -192,27 +220,29 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 ## <a name="connect"></a>第 7 部分 - 连接到 Azure
 1. 若要连接到 VNet，请在客户端计算机上导航到 VPN 连接，找到创建的 VPN 连接。其名称与虚拟网络的名称相同。单击“连接”。可能会出现与使用证书相关的弹出消息。如果出现此消息，请单击“继续”以使用提升的权限。
 2. 在“连接”状态页上，单击“连接”开始连接。如果你看到“选择证书”屏幕，请确保所显示的客户端证书就是你要用来连接的证书。如果不是，请使用下拉箭头选择正确的证书，然后单击“确定”。
-   
+
     ![VPN 客户端连接](./media/vpn-gateway-howto-point-to-site-rm-ps/clientconnect.png "VPN 客户端连接")  
 
 3. 现在应已建立连接。
-   
+
     ![已建立连接](./media/vpn-gateway-howto-point-to-site-rm-ps/connected.png "已建立连接")  
 
 ## <a name="verify"></a>第 8 部分 - 验证连接
 1. 若要验证你的 VPN 连接是否处于活动状态，请打开提升的命令提示符，然后运行 *ipconfig/all*。
 2. 查看结果。请注意，你收到的 IP 地址是在配置中指定的点到站点 VPN 客户端地址池中的地址之一。结果应大致如下所示：
-   
-        PPP adapter VNet1:
-            Connection-specific DNS Suffix .:
-            Description.....................: VNet1
-            Physical Address................:
-            DHCP Enabled....................: No
-            Autoconfiguration Enabled.......: Yes
-            IPv4 Address....................: 172.16.201.3(Preferred)
-            Subnet Mask.....................: 255.255.255.255
-            Default Gateway.................:
-            NetBIOS over Tcpip..............: Enabled
+
+    ```
+    PPP adapter VNet1:
+        Connection-specific DNS Suffix .:
+        Description.....................: VNet1
+        Physical Address................:
+        DHCP Enabled....................: No
+        Autoconfiguration Enabled.......: Yes
+        IPv4 Address....................: 172.16.201.3(Preferred)
+        Subnet Mask.....................: 255.255.255.255
+        Default Gateway.................:
+        NetBIOS over Tcpip..............: Enabled
+    ```
 
 ## <a name="addremovecert"></a>添加或删除受信任的根证书
 证书用于对点到站点 VPN 的 VPN 客户端进行身份验证。以下步骤指导如何添加和删除根证书。在将 Base64 编码 X.509 (.cer) 文件添加到 Azure 时，则是在告诉 Azure 信任该文件所代表的根证书。
@@ -223,39 +253,51 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 最多可以将 20 个受信任的根证书 .cer 文件添加到 Azure。请遵循以下步骤来添加根证书。
 
 1. 创建并准备好要添加到 Azure 的新根证书。将公钥导出为 Base-64 编码的 X.509 (.CER)，使用文本编辑器将它打开。然后，仅复制如下所示的部分。
-   
+
     按以下示例中所示复制所需的值：
-   
+
     ![证书](./media/vpn-gateway-howto-point-to-site-rm-ps/copycert.png "证书")  
 
 2. 指定证书名称和密钥信息作为变量。将信息替换为自己的值，如以下示例中所示：
-   
-        $P2SRootCertName2 = "ARMP2SRootCert2.cer"
-        $MyP2SCertPubKeyBase64_2 = "MIIC/zCCAeugAwIBAgIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAMBgxFjAUBgNVBAMTDU15UDJTUm9vdENlcnQwHhcNMTUxMjE5MDI1MTIxWhcNMzkxMjMxMjM1OTU5WjAYMRYwFAYDVQQDEw1NeVAyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyjIXoWy8xE/GF1OSIvUaA0bxBjZ1PJfcXkMWsHPzvhWc2esOKrVQtgFgDz4ggAnOUFEkFaszjiHdnXv3mjzE2SpmAVIZPf2/yPWqkoHwkmrp6BpOvNVOpKxaGPOuK8+dql1xcL0eCkt69g4lxy0FGRFkBcSIgVTViS9wjuuS7LPo5+OXgyFkAY3pSDiMzQCkRGNFgw5WGMHRDAiruDQF1ciLNojAQCsDdLnI3pDYsvRW73HZEhmOqRRnJQe6VekvBYKLvnKaxUTKhFIYwuymHBB96nMFdRUKCZIiWRIy8Hc8+sQEsAML2EItAjQv4+fqgYiFdSWqnQCPf/7IZbotgQIDAQABo00wSzBJBgNVHQEEQjBAgBAkuVrWvFsCJAdK5pb/eoCNoRowGDEWMBQGA1UEAxMNTXlQMlNSb290Q2VydIIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAA4IBAQA223veAZEIar9N12ubNH2+HwZASNzDVNqspkPKD97TXfKHlPlIcS43TaYkTz38eVrwI6E0yDk4jAuPaKnPuPYFRj9w540SvY6PdOUwDoEqpIcAVp+b4VYwxPL6oyEQ8wnOYuoAK1hhh20lCbo8h9mMy9ofU+RP6HJ7lTqupLfXdID/XevI8tW6Dm+C/wCeV3EmIlO9KUoblD/e24zlo3YzOtbyXwTIh34T0fO/zQvUuBqZMcIPfM1cDvqcqiEFLWvWKoAnxbzckye2uk1gHO52d8AVL3mGiX8wBJkjc/pMdxrEvvCzJkltBmqxTM6XjDJALuVh16qFlqgTWCIcb7ju"
+
+    ```
+    $P2SRootCertName2 = "ARMP2SRootCert2.cer"
+    $MyP2SCertPubKeyBase64_2 = "MIIC/zCCAeugAwIBAgIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAMBgxFjAUBgNVBAMTDU15UDJTUm9vdENlcnQwHhcNMTUxMjE5MDI1MTIxWhcNMzkxMjMxMjM1OTU5WjAYMRYwFAYDVQQDEw1NeVAyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyjIXoWy8xE/GF1OSIvUaA0bxBjZ1PJfcXkMWsHPzvhWc2esOKrVQtgFgDz4ggAnOUFEkFaszjiHdnXv3mjzE2SpmAVIZPf2/yPWqkoHwkmrp6BpOvNVOpKxaGPOuK8+dql1xcL0eCkt69g4lxy0FGRFkBcSIgVTViS9wjuuS7LPo5+OXgyFkAY3pSDiMzQCkRGNFgw5WGMHRDAiruDQF1ciLNojAQCsDdLnI3pDYsvRW73HZEhmOqRRnJQe6VekvBYKLvnKaxUTKhFIYwuymHBB96nMFdRUKCZIiWRIy8Hc8+sQEsAML2EItAjQv4+fqgYiFdSWqnQCPf/7IZbotgQIDAQABo00wSzBJBgNVHQEEQjBAgBAkuVrWvFsCJAdK5pb/eoCNoRowGDEWMBQGA1UEAxMNTXlQMlNSb290Q2VydIIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAA4IBAQA223veAZEIar9N12ubNH2+HwZASNzDVNqspkPKD97TXfKHlPlIcS43TaYkTz38eVrwI6E0yDk4jAuPaKnPuPYFRj9w540SvY6PdOUwDoEqpIcAVp+b4VYwxPL6oyEQ8wnOYuoAK1hhh20lCbo8h9mMy9ofU+RP6HJ7lTqupLfXdID/XevI8tW6Dm+C/wCeV3EmIlO9KUoblD/e24zlo3YzOtbyXwTIh34T0fO/zQvUuBqZMcIPfM1cDvqcqiEFLWvWKoAnxbzckye2uk1gHO52d8AVL3mGiX8wBJkjc/pMdxrEvvCzJkltBmqxTM6XjDJALuVh16qFlqgTWCIcb7ju"
+    ```
 3. 添加新的根证书。一次只能添加一个证书。
-   
-        Add-AzureRmVpnClientRootCertificate -VpnClientRootCertificateName $P2SRootCertName2 -VirtualNetworkGatewayname "VNet1GW" -ResourceGroupName "TestRG" -PublicCertData $MyP2SCertPubKeyBase64_2
+
+    ```
+    Add-AzureRmVpnClientRootCertificate -VpnClientRootCertificateName $P2SRootCertName2 -VirtualNetworkGatewayname "VNet1GW" -ResourceGroupName "TestRG" -PublicCertData $MyP2SCertPubKeyBase64_2
+    ```
 4. 可以使用以下 cmdlet 来验证是否已已正确添加新证书。
-   
-        Get-AzureRmVpnClientRootCertificate -ResourceGroupName "TestRG" `
-        -VirtualNetworkGatewayName "VNet1GW"
+
+    ```
+    Get-AzureRmVpnClientRootCertificate -ResourceGroupName "TestRG" `
+    -VirtualNetworkGatewayName "VNet1GW"
+    ```
 
 ### 删除受信任的根证书
 可以从 Azure 中删除受信任的根证书。删除受信任的证书时，从根证书生成的客户端证书不再能够通过点到站点连接到 Azure。如果希望客户端能够连接，需要在客户端上安装新客户端证书，这些证书是从 Azure 信任的证书生成的。
 
 1. 若要删除受信任的根证书，请修改以下示例：
-   
+
     声明变量。
-   
-        $P2SRootCertName2 = "ARMP2SRootCert2.cer"
-        $MyP2SCertPubKeyBase64_2 = "MIIC/zCCAeugAwIBAgIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAMBgxFjAUBgNVBAMTDU15UDJTUm9vdENlcnQwHhcNMTUxMjE5MDI1MTIxWhcNMzkxMjMxMjM1OTU5WjAYMRYwFAYDVQQDEw1NeVAyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyjIXoWy8xE/GF1OSIvUaA0bxBjZ1PJfcXkMWsHPzvhWc2esOKrVQtgFgDz4ggAnOUFEkFaszjiHdnXv3mjzE2SpmAVIZPf2/yPWqkoHwkmrp6BpOvNVOpKxaGPOuK8+dql1xcL0eCkt69g4lxy0FGRFkBcSIgVTViS9wjuuS7LPo5+OXgyFkAY3pSDiMzQCkRGNFgw5WGMHRDAiruDQF1ciLNojAQCsDdLnI3pDYsvRW73HZEhmOqRRnJQe6VekvBYKLvnKaxUTKhFIYwuymHBB96nMFdRUKCZIiWRIy8Hc8+sQEsAML2EItAjQv4+fqgYiFdSWqnQCPf/7IZbotgQIDAQABo00wSzBJBgNVHQEEQjBAgBAkuVrWvFsCJAdK5pb/eoCNoRowGDEWMBQGA1UEAxMNTXlQMlNSb290Q2VydIIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAA4IBAQA223veAZEIar9N12ubNH2+HwZASNzDVNqspkPKD97TXfKHlPlIcS43TaYkTz38eVrwI6E0yDk4jAuPaKnPuPYFRj9w540SvY6PdOUwDoEqpIcAVp+b4VYwxPL6oyEQ8wnOYuoAK1hhh20lCbo8h9mMy9ofU+RP6HJ7lTqupLfXdID/XevI8tW6Dm+C/wCeV3EmIlO9KUoblD/e24zlo3YzOtbyXwTIh34T0fO/zQvUuBqZMcIPfM1cDvqcqiEFLWvWKoAnxbzckye2uk1gHO52d8AVL3mGiX8wBJkjc/pMdxrEvvCzJkltBmqxTM6XjDJALuVh16qFlqgTWCIcb7ju"
+
+    ```
+    $P2SRootCertName2 = "ARMP2SRootCert2.cer"
+    $MyP2SCertPubKeyBase64_2 = "MIIC/zCCAeugAwIBAgIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAMBgxFjAUBgNVBAMTDU15UDJTUm9vdENlcnQwHhcNMTUxMjE5MDI1MTIxWhcNMzkxMjMxMjM1OTU5WjAYMRYwFAYDVQQDEw1NeVAyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyjIXoWy8xE/GF1OSIvUaA0bxBjZ1PJfcXkMWsHPzvhWc2esOKrVQtgFgDz4ggAnOUFEkFaszjiHdnXv3mjzE2SpmAVIZPf2/yPWqkoHwkmrp6BpOvNVOpKxaGPOuK8+dql1xcL0eCkt69g4lxy0FGRFkBcSIgVTViS9wjuuS7LPo5+OXgyFkAY3pSDiMzQCkRGNFgw5WGMHRDAiruDQF1ciLNojAQCsDdLnI3pDYsvRW73HZEhmOqRRnJQe6VekvBYKLvnKaxUTKhFIYwuymHBB96nMFdRUKCZIiWRIy8Hc8+sQEsAML2EItAjQv4+fqgYiFdSWqnQCPf/7IZbotgQIDAQABo00wSzBJBgNVHQEEQjBAgBAkuVrWvFsCJAdK5pb/eoCNoRowGDEWMBQGA1UEAxMNTXlQMlNSb290Q2VydIIQKazxzFjMkp9JRiX+tkTfSzAJBgUrDgMCHQUAA4IBAQA223veAZEIar9N12ubNH2+HwZASNzDVNqspkPKD97TXfKHlPlIcS43TaYkTz38eVrwI6E0yDk4jAuPaKnPuPYFRj9w540SvY6PdOUwDoEqpIcAVp+b4VYwxPL6oyEQ8wnOYuoAK1hhh20lCbo8h9mMy9ofU+RP6HJ7lTqupLfXdID/XevI8tW6Dm+C/wCeV3EmIlO9KUoblD/e24zlo3YzOtbyXwTIh34T0fO/zQvUuBqZMcIPfM1cDvqcqiEFLWvWKoAnxbzckye2uk1gHO52d8AVL3mGiX8wBJkjc/pMdxrEvvCzJkltBmqxTM6XjDJALuVh16qFlqgTWCIcb7ju"
+    ```
 2. 删除证书。
-   
-        Remove-AzureRmVpnClientRootCertificate -VpnClientRootCertificateName $P2SRootCertName2 -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG -PublicCertData $MyP2SCertPubKeyBase64_2
+
+    ```
+    Remove-AzureRmVpnClientRootCertificate -VpnClientRootCertificateName $P2SRootCertName2 -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG -PublicCertData $MyP2SCertPubKeyBase64_2
+    ```
 3. 使用以下 cmdlet 来验证是否已已成功删除证书。
-   
-        Get-AzureRmVpnClientRootCertificate -ResourceGroupName "TestRG" `
-        -VirtualNetworkGatewayName "VNet1GW"
+
+    ```
+    Get-AzureRmVpnClientRootCertificate -ResourceGroupName "TestRG" `
+    -VirtualNetworkGatewayName "VNet1GW"
+    ```
 
 ## <a name="revoke"></a>管理已吊销客户端证书的列表
 你可以吊销客户端证书。证书吊销列表可让你选择性地拒绝基于单个客户端证书的点到站点连接。如果从 Azure 中删除根证书 .cer，将吊销所有由吊销的根证书生成/签名的客户端证书的访问权限。如果需要，也可以吊销特定的客户端证书而不是根证书。这样，从根证书生成的证书仍然有效。
@@ -264,29 +306,39 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 
 ### 吊销客户端证书
 1. 获取要吊销的客户端证书的指纹。
-   
-        $RevokedClientCert1 = "ClientCert1"
-        $RevokedThumbprint1 = "‎ef2af033d0686820f5a3c74804d167b88b69982f"
+
+    ```
+    $RevokedClientCert1 = "ClientCert1"
+    $RevokedThumbprint1 = "‎ef2af033d0686820f5a3c74804d167b88b69982f"
+    ```
 2. 将指纹添加到吊销的指纹列表。
-   
-        Add-AzureRmVpnClientRevokedCertificate -VpnClientRevokedCertificateName $RevokedClientCert1 `
-        -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG -Thumbprint $RevokedThumbprint1
+
+    ```
+    Add-AzureRmVpnClientRevokedCertificate -VpnClientRevokedCertificateName $RevokedClientCert1 `
+    -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG -Thumbprint $RevokedThumbprint1
+    ```
 3. 确认指纹已添加到证书吊销列表。必须一次添加一个指纹。
-   
-        Get-AzureRmVpnClientRevokedCertificate -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG
+
+    ```
+    Get-AzureRmVpnClientRevokedCertificate -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG
+    ```
 
 ### 恢复客户端证书
 可以通过从吊销的客户端证书列表中删除指纹来恢复客户端证书。
 
 1. 从吊销的客户端证书指纹列表中删除指纹。
-   
-        Remove-AzureRmVpnClientRevokedCertificate -VpnClientRevokedCertificateName $RevokedClientCert1 `
-        -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG -Thumbprint $RevokedThumbprint1
+
+    ```
+    Remove-AzureRmVpnClientRevokedCertificate -VpnClientRevokedCertificateName $RevokedClientCert1 `
+    -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG -Thumbprint $RevokedThumbprint1
+    ```
 2. 检查指纹是否已从吊销列表中删除。
-   
-        Get-AzureRmVpnClientRevokedCertificate -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG
+
+    ```
+    Get-AzureRmVpnClientRevokedCertificate -VirtualNetworkGatewayName $GWName -ResourceGroupName $RG
+    ```
 
 ## 后续步骤
-连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md/)。
+连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -30,7 +30,8 @@ ms.author: carlrab
 - 主数据库上 DBManager 的登录名，拥有你要异地复制的本地数据库的 db\_ownership 权限，并且是你要配置异地复制的伙伴服务器上的 DBManager。
 - SQL Server Management Studio (SSMS)
 
-> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 启动计划的故障转移，将辅助数据库升级为新的主数据库
 
@@ -52,11 +53,14 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句以将辅助数据库切换为主角色。
 
-        ALTER DATABASE <MyDB> FAILOVER;
+    ```
+    ALTER DATABASE <MyDB> FAILOVER;
+    ```
 
 4. 单击“执行”运行查询。
 
->[!NOTE] 在少数情况下，操作无法完成并且可能会出现停滞。在此情况下，用户可以执行强制故障转移命令并接受数据丢失。
+>[!NOTE]
+> 在少数情况下，操作无法完成并且可能会出现停滞。在此情况下，用户可以执行强制故障转移命令并接受数据丢失。
 
 ## 启动从主数据库到辅助数据库的非计划故障转移
 
@@ -76,11 +80,14 @@ ms.author: carlrab
 
 3. 使用以下 **ALTER DATABASE** 语句以将辅助数据库切换为主角色。
 
-        ALTER DATABASE <MyDB>   FORCE_FAILOVER_ALLOW_DATA_LOSS;
+    ```
+    ALTER DATABASE <MyDB>   FORCE_FAILOVER_ALLOW_DATA_LOSS;
+    ```
 
 4. 单击“执行”运行查询。
 
->[!NOTE] 如果在主数据库和辅助数据库在线时发出此命令，旧的主数据库将立即变为新的辅助数据库，但不会进行数据同步。如果发出命令时主数据库正在提交事务，则可能会丢失某些数据。
+>[!NOTE]
+> 如果在主数据库和辅助数据库在线时发出此命令，旧的主数据库将立即变为新的辅助数据库，但不会进行数据同步。如果发出命令时主数据库正在提交事务，则可能会丢失某些数据。
 
 ## 后续步骤   
 

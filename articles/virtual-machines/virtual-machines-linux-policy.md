@@ -20,7 +20,8 @@ ms.author: singhkay
 
 # 将策略应用到 Azure Resource Manager 虚拟机
 
-> [!NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型
+> [!NOTE]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型
 
 通过使用策略，组织可以在整个企业中强制实施各种约定和规则。强制实施所需行为有助于消除风险，同时为组织的成功做出贡献。在本文中，我们将介绍如何使用 Azure Resource Manager 策略来为组织中的虚拟机定义所需行为。
 
@@ -42,42 +43,46 @@ ms.author: singhkay
 企业中常用的一种方案可能是，只允许其用户在经测试可与 LOB 应用程序兼容的特定操作系统中创建虚拟机。使用 Azure Resource Manager 策略可以通过几个步骤完成此任务。
 在此策略示例中，我们将只允许创建 Ubuntu 14.04.2-LTS 虚拟机。策略定义如下所示
 
-    "if": {
-      "allOf": [
-        {
-          "field": "type",
-          "equals": "Microsoft.Compute/virtualMachines"
-        },
-        {
-          "not": {
-            "allOf": [
-              {
-                "field": "Microsoft.Compute/virtualMachines/imagePublisher",
-                "equals": "Canonical"
-              },
-              {
-                "field": "Microsoft.Compute/virtualMachines/imageOffer",
-                "equals": "UbuntuServer"
-              },
-              {
-                "field": "Microsoft.Compute/virtualMachines/imageSku",
-                "equals": "14.04.2-LTS"
-              }
-            ]
-          }
-        }
-      ]
+```
+"if": {
+  "allOf": [
+    {
+      "field": "type",
+      "equals": "Microsoft.Compute/virtualMachines"
     },
-    "then": {
-      "effect": "deny"
+    {
+      "not": {
+        "allOf": [
+          {
+            "field": "Microsoft.Compute/virtualMachines/imagePublisher",
+            "equals": "Canonical"
+          },
+          {
+            "field": "Microsoft.Compute/virtualMachines/imageOffer",
+            "equals": "UbuntuServer"
+          },
+          {
+            "field": "Microsoft.Compute/virtualMachines/imageSku",
+            "equals": "14.04.2-LTS"
+          }
+        ]
+      }
     }
+  ]
+},
+"then": {
+  "effect": "deny"
+}
+```
 
 可以轻松修改上述策略，以允许在虚拟机部署中使用经过以下更改的任何 Ubuntu LTS 映像
 
-    {
-      "field": "Microsoft.Compute/virtualMachines/imageSku",
-      "like": "*LTS"
-    }
+```
+{
+  "field": "Microsoft.Compute/virtualMachines/imageSku",
+  "like": "*LTS"
+}
+```
 
 #### 虚拟机属性字段
 

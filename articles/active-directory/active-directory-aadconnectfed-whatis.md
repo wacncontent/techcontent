@@ -29,17 +29,17 @@ wacn.date: 12/09/2016
 | **Azure AD Connect 用户登录选项** | |
 | [了解用户登录选项](./active-directory-aadconnect-user-signin.md) |各种用户登录选项以及它们如何影响 Azure 登录的用户体验的说明 |
 | **使用 Azure AD Connect 安装 AD FS** | |
-| [先决条件](./active-directory-aadconnect-get-started-custom.md#ad-fs-configuration-pre-requisites/) |通过 Azure AD Connect 成功安装 AD FS 的前提条件 |
-| [配置 AD FS 场](./active-directory-aadconnect-get-started-custom.md#configuring-federation-with-ad-fs/) |如何使用 Azure AD Connect 安装新的 AD FS 场 |
+| [先决条件](./active-directory-aadconnect-get-started-custom.md#ad-fs-configuration-pre-requisites) |通过 Azure AD Connect 成功安装 AD FS 的前提条件 |
+| [配置 AD FS 场](./active-directory-aadconnect-get-started-custom.md#configuring-federation-with-ad-fs) |如何使用 Azure AD Connect 安装新的 AD FS 场 |
 | **修改 AD FS 配置** | |
-| [修复信任](./active-directory-aadconnect-federation-management.md#repairthetrust/) |如何修复当前本地 AD FS 和 Office 365/Azure 之间的信任 |
-| [添加新的 AD FS 服务器](./active-directory-aadconnect-federation-management.md#addadfsserver/) |初始安装后，使用其他 AD FS 服务器扩展 AD FS 场 |
-| [添加新的 AD FS WAP 服务器](./active-directory-aadconnect-federation-management.md#addwapserver/) |初始安装后，使用其他 WAP 服务器扩展 AD FS 场 |
-| [添加新的联合域](./active-directory-aadconnect-federation-management.md#addfeddomain/) |添加另一个域来与 Azure AD 联合 |
+| [修复信任](./active-directory-aadconnect-federation-management.md#repairthetrust) |如何修复当前本地 AD FS 和 Office 365/Azure 之间的信任 |
+| [添加新的 AD FS 服务器](./active-directory-aadconnect-federation-management.md#addadfsserver) |初始安装后，使用其他 AD FS 服务器扩展 AD FS 场 |
+| [添加新的 AD FS WAP 服务器](./active-directory-aadconnect-federation-management.md#addwapserver) |初始安装后，使用其他 WAP 服务器扩展 AD FS 场 |
+| [添加新的联合域](./active-directory-aadconnect-federation-management.md#addfeddomain) |添加另一个域来与 Azure AD 联合 |
 | **安装后任务** | |
-| [添加自定义公司徽标/插图](./active-directory-aadconnect-federation-management.md#customlogo/) |通过指定将在 AD FS 登录页显示的自定义徽标来调整登录体验 |
-| [添加登录说明](./active-directory-aadconnect-federation-management.md#addsignindescription/) |更改 AD FS 登录页上的登录说明 |
-| [修改 AD FS 声明规则](./active-directory-aadconnect-federation-management.md#modclaims/) |对应于 Azure AD Connect 同步配置修改/添加 AD FS 中的声明规则 |
+| [添加自定义公司徽标/插图](./active-directory-aadconnect-federation-management.md#customlogo) |通过指定将在 AD FS 登录页显示的自定义徽标来调整登录体验 |
+| [添加登录说明](./active-directory-aadconnect-federation-management.md#addsignindescription) |更改 AD FS 登录页上的登录说明 |
+| [修改 AD FS 声明规则](./active-directory-aadconnect-federation-management.md#modclaims) |对应于 Azure AD Connect 同步配置修改/添加 AD FS 中的声明规则 |
 
 ## 其他资源
 - [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)

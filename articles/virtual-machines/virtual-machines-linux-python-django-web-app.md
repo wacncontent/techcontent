@@ -56,28 +56,36 @@ ms.author: huvalo
 Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Django。按照以下步骤可连接到你的 VM 并安装 Apache 和 Django。
 
 1.  启动新的**终端**窗口。
-    
+
 1.  输入以下命令来连接到 Azure VM。如果未创建 FQDN，可使用 Azure 经典管理门户的虚拟机摘要中显示的公共 IP 地址进行连接。
 
-        $ ssh yourusername@yourVmUrl
+    ```
+    $ ssh yourusername@yourVmUrl
+    ```
 
 1.  输入以下命令来安装 Django：
 
-        $ sudo apt-get install python-setuptools python-pip
-        $ sudo pip install django
+    ```
+    $ sudo apt-get install python-setuptools python-pip
+    $ sudo pip install django
+    ```
 
 1.  输入以下带 mod-wsgi 的命令来安装 Apache：
 
-        $ sudo apt-get install apache2 libapache2-mod-wsgi
+    ```
+    $ sudo apt-get install apache2 libapache2-mod-wsgi
+    ```
 
 ## 创建新的 Django 应用程序
 
 1.  打开你在上一节中使用的**终端**窗口，通过 ssh 进入你的 VM。
-    
+
 1.  输入以下命令来创建新的 Django 项目：
 
-        $ cd /var/www
-        $ sudo django-admin.py startproject helloworld
+    ```
+    $ cd /var/www
+    $ sudo django-admin.py startproject helloworld
+    ```
 
     **django-admin.py** 脚本为基于 Django 的网站生成基本结构：
     -   **helloworld/manage.py** 可帮助你启动托管和停止托管基于 Django 的网站；
@@ -85,36 +93,46 @@ Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Djang
     -   **helloworld/helloworld/urls.py** 包含每个 url 及其视图之间的映射代码。
 
 1.  在 **/var/www/helloworld/helloworld** 目录中创建一个名为 **views.py** 的新文件。这会包含呈现“hello world”页面的视图。启动编辑器并输入以下代码：
-        
-        from django.http import HttpResponse
-        def home(request):
-            html = "<html><body>Hello World!</body></html>"
-            return HttpResponse(html)
+
+    ```
+    from django.http import HttpResponse
+    def home(request):
+        html = "<html><body>Hello World!</body></html>"
+        return HttpResponse(html)
+    ```
 
 1.  现在，将 **urls.py** 文件的内容替换为以下代码：
 
-        from django.conf.urls import patterns, url
-        urlpatterns = patterns('',
-            url(r'^$', 'helloworld.views.home', name='home'),
-        )
+    ```
+    from django.conf.urls import patterns, url
+    urlpatterns = patterns('',
+        url(r'^$', 'helloworld.views.home', name='home'),
+    )
+    ```
 
 ## 设置 Apache
 
 1.  创建 Apache 虚拟主机配置文件 **/etc/apache2/sites-available/helloworld.conf**。将内容设置为以下项，并将 yourVmName 替换为你所使用的计算机的实际名称（例如 pyubuntu）。
 
-        <VirtualHost *:80>
-        ServerName yourVmName
-        </VirtualHost>
-        WSGIScriptAlias / /var/www/helloworld/helloworld/wsgi.py
-        WSGIPythonPath /var/www/helloworld
+    ```
+    <VirtualHost *:80>
+    ServerName yourVmName
+    </VirtualHost>
+    WSGIScriptAlias / /var/www/helloworld/helloworld/wsgi.py
+    WSGIPythonPath /var/www/helloworld
+    ```
 
 1.  使用以下命令启用该站点：
 
-        $ sudo a2ensite helloworld
+    ```
+    $ sudo a2ensite helloworld
+    ```
 
 1.  使用以下命令重新启动 Apache：
 
-        $ sudo service apache2 reload
+    ```
+    $ sudo service apache2 reload
+    ```
 
 1.  最后，在你的浏览器中加载网页：
 

@@ -23,7 +23,8 @@ ms.author: chackdan
 
 在创建群集期间配置证书安全性时，Service Fabric 允许指定两个群集证书（主要证书和辅助证书）。有关详细信息，请参阅 [creating an azure cluster via portal](./service-fabric-cluster-creation-via-portal.md)（通过门户创建 Azure 群集）或 [creating an azure cluster via Azure Resource Manager](./service-fabric-cluster-creation-via-arm.md)（通过 Azure Resource Manager 创建 Azure 群集）。如果通过 Resource Manager 进行部署并且只指定了一个群集证书，将使用该证书作为主要证书。在创建群集后，可以添加一个新证书作为辅助证书。
 
->[!NOTE] 对于安全群集，始终至少需要部署一个有效的（未吊销或过期）证书（主要或辅助），否则，群集无法正常运行。在所有有效证书过期前的 90 天，系统将针对节点生成警告跟踪和警告运行状况事件。Service Fabric 当前不会针对此主题发送电子邮件或其他任何通知。
+>[!NOTE]
+> 对于安全群集，始终至少需要部署一个有效的（未吊销或过期）证书（主要或辅助），否则，群集无法正常运行。在所有有效证书过期前的 90 天，系统将针对节点生成警告跟踪和警告运行状况事件。Service Fabric 当前不会针对此主题发送电子邮件或其他任何通知。
 
 ## 使用门户添加辅助证书
 若要添加另一个证书作为辅助证书，必须将该证书上载到 Azure 密钥保管库，然后将它部署到群集中的 VM。有关更多信息，请参阅 [Deploy certificates to VMs from a customer-managed key vault](http://blogs.technet.com/b/kv/archive/2015/07/14/vm_2d00_certificates.aspx)（将证书从客户管理的密钥保管库部署到 VM）。
@@ -70,22 +71,26 @@ ms.author: chackdan
 2. 添加“字符串”类型的新参数“secCertificateThumbprint”。如果使用的 Resource Manager 模板是在创建群集时从门户下载的，或者是从快速入门模板下载的，则只需搜索该参数，就会发现它已做了定义。
 3. 找到“Microsoft.ServiceFabric/clusters”资源定义。在属性下面找到“Certificate”JSON 标记，如以下 JSON 代码片段所示。
 
-          "properties": {
-            "certificate": {
-              "thumbprint": "[parameters('certificateThumbprint')]",
-              "x509StoreName": "[parameters('certificateStoreValue')]"
-            }
+    ```
+      "properties": {
+        "certificate": {
+          "thumbprint": "[parameters('certificateThumbprint')]",
+          "x509StoreName": "[parameters('certificateStoreValue')]"
+        }
+    ```
 
 4. 添加新标记“thumbprintSecondary”并为其指定值“[parameters('secCertificateThumbprint')]”。
 
 资源定义现在应如下所示（根据具体的模板源，有时与下面的代码片段不完全相同）。在下面可以看到，执行的操作是指定一个新证书作为主要证书，同时将当前主要证书交换为辅助证书。这样就可以通过一个部署步骤，将当前证书滚动更新为新证书。
 
-          "properties": {
-            "certificate": {
-                "thumbprint": "[parameters('certificateThumbprint')]",
-                "thumbprintSecondary": "[parameters('secCertificateThumbprint')]",
-                "x509StoreName": "[parameters('certificateStoreValue')]"
-            },
+```
+      "properties": {
+        "certificate": {
+            "thumbprint": "[parameters('certificateThumbprint')]",
+            "thumbprintSecondary": "[parameters('secCertificateThumbprint')]",
+            "x509StoreName": "[parameters('certificateStoreValue')]"
+        },
+```
 
 #### 编辑模板文件，反映前面添加的新参数
 
@@ -93,24 +98,26 @@ ms.author: chackdan
 
 编辑 Resource Manager 模板参数文件，为 secCertificate 添加新参数，将现有的主要证书详细信息与辅助证书交换，然后将主要证书详细信息替换为新证书详细信息。
 
-        "secCertificateThumbprint": {
-          "value": "OLD Primary Certificate Thumbprint"
-        },
-       "secSourceVaultValue": {
-          "value": "OLD Primary Certificate Key Vault location"
-        },
-        "secCertificateUrlValue": {
-          "value": "OLD Primary Certificate location in the key vault"
-         },
-        "certificateThumbprint": {
-          "value": "New Certificate Thumbprint"
-        },
-        "sourceVaultValue": {
-          "value": "New Certificate Key Vault location"
-        },
-        "certificateUrlValue": {
-          "value": "New Certificate location in the key vault"
-         },
+```
+    "secCertificateThumbprint": {
+      "value": "OLD Primary Certificate Thumbprint"
+    },
+   "secSourceVaultValue": {
+      "value": "OLD Primary Certificate Key Vault location"
+    },
+    "secCertificateUrlValue": {
+      "value": "OLD Primary Certificate location in the key vault"
+     },
+    "certificateThumbprint": {
+      "value": "New Certificate Thumbprint"
+    },
+    "sourceVaultValue": {
+      "value": "New Certificate Key Vault location"
+    },
+    "certificateUrlValue": {
+      "value": "New Certificate location in the key vault"
+     },
+```
 
 ### 将模板部署到 Azure
 
@@ -122,47 +129,59 @@ ms.author: chackdan
 
 部署模板之前先进行测试。使用群集当前部署到的同一个资源组。
 
-    Test-AzureRmResourceGroupDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
+```
+Test-AzureRmResourceGroupDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
+```
 
 将模板部署到该资源组。使用群集当前部署到的同一个资源组。运行 New-AzureRmResourceGroupDeployment 命令。无需指定模式，因为默认值为 **incremental**。
 
 >[!NOTE]
 如果将 Mode 设置为 Complete，可能会无意中删除不在模板中的资源。因此请不要在此方案中使用该模式。
-   
-    New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
+
+```
+New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
+```
 
 下面是已填充数据的同一个 Powershell 命令示例。
 
-    $ResouceGroup2 = "chackosecure5"
-    $TemplateFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure_Step2.json"
-    $TemplateParmFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure.parameters_Step2.json"
+```
+$ResouceGroup2 = "chackosecure5"
+$TemplateFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure_Step2.json"
+$TemplateParmFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure.parameters_Step2.json"
 
-    New-AzureRmResourceGroupDeployment -ResourceGroupName $ResouceGroup2 -TemplateParameterFile $TemplateParmFile -TemplateUri $TemplateFile -clusterName $ResouceGroup2
+New-AzureRmResourceGroupDeployment -ResourceGroupName $ResouceGroup2 -TemplateParameterFile $TemplateParmFile -TemplateUri $TemplateFile -clusterName $ResouceGroup2
+```
 
 部署完成后，使用新证书连接到群集，然后执行一些查询。如果能够执行这些查询，则可以删除旧的主要证书。
 
 如果使用自签名证书，请务必将它们导入本地 TrustedPeople 证书存储。
 
-    ######## Set up the certs on your local box
-    Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\TrustedPeople -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
-    Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
+```
+######## Set up the certs on your local box
+Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\TrustedPeople -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
+Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
+```
 
 以下快速参考提供了用于连接到安全群集的命令
 
-    $ClusterName= "chackosecure5.chinaeast.chinacloudapp.cn:19000"
-    $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7SD1D630F8F3" 
+```
+$ClusterName= "chackosecure5.chinaeast.chinacloudapp.cn:19000"
+$CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7SD1D630F8F3" 
 
-    Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveIntervalInSec 10 `
-        -X509Credential `
-        -ServerCertThumbprint $CertThumbprint  `
-        -FindType FindByThumbprint `
-        -FindValue $CertThumbprint `
-        -StoreLocation CurrentUser `
-        -StoreName My
+Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveIntervalInSec 10 `
+    -X509Credential `
+    -ServerCertThumbprint $CertThumbprint  `
+    -FindType FindByThumbprint `
+    -FindValue $CertThumbprint `
+    -StoreLocation CurrentUser `
+    -StoreName My
+```
 
 以下快速参考提供了用于获取群集运行状况的命令
 
-    Get-ServiceFabricClusterHealth 
+```
+Get-ServiceFabricClusterHealth 
+```
 
 ## 使用门户删除旧证书
 下面是删除旧证书，以使群集不使用它的过程：

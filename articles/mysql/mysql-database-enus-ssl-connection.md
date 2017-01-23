@@ -49,7 +49,8 @@ Once the connection is successful, you can use the status command to view the cl
 
 ![Verification][6]
 
->[!NOTE] **MySQL on Azure created an SSL secure connection between the proxy server and the client, so while SSL-related global variables or session variables on the server remain set to DISABLED, the entire communication process has actually already been encrypted with TLSv1.**
+>[!NOTE]
+> **MySQL on Azure created an SSL secure connection between the proxy server and the client, so while SSL-related global variables or session variables on the server remain set to DISABLED, the entire communication process has actually already been encrypted with TLSv1.**
 
 Using MySQL Workbench as an example, use the **Parameters** tab to set up the connection string for accessing the database, as shown in the following image.
 

@@ -35,17 +35,17 @@ Azure 媒体分析可让开发人员快速学会如何在有限范围内使用�
 ## Azure 媒体分析服务
 
 - **Indexer** — Azure Media Indexer 能使内容可搜索，以及生成隐藏式字幕跟踪。
- 
+
 - **Hyperlapse** — Microsoft Hyperlapse 是 Microsoft Research (MSR) 20 多年以来在计算机视觉研究上获取的成果，它结合了视频稳定化和缩时功能，可从长格式内容创建快速可用的优美视频。除了创建缩时视频，你还可以使用 Hyperlapse 将通过手机和摄影机拍摄的不稳定视频创建稳定的视频。有关详细信息和示例，请参阅[使用 Azure Media Hyperlapse 创建 Hyperlapse 媒体文件](./media-services-hyperlapse-content.md)
- 
+
 - **动作检测** — 可以使用此服务来检测具有固定背景的视频中的动作。对于想要检查监视视频摘要上由监控摄影机检测到的动作事件是否存在误报的客户，此功能非常合适。有关详细信息和示例，请参阅 [Azure 媒体分析的动作检测](./media-services-motion-detection.md)。
- 
+
 - **面部检测和面部情绪** — 使用此服务可以检测人的面部和情绪，包括快乐、悲伤、惊讶、生气、藐视、恐惧、厌恶与冷漠/淡定。此服务具有如下所述的多个有用行业应用程序，包括聚合与分析参与事件的人员的反应。有关详细信息和示例，请参阅 [Azure 媒体分析的面部和情绪检测](./media-services-face-and-emotion-detection.md)。
- 
+
 - **视频摘要** — 视频摘要可通过自动选择来自源视频的有趣片段帮助你创建长视频的摘要。当你要提供有关长视频内容的快速概述时，这很有用。有关详细信息和示例，请参阅[使用 Azure 媒体视频缩略图创建视频摘要](./media-services-video-summarization.md)
 
 - **光学字符识别** — Azure 媒体分析 OCR（光学字符识别）可让你将视频文件中的文本内容转换成可编辑、可搜索的数字文本。这可让你从媒体的视频信号中自动提取有意义的元数据。
- 
+
 - **可缩放的面部修订** - **Azure 媒体修订器**是一种 Azure 媒体分析 (MP)，可用于在云中进行可缩放的面部修订。使用面部修订，可对视频进行修改，使所选个人的面部模糊显示。用户可能想要在公共安全和新闻媒体场景中使用面部修订服务。对于时长仅几分钟但包含多张面孔的镜头，进行手动面部修订可能需要几个小时，但使用此服务仅需几个简单步骤即可完成该过程。有关详细信息，请参阅[此](./media-services-face-redaction.md)文章。
 
 ## 常见方案
@@ -73,51 +73,57 @@ Azure 媒体分析可让开发人员快速学会如何在有限范围内使用�
 ### .NET
 以下函数采用其中一个指定的 MP 名称，并返回 MP 对象。
 
-    static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
-    {
-        var processor = _context.MediaProcessors
-            .Where(p => p.Name == mediaProcessorName)
-            .ToList()
-            .OrderBy(p => new Version(p.Version))
-            .LastOrDefault();
+```
+static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
+{
+    var processor = _context.MediaProcessors
+        .Where(p => p.Name == mediaProcessorName)
+        .ToList()
+        .OrderBy(p => new Version(p.Version))
+        .LastOrDefault();
 
-        if (processor == null)
-            throw new ArgumentException(string.Format("Unknown media processor",
-                                                       mediaProcessorName));
+    if (processor == null)
+        throw new ArgumentException(string.Format("Unknown media processor",
+                                                   mediaProcessorName));
 
-        return processor;
-    }
+    return processor;
+}
+```
 
 ## REST
 请求：
 
-    GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/MediaProcessors()?$filter=Name%20eq%20'Azure%20Media%20OCR' HTTP/1.1
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    User-Agent: Microsoft ADO.NET Data Services
-    Authorization: Bearer <token>
-    x-ms-version: 2.12
-    Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+```
+GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/MediaProcessors()?$filter=Name%20eq%20'Azure%20Media%20OCR' HTTP/1.1
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+User-Agent: Microsoft ADO.NET Data Services
+Authorization: Bearer <token>
+x-ms-version: 2.12
+Host: wamsshaclus001rest-hs.chinacloudapp.cn
+```
+
 响应：
-        
-    . . .
-    
-    {  
-       "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#MediaProcessors",
-       "value":[  
-          {  
-             "Id":"nb:mpid:UUID:074c3899-d9fb-448f-9ae1-4ebcbe633056",
-             "Description":"Azure Media OCR",
-             "Name":"Azure Media OCR",
-             "Sku":"",
-             "Vendor":"Microsoft",
-             "Version":"1.1"
-          }
-       ]
-    }
+
+```
+. . .
+
+{  
+   "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#MediaProcessors",
+   "value":[  
+      {  
+         "Id":"nb:mpid:UUID:074c3899-d9fb-448f-9ae1-4ebcbe633056",
+         "Description":"Azure Media OCR",
+         "Name":"Azure Media OCR",
+         "Sku":"",
+         "Vendor":"Microsoft",
+         "Version":"1.1"
+      }
+   ]
+}
+```
 
 ## 演示
 [Azure Media Analytics demos（Azure 媒体分析演示）](http://azuremedialabs.azurewebsites.net/demos/Analytics.html)
@@ -125,7 +131,7 @@ Azure 媒体分析可让开发人员快速学会如何在有限范围内使用�
 ##相关文章
 
 [Azure 媒体服务公告](https://azure.microsoft.com/blog/introducing-azure-media-analytics/)
-  
+
 <!-- Images -->
 
 [overview]: ./media/media-services-video-on-demand-workflow/media-services-video-on-demand.png

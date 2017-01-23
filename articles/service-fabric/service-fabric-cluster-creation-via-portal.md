@@ -1,4 +1,3 @@
-
 <!--preview portal-->
 
 ---
@@ -32,7 +31,8 @@ ms.author: vturecek
  - 通过 Azure 门户预览在 Azure 中创建安全群集。
  - 使用证书对管理员进行身份验证。
 
->[!NOTE] 有关更高级的安全选项（例如使用 Azure Active Directory 进行用户身份验证和设置应用程序安全证书），请参阅 [create your cluster using Azure Resource Manager][create-cluster-arm]（使用 Azure Resource Manager 创建群集）。
+>[!NOTE]
+> 有关更高级的安全选项（例如使用 Azure Active Directory 进行用户身份验证和设置应用程序安全证书），请参阅 [create your cluster using Azure Resource Manager][create-cluster-arm]（使用 Azure Resource Manager 创建群集）。
 
 安全的群集是防止未经授权访问管理操作的群集，这些操作包括部署、升级和删除应用程序、服务及其包含的数据。不安全的群集是任何人都可以随时连接并执行管理操作的群集。尽管可以创建不安全的群集，但**强烈建议创建安全的群集**。不安全的群集**无法在事后受到保护** - 要保护群集，必须创建新群集。
 
@@ -41,12 +41,16 @@ ms.author: vturecek
 
 登录到 Azure 帐户：
 
-    Login-AzureRmAccount -EnvironmentName AzureChinacloud
+```
+Login-AzureRmAccount -EnvironmentName AzureChinacloud
+```
 
 选择订阅：
 
-    Get-AzureRmSubscription
-    Set-AzureRmContext -SubscriptionId <guid>
+```
+Get-AzureRmSubscription
+Set-AzureRmContext -SubscriptionId <guid>
+```
 
 ## 设置密钥保管库
 
@@ -62,48 +66,54 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 第一个步骤是专门针对密钥保管库创建资源组。建议将密钥保管库放入其自身的资源组中，以便可以删除计算与存储资源组（例如包含 Service Fabric 群集的资源组），而不会丢失密钥和密码。包含密钥保管库的资源组必须与正在使用它的群集位于同一区域。
 
-        PS C:\Users\vturecek> New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
-        WARNING: The output object type of this cmdlet will be modified in a future release.
-    
-        ResourceGroupName : mycluster-keyvault
-        Location          : chinaeast
-        ProvisioningState : Succeeded
-        Tags              :
-        ResourceId        : /subscriptions/<guid>/resourceGroups/mycluster-keyvault
+```
+    PS C:\Users\vturecek> New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
+    WARNING: The output object type of this cmdlet will be modified in a future release.
+
+    ResourceGroupName : mycluster-keyvault
+    Location          : chinaeast
+    ProvisioningState : Succeeded
+    Tags              :
+    ResourceId        : /subscriptions/<guid>/resourceGroups/mycluster-keyvault
+```
 
 ### 创建密钥保管库 
 
 在新资源组中创建密钥保管库。**必须针对部署启用**密钥保管库，使 Service Fabric 资源提供程序能够从中获取证书并将其安装在群集节点上：
 
-        PS C:\Users\vturecek> New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
-    
-        Vault Name                       : myvault
-        Resource Group Name              : mycluster-keyvault
-        Location                         : China East
-        Resource ID                      : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
-        Vault URI                        : https://myvault.vault.chinacloudapi.cn
-        Tenant ID                        : <guid>
-        SKU                              : Standard
-        Enabled For Deployment?          : False
-        Enabled For Template Deployment? : False
-        Enabled For Disk Encryption?     : False
-        Access Policies                  :
-                                           Tenant ID                :    <guid>
-                                           Object ID                :    <guid>
-                                           Application ID           :
-                                           Display Name             :    
-                                           Permissions to Keys      :    get, create, delete, list, update, import, backup, restore
-                                           Permissions to Secrets   :    all
-    
-        Tags                             :
+```
+    PS C:\Users\vturecek> New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
+
+    Vault Name                       : myvault
+    Resource Group Name              : mycluster-keyvault
+    Location                         : China East
+    Resource ID                      : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+    Vault URI                        : https://myvault.vault.chinacloudapi.cn
+    Tenant ID                        : <guid>
+    SKU                              : Standard
+    Enabled For Deployment?          : False
+    Enabled For Template Deployment? : False
+    Enabled For Disk Encryption?     : False
+    Access Policies                  :
+                                       Tenant ID                :    <guid>
+                                       Object ID                :    <guid>
+                                       Application ID           :
+                                       Display Name             :    
+                                       Permissions to Keys      :    get, create, delete, list, update, import, backup, restore
+                                       Permissions to Secrets   :    all
+
+    Tags                             :
+```
 
 如果有现有的密钥保管库，可以使用 Azure CLI 针对部署启用该保管库：
 
-    > azure login -e AzureChinaCloud
-    > azure account set "your account"
-    > azure config mode arm 
-    > azure keyvault list
-    > azure keyvault set-policy --vault-name "your vault name" --enabled-for-deployment true
+```
+> azure login -e AzureChinaCloud
+> azure account set "your account"
+> azure config mode arm 
+> azure keyvault list
+> azure keyvault set-policy --vault-name "your vault name" --enabled-for-deployment true
+```
 
 ## 将证书添加到密钥保管库
 
@@ -112,7 +122,7 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 ### 群集和服务器证书（必需） 
 
 需要使用此证书来保护群集以及防止未经授权访问群集。此证书通过多种方式保护群集：
- 
+
  - **群集身份验证：**在群集联合的情况下对节点间的通信进行身份验证。只有可以使用此证书自我证明身份的节点才能加入群集。
  - **服务器身份验证：**在管理客户端上对群集管理终结点进行身份验证，使管理客户端知道它正在与真正的群集通信。此证书还通过 HTTPS 为 HTTPS 管理 API 和 Service Fabric Explorer 提供 SSL。
 
@@ -128,7 +138,8 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 无需将客户端身份验证证书上载到密钥保管库即可使用 Service Fabric。只需将这些证书提供给有权管理群集的用户。
 
->[!NOTE] 建议使用 Azure Active Directory 对执行群集管理操作的客户端进行身份验证。若要使用 Azure Active Directory，必须[使用 Azure Resource Manager 创建群集][create-cluster-arm]。
+>[!NOTE]
+> 建议使用 Azure Active Directory 对执行群集管理操作的客户端进行身份验证。若要使用 Azure Active Directory，必须[使用 Azure Resource Manager 创建群集][create-cluster-arm]。
 
 ### 应用程序证书（可选）
 
@@ -152,23 +163,25 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 此 PowerShell 模块中的 `Invoke-AddCertToKeyVault` 命令自动将证书私钥的格式设置为 JSON 字符串，并将它上载到密钥保管库。使用该字符串可将群集证书与任何其他应用程序证书添加到密钥保管库。针对要在群集中安装的其他任何证书重复此步骤。
 
-    PS C:\Users\vturecek> Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
-    
-        Switching context to SubscriptionId <guid>
-        Ensuring ResourceGroup mycluster-keyvault in China East
-        WARNING: The output object type of this cmdlet will be modified in a future release.
-        Using existing valut myvault in China East
-        Reading pfx file from C:\path\to\key.pfx
-        Writing secret to myvault in vault myvault
-    
-    Name  : CertificateThumbprint
-    Value : <value>
+```
+PS C:\Users\vturecek> Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
 
-    Name  : SourceVault
-    Value : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+    Switching context to SubscriptionId <guid>
+    Ensuring ResourceGroup mycluster-keyvault in China East
+    WARNING: The output object type of this cmdlet will be modified in a future release.
+    Using existing valut myvault in China East
+    Reading pfx file from C:\path\to\key.pfx
+    Writing secret to myvault in vault myvault
 
-    Name  : CertificateURL
-    Value : https://myvault.vault.chinalcoudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
+Name  : CertificateThumbprint
+Value : <value>
+
+Name  : SourceVault
+Value : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+
+Name  : CertificateURL
+Value : https://myvault.vault.chinalcoudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
+```
 
 这就是配置 Service Fabric 群集 Resource Manager 模板时所要满足的所有密钥保管库先决条件。该模板可安装用于节点身份验证、管理终结点安全性与身份验证以及使用 X.509 证书的其他任何应用程序安全功能的证书。此时，应已在 Azure 中设置以下各项：
 
@@ -206,7 +219,8 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
  4. 创建**新的资源组**。最好让它与群集同名，这样稍后就可以轻松找到它们，在尝试更改部署或删除群集时非常有用。
 
-    >[!NOTE] 尽管你可以决定使用现有资源组，但最好还是创建新的资源组。这样可以轻松删除不需要的群集。
+    >[!NOTE]
+    > 尽管你可以决定使用现有资源组，但最好还是创建新的资源组。这样可以轻松删除不需要的群集。
 
  5. 选择要在其中创建群集的**区域**。必须使用密钥保管库所在的同一区域。
 
@@ -216,7 +230,8 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 配置群集节点。节点类型定义 VM 大小、VM 数目及其属性。群集可以有不只一个节点类型，但主节点类型（在门户定义的第一个节点类型）必须至少有 5 个 VM，因为这是 Service Fabric 系统服务放置到的节点类型。不需要配置“放置属性”，因为系统会自动添加了“NodeTypeName”的默认放置属性。
 
-   >[!NOTE] 具有多个节点类型的常见情景是包含前端服务和后端服务的应用程序。要将前端服务放在端口向 Internet 开放的较小型 VM（D2 等 VM 大小）上，同时要将后端服务放在没有向 Internet 开放端口的较大型 VM（D4、D6、D15 等 VM 大小）上。
+   >[!NOTE]
+   > 具有多个节点类型的常见情景是包含前端服务和后端服务的应用程序。要将前端服务放在端口向 Internet 开放的较小型 VM（D2 等 VM 大小）上，同时要将后端服务放在没有向 Internet 开放端口的较大型 VM（D4、D6、D15 等 VM 大小）上。
 
  1. 选择节点类型的名称（1 到 12 个字符，只能包含字母和数字）。
 
@@ -234,7 +249,8 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
  9. 选择要为群集设置的结构升级模式。如果要让系统自动选择最新可用的版本并尝试将群集升级到此版本，请选择“自动”。如果要选择支持的版本，请将模式设置为“手动”。
 
->[!NOTE] 仅支持运行受支持 Service Fabric 版本的群集。如果选择“手动”模式，则需要自行负责将群集升级到支持的版本。有关结构升级模式的详细信息，请参阅 [service-fabric-cluster-upgrade 文档][service-fabric-cluster-upgrade]。
+>[!NOTE]
+> 仅支持运行受支持 Service Fabric 版本的群集。如果选择“手动”模式，则需要自行负责将群集升级到支持的版本。有关结构升级模式的详细信息，请参阅 [service-fabric-cluster-upgrade 文档][service-fabric-cluster-upgrade]。
 
 #### 3\.“安全”
 
@@ -277,7 +293,8 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 群集仪表板边栏选项卡上的“节点监视器”部分显示运行正常和不正常的 VM 的数目。若要了解有关群集运行状况的详细信息，请参阅 [Service Fabric health model introduction][service-fabric-health-introduction]（Service Fabric 运行状况模型简介）。
 
->[!NOTE] Service Fabric 群集需要有一定数量的节点可随时启动，以保持可用性和状态 - 称为“维持仲裁”。因此，除非已事先执行[状态的完整备份][service-fabric-reliable-services-backup-restore]，否则关闭群集中的所有计算机通常是不安全的做法。
+>[!NOTE]
+> Service Fabric 群集需要有一定数量的节点可随时启动，以保持可用性和状态 - 称为“维持仲裁”。因此，除非已事先执行[状态的完整备份][service-fabric-reliable-services-backup-restore]，否则关闭群集中的所有计算机通常是不安全的做法。
 
 ## 远程连接到虚拟机规模集实例或群集节点
 

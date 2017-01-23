@@ -22,7 +22,8 @@ ms.author: jgao
 
 学习如何使用 Azure PowerShell 提交 MapReduce 和 Hive 作业，以及如何使用 HDInsight .NET SDK 提交 MapReduce、Hadoop 流式处理和 Hive 作业。
 
-> [!NOTE] 这篇文章的步骤必须在 Windows 客户端使用。关于在 HDInsight 把 Linux, OS X 或者 Unix 客户端与 MapReduce, Hive 或者 Pig 一起使用，请查看以下文章，并选择 “Curl” 链接。
+> [!NOTE]
+> 这篇文章的步骤必须在 Windows 客户端使用。关于在 HDInsight 把 Linux, OS X 或者 Unix 客户端与 MapReduce, Hive 或者 Pig 一起使用，请查看以下文章，并选择 “Curl” 链接。
 ><p> - [在 HDInsight 使用 Hive](./hdinsight-use-hive.md)
 ><p> - [在 HDInsight 使用 Pig](./hdinsight-use-pig.md)
 ><p> - [在 HDInsight 使用 MapReduce](./hdinsight-use-mapreduce.md)
@@ -58,131 +59,135 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 1. 在 Visual Studio 中创建 C# 控制台应用程序。
 2. 通过 Nuget 包管理器控制台运行以下命令。
 
-        Install-Package Microsoft.Azure.Management.HDInsight.Job -Pre
+    ```
+    Install-Package Microsoft.Azure.Management.HDInsight.Job -Pre
+    ```
 
 2. 使用以下代码：
 
-        using System.Collections.Generic;
-        using System.Security;
-        using Microsoft.Azure.Management.HDInsight.Job;
-        using Microsoft.Azure.Management.HDInsight.Job.Models;
-        using Hyak.Common;
-        
-        namespace SubmitHDInsightJobDotNet
+    ```
+    using System.Collections.Generic;
+    using System.Security;
+    using Microsoft.Azure.Management.HDInsight.Job;
+    using Microsoft.Azure.Management.HDInsight.Job.Models;
+    using Hyak.Common;
+
+    namespace SubmitHDInsightJobDotNet
+    {
+        class Program
         {
-            class Program
+            private static HDInsightJobManagementClient _hdiJobManagementClient;
+
+            private const string ExistingClusterName = "<Your HDInsight Cluster Name>";
+            private const string ExistingClusterUri = ExistingClusterName + ".azurehdinsight.cn";
+            private const string ExistingClusterUsername = "<Cluster Username>";
+            private const string ExistingClusterPassword = "<Cluster User Password>";
+
+            static void Main(string[] args)
             {
-                private static HDInsightJobManagementClient _hdiJobManagementClient;
+                System.Console.WriteLine("Running");
 
-                private const string ExistingClusterName = "<Your HDInsight Cluster Name>";
-                private const string ExistingClusterUri = ExistingClusterName + ".azurehdinsight.cn";
-                private const string ExistingClusterUsername = "<Cluster Username>";
-                private const string ExistingClusterPassword = "<Cluster User Password>";
+                var tokenCreds = GetTokenCloudCredentials();
+                var subCloudCredentials = GetSubscriptionCloudCredentials(tokenCreds, SubscriptionId);
 
-                static void Main(string[] args)
+                var clusterCredentials = new BasicAuthenticationCloudCredentials { Username = ExistingClusterUsername, Password = ExistingClusterPassword };
+                _hdiJobManagementClient = new HDInsightJobManagementClient(ExistingClusterUri, clusterCredentials);
+
+                SubmitHiveJob();
+                SubmitPigJob();
+                SubmitSqoopJob();
+            }
+
+            private static void SubmitPigJob()
+            {
+                var parameters = new PigJobSubmissionParameters
                 {
-                    System.Console.WriteLine("Running");
-        
-                    var tokenCreds = GetTokenCloudCredentials();
-                    var subCloudCredentials = GetSubscriptionCloudCredentials(tokenCreds, SubscriptionId);
+                    Query = @"LOGS = LOAD 'wasbs:///example/data/sample.log';
+                        LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
+                        FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
+                        GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
+                        FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
+                        RESULT = order FREQUENCIES by COUNT desc;
+                        DUMP RESULT;"
+                };
 
-                    var clusterCredentials = new BasicAuthenticationCloudCredentials { Username = ExistingClusterUsername, Password = ExistingClusterPassword };
-                    _hdiJobManagementClient = new HDInsightJobManagementClient(ExistingClusterUri, clusterCredentials);
-        
-                    SubmitHiveJob();
-                    SubmitPigJob();
-                    SubmitSqoopJob();
+                System.Console.WriteLine("Submitting the Pig job to the cluster...");
+                var response = _hdiJobManagementClient.JobManagement.SubmitPigJob(parameters);
+                System.Console.WriteLine("Validating that the response is as expected...");
+                System.Console.WriteLine("Response status code is " + response.StatusCode);
+                System.Console.WriteLine("Validating the response object...");
+                System.Console.WriteLine("JobId is " + response.JobSubmissionJsonResponse.Id);
+            }
+
+            private static void SubmitHiveJob()
+            {
+                Dictionary<string, string> defines = new Dictionary<string, string> { { "hive.execution.engine", "ravi" }, { "hive.exec.reducers.max", "1" } };
+                List<string> args = new List<string> { { "argA" }, { "argB" } };
+                var parameters = new HiveJobSubmissionParameters
+                {
+                    Query = "SHOW TABLES",
+                    Defines = defines,
+                    Arguments = args
+                };
+
+                Console.WriteLine("Submitting the Hive job to the cluster...");
+                var jobResponse = _hdiJobManagementClient.JobManagement.SubmitHiveJob(parameters);
+                var jobId = jobResponse.JobSubmissionJsonResponse.Id;
+                Console.WriteLine("Validating that the response is as expected...");
+                Console.WriteLine("Response status code is " + jobResponse.StatusCode);
+                Console.WriteLine("Validating the response object...");
+                Console.WriteLine("JobId is " + jobId);
+
+                Console.WriteLine("Waiting for the job completion ...");
+
+                // Wait for job completion
+                var jobDetail = _hdiJobManagementClient.JobManagement.GetJob(jobId).JobDetail;
+                while (!jobDetail.Status.JobComplete)
+                {
+                    Thread.Sleep(1000);
+                    jobDetail = _hdiJobManagementClient.JobManagement.GetJob(jobId).JobDetail;
                 }
 
-                private static void SubmitPigJob()
+                // Get job output
+                var storageAccess = new AzureStorageAccess(DefaultStorageAccountName, DefaultStorageAccountKey,
+                    DefaultStorageContainerName);
+                var output = (jobDetail.ExitValue == 0)
+                    ? _hdiJobManagementClient.JobManagement.GetJobOutput(jobId, storageAccess) // fetch stdout output in case of success
+                    : _hdiJobManagementClient.JobManagement.GetJobErrorLogs(jobId, storageAccess); // fetch stderr output in case of failure
+            }
+
+            private static void SubmitSqoopJob()
+            {
+                var sqlDatabaseServerName = "<SQLDatabaseServerName>";
+                var sqlDatabaseLogin = "<SQLDatabaseLogin>";
+                var sqlDatabaseLoginPassword = "<SQLDatabaseLoginPassword>";
+                var sqlDatabaseDatabaseName = "<DatabaseName>";
+
+                var tableName = "<TableName>";
+                var exportDir = "/tutorials/usesqoop/data";
+
+                // Connection string for using Azure SQL Database.
+                // Comment if using SQL Server
+                var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ".database.chinacloudapi.cn;user=" + sqlDatabaseLogin + "@" + sqlDatabaseServerName + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
+                // Connection string for using SQL Server.
+                // Uncomment if using SQL Server
+                //var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ";user=" + sqlDatabaseLogin + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
+
+                var parameters = new SqoopJobSubmissionParameters
                 {
-                    var parameters = new PigJobSubmissionParameters
-                    {
-                        Query = @"LOGS = LOAD 'wasbs:///example/data/sample.log';
-                            LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
-                            FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
-                            GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
-                            FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
-                            RESULT = order FREQUENCIES by COUNT desc;
-                            DUMP RESULT;"
-                    };
-        
-                    System.Console.WriteLine("Submitting the Pig job to the cluster...");
-                    var response = _hdiJobManagementClient.JobManagement.SubmitPigJob(parameters);
-                    System.Console.WriteLine("Validating that the response is as expected...");
-                    System.Console.WriteLine("Response status code is " + response.StatusCode);
-                    System.Console.WriteLine("Validating the response object...");
-                    System.Console.WriteLine("JobId is " + response.JobSubmissionJsonResponse.Id);
-                }
-        
-                private static void SubmitHiveJob()
-                {
-                    Dictionary<string, string> defines = new Dictionary<string, string> { { "hive.execution.engine", "ravi" }, { "hive.exec.reducers.max", "1" } };
-                    List<string> args = new List<string> { { "argA" }, { "argB" } };
-                    var parameters = new HiveJobSubmissionParameters
-                    {
-                        Query = "SHOW TABLES",
-                        Defines = defines,
-                        Arguments = args
-                    };
-        
-                    Console.WriteLine("Submitting the Hive job to the cluster...");
-                    var jobResponse = _hdiJobManagementClient.JobManagement.SubmitHiveJob(parameters);
-                    var jobId = jobResponse.JobSubmissionJsonResponse.Id;
-                    Console.WriteLine("Validating that the response is as expected...");
-                    Console.WriteLine("Response status code is " + jobResponse.StatusCode);
-                    Console.WriteLine("Validating the response object...");
-                    Console.WriteLine("JobId is " + jobId);
-        
-                    Console.WriteLine("Waiting for the job completion ...");
-        
-                    // Wait for job completion
-                    var jobDetail = _hdiJobManagementClient.JobManagement.GetJob(jobId).JobDetail;
-                    while (!jobDetail.Status.JobComplete)
-                    {
-                        Thread.Sleep(1000);
-                        jobDetail = _hdiJobManagementClient.JobManagement.GetJob(jobId).JobDetail;
-                    }
-        
-                    // Get job output
-                    var storageAccess = new AzureStorageAccess(DefaultStorageAccountName, DefaultStorageAccountKey,
-                        DefaultStorageContainerName);
-                    var output = (jobDetail.ExitValue == 0)
-                        ? _hdiJobManagementClient.JobManagement.GetJobOutput(jobId, storageAccess) // fetch stdout output in case of success
-                        : _hdiJobManagementClient.JobManagement.GetJobErrorLogs(jobId, storageAccess); // fetch stderr output in case of failure
-                }
-        
-                private static void SubmitSqoopJob()
-                {
-                    var sqlDatabaseServerName = "<SQLDatabaseServerName>";
-                    var sqlDatabaseLogin = "<SQLDatabaseLogin>";
-                    var sqlDatabaseLoginPassword = "<SQLDatabaseLoginPassword>";
-                    var sqlDatabaseDatabaseName = "<DatabaseName>";
-        
-                    var tableName = "<TableName>";
-                    var exportDir = "/tutorials/usesqoop/data";
-        
-                    // Connection string for using Azure SQL Database.
-                    // Comment if using SQL Server
-                    var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ".database.chinacloudapi.cn;user=" + sqlDatabaseLogin + "@" + sqlDatabaseServerName + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
-                    // Connection string for using SQL Server.
-                    // Uncomment if using SQL Server
-                    //var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ";user=" + sqlDatabaseLogin + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
-        
-                    var parameters = new SqoopJobSubmissionParameters
-                    {
-                        Command = "export --connect " + connectionString + " --table " + tableName + "_mobile --export-dir " + exportDir + "_mobile --fields-terminated-by \\t -m 1"
-                    };
-        
-                    System.Console.WriteLine("Submitting the Sqoop job to the cluster...");
-                    var response = _hdiJobManagementClient.JobManagement.SubmitSqoopJob(parameters);
-                    System.Console.WriteLine("Validating that the response is as expected...");
-                    System.Console.WriteLine("Response status code is " + response.StatusCode);
-                    System.Console.WriteLine("Validating the response object...");
-                    System.Console.WriteLine("JobId is " + response.JobSubmissionJsonResponse.Id);
-                }
+                    Command = "export --connect " + connectionString + " --table " + tableName + "_mobile --export-dir " + exportDir + "_mobile --fields-terminated-by \\t -m 1"
+                };
+
+                System.Console.WriteLine("Submitting the Sqoop job to the cluster...");
+                var response = _hdiJobManagementClient.JobManagement.SubmitSqoopJob(parameters);
+                System.Console.WriteLine("Validating that the response is as expected...");
+                System.Console.WriteLine("Response status code is " + response.StatusCode);
+                System.Console.WriteLine("Validating the response object...");
+                System.Console.WriteLine("JobId is " + response.JobSubmissionJsonResponse.Id);
             }
         }
+    }
+    ```
 
 5. 按 **F5** 运行应用程序。
 

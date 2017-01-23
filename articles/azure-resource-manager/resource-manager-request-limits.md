@@ -46,47 +46,59 @@ ms.author: tomfitz
 
 例如，在 **C#** 中，可以使用以下代码从名为 **response** 的 **HttpWebResponse** 对象检索标头值：
 
-    response.Headers.GetValues("x-ms-ratelimit-remaining-subscription-reads").GetValue(0)
+```
+response.Headers.GetValues("x-ms-ratelimit-remaining-subscription-reads").GetValue(0)
+```
 
 在 **PowerShell** 中，可以通过 Invoke-WebRequest 操作检索标头值。
 
-    $r = Invoke-WebRequest -Uri https://management.chinacloudapi.cn/subscriptions/{guid}/resourcegroups?api-version=2016-09-01 -Method GET -Headers $authHeaders
-    $r.Headers["x-ms-ratelimit-remaining-subscription-reads"]
+```
+$r = Invoke-WebRequest -Uri https://management.chinacloudapi.cn/subscriptions/{guid}/resourcegroups?api-version=2016-09-01 -Method GET -Headers $authHeaders
+$r.Headers["x-ms-ratelimit-remaining-subscription-reads"]
+```
 
 或者，如果需要查看剩余请求数以便进行调试，可在 **PowerShell** cmdlet 中提供 **-Debug** 参数。
 
-    Get-AzureRmResourceGroup -Debug
+```
+Get-AzureRmResourceGroup -Debug
+```
 
 这会返回大量的信息，包括以下响应值：
 
-    ...
-    DEBUG: ============================ HTTP RESPONSE ============================
+```
+...
+DEBUG: ============================ HTTP RESPONSE ============================
 
-    Status Code:
-    OK
+Status Code:
+OK
 
-    Headers:
-    Pragma                        : no-cache
-    x-ms-ratelimit-remaining-subscription-reads: 14999
-    ...
+Headers:
+Pragma                        : no-cache
+x-ms-ratelimit-remaining-subscription-reads: 14999
+...
+```
 
 在 **Azure CLI** 中，可以使用更详细的选项检索标头值。
 
-    azure group list -vv --json
+```
+azure group list -vv --json
+```
 
 这会返回大量的信息，包括以下对象：
 
+```
+...
+silly: returnObject
+{
+  "statusCode": 200,
+  "header": {
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "content-type": "application/json; charset=utf-8",
+    "expires": "-1",
+    "x-ms-ratelimit-remaining-subscription-reads": "14998",
     ...
-    silly: returnObject
-    {
-      "statusCode": 200,
-      "header": {
-        "cache-control": "no-cache",
-        "pragma": "no-cache",
-        "content-type": "application/json; charset=utf-8",
-        "expires": "-1",
-        "x-ms-ratelimit-remaining-subscription-reads": "14998",
-        ...
+```
 
 ## 在发送下一请求之前等待
 达到请求限制时，Resource Manager 会返回 **429** HTTP 状态代码以及标头中的 **Retry-After** 值。**Retry-After** 值指定应用程序在发送下一请求之前应等待（或睡眠）的秒数。如果在重试值所对应的时间尚未用完之前发送请求，则系统不会处理该请求，而会返回新的重试值。

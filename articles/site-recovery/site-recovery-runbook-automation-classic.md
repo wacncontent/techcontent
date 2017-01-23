@@ -64,10 +64,10 @@ ms.author: ruturajd@microsoft.com
 1. 在 Azure 自动化“资产”中添加新设置 ![](./media/site-recovery-runbook-automation/04.png) 并选择 ![](./media/site-recovery-runbook-automation/05.png)
 2. 选择“字符串”作为变量类型
 3. 指定 **AzureSubscriptionName** 作为变量名称
-   
+
    ![](./media/site-recovery-runbook-automation/06.png)
 4. 指定你的实际 Azure 订阅名称作为变量值。
-   
+
    ![](./media/site-recovery-runbook-automation/07_1.png)
 
 可从 Azure 门户上的帐户设置页中找到订阅名称。
@@ -78,7 +78,7 @@ Azure 自动化使用 Azure PowerShell 连接到订阅，并对该处的项目�
 1. 在 Azure 自动化“资产”中添加新设置 ![](./media/site-recovery-runbook-automation/04.png) 并选择 ![](./media/site-recovery-runbook-automation/09.png)
 2. 选择“Windows PowerShell 凭据”作为凭据类型
 3. 指定 **AzureCredential** 作为名称
-   
+
    ![](./media/site-recovery-runbook-automation/10.png)
 4. 指定用于登录的用户名和密码。
 
@@ -95,23 +95,25 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 
 下面是上下文变量形式的示例。
 
-        {"RecoveryPlanName":"hrweb-recovery",
+```
+    {"RecoveryPlanName":"hrweb-recovery",
 
-        "FailoverType":"Test",
+    "FailoverType":"Test",
 
-        "FailoverDirection":"PrimaryToSecondary",
+    "FailoverDirection":"PrimaryToSecondary",
 
-        "GroupId":"1",
+    "GroupId":"1",
 
-        "VmMap":{"7a1069c6-c1d6-49c5-8c5d-33bfce8dd183":
+    "VmMap":{"7a1069c6-c1d6-49c5-8c5d-33bfce8dd183":
 
-                {"CloudServiceName":"pod02hrweb-Chicago-test",
+            {"CloudServiceName":"pod02hrweb-Chicago-test",
 
-                "RoleName":"Fabrikam-Hrweb-frontend-test"}
+            "RoleName":"Fabrikam-Hrweb-frontend-test"}
 
-                }
+            }
 
-        }
+    }
+```
 
 下表包含上下文中每个变量的名称和说明。
 
@@ -134,97 +136,107 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 现在，请创建用于在前端虚拟机上打开端口 80 的 Runbook。
 
 1. 在 Azure 自动化帐户中使用名称 **OpenPort80** 创建一个新的 Runbook
-   
+
    ![](./media/site-recovery-runbook-automation/14.png)
 2. 导航到 Runbook 的“创作”视图，并进入草稿模式。
 3. 首先指定要用作恢复计划上下文的变量
-   
-           param (
-               [Object]$RecoveryPlanContext
-           )
-   
+
+    ```
+       param (
+           [Object]$RecoveryPlanContext
+       )
+    ```
+
 4. 接下来，使用凭据和订阅名称连接到订阅
-   
-           $Cred = Get-AutomationPSCredential -Name 'AzureCredential'
-   
-           # Connect to Azure
-           $AzureAccount = Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred
-           $AzureSubscriptionName = Get-AutomationVariable –Name ‘AzureSubscriptionName’
-           Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
+
+    ```
+       $Cred = Get-AutomationPSCredential -Name 'AzureCredential'
+
+       # Connect to Azure
+       $AzureAccount = Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred
+       $AzureSubscriptionName = Get-AutomationVariable –Name ‘AzureSubscriptionName’
+       Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
+    ```
 
    请注意，此处使用了 Azure 资产 – **AzureCredential** 和 **AzureSubscriptionName**。
 5. 现在，请指定终结点详细信息和你要公开其终结点的虚拟机的 GUID。在本例中为前端虚拟机。
-   
-           # Specify the parameters to be used by the script
-           $AEProtocol = "TCP"
-           $AELocalPort = 80
-           $AEPublicPort = 80
-           $AEName = "Port 80 for HTTP"
-           $VMGUID = "7a1069c6-c1d6-49c5-8c5d-33bfce8dd183"
+
+    ```
+       # Specify the parameters to be used by the script
+       $AEProtocol = "TCP"
+       $AELocalPort = 80
+       $AEPublicPort = 80
+       $AEName = "Port 80 for HTTP"
+       $VMGUID = "7a1069c6-c1d6-49c5-8c5d-33bfce8dd183"
+    ```
 
    这将指定 Azure 终结点协议、VM 上的本地端口及其映射的公共端口。这些变量是向 VM 添加终结点的 Azure 命令所需的参数。VMGUID 包含你要对其执行操作的虚拟机的 GUID。
 6. 现在，脚本提取给定 VM GUID 的上下文，并在它引用的虚拟机上创建终结点。
-   
-           #Read the VM GUID from the context
-           $VM = $RecoveryPlanContext.VmMap.$VMGUID
-   
-           if ($VM -ne $null)
-           {
-               # Invoke pipeline commands within an InlineScript
-   
-               $EndpointStatus = InlineScript {
-                   # Invoke the necessary pipeline commands to add a Azure Endpoint to a specified Virtual Machine
-                   # Commands include: Get-AzureVM | Add-AzureEndpoint | Update-AzureVM (including parameters)
-   
-                   $Status = Get-AzureVM -ServiceName $Using:VM.CloudServiceName -Name $Using:VM.RoleName | `
-                       Add-AzureEndpoint -Name $Using:AEName -Protocol $Using:AEProtocol -PublicPort $Using:AEPublicPort -LocalPort $Using:AELocalPort | `
-                       Update-AzureVM
-                   Write-Output $Status
-               }
+
+    ```
+       #Read the VM GUID from the context
+       $VM = $RecoveryPlanContext.VmMap.$VMGUID
+
+       if ($VM -ne $null)
+       {
+           # Invoke pipeline commands within an InlineScript
+
+           $EndpointStatus = InlineScript {
+               # Invoke the necessary pipeline commands to add a Azure Endpoint to a specified Virtual Machine
+               # Commands include: Get-AzureVM | Add-AzureEndpoint | Update-AzureVM (including parameters)
+
+               $Status = Get-AzureVM -ServiceName $Using:VM.CloudServiceName -Name $Using:VM.RoleName | `
+                   Add-AzureEndpoint -Name $Using:AEName -Protocol $Using:AEProtocol -PublicPort $Using:AEPublicPort -LocalPort $Using:AELocalPort | `
+                   Update-AzureVM
+               Write-Output $Status
            }
+       }
+    ```
 
 7. 完成此操作后，点击“发布 ![](./media/site-recovery-runbook-automation/20.png)”使脚本可执行。
 
 下面提供了完整脚本供你参考
 
-      workflow OpenPort80
-      {
-        param (
-            [Object]$RecoveryPlanContext
-        )
+```
+  workflow OpenPort80
+  {
+    param (
+        [Object]$RecoveryPlanContext
+    )
 
-        $Cred = Get-AutomationPSCredential -Name 'AzureCredential'
+    $Cred = Get-AutomationPSCredential -Name 'AzureCredential'
 
-        # Connect to Azure
-        $AzureAccount = Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred
-        $AzureSubscriptionName = Get-AutomationVariable –Name ‘AzureSubscriptionName’
-        Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
+    # Connect to Azure
+    $AzureAccount = Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred
+    $AzureSubscriptionName = Get-AutomationVariable –Name ‘AzureSubscriptionName’
+    Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
 
-        # Specify the parameters to be used by the script
-        $AEProtocol = "TCP"
-        $AELocalPort = 80
-        $AEPublicPort = 80
-        $AEName = "Port 80 for HTTP"
-        $VMGUID = "7a1069c6-c1d6-49c5-8c5d-33bfce8dd183"
+    # Specify the parameters to be used by the script
+    $AEProtocol = "TCP"
+    $AELocalPort = 80
+    $AEPublicPort = 80
+    $AEName = "Port 80 for HTTP"
+    $VMGUID = "7a1069c6-c1d6-49c5-8c5d-33bfce8dd183"
 
-        #Read the VM GUID from the context
-        $VM = $RecoveryPlanContext.VmMap.$VMGUID
+    #Read the VM GUID from the context
+    $VM = $RecoveryPlanContext.VmMap.$VMGUID
 
-        if ($VM -ne $null)
-        {
-            # Invoke pipeline commands within an InlineScript
+    if ($VM -ne $null)
+    {
+        # Invoke pipeline commands within an InlineScript
 
-            $EndpointStatus = InlineScript {
-                # Invoke the necessary pipeline commands to add an Azure Endpoint to a specified Virtual Machine
-                # This set of commands includes: Get-AzureVM | Add-AzureEndpoint | Update-AzureVM (including necessary parameters)
+        $EndpointStatus = InlineScript {
+            # Invoke the necessary pipeline commands to add an Azure Endpoint to a specified Virtual Machine
+            # This set of commands includes: Get-AzureVM | Add-AzureEndpoint | Update-AzureVM (including necessary parameters)
 
-                $Status = Get-AzureVM -ServiceName $Using:VM.CloudServiceName -Name $Using:VM.RoleName | `
-                    Add-AzureEndpoint -Name $Using:AEName -Protocol $Using:AEProtocol -PublicPort $Using:AEPublicPort -LocalPort $Using:AELocalPort | `
-                    Update-AzureVM
-                Write-Output $Status
-            }
+            $Status = Get-AzureVM -ServiceName $Using:VM.CloudServiceName -Name $Using:VM.RoleName | `
+                Add-AzureEndpoint -Name $Using:AEName -Protocol $Using:AEProtocol -PublicPort $Using:AEPublicPort -LocalPort $Using:AELocalPort | `
+                Update-AzureVM
+            Write-Output $Status
         }
-      }
+    }
+  }
+```
 
 ## 将脚本添加到恢复计划
 脚本准备就绪后，你可以将它添加到先前创建的恢复计划。
@@ -244,10 +256,10 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 
 1. 选择恢复计划并启动测试故障转移。
 2. 在执行计划期间，你可以通过状态了解 Runbook 是否已执行。
-   
+
    ![](./media/site-recovery-runbook-automation/17.png)
 3. 你也可以在 Runbook 的 Azure 自动化作业页上查看详细的 Runbook 执行状态。
-   
+
    ![](./media/site-recovery-runbook-automation/18.png)
 4. 在故障转移完成后，除了 Runbook 执行结果以外，你还可以通过访问 Azure 虚拟机页并查看终结点，来了解执行是否成功。
 
@@ -257,7 +269,7 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 尽管我们在本教程中演练的是一个常见任务，那就是向 Azure 虚拟机添加终结点，但是，你可以使用 Azure 自动化完成其他许多功能强大的自动化任务。Microsoft 和 Azure 自动化社区提供了示例 Runbook，可帮助你开始创建自己的解决方案和实用 Runbook，可用作更大自动化任务的构建基块。你可以从库中使用这些 Runbook，通过 Azure 站点恢复为应用程序生成强大的单击式恢复计划。
 
 ## 其他资源
-[Azure 自动化概述](../automation/index.md/ "Azure 自动化概述")
+[Azure 自动化概述](../automation/index.md "Azure 自动化概述")
 
 [Azure 自动化示例脚本](http://gallery.technet.microsoft.com/scriptcenter/site/search?f[0].Type=User&f[0].Value=SC%20Automation%20Product%20Team&f[0].Text=SC%20Automation%20Product%20Team "Azure 自动化示例脚本")
 

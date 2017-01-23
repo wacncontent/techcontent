@@ -21,7 +21,8 @@ wacn.date: 01/04/2017
 
 服务总线消息传送示例演示了[服务总线](https://www.azure.cn/home/features/messaging/)（云服务）和 [Windows Server 服务总线](https://msdn.microsoft.com/zh-cn/library/dn282144.aspx)中的主要功能。本文分类并介绍了可用的示例，每个示例均具有链接。
 
->[!NOTE] 服务总线示例未安装 SDK。若要获取这些示例，请访问 [Azure SDK 示例页](https://code.msdn.microsoft.com/site/search?query=service%20bus&f%5B0%5D.Value=service%20bus&f%5B0%5D.Type=SearchText&ac=5)。
+>[!NOTE]
+> 服务总线示例未安装 SDK。若要获取这些示例，请访问 [Azure SDK 示例页](https://code.msdn.microsoft.com/site/search?query=service%20bus&f%5B0%5D.Value=service%20bus&f%5B0%5D.Type=SearchText&ac=5)。
 >
 >另外，[此处](https://github.com/Azure-Samples/azure-servicebus-messaging-samples)提供一组已更新的服务总线消息传送示例（撰写本文时未介绍这些示例）。[此处](https://github.com/Azure-Samples/azure-servicebus-relay-samples)是中继示例。
 
@@ -49,7 +50,9 @@ wacn.date: 01/04/2017
 
 1. 运行以下 Azure Powershell cmdlet：
 
-        get-sbClientConfiguration
+    ```
+    get-sbClientConfiguration
+    ```
 
 2. 将连接字符串粘贴到示例的 App.config 文件中。
 

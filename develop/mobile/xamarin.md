@@ -44,22 +44,21 @@ wacn.date: 11/02/2015
 
 ###数据
 
-查看服务：[移动服务](../../articles/mobile-services/index.md/) | [存储](../../articles/storage/index.md/)
+查看服务：[移动服务](../../articles/mobile-services/index.md) | [存储](../../articles/storage/index.md)
 <!--
 ###同步
 
 - 使用移动服务同步脱机数据 [iOS](../../articles/mobile-services/mobile-services-xamarin-ios-get-started-offline-data.md) | [Android](../../articles/mobile-services/mobile-services-xamarin-android-get-started-offline-data.md)
 
-查看服务：[移动服务](../../articles/mobile-services/index.md/)
+查看服务：[移动服务](../../articles/mobile-services/index.md)
 -->
 ###推送
 
 - 通知中心入门 [iOS](../../articles/notification-hubs/xamarin-notification-hubs-ios-push-notification-apns-get-started.md)
 
-查看服务： [通知中心](../../articles/notification-hubs/index.md/)
+查看服务： [通知中心](../../articles/notification-hubs/index.md)
 
 ##资源
 - [Xamarin 参考查找针对客户端库和服务器脚本的文档](http://developer.xamarin.com/guides/cross-platform/azure/mobile-services)
 - [Xamarin 示例了解丰富的可下载示例应用程序](http://developer.xamarin.com/guides/cross-platform/azure/mobile-services)
 - [论坛询问问题、分享见解和讨论平台](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=windowsazurezhchs)
-

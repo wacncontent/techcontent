@@ -22,7 +22,8 @@ ms.author: sumukhs
 
 Azure Service Fabric 运行时在 settings.xml 文件中查找预定义的节名称，并在创建基础运行时组件时使用这些配置值。
 
->[!NOTE] 请**勿**删除或修改 Visual Studio 解决方案中生成的 settings.xml 文件中的以下配置的节名称。
+>[!NOTE]
+> 请**勿**删除或修改 Visual Studio 解决方案中生成的 settings.xml 文件中的以下配置的节名称。
 
 ## 复制器安全配置
 复制器安全配置用于保护在复制过程中使用的通信通道的安全。这意味着服务将无法看到对方的复制流量，从而确保高度可用的数据也处于安全状态。默认情况下，空的安全配置节会影响复制安全。
@@ -62,25 +63,27 @@ Azure Service Fabric 运行时在 settings.xml 文件中查找预定义的节名
 
 ## 示例配置文件
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-       <Section Name="MyActorServiceReplicatorConfig">
-          <Parameter Name="ReplicatorEndpoint" Value="MyActorServiceReplicatorEndpoint" />
-          <Parameter Name="BatchAcknowledgementInterval" Value="0.05"/>
-       </Section>
-       <Section Name="MyActorServiceLocalStoreConfig">
-          <Parameter Name="MaxVerPages" Value="8192" />
-       </Section>
-       <Section Name="MyActorServiceReplicatorSecurityConfig">
-          <Parameter Name="CredentialType" Value="X509" />
-          <Parameter Name="FindType" Value="FindByThumbprint" />
-          <Parameter Name="FindValue" Value="9d c9 06 b1 69 dc 4f af fd 16 97 ac 78 1e 80 67 90 74 9d 2f" />
-          <Parameter Name="StoreLocation" Value="LocalMachine" />
-          <Parameter Name="StoreName" Value="My" />
-          <Parameter Name="ProtectionLevel" Value="EncryptAndSign" />
-          <Parameter Name="AllowedCommonNames" Value="My-Test-SAN1-Alice,My-Test-SAN1-Bob" />
-       </Section>
-    </Settings>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <Section Name="MyActorServiceReplicatorConfig">
+      <Parameter Name="ReplicatorEndpoint" Value="MyActorServiceReplicatorEndpoint" />
+      <Parameter Name="BatchAcknowledgementInterval" Value="0.05"/>
+   </Section>
+   <Section Name="MyActorServiceLocalStoreConfig">
+      <Parameter Name="MaxVerPages" Value="8192" />
+   </Section>
+   <Section Name="MyActorServiceReplicatorSecurityConfig">
+      <Parameter Name="CredentialType" Value="X509" />
+      <Parameter Name="FindType" Value="FindByThumbprint" />
+      <Parameter Name="FindValue" Value="9d c9 06 b1 69 dc 4f af fd 16 97 ac 78 1e 80 67 90 74 9d 2f" />
+      <Parameter Name="StoreLocation" Value="LocalMachine" />
+      <Parameter Name="StoreName" Value="My" />
+      <Parameter Name="ProtectionLevel" Value="EncryptAndSign" />
+      <Parameter Name="AllowedCommonNames" Value="My-Test-SAN1-Alice,My-Test-SAN1-Bob" />
+   </Section>
+</Settings>
+```
 
 ## 备注
 

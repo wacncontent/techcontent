@@ -43,13 +43,15 @@ ms.author: sstein;carlrab
 
 3. 在查询窗口中，复制并粘贴以下内容：
 
-        SELECT
-        CustomerId
-        ,Title
-        ,FirstName
-        ,LastName
-        ,CompanyName
-        FROM SalesLT.Customer;
+    ```
+    SELECT
+    CustomerId
+    ,Title
+    ,FirstName
+    ,LastName
+    ,CompanyName
+    FROM SalesLT.Customer;
+    ```
 
 4. 单击“执行”按钮：
 

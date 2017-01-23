@@ -32,7 +32,8 @@ ms.author: vturecek;mikhegn
 
 3. 通过单击“调试”菜单中的命令来设置代码中的断点并单步执行应用程序。
 
-    > [!NOTE] Visual Studio 将附加到应用程序的所有实例。单步执行代码时，断点可能被多个进程命中，从而产生并发会话。尝试通过在线程 ID 上设置每个断点条件，或使用诊断事件，在命中后禁用断点、。
+    > [!NOTE]
+    > Visual Studio 将附加到应用程序的所有实例。单步执行代码时，断点可能被多个进程命中，从而产生并发会话。尝试通过在线程 ID 上设置每个断点条件，或使用诊断事件，在命中后禁用断点、。
 
 4. “诊断事件”窗口将会自动打开，以便用户可实时查看诊断事件。
 
@@ -46,8 +47,10 @@ ms.author: vturecek;mikhegn
 
 6. 诊断事件可以在自动生成的 **ServiceEventSource.cs** 文件中查看并从应用程序代码中进行调用。
 
-        ServiceEventSource.Current.ServiceMessage(this, "My ServiceMessage with a parameter {0}", result.Value.ToString());
-    
+    ```
+    ServiceEventSource.Current.ServiceMessage(this, "My ServiceMessage with a parameter {0}", result.Value.ToString());
+    ```
+
 7. “诊断事件”窗口支持筛选、暂停和检查实时事件。筛选是对事件消息及其内容进行的简单字符串搜索。
 
     ![实时筛选、暂停和恢复或检查事件][diagnosticeventsactions]
@@ -62,10 +65,12 @@ ms.author: vturecek;mikhegn
 
 如果 Service Fabric 应用程序是在 Azure 中的 Service Fabric 群集上运行，则可直接从 Visual Studio 进行其远程调试。
 
-> [!NOTE] 该功能需要 [Service Fabric SDK 2.0](http://www.microsoft.com/web/handlers/webpi.ashx?command=getinstallerredirect&appid=MicrosoftAzure-ServiceFabric-VS2015) 和 [Azure SDK for.NET 2.9](/downloads/)。
+> [!NOTE]
+> 该功能需要 [Service Fabric SDK 2.0](http://www.microsoft.com/web/handlers/webpi.ashx?command=getinstallerredirect&appid=MicrosoftAzure-ServiceFabric-VS2015) 和 [Azure SDK for.NET 2.9](/downloads/)。
 
 <!-- -->
-> [!WARNING] 远程调试适用于开发/测试方案，而非用于生产环境中，因为它会对运行中的应用程序造成影响。
+> [!WARNING]
+> 远程调试适用于开发/测试方案，而非用于生产环境中，因为它会对运行中的应用程序造成影响。
 
 1. 在“Cloud Explorer”中导航到群集，单击右键并选择“启用调试”
 
@@ -90,7 +95,8 @@ ms.author: vturecek;mikhegn
 
     ![条件性断点][conditionalbreakpoint]
 
-    > [!NOTE] 目前我们不支持使用具有相同服务可执行文件名的多个实例调试 Service Fabric 群集。
+    > [!NOTE]
+    > 目前我们不支持使用具有相同服务可执行文件名的多个实例调试 Service Fabric 群集。
 
 4. 完成应用程序调试后，可以通过在“Cloud Explorer”中右键单击群集并选择“禁用调试”，来禁用远程调试扩展
 
@@ -100,11 +106,13 @@ ms.author: vturecek;mikhegn
 
 你也可以直接从远程群集节点将跟踪流式传输到 Visual studio。借助此功能，用户可流式传输 Service Fabric 群集节点上生成的 ETW 跟踪事件。
 
-> [!NOTE] 此功能需要 [Service Fabric SDK 2.0](http://www.microsoft.com/web/handlers/webpi.ashx?command=getinstallerredirect&appid=MicrosoftAzure-ServiceFabric-VS2015) 和 [Azure SDK for.NET 2.9](/downloads/)。此功能仅支持在 Azure 中运行的群集。
+> [!NOTE]
+> 此功能需要 [Service Fabric SDK 2.0](http://www.microsoft.com/web/handlers/webpi.ashx?command=getinstallerredirect&appid=MicrosoftAzure-ServiceFabric-VS2015) 和 [Azure SDK for.NET 2.9](/downloads/)。此功能仅支持在 Azure 中运行的群集。
 
 <!-- -->
 
-> [!WARNING] 流跟踪适用于开发/测试方案，而非用于生产环境中，因为它会对运行中的应用程序造成影响。在生产方案中，你应依赖于使用 Azure 诊断转发事件。
+> [!WARNING]
+> 流跟踪适用于开发/测试方案，而非用于生产环境中，因为它会对运行中的应用程序造成影响。在生产方案中，你应依赖于使用 Azure 诊断转发事件。
 
 1. 在“Cloud Explorer”中导航到群集，右键单击并选择“启用流式跟踪”
 
@@ -123,7 +131,7 @@ ms.author: vturecek;mikhegn
     ![查看流跟踪][viewingstreamingtraces]
 
 3. 完成从群集流式传输跟踪后，可以通过在“Cloud Explorer”中右键单击群集并选择“禁用流式跟踪”，来禁用远程流跟踪
-   
+
     ![禁用远程流跟踪][disablestreamingtraces]  
 
 ## 后续步骤

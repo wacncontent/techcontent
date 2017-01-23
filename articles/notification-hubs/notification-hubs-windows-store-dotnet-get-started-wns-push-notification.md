@@ -119,36 +119,43 @@ wacn.date: 11/22/2016
 
 3. 打开 App.xaml.cs 项目文件并添加以下 `using` 语句。
 
-        using Windows.Networking.PushNotifications;
-        using Microsoft.WindowsAzure.Messaging;
-        using Windows.UI.Popups;
+    ```
+    using Windows.Networking.PushNotifications;
+    using Microsoft.WindowsAzure.Messaging;
+    using Windows.UI.Popups;
+    ```
 
 4. 另外在 App.xaml.cs 中，将以下 **InitNotificationsAsync** 方法定义添加到 **App** 类中：
 
-        private async void InitNotificationsAsync()
+    ```
+    private async void InitNotificationsAsync()
+    {
+        var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+        var hub = new NotificationHub("< your hub name>", "<Your DefaultListenSharedAccessSignature connection string>");
+        var result = await hub.RegisterNativeAsync(channel.Uri);
+
+        // Displays the registration ID so you know it was successful
+        if (result.RegistrationId != null)
         {
-            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-
-            var hub = new NotificationHub("< your hub name>", "<Your DefaultListenSharedAccessSignature connection string>");
-            var result = await hub.RegisterNativeAsync(channel.Uri);
-
-            // Displays the registration ID so you know it was successful
-            if (result.RegistrationId != null)
-            {
-                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                dialog.Commands.Add(new UICommand("OK"));
-                await dialog.ShowAsync();
-            }
-
+            var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+            dialog.Commands.Add(new UICommand("OK"));
+            await dialog.ShowAsync();
         }
+
+    }
+    ```
 
     此代码从 WNS 检索应用的通道 URI，然后将该通道 URI 注册到你的通知中心。
 
-    >[!NOTE] 确保将“your hub name”占位符替换为出现在 Azure 门户预览中的通知中心名称。此处，使用在之前部分中从通知中心的“访问策略”页获取的 **DefaultListenSharedAccessSignature** 连接字符串替换连接字符串占位符。
+    >[!NOTE]
+    > 确保将“your hub name”占位符替换为出现在 Azure 门户预览中的通知中心名称。此处，使用在之前部分中从通知中心的“访问策略”页获取的 **DefaultListenSharedAccessSignature** 连接字符串替换连接字符串占位符。
 
 5. 在 App.xaml.cs 中 **OnLaunched** 事件处理程序的上方，添加对新 **InitNotificationsAsync** 方法的以下调用：
 
-        InitNotificationsAsync();
+    ```
+    InitNotificationsAsync();
+    ```
 
     这保证每次启动应用程序时都在通知中心注册通道 URI。
 
@@ -194,7 +201,9 @@ wacn.date: 11/22/2016
 
 3. 在“包管理器控制台”窗口中，将“默认项目”设置为新的控制台应用程序项目，然后在控制台窗口中执行以下命令：
 
-        Install-Package Microsoft.Azure.NotificationHubs
+    ```
+    Install-Package Microsoft.Azure.NotificationHubs
+    ```
 
     这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
 
@@ -202,26 +211,33 @@ wacn.date: 11/22/2016
 
 4. 打开文件 Program.cs 并添加以下 `using` 语句：
 
-        using Microsoft.Azure.NotificationHubs;
+    ```
+    using Microsoft.Azure.NotificationHubs;
+    ```
 
 5. 在 **Program** 类中，添加以下方法：
 
-        private static async void SendNotificationAsync()
-        {
-            NotificationHubClient hub = NotificationHubClient
-                .CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
-            var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">Hello from a .NET App!</text></binding></visual></toast>";
-            await hub.SendWindowsNativeNotificationAsync(toast);
-        }
+    ```
+    private static async void SendNotificationAsync()
+    {
+        NotificationHubClient hub = NotificationHubClient
+            .CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
+        var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">Hello from a .NET App!</text></binding></visual></toast>";
+        await hub.SendWindowsNativeNotificationAsync(toast);
+    }
+    ```
 
        确保将“hub name”占位符替换为出现在 Azure 门户预览中的通知中心名称。此外，使用在“配置通知中心”部分中的通知中心的“访问策略”页获取的 **DefaultFullSharedAccessSignature** 连接字符串替换连接字符串占位符。
 
-    >[!NOTE]确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送通知。
+    >[!NOTE]
+    >确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送通知。
 
 6. 在 **Main** 方法中添加以下行：
 
-         SendNotificationAsync();
-         Console.ReadLine();
+    ```
+     SendNotificationAsync();
+     Console.ReadLine();
+    ```
 
 7. 在 Visual Studio 中，右键单击控制台应用程序项目，然后单击“设为启动项目”，将它设置为启动项目。然后按 **F5** 键运行应用程序。
 

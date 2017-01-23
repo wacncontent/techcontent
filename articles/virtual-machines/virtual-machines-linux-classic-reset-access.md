@@ -46,47 +46,61 @@ ms.author: cynthn
 * 你需要[安装 Azure CLI](../xplat-cli-install.md)，并[连接到你的订阅](../xplat-cli-connect.md)以使用与你帐户关联的 Azure 资源。
 * 在命令提示符下键入以下命令，为经典部署模型设置正确的模式：
 
-        azure config mode asm
+    ```
+    azure config mode asm
+    ```
 
 * 设置一个新密码或一组新 SSH 密钥（如果想要重置任一项）。如果想要重置 SSH 配置，则不需要这些。
 
 ## <a name="pwresetcli"></a>重置密码
 1. 使用以下代码行在本地计算机上创建名为 PrivateConf.json 的文件。将 **myUserName** 和 **myP@ssW0rd** 替换为自己的用户名和密码，并设置自己的过期日期。
- 
-        {
-        "username":"myUserName",
-        "password":"myP@ssW0rd",
-        "expiration":"2020-01-01"
-        }
+
+    ```
+    {
+    "username":"myUserName",
+    "password":"myP@ssW0rd",
+    "expiration":"2020-01-01"
+    }
+    ```
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-        azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
+    azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
 
 ## <a name="sshkeyresetcli"></a>重置 SSH 密钥
 1. 使用以下内容创建名为 PrivateConf.json 的文件。将 **myUserName** 和 **mySSHKey** 值替换为自己的信息。
 
-        {
-        "username":"myUserName",
-        "ssh_key":"mySSHKey"
-        }
+    ```
+    {
+    "username":"myUserName",
+    "ssh_key":"mySSHKey"
+    }
+    ```
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
-   
-        azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+
+    ```
+    azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
 
 ## <a name="resetbothcli"></a>重置密码和 SSH 密钥
 1. 使用以下内容创建名为 PrivateConf.json 的文件。将 **myUserName**、**mySSHKey** 和 **myP@ssW0rd** 值替换为自己的信息。
 
-        {
-        "username":"myUserName",
-        "ssh_key":"mySSHKey",
-        "password":"myP@ssW0rd"
-        }
+    ```
+    {
+    "username":"myUserName",
+    "ssh_key":"mySSHKey",
+    "password":"myP@ssW0rd"
+    }
+    ```
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-        azure vm extension set MyVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
+    azure vm extension set MyVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
 
 ## <a name="createnewsudocli"></a>创建新的 sudo 用户帐户
 
@@ -108,58 +122,76 @@ ms.author: cynthn
 
 1. 使用以下内容创建名为 PrivateConf.json 的文件。
 
-        {
-        "reset_ssh":"True"
-        }
+    ```
+    {
+    "reset_ssh":"True"
+    }
+    ```
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-        azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
+    azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
 
 ## <a name="deletecli"></a>删除用户
 如果想要不登录 VM 就直接删除用户帐户，可以使用此脚本。
 
 1. 创建包含以下内容的名为 PrivateConf.json 的文件（请将 **removeUserName** 替换为要删除的用户名）。
 
-        {
-        "remove_user":"removeUserName"
-        }
+    ```
+    {
+    "remove_user":"removeUserName"
+    }
+    ```
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-        azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
+    azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
+    ```
 
 ## <a name="statuscli"></a>显示 VMAccess 扩展的状态
 若要显示 VMAccess 扩展的状态，请运行以下命令。
 
-        azure vm extension get
+```
+    azure vm extension get
+```
 
 ## <a name='checkdisk'></a>检查添加磁盘的一致性
 若要在 Linux 虚拟机的所有磁盘上运行 fsck，需执行以下操作：
 
 1. 使用以下内容创建名为 PublicConf.json 的文件。Check Disk 采用的布尔值表示是否检查附加到虚拟机的磁盘。
 
-        {   
-        "check_disk": "true"
-        }
+    ```
+    {   
+    "check_disk": "true"
+    }
+    ```
 
 2. 执行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-        azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --public-config-path PublicConf.json 
+    ```
+    azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --public-config-path PublicConf.json 
+    ```
 
 ## <a name='repairdisk'></a>修复磁盘
 若要修复无法装入或存在装入配置错误的磁盘，请使用 VMAccess 扩展重置 Linux 虚拟机上的装入配置。请将 **myDisk** 替换为自己的磁盘名称。
 
 1. 使用以下内容创建名为 PublicConf.json 的文件。
 
-        {
-        "repair_disk":"true",
-        "disk_name":"myDisk"
-        }
+    ```
+    {
+    "repair_disk":"true",
+    "disk_name":"myDisk"
+    }
+    ```
 
 2. 执行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-        azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --public-config-path PublicConf.json
+    ```
+    azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --public-config-path PublicConf.json
+    ```
 
 ## 后续步骤
 * 如果你要使用 Azure PowerShell cmdlet 或 Azure Resource Manager 模板来重置密码或 SSH 密钥、修复 SSH 配置和检查磁盘一致性，请参阅 [GitHub 上的 VMAccess 扩展文档](https://github.com/Azure/azure-linux-extensions/tree/master/VMAccess)。

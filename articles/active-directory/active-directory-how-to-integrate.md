@@ -69,7 +69,7 @@ Azure Active Directory 为组织的云应用程序提供企业级标识管理。
 
 ### 高级安全功能
 
-**多重身份验证。** Azure AD 提供本机多重身份验证。IT 管理员可以要求访问应用程序之前经过多重身份验证，因此你无需编写此项支持的代码。了解有关[多重身份验证](../multi-factor-authentication/index.md/)的详细信息。
+**多重身份验证。** Azure AD 提供本机多重身份验证。IT 管理员可以要求访问应用程序之前经过多重身份验证，因此你无需编写此项支持的代码。了解有关[多重身份验证](../multi-factor-authentication/index.md)的详细信息。
 
 **异常登录检测。** Azure AD 每天要处理十亿次以上的登录，同时，使用机器学习算法来检测可疑活动，并通知 IT 管理员可能存在的问题。通过支持 Azure AD 登录，你的应用程序将从这种保护中受益。
 
@@ -87,7 +87,7 @@ Azure Active Directory 为组织的云应用程序提供企业级标识管理。
 
 ## 后续步骤
 
-[开始编写代码](./active-directory-developers-guide.md#getting-started/)。
+[开始编写代码](./active-directory-developers-guide.md#getting-started)。
 
 [使用 Azure AD 登录用户](./active-directory-authentication-scenarios.md)
 

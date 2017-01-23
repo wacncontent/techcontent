@@ -41,7 +41,7 @@ Azure 流分析作业可以连接到一个或多个数据输出，这些数据�
     ![Azure 门户预览选择数据移动类型](./media/stream-analytics-add-outputs/6-stream-analytics-add-outputs.png)  
 
 3. 在“输出别名”框中为该输出提供一个友好的名称。此名称以后会用于你的作业查询以引用该输出。
-    
+
     填充所需连接属性的其余部分以连接到你的输出。这些字段根据输出类型而变化，在此处进行了详细定义。
 
     ![添加数据输出属性](./media/stream-analytics-add-outputs/3-stream-analytics-add-outputs.png)  
@@ -54,7 +54,8 @@ Azure 流分析作业可以连接到一个或多个数据输出，这些数据�
 
     ![Azure 门户预览将数据输出添加到事件中心](./media/stream-analytics-add-outputs/7-stream-analytics-add-outputs.png)  
 
-> [!NOTE] 必须先存在添加到作业的输出元素，然后才能启动作业并开始事件的流动。例如，如果你使用 Blob 存储作为输出，该作业将不会自动创建存储帐户。在启动 ASA 作业之前，需要由用户创建该存储帐户。
+> [!NOTE]
+> 必须先存在添加到作业的输出元素，然后才能启动作业并开始事件的流动。例如，如果你使用 Blob 存储作为输出，该作业将不会自动创建存储帐户。在启动 ASA 作业之前，需要由用户创建该存储帐户。
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=AzureStreamAnalytics)。

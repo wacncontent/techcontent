@@ -60,12 +60,12 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
 1. 查看 201-web-app-sql-database 文件夹中 [azuredeploy.parameters.json](https://github.com/Azure/azure-quickstart-templates/tree/3f24f7b7e1e377538d1d548eaa6eab2851a21810/201-web-app-sql-database/azuredeploy.parameters.json) 文件的内容。这是在前一部分中保存的模板文件的参数文件。
 2. 在视图模式中，单击[“原始”](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/3f24f7b7e1e377538d1d548eaa6eab2851a21810/201-web-app-sql-database/azuredeploy.parameters.json)按钮。
 3. 使用鼠标选择此文件的内容，然后使用以下名称将其保存在计算机上的三个不同文件中：
-   
+
     * TestApp1-Parameters-Development.json
     * TestApp1-Parameters-Test.json
     * TestApp1-Parameters-Pre-Production.json
 4. 使用任何文本或 JSON 编辑器来编辑步骤 3 中创建的开发环境参数文件，并将列在文件中参数值右侧的值替换为列在以下**参数**右侧的 *值* ：
-   
+
     * **siteName**： *TestApp1DevApp*
     * **hostingPlanName**： *TestApp1DevPlan*
     * **siteLocation**： *China East*
@@ -75,7 +75,7 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
     * **administratorLoginPassword**： *替换为你的密码*
     * **databaseName**： *testapp1devdb*
 5. 使用任何文本或 JSON 编辑器来编辑步骤 3 中创建的测试环境参数文件，并将列在文件中参数值右侧的值替换为列在以下**参数**右侧的*值*：
-   
+
     * **siteName**： *TestApp1TestApp*
     * **hostingPlanName**： *TestApp1TestPlan*
     * **siteLocation**： *China East*
@@ -85,43 +85,45 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
     * **administratorLoginPassword**： *替换为你的密码*
     * **databaseName**： *testapp1testdb*
 6. 使用任何文本或 JSON 编辑器，编辑在步骤 3 中创建的预生产参数文件。将文件的整个内容替换为以下内容：
-   
-        {
-          "$schema" : "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-          "contentVersion" : "1.0.0.0",
-          "parameters" : {
-        "administratorLogin" : {
-          "value" : "testApp1Admin"
-        },
-        "administratorLoginPassword" : {
-          "value" : "replace with your password"
-        },
-        "databaseName" : {
-          "value" : "testapp1preproddb"
-        },
-        "hostingPlanName" : {
-          "value" : "TestApp1PreProdPlan"
-        },
-        "serverLocation" : {
-          "value" : "China North"
-        },
-        "serverName" : {
-          "value" : "testapp1preprodsrv"
-        },
-        "siteLocation" : {
-          "value" : "China North"
-        },
-        "siteName" : {
-          "value" : "TestApp1PreProdApp"
-        },
-        "sku" : {
-          "value" : "Standard"
-        },
-            "requestedServiceObjectiveName" : {
-              "value" : "S1"
-        }
-          }
-        }
+
+    ```
+    {
+      "$schema" : "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+      "contentVersion" : "1.0.0.0",
+      "parameters" : {
+    "administratorLogin" : {
+      "value" : "testApp1Admin"
+    },
+    "administratorLoginPassword" : {
+      "value" : "replace with your password"
+    },
+    "databaseName" : {
+      "value" : "testapp1preproddb"
+    },
+    "hostingPlanName" : {
+      "value" : "TestApp1PreProdPlan"
+    },
+    "serverLocation" : {
+      "value" : "China North"
+    },
+    "serverName" : {
+      "value" : "testapp1preprodsrv"
+    },
+    "siteLocation" : {
+      "value" : "China North"
+    },
+    "siteName" : {
+      "value" : "TestApp1PreProdApp"
+    },
+    "sku" : {
+      "value" : "Standard"
+    },
+        "requestedServiceObjectiveName" : {
+          "value" : "S1"
+    }
+      }
+    }
+    ```
 
 在上述预生产参数文件中，**sku** 和 **requestedServiceObjectiveName** 参数为 *added* ，而它们并未添加到开发和测试参数文件。这是因为模板中为这些参数指定了默认值，并且默认值也用于开发和测试环境中，但在预生产环境中用于这些参数的是非默认值。
 
@@ -142,50 +144,66 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
 ### Azure 命令行界面 (CLI)
 确保 Windows、OS X 或 Linux 计算机上[已安装](../xplat-cli-install.md) CLI，并且已将 [Azure AD 帐户](../active-directory/active-directory-how-subscriptions-associated-directory.md)（也称为工作帐户或学校帐户）[连接](../xplat-cli-connect.md)到 Azure 订阅。在 CLI 命令行中键入以下命令以创建开发环境的资源组。
 
-    azure group create "TestApp1-Development" "China North"
+```
+azure group create "TestApp1-Development" "China North"
+```
 
 如果命令成功，将返回以下信息：
 
-    info:    Executing command group create
-    + Getting resource group TestApp1-Development
-    + Creating resource group TestApp1-Development
-    info:    Created resource group TestApp1-Development
-    data:    Id:                  /subscriptions/uuuuuuuu-vvvv-wwww-xxxx-yyyy-zzzzzzzzzzzz/resourceGroups/TestApp1-Development
-    data:    Name:                TestApp1-Development
-    data:    Location:            chinaeast
-    data:    Provisioning State:  Succeeded
-    data:    Tags: null
-    data:
-    info:    group create command OK
+```
+info:    Executing command group create
++ Getting resource group TestApp1-Development
++ Creating resource group TestApp1-Development
+info:    Created resource group TestApp1-Development
+data:    Id:                  /subscriptions/uuuuuuuu-vvvv-wwww-xxxx-yyyy-zzzzzzzzzzzz/resourceGroups/TestApp1-Development
+data:    Name:                TestApp1-Development
+data:    Location:            chinaeast
+data:    Provisioning State:  Succeeded
+data:    Tags: null
+data:
+info:    group create command OK
+```
 
 若要创建测试环境的资源组，请键入以下命令：
 
-    azure group create "TestApp1-Test" "China North"
+```
+azure group create "TestApp1-Test" "China North"
+```
 
 若要创建预生产环境的资源组，请键入以下命令：
 
-    azure group create "TestApp1-Pre-Production" "China North"
+```
+azure group create "TestApp1-Pre-Production" "China North"
+```
 
 ### PowerShell
 确保已按[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 一文中的详述，在 Windows 计算机上安装了 PowerShell 1.01 或更高版本，并且已将 [Azure AD 帐户](../active-directory/active-directory-how-subscriptions-associated-directory.md)（也称为工作帐户或学校帐户）连接到订阅。在 PowerShell 命令提示符下，键入以下命令以创建开发环境的资源组。
 
-    New-AzureRmResourceGroup -Name TestApp1-Development -Location "China North"
+```
+New-AzureRmResourceGroup -Name TestApp1-Development -Location "China North"
+```
 
 如果命令成功，将返回以下信息：
 
-    ResourceGroupName : TestApp1-Development
-    Location          : chinaeast
-    ProvisioningState : Succeeded
-    Tags              :
-    ResourceId        : /subscriptions/uuuuuuuu-vvvv-wwww-xxxx-yyyy-zzzzzzzzzzzz/resourceGroups/TestApp1-Development
+```
+ResourceGroupName : TestApp1-Development
+Location          : chinaeast
+ProvisioningState : Succeeded
+Tags              :
+ResourceId        : /subscriptions/uuuuuuuu-vvvv-wwww-xxxx-yyyy-zzzzzzzzzzzz/resourceGroups/TestApp1-Development
+```
 
 若要创建测试环境的资源组，请键入以下命令：
 
-    New-AzureRmResourceGroup -Name TestApp1-Test -Location "China North"
+```
+New-AzureRmResourceGroup -Name TestApp1-Test -Location "China North"
+```
 
 若要创建预生产环境的资源组，请键入以下命令：
 
-    New-AzureRmResourceGroup -Name TestApp1-Pre-Production -Location "China North"
+```
+New-AzureRmResourceGroup -Name TestApp1-Pre-Production -Location "China North"
+```
 
 ### Azure 门户预览
 1. 使用 [Azure AD](../active-directory/active-directory-how-subscriptions-associated-directory.md)（也称为工作或学校）帐户登录 [Azure 门户预览](https://portal.azure.cn)。单击"新建"-->"管理"-->"资源组"，在"资源组名称"框中输入"TestApp1-Development"，选择订阅，然后在"资源组位置"框中选择"中国东部"，如下图所示。
@@ -203,80 +221,92 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
 ### Azure 命令行界面 (CLI)
 在 CLI 命令行中键入以下命令（将 [path] 替换为前面步骤中的文件保存路径），将资源部署到为开发环境创建的资源组。
 
-    azure group deployment create -g TestApp1-Development -n Deployment1 -f [path]TestApp1-Template.json -e [path]TestApp1-Parameters-Development.json 
+```
+azure group deployment create -g TestApp1-Development -n Deployment1 -f [path]TestApp1-Template.json -e [path]TestApp1-Parameters-Development.json 
+```
 
 在看到“等待部署完成”消息数分钟之后，如果部署成功，命令将返回以下消息：
 
-    info:    Executing command group deployment create
-    + Initializing template configurations and parameters
-    + Creating a deployment
-    info:    Created template deployment "Deployment1"
-    + Waiting for deployment to complete
-    data:    DeploymentName     : Deployment1
-    data:    ResourceGroupName  : TestApp1-Development
-    data:    ProvisioningState  : Succeeded
-    data:    Timestamp          : XXXX-XX-XXT20:20:23.5202316Z
-    data:    Mode               : Incremental
-    data:    Name                           Type          Value
-    data:    -----------------------------  ------------  ----------------------------
-    data:    siteName                       String        TestApp1DevApp
-    data:    hostingPlanName                String        TestApp1DevPlan
-    data:    siteLocation                   String        China North
-    data:    sku                            String        Free
-    data:    workerSize                     String        0
-    data:    serverName                     String        testapp1devsrv
-    data:    serverLocation                 String        China North
-    data:    administratorLogin             String        testapp1Admin
-    data:    administratorLoginPassword     SecureString  undefined
-    data:    databaseName                   String        testapp1devdb
-    data:    collation                      String        SQL_Latin1_General_CP1_CI_AS
-    data:    edition                        String        Standard
-    data:    maxSizeBytes                   String        1073741824
-    data:    requestedServiceObjectiveName  String        S0
-    info:    group deployment create command OKx
+```
+info:    Executing command group deployment create
++ Initializing template configurations and parameters
++ Creating a deployment
+info:    Created template deployment "Deployment1"
++ Waiting for deployment to complete
+data:    DeploymentName     : Deployment1
+data:    ResourceGroupName  : TestApp1-Development
+data:    ProvisioningState  : Succeeded
+data:    Timestamp          : XXXX-XX-XXT20:20:23.5202316Z
+data:    Mode               : Incremental
+data:    Name                           Type          Value
+data:    -----------------------------  ------------  ----------------------------
+data:    siteName                       String        TestApp1DevApp
+data:    hostingPlanName                String        TestApp1DevPlan
+data:    siteLocation                   String        China North
+data:    sku                            String        Free
+data:    workerSize                     String        0
+data:    serverName                     String        testapp1devsrv
+data:    serverLocation                 String        China North
+data:    administratorLogin             String        testapp1Admin
+data:    administratorLoginPassword     SecureString  undefined
+data:    databaseName                   String        testapp1devdb
+data:    collation                      String        SQL_Latin1_General_CP1_CI_AS
+data:    edition                        String        Standard
+data:    maxSizeBytes                   String        1073741824
+data:    requestedServiceObjectiveName  String        S0
+info:    group deployment create command OKx
+```
 
 如果命令未成功，请解决任何错误消息并重试。常见的问题是使用了未遵循 Azure 资源命名约束的参数值。其他故障排除提示可在 [Azure 中的资源组部署故障排除](./resource-manager-troubleshoot-deployments-cli.md)一文中找到。
 
 在 CLI 命令行中键入以下命令（将 [path] 替换为前面步骤中的文件保存路径），将资源部署到为测试环境创建的资源组。
 
-    azure group deployment create -g TestApp1-Test -n Deployment1 -f [path]TestApp1-Template.json -e [path]TestApp1-Parameters-Test.json
+```
+azure group deployment create -g TestApp1-Test -n Deployment1 -f [path]TestApp1-Template.json -e [path]TestApp1-Parameters-Test.json
+```
 
 在 CLI 命令行中键入以下命令（将 [path] 替换为前面步骤中的文件保存路径），将资源部署到为预生产环境创建的资源组。
 
-    azure group deployment create -g TestApp1-Pre-Production -n Deployment1 -f [path]TestApp1-Template.json -e [path]TestApp1-Parameters-Pre-Production.json
+```
+azure group deployment create -g TestApp1-Pre-Production -n Deployment1 -f [path]TestApp1-Template.json -e [path]TestApp1-Parameters-Pre-Production.json
+```
 
 ### PowerShell
 在 Azure PowerShell（版本 1.01 或更高）命令提示符下键入以下命令（将 [path] 替换为前面步骤中的文件保存路径），将资源部署到为开发环境创建的资源组。
 
-    New-AzureRmResourceGroupDeployment -ResourceGroupName TestApp1-Development -TemplateFile [path]TestApp1-Template.json -TemplateParameterFile [path]TestApp1-Parameters-Development.json -Name Deployment1 
+```
+New-AzureRmResourceGroupDeployment -ResourceGroupName TestApp1-Development -TemplateFile [path]TestApp1-Template.json -TemplateParameterFile [path]TestApp1-Parameters-Development.json -Name Deployment1 
+```
 
 光标闪烁数分钟之后，如果部署成功，命令将返回以下消息：
 
-    DeploymentName    : Deployment1
-    ResourceGroupName : TestApp1-Development
-    ProvisioningState : Succeeded
-    Timestamp         : XX/XX/XXXX 2:44:48 PM
-    Mode              : Incremental
-    TemplateLink      : 
-    Parameters        : 
-                        Name             Type                       Value     
-                        ===============  =========================  ==========
-                        siteName         String                     TestApp1DevApp
-                        hostingPlanName  String                     TestApp1DevPlan
-                        siteLocation     String                     China North
-                        sku              String                     Free      
-                        workerSize       String                     0         
-                        serverName       String                     testapp1devsrv
-                        serverLocation   String                     China North
-                        administratorLogin  String                     testapp1Admin
-                        administratorLoginPassword  SecureString                         
-                        databaseName     String                     testapp1devdb
-                        collation        String                     SQL_Latin1_General_CP1_CI_AS
-                        edition          String                     Standard  
-                        maxSizeBytes     String                     1073741824
-                        requestedServiceObjectiveName  String                     S0        
+```
+DeploymentName    : Deployment1
+ResourceGroupName : TestApp1-Development
+ProvisioningState : Succeeded
+Timestamp         : XX/XX/XXXX 2:44:48 PM
+Mode              : Incremental
+TemplateLink      : 
+Parameters        : 
+                    Name             Type                       Value     
+                    ===============  =========================  ==========
+                    siteName         String                     TestApp1DevApp
+                    hostingPlanName  String                     TestApp1DevPlan
+                    siteLocation     String                     China North
+                    sku              String                     Free      
+                    workerSize       String                     0         
+                    serverName       String                     testapp1devsrv
+                    serverLocation   String                     China North
+                    administratorLogin  String                     testapp1Admin
+                    administratorLoginPassword  SecureString                         
+                    databaseName     String                     testapp1devdb
+                    collation        String                     SQL_Latin1_General_CP1_CI_AS
+                    edition          String                     Standard  
+                    maxSizeBytes     String                     1073741824
+                    requestedServiceObjectiveName  String                     S0        
 
-    Outputs           :
+Outputs           :
+```
 
   如果命令未成功，请解决任何错误消息并重试。常见的问题是使用了未遵循 Azure 资源命名约束的参数值。其他故障排除提示可在 [Azure 中的资源组部署故障排除](./resource-manager-troubleshoot-deployments-powershell.md)一文中找到。
 
@@ -318,28 +348,38 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
 ### Azure CLI
 在 CLI 提示符下键入以下命令：
 
-    azure group delete "TestApp1-Development"
+```
+azure group delete "TestApp1-Development"
+```
 
 出现提示时，请输入 y 并按 Enter 以删除开发环境及其所有资源。几分钟后，命令将返回以下内容：
 
-    info:    group delete command OK
+```
+info:    group delete command OK
+```
 
 在 CLI 提示符下键入以下命令，以删除剩余的环境：
 
-    azure group delete "TestApp1-Test"
-    azure group delete "TestApp1-Pre-Production"
+```
+azure group delete "TestApp1-Test"
+azure group delete "TestApp1-Pre-Production"
+```
 
 ### PowerShell
 在 Azure PowerShell（版本 1.01 或更高）命令提示符下，键入以下命令以删除资源组及其所有内容。
 
-    Remove-AzureRmResourceGroup -Name TestApp1-Development
+```
+Remove-AzureRmResourceGroup -Name TestApp1-Development
+```
 
 当系统提示你是否确定要删除该资源组时，请输入 y，然后按 Enter 键。
 
 键入以下命令以删除剩余的环境：
 
-    Remove-AzureRmResourceGroup -Name TestApp1-Test
-    Remove-AzureRmResourceGroup -Name TestApp1-Pre-Production
+```
+Remove-AzureRmResourceGroup -Name TestApp1-Test
+Remove-AzureRmResourceGroup -Name TestApp1-Pre-Production
+```
 
 ### Azure 门户预览
 1. 在 Azure 门户预览中浏览到“资源组”，如同上一步骤所述。

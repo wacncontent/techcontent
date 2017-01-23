@@ -71,7 +71,8 @@ Azure 应用服务是面向专业开发人员的完全托管型平台即服务 (
 
 关 Azure 应用服务平台的详细信息，请参阅 [Azure App Service]（Azure 应用服务）。
 
->[!NOTE] 如果您想要在注册 Azure 帐户之前开始使用 Azure App Service，请转到[试用 App Service](https://tryappservice.azure.com/?appServiceName=mobile)，您可以在 App Service 中立即创建一个生存期较短的入门 Web 应用。你不需要使用信用卡，也不需要做出承诺。
+>[!NOTE]
+> 如果您想要在注册 Azure 帐户之前开始使用 Azure App Service，请转到[试用 App Service](https://tryappservice.azure.com/?appServiceName=mobile)，您可以在 App Service 中立即创建一个生存期较短的入门 Web 应用。你不需要使用信用卡，也不需要做出承诺。
 
 <!-- URLs. -->
 [Migrate your Mobile Service to App Service]: ./app-service-mobile-migrating-from-mobile-services.md

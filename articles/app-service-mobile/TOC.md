@@ -234,6 +234,3 @@
 ## [Service updates](https://azure.microsoft.com/updates/?product=mobile-services)
 ## [App Service Best practices](../app-service-web/app-service-best-practices.md?toc=%2fazure%2fapp-service-mobile%2ftoc.json)
 ## [List of WebJob resources](../app-service-web/websites-webjobs-resources.md?toc=%2fazure%2fapp-service-mobile%2ftoc.json)
-
-
-

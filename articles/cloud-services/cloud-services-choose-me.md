@@ -25,7 +25,7 @@ Azure 云服务是适合你的选择吗？ Azure 提供了用于运行应用程�
 <a name="tellmecs"></a>
 ## 告诉我有关云服务的信息
 
-云服务是平台即服务 (PaaS) 的一个例子。与[应用服务](../app-service-web/index.md/)一样，这种技术旨在支持可缩放、可靠且运营价格实惠的应用程序。云服务像应用服务一样托管在 VM 中，但用户对相关 VM 具有更高的控制权。可在云服务 VM 上安装自己的软件，也可程接入。
+云服务是平台即服务 (PaaS) 的一个例子。与[应用服务](../app-service-web/index.md)一样，这种技术旨在支持可缩放、可靠且运营价格实惠的应用程序。云服务像应用服务一样托管在 VM 中，但用户对相关 VM 具有更高的控制权。可在云服务 VM 上安装自己的软件，也可程接入。
 
 ![cs\_diagram](./media/cloud-services-choose-me/diagram.png)
 
@@ -36,7 +36,7 @@ Azure 云服务是适合你的选择吗？ Azure 提供了用于运行应用程�
 云服务中提供这两个略有不同的 VM 托管选项的任意组合：
 
 * **Web 角色**运行 Windows Server，并将 Web 应用自动部署到 IIS。
-  
+
 * **辅助角色**运行 Windows Server 而不使用 IIS。
 
 例如，简单应用程序可能仅使用 Web 角色，而稍复杂的应用程序可能使用 Web 角色处理来自用户的传入请求，然后将那些请求创建的工作传递给辅助角色进行处理。（此通信可能使用[服务总线](../service-bus-messaging/service-bus-fundamentals-hybrid-solutions.md)或 [Azure 队列](../storage/storage-introduction.md)。）

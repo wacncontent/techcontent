@@ -24,9 +24,11 @@ wacn.date: 07/26/2016
 
 下面是当请求中缺少必需的 `response_type` 参数时，Azure AD 授权终结点发出的示例 HTTP 302 错误响应。
 
-    GET  HTTP/1.1 302 Found
-    Location: http://localhost/myapp/?error=invalid_request&error_description=AADSTS90014%3a+The+request+body+must+contain+the+following+parameter%3a+%27response_type%27.%0d%0aTrace+ID%3a+57f5cb47-2278-4802-a018-d05d9145daad%0d%0aCorrelation+ID%3a+570a9ed3-bf1d-40d1-81ae-63465cc25488%0d%0aTimestamp%3a+2013-12-31+05%3a51%3a35Z&state=D79E5777-702E-4260-9A62-37F75FF22CCE
-        
+```
+GET  HTTP/1.1 302 Found
+Location: http://localhost/myapp/?error=invalid_request&error_description=AADSTS90014%3a+The+request+body+must+contain+the+following+parameter%3a+%27response_type%27.%0d%0aTrace+ID%3a+57f5cb47-2278-4802-a018-d05d9145daad%0d%0aCorrelation+ID%3a+570a9ed3-bf1d-40d1-81ae-63465cc25488%0d%0aTimestamp%3a+2013-12-31+05%3a51%3a35Z&state=D79E5777-702E-4260-9A62-37F75FF22CCE
+```
+
 | 参数 | 说明 |
 |-----------|-------------|
 | error | [OAuth 2.0 授权框架](http://tools.ietf.org/html/rfc6749)第 5.2 部分中定义的错误代码值。下表描述了 Azure AD 返回的错误代码。 |
@@ -55,10 +57,12 @@ wacn.date: 07/26/2016
 
 例如，如果请求中的 `client_id` 参数无效，将返回如下所示的错误：
 
-    HTTP/1.1 400 Bad Request
-    Content-Type: application/json; charset=utf-8
-        
-    {"error":"invalid_request","error_description":"AADSTS90011: Request is ambiguous, multiple application identifiers found. Application identifiers: '197451ec-ade4-40e4-b403-02105abd9049, 597451ec-ade4-40e4-b403-02105abd9049'.\r\nTrace ID: 4457d068-2a03-42b2-97f2-d55325289d86\r\nCorrelation ID: 6b3474d8-233e-463f-b0a3-86433d8ba889\r\nTimestamp: 2013-12-31 06:31:41Z","error_codes":[90011],"timestamp":"2013-12-31 06:31:41Z","trace_id":"4457d068-2a03-42b2-97f2-d55325289d86","correlation_id":"6b3474d8-233e-463f-b0a3-86433d8ba889"}
+```
+HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
+
+{"error":"invalid_request","error_description":"AADSTS90011: Request is ambiguous, multiple application identifiers found. Application identifiers: '197451ec-ade4-40e4-b403-02105abd9049, 597451ec-ade4-40e4-b403-02105abd9049'.\r\nTrace ID: 4457d068-2a03-42b2-97f2-d55325289d86\r\nCorrelation ID: 6b3474d8-233e-463f-b0a3-86433d8ba889\r\nTimestamp: 2013-12-31 06:31:41Z","error_codes":[90011],"timestamp":"2013-12-31 06:31:41Z","trace_id":"4457d068-2a03-42b2-97f2-d55325289d86","correlation_id":"6b3474d8-233e-463f-b0a3-86433d8ba889"}
+```
 
 ### HTTP 状态代码
 
@@ -102,9 +106,11 @@ wacn.date: 07/26/2016
 实现 RFC 6750 的受保护资源会发出 HTTP 状态代码。如果请求不包含身份验证凭据或缺少令牌，则响应将包含 `WWW-Authenticate` 标头。当某个请求失败时，资源服务器将使用 HTTP 状态代码和错误代码做出响应。
 
 下面是不成功的请求和响应的示例，其中，客户端请求不包含持有者令牌：
-        
-    HTTP/1.1 401 Unauthorized
-    WWW-Authenticate: Bearer authorization_uri="https://login.window.net/contoso.com/oauth2/authorize",  error="invalid_token",  error_description="The access token is missing.",
+
+```
+HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer authorization_uri="https://login.window.net/contoso.com/oauth2/authorize",  error="invalid_token",  error_description="The access token is missing.",
+```
 
 ## 错误参数
 

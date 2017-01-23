@@ -35,7 +35,8 @@ wacn.date: 01/03/2017
 6. 在用户的“配置文件”页上，提供名字和姓氏、用户友好名称，并从“角色”列表中选择用户角色。有关用户和管理员角色的详细信息，请参阅[在 Azure AD 中分配管理员角色](./active-directory-assign-admin-roles.md)。指定是否要为用户**启用多重身份验证**。
 7. 在“获取临时密码”页上，选择“创建”。
 
-> [!IMPORTANT] 如果你所在的组织使用多个域，在添加用户帐户时你应知道以下问题：
+> [!IMPORTANT]
+> 如果你所在的组织使用多个域，在添加用户帐户时你应知道以下问题：
 >
 > - 若要跨域添加具有相同用户主体名称 (UPN) 的用户帐户，例如，你可以**先**添加 geoffgrisso@contoso.partner.onmschina.cn，**再**添加 geoffgrisso@contoso.com。
 > - **不要**在添加 geoffgrisso@contoso.partner.onmschina.cn 之前添加 geoffgrisso@contoso.com。此顺序非常重要，事后想要撤消操作将很麻烦。

@@ -69,25 +69,31 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 以下示例使用名为“testvnet1”的虚拟网络和名为“subnet-1”的子网创建应用程序网关。
 
-    New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
+```
+New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
+```
 
 *Description*、*InstanceCount* 和 *GatewaySize* 是可选参数。
 
 若要验证是否已创建网关，可以使用 `Get-AzureApplicationGateway` cmdlet。
 
-    Get-AzureApplicationGateway AppGwTest
+```
+Get-AzureApplicationGateway AppGwTest
+```
 
 <br/>  
 
-    Name          : AppGwTest
-    Description   :
-    VnetName      : testvnet1
-    Subnets       : {Subnet-1}
-    InstanceCount : 2
-    GatewaySize   : Medium
-    State         : Stopped
-    VirtualIPs    : {}
-    DnsName       :
+```
+Name          : AppGwTest
+Description   :
+VnetName      : testvnet1
+Subnets       : {Subnet-1}
+InstanceCount : 2
+GatewaySize   : Medium
+State         : Stopped
+VirtualIPs    : {}
+DnsName       :
+```
 
 > [!NOTE]
 *InstanceCount* 的默认值为 2，最大值为 10。*GatewaySize* 的默认值为 Medium。你可以选择 Small、Medium 或 Large。
@@ -108,103 +114,110 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 将以下文本复制到记事本中。
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
-        <FrontendPorts>
-            <FrontendPort>
-                <Name>(name-of-your-frontend-port)</Name>
-                <Port>(port number)</Port>
-            </FrontendPort>
-        </FrontendPorts>
-        <BackendAddressPools>
-            <BackendAddressPool>
-                <Name>(name-of-your-backend-pool)</Name>
-                <IPAddresses>
-                    <IPAddress>(your-IP-address-for-backend-pool)</IPAddress>
-                    <IPAddress>(your-second-IP-address-for-backend-pool)</IPAddress>
-                </IPAddresses>
-            </BackendAddressPool>
-        </BackendAddressPools>
-        <BackendHttpSettingsList>
-            <BackendHttpSettings>
-                <Name>(backend-setting-name-to-configure-rule)</Name>
-                <Port>80</Port>
-                <Protocol>[Http|Https]</Protocol>
-                <CookieBasedAffinity>Enabled</CookieBasedAffinity>
-            </BackendHttpSettings>
-        </BackendHttpSettingsList>
-        <HttpListeners>
-            <HttpListener>
-                <Name>(name-of-the-listener)</Name>
-                <FrontendPort>(name-of-your-frontend-port)</FrontendPort>
-                <Protocol>[Http|Https]</Protocol>
-            </HttpListener>
-        </HttpListeners>
-        <HttpLoadBalancingRules>
-            <HttpLoadBalancingRule>
-                <Name>(name-of-load-balancing-rule)</Name>
-                <Type>basic</Type>
-                <BackendHttpSettings>(backend-setting-name-to-configure-rule)</BackendHttpSettings>
-                <Listener>(name-of-the-listener)</Listener>
-                <BackendAddressPool>(name-of-your-backend-pool)</BackendAddressPool>
-            </HttpLoadBalancingRule>
-        </HttpLoadBalancingRules>
-    </ApplicationGatewayConfiguration>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
+    <FrontendPorts>
+        <FrontendPort>
+            <Name>(name-of-your-frontend-port)</Name>
+            <Port>(port number)</Port>
+        </FrontendPort>
+    </FrontendPorts>
+    <BackendAddressPools>
+        <BackendAddressPool>
+            <Name>(name-of-your-backend-pool)</Name>
+            <IPAddresses>
+                <IPAddress>(your-IP-address-for-backend-pool)</IPAddress>
+                <IPAddress>(your-second-IP-address-for-backend-pool)</IPAddress>
+            </IPAddresses>
+        </BackendAddressPool>
+    </BackendAddressPools>
+    <BackendHttpSettingsList>
+        <BackendHttpSettings>
+            <Name>(backend-setting-name-to-configure-rule)</Name>
+            <Port>80</Port>
+            <Protocol>[Http|Https]</Protocol>
+            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
+        </BackendHttpSettings>
+    </BackendHttpSettingsList>
+    <HttpListeners>
+        <HttpListener>
+            <Name>(name-of-the-listener)</Name>
+            <FrontendPort>(name-of-your-frontend-port)</FrontendPort>
+            <Protocol>[Http|Https]</Protocol>
+        </HttpListener>
+    </HttpListeners>
+    <HttpLoadBalancingRules>
+        <HttpLoadBalancingRule>
+            <Name>(name-of-load-balancing-rule)</Name>
+            <Type>basic</Type>
+            <BackendHttpSettings>(backend-setting-name-to-configure-rule)</BackendHttpSettings>
+            <Listener>(name-of-the-listener)</Listener>
+            <BackendAddressPool>(name-of-your-backend-pool)</BackendAddressPool>
+        </HttpLoadBalancingRule>
+    </HttpLoadBalancingRules>
+</ApplicationGatewayConfiguration>
+```
 
 编辑配置项的括号之间的值。使用扩展名 .xml 保存文件。
 
->[!IMPORTANT] 协议项 Http 或 Https 区分大小写。
+>[!IMPORTANT]
+> 协议项 Http 或 Https 区分大小写。
 
 以下示例演示如何使用配置文件设置应用程序网关。此示例对公共端口 80 上的 HTTP 流量进行负载均衡，将网络流量发送到两个 IP 地址之间的后端端口 80。
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
-        <FrontendPorts>
-            <FrontendPort>
-                <Name>FrontendPort1</Name>
-                <Port>80</Port>
-            </FrontendPort>
-        </FrontendPorts>
-        <BackendAddressPools>
-            <BackendAddressPool>
-                <Name>BackendPool1</Name>
-                <IPAddresses>
-                    <IPAddress>10.0.0.1</IPAddress>
-                    <IPAddress>10.0.0.2</IPAddress>
-                </IPAddresses>
-            </BackendAddressPool>
-        </BackendAddressPools>
-        <BackendHttpSettingsList>
-            <BackendHttpSettings>
-                <Name>BackendSetting1</Name>
-                <Port>80</Port>
-                <Protocol>Http</Protocol>
-                <CookieBasedAffinity>Enabled</CookieBasedAffinity>
-            </BackendHttpSettings>
-        </BackendHttpSettingsList>
-        <HttpListeners>
-            <HttpListener>
-                <Name>HTTPListener1</Name>
-                <FrontendPort>FrontendPort1</FrontendPort>
-                <Protocol>Http</Protocol>
-            </HttpListener>
-        </HttpListeners>
-        <HttpLoadBalancingRules>
-            <HttpLoadBalancingRule>
-                <Name>HttpLBRule1</Name>
-                <Type>basic</Type>
-                <BackendHttpSettings>BackendSetting1</BackendHttpSettings>
-                <Listener>HTTPListener1</Listener>
-                <BackendAddressPool>BackendPool1</BackendAddressPool>
-            </HttpLoadBalancingRule>
-        </HttpLoadBalancingRules>
-    </ApplicationGatewayConfiguration>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
+    <FrontendPorts>
+        <FrontendPort>
+            <Name>FrontendPort1</Name>
+            <Port>80</Port>
+        </FrontendPort>
+    </FrontendPorts>
+    <BackendAddressPools>
+        <BackendAddressPool>
+            <Name>BackendPool1</Name>
+            <IPAddresses>
+                <IPAddress>10.0.0.1</IPAddress>
+                <IPAddress>10.0.0.2</IPAddress>
+            </IPAddresses>
+        </BackendAddressPool>
+    </BackendAddressPools>
+    <BackendHttpSettingsList>
+        <BackendHttpSettings>
+            <Name>BackendSetting1</Name>
+            <Port>80</Port>
+            <Protocol>Http</Protocol>
+            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
+        </BackendHttpSettings>
+    </BackendHttpSettingsList>
+    <HttpListeners>
+        <HttpListener>
+            <Name>HTTPListener1</Name>
+            <FrontendPort>FrontendPort1</FrontendPort>
+            <Protocol>Http</Protocol>
+        </HttpListener>
+    </HttpListeners>
+    <HttpLoadBalancingRules>
+        <HttpLoadBalancingRule>
+            <Name>HttpLBRule1</Name>
+            <Type>basic</Type>
+            <BackendHttpSettings>BackendSetting1</BackendHttpSettings>
+            <Listener>HTTPListener1</Listener>
+            <BackendAddressPool>BackendPool1</BackendAddressPool>
+        </HttpLoadBalancingRule>
+    </HttpLoadBalancingRules>
+</ApplicationGatewayConfiguration>
+```
 
 ### 步骤 2
 
 下一步，设置应用程序网关。将 `Set-AzureApplicationGatewayConfig` cmdlet 与配置 XML 文件配合使用。
 
-    Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile "D:\config.xml"
+```
+Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile "D:\config.xml"
+```
 
 ## 使用配置对象配置应用程序网关
 
@@ -221,56 +234,70 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 按以下示例中所示创建前端 IP。
 
-    $fip = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendIPConfiguration
-    $fip.Name = "fip1"
-    $fip.Type = "Private"
-    $fip.StaticIPAddress = "10.0.0.5"
+```
+$fip = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendIPConfiguration
+$fip.Name = "fip1"
+$fip.Type = "Private"
+$fip.StaticIPAddress = "10.0.0.5"
+```
 
 按以下示例中所示创建前端端口。
 
-    $fep = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendPort
-    $fep.Name = "fep1"
-    $fep.Port = 80
+```
+$fep = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendPort
+$fep.Name = "fep1"
+$fep.Port = 80
+```
 
 创建后端服务器池。
 
 按以下示例中所示定义要添加到后端服务器池的 IP 地址。
 
-    $servers = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendServerCollection
-    $servers.Add("10.0.0.1")
-    $servers.Add("10.0.0.2")
+```
+$servers = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendServerCollection
+$servers.Add("10.0.0.1")
+$servers.Add("10.0.0.2")
+```
 
 使用 $server 对象将值添加到后端池对象 ($pool)。
 
-    $pool = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendAddressPool
-    $pool.BackendServers = $servers
-    $pool.Name = "pool1"
+```
+$pool = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendAddressPool
+$pool.BackendServers = $servers
+$pool.Name = "pool1"
+```
 
 创建后端服务器池设置。
 
-    $setting = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendHttpSettings
-    $setting.Name = "setting1"
-    $setting.CookieBasedAffinity = "enabled"
-    $setting.Port = 80
-    $setting.Protocol = "http"
+```
+$setting = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendHttpSettings
+$setting.Name = "setting1"
+$setting.CookieBasedAffinity = "enabled"
+$setting.Port = 80
+$setting.Protocol = "http"
+```
 
 创建侦听器。
 
-    $listener = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpListener
-    $listener.Name = "listener1"
-    $listener.FrontendPort = "fep1"
-    $listener.FrontendIP = "fip1"
-    $listener.Protocol = "http"
-    $listener.SslCert = ""
+```
+$listener = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpListener
+$listener.Name = "listener1"
+$listener.FrontendPort = "fep1"
+$listener.FrontendIP = "fip1"
+$listener.Protocol = "http"
+$listener.SslCert = ""
+```
 
 创建规则。
 
-    $rule = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpLoadBalancingRule
-    $rule.Name = "rule1"
-    $rule.Type = "basic"
-    $rule.BackendHttpSettings = "setting1"
-    $rule.Listener = "listener1"
-    $rule.BackendAddressPool = "pool1"
+```
+$rule = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpLoadBalancingRule
+$rule.Name = "rule1"
+$rule.Type = "basic"
+$rule.BackendHttpSettings = "setting1"
+$rule.Listener = "listener1"
+$rule.BackendAddressPool = "pool1"
+```
 
 ### 步骤 2
 
@@ -278,39 +305,53 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 将前端 IP 添加到配置。
 
-    $appgwconfig = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.ApplicationGatewayConfiguration
-    $appgwconfig.FrontendIPConfigurations = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendIPConfiguration]"
-    $appgwconfig.FrontendIPConfigurations.Add($fip)
+```
+$appgwconfig = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.ApplicationGatewayConfiguration
+$appgwconfig.FrontendIPConfigurations = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendIPConfiguration]"
+$appgwconfig.FrontendIPConfigurations.Add($fip)
+```
 
 将前端端口添加到配置。
 
-    $appgwconfig.FrontendPorts = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendPort]"
-    $appgwconfig.FrontendPorts.Add($fep)
+```
+$appgwconfig.FrontendPorts = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendPort]"
+$appgwconfig.FrontendPorts.Add($fep)
+```
 
 将后端服务器池添加到配置。
 
-    $appgwconfig.BackendAddressPools = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendAddressPool]"
-    $appgwconfig.BackendAddressPools.Add($pool)  
+```
+$appgwconfig.BackendAddressPools = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendAddressPool]"
+$appgwconfig.BackendAddressPools.Add($pool)  
+```
 
 将后端池设置添加到配置。
 
-    $appgwconfig.BackendHttpSettingsList = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendHttpSettings]"
-    $appgwconfig.BackendHttpSettingsList.Add($setting)
+```
+$appgwconfig.BackendHttpSettingsList = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendHttpSettings]"
+$appgwconfig.BackendHttpSettingsList.Add($setting)
+```
 
 将侦听器添加到配置。
 
-    $appgwconfig.HttpListeners = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpListener]"
-    $appgwconfig.HttpListeners.Add($listener)
+```
+$appgwconfig.HttpListeners = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpListener]"
+$appgwconfig.HttpListeners.Add($listener)
+```
 
 将规则添加到配置。
 
-    $appgwconfig.HttpLoadBalancingRules = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpLoadBalancingRule]"
-    $appgwconfig.HttpLoadBalancingRules.Add($rule)
+```
+$appgwconfig.HttpLoadBalancingRules = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpLoadBalancingRule]"
+$appgwconfig.HttpLoadBalancingRules.Add($rule)
+```
 
 ### 步骤 3
 使用 `Set-AzureApplicationGatewayConfig` 将配置对象提交到应用程序网关资源。
 
-    Set-AzureApplicationGatewayConfig -Name AppGwTest -Config $appgwconfig
+```
+Set-AzureApplicationGatewayConfig -Name AppGwTest -Config $appgwconfig
+```
 
 ## 启动网关
 
@@ -321,7 +362,9 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 > 
 > 
 
-    Start-AzureApplicationGateway AppGwTest
+```
+Start-AzureApplicationGateway AppGwTest
+```
 
 ## 验证网关状态
 
@@ -329,21 +372,25 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 以下示例演示了一个正常运行并已准备好将流量定向到 `http://<generated-dns-name>.chinacloudapp.cn` 的应用程序网关。
 
-    Get-AzureApplicationGateway AppGwTest
+```
+Get-AzureApplicationGateway AppGwTest
+```
 
 <br/>  
 
-    VERBOSE: 8:09:28 PM - Begin Operation: Get-AzureApplicationGateway
-    VERBOSE: 8:09:30 PM - Completed Operation: Get-AzureApplicationGateway
-    Name          : AppGwTest
-    Description   :
-    VnetName      : testvnet1
-    Subnets       : {Subnet-1}
-    InstanceCount : 2
-    GatewaySize   : Medium
-    State         : Running
-    Vip           : 138.91.170.26
-    DnsName       : appgw-1b8402e8-3e0d-428d-b661-289c16c82101.chinacloudapp.cn
+```
+VERBOSE: 8:09:28 PM - Begin Operation: Get-AzureApplicationGateway
+VERBOSE: 8:09:30 PM - Completed Operation: Get-AzureApplicationGateway
+Name          : AppGwTest
+Description   :
+VnetName      : testvnet1
+Subnets       : {Subnet-1}
+InstanceCount : 2
+GatewaySize   : Medium
+State         : Running
+Vip           : 138.91.170.26
+DnsName       : appgw-1b8402e8-3e0d-428d-b661-289c16c82101.chinacloudapp.cn
+```
 
 ## 删除应用程序网关
 
@@ -355,36 +402,46 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 以下示例在第一行显示 `Stop-AzureApplicationGateway` cmdlet，接着显示输出。
 
-    Stop-AzureApplicationGateway AppGwTest
+```
+Stop-AzureApplicationGateway AppGwTest
 
-    VERBOSE: 9:49:34 PM - Begin Operation: Stop-AzureApplicationGateway
-    VERBOSE: 10:10:06 PM - Completed Operation: Stop-AzureApplicationGateway
-    Name       HTTP Status Code     Operation ID                             Error
-    ----       ----------------     ------------                             ----
-    Successful OK                   ce6c6c95-77b4-2118-9d65-e29defadffb8
+VERBOSE: 9:49:34 PM - Begin Operation: Stop-AzureApplicationGateway
+VERBOSE: 10:10:06 PM - Completed Operation: Stop-AzureApplicationGateway
+Name       HTTP Status Code     Operation ID                             Error
+----       ----------------     ------------                             ----
+Successful OK                   ce6c6c95-77b4-2118-9d65-e29defadffb8
+```
 
 应用程序网关进入停止状态后，请使用 `Remove-AzureApplicationGateway` cmdlet 删除该服务。
 
-    Remove-AzureApplicationGateway AppGwTest
+```
+Remove-AzureApplicationGateway AppGwTest
+```
 
 <br/>  
 
-    VERBOSE: 10:49:34 PM - Begin Operation: Remove-AzureApplicationGateway
-    VERBOSE: 10:50:36 PM - Completed Operation: Remove-AzureApplicationGateway
-    Name       HTTP Status Code     Operation ID                             Error
-    ----       ----------------     ------------                             ----
-    Successful OK                   055f3a96-8681-2094-a304-8d9a11ad8301
+```
+VERBOSE: 10:49:34 PM - Begin Operation: Remove-AzureApplicationGateway
+VERBOSE: 10:50:36 PM - Completed Operation: Remove-AzureApplicationGateway
+Name       HTTP Status Code     Operation ID                             Error
+----       ----------------     ------------                             ----
+Successful OK                   055f3a96-8681-2094-a304-8d9a11ad8301
+```
 
 若要验证是否已删除服务，可以使用 `Get-AzureApplicationGateway` cmdlet。此步骤不是必需的。
 
-    Get-AzureApplicationGateway AppGwTest
+```
+Get-AzureApplicationGateway AppGwTest
+```
 
 <br/>  
 
-    VERBOSE: 10:52:46 PM - Begin Operation: Get-AzureApplicationGateway
+```
+VERBOSE: 10:52:46 PM - Begin Operation: Get-AzureApplicationGateway
 
-    Get-AzureApplicationGateway : ResourceNotFound: The gateway does not exist.
-    .....
+Get-AzureApplicationGateway : ResourceNotFound: The gateway does not exist.
+.....
+```
 
 ## 后续步骤
 
@@ -394,8 +451,8 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-* [Azure Load Balancer](../load-balancer/index.md/)
-* [Azure 流量管理器](../traffic-manager/index.md/)
+* [Azure Load Balancer](../load-balancer/index.md)
+* [Azure 流量管理器](../traffic-manager/index.md)
 
 [scenario]: ./media/application-gateway-create-gateway/scenario.png
 

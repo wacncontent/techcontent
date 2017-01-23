@@ -20,7 +20,8 @@ ms.author: asteen
 
 # 了解有关密码管理的详细信息
 
-> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+> [!IMPORTANT]
+> **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 如果你已部署密码管理，或只是想要在部署之前深入了解密码管理工作原理的技术细节，则本部分可让你大致了解该服务背后的技术概念。本部分将介绍以下内容：
 
@@ -71,7 +72,7 @@ ms.author: asteen
 10. 如果密码设置操作失败，我们会将错误返回给用户，让他们再试一次。操作失败的可能原因是服务已关闭、用户选择的密码不符合组织策略、我们在本地 AD 中找不到该用户等。我们对于许多这类情况都有一个特定消息，并告知用户他们可以执行哪些操作来解决问题。
 
 ### <a name="scenarios-supported-for-password-writeback"></a>密码写回支持的方案
-下表介绍同步功能的各个版本支持哪些方案。通常情况下，如果要使用密码写回，我们强烈建议安装最新版本的 [Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect/)。
+下表介绍同步功能的各个版本支持哪些方案。通常情况下，如果要使用密码写回，我们强烈建议安装最新版本的 [Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect)。
 
   ![][002]  
 
@@ -106,7 +107,8 @@ ms.author: asteen
 ### <a name="what-data-is-used-by-password-reset"></a>密码重置使用哪些数据？
 下表概述密码重置期间此数据使用的位置和方式，旨在帮助你决定哪些身份验证选项适合你的组织。此表还显示当你代表用户从未验证此数据的输入路径提供数据时的格式要求。
 
-> [!NOTE] 注册门户中不会显示办公电话，因为用户当前无法在目录中编辑此属性。
+> [!NOTE]
+> 注册门户中不会显示办公电话，因为用户当前无法在目录中编辑此属性。
 
 <table>
           <tbody><tr>
@@ -309,18 +311,24 @@ ms.author: asteen
 
 #####备用电子邮件
 
-    Connect-MsolService
-    Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
+```
+Connect-MsolService
+Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
+```
 
 #####移动电话
-    
-    Connect-MsolService
-    Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
+
+```
+Connect-MsolService
+Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
+```
 
 #####办公电话
-    
-    Connect-MsolService
-    Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
+
+```
+Connect-MsolService
+Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
+```
 
 #### 使用 PowerShell 读取密码重置数据
 可以使用 Azure AD PowerShell 读取以下字段的值。
@@ -334,29 +342,39 @@ ms.author: asteen
 若要开始，首先需要[下载并安装 Azure AD PowerShell 模块](https://msdn.microsoft.com/zh-cn/library/azure/jj151815.aspx#bkmk_installmodule)。安装后，你可以遵照以下步骤配置每个字段。
 
 ##### 备用电子邮件
-    
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
+
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
+```
 
 ##### 移动电话
-    
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
+
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
+```
 
 ##### 办公电话
-    
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
+
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
+```
 
 ##### 身份验证电话
-    
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
+
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
+```
 
 ##### 身份验证电子邮件
-    
-    Connect-MsolService
-    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
+
+```
+Connect-MsolService
+Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
+```
 
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：

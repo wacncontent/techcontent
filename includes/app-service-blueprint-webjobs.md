@@ -1,4 +1,3 @@
-
 ## 资源
 
 * [什么是 WebJobs SDK](../articles/app-service-web/websites-dotnet-webjobs-sdk.md)

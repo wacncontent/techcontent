@@ -36,7 +36,8 @@ ms.author: tdykstra
 
 本教程可以配合 Visual Studio 2015 使用，但在本地运行应用程序之前，必须将 Web.config 和 App.config 文件中 SQL Server LocalDB 连接字符串的 `Data Source` 部分从 `Data Source=(localdb)\v11.0` 更改为 `Data Source=(LocalDb)\MSSQLLocalDB`。
 
-> [!NOTE] <a name="note"></a>完成本教程需要 Azure 帐户：
+> [!NOTE]
+> <a name="note"></a>完成本教程需要 Azure 帐户：
 ><p>
 > * 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)：获取用于试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，仍可保留帐户并使用免费 Azure 服务（如网站）。不会收取任何费用，除非明确更改设置并要求收费。
 >
@@ -414,112 +415,124 @@ Web 项目和 Web 作业项目都处理 SQL 数据库，因此两者都需要引
 ### ContosoAdsCommon - Ad.cs
 Ad.cs 文件为 ad 类别定义一个枚举，为 ad 信息定义一个 POCO 实体类。
 
-        public enum Category
-        {
-            Cars,
-            [Display(Name="Real Estate")]
-            RealEstate,
-            [Display(Name = "Free Stuff")]
-            FreeStuff
-        }
+```
+    public enum Category
+    {
+        Cars,
+        [Display(Name="Real Estate")]
+        RealEstate,
+        [Display(Name = "Free Stuff")]
+        FreeStuff
+    }
 
-        public class Ad
-        {
-            public int AdId { get; set; }
+    public class Ad
+    {
+        public int AdId { get; set; }
 
-            [StringLength(100)]
-            public string Title { get; set; }
+        [StringLength(100)]
+        public string Title { get; set; }
 
-            public int Price { get; set; }
+        public int Price { get; set; }
 
-            [StringLength(1000)]
-            [DataType(DataType.MultilineText)]
-            public string Description { get; set; }
+        [StringLength(1000)]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
 
-            [StringLength(1000)]
-            [DisplayName("Full-size Image")]
-            public string ImageURL { get; set; }
+        [StringLength(1000)]
+        [DisplayName("Full-size Image")]
+        public string ImageURL { get; set; }
 
-            [StringLength(1000)]
-            [DisplayName("Thumbnail")]
-            public string ThumbnailURL { get; set; }
+        [StringLength(1000)]
+        [DisplayName("Thumbnail")]
+        public string ThumbnailURL { get; set; }
 
-            [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-            public DateTime PostedDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime PostedDate { get; set; }
 
-            public Category? Category { get; set; }
-            [StringLength(12)]
-            public string Phone { get; set; }
-        }
+        public Category? Category { get; set; }
+        [StringLength(12)]
+        public string Phone { get; set; }
+    }
+```
 
 ### ContosoAdsCommon - ContosoAdsContext.cs
 ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存储在 SQL 数据库中。
 
-        public class ContosoAdsContext : DbContext
+```
+    public class ContosoAdsContext : DbContext
+    {
+        public ContosoAdsContext() : base("name=ContosoAdsContext")
         {
-            public ContosoAdsContext() : base("name=ContosoAdsContext")
-            {
-            }
-            public ContosoAdsContext(string connString)
-                : base(connString)
-            {
-            }
-            public System.Data.Entity.DbSet<Ad> Ads { get; set; }
         }
+        public ContosoAdsContext(string connString)
+            : base(connString)
+        {
+        }
+        public System.Data.Entity.DbSet<Ad> Ads { get; set; }
+    }
+```
 
 类具有两个构造函数。第一个由 Web 项目使用，并指定存储在 Web.config 文件或 Azure 运行时环境中的连接字符串的名称。第二个构造函数允许在实际连接字符串中传递。程序需要 Web 作业项目，因为它没有 Web.config 文件。之前看到存储此连接字符串的位置，稍后会看到在实例化 DbContext 类时代码如何检索连接字符串。
 
 ### ContosoAdsCommon - BlobInformation.cs
 `BlobInformation` 类用于在队列消息中存储有关图像 Blob 的信息。
 
-        public class BlobInformation
-        {
-            public Uri BlobUri { get; set; }
+```
+    public class BlobInformation
+    {
+        public Uri BlobUri { get; set; }
 
-            public string BlobName
+        public string BlobName
+        {
+            get
             {
-                get
-                {
-                    return BlobUri.Segments[BlobUri.Segments.Length - 1];
-                }
+                return BlobUri.Segments[BlobUri.Segments.Length - 1];
             }
-            public string BlobNameWithoutExtension
-            {
-                get
-                {
-                    return Path.GetFileNameWithoutExtension(BlobName);
-                }
-            }
-            public int AdId { get; set; }
         }
+        public string BlobNameWithoutExtension
+        {
+            get
+            {
+                return Path.GetFileNameWithoutExtension(BlobName);
+            }
+        }
+        public int AdId { get; set; }
+    }
+```
 
 ### ContosoAdsWeb - Global.asax.cs
 从 `Application_Start` 方法调用的代码创建*图像* Blob 容器和*图像*队列（如果它们尚不存在）。这确保只要开始使用新的存储帐户，将会自动创建所需的 Blob 容器和队列。
 
 此代码通过使用 *Web.config* 文件或 Azure 运行时环境中的存储连接字符串，获取存储帐户的访问权限。
 
-        var storageAccount = CloudStorageAccount.Parse
-            (ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ToString());
+```
+    var storageAccount = CloudStorageAccount.Parse
+        (ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ToString());
+```
 
 然后，获取对*图像* Blob 容器的引用，创建尚不存在的容器，并在新容器上设置访问权限。默认情况下，新容器仅允许拥有存储帐户凭据的客户端访问 Blob。Web 应用需要将 Blob 公开，以便它可以使用指向图像 Blob 的 URL 显示图像。
 
-        var blobClient = storageAccount.CreateCloudBlobClient();
-        var imagesBlobContainer = blobClient.GetContainerReference("images");
-        if (imagesBlobContainer.CreateIfNotExists())
-        {
-            imagesBlobContainer.SetPermissions(
-                new BlobContainerPermissions
-                {
-                    PublicAccess = BlobContainerPublicAccessType.Blob
-                });
-        }
+```
+    var blobClient = storageAccount.CreateCloudBlobClient();
+    var imagesBlobContainer = blobClient.GetContainerReference("images");
+    if (imagesBlobContainer.CreateIfNotExists())
+    {
+        imagesBlobContainer.SetPermissions(
+            new BlobContainerPermissions
+            {
+                PublicAccess = BlobContainerPublicAccessType.Blob
+            });
+    }
+```
 
 类似代码获取对 *thumbnailrequest* 队列的引用并创建一个新队列。在这种情况下，不需要更改权限。
 
-        CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-        var imagesQueue = queueClient.GetQueueReference("thumbnailrequest");
-        imagesQueue.CreateIfNotExists();
+```
+    CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+    var imagesQueue = queueClient.GetQueueReference("thumbnailrequest");
+    imagesQueue.CreateIfNotExists();
+```
 
 ### ContosoAdsWeb - \_Layout.cshtml
 *\_Layout.cshtml* 文件在页眉和页脚中设置应用名称，并创建“广告”菜单项。
@@ -527,157 +540,191 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 ### ContosoAdsWeb - Views\\Home\\Index.cshtml
 *Views\\Home\\Index.cshtml* 文件在主页上显示类别链接。链接将查询字符串变量中 `Category` 枚举的整数值传递到“广告索引”页面。
 
-        <li>@Html.ActionLink("Cars", "Index", "Ad", new { category = (int)Category.Cars }, null)</li>
-        <li>@Html.ActionLink("Real estate", "Index", "Ad", new { category = (int)Category.RealEstate }, null)</li>
-        <li>@Html.ActionLink("Free stuff", "Index", "Ad", new { category = (int)Category.FreeStuff }, null)</li>
-        <li>@Html.ActionLink("All", "Index", "Ad", null, null)</li>
+```
+    <li>@Html.ActionLink("Cars", "Index", "Ad", new { category = (int)Category.Cars }, null)</li>
+    <li>@Html.ActionLink("Real estate", "Index", "Ad", new { category = (int)Category.RealEstate }, null)</li>
+    <li>@Html.ActionLink("Free stuff", "Index", "Ad", new { category = (int)Category.FreeStuff }, null)</li>
+    <li>@Html.ActionLink("All", "Index", "Ad", null, null)</li>
+```
 
 ### <a name="ResolveBlobName" id="resolveblobname"></a>ContosoAdsWeb - AdController.cs
 在 *AdController.cs* 文件中，构造函数调用 `InitializeStorage` 方法创建 Azure 存储客户端库对象，提供用于处理 Blob 和队列的 API。
 
 然后，代码获取对*图像* Blob 容器的引用，正如之前在 *Global.asax.cs* 中所看到的。执行此操作时，它设置适用于 Web 应用的默认[重试策略](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/transient-fault-handling)。对于超过暂时性故障反复重试超过一分钟的 Web 应用，默认指数回退重试策略可能会将其挂起。此处指定的重试策略将在每次尝试后等待 3 秒，最多可尝试 3 次。
 
-        var blobClient = storageAccount.CreateCloudBlobClient();
-        blobClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
-        imagesBlobContainer = blobClient.GetContainerReference("images");
+```
+    var blobClient = storageAccount.CreateCloudBlobClient();
+    blobClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
+    imagesBlobContainer = blobClient.GetContainerReference("images");
+```
 
 类似代码获取对*图像*队列的引用。
 
-        CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-        queueClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
-        imagesQueue = queueClient.GetQueueReference("blobnamerequest");
+```
+    CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+    queueClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
+    imagesQueue = queueClient.GetQueueReference("blobnamerequest");
+```
 
 大部分控制器代码通常用于使用 DbContext 类的实体框架数据模型。例外情况是 HttpPost `Create` 方法，它上载文件并将其保存在 Blob 存储中。模型联编程序为该方法提供一个 [HttpPostedFileBase](http://msdn.microsoft.com/zh-cn/library/system.web.httppostedfilebase.aspx) 对象。
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(
-            [Bind(Include = "Title,Price,Description,Category,Phone")] Ad ad,
-            HttpPostedFileBase imageFile)
+```
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Create(
+        [Bind(Include = "Title,Price,Description,Category,Phone")] Ad ad,
+        HttpPostedFileBase imageFile)
+```
 
 如果用户选择要上载的文件，则代码上载该文件，将其保存在 Blob 中，并使用指向 Blob 的 URL 更新广告数据库记录。
 
-        if (imageFile != null && imageFile.ContentLength != 0)
-        {
-            blob = await UploadAndSaveBlobAsync(imageFile);
-            ad.ImageURL = blob.Uri.ToString();
-        }
+```
+    if (imageFile != null && imageFile.ContentLength != 0)
+    {
+        blob = await UploadAndSaveBlobAsync(imageFile);
+        ad.ImageURL = blob.Uri.ToString();
+    }
+```
 
 执行上载的代码位于 `UploadAndSaveBlobAsync` 方法中。它将创建 Blob 的 GUID 名称，上载和保存该文件，并将引用返回已保存的 Blob。
 
-        private async Task<CloudBlockBlob> UploadAndSaveBlobAsync(HttpPostedFileBase imageFile)
+```
+    private async Task<CloudBlockBlob> UploadAndSaveBlobAsync(HttpPostedFileBase imageFile)
+    {
+        string blobName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+        CloudBlockBlob imageBlob = imagesBlobContainer.GetBlockBlobReference(blobName);
+        using (var fileStream = imageFile.InputStream)
         {
-            string blobName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-            CloudBlockBlob imageBlob = imagesBlobContainer.GetBlockBlobReference(blobName);
-            using (var fileStream = imageFile.InputStream)
-            {
-                await imageBlob.UploadFromStreamAsync(fileStream);
-            }
-            return imageBlob;
+            await imageBlob.UploadFromStreamAsync(fileStream);
         }
+        return imageBlob;
+    }
+```
 
 HttpPost `Create` 方法上载 Blob 并更新数据库后，将创建队列消息，以通知后端进程图像已准备好转换为缩略图。
 
-        BlobInformation blobInfo = new BlobInformation() { AdId = ad.AdId, BlobUri = new Uri(ad.ImageURL) };
-        var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
-        await thumbnailRequestQueue.AddMessageAsync(queueMessage);
+```
+    BlobInformation blobInfo = new BlobInformation() { AdId = ad.AdId, BlobUri = new Uri(ad.ImageURL) };
+    var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
+    await thumbnailRequestQueue.AddMessageAsync(queueMessage);
+```
 
 HttpPost `Edit` 方法的代码类似，不同之处在于如果用户选择新图像文件，则必须删除此广告已存在的任何 Blob。
 
-        if (imageFile != null && imageFile.ContentLength != 0)
-        {
-            await DeleteAdBlobsAsync(ad);
-            imageBlob = await UploadAndSaveBlobAsync(imageFile);
-            ad.ImageURL = imageBlob.Uri.ToString();
-        }
+```
+    if (imageFile != null && imageFile.ContentLength != 0)
+    {
+        await DeleteAdBlobsAsync(ad);
+        imageBlob = await UploadAndSaveBlobAsync(imageFile);
+        ad.ImageURL = imageBlob.Uri.ToString();
+    }
+```
 
 以下是删除广告时删除 Blob 的代码：
 
-        private async Task DeleteAdBlobsAsync(Ad ad)
+```
+    private async Task DeleteAdBlobsAsync(Ad ad)
+    {
+        if (!string.IsNullOrWhiteSpace(ad.ImageURL))
         {
-            if (!string.IsNullOrWhiteSpace(ad.ImageURL))
-            {
-                Uri blobUri = new Uri(ad.ImageURL);
-                await DeleteAdBlobAsync(blobUri);
-            }
-            if (!string.IsNullOrWhiteSpace(ad.ThumbnailURL))
-            {
-                Uri blobUri = new Uri(ad.ThumbnailURL);
-                await DeleteAdBlobAsync(blobUri);
-            }
+            Uri blobUri = new Uri(ad.ImageURL);
+            await DeleteAdBlobAsync(blobUri);
         }
-        private static async Task DeleteAdBlobAsync(Uri blobUri)
+        if (!string.IsNullOrWhiteSpace(ad.ThumbnailURL))
         {
-            string blobName = blobUri.Segments[blobUri.Segments.Length - 1];
-            CloudBlockBlob blobToDelete = imagesBlobContainer.GetBlockBlobReference(blobName);
-            await blobToDelete.DeleteAsync();
+            Uri blobUri = new Uri(ad.ThumbnailURL);
+            await DeleteAdBlobAsync(blobUri);
         }
+    }
+    private static async Task DeleteAdBlobAsync(Uri blobUri)
+    {
+        string blobName = blobUri.Segments[blobUri.Segments.Length - 1];
+        CloudBlockBlob blobToDelete = imagesBlobContainer.GetBlockBlobReference(blobName);
+        await blobToDelete.DeleteAsync();
+    }
+```
 
 ### ContosoAdsWeb - Views\\Ad\\Index.cshtml 和 Details.cshtml
 *Index.cshtml* 文件显示包含其他广告数据的缩略图：
 
-        <img  src="@Html.Raw(item.ThumbnailURL)" />
+```
+    <img  src="@Html.Raw(item.ThumbnailURL)" />
+```
 
 *Details.cshtml* 文件显示全尺寸图像：
 
-        <img src="@Html.Raw(Model.ImageURL)" />
+```
+    <img src="@Html.Raw(Model.ImageURL)" />
+```
 
 ### ContosoAdsWeb - Views\\Ad\\Create.cshtml 和 Edit.cshtml
 *Create.cshtml* 和 *Edit.cshtml* 文件指定窗体编码，允许控制器获取 `HttpPostedFileBase` 对象。
 
-        @using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+```
+    @using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+```
 
 `<input>` 元素通知浏览器提供文件选择对话框。
 
-        <input type="file" name="imageFile" accept="image/*" class="form-control fileupload" />
+```
+    <input type="file" name="imageFile" accept="image/*" class="form-control fileupload" />
+```
 
 ### <a id="programcs"></a>ContosoAdsWebJob - Program.cs
 当 Web 作业启动时，`Main` 方法将调用 WebJobs SDK `JobHost.RunAndBlock` 方法，以开始执行当前线程上触发的函数。
 
-        static void Main(string[] args)
-        {
-            JobHost host = new JobHost();
-            host.RunAndBlock();
-        }
+```
+    static void Main(string[] args)
+    {
+        JobHost host = new JobHost();
+        host.RunAndBlock();
+    }
+```
 
 ### <a id="generatethumbnail"></a>ContosoAdsWebJob - Functions.cs - GenerateThumbnail 方法
 接收队列消息时，WebJobs SDK 将调用此方法。该方法创建缩略图，并将缩略图放在数据库中的 URL。
 
-        public static void GenerateThumbnail(
-        [QueueTrigger("thumbnailrequest")] BlobInformation blobInfo,
-        [Blob("images/{BlobName}", FileAccess.Read)] Stream input,
-        [Blob("images/{BlobNameWithoutExtension}_thumbnail.jpg")] CloudBlockBlob outputBlob)
+```
+    public static void GenerateThumbnail(
+    [QueueTrigger("thumbnailrequest")] BlobInformation blobInfo,
+    [Blob("images/{BlobName}", FileAccess.Read)] Stream input,
+    [Blob("images/{BlobNameWithoutExtension}_thumbnail.jpg")] CloudBlockBlob outputBlob)
+    {
+        using (Stream output = outputBlob.OpenWrite())
         {
-            using (Stream output = outputBlob.OpenWrite())
-            {
-                ConvertImageToThumbnailJPG(input, output);
-                outputBlob.Properties.ContentType = "image/jpeg";
-            }
-
-            // Entity Framework context class is not thread-safe, so it must
-            // be instantiated and disposed within the function.
-            using (ContosoAdsContext db = new ContosoAdsContext())
-            {
-                var id = blobInfo.AdId;
-                Ad ad = db.Ads.Find(id);
-                if (ad == null)
-                {
-                    throw new Exception(String.Format("AdId {0} not found, can't create thumbnail", id.ToString()));
-                }
-                ad.ThumbnailURL = outputBlob.Uri.ToString();
-                db.SaveChanges();
-            }
+            ConvertImageToThumbnailJPG(input, output);
+            outputBlob.Properties.ContentType = "image/jpeg";
         }
+
+        // Entity Framework context class is not thread-safe, so it must
+        // be instantiated and disposed within the function.
+        using (ContosoAdsContext db = new ContosoAdsContext())
+        {
+            var id = blobInfo.AdId;
+            Ad ad = db.Ads.Find(id);
+            if (ad == null)
+            {
+                throw new Exception(String.Format("AdId {0} not found, can't create thumbnail", id.ToString()));
+            }
+            ad.ThumbnailURL = outputBlob.Uri.ToString();
+            db.SaveChanges();
+        }
+    }
+```
 
 * `QueueTrigger` 属性指示 WebJobs SDK thumbnailrequest 队列上接收到新消息时调用此方法。
 
-        [QueueTrigger("thumbnailrequest")] BlobInformation blobInfo,
+    ```
+    [QueueTrigger("thumbnailrequest")] BlobInformation blobInfo,
+    ```
 
     队列消息中的 `BlobInformation` 对象是自动反序列化为 `blobInfo` 参数。当该方法完成时，将删除队列消息。如果该方法将在完成之前失败，则不会删除队列消息；10 分钟租约过期后，会再次挑选发布和处理消息。如果有消息始终引起异常，则不会无限期地重复此序列。如果尝试处理某条消息 5 次都不成功，会将该消息移到名为 {queuename}-poison 的队列。可以配置最大尝试次数。
 * 这两个 `Blob` 属性提供绑定到 Blob 的对象：一个绑定到现有的图像 Blob，另一个绑定到该方法创建的新缩略图 Blob。
 
-        [Blob("images/{BlobName}", FileAccess.Read)] Stream input,
-        [Blob("images/{BlobNameWithoutExtension}_thumbnail.jpg")] CloudBlockBlob outputBlob)
+    ```
+    [Blob("images/{BlobName}", FileAccess.Read)] Stream input,
+    [Blob("images/{BlobNameWithoutExtension}_thumbnail.jpg")] CloudBlockBlob outputBlob)
+    ```
 
     Blob 名称来自队列消息中收到的 `BlobInformation` 对象的属性（`BlobName` 和 `BlobNameWithoutExtension`）。若要获取存储客户端库的完整功能，可以使用兼容 Blob 的 `CloudBlockBlob` 类。如果要重用为使用 `Stream` 对象编写的代码，可以使用 `Stream` 类。
 

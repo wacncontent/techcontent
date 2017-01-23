@@ -38,7 +38,7 @@ ms.author: robinsh
     - **存储日志记录**可以在服务器端日志中记录发送到 Azure 存储服务的每个请求。日志用于跟踪每个请求的详细数据，包括执行的操作、操作的状态和延迟信息。有关存储分析写入日志的请求和响应数据的详细信息，请参阅[存储分析日志格式](http://msdn.microsoft.com/zh-cn/library/azure/hh343259.aspx)。
 
 - **Azure 经典管理门户**。可以在[Azure 经典管理门户](https://manage.windowsazure.cn)中配置存储帐户的度量值和日志记录。还可以查看显示应用程序在各时间段执行情况的图表和图形，以及配置警报，以便在应用程序的特定度量值不同于预期时接收通知。
-    
+
     有关在 Azure 经典管理门户中配置监视功能的信息，请参阅[监视 Azure 门户中的存储帐户](./storage-monitor-storage-account.md)。
 
 - **AzCopy**。Azure 存储的服务器日志存储为 Blob，因此你可以使用 AzCopy 将日志 Blob 复制到本地目录，以使用 Microsoft Message Analyzer 进行分析。有关 AzCopy 的详细信息，请参阅[使用 AzCopy 命令行实用工具传输数据](./storage-use-azcopy.md)。
@@ -72,7 +72,7 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 - 当你使用 Create API 创建新容器或 Blob，但未事先检查存在性，而已经存在同名的容器或 Blob 时发生。
 - 如果在删除某个容器时，你尝试在删除操作完成之前创建同名的新容器，则会发生此错误。
 - 如果在容器或 Blob 中指定了租约，但已存在租约，则会发生此错误。
- 
+
 **状态代码 412（前置条件失败）示例**
 
 - 当未满足条件标头指定的条件时发生。
@@ -93,7 +93,8 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 
 若要使用门户配置存储帐户的日志记录和度量值，请遵循[监视 Azure 门户预览中的存储帐户](./storage-monitor-storage-account.md)中的说明。
 
-> [!NOTE] 无法使用 Azure 经典管理门户设置分钟度量值。但是，对于本教程，我们建议你设置分钟度量值，它还可以调查应用程序的性能问题。可以使用 PowerShell（如下所示）设置分钟度量值，也可以通过编程方式或 Azure 经典管理门户设置。
+> [!NOTE]
+> 无法使用 Azure 经典管理门户设置分钟度量值。但是，对于本教程，我们建议你设置分钟度量值，它还可以调查应用程序的性能问题。可以使用 PowerShell（如下所示）设置分钟度量值，也可以通过编程方式或 Azure 经典管理门户设置。
 >
 > 请注意，Azure 经典管理门户无法显示分钟度量值，而只显示小时度量值。
 
@@ -103,22 +104,30 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 
 1. 使用 [Add-AzureAccount](http://msdn.microsoft.com/zh-cn/library/azure/dn722528.aspx) cmdlet 将 Azure 用户帐户添加到 PowerShell 窗口中：
 
-        Add-AzureAccount -Environment azurechinacloud
-    
+    ```
+    Add-AzureAccount -Environment azurechinacloud
+    ```
+
 2. 在“登录 Azure”窗口中，键入与你的帐户关联的电子邮件地址和密码。Azure 将对凭据信息进行身份验证和保存，然后关闭该窗口。
 3. 通过在 PowerShell 窗口中执行以下命令，将默认存储帐户设置为用于本教程的存储帐户：
 
-        $SubscriptionName = 'Your subscription name'
-        $StorageAccountName = 'yourstorageaccount' 
-        Set-AzureSubscription -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName 
+    ```
+    $SubscriptionName = 'Your subscription name'
+    $StorageAccountName = 'yourstorageaccount' 
+    Set-AzureSubscription -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName 
+    ```
 
 4. 为 Blob 服务启用存储日志记录：
- 
-        Set-AzureStorageServiceLoggingProperty -ServiceType Blob -LoggingOperations Read,Write,Delete -PassThru -RetentionDays 7 -Version 1.0 
+
+    ```
+    Set-AzureStorageServiceLoggingProperty -ServiceType Blob -LoggingOperations Read,Write,Delete -PassThru -RetentionDays 7 -Version 1.0 
+    ```
 
 5. 为 Blob 服务启用存储度量值，确保将 **-MetricsType** 设置为 `Minute`：
 
-        Set-AzureStorageServiceMetricsProperty -ServiceType Blob -MetricsType Minute -MetricsLevel ServiceAndApi -PassThru -RetentionDays 7 -Version 1.0 
+    ```
+    Set-AzureStorageServiceMetricsProperty -ServiceType Blob -MetricsType Minute -MetricsLevel ServiceAndApi -PassThru -RetentionDays 7 -Version 1.0 
+    ```
 
 ### 配置 .NET 客户端日志记录
 
@@ -147,12 +156,15 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 4. 选择 **Microsoft-Pef-WebProxy** ETW 提供程序右侧的“配置”链接。
 5. 在“高级设置”对话框中，单击“提供程序”选项卡。
 6. 在“主机名筛选器”字段中，指定以空格分隔的存储终结点。例如，可按如下所示指定终结点；将 `storagesample` 更改为存储帐户名称：
-    
-        storagesample.blob.core.chinacloudapi.cn storagesample.queue.core.chinacloudapi.cn storagesample.table.core.chinacloudapi.cn 
+
+    ```
+    storagesample.blob.core.chinacloudapi.cn storagesample.queue.core.chinacloudapi.cn storagesample.table.core.chinacloudapi.cn 
+    ```
 
 7. 退出对话框，然后单击“重新启动”，在启用主机名筛选器的情况下开始收集跟踪，以便仅在跟踪中包含 Azure 存储网络通信。
 
->[!NOTE] 在完成收集网络跟踪后，我们强烈建议还原你可能在 Fiddler 中为了解密 HTTPS 通信而更改的设置。在“Fiddler 选项”对话框中，取消选中“捕获 HTTPS 连接”和“解密 HTTPS 通信”复选框。
+>[!NOTE]
+> 在完成收集网络跟踪后，我们强烈建议还原你可能在 Fiddler 中为了解密 HTTPS 通信而更改的设置。在“Fiddler 选项”对话框中，取消选中“捕获 HTTPS 连接”和“解密 HTTPS 通信”复选框。
 
 有关详细信息，请参阅 Technet 上的[使用网络跟踪功能](http://technet.microsoft.com/zh-cn/library/jj674819.aspx)。
 
@@ -172,7 +184,8 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 
 有关将度量值添加到监视页的详细信息，请参阅[如何：向度量值表中添加度量值](./storage-monitor-storage-account.md#how-to-add-metrics-to-the-metrics-table)。
 
-> [!NOTE] 在启用存储度量值后，可能需要经过一段时间，度量值数据才会显示在 Azure 经典管理门户中。这是因为，只有在当前小时已过后，前一个小时的小时度量值才会显示在 Azure 经典管理门户中。此外，分钟度量值不会显示在 Azure 经典管理门户中。因此，根据启用度量值的时间，最多可能需要两个小时才能看到度量值数据。
+> [!NOTE]
+> 在启用存储度量值后，可能需要经过一段时间，度量值数据才会显示在 Azure 经典管理门户中。这是因为，只有在当前小时已过后，前一个小时的小时度量值才会显示在 Azure 经典管理门户中。此外，分钟度量值不会显示在 Azure 经典管理门户中。因此，根据启用度量值的时间，最多可能需要两个小时才能看到度量值数据。
 
 ## 使用 AzCopy 将服务器日志复制到本地目录
 
@@ -180,7 +193,9 @@ Azure 存储将服务器日志数据写入 Blob，将度量值写入表。存储
 
 可以使用 AzCopy 命令行工具将这些服务器端日志文件下载到你本地计算机上的所选位置。例如，可以使用以下命令将发生于 2015 年 1 月 2 日 Blob 操作的日志文件下载到文件夹 `C:\Temp\Logs\Server`；将 `<storageaccountname>` 替换为存储帐户名称，将 `<storageaccountkey>` 替换为帐户访问密钥：
 
-    AzCopy.exe /Source:http://<storageaccountname>.blob.core.chinacloudapi.cn/$logs /Dest:C:\Temp\Logs\Server /Pattern:"blob/2015/01/02" /SourceKey:<storageaccountkey> /S /V
+```
+AzCopy.exe /Source:http://<storageaccountname>.blob.core.chinacloudapi.cn/$logs /Dest:C:\Temp\Logs\Server /Pattern:"blob/2015/01/02" /SourceKey:<storageaccountkey> /S /V
+```
 
 可以从 [Azure 下载](/downloads/)页下载 AzCopy。有关使用 AzCopy 的详细信息，请参阅[使用 AzCopy 命令行实用工具传输数据](./storage-use-azcopy.md)。
 
@@ -206,7 +221,8 @@ Message Analyzer 包括 Azure 存储的资产，可帮助你分析服务器、�
 
 ![Message Analyzer 资产管理器](./media/storage-e2e-troubleshooting-classic-portal/mma-start-page-1.png)
 
-> [!NOTE] 对于本教程，请安装显示的所有 Azure 存储资产。
+> [!NOTE]
+> 对于本教程，请安装显示的所有 Azure 存储资产。
 
 ### 将日志文件导入 Message Analyzer
 可以将所有已保存的日志文件（服务器端、客户端和网络）导入到 Microsoft Message Analyzer 的单个会话中以供分析。
@@ -249,7 +265,8 @@ Message Analyzer 的存储资产包括 Azure 存储视图布局，它们是预�
 
 ![Azure 存储视图布局](./media/storage-e2e-troubleshooting-classic-portal/view-layout-client-request-id-module.png)
 
->[!NOTE] 不同的日志文件具有不同的列，因此，当分析网格中显示了多个日志文件中的数据时，某些列可能不包含某一给定行的任何数据。例如，在上图中，客户端日志行未显示“时间戳”，“已用时间”、“源”和“目标”列的任何数据，因为这些列不在客户端日志中，而在网络跟踪中。同样，“时间戳”列显示了服务器日志中的时间戳数据，但未显示“已用时间”、“源”和“目标”列的任何数据，因为这些数据不在服务器日志中。
+>[!NOTE]
+> 不同的日志文件具有不同的列，因此，当分析网格中显示了多个日志文件中的数据时，某些列可能不包含某一给定行的任何数据。例如，在上图中，客户端日志行未显示“时间戳”，“已用时间”、“源”和“目标”列的任何数据，因为这些列不在客户端日志中，而在网络跟踪中。同样，“时间戳”列显示了服务器日志中的时间戳数据，但未显示“已用时间”、“源”和“目标”列的任何数据，因为这些数据不在服务器日志中。
 
 除了使用 Azure 存储视图布局以外，还可以定义并保存自己的视图布局。可以选择其他所需字段来分组数据，并将分组另存为自定义布局的一部分。
 
@@ -270,7 +287,9 @@ Message Analyzer 的存储资产包括 Azure 存储视图布局，它们是预�
 1. 显示“视图筛选器”工具窗口（如果尚未显示）。在工具栏功能区中，选择“工具窗口”，然后选择“视图筛选器”。
 2. 若要将日志数据筛选为仅显示 400 范围错误，请将以下筛选条件添加到“视图筛选器”窗口，然后单击“应用”：
 
-        (AzureStorageLog.StatusCode >= 400 && AzureStorageLog.StatusCode <=499) || (HTTP.StatusCode >= 400 && HTTP.StatusCode <= 499)
+    ```
+    (AzureStorageLog.StatusCode >= 400 && AzureStorageLog.StatusCode <=499) || (HTTP.StatusCode >= 400 && HTTP.StatusCode <= 499)
+    ```
 
 下图显示了此分组和筛选器的结果。例如，展开状态代码 409 所对应的分组下面的 **ClientRequestID** 字段会显示导致该状态代码的操作。
 
@@ -278,7 +297,8 @@ Message Analyzer 的存储资产包括 Azure 存储视图布局，它们是预�
 
 应用此筛选器后，你将看到已从客户端日志中排除的行，因为客户端日志不包含 **StatusCode** 列。首先，我们将检查服务器和网络跟踪日志，以找到 404 错误，然后我们会返回到客户端日志以检查导致它们的客户端操作。
 
->[!NOTE] 你可以根据 **StatusCode** 列筛选，并仍显示所有三个日志（包括客户端日志）中的数据，前提是将表达式添加到包括日志条目的筛选器（状态代码为 null）。若要构造此筛选器表达式，请使用：
+>[!NOTE]
+> 你可以根据 **StatusCode** 列筛选，并仍显示所有三个日志（包括客户端日志）中的数据，前提是将表达式添加到包括日志条目的筛选器（状态代码为 null）。若要构造此筛选器表达式，请使用：
 >
 > <code>&#42;StatusCode >= 400 或 !&#42;StatusCode</code>
 >
@@ -294,8 +314,10 @@ Message Analyzer 的存储资产包括 Azure 存储视图布局，它们是预�
 4. 将筛选器中显示的时间戳编辑为你想要查看的范围。这有助于缩小要分析的数据范围。
 5. 你的筛选器应类似于以下示例。单击“应用”将筛选器应用到分析网格。
 
-        ((AzureStorageLog.StatusCode == 404 || HTTP.StatusCode == 404)) And 
-        (#Timestamp >= 2014-10-20T16:36:38 and #Timestamp <= 2014-10-20T16:36:39)
+    ```
+    ((AzureStorageLog.StatusCode == 404 || HTTP.StatusCode == 404)) And 
+    (#Timestamp >= 2014-10-20T16:36:38 and #Timestamp <= 2014-10-20T16:36:39)
+    ```
 
 ![Azure 存储视图布局](./media/storage-e2e-troubleshooting-classic-portal/404-filtered-errors1.png)
 
@@ -313,7 +335,9 @@ Message Analyzer 的存储资产包括 Azure 存储视图布局，它们是预�
 2. 在工具栏功能区中，选择“视图布局”，然后选择“Azure 存储”部分下的“所有 .NET 客户端列”。此视图布局显示客户端日志以及服务器和网络跟踪日志中的数据。默认情况下，这些数据已按 **MessageNumber** 列排序。
 3. 接下来，搜索客户端请求 ID 的客户端日志。在工具栏功能区中，选择“查找消息”，然后在“查找”字段中指定客户端请求 ID 上的自定义筛选器。对于筛选器，请使用以下语法指定自己的客户端请求 ID：
 
-        *ClientRequestId == "398bac41-7725-484b-8a69-2a9e48fc669a"
+    ```
+    *ClientRequestId == "398bac41-7725-484b-8a69-2a9e48fc669a"
+    ```
 
 Message Analyzer 将查找并选择搜索条件与客户端请求 ID 匹配的第一个日志条目。在客户端日志中，每个客户端请求 ID 有多个条目，因此你可能需要根据 **ClientRequestId** 字段对其分组，以更轻松地查看其聚合视图。下图显示了指定的客户端请求 ID 的客户端日志中的所有消息。
 
@@ -354,5 +378,5 @@ Message Analyzer 将查找并选择搜索条件与客户端请求 ID 匹配的�
 - [监视 Azure 门户预览中的存储帐户](./storage-monitor-storage-account.md)
 - [使用 AzCopy 命令行实用工具传输数据](./storage-use-azcopy.md)
 - [Microsoft Message Analyzer 操作指南](http://technet.microsoft.com/zh-cn/library/jj649776.aspx)
- 
+
 <!---HONumber=Mooncake_0103_2017-->

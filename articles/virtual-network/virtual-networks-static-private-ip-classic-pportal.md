@@ -24,7 +24,8 @@ ms.author: jdial
 
 [!INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
 
->[!IMPORTANT]在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](../azure-classic-rm.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍经典部署模型。还可[在 Resource Manager 部署模型中管理静态专用 IP 地址](./virtual-networks-static-private-ip-arm-pportal.md)。
+>[!IMPORTANT]
+>在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](../azure-classic-rm.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍经典部署模型。还可[在 Resource Manager 部署模型中管理静态专用 IP 地址](./virtual-networks-static-private-ip-arm-pportal.md)。
 
 [!INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
 
@@ -65,7 +66,7 @@ ms.author: jdial
 
 ## 如何从 VM 中删除静态专用 IP 地址
 若要从上面创建的 VM 中删除静态专用 IP 地址，请按照以下步骤操作。
-    
+
 1. 从上示“IP 地址”边栏选项卡中“IP 地址分配”右侧，依次单击“动态”、“保存”和“是”。
 
     ![在 Azure 门户预览中创建 VM](./media/virtual-networks-static-ip-classic-pportal/figure07.png)

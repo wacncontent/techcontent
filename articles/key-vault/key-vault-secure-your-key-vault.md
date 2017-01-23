@@ -83,7 +83,8 @@ Azure 密钥保管库是可以在 Azure资源管理器部署模型中使用的 A
 
 可以通过分配相应的 RBAC 角色，在特定范围内向用户、组和应用程序授予访问权限。例如，若要向某个用户授予管理密钥保管库的权限，可在特定的范围内向此用户分配预定义的角色“密钥保管库参与者”。在本例中，范围是订阅、资源组或特定的密钥保管库。在订阅级别分配的角色适用于该订阅中的所有资源组和资源。在资源组级别分配的角色适用于该资源组中的所有资源。为特定资源分配的角色仅适用于该资源。有几个预定义的角色（请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)）。如果预定义的角色不符合你的需要，你也可以定义自己的角色。
 
->[!IMPORTANT] 请注意，如果某个用户对密钥保管库管理平面拥有“参与者”权限 (RBAC)，该用户可以通过设置密钥保管库访问策略（用于控制对数据平面的访问），向自己授予数据平面访问权限。因此，建议严格控制谁对密钥保管库拥有“参与者”访问权限，确保只有授权的人员可以访问和管理你的密钥保管库、密钥、机密和证书。
+>[!IMPORTANT]
+> 请注意，如果某个用户对密钥保管库管理平面拥有“参与者”权限 (RBAC)，该用户可以通过设置密钥保管库访问策略（用于控制对数据平面的访问），向自己授予数据平面访问权限。因此，建议严格控制谁对密钥保管库拥有“参与者”访问权限，确保只有授权的人员可以访问和管理你的密钥保管库、密钥、机密和证书。
 
 <a name="data-plane-access-control"></a>
 ## 数据平面访问控制
@@ -96,7 +97,8 @@ Azure 密钥保管库是可以在 Azure资源管理器部署模型中使用的 A
 
 密钥保管库访问策略单独授予对密钥、机密和证书的权限。例如，可以向用户授予仅限密钥的访问权限，而不授予对机密的权限。但是，对访问密钥、机密或证书的权限是在保管库级别分配的。换而言之，密钥保管库访问策略不支持对象级权限。可以使用 [Azure 门户预览](https://portal.azure.cn/)、[Azure CLI 工具](../xplat-cli-install.md)、[PowerShell](../powershell-install-configure.md) 或[密钥保管库管理 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt620024.aspx) 设置密钥保管库的访问策略。
 
->[!IMPORTANT] 请注意，密钥保管库访问策略在保管库级别应用。例如，授予某个用户创建和删除密钥的权限时，该用户可以针对该密钥保管库中的所有密钥执行这些操作。
+>[!IMPORTANT]
+> 请注意，密钥保管库访问策略在保管库级别应用。例如，授予某个用户创建和删除密钥的权限时，该用户可以针对该密钥保管库中的所有密钥执行这些操作。
 
 <a name="example"></a>
 ## 示例
@@ -142,7 +144,8 @@ Azure 密钥保管库是可以在 Azure资源管理器部署模型中使用的 A
 |审核人员| 无 | 密钥：列出<br>机密：列出|
 |应用程序| 无 | 密钥：签名<br>机密：获取 |
 
->[!NOTE] 审核员需要对密钥和机密拥有列出权限，以便能够检查日志中未发出的密钥和机密的属性，例如标记、激活日期和过期日期。
+>[!NOTE]
+> 审核员需要对密钥和机密拥有列出权限，以便能够检查日志中未发出的密钥和机密的属性，例如标记、激活日期和过期日期。
 
 除了对密钥保管库的权限以外，所有三个角色还需要有权访问其他资源。例如，能够部署 VM（或 Web 应用等）。 开发人员/操作人员还需要对这些资源类型拥有“参与者”访问权限。审核人员需要对密钥保管库日志所存储到的存储帐户拥有读取访问权限。
 
@@ -160,36 +163,40 @@ Azure 密钥保管库是可以在 Azure资源管理器部署模型中使用的 A
 
 首先，订阅管理员向安全小组分配“密钥保管库参与者”和“用户访问管理员”角色。这样，安全团队便可以管理对其他资源的访问权限，以及管理资源组 ContosoAppRG 中的密钥保管库。
 
-    New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "key vault Contributor" -ResourceGroupName ContosoAppRG
-    New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "User Access Administrator" -ResourceGroupName ContosoAppRG
+```
+New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "key vault Contributor" -ResourceGroupName ContosoAppRG
+New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -RoleDefinitionName "User Access Administrator" -ResourceGroupName ContosoAppRG
+```
 
 以下脚本演示安全团队如何创建密钥保管库、设置日志记录，以及设置对其他角色和应用程序的访问权限。
 
-    # Create key vault and enable logging
-    $sa = Get-AzureRmStorageAccount -ResourceGroup ContosoAppRG -Name contosologstorage
-    $kv = New-AzureRmKeyVault -VaultName ContosoKeyVault -ResourceGroup ContosoAppRG -SKU premium -Location 'ChinaNorth' -EnabledForDeployment
-    Set-AzureRmDiagnosticSetting -ResourceId $kv.ResourceId -StorageAccountId $sa.Id -Enabled $true -Categories AuditEvent
+```
+# Create key vault and enable logging
+$sa = Get-AzureRmStorageAccount -ResourceGroup ContosoAppRG -Name contosologstorage
+$kv = New-AzureRmKeyVault -VaultName ContosoKeyVault -ResourceGroup ContosoAppRG -SKU premium -Location 'ChinaNorth' -EnabledForDeployment
+Set-AzureRmDiagnosticSetting -ResourceId $kv.ResourceId -StorageAccountId $sa.Id -Enabled $true -Categories AuditEvent
 
-    # Data plane permissions for Security team
-    Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -PermissionToKeys backup,create,delete,get,import,list,restore -PermissionToSecrets all
+# Data plane permissions for Security team
+Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso Security Team')[0].Id -PermissionToKeys backup,create,delete,get,import,list,restore -PermissionToSecrets all
 
-    # Management plane permissions for Dev/ops
-    # Create a new role from an existing role
-    $devopsrole = Get-AzureRmRoleDefinition -Name "Virtual Machine Contributor"
-    $devopsrole.Id = $null
-    $devopsrole.Name = "Contoso App Devops"
-    $devopsrole.Description = "Can deploy VMs that need secrets from key vault"
-    $devlopsrole.AssignableScopes = @("/subscriptions/<SUBSCRIPTION-GUID>")
+# Management plane permissions for Dev/ops
+# Create a new role from an existing role
+$devopsrole = Get-AzureRmRoleDefinition -Name "Virtual Machine Contributor"
+$devopsrole.Id = $null
+$devopsrole.Name = "Contoso App Devops"
+$devopsrole.Description = "Can deploy VMs that need secrets from key vault"
+$devlopsrole.AssignableScopes = @("/subscriptions/<SUBSCRIPTION-GUID>")
 
-    # Add permission for dev/ops so they can deploy VMs that have secrets deployed from key vaults
-    $devopsrole.Actions.Add("Microsoft.KeyVault/vaults/deploy/action")
-    New-AzureRmRoleDefinition -Role $role
+# Add permission for dev/ops so they can deploy VMs that have secrets deployed from key vaults
+$devopsrole.Actions.Add("Microsoft.KeyVault/vaults/deploy/action")
+New-AzureRmRoleDefinition -Role $role
 
-    # Assign this newly defined role to Dev ops security group
-    New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Devops')[0].Id -RoleDefinitionName "Contoso App Devops" -ResourceGroupName ContosoAppRG
+# Assign this newly defined role to Dev ops security group
+New-AzureRmRoleAssignment -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Devops')[0].Id -RoleDefinitionName "Contoso App Devops" -ResourceGroupName ContosoAppRG
 
-    # Data plane permissions for Auditors
-    Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Auditors')[0].Id -PermissionToKeys list -PermissionToSecrets list
+# Data plane permissions for Auditors
+Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoKeyVault -ObjectId (Get-AzureRmADGroup -SearchString 'Contoso App Auditors')[0].Id -PermissionToKeys list -PermissionToSecrets list
+```
 
 自定义的角色只能分配给创建 ContosoAppRG 资源组所在的订阅。如果要为其他订阅中的其他项目使用相同的自定义角色，应该在角色范围中添加更多的订阅。
 
@@ -197,7 +204,8 @@ Azure 密钥保管库是可以在 Azure资源管理器部署模型中使用的 A
 
 本示例描绘了一个简单方案。现实的方案可能更复杂，需要你根据需求调整对密钥保管库的权限。例如，在本示例中，假设安全团队会向开发人员/操作人员团队提供他们需要在应用程序中使用的密钥和机密引用（URI 和指纹）。因此，安全团队不需要向开发人员/操作人员授予任何数据平面访问权限。另外，请注意，本示例重点演示如何保护密钥保管库。保护 VM、[存储帐户](../storage/storage-security-guide.md)和其他 Azure 资源时，也应该考虑类似的因素。
 
->[!NOTE] 注意：本示例演示如何在生产环境中锁定密钥保管库访问权限。开发人员应该获取自己的、拥有完全权限的订阅或资源组，以便能够管理用于开发应用程序的保管库、VM 和存储帐户。
+>[!NOTE]
+> 注意：本示例演示如何在生产环境中锁定密钥保管库访问权限。开发人员应该获取自己的、拥有完全权限的订阅或资源组，以便能够管理用于开发应用程序的保管库、VM 和存储帐户。
 
 ## 资源
 

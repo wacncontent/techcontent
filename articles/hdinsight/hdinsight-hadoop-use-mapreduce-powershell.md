@@ -33,7 +33,7 @@ ms.author: larryfr
 
 * **Azure HDInsight（HDInsight 上的 Hadoop）群集（基于 Windows）**
 * **配备 Azure PowerShell 的工作站**。
-  
+
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 ## <a id="powershell"></a>使用 Azure PowerShell 运行 MapReduce 作业
@@ -58,59 +58,66 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 MapRed
 
 1. 使用编辑器将以下代码保存为 **mapreducejob.ps1**。必须将 **CLUSTERNAME** 替换为 HDInsight 群集的名称。
 
-        #Login to your Azure subscription
-        # Is there an active Azure subscription?
-        $sub = Get-AzureSubscription -ErrorAction SilentlyContinue
-        if(-not($sub))
-        {
-            Add-AzureAccount -Environment AzureChinaCloud
-        }
+    ```
+    #Login to your Azure subscription
+    # Is there an active Azure subscription?
+    $sub = Get-AzureSubscription -ErrorAction SilentlyContinue
+    if(-not($sub))
+    {
+        Add-AzureAccount -Environment AzureChinaCloud
+    }
 
-        #Specify the cluster name
-        $clusterName = "CLUSTERNAME"
+    #Specify the cluster name
+    $clusterName = "CLUSTERNAME"
 
-        #Define the MapReduce job
-        #NOTE: If using an HDInsight 2.0 cluster, use hadoop-examples.jar instead.
-        # -JarFile = the JAR containing the MapReduce application
-        # -ClassName = the class of the application
-        # -Arguments = The input file, and the output directory
-        $wordCountJobDefinition = New-AzureHDInsightMapReduceJobDefinition -JarFile "wasb:///example/jars/hadoop-mapreduce-examples.jar" `
-                                  -ClassName "wordcount" `
-                                  -Arguments "wasb:///example/data/gutenberg/davinci.txt", "wasb:///example/data/WordCountOutput"
+    #Define the MapReduce job
+    #NOTE: If using an HDInsight 2.0 cluster, use hadoop-examples.jar instead.
+    # -JarFile = the JAR containing the MapReduce application
+    # -ClassName = the class of the application
+    # -Arguments = The input file, and the output directory
+    $wordCountJobDefinition = New-AzureHDInsightMapReduceJobDefinition -JarFile "wasb:///example/jars/hadoop-mapreduce-examples.jar" `
+                              -ClassName "wordcount" `
+                              -Arguments "wasb:///example/data/gutenberg/davinci.txt", "wasb:///example/data/WordCountOutput"
 
-        #Submit the job to the cluster
-        Write-Host "Start the MapReduce job..." -ForegroundColor Green
-        $wordCountJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $wordCountJobDefinition
+    #Submit the job to the cluster
+    Write-Host "Start the MapReduce job..." -ForegroundColor Green
+    $wordCountJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $wordCountJobDefinition
 
-        #Wait for the job to complete
-        Write-Host "Wait for the job to complete..." -ForegroundColor Green
-        Wait-AzureHDInsightJob -Job $wordCountJob -WaitTimeoutInSeconds 3600
+    #Wait for the job to complete
+    Write-Host "Wait for the job to complete..." -ForegroundColor Green
+    Wait-AzureHDInsightJob -Job $wordCountJob -WaitTimeoutInSeconds 3600
 
-        # Print the output
-        Write-Host "Display the standard output..." -ForegroundColor Green
-        Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $wordCountJob.JobId -StandardOutput
+    # Print the output
+    Write-Host "Display the standard output..." -ForegroundColor Green
+    Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $wordCountJob.JobId -StandardOutput
+    ```
 
 2. 打开一个新的 **Azure PowerShell** 命令提示符。将目录更改为 **mapreducejob.ps1** 文件所在位置，然后使用以下命令来运行脚本：
-   
-        .\mapreducejob.ps1
-   
+
+    ```
+    .\mapreducejob.ps1
+    ```
+
     运行脚本时，系统将提示对 Azure 订阅进行身份验证。还会要求你提供 HDInsight 群集的 HTTPS/Admin 帐户名称和密码。
 
 3. 作业完成后，应显示如下输出：
-    
-        Cluster         : CLUSTERNAME
-        ExitCode        : 0
-        Name            : wordcount
-        PercentComplete : map 100% reduce 100%
-        Query           :
-        State           : Completed
-        StatusDirectory : f1ed2028-afe8-402f-a24b-13cc17858097
-        SubmissionTime  : 12/5/2014 8:34:09 PM
-        JobId           : job_1415949758166_0071
-    
+
+    ```
+    Cluster         : CLUSTERNAME
+    ExitCode        : 0
+    Name            : wordcount
+    PercentComplete : map 100% reduce 100%
+    Query           :
+    State           : Completed
+    StatusDirectory : f1ed2028-afe8-402f-a24b-13cc17858097
+    SubmissionTime  : 12/5/2014 8:34:09 PM
+    JobId           : job_1415949758166_0071
+    ```
+
     此输出指示作业已成功完成。
 
-    > [!NOTE] 如果 **ExitCode** 的值不是 0，请参阅[故障排除](#troubleshooting)。
+    > [!NOTE]
+    > 如果 **ExitCode** 的值不是 0，请参阅[故障排除](#troubleshooting)。
 
 ##查看输出
 
@@ -125,33 +132,36 @@ MapReduce 作业已将操作结果存储到 Azure Blob 存储（位于指定为�
 
 以下示例将检索存储信息，然后从 **wasb:///example/data/WordCountOutput** 下载输出。将 **CLUSTERNAME** 替换为 HDInsight 群集的名称。
 
-        #Login to your Azure subscription
-        # Is there an active Azure subscription?
-        $sub = Get-AzureSubscription -ErrorAction SilentlyContinue
-        if(-not($sub))
-        {
-            Add-AzureAccount -Environment AzureChinaCloud
-        }
+```
+    #Login to your Azure subscription
+    # Is there an active Azure subscription?
+    $sub = Get-AzureSubscription -ErrorAction SilentlyContinue
+    if(-not($sub))
+    {
+        Add-AzureAccount -Environment AzureChinaCloud
+    }
 
-        #Specify the cluster name
-        $clusterName = "CLUSTERNAME"
+    #Specify the cluster name
+    $clusterName = "CLUSTERNAME"
 
-        #Retrieve the cluster information
-        $clusterInfo = Get-AzureHDInsightCluster -ClusterName $clusterName
+    #Retrieve the cluster information
+    $clusterInfo = Get-AzureHDInsightCluster -ClusterName $clusterName
 
-        #Get the storage account information
-        $storageAccountName = $clusterInfo.DefaultStorageAccount.StorageAccountName
-        $storageAccountKey = $clusterInfo.DefaultStorageAccount.StorageAccountKey
-        $storageContainer = $clusterInfo.DefaultStorageAccount.StorageContainerName
+    #Get the storage account information
+    $storageAccountName = $clusterInfo.DefaultStorageAccount.StorageAccountName
+    $storageAccountKey = $clusterInfo.DefaultStorageAccount.StorageAccountKey
+    $storageContainer = $clusterInfo.DefaultStorageAccount.StorageContainerName
 
-        #Create the context object
-        $context = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
+    #Create the context object
+    $context = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
 
-        #Download the files from wasb:///example/data/WordCountOutput
-        #Use the -blob switch to filter only blobs contained in example/data/WordCountOutput
-        Get-AzureStorageBlob -Container $storageContainer -Blob example/data/WordCountOutput/* -Context $context | Get-AzureStorageBlobContent -Context $context
+    #Download the files from wasb:///example/data/WordCountOutput
+    #Use the -blob switch to filter only blobs contained in example/data/WordCountOutput
+    Get-AzureStorageBlob -Container $storageContainer -Blob example/data/WordCountOutput/* -Context $context | Get-AzureStorageBlobContent -Context $context
+```
 
-> [!NOTE] 此示例会将下载的文件存储到你从中运行脚本的目录中的 **example/data/WordCountOutput** 文件夹。
+> [!NOTE]
+> 此示例会将下载的文件存储到你从中运行脚本的目录中的 **example/data/WordCountOutput** 文件夹。
 
 在文本编辑器中打开 **output.txt** 文件，以查看作业生成的单词和计数。
 
@@ -162,9 +172,11 @@ MapReduce 作业的输出文件是固定不变的。因此，如果重新运行�
 
 如果作业完成时未返回任何信息，可能表示处理期间发生错误。若要查看此作业的错误信息，请将以下命令添加到 **mapreducejob.ps1** 文件的末尾，保存，然后重新运行该文件。
 
-    # Print the output of the WordCount job.
-    Write-Host "Display the standard output ..." -ForegroundColor Green
-    Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $wordCountJob.JobId -StandardError
+```
+# Print the output of the WordCount job.
+Write-Host "Display the standard output ..." -ForegroundColor Green
+Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $wordCountJob.JobId -StandardError
+```
 
 运行作业时，这将返回写入到服务器上的 STDERR 的信息，可用于确定该作业失败的原因。
 
