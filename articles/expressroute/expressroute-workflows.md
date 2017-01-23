@@ -1,20 +1,21 @@
-<properties
-   pageTitle="ExpressRoute 线路配置工作流 | Azure"
-   description="本页将指导你完成配置 ExpressRoute 线路和对等互连的工作流"
-   documentationCenter="na"
-   services="expressroute"
-   authors="cherylmc"
-   manager="carmonm"
-   editor="" />
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="article" 
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="01/04/2017"
-   ms.author="cherylmc"/>
+---
+title: ExpressRoute 线路配置工作流 | Azure
+description: 本页将指导你完成配置 ExpressRoute 线路和对等互连的工作流
+documentationCenter: na
+services: expressroute
+authors: cherylmc
+manager: carmonm
+editor: 
+
+ms.service: expressroute
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 01/04/2017
+ms.author: cherylmc
+---
 
 # ExpressRoute 线路预配工作流和线路状态
 本页从较高层面引导你完成服务预配和路由配置工作流。
@@ -23,21 +24,20 @@
 
 下图和相应的步骤说明了预配端到端 ExpressRoute 线路所要执行的任务。
 
-1. 使用 PowerShell 配置 ExpressRoute 线路。有关更多详细信息，请遵循[创建 ExpressRoute 线路](/documentation/articles/expressroute-howto-circuit-classic/)一文中的说明。
+1. 使用 PowerShell 配置 ExpressRoute 线路。有关更多详细信息，请遵循[创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)一文中的说明。
 
 2. 从服务提供商订购连接。此过程根据情况而有所不同。有关如何订购连接的详细信息，请联系你的连接服务提供商。
 
 3. 通过 PowerShell 验证 ExpressRoute 线路预配状态，以确保线路预配成功。
 
-4. 配置路由域。如果连接服务提供商管理第 3 层，则他们将为你的线路配置路由。如果连接服务提供商只提供第 2 层服务，则你必须根据[路由要求](/documentation/articles/expressroute-routing/)和[路由配置](/documentation/articles/expressroute-howto-routing-classic/)页中所述的指导原则来配置路由。
+4. 配置路由域。如果连接服务提供商管理第 3 层，则他们将为你的线路配置路由。如果连接服务提供商只提供第 2 层服务，则你必须根据[路由要求](./expressroute-routing.md)和[路由配置](./expressroute-howto-routing-classic.md)页中所述的指导原则来配置路由。
 
 -  启用 Azure 专用对等互连 - 只有启用此对等互连才能连接到部署在虚拟网络中的 VM/云服务。
 -  启用 Azure 公共对等互连 - 如果你想要连接到托管在公共 IP 地址上的 Azure 服务，则必须启用 Azure 公共对等互连。如果你已选择为 Azure 专用对等互连启用默认路由并想要访问 Azure 资源，则必须执行上述操作。
 
     ![](./media/expressroute-workflows/routing-workflow.png)
 
-5. 将虚拟网络链接到 ExpressRoute 线路 - 可以将虚拟网络链接到 ExpressRoute 线路。请按照说明[将 VNet 链接](/documentation/articles/expressroute-howto-linkvnet-arm/)到你的线路。这些 VNet 可以位于 ExpressRoute 线路所在的同一 Azure 订阅中，也可以位于不同的订阅中。
-
+5. 将虚拟网络链接到 ExpressRoute 线路 - 可以将虚拟网络链接到 ExpressRoute 线路。请按照说明[将 VNet 链接](./expressroute-howto-linkvnet-arm.md)到你的线路。这些 VNet 可以位于 ExpressRoute 线路所在的同一 Azure 订阅中，也可以位于不同的订阅中。
 
 ## <a name="expressroute-circuit-provisioning-states"></a> ExpressRoute 线路预配状态
 
@@ -58,24 +58,28 @@
 
 运行 PowerShell cmdlet 创建 ExpressRoute 线路后，很快就会看到 ExpressRoute 线路处于以下状态。
 
-	ServiceProviderProvisioningState : NotProvisioned
-	Status                           : Enabled
-
+```
+ServiceProviderProvisioningState : NotProvisioned
+Status                           : Enabled
+```
 
 #### 当连接服务提供商正在预配线路时
 
 将服务密钥传递给连接服务提供商并且他们已启动预配过程时，很快就会看到 ExpressRoute 线路处于以下状态。
 
-	ServiceProviderProvisioningState : Provisioning
-	Status                           : Enabled
-
+```
+ServiceProviderProvisioningState : Provisioning
+Status                           : Enabled
+```
 
 #### 当连接服务提供商完成预配过程时
 
 当连接服务提供商完成预配过程后，很快就会看到 ExpressRoute 线路处于以下状态。
 
-	ServiceProviderProvisioningState : Provisioned
-	Status                           : Enabled
+```
+ServiceProviderProvisioningState : Provisioned
+Status                           : Enabled
+```
 
 线路只有处于 Provisioned 和 Enabled 状态时才可供使用。如果你使用第 2 层服务提供商，则只有在线路处于此状态时才能配置路由。
 
@@ -83,15 +87,15 @@
 
 如果已请求服务提供商取消预配 ExpressRoute 线路，当服务提供商完成取消预配过程后，将看到线路已设置为以下状态。
 
-
-	ServiceProviderProvisioningState : NotProvisioned
-	Status                           : Enabled
-
+```
+ServiceProviderProvisioningState : NotProvisioned
+Status                           : Enabled
+```
 
 如果需要，你可以选择重新启用线路，或运行 PowerShell cmdlet 删除线路。
 
->[AZURE.IMPORTANT] 当 ServiceProviderProvisioningState 为 Provisioning 或 Provisioned 时，如果运行该 PowerShell cmdlet 来删除线路，操作将会失败。请先让连接服务提供商取消 ExpressRoute 线路，然后删除线路。在运行 PowerShell cmdlet 删除线路之前，Azure 会持续收取线路费用。
-
+>[!IMPORTANT]
+> 当 ServiceProviderProvisioningState 为 Provisioning 或 Provisioned 时，如果运行该 PowerShell cmdlet 来删除线路，操作将会失败。请先让连接服务提供商取消 ExpressRoute 线路，然后删除线路。在运行 PowerShell cmdlet 删除线路之前，Azure 会持续收取线路费用。
 
 ##<a name="routing-session-configuration-state"></a> 路由会话配置状态
 
@@ -101,14 +105,15 @@ BGP 预配状态可让你知道  Azure 边缘是否已启用 BGP 会话。必须
 
 如果播发的公共前缀状态设置为*需要验证*状态，则不会启用 BGP 会话，因为播发的前缀不符合任何路由注册表中的 AS 编号。
 
->[AZURE.IMPORTANT] 如果播发的公共前缀状态是*手动验证*状态，则你必须[在线申请支持](/support/support-ticket-form/?l=zh-cn)创建工单，并提供拥有播发 IP 地址的证明以及相关的自治系统编号。
+>[!IMPORTANT]
+> 如果播发的公共前缀状态是*手动验证*状态，则你必须[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单，并提供拥有播发 IP 地址的证明以及相关的自治系统编号。
 
 ## 后续步骤
 
 - 配置 ExpressRoute 连接。
 
-	- [创建 ExpressRoute 线路](/documentation/articles/expressroute-howto-circuit-arm/)
-	- [配置路由](/documentation/articles/expressroute-howto-routing-arm/)
-	- [将 VNet 链接到 ExpressRoute 线路](/documentation/articles/expressroute-howto-linkvnet-arm/)
+    - [创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
+    - [配置路由](./expressroute-howto-routing-arm.md)
+    - [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

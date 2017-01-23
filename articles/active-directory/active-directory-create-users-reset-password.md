@@ -1,22 +1,22 @@
-<properties
-    pageTitle="已重置 Azure Active Directory 中用户的密码 | Azure"
-    description="说明管理员应如何重置 Azure Active Directory 中用户的密码。"
-    services="active-directory"
-    documentationcenter=""
-    author="curtand"
-    manager="femila"
-    editor="" />  
+---
+title: 已重置 Azure Active Directory 中用户的密码 | Azure
+description: 说明管理员应如何重置 Azure Active Directory 中用户的密码。
+services: active-directory
+documentationcenter: 
+author: curtand
+manager: femila
+editor: 
 
-<tags
-    ms.assetid="324a0b7a-4370-4b3d-bd25-2d5e7eafa683"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/09/2016"
-    ms.author="curtand" 
-    wacn.date="12/09/2016"/>
+ms.assetid: 324a0b7a-4370-4b3d-bd25-2d5e7eafa683
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/09/2016
+ms.author: curtand
+wacn.date: 12/09/2016
+---
 
 # 已重置用户的密码
 
@@ -29,8 +29,8 @@
 5. 选中相应的复选标记以完成重置密码。
 
 ## 后续步骤
-- [向 Azure Active Directory 添加新用户](/documentation/articles/active-directory-create-users/)
-- [管理 Azure AD](/documentation/articles/active-directory-administer/)
-- [在 Azure AD 中管理密码](/documentation/articles/active-directory-manage-passwords/)
+- [向 Azure Active Directory 添加新用户](./active-directory-create-users.md)
+- [管理 Azure AD](./active-directory-administer.md)
+- [在 Azure AD 中管理密码](./active-directory-manage-passwords.md)
 
 <!---HONumber=Mooncake_1128_2016-->

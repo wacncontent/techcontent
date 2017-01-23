@@ -1,23 +1,22 @@
-﻿<properties
-    pageTitle="创建 blob 的只读快照 | Azure"
-    description="了解如何在指定时刻及时创建 blob 的快照以备份 blob 数据。了解如何对快照计费，以及如何使用快照最大程度地减少容量费用。"
-    services="storage"
-    documentationcenter=""
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />  
+﻿---
+title: 创建 blob 的只读快照 | Azure
+description: 了解如何在指定时刻及时创建 blob 的快照以备份 blob 数据。了解如何对快照计费，以及如何使用快照最大程度地减少容量费用。
+services: storage
+documentationcenter: 
+author: mmacy
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="3710705d-e127-4b01-8d0f-29853fb06d0d"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/07/2016"
-    wacn.date="12/29/2016"
-    ms.author="marsma" />  
-
+ms.assetid: 3710705d-e127-4b01-8d0f-29853fb06d0d
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/07/2016
+wacn.date: 12/29/2016
+ms.author: marsma
+---
 
 # 创建 Blob 快照
 ## 概述
@@ -25,7 +24,8 @@
 
 Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一个 **DateTime** 值用于指示快照的生成时间。例如，如果页 Blob URI 为 `http://storagesample.core.blob.chinacloudapi.cn/mydrives/myvhd`，则快照 URI 将类似于 `http://storagesample.core.blob.chinacloudapi.cn/mydrives/myvhd?snapshot=2011-03-09T01:42:34.9360000Z`。
 
-> [AZURE.NOTE] 所有快照共享基本 Blob 的 URI。基本 Blob 与快照之间的唯一区别体现在追加的 **DateTime** 值。
+> [!NOTE]
+> 所有快照共享基本 Blob 的 URI。基本 Blob 与快照之间的唯一区别体现在追加的 **DateTime** 值。
 
 一个 Blob 可以有任意数目的快照。除非显式删除，否则快照会一直保留。快照的生存期不能长于其基本 Blob。你可以枚举与基本 Blob 关联的快照，以跟踪当前快照。
 
@@ -36,37 +36,38 @@ Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一
 ## 创建快照
 以下代码示例演示如何在 .NET 中创建快照。本示例在创建快照时为其指定了单独的元数据。
 
-    private static async Task CreateBlockBlobSnapshot(CloudBlobContainer container)
+```
+private static async Task CreateBlockBlobSnapshot(CloudBlobContainer container)
+{
+    // Create a new block blob in the container.
+    CloudBlockBlob baseBlob = container.GetBlockBlobReference("sample-base-blob.txt");
+
+    // Add blob metadata.
+    baseBlob.Metadata.Add("ApproxBlobCreatedDate", DateTime.UtcNow.ToString());
+
+    try
     {
-        // Create a new block blob in the container.
-        CloudBlockBlob baseBlob = container.GetBlockBlobReference("sample-base-blob.txt");
+        // Upload the blob to create it, with its metadata.
+        await baseBlob.UploadTextAsync(string.Format("Base blob: {0}", baseBlob.Uri.ToString()));
 
-        // Add blob metadata.
-        baseBlob.Metadata.Add("ApproxBlobCreatedDate", DateTime.UtcNow.ToString());
+        // Sleep 5 seconds.
+        System.Threading.Thread.Sleep(5000);
 
-        try
-        {
-            // Upload the blob to create it, with its metadata.
-            await baseBlob.UploadTextAsync(string.Format("Base blob: {0}", baseBlob.Uri.ToString()));
-
-            // Sleep 5 seconds.
-            System.Threading.Thread.Sleep(5000);
-
-            // Create a snapshot of the base blob.
-            // Specify metadata at the time that the snapshot is created to specify unique metadata for the snapshot.
-            // If no metadata is specified when the snapshot is created, the base blob's metadata is copied to the snapshot.
-            Dictionary<string, string> metadata = new Dictionary<string, string>();
-            metadata.Add("ApproxSnapshotCreatedDate", DateTime.UtcNow.ToString());
-            await baseBlob.CreateSnapshotAsync(metadata, null, null, null);
-        }
-        catch (StorageException e)
-        {
-            Console.WriteLine(e.Message);
-            Console.ReadLine();
-            throw;
-        }
+        // Create a snapshot of the base blob.
+        // Specify metadata at the time that the snapshot is created to specify unique metadata for the snapshot.
+        // If no metadata is specified when the snapshot is created, the base blob's metadata is copied to the snapshot.
+        Dictionary<string, string> metadata = new Dictionary<string, string>();
+        metadata.Add("ApproxSnapshotCreatedDate", DateTime.UtcNow.ToString());
+        await baseBlob.CreateSnapshotAsync(metadata, null, null, null);
     }
- 
+    catch (StorageException e)
+    {
+        Console.WriteLine(e.Message);
+        Console.ReadLine();
+        throw;
+    }
+}
+```
 
 ## 复制快照
 涉及 Blob 和快照的复制操作遵循以下规则：
@@ -84,7 +85,9 @@ Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一
 
 以下代码示例演示如何在 .NET 中删除 Blob 及其快照，其中 `blockBlob` 是 **CloudBlockBlob** 类型的变量：
 
-	await blockBlob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, null, null, null);
+```
+await blockBlob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, null, null, null);
+```
 
 ## 在 Azure 高级存储中使用快照
 在高级存储中使用快照需遵循以下规则：
@@ -96,23 +99,25 @@ Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一
 ## 返回快照的绝对 URI
 此 C# 代码示例创建一个快照并写出主位置的绝对 URI。
 
-    //Create the blob service client object.
-    const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
+```
+//Create the blob service client object.
+const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
 
-    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
-    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
+CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-    //Get a reference to a container.
-    CloudBlobContainer container = blobClient.GetContainerReference("sample-container");
-    container.CreateIfNotExists();
+//Get a reference to a container.
+CloudBlobContainer container = blobClient.GetContainerReference("sample-container");
+container.CreateIfNotExists();
 
-    //Get a reference to a blob.
-    CloudBlockBlob blob = container.GetBlockBlobReference("sampleblob.txt");
-    blob.UploadText("This is a blob.");
+//Get a reference to a blob.
+CloudBlockBlob blob = container.GetBlockBlobReference("sampleblob.txt");
+blob.UploadText("This is a blob.");
 
-    //Create a snapshot of the blob and write out its primary URI.
-    CloudBlockBlob blobSnapshot = blob.CreateSnapshot();
-    Console.WriteLine(blobSnapshot.SnapshotQualifiedStorageUri.PrimaryUri);
+//Create a snapshot of the blob and write out its primary URI.
+CloudBlockBlob blobSnapshot = blob.CreateSnapshot();
+Console.WriteLine(blobSnapshot.SnapshotQualifiedStorageUri.PrimaryUri);
+```
 
 ## 了解快照如何产生费用
 创建快照（它是 Blob 的只读副本）会导致你的帐户产生额外的数据存储费用。在设计应用程序时，你有必要了解在哪些情况下会产生这些费用，以便能最大程度地减少不必要的费用。
@@ -125,12 +130,12 @@ Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一
 * 通过调用 **UploadFile**、**UploadText**、**UploadStream** 或 **UploadByteArray** 方法替换块 Blob 可替换该 Blob 中的所有块。如果你有与该 Blob 关联的快照，则基本 Blob 和快照中的所有块现在将发生偏离，并且你需为这两个 Blob 中的所有块支付费用。即使基本 Blob 和快照中的数据保持相同也是如此。
 * Azure Blob 服务无法确定这两个块是否包含相同的数据。每个上传和提交的块均被视为唯一的快，即使它具有相同的数据和块 ID 也是如此。由于唯一的块会产生费用，因此考虑到更新具有快照的 Blob 将导致产生其他唯一块和额外费用这一点很重要。
 
-> [AZURE.NOTE] 最佳实践要求你仔细管理快照以避免额外费用。建议你通过以下方式管理快照：
+> [!NOTE]
+> 最佳实践要求你仔细管理快照以避免额外费用。建议你通过以下方式管理快照：
 
 > - 除非你的应用程序设计需要保留与 Blob 关联的快照，否则请在更新 Blob 时删除并重新创建这些快照，即使你使用相同的数据进行更新也是如此。通过删除并重新创建 Blob 的快照，可以确保 Blob 和快照不会发生偏离。
 
 > - 如果要保留 Blob 的快照，请避免调用 **UploadFile**、**UploadText**、**UploadStream** 或 **UploadByteArray** 更新 Blob。这些方法将替换 Blob 中的所有块，因此基本 Blob 和快照将发生明显偏离。相反，请使用 **PutBlock** 和 **PutBlockList** 方法更新尽可能少的块。
-
 
 ### 快照计费方案
 下列方案说明了块 Blob 及其快照将如何产生费用。

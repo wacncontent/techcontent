@@ -1,24 +1,22 @@
-<properties
-	pageTitle="在流分析中使用引用数据和查找表 | Azure"
-	description="在流分析查询中使用引用数据"
-	keywords="查找表, 引用数据"
-	services="stream-analytics"
-	documentationCenter=""
-	authors="jeffstokes72"
-	manager="jhubbard"
-	editor="cgronlun"/>  
+---
+title: 在流分析中使用引用数据和查找表 | Azure
+description: 在流分析查询中使用引用数据
+keywords: 查找表, 引用数据
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-services"
-	ms.date="09/26/2016"
-	wacn.date="01/17/2017"
-	ms.author="jeffstok"/>  
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 01/17/2017
+ms.author: jeffstok
+---
 
 # 在流分析的输入流中使用引用数据或查找表
 
@@ -77,7 +75,8 @@
 
 如果你的引用数据是缓慢变化的数据集，则使用 {date} 和 {time} 替换令牌在输入配置中指定路径模式即可实现对刷新引用数据的支持。流分析将根据此路径模式选取引用数据定义。例如，使用 `sample/{date}/{time}/products.csv` 模式时，日期格式为“YYYY-MM-DD”，时间格式为“HH:mm”，可指示流分析在 2015 年 4 月 16 日下午 5:30（UTC 时区）提取更新的 blob `sample/2015-04-16/17:30/products.csv`。
 
-> [AZURE.NOTE] 当前，流分析作业仅在计算机时间提前于 blob 名称中的编码时间时才查找 blob 刷新。例如，该作业将尽可能查找 `sample/2015-04-16/17:30/products.csv`，但不会早于 2015 年 4 月 16 日下午 5:30（UTC 时区）。它将*永远不会*查找编码时间早于发现的上一个文件的文件。
+> [!NOTE]
+> 当前，流分析作业仅在计算机时间提前于 blob 名称中的编码时间时才查找 blob 刷新。例如，该作业将尽可能查找 `sample/2015-04-16/17:30/products.csv`，但不会早于 2015 年 4 月 16 日下午 5:30（UTC 时区）。它将*永远不会*查找编码时间早于发现的上一个文件的文件。
 > 
 > 例如，该作业找到 blob `sample/2015-04-16/17:30/products.csv` 后，它将忽略编码日期早于 2015 年 4 月 16 日下午 5:30 的任何文件，因此，如果晚到达的 `sample/2015-04-16/17:25/products.csv` blob 在同一容器中创建，该作业将不会使用它。
 > 
@@ -85,13 +84,11 @@
 > 
 > 这种情况的一个例外是，当作业需要按时重新处理数据时或第一次启动作业时。开始时，作业查找的是在指定的作业开始时间之前生成的最新 blob。这样做是为了确保在作业开始时存在**非空**的引用数据集。如果找不到引用数据集，该作业将显示以下诊断：`Initializing input without a valid reference data blob for UTC time <start time>`。
 
-
-
 ## 有关刷新引用数据的提示 ##
 
 1. 覆盖引用数据 blob 不会导致流分析重新加载 blob，并且在某些情况下，它可能会导致作业失败。更改引用数据的建议方法是使用作业输入中定义的相同容器和路径模式添加新的 blob，并且使用的日期/时间**大于**序列中最后一个 blob 指定的日期/时间。
-2.	引用数据 blob 并不按 blob 的“上次修改”时间排序，而是按 blob 名称中使用 {date} 和 {time} 替换项指定的日期和时间排序。
-3.	有时，作业必须按时返回，因此不能变更或删除引用数据 blob。
+2. 引用数据 blob 并不按 blob 的“上次修改”时间排序，而是按 blob 名称中使用 {date} 和 {time} 替换项指定的日期和时间排序。
+3. 有时，作业必须按时返回，因此不能变更或删除引用数据 blob。
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
@@ -99,17 +96,17 @@
 ## 后续步骤
 我们已经向你介绍了流分析，这是一种托管服务，适用于对物联网的数据进行流式分析。若要了解有关此服务的详细信息，请参阅：
 
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 
 <!--Link references-->
 
 [stream.analytics.developer.guide]: /documentation/articles/stream-analytics-developer-guide/
-[stream.analytics.scale.jobs]: /documentation/articles/stream-analytics-scale-jobs/
-[stream.analytics.introduction]: /documentation/articles/stream-analytics-introduction/
-[stream.analytics.get.started]: /documentation/articles/stream-analytics-get-started/
+[stream.analytics.scale.jobs]: ./stream-analytics-scale-jobs.md
+[stream.analytics.introduction]: ./stream-analytics-introduction.md
+[stream.analytics.get.started]: ./stream-analytics-get-started.md
 [stream.analytics.query.language.reference]: https://msdn.microsoft.com/zh-cn/library/dn834998.aspx
 [stream.analytics.rest.api.reference]: https://msdn.microsoft.com/zh-cn/library/dn835031.aspx
 

@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-data-warehouse-include-pause-description.md
 

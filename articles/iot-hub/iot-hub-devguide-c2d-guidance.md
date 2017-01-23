@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure IoT 中心从云到设备选项 | Azure"
-    description="开发人员指南 - 指导用户何时使用直接方法、设备孪生的所需属性或云到设备的消息，以进行从云到设备的通信。"
-    services="iot-hub"
-    documentationcenter=""
-    author="fsautomata"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="1ac90923-1edf-4134-bbd4-77fee9b68d24"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/09/2016"
-    wacn.date="01/13/2017"
-    ms.author="elioda" />  
+---
+title: Azure IoT 中心从云到设备选项 | Azure
+description: 开发人员指南 - 指导用户何时使用直接方法、设备孪生的所需属性或云到设备的消息，以进行从云到设备的通信。
+services: iot-hub
+documentationcenter: 
+author: fsautomata
+manager: timlt
+editor: 
 
+ms.assetid: 1ac90923-1edf-4134-bbd4-77fee9b68d24
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/09/2016
+wacn.date: 01/13/2017
+ms.author: elioda
+---
 
 # 从云到设备通信指南
 IoT 中心提供三个选项，允许设备应用向后端应用公开功能：
@@ -43,15 +43,15 @@ IoT 中心提供三个选项，允许设备应用向后端应用公开功能：
 * [使用所需属性配置设备][lnk-twin-properties]：针对设备孪生的所需属性；
 * [发送从云到设备的消息][lnk-c2d-tutorial]：针对从云到设备的消息。
 
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-c2d]: /documentation/articles/iot-hub-devguide-messaging/#cloud-to-device-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-twin-properties]: /documentation/articles/iot-hub-node-node-twin-how-to-configure/
-[lnk-c2d-tutorial]: /documentation/articles/iot-hub-node-node-c2d/
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-c2d]: ./iot-hub-devguide-messaging.md#cloud-to-device-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
+[lnk-twin-properties]: ./iot-hub-node-node-twin-how-to-configure.md
+[lnk-c2d-tutorial]: ./iot-hub-node-node-c2d.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

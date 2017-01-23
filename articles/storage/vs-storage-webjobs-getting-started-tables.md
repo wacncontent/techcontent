@@ -1,30 +1,30 @@
-<properties
-    pageTitle="开始使用 Azure 存储空间和 Visual Studio 连接服务（WebJob 项目）"
-    description="在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 Azure WebJobs 项目中使用 Azure 表存储"
-    services="storage"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />
-<tags
-    ms.assetid="061a6c46-0592-4e5d-aced-ab7498481cde"
-    ms.service="storage"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-getting-started"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/02/2016"
-    wacn.date="01/06/2017"
-    ms.author="tarcher" />  
+---
+title: 开始使用 Azure 存储空间和 Visual Studio 连接服务（WebJob 项目）
+description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 Azure WebJobs 项目中使用 Azure 表存储
+services: storage
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
+ms.assetid: 061a6c46-0592-4e5d-aced-ab7498481cde
+ms.service: storage
+ms.workload: web
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: na
+ms.topic: article
+ms.date: 12/02/2016
+wacn.date: 01/06/2017
+ms.author: tarcher
+---
 
 # Azure 存储入门（Azure WebJob 项目）
 
 ## 概述
 
-本文章提供了 C# 代码示例，用于演示如何在 Azure 表存储服务中使用 Azure WebJobs SDK 版本 1.x。这些代码示例使用 [WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk/) 版本 1.x。
+本文章提供了 C# 代码示例，用于演示如何在 Azure 表存储服务中使用 Azure WebJobs SDK 版本 1.x。这些代码示例使用 [WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk.md) 版本 1.x。
 
-Azure 表存储服务使用户可以存储大量结构化数据。该服务是一个 NoSQL 数据存储，接受来自 Azure 云内部和外部的通过验证的呼叫。Azure 表最适合存储结构化非关系型数据。有关详细信息，请参阅[通过 .NET 开始使用 Azure 表存储](/documentation/articles/storage-dotnet-how-to-use-tables/#create-a-table)。
+Azure 表存储服务使用户可以存储大量结构化数据。该服务是一个 NoSQL 数据存储，接受来自 Azure 云内部和外部的通过验证的呼叫。Azure 表最适合存储结构化非关系型数据。有关详细信息，请参阅[通过 .NET 开始使用 Azure 表存储](./storage-dotnet-how-to-use-tables.md#create-a-table)。
 
 一些代码段显示了手动调用（即：不是使用触发器属性之一调用）的函数中使用的 **Table** 属性。
 
@@ -34,34 +34,38 @@ Azure 表存储服务使用户可以存储大量结构化数据。该服务是�
 
 下面的代码示例将 **Person** 实体添加到名为 *Ingress* 的表。
 
-		[NoAutomaticTrigger]
-		public static void IngressDemo(
-		    [Table("Ingress")] ICollector<Person> tableBinding)
-		{
-		    for (int i = 0; i < 100000; i++)
-		    {
-		        tableBinding.Add(
-		            new Person() {
-		                PartitionKey = "Test",
-		                RowKey = i.ToString(),
-		                Name = "Name" }
-		            );
-		    }
-		}
+```
+    [NoAutomaticTrigger]
+    public static void IngressDemo(
+        [Table("Ingress")] ICollector<Person> tableBinding)
+    {
+        for (int i = 0; i < 100000; i++)
+        {
+            tableBinding.Add(
+                new Person() {
+                    PartitionKey = "Test",
+                    RowKey = i.ToString(),
+                    Name = "Name" }
+                );
+        }
+    }
+```
 
 通常情况下，用于 **ICollector** 的类型派生自 **TableEntity** 或者通过实现 **ITableEntity** 获得，但这不是必需的。以下 **Person** 类之一适用于前面 **Ingress** 方法中所示的代码。
 
-		public class Person : TableEntity
-		{
-		    public string Name { get; set; }
-		}
+```
+    public class Person : TableEntity
+    {
+        public string Name { get; set; }
+    }
 
-		public class Person
-		{
-		    public string PartitionKey { get; set; }
-		    public string RowKey { get; set; }
-		    public string Name { get; set; }
-		}
+    public class Person
+    {
+        public string PartitionKey { get; set; }
+        public string RowKey { get; set; }
+        public string Name { get; set; }
+    }
+```
 
 如果你想要直接使用 Azure 存储 API，则可以向方法签名添加 **CloudStorageAccount** 参数。
 
@@ -85,17 +89,19 @@ Azure 表存储服务使用户可以存储大量结构化数据。该服务是�
 
 下面的代码示例读取并记录 **Ingress** 表中所有行：
 
-		public static void ReadTable(
-		    [Table("Ingress")] IQueryable<Person> tableBinding,
-		    TextWriter logger)
-		{
-		    var query = from p in tableBinding select p;
-		    foreach (Person person in query)
-		    {
-		        logger.WriteLine("PK:{0}, RK:{1}, Name:{2}",
-		            person.PartitionKey, person.RowKey, person.Name);
-		    }
-		}
+```
+    public static void ReadTable(
+        [Table("Ingress")] IQueryable<Person> tableBinding,
+        TextWriter logger)
+    {
+        var query = from p in tableBinding select p;
+        foreach (Person person in query)
+        {
+            logger.WriteLine("PK:{0}, RK:{1}, Name:{2}",
+                person.PartitionKey, person.RowKey, person.Name);
+        }
+    }
+```
 
 ### 如何从表中读取单个实体
 
@@ -103,23 +109,24 @@ Azure 表存储服务使用户可以存储大量结构化数据。该服务是�
 
 下面的代码示例基于队列消息中接收到的分区键和行键读取 **Person** 实体的表行：
 
-		public static void ReadTableEntity(
-		    [QueueTrigger("inputqueue")] Person personInQueue,
-		    [Table("persontable","{PartitionKey}", "{RowKey}")] Person personInTable,
-		    TextWriter logger)
-		{
-		    if (personInTable == null)
-		    {
-		        logger.WriteLine("Person not found: PK:{0}, RK:{1}",
-		                personInQueue.PartitionKey, personInQueue.RowKey);
-		    }
-		    else
-		    {
-		        logger.WriteLine("Person found: PK:{0}, RK:{1}, Name:{2}",
-		                personInTable.PartitionKey, personInTable.RowKey, personInTable.Name);
-		    }
-		}
-
+```
+    public static void ReadTableEntity(
+        [QueueTrigger("inputqueue")] Person personInQueue,
+        [Table("persontable","{PartitionKey}", "{RowKey}")] Person personInTable,
+        TextWriter logger)
+    {
+        if (personInTable == null)
+        {
+            logger.WriteLine("Person not found: PK:{0}, RK:{1}",
+                    personInQueue.PartitionKey, personInQueue.RowKey);
+        }
+        else
+        {
+            logger.WriteLine("Person found: PK:{0}, RK:{1}, Name:{2}",
+                    personInTable.PartitionKey, personInTable.RowKey, personInTable.Name);
+        }
+    }
+```
 
 此示例中的 **Person** 类不必实现 **ITableEntity**。
 
@@ -129,31 +136,30 @@ Azure 表存储服务使用户可以存储大量结构化数据。该服务是�
 
 下面的代码示例使用 **CloudTable** 对象将单个实体添加到 *Ingress* 表中。
 
-		public static void UseStorageAPI(
-		    [Table("Ingress")] CloudTable tableBinding,
-		    TextWriter logger)
-		{
-		    var person = new Person()
-		        {
-		            PartitionKey = "Test",
-		            RowKey = "100",
-		            Name = "Name"
-		        };
-		    TableOperation insertOperation = TableOperation.Insert(person);
-		    tableBinding.Execute(insertOperation);
-		}
+```
+    public static void UseStorageAPI(
+        [Table("Ingress")] CloudTable tableBinding,
+        TextWriter logger)
+    {
+        var person = new Person()
+            {
+                PartitionKey = "Test",
+                RowKey = "100",
+                Name = "Name"
+            };
+        TableOperation insertOperation = TableOperation.Insert(person);
+        tableBinding.Execute(insertOperation);
+    }
+```
 
-有关如何使用 **CloudTable** 对象的详细信息，请参阅[通过 .NET 开始使用 Azure 表存储](/documentation/articles/storage-dotnet-how-to-use-tables/)。
+有关如何使用 **CloudTable** 对象的详细信息，请参阅[通过 .NET 开始使用 Azure 表存储](./storage-dotnet-how-to-use-tables.md)。
 
 ## 队列操作指南文章涵盖的相关主题
 
-有关如何处理队列消息触发的表处理，或者不特定于表处理的 WebJobs SDK 方案的信息，请参阅[开始使用 Azure 队列存储和 Visual Studio 连接服务（WebJob 项目）](/documentation/articles/vs-storage-webjobs-getting-started-queues/)。
-
-
+有关如何处理队列消息触发的表处理，或者不特定于表处理的 WebJobs SDK 方案的信息，请参阅[开始使用 Azure 队列存储和 Visual Studio 连接服务（WebJob 项目）](./vs-storage-webjobs-getting-started-queues.md)。
 
 ## 后续步骤
 
-本文章提供了代码示例，演示如何处理用于操作 Azure 表的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](/documentation/articles/websites-webjobs-resources/)。
- 
+本文章提供了代码示例，演示如何处理用于操作 Azure 表的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](../app-service-web/websites-webjobs-resources.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

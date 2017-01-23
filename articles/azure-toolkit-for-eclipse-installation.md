@@ -1,23 +1,22 @@
 <!-- Remove intelij, hello world for temp -->
-<properties
-	pageTitle="安装 Azure Toolkit for Eclipse | Azure"
-	description="了解如何安装 Azure Toolkit for Eclipse。"
-	services=""
-	documentationCenter="java"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""/>  
+---
+title: 安装 Azure Toolkit for Eclipse | Azure
+description: 了解如何安装 Azure Toolkit for Eclipse。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="na"
-	ms.tgt_pltfrm="multiple"
-	ms.devlang="Java"
-	ms.topic="article"
-	ms.date="11/01/2016" 
-	wacn.date="12/05/2016" 
-	ms.author="robmcm"/>
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 <!-- Legacy MSDN URL = https://msdn.microsoft.com/library/azure/hh690946.aspx -->
 
@@ -28,20 +27,20 @@
 
 以下步骤说明如何安装 Azure Toolkit for Eclipse。
 
-[AZURE.INCLUDE [azure-toolkit-for-eclipse-prerequisites](../includes/azure-toolkit-for-eclipse-prerequisites.md)]
+[!INCLUDE [azure-toolkit-for-eclipse-prerequisites](../includes/azure-toolkit-for-eclipse-prerequisites.md)]
 
 ## 安装 Azure Toolkit for Eclipse
 1. 启动 Eclipse。
 2. Eclipse 打开后，单击 “帮助”菜单，然后单击“安装新软件”，如下图所示。
-   
+
     ![安装 Azure Toolkit for Eclipse][01]  
 
 3. 在“可用软件”对话框的“使用”文本框中，键入**http://dl.microsoft.com/eclipse**，然后按 **Enter **键。
 4. 在“名称”窗格中，选中“Azure Toolkit for Eclipse”，并取消选中“在安装过程中访问所有更新站点以查找所需的软件”。你的屏幕应与下图中所示类似：
-   
+
     ![安装 Azure Toolkit for Eclipse][02]
 5. 如果展开“Azure Toolkit for Eclipse”，你将看到以下项：
-   
+
    * **适用于 Java 的 Application Insights 插件**：此组件允许你将 Azure 的遥测日志记录和分析服务用于应用程序和服务器实例。
    * **Azure 访问控制服务筛选器**：此组件对以下情况提供支持：向 Azure ACS 验证应用程序用户的身份，启用单一登录方案，以及从应用程序具体化标识逻辑。
    * **Azure 常用插件**：此组件提供其他工具包组件所需的常见功能。
@@ -53,22 +52,20 @@
     * **Azure Java 库包**：此组件提供用于访问 Azure 服务（例如存储空间、服务总线、服务运行时等等）的 API。
 6. 单击“下一步”。（如果在安装该工具包时遇到不正常的延迟，请确保未选中“在安装过程中访问所有更新站点以查找所需的软件”。）
 7. 在“安装详细信息”对话框中，单击“下一步”。
-   
+
     ![查看安装详细信息][03]  
 
 8. 在“查看许可证”对话框中，查看许可协议条款。如果接受许可协议条款，请单击“我接受许可协议条款”，然后单击“完成”。（剩余步骤假定你接受许可协议条款。如果你不接受许可协议条款，请退出安装过程。）
-   
+
     ![查看许可证][04]  
 
-   
     Eclipse 将下载并安装必要的包。
-   
+
     ![安装进度][05]  
 
 9. 如果系统提示重新启动 Eclipse 以完成安装，请单击“是”。
-   
-    ![重新启动提示][06]  
 
+    ![重新启动提示][06]  
 
 ## 另请参阅
 有关 Azure Toolkits for Java IDE 的详细信息，请参阅以下链接：
@@ -84,15 +81,14 @@
 
 <!-- URL List -->
 
-
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij.md
 [在 Eclipse 中创建 Azure 的 Hello World Web 应用]: /documentation/articles/app-service-web-eclipse-create-hello-world-web-app/
 [在 IntelliJ 中创建 Azure 的 Hello World Web 应用]: /documentation/articles/app-service-web-intellij-create-hello-world-web-app/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[安装 Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij-installation/
-[Azure Toolkit for Eclipse 的新增功能]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
-[Azure Toolkit for IntelliJ 中的新增功能]: /documentation/articles/azure-toolkit-for-intellij-whats-new/
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[安装 Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij-installation.md
+[Azure Toolkit for Eclipse 的新增功能]: ./azure-toolkit-for-eclipse-whats-new.md
+[Azure Toolkit for IntelliJ 中的新增功能]: ./azure-toolkit-for-intellij-whats-new.md
 
 [Azure Java 开发人员中心]: /develop/java/
 
@@ -104,6 +100,5 @@
 [04]: ./media/azure-toolkit-for-eclipse-installation/eclipse-installation-04.png
 [05]: ./media/azure-toolkit-for-eclipse-installation/eclipse-installation-05.png
 [06]: ./media/azure-toolkit-for-eclipse-installation/eclipse-installation-06.png
-
 
 <!---HONumber=Mooncake_1128_2016-->

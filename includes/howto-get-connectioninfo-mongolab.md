@@ -1,6 +1,5 @@
 在您配置 MongoLab 数据库时，MongoLab 会采用 MongoDB 标准连接字符串格式向 Azure 发送一个连接 URI。该值用于通过您所选择的 MongoDB 驱动程序建立 MongoDB 连接。有关连接字符串的更多信息，请参见 mongodb.org 上的[连接](http://www.mongodb.org/display/DOCS/Connections)。
 
-
 **此 URI 包含您的数据库用户名称和密码。将其视为敏感信息而不共享它。**
 
 可通过下列步骤在 Azure 门户中检索该 URI：

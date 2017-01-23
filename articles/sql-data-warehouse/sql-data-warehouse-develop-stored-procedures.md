@@ -1,23 +1,21 @@
-<properties
-   pageTitle="SQL 数据仓库中的存储过程 | Azure"
-   description="有关在开发解决方案时实现 Azure SQL 数据仓库中的存储过程的技巧。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库中的存储过程 | Azure
+description: 有关在开发解决方案时实现 Azure SQL 数据仓库中的存储过程的技巧。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="jrj;barbkess;sonyama"/>
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: jrj;barbkess;sonyama
+---
 
 # SQL 数据仓库中的存储过程
 SQL 数据仓库支持 SQL Server 中提供的许多 Transact-SQL 功能。更重要的是，我们可以利用特定的扩大功能将解决方案的性能最大化。
@@ -40,25 +38,29 @@ SQL 数据仓库最多支持 8 个嵌套级别。这与 SQL Server 稍有不同�
 
 最上层存储过程调用等同于嵌套级别 1
 
-
-	EXEC prc_nesting
+```
+EXEC prc_nesting
+```
 
 如果存储过程还调用另一个 EXEC，则嵌套级别将增加到 2
 
-	CREATE PROCEDURE prc_nesting
-	AS
-	EXEC prc_nesting_2  -- This call is nest level 2
-	GO
-	EXEC prc_nesting
+```
+CREATE PROCEDURE prc_nesting
+AS
+EXEC prc_nesting_2  -- This call is nest level 2
+GO
+EXEC prc_nesting
+```
 
 如果第二个过程随后执行某种动态 sql，则嵌套级别将增加到 3
 
-	CREATE PROCEDURE prc_nesting_2
-	AS
-	EXEC sp_executesql 'SELECT 'another nest level'  -- This call is nest level 2
-	GO
-	EXEC prc_nesting
-
+```
+CREATE PROCEDURE prc_nesting_2
+AS
+EXEC sp_executesql 'SELECT 'another nest level'  -- This call is nest level 2
+GO
+EXEC prc_nesting
+```
 
 请注意，SQL 数据仓库当前不支持 @@NESTLEVEL。你需要自行跟踪自己的嵌套级别。不太可能达到 8 个嵌套级别的限制，但如果达到，则你需要重新处理代码并将其“平整化”，使其符合此限制。
 
@@ -90,8 +92,8 @@ SQL 数据仓库中未实现 Transact-SQL 存储过程的某些方面。
 <!--Image references-->
 
 <!--Article references-->
-[临时表]: /documentation/articles/sql-data-warehouse-tables-temporary/#modularizing-code
-[开发概述]: /documentation/articles/sql-data-warehouse-overview-develop/
+[临时表]: ./sql-data-warehouse-tables-temporary.md#modularizing-code
+[开发概述]: ./sql-data-warehouse-overview-develop.md
 
 <!--MSDN references-->
 [nest level]: https://msdn.microsoft.com/zh-cn/library/ms187371.aspx

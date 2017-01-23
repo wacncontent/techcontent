@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Azure AD Connect：自动升级 | Azure"
-   description="本主题介绍 Azure AD Connect sync 中的内置自动升级功能。"
-   services="active-directory"
-   documentationCenter=""
-   authors="AndKjell"
-   manager="StevenPo"
-   editor=""/>
+---
+title: Azure AD Connect：自动升级 | Azure
+description: 本主题介绍 Azure AD Connect sync 中的内置自动升级功能。
+services: active-directory
+documentationCenter: 
+authors: AndKjell
+manager: StevenPo
+editor: 
 
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="08/24/2016"
-   ms.author="andkjell"
-   wacn.date="01/09/2017"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 08/24/2016
+ms.author: andkjell
+wacn.date: 01/09/2017
+---
 
 # Azure AD Connect：自动升级
 此功能是随内部版本 1.1.105.0（于 2016 年 2 月发布）一起推出的。
@@ -77,21 +77,21 @@ UpgradeAbortedSecurityGroupsNotPresent | 找不到且无法解析同步引擎使
 UpgradeAbortedServiceCanNotBeStarted | NT 服务 **Azure AD Sync** 未能启动。
 UpgradeAbortedServiceCanNotBeStopped | NT 服务 **Azure AD Sync** 未能停止。
 UpgradeAbortedServiceIsNotRunning | NT 服务 **Azure AD Sync** 未运行。
-UpgradeAbortedSyncCycleDisabled | [计划程序](/documentation/articles/active-directory-aadconnectsync-feature-scheduler/)中的 SyncCycle 选项已禁用。
-UpgradeAbortedSyncExeInUse | 服务器上打开了 [Synchronization Service Manager UI](/documentation/articles/active-directory-aadconnectsync-service-manager-ui/)。
+UpgradeAbortedSyncCycleDisabled | [计划程序](./active-directory-aadconnectsync-feature-scheduler.md)中的 SyncCycle 选项已禁用。
+UpgradeAbortedSyncExeInUse | 服务器上打开了 [Synchronization Service Manager UI](./active-directory-aadconnectsync-service-manager-ui.md)。
 UpgradeAbortedSyncOrConfigurationInProgress | 安装向导正在运行，或者在计划程序外部计划了同步。
 **UpgradeNotSupported** |
 UpgradeNotSupportedCustomizedSyncRules | 你已将自己的自定义规则添加到配置中。
-UpgradeNotSupportedGroupWritebackEnabled | 你已启用[组写回](/documentation/articles/active-directory-aadconnect-feature-preview/#group-writeback/)功能。
+UpgradeNotSupportedGroupWritebackEnabled | 你已启用[组写回](./active-directory-aadconnect-feature-preview.md#group-writeback)功能。
 UpgradeNotSupportedInvalidPersistedState | 安装不是快速设置或 DirSync 升级。
 UpgradeNotSupportedMetaverseSizeExceeeded | Metaverse 中的对象超过 100,000 个。
 UpgradeNotSupportedMultiForestSetup | 你正在连接到多个林。快速安装只会连接到一个林。
 UpgradeNotSupportedNonLocalDbInstall | 你使用的不是 SQL Server Express LocalDB 数据库。
-UpgradeNotSupportedNonMsolAccount | [AD 连接器帐户](/documentation/articles/active-directory-aadconnect-accounts-permissions/#active-directory-account/)不再是默认的 MSOL\_ 帐户。
-UpgradeNotSupportedStagingModeEnabled | 服务器已设置为[过渡模式](/documentation/articles/active-directory-aadconnectsync-operations/#staging-mode/)。
-UpgradeNotSupportedUserWritebackEnabled | 你已启用[用户写回](/documentation/articles/active-directory-aadconnect-feature-preview/#user-writeback/)功能。
+UpgradeNotSupportedNonMsolAccount | [AD 连接器帐户](./active-directory-aadconnect-accounts-permissions.md#active-directory-account)不再是默认的 MSOL\_ 帐户。
+UpgradeNotSupportedStagingModeEnabled | 服务器已设置为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode)。
+UpgradeNotSupportedUserWritebackEnabled | 你已启用[用户写回](./active-directory-aadconnect-feature-preview.md#user-writeback)功能。
 
 ## 后续步骤
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

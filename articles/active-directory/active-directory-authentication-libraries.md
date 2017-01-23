@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Azure Active Directory 身份验证库 | Azure"
-   description="通过 Azure AD 身份验证库 (ADAL)，客户端应用程序开发人员能够轻松利用云或本地 Active Directory (AD) 对用户进行身份验证，然后获取访问令牌，以进行安全的 API 调用。"
-   services="active-directory"
-   documentationCenter=""
-   authors="msmbaldwin"
-   manager="mbaldwin"
-   editor="mbaldwin" />  
+---
+title: Azure Active Directory 身份验证库 | Azure
+description: 通过 Azure AD 身份验证库 (ADAL)，客户端应用程序开发人员能够轻松利用云或本地 Active Directory (AD) 对用户进行身份验证，然后获取访问令牌，以进行安全的 API 调用。
+services: active-directory
+documentationCenter: 
+authors: msmbaldwin
+manager: mbaldwin
+editor: mbaldwin
 
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="10/11/2016"
-   ms.author="mbaldwin" 
-   wacn.date="01/03/2017"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 10/11/2016
+ms.author: mbaldwin
+wacn.date: 01/03/2017
+---
 
 # Azure Active Directory 身份验证库
 
@@ -57,13 +57,12 @@
 
 在此方案中，开发人员在服务器上有一个正在运行的应用程序需要访问由 Azure AD 保护的远程资源（如 Web API）。请求也需要代表 Azure AD 中的用户发出。他有一个 Azure 订阅，知道如何调用下游 Web API，还知道服务使用哪个 Azure AD 租户。用户通过 Web 应用程序的身份验证后，应用程序可以从 Azure AD 获取该用户的授权代码。然后，Web 应用程序可以使用该授权代码以及与应用程序关联的客户端凭据，代表用户通过 ADAL 从 Azure AD 中获取访问令牌和刷新令牌。Web 应用程序拥有访问令牌后，就可以调用 Web API，直到该令牌过期。令牌过期后，Web 应用程序可以使用前面收到的刷新令牌，通过 ADAL 获取新的访问令牌。
 
-
 ## 另请参阅
 
-[Azure Active Directory 开发人员指南](/documentation/articles/active-directory-developers-guide/)
+[Azure Active Directory 开发人员指南](./active-directory-developers-guide.md)
 
-[Azure Active directory 的身份验证方案](/documentation/articles/active-directory-authentication-scenarios/)
+[Azure Active directory 的身份验证方案](./active-directory-authentication-scenarios.md)
 
-[Azure Active Directory 代码示例](/documentation/articles/active-directory-code-samples/)
+[Azure Active Directory 代码示例](./active-directory-code-samples.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

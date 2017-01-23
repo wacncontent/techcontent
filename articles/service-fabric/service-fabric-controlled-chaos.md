@@ -1,23 +1,21 @@
-<properties
-   pageTitle="在 Service Fabric 群集中引入混沌测试 | Azure"
-   description="使用故障注入和群集分析服务 API 管理群集中的混沌测试。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="motanv"
-   manager="rsinha"
-   editor="toddabel"/>  
+---
+title: 在 Service Fabric 群集中引入混沌测试 | Azure
+description: 使用故障注入和群集分析服务 API 管理群集中的混沌测试。
+services: service-fabric
+documentationCenter: .net
+authors: motanv
+manager: rsinha
+editor: toddabel
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/19/2016"
-   wacn.date="11/28/2016"
-   ms.author="motanv"/>  
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/19/2016
+wacn.date: 11/28/2016
+ms.author: motanv
+---
 
 # 在 Service Fabric 群集中引入受控的混沌测试
 大规模分布式系统，例如云基础结构，在本质上都是不可靠的。Azure Service Fabric 可让开发人员在不可靠的基础结构顶层编写可靠的服务。为了编写稳健的服务，开发人员需要能够针对这种不可靠的基础结构引入故障来测试其服务的稳定性。
@@ -61,136 +59,138 @@
 ## 如何运行混沌测试
 **C#：**
 
+```
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Fabric;
 
-	using System;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
-	using System.Fabric;
+using System.Diagnostics;
+using System.Fabric.Chaos.DataStructures;
 
-	using System.Diagnostics;
-	using System.Fabric.Chaos.DataStructures;
+class Program
+{
+    private class ChaosEventComparer : IEqualityComparer<ChaosEvent>
+    {
+        public bool Equals(ChaosEvent x, ChaosEvent y)
+        {
+            return x.TimeStampUtc.Equals(y.TimeStampUtc);
+        }
 
-	class Program
-	{
-	    private class ChaosEventComparer : IEqualityComparer<ChaosEvent>
-	    {
-	        public bool Equals(ChaosEvent x, ChaosEvent y)
-	        {
-	            return x.TimeStampUtc.Equals(y.TimeStampUtc);
-	        }
+        public int GetHashCode(ChaosEvent obj)
+        {
+            return obj.TimeStampUtc.GetHashCode();
+        }
+    }
 
-	        public int GetHashCode(ChaosEvent obj)
-	        {
-	            return obj.TimeStampUtc.GetHashCode();
-	        }
-	    }
+    static void Main(string[] args)
+    {
+        var clusterConnectionString = "localhost:19000";
+        using (var client = new FabricClient(clusterConnectionString))
+        {
+            var startTimeUtc = DateTime.UtcNow;
+            var stabilizationTimeout = TimeSpan.FromSeconds(30.0);
+            var timeToRun = TimeSpan.FromMinutes(60.0);
+            var maxConcurrentFaults = 3;
 
-	    static void Main(string[] args)
-	    {
-	        var clusterConnectionString = "localhost:19000";
-	        using (var client = new FabricClient(clusterConnectionString))
-	        {
-	            var startTimeUtc = DateTime.UtcNow;
-	            var stabilizationTimeout = TimeSpan.FromSeconds(30.0);
-	            var timeToRun = TimeSpan.FromMinutes(60.0);
-	            var maxConcurrentFaults = 3;
+            var parameters = new ChaosParameters(
+                stabilizationTimeout,
+                maxConcurrentFaults,
+                true, /* EnableMoveReplicaFault */
+                timeToRun);
 
-	            var parameters = new ChaosParameters(
-	                stabilizationTimeout,
-	                maxConcurrentFaults,
-	                true, /* EnableMoveReplicaFault */
-	                timeToRun);
+            try
+            {
+                client.TestManager.StartChaosAsync(parameters).GetAwaiter().GetResult();
+            }
+            catch (FabricChaosAlreadyRunningException)
+            {
+                Console.WriteLine("An instance of Chaos is already running in the cluster.");
+            }
 
-	            try
-	            {
-	                client.TestManager.StartChaosAsync(parameters).GetAwaiter().GetResult();
-	            }
-	            catch (FabricChaosAlreadyRunningException)
-	            {
-	                Console.WriteLine("An instance of Chaos is already running in the cluster.");
-	            }
+            var filter = new ChaosReportFilter(startTimeUtc, DateTime.MaxValue);
 
-	            var filter = new ChaosReportFilter(startTimeUtc, DateTime.MaxValue);
+            var eventSet = new HashSet<ChaosEvent>(new ChaosEventComparer());
 
-	            var eventSet = new HashSet<ChaosEvent>(new ChaosEventComparer());
+            while (true)
+            {
+                var report = client.TestManager.GetChaosReportAsync(filter).GetAwaiter().GetResult();
 
-	            while (true)
-	            {
-	                var report = client.TestManager.GetChaosReportAsync(filter).GetAwaiter().GetResult();
+                foreach (var chaosEvent in report.History)
+                {
+                    if (eventSet.add(chaosEvent))
+                    {
+                        Console.WriteLine(chaosEvent);
+                    }
+                }
 
-	                foreach (var chaosEvent in report.History)
-	                {
-	                    if (eventSet.add(chaosEvent))
-	                    {
-	                        Console.WriteLine(chaosEvent);
-	                    }
-	                }
+                // When Chaos stops, a StoppedEvent is created.
+                // If a StoppedEvent is found, exit the loop.
+                var lastEvent = report.History.LastOrDefault();
 
-	                // When Chaos stops, a StoppedEvent is created.
-	                // If a StoppedEvent is found, exit the loop.
-	                var lastEvent = report.History.LastOrDefault();
+                if (lastEvent is StoppedEvent)
+                {
+                    break;
+                }
 
-	                if (lastEvent is StoppedEvent)
-	                {
-	                    break;
-	                }
-
-	                Task.Delay(TimeSpan.FromSeconds(1.0)).GetAwaiter().GetResult();
-	            }
-	        }
-	    }
-	}
+                Task.Delay(TimeSpan.FromSeconds(1.0)).GetAwaiter().GetResult();
+            }
+        }
+    }
+}
+```
 
 **PowerShell：**
 
+```
+$connection = "localhost:19000"
+$timeToRun = 60
+$maxStabilizationTimeSecs = 180
+$concurrentFaults = 3
+$waitTimeBetweenIterationsSec = 60
 
-	$connection = "localhost:19000"
-	$timeToRun = 60
-	$maxStabilizationTimeSecs = 180
-	$concurrentFaults = 3
-	$waitTimeBetweenIterationsSec = 60
+Connect-ServiceFabricCluster $connection
 
-	Connect-ServiceFabricCluster $connection
+$events = @{}
+$now = [System.DateTime]::UtcNow
 
-	$events = @{}
-	$now = [System.DateTime]::UtcNow
+Start-ServiceFabricChaos -TimeToRunMinute $timeToRun -MaxConcurrentFaults $concurrentFaults -MaxClusterStabilizationTimeoutSec $maxStabilizationTimeSecs -EnableMoveReplicaFaults -WaitTimeBetweenIterationsSec $waitTimeBetweenIterationsSec
 
-	Start-ServiceFabricChaos -TimeToRunMinute $timeToRun -MaxConcurrentFaults $concurrentFaults -MaxClusterStabilizationTimeoutSec $maxStabilizationTimeSecs -EnableMoveReplicaFaults -WaitTimeBetweenIterationsSec $waitTimeBetweenIterationsSec
+while($true)
+{
+    $stopped = $false
+    $report = Get-ServiceFabricChaosReport -StartTimeUtc $now -EndTimeUtc ([System.DateTime]::MaxValue)
 
-	while($true)
-	{
-	    $stopped = $false
-	    $report = Get-ServiceFabricChaosReport -StartTimeUtc $now -EndTimeUtc ([System.DateTime]::MaxValue)
+    foreach ($e in $report.History) {
 
-	    foreach ($e in $report.History) {
+        if(-Not ($events.Contains($e.TimeStampUtc.Ticks)))
+        {
+            $events.Add($e.TimeStampUtc.Ticks, $e)
+            if($e -is [System.Fabric.Chaos.DataStructures.ValidationFailedEvent])
+            {
+                Write-Host -BackgroundColor White -ForegroundColor Red $e
+            }
+            else
+            {
+                if($e -is [System.Fabric.Chaos.DataStructures.StoppedEvent])
+                {
+                    $stopped = $true
+                }
 
-	        if(-Not ($events.Contains($e.TimeStampUtc.Ticks)))
-	        {
-	            $events.Add($e.TimeStampUtc.Ticks, $e)
-	            if($e -is [System.Fabric.Chaos.DataStructures.ValidationFailedEvent])
-	            {
-	                Write-Host -BackgroundColor White -ForegroundColor Red $e
-	            }
-	            else
-	            {
-	                if($e -is [System.Fabric.Chaos.DataStructures.StoppedEvent])
-	                {
-	                    $stopped = $true
-	                }
+                Write-Host $e
+            }
+        }
+    }
 
-	                Write-Host $e
-	            }
-	        }
-	    }
+    if($stopped -eq $true)
+    {
+        break
+    }
 
-	    if($stopped -eq $true)
-	    {
-	        break
-	    }
+    Start-Sleep -Seconds 1
+}
 
-	    Start-Sleep -Seconds 1
-	}
-
-	Stop-ServiceFabricChaos
+Stop-ServiceFabricChaos
+```
 
 <!---HONumber=Mooncake_1121_2016-->

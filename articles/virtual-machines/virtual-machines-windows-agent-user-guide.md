@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Azure 虚拟机代理概述 | Azure"
-    description="Azure 虚拟机代理概述"
-    services="virtual-machines-windows"
-    documentationcenter="virtual-machines"
-    author="neilpeterson"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="0a1f212e-053e-4a39-9910-8d622959f594"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="11/17/2016"
-    wacn.date="01/13/2017"
-    ms.author="nepeters" />  
+---
+title: Azure 虚拟机代理概述 | Azure
+description: Azure 虚拟机代理概述
+services: virtual-machines-windows
+documentationcenter: virtual-machines
+author: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
+ms.assetid: 0a1f212e-053e-4a39-9910-8d622959f594
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 11/17/2016
+wacn.date: 01/13/2017
+ms.author: nepeters
+---
 
 # Azure 虚拟机代理概述
 
@@ -37,7 +37,9 @@ Azure VM 代理默认安装在任何通过 Azure 库映像部署的 Windows 虚�
 
 双击 Windows 安装程序文件即可安装 VM 代理。若要以自动或无人参与方式安装 VM 代理，请运行以下命令。
 
-    msiexec.exe /i WindowsAzureVmAgent.2.7.1198.778.rd_art_stable.160617-1120.fre /quiet
+```
+msiexec.exe /i WindowsAzureVmAgent.2.7.1198.778.rd_art_stable.160617-1120.fre /quiet
+```
 
 ## 检测 VM 代理
 
@@ -45,25 +47,31 @@ Azure VM 代理默认安装在任何通过 Azure 库映像部署的 Windows 虚�
 
 可以使用 Azure Resource Manager PowerShell 模块检索有关 Azure 虚拟机的信息。运行 `Get-AzureRmVM` 会返回大量信息，包括 Azure VM 代理的预配状态。
 
-    Get-AzureRmVM
+```
+Get-AzureRmVM
+```
 
 下面仅仅是部分 `Get-AzureRmVM` 输出。请注意嵌套在 `OSProfile` 中的 `ProvisionVMAgent` 属性，可以使用该属性来确定 VM 代理是否已部署到虚拟机。
 
-    OSProfile                  :
-      ComputerName             : myVM
-      AdminUsername            : muUserName
-      WindowsConfiguration     :
-        ProvisionVMAgent       : True
-        EnableAutomaticUpdates : True
+```
+OSProfile                  :
+  ComputerName             : myVM
+  AdminUsername            : muUserName
+  WindowsConfiguration     :
+    ProvisionVMAgent       : True
+    EnableAutomaticUpdates : True
+```
 
 可以使用以下脚本返回一个简明列表，其中包含虚拟机名称以及 VM 代理的状态。
 
-    $vms = Get-AzureRmVM
+```
+$vms = Get-AzureRmVM
 
-    foreach ($vm in $vms) {
-        $agent = $vm | Select -ExpandProperty OSProfile | Select -ExpandProperty Windowsconfiguration | Select ProvisionVMAgent
-        Write-Host $vm.Name $agent.ProvisionVMAgent
-    }
+foreach ($vm in $vms) {
+    $agent = $vm | Select -ExpandProperty OSProfile | Select -ExpandProperty Windowsconfiguration | Select ProvisionVMAgent
+    Write-Host $vm.Name $agent.ProvisionVMAgent
+}
+```
 
 ### 手动检测
 

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="DocumentDB 社区和新闻 | Azure"
-    description="加入 Azure DocumentDB 社区，在这里建立关系网，展示你的工作，磨练你的技能。"
-    services="documentdb"
-    documentationcenter=""
-    author="aliuy"
-    manager="jhubbard"
-    editor="mimig" />
-<tags
-    ms.assetid="cfdf15da-3ddc-43a1-af64-789eea5f6ddd"
-    ms.service="documentdb"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="data-services"
-    ms.date="12/13/2016"
-    wacn.date="01/23/2017"
-    ms.author="andrl" />  
+---
+title: DocumentDB 社区和新闻 | Azure
+description: 加入 Azure DocumentDB 社区，在这里建立关系网，展示你的工作，磨练你的技能。
+services: documentdb
+documentationcenter: 
+author: aliuy
+manager: jhubbard
+editor: mimig
 
+ms.assetid: cfdf15da-3ddc-43a1-af64-789eea5f6ddd
+ms.service: documentdb
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 12/13/2016
+wacn.date: 01/23/2017
+ms.author: andrl
+---
 
 # 社区门户
 ## 社区聚焦
@@ -68,7 +68,7 @@ fluent-plugin-documentdb 是用于输出到 Azure DocumentDB 的 Fluentd 插件�
 - [**预览版中 MongoDB 的 Azure DocumentDB 协议支持（使用 Sitecore 进行测试）**](https://alwaysupalwayson.blogspot.ca/2016/05/azure-documentdb-protocol-support-for.html)- *作者：Mathieu Benoit*
 - [**使用 DocumentDB 展开社交**](https://blogs.msdn.microsoft.com/mvpawardprogram/2016/03/15/going-social-with-documentdb/) - *作者：Matías Quaranta*
 - [**UWP、Azure 应用服务和 DocumentDB Soup：一个照片分享应用**](https://blogs.windows.com/buildingapps/2016/03/17/uwp-azure-app-services-and-documentdb-soup-a-photo-sharing-app/) - *作者：Eric Langland*
-- [**使用逻辑应用的新的或更改后的 DocumentDB 资源通知**](/documentation/articles/documentdb-change-notification/) - *作者：Howard Edidin*
+- [**使用逻辑应用的新的或更改后的 DocumentDB 资源通知**](./documentdb-change-notification.md) - *作者：Howard Edidin*
 - [**使用 fluent-plugin-documentdb 将日志收集到 Azure DocumentDB**](http://unofficialism.info/posts/collecting-logs-into-azure-documentdb-using-fluent-plugin-documentdb/) - *作者：Yoichi Kawasaki*
 - [**重新访问的 DocumentDB 第 1 部分（共 2 部分）- 理论**](https://peterintheazuresky.wordpress.com/2016/02/19/documentdb-revisited-part-12-the-theory/) - *作者：Peter Mannerhult*
 - [**令人又爱又恨的 Azure 的 DocumentDB**](http://blog.falafel.com/4-what-to-love-and-hate-about-azures-documentdb/) - *作者：George Saadeh*
@@ -108,9 +108,6 @@ fluent-plugin-documentdb 是用于输出到 Azure DocumentDB 的 Fluentd 插件�
 ## 与团队联系
 ![团队](./media/documentdb-community/documentdb-team.png)  
 
-
-
-
 ## 开放源代码项目
 这些项目由 Azure DocumentDB 团队与我们的开放源代码社区共同积极开发。
 
@@ -124,7 +121,7 @@ fluent-plugin-documentdb 是用于输出到 Azure DocumentDB 的 Fluentd 插件�
 ### 其他项目
 | 名称 | Github | 网站 |
 | --- | --- | --- |
-| 文档 | azure-content |[文档网站](/documentation/services/documentdb/) |
+| 文档 | azure-content |[文档网站](./index.md) |
 | Hadoop 连接器 |[azure-documentdb-hadoop](https://github.com/Azure/azure-documentdb-hadoop) |[Maven](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-documentdb-hadoop%22) |
 | 数据迁移工具 |[azure-documentdb-datamigrationtool](https://github.com/Azure/azure-documentdb-datamigrationtool) |[Microsoft 下载中心](http://www.microsoft.com/en-us/download/details.aspx?id=46436) |
 
@@ -135,4 +132,3 @@ DocumentDB 奇才是社区领导者，他们是帮助其他人充分利用他们
 
 <!---HONumber=Mooncake_0109_2017-->
 <!---Update_Description: wording update -->
-

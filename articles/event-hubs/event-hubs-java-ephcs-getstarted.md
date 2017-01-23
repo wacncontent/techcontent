@@ -1,27 +1,25 @@
-<properties
-	pageTitle="通过 Java 使用事件中心入门 | Azure"
-	description="遵循本教程开始使用 Azure 事件中心，以通过 Java 发送事件，并使用 EventProcessorHost 通过 C# 接收事件。"
-	services="event-hubs"
-	documentationCenter=""
-	authors="jtaubensee"
-	manager="timlt"
-	editor=""/>  
+---
+title: 通过 Java 使用事件中心入门 | Azure
+description: 遵循本教程开始使用 Azure 事件中心，以通过 Java 发送事件，并使用 EventProcessorHost 通过 C# 接收事件。
+services: event-hubs
+documentationCenter: 
+authors: jtaubensee
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="event-hubs"
-	ms.workload="core"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="01/04/2017"
-	ms.author="jotaub;sethm"/>  
-
+ms.service: event-hubs
+ms.workload: core
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 01/04/2017
+ms.author: jotaub;sethm
+---
 
 # 事件中心入门
 
-[AZURE.INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
+[!INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
 
 ## 介绍
 
@@ -37,25 +35,25 @@
 
 + [Microsoft Visual Studio](http://visualstudio.com)
 
-+ 有效的 Azure 帐户。<br/>如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 <a href="/pricing/1rmb-trial/" target="_blank">Azure 试用</a>。
++ 有效的 Azure 帐户。<br/>如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/" target="_blank">Azure 试用</a>。
 
-[AZURE.INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
+[!INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-send-java](../../includes/service-bus-event-hubs-get-started-send-java.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-send-java](../../includes/service-bus-event-hubs-get-started-send-java.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-receive-ephcs](../../includes/service-bus-event-hubs-get-started-receive-ephcs.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-receive-ephcs](../../includes/service-bus-event-hubs-get-started-receive-ephcs.md)]
 
 ## 运行应用程序
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	从 Visual Studio 中运行 **Receiver** 项目，然后等待它为所有分区启动接收方。
+1. 从 Visual Studio 中运行 **Receiver** 项目，然后等待它为所有分区启动接收方。
 
-	![][21]
+    ![][21]
 
-2.	运行 **Sender** 项目。
+2. 运行 **Sender** 项目。
 
-	![][22]
+    ![][22]
 
 ## 后续步骤
 
@@ -75,9 +73,8 @@
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 [事件处理程序主机]: https://www.nuget.org/packages/Microsoft.Azure.ServiceBus.EventProcessorHost
-[事件中心概述]: /documentation/articles/event-hubs-overview/
+[事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 [使用事件中心扩大事件处理]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-45f43fc3
- 
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

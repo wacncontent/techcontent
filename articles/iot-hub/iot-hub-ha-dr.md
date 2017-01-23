@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure IoT 中心 HA 和 DR | Azure"
-    description="介绍了Azure 和 IoT 中心功能，这些功能有助于构建带灾难恢复功能的 Azure IoT 高可用性解决方案。"
-    services="iot-hub"
-    documentationcenter=""
-    author="fsautomata"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="ae320e58-aa20-45b9-abdc-fa4faae8e6dd"
-    ms.service="iot-hub"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/16/2016"
-    wacn.date="01/13/2017"
-    ms.author="elioda" />
+---
+title: Azure IoT 中心 HA 和 DR | Azure
+description: 介绍了Azure 和 IoT 中心功能，这些功能有助于构建带灾难恢复功能的 Azure IoT 高可用性解决方案。
+services: iot-hub
+documentationcenter: 
+author: fsautomata
+manager: timlt
+editor: 
+
+ms.assetid: ae320e58-aa20-45b9-abdc-fa4faae8e6dd
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/16/2016
+wacn.date: 01/13/2017
+ms.author: elioda
+---
 
 # IoT 中心高可用性和灾难恢复
 
@@ -51,13 +52,12 @@
 - [IoT 中心入门（教程）][lnk-get-started]
 - [Azure IoT 中心是什么？][]
 
-
 [防故障：弹性云体系结构指南]: https://msdn.microsoft.com/zh-cn/library/azure/jj853352.aspx
-[Azure Traffic Manager]: /documentation/services/traffic-manager/
-[IoT Hub Developer Guide - identity registry]: /documentation/articles/iot-hub-devguide-identity-registry/
+[Azure Traffic Manager]: ../traffic-manager/index.md
+[IoT Hub Developer Guide - identity registry]: ./iot-hub-devguide-identity-registry.md
 
-[lnk-get-started]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[Azure IoT 中心是什么？]: /documentation/articles/iot-hub-what-is-iot-hub/
+[lnk-get-started]: ./iot-hub-csharp-csharp-getstarted.md
+[Azure IoT 中心是什么？]: ./iot-hub-what-is-iot-hub.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

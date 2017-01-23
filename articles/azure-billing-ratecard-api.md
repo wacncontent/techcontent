@@ -1,22 +1,21 @@
-<properties
-   pageTitle="获取 Azure 订阅中所用资源的价格和元数据信息 | Azure"
-   description="了解如何获取 Azure 订阅中所用资源的价格和元数据信息"
-   services=""
-   documentationCenter=""
-   authors=""
-   manager=""
-   editor=""
-   tags="billing"/>  
+---
+title: 获取 Azure 订阅中所用资源的价格和元数据信息 | Azure
+description: 了解如何获取 Azure 订阅中所用资源的价格和元数据信息
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: billing
 
-
-<tags
-   ms.service="billing"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="01/16/2017"
-   wacn.date="01/16/2017"/>  
+ms.service: billing
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/16/2017
+wacn.date: 01/16/2017
+---
 
 # 获取 Azure 订阅中所用资源的价格和元数据信息
 
@@ -27,7 +26,8 @@
 - 地域文化
 - 地区
 
->[AZURE.IMPORTANT]与计费表有关的元数据，包括但不限于服务名称、类型、资源、计量单位和地区等，可能随时在未经通知的情况下变更。如果您打算以自动方式使用这些计费数据，请使用计费表 GUID（全局唯一标识符）识别每项可计费项目。如果由于采用新的计费模式而计划变更计费表 GUID，会提前通知您。
+>[!IMPORTANT]
+>与计费表有关的元数据，包括但不限于服务名称、类型、资源、计量单位和地区等，可能随时在未经通知的情况下变更。如果您打算以自动方式使用这些计费数据，请使用计费表 GUID（全局唯一标识符）识别每项可计费项目。如果由于采用新的计费模式而计划变更计费表 GUID，会提前通知您。
 
 ##请求
 请见 [Resource RateCard（资源价格表）（预览）](https://msdn.microsoft.com/zh-cn/library/azure/mt219005.aspx) 中的**通用参数和头信息**小节，了解与 Resource RateCard API（应用程序编程接口）有关的所有请求使用的头信息和参数。
@@ -36,12 +36,13 @@
 ---|---
 GET | `https://https://management.chinacloudapi.cn/subscriptions/{subscription-Id}/providers/Microsoft.Commerce/RateCard?api-version={api-version}&$filter=OfferDurableId eq '{OfferDurableId}' and Currency eq '{Currency}' and Locale eq '{Locale}' and RegionInfoeq '{RegionInfo}'`
 
-- 把 {OfferDurableId}（提供项持久 ID）设定为一个有效的提供项 ID 代码（例如 MS-MC-AZR-33P）。请见 [Azure 优惠项目详情](/support/legal/offer-rate-plans/)了解关于可用提供项 ID、国家/地区可用性和计费货币的更多信息。提供项 ID 参数包括 “MS-AZR-” 前缀再加上提供项 ID 编号。
+- 把 {OfferDurableId}（提供项持久 ID）设定为一个有效的提供项 ID 代码（例如 MS-MC-AZR-33P）。请见 [Azure 优惠项目详情](https://www.azure.cn/support/legal/offer-rate-plans/)了解关于可用提供项 ID、国家/地区可用性和计费货币的更多信息。提供项 ID 参数包括 “MS-AZR-” 前缀再加上提供项 ID 编号。
 - 把 {Currency}（货币）设定为用于表示资源价格的货币。
 - 把 {Locale}（地域文化）设定为资源元数据需要面向的地域文化。
 - 把 {RegionInfo}（地区信息）设定为提供项购买地区的双字母 ISO（国际标准化组织）代码。
 
->[AZURE.NOTE]请注意，需要全部 4 个查询参数。另外，$filter（过滤器）查询选项此时仅支持‘等于’和‘与’逻辑运算符。没有请求体。
+>[!NOTE]
+>请注意，需要全部 4 个查询参数。另外，$filter（过滤器）查询选项此时仅支持‘等于’和‘与’逻辑运算符。没有请求体。
 
 ## 响应
 
@@ -51,59 +52,63 @@ GET | `https://https://management.chinacloudapi.cn/subscriptions/{subscription-I
 
 下面的例子显示了“随收随付”提供项查询，其中**提供项持久ID = MS-MC-AZR-0033P，用于中国地区，价格用人民币表示，元数据面向美国英语（en-US）地域文化。**
 
-    https://management.chinacloudapi.cn/subscriptions/{subscription-Id}/providers/Microsoft.Commerce/RateCard?api-version=2015-06-01-preview&$filter=OfferDurableId eq 'MS-MC-AZR-0033P' and Currency eq 'CNY' and Locale eq 'en-US' and RegionInfoeq 'CN'
+```
+https://management.chinacloudapi.cn/subscriptions/{subscription-Id}/providers/Microsoft.Commerce/RateCard?api-version=2015-06-01-preview&$filter=OfferDurableId eq 'MS-MC-AZR-0033P' and Currency eq 'CNY' and Locale eq 'en-US' and RegionInfoeq 'CN'
+```
 
 JSON
 
+```
+{
+"OfferTerms": [],
+"Meters": [
     {
-    "OfferTerms": [],
-    "Meters": [
-        {
-            "MeterId": "1822fcc4-6059-4cbb-a132-54a187aaac46",
-            "MeterName": "Compute Hours",
-            "MeterCategory": "Virtual Machines",
-            "MeterSubCategory": "Basic_D6 VM (Non-Windows)",
-            "Unit": "Hours",
-            "MeterTags": [],
-            "MeterRates": {
-                "0": 3.136
-            },
-            "EffectiveDate": "2015-02-01T00:00:00Z",
-            "IncludedQuantity": 0.0
+        "MeterId": "1822fcc4-6059-4cbb-a132-54a187aaac46",
+        "MeterName": "Compute Hours",
+        "MeterCategory": "Virtual Machines",
+        "MeterSubCategory": "Basic_D6 VM (Non-Windows)",
+        "Unit": "Hours",
+        "MeterTags": [],
+        "MeterRates": {
+            "0": 3.136
         },
-        {
-            "MeterId": "3c5324ad-eb8c-44c6-af9a-6741ae75fc90",
-            "MeterName": "Data Transfer Out at 500 Mbps (GB)",
-            "MeterCategory": "Networking",
-            "MeterSubCategory": "ExpressRoute (IXP)",
-            "Unit": "GB",
-            "MeterTags": [],
-            "MeterRates": {
-                "0": 0.1
-            },
-            "EffectiveDate": "2014-08-01T00:00:00Z",
-            "IncludedQuantity": 2048.0
+        "EffectiveDate": "2015-02-01T00:00:00Z",
+        "IncludedQuantity": 0.0
+    },
+    {
+        "MeterId": "3c5324ad-eb8c-44c6-af9a-6741ae75fc90",
+        "MeterName": "Data Transfer Out at 500 Mbps (GB)",
+        "MeterCategory": "Networking",
+        "MeterSubCategory": "ExpressRoute (IXP)",
+        "Unit": "GB",
+        "MeterTags": [],
+        "MeterRates": {
+            "0": 0.1
         },
+        "EffectiveDate": "2014-08-01T00:00:00Z",
+        "IncludedQuantity": 2048.0
+    },
 
-        {
-            "MeterId": "9ee077eb-c902-46ef-b7f9-2caeade852e0",
-            "MeterName": "Compute Hours",
-            "MeterCategory": "Cloud Services",
-            "MeterSubCategory": "A6 Cloud Services",
-            "Unit": "Hours",
-            "MeterTags": [],
-            "MeterRates": {
-            "0": 0.71
-            },
-            "EffectiveDate": "2013-12-01T00:00:00Z",
-            "IncludedQuantity": 0.0
+    {
+        "MeterId": "9ee077eb-c902-46ef-b7f9-2caeade852e0",
+        "MeterName": "Compute Hours",
+        "MeterCategory": "Cloud Services",
+        "MeterSubCategory": "A6 Cloud Services",
+        "Unit": "Hours",
+        "MeterTags": [],
+        "MeterRates": {
+        "0": 0.71
         },
-    …   
-    ]
-    "Currency": "CNY",
-    "Locale": "en-US",
-    "IsTaxIncluded": false,
-        }
+        "EffectiveDate": "2013-12-01T00:00:00Z",
+        "IncludedQuantity": 0.0
+    },
+…   
+]
+"Currency": "CNY",
+"Locale": "en-US",
+"IsTaxIncluded": false,
+    }
+```
 
 ## JSON元素定义
 
@@ -144,8 +149,4 @@ JSON
 <p>404/Not Found</p><p>404/未发现</p> | <p>ObjectNotFound</p><p>未发现对象</p> | 客户没有授权。
 <p>404/Not Found</p><p>404/未发现</p> | <p>SubscriptionNotFound</p><p>未发现订阅</p> | 请求 URL 中的订阅 ID 值无效或者未发现订阅 ID 值。
 
-
 想了解在境外其它国家由微软运营的Azure 服务，请访问[微软 Azure 提供的项目详情](http://azure.microsoft.com/en-us/support/legal/offer-details/)。
-
-
-

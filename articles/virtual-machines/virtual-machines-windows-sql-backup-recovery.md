@@ -1,22 +1,22 @@
-<properties
-	pageTitle="SQL Server 的备份和还原 | Azure"
-	description="介绍 Azure 虚拟机上运行的 SQL Server 数据库的备份和还原注意事项。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="rothja"
-	manager="jeffreyg"
-	editor="monicar"
-	tags="azure-resource-management" />
+---
+title: SQL Server 的备份和还原 | Azure
+description: 介绍 Azure 虚拟机上运行的 SQL Server 数据库的备份和还原注意事项。
+services: virtual-machines-windows
+documentationCenter: na
+authors: rothja
+manager: jeffreyg
+editor: monicar
+tags: azure-resource-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="11/15/2016"
-	wacn.date="12/30/2016"
-	ms.author="jroth" />
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 11/15/2016
+wacn.date: 12/30/2016
+ms.author: jroth
+---
 
 # Azure 虚拟机中 SQL Server 的备份和还原
 
@@ -24,13 +24,14 @@
 
 备份 SQL Server 数据库中的数据是为防止应用程序或用户错误导致数据丢失而采取的策略的重要组成部分。对于 Azure 虚拟机 (VM) 上运行的 SQL Server 同样如此。
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-both-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-both-include.md)]
 
-对于 Azure VM 中运行的 SQL Server，可以使用附加的磁盘作为备份文件目标，通过本机备份和还原技术实现此目的。不过，你只能根据[虚拟机的大小](/documentation/articles/virtual-machines-windows-sizes/)，将有限数量的磁盘附加到 Azure 虚拟机。磁盘管理开销也是一个考虑因素。
+对于 Azure VM 中运行的 SQL Server，可以使用附加的磁盘作为备份文件目标，通过本机备份和还原技术实现此目的。不过，你只能根据[虚拟机的大小](./virtual-machines-windows-sizes.md)，将有限数量的磁盘附加到 Azure 虚拟机。磁盘管理开销也是一个考虑因素。
 
 从 SQL Server 2014 开始，你可以备份和还原到 Azure Blob 存储。SQL Server 2016 进一步增强了此选项。此外，对于 Azure Blob 存储中存储的数据库文件，SQL Server 2016 提供了一个选项，你可以使用 Azure 快照进行近实时备份和快速还原。本文将概述这些选项，你可以在[使用 Azure Blob 存储服务执行 SQL Server 备份和还原](https://msdn.microsoft.com/zh-cn/library/jj919148.aspx)中找到更多信息。
 
->[AZURE.NOTE] 有关用于备份极大型数据库的选项的介绍，请参阅[适用于 Azure 虚拟机的多 TB SQL Server 数据库备份策略](http://blogs.msdn.com/b/igorpag/archive/2015/07/28/multi-terabyte-sql-server-database-backup-strategies-for-azure-virtual-machines.aspx)。
+>[!NOTE]
+> 有关用于备份极大型数据库的选项的介绍，请参阅[适用于 Azure 虚拟机的多 TB SQL Server 数据库备份策略](http://blogs.msdn.com/b/igorpag/archive/2015/07/28/multi-terabyte-sql-server-database-backup-strategies-for-azure-virtual-machines.aspx)。
 
 下列部分介绍特定于 Azure 虚拟机中支持的不同 SQL Server 版本的信息。
 
@@ -58,14 +59,13 @@
 
 ## SQL Server 2014
 
-
 SQL Server 2014 包括以下增强功能：
 
 1. **备份和还原到 Azure**：
 
  - 现在，SQL Server Management Studio 支持 *SQL Server 备份到 URL*。当使用“备份”或“还原”任务或在 SQL Server Management Studio 中使用维护计划向导时，现在可以使用备份到 Azure 的选项。有关详细信息，请参阅 [SQL Server 备份到 URL](https://msdn.microsoft.com/zh-cn/library/jj919148%28v=sql.120%29.aspx)。
  - *SQL Server 托管备份到 Azure*：允许自动执行备份管理的新功能。这对于针对在 Azure 计算机上运行的 SQL Server 2014 实例自动执行备份管理特别有用。有关详细信息，请参阅 [SQL Server 托管备份到 Azure](https://msdn.microsoft.com/zh-cn/library/dn449496%28v=sql.120%29.aspx)。
- - *自动备份*：在 Azure 中 SQL Server VM 的所有现有和新数据库上，提供额外的自动化功能来自动启用 *SQL Server 托管备份到 Azure*。有关详细信息，请参阅[针对 Azure 虚拟机中 SQL Server 的自动备份](/documentation/articles/virtual-machines-windows-classic-sql-automated-backup)。
+ - *自动备份*：在 Azure 中 SQL Server VM 的所有现有和新数据库上，提供额外的自动化功能来自动启用 *SQL Server 托管备份到 Azure*。有关详细信息，请参阅[针对 Azure 虚拟机中 SQL Server 的自动备份](./virtual-machines-windows-classic-sql-automated-backup.md)。
  - 有关 SQL Server 2014 备份到 Azure 的所有选项的概述，请参阅[使用 Azure Blob 存储服务执行 SQL Server 备份和还原](https://msdn.microsoft.com/zh-cn/library/jj919148%28v=sql.120%29.aspx)。
 
 1. **加密**：SQL Server 2014 支持在创建备份时加密数据。它支持几种加密算法和使用证书或非对称密钥。有关详细信息，请参阅[备份加密](https://msdn.microsoft.com/zh-cn/library/dn449489%28v=sql.120%29.aspx)。
@@ -88,10 +88,10 @@ SQL Server 2014 包括以下增强功能：
 
 ## 后续步骤
 
-如果你在规划 Azure VM 中的 SQL Server 部署，可在以下教程中找到预配指导：[使用 Azure Resource Manager 在 Azure 上预配 SQL Server 虚拟机](/documentation/articles/virtual-machines-windows-portal-sql-server-provision/)。
+如果你在规划 Azure VM 中的 SQL Server 部署，可在以下教程中找到预配指导：[使用 Azure Resource Manager 在 Azure 上预配 SQL Server 虚拟机](./virtual-machines-windows-portal-sql-server-provision.md)。
 
-尽管备份和还原可用于迁移数据，但是，Azure VM 上的 SQL Server 可能还存在更便捷的数据迁移路径。有关迁移选项和建议的完整讨论，请参阅[将数据库迁移到 Azure VM 上的 SQL Server](/documentation/articles/virtual-machines-windows-migrate-sql/)。
+尽管备份和还原可用于迁移数据，但是，Azure VM 上的 SQL Server 可能还存在更便捷的数据迁移路径。有关迁移选项和建议的完整讨论，请参阅[将数据库迁移到 Azure VM 上的 SQL Server](./virtual-machines-windows-migrate-sql.md)。
 
-请查看其他[有关在 Azure 虚拟机中运行 SQL Server 的资源](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)。
+请查看其他[有关在 Azure 虚拟机中运行 SQL Server 的资源](./virtual-machines-windows-sql-server-iaas-overview.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

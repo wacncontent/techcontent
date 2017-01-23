@@ -1,32 +1,32 @@
-<properties
-	pageTitle="使用 Git 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用"
-	description="本教程演示如何创建在 MySQL 中存储数据的 PHP Web 应用并使用 Git 部署到 Azure。"
-	services="app-service\web"
-	documentationCenter="php"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""
-	tags="mysql"/>
+---
+title: 使用 Git 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用
+description: 本教程演示如何创建在 MySQL 中存储数据的 PHP Web 应用并使用 Git 部署到 Azure。
+services: app-service\web
+documentationCenter: php
+authors: rmcmurray
+manager: wpickett
+editor: 
+tags: mysql
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="PHP"
-	ms.topic="article"
-	ms.date="11/01/2016"
-	wacn.date="12/30/2016"
-	ms.author="robmcm"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 # 使用 Git 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-本教程演示如何创建 PHP-MySQL Web 应用以及如何使用 Git 将该应用部署到[应用服务](/documentation/articles/app-service-changes-existing-services/)。需要使用计算机上已安装的 [PHP][install-php]、MySQL 命令行工具（[MySQL][install-mysql] 的一部分）和 [Git][install-git]。本教程中的说明适用于任何操作系统，包括 Windows、Mac 和 Linux。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP/MySQL Web 应用。
+本教程演示如何创建 PHP-MySQL Web 应用以及如何使用 Git 将该应用部署到[应用服务](./app-service-changes-existing-services.md)。需要使用计算机上已安装的 [PHP][install-php]、MySQL 命令行工具（[MySQL][install-mysql] 的一部分）和 [Git][install-git]。本教程中的说明适用于任何操作系统，包括 Windows、Mac 和 Linux。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP/MySQL Web 应用。
 
 你将学习以下内容：
 
-* 如何使用 [Azure 门户预览][management-portal]创建 Web 应用和 MySQL 数据库。由于[应用服务 Web 应用](/documentation/articles/app-service-changes-existing-services/)已默认启用 PHP，因此运行 PHP 代码没有任何特殊要求。
+* 如何使用 [Azure 门户预览][management-portal]创建 Web 应用和 MySQL 数据库。由于[应用服务 Web 应用](./app-service-changes-existing-services.md)已默认启用 PHP，因此运行 PHP 代码没有任何特殊要求。
 * 如何使用 Git 将应用程序发布和重新发布到 Azure。
 * 如何启用该编辑器扩展才能在每个 `git push` 自动执行编辑器任务。
 
@@ -37,7 +37,6 @@
 ## 设置开发环境
 
 本教程假定计算机上已安装 [PHP][install-php]、MySQL 命令行工具（[MySQL][install-mysql] 的一部分）和 [Git][install-git]。
-
 
 ##<a id="create-web-site-and-set-up-git"></a>创建 Web 应用并设置 Git 发布
 
@@ -60,16 +59,17 @@
 
 9. 若要启用 Git 发布，必须提供用户名和密码。记下你创建的用户名和密码。（如果之前已设置 Git 存储库，则会跳过此步骤。）
 
-	![创建发布凭据][credentials]
+    ![创建发布凭据][credentials]
 
 11. 使用以下 PowerShell 命令行设置“本地 Git 存储库”。
 
-		$a = Get-AzureRmResource -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
+    ```
+    $a = Get-AzureRmResource -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
 
-		$a.Properties.scmType = "LocalGit"
+    $a.Properties.scmType = "LocalGit"
 
-		Set-AzureRmResource -PropertyObject $a.Properties -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
-
+    Set-AzureRmResource -PropertyObject $a.Properties -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
+    ```
 
 ## 获取远程 MySQL 连接信息
 
@@ -81,7 +81,7 @@
 
 3. 在“数据库”页中，可以获取此 MYSQL 数据库服务器下的所有数据库。
 
-	数据源将为 `tcp:<your MYSQL server name>.database.chinacloudapi.cn,<port>`
+    数据源将为 `tcp:<your MYSQL server name>.database.chinacloudapi.cn,<port>`
 
 ## 在本地生成并测试应用
 
@@ -95,136 +95,146 @@
 
 1. 使用之前检索的 `Data Source`、`User Id`、`Password` 和 `Database` 的值，连接到远程 MySQL 服务器：
 
-		mysql -h{Data Source] -u[User Id] -p[Password] -D[Database]
+    ```
+    mysql -h{Data Source] -u[User Id] -p[Password] -D[Database]
+    ```
 
 2. 此时将出现 MySQL 命令提示符：
 
-		mysql>
+    ```
+    mysql>
+    ```
 
 3. 粘贴以下 `CREATE TABLE` 命令以在你的数据库中创建 `registration_tbl` 表：
 
-		CREATE TABLE registration_tbl(id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(30), email VARCHAR(30), date DATE);
+    ```
+    CREATE TABLE registration_tbl(id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(30), email VARCHAR(30), date DATE);
+    ```
 
 4. 在本地应用程序文件夹的根目录中创建 **index.php** 文件。
 
 5. 在文本编辑器或 IDE 中打开 **index.php** 文件，添加以下代码，并完成用 `//TODO:` 注释标记的必需更改。
 
-
-		<html>
-		<head>
-		<Title>Registration Form</Title>
-		<style type="text/css">
-			body { background-color: #fff; border-top: solid 10px #000;
-			    color: #333; font-size: .85em; margin: 20; padding: 20;
-			    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-			}
-			h1, h2, h3,{ color: #000; margin-bottom: 0; padding-bottom: 0; }
-			h1 { font-size: 2em; }
-			h2 { font-size: 1.75em; }
-			h3 { font-size: 1.2em; }
-			table { margin-top: 0.75em; }
-			th { font-size: 1.2em; text-align: left; border: none; padding-left: 0; }
-			td { padding: 0.25em 2em 0.25em 0em; border: 0 none; }
-		</style>
-		</head>
-		<body>
-		<h1>Register here!</h1>
-		<p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
-		<form method="post" action="index.php" enctype="multipart/form-data" >
-		      Name  <input type="text" name="name" id="name"/></br>
-		      Email <input type="text" name="email" id="email"/></br>
-		      <input type="submit" name="submit" value="Submit" />
-		</form>
-		<?php
-			// DB connection info
-			//TODO: Update the values for $host, $user, $pwd, and $db
-			//using the values you retrieved earlier from the Azure Portal.
-			$host = "value of Data Source";
-			$user = "value of User Id";
-			$pwd = "value of Password";
-			$db = "value of Database";
-			// Connect to database.
-			try {
-				$conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
-				$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-			}
-			catch(Exception $e){
-				die(var_dump($e));
-			}
-			// Insert registration info
-			if(!empty($_POST)) {
-			try {
-				$name = $_POST['name'];
-				$email = $_POST['email'];
-				$date = date("Y-m-d");
-				// Insert data
-				$sql_insert = "INSERT INTO registration_tbl (name, email, date)
-						   VALUES (?,?,?)";
-				$stmt = $conn->prepare($sql_insert);
-				$stmt->bindValue(1, $name);
-				$stmt->bindValue(2, $email);
-				$stmt->bindValue(3, $date);
-				$stmt->execute();
-			}
-			catch(Exception $e) {
-				die(var_dump($e));
-			}
-			echo "<h3>Your're registered!</h3>";
-			}
-			// Retrieve data
-			$sql_select = "SELECT * FROM registration_tbl";
-			$stmt = $conn->query($sql_select);
-			$registrants = $stmt->fetchAll();
-			if(count($registrants) > 0) {
-				echo "<h2>People who are registered:</h2>";
-				echo "<table>";
-				echo "<tr><th>Name</th>";
-				echo "<th>Email</th>";
-				echo "<th>Date</th></tr>";
-				foreach($registrants as $registrant) {
-					echo "<tr><td>".$registrant['name']."</td>";
-					echo "<td>".$registrant['email']."</td>";
-					echo "<td>".$registrant['date']."</td></tr>";
-		    	}
-		 		echo "</table>";
-			} else {
-				echo "<h3>No one is currently registered.</h3>";
-			}
-		?>
-		</body>
-		</html>
+    ```
+    <html>
+    <head>
+    <Title>Registration Form</Title>
+    <style type="text/css">
+        body { background-color: #fff; border-top: solid 10px #000;
+            color: #333; font-size: .85em; margin: 20; padding: 20;
+            font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+        }
+        h1, h2, h3,{ color: #000; margin-bottom: 0; padding-bottom: 0; }
+        h1 { font-size: 2em; }
+        h2 { font-size: 1.75em; }
+        h3 { font-size: 1.2em; }
+        table { margin-top: 0.75em; }
+        th { font-size: 1.2em; text-align: left; border: none; padding-left: 0; }
+        td { padding: 0.25em 2em 0.25em 0em; border: 0 none; }
+    </style>
+    </head>
+    <body>
+    <h1>Register here!</h1>
+    <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
+    <form method="post" action="index.php" enctype="multipart/form-data" >
+          Name  <input type="text" name="name" id="name"/></br>
+          Email <input type="text" name="email" id="email"/></br>
+          <input type="submit" name="submit" value="Submit" />
+    </form>
+    <?php
+        // DB connection info
+        //TODO: Update the values for $host, $user, $pwd, and $db
+        //using the values you retrieved earlier from the Azure Portal.
+        $host = "value of Data Source";
+        $user = "value of User Id";
+        $pwd = "value of Password";
+        $db = "value of Database";
+        // Connect to database.
+        try {
+            $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
+            $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        }
+        catch(Exception $e){
+            die(var_dump($e));
+        }
+        // Insert registration info
+        if(!empty($_POST)) {
+        try {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $date = date("Y-m-d");
+            // Insert data
+            $sql_insert = "INSERT INTO registration_tbl (name, email, date)
+                       VALUES (?,?,?)";
+            $stmt = $conn->prepare($sql_insert);
+            $stmt->bindValue(1, $name);
+            $stmt->bindValue(2, $email);
+            $stmt->bindValue(3, $date);
+            $stmt->execute();
+        }
+        catch(Exception $e) {
+            die(var_dump($e));
+        }
+        echo "<h3>Your're registered!</h3>";
+        }
+        // Retrieve data
+        $sql_select = "SELECT * FROM registration_tbl";
+        $stmt = $conn->query($sql_select);
+        $registrants = $stmt->fetchAll();
+        if(count($registrants) > 0) {
+            echo "<h2>People who are registered:</h2>";
+            echo "<table>";
+            echo "<tr><th>Name</th>";
+            echo "<th>Email</th>";
+            echo "<th>Date</th></tr>";
+            foreach($registrants as $registrant) {
+                echo "<tr><td>".$registrant['name']."</td>";
+                echo "<td>".$registrant['email']."</td>";
+                echo "<td>".$registrant['date']."</td></tr>";
+            }
+             echo "</table>";
+        } else {
+            echo "<h3>No one is currently registered.</h3>";
+        }
+    ?>
+    </body>
+    </html>
+    ```
 
 4.  在终端中转到应用程序文件夹，并键入以下命令：
 
-		php -S localhost:8000
+    ```
+    php -S localhost:8000
+    ```
 
 现在，你可以浏览到 **http://localhost:8000/** 以测试应用程序。
-
 
 ## 发布应用
 
 在本地测试你的应用之后，可以使用 Git 将其发布到 Web Apps。你将初始化本地 Git 存储库并发布该应用程序。
 
-> [AZURE.NOTE]
+> [!NOTE]
 这些步骤与 Azure 门户预览中的“创建 Web 应用并设置 Git 发布”一节的结尾显示的步骤相同。
 
 1. （可选）如果你忘记或误放了 Git 远程存储库 URL，请导航到 Azure 门户预览上的 Web 应用属性。
 
 1. 打开 GitBash（或终端，如果 Git 在 `PATH` 中），将目录更改为应用程序的根目录，并运行以下命令：
 
-		git init
-		git add .
-		git commit -m "initial commit"
-		git remote add azure [URL for remote repository]
-		git push azure master
+    ```
+    git init
+    git add .
+    git commit -m "initial commit"
+    git remote add azure [URL for remote repository]
+    git push azure master
+    ```
 
-	系统将提示你输入之前创建的密码。
+    系统将提示你输入之前创建的密码。
 
-	![通过 Git 初始推送到 Azure][git-initial-push]
+    ![通过 Git 初始推送到 Azure][git-initial-push]
 
 2. 浏览到 **http://[site name].chinacloudsites.cn/index.php** 以开始使用应用程序（此信息将存储在你的帐户仪表板上）：
 
-	![Azure PHP 网站][running-app]
+    ![Azure PHP 网站][running-app]
 
 发布应用之后，你可以开始对其进行更改并使用 Git 发布所做的更改。
 
@@ -235,18 +245,20 @@
 1. 本地对应用进行更改。
 2. 打开 GitBash（或终端，如果 Git 在 `PATH` 中），将目录更改为应用的根目录，并运行以下命令：
 
-		git add .
-		git commit -m "comment describing changes"
-		git push azure master
+    ```
+    git add .
+    git commit -m "comment describing changes"
+    git push azure master
+    ```
 
-	系统将提示你输入之前创建的密码。
+    系统将提示你输入之前创建的密码。
 
-	![通过 Git 将网站更改推送到 Azure][git-change-push]
+    ![通过 Git 将网站更改推送到 Azure][git-change-push]
 
 3. 浏览到 **http://[site name].chinacloudsites.cn/index.php** 以查看应用及可能做出的任何更改：
 
-	![Azure PHP 网站][running-app]
-	
+    ![Azure PHP 网站][running-app]
+
 ## <a name="composer"></a> 使用编辑器扩展启用编辑器自动化
 
 默认情况下，如果 PHP 项目中有 composer.json，则应用服务中的 git 部署过程与其不相关。`git push` 期间可以通过启用编辑器扩展启用 composer.json 处理。
@@ -258,13 +270,13 @@
 2. 单击“添加”，然后单击“编辑器”。
 
     ![添加编辑器扩展插件][composer-extension-add]
-    
+
 3. 单击“确定”接受法律条款。再次单击“确定”以添加该扩展。
 
     **已安装扩展**边栏选项卡将不会显示编辑器扩展。
 
     ![查看编辑器扩展插件][composer-extension-view]
-    
+
 4. 现在，如上一节所示，执行 `git add`、`git commit` 和 `git push`。现在将看到编辑器正在安装在 composer.json 中定义的依赖项。
 
     ![编辑器扩展插件成功][composer-extension-success]

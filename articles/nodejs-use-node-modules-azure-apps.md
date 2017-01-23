@@ -1,24 +1,21 @@
-<properties
-	pageTitle="使用 Node.js 模块"
-	description="了解如何在使用 Azure App Service 或云服务的同时使用 Node.js 模块。"
-	services=""
-	documentationCenter="nodejs"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""/>  
+---
+title: 使用 Node.js 模块
+description: 了解如何在使用 Azure App Service 或云服务的同时使用 Node.js 模块。
+services: 
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="nodejs"
-	ms.topic="article"
-	ms.date="11/01/2016"
-	ms.author="robmcm"
-	wacn.date="12/23/2016"/>  
-
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 11/01/2016
+ms.author: robmcm
+wacn.date: 12/23/2016
+---
 
 # 将 Node.js 模块与 Azure 应用程序一起使用
 本文档提供有关将 Node.js 模块与托管在 Azure 中的应用程序一起使用的指南。其中提供有关确保你的应用程序使用特定版本的模块，以及对 Azure 使用本机模块的指南。
@@ -28,7 +25,8 @@
 - Azure App Service 了解 **package.json** 和 **npm-shrinkwrap.json** 文件，可基于这些文件中的条目安装模块。
 - Azure 云服务希望所有模块都安装在开发环境中，并将 **node\_modules** 目录包含为部署包的一部分。可以为使用 **package.json** 或 **npm-shrinkwrap.json** 文件在云服务上安装模块提供相应支持，但这需要自定义云服务项目使用的默认脚本。有关如何实现此目的的示例，请参阅[运行 npm 安装以避免部署 Node 模块的 Azure 启动任务](https://github.com/woloski/nodeonazure-blog/blob/master/articles/startup-task-to-run-npm-in-azure.markdown)
 
-> [AZURE.NOTE] 本文不讨论 Azure 虚拟机，因为 VM 中的开发体验将取决于由虚拟机托管的操作系统。
+> [!NOTE]
+> 本文不讨论 Azure 虚拟机，因为 VM 中的开发体验将取决于由虚拟机托管的操作系统。
 
 ## Node.js 模块
 模块是可加载的 JavaScript 包，可为你的应用程序提供特定功能。通常使用 **npm** 命令行工具安装模块，但一些模块（如 http 模块）是作为核心 Node.js 包的一部分提供的。
@@ -52,35 +50,33 @@ Azure App Service 不支持部分本机模块，并且在编译具有高度专�
 
 **package.json** 文件的一个潜在问题是它仅指定顶级依赖项的版本。安装的每个模块不一定会指定它所依赖的模块的版本，所以你最终使用的依赖项链可能与开发过程中使用的不同。
 
-> [AZURE.NOTE]
+> [!NOTE]
 部署到 Azure App Service 时，如果 <b>package.json</b> 文件引用本机模块，那么在使用 Git 发布应用程序时你将看到如下错误：
 
 >		npm ERR! module-name@0.6.0 install: 'node-gyp configure build'
 
 >		npm ERR! 'cmd "/c" "node-gyp configure build"' failed with 1
 
-
 ### 使用 npm-shrinkwrap.json 文件
 **npm-shrinkwrap.json** 文件用于尝试消除 **package.json** 文件的模块版本控制限制。虽然 **package.json** 文件仅包含顶级模块的版本，但 **npm-shrinkwrap.json** 文件包含所有模块依赖项链的版本要求。
 
 您的应用程序准备好生产后，便可锁定版本要求，并使用 **npm shrinkwrap** 命令创建 **npm-shrinkwrap.json** 文件。这将使用当前安装在 **node\_modules** 文件夹中的版本，并将这些信息记录到 **npm-shrinkwrap.json** 文件。将应用程序部署到托管环境后，可使用 **npm install** 命令来解析 **npm-shrinkwrap.json** 文件并安装列出的所有依赖项。有关详细信息，请参阅 [npm-shrinkwrap](https://docs.npmjs.com/cli/shrinkwrap)。
 
-> [AZURE.NOTE]
+> [!NOTE]
 部署到 Azure App Service 时，如果 <b>npm-shrinkwrap.json</b> 文件引用本机模块，那么在使用 Git 发布应用程序时你将看到如下错误：
 
 >		npm ERR! module-name@0.6.0 install: 'node-gyp configure build'
 
 >		npm ERR! 'cmd "/c" "node-gyp configure build"' failed with 1
 
-
 ## 后续步骤
-了解如何在 Azure 中使用 Node.js 模块后，了解如何[指定 Node.js 版本]、[生成和部署 Node.js Web 应用](/documentation/articles/web-sites-nodejs-develop-deploy-mac/)，以及[如何使用适用于 Mac 和 Linux 的 Azure 命令行接口]。
+了解如何在 Azure 中使用 Node.js 模块后，了解如何[指定 Node.js 版本]、[生成和部署 Node.js Web 应用](./app-service-web/web-sites-nodejs-develop-deploy-mac.md)，以及[如何使用适用于 Mac 和 Linux 的 Azure 命令行接口]。
 
 有关详细信息，请参阅 [Node.js 开发人员中心](/develop/nodejs/)。
 
-[指定 Node.js 版本]: /documentation/articles/nodejs-specify-node-version-azure-apps/
-[如何使用适用于 Mac 和 Linux 的 Azure 命令行接口]: /documentation/articles/xplat-cli-install/
-[build and deploy a Node.js web Site]:/documentation/articles/web-sites-nodejs-develop-deploy-mac/
-[Build and deploy a Node.js application to an Azure Cloud Service]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+[指定 Node.js 版本]: ./nodejs-specify-node-version-azure-apps.md
+[如何使用适用于 Mac 和 Linux 的 Azure 命令行接口]: ./xplat-cli-install.md
+[build and deploy a Node.js web Site]:./app-service-web/web-sites-nodejs-develop-deploy-mac.md
+[Build and deploy a Node.js application to an Azure Cloud Service]: ./cloud-services/cloud-services-nodejs-develop-deploy-app.md
 
 <!---HONumber=Mooncake_1212_2016-->

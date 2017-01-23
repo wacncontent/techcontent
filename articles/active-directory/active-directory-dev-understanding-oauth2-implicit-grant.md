@@ -1,22 +1,22 @@
-<properties
-    pageTitle="了解 Azure Active Directory 中的 OAuth2 隐式授权流 | Azure"
-    description="详细了解 Azure Active Directory 的 OAuth2 隐式授权流实现，以及它是否适合你的应用程序。"
-    services="active-directory"
-    documentationcenter="dev-center-name"
-    author="vibronet"
-    manager="mbaldwin"
-    editor="" />  
+---
+title: 了解 Azure Active Directory 中的 OAuth2 隐式授权流 | Azure
+description: 详细了解 Azure Active Directory 的 OAuth2 隐式授权流实现，以及它是否适合你的应用程序。
+services: active-directory
+documentationcenter: dev-center-name
+author: vibronet
+manager: mbaldwin
+editor: 
 
-<tags
-    ms.assetid="90e42ff9-43b0-4b4f-a222-51df847b2a8d"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="11/15/2016"
-    ms.author="vittorib;bryanla" 
-    wacn.date="12/09/2016"/>
+ms.assetid: 90e42ff9-43b0-4b4f-a222-51df847b2a8d
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/15/2016
+ms.author: vittorib;bryanla
+wacn.date: 12/09/2016
+---
 
 # 了解 Azure Active Directory (AD) 中的 OAuth2 隐式授权流
 OAuth2 隐式授权是 OAuth2 规范中安全疑虑最多的授权方式，因此让人诟病。然而，这却是 ADAL JS 的实现方式，也是我们建议用于编写 SPA 应用程序的方法。这是怎么回事呢？ 不外乎是一种权衡利弊之后的结果：事实证明，对于通过 JavaScript 从浏览器使用 Web API 的应用程序而言，隐式授权是所能找到的最好方法。
@@ -62,9 +62,9 @@ OAuth2 隐式授权的重要特征是，此类流程绝对不会将刷新令牌�
 <!--Image references-->
 
 <!--Reference style links in use-->
-[AAD-Developers-Guide]: /documentation/articles/active-directory-developers-guide/
-[ACOM-How-And-Why-Apps-Added-To-AAD]: /documentation/articles/active-directory-how-applications-are-added/
-[ACOM-How-To-Integrate]: /documentation/articles/active-directory-how-to-integrate/
+[AAD-Developers-Guide]: ./active-directory-developers-guide.md
+[ACOM-How-And-Why-Apps-Added-To-AAD]: ./active-directory-how-applications-are-added.md
+[ACOM-How-To-Integrate]: ./active-directory-how-to-integrate.md
 [OAuth2-Spec-Implicit-Misuse]: https://tools.ietf.org/html/rfc6749#section-10.16
 [OAuth2-Threat-Model-And-Security-Implications]: https://tools.ietf.org/html/rfc6819
 

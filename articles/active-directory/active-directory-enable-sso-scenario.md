@@ -1,23 +1,21 @@
-<properties
-    pageTitle="使用 Azure Active Directory 管理应用程序 | Azure"
-    description="本文介绍将 Azure Active Directory 与本地、云和 SaaS 应用程序集成的好处。"
-    services="active-directory"
-    documentationCenter=""
-    authors="markusvi"
-    manager="femila"
-    editor=""/>  
+---
+title: 使用 Azure Active Directory 管理应用程序 | Azure
+description: 本文介绍将 Azure Active Directory 与本地、云和 SaaS 应用程序集成的好处。
+services: active-directory
+documentationCenter: 
+authors: markusvi
+manager: femila
+editor: 
 
-
-   <tags
-      ms.service="active-directory"
-      ms.devlang="na"
-      ms.topic="article"
-      ms.tgt_pltfrm="na"
-      ms.workload="identity"
-      ms.date="10/10/2016"
-      wacn.date="10/31/2016"
-      ms.author="markvi"/>  
-
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 10/10/2016
+wacn.date: 10/31/2016
+ms.author: markvi
+---
 
 # 使用 Azure Active Directory 管理应用程序
 
@@ -62,7 +60,6 @@ Azure Active Directory 是 Microsoft 的综合性标识即服务 (IDaaS) 解决�
 - 提供中心访问管理、单一登录 (SSO) 及报告功能
 
 - 支持应用程序库中[数千个应用程序](https://azure.microsoft.com/marketplace/active-directory/)（包括 Salesforce、Google Apps、Box、Concur 等）的集成访问管理。
-
 
 借助 Azure Active Directory，你为合作伙伴与客户（企业或消费者）发布的所有应用程序都具有相同的标识和访问管理功能。<br> 这可让你大幅降低运营成本。
 
@@ -128,14 +125,14 @@ Azure AD 提供预先集成的报告和监控功能，使你能够知道谁有�
 
 ## 相关功能
 
-借助 Azure AD，可以使用精细的访问策略和预先集成的 MFA 来保护你的应用程序。若要了解有关 Azure MFA 的详细信息，请参阅 [Azure MFA](/home/features/multi-factor-authentication/)。
+借助 Azure AD，可以使用精细的访问策略和预先集成的 MFA 来保护你的应用程序。若要了解有关 Azure MFA 的详细信息，请参阅 [Azure MFA](https://www.azure.cn/home/features/multi-factor-authentication/)。
 
 ## 入门
 
-若要开始将应用程序与 Azure AD 集成，请参阅[将 Azure Active Directory 与应用程序集成入门指南](/documentation/articles/active-directory-integrating-applications-getting-started/)。
+若要开始将应用程序与 Azure AD 集成，请参阅[将 Azure Active Directory 与应用程序集成入门指南](./active-directory-integrating-applications-getting-started.md)。
 
 ## 另请参阅
 
-[有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
+[有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 
 <!---HONumber=Mooncake_1024_2016-->

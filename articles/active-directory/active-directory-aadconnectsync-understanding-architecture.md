@@ -1,22 +1,21 @@
-<properties
-   pageTitle="Azure AD Connect 同步：了解体系结构 | Azure"
-   description="本主题介绍 Azure AD Connect 同步的体系结构，并解释使用的术语。"
-   services="active-directory"
-   documentationCenter=""
-   authors="andkjell"
-   manager="stevenpo"
-   editor=""/>
+---
+title: Azure AD Connect 同步：了解体系结构 | Azure
+description: 本主题介绍 Azure AD Connect 同步的体系结构，并解释使用的术语。
+services: active-directory
+documentationCenter: 
+authors: andkjell
+manager: stevenpo
+editor: 
 
-<tags
-   ms.service="active-directory"
-   ms.workload="identity"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="08/31/2016"
-   wacn.date="10/11/2016"
-   ms.author="billmath"/>
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/31/2016
+wacn.date: 10/11/2016
+ms.author: billmath
+---
 
 # Azure AD Connect 同步：了解体系结构
 本主题介绍 Azure AD Connect 同步的基本体系结构。在许多方面，它类似于其前身产品 MIIS 2003、ILM 2007 和 FIM 2010。Azure AD Connect 同步是这些技术的演进。如果熟悉上述任何早期技术，则也会熟悉本主题的内容。本主题很适合同步功能的新手。但是，不一定要了解本主题的详细信息才能成功自定义 Azure AD Connect 同步（在本主题中称为"同步引擎"）。
@@ -252,8 +251,8 @@ Metaverse 对象包含同步引擎具有的连接器空间中暂存对象的聚�
 例如，如果同步引擎将值为 5 的属性 C 导出到连接的数据源，则在导出状态内存中存储 C=5。此对象的每次额外导出都会导致尝试再度将 C=5 导出到连接的数据源，因为同步引擎假设此值尚未持续应用到对象（也就是说，除非最近从连接的数据源导入了不同的值）。在对象导入操作期间收到 C=5 时，将清除导出内存。
 
 ## 后续步骤
-了解有关 [Azure AD Connect 同步](/documentation/articles/active-directory-aadconnectsync-whatis/)配置的详细信息。
+了解有关 [Azure AD Connect 同步](./active-directory-aadconnectsync-whatis.md)配置的详细信息。
 
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_0926_2016-->

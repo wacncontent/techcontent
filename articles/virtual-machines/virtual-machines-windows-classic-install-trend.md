@@ -1,29 +1,26 @@
-<properties
-	pageTitle="在 VM 上安装 Trend Micro Deep Security | Azure"
-	description="本文介绍如何在 Azure 中使用经典部署模型创建的 VM 上安装和配置 Trend Micro Deep Security。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="iainfoulds"
-	manager="timlt"
-	editor=""
-	tags="azure-service-management"/>  
+---
+title: 在 VM 上安装 Trend Micro Deep Security | Azure
+description: 本文介绍如何在 Azure 中使用经典部署模型创建的 VM 上安装和配置 Trend Micro Deep Security。
+services: virtual-machines-windows
+documentationCenter: 
+authors: iainfoulds
+manager: timlt
+editor: 
+tags: azure-service-management
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-multiple"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="11/14/2016"
-	wacn.date="01/05/2017"
-	ms.author="iainfou"/>  
-
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: na
+ms.topic: article
+ms.date: 11/14/2016
+wacn.date: 01/05/2017
+ms.author: iainfou
+---
 
 # 如何在 Windows VM 上安装和配置 Trend Micro Deep Security 即服务
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)]
 
 本文演示了如何在运行 Windows Server 的新的或现有虚拟机 (VM) 上安装和配置 Trend Micro Deep Security 即服务。Deep Security 即服务包括反恶意软件保护、防火墙、入侵防御系统和完整性监视。
 
@@ -35,16 +32,15 @@
 
 使用“从库中”选项创建虚拟机时，[Azure 经典管理门户](http://manage.windowsazure.cn)允许安装 VM 代理和 Trend Micro 安全扩展插件。如果要创建的是单个虚拟机，则可通过此门户轻松地添加来自 Trend Micro 的保护。
 
-此**“从库中”**选项会打开帮助你设置虚拟机的向导。该向导的最后一页用于安装 VM 代理和 Trend Micro 安全扩展插件。有关常规说明，请参阅 [Create a virtual machine running Windows in the Azure Classic Management Portal](/documentation/articles/virtual-machines-windows-classic-tutorial/)（在 Azure 经典管理门户中创建运行 Windows 的虚拟机）。进入向导的最后一页时，请执行以下操作：
+此**“从库中”**选项会打开帮助你设置虚拟机的向导。该向导的最后一页用于安装 VM 代理和 Trend Micro 安全扩展插件。有关常规说明，请参阅 [Create a virtual machine running Windows in the Azure Classic Management Portal](./virtual-machines-windows-classic-tutorial.md)（在 Azure 经典管理门户中创建运行 Windows 的虚拟机）。进入向导的最后一页时，请执行以下操作：
 
-1.	在“VM 代理”下，选中“安装 VM 代理”。
+1. 在“VM 代理”下，选中“安装 VM 代理”。
 
-2.	在“安全扩展插件”下，选中“Trend Micro Deep Security Agent”。
+2. 在“安全扩展插件”下，选中“Trend Micro Deep Security Agent”。
 
-	![安装 VM 代理和 Deep Security Agent](./media/virtual-machines-windows-classic-install-trend/InstallVMAgentandTrend.png)  
+    ![安装 VM 代理和 Deep Security Agent](./media/virtual-machines-windows-classic-install-trend/InstallVMAgentandTrend.png)  
 
-
-3.	单击复选标记可创建虚拟机。
+3. 单击复选标记可创建虚拟机。
 
 ## 在现有 VM 上安装 Deep Security Agent
 
@@ -56,10 +52,12 @@
 
 首先，请验证是否已安装 VM 代理。填写云服务名称和虚拟机名称，然后在管理员级别的 Azure PowerShell 命令提示符下运行以下命令。替换引号内的所有内容，包括 < and > 字符。
 
-	$CSName = "<cloud service name>"
-	$VMName = "<virtual machine name>"
-	$vm = Get-AzureVM -ServiceName $CSName -Name $VMName
-	write-host $vm.VM.ProvisionGuestAgent
+```
+$CSName = "<cloud service name>"
+$VMName = "<virtual machine name>"
+$vm = Get-AzureVM -ServiceName $CSName -Name $VMName
+write-host $vm.VM.ProvisionGuestAgent
+```
 
 如果不知道云服务名称和虚拟机名称，运行 **Get-AzureVM** 即可显示当前订阅中所有虚拟机的该信息。
 
@@ -67,9 +65,11 @@
 
 如果已安装 VM 代理，请运行以下命令。
 
-	$Agent = Get-AzureVMAvailableExtension TrendMicro.DeepSecurity -ExtensionName TrendMicroDSA
+```
+$Agent = Get-AzureVMAvailableExtension TrendMicro.DeepSecurity -ExtensionName TrendMicroDSA
 
-	Set-AzureVMExtension -Publisher TrendMicro.DeepSecurity -Version $Agent.Version -ExtensionName TrendMicroDSA -VM $vm | Update-AzureVM
+Set-AzureVMExtension -Publisher TrendMicro.DeepSecurity -Version $Agent.Version -ExtensionName TrendMicroDSA -VM $vm | Update-AzureVM
+```
 
 ## 后续步骤
 
@@ -85,10 +85,9 @@
 
 [Azure VM 扩展和功能]
 
-
 <!--Link references-->
 
-[如何登录到运行 Windows Server 的虚拟机]: /documentation/articles/virtual-machines-windows-classic-connect-logon/
-[Azure VM 扩展和功能]: /documentation/articles/virtual-machines-windows-extensions-features/
+[如何登录到运行 Windows Server 的虚拟机]: ./virtual-machines-windows-classic-connect-logon.md
+[Azure VM 扩展和功能]: ./virtual-machines-windows-extensions-features.md
 
 <!---HONumber=Mooncake_1017_2016-->

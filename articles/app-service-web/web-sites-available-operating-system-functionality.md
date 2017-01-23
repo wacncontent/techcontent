@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="Azure 应用服务上的操作系统功能" 
-	description="了解 Azure 应用服务上可供 Web 应用、移动应用后端和 API 应用使用的 OS 功能" 
-	services="app-service" 
-	documentationCenter="" 
-	authors="cephalin" 
-	manager="wpickett" 
-	editor="mollybos"/>
+---
+title: Azure 应用服务上的操作系统功能
+description: 了解 Azure 应用服务上可供 Web 应用、移动应用后端和 API 应用使用的 OS 功能
+services: app-service
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: mollybos
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="07/01/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="cephalin"/>
+ms.service: app-service
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/01/2016
+wacn.date: 12/26/2016
+ms.author: cephalin
+---
 
 # Azure 应用服务上的操作系统功能 #
 
-本文介绍可用于在 [Azure 应用服务](/documentation/services/web-sites/)上运行的所有应用的常见基准操作系统功能。这些功能包括文件、网络和注册表访问以及诊断日志和事件。
+本文介绍可用于在 [Azure 应用服务](./index.md)上运行的所有应用的常见基准操作系统功能。这些功能包括文件、网络和注册表访问以及诊断日志和事件。
 
 ## <a id="tiers"></a> 应用服务计划层
 
@@ -93,7 +93,6 @@
 
 对注册表的写访问被阻止，包括对任何按用户注册表项的访问。从应用角度来说，对注册表的写访问永远不应依赖于 Azure 环境，因为应用可以（并且也是这样做的）跨不同虚拟机进行迁移。应用可依赖的唯一持久可写入存储是在应用服务 UNC 共享上存储的按应用内容目录结构。
 
-[AZURE.INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
- 
+[!INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

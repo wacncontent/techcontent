@@ -1,26 +1,25 @@
-<properties
-    pageTitle="如何使用 SDK 实现客户端分区 | Azure"
-    description="了解如何使用 Azure DocumentDB SDK 对数据进行分区（分片）和跨多个集合路由请求"
-    services="documentdb"
-    author="arramac"
-    manager="jhubbard"
-    editor="cgronlun"
-    documentationcenter="" />  
+---
+title: 如何使用 SDK 实现客户端分区 | Azure
+description: 了解如何使用 Azure DocumentDB SDK 对数据进行分区（分片）和跨多个集合路由请求
+services: documentdb
+author: arramac
+manager: jhubbard
+editor: cgronlun
+documentationcenter: 
 
-<tags
-    ms.assetid="ab2a63f0-4601-42d8-b5e5-ba943319c1c8"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/27/2016"
-    wacn.date="12/27/2016"
-    ms.author="arramac" />  
-
+ms.assetid: ab2a63f0-4601-42d8-b5e5-ba943319c1c8
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/27/2016
+wacn.date: 12/27/2016
+ms.author: arramac
+---
 
 # 如何在 DocumentDB 中使用客户端支持对数据分区
-Azure DocumentDB 支持[对集合自动分区](/documentation/articles/documentdb-partition-data/)。但是，也存在对分区行为进行精细控制更有利的用例。为了减少分区任务所需的重复代码，我们在 .NET、Node.js 和 Java SDK 中添加了相应的功能，可使构建跨多个集合扩大构大的应用程序变得更为简单。
+Azure DocumentDB 支持[对集合自动分区](./documentdb-partition-data.md)。但是，也存在对分区行为进行精细控制更有利的用例。为了减少分区任务所需的重复代码，我们在 .NET、Node.js 和 Java SDK 中添加了相应的功能，可使构建跨多个集合扩大构大的应用程序变得更为简单。
 
 在本文中，我们将了解 .NET SDK 中的类和接口，以及如何使用它们来开发已分区的应用程序。Java、Node.js 和 Python 等其他 SDK 支持使用类似方法和接口进行客户端侧分区。
 
@@ -31,9 +30,10 @@ Azure DocumentDB 支持[对集合自动分区](/documentation/articles/documentd
 - ACID 事务（即存储过程和触发器）不能跨越集合。事务的作用域在集合内的单个分区键值内。
 - 集合不强制实施架构，因此它们可以用于相同类型或不同类型的 JSON 文档。
 
-从 [Azure DocumentDB SDK 1.5.x](/documentation/articles/documentdb-sdk-dotnet/) 版本开始，可以直接对数据库执行文档操作。在内部，[DocumentClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.documentclient.aspx) 使用为数据库指定的 PartitionResolver 将请求路由到相应的集合。
+从 [Azure DocumentDB SDK 1.5.x](./documentdb-sdk-dotnet.md) 版本开始，可以直接对数据库执行文档操作。在内部，[DocumentClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.documentclient.aspx) 使用为数据库指定的 PartitionResolver 将请求路由到相应的集合。
 
->[AZURE.NOTE] [Server-side partitioning]REST API 2015-12-16 和 SDK 1.6.0+ 中引入的 (/documentation/articles/documentdb-partition-data) 弃用了用于简单用例的客户端分区解析程序。但是，客户端分区更灵活，并可让你跨分区键控制性能隔离，在读取多个分区中的结果时控制并行度，并使用范围/空间分区方法与哈希。
+>[!NOTE]
+> [Server-side partitioning]REST API 2015-12-16 和 SDK 1.6.0+ 中引入的 (/documentation/articles/documentdb-partition-data) 弃用了用于简单用例的客户端分区解析程序。但是，客户端分区更灵活，并可让你跨分区键控制性能隔离，在读取多个分区中的结果时控制并行度，并使用范围/空间分区方法与哈希。
 
 例如，在 .NET 中，每个 PartitionResolver 类都是 [IPartitionResolver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.ipartitionresolver.aspx) 接口的具体实现，它拥有三种方法 — [GetPartitionKey](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.ipartitionresolver.getpartitionkey.aspx)、[ResolveForCreate](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.ipartitionresolver.resolveforcreate.aspx) 和 [ResolveForRead](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.ipartitionresolver.resolveforread.aspx)。LINQ 查询和 ReadFeed 迭代器在内部使用 ResolveForRead 方法来循环访问与请求的分区键匹配的所有集合。类似地，创建操作使用 ResolveForCreate 方法来将创建路由到正确的分区。进行替换、删除和读取无需任何更改，因为它们使用已包含对相应集合的引用的文档。
 
@@ -44,59 +44,62 @@ SDK 还包括两个类，通过 [HashPartitionResolver](https://msdn.microsoft.c
 
 cs
 
-	// Create some collections to partition data.
-	DocumentCollection collection1 = await client.CreateDocumentCollectionAsync(...);
-	DocumentCollection collection2 = await client.CreateDocumentCollectionAsync(...);
+```
+// Create some collections to partition data.
+DocumentCollection collection1 = await client.CreateDocumentCollectionAsync(...);
+DocumentCollection collection2 = await client.CreateDocumentCollectionAsync(...);
 
-	// Initialize a HashPartitionResolver using the "UserId" property and the two collection self-links.
-	HashPartitionResolver hashResolver = new HashPartitionResolver(
-    		u => ((UserProfile)u).UserId, 
-    		new string[] { collection1.SelfLink, collection2.SelfLink });
+// Initialize a HashPartitionResolver using the "UserId" property and the two collection self-links.
+HashPartitionResolver hashResolver = new HashPartitionResolver(
+        u => ((UserProfile)u).UserId, 
+        new string[] { collection1.SelfLink, collection2.SelfLink });
 
-	// Register the PartitionResolver with the database.
-	this.client.PartitionResolvers[database.SelfLink] = hashResolver;
-
-
+// Register the PartitionResolver with the database.
+this.client.PartitionResolvers[database.SelfLink] = hashResolver;
+```
 
 ## 在分区中创建文档
 注册 PartitionResolver 后，你可以直接对数据库执行创建和查询，如下所示。在此示例中，SDK 使用 PartitionResolver 来提取 UserId，并对其进行哈希运算，然后使用该值将创建操作路由到正确的集合。
 
 cs
 
-	Document johnDocument = await this.client.CreateDocumentAsync(
-	    database.SelfLink, new UserProfile("J1", "@John", Region.UnitedStatesEast));
-	Document ryanDocument = await this.client.CreateDocumentAsync(
-	    database.SelfLink, new UserProfile("U4", "@Ryan", Region.AsiaPacific, UserStatus.AppearAway));
-
+```
+Document johnDocument = await this.client.CreateDocumentAsync(
+    database.SelfLink, new UserProfile("J1", "@John", Region.UnitedStatesEast));
+Document ryanDocument = await this.client.CreateDocumentAsync(
+    database.SelfLink, new UserProfile("U4", "@Ryan", Region.AsiaPacific, UserStatus.AppearAway));
+```
 
 ## 创建针对分区的查询
 可以使用 [CreateDocumentQuery](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.linq.documentqueryable.createdocumentquery.aspx) 方法，通过传入数据库和分区键进行查询。该查询对数据库内映射到分区键的所有集合返回单个结果集。
 
 cs
 
-	// Query for John's document by ID - uses PartitionResolver to restrict the query to the partitions 
-	// containing @John. Again the query uses the database self link, and relies on the hash resolver 
-	// to route the appropriate collection.
-	var query = this.client.CreateDocumentQuery<UserProfile>(
-	    database.SelfLink, null, partitionResolver.GetPartitionKey(johnProfile))
-	    .Where(u => u.UserName == "@John");
-	johnProfile = query.AsEnumerable().FirstOrDefault();
-
+```
+// Query for John's document by ID - uses PartitionResolver to restrict the query to the partitions 
+// containing @John. Again the query uses the database self link, and relies on the hash resolver 
+// to route the appropriate collection.
+var query = this.client.CreateDocumentQuery<UserProfile>(
+    database.SelfLink, null, partitionResolver.GetPartitionKey(johnProfile))
+    .Where(u => u.UserName == "@John");
+johnProfile = query.AsEnumerable().FirstOrDefault();
+```
 
 ## 在数据库中创建对所有集合的查询
 通过跳过分区键参数，你还可以查询数据库中的所有集合并枚举结果，如下所示。
 
 cs
 
-	// Query for all "Available" users. Here since there is no partition key, the query is serially executed 
-	// across each partition/collection and returns a single result-set. 
-	query = this.client.CreateDocumentQuery<UserProfile>(database.SelfLink)
-	    .Where(u => u.Status == UserStatus.Available);
-	foreach (UserProfile activeUser in query)
-	{
-	    Console.WriteLine(activeUser);
-	}
-
+```
+// Query for all "Available" users. Here since there is no partition key, the query is serially executed 
+// across each partition/collection and returns a single result-set. 
+query = this.client.CreateDocumentQuery<UserProfile>(database.SelfLink)
+    .Where(u => u.Status == UserStatus.Available);
+foreach (UserProfile activeUser in query)
+{
+    Console.WriteLine(activeUser);
+}
+```
 
 ## 哈希分区解析程序
 使用哈希分区，将基于哈希函数的值分配分配，这可让你跨大量分区均衡分配请求和数据。这种方法通常用于对在大量不同客户端中生成或使用的数据进行分区，对存储用户配置文件、目录项和 IoT（物联网）遥测数据非常有用。集合内的 DocumentDB 服务器端分区支持也使用哈希分区。
@@ -132,12 +135,13 @@ cs
 
 这些示例是开放源代码的，并且我们鼓励你提交可让其他 DocumentDB 开发人员获益的相关拉取请求。
 
->[AZURE.NOTE] 创建集合的速度受到 DocumentDB 的限制，因此此处显示的一些示例方法可能需要几分钟才能完成。
+>[!NOTE]
+> 创建集合的速度受到 DocumentDB 的限制，因此此处显示的一些示例方法可能需要几分钟才能完成。
 
 ## 常见问题
 **DocumentDB 支持服务器端分区吗？**
 
-是的，DocumentDB 支持[服务器端分区](/documentation/articles/documentdb-partition-data/)。DocumentDB 还支持通过客户端分区解析程序进行客户端分区，以实现更高级的用例。
+是的，DocumentDB 支持[服务器端分区](./documentdb-partition-data.md)。DocumentDB 还支持通过客户端分区解析程序进行客户端分区，以实现更高级的用例。
 
 **服务器端分区和客户端分区分别在什么情况下使用？** 对于大多数用例，建议使用服务器端分区，因为它可处理分区数据和路由请求的管理任务。但是，如果需要范围分区，或使用专用用例实现对不同分区键值间的性能隔离，那么客户端分区可能是最好的方法。
 
@@ -154,12 +158,12 @@ cs
 你可以通过实现在内部使用一个或多个现有解析程序的 IPartitionResolver 来链接 PartitionResolver。有关示例，请查看 TransitionHashPartitionResolver 示例项目。
 
 ## 参考
-- [ DocumentDB 中的服务器端分区](/documentation/articles/documentdb-partition-data/)
-- [DocumentDB 集合和性能级别](/documentation/articles/documentdb-performance-levels/)
+- [ DocumentDB 中的服务器端分区](./documentdb-partition-data.md)
+- [DocumentDB 集合和性能级别](./documentdb-performance-levels.md)
 - [Github 上的分区代码示例](https://github.com/Azure/azure-documentdb-dotnet/tree/287acafef76ad223577759b0170c8f08adb45755/samples/code-samples/Partitioning)
 - [MSDN 中的 DocumentDB .NET SDK 文档](https://msdn.microsoft.com/zh-cn/library/azure/dn948556.aspx)
 - [DocumentDB .NET samples（DocumentDB .NET 示例）](https://github.com/Azure/azure-documentdb-net)
-- [DocumentDB 限制](/documentation/articles/documentdb-limits/)
+- [DocumentDB 限制](./documentdb-limits.md)
 - [DocumentDB 性能提示博客](https://azure.microsoft.com/blog/2015/01/20/performance-tips-for-azure-documentdb-part-1-2/)
 
 <!---HONumber=Mooncake_1219_2016-->

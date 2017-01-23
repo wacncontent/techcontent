@@ -1,21 +1,21 @@
-<properties
-    pageTitle="使用索引器连接 DocumentDB 和 Azure 搜索 | Azure"
-    description="本文介绍如何将 Azure 搜索索引器与 DocumentDB 作为数据源联合使用。"
-    services="documentdb"
-    documentationCenter=""
-    authors="AndrewHoh"
-    manager="jhubbard"
-    editor="mimig"/>
+---
+title: 使用索引器连接 DocumentDB 和 Azure 搜索 | Azure
+description: 本文介绍如何将 Azure 搜索索引器与 DocumentDB 作为数据源联合使用。
+services: documentdb
+documentationCenter: 
+authors: AndrewHoh
+manager: jhubbard
+editor: mimig
 
-<tags
-    ms.service="documentdb"
-    ms.devlang="rest-api"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="data-services"
-    ms.date="07/08/2016"
-    wacn.date="01/19/2017"
-    ms.author="denlee"/>
+ms.service: documentdb
+ms.devlang: rest-api
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 07/08/2016
+wacn.date: 01/19/2017
+ms.author: denlee
+---
 
 #使用索引器连接 DocumentDB 和 Azure 搜索
 
@@ -40,9 +40,11 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 发出一个 HTTP POST 请求以在你的 Azure 搜索服务中创建新的数据源，包括以下请求标头。
 
-    POST https://[Search service name].search.chinacloudapi.cn/datasources?api-version=[api-version]
-    Content-Type: application/json
-    api-key: [Search service admin key]
+```
+POST https://[Search service name].search.chinacloudapi.cn/datasources?api-version=[api-version]
+Content-Type: application/json
+api-key: [Search service admin key]
+```
 
 `api-version` 是必需的。有效值包括 `2015-02-28` 或更高版本。
 
@@ -72,52 +74,60 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 数据更改检测策略旨在有效识别已更改的数据项。目前，唯一支持的策略是 DocumentDB 提供的使用 `_ts` 上次修改时间戳属性的 `High Water Mark` 策略，它按如下所示指定：
 
-    {
-        "@odata.type" : "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
-        "highWaterMarkColumnName" : "_ts"
-    }
+```
+{
+    "@odata.type" : "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
+    "highWaterMarkColumnName" : "_ts"
+}
+```
 
 你还需要为查询在投影中添加 `_ts` 和 `WHERE` 子句。例如：
 
-    SELECT s.id, s.Title, s.Abstract, s._ts FROM Sessions s WHERE s._ts >= @HighWaterMark
-
+```
+SELECT s.id, s.Title, s.Abstract, s._ts FROM Sessions s WHERE s._ts >= @HighWaterMark
+```
 
 ###<a id="DataDeletionDetectionPolicy"></a>捕获已删除的文档
 
 在源表中删除行时，你也应该从搜索索引中删除这些行。数据删除检测策略旨在有效识别已删除的数据项。目前，唯一支持的策略是 `Soft Delete` 策略（删除标有某种类型的标志），它按如下所示指定：
 
-    {
-        "@odata.type" : "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
-        "softDeleteColumnName" : "the property that specifies whether a document was deleted",
-        "softDeleteMarkerValue" : "the value that identifies a document as deleted"
-    }
+```
+{
+    "@odata.type" : "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+    "softDeleteColumnName" : "the property that specifies whether a document was deleted",
+    "softDeleteMarkerValue" : "the value that identifies a document as deleted"
+}
+```
 
-> [AZURE.NOTE] 如果你使用的是自定义投影，则将需要在 SELECT 子句中包含 softDeleteColumnName 属性。
+> [!NOTE]
+> 如果你使用的是自定义投影，则将需要在 SELECT 子句中包含 softDeleteColumnName 属性。
 
 ###<a id="CreateDataSourceExample"></a>请求正文示例
 
 下面的示例创建具有自定义查询和策略提示的数据源：
 
-    {
-        "name": "mydocdbdatasource",
-        "type": "documentdb",
-        "credentials": {
-            "connectionString": "AccountEndpoint=https://myDocDbEndpoint.documents.azure.com;AccountKey=myDocDbAuthKey;Database=myDocDbDatabaseId"
-        },
-        "container": {
-            "name": "myDocDbCollectionId",
-            "query": "SELECT s.id, s.Title, s.Abstract, s._ts FROM Sessions s WHERE s._ts > @HighWaterMark"
-        },
-        "dataChangeDetectionPolicy": {
-            "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
-            "highWaterMarkColumnName": "_ts"
-        },
-        "dataDeletionDetectionPolicy": {
-            "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
-            "softDeleteColumnName": "isDeleted",
-            "softDeleteMarkerValue": "true"
-        }
+```
+{
+    "name": "mydocdbdatasource",
+    "type": "documentdb",
+    "credentials": {
+        "connectionString": "AccountEndpoint=https://myDocDbEndpoint.documents.azure.com;AccountKey=myDocDbAuthKey;Database=myDocDbDatabaseId"
+    },
+    "container": {
+        "name": "myDocDbCollectionId",
+        "query": "SELECT s.id, s.Title, s.Abstract, s._ts FROM Sessions s WHERE s._ts > @HighWaterMark"
+    },
+    "dataChangeDetectionPolicy": {
+        "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
+        "highWaterMarkColumnName": "_ts"
+    },
+    "dataDeletionDetectionPolicy": {
+        "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+        "softDeleteColumnName": "isDeleted",
+        "softDeleteMarkerValue": "true"
     }
+}
+```
 
 ###响应
 
@@ -127,14 +137,16 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 如果你还没有目标 Azure 搜索索引，请创建一个。你可以通过使用[创建索引 API](https://msdn.microsoft.com/zh-cn/library/azure/dn798941.aspx) 来执行此操作。
 
-	POST https://[Search service name].search.chinacloudapi.cn/indexes?api-version=[api-version]
-	Content-Type: application/json
-	api-key: [Search service admin key]
-
+```
+POST https://[Search service name].search.chinacloudapi.cn/indexes?api-version=[api-version]
+Content-Type: application/json
+api-key: [Search service admin key]
+```
 
 确保目标索引的架构与源 JSON 文档的架构或自定义查询投影的输出的架构兼容。
 
->[AZURE.NOTE] 对于分区集合，默认文档键是 DocumentDB 的 `_rid` 属性，它在 Azure 搜索中重命名为 `rid`。此外，DocumentDB 的 `_rid` 值包含在 Azure 搜索键中无效的字符；因此，`_rid` 值采用 Base64 编码。
+>[!NOTE]
+> 对于分区集合，默认文档键是 DocumentDB 的 `_rid` 属性，它在 Azure 搜索中重命名为 `rid`。此外，DocumentDB 的 `_rid` 值包含在 Azure 搜索键中无效的字符；因此，`_rid` 值采用 Base64 编码。
 
 ###图 A：JSON 数据类型与 Azure 搜索数据类型之间的映射
 
@@ -153,22 +165,24 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 下面的示例创建带有 ID 和描述字段的索引：
 
-    {
-       "name": "mysearchindex",
-       "fields": [{
-         "name": "id",
-         "type": "Edm.String",
-         "key": true,
-         "searchable": false
-       }, {
-         "name": "description",
-         "type": "Edm.String",
-         "filterable": false,
-         "sortable": false,
-         "facetable": false,
-         "suggestions": true
-       }]
-     }
+```
+{
+   "name": "mysearchindex",
+   "fields": [{
+     "name": "id",
+     "type": "Edm.String",
+     "key": true,
+     "searchable": false
+   }, {
+     "name": "description",
+     "type": "Edm.String",
+     "filterable": false,
+     "sortable": false,
+     "facetable": false,
+     "suggestions": true
+   }]
+ }
+```
 
 ###响应
 
@@ -178,9 +192,11 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 可以通过使用具有以下标头的 HTTP POST 请求来在 Azure 搜索服务中创建新的索引器。
 
-    POST https://[Search service name].search.chinacloudapi.cn/indexers?api-version=[api-version]
-    Content-Type: application/json
-    api-key: [Search service admin key]
+```
+POST https://[Search service name].search.chinacloudapi.cn/indexers?api-version=[api-version]
+Content-Type: application/json
+api-key: [Search service admin key]
+```
 
 请求正文包含索引器定义，其中应包括以下字段：
 
@@ -204,12 +220,14 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 下面的示例创建一个索引器，该索引器按计划（从 2015 年 1 月 1 日 UTC 开始，每小时运行一次），将数据从 `myDocDbDataSource` 数据源引用的集合复制到 `mySearchIndex` 索引。
 
-    {
-        "name" : "mysearchindexer",
-        "dataSourceName" : "mydocdbdatasource",
-        "targetIndexName" : "mysearchindex",
-        "schedule" : { "interval" : "PT1H", "startTime" : "2015-01-01T00:00:00Z" }
-    }
+```
+{
+    "name" : "mysearchindexer",
+    "dataSourceName" : "mydocdbdatasource",
+    "targetIndexName" : "mysearchindex",
+    "schedule" : { "interval" : "PT1H", "startTime" : "2015-01-01T00:00:00Z" }
+}
+```
 
 ###响应
 
@@ -219,8 +237,10 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 除按计划定期运行以外，也可以通过发出以下 HTTP POST 请求来按需调用索引器：
 
-    POST https://[Search service name].search.chinacloudapi.cn/indexers/[indexer name]/run?api-version=[api-version]
-    api-key: [Search service admin key]
+```
+POST https://[Search service name].search.chinacloudapi.cn/indexers/[indexer name]/run?api-version=[api-version]
+api-key: [Search service admin key]
+```
 
 ###响应
 
@@ -230,8 +250,10 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 你可以发出 HTTP GET 请求来检索索引器的当前状态和执行历史记录：
 
-    GET https://[Search service name].search.chinacloudapi.cn/indexers/[indexer name]/status?api-version=[api-version]
-    api-key: [Search service admin key]
+```
+GET https://[Search service name].search.chinacloudapi.cn/indexers/[indexer name]/status?api-version=[api-version]
+api-key: [Search service admin key]
+```
 
 ###响应
 
@@ -239,31 +261,33 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 响应应类似于以下形式：
 
-    {
-        "status":"running",
-        "lastResult": {
-            "status":"success",
-            "errorMessage":null,
-            "startTime":"2014-11-26T03:37:18.853Z",
-            "endTime":"2014-11-26T03:37:19.012Z",
-            "errors":[],
-            "itemsProcessed":11,
-            "itemsFailed":0,
-            "initialTrackingState":null,
-            "finalTrackingState":null
-         },
-        "executionHistory":[ {
-            "status":"success",
-             "errorMessage":null,
-            "startTime":"2014-11-26T03:37:18.853Z",
-            "endTime":"2014-11-26T03:37:19.012Z",
-            "errors":[],
-            "itemsProcessed":11,
-            "itemsFailed":0,
-            "initialTrackingState":null,
-            "finalTrackingState":null
-        }]
-    }
+```
+{
+    "status":"running",
+    "lastResult": {
+        "status":"success",
+        "errorMessage":null,
+        "startTime":"2014-11-26T03:37:18.853Z",
+        "endTime":"2014-11-26T03:37:19.012Z",
+        "errors":[],
+        "itemsProcessed":11,
+        "itemsFailed":0,
+        "initialTrackingState":null,
+        "finalTrackingState":null
+     },
+    "executionHistory":[ {
+        "status":"success",
+         "errorMessage":null,
+        "startTime":"2014-11-26T03:37:18.853Z",
+        "endTime":"2014-11-26T03:37:19.012Z",
+        "errors":[],
+        "itemsProcessed":11,
+        "itemsFailed":0,
+        "initialTrackingState":null,
+        "finalTrackingState":null
+    }]
+}
+```
 
 执行历史记录包含最多 50 个最近完成的执行，它们被按反向时间顺序排序（因此，最新执行出现在响应中的第一个）。
 
@@ -271,8 +295,6 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 祝贺你！ 你已学习了如何使用 DocumentDB 索引器将 Azure DocumentDB 与 Azure 搜索进行集成。
 
- - 若要了解有关 Azure DocumentDB 的详细信息，请参阅 [DocumentDB 服务页](/documentation/services/documentdb/)。
-
-
+ - 若要了解有关 Azure DocumentDB 的详细信息，请参阅 [DocumentDB 服务页](./index.md)。
 
 <!---HONumber=Mooncake_0808_2016-->

@@ -1,23 +1,21 @@
-<properties
-   pageTitle="SQL 数据仓库 Transact-SQL 语言元素 | Azure"
-   description="用于 SQL 数据仓库的 Transact-SQL 语言元素的参考内容链接列表。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库 Transact-SQL 语言元素 | Azure
+description: 用于 SQL 数据仓库的 Transact-SQL 语言元素的参考内容链接列表。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="barbkess;sonyama;kevin"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: barbkess;sonyama;kevin
+---
 
 # 语言元素
 
@@ -259,8 +257,6 @@
 - [sp\_tables](https://msdn.microsoft.com/zh-cn/library/ms186250.aspx)
 - [sp\_unprepare](https://msdn.microsoft.com/zh-cn/library/ff848735.aspx)
 
-
-
 ## SET 语句
 
 - [SET ANSI\_DEFAULTS](https://msdn.microsoft.com/zh-cn/library/ms188340.aspx)
@@ -284,14 +280,13 @@
 - [SET TRANSACTION ISOLATION LEVEL](https://msdn.microsoft.com/zh-cn/library/ms173763.aspx)
 - [SET XACT\_ABORT](https://msdn.microsoft.com/zh-cn/library/ms188792.aspx)
 
-
 ## 后续步骤
 有关更多参考信息，请参阅 [SQL 数据仓库参考概述][]。
 
 <!--Image references-->
 
 <!--Article references-->
-[SQL 数据仓库参考概述]: /documentation/articles/sql-data-warehouse-overview-reference/
+[SQL 数据仓库参考概述]: ./sql-data-warehouse-overview-reference.md
 
 <!--MSDN references-->
 

@@ -1,23 +1,23 @@
-<properties
-    pageTitle="为工作或学校帐户设置双重验证"
-    description="公司配置 Azure 多重身份验证时，会提示你注册双重验证。了解如何进行设置。"
-    services="multi-factor-authentication"
-    keywords="如何使用 azure 目录, 云中的 active directory, active directory 教程"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="pblachar" />
-<tags
-    ms.assetid="46f83a6a-dbdd-4375-8dc4-e7ea77c16357"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/23/2016"
-    wacn.date="01/13/2017"
-    ms.author="kgremban" />  
+---
+title: 为工作或学校帐户设置双重验证
+description: 公司配置 Azure 多重身份验证时，会提示你注册双重验证。了解如何进行设置。
+services: multi-factor-authentication
+keywords: 如何使用 azure 目录, 云中的 active directory, active directory 教程
+documentationcenter: 
+author: kgremban
+manager: femila
+editor: pblachar
 
+ms.assetid: 46f83a6a-dbdd-4375-8dc4-e7ea77c16357
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/23/2016
+wacn.date: 01/13/2017
+ms.author: kgremban
+---
 
 # 将我的帐户设置为使用双重验证
 双重验证是一种额外的安全步骤，可使帐户更难被其他人攻破，从而帮助保护帐户。如果正在阅读本文，可能会收到来自工作或学校管理员的有关多重身份验证的电子邮件。或者，也许会在尝试登录时收到消息，要求你设置其他安全性验证。如果是这种情况，**在完成自动注册过程之前将无法登录**。
@@ -30,7 +30,6 @@
 若要开始设置过程，请尝试按往常的方式登录帐户。如果管理员已将帐户配置为使用双重验证，系统会提示你开始自动注册过程。单击“立即设置”开始执行此过程。
 
 ![设置](./media/multi-factor-authentication-end-user-first-time/first.png)  
-
 
 注册过程中的第一个问题是你希望我们如何与你联系。查看表中的选项，然后使用相应的链接转到每种方法的设置步骤。
 
@@ -95,12 +94,12 @@
 2. 会使用公司联系人信息自动填充电话号码框。如果号码错误或丢失，请联系管理员进行更改。
 3. 选择“与我联系”以验证手机号码。我们会呼叫你的电话号码。按照屏幕上提供的说明，选择“验证”。
 4. 此时，系统会提示为非浏览器应用（如 Outlook 2010 或更低版本，或 Apple 设备上的本机电子邮件应用）设置应用密码。这是因为某些应用不支持双重验证。如果不使用这些应用，请单击“完成”并跳过其余步骤。
-5. 如果正在使用这些应用，请复制提供的应用密码，然后将其粘贴到应用程序（而不是常规密码）中。对于多个应用，可以使用相同的应用密码。有关详细信息，请参阅[应用密码是什么](/documentation/articles/multi-factor-authentication-end-user-app-passwords/)。
+5. 如果正在使用这些应用，请复制提供的应用密码，然后将其粘贴到应用程序（而不是常规密码）中。对于多个应用，可以使用相同的应用密码。有关详细信息，请参阅[应用密码是什么](./multi-factor-authentication-end-user-app-passwords.md)。
 6. 单击“Done”（完成）。
 
 ## 后续步骤
-- 更改首选选项并[管理双重验证的设置](/documentation/articles/multi-factor-authentication-end-user-manage-settings/)
-- 为不支持双重验证的本机设备应用设置[应用密码](/documentation/articles/multi-factor-authentication-end-user-app-passwords/)。
-- 查看[Microsoft Authenticator 应用](/documentation/articles/multi-factor-authentication-microsoft-authenticator/)文章，了解快速、安全的身份验证（即便没有手机网络服务）。
+- 更改首选选项并[管理双重验证的设置](./multi-factor-authentication-end-user-manage-settings.md)
+- 为不支持双重验证的本机设备应用设置[应用密码](./multi-factor-authentication-end-user-app-passwords.md)。
+- 查看[Microsoft Authenticator 应用](./multi-factor-authentication-microsoft-authenticator.md)文章，了解快速、安全的身份验证（即便没有手机网络服务）。
 
 <!---HONumber=Mooncake_0103_2017-->

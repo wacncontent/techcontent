@@ -1,45 +1,50 @@
-<properties
- pageTitle="管理 HPC Pack 群集计算节点 | Azure"
- description="了解 PowerShell 脚本工具如何添加、删除、启动和停止 Azure 的 HPC Pack 群集计算节点"
- services="virtual-machines-windows"
- documentationCenter=""
- authors="dlepow"
- manager="timlt"
- editor=""
- tags="azure-service-management,hpc-pack"/>
-<tags
-ms.service="virtual-machines-windows"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="vm-multiple"
- ms.workload="big-compute"
- ms.date="07/22/2016"
- wacn.date="09/30/2016"
- ms.author="danlep"/>
+---
+title: 管理 HPC Pack 群集计算节点 | Azure
+description: 了解 PowerShell 脚本工具如何添加、删除、启动和停止 Azure 的 HPC Pack 群集计算节点
+services: virtual-machines-windows
+documentationCenter: 
+authors: dlepow
+manager: timlt
+editor: 
+tags: azure-service-management,hpc-pack
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-multiple
+ms.workload: big-compute
+ms.date: 07/22/2016
+wacn.date: 09/30/2016
+ms.author: danlep
+---
 
 # 管理 Azure 的 HPC Pack 群集中计算节点的数量和可用性
 
 如果你在 Azure VM 中创建了一个 HPC Pack 群集，你可能希望有轻松添加、删除、启动（设置）或停止（取消设置）群集中大量计算节点 VM 的方法。若要执行这些任务，请运行头节点 VM 中安装的 Azure PowerShell 脚本。这些脚本可帮助你控制 HPC Pack 群集资源的数量和可用性，以便你可以控制成本。
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 ## 先决条件
 
-* **Azure VM 中的 HPC Pack 群集** - 在经典部署模型中，使用 HPC Pack 2012 R2 Update 1 以上版本创建一个 HPC Pack 群集。例如，可以通过使用 Azure 库中的 HPC Pack VM 映像和 Azure PowerShell 脚本，自动执行部署。有关信息和先决条件，请参阅[使用 HPC Pack IaaS 部署脚本创建 HPC 群集](/documentation/articles/virtual-machines-windows-classic-hpcpack-cluster-powershell-script/)。
+* **Azure VM 中的 HPC Pack 群集** - 在经典部署模型中，使用 HPC Pack 2012 R2 Update 1 以上版本创建一个 HPC Pack 群集。例如，可以通过使用 Azure 库中的 HPC Pack VM 映像和 Azure PowerShell 脚本，自动执行部署。有关信息和先决条件，请参阅[使用 HPC Pack IaaS 部署脚本创建 HPC 群集](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)。
 
 * **Azure 发布设置文件或管理证书** - 你需要在头节点上执行下列操作之一：
 
-	部署之后，在头节点上的 %CCP\_HOME%bin 文件夹中找到节点管理脚本。你必须以管理员身份运行各个脚本。
+    部署之后，在头节点上的 %CCP\_HOME%bin 文件夹中找到节点管理脚本。你必须以管理员身份运行各个脚本。
 
     * **导入 Azure 发布设置文件**。为此，在头节点上运行以下 Azure PowerShell cmdlet：
 
-    		Get-AzurePublishSettingsFile
+        ```
+        Get-AzurePublishSettingsFile
 
-    		Import-AzurePublishSettingsFile -PublishSettingsFile <publish settings file>
+        Import-AzurePublishSettingsFile -PublishSettingsFile <publish settings file>
+        ```
 
     * **在头节点上配置 Azure 管理证书**。如果你有 .cer 文件，将其导入至 CurrentUser\\My certificate store，然后为 Azure 环境（AzureCloud 或 AzureChinaCloud）运行以下 Azure PowerShell cmdlet：
 
-    		Set-AzureSubscription -SubscriptionName <Sub Name> -SubscriptionId <Sub ID> -Certificate (Get-Item Cert:\CurrentUser\My<Cert Thrumbprint>) -Environment <AzureCloud | AzureChinaCloud>
+        ```
+        Set-AzureSubscription -SubscriptionName <Sub Name> -SubscriptionId <Sub ID> -Certificate (Get-Item Cert:\CurrentUser\My<Cert Thrumbprint>) -Environment <AzureCloud | AzureChinaCloud>
+        ```
 
 ## 添加计算节点 VM
 
@@ -47,9 +52,11 @@ ms.service="virtual-machines-windows"
 
 ### 语法
 
-	Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String> `
-		[-Quantity] <Int32> [-InstanceSize] <String> [-DomainUserName] <String> [[-DomainUserPassword] <String>] `
-		[[-NodeNameSeries] <String>] [<CommonParameters>]
+```
+Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String> `
+    [-Quantity] <Int32> [-InstanceSize] <String> [-DomainUserName] <String> [[-DomainUserPassword] <String>] `
+    [[-NodeNameSeries] <String>] [<CommonParameters>]
+```
 
 ### Parameters
 
@@ -77,9 +84,11 @@ ms.service="virtual-machines-windows"
 
 下面的示例基于 VM 映像 *hpccnimage1*，在云服务 *hpcservice1* 中添加了 20 个大型计算节点 VM。
 
-	Add-HPCIaaSNode.ps1 -ServiceName hpcservice1 -ImageName hpccniamge1 `
-		-Quantity 20 -InstanceSize Large -DomainUserName <username> `
-		-DomainUserPassword <password> `
+```
+Add-HPCIaaSNode.ps1 -ServiceName hpcservice1 -ImageName hpccniamge1 `
+    -Quantity 20 -InstanceSize Large -DomainUserName <username> `
+    -DomainUserPassword <password> `
+```
 
 ## 删除计算节点 VM
 
@@ -87,9 +96,11 @@ ms.service="virtual-machines-windows"
 
 ### 语法
 
-	Remove-HPCIaaSNode.ps1 -Name <String[]> [-DeleteVHD] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+Remove-HPCIaaSNode.ps1 -Name <String[]> [-DeleteVHD] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 
-	Remove-HPCIaaSNode.ps1 -Node <Object> [-DeleteVHD] [-Force] [-Confirm] [<CommonParameters>]
+Remove-HPCIaaSNode.ps1 -Node <Object> [-DeleteVHD] [-Force] [-Confirm] [<CommonParameters>]
+```
 
 ### Parameters
 
@@ -109,7 +120,9 @@ ms.service="virtual-machines-windows"
 
 下面的示例强制名称以 *HPCNode-CN-* 开头的脱机节点，然后删除这些节点及其关联磁盘。
 
-	Remove-HPCIaaSNode.ps1 -Name HPCNodeCN-* -DeleteVHD -Force
+```
+Remove-HPCIaaSNode.ps1 -Name HPCNodeCN-* -DeleteVHD -Force
+```
 
 ## 启动计算节点 VM
 
@@ -117,9 +130,11 @@ ms.service="virtual-machines-windows"
 
 ### 语法
 
-	Start-HPCIaaSNode.ps1 -Name <String[]> [<CommonParameters>]
+```
+Start-HPCIaaSNode.ps1 -Name <String[]> [<CommonParameters>]
 
-	Start-HPCIaaSNode.ps1 -Node <Object> [<CommonParameters>]
+Start-HPCIaaSNode.ps1 -Node <Object> [<CommonParameters>]
+```
 
 ### Parameters
 
@@ -131,7 +146,9 @@ ms.service="virtual-machines-windows"
 
 下面的示例启动名称以 *HPCNode-CN-* 开头的节点。
 
-	Start-HPCIaaSNode.ps1 -Name HPCNodeCN-*
+```
+Start-HPCIaaSNode.ps1 -Name HPCNodeCN-*
+```
 
 ## 停止计算节点 VM
 
@@ -139,12 +156,13 @@ ms.service="virtual-machines-windows"
 
 ### 语法
 
-	Stop-HPCIaaSNode.ps1 -Name <String[]> [-Force] [<CommonParameters>]
+```
+Stop-HPCIaaSNode.ps1 -Name <String[]> [-Force] [<CommonParameters>]
 
-	Stop-HPCIaaSNode.ps1 -Node <Object> [-Force] [<CommonParameters>]
+Stop-HPCIaaSNode.ps1 -Node <Object> [-Force] [<CommonParameters>]
+```
 
 ### Parameters
-
 
 * **Name** - 要停止的群集节点的名称。支持通配符。参数集名称是“名称”。你无法指定**名称**和**节点**参数。
 
@@ -156,10 +174,12 @@ ms.service="virtual-machines-windows"
 
 下面的示例强制名称以 *HPCNode-CN-* 开头的脱机节点，然后停止这些节点。
 
-	Stop-HPCIaaSNode.ps1 -Name HPCNodeCN-* -Force
+```
+Stop-HPCIaaSNode.ps1 -Name HPCNodeCN-* -Force
+```
 
 ## 后续步骤
 
-* 如果你想要有一种方法能够根据群集上作业及任务的当前工作负荷自动增加或减少群集节点，请参阅[根据集群工作流自动增加和减少 Azure 中的 HPC Pack 群集资源](/documentation/articles/virtual-machines-windows-classic-hpcpack-cluster-node-autogrowshrink/)。
+* 如果你想要有一种方法能够根据群集上作业及任务的当前工作负荷自动增加或减少群集节点，请参阅[根据集群工作流自动增加和减少 Azure 中的 HPC Pack 群集资源](./virtual-machines-windows-classic-hpcpack-cluster-node-autogrowshrink.md)。
 
 <!---HONumber=Mooncake_0215_2016-->

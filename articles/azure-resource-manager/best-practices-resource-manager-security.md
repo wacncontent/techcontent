@@ -1,28 +1,27 @@
-<properties
-    pageTitle="Resource Manager 的安全注意事项 | Azure"
-    description="显示了在 Azure 资源管理器中如何使用建议的方法通过密钥和机密、基于角色的访问控制以及网络安全组来确保资源的安全。"
-    services="azure-resource-manager"
-    documentationcenter=""
-    author="george-moore"
-    manager="georgem"
-    editor="tysonn" />  
+---
+title: Resource Manager 的安全注意事项 | Azure
+description: 显示了在 Azure 资源管理器中如何使用建议的方法通过密钥和机密、基于角色的访问控制以及网络安全组来确保资源的安全。
+services: azure-resource-manager
+documentationcenter: 
+author: george-moore
+manager: georgem
+editor: tysonn
 
-<tags
-    ms.assetid="c862e9c7-276b-46bf-bc0a-11868ac11459"
-    ms.service="azure-resource-manager"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="08/01/2016"
-    wacn.date="12/26/2016"
-    ms.author="georgem;tomfitz" />  
-
+ms.assetid: c862e9c7-276b-46bf-bc0a-11868ac11459
+ms.service: azure-resource-manager
+ms.workload: multiple
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/01/2016
+wacn.date: 12/26/2016
+ms.author: georgem;tomfitz
+---
 
 # Azure 资源管理器的安全注意事项
 关于 Azure 资源管理器模板的安全事项，有几个方面需要考虑，即密钥和机密、基于角色的访问控制，以及网络安全组。
 
-本主题假定用户熟悉 Azure Resource Manager 中基于角色的访问控制 (RBAC)。有关详细信息，请参阅 [Azure 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)。
+本主题假定用户熟悉 Azure Resource Manager 中基于角色的访问控制 (RBAC)。有关详细信息，请参阅 [Azure 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
 
 本主题是包含更多内容的白皮书的一部分。若要阅读完整的白皮书，请下载 [一流的 ARM 模板注意事项和成熟的做法](http://download.microsoft.com/download/8/E/1/8E1DBEFA-CECE-4DC9-A813-93520A5D7CFE/World%20Class%20ARM%20Templates%20-%20Considerations%20and%20Proven%20Practices.pdf)。
 
@@ -48,105 +47,109 @@
 
 虽然此模板中的大多数字段都很直观明了，但 **enableVaultForDeployment** 设置还是需要解释一下：保管库通常并不默认允许其他 Azure 基础结构组件进行访问。设置此值之后，Azure 计算基础结构组件即可对这个特定的保管库进行只读访问。因此还需指出的是，最好不要将公司的敏感数据与虚拟机机密置于同一保管库中。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "keyVaultName": {
-                "type": "string",
-                "metadata": {
-                    "description": "Name of the Vault"
-                }
-            },
-            "location": {
-                "type": "string",
-                "allowedValues": ["China East", "China North"],
-                "metadata": {
-                    "description": "Location of the Vault"
-                }
-            },
-            "tenantId": {
-                "type": "string",
-                "metadata": {
-                    "description": "Tenant Id of the subscription. Get using Get-AzureSubscription cmdlet or Get Subscription API"
-                }
-            },
-            "objectId": {
-                "type": "string",
-                "metadata": {
-                    "description": "Object Id of the AD user. Get using Get-AzureADUser cmdlet"
-                }
-            },
-            "skuName": {
-                "type": "string",
-                "allowedValues": ["Standard", "Premium"],
-                "metadata": {
-                    "description": "SKU for the vault"
-                }
-            },
-            "enableVaultForDeployment": {
-                "type": "bool",
-                "allowedValues": [true, false],
-                "metadata": {
-                    "description": "Specifies if the vault is enabled for a VM deployment"
-                }
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the Vault"
             }
         },
-        "resources": [{
-            "type": "Microsoft.KeyVault/vaults",
-            "name": "[parameters('keyVaultName')]",
-            "apiVersion": "2014-12-19-preview",
-            "location": "[parameters('location')]",
-            "properties": {
-                "enabledForDeployment": "[parameters('enableVaultForDeployment')]",
-                "tenantid": "[parameters('tenantId')]",
-                "accessPolicies": [{
-                    "tenantId": "[parameters('tenantId')]",
-                    "objectId": "[parameters('objectId')]",
-                    "permissions": {
-                        "secrets": ["all"],
-                        "keys": ["all"]
-                    }
-                }],
-                "sku": {
-                    "name": "[parameters('skuName')]",
-                    "family": "A"
-                }
+        "location": {
+            "type": "string",
+            "allowedValues": ["China East", "China North"],
+            "metadata": {
+                "description": "Location of the Vault"
             }
-        }]
-    }
+        },
+        "tenantId": {
+            "type": "string",
+            "metadata": {
+                "description": "Tenant Id of the subscription. Get using Get-AzureSubscription cmdlet or Get Subscription API"
+            }
+        },
+        "objectId": {
+            "type": "string",
+            "metadata": {
+                "description": "Object Id of the AD user. Get using Get-AzureADUser cmdlet"
+            }
+        },
+        "skuName": {
+            "type": "string",
+            "allowedValues": ["Standard", "Premium"],
+            "metadata": {
+                "description": "SKU for the vault"
+            }
+        },
+        "enableVaultForDeployment": {
+            "type": "bool",
+            "allowedValues": [true, false],
+            "metadata": {
+                "description": "Specifies if the vault is enabled for a VM deployment"
+            }
+        }
+    },
+    "resources": [{
+        "type": "Microsoft.KeyVault/vaults",
+        "name": "[parameters('keyVaultName')]",
+        "apiVersion": "2014-12-19-preview",
+        "location": "[parameters('location')]",
+        "properties": {
+            "enabledForDeployment": "[parameters('enableVaultForDeployment')]",
+            "tenantid": "[parameters('tenantId')]",
+            "accessPolicies": [{
+                "tenantId": "[parameters('tenantId')]",
+                "objectId": "[parameters('objectId')]",
+                "permissions": {
+                    "secrets": ["all"],
+                    "keys": ["all"]
+                }
+            }],
+            "sku": {
+                "name": "[parameters('skuName')]",
+                "family": "A"
+            }
+        }
+    }]
+}
+```
 
 创建保管库后，下一步就是在新 VM 的部署模板中引用该保管库。如上所述，最佳做法是让其他开发/运营小组来管理 VM 部署，该小组不能直接访问保管库中存储的密钥。
 
 以下模板片段将整合到更高级的部署构造中，每种构造都可以安全且稳定地引用高度敏感的机密，这些机密不在操作员的直接控制之下。
 
-    "vaultName": {
-        "type": "string",
-        "metadata": {
-            "description": "Name of Key Vault that has a secret"
-        }
-    },
-    {
-        "apiVersion": "2015-05-01-preview",
-        "type": "Microsoft.Compute/virtualMachines",
-        "name": "[parameters('vmName')]",
-        "location": "[parameters('location')]",
-        "properties": {
-            "osProfile": {
-                "secrets": [{
-                    "sourceVault": {
-                        "id": "[resourceId('vaultrg', 'Microsoft.KeyVault/vaults', 'kayvault')]"
-                    },
-                    "vaultCertificates": [{
-                        "certificateUrl": "[parameters('secretUrlWithVersion')]",
-                        "certificateStore": "My"
-                    }]
+```
+"vaultName": {
+    "type": "string",
+    "metadata": {
+        "description": "Name of Key Vault that has a secret"
+    }
+},
+{
+    "apiVersion": "2015-05-01-preview",
+    "type": "Microsoft.Compute/virtualMachines",
+    "name": "[parameters('vmName')]",
+    "location": "[parameters('location')]",
+    "properties": {
+        "osProfile": {
+            "secrets": [{
+                "sourceVault": {
+                    "id": "[resourceId('vaultrg', 'Microsoft.KeyVault/vaults', 'kayvault')]"
+                },
+                "vaultCertificates": [{
+                    "certificateUrl": "[parameters('secretUrlWithVersion')]",
+                    "certificateStore": "My"
                 }]
-            }
+            }]
         }
     }
+}
+```
 
-在部署模板的过程中，若要以参数形式传递密钥保管库中的值，请参阅[在部署期间传递安全值](/documentation/articles/resource-manager-keyvault-parameter/)。
+在部署模板的过程中，若要以参数形式传递密钥保管库中的值，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md)。
 
 ## 负责跨订阅交互的服务主体
 服务标识由 Active Directory 中的服务主体表示。将由服务主体主要负责为企业 IT 组织、系统集成商 (SI) 和云服务供应商 (CSV) 启用密钥方案。具体说来，将会存在这样的用例：一家这样的组织需要与一位客户的订阅进行交互。
@@ -169,12 +172,12 @@
 ## 网络安全组
 许多方案都会有特定的要求，要求指定具体的控制方法来控制流向你的虚拟网络中一个或多个 VM 实例的流量。你可以使用网络安全组 (NSG) 在 ARM 模板部署过程中这样做。
 
-网络安全组是与你的订阅相关联的顶层对象。NSG 包含特定的访问控制规则，可以通过这些规则来允许或拒绝流向 VM 实例的流量。可以随时更改 NSG 的规则，所做的更改适用于所有关联的实例。若要使用 NSG，你必须有一个与某区域（位置）关联的虚拟网络。NSG 不兼容与地缘组关联的虚拟网络。如果你没有区域性虚拟网络却又希望控制流向终结点的流量，请参阅[关于网络访问控制列表 (ACL)](/documentation/articles/virtual-networks-acl/)。
+网络安全组是与你的订阅相关联的顶层对象。NSG 包含特定的访问控制规则，可以通过这些规则来允许或拒绝流向 VM 实例的流量。可以随时更改 NSG 的规则，所做的更改适用于所有关联的实例。若要使用 NSG，你必须有一个与某区域（位置）关联的虚拟网络。NSG 不兼容与地缘组关联的虚拟网络。如果你没有区域性虚拟网络却又希望控制流向终结点的流量，请参阅[关于网络访问控制列表 (ACL)](../virtual-network/virtual-networks-acl.md)。
 
 你可以将 NSG 与 VM 相关联，也可以将其与虚拟网络中的子网相关联。与 VM 关联后，NSG 适用于 VM 实例所发送和接收的所有通信。应用到虚拟网络中的子网以后，它将适用于子网中所有 VM 实例发送和接收的所有通信。一个 VM 或子网只能与 1 个 NSG 相关联，但每个 NSG 都可以包含多达 200 条规则。每个订阅可以有 100 个 NSG。
 
-> [AZURE.NOTE]
-不支持将基于终结点的 ACL 和网络安全组置于相同 VM 实例上。如果你想要使用 NSG，但已有了终结点 ACL，则请先删除该终结点 ACL。有关如何执行此操作的信息，请参阅[使用 PowerShell 管理终结点的访问控制列表 (ACL)](/documentation/articles/virtual-networks-acl-powershell/)。
+> [!NOTE]
+不支持将基于终结点的 ACL 和网络安全组置于相同 VM 实例上。如果你想要使用 NSG，但已有了终结点 ACL，则请先删除该终结点 ACL。有关如何执行此操作的信息，请参阅[使用 PowerShell 管理终结点的访问控制列表 (ACL)](../virtual-network/virtual-networks-acl-powershell.md)。
 
 ### 网络安全组工作原理
 网络安全组不同于基于终结点的 ACL。终结点 ACL 只适用于通过输入终结点公开的公共端口。NSG 适用于一个或多个 VM 实例，并可控制 VM 上的所有入站和出站流量。
@@ -252,7 +255,6 @@ NSG 规则是显式的。除了 NSG 规则中指定的情况，不会对流量�
 
 ![将 NSG 关联到子网和 VM](./media/best-practices-resource-manager-security/nsg-subnet-vm.png)  
 
-
 当 NSG 与 VM 或子网关联时，网络访问控制规则变得很明确。该平台不会插入任何允许流量流向特定端口的隐式规则。在这种情况下，如果你在 VM 中创建一个终结点，则还必须创建一项规则以允许来自 Internet 的流量。如果不执行该操作，则不能从外部访问 *VIP:{Port}* 。
 
 例如，你可以创建新的 VM 和新的 NSG。你将 NSG 与 VM 相关联。该 VM 可以通过 ALLOW VNET INBOUND 规则与虚拟网络中的其他 VM 通信。该 VM 还可通过 ALLOW INTERNET OUTBOUND 规则进行连接到 Internet 的出站连接。随后，你可以在端口 80 上创建一个终结点以接收流到在 VM 中运行的网站的流量。除非你向 NSG 添加与下表类似的规则，否则从 Internet 流向 VIP（公用虚拟 IP 地址）上端口 80 的数据包将不会到达 VM。
@@ -284,7 +286,6 @@ Azure 使用路由表来决定如何根据每个数据包的目标来转发 IP �
 
 ![路由](./media/best-practices-resource-manager-security/routing.png)  
 
-
 ### 默认路由
 在虚拟网络中创建的每个子网都会自动与其中包含以下默认路由规则的路由表关联：
 
@@ -293,9 +294,9 @@ Azure 使用路由表来决定如何根据每个数据包的目标来转发 IP �
 * Internet 规则：此规则处理要发送到公共 Internet 的所有流量，并使用基础结构 Internet 网关作为要发送到 Internet 的所有流量的下一跃点。
 
 ### BGP 路由
-在撰写本文时，[ExpressRoute](/documentation/articles/expressroute-introduction/) 在 Azure 资源管理器的[网络资源提供程序](/documentation/articles/resource-groups-networking/)中并不受支持。如果在本地网络和 Azure 之间存在 ExpressRoute 连接，则一旦 NRP 支持 ExpressRoute，即可通过 BGP 将路由从本地网络传播到 Azure。在每个 Azure 子网中，这些 BGP 路由的使用方式与默认路由和用户定义路由相同。有关详细信息，请参阅 [ExpressRoute 简介](/documentation/articles/expressroute-introduction/)。
+在撰写本文时，[ExpressRoute](../expressroute/expressroute-introduction.md) 在 Azure 资源管理器的[网络资源提供程序](../virtual-network/resource-groups-networking.md)中并不受支持。如果在本地网络和 Azure 之间存在 ExpressRoute 连接，则一旦 NRP 支持 ExpressRoute，即可通过 BGP 将路由从本地网络传播到 Azure。在每个 Azure 子网中，这些 BGP 路由的使用方式与默认路由和用户定义路由相同。有关详细信息，请参阅 [ExpressRoute 简介](../expressroute/expressroute-introduction.md)。
 
-> [AZURE.NOTE]
+> [!NOTE]
 NRP 上支持 ExpressRoute 时，你就可以将 Azure 环境配置为使用强制方式通过隧道来连接你的本地网络，即为子网 0.0.0.0/0 创建一个用户定义路由，而该子网则使用 VPN 网关作为下一跃点。但是，仅在使用 VPN 网关而非 ExpressRoute 的情况下，此方法才起作用。对于 ExpressRoute，强制隧道是通过 BGP 配置的。
 > 
 > 
@@ -314,9 +315,8 @@ NRP 上支持 ExpressRoute 时，你就可以将 Azure 环境配置为使用强�
 2. BGP 路由（当使用 ExpressRoute 时）
 3. 默认路由
 
-> [AZURE.NOTE]
+> [!NOTE]
 用户定义路由仅适用于 Azure VM 和云服务。例如，如果你想要在本地网络和 Azure 之间添加防火墙虚拟设备，则需为 Azure 路由表创建用户定义路由，以便将目标为本地地址空间的所有流量转发到虚拟设备。但是，来自本地地址空间的传入流量将流经你的 VPN 网关或 ExpressRoute 线路，绕过虚拟设备直接进入 Azure 环境中。
-
 
 ### IP 转发
 如上所述，之所以要创建用户定义路由，其中一个主要原因是为了将流量转发到虚拟设备。虚拟设备只是一个 VM，其上运行的应用程序用于通过某种方式（例如防火墙或 NAT 设备）处理网络流量。
@@ -324,9 +324,9 @@ NRP 上支持 ExpressRoute 时，你就可以将 Azure 环境配置为使用强�
 此虚拟设备 VM 必须能够接收不以其自身为目标的传入流量。若要允许 VM 接收发送到其他目标的流量，必须在 VM 中启用 IP 转发。
 
 ## 后续步骤
-* 若要了解如何设置安全主体，以便通过正确的访问权限来使用组织中的资源，请参阅[通过 Azure 资源管理器对服务主体进行身份验证](/documentation/articles/resource-group-authenticate-service-principal/)
-* 如果你需要锁定对资源的访问，则可使用管理锁。请参阅[使用 Azure 资源管理器锁定资源](/documentation/articles/resource-group-lock-resources/)
-* 若要配置路由和 IP 转发，请参阅[在 Resource Manager 中使用模板创建用户定义的路由 (UDR)](/documentation/articles/virtual-network-create-udr-arm-template/)
-* 有关基于角色的访问控制的概述，请参阅 [Azure 门户预览中基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)
+* 若要了解如何设置安全主体，以便通过正确的访问权限来使用组织中的资源，请参阅[通过 Azure 资源管理器对服务主体进行身份验证](./resource-group-authenticate-service-principal.md)
+* 如果你需要锁定对资源的访问，则可使用管理锁。请参阅[使用 Azure 资源管理器锁定资源](./resource-group-lock-resources.md)
+* 若要配置路由和 IP 转发，请参阅[在 Resource Manager 中使用模板创建用户定义的路由 (UDR)](../virtual-network/virtual-network-create-udr-arm-template.md)
+* 有关基于角色的访问控制的概述，请参阅 [Azure 门户预览中基于角色的访问控制](../active-directory/role-based-access-control-configure.md)
 
 <!---HONumber=Mooncake_1219_2016-->

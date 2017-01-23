@@ -1,11 +1,9 @@
-
-
-
 ##使用 VM 扩展
 
 Azure VM 扩展实现了可帮助其他程序在 Azure VM 上正常工作的行为或功能（例如，**WebDeployForVSDevTest** 扩展允许 Visual Studio 在 Azure VM 上对解决方案进行 Web 部署），或为你提供与 VM 交互的功能以支持其他某种行为（例如，你可以使用 VM 访问扩展从 Powershell、Azure CLI 和 REST 客户端重置或修改 Azure VM 上的远程访问值）。
 
->[AZURE.IMPORTANT] 有关这些扩展按它们支持的功能列出的完整列表，请参阅 Azure VM 扩展和功能：[Windows](/documentation/articles/virtual-machines-windows-extensions-features/) 或者 [Linux](/documentation/articles/virtual-machines-linux-extensions-features/)。由于每个 VM 扩展都支持特定功能，因此使用扩展确切地可以和不可以执行哪些操作取决于该扩展。因此，在修改 VM 之前，请确保你已阅读要使用的 VM 扩展的文档。不支持删除某些 VM 扩展；其他 VM 扩展具有可设置以从根本上更改 VM 行为的属性。
+>[!IMPORTANT]
+> 有关这些扩展按它们支持的功能列出的完整列表，请参阅 Azure VM 扩展和功能：[Windows](../articles/virtual-machines/virtual-machines-windows-extensions-features.md) 或者 [Linux](../articles/virtual-machines/virtual-machines-linux-extensions-features.md)。由于每个 VM 扩展都支持特定功能，因此使用扩展确切地可以和不可以执行哪些操作取决于该扩展。因此，在修改 VM 之前，请确保你已阅读要使用的 VM 扩展的文档。不支持删除某些 VM 扩展；其他 VM 扩展具有可设置以从根本上更改 VM 行为的属性。
 
 最常见的任务是：
 
@@ -57,7 +55,6 @@ Azure VM 扩展实现了可帮助其他程序在 Azure VM 上正常工作的行�
         PublishedDate               :
         CompanyName                 :
 
-
 ###Azure 命令行界面 (Azure CLI)
 
 某些扩展使用特定于它们的 Azure CLI 命令，这可能会使其配置更容易；但以下命令适用于所有 VM 扩展。
@@ -66,21 +63,20 @@ Azure VM 扩展实现了可帮助其他程序在 Azure VM 上正常工作的行�
 
 例如，以下代码示例显示如何使用 Azure CLI **azure vm extension list** 命令列出 **IaaSDiagnostics** 扩展的信息，并使用 **–-json** 选项返回完整信息。
 
-
-    $ azure vm extension list -n IaaSDiagnostics --json
-    [
-      {
-        "publisher": "Microsoft.Azure.Diagnostics",
-        "name": "IaaSDiagnostics",
-        "version": "1.2",
-        "label": "Microsoft Monitoring Agent Diagnostics",
-        "description": "Microsoft Monitoring Agent Extension",
-        "replicationCompleted": true,
-        "isJsonExtension": true
-      }
-    ]
-
-
+```
+$ azure vm extension list -n IaaSDiagnostics --json
+[
+  {
+    "publisher": "Microsoft.Azure.Diagnostics",
+    "name": "IaaSDiagnostics",
+    "version": "1.2",
+    "label": "Microsoft Monitoring Agent Diagnostics",
+    "description": "Microsoft Monitoring Agent Extension",
+    "replicationCompleted": true,
+    "isJsonExtension": true
+  }
+]
+```
 
 ###服务管理 REST API
 
@@ -93,7 +89,6 @@ Azure VM 扩展实现了可帮助其他程序在 Azure VM 上正常工作的行�
 ##添加、更新或禁用扩展
 
 扩展可以在创建实例时添加，也可以将它们添加到正在运行的实例。可以更新、禁用或删除扩展。可以通过使用 Azure PowerShell cmdlet 或使用服务管理 REST API 操作来执行这些操作。需要使用参数才能安装和设置某些扩展。扩展支持公共和私有参数。
-
 
 ###Azure PowerShell
 
@@ -115,4 +110,5 @@ Azure VM 扩展实现了可帮助其他程序在 Azure VM 上正常工作的行�
 
 -   对于虚拟机的实例，**PublicConfigurationSchema** 和 **PrivateConfigurationSchema** 元素包含[“列出资源扩展”](https://msdn.microsoft.com/zh-cn/library/dn495441.aspx)操作的响应中的信息。
 
->[AZURE.NOTE]扩展也可以使用使用 JSON 定义的配置。使用这些类型的扩展时，仅使用 **SampleConfig** 元素。
+>[!NOTE]
+>扩展也可以使用使用 JSON 定义的配置。使用这些类型的扩展时，仅使用 **SampleConfig** 元素。

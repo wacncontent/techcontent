@@ -1,32 +1,31 @@
-<properties
-    pageTitle="为 Azure 移动应用启用脱机同步 (Xamarin iOS)"
-    description="了解如何在 Xamarin iOS 应用程序中使用应用服务移动应用缓存和同步脱机数据"
-    documentationCenter="xamarin"
-    authors="adrianhall"
-    manager="dwrede"
-    editor=""
-    services="app-service\mobile"/>  
+---
+title: 为 Azure 移动应用启用脱机同步 (Xamarin iOS)
+description: 了解如何在 Xamarin iOS 应用程序中使用应用服务移动应用缓存和同步脱机数据
+documentationCenter: xamarin
+authors: adrianhall
+manager: dwrede
+editor: 
+services: app-service\mobile
 
-
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="mobile-xamarin-ios"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/01/2016"
-    wacn.date="12/26/2016"
-    ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 # 为 Xamarin.iOS 移动应用启用脱机同步
 
-[AZURE.INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
+[!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 ## 概述
 
 本教程介绍适用于 Xamarin.iOS 的 Azure 移动应用的脱机同步功能。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。在本地数据库中存储更改。设备重新联机后，这些更改会与远程服务同步。
 
-本教程更新[创建 Xamarin iOS 应用]中的 Xamarin.iOS 应用项目，以支持 Azure 移动应用的脱机功能。如果不使用下载的快速入门服务器项目，必须将数据访问扩展包添加到项目。有关服务器扩展包的详细信息，请参阅 [Work with the .NET backend server SDK for Azure Mobile Apps](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
+本教程更新[创建 Xamarin iOS 应用]中的 Xamarin.iOS 应用项目，以支持 Azure 移动应用的脱机功能。如果不使用下载的快速入门服务器项目，必须将数据访问扩展包添加到项目。有关服务器扩展包的详细信息，请参阅 [Work with the .NET backend server SDK for Azure Mobile Apps](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
 
 若要了解有关脱机同步功能的详细信息，请参阅主题 [Azure 移动应用中的脱机数据同步]。
 
@@ -46,9 +45,11 @@
 
 1. 在共享项目中编辑 QSToDoService.cs。将 **applicationURL** 更改为指向无效的 URL：
 
-         const string applicationURL = @"https://your-service.azurewebsites.fail";
+    ```
+     const string applicationURL = @"https://your-service.azurewebsites.fail";
+    ```
 
-	还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
+    还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
 
 2. 构建并运行应用程序。请注意，在应用启动时，同步刷新将失败。
 
@@ -80,48 +81,49 @@
 
 * 表操作之前，必须初始化本地存储区。`QSTodoListViewController.ViewDidLoad()` 执行 `QSTodoService.InitializeStoreAsync()` 时，对本地存储数据库进行初始化。此方法使用 Azure 移动应用客户端 SDK 提供的 `MobileServiceSQLiteStore` 类创建一个新的本地 SQLite 数据库。
 
-	`DefineTable` 方法与所提供的类型中的字段相匹配的本地存储中创建一个表 `ToDoItem` 这种情况下。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
+    `DefineTable` 方法与所提供的类型中的字段相匹配的本地存储中创建一个表 `ToDoItem` 这种情况下。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
 
-		// QSTodoService.cs
+    ```
+    // QSTodoService.cs
 
-        public async Task InitializeStoreAsync()
-        {
-            var store = new MobileServiceSQLiteStore(localDbPath);
-            store.DefineTable<ToDoItem>();
+    public async Task InitializeStoreAsync()
+    {
+        var store = new MobileServiceSQLiteStore(localDbPath);
+        store.DefineTable<ToDoItem>();
 
-            // Uses the default conflict handler, which fails on conflict
-            await client.SyncContext.InitializeAsync(store);
-        }
-
+        // Uses the default conflict handler, which fails on conflict
+        await client.SyncContext.InitializeAsync(store);
+    }
+    ```
 
 * `QSTodoService` 的 `todoTable` 成员属于 `IMobileServiceSyncTable` 类型而不是 `IMobileServiceTable` 类型。IMobileServiceSyncTable 会将所有创建、读取、更新和删除 (CRUD) 表操作定向到本地存储数据库。
 
-	通过调用 `IMobileServiceSyncContext.PushAsync()` 确定将这些更改推送到 Azure 移动应用后端的时间。对于调用 `PushAsync` 时客户端应用修改的所有表，此同步上下文通过跟踪和推送这些表中的更改来帮助保持表关系。
+    通过调用 `IMobileServiceSyncContext.PushAsync()` 确定将这些更改推送到 Azure 移动应用后端的时间。对于调用 `PushAsync` 时客户端应用修改的所有表，此同步上下文通过跟踪和推送这些表中的更改来帮助保持表关系。
 
-	每当刷新 todoitem 列表或者添加或完成 todoitem 时，所提供的代码便会调用 `QSTodoService.SyncAsync()` 进行同步。该应用在每次本地更改后同步。如果对具有由上下文跟踪的未完成本地更新的表执行拉取操作，该拉取操作将自动先触发上下文推送操作。
+    每当刷新 todoitem 列表或者添加或完成 todoitem 时，所提供的代码便会调用 `QSTodoService.SyncAsync()` 进行同步。该应用在每次本地更改后同步。如果对具有由上下文跟踪的未完成本地更新的表执行拉取操作，该拉取操作将自动先触发上下文推送操作。
 
     在所提供的代码中，将查询远程 `TodoItem` 表中的所有记录，但它还可以筛选记录，只需将查询 ID 和查询传递给 `PushAsync` 即可。有关详细信息，请参阅 [Azure 移动应用中的脱机数据同步]中的*增量同步*部分。
 
-	<!-- Need updated conflict handling info : `InitializeAsync` uses the default conflict handler, which fails whenever there is a conflict. To provide a custom conflict handler, see the tutorial [Handling conflicts with offline support for Mobile Services].
-	-->
+    <!-- Need updated conflict handling info : `InitializeAsync` uses the default conflict handler, which fails whenever there is a conflict. To provide a custom conflict handler, see the tutorial [Handling conflicts with offline support for Mobile Services].
+    -->
 
+    ```
+    // QSTodoService.cs
 
-		// QSTodoService.cs
-
-        public async Task SyncAsync()
+    public async Task SyncAsync()
+    {
+        try
         {
-            try
-            {
-                await client.SyncContext.PushAsync();
-                await todoTable.PullAsync("allTodoItems", todoTable.CreateQuery()); // query ID is used for incremental sync
-            }
-
-            catch (MobileServiceInvalidOperationException e)
-            {
-                Console.Error.WriteLine(@"Sync Failed: {0}", e.Message);
-            }
+            await client.SyncContext.PushAsync();
+            await todoTable.PullAsync("allTodoItems", todoTable.CreateQuery()); // query ID is used for incremental sync
         }
 
+        catch (MobileServiceInvalidOperationException e)
+        {
+            Console.Error.WriteLine(@"Sync Failed: {0}", e.Message);
+        }
+    }
+    ```
 
 ## 其他资源
 
@@ -130,11 +132,10 @@
 
 <!-- Images -->
 
-
 <!-- URLs. -->
-[创建 Xamarin iOS 应用]: /documentation/articles/app-service-mobile-xamarin-ios-get-started/
-[Azure 移动应用中的脱机数据同步]: /documentation/articles/app-service-mobile-offline-data-sync/
+[创建 Xamarin iOS 应用]: ./app-service-mobile-xamarin-ios-get-started.md
+[Azure 移动应用中的脱机数据同步]: ./app-service-mobile-offline-data-sync.md
 [SyncContext]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient.synccontext(v=azure.10).aspx
-[8]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/
+[8]: ./app-service-mobile-dotnet-how-to-use-client-library.md
 
 <!---HONumber=Mooncake_0919_2016-->

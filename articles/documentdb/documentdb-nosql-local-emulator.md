@@ -1,23 +1,23 @@
-<properties
-    pageTitle="使用 DocumentDB 模拟器在本地开发 | Azure"
-    description="使用 DocumentDB 模拟器，可以在本地免费开发并测试应用程序，而无需创建 Azure 订阅。"
-    services="documentdb"
-    documentationcenter=""
-    keywords="DocumentDB 模拟器"
-    author="arramac"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="90b379a6-426b-4915-9635-822f1a138656"
-    ms.service="documentdb"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/29/2016"
-    wacn.date="01/23/2017"
-    ms.author="arramac" />  
+---
+title: 使用 DocumentDB 模拟器在本地开发 | Azure
+description: 使用 DocumentDB 模拟器，可以在本地免费开发并测试应用程序，而无需创建 Azure 订阅。
+services: documentdb
+documentationcenter: 
+keywords: DocumentDB 模拟器
+author: arramac
+manager: jhubbard
+editor: 
 
+ms.assetid: 90b379a6-426b-4915-9635-822f1a138656
+ms.service: documentdb
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/29/2016
+wacn.date: 01/23/2017
+ms.author: arramac
+---
 
 # 使用 Azure DocumentDB 模拟器进行开发和测试
 
@@ -30,20 +30,20 @@ DocumentDB 模拟器具有以下硬件和软件要求：
 
 - 软件要求
   - Windows Server 2012 R2、Windows Server 2016 或 Windows 10
-*	最低硬件要求
-  *	2 GB RAM
-  *	10 GB 可用硬盘空间
+* 最低硬件要求
+  * 2 GB RAM
+  * 10 GB 可用硬盘空间
 
 ## 安装 DocumentDB 模拟器
 可以在 [Microsoft 下载中心](https://aka.ms/documentdb-emulator)下载并安装 DocumentDB 模拟器。
 
-> [AZURE.NOTE]
+> [!NOTE]
 若要安装、配置并运行 DocumentDB 模拟器，必须在计算机上具有管理权限。
 
 ## 检查 DocumentDB 模拟器更新
 DocumentDB 模拟器包括内置的 Azure DocumentDB 数据资源管理器，用于浏览 DocumentDB 中存储的数据、创建新集合，并且通知何时有新的更新可下载。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在 DocumentDB 模拟器的一个版本中创建的数据不保证在使用不同版本时可以访问。如果需要长期保存数据，建议将数据存储在 Azure DocumentDB 帐户中，而不是存储在 DocumentDB 模拟器中。
 
 ## DocumentDB 模拟器的工作方式
@@ -51,14 +51,15 @@ DocumentDB 模拟器提供对 DocumentDB 服务的高保真模拟。它支持和
 
 虽然创建了实际 DocumentDB 服务的高保真本地模拟，但是 DocumentDB 模拟器的实现不同于该服务。例如，DocumentDB 模拟器针对持久性使用标准 OS 组件（如本地文件系统），针对连接性使用 HTTPS 协议堆栈。这意味着一些依赖于 Azure 基础结构的功能，如全局复制、读/写的一位数毫秒延迟和可调一致性级别，无法通过 DocumentDB 模拟器使用。
 
-
 ## 对 DocumentDB 模拟器的请求进行身份验证
 和云中的 Azure Document 一样，每个针对 DocumentDB 模拟器的请求都必须进行身份验证。DocumentDB 模拟器使用一个固定的帐户和公开的身份验证密钥进行主密钥身份验证。此帐户和密钥是允许用于 DocumentDB 模拟器的唯一凭据。它们具有以下特点：
 
-    Account name: localhost:<port>
-    Account key: C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
+```
+Account name: localhost:<port>
+Account key: C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 模拟器中使用生产 DocumentDB 帐户和密钥。
 
 此外，和 Azure DocumentDB 服务一样，DocumentDB 模拟器仅支持使用 SSL 的安全通信。
@@ -69,11 +70,9 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 
 ![选择“开始”按钮或按 Windows 键，先键入“DocumentDB 模拟器”，然后从应用程序的列表中选择模拟器](./media/documentdb-nosql-local-emulator/azure-documentdb-database-local-emulator-start.png)  
 
-
 运行模拟器时，在 Windows 任务栏通知区域中会显示一个图标。默认情况下，DocumentDB 模拟器在端口 8081 上侦听的本地计算机（“localhost”）上运行。
 
 ![DocumentDB 本地模拟器的任务栏通知](./media/documentdb-nosql-local-emulator/azure-documentdb-database-local-emulator-taskbar.png)  
-
 
 默认情况下，DocumentDB 模拟器安装到 `C:\Program Files\Azure DocumentDB Emulator` 目录。你还可以从命令行启动和停止模拟器。有关详细信息，请参阅[命令行工具参考](#command-line)。
 
@@ -83,22 +82,25 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 
 ![DocumentDB 本地模拟器数据资源管理器启动器](./media/documentdb-nosql-local-emulator/azure-documentdb-database-local-emulator-data-explorer-launcher.png)  
 
-
 ## 使用 DocumentDB 模拟器进行开发
-在桌面上运行 DocumentDB 模拟器之后，可以使用任何支持的 [DocumentDB SDK](/documentation/articles/documentdb-sdk-dotnet/) 或 [DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 与模拟器进行交互。DocumentDB 模拟器还包括内置的数据资源管理器，可用于创建集合、查看和编辑文档，而无需编写任何代码。
+在桌面上运行 DocumentDB 模拟器之后，可以使用任何支持的 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 或 [DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 与模拟器进行交互。DocumentDB 模拟器还包括内置的数据资源管理器，可用于创建集合、查看和编辑文档，而无需编写任何代码。
 
-    // Connect to the DocumentDB Emulator running locally
-    DocumentClient client = new DocumentClient(
-        new Uri("https://localhost:8081"), 
-        "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
-        new ConnectionPolicy { EnableEndpointDiscovery = false });
+```
+// Connect to the DocumentDB Emulator running locally
+DocumentClient client = new DocumentClient(
+    new Uri("https://localhost:8081"), 
+    "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
+    new ConnectionPolicy { EnableEndpointDiscovery = false });
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 连接到模拟器时，必须在连接配置中设置 EnableEndpointDiscovery = false。
 
-如果使用[具有 MongoDB 协议支持的 DocumentDB](/documentation/articles/documentdb-protocol-mongodb/)，请使用以下连接字符串：
+如果使用[具有 MongoDB 协议支持的 DocumentDB](./documentdb-protocol-mongodb.md)，请使用以下连接字符串：
 
-    mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10250/admin?ssl=true&3t.sslSelfSignedCerts=true
+```
+mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10250/admin?ssl=true&3t.sslSelfSignedCerts=true
+```
 
 可以使用现有工具如 [DocumentDB Studio](https://github.com/mingaliu/DocumentDBStudio) 连接到 DocumentDB 模拟器。用户还可以使用 [DocumentDB 数据迁移工具](https://github.com/azure/azure-documentdb-datamigrationtool)在 DocumentDB 模拟器和 Azure DocumentDB 服务之间迁移数据。
 
@@ -106,19 +108,20 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 
 .NET 语言和运行时使用 Windows 证书存储来安全地连接到 DocumentDB 本地模拟器。其他语言拥有自己的证书管理和使用方法。Java 使用自己的[证书存储](https://docs.oracle.com/cd/E19830-01/819-4712/ablqw/index.html)，而 Python 则使用[套接字包装器](https://docs.python.org/2/library/ssl.html)。
 
-若要获取与不集成到 Windows 证书存储中的语言和运行时配合使用的证书，需要使用 Windows 证书管理器进行导出。可通过运行 certlm.msc 进行启动，也可按照[导出 DocumentDB 模拟器证书](/documentation/articles/documentdb-nosql-local-emulator-export-ssl-certificates/)中的分步说明进行操作。证书管理器开始运行后，如下所示打开个人证书，然后将友好名称为“DocumentDBEmulatorCertificate”的证书作为 BASE-64 编码的 X.509 \(.cer\) 文件导出。
+若要获取与不集成到 Windows 证书存储中的语言和运行时配合使用的证书，需要使用 Windows 证书管理器进行导出。可通过运行 certlm.msc 进行启动，也可按照[导出 DocumentDB 模拟器证书](./documentdb-nosql-local-emulator-export-ssl-certificates.md)中的分步说明进行操作。证书管理器开始运行后，如下所示打开个人证书，然后将友好名称为“DocumentDBEmulatorCertificate”的证书作为 BASE-64 编码的 X.509 \(.cer\) 文件导出。
 
 ![DocumentDB 本地模拟器 SSL 证书](./media/documentdb-nosql-local-emulator/azure-documentdb-database-local-emulator-ssl_certificate.png)  
 
-
-可按照[将证书添加到 Java CA 证书存储](/documentation/articles/java-add-certificate-ca-store/)中的说明，将 X.509 证书导入 Java 证书存储。证书导入 cacerts 存储后，Java 和 MongoDB 应用程序即能够连接到 DocumentDB 模拟器。
+可按照[将证书添加到 Java CA 证书存储](../java-add-certificate-ca-store.md)中的说明，将 X.509 证书导入 Java 证书存储。证书导入 cacerts 存储后，Java 和 MongoDB 应用程序即能够连接到 DocumentDB 模拟器。
 
 ## <a id="command-line"></a>DocumentDB 模拟器命令行工具参考
 从安装位置中，可以使用命令行启动和停止模拟器、配置选项，和执行其他操作。
 
 ### 命令行语法
 
-    DocumentDB.Emulator.exe [/shutdown] [/datapath] [/port] [/mongoport] [/directports] [/key] [/?]
+```
+DocumentDB.Emulator.exe [/shutdown] [/datapath] [/port] [/mongoport] [/directports] [/key] [/?]
+```
 
 若要查看选项列表，请在命令提示符下键入 `DocumentDB.Emulator.exe /?`。
 
@@ -208,14 +211,14 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 
 - DocumentDB 模拟器只支持一个固定的帐户和公开的主密钥。在 DocumentDB 模拟器中无法重新生成密钥。
 - DocumentDB 模拟器不是可扩展的服务，并且不支持大量集合。
-- DocumentDB 模拟器不模拟不同的 [DocumentDB 一致性级别](/documentation/articles/documentdb-consistency-levels/)。
-- DocumentDB 模拟器不模拟[多区域复制](/documentation/articles/documentdb-distribute-data-globally/)。
+- DocumentDB 模拟器不模拟不同的 [DocumentDB 一致性级别](./documentdb-consistency-levels.md)。
+- DocumentDB 模拟器不模拟[多区域复制](./documentdb-distribute-data-globally.md)。
 - DocumentDB 模拟器不支持服务配额覆盖，而 Azure DocumentDB 服务支持（例如文档大小限制、增加的分区集合存储）。
 - 由于 DocumentDB 模拟器的副本不一定能反应 Azure DocumentDB 的最新更改，因此请使用 [DocumentDB 容量规划器](https://www.documentdb.com/capacityplanner)准确估计应用程序的生产吞吐量需求。
 
 ## 后续步骤
-- 若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB 简介](/documentation/articles/documentdb-introduction/)。
-- 若要开始使用 DocumentDB 模拟器进行开发，请下载一个[支持的 DocumentDB SDK](/documentation/articles/documentdb-sdk-dotnet/)。
+- 若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB 简介](./documentdb-introduction.md)。
+- 若要开始使用 DocumentDB 模拟器进行开发，请下载一个[支持的 DocumentDB SDK](./documentdb-sdk-dotnet.md)。
 
 <!---HONumber=Mooncake_0109_2017-->
 <!---Update_Description: add content on how to Start the local emulator Data Explorer and export SSL certificate -->

@@ -1,26 +1,26 @@
-<properties 
-	pageTitle="将弹性数据库客户端库与实体框架配合使用 | Azure" 
-	description="将弹性数据库客户端库与实体框架用于数据库编码" 
-	services="sql-database" 
-	documentationCenter="" 
-	manager="jhubbard" 
-	authors="torsteng" 
-	editor=""/>
+---
+title: 将弹性数据库客户端库与实体框架配合使用 | Azure
+description: 将弹性数据库客户端库与实体框架用于数据库编码
+services: sql-database
+documentationCenter: 
+manager: jhubbard
+authors: torsteng
+editor: 
 
-<tags 
-	ms.service="sql-database" 
-	ms.workload="sql-database" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="05/27/2016" 
-	wacn.date="12/19/2016" 
-	ms.author="torsteng"/>
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/27/2016
+wacn.date: 12/19/2016
+ms.author: torsteng
+---
 
 # 弹性数据库客户端库与实体框架 
- 
-此文档介绍与[弹性数据库工具](/documentation/articles/sql-database-elastic-scale-introduction/)集成所需的实体框架应用程序中的更改。重点是使用实体框架的**代码优先**方法撰写[分片映射管理](/documentation/articles/sql-database-elastic-scale-shard-map-management/)和[依赖于数据的路由](/documentation/articles/sql-database-elastic-scale-data-dependent-routing/)。[EF 的代码优先 – 新数据库](http://msdn.microsoft.com/data/jj193542.aspx)教程在本文档中充当运行示例。本文档附带的示例代码是 Visual Studio 代码示例中弹性数据库工具示例集的一部分。
-  
+
+此文档介绍与[弹性数据库工具](./sql-database-elastic-scale-introduction.md)集成所需的实体框架应用程序中的更改。重点是使用实体框架的**代码优先**方法撰写[分片映射管理](./sql-database-elastic-scale-shard-map-management.md)和[依赖于数据的路由](./sql-database-elastic-scale-data-dependent-routing.md)。[EF 的代码优先 – 新数据库](http://msdn.microsoft.com/data/jj193542.aspx)教程在本文档中充当运行示例。本文档附带的示例代码是 Visual Studio 代码示例中弹性数据库工具示例集的一部分。
+
 ## 下载和运行示例代码
 若要下载本文的代码：
 
@@ -28,7 +28,7 @@
 * 启动 Visual Studio。
 * 在 Visual Studio 中，依次选择“文件”->“新建项目”。
 * 在“新建项目”对话框中，导航到“Visual C#”的“联机示例”，然后在右上方的搜索框中键入“弹性数据库”。
-    
+
     ![实体框架和弹性数据库示例应用][1]
 
     选择名为 **Azure SQL 的弹性数据库工具 – 实体框架集成**的示例。在接受许可证后，该示例将加载。
@@ -54,12 +54,11 @@
 
 ## 弹性数据库工具假设条件 
 
-有关术语定义，请参阅[弹性数据库工具词汇表](/documentation/articles/sql-database-elastic-scale-glossary/)。
+有关术语定义，请参阅[弹性数据库工具词汇表](./sql-database-elastic-scale-glossary.md)。
 
 借助弹性数据库客户端库，你可以定义称为 shardlet 的应用程序数据分区。Shardlet 由分片键标识，并且映射到特定数据库。应用程序可以具有任意所需数量的数据库，并根据当前业务需求分发 shardlet 以提供足够的容量或性能。分片键值到数据库的映射由弹性数据库客户端 API 提供的分片映射存储。我们将此功能称为**分片映射管理**或简称为 SMM。分片映射还为带有分片键的请求充当数据库连接的代理。我们将此功能称为**依赖于数据的路由**。
- 
-分片映射管理器防止用户在 shardlet 数据中出现不一致视图，当发生并发 shardlet 管理操作时（例如将数据从一个分片重新分配到另一个分片）可能发生此情况。为此，客户端库管理的分片映射将会代理应用程序的数据库连接。当分片管理操作可能影响为其创建数据库连接的 shardlet 时，此操作允许分片映射功能自动终止该连接。此方法需要与一些 EF 的功能集成，例如从现有连接创建新连接以检查数据库是否存在。在通常情况下，我们观察到标准 DbContext 构造函数仅对可安全克隆用于 EF 工作的关闭数据库连接有效。弹性数据库的设计原则是仅代理打开的连接。有人可能认为，在交付给 EF DbContext 之前关闭由客户端库代理的连接可能解决此问题。但是，通过关闭连接并依靠 EF 重新打开它，将放弃由该库执行的验证和一致性检查。但是，EF 中的迁移功能使用这些连接以对应用程序透明的方式管理基础数据库架构。理想情况下，我们希望在相同的应用程序中保留和合并所有这些来自弹性数据库客户端库和 EF 的功能。以下部分将更详细地讨论这些属性和要求。
 
+分片映射管理器防止用户在 shardlet 数据中出现不一致视图，当发生并发 shardlet 管理操作时（例如将数据从一个分片重新分配到另一个分片）可能发生此情况。为此，客户端库管理的分片映射将会代理应用程序的数据库连接。当分片管理操作可能影响为其创建数据库连接的 shardlet 时，此操作允许分片映射功能自动终止该连接。此方法需要与一些 EF 的功能集成，例如从现有连接创建新连接以检查数据库是否存在。在通常情况下，我们观察到标准 DbContext 构造函数仅对可安全克隆用于 EF 工作的关闭数据库连接有效。弹性数据库的设计原则是仅代理打开的连接。有人可能认为，在交付给 EF DbContext 之前关闭由客户端库代理的连接可能解决此问题。但是，通过关闭连接并依靠 EF 重新打开它，将放弃由该库执行的验证和一致性检查。但是，EF 中的迁移功能使用这些连接以对应用程序透明的方式管理基础数据库架构。理想情况下，我们希望在相同的应用程序中保留和合并所有这些来自弹性数据库客户端库和 EF 的功能。以下部分将更详细地讨论这些属性和要求。
 
 ## 要求 
 
@@ -68,9 +67,9 @@
 * **扩大**：我们需要根据应用程序的容量需求，在分片应用程序的数据层中添加或删除数据库。这意味着对数据库的创建和删除的控制，以及使用弹性数据库分片映射管理器 API 管理数据库和 shardlet 的映射。
 
 * **一致性**：应用程序利用分片，并且使用客户端库的依赖于数据的路由功能。若要避免损坏或错误的查询结果，连接通过分片映射管理器进行代理。此操作还会保留验证和一致性。
- 
+
 * **代码优先**：保留 EF 的代码优先范例的便利性。在“代码优先”中，应用程序中的类透明映射到基础数据库结构。应用程序代码与 DbSet 交互以为基础数据库处理中涉及的大部分方面提供掩码。
- 
+
 * **架构**：实体框架通过迁移处理初始数据库架构创建和后续架构演变。通过保留这些功能，随着数据的演变调整你的应用很容易。
 
 以下指南指导如何满足使用弹性数据库工具的“代码优先”应用程序的这些要求。
@@ -91,36 +90,38 @@
 
 以下代码示例演示了此方法。（附带的 Visual Studio 项目中也提供此代码）
 
-    public class ElasticScaleContext<T> : DbContext
+```
+public class ElasticScaleContext<T> : DbContext
+{
+public DbSet<Blog> Blogs { get; set; }
+…
+
+    // C'tor for data dependent routing. This call will open a validated connection 
+    // routed to the proper shard by the shard map manager. 
+    // Note that the base class c'tor call will fail for an open connection
+    // if migrations need to be done and SQL credentials are used. This is the reason for the 
+    // separation of c'tors into the data-dependent routing case (this c'tor) and the internal c'tor for new shards.
+    public ElasticScaleContext(ShardMap shardMap, T shardingKey, string connectionStr)
+        : base(CreateDDRConnection(shardMap, shardingKey, connectionStr), 
+        true /* contextOwnsConnection */)
     {
-    public DbSet<Blog> Blogs { get; set; }
-    …
+    }
 
-        // C'tor for data dependent routing. This call will open a validated connection 
-        // routed to the proper shard by the shard map manager. 
-        // Note that the base class c'tor call will fail for an open connection
-        // if migrations need to be done and SQL credentials are used. This is the reason for the 
-        // separation of c'tors into the data-dependent routing case (this c'tor) and the internal c'tor for new shards.
-        public ElasticScaleContext(ShardMap shardMap, T shardingKey, string connectionStr)
-            : base(CreateDDRConnection(shardMap, shardingKey, connectionStr), 
-            true /* contextOwnsConnection */)
-        {
-        }
+    // Only static methods are allowed in calls into base class c'tors.
+    private static DbConnection CreateDDRConnection(
+    ShardMap shardMap, 
+    T shardingKey, 
+    string connectionStr)
+    {
+        // No initialization
+        Database.SetInitializer<ElasticScaleContext<T>>(null);
 
-        // Only static methods are allowed in calls into base class c'tors.
-        private static DbConnection CreateDDRConnection(
-        ShardMap shardMap, 
-        T shardingKey, 
-        string connectionStr)
-        {
-            // No initialization
-            Database.SetInitializer<ElasticScaleContext<T>>(null);
-
-            // Ask shard map to broker a validated connection for the given key
-            SqlConnection conn = shardMap.OpenConnectionForKey<T>
-                                (shardingKey, connectionStr, ConnectionOptions.Validate);
-            return conn;
-        }    
+        // Ask shard map to broker a validated connection for the given key
+        SqlConnection conn = shardMap.OpenConnectionForKey<T>
+                            (shardingKey, connectionStr, ConnectionOptions.Validate);
+        return conn;
+    }    
+```
 
 ## 要点
 * 新的构造函数将替换 DbContext 子类中的默认构造函数
@@ -128,35 +129,36 @@
     * 用于访问依赖于数据的路由接口的分片映射，
     * 用于标识 shardlet 的分片键，
     * 带有到该分片的依赖于数据的路由连接的凭据的连接字符串。
- 
+
 * 对基类构造函数的调用需要绕行到静态方法，以执行依赖于数据的路由所需的所有步骤。
    * 它使用分片映射上的弹性数据库客户端接口的 OpenConnectionForKey 调用来建立开放连接。
    * 分片映射创建到保存特定分片键的 shardlet 的分片的开放连接。
    * 此开放连接将传递回 DbContext 的基类构造函数以指示此连接将由 EF 使用，而不是让 EF 自动创建新连接。这样，该连接已由弹性数据库客户端 API 标记，以便它可以保证分片映射管理操作下的一致性。
- 
-  
+
 为你的 DbContext 子类使用新的构造函数而不是你的代码中的默认构造函数。下面是一个示例：
 
-    // Create and save a new blog.
+```
+// Create and save a new blog.
 
-    Console.Write("Enter a name for a new blog: "); 
-    var name = Console.ReadLine(); 
+Console.Write("Enter a name for a new blog: "); 
+var name = Console.ReadLine(); 
 
-    using (var db = new ElasticScaleContext<int>( 
-                            sharding.ShardMap,  
-                            tenantId1,  
-                            connStrBldr.ConnectionString)) 
-    { 
-        var blog = new Blog { Name = name }; 
-        db.Blogs.Add(blog); 
-        db.SaveChanges(); 
+using (var db = new ElasticScaleContext<int>( 
+                        sharding.ShardMap,  
+                        tenantId1,  
+                        connStrBldr.ConnectionString)) 
+{ 
+    var blog = new Blog { Name = name }; 
+    db.Blogs.Add(blog); 
+    db.SaveChanges(); 
 
-        // Display all Blogs for tenant 1 
-        var query = from b in db.Blogs 
-                    orderby b.Name 
-                    select b; 
-     … 
-    }
+    // Display all Blogs for tenant 1 
+    var query = from b in db.Blogs 
+                orderby b.Name 
+                select b; 
+ … 
+}
+```
 
 新的构造函数将打开到该分片的连接，该分片保存由 **tenantid1** 的值标识的 shardlet 的数据。**using** 块中的代码保持不变以访问 **DbSet**，进而获取有关对 **tenantid1** 的分片使用 EF 的博客。这改变了 using 块中的代码的语义，因此所有数据库操作的范围现在设置为保留 **tenantid1** 的单个分片。例如，博客 **DbSet** 上的 LINQ 查询将仅返回当前分片上存储的博客，不返回存储在其他分片上的博客。
 
@@ -165,19 +167,21 @@ Microsoft 模式和实践团队已发布[暂时性故障处理应用程序块](h
 
 以下代码示例演示如何围绕新的 **DbContext** 子类构造函数使用 SQL 重试策略：
 
-    SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() => 
-    { 
-        using (var db = new ElasticScaleContext<int>( 
-                                sharding.ShardMap,  
-                                tenantId1,  
-                                connStrBldr.ConnectionString)) 
-            { 
-                    var blog = new Blog { Name = name }; 
-                    db.Blogs.Add(blog); 
-                    db.SaveChanges(); 
-            … 
-            } 
-        }); 
+```
+SqlDatabaseUtils.SqlRetryPolicy.ExecuteAction(() => 
+{ 
+    using (var db = new ElasticScaleContext<int>( 
+                            sharding.ShardMap,  
+                            tenantId1,  
+                            connStrBldr.ConnectionString)) 
+        { 
+                var blog = new Blog { Name = name }; 
+                db.Blogs.Add(blog); 
+                db.SaveChanges(); 
+        … 
+        } 
+    }); 
+```
 
 上述代码中的 **SqlDatabaseUtils.SqlRetryPolicy** 定义为 **SqlDatabaseTransientErrorDetectionStrategy**，重试计数为 10，每两次重试的等待时间为 5 秒。此方法类似于 EF 和用户启动事务的指南（请参阅[重试执行策略的限制（从 EF6 开始）](http://msdn.microsoft.com/data/dn307226)。这两种情况都要求应用程序控制返回暂时性异常的范围：重新打开事务，或者（如下所示）从使用弹性数据库客户端库的适当构造函数重新创建上下文。
 
@@ -185,7 +189,6 @@ Microsoft 模式和实践团队已发布[暂时性故障处理应用程序块](h
 
 #### 构造函数重写
 上方的代码示例演示你的应用程序所需的默认构造函数重写，以将依赖于数据的路由与实体框架一起使用。下表将此方法一般化到其他构造函数。
-
 
 当前构造函数 | 为数据重写构造函数 | 基构造函数 | 说明
 ---------- | ----------- | ------------|----------
@@ -211,55 +214,56 @@ MyContext(DbConnection, DbCompiledModel,bool) |ElasticScaleContext(ShardMap, TKe
 
 具备这些先决条件后，我们可以创建一个常规的未打开的 **SqlConnection**，以便为架构部署启动 EF 迁移。以下代码示例演示了此方法。
 
-        // Enter a new shard - i.e. an empty database - to the shard map, allocate a first tenant to it  
-        // and kick off EF intialization of the database to deploy schema 
+```
+    // Enter a new shard - i.e. an empty database - to the shard map, allocate a first tenant to it  
+    // and kick off EF intialization of the database to deploy schema 
 
-        public void RegisterNewShard(string server, string database, string connStr, int key) 
+    public void RegisterNewShard(string server, string database, string connStr, int key) 
+    { 
+
+        Shard shard = this.ShardMap.CreateShard(new ShardLocation(server, database)); 
+
+        SqlConnectionStringBuilder connStrBldr = new SqlConnectionStringBuilder(connStr); 
+        connStrBldr.DataSource = server; 
+        connStrBldr.InitialCatalog = database; 
+
+        // Go into a DbContext to trigger migrations and schema deployment for the new shard. 
+        // This requires an un-opened connection. 
+        using (var db = new ElasticScaleContext<int>(connStrBldr.ConnectionString)) 
         { 
-
-            Shard shard = this.ShardMap.CreateShard(new ShardLocation(server, database)); 
-
-            SqlConnectionStringBuilder connStrBldr = new SqlConnectionStringBuilder(connStr); 
-            connStrBldr.DataSource = server; 
-            connStrBldr.InitialCatalog = database; 
-
-            // Go into a DbContext to trigger migrations and schema deployment for the new shard. 
-            // This requires an un-opened connection. 
-            using (var db = new ElasticScaleContext<int>(connStrBldr.ConnectionString)) 
-            { 
-                // Run a query to engage EF migrations 
-                (from b in db.Blogs 
-                    select b).Count(); 
-            } 
-
-            // Register the mapping of the tenant to the shard in the shard map. 
-            // After this step, data-dependent routing on the shard map can be used 
-
-            this.ShardMap.CreatePointMapping(key, shard); 
+            // Run a query to engage EF migrations 
+            (from b in db.Blogs 
+                select b).Count(); 
         } 
- 
+
+        // Register the mapping of the tenant to the shard in the shard map. 
+        // After this step, data-dependent routing on the shard map can be used 
+
+        this.ShardMap.CreatePointMapping(key, shard); 
+    } 
+```
 
 此示例演示方法 **RegisterNewShard**，此方法注册分片映射中的分片、通过 EF 迁移部署架构并将分片键的映射存储到该分片。它依靠 **DbContext** 子类的构造函数（在本示例中为 **ElasticScaleContext**），此构造函数采用 SQL 连接字符串作为输入。此构造函数的代码很简单，如以下示例所示：
 
+```
+    // C'tor to deploy schema and migrations to a new shard 
+    protected internal ElasticScaleContext(string connectionString) 
+        : base(SetInitializerForConnection(connectionString)) 
+    { 
+    } 
 
-        // C'tor to deploy schema and migrations to a new shard 
-        protected internal ElasticScaleContext(string connectionString) 
-            : base(SetInitializerForConnection(connectionString)) 
-        { 
-        } 
+    // Only static methods are allowed in calls into base class c'tors 
+    private static string SetInitializerForConnection(string connnectionString) 
+    { 
+        // We want existence checks so that the schema can get deployed 
+        Database.SetInitializer<ElasticScaleContext<T>>( 
+    new CreateDatabaseIfNotExists<ElasticScaleContext<T>>()); 
 
-        // Only static methods are allowed in calls into base class c'tors 
-        private static string SetInitializerForConnection(string connnectionString) 
-        { 
-            // We want existence checks so that the schema can get deployed 
-            Database.SetInitializer<ElasticScaleContext<T>>( 
-        new CreateDatabaseIfNotExists<ElasticScaleContext<T>>()); 
+        return connnectionString; 
+    } 
+```
 
-            return connnectionString; 
-        } 
- 
 有人可能使用了从基类继承的构造函数版本。但是该代码需要确保在连接时使用 EF 的默认初始化程序。因此在调用带有连接字符串的基类构造函数前，需短暂绕行到静态方法。请注意，分片的注册应该在不同的应用域或进程中运行，以确保 EF 的初始化程序设置不冲突。
-
 
 ## 限制 
 
@@ -275,11 +279,9 @@ MyContext(DbConnection, DbCompiledModel,bool) |ElasticScaleContext(ShardMap, TKe
 
 通过本文档中概述的步骤，EF 应用程序可以通过重构 EF 应用程序中使用的 **DbContext** 子类的构造函数，使用弹性数据库客户端库的依赖于数据的路由功能。这将所需的更改限制到 **DbContext** 类已经存在的位置。此外，EF 应用程序可以通过将调用必要的 EF 迁移的步骤与新分片的注册和分片映射中的映射结合，继续从自动架构部署中受益。
 
-
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-use-entity-framework-applications-visual-studio/sample.png
- 
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

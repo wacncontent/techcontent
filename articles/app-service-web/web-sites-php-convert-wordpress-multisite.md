@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="在 Azure App Service 中将 WordPress 转换为 Multisite" 
-	description="了解如何采用通过 Azure 中的库创建的现有 WordPress Web 应用并将其转换为 WordPress Multisite" 
-	services="app-service\web" 
-	documentationCenter="php" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 在 Azure App Service 中将 WordPress 转换为 Multisite
+description: 了解如何采用通过 Azure 中的库创建的现有 WordPress Web 应用并将其转换为 WordPress Multisite
+services: app-service\web
+documentationCenter: php
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="PHP" 
-	ms.topic="article" 
-	ms.date="11/01/2016" 
-	wacn.date="12/30/2016" 
-	ms.author="robmcm"/>
-
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 # 在 Azure App Service 中将 WordPress 转换为 Multisite
 
@@ -43,9 +41,11 @@
 
 使用所选编辑器打开 `wp-config.php` 文件并在 `/* That's all, stop editing! Happy blogging. */` 行的上方添加以下内容。
 
-	/* Multisite */
+```
+/* Multisite */
 
-	define( 'WP_ALLOW_MULTISITE', true );
+define( 'WP_ALLOW_MULTISITE', true );
+```
 
 请务必保存该文件并将其上载回服务器！
 
@@ -63,9 +63,7 @@
 
 现已在数据库中配置网络，但剩下的一个步骤是启用网络功能。完成 `wp-config.php` 设置并确保 `web.config` 正确路由每个站点。
 
-
 在“网络设置”页上单击“安装”按钮后，WordPress 将尝试更新 `wp-config.php` 和 `web.config` 文件。不过，你应该始终检查这些文件，以便确保更新成功。如果更新不成功，此屏幕将向你显示必要的更新。编辑并保存文件。
-
 
 进行这些更新后，需要注销并重新登录到 wp-admin 仪表板。
 
@@ -77,7 +75,7 @@
 
 ## 启用到 Web 应用的域映射
 
-**免费**的[应用服务](/documentation/articles/app-service-changes-existing-services/)计划模式不支持向 Web 应用添加自定义域。需要切换到“共享”或“标准”模式。为此，请按以下步骤操作：
+**免费**的[应用服务](./app-service-changes-existing-services.md)计划模式不支持向 Web 应用添加自定义域。需要切换到“共享”或“标准”模式。为此，请按以下步骤操作：
 
 * 登录到 Azure 门户预览并找到你的 Web 应用。
 * 单击“设置”中的“向上缩放”选项卡。
@@ -118,7 +116,6 @@
 
 使用上一个步骤中的 IP 地址可返回你的 DNS 管理器并将 A 记录设置为指向该 IP。
 
-
 ## 安装和设置插件
 
 WordPress Multisite 当前没有用于映射自定义域的内置方法。但是，你可以利用一个名为 [WordPress MU 域映射][wordpress-plugin-wordpress-mu-domain-mapping]的插件来添加该功能。登录到你网站的“网络管理员”部分，并安装“WordPress MU 域映射”插件。
@@ -136,19 +133,17 @@ WordPress Multisite 当前没有用于映射自定义域的内置方法。但是
 利用 Azure Web Apps，可以向一个 Web 应用添加无数个域。若要添加另一个域，你需要为每个域执行**验证域**和**设置域 A 记录**部分中所述的操作。
 
 ## 发生的更改
-* 有关从网站更改为 App Service 的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为 App Service 的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 [ben-lobaugh]: http://ben.lobaugh.net
 [ms-open-tech]: http://msopentech.com
 [wordpress-codex-create-a-network]: http://codex.wordpress.org/Create_A_Network
-[website-w-mysql-and-ftp-ftp-setup]: /documentation/articles/web-sites-php-mysql-deploy-use-ftp/
-[website-w-mysql-and-git-git-setup]: /documentation/articles/web-sites-php-mysql-deploy-use-git/
+[website-w-mysql-and-ftp-ftp-setup]: ./web-sites-php-mysql-deploy-use-ftp.md
+[website-w-mysql-and-git-git-setup]: ./web-sites-php-mysql-deploy-use-git.md
 [wordpress-network-setup]: ./media/web-sites-php-convert-wordpress-multisite/wordpress-network-setup.png
 [wordpress-codex-types-of-networks]: http://codex.wordpress.org/Before_You_Create_A_Network#Types_of_multisite_network
 [wordpress-plugin-wordpress-mu-domain-mapping]: http://wordpress.org/extend/plugins/wordpress-mu-domain-mapping/
 
 [wordpress-manage-domains]: ./media/web-sites-php-convert-wordpress-multisite/wordpress-manage-domains.png
-
- 
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

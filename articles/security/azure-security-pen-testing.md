@@ -1,23 +1,21 @@
-<properties
-   pageTitle="渗透测试 | Microsoft Azure"
-   description="本文概述了渗透测试（简称 pentest）过程，以及如何对运行在 Azure 基础结构中的应用进行渗透测试。"
-   services="security"
-   documentationCenter="na"
-   authors="YuriDio"
-   manager="swadhwa"
-   editor="TomSh"/>  
+---
+title: 渗透测试 | Microsoft Azure
+description: 本文概述了渗透测试（简称 pentest）过程，以及如何对运行在 Azure 基础结构中的应用进行渗透测试。
+services: security
+documentationCenter: na
+authors: YuriDio
+manager: swadhwa
+editor: TomSh
 
-
-<tags
-   ms.service="security"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="08/09/2016"
-   wacn.date="10/31/2016"
-   ms.author="yurid"/>  
-
+ms.service: security
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/09/2016
+wacn.date: 10/31/2016
+ms.author: yurid
+---
 
 # 渗透测试
 

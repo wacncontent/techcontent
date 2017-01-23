@@ -1,5 +1,3 @@
-
-
 ##<a name="grant-new-database-user-dbowner-permissions"></a> 授予新的数据库用户 db\_owner 权限
 
 使用以下步骤授予现有数据库用户 db\_owner 权限
@@ -9,7 +7,6 @@
 1. 在对象资源管理器中，展开“数据库”节点并选择包含你要为其授予 dbo 权限的用户的数据库。
 
      ![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-create-new-database-user/sql-database-create-new-database-user-1.png)  
-
 
 2. 右键单击选定的数据库，然后单击“查询”。
 

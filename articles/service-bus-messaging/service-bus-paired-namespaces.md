@@ -1,15 +1,16 @@
-<properties 
-   pageTitle="服务总线配对命名空间 | Microsoft Azure"
-   description="配对命名空间实现的详细信息和成本"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-   editor="" />
-<tags 
-   ms.service="service-bus"
-   ms.date="10/04/2016"
-   wacn.date="01/09/2017" />
+---
+title: 服务总线配对命名空间 | Microsoft Azure
+description: 配对命名空间实现的详细信息和成本
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
+
+ms.service: service-bus
+ms.date: 10/04/2016
+wacn.date: 01/09/2017
+---
 
 # 配对命名空间实现详细信息和成本影响
 
@@ -120,7 +121,7 @@
   [TopicClient]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicclient.aspx
   [ContentType]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.contenttype.aspx
   [TimeToLive]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx
-  [异步消息传递模式和高可用性]: /documentation/articles/service-bus-async-messaging/
+  [异步消息传递模式和高可用性]: ./service-bus-async-messaging.md
   [0]: ./media/service-bus-paired-namespaces/IC673405.png
   [1]: ./media/service-bus-paired-namespaces/IC673406.png
   [2]: ./media/service-bus-paired-namespaces/IC673407.png

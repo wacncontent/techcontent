@@ -7,8 +7,10 @@
 <!--
 3. Open **AndroidManifest.xml** and add this tag to the *application* tag.
 
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+    ```
+    <meta-data android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+    ```
 -->
 
 <!---HONumber=Mooncake_0919_2016-->

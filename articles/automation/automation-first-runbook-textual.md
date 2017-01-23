@@ -1,21 +1,22 @@
-<properties
-    pageTitle="我在 Azure 自动化中的第一个 PowerShell 工作流 Runbook | Azure"
-    description="本教程指导你使用 PowerShell 工作流创建、测试和发布一个简单的文本 Runbook。"
-    services="automation"
-    documentationCenter=""
-    authors="mgoedtel"
-    manager="jwhit"
-    editor=""
-	keywords="powershell 工作流, powershell 工作流示例, 工作流 powershell"/>
-<tags
-    ms.service="automation"
-    ms.workload="tbd"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="07/19/2016"
-    wacn.date="01/03/2017"
-    ms.author="magoedte;bwren"/>
+---
+title: 我在 Azure 自动化中的第一个 PowerShell 工作流 Runbook | Azure
+description: 本教程指导你使用 PowerShell 工作流创建、测试和发布一个简单的文本 Runbook。
+services: automation
+documentationCenter: 
+authors: mgoedtel
+manager: jwhit
+editor: 
+keywords: powershell 工作流, powershell 工作流示例, 工作流 powershell
+
+ms.service: automation
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 07/19/2016
+wacn.date: 01/03/2017
+ms.author: magoedte;bwren
+---
 
 # 我的第一个 PowerShell 工作流 Runbook
 
@@ -25,8 +26,8 @@
 
 为了完成本教程，你需要满足以下条件。
 
-- Azure 订阅创建新存储帐户。如果你没有订阅，可以[注册帐户](/pricing/1rmb-trial)。
-- [自动化帐户](/documentation/articles/automation-security-overview/)，用来保存 Runbook 以及向 Azure 资源进行身份验证。此帐户必须有权启动和停止虚拟机。
+- Azure 订阅创建新存储帐户。如果你没有订阅，可以[注册帐户](https://www.azure.cn/pricing/1rmb-trial)。
+- [自动化帐户](./automation-security-overview.md)，用来保存 Runbook 以及向 Azure 资源进行身份验证。此帐户必须有权启动和停止虚拟机。
 - Azure 虚拟机。我们将停止并启动该计算机，因此其不应为生产用计算机。
 
 ## 步骤 1 - 创建新的 Runbook
@@ -42,20 +43,24 @@
 
 你可以直接将代码键入 Runbook 中，或者通过“库”控件选择 cmdlet、Runbook 和资产，并使用任何相关的参数将它们添加到 Runbook。在本演练中，我们将直接键入 Runbook。
 
-1.	我们的 Runbook 目前是空的，只有必需的 *workflow* 关键字、Runbook 名称以及括住整个工作流的大括号。
+1. 我们的 Runbook 目前是空的，只有必需的 *workflow* 关键字、Runbook 名称以及括住整个工作流的大括号。
 
-	    Workflow MyFirstRunbook-Workflow
-	    {
-	    }
+    ```
+    Workflow MyFirstRunbook-Workflow
+    {
+    }
+    ```
 
-2.	在大括号之间键入 *Write-Output "Hello World"*。
+2. 在大括号之间键入 *Write-Output "Hello World"*。
 
-	    Workflow MyFirstRunbook-Workflow
-	    {
-	      Write-Output "Hello World"
-	    }
+    ```
+    Workflow MyFirstRunbook-Workflow
+    {
+      Write-Output "Hello World"
+    }
+    ```
 
-3.	通过单击“保存”来保存 Runbook。
+3. 通过单击“保存”来保存 Runbook。
 
 ## 步骤 3 - 测试 Runbook
 
@@ -88,35 +93,41 @@
 5.  在 **Get-AutomationPSCredential** 前面，输入 *$Credential =* 以将凭据分配给变量。
 3.  在下一行中键入 *Add-AzureRmAccount -Credential $Credential -EnvironmentName AzureChinaCloud*。
 
-		workflow test
-		{
-    		$Credential = Get-AutomationPSCredential -Name "<your credential>"
-    		Add-AzureRmAccount -Credential $Credential -EnvironmentName AzureChinaCloud
-		}
+    ```
+    workflow test
+    {
+        $Credential = Get-AutomationPSCredential -Name "<your credential>"
+        Add-AzureRmAccount -Credential $Credential -EnvironmentName AzureChinaCloud
+    }
+    ```
 
 3. 单击“测试”，然后在出现提示时单击“是”。
 10.  完成后，你应会收到类似于下面的输出，这是向凭据中的用户返回的信息。这是对凭据有效的确认。
 
-		PSComputeerName			: localhost
-		PSSourceJobInstanceID	: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-		Id						: azureuser@contoso.com
-		Type					: User
-		Subscriptions			: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-		Tenants					: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    ```
+    PSComputeerName			: localhost
+    PSSourceJobInstanceID	: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Id						: azureuser@contoso.com
+    Type					: User
+    Subscriptions			: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Tenants					: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    ```
 
 ## 步骤 6 – 添加用于启动虚拟机的代码
 
 在 Runbook 对 Azure 订阅进行身份验证后，我们可以管理资源。我们将添加一个命令用于启动虚拟机。你可以在你的 Azure 订阅中选取任何虚拟机，现在我们会将该名称硬编码到 cmdlet 中。
 
-1.	在 *Add-AzureRmAccount* 后面键入 *Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'NameofResourceGroup'*（提供要启动的虚拟机的名称和资源组名称）。
+1. 在 *Add-AzureRmAccount* 后面键入 *Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'NameofResourceGroup'*（提供要启动的虚拟机的名称和资源组名称）。
 
-	    workflow MyFirstRunbook-Workflow
-	    {
-	     $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
-	     Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
+    ```
+    workflow MyFirstRunbook-Workflow
+    {
+     $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
+     Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
 
-	     Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'ResourceGroupName'
-	    }
+     Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'ResourceGroupName'
+    }
+    ```
 
 9. 保存 Runbook，然后单击“测试”，以便我们可以测试 Runbook。
 
@@ -124,24 +135,26 @@
 
 我们的 Runbook 目前会启动我们在 Runbook 中硬编码的虚拟机，但如果可以在启动 Runbook 时指定虚拟机，它会更有用。我们现在将输入参数添加到 Runbook，以提供该功能。
 
-1.	将 *VMName* 和 *ResourceGroupName* 的参数添加到 Runbook，并将这些变量与 **Start-AzureRmVM** cmdlet 配合使用，如以下示例所示。
+1. 将 *VMName* 和 *ResourceGroupName* 的参数添加到 Runbook，并将这些变量与 **Start-AzureRmVM** cmdlet 配合使用，如以下示例所示。
 
-	    workflow MyFirstRunbook-Workflow
-	    {
-	       Param(
-	        [string]$VMName,
-	        [string]$ResourceGroupName
-	       )  
-	     $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
-	     Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
-	     Start-AzureRmVM -Name $VMName -ResourceGroupName $ResourceGroupName
-	    }
+    ```
+    workflow MyFirstRunbook-Workflow
+    {
+       Param(
+        [string]$VMName,
+        [string]$ResourceGroupName
+       )  
+     $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
+     Add-AzureRmAccount –EnvironmentName AzureChinaCloud -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
+     Start-AzureRmVM -Name $VMName -ResourceGroupName $ResourceGroupName
+    }
+    ```
 
-2.	保存 Runbook 并打开“测试”窗格。请注意，现在可以为将在测试中使用的两个输入变量提供值。
-3.	关闭“测试”窗格。
-4.	单击“发布”以发布 Runbook 的新版本。
-5.	停止在上一步中启动的虚拟机。
-6.	单击“启动”以启动 Runbook。键入要启动的虚拟机的 **VMName** 和 **ResourceGroupName**。
-7.	一旦 Runbook 完成后，检查已启动的虚拟机。
+2. 保存 Runbook 并打开“测试”窗格。请注意，现在可以为将在测试中使用的两个输入变量提供值。
+3. 关闭“测试”窗格。
+4. 单击“发布”以发布 Runbook 的新版本。
+5. 停止在上一步中启动的虚拟机。
+6. 单击“启动”以启动 Runbook。键入要启动的虚拟机的 **VMName** 和 **ResourceGroupName**。
+7. 一旦 Runbook 完成后，检查已启动的虚拟机。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

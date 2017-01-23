@@ -1,28 +1,25 @@
-<properties 
-	pageTitle="Media Encoder Standard 格式和编解码器" 
-	description="本主题概述 Media Encoder Standard 格式和编解码器。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: Media Encoder Standard 格式和编解码器
+description: 本主题概述 Media Encoder Standard 格式和编解码器。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="10/10/2016"
-	wacn.date="12/16/2016"
-	ms.author="juliako;anilmur"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 12/16/2016
+ms.author: juliako;anilmur
+---
 
 #Media Encoder Standard 格式和编解码器
 
-
 本文档包含最常见的导入和导出文件格式的列表，可以将这些格式用于 Media Encoder Standard。
-
 
 ##输入容器/文件格式
 
@@ -39,7 +36,7 @@ MP4（.mp4、.m4a、.m4v）/ISMV（.isma、.ismv）|是
 Matroska/WebM (.mkv) |是 
 WAVE/WAV (.wav) |是 
 QuickTime (.mov) |是
- 
+
 ###输入容器中的音频格式 
 
 Media Encoder Standard 支持在输入容器中带有以下音频格式：
@@ -51,7 +48,6 @@ Media Encoder Standard 支持在输入容器中带有以下音频格式：
 - MXF、GXF 和 QuickTime 文件，其中的音频以独立 PCM 轨道的形式携带，但可以从文件元数据推导频道映射（到立体声或 5.1 的映射）
 
 注意，不久的将来会提供对显式/用户提供的频道映射的支持。
-
 
 ##输入视频编解码器
 
@@ -76,8 +72,6 @@ Apple ProRes Proxy|是
 Apple ProRes 4444 |是
 Apple ProRes 4444 XQ |是
 
-
-
 ##输入音频编解码器
 
 输入音频编解码器|支持
@@ -96,22 +90,19 @@ Dolby® E |否
 Dolby® Digital (AC3) |否 
 Dolby® Digital Plus (E-AC3) |否 
 
-
 ##输出格式和编解码器
 
 下表列出了支持导出操作的编解码器和文件格式。
-
 
 文件格式|视频编解码器|音频编解码器
 ---|---|---
 MP4<br/><br/>（包括多比特率 MP4 容器） |H.264（High、Main 和 Baseline Profile）|AAC-LC、HE-AAC v1、HE-AAC v2 
 MPEG2-TS |H.264（High、Main 和 Baseline Profile）|AAC-LC、HE-AAC v1、HE-AAC v2 
 
-
 ##另请参阅
 
-[使用 Azure 媒体服务对按需内容进行编码](/documentation/articles/media-services-encode-asset/)
+[使用 Azure 媒体服务对按需内容进行编码](./media-services-encode-asset.md)
 
-[如何使用 Media Encoder Standard 进行编码](/documentation/articles/media-services-dotnet-encode-with-media-encoder-standard/)
+[如何使用 Media Encoder Standard 进行编码](./media-services-dotnet-encode-with-media-encoder-standard.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

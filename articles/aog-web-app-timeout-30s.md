@@ -1,18 +1,17 @@
-<properties
-	pageTitle="使用应用程序网关网页载入超过 30 秒（错误代码 502）的解决方法"
-	description="如何解决载入超过 30 秒出现 502 错误"
-	services="application-gateway"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 使用应用程序网关网页载入超过 30 秒（错误代码 502）的解决方法
+description: 如何解决载入超过 30 秒出现 502 错误
+services: application-gateway
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="application-gateway-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/03/2016"/>
-
+ms.service: application-gateway-aog
+ms.date: 10/27/2016
+wacn.date: 11/03/2016
+---
 
 #使用应用程序网关网页载入超过 30 秒（错误代码 502）的解决方法
 
@@ -23,9 +22,11 @@
 ###现象：
 
 问题发生时，网页会显示如下错误信息：
-	
-	502 - Web server received an invalid response while acting as a gateway or proxy server.
-	There is a problem with the page you are looking for, and it cannot be displayed. When the Web server (while acting as a gateway or proxy) contacted the upstream content server, it received an invalid response from the content server.
+
+```
+502 - Web server received an invalid response while acting as a gateway or proxy server.
+There is a problem with the page you are looking for, and it cannot be displayed. When the Web server (while acting as a gateway or proxy) contacted the upstream content server, it received an invalid response from the content server.
+```
 
 ###解决方法：
 
@@ -39,30 +40,32 @@
 
 1. 运行下面的 PowerShell 命令导出应用程序网关的配置信息。
 
-		Get-AzureApplicationGatewayConfig -Name <application gateway name> -Exporttofile "<path to file>"
+    ```
+    Get-AzureApplicationGatewayConfig -Name <application gateway name> -Exporttofile "<path to file>"
+    ```
 
 2. 打开导出的文件并找到 BackendHttpSettingsList 部分，修改 RequestTimeout 的值。该值的单位为秒，可以配置为 1 到 86400，可以根据实际的情况进行修改。
-	
-	    <BackendHttpSettingsList>
-	        <BackendHttpSettings>
-	            <Name>BackendSetting1</Name>
-	            <Port>8180</Port>
-	            <Protocol>Http</Protocol>
-	            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
-	           <RequestTimeout>120</RequestTimeout>
-	        </BackendHttpSettings>
-	    </BackendHttpSettingsList>
+
+    ```
+    <BackendHttpSettingsList>
+        <BackendHttpSettings>
+            <Name>BackendSetting1</Name>
+            <Port>8180</Port>
+            <Protocol>Http</Protocol>
+            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
+           <RequestTimeout>120</RequestTimeout>
+        </BackendHttpSettings>
+    </BackendHttpSettingsList>
+    ```
 
 3. 运行下面的命令对应用程序网关进行配置。
 
-		Set-AzureApplicationGatewayConfig -Name <application gateway name> -Configfile "<path to file>"
+    ```
+    Set-AzureApplicationGatewayConfig -Name <application gateway name> -Configfile "<path to file>"
+    ```
 
 >注意：请使用最新版本的 Azure PowerShell 来进行配置，如果使用的 PowerShell 版本较老可能会导致该操作不成功。
 
 对于使用 ARM 模式创建的应用程序网关，我们可以直接在 Portal 直接进行配置。如下图所示，点击 HTTP 设置，选中某一条 HTTP 设置可以在请求超时部分进行配置。
 
 ![](./media/aog-web-app-timeout-30s/timeout.png)
-
-
- 
-

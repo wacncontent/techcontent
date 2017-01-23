@@ -1,27 +1,26 @@
-<properties
-    pageTitle="为 Azure 导入/导出的导入作业准备硬盘驱动器 | Azure"
-    description="了解如何使用 WAImportExport 工具准备硬盘驱动器，以便为 Azure 导入/导出服务创建导入作业。"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 为 Azure 导入/导出的导入作业准备硬盘驱动器 | Azure
+description: 了解如何使用 WAImportExport 工具准备硬盘驱动器，以便为 Azure 导入/导出服务创建导入作业。
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/16/2016"
-    wacn.date="01/11/2016"
-    ms.author="renash" />  
-
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/16/2016
+wacn.date: 01/11/2016
+ms.author: renash
+---
 
 # 为导入作业准备硬盘驱动器
 ## 概述
 
-WAImportExport 工具是可与 [Azure 导入/导出服务](/documentation/articles/storage-import-export-service/)一起使用的驱动器准备和修复工具。可以使用此工具将数据复制到要寄送给 Azure 数据中心的硬盘驱动器。完成某个导入作业后，可以使用此工具修复已损坏、丢失或与其他 Blob 冲突的任何 Blob。通过某个已完成的导出作业收到驱动器后，可以使用此工具修复这些驱动器上已损坏或丢失的任何文件。本文讲解此工具的工作原理。
+WAImportExport 工具是可与 [Azure 导入/导出服务](./storage-import-export-service.md)一起使用的驱动器准备和修复工具。可以使用此工具将数据复制到要寄送给 Azure 数据中心的硬盘驱动器。完成某个导入作业后，可以使用此工具修复已损坏、丢失或与其他 Blob 冲突的任何 Blob。通过某个已完成的导出作业收到驱动器后，可以使用此工具修复这些驱动器上已损坏或丢失的任何文件。本文讲解此工具的工作原理。
 
 ## 先决条件
 
@@ -72,11 +71,11 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](/documentation/articl
 
 ### 示例 dataset.csv
 
-
-	BasePath,DstBlobPathOrPrefix,BlobType,Disposition,MetadataFile,PropertiesFile
-	"F:\50M_original\100M_1.csv.txt","containername/100M_1.csv.txt",BlockBlob,rename,"None",None
-	"F:\50M_original","containername/",BlockBlob,rename,"None",None
-
+```
+BasePath,DstBlobPathOrPrefix,BlobType,Disposition,MetadataFile,PropertiesFile
+"F:\50M_original\100M_1.csv.txt","containername/100M_1.csv.txt",BlockBlob,rename,"None",None
+"F:\50M_original","containername/",BlockBlob,rename,"None",None
+```
 
 ### 数据集 CSV 文件字段
 
@@ -84,9 +83,9 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](/documentation/articl
 | --- | --- |
 | BasePath | <p>**[必需]**</p><p>此参数的值表示要导入的数据所在的源。工具将以递归方式复制此路径下的所有数据。</p><p>**允许的值**：必须是本地计算机上的有效路径，或者可由用户访问的有效共享路径。目录路径必须是绝对路径（而不是相对路径）。如果路径以“\\”结尾，则表示目录；如果路径不以“\\”结尾，则表示文件。</p><p>不允许在此字段中指定正则表达式。如果路径包含空格，请将路径括在 "" 中。</p><p>**示例**："c:\\Directory\\c\\Directory\\File.txt"<br>"\\\FBaseFilesharePath.domain.net\\sharename\\directory 1" |
 | DstBlobPathOrPrefix | <p>**[必需]**</p><p> Azure 存储帐户中的目标虚拟目录的路径。虚拟目录可能存在，也可能不存在。如果不存在，导入/导出服务将创建一个虚拟目录。</p><p>在指定目标虚拟目录或 Blob 时，请确保使用有效的容器名称。请记住，容器名称必须是小写的。有关容器命名规则，请参阅 [Naming and Referencing Containers, Blobs, and Metadata](https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/naming-and-referencing-containers--blobs--and-metadata)（命名和引用容器、Blob 与元数据）。如果仅指定根，则源的目录结构将目标 Blob 容器中复制。如果所需的目录结构不同于源中的目录结构，可在 CSV 中包含多个映射行</p><p>可以指定容器，或者指定类似于 music/70s/ 的 Blob 前缀。目标目录必须以容器名称开头，后跟正斜杠“/”，并且可以选择包含以“/”结尾的虚拟 Blob 目录。</p><p>当目标容器为根容器时，必须显式指定包含正斜杠的根容器（如 $root/）。由于根容器下的 Blob 的名称中不能包含“/”，因此当目标目录为根容器时，将不会复制源目录中的任何子目录。</p><p>**示例**</p><p>如果目标 Blob 路径为 https://mystorageaccount.blob.core.chinacloudapi.cn/video，则此字段的值可以是 video</p> |
-| /BlobType | <p>**[可选]** block \| page</p><p>导入/导出服务目前支持 2 种 Blob：页 Blob 和块 Blob。默认情况下，所有文件将以块 Blob 的形式导入。*.vhd 和 *.vhdx 将以页 Blob 的形式导入。块 Blob 和页 Blob 的允许大小有限制。有关详细信息，请参阅 [Storage scalability targets](/documentation/articles/storage-scalability-targets/#scalability-targets-for-blobs-queues-tables-and-files)（存储可伸缩性目标）。</p> |
+| /BlobType | <p>**[可选]** block \| page</p><p>导入/导出服务目前支持 2 种 Blob：页 Blob 和块 Blob。默认情况下，所有文件将以块 Blob 的形式导入。*.vhd 和 *.vhdx 将以页 Blob 的形式导入。块 Blob 和页 Blob 的允许大小有限制。有关详细信息，请参阅 [Storage scalability targets](./storage-scalability-targets.md#scalability-targets-for-blobs-queues-tables-and-files)（存储可伸缩性目标）。</p> |
 | Disposition | <p>**[可选]** rename \| no-overwrite \| overwrite </p><p>此字段指定导入期间（将数据从磁盘上载到存储帐户时）的复制行为。可用选项包括：rename\|overwite\|no-overwrite.。如果未指定任何值，则默认为“rename”。</p><p>**Rename**：如果存在同名的对象，则在目标中创建一个副本。</p><p>Overwrite：将文件覆盖为更新的文件。使用最近一次修改的文件覆盖。</p><p>**No-overwrite**：跳过文件写入（如果该文件已存在）。</p>|
-| MetadataFile | <p>**[可选]**</p><p>此字段的值是用户需要保留对象的元数据或者提供自定义元数据时可提供的元数据文件。目标 Blob 的元数据文件的路径。有关详细信息，请参阅[导入/导出服务元数据和属性文件格式](/documentation/articles/storage-import-export-file-format-metadata-and-properties/)</p> |
+| MetadataFile | <p>**[可选]**</p><p>此字段的值是用户需要保留对象的元数据或者提供自定义元数据时可提供的元数据文件。目标 Blob 的元数据文件的路径。有关详细信息，请参阅[导入/导出服务元数据和属性文件格式](./storage-import-export-file-format-metadata-and-properties.md)</p> |
 | PropertiesFile | <p>**[可选]**</p><p>目标 Blob 的属性文件的路径。有关详细信息，请参阅[导入/导出服务元数据和属性文件格式](https://docs.microsoft.com/zh-CN/rest/api/storageservices/importexport/import-export-service-metadata-and-properties-file-format)。</p> |
 
 ##<a name="prepare-initialdriveset-or-additionaldriveset-csv-file"></a> 准备 InitialDriveSet 或 AdditionalDriveSet CSV 文件
@@ -103,11 +102,11 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](/documentation/articl
 
 ### 示例 InitialDriveSet 和 AdditionalDriveSet CSV 文件
 
-
-	DriveLetter,FormatOption,SilentOrPromptOnFormat,Encryption,ExistingBitLockerKey
-	G,AlreadyFormatted,SilentMode,AlreadyEncrypted,060456-014509-132033-080300-252615-584177-672089-411631
-	H,Format,SilentMode,Encrypt,
-
+```
+DriveLetter,FormatOption,SilentOrPromptOnFormat,Encryption,ExistingBitLockerKey
+G,AlreadyFormatted,SilentMode,AlreadyEncrypted,060456-014509-132033-080300-252615-584177-672089-411631
+H,Format,SilentMode,Encrypt,
+```
 
 ### 驱动器集 CSV 文件字段
 
@@ -127,59 +126,60 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](/documentation/articl
 
 将单个/多个目录复制到单个/多个磁盘（具体取决于 CSV 文件中的指定）的第一个复制会话。可以使用 PrepImport 命令调用 WAImportExport 工具，在第一个复制会话中使用一个新的复制会话来复制目录和/或文件：
 
-
-	WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] [/sk:<StorageAccountKey>] [/silentmode] [/InitialDriveSet:<driveset.csv>] DataSet:<dataset.csv>
-
+```
+WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] [/sk:<StorageAccountKey>] [/silentmode] [/InitialDriveSet:<driveset.csv>] DataSet:<dataset.csv>
+```
 
 **示例：**
 
-
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#1  /sk:************* /InitialDriveSet:driveset-1.csv /DataSet:dataset-1.csv /logdir:F:\logs
-
+```
+WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#1  /sk:************* /InitialDriveSet:driveset-1.csv /DataSet:dataset-1.csv /logdir:F:\logs
+```
 
 ### 在后续会话中添加数据
 
 在后续复制会话中，无需指定初始参数。需要使用相同的日记文件，使工具能够记住上一会话的暂停位置。复制会话的状态将写入日记文件。下面是用于复制目录和/或文件的后续复制会话的语法：
 
-
-	WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<DifferentSessionId>  [DataSet:<differentdataset.csv>]
-
+```
+WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<DifferentSessionId>  [DataSet:<differentdataset.csv>]
+```
 
 **示例：**
 
-
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2  /DataSet:dataset-2.csv
-
+```
+WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2  /DataSet:dataset-2.csv
+```
 
 ### 将驱动器添加到最新的会话
 
 如果数据无法放入 InitialDriveset 中指定的驱动器，可以使用该工具将其他驱动器添加到同一个复制会话。
 
->[AZURE.NOTE] 会话 ID 应与上一个会话 ID 匹配。日记文件应与上一个会话中指定的文件匹配。
+>[!NOTE]
+> 会话 ID 应与上一个会话 ID 匹配。日记文件应与上一个会话中指定的文件匹配。
 
-
-	WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<SameSessionId> /AdditionalDriveSet:<newdriveset.csv>
-
+```
+WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<SameSessionId> /AdditionalDriveSet:<newdriveset.csv>
+```
 
 **示例：**
 
-
-	WAImportExport.exe PrepImport /j:SameJournalTest.jrn /id:session#2  /AdditionalDriveSet:driveset-2.csv
-
+```
+WAImportExport.exe PrepImport /j:SameJournalTest.jrn /id:session#2  /AdditionalDriveSet:driveset-2.csv
+```
 
 ### 中止最新会话：
 
 如果复制会话已中断且无法恢复（例如，如果源目录被证实不可访问），则必须中止当前会话，以便可将其回滚并启动新的复制会话：
 
-
-	WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<SameSessionId> /AbortSession
-
+```
+WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<SameSessionId> /AbortSession
+```
 
 **示例：**
 
-
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2  /AbortSession
-
+```
+WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2  /AbortSession
+```
 
 如果异常终止，则只能中止最后的复制会话。请注意，无法中止驱动器的第一个复制会话。在此情况下，必须重新启动包含新日记文件的复制会话。
 
@@ -187,17 +187,18 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](/documentation/articl
 
 如果复制会话因任何原因导致中断，可通过在仅指定日记文件的情况下运行该工具来恢复会话：
 
-
-	WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<SameSessionId> /ResumeSession
-
+```
+WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<SameSessionId> /ResumeSession
+```
 
 **示例：**
 
+```
+WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /ResumeSession
+```
 
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /ResumeSession
-
-
-> [AZURE.IMPORTANT] 恢复复制会话时，请不要通过添加或删除文件来修改源数据文件和目录。
+> [!IMPORTANT]
+> 恢复复制会话时，请不要通过添加或删除文件来修改源数据文件和目录。
 
 ## WAImportExport 参数
 
@@ -226,76 +227,76 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](/documentation/articl
 
 ### 示例驱动器清单文件
 
-
-	<?xml version="1.0" encoding="UTF-8"?>
-	<DriveManifest Version="2011-MM-DD">
-	   <Drive>
-	      <DriveId>drive-id</DriveId>
-	      <StorageAccountKey>storage-account-key</StorageAccountKey>
-	      <ClientCreator>client-creator</ClientCreator>
-	      <!-- First Blob List -->
-	      <BlobList Id="session#1-0">
-	         <!-- Global properties and metadata that applies to all blobs -->
-	         <MetadataPath Hash="md5-hash">global-metadata-file-path</MetadataPath>
-	         <PropertiesPath Hash="md5-hash">global-properties-file-path</PropertiesPath>
-	         <!-- First Blob -->
-	         <Blob>
-	            <BlobPath>blob-path-relative-to-account</BlobPath>
-	            <FilePath>file-path-relative-to-transfer-disk</FilePath>
-	            <ClientData>client-data</ClientData>
-	            <Length>content-length</Length>
-	            <ImportDisposition>import-disposition</ImportDisposition>
-	            <!-- page-range-list-or-block-list -->
-	            <!-- page-range-list -->
-	            <PageRangeList>
-	               <PageRange Offset="1073741824" Length="512" Hash="md5-hash" />
-	               <PageRange Offset="1073741824" Length="512" Hash="md5-hash" />
-	            </PageRangeList>
-	            <!-- block-list -->
-	            <BlockList>
-	               <Block Offset="1073741824" Length="4194304" Id="block-id" Hash="md5-hash" />
-	               <Block Offset="1073741824" Length="4194304" Id="block-id" Hash="md5-hash" />
-	            </BlockList>
-	            <MetadataPath Hash="md5-hash">metadata-file-path</MetadataPath>
-	            <PropertiesPath Hash="md5-hash">properties-file-path</PropertiesPath>
-	         </Blob>
-	      </BlobList>
-	   </Drive>
-	</DriveManifest>
-
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<DriveManifest Version="2011-MM-DD">
+   <Drive>
+      <DriveId>drive-id</DriveId>
+      <StorageAccountKey>storage-account-key</StorageAccountKey>
+      <ClientCreator>client-creator</ClientCreator>
+      <!-- First Blob List -->
+      <BlobList Id="session#1-0">
+         <!-- Global properties and metadata that applies to all blobs -->
+         <MetadataPath Hash="md5-hash">global-metadata-file-path</MetadataPath>
+         <PropertiesPath Hash="md5-hash">global-properties-file-path</PropertiesPath>
+         <!-- First Blob -->
+         <Blob>
+            <BlobPath>blob-path-relative-to-account</BlobPath>
+            <FilePath>file-path-relative-to-transfer-disk</FilePath>
+            <ClientData>client-data</ClientData>
+            <Length>content-length</Length>
+            <ImportDisposition>import-disposition</ImportDisposition>
+            <!-- page-range-list-or-block-list -->
+            <!-- page-range-list -->
+            <PageRangeList>
+               <PageRange Offset="1073741824" Length="512" Hash="md5-hash" />
+               <PageRange Offset="1073741824" Length="512" Hash="md5-hash" />
+            </PageRangeList>
+            <!-- block-list -->
+            <BlockList>
+               <Block Offset="1073741824" Length="4194304" Id="block-id" Hash="md5-hash" />
+               <Block Offset="1073741824" Length="4194304" Id="block-id" Hash="md5-hash" />
+            </BlockList>
+            <MetadataPath Hash="md5-hash">metadata-file-path</MetadataPath>
+            <PropertiesPath Hash="md5-hash">properties-file-path</PropertiesPath>
+         </Blob>
+      </BlobList>
+   </Drive>
+</DriveManifest>
+```
 
 ### 每个驱动器的示例日记文件：以 .xml 结尾
 
-
-	[BeginUpdateRecord][2016/11/01 21:22:25.379][Type:ActivityRecord]
-	ActivityId: DriveInfo
-	DriveState: [BeginValue]
-	<?xml version="1.0" encoding="UTF-8"?>
-	<Drive>
-	   <DriveId>drive-id</DriveId>
-	   <BitLockerKey>*******</BitLockerKey>
-	   <ManifestFile>\DriveManifest.xml</ManifestFile>
-	   <ManifestHash>D863FE44F861AE0DA4DCEAEEFFCCCE68</ManifestHash> </Drive>
-	[EndValue]
-	SaveCommandOutput: Completed
-	[EndUpdateRecord]
-
+```
+[BeginUpdateRecord][2016/11/01 21:22:25.379][Type:ActivityRecord]
+ActivityId: DriveInfo
+DriveState: [BeginValue]
+<?xml version="1.0" encoding="UTF-8"?>
+<Drive>
+   <DriveId>drive-id</DriveId>
+   <BitLockerKey>*******</BitLockerKey>
+   <ManifestFile>\DriveManifest.xml</ManifestFile>
+   <ManifestHash>D863FE44F861AE0DA4DCEAEEFFCCCE68</ManifestHash> </Drive>
+[EndValue]
+SaveCommandOutput: Completed
+[EndUpdateRecord]
+```
 
 ### 会话的示例日记文件：以 .jrn 结尾，记录会话跟踪
 
-
-	[BeginUpdateRecord][2016/11/02 18:24:14.735][Type:NewJournalFile]
-	VocabularyVersion: 2013-02-01
-	[EndUpdateRecord]
-	[BeginUpdateRecord][2016/11/02 18:24:14.749][Type:ActivityRecord]
-	ActivityId: PrepImportDriveCommandContext
-	LogDirectory: F:\logs
-	[EndUpdateRecord]
-	[BeginUpdateRecord][2016/11/02 18:24:14.754][Type:ActivityRecord]
-	ActivityId: PrepImportDriveCommandContext
-	StorageAccountKey: *******
-	[EndUpdateRecord]
-
+```
+[BeginUpdateRecord][2016/11/02 18:24:14.735][Type:NewJournalFile]
+VocabularyVersion: 2013-02-01
+[EndUpdateRecord]
+[BeginUpdateRecord][2016/11/02 18:24:14.749][Type:ActivityRecord]
+ActivityId: PrepImportDriveCommandContext
+LogDirectory: F:\logs
+[EndUpdateRecord]
+[BeginUpdateRecord][2016/11/02 18:24:14.754][Type:ActivityRecord]
+ActivityId: PrepImportDriveCommandContext
+StorageAccountKey: *******
+[EndUpdateRecord]
+```
 
 ##<a name="faq"></a> 常见问题
 
@@ -311,7 +312,7 @@ WAImportExport 工具是可与 Azure 导入/导出服务一起使用的驱动器
 
 #### 在哪里可以找到上一个版本的 WAImportExport 工具？
 
-WAImportExport 工具包含 WAImportExport V1 工具所提供的全部功能。用户可以使用 WAImportExport 工具指定多个源以及写入多个驱动器。此外，用户可以轻松管理要在其中以单个 CSV 文件复制数据的源位置。但是，如果需要 SAS 支持或者要将单个源复制到单个磁盘，可以[下载 WAImportExport V1 工具](http://go.microsoft.com/fwlink/?LinkID=301900&amp;clcid=0x409)并参阅 [WAImportExport V1 Reference](/documentation/articles/storage-import-export-tool-how-to-v1/)（WAImportExport V1 参考），获取 WAImportExport V1 用法的帮助。
+WAImportExport 工具包含 WAImportExport V1 工具所提供的全部功能。用户可以使用 WAImportExport 工具指定多个源以及写入多个驱动器。此外，用户可以轻松管理要在其中以单个 CSV 文件复制数据的源位置。但是，如果需要 SAS 支持或者要将单个源复制到单个磁盘，可以[下载 WAImportExport V1 工具](http://go.microsoft.com/fwlink/?LinkID=301900&amp;clcid=0x409)并参阅 [WAImportExport V1 Reference](./storage-import-export-tool-how-to-v1.md)（WAImportExport V1 参考），获取 WAImportExport V1 用法的帮助。
 
 #### 会话 ID 是什么？
 
@@ -347,13 +348,13 @@ SessionId 可以包含字母、0~9、下划线 (\_)、短划线 (-) 或井号 (#
 
 ![检查 BitLocker](./media/storage-import-export-tool-preparing-hard-drives-import/BitLocker.png)  
 
-
 有关如何启用 BitLocker，请参阅[此文](https://technet.microsoft.com/zh-cn/library/cc766295.aspx)
 
 有可能你的计算机不带 tpm 芯片。如果使用 tpm.msc 未返回任何输出，请查看下一条常见问题。
 
 #### 如何在 BitLocker 中禁用受信任的平台模块 (TPM)？
-> [AZURE.NOTE] 仅当服务器中没有 TPM 时，才需要禁用 TPM 策略。如果用户的服务器中有受信任的 TPM，则不需要禁用 TPM。
+> [!NOTE]
+> 仅当服务器中没有 TPM 时，才需要禁用 TPM 策略。如果用户的服务器中有受信任的 TPM，则不需要禁用 TPM。
 
 若要在 BitLocker 中禁用 TPM，请执行以下步骤：
 

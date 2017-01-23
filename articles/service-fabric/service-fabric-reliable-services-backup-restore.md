@@ -1,26 +1,28 @@
-<properties
-    pageTitle="Service Fabric 备份和还原 | Azure"
-    description="Service Fabric 备份和还原的概念文档"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="mcoskun"
-    manager="timlt"
-    editor="subramar,jessebenson" />
-<tags
-    ms.assetid="91ea6ca4-cc2a-4155-9823-dcbd0b996349"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/18/2016"
-    wacn.date="12/26/2016"
-    ms.author="mcoskun" />
+---
+title: Service Fabric 备份和还原 | Azure
+description: Service Fabric 备份和还原的概念文档
+services: service-fabric
+documentationcenter: .net
+author: mcoskun
+manager: timlt
+editor: subramar,jessebenson
+
+ms.assetid: 91ea6ca4-cc2a-4155-9823-dcbd0b996349
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/18/2016
+wacn.date: 12/26/2016
+ms.author: mcoskun
+---
 
 # 备份和还原 Reliable Services 及 Reliable Actors
 Azure Service Fabric 是一个高可用性平台，用于复制多个节点中的状态以维护此高可用性。因此，即使群集中的一个节点出现故障，服务也将继续可用。尽管此平台提供的此内置冗余对某些情况来说可能已足够用了，但在特定情况下，仍需要服务备份数据（到外部存储）。
 
->[AZURE.NOTE] 请务必备份和还原你的数据（并测试它是否正常运行），以便从数据丢失情形中恢复。
+>[!NOTE]
+> 请务必备份和还原你的数据（并测试它是否正常运行），以便从数据丢失情形中恢复。
 
 例如，在以下情况下，服务可能要备份数据：
 
@@ -42,11 +44,9 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 ![完整备份示例。](./media/service-fabric-reliable-services-backup-restore/FullBackupExample.PNG)  
 
-
 此问题的解决方案是增量备份，这种备份只备份自上次备份以来的日志记录。
 
 ![增量备份示例。](./media/service-fabric-reliable-services-backup-restore/IncrementalBackupExample.PNG)
-
 
 由于增量备份只在自上次备份以来更改（不包括检查点），因此它们往往更快，但无法自行还原。若要还原增量备份，需要整个备份链。备份链是从完整备份开始，随后是一些连续增量备份的链。
 
@@ -57,13 +57,11 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 如下所示，**BackupAsync** 采用 **BackupDescription** 对象，用户可以在其中指定完整或增量备份，以及指定在本地创建备份文件夹并准备好移出到某个外部存储时调用的回调函数 **Func<< BackupInfo, CancellationToken, Task<bool>>>**。
 
+```
+BackupDescription myBackupDescription = new BackupDescription(backupOption.Incremental,this.BackupCallbackAsync);
 
-
-	BackupDescription myBackupDescription = new BackupDescription(backupOption.Incremental,this.BackupCallbackAsync);
-
-	await this.BackupAsync(myBackupDescription);
-
-
+await this.BackupAsync(myBackupDescription);
+```
 
 采用增量备份的请求可能会因 **FabricMissingFullBackupException** 而失败，该异常指示
 
@@ -71,22 +69,22 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 * 自上次备份被截断后记录了部分日志，或
 * 副本超出 **MaxAccumulatedBackupLogSizeInMB** 限制。
 
-用户可以配置 **MinLogSizeInMB** 或 **TruncationThresholdFactor**，提高能够执行增量备份的可能性。请注意，提高这些值会增加每个副本磁盘的使用量。有关详细信息，请参阅 [Reliable Services 配置](/documentation/articles/service-fabric-reliable-services-configuration/)
+用户可以配置 **MinLogSizeInMB** 或 **TruncationThresholdFactor**，提高能够执行增量备份的可能性。请注意，提高这些值会增加每个副本磁盘的使用量。有关详细信息，请参阅 [Reliable Services 配置](./service-fabric-reliable-services-configuration.md)
 
 **BackupInfo** 提供有关备份的信息，包括运行时在其中保存备份的文件夹的位置 (**BackupInfo.Directory**)。回调函数可以将 **BackupInfo.Directory** 移到外部存储或其他位置。此函数也返回一个布尔值，此值表示是否已成功将备份文件夹移动到其目标位置。
 
 以下代码演示如何使用 **BackupCallbackAsync** 方法将备份上传到 Azure 存储：
 
+```
+private async Task<bool> BackupCallbackAsync(BackupInfo backupInfo, CancellationToken cancellationToken)
+{
+    var backupId = Guid.NewGuid();
 
-	private async Task<bool> BackupCallbackAsync(BackupInfo backupInfo, CancellationToken cancellationToken)
-	{
-	    var backupId = Guid.NewGuid();
+    await externalBackupStore.UploadBackupFolderAsync(backupInfo.Directory, backupId, cancellationToken);
 
-	    await externalBackupStore.UploadBackupFolderAsync(backupInfo.Directory, backupId, cancellationToken);
-
-	    return true;
-	}
-
+    return true;
+}
+```
 
 在上面的示例中，**ExternalBackupStore** 是用于与 Azure Blob 存储连接的示例类，**UploadBackupFolderAsync** 是压缩文件夹并将其放在 Azure Blob 存储中的方法。
 
@@ -124,23 +122,23 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 以下是 **OnDataLossAsync** 方法的实现示例：
 
+```
+protected override async Task<bool> OnDataLossAsync(RestoreContext restoreCtx, CancellationToken cancellationToken)
+{
+    var backupFolder = await this.externalBackupStore.DownloadLastBackupAsync(cancellationToken);
 
+    var restoreDescription = new RestoreDescription(backupFolder);
 
-	protected override async Task<bool> OnDataLossAsync(RestoreContext restoreCtx, CancellationToken cancellationToken)
-	{
-	    var backupFolder = await this.externalBackupStore.DownloadLastBackupAsync(cancellationToken);
+    await restoreCtx.RestoreAsync(restoreDescription);
 
-	    var restoreDescription = new RestoreDescription(backupFolder);
-
-	    await restoreCtx.RestoreAsync(restoreDescription);
-
-	    return true;
-	}
-
+    return true;
+}
+```
 
 传入到 **RestoreContext.RestoreAsync** 调用的 **RestoreDescription** 包含一个名为 **BackupFolderPath** 的成员。还原单个完整备份时，此 **BackupFolderPath** 应设置为包含完整备份的文件夹的本地路径。还原一个完整备份和一些增量备份时，**BackupFolderPath** 应设置为包含完整备份以及所有增量备份的文件夹的本地路径。如果提供的 **BackupFolderPath** 不包含完整备份，则 **RestoreAsync** 调用可能会引发 **FabricMissingFullBackupException**。如果 **BackupFolderPath** 具有断开的增量备份链，则它还可能会引发 **ArgumentException**。例如，如果它包含完整备份、第一个增量备份和第三个增量备份，但不包含第二个增量备份。
 
->[AZURE.NOTE] 默认情况下，RestorePolicy 设置为安全。这表示，如果检测到备份文件夹中包含的状态早于或等于此副本中包含的状态，则 **RestoreAsync** API 会因 ArgumentException 而失败。可以使用 **RestorePolicy.Force** 来跳过此安全检查。这会指定为 **RestoreDescription** 的一部分。
+>[!NOTE]
+> 默认情况下，RestorePolicy 设置为安全。这表示，如果检测到备份文件夹中包含的状态早于或等于此副本中包含的状态，则 **RestoreAsync** API 会因 ArgumentException 而失败。可以使用 **RestorePolicy.Force** 来跳过此安全检查。这会指定为 **RestoreDescription** 的一部分。
 
 ## 删除或丢失服务
 
@@ -148,7 +146,8 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 从这个角度来看，实现操作与上述情况相同。每个分区需要从外部存储中还原最新的相关备份。值得注意的一点是，分区 ID 现在可能已更改，因为运行时是动态创建分区 ID。因此，此服务需要还原相应的分区信息和服务名称来标识每个分区要还原的正确的最新备份。
 
->[AZURE.NOTE] 不建议在每个分区上使用 **FabricClient.ServiceManager.InvokeDataLossAsync** 来还原整个服务，因为这可能会损坏群集状态。
+>[!NOTE]
+> 不建议在每个分区上使用 **FabricClient.ServiceManager.InvokeDataLossAsync** 来还原整个服务，因为这可能会损坏群集状态。
 
 ## 复制损坏的应用程序数据
 如果新部署的应用程序升级有一个 bug，则可能会导致数据损坏。例如，应用程序升级可能使用无效的区号更新可靠字典中的每个电话号码记录。在此情况下，将复制无效的电话号码，因为 Service Fabric 并不知道要存储的数据的性质。
@@ -171,13 +170,14 @@ Reliable Actors 的备份和还原以 Reliable Services 提供的备份和还原
 - 创建自定义执行组件服务时，必须在注册执行组件时注册自定义执行组件服务。请参阅 **ActorRuntime.RegistorActorAsync**。
 - **KvsActorStateProvider** 目前仅支持完整备份。而且 **KvsActorStateProvider** 会忽略 **RestorePolicy.Safe** 选项。
 
->[AZURE.NOTE] 默认 ActorStateProvider（即 **KvsActorStateProvider**）**不会**自己清理备份文件夹（在通过 ICodePackageActivationContext.WorkDirectory 获取的应用程序工作文件夹下）。这可能会导致填满工作文件夹。将备份移动到外部存储之后，应在备份回调中显式清理备份文件夹。
-
+>[!NOTE]
+> 默认 ActorStateProvider（即 **KvsActorStateProvider**）**不会**自己清理备份文件夹（在通过 ICodePackageActivationContext.WorkDirectory 获取的应用程序工作文件夹下）。这可能会导致填满工作文件夹。将备份移动到外部存储之后，应在备份回调中显式清理备份文件夹。
 
 ## 测试备份和还原
 请务必确保关键数据正在进行备份，并可进行还原。为此，可在 PowerShell 中调用会导致特定分区丢失数据的 **Invoke-ServiceFabricPartitionDataLoss** cmdlet，以测试服务的数据备份和还原功能是否按预期运行。此外，也可以通过编程方式调用数据丢失，并从该事件中还原。
 
->[AZURE.NOTE] 你可以在 Github 上找到 Web 引用应用中备份和还原功能的实现示例。有关更多详细信息，请查看 Inventory.Service 服务。
+>[!NOTE]
+> 你可以在 Github 上找到 Web 引用应用中备份和还原功能的实现示例。有关更多详细信息，请查看 Inventory.Service 服务。
 
 ## 表象之下：有关备份和还原的更多详细信息
 下面提供了有关备份和还原的更多详细信息。
@@ -193,10 +193,10 @@ Reliable Actors 的备份和还原以 Reliable Services 提供的备份和还原
 **RestoreAsync** 首先删除调用它的主要副本中的所有现有状态。之后，可靠状态管理器创建备份文件夹中存在的所有可靠对象。接下来，指示可靠对象从备份文件夹中的它们的检查点还原。最后，可靠性状态管理器从备份文件夹中的日志记录中恢复其自己的状态，并执行恢复。作为恢复过程的一部分，将对可靠对象重播从“起始点”开始的操作，该起始点已提交备份文件夹中的日志记录。此步骤可以确保恢复的状态是一致的。
 
 ## 后续步骤
-* [Reliable Collections](/documentation/articles/service-fabric-work-with-reliable-collections/)
-- [Reliable Services 快速启动](/documentation/articles/service-fabric-reliable-services-quick-start/)
-- [Reliable Services 通知](/documentation/articles/service-fabric-reliable-services-notifications/)
-* [Reliable Services 配置](/documentation/articles/service-fabric-reliable-services-configuration/)
+* [Reliable Collections](./service-fabric-work-with-reliable-collections.md)
+- [Reliable Services 快速启动](./service-fabric-reliable-services-quick-start.md)
+- [Reliable Services 通知](./service-fabric-reliable-services-notifications.md)
+* [Reliable Services 配置](./service-fabric-reliable-services-configuration.md)
 - [Reliable Collections 的开发人员参考](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicefabric.data.collections.aspx)
 
 <!---HONumber=Mooncake_1219_2016-->

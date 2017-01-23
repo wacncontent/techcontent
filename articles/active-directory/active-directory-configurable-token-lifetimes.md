@@ -1,30 +1,26 @@
-<properties
-   pageTitle="Azure Active Directory 中可配置的令牌生存期 | Azure"
-   description="管理员和开发人员可以使用此功能指定 Azure AD 颁发的令牌的生存期。"
-   services="active-directory"
-   documentationCenter=""
-   authors="billmath"
-   manager="femila"
-   editor=""/>  
+---
+title: Azure Active Directory 中可配置的令牌生存期 | Azure
+description: 管理员和开发人员可以使用此功能指定 Azure AD 颁发的令牌的生存期。
+services: active-directory
+documentationCenter: 
+authors: billmath
+manager: femila
+editor: 
 
-
-<tags
-   ms.service="active-directory"  
-   ms.workload="identity"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="10/06/2016"
-   wacn.date="10/31/2016"
-   ms.author="billmath"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/06/2016
+wacn.date: 10/31/2016
+ms.author: billmath
+---
 
 # Azure Active Directory 中可配置的令牌生存期（公共预览版）
 
->[AZURE.NOTE]
+>[!NOTE]
 此功能目前以公共预览版提供。读者应准备好还原或删除所做的任何更改。在公共预览版推出期间，任何人都可以随意试用此功能，但是，在正式版推出后，某些方面可能需要配合 Azure AD 高级订阅使用。
-
 
 ## 介绍
 管理员和开发人员可以使用此功能指定 Azure AD 颁发的令牌的生存期。可以针对租户中的所有应用、多租户应用程序或者租户中的特定服务主体配置令牌生存期。
@@ -34,7 +30,6 @@
 可将某个策略指定为租户的默认策略。然后，此策略将对该租户中的任何应用程序生效，只要此策略不被更高优先级的策略覆盖即可。此外，还可以将策略分配到特定的应用程序。优先顺序根据策略类型的不同而异。
 
 可为刷新令牌、访问令牌、会话令牌和 ID 令牌配置令牌生存期策略。
-
 
 ### 访问令牌
 客户端使用访问令牌来访问受保护的资源。访问令牌仅可用于用户、客户端和资源的特定组合。访问令牌不能吊销，在过期日期之前保持有效。获取了访问令牌的恶意行动者在访问令牌的生存期内一直可以使用它。调整访问令牌生存期的利弊是可以提高系统性能，但也会增加客户端在用户帐户禁用后保留访问权限的时间。通过减少客户端获取刷新访问令牌的次数可以实现系统性能的提升。
@@ -46,7 +41,6 @@
 机密客户端是能够安全存储客户端密码，可证实请求来自客户端应用程序而不是恶意行动者的应用程序。由于这些流程更加安全，因此颁发给这些流程的刷新令牌的默认生存期更长，无法使用策略更改。
 
 由于运行应用程序的环境有限制，公共客户端无法安全存储客户端密码。可以针对资源设置策略，防止使用公共客户端中超过指定期限的刷新令牌获取新的访问权限/刷新令牌对（刷新令牌最大非活动时间）。此外，可以使用策略设置一个时间段，超出该时间段后，刷新令牌不再被接受（刷新令牌最大期限）。通过调整刷新令牌生存期，可以控制用户在使用公共客户端应用程序时，需要重新输入凭据而不是以无提示方式重新进行身份验证的时间和频率。
-
 
 ### ID 令牌
 ID 令牌将传递给网站和本机客户端，包含有关用户的配置文件信息。ID 令牌绑定到用户和客户端的特定组合。在过期日期之前，ID 令牌保持有效。一般情况下，Web 应用程序会将应用程序中用户的会话生存期与针对该用户颁发的 ID 令牌的生存期进行匹配。通过调整 ID 令牌生存期，可以控制 Web 应用程序使应用程序会话过期，并要求用户在 Azure AD 上重新进行身份验证（以无提示方式或交互方式）的频率。
@@ -63,7 +57,6 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 ### 令牌生存期策略属性
 令牌生存期策略是一种策略对象，其中包含令牌生存期规则。策略的属性用于控制指定的令牌生存期。如果未设置策略，系统将强制实施默认生存期值。
 
-
 ### 可配置的令牌生存期属性
 属性|策略属性字符串|影响|默认|最小值|最大值|
 ----- | ----- | ----- |----- | ----- | ----- |
@@ -73,8 +66,6 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 多因素刷新令牌最大期限|	MaxAgeMultiFactor|	刷新令牌（适用于任何用户）|	90 天|10 分钟|直到吊销*|
 单因素会话令牌最大期限 |MaxAgeSessionSingleFactor** |会话令牌（持久性和非持久性）|	直到吊销* |10 分钟 |直到吊销*|
 多因素会话令牌最大期限|	MaxAgeSessionMultiFactor***|	会话令牌（持久性和非持久性）|	直到吊销*|	10 分钟|	直到吊销*
-
-
 
 - *365 天是可针对这些属性设置的最大显式时间长短。
 - **如果未设置 MaxAgeSessionSingleFactor，此值将采用 MaxAgeSingleFactor 值。如果未设置任一参数，该属性将采用默认值（直到吊销）。
@@ -91,18 +82,16 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 可以创建令牌生存期策略并将其分配到特定的应用程序、租户和服务主体。这意味着，可将多个策略应用到特定的应用程序。生效的令牌生存期策略遵循以下规则：
 
-
 - 如果将某个策略显式分配到服务主体，将强制实施该策略。
 - 如果未将策略显式分配到服务主体，则强制实施显式分配到服务主体的父租户的策略。
 - 如果未将策略显式分配到服务主体或租户，则强制实施分配到应用程序的策略。
 - 如果未将策略分配到服务主体、租户或应用程序对象，则强制实施默认值（请参阅上表）。
 
-有关 Azure AD 中应用程序对象与服务主体对象之间的关系的详细信息，请参阅 [Application and service principal objects in Azure Active Directory](/documentation/articles/active-directory-application-objects/)（Azure Active Directory 中的应用程序对象和服务主体对象）。
+有关 Azure AD 中应用程序对象与服务主体对象之间的关系的详细信息，请参阅 [Application and service principal objects in Azure Active Directory](./active-directory-application-objects.md)（Azure Active Directory 中的应用程序对象和服务主体对象）。
 
 使用令牌时，系统会评估其有效性。所访问的应用程序中具有最高优先级的策略将会生效。
 
-
->[AZURE.NOTE]
+>[!NOTE]
 ><p>
 ><p>示例
 ><p>
@@ -188,13 +177,11 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 如果能够创建和管理应用、服务主体和整个租户的令牌生存期，就可以在 Azure AD 中实现各种新的方案。下面逐步讲解一些常见的策略方案，帮助针对以下属性实施新规则：
 
-
 - 令牌生存期
 - 令牌最大非活动时间
 - 令牌最大期限
 
 逐步讲解的方案包括：
-
 
 - 管理租户的默认策略
 - 为 Web 登录创建策略
@@ -202,17 +189,20 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 - 管理高级策略
 
 ### 先决条件
-以下示例方案针对应用、服务主体和总个租户创建、更新、链接和删除策略。在学习这些示例之前，Azure AD 的新手应该先阅读[此文](/documentation/articles/active-directory-howto-tenant/)帮助自己入门。
-
+以下示例方案针对应用、服务主体和总个租户创建、更新、链接和删除策略。在学习这些示例之前，Azure AD 的新手应该先阅读[此文](./active-directory-howto-tenant.md)帮助自己入门。
 
 1. 若要开始，请下载最新的 [Azure AD PowerShell Cmdlet 预览版](https://www.powershellgallery.com/packages/AzureADPreview)。
-2.	获取 Azure AD PowerShell Cmdlet 后，运行 Connect 命令登录到 Azure AD 管理员帐户。每次启动新会话都需要执行此操作。
-        
-        Connect-AzureAD -Confirm
+2. 获取 Azure AD PowerShell Cmdlet 后，运行 Connect 命令登录到 Azure AD 管理员帐户。每次启动新会话都需要执行此操作。
 
-3.	运行以下命令，查看租户中创建的所有策略。在以下方案中执行大多数操作之后，都应该使用此命令。此命令还可帮助获取策略的**对象 ID**。
-        
-        Get-AzureADPolicy
+    ```
+    Connect-AzureAD -Confirm
+    ```
+
+3. 运行以下命令，查看租户中创建的所有策略。在以下方案中执行大多数操作之后，都应该使用此命令。此命令还可帮助获取策略的**对象 ID**。
+
+    ```
+Get-AzureADPolicy
+```
 
 ### 示例：管理租户的默认策略
 
@@ -220,74 +210,89 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 为此，可以针对应用到整个租户的单因素刷新令牌创建一个令牌生存期策略。此策略将应用到租户中的每个应用程序，以及尚未设置策略的每个服务主体。
 
-1.	**创建令牌生存期策略。**
+1. **创建令牌生存期策略。**
 
 将单因素刷新令牌设置为“直到吊销”，这意味着在吊销访问权限之前它都不会过期。要创建的策略定义如下：
-        
-        @("{
-          `"TokenLifetimePolicy`":
-              {
-                 `"Version`":1, 
-                 `"MaxAgeSingleFactor`":`"until-revoked`"
-              }
-        }")
+
+```
+    @("{
+      `"TokenLifetimePolicy`":
+          {
+             `"Version`":1, 
+             `"MaxAgeSingleFactor`":`"until-revoked`"
+          }
+    }")
+```
 
 然后，运行以下命令创建此策略。
 
-		
-    New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1, `"MaxAgeSingleFactor`":`"until-revoked`"}}") -DisplayName TenantDefaultPolicyScenario -IsTenantDefault $true -Type TokenLifetimePolicy
-		
+```
+New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1, `"MaxAgeSingleFactor`":`"until-revoked`"}}") -DisplayName TenantDefaultPolicyScenario -IsTenantDefault $true -Type TokenLifetimePolicy
+```
+
 若要查看新策略并获取其 ObjectID，请运行以下命令。
 
-	Get-AzureADPolicy
+```
+Get-AzureADPolicy
+```
 &nbsp;&nbsp;2.**更新策略**
 
 假设第一个策略不像服务要求的那样严格，单因素刷新令牌应该在 2 天后过期。运行以下命令。
-		
-	Set-AzureADPolicy -ObjectId <ObjectID FROM GET COMMAND> -DisplayName TenantDefaultPolicyUpdatedScenario -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxAgeSingleFactor`":`"2.00:00:00`"}}")
-		
+
+```
+Set-AzureADPolicy -ObjectId <ObjectID FROM GET COMMAND> -DisplayName TenantDefaultPolicyUpdatedScenario -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxAgeSingleFactor`":`"2.00:00:00`"}}")
+```
+
 &nbsp;&nbsp;3.**大功告成！**
 
 ### 示例：为 Web 登录创建策略
 
 本示例创建一个要求用户更频繁地在 Web 应用中进行身份验证的策略。此策略将会针对 Web 应用的服务主体设置访问/ID 令牌的生存期以及多因素会话令牌的最大期限。
 
-1.	**创建令牌生存期策略。**
+1. **创建令牌生存期策略。**
 
 这个用于 Web 登录的策略将访问/ID 令牌生存期和单因素会话令牌最大期限设置为 2 小时。
 
-	New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"AccessTokenLifetime`":`"02:00:00`",`"MaxAgeSessionSingleFactor`":`"02:00:00`"}}") -DisplayName WebPolicyScenario -IsTenantDefault $false -Type TokenLifetimePolicy
+```
+New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"AccessTokenLifetime`":`"02:00:00`",`"MaxAgeSessionSingleFactor`":`"02:00:00`"}}") -DisplayName WebPolicyScenario -IsTenantDefault $false -Type TokenLifetimePolicy
+```
 
 若要查看新策略并获取其 ObjectID，请运行以下命令。
 
-	Get-AzureADPolicy
+```
+Get-AzureADPolicy
+```
 &nbsp;&nbsp;2.**将策略分配到服务主体。**
 
 接下来，将此新策略链接到服务主体。还需要通过某种方式访问服务主体的 **ObjectId**。可以查询 [Microsoft Graph](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity) 或转到 [Graph Explorer Tool](https://graphexplorer.cloudapp.net/)，然后登录到 Azure AD 帐户，查看租户的所有服务主体。
 
 获取 **ObjectId** 后，运行以下命令。
-        
-	Add-AzureADServicePrincipalPolicy -ObjectId <ObjectID of the Service Principal> -RefObjectId <ObjectId of the Policy>
+
+```
+Add-AzureADServicePrincipalPolicy -ObjectId <ObjectID of the Service Principal> -RefObjectId <ObjectId of the Policy>
+```
 &nbsp;&nbsp;3.**大功告成！**
 
  
 
 ### 示例：为调用 Web API 的本机应用创建策略
 
->[AZURE.NOTE]
+>[!NOTE]
 将策略链接到应用程序的功能目前已禁用。我们正在努力，有望很快就会启用。一旦有新功能推出，此页面就会更新。
 
 在本示例中创建的策略不要求用户太频繁地进行身份验证，这会延长用户可保持非活动状态、不必再次身份验证的时间。该策略将应用到 Web API，因此，当本机应用以资源形式请求 Web API 时，将应用此策略。
 
-1.	**创建令牌生存期策略。**
+1. **创建令牌生存期策略。**
 
 此命令将为 Web API 创建一个严格的策略。
-        
-	New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxInactiveTime`":`"30.00:00:00`",`"MaxAgeMultiFactor`":`"until-revoked`",`"MaxAgeSingleFactor`":`"180.00:00:00`"}}") -DisplayName WebApiDefaultPolicyScenario -IsTenantDefault $false -Type TokenLifetimePolicy
-         
+
+```
+New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxInactiveTime`":`"30.00:00:00`",`"MaxAgeMultiFactor`":`"until-revoked`",`"MaxAgeSingleFactor`":`"180.00:00:00`"}}") -DisplayName WebApiDefaultPolicyScenario -IsTenantDefault $false -Type TokenLifetimePolicy
+```
+
 若要查看新策略并获取其 ObjectID，请运行以下命令。
 
-	Get-AzureADPolicy
+    Get-AzureADPolicy
 
 &nbsp;&nbsp;2.**将策略分配到 Web API**。
 
@@ -295,7 +300,9 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 获取 **ObjectId** 后，运行以下命令。
 
-	Add-AzureADApplicationPolicy -ObjectId <ObjectID of the App> -RefObjectId <ObjectId of the Policy>
+```
+Add-AzureADApplicationPolicy -ObjectId <ObjectID of the App> -RefObjectId <ObjectId of the Policy>
+```
 
 &nbsp;&nbsp;3.**大功告成！**
 
@@ -303,14 +310,16 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 本示例创建一些策略来演示优先级系统的工作原理，以及如何管理已应用到多个对象的多个策略。本示例可让我们深入了解上述策略的优先级，同时有助于管理更复杂的方案。
 
-1.	**创建令牌生存期策略**
+1. **创建令牌生存期策略**
 
 现在一切都很简单。我们已经创建了一个将单因素刷新令牌生存期设置为 30 天的租户默认策略。
 
-	New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxAgeSingleFactor`":`"30.00:00:00`"}}") -DisplayName ComplexPolicyScenario -IsTenantDefault $true -Type TokenLifetimePolicy
+```
+New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxAgeSingleFactor`":`"30.00:00:00`"}}") -DisplayName ComplexPolicyScenario -IsTenantDefault $true -Type TokenLifetimePolicy
+```
 若要查看新策略并获取其 ObjectID，请运行以下命令。
- 
-	Get-AzureADPolicy
+
+    Get-AzureADPolicy
 
 &nbsp;&nbsp;2.**将策略分配到服务主体**
 
@@ -320,31 +329,34 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 获取 **ObjectId** 后，运行以下命令。
 
-	Add-AzureADServicePrincipalPolicy -ObjectId <ObjectID of the Service Principal> -RefObjectId <ObjectId of the Policy>
+```
+Add-AzureADServicePrincipalPolicy -ObjectId <ObjectID of the Service Principal> -RefObjectId <ObjectId of the Policy>
+```
 
 &nbsp;&nbsp;3.**使用以下命令将 IsTenantDefault 标志设置为 false**。
 
-	Set-AzureADPolicy -ObjectId <ObjectId of Policy> -DisplayName ComplexPolicyScenario -IsTenantDefault $false
+```
+Set-AzureADPolicy -ObjectId <ObjectId of Policy> -DisplayName ComplexPolicyScenario -IsTenantDefault $false
+```
 &nbsp;&nbsp;4.**创建新的租户默认策略**
 
-	New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxAgeSingleFactor`":`"until-revoked`"}}") -DisplayName ComplexPolicyScenarioTwo -IsTenantDefault $true -Type TokenLifetimePolicy
+    New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxAgeSingleFactor`":`"until-revoked`"}}") -DisplayName ComplexPolicyScenarioTwo -IsTenantDefault $true -Type TokenLifetimePolicy
 
 &nbsp;&nbsp;5.**大功告成！**
 
 现在，已将原始策略链接到服务主体，已将新策略设置为租户默认策略。请务必记住，应用到服务主体的策略优先级高于租户默认策略。
-
 
 ## Cmdlet 参考
 
 ### 管理策略
 以下 cmdlet 可用于管理策略。</br></br>
 
-
-
 #### New-AzureADPolicy
 创建新策略。
 
-	New-AzureADPolicy -Definition <Array of Rules> -DisplayName <Name of Policy> -IsTenantDefault <boolean> -Type <Policy Type> 
+```
+New-AzureADPolicy -Definition <Array of Rules> -DisplayName <Name of Policy> -IsTenantDefault <boolean> -Type <Policy Type> 
+```
 
 参数|说明|示例|
 -----| ----- |-----|
@@ -357,8 +369,10 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 #### Get-AzureADPolicy         
 获取所有 AzureAD 策略或指定的策略
-        
-	Get-AzureADPolicy 
+
+```
+Get-AzureADPolicy 
+```
 
 参数|说明|示例|
 -----| ----- |-----|
@@ -367,8 +381,10 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 
 #### Get-AzureADPolicyAppliedObject         
 获取已链接到策略的所有应用和服务主体
-        
-	Get-AzureADPolicyAppliedObject -ObjectId <object id of policy> 
+
+```
+Get-AzureADPolicyAppliedObject -ObjectId <object id of policy> 
+```
 
 Parameters|说明|示例|
 -----| ----- |-----|
@@ -377,9 +393,11 @@ Parameters|说明|示例|
 
 #### Set-AzureADPolicy
 更新现有策略
-        
-	Set-AzureADPolicy -ObjectId <object id of policy> -DisplayName <string> 
- 
+
+```
+Set-AzureADPolicy -ObjectId <object id of policy> -DisplayName <string> 
+```
+
 参数|说明|示例|
 -----| ----- |-----|
 -ObjectId|要获取的策略的对象 ID。|-ObjectId &lt;策略的 ObjectID&gt;
@@ -393,7 +411,9 @@ Parameters|说明|示例|
 #### Remove-AzureADPolicy         
 删除指定的策略
 
-	Remove-AzureADPolicy -ObjectId <object id of policy>
+```
+Remove-AzureADPolicy -ObjectId <object id of policy>
+```
 
 参数|说明|示例|
 -----| ----- |-----|
@@ -406,7 +426,9 @@ Parameters|说明|示例|
 #### Add-AzureADApplicationPolicy         
 将指定的策略链接到应用程序
 
-	Add-AzureADApplicationPolicy -ObjectId <object id of application> -RefObjectId <object id of policy>
+```
+Add-AzureADApplicationPolicy -ObjectId <object id of application> -RefObjectId <object id of policy>
+```
 
 参数|说明|示例|
 -----| ----- |-----|
@@ -417,7 +439,9 @@ Parameters|说明|示例|
 #### Get-AzureADApplicationPolicy        
 获取已分配到应用程序的策略
 
-	Get-AzureADApplicationPolicy -ObjectId <object id of application>
+```
+Get-AzureADApplicationPolicy -ObjectId <object id of application>
+```
 
 参数|说明|示例|
 -----| ----- |-----|
@@ -427,7 +451,9 @@ Parameters|说明|示例|
 #### Remove-AzureADApplicationPolicy        
 从应用程序中删除策略
 
-	Remove-AzureADApplicationPolicy -ObjectId <object id of application> -PolicyId <object id of policy>
+```
+Remove-AzureADApplicationPolicy -ObjectId <object id of application> -PolicyId <object id of policy>
+```
 
 参数|说明|示例|
 -----| ----- |-----|
@@ -441,7 +467,9 @@ Parameters|说明|示例|
 #### Add-AzureADServicePrincipalPolicy         
 将指定的策略链接到服务主体
 
-	Add-AzureADServicePrincipalPolicy -ObjectId <object id of service principal> -RefObjectId <object id of policy>
+```
+Add-AzureADServicePrincipalPolicy -ObjectId <object id of service principal> -RefObjectId <object id of policy>
+```
 
 参数|说明|示例|
 -----| ----- |-----|
@@ -452,8 +480,10 @@ Parameters|说明|示例|
 #### Get-AzureADServicePrincipalPolicy        
 获取已链接到指定服务主体的任何策略
 
-	Get-AzureADServicePrincipalPolicy -ObjectId <object id of service principal>
- 
+```
+Get-AzureADServicePrincipalPolicy -ObjectId <object id of service principal>
+```
+
 参数|说明|示例|
 -----| ----- |-----|
 -ObjectId|应用程序的对象 ID。|-ObjectId &lt;应用程序的 ObjectID&gt; 
@@ -462,8 +492,10 @@ Parameters|说明|示例|
 #### Remove-AzureADServicePrincipalPolicy         
 从指定的服务主体中删除策略
 
-	Remove-AzureADServicePrincipalPolicy -ObjectId <object id of service principal>  -PolicyId <object id of policy>
- 
+```
+Remove-AzureADServicePrincipalPolicy -ObjectId <object id of service principal>  -PolicyId <object id of policy>
+```
+
 参数|说明|示例|
 -----| ----- |-----|
 -ObjectId|应用程序的对象 ID。|-ObjectId &lt;应用程序的 ObjectID&gt; 

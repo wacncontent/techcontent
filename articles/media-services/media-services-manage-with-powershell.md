@@ -1,33 +1,31 @@
-<properties 
-	pageTitle="使用 PowerShell 管理 Azure 媒体服务帐户" 
-	description="了解如何使用 PowerShell cmdlet 管理 Azure 媒体服务帐户。" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>  
+---
+title: 使用 PowerShell 管理 Azure 媒体服务帐户
+description: 了解如何使用 PowerShell cmdlet 管理 Azure 媒体服务帐户。
+authors: Juliako
+manager: erikre
+editor: 
+services: media-services
+documentationCenter: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="10/03/2016"
-	wacn.date="12/27/2016"
-	ms.author="juliako"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/03/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #使用 PowerShell 管理 Azure 媒体服务帐户
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/media-services-create-account/)
-- [PowerShell](/documentation/articles/media-services-manage-with-powershell/)
+> [!div class="op_single_selector"]
+- [门户](./media-services-create-account.md)
+- [PowerShell](./media-services-manage-with-powershell.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/media/management/create-media-services-account)
 
-> [AZURE.NOTE] 若要创建 Azure 媒体服务帐户，你必须有一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="/pricing/1rmb-trial/?WT.mc_id=A8A8397B5" target="_blank">Azure 试用</a>。
+> [!NOTE]
+> 若要创建 Azure 媒体服务帐户，你必须有一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A8A8397B5" target="_blank">Azure 试用</a>。
 
 ##概述 
 
@@ -36,7 +34,6 @@
 ## 版本
 
 **ApiVersion**：“2015-10-01”
-               
 
 ## New-AzureRmMediaService
 
@@ -46,11 +43,15 @@
 
 参数集：StorageAccountIdParamSet
 
-	New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccountId] <string> [-Tags <hashtable>]  [<CommonParameters>]
+```
+New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccountId] <string> [-Tags <hashtable>]  [<CommonParameters>]
+```
 
 参数集：StorageAccountsParamSet
 
-	New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccounts] <PSStorageAccount[]> [-Tags <hashtable>]  [<CommonParameters>]
+```
+New-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Location] <string> [-StorageAccounts] <PSStorageAccount[]> [-Tags <hashtable>]  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -158,7 +159,9 @@
 
 ### 语法
 
-	Set-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Tags <hashtable>] [-StorageAccounts <PSStorageAccount[]>]  [<CommonParameters>]
+```
+Set-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string> [-Tags <hashtable>] [-StorageAccounts <PSStorageAccount[]>]  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -237,7 +240,9 @@
 
 ### 语法
 
-	Remove-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
+Remove-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -285,11 +290,15 @@
 
 ParameterSet: ResourceGroupParameterSet
 
-	Get-AzureRmMediaService [-ResourceGroupName] <string>  [<CommonParameters>]	
+```
+Get-AzureRmMediaService [-ResourceGroupName] <string>  [<CommonParameters>]	
+```
 
 ParameterSet: AccountNameParameterSet
 
-	Get-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
+Get-AzureRmMediaService [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -337,7 +346,9 @@ ParameterSet: AccountNameParameterSet
 
 ### 语法
 
-	Get-AzureRmMediaServiceKeys [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
+Get-AzureRmMediaServiceKeys [-ResourceGroupName] <string> [-AccountName] <string>  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -383,7 +394,9 @@ ParameterSet: AccountNameParameterSet
 
 ### 语法
 
-	Set-AzureRmMediaServiceKey [-ResourceGroupName] <string> [-AccountName] <string> [-KeyType] <KeyType> {Primary | Secondary}  [<CommonParameters>]
+```
+Set-AzureRmMediaServiceKey [-ResourceGroupName] <string> [-AccountName] <string> [-KeyType] <KeyType> {Primary | Secondary}  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -443,7 +456,9 @@ ParameterSet: AccountNameParameterSet
 
 ### 语法
 
-	Sync-AzureRmMediaServiceStorageKeys [-ResourceGroupName] <string> [-MediaServiceAccountName] <string>    [-StorageAccountId] <string>  [<CommonParameters>]
+```
+Sync-AzureRmMediaServiceStorageKeys [-ResourceGroupName] <string> [-MediaServiceAccountName] <string>    [-StorageAccountId] <string>  [<CommonParameters>]
+```
 
 ### 参数
 
@@ -494,11 +509,5 @@ ParameterSet: AccountNameParameterSet
 ### 输出
 
 输出类型是 cmdlet 发出的对象类型。
-
-
-
-
-
- 
 
 <!---HONumber=Mooncake_1114_2016-->

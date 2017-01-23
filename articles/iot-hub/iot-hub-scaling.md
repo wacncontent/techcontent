@@ -1,22 +1,21 @@
-<properties
- pageTitle="Azure IoT 中心缩放 | Azure"
- description="如何缩放 IoT 中心来支持预期的消息吞吐量。概括介绍了分片选项和每层支持的吞吐量"
- services="iot-hub"
- documentationCenter=""
- authors="fsautomata"
- manager="timlt"
- editor=""/>  
+---
+title: Azure IoT 中心缩放 | Azure
+description: 如何缩放 IoT 中心来支持预期的消息吞吐量。概括介绍了分片选项和每层支持的吞吐量
+services: iot-hub
+documentationCenter: 
+authors: fsautomata
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/19/2016"
- wacn.date="01/13/2017"
- ms.author="elioda"/>  
-
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/19/2016
+wacn.date: 01/13/2017
+ms.author: elioda
+---
 
 # 缩放 IoT 中心
 
@@ -59,11 +58,11 @@ Azure IoT 中心支持多达一百万台设备同时连接。有关详细信息�
 - [开发人员指南][lnk-devguide]
 - [使用网关 SDK 模拟设备][lnk-gateway]
 
-[lnk-pricing]: /pricing/details/iot-hub/
-[IoT 中心配额和限制]: /documentation/articles/iot-hub-devguide-quotas-throttling/
+[lnk-pricing]: https://www.azure.cn/pricing/details/iot-hub/
+[IoT 中心配额和限制]: ./iot-hub-devguide-quotas-throttling.md
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

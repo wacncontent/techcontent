@@ -1,29 +1,31 @@
-<properties 
-	pageTitle="在 Web 应用中使用 ReportViewer | Azure"
-	description="本主题介绍如何使用 Visual Studio ReportViewer 控件构建 Azure Web 应用，该控件用于显示存储在 Azure 虚拟机上的报表。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="guyinacube"
-	manager="jhubbard"
-	editor="monicar" 
-	tags="azure-service-management" />
-<tags 
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="10/04/2016"
-	wacn.date="11/21/2016"
-	ms.author="asaxton" />
+---
+title: 在 Web 应用中使用 ReportViewer | Azure
+description: 本主题介绍如何使用 Visual Studio ReportViewer 控件构建 Azure Web 应用，该控件用于显示存储在 Azure 虚拟机上的报表。
+services: virtual-machines-windows
+documentationCenter: na
+authors: guyinacube
+manager: jhubbard
+editor: monicar
+tags: azure-service-management
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 10/04/2016
+wacn.date: 11/21/2016
+ms.author: asaxton
+---
 
 # 在 Azure 中托管的 Web 应用中使用 ReportViewer
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 你可以使用 Visual Studio ReportViewer 控件构建 Azure Web 应用，该控件用于显示存储在 Azure 虚拟机上的报表。ReportViewer 控件位于使用 ASP.NET Web 应用模板生成的 Web 应用中。
 
->[AZURE.IMPORTANT]ASP.NET MVC Web 应用程序模板不支持 ReportViewer 控件。
+>[!IMPORTANT]
+>ASP.NET MVC Web 应用程序模板不支持 ReportViewer 控件。
 
 若要将 ReportViewer 整合到你的 Azure Web 应用，需要完成以下任务。
 
@@ -35,11 +37,11 @@
 
 ## 先决条件
 
-查看 [Azure 虚拟机中的 SQL Server Business Intelligence](/documentation/articles/virtual-machines-windows-classic-ps-sql-bi/) 中的“常规建议和最佳实践”部分。
+查看 [Azure 虚拟机中的 SQL Server Business Intelligence](./virtual-machines-windows-classic-ps-sql-bi.md) 中的“常规建议和最佳实践”部分。
 
->[AZURE.NOTE]ReportViewer 控件随 Visual Studio Standard Edition 或更高版本提供。如果你使用的是 Web Developer Express Edition，则必须安装 [MICROSOFT REPORT VIEWER 2012 RUNTIME](https://www.microsoft.com/download/details.aspx?id=35747) 才能使用 ReportViewer 运行时功能。
+>[!NOTE]
+>ReportViewer 控件随 Visual Studio Standard Edition 或更高版本提供。如果你使用的是 Web Developer Express Edition，则必须安装 [MICROSOFT REPORT VIEWER 2012 RUNTIME](https://www.microsoft.com/download/details.aspx?id=35747) 才能使用 ReportViewer 运行时功能。
 ><p>在 Azure 中不支持在本地处理模式下配置的 ReportViewer。
-
 
 ## 将程序集添加到部署包
 
@@ -91,17 +93,18 @@ ReportViewer 需要使用正确的凭据向报表服务器进行身份验证，�
 
 ## 发布 ASP.NET Web 应用程序到 Azure
 
-有关将 ASP.NET Web 应用程序发布到 Azure 的说明，请参阅 [Web Apps 和 ASP.NET 入门](/documentation/articles/web-sites-dotnet-get-started/)。
+有关将 ASP.NET Web 应用程序发布到 Azure 的说明，请参阅 [Web Apps 和 ASP.NET 入门](../app-service-web/web-sites-dotnet-get-started.md)。
 
->[AZURE.IMPORTANT]如果在解决方案资源管理器中的快捷菜单中未显示添加Azure 部署项目或添加 Azure 云服务项目命令，你可能需要将该项目的目标框架更改为 .NET Framework 4。
+>[!IMPORTANT]
+>如果在解决方案资源管理器中的快捷菜单中未显示添加Azure 部署项目或添加 Azure 云服务项目命令，你可能需要将该项目的目标框架更改为 .NET Framework 4。
 ><p>两个命令提供基本相同的功能。其中一个命令将显示在快捷菜单中，这取决于已安装的 Azure SDK 版本。
 
 ## 资源
 
 [Microsoft 报表](https://msdn.microsoft.com/zh-cn/library/bb885185.aspx)
 
-[Azure 虚拟机中的 SQL Server Business Intelligence](/documentation/articles/virtual-machines-windows-classic-ps-sql-bi/)
+[Azure 虚拟机中的 SQL Server Business Intelligence](./virtual-machines-windows-classic-ps-sql-bi.md)
 
-[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](/documentation/articles/virtual-machines-windows-classic-ps-sql-report/)
+[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](./virtual-machines-windows-classic-ps-sql-report.md)
 
 <!---HONumber=Mooncake_0104_2016-->

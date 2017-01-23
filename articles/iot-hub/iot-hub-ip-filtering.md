@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure IoT 中心 IP 筛选器 | Azure"
-    description="如何使用 IP 筛选阻止特定 IP 地址到 Azure IoT 中心的连接。可阻止来自单独 IP 地址或 IP 地址范围的连接。"
-    services="iot-hub"
-    documentationcenter=""
-    author="BeatriceOltean"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="f833eac3-5b5f-46a7-a47b-f4f6fc927f3f"
-    ms.service="iot-hub"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/14/2016"
-    wacn.date="01/13/2017"
-    ms.author="boltean" />  
+---
+title: Azure IoT 中心 IP 筛选器 | Azure
+description: 如何使用 IP 筛选阻止特定 IP 地址到 Azure IoT 中心的连接。可阻止来自单独 IP 地址或 IP 地址范围的连接。
+services: iot-hub
+documentationcenter: 
+author: BeatriceOltean
+manager: timlt
+editor: 
 
+ms.assetid: f833eac3-5b5f-46a7-a47b-f4f6fc927f3f
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/14/2016
+wacn.date: 01/13/2017
+ms.author: boltean
+---
 
 # 使用 IP 筛选器
 
@@ -40,7 +40,6 @@
 
 ![][img-ip-filter-default]  
 
-
 ## 添加或编辑 IP 筛选器规则
 
 添加 IP 筛选器规则时，系统会提示用户提供以下值：
@@ -51,11 +50,9 @@
 
 ![][img-ip-filter-add-rule]  
 
-
 保存规则后，将会出现一个提醒，通知你更新正在进行。
 
 ![][img-ip-filter-save-new-rule]  
-
 
 在用户达到 10 个 IP 筛选器规则这一最大限制以后，系统会禁用“添加”选项。
 
@@ -66,7 +63,6 @@
 若要删除 IP 筛选器规则，请在网格中选择一条或多条规则，然后单击“删除”。
 
 ![][img-ip-filter-delete-rule]  
-
 
 ## IP 筛选器规则评估
 
@@ -79,7 +75,6 @@ IP 筛选器规则按顺序应用，与 IP 地址匹配的第一条规则决定�
 若要保存新的 IP 筛选器规则顺序，请单击“保存”。
 
 ![][img-ip-filter-rule-order]  
-
 
 ## 后续步骤
 
@@ -96,15 +91,13 @@ IP 筛选器规则按顺序应用，与 IP 地址匹配的第一条规则决定�
 [img-ip-filter-delete-rule]: ./media/iot-hub-ip-filtering/ip-filter-delete-rule.png
 [img-ip-filter-rule-order]: ./media/iot-hub-ip-filtering/ip-filter-rule-order.png
 
-
 <!-- Links -->
 
+[IoT Hub Developer Guide]: ./iot-hub-devguide.md
+[Azure ExpressRoute]: ../expressroute/expressroute-faqs.md#supported-services
 
-[IoT Hub Developer Guide]: /documentation/articles/iot-hub-devguide
-[Azure ExpressRoute]: /documentation/articles/expressroute-faqs/#supported-services
-
-[lnk-monitor]: /documentation/articles/iot-hub-operations-monitoring/
-[lnk-metrics]: /documentation/articles/iot-hub-metrics/
+[lnk-monitor]: ./iot-hub-operations-monitoring.md
+[lnk-metrics]: ./iot-hub-metrics.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

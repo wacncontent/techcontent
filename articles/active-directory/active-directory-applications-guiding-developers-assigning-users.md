@@ -1,24 +1,24 @@
-<properties
-	pageTitle="Azure AD 和应用程序：将用户分配到应用程序 | Azure"
-	description="如何为 Azure 应用程序实现用户分配。"
-	services="active-directory"
-	documentationCenter=""
-	authors="femila"
-	manager="femila"
-	editor=""/>
+---
+title: Azure AD 和应用程序：将用户分配到应用程序 | Azure
+description: 如何为 Azure 应用程序实现用户分配。
+services: active-directory
+documentationCenter: 
+authors: femila
+manager: femila
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/15/2015"
-	wacn.date="10/11/2016"
-	ms.author="inhenk"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/15/2015
+wacn.date: 10/11/2016
+ms.author: inhenk
+---
 
 # Azure AD 和应用程序：将用户分配到应用程序
-在将用户和组分配到应用程序之前，你必须要求用户分配。若要了解如何要求用户分配，请参阅 [Requiring User Assignment](/documentation/articles/active-directory-applications-guiding-developers-requiring-user-assignment/)（要求用户分配）一文。
+在将用户和组分配到应用程序之前，你必须要求用户分配。若要了解如何要求用户分配，请参阅 [Requiring User Assignment](./active-directory-applications-guiding-developers-requiring-user-assignment.md)（要求用户分配）一文。
 
 ## 将用户分配到应用程序
 1. 使用管理员帐户登录到 Azure 门户。
@@ -32,6 +32,6 @@
 10. 出现提示时单击"是"。
 
 ## 后续步骤
-[AZURE.INCLUDE [guiding-developers-for-lob-applications-toc.md](../../includes/active-directory-applications-guiding-developers-for-lob-applications-toc.md)]
+[!INCLUDE [guiding-developers-for-lob-applications-toc.md](../../includes/active-directory-applications-guiding-developers-for-lob-applications-toc.md)]
 
 <!---HONumber=Mooncake_0926_2016-->

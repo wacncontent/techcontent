@@ -1,27 +1,25 @@
-<properties
-	pageTitle="如何使用 Android 移动应用客户端库"
-	description="如何使用 Azure 移动应用的 Android 客户端 SDK。"
-	services="app-service\mobile"
-	documentationCenter="android"
-	authors="yuaxu"
-	manager="erikre"
-	editor=""/>  
+---
+title: 如何使用 Android 移动应用客户端库
+description: 如何使用 Azure 移动应用的 Android 客户端 SDK。
+services: app-service\mobile
+documentationCenter: android
+authors: yuaxu
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/02/2016"
-	ms.author="yuaxu"/>
-
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-android
+ms.devlang: java
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/02/2016
+ms.author: yuaxu
+---
 
 # 如何使用移动应用的 Android 客户端库
 
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 本指南说明如何使用用于移动应用的 Android 客户端 SDK 来实现常见方案，例如：
 
@@ -46,7 +44,7 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 ## 安装与先决条件
 
-完成[移动应用快速入门](/documentation/articles/app-service-mobile-android-get-started/)教程。此任务可确保满足开发 Azure 移动应用的所有先决条件。快速入门还帮助配置帐户及创建第一个移动应用后端。
+完成[移动应用快速入门](./app-service-mobile-android-get-started.md)教程。此任务可确保满足开发 Azure 移动应用的所有先决条件。快速入门还帮助配置帐户及创建第一个移动应用后端。
 
 如果决定不完成快速入门教程，请完成以下任务：
 
@@ -60,15 +58,19 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 1. 将以下代码添加到 *buildscript* 标记内 *项目* 级别的 **build.gradle** 文件：
 
-		buildscript {
-		    repositories {
-		        jcenter()
-		    }
-		}
+    ```
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
+    ```
 
 2. 将以下代码添加到 *dependencies* 标记内 *模块应用* 级别的 **build.gradle** 文件：
 
-		compile 'com.microsoft.azure:azure-mobile-android:3.1.0'
+    ```
+    compile 'com.microsoft.azure:azure-mobile-android:3.1.0'
+    ```
 
     目前的最新版本为 3.1.0。[此处][14]列出了支持的版本。
 
@@ -76,7 +78,9 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 若要访问 Azure，应用中必须已启用 Internet 权限。如果尚未启用，请将以下代码行添加到 **AndroidManifest.xml** 文件：
 
-	<uses-permission android:name="android.permission.INTERNET" />
+```
+<uses-permission android:name="android.permission.INTERNET" />
+```
 
 ## 基础知识的深入探讨
 
@@ -92,34 +96,38 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 对应的类型化客户端对象：
 
-	public class ToDoItem {
-		private String id;
-		private String text;
-		private Boolean complete;
-	}
+```
+public class ToDoItem {
+    private String id;
+    private String text;
+    private Boolean complete;
+}
+```
 
 代码驻留在名为 **ToDoItem.java** 的文件中。
 
 如果 SQL Azure 表包含多个列，请将相应的字段添加到此类。例如，如果 DTO（数据传输对象）包含整数 Priority 列，则可以添加此字段，及其 getter 和 setter 方法：
 
-	private Integer priority;
+```
+private Integer priority;
 
-	/**
-	* Returns the item priority
-	*/
-	public Integer getPriority() {
-	return mPriority;
-	}
-	
-	/**
-	* Sets the item priority
-	*
-	* @param priority
-	*            priority to set
-	*/
-	public final void setPriority(Integer priority) {
-	mPriority = priority;
-	}
+/**
+* Returns the item priority
+*/
+public Integer getPriority() {
+return mPriority;
+}
+
+/**
+* Sets the item priority
+*
+* @param priority
+*            priority to set
+*/
+public final void setPriority(Integer priority) {
+mPriority = priority;
+}
+```
 
 若要了解如何在移动应用后端中创建更多的表，请参阅[如何定义表控制器][15]（.NET 后端）或[使用动态架构定义表][16]（Node.js 后端）。对于 Node.js 后端，也可以使用 [Azure 门户]中的“简易表”设置。
 
@@ -127,13 +135,17 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 此代码创建用于访问移动应用后端的 **MobileServiceClient** 对象。代码将进入 *AndroidManifest.xml* 中指定为 **MAIN** 操作和 **LAUNCHER** 类别的 **Activity** 类的 `onCreate` 方法。在快速入门代码中，代码将进入 **ToDoActivity.java** 文件。
 
-		MobileServiceClient mClient = new MobileServiceClient(
-			"MobileAppUrl", // Replace with the Site URL
-			this)
+```
+    MobileServiceClient mClient = new MobileServiceClient(
+        "MobileAppUrl", // Replace with the Site URL
+        this)
+```
 
 在此代码中，请将 `MobileAppUrl` 替换为移动应用后端的 URL，可以在 [Azure 门户预览]中移动应用后端的边栏选项卡内找到该 URL。若要编译此代码行，还需要添加以下 **import** 语句：
 
-	import com.microsoft.windowsazure.mobileservices.*;
+```
+import com.microsoft.windowsazure.mobileservices.*;
+```
 
 ###<a name="instantiating"></a>如何创建表引用
 
@@ -141,18 +153,24 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 若要访问表，请先通过对 [MobileServiceClient][9] 调用 **getTable** 方法来创建一个 [MobileServiceTable][8] 对象。此方法有两个重载：
 
-	public class MobileServiceClient {
-	    public <E> MobileServiceTable<E> getTable(Class<E> clazz);
-	    public <E> MobileServiceTable<E> getTable(String name, Class<E> clazz);
-	}
+```
+public class MobileServiceClient {
+    public <E> MobileServiceTable<E> getTable(Class<E> clazz);
+    public <E> MobileServiceTable<E> getTable(String name, Class<E> clazz);
+}
+```
 
 在以下代码中，**mClient** 是对 MobileServiceClient 对象的引用。如果类名称与表名称相同，则使用第一个重载，这也是快速入门中使用的重载：
 
-	MobileServiceTable<ToDoItem> mToDoTable = mClient.getTable(ToDoItem.class);
+```
+MobileServiceTable<ToDoItem> mToDoTable = mClient.getTable(ToDoItem.class);
+```
 
 如果表名称与类名称不同，则使用第二个重载：第一个参数是表名称。
 
-	MobileServiceTable<ToDoItem> mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
+```
+MobileServiceTable<ToDoItem> mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
+```
 
 ###<a name="binding"></a>如何将数据绑定到用户界面
 
@@ -170,27 +188,30 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 布局由多个 XML 代码段定义。以某个现有布局为例，以下代码表示要在其中填充服务器数据的 **ListView**。
 
-    <ListView
-        android:id="@+id/listViewToDo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/row_list_to_do" >
-    </ListView>
+```
+<ListView
+    android:id="@+id/listViewToDo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:listitem="@layout/row_list_to_do" >
+</ListView>
+```
 
 在上述代码中， *listitem* 属性指定列表中单个行的布局 ID。此代码指定复选框及其关联文本，并针对列表中的每个项进行一次实例化。此布局不显示 **id** 字段，如果使用更复杂的布局，则会在屏幕中指定更多的字段。以下代码摘自 **row\_list\_to\_do.xml** 文件。
 
-	<?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:orientation="horizontal">
-	    <CheckBox
-	        android:id="@+id/checkToDoItem"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/checkbox_text" />
-	</LinearLayout>
-
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <CheckBox
+        android:id="@+id/checkToDoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkbox_text" />
+</LinearLayout>
+```
 
 #### <a name="adapter"></a>如何定义适配器
 
@@ -198,55 +219,62 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 在代码中，我们可以定义以下类作为 **ArrayAdapter<E>** 类的扩展：
 
-	public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
+```
+public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
+```
 
 替代适配器的 **getView** 方法。例如：
 
-    @Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View row = convertView;
+```
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+    View row = convertView;
 
-		final ToDoItem currentItem = getItem(position);
+    final ToDoItem currentItem = getItem(position);
 
-		if (row == null) {
-			LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-			row = inflater.inflate(R.layout.row_list_to_do, parent, false);
-		}
+    if (row == null) {
+        LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+        row = inflater.inflate(R.layout.row_list_to_do, parent, false);
+    }
 
-		row.setTag(currentItem);
+    row.setTag(currentItem);
 
-		final CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkToDoItem);
-		checkBox.setText(currentItem.getText());
-		checkBox.setChecked(false);
-		checkBox.setEnabled(true);
+    final CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkToDoItem);
+    checkBox.setText(currentItem.getText());
+    checkBox.setChecked(false);
+    checkBox.setEnabled(true);
 
-        checkBox.setOnClickListener(new View.OnClickListener() {
+    checkBox.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
-                if (checkBox.isChecked()) {
-                    checkBox.setEnabled(false);
-                    if (mContext instanceof ToDoActivity) {
-                        ToDoActivity activity = (ToDoActivity) mContext;
-                        activity.checkItem(currentItem);
-                    }
+        @Override
+        public void onClick(View arg0) {
+            if (checkBox.isChecked()) {
+                checkBox.setEnabled(false);
+                if (mContext instanceof ToDoActivity) {
+                    ToDoActivity activity = (ToDoActivity) mContext;
+                    activity.checkItem(currentItem);
                 }
             }
-        });
+        }
+    });
 
-
-		return row;
-	}
+    return row;
+}
+```
 
 在活动中创建此类的实例，如下所示：
 
-	ToDoItemAdapter mAdapter;
-	mAdapter = new ToDoItemAdapter(this, R.layout.row_list_to_do);
+```
+ToDoItemAdapter mAdapter;
+mAdapter = new ToDoItemAdapter(this, R.layout.row_list_to_do);
+```
 
 ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现在可以实例化 **ListView** 并将适配器分配到 **ListView**。
 
-	ListView listViewToDo = (ListView) findViewById(R.id.listViewToDo);
-	listViewToDo.setAdapter(mAdapter);
+```
+ListView listViewToDo = (ListView) findViewById(R.id.listViewToDo);
+listViewToDo.setAdapter(mAdapter);
+```
 
 ### <a name="api"></a>API 结构
 
@@ -258,30 +286,32 @@ ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现�
 
 现在，你可以使用数据绑定了。下面的代码说明如何获取表中的项，以及使用返回的项填充本地适配器。
 
-    public void showAll(View view) {
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    final List<ToDoItem> results = mToDoTable.execute().get();
-                    runOnUiThread(new Runnable() {
+```
+public void showAll(View view) {
+    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                final List<ToDoItem> results = mToDoTable.execute().get();
+                runOnUiThread(new Runnable() {
 
-                        @Override
-                        public void run() {
-                            mAdapter.clear();
-                            for (ToDoItem item : results) {
-                                mAdapter.add(item);
-                            }
+                    @Override
+                    public void run() {
+                        mAdapter.clear();
+                        for (ToDoItem item : results) {
+                            mAdapter.add(item);
                         }
-                    });
-                } catch (Exception exception) {
-                    createAndShowDialog(exception, "Error");
-                }
-                return null;
+                    }
+                });
+            } catch (Exception exception) {
+                createAndShowDialog(exception, "Error");
             }
-        };
-		runAsyncTask(task);
-    }
+            return null;
+        }
+    };
+    runAsyncTask(task);
+}
+```
 
 请在每次修改 **ToDoItem** 表时调用适配器。修改是逐条记录进行的，因此，要处理的是单个行而不是一个集合。插入项时，需要对适配器调用 **add** 方法；删除项时，需要调用 **remove** 方法。
 
@@ -300,7 +330,9 @@ ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现�
 
 以下查询返回 **ToDoItem** 表中的所有项。
 
-	List<ToDoItem> results = mToDoTable.execute().get();
+```
+List<ToDoItem> results = mToDoTable.execute().get();
+```
 
 *results* 变量以列表形式返回查询中的结果集。
 
@@ -308,9 +340,11 @@ ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现�
 
 以下查询执行从 **complete** 等于 **false** 的 **ToDoItem** 表返回所有项目。
 
-	List<ToDoItem> result = mToDoTable.where()
-								.field("complete").eq(false)
-								.execute().get();
+```
+List<ToDoItem> result = mToDoTable.where()
+                            .field("complete").eq(false)
+                            .execute().get();
+```
 
 **mToDoTable** 是对前面创建的移动服务表的引用。
 
@@ -318,28 +352,38 @@ ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现�
 
 可以按日期筛选。使用以下方法可以比较整个日期字段或日期的某些部分：**year**、**month**、**day**、**hour**、**minute** 和 **second**。以下示例针对 *截止日期* 等于 2013 的项添加一个筛选器。
 
-	mToDoTable.where().year("due").eq(2013).execute().get();
+```
+mToDoTable.where().year("due").eq(2013).execute().get();
+```
 
 以下方法支持对字符串字段使用复杂筛选器：**startsWith**、**endsWith**、**concat**、**subString**、**indexOf**、**replace**、**toLower**、**toUpper**、**trim** 和 **length**。以下示例筛选 *text* 列以“PRI0”开头的表行。
 
-	mToDoTable.where().startsWith("text", "PRI0").execute().get();
+```
+mToDoTable.where().startsWith("text", "PRI0").execute().get();
+```
 
 支持对数字字段使用以下运算符方法：**add**、**sub**、**mul**、**div**、**mod**、**floor**、**ceiling** 和 **round**。以下示例筛选其中的 **duration** 为偶数的表行。
 
-	mToDoTable.where().field("duration").mod(2).eq(0).execute().get();
+```
+mToDoTable.where().field("duration").mod(2).eq(0).execute().get();
+```
 
 可将谓词与以下逻辑方法相组合：**and**、**or** 和 **not**。以下示例组合前述两个示例。
 
-	mToDoTable.where().year("due").eq(2013).and().startsWith("text", "PRI0")
-				.execute().get();
+```
+mToDoTable.where().year("due").eq(2013).and().startsWith("text", "PRI0")
+            .execute().get();
+```
 
 组和嵌套逻辑运算符：
 
-	mToDoTable.where()
-				.year("due").eq(2013)
-					.and
-				(startsWith("text", "PRI0").or().field("duration").gt(10))
-				.execute().get();
+```
+mToDoTable.where()
+            .year("due").eq(2013)
+                .and
+            (startsWith("text", "PRI0").or().field("duration").gt(10))
+            .execute().get();
+```
 
 有关筛选操作的更详细介绍和示例，请参阅 [Exploring the richness of the Android client query model](http://hashtagfail.com/post/46493261719/mobile-services-android-querying)（探索 Android 客户端查询模型的丰富功能）。
 
@@ -347,7 +391,9 @@ ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现�
 
 以下代码返回 **ToDoItems** 表中的所有项，返回的结果已按 *text* 字段的升序排序。 *mToDoTable* 是对前面创建的后端表的引用：
 
-	mToDoTable.orderBy("text", QueryOrder.Ascending).execute().get();
+```
+mToDoTable.orderBy("text", QueryOrder.Ascending).execute().get();
+```
 
 **orderBy** 方法的第一个参数是与要排序的字段名称相同的字符串。第二个参数使用 **QueryOrder** 枚举来指定是按升序还是按降序排序。如果使用 ***where*** 方法筛选，则必须在调用 ***orderBy*** 方法之前调用 ***where*** 方法。
 
@@ -355,18 +401,23 @@ ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现�
 
 第一个示例说明如何选择表中的前 5 个项。该查询返回 **ToDoItems** 表中的项。**mToDoTable** 是对前面创建的后端表的引用。
 
-    List<ToDoItem> result = mToDoTable.top(5).execute().get();
-
+```
+List<ToDoItem> result = mToDoTable.top(5).execute().get();
+```
 
 以下查询跳过前 5 个项，返回接下来的 5 个项：
 
-	mToDoTable.skip(5).top(5).execute().get();
+```
+mToDoTable.skip(5).top(5).execute().get();
+```
 
 ### <a name="selecting"></a>如何选择特定的列
 
 以下代码演示如何返回 **ToDoItems** 表中的所有项，但只显示 **complete** 和 **text** 字段。**mToDoTable** 是对前面创建的后端表的引用。
 
-	List<ToDoItemNarrow> result = mToDoTable.select("complete", "text").execute().get();
+```
+List<ToDoItemNarrow> result = mToDoTable.select("complete", "text").execute().get();
+```
 
 Select 函数的参数是要返回的表列的字符串名称。
 
@@ -376,14 +427,16 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 用于查询后端表的方法是可以连接的。通过链接查询方法，可以选择已排序并分页的筛选行的特定列。可以创建复杂的逻辑筛选器。每个查询方法都会返回一个查询对象。若要结束方法序列并真正运行查询，可以调用 **execute** 方法。例如：
 
-	mToDoTable.where()
-        .year("due").eq(2013)
-		.and().startsWith("text", "PRI0")
-		.or().field("duration").gt(10)
-		.orderBy(duration, QueryOrder.Ascending)
-        .select("id", "complete", "text", "duration")
-        .top(20)
-		.execute().get();
+```
+mToDoTable.where()
+    .year("due").eq(2013)
+    .and().startsWith("text", "PRI0")
+    .or().field("duration").gt(10)
+    .orderBy(duration, QueryOrder.Ascending)
+    .select("id", "complete", "text", "duration")
+    .top(20)
+    .execute().get();
+```
 
 链接的查询方法必须按照以下顺序排序：
 
@@ -396,13 +449,17 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 实例化 *ToDoItem* 类的实例并设置其属性。
 
-	ToDoItem item = new ToDoItem();
-	item.text = "Test Program";
-	item.complete = false;
+```
+ToDoItem item = new ToDoItem();
+item.text = "Test Program";
+item.complete = false;
+```
 
 然后使用 **insert()** 插入对象：
 
-	ToDoItem entity = mToDoTable.insert(item).get();
+```
+ToDoItem entity = mToDoTable.insert(item).get();
+```
 
 返回的实体将匹配插入后端表的数据，包括 ID 和后端上设置的任何其他值。
 
@@ -420,7 +477,9 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 若要更新表中的数据，请将新对象传递到 **update()** 方法。
 
-    mToDoTable.update(item).get();
+```
+mToDoTable.update(item).get();
+```
 
 在此示例中， *item* 是对 *ToDoItem* 表中某个行的引用，该表包含一些更改。具有相同 **id** 的行会更新。
 
@@ -428,20 +487,26 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 以下代码演示如何通过指定数据对象来删除表中的数据。
 
-	mToDoTable.delete(item);
+```
+mToDoTable.delete(item);
+```
 
 也可以通过指定要删除的行的 **id** 字段来删除项。
 
-	String myRowId = "2FA404AB-E458-44CD-BC1B-3BC847EF0902";
-   	mToDoTable.delete(myRowId);
+```
+String myRowId = "2FA404AB-E458-44CD-BC1B-3BC847EF0902";
+   mToDoTable.delete(myRowId);
+```
 
 ##<a name="lookup"></a>如何查找特定的项
 
 使用 **lookUp()** 方法查找具有特定 **id** 字段的项：
 
-	ToDoItem result = mToDoTable
-						.lookUp("0380BAFB-BCFF-443C-B7D5-30199F730335")
-						.get();
+```
+ToDoItem result = mToDoTable
+                    .lookUp("0380BAFB-BCFF-443C-B7D5-30199F730335")
+                    .get();
+```
 
 ##<a name="untyped"></a>如何处理非类型化数据
 
@@ -453,9 +518,11 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 与使用类型化模型相似，首先需要获取表引用，不过，此时该引用的是一个 **MobileServicesJsonTable** 对象。对客户端的实例调用 **getTable** 方法来获取引用：
 
-    private MobileServiceJsonTable mJsonToDoTable;
-	//...
-    mJsonToDoTable = mClient.getTable("ToDoItem");
+```
+private MobileServiceJsonTable mJsonToDoTable;
+//...
+mJsonToDoTable = mClient.getTable("ToDoItem");
+```
 
 创建 **MobileServiceJsonTable** 的实例后，它就几乎具有与类型化编程模型所能使用的 API 相同的 API。在某些情况下，这些方法会采用非类型化参数，而不采用类型化参数。
 
@@ -463,63 +530,75 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 以下代码演示了如何执行插入。第一步是创建属于 gson 库的 JsonObject 。
 
-	JsonObject jsonItem = new JsonObject();
-	jsonItem.addProperty("text", "Wake up");
-	jsonItem.addProperty("complete", false);
+```
+JsonObject jsonItem = new JsonObject();
+jsonItem.addProperty("text", "Wake up");
+jsonItem.addProperty("complete", false);
+```
 
 然后，使用 **insert()** 将非类型化对象插入表中。
 
-    mJsonToDoTable.insert(jsonItem).get();
+```
+mJsonToDoTable.insert(jsonItem).get();
+```
 
 如果需要获取所插入对象的 ID，请使用 **getAsJsonPrimitive()** 方法。
 
-	jsonItem.getAsJsonPrimitive("id").getAsInt());
+```
+jsonItem.getAsJsonPrimitive("id").getAsInt());
+```
 
 ### <a name="json_delete"></a>如何从非类型化表中删除数据
 
 以下代码演示了如何删除一个实例，在本例中，该实例就是我们在前一个 *insert* 示例中创建的 **JsonObject** 的实例。该代码与类型化案例相同，但方法具有不同的签名，因为它引用了 **JsonObject**。
 
-         mToDoTable.delete(jsonItem);
+```
+     mToDoTable.delete(jsonItem);
+```
 
 还可以使用某个实例的 ID 来直接删除该实例：
 
-		 mToDoTable.delete(ID);
+```
+     mToDoTable.delete(ID);
+```
 
 ### <a name="json_get"></a>如何返回非类型化表中的所有行
 
 以下代码演示了如何检索整个表。由于使用的是 Json 数据表，你可以选择性地只检索某些表的列。
 
-    public void showAllUntyped(View view) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    final JsonElement result = mJsonToDoTable.execute().get();
-                    final JsonArray results = result.getAsJsonArray();
-                    runOnUiThread(new Runnable() {
+```
+public void showAllUntyped(View view) {
+    new AsyncTask<Void, Void, Void>() {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                final JsonElement result = mJsonToDoTable.execute().get();
+                final JsonArray results = result.getAsJsonArray();
+                runOnUiThread(new Runnable() {
 
-                        @Override
-                        public void run() {
-                            mAdapter.clear();
-                            for (JsonElement item : results) {
-                                String ID = item.getAsJsonObject().getAsJsonPrimitive("id").getAsString();
-                                String mText = item.getAsJsonObject().getAsJsonPrimitive("text").getAsString();
-                                Boolean mComplete = item.getAsJsonObject().getAsJsonPrimitive("complete").getAsBoolean();
-                                ToDoItem mToDoItem = new ToDoItem();
-                                mToDoItem.setId(ID);
-                                mToDoItem.setText(mText);
-                                mToDoItem.setComplete(mComplete);
-                                mAdapter.add(mToDoItem);
-                            }
+                    @Override
+                    public void run() {
+                        mAdapter.clear();
+                        for (JsonElement item : results) {
+                            String ID = item.getAsJsonObject().getAsJsonPrimitive("id").getAsString();
+                            String mText = item.getAsJsonObject().getAsJsonPrimitive("text").getAsString();
+                            Boolean mComplete = item.getAsJsonObject().getAsJsonPrimitive("complete").getAsBoolean();
+                            ToDoItem mToDoItem = new ToDoItem();
+                            mToDoItem.setId(ID);
+                            mToDoItem.setText(mText);
+                            mToDoItem.setComplete(mComplete);
+                            mAdapter.add(mToDoItem);
                         }
-                    });
-                } catch (Exception exception) {
-                    createAndShowDialog(exception, "Error");
-                }
-                return null;
+                    }
+                });
+            } catch (Exception exception) {
+                createAndShowDialog(exception, "Error");
             }
-        }.execute();
-    }
+            return null;
+        }
+    }.execute();
+}
+```
 
 类型化模型可以使用的同一筛选集、筛选和分页方法也可用于非类型化模型。
 
@@ -529,23 +608,25 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 从 Android 客户端调用 **invokeApi** 方法，以调用自定义 API 终结点。以下示例说明如何调用名为 **completeAll** 的 API 终结点，从而返回名为 **MarkAllResult** 的集合类。
 
-	public void completeItem(View view) {
+```
+public void completeItem(View view) {
 
-	    ListenableFuture<MarkAllResult> result = mClient.invokeApi( "completeAll", MarkAllResult.class );
+    ListenableFuture<MarkAllResult> result = mClient.invokeApi( "completeAll", MarkAllResult.class );
 
-	    	Futures.addCallback(result, new FutureCallback<MarkAllResult>() {
-	    		@Override
-	    		public void onFailure(Throwable exc) {
-	    			createAndShowDialog((Exception) exc, "Error");
-	    		}
+        Futures.addCallback(result, new FutureCallback<MarkAllResult>() {
+            @Override
+            public void onFailure(Throwable exc) {
+                createAndShowDialog((Exception) exc, "Error");
+            }
 
-	    		@Override
-	    		public void onSuccess(MarkAllResult result) {
-	    			createAndShowDialog(result.getCount() + " item(s) marked as complete.", "Completed Items");
-	                refreshItemsFromTable();
-	    		}
-	    	});
-	    }
+            @Override
+            public void onSuccess(MarkAllResult result) {
+                createAndShowDialog(result.getCount() + " item(s) marked as complete.", "Completed Items");
+                refreshItemsFromTable();
+            }
+        });
+    }
+```
 
 **invokeApi** 方法在客户端上调用，该客户端向新的自定义 API 发送 POST 请求。与任何错误相同，自定义 API 返回的结果也显示在消息对话框中。使用其他版本的 **invokeApi** 可以选择性地在请求正文中发送对象、指定 HTTP 方法，以及随请求一起发送查询参数。此外还提供了非类型化的 **invokeApi** 版本。
 
@@ -553,7 +634,7 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 教程已详细说明如何添加这些功能。
 
-应用服务支持使用各种外部标识提供者[对应用用户进行身份验证](/documentation/articles/app-service-mobile-android-get-started-users/)，这些提供者包括：Microsoft 帐户和 Azure Active Directory。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在后端中使用已经过身份验证的用户的标识来实施授权规则。
+应用服务支持使用各种外部标识提供者[对应用用户进行身份验证](./app-service-mobile-android-get-started-users.md)，这些提供者包括：Microsoft 帐户和 Azure Active Directory。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在后端中使用已经过身份验证的用户的标识来实施授权规则。
 
 支持两种身份验证流: **服务器**流和**客户端**流。服务器流依赖于标识提供者的 Web 界面，因此可提供最简单的身份验证体验。无需其他 SDK 即可实现服务器流身份验证。服务器流身份验证不会与移动设备深度集成，因此仅建议用于概念验证方案。
 
@@ -572,10 +653,11 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 以下代码使用 Microsoft 提供程序启动服务器流登录过程：
 
-	MobileServiceUser user = mClient.login(MobileServiceAuthenticationProvider.Microsoft);
+```
+MobileServiceUser user = mClient.login(MobileServiceAuthenticationProvider.Microsoft);
+```
 
 使用 **getUserId** 方法从 **MobileServiceUser** 获取已登录用户的 ID。有关如何使用 Futures 调用异步登录 API 的示例，请参阅 [Get started with authentication]（身份验证入门）。
-
 
 ### <a name="caching"></a>如何缓存身份验证令牌
 
@@ -589,30 +671,32 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 可以借助 Active Directory 身份验证库 (ADAL) 使用 Azure Active Directory 将用户登录到应用程序。使用客户端流登录通常比使用 `loginAsync()` 方法更有利，因为它提供更直观的 UX 风格，并允许其他自定义。
 
-1. 根据 [How to configure App Service for Active Directory login](/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/)（如何为 Active Directory 登录配置应用服务）教程中的说明，为 AAD 登录配置移动应用。请务必完成注册本机客户端应用程序的可选步骤。
+1. 根据 [How to configure App Service for Active Directory login](./app-service-mobile-how-to-configure-active-directory-authentication.md)（如何为 Active Directory 登录配置应用服务）教程中的说明，为 AAD 登录配置移动应用。请务必完成注册本机客户端应用程序的可选步骤。
 
 2. 通过修改 build.gradle 文件并包含以下定义来安装 ADAL：
 
-		repositories {
-			mavenCentral()
-			flatDir {
-				dirs 'libs'
-			}
-			maven {
-				url "YourLocalMavenRepoPath\\.m2\\repository"
-			}
-		}
-    	packagingOptions {
-        	exclude 'META-INF/MSFTSIG.RSA'
-        	exclude 'META-INF/MSFTSIG.SF'
-    	}
-		dependencies {
-			compile fileTree(dir: 'libs', include: ['*.jar'])
-			compile('com.microsoft.aad:adal:1.1.1') {
-				exclude group: 'com.android.support'
-			} // Recent version is 1.1.1
-    		compile 'com.android.support:support-v4:23.0.0'
-		}
+    ```
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+        maven {
+            url "YourLocalMavenRepoPath\\.m2\\repository"
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/MSFTSIG.RSA'
+        exclude 'META-INF/MSFTSIG.SF'
+    }
+    dependencies {
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+        compile('com.microsoft.aad:adal:1.1.1') {
+            exclude group: 'com.android.support'
+        } // Recent version is 1.1.1
+        compile 'com.android.support:support-v4:23.0.0'
+    }
+    ```
 
 3. 将以下代码添加到应用程序并进行以下替换：
 
@@ -624,63 +708,64 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 * 将 **INSERT-REDIRECT-URI-HERE** 替换为站点的 _/.auth/login/done_ 终结点（使用 HTTPS 方案）。此值应类似于 \_https://contoso.chinacloudsites.cn/.auth/login/done_。
 
-		private AuthenticationContext mContext;
-		private void authenticate() {
-		String authority = "INSERT-AUTHORITY-HERE";
-		String resourceId = "INSERT-RESOURCE-ID-HERE";
-		String clientId = "INSERT-CLIENT-ID-HERE";
-		String redirectUri = "INSERT-REDIRECT-URI-HERE";
-		try {
-		    mContext = new AuthenticationContext(this, authority, true);
-		    mContext.acquireToken(this, resourceId, clientId, redirectUri, PromptBehavior.Auto, "", callback);
-		} catch (Exception exc) {
-		    exc.printStackTrace();
-		}
-		}
-		private AuthenticationCallback<AuthenticationResult> callback = new AuthenticationCallback<AuthenticationResult>() {
-		@Override
-		public void onError(Exception exc) {
-		    if (exc instanceof AuthenticationException) {
-		        Log.d(TAG, "Cancelled");
-		    } else {
-		        Log.d(TAG, "Authentication error:" + exc.getMessage());
-		    }
-		}
-		@Override
-			public void onSuccess(AuthenticationResult result) {
-		    if (result == null || result.getAccessToken() == null
-		            || result.getAccessToken().isEmpty()) {
-		        Log.d(TAG, "Token is empty");
-		    } else {
-		        try {
-		            JSONObject payload = new JSONObject();
-		            payload.put("access_token", result.getAccessToken());
-		            ListenableFuture<MobileServiceUser> mLogin = mClient.login("aad", payload.toString());
-		            Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
-		                @Override
-		                public void onFailure(Throwable exc) {
-		                    exc.printStackTrace();
-		                }
-		                @Override
-		                public void onSuccess(MobileServiceUser user) {
-		            		Log.d(TAG, "Login Complete");
-		                }
-		            });
-		        }
-		        catch (Exception exc){
-		            Log.d(TAG, "Authentication error:" + exc.getMessage());
-		        }
-		    }
-		}
-		};
-		@Override
-		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (mContext != null) {
-		    mContext.onActivityResult(requestCode, resultCode, data);
-		}
-		}
-
+    ```
+    private AuthenticationContext mContext;
+    private void authenticate() {
+    String authority = "INSERT-AUTHORITY-HERE";
+    String resourceId = "INSERT-RESOURCE-ID-HERE";
+    String clientId = "INSERT-CLIENT-ID-HERE";
+    String redirectUri = "INSERT-REDIRECT-URI-HERE";
+    try {
+        mContext = new AuthenticationContext(this, authority, true);
+        mContext.acquireToken(this, resourceId, clientId, redirectUri, PromptBehavior.Auto, "", callback);
+    } catch (Exception exc) {
+        exc.printStackTrace();
+    }
+    }
+    private AuthenticationCallback<AuthenticationResult> callback = new AuthenticationCallback<AuthenticationResult>() {
+    @Override
+    public void onError(Exception exc) {
+        if (exc instanceof AuthenticationException) {
+            Log.d(TAG, "Cancelled");
+        } else {
+            Log.d(TAG, "Authentication error:" + exc.getMessage());
+        }
+    }
+    @Override
+        public void onSuccess(AuthenticationResult result) {
+        if (result == null || result.getAccessToken() == null
+                || result.getAccessToken().isEmpty()) {
+            Log.d(TAG, "Token is empty");
+        } else {
+            try {
+                JSONObject payload = new JSONObject();
+                payload.put("access_token", result.getAccessToken());
+                ListenableFuture<MobileServiceUser> mLogin = mClient.login("aad", payload.toString());
+                Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
+                    @Override
+                    public void onFailure(Throwable exc) {
+                        exc.printStackTrace();
+                    }
+                    @Override
+                    public void onSuccess(MobileServiceUser user) {
+                        Log.d(TAG, "Login Complete");
+                    }
+                });
+            }
+            catch (Exception exc){
+                Log.d(TAG, "Authentication error:" + exc.getMessage());
+            }
+        }
+    }
+    };
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (mContext != null) {
+        mContext.onActivityResult(requestCode, resultCode, data);
+    }
+    }
+    ```
 
 ## 如何将推送通知添加到应用
 
@@ -690,7 +775,9 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 快速入门教程包含可实现脱机同步的代码。查找前面带有如下注释的代码：
 
-	// Offline Sync
+```
+// Offline Sync
+```
 
 取消注释以下代码行，即可实现脱机同步，并且可将类似的代码添加到其他移动应用代码。
 
@@ -702,28 +789,30 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 配置 **ServiceFilter**，将自定义 HTTP 标头添加到每个请求：
 
-	private class CustomHeaderFilter implements ServiceFilter {
+```
+private class CustomHeaderFilter implements ServiceFilter {
 
-        @Override
-        public ListenableFuture<ServiceFilterResponse> handleRequest(
-                	ServiceFilterRequest request,
-					NextServiceFilterCallback next) {
+    @Override
+    public ListenableFuture<ServiceFilterResponse> handleRequest(
+                ServiceFilterRequest request,
+                NextServiceFilterCallback next) {
 
-            runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
 
-                @Override
-                public void run() {
-	        		request.addHeader("My-Header", "Value");	                }
-            });
+            @Override
+            public void run() {
+                request.addHeader("My-Header", "Value");	                }
+        });
 
-            SettableFuture<ServiceFilterResponse> result = SettableFuture.create();
-            try {
-                ServiceFilterResponse response = next.onNext(request).get();
-                result.set(response);
-            } catch (Exception exc) {
-                result.setException(exc);
-            }
+        SettableFuture<ServiceFilterResponse> result = SettableFuture.create();
+        try {
+            ServiceFilterResponse response = next.onNext(request).get();
+            result.set(response);
+        } catch (Exception exc) {
+            result.setException(exc);
         }
+    }
+```
 
 ### <a name="serialization"></a>如何自定义序列化
 
@@ -745,39 +834,44 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 将客户端名称序列化为与服务器上 **ToDoItem** 表的列名称匹配的 JSON 名称。下面的代码使用 gson 库批注属性：
 
-	@com.google.gson.annotations.SerializedName("text")
-	private String mText;
+```
+@com.google.gson.annotations.SerializedName("text")
+private String mText;
 
-	@com.google.gson.annotations.SerializedName("id")
-	private int mId;
+@com.google.gson.annotations.SerializedName("id")
+private int mId;
 
-	@com.google.gson.annotations.SerializedName("complete")
-	private boolean mComplete;
+@com.google.gson.annotations.SerializedName("complete")
+private boolean mComplete;
 
-	@com.google.gson.annotations.SerializedName("duration")
-	private String mDuration;
+@com.google.gson.annotations.SerializedName("duration")
+private String mDuration;
+```
 
 ### <a name="table"></a>如何在客户端与后端之间映射不同的表名称
 
 使用 getTable() 方法的替代，将客户端表名称映射到其他移动服务表名称：
 
-	mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
-
+```
+mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
+```
 
 ### <a name="conversions"></a>如何自动执行列名称映射
 
 可以使用 gson API，指定适用于每个列的转换策略。在发送数据到 Azure App Service 之前，Android 客户端库会在幕后使用 gson 将 Java 对象序列化为 JSON 数据。下面的代码使用 **setFieldNamingStrategy()** 方法设置策略。此示例会删除初始字符（“m”），然后将每个字段名称的下一个字符小写。例如，它会将“mId”变为“id”。
 
-	client.setGsonBuilder(
-	    MobileServiceClient
-	    .createMobileServiceGsonBuilder()
-	    .setFieldNamingStrategy(new FieldNamingStrategy() {
-	        public String translateName(Field field) {
-	            String name = field.getName();
-	            return Character.toLowerCase(name.charAt(1))
-	                + name.substring(2);
-	            }
-	        });
+```
+client.setGsonBuilder(
+    MobileServiceClient
+    .createMobileServiceGsonBuilder()
+    .setFieldNamingStrategy(new FieldNamingStrategy() {
+        public String translateName(Field field) {
+            String name = field.getName();
+            return Character.toLowerCase(name.charAt(1))
+                + name.substring(2);
+            }
+        });
+```
 
 必须在使用 **MobileServiceClient** 之前执行此代码。
 
@@ -786,7 +880,6 @@ Select 函数的参数是要返回的表列的字符串名称。
 到目前为止，我们的序列化示例已涉及整数和字符串等基元类型。基元类型可轻松地序列化为 JSON。如果想要添加不会自动序列化为 JSON 的复杂对象，需要提供 JSON 序列化方法。若要查看如何提供自定义 JSON 序列化的示例，请阅读博客文章 [Customizing serialization using the gson library in the Mobile Services Android client][2]（在移动服务 Android 客户端中使用 gson 库自定义序列化）。
 
 <!-- Anchors. -->
-
 
 [What is Mobile Services]: #what-is
 [Concepts]: #concepts
@@ -822,27 +915,26 @@ Select 函数的参数是要返回的表列的字符串名称。
 <!-- Images. -->
 
 <!-- URLs. -->
-[Get started with Azure Mobile Apps]: /documentation/articles/app-service-mobile-android-get-started/
+[Get started with Azure Mobile Apps]: ./app-service-mobile-android-get-started.md
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
 [Mobile Services SDK for Android]: http://go.microsoft.com/fwlink/p/?LinkID=717033
 [Azure 门户预览]: https://portal.azure.cn
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
-[Get started with authentication]: /documentation/articles/app-service-mobile-android-get-started-users/
-[身份验证入门]: /documentation/articles/app-service-mobile-android-get-started-users/
+[Get started with authentication]: ./app-service-mobile-android-get-started-users.md
+[身份验证入门]: ./app-service-mobile-android-get-started-users.md
 [2]: http://hashtagfail.com/post/44606137082/mobile-services-android-serialization-gson
 
-
-[6]: /documentation/articles/notification-hubs-push-notification-overview/#integration-with-app-service-mobile-apps
-[7]: /documentation/articles/app-service-mobile-android-get-started-users/#cache-tokens
+[6]: ../notification-hubs/notification-hubs-push-notification-overview.md#integration-with-app-service-mobile-apps
+[7]: ./app-service-mobile-android-get-started-users.md#cache-tokens
 [8]: http://azure.github.io/azure-mobile-apps-android-client/com/microsoft/windowsazure/mobileservices/table/MobileServiceTable.html
 [9]: http://azure.github.io/azure-mobile-apps-android-client/com/microsoft/windowsazure/mobileservices/MobileServiceClient.html
-[10]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[11]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/
+[10]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[11]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md
 [12]: http://azure.github.io/azure-mobile-apps-android-client/
-[13]: /documentation/articles/app-service-mobile-android-get-started/#create-a-new-azure-mobile-app-backend
+[13]: ./app-service-mobile-android-get-started.md#create-a-new-azure-mobile-app-backend
 [14]: http://go.microsoft.com/fwlink/p/?LinkID=717034
-[15]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-define-a-table-controller
-[16]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#TableOperations
+[15]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-define-a-table-controller
+[16]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md#TableOperations
 [Future]: http://developer.android.com/reference/java/util/concurrent/Future.html
 [AsyncTask]: http://developer.android.com/reference/android/os/AsyncTask.html
 

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure IoT 中心与 Azure 事件中心的比较 | Azure"
-    description="比较 IoT 中心与事件中心这两个 Azure服务，重点介绍功能差异和用例。比较内容包括支持的协议、设备管理、监视和文件上传。"
-    services="iot-hub"
-    documentationcenter=""
-    author="fsautomata"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="aeddea62-8302-48e2-9aad-c5a0e5f5abe9"
-    ms.service="iot-hub"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="12/12/2016"
-    wacn.date="01/13/2017"
-    ms.author="elioda" />  
+---
+title: Azure IoT 中心与 Azure 事件中心的比较 | Azure
+description: 比较 IoT 中心与事件中心这两个 Azure服务，重点介绍功能差异和用例。比较内容包括支持的协议、设备管理、监视和文件上传。
+services: iot-hub
+documentationcenter: 
+author: fsautomata
+manager: timlt
+editor: 
 
+ms.assetid: aeddea62-8302-48e2-9aad-c5a0e5f5abe9
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/12/2016
+wacn.date: 01/13/2017
+ms.author: elioda
+---
 
 # Azure IoT 中心和 Azure 事件中心比较
 IoT 中心的主要用例之一是从设备收集遥测数据。因此，我们经常在 IoT 中心与 [Azure 事件中心][Azure Event Hubs]之间进行比较。与 IoT 中心一样，事件中心是一种事件处理服务，用于向云提供大规模的事件与遥测数据入口，并且具有较低的延迟和较高的可靠性。
@@ -47,21 +47,21 @@ IoT 中心的主要用例之一是从设备收集遥测数据。因此，我们�
 * [IoT 中心开发人员指南][lnk-devguide]
 * [使用 IoT 网关 SDK 模拟设备][lnk-gateway]
 
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-c2d-guidance]: /documentation/articles/iot-hub-devguide-c2d-guidance/
-[lnk-d2c-guidance]: /documentation/articles/iot-hub-devguide-d2c-guidance/
-[Azure Event Hubs]: /documentation/articles/event-hubs-what-is-event-hubs/
-[IoT 中心开发人员指南的“安全性”部分]: /documentation/articles/iot-hub-devguide-security/
-[Event Hub - security]: /documentation/articles/event-hubs-authentication-and-security-model-overview/
-[Event Hub publisher policies]: /documentation/articles/event-hubs-overview/#common-publisher-tasks
-[Azure Service Bus quotas]: /documentation/articles/service-bus-quotas/
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
+[lnk-d2c-guidance]: ./iot-hub-devguide-d2c-guidance.md
+[Azure Event Hubs]: ../event-hubs/event-hubs-what-is-event-hubs.md
+[IoT 中心开发人员指南的“安全性”部分]: ./iot-hub-devguide-security.md
+[Event Hub - security]: ../event-hubs/event-hubs-authentication-and-security-model-overview.md
+[Event Hub publisher policies]: ../event-hubs/event-hubs-overview.md#common-publisher-tasks
+[Azure Service Bus quotas]: ../service-bus-messaging/service-bus-quotas.md
 [Azure IoT SDKs]: https://github.com/Azure/azure-iot-sdks/blob/master/readme.md
-[lnk-azure-protocol-gateway]: /documentation/articles/iot-hub-protocol-gateway/
+[lnk-azure-protocol-gateway]: ./iot-hub-protocol-gateway.md
 
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-devguide-messaging]: /documentation/articles/iot-hub-devguide-messaging/
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-devguide-messaging]: ./iot-hub-devguide-messaging.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

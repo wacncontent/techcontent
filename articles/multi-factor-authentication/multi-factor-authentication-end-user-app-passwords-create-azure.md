@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="在 Azure 门户中为 Azure Multi-Factor Authentication 创建应用密码" 
-	description="本页说明用户如何在 Azure 门户中创建更多的应用密码。" 
-	services="multi-factor-authentication" 
-	documentationCenter="" 
-	authors="billmath" 
-	manager="stevenp" 
-	editor="curtland"/>
+---
+title: 在 Azure 门户中为 Azure Multi-Factor Authentication 创建应用密码
+description: 本页说明用户如何在 Azure 门户中创建更多的应用密码。
+services: multi-factor-authentication
+documentationCenter: 
+authors: billmath
+manager: stevenp
+editor: curtland
 
-<tags
-	ms.service="multi-factor-authentication"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/04/2016"
-	wacn.date="09/12/2016"
-	ms.author="kgremban"/>
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/04/2016
+wacn.date: 09/12/2016
+ms.author: kgremban
+---
 
 # 在 Azure 门户中为多重身份验证创建应用密码
 
@@ -30,9 +30,6 @@
 7. 输入应用密码的名称，然后单击“下一步”
 8. 将应用密码复制到剪贴板，然后将它粘贴到你的应用。
 
-
 <center>![Cloud](./media/multi-factor-authentication-end-user-app-passwords-create-azure/app2.png)</center>
-
- 
 
 <!---HONumber=Mooncake_0905_2016-->

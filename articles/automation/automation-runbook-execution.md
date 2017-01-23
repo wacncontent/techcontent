@@ -1,23 +1,22 @@
-<properties
-    pageTitle="在 Azure 自动化中执行 Runbook | Azure"
-    description="详细介绍如何处理 Azure 自动化中的 Runbook。"
-    services="automation"
-    documentationcenter=""
-    author="mgoedtel"
-    manager="jwhit"
-    editor="tysonn" />  
+---
+title: 在 Azure 自动化中执行 Runbook | Azure
+description: 详细介绍如何处理 Azure 自动化中的 Runbook。
+services: automation
+documentationcenter: 
+author: mgoedtel
+manager: jwhit
+editor: tysonn
 
-<tags
-    ms.assetid="d10c8ce2-2c0b-4ea7-ba3c-d20e09b2c9ca"
-    ms.service="automation"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/02/2016"
-    wacn.date="01/09/2017"
-    ms.author="bwren" />  
-
+ms.assetid: d10c8ce2-2c0b-4ea7-ba3c-d20e09b2c9ca
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/02/2016
+wacn.date: 01/09/2017
+ms.author: bwren
+---
 
 # 在 Azure 自动化中执行 Runbook
 在 Azure 自动化中启动 Runbook 时，将会创建一个作业。作业是 Runbook 的单一执行实例。将分配一个 Azure 自动化工作线程来运行每个作业。尽管工作线程由多个 Azure 帐户共享，但不同自动化帐户中的作业是相互独立的。你无法控制要由哪个工作线程为作业的请求提供服务。一个 Runbook 可以同时运行多个作业。当你在 Azure 经典管理门户中查看 Runbook 列表时，列表中会列出为每个 Runbook 启动的最后一个作业的状态。可以查看每个 Runbook 的作业列表以跟踪每个作业的状态。有关不同作业状态的说明，请参阅[作业状态](#job-statuses)。
@@ -80,10 +79,12 @@ Runbook 仪表板显示单个 Runbook 的摘要。摘要图表显示在给定的
 
 以下示例命令检索示例 Runbook 的最后一个作业，并显示其状态、为 Runbook 参数提供的值以及作业的输出。
 
-	$job = (Get-AzureAutomationJob -AutomationAccountName "MyAutomationAccount" -Name "Test-Runbook" | sort LastModifiedDate -desc)[0]
-	$job.Status
-	$job.JobParameters
-	Get-AzureAutomationJobOutput -AutomationAccountName "MyAutomationAccount" -Id $job.Id -Stream Output
+```
+$job = (Get-AzureAutomationJob -AutomationAccountName "MyAutomationAccount" -Name "Test-Runbook" | sort LastModifiedDate -desc)[0]
+$job.Status
+$job.JobParameters
+Get-AzureAutomationJobOutput -AutomationAccountName "MyAutomationAccount" -Id $job.Id -Stream Output
+```
 
 ## <a name="fairshare"></a>公平共享
 为了在云中的所有 Runbook 之间共享资源，Azure 自动化在任何作业运行 3 小时后都会将其暂时卸载。PowerShell 工作流 Runbook 将会从上一个[检查点](http://technet.microsoft.com/zh-cn/library/dn469257.aspx#bk_Checkpoints)进行恢复。在此期间，该作业将显示“正在运行，正在等待资源”状态。如果该 Runbook 没有检查点或者作业在卸载之前尚未达到第一个检查点，则会从开始处重启。
@@ -95,6 +96,6 @@ Runbook 仪表板显示单个 Runbook 的摘要。摘要图表显示在给定的
 在创建 Runbook 时，应确保在两个检查点之间运行任何活动的时间不超过 3 小时。你可能需要向 Runbook 添加检查点以确保它不会达到此 3 小时限制，或者需要将长时间运行的操作进行分解。例如，你的 Runbook 可能对大型 SQL 数据库执行了重新编制索引。如果这一项操作未在公平份额限制内完成，则作业将会卸载并从开始处重启。在此情况下，你应该将重新编制索引操作拆分成多个步骤（例如，一次重新编制一个表的索引），然后在每项操作的后面插入一个检查点，使作业能够在上次操作后恢复并得以完成。
 
 ## 后续步骤
-* 若要详细了解可用于在 Azure 自动化中启动 Runbook 的不同方法，请参阅[在 Azure 自动化中启动 Runbook](/documentation/articles/automation-starting-a-runbook/)
+* 若要详细了解可用于在 Azure 自动化中启动 Runbook 的不同方法，请参阅[在 Azure 自动化中启动 Runbook](./automation-starting-a-runbook.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

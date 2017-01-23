@@ -24,11 +24,11 @@ Azure IoT 套件提供独特的功能，从 IoT 设备预配、连接到及存�
 
 Azure 提供完整的云解决方案，其中结合了持续成长的集成式云服务（分析、存储、安全、网络功能和 Web）集合，通过行业领先的承诺来为数据提供保护与隐私。我们的[假设性违规](https://azure.microsoft.com/blog/red-teaming-using-cutting-edge-threat-simulation-to-harden-the-microsoft-enterprise-cloud)策略将通过由软件安全专家组成的专属“红队”，来模拟攻击、测试要检测的 Azure 能力、防范新兴威胁，以及从违规中恢复。我们的[全球事件响应](https://www.microsoft.com/TrustCenter/Security/DesignOpSecurity)团队夜以继日地工作，以减缓攻击与恶意活动造成的影响。该团队遵循事件管理、通信和恢复所创建的过程，并与内部和外部伙伴合作来使用可探索且可预测的接口。
 
-我们的系统提供持续的入侵检测和防护、服务攻击预防、定期渗透测试和法医式工具帮助识别与缓解威胁。[多重身份验证](/documentation/articles/multi-factor-authentication/)可为访问网络的最终用户提供额外的安全层。此外，对于应用程序和主机提供程序，我们提供访问控制、监视、反恶意软件、漏洞扫描、修补和配置管理。
+我们的系统提供持续的入侵检测和防护、服务攻击预防、定期渗透测试和法医式工具帮助识别与缓解威胁。[多重身份验证](../articles/multi-factor-authentication/multi-factor-authentication.md)可为访问网络的最终用户提供额外的安全层。此外，对于应用程序和主机提供程序，我们提供访问控制、监视、反恶意软件、漏洞扫描、修补和配置管理。
 
 Azure IoT 套件使用内置于 Azure 平台的安全和隐私功能，以及我们针对所有 Microsoft 软件进行的安全开发和操作所提供的 SDL 和 OSA 过程。这些过程提供基础结构保护、网络保护，以及标识与管理功能，作为任何解决方案安全的基础。
 
-[IoT 套件](/documentation/articles/iot-suite-what-is-azure-iot/)内的 [Azure IoT 中心](/documentation/articles/iot-hub-what-is-iot-hub/)提供完全托管的服务，使用每一设备的安全凭据和访问控制，在 IoT 设备与 Azure 服务之间启用可靠且安全的双向通信，例如 [Azure 流分析](/documentation/articles/stream-analytics-introduction/)。
+[IoT 套件](../articles/iot-suite/iot-suite-what-is-azure-iot.md)内的 [Azure IoT 中心](../articles/iot-hub/iot-hub-what-is-iot-hub.md)提供完全托管的服务，使用每一设备的安全凭据和访问控制，在 IoT 设备与 Azure 服务之间启用可靠且安全的双向通信，例如 [Azure 流分析](../articles/stream-analytics/stream-analytics-introduction.md)。
 
 为了以最佳方式传达内置于 Azure IoT 套件的安全和隐私功能，我们已将套件细分为三个主要安全领域。
 
@@ -38,8 +38,8 @@ Azure IoT 套件使用内置于 Azure 平台的安全和隐私功能，以及我
 
 当设备不在现场时，Azure IoT 套件将保护它们，方法是为每个设备提供唯一的标识密钥，在设备运行时，IoT 基础结构可用于与其进行通信。该过程非常快速且可轻松设置。使用用户选择的设备 ID 生成的密钥将形成令牌的基础，可以在设备和 Azure IoT 中心之间的所有通信中使用。
 
-设备 ID 可以在制造期间（例如硬件信任模块中的闪存）与设备关联，或者可以使用现有的固定标识作为代理（例如 CPU 序列号）。由于更改设备中的此识别信息并不简单，因此请务必引入逻辑设备 ID，以防万一基础设备硬件更改，逻辑设备可保持不变。在某些情况下，设备标识的关联将发生在设备部署期间（也就是已经过验证的现场工程师实际上将在与 IoT 解决方案后端通信的同时配置新设备）。[Azure IoT 中心标识注册表](/documentation/articles/iot-hub-devguide/)针对解决方案为设备标识和安全密钥提供安全存储。可将单个或一组设备标识添加到允许列表或方块列表，以便完全控制设备访问。
- 
+设备 ID 可以在制造期间（例如硬件信任模块中的闪存）与设备关联，或者可以使用现有的固定标识作为代理（例如 CPU 序列号）。由于更改设备中的此识别信息并不简单，因此请务必引入逻辑设备 ID，以防万一基础设备硬件更改，逻辑设备可保持不变。在某些情况下，设备标识的关联将发生在设备部署期间（也就是已经过验证的现场工程师实际上将在与 IoT 解决方案后端通信的同时配置新设备）。[Azure IoT 中心标识注册表](../articles/iot-hub/iot-hub-devguide.md)针对解决方案为设备标识和安全密钥提供安全存储。可将单个或一组设备标识添加到允许列表或方块列表，以便完全控制设备访问。
+
 云中的 Azure IoT 中心访问控制策略，能够启用和禁用任何设备标识，必要时可提供方法来取消关联 IoT 部署中的设备。设备的这种关联和取消关联基于每个设备标识。
 
 其他设备安全功能包括：
@@ -51,7 +51,7 @@ Azure IoT 套件使用内置于 Azure 平台的安全和隐私功能，以及我
 ### 安全的连接 
 
 消息传递的持久性是所有 IoT 解决方案的重要功能。永久传递命令和/或从设备接收数据的要求，可通过以下事实强调说明：IoT 设备是通过 Internet 或不可靠的其他类似网络来连接。Azure IoT 中心通过通知系统来提供云与设备之间消息传递的持久性，以响应消息。消息传递的额外持久性可通过在 IoT 中心缓存消息来实现，针对遥测最多七天，针对命令最多两天。
- 
+
 为确保可在资源受限的环境中节省资源和操作，效率非常重要。IoT 中心支持 HTTPS（安全 HTTP，流行 http 协议的行业标准安全版本），能够进行有效的通信。Azure IoT 中心支持的高级消息队列协议 (AMQP) 和消息队列遥测传输 (MQTT)，不只是根据资源使用的效率而设计，同时也可进行可靠的消息传递。
 
 可缩放性需要能够与各式各样设备安全互操作的能力。Azure IoT 中心能够安全连接到已启用 IP 和未启用 IP 的设备。已启用 IP 的设备能够直接连接，并通过安全连接与 IoT 中心通信。未启用 IP 的设备是资源受限的，只能通过短距离协议（例如 Zwave、ZigBee 和蓝牙）来连接。现场网关可用于聚合这些设备并执行协议转换，以便与云进行安全的双向通信。
@@ -67,8 +67,8 @@ Azure IoT 套件使用内置于 Azure 平台的安全和隐私功能，以及我
 通过加密通信以处理云中的数据，Azure IoT 套件有助于确保数据安全。这将提供弹性来实现额外加密并管理安全密钥。使用 Azure Active Directory (AAD) 进行用户身份验证和授权，Azure IoT 套件可以针对在云中的数据提供以策略为基础的授权模型，启用可审核和审查的轻松访问管理。此模型还能够以接近实时的方式吊销对云中数据以及连接到 Azure IoT 套件的设备的访问权限。
 
 将数据移到云中之后，可以在任何用户定义工作流中处理和存储数据。访问数据的每个部分根据所用的存储服务通过 Azure Active Directory 来控制。
-   
-IoT 基础结构使用的所有密钥存储在云的安全存储中，并具有滚动更新能力，以防密钥需要重新预配。数据可以存储在 [DocumentDB](/documentation/articles/documentdb-introduction/) 或 [SQL 数据库](/documentation/articles/sql-database-faq/)中，启用所需安全级别的定义。此外，Azure 提供一种方式用于监视和审核对数据的所有访问权限，以提醒有任何入侵或未经授权的访问。
+
+IoT 基础结构使用的所有密钥存储在云的安全存储中，并具有滚动更新能力，以防密钥需要重新预配。数据可以存储在 [DocumentDB](../articles/documentdb/documentdb-introduction.md) 或 [SQL 数据库](../articles/sql-database/sql-database-faq.md)中，启用所需安全级别的定义。此外，Azure 提供一种方式用于监视和审核对数据的所有访问权限，以提醒有任何入侵或未经授权的访问。
 
 ## 结束语
 
@@ -80,9 +80,9 @@ Azure IoT 套件根据设计将构建安全措施，启用安全的资产监视�
 
 每个 Azure IoT 套件的预配置解决方案将创建 Azure 服务的实例，例如：
 
-- [**Azure IoT 中心**](/home/features/iot-hub/)：将云连接到“事物”的网关。可以缩放为每个中心有百万个连接，并使用每设备身份验证支持来处理大量数据，以帮助保护解决方案。
-- [**Azure DocumentDB**](/home/features/documentdb/)：适用于半结构化数据的可缩放且已完全编制索引的数据库服务，可管理预配的设备的元数据，例如，属性、配置和安全属性。DocumentDB 提供高性能和高吞吐量处理、架构不可知的数据索引，以及丰富的 SQL 查询接口。
-- [**Azure 流分析**](/home/features/stream-analytics/)：云中处理的实时流可让你快速开发和部署低成本分析解决方案，以便从设备、传感器、基础结构和应用程序实时获取深入了解。来自这种完全托管服务的数据可缩放为任何数量，同时保持高吞吐量、低延迟和复原能力。
-- [**Blob 存储**](/home/features/storage/)：可靠且符合经济效益的云存储，适用于设备要发送到云的数据。
+- [**Azure IoT 中心**](https://www.azure.cn/home/features/iot-hub/)：将云连接到“事物”的网关。可以缩放为每个中心有百万个连接，并使用每设备身份验证支持来处理大量数据，以帮助保护解决方案。
+- [**Azure DocumentDB**](https://www.azure.cn/home/features/documentdb/)：适用于半结构化数据的可缩放且已完全编制索引的数据库服务，可管理预配的设备的元数据，例如，属性、配置和安全属性。DocumentDB 提供高性能和高吞吐量处理、架构不可知的数据索引，以及丰富的 SQL 查询接口。
+- [**Azure 流分析**](https://www.azure.cn/home/features/stream-analytics/)：云中处理的实时流可让你快速开发和部署低成本分析解决方案，以便从设备、传感器、基础结构和应用程序实时获取深入了解。来自这种完全托管服务的数据可缩放为任何数量，同时保持高吞吐量、低延迟和复原能力。
+- [**Blob 存储**](https://www.azure.cn/home/features/storage/)：可靠且符合经济效益的云存储，适用于设备要发送到云的数据。
 
 <!---HONumber=Mooncake_0829_2016-->

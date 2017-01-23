@@ -1,37 +1,37 @@
-<properties
-	pageTitle="Azure AD Android 入门 | Azure"
-	description="如何生成一个与 Azure AD 集成以方便登录，并使用 OAuth 调用 Azure AD 保护 API 的 Android 应用程序。"
-	services="active-directory"
-	documentationCenter="android"
-	authors="brandwe"
-	manager="mbaldwin"
-	editor=""/>
+---
+title: Azure AD Android 入门 | Azure
+description: 如何生成一个与 Azure AD 集成以方便登录，并使用 OAuth 调用 Azure AD 保护 API 的 Android 应用程序。
+services: active-directory
+documentationCenter: android
+authors: brandwe
+manager: mbaldwin
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="09/16/2016"
-	ms.author="brandwe"
-	wacn.date="01/09/2017"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: mobile-android
+ms.devlang: java
+ms.topic: article
+ms.date: 09/16/2016
+ms.author: brandwe
+wacn.date: 01/09/2017
+---
 
 # 将 Azure AD 集成到 Android 应用程序中
 
-[AZURE.INCLUDE [active-directory-devquickstarts-switcher](../../includes/active-directory-devquickstarts-switcher.md)]
+[!INCLUDE [active-directory-devquickstarts-switcher](../../includes/active-directory-devquickstarts-switcher.md)]
 
-[AZURE.INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
+[!INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
 
 如果你要开发桌面应用程序，Azure AD 可让你简单直接地使用用户的 Active Directory 帐户对其进行身份验证。它还可以让应用程序安全地使用 Azure AD 保护的任何 Web API，例如 Office 365 API 或 Azure API。
 
 对于需要访问受保护资源的 Android 客户端，Azure AD 提供 Active Directory 身份验证库 (ADAL)。在本质上，ADAL 的唯一用途就是方便应用程序获取访问令牌。为了演示这种简便性，我们生成了一个 Android 待办事项列表应用程序，其中包括：
 
--	使用 [OAuth 2.0 身份验证协议](/documentation/articles/active-directory-protocols-oauth-code/)获取调用待办事项列表 API 的访问令牌。
--	获取用户的待办事项列表
--	将用户注销。
+- 使用 [OAuth 2.0 身份验证协议](./active-directory-protocols-oauth-code.md)获取调用待办事项列表 API 的访问令牌。
+- 获取用户的待办事项列表
+- 将用户注销。
 
-若要开始，你需要一个可在其中创建用户和注册应用程序的 Azure AD 租户。如果你还没有租户，请[了解如何获取租户](/documentation/articles/active-directory-howto-tenant/)。
+若要开始，你需要一个可在其中创建用户和注册应用程序的 Azure AD 租户。如果你还没有租户，请[了解如何获取租户](./active-directory-howto-tenant.md)。
 
 ## 步骤 1：下载并运行 Node.js REST API TODO 示例服务器
 
@@ -39,7 +39,7 @@
 
 有关如何设置的信息，请访问我们的现有示例：
 
-- [适用于 Node.js 的 Azure Active Directory 示例 REST API 服务](/documentation/articles/active-directory-devquickstarts-webapi-nodejs/)
+- [适用于 Node.js 的 Azure Active Directory 示例 REST API 服务](./active-directory-devquickstarts-webapi-nodejs.md)
 
 ## 步骤 2：向 Azure AD 租户注册 Web API
 
@@ -89,8 +89,6 @@
 10. 查找“客户端 ID”值并将它复制到某个位置，稍后配置应用程序时需要用到它。
 11. 在“针对其他应用程序的权限”中，单击“添加应用程序”。 在“显示”下拉列表中选择“其他”，然后单击上方的复选标记。找到并单击“TodoListService”，然后单击底部的复选标记以添加该应用程序。从“委托的权限”下拉列表中选择“访问 TodoListService”，然后保存配置。
 
-
-
 若要使用 Maven 生成，你可以在顶层使用 pom.xml
 
   - 将此存储库克隆到所选的目录：
@@ -123,8 +121,10 @@
 
 若要通过 git 获取 SDK 的源代码，只需键入：
 
-    git clone git@github.com:AzureAD/azure-activedirectory-library-for-android.git
-    cd ./azure-activedirectory-library-for-android/src
+```
+git clone git@github.com:AzureAD/azure-activedirectory-library-for-android.git
+cd ./azure-activedirectory-library-for-android/src
+```
 
 ####选项 3：通过 Gradle 获取二进制文件
 
@@ -132,22 +132,23 @@
 
 gradle
 
-	repositories {
-		   mavenCentral()
-		   flatDir {
-		       dirs 'libs'
-		   }
-		   maven {
-		       url "YourLocalMavenRepoPath\\.m2\\repository"
-		   }
-	}
-	dependencies {
-		   compile fileTree(dir: 'libs', include: ['*.jar'])
-		   compile('com.microsoft.aad:adal:1.1.1') {
-		       exclude group: 'com.android.support'
-		   } // Recent version is 1.1.1
-	}
-
+```
+repositories {
+       mavenCentral()
+       flatDir {
+           dirs 'libs'
+       }
+       maven {
+           url "YourLocalMavenRepoPath\\.m2\\repository"
+       }
+}
+dependencies {
+       compile fileTree(dir: 'libs', include: ['*.jar'])
+       compile('com.microsoft.aad:adal:1.1.1') {
+           exclude group: 'com.android.support'
+       } // Recent version is 1.1.1
+}
+```
 
 ####选项 4：通过 Maven 获取 aar
 
@@ -155,21 +156,19 @@ gradle
 
 xml
 
-	<dependency>
-		   <groupId>com.microsoft.aad</groupId>
-		   <artifactId>adal</artifactId>
-		   <version>1.1.1</version>
-		   <type>aar</type>
-	</dependency>
-
-
+```
+<dependency>
+       <groupId>com.microsoft.aad</groupId>
+       <artifactId>adal</artifactId>
+       <version>1.1.1</version>
+       <type>aar</type>
+</dependency>
+```
 
 ####选项 5：libs 文件夹中的 jar 包
 可以从 maven 存储库获取 jar 文件并将其放入项目中的 *libs* 文件夹。你还需要将所需的资源复制到项目，因为 jar 包不包括这些项目。
 
-
 ### 步骤 5：在项目中添加对 Android ADAL 的引用
-
 
 2. 添加对项目的引用，并将其指定为 Android 库。如果你不确定如何执行此操作，请[单击此处了解详细信息](http://developer.android.com/tools/projects/projects-eclipse.html)
 
@@ -179,112 +178,119 @@ xml
 
 Java
 
-	<uses-permission android:name="android.permission.INTERNET" />
-		    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-		    <application
-		          android:allowBackup="true"
-		          android:debuggable="true"
-		          android:icon="@drawable/ic_launcher"
-		          android:label="@string/app_name"
-		          android:theme="@style/AppTheme" >
-		
-		          <activity
-		              android:name="com.microsoft.aad.adal.AuthenticationActivity"
-		              android:label="@string/title_login_hello_app" >
-		          </activity>
-		     ....
-	<application/>
-		    
+```
+<uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <application
+              android:allowBackup="true"
+              android:debuggable="true"
+              android:icon="@drawable/ic_launcher"
+              android:label="@string/app_name"
+              android:theme="@style/AppTheme" >
+
+              <activity
+                  android:name="com.microsoft.aad.adal.AuthenticationActivity"
+                  android:label="@string/title_login_hello_app" >
+              </activity>
+         ....
+<application/>
+```
 
 7. 在主要活动中创建 AuthenticationContext 的实例。有关此调用的详细信息超出了本自述文件的范畴，但你可以通过查看 [Android 本机客户端示例](https://github.com/AzureADSamples/NativeClient-Android)来获得一个良好的起点。下面是一个示例：
 Java
 
     // 机构采用了 https://login.chinacloudapi.cn/yourtenant.partner.onmschina.cn 
     mContext = new AuthenticationContext(MainActivity.this, authority, true) 的形式；// 这将使用 SharedPreferences 作为            默认缓存
-    
+
   * 注意：mContext 是活动中的一个字段
 
 8. 复制此代码块，以便在用户输入凭据并收到授权代码后处理 AuthenticationActivity 的结束：
 
 Java
 
-	@Override
-	  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		    super.onActivityResult(requestCode, resultCode, data);
-		     if (mContext != null) {
-		      mContext.onActivityResult(requestCode, resultCode, data);
-		    }
-	}
-		    
+```
+@Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+         if (mContext != null) {
+          mContext.onActivityResult(requestCode, resultCode, data);
+        }
+}
+```
 
 9. 若要请求令牌，你可以定义一个回调
 
 Java
 
-	private AuthenticationCallback<AuthenticationResult> callback = new AuthenticationCallback<AuthenticationResult>() {
-		
-		@Override
-		public void onError(Exception exc) {
-		     if (exc instanceof AuthenticationException) {
-		       textViewStatus.setText("Cancelled");
-		         Log.d(TAG, "Cancelled");
-		         } else {
-		            textViewStatus.setText("Authentication error:" + exc.getMessage());
-		            Log.d(TAG, "Authentication error:" + exc.getMessage());
-		           }
-		       }
-		
-		    @Override
-		      public void onSuccess(AuthenticationResult result) {
-		        mResult = result;
-		
-		        if (result == null || result.getAccessToken() == null
-		              || result.getAccessToken().isEmpty()) {
-		                    textViewStatus.setText("Token is empty");
-		                    Log.d(TAG, "Token is empty");
-		         } else {
-		             // request is successful
-		            Log.d(TAG, "Status:" + result.getStatus() + " Expired:"
-		               + result.getExpiresOn().toString());
-		               textViewStatus.setText(PASSED);
-		            }
-		         }
-	};
-    
+```
+private AuthenticationCallback<AuthenticationResult> callback = new AuthenticationCallback<AuthenticationResult>() {
+
+    @Override
+    public void onError(Exception exc) {
+         if (exc instanceof AuthenticationException) {
+           textViewStatus.setText("Cancelled");
+             Log.d(TAG, "Cancelled");
+             } else {
+                textViewStatus.setText("Authentication error:" + exc.getMessage());
+                Log.d(TAG, "Authentication error:" + exc.getMessage());
+               }
+           }
+
+        @Override
+          public void onSuccess(AuthenticationResult result) {
+            mResult = result;
+
+            if (result == null || result.getAccessToken() == null
+                  || result.getAccessToken().isEmpty()) {
+                        textViewStatus.setText("Token is empty");
+                        Log.d(TAG, "Token is empty");
+             } else {
+                 // request is successful
+                Log.d(TAG, "Status:" + result.getStatus() + " Expired:"
+                   + result.getExpiresOn().toString());
+                   textViewStatus.setText(PASSED);
+                }
+             }
+};
+```
+
 10. 最后，使用该回调请求令牌：
 
 Java
 
-	mContext.acquireToken(MainActivity.this, resource, clientId, redirect, user_loginhint, PromptBehavior.Auto, "",
-		                    callback);
-		    
+```
+mContext.acquireToken(MainActivity.this, resource, clientId, redirect, user_loginhint, PromptBehavior.Auto, "",
+                        callback);
 
-	参数说明：
+参数说明：
 
-	  * Resource 是必需的，它是你尝试访问的资源。
-	  * Clientid 是必需的，它来自 AzureAD 门户。
-	  * 你可以将 redirectUri 设置为包名称。对于 acquireToken 调用，不需要提供此参数。
-	  * PromptBehavior 可帮助请求凭据以跳过缓存和 Cookie。
-	  * 在交换令牌的授权代码后，将调用 Callback。
-	
-	  Callback 具有一个包含 accesstoken、过期日期和 idtoken 信息的 AuthenticationResult 对象。
-	
-	可选：**acquireTokenSilent**
-	
-	可以调用 **acquireTokenSilent** 来处理缓存和令牌刷新。它也提供了同步版本。它接受使用 userid 作为参数。
-	
+  * Resource 是必需的，它是你尝试访问的资源。
+  * Clientid 是必需的，它来自 AzureAD 门户。
+  * 你可以将 redirectUri 设置为包名称。对于 acquireToken 调用，不需要提供此参数。
+  * PromptBehavior 可帮助请求凭据以跳过缓存和 Cookie。
+  * 在交换令牌的授权代码后，将调用 Callback。
+
+  Callback 具有一个包含 accesstoken、过期日期和 idtoken 信息的 AuthenticationResult 对象。
+
+可选：**acquireTokenSilent**
+
+可以调用 **acquireTokenSilent** 来处理缓存和令牌刷新。它也提供了同步版本。它接受使用 userid 作为参数。
+```
+
 Java
-		
-	mContext.acquireTokenSilent(resource, clientid, userId, callback );
-		    
+
+```
+mContext.acquireTokenSilent(resource, clientid, userId, callback );
+```
 
 11. **Broker**：
   Microsoft Intune 的公司门户应用程序将提供代理组件。如果在验证器中创建了一个用户帐户并且开发人员选择不跳过代理帐户，ADAL 将使用代理帐户。开发人员可以使用以下操作跳过代理用户：
 
 Java
 
-     AuthenticationSettings.Instance.setSkipBroker(true);
-    
+```
+ AuthenticationSettings.Instance.setSkipBroker(true);
+```
 
  开发人员需要注册特殊的 redirectUri 供代理使用。RedirectUri 的格式为 msauth://packagename/Base64UrlencodedSignature。你可以使用脚本“brokerRedirectPrint.ps1”或使用 API 调用 mContext.getBrokerRedirectUri 获取应用程序的 redirecturi。签名与签名证书相关。
 
@@ -292,8 +298,10 @@ Java
 
 Java
 
-	String brokerAccount =  mContext.getBrokerUser();
- 
+```
+String brokerAccount =  mContext.getBrokerUser();
+```
+
  如果帐户有效，将返回代理用户。
 
  应用程序清单应有权使用 AccountManager 帐户：http://developer.android.com/reference/android/accounts/AccountManager.html
@@ -301,7 +309,6 @@ Java
  * GET\_ACCOUNTS
  * USE\_CREDENTIALS
  * MANAGE\_ACCOUNTS
-
 
 使用本演练时，你应会获得与 Azure Active Directory 成功集成所需的项目。有关此工作的更多示例，请访问 GitHub 上的 AzureADSamples/ 存储库。
 
@@ -327,14 +334,17 @@ ADAL 在 SharedPreferences 中提供默认缓存，以及一些简单的缓存�
 
 Java
 
-	ITokenCacheStore cache = mContext.getCache();
+```
+ITokenCacheStore cache = mContext.getCache();
+```
 
 你还可以提供缓存实现（如果你想要对其进行自定义）。
 
 Java
 
-	mContext = new AuthenticationContext(MainActivity.this, authority, true, yourCache);
-
+```
+mContext = new AuthenticationContext(MainActivity.this, authority, true, yourCache);
+```
 
 ### PromptBehavior
 
@@ -346,8 +356,9 @@ ADAL 提供用于指定提示行为的选项。如果刷新令牌无效并且需
 
 Java
 
-	Future<AuthenticationResult> result = mContext.acquireTokenSilent(resource, clientid, userId, callback );
-    
+```
+Future<AuthenticationResult> result = mContext.acquireTokenSilent(resource, clientid, userId, callback );
+```
 
 你也可以使用此方法执行同步调用。可以将回调设置为 null，或使用 acquireTokenSilentSync。
 
@@ -369,32 +380,32 @@ Java
 
 你可以将库配置为生成有助于诊断问题的日志消息。若要配置日志记录，你可以执行以下调用以配置一个回调，ADAL 将使用该回调来移交它所生成的每条日志消息。
 
-
  Java
 
-	Logger.getInstance().setExternalLogger(new ILogger() {
-		 @Override
-		public void Log(String tag, String message, String additionalMessage, LogLevel level, ADALError errorCode) {
-		 ...
-		// You can write this to logfile depending on level or errorcode.
-		 writeToLogFile(getApplicationContext(), tag +":" + message + "-" + additionalMessage);
-		}
-	}
-		 
+    Logger.getInstance().setExternalLogger(new ILogger() {
+         @Override
+        public void Log(String tag, String message, String additionalMessage, LogLevel level, ADALError errorCode) {
+         ...
+        // You can write this to logfile depending on level or errorcode.
+         writeToLogFile(getApplicationContext(), tag +":" + message + "-" + additionalMessage);
+        }
+    }
+
 消息可写入自定义日志文件，如下所示。遗憾的是，没有标准的方法可从设备中获取日志。有些服务可帮助你实现此目的。你也可以还创造自己的方法，例如，将文件发送到服务器。
 
 Java
 
-	private syncronized void writeToLogFile(Context ctx, String msg) {
-		File directory = ctx.getDir(ctx.getPackageName(), Context.MODE_PRIVATE);
-		File logFile = new File(directory, "logfile");
-		FileOutputStream outputStream = new FileOutputStream(logFile, true);
-		OutputStreamWriter osw = new OutputStreamWriter(outputStream);
-		osw.write(msg);
-		osw.flush();
-		osw.close();
-	}
-
+```
+private syncronized void writeToLogFile(Context ctx, String msg) {
+    File directory = ctx.getDir(ctx.getPackageName(), Context.MODE_PRIVATE);
+    File logFile = new File(directory, "logfile");
+    FileOutputStream outputStream = new FileOutputStream(logFile, true);
+    OutputStreamWriter osw = new OutputStreamWriter(outputStream);
+    osw.write(msg);
+    osw.flush();
+    osw.close();
+}
+```
 
 ##### 日志记录级别
 
@@ -407,14 +418,15 @@ Java
 
 Java
 
-	Logger.getInstance().setLogLevel(Logger.LogLevel.Verbose);
- 
+```
+Logger.getInstance().setLogLevel(Logger.LogLevel.Verbose);
+```
 
  除了将所有日志消息发送到任何自定义日志回调以外，还将其发送到 logcat。
 可以将日志从 logcat 提取到文件，如下所示：
 
-	adb logcat > "C:\logmsg\logfile.txt"
- 
+    adb logcat > "C:\logmsg\logfile.txt"
+
  有关 adb 命令的更多示例：https://developer.android.com/tools/debugging/debugging-log.html#startingLogcat
 
 #### 网络跟踪
@@ -425,7 +437,6 @@ Fiddler 是最方便的 HTTP 跟踪工具。使用以下链接设置该工具以
 
 + [针对 Android 设置 Fiddler](http://docs.telerik.com/fiddler/configure-fiddler/tasks/ConfigureForAndroid)
 + [为 ADAL 配置 Fiddler 规则](https://github.com/AzureAD/azure-activedirectory-library-for-android/wiki/How-to-listen-to-httpUrlConnection-in-Android-app-from-Fiddler)
-
 
 ### 对话模式
 没有活动的 acquireToken 方法支持对话提示。
@@ -442,11 +453,13 @@ AuthenticationParameters 类提供通过 Oauth2 持有者质询获取 authorizat
 
 在关闭应用程序后，Android Webview 不会清除会话 Cookie。你可以使用以下示例代码来处理此问题：
 Java
-		
-	CookieSyncManager.createInstance(getApplicationContext());
-	CookieManager cookieManager = CookieManager.getInstance();
-	cookieManager.removeSessionCookie();
-	CookieSyncManager.getInstance().sync();
+
+```
+CookieSyncManager.createInstance(getApplicationContext());
+CookieManager cookieManager = CookieManager.getInstance();
+cookieManager.removeSessionCookie();
+CookieSyncManager.getInstance().sync();
+```
 
 有关 Cookie 的详细信息：http://developer.android.com/reference/android/webkit/CookieSyncManager.html
 
@@ -457,24 +470,23 @@ ADAL 库包含以下两条 ProgressDialog 消息的英文字符串。
 如果需要本地化的字符串，你的应用程序应覆盖这些英文字符串。
 
 Java
-		
-	<string name="app_loading">Loading...</string>
-	<string name="broker_processing">Broker is processing</string>
-	<string name="http_auth_dialog_username">Username</string>
-	<string name="http_auth_dialog_password">Password</string>
-	<string name="http_auth_dialog_title">Sign In</string>
-	<string name="http_auth_dialog_login">Login</string>
-	<string name="http_auth_dialog_cancel">Cancel</string>
 
-
-
+```
+<string name="app_loading">Loading...</string>
+<string name="broker_processing">Broker is processing</string>
+<string name="http_auth_dialog_username">Username</string>
+<string name="http_auth_dialog_password">Password</string>
+<string name="http_auth_dialog_title">Sign In</string>
+<string name="http_auth_dialog_login">Login</string>
+<string name="http_auth_dialog_cancel">Cancel</string>
+```
 
 ### NTLM 对话
 ADAL 版本 1.1.0 支持通过 WebViewClient 中的 onReceivedHttpAuthRequest 事件处理的 NTLM 对话。你可以自定义对话布局和字符串。
 
 ### 跨应用 SSO
-了解[如何使用 ADAL 在 Android 上启用跨应用 SSO](/documentation/articles/active-directory-sso-android/)
+了解[如何使用 ADAL 在 Android 上启用跨应用 SSO](./active-directory-sso-android.md)
 
-[AZURE.INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
+[!INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

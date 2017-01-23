@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure AD Connect：端口 | Azure"
-    description="此技术参考页面描述了需要为 Azure AD Connect 打开的端口"
-    services="active-directory"
-    documentationcenter=""
-    author="billmath"
-    manager="femila"
-    editor="curtand" />  
+---
+title: Azure AD Connect：端口 | Azure
+description: 此技术参考页面描述了需要为 Azure AD Connect 打开的端口
+services: active-directory
+documentationcenter: 
+author: billmath
+manager: femila
+editor: curtand
 
-<tags
-    ms.assetid="de97b225-ae06-4afc-b2ef-a72a3643255b"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/06/2016"
-    wacn.date="01/06/2017"
-    ms.author="billmath" />
+ms.assetid: de97b225-ae06-4afc-b2ef-a72a3643255b
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/06/2016
+wacn.date: 01/06/2017
+ms.author: billmath
+---
 
 # 混合标识所需的端口和协议
 以下文档是用于实现混合标识解决方案所需的端口和协议的技术参考。使用下图并参考相应的表格。

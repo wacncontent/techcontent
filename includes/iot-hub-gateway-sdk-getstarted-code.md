@@ -52,7 +52,7 @@ int main(int argc, char** argv)
         (void)getchar();
         Gateway_LL_Destroy(gateway);
     }
-	return 0;
+    return 0;
 }
 ```
 
@@ -123,42 +123,44 @@ int helloWorldThread(void *param)
     HELLOWORLD_HANDLE_DATA* handleData = param;
     MESSAGE_CONFIG msgConfig;
     MAP_HANDLE propertiesMap = Map_Create(NULL);
-    
-    // Add a property named "helloWorld" with a value of "from Azure IoT
-    // Gateway SDK simple sample!" to a set of message properties that
-    // will be appended to the message before publishing it. 
-    Map_AddOrUpdate(propertiesMap, "helloWorld", "from Azure IoT Gateway SDK simple sample!")
 
-    // Set the content for the message
-    msgConfig.size = strlen(HELLOWORLD_MESSAGE);
-    msgConfig.source = HELLOWORLD_MESSAGE;
+```
+// Add a property named "helloWorld" with a value of "from Azure IoT
+// Gateway SDK simple sample!" to a set of message properties that
+// will be appended to the message before publishing it. 
+Map_AddOrUpdate(propertiesMap, "helloWorld", "from Azure IoT Gateway SDK simple sample!")
 
-    // Set the properties for the message
-    msgConfig.sourceProperties = propertiesMap;
-    
-    // Create a message based on the msgConfig structure
-    MESSAGE_HANDLE helloWorldMessage = Message_Create(&msgConfig);
+// Set the content for the message
+msgConfig.size = strlen(HELLOWORLD_MESSAGE);
+msgConfig.source = HELLOWORLD_MESSAGE;
 
-    while (1)
+// Set the properties for the message
+msgConfig.sourceProperties = propertiesMap;
+
+// Create a message based on the msgConfig structure
+MESSAGE_HANDLE helloWorldMessage = Message_Create(&msgConfig);
+
+while (1)
+{
+    if (handleData->stopThread)
     {
-        if (handleData->stopThread)
-        {
-            (void)Unlock(handleData->lockHandle);
-            break; /*gets out of the thread*/
-        }
-        else
-        {
-            // publish the message to the broker
-            (void)Broker_Publish(handleData->brokerHandle, helloWorldMessage);
-            (void)Unlock(handleData->lockHandle);
-        }
-
-        (void)ThreadAPI_Sleep(5000); /*every 5 seconds*/
+        (void)Unlock(handleData->lockHandle);
+        break; /*gets out of the thread*/
+    }
+    else
+    {
+        // publish the message to the broker
+        (void)Broker_Publish(handleData->brokerHandle, helloWorldMessage);
+        (void)Unlock(handleData->lockHandle);
     }
 
-    Message_Destroy(helloWorldMessage);
+    (void)ThreadAPI_Sleep(5000); /*every 5 seconds*/
+}
 
-    return 0;
+Message_Destroy(helloWorldMessage);
+
+return 0;
+```
 }
 ```
 
@@ -183,38 +185,40 @@ Logger 模块接收来自中转站的消息，并将其写入文件中。它不�
 static void Logger_Receive(MODULE_HANDLE moduleHandle, MESSAGE_HANDLE messageHandle)
 {
 
-    time_t temp = time(NULL);
-    struct tm* t = localtime(&temp);
-    char timetemp[80] = { 0 };
+```
+time_t temp = time(NULL);
+struct tm* t = localtime(&temp);
+char timetemp[80] = { 0 };
 
-    // Get the message properties from the message
-    CONSTMAP_HANDLE originalProperties = Message_GetProperties(messageHandle); 
-    MAP_HANDLE propertiesAsMap = ConstMap_CloneWriteable(originalProperties);
+// Get the message properties from the message
+CONSTMAP_HANDLE originalProperties = Message_GetProperties(messageHandle); 
+MAP_HANDLE propertiesAsMap = ConstMap_CloneWriteable(originalProperties);
 
-    // Convert the collection of properties into a JSON string
-    STRING_HANDLE jsonProperties = Map_ToJSON(propertiesAsMap);
+// Convert the collection of properties into a JSON string
+STRING_HANDLE jsonProperties = Map_ToJSON(propertiesAsMap);
 
-    //  base64 encode the message content
-    const CONSTBUFFER * content = Message_GetContent(messageHandle);
-    STRING_HANDLE contentAsJSON = Base64_Encode_Bytes(content->buffer, content->size);
+//  base64 encode the message content
+const CONSTBUFFER * content = Message_GetContent(messageHandle);
+STRING_HANDLE contentAsJSON = Base64_Encode_Bytes(content->buffer, content->size);
 
-    // Start the construction of the final string to be logged by adding
-    // the timestamp
-    STRING_HANDLE jsonToBeAppended = STRING_construct(",{\"time\":\"");
-    STRING_concat(jsonToBeAppended, timetemp);
+// Start the construction of the final string to be logged by adding
+// the timestamp
+STRING_HANDLE jsonToBeAppended = STRING_construct(",{\"time\":\"");
+STRING_concat(jsonToBeAppended, timetemp);
 
-    // Add the message properties
-    STRING_concat(jsonToBeAppended, "\",\"properties\":"); 
-    STRING_concat_with_STRING(jsonToBeAppended, jsonProperties);
+// Add the message properties
+STRING_concat(jsonToBeAppended, "\",\"properties\":"); 
+STRING_concat_with_STRING(jsonToBeAppended, jsonProperties);
 
-    // Add the content
-    STRING_concat(jsonToBeAppended, ",\"content\":\"");
-    STRING_concat_with_STRING(jsonToBeAppended, contentAsJSON);
-    STRING_concat(jsonToBeAppended, "\"}]");
+// Add the content
+STRING_concat(jsonToBeAppended, ",\"content\":\"");
+STRING_concat_with_STRING(jsonToBeAppended, contentAsJSON);
+STRING_concat(jsonToBeAppended, "\"}]");
 
-    // Write the formatted string
-    LOGGER_HANDLE_DATA *handleData = (LOGGER_HANDLE_DATA *)moduleHandle;
-    addJSONString(handleData->fout, STRING_c_str(jsonToBeAppended);
+// Write the formatted string
+LOGGER_HANDLE_DATA *handleData = (LOGGER_HANDLE_DATA *)moduleHandle;
+addJSONString(handleData->fout, STRING_c_str(jsonToBeAppended);
+```
 }
 ```
 
@@ -230,6 +234,6 @@ static void Logger_Receive(MODULE_HANDLE moduleHandle, MESSAGE_HANDLE messageHan
 [lnk-helloworld-c]: https://github.com/Azure/azure-iot-gateway-sdk/blob/master/modules/hello_world/src/hello_world.c
 [lnk-logger-c]: https://github.com/Azure/azure-iot-gateway-sdk/blob/master/modules/logger/src/logger.c
 [lnk-gateway-sdk]: https://github.com/Azure/azure-iot-gateway-sdk/
-[lnk-gateway-simulated]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-gateway-simulated]: ../articles/iot-hub/iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_1212_2016-->

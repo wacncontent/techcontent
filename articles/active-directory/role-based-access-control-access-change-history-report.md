@@ -1,21 +1,21 @@
-<properties
-	pageTitle="创建访问权限更改历史记录报告 | Azure"
-	description="生成一个列出过去 90 天内使用基于角色的访问控制对 Azure 订阅的访问权限进行的所有更改的报告。"
-	services="active-directory"
-	documentationCenter=""
-	authors="kgremban"
-	manager="femila"
-	editor=""/>
+---
+title: 创建访问权限更改历史记录报告 | Azure
+description: 生成一个列出过去 90 天内使用基于角色的访问控制对 Azure 订阅的访问权限进行的所有更改的报告。
+services: active-directory
+documentationCenter: 
+authors: kgremban
+manager: femila
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="identity"
-	ms.date="08/03/2016"
-	wacn.date="09/05/2016"
-	ms.author="kgremban"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 08/03/2016
+wacn.date: 09/05/2016
+ms.author: kgremban
+---
 
 # 创建访问权限更改历史记录报告
 
@@ -43,9 +43,9 @@
 
 此示例命令列出过去 7 天内订阅中所有访问权限的更改：
 
-	
-	Get-AzureRMAuthorizationChangeLog -StartTime ([DateTime]::Now - [TimeSpan]::FromDays(7)) | FT Caller,Action,RoleName,PrincipalType,PrincipalName,ScopeType,ScopeName
-
+```
+Get-AzureRMAuthorizationChangeLog -StartTime ([DateTime]::Now - [TimeSpan]::FromDays(7)) | FT Caller,Action,RoleName,PrincipalType,PrincipalName,ScopeType,ScopeName
+```
 
 ![PowerShell Get-AzureRMAuthorizationChangeLog - 屏幕快照](./media/role-based-access-control-configure/access-change-history.png)
 
@@ -57,9 +57,8 @@
 
 ![更改日志被视为电子表格 - 屏幕快照](./media/role-based-access-control-configure/change-history-spreadsheet.png)  
 
-
 ## 另请参阅
-- 开始使用 [Azure 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)
-- 使用 [Azure RBAC 中的自定义角色](/documentation/articles/role-based-access-control-custom-roles/)
+- 开始使用 [Azure 基于角色的访问控制](./role-based-access-control-configure.md)
+- 使用 [Azure RBAC 中的自定义角色](./role-based-access-control-custom-roles.md)
 
 <!---HONumber=Mooncake_0627_2016-->

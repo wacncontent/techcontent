@@ -1,72 +1,72 @@
-<properties
-	pageTitle="向应用程序添加推送通知 (iOS) | .NET 后端"
-	description="了解如何使用 Azure 移动服务将推送通知发送到 iOS 应用程序。"
-	services="mobile-services,notification-hubs"
-	documentationCenter="ios"
-	manager="dwrede"
-	editor=""
-	authors="krisragh"/>
+---
+title: 向应用程序添加推送通知 (iOS) | .NET 后端
+description: 了解如何使用 Azure 移动服务将推送通知发送到 iOS 应用程序。
+services: mobile-services,notification-hubs
+documentationCenter: ios
+manager: dwrede
+editor: 
+authors: krisragh
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="10/17/2016"
-	ms.author="krisragh"/>  
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 10/17/2016
+ms.author: krisragh
+---
 
 # 向 iOS 应用和 .NET 后端添加推送通知
 
-[AZURE.INCLUDE [mobile-services-selector-get-started-push](../../includes/mobile-services-selector-get-started-push.md)]
+[!INCLUDE [mobile-services-selector-get-started-push](../../includes/mobile-services-selector-get-started-push.md)]
 
 &nbsp;
 
-[AZURE.INCLUDE [mobile-service-note-mobile-apps](../../includes/mobile-services-note-mobile-apps.md)]
-> 有关本主题的对应的移动应用版本，请参阅[向 iOS 应用程序添加推送通知](/documentation/articles/app-service-mobile-ios-get-started-push/)。
+[!INCLUDE [mobile-service-note-mobile-apps](../../includes/mobile-services-note-mobile-apps.md)]
+> 有关本主题的对应的移动应用版本，请参阅[向 iOS 应用程序添加推送通知](../app-service-mobile/app-service-mobile-ios-get-started-push.md)。
 
-本主题介绍如何将推送通知添加到[快速入门项目](/documentation/articles/mobile-services-dotnet-backend-ios-get-started/)，以便在每次插入一条记录时，移动服务就会发送一条推送通知。你必须先完成[移动服务入门]教程。
+本主题介绍如何将推送通知添加到[快速入门项目](./mobile-services-dotnet-backend-ios-get-started.md)，以便在每次插入一条记录时，移动服务就会发送一条推送通知。你必须先完成[移动服务入门]教程。
 
-[AZURE.INCLUDE [启用 Apple 推送通知](../../includes/enable-apple-push-notifications.md)]
+[!INCLUDE [启用 Apple 推送通知](../../includes/enable-apple-push-notifications.md)]
 
 ## <a id="configure"></a>配置 Azure 以发送推送通知
 
-[AZURE.INCLUDE [在 Azure 移动服务中配置推送通知](../../includes/mobile-services-apns-configure-push.md)]
+[!INCLUDE [在 Azure 移动服务中配置推送通知](../../includes/mobile-services-apns-configure-push.md)]
 
 ##<a id="update-server"></a>更新后端代码以发送推送通知
 
 * 打开 Visual Studio 项目，然后选择“控制器”文件夹 >“TodoItemController.cs”> 方法 `PostTodoItem`。将该方法替换为以下内容。插入待办事项时，此代码将发送包含项文本的推送通知。如果发生了错误，该代码将添加一个错误日志条目，该条目可通过门户中的“日志”部分查看。
-
 
 ```
         public async Task<IHttpActionResult> PostTodoItem(TodoItem item)
         {
             TodoItem current = await InsertAsync(item);
 
-            ApplePushMessage message = new ApplePushMessage(item.Text, System.TimeSpan.FromHours(1));
+```
+        ApplePushMessage message = new ApplePushMessage(item.Text, System.TimeSpan.FromHours(1));
 
-            try
-            {
-                var result = await Services.Push.SendAsync(message);
-                Services.Log.Info(result.State.ToString());
-            }
-            catch (System.Exception ex)
-            {
-                Services.Log.Error(ex.Message, null, "Push.SendAsync Error");
-            }
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+        try
+        {
+            var result = await Services.Push.SendAsync(message);
+            Services.Log.Info(result.State.ToString());
         }
+        catch (System.Exception ex)
+        {
+            Services.Log.Error(ex.Message, null, "Push.SendAsync Error");
+        }
+        return CreatedAtRoute("Tables", new { id = current.Id }, current);
+    }
+```
 ```
 
 ##<a name="publish-the-service"></a>将移动服务发布到 Azure
 
-[AZURE.INCLUDE [mobile-services-dotnet-backend-publish-service](../../includes/mobile-services-dotnet-backend-publish-service.md)]
+[!INCLUDE [mobile-services-dotnet-backend-publish-service](../../includes/mobile-services-dotnet-backend-publish-service.md)]
 
-[AZURE.INCLUDE [向应用程序添加推送通知](../../includes/add-push-notifications-to-app.md)]
+[!INCLUDE [向应用程序添加推送通知](../../includes/add-push-notifications-to-app.md)]
 
-[AZURE.INCLUDE [在应用程序中测试推送通知](../../includes/test-push-notifications-in-app.md)]
+[!INCLUDE [在应用程序中测试推送通知](../../includes/test-push-notifications-in-app.md)]
 
 <!-- Anchors.  -->
 [Generate the certificate signing request]: #certificates
@@ -125,13 +125,13 @@
 [iOS Provisioning Portal]: http://go.microsoft.com/fwlink/p/?LinkId=272456
 [Mobile Services iOS SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
 [Apple Push Notification Service]: http://go.microsoft.com/fwlink/p/?LinkId=272584
-[移动服务入门]: /documentation/articles/mobile-services-dotnet-backend-ios-get-started/
+[移动服务入门]: ./mobile-services-dotnet-backend-ios-get-started.md
 [apns object]: http://go.microsoft.com/fwlink/p/?LinkId=272333
 
-[Get started with authentication]: /documentation/articles/mobile-services-dotnet-backend-ios-get-started-users/
+[Get started with authentication]: ./mobile-services-dotnet-backend-ios-get-started-users.md
 [Mobile Services Objective-C how-to conceptual reference]: /documentation/articles/mobile-services-windows-dotnet-how-to-use-client-library/
 [What are Notification Hubs?]: /documentation/articles/notification-hubs-overview/
 [Send broadcast notifications to subscribers]: /documentation/articles/notification-hubs-ios-send-breaking-news/
-[Send template-based notifications to subscribers]: /documentation/articles/notification-hubs-ios-xplat-localized-apns-push-notification/
+[Send template-based notifications to subscribers]: ../notification-hubs/notification-hubs-ios-xplat-localized-apns-push-notification.md
 
 <!---HONumber=Mooncake_0215_2016-->

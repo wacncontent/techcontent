@@ -1,16 +1,16 @@
-<properties
-   pageTitle="Azure 备份限制表"
-   description="描述 Azure 备份的系统限制。"
-   services="backup"
-   documentationCenter="NA"
-   authors="Jim-Parker"
-   manager="jwhit"
-   editor="" />
-<tags
-   ms.service="backup"
-   ms.date="10/05/2015"
-   wacn.date="12/31/2015" />
+---
+title: Azure 备份限制表
+description: 描述 Azure 备份的系统限制。
+services: backup
+documentationCenter: NA
+authors: Jim-Parker
+manager: jwhit
+editor: 
 
+ms.service: backup
+ms.date: 10/05/2015
+wacn.date: 12/31/2015
+---
 
 以下限制适用于 Azure 备份。
 

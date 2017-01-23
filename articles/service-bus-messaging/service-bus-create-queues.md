@@ -1,15 +1,16 @@
-<properties 
-   pageTitle="编写使用服务总线队列的应用程序 | Microsoft Azure"
-   description="如何编写一个基于队列的、使用服务总线的简单应用程序。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" />
-<tags 
-   ms.service="service-bus"
-    ms.date="10/03/2016"
-   wacn.date="01/04/2017" />
+---
+title: 编写使用服务总线队列的应用程序 | Microsoft Azure
+description: 如何编写一个基于队列的、使用服务总线的简单应用程序。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
+
+ms.service: service-bus
+ms.date: 10/03/2016
+wacn.date: 01/04/2017
+---
 
 # 创建使用服务总线队列的应用程序
 
@@ -51,7 +52,7 @@
 
 ### 注册 Azure 帐户
 
-需要 Azure 帐户才能开始使用服务总线。如果你尚无订阅，可以在[此处](/pricing/1rmb-trial/?WT.mc_id=A85619ABF)注册试用版。
+需要 Azure 帐户才能开始使用服务总线。如果你尚无订阅，可以在[此处](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A85619ABF)注册试用版。
 
 ### 创建服务命名空间
 
@@ -63,22 +64,22 @@
 
 ### 创建队列
 
-服务总线消息传送实体（队列和发布/订阅主题）的管理操作通过 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类执行。服务总线使用基于安全模型的[共享访问签名 (SAS)](/documentation/articles/service-bus-sas-overview/)。[TokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.aspx) 类代表具有内置工厂方法的安全令牌提供程序，这些方法可返回一些众所周知的令牌提供程序。我们将使用 [CreateSharedAccessSignatureTokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.createsharedaccesssignaturetokenprovider.aspx) 方法来保留 SAS 凭据。然后使用服务总线命名空间和令牌提供程序的基址构建 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 实例。
+服务总线消息传送实体（队列和发布/订阅主题）的管理操作通过 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类执行。服务总线使用基于安全模型的[共享访问签名 (SAS)](./service-bus-sas-overview.md)。[TokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.aspx) 类代表具有内置工厂方法的安全令牌提供程序，这些方法可返回一些众所周知的令牌提供程序。我们将使用 [CreateSharedAccessSignatureTokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.createsharedaccesssignaturetokenprovider.aspx) 方法来保留 SAS 凭据。然后使用服务总线命名空间和令牌提供程序的基址构建 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 实例。
 
 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类提供了创建、枚举和删除消息传送实体的方法。此处显示的代码介绍了创建 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 实例并用它创建 **DataCollectionQueue** 队列的方法。
 
+```
+    Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", 
+                    "test-blog", string.Empty);
+    string name = "RootManageSharedAccessKey";
+    string key = "abcdefghijklmopqrstuvwxyz";
 
-		Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", 
-		                "test-blog", string.Empty);
-		string name = "RootManageSharedAccessKey";
-		string key = "abcdefghijklmopqrstuvwxyz";
- 
-		TokenProvider tokenProvider = 
-		    TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
-		NamespaceManager namespaceManager = 
-		    new NamespaceManager(uri, tokenProvider);
-		namespaceManager.CreateQueue("DataCollectionQueue");
-
+    TokenProvider tokenProvider = 
+        TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
+    NamespaceManager namespaceManager = 
+        new NamespaceManager(uri, tokenProvider);
+    namespaceManager.CreateQueue("DataCollectionQueue");
+```
 
 请注意，存在 [CreateQueue](https://msdn.microsoft.com/zh-cn/library/azure/hh322663.aspx) 方法的重载，你可以通过该方法设置队列的属性。例如，可为发送给队列的消息设置默认生存期 (TTL) 值。
 
@@ -86,26 +87,25 @@
 
 为了对服务总线实体进行运行时操作（例如发送和接收消息），应用程序必须首先创建 [MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 对象。类似于 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类，[MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 实例也从服务命名空间和令牌提供程序的基址创建。
 
-
-		 BrokeredMessage bm = new BrokeredMessage(salesData);
-		 bm.Label = "SalesReport";
-		 bm.Properties["StoreName"] = "Redmond";
-		 bm.Properties["MachineID"] = "POS_1";
-
+```
+     BrokeredMessage bm = new BrokeredMessage(salesData);
+     bm.Label = "SalesReport";
+     bm.Properties["StoreName"] = "Redmond";
+     bm.Properties["MachineID"] = "POS_1";
+```
 
 在服务总线队列中发送和接收的消息是 [BrokeredMessage](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx) 类的实例。此类包含一组标准属性（如 [Label](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.label.aspx) 和 [TimeToLive](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx)）、一个用来保存应用程序属性的词典以及大量随机应用程序数据。应用程序可以通过传入任何可序列化对象来设置正文（下面的示例传入 **SalesData** 对象，表示来自 POS 终端的销售数据），它将使用 [DataContractSerializer](https://msdn.microsoft.com/zh-cn/library/azure/system.runtime.serialization.datacontractserializer.aspx) 来序列化该对象。或者，也可以提供 [Stream](https://msdn.microsoft.com/zh-cn/library/azure/system.io.stream.aspx) 对象。
 
 将消息发送到队列（在本例中即 **DataCollectionQueue**）的最简单方法是使用 [CreateMessageSender](https://msdn.microsoft.com/zh-cn/library/azure/hh322659.aspx) 从 [MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 实例直接创建 [MessageSender](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagesender.aspx) 对象。
 
-
-		MessageSender sender = factory.CreateMessageSender("DataCollectionQueue");
-		sender.Send(bm);
-
+```
+    MessageSender sender = factory.CreateMessageSender("DataCollectionQueue");
+    sender.Send(bm);
+```
 
 ### 从队列接收消息
 
 若要从队列接收消息，可使用 [MessageReceiver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagereceiver.aspx) 对象，该对象是你使用 [CreateMessageReceiver](https://msdn.microsoft.com/zh-cn/library/azure/hh322642.aspx) 从 [MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 直接创建的。消息接收方可在两种不同模式下工作：**ReceiveAndDelete** 和 **PeekLock**。创建消息接收方时，[ReceiveMode](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.receivemode.aspx) 将会被设置为 [CreateMessageReceiver](https://msdn.microsoft.com/zh-cn/library/azure/hh322642.aspx) 调用的一个参数。
-
 
 当使用 **ReceiveAndDelete** 模式时，接收是一个单次操作。即，当服务总线收到请求时，它会将该消息标记为“已使用”并将其返回给应用程序。**ReceiveAndDelete** 模式是最简单的模式，最适合应用程序允许出现故障时不处理消息的方案。为了理解这一点，可以考虑这样一种情形：使用方发出接收请求，但在处理该请求前发生了崩溃。由于服务总线将消息标记为“已使用”，因此当应用程序重新启动并重新开始使用消息时，它会漏掉在发生崩溃前使用的消息。
 
@@ -117,43 +117,43 @@
 
 此处显示的代码使用 **PeekLock** 模式接收和处理消息，如果未显式提供 [ReceiveMode](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.receivemode.aspx) 值，则这是默认设置。
 
-
-		MessageReceiver receiver = factory.CreateMessageReceiver("DataCollectionQueue");
-		BrokeredMessage receivedMessage = receiver.Receive();
-		try
-		{
-		    ProcessMessage(receivedMessage);
-		    receivedMessage.Complete();
-		}
-		catch (Exception e)
-		{
-		    receivedMessage.Abandon();
-		}
-
+```
+    MessageReceiver receiver = factory.CreateMessageReceiver("DataCollectionQueue");
+    BrokeredMessage receivedMessage = receiver.Receive();
+    try
+    {
+        ProcessMessage(receivedMessage);
+        receivedMessage.Complete();
+    }
+    catch (Exception e)
+    {
+        receivedMessage.Abandon();
+    }
+```
 
 ### 使用队列客户端
 
 此部分中前面的示例从 [MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 直接创建了 [MessageSender](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagesender.aspx) 和 [MessageReceiver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagereceiver.aspx) 对象，分别用于向队列发送消息和从队列接收消息。另一种方法是使用 [QueueClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx) 类，它也支持发送和接收操作，并且还具有更高级的功能，例如会话。
 
+```
+    QueueClient queueClient = factory.CreateQueueClient("DataCollectionQueue");
+    queueClient.Send(bm);
 
-		QueueClient queueClient = factory.CreateQueueClient("DataCollectionQueue");
-		queueClient.Send(bm);
-            
-		BrokeredMessage message = queueClient.Receive();
+    BrokeredMessage message = queueClient.Receive();
 
-		try
-		{
-		    ProcessMessage(message);
-		    message.Complete();
-		}
-		catch (Exception e)
-		{
-		    message.Abandon();
-		} 
-
+    try
+    {
+        ProcessMessage(message);
+        message.Complete();
+    }
+    catch (Exception e)
+    {
+        message.Abandon();
+    } 
+```
 
 ## 后续步骤
 
-了解了队列的基础知识后，请参阅[创建使用服务总线主题和订阅的应用程序](/documentation/articles/service-bus-create-topics-subscriptions/)，以使用服务总线主题和订阅的发布/订阅功能继续这一讨论。
+了解了队列的基础知识后，请参阅[创建使用服务总线主题和订阅的应用程序](./service-bus-create-topics-subscriptions.md)，以使用服务总线主题和订阅的发布/订阅功能继续这一讨论。
 
 <!---HONumber=Mooncake_0215_2016-->

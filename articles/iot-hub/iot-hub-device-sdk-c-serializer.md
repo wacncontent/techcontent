@@ -1,26 +1,26 @@
-<properties
-    pageTitle="适用于 C 语言的 Azure IoT 设备 SDK - 序列化程序 | Azure"
-    description="如何使用 Azure IoT 设备 SDK 中面向 C 语言的序列化程序库创建与 IoT 中心通信的设备应用。"
-    services="iot-hub"
-    documentationcenter=""
-    author="olivierbloch"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="defbed34-de73-429c-8592-cd863a38e4dd"
-    ms.service="iot-hub"
-    ms.devlang="cpp"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/06/2016"
-    wacn.date="01/13/2017"
-    ms.author="obloch" />  
+---
+title: 适用于 C 语言的 Azure IoT 设备 SDK - 序列化程序 | Azure
+description: 如何使用 Azure IoT 设备 SDK 中面向 C 语言的序列化程序库创建与 IoT 中心通信的设备应用。
+services: iot-hub
+documentationcenter: 
+author: olivierbloch
+manager: timlt
+editor: 
 
+ms.assetid: defbed34-de73-429c-8592-cd863a38e4dd
+ms.service: iot-hub
+ms.devlang: cpp
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/06/2016
+wacn.date: 01/13/2017
+ms.author: obloch
+---
 
 # 适用于 C 语言的 Azure IoT 设备 SDK - 有关序列化程序的详细信息
 
-本系列教程的[第一篇文章](/documentation/articles/iot-hub-device-sdk-c-intro/)介绍了**适用于 C 语言的 Azure IoT 设备 SDK**。下一篇文章提供 [**IoTHubClient**](/documentation/articles/iot-hub-device-sdk-c-iothubclient/) 的更详细介绍。本文最后的部分将提供该 SDK 的剩余组件**序列化程序**库的更详细说明。
+本系列教程的[第一篇文章](./iot-hub-device-sdk-c-intro.md)介绍了**适用于 C 语言的 Azure IoT 设备 SDK**。下一篇文章提供 [**IoTHubClient**](./iot-hub-device-sdk-c-iothubclient.md) 的更详细介绍。本文最后的部分将提供该 SDK 的剩余组件**序列化程序**库的更详细说明。
 
 本简介文章介绍如何使用**序列化程序**库将事件发送到 IoT 中心，以及接收来自 IoT 中心的消息。本文中将延伸该讨论，更完整地阐释如何使用**序列化程序**宏语言来创建数据模型。本文还包含更多有关该库如何序列化消息（以及在某些情况下，如何控制序列化行为）的详细信息。此外，将介绍可以修改以判断所要创建的模型大小的某些参数。
 
@@ -32,7 +32,7 @@
 
 ## 建模语言
 
-本系列教程中的[简介文章](/documentation/articles/iot-hub-device-sdk-c-intro/)通过 **simplesample\_amqp** 应用程序提供的示例介绍了**适用于 C 语言的 Azure IoT 设备 SDK** 建模语言：
+本系列教程中的[简介文章](./iot-hub-device-sdk-c-intro.md)通过 **simplesample\_amqp** 应用程序提供的示例介绍了**适用于 C 语言的 Azure IoT 设备 SDK** 建模语言：
 
 ```
 BEGIN_NAMESPACE(WeatherStation);
@@ -56,7 +56,8 @@ END_NAMESPACE(WeatherStation);
 
 本示例并未演示 SDK 支持的其他数据类型。我们将在稍后讨论。
 
-> [AZURE.NOTE] IoT 中心将设备发送给它的数据视为 *事件* ，而建模语言将其视为 *数据*（使用 **WITH\_DATA** 来定义）。同样，IoT 中心将发送给设备的数据视为 *消息* ，而建模语言将其视为*操作*（使用 **WITH\_ACTION** 来定义）。请注意，本文中可能会换用这些术语。
+> [!NOTE]
+> IoT 中心将设备发送给它的数据视为 *事件* ，而建模语言将其视为 *数据*（使用 **WITH\_DATA** 来定义）。同样，IoT 中心将发送给设备的数据视为 *消息* ，而建模语言将其视为*操作*（使用 **WITH\_ACTION** 来定义）。请注意，本文中可能会换用这些术语。
 
 ### 支持的数据类型
 
@@ -142,26 +143,26 @@ SendAsync(iotHubClientHandle, (const void*)&(testModel->Test));
 ```
     void SendAsync(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, const void *dataEvent)
     {
-    	unsigned char* destination;
-    	size_t destinationSize;
-    	if (SERIALIZE(&destination, &destinationSize, *(const unsigned char*)dataEvent) ==
-    	{
-    		// null terminate the string
-    		char* destinationAsString = (char*)malloc(destinationSize + 1);
-    		if (destinationAsString != NULL)
-    		{
-    			memcpy(destinationAsString, destination, destinationSize);
-    			destinationAsString[destinationSize] = '\0';
-    			IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromString(destinationAsString);
-    			if (messageHandle != NULL)
-    			{
-    				IoTHubClient_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, (void*)0);
-    				IoTHubMessage_Destroy(messageHandle);
-    			}
-    			free(destinationAsString);
-    		}
-    		free(destination);
-    	}
+        unsigned char* destination;
+        size_t destinationSize;
+        if (SERIALIZE(&destination, &destinationSize, *(const unsigned char*)dataEvent) ==
+        {
+            // null terminate the string
+            char* destinationAsString = (char*)malloc(destinationSize + 1);
+            if (destinationAsString != NULL)
+            {
+                memcpy(destinationAsString, destination, destinationSize);
+                destinationAsString[destinationSize] = '\0';
+                IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromString(destinationAsString);
+                if (messageHandle != NULL)
+                {
+                    IoTHubClient_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, (void*)0);
+                    IoTHubMessage_Destroy(messageHandle);
+                }
+                free(destinationAsString);
+            }
+            free(destination);
+        }
     }
 ```
 
@@ -172,16 +173,16 @@ SendAsync(iotHubClientHandle, (const void*)&(testModel->Test));
 ```
 EDM_DATE_TIME_OFFSET GetDateTimeOffset(time_t time)
 {
-	struct tm newTime;
-	gmtime_s(&newTime, &time);
-	EDM_DATE_TIME_OFFSET dateTimeOffset;
-	dateTimeOffset.dateTime = newTime;
-	dateTimeOffset.fractionalSecond = 0;
-	dateTimeOffset.hasFractionalSecond = 0;
-	dateTimeOffset.hasTimeZone = 0;
-	dateTimeOffset.timeZoneHour = 0;
-	dateTimeOffset.timeZoneMinute = 0;
-	return dateTimeOffset;
+    struct tm newTime;
+    gmtime_s(&newTime, &time);
+    EDM_DATE_TIME_OFFSET dateTimeOffset;
+    dateTimeOffset.dateTime = newTime;
+    dateTimeOffset.fractionalSecond = 0;
+    dateTimeOffset.hasFractionalSecond = 0;
+    dateTimeOffset.hasTimeZone = 0;
+    dateTimeOffset.timeZoneHour = 0;
+    dateTimeOffset.timeZoneMinute = 0;
+    return dateTimeOffset;
 }
 ```
 
@@ -261,9 +262,11 @@ static void sendMessage(IOTHUB_CLIENT_HANDLE iotHubClientHandle, const unsigned 
     {
         IoTHubClient_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, (void*)(uintptr_t)messageTrackingId);
 
-        IoTHubMessage_Destroy(messageHandle);
-    }
-    free((void*)buffer);
+```
+    IoTHubMessage_Destroy(messageHandle);
+}
+free((void*)buffer);
+```
 }
 ```
 
@@ -446,7 +449,7 @@ if (SERIALIZE(&destination, &destinationSize, thermostat->Temperature, thermosta
 
 ## 消息处理
 
-到目前为止，本文只讨论了如何将事件发送到 IoT 中心，而尚未涉及到消息接收。这是因为有关接收消息的知识大多数在[以前的文章](/documentation/articles/iot-hub-device-sdk-c-intro/)中都已涵盖。回顾那篇文章，我们知道是通过注册消息回调函数来处理消息的：
+到目前为止，本文只讨论了如何将事件发送到 IoT 中心，而尚未涉及到消息接收。这是因为有关接收消息的知识大多数在[以前的文章](./iot-hub-device-sdk-c-intro.md)中都已涵盖。回顾那篇文章，我们知道是通过注册消息回调函数来处理消息的：
 
 ```
 IoTHubClient_SetMessageCallback(iotHubClientHandle, IoTHubMessage, myWeather)
@@ -606,7 +609,7 @@ WITH_DATA(int, MyData)
 
 本文着重介绍的示例应用程序为 **simplesample\_amqp**。此示例使用较高级别（非“LL”）API 来发送事件和接收消息。如果你使用这些 API，将运行后台线程来处理事件发送和消息接收。但是，通过较低级别 \(LL\) API，可消除此后台线程的使用并明确掌控何时发送事件或从云中接收消息。
 
-如[前一篇文章](/documentation/articles/iot-hub-device-sdk-c-iothubclient/)中所述，有一组由较高级别 API 构成的函数：
+如[前一篇文章](./iot-hub-device-sdk-c-iothubclient.md)中所述，有一组由较高级别 API 构成的函数：
 
 -   IoTHubClient\_CreateFromConnectionString
 
@@ -634,7 +637,7 @@ WITH_DATA(int, MyData)
 
 ## 其他主题
 
-值得一提的其他几个主题包括属性处理、使用替代设备凭据和配置选项。这些主题均涵盖在[前一篇文章](/documentation/articles/iot-hub-device-sdk-c-iothubclient/)中。重点在于，所有这些功能与**序列化程序**库配合使用的方式与和 **IoTHubClient** 库配合使用的方式相同。例如，如果你想要从模型将属性附加到事件，需要以前面所述的相同方式，使用 **IoTHubMessage\_Properties** 和 **Map**\_**AddorUpdate**：
+值得一提的其他几个主题包括属性处理、使用替代设备凭据和配置选项。这些主题均涵盖在[前一篇文章](./iot-hub-device-sdk-c-iothubclient.md)中。重点在于，所有这些功能与**序列化程序**库配合使用的方式与和 **IoTHubClient** 库配合使用的方式相同。例如，如果你想要从模型将属性附加到事件，需要以前面所述的相同方式，使用 **IoTHubMessage\_Properties** 和 **Map**\_**AddorUpdate**：
 
 ```
 MAP_HANDLE propMap = IoTHubMessage_Properties(message.messageHandle);
@@ -662,7 +665,7 @@ serializer_init(NULL);
 serializer_deinit();
 ```
 
-除此之外，上面列出的所有其他功能在**序列化程序**库中的运行方式均与在 **IoTHubClient** 库中的运行方式相同。有关这些主题中任何一个主题的详细信息，请参阅本系列教程中的[前一篇文章](/documentation/articles/iot-hub-device-sdk-c-iothubclient/)。
+除此之外，上面列出的所有其他功能在**序列化程序**库中的运行方式均与在 **IoTHubClient** 库中的运行方式相同。有关这些主题中任何一个主题的详细信息，请参阅本系列教程中的[前一篇文章](./iot-hub-device-sdk-c-iothubclient.md)。
 
 ## 后续步骤
 
@@ -677,9 +680,9 @@ serializer_deinit();
 - [使用 IoT 网关 SDK 模拟设备][lnk-gateway]
 - [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
 
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

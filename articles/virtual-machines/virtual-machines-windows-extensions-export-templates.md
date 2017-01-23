@@ -1,23 +1,23 @@
-<properties
-    pageTitle="导出包含 VM 扩展的 Azure 资源组 | Azure"
-    description="导出包含虚拟机扩展的 Resource Manager 模板。"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="neilpeterson"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="7f4e2ca6-f1c7-4f59-a2cc-8f63132de279"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="12/05/2016"
-    wacn.date="01/13/2017"
-    ms.author="nepeters" />  
+---
+title: 导出包含 VM 扩展的 Azure 资源组 | Azure
+description: 导出包含虚拟机扩展的 Resource Manager 模板。
+services: virtual-machines-windows
+documentationcenter: 
+author: neilpeterson
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
+ms.assetid: 7f4e2ca6-f1c7-4f59-a2cc-8f63132de279
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 12/05/2016
+wacn.date: 01/13/2017
+ms.author: nepeters
+---
 
 # 导出包含 VM 扩展的资源组
 
@@ -50,7 +50,6 @@
 
 ![模板导出](./media/virtual-machines-windows-extensions-export-templates/template-export.png)  
 
-
 Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一个参数文件以及多个示例部署脚本（例如 PowerShell 和 Azure CLI）。目前可以使用下载按钮下载导出的模板、将其作为新模板添加到模板库，或使用部署按钮重新对其进行部署。
 
 ## 配置受保护的设置
@@ -61,10 +60,12 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 导出资源组时，会创建单个模板参数，为导出的受保护设置提供值。可以删除此参数。若要删除此参数，可通过参数列表查找并删除看起来类似于此 JSON 示例的参数。
 
-    "extensions_extensionname_protectedSettings": {
-        "defaultValue": null,
-        "type": "SecureObject"
-    }
+```
+"extensions_extensionname_protectedSettings": {
+    "defaultValue": null,
+    "type": "SecureObject"
+}
+```
 
 ### 步骤 2 - 获取受保护设置属性
 
@@ -72,25 +73,27 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 从架构存储库中搜索所需的扩展（在本示例中为 `IaaSDiagnostics`）。找到扩展的 `protectedSettings` 对象以后，记下每个参数。以 `IaasDiagnostic` 扩展为例，所需参数为 `storageAccountName`、`storageAccountKey` 和 `storageAccountEndPoint`。
 
-    "protectedSettings": {
-        "type": "object",
-        "properties": {
-            "storageAccountName": {
-                "type": "string"
-            },
-            "storageAccountKey": {
-                "type": "string"
-            },
-            "storageAccountEndPoint": {
-                "type": "string"
-            }
+```
+"protectedSettings": {
+    "type": "object",
+    "properties": {
+        "storageAccountName": {
+            "type": "string"
         },
-        "required": [
-            "storageAccountName",
-            "storageAccountKey",
-            "storageAccountEndPoint"
-        ]
-    }
+        "storageAccountKey": {
+            "type": "string"
+        },
+        "storageAccountEndPoint": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "storageAccountName",
+        "storageAccountKey",
+        "storageAccountEndPoint"
+    ]
+}
+```
 
 ### 步骤 3 - 重新创建受保护的配置
 
@@ -98,54 +101,60 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 以 `IaasDiagnostic` 扩展为例，新的受保护设置配置将如以下示例所示：
 
-    "protectedSettings": {
-        "storageAccountName": "[parameters('storageAccountName')]",
-        "storageAccountKey": "[parameters('storageAccountKey')]",
-        "storageAccountEndPoint": "https://core.chinacloudapi.cn"
-    }
+```
+"protectedSettings": {
+    "storageAccountName": "[parameters('storageAccountName')]",
+    "storageAccountKey": "[parameters('storageAccountKey')]",
+    "storageAccountEndPoint": "https://core.chinacloudapi.cn"
+}
+```
 
 最终的扩展资源看起来类似于以下 JSON 示例：
 
-    {
-        "name": "Microsoft.Insights.VMDiagnosticsSettings",
-        "type": "extensions",
-        "location": "[resourceGroup().location]",
-        "apiVersion": "[variables('apiVersion')]",
-        "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-        ],
-        "tags": {
-            "displayName": "AzureDiagnostics"
+```
+{
+    "name": "Microsoft.Insights.VMDiagnosticsSettings",
+    "type": "extensions",
+    "location": "[resourceGroup().location]",
+    "apiVersion": "[variables('apiVersion')]",
+    "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+    ],
+    "tags": {
+        "displayName": "AzureDiagnostics"
+    },
+    "properties": {
+        "publisher": "Microsoft.Azure.Diagnostics",
+        "type": "IaaSDiagnostics",
+        "typeHandlerVersion": "1.5",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+            "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('vmName'), variables('wadcfgxend')))]",
+            "storageAccount": "[parameters('existingdiagnosticsStorageAccountName')]"
         },
-        "properties": {
-            "publisher": "Microsoft.Azure.Diagnostics",
-            "type": "IaaSDiagnostics",
-            "typeHandlerVersion": "1.5",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-                "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('vmName'), variables('wadcfgxend')))]",
-                "storageAccount": "[parameters('existingdiagnosticsStorageAccountName')]"
-            },
-            "protectedSettings": {
-                "storageAccountName": "[parameters('storageAccountName')]",
-                "storageAccountKey": "[parameters('storageAccountKey')]",
-                "storageAccountEndPoint": "https://core.chinacloudapi.cn"
-            }
+        "protectedSettings": {
+            "storageAccountName": "[parameters('storageAccountName')]",
+            "storageAccountKey": "[parameters('storageAccountKey')]",
+            "storageAccountEndPoint": "https://core.chinacloudapi.cn"
         }
     }
+}
+```
 
-如果使用模板参数提供属性值，则需创建这些参数。为受保护的设置值创建模板参数时，请确保使用 `SecureObject` 参数类型，以便保护敏感值。如需详细了解如何使用参数，请参阅[创作 Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)。
+如果使用模板参数提供属性值，则需创建这些参数。为受保护的设置值创建模板参数时，请确保使用 `SecureObject` 参数类型，以便保护敏感值。如需详细了解如何使用参数，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)。
 
 以 `IaasDiagnostic` 扩展为例，将在 Resource Manager 模板的参数部分创建以下参数。
 
-    "storageAccountName": {
-        "defaultValue": null,
-        "type": "SecureObject"
-    },
-    "storageAccountKey": {
-        "defaultValue": null,
-        "type": "SecureObject"
-    }
+```
+"storageAccountName": {
+    "defaultValue": null,
+    "type": "SecureObject"
+},
+"storageAccountKey": {
+    "defaultValue": null,
+    "type": "SecureObject"
+}
+```
 
 目前可以使用任何模板部署方法部署此模板。
 

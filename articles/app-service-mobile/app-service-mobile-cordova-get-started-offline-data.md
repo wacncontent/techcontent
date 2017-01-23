@@ -1,27 +1,25 @@
-<properties
-    pageTitle="为 Azure 移动应用启用脱机同步 (Cordova) | Azure"
-    description="了解如何在 Cordova 应用程序中使用应用服务移动应用来缓存和同步脱机数据"
-    documentationCenter="cordova"
-    authors="adrianhall"
-    manager="erikre"
-    editor=""
-    services="app-service\mobile"/>  
+---
+title: 为 Azure 移动应用启用脱机同步 (Cordova) | Azure
+description: 了解如何在 Cordova 应用程序中使用应用服务移动应用来缓存和同步脱机数据
+documentationCenter: cordova
+authors: adrianhall
+manager: erikre
+editor: 
+services: app-service\mobile
 
-
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="mobile-cordova-ios"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/01/2016"
-    wacn.date="11/21/2016"
-    ms.author="adrianha"/>  
-
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-cordova-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # 为 Cordova 移动应用启用脱机同步
 
-[AZURE.INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
+[!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 本教程介绍适用于 Cordova 的 Azure 移动应用的脱机同步功能。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。更改存储在本地数据库中；设备重新联机后，这些更改会与远程服务同步。
 
@@ -35,37 +33,45 @@
 
 1. 在 Visual Studio 解决方案资源管理器中，打开 index.js，然后将以下代码
 
-        var client,            // Connection to the Azure Mobile App backend
-          todoItemTable;      // Reference to a table endpoint on backend
+    ```
+    var client,            // Connection to the Azure Mobile App backend
+      todoItemTable;      // Reference to a table endpoint on backend
+    ```
 
     替换为此代码：
 
-        var client,             // Connection to the Azure Mobile App backend
-          todoItemTable, syncContext; // Reference to table and sync context
+    ```
+    var client,             // Connection to the Azure Mobile App backend
+      todoItemTable, syncContext; // Reference to table and sync context
+    ```
 
 2. 接下来，将以下代码：
 
-        client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
+    ```
+    client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
+    ```
 
-	替换为此代码：
+    替换为此代码：
 
-        client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
+    ```
+    client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
 
-        // Note: Requires at least version 2.0.0-beta6 of the Azure Mobile Apps plugin
-        var store = new WindowsAzure.MobileServiceSqliteStore('store.db');
+    // Note: Requires at least version 2.0.0-beta6 of the Azure Mobile Apps plugin
+    var store = new WindowsAzure.MobileServiceSqliteStore('store.db');
 
-        store.defineTable({
-          name: 'todoitem',
-          columnDefinitions: {
-              id: 'string',
-              text: 'string',
-              deleted: 'boolean',
-              complete: 'boolean'
-          }
-        });
+    store.defineTable({
+      name: 'todoitem',
+      columnDefinitions: {
+          id: 'string',
+          text: 'string',
+          deleted: 'boolean',
+          complete: 'boolean'
+      }
+    });
 
-        // Get the sync context from the client
-        syncContext = client.getSyncContext();
+    // Get the sync context from the client
+    syncContext = client.getSyncContext();
+    ```
 
     前面增加的代码会初始化本地存储，并定义与 Azure 后端中使用的列值匹配的本地表。（无需在此代码中包含所有列值。）
 
@@ -75,41 +81,45 @@
 
 4. 接下来，将此代码：
 
-        todoItemTable = client.getTable('todoitem'); // todoitem is the table name
+    ```
+    todoItemTable = client.getTable('todoitem'); // todoitem is the table name
+    ```
 
     替换为此代码：
 
-        // todoItemTable = client.getTable('todoitem');
+    ```
+    // todoItemTable = client.getTable('todoitem');
 
-        // Initialize the sync context with the store
-        syncContext.initialize(store).then(function () {
+    // Initialize the sync context with the store
+    syncContext.initialize(store).then(function () {
 
-        // Get the local table reference.
-        todoItemTable = client.getSyncTable('todoitem');
+    // Get the local table reference.
+    todoItemTable = client.getSyncTable('todoitem');
 
-        syncContext.pushHandler = {
-            onConflict: function (serverRecord, clientRecord, pushError) {
-                // Handle the conflict.
-                console.log("Sync conflict! " + pushError.getError().message);
-                // Update failed, revert to server's copy.
-                pushError.cancelAndDiscard();
-              },
-              onError: function (pushError) {
-                  // Handle the error
-                  // In the simulated offline state, you get "Sync error! Unexpected connection failure."
-                  console.log("Sync error! " + pushError.getError().message);
-              }
-        };
+    syncContext.pushHandler = {
+        onConflict: function (serverRecord, clientRecord, pushError) {
+            // Handle the conflict.
+            console.log("Sync conflict! " + pushError.getError().message);
+            // Update failed, revert to server's copy.
+            pushError.cancelAndDiscard();
+          },
+          onError: function (pushError) {
+              // Handle the error
+              // In the simulated offline state, you get "Sync error! Unexpected connection failure."
+              console.log("Sync error! " + pushError.getError().message);
+          }
+    };
 
-        // Call a function to perform the actual sync
-        syncBackend();
+    // Call a function to perform the actual sync
+    syncBackend();
 
-        // Refresh the todoItems
-        refreshDisplay();
+    // Refresh the todoItems
+    refreshDisplay();
 
-        // Wire up the UI Event Handler for the Add Item
-        $('#add-item').submit(addItemHandler);
-        $('#refresh').on('click', refreshDisplay);
+    // Wire up the UI Event Handler for the Add Item
+    $('#add-item').submit(addItemHandler);
+    $('#refresh').on('click', refreshDisplay);
+    ```
 
     前面的代码会初始化同步上下文，然后调用 getSyncTable（而不是 getTable）来获取对本地表的引用。
 
@@ -119,17 +129,19 @@
 
 5. 接下来，添加此函数以执行实际同步操作。
 
-        function syncBackend() {
+    ```
+    function syncBackend() {
 
-          // Sync local store to Azure table when app loads, or when login complete.
-          syncContext.push().then(function () {
-              // Push completed
+      // Sync local store to Azure table when app loads, or when login complete.
+      syncContext.push().then(function () {
+          // Push completed
 
-          });
+      });
 
-          // Pull items from the Azure table after syncing to Azure.
-          syncContext.pull(new WindowsAzure.Query('todoitem'));
-        }
+      // Pull items from the Azure table after syncing to Azure.
+      syncContext.pull(new WindowsAzure.Query('todoitem'));
+    }
+    ```
 
     通过在客户端使用的 **syncContext** 对象上调用 **push**，决定何时将更改推送到移动应用后端。例如，可以在应用中将对 **syncBackend** 的调用添加到按钮事件处理程序（例如新的“同步”按钮），或者添加对 **addItemHandler** 函数的调用，以便在添加新项时进行同步处理。
 
@@ -147,14 +159,16 @@
 
 注释禁止登录行后，该代码应如下所示。
 
-      // Login to the service.
-      // client.login('twitter')
-      //    .then(function () {
-        syncContext.initialize(store).then(function () {
-          // Leave the rest of the code in this callback function  uncommented.
-                ...
-        });
-      // }, handleError);
+```
+  // Login to the service.
+  // client.login('twitter')
+  //    .then(function () {
+    syncContext.initialize(store).then(function () {
+      // Leave the rest of the code in this callback function  uncommented.
+            ...
+    });
+  // }, handleError);
+```
 
 现在，应用将在运行应用时（而不是登录时）与 Azure 后端同步。
 
@@ -168,11 +182,15 @@
 
 1. 在解决方案资源管理器中，打开 index.js 项目文件，然后更改应用程序 URL，使其指向无效的 URL，如下所示：
 
-        client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.net-fail');
+    ```
+    client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.net-fail');
+    ```
 
 2. 在 index.html 中，使用同一无效的 URL 更新 CSP `<meta>` 元素。
 
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://yourmobileapp.azurewebsites.net-fail; style-src 'self'; media-src *">
+    ```
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://yourmobileapp.azurewebsites.net-fail; style-src 'self'; media-src *">
+    ```
 
 3. 生成并运行客户端应用，请注意，如果应用在登录后尝试与后端同步，则会在控制台中记录异常。添加的所有新项在推送到移动后端之前，将只存在于本地存储中。客户端应用的行为就像它已连接到支持所有创建、读取、更新、删除 (CRUD) 操作的后端一样。
 
@@ -180,8 +198,7 @@
 
 5. （可选）使用 Visual Studio 查看 Azure SQL 数据库表，以了解后端数据库中的数据是否未更改。
 
-	在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
-
+    在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
 
 ## （可选）测试与移动后端的重新连接
 
@@ -201,7 +218,6 @@
 
 * [Azure 移动应用中的脱机数据同步]
 
-
 * [用于 Apache Cordova 的 Visual Studio 工具]
 
 ## 后续步骤
@@ -211,22 +227,21 @@
 
 <!-- ##Summary -->
 
-
 <!-- Images -->
 
 <!-- URLs. -->
 
-[Apache Cordova 快速入门]: /documentation/articles/app-service-mobile-cordova-get-started/
+[Apache Cordova 快速入门]: ./app-service-mobile-cordova-get-started.md
 [自述文件]: https://github.com/Azure/azure-mobile-apps-js-client#offline-data-sync-preview
 [脱机同步示例]: https://github.com/shrishrirang/azure-mobile-apps-quickstarts/tree/samples/client/cordova/ZUMOAPPNAME
-[Azure 移动应用中的脱机数据同步]: /documentation/articles/app-service-mobile-offline-data-sync/
-[Adding Authentication]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[authentication]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[Work with the .NET backend server SDK for Azure Mobile Apps]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
+[Azure 移动应用中的脱机数据同步]: ./app-service-mobile-offline-data-sync.md
+[Adding Authentication]: ./app-service-mobile-cordova-get-started-users.md
+[authentication]: ./app-service-mobile-cordova-get-started-users.md
+[Work with the .NET backend server SDK for Azure Mobile Apps]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [Visual Studio Community 2015]: http://www.visualstudio.com/
 [用于 Apache Cordova 的 Visual Studio 工具]: https://www.visualstudio.com/zh-cn/features/cordova-vs.aspx
-[Apache Cordova SDK]: /documentation/articles/app-service-mobile-cordova-how-to-use-client-library/
-[ASP.NET Server SDK]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[Node.js Server SDK]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/
+[Apache Cordova SDK]: ./app-service-mobile-cordova-how-to-use-client-library.md
+[ASP.NET Server SDK]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[Node.js Server SDK]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md
 
 <!---HONumber=Mooncake_1010_2016-->

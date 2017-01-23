@@ -1,5 +1,5 @@
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中单击目录页上的“应用程序”选项卡。
-  
+
 2. 单击集成的应用程序注册。
 
 3. 单击应用程序页上的“配置”，然后向下滚动到页的“密钥”部分。
@@ -11,7 +11,6 @@
 6. 向下滚动到集成应用程序配置页底部并为应用程序启用“读取目录数据”权限，然后单击“保存”。
 
     ![](./media/mobile-services-generate-aad-app-registration-access-key/app-perms.png)
-
 
 7. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，浏览回到你的移动服务，然后单击“配置”选项卡。向下滚动到“应用设置”部分并添加以下应用设置，然后单击“保存”。
 
@@ -30,8 +29,6 @@
     </tr>
     </table><br/>
 
- 
     ![](./media/mobile-services-generate-aad-app-registration-access-key/aad-app-settings.png)
-  
 
 <!---HONumber=Mooncake_0118_2016-->

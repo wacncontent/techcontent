@@ -158,7 +158,6 @@ AD 访问控制以在 WCF (SOAP) 服务上颁发将由 WIF 处理的 SAML 令牌
 
 ![WCF (SOAP) Service][04]
 
-
 请参见以下资源来实施此方案：
 
 -   [如何：添加具有 X.509 证书、密码或对称密钥的服务标识](http://msdn.microsoft.com/zh-cn/library/gg185924.aspx)
@@ -230,7 +229,6 @@ Internet 标识本身不支持活动配置文件方案（Web 服务方案）。I
 -   [如何：将 Yahoo! 配置为标识提供程序](http://msdn.microsoft.com/zh-cn/library/gg185977.aspx)
 -  [代码示例：Windows Phone 7 应用程序](http://msdn.microsoft.com/zh-cn/library/gg983271.aspx)
 -   [使用由 Azure 访问控制服务 (ACS) 颁发的 SWT 令牌保护 REST WCF](http://code.msdn.microsoft.com/REST-WCF-With-SWT-Token-123d93c0)
-
 
 ###在 ASP.NET Web 应用和 REST WCF 服务之间使用共享 SWT 令牌
 
@@ -305,7 +303,6 @@ RoleManger。WIF 可用于在实施自定义 RoleManager 接口方法（例如 G
 -   [如何：使用 WIF 和 ACS 在声明感知 ASP.NET 应用程序中实现声明授权](http://msdn.microsoft.com/zh-cn/library/gg185907.aspx)
 -   代码示例：[Windows Identity Foundation SDK](http://www.microsoft.com/downloads/details.aspx?FamilyID=c148b2df-c7af-46bb-9162-2c9422208504) 中基于声明的授权
 
-
 ##Azure 存储服务身份识别和访问控制方案
 
 在此方案中，您需要安全地共享对 Azure 存储 Blob 和容器的访问权限。
@@ -324,7 +321,6 @@ URL。
 -   [管理对 Blob 和容器的访问权限](http://msdn.microsoft.com/zh-cn/library/ee393343.aspx)
 -   [新存储功能：共享访问签名（可能为英文页面）](http://blog.smarx.com/posts/new-storage-feature-signed-access-signatures)
 -   [共享访问签名现在很容易实现](http://blog.smarx.com/posts/shared-access-signatures-are-easy-these-days)
-
 
 ##Azure SQL 数据库 身份识别和访问控制方案
 
@@ -363,7 +359,6 @@ SQL 数据库 时都必须提供凭据（登录名和密码）。在管理您的
 Azure AD A访问控制进行身份验证。它可使用通过管理门户提供的共享密钥。在访问缓存时，可在您的代码或配置文件中使用密钥。确保安全存储密钥以避免信息泄露。
 
 ![][17]
-
 
 请参见以下资源来实施此方案：
 
@@ -475,7 +470,6 @@ Azure AD 访问控制的安全设置。在设计并部署您的应用程序时�
 -   [安全智能报告](http://www.microsoft.com/security/sir)
 -   [安全开发生命周期](http://www.microsoft.com/security/sdl/default.aspx)
 -   [安全开发人员中心 (MSDN)](http://msdn.microsoft.com/security)
-
 
 [01]:./media/SecurityRX/01_SecuringTheApplication.gif
 [02]:./media/SecurityRX/02_ThreatsVulnerabilitiesandAttacks.gif

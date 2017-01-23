@@ -1,29 +1,30 @@
-<properties
-    pageTitle="DocumentDB .NET API 和 SDK | Azure"
-    description="了解有关 .NET API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB.NET SDK 各版本之间的更改。"
-    services="documentdb"
-    documentationcenter=".net"
-    author="rnagpal"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="8e239217-9085-49f5-b0a7-58d6e6b61949"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="12/09/2016"
-    wacn.date="01/23/2017"
-    ms.author="rnagpal" />
+---
+title: DocumentDB .NET API 和 SDK | Azure
+description: 了解有关 .NET API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB.NET SDK 各版本之间的更改。
+services: documentdb
+documentationcenter: .net
+author: rnagpal
+manager: jhubbard
+editor: cgronlun
+
+ms.assetid: 8e239217-9085-49f5-b0a7-58d6e6b61949
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 12/09/2016
+wacn.date: 01/23/2017
+ms.author: rnagpal
+---
 
 # DocumentDB API 和 SDK
->[AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-sdk-dotnet/)
-- [.NET Core](/documentation/articles/documentdb-sdk-dotnet-core/)
-- [Node.js](/documentation/articles/documentdb-sdk-node/)
-- [Java](/documentation/articles/documentdb-sdk-java/)
-- [Python](/documentation/articles/documentdb-sdk-python/)
+>[!div class="op_single_selector"]
+- [.NET](./documentdb-sdk-dotnet.md)
+- [.NET Core](./documentdb-sdk-dotnet-core.md)
+- [Node.js](./documentdb-sdk-node.md)
+- [Java](./documentdb-sdk-java.md)
+- [Python](./documentdb-sdk-python.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/documentdb/)
 - [REST 资源提供程序](https://docs.microsoft.com/rest/api/documentdbresourceprovider/)
 - [SQL](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)
@@ -31,16 +32,15 @@
 ## DocumentDB .NET API 和 SDK
 <table>
 
-
 <tr><td>**SDK 下载**</td><td><a href="https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/">NuGet</a></td></tr>
 
 <tr><td>**API 文档**</td><td><a href="https://msdn.microsoft.com/zh-cn/library/azure/dn948556.aspx">.NET API 参考文档</a></td></tr>
 
-<tr><td>**示例**</td><td><a href="/documentation/articles/documentdb-dotnet-samples/">.NET 代码示例</a></td></tr>
+<tr><td>**示例**</td><td><a href="./documentdb-dotnet-samples.md">.NET 代码示例</a></td></tr>
 
-<tr><td>**入门**</td><td><a href="/documentation/articles/documentdb-get-started/">DocumentDB .NET SDK 入门</a></td></tr>
+<tr><td>**入门**</td><td><a href="./documentdb-get-started.md">DocumentDB .NET SDK 入门</a></td></tr>
 
-<tr><td>**Web 应用教程**</td><td><a href="/documentation/articles/documentdb-dotnet-application/">使用 DocumentDB 开发 Web 应用程序</a></td></tr>
+<tr><td>**Web 应用教程**</td><td><a href="./documentdb-dotnet-application.md">使用 DocumentDB 开发 Web 应用程序</a></td></tr>
 
 <tr><td>**当前受支持的框架**</td><td><a href="https://www.microsoft.com/zh-cn/download/details.aspx?id=30653">Microsoft .NET Framework 4.5</a></td></tr>
 </table>
@@ -48,7 +48,7 @@
 ## 发行说明
 
 ### <a name="1.11.0"/>[1\.11.0](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.11.0)
-- 支持新类和方法，可处理集合内的文档[更改源](/documentation/articles/documentdb-change-feed/)。
+- 支持新类和方法，可处理集合内的文档[更改源](./documentdb-change-feed.md)。
 - 支持跨分区查询延续和跨分区查询的一些性能改进。
 - 添加 CreateDatabaseIfNotExistsAsync 和 CreateDocumentCollectionIfNotExistsAsync 方法。
 - 针对系统函数 IsDefined、IsNull 和 IsPrimitive 的 LINQ 支持。
@@ -103,7 +103,7 @@
 - 修复了用于将其打包为 Azure 云服务解决方案的一部分的 .NET SDK 的 Nuget 包中的 Bug。
 
 ### <a name="1.6.2"/>[1\.6.2](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.6.2)
-- 实现了[分区集合](/documentation/articles/documentdb-partition-data/)和[用户定义的性能级别](/documentation/articles/documentdb-performance-levels/)。
+- 实现了[分区集合](./documentdb-partition-data.md)和[用户定义的性能级别](./documentdb-performance-levels.md)。
 
 ### <a name="1.5.3"/>[1\.5.3](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.5.3)
 - **\[已修复\]** 查询 DocumentDB 终结点引发：“System.Net.Http.HttpRequestException：将内容复制到流时出错”。
@@ -153,12 +153,12 @@
 ### <a name="1.2.0"/>[1\.2.0](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.2.0)
 - 对 Newtonsoft.Json v5.0.7 的依赖关系
 - 更改为支持 Order By
-  
+
   - LINQ 提供程序支持 OrderBy\(\) 或 OrderByDescending\(\)
   - 支持 Order By 的 IndexingPolicy
-    
+
     **注意：可能非常重大的更改** 
-    
+
     如果你的现有代码使用自定义索引策略预配集合，那么你的现有代码将需要更新为支持新的 IndexingPolicy 类。 如果你没有任何自定义索引策略，此更改不会影响你。 
 
 ### <a name="1.1.0"/>[1\.1.0](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.1.0)
@@ -170,7 +170,7 @@
 ### <a name="1.0.0"/>[1\.0.0](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.0.0)
 - GA SDK
 
-> [AZURE.NOTE]
+> [!NOTE]
 预览版和 GA 版之间的 NuGet 程序包名称有所更改。从 **Microsoft.Azure.Documents.Client** 移到了 **Microsoft.Azure.DocumentDB**
 > <br/>
 > 
@@ -186,7 +186,7 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 
 使用已停用的 SDK 对 DocumentDB 发出的任何请求都将被服务拒绝。
 
-> [AZURE.WARNING]
+> [!WARNING]
 **1.0.0** 版之前的所有 Azure DocumentDB SDK for .NET 版本都将在 **2016 年 2 月 29 日**停用。
 > 
 > 
@@ -224,10 +224,10 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 | [0\.9.0-prelease](#0.9.x-preview) |2014 年 8 月 21 日 |2016 年 2 月 29 日|
 
 ## 常见问题
-[AZURE.INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
+[!INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
 
 ## 另请参阅
-若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](/home/features/documentdb/) 服务页。
+若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 服务页。
 
 <!---HONumber=Mooncake_0109_2017-->
 <!---Update_Description: wording update -->

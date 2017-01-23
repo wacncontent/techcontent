@@ -1,133 +1,136 @@
-<properties
-   pageTitle="Desired State Configuration Resource Manager 模板 | Azure"
-   description="Azure 中 Desired State Configuration 的 Resource Manager 模板定义，提供示例和故障排除方法"
-   services="virtual-machines-windows"
-   documentationCenter=""
-   authors="zjalexander"
-   manager="timlt"
-   editor=""
-   tags="azure-service-management,azure-resource-manager"
-   keywords=""/>  
+---
+title: Desired State Configuration Resource Manager 模板 | Azure
+description: Azure 中 Desired State Configuration 的 Resource Manager 模板定义，提供示例和故障排除方法
+services: virtual-machines-windows
+documentationCenter: 
+authors: zjalexander
+manager: timlt
+editor: 
+tags: azure-service-management,azure-resource-manager
+keywords: 
 
-
-<tags
-   ms.service="virtual-machines-windows"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows"
-   ms.workload="na"
-   ms.date="09/15/2016"
-   wacn.date="01/05/2017"
-   ms.author="zachal"/>  
-
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: na
+ms.date: 09/15/2016
+wacn.date: 01/05/2017
+ms.author: zachal
+---
 
 # 在 Azure Resource Manager 模板中使用 Windows VMSS 和 Desired State Configuration
-本文介绍 [Desired State Configuration 扩展处理程序](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)的 Resource Manager 模板。
+本文介绍 [Desired State Configuration 扩展处理程序](./virtual-machines-windows-extensions-dsc-overview.md)的 Resource Manager 模板。
 
 ## Windows VM 模板示例
 
 模板的“资源”部分中要使用以下代码片段。
 
-			"name": "Microsoft.Powershell.DSC",
-			"type": "extensions",
-             "location": "[resourceGroup().location]",
-             "apiVersion": "2015-06-15",
-             "dependsOn": [
-                  "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-              ],
-              "properties": {
-                  "publisher": "Microsoft.Powershell",
-                  "type": "DSC",
-                  "typeHandlerVersion": "2.20",
-                  "autoUpgradeMinorVersion": true,
-                  "forceUpdateTag": "[parameters('dscExtensionUpdateTagVersion')]",
-                  "settings": {
-                      "configuration": {
-                          "url": "[concat(parameters('_artifactsLocation'), '/', variables('dscExtensionArchiveFolder'), '/', variables('dscExtensionArchiveFileName'))]",
-                          "script": "dscExtension.ps1",
-                          "function": "Main"
-                      },
-                      "configurationArguments": {
-                          "nodeName": "[variables('vmName')]"
-                      }
+```
+        "name": "Microsoft.Powershell.DSC",
+        "type": "extensions",
+         "location": "[resourceGroup().location]",
+         "apiVersion": "2015-06-15",
+         "dependsOn": [
+              "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+          ],
+          "properties": {
+              "publisher": "Microsoft.Powershell",
+              "type": "DSC",
+              "typeHandlerVersion": "2.20",
+              "autoUpgradeMinorVersion": true,
+              "forceUpdateTag": "[parameters('dscExtensionUpdateTagVersion')]",
+              "settings": {
+                  "configuration": {
+                      "url": "[concat(parameters('_artifactsLocation'), '/', variables('dscExtensionArchiveFolder'), '/', variables('dscExtensionArchiveFileName'))]",
+                      "script": "dscExtension.ps1",
+                      "function": "Main"
                   },
-                  "protectedSettings": {
-                      "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
+                  "configurationArguments": {
+                      "nodeName": "[variables('vmName')]"
                   }
-
+              },
+              "protectedSettings": {
+                  "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
+              }
+```
 
 ## Windows VMSS 的模板示例
 
 VMSS 节点具有“properties”节，其中包含“VirtualMachineProfile”和“extensionProfile”属性。DSC 添加在“extensions”下面。
 
-    "extensionProfile": {
-            "extensions": [
-                {
-                    "name": "Microsoft.Powershell.DSC",
-                    "properties": {
-                        "publisher": "Microsoft.Powershell",
-                        "type": "DSC",
-                        "typeHandlerVersion": "2.20",
-                        "autoUpgradeMinorVersion": true,
-                        "forceUpdateTag": "[parameters('DscExtensionUpdateTagVersion')]",
-                        "settings": {
-                            "configuration": {
-                                "url": "[concat(parameters('_artifactsLocation'), '/', variables('DscExtensionArchiveFolder'), '/', variables('DscExtensionArchiveFileName'))]",
-                                "script": "DscExtension.ps1",
-                                "function": "Main"
-                            },
-                            "configurationArguments": {
-                                "nodeName": "localhost"
-                            }
+```
+"extensionProfile": {
+        "extensions": [
+            {
+                "name": "Microsoft.Powershell.DSC",
+                "properties": {
+                    "publisher": "Microsoft.Powershell",
+                    "type": "DSC",
+                    "typeHandlerVersion": "2.20",
+                    "autoUpgradeMinorVersion": true,
+                    "forceUpdateTag": "[parameters('DscExtensionUpdateTagVersion')]",
+                    "settings": {
+                        "configuration": {
+                            "url": "[concat(parameters('_artifactsLocation'), '/', variables('DscExtensionArchiveFolder'), '/', variables('DscExtensionArchiveFileName'))]",
+                            "script": "DscExtension.ps1",
+                            "function": "Main"
                         },
-                        "protectedSettings": {
-                            "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
+                        "configurationArguments": {
+                            "nodeName": "localhost"
                         }
+                    },
+                    "protectedSettings": {
+                        "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
                     }
                 }
-            ]
+            }
+        ]
+```
 
 ## 详细设置信息
 
 Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用以下架构。
 
-    "settings": {
-    "wmfVersion": "latest",
-    "configuration": {
-        "url": "http://validURLToConfigLocation",
-        "script": "ConfigurationScript.ps1",
-        "function": "ConfigurationFunction"
-    },
-    "configurationArguments": {
-        "argument1": "Value1",
-        "argument2": "Value2"
-    },
-    "configurationData": {
-        "url": "https://foo.psd1"
-    },
-    "privacy": {
-        "dataCollection": "enable"
-    },
-    "advancedOptions": {
-        "downloadMappings": {
-        "customWmfLocation": "http://myWMFlocation"
-        }
-    } 
-    },
-    "protectedSettings": {
-    "configurationArguments": {
-        "parameterOfTypePSCredential1": {
-        "userName": "UsernameValue1",
-        "password": "PasswordValue1"
-        },
-        "parameterOfTypePSCredential2": {
-        "userName": "UsernameValue2",
-        "password": "PasswordValue2"
-        }
-    },
-    "configurationUrlSasToken": "?g!bber1sht0k3n",
-    "configurationDataUrlSasToken": "?dataAcC355T0k3N"
+```
+"settings": {
+"wmfVersion": "latest",
+"configuration": {
+    "url": "http://validURLToConfigLocation",
+    "script": "ConfigurationScript.ps1",
+    "function": "ConfigurationFunction"
+},
+"configurationArguments": {
+    "argument1": "Value1",
+    "argument2": "Value2"
+},
+"configurationData": {
+    "url": "https://foo.psd1"
+},
+"privacy": {
+    "dataCollection": "enable"
+},
+"advancedOptions": {
+    "downloadMappings": {
+    "customWmfLocation": "http://myWMFlocation"
     }
+} 
+},
+"protectedSettings": {
+"configurationArguments": {
+    "parameterOfTypePSCredential1": {
+    "userName": "UsernameValue1",
+    "password": "PasswordValue1"
+    },
+    "parameterOfTypePSCredential2": {
+    "userName": "UsernameValue2",
+    "password": "PasswordValue2"
+    }
+},
+"configurationUrlSasToken": "?g!bber1sht0k3n",
+"configurationDataUrlSasToken": "?dataAcC355T0k3N"
+}
+```
 
 ## 详细信息
 | 属性名称 | 类型 | 说明 |
@@ -151,65 +154,71 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 
 如果配置需要凭据，可将凭据包含在 protectedSettings 中：
 
-    "protectedSettings": {
-        "configurationArguments": {
-            "parameterOfTypePSCredential1": {
-                "userName": "UsernameValue1",
-                "password": "PasswordValue1"
-            }
+```
+"protectedSettings": {
+    "configurationArguments": {
+        "parameterOfTypePSCredential1": {
+            "userName": "UsernameValue1",
+            "password": "PasswordValue1"
         }
     }
+}
+```
 
 ## 示例
 
-以下示例摘自 [DSC Extension Handler Overview](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)（DSC 扩展处理程序概述）网页中的“Getting Started”（入门）部分。
+以下示例摘自 [DSC Extension Handler Overview](./virtual-machines-windows-extensions-dsc-overview.md)（DSC 扩展处理程序概述）网页中的“Getting Started”（入门）部分。
 此示例使用 Resource Manager 模板而不是cmdlet 来部署该扩展。
 保存“IisInstall.ps1”配置，将它放在 .ZIP 文件中，然后将该文件上载到可访问的 URL 中。此示例使用 Azure Blob 存储，但可以从任意位置下载 .ZIP 文件。
 
 在 Azure Resource Manager 模板中，以下代码指示 VM 下载正确的文件并运行适当的 PowerShell 函数：
 
-    "settings": {
-        "configuration": {
-            "url": "https://demo.blob.core.chinacloudapi.cn/",
-            "script": "IisInstall.ps1",
-            "function": "IISInstall"
-        }
-        } 
-    },
-    "protectedSettings": {
-        "configurationUrlSasToken": "odLPL/U1p9lvcnp..."
+```
+"settings": {
+    "configuration": {
+        "url": "https://demo.blob.core.chinacloudapi.cn/",
+        "script": "IisInstall.ps1",
+        "function": "IISInstall"
     }
+    } 
+},
+"protectedSettings": {
+    "configurationUrlSasToken": "odLPL/U1p9lvcnp..."
+}
+```
 
 ## 从以前的格式进行更新
 先前格式（包含 ModulesUrl、ConfigurationFunction、SasToken 或 Properties 等公共属性）中的所有设置将自动调整为当前格式，并按以前的相同方式运行。
 
 以前的 settings 架构如下所示：
 
-    "settings": {
-        "WMFVersion": "latest",
-        "ModulesUrl": "https://UrlToZipContainingConfigurationScript.ps1.zip",
-        "SasToken": "SAS Token if ModulesUrl points to private Azure Blob Storage",
-        "ConfigurationFunction": "ConfigurationScript.ps1\\ConfigurationFunction",
-        "Properties":  {
-            "ParameterToConfigurationFunction1":  "Value1",
-            "ParameterToConfigurationFunction2":  "Value2",
-            "ParameterOfTypePSCredential1": {
-                "UserName": "UsernameValue1",
-                "Password": "PrivateSettingsRef:Key1" 
-            },
-            "ParameterOfTypePSCredential2": {
-                "UserName": "UsernameValue2",
-                "Password": "PrivateSettingsRef:Key2"
-            }
-        }
-    },
-    "protectedSettings": { 
-        "Items": {
-            "Key1": "PasswordValue1",
-            "Key2": "PasswordValue2"
+```
+"settings": {
+    "WMFVersion": "latest",
+    "ModulesUrl": "https://UrlToZipContainingConfigurationScript.ps1.zip",
+    "SasToken": "SAS Token if ModulesUrl points to private Azure Blob Storage",
+    "ConfigurationFunction": "ConfigurationScript.ps1\\ConfigurationFunction",
+    "Properties":  {
+        "ParameterToConfigurationFunction1":  "Value1",
+        "ParameterToConfigurationFunction2":  "Value2",
+        "ParameterOfTypePSCredential1": {
+            "UserName": "UsernameValue1",
+            "Password": "PrivateSettingsRef:Key1" 
         },
-        "DataBlobUri": "https://UrlToConfigurationDataWithOptionalSasToken.psd1"
+        "ParameterOfTypePSCredential2": {
+            "UserName": "UsernameValue2",
+            "Password": "PrivateSettingsRef:Key2"
+        }
     }
+},
+"protectedSettings": { 
+    "Items": {
+        "Key1": "PasswordValue1",
+        "Key2": "PasswordValue2"
+    },
+    "DataBlobUri": "https://UrlToConfigurationDataWithOptionalSasToken.psd1"
+}
+```
 
 以前的格式调整为当前格式后的情况如下所示：
 
@@ -226,7 +235,6 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 | protectedSettings.configurationArguments | protectedSettings.Properties |
 | protectedSettings.configurationUrlSasToken | settings.SasToken |
 | protectedSettings.configurationDataUrlSasToken | protectedSettings.DataBlobUri 中的 SAS 令牌 |
-
 
 ## 故障排除 - 错误代码 1100
 错误代码 1100 指示 DSC 扩展中的用户输入有问题。
@@ -283,13 +291,12 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 - 提供缺少的属性。
 - 删除需要缺失属性的属性。
 
-
 ## 后续步骤
-若要了解 DSC 的和虚拟机规模集，请参阅[将虚拟机规模集与 Azure DSC 扩展配合使用](/documentation/articles/virtual-machine-scale-sets-dsc/)
+若要了解 DSC 的和虚拟机规模集，请参阅[将虚拟机规模集与 Azure DSC 扩展配合使用](../virtual-machine-scale-sets/virtual-machine-scale-sets-dsc.md)
 
-有关详细信息，请参阅 [DSC 的安全凭据管理](/documentation/articles/virtual-machines-windows-extensions-dsc-credentials/)。
+有关详细信息，请参阅 [DSC 的安全凭据管理](./virtual-machines-windows-extensions-dsc-credentials.md)。
 
-若要深入了解 Azure DSC 扩展处理程序，请参阅 [Azure Desired State Configuration 扩展处理程序简介](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)。
+若要深入了解 Azure DSC 扩展处理程序，请参阅 [Azure Desired State Configuration 扩展处理程序简介](./virtual-machines-windows-extensions-dsc-overview.md)。
 
 有关 PowerShell DSC 的详细信息，请[访问 PowerShell 文档中心](https://msdn.microsoft.com/powershell/dsc/overview)。
 

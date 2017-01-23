@@ -1,32 +1,31 @@
-<properties
-	pageTitle="适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令 | Azure"
-	description="了解如何使用基于 Azure Resource Manager 的新 PowerShell 命令来管理 Azure Web Apps。"
-	services="app-service\web"
-	documentationCenter=""
-	authors="ahmedelnably"
-	manager="stefsch"
-	editor=""/>  
+---
+title: 适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令 | Azure
+description: 了解如何使用基于 Azure Resource Manager 的新 PowerShell 命令来管理 Azure Web Apps。
+services: app-service\web
+documentationCenter: 
+authors: ahmedelnably
+manager: stefsch
+editor: 
 
-
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/29/2016"
-	wacn.date="10/31/2016"
-	ms.author="aelnably"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/29/2016
+wacn.date: 10/31/2016
+ms.author: aelnably
+---
 
 # 使用基于 Azure Resource Manager 的 PowerShell 来管理 Azure Web Apps#
 
-> [AZURE.SELECTOR]
-- [Azure CLI](/documentation/articles/app-service-web-app-azure-resource-manager-xplat-cli/)
-- [Azure PowerShell](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)
+> [!div class="op_single_selector"]
+- [Azure CLI](./app-service-web-app-azure-resource-manager-xplat-cli.md)
+- [Azure PowerShell](./app-service-web-app-azure-resource-manager-powershell.md)
 
 Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Resource Manager 的 PowerShell 命令来管理 Web 应用。
 
-若要了解如何管理资源组，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](/documentation/articles/powershell-azure-resource-manager/)。
+若要了解如何管理资源组，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
 
 若要了解 PowerShell cmdlet 的完整参数和选项列表，请参阅 [Web 应用的基于 Azure Resource Manager 的 PowerShell Cmdlet 的完整 Cmdlet 参考](https://msdn.microsoft.com/zh-cn/library/mt619237.aspx)
 
@@ -46,7 +45,9 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 使用此 cmdlet 的示例：
 
-    New-AzureRmAppServicePlan -Name ContosoAppServicePlan -Location "China East" -ResourceGroupName ContosoAzureResourceGroup -Tier Premium -WorkerSize Large -NumberofWorkers 10
+```
+New-AzureRmAppServicePlan -Name ContosoAppServicePlan -Location "China East" -ResourceGroupName ContosoAzureResourceGroup -Tier Premium -WorkerSize Large -NumberofWorkers 10
+```
 
 ### 列出现有的 App Service 计划 ###
 
@@ -54,46 +55,61 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 若要列出订阅之下的所有应用服务计划，请使用：
 
-    Get-AzureRmAppServicePlan
+```
+Get-AzureRmAppServicePlan
+```
 
 若要列出特定资源组之下的所有 App Service 计划，请使用：
 
-    Get-AzureRmAppServicePlan -ResourceGroupname ContosoAzureResourceGroup
+```
+Get-AzureRmAppServicePlan -ResourceGroupname ContosoAzureResourceGroup
+```
 
 若要获取特定的 App Service 计划，请使用：
 
-    Get-AzureRmAppServicePlan -Name ContosoAppServicePlan
-
+```
+Get-AzureRmAppServicePlan -Name ContosoAppServicePlan
+```
 
 ### 配置现有的 App Service 计划 ###
 
 若要更改现有应用服务计划的设置，请使用 **Set-AzureRmAppServicePlan** cmdlet。可以更改层、辅助角色大小和辅助角色数目
 
-    Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -Tier Standard -WorkerSize Medium -NumberofWorkers 9
+```
+Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -Tier Standard -WorkerSize Medium -NumberofWorkers 9
+```
 
 #### 缩放 App Service 计划 ####
 
 若要缩放现有的 App Service 计划，请使用：
 
-    Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -NumberofWorkers 9
+```
+Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -NumberofWorkers 9
+```
 
 #### 更改 App Service 计划的辅助角色大小 ####
 
 若要更改现有 App Service 计划中的辅助角色大小，请使用：
 
-    Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -WorkerSize Medium
+```
+Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -WorkerSize Medium
+```
 
 #### 更改 App Service 计划的层 ####
 
 若要更改现有 App Service 计划的层，请使用：
 
-    Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -Tier Standard
+```
+Set-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -Tier Standard
+```
 
 ### 删除现有的 App Service 计划 ###
 
 若要删除现有的应用服务计划，请先移动或删除所有已分配的 Web 应用。然后使用 **Remove-AzureRmAppServicePlan** cmdlet 可删除应用服务计划。
 
-    Remove-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup
+```
+Remove-AzureRmAppServicePlan -Name ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup
+```
 
 ## 管理应用服务 Web 应用 ##
 
@@ -110,14 +126,17 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 使用此 cmdlet 的示例：
 
-    New-AzureRmWebApp -Name ContosoWebApp -AppServicePlan ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -Location "China East"
+```
+New-AzureRmWebApp -Name ContosoWebApp -AppServicePlan ContosoAppServicePlan -ResourceGroupName ContosoAzureResourceGroup -Location "China East"
+```
 
 ### 删除现有的 Web 应用 ###
 
 若要删除现有的 Web 应用，可以使用 **Remove-AzureRmWebApp** cmdlet，并且需要指定 Web 应用名称和资源组名称。
 
-    Remove-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
-
+```
+Remove-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
 
 ### 列出现有的 Web 应用 ###
 
@@ -125,15 +144,21 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 若要列出订阅之下的所有 Web 应用，请使用：
 
-    Get-AzureRmWebApp
+```
+Get-AzureRmWebApp
+```
 
 若要列出特定资源组之下的所有 Web 应用，请使用：
 
-    Get-AzureRmWebApp -ResourceGroupname ContosoAzureResourceGroup
+```
+Get-AzureRmWebApp -ResourceGroupname ContosoAzureResourceGroup
+```
 
 若要获取特定的 Web 应用，请使用：
 
-    Get-AzureRmWebApp -Name ContosoWebApp
+```
+Get-AzureRmWebApp -Name ContosoWebApp
+```
 
 ### 配置现有的 Web 应用 ###
 
@@ -141,18 +166,23 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 示例 (1)：使用此 cmdlet 来更改连接字符串
 
-	$connectionstrings = @{ ContosoConn1 = @{ Type = "MySql"; Value = "MySqlConn"}; ContosoConn2 = @{ Type = "SQLAzure"; Value = "SQLAzureConn"} }
-	Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -ConnectionStrings $connectionstrings
+```
+$connectionstrings = @{ ContosoConn1 = @{ Type = "MySql"; Value = "MySqlConn"}; ContosoConn2 = @{ Type = "SQLAzure"; Value = "SQLAzureConn"} }
+Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -ConnectionStrings $connectionstrings
+```
 
 示例 (2)：添加或更改应用设置
 
-	$appsettings = @{appsetting1 = "appsetting1value"; appsetting2 = "appsetting2value"}
-	Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -AppSettings $appsettings
-
+```
+$appsettings = @{appsetting1 = "appsetting1value"; appsetting2 = "appsetting2value"}
+Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -AppSettings $appsettings
+```
 
 示例 (3)：将 Web 应用设置为在 64 位模式下运行
 
-	Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -Use32BitWorkerProcess $False
+```
+Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -Use32BitWorkerProcess $False
+```
 
 ### 更改现有 Web 应用的状态 ###
 
@@ -160,19 +190,25 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 若要重新启动 Web 应用，必须指定 Web 应用的名称和资源组。
 
-    Restart-AzureRmWebapp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
+Restart-AzureRmWebapp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
 
 #### 停止 Web 应用 ####
 
 若要停止 Web 应用，必须指定 Web 应用的名称和资源组。
 
-    Stop-AzureRmWebapp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
+Stop-AzureRmWebapp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
 
 #### 启动 Web 应用 ####
 
 若要启动 Web 应用，必须指定 Web 应用的名称和资源组。
 
-    Start-AzureRmWebapp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
+Start-AzureRmWebapp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
 
 ### 管理 Web 应用发布配置文件 ###
 
@@ -182,7 +218,9 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 若要获取 Web 应用的发布配置文件，请使用：
 
-    Get-AzureRmWebAppPublishingProfile -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -OutputFile .\publishingprofile.txt
+```
+Get-AzureRmWebAppPublishingProfile -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -OutputFile .\publishingprofile.txt
+```
 
 此命令将发布配置文件回显至命令行，以及将发布配置文件输出至文本文件。
 
@@ -190,17 +228,18 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 若要同时对 Web 应用的 FTP 和 Web 部署重置发布密码，请使用：
 
-    Reset-AzureRmWebAppPublishingProfile -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
+Reset-AzureRmWebAppPublishingProfile -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
+```
 
 ### 管理 Web 应用证书 ###
 
-若要了解如何管理 Web 应用证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](/documentation/articles/app-service-web-app-powershell-ssl-binding/)
-
+若要了解如何管理 Web 应用证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](./app-service-web-app-powershell-ssl-binding.md)
 
 ### 后续步骤 ###
-- 若要了解 Azure Resource Manager PowerShell 支持，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](/documentation/articles/powershell-azure-resource-manager/)。
-- 若要了解如何使用 PowerShell 管理 App Service SSL 证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](/documentation/articles/app-service-web-app-powershell-ssl-binding/)。
+- 若要了解 Azure Resource Manager PowerShell 支持，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
+- 若要了解如何使用 PowerShell 管理 App Service SSL 证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](./app-service-web-app-powershell-ssl-binding.md)。
 - 若要了解适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell cmdlet 的完整列表，请参阅 [Azure Cmdlet Reference of Web Apps Azure Resource Manager PowerShell Cmdlets](https://msdn.microsoft.com/zh-cn/library/mt619237.aspx)（Web 应用 Azure Resource Manager PowerShell Cmdlet 的 Azure Cmdlet 参考）。
-- - 若要了解使用 CLI 管理应用服务的相关信息，请参阅[使用适用于 Azure Web 应用的基于 Azure Resource Manager 的 XPlat CLI](/documentation/articles/app-service-web-app-azure-resource-manager-xplat-cli/)。
+- - 若要了解使用 CLI 管理应用服务的相关信息，请参阅[使用适用于 Azure Web 应用的基于 Azure Resource Manager 的 XPlat CLI](./app-service-web-app-azure-resource-manager-xplat-cli.md)。
 
 <!---HONumber=Mooncake_1024_2016-->

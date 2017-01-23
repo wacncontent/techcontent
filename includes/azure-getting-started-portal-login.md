@@ -1,4 +1,3 @@
-
 <!--
 includes/azure-include-getting-started-v12portal-gettings-an-account.md
 
@@ -16,7 +15,7 @@ articles/sql-database/sql-database-get-started-tutorial.md
 
 如果你目前没有 Azure 帐户，请单击以下链接之一来获取帐户：
 
-- 获取 [1 元试用帐户](/pricing/1rmb-trial/)
+- 获取 [1 元试用帐户](https://www.azure.cn/pricing/1rmb-trial/)
 
 ###使用现有的帐户登录
 
@@ -29,6 +28,5 @@ articles/sql-database/sql-database-get-started-tutorial.md
 1. 登录页出现时，请提供订阅的凭据
 
    ![登录](./media/azure-getting-started-portal-login/login.png)
-   
 
 <!---HONumber=Mooncake_0425_2016-->

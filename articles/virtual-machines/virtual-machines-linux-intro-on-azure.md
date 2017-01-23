@@ -1,22 +1,22 @@
-<properties
-	pageTitle="Azure 中的 Linux 简介 | Azure"
-	description="了解如何在 Azure 上使用 Linux 虚拟机。"
-	services="virtual-machines-linux"
-	documentationCenter="python"
-	authors="szarkos"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager,azure-service-management"/>
+---
+title: Azure 中的 Linux 简介 | Azure
+description: 了解如何在 Azure 上使用 Linux 虚拟机。
+services: virtual-machines-linux
+documentationCenter: python
+authors: szarkos
+manager: timlt
+editor: 
+tags: azure-resource-manager,azure-service-management
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/24/2016"
-	wacn.date="10/25/2016"
-	ms.author="szark"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 08/24/2016
+wacn.date: 10/25/2016
+ms.author: szark
+---
 
 #Azure 上的 Linux 简介
 
@@ -26,28 +26,28 @@
 
 在使用 Azure 经典管理门户创建 Linux 虚拟机时，系统会要求你提供用户名、密码或 SSH 公钥。在 Azure 上部署 Linux 虚拟机时，用户名的选择受到以下限制：不允许使用虚拟机中已经存在的系统帐户 (UID <100) 的名称，例如，“根”。
 
-
- - 请参阅[创建运行 Linux 的虚拟机](/documentation/articles/virtual-machines-linux-quick-create-cli/)
- - 请参阅[如何在 Azure 上将 SSH 用于 Linux 和 Mac](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)
+ - 请参阅[创建运行 Linux 的虚拟机](./virtual-machines-linux-quick-create-cli.md)
+ - 请参阅[如何在 Azure 上将 SSH 用于 Linux 和 Mac](./virtual-machines-linux-mac-create-ssh-keys.md)
 
 ## 使用 `sudo` 获取超级用户特权
 
 在 Azure 上部署虚拟机实例的过程中指定的用户帐户是特权帐户。此帐户由 Azure Linux 代理配置为能够使用 `sudo` 实用工具提升根（超级用户帐户）的特权。在使用此用户帐户登录后，你将能够使用命令语法以根用户身份运行命令。
 
-	# sudo <COMMAND>
+```
+# sudo <COMMAND>
+```
 
 可以选择使用 **sudo -s** 获取根 shell。
 
-- 请参阅[在 Azure 中对 Linux 虚拟机使用根特权](/documentation/articles/virtual-machines-linux-use-root-privileges/)
+- 请参阅[在 Azure 中对 Linux 虚拟机使用根特权](./virtual-machines-linux-use-root-privileges.md)
 
 ## 防火墙配置
 
 Azure 提供了一个入站数据包筛选器，用于限制与经典管理门户中指定的端口的连接。默认情况下，唯一允许的端口为 SSH。通过在经典管理门户中配置终结点，可以启用对 Linux 虚拟机上的其他端口的访问：
 
- - 请参阅：[如何设置虚拟机的终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)
+ - 请参阅：[如何设置虚拟机的终结点](./virtual-machines-linux-classic-setup-endpoints.md)
 
 默认情况下，Azure 库中的 Linux 映像不支持 *iptables* 防火墙。如果需要，可以将该防火墙配置为提供附加筛选。
-
 
 ## 主机名更改
 
@@ -55,20 +55,21 @@ Azure 提供了一个入站数据包筛选器，用于限制与经典管理门�
 
 如果在部署虚拟机后需要更改主机名，请使用命令
 
-	# sudo hostname <newname>
+```
+# sudo hostname <newname>
+```
 
 Azure Linux 代理包含自动检测此名称更改的功能，并会相应地配置虚拟机以保留此更改以及将此更改发布到平台 DNS 服务器。
 
- - [Azure Linux 代理用户指南](/documentation/articles/virtual-machines-linux-agent-user-guide/)
+ - [Azure Linux 代理用户指南](./virtual-machines-linux-agent-user-guide.md)
 
 ### Cloud-Init
 **Ubuntu** 和 **CoreOS** 映像利用 cloud-init pn Azure 为启动虚拟机提供附加功能。
 
- - [如何插入自定义数据](/documentation/articles/virtual-machines-linux-classic-inject-custom-data/)
+ - [如何插入自定义数据](./virtual-machines-linux-classic-inject-custom-data.md)
  - [Azure 上的自定义数据和 Cloud-Init](http://azure.microsoft.com/blog/2014/04/21/custom-data-and-cloud-init-on-windows-azure/)
  - [使用 Cloud-Init 创建 Azure 交换分区](https://wiki.ubuntu.com/AzureSwapPartitions)
  - [如何在 Azure 上使用 CoreOS](https://coreos.com/os/docs/latest/booting-on-azure.html)
-
 
 ## 虚拟机映像捕获
 
@@ -80,8 +81,7 @@ Azure Linux 代理包含自动检测此名称更改的功能，并会相应地�
 
 3. 在经典管理门户中单击“捕获”或者使用 Powershell 或 CLI 工具将虚拟机作为映像捕获。
 
- - 请参阅：[如何捕获 Linux 虚拟机以用作模板](/documentation/articles/virtual-machines-linux-classic-capture-image/)
-
+ - 请参阅：[如何捕获 Linux 虚拟机以用作模板](./virtual-machines-linux-classic-capture-image.md)
 
 ## 附加磁盘
 
@@ -89,11 +89,11 @@ Azure Linux 代理包含自动检测此名称更改的功能，并会相应地�
 
 在 Linux 上，资源磁盘通常由 Azure Linux 代理管理并且自动装载到 **/mnt/resource**（或 Ubuntu 映像上的 **/mnt**）。
 
+>[!NOTE]
+>请注意，资源磁盘是**临时**磁盘，并可能在重新启动 VM 时被删除或重新格式化。
 
->[AZURE.NOTE]请注意，资源磁盘是**临时**磁盘，并可能在重新启动 VM 时被删除或重新格式化。
+在 Linux 上，数据磁盘可能由内核命名为 `/dev/sdc`，并且用户需要对该资源进行分区、格式化和装载。在[如何将数据磁盘附加到虚拟机](./virtual-machines-linux-classic-attach-disk.md)的教程中对此进行了分步说明。
 
-在 Linux 上，数据磁盘可能由内核命名为 `/dev/sdc`，并且用户需要对该资源进行分区、格式化和装载。在[如何将数据磁盘附加到虚拟机](/documentation/articles/virtual-machines-linux-classic-attach-disk/)的教程中对此进行了分步说明。
-
- - **另请参阅：**[在 Linux 上配置软件 RAID](/documentation/articles/virtual-machines-linux-configure-raid/)
+ - **另请参阅：**[在 Linux 上配置软件 RAID](./virtual-machines-linux-configure-raid.md)
 
 <!---HONumber=Mooncake_1207_2015-->

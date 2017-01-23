@@ -1,16 +1,20 @@
-<properties 
-	pageTitle="使用 docker-machine 管理 Azure 容器虚拟机" 
-	description="如何使用 docker-machine 管理 Azure 容器虚拟机" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machine-aog" ms.date="" wacn.date="10/28/2016"/>
+---
+title: 使用 docker-machine 管理 Azure 容器虚拟机
+description: 如何使用 docker-machine 管理 Azure 容器虚拟机
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 10/28/2016
+---
 
 # 使用 docker-machine 管理 Azure 容器虚拟机 #
 
-安装 docker-machine 请参见该链接（[https://docs.docker.com/machine/install-machine](https://docs.docker.com/machine/install-machine "https://docs.docker.com/machine/install-machine")）本例中，先安装了 git bash 工具，再通过 git bash 安装 docker-machine. 
+安装 docker-machine 请参见该链接（[https://docs.docker.com/machine/install-machine "https://docs.docker.com/machine/install-machine"](https://docs.docker.com/machine/install-machine "https://docs.docker.com/machine/install-machine")）本例中，先安装了 git bash 工具，再通过 git bash 安装 docker-machine. 
 
 第一次运行 docker-machine，会在当前用户的用户目录里（一般为 C:\Users\<user>\）生成 . =docker 的文件夹。该文件夹下的内容主要有：
 
@@ -26,30 +30,34 @@ Docker-machine 使用不同的驱动，能与不同的平台进行通信，进�
 
 Azure 驱动版本随着 Docker-machine 的版本一同更新。参见下面链接查看最新的 docker-machine 的版本，修复的往期的 bug，以及支持的新功能等。
 
-[https://github.com/docker/machine/releases ](https://github.com/docker/machine/releases  "https://github.com/docker/machine/releases ")
+[https://github.com/docker/machine/releases  "https://github.com/docker/machine/releases "](https://github.com/docker/machine/releases  "https://github.com/docker/machine/releases ")
 
  根据 docker-machine 版本的不同，参数可能不同。参见下面链接查看最新的Azure驱动支持的参数选项及其默认值。
 
-[https://docs.docker.com/machine/drivers/azure/](https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/") 
+[https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/"](https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/") 
 除了必须指定订阅号，其他必须参数都包含了默认值；您也可以根据需求自定义各参数值。下面是一个示例（使用 docker-machine 0.8.2 ）：
 
-	docker-machine.exe create --driver azure \
-	--azure-subscription-id "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx" \
-	--azure-image "Openlogic:CentOS:7.2:latest" \
+```
+docker-machine.exe create --driver azure \
+--azure-subscription-id "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx" \
+--azure-image "Openlogic:CentOS:7.2:latest" \
+```
 
 > 这里需要指定 docker-machine 支持的 OS 版本，同时也需要在中国版 Azure 中存在。通过 Powershell 查看中国版 Azure 支持的 image，命令为 Get-AzureRmVMImagePublisher；Get-AzureRmVMImageOffer；Get-AzureRmVMImageSku；Version 一般都是 latest。
 
-	--azure-location "China North" \
-	--azure-resource-group "dockertestrg" \
-	--azure-size "Standard_A2" \
-	#Powershell中通过Get-AzureRmVMSize查看支持的虚拟机尺寸大小。
-	--azure-vnet "dockervnet" \
-	--azure-subnet "dockersub" \
-	--azure-subnet-prefix "192.168.0.0/24" \
-	--azure-availability-set "dockeravset" \
-	--azure-open-port "80" \
-	--azure-open-port "443" \
-	--azure-private-ip-address  192.168.0.10 \
+```
+--azure-location "China North" \
+--azure-resource-group "dockertestrg" \
+--azure-size "Standard_A2" \
+#Powershell中通过Get-AzureRmVMSize查看支持的虚拟机尺寸大小。
+--azure-vnet "dockervnet" \
+--azure-subnet "dockersub" \
+--azure-subnet-prefix "192.168.0.0/24" \
+--azure-availability-set "dockeravset" \
+--azure-open-port "80" \
+--azure-open-port "443" \
+--azure-private-ip-address  192.168.0.10 \
+```
 
 > 指定的内网 IP 简易不要在网段中太靠前，有些 IP 已经被预留，创建时会出现使用预留 IP 的错误。
 
@@ -94,4 +102,4 @@ ssh 登录虚拟机
 1. Docker-machine v.0.7.0 对 CentOS 的支持有一定问题。通过该版本配置的 docker 服务无法正常启动。建议到 github（https://github.com/docker/machine） 上查询最新版本信息，以及已知 bug。
 2. 下面错误一般是因为 docker vm 上的证书与本地的证书不匹配造成的；使用 regenerate-certs 可以重置证书。
 
-	![regenerate-certs](./media/aog-virtual-machines-docker-manage-vm/regenerate-certs.png "regenerate-certs")
+    ![regenerate-certs](./media/aog-virtual-machines-docker-manage-vm/regenerate-certs.png "regenerate-certs")

@@ -1,31 +1,27 @@
+---
+title: 自定义 Service Fabric 群集设置和结构升级策略 | Azure
+description: 本文介绍可以自定义的结构设置和结构升级策略。
+services: service-fabric
+documentationCenter: .net
+authors: chackdan
+manager: timlt
+editor: 
 
-<properties
-   pageTitle="自定义 Service Fabric 群集设置和结构升级策略 | Azure"
-   description="本文介绍可以自定义的结构设置和结构升级策略。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="chackdan"
-   manager="timlt"
-   editor=""/>  
-
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/20/2016"
-   wacn.date="11/28/2016"
-   ms.author="chackdan"/>  
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/20/2016
+wacn.date: 11/28/2016
+ms.author: chackdan
+---
 
 # 自定义 Service Fabric 群集设置和结构升级策略
 
 本文档说明如何为 Service Fabric 群集自定义各种结构设置和结构升级策略。可以使用门户或 Resource Manager 模板完成自定义。
 
 ## 可以自定义的结构设置
-
 
 下面是可以自定义的结构设置：
 
@@ -67,12 +63,10 @@
 |FabricUpgradeStatusPollInterval|以秒为单位的时间，默认值为 60|轮询结构升级状态的频率。此值确定任何 GetFabricUpgradeProgress 调用的更新速率 |
 |FabricUpgradeHealthCheckInterval|以秒为单位的时间，默认值为 60|受监视结构升级期间的运行状况检查频率|
 
-
-
 ## 后续步骤
 
 有关群集管理的详细信息，请阅读以下文章：
 
-[在 Azure 群集中添加、滚动更新和删除证书](/documentation/articles/service-fabric-cluster-security-update-certs-azure/)
+[在 Azure 群集中添加、滚动更新和删除证书](./service-fabric-cluster-security-update-certs-azure.md)
 
 <!---HONumber=Mooncake_1121_2016-->

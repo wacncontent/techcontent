@@ -1,30 +1,25 @@
-<properties
-	pageTitle="开始使用 Azure 经典管理门户按需传送内容 | Azure"
-	description="本教程介绍了使用 Azure 媒体服务和 Azure 经典管理门户实施视频点播 (VoD) 内容传送应用程序的步骤。"
-	services="media-services"
-	documentationCenter=""
-	authors="Juliako"
-	manager="erikre"
-	editor=""/>  
+---
+title: 开始使用 Azure 经典管理门户按需传送内容 | Azure
+description: 本教程介绍了使用 Azure 媒体服务和 Azure 经典管理门户实施视频点播 (VoD) 内容传送应用程序的步骤。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="media-services"
-	ms.date="06/22/2016"
-	wacn.date="12/27/2016"/>
-
-
+ms.service: media-services
+ms.date: 06/22/2016
+wacn.date: 12/27/2016
+---
 
 # 开始使用 Azure 经典管理门户按需传送内容
 
-
-[AZURE.INCLUDE [media-services-selector-get-started](../../includes/media-services-selector-get-started.md)]
-
+[!INCLUDE [media-services-selector-get-started](../../includes/media-services-selector-get-started.md)]
 
 本教程介绍了使用 Azure 经典管理门户实施基本视频点播 (VoD) 内容传送应用程序的步骤。
 
-> [AZURE.NOTE] 若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 免费试用](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
-
+> [!NOTE]
+> 若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 免费试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
 
 本教程包括以下任务：
 
@@ -35,12 +30,11 @@
 1.  发布资产并获取流式处理和渐进式下载 URL。
 1.  播放内容。
 
-
 ## 创建 Azure 媒体服务帐户
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，依次单击“新建”、“媒体服务”和“快速创建”。
 
-	![媒体服务快速创建](./media/media-services-portal-get-started/wams-QuickCreate.png)
+    ![媒体服务快速创建](./media/media-services-portal-get-started/wams-QuickCreate.png)
 
 2. 在“名称”中，输入新帐户的名称。媒体服务帐户名称由小写字母或数字构成（不含空格），长度为 3 到 24 个字符。
 
@@ -52,16 +46,15 @@
 
 6. 单击窗体底部的“快速创建”。
 
-	可以在窗口底部的消息区域中监视过程的状态。
+    可以在窗口底部的消息区域中监视过程的状态。
 
-	成功创建帐户后，状态将更改为“活动”。
+    成功创建帐户后，状态将更改为“活动”。
 
-	在页面底部，将出现“管理密钥”按钮。单击此按钮时，会显示一个对话框，其中包含媒体服务帐户名以及主密钥和辅助密钥。需要帐户名和主密钥信息，才能以编程方式访问媒体服务帐户。
+    在页面底部，将出现“管理密钥”按钮。单击此按钮时，会显示一个对话框，其中包含媒体服务帐户名以及主密钥和辅助密钥。需要帐户名和主密钥信息，才能以编程方式访问媒体服务帐户。
 
-	![“媒体服务”页](./media/media-services-portal-get-started/wams-mediaservices-page.png)
+    ![“媒体服务”页](./media/media-services-portal-get-started/wams-mediaservices-page.png)
 
-	双击帐户名时，默认情况下将显示“快速启动”页。可从此页执行某些管理任务，而这些管理任务也可从该门户的其他页执行。例如，可以从此页上传视频文件，也可以从“内容”页执行此操作。
-
+    双击帐户名时，默认情况下将显示“快速启动”页。可从此页执行某些管理任务，而这些管理任务也可从该门户的其他页执行。例如，可以从此页上传视频文件，也可以从“内容”页执行此操作。
 
 ## 使用门户配置流式处理终结点
 
@@ -84,37 +77,36 @@
 
 3. 若要指定流式处理单元数，请选择“缩放”选项卡并移动“保留容量”滑块。
 
-	![“缩放”页](./media/media-services-portal-get-started/media-services-origin-scale.png)
+    ![“缩放”页](./media/media-services-portal-get-started/media-services-origin-scale.png)
 
 4. 单击“保存”按钮保存更改。
 
-	分配所有新的单元大约需要 20 分钟才能完成。
+    分配所有新的单元大约需要 20 分钟才能完成。
 
-	>[AZURE.NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
-	>
-	> 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](/pricing/details/media-services/)。
+    >[!NOTE]
+    > 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
+    >
+    > 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
 ## 上传内容
-
 
 1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，单击“媒体服务”，然后单击媒体服务帐户名。
 2. 选择“内容”页。
 3. 单击该页上或者门户底部的“上传”按钮。
 4. 在“上传内容”对话框中，浏览到所需的资产文件。单击该文件，然后单击“打开”或按 Enter。
 
-	![UploadContentDialog][uploadcontent]
+    ![UploadContentDialog][uploadcontent]
 
 5. 在“上传内容”对话框中，单击复选按钮以接受“文件”和“内容名称”。
 6. 随后将开始上传，可从门户底部跟踪进度。
 
-	![JobStatus][status]
+    ![JobStatus][status]
 
 上传完成后，内容列表中会列出新的资产。根据约定，名称的末尾将附加“**-Source**”，以便将新内容作为编码任务的源内容进行跟踪。
 
 ![ContentPage][contentpage]
 
 如果在上传过程停止后未更新文件大小值，请选择“同步元数据”按钮。这会将资产文件大小与存储中的实际文件大小同步，并刷新“内容”页上的值。
-
 
 ## 对内容进行编码
 
@@ -129,7 +121,7 @@
 若要使用动态打包，必须执行下列操作：
 
 - 将夹层（源）文件编码成一组自适应比特率 MP4 文件或自适应比特率平滑流文件（本教程稍后将演示编码步骤）。
-- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
+- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 通过动态打包，只需要存储及支付一种存储格式的文件，媒体服务将会根据客户端的要求创建并提供适当的响应。
 
@@ -143,20 +135,18 @@
 4. 在“处理”对话框中，选择“Media Encoder Standard”处理器。
 5. 选择其中一个“编码配置”。
 
-	![Process2][process2]  
+    ![Process2][process2]  
 
-
-	[媒体编码器标准版的任务预设字符串](https://msdn.microsoft.com/zh-cn/library/mt269960)主题说明了每个预设的含义。
+    [媒体编码器标准版的任务预设字符串](https://msdn.microsoft.com/zh-cn/library/mt269960)主题说明了每个预设的含义。
 
 5. 然后，输入所需的友好输出内容名称或接受默认值。然后，单击复选按钮开始编码操作。可在门户底部跟踪进度。
 6. 选择“确定”。
 
-	完成编码后，“内容”页将包含已编码的文件。
+    完成编码后，“内容”页将包含已编码的文件。
 
-	若要查看编码作业的进度，请切换到“作业”页。
+    若要查看编码作业的进度，请切换到“作业”页。
 
-	如果在完成编码后未更新文件大小值，请选择“同步元数据”按钮。这会将输出资产文件大小与存储中的实际文件大小同步，并刷新“内容”页上的值。
-
+    如果在完成编码后未更新文件大小值，请选择“同步元数据”按钮。这会将输出资产文件大小与存储中的实际文件大小同步，并刷新“内容”页上的值。
 
 ## 发布内容
 
@@ -168,24 +158,32 @@
 
 SAS URL 采用以下格式。
 
-	{blob container name}/{asset name}/{file name}/{SAS signature}
+```
+{blob container name}/{asset name}/{file name}/{SAS signature}
+```
 
 流式处理 URL 采用以下格式，你可以用它来播放平滑流资产。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
 
 若要生成 HLS 流式处理 URL，请将 (format=m3u8-aapl) 附加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
 
 若要生成 MPEG DASH 流式处理 URL，请将 (format=mpd-time-csf) 追加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
-
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
 
 定位符附带到期日期。使用门户发布资产时，会创建到期日期在 100 年后的定位符。
 
->[AZURE.NOTE] 如果使用门户在 2015 年 3 月之前创建了定位符，则会创建到期日期在两年后的定位符。
+>[!NOTE]
+> 如果使用门户在 2015 年 3 月之前创建了定位符，则会创建到期日期在两年后的定位符。
 
 若要更新定位符的到期日期，请使用 [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator) 或 [.NET](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.ilocator.update(v=azure.10).aspx) API。请注意，更新 SAS 定位符的到期日期时，URL 会发生变化。
 
@@ -198,8 +196,6 @@ SAS URL 采用以下格式。
 
  ![PublishedContent][publishedcontent]  
 
-
-
 ## 从门户播放内容
 
 Azure 经典管理门户提供了可用于测试视频的内容播放器。
@@ -211,19 +207,12 @@ Azure 经典管理门户提供了可用于测试视频的内容播放器。
 - 确保视频已发布。
 - **媒体服务内容播放器**从默认的流式处理终结点播放。如果要从非默认流式处理终结点播放，请使用其他播放器。例如 [Azure 媒体服务播放器](http://amsplayer.azurewebsites.net/azuremediaplayer.html)。
 
-
 ![AMSPlayer][AMSPlayer]  
-
-
-
-
 
 <!-- Anchors. -->
 
-
 <!-- URLs. -->
 [Azure Management Portal]: http://manage.windowsazure.cn/
-
 
 <!-- Images -->
 [portaloverview]: ./media/media-services-portal-get-started/media-services-content-page.png

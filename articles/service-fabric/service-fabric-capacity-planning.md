@@ -1,27 +1,23 @@
-<properties
-   pageTitle="Service Fabric 应用的容量规划 | Azure"
-   description="介绍如何识别 Service Fabric 应用程序所需的计算节点数"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="mani-ramaswamy"
-   manager="markfuss"
-   editor=""/>  
+---
+title: Service Fabric 应用的容量规划 | Azure
+description: 介绍如何识别 Service Fabric 应用程序所需的计算节点数
+services: service-fabric
+documentationCenter: .net
+authors: mani-ramaswamy
+manager: markfuss
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/14/2016"
-   wacn.date="11/17/2016"
-   ms.author="subramar"/>  
-
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/14/2016
+wacn.date: 11/17/2016
+ms.author: subramar
+---
 
 # Service Fabric 应用程序的容量规划
-
 
 本文档介绍如何评估运行 Azure Service Fabric 应用程序所需的资源量（CPU、RAM 和磁盘存储空间）。资源要求经常会随着时间而变化。开发/测试服务时需要的资源通常很少，之后进入生产环境且应用程序受欢迎度提高时需要的资源会更多。设计应用程序时，应仔细规划长期要求并做出选择，以便到时服务可以缩放以应对较高的客户需求。
 
@@ -33,17 +29,15 @@
 
 ## 确定需要多少个节点
 
-将服务分区可以扩展服务的数据。有关分区的详细信息，请参阅 [Partitioning Service Fabric](/documentation/articles/service-fabric-concepts-partitioning/)（将 Service Fabric 分区）。必须将每个分区放入单个 VM，但也可以将多个（小型）分区放入单个 VM。因此，相比少量的大型磁盘分区，大量小型分区可提供更大的弹性。缺点是增加分区会增大 Service Fabric 的负担，并且无法跨分区执行事务操作。如果服务代码经常需要访问位于不同分区的数据片段，则还可能会产生更多的网络流量。设计服务时，应该仔细考虑这些优缺点，以实现有效的分区策略。
+将服务分区可以扩展服务的数据。有关分区的详细信息，请参阅 [Partitioning Service Fabric](./service-fabric-concepts-partitioning.md)（将 Service Fabric 分区）。必须将每个分区放入单个 VM，但也可以将多个（小型）分区放入单个 VM。因此，相比少量的大型磁盘分区，大量小型分区可提供更大的弹性。缺点是增加分区会增大 Service Fabric 的负担，并且无法跨分区执行事务操作。如果服务代码经常需要访问位于不同分区的数据片段，则还可能会产生更多的网络流量。设计服务时，应该仔细考虑这些优缺点，以实现有效的分区策略。
 
 假设应用程序包含单个有状态服务，该服务的存储大小在一年内预期会增加到 DB\_Size GB。在这种情况下，你会想要添加更多的应用程序（与分区），以应对该年度后的存储增长。复制因数 (RF)，确定服务的副本数对 DB\_Size 总计的影响。复制因数乘以 DB\_Size 即为所有副本的 DB\_Size 总计。Node\_Size 表示想要用于服务的每节点磁盘空间/RAM。为了获得最佳性能，应该使 DB\_Size 适应各群集的内存量，并使 Node\_Size 大约等于所选 VM 的 RAM 容量。通过分配大于 RAM 容量的 Node\_Size，可以依赖于 Service Fabric 运行时提供的分页。因此，如果整个数据都被视为热数据（因为从那时起数据进入分页/移出分页），性能就可能无法达到最佳。但是，对于只有一部分数据是热数据的许多服务而言，还是具有很高的成本效益。
 
 为了获得最大性能所需的节点数目可根据以下公式计算：
 
-
-	Number of Nodes = (DB_Size * RF)/Node_Size
-
-
-
+```
+Number of Nodes = (DB_Size * RF)/Node_Size
+```
 
 ## 考虑增长
 
@@ -51,8 +45,7 @@
 
 最好随时准备几台额外的计算机，以便可以处理任何意外的高峰或故障（例如，一些 VM 停机）。尽管额外的容量要使用预期高峰来确定，但一开始可以多预留几个 VM（额外准备 5-10%）。
 
-上面假设只有一个有状态服务。如果有多个有状态服务，则必须将与其他服务关联的 DB\_Size 添加到公式中。或者，可以单独为每个有状态服务计算节点数。服务可能包含不平衡的副本或分区。请记住，有些分区的数据可能比其他分区要多。有关分区的详细信息，请参阅[分区最佳实践文章](/documentation/articles/service-fabric-concepts-partitioning/)。但是，上述公式不受分区或副本影响，因为 Service Fabric 可确保副本以优化方式分散在节点之间。
-
+上面假设只有一个有状态服务。如果有多个有状态服务，则必须将与其他服务关联的 DB\_Size 添加到公式中。或者，可以单独为每个有状态服务计算节点数。服务可能包含不平衡的副本或分区。请记住，有些分区的数据可能比其他分区要多。有关分区的详细信息，请参阅[分区最佳实践文章](./service-fabric-concepts-partitioning.md)。但是，上述公式不受分区或副本影响，因为 Service Fabric 可确保副本以优化方式分散在节点之间。
 
 ## 使用电子表格进行成本计算
 
@@ -64,13 +57,9 @@
 
 ![用于成本计算的电子表格][Image1]
 
-
-
 ## 后续步骤
 
 查看 [Partitioning Service Fabric services][10]（为 Service Fabric 服务分区），了解有关为服务分区的详细信息。
-
-
 
 <!--Image references-->
 
@@ -78,6 +67,6 @@
 
 <!--Link references--In actual articles, you only need a single period before the slash-->
 
-[10]: /documentation/articles/service-fabric-concepts-partitioning/
+[10]: ./service-fabric-concepts-partitioning.md
 
 <!---HONumber=Mooncake_1017_2016-->

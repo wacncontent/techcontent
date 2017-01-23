@@ -1,20 +1,19 @@
-<properties
-	pageTitle="Azure 中使用 iPerf 进行网络带宽测试"
-	description="了解 Azure 中使用 iPerf 进行网络带宽测试。"
-	services="virtual-network"
-	documentationCenter=""
-	authors="Kyle Fu"
-	manager=""
-	editor=""
-	tags="Azure,iPerf,带宽,网络"/>
+---
+title: Azure 中使用 iPerf 进行网络带宽测试
+description: 了解 Azure 中使用 iPerf 进行网络带宽测试。
+services: virtual-network
+documentationCenter: 
+authors: Kyle Fu
+manager: 
+editor: 
+tags: Azure,iPerf,带宽,网络
 
-<tags
-	ms.service="virtual-network-aog"
-	ms.date="11/03/2016"
-	wacn.date="11/03/2016"/>
+ms.service: virtual-network-aog
+ms.date: 11/03/2016
+wacn.date: 11/03/2016
+---
 
 #Azure 中使用 iPerf 进行网络带宽测试
-
 
 ##iPerf 简介
 
@@ -34,29 +33,37 @@ Windows 版的 iPerf 下载、解压后可以直接在命令提示符下运行�
 
 当然，在没有找到合适的安装包时，大家也可以选择源码包编译安装。以下是在 SuSE12.1 中使用源码包安装 iPerf3 的安装步骤，供参考。
 
-1.	确保 gcc 和 make 已安装。
+1. 确保 gcc 和 make 已安装。
 
-		#zypper in gcc
-		#zypper in make
+    ```
+    #zypper in gcc
+    #zypper in make
+    ```
 
-2.	下载并解压 iperf 源码包
+2. 下载并解压 iperf 源码包
 
-		#cd /tmp
-		#wget http://downloads.es.net/pub/iperf/iperf-3-current.tar.gz
-		#tar zxvf iperf-3-current.tar.gz
+    ```
+    #cd /tmp
+    #wget http://downloads.es.net/pub/iperf/iperf-3-current.tar.gz
+    #tar zxvf iperf-3-current.tar.gz
+    ```
 
-3.	安装 iperf
+3. 安装 iperf
 
-		#cd iperf-3.1.2/
-		#./configure
-		#make
-		#make install
+    ```
+    #cd iperf-3.1.2/
+    #./configure
+    #make
+    #make install
+    ```
 
 完成后，iperf3 被安装至`/usr/local/bin/`下，在系统的任意路径都可以执行。
 
 若 iperf 运行报以下错误：
 
-	iperf3: error while loading shared libraries: libiperf.so.0: cannot open shared object file: No such file or directory
+```
+iperf3: error while loading shared libraries: libiperf.so.0: cannot open shared object file: No such file or directory
+```
 
 通常运行 ldconfig 命令可以解决此问题。
 
@@ -106,7 +113,7 @@ Windows 版的 iPerf 下载、解压后可以直接在命令提示符下运行�
   - -T, --title str，设置每行测试结果的前缀；
   - --get-server-output，从 Server 端获取测试结果；
   - --udp-counters-64bit，在 UDP 测试包中使用 64 位计数器（防止计数器溢出）。
-  
+
 iPerf 功能十分强大，支持的参数特别多。但是在实际使用中，并不需要同时使用这么多参数。使用时，根据实际需求来设置关键参数就可以了。
 
 ##Azure 中使用 iPerf
@@ -118,37 +125,43 @@ iPerf 功能十分强大，支持的参数特别多。但是在实际使用中�
 终结点（Endpoint，经典模式）：
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-endpoint.png)
- 
+
 网络安全组（NSG，资源管理器模式）：
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-nsg.png)
- 
+
 >需要说明的是，iPerf 测试不可避免产生数据流量。如果测试时有进出 Azure 的数据流量，很可能会产生相对应的费用。所以测试前务必做好测试计划，以免不必要的数据流量造成计划外的支出。
 
 ###开始测试
 
 首先在 Server 端，我们运行以下命令使 iPerf 监听 5001 端口，每 2 秒输出一次结果。
-	
-	#iperf3 -s -p 5001 -i 2
+
+```
+#iperf3 -s -p 5001 -i 2
+```
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-listen.png)
- 
+
 当终端显示 Server listening on 5001 时，就表示 Server 已经正常运行，等待测试了。
 然后在 Client 端，我们并发 4 个数据流，测试总时长为 30 秒，每 2 秒输出一次结果。以下为测试所使用的命令。
 
-	#iperf3 -c 139.219.2XX.XXX -P 4 -t 30 -i 2 -p 5001
+```
+#iperf3 -c 139.219.2XX.XXX -P 4 -t 30 -i 2 -p 5001
+```
 
 当 Client 端的命令执行后，测试就开始了。
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-connect.png)
- 
+
 终端会每隔 2 秒滚动显示测试的结果，最后还有整个测试的总结。
 
 测试完成后，再次用以下命令测试并发 8 个数据流的情况，对比结果将在结果解读中展现。
 
-	#iperf3 -c 139.219.2XX.XXX -P 8 -t 30 -i 2 -p 5001
+```
+#iperf3 -c 139.219.2XX.XXX -P 8 -t 30 -i 2 -p 5001
+```
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-test.png)
- 
+
 ###结果解读
 
 测试时，iPerf 的 Server 端和 Client 端都会输出测试结果。测试过程中，根据报告间隔时间的参数，终端会不断地显示当前时间间隔内测试结果。当测试结束后，iPerf 将测试结果汇总，输出最终测试结果。
@@ -158,13 +171,13 @@ iPerf 功能十分强大，支持的参数特别多。但是在实际使用中�
 下图是第一次 4 个数据流测试过程中 Server 端的部分输出。
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-output.png)
- 
+
 可以看到 iPerf 在不同的时间间隔内，都完整的显示了每个数据流传送的数据大小以及带宽。然后在第 5 行显示当前时间间隔内的传送的总数据大小和总带宽。
 
 下图是第一次 4 个数据流测试过程中 Client 端的部分输出。
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-output-client.png)
- 
+
 Client 端的数据除了传输的数据大小和实时带宽，还有 TCP 重传次数（Retr）和窗口大小（Cwnd）。
 
 ###最终结果
@@ -173,13 +186,12 @@ Client 端的数据除了传输的数据大小和实时带宽，还有 TCP 重�
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-output-final.png)
 
- 
 这里可以看到 4 个数据流接收到的数据大小和平均带宽，还有接收到的总数据和总带宽。
 
 我们再看一下 8 个数据流并发测试的结果，见下图。
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-output-eight.png)
- 
+
 对比这两个结果，我们能看出来 4 个数据流并发时，总带宽是 163Mb/s。8 个数据流并发时，总带宽达到了 248Mb/s。这说明 4 个数据流并发时，并没有测试出最大带宽。所以在实际测试时，可以通过多次调整并发数据流数量，来获取真实的最大带宽值。
 
 除了并发数据流数量，TCP 窗口大小、最大分段长度、拥塞算法等等都会影响到应用程序实际能获取到的网络带宽。有经验的网络工程师也会通过数据计算，然后设置这些相关的参数进行测试，来获取到最大网络带宽。

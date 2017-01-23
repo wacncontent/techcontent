@@ -1,22 +1,21 @@
-<properties
- pageTitle="Azure IoT 中心概述 | Azure"
- description="Azure IoT 中心服务概述：什么是 IoT 中心、设备连接、物联网通信模式和服务辅助通信模式"
- services="iot-hub"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: Azure IoT 中心概述 | Azure
+description: Azure IoT 中心服务概述：什么是 IoT 中心、设备连接、物联网通信模式和服务辅助通信模式
+services: iot-hub
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="get-started-article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="12/12/2016"
- wacn.date="01/13/2017"
- ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/12/2016
+wacn.date: 01/13/2017
+ms.author: dobett
+---
 
 # Azure IoT 中心是什么？
 
@@ -33,8 +32,8 @@
 
 ![在物联网解决方案中充当云网关的 Azure IoT 中心][img-architecture]  
 
-
-> [AZURE.NOTE] 有关 IoT 体系结构的深入讨论，请参阅 [Azure IoT Reference Architecture][lnk-refarch]（Azure IoT 参考体系结构）。
+> [!NOTE]
+> 有关 IoT 体系结构的深入讨论，请参阅 [Azure IoT Reference Architecture][lnk-refarch]（Azure IoT 参考体系结构）。
 
 ## IoT 设备连接性挑战
 IoT 中心和设备库可帮助你应对挑战，即如何以可靠且安全的方式将设备连接到解决方案后端。IoT 设备：
@@ -100,26 +99,25 @@ Azure IoT 中心会实现[服务辅助通信][lnk-service-assisted-pattern]模�
 
 [img-architecture]: ./media/iot-hub-what-is-iot-hub/hubarchitecture.png
 
-
-[lnk-get-started]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
+[lnk-get-started]: ./iot-hub-csharp-csharp-getstarted.md
 [protocol-gateway]: https://github.com/Azure/azure-iot-protocol-gateway/blob/master/README.md
 [lnk-service-assisted-pattern]: http://blogs.msdn.com/b/clemensv/archive/2014/02/10/service-assisted-communication-for-connected-devices.aspx "服务辅助通信，博客作者 Clemens Vasters"
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
-[lnk-gateway]: /documentation/articles/iot-hub-protocol-gateway/
-[lnk-field-gateway]: /documentation/articles/iot-hub-devguide-endpoints/#field-gateways
-[lnk-devguide-identityregistry]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-devguide-security]: /documentation/articles/iot-hub-devguide-security/
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
+[lnk-gateway]: ./iot-hub-protocol-gateway.md
+[lnk-field-gateway]: ./iot-hub-devguide-endpoints.md#field-gateways
+[lnk-devguide-identityregistry]: ./iot-hub-devguide-identity-registry.md
+[lnk-devguide-security]: ./iot-hub-devguide-security.md
 [lnk-wns]: https://msdn.microsoft.com/zh-cn/library/windows/apps/mt187203.aspx
 [lnk-google-messaging]: https://developers.google.com/cloud-messaging/
 
 [lnk-device-sdks]: https://github.com/Azure/azure-iot-sdks
 [lnk-refarch]: http://download.microsoft.com/download/A/4/D/A4DAD253-BC21-41D3-B9D9-87D2AE6F0719/Microsoft_Azure_IoT_Reference_Architecture.pdf
 [lnk-gateway-sdk]: https://github.com/Azure/azure-iot-gateway-sdk
-[lnk-send-messages]: /documentation/articles/iot-hub-devguide-messaging/
-[lnk-device-management]: /documentation/articles/iot-hub-device-management-overview/
+[lnk-send-messages]: ./iot-hub-devguide-messaging.md
+[lnk-device-management]: ./iot-hub-device-management-overview.md
 
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-c2d-guidance]: /documentation/articles/iot-hub-devguide-c2d-guidance/
-[lnk-d2c-guidance]: /documentation/articles/iot-hub-devguide-d2c-guidance/
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
+[lnk-d2c-guidance]: ./iot-hub-devguide-d2c-guidance.md
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording and link references-->

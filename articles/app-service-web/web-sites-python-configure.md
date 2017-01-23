@@ -1,29 +1,26 @@
-<properties 
-	pageTitle="使用 Azure 应用服务 Web 应用配置 Python" 
-	description="本教程介绍在 Azure 应用服务 Web 应用中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。" 
-	services="app-service" 
-	documentationCenter="python" 
-	tags="python"
-	authors="huguesv" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 使用 Azure 应用服务 Web 应用配置 Python
+description: 本教程介绍在 Azure 应用服务 Web 应用中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
+services: app-service
+documentationCenter: python
+tags: python
+authors: huguesv
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="python" 
-	ms.topic="article" 
-	ms.date="02/26/2016" 
-	wacn.date="01/05/2017" 
-	ms.author="huvalo"/>
-
-
-
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 02/26/2016
+wacn.date: 01/05/2017
+ms.author: huvalo
+---
 
 # 使用 Azure 应用服务 Web 应用配置 Python
 
-本教程介绍在 [Azure 应用服务 Web 应用](/documentation/services/web-sites/)中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
+本教程介绍在 [Azure 应用服务 Web 应用](./index.md)中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
 
 其中讲解了 Git 部署的一些功能，如使用 requirements.txt 安装虚拟环境和包。
 
@@ -31,10 +28,9 @@
 
 如果你正在 Azure 应用服务中开发第一个 Web 应用，或者不熟悉 Git，我们建议你参考以下教程之一，其中包括用于从 Windows 或 Mac 使用 Git 部署从库构建工作应用程序的分步说明：
 
-- [使用 Bottle 创建 Web 应用](/documentation/articles/web-sites-python-create-deploy-bottle-app/)
-- [使用 Django 创建 Web 应用](/documentation/articles/web-sites-python-create-deploy-django-app/)
-- [使用 Flask 创建 Web 应用](/documentation/articles/web-sites-python-create-deploy-flask-app/)
-
+- [使用 Bottle 创建 Web 应用](./web-sites-python-create-deploy-bottle-app.md)
+- [使用 Django 创建 Web 应用](./web-sites-python-create-deploy-django-app.md)
+- [使用 Flask 创建 Web 应用](./web-sites-python-create-deploy-flask-app.md)
 
 ##<a name="website-creation-on-portal"></a>在 Azure 门户预览中创建 Web 应用
 
@@ -44,21 +40,21 @@
 
 ##<a name="git-publishing"></a>Git 发布
 
-按照[从本地 Git 部署到 Azure 应用服务](/documentation/articles/app-service-deploy-local-git/)的说明为新创建的 Web 应用配置 Git 发布。本教程使用 Git 来创建、管理 Python Web 应用以及将其发布到 Azure 应用服务。
+按照[从本地 Git 部署到 Azure 应用服务](./app-service-deploy-local-git.md)的说明为新创建的 Web 应用配置 Git 发布。本教程使用 Git 来创建、管理 Python Web 应用以及将其发布到 Azure 应用服务。
 
 在设置 Git 发布之后，将创建 Git 存储库并使其与你的 Web 应用相关联。随即会显示该存储库的 URL，之后其可用于将数据从本地开发环境推送到云。若要通过 Git 发布应用程序，请确保还安装了 Git 客户端，并按照提供的说明将 Web 应用内容推送到 Azure 应用服务。
-
 
 ##<a name="application-overview"></a>应用程序概述
 
 接下来几节将创建以下文件。这些文件应放在 Git 存储库的根目录中。
 
-    app.py
-    requirements.txt
-    runtime.txt
-    web.config
-    ptvs_virtualenv_proxy.py
-
+```
+app.py
+requirements.txt
+runtime.txt
+web.config
+ptvs_virtualenv_proxy.py
+```
 
 ##<a name="wsgi-handler"></a>WSGI 处理程序
 
@@ -66,21 +62,22 @@ WSGI 是 [PEP 3333](http://www.python.org/dev/peps/pep-3333/) 所述的 Python �
 
 下面是定义自定义处理程序的 `app.py` 的一个示例：
 
-    def wsgi_app(environ, start_response):
-        status = '200 OK'
-        response_headers = [('Content-type', 'text/plain')]
-        start_response(status, response_headers)
-        response_body = 'Hello World'
-        yield response_body.encode()
+```
+def wsgi_app(environ, start_response):
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)
+    response_body = 'Hello World'
+    yield response_body.encode()
 
-    if __name__ == '__main__':
-        from wsgiref.simple_server import make_server
+if __name__ == '__main__':
+    from wsgiref.simple_server import make_server
 
-        httpd = make_server('localhost', 5555, wsgi_app)
-        httpd.serve_forever()
+    httpd = make_server('localhost', 5555, wsgi_app)
+    httpd.serve_forever()
+```
 
 可以使用 `python app.py` 在本地运行此应用程序，然后在 Web 浏览器中浏览到 `http://localhost:5555`。
-
 
 ## 虚拟环境
 
@@ -92,24 +89,25 @@ WSGI 是 [PEP 3333](http://www.python.org/dev/peps/pep-3333/) 所述的 Python �
 
 你可能需要创建虚拟环境用于开发，但不将其包括在 Git 存储库中。
 
-
 ## 包管理
 
 Requirements.txt 中列出的包将使用 pip 自动安装到虚拟环境中。每次部署时都会发生这种情况，但如果已安装包，则 pip 将跳过安装。
 
 示例 `requirements.txt`：
 
-    azure==0.8.4
-
+```
+azure==0.8.4
+```
 
 ## Python 版本
 
-[AZURE.INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-runtime.md)]
+[!INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-runtime.md)]
 
 示例 `runtime.txt`：
 
-    python-2.7
-
+```
+python-2.7
+```
 
 ## Web.config
 
@@ -121,101 +119,103 @@ Requirements.txt 中列出的包将使用 pip 自动安装到虚拟环境中。�
 
 Python 2.7 的示例 `web.config`：
 
-    <?xml version="1.0"?>
-    <configuration>
-      <appSettings>
-        <add key="WSGI_ALT_VIRTUALENV_HANDLER" value="app.wsgi_app" />
-        <add key="WSGI_ALT_VIRTUALENV_ACTIVATE_THIS"
-             value="D:\home\site\wwwroot\env\Scripts\activate_this.py" />
-        <add key="WSGI_HANDLER"
-             value="ptvs_virtualenv_proxy.get_virtualenv_handler()" />
-        <add key="PYTHONPATH" value="D:\home\site\wwwroot" />
-      </appSettings>
-      <system.web>
-        <compilation debug="true" targetFramework="4.0" />
-      </system.web>
-      <system.webServer>
-        <modules runAllManagedModulesForAllRequests="true" />
-        <handlers>
-          <remove name="Python27_via_FastCGI" />
-          <remove name="Python34_via_FastCGI" />
-          <add name="Python FastCGI"
-               path="handler.fcgi"
-               verb="*"
-               modules="FastCgiModule"
-               scriptProcessor="D:\Python27\python.exe|D:\Python27\Scripts\wfastcgi.py"
-               resourceType="Unspecified"
-               requireAccess="Script" />
-        </handlers>
-        <rewrite>
-          <rules>
-            <rule name="Static Files" stopProcessing="true">
-              <conditions>
-                <add input="true" pattern="false" />
-              </conditions>
-            </rule>
-            <rule name="Configure Python" stopProcessing="true">
-              <match url="(.*)" ignoreCase="false" />
-              <conditions>
-                <add input="{REQUEST_URI}" pattern="^/static/.*" ignoreCase="true" negate="true" />
-              </conditions>
-              <action type="Rewrite"
-                      url="handler.fcgi/{R:1}"
-                      appendQueryString="true" />
-            </rule>
-          </rules>
-        </rewrite>
-      </system.webServer>
-    </configuration>
-
+```
+<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="WSGI_ALT_VIRTUALENV_HANDLER" value="app.wsgi_app" />
+    <add key="WSGI_ALT_VIRTUALENV_ACTIVATE_THIS"
+         value="D:\home\site\wwwroot\env\Scripts\activate_this.py" />
+    <add key="WSGI_HANDLER"
+         value="ptvs_virtualenv_proxy.get_virtualenv_handler()" />
+    <add key="PYTHONPATH" value="D:\home\site\wwwroot" />
+  </appSettings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.0" />
+  </system.web>
+  <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true" />
+    <handlers>
+      <remove name="Python27_via_FastCGI" />
+      <remove name="Python34_via_FastCGI" />
+      <add name="Python FastCGI"
+           path="handler.fcgi"
+           verb="*"
+           modules="FastCgiModule"
+           scriptProcessor="D:\Python27\python.exe|D:\Python27\Scripts\wfastcgi.py"
+           resourceType="Unspecified"
+           requireAccess="Script" />
+    </handlers>
+    <rewrite>
+      <rules>
+        <rule name="Static Files" stopProcessing="true">
+          <conditions>
+            <add input="true" pattern="false" />
+          </conditions>
+        </rule>
+        <rule name="Configure Python" stopProcessing="true">
+          <match url="(.*)" ignoreCase="false" />
+          <conditions>
+            <add input="{REQUEST_URI}" pattern="^/static/.*" ignoreCase="true" negate="true" />
+          </conditions>
+          <action type="Rewrite"
+                  url="handler.fcgi/{R:1}"
+                  appendQueryString="true" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
+```
 
 Python 3.4 的示例 `web.config`：
 
-    <?xml version="1.0"?>
-    <configuration>
-      <appSettings>
-        <add key="WSGI_ALT_VIRTUALENV_HANDLER" value="app.wsgi_app" />
-        <add key="WSGI_ALT_VIRTUALENV_ACTIVATE_THIS"
-             value="D:\home\site\wwwroot\env\Scripts\python.exe" />
-        <add key="WSGI_HANDLER"
-             value="ptvs_virtualenv_proxy.get_venv_handler()" />
-        <add key="PYTHONPATH" value="D:\home\site\wwwroot" />
-      </appSettings>
-      <system.web>
-        <compilation debug="true" targetFramework="4.0" />
-      </system.web>
-      <system.webServer>
-        <modules runAllManagedModulesForAllRequests="true" />
-        <handlers>
-          <remove name="Python27_via_FastCGI" />
-          <remove name="Python34_via_FastCGI" />
-          <add name="Python FastCGI"
-               path="handler.fcgi"
-               verb="*"
-               modules="FastCgiModule"
-               scriptProcessor="D:\Python34\python.exe|D:\Python34\Scripts\wfastcgi.py"
-               resourceType="Unspecified"
-               requireAccess="Script" />
-        </handlers>
-        <rewrite>
-          <rules>
-            <rule name="Static Files" stopProcessing="true">
-              <conditions>
-                <add input="true" pattern="false" />
-              </conditions>
-            </rule>
-            <rule name="Configure Python" stopProcessing="true">
-              <match url="(.*)" ignoreCase="false" />
-              <conditions>
-                <add input="{REQUEST_URI}" pattern="^/static/.*" ignoreCase="true" negate="true" />
-              </conditions>
-              <action type="Rewrite" url="handler.fcgi/{R:1}" appendQueryString="true" />
-            </rule>
-          </rules>
-        </rewrite>
-      </system.webServer>
-    </configuration>
-
+```
+<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="WSGI_ALT_VIRTUALENV_HANDLER" value="app.wsgi_app" />
+    <add key="WSGI_ALT_VIRTUALENV_ACTIVATE_THIS"
+         value="D:\home\site\wwwroot\env\Scripts\python.exe" />
+    <add key="WSGI_HANDLER"
+         value="ptvs_virtualenv_proxy.get_venv_handler()" />
+    <add key="PYTHONPATH" value="D:\home\site\wwwroot" />
+  </appSettings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.0" />
+  </system.web>
+  <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true" />
+    <handlers>
+      <remove name="Python27_via_FastCGI" />
+      <remove name="Python34_via_FastCGI" />
+      <add name="Python FastCGI"
+           path="handler.fcgi"
+           verb="*"
+           modules="FastCgiModule"
+           scriptProcessor="D:\Python34\python.exe|D:\Python34\Scripts\wfastcgi.py"
+           resourceType="Unspecified"
+           requireAccess="Script" />
+    </handlers>
+    <rewrite>
+      <rules>
+        <rule name="Static Files" stopProcessing="true">
+          <conditions>
+            <add input="true" pattern="false" />
+          </conditions>
+        </rule>
+        <rule name="Configure Python" stopProcessing="true">
+          <match url="(.*)" ignoreCase="false" />
+          <conditions>
+            <add input="{REQUEST_URI}" pattern="^/static/.*" ignoreCase="true" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="handler.fcgi/{R:1}" appendQueryString="true" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
+```
 
 静态文件将由 Web 服务器直接处理，无需通过 Python 代码，从而提高性能。
 
@@ -225,156 +225,154 @@ Python 3.4 的示例 `web.config`：
 
 可以自定义 `PYTHONPATH`，但是，如果通过在 requirements.txt 中指定将所有依赖项全部安装到虚拟环境中，则不需要更改。
 
-
 ## 虚拟环境代理
 
 使用以下脚本可检索 WSGI 处理程序、激活虚拟环境以及记录错误。该脚本是通用的，无需修改即可使用。
 
 `ptvs_virtualenv_proxy.py` 的内容：
 
-     # ############################################################################
-     #
-     # Copyright (c) Microsoft Corporation. 
-     #
-     # This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
-     # copy of the license can be found in the License.html file at the root of this distribution. If 
-     # you cannot locate the Apache License, Version 2.0, please send an email to 
-     # vspython@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
-     # by the terms of the Apache License, Version 2.0.
-     #
-     # You must not remove this notice, or any other, from this software.
-     #
-     # ###########################################################################
+```
+ # ############################################################################
+ #
+ # Copyright (c) Microsoft Corporation. 
+ #
+ # This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
+ # copy of the license can be found in the License.html file at the root of this distribution. If 
+ # you cannot locate the Apache License, Version 2.0, please send an email to 
+ # vspython@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ # by the terms of the Apache License, Version 2.0.
+ #
+ # You must not remove this notice, or any other, from this software.
+ #
+ # ###########################################################################
 
-    import datetime
-    import os
-    import sys
-    import traceback
+import datetime
+import os
+import sys
+import traceback
 
-    if sys.version_info[0] == 3:
-        def to_str(value):
-            return value.decode(sys.getfilesystemencoding())
+if sys.version_info[0] == 3:
+    def to_str(value):
+        return value.decode(sys.getfilesystemencoding())
 
-        def execfile(path, global_dict):
-            """Execute a file"""
-            with open(path, 'r') as f:
-                code = f.read()
-            code = code.replace('\r\n', '\n') + '\n'
-            exec(code, global_dict)
-    else:
-        def to_str(value):
-            return value.encode(sys.getfilesystemencoding())
+    def execfile(path, global_dict):
+        """Execute a file"""
+        with open(path, 'r') as f:
+            code = f.read()
+        code = code.replace('\r\n', '\n') + '\n'
+        exec(code, global_dict)
+else:
+    def to_str(value):
+        return value.encode(sys.getfilesystemencoding())
 
-    def log(txt):
-        """Logs fatal errors to a log file if WSGI_LOG env var is defined"""
-        log_file = os.environ.get('WSGI_LOG')
-        if log_file:
-            f = open(log_file, 'a+')
-            try:
-                f.write('%s: %s' % (datetime.datetime.now(), txt))
-            finally:
-                f.close()
-
-    ptvsd_secret = os.getenv('WSGI_PTVSD_SECRET')
-    if ptvsd_secret:
-        log('Enabling ptvsd ...\n')
+def log(txt):
+    """Logs fatal errors to a log file if WSGI_LOG env var is defined"""
+    log_file = os.environ.get('WSGI_LOG')
+    if log_file:
+        f = open(log_file, 'a+')
         try:
-            import ptvsd
-            try:
-                ptvsd.enable_attach(ptvsd_secret)
-                log('ptvsd enabled.\n')
-            except: 
-                log('ptvsd.enable_attach failed\n')
+            f.write('%s: %s' % (datetime.datetime.now(), txt))
+        finally:
+            f.close()
+
+ptvsd_secret = os.getenv('WSGI_PTVSD_SECRET')
+if ptvsd_secret:
+    log('Enabling ptvsd ...\n')
+    try:
+        import ptvsd
+        try:
+            ptvsd.enable_attach(ptvsd_secret)
+            log('ptvsd enabled.\n')
+        except: 
+            log('ptvsd.enable_attach failed\n')
+    except ImportError:
+        log('error importing ptvsd.\n')
+
+def get_wsgi_handler(handler_name):
+    if not handler_name:
+        raise Exception('WSGI_ALT_VIRTUALENV_HANDLER env var must be set')
+
+    if not isinstance(handler_name, str):
+        handler_name = to_str(handler_name)
+
+    module_name, _, callable_name = handler_name.rpartition('.')
+    should_call = callable_name.endswith('()')
+    callable_name = callable_name[:-2] if should_call else callable_name
+    name_list = [(callable_name, should_call)]
+    handler = None
+    last_tb = ''
+
+    while module_name:
+        try:
+            handler = __import__(module_name, fromlist=[name_list[0][0]])
+            last_tb = ''
+            for name, should_call in name_list:
+                handler = getattr(handler, name)
+                if should_call:
+                    handler = handler()
+            break
         except ImportError:
-            log('error importing ptvsd.\n')
+            module_name, _, callable_name = module_name.rpartition('.')
+            should_call = callable_name.endswith('()')
+            callable_name = callable_name[:-2] if should_call else callable_name
+            name_list.insert(0, (callable_name, should_call))
+            handler = None
+            last_tb = ': ' + traceback.format_exc()
 
-    def get_wsgi_handler(handler_name):
-        if not handler_name:
-            raise Exception('WSGI_ALT_VIRTUALENV_HANDLER env var must be set')
-    
-        if not isinstance(handler_name, str):
-            handler_name = to_str(handler_name)
-    
-        module_name, _, callable_name = handler_name.rpartition('.')
-        should_call = callable_name.endswith('()')
-        callable_name = callable_name[:-2] if should_call else callable_name
-        name_list = [(callable_name, should_call)]
-        handler = None
-        last_tb = ''
+    if handler is None:
+        raise ValueError('"%s" could not be imported%s' % (handler_name, last_tb))
 
-        while module_name:
-            try:
-                handler = __import__(module_name, fromlist=[name_list[0][0]])
-                last_tb = ''
-                for name, should_call in name_list:
-                    handler = getattr(handler, name)
-                    if should_call:
-                        handler = handler()
-                break
-            except ImportError:
-                module_name, _, callable_name = module_name.rpartition('.')
-                should_call = callable_name.endswith('()')
-                callable_name = callable_name[:-2] if should_call else callable_name
-                name_list.insert(0, (callable_name, should_call))
-                handler = None
-                last_tb = ': ' + traceback.format_exc()
-    
-        if handler is None:
-            raise ValueError('"%s" could not be imported%s' % (handler_name, last_tb))
-    
-        return handler
+    return handler
 
-    activate_this = os.getenv('WSGI_ALT_VIRTUALENV_ACTIVATE_THIS')
-    if not activate_this:
-        raise Exception('WSGI_ALT_VIRTUALENV_ACTIVATE_THIS is not set')
+activate_this = os.getenv('WSGI_ALT_VIRTUALENV_ACTIVATE_THIS')
+if not activate_this:
+    raise Exception('WSGI_ALT_VIRTUALENV_ACTIVATE_THIS is not set')
 
-    def get_virtualenv_handler():
-        log('Activating virtualenv with %s\n' % activate_this)
-        execfile(activate_this, dict(__file__=activate_this))
+def get_virtualenv_handler():
+    log('Activating virtualenv with %s\n' % activate_this)
+    execfile(activate_this, dict(__file__=activate_this))
 
-        log('Getting handler %s\n' % os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
-        handler = get_wsgi_handler(os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
-        log('Got handler: %r\n' % handler)
-        return handler
+    log('Getting handler %s\n' % os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
+    handler = get_wsgi_handler(os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
+    log('Got handler: %r\n' % handler)
+    return handler
 
-    def get_venv_handler():
-        log('Activating venv with executable at %s\n' % activate_this)
-        import site
-        sys.executable = activate_this
-        old_sys_path, sys.path = sys.path, []
-    
-        site.main()
-    
-        sys.path.insert(0, '')
-        for item in old_sys_path:
-            if item not in sys.path:
-                sys.path.append(item)
+def get_venv_handler():
+    log('Activating venv with executable at %s\n' % activate_this)
+    import site
+    sys.executable = activate_this
+    old_sys_path, sys.path = sys.path, []
 
-        log('Getting handler %s\n' % os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
-        handler = get_wsgi_handler(os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
-        log('Got handler: %r\n' % handler)
-        return handler
+    site.main()
 
+    sys.path.insert(0, '')
+    for item in old_sys_path:
+        if item not in sys.path:
+            sys.path.append(item)
+
+    log('Getting handler %s\n' % os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
+    handler = get_wsgi_handler(os.getenv('WSGI_ALT_VIRTUALENV_HANDLER'))
+    log('Got handler: %r\n' % handler)
+    return handler
+```
 
 ## 自定义 Git 部署
 
-[AZURE.INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-deployment.md)]
-
+[!INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-deployment.md)]
 
 ## 故障排除 - 软件包安装
 
-[AZURE.INCLUDE [web-sites-python-troubleshooting-package-installation](../../includes/web-sites-python-troubleshooting-package-installation.md)]
-
+[!INCLUDE [web-sites-python-troubleshooting-package-installation](../../includes/web-sites-python-troubleshooting-package-installation.md)]
 
 ## 故障排除 - 虚拟环境
 
-[AZURE.INCLUDE [web-sites-python-troubleshooting-virtual-environment](../../includes/web-sites-python-troubleshooting-virtual-environment.md)]
+[!INCLUDE [web-sites-python-troubleshooting-virtual-environment](../../includes/web-sites-python-troubleshooting-virtual-environment.md)]
 
 ## 后续步骤
 
 有关详细信息，请参阅 [Python 开发人员中心](/develop/python/)。
 
 ## 更改内容
-* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

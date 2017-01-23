@@ -1,22 +1,21 @@
-<properties
-   pageTitle="迁移：数据仓库迁移实用程序 | Azure"
-   description="迁移到 SQL 数据仓库。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="lodipalm"
-   manager="barbkess"
-   editor=""/>
+---
+title: 迁移：数据仓库迁移实用程序 | Azure
+description: 迁移到 SQL 数据仓库。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: lodipalm
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="lodipalm;barbkess;sonyama"/>
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: lodipalm;barbkess;sonyama
+---
 
 # 数据仓库迁移实用程序（预览版）
 
@@ -56,10 +55,9 @@
 
 <!--Image references-->
 
-
 <!--Article references-->
-[迁移文档]: /documentation/articles/sql-data-warehouse-overview-migrate/
-[开发]: /documentation/articles/sql-data-warehouse-overview-develop/
+[迁移文档]: ./sql-data-warehouse-overview-migrate.md
+[开发]: ./sql-data-warehouse-overview-develop.md
 
 <!--Other Web references--> 
 [下载迁移实用程序]: https://migrhoststorage.blob.core.windows.net/sqldwsample/DataWarehouseMigrationUtility.zip

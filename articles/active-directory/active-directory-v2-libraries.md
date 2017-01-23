@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Azure Active Directory v2.0 身份验证库 | Azure"
-    description="Azure Active Directory v2.0 终结点的兼容客户端库和服务器中间件库，以及相关的库、源代码和示例链接。"
-    services="active-directory"
-    documentationcenter=""
-    author="skwan"
-    manager="mbaldwin"
-    editor="" />  
+---
+title: Azure Active Directory v2.0 身份验证库 | Azure
+description: Azure Active Directory v2.0 终结点的兼容客户端库和服务器中间件库，以及相关的库、源代码和示例链接。
+services: active-directory
+documentationcenter: 
+author: skwan
+manager: mbaldwin
+editor: 
 
-<tags
-    ms.assetid="19cec615-e51f-4141-9f8c-aaf38ff9f746"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="11/29/2016"
-    wacn.date="01/05/2017"
-    ms.author="skwan;bryanla" />  
-
+ms.assetid: 19cec615-e51f-4141-9f8c-aaf38ff9f746
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/29/2016
+wacn.date: 01/05/2017
+ms.author: skwan;bryanla
+---
 
 # Azure Active Directory v2.0 身份验证库
 Azure Active Directory (Azure AD) v2.0 终结点支持行业标准 OAuth 2.0 和 OpenID Connect 1.0 协议。可以对 v2.0 终结点使用 Microsoft 和其他组织提供的各种库。
@@ -52,7 +51,6 @@ Azure AD v2.0 适用于两类库：
 | JavaScript | Microsoft Authentication Library (MSAL) for JavaScript | In development | In development | In development |
  -->
 
-
 ## Microsoft 支持的服务器中间件库
 | 平台 | 库名称 | 下载 | 源代码 | 示例 |
 |:---:|:---:|:---:|:---:|:---:|
@@ -69,8 +67,8 @@ Azure AD v2.0 适用于两类库：
 ## 兼容的客户端库
 | 平台 | 库名称 | 测试的版本 | 源代码 | 示例 |
 |:---:|:---:|:---:|:---:|:---:|
-| Android |[OIDCAndroidLib](https://github.com/kalemontes/OIDCAndroidLib/wiki) |0\.2.1 |[OIDCAndroidLib](https://github.com/kalemontes/OIDCAndroidLib) |[本机应用示例](/documentation/articles/active-directory-v2-devquickstarts-android/) |
-| iOS |[NXOAuth2Client](https://github.com/nxtbgthng/OAuth2Client) |1\.2.8 |[NXOAuth2Client](https://github.com/nxtbgthng/OAuth2Client) |[本机应用示例](/documentation/articles/active-directory-v2-devquickstarts-ios/) |
+| Android |[OIDCAndroidLib](https://github.com/kalemontes/OIDCAndroidLib/wiki) |0\.2.1 |[OIDCAndroidLib](https://github.com/kalemontes/OIDCAndroidLib) |[本机应用示例](./active-directory-v2-devquickstarts-android.md) |
+| iOS |[NXOAuth2Client](https://github.com/nxtbgthng/OAuth2Client) |1\.2.8 |[NXOAuth2Client](https://github.com/nxtbgthng/OAuth2Client) |[本机应用示例](./active-directory-v2-devquickstarts-ios.md) |
 | Java | [Scribe Java scribejava](https://github.com/scribejava/scribejava) | [版本 3.2.0](https://github.com/scribejava/scribejava/releases/tag/scribejava-3.2.0) | [ScribeJava](https://github.com/scribejava/scribejava/archive/scribejava-3.2.0.zip) | 即将支持 |
 | JavaScript |[Hello.js](https://adodson.com/hello.js/) |1\.13.5 |[Hello.js](https://github.com/MrSwitch/hello.js) |即将支持 |
 | PHP | [The PHP League oauth2-client](https://github.com/thephpleague/oauth2-client) | [版本 1.4.2](https://github.com/thephpleague/oauth2-client/releases/tag/1.4.2) | [oauth2-client](https://github.com/thephpleague/oauth2-client/archive/1.4.2.zip) | 即将支持 |
@@ -86,7 +84,6 @@ Azure AD v2.0 适用于两类库：
 | PHP | [OpenID Connect Basic Client](https://github.com/jumbojett/OpenID-Connect-PHP) |   | [OpenID Connect Basic Client](https://github.com/jumbojett/OpenID-Connect-PHP)  | Coming soon  |
 -->
 
-
 ## 兼容的服务器中间件库
 即将支持
 
@@ -97,23 +94,22 @@ Azure AD v2.0 适用于两类库：
 
 <!--Image references-->
 
-
 <!--Reference style links -->
 
-[AAD-App-Model-V2-Overview]: /documentation/articles/active-directory-appmodel-v2-overview/
+[AAD-App-Model-V2-Overview]: ./active-directory-appmodel-v2-overview.md
 [ClientLib-NET-Lib]: http://www.nuget.org/packages/Microsoft.Identity.Client
 [ClientLib-NET-Repo]: https://github.com/AzureAD/microsoft-authentication-library-for-dotnet
-[ClientLib-NET-Sample]: /documentation/articles/active-directory-v2-devquickstarts-wpf/
+[ClientLib-NET-Sample]: ./active-directory-v2-devquickstarts-wpf.md
 [ClientLib-Node-Lib]: https://www.npmjs.com/package/passport-azure-ad
 [ClientLib-Node-Repo]: https://github.com/AzureAD/passport-azure-ad
 
 [Microsoft-SDL]: http://www.microsoft.com/sdl/default.aspx
 [ServerLib-Net4-Owin-Oidc-Lib]: https://www.nuget.org/packages/Microsoft.Owin.Security.OpenIdConnect/
 [ServerLib-Net4-Owin-Oidc-Repo]: http://katanaproject.codeplex.com/
-[ServerLib-Net4-Owin-Oidc-Sample]: /documentation/articles/active-directory-v2-devquickstarts-dotnet-web/
+[ServerLib-Net4-Owin-Oidc-Sample]: ./active-directory-v2-devquickstarts-dotnet-web.md
 [ServerLib-Net4-Owin-Oauth-Lib]: https://www.nuget.org/packages/Microsoft.Owin.Security.OAuth/
 [ServerLib-Net4-Owin-Oauth-Repo]: http://katanaproject.codeplex.com/
-[ServerLib-Net4-Owin-Oauth-Sample]: /documentation/articles/active-directory-v2-devquickstarts-dotnet-api/
+[ServerLib-Net4-Owin-Oauth-Sample]: ./active-directory-v2-devquickstarts-dotnet-api.md
 [ServerLib-Net-Jwt-Lib]: https://www.nuget.org/packages/System.IdentityModel.Tokens.Jwt
 [ServerLib-Net-Jwt-Repo]: https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet
 [ServerLib-Net-Jwt-Sample]: /
@@ -125,6 +121,6 @@ Azure AD v2.0 适用于两类库：
 [ServerLib-NetCore-Owin-Oauth-Sample]: /
 [ServerLib-Node-Lib]: https://www.npmjs.com/package/passport-azure-ad
 [ServerLib-Node-Repo]: https://github.com/AzureAD/passport-azure-ad/
-[ServerLib-Node-Sample]: /documentation/articles/active-directory-v2-devquickstarts-node-web/
+[ServerLib-Node-Sample]: ./active-directory-v2-devquickstarts-node-web.md
 
 <!---HONumber=Mooncake_1226_2016-->

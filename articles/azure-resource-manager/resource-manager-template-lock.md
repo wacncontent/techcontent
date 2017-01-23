@@ -1,23 +1,22 @@
-<properties
-    pageTitle="资源锁的 Resource Manager 模板 | Azure"
-    description="介绍用于通过模板部署资源锁的资源管理器架构。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="" />  
+---
+title: 资源锁的 Resource Manager 模板 | Azure
+description: 介绍用于通过模板部署资源锁的资源管理器架构。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="de6c0c57-e33a-4960-98e0-900901592003"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/03/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: de6c0c57-e33a-4960-98e0-900901592003
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/03/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 资源锁模板架构
 在资源及其子资源上创建锁。
@@ -25,19 +24,19 @@
 ## 架构格式
 若要创建锁，请将以下架构添加到模板的资源节中。
 
+```
+{
+    "type": enum,
+    "apiVersion": "2015-01-01",
+    "name": string,
+    "dependsOn": [ array values ],
+    "properties":
     {
-        "type": enum,
-        "apiVersion": "2015-01-01",
-        "name": string,
-        "dependsOn": [ array values ],
-        "properties":
-        {
-            "level": enum,
-            "notes": string
-        }
+        "level": enum,
+        "notes": string
     }
-
-
+}
+```
 
 ## 值
 下表描述了需要在架构中设置的值。
@@ -59,7 +58,7 @@
 ## 如何使用锁资源
 将此资源添加到你的模板可防止对资源执行指定的操作。该锁将应用于所有用户和组。
 
-若要创建或删除管理锁，必须有权访问 **Microsoft.Authorization/*** 或 **Microsoft.Authorization/locks/*** 操作。在内置角色中，只有**所有者**和**用户访问管理员**有权执行这些操作。有关基于角色的访问控制的信息，请参阅 [Azure 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)。
+若要创建或删除管理锁，必须有权访问 **Microsoft.Authorization/*** 或 **Microsoft.Authorization/locks/*** 操作。在内置角色中，只有**所有者**和**用户访问管理员**有权执行这些操作。有关基于角色的访问控制的信息，请参阅 [Azure 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
 
 锁将应用于指定的资源和任何子资源。
 
@@ -68,66 +67,70 @@
 ## 示例
 以下示例将一个 cannot-delete 锁应用到 Web 应用。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "hostingPlanName": {
-                  "type": "string"
-            }
-        },
-        "variables": {
-            "siteName": "[concat('site',uniqueString(resourceGroup().id))]"
-        },
-        "resources": [
-            {
-                "apiVersion": "2015-08-01",
-                "name": "[variables('siteName')]",
-                "type": "Microsoft.Web/sites",
-                "location": "[resourceGroup().location]",
-                "properties": {
-                    "serverFarmId": "[parameters('hostingPlanName')]"
-                },
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hostingPlanName": {
+              "type": "string"
+        }
+    },
+    "variables": {
+        "siteName": "[concat('site',uniqueString(resourceGroup().id))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-08-01",
+            "name": "[variables('siteName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "serverFarmId": "[parameters('hostingPlanName')]"
             },
+        },
+        {
+            "type": "Microsoft.Web/sites/providers/locks",
+            "apiVersion": "2015-01-01",
+            "name": "[concat(variables('siteName'),'/Microsoft.Authorization/MySiteLock')]",
+            "dependsOn": [ "[variables('siteName')]" ],
+            "properties":
             {
-                "type": "Microsoft.Web/sites/providers/locks",
-                "apiVersion": "2015-01-01",
-                "name": "[concat(variables('siteName'),'/Microsoft.Authorization/MySiteLock')]",
-                "dependsOn": [ "[variables('siteName')]" ],
-                "properties":
-                {
-                    "level": "CannotDelete",
-                    "notes": "my notes"
-                }
-             }
-        ],
-        "outputs": {}
-    }
+                "level": "CannotDelete",
+                "notes": "my notes"
+            }
+         }
+    ],
+    "outputs": {}
+}
+```
 
 以下示例将一个 cannot-delete 锁应用到资源组。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {},
-        "variables": {},
-        "resources": [
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Authorization/locks",
+            "apiVersion": "2015-01-01",
+            "name": "MyGroupLock",
+            "properties":
             {
-                "type": "Microsoft.Authorization/locks",
-                "apiVersion": "2015-01-01",
-                "name": "MyGroupLock",
-                "properties":
-                {
-                    "level": "CannotDelete",
-                    "notes": "my notes"
-                }
+                "level": "CannotDelete",
+                "notes": "my notes"
             }
-        ],
-        "outputs": {}
-    }
+        }
+    ],
+    "outputs": {}
+}
+```
 
 ## 后续步骤
-* 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
-* 有关锁的详细信息，请参阅[使用 Azure 资源管理器锁定资源](/documentation/articles/resource-group-lock-resources/)。
+* 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。
+* 有关锁的详细信息，请参阅[使用 Azure 资源管理器锁定资源](./resource-group-lock-resources.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,29 +1,28 @@
-<properties
-    pageTitle="我的 MVC 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况？| Azure"
-    description="描述一下，当你使用 Visual Studio 连接服务连接到 Azure AD 时，你的 MVC 项目会发生什么情况"
-    services="active-directory"
-    documentationcenter="na"
-    author="TomArcher"
-    manager="douge"
-    editor="" />  
+---
+title: 我的 MVC 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况？| Azure
+description: 描述一下，当你使用 Visual Studio 连接服务连接到 Azure AD 时，你的 MVC 项目会发生什么情况
+services: active-directory
+documentationcenter: na
+author: TomArcher
+manager: douge
+editor: 
 
-<tags
-    ms.assetid="8b24adde-547e-4ffe-824a-2029ba210216"
-    ms.service="active-directory"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-what-happened"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/18/2016"
-    wacn.date="01/05/2017"
-    ms.author="tarcher" />  
-
+ms.assetid: 8b24adde-547e-4ffe-824a-2029ba210216
+ms.service: active-directory
+ms.workload: web
+ms.tgt_pltfrm: vs-what-happened
+ms.devlang: na
+ms.topic: article
+ms.date: 11/18/2016
+wacn.date: 01/05/2017
+ms.author: tarcher
+---
 
 # 我的 MVC 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况？
 
-> [AZURE.SELECTOR]
-> - [入门](/documentation/articles/vs-active-directory-dotnet-getting-started/)
-> - [发生了什么情况](/documentation/articles/vs-active-directory-dotnet-what-happened/)
+> [!div class="op_single_selector"]
+> - [入门](./vs-active-directory-dotnet-getting-started.md)
+> - [发生了什么情况](./vs-active-directory-dotnet-what-happened.md)
 
 ## 已添加引用
 ### NuGet 包引用
@@ -58,13 +57,15 @@
 ### 您的 app.config 或 web.config 具有新的配置值
 已添加以下配置条目。
 
-    <appSettings>
-        <add key="ida:ClientId" value="ClientId from the new Azure AD App" />
-        <add key="ida:AADInstance" value="https://login.microsoftonline.com/" />
-        <add key="ida:Domain" value="The selected Azure AD Domain" />
-        <add key="ida:TenantId" value="The Id of your selected Azure AD Tenant" />
-        <add key="ida:PostLogoutRedirectUri" value="Your project start page" />
-    </appSettings>
+```
+<appSettings>
+    <add key="ida:ClientId" value="ClientId from the new Azure AD App" />
+    <add key="ida:AADInstance" value="https://login.microsoftonline.com/" />
+    <add key="ida:Domain" value="The selected Azure AD Domain" />
+    <add key="ida:TenantId" value="The Id of your selected Azure AD Tenant" />
+    <add key="ida:PostLogoutRedirectUri" value="Your project start page" />
+</appSettings>
+```
 
 ### 已创建 Azure Active Directory (AD) 应用
 已在您在向导中选定的目录内创建一个 Azure AD 应用程序。
@@ -125,34 +126,37 @@ NuGet 包引用已删除，文件已删除和备份。根据你的项目的状�
 ### 对 app.config 或 web.config 做出的其他更改
 添加了以下附加配置条目。
 
-    <appSettings>
-        <add key="ida:ClientSecret" value="Your Azure AD App's new client secret" />
-    </appSettings>
+```
+<appSettings>
+    <add key="ida:ClientSecret" value="Your Azure AD App's new client secret" />
+</appSettings>
+```
 
 添加了以下配置节和连接字符串。
 
-    <configSections>
-        <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
-        <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
-    </configSections>
-    <connectionStrings>
-        <add name="DefaultConnection" connectionString="Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-[AppName + Generated Id].mdf;Initial Catalog=aspnet-[AppName + Generated Id];Integrated Security=True" providerName="System.Data.SqlClient" />
-    </connectionStrings>
-    <entityFramework>
-        <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
-          <parameters>
-            <parameter value="mssqllocaldb" />
-          </parameters>
-        </defaultConnectionFactory>
-        <providers>
-          <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
-        </providers>
-    </entityFramework>
-
+```
+<configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+</configSections>
+<connectionStrings>
+    <add name="DefaultConnection" connectionString="Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-[AppName + Generated Id].mdf;Initial Catalog=aspnet-[AppName + Generated Id];Integrated Security=True" providerName="System.Data.SqlClient" />
+</connectionStrings>
+<entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="mssqllocaldb" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+</entityFramework>
+```
 
 ### 你的 Azure Active Directory 应用已更新
 你的 Azure Active Directory 应用已更新为包括 *读取目录数据* 权限，并已创建一个附加密钥，该密钥随后已用作 **Web.config** 文件中的 *ida:ClientSecret* 。
 
-[详细了解 Azure Active Directory](/home/features/identity/)
+[详细了解 Azure Active Directory](https://www.azure.cn/home/features/identity/)
 
 <!---HONumber=Mooncake_1226_2016-->

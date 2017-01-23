@@ -1,33 +1,32 @@
-<properties
-    pageTitle="使用门户创建具有 Web 应用程序防火墙的应用程序网关 | Azure"
-    description="了解如何使用门户创建具有 Web 应用程序防火墙的应用程序网关"
-    services="application-gateway"
-    documentationcenter="na"
-    author="georgewallace"
-    manager="carmonm"
-    editor="tysonn"
-    tags="azure-resource-manager" />  
+---
+title: 使用门户创建具有 Web 应用程序防火墙的应用程序网关 | Azure
+description: 了解如何使用门户创建具有 Web 应用程序防火墙的应用程序网关
+services: application-gateway
+documentationcenter: na
+author: georgewallace
+manager: carmonm
+editor: tysonn
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="b561a210-ed99-4ab4-be06-b49215e3255a"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/16/2016"
-    wacn.date="12/05/2016"
-    ms.author="gwallace" />  
-
+ms.assetid: b561a210-ed99-4ab4-be06-b49215e3255a
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: gwallace
+---
 
 # 使用门户创建具有 Web 应用程序防火墙的应用程序网关
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-web-application-firewall-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-web-application-firewall-powershell/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-web-application-firewall-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-web-application-firewall-powershell.md)
 
 Azure 应用程序网关中的 Web 应用程序防火墙 (WAF) 可保护 Web 应用程序，使其免受常见 Web 攻击的威胁，例如 SQL 注入、跨站点脚本攻击和会话劫持。Web 应用程序可以防止 OWASP 十大常见 Web 漏洞中的大部分漏洞。
 
-Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](/documentation/articles/application-gateway-introduction/)
+Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](./application-gateway-introduction.md)
 
 ## <a name="scenario"></a> 方案
 
@@ -39,8 +38,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 ![方案示例][scenario]  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 针对应用程序网关进行的其他配置（包括自定义运行状况探测、后端池地址以及其他规则）是在对应用程序网关配置以后配置的，不是在初始部署期间配置的。
 > 
 > 
@@ -59,7 +57,6 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![创建应用程序网关][1]  
 
-
 ### 步骤 2
 
 单击“配置”并更新应用程序网关设置。完成后，单击“保存”
@@ -73,8 +70,7 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![显示基本设置的边栏选项卡][2]  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 若要查看 Web 应用程序防火墙日志，必须启用诊断功能并选择 ApplicationGatewayFirewallLog。进行测试时，可以选择 1 作为实例计数。必须知道的是，2 以下的实例计数不受 SLA 支持，因此不建议使用。使用 Web 应用程序防火墙时，无法使用小型网关。
 > 
 > 
@@ -94,7 +90,6 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![创建应用程序网关][1-1]  
 
-
 ### 步骤 2
 
 下一步，填写有关应用程序网关的基本信息。请务必选择“WAF”作为层。完成后，单击“确定”
@@ -110,8 +105,7 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![显示基本设置的边栏选项卡][2-2]  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 进行测试时，可以选择 1 作为实例计数。必须知道的是，2 以下的实例计数不受 SLA 支持，因此不建议使用。Web 应用程序防火墙方案不支持小型网关。
 > 
 > 
@@ -132,13 +126,11 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![选择虚拟网络边栏选项卡][4]  
 
-
 ### 步骤 5
 
 在“创建虚拟网络”边栏选项卡中填写网络信息，如前面的[方案](#scenario)说明中所述。
 
 ![使用输入的信息创建虚拟网络边栏选项卡][5]  
-
 
 ### 步骤 6
 
@@ -148,13 +140,11 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![选择公共 IP 地址边栏选项卡][6]  
 
-
 ### 步骤 7
 
 接下来为公共 IP 地址提供一个友好名称，然后单击“确定”
 
 ![创建公共 IP 地址边栏选项卡][7]  
-
 
 ### 步骤 8
 
@@ -168,7 +158,6 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![“设置”边栏选项卡上的“侦听器配置”部分][8]  
 
-
 ### 步骤 9
 
 配置 **WAF** 特定设置。
@@ -177,7 +166,6 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 * **防火墙模式** - 此设置确定 WAF 对恶意流量采取的操作。如果选择**检测**，只会记录流量。如果选择**阻止**，会记录并停止流量，同时提供“403 未授权”响应。
 
 ![Web 应用程序防火墙设置][9]  
-
 
 ### 步骤 10
 
@@ -189,16 +177,15 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![应用程序网关资源视图][10]  
 
-
 这些步骤会创建基本的应用程序网关，提供侦听器、后端池、后端 http 设置以及规则的默认设置。预配成功后，即可根据部署修改这些设置
 
 ## 后续步骤
 
-若要了解如何配置诊断日志记录，以及如何记录通过 Web 应用程序防火墙检测到或阻止的事件，请参阅[应用程序网关诊断](/documentation/articles/application-gateway-diagnostics/)
+若要了解如何配置诊断日志记录，以及如何记录通过 Web 应用程序防火墙检测到或阻止的事件，请参阅[应用程序网关诊断](./application-gateway-diagnostics.md)
 
-访问[创建自定义运行状况探测](/documentation/articles/application-gateway-create-probe-portal/)，了解如何创建自定义运行状况探测
+访问[创建自定义运行状况探测](./application-gateway-create-probe-portal.md)，了解如何创建自定义运行状况探测
 
-访问[配置 SSL 卸载](/documentation/articles/application-gateway-ssl-portal/)，了解如何配置 SSL 卸载并从 Web 服务器中剥离开销较高的 SSL 解密
+访问[配置 SSL 卸载](./application-gateway-ssl-portal.md)，了解如何配置 SSL 卸载并从 Web 服务器中剥离开销较高的 SSL 解密
 
 <!--Image references-->
 

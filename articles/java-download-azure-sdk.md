@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="下载 Azure SDK for Java" 
-	description="了解如何下载 Azure SDK for Java，并提供 Maven 项目的示例代码，以及 Azure Tookit for Eclipse 的基本安装步骤。" 
-	services="" 
-	documentationCenter="java" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>  
+---
+title: 下载 Azure SDK for Java
+description: 了解如何下载 Azure SDK for Java，并提供 Maven 项目的示例代码，以及 Azure Tookit for Eclipse 的基本安装步骤。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags 
-	ms.service="multiple" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="multiple" 
-	ms.devlang="Java" 
-	ms.topic="article" 
-	ms.date="11/01/2016" 
-	ms.author="robmcm"
-    wacn.date="12/30/2016"/>  
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+ms.author: robmcm
+wacn.date: 12/30/2016
+---
 
 # 下载 Azure SDK for Java
 本文包含有关下载和安装适用于 Java 的 Azure 库的说明。
@@ -43,53 +41,56 @@
 ### 步骤 2 - 使用必要的依赖项配置 Maven 设置
 将项目配置为使用 Maven 生成之后，可以使用类似于以下示例的语法，将必要的依赖项添加到 pom.xml 文件中。请注意，你无需添加以下示例中所列的每个依赖项，而只需添加项目所需的特定依赖项。
 
-> [AZURE.NOTE] 在以下示例中的每个 `<version>` 元素中，将此示例中的“n.n.n”占位符替换为有效版本号，可从 [Maven 上的 Azure 库存储库]获取此版本号。
+> [!NOTE]
+> 在以下示例中的每个 `<version>` 元素中，将此示例中的“n.n.n”占位符替换为有效版本号，可从 [Maven 上的 Azure 库存储库]获取此版本号。
 
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-compute</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-network</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-sql</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-storage</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-websites</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-media</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-servicebus</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-serviceruntime</artifactId>
-        <version>n.n.n</version>
-    </dependency>
+```
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-compute</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-network</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-sql</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-storage</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-websites</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-media</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-servicebus</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-serviceruntime</artifactId>
+    <version>n.n.n</version>
+</dependency>
+```
 
 ## 安装 Azure Toolkit for Eclipse
 本部分包含有关安装 Azure Toolkit for Eclipse 的基本说明；有关详细说明，请参阅[安装 Azure Toolkit for Eclipse]。
@@ -119,13 +120,13 @@ Azure Toolkit for Eclipse 使用最新版本的 Azure SDK。可使用 Web 平台
 
 [Azure Java 开发人员中心]: /develop/java
 [Maven 上的 Azure 库存储库]: http://go.microsoft.com/fwlink/?LinkID=286274
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 [Java 生成路径]: http://help.eclipse.org/luna/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fref-properties-build-path.htm
 [license]: http://www.apache.org/licenses/LICENSE-2.0.html
 [maven-getting-started]: http://go.microsoft.com/fwlink/?LinkID=622998
 [zip-download]: http://go.microsoft.com/fwlink/?LinkId=690320
-[Azure Toolkit for Eclipse 的新增功能]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
+[Azure Toolkit for Eclipse 的新增功能]: ./azure-toolkit-for-eclipse-whats-new.md
 
 <!---HONumber=Mooncake_1212_2016-->

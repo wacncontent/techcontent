@@ -1,26 +1,25 @@
-<properties
-   pageTitle="在 Visual Studio | Microsoft Azure 中管理应用程序"
-   description="使用 Visual Studio 来创建、开发、打包、部署和调试 Service Fabric 应用程序和服务。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="seanmck"
-   manager="timlt"
-   editor=""/>  
+---
+title: 在 Visual Studio | Microsoft Azure 中管理应用程序
+description: 使用 Visual Studio 来创建、开发、打包、部署和调试 Service Fabric 应用程序和服务。
+services: service-fabric
+documentationCenter: .net
+authors: seanmck
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="09/09/2016"
-   wacn.date="01/17/2017"
-   ms.author="seanmck;mikhegn"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/09/2016
+wacn.date: 01/17/2017
+ms.author: seanmck;mikhegn
+---
 
 # 使用 Visual Studio 简化 Service Fabric 应用程序的编写和管理
 
-你可以通过 Visual Studio 管理 Azure Service Fabric 应用程序和服务。[设置开发环境](/documentation/articles/service-fabric-get-started/)之后，你可以使用 Visual Studio 创建 Service Fabric 应用程序、添加服务，或在本地开发群集中打包、注册和部署应用程序。
+你可以通过 Visual Studio 管理 Azure Service Fabric 应用程序和服务。[设置开发环境](./service-fabric-get-started.md)之后，你可以使用 Visual Studio 创建 Service Fabric 应用程序、添加服务，或在本地开发群集中打包、注册和部署应用程序。
 
 ## 部署 Service Fabric 应用程序
 
@@ -32,7 +31,7 @@
 4. 删除任何正在运行的应用程序实例
 5. 创建新的应用程序实例
 
-在 Visual Studio 中按 **F5** 还可以部署应用程序，并将调试器附加到所有应用程序实例。你可以使用 **Ctrl + F5** 部署应用程序而不进行调试，或者使用发布配置文件将应用程序发布到本地或远程群集。有关详细信息，请参阅[使用 Visual Studio 将应用程序发布到远程群集](/documentation/articles/service-fabric-publish-app-remote-cluster/)。
+在 Visual Studio 中按 **F5** 还可以部署应用程序，并将调试器附加到所有应用程序实例。你可以使用 **Ctrl + F5** 部署应用程序而不进行调试，或者使用发布配置文件将应用程序发布到本地或远程群集。有关详细信息，请参阅[使用 Visual Studio 将应用程序发布到远程群集](./service-fabric-publish-app-remote-cluster.md)。
 
 ### 应用程序调试模式
 
@@ -45,7 +44,6 @@
 
     ![设置“应用程序调试模式”属性][debugmodeproperty]  
 
-
 下面是可用的“应用程序调试模式”选项。
 
 1. **自动升级**：调试会话结束时，应用程序继续运行。再次使用 **F5** 时，该操作会将该部署视为一次升级，使用无监控的自动模式将此应用程序快速升级到附加了日期字符串的较新的版本。此升级过程会保留你在上一个调试会话中输入的任何数据。
@@ -54,12 +52,12 @@
 
 3. **删除应用程序**：调试会话结束时删除应用程序。
 
-**自动升级**：通过应用 Service Fabric 的应用程序升级功能保存数据，但会出于性能优化而非安全性的目的将数据进行优化。有关升级应用程序和在真实环境中如何执行升级的详细信息，请参阅 [Service Fabric 应用程序升级](/documentation/articles/service-fabric-application-upgrade/)。
+**自动升级**：通过应用 Service Fabric 的应用程序升级功能保存数据，但会出于性能优化而非安全性的目的将数据进行优化。有关升级应用程序和在真实环境中如何执行升级的详细信息，请参阅 [Service Fabric 应用程序升级](./service-fabric-application-upgrade.md)。
 
 ![附加了日期的新应用程序版本的示例][preservedata]  
 
-
->[AZURE.NOTE] 1.1 版之前的适用于 Visual Studio 的 Service Fabric 工具版本不具有此属性。对于 1.1 版之前的版本，请使用“启动时保留数据”属性实现相同的效果。“保留应用程序”选项是在用于 Visual Studio 的 Service Fabric 工具 1.2 版本中引入的。
+>[!NOTE]
+> 1.1 版之前的适用于 Visual Studio 的 Service Fabric 工具版本不具有此属性。对于 1.1 版之前的版本，请使用“启动时保留数据”属性实现相同的效果。“保留应用程序”选项是在用于 Visual Studio 的 Service Fabric 工具 1.2 版本中引入的。
 
 ## 向 Service Fabric 应用程序添加服务
 
@@ -67,16 +65,13 @@
 
 ![将新的 Fabric 服务添加到你的应用程序中][newservice]  
 
-
-选择要添加到你的应用程序的 Service Fabric 项目类型，并指定服务的名称。请参阅[为服务选择框架](/documentation/articles/service-fabric-choose-framework/)，帮助确定要使用的服务类型。
+选择要添加到你的应用程序的 Service Fabric 项目类型，并指定服务的名称。请参阅[为服务选择框架](./service-fabric-choose-framework.md)，帮助确定要使用的服务类型。
 
 ![选择要添加到你的应用程序的 Fabric 服务项目类型][addserviceproject]  
-
 
 新的服务会添加到你的解决方案和现有应用程序包中。服务引用和默认的服务实例会添加到应用程序清单中。将在下次部署应用程序时创建并启动服务。
 
 ![新的服务会添加到应用程序清单中][newserviceapplicationmanifest]  
-
 
 ## 打包 Service Fabric 应用程序
 
@@ -88,19 +83,18 @@
 
 ![删除应用程序](./media/service-fabric-manage-application-in-visual-studio/removeapplication.png)  
 
-
->[AZURE.TIP] 有关更丰富的群集管理功能，请参阅[使用 Service Fabric Explorer 可视化群集](/documentation/articles/service-fabric-visualizing-your-cluster/)。
-
+>[!TIP]
+> 有关更丰富的群集管理功能，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 
 ## 后续步骤
 
-- [Service Fabric 应用程序模型](/documentation/articles/service-fabric-application-model/)
-- [Service Fabric 应用程序部署](/documentation/articles/service-fabric-deploy-remove-applications/)
-- [管理多个环境的应用程序参数](/documentation/articles/service-fabric-manage-multiple-environment-app-configuration/)
-- [调试 Service Fabric 应用程序](/documentation/articles/service-fabric-debugging-your-application/)
-- [使用 Service Fabric 资源管理器可视化群集](/documentation/articles/service-fabric-visualizing-your-cluster/)
+- [Service Fabric 应用程序模型](./service-fabric-application-model.md)
+- [Service Fabric 应用程序部署](./service-fabric-deploy-remove-applications.md)
+- [管理多个环境的应用程序参数](./service-fabric-manage-multiple-environment-app-configuration.md)
+- [调试 Service Fabric 应用程序](./service-fabric-debugging-your-application.md)
+- [使用 Service Fabric 资源管理器可视化群集](./service-fabric-visualizing-your-cluster.md)
 
 <!--Image references-->
 

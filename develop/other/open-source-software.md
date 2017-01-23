@@ -1,15 +1,16 @@
-<properties 
-pageTitle="Azure 开发人员中心：开源软件" 
-description="Azure 开发人员中心：开源软件" 
-services="" 
-documentationCenter="Develop" 
-authors="" 
-manager="Tiffena" 
-editor="Eric Chen" />
-<tags ms.service=""
-    ms.date=""
-    wacn.date="06/29/2015"
-    />
+---
+title: Azure 开发人员中心：开源软件
+description: Azure 开发人员中心：开源软件
+services: 
+documentationCenter: Develop
+authors: 
+manager: Tiffena
+editor: Eric Chen
+
+ms.service: 
+ms.date: 
+wacn.date: 06/29/2015
+---
 
 #开源软件 
 
@@ -37,13 +38,11 @@ BlogEngine.NET 是使用 ASP.NET 开发的一个创新的开放源博客平台�
 
 <a id="_know-more-color" href="http://www.dotnetblogengine.net/" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://www.dotnetblogengine.net/post/Run-BlogEngineNET-on-Windows-Azure!.aspx" target="_blank" class="_know-more-link">如何使用</a>
 
-
 ###CentOS
 
 CentOS 是派生自著名北美企业 Linux 供应商免费提供给公众的源代码的企业级 Linux 发行版本。它受 Azure 虚拟机的支持。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253287&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="/manage/linux/how-to-guides/prepare-a-linux-distribution/" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###Chef
 
@@ -51,13 +50,11 @@ Chef 是开放源代码系统集成框架，利用它，可以轻松地创建一
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253778&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://go.microsoft.com/fwlink/?linkid=253787&amp;clcid=0x409" target="_blank" class="_know-more-link">如何使用</a>
 
-
 ###<a id="composite"></a> Composite C1 CMS
 
 Composite C1 是一个开发人员友好的 Web 内容管理系统 (CMS)，适用于需要通过一致性可视标识来轻松管理企业网站内容的营销和沟通专业人员。
 
 <a id="_know-more-color" href="http://www.composite.net/" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://docs.composite.net/WindowsAzure" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###<a id="concrete5"></a> concrete5
 
@@ -71,13 +68,11 @@ CouchDB 是构建在 HTTP 和 JSON 等 Web 标准上的数据库。它提供 Jav
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253288&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>
 
-
 ###<a id="Doctrine"></a>Doctrine
 
 Doctrine 项目是一组可提供持久性服务、对象关系映射和相关功能的 PHP 库。Doctrine 支持对 SQL 数据库 进行分区来实现可高度缩放的性能和可用性。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253289&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://go.microsoft.com/fwlink/?linkid=253789&amp;clcid=0x409" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###<a id="DotNetNuke"></a>DotNetNuke
 
@@ -85,13 +80,11 @@ DotNetNuke 既是一个基于 .NET 的开放源内容管理系统，又是一个
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253780&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>
 
-
 ###Drupal
 
 Drupal 是一个基于 PHP 的开放源内容管理系统，常用于知识管理和企业协作方案。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253290&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="https://drupal.org/project/azure" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###<a id="Eclipse"></a>Eclipse
 
@@ -99,13 +92,11 @@ Eclipse 是一个带有可扩展的插件体系结构的开放源集成开发环
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253291&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://go.microsoft.com/fwlink/?linkid=253792&amp;clcid=0x409" target="_blank" class="_know-more-link">如何使用</a>
 
-
 ###<a id="EHCache"></a>EHCache
 
 EHCache 是一个基于标准的开放源缓存，可用于增强性能和提高数据密集型 Java 应用程序的可伸缩性。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253292&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>
-
 
 ###<a id="Git"></a>Git
 
@@ -113,13 +104,11 @@ Git 是免费的开放源代码分布式版本控制系统 (DVCS)，常用于管
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253293&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://go.microsoft.com/fwlink/?linkid=253794&amp;clcid=0x409" target="_blank" class="_know-more-link">如何使用</a>
 
-
 ###<a id="gitorious"></a>Hadoop
 
 Hadoop 是一个框架，允许使用简单的编程模型跨计算机群集分布式处理大型数据集。它旨在从单独服务器纵向扩展到数千台计算机，每台计算机均提供本地计算和存储。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253294&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://go.microsoft.com/fwlink/?linkid=253795&amp;clcid=0x409" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###Hibernate
 
@@ -127,20 +116,17 @@ Hibernate 是面向 Java 开发人员的开放源代码对象关系映射 (ORM) 
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253295&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>
 
-
 ###<a id="JBoss"></a>JBoss
 
 JBoss 是支持 Java 的任何操作系统（包括 Azure）的开放源代码 Java EE 应用程序服务器。它提供了对 JSP、servlets、JDBC、SOAP、缓存、群集和许多其他功能的支持。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253296&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>
 
-
 ###<a id="Jetty"></a>Jetty
 
 Jetty 既是一个开放源 Web 服务器，又是 Java servlet 容器，具有对 Web Socket、OSGi、JMX、JNDI、JASPI、AJP 和许多其他集成的支持。Jetty 可嵌入到设备、工具、框架、应用程序服务器和群集中。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253297&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://blogs.msdn.com/b/windowsazure/archive/2010/04/14/run-java-with-jetty-in-windows-azure.aspx" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###<a id="Joomla"></a>Joomla
 
@@ -153,7 +139,6 @@ Joomla 是使用 PHP 编写的易于使用的可扩展开放源代码内容管�
 Maven 是一个开放源代码生成自动化工具，可用于生成和管理使用 C#、Ruby、Scala 和其他语言编写的项目。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253300&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://go.microsoft.com/fwlink/?linkid=253801&amp;clcid=0x409" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###<a id="MediaWiki"></a>MediaWiki
 
@@ -172,7 +157,6 @@ Memcached 是免费的开放源代码分布式内存对象缓存系统，具有�
 mojoPortal 是用于运行网站的免费的开放源代码 Web 内容管理软件。
 
 <a id="_know-more-color" href="http://www.mojoportal.com/" target="_blank" class="_know-more-link">了解更多</a>  <a id="_know-more-color" style="margin-left: 20px;" href="http://www.mojoportal.com/windows-azure" target="_blank" class="_know-more-link">如何使用</a>
-
 
 ###<a id="MongoDB"></a>MongoDB
 
@@ -269,5 +253,3 @@ Umbraco 是使用 C# 编写的常用的开放源代码 CMS，它可通过 ASP.NE
 WordPress 是基于 PHP 和 MySQL 的受欢迎的开源博客创建平台和 CMS。它可从 Azure 网站库中立即进行安装。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253316&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>
-
-
