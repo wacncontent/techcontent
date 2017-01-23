@@ -108,7 +108,7 @@ wacn.date: 01/06/2017
 > 单击“保存”按钮还会基于你配置的“对其他应用程序的权限”自动设置对你目录中的应用程序的权限。可以在应用程序的“属性”选项卡中查看这些应用程序权限。
 
 ### 将资源应用程序配置为公开 Web API
-可以开发一个 Web API，并通过公开访问权限[范围](./active-directory-dev-glossary.md#scopes/)和[角色](./active-directory-dev-glossary.md#roles)，使其可供其他客户端应用程序使用。可以像提供其他 Microsoft Web API（包括图形 API 和 Office 365 API）一样提供正确配置的 Web API。可通过[应用程序的清单](./active-directory-dev-glossary.md#application-manifest)公开访问权限范围和角色。该清单是表示应用程序标识配置的 JSON 文件。
+可以开发一个 Web API，并通过公开访问权限[范围](./active-directory-dev-glossary.md#scopes)和[角色](./active-directory-dev-glossary.md#roles)，使其可供其他客户端应用程序使用。可以像提供其他 Microsoft Web API（包括图形 API 和 Office 365 API）一样提供正确配置的 Web API。可通过[应用程序的清单](./active-directory-dev-glossary.md#application-manifest)公开访问权限范围和角色。该清单是表示应用程序标识配置的 JSON 文件。
 
 以下部分说明如何通过修改资源应用程序的清单公开访问范围。
 

@@ -18,7 +18,7 @@ ms.author: dastrock
 ---
 
 # v2.0 终结点的应用类型
-v2.0 终结点支持各种现代应用体系结构的身份验证，所有这些体系结构都基于行业标准协议 [OAuth 2.0](./active-directory-v2-protocols.md#oauth2-authorization-code-flow) 和/或 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow/)。本文档简要介绍你可以构建的应用类型（无论你使用哪种语言或平台）。它可帮助了解一些高级方案，然后便可[开始编写代码](./active-directory-appmodel-v2-overview.md#getting-started)。
+v2.0 终结点支持各种现代应用体系结构的身份验证，所有这些体系结构都基于行业标准协议 [OAuth 2.0](./active-directory-v2-protocols.md#oauth2-authorization-code-flow) 和/或 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow)。本文档简要介绍你可以构建的应用类型（无论你使用哪种语言或平台）。它可帮助了解一些高级方案，然后便可[开始编写代码](./active-directory-appmodel-v2-overview.md#getting-started)。
 
 > [!NOTE]
     v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。

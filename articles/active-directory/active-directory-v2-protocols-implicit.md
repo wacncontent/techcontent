@@ -110,7 +110,7 @@ ms.author: dastrock
 ## 验证 id\_token
 仅接收 id\_token 不足以验证用户，必须身份验证 id\_token 签名，并按照应用的要求验证令牌中的声明。v2.0 终结点使用 [JSON Web 令牌 (JWT)](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) 和公钥加密对令牌进行签名并验证其是否有效。
 
-可以选择验证客户端代码中的 `id_token`，但是常见的做法是将 `id_token` 发送到后端服务器，并在那里执行验证。验证 id\_token 的签名后，就有几项声明需要验证。有关详细信息，请参阅 [v2.0 令牌参考](./active-directory-v2-tokens.md)，包括[验证令牌](./active-directory-v2-tokens.md#validating-tokens/)和[有关签名密钥滚动更新的重要信息](./active-directory-v2-tokens.md#validating-tokens)。我们建议利用库来分析和验证令牌 - 对于大多数语言和平台至少有一个可用。
+可以选择验证客户端代码中的 `id_token`，但是常见的做法是将 `id_token` 发送到后端服务器，并在那里执行验证。验证 id\_token 的签名后，就有几项声明需要验证。有关详细信息，请参阅 [v2.0 令牌参考](./active-directory-v2-tokens.md)，包括[验证令牌](./active-directory-v2-tokens.md#validating-tokens)和[有关签名密钥滚动更新的重要信息](./active-directory-v2-tokens.md#validating-tokens)。我们建议利用库来分析和验证令牌 - 对于大多数语言和平台至少有一个可用。
 <!--TODO: Improve the information on this-->
 
 你可能还希望根据自己的方案验证其他声明。一些常见的验证包括：

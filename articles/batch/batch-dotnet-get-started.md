@@ -358,7 +358,7 @@ csharp
 此外，在上述代码片段中，值得注意的问题是，StartTask 的 *CommandLine* 属性中使用了两个环境变量：`%AZ_BATCH_TASK_WORKING_DIR%` 和 `%AZ_BATCH_NODE_SHARED_DIR%`。将自动为 Batch 池中的每个计算节点配置多个特定于 Batch 的环境变量。由任务执行的任何进程都可以访问这些环境变量。
 
 > [!TIP]
-> 若要深入了解 Batch 池中计算节点上可用的环境变量，以及有关任务工作目录的信息，请参阅[面向开发人员的 Batch 功能概述](./batch-api-basics.md)中的[任务的环境设置](./batch-api-basics.md#environment-settings-for-tasks/)及[文件和目录](./batch-api-basics.md#files-and-directories)部分。
+> 若要深入了解 Batch 池中计算节点上可用的环境变量，以及有关任务工作目录的信息，请参阅[面向开发人员的 Batch 功能概述](./batch-api-basics.md)中的[任务的环境设置](./batch-api-basics.md#environment-settings-for-tasks)及[文件和目录](./batch-api-basics.md#files-and-directories)部分。
 
 ## <a name="step-4-create-batch-job"></a>步骤 4：创建 Batch 作业
 

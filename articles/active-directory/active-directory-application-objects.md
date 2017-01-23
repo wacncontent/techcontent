@@ -22,7 +22,7 @@ ms.author: bryanla;mbaldwin
 Azure Active Directory (Azure AD) 中的术语“应用程序”有时很容易造成误解，尤其是缺少支持上下文时。本文旨在更加明确地阐明其含义，澄清 Azure AD 应用程序集成的概念和具体层面，然后演示如何注册和同意[多租户应用程序](./active-directory-dev-glossary.md#multi-tenant-application)。
 
 ## 概述
-Azure AD 应用程序远远不只是一套软件。它是一个概念性的术语，指的不只是应用程序软件，还包括它在 Azure AD 上的注册（也称为标识配置），这可以让它在运行时参与身份验证和授权“对话”。根据定义，应用程序能够以[客户端](./active-directory-dev-glossary.md#client-application/)角色（使用资源）和/或[资源服务器](./active-directory-dev-glossary.md#resource-server)角色（向客户端公开 API）运行。对话协议由 [OAuth 2.0 授权流](./active-directory-dev-glossary.md#authorization-grant)定义，目标是要让客户端/资源能够各自访问/保护资源的数据。现在让我们再深入一点，看看 Azure AD 应用程序模型在内部如何代表应用程序。
+Azure AD 应用程序远远不只是一套软件。它是一个概念性的术语，指的不只是应用程序软件，还包括它在 Azure AD 上的注册（也称为标识配置），这可以让它在运行时参与身份验证和授权“对话”。根据定义，应用程序能够以[客户端](./active-directory-dev-glossary.md#client-application)角色（使用资源）和/或[资源服务器](./active-directory-dev-glossary.md#resource-server)角色（向客户端公开 API）运行。对话协议由 [OAuth 2.0 授权流](./active-directory-dev-glossary.md#authorization-grant)定义，目标是要让客户端/资源能够各自访问/保护资源的数据。现在让我们再深入一点，看看 Azure AD 应用程序模型在内部如何代表应用程序。
 
 ## 应用程序注册
 在 [Azure 经典管理门户][AZURE-Classic-Portal]中注册应用程序时，将在 Azure AD 租户中创建两个对象：应用程序对象和服务主体对象。

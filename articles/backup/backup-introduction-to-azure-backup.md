@@ -29,7 +29,7 @@ Azure 备份是基于 Azure 的服务，可用于备份（或保护）和还原 
 
 **无限缩放** - Azure 备份利用 Azure 云的基础功能和无限缩放功能实现高可用性 - 无需维护或监视开销。可设置警报来获取相关事件信息，但无需担忧云数据的高可用性。
 
-**多种存储选项** - 高可用性的一个方面是存储复制。Azure 备份提供两种类型的复制：[本地冗余存储](../storage/storage-redundancy.md#locally-redundant-storage/)和[异地复制存储](../storage/storage-redundancy.md#geo-redundant-storage)。根据需要选择备份存储选项：
+**多种存储选项** - 高可用性的一个方面是存储复制。Azure 备份提供两种类型的复制：[本地冗余存储](../storage/storage-redundancy.md#locally-redundant-storage)和[异地复制存储](../storage/storage-redundancy.md#geo-redundant-storage)。根据需要选择备份存储选项：
 
 - 本地冗余存储 (LRS) 将同一区域的配对数据中心内的数据复制三次（创建三个数据副本）。LRS 选项成本低廉，适合注重价格的客户，因为它保护数据免受本地硬件故障的损害。
 - 异地复制存储 (GRS) 将数据复制在源数据主位置数英里之外的次要区域中。GRS 的成本比 LRS 的高，但它可让数据更为持久，即使出现区域性中断也是如此。

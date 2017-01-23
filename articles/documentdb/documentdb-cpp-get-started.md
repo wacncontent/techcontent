@@ -100,7 +100,7 @@ ms.author: aasthan
     现已获得用于初始化 documentdb 客户端的代码，接下来让我们看看如何使用 DocumentDB 资源。
 
 ## <a id="CreateDBColl"></a>步骤 5：创建 C++ 数据库和集合
-执行此步骤之前，针对 DocumentDB 的新用户，让我们回顾一下数据库、集合和文档的交互方式。[数据库](./documentdb-resources.md#databases/)是跨集合分区的文档存储的逻辑容器。[集合](./documentdb-resources.md#collections)是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。可以在 [DocumentDB 分层资源模型和概念](./documentdb-resources.md)中了解有关 DocumentDB 分层资源模型和概念的更多信息。
+执行此步骤之前，针对 DocumentDB 的新用户，让我们回顾一下数据库、集合和文档的交互方式。[数据库](./documentdb-resources.md#databases)是跨集合分区的文档存储的逻辑容器。[集合](./documentdb-resources.md#collections)是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。可以在 [DocumentDB 分层资源模型和概念](./documentdb-resources.md)中了解有关 DocumentDB 分层资源模型和概念的更多信息。
 
 若要创建数据库和相应的集合，请将下面的代码添加到主函数末尾。这样可以使用上一步中声明的客户端配置创建名为“FamilyRegistry”的数据库和名为“FamilyCollection”的集合。
 
