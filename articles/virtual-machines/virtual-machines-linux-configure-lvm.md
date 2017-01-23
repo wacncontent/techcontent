@@ -2,28 +2,27 @@
 title: 在运行 Linux 的虚拟机上配置 LVM | Azure
 description: 了解如何在 Azure 中的 Linux 上配置 LVM。
 services: virtual-machines-linux
-documentationCenter: na
-authors: szarkos
+documentationcenter: na
+author: szarkos
 manager: timlt
 editor: tysonn
 tag: azure-service-management,azure-resource-manager
 
+ms.assetid: 7f533725-1484-479d-9472-6b3098d0aecc
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 08/24/2016
-wacn.date: 01/05/2017
+ms.date: 12/02/2016
+wacn.date: 01/20/2017
 ms.author: szark
 ---
 
 # 在 Azure 中的 Linux VM 上配置 LVM
-
 本文档介绍如何在 Azure 虚拟机中配置逻辑卷管理器 (LVM)。尽管可以在任何连接到虚拟机的磁盘上配置 LVM，但默认情况下，大多数云映像不会在 OS 磁盘上配置 LVM。这是为了防止与重复卷组相关的问题，因为 OS 磁盘可能曾经连接到相同分发版和类型的 VM（例如在执行恢复方案期间）。因此建议只在数据磁盘上使用 LVM。
 
 ## 线性与条带化逻辑卷
-
 LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，LVM 通常会创建线性逻辑卷，这意味着，物理存储是串连在一起的。在这种情况下，读取/写入操作通常只发送到单个磁盘。相比之下，我们也可以创建条带化逻辑卷，其中的读取和写入将分布到卷组（类似于 RAID0）中的多个磁盘。出于性能考虑，你可能希望创建条带化逻辑卷，以便读取和写入操作利用所有附加的数据磁盘。
 
 本文档介绍如何将多个数据磁盘合并成单个卷组，然后创建条带化逻辑卷。下面是通用化的步骤，适用于大多数分发版。在大多数情况下，Azure 上用于管理 LVM 的实用工具和工作流与其他环境中基本上相同。像往常一样，另请咨询 Linux 供应商，了解有关将 LVM 与特定分发版配合使用的文档和最佳实践。
@@ -32,27 +31,26 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 使用 LVM 时，通常一开始用两个或更多的空数据磁盘。根据 IO 需求，可以选择附加存储在标准存储且一个磁盘最多具有 500 IO/ps 的磁盘，或高级存储且一个磁盘最多具有 5000 IO/ps 的磁盘。本文将不详细介绍如何为 Linux 虚拟机预配和附加数据磁盘。请参阅 Azure 文章[附加磁盘](./virtual-machines-linux-add-disk.md)，详细了解如何在 Azure 上为 Linux 虚拟机附加空数据磁盘。
 
 ## 安装 LVM 实用工具
-
-- **Ubuntu**
+* **Ubuntu**
 
     ```
     sudo apt-get update
     sudo apt-get install lvm2
     ```
 
-- **RHEL、CentOS 和 Oracle Linux**
+* **RHEL、CentOS 和 Oracle Linux**
 
     ```
     sudo yum install lvm2
     ```
 
-- **SLES 12 和 openSUSE**
+* **SLES 12 和 openSUSE**
 
     ```
     sudo zypper install lvm2
     ```
 
-- **SLES 11**
+* **SLES 11**
 
     ```
     sudo zypper install lvm2
@@ -76,7 +74,7 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
     Physical volume "/dev/sde" successfully created
     ```
 
-2.  创建卷组。在本例中，我们将调用卷组 `data-vg01`：
+2. 创建卷组。在本例中，我们将调用卷组 `data-vg01`：
 
     ```
     sudo vgcreate data-vg01 /dev/sd[cde]
@@ -96,13 +94,12 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
     sudo mkfs -t ext4 /dev/data-vg01/data-lv01
     ```
 
-  >[!NOTE]
-  > 在 SLES11 上，请使用 `-t ext3` 而不是 ext4。SLES11 仅支持对 ext4 文件系统进行只读访问。
+    > [!NOTE]
+    在 SLES11 上，请使用 `-t ext3` 而不是 ext4。SLES11 仅支持对 ext4 文件系统进行只读访问。
 
 ## 将新文件系统添加到 /etc/fstab
-
 > [!IMPORTANT]
-> 错误地编辑 `/etc/fstab` 文件可能会导致系统无法引导。如果没有把握，请参考分发的文档来获取有关如何正确编辑该文件的信息。另外，建议在编辑之前创建 `/etc/fstab` 文件的备份。
+错误地编辑 `/etc/fstab` 文件可能会导致系统无法引导。如果没有把握，请参考分发的文档来获取有关如何正确编辑该文件的信息。另外，建议在编辑之前创建 `/etc/fstab` 文件的备份。
 
 1. 为新文件系统创建所需的装入点，例如：
 
@@ -153,4 +150,31 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
     /dev/data-vg01/data-lv01  /data  ext4  defaults,nobootwait  0  2
     ```
 
-<!---HONumber=Mooncake_Quality_Review_1215_2016-->
+## TRIM/UNMAP 支持
+某些 Linux 内核支持 TRIM/UNMAP 操作以放弃磁盘上未使用的块。这些操作主要适用于标准存储，以通知 Azure 已删除的页不再有效可以丢弃。如果创建了较大的文件，然后将其删除，则放弃页可以节省成本。
+
+在 Linux VM 中有两种方法可以启用 TRIM 支持。与往常一样，有关建议的方法，请参阅分发：
+
+- 在 `/etc/fstab` 中使用 `discard` 装载选项，例如：
+
+    ```
+    /dev/data-vg01/data-lv01  /data  ext4  defaults,discard  0  2
+    ```
+
+- 在某些情况下 `discard` 选项可能会影响性能。此处，还可以从命令行手动运行 `fstrim` 命令，或将其添加到 crontab 以定期运行：
+
+    **Ubuntu**
+
+    ```
+    # sudo apt-get install util-linux
+    # sudo fstrim /datadrive
+    ```
+
+**RHEL/CentOS**
+
+```
+    # sudo yum install util-linux
+    # sudo fstrim /datadrive
+```
+
+<!---HONumber=Mooncake_0116_2017-->
