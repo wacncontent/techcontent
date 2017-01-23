@@ -1,5 +1,3 @@
-
-
 ## 基于 Windows 的虚拟机的注意事项
 
 请参阅 [Oracle 虚拟机映像的其他注意事项](../articles/virtual-machines/virtual-machines-windows-classic-oracle-considerations.md)，了解基于 Windows Server 的 Azure 虚拟机上的 Oracle 软件限制。
@@ -15,4 +13,3 @@
 ## Oracle GoldenGate
 
 [为 Azure 配置 Oracle GoldenGate](../articles/virtual-machines/virtual-machines-windows-classic-configure-oracle-goldengate.md) 将逐步引导你完成数据库与复制设置。
-

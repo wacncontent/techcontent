@@ -91,4 +91,3 @@ Un-versioned 访问截图
     ![](./media/aog-storage-media-stop-resume/result2.png)
 
 2.  如果是自己 code 开发的播放客户端，可以在读取音频或者视频文件时显示的设置 API 版本为最新。
-

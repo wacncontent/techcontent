@@ -1,4 +1,3 @@
-
 1. 在 Visual Studio 的解决方案资源管理器中，展开 App\_Start 文件夹，然后打开 WebApiConfig.cs 项目文件。
 
 2. 将以下代码行添加到 Register 方法的 **ConfigOptions** 定义后面：

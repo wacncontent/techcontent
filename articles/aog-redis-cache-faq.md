@@ -133,4 +133,3 @@ wacn.date: 08/31/2016
 **监控问题：**[检查 slow 日志](http://redis.io/commands/slowlog)
 
 **解决方法：**避免使用那些时间消耗大的命令或者通过升级 redis 到更高版本来获取到更多的 cpu 资源。
-

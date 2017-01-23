@@ -1,4 +1,4 @@
- ---
+---
 title: Azure AD 令牌参考 | Azure
 description: 本指南帮助你了解和评估 Azure Active Directory (AAD) 颁发的 SAML 2.0 令牌和 JSON Web 令牌 (JWT) 令牌中的声明。
 documentationCenter: na

@@ -1,4 +1,3 @@
-
 ---
 title: 使用 JAVA AMQP 协议如何订阅启用分区功能的 Azure 服务总线主题的消息
 description: 借助 Java JMS API 使用 AMQP 协议订阅启用分区的 Azure 服务总线主题的消息
@@ -50,4 +49,3 @@ wacn.date: 12/15/2016
     MessageProducer messageProducer = session.createProducer(topic);
     Message message = session.createTextMessage("Hello world1213!");
     messageProducer.send(message);
-

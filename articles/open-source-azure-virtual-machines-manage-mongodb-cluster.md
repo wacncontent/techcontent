@@ -1,4 +1,3 @@
-
 ---
 title: 在 Azure 虚拟机上管理配置 MongoDB 集群 | Azure 
 description: 了解如何管理配置 MongoDB 集群

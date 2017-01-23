@@ -1,4 +1,3 @@
-
 ---
 title: 应用程序升级：升级参数 | Azure
 description: 描述与升级 Service Fabric 应用程序有关的参数，包括要执行的运行状况检查和用于自动撤消升级的策略。

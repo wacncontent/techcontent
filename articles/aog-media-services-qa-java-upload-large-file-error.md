@@ -43,4 +43,3 @@ wacn.date: 12/08/2016
             blockList.addUncommittedEntry(blockId);
     }
     uploader.commitBlobBlocks(blobName, blockList);
-

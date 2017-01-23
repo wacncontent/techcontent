@@ -41,4 +41,3 @@ wacn.date: 08/31/2016
 - 编辑文件 /etc/security/limits.d/20-nproc.conf，将高亮显示行内的 4096，调整为相应的值，或者改成 unlimited.
 
 更多详细介绍， 请参考[这篇文档](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Migration_Planning_Guide/sect-Red_Hat_Enterprise_Linux-Migration_Planning_Guide-System_Management.html)
-

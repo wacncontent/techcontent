@@ -40,4 +40,3 @@ wacn.date: 12/18/2015
     ![](./media/aog-virtual-machine-how-to-reset-vm-size/reset-vm-size.png)
 
 **请注意**：在调整虚拟机的尺寸后，虚拟机需要重新启动！
-

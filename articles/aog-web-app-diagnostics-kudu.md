@@ -1,4 +1,3 @@
-
 ---
 title: Kudu 管理和诊断 azure web 应用
 description: Kudu 管理和诊断 azure web 应用。
@@ -106,4 +105,3 @@ Tools选项卡下面提供了一些其他在线工具：
 Kudu 站点提供了 web 应用扩展界面，用户可以查看已经安装的扩展或者安装新的扩展。
 
 ![Web extension](./media/aog-web-app-diagnostics-kudu/web-extension.png)
-

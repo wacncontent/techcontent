@@ -411,4 +411,3 @@ Azure 云服务运行时，会收取计算费用；关闭后，继续收取计�
 [3]: ./media/azure-cloud-services-user-manual-part-1/3.png
 [4]: ./media/azure-cloud-services-user-manual-part-1/4.png
 [5]: ./media/azure-cloud-services-user-manual-part-1/5.png
-

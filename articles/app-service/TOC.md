@@ -155,4 +155,4 @@
 ## [Pricing](https://azure.microsoft.com/pricing/details/app-service/)  
 ## [MSDN forum](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=windowsazurewebsitespreview)  
 ## [Videos](https://azure.microsoft.com/documentation/videos/index/?services=app-service) 
-## [Service updates](https://azure.microsoft.com/updates/?product=app-service) 
+## [Service updates](https://azure.microsoft.com/updates/?product=app-service)

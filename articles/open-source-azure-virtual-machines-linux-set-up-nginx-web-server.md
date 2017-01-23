@@ -262,5 +262,4 @@ Azure 虚拟机默认只开放对应 VIP 地址的有限端口，用于远程连
 [2]: ./media/open-source-azure-virtual-machines-linux-set-up-nginx-web-server/open-source-set-up-nginx-web-server-in-azure-2.png 
 [3]: ./media/open-source-azure-virtual-machines-linux-set-up-nginx-web-server/open-source-set-up-nginx-web-server-in-azure-3.png 
 [4]: ./media/open-source-azure-virtual-machines-linux-set-up-nginx-web-server/open-source-set-up-nginx-web-server-in-azure-4.png 
-[5]: ./media/open-source-azure-virtual-machines-linux-set-up-nginx-web-server/open-source-set-up-nginx-web-server-in-azure-5.png 
-
+[5]: ./media/open-source-azure-virtual-machines-linux-set-up-nginx-web-server/open-source-set-up-nginx-web-server-in-azure-5.png

@@ -69,4 +69,3 @@ wacn.date: 12/15/2016
 13. 打开我的电脑, 确认 F 盘是否可读写。
 
     ![disk-f](./media/aog-virtual-machines-howto-disk-striping/disk-f.png)
-

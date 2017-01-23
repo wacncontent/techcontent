@@ -1102,4 +1102,3 @@ To test HLS, use iOS or Safari devices, or [3ivx-hls-player](http://apps.microso
 <!-- URLs. -->
   [Web Platform Installer]: http://go.microsoft.com/fwlink/?linkid=255386
   [Management Portal]: http://manage.windowsazure.cn/
-

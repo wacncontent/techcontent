@@ -124,4 +124,3 @@ wacn.date: 07/26/2016
 * [关于 MySQL on Azure 服务入门指南](./mysql/mysql-database-get-started.md)
 * [MySQL on Azure 服务导入导出指导](./mysql/mysql-database-migration.md)
 * [关于 Web 应用的相关技术文档](./app-service-web/index.md)
-

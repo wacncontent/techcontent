@@ -83,4 +83,3 @@ MySQL 数据库 on Azure支持两种备份形式：按需备份和每日定时�
 完成上述步骤，您即建立了MySQL 数据库 on Azure数据库，也对管理门户有所了解。接下来，您可以尝试其他功能，如查看数据库使用情况，数据库的备份和恢复，版本的升级降级等等。
 
 如果您在操作中遇到问题，可以查看管理门户帮助指南，也可以联系技术支持，或在[MSDN论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureMySQLRDS)上提出您的问题。
-

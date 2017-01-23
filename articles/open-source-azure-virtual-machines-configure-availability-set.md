@@ -140,4 +140,3 @@ wacn.date: 06/14/2016
     ![23](./media/open-source-azure-virtual-machines-configure-availability-set/23.png)
 
     配置成功。
-

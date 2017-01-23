@@ -31,4 +31,4 @@ wacn.date: 11/03/2016
 
 ###其他资源：
 
-requestTimeout 具体配置可以参考[这个链接](https://www.iis.net/learn/extensions/httpplatformhandler/httpplatformhandler-configuration-reference) 
+requestTimeout 具体配置可以参考[这个链接](https://www.iis.net/learn/extensions/httpplatformhandler/httpplatformhandler-configuration-reference)

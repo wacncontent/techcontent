@@ -1,4 +1,3 @@
-
 ### 设置用于测试的 Android 模拟器
 当你在模拟器中运行此应用程序时，请确保使用支持 Google API 的 Android 虚拟设备 (AVD)。
 

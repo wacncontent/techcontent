@@ -1,4 +1,3 @@
-
 1. 在 Visual Studio 的 Solution Explorer 中，右键单击服务项目，然后单击“调试”上下文菜单下的“启动新实例”。
 
     ![在本地启动移动服务项目](./media/mobile-services-dotnet-backend-test-local-service-api-documentation/vs-start-debug-service-project.png)

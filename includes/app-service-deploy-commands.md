@@ -1,4 +1,3 @@
-
 若要将资源部署到 Azure，必须登录到 Azure 帐户，并且必须使用 Azure Resource Manager 模块。若要了解配合使用 Azure Resource Manager 和 Azure PowerShell 或 Azure CLI 的相关信息，请参阅：
 
 - [将 Azure PowerShell 与 Azure 资源管理器配合使用](../articles/azure-resource-manager/powershell-azure-resource-manager.md)

@@ -1,4 +1,3 @@
-
 ---
 title: DocumentDB Java API 和 SDK | Azure
 description: 了解有关 Java API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Java SDK 各版本之间所做的更改。

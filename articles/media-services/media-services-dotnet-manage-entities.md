@@ -1,4 +1,3 @@
-
 ---
 title: 使用媒体服务 .NET SDK 管理资产和相关的实体
 description: 了解如何使用适用于 .NET 的媒体服务 SDK 管理资产和相关的实体。

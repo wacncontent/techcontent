@@ -384,4 +384,3 @@ wacn.date: 06/14/2016
 12. 检查您的邮箱。收到邮件内容类似下图
 
   ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-3/14.png)
-

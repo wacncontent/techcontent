@@ -1,5 +1,3 @@
-
-
 ---
 title: 用于部署 Windows HPC 群集的 PowerShell 脚本 | Azure
 description: 运行 PowerShell 脚本，以在 Azure 虚拟机中部署 Windows HPC Pack 群集

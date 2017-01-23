@@ -166,4 +166,4 @@ MySQL 有多个稳定版本以及多种安装方式，这篇文档以 MySQL 5.6�
 
 9. 此时可以从 10.0.0.1 机器远程访问您的 MySQL 数据库了。
 
-更多资料请参考[官网](http://dev.mysql.com/doc/refman/5.6/en/) 
+更多资料请参考[官网](http://dev.mysql.com/doc/refman/5.6/en/)

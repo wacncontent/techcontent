@@ -30,4 +30,3 @@ Linux 环境下使用 wget 命令下载 Blob 文件断点续传问题
 通过加参数 `--header "x-ms-version: 2015-04-05"`，指定 REST HTTP 请求版本：
 
 ![REST HTTP 请求](./media/aog-storage-blob-wget-download-offset/wget-rest-http-request.png "REST HTTP 请求")
-

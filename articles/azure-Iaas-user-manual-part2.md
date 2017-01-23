@@ -1140,4 +1140,3 @@ Azure 虚拟机可以提供监控的功能，包括：
 ![vm_manage22](./media/azure-Iaas-user-manual-part2/vm_manage22.png)
 
 就可以显示在过去 1 小时，24 小时或者是 7 天的范围内，该虚拟机的监控情况。
-

@@ -72,4 +72,3 @@ wacn.date: 08/31/2016
         0 1 * * Sun root /usr/sbin/raid-check
 
     编辑自检脚本 /etc/sysconfig/raid-check 将 ENABLED=yes 行改成 ENABLED=no 来关闭自检。
-

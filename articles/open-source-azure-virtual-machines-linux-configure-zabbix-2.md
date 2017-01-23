@@ -156,4 +156,3 @@ wacn.date: 06/14/2016
 19. 您也可以选择 “Nginx Clients Status” 图。
 
   ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-2/37.png)
-

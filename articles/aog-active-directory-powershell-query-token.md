@@ -80,4 +80,3 @@ Azure AD Graph API 通过 OData REST API 终结点提供对 Azure AD 的编程�
 **结果截图：**  
 
 ![result](./media/aog-active-directory-powershell-query-token/result.png)
-

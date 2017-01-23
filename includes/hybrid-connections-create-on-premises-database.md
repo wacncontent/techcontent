@@ -1,4 +1,3 @@
-
 本部分说明如何安装 SQL Server Express、启用 TCP/IP、设置静态端口，以及创建可用于混合连接的数据库。
 
 ###安装 SQL Server Express

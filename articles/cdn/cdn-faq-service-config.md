@@ -99,4 +99,3 @@ access_log /var/log/nginx/access.log logCDN;
 >Linux、BSD等UNIX类操作系统下该文件路径为 /etc/hosts。修改该文件需要管理员权限。
 >**注意**
 >对于Azure Blob 和 Cloud Service，直接访问域名会得到404。此时可以通过访问一个有效URI来排查。
-

@@ -1,5 +1,3 @@
-
-
 # Overview
 ## [What is Scheduler?](scheduler-intro.md)
 
@@ -30,6 +28,3 @@
 ## [Stack Overflow](http://stackoverflow.com/questions/tagged/azure-scheduler)
 ## [Videos](https://azure.microsoft.com/documentation/videos/index/?services=scheduler)
 ## [Service updates](https://azure.microsoft.com/updates/?product=scheduler)
-
-
-

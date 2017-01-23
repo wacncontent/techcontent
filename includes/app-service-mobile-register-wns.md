@@ -1,4 +1,3 @@
-
 1. 在“Visual Studio 解决方案资源管理器”中，右键单击 Windows 应用商店应用项目，再单击“应用商店”>“将应用与应用商店关联...”。
 
     ![关联应用与 Windows 应用商店](./media/app-service-mobile-register-wns/notification-hub-associate-win8-app.png)

@@ -176,4 +176,4 @@ Microsoft 还为 Excel 提供了 HiveQL 驱动程序。使用 Excel 外接程序
 [SQL-report]: ./media/cloud-storage/Data_05_SQLReporting.png
 [SQL-tblstor]: ./media/cloud-storage/Data_06_TblStorage.png
 [hadoop]: ./media/cloud-storage/Data_07_Hadoop.png
-<!--HONumber=43--> 
+<!--HONumber=43-->

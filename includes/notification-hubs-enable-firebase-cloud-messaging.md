@@ -1,5 +1,3 @@
-
-
 1. 登录到 [Firebase 控制台](https://firebase.google.com/console/)。如果还没有 Firebase 项目，创建一个新项目。
 2. 项目创建后，单击“将 Firebase 添加到 Android 应用”，并按照提供的说明操作。
 

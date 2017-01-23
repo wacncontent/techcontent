@@ -1,4 +1,3 @@
-
 ---
 title: 使用 PowerShell 在 Azure Active Directory 中管理域的集成方式
 description: 使用 PowerShell 在 Azure Active Directory 中管理域的集成方式
@@ -105,4 +104,3 @@ PowerShell 将在本地域的 ADFS 服务中注册 Azure AD 的依赖方 (Relyin
 
 - [将自定义域名添加到 Azure Active Directory](./active-directory/active-directory-add-domain.md)
 - [将本地标识与 Azure Active Directory 集成](./active-directory/active-directory-aadconnect.md)
-

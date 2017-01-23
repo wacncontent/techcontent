@@ -1,4 +1,3 @@
-
 <!--
 includes/azure-include-getting-started-v12portal-gettings-an-account.md
 

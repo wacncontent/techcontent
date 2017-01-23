@@ -96,4 +96,3 @@ MTR 测试会得出各式各样的结果。当网络有故障时，不同的结�
 [使用 MTR 诊断网络问题（中文）](http://www.tuicool.com/articles/emINv2v)
 
 [Diagnosing Network Issues with MTR（上一个链接的英文原版）](https://www.linode.com/docs/networking/diagnostics/diagnosing-network-issues-with-mtr/)
-

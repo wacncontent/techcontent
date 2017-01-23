@@ -1,4 +1,3 @@
-
 ---
 title: Azure AD v2.0 OAuth 客户端凭据流 | Azure
 description: 使用 Azure AD 的 OAuth 2.0 身份验证协议实现构建 Web 应用程序。

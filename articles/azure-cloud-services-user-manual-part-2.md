@@ -1711,4 +1711,3 @@ Web Role 已经加入了 Web-Subnet 子网。
 [141]: ./media/azure-cloud-services-user-manual-part-2/141.png
 [142]: ./media/azure-cloud-services-user-manual-part-2/142.png
 [143]: ./media/azure-cloud-services-user-manual-part-2/143.png
-

@@ -57,4 +57,3 @@
 # Resources
 ## [Redis cache samples](cache-redis-samples.md)
 ## [Pricing](https://azure.microsoft.com/pricing/details/cache/)
-

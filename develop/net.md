@@ -50,4 +50,3 @@ wacn.date: 04/11/2016
         <td>服务管理 <a href="http://go.microsoft.com/fwlink/p/?linkid=327806&clcid=0x804">.NET</a> | <a href="http://msdn.microsoft.com/zh-cn/library/azure/ee460799.aspx">REST</a></td>
       </tr>
 </table>
-

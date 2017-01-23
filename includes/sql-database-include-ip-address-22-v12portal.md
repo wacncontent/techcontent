@@ -1,4 +1,3 @@
-
 <!--
 ../includes/sql-database-include-ip-address-22-v12portal.md
 

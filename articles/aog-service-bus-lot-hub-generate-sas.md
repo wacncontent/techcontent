@@ -55,4 +55,3 @@ wacn.date: 12/05/2016
             return Convert.ToString((int)expirySinceEpoch.TotalSeconds);
         }
     }
-

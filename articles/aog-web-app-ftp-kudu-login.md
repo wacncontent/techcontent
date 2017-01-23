@@ -106,5 +106,4 @@ https://amaydel1.scm.chinacloudsites.cn/
 
 ##其他资源： 
 
-[./aog-web-app-diagnostics-kudu.md#login ](./aog-web-app-diagnostics-kudu.md#login ) 
-
+[./aog-web-app-diagnostics-kudu.md#login ](./aog-web-app-diagnostics-kudu.md#login )

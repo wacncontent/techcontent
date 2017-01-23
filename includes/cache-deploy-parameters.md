@@ -1,4 +1,3 @@
-
 ### cacheSKUName
 
 新 Azure Redis 缓存的定价层。

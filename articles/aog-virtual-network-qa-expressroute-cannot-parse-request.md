@@ -78,4 +78,3 @@ wacn.date: 12/13/2016
 ### 其它资源 ###
 
 [将虚拟网络链接到 ExpressRoute 线路](./expressroute/expressroute-howto-linkvnet-arm.md)
-

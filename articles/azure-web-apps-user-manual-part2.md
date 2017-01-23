@@ -293,4 +293,3 @@ Azure 还具有弹性扩展的优势，在访问量比较高的情况下，可�
     ![monitor3](./media/azure-web-apps-user-manual-part2/monitor3.png)
 
 4. 注意：上图中关于 CPU 的监控指标是 CPU Time，而不是一般情况下的 CPU 利用率 (CPU Usage)。这是因为对于 ”免费” 和 ”共享” 级别，分别包括每天 60 分钟和 240 分钟的 CPU Time。
-

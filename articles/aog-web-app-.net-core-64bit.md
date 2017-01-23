@@ -36,5 +36,4 @@ wacn.date: 11/10/2016
             </handlers>
             <aspNetCore processPath="d:\home\site\wwwroot\dotnet\dotnet.exe" arguments=".\WebApplication1.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" forwardWindowsAuthToken="false" />
           </system.webServer>
-4. 重启站点。 
-
+4. 重启站点。

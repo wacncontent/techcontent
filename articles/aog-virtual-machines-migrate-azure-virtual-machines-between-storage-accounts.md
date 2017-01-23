@@ -131,4 +131,3 @@ Azure 存储服务提供了将 Blob 从一个存储账户移动到另一个的�
 ![LinuxVM_thumb](./media/aog-virtual-machine-migrate-storage/LinuxVM_thumb.png)
 
 现在虚拟机已经在目标存储账户中运行了。
-

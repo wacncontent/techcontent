@@ -88,4 +88,3 @@ wacn.date: 06/08/2016
 * 前 5 个保留的 IP 如果在使用中则为免费，如果只保留了 IP 而没有使用则将被计费。
 
 更多详细请阅读：[IP 地址定价](https://www.azure.cn/pricing/details/reserved-ip-addresses/)
-

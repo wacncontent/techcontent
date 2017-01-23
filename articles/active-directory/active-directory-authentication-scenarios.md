@@ -1,4 +1,3 @@
-
 ---
 title: Azure AD 的身份验证方案 | Azure
 description: Azure Active Directory (AAD) 的五个最常见身份验证方案概述

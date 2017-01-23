@@ -63,4 +63,3 @@ Azure web 应用内容（包括代码文件，资源文件等）默认并不是�
 4. 如果存在环境变量 `WEBSITE_LOCALCACHE_READY = True`，则说明 web 应用已经成功切换到本地缓存模式。
 
     ![](./media/aog-web-app-configure-local-cache/local-ready.png)
-

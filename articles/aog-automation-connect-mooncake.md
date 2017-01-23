@@ -71,5 +71,4 @@ Azure 自动化是通过 Windows PowserShell 工作流（也称为 Runbook）来
 
     $Cred = Get-AutomationPSCredential -Name "Powercredential"; 
     Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
-    Select-AzureSubscription -SubscriptionName "<subscription name>";  
-
+    Select-AzureSubscription -SubscriptionName "<subscription name>";

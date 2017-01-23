@@ -1,4 +1,3 @@
-
 ---
 title: Azure AD v2.0 OpenID Connect 协议 | Azure
 description: 使用 Azure AD 的 OpenID Connect 身份验证协议 v2.0 实现构建 Web 应用程序。

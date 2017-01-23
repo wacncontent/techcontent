@@ -71,4 +71,3 @@ wacn.date: 11/03/2016
 ###后续步骤
 
 证书配置完成之后，完成 P2S 连接还需配置 VPN 客户端，可以参阅：[配置与 VNet 的点到站点连接](./vpn-gateway/vpn-gateway-point-to-site-create.md)。
-

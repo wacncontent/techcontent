@@ -1,4 +1,3 @@
-
 1. 在“解决方案”视图（或 Visual Studio 的“解决方案资源管理器”）中，右键单击“组件”文件夹，单击“获取更多组件...”，搜索 **Google Cloud Messaging** 客户端组件，并将其添加到项目中。
 
 1. 打开 ToDoActivity.cs 项目文件，将以下 using 语句添加到类：

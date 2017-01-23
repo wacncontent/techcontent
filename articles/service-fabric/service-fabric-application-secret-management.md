@@ -1,4 +1,3 @@
-
 ---
 title: 管理 Service Fabric 应用程序中的密码 | Azure
 description: 本文介绍如何保护 Service Fabric 应用程序中的密码。

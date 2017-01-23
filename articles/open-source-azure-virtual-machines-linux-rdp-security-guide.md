@@ -40,4 +40,4 @@ wacn.date: 06/14/2016
 [1]: ./media/open-source-azure-virtual-machines-linux-rdp-security-guide/open-source-azure-virtual-machines-linux-rdp-security-guide-1.png  
 [2]: ./media/open-source-azure-virtual-machines-linux-rdp-security-guide/open-source-azure-virtual-machines-linux-rdp-security-guide-2.png  
 [3]: ./media/open-source-azure-virtual-machines-linux-rdp-security-guide/open-source-azure-virtual-machines-linux-rdp-security-guide-3.png  
-[4]: ./media/open-source-azure-virtual-machines-linux-rdp-security-guide/open-source-azure-virtual-machines-linux-rdp-security-guide-4.png  
+[4]: ./media/open-source-azure-virtual-machines-linux-rdp-security-guide/open-source-azure-virtual-machines-linux-rdp-security-guide-4.png

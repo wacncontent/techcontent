@@ -1,4 +1,3 @@
-
 # 使用 SQL Server Management Studio 管理 Azure SQL 数据库 
 
 你可以使用 SQL Server Management Studio (SSMS) 来管理 Azure SQL 数据库逻辑服务器与数据库。本主题将指导你使用 SSMS 完成常见任务。在开始之前，你应该已在 Azure SQL 数据库中创建了逻辑服务器和数据库。若要开始，请先阅读[创建你的第一个 Azure SQL 数据库](../articles/sql-database/sql-database-get-started.md)，然后返回此处。

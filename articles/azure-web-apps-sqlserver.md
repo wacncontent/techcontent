@@ -98,4 +98,3 @@ wacn.date: 07/26/2016
 * [SQL 数据库入门指导](./sql-database/sql-database-get-started.md)
 * [SQL Server 数据库的迁移指南](./sql-database/sql-database-cloud-migrate.md)
 * [SQL 数据库常见问题](./sql-database/sql-database-faq.md)
-

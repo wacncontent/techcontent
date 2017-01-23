@@ -95,4 +95,3 @@ wacn.date: 11/30/2016
 ![](./media/aog-sql-database-troubleshot-dead-lock/v12-1.jpg)
 
 可以通过点击 deadlock_xml 列下面的链接来查看某个死锁的具体信息，同样可以看到和 V11 中类似的死锁的具体信息，从而进行后续的分析和排查。
-

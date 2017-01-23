@@ -604,4 +604,3 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
     Azure 的虚拟机创建时默认只打开了22端口，所以一定要记得检查是否有把相应的服务端口打开。请参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)。
     监控，备份，安全等有相关的专题，可参考具体页面。
-

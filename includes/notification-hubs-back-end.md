@@ -1,4 +1,3 @@
-
 本节演示了如何从 .NET 控制台应用以及其他任何应用发送通知。
 如果你使用的是 Java 或 PHP，请参阅[如何从 Java/PHP 使用通知中心](../articles/notification-hubs/notification-hubs-java-push-notification-tutorial.md)。你可使用[通知中心 REST 接口](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn223264.aspx)通过任何后端发送通知。
 

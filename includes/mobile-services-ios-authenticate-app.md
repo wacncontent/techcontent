@@ -1,6 +1,4 @@
-
-
- 打开项目文件 QSTodoListViewController.m，并在 **viewDidLoad** 方法中，删除用于将数据重新上载到表的以下代码：
+打开项目文件 QSTodoListViewController.m，并在 **viewDidLoad** 方法中，删除用于将数据重新上载到表的以下代码：
 
 ```
         - (void) loginAndGetData

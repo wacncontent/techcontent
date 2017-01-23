@@ -64,4 +64,3 @@ wacn.lang: cn
               }
           }
       }
-

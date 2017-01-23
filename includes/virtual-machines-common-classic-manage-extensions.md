@@ -1,5 +1,3 @@
-
-
 ##使用 VM 扩展
 
 Azure VM 扩展实现了可帮助其他程序在 Azure VM 上正常工作的行为或功能（例如，**WebDeployForVSDevTest** 扩展允许 Visual Studio 在 Azure VM 上对解决方案进行 Web 部署），或为你提供与 VM 交互的功能以支持其他某种行为（例如，你可以使用 VM 访问扩展从 Powershell、Azure CLI 和 REST 客户端重置或修改 Azure VM 上的远程访问值）。

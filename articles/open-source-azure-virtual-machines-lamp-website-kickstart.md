@@ -194,4 +194,3 @@ URL 地址为：
 如果是 Redhat, Ubuntu Linux, mysql.php 在 /var/www/html/ 路径下，如果是 SUSE LINUX, mysql.php 在 /srv/www/htdocs/ 路径下。
 
 如果您想使用您自己的域名作为网站的 URL，而不是用虚拟机的云服务名字的话，请参考[使用自定义域名](./cloud-services/cloud-services-custom-domain-name.md)。
-

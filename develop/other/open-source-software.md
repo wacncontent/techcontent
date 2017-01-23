@@ -253,4 +253,3 @@ Umbraco 是使用 C# 编写的常用的开放源代码 CMS，它可通过 ASP.NE
 WordPress 是基于 PHP 和 MySQL 的受欢迎的开源博客创建平台和 CMS。它可从 Azure 网站库中立即进行安装。
 
 <a id="_know-more-color" href="http://go.microsoft.com/fwlink/?linkid=253316&amp;clcid=0x409" target="_blank" class="_know-more-link">了解更多</a>
-

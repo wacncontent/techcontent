@@ -1,4 +1,3 @@
-
 - [在 Azure 中快速创建虚拟机](#quick-create-a-vm-in-azure)
 - [在 Azure 中从模板部署虚拟机](#deploy-a-vm-in-azure-from-a-template)
 - [从自定义映像创建虚拟机](#create-a-custom-vm-image)

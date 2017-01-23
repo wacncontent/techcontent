@@ -81,4 +81,3 @@ wacn.date: 01/17/2017
 2. 签到管理页面：http://yourwebapp.chinacloudsites.cn/checkin/allusers
 
 3. 微信自动回复服务URL：http://yourwebapp.chinacloudsites.cn/wce/
-

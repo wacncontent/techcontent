@@ -1,4 +1,4 @@
- ---
+---
 title: 如何使用批处理来改善 Azure SQL 数据库应用程序的性能
 description: 本主题提供有关数据库批处理操作大幅改善 Azure SQL 数据库应用程序速度和缩放性的证据。尽管这些批处理方法适用于任何 SQL Server 数据库，但本文将重点放在 Azure 上。
 services: sql-database

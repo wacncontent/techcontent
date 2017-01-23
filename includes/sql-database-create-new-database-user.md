@@ -1,5 +1,3 @@
-
-
 ##<a name="create-new-database-user-using-ssms"></a> 使用 SSMS 创建新数据库用户
 
 通过以下步骤使用 SSMS 在现有数据库中创建新的数据库用户。

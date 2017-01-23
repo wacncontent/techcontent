@@ -35,4 +35,3 @@ MySQL Database on Azure目前支持用户通过修改参数设定的方式来进
 >[!NOTE]
 >**目前暂不支持已命名时区如"Europe/Helsinki", "US/Eastern" or "MET"等**
 *
-

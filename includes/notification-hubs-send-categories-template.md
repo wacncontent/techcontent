@@ -1,4 +1,3 @@
-
 本部分说明如何从 .NET 控制台应用以标记模板通知的形式发送突发新闻。
 
 如果你使用的是 Mobile Apps，请参阅 [Add push notifications for Mobile Apps]（为 Mobile Apps 添加推送通知）教程，然后选择顶层的平台。

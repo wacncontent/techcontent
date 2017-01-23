@@ -1,4 +1,3 @@
-
 有关磁盘的更多详细信息，请参阅[关于虚拟机的磁盘和 VHD](../articles/virtual-machines/virtual-machines-linux-about-disks-vhds.md)。
 
 ## <a id="attachempty"></a>如何：附加空磁盘

@@ -87,4 +87,3 @@ wacn.date: 11/10/2016
 •	设置 authenticationAge 验证时长为 6 个月
 
 •	使用其他协议的实现，比如 OAuth，Azure AD 也是支持的
-

@@ -1,4 +1,3 @@
-
 ---
 title: 使用 Azure 移动服务开发 Android 应用程序入门
 description: 遵照本教程开始使用 Azure 移动服务进行 Android 开发。

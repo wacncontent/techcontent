@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-database-include-connection-string-40-config.md
 

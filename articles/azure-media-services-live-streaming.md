@@ -156,4 +156,3 @@ wacn.date: 08/10/2016
 ##常见问题与相关文档
 
 [如何使用AMS进行实时编码](./media-services/media-services-portal-creating-live-encoder-enabled-channel.md)
-

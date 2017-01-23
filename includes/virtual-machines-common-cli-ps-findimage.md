@@ -1,5 +1,3 @@
-
-
 ## <a name="azure-cli"></a> Azure CLI
 
 > [!NOTE]

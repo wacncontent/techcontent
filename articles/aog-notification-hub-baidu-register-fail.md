@@ -1,4 +1,3 @@
-
 ---
 title: 百度推送通过获取注册信息失败
 description: 介绍如何解决百度推送过程中的注册问题。
@@ -49,4 +48,3 @@ wacn.date: 10/28/2016
             }
             retrieveRegistrationCollectionAsync(queryUri, callback);
         }
-

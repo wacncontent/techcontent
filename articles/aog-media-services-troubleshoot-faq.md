@@ -112,4 +112,3 @@ Wirecast 无法连接直播频道的 ingest URL，出现 -4018 错误:
 [Dynamic Manifests and Rendered Sub-Clips, Essential Tools for Live Streaming](https://azure.microsoft.com/en-us/blog/dynamic-manifests-and-rendered-sub-clips/)
 
 [Customized Renditions and Asset trimming with Dynamic Manifest](https://azure.microsoft.com/en-us/blog/dynamic-manifest/)
-

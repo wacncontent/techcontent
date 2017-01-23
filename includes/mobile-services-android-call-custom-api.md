@@ -1,4 +1,3 @@
-
 ## <a name="update-app"></a>更新应用以调用自定义 API
 
 1. 我们将在现有按钮旁边添加一个标记为"Complete All"（完成全部）的按钮，并将两个按钮都下移一行。在 Eclipse 中，打开您的快速启动项目中的  *res\layout\activity_to_do.xml* 文件，找到包含名为  `buttonAddToDo` 的 **Button** 元素的 **LinearLayout** 元素。复制 **LinearLayout** 并将其紧邻着粘贴在原始元素之后。将 **Button** 元素从第一个 **LinearLayout** 中删除。

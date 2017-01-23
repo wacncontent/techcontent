@@ -18,4 +18,3 @@
     即使在此应用未运行时，也在 Windows Phone 上显示此通知。
 
        ![](./media/mobile-services-javascript-backend-windows-universal-test-push/mobile-quickstart-push5-wp8.png)
-

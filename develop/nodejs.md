@@ -59,4 +59,3 @@ wacn.date: 04/07/2016
 - [表服务](../articles/storage/storage-nodejs-how-to-use-table-storage.md) / [API](http://go.microsoft.com/fwlink/?linkid=401538&clcid=0x804) / [REST](http://msdn.microsoft.com/zh-cn/library/azure/dd179355)
 - [命令行工具](../articles/xplat-cli-install.md)
 - [PowerShell Cmdlet](../articles/powershell-install-configure.md)
-

@@ -1,5 +1,3 @@
-
-
 ## 在使用情况详细信息中查看标记
 
 通过 Resource Manager 部署模型放置在计算、网络和存储资源中的标记将在[计费门户](https://account.windowsazure.cn/)上的使用情况详细信息中填充。

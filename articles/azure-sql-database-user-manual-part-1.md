@@ -615,4 +615,3 @@ Azure SQL 数据库的时区默认为 UTC 时区，且无法进行修改和配�
 [5]: ./media/azure-sql-database-user-manual-part-1/azure-sql-database-user-manual-5.png
 [6]: ./media/azure-sql-database-user-manual-part-1/azure-sql-database-user-manual-6.png
 [7]: ./media/azure-sql-database-user-manual-part-1/azure-sql-database-user-manual-7.png
-

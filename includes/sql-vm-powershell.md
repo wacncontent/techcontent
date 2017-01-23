@@ -1,4 +1,3 @@
-
 ## 启动 PowerShell 会话
 
 首先你需要安装并运行最新的 [Azure PowerShell](http://msdn.microsoft.com/zh-cn/library/mt619274.aspx)。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。

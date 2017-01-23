@@ -340,4 +340,3 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 4. 在 web server 配置 SSL。请参考 apache 官网 [https://httpd.apache.org/docs/2.2/ssl/](https://httpd.apache.org/docs/2.2/ssl/)
 
 更多关于 HAProxy 的详细信息请参考[官网](http://www.haproxy.org/)
-

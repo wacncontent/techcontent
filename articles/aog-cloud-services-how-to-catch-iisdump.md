@@ -83,4 +83,3 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 
 5. 验证该问题，可以生成 dump 文件：  
  ![iis-dump](./media/aog-cloud-services-how-to-catch-iisdump/iis-dump.png "iis-dump")
-

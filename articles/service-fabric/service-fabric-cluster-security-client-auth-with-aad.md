@@ -1,4 +1,3 @@
-
 ---
 title: Service Fabric 群集安全性：使用 Azure Active Directory 进行客户端身份验证 | Azure
 description: 本文介绍如何创建使用 Azure Active Directory (AAD) 进行客户端身份验证的 Service Fabric 群集

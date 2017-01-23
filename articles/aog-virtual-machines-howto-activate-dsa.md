@@ -40,5 +40,4 @@ Trend Micro Deep Security Agent (DSA) 可以配合 Deep Security Manager 工作�
 - [Trend Micro Azure 云服务安全](http://www.trendmicro.com/azure/)  
 - [Trend Micro Deep Security 技术支持](https://help.deepsecurity.trendmicro.com/welcome.html)  
 - [Deep Security Manager 快速入门](https://help.deepsecurity.trendmicro.com/azure-marketplace-getting-started-with-deep-security.html)  
-- [Deep Security 服务包.pdf](http://docs.trendmicro.com/all/ent/ds/v9.6_sp1/en-us/Deep_Security_96_SP1_Admin_Guide_EN.pdf)  
-
+- [Deep Security 服务包.pdf](http://docs.trendmicro.com/all/ent/ds/v9.6_sp1/en-us/Deep_Security_96_SP1_Admin_Guide_EN.pdf)

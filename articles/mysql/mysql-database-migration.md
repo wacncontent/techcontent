@@ -104,4 +104,3 @@ MySQL Database on Azure兼容MySQL 5.5 和 MySQL 5.6，所以绝大部分应用�
 
 [1]: ./media/mysql-database-migration/migration1.png
 [2]: ./media/mysql-database-migration/migration2.png
-
