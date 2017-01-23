@@ -13,7 +13,7 @@ ms.topic: article
 ms.tgt_pltfrm: vm-multiple
 ms.workload: big-compute
 ms.date: 11/14/2016
-wacn.date: 12/20/2016
+wacn.date: 01/20/2017
 ms.author: danlep
 ---
 
@@ -40,7 +40,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
     ![Azure Active Directory 环境](./media/virtual-machines-windows-hpcpack-cluster-active-directory/aad.png)  
 
 ## 先决条件
-* **Azure 虚拟机中部署的 HPC Pack 2016 群集**
+* **在 Azure 虚拟机中部署的 HPC Pack 2016 群集** - 需要获得头节点的 DNS 名称和群集管理员的凭据才能完成本文中的步骤。
 
   > [!NOTE]
   在 HPC Pack 2016 之前的 HPC Pack 版本中不支持 Azure Active Directory 集成。
@@ -93,7 +93,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
     ```
 
 7. 保存文件。然后在门户中，单击“管理清单”>“上载清单”。然后，可以上载编辑的清单。
-8. 单击“用户”，选择用户，然后单击“分配”。将一个可用角色（HpcUsers 或 HpcAdminMirror）分配给用户。对目录中的其他用户重复此步骤。有关群集用户的背景信息，请参阅 [管理群集用户](https://technet.microsoft.com/zh-cn/library/ff919335(v=ws.11).aspx)。
+8. 单击“用户”，选择用户，然后单击“分配”。将一个可用角色（HpcUsers 或 HpcAdminMirror）分配给用户。对目录中的其他用户重复此步骤。有关群集用户的背景信息，请参阅 [管理群集用户] (https://technet.microsoft.com/zh-cn/library/ff919335(v=ws.11).aspx)。
 
 ## 步骤 2：将 HPC 群集客户端注册到 Azure AD 租户
 
@@ -170,7 +170,10 @@ $SecurePassword = "<password>" | ConvertTo-SecureString -AsPlainText -Force
 Set-HpcTokenCache -UserName <AADUsername> -Password $SecurePassword -scheduler https://<Azure load balancer DNS name> 
 ```
 
-### 设置用于使用 Azure AD 帐户提交作业的凭据
+### 设置用于使用 Azure AD 帐户提交作业的凭据 
+
+有时，你可能想要以 HPC 群集用户的身份运行作业（对于已加入域的 HPC 群集，以域用户的身份运行；对于未加入域的 HPC 群集，以头节点上某个本地用户的身份运行）。
+
 1. 使用以下命令以设置凭据：
 
     ```
@@ -197,6 +200,18 @@ Set-HpcTokenCache -UserName <AADUsername> -Password $SecurePassword -scheduler h
     Submit-HpcJob -Job $job -Scheduler https://<Azure load balancer DNS name> -Credential $emptycreds
     ```
 
-    如果使用 `Submit-HpcJob` 时未指定 `-Credential`，则作业/任务在本地映射为 Azure AD 帐户的用户下运行。（HPC 群集创建的本地用户与用于运行任务的 Azure AD 帐户同名。）
+如果使用 `Submit-HpcJob` 时未指定 `-Credential`，则作业或任务在本地映射为 Azure AD 帐户的用户下运行。（HPC 群集创建的本地用户与用于运行任务的 Azure AD 帐户同名。）
 
-<!---HONumber=Mooncake_1212_2016-->
+3. 为 Azure AD 帐户设置扩展的数据。使用 Azure AD 帐户在 Linux 节点上运行 MPI 作业时，这种做法十分有用。
+
+    * 为 Azure AD 帐户本身设置扩展的数据
+
+          Set-HpcJobCredential -Scheduler https://<Azure load balancer DNS name> -ExtendedData <data> -AadUser
+
+* 设置扩展的数据和 HPC 群集的运行方式用户
+
+    ```
+      Set-HpcJobCredential -Credential $mycreds -Scheduler https://<Azure load balancer DNS name> -ExtendedData <data>
+    ```
+
+<!---HONumber=Mooncake_0116_2017-->

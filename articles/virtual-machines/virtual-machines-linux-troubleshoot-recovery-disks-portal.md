@@ -15,7 +15,7 @@ ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 11/14/2016
-wacn.date: 12/20/2016
+wacn.date: 01/20/2017
 ms.author: iainfou
 ---
 
@@ -91,6 +91,9 @@ ms.author: iainfou
 
 ## 装载附加的数据磁盘
 
+> [!NOTE]
+以下示例详细说明了在 Ubuntu VM 上需要执行的步骤。如果使用不同的 Linux 分发版（如 Red Hat Enterprise Linux 或 SUSE），日志文件位置和 `mount` 命令可能稍有不同。请参阅具体分发版的文档，了解命令中有哪些相应的变化。
+
 1. 使用相应的凭据通过 SSH 连接到故障排除 VM。如果此磁盘是附加到故障排除 VM 的第一个数据磁盘，则它可能已连接到 `/dev/sdc`。使用 `dmseg` 列出附加的磁盘：
 
     ```
@@ -122,7 +125,7 @@ ms.author: iainfou
     ```
 
     > [!NOTE]
-    最佳做法是使用虚拟硬盘的全局唯一标识符 (UUID) 装载 Azure 中 VM 上的数据磁盘。对于此简短的故障排除方案，不必要使用 UUID 装载虚拟硬盘。但是，在正常使用时，编辑 `/etc/fstab` 以使用设备名称（而不是 UUID）装载虚拟硬盘可能会导致 VM 无法启动。
+    > 最佳做法是使用虚拟硬盘的全局唯一标识符 (UUID) 装载 Azure 中 VM 上的数据磁盘。对于此简短的故障排除方案，不必要使用 UUID 装载虚拟硬盘。但是，在正常使用时，编辑 `/etc/fstab` 以使用设备名称（而不是 UUID）装载虚拟硬盘可能会导致 VM 无法启动。
 
 ## 修复原始虚拟硬盘上的问题
 装载现有虚拟硬盘后，可以根据需要执行任何维护和故障排除步骤。解决问题后，请继续执行以下步骤。
@@ -153,9 +156,7 @@ ms.author: iainfou
 
 [![从 Github 中的模板部署 VM](http://azuredeploy.net/deploybutton.png)](https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fazure%2Fazure-quickstart-templates%2Fmaster%2F201-vm-specialized-vhd-existing-vnet%2Fazuredeploy.json)
 
-模板已载入 Azure 门户预览进行部署。请输入新 VM 和现有 Azure 资源的名称，然后粘贴现有虚拟硬盘的 URL。若要开始部署，请单击“购买”：
-
-![从模板部署 VM](./media/virtual-machines-linux-troubleshoot-recovery-disks/deploy-from-image.png)  
+模板已加载到 Azure 门户预览中进行部署。请输入新 VM 和现有 Azure 资源的名称，然后粘贴现有虚拟硬盘的 URL。
 
 ## 重新启用启动诊断
 从现有虚拟硬盘创建 VM 时，启动诊断可能不会自动启用。若要检查启动诊断的状态并根据需要打开启动诊断，请在门户中选择你的 VM。在“监视”下面，单击“诊断设置”。确保状态为“打开”，并检查“启动诊断”旁边的复选标记是否为选中状态。如果做了任何更改，请单击“保存”：
@@ -167,4 +168,4 @@ ms.author: iainfou
 
 有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
-<!---HONumber=Mooncake_1212_2016-->
+<!---HONumber=Mooncake_0116_2017-->
