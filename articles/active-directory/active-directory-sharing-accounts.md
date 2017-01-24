@@ -2,10 +2,10 @@
 title: 使用 Azure AD 共享帐户 | Azure
 description: 介绍组织如何使用 Azure Active Directory 来安全共享本地应用和使用者云服务的帐户。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: msStevenPo
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

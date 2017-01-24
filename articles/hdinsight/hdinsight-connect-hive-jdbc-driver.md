@@ -2,7 +2,7 @@
 title: 使用 JDBC 在 Azure HDInsight 上查询 Hive
 description: 了解如何使用 JDBC 连接到 Azure HDInsight 上的 Hive，以及如何通过远程方式对存储在云中的数据运行查询。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

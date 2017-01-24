@@ -2,13 +2,13 @@
 title: 在 Azure 虚拟机上快速搭建 ELK 集群 | Azure 
 description: 了解如何在 Azure 虚拟机上快速搭建 ELK 集群
 services: open-resource
-documentationCenter: 
+documentationCenter: ''
 authors: lizzha
-manager: 
+manager: ''
 editor: lizzha
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 08/09/2016
 ---
 

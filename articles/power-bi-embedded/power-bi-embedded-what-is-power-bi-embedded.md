@@ -2,11 +2,11 @@
 title: Power BI Embedded 是什么？
 description: Power BI Embedded 可以用来将 Power BI 报表集成到 Web 或移动应用程序中，因此无需为用户构建用来使数据可视化的自定义解决方案
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: mblythe
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA

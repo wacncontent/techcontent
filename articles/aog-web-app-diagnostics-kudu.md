@@ -2,13 +2,13 @@
 title: Kudu 管理和诊断 azure web 应用
 description: Kudu 管理和诊断 azure web 应用。
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: app-service-web-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/31/2016
 ---
 

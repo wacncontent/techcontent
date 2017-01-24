@@ -2,7 +2,7 @@
 title: 使用 AzCopy 将数据复制或移动到存储 | Azure
 description: 使用 AzCopy 实用程序将数据移动或复制到 blob、表和文件内容或从 blob、表和文件内容移动或复制数据。从本地文件将数据复制到 Azure 存储，或者在存储帐户中或存储帐户之间复制数据。轻松地将数据迁移到 Azure 存储。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: micurd
 manager: jahogg
 editor: tysonn

@@ -1,12 +1,12 @@
 ---
 title: Azure IoT 预配置解决方案 | Azure
 description: Azure IoT 预配置解决方案及其体系结构描述，以及指向其他资源的链接。
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

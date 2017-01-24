@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：技术概念 | Azure
 description: 介绍 Azure AD Connect 同步的技术概念
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

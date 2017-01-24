@@ -1,15 +1,15 @@
 ---
 title: 基于认知服务的智慧云会务管理系统部署说明 | Azure
 description: 基于认知服务的智慧云会务管理系统部署说明
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: multiple
-ms.date: 
+ms.date: ''
 wacn.date: 01/17/2017
 ---
 

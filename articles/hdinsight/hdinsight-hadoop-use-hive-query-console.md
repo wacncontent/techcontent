@@ -2,7 +2,7 @@
 title: 在 HDInsight 中的查询控制台上使用 Hadoop Hive | Azure
 description: 了解如何在浏览器中使用基于 Web 的查询控制台在 HDInsight Hadoop 群集上运行 Hive 查询。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

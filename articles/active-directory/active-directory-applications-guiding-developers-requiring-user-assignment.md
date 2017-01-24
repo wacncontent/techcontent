@@ -2,10 +2,10 @@
 title: Azure AD 和应用程序：要求进行用户分配 | Azure
 description: 如何要求对 Azure 应用程序进行用户分配。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: IHenkel
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

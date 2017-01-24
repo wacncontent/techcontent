@@ -2,10 +2,10 @@
 title: 从自动备份还原 Azure SQL 数据库（Azure 门户） | Azure
 description: 从自动备份还原 Azure SQL 数据库（Azure 门户）。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 62d94085-d7e7-4f08-bb83-404cf866a6c1
 ms.service: sql-database

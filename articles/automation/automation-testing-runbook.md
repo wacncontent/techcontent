@@ -2,7 +2,7 @@
 title: 在 Azure 自动化中测试 Runbook | Azure
 description: 在 Azure 自动化中发布某个 Runbook 之前，你可以对它进行测试，以确保它按预期工作。本文介绍如何测试 Runbook 并查看其输出。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
 editor: tysonn

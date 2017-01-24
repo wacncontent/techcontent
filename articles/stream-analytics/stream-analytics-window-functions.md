@@ -2,7 +2,7 @@
 title: 流分析开窗函数简介 | Azure
 description: 了解流分析中的三个开窗函数（翻转、跳跃、滑动）。
 keywords: 翻转窗口, 滑动窗口, 跳跃窗口
-documentationCenter: 
+documentationCenter: ''
 services: stream-analytics
 authors: jeffstokes72
 manager: jhubbard

@@ -2,10 +2,10 @@
 title: Web Apps 概述 | Azure
 description: 了解 Azure App Service 如何帮助用户开发和托管 Web 应用程序
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: jaime-espinosa
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

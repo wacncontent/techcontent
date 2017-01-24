@@ -1,11 +1,11 @@
 ---
 title: Azure 服务终结点
 description: 介绍 Azure Toolkit for Eclipse 中的 Azure 服务终结点设置。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

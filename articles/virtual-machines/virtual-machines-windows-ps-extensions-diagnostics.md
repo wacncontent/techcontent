@@ -4,10 +4,10 @@
 title: 使用 PowerShell 在运行 Windows 的 Azure 虚拟机中启用诊断 | Azure
 description: 了解如何使用 PowerShell 在运行 Windows 的 Azure 虚拟机中启用诊断
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: sbtron
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services

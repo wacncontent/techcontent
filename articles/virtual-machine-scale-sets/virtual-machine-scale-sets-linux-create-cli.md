@@ -2,7 +2,7 @@
 title: 创建虚拟机规模集 | Azure
 description: 使用 Azure CLI 创建虚拟机规模集
 services: virtual-machine-scale-sets
-documentationCenter: 
+documentationCenter: ''
 authors: gatneil
 manager: madhana
 editor: tysonn

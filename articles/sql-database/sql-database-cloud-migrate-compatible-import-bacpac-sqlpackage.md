@@ -2,10 +2,10 @@
 title: 使用 SqlPackage 从 BACPAC 文件导入到 SQL 数据库
 description: Azure SQL 数据库, 数据库迁移, 导入数据库, 导入 BACPAC 文件, sqlpackage
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 424afa27-5f13-4ec3-98f6-99a511a6a2df
 ms.service: sql-database

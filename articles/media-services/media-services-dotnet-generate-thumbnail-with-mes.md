@@ -2,10 +2,10 @@
 title: 如何使用 Media Encoder Standard 通过 .NET 生成缩略图
 description: 本主题介绍如何使用 .NET 通过 Media Encoder Standard 对资产进行编码和生成缩略图。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

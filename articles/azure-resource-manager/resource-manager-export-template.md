@@ -2,7 +2,7 @@
 title: 导出 Azure Resource Manager 模板 | Azure
 description: 使用 Azure Resource Manager 从现有资源组导出模板。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

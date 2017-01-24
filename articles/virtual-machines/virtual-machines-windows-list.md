@@ -2,10 +2,10 @@
 title: Azure中支持的虚拟机镜像
 description: 了解Azure虚拟机能支持的系统镜像
 services: virtual-machines
-documentationCenter: 
+documentationCenter: ''
 authors: Jack Zeng
 manager: Jie Rong
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 wacn.date: 07/28/2016

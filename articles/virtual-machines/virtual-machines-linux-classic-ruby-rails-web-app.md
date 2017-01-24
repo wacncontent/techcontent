@@ -5,7 +5,7 @@ services: virtual-machines-linux
 documentationcenter: ruby
 author: rmcmurray
 manager: erikre
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: aad32685-3550-4bff-9c73-beb8d70b3291

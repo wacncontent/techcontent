@@ -4,8 +4,8 @@ description: 了解如何配置 IIS Express，以便连接到本地移动服务�
 authors: ggailey777
 manager: dwrede
 services: mobile-services
-documentationCenter: 
-editor: 
+documentationCenter: ''
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

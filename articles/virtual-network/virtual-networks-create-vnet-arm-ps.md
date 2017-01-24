@@ -2,10 +2,10 @@
 title: 使用 PowerShell 创建虚拟网络 | Azure
 description: 了解如何使用 PowerShell 创建虚拟网络 | Resource Manager。
 services: virtual-network
-documentationcenter: 
+documentationcenter: ''
 author: jimdial
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: a31f4f12-54ee-4339-b968-1a8097ca77d3

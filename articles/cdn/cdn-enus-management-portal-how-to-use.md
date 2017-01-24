@@ -4,14 +4,14 @@ urlDisplayName: CDN
 title: How to use the Azure Content Delivery Network portal advanced features - Azure feature guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, cache refresh, content prefetch, log download, cache rules, CDN help files, CDN technical documentation, CDN
 description: Learn how to use the advanced features of the Azure portal to manage Content Delivery Network endpoints
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn_en
 ms.date: 7/7/2016

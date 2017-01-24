@@ -2,10 +2,10 @@
 title: Azure Active Directory 的应用程序访问与单一登录是什么？| Azure
 description: 使用 Azure Active Directory 启用单一登录，以访问完成业务所需的全部 SaaS 和 Web 应用程序。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: asmalser-msft
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

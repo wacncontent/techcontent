@@ -3,9 +3,9 @@ title: 使用 Azure 门户预览创建 SQL 数据库警报 | Azure
 description: 使用 Azure 门户预览创建 SQL 数据库警报，该警报可在满足指定的条件时触发通知或自动化操作。
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: f7457655-ced6-4102-a9dd-7ddf2265c0e2
 ms.service: sql-database

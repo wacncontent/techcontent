@@ -2,10 +2,10 @@
 title: 使用 Transact-SQL 为 Azure SQL 数据库启动计划内或计划外故障转移 | Azure
 description: 使用 Transact-SQL 为 Azure SQL 数据库启动计划内或计划外故障转移
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

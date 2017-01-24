@@ -2,10 +2,10 @@
 title: 有关平台支持的从经典部署模型到 Azure Resource Manager 的迁移的技术深入探讨 | Azure
 description: 本文对平台支持的从经典部署模型到 Azure Resource Manager 的资源迁移做了深入的技术探讨
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: singhkays
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 1ee40d32-a5e8-42a2-97d0-3232fd3cbb98

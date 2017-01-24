@@ -2,10 +2,10 @@
 title: 将 VM 的 D 盘设为数据磁盘 | Azure
 description: 介绍如何更改 Windows VM 的驱动器号，以将 D: 盘用作数据驱动器。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-windows

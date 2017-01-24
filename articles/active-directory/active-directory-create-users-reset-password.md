@@ -2,10 +2,10 @@
 title: 已重置 Azure Active Directory 中用户的密码 | Azure
 description: 说明管理员应如何重置 Azure Active Directory 中用户的密码。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 324a0b7a-4370-4b3d-bd25-2d5e7eafa683
 ms.service: active-directory

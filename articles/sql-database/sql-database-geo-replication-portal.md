@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览为 Azure SQL 数据库配置异地复制 | Azure
 description: 使用 Azure 门户预览为 Azure SQL 数据库配置异地复制
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: d0b29822-714f-4633-a5ab-fb1a09d43ced
 ms.service: sql-database

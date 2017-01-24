@@ -3,7 +3,7 @@ title: 了解流分析作业监视 | Azure
 description: 了解流分析作业监视
 keywords: 查询监视器
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

@@ -3,9 +3,9 @@ title: 在 Azure 应用服务上进行高密度托管 | Azure
 description: 在 Azure 应用服务上进行高密度托管
 author: btardif
 manager: wpickett
-editor: 
+editor: ''
 services: app-service\web
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: a903cb78-4927-47b0-8427-56412c4e3e64
 ms.service: app-service-web

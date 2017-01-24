@@ -2,7 +2,7 @@
 title: Azure SQL 数据库顾问
 description: Azure SQL 数据库顾问为你的现有 SQL 数据库提供建议，这样可以提高当前的查询性能。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
 editor: monicar

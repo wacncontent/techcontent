@@ -5,7 +5,7 @@ services: event-hubs
 documentationCenter: na
 authors: spyrossak
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: event-hubs
 ms.devlang: na

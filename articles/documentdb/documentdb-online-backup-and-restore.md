@@ -3,7 +3,7 @@ title: 使用 DocumentDB 进行联机备份和还原 | Azure
 description: 了解如何使用 Azure DocumentDB 执行 NoSQL 数据库的自动备份和还原。
 keywords: 备份和还原, 联机备份
 services: documentdb
-documentationCenter: 
+documentationCenter: ''
 authors: RahulPrasad16
 manager: jhubbard
 editor: monicar

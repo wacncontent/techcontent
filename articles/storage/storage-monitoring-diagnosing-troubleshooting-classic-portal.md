@@ -2,7 +2,7 @@
 title: 对存储进行监视、诊断和故障排除 | Azure
 description: 使用存储分析、客户端日志记录等功能及其他第三方工具，确定、诊断和排查与 Azure 存储相关的问题。
 services: storage
-documentationCenter: 
+documentationCenter: ''
 authors: jasonnewyork
 manager: tadb
 editor: tysonn

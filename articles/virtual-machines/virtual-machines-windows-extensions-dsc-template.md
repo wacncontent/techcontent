@@ -2,12 +2,12 @@
 title: Desired State Configuration Resource Manager 模板 | Azure
 description: Azure 中 Desired State Configuration 的 Resource Manager 模板定义，提供示例和故障排除方法
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: zjalexander
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
-keywords: 
+keywords: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

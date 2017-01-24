@@ -2,10 +2,10 @@
 title: 获取 Azure 工具（Windows 7 及更高版本） | Azure
 description: 在 Windows 7 及更高版本上安装 Python 和 Azure 命令行接口 (Azure CLI)。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: iot 云服务, azure cli
 
 ms.assetid: acfa13e3-6d2c-4e68-9a77-1cbc2cf3f9c1

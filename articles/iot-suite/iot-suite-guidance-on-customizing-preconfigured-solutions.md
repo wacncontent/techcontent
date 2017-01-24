@@ -1,12 +1,12 @@
 ---
 title: 自定义预配置解决方案 | Azure
 description: 提供有关如何自定义 Azure IoT 套件预配置解决方案的指导。
-services: 
+services: ''
 suite: iot-suite
 documentationCenter: .net
 authors: stevehob
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: dotnet

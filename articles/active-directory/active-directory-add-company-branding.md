@@ -2,10 +2,10 @@
 title: 在登录页和访问面板页中添加公司品牌
 description: 了解如何在 Azure 登录页和访问面板页中添加公司品牌
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: infrastructure-services

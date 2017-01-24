@@ -5,7 +5,7 @@ services:  service-bus-messaging
 documentationcenter:  .net
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.date: 10/25/2016
 ms.service: service-bus

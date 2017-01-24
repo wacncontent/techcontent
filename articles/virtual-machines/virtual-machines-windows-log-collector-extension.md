@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationCenter: virtual-machines
 authors: squillace
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: powershell

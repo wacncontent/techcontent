@@ -2,7 +2,7 @@
 title: 配置 Azure AD 用户帐户 | Azure
 description: 本文介绍如何为 Azure 自动化中的 Runbook 配置用于身份验证的 Azure AD 用户帐户凭据。
 services: automation
-documentationcenter: 
+documentationcenter: ''
 author: MGoedtel
 manager: jwhit
 editor: tysonn

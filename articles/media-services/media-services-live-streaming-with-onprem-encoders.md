@@ -2,10 +2,10 @@
 title: 使用本地编码器执行实时传送视频流以创建多比特率流 | Azure
 description: 本主题介绍如何设置接收来自本地编码器的多比特率实时流的频道。然后，该流可以使用以下自适应流式处理协议之一通过一个或多个流式处理终结点传送给客户端播放应用程序：HLS、平滑流、MPEG DASH、HDS。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

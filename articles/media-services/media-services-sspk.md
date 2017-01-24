@@ -2,10 +2,10 @@
 title: 授权 Microsoft® 平滑流式处理客户端移植工具包
 description: 了解如何为 Microsoft® 平滑流式处理客户端移植工具包授权。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: xpouyat,vsood
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

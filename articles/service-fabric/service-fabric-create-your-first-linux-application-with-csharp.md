@@ -5,7 +5,7 @@ services: service-fabric
 documentationCenter: csharp
 authors: mani-ramaswamy
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-fabric
 ms.devlang: csharp

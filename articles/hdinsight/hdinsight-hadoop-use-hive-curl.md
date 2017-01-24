@@ -2,7 +2,7 @@
 title: 在 HDInsight 中将 Hadoop Hive 与 Curl 配合使用 | Azure
 description: 了解如何使用 Curl 向 HDInsight 远程提交 Pig 作业。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

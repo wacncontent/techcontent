@@ -2,10 +2,10 @@
 title: 站点恢复的工作原理 | Azure
 description: 本文提供站点恢复体系结构的概述
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: c413efcd-d750-4b22-b34b-15bcaa03934a
 ms.service: site-recovery

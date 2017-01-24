@@ -2,10 +2,10 @@
 title: Azure Active Directory 版本 | Azure
 description: 本文介绍 Azure Active Directory 的免费版和付费版选项。Azure Active Directory Basic、Azure Active Directory Premium P1 和 Azure Active Directory Premium P2 是付费版本。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: dcaf8939-7633-40a8-bd76-27dedbb6083a
 ms.service: active-directory

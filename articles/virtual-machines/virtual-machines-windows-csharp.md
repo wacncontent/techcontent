@@ -2,7 +2,7 @@
 title: 使用 C# 部署 Azure 资源 | Azure
 description: 了解如何使用 C# 和 Azure Resource Manager 创建 Azure 资源。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: davidmu1
 manager: timlt
 editor: tysonn

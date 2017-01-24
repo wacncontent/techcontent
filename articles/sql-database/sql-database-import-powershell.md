@@ -2,10 +2,10 @@
 title: 使用 PowerShell 导入 BACPAC 文件以创建 Azure SQL 数据库 | Azure
 description: 使用 PowerShell 导入 BACPAC 文件以创建 Azure SQL 数据库
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

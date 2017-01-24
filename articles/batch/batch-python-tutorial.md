@@ -5,7 +5,7 @@ services: batch
 documentationCenter: python
 authors: mmacy
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: batch
 ms.devlang: python

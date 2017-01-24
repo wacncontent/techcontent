@@ -2,10 +2,10 @@
 title: 在 Azure 云服务中配置本地存储资源
 description: 了解如何在 Azure 云服务中配置本地存储资源
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: cristy
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.date: 06/11/2015

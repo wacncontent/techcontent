@@ -2,7 +2,7 @@
 title: 使用 Oracle VM 映像的注意事项 | Azure
 description: 在部署之前，了解 Azure 中 Windows Server 上的 Oracle VM 支持的配置以及限制。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 manager: timlt
 authors: rickstercdn
 tags: azure-service-management

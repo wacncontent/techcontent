@@ -2,7 +2,7 @@
 title: 在 HDInsight 中将 Hadoop Pig 与 Curl 配合使用 | Azure
 description: 了解如何使用 Curl 在 Azure HDInsight 中的 Hadoop 群集上运行 Pig Latin 作业。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

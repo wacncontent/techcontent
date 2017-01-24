@@ -2,10 +2,10 @@
 title: 如何结合使用通知中心与 PHP
 description: 了解如何从 PHP 后端使用 Azure 通知中心。
 services: notification-hubs
-documentationCenter: 
+documentationCenter: ''
 authors: wesmc7777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

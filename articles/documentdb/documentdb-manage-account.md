@@ -3,7 +3,7 @@ title: 通过 Azure 门户预览管理 DocumentDB 帐户 | Azure
 description: 了解如何通过 Azure 门户预览管理你的 DocumentDB 帐户。查找有关使用 Azure 门户预览查看、复制、删除和访问帐户的指南。
 keywords: Azure 门户预览, documentdb, azure, Azure
 services: documentdb
-documentationCenter: 
+documentationCenter: ''
 authors: kirillg
 manager: jhubbard
 editor: cgronlun

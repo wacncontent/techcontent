@@ -2,7 +2,7 @@
 title: 准备站点恢复部署 | Azure
 description: 本文介绍如何准备使用 Azure Site Recovery 部署复制。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
 editor: tysonn

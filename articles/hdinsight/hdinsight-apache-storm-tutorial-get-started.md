@@ -3,7 +3,7 @@ title: Apache Storm 教程：Storm 入门 | Azure
 description: 开始在 HDInsight 上使用 Apache Storm 和 Storm 初学者示例进行大数据分析。了解如何使用 Storm 实时处理数据。
 keywords: apache storm,apache storm 教程,大数据分析,storm 初学者
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

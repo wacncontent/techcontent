@@ -4,10 +4,10 @@
 title: 使用 VMAccess 扩展重置 Azure Linux VM 上的访问权限 | Azure
 description: 使用 VMAccess 扩展重置 Azure Linux VM 上的访问权限。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 261a9646-1f93-407e-951e-0be7226b3064

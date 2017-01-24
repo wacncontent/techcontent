@@ -2,7 +2,7 @@
 title: 向你的流分析作业添加数据输入 | Azure
 description: 了解如何通过事件中心将数据源作为流数据挂接到流分析作业，或者通过 Blob 存储挂接引用数据。
 keywords: 数据输入、流式数据
-documentationCenter: 
+documentationCenter: ''
 services: stream-analytics
 authors: jeffstokes72
 manager: jhubbard

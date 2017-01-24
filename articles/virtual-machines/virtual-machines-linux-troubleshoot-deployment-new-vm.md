@@ -2,10 +2,10 @@
 title: 排查 Linux VM 部署问题 - RM | Azure
 description: 排查在 Azure 中创建新 Linux 虚拟机时遇到的 Resource Manager 部署问题
 services: virtual-machines-linux, azure-resource-manager
-documentationCenter: 
+documentationCenter: ''
 authors: jiangchen79
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue, azure-resource-manager
 
 ms.service: virtual-machines-linux

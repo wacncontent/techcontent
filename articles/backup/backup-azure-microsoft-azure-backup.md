@@ -2,10 +2,10 @@
 title: 准备环境以使用 Azure 备份服务器来备份工作负荷 | Azure
 description: 确保正确准备好你的环境，以使用 Azure 备份服务器来备份工作负荷
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: trinadhk
 manager: shreeshd
-editor: 
+editor: ''
 keywords: azure 备份的服务器;备份保管库
 
 ms.service: backup

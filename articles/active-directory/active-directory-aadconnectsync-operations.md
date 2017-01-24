@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：操作任务和注意事项 | Azure
 description: 本主题介绍 Azure AD Connect 同步的操作任务，以及如何准备运行此组件。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

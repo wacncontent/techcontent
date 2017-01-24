@@ -2,11 +2,11 @@
 title: 常见 Power BI Embedded 方案
 description: 常见 Power BI Embedded 方案
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: mblythe
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA

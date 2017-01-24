@@ -1,11 +1,11 @@
 ---
 title: Azure Toolkit for IntelliJ 中的新增功能 | Azure
 description: 了解 Azure Toolkit for IntelliJ 中的最新功能。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

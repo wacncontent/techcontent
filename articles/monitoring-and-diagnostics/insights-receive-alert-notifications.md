@@ -3,7 +3,7 @@ title: 接收警报通知
 description: 在满足警报规则条件时收到通知。
 authors: stepsic-microsoft-com
 manager: ronmart
-editor: 
+editor: ''
 services: azure-portal
 documentationCenter: na
 

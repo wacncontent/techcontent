@@ -2,7 +2,7 @@
 title: 使用 Mahout 和基于 WIndows 的 HDInsight 生成推荐 | Azure
 description: 了解如何使用 Apache Mahout 机器学习库，通过基于 Windows 的 HDInsight (Hadoop) 生成电影推荐。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

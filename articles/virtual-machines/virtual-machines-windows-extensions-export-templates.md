@@ -2,10 +2,10 @@
 title: 导出包含 VM 扩展的 Azure 资源组 | Azure
 description: 导出包含虚拟机扩展的 Resource Manager 模板。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: neilpeterson
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 7f4e2ca6-f1c7-4f59-a2cc-8f63132de279

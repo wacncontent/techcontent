@@ -2,10 +2,10 @@
 title: 如何使用 REST API 检查作业进度 | Azure
 description: 了解如何跟踪作业进度。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

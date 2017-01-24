@@ -2,7 +2,7 @@
 title: 使用堆转储调试和分析 Hadoop 服务 | Azure
 description: 自动收集 Hadoop 服务的堆转储并将其放置在 Azure Blob 存储帐户内用于调试和分析。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

@@ -2,7 +2,7 @@
 title: 在 HDInsight 中使用 Apache Phoenix 和 Squirrel | Azure
 description: 了解如何在 HDInsight 中使用 Apache Phoenix，以及如何在工作站上安装和配置 SQuirrel 以连接到 HDInsight 中的 HBase 群集。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: mumian
 manager: paulettm
 editor: cgronlun

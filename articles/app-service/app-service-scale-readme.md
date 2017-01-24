@@ -3,10 +3,10 @@ title: Azure 应用服务：缩放应用服务应用程序
 description: 了解在应用服务中缩放应用程序的复杂细节。
 keywords: 应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: btardif
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

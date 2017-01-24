@@ -2,7 +2,7 @@
 title: 使用 Maven 开发 Scalding MapReduce 作业 | Azure
 description: 了解如何使用 Maven 创建 Scalding MapReduce 作业，然后在 HDInsight 群集的 Hadoop 上部署并运行该作业。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

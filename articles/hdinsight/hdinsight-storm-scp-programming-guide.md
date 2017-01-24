@@ -2,7 +2,7 @@
 title: SCP.NET 编程指南 | Azure
 description: 了解如何通过 SCP.NET 创建可与 HDInsight 上的 Storm 配合使用的基于 .NET 的 Storm 拓扑。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: rperi
 manager: paulettm
 editor: cgronlun

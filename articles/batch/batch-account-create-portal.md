@@ -2,10 +2,10 @@
 title: 创建 Azure Batch 帐户 | Azure
 description: 了解如何在 Azure 门户预览中创建 Azure Batch 帐户，以便在云中运行大规模并行工作负荷
 services: batch
-documentationCenter: 
+documentationCenter: ''
 authors: mmacy
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: batch
 ms.workload: big-compute

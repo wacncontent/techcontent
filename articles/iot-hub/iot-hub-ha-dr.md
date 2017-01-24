@@ -2,10 +2,10 @@
 title: Azure IoT 中心 HA 和 DR | Azure
 description: 介绍了Azure 和 IoT 中心功能，这些功能有助于构建带灾难恢复功能的 Azure IoT 高可用性解决方案。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: fsautomata
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: ae320e58-aa20-45b9-abdc-fa4faae8e6dd
 ms.service: iot-hub

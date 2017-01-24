@@ -3,7 +3,7 @@ title: 启用监视和诊断
 description: 了解如何在 Azure 中为资源设置诊断。
 authors: stepsic-microsoft-com
 manager: ronmart
-editor: 
+editor: ''
 services: azure-portal
 documentationCenter: na
 

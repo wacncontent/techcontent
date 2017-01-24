@@ -5,7 +5,7 @@ services: sql-database
 documentationCenter: na
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: na

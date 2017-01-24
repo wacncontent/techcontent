@@ -2,7 +2,7 @@
 title: 在 Azure 中创建和上载 Linux VHD | Azure
 description: 使用经典部署模型创建和上载包含 Linux 操作系统的 Azure 虚拟硬盘 (VHD)
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
 editor: tysonn

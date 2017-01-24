@@ -2,7 +2,7 @@
 title: 监视 DocumentDB 请求和存储 | Azure
 description: 了解如何监视你的 DocumentDB 帐户的性能指标（如请求和服务器错误）以及使用情况指标（如存储消耗）。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: mimig1
 manager: jhubbard
 editor: cgronlun

@@ -2,10 +2,10 @@
 title: v2.0 终结点的类型 | Azure
 description: Azure AD v2.0 终结点支持的应用和方案类型。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

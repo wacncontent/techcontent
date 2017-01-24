@@ -2,10 +2,10 @@
 title: 开始使用 REST 按需传送内容 | Azure
 description: 本教程介绍了使用 Azure 媒体服务和 REST API 实现点播内容传送应用程序的步骤。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 88194b59-e479-43ac-b179-af4f295e3780
 ms.service: media-services

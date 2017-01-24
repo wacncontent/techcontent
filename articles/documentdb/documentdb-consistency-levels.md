@@ -6,7 +6,7 @@ services: documentdb
 author: syamkmsft
 manager: jhubbard
 editor: cgronlun
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 3fe51cfa-a889-4a4a-b320-16bf871fe74c
 ms.service: documentdb

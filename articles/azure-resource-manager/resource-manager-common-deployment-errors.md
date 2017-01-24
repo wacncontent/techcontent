@@ -2,7 +2,7 @@
 title: 排查常见的 Azure 部署错误 | Azure
 description: 说明如何解决使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 tags: top-support-issue
 author: tfitzmac
 manager: timlt

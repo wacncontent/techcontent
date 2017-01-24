@@ -2,10 +2,10 @@
 title: 更改 Azure SQL 数据库的服务层和性能级别
 description: “更改 Azure SQL 数据库的服务层和性能级别”介绍如何增加或减少 SQL 数据库。更改 Azure SQL 数据库的定价层。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

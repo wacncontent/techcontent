@@ -1,12 +1,12 @@
 ---
 title: Azure IoT 套件和 Azure Active Directory | Azure
 description: 介绍 Azure IoT 套件如何使用 Azure Active Directory 管理权限。
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: aguilaaj
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

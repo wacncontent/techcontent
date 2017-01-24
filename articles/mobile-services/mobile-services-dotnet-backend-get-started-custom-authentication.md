@@ -4,7 +4,7 @@ description: 了解如何使用用户名和密码对用户进行身份验证。
 documentationCenter: Mobile
 authors: mattchenderson
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

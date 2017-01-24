@@ -6,7 +6,7 @@ keywords: ios 推送通知, 推送消息, 推送通知, 推送消息
 documentationCenter: xamarin
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

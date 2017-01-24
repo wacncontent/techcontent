@@ -2,10 +2,10 @@
 title: Azure SQL 数据库常见问题
 description: 客户询问的有关云数据库和 Azure SQL 数据库、Microsoft 的关系数据库管理系统 (RDBMS) 和在云中作为服务的数据库的常见问题的答案。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 1da12abc-0646-43ba-b564-e3b049a6487f
 ms.service: sql-database

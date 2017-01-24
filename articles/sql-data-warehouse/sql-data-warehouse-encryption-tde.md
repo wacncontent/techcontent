@@ -2,10 +2,10 @@
 title: SQL 数据仓库（门户）中的透明数据加密 | Azure
 description: SQL 数据仓库中的透明数据加密 (TDE)
 services: sql-data-warehouse
-documentationCenter: 
+documentationCenter: ''
 authors: ronortloff
 manager: barbkess
-editor: 
+editor: ''
 
 ms.service: sql-data-warehouse
 ms.workload: data-management

@@ -2,10 +2,10 @@
 title: Azure IoT 网关 SDK 入门 (Linux) | Azure
 description: 了解如何在 Linux 计算机上生成网关，并了解 Azure IoT 网关 SDK（如模块）和 JSON 配置文件中的重要概念。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: chipalost
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: cf537bdd-2352-4bb1-96cd-a283fcd3d6cf
 ms.service: iot-hub

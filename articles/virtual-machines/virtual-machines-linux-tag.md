@@ -2,7 +2,7 @@
 title: 如何标记 Linux 虚拟机 | Azure
 description: 了解如何标记使用 Resource Manager 部署模型在 Azure 中创建的 Linux 虚拟机。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: mmccrory
 manager: timlt
 editor: tysonn

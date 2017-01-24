@@ -3,7 +3,7 @@ title: 流分析中常用使用模式的查询示例 | Azure
 description: 常见的 Azure 流分析查询模式 
 keywords: 查询示例
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

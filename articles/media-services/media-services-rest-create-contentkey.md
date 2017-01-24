@@ -2,10 +2,10 @@
 title: 使用 REST 创建 ContentKey | Azure
 description: 了解如何创建提供对资产进行安全访问的内容密钥。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

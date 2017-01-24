@@ -2,10 +2,10 @@
 title: 运行示例应用程序以接收云到设备的消息 | Azure
 description: 示例应用程序在 Pi 上运行，用于监视来自 IoT 中心的传入消息。新的 gulp 任务会将消息从 IoT 中心发送到 Pi，使 LED 闪烁。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: 云到设备, 来自云的消息
 
 ms.assetid: 6ae6539e-1163-4490-8d72-fdf7803e3054

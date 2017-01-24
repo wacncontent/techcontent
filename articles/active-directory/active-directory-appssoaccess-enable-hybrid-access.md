@@ -2,11 +2,11 @@
 title: 使用应用代理启用混合访问 | Azure
 description: 通过 Azure Active Directory 从网络外部实现对专用网络内部运行的应用的访问。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 keywords: 应用程序访问,应用代理,混合访问
 authors: femila
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.date: 02/10/2016

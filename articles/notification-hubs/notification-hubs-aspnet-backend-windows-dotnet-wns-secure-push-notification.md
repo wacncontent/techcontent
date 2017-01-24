@@ -4,7 +4,7 @@ description: 了解如何在 Azure 中发送安全推送通知。代码示例是
 documentationCenter: windows
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 services: notification-hubs
 
 ms.service: notification-hubs

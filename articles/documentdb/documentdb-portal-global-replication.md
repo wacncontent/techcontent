@@ -3,7 +3,7 @@ title: DocumentDB 全局数据库复制 | Azure
 description: 了解如何通过 Azure 门户预览管理 DocumentDB 帐户的全局复制。
 services: documentdb
 keywords: 全局数据库, 复制
-documentationcenter: 
+documentationcenter: ''
 author: mimig1
 manager: jhubbard
 editor: cgronlun

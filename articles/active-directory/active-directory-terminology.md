@@ -2,10 +2,10 @@
 title: Azure AD 术语 | Azure
 description: 与 Azure Active Directory 相关的术语和定义。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

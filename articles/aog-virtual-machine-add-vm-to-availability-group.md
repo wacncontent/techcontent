@@ -2,13 +2,13 @@
 title: 将虚拟机添加到可用性集中
 description: 本页介绍如何将虚拟机添加到可用性集中。
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 06/08/2015
 ---
 

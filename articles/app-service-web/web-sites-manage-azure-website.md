@@ -2,10 +2,10 @@
 title: 管理 Azure App Service 中的 Web 应用
 description: 用于管理 Azure App Service 中 Web 应用的资源链接。
 services: app-service\web
-documentationcenter: 
+documentationcenter: ''
 author: erikre
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: d5e2887a-84f9-4747-a573-867635cb8b39
 ms.service: app-service-web

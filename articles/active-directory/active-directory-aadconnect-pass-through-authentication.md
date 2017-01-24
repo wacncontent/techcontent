@@ -3,7 +3,7 @@ title: Azure AD Connect：直通身份验证 | Azure
 description: 本主题介绍了你需要了解的如何在本地 Active Directory (AD) 中使用 Azure AD 直通身份验证，以提供对 Azure Active Directory (Azure AD) 的访问权限和连接服务的信息。
 services: active-directory
 keywords: 什么是 Azure AD Connect, 安装 Active Directory, Azure AD 所需的组件, SSO, 单一登录
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
 

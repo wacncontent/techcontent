@@ -5,7 +5,7 @@ services: service-bus
 documentationCenter: python
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 09/21/2016

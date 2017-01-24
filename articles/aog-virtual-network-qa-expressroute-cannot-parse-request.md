@@ -2,10 +2,10 @@
 title: 将不同订阅中的虚拟网络连接到 ExpressRoute 线路时收到报错'Cannot parse the request'
 description: 通过 PowerShell 将不同订阅中的虚拟网络连接到 ExpressRoute
 services: virtual-network
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Azure,PowerShell,VNet,ExpressRoute,Subscriptions
 
 ms.service: virtual-network-aog

@@ -2,10 +2,10 @@
 title: Azure AD 与 Azure 订阅在 Azure 中国的架构限制与最佳实践
 description: Azure AD 与 Azure 订阅在中国的限制以及解决多个 Azure AD 目录关联的最佳实践
 services: active-directory
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Azure AD,Azure 订阅,Azure 中国
 
 ms.service: active-directory-aog

@@ -5,7 +5,7 @@ services: multiple
 documentationCenter: .net
 authors: rboucher
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

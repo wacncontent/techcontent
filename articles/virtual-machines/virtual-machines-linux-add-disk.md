@@ -3,7 +3,7 @@ title: 将磁盘添加到 Linux VM | Azure
 description: 了解如何将持久性磁盘添加到 Linux VM
 keywords: linux 虚拟机, 添加资源磁盘
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: rickstercdn
 manager: timlt
 editor: tysonn

@@ -2,11 +2,11 @@
 title: 如何将 Power BI Embedded 与 REST 配合使用 | Azure
 description: 了解如何将 Power BI Embedded 与 REST 配合使用 
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA

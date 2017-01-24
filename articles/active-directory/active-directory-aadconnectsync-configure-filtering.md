@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：配置筛选 | Azure
 description: 介绍如何在 Azure AD Connect 同步中配置筛选。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

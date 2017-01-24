@@ -5,7 +5,7 @@ services: azure-resource-manager
 documentationCenter: na
 authors: tfitzmac
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: azure-resource-manager
 ms.date: 10/28/2015

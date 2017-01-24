@@ -5,9 +5,9 @@ services: app-service
 documentationCenter: app-service
 authors: SyntaxC4
 manager: yochayk
-editor: 
+editor: ''
 tags: optional
-keywords: 
+keywords: ''
 
 ms.service: app-service
 ms.devlang: multiple

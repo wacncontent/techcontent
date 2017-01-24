@@ -2,7 +2,7 @@
 title: 使用 Visual Studio 和 C# 创建 Apache Storm 拓扑 | Azure
 description: 了解如何通过使用用于 Visual Studio 的 HDInsight 工具创建一个简单的单词计数拓扑，来以 C# 语言创建一个 Storm 拓扑。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

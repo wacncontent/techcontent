@@ -5,7 +5,7 @@ services: app-service
 documentationcenter: php
 author: rmcmurray
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 95c4072b-8570-496b-9c48-ee21a223fb60
 ms.service: app-service

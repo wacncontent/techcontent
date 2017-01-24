@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：了解体系结构 | Azure
 description: 本主题介绍 Azure AD Connect 同步的体系结构，并解释使用的术语。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

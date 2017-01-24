@@ -2,7 +2,7 @@
 title: 如何删除 HDInsight 群集 | Azure
 description: 删除 HDInsight 群集的各种方式的相关信息。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

@@ -2,10 +2,10 @@
 title: Azure AD Connect：预览版功能 | Azure
 description: 本主题详细介绍 Azure AD Connect 中以预览版形式提供的功能。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

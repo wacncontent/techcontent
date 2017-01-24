@@ -4,7 +4,7 @@ description: 了解如何使用 Azure 移动服务在 Android 应用程序中缓
 documentationCenter: android
 authors: RickSaling
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

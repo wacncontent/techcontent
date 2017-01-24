@@ -2,10 +2,10 @@
 title: Azure Web 应用对外连接数上限分析
 description: Azure Web 应用对外连接数存在上限，超出后会发生异常
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Web Apps,outbound connection
 
 ms.service: app-service-web-aog

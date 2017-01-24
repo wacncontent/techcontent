@@ -1,9 +1,9 @@
 ---
 title: 使用 Azure CLI 管理资源 | Azure
 description: 使用 Azure 命令行接口 (CLI) 管理 Azure 资源和组
-editor: 
+editor: ''
 manager: timlt
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 services: azure-resource-manager
 

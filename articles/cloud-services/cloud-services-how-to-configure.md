@@ -2,10 +2,10 @@
 title: 如何配置云服务（经典管理门户）| Azure
 description: 了解如何在 Azure 中配置云服务。了解如何更新云服务配置以及配置对角色实例的远程访问。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

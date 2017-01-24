@@ -2,10 +2,10 @@
 title: 用于识别适用于池的单一数据库的 Powershell 脚本
 description: 弹性数据库池是由一组弹性数据库共享的可用资源的集合。本文档提供一个 Powershell 脚本来帮助用户评估是否适合对一组数据库使用弹性数据库池。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

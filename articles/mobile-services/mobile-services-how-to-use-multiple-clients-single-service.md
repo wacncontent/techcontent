@@ -2,7 +2,7 @@
 title: 如何在多个客户端上使用单个移动服务后端 | Azure 移动服务
 description: 了解如何在面向不同移动平台的多个客户端应用上使用单个移动服务后端。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
 editor: mollybos

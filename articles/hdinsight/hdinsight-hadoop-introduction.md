@@ -3,7 +3,7 @@ title: 什么是 Hadoop？ Azure HDInsight 简介 | Azure
 description: 获取 HDInsight 上的 Hadoop 生态系统和组件的简介。HDInsight 包括 Hadoop、HBase 等，用于大数据处理和分析。
 keywords: 大数据分析,hadoop 简介,什么是 hadoop,hadoop 技术堆栈,hadoop 生态系统
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: cjgronlund
 manager: jhubbard
 editor: cgronlun

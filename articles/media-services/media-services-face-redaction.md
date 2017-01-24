@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体分析进行面部修订 | Azure
 description: 本主题演示如何使用 Azure 媒体分析检测面部。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 5b6d8b8c-5f4d-4fef-b3d6-dc22c6b5a0f5
 ms.service: media-services

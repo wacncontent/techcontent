@@ -2,7 +2,7 @@
 title: 在扩大云数据库之间移动数据 | Azure
 description: 介绍如何使用弹性数据库 API 通过自托管服务来操作分片和移动数据。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 manager: jhubbard
 author: ddove
 

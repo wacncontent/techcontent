@@ -1,15 +1,15 @@
 ---
 title: Ruby-计算 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: Ruby-计算 - Azure 微软云
-services: 
+services: ''
 documentationCenter: ruby
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 08/11/2016
 ---
 

@@ -2,10 +2,10 @@
 title: Azure AD Connect：版本发布历史记录 | Azure
 description: 本主题列出 Azure AD Connect 和 Azure AD Sync 的所有版本
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: ef2797d7-d440-4a9a-a648-db32ad137494
 ms.service: active-directory

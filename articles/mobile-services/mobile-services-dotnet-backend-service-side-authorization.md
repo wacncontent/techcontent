@@ -5,7 +5,7 @@ services: mobile-services
 documentationCenter: windows
 authors: krisragh
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

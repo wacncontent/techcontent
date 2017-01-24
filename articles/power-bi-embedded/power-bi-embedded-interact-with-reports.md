@@ -2,11 +2,11 @@
 title: 使用 JavaScript API 与报表进行交互 | Azure
 description: Power BI Embedded, 使用 JavaScript API 与报表进行交互
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA

@@ -2,7 +2,7 @@
 title: 在 SQL Server 上使用 Azure 高级存储 | Azure
 description: 本文使用通过经典部署模型创建的资源并介绍如何对 Azure 虚拟机上运行的 SQL Server 使用 Azure 高级存储。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: danielsollondon
 manager: jeffreyg
 editor: monicar

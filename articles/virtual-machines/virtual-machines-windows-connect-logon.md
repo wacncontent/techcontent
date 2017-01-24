@@ -2,7 +2,7 @@
 title: 连接到 Windows Server VM | Azure
 description: 了解如何使用 Azure 门户预览和 Resource Manager 部署模型连接并登录到 Windows VM。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

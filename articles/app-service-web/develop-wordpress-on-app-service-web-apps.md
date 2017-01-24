@@ -3,10 +3,10 @@ title: 在 Azure App Service 上开发 WordPress
 description: 了解在 Azure 上开发和缩放 WordPress 的最佳做法。
 keywords: app service, azure app service, 缩放 wordpress, 可缩放 wordpress, wordpress
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: sunbuild
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

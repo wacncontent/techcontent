@@ -2,10 +2,10 @@
 title: 我的云服务项目发生了什么情况？| Azure
 description: 介绍使用 Visual Studio 连接服务连接到 Azure 存储帐户后云服务项目中会发生什么情况
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: ca0ea68d-f417-4ce8-9413-40d76f69cdea
 ms.service: storage

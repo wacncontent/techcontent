@@ -2,13 +2,13 @@
 title: 如何查看 SQL Azure 数据库死锁 (DB POD)
 description: 如何查看 SQL Azure 数据库死锁 (DB POD)
 services: sql-database
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: sql-database-aog
-ms.date: 
+ms.date: ''
 wacn.date: 11/30/2016
 ---
 

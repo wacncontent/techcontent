@@ -2,7 +2,7 @@
 title: Azure AD Connect：后续步骤以及如何管理 Azure AD Connect | Azure
 description: 了解如何扩展 Azure AD Connect 的默认配置和操作任务。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
 editor: curtand

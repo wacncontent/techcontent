@@ -3,7 +3,7 @@ title: 使用流分析中的操作和服务日志进行调试 | Azure
 description: 如何使用流分析操作日志
 keywords: 服务日志
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

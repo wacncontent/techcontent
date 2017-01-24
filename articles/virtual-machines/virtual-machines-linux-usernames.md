@@ -2,10 +2,10 @@
 title: 为 Linux 选择用户名 | Azure
 description: 了解如何在 Azure 中选择 Linux 虚拟机的用户名。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: szarkos
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-linux

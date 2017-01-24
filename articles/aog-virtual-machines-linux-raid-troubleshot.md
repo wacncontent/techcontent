@@ -2,13 +2,13 @@
 title: Azure Linux 虚机上配置 RAID 的常见问题及解决方案
 description: 独立硬盘冗余阵列（RAID, Redundant Array of Independent Disks），简称磁盘阵列。能增强数据集成度，增强容错功能，增加处理量或容量。
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machines-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/31/2016
 ---
 

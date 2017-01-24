@@ -2,10 +2,10 @@
 title: 在 Windows VM 上安装 MongoDB | Azure
 description: 了解如何在使用 Resource Manager 部署模型创建的、运行 Windows Server 2012 R2 的 Azure VM 上安装 MongoDB。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services

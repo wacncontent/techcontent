@@ -2,10 +2,10 @@
 title: 百度推送服务绑定关系未找到或不存在
 description: 通过调用 Baidu Push API 修复 Bind Relation Not Found 错误
 services: notification-hubs
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Notification Hubs,Baidu,Bind Relation
 
 ms.service: notification-hubs-aog

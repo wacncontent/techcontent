@@ -4,13 +4,13 @@ urlDisplayName: Azure 虚拟机就绪评估
 title: Azure 虚拟机就绪评估
 metaKeywords: Azure 虚拟机就绪评估
 description: Azure 虚拟机就绪评估
-metaCanonical: 
+metaCanonical: ''
 services: downloads
 documentationCenter: downloads
 title: Azure 虚拟机就绪评估
 authors: ACom
-solutions: 
-manager: 
+solutions: ''
+manager: ''
 editor: Haifeng Liu
 
 ms.service: downloads

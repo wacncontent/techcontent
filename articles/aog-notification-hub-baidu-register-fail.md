@@ -2,10 +2,10 @@
 title: 百度推送通过获取注册信息失败
 description: 介绍如何解决百度推送过程中的注册问题。
 services: notification-hubs
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: 通知中心,百度推送,注册信息
 
 ms.service: notification-hubs-aog

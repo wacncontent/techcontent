@@ -2,10 +2,10 @@
 title: Windows VM 扩展的示例配置 | Azure
 description: 使用扩展创作模板的示例配置
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: kundanap
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

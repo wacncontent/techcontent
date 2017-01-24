@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: .net
 authors: cawaMS
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.devlang: dotnet

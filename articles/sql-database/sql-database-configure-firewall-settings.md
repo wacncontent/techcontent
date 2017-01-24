@@ -2,10 +2,10 @@
 title: 配置 SQL 数据库服务器级防火墙规则 | Azure
 description: 了解如何配置防火墙以允许 IP 地址访问 Azure SQL 服务器。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: BYHAM
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

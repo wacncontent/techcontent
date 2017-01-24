@@ -2,10 +2,10 @@
 title: 云中的 Batch 和 HPC 解决方案 | Azure
 description: 了解 Azure 中的批处理和高性能计算（HPC 和大型计算）应用方案和解决方案选项
 services: batch, virtual-machines, cloud-services
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: aab5401d-2baf-4cf2-bf20-ad224de33888
 ms.service: batch

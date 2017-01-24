@@ -2,10 +2,10 @@
 title: 使用 PowerShell 为 Azure SQL 数据库配置活动异地复制 | Azure
 description: 使用 PowerShell 为 Azure SQL 数据库配置活动异地复制
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

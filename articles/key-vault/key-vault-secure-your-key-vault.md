@@ -2,7 +2,7 @@
 title: 保护密钥保管库 | Azure
 description: 管理密钥保管库的访问权限，以便对保管库、密钥和机密进行管理。密钥保管库的身份验证和授权模型，以及如何保护密钥保管库
 services: key-vault
-documentationCenter: 
+documentationCenter: ''
 authors: amitbapat
 manager: mbaldwin
 tags: azure-resource-manager

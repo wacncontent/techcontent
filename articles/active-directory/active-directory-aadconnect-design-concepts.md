@@ -2,10 +2,10 @@
 title: Azure AD Connect：设计概念 | Azure
 description: 本主题详细说明某些实现设计方面的问题
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

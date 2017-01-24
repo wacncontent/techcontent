@@ -1,17 +1,17 @@
 ---
-linkid: 
-urlDisplayName: 
+linkid: ''
+urlDisplayName: ''
 title: 使用PowerShell管理MySQL Database on Azure - Azure 微软云
 metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,入门指南,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, API, Azure MySQL Service, Azure RDS
 description: 本文介绍如何通过API实现更多MySQL Database on Azure的查询、创建、修改、删除等操作。
-metaCanonical: 
+metaCanonical: ''
 services: MySQL
 documentationCenter: Services
-title: 
+title: ''
 authors: sofia
-solutions: 
-manager: 
-editor: 
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: mysql
 ms.date: 07/05/2016

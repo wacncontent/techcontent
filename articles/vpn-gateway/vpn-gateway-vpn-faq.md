@@ -5,7 +5,7 @@ services: vpn-gateway
 documentationCenter: na
 authors: yushwang
 manager: rossort
-editor: 
+editor: ''
 
 ms.service: vpn-gateway
 ms.devlang: na

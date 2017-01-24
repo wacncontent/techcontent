@@ -2,10 +2,10 @@
 title: 捕获用作模板的 Linux VM | Azure
 description: 了解如何捕获并通用化使用 Azure Resource Manager 部署模型创建的、基于 Linux 的 Azure 虚拟机 (VM) 的映像。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: e608116f-f478-41be-b787-c2ad91b5a802

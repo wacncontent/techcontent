@@ -2,11 +2,11 @@
 title: SQL 数据库的 XEvent 环形缓冲区代码 | Azure
 description: 提供一个 Transact-SQL 代码示例，以帮助你快速轻松地在 Azure SQL 数据库中使用环形缓存区目标。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: MightyPen
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: sql-database
 ms.workload: data-management

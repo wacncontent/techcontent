@@ -4,14 +4,14 @@ urlDisplayName: CDN
 title: How to Create Web Acceleration-Type CDNs – Azure Feature Guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN acceleration, CDN service, mainstream CDN, Web acceleration, Web, webpage acceleration, static acceleration, cache rules, image acceleration, CDN technical documentation, CDN help files, portal website acceleration
 description: Learn how to create Web Acceleration-type CDNs on Azure Management Portal, and learn about default caching rules for Web CDNs.
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn_en
 ms.date: 7/7/2016

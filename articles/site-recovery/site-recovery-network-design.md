@@ -2,10 +2,10 @@
 title: 设计用于灾难恢复的网络基础结构 | Azure
 description: 本文讨论 Azure Site Recovery 的网络设计注意事项
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: prateek9us
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: ce787731-d930-4f00-a309-e2fbc2e1f53b
 ms.service: site-recovery

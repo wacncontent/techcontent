@@ -2,10 +2,10 @@
 title: 迁移要扩大的现有数据库 | Azure
 description: 创建分片映射管理器，将分片数据库转换为使用弹性数据库工具
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: ddove
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 8c851d8e-8fd5-4327-89c1-9178b20ddd69
 ms.service: sql-database

@@ -2,10 +2,10 @@
 title: 使用弹性数据库工具添加分片 | Azure
 description: 如何使用弹性缩放 API 将新分片添加到分片集。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 manager: jhubbard
 author: ddove
-editor: 
+editor: ''
 
 ms.assetid: 62a349db-bebe-406f-a120-2f1986f2b286
 ms.service: sql-database

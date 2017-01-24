@@ -2,7 +2,7 @@
 title: 使用 Azure PowerShell 创建 HDInsight 中基于 Windows 的 Hadoop 群集 | Azure
 description: 了解如何使用 Azure PowerShell 创建 Azure HDInsight 的群集。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

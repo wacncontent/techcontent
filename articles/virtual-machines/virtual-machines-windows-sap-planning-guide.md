@@ -5,9 +5,9 @@ services: virtual-machines-windows,virtual-network,storage
 documentationCenter: saponazure
 authors: MSSedusch
 manager: juergent
-editor: 
+editor: ''
 tags: azure-resource-manager
-keywords: 
+keywords: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: NA

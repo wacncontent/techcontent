@@ -5,7 +5,7 @@ documentationCenter: na
 services: expressroute
 authors: richcar
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: expressroute
 ms.devlang: na

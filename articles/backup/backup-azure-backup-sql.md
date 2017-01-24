@@ -2,10 +2,10 @@
 title: 使用 DPM 为 SQL 工作负荷配置 Azure 备份 | Azure
 description: 使用 Azure 备份服务备份 SQL Server 数据库简介
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: adigan
 manager: Nkolli1
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

@@ -2,7 +2,7 @@
 title: 在 HDInsight 中使用 Hadoop Pig | Azure
 description: 了解如何将 Pig 与 HDInsight 上的 Hadoop 配合使用。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

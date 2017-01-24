@@ -4,7 +4,7 @@
 title: Windows 虚拟机概述 | Azure
 description: 了解如何在 Azure 中创建和管理 Windows 虚拟机。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: davidmu1
 manager: timlt
 editor: tysonn

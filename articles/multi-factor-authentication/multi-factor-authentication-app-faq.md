@@ -2,7 +2,7 @@
 title: Microsoft Authenticator 应用常见问题解答
 description: 提供与 Microsoft Authenticator 应用和 Azure 多重身份验证相关的常见问题与解答列表。
 services: multi-factor-authentication
-documentationcenter: 
+documentationcenter: ''
 author: kgremban
 manager: femila
 editor: pblachar, librown

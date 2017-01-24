@@ -2,10 +2,10 @@
 title: 通过自定义 MES 预设执行高级编码 | Azure
 description: 本主题说明如何通过自定义 Media Encoder Standard 任务预设执行高级编码。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 2a4ade25-e600-4bce-a66e-e29cf4a38369
 ms.service: media-services

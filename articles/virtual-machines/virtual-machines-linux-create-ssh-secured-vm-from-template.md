@@ -2,10 +2,10 @@
 title: 使用 Azure 模板创建 Linux VM | Azure
 description: 使用 Azure Resource Manager 模板在 Azure 上创建 Linux VM。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.assetid: 721b8378-9e47-411e-842c-ec3276d3256a

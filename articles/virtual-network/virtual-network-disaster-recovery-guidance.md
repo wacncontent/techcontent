@@ -2,10 +2,10 @@
 title: 发生影响 Azure 虚拟网络的 Azure 服务中断事件时该怎么办 | Azure
 description: 了解发生影响 Azure 虚拟网络的 Azure 服务中断事件时该怎么办。
 services: virtual-network
-documentationcenter: 
+documentationcenter: ''
 author: NarayanAnnamalai
 manager: jefco
-editor: 
+editor: ''
 
 ms.assetid: ad260ab9-d873-43b3-8896-f9a1db9858a5
 ms.service: virtual-network

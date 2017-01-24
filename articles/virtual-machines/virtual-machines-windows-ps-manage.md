@@ -2,10 +2,10 @@
 title: 使用 Resource Manager 和 PowerShell 管理 VM | Azure
 description: 使用 Azure Resource Manager 与 PowerShell 来管理虚拟机。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

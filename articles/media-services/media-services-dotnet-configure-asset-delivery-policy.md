@@ -2,10 +2,10 @@
 title: 使用 .NET SDK 配置资产传送策略 | Azure
 description: 本主题说明如何通过 Azure 媒体服务 .NET SDK 配置不同的资产传送策略。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Mingfeiy
 manager: dwrede
-editor: 
+editor: ''
 
 ms.assetid: 3ec46f58-6cbb-4d49-bac6-1fd01a5a456b
 ms.service: media-services

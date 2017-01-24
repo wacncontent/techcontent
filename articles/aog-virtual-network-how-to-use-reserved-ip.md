@@ -2,13 +2,13 @@
 title: 保留正在使用的 VIP
 description: 本页介绍如何使用 PowerShell 来使用保留 IP。
 services: virtual network
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-network-aog
-ms.date: 
+ms.date: ''
 wacn.date: 06/08/2016
 ---
 

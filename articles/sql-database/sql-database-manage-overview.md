@@ -2,10 +2,10 @@
 title: 概述: SQL 数据库的管理工具 | Azure
 description: 比较用于管理 Azure SQL 数据库的工具和选项
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 37767380-975f-4dee-a28d-80bc2036dda3
 ms.service: sql-database

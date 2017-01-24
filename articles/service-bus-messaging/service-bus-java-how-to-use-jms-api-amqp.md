@@ -5,7 +5,7 @@ services: service-bus
 documentationCenter: java
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.workload: na

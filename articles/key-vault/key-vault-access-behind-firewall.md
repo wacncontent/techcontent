@@ -2,7 +2,7 @@
 title: 访问防火墙后面的密钥保管库 | Azure
 description: 了解如何从防火墙后面的应用程序访问密钥保管库
 services: key-vault
-documentationCenter: 
+documentationCenter: ''
 authors: amitbapat
 manager: mbaldwin
 tags: azure-resource-manager

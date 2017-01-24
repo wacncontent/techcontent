@@ -2,10 +2,10 @@
 title: 在迁移到 Azure SQL 数据库之前，使用 SQL Server Management Studio 确定 SQL 数据库的兼容性 | Azure
 description: Azure SQL 数据库, 数据库迁移, SQL 数据库兼容性, 导出数据层应用程序向导
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

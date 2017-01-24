@@ -3,11 +3,11 @@ title: 配置 SQL Server 防火墙概述 | Azure
 description: 了解如何配置使用服务器级和数据库级防火墙规则的 SQL 数据库防火墙以管理访问权限。
 keywords: 数据库防火墙
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: BYHAM
 manager: jhubbard
 editor: cgronlun
-tags: 
+tags: ''
 
 ms.service: sql-database
 ms.devlang: na
@@ -44,7 +44,7 @@ Azure SQL 数据库为 Azure 和其他基于 Internet 的应用程序提供关�
 
 来自 Internet 和 Azure 的连接尝试必须首先通过防火墙，然后才能访问你的 Azure SQL Server 或 SQL 数据库，如下图中所示。
 
-    ![描述防火墙配置的示意图。][1]
+   ![描述防火墙配置的示意图。][1]
 
 ## 从 Internet 连接
 

@@ -2,10 +2,10 @@
 title: 在 Azure Active Directory 中管理密码 | Azure
 description: 如何在 Azure Active Directory 中管理密码。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: a7679724-0ed5-4973-92e2-bd1285a6ef93
 ms.service: active-directory

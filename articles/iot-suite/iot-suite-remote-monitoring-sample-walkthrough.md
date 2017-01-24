@@ -1,12 +1,12 @@
 ---
 title: 远程监视预配置解决方案演练 | Azure
 description: 介绍 Azure IoT 预配置解决方案远程监视及其体系结构。
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

@@ -5,7 +5,7 @@ services: azure-portal
 documentationCenter: na
 authors: IHenkel
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: azure-portal
 ms.date: 08/14/2015

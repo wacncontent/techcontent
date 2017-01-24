@@ -1,11 +1,11 @@
 ---
 title: 指定 Node.js 版本
 description: 了解如何指定 Azure 网站和云服务使用的 Node.js 版本
-services: 
+services: ''
 documentationCenter: nodejs
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

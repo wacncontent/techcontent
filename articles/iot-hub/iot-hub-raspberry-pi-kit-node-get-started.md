@@ -2,10 +2,10 @@
 title: 将 Raspberry Pi 3 连接到 Azure IoT 中心 | Azure
 description: 开始使用 Raspberry Pi 3 设备、创建 Azure IoT 中心，并将 Pi 连接到 IoT 中心。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: azure iot 中心, 物联网入门, iot 工具包
 experimental: true
 experiment_id: xshi-happypathemu-20161202

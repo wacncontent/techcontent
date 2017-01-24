@@ -2,10 +2,10 @@
 title: 获取 Azure 工具 (macOS 10.10) | Azure
 description: 在 macOS 上安装 Python 和 Azure 命令行接口 (Azure CLI)。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: iot 云服务, azure cli
 
 ms.assetid: 1814b703-2d81-45db-aff0-eb338c97f120

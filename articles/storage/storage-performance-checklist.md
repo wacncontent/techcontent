@@ -2,7 +2,7 @@
 title: Azure 存储的性能和可伸缩性清单 | Azure
 description: 在开发使用 Azure 存储的高性能应用程序时，一个经过验证的检查表。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: robinsh
 manager: timlt
 editor: tysonn

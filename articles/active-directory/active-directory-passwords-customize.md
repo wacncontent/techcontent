@@ -2,7 +2,7 @@
 title: 自定义：Azure AD 密码管理 | Azure
 description: 如何根据需要在 Azure AD 中自定义密码管理外观、行为和通知。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: asteen
 manager: femila
 editor: curtand

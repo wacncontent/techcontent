@@ -4,10 +4,10 @@
 title: 将策略应用到 Azure Resource Manager 虚拟机 | Azure
 description: 如何将策略应用到 Azure Resource Manager Windows 虚拟机
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: singhkay
 manager: drewm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

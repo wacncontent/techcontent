@@ -2,10 +2,10 @@
 title: 使用网关 SDK 模拟设备 | Azure
 description: 如何在 Windows 上使用 Azure IoT 网关 SDK 创建模拟设备，从而将遥测数据通过网关发送到 IoT 中心
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: chipalost
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: cpp

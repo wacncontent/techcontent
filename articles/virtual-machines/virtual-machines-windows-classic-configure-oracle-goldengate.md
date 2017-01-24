@@ -4,7 +4,7 @@ description: Step through a tutorial for setting up and implementing Oracle Gold
 services: virtual-machines-windows
 authors: rickstercdn
 manager: timlt
-documentationCenter: 
+documentationCenter: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

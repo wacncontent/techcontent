@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览创建 Linux VM | Azure
 description: 使用 Azure 门户预览创建 Linux VM。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: cc5dc395-dc54-4402-8804-2bb15aba8ea2

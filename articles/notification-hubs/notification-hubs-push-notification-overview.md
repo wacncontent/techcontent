@@ -3,9 +3,9 @@ title: Azure 通知中心
 description: 了解如何在 Azure 中使用通知中心。代码示例是使用 .NET API 通过 C# 编写的。
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 services: notification-hubs
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

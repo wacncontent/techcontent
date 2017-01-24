@@ -2,7 +2,7 @@
 title: 云灾难恢复解决方案 - SQL 数据库活动异地复制 | Azure
 description: 了解如何使用 Azure SQL 数据库异地复制来支持云应用程序的在线升级。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: anosov1960
 manager: jhubbard
 editor: monicar

@@ -2,10 +2,10 @@
 title: 创建 Windows VM 的不同方法 | Azure
 description: 列出使用 Resource Manager 创建 Windows 虚拟机的不同方法。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-windows

@@ -4,7 +4,7 @@ description: 了解如何使用 Azure 移动服务构建具有 .NET 后端的 Wi
 documentationCenter: windows
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

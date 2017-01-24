@@ -2,13 +2,13 @@
 title: 使用 Powershell 设置 VNET 中的静态 IP
 description: 本页介绍如何使用 PowerShell 来使用静态 IP。
 services: virtual network
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-network-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/01/2016
 ---
 

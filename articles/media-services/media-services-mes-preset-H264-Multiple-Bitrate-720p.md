@@ -3,9 +3,9 @@ title: H264 多比特率 720p | Azure
 description: 本主题概述了 **H264 多比特率 720p** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 10dfad38-2112-42ab-b99b-8f74a94513c3
 ms.service: media-services

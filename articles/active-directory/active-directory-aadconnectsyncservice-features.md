@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步服务功能和配置 | Azure
 description: 介绍 Azure AD Connect 同步服务的服务端功能。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

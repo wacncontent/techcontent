@@ -2,10 +2,10 @@
 title: 在经典管理门户中创建 VM | Azure
 description: 在 Azure 经典管理门户中创建 Windows 虚拟机。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 1871f823-ebd7-4eff-9a22-8e2411555595

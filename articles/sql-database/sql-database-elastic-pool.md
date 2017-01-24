@@ -3,7 +3,7 @@ title: 什么是 Azure 弹性池？ | Azure
 description: 使用池管理成百上千个数据库。可通过池分发一组性能单位的价格。可随心所欲地移入或移出数据库。
 keywords: 弹性数据库, sql 数据库
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
 editor: cgronlun

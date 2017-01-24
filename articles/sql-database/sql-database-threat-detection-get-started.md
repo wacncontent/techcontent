@@ -2,7 +2,7 @@
 title: SQL 数据库威胁检测入门
 description: 如何开始在 Azure 门户预览中使用 SQL 数据库威胁检测
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: ronitr
 manager: jhubbard
 editor: v-romcal

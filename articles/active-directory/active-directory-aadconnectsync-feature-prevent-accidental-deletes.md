@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：防止意外删除 | Azure
 description: 本主题说明 Azure AD Connect 中的防止意外删除功能。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

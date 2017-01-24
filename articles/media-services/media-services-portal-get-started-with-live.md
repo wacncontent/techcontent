@@ -2,10 +2,10 @@
 title: 使用 Azure 经典管理门户创建从本地编码器接收多比特率实时流的频道 | Azure
 description: 本教程指导你完成实现基本媒体服务实时传送视频流应用程序的步骤，在该应用程序中，频道从本地实时编码器接收多比特率实时流。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: cenkdin
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

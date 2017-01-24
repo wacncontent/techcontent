@@ -2,10 +2,10 @@
 title: 泛型 LDAP 连接器 | Azure
 description: 本文介绍如何配置 Microsoft 的泛型 LDAP 连接器。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

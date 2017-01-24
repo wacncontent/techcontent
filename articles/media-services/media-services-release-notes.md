@@ -2,10 +2,10 @@
 title: 媒体服务发行说明 | Azure
 description: 媒体服务发行说明
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

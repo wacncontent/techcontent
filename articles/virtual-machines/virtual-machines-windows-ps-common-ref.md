@@ -2,7 +2,7 @@
 title: VM 的常用 PowerShell 命令 | Azure
 description: 可用于在 Windows 设备上的 Azure 中创建和管理 VM 的常用 PowerShell 命令
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: davidmu1
 manager: timlt
 editor: tysonn

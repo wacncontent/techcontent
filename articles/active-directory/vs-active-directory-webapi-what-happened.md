@@ -2,10 +2,10 @@
 title: 我的 WebApi 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况 | Azure
 description: 描述当你使用 Visual Studio 连接到 Azure AD 时，你的 MVC 项目 WebApi 会发生什么情况
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 57630aee-26a2-4326-9dbb-ea2a66daa8b0
 ms.service: active-directory

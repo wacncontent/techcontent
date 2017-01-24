@@ -5,7 +5,7 @@ services: expressroute
 documentationCenter: na
 authors: cherylmc
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: expressroute

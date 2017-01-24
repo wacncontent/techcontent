@@ -2,10 +2,10 @@
 title: 如何开始使用 Azure AD
 description: 介绍如何注册 Azure，以及尝试使用 Azure AD 之前所要完成的最先几个步骤。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.date: 05/16/2016

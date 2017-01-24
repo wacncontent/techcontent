@@ -2,10 +2,10 @@
 title: 从通用 VHD 创建 VM | Azure
 description: 了解如何在 Resource Manager 部署模型中，使用 Azure PowerShell 从通用 VHD 映像创建 Windows 虚拟机。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

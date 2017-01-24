@@ -2,10 +2,10 @@
 title: 还原已启用延伸的数据库 | Azure
 description: 了解如何还原已启用延伸的数据库。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

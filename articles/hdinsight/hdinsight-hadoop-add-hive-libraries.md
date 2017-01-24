@@ -2,7 +2,7 @@
 title: 在 HDInsight 群集创建过程中添加 Hive 库 | Azure
 description: 了解如何在群集创建过程中将 Hive 库（jar 文件）添加到 HDInsight 群集。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

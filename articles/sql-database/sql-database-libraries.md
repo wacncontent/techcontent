@@ -2,7 +2,7 @@
 title: 用于 SQL 数据库和 SQL Server 的连接库
 description: 列出每个客户端程序可以用来连接到 Azure SQL 数据库或 Microsoft SQL Server 的驱动程序的最低版本号。提供一个链接，通过它可查看由社区而不是 Microsoft 发布的驱动程序的版本信息。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: MightyPen
 manager: jhubbard
 editor: genemi

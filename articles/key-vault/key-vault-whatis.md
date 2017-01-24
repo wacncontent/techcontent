@@ -2,7 +2,7 @@
 title: 什么是 Azure 密钥保管库？| Azure
 description: Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密钥和机密。通过 Azure 密钥保管库，客户可以使用受硬件安全模块 (HSM) 保护的密钥，来加密密钥和机密（例如身份验证密钥、存储帐户密钥、数据加密密钥、.PFX 文件和密码）。
 services: key-vault
-documentationCenter: 
+documentationCenter: ''
 authors: cabailey
 manager: mbaldwin
 tags: azure-resource-manager
@@ -45,7 +45,7 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 
 然后，此管理员将为开发人员提供可从其应用程序调用的 URI，并为其安全管理员提供密钥用法日志记录信息。
 
-    ![Azure 密钥保管库概述][1]
+   ![Azure 密钥保管库概述][1]
 
 开发人员还可通过使用 API 直接管理密钥。有关详细信息，请参阅[密钥保管库开发人员指南](./key-vault-developers-guide.md)。
 

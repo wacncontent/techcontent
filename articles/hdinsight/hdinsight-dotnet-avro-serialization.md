@@ -2,7 +2,7 @@
 title: 使用 Microsoft Avro Library 序列化数据 | Azure
 description: 了解 Azure HDInsight 如何使用 Avro 来序列化大数据。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

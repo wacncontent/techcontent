@@ -3,7 +3,7 @@ title: 为 Azure 准备 Oracle Linux 虚拟机
 description: 逐步完成在 Azure 中配置运行 Linux 的 Oracle 虚拟机。
 services: virtual-machines-linux
 authors: bbenz
-documentationCenter: 
+documentationCenter: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-linux

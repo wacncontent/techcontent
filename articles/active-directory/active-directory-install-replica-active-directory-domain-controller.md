@@ -2,10 +2,10 @@
 title: 在 Azure 上安装副本 Active Directory 域控制器 | Azure
 description: 本教程说明如何从 Azure 虚拟机上的本地 Active Directory 林安装域控制器。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: virtual-network
 ms.workload: identity

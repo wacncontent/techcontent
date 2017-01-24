@@ -2,11 +2,11 @@
 title: 通过配置 SSHD 禁用 Linux VM 上的 SSH 密码 | Azure
 description: 通过禁用 SSH 的密码登录来保护 Azure 上的 Linux VM。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.assetid: 46137640-a7d2-40e5-a1e9-9effef7eb190
 ms.service: virtual-machines-linux

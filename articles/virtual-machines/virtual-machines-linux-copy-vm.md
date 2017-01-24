@@ -2,7 +2,7 @@
 title: 创建 Azure Linux VM 的副本 | Azure
 description: 了解如何在 Resource Manager 部署模型中创建 Azure Linux 虚拟机的副本
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 tags: azure-resource-manager

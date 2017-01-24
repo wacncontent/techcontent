@@ -4,7 +4,7 @@ description: 了解如何将 Hadoop 作业提交到 Azure HDInsight Hadoop。
 editor: cgronlun
 manager: paulettm
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 

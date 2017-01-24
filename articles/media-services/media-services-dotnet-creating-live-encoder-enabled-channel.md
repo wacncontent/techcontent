@@ -2,10 +2,10 @@
 title: 如何使用 Azure 媒体服务执行实时流式处理以通过 .NET 创建多比特率流
 description: 本教程将指导你使用 .NET SDK 完成创建通道的步骤，该通道接收单比特率实时流，并将其编码为多比特率流。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: anilmur
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

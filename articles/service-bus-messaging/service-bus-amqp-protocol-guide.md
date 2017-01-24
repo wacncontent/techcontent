@@ -5,7 +5,7 @@ services: service-bus,event-hubs
 documentationCenter: .net
 authors: clemensv
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 07/01/2016

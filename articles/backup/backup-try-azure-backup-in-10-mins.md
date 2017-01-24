@@ -2,10 +2,10 @@
 title: 了解如何将文件和文件夹从 Windows 备份到 Azure | Azure
 description: 了解如何通过创建保管库、安装备份代理，并将文件和文件夹备份到 Azure，来备份 Windows Server 数据。
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: Jim-Parker
 manager: jwhit
-editor: 
+editor: ''
 keywords: 如何备份;怎样备份
 
 ms.service: backup

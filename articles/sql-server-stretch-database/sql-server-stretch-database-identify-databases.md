@@ -2,7 +2,7 @@
 title: 通过运行SQL Server Stretch Database顾问来识别符合SQL Server Stretch Database条件的数据库和表 | Azure
 description: 了解如何识别符合SQL Server Stretch Database条件的数据库和表。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglasl
 manager: jhubbard
 editor: monicar

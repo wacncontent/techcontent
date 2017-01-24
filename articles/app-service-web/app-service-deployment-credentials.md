@@ -2,7 +2,7 @@
 title: Azure App Service 部署凭据 | Azure
 description: 了解如何使用 Azure App Service 部署凭据。
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: dariagrigoriu
 manager: wpickett
 editor: mollybos

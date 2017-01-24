@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体服务实时传送视频流概述 | Azure
 description: 本主题概述了如何使用 Azure 媒体服务实时传送视频流。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: fb63502e-914d-4c1f-853c-4a7831bb08e8
 ms.service: media-services

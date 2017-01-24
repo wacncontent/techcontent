@@ -2,7 +2,7 @@
 title: 使用 HDInsight 进行脚本操作开发 | Azure
 description: 了解如何使用脚本操作自定义 Hadoop 群集。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

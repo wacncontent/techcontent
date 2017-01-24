@@ -2,7 +2,7 @@
 title: 将 Java 用户定义函数 (UDF) 与 HDInsight 中的 Hive 配合使用 |Azure
 description: 了解如何在 HDInsight 的 Hive 中创建并使用 Java 用户定义函数 (UDF)。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: jhubbard
 editor: cgronlun

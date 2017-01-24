@@ -2,10 +2,10 @@
 title: 使用 .NET 监视作业进度
 description: 了解如何使用事件处理程序代码来跟踪作业进度并发送状态更新。代码示例用 C# 编写，并使用用于 .NET 的媒体服务 SDK。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -3,7 +3,7 @@ title: 使用 PowerShell 设置新的 SQL 数据库 | Azure
 description: 了解如何使用 PowerShell 创建 SQL 数据库。可以通过 PowerShell cmdlet 管理常见的数据库设置任务。
 keywords: 新建 sql 数据库, 数据库设置
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
 editor: cgronlun

@@ -2,10 +2,10 @@
 title: 扩展 Azure SQL 数据库 | Azure
 description: 软件即服务 (SaaS) 开发人员可以使用这些工具轻松地在云中创建可缩放的弹性数据库
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: ddove
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: sql-database

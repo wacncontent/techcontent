@@ -2,7 +2,7 @@
 title: 将 Apache Storm 与 Power BI 配合使用 | Azure
 description: 使用 HDInsight 中 Apache Storm 群集上运行的 C# 拓扑中的数据创建 Power BI 报表。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

@@ -2,7 +2,7 @@
 title: 使用 Resource Manager 执行审核操作 | Azure
 description: 使用 Resource Manager 中的活动日志查看用户操作和错误。显示 Azure 门户预览、PowerShell、Azure CLI 和 REST。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

@@ -2,13 +2,13 @@
 title: 在 Azure Linux 虚拟机上快速搭建单机版 LAMP 网站
 description: 了解如何在 Azure Linux 虚拟机上快速搭建单机版 LAMP 网站
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 07/12/2016
 ---
 

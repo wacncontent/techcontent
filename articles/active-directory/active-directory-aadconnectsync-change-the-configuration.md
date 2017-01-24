@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：如何更改默认配置 | Azure
 description: 介绍如何对 Azure AD Connect 同步中的配置进行更改。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

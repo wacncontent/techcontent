@@ -2,10 +2,10 @@
 title: Azure SQL 数据库中的临时表入门 | Azure
 description: 了解如何开始使用 Azure SQL 数据库中的临时表。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

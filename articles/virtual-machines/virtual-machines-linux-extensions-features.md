@@ -4,10 +4,10 @@
 title: 适用于 Linux 的虚拟机扩展和功能 | Azure
 description: 了解可为 Azure 虚拟机提供的扩展，这些虚拟机扩展按它们提供或改进的功能进行分组。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: neilpeterson
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.assetid: 52f5d0ec-8f75-49e7-9e15-88d46b420e63

@@ -2,10 +2,10 @@
 title: 如何使用 Azure blob storage 在浏览器中实现对媒体文件拖拽点播
 description: 如何使用 Azure blob storage 在浏览器中实现对媒体文件拖拽点播。
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: blob存储,媒体文件,拖拽点播,Progressive Download
 
 ms.service: storage-aog

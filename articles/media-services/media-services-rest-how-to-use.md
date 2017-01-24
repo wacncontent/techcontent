@@ -2,10 +2,10 @@
 title: 媒体服务操作 REST API 概述 | Azure
 description: 媒体服务 REST API 概述
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: a5f1c5e7-ec52-4e26-9a44-d9ea699f68d9
 ms.service: media-services

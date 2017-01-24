@@ -2,10 +2,10 @@
 title: 使用 Load Balancer,Corosync,Pacemaker 搭建 Linux 高可用集群
 description: 使用 LB-corosync-pacemaker 搭建 Linux 高可用集群的详细步骤与测试 
 services: virtual-machines
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Azure VM,HA,Azure LB,DRBD,MariaDB,Corosync,Pacemaker,PowerShell
 
 ms.service: virtual-machines-linux-aog

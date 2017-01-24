@@ -2,10 +2,10 @@
 title: 开始使用 Azure Active Directory 和 Visual Studio 连接服务（WebApi 项目）| Azure
 description: 通过 Visual Studio 连接服务连接到或创建 Azure AD 之后，如何在 WebApi 项目中开始使用 Azure Active Directory
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: bf1eb32d-25cd-4abf-8679-2ead299fedaa
 ms.service: active-directory

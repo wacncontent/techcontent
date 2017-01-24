@@ -1,12 +1,12 @@
 ---
 title: 在第一个 Windows VM 上安装 IIS | Azure
 description: 通过使用 Azure 门户预览安装 IIS 并打开端口 80，体验第一个 Windows 虚拟机。
-keywords: 
+keywords: ''
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

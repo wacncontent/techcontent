@@ -2,7 +2,7 @@
 title: Azure 多重身份验证常见问题
 description: 提供与 Azure 多重身份验证相关的常见问题与解答列表。Azure 多重身份验证是要求使用多种方式（而不仅仅是用户名和密码）来验证用户身份的一种方法。它为用户登录和事务提供了额外的安全层。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtand

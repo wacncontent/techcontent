@@ -5,8 +5,8 @@ keywords: robomongo
 services: documentdb
 author: AndrewHoh
 manager: jhubbard
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 
 ms.assetid: 352c5fb9-8772-4c5f-87ac-74885e63ecac
 ms.service: documentdb

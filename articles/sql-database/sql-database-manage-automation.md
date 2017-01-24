@@ -2,7 +2,7 @@
 title: 使用 Azure 自动化管理 Azure SQL 数据库 | Azure
 description: 了解如何使用 Azure 自动化服务来方便管理 Azure SQL 数据库。
 services: sql-database, automation
-documentationCenter: 
+documentationCenter: ''
 authors: jodoglevy
 manager: jhubbard
 editor: monicar

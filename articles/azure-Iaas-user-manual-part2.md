@@ -2,13 +2,13 @@
 title: Azure IaaS 用户手册 - 第二部分 | Azure
 description: 详细介绍如何创建和管理 Azure 虚拟机。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: Lei Zhang
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: virtual-machines-windows
-ms.date: 
+ms.date: ''
 wacn.date: 09/27/2016
 ---
 

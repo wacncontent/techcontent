@@ -2,10 +2,10 @@
 title: 在 Azure 经典管理门户中创建 CDN 终结点失败
 description: 在 Azure 经典管理门户中创建 CDN 终结点时，出现无提示或 CDN 终结点创建失败
 services: cdn
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: cdn,IPC number, contoso
 
 ms.service: cdn-aog

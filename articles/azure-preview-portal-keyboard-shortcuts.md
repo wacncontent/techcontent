@@ -2,10 +2,10 @@
 title: Azure 经典管理门户快捷键 | Azure
 description: 本文始终列出可在整个 Azure 经典管理门户中使用的最新快捷键。单个服务可能有其自身的专用快捷键。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.date: 12/01/2015

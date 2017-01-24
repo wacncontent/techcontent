@@ -2,7 +2,7 @@
 title: 在 HDInsight 中预配自定义 Hadoop 群集 | Azure
 description: 了解如何通过使用 Azure 经典管理门户、Azure PowerShell、命令行或 .NET SDK 预配自定义的 Azure HDInsight 群集。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: mumian
 manager: paulettm
 editor: cgronlun

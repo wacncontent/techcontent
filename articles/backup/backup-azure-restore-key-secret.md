@@ -2,10 +2,10 @@
 title: 使用 Azure 备份还原已加密 VM 的密钥保管库密钥和机密 | Azure
 description: 了解如何使用 PowerShell 在 Azure 备份中还原密钥保管库密钥和机密
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: JPallavi
 manager: vijayts
-editor: 
+editor: ''
 
 ms.assetid: 45214083-d5fc-4eb3-a367-0239dc59e0f6
 ms.service: backup

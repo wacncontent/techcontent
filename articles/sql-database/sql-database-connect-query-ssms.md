@@ -1,13 +1,13 @@
 ---
 title: 连接到 SQL 数据库 - SQL Server Management Studio | Azure
 description: 了解如何通过使用 SQL Server Management Studio (SSMS) 连接到在 Azure 上的 SQL 数据库。然后，使用 Transact-SQL (T-SQL) 运行示例查询。
-metaCanonical: 
+metaCanonical: ''
 keywords: 连接到 sql 数据库, sql server management studio
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

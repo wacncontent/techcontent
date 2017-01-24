@@ -2,10 +2,10 @@
 title: 在迁移到 SQL 数据库之前使用 SQL Server Managment Studio 修复 SQL Server 数据库的兼容性问题 | Azure
 description: Azure SQL 数据库, 数据库迁移, 兼容性, SQL Azure 迁移向导
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 5f7d3544-b07e-415a-a2ae-96e49bf5d756
 ms.service: sql-database

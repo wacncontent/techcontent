@@ -2,10 +2,10 @@
 title: 将 Elemental Live 编码器配置为发送单比特率实时流
 description: 本主题说明了如何配置 Elemental Live 编码器，以便将单比特率流发送到 AMS 频道进行实时编码。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: cenkdin
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

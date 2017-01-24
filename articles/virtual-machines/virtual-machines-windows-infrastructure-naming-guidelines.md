@@ -1,11 +1,11 @@
 ---
 title: 基础结构命名准则 | Azure
 description: 了解在 Azure 基础结构服务中进行命名的关键设计和实施准则。
-documentationCenter: 
+documentationCenter: ''
 services: virtual-machines-windows
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

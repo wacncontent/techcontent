@@ -2,10 +2,10 @@
 title: Azure AD v2.0 令牌参考 | Azure
 description: v2.0 终结点发出的令牌和声明类型
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

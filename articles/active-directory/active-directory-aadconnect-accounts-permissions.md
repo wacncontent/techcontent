@@ -2,10 +2,10 @@
 title: Azure AD Connect：帐户和权限 | Azure
 description: 本主题介绍使用和创建的帐户以及所需的权限。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: b93e595b-354a-479d-85ec-a95553dd9cc2
 ms.service: active-directory

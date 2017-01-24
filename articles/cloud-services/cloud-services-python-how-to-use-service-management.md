@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: python
 authors: lmazuel
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

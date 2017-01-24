@@ -2,10 +2,10 @@
 title: 适用于 C 语言的 Azure IoT 设备 SDK - 序列化程序 | Azure
 description: 如何使用 Azure IoT 设备 SDK 中面向 C 语言的序列化程序库创建与 IoT 中心通信的设备应用。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: olivierbloch
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: defbed34-de73-429c-8592-cd863a38e4dd
 ms.service: iot-hub

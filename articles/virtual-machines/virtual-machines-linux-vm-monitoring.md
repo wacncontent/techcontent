@@ -5,7 +5,7 @@ services: virtual-machines-linux
 documentationCenter: virtual-machines
 authors: kmouss
 manager: drewm
-editor: 
+editor: ''
 
 ms.service: virtual-machines-linux
 ms.devlang: NA

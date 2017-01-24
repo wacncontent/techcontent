@@ -2,10 +2,10 @@
 title: 资源管理器中的经典终结点概述 | Azure
 description: 了解现在如何在资源管理器中使用网络安全组和 ACL 规则实施经典部署模型中的终结点
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

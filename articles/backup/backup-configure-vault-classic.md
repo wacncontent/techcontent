@@ -2,10 +2,10 @@
 title: 使用经典部署模型将 Windows Server 或客户端备份到 Azure | Azure
 description: 通过创建备份保管库、下载凭据、安装备份代理并完成文件和文件夹的初始备份，将 Windows 服务器或客户端备份到 Azure。
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: markgalioto
 manager: cfreeman
-editor: 
+editor: ''
 keywords: 备份保管库; 备份 Windows 服务器; 备份 windows;
 
 ms.service: backup

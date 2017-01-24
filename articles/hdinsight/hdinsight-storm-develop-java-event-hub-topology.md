@@ -2,7 +2,7 @@
 title: 配合 Java 使用 Storm on HDInsight 从事件中心处理事件 | Azure
 description: 了解如何使用通过 Maven 创建的 Java Storm 拓扑处理事件中心数据。
 services: hdinsight,notification hubs
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

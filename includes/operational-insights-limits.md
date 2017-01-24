@@ -5,7 +5,7 @@ services: operational-insights
 documentationCenter: NA
 authors: bandersmsft
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: operational-insights
 ms.date: 07/01/2015

@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：理解和自定义同步 | Azure
 description: 介绍 Azure AD Connect 同步的工作原理以及如何自定义。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: ee4bf802-045b-4da0-986e-90aba2de58d6
 ms.service: active-directory

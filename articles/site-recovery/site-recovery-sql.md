@@ -2,10 +2,10 @@
 title: 使用 SQL Server 灾难恢复和 Azure Site Recovery 来保护 SQL Server | Azure
 description: 本文介绍如何使用 Azure Site Recovery 的 SQL Server 灾难功能来复制 SQL Server。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: 9126f5e8-e9ed-4c31-b6b4-bf969c12c184
 ms.service: site-recovery

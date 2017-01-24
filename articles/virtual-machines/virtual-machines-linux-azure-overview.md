@@ -5,7 +5,7 @@ services: virtual-machines-linux
 documentationCenter: virtual-machines-linux
 authors: vlivech
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-linux
 ms.devlang: NA

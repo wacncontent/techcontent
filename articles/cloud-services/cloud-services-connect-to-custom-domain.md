@@ -2,10 +2,10 @@
 title: 将云服务连接到自定义域控制器 | Azure
 description: 了解如何使用 Powershell 和 AD 域扩展将 Web/辅助角色连接到自定义 AD 域
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

@@ -2,10 +2,10 @@
 title: 使用 PowerShell 备份和还原应用服务应用
 description: 了解如何使用 PowerShell 在 Azure 应用服务中备份和还原应用
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: NKing92
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

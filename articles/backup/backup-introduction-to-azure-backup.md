@@ -2,7 +2,7 @@
 title: 什么是 Azure 备份？| Azure
 description: 使用 Azure 备份和恢复服务，你可以从 Windows 服务器、Windows 客户端计算机、System Center DPM 服务器和 Azure 虚拟机备份和还原数据与应用程序。
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: markgalioto
 manager: cfreeman
 editor: tysonn

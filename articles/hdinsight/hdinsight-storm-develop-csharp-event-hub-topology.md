@@ -2,7 +2,7 @@
 title: 使用 Storm on HDInsight 处理事件中心的事件 | Azure
 description: 了解如何使用在 Visual Studio 中通过用于 Visual Studio 的 HDInsight 工具创建的 C# Storm 拓扑处理事件中心数据。
 services: hdinsight,notification hubs
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun

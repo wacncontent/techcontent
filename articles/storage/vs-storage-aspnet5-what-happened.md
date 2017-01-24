@@ -2,10 +2,10 @@
 title: 我的 ASP.NET 5 项目（Visual Studio 连接服务）发生了什么情况？| Azure
 description: 介绍在 Visual Studio ASP.NET 5 项目中使用 Visual Studio 连接服务连接到 Azure 存储帐户后会发生什么情况
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: e7caa9fa-c780-45eb-a546-299fc1c68455
 ms.service: storage

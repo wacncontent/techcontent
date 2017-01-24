@@ -2,10 +2,10 @@
 title: 在 Windows上使用 PHP 连接到 SQL 数据库 | Azure
 description: 演示了一个示例 PHP 程序，该程序可以从 Windows 客户端连接到 Azure SQL 数据库，并与客户端所需的软件组件建立链接。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: meet-bhagdev
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: drivers

@@ -2,10 +2,10 @@
 title: 初步了解：使用备份保管库保护 Azure VM | Azure
 description: 使用备份保管库保护 Azure VM。本教程介绍如何在 Azure 中创建保管库、注册 VM、创建策略和保护 VM。
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: markgalioto
 manager: cfreeman
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

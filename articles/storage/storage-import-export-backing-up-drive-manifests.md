@@ -5,7 +5,7 @@ author: renashahmsft
 manager: aungoo
 editor: tysonn
 services: storage
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 594abd80-b834-4077-a474-d8a0f4b7928a
 ms.service: storage

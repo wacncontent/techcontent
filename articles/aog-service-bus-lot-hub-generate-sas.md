@@ -1,14 +1,14 @@
 ---
 title: 如何为 Azure Service Bus 和 Azure IoT Hub 生成 SharedAccessSignature
 description: 如何为 Azure Service Bus 和 Azure IoT Hub 生成 SharedAccessSignature
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: service-bus-aog
-ms.date: 
+ms.date: ''
 wacn.date: 12/05/2016
 ---
 

@@ -2,7 +2,7 @@
 title: DocumentDB 门户问题故障排除 | Azure
 description: 找出并解决 DocumentDB Azure 门户预览中的问题。
 services: documentdb
-documentationCenter: 
+documentationCenter: ''
 authors: mimig1
 manager: jhubbard
 editor: monicar

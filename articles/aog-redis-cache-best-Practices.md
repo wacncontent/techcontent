@@ -2,13 +2,13 @@
 title: Azure Redis 最佳实践
 description: Azure Redis 最佳实践
 services: redis-cache
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: redis-cache-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/31/2016
 ---
 

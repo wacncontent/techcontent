@@ -3,7 +3,7 @@ title: Azure 仪表板共享和访问控制 | Azure
 description: 了解如何管理 Azure 仪表板的共享和访问控制。
 services: azure-resource-manager,azure-portal
 keywords: 门户,共享,访问
-documentationCenter: 
+documentationCenter: ''
 authors: adamabdelhamed
 manager: dend
 editor: dend

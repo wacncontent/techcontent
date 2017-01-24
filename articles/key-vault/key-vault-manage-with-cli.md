@@ -2,7 +2,7 @@
 title: 使用 CLI 管理密钥保管库 | Azure
 description: 使用本教程通过 CLI 自动执行密钥保管库中的常见任务
 services: key-vault
-documentationCenter: 
+documentationCenter: ''
 authors: BrucePerlerMS
 manager: mbaldwin
 tags: azure-resource-manager

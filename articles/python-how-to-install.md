@@ -1,11 +1,11 @@
 ---
 title: 安装 Python 和 SDK - Azure
 description: 了解如何安装 Python 和 SDK 以与 Azure 一起使用。
-services: 
+services: ''
 documentationCenter: python
 authors: lmazuel
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

@@ -2,10 +2,10 @@
 title: 已知网络 | Azure
 description: 配置已知网络后，你可以避免将你组织拥有的 IP 地址包含在“从多个地理区域登录”和“从具有可疑活动的 IP 地址登录”报告中。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

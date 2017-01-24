@@ -1,11 +1,11 @@
 ---
 title: Azure Toolkit for Eclipse 的新增功能
 description: 了解 Azure Toolkit for Eclipse 中的最新功能。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

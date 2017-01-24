@@ -2,10 +2,10 @@
 title: 从 DirSync 和 Azure AD Sync 升级 | Azure
 description: 介绍如何从 DirSync 和 Azure AD Sync 升级到 Azure AD Connect。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

@@ -2,10 +2,10 @@
 title: 弹性数据库工具词汇表 | Azure
 description: 用于弹性数据库工具的术语的说明
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 manager: jhubbard
 author: ddove
-editor: 
+editor: ''
 
 ms.assetid: a23a4e81-6706-452d-afc1-a550e5e47af9
 ms.service: sql-database

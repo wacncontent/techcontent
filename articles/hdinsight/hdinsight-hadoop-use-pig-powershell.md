@@ -2,7 +2,7 @@
 title: 在 HDInsight 中将 Hadoop Pig 与 PowerShell 配合使用 | Azure
 description: 了解如何使用 Azure PowerShell 将 Pig 作业提交到 HDInsight 上的 Hadoop 群集。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

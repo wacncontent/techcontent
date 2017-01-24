@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：有关更改默认配置的最佳实践 | Azure
 description: 提供有关更改 Azure AD Connect 同步默认配置的最佳实践。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

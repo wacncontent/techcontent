@@ -2,10 +2,10 @@
 title: Azure IoT 中心与 Azure 事件中心的比较 | Azure
 description: 比较 IoT 中心与事件中心这两个 Azure服务，重点介绍功能差异和用例。比较内容包括支持的协议、设备管理、监视和文件上传。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: fsautomata
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: aeddea62-8302-48e2-9aad-c5a0e5f5abe9
 ms.service: iot-hub

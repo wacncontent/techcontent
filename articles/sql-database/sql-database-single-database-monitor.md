@@ -3,10 +3,10 @@ title: 在 Azure SQL 数据库中监视数据库性能 | Azure
 description: 了解使用 Azure 工具和动态管理视图监视数据库时可用的选项。
 keywords: 数据库监视,云数据库性能
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: na

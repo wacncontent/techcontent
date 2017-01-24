@@ -4,8 +4,8 @@ description: 概述 Resource Manager .NET SDK 身份验证和用例
 services: azure-resource-manager
 documentationCenter: na
 authors: navalev
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: azure-resource-manager
 ms.date: 06/21/2016

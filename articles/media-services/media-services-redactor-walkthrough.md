@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体分析进行面部修订演练 | Azure
 description: 本主题提供分步指导，引导用户使用 Azure 媒体服务资源管理器 (AMSE) 和 Azure Media Redactor Visualizer（开源工具）运行完整修正工作流。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Lichard
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: d6fa21b8-d80a-41b7-80c1-ff1761bc68f2
 ms.service: media-services

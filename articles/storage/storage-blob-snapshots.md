@@ -2,7 +2,7 @@
 title: 创建 blob 的只读快照 | Azure
 description: 了解如何在指定时刻及时创建 blob 的快照以备份 blob 数据。了解如何对快照计费，以及如何使用快照最大程度地减少容量费用。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: mmacy
 manager: timlt
 editor: tysonn

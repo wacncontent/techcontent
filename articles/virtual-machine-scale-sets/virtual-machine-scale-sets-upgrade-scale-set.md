@@ -2,10 +2,10 @@
 title: 在虚拟机规模集上部署应用 | Azure
 description: 在虚拟机规模集上部署应用
 services: virtual-machine-scale-sets
-documentationCenter: 
+documentationCenter: ''
 authors: gbowerman
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machine-scale-sets

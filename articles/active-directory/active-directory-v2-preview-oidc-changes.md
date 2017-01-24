@@ -2,10 +2,10 @@
 title: Azure AD v2.0 终结点的更改 | Azure
 description: 介绍了要对应用模型 v2.0 公共预览协议进行的更改。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

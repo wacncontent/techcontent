@@ -5,7 +5,7 @@ services: app-service\web
 documentationCenter: .net
 authors: Rick-Anderson
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: na

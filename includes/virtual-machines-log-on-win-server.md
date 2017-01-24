@@ -2,7 +2,7 @@
 services: virtual-machines
 title: How to Log on to a Virtual Machine Running Windows Server
 authors: cynthn
-solutions: 
+solutions: ''
 manager: timlt
 editor: tysonn
 ---

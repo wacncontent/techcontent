@@ -2,10 +2,10 @@
 title: 如何为高级 Azure Redis 缓存配置虚拟网络支持 | Azure
 description: 了解如何为高级层 Azure Redis 缓存实例创建和管理虚拟网络支持
 services: redis-cache
-documentationcenter: 
+documentationcenter: ''
 author: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 8b1e43a0-a70e-41e6-8994-0ac246d8bf7f
 ms.service: cache

@@ -2,10 +2,10 @@
 title: 在 JavaScript 后端移动服务中对用户进行服务端授权 | Microsoft Azure
 description: 了解如何在 Azure 移动服务的 JavaScript 后端对用户授权。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: krisragh
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

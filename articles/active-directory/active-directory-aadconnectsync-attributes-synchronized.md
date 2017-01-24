@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：与 Azure Active Directory 同步的属性 | Azure
 description: 列出同步到 Azure Active Directory 的属性。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

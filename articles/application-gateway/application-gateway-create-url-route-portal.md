@@ -5,7 +5,7 @@ services: application-gateway
 documentationCenter: na
 authors: georgewallace
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: application-gateway

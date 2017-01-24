@@ -2,10 +2,10 @@
 title: Hyperlapse 媒体文件与 Azure Media Hyperlapse
 description: Azure Media Hyperlapse 可以使用第一人称视角或运动相机内容创建流畅缩时视频。本主题说明如何使用 Media Indexer。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: asolanki
 manager: johndeu
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

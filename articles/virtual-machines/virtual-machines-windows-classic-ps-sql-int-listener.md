@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationcenter: na
 author: MikeRayMSFT
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 291288a0-740b-4cfa-af62-053218beba77

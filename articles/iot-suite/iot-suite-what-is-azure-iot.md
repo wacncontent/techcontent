@@ -1,12 +1,12 @@
 ---
 title: 面向物联网的 Azure 解决方案 | Azure
 description: Azure 的 IoT 概述包括预配置的解决方案、一个示例解决方案体系结构以及它如何与 Azure IoT 套件关联
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

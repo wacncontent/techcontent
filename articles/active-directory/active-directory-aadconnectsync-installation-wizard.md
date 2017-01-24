@@ -3,10 +3,10 @@ title: Azure AD Connect 同步：第二次运行安装向导 | Azure
 description: 介绍安装向导第二次运行时的工作原理。
 keywords: Azure AD Connect 安装向导允许你在第二次运行它时配置维护设置
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

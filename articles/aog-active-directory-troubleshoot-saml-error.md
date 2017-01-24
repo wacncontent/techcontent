@@ -2,11 +2,11 @@
 title: 通过 Azure AD SAML 协议登录应用报错相关解决方案
 description: 通过 Azure AD SAML 协议登录应用报错相关解决方案。
 services: active-directory
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: active-directory-aog
 ms.date: 10/27/2016

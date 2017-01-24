@@ -2,7 +2,7 @@
 title: Azure 自动化安全性 | Azure
 description: 本文概述了 Azure 自动化中自动化帐户的自动化安全性以及可供使用的不同身份验证方法。
 services: automation
-documentationcenter: 
+documentationcenter: ''
 author: MGoedtel
 manager: jwhit
 editor: tysonn

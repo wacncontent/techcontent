@@ -1,11 +1,11 @@
 ---
 title: 在 Eclipse 中为 Azure 部署启用远程访问
 description: 了解如何使用 Azure Toolkit for Eclipse 为 Azure 部署启用远程访问。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

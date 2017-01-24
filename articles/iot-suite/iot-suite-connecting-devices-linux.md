@@ -1,12 +1,12 @@
 ---
 title: 在 Linux 上使用 C 连接设备 | Azure
 description: 介绍如何使用在 Linux 上运行的以 C 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。
-services: 
+services: ''
 suite: iot-suite
 documentationCenter: na
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

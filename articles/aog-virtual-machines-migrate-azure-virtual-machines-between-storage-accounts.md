@@ -2,13 +2,13 @@
 title: 存储账户之间转移虚拟机
 description: 存储账户之间转移虚拟机
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 12/05/2016
 ---
 

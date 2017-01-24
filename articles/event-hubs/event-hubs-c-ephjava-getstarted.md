@@ -2,10 +2,10 @@
 title: 通过 C 使用事件中心入门 | Azure
 description: 遵循本教程开始使用 Azure 事件中心，以便通过事件处理程序主机，使用 C 程序发送事件和使用 Java 程序接收事件。
 services: event-hubs
-documentationCenter: 
+documentationCenter: ''
 authors: jtaubensee
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: event-hubs
 ms.workload: na

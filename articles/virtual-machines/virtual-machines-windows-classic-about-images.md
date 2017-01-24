@@ -2,7 +2,7 @@
 title: 关于 Windows 虚拟机的映像 | Azure
 description: 了解如何对 Azure 中的 Windows 虚拟机使用映像。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

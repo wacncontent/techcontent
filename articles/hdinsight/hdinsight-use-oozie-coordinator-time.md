@@ -2,7 +2,7 @@
 title: 在 HDInsight 中使用基于时间的 Hadoop Oozie 协调器 | Azure
 description: 在 HDInsight 中使用基于时间的 Hadoop Oozie 协调器（大数据服务）。了解如何定义 Oozie 工作流和协调器，以及如何提交作业。
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: mumian
 manager: jhubbard

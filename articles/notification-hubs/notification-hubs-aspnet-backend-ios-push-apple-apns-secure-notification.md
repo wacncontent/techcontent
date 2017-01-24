@@ -4,7 +4,7 @@ description: 了解如何从 Azure 将安全推送通知发送到 iOS 应用。�
 documentationCenter: ios
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 services: notification-hubs
 
 ms.service: notification-hubs

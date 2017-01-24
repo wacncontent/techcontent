@@ -2,7 +2,7 @@
 title: Microsoft Azure Multi-Factor Authentication 用户状态
 description: 在 Azure MFA 中了解用户状态信息。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtand

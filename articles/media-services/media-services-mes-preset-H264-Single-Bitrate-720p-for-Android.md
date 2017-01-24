@@ -3,9 +3,9 @@ title: 适用于 Android 的 H264 单比特率 720p | Azure
 description: 本主题概述了 **适用于 Android 的 H264 单比特率 720p** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 4f9569a3-5aca-4fea-8242-024925a8af90
 ms.service: media-services

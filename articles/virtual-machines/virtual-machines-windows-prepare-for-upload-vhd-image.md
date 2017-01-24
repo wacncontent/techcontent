@@ -2,10 +2,10 @@
 title: 准备好要上载到 Azure 的 Windows VHD | Azure
 description: 将 Windows VHD 上载到 Azure 之前为其做好准备的建议做法
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: genlin
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

@@ -3,7 +3,7 @@ title: 内存不足 (OOM) 错误 - Hive 设置 | Azure
 description: 在 HDInsight 的 Hadoop 中解决运行 Hive 查询时内存不足 (OOM) 错误。客户方案为跨多个大型表运行查询。
 keywords: 内存不足错误, OOM, Hive 设置
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: rashimg
 manager: paulettm
 editor: cgronlun

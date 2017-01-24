@@ -3,10 +3,10 @@ title: SQL 数据库教程：创建 SQL 数据库 | Azure
 description: 了解如何设置 SQL 数据库逻辑服务器、服务器防火墙规则、SQL 数据库和示例数据。此外，了解如何使用客户端工具进行连接、配置用户，以及设置数据库防火墙规则。
 keywords: SQL 数据库教程, 创建 SQL 数据库
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

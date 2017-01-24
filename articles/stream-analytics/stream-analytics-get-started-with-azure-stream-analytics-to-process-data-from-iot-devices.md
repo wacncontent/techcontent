@@ -3,7 +3,7 @@ title: 开始使用 Azure 流分析处理来自 IoT 设备的数据 | Azure
 description: 带流分析和实时数据处理的 IoT 传感器标记和数据流
 keywords: iot 解决方案, iot 入门
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

@@ -3,11 +3,11 @@ title: SQL 数据库身份验证和授权：授予访问权限 | Azure
 description: 了解 SQL 数据库安全管理，特别是如何通过服务器级的主体帐户管理数据库的访问和登录安全。
 keywords: sql 数据库安全,数据库安全管理,登录安全,数据库安全,数据库访问权限
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: BYHAM
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: sql-database
 ms.devlang: na

@@ -2,10 +2,10 @@
 title: 使用 Azure 门户管理 IoT 中心 | Azure
 description: 概述如何通过 Azure 门户创建和管理 Azure IoT 中心
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: nasing
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.date: 08/11/2016

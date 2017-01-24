@@ -2,10 +2,10 @@
 title: 将 Azure SQL 数据库还原到过去的时间点（Azure 门户） | Azure
 description: 将 Azure SQL 数据库还原到过去的时间点。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: d1822905-a11f-4c42-8940-98c6b81aed20
 ms.service: sql-database

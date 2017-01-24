@@ -2,7 +2,7 @@
 title: 跨具有不同架构的云数据库进行查询 | Azure
 description: 如何在垂直分区上设置跨数据库查询
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: torsteng
 

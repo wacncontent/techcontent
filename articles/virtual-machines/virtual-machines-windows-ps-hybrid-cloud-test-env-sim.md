@@ -2,10 +2,10 @@
 title: 模拟的混合云测试环境 | Azure
 description: 使用两个 Azure 虚拟网络和 VNet 到 VNet 连接创建模拟的混合云环境，以便进行 IT 专业人员测试或开发测试。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: JoeDavies-MSFT
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

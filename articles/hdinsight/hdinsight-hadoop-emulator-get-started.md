@@ -6,7 +6,7 @@ editor: cgronlun
 manager: jhubbard
 services: hdinsight
 authors: nitinme
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 
 ms.service: hdinsight

@@ -2,10 +2,10 @@
 title: 使用 Azure CLI 创建 Linux VM | Azure
 description: 使用 Azure CLI 在 Azure 上为 NodeJs 创建 Linux VM。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: facb1115-2b4e-4ef3-9905-330e42beb686
 ms.service: virtual-machines-linux

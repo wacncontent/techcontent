@@ -1,11 +1,11 @@
 ---
 title: Azure 存储帐户列表
 description: 使用 Azure Toolkit for Eclipse 管理存储帐户设置
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

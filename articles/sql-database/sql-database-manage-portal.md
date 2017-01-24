@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览管理 Azure SQL 数据库
 description: 了解如何使用 Azure 门户预览管理云中的关系数据库。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

@@ -2,10 +2,10 @@
 title: SQL Server Stretch Database的管理和故障排除 | Azure
 description: 如何对SQL Server Stretch Database进行管理和故障排除。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

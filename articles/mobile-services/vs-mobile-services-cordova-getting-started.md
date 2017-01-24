@@ -2,10 +2,10 @@
 title: Cordova 移动服务项目（Visual Studio 连接服务）入门 | Microsoft Azure
 description: 描述使用 Visual Studio 连接服务将 Cordova 项目连接到 Azure 移动服务后可以执行的前几个步骤。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: mlhoop
 manager: douge
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

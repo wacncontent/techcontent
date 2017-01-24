@@ -2,10 +2,10 @@
 title: 角色的默认 TEMP 文件夹大小太小 | Azure
 description: 云服务角色的 TEMP 文件夹的空间有限。本文针对如何避免磁盘空间不足的问题提供了一些建议。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: simonxjx
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue
 
 ms.service: cloud-services

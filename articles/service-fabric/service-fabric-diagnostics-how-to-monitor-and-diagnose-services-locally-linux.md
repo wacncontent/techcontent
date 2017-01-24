@@ -5,7 +5,7 @@ services: service-fabric
 documentationcenter: .net
 author: mani-ramaswamy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 4eebe937-ab42-4429-93db-f35c26424321
 ms.service: service-fabric

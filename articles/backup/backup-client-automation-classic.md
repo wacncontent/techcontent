@@ -2,10 +2,10 @@
 title: 使用 PowerShell 部署和管理 Windows Server/客户端的备份 | Azure
 description: 了解如何使用 PowerShell 部署和管理 Azure 备份
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: saurabhsensharma
 manager: shivamg
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

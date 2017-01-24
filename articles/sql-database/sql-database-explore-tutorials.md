@@ -1,12 +1,12 @@
 ---
 title: 浏览 Azure SQL 数据库教程
 description: 了解 SQL 数据库的特性和功能
-keywords: 
+keywords: ''
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

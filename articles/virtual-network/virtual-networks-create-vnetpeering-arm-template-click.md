@@ -2,10 +2,10 @@
 title: 使用 Resource Manager 模板创建 VNet 对等互连 | Azure
 description: 了解如何在 Resource Manager 中使用模板创建虚拟网络。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: narayanannamalai
 manager: jefco
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-network

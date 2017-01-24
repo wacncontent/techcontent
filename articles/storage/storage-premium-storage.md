@@ -2,7 +2,7 @@
 title: 高级存储：适用于 Azure 虚拟机工作负荷的高性能存储 | Azure
 description: 高级存储为 Azure 虚拟机上运行的 I/O 密集型工作负荷提供高性能、低延迟的磁盘支持。Azure DS 系列 VM 支持高级存储。
 services: storage
-documentationCenter: 
+documentationCenter: ''
 authors: yuemlu
 manager: aungoo-msft
 editor: tysonn

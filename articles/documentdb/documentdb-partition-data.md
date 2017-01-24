@@ -5,7 +5,7 @@ services: documentdb
 author: arramac
 manager: jhubbard
 editor: monicar
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 702c39b4-1798-48dd-9993-4493a2f6df9e
 ms.service: documentdb

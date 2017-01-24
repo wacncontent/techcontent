@@ -2,10 +2,10 @@
 title: VM 上的程序打不开或侦听端口受阻 | Azure
 description: 如果无法启动或使用 Azure VM 上运行的程序，请使用以下步骤来隔离问题根源。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 keywords: 无法启动应用程序, 程序打不开, 侦听端口受阻, 无法启动程序, 侦听端口受阻
 

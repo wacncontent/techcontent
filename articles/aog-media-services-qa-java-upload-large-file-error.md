@@ -2,10 +2,10 @@
 title: 通过 Java 上传大文件到媒体服务账号报错
 description: Java 通过分片的方式上传大文件到媒体服务账号中
 services: media-services
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Azure,java,媒体服务,分片
 
 ms.service: media-services-aog

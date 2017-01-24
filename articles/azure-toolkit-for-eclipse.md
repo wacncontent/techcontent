@@ -2,11 +2,11 @@
 ---
 title: 适用于 Eclipse 的 Azure 工具包 | Azure
 description: 了解适用于 Eclipse 的 Azure 工具包。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

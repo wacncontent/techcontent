@@ -5,7 +5,7 @@ services: service-bus
 documentationCenter: .net
 authors: jtaubensee
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 08/23/2016

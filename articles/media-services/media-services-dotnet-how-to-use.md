@@ -2,10 +2,10 @@
 title: 如何设置计算机以使用 .NET 进行媒体服务开发
 description: 了解使用适用于 .NET 的媒体服务 SDK 进行媒体服务开发所要满足的先决条件。此外，了解如何创建 Visual Studio 应用程序。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: ec2804c7-c656-4fbf-b3e4-3f0f78599a7f
 ms.service: media-services

@@ -5,7 +5,7 @@ services: event-hubs
 documentationCenter: .net
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: event-hubs
 ms.date: 07/11/2016

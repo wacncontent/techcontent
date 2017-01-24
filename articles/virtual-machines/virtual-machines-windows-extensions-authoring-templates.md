@@ -4,10 +4,10 @@
 title: 使用 Windows VM 扩展创作模板 | Azure
 description: 详细了解如何为 Windows VM 使用扩展创建 Azure 资源管理器模板
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: kundanap
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

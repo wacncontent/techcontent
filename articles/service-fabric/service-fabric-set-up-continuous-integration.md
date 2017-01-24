@@ -5,7 +5,7 @@ services: service-fabric
 documentationCenter: na
 authors: mthalman-msft
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.devlang: dotnet

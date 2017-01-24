@@ -2,10 +2,10 @@
 title: 使用 Azure 自动化管理 Azure 存储
 description: 了解如何使用 Azure 自动化服务来方便管理 Azure 存储。
 services: storage, automation
-documentationCenter: 
+documentationCenter: ''
 authors: jodoglevy
 manager: eamono
-editor: 
+editor: ''
 
 ms.service: storage
 ms.workload: storage

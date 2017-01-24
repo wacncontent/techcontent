@@ -4,9 +4,9 @@ description: 使用 Azure 资源管理器模板或 CLI 来部署 DocumentDB 数�
 services: documentdb
 authors: mimig1
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-resource-manager
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: documentdb
 ms.workload: data-services

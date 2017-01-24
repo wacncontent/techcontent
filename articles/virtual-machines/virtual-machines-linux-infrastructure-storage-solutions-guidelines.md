@@ -1,11 +1,11 @@
 ---
 title: 存储解决方案准则 | Azure
 description: 了解用于在 Azure 基础结构服务中部署存储解决方案的关键设计和实施准则。
-documentationCenter: 
+documentationCenter: ''
 services: virtual-machines-linux
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-linux

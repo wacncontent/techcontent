@@ -5,7 +5,7 @@ services: app-service
 documentationCenter: .net,nodejs,java
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.devlang: multiple

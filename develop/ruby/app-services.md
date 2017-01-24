@@ -1,14 +1,14 @@
 ---
 title: Ruby-应用服务 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: Ruby-应用服务 - Azure 微软云
-services: 
+services: ''
 documentationCenter: ruby
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
+ms.service: ''
 ms.date: 10/18/2014
 wacn.date: 11/02/2015
 ---

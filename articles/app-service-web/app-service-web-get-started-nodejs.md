@@ -2,10 +2,10 @@
 title: 在 5 分钟内将 Node.js Web 应用部署到 Azure | Azure
 description: 了解如何部署示例应用，轻松地在应用服务中运行 Web 应用。快速进行实际的开发，立即查看结果。
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

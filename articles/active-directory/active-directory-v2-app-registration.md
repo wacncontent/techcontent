@@ -2,10 +2,10 @@
 title: v2.0 应用注册 | Azure
 description: 如何使用 v2.0 终结点向 Microsoft 注册应用以启用登录和访问 Microsoft 服务
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

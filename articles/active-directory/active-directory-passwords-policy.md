@@ -2,10 +2,10 @@
 title: Azure Active Directory 中的密码策略和限制 | Azure
 description: 介绍适用于 Azure Active Directory 中的密码的策略，包括允许的字符、长度和过期
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

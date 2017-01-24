@@ -2,10 +2,10 @@
 title: Azure Site Recovery：复制单个 VMM 服务器上的 Hyper-V 虚拟机 | Azure
 description: 本文介绍如何只有单个 VMM 服务器时如何复制 Hyper-V 虚拟机。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: 1c0c4b99-2a6a-4fa2-89fa-d19c39869be6
 ms.service: site-recovery

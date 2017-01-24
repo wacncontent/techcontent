@@ -2,10 +2,10 @@
 title: 监视虚拟机和物理服务器的保护及其故障排除 | Windows Auzre
 description: Azure Site Recovery 可以协调位于本地服务器中的虚拟机到 Azure 或辅助数据中心的复制、故障转移和恢复。参考本文来监视 VMM 或 Hyper-V 站点保护并对其进行故障排除。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: anbacker
 manager: mkjain
-editor: 
+editor: ''
 
 ms.service: site-recovery
 ms.devlang: na

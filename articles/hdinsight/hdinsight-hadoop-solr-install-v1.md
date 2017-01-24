@@ -2,7 +2,7 @@
 title: 使用脚本操作在 Hadoop 群集上安装 Solr | Azure
 description: 了解如何使用 Solr 自定义 HDInsight 群集。你将使用脚本操作配置选项来通过脚本安装 Solr。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: nitinme
 manager: paulettm
 editor: cgronlun

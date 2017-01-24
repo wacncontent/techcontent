@@ -2,10 +2,10 @@
 title: 使用 JAVA AMQP 协议如何订阅启用分区功能的 Azure 服务总线主题的消息
 description: 借助 Java JMS API 使用 AMQP 协议订阅启用分区的 Azure 服务总线主题的消息
 services: service-bus
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: service bus topic,partition,subscription,AMQP
 
 ms.service: service-bus-aog

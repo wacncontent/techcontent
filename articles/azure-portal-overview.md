@@ -1,8 +1,8 @@
 ---
 title:  Azure 门户预览概述
 description: 了解如何使用 Azure 门户预览。
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: davidwrede
 manager: dwrede
 editor: jimbe

@@ -2,10 +2,10 @@
 title: 使用应用服务移动应用托管客户端库 (Windows | Xamarin) | Azure
 description: 了解如何在 Windows 和 Xamarin 应用中使用 Azure 应用服务移动应用的 .NET 客户端。
 services: app-service\mobile
-documentationCenter: 
+documentationCenter: ''
 authors: adrianhall
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

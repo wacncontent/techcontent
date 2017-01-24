@@ -5,7 +5,7 @@ services: service-bus
 documentationCenter: na
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 03/16/2016

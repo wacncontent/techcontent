@@ -2,7 +2,7 @@
 title: 服务管理模式下的 Azure CLI 命令 | Azure
 description: 在服务管理模式下使用 Azure 命令行界面 (CLI) 命令管理经典部署模型中的部署
 services: virtual-machines-linux,virtual-machines-windows,mobile-services, cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
 editor: tysonn

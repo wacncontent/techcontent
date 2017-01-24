@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：Synchronization Service Manager UI | Azure
 description: 了解 Azure AD Connect 的 Synchronization Service Manager。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

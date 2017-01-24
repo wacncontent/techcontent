@@ -5,7 +5,7 @@ services: service-name
 documentationCenter: dev-center-name
 authors: markgalioto
 manager: cfreeman
-editor: 
+editor: ''
 
 ms.service: backup
 ms.devlang: na

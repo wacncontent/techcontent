@@ -2,10 +2,10 @@
 title: 将用户添加到 Azure 上的 Linux VM | Azure
 description: 将用户添加到 Azure 上的 Linux VM。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: vlivech
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-linux

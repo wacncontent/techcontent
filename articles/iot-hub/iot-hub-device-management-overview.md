@@ -2,10 +2,10 @@
 title: 使用 Azure IoT 中心管理设备 | Azure
 description: 概述 Azure IoT 中心中的设备管理：企业设备生命周期和设备管理模式，例如重启、恢复出厂设置、固件更新、配置、设备孪生、查询以及作业。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: bzurcher
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: a367e715-55f6-4593-bd68-7863cbf0eb81
 ms.service: iot-hub

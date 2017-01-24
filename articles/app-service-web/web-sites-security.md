@@ -2,10 +2,10 @@
 title: 在 Azure App Service 中保护应用安全
 description: 了解如何在 Azure App Service 中保护 Web 应用、移动应用后端或 API 应用。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

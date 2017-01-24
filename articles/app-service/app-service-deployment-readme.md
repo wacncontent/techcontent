@@ -3,10 +3,10 @@ title: 将应用程序部署到 Azure 应用服务
 description: 了解如何将应用程序部署到应用服务工作
 keywords: 应用服务, azure 应用服务, 正在部署, 部署
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: dariagrigoriu
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

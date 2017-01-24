@@ -2,13 +2,13 @@
 title: 如何为 Azure Web 应用配置本地缓存
 description: 如何为 Azure Web 应用配置本地缓存。
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: app-service-web-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/31/2016
 ---
 

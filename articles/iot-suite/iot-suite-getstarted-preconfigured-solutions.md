@@ -1,12 +1,12 @@
 ---
 title: 预配置解决方案入门 | Azure
 description: 遵循本教程，了解如何部署 Azure IoT 套件预配置解决方案。
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

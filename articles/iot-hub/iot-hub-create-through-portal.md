@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览创建 IoT 中心 | Azure
 description: 如何通过 Azure 门户预览创建、管理和删除 Azure IoT 中心。包括有关定价层、缩放、安全性和消息传递配置的信息。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 0909cd2b-4c1e-49e0-b68a-75532caf0a6a
 ms.service: iot-hub

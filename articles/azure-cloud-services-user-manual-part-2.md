@@ -1,14 +1,14 @@
 ---
 title: Azure 云服务操作手册 - 第二部分 | Azure
 description: Azure 云服务操作手册 - 第二部分 | Azure
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: Lei Zhang
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: cloud-services
-ms.date: 
+ms.date: ''
 wacn.date: 12/15/2016
 ---
 

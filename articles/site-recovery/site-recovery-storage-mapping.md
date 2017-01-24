@@ -2,10 +2,10 @@
 title: 映射 Azure Site Recovery 中的存储，以便在本地数据中心之间进行 Hyper-V 虚拟机复制 | Azure
 description: 准备存储映射，以便通过 Azure Site Recovery 在两个本地数据中心之间进行 Hyper-V 虚拟机复制。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: 20e14e9c-87c4-4ad3-aa95-441697b1fc43
 ms.service: site-recovery

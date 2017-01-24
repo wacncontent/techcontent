@@ -2,10 +2,10 @@
 title: 在发生灾难时恢复移动服务 | Azure
 description: 了解在发生灾难时如何恢复移动服务。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: christopheranderson
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

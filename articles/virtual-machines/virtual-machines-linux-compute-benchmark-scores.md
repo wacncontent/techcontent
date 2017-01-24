@@ -2,10 +2,10 @@
 title: Linux VM 的计算基准测试分数 | Azure
 description: 比较运行 Linux 的 Azure VM 的 CoreMark 计算基准测试分数
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-linux

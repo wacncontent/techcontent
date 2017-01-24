@@ -2,10 +2,10 @@
 title: 创建多个虚拟机 | Azure
 description: 用于在 Windows 上创建多个虚拟机的选项
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: gbowerman
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

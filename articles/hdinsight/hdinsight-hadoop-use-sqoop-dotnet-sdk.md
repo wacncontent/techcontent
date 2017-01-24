@@ -4,7 +4,7 @@ description: 了解如何使用 HDInsight .NET SDK 在 Hadoop 群集和 Azure SQ
 editor: cgronlun
 manager: paulettm
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 

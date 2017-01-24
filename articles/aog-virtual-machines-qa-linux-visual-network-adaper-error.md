@@ -2,13 +2,13 @@
 title: Linux 虚拟机虚拟网卡问题导致无法连接问题
 description: Linux 虚拟机虚拟网卡问题导致无法连接问题。
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machines-aog
-ms.date: 
+ms.date: ''
 wacn.date: 12/05/2016
 ---
 

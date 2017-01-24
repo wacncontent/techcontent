@@ -2,7 +2,7 @@
 title: 在 HDInsight 中将 Hadoop Hive 与 PowerShell 配合使用 | Azure
 description: 使用 PowerShell 在 HDInsight 上的 Hadoop 中运行 Hive 查询。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

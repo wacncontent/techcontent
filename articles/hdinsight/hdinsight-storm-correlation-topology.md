@@ -2,7 +2,7 @@
 title: 使用 HDInsight 上的 Storm 和 HBase 按时间关联事件
 description: 了解如何使用 HDInsight 上的 Storm 和 HBase 将不同时间到达的事件关联起来。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

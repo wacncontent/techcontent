@@ -2,10 +2,10 @@
 title: 在 Linux VM 上设置 MySQL | Azure
 description: 了解如何在 Azure 中的 Linux 虚拟机（Ubuntu 或 RedHat 系列 OS）上安装 MySQL 堆栈
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: SuperScottz
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-linux

@@ -2,10 +2,10 @@
 title: 将用户添加到 Azure Active Directory 中的自定义域 | Azure
 description: 如何使用用户帐户填充 Azure Active Directory 中的自定义域。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: jeffsta
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

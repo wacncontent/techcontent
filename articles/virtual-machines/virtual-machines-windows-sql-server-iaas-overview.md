@@ -2,10 +2,10 @@
 title: Azure 虚拟机中的 SQL Server 概述 | Azure
 description: 了解如何在 Azure 虚拟机上运行完整的 SQL Server 版本。获取所有 SQL Server VM 映像和相关内容的直接链接。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: rothja
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: c505089e-6bbf-4d14-af0e-dd39a1872767

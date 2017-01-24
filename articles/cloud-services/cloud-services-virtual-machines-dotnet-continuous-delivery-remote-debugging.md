@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: .net
 authors: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: infrastructure-services

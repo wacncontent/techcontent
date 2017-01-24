@@ -2,7 +2,7 @@
 title: 在 Azure 中备份应用
 description: 了解如何在 Azure App Service 中创建应用备份。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
 editor: jimbe

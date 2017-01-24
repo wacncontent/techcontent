@@ -2,10 +2,10 @@
 title: Azure AD Connect 和联合身份验证 | Azure
 description: 此页是使用 Azure AD Connect 进行 AD FS 操作的所有相关文档的中央位置
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: anandyadavmsft
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: f9107cf5-0131-499a-9edf-616bf3afef4d
 ms.service: active-directory

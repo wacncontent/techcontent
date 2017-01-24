@@ -2,10 +2,10 @@
 title: 使用 PowerShell 为 Azure 云服务中的角色启用远程桌面连接
 description: 如何使用 PowerShell 配置 Azure 云服务应用程序以允许远程桌面连接
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

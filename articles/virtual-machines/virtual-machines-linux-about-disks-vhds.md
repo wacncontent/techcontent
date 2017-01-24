@@ -2,7 +2,7 @@
 title: 关于 Linux VM 的磁盘和 VHD | Azure
 description: 了解 Azure 中 Linux 虚拟机磁盘和 VHD 的基础知识。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

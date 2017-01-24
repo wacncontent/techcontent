@@ -2,10 +2,10 @@
 title: Resource Manager 模式下的 Azure CLI 命令 | Azure
 description: 用于在 Resource Manager 部署模型中管理资源的 Azure 命令行界面 (CLI) 命令
 services: virtual-machines-linux,virtual-machines-windows,virtual-network,mobile-services,cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: multiple

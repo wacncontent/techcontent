@@ -2,11 +2,11 @@
 title: Power BI Embedded - 连接到数据源
 description: Power BI Embedded, 连接到数据源
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA

@@ -2,10 +2,10 @@
 title: Linux VM 上的自定义脚本 | Azure
 description: 使用自定义脚本扩展自动化 Linux VM 配置任务
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: neilpeterson
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-linux

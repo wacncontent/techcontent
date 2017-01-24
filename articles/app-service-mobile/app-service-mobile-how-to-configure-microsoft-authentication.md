@@ -3,9 +3,9 @@ title: 如何为应用服务应用程序配置 Microsoft 帐户身份验证
 description: 了解如何为应用服务应用程序配置 Microsoft 帐户身份验证。
 authors: mattchenderson
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: mobile

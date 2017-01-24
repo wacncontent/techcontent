@@ -2,10 +2,10 @@
 title: 监视 XTP 内存中存储 | Azure
 description: 估算和监视 XTP 内存中存储用量与容量；解决容量错误 41823
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: jodebrui
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

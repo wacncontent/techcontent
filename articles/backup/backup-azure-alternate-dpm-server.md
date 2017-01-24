@@ -2,10 +2,10 @@
 title: 从备份保管库中的另一台 DPM 服务器恢复数据 | Azure
 description: 将所保护的数据从任意 DPM 服务器恢复到 Azure 备份保管库，前提是服务器已注册到该保管库。
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: nkolli1
 manager: shreeshd
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

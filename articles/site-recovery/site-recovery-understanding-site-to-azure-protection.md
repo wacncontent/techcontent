@@ -2,10 +2,10 @@
 title: 了解如何通过 Azure Site Recovery 进行 Hyper-V 复制 | Azure
 description: 使用本文来了解帮助你成功安装、配置和管理 Azure Site Recovery 的技术概念。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: anbacker
 manager: mkjain
-editor: 
+editor: ''
 
 ms.service: site-recovery
 ms.devlang: na

@@ -4,7 +4,7 @@ description: 了解如何在 Windows 应用商店应用程序中使用 ADAL 对�
 documentationCenter: windows
 authors: wesmc7777
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

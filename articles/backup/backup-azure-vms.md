@@ -2,10 +2,10 @@
 title: 备份 Azure 虚拟机 | Azure
 description: 使用本文中的 Azure 虚拟机备份过程来发现、注册和备份虚拟机。
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: markgalioto
 manager: jwhit
-editor: 
+editor: ''
 keywords: 虚拟机备份;备份虚拟机;备份和灾难恢复;vm 备份
 
 ms.service: backup

@@ -5,7 +5,7 @@ services: iot-hub
 documentationCenter: java
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: java

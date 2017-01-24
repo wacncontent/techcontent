@@ -2,10 +2,10 @@
 title: 在 Azure 中使用负载均衡服务 | Azure
 description: 本教程说明如何使用以下 Azure 负载均衡产品组合创建方案：流量管理器、应用程序网关和负载均衡器。
 services: traffic-manager
-documentationcenter: 
+documentationcenter: ''
 author: liumichelle
 manager: vitinnan
-editor: 
+editor: ''
 
 ms.assetid: f89be3be-a16f-4d47-bcae-db2ab72ade17
 ms.service: traffic-manager

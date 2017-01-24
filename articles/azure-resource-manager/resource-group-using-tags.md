@@ -2,7 +2,7 @@
 title: 使用标记组织 Azure 资源 | Azure
 description: 演示如何应用标记来组织资源进行计费和管理。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

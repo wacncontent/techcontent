@@ -2,10 +2,10 @@
 title: 使用 Azure 自动化管理 Azure 服务总线 | Azure
 description: 了解如何使用 Azure 自动化服务来管理 Azure 服务总线。
 services: service-bus, automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 07/29/2016

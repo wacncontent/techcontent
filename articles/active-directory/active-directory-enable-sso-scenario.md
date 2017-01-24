@@ -2,10 +2,10 @@
 title: 使用 Azure Active Directory 管理应用程序 | Azure
 description: 本文介绍将 Azure Active Directory 与本地、云和 SaaS 应用程序集成的好处。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

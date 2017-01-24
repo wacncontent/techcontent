@@ -2,11 +2,11 @@
 title: Power BI Embedded 的行级别安全性
 description: 有关 Power BI Embedded 的行级别安全性的详细信息
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA

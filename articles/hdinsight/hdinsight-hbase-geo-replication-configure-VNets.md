@@ -2,7 +2,7 @@
 title: 在两个虚拟网络之间配置 VPN 连接 | Azure
 description: 了解如何在两个虚拟网络之间配置 VPN 连接和域名解析，以及如何配置 HBase 异地复制。
 services: hdinsight,virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: mumian
 manager: paulettm
 editor: cgronlun

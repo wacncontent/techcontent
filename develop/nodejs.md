@@ -3,12 +3,12 @@ title: Azure 开发人员中心：NODEJS
 description: Azure 开发人员中心：NODEJS
 services: NODEJS
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
 ms.service: NODEJS
-ms.date: 
+ms.date: ''
 wacn.date: 04/07/2016
 ---
 

@@ -3,9 +3,9 @@ title: Azure 媒体服务输入元数据架构 |Azure
 description: 本部分概述 Azure 媒体服务输入元数据架构。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: d72848e2-4b65-4c84-94bc-e2a90a6e7f47
 ms.service: media-services

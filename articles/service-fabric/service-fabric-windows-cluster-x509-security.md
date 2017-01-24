@@ -5,7 +5,7 @@ services: service-fabric
 documentationcenter: .net
 author: dsk-2015
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: fe0ed74c-9af5-44e9-8d62-faf1849af68c
 ms.service: service-fabric

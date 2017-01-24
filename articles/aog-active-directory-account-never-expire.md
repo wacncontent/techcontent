@@ -2,13 +2,13 @@
 title: 如何配置 Azure Active Directory 账户密码永不过期
 description: 本文适用于未将本地活动目录与 Azure AD 集成的账号。如果需要对集成后的账号配置密码用户过期，请在本地活动目录内对账号进行配置，并使用同步工具将配置同步至 Azure AD。
 services: Active Directory
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: active-directory-aog
-ms.date: 
+ms.date: ''
 wacn.date: 10/28/2016
 ---
 

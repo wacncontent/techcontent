@@ -5,7 +5,7 @@ services: service-fabric
 documentationCenter: .net
 authors: toddabel
 manager: mfussell
-editor: 
+editor: ''
 
 ms.service: service-fabric
 ms.devlang: dotnet

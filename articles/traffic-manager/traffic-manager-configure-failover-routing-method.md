@@ -2,7 +2,7 @@
 title: 配置流量管理器故障转移流量路由方法 | Azure
 description: 本文将帮助你在流量管理器中配置故障转移流量路由方法
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: joaoma
 manager: adinah
 editor: tysonn

@@ -2,7 +2,7 @@
 title: 登录到经典 Azure VM | Azure
 description: 使用 Azure 经典管理门户登录到使用经典部署模型创建的 Windows 虚拟机。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

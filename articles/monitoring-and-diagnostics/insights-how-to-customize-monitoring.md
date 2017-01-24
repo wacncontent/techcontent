@@ -3,9 +3,9 @@ title: 监视服务指标
 description: 了解如何在 Azure 中自定义监视图表。
 authors: stepsic-microsoft-com
 manager: ronmart
-editor: 
+editor: ''
 services: azure-portal
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: monitoring-and-diagnostics
 ms.workload: na
@@ -74,7 +74,7 @@ ms.author: robb
 
 还可以在具有配额的资源的边栏选项卡上查看使用配额：
 
-    ![使用情况](./media/insights-how-to-customize-monitoring/Insights_UsageChart.png)
+   ![使用情况](./media/insights-how-to-customize-monitoring/Insights_UsageChart.png)
 
 与指标一样，可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn931963.aspx) 或 [.NET SDK](https://www.nuget.org/packages/Microsoft.Azure.Insights/) 以编程方式访问完整使用配额集。
 

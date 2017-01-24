@@ -3,12 +3,12 @@ title: Azure 开发人员中心：PHP
 description: Azure 开发人员中心：PHP
 services: PHP
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
 ms.service: PHP
-ms.date: 
+ms.date: ''
 wacn.date: 08/11/2016
 ---
 

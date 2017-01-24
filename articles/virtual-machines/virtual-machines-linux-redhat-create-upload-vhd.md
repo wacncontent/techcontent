@@ -2,7 +2,7 @@
 title: 创建并上载 Red Hat Enterprise Linux VHD，以供在 Azure 中使用
 description: 了解如何创建和上载包含 Red Hat Linux 操作系统的 Azure 虚拟硬盘 (VHD)。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: SuperScottz
 manager: timlt
 editor: tysonn

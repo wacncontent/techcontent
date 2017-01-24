@@ -2,7 +2,7 @@
 title: SQL 数据仓库备份 | Azure
 description: 了解 SQL 数据仓库的内置数据库备份，该功能可以将 Azure SQL 数据仓库还原到某个还原点或另一地理区域。
 services: sql-data-warehouse
-documentationCenter: 
+documentationCenter: ''
 authors: lakshmi1812
 manager: barbkess
 editor: monicar

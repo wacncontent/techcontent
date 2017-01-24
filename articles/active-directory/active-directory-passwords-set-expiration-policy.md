@@ -2,10 +2,10 @@
 title: 在 Azure Active Directory 中设置密码过期策略 | Azure
 description: 了解如何检查 Azure Active Directory 密码的过期策略，以及如何逐个或批量更改用户密码过期策略
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 6887250c-15d4-4b59-a161-f0380c0f0acb
 ms.service: active-directory

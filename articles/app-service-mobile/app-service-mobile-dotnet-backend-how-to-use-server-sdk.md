@@ -3,10 +3,10 @@ title: 如何使用适用于移动应用的 .NET 后端服务器 SDK | Azure 应
 description: 了解如何使用适用于 Azure 应用服务移动应用的 .NET 后端服务器 SDK。
 keywords: 应用服务, azure 应用服务, 移动应用, 移动服务, 缩放, 可缩放, 应用部署, azure 应用部署
 services: app-service\mobile
-documentationCenter: 
+documentationCenter: ''
 authors: adrianhall
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

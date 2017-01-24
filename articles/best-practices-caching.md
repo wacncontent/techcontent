@@ -1,12 +1,12 @@
 ---
 title: 缓存指南 | Azure
 description: 有关配置缓存以提高性能和可缩放性的指南。
-services: 
+services: ''
 documentationCenter: na
 authors: dragon119
 manager: masimms
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: best-practice
 ms.devlang: na

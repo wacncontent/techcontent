@@ -2,10 +2,10 @@
 title: 如何缩放 Azure Redis 缓存 | Azure
 description: 了解如何缩放你的 Azure Redis 缓存实例
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

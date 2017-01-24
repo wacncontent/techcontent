@@ -2,10 +2,10 @@
 title: Azure Active Directory v2.0 Android 应用 | Azure
 description: 如何生成一个使用 Microsoft 个人帐户和工作或学校帐户让用户登录并通过第三方库调用图形 API 的 Android 应用。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: brandwe
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

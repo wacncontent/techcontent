@@ -4,7 +4,7 @@ description: Azure 移动应用脱机数据同步功能的概念参考和概述
 documentationCenter: windows
 authors: adrianhall
 manager: dwrede
-editor: 
+editor: ''
 services: app-service\mobile
 
 ms.service: app-service-mobile

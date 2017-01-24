@@ -2,7 +2,7 @@
 title: Runbook 设置 | Azure
 description: 介绍 Azure 自动化中 Runbook 的配置设置，以及如何使用 Azure 经典管理门户和 Windows PowerShell 更改这些设置。
 services: automation
-documentationcenter: 
+documentationcenter: ''
 author: mgoedtel
 manager: stevenka
 editor: tysonn

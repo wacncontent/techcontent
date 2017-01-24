@@ -2,10 +2,10 @@
 title: DocumentDB 简介 - 一个 Azure NoSQL 数据库 | Azure
 description: 下载 David Chappell 撰写的关于 DocumentDB（Azure 上一个托管 NoSQL 数据库）的白皮书。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: mimig1
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 61079e82-5b81-41de-81ff-1f963ff55d65
 ms.service: documentdb

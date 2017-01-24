@@ -2,7 +2,7 @@
 title: Resource Manager 模板中的模式 | Azure
 description: 演示 Azure 资源管理器模板的设计模式
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

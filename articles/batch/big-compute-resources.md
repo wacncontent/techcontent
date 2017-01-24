@@ -2,10 +2,10 @@
 title: 批处理和 HPC 工作负荷在云中的资源 | Azure
 description: 列出了旨在帮助你在 Azure 中运行大规模并行批处理和高性能计算 (HPC) 工作负荷的技术资源。
 services: batch, cloud-services, virtual-machines
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 6f8be911-c841-41ae-88d3-3bcfc029eb7f
 ms.service: multiple

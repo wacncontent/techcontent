@@ -2,10 +2,10 @@
 title: 使用 System Center 2012 R2 DPM 将 Exchange Server 备份到 Azure 备份 | Azure
 description: 了解如何使用 System Center 2012 R2 DPM 将 Exchange Server 备份到 Azure 备份
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: MaanasSaran
 manager: NKolli1
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

@@ -2,7 +2,7 @@
 title: 监视、诊断和排查存储空间问题 |Azure
 description: 使用存储分析、客户端日志记录等功能及其他第三方工具来确定、诊断和排查与 Azure 存储空间相关的问题。
 services: storage
-documentationCenter: 
+documentationCenter: ''
 authors: jasonnewyork
 manager: tadb
 editor: tysonn

@@ -2,7 +2,7 @@
 title: Azure 自动化的 Runbook 和模块库 | Azure
 description: 你可以安装并在 Azure 自动化环境中使用 Microsoft 和社区提供的 Runbook 与模块。本文介绍如何访问这些资源，以及在库中补充你的 Runbook。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
 editor: tysonn

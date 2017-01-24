@@ -2,10 +2,10 @@
 title: Azure Web 应用重新配置应用服务计划时无法选择新创建的应用服务计划
 description: Azure 应用服务计划由于不在同一区域或同一资源组，出现 Web 应用无法选择新创建的应用服务计划
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Web Apps,App Service Plan,Resource group
 
 ms.service: app-service-web-aog

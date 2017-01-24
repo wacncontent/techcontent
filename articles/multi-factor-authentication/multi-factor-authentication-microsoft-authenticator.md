@@ -2,7 +2,7 @@
 title: 手机版 Microsoft Authenticator 应用 | Azure
 description: 了解如何升级到最新版本的 Azure Authenticator。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: femila
 editor: curtland

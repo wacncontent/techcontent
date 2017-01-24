@@ -3,9 +3,9 @@ title: H264 多比特率 4x3 SD 音频 5.1 | Azure
 description: 本主题概述了 **H264 多比特率 4x3 SD 音频 5.1** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 24faec4f-a69c-4ae5-afd4-308e03046a3c
 ms.service: media-services

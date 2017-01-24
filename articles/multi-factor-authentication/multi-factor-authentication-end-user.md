@@ -2,7 +2,7 @@
 title: Azure 多重身份验证对我而言有什么用途？
 description: 本 Azure 多重身份验证页面将会帮助你的最终用户开始使用 Azure 多重身份验证。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtland

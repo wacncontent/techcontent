@@ -2,10 +2,10 @@
 title: 将设备到云的消息发送到 Azure IoT 中心 | Azure
 description: 将示例应用程序部署到 Raspberry Pi 3 并运行，以便将消息发送到 IoT 中心并使 LED 闪烁。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: 闪烁 led 云 pi, 云中的 led 闪烁
 
 ms.assetid: 427d8e5e-8af8-4249-8607-44edc90a4972

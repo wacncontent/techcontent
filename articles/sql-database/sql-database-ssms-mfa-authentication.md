@@ -2,11 +2,11 @@
 title: SQL 数据库和 SQL 数据仓库针对 Azure AD MFA 的 SSMS 支持 | Azure
 description: 将 Multi-Factored Authentication 与 SSMS 搭配用于 SQL 数据库和 SQL 数据仓库。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: BYHAM
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: sql-database
 ms.devlang: na

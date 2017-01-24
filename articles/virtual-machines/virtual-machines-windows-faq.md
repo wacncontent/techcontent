@@ -2,10 +2,10 @@
 title: Windows VM 的常见问题 | Azure
 description: 解答通过 Resource Manager 模型创建 Windows 虚拟机的一些常见问题。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-management
 
 ms.service: virtual-machines-windows

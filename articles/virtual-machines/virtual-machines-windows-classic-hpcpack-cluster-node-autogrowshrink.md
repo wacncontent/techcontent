@@ -4,9 +4,9 @@
 title: 自动缩放 HPC Pack 群集节点 | Azure
 description: 自动扩展和收缩 Azure 中的 HPC Pack 群集计算节点数
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
-manager: 
+manager: ''
 editor: tysonn
 
 ms.assetid: 38762cd1-f917-464c-ae5d-b02b1eb21e3f

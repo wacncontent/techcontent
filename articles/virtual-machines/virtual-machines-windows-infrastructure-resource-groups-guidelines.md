@@ -1,11 +1,11 @@
 ---
 title: 资源组准则 | Azure
 description: 了解用于在 Azure 基础结构服务中部署资源组的关键设计和实施准则。
-documentationCenter: 
+documentationCenter: ''
 services: virtual-machines-windows
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

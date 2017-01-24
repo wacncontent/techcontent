@@ -1,11 +1,11 @@
 ---
 title: 在 Eclipse 中显示 Azure Libraries Package for Java 的 Javadoc 内容
 description: 如何在 Eclipse 中显示 Azure Libraries 的 Javadoc 内容。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

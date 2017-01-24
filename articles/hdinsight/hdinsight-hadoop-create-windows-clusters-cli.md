@@ -2,7 +2,7 @@
 title: 使用 Azure CLI 在 HDInsight 中创建基于 Windows 的 Hadoop 群集
 description: 了解如何使用 Azure CLI 创建 Azure HDInsight 群集。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

@@ -7,7 +7,7 @@ services: app-service
 documentationCenter: .net
 authors: tdykstra
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

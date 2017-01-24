@@ -2,10 +2,10 @@
 title: 将 Web 应用资源移到另一个资源组
 description: 介绍将 Web 应用和 App Service 从一个资源组移到另一个资源组的方案。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: ZainRizvi
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: web

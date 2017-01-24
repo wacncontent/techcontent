@@ -2,10 +2,10 @@
 title: 在客户端上插入广告
 description: 本主题说明如何在客户端上插入广告。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

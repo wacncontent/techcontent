@@ -2,7 +2,7 @@
 title: 将 MapReduce 和 Curl 与 HDInsight 中的 Hadoop 配合使用 | Azure
 description: 了解如何使用 Curl 在 HDInsight 的 Hadoop 上远程运行 MapReduce 作业。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

@@ -2,7 +2,7 @@
 title: 使用 PowerShell 将应用程序连接到虚拟网络
 description: 有关如何使用 PowerShell 来连接和操作虚拟网络的说明
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: ccompy
 manager: wpickett
 editor: cephalin

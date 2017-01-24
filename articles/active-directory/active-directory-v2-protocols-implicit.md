@@ -2,10 +2,10 @@
 title: Azure AD v2.0 隐式流 | Azure
 description: 使用单页面应用隐式流的 Azure AD v2.0 实现构建 Web 应用程序。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: msmbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

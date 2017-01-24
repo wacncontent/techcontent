@@ -5,7 +5,7 @@ documentationCenter: dev-center-name
 authors: msmbaldwin
 services: active-directory
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

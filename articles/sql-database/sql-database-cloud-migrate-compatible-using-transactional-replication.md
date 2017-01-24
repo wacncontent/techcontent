@@ -2,10 +2,10 @@
 title: 使用事务复制迁移到 SQL 数据库 | Azure
 description: Azure SQL 数据库, 数据库迁移, 导入数据库, 事务复制
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: eebdd725-833d-4151-9b2b-a0303f39e30f
 ms.service: sql-database

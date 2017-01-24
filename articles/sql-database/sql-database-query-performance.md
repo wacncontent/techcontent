@@ -2,7 +2,7 @@
 title: Azure SQL 数据库 Query Performance Insight
 description: 查询性能监视可以识别 Azure SQL 数据库中 CPU 消耗最大的查询。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
 editor: monicar

@@ -4,17 +4,17 @@ urlDisplayName: CDN
 title: Azure Content Delivery Network FAQs: Azure feature guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN FAQS, origin traffic, ICP record number, CDN default cache rules, origin domain name, subscribe, CNAME, download acceleration, Web acceleration, website acceleration, live streaming acceleration, VOD acceleration, video on demand acceleration, CDN price, CDN fees, technical documentation, help files
 description: Find answers to common service consulting questions or inquiries related to Azure Content Delivery Network
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn_en
-ms.date: 
+ms.date: ''
 wacn.date: 2/23/2016
 wacn.lang: en
 ---
@@ -138,9 +138,9 @@ The differences in terms of how these acceleration types work with the CDN back-
 
 **Cache rule logic:**
 
-    1. If the user configured no-cache rules, these rules will be applied as top priority. Then, configured cache rules will be applied from top to bottom.
+   1. If the user configured no-cache rules, these rules will be applied as top priority. Then, configured cache rules will be applied from top to bottom.
 
-    2. If a particular URL is not matched in either the cache or no-cache rules, CDN default rules will be followed.
+   2. If a particular URL is not matched in either the cache or no-cache rules, CDN default rules will be followed.
 
 ## **Can cache rules be configured for wildcard domain names?**<a id="step13"></a>
 

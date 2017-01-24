@@ -1,10 +1,10 @@
 ---
 title: Azure 虚拟机的多个 IP 地址 - 模板 | Azure
 description: 了解如何使用 Azure Resource Manager 模板将多个 IP 地址分配给虚拟机。
-documentationcenter: 
+documentationcenter: ''
 author: jimdial
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-network

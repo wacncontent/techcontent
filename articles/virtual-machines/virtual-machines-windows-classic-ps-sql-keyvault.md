@@ -2,10 +2,10 @@
 title: 在 Azure VM 上配置 SQL Serve 的 Azure 密钥保管库集成（经典）
 description: 了解如何自动配置用于 Azure 密钥保管库的 SQL Server 加密。本主题说明了如何将 Azure 密钥保管库集成和经典部署模型中创建的 SQL Server 虚拟机结合使用。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: rothja
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

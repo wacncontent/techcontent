@@ -2,10 +2,10 @@
 title: 使用保留策略管理临时表中的历史数据 | Azure
 description: 了解如何使用临时保留策略来控制历史数据。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: bonova
 manager: drasumic
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

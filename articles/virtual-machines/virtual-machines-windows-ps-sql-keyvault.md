@@ -2,10 +2,10 @@
 title: 为 Azure VM (Resource Manager) 上的 SQL Server 配置 Azure 密钥保管库集成
 description: 了解如何自动配置用于 Azure 密钥保管库的 SQL Server 加密。本主题说明如何将 Azure 密钥保管库集成用于通过 Resource Manager 创建的 SQL Server 虚拟机。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: rothja
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: cd66dfb1-0e9b-4fb0-a471-9deaf4ab4ab8

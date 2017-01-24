@@ -2,10 +2,10 @@
 title: Azure Active Directory 中自定义域名的概念性概述 | Azure
 description: 介绍了在 Azure Active Directory 中使用自定义域名的概念性框架，其中包括用于实现单一登录的联盟
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: jeffsta
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

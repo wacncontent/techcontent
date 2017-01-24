@@ -2,13 +2,13 @@
 title: 通过 Azure Active Directory 认证 Azure 自动化服务
 description: 如何在 Azure 自动化服务中使用 Azure AD 认证
 services: automation
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: automation-aog
-ms.date: 
+ms.date: ''
 wacn.date: 02/01/2016
 ---
 

@@ -2,7 +2,7 @@
 title: 常见问题：Azure AD 密码管理 | Azure
 description: 有关 Azure AD 中密码管理的常见问题 (FAQ)，包括密码重置、注册、报告和写回本地 Active Directory。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: asteen
 manager: femila
 editor: curtand

@@ -2,10 +2,10 @@
 title: SQL 数据库 s 数据同步入门
 description: 本教程帮助你 Azure SQL 数据同步（预览版）入门。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: jennieHubbard
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

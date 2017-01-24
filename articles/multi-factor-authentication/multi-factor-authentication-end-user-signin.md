@@ -3,7 +3,7 @@ title: 使用 Azure 多重身份验证时的 Azure MFA 登录体验
 description: 本页将提供有关在何处查看 Azure MFA 支持的各种登录方法的指导。
 keywords: 用户身份验证, 登录体验, 使用手机登录, 使用办公电话登录
 services: multi-factor-authentication
-documentationcenter: 
+documentationcenter: ''
 author: kgremban
 manager: femila
 editor: pblachar

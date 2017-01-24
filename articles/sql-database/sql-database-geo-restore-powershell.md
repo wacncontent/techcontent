@@ -2,10 +2,10 @@
 title: 从异地冗余备份还原 Azure SQL 数据库 (PowerShell) | Azure
 description: 从异地冗余备份将 Azure SQL 数据库还原到新的服务器中
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

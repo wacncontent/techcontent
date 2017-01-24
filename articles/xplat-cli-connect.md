@@ -3,7 +3,7 @@ title: 通过 CLI 登录到 Azure | Azure
 description: 从适用于 Mac、Linux 和 Windows 的 Azure 命令行界面 (Azure CLI) 连接到 Azure 订阅
 editor: tysonn
 manager: timlt
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 services: virtual-machines-linux,virtual-network,storage,azure-resource-manager
 tags: azure-resource-manager,azure-service-management

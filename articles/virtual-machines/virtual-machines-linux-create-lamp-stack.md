@@ -5,7 +5,7 @@ services: virtual-machines-linux
 documentationCenter: virtual-machines
 authors: jluk
 manager: squillace
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-linux

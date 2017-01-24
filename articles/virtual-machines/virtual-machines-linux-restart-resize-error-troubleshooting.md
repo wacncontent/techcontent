@@ -2,10 +2,10 @@
 title: VM 重新启动或大小调整问题 | Azure
 description: 排查在 Azure 中重新启动或调整现有 Linux 虚拟机时遇到的 Resource Manager 部署问题
 services: virtual-machines-linux, azure-resource-manager
-documentationCenter: 
+documentationCenter: ''
 authors: Deland-Han
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue
 
 ms.service: virtual-machines-linux

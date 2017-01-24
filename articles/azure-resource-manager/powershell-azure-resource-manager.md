@@ -2,7 +2,7 @@
 title: Azure PowerShell 与资源管理器 | Azure
 description: 介绍如何使用 Azure PowerShell 将作为资源组的多个资源部署到 Azure。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

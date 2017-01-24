@@ -5,7 +5,7 @@ services: mobile-services
 documentationCenter: na
 authors: mlhoop
 manager: douge
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

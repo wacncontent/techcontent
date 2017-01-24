@@ -3,12 +3,12 @@ title: Azure 开发人员中心：RUBY
 description: Azure 开发人员中心：RUBY
 services: RUBY
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
 ms.service: RUBY
-ms.date: 
+ms.date: ''
 wacn.date: 11/17/2016
 ---
 

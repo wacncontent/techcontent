@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体服务执行实时流式处理以创建多比特率流 | Azure
 description: 本主题介绍如何设置通道，以从本地编码器接收单比特率实时流，然后使用媒体服务执行实时编码以将其转换为自适应比特率流。然后，该流可使用以下自适应流式传输协议之一，通过一个或多个流式传输终结点传送给客户端播放应用程序：HLS、平滑流、MPEG DASH。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: anilmur
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 30ce6556-b0ff-46d8-a15d-5f10e4c360e2
 ms.service: media-services

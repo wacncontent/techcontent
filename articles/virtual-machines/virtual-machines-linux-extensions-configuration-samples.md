@@ -4,10 +4,10 @@
 title: Linux VM 扩展的示例配置 | Azure
 description: 使用扩展为 Linux VM 创作模板的示例配置
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: kundanap
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-linux

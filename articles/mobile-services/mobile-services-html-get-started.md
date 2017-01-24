@@ -2,10 +2,10 @@
 title: 适用于 HTML/JavaScript 应用的 Azure 移动服务入门 | Azure
 description: 按照本教程进行操作，开始使用 Azure 移动服务进行 HTML 开发。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

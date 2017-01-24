@@ -5,7 +5,7 @@ services: batch
 documentationcenter: .net
 author: mmacy
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 16279b23-60ff-4b16-b308-5de000e4c028

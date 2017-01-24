@@ -2,7 +2,7 @@
 title: 跨已扩展的云数据库进行报告（预览）| Azure
 description: 如何对水平分区设置弹性查询
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: torsteng
 

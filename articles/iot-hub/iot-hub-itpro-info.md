@@ -2,10 +2,10 @@
 title: 面向 IT 专业人员的 Azure IoT 中心信息 | Azure
 description: 帮助 IT 专业人员使用 Azure IoT 中心的信息，例如端口要求和安全背景信息。
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: na

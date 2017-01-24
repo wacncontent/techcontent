@@ -2,7 +2,7 @@
 title: 在 Azure 自动化中执行 Runbook | Azure
 description: 详细介绍如何处理 Azure 自动化中的 Runbook。
 services: automation
-documentationcenter: 
+documentationcenter: ''
 author: mgoedtel
 manager: jwhit
 editor: tysonn

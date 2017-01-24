@@ -2,10 +2,10 @@
 title: 身份验证检测期间的错误
 description: Active Directory 连接向导检测到不兼容的身份验证类型
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: dd89ea63-4e45-4da1-9642-645b9309670a
 ms.service: active-directory

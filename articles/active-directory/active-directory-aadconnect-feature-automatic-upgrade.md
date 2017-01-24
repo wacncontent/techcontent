@@ -2,10 +2,10 @@
 title: Azure AD Connect：自动升级 | Azure
 description: 本主题介绍 Azure AD Connect sync 中的内置自动升级功能。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: StevenPo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

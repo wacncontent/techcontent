@@ -3,7 +3,7 @@ title: 在 Azure 上优化 Linux VM | Azure
 description: 了解一些优化提示，确保正确设置你的 Linux VM，从而在 Azure 上获得最佳性能
 keywords: linux 虚拟机,虚拟机 linux,ubuntu 虚拟机
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: rickstercdn
 manager: timlt
 editor: tysonn

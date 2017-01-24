@@ -2,10 +2,10 @@
 title: 从 GitHub 更新 Azure Linux 代理 | Azure
 description: 了解如何从 Github 将 Azure 中 Linux VM 的 Azure Linux 代理更新到最新版本
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: SuperScottz
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-linux
@@ -86,7 +86,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 #wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-[version]/waagent  
 ```
 
-    以下行使用版本 2.0.14 作为示例：
+   以下行使用版本 2.0.14 作为示例：
 
     #wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-2.0.14/waagent  
 
@@ -98,7 +98,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 #cd WALinuxAgent-[version]
 ```
 
-    以下行使用版本 2.1.0 作为示例：
+   以下行使用版本 2.1.0 作为示例：
 
     #wget https://github.com/Azure/WALinuxAgent/archive/WALinuxAgent-2.1.0.zip
     #unzip WALinuxAgent-2.1.0.zip  

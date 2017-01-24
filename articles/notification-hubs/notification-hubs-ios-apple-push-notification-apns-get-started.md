@@ -6,7 +6,7 @@ documentationCenter: ios
 keywords: 推送通知, 推送通知, ios 推送通知
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

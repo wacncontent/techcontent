@@ -1,8 +1,8 @@
 ---
 title: Azure 上的应用程序体系结构 | Azure
 description: 包括常见设计模式的体系结构概述
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: Rboucher
 manager: jwhit
 editor: mattshel

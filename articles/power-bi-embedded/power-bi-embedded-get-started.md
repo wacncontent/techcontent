@@ -2,11 +2,11 @@
 title: Power BI Embedded 入门
 description: Power BI Embedded，将交互式 Power BI 报表添加到商业智能应用程序
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA

@@ -2,7 +2,7 @@
 title: Azure AD Connect：用户登录 | Azure
 description: Azure AD Connect 用户登录的自定义设置。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
 editor: curtand

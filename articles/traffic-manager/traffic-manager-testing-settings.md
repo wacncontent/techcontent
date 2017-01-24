@@ -2,10 +2,10 @@
 title: 测试流量管理器设置 | Azure
 description: 本文将帮助你测试流量管理器设置
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

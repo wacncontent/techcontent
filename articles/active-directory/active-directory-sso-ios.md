@@ -2,10 +2,10 @@
 title: 如何使用 ADAL 在 iOS 上启用跨应用 SSO | Azure
 description: 如何使用 ADAL SDK 的功能跨应用程序启用单一登录。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: brandwe
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

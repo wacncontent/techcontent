@@ -5,7 +5,7 @@ services: storsimple
 documentationCenter: NA
 authors: alkohli
 manager: adinah
-editor: 
+editor: ''
 
 ms.service: storsimple
 ms.date: 08/18/2015

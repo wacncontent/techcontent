@@ -2,13 +2,13 @@
 title: Azure Windows虚拟机常见导致无法远程的操作
 description: 对Azure虚拟机的一些操作可能会导致无法远程连接，本文罗列了常见的几种场景。
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machines-aog
-ms.date: 
+ms.date: ''
 wacn.date: 07/26/2016
 ---
 

@@ -2,10 +2,10 @@
 title: 可以通过 Azure Site Recovery 保护哪些工作负荷？
 description: Azure Site Recovery 可以协调本地虚拟机和物理服务器到 Azure 或辅助本地站点的复制、故障转移和恢复，从而保护工作负荷和应用程序
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: rayne-wiselman
 manager: cfreeman
-editor: 
+editor: ''
 
 ms.service: site-recovery
 ms.devlang: na

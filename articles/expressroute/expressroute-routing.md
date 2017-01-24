@@ -5,7 +5,7 @@ documentationCenter: na
 services: expressroute
 authors: ganesr
 manager: rossort
-editor: 
+editor: ''
 
 ms.service: expressroute
 ms.devlang: na

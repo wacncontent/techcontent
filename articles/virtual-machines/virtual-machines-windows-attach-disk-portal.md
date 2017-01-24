@@ -2,10 +2,10 @@
 title: 将数据磁盘附加到 Windows VM |Azure
 description: 如何使用 Resource Manager 部署模型在 Azure 门户预览中将新磁盘或现有数据磁盘附加到 Windows VM。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 3790fc59-7264-41df-b7a3-8d1226799885

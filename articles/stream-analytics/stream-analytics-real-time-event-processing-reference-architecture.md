@@ -3,10 +3,10 @@ title: 使用流分析事件处理进行实时事件处理 | Azure
 description: 了解如何让一组 Azure 服务通过互操作来实现实时事件处理和分析。
 keywords: 实时处理, 事件处理, 参考体系结构
 services: stream-analytics,event-hubs,storage,sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: stream-analytics
 ms.workload: big-data

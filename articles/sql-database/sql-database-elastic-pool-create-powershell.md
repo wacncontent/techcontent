@@ -2,10 +2,10 @@
 title: 使用 PowerShell 创建新的弹性数据库池 | Azure
 description: 了解如何通过创建可缩放的弹性数据库池，以使用 PowerShell 扩展 Azure SQL 数据库资源以管理多个数据库。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: sidneyh
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

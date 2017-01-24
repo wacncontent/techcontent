@@ -2,7 +2,7 @@
 title: Azure App Service、虚拟机、Service Fabric 和云服务的比较 | Azure
 description: 了解托管 Web 应用程序时如何在 Azure App Service、虚拟机、Service Fabric 和云服务之间做出选择。
 services: app-service\web, virtual-machines, cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: tdykstra
 manager: wpickett
 editor: jimbe

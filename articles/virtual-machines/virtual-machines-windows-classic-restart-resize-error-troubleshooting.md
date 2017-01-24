@@ -2,10 +2,10 @@
 title: VM 重新启动或大小调整问题 | Azure
 description: 排查在 Azure 中重新启动现有 Windows 虚拟机或调整其大小时遇到的经典部署问题
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: Deland-Han
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue
 
 ms.assetid: aa854fff-c057-4b8e-ad77-e4dbc39648cc

@@ -2,10 +2,10 @@
 title: 设置使用 SQL 数据库的 Web 应用
 description: 使用 Azure 资源管理器模板来部署包含 SQL 数据库的 Web 应用。
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: fb9648e1-9bf2-4537-bc4a-ab8d4953168c
 ms.service: app-service

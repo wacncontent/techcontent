@@ -5,7 +5,7 @@ services: service-fabric
 documentationCenter: java
 authors: seanmck
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-fabric
 ms.devlang: java

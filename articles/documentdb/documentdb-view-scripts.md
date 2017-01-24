@@ -6,7 +6,7 @@ services: documentdb
 authors: AndrewHoh
 manager: jhubbard
 editor: monicar
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: documentdb
 ms.workload: data-services

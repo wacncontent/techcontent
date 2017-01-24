@@ -2,7 +2,7 @@
 services: virtual-machines
 title: Setting up PowerShell
 authors: JoeDavies-MSFT
-solutions: 
+solutions: ''
 manager: timlt
 editor: tysonn
 

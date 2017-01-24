@@ -1,14 +1,14 @@
 ---
 title: 数据服务 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: 数据服务 - Azure 微软云
-services: 
+services: ''
 documentationCenter: java-data
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
+ms.service: ''
 ms.date: 10/23/2014
 wacn.date: 01/11/2016
 ---

@@ -2,10 +2,10 @@
 title: Azure SQL 数据库解决方案快速入门 | Azure
 description: 了解 Azure SQL 数据库解决方案
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

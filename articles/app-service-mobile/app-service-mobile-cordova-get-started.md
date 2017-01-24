@@ -5,8 +5,8 @@ services: app-service\mobile
 documentationCenter: javascript
 authors: adrianhall
 manager: erikre
-editor: 
-tags: 
+editor: ''
+tags: ''
 keywords: cordova,javascript,移动,客户端
 
 ms.service: app-service-mobile

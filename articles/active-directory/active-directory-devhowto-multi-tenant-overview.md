@@ -2,10 +2,10 @@
 title: 如何构建可使任何 Azure Active Directory 用户登录的应用程序 | Azure
 description: 有关如何构建一个可使用户从任何 Azure Active Directory 租户登录的应用程序（也称为多租户应用程序）的分步说明。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: skwan
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

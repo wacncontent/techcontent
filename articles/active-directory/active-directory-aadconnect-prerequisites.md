@@ -2,10 +2,10 @@
 title: Azure AD Connect：先决条件和硬件 | Azure
 description: 本主题介绍 Azure AD Connect 的先决条件和硬件要求
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 91b88fda-bca6-49a8-898f-8d906a661f07
 ms.service: active-directory

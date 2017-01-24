@@ -5,7 +5,7 @@ services: service-fabric
 documentationcenter: na
 author: cawams
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: fc743585-0d1b-483f-981d-493f4552ac07
 ms.service: multiple

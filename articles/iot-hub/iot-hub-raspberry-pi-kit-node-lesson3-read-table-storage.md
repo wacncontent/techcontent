@@ -2,10 +2,10 @@
 title: 读取保存在 Azure 存储中的消息 | Azure
 description: 在将从设备到云的消息写入 Azure 表存储时，对其进行监视。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: 从云中检索数据, iot 云服务
 
 ms.assetid: 9965bd54-61da-479b-aaad-5604850a2be5

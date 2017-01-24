@@ -2,7 +2,7 @@
 title: 使用示例库了解 HDInsight 中的 Hadoop | Azure
 description: 通过从 HDInsight 入门库运行示例应用程序快速了解 Hadoop。使用示例数据，或提供自己的数据。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: mumian
 manager: paulettm
 editor: cgronlun

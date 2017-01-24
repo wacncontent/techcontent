@@ -2,7 +2,7 @@
 title: 将资源移到新的资源组 | Azure
 description: 使用 Azure Resource Manager 将资源移到新的资源组或订阅。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

@@ -1,9 +1,9 @@
 ---
 title: 安装 Azure 命令行界面 | Azure
 description: 安装适用于 Mac、Linux 和 Windows 的 Azure 命令行接口 (CLI) 即可使用 Azure 服务
-editor: 
+editor: ''
 manager: timlt
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 services: virtual-machines-linux,virtual-network,storage,azure-resource-manager
 tags: azure-resource-manager,azure-service-management

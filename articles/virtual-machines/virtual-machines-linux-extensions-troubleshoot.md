@@ -4,10 +4,10 @@
 title: 对 Linux VM 扩展故障进行故障排除 | Azure
 description: 了解如何对 Azure Linux VM 扩展故障进行故障排除
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: kundanap
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-resource-manager
 
 ms.service: virtual-machines-linux

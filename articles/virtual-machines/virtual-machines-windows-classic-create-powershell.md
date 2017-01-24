@@ -2,10 +2,10 @@
 title: 使用 PowerShell 创建 Windows VM | Azure
 description: 使用 Azure PowerShell 和经典部署模型创建 Windows 虚拟机。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

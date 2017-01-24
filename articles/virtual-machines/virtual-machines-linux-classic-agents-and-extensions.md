@@ -2,10 +2,10 @@
 title: Azure VM 代理和扩展 | Azure
 description: 提供了代理和扩展的概述以及如何使用经典部署模型安装代理。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: squillace
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

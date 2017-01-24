@@ -2,10 +2,10 @@
 title: 使用 SQL Server Management Studio 将 SQL Server 数据库导出到 BACPAC 文件 | Azure
 description: Azure SQL 数据库, 数据库迁移, 导出数据库, 导出 BACPAC 文件, 导出数据层应用程序向导
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 19c2dab4-81a6-411d-b08a-0ef79b90fbce
 ms.service: sql-database

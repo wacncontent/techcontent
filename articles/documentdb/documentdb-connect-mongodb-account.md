@@ -5,8 +5,8 @@ keywords: mongodb 连接字符串
 services: documentdb
 author: AndrewHoh
 manager: jhubbard
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 
 ms.assetid: e36f7375-9329-403b-afd1-4ab49894f75e
 ms.service: documentdb

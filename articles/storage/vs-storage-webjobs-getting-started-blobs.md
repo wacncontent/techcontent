@@ -2,10 +2,10 @@
 title: Blob 存储和 Visual Studio 连接服务（Web 作业项目）入门 | Azure
 description: 在使用 Visual Studio 连接服务连接到 Azure 存储后，如何开始使用 WebJob 项目中的 Blob 存储
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 324c9376-0225-4092-9825-5d1bd5550058
 ms.service: storage

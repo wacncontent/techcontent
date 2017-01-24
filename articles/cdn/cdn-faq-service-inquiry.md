@@ -4,14 +4,14 @@ urlDisplayName: CDN
 title: Azure CDN FAQ - Azure feature guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN常见问题, 回源流量, ICP备案号, CDN默认缓存规则, 回源域名, 订阅, CNAME, 下载加速, Web加速, 网站加速, 流媒体直播加速, VOD加速, 视频点播加速, CDN价格, CDN收费, 技术文档, 帮助文档
 description: Find answers to common service consulting or inquiries related to Azure CDN
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn
 ms.date: 7/7/2016
@@ -142,9 +142,9 @@ Azure CDN支持的加速类型包括：Web加速，下载加速，VOD加速，�
 
 **缓存规则逻辑：**
 
-    1. 如果用户配置了不缓存的规则，优先匹配；然后匹配需要缓存的规则；缓存规则自上而下匹配。
+   1. 如果用户配置了不缓存的规则，优先匹配；然后匹配需要缓存的规则；缓存规则自上而下匹配。
 
-    2. 如果某个URL在不缓存、缓存规则里都没有匹配上，那么就遵循CDN默认规则。
+   2. 如果某个URL在不缓存、缓存规则里都没有匹配上，那么就遵循CDN默认规则。
 
 ## **CDN节点上的文件最大缓存时长是多少？**<a id="step23"></a>
 

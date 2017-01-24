@@ -2,7 +2,7 @@
 title: 通用化 Windows VHD | Azure
 description: 了解如何使用 Sysprep 通用化 Windows VM，使其能够与 Resource Manager 部署模型配合使用。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
 editor: tysonn

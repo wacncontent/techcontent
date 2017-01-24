@@ -2,10 +2,10 @@
 title: Stretch Database 的限制 | Azure
 description: 了解 Stretch Database 的限制。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

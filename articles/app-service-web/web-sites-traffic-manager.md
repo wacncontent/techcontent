@@ -2,7 +2,7 @@
 title: 使用 Azure 流量管理器控制 Azure Web 应用流量
 description: 因为 Azure 流量管理器与 Azure Web 应用相关，本文提供了有关 Azure 流量管理器的摘要信息。
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 writer: cephalin
 manager: wpickett

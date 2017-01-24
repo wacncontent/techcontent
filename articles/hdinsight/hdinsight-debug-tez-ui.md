@@ -2,7 +2,7 @@
 title: 将 Tez UI 与基于 Windows 的 HDInsight 配合使用 | Azure
 description: 了解如何使用 Tez UI 调试基于 Windows 的 HDInsight 上的 Tez 作业。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

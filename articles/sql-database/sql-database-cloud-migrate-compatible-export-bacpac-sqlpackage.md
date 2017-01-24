@@ -2,10 +2,10 @@
 title: 使用 SqlPackage 将 SQL Server 数据库导出到 BACPAC 文件 | Azure
 description: Azure SQL 数据库, 数据库迁移, 导出数据库, 导出 BACPAC 文件, sqlpackage
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 7b9541c5-5590-4c70-ad36-73007389f6dc
 ms.service: sql-database

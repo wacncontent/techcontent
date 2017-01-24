@@ -2,10 +2,10 @@
 title: 用于 Excel 和 SOA 的 HPC Pack 群集 | Azure
 description: 开始在 Azure 的 HPC Pack 群集上运行大型 Excel 和 SOA 工作负荷
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,hpc-pack
 
 ms.service: virtual-machines-windows

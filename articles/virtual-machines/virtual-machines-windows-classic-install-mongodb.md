@@ -2,7 +2,7 @@
 title: 在 Windows VM 上安装 MongoDB | Azure
 description: 了解如何在使用经典部署模型创建且运行 Windows Server 的 Azure VM 上安装 MongoDB。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
 editor: tysonn

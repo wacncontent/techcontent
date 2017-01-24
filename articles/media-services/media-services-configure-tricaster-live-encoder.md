@@ -2,10 +2,10 @@
 title: 将 NewTek TriCaster 编码器配置为发送单比特率实时流
 description: 本主题说明如何配置 Tricaster 实时编码器，以便将单比特率流发送到 AMS 频道进行实时编码。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: cenkdin
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

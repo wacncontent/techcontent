@@ -2,10 +2,10 @@
 title: 如何创建媒体处理器 | Azure
 description: 了解如何创建一个媒体处理器组件，对 Azure 媒体服务的媒体内容进行编码、格式转换、加密或解密。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

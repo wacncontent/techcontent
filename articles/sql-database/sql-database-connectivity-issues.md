@@ -3,10 +3,10 @@ title: 修复 SQL 连接错误和暂时性错误 | Azure
 description: 了解如何排查、诊断和防止 Azure SQL 数据库中的 SQL 连接错误或暂时性错误。
 keywords: SQL 连接, 连接字符串, 连接问题, 暂时性错误, 连接错误
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: dalechen
 manager: felixwu
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: sql-database

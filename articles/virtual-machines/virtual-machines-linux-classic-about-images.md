@@ -2,7 +2,7 @@
 title: 关于 VM 的 Linux 映像 | Azure
 description: 了解如何对 Azure 中的虚拟机使用 Linux 映像。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

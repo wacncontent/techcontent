@@ -2,7 +2,7 @@
 title: 使用网络配置文件配置虚拟网络
 description: 有关通过 Azure 经典管理门户导出和导入网络配置文件以创建或修改虚拟网络的说明。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: telmosampaio
 manager: carmonm
 editor: tysonn

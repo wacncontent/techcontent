@@ -2,10 +2,10 @@
 title: 加密 Linux VM 中的磁盘 | Azure
 description: 如何使用 Azure CLI 和 Resource Manager 部署模型加密 Linux VM 中的磁盘
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 2a23b6fa-6941-4998-9804-8efe93b647b3
 ms.service: virtual-machines-linux

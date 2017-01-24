@@ -2,10 +2,10 @@
 title: 在未安装 Azure 来宾代理的情况下重置本地 Windows 密码 | Azure
 description: 如何在 Azure 来宾代理未安装或者未在 VM 上正常运行的情况下重置本地 Windows 用户帐户密码
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

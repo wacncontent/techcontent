@@ -5,7 +5,7 @@ documentationCenter: ios
 services: notification-hubs
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

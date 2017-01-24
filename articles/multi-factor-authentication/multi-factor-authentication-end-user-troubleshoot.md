@@ -3,7 +3,7 @@ title: 双重验证故障排除 | Azure
 description: 本文档向用户提供有关如何解决 Azure 多重身份验证问题的信息。
 services: multi-factor-authentication
 keywords: multifactor authentication 客户端, 身份验证问题, 相关性 ID
-documentationCenter: 
+documentationCenter: ''
 authors: kgremban
 manager: femila
 editor: yossib

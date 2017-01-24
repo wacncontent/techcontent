@@ -1,11 +1,11 @@
 ---
 title: 了解你的帐单 | Azure
 description: 了解如何阅读并理解 Azure 订阅的使用情况和计费
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: erihur
 manager: stevenpo
-editor: 
+editor: ''
 tags: billing
 
 ms.service: billing

@@ -2,10 +2,10 @@
 title: 在第一个 Web 应用中添加功能
 description: 在短时间内将一些新奇功能添加到你的第一个 Web 应用。
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

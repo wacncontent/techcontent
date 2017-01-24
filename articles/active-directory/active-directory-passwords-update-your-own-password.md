@@ -2,7 +2,7 @@
 title: 如何使用 Azure Active Directory 更新自己的密码 | Azure
 description: 了解如何注册密码重置、更改自己的密码，以及在忘记密码的情况下重置自己的密码。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: asteen
 manager: femila
 editor: curtand

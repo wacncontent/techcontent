@@ -2,10 +2,10 @@
 title: 部署拆分/合并服务 | Azure
 description: 使用弹性数据库工具拆分和合并
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: ddove
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 9a993c0f-7052-46cd-aa59-073bea8d535a
 ms.service: sql-database

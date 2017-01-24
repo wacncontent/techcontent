@@ -2,10 +2,10 @@
 title: 构建使用表存储的 .NET 后端移动服务 | Azure 移动服务
 description: 了解如何对 .NET 后端移动服务使用 Azure 表存储。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

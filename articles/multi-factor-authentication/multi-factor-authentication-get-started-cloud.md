@@ -2,7 +2,7 @@
 title: 云中的 Azure 多重身份验证入门
 description: 这是与 Azure 多重身份验证相关的页面，介绍如何在云中开始使用 Azure MFA。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: femila
 editor: curtand

@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：了解默认配置 | Azure
 description: 本文介绍 Azure AD Connect 同步中的默认配置。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

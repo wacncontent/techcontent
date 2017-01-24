@@ -2,7 +2,7 @@
 title: 自定义导出的 Resource Manager 模板 | Azure
 description: 向导出的 Azure Resource Manager 模板添加参数，并通过 Azure PowerShell 或 Azure CLI 重新部署该模板。
 services: azure-resource-manager
-documentationCenter: 
+documentationCenter: ''
 authors: tfitzmac
 manager: timlt
 editor: tysonn

@@ -1,7 +1,7 @@
 ---
 title: Azure Multi-Factor Authentication 报告
 description: 本文介绍如何更改用户设置，例如，强制用户再次完成验证过程。
-documentationCenter: 
+documentationCenter: ''
 services: multi-factor-authentication
 authors: billmath
 manager: stevenpo

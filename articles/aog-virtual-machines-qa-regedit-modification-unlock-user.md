@@ -2,10 +2,10 @@
 title: 如何通过修改注册表的方式解锁被锁定的用户
 description: 通过修改注册表的方式修复意外操作导致用户的锁定
 services: virtual-machines
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: 虚拟机,regedit,SAM
 
 ms.service: virtual-machines-aog

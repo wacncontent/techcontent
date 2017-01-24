@@ -2,13 +2,13 @@
 title: Azure Web 应用用户手册 - 第三部分 | Azure
 description: 详细介绍如何创建和管理 Azure Web 应用。
 services: app-service-web
-documentationCenter: 
+documentationCenter: ''
 authors: Lei Zhang
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: app-service-web
-ms.date: 
+ms.date: ''
 wacn.date: 07/05/2016
 ---
 

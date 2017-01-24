@@ -5,7 +5,7 @@ documentationcenter: dev-center-name
 services: key-vault
 author: cabailey
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.assetid: 1a5f1222-57f0-4a2a-98ee-92bb899f9d75
 ms.service: key-vault

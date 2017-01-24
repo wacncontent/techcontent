@@ -4,17 +4,17 @@ urlDisplayName: 下载和安装 Azure SDK工具
 title: Azure 服务管理
 metaKeywords: 下载和安装 Azure SDK工具
 description: 下载和安装 Azure SDK、Azure PowerShell 和用于管理和部署的命令行工具
-metaCanonical: 
+metaCanonical: ''
 services: downloads
 documentationCenter: downloads
 title: 下载和安装 Azure SDK工具
 authors: ACom
-solutions: 
-manager: 
+solutions: ''
+manager: ''
 editor: Eric Chen
 
 ms.service: downloads
-ms.date: 
+ms.date: ''
 wacn.date: 11/25/2016
 ---
 

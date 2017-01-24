@@ -2,10 +2,10 @@
 title: 适用于 C 语言的 Azure IoT 设备 SDK | Azure
 description: 开始使用适用于 C 语言的 Azure IoT 设备 SDK，并了解如何创建与 IoT 中心通信的设备应用。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: olivierbloch
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: e448b061-6bdd-470a-a527-15ec03cca7b9
 ms.service: iot-hub

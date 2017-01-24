@@ -2,10 +2,10 @@
 title: SQL 数据库安全性概述
 description: 了解有关 Azure SQL 数据库和 SQL Server 安全性的信息，包括云与本地 SQL Server 在身份验证、授权、连接安全性、加密和合规性方面的差异。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: tmullaney
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

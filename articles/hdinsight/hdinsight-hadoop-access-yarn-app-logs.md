@@ -2,7 +2,7 @@
 title: 以编程方式访问 Hadoop YARN 应用程序日志 | Azure
 description: 以编程方式访问 HDInsight 中 Hadoop 群集上的应用程序日志。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

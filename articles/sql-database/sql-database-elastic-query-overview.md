@@ -2,7 +2,7 @@
 title: Azure SQL 数据库弹性数据库查询概述 | Azure
 description: 弹性查询功能概述
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: sidneyh
 

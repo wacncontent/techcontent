@@ -3,7 +3,7 @@ title: DocumentDB 索引策略 | Azure
 description: 了解 DocumentDB 中的索引工作原理以及如何配置与更改索引策略。在 DocumentDB 中配置索引策略，实现自动索引并提高性能。
 keywords: 索引的工作原理, 自动索引, 索引数据库, documentdb, azure, Azure
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: arramac
 manager: jhubbard
 editor: monicar

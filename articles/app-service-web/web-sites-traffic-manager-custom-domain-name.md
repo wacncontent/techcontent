@@ -2,10 +2,10 @@
 title: 为 Azure App Service 中使用流量管理器进行负载均衡的 Web 应用配置自定义域名。
 description: 为 Azure App Service 中包含流量管理器（用于负载均衡）的 Web 应用使用自定义域名。
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

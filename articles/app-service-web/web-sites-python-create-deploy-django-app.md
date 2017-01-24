@@ -6,7 +6,7 @@ documentationCenter: python
 tags: python
 authors: huguesv
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

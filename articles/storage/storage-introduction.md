@@ -2,7 +2,7 @@
 title: 存储简介 | Azure
 description: Microsoft 的云中在线数据存储 - Azure 存储空间的概述。了解如何在应用程序中使用最佳的云存储解决方案。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: tamram
 manager: carmonm
 editor: tysonn

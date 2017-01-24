@@ -6,7 +6,7 @@ documentationcenter: .net
 author: Rick-Anderson
 writer: Rick-Anderson
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: f4916fc0-ea08-41f7-846b-73e41bc88149
 ms.service: app-service-web

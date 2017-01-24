@@ -2,7 +2,7 @@
 title: 创建 Linux VM | Azure
 description: 了解如何使用运行 Linux 操作系统的经典部署模型创建自定义虚拟机。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
 editor: tysonn

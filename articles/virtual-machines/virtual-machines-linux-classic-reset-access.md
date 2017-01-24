@@ -2,10 +2,10 @@
 title: 从 CLI 重置 Linux VM 密码和 SSH 密钥 | Azure
 description: 如何使用 VMAccess 扩展从 Azure 命令行接口 (CLI) 重置 Linux VM 密码或 SSH 密钥、修复 SSH 配置，以及检查磁盘一致性
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: d975eb70-5ff1-40d1-a634-8dd2646dcd17

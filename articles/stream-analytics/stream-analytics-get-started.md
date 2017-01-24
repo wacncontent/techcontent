@@ -3,7 +3,7 @@ title: 流分析入门：实时检测欺诈行为 | Azure
 description: 了解如何通过流分析创建实时欺诈行为检测解决方案。使用事件中心进行实时事件处理。
 keywords: 异常检测、欺诈检测、实时异常检测
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

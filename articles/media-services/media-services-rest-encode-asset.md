@@ -2,10 +2,10 @@
 title: 如何使用 Media Encoder Standard 对资产进行编码 | Azure
 description: 了解如何使用媒体编码器标准版对媒体服务上的媒体内容进行编码。代码示例使用 REST API。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -2,11 +2,11 @@
 title: 使用动态管理视图监视 Azure SQL 数据库 | Azure
 description: 了解如何通过使用动态管理视图监视 Azure SQL 数据库来检测并诊断常见性能问题。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: sql-database
 ms.devlang: na

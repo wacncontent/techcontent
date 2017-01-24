@@ -2,7 +2,7 @@
 title: 创建自定义 Linux 虚拟机 | Azure
 description: 了解如何从 Azure 经典管理门户使用经典部署模型创建自定义 Linux 虚拟机。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

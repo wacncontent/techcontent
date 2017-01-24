@@ -2,7 +2,7 @@
 title: 在 HDInsight 中运行 Hadoop 示例 | Azure
 description: 使用所提供的示例开始使用 Azure HDInsight 服务。在数据群集中使用运行 MapReduce 程序的 PowerShell 脚本。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

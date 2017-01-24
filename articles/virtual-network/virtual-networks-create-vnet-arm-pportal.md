@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览创建虚拟网络 | Azure
 description: 了解如何使用 Azure 门户预览创建虚拟网络 | Resource Manager。
 services: virtual-network
-documentationcenter: 
+documentationcenter: ''
 author: jimdial
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 4ad679a4-a959-4e48-a317-d9f5655a442b

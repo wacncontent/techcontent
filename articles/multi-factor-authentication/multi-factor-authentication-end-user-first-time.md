@@ -3,7 +3,7 @@ title: 为工作或学校帐户设置双重验证
 description: 公司配置 Azure 多重身份验证时，会提示你注册双重验证。了解如何进行设置。
 services: multi-factor-authentication
 keywords: 如何使用 azure 目录, 云中的 active directory, active directory 教程
-documentationcenter: 
+documentationcenter: ''
 author: kgremban
 manager: femila
 editor: pblachar

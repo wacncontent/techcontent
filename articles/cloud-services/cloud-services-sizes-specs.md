@@ -2,10 +2,10 @@
 title: 云服务的大小
 description: 列出 Azure 云服务 Web 角色和辅助角色的不同虚拟机大小。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.devlang: na

@@ -2,10 +2,10 @@
 title: 什么是流量管理器 | Azure
 description: 本文将有助于你了解什么是流量管理器，以及流量管理器是否是适合你应用程序的流量路由选择
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

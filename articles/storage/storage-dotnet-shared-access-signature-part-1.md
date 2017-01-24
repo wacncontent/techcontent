@@ -2,7 +2,7 @@
 title: 使用共享访问签名 (SAS) | Azure
 description: 了解使用共享访问签名 (SAS) 委派对 Azure 存储空间资源（包括 Blob、队列、表和文件）的访问权限。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: mmacy
 manager: timlt
 editor: tysonn

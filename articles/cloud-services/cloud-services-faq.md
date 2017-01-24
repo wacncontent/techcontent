@@ -2,10 +2,10 @@
 title: 云服务常见问题 | Azure
 description: 有关云服务的常见问题。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

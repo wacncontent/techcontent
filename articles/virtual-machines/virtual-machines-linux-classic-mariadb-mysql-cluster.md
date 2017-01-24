@@ -2,10 +2,10 @@
 title: 在 Azure 上运行 MariaDB (MySQL) 群集
 description: 在 Azure 虚拟机上创建 MariaDB + Galera MySQL 群集
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: sabbour
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

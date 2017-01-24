@@ -2,7 +2,7 @@
 title: 在 HDInsight 上将 DataFu 与 pig 配合使用
 description: DataFu 是适用于 Hadoop 的库的集合。了解如何在 HDInsight 群集上将 DataFu 与 pig 配合使用。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

@@ -2,10 +2,10 @@
 title: 轮询长时间运行的操作
 description: 本主题展示了如何轮询长时间运行的操作。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

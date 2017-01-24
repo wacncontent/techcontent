@@ -2,7 +2,7 @@
 title: 使用虚拟网络扩展 HDInsight | Microsoft Azure
 description: 了解如何使用 Azure 虚拟网络将 HDInsight 连接到其他云资源或数据中心内的资源
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun

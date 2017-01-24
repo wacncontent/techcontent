@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：了解声明性预配表达式 | Azure
 description: 说明声明性设置表达式
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

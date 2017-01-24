@@ -3,7 +3,7 @@ title: 从 HDFS 兼容的 Blob 存储查询数据 | Azure
 description: HDInsight 使用 Azure Blob 存储作为 HDFS 的大数据存储。了解如何从 Blob 存储查询数据，并存储分析结果。
 keywords: blob 存储,hdfs,结构化数据,非结构化数据
 services: hdinsight,storage
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

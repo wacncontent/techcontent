@@ -2,10 +2,10 @@
 title: 将 Windows VM 上的自定义脚本与模板配合使用 | Azure
 description: 通过将自定义脚本扩展与 Resource Manager 模板配合使用，自动完成 Windows VM 配置任务
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: kundanap
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

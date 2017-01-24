@@ -2,7 +2,7 @@
 title: 如何监视存储帐户 | Azure
 description: 了解如何使用 Azure 门户在 Azure 中监视存储帐户。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: robinsh
 manager: timlt
 editor: tysonn

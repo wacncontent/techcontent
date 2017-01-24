@@ -2,10 +2,10 @@
 title: 预配 Redis 缓存 | Azure
 description: 使用 Azure 资源管理器模板部署 Azure Redis 缓存。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: Erikre
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: web

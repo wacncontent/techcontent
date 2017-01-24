@@ -2,10 +2,10 @@
 title: SQL 数据库 V12 中的新增功能 | Azure
 description: 介绍云中使用 Azure SQL 数据库的业务系统在升级到版本 V12 后为何能够受益。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: MightyPen
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 729b25ef-0abb-45eb-aa7e-7600ea3569d1
 ms.service: sql-database

@@ -9,7 +9,7 @@ editor: cgronlun
 
 ms.service: stream-analytics
 ms.date: 07/25/2016
-wacn.date: 
+wacn.date: ''
 ---
 
 | 限制标识符 | 限制 | 注释 |

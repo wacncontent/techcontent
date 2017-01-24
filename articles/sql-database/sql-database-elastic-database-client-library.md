@@ -2,10 +2,10 @@
 title: 构建可缩放的云数据库 | Azure
 description: 使用弹性数据库客户端库构建可缩放的 .NET 数据库应用
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: ddove
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: sql-database

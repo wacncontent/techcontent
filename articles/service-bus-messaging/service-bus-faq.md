@@ -4,8 +4,8 @@ description: 回答了一些关于 Azure 服务总线的常见问题。
 services: service-bus
 documentationCenter: na
 authors: sethmanheim
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: service-bus
 ms.devlang: na

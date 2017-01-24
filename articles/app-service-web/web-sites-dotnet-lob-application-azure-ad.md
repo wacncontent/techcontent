@@ -5,7 +5,7 @@ services: app-service\web, active-directory
 documentationcenter: .net
 author: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: ad947bdb-4463-43ff-a5e3-91d9b2169b60
 ms.service: app-service-web

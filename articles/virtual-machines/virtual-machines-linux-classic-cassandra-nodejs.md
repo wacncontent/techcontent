@@ -5,7 +5,7 @@ services: virtual-machines-linux
 documentationcenter: nodejs
 author: hanuk
 manager: erikre
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 30de1f29-e97d-492f-ae34-41ec83488de0

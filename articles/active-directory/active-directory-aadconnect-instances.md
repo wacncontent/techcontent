@@ -2,10 +2,10 @@
 title: Azure AD Connect：同步服务实例 | Azure
 description: 本页记录了 Azure AD 实例的特殊注意事项。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

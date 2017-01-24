@@ -2,7 +2,7 @@
 title: 将 Hive 用于 Hadoop 以进行网站日志分析 | Azure
 description: 了解如何通过将 Hive 与 HDInsight 配合使用来分析网站日志。我们将使用日志文件作为 HDInsight 表的输入，并使用 HiveQL 来查询数据。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: nitinme
 manager: paulettm
 editor: cgronlun

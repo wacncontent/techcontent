@@ -2,10 +2,10 @@
 title: 使用 Redis 缓存预配 Web 应用
 description: 使用 Azure 资源管理器模板部署包含 Redis 缓存的 Web 应用。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: erickson-doug
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: web

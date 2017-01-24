@@ -2,7 +2,7 @@
 title: 如何为 Web 应用配置 TLS 相互身份验证
 description: 了解如何将 Web 应用配置为使用 TLS 客户端证书身份验证。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: naziml
 manager: wpickett
 editor: jimbe

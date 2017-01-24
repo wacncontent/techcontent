@@ -5,7 +5,7 @@ services: vpn-gateway
 documentationCenter: na
 authors: yushwang
 manager: rossort
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: vpn-gateway

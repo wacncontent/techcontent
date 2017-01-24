@@ -2,7 +2,7 @@
 title: 关于 Windows VM 的磁盘和 VHD | Azure
 description: 了解 Azure 中 Windows 虚拟机磁盘和 VHD 的基础知识。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
 editor: tysonn

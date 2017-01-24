@@ -1,14 +1,14 @@
 ---
 title: 如何在 Proxy 环境下正确使用 PowerShell 工具发送 web http 请求
 description: 如何在 Proxy 环境下正确使用 PowerShell 工具发送 web http 请求
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: na-aog
-ms.date: 
+ms.date: ''
 wacn.date: 09/29/2016
 ---
 

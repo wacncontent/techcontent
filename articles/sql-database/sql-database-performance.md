@@ -2,7 +2,7 @@
 title: Azure SQL 数据库性能见解 | Azure
 description: Azure SQL 数据库提供的性能工具有助于发现可以提高当前查询性能的方面。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
 editor: monicar

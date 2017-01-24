@@ -4,7 +4,7 @@ description: 了解如何使用 HDInsight .NET SDK 将 Hadoop 作业提交到 Az
 editor: cgronlun
 manager: paulettm
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 

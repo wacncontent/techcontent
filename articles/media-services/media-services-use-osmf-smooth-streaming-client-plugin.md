@@ -2,10 +2,10 @@
 title: 适用于 Open Source Media Framework 的平滑流式处理插件
 description: 了解如何使用适用于 Adobe Open Source Media Framework 的 Azure 媒体服务平滑流式处理插件。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

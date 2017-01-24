@@ -5,7 +5,7 @@ services: service-bus
 documentationCenter: ruby
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.workload: na

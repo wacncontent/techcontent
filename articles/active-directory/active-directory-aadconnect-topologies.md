@@ -2,10 +2,10 @@
 title: Azure AD Connect：支持的拓扑 | Azure
 description: 本主题详细说明 Azure AD Connect 的受支持和不受支持的拓扑
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: AndKjell
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 1034c000-59f2-4fc8-8137-2416fa5e4bfe
 ms.service: active-directory

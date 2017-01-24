@@ -2,7 +2,7 @@
 title: 使用 HDInsight 中的 Hive 分析和处理 JSON 文档 | Azure
 description: 了解如何使用 JSON 文档，以及如何使用 HDInsight 中的 Hive 分析这些文档。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: rashimg
 manager: mwinkle
 editor: cgronlun

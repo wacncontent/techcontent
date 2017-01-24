@@ -2,11 +2,11 @@
 title: 使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库 | Azure
 description: 了解如何通过使用 Azure Active Directory 身份验证连接到 SQL 数据库
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: BYHAM
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.assetid: 7e2508a1-347e-4f15-b060-d46602c5ce7e
 ms.service: sql-database

@@ -3,7 +3,7 @@ title: SQL 数据库：什么是 DTU？| Azure
 description: 了解什么是 Azure SQL 数据库事务单位。
 keywords: 数据库选项,数据库性能
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
 editor: CarlRabeler

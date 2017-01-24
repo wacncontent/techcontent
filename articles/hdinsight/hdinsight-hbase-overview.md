@@ -3,7 +3,7 @@ title: HDInsight 中的 HBase 是什么？| Azure
 description: 介绍 HDInsight 中的 Apache HBase - 在 Hadoop 上构建的 NoSQL 数据库。了解相关用例并将 HBase 与其他 Hadoop 群集进行比较。
 keywords: bigtable,nosql,什么是 hbase
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: mumian
 manager: jhubbard

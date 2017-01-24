@@ -4,10 +4,10 @@
 title: 调整 Windows VM 的大小 | Azure
 description: 使用 Azure Powershell 调整在 Resource Manager 部署模型中创建的 Windows 虚拟机的大小。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: Drewm3
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 057ff274-6dad-415e-891c-58f8eea9ed78

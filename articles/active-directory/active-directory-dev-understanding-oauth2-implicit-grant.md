@@ -5,7 +5,7 @@ services: active-directory
 documentationcenter: dev-center-name
 author: vibronet
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.assetid: 90e42ff9-43b0-4b4f-a222-51df847b2a8d
 ms.service: active-directory

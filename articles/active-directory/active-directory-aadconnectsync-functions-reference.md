@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：函数参考 | Azure
 description: 在 Azure AD Connect 同步中引用声明性设置表达式。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: StevenPo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

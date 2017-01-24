@@ -2,7 +2,7 @@
 title: 删除 Resource Manager 部署中的 Azure 存储帐户、容器或 VHD 时对错误进行故障排除 | Azure
 description: 删除 Resource Manager 部署中的 Azure 存储帐户、容器或 VHD 时对错误进行故障排除
 services: storage
-documentationCenter: 
+documentationCenter: ''
 authors: genlin
 manager: felixwu
 editor: na

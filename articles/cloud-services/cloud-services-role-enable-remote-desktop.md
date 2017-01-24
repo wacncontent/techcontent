@@ -2,10 +2,10 @@
 title: 为 Azure 云服务中的角色设置远程桌面连接
 description: 如何配置 Azure 云服务应用程序以允许远程桌面连接
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: sbtron
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

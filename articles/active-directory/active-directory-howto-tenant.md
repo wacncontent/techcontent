@@ -2,10 +2,10 @@
 title: 如何获取 Azure AD 租户 | Azure
 description: 如何获取用于注册和生成应用程序的 Azure Active Directory 租户。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: terrylan
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

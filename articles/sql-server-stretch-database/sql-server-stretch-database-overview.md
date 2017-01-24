@@ -3,10 +3,10 @@
 title: Stretch Database 概述 | Azure
 description: 了解 Stretch Database 如何透明、安全地将冷数据迁移到 Azure 云。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

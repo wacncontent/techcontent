@@ -2,7 +2,7 @@
 title: Azure AD Connect：常见问题 | Azure
 description: 此页包含有关 Azure AD Connect 的常见问题。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtand

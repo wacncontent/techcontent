@@ -2,7 +2,7 @@
 title: HDInsight Hadoop PowerShell Cmdlet 备忘单 | Azure
 description: 一个可下载的 HDInsight Hadoop Powershell cmdlet 备忘单，可帮助你在 Azure HDInsight 中执行标准的 Hadoop 任务。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: nitinme
 manager: paulettm
 editor: cgronlun

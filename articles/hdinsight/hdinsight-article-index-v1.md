@@ -5,7 +5,7 @@ services: hdinsight
 documentationCenter: na
 authors: cjgronlund
 manager: pablissima
-editor: 
+editor: ''
 
 ms.service: hdinsight
 ms.devlang: na

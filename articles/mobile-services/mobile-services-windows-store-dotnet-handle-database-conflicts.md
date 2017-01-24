@@ -4,7 +4,7 @@ description: 了解如何处理服务器上和 Windows 应用商店应用程序�
 documentationCenter: windows
 authors: wesmc7777
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

@@ -5,7 +5,7 @@ services: visual-studio-online,virtual-machines-windows
 documentationCenter: na
 authors: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: multiple

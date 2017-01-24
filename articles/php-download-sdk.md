@@ -5,7 +5,7 @@ documentationCenter: php
 services: app-service\web
 authors: allclark
 manager: douge
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: na

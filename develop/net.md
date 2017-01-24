@@ -4,12 +4,12 @@ metaKeywords: .NET
 description: Azure 开发人员中心：.NET
 services: .NET
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
 ms.service: .NET
-ms.date: 
+ms.date: ''
 wacn.date: 04/11/2016
 ---
 

@@ -3,9 +3,9 @@ title: 适用于 iOS 的 H264 多比特率 4x3 | Azure
 description: 本主题概述了 **适用于 iOS 的 H264 多比特率 4x3** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 7f587c46-bda5-49e6-abad-203380e1d1ab
 ms.service: media-services

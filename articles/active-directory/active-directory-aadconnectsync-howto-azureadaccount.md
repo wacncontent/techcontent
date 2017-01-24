@@ -3,10 +3,10 @@ title: Azure AD Connect 同步：如何管理 Azure AD 服务帐户 | Azure
 description: 本主题介绍如何还原 Azure AD 服务帐户。
 services: active-directory
 keywords: AADSTS70002、AADSTS50054：如何重置 Azure AD Connect 同步连接器服务帐户的密码
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

@@ -2,7 +2,7 @@
 title: 了解和解决 HDInsight 上的 WebHCat 错误
 description: 了解 HDInsight 上的 WebHCat 返回的常见错误以及如何解决它们。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

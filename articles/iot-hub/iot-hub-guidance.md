@@ -2,10 +2,10 @@
 title: IoT 中心解决方案指南 | Azure
 description: 有关网关、设备预配和身份验证的指导主题，帮助用户使用 Azure IoT 中心开发 IoT 解决方案。
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: na

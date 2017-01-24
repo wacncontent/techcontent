@@ -2,10 +2,10 @@
 title: 在 Azure Redis 缓存中导入和导出数据 | Azure
 description: 了解如何使用高级 Azure Redis 缓存实例从 blob 存储导入数据，以及将数据导出到 blob 存储
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

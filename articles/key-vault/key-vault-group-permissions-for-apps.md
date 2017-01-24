@@ -2,7 +2,7 @@
 title: 为多个应用程序授予 Azure 密钥保管库的访问权限 | Azure
 description: 了解如何为多个应用程序授予密钥保管库的访问权限
 services: key-vault
-documentationcenter: 
+documentationcenter: ''
 author: amitbapat
 manager: mbaldwin
 tags: azure-resource-manager

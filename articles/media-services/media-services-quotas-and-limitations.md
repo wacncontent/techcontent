@@ -2,10 +2,10 @@
 title: 媒体服务配额和限制 | Azure
 description: 本主题介绍与 Azure 媒体服务关联的配额和限制。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

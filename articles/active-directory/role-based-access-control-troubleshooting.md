@@ -5,7 +5,7 @@ services: azure-portal
 documentationCenter: na
 authors: kgremban
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

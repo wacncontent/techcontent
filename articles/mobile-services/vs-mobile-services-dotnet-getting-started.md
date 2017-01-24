@@ -2,10 +2,10 @@
 title: 开始使用 Visual Studio .NET 移动服务项目（连接服务）| Microsoft Azure
 description: 如何在 Visual Studio .NET 项目中开始使用 Azure 移动服务
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: mlhoop
 manager: douge
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

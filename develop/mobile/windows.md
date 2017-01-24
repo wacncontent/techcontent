@@ -1,15 +1,15 @@
 ---
 title: 移动服务-Windows - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: 移动服务-Windows - Azure 微软云
-services: 
+services: ''
 documentationCenter: Windows
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
 ms.service: mobile-services
-ms.date: 
+ms.date: ''
 wacn.date: 11/17/2016
 ---
 

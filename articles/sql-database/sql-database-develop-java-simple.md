@@ -2,7 +2,7 @@
 title: 在 Windows 上配合使用 Java 和 JDBC 连接到 SQL 数据库 | Azure
 description: 演示了一个可以用来连接到 Azure SQL 数据库的 Java 代码示例。该示例使用 JDBC，并在 Windows 客户端计算机上运行。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: LuisBosquez
 manager: jhubbard
 editor: genemi

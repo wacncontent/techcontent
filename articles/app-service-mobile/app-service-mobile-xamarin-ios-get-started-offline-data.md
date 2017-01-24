@@ -4,7 +4,7 @@ description: 了解如何在 Xamarin iOS 应用程序中使用应用服务移动
 documentationCenter: xamarin
 authors: adrianhall
 manager: dwrede
-editor: 
+editor: ''
 services: app-service\mobile
 
 ms.service: app-service-mobile

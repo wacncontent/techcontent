@@ -5,7 +5,7 @@ services: app-service\mobile
 documentationCenter: javascript
 authors: adrianhall
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: na

@@ -3,7 +3,7 @@ title: 学习使用用于 Visual Studio 的 Data Lake (HDInsight) 工具 | Azure
 description: 了解如何安装和使用用于 Visual Studio 的 Data Lake (HDInsight) 工具连接到 Hadoop 群集及运行 Hive 查询。
 keywords: hadoop 工具,hive 查询,visual studio
 services: HDInsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: mumian
 manager: jhubbard

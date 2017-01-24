@@ -3,7 +3,7 @@ title: SQL 数据库性能：服务层 | Azure
 description: 比较 SQL 数据库服务层。
 keywords: 数据库选项, 数据库性能
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
 editor: CarlRabeler

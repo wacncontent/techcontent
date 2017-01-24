@@ -2,10 +2,10 @@
 title: Azure 按需媒体编码器概述和比较 | Azure
 description: 本主题概述并比较 Azure 按需媒体编码器。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -2,10 +2,10 @@
 title: 在 Azure 中计划 VM 备份基础结构 | Azure
 description: 规划在 Azure 中备份虚拟机时的重要注意事项
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: markgalioto
 manager: cfreeman
-editor: 
+editor: ''
 keywords: 备份 vm, 备份虚拟机
 
 ms.assetid: 19d2cf82-1f60-43e1-b089-9238042887a9

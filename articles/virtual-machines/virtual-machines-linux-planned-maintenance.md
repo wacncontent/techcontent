@@ -2,10 +2,10 @@
 title: Linux VM 的计划内维护 | Azure
 description: 了解什么是 Azure 计划内维护以及它如何影响正在 Azure 中运行的 Linux 虚拟机。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: drewm
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-linux

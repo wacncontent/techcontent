@@ -2,7 +2,7 @@
 title: Azure 应用服务中的 WebJobs
 description: 了解如何构建 WebJobs，以便运行后台测试、与存储和服务总线之类的服务交互，以及创建计划的任务。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: christopheranderson
 manager: wpickett
 editor: mollybos

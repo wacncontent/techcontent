@@ -2,10 +2,10 @@
 title: 使用负载均衡集组建 MySQL 的群集 | Azure
 description: 在 Azure 上设置使用经典部署模型创建的负载均衡且高度可用的 Linux MySQL 群集
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: bureado
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 6c413a16-e9b5-4ffe-a8a3-ae67046bbdf3

@@ -2,10 +2,10 @@
 title: 管理和监视 Azure 虚拟机备份 | Azure
 description: 了解如何管理和监视 Azure 虚拟机备份
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: trinadhk
 manager: shreeshd
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

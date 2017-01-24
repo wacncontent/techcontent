@@ -2,10 +2,10 @@
 title: Blob 存储和 Visual Studio 连接服务（云服务）入门 | Azure
 description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的云服务项目中使用 Azure Blob 存储
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 1144a958-f75a-4466-bb21-320b7ae8f304
 ms.service: storage

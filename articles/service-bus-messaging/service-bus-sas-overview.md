@@ -5,7 +5,7 @@ services: service-bus,event-hubs
 documentationCenter: na
 authors: djrosanova
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 10/02/2016

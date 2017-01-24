@@ -2,10 +2,10 @@
 title: 如何使用适用于移动应用的 Node.js 后端服务器 SDK | Azure 应用服务
 description: 了解如何使用适用于 Azure 应用服务移动应用的 Node.js 后端服务器 SDK。
 services: app-service\mobile
-documentationCenter: 
+documentationCenter: ''
 authors: adrianhall
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

@@ -2,10 +2,10 @@
 title: 常见的云服务管理任务（经典）| Azure
 description: 了解如何在 Azure 经典管理门户中管理云服务。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

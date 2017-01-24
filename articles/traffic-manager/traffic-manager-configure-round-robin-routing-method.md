@@ -2,7 +2,7 @@
 title: 配置流量管理器轮循机制流量路由方法 | Azure
 description: 本文将帮助你为流量管理器终结点配置“循环”负载均衡。
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: joaoma
 manager: carmonm
 editor: tysonn

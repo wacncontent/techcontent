@@ -2,7 +2,7 @@
 title: 在 HDInsight 中使用 R 来自定义群集 | Azure
 description: 了解如何通过脚本操作安装 R，以及如何在 HDInsight 群集上使用 R。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 manager: paulettm

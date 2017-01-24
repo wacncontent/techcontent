@@ -2,7 +2,7 @@
 title: Runbook 输入参数 | Azure
 description: Runbook 输入参数可让你将数据传递到启动的 Runbook，以增加 Runbook 的弹性。本文介绍在 Runbook 中使用输入参数的不同方案。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: MGoedtel
 manager: jwhit
 editor: tysonn

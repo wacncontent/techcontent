@@ -2,10 +2,10 @@
 title: 什么是 Azure 自动化 | Azure
 description: 了解 Azure 自动化的重要性和常见问题的答案，为创建和使用 Runbook 做准备。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
-editor: 
+editor: ''
 keywords: 什么是自动化, azure 自动化, azure 自动化示例
 
 ms.service: automation

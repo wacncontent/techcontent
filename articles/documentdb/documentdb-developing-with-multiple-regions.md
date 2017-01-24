@@ -2,10 +2,10 @@
 title: 在 DocumentDB 中使用多个区域进行开发 | Azure
 description: 了解如何从 Azure DocumentDB（完全托管的 NoSQL 数据库服务）访问多个区域中的数据。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: kiratp
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: d4579378-0b3a-44a5-9f5b-630f1fa4c66d
 ms.service: documentdb

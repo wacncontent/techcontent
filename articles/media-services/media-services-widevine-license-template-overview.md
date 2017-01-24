@@ -3,9 +3,9 @@ title: Widevine 许可证模板概述 | Azure
 description: 本主题概述了用于配置 Widevine 许可证的 Widevine 许可证模板。
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: media-services
 ms.workload: media

@@ -2,7 +2,7 @@
 title: 在 HDInsight 中的 Hadoop 上将 C# 与 Hive 和 Pig 配合使用 | Azure
 description: 了解在 Azure HDInsight 中如何将 C# 用户定义的函数 (UDF) 与 Hive 和 Pig 流式处理配合使用。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

@@ -2,10 +2,10 @@
 title: 如何将文件打包到云服务包中
 description: 通过 Visual Studio 将额外的文件打包到 Cloud Services Package
 services: cloud-services
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Visual Studio,Cloud Service,Package
 
 ms.service: cloud-services-aog

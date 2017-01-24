@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体分析检测面部和情绪 | Azure
 description: 本主题演示如何使用 Azure 媒体分析检测人脸和情感。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 5ca4692c-23f1-451d-9d82-cbc8bf0fd707
 ms.service: media-services

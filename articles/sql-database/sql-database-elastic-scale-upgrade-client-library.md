@@ -2,7 +2,7 @@
 title: 升级到最新的弹性数据库客户端库 | Azure
 description: 使用 Nuget 升级应用和库
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 manager: jhubbard
 author: ddove
 

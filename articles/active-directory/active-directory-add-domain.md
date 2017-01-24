@@ -2,10 +2,10 @@
 title: 将自定义域名添加到 Azure Active Directory | Azure
 description: 如何将公司域名添加到 Azure Active Directory，以及如何验证域名。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: jeffsta
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

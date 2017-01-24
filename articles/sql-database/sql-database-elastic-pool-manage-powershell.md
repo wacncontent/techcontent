@@ -2,10 +2,10 @@
 title: 管理弹性数据库池 (PowerShell) | Azure
 description: 了解如何使用 PowerShell 管理弹性数据库池。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: srinia
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

@@ -2,10 +2,10 @@
 title: 使用 python 获取服务总线消息
 description: 通过更新解决 azure-servicebus v0.20.2 之前版本的问题
 services: service-bus
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Python,service bus
 
 ms.service: service-bus-aog

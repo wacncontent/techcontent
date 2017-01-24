@@ -1,12 +1,12 @@
 ---
 title: Azure SQL 数据库动态缩放规模
 description: 了解 Azure SQL 数据库如何动态缩放规模
-keywords: 
+keywords: ''
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

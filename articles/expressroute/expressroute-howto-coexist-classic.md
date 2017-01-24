@@ -5,7 +5,7 @@ documentationCenter: na
 services: expressroute
 authors: charwen
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: expressroute

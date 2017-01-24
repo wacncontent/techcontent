@@ -2,10 +2,10 @@
 title: 以组织身份注册 Azure
 description: 了解如何通过工作或学校帐户，来利用现有的用户帐户、策略、设置或已有的本地服务器部署，以及提高组织的本地标识基础结构与 Azure AD 之间的效率。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

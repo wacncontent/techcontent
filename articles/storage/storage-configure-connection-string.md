@@ -2,7 +2,7 @@
 title: 配置 Azure 存储空间的连接字符串 | Azure
 description: 配置 Azure 存储帐户的连接字符串。连接字符串包含在运行时从应用程序访问 Azure 存储帐户所需的身份验证信息。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: mmacy
 manager: timlt
 editor: tysonn

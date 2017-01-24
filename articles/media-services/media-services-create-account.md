@@ -2,10 +2,10 @@
 title: 创建媒体服务帐户 | Azure
 description: 介绍如何在 Azure 中创建新的 Azure 媒体服务帐户。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.date: 06/22/2016

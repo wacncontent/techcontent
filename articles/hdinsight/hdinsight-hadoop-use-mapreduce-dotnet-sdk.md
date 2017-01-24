@@ -4,7 +4,7 @@ description: 了解如何使用 HDInsight .NET SDK 将 MapReduce 作业提交到
 editor: cgronlun
 manager: jhubbard
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: mumian
 

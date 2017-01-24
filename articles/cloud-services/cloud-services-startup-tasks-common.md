@@ -2,10 +2,10 @@
 title: 云服务的常见启动任务 | Azure
 description: 提供了一些可能需要在云服务 Web 角色或辅助角色中执行的常见启动任务示例。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

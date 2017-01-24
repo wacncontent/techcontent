@@ -4,7 +4,7 @@ description: 学习如何从工作站使用 Azure PowerShell 在 Hadoop 群集�
 editor: cgronlun
 manager: paulettm
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 tags: azure-portal
 authors: mumian
 

@@ -2,10 +2,10 @@
 title: 将物理设备与 Azure IoT 网关 SDK 配合使用 | Azure
 description: 如何使用 Texas Instruments SensorTag 设备通过 Raspberry Pi 3 设备上运行的网管将数据发送到 IoT 中心。该网关使用 Azure IoT 网关 SDK 生成。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: chipalost
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: cpp

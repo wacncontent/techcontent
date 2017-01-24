@@ -2,10 +2,10 @@
 title: 了解有关 Azure AD 的详细信息
 description: Azure AD 内容集的学习路线图。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.date: 04/26/2016

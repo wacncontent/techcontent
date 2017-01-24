@@ -2,7 +2,7 @@
 title: 在 HDInsight 上部署和管理 Apache Storm 拓扑 | Azure
 description: 了解如何使用 HDInsight 上的 Storm 仪表板部署、监视和管理 Apache Storm 拓扑。使用 Hadoop Tools for Visual Studio。
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun

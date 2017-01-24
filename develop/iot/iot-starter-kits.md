@@ -3,13 +3,13 @@ title: Azure 开发人员中心：Azure IoT
 description: Azure 开发人员中心：Azure IoT
 services: IoT
 documentationCenter: Develop
-authors: 
-manager: 
-editor: 
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: IoT
-ms.date: 
-wacn.date: 
+ms.date: ''
+wacn.date: ''
 ---
 
 # Azure 初学者套件

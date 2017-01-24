@@ -2,10 +2,10 @@
 title: 如何为高级 Azure Redis 缓存配置数据暂留
 description: 了解如何为高级级别的 Azure Redis 缓存实例配置和管理数据暂留
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

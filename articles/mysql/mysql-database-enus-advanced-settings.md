@@ -1,17 +1,17 @@
 ---
-linkid: 
-urlDisplayName: 
+linkid: ''
+urlDisplayName: ''
 title: Setting MySQL Database on Azure Server Parameters – Azure Cloud
 metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, parameters, customization, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
 description: MySQL Database on Azure supports customizing some parameters to your own requirements. We will help you to understand the selectable ranges and intervals for different parameters.
-metaCanonical: 
+metaCanonical: ''
 services: MySQL
 documentationCenter: Services
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: mysql_en
 ms.date: 07/05/2016
@@ -82,7 +82,7 @@ MySQL Database on Azure supports custom settings for some parameters. The follow
     <td>1048576</td>
     <td>[1024- 16777216]</td>
   </tr>
-    <tr>
+   <tr>
     <td>server-id</td>
     <td>Random Value</td>
     <td>[1000 – 4294967295]</td>

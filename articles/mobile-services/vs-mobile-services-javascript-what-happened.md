@@ -2,10 +2,10 @@
 title: 通过使用 Visual Studio 连接服务将移动服务添加到 Javascript 应用时会发生什么情况 | Microsoft Azure
 description: 描述 Visual Studio 中的 Azure 移动服务项目发生了什么情况
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: mlhoop
 manager: douge
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

@@ -2,13 +2,13 @@
 title: 通过AzCopy操作Azure存储
 description: 本页介绍如何使用AzCopy操作storage。
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: storage-aog
-ms.date: 
+ms.date: ''
 wacn.date: 01/21/2016
 ---
 

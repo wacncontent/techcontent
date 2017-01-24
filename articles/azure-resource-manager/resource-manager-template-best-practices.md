@@ -2,7 +2,7 @@
 title: Resource Manager 模板最佳实践 | Azure
 description: 有关简化 Azure Resource Manager 模板的指导。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

@@ -2,10 +2,10 @@
 title: 在创建期间使用 cloud-init 自定义 Linux VM | Azure
 description: 在创建期间使用 cloud-init 自定义 Linux VM。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 195c22cd-4629-4582-9ee3-9749493f1d72

@@ -2,13 +2,13 @@
 title: 自动化实现定时关闭虚拟机
 description: 在虚拟机中配置如何定时关闭虚拟机
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 06/08/2016
 ---
 

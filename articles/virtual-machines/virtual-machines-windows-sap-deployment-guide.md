@@ -2,12 +2,12 @@
 title: Azure 虚拟机 (VM) 上的 SAP NetWeaver - 部署指南 | Azure
 description: Azure 虚拟机 (VM) 上的 SAP NetWeaver - 部署指南
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: MSSedusch
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
-keywords: 
+keywords: ''
 
 ms.assetid: 22aaa98c-bb9f-472f-b546-0b294e033cda
 ms.service: virtual-machines-windows

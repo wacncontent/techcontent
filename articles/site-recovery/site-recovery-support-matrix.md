@@ -2,10 +2,10 @@
 title: Azure Site Recovery 支持矩阵 | Azure
 description: 汇总了 Azure Site Recovery 支持的操作系统和组件
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: 1bbcc13c-ea21-4349-9ddf-0d7dfdcdcbfb
 ms.service: site-recovery

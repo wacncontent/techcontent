@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览为 Azure SQL 数据库启动计划内或计划外故障转移 | Azure
 description: 使用 Azure 门户预览为 Azure SQL 数据库启动计划内或计划外故障转移
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

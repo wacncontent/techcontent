@@ -5,7 +5,7 @@ services: media-services
 documentationcenter: java
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: b884bd61-dbdb-42ea-b170-8fb02e7fded7
 ms.service: media-services

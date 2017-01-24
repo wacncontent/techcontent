@@ -4,8 +4,8 @@ description: 了解如何使用 Azure 中的消息传送构建可靠弹性的云
 services: service-bus
 authors: sethmanheim
 manager: timlt
-editor: 
-documentationCenter: 
+editor: ''
+documentationCenter: ''
 
 ms.service: service-bus
 ms.date: 05/10/2016

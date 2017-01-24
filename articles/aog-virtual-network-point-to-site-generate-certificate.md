@@ -2,11 +2,11 @@
 title: 本文讲解如何使用 Powershell 来生成点到站点连接所使用的自签名证书
 description: 本文讲解如何使用 Powershell 来生成点到站点连接所使用的自签名证书
 services: virtual-network
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: virtual-network-aog
 ms.date: 10/27/2016

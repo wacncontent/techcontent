@@ -2,10 +2,10 @@
 title: 创建 Azure Function App 和 Azure 存储帐户 | Azure
 description: Azure 函数应用可侦听 Azure IoT 中心事件、处理传入消息以及将其写入到 Azure 表存储。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: 在云中存储数据, 云中存储的数据, iot 云服务
 
 ms.assetid: 6c58de85-c5c4-4989-bb5e-08c45c549966

@@ -2,10 +2,10 @@
 title: 如何在 Hudson 连续集成中使用 Azure Slave 插件 | Azure
 description: 介绍如何在 Hudson 连续集成中使用 Azure Slave 插件。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services

@@ -2,11 +2,11 @@
 title: 如何在媒体服务帐户中管理流式处理终结点
 description: 本主题说明如何使用 Azure 经典管理门户管理流式处理终结点。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 writer: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.date: 06/22/2016

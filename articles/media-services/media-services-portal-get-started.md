@@ -2,10 +2,10 @@
 title: 开始使用 Azure 经典管理门户按需传送内容 | Azure
 description: 本教程介绍了使用 Azure 媒体服务和 Azure 经典管理门户实施视频点播 (VoD) 内容传送应用程序的步骤。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.date: 06/22/2016

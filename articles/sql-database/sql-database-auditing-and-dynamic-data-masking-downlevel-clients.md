@@ -2,10 +2,10 @@
 title: 针对审核的 SQL 数据库下层客户端支持和 IP 终结点更改 | Azure
 description: 了解针对审核的 SQL 数据库下层客户端支持和 IP 终结点更改。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: ronitr
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

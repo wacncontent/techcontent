@@ -2,7 +2,7 @@
 title: 将自定义域名映射到 Azure 应用
 description: 了解如何在 Azure App Service 中将自定义域名（虚域）映射到应用。
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: cephalin
 manager: wpickett
 editor: jimbe

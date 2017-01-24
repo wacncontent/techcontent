@@ -2,10 +2,10 @@
 title: 获取工具（Windows 7 或更高版本）| Azure
 description: 下载并安装适用于 Windows 7 及更高版本上 Pi 的第一个示例应用程序的必需工具和软件。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: iot 开发, iot 软件, 物联网软件, 在 windows 上安装 git, gulp 运行, 安装 node js windows, 在 windows 上安装 npm, 在 windows 上安装 python
 
 ms.assetid: b3d88e17-97cc-4f23-85fd-a688fc228eb8

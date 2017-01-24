@@ -2,10 +2,10 @@
 title: 将弹性数据库客户端库与实体框架配合使用 | Azure
 description: 将弹性数据库客户端库与实体框架用于数据库编码
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: torsteng
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: sql-database

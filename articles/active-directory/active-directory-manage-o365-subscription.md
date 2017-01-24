@@ -2,10 +2,10 @@
 title: 在 Azure 中管理 Office 365 订阅的目录 | Azure
 description: 使用 Azure Active Directory 和 Azure 经典管理门户来管理 Office 365 订阅目录
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 746987b7-2dfd-4b35-819d-37c1b65c5c81
 ms.service: active-directory

@@ -2,10 +2,10 @@
 title: 添加和管理多个 Azure Active Directory 目录 | Azure
 description: 有关添加和管理 Azure Active Directory 目录的说明与最佳实践，解释目录为何是完全独立的资源
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 2b862b75-14df-45f2-a8ab-2a3ff1e2eb08
 ms.service: active-directory

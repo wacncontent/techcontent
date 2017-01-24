@@ -2,10 +2,10 @@
 title: 将作业提交到 Azure 中的 HPC Pack 群集 | Azure
 description: 了解如何设置本地计算机，以将作业提交到 Azure 中的 HPC Pack 群集
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management,hpc-pack
 
 ms.service: virtual-machines-windows

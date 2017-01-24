@@ -2,11 +2,11 @@
 title: Azure SQL 数据库安全指导原则和限制 | Azure
 description: 了解与安全性相关的 Azure SQL 数据库指导原则和限制。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: BYHAM
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.assetid: 8e71b04c-bc38-4153-8f83-f2b14faa31d9
 ms.service: sql-database

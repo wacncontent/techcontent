@@ -2,7 +2,7 @@
 title: 将 Pig 与 HDInsight 中的远程桌面配合使用 | Azure
 description: 了解如何使用 Pig 命令从到基于 Windows 的 HDInsight Hadoop 群集的远程桌面连接运行 Pig Latin 语句。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

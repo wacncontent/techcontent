@@ -1,12 +1,12 @@
 ---
 title: Azure IoT 套件常见问题 | Azure
 description: 有关 IoT 套件的常见问题
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: aguilaaj
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

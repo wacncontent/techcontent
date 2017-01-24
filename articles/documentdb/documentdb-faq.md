@@ -6,7 +6,7 @@ services: documentdb
 author: mimig1
 manager: jhubbard
 editor: monicar
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: b68d1831-35f9-443d-a0ac-dad0c89f245b
 ms.service: documentdb

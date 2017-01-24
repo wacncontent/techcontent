@@ -3,10 +3,10 @@ title: Azure 中的 Active Directory 联合身份验证服务 | Azure
 description: 在本文档中，你将学习如何在 Azure 中部署 AD FS 以实现高可用性。
 keywords: 在 azure 中部署 AD FS, 部署 azure adfs, azure adfs, azure ad fs,部署 adfs, 部署 ad fs, azure 中的 adfs, 在 azure 中部署 adfs, 在 azure 中部署 AD FS, adfs azure, AD FS 简介, Azure, Azure 中的 AD FS, iaas, ADFS, 将 adfs 移到 azure
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: anandyadavmsft
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 692a188c-badc-44aa-ba86-71c0e8074510
 ms.service: active-directory
@@ -177,11 +177,11 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 1. 单击“添加”
 2. 提供探测详细信息 
-    a.**名称**：探测名称 
-    b.**协议**：TCP 
-    c.**端口**：443 (HTTPS) 
-    d.**间隔**：5（默认值）- 这是 ILB 在后端池中探测计算机的间隔
-    e.**不正常阈值限制**：2（默认值）- 这是连续探测失败阈值，达到此阈值后，ILB 会将后端池中的计算机声明为无响应，并停止向它发送流量。
+   a.**名称**：探测名称 
+   b.**协议**：TCP 
+   c.**端口**：443 (HTTPS) 
+   d.**间隔**：5（默认值）- 这是 ILB 在后端池中探测计算机的间隔
+   e.**不正常阈值限制**：2（默认值）- 这是连续探测失败阈值，达到此阈值后，ILB 会将后端池中的计算机声明为无响应，并停止向它发送流量。
 
 ![配置 ILB 探测](./media/active-directory-aadconnect-azure-adfs/ilbdeployment4.png)  
 
@@ -192,12 +192,12 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 1. 在 ILB 的设置面板中选择“负载均衡规则”
 2. 在“负载均衡规则”面板中单击“添加”
 3. 在“添加负载均衡规则”面板中，指定以下值：
-    a.**名称**：提供规则的名称
-    b.**协议**：选择“TCP”
-    c.**端口**：443 
-    d.**后端端口**：443 
-    e.**后端池**：选择前面为 AD FS 群集创建的池 
-    f.**探测**：选择前面为 AD FS 服务器创建的探测
+   a.**名称**：提供规则的名称
+   b.**协议**：选择“TCP”
+   c.**端口**：443 
+   d.**后端端口**：443 
+   e.**后端池**：选择前面为 AD FS 群集创建的池 
+   f.**探测**：选择前面为 AD FS 服务器创建的探测
 
 ![配置 ILB 平衡规则](./media/active-directory-aadconnect-azure-adfs/ilbdeployment5.png)
 

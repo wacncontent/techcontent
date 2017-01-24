@@ -1,11 +1,11 @@
 ---
 title: Azure 搜索层（Azure 体系结构模式）
 description: Azure 搜素层模式是 Foundation 区域的一部分，在 CPIF 体系结构文档中对其进行了广泛的介绍。
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: arynes
 manager: fredhar
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.date: 03/25/2015

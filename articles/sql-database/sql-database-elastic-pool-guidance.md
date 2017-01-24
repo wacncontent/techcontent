@@ -2,10 +2,10 @@
 title: 何时使用弹性数据库池？
 description: 弹性数据库池是由一组弹性数据库共享的可用资源的集合。本文提供相关的指导来帮助你评估是否适合对一组数据库使用弹性数据库池。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA
@@ -42,7 +42,7 @@ Azure SQL 数据库中的弹性池可使 SaaS 开发人员将一组数据库的�
 
 下图显示了一个数据库示例，该数据库有大量的闲置时间，但也会定期出现活动高峰。这是非常适合池的使用模式：
 
-    ![适用于池的单一数据库](./media/sql-database-elastic-pool-guidance/one-database.png)
+   ![适用于池的单一数据库](./media/sql-database-elastic-pool-guidance/one-database.png)
 
 对于如上所示的五分钟时间段内，DB1 高峰最高达到 90 个 DTU，但其整体平均使用量低于五个 DTU。在单一数据库中，运行此工作负荷需要 S3 性能级别，但在低活动期间，大多数资源都处在未使用的状态。
 
@@ -50,9 +50,9 @@ Azure SQL 数据库中的弹性池可使 SaaS 开发人员将一组数据库的�
 
 以上一个示例为基础，假设有其他数据库具有与 DB1 类似的使用模式。在接下来的两个图形中，4 个数据库和 20 个数据库的使用量分层放在相同的图形上，以说明随时间推移，它们的使用率非重叠的性质：
 
-    ![使用模式适用于池的 4 个数据库](./media/sql-database-elastic-pool-guidance/four-databases.png)
+   ![使用模式适用于池的 4 个数据库](./media/sql-database-elastic-pool-guidance/four-databases.png)
 
-    ![使用模式适用于池的 20 个数据库](./media/sql-database-elastic-pool-guidance/twenty-databases.png)
+   ![使用模式适用于池的 20 个数据库](./media/sql-database-elastic-pool-guidance/twenty-databases.png)
 
 在上图中，黑线表示跨所有 20 个数据库的聚合 DTU 使用量。其中表明聚合 DTU 使用量永远不会超过 100 个 DTU，并指出 20 个数据库可以在此时间段内共享 100 个 eDTU。相比于将每个数据库放在单一数据库的 S3 性能级别，这会导致 DTU 减少 20 倍，价格降低 13 倍。
 

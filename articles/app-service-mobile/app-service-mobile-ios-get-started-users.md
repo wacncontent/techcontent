@@ -5,7 +5,7 @@ services: app-service\mobile
 documentationCenter: ios
 authors: yuaxu
 manager: yochayk
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

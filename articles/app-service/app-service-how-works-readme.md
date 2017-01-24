@@ -3,10 +3,10 @@ title: Azure 应用服务工作方式
 description: 了解应用服务工作方式
 keywords: 应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: yochay
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: ae74fc32-969e-4580-8d61-02c922f1f184
 ms.service: app-service

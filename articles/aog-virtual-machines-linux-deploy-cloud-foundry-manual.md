@@ -2,13 +2,13 @@
 title: 使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
 description: 这篇文章将介绍如何使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machines-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/31/2016
 ---
 

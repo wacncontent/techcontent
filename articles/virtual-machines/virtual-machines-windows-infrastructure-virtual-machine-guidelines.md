@@ -1,11 +1,11 @@
 ---
 title: Windows 虚拟机准则 |Azure
 description: 了解将 Windows 虚拟机部署到 Azure 中的关键设计和实施准则
-documentationCenter: 
+documentationCenter: ''
 services: virtual-machines-windows
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

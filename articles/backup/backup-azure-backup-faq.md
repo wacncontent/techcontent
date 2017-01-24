@@ -2,10 +2,10 @@
 title: Azure 备份常见问题 | Azure
 description: 有关备份服务、备份代理、备份和保留、恢复、安全性，以及有关备份和灾难恢复的常见问题的解答。
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: markgalioto
 manager: jwhit
-editor: 
+editor: ''
 keywords: 备份和灾难恢复; 备份服务
 
 ms.assetid: 1011bdd6-7a64-434f-abd7-2783436668d7

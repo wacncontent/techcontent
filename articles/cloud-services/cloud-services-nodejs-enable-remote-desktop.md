@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: nodejs
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

@@ -3,12 +3,12 @@ title: Azure 开发人员中心：Media Services
 description: Azure 开发人员中心：Media Services
 services: Media Services
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
 ms.service: Media Services
-ms.date: 
+ms.date: ''
 wacn.date: 06/29/2015
 ---
 

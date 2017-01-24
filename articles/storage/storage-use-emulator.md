@@ -2,7 +2,7 @@
 title: 使用 Azure 存储模拟器进行开发和测试 | Azure
 description: Azure 存储模拟器为针对 Azure 存储的开发和测试提供了免费的本地开发环境。了解有关存储模拟器的信息，包括如何对请求进行身份验证、如何从应用程序连接到模拟器和如何使用命令行工具。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: mmacy
 manager: timlt
 editor: tysonn

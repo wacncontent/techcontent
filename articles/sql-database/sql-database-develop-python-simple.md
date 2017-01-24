@@ -2,10 +2,10 @@
 title: 使用 Python 连接到 SQL 数据库
 description: 演示了一个可以用来连接到 Azure SQL 数据库的 Python 代码示例。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: meet-bhagdev
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: drivers

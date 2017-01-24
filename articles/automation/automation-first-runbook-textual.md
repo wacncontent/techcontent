@@ -2,10 +2,10 @@
 title: 我在 Azure 自动化中的第一个 PowerShell 工作流 Runbook | Azure
 description: 本教程指导你使用 PowerShell 工作流创建、测试和发布一个简单的文本 Runbook。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
-editor: 
+editor: ''
 keywords: powershell 工作流, powershell 工作流示例, 工作流 powershell
 
 ms.service: automation

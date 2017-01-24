@@ -2,10 +2,10 @@
 title: 使用 Transact-SQL 复制 Azure SQL 数据库 | Azure
 description: 使用 Transact-SQL 创建 Azure SQL 数据库的副本
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

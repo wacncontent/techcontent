@@ -2,10 +2,10 @@
 title: 虚拟机规模集概述 | Azure
 description: 了解有关虚拟机规模集的详细信息
 services: virtual-machine-scale-sets
-documentationcenter: 
+documentationcenter: ''
 author: gbowerman
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 76ac7fd7-2e05-4762-88ca-3b499e87906e

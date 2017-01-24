@@ -2,10 +2,10 @@
 title: Azure 区域和 Windows VM 可用性 | Azure
 description: 了解能够在 Azure 中运行 Windows 虚拟机的区域和可用性功能
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

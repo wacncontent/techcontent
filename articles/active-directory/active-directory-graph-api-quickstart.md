@@ -5,8 +5,8 @@ services: active-directory
 documentationCenter: n/a
 authors: JimacoMS
 manager: msmbaldwin
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: active-directory
 ms.devlang: na

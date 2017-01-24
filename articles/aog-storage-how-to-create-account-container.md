@@ -2,13 +2,13 @@
 title: 如何创建存储账号及容器
 description: 本页介绍如何创建存储账号及容器。
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: storage-aog
-ms.date: 
+ms.date: ''
 wacn.date: 12/14/2015
 ---
 

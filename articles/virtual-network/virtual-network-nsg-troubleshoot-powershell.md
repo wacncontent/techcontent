@@ -5,7 +5,7 @@ services: virtual-network
 documentationCenter: na
 authors: AnithaAdusumilli
 manager: narayan
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-network

@@ -2,12 +2,12 @@
 title: 使用 DSC 将凭据传递到 Azure | Azure
 description: 概述如何使用 PowerShell Desired State Configuration 安全地将凭据传递给 Azure 虚拟机
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: zjalexander
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
-keywords: 
+keywords: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

@@ -2,7 +2,7 @@
 title: 使用索引器连接 DocumentDB 和 Azure 搜索 | Azure
 description: 本文介绍如何将 Azure 搜索索引器与 DocumentDB 作为数据源联合使用。
 services: documentdb
-documentationCenter: 
+documentationCenter: ''
 authors: AndrewHoh
 manager: jhubbard
 editor: mimig

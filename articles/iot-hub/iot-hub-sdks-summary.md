@@ -2,10 +2,10 @@
 title: Azure IoT 中心 SDK 的列表 | Azure
 description: 有关各种 Azure IoT 中心设备和服务 SDK 的信息以及指向这些 SDK 的链接。
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.date: 09/13/2016

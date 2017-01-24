@@ -6,7 +6,7 @@ tags: azure-portal
 editor: cgronlun
 manager: paulettm
 authors: mumian
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: hdinsight
 ms.workload: big-data

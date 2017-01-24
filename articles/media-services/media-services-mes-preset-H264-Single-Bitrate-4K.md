@@ -3,9 +3,9 @@ title: H264 单比特率 4K | Azure
 description: 本主题概述了 **H264 单比特率 4K** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 8e437aea-8193-49a0-9ff2-4fd391c80972
 ms.service: media-services

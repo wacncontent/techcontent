@@ -2,10 +2,10 @@
 title: 通过 PowerShell 迁移到 Resource Manager | Azure
 description: 本文详述了如何在支持的平台上使用 Azure PowerShell 命令将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager 部署模型
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 2b3dff9b-2e99-4556-acc5-d75ef234af9c

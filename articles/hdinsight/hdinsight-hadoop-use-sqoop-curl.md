@@ -2,7 +2,7 @@
 title: 在 HDInsight 中将 Hadoop Sqoop 与 Curl 配合使用 | Azure
 description: 了解如何使用 Curl 向 HDInsight 远程提交 Sqoop 作业。
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: mumian
 manager: jhubbard
 editor: cgronlun

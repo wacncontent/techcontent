@@ -4,7 +4,7 @@ description: 了解如何在通用 Windows 应用中使用 Azure 移动服务缓
 documentationCenter: mobile-services
 authors: lindydonna
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

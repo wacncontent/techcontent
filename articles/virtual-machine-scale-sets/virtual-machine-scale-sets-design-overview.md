@@ -3,7 +3,7 @@ title: 设计规模化的虚拟机规模集 | Azure
 description: 了解如何设计规模化的虚拟机规模集
 keywords: linux 虚拟机, 虚拟机规模集
 services: virtual-machine-scale-sets
-documentationCenter: 
+documentationCenter: ''
 authors: gatneil
 manager: madhana
 editor: tysonn

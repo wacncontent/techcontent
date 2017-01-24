@@ -2,7 +2,7 @@
 title: 使用 Azure 门户预览管理 Azure 资源 | Azure
 description: 使用 Azure 门户预览和 Azure Resource Manager 来管理资源。说明如何使用仪表板进行资源监视。
 services: azure-resource-manager,azure-portal
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

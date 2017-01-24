@@ -2,10 +2,10 @@
 title: Azure Redis 缓存常见问题 | Azure
 description: 了解常见问题的答案，以及有关 Azure Redis 缓存的模式和最佳实践
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

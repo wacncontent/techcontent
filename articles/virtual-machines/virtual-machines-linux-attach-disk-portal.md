@@ -2,10 +2,10 @@
 title: 将数据磁盘附加到 Linux VM | Azure
 description: 如何使用 Resource Manager 部署模型在 Azure 门户预览中将新数据磁盘或现有数据磁盘附加到 Linux VM。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 5e1c6212-976c-4962-a297-177942f90907

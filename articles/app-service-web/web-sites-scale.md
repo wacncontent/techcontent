@@ -2,7 +2,7 @@
 title: 增加 Azure 中的应用 | Azure
 description: 了解如何增加 Azure App Service 中的应用以增加容量和功能。
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: cephalin
 manager: wpickett
 editor: mollybos

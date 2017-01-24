@@ -4,14 +4,14 @@ urlDisplayName: CDN
 title: Azure CDN FAQs – Azure Feature Guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, cannot cache, cannot CNAME, origin rate high, cache refresh failed, CDN FAQ, CDN FAQS, CDN use failed, CDN service failure, CDN configuration error, speed slow, cannot open website, login exception, CNAME, CDN technical documentation, CDN help files
 description: Find answers to common service consulting questions or inquiries related to the Azure CDN
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn_en
 ms.date: 7/7/2016
@@ -41,10 +41,10 @@ wacn.lang: en
 The inability to cache a URL is usually due to one of the following reasons:
 
 1. The response header for the origin URL includes the following information:
-    - Set-Cookie (and the Allow ignore Cookie option has not been checked in the Configure Cache Rules in Azure CDN management portal). Note: When Set-Cookie is used for user login and identification, the Allow Ignore Cookie option cannot be checked; otherwise, it could cause cache issues.
-    - Cache-Control: no-store/no-cache/private (and the Allow ignore Cache-Control option has not been checked in the Configure Cache Rules).
-    - The Expires time is a time in the past; Expires sets the point in time when the cache expires, so if it is a time in the past, it will make it impossible to cache.
-    - The value of Max-age is very small; Max-age sets the length of the caching time in seconds, so if the value is too small, for example less than two digits, it will expire very quickly and make it impossible to cache.
+   - Set-Cookie (and the Allow ignore Cookie option has not been checked in the Configure Cache Rules in Azure CDN management portal). Note: When Set-Cookie is used for user login and identification, the Allow Ignore Cookie option cannot be checked; otherwise, it could cause cache issues.
+   - Cache-Control: no-store/no-cache/private (and the Allow ignore Cache-Control option has not been checked in the Configure Cache Rules).
+   - The Expires time is a time in the past; Expires sets the point in time when the cache expires, so if it is a time in the past, it will make it impossible to cache.
+   - The value of Max-age is very small; Max-age sets the length of the caching time in seconds, so if the value is too small, for example less than two digits, it will expire very quickly and make it impossible to cache.
 
 2. The cache rules are not configured or are configured with errors such that the URL cannot hit any caching rules; for example, if the user accidentally enters the rule “[Any Character] (.gif|.jpg|.bmp) (.gif|.jpg|.bmp)”, then it will be impossible to hit the rule even for images, because the file extension is duplicated.
 

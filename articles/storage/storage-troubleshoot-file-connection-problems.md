@@ -2,7 +2,7 @@
 title: Azure 文件存储问题疑难解答 | Azure
 description: Azure 文件存储问题疑难解答
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: genlin
 manager: felixwu
 editor: na

@@ -2,7 +2,7 @@
 title: 使用 Azure Active Directory 的 HPC Pack 群集 | Azure
 description: 了解如何将 Azure 中的 HPC Pack 2016 群集与 Azure Active Directory 集成
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
 manager: timlt
 

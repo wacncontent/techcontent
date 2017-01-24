@@ -2,7 +2,7 @@
 title: 使用 C# 和 Resource Manager 模板部署 VM | Azure
 description: 了解如何使用 C# 和 Resource Manager 模板部署 Azure VM。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: davidmu1
 manager: timlt
 editor: tysonn

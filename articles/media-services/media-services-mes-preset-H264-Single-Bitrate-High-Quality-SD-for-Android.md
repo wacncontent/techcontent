@@ -3,9 +3,9 @@ title: 适用于 Android 的 H264 单比特率高品质 SD | Azure
 description: 本主题概述了 **适用于 Android 的 H264 单比特率高品质 SD** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 4a190f24-ec6a-47e7-8bca-6294e064b15b
 ms.service: media-services

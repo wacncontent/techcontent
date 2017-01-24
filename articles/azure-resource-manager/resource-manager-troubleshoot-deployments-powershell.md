@@ -2,11 +2,11 @@
 title: 使用 PowerShell 查看部署操作 | Azure
 description: 介绍如何使用 Azure PowerShell 来检测 Resource Manager 部署的问题。
 services: azure-resource-manager,virtual-machines
-documentationcenter: 
+documentationcenter: ''
 tags: top-support-issue
 author: tfitzmac
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 51cb9716-ab95-4024-afc4-ae9cf5b2f4b7
 ms.service: azure-resource-manager

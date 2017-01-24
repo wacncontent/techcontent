@@ -2,10 +2,10 @@
 title: 排查 Linux VM 分配失败 | Azure
 description: 在 Azure 中创建、重新启动 Linux VM 或调整其大小时排查分配失败
 services: virtual-machines-linux, azure-resource-manager
-documentationCenter: 
+documentationCenter: ''
 authors: jiangchen79
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue,azure-resourece-manager,azure-service-management
 
 ms.service: virtual-machines-linux

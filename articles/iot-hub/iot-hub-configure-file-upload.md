@@ -2,10 +2,10 @@
 title: 使用 Azure 门户配置文件上载 | Azure
 description: 如何使用 Azure 门户配置 IoT 中心，以便从连接的设备上传文件。包括有关配置目标 Azure 存储帐户的信息。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 915f1597-272d-4fd4-8c5b-a0ccb1df0d91
 ms.service: iot-hub

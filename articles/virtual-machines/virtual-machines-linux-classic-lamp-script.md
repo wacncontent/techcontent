@@ -3,7 +3,7 @@ title: 使用 Azure CustomScript Extension 部署 Linux 应用程序
 description: 了解如何使用 Azure CustomScript 扩展在 Linux 虚拟机上部署应用程序
 editor: tysonn
 manager: timlt
-documentationCenter: 
+documentationCenter: ''
 services: virtual-machines-linux
 authors: gbowerman
 

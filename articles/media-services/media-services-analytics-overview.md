@@ -2,10 +2,10 @@
 title: Azure 媒体服务分析概述 | Azure
 description: Azure 媒体服务提供了 Azure 媒体分析公共预览版，其中集合了企业级的语音和计算机视觉服务、合规性、安全性和全球市场宣传功能。Azure 媒体分析服务是使用核心 Azure 媒体服务平台组件构建而成的，因此一开始就能进行大规模的媒体处理。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: c56e3781-8510-4f7f-b5ff-a218c1bb6f4c
 ms.service: media-services

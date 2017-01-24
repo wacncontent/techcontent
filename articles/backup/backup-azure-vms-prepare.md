@@ -2,10 +2,10 @@
 title: 准备好环境以备份 Azure 虚拟机 | Azure
 description: 确保对环境进行准备，以便在 Azure 中备份虚拟机
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: markgalioto
 manager: cfreeman
-editor: 
+editor: ''
 keywords: 备份; 正在备份;
 
 ms.service: backup

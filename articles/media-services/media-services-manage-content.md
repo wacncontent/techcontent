@@ -2,10 +2,10 @@
 title: 如何使用 Azure 经典管理门户管理 Azure 媒体服务的媒体内容
 description: 了解如何管理 Azure 媒体服务中的媒体内容。包括：上传、编制索引、编码、加密以及发布。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

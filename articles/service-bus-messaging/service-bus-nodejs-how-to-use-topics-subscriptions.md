@@ -5,7 +5,7 @@ services: service-bus
 documentationCenter: nodejs
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.workload: na

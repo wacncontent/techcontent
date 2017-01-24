@@ -4,7 +4,7 @@ description: 了解如何使用 .NET 后端通过移动服务基于 Windows 应�
 documentationCenter: windows
 authors: wesmc7777
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

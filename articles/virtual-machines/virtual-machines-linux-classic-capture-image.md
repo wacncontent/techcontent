@@ -2,7 +2,7 @@
 title: 捕获 Linux VM 的映像 | Azure
 description: 了解如何使用经典部署模型捕获基于 Linux 的 Azure 虚拟机 (VM) 的映像。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
 editor: tysonn

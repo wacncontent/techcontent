@@ -1,14 +1,14 @@
 ---
 title: Azure Web 应用连接 Service Bus 出现证书错误的解决方案
 description: Azure Web 应用连接 Service Bus 出现证书错误的解决方案
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: service-bus-aog
-ms.date: 
+ms.date: ''
 wacn.date: 11/23/2016
 ---
 

@@ -2,10 +2,10 @@
 title: 获取工具 (Ubuntu 16.04) | Azure
 description: 下载并安装适用于 Ubuntu 上 Pi 的第一个示例应用程序的必需工具和软件。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: iot 开发, iot 软件, 物联网软件, 在 ubuntu 上安装 git, gulp 运行, 安装 node js ubuntu
 
 ms.assetid: 4d5e45c0-1db9-4662-a039-99ba26333085

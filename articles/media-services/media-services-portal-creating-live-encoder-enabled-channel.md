@@ -2,10 +2,10 @@
 title: 如何使用 Azure 媒体服务执行实时传送视频流以通过 Azure 经典管理门户创建多比特率流 | Azure
 description: 本教程介绍了创建通道的步骤，该通道接收单比特率实时流并利用 Azure 经典管理门户将其编码为多比特率流。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: anilmur
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 504f74c2-3103-42a0-897b-9ff52f279e23
 ms.service: media-services

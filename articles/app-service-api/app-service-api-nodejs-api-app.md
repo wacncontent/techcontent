@@ -5,7 +5,7 @@ services: app-service\api
 documentationCenter: node
 authors: bradygaster
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-api
 ms.workload: web

@@ -2,10 +2,10 @@
 title: 将突发节点添加到 HPC Pack 群集 | Azure
 description: 了解如何通过添加在云服务中运行的辅助角色实例在 Azure 中按需扩展 HPC Pack 群集
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,hpc-pack
 
 ms.service: virtual-machines-windows

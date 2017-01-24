@@ -2,10 +2,10 @@
 title: 在 Azure 门户预览中使用 Windows 故障排除 VM | Azure
 description: 了解如何通过使用 Azure 门户预览将 OS 磁盘连接到恢复 VM 来排查 Azure 中的 Windows 虚拟机问题
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

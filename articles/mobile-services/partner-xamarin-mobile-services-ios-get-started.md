@@ -5,7 +5,7 @@ services: mobile-services
 documentationCenter: xamarin
 authors: conceptdev
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

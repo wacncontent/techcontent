@@ -2,10 +2,10 @@
 title: 将 Azure SQL 数据库还原到之前的时间点 (PowerShell) | Azure
 description: 将 Azure SQL 数据库还原到之前的时间点
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

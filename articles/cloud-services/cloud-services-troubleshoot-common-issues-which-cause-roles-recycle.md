@@ -2,10 +2,10 @@
 title: 云服务角色回收的常见原因 | Azure
 description: 突然回收云服务角色可能会导致严重停机。以下是导致角色回收的一些常见问题，解决这些问题将有助于减少停机。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: simonxjx
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue
 
 ms.service: cloud-services

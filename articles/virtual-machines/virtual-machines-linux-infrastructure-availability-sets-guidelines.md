@@ -1,11 +1,11 @@
 ---
 title: Azure 可用性集准则 | Azure
 description: 了解用于在 Azure 基础结构服务中部署可用性集的关键设计和实施准则。
-documentationcenter: 
+documentationcenter: ''
 services: virtual-machines-linux
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 24f1d91c-8cc0-4251-bb67-ac4c4c37e8cd

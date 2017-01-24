@@ -1,12 +1,12 @@
 ---
 title: 监视和诊断指南 | Azure
 description: 有关在云中监视分布式应用程序的最佳实践。
-services: 
+services: ''
 documentationCenter: na
 authors: dragon119
 manager: christb
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: best-practice
 ms.devlang: na

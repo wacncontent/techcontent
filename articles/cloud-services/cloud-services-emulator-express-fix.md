@@ -2,10 +2,10 @@
 title: 在 Visual Studio 中设置 Emulator Express 来调试云服务应用程序 | Microsoft 文档
 description: 介绍如何在 Visual Studio 服务中安装 C++ Redistributable 来启用 Emulator Express
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: cawa
 manager: paulyuk
-editor: 
+editor: ''
 
 ms.assetid: 22b20f7a-23f4-4f7f-b536-3bf1e01adcd1
 ms.service: cloud-services

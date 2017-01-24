@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: na
 authors: raiye
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.devlang: na

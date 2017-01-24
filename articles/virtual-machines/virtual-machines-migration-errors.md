@@ -2,10 +2,10 @@
 title: 从经典迁移到 Azure Resource Manager 期间的常见错误 | Azure
 description: 本文编录了将 IaaS 资源从 Azure 服务管理迁移到 Azure Resource Manager 堆栈期间的最常见错误和缓解措施。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: singhkays
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 5bc03a1b-eb1c-438c-83d9-f0e9d61f1b6a

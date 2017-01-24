@@ -2,10 +2,10 @@
 title: 实时流式处理故障排除指南 | Azure
 description: 本主题提供有关如何排查实时流式处理问题的建议。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

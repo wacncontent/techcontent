@@ -2,10 +2,10 @@
 title: 使用 Transact-SQL 为 Azure SQL 数据库配置异地复制 | Azure
 description: 使用 Transact-SQL 为 Azure SQL 数据库配置异地复制
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

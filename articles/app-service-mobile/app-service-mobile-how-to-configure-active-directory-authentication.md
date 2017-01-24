@@ -3,9 +3,9 @@ title: 如何为应用服务应用程序配置 Azure Active Directory 身份验�
 description: 了解如何为应用服务应用程序配置 Azure Active Directory 身份验证。
 authors: mattchenderson
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

@@ -2,10 +2,10 @@
 title: 通过资源管理器部署模型使用 Azure 备份将 Windows Server 或客户端备份到 Azure | Azure
 description: 通过创建备份保管库、下载凭据、安装备份代理并完成文件和文件夹的初始备份，将 Windows 服务器或客户端备份到 Azure。
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: markgalioto
 manager: cfreeman
-editor: 
+editor: ''
 keywords: 备份保管库; 备份 Windows 服务器; 备份 windows;
 
 ms.assetid: 7f5b1943-b3c1-4ddb-8fb7-3560533c68d5
@@ -93,11 +93,11 @@ $credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $va
 1. 在 Downloads 文件夹（或其他保存位置）中找到并双击 **MARSagentinstaller.exe**。
 2. 完成 Azure 恢复服务代理安装向导。若要完成该向导，你需要：
 
-    - 选择安装和缓存文件夹的位置。
-    - 如果使用代理服务器来连接 Internet，请提供代理服务器信息。
-    - 如果使用经过身份验证的代理，请提供用户名和密码详细信息。
-    - 提供已下载的保管库凭据
-    - 将加密通行短语保存在安全的位置。
+   - 选择安装和缓存文件夹的位置。
+   - 如果使用代理服务器来连接 Internet，请提供代理服务器信息。
+   - 如果使用经过身份验证的代理，请提供用户名和密码详细信息。
+   - 提供已下载的保管库凭据
+   - 将加密通行短语保存在安全的位置。
 
     >[!NOTE]
     > 如果你丢失或忘记了通行短语，Microsoft 无法帮助你恢复备份数据。请将文件保存在安全的位置。还原备份时需要用到此文件。

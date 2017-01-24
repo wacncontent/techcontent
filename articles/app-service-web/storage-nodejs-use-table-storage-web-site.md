@@ -6,7 +6,7 @@ services: app-service\web, storage
 documentationCenter: nodejs
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: storage
 ms.workload: storage

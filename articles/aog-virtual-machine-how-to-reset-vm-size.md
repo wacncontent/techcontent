@@ -2,13 +2,13 @@
 title: 调整虚拟机的尺寸
 description: 本文介绍如何调整虚拟机的尺寸
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 12/18/2015
 ---
 

@@ -1,11 +1,11 @@
 ---
 title: PHP Web 角色和辅助角色 | Azure
 description: 有关如何在 Azure 云服务中创建 PHP Web 和辅助角色以及配置 PHP 运行时的指南。
-services: 
+services: ''
 documentationCenter: php
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

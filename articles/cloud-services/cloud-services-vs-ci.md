@@ -2,10 +2,10 @@
 title: 使用 Visual Studio Online 持续交付云服务 | Microsoft 文档
 description: 学习如何在不将诊断存储密钥保存到服务配置文件服务的情况下设置 Azure 云应用的持续交付
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: cawa
 manager: paulyuk
-editor: 
+editor: ''
 
 ms.assetid: 148b2959-c5db-4e4a-a7e9-fccb252e7e8a
 ms.service: cloud-services

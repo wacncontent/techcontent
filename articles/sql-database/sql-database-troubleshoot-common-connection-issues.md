@@ -2,10 +2,10 @@
 title: 排查 Azure SQL 数据库的常见连接问题
 description: 识别和解决 Azure SQL 数据库常见连接错误的步骤。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: dalechen
 manager: felixwu
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

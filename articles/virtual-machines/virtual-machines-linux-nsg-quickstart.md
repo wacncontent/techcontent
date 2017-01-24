@@ -2,10 +2,10 @@
 title: 在 Azure 中打开 Linux VM 的端口和终结点 | Azure
 description: 了解如何使用 Azure Resource Manager 部署模型和 Azure CLI 2.0（预览版）在 Linux VM 上打开端口/创建终结点
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: eef9842b-495a-46cf-99a6-74e49807e74e
 ms.service: virtual-machines-linux

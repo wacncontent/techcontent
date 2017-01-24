@@ -2,10 +2,10 @@
 title: 使用 T-SQL 创建 Azure SQL 数据库或将其移入弹性池 | Azure
 description: 使用 T-SQL 在弹性池中创建 Azure SQL 数据库。或使用 T-SQL 将数据库移入和移出池。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: sidneyh
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

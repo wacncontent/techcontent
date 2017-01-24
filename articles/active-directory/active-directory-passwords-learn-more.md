@@ -2,7 +2,7 @@
 title: 详细了解：Azure AD 密码管理 | Azure
 description: 有关 Azure AD 密码管理的高级主题，内容包括密码写回的工作原理、密码写回安全性、密码重置门户的工作原理，以及密码重置使用的数据。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: asteen
 manager: femila
 editor: curtand

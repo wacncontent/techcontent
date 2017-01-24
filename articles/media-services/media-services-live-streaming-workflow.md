@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体服务传送实时流
 description: 此主题概述实时流式处理中所涉及的主要组件。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.date: 06/22/2016

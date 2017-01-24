@@ -2,10 +2,10 @@
 title: 连接器版本发行历史记录 | Azure
 description: 本主题列出了 Forefront Identity Manager (FIM) 和 Microsoft Identity Manager (MIM) 的连接器的所有版本
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

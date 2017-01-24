@@ -2,10 +2,10 @@
 title: 从 Azure SQL 数据库备份中还原单个表 | Azure
 description: 了解如何从 Azure SQL 数据库备份中还原单个表。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: dalechen
 manager: felixwu
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

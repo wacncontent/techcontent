@@ -2,13 +2,13 @@
 title: Linux 虚拟机远程连接安全贴士 | Azure
 description: 本文介绍如何安全的远程连接到 Linux 虚拟机
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

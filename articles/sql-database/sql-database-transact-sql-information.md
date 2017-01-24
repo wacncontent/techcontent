@@ -2,11 +2,11 @@
 title: Azure SQL 数据库 T-SQL 中不支持的语句 | Azure
 description: 在 Azure SQL 数据库中不完全支持的 Transact-SQL 语句
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: BYHAM
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: sql-database
 ms.devlang: na

@@ -2,10 +2,10 @@
 title: 排查 Azure SQL 数据库的备份和还原问题
 description: 了解如何在发生错误和服务中断时，使用 Azure SQL 数据库中的备份和副本恢复云数据库。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: dalechen
 manager: felixwu
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

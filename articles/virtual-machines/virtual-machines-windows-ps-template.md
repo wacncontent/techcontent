@@ -2,10 +2,10 @@
 title: 使用 Resource Manager 模板创建 VM | Azure
 description: 将 Resource Manager 模板与 PowerShell 配合使用，以轻松创建新的 Windows 虚拟机。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

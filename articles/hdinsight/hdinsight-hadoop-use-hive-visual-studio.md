@@ -2,7 +2,7 @@
 title: 使用 Hadoop Tools for Visual Studio 执行 Hive 查询 | Azure
 description: 了解如何通过 Visual Studio Hadoop 工具将 Hive 与 HDInsight 中的 Hadoop 配合使用。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun

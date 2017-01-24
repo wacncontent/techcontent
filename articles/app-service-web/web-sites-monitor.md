@@ -2,7 +2,7 @@
 title: 在 Azure 中监视 Web Apps
 description: 了解如何使用经典管理门户在 Azure 中监视 Web 应用。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
 editor: mollybos

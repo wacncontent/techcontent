@@ -4,7 +4,7 @@ description: 了解如何在通用 Windows 平台 (UWP) 应用中使用 Azure �
 documentationCenter: windows
 authors: adrianhall
 manager: erikre
-editor: 
+editor: ''
 services: app-service\mobile
 
 ms.service: app-service-mobile

@@ -1,12 +1,12 @@
 ---
 title: VS2015 直接使用账户登录 Azure
 description: VS2015 直接使用账户登录 Azure。
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: na-aog
 ms.date: 12/05/2016

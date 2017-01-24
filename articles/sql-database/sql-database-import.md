@@ -2,10 +2,10 @@
 title: 导入 BACPAC 文件以创建 Azure SQL 数据库 | Azure
 description: 通过导入现有 BACPAC 文件创建 Azure SQL 数据库。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

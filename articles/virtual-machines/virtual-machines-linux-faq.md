@@ -2,10 +2,10 @@
 title: Linux VM 常见问题 | Azure
 description: 解答有关通过 Resource Manager 模型创建的 Linux 虚拟机的一些常见问题。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-management
 
 ms.service: virtual-machines-linux

@@ -3,7 +3,7 @@ title: SQL (PaaS) 数据库与VM 上的云中 SQL Server (IaaS) | Azure
 description: 了解哪个云 SQL Server 选项适合你的应用程序：Azure SQL (PaaS) 数据库或 Azure 虚拟机上的云中 SQL Server。
 services: sql-database, virtual-machines
 keywords: SQL Server 云, 云中 SQL Server, PaaS 数据库, 云 SQL Server, DBaaS
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
 editor: cjgronlund

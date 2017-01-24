@@ -4,7 +4,7 @@ description: 了解如何使用 Azure 移动应用将推送通知发送到 iOS �
 services: app-service\mobile
 documentationCenter: ios
 manager: yochayk
-editor: 
+editor: ''
 authors: yuaxu
 
 ms.service: app-service-mobile
