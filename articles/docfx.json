@@ -20,19 +20,23 @@
         "files": [
           "**/*.png",
           "**/*.jpg",
-          "**/*.jpeg",
           "**/*.svg",
-          "**/*.gif",
-          "../includes/**/*.png",
-          "../includes/**/*.jpg",
-          "../includes/**/*.jpeg",
-          "../includes/**/*.svg",
-          "../includes/**/*.gif"
+          "**/*.gif"
         ],
         "exclude": [
           "**/obj/**",
           "opsacndocsdemo/**"
         ]
+      },
+      {
+        "files": [
+          "**/*.png",
+          "**/*.jpg",
+          "**/*.svg",
+          "**/*.gif"
+        ],
+        "src": "../includes",
+        "dest": "includes"
       }
     ],
     "overwrite": [],
