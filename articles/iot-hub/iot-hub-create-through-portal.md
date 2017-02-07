@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览创建 IoT 中心 | Azure
 description: 如何通过 Azure 门户预览创建、管理和删除 Azure IoT 中心。包括有关定价层、缩放、安全性和消息传递配置的信息。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 0909cd2b-4c1e-49e0-b68a-75532caf0a6a
 ms.service: iot-hub
@@ -18,12 +18,12 @@ wacn.date: 01/13/2017
 ms.author: dobett
 ---
 
-# 使用 Azure 门户创建 IoT 中心
+# 使用 Azure 门户预览创建 IoT 中心
 
 [!INCLUDE [iot-hub-resource-manager-selector](../../includes/iot-hub-resource-manager-selector.md)]
 
 ## 介绍
-本文介绍如何在 Azure 门户中查找 IoT 中心服务，以及如何创建和管理 IoT 中心。
+本文介绍如何在 Azure 门户预览中查找 IoT 中心服务，以及如何创建和管理 IoT 中心。
 
 ## 在哪里可以找到 IoT 中心
 可在多个位置找到 IoT 中心。

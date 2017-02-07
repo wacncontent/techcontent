@@ -5,7 +5,7 @@ services: virtual-network
 documentationcenter: na
 author: jimdial
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: d8d07c16-cbe5-4536-acd6-870269346fe3

@@ -3,9 +3,9 @@ title: H264 多比特率 1080p | Azure
 description: 本主题概述了 **H264 多比特率 1080p** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 7096d8e9-2953-48b3-9d1c-8f7ff6a38e91
 ms.service: media-services

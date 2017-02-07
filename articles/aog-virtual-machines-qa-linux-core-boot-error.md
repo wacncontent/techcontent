@@ -2,13 +2,13 @@
 title: Linux 内核超时导致虚拟机无法正常启动
 description: Linux 内核超时导致虚拟机无法正常启动。
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machines-aog
-ms.date: 
+ms.date: ''
 wacn.date: 12/05/2016
 ---
 

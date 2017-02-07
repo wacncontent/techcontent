@@ -6,7 +6,7 @@ services: sql-data-warehouse
 documentationCenter: NA
 authors: lodipalm
 manager: barbkess
-editor: 
+editor: ''
 
 ms.service: sql-data-warehouse
 ms.devlang: NA

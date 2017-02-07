@@ -2,10 +2,10 @@
 title: Azure Active Directory 中的管理单元管理
 description: 在 Azure Active Directory 中使用管理单元获得更精细的委派权限
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 8464cd6b-1d1a-470d-a4fb-ee29b8eab4c4
 ms.service: active-directory

@@ -2,7 +2,7 @@
 title: 使用 Resource Manager 锁定资源 | Azure
 description: 通过对所有用户和角色应用限制，来防止用户更新或删除特定的资源。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

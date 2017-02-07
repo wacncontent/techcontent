@@ -1,14 +1,14 @@
 ---
 title: 计算 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: 计算 - Azure 微软云
-services: 
+services: ''
 documentationCenter: java-compute
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
+ms.service: ''
 ms.date: 10/23/2014
 wacn.date: 11/02/2015
 ---

@@ -2,10 +2,10 @@
 title: Media Encoder Standard 格式和编解码器
 description: 本主题概述 Media Encoder Standard 格式和编解码器。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

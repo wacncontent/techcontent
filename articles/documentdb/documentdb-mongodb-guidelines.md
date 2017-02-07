@@ -4,8 +4,8 @@ description: 了解具有 MongoDB 协议支持的 DocumentDB 帐户（目前以�
 services: documentdb
 authors: andrewhoh
 manager: jhubbard
-editor: 
-documentationCenter: 
+editor: ''
+documentationCenter: ''
 
 ms.service: documentdb
 ms.workload: data-services

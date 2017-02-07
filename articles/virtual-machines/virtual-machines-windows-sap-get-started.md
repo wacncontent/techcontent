@@ -2,20 +2,20 @@
 title: 开始使用 SAP 解决方案 | Azure
 description: 了解如何在 Azure 中的虚拟机 (VM) 上运行 SAP 解决方案
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: RicksterCDN
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
-keywords: 
+keywords: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 09/23/2016
-wacn.date: 01/05/2017
+ms.date: 12/08/2016
+wacn.date: 01/25/2017
 ms.author: rclaus
 ---
 

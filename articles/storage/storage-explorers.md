@@ -2,7 +2,7 @@
 title: Azure 存储客户端工具 | Azure
 description: 可用于查看 Azure 存储数据或与之交互的工具列表。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: micurd
 manager: jahogg
 editor: tysonn

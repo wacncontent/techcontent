@@ -2,10 +2,10 @@
 title: 向 HTML/JavaScript 应用添加身份验证 | Azure
 description: 了解如何使用移动服务通过 Microsoft 帐户对 HTML 应用的用户进行身份验证。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

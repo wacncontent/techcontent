@@ -2,10 +2,10 @@
 title: 如何使用 Azure 经典管理门户缩放媒体处理
 description: 了解如何通过指定要为帐户预配的“按需流式处理保留单元”和“编码保留单元”数，缩放媒体服务。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: milangada
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

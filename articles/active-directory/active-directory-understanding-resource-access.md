@@ -2,10 +2,10 @@
 title: 了解 Azure 中的资源访问权限 | Azure
 description: 本主题介绍有关使用订阅管理员在整个 Azure 门户预览中控制资源访问权限的概念。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

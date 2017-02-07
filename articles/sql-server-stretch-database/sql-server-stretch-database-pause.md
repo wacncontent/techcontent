@@ -2,7 +2,7 @@
 title: 暂停和恢复数据迁移（SQL Server Stretch Database）| Azure
 description: 了解如何暂停或继续将数据迁移到 Azure。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglasl
 manager: jhubbard
 editor: monicar

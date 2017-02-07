@@ -2,10 +2,10 @@
 title: Azure IoT 中心概述 | Azure
 description: Azure IoT 中心服务概述：什么是 IoT 中心、设备连接、物联网通信模式和服务辅助通信模式
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: na

@@ -2,11 +2,11 @@
 ---
 title: 适用于 Eclipse 的 Azure 工具包 | Azure
 description: 了解适用于 Eclipse 的 Azure 工具包。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na
@@ -90,7 +90,7 @@ ms.author: robmcm;asirveda
 [在 Eclipse 中显示 Package for Azure Libraries for Java 的 Javadoc 内容]: ./azure-toolkit-for-eclipse-displaying-javadoc-content-for-azure-libraries.md
 [在 Eclipse 中为 Azure 部署启用远程访问]: ./azure-toolkit-for-eclipse-enabling-remote-access-for-azure-deployments.md
 [启用会话相关性]: ./azure-toolkit-for-eclipse-enable-session-affinity.md
-[HDInsight Tools Plugin for Eclipse]: /documentation/articles/hdinsight-apache-spark-eclipse-tool-plugin/
+[HDInsight Tools Plugin for Eclipse]: ./hdinsight/hdinsight-apache-spark-eclipse-tool-plugin.md
 [How to Authenticate Web Users with Azure Access Control Service Using Eclipse]: ./active-directory/active-directory-java-authenticate-users-access-control-eclipse.md
 
 <!-- [How to Maintain Session Data with Session Affinity]: http://go.microsoft.com/fwlink/?LinkID=699539 -->

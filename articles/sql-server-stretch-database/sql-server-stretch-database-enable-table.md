@@ -2,10 +2,10 @@
 title: 为表启用 Stretch Database | Azure
 description: 了解如何为延伸数据库配置表。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

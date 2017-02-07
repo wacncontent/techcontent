@@ -1,15 +1,15 @@
 ---
 title: 移动服务-xamarin - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: 移动服务-xamarin - Azure 微软云
-services: 
+services: ''
 documentationCenter: xamarin
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
 ms.service: mobile-services
-ms.date: 
+ms.date: ''
 wacn.date: 11/02/2015
 ---
 

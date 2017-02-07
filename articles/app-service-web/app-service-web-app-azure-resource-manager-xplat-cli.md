@@ -2,10 +2,10 @@
 title: 适用于 Azure Web 应用的基于 Azure Resource Manager 的跨平台命令行工具 | Azure
 description: 了解如何使用新的基于 Azure Resource Manager 的跨平台命令行工具来管理 Azure Web 应用。
 services: app-service\web
-documentationcenter: 
+documentationcenter: ''
 author: ahmedelnably
 manager: stefsch
-editor: 
+editor: ''
 
 ms.assetid: d415b195-4262-416f-b59f-7e1aef200054
 ms.service: app-service-web

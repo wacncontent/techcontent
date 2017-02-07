@@ -4,7 +4,7 @@ description: 了解如何在 iOS 应用程序中使用应用服务移动应用�
 documentationCenter: ios
 authors: yuaxu
 manager: yochayk
-editor: 
+editor: ''
 services: app-service\mobile
 
 ms.service: app-service-mobile

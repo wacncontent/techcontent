@@ -1,14 +1,14 @@
 ---
 title: Best Practice
 description: Best Practice
-services: 
+services: ''
 documentationCenter: Best Practice
-authors: 
-manager: 
-editor: 
+authors: ''
+manager: ''
+editor: ''
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 05/18/2016
 ---
 

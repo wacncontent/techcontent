@@ -2,13 +2,13 @@
 title: 使用 NSG 实现 DMZ 区域
 description: 本页介绍如何使用 Powershell 指令构建 NSG
 services: virtual network
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-network-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/01/2016
 ---
 

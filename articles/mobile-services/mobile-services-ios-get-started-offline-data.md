@@ -4,7 +4,7 @@ description: 了解如何在 iOS 应用程序中使用 Azure 移动服务缓存�
 documentationCenter: ios
 authors: krisragh
 manager: erikre
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

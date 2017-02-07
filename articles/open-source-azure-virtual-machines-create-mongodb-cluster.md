@@ -2,9 +2,9 @@
 title: 在 Azure 虚拟机上快速搭建 MongoDB 集群 | Azure 
 description: 了解如何在 Azure 虚拟机上快速搭建 MongoDB 集群
 services: open-resource
-documentationCenter: 
-authors: 
-manager: 
+documentationCenter: ''
+authors: ''
+manager: ''
 editor: Lingli
 
 ms.service: open-source-mongodb

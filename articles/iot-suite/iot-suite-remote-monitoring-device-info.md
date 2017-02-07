@@ -1,12 +1,12 @@
 ---
 title: 远程监视解决方案中的设备信息元数据 | Azure
 description: 介绍 Azure IoT 预配置解决方案远程监视及其体系结构。
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

@@ -2,10 +2,10 @@
 title: 管理虚拟机扩展 | Azure
 description: 介绍如何在经典部署模型中添加、查找、更新和删除 Azure 虚拟机的扩展。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: squillace
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management-windows
 
 ms.service: virtual-machines-windows

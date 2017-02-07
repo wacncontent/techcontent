@@ -2,13 +2,13 @@
 title: 如何创建事务复制将本地数据同步到 SQL Azure
 description: 如何创建事务复制将本地数据同步到 SQL Azure
 services: sql-database
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: sql-database-aog
-ms.date: 
+ms.date: ''
 wacn.date: 09/29/2016
 ---
 
@@ -55,7 +55,7 @@ Azure SQL DB 可以被配置成为 SQL Server 事务复制的一个订阅者( su
 3. 完成向导中的后续步骤，创建一个复制。  
     ![Creating-Publication](./media/aog-sql-service-transaction-copy/Creating-Publication.png "Creating Publication")
 4. 创建一个新的订阅。  
-    右键刚刚创建的发布，选择 New Subscriptions,调出新建订阅向导。  
+   右键刚刚创建的发布，选择 New Subscriptions,调出新建订阅向导。  
     ![New-Subscription-Wizard](./media/aog-sql-service-transaction-copy/New-Subscription-Wizard.png "New Subscription Wizard")
 5. 完成向导中所需步骤，在下图 Subscribers 页面，点击 Add Subscriber -> Add SQL Server Subscriber。  
     ![Subscribers](./media/aog-sql-service-transaction-copy/Subscribers.png "Subscribers")

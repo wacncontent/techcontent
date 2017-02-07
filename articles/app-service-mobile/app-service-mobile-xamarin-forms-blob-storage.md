@@ -4,7 +4,7 @@ description: 连接到 Azure blob 存储向待办事项列表 Xamarin.Forms 移�
 documentationCenter: xamarin
 authors: adrianhall
 manager: erikre
-editor: 
+editor: ''
 services: app-service\mobile
 
 ms.service: app-service-mobile

@@ -2,10 +2,10 @@
 title: 应用注册门户帮助主题 | Azure
 description: 介绍 Microsoft 应用注册门户中的各种功能。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

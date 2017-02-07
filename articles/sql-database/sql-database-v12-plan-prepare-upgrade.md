@@ -2,10 +2,10 @@
 title: 规划升级到 SQL 数据库 V12 | Azure
 description: 介绍升级到 Azure SQL 数据库 V12 版本所涉及的准备工作和限制。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: MightyPen
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 8020f904-ad27-40c5-8c59-bdf2e690f77d
 ms.service: sql-database

@@ -2,10 +2,10 @@
 title: 什么是 Site Recovery？| Azure
 description: 概述 Azure Site Recovery 服务并汇总部署方案。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: rayne-wiselman
 manager: cfreeman
-editor: 
+editor: ''
 
 ms.assetid: e9b97b00-0c92-4970-ae92-5166a4d43b68
 ms.service: site-recovery

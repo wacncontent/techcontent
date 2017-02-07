@@ -2,10 +2,10 @@
 title: 自定义 Media Encoder Standard 预设 | Azure
 description: 本主题说明如何通过自定义 Media Encoder Standard 任务预设执行高级编码。本主题说明如何使用媒体服务 .NET SDK 创建编码任务和作业。此外，还说明如何向编码作业提供自定义预设。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: ec95392f-d34a-4c22-a6df-5274eaac445b
 ms.service: media-services

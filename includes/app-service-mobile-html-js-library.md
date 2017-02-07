@@ -1,13 +1,11 @@
-##<a name="create-client"></a>创建客户端连接
-
+## <a name="create-client"></a>创建客户端连接
 通过创建 `WindowsAzure.MobileServiceClient` 对象创建客户端连接。将 `appUrl` 替换为到移动应用的 URL。
 
 ```
 var client = WindowsAzure.MobileServiceClient(appUrl);
 ```
 
-##<a name="table-reference"></a>使用表格
-
+## <a name="table-reference"></a>使用表格
 若要访问或更新数据，请创建到后端表的引用。将 `tableName` 替换为表名称
 
 ```
@@ -24,7 +22,7 @@ var table = client.getTable(tableName);
 * [修改数据](#modifying)
 * [删除数据](#deleting)
 
-###<a name="querying"></a>如何：查询表格引用
+### <a name="querying"></a>如何：查询表格引用
 
 拥有表格引用后，可用其查询服务器上的数据。查询使用了“类 LINQ”语言。
 若要返回表中的所有数据，请使用以下项：
@@ -38,12 +36,12 @@ var table = client.getTable(tableName);
  * @param {Object} results[] the individual results
  */
 function success(results) {
-    var numItemsRead = results.length;
+   var numItemsRead = results.length;
 
-    for (var i = 0 ; i < results.length ; i++) {
+   for (var i = 0 ; i < results.length ; i++) {
        var row = results[i];
        // Each row is an object - the properties are the columns
-    }
+   }
 }
 
 function failure(error) {
@@ -57,8 +55,7 @@ table
 
 随结果调用 success 函数。请勿在 success 函数中使用 `for (var i in results)`，因为这会在使用其他查询函数（如 `.includeTotalCount()`）时迭代结果中所含的信息。
 
-####<a name="table-filter"></a>在服务器上筛选数据
-
+#### <a name="table-filter"></a>在服务器上筛选数据
 可在表格引用上使用 `where` 子句：
 
 ```
@@ -68,7 +65,7 @@ table
     .then(success, failure);
 ```
 
-也可使用筛选对象的函数。该情况下，`this` 变量被分配给经过筛选的当前对象。以下示例在功能上等效于上个示例：
+也可使用筛选对象的函数。该情况下，`this` 变量被分配给经过筛选的当前对象。以下代码在功能上等效于上个示例：
 
 ```
 function filterByUserId(currentUserId) {
@@ -81,9 +78,8 @@ table
     .then(success, failure);
 ```
 
-####<a name="table-paging"></a>分页浏览数据
-
-利用 take() 和 skip() 方法。例如，如想要将表拆分为 100 行记录：
+#### <a name="table-paging"></a>分页浏览数据
+使用 `take()` 和 `skip()` 方法。例如，如想要将表拆分为 100 行记录：
 
 ```
 var totalCount = 0, pages = 0;
@@ -108,11 +104,10 @@ function loadPage(pageNum) {
 
 `.includeTotalCount()` 方法用于将 totalCount 字段添加到结果对象。如果不分页，totalCount 字段会填充要返回的记录总数。
 
-然后可使用页变量和某些 UI 按钮提供页列表；使用 loadPage() 为每页加载新记录。应实现某种形式的缓存，加快已加载记录的访问速度。
+然后可使用页变量和某些 UI 按钮提供页列表；使用 `loadPage()` 为每页加载新记录。实现缓存以加快对已加载记录的访问速度。
 
-####<a name="sorting-data"></a>如何：返回排序后的数据
-
-使用 .orderBy() 或 .orderByDescending() 查询方法：
+#### <a name="sorting-data"></a>如何：返回排序后的数据
+使用 `.orderBy()` 或 `.orderByDescending()` 查询方法：
 
 ```
 table
@@ -138,9 +133,9 @@ table
     }, failure);
 ```
 
-成功插入后，插入项随同步操作所需的其他字段一并返回。应使用此信息自行更新缓存，便于后续更新。
+成功插入后，插入项随同步操作所需的其他字段一并返回。使用此信息更新自己的缓存，便于后续更新。
 
-请注意，Azure 移动应用 Node.js Server SDK 支持用于开发的动态架构。对于动态架构，表格架构随时更新，使得只需在插入或更新操作进行指定即可向表格添加列。建议先关闭动态架构，再将应用程序迁移到生产。
+Azure 移动应用 Node.js Server SDK 支持用于开发的动态架构。在动态架构中，可通过在插入或更新操作中指定列，以将这些列添加到表中。建议先关闭动态架构，再将应用程序迁移到生产。
 
 ###<a name="modifying"></a>如何：修改数据
 
@@ -159,9 +154,8 @@ table
     }, failure);
 ```
 
-###<a name="deleting"></a>如何：删除数据
-
-调用 .del() 方法删除记录。在对象引用中传递 ID：
+### <a name="deleting"></a>如何：删除数据
+若要删除记录，请调用 `.del()` 方法。在对象引用中传递 ID：
 
 ```
 table
@@ -171,4 +165,4 @@ table
     }, failure);
 ```
 
-<!---HONumber=Mooncake_0919_2016-->
+<!---HONumber=Mooncake_0116_2017-->

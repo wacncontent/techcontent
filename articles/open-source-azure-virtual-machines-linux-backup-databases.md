@@ -2,13 +2,13 @@
 title: Azure Linux 虚拟机上的数据库的备份 | Azure
 description: 本文介绍如何在 Azure Linux 虚拟机上备份 MySQL、Redis、MongoDB 数据库
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

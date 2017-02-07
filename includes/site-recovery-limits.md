@@ -5,7 +5,7 @@ services: site recovery
 documentationCenter: NA
 authors: csilauraa
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: site recovery
 ms.date: 07/06/2015

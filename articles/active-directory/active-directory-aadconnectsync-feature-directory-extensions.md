@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：目录扩展 | Azure
 description: 本主题介绍 Azure AD Connect 中的目录扩展功能。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: StevenPo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

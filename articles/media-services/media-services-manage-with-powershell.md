@@ -3,9 +3,9 @@ title: 使用 PowerShell 管理 Azure 媒体服务帐户
 description: 了解如何使用 PowerShell cmdlet 管理 Azure 媒体服务帐户。
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: media-services
 ms.workload: media

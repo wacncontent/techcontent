@@ -2,10 +2,10 @@
 title: 使用 Azure Media Indexer 为媒体文件编制索引
 description: 使用 Azure Media Indexer，可以使媒体文件内容可供搜索，并为隐藏的字幕和关键字生成全文本脚本。本主题说明如何使用 Media Indexer。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Asolanki
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

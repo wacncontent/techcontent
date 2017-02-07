@@ -5,7 +5,7 @@ services: active-directory
 documentationCenter: .net
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

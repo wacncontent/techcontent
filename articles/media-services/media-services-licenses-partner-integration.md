@@ -2,10 +2,10 @@
 title: 使用合作伙伴将 Widevine 许可证传送到 Azure 媒体服务 | Azure
 description: 本文介绍如何使用 Azure 媒体服务 (AMS) 传送 AMS 通过 PlayReady 和 Widevine DRM 动态加密的流。PlayReady 许可证来自媒体服务 PlayReady 许可证服务器，而 Widevine 许可证则由 castLabs 许可证服务器传送。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

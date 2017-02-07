@@ -1,12 +1,12 @@
 ---
 title: 可缩放性清单 | Azure
 description: Azure 自动缩放设计注意事项：可伸缩性清单指南。
-services: 
+services: ''
 documentationCenter: na
 authors: dragon119
 manager: christb
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: best-practice
 ms.devlang: na

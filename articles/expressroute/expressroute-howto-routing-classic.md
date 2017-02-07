@@ -5,7 +5,7 @@ documentationCenter: na
 services: expressroute
 authors: ganesr
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: expressroute
@@ -260,7 +260,8 @@ Remove-AzureBGPPeering -AccessType Public -ServiceKey "*************************
 ## 后续步骤
 
 接下来，请[将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)。
--  有关工作流的详细信息，请参阅 [ExpressRoute 工作流](./expressroute-workflows.md)。
--  有关线路对等互连的详细信息，请参阅 [ExpressRoute 线路和路由域](./expressroute-circuit-peerings.md)。
+
+- 有关工作流的详细信息，请参阅 [ExpressRoute 工作流](./expressroute-workflows.md)。
+- 有关线路对等互连的详细信息，请参阅 [ExpressRoute 线路和路由域](./expressroute-circuit-peerings.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

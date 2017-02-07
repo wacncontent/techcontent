@@ -2,7 +2,7 @@
 title: 使用 Azure DocumentDB 中的地理空间数据 | Azure
 description: 了解如何使用 Azure DocumentDB 创建、索引和查询空间对象。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: arramac
 manager: jhubbard
 editor: monicar

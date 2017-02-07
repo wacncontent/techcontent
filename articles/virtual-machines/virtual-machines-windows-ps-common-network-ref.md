@@ -2,10 +2,10 @@
 title: VM 的常用网络 PowerShell 命令 | Azure
 description: 可用于为 VM 创建虚拟网络及其关联资源的常用 PowerShell 命令。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

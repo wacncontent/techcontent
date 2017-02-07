@@ -7,7 +7,7 @@ services: virtual-machines-windows
 documentationCenter: virtual-machines
 authors: squillace
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

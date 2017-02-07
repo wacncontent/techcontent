@@ -2,10 +2,10 @@
 title: 配置设备 | Azure
 description: 对 Raspberry Pi 3 进行首次使用配置，并安装 Raspbian OS，这是一个免费操作系统，已针对 Raspberry Pi 硬件优化。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: 安装 raspbian, raspbian 下载, 如何安装 raspbian, raspbian 安装程序, raspberry pi 安装 raspbian, raspberry pi 安装 os, raspberry pi sd 卡安装, raspberry pi 连接, 连接到 raspberry pi, raspberry pi 连接
 
 ms.assetid: 43f7c2cf-f1a5-4dd5-93f0-7e546c6dc91e

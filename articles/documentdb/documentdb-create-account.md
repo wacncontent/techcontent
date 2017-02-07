@@ -3,7 +3,7 @@ title: 如何创建 DocumentDB 帐户 | Azure
 description: 使用 Azure DocumentDB 创建 NoSQL 数据库。遵循本说明文档创建 DocumentDB 帐户，并开始构建运行速度飞快且可全局缩放的 NoSQL 数据库。
 keywords: 构建数据库
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: mimig1
 manager: jhubbard
 editor: monicar

@@ -3,9 +3,9 @@ title: H264 单比特率 1080p | Azure
 description: 本主题概述了 **H264 单比特率 1080p** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 0951fea8-15af-420b-9648-8c5c1abf8173
 ms.service: media-services

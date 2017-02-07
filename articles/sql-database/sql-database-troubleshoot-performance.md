@@ -2,10 +2,10 @@
 title: SQL 数据库性能优化提示 | Azure
 description: 有关通过评估和改进来调整 Azure SQL 数据库性能的提示。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: v-shysun
 manager: felixwu
-editor: 
+editor: ''
 keywords: sql 性能优化, 数据库性能优化, sql 性能优化提示, sql 数据库性能优化
 
 ms.service: sql-database

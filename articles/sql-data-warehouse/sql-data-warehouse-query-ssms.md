@@ -2,10 +2,10 @@
 title: 连接到 Azure SQL 数据仓库 - SSMS | Azure
 description: 使用 SQL Server Management Studio (SSMS) 连接和查询 Azure SQL 数据仓库。
 services: sql-data-warehouse
-documentationcenter: 
+documentationcenter: ''
 author: hirokib
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 299e50b3-e68a-471c-8aee-b0b9874781bd
 ms.service: sql-data-warehouse

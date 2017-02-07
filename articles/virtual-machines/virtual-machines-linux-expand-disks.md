@@ -2,12 +2,12 @@
 title: 在 Azure 中扩展 Linux VM 上的 OS 磁盘 | Azure
 description: 了解如何使用 Azure CLI 和 Resource Manager 部署模型扩展 Linux VM 上的操作系统 (OS) 虚拟磁盘
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article

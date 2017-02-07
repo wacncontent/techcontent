@@ -1,8 +1,8 @@
 ---
-title: 使用 Azure 门户预览部署 Azure 资源 | Azure
-description: 使用 Azure 门户预览和 Azure Resource Manager 来部署资源。
+title: 使用 Azure 门户预览版部署 Azure 资源 | Azure
+description: 使用 Azure 门户预览版和 Azure Resource Manager 部署资源。
 services: azure-resource-manager,azure-portal
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn
@@ -13,21 +13,21 @@ ms.workload: multiple
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 09/15/2016
-wacn.date: 01/03/2017
+ms.date: 12/19/2016
+wacn.date: 01/25/2017
 ms.author: tomfitz
 ---
 
-# 使用 Resource Manager 模板和 Azure 门户预览部署资源
+# 使用 Resource Manager 模板和 Azure 门户预览版部署资源
 > [!div class="op_single_selector"]
-* [Azure PowerShell](./powershell-azure-resource-manager.md)
-* [Azure CLI](./xplat-cli-azure-resource-manager.md)
-* [门户](./resource-group-portal.md)
-* [REST API](./resource-manager-rest-api.md)
+- [PowerShell](./resource-group-template-deploy.md)
+- [Azure CLI](./resource-group-template-deploy-cli.md)
+- [门户](./resource-group-template-deploy-portal.md)
+- [REST API](./resource-group-template-deploy-rest.md)
 
-本主题演示了如何将 [Azure 门户预览](https://portal.azure.cn)与 [Azure Resource Manager](./resource-group-overview.md) 配合使用，以部署 Azure 资源。若要了解有关管理资源的信息，请参阅[通过门户管理 Azure 资源](./resource-group-portal.md)。
+本主题演示如何使用 [Azure 门户预览版](https://portal.azure.cn)和 [Azure Resource Manager](./resource-group-overview.md) 部署 Azure 资源。若要了解有关管理资源的信息，请参阅[通过门户管理 Azure 资源](./resource-group-portal.md)。
 
-目前，并非每种服务都支持门户或资源管理器。对于这些服务，需要使用[经典管理门户](https://manage.windowsazure.cn)。
+目前，并非每种服务都支持门户或资源管理器。要使用这些服务，需使用[经典管理门户](https://manage.windowsazure.cn)。若要了解每种服务的状态，请参阅 [Azure 门户预览版可用性图表](https://azure.microsoft.com/features/azure-portal/availability/)。
 
 ## <a name="create-resource-group"></a> 创建资源组
 1. 若要创建空资源组，请依次选择“新建”>“管理”>“资源组”。
@@ -86,7 +86,10 @@ ms.author: tomfitz
 
 4. 或者，也可以从 [Azure 快速启动模板](https://github.com/Azure/azure-quickstart-templates/)中选择预先存在的模板。这些模板是由社区提供的。它们涵盖了许多常见的方案，有人可能已添加了一个与你想要部署的模板类似的模板。可以搜索模板以查找与你的方案相匹配的模板。
 
+    ![选择快速入门模板](./media/resource-group-template-deploy-portal/select-quickstart-template.png)  
+
     可以在编辑器中查看所选模板。
+
 5. 提供所有其他值之后，选择“创建”可部署该模板。
 
     ![部署模板](./media/resource-group-template-deploy-portal/create-custom-deploy.png)  
@@ -108,9 +111,10 @@ ms.author: tomfitz
 
 ## 后续步骤
 * 若要查看审核日志，请参阅 [Audit operations with Resource Manager](./resource-group-audit.md)（使用 Resource Manager 进行审核操作）。
-* 若要排查部署错误，请参阅[使用 Azure 门户预览对资源组部署进行故障排除](./resource-manager-troubleshoot-deployments-portal.md)。
+* 若要排查部署错误，请参阅[查看部署操作](./resource-manager-deployment-operations.md)。
 * 若要从部署或资源组中检索模板，请参阅[从现有资源导出 Azure Resource Manager 模板](./resource-manager-export-template.md)。
 * 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
-* 有关自动化部署的四部分系列教程，请参阅[将应用程序自动部署到 Azure 虚拟机](../virtual-machines/virtual-machines-windows-dotnet-core-1-landing.md)。此系列教程介绍了应用程序体系结构、访问与安全性、可用性与缩放性，以及应用程序部署。
+* 有关自动化部署的四部分系列教程，请参阅[将应用程序自动部署到 Azure 虚拟机](../virtual-machines/virtual-machines-windows-dotnet-core-1-landing.md)。此系列教程介绍了应用程序体系结构、访问与安全性、可用性与伸缩性，以及应用程序部署。
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_0120_2017-->
+<!-- Update_Description: update meta properties ; wording update ; update image ; update link reference -->

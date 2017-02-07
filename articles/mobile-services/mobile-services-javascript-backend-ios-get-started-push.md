@@ -4,7 +4,7 @@ description: 了解如何使用 Azure 移动服务将推送通知发送到 iOS �
 services: mobile-services,notification-hubs
 documentationCenter: ios
 manager: dwrede
-editor: 
+editor: ''
 authors: krisragh
 
 ms.service: mobile-services

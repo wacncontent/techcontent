@@ -2,10 +2,10 @@
 title: 将 Hyper-V 虚拟机（位于 VMM 云中）复制到辅助 VMM 站点 | Azure
 description: 本文介绍如何通过 Azure Site Recovery 将 VMM 云中的 Hyper-V VM 复制到辅助 VMM 站点。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: site-recovery
 ms.workload: backup-recovery

@@ -2,10 +2,10 @@
 title: 平滑流式处理 Windows 应用商店应用教程
 description: 了解如何使用 Azure 媒体服务来创建一个 C# Windows 应用商店应用程序，该应用程序包含一个用于播放平滑流内容的 XML MediaElement 控件。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

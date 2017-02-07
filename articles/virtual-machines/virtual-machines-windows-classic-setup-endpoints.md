@@ -2,10 +2,10 @@
 title: 在经典 Windows 虚拟机上设置终结点 | Azure
 description: 了解如何在 Azure 经典管理门户中设置终结点以允许与 Azure 中的 Windows 虚拟机通信。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

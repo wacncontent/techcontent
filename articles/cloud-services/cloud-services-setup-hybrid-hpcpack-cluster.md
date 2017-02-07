@@ -2,10 +2,10 @@
 title: 使用 Microsoft HPC Pack 设置混合 HPC 群集 | Azure
 description: 了解如何使用 Microsoft HPC Pack 和 Azure 设置小型的混合高性能计算 (HPC) 群集
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,hpc-pack
 
 ms.service: cloud-services

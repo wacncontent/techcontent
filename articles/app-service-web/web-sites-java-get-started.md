@@ -5,7 +5,7 @@ services: app-service\web
 documentationcenter: java
 author: rmcmurray
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: d6e73cc3-8b71-4742-a197-3edeabc6a289
 ms.service: app-service-web

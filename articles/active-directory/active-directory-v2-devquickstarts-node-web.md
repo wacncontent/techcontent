@@ -5,7 +5,7 @@ services: active-directory
 documentationCenter: nodejs
 authors: brandwe
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

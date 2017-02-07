@@ -2,10 +2,10 @@
 title: 在迁移到 SQL 数据库之前修复 SQL Server 数据库的兼容性问题 | Azure
 description: Azure SQL 数据库, 数据库迁移, 兼容性, SQL Azure 迁移向导, SSDT
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 7ff52877-5b63-4adc-aa1a-689669a1146e
 ms.service: sql-database

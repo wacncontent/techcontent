@@ -2,10 +2,10 @@
 title: Azure 移动应用中的身份验证和授权 | Azure
 description: Azure 移动应用身份验证/授权功能的概念参考和概述
 services: app-service\mobile
-documentationCenter: 
+documentationCenter: ''
 authors: mattchenderson
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

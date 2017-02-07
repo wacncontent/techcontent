@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationCenter: na
 authors: rothja
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

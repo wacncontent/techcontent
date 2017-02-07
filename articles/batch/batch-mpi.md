@@ -5,7 +5,7 @@ services: batch
 documentationcenter: .net
 author: mmacy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 83e34bd7-a027-4b1b-8314-759384719327
 ms.service: batch

@@ -2,10 +2,10 @@
 title: Azure Active Directory v2.0 身份验证库 | Azure
 description: Azure Active Directory v2.0 终结点的兼容客户端库和服务器中间件库，以及相关的库、源代码和示例链接。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: skwan
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.assetid: 19cec615-e51f-4141-9f8c-aaf38ff9f746
 ms.service: active-directory

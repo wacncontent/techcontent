@@ -2,7 +2,7 @@
 title: 如何标记 Windows VM | Azure
 description: 了解如何标记使用资源管理器部署模型在 Azure 中创建的 Windows 虚拟机。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: mmccrory
 manager: timlt
 editor: tysonn

@@ -2,7 +2,7 @@
 title: 从本地 Git 部署到 Azure App Service
 description: 了解如何实现从本地 Git 部署到 Azure App Service。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: dariagrigoriu
 manager: wpickett
 editor: mollybos

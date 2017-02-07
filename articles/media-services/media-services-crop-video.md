@@ -2,10 +2,10 @@
 title: 如何裁剪视频 | Azure
 description: 本文说明如何使用媒体编码器标准版裁剪视频。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: anilmur
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

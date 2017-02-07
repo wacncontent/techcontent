@@ -1,12 +1,12 @@
 ---
 title: 数据分区指南 | Azure
 description: 有关如何隔离分区，以便单独进行管理和访问的指导。
-services: 
+services: ''
 documentationCenter: na
 authors: dragon119
 manager: christb
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: best-practice
 ms.devlang: na

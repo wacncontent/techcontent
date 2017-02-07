@@ -3,7 +3,7 @@ title: 拆分/合并安全配置 | Azure
 description: 设置用于加密的 x409 证书
 metaKeywords: 弹性数据库证书安全性
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: torsteng
 

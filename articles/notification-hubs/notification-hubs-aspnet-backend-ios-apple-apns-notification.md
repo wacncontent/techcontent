@@ -4,7 +4,7 @@ description: 了解如何向 Azure 中的用户发送推送通知。使用 Objec
 documentationCenter: ios
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 services: notification-hubs
 
 ms.service: notification-hubs

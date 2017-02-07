@@ -2,17 +2,17 @@
 title: 如何监视云服务 | Azure
 description: 了解如何使用 Azure 经典管理门户监视云服务。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: rboucher
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 12/07/2016
+ms.date: 12/07/2015
 wacn.date: 01/03/2017
 ms.author: robb
 ---

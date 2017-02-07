@@ -2,7 +2,7 @@
 title: 在 Azure 存储中管理并发
 description: 如何管理 Blob、队列、表和文件服务的并发
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: jasonnewyork
 manager: tadb
 editor: tysonn

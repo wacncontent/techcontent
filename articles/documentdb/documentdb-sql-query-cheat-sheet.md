@@ -3,7 +3,7 @@ title: DocumentDB SQL 备忘单 PDF | Azure
 description: 可打印的 SQL 备忘单 PDF 有助于你使用 DocumentDB 的 SQL 语法在其 NoSQL 数据库（SQL 快速参考）中查询 JSON 文档。
 keywords: SQL 备忘单, SQL 备忘单 PDF, SQL 查询备忘单
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: mimig1
 manager: jhubbard
 editor: monicar

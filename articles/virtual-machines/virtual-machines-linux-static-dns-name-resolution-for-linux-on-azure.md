@@ -2,13 +2,13 @@
 title: 在 Azure 上使用内部 DNS 进行 VM 名称解析 | Azure
 description: 在 Azure 上使用内部 DNS 进行 VM 名称解析。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux

@@ -3,10 +3,10 @@ title: 什么是 Azure Active Directory 许可？| Azure
 description: 介绍 Azure Active Directory 许可及其工作原理、入门方法和最佳做法，涉及的产品包括 Office 365、Microsoft Intune 及 Azure Active Directory Premium 和 Basic 版本
 services: active-directory
 keywords: Azure AD 许可
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

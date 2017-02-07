@@ -2,10 +2,10 @@
 title: 通用 SQL 连接器分步指南 | Azure
 description: 本文将指导你完成一个使用通用 SQL 连接器的简单 HR 系统分步示例。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

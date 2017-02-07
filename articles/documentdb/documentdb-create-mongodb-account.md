@@ -5,8 +5,8 @@ keywords: mongodb 应用, mongodb 应用
 services: documentdb
 author: AndrewHoh
 manager: jhubbard
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 
 ms.assetid: 413f3ae1-a68e-43be-b0d7-fa2987644f3e
 ms.service: documentdb

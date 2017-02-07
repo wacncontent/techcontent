@@ -5,7 +5,7 @@ services: app-service\web
 documentationcenter: nodejs
 author: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: fb2b90c8-02b6-4700-929b-5de9a35d67cc
 ms.service: app-service-web

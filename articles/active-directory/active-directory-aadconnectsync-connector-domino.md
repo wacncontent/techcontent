@@ -2,10 +2,10 @@
 title: Lotus Domino 连接器 | Azure
 description: 本文介绍如何配置 Microsoft 的 Lotus Domino 连接器。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: AndKjell
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: e07fd469-d862-470f-a3c6-3ed2a8d745bf
 ms.service: active-directory
@@ -429,16 +429,16 @@ Domino 连接器依赖**目录助手**功能来查找辅助通讯簿。如果辅
 
 1. 按照[这些步骤](http://publib.boulder.ibm.com/infocenter/domhelp/v8r0/index.jsp?topic=%2Fcom.ibm.help.domino.admin85.doc%2FH_CREATING_A_COPY_OF_THE_DEFAULT_PUBIC_ADDRESS_BOOK_TEMPLATE.html)创建一份 Domino 目录模板副本 {PUBNAMES.NTF}（请勿自定义默认的 IBM Lotus Domino 目录模板）：
 2. 在 Domino Designer 中打开刚才创建的 Domino 目录模板副本 {CONTOSO.NTF}，然后遵循以下步骤：
-    - 单击“共享元素”，然后展开子窗体
-    - 双击“${ObjectName}InheritableSchema”子窗体（其中 {ObjectName} 是默认结构对象类的名称，例如 Person）。
-    - 为想要添加到 {MyPersonAtrribute} 架构的属性以及对应于该属性的属性命名。选择“创建”菜单并从菜单中选择“字段”来创建字段。
-    - 在添加的字段中，于字段“属性”窗口上选择其类型、样式、大小、字体和其他相关参数，并设置其属性。
-    - 让属性默认值和提供给该属性的名称保持相同（例如，如果属性名称是 MyPersonAttribute，请让默认值保有相同名称）。
-    - 保存包含更新值的 ${ObjectName}InheritableSchema 子窗体。
+   - 单击“共享元素”，然后展开子窗体
+   - 双击“${ObjectName}InheritableSchema”子窗体（其中 {ObjectName} 是默认结构对象类的名称，例如 Person）。
+   - 为想要添加到 {MyPersonAtrribute} 架构的属性以及对应于该属性的属性命名。选择“创建”菜单并从菜单中选择“字段”来创建字段。
+   - 在添加的字段中，于字段“属性”窗口上选择其类型、样式、大小、字体和其他相关参数，并设置其属性。
+   - 让属性默认值和提供给该属性的名称保持相同（例如，如果属性名称是 MyPersonAttribute，请让默认值保有相同名称）。
+   - 保存包含更新值的 ${ObjectName}InheritableSchema 子窗体。
 3. 按照[这些步骤](http://publib.boulder.ibm.com/infocenter/domhelp/v8r0/index.jsp?topic=%2Fcom.ibm.help.domino.admin85.doc%2FH_ABOUT_RULES_FOR_CUSTOMIZING_THE_PUBLIC_ADDRESS_BOOK.html)，将 Domino 目录模板 {PUBNAMES.NTF} 替换为新的自定义模板 {CONTOSO.NTF}。
 4. 关闭 Domino Admin，然后打开 Domino 控制台以重新启动 LDAP 服务，并重新加载 LDAP 架构：
-    - 在 Domino 控制台中，于“Domino 命令”文本字段下插入命令来重新启动 LDAP 服务 - [Restart Task LDAP](http://publib.boulder.ibm.com/infocenter/domhelp/v8r0/index.jsp?topic=%2Fcom.ibm.help.domino.admin85.doc%2FH_STARTING_AND_STOPPING_THE_LDAP_SERVER_OVER.html)。
-    - 若要重新加载 LDAP 架构，请使用 Tell LDAP 命令 - Tell LDAP ReloadSchema
+   - 在 Domino 控制台中，于“Domino 命令”文本字段下插入命令来重新启动 LDAP 服务 - [Restart Task LDAP](http://publib.boulder.ibm.com/infocenter/domhelp/v8r0/index.jsp?topic=%2Fcom.ibm.help.domino.admin85.doc%2FH_STARTING_AND_STOPPING_THE_LDAP_SERVER_OVER.html)。
+   - 若要重新加载 LDAP 架构，请使用 Tell LDAP 命令 - Tell LDAP ReloadSchema
 5. 打开 Domino Admin，并选择“人员和组”选项卡以查看添加的属性是否已在 Domino“添加人员”中反映。
 6. 从“文件”选项卡打开 Schema.nsf，查看添加的属性是否已在 dominoPerson LDAP 对象类中反映。
 
@@ -449,19 +449,19 @@ Domino 连接器依赖**目录助手**功能来查找辅助通讯簿。如果辅
 3. 在左窗格中，依次选择“共享代码”和“子窗体”。
 4. 单击“新建子窗体”
 5. 执行以下操作以指定新子窗体的属性：
-    - 在新子窗体打开时，选择“设计”-“子窗体属性”
-    - 在“名称”属性旁，输入辅助对象类的名称，例如 TestSubform。
-    - 将“选项”属性“包含在插入子窗体...对话框”保持为选中状态
-    - 取消选择“选项”属性“在 Notes 中呈现传递 HTML”。
-    - 将其他属性保持不变，然后关闭“子窗体属性”框。
-    - 保存并关闭新子窗体。
+   - 在新子窗体打开时，选择“设计”-“子窗体属性”
+   - 在“名称”属性旁，输入辅助对象类的名称，例如 TestSubform。
+   - 将“选项”属性“包含在插入子窗体...对话框”保持为选中状态
+   - 取消选择“选项”属性“在 Notes 中呈现传递 HTML”。
+   - 将其他属性保持不变，然后关闭“子窗体属性”框。
+   - 保存并关闭新子窗体。
 6. 执行以下操作来添加字段，以定义辅助对象类：
-    - 打开创建的子窗体。
-    - 选择“创建”-“字段”。
-    - 在“字段”对话框的“基本”选项卡上的“名称”旁，指定任何名称，例如：{MyPersonTestAttribute}。
-    - 在添加的字段中，选择其类型、样式、大小、字体和相关属性，以设置其属性。
-    - 让属性默认值和提供给该属性的名称保持相同（例如，如果属性名称是 MyPersonTestAttribute，请让默认值保有相同名称）。
-    - 保存包含更新值的子窗体，然后执行以下操作：
+   - 打开创建的子窗体。
+   - 选择“创建”-“字段”。
+   - 在“字段”对话框的“基本”选项卡上的“名称”旁，指定任何名称，例如：{MyPersonTestAttribute}。
+   - 在添加的字段中，选择其类型、样式、大小、字体和相关属性，以设置其属性。
+   - 让属性默认值和提供给该属性的名称保持相同（例如，如果属性名称是 MyPersonTestAttribute，请让默认值保有相同名称）。
+   - 保存包含更新值的子窗体，然后执行以下操作：
      - 在左窗格中，依次选择“共享代码”和“子窗体”
      - 选择新的子窗体，然后选择“设计”-“设计属性”。
      - 单击左边的第三个选项卡，然后选择“传播此设计更改禁止”。

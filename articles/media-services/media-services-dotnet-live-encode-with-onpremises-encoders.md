@@ -2,10 +2,10 @@
 title: 如何使用 .NET 通过本地编码器执行实时传送视频流 | Azure
 description: 本主题演示如何使用 .NET 通过本地编码器执行实时编码。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

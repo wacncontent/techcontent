@@ -3,9 +3,9 @@ title: 使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式�
 description: 本主题演示如何使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频。
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: media-services
 ms.workload: media

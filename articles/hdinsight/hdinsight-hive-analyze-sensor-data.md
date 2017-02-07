@@ -2,7 +2,7 @@
 title: 使用 Hive 和 Hadoop 分析传感器数据 |Azure
 description: 了解如何通过将 Hive 查询控制台与 HDInsight (Hadoop) 配合使用来分析传感器数据，然后通过 PowerView 在 Microsoft Excel 中可视化数据。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun
@@ -36,7 +36,7 @@ ms.author: larryfr
 
 ##先决条件
 
-* HDInsight (Hadoop) 群集：有关创建群集的信息，请参阅[在 HDInsight 中预配 Hadoop 群集](./hdinsight-provision-clusters-v1.md)。
+* HDInsight (Hadoop) 群集：有关创建群集的信息，请参阅[在 HDInsight 中预配 Hadoop 群集](./hdinsight-provision-clusters.md)。
 
 * Microsoft Excel 2013
 

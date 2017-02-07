@@ -2,7 +2,7 @@
 title: 将 Pig 与 HDInsight 中的远程桌面配合使用 | Azure
 description: 了解如何使用 Pig 命令从到基于 Windows 的 HDInsight Hadoop 群集的远程桌面连接运行 Pig Latin 语句。
 services: hdinsight
-documentationCenter: 
+documentationCenter: ''
 authors: Blackmist
 manager: paulettm
 editor: cgronlun
@@ -36,7 +36,7 @@ ms.author: larryfr
 
 ##<a id="connect"></a>使用远程桌面进行连接
 
-为 HDInsight 群集启用远程桌面，然后根据[使用 RDP 连接到 HDInsight 群集](./hdinsight-administer-use-management-portal-v1.md#rdp)中的说明连接到该群集。
+为 HDInsight 群集启用远程桌面，然后根据[使用 RDP 连接到 HDInsight 群集](./hdinsight-administer-use-management-portal.md#connect-to-clusters-using-rdp)中的说明连接到该群集。
 
 ##<a id="pig"></a>使用 Pig 命令
 

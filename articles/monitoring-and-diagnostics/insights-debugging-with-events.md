@@ -2,8 +2,8 @@
 title: 查看事件和审核日志
 description: 了解如何查看 Azure 订阅中发生的所有事件。
 authors: rboucher
-manager: 
-editor: 
+manager: ''
+editor: ''
 services: azure-portal
 documentationCenter: na
 

@@ -2,10 +2,10 @@
 title: 使用 Azure AD Connect 同步实现密码同步 | Azure
 description: 提供有关密码同步工作原理以及如何启用密码同步的信息。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: MarkusVi
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 05f16c3e-9d23-45dc-afca-3d0fa9dbf501
 ms.service: active-directory

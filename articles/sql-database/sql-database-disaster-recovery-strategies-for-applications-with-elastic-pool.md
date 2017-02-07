@@ -2,7 +2,7 @@
 title: 使用 SQL 数据库异地复制设计灾难恢复云解决方案 | Azure
 description: 了解如何通过选择合适的故障转移模式来设计灾难恢复云解决方案。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: anosov1960
 manager: jhubbard
 editor: monicar

@@ -2,10 +2,10 @@
 title: 筛选器和动态清单 | Azure
 description: 本主题介绍如何创建筛选器，以便客户端能够使用它们来流式传输流的特定部分。媒体服务将创建动态清单来存档此选择性的流。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: cenkdin
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: ff102765-8cee-4c08-a6da-b603db9e2054
 ms.service: media-services

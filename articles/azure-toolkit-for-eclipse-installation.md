@@ -2,11 +2,11 @@
 ---
 title: 安装 Azure Toolkit for Eclipse | Azure
 description: 了解如何安装 Azure Toolkit for Eclipse。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

@@ -5,8 +5,8 @@ keywords: 性能测试
 services: documentdb
 author: arramac
 manager: jhubbard
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 
 ms.assetid: f4c96ebd-f53c-427d-a500-3f28fe7b11d0
 ms.service: documentdb

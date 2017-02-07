@@ -1,15 +1,15 @@
 ---
 title: 人脸识别API+微信应用开发操作手册
 description: 人脸识别API+微信应用开发操作手册
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: multiple
-ms.date: 
+ms.date: ''
 wacn.date: 09/09/2016
 wacn.lang: cn
 ---

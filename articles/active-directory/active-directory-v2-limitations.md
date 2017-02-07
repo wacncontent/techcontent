@@ -2,10 +2,10 @@
 title: v2.0 终结点的限制和局限性 | Azure
 description: Azure AD v2.0 终结点的限制和局限性列表。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

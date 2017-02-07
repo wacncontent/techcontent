@@ -1,15 +1,15 @@
 ---
 title: Azure 媒体服务实现视频点播操作手册
 description: Azure 媒体服务实现视频点播操作手册
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: multiple
-ms.date: 
+ms.date: ''
 wacn.date: 08/10/2016
 ---
 

@@ -5,7 +5,7 @@ documentationCenter: xamarin
 authors: ysxu
 manager: dwrede
 services: mobile-services
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

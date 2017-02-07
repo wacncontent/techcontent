@@ -3,7 +3,7 @@ title: 流分析输出：存储、分析选项 | Azure
 description: 了解有关设定流分析数据输出选项（包括 Power BI）目标，用于分析结果的信息。
 keywords: 数据转换, 分析结果, 数据存储选项
 services: stream-analytics,documentdb,sql-database,event-hubs,service-bus,storage
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

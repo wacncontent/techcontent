@@ -2,10 +2,10 @@
 title: Azure 应用服务中的身份验证和授权 | Azure
 description: 概念性参考和概述：Azure 应用服务的身份验证/授权功能
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: mattchenderson
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: mobile

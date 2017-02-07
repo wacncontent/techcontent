@@ -1,12 +1,12 @@
 ---
 title: SQL 数据库教程：安全性入门
 description: 了解如何创建用户帐户来访问和管理数据库。
-keywords: 
+keywords: ''
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

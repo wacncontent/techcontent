@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览创建虚拟网络 | Microsoft Azure
 description: 了解如何使用 Azure 门户预览创建虚拟网络。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: telmosampaio
 manager: carolz
-editor: 
+editor: ''
 tags: classic
 
 ms.service: virtual-network

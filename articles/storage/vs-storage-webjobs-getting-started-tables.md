@@ -2,10 +2,10 @@
 title: 开始使用 Azure 存储空间和 Visual Studio 连接服务（WebJob 项目）
 description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 Azure WebJobs 项目中使用 Azure 表存储
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 061a6c46-0592-4e5d-aced-ab7498481cde
 ms.service: storage

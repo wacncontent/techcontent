@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationCenter: na
 authors: MikeRayMSFT
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

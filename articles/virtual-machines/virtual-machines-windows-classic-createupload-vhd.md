@@ -2,7 +2,7 @@
 title: 使用 Powershell 创建和上载 VM 映像 | Azure
 description: 了解如何使用经典部署模型和 Azure Powershell 创建并上载通用化 Windows Server 映像 (VHD)。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

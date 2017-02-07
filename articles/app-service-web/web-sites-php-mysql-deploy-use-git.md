@@ -5,7 +5,7 @@ services: app-service\web
 documentationCenter: php
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 tags: mysql
 
 ms.service: app-service-web

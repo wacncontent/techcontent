@@ -2,10 +2,10 @@
 title: 云服务角色配置 XPath 速查表 | Azure
 description: 可在云服务角色配置中用来将设置公开为环境变量的各种 XPath 设置。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

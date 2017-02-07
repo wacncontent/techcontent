@@ -2,7 +2,7 @@
 title: 使用门户查看部署操作 | Azure
 description: 介绍如何使用 Azure 门户预览来检测 Resource Manager 部署中的错误。
 services: azure-resource-manager,virtual-machines
-documentationcenter: 
+documentationcenter: ''
 tags: top-support-issue
 author: tfitzmac
 manager: timlt

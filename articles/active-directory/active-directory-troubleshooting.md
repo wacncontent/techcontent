@@ -5,7 +5,7 @@ services: active-directory
 documentationCenter: na
 authors: msmbaldwin
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

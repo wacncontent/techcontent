@@ -2,7 +2,7 @@
 title: 通过 Azure 自动化启动和停止虚拟机 - PowerShell 工作流 | Azure
 description: Azure 自动化方案的图形版本，包括启动和停止经典虚拟机所需的 Runbook。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
 editor: tysonn

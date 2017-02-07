@@ -2,10 +2,10 @@
 title: 使用 DocumentDB 全局分发数据 | Azure
 description: 了解如何通过 Azure DocumentDB（一种完全托管的 NoSQL 数据库服务），使用全局数据库进行全球范围的异地复制、故障转移和数据恢复。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: kiratp
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: ba5ad0cc-aa1f-4f40-aee9-3364af070725
 ms.service: documentdb

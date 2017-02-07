@@ -2,10 +2,10 @@
 title: 在 Azure 中运行 OpenSUSE Linux 的 VM 上安装 MySQL
 description: 了解如何在 Azure 中的虚拟机上安装 MySQL。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

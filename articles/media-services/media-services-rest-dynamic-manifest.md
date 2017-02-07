@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体服务 REST API 创建筛选器 | Azure
 description: 本主题介绍如何创建筛选器，以便客户端能够使用它们对流的特定部分进行流式处理。媒体服务将创建动态清单来存档此选择性流。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

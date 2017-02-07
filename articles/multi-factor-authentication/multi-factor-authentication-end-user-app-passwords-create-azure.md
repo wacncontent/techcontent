@@ -2,7 +2,7 @@
 title: 在 Azure 门户中为 Azure Multi-Factor Authentication 创建应用密码
 description: 本页说明用户如何在 Azure 门户中创建更多的应用密码。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenp
 editor: curtland

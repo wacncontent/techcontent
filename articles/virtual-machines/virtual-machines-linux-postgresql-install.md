@@ -2,10 +2,10 @@
 title: 在运行 Linux 的 Azure 虚拟机上安装和配置 PostgreSQL
 description: 了解如何在 Azure 中的 Linux 虚拟机上安装和配置 PostgreSQL
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: SuperScottz
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-linux

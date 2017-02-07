@@ -4,7 +4,7 @@ description: 了解如何在 Xamarin.Forms 应用程序中使用应用服务移�
 documentationCenter: xamarin
 authors: adrianhall
 manager: yochayk
-editor: 
+editor: ''
 services: app-service\mobile
 
 ms.service: app-service-mobile

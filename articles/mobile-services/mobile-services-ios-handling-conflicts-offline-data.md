@@ -4,7 +4,7 @@ description: 了解在 iOS 应用程序中同步脱机数据时如何使用 Azur
 documentationCenter: ios
 authors: krisragh
 manager: erikre
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

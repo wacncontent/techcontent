@@ -2,10 +2,10 @@
 title: 使用 AMS REST API 通过存储空间加密来加密内容
 description: 了解如何使用 AMS REST API 通过存储空间加密来加密内容。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

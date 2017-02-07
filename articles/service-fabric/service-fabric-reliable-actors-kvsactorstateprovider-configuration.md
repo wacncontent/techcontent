@@ -5,7 +5,7 @@ services: Service-Fabric
 documentationCenter: .net
 authors: sumukhs
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: Service-Fabric
 ms.devlang: dotnet

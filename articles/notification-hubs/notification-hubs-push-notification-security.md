@@ -5,7 +5,7 @@ services: notification-hubs
 documentationCenter: .net
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

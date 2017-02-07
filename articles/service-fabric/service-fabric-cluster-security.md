@@ -5,7 +5,7 @@ services: service-fabric
 documentationcenter: .net
 author: ChackDan
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 26b58724-6a43-4f20-b965-2da3f086cf8a
 ms.service: service-fabric
@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/06/2016
-wacn.date: 01/17/2017
+wacn.date: 01/20/2017
 ms.author: chackdan
 ---
 
@@ -113,4 +113,5 @@ X.509 数字证书通常用于验证客户端与服务器，以及对消息进�
 [Node-to-Node]: ./media/service-fabric-cluster-security/node-to-node.png
 [Client-to-Node]: ./media/service-fabric-cluster-security/client-to-node.png
 
-<!---HONumber=Mooncake_Quality_Review_0117_2017-->
+<!---HONumber=Mooncake_0116_2017-->
+<!--update: wording update-->

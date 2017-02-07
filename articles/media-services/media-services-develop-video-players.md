@@ -3,9 +3,9 @@ title: 开发视频播放器应用程序
 description: 本主题提供可用于开发自己的客户端应用程序（这些应用程序使用媒体服务中的流媒体）的播放器框架和插件的链接。
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: media-services
 ms.workload: media

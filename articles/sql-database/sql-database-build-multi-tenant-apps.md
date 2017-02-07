@@ -1,12 +1,12 @@
 ---
 title: 使用具有隔离和效率的 Azure SQL 数据库构建多租户应用
 description: 了解 SQL 数据库如何构建多租户应用
-keywords: 
+keywords: ''
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

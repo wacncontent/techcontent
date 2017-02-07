@@ -1,12 +1,12 @@
 ---
 title: 在 Azure SQL 数据库中操作查询存储
 description: 了解如何在 Azure SQL 数据库中操作查询存储
-keywords: 
+keywords: ''
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 0cccf6bd-1327-44f7-a6f9-8eff0c210463
 ms.service: sql-database

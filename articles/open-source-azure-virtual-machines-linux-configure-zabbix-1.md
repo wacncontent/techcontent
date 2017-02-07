@@ -2,13 +2,13 @@
 title: 在 Azure Linux 虚拟机上手动安装配置 Zabbix 监控服务
 description: 本文介绍如何在 Azure Linux 虚拟机上配置 zabbix 监控
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 08/10/2016
 ---
 

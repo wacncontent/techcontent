@@ -2,10 +2,10 @@
 title: Azure 媒体服务概念 | Azure
 description: 本部分概述 Azure 媒体服务的概念。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: dcefc8bc-e2ea-4b38-a643-9010f4436fb5
 ms.service: media-services

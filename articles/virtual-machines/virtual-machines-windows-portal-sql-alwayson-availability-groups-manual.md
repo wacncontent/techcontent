@@ -9,7 +9,7 @@ editor: monicar
 tags: azure-service-management
 
 ms.assetid: 986cbc2e-553d-4eba-8acb-c34ad7fd1d8b
-ms.service: virtual-machines
+ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
@@ -185,10 +185,10 @@ Azure 将返回到门户仪表板并在创建新网络时发出通知。
 * ad-primary-dc
 * ad-secondary-dc
 
-  > [!NOTE]
-  **ad-secondary-dc** 是可选组件，可为 Active Directory 域服务提供高可用性。
-  > 
-  > 
+    > [!NOTE]
+    **ad-secondary-dc** 是可选组件，可为 Active Directory 域服务提供高可用性。
+    > 
+    > 
 
 下表显示了这两个虚拟机的设置。
 
@@ -703,12 +703,12 @@ Azure 将创建虚拟机。
     $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
     $IPResourceName = "<IPResourceName>" # the IP Address resource name
     $ILBIP = "<X.X.X.X>" # the IP Address of the Internal Load Balancer (ILB). This is the static IP address for the load balancer you configured in the Azure portal preview.
+    [int]$ProbePort = <nnnnn> # In this sample we've using 59999 for the probe port. 
+
+    Import-Module FailoverClusters
+
+    Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"=$ProbePort;"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
     ```
-       [int]$ProbePort = <nnnnn> # 本示例使用 59999 作为探测端口。
-
-        Import-Module FailoverClusters
-
-        Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"=$ProbePort;"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
 
 10. 更新变量并运行 PowerShell 脚本，以配置新侦听器的 IP 地址和端口。
 11. 在“故障转移群集管理器”中，右键单击可用性组资源，然后单击“属性”。在“依赖性”选项卡上，将资源组设置为依赖于侦听器网络名称。
@@ -735,3 +735,4 @@ Azure 将创建虚拟机。
 有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](./virtual-machines-windows-sql-server-iaas-overview.md)。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

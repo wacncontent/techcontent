@@ -2,10 +2,10 @@
 title: Linux 代理用户指南 | Azure
 description: 了解如何安装和配置 Linux 代理 (waagent) 以管理虚拟机与 Azure 结构控制器的交互。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: szarkos
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-linux

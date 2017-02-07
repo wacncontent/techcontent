@@ -2,10 +2,10 @@
 title: 了解 Azure Active Directory 应用程序清单 | Azure
 description: 详细介绍 Azure Active Directory 应用程序清单，该清单表示 Azure AD 租户中的应用程序标识配置，并方便实现 OAuth 授权、许可体验和其他功能。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: bryanla
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

@@ -2,10 +2,10 @@
 title: 在 Azure 门户预览中使用基于角色的访问控制 | Azure
 description: 在 Azure 门户预览中使用基于角色的访问控制开始进行访问权限管理。使用角色分配来分配资源权限。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: kgremban
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

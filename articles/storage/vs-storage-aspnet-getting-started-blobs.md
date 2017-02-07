@@ -2,10 +2,10 @@
 title: 开始使用 Azure Blob 存储和 Visual Studio 连接服务 (ASP.NET) | Azure
 description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 ASP.NET 项目中使用 Azure Blob 存储
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: b3497055-bef8-4c95-8567-181556b50d95
 ms.service: storage

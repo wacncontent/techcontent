@@ -3,9 +3,9 @@ title: 用于 .NET 的媒体服务 SDK 中的重试逻辑 | Azure
 description: 本主题概述了用于 .NET 的媒体服务 SDK 中的重试逻辑。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 527b61a6-c862-4bd8-bcbc-b9aea1ffdee3
 ms.service: media-services

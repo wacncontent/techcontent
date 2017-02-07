@@ -2,10 +2,10 @@
 title: 使用 Apple FairPlay 和/或 Microsoft PlayReady 保护 HLS 内容 | Azure
 description: 本主题概括介绍并演示了如何使用 Azure 媒体服务通过 Apple FairPlay 动态加密 HTTP 实时传送视频流 (HLS) 内容。它还演示了如何使用媒体服务许可证传送服务将 FairPlay 许可证传送到客户端。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

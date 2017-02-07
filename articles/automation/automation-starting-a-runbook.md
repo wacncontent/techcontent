@@ -2,7 +2,7 @@
 title: 在 Azure 自动化中启动 Runbook | Azure
 description: 汇总了可用于在 Azure 自动化中启动 Runbook 的不同方法，并提供有关如何使用 Azure 经典管理门户和 Windows PowerShell 的详细信息。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
 editor: tysonn

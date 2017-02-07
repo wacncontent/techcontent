@@ -2,7 +2,7 @@
 title: 如何配置流分析作业的数据输出 | Azure
 description: 配置流分析作业的输出 | 学习路径段。
 keywords: 数据输出、数据移动
-documentationCenter: 
+documentationCenter: ''
 services: stream-analytics
 authors: jeffstokes72
 manager: jhubbard

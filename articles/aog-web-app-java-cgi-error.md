@@ -2,11 +2,11 @@
 title: 访问 Azure Web 应用遇到“指定的 CGI 应用程序遇到错误，服务器终止了该进程”错误
 description: 访问 Azure Web 应用遇到“指定的 CGI 应用程序遇到错误，服务器终止了该进程”错误。
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: app-service-web-aog
 ms.date: 10/27/2016

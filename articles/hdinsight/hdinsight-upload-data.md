@@ -2,7 +2,7 @@
 title: 在 HDInsight 中上传 Hadoop 作业的数据 | Azure
 description: 了解如何在 HDInsight 中使用 Azure CLI、Azure 存储资源管理器、Azure PowerShell、Hadoop 命令行或 Sqoop 上传和访问 Hadoop 作业的数据。
 services: hdinsight,storage
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: mumian
 manager: jhubbard
@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 11/15/2016
-wacn.date: 01/05/2017
+wacn.date: 01/25/2017
 ms.author: jgao
 ---
 
@@ -65,13 +65,10 @@ Azure CLI 是一个跨平台工具，可用于管理 Azure 服务。使用以下
 2. 打开命令提示符、bash 或其他 shell，然后使用以下方法对 Azure 订阅进行身份验证。
 
     ```
-    azure config mode asm
     azure login -e AzureChinaCloud
     ```
 
-    > [!NOTE]
-    > 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
-
+    出现提示时，输入订阅的用户名和密码。
 3. 输入以下命令，列出订阅的存储帐户：
 
     ```
@@ -91,21 +88,18 @@ Azure CLI 是一个跨平台工具，可用于管理 Azure 服务。使用以下
     ```
 6. 使用以下命令可将文件上传和下载到 Blob：
 
-   * 上传文件：
+    * 上传文件：
 
-       ```
-       azure storage blob upload -a <storage-account-name> -k <primary-key> <source-file> <container-name> <blob-name>
-       ```
-   * 下载文件：
+           azure storage blob upload -a <storage-account-name> -k <primary-key> <source-file> <container-name> <blob-name>
+    * 下载文件：
 
-       ```
-       azure storage blob download -a <storage-account-name> -k <primary-key> <container-name> <blob-name> <destination-file>
-       ```
+           azure storage blob download -a <storage-account-name> -k <primary-key> <container-name> <blob-name> <destination-file>
 
 > [!NOTE]
 如果始终使用同一个存储帐户，可以不用为每条命令指定帐户和密钥，而是设置以下环境变量：
 ><p>
-><p> *AZURE\_STORAGE\_ACCOUNT**：存储帐户名称 <p> * **AZURE\_STORAGE\_ACCESS\_KEY**：存储帐户密钥
+<p> *AZURE\_STORAGE\_ACCOUNT**：存储帐户名称 
+<p> * **AZURE\_STORAGE\_ACCESS\_KEY**：存储帐户密钥
 >
 >
 
@@ -128,7 +122,7 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
     $blobName = "<BlobName>"
 
     # Get the storage account key
-    $storageaccountkey = get-azurestoragekey -ResourceGroupName $resourceGroupName -Name $storageAccountName | %{$_.Primary}
+    $storageAccountKey = (Get-AzureRmStorageAccountKey -ResourceGroupName $resourceGroupName -Name $storageAccountName)[0].Value
     # Create the storage context object
     $destContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageaccountkey
 
@@ -155,9 +149,10 @@ AzCopy <Source> <Destination> [filePattern [filePattern...]] [Options]
 
 若要使用 Hadoop 命令，必须先使用以下方法之一连接到头节点：
 
-* **基于 Windows 的 HDInsight**：[使用远程桌面连接](./hdinsight-administer-use-management-portal-v1.md#connect-to-clusters-using-rdp)
+* **基于 Windows 的 HDInsight**：[使用远程桌面连接](./hdinsight-administer-use-management-portal.md#connect-to-clusters-using-rdp)
+* **基于 Linux 的 HDInsight**：使用 SSH（[SSH 命令](./hdinsight-hadoop-linux-use-ssh-unix.md)或 [PuTTY](./hdinsight-hadoop-linux-use-ssh-windows.md)）连接
 
-连接之后，可以使用以下语法将文件上传到存储。
+连接之后，可以使用以下语法将文件上载到存储。
 
 ```
 hadoop -copyFromLocal <localFilePath> <storageFilePath>
@@ -223,6 +218,7 @@ wasbs://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/example/
 请参阅[将 Azure Blob 存储装载为本地驱动器](http://blogs.msdn.com/b/bigdatasupport/archive/2014/01/09/mount-azure-blob-storage-as-local-drive.aspx)。
 
 ## 服务
+
 ### <a id="sqoop"></a>Apache Sqoop
 Sqoop 是一种专用于在 Hadoop 和关系数据库之间传输数据的工具。可以使用此工具将数据从关系数据库管理系统 (RDBMS)（如 SQL Server、MySQL 或 Oracle）中导入到 Hadoop 分布式文件系统 (HDFS)，在 Hadoop 中使用 MapReduce 或 Hive 转换该数据，然后将该数据导回 RDBMS。
 
@@ -274,6 +270,19 @@ Caused by: com.microsoft.azure.storage.StorageException: The request body is too
 hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file.bin /example/data
 ```
 
+还可以使用 Ambari 全局增加 `fs.azure.write.request.size` 的值。可以使用以下步骤在 Ambari Web UI 中更改该值：
+
+1. 在浏览器中，转到群集的 Ambari Web UI。网址为 https://CLUSTERNAME.azurehdinsight.cn，其中 **CLUSTERNAME** 是群集的名称。
+
+    出现提示时，输入群集的管理员名称和密码。
+2. 在屏幕左侧选择“HDFS”，然后选择“配置”选项卡。
+3. 在“筛选...”字段中，输入 `fs.azure.write.request.size`。这将在页中间显示该字段和当前值。
+4. 将值从 262144 (256KB) 更改为新值。例如，4194304 (4MB)。
+
+![通过 Ambari Web UI 更改值的图像](./media/hdinsight-upload-data/hbase-change-block-write-size.png)  
+
+有关如何使用 Ambari 的详细信息，请参阅 [Manage HDInsight clusters using the Ambari Web UI](./hdinsight-hadoop-manage-ambari.md)（使用 Ambari Web UI 管理 HDInsight 群集）。
+
 ## 后续步骤
 现在，你已了解如何将数据导入 HDInsight，请阅读以下文章了解如何执行分析：
 
@@ -282,7 +291,7 @@ hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file
 * [将 Hive 与 HDInsight 配合使用][hdinsight-use-hive]
 * [将 Pig 与 HDInsight 配合使用][hdinsight-use-pig]
 
-[azure-management-portal]: https://manage.windowsazure.cn
+[azure-management-portal]: https://portal.azure.cn
 [azure-powershell]: http://msdn.microsoft.com/zh-cn/library/azure/jj152841.aspx
 
 [azure-storage-client-library]: ../storage/storage-dotnet-how-to-use-blobs.md
@@ -294,11 +303,11 @@ hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file
 
 [hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
 [hdinsight-submit-jobs]: ./hdinsight-submit-hadoop-jobs-programmatically.md
-[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-get-started]: ./hdinsight-hadoop-linux-tutorial-get-started.md
 
 [hdinsight-use-hive]: ./hdinsight-use-hive.md
 [hdinsight-use-pig]: ./hdinsight-use-pig.md
-[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-provision]: ./hdinsight-provision-clusters.md
 
 [sqldatabase-create-configure]: ../sql-database/sql-database-get-started.md
 
@@ -312,4 +321,4 @@ hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file
 [image-ase-addaccount]: ./media/hdinsight-upload-data/HDI.ASEAddAccount.png
 [image-ase-blob]: ./media/hdinsight-upload-data/HDI.ASEBlob.png
 
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_0120_2017-->

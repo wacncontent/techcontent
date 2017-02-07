@@ -2,7 +2,7 @@
 title: 故障排除：Azure AD 密码管理 | Azure
 description: 针对 Azure AD 密码管理的常见故障排除步骤，包括重置、更改、写回、注册，以及寻求帮助时要提供的信息。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: asteen
 manager: femila
 editor: curtand

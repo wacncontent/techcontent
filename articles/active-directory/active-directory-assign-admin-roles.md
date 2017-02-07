@@ -2,10 +2,10 @@
 title: 在 Azure Active Directory 中分配管理员角色 | Azure
 description: 介绍 Azure Active Directory 提供的管理员角色，以及如何分配这些角色。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

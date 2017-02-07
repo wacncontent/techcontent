@@ -2,11 +2,11 @@
 title: 导出 DocumentDB 模拟器证书 | Azure
 description: 使用不使用 Windows 证书存储的语言和运行时进行开发时，将需要导出和管理 SSL 证书。此文提供了分步说明。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 keywords: DocumentDB 模拟器
 author: voellm
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: ef43deda-c2e9-4193-99e2-7f6a88a0319f
 ms.service: documentdb

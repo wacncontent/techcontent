@@ -2,11 +2,11 @@
 title: 利用生存时间使 DocumentDB 中的数据过期 |Azure
 description: 通过 TTL 功能，Azure DocumentDB 能够在一段时间后将文档自动从系统清除。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 keywords: 生存时间
 author: kiratp
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 25fcbbda-71f7-414a-bf57-d8671358ca3f
 ms.service: documentdb

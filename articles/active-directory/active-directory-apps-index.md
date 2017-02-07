@@ -2,10 +2,10 @@
 title: 有关 Azure Active Directory 中应用程序管理的文章索引 | Azure
 description: 了解如何自定义联合证书的过期日期，以及如何续订即将过期的证书。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: MarkusVi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

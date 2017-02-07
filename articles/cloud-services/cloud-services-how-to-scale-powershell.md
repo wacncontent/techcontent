@@ -2,10 +2,10 @@
 title: 在 Windows PowerShell 中缩放 Azure 云服务 | Azure
 description: （经典）了解如何使用 PowerShell 在 Azure 中缩放 web 角色或辅助角色。
 services: cloud-services
-documentationcenter: 
+documentationcenter: ''
 author: seanmck
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: ee37dd8c-6714-4c61-adb8-03d6bbf76c9a
 ms.service: cloud-services

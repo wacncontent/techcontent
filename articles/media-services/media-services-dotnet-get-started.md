@@ -2,10 +2,10 @@
 title: 开始使用 .NET 传送点播内容 | Azure
 description: 本教程将引导你完成使用 Azure 媒体服务和 .NET 实施点播内容传送应用程序的步骤。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 388b8928-9aa9-46b1-b60a-a918da75bd7b
 ms.service: media-services

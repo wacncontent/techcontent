@@ -1,12 +1,12 @@
 ---
 title: 自定义预配置解决方案 | Azure
 description: 提供有关如何自定义 Azure IoT 套件预配置解决方案的指导。
-services: 
+services: ''
 suite: iot-suite
 documentationCenter: .net
 authors: stevehob
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: dotnet
@@ -53,7 +53,7 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 ## 添加你自己的规则
 
-除了更改预配置的 Azure 流分析作业，也可以使用 Azure 门户添加新作业或添加对现有作业的新查询。
+除了更改预配置的 Azure 流分析作业，也可以使用 Azure 门户预览添加新作业或添加对现有作业的新查询。
 
 ## 自定义设备
 

@@ -2,8 +2,8 @@
 title: 使用 Azure 门户预览为 Azure 服务创建警报 | Azure
 description: 使用 Azure 门户创建 Azure 警报，以便在满足指定的条件时触发通知或自动化操作。
 authors: rboucher
-manager: 
-editor: 
+manager: ''
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

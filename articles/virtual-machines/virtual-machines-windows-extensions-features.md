@@ -4,10 +4,10 @@
 title: 虚拟机扩展和功能 | Azure
 description: 了解可为 Azure 虚拟机提供的扩展，这些虚拟机扩展按它们提供或改进的功能进行分组。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: neilpeterson
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.assetid: 999d63ee-890e-432e-9391-25b3fc6cde28
@@ -282,3 +282,4 @@ Remove-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name 
 | Azure VM 访问扩展 |管理用户和凭据 |[适用于 Linux 的 VM 访问扩展](https://azure.microsoft.com/blog/using-vmaccess-extension-to-reset-login-credentials-for-linux-vm/) |
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: add VM Extension Data Protection-->

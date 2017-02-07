@@ -2,10 +2,10 @@
 title: 为 Azure Resource Manager 中的虚拟机设置 WinRM 访问权限 | Azure
 description: 如何设置要用于 Azure Resource Manager 虚拟机的 WinRM 访问权限
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: singhkay
 manager: drewm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

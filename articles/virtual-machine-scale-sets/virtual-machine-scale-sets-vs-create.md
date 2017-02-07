@@ -2,10 +2,10 @@
 title: 使用 Visual Studio 部署虚拟机规模集 | Azure
 description: 使用 Visual Studio 和 Resource Manager 模板部署虚拟机规模集
 services: virtual-machine-scale-sets
-documentationCenter: 
+documentationCenter: ''
 authors: gbowerman
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machine-scale-sets

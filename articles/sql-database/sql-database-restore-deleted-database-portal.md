@@ -2,10 +2,10 @@
 title: 还原已删除的 Azure SQL 数据库（Azure 门户预览）| Azure
 description: 还原已删除的 Azure SQL 数据库（Azure 门户预览）。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

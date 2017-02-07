@@ -2,10 +2,10 @@
 title: 了解 Azure IoT 中心定价 | Azure
 description: 开发人员指南 - 介绍了如何实现 IoT 中心（包括样例）的计数和定价。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 1ac90923-1edf-4134-bbd4-77fee9b68d24
 ms.service: iot-hub

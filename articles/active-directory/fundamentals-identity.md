@@ -5,7 +5,7 @@ services: active-directory
 documentationcenter: .net
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 30867693-9851-4551-b3d3-df583365207f
 ms.service: active-directory

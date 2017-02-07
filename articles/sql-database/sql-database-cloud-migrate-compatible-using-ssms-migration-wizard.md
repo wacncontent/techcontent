@@ -2,10 +2,10 @@
 title: 使用“将数据库部署到 Azure 数据库”向导将 SQL Server 数据库迁移到 SQL 数据库
 description: Azure SQL 数据库, 数据库迁移, Azure 数据库向导
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

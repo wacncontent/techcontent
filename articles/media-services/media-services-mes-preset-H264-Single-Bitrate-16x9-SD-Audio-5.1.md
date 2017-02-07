@@ -3,9 +3,9 @@ title: H264 单比特率 16x9 SD 音频 5.1 | Azure
 description: 本主题概述了 **H264 单比特率 16x9 SD 音频 5.1** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: d57cd39f-60e8-4248-a21d-c5b9f096b0ce
 ms.service: media-services

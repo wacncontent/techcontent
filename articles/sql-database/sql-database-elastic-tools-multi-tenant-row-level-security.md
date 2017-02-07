@@ -3,7 +3,7 @@ title: 具有弹性数据库工具和行级安全性的多租户应用程序
 description: 了解如何将弹性数据库工具和行级安全性一起使用，在 Azure SQL 数据库上生成具有高度可伸缩性数据层、支持多租户分片的应用程序。
 metaKeywords: azure sql 数据库弹性工具多租户行级别安全性 rls
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: tmullaney
 

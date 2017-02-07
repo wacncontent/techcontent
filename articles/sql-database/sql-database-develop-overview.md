@@ -2,7 +2,7 @@
 title: SQL 数据库开发概述 | Azure
 description: 了解连接到 SQL 数据库的应用程序的可用连接库和最佳实践。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: annemill
 manager: jhubbard
 editor: genemi

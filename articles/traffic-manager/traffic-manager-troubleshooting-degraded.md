@@ -2,10 +2,10 @@
 title: Azure 流量管理器上的降级状态故障排除
 description: 如何在流量管理器显示为降级状态时对流量管理器配置文件进行故障排除。
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationCenter: python
 authors: huguesv
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.workload: web

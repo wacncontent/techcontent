@@ -2,10 +2,10 @@
 title: 依赖于数据的路由 | Azure
 description: 如何将 .NET 应用中的 ShardMapManager 类用于依赖于数据的路由（Azure SQL 数据库弹性数据库的一项功能）
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: torsteng
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: sql-database

@@ -1,14 +1,14 @@
 ---
 title: Python-数据服务 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: Python-数据服务 - Azure 微软云
-services: 
+services: ''
 documentationCenter: python
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
+ms.service: ''
 ms.date: 10/18/2014
 wacn.date: 04/11/2015
 ---

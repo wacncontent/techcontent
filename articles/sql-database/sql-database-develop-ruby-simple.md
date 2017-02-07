@@ -2,10 +2,10 @@
 title: 使用 Ruby 连接到 SQL 数据库
 description: 提供可运行的用于连接到 Azure SQL 数据库的 Ruby 代码示例。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: ajlam
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: drivers

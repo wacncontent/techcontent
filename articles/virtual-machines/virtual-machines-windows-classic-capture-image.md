@@ -2,7 +2,7 @@
 title: 捕获 Azure Windows VM 的映像| Azure
 description: 捕获使用经典部署模型创建的 Azure Windows 虚拟机的映像。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

@@ -2,10 +2,10 @@
 title: 适用于 SQL Server VM 的 SQL Server 代理扩展（经典）| Azure
 description: 本主题介绍如何管理可以自动执行特定 SQL Server 管理任务的 SQL Server 代理扩展。这些任务包括自动备份、自动修补和 Azure 密钥保管库集成。本主题使用经典部署模式。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: rothja
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

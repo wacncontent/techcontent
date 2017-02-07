@@ -3,7 +3,7 @@ title: 使用 Azure 门户预览创建虚拟机规模集 | Azure
 description: 使用 Azure 门户预览部署规模集。
 keywords: 虚拟机规模集
 services: virtual-machine-scale-sets
-documentationcenter: 
+documentationcenter: ''
 author: gatneil
 manager: madhana
 editor: tysonn

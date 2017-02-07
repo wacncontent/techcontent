@@ -2,10 +2,10 @@
 title: 创建恢复计划 |Azure
 description: 使用 Azure Site Recovery 创建恢复计划，以故障转移并恢复虚拟机和物理服务器组。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: site-recovery
 ms.devlang: na

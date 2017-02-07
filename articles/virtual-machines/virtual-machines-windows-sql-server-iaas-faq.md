@@ -2,14 +2,14 @@
 title: Azure 虚拟机中的 SQL Server 常见问题 | Azure
 description: 本文提供有关运行 Azure VM 中的 SQL Server 时遇到的常见问题的解答。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: v-shysun
 manager: felixwu
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 2fa5ee6b-51a6-4237-805f-518e6c57d11b
-ms.service: virtual-machines-sql
+ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
@@ -73,3 +73,4 @@ ms.author: v-shysun
 * [Azure 虚拟机中 SQL Server 的应用程序模式和开发策略](./virtual-machines-windows-sql-server-app-patterns-dev-strategies.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

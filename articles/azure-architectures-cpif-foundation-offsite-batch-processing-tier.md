@@ -1,11 +1,11 @@
 ---
 title: 非现场批处理层（Azure 体系结构模式）
 description: 非现场批处理层模式是基础结构区域的一部分，在 CPIF 体系结构文档中对其进行了广泛的介绍。
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: arynes
 manager: fredhar
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.date: 03/25/2015

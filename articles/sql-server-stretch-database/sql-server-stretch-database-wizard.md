@@ -2,10 +2,10 @@
 title: 通过运行“为数据库启用延伸向导”开始操作 | Azure
 description: 了解如何通过运行“为数据库启用延伸向导”，来为延伸数据库配置数据库。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

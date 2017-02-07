@@ -2,7 +2,7 @@
 title: 使用 Site Recovery 将 Azure IaaS 虚拟机从一个 Azure 区域迁移到另一个 Azure 区域 | Azure
 description: 使用 Azure Site Recovery 将 Azure IaaS 虚拟机从一个 Azure 区域迁移到另一个 Azure 区域。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: rayne-wiselman
 manager: jwhit
 editor: tysonn

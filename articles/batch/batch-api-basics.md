@@ -5,7 +5,7 @@ services: batch
 documentationcenter: .net
 author: mmacy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 416b95f8-2d7b-4111-8012-679b0f60d204
 ms.service: batch
@@ -311,9 +311,9 @@ Batch 可以处理使用 Azure 存储将应用程序包存储及部署到计算�
 
 - VNet 必须符合以下条件：
 
-    - 与 Azure 批处理帐户位于同一 Azure **区域**。
-    - 与 Azure 批处理帐户属于同一**订阅**。
-    - **经典** VNet。不支持通过 Azure资源管理器部署模型创建 VNet。
+   - 与 Azure 批处理帐户位于同一 Azure **区域**。
+   - 与 Azure 批处理帐户属于同一**订阅**。
+   - **经典** VNet。不支持通过 Azure资源管理器部署模型创建 VNet。
 
 - 根据池的 `targetDedicated` 属性要求，VNet 应该有足够的可用 **IP 地址**。如果子网没有足够的可用 IP 地址，则批处理服务只能完成池中计算节点的部分分配，因此会返回调整大小错误。
 - *MicrosoftAzureBatch* 服务主体必须具有[经典虚拟机参与者](../active-directory/role-based-access-built-in-roles.md#classic-virtual-machine-contributor)这一针对指定 VNet 的基于角色的访问控制 (RBAC) 角色。在 Azure 门户预览中：

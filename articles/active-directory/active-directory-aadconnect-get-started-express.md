@@ -2,7 +2,7 @@
 title: Azure AD Connect：开始使用快速设置 | Azure
 description: 了解如何下载、安装和运行 Azure AD Connect 的设置向导。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: femila
 editor: curtand

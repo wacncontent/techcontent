@@ -2,10 +2,10 @@
 title: 数据迁移的监视和故障排除（延伸数据库）| Azure
 description: 了解如何监视数据迁移状态。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

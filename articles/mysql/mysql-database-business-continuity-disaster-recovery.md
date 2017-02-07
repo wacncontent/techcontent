@@ -1,17 +1,17 @@
 ---
-linkid: 
-urlDisplayName: 
+linkid: ''
+urlDisplayName: ''
 title: MySQL服务问题 - Azure 微软云
 metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,区域性灾难,业务连续性方案,常见问题,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS,FAQ
 description: 本文提供三种灾难恢复方案，保障用户的业务连续性。
-metaCanonical: 
+metaCanonical: ''
 services: MySQL
 documentationCenter: Services
-title: 
+title: ''
 authors: v-chenyh
-solutions: 
+solutions: ''
 manager: RongYu
-editor: 
+editor: ''
 
 ms.service: mysql
 ms.date: 10/13/2016

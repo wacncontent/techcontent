@@ -2,10 +2,10 @@
 title: 跨多个存储帐户管理媒体服务资产
 description: 本文提供如何跨多个存储帐户管理媒体服务资产的指导。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

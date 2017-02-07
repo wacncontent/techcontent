@@ -2,10 +2,10 @@
 title: 如何配置 Azure Blob 存储中文件的互联网媒体类型
 description: 配置 Azure Blob 存储中文件的互联网媒体类型以避免被点击时反复下载
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: 存储,Blob,互联网媒体类型,MIME,AzCopy, Azure Storage Explorer
 
 ms.service: storage-aog

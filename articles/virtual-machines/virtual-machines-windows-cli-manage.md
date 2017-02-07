@@ -2,10 +2,10 @@
 title: VM 任务的基本 Azure CLI 命令 | Azure
 description: 用于在 Azure 资源管理器和 Azure 服务管理模式下创建和管理 Azure VM 的基本 Azure CLI 命令
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-windows

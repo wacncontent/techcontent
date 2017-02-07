@@ -1,14 +1,14 @@
 ---
 title: Azure 开发人员中心：开源软件
 description: Azure 开发人员中心：开源软件
-services: 
+services: ''
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 06/29/2015
 ---
 

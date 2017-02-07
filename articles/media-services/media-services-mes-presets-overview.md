@@ -3,9 +3,9 @@ title: MES (Media Encoder Standard) 任务预设 | Azure
 description: 本主题概述了 MES (Media Encoder Standard) 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: f243ed1c-ac9c-4300-a5f7-f092cf9853b9
 ms.service: media-services

@@ -5,7 +5,7 @@ services: load-balancer
 documentationCenter: na
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: load-balancer
 ms.devlang: na

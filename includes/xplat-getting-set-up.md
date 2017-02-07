@@ -2,7 +2,7 @@
 services: virtual-machines
 title: Setting up Azure CLI for service management
 authors: squillace
-solutions: 
+solutions: ''
 manager: timlt
 editor: tysonn
 

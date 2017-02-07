@@ -2,10 +2,10 @@
 title: Azure VM 备份失败：无法与 VM 代理通信以获取快照状态 - 快照 VM 子任务超时 | Azure
 description: 与以下症状相关的 Azure VM 备份失败的原因与解决方法：无法与 VM 代理通信，因而无法获取快照。快照 VM 子任务超时错误
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: genlin
 manager: cfreeman
-editor: 
+editor: ''
 
 ms.assetid: 4b02ffa4-c48e-45f6-8363-73d536be4639
 ms.service: backup

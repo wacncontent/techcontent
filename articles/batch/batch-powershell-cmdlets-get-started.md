@@ -2,10 +2,10 @@
 title: Azure Batch PowerShell 入门 | Azure
 description: 快速介绍可用于管理 Azure Batch 服务的 Azure PowerShell cmdlet
 services: batch
-documentationcenter: 
+documentationcenter: ''
 author: mmacy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: f9ad62c5-27bf-4e6b-a5bf-c5f5914e6199
 ms.service: batch

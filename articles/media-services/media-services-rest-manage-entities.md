@@ -3,9 +3,9 @@ title: 使用 REST API 管理媒体服务实体 | Azure
 description: 了解如何使用 REST API 管理媒体服务实体。
 authors: juliako
 manager: dwrede
-editor: 
+editor: ''
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: media-services
 ms.workload: media

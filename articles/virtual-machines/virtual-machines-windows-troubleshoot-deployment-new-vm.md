@@ -2,10 +2,10 @@
 title: 排查 Windows VM 部署问题 - RM | Azure
 description: 排查在 Azure 中新建 Windows 虚拟机时遇到的 Resource Manager 部署问题
 services: virtual-machines-windows, azure-resource-manager
-documentationCenter: 
+documentationCenter: ''
 authors: jiangchen79
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue, azure-resource-manager
 
 ms.service: virtual-machines-windows
@@ -13,8 +13,8 @@ ms.workload: na
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 09/09/2016
-wacn.date: 12/26/2016
+ms.date: 12/16/2016
+wacn.date: 01/25/2017
 ms.author: cjiang
 ---
 

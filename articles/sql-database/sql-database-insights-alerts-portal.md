@@ -3,18 +3,19 @@ title: 使用 Azure 门户预览创建 SQL 数据库警报 | Azure
 description: 使用 Azure 门户预览创建 SQL 数据库警报，该警报可在满足指定的条件时触发通知或自动化操作。
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: f7457655-ced6-4102-a9dd-7ddf2265c0e2
 ms.service: sql-database
+ms.custom: monitor and tune
 ms.workload: data-management
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 09/23/2016
-wacn.date: 12/19/2016
+ms.date: 11/15/2016
+wacn.date: 01/20/2016
 ms.author: carlrab
 ---
 
@@ -26,7 +27,7 @@ ms.author: carlrab
 可以根据监视指标或事件接收 Azure 服务的警报。
 
 * **指标值** - 当指定指标的值在任一方向越过了指定的阈值时警报将触发。也就是说，当条件先是满足以及之后不再满足该条件时，警报都会触发。
-* **活动日志事件** - 警报可以在发生*每个*事件时都触发，也可以仅在发生特定数量的事件时触发。
+* **活动日志事件** - 警报可以在发生 *每个* 事件时都触发，也可以仅在发生特定数量的事件时触发。
 
 可以配置警报以在其触发时执行以下操作：
 
@@ -117,4 +118,5 @@ ms.author: carlrab
 * 详细了解 [Azure 自动化 Runbook](../automation/automation-starting-a-runbook.md)。
 * [大致了解指标收集](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md)以确保你的服务可用且响应迅速。
 
-<!---HONumber=Mooncake_1212_2016-->
+<!---HONumber=Mooncake_0116_2017-->
+<!--update: wording update-->

@@ -4,10 +4,10 @@
 title: 云中的 Windows HPC Pack 群集选项 | Azure
 description: 了解在 Azure 云中使用 Microsoft HPC Pack 创建和管理 Windows 高性能计算 (HPC) 群集时可用的选项
 services: virtual-machines-windows,cloud-services,batch
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management,hpc-pack
 
 ms.assetid: 02c5566d-2129-483c-9ecf-0d61030442d7
@@ -57,3 +57,4 @@ ms.author: danlep
 * [使用 HPC Pack 迸发到 Azure Batch](https://technet.microsoft.com/zh-cn/library/mt612877.aspx)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

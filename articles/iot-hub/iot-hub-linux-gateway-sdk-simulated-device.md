@@ -2,10 +2,10 @@
 title: 使用 Azure IoT 网关 SDK 模拟设备 (Linux) | Azure
 description: 如何在 Linux 上使用 Azure IoT 网关 SDK 创建模拟设备，从而通过网关发送遥测数据到 IoT 中心。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: chipalost
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 11e7bf28-ee3d-48d6-a386-eb506c7a31cf
 ms.service: iot-hub

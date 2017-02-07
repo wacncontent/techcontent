@@ -5,7 +5,7 @@ services: service-fabric
 documentationcenter: .net
 author: rwike77
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: f03f4294-571d-4262-8a77-cc8b481b959d
 ms.service: service-fabric

@@ -2,10 +2,10 @@
 title: 使用网关 SDK 模拟设备 | Azure
 description: 如何在 Windows 上使用 Azure IoT 网关 SDK 创建模拟设备，从而将遥测数据通过网关发送到 IoT 中心
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: chipalost
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: cpp
@@ -13,11 +13,11 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 08/29/2016
-wacn.date: 01/13/2017
+wacn.date: 02/06/2017
 ms.author: andbuc
 ---
 
-# 使用 Azure IoT 网关 SDK，通过模拟设备发送设备到云消息 \(Windows\)
+# 使用 Azure IoT 网关 SDK，通过模拟设备发送设备到云消息 (Windows)
 
 [!INCLUDE [iot-hub-gateway-sdk-simulated-selector](../../includes/iot-hub-gateway-sdk-simulated-selector.md)]
 
@@ -26,7 +26,7 @@ ms.author: andbuc
 开始之前，必须：
 
 - [设置开发环境][lnk-setupdevbox]，以便在 Windows 上使用 SDK。
-- 若要在 Azure 订阅中[创建 IoT 中心][lnk-create-hub]，需要中心的名称来完成本演练。如果还没有 Azure 订阅，可以获取一个[帐户][lnk-free-trial]。
+- 若要在 Azure 订阅中[创建 IoT 中心][lnk-create-hub]，需要中心的名称来完成本演练。如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。
 - 将两个设备添加到 IoT 中心，并记下其 ID 和设备密钥。可使用设备资源管理器或 iothub-explorer 工具来将设备添加到在上一步中创建的 IoT 中心，并检索其密钥。
 
 生成示例：
@@ -167,5 +167,5 @@ ms.author: andbuc
 [lnk-devguide]: ./iot-hub-devguide.md
 [lnk-create-hub]: ./iot-hub-create-through-portal.md
 
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->
 <!--Update_Description:update wording-->

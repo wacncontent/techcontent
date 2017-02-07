@@ -2,10 +2,10 @@
 title: 使用 Azure 门户创建 VNet 对等互连 | Azure
 description: 了解如何在 Resource Manager 中使用 Azure 门户创建虚拟网络。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: NarayanAnnamalai
 manager: jefco
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-network

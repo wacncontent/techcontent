@@ -3,10 +3,10 @@ title: 使用 C# 查询连接到 SQL 数据库 | Azure
 description: 用 C# 编写用于查询和连接到 SQL 数据库的程序。有关 IP 地址、连接字符串、安全登录和免费 Visual Studio 的信息。
 services: sql-database
 keywords: c# 数据库查询, c# 查询, 连接到数据库, SQL C#
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

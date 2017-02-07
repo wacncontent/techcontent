@@ -2,10 +2,10 @@
 title: 自动缩放和虚拟机规模集 | Azure
 description: 了解如何使用诊断和自动缩放资源自动缩放规模集中的虚拟机。
 services: virtual-machine-scale-sets
-documentationCenter: 
+documentationCenter: ''
 authors: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machine-scale-sets

@@ -2,18 +2,18 @@
 title: 如何排查 Azure Redis 缓存问题 | Azure
 description: 了解如何解决 Azure Redis 缓存的常见问题。
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd
 ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
-ms.date: 10/25/2016
-wacn.date: 01/18/2017
+ms.date: 12/13/2016
+wacn.date: 01/25/2017
 ms.author: sdanie
 ---
 

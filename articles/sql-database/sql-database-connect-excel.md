@@ -3,10 +3,10 @@ title: 将 Excel 连接到 SQL 数据库 | Azure
 description: 了解如何将 Microsoft Excel 连接到云中的 Azure SQL 数据库。将数据导入 Excel 以进行报告和数据探索。
 services: sql-database
 keywords: 将 Excel 连接到 SQL, 将数据导入 Excel
-documentationCenter: 
+documentationCenter: ''
 authors: joseidz
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

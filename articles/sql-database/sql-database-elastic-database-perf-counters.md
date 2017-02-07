@@ -2,10 +2,10 @@
 title: 分片映射管理器的性能计数器
 description: ShardMapManager 类和数据相关的路由的性能计数器
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: SilviaDoomra
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: sql-database

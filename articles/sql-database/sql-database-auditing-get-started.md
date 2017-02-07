@@ -2,10 +2,10 @@
 title: SQL 数据库审核入门 | Azure
 description: SQL 数据库审核入门
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: ronitr
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

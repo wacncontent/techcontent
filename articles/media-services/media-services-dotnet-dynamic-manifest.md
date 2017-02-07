@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体服务 .NET SDK 创建筛选器
 description: 本主题介绍如何创建筛选器，以便客户端能够使用它们来流式传输流的特定部分。媒体服务创建动态清单来存档此选择性流。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: dwrede,cenkdin
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

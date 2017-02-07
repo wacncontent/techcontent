@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-windows

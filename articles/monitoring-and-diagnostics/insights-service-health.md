@@ -2,8 +2,8 @@
 title: 使用 Azure Monitor 活动日志跟踪 Azure 服务运行状况 | Azure
 description: 在 Azure 遇到性能下降或服务中断及时发现。
 authors: rboucher
-manager: 
-editor: 
+manager: ''
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

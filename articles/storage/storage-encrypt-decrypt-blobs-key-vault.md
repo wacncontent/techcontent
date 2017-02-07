@@ -2,7 +2,7 @@
 title: 教程：在 Azure 存储中使用 Azure 密钥保管库加密和解密 Blob | Azure
 description: 本教程指导用户如何将 Azure 存储的客户端加密与 Azure 密钥保管库配合使用来加密和解密 blob。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: robinsh
 manager: carmonm
 editor: tysonn

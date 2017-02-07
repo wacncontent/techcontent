@@ -2,18 +2,18 @@
 title: 如何配置云服务（经典管理门户）| Azure
 description: 了解如何在 Azure 中配置云服务。了解如何更新云服务配置以及配置对角色实例的远程访问。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 10/11/2016
-wacn.date: 12/12/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: adegeo
 ---
 
@@ -80,3 +80,4 @@ Azure 经典管理门户还允许你[为 Azure 云服务中的角色启用远程
 * 配置 [SSL 证书](./cloud-services-configure-ssl-certificate.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->
+<!--Update_Description:update meta properties-->

@@ -2,7 +2,7 @@
 title: 密钥保管库开发人员指南 | Azure
 description: 开发人员可以使用 Azure 密钥保管库来管理 Azure 环境中的加密密钥。
 services: key-vault
-documentationCenter: 
+documentationCenter: ''
 authors: BrucePerlerMS
 manager: mbaldwin
 editor: bruceper

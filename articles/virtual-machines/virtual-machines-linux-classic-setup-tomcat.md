@@ -2,10 +2,10 @@
 title: 在 Linux VM 上设置 Apache Tomcat | Azure
 description: 了解如何使用运行 Linux 的 Azure 虚拟机 (VM) 设置 Apache Tomcat7。
 services: virtual-machines
-documentationCenter: 
+documentationCenter: ''
 authors: NingKuang
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

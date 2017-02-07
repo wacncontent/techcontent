@@ -2,10 +2,10 @@
 title: 标识同步和重复属性复原 | Azure
 description: 介绍如何借助一种新的行为，在目录同步期间使用 Azure AD Connect 处理具有 UPN 或 ProxyAddress 冲突的对象。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

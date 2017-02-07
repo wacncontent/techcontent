@@ -1,12 +1,12 @@
 ---
 title: Azure IoT 套件概述 | Azure
 description: 概述 Azure IoT 套件如何提供物联网预配置解决方案，以收集、分析和存储数据，提供可视化效果，以及与其他系统集成。
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

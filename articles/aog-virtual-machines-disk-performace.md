@@ -2,13 +2,13 @@
 title: 理解及快速测定 Azure 虚拟机的磁盘性能
 description: 理解及快速测定 Azure 虚拟机的磁盘性能
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 10/28/2016
 ---
 

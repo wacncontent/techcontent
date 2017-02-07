@@ -1,20 +1,20 @@
 ---
 title: IoT 安全体系结构 | Azure
 description: IoT 安全体系结构指导原则和注意事项
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: YuriDio
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/17/2016
-wacn.date: 10/31/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: yurid
 ---
 
@@ -33,3 +33,4 @@ ms.author: yurid
 [lnk-security-deployment]: ./iot-suite-security-deployment.md
 
 <!---HONumber=Mooncake_0829_2016-->
+<!--Update_Description:update meta properties-->

@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationcenter: na
 author: MikeRayMSFT
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: a2453032-94ab-4775-b976-c74d24716728
@@ -138,3 +138,4 @@ sqlcmd -S "mycloudservice.chinacloudapp.cn,<EndpointPort>" -d "<DatabaseName>" -
 [!INCLUDE [Listener-Next-Steps](../../includes/virtual-machines-ag-listener-next-steps.md)]
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & move contents out from include files-->

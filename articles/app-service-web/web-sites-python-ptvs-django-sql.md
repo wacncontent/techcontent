@@ -6,7 +6,7 @@ tags: python
 documentationcenter: python
 author: huguesv
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: 3a677e64-b5a9-4d43-b9c0-66246368b483
 ms.service: app-service-web

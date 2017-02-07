@@ -2,10 +2,10 @@
 title: 导航和选择 Windows VM 映像 | Azure
 description: 了解在使用资源管理器部署模型创建 Windows 虚拟机时如何确定映像的确定发布者、产品和 SKU。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: squillace
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

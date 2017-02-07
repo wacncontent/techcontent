@@ -4,7 +4,7 @@
 title: Linux 和 Mac 的基本 Azure CLI 命令 | Azure
 description: 用于在 Linux 和 Mac 上开始管理 Azure Resource Manager 模式的 VM 的基本 Azure CLI 命令
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: RicksterCDN
 manager: timlt
 editor: tysonn

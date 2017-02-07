@@ -2,13 +2,13 @@
 title: 通过 PowerShell 的方式增加虚拟机终结点
 description: 如何通过 ps 为虚拟机增加终结点
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 02/01/2016
 ---
 

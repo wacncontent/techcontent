@@ -1,14 +1,14 @@
 ---
 title: Azure SQL 数据库用户手册 - 第一部分 | Azure
 description: Azure SQL 数据库用户手册 - 第一部分 | Azure
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: Lei Zhang
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-database
-ms.date: 
+ms.date: ''
 wacn.date: 10/19/2016
 ---
 

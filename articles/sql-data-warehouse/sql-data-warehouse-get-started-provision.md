@@ -5,7 +5,7 @@ services: sql-data-warehouse
 documentationCenter: NA
 authors: barbkess
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-sql-data-warehouse
 
 ms.service: sql-data-warehouse

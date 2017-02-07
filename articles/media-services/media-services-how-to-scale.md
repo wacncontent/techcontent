@@ -2,10 +2,10 @@
 title: 如何缩放媒体服务
 description: 了解如何通过指定要为帐户预配的“按需流式处理保留单元”和“编码保留单元”数，缩放媒体服务。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.date: 06/22/2016

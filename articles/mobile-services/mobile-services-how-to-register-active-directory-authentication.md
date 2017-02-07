@@ -3,9 +3,9 @@ title: 注册以进行 Azure Active Directory 身份验证 | Microsoft Azure
 description: 了解如何在移动服务应用程序中注册以进行 Azure Active Directory 身份验证。
 authors: wesmc7777
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

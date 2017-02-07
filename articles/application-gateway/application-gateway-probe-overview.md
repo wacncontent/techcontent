@@ -5,7 +5,7 @@ services: application-gateway
 documentationcenter: na
 author: georgewallace
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 7eeba328-bb2d-4d3e-bdac-7552e7900b7f

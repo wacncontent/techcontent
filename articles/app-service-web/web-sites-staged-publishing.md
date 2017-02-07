@@ -2,7 +2,7 @@
 title: 为 Azure App Service 中的 Web 应用设置过渡环境 | Azure
 description: 了解如何对 Azure App Service 中的 Web 应用使用分阶段发布。
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: cephalin
 writer: cephalin
 manager: wpickett

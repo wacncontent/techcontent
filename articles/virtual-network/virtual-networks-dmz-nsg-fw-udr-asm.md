@@ -5,7 +5,7 @@ services: virtual-network
 documentationCenter: na
 authors: tracsman
 manager: rossort
-editor: 
+editor: ''
 
 ms.service: virtual-network
 ms.devlang: na

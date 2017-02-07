@@ -3,10 +3,10 @@ title: SQL 错误代码 - 数据库连接错误 | Azure
 description: 了解有关 SQL 数据库客户端应用程序的 SQL 错误代码，例如常见的数据库连接错误、数据库复制问题和常规错误。
 keywords: SQL 错误代码, 访问 SQL, 数据库连接错误, SQL 错误代码
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: annemill
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: drivers

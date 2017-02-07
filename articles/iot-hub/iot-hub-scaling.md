@@ -2,10 +2,10 @@
 title: Azure IoT 中心缩放 | Azure
 description: 如何缩放 IoT 中心来支持预期的消息吞吐量。概括介绍了分片选项和每层支持的吞吐量
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: fsautomata
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: na

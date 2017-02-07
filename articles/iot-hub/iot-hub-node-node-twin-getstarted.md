@@ -5,7 +5,7 @@ services: iot-hub
 documentationcenter: node
 author: fsautomata
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 314c88e4-cce1-441c-b75a-d2e08e39ae7d
 ms.service: iot-hub

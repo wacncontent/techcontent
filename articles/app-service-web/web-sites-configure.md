@@ -2,10 +2,10 @@
 title: 在 Azure 应用服务中配置 Web 应用
 description: 如何在 Azure 应用服务中配置 Web 应用
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

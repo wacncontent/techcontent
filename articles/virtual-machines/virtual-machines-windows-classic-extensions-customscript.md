@@ -2,10 +2,10 @@
 title: Windows VM 上的自定义脚本扩展 | Azure
 description: 通过使用自定义脚本扩展在远程 Windows VM 上运行 PowerShell 脚本自动执行 Azure VM 配置任务
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: neilpeterson
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: ebb7340a-8f61-4d3c-a290-d7bf8de2d0bd
@@ -109,3 +109,4 @@ Set-AzureVMCustomScriptExtension -Uninstall | Update-AzureVM
 [5]: ./media/virtual-machines-windows-classic-extensions-customscript/addcse.png
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & update code-->

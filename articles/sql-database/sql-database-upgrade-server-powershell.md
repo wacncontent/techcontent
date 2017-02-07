@@ -2,10 +2,10 @@
 title: 使用 PowerShell 升级到 Azure SQL 数据库 V12 | Azure
 description: 介绍如何使用 PowerShell 升级到 Azure SQL 数据库 V12，包括如何升级 Web 和企业数据库，以及如何升级 V11 服务器并将其数据库直接迁移到弹性数据库池。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

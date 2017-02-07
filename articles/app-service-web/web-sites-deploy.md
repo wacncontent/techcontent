@@ -2,7 +2,7 @@
 title: 将应用部署到 Azure App Service | Azure
 description: 了解如何将你的应用部署到 Azure App Service。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
 editor: mollybos

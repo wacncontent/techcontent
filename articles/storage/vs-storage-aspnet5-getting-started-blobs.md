@@ -2,10 +2,10 @@
 title: Blob 存储和 Visual Studio 连接服务入门 (ASP.NET 5) | Azure
 description: 在使用 Visual Studio 连接服务创建存储帐户后，如何开始在 Visual Studio ASP.NET 5 项目中使用 Azure Blob 存储
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 094b596a-c92c-40c4-a0f5-86407ae79672
 ms.service: storage

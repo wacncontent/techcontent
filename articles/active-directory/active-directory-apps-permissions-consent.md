@@ -3,10 +3,10 @@ title: Azure Active Directory 中的应用、权限和同意 | Azure
 description: Azure AD Connect 会将本地目录与 Azure Active Directory 集成。这样便可以为集成到 Azure AD 的 Office 365、Azure 和 SaaS 应用程序提供一个通用标识。
 keywords: Azure AD 介绍, 应用, 什么是 Azure AD Connect, 安装 active directory
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 25897cc4-7687-49b6-b0d5-71f51302b6b1
 ms.service: active-directory

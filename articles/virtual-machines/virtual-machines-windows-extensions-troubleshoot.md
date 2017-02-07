@@ -4,10 +4,10 @@
 title: 对 Windows VM 扩展故障进行故障排除 | Azure
 description: 了解如何对 Azure Windows VM 扩展故障进行故障排除
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: kundanap
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-resource-manager
 
 ms.service: virtual-machines-windows

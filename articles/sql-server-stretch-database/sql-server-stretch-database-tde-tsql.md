@@ -2,10 +2,10 @@
 title: 为 Azure TSQL 上的 SQL Server Stretch Database 启用透明数据加密 (TDE) | Azure
 description: 为 Azure TSQL 上的 SQL Server Stretch Database 启用透明数据加密 (TDE)
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

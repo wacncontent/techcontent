@@ -2,10 +2,10 @@
 title: 使用 Azure 门户配置内容密钥授权策略 | Azure
 description: 了解如何配置内容密钥的授权策略。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -2,13 +2,13 @@
 title: 如何为Azure存储的Blob创建SAS（共享访问签名）令牌
 description: 如何为Blob创建SAS令牌
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: storage-aog
-ms.date: 
+ms.date: ''
 wacn.date: 06/08/2016
 ---
 

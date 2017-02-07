@@ -2,7 +2,7 @@
 title: 使用 Site Recovery 进行本地到本地 Hyper-V 复制后的性能测试和缩放结果 | Azure
 description: 本文介绍了使用 Azure Site Recovery 进行本地到本地复制时的性能测试。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
 editor: tysonn

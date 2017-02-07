@@ -2,10 +2,10 @@
 title: Azure AD v2.0 AngularJS 入门 | Azure
 description: 如何构建一个使用个人 Microsoft 帐户和工作或学校帐户登录用户的 Angular JS 单页应用。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

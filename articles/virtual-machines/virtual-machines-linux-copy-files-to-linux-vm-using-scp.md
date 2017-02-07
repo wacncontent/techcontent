@@ -5,10 +5,10 @@ services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure
 ms.tgt_pltfrm: vm-linux

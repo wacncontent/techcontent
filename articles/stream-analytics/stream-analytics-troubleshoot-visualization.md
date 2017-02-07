@@ -1,8 +1,8 @@
 ---
 title: 流分析作业的可视化和故障排除 | Azure
 description: 了解如何使用诊断关系图功能对自助服务的流分析作业管道的故障排除进行可视化。
-keywords: 
-documentationCenter: 
+keywords: ''
+documentationCenter: ''
 services: stream-analytics
 authors: jeffstokes72
 manager: jhubbard

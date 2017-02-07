@@ -6,7 +6,7 @@ services: documentdb
 authors: mimig1
 manager: jhubbard
 editor: cgronlun
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: documentdb
 ms.workload: data-services

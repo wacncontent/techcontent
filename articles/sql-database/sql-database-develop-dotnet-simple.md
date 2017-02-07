@@ -2,10 +2,10 @@
 title: 使用 .NET (C#) 连接到 SQL 数据库 | Azure
 description: 使用本快速入门教程中的示例代码可以生成一个包含 C# 代码并由云中强大的 Azure SQL 数据库关系数据库支持的新式应用程序。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: tobbox
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: drivers

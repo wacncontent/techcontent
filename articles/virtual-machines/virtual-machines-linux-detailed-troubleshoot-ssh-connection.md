@@ -3,10 +3,10 @@ title: Azure VM 的详细 SSH 故障排除 | Azure
 description: 对 Azure 虚拟机连接问题进行较详细 SSH 故障排除的步骤
 keywords: ssh 连接被拒绝,ssh 错误,azure ssh,SSH 连接失败
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 
 ms.assetid: b8e8be5f-e8a6-489d-9922-9df8de32e839
@@ -140,3 +140,4 @@ ms.author: iainfou
 有关对应用程序访问进行故障排除的详细信息，请参阅[对在 Azure 虚拟机上运行的应用程序的访问进行故障排除](./virtual-machines-linux-troubleshoot-app-connection.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

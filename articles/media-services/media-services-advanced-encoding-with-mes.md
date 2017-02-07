@@ -2,10 +2,10 @@
 title: 通过自定义 MES 预设执行高级编码 | Azure
 description: 本主题说明如何通过自定义 Media Encoder Standard 任务预设执行高级编码。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 2a4ade25-e600-4bce-a66e-e29cf4a38369
 ms.service: media-services
@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 11/28/2016
-wacn.date: 01/13/2017
+wacn.date: 01/24/2017
 ms.author: juliako
 ---
 
@@ -858,7 +858,7 @@ static public IAsset EncodeWithOverlay(IAsset assetSource, string customPresetFi
     1. 重复调用 task. InputAssets.Add() 以便依次添加更多视频。
     2. 通过按相同顺序添加更多条目，对 JSON 中的“Sources”元素进行相应编辑。
 
-###.NET 代码
+###<a name="encoding_with_dotnet"></a>.NET 代码
 
 ```
 IAsset asset1 = _context.Assets.Where(asset => asset.Id == "nb:cid:UUID:606db602-efd7-4436-97b4-c0b867ba195b").FirstOrDefault();

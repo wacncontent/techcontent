@@ -2,10 +2,10 @@
 title: Azure Active Directory 基于角色的访问控制| Azure
 description: Azure 门户中具有 Azure 基于角色的访问控制的访问管理入门。在目录中使用角色分配来分配权限。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: kgremban
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

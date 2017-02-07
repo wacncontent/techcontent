@@ -4,10 +4,10 @@
 title: 从 Windows VM 分离数据磁盘 | Azure
 description: 了解如何从使用资源管理器部署模型的 Azure 中的虚拟机分离磁盘。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

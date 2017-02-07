@@ -2,10 +2,10 @@
 title: Azure Active Directory 的工作原理 | Azure
 description: Azure Active Directory 可在云中创建属于你的标识布局。它可以连接到你的本地标识系统，你也可以单独使用它。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.date: 04/26/2016

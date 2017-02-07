@@ -2,7 +2,7 @@
 title: 创建并上载自定义 Linux 映像 | Azure
 description: 使用 Resource Manager 部署模型创建包含自定义 Linux 映像的虚拟硬盘 (VHD) 并将其上载到 Azure。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
 editor: tysonn

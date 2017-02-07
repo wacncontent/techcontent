@@ -1,20 +1,22 @@
 ---
-title: 使用 Node.js 连接到 SQL 数据库
+title: 使用 Node.js 连接到 SQL 数据库 | Azure
 description: 演示了一个可以用来连接到 Azure SQL 数据库的 Node.js 代码示例。
 services: sql-database
-documentationCenter: 
-authors: meet-bhagdev
+documentationcenter: ''
+author: LuisBosquez
 manager: jhubbard
-editor: 
+editor: ''
 
+ms.assetid: 53f70e37-5eb4-400d-972e-dd7ea0caacd4
 ms.service: sql-database
+ms.custom: development
 ms.workload: drivers
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 10/03/2016
-wacn.date: 12/26/2016
-ms.author: meetb
+ms.date: 12/24/2016
+wacn.date: 01/25/2017
+ms.author: lbosq
 ---
 
 # 使用 Node.js 连接到 SQL 数据库
@@ -48,7 +50,8 @@ ms.author: meetb
 
 ## 其他资源 
 
-* [包含 Azure SQL 数据库的多租户 SaaS 应用程序的设计模式](./sql-database-design-patterns-multi-tenancy-saas-applications.md)
-* 浏览所有 [SQL 数据库功能](https://www.azure.cn/home/features/sql-database/)
+* [多租户 SaaS 应用程序和 Azure SQL 数据库的设计模式](./sql-database-design-patterns-multi-tenancy-saas-applications.md)
+* 浏览所有 [SQL 数据库的功能](https://www.azure.cn/home/features/sql-database/)
 
-<!---HONumber=Mooncake_Quality_Review_1215_2016-->
+<!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: wording update-->

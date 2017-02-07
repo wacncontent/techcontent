@@ -2,11 +2,11 @@
 title: 如何根据通道信息获取通知中心中的注册信息
 description: 如何根据通道信息获取通知中心中的注册信息。
 services: notification-hubs
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: notification-hubs-aog
 ms.date: 12/05/2016

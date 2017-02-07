@@ -2,7 +2,7 @@
 services: virtual-machines
 title: Using Azure CLI with Azure Resource Manager
 authors: squillace
-solutions: 
+solutions: ''
 manager: timlt
 editor: tysonn
 

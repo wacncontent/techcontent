@@ -4,11 +4,11 @@
 title: 为 Linux VM 创建 SSH 密钥对 | Azure
 description: 以安全方式为 Linux VM 创建 SSH 公钥和私钥对。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.assetid: 34ae9482-da3e-4b2d-9d0d-9d672aa42498
 ms.service: virtual-machines-linux
@@ -283,3 +283,4 @@ ssh fedora22
 * [使用 Azure CLI 创建安全 Linux VM](./virtual-machines-linux-quick-create-cli.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

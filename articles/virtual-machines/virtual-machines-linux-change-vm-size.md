@@ -5,8 +5,8 @@ services: virtual-machines-linux
 documentationCenter: na
 authors: mikewasson
 manager: roshar
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: virtual-machines-linux
 ms.devlang: na

@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: .net
 authors: cawaMS
 manager: paulyuk
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.date: 10/14/2015

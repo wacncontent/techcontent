@@ -5,7 +5,7 @@ services: vpn-gateway
 documentationcenter: na
 author: cherylmc
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 7413827f-233d-4c7c-a133-9c99cf031833

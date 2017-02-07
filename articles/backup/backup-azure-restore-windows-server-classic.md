@@ -2,10 +2,10 @@
 title: 使用经典部署模型将数据还原到 Windows Server 或 Windows 客户端 | Azure
 description: 了解如何从 Windows Server 或 Windows 客户端还原。
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: saurabhsensharma
 manager: shivamg
-editor: 
+editor: ''
 
 ms.assetid: 85585dfc-c764-4e8c-8f0e-40b969640ac2
 ms.service: backup

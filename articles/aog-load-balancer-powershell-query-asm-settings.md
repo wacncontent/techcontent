@@ -2,10 +2,10 @@
 title: 使用 PowerShell 查看经典模式下的负载均衡配置 
 description: 通过 PowerShell 脚本程序查看经典模式下的负载均衡配置 
 services: load-balancer
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: 负载均衡,PowerShell,经典部署模式,ASM
 
 ms.service: load-balancer-aog

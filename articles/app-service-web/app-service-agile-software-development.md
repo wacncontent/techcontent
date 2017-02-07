@@ -2,10 +2,10 @@
 title: 使用 Azure App Service 进行敏捷软件开发
 description: 学习如何使用支持敏捷软件开发的方式，通过 Azure App Service 创建高缩放性的复杂应用程序。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

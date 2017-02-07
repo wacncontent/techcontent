@@ -2,10 +2,10 @@
 title: 如何在不添加应用程序的前提下使用 PowerShell 获取 Azure Active Directory 令牌
 description: 使用 PowerShell 在不添加应用程序的前提下获取 Azure Active Directory 令牌
 services: active-directory
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: PowerShell,azure AD,token
 
 ms.service: active-directory-aog

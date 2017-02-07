@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：了解声明性预配 | Azure
 description: 介绍 Azure AD Connect 中的声明性预配配置模型。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: andkjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

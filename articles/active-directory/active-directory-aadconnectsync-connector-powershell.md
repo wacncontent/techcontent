@@ -2,10 +2,10 @@
 title: PowerShell 连接器 | Azure
 description: 本文介绍如何配置 Microsoft 的 Windows PowerShell 连接器。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

@@ -2,10 +2,10 @@
 title: 从备份中还原虚拟机 | Azure
 description: 了解如何从恢复点还原 Azure 虚拟机
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: trinadhk
 manager: shreeshd
-editor: 
+editor: ''
 keywords: 还原备份; 如何还原; 恢复点;
 
 ms.assetid: fed877b3-b496-49fb-99e4-653be7c23e3a

@@ -2,10 +2,10 @@
 title: 远程桌面到 Linux VM | Azure
 description: 了解如何安装和配置远程桌面以连接到 Azure Linux VM
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: SuperScottz
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

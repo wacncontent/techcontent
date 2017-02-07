@@ -2,10 +2,10 @@
 title: 将 VMM 云中的 Hyper-V 虚拟机复制到 Azure | Azure
 description: 本文介绍如何将位于 System Center VMM 云中的 Hyper-V 主机上的 Hyper-V 虚拟机复制到 Azure。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: 9d526a1f-0d8e-46ec-83eb-7ea762271db5
 ms.service: site-recovery

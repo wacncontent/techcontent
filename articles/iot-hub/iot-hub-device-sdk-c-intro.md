@@ -2,10 +2,10 @@
 title: 适用于 C 语言的 Azure IoT 设备 SDK | Azure
 description: 开始使用适用于 C 语言的 Azure IoT 设备 SDK，并了解如何创建与 IoT 中心通信的设备应用。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: olivierbloch
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: e448b061-6bdd-470a-a527-15ec03cca7b9
 ms.service: iot-hub
@@ -86,7 +86,7 @@ SDK 中包含的自述文件提供了有关准备开发环境和获取设备凭�
 ### 获取设备凭据
 现在你已设置好开发环境，下一步要做的就是获取一组设备凭据。若要使设备能够访问 IoT 中心，必须先将该设备添加到 IoT 中心标识注册表。添加设备时，你将获取一组所需的设备凭据，以便设备能够连接到 IoT 中心。下一部分所述示例应用程序的预期凭据格式为**设备连接字符串**。
 
-SDK 开放源代码存储库中提供了两个工具用来帮助管理 IoT 中心。一个是称为*设备资源管理器*的 Windows 应用程序，另一个是称为 *iothub-explorer* 的基于 node.js 的跨平台 CLI 工具。你可以在[此处](https://github.com/Azure/azure-iot-sdks/blob/master/doc/manage_iot_hub.md)了解更多有关这两种工具的信息。
+SDK 开放源代码存储库中提供了两个工具用来帮助管理 IoT 中心。一个是称为*设备资源管理器*的 Windows 应用程序，另一个是称为 *iothub-explorer* 的基于 node.js 的跨平台 CLI 工具。
 
 SDK 开放源代码存储库中提供了两个工具用来帮助管理 IoT 中心。一个是称为设备资源管理器的 Windows 应用程序，另一个是称为 iothub-explorer 的基于 node.js 的跨平台 CLI 工具。
 

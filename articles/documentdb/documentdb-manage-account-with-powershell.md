@@ -4,18 +4,18 @@ description: 使用 Azure Powershell 管理 DocumentDB 数据库帐户。Documen
 services: documentdb
 author: dmakwana
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 
-ms.assetid: 
+ms.assetid: ''
 ms.service: documentdb
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 11/27/2016
-wacn.date: 01/22/2017
+wacn.date: 01/12/2017
 ms.author: dimakwan
 ---
 

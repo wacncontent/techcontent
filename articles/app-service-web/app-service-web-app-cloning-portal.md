@@ -2,10 +2,10 @@
 title: 使用 Azure 门户预览克隆 Web 应用
 description: 了解如何使用 Azure 门户预览将 Web 应用克隆到新的 Web 应用。
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: ahmedelnably
 manager: stefsch
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

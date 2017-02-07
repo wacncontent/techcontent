@@ -2,7 +2,7 @@
 title: Azure Active Directory 图形 API | Azure
 description: 有关可通过 REST API 终结点提供对 Azure AD 的编程访问权限的图形 API 的概述和快速入门指南。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: msmbaldwin
 manager: mbaldwin
 editor: mbaldwin

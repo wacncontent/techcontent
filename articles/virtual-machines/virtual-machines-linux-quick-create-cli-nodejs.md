@@ -2,10 +2,10 @@
 title: 使用 Azure CLI 创建 Linux VM | Azure
 description: 使用 Azure CLI 在 Azure 上为 NodeJs 创建 Linux VM。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: facb1115-2b4e-4ef3-9905-330e42beb686
 ms.service: virtual-machines-linux
@@ -205,3 +205,4 @@ myAdminUser@myVM:~$
 * [Create an SSH Secured Linux VM on Azure using templates（使用模板在 Azure 上创建受 SSH 保护的 Linux VM）](./virtual-machines-linux-create-ssh-secured-vm-from-template.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

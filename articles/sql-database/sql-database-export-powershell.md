@@ -2,10 +2,10 @@
 title: 使用 PowerShell 将 Azure SQL 数据库存档到 BACPAC 文件
 description: 使用 PowerShell 将 Azure SQL 数据库存档到 BACPAC 文件
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

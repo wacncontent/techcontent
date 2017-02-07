@@ -2,10 +2,10 @@
 title: SQL 数据库动态数据掩码入门（Azure 管理门户）
 description: 如何开始在 Azure 管理门户中使用 SQL 数据库动态数据掩码
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: ronitr
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

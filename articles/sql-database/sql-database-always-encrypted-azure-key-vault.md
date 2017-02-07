@@ -3,7 +3,7 @@ title: Always Encrypted - 使用数据库加密保护 Azure SQL 数据库中的�
 description: 在数分钟内保护 SQL 数据库中的敏感数据。
 keywords: 数据加密、加密密钥、云加密
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
 editor: cgronlun

@@ -1,15 +1,15 @@
 ---
 title: Php-数据管理 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: Php-数据管理 - Azure 微软云
-services: 
+services: ''
 documentationCenter: php
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 08/11/2016
 ---
 

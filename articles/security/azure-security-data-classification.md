@@ -5,7 +5,7 @@ services: security
 documentationCenter: na
 authors: YuriDio
 manager: swadhwa
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: security

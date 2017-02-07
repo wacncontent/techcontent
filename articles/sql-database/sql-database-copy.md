@@ -2,10 +2,10 @@
 title: 复制 Azure SQL 数据库 | Azure
 description: 创建 Azure SQL 数据库的副本
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: anosov1960
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 5aaf6bcd-3839-49b5-8c77-cbdf786e359b
 ms.service: sql-database

@@ -1,11 +1,11 @@
 ---
 title: 在 Eclipse 中调试 Azure 应用程序
 description: 了解如何使用 Azure Toolkit for Eclipse 调试 Azure 应用程序。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

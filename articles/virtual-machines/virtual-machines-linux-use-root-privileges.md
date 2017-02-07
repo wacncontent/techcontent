@@ -2,10 +2,10 @@
 title: 在 Azure 中的 Linux 虚拟机上使用根权限
 description: 了解如何在 Azure 中使用 Linux 虚拟机的根权限。
 services: virtual-machines
-documentationCenter: 
+documentationCenter: ''
 authors: szarkos
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-linux

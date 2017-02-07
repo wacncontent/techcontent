@@ -3,9 +3,9 @@ title: H264 多比特率 4K | Azure
 description: 本主题概述了 **H264 多比特率 4K** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: aba8e29e-d145-4f7b-814f-405f9c2a183b
 ms.service: media-services

@@ -2,13 +2,13 @@
 title: 在 Azure 中自己搭建 Nginx Web 服务器 | Azure
 description: 本文介绍如何微软的公有云平台 Azure 中搭建 Nginx Web 服务器。
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

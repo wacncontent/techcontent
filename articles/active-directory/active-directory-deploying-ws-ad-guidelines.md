@@ -2,10 +2,10 @@
 title: 在 Azure 虚拟机中部署 Windows Server Active Directory 的准则 | Azure
 description: 如果你知道如何在本地部署 AD 域服务和 AD 联合身份验证服务，则就了解这些服务在 Azure 虚拟机上的工作方式。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: femila
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

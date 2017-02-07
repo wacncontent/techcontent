@@ -2,10 +2,10 @@
 title: 从移动服务迁移到应用服务移动应用
 description: 了解如何轻松将移动服务应用程序迁移到应用服务移动应用
 services: app-service\mobile
-documentationCenter: 
+documentationCenter: ''
 authors: adrianhall
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

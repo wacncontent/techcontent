@@ -2,10 +2,10 @@
 title: 排查在 Azure 备份中备份文件和文件夹时速度缓慢的问题 | Azure
 description: 提供了故障排除指导，帮助你诊断 Azure 备份性能问题的原因
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: genlin
 manager: jimpark
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

@@ -3,7 +3,7 @@ title: 云灾难恢复解决方案 - SQL 数据库活动异地复制 | Azure
 description: 了解如何使用 Azure SQL 数据库中应用数据备份的异地复制功能为业务连续性规划设计云灾难恢复解决方案。
 keywords: 云灾难恢复, 灾难恢复解决方案, 应用数据备份, 异地复制, 业务连续性规划
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: anosov1960
 manager: jhubbard
 editor: monicar

@@ -2,10 +2,10 @@
 title: Azure Active Directory 的后续用途有哪些？
 description: 高级任务，例如使用 Azure Active Directory 管理密码、管理用户、管理组以及进行条件性访问
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.date: 05/16/2016

@@ -2,7 +2,7 @@
 title: 如何将 Azure 存储空间用于 SQL Server 备份和还原 | Azure
 description: 了解如何将 SQL Server 备份到 Azure 存储空间。说明将 SQL 数据库备份到 Azure 存储空间的好处。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: rothja
 manager: jhubbard
 tags: azure-service-management

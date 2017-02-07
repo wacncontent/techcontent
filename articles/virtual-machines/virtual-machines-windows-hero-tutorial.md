@@ -3,10 +3,10 @@ title: 创建第一个 Windows VM | Azure
 description: 了解如何使用 Azure 门户预览创建第一个 Windows 虚拟机。
 keywords: Windows 虚拟机,创建虚拟机,虚拟计算机,设置虚拟机
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

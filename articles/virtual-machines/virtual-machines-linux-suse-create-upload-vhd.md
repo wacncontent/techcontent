@@ -2,7 +2,7 @@
 title: 在 Azure 中创建和上载 SUSE Linux VHD
 description: 了解如何创建和上载包含 SUSE Linux 操作系统的 Azure 虚拟硬盘 (VHD)。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: szarkos
 manager: timlt
 editor: tysonn

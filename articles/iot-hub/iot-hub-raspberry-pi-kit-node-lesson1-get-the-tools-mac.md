@@ -2,10 +2,10 @@
 title: 获取工具 (macOS 10.10) | Azure
 description: 下载并安装适用于 macOS 上 Pi 的第一个示例应用程序的必需工具和软件。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: iot 开发, iot 软件, 物联网软件, 安装 python mac, 在 mac 上安装 git, gulp 运行, 安装 node js mac
 
 ms.assetid: 2ea6d211-c0e8-4ade-ac69-d1c2261d78c4

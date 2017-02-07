@@ -5,7 +5,7 @@ authors: ggailey777
 services: mobile-services
 documentationCenter: Mobile
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

@@ -2,20 +2,20 @@
 title: Power BI Embedded 中的新增功能
 description: 获取 Power BI Embedded 中的新增功能的最新信息
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: mblythe
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: powerbi
-ms.date: 07/06/2016
+ms.date: 10/04/2016
 ms.author: mblythe
-wacn.date: 12/29/2016
+wacn.date: 02/06/2017
 ---
 
 # Power BI Embedded 中的新增功能

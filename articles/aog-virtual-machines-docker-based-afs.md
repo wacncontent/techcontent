@@ -2,13 +2,13 @@
 title: 创建基于 AFS 的 Docker 容器卷
 description: 创建基于 AFS 的 Docker 容器卷
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 09/29/2016
 ---
 

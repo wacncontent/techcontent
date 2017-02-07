@@ -2,10 +2,10 @@
 title: 使用 SqlPackage.exe 确定 SQL 数据库兼容性 | Azure
 description: Azure SQL 数据库, 数据库迁移, SQL 数据库兼容性, SqlPackage
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: ebe2cf3e-9561-4ede-8fb9-f3e6ce3fb7a6
 ms.service: sql-database

@@ -5,7 +5,7 @@ services: active-directory
 documentationCenter: na
 authors: kgremban
 manager: stevenpo
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: multiple

@@ -4,13 +4,13 @@ urlDisplayName: Azure迁移助手
 title: Azure迁移助手
 metaKeywords: Azure迁移助手下载和安装 Azure SDK工具
 description: Azure迁移助手下载和安装 Azure SDK、Azure PowerShell 和用于管理和部署的命令行工具
-metaCanonical: 
+metaCanonical: ''
 services: downloads
 documentationCenter: downloads
 title: Azure迁移助手
 authors: ACom
-solutions: 
-manager: 
+solutions: ''
+manager: ''
 editor: Haifeng Liu
 
 ms.service: downloads

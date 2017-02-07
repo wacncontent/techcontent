@@ -2,10 +2,10 @@
 title: 发生影响 Azure 虚拟机的 Azure 服务中断事件时该怎么办 | Azure
 description: 了解发生影响 Azure 虚拟机的 Azure 服务中断事件时该怎么办。
 services: virtual-machines
-documentationCenter: 
+documentationCenter: ''
 authors: kmouss
 manager: drewm
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.workload: virtual-machines

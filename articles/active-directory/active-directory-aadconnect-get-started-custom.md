@@ -3,7 +3,7 @@ title: Azure AD Connect 的自定义安装 | Azure
 description: 本文档详细介绍了 Azure AD Connect 的自定义安装选项。使用本文中的说明来通过 Azure AD Connect 安装 Active Directory。
 services: active-directory
 keywords: 什么是 Azure AD Connect, 安装 Active Directory, Azure AD 所需的组件
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
 

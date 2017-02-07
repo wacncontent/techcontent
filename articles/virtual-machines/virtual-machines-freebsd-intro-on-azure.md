@@ -2,10 +2,10 @@
 title: Azure FreeBSD 简介 | Azure
 description: 了解如何在 Azure 上使用 FreeBSD 虚拟机。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: KylieLiang
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 32b87a5f-d024-4da0-8bf0-77e233d1422b

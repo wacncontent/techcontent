@@ -2,10 +2,10 @@
 title: 使用混合连接从 .NET 后端移动服务连接到本地 SQL Server | Azure 移动服务
 description: 了解如何使用 Azure 混合连接从 .NET 后端移动服务连接到本地 SQL Server
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

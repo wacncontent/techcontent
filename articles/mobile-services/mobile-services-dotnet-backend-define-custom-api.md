@@ -2,10 +2,10 @@
 title: 如何在 .NET 后端移动服务中定义自定义 API | Azure 移动服务
 description: 了解如何在 .NET 后端移动服务中定义自定义 API 终结点
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

@@ -2,7 +2,7 @@
 title: SQL 数据库灾难恢复演练
 description: 了解有关使用 Azure SQL 数据库执行灾难恢复演练，帮助任务关键型业务应用程序弹性应对故障和中断的指南和最佳实践。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: mihaelablendea
 manager: jhubbard
 editor: monicar

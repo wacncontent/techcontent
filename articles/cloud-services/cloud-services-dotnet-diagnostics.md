@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: .net
 authors: rboucher
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

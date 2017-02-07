@@ -2,7 +2,7 @@
 title: 在 Azure 自动化中计划 Runbook
 description: 介绍如何在 Azure 自动化中创建一个计划，以便在特定的时间或按重复计划自动启动 Runbook。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
 editor: tysonn
@@ -12,8 +12,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 08/05/2016
-wacn.date: 01/09/2017
+ms.date: 12/09/2016
+wacn.date: 01/25/2017
 ms.author: bwren
 ---
 

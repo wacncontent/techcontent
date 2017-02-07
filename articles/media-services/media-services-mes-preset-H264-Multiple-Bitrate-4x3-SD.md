@@ -3,9 +3,9 @@ title: H264 多比特率 4x3 SD | Azure
 description: 本主题概述了 **H264 多比特率 4x3 SD** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 13e68b15-d090-4bf5-8e52-872eab025bc6
 ms.service: media-services

@@ -2,17 +2,17 @@
 title: 什么是云服务模型和包 | Azure
 description: 描述 Azure 中的云服务模型（.csdef、.cscfg）和包 (.cspkg)
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 11/16/2016
+ms.date: 12/14/2016
 wacn.date: 01/03/2017
 ms.author: adegeo
 ---

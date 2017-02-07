@@ -2,10 +2,10 @@
 title: 基于 Azure VM 创建 VM 映像 | Azure
 description: 了解如何基于 Resource Manager 部署模型中创建的现有 Azure VM 创建通用化 VM 映像
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

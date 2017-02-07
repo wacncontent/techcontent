@@ -2,10 +2,10 @@
 title: 使用 REST 配置 Azure 媒体服务遥测 |Azure
 description: 本文介绍如何通过 REST API 使用 Azure 媒体服务遥测...
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 4e4a9ec3-8ddb-4938-aec1-d7172d3db858
 ms.service: media-services

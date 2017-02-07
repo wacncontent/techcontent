@@ -2,10 +2,10 @@
 title: 使用 .NET 连接到媒体服务帐户
 description: 本主题演示如何使用 .NET 连接到媒体服务。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

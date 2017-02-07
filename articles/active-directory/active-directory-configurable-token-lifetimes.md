@@ -2,10 +2,10 @@
 title: Azure Active Directory 中可配置的令牌生存期 | Azure
 description: 管理员和开发人员可以使用此功能指定 Azure AD 颁发的令牌的生存期。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

@@ -2,10 +2,10 @@
 title: 如何将应用程序添加到 Azure Active Directory。
 description: 本文介绍如何将应用程序添加到 Azure Active Directory 的实例。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: shoatman
 manager: kbrint
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

@@ -2,10 +2,10 @@
 title: Azure Active Directory 常见问题 | Azure
 description: Azure Active Directory 常见问题，其中提供了有关访问 Azure 和 Azure Active Directory、密码管理和应用程序访问的问题的解答。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: MarkusVi
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: b8207760-9714-4871-93d5-f9893de31c8f
 ms.service: active-directory

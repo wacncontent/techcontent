@@ -2,7 +2,7 @@
 title: Blob 的 Azure 冷存储 | Azure
 description: Azure Blob 存储的存储层基于访问模式为对象数据提供经济高效的存储。冷存储层适用于不常访问的数据。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: michaelhauss
 manager: vamshik
 editor: tysonn

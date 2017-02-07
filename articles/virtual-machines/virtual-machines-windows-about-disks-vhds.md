@@ -2,7 +2,7 @@
 title: 关于 Windows VM 的磁盘和 VHD | Azure
 description: 了解 Azure 中 Windows 虚拟机磁盘和 VHD 的基础知识。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
 editor: tysonn
@@ -89,3 +89,4 @@ fsutil behavior set DisableDeleteNotify 0
 * [更改 Windows 临时磁盘的驱动器号](./virtual-machines-windows-classic-change-drive-letter.md)，使应用程序能够将 D: 盘用于数据。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & add support for TRIM-->

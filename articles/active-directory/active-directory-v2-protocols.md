@@ -2,10 +2,10 @@
 title: Azure AD v2.0 协议 | Azure
 description: 有关 Azure AD v2.0 终结点支持的协议的指南。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

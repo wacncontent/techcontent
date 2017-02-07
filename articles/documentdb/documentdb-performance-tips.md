@@ -5,8 +5,8 @@ keywords: 如何提高数据库性能
 services: documentdb
 author: mimig1
 manager: jhubbard
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 
 ms.assetid: 94ff155e-f9bc-488f-8c7a-5e7037091bb9
 ms.service: documentdb

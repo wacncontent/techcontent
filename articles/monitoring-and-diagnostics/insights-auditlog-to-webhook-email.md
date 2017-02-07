@@ -2,8 +2,8 @@
 title: 针对 Azure 活动日志警报配置 webhook | Azure
 description: 了解如何使用活动日志警报调用 webhook。
 authors: kamathashwin
-manager: 
-editor: 
+manager: ''
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

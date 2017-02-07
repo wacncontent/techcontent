@@ -2,12 +2,12 @@
 title: 适用于 Azure 的 Desired State Configuration 概述 | Azure
 description: 有关使用 PowerShell Desired State Configuration 的 Azure 扩展的概述。内容涉及先决条件、体系结构和 cmdlet。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: zjalexander
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
-keywords: 
+keywords: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

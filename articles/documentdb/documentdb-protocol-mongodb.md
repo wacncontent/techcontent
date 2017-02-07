@@ -5,8 +5,8 @@ keywords: 什么是 MongoDB
 services: documentdb
 author: AndrewHoh
 manager: jhubbard
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 
 ms.assetid: 4afaf40d-c560-42e0-83b4-a64d94671f0a
 ms.service: documentdb

@@ -2,10 +2,10 @@
 title: 如何将现有的 Azure Web 应用分离到不同的应用服务计划
 description: 通过管理门户及 PowerShell 将 Azure Web 应用分离到不同的应用服务计划
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Azure,Web 应用,应用服务计划,PowerShell,Portal
 
 ms.service: app-service-web-aog

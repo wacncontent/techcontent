@@ -5,7 +5,7 @@ services: traffic-manager
 documentationCenter: na
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

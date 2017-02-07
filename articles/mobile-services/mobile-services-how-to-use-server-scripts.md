@@ -2,10 +2,10 @@
 title: 使用 JavaScript 后端移动服务
 description: 提供有关如何在 Azure 移动服务中定义、注册以及使用服务器脚本的示例。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: RickSaling
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

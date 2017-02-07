@@ -2,10 +2,10 @@
 title: 在 DocumentDB 中使用多个区域进行开发 | Azure
 description: 了解如何从 Azure DocumentDB（完全托管的 NoSQL 数据库服务）访问多个区域中的数据。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: kiratp
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: d4579378-0b3a-44a5-9f5b-630f1fa4c66d
 ms.service: documentdb
@@ -20,7 +20,7 @@ ms.author: kipandya
 
 # 使用多区域 DocumentDB 帐户进行开发
 > [!NOTE]
-> DocumentDB 数据库全局分发功能已正式推出，所有新建的 DocumentDB 帐户将自动启用该功能。我们正在努力为所有现有帐户启用全局分发，但在此之前，如果你要为你的帐户启用全局分发，请[与支持部门联系](https://portal.azure.cn/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade)，我们将会帮助你启用。
+DocumentDB 数据库全局分发功能已正式推出，所有新建的 DocumentDB 帐户将自动启用该功能。我们正在努力为所有现有帐户启用全局分发，但在此之前，如果你要为你的帐户启用全局分发，请[与支持部门联系](https://portal.azure.cn/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade)，我们将会帮助你启用。
 >
 >
 
@@ -46,7 +46,7 @@ SDK 会自动将所有写入请求发送到当前写入区域。
 当前写入终结点和读取终结点分别在 DocumentClient.WriteEndpoint 和 DocumentClient.ReadEndpoint 中提供。
 
 > [!NOTE]
-> 不应将终结点 URL 视为长期不变的常量。服务随时会更新这些 URL。SDK 会自动处理这种更改。
+不应将终结点 URL 视为长期不变的常量。服务随时会更新这些 URL。SDK 会自动处理这种更改。
 >
 >
 

@@ -2,10 +2,10 @@
 title: Azure 订阅与 Azure Active Directory 的关联方式 | Azure
 description: 登录 Azure 及相关问题（例如，Azure 订阅与 Azure Active Directory 之间的关系）。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: bc4773c2-bc4a-4d21-9264-2267065f0aea
 ms.service: active-directory

@@ -2,10 +2,10 @@
 title: 轮转存储访问密钥后更新媒体服务 | Azure
 description: 本文提供有关在轮转存储访问密钥后如何更新媒体服务的指导。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -6,7 +6,7 @@ writer: yochayk
 editor: yochayk
 manager: nirma
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: app-service
 ms.workload: na

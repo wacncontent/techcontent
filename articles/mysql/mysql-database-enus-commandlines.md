@@ -1,17 +1,17 @@
 ---
-linkid: 
-urlDisplayName: 
+linkid: ''
+urlDisplayName: ''
 title: Use Windows PowerShell to manage MySQL Database on Azure – Azure cloud
 metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, beginner’s guide, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
 description: This article explains how to use Windows PowerShell to do more with MySQL Database on Azure, including create, view, delete, and modify operations.
-metaCanonical: 
+metaCanonical: ''
 services: MySQL
 documentationCenter: Services
-title: 
+title: ''
 authors: sofia
-solutions: 
-manager: 
-editor: 
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: mysql_en
 ms.date: 11/22/2016

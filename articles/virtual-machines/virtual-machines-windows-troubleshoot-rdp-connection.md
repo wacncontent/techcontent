@@ -5,10 +5,10 @@ title: 无法通过 RDP 连接到 Azure VM | Azure
 description: 排查无法使用远程桌面连接到 Azure 中 Windows 虚拟机的问题
 keywords: 远程桌面错误,远程桌面连接错误,无法连接到 VM,远程桌面故障排除
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 
 ms.assetid: 0d740f8e-98b8-4e55-bb02-520f604f5b18

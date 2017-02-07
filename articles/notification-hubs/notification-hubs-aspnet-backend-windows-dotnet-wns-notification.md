@@ -5,7 +5,7 @@ documentationCenter: windows
 authors: wesmc7777
 manager: erikre
 services: notification-hubs
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

@@ -2,7 +2,7 @@
 title: 在 Azure 应用中使用本地 Active Directory 进行身份验证 | Azure
 description: 了解 Azure 应用服务中的业务线应用在本地 Active Directory 上进行身份验证时可用的不同选项
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
 editor: jimbe

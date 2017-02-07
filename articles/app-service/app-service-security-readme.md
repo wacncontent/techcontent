@@ -2,7 +2,7 @@
 title: Azure 应用服务安全性
 description: 了解如何保护 Azure 应用服务中的 Web 应用、移动应用和 API 应用。
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: naziml
 manager: yochayk
 editor: wpickett

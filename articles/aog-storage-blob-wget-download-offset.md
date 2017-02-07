@@ -2,10 +2,10 @@
 title: 关于 wget 下载 Blob 文件如何断点续传
 description: 关于 wget 下载 Blob 文件如何断点续传。
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: wget,blob文件,断点续传
 
 ms.service: storage-aog

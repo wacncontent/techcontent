@@ -5,7 +5,7 @@ services: documentdb
 author: arramac
 manager: jhubbard
 editor: mimig
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 126bfd36-9332-4127-8747-1a1c806760f7
 ms.service: documentdb

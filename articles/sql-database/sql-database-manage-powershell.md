@@ -2,7 +2,7 @@
 title: 使用 PowerShell 管理 Azure SQL 数据库 | Azure
 description: 使用 PowerShell 管理 Azure SQL 数据库。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: stevestein
 manager: jhubbard
 editor: monicar

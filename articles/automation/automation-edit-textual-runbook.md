@@ -2,7 +2,7 @@
 title: 在 Azure 自动化中编辑文本 Runbook
 description: 本文提供的不同过程适用于在 Azure 自动化中通过文本编辑器来处理 PowerShell 工作流 Runbook。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: stevenka
 editor: tysonn

@@ -2,10 +2,10 @@
 title: 创建 Windows VM 的副本 | Azure
 description: 了解如何在 Resource Manager 部署模型中，为运行 Windows 的专用 Azure VM 创建副本。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

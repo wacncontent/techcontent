@@ -2,10 +2,10 @@
 title: IoT 中心网关 SDK 入门 | Azure
 description: 使用 Windows 的 Azure IoT 中心网关 SDK 演练，说明使用 Azure IoT 中心网关 SDK 时应理解的关键概念。
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: chipalost
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: cpp

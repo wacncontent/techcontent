@@ -2,10 +2,10 @@
 title: 使用 REST 将文件上传到媒体服务帐户 | Azure
 description: 了解如何通过创建和上传资产将媒体内容加入媒体服务。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

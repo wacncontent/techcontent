@@ -2,10 +2,10 @@
 title: Azure IoT 中心从云到设备选项 | Azure
 description: 开发人员指南 - 指导用户何时使用直接方法、设备孪生的所需属性或云到设备的消息，以进行从云到设备的通信。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: fsautomata
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 1ac90923-1edf-4134-bbd4-77fee9b68d24
 ms.service: iot-hub
@@ -39,9 +39,9 @@ IoT 中心提供三个选项，允许设备应用向后端应用公开功能：
 
 在以下教程中学习如何使用直接方法、所需属性以及从云到设备的消息：
 
-* [使用直接方法][lnk-methods-tutorial]：针对直接方法；
-* [使用所需属性配置设备][lnk-twin-properties]：针对设备孪生的所需属性；
-* [发送从云到设备的消息][lnk-c2d-tutorial]：针对从云到设备的消息。
+* [使用直接方法][lnk-methods-tutorial]：针对直接方法
+* [使用所需属性配置设备][lnk-twin-properties]：针对设备孪生的所需属性
+* [发送从云到设备的消息][lnk-c2d-tutorial]：针对从云到设备的消息
 
 [lnk-twins]: ./iot-hub-devguide-device-twins.md
 [lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md

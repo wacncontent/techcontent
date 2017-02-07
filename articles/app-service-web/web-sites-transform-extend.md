@@ -6,7 +6,7 @@ writer: cephalin
 editor: mollybos
 manager: wpickett
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: app-service
 ms.workload: na

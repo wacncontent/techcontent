@@ -2,10 +2,10 @@
 title: 发生影响 Azure 云服务的 Azure 服务中断时该怎么办 | Azure
 description: 了解发生影响 Azure 云服务的 Azure 服务中断时该怎么办。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: kmouss
 manager: drewm
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: cloud-services

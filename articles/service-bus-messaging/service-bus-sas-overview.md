@@ -5,7 +5,7 @@ services: service-bus,event-hubs
 documentationCenter: na
 authors: djrosanova
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 10/02/2016
@@ -250,8 +250,6 @@ AMQP 消息包含一组属性，比简单消息包含更多信息。SAS 令牌�
 有关如何使用这些 SAS 令牌的详细信息，请参阅[服务总线 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/hh780717.aspx)。
 
 有关服务总线身份验证的详细信息，请参阅[服务总线身份验证和授权](./service-bus-authentication-and-authorization.md)。
-
-此[博客文章](http://developers.de/blogs/damir_dobric/archive/2013/10/17/how-to-create-shared-access-signature-for-service-bus.aspx)中介绍了更多关于 C# 和 Java 脚本中的 SAS 的示例。
 
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 

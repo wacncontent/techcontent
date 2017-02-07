@@ -1,20 +1,20 @@
 ---
 title: 使用 Node.js 连接设备 | Azure
 description: 介绍如何使用以 Node.js 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。
-services: 
+services: ''
 suite: iot-suite
 documentationCenter: na
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/05/2016
-wacn.date: 01/03/2017
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: dobett
 ---
 

@@ -2,10 +2,10 @@
 title: 使用 Azure CLI 管理基于角色的访问控制 (RBAC) | Azure
 description: 通过列出角色和角色操作、将角色分配到订阅和应用程序范围来了解如何使用 Azure 命令行接口管理基于角色的访问控制 (RBAC)。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: kgremban
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

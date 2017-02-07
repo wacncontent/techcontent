@@ -2,7 +2,7 @@
 title: Azure Multi-Factor Authentication - 工作原理
 description: Azure Multi-Factor Authentication 可帮助保护对数据和应用程序的访问，同时可以满足用户对简单登录过程的需求。它通过要求第二种形式的身份验证提供额外的安全性，并通过一系列简单的身份验证选项提供增强式身份验证。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtland

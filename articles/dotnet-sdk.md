@@ -5,7 +5,7 @@ documentationCenter: .net
 authors: tdykstra
 manager: wpickett
 editor: mollybos
-services: 
+services: ''
 
 ms.service: multiple
 ms.workload: multiple

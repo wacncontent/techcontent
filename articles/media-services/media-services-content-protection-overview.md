@@ -2,10 +2,10 @@
 title: 保护内容概述
 description: 本文概述了如何使用媒体服务来保护内容。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

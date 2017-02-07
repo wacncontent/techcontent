@@ -2,10 +2,10 @@
 title: 自动缩放 Linux 虚拟机规模集 | Azure
 description: 使用 Azure CLI 为 Linux 虚拟机规模集设置自动缩放
 services: virtual-machine-scale-sets
-documentationcenter: 
+documentationcenter: ''
 author: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 83e93d9c-cac0-41d3-8316-6016f5ed0ce4

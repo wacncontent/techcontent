@@ -1,11 +1,11 @@
 ---
 title: 下载 Azure SDK for Java
 description: 了解如何下载 Azure SDK for Java，并提供 Maven 项目的示例代码，以及 Azure Tookit for Eclipse 的基本安装步骤。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

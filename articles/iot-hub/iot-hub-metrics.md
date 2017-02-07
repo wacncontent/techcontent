@@ -2,10 +2,10 @@
 title: Azure IoT 中心度量值 | Azure
 description: 如何使用 Azure IoT 中心度量值评估和监视 IoT 中心的总体运行状况。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: nberdy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: a47108fd-f994-4105-b21d-5b8f697b699c
 ms.service: iot-hub

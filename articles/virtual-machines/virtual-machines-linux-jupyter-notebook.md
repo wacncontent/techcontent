@@ -5,7 +5,7 @@ services: virtual-machines-linux
 documentationCenter: python
 authors: crwilcox
 manager: wpickett
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-linux

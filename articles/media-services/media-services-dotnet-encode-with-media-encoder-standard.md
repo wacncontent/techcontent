@@ -2,10 +2,10 @@
 title: 使用 .NET 通过媒体编码器标准版对资产进行编码
 description: 本主题介绍如何使用 .NET 通过媒体编码器标准版对资产进行编码。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

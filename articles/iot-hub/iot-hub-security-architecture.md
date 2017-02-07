@@ -2,10 +2,10 @@
 title: IoT 安全体系结构 | Azure
 description: IoT 安全体系结构指导原则和注意事项（包括威胁模型）
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: YuriDio
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: na

@@ -5,14 +5,14 @@ services: iot-hub
 documentationCenter: java
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: java
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/01/2016
+ms.date: 12/12/2016
 wacn.date: 12/10/2016
 ms.author: dobett
 ---
@@ -80,20 +80,18 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             msg.setProperty("messageType", "interactive");
             System.out.println("Sending interactive message: " + msgStr);
 
-    ```
-        Object lockobj = new Object();
-        EventCallback callback = new EventCallback();
-        client.sendEventAsync(msg, callback, lockobj);
+            Object lockobj = new Object();
+            EventCallback callback = new EventCallback();
+            client.sendEventAsync(msg, callback, lockobj);
 
-        synchronized (lockobj) {
-          lockobj.wait();
+            synchronized (lockobj) {
+              lockobj.wait();
+            }
+            Thread.sleep(10000);
+          }
+        } catch (InterruptedException e) {
+          System.out.println("Finished sending interactive messages.");
         }
-        Thread.sleep(10000);
-      }
-    } catch (InterruptedException e) {
-      System.out.println("Finished sending interactive messages.");
-    }
-    ```
       }
     }
     ```
@@ -105,14 +103,16 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 3. 修改 **main** 方法，按以下代码片段中所示发送交互式消息和数据点消息：
 
-    ````
-    MessageSender sender = new MessageSender();
-    InteractiveMessageSender interactiveSender = new InteractiveMessageSender();
+    `
+        MessageSender sender = new MessageSender();
+        InteractiveMessageSender interactiveSender = new InteractiveMessageSender();
 
+    ```
     ExecutorService executor = Executors.newFixedThreadPool(2);
     executor.execute(sender);
     executor.execute(interactiveSender);
-    ````
+    ```
+    `
 4. 保存并关闭 simulated-device\\src\\main\\java\\com\\mycompany\\app\\App.java 文件。
 
     > [!NOTE]
@@ -169,26 +169,28 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     ```
     mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=process-d2c-messages -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     ```
+
 2. 在命令提示符处，导航到新的 process-d2c-messages 文件夹。
 3. 使用文本编辑器打开 process-d2c-messages 文件夹中的 pom.xml 文件，并向 **dependencies** 节点添加以下依赖项。借助这些依赖项，可使用应用程序中的 azure-eventhubs、azure-eventhubs-eph 和 azure-servicebus 包与 IoT 中心和服务总线队列进行交互：
 
+        <dependency>
+          <groupId>com.microsoft.azure</groupId>
+          <artifactId>azure-eventhubs</artifactId>
+          <version>0.8.0</version>
+        </dependency>
+        <dependency>
+          <groupId>com.microsoft.azure</groupId>
+          <artifactId>azure-eventhubs-eph</artifactId>
+          <version>0.8.0</version>
+        </dependency>
     ```
-    <dependency>
-      <groupId>com.microsoft.azure</groupId>
-      <artifactId>azure-eventhubs</artifactId>
-      <version>0.8.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.microsoft.azure</groupId>
-      <artifactId>azure-eventhubs-eph</artifactId>
-      <version>0.8.0</version>
-    </dependency>
     <dependency>
       <groupId>com.microsoft.azure</groupId>
       <artifactId>azure-servicebus</artifactId>
       <version>0.9.4</version>
     </dependency>
     ```
+
 4. 保存并关闭 pom.xml 文件。
 
 接下来是向项目添加 **ErrorNotificationHandler** 类。
@@ -211,6 +213,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       }
     }
     ```
+
 2. 保存并关闭 ErrorNotificationHandler.java 文件。
 
 现即可添加会实现 **IEventProcessor** 接口的类。**EventProcessorHost** 类调用此类来处理从 IoT 中心收到的设备到云的消息。此类中的代码实现逻辑，以在 Blob 容器中可靠地存储消息，并将交互式消息转送到服务总线队列。
@@ -252,6 +255,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
     }
     ```
+
 3. 向 **EventProcessor** 类添加以下方式以使用 **IEventProcessor** 接口：
 
     ```
@@ -280,6 +284,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         throws Exception {
     }
     ```
+
 4. 向 **EventProcessor** 类添加以下类级变量：
 
     ```
@@ -295,6 +300,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     private Instant start = Instant.now();
     private EventData latestEventData;
     ```
+
 5. 向 **EventProcessor** 类添加带以下签名的 **AppendAndCheckPoint** 方法：
 
     ```
@@ -303,6 +309,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       IllegalArgumentException, InterruptedException, ExecutionException {
     }
     ```
+
 6. 向 **AppendAndCheckPoint** 方法添加以下代码，用以检索分区中的当前消息偏移量和序列号：
 
     ```
@@ -313,6 +320,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             "\nAppendAndCheckPoint using partition: %s, offset: %s, sequence: %s\n",
             context.getPartitionId(), currentOffset, currentSequence);
     ```
+
 7. 在 **AppendAndCheckPoint** 方法中，使用当前偏移值以创建下一个要存到 blob 的块的 **BlockEntry** 实例：
 
     ```
@@ -322,6 +330,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         blockIdString.getBytes(StandardCharsets.US_ASCII));
     BlockEntry block = new BlockEntry(encodedBlockId);
     ```
+
 8. 在 **AppendAndCheckPoint** 方法中，将最新消息集上传到块 blob 并检索当前的块列表：
 
     ```
@@ -332,6 +341,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         new ByteArrayInputStream(toAppend.toByteArray()), toAppend.size());
     ArrayList<BlockEntry> blockList = currentBlob.downloadBlockList();
     ```
+
 9. 在 **AppendAndCheckPoint** 方法中，在新 blob 中创建初始块或附加块到现有 blob：
 
     ```
@@ -352,6 +362,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     }
     currentBlob.commitBlockList(blockList);
     ```
+
 10. 最后在 **AppendAndCheckPoint** 方法中，在分区上创建检查点，并准备好保存下一个消息块：
 
     ```
@@ -363,6 +374,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     System.out.printf("Checkpointed on partition id: %s\n",
         context.getPartitionId());
     ```
+
 11. 在 **onEvents** 方法中，添加以下代码以接收来自 IoT 中心终结点的消息并将交互式消息转发给服务总线队列。然后，在块占用完或达到超时时调用 **AppendAndCheckPoint** 方法：
 
     ```
@@ -389,6 +401,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       }
     }
     ```
+
 12. 最后在 **onEvents** 方法中，如果在 IoT 中心未发送任何消息时达到超时，则添加“else if”子句来调用 **AppendAndCheckPoint**：
 
     ```
@@ -398,6 +411,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       AppendAndCheckPoint(context);
     }
     ```
+
 13. 将更改保存到 EventProcessor.java 文件。
 
 **process-d2c-messages** 项目的最后一个任务是，向可实例化 **EventProcessorHost** 实例的 **main** 方法添加代码。
@@ -419,11 +433,13 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     import java.security.InvalidKeyException;
     import java.util.concurrent.*;
     ```
+
 3. 向 **App** 类添加类级变量。将 **{yourstorageaccountconnectionstring}** 替换为之前在[预配 Azure 存储帐户和服务总线队列](#provision-an-azure-storage-account-and-a-service-bus-queue)部分中记下的 Azure 存储帐户连接字符串：
 
     ```
     private final static String storageConnectionString = "{yourstorageaccountconnectionstring}";
     ```
+
 4. 向 **App** 类添加类级变量，并将 **{yourservicebusnamespace}** 替换为服务总线命名空间，将 **{yourservicebussendkey}** 替换为队列的 **send** 键。先前在[预配 Azure 存储帐户和服务总线队列](#provision-an-azure-storage-account-and-a-service-bus-queue)部分中记下了命名空间和 **listen** 键：
 
     ```
@@ -432,6 +448,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     private final static String serviceBusSASKey = "{yourservicebussendkey}";
     private final static String serviceBusRootUri = ".servicebus.chinacloudapi.cn";
     ```
+
 5. 将以下类级变量添加到 **App** 类。将 **{youreventhubcompatibleendpoint}** 替换为与事件中心兼容的终结点值。该终结点值类似于 **ihs....namespace**，因此要删除 **sb://** 前缀和 **.servicebus.chinacloudapi.cn/** 后缀。将 **{youreventhubcompatiblename}** 替换为事件中心兼容的名称。将 **{youriothubkey}** 替换为 **iothubowner** 键。在 Java 版 Azure IoT 中心*教程的[创建 IoT 中心][lnk-create-an-iot-hub] section in the *部分中记下了这些值：
 
     ```
@@ -441,6 +458,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     private final static String sasKeyName = "iothubowner";
     private final static String sasKey = "{youriothubkey}";
     ```
+
 6. 如下修改 **main** 方法的签名：
 
     ```
@@ -448,6 +466,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       URISyntaxException, StorageException {
     }
     ```
+
 7. 向 **main** 方法添加以下代码，获取到存储消息的 blob 容器的引用：
 
     ```
@@ -459,6 +478,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         .getContainerReference("d2cjavatutorial");
     EventProcessor.blobContainer.createIfNotExists();
     ```
+
 8. 向 **main** 方法添加以下代码，获取到服务总线服务的引用：
 
     ```
@@ -467,6 +487,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             serviceBusSasKeyName, serviceBusSASKey, serviceBusRootUri);
     EventProcessor.serviceBusContract = ServiceBusService.create(config);
     ```
+
 9. 在 **main** 方法中，配置并创建 **EventProcessorHost** 实例。**setInvokeProcessorAfterReceiveTimeout** 选项确保即使没有要处理的消息，**EventProcessorHost** 实例也调用 **IEventProcessor** 接口中的 **onEvents** 方法。之后在达到超时时，该方法会始终调用 **AppendAndCheckPoint** 方法。
 
     ```
@@ -479,6 +500,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     options.setExceptionNotification(new ErrorNotificationHandler());
     options.setInvokeProcessorAfterReceiveTimeout(true);
     ```
+
 10. 在 **main** 方法中，向 **EventProcessorHost** 实例注册 **IEventProcessor** 实现：
 
     ```
@@ -496,6 +518,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       System.out.println(e.toString());
     }
     ```
+
 11. 最后，向 **main** 方法添加逻辑以关闭 **EventProcessorHost** 实例：
 
     ```
@@ -513,6 +536,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
     System.out.println("End of sample");
     ```
+
 12. 保存并关闭 process-d2c-messages\\src\\main\\java\\com\\mycompany\\app\\App.java 文件夹。
 13. 若要使用 Maven 生成 **process-d2c-messages** 应用程序，请在 process-d2c-messages 文件夹的命令提示符处执行以下命令：
 
@@ -530,16 +554,16 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     ```
     mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=process-interactive-messages -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     ```
+
 2. 在命令提示符处，导航到新的 process-interactive-messages 文件夹。
 3. 使用文本编辑器打开 process-interactive-messages 文件夹中的 pom.xml 文件，并向 **dependencies** 节点添加以下依赖项。借助该依赖项，可使用应用程序中的 azure-servicebus 包与服务总线队列进行交互：
 
-    ```
-    <dependency>
-      <groupId>com.microsoft.azure</groupId>
-      <artifactId>azure-servicebus</artifactId>
-      <version>0.9.4</version>
-    </dependency>
-    ```
+        <dependency>
+          <groupId>com.microsoft.azure</groupId>
+          <artifactId>azure-servicebus</artifactId>
+          <version>0.9.4</version>
+        </dependency>
+
 4. 保存并关闭 pom.xml 文件。
 
 接下来是添加代码以检索服务总线队列中的消息。
@@ -557,6 +581,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     import com.microsoft.windowsazure.services.servicebus.*;
     import com.microsoft.windowsazure.services.servicebus.models.*;
     ```
+
 3. 向 **App** 类添加以下类级变量，并将 **{yourservicebusnamespace}** 替换为服务总线命名空间，将 **{yourservicebuslistenkey}** 替换为队列的 **listen** 键。先前在[预配 Azure 存储帐户和服务总线队列](#provision-an-azure-storage-account-and-a-service-bus-queue)部分中记下了命名空间和 **listen** 键：
 
     ```
@@ -567,6 +592,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     private final static String queueName = "d2ctutorial";
     private static ServiceBusContract service = null;
     ```
+
 4. 向 **App** 类添加以下嵌套类以接收队列中的消息：
 
     ```
@@ -605,12 +631,14 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       }
     }
     ```
+
 5. 如下修改 **main** 方法的签名：
 
     ```
     public static void main(String args[]) throws ServiceException, IOException {
     }
     ```
+
 6. 在 **main** 方法中，添加以下代码，开始侦听新消息：
 
     ```
@@ -630,6 +658,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     System.in.read();
     executor.shutdownNow();
     ```
+
 7. 保存并关闭 process-interactive-messages\\src\\main\\java\\com\\mycompany\\app\\App.java 文件夹。
 8. 若要使用 Maven 生成 **process-interactive-messages** 应用程序，请在 process-interactive-messages 文件夹的命令提示符处执行以下命令：
 
@@ -642,23 +671,17 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 1. 若要运行 **process-interactive-messages** 应用程序，请在命令提示符或外壳处导航到 process-interactive-messages 文件夹并执行以下命令：
 
-   ```
-   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-   ```
+       mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
 
    ![运行 process-interactive-messages][processinteractive]
 2. 若要运行 **process-d2c-messages** 应用程序，请在命令提示符或外壳处导航到 process-d2c-messages 文件夹并执行以下命令：
 
-   ```
-   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-   ```
+       mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
 
    ![运行 process-d2c-messages][processd2c]
 3. 若要运行 **simulated-device** 应用程序，请在命令提示符或外壳处导航到 simulated-device 文件夹并执行以下命令：
 
-   ```
-   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-   ```
+       mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
 
    ![运行 simulated-device][simulateddevice]  
 

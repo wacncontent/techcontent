@@ -3,7 +3,7 @@ title: 针对 Web 应用、移动应用和 API 应用的 Azure 应用服务 | Az
 description: 了解如何借助 Azure 应用服务开发、部署和管理 Web 应用和移动应用。
 keywords: 应用服务, azure 应用服务, 应用服务成本, 缩放, 可缩放, 应用部署, azure 应用部署, paas, 平台即服务, 网站, web, azure 移动
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: omarkmsft
 manager: erikre
 editor: cephalin

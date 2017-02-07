@@ -5,7 +5,7 @@ services: app-service\web
 documentationCenter: nodejs
 authors: ranjithr
 manager: wadeh
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

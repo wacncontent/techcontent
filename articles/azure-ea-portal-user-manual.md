@@ -2,13 +2,13 @@
 title: Azure 企业门户管理手册 | Azure
 description: 详细介绍如何管理Azure账户、订阅及查看相应的账单。
 services: ea-portal
-documentationCenter: 
+documentationCenter: ''
 authors: Lei Zhang
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: ea-portal
-ms.date: 
+ms.date: ''
 wacn.date: 09/21/2016
 ---
 

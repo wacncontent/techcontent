@@ -2,10 +2,10 @@
 title: 通知中心 - 企业推送架构
 description: 有关在企业环境中使用 Azure 通知中心的指南
 services: notification-hubs
-documentationCenter: 
+documentationCenter: ''
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

@@ -2,7 +2,7 @@
 title: 在 Azure 存储中设置和检索对象的属性及元数据 | Azure
 description: 在 Azure 存储中存储对象的自定义元数据，并设置和检索系统属性。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: mmacy
 manager: timlt
 editor: tysonn

@@ -5,7 +5,7 @@ services: app-service\web
 documentationCenter: .net
 authors: Juliako
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.date: 01/19/2016

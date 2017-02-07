@@ -4,7 +4,7 @@ description: 了解 Azure NoSQL 如何帮助你管理不适合于关系数据库
 editor: cgronlun
 manager: jhubbard
 services: documentdb, storage, hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: mimig1
 
 ms.assetid: eb9c081f-7d67-4d60-be77-1181108da30d

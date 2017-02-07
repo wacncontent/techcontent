@@ -2,10 +2,10 @@
 title: Azure RBAC 中的自定义角色 | Azure
 description: 了解如何通过 Azure 基于角色的访问控制来定义自定义角色，以便在 Azure 订阅中进行更精确的身份管理。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: kgremban
 manager: kgremban
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

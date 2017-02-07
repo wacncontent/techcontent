@@ -2,10 +2,10 @@
 title: 嵌套式流量管理器配置文件 | Azure
 description: 本文介绍了 Azure 流量管理器的“嵌套式配置文件”功能
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

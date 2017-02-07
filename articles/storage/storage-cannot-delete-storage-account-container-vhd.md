@@ -2,7 +2,7 @@
 title: 对在经典部署中删除 Azure 存储帐户、容器或 VHD 进行故障排除 | Azure
 description: 对在经典部署中删除 Azure 存储帐户、容器或 VHD 进行故障排除
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: genlin
 manager: felixwu
 editor: tysonn

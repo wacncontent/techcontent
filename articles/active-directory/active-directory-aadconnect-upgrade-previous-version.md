@@ -2,10 +2,10 @@
 title: Azure AD Connect：从旧版升级 | Azure
 description: 介绍升级到 Azure Active Directory Connect 最新版本的不同方法，包括就地升级和交叉迁移。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: AndKjell
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: 31f084d8-2b89-478c-9079-76cf92e6618f
 ms.service: active-directory

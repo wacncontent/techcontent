@@ -5,7 +5,7 @@ services: mobile-services
 documentationCenter: android
 authors: RickSaling
 manager: reikre
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

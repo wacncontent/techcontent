@@ -2,7 +2,7 @@
 title: 弹性数据库工具入门
 description: 有关 Azure SQL 数据库的弹性数据库工具功能的基本说明，包括易于运行的示例应用。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 manager: jhubbard
 author: ddove
 editor: CarlRabeler

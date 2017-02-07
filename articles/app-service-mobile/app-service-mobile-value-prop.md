@@ -2,10 +2,10 @@
 title: 什么是移动应用
 description: 了解应用服务为企业移动应用带来的优势。
 services: app-service\mobile
-documentationCenter: 
+documentationCenter: ''
 authors: adrianhall
 manager: yochayk
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: na

@@ -5,15 +5,15 @@ services: cloud-services
 documentationCenter: nodejs
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: hero-article
-ms.date: 11/01/2016
-wacn.date: 01/03/2017
+ms.date: 12/22/2016
+wacn.date: 01/25/2017
 ms.author: robmcm
 ---
 
@@ -212,3 +212,4 @@ Publish-AzureServiceProject -ServiceName $ServiceName  -Location "China East" -L
 [The status of the Remove-AzureService command]: ./media/cloud-services-nodejs-develop-deploy-app/node49.png
 
 <!---HONumber=Mooncake_1226_2016-->
+<!--Update_Description:update meta properties-->

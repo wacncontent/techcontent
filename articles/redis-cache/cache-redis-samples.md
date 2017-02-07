@@ -2,10 +2,10 @@
 title: Azure Redis 缓存示例 | Azure
 description: 了解如何使用 Azure Redis Cache
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

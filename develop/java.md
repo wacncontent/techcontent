@@ -3,12 +3,12 @@ title: Azure 开发人员中心：JAVA
 description: Azure 开发人员中心：JAVA
 services: JAVA
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
 ms.service: JAVA
-ms.date: 
+ms.date: ''
 wacn.date: 01/21/2016
 ---
 

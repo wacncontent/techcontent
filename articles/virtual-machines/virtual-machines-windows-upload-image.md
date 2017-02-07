@@ -2,7 +2,7 @@
 title: 上载 Windows VHD 用于 Resource Manager | Azure
 description: 了解如何使用 Resource Manager 部署模型将 Windows 虚拟机 VHD 从本地上传到 Azure。可以从通用或专用 VM 上传 VHD。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

@@ -5,7 +5,7 @@ services: load-balancer
 documentationcenter: na
 author: kumudd
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 3be93168-3787-45a5-a194-9124fe386493

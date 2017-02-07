@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: .net
 authors: thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.devlang: dotnet

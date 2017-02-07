@@ -2,10 +2,10 @@
 title: Azure 媒体服务分片 MP4 实时引入规范 | Azure
 description: 本规范描述基于分片 MP4 的实时流引入协议和格式（适用于 Azure 媒体服务）。Azure 媒体服务提供实时传送视频流服务，支持客户使用 Azure 作为云平台来实时流式传输实时事件和广播内容。本文档还介绍了有关构建高度冗余和稳健的实时引入机制的最佳实践。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: cenkdin
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 43fac263-a5ea-44af-8dd5-cc88e423b4de
 ms.service: media-services

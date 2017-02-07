@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationcenter: na
 author: MikeRayMSFT
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.assetid: 291288a0-740b-4cfa-af62-053218beba77
@@ -166,3 +166,4 @@ Azure 经典管理门户目前不支持内部负载均衡器，因此在 Azure �
 [!INCLUDE [Listener-Next-Steps](../../includes/virtual-machines-ag-listener-next-steps.md)]
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & move contents out from include files-->

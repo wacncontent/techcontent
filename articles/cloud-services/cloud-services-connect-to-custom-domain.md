@@ -2,18 +2,18 @@
 title: 将云服务连接到自定义域控制器 | Azure
 description: 了解如何使用 Powershell 和 AD 域扩展将 Web/辅助角色连接到自定义 AD 域
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 10/21/2016
-wacn.date: 12/26/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: adegeo
 ---
 
@@ -29,15 +29,14 @@ ms.author: adegeo
 
 按照以下分步指南操作，如果遇到任何问题，请在下面留言。我们将回复你（没错，我们真的会阅读留言）。
 
-1. 云服务引用的网络<mark>必须是</mark>**经典虚拟网络**。
+云服务引用的网络<mark>必须是</mark>**经典虚拟网络**。
 
 ## 创建虚拟网络
 
 可使用 Azure 经典管理门户或 Powershell 在 Azure 中创建虚拟网络。在本教程中，我们将使用 Powershell。若要使用 Azure 经典管理门户创建虚拟网络，请参阅[创建虚拟网络](../virtual-network/virtual-networks-create-vnet-arm-pportal.md)。
 
-#创建虚拟网络
-
 ```
+#创建虚拟网络
 $vnetStr =
 @"<?xml version="1.0" encoding="utf-8"?>
 <NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
@@ -79,11 +78,8 @@ $vm1 = '<your-vm-name>'
 $username = '<your-username>'
 $password = '<your-password>'
 $affgrp = '<your- affgrp>'
-```
 
 # 创建 VM 并将其添加到虚拟网络
-
-```
 New-AzureQuickVM -Windows -ServiceName $vmsvc1 -name $vm1 -ImageName $imgname -AdminUsername $username -Password $password -AffinityGroup $affgrp -SubnetNames $subnetname -VNetName $vnetname
 ```
 
@@ -92,8 +88,8 @@ New-AzureQuickVM -Windows -ServiceName $vmsvc1 -name $vm1 -ImageName $imgname -A
 
 若要登录到 VM，可使用以下命令通过 Powershell 获取 RDP 文件。
 
-# 获取 RDP 文件
 ```
+# 获取 RDP 文件
 Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-path>
 ```
 
@@ -138,19 +134,15 @@ Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-
 
 在 Azure 上部署云服务项目后，请使用 AD 域扩展将角色实例连接到自定义 AD 域。若要将 AD 域扩展添加到现有云服务部署并加入自定义域，请在 Powershell 中执行以下命令：
 
-# 初始化域变量
-
 ```
+# 初始化域变量
 $domain = '<your-domain-name>'
 $dmuser = '$domain<your-username>'
 $dmpswd = '<your-domain-password>'
 $dmspwd = ConvertTo-SecureString $dmpswd -AsPlainText -Force
 $dmcred = New-Object System.Management.Automation.PSCredential ($dmuser, $dmspwd)
-```
 
 # 将 AD 域扩展添加到云服务角色
-
-```
 Set-AzureServiceADDomainExtension -Service <your-cloud-service-hosted-service-name> -Role <your-role-name> -Slot <staging-or-production> -DomainName $domain -Credential $dmcred -JoinOption 35
 ```
 
@@ -164,3 +156,4 @@ help New-AzureServiceADDomainExtensionConfig
 ```
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->
+<!--Update_Description:update meta properties-->

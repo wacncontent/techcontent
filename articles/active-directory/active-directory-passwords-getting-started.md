@@ -3,7 +3,7 @@ title: 入门：Azure AD 密码管理 | Azure
 description: 使用户能够重置其自己的密码和了解密码重置先决条件，并启用密码写回来管理 Active Directory 中的本地密码。
 services: active-directory
 keywords: Active Directory 密码管理, 密码管理, 重置 Azure AD 密码
-documentationCenter: 
+documentationCenter: ''
 authors: asteen
 manager: femila
 editor: curtand

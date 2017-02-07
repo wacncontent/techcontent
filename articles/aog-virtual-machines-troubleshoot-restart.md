@@ -2,13 +2,13 @@
 title: 文件系统损坏导致虚拟机无法正常启动的问题及解决方法
 description: 文件系统损坏导致虚拟机无法正常启动的问题及解决方法
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 10/11/2016
 ---
 

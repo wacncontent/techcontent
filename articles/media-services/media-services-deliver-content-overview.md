@@ -2,10 +2,10 @@
 title: 向客户传送内容 | Azure
 description: 本主题概述使用 Azure 媒体服务传送内容所涉及的操作。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 89ede54a-6a9c-4814-9858-dcfbb5f4fed5
 ms.service: media-services

@@ -2,10 +2,10 @@
 title: 使用 PowerShell 创建虚拟机规模集 | Azure
 description: 使用 PowerShell 创建虚拟机规模集
 services: virtual-machine-scale-sets
-documentationcenter: 
+documentationcenter: ''
 author: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 7bb03323-8bcc-4ee4-9a3e-144ca6d644e2

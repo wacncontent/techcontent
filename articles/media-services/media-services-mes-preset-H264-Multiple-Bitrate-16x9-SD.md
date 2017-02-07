@@ -3,9 +3,9 @@ title: H264 多比特率 16x9 SD | Azure
 description: 本主题概述了 **H264 多比特率 16x9 SD** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 8b16385a-9a3d-4939-aef3-ca6ac82f455f
 ms.service: media-services

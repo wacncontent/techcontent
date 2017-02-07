@@ -2,7 +2,7 @@
 title: 为 Apache Storm 开发基于 Java 的拓扑 | Azure
 description: 了解如何通过创建一个简单的单词计数拓扑，来以 Java 语言创建一个 Storm 拓扑。
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun

@@ -3,7 +3,7 @@ title: 使用 PowerShell 监视和管理流分析作业 | Azure
 description: 了解如何使用 Azure PowerShell 和 cmdlet 监视和管理流分析作业。
 keywords: azure powershell、azure powershell cmdlet、powershell 命令、powershell 脚本
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

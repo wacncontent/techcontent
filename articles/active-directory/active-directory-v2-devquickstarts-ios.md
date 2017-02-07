@@ -2,10 +2,10 @@
 title: Azure AD v2.0 iOS 应用 | Azure
 description: 如何通过第三方库生成一个使用个人 Microsoft 帐户和工作或学校帐户来登录用户的 iOS 应用。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: brandwe
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

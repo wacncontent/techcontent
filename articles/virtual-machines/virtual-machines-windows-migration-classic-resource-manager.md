@@ -2,10 +2,10 @@
 title: 平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移 | Azure
 description: 本文逐步讲解如何对资源进行平台支持的从经典部署模型到 Azure Resource Manager 的迁移
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: singhkays
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 78492a2c-2694-4023-a7b8-c97d3708dcb7
@@ -180,7 +180,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 >
 >
 
-## 常见问题
+## <a name="frequently-asked-questions"></a> 常见问题
 **此迁移计划是否影响 Azure 虚拟机上运行的任何现有服务或应用程序？**
 
 否。VM（经典）是公开上市的完全受支持的服务。你可以继续使用这些资源来拓展你在 Azure 上的足迹。

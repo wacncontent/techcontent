@@ -2,10 +2,10 @@
 title: 如何评估兼容级别 | Azure
 description: 用于确定哪种兼容级别最适合 Azure SQL 数据库或 Microsoft SQL Server 上的数据库的工具和步骤
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: alainlissoir
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

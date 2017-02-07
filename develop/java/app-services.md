@@ -1,14 +1,14 @@
 ---
 title: 应用服务 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: 应用服务 - Azure 微软云
-services: 
+services: ''
 documentationCenter: java-app-services
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
+ms.service: ''
 ms.date: 10/23/2014
 wacn.date: 04/11/2015
 ---

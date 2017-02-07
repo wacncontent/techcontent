@@ -5,7 +5,7 @@ services: active-directory
 documentationcenter: java
 author: rmcmurray
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 6cd216f9-eb43-46b4-b30d-f194d0ae2d48
 ms.service: active-directory

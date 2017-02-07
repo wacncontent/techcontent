@@ -1,15 +1,15 @@
 ---
 title: 媒体服务开发人员工具 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: 媒体服务开发人员工具 - Azure 微软云
-services: 
+services: ''
 documentationCenter: media-services-dev-tools
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 11/17/2015
 ---
 

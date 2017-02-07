@@ -2,10 +2,10 @@
 title: Azure 移动服务和 Sencha 入门
 description: 请按照本教程来开始使用移动服务和 Sencha HTML5 移动应用程序框架进行开发。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

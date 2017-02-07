@@ -2,10 +2,10 @@
 title: 创建和部署 blink 应用程序 | Azure
 description: 克隆 GitHub 提供的示例 Node.js 应用程序，并使用 gulp 将此应用程序部署到 Raspberry Pi 3 开发板。此示例应用程序每隔两秒让连接到板的 LED 闪烁一次。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: raspberry pi led 闪烁, 使用 raspberry pi 的闪烁 led
 
 ms.assetid: a5a03a57-fe86-416f-90ff-6eca17775842

@@ -2,10 +2,10 @@
 title: 资源管理器和服务管理（经典）部署模型 | Azure
 description: 了解资源管理器与经典部署模型之间的差异。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: telmosampaio
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-network

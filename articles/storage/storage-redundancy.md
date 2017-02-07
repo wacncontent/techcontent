@@ -2,7 +2,7 @@
 title: Azure 存储复制 | Azure
 description: 复制 Azure 存储帐户中的数据以实现持久性和高可用性。复制选项包括本地冗余存储 (LRS)、异地冗余存储 (GRS) 和读取访问异地冗余存储 (RA-GRS)。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: mmacy
 manager: timlt
 editor: tysonn

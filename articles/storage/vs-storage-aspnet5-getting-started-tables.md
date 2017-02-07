@@ -2,10 +2,10 @@
 title: 表存储和 Visual Studio 连接服务入门 (ASP.NET 5) | Azure
 description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 ASP.NET 5 项目中使用 Azure 表存储
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: c3c451d1-71ff-4222-a348-c41c98a02b85
 ms.service: storage

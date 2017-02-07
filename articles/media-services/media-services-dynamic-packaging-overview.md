@@ -3,9 +3,9 @@ title: 动态打包概述 | Azure
 description: 本主题概述动态打包。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 0d9e4f54-5daa-45c1-bfaa-cf09ca89b812
 ms.service: media-services

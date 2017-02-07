@@ -3,12 +3,12 @@ title: Azure 开发人员中心：PYTHON
 description: Azure 开发人员中心：PYTHON
 services: PYTHON
 documentationCenter: Develop
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 
 ms.service: PYTHON
-ms.date: 
+ms.date: ''
 wacn.date: 04/07/2016
 ---
 

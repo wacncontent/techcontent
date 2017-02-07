@@ -5,7 +5,7 @@ services: virtual-machines-linux
 documentationcenter: virtual-machines-linux
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: b5420e35-0463-4456-9803-6142db150f2e
 ms.service: virtual-machines-linux

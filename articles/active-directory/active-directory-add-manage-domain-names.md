@@ -2,10 +2,10 @@
 title: 管理 Azure Active Directory 中的自定义域名 | Azure
 description: 用于管理 Azure Active Directory 中的自定义域的管理概念和操作指南
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: jeffsta
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

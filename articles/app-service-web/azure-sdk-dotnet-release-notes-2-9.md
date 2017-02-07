@@ -5,7 +5,7 @@ services: app-service\web
 documentationcenter: .net
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: c83d815b-fc19-4260-821e-7d2a7206dffc
 ms.service: app-service

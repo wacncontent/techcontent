@@ -1,11 +1,11 @@
 ---
 title: Azure 简介 | Azure
 description: 是 Azure 的新手？ 获取有关所提供服务的基本概述，以及用法示例。
-services:  
+services: ''
 documentationCenter: .net
 authors: rboucher
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: multiple
 ms.workload: multiple

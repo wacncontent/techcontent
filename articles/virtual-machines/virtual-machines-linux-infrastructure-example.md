@@ -1,11 +1,11 @@
 ---
 title: 示例 Azure 基础结构演练 | Azure
 description: 了解用于在 Azure 中部署示例基础结构的关键设计和实施准则。
-documentationCenter: 
+documentationCenter: ''
 services: virtual-machines-linux
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-linux
@@ -13,8 +13,8 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 09/08/2016
-wacn.date: 01/05/2017
+ms.date: 12/16/2016
+wacn.date: 01/25/2017
 ms.author: iainfou
 ---
 

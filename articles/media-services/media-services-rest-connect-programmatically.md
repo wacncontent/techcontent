@@ -2,10 +2,10 @@
 title: 使用 REST API 连接到媒体服务帐户 | Azure
 description: 本主题演示如何使用 REST API 连接到媒体服务。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

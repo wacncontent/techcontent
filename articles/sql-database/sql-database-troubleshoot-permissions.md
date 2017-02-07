@@ -2,10 +2,10 @@
 title: 如何执行管理任务，例如重置管理员密码 | Azure
 description: 介绍如何在 SQL 数据库中执行常见管理任务。例如重置管理员密码、授予和删除访问权限。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: v-shysun
 manager: felixwu
-editor: 
+editor: ''
 keywords: 重置管理员密码
 
 ms.service: sql-database

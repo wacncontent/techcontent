@@ -5,7 +5,7 @@ documentationCenter: na
 services: expressroute
 authors: cherylmc
 manager: carolz
-editor: 
+editor: ''
 
 ms.service: expressroute
 ms.devlang: na

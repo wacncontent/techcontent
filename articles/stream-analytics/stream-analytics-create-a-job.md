@@ -2,7 +2,7 @@
 title: 如何为流分析创建数据分析处理作业 | Azure
 description: 为流分析创建数据分析处理作业 | 学习路径段。
 keywords: 数据分析处理
-documentationCenter: 
+documentationCenter: ''
 services: stream-analytics
 authors: jeffstokes72
 manager: jhubbard

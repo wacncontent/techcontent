@@ -2,10 +2,10 @@
 title: 从 Linux VM 分离磁盘 | Azure
 description: 了解如何从使用经典部署模型创建的 Azure 虚拟机分离数据磁盘。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

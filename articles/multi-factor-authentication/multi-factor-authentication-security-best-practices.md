@@ -2,7 +2,7 @@
 title: MFA 最佳安全做法 | Azure
 description: 本文档提供有关配合使用 Azure MFA 与 Azure 帐户的最佳实践
 services: multi-factor-authentication
-documentationcenter: 
+documentationcenter: ''
 author: kgremban
 manager: femila
 editor: yossib

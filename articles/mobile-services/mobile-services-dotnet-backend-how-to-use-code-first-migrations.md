@@ -2,11 +2,11 @@
 title: 如何对 .NET 后端移动服务进行数据模型更改
 description: 本主题介绍数据模型初始值设定项，以及如何在 .NET 后端移动服务进行数据模型更改。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 writer: glenga
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

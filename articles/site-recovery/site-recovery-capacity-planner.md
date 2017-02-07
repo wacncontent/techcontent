@@ -2,10 +2,10 @@
 title: 在 Azure Site Recovery 中规划用于保护虚拟机和物理服务器的容量 | Azure
 description: 规划 Azure Site Recovery 的复制容量
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: 0a1cd8eb-a8f7-4228-ab84-9449e0b2887b
 ms.service: site-recovery

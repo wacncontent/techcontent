@@ -3,10 +3,10 @@ title: 使用 Azure 流量管理器在 Azure 中部署高可用性跨地域 AD F
 description: 在本文档中，你将学习如何在 Azure 中部署 AD FS 以实现高可用性。
 keywords: Ad fs 与 Azure 流量管理器, adfs 与 Azure 流量管理器, 地域, 多个数据中心, 地域数据中心, 多个地域数据中心, 在 azure 中部署 AD FS, 部署 azure adfs, azure adfs, azure ad fs,部署 adfs, 部署 ad fs, azure 中的 adfs, 在 azure 中部署 adfs, 在 azure 中部署 AD FS, adfs azure, AD FS 简介, Azure, Azure 中的 AD FS, iaas, ADFS, 将 adfs 移到 azure
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: anandyadavmsft
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

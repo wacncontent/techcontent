@@ -2,7 +2,7 @@
 title: Azure 自动化中的凭据资产 | Azure
 description: Azure 自动化中的凭据资产包含可用于向 Runbook 访问的资源进行身份验证的安全凭据。本文介绍如何创建凭据资产并在 Runbook 中使用它们。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: mgoedtel
 manager: jwhit
 editor: tysonn

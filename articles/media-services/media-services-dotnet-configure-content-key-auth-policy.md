@@ -2,10 +2,10 @@
 title: 使用媒体服务 .NET SDK 配置内容密钥授权策略 | Azure
 description: 了解如何使用适用于 .NET 的媒体服务 SDK 配置内容密钥的授权策略。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Mingfeiy
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 1a0aedda-5b87-4436-8193-09fc2f14310c
 ms.service: media-services

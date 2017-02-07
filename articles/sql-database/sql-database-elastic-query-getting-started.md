@@ -2,7 +2,7 @@
 title: 跨已扩展的云数据库（水平分区）进行报告 | Azure
 description: 如何使用跨数据库数据库查询
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: sidneyh
 

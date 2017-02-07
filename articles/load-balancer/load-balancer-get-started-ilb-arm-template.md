@@ -5,7 +5,7 @@ services: load-balancer
 documentationCenter: na
 authors: joaoma
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: load-balancer

@@ -2,10 +2,10 @@
 title: 在源代码管理中存储 .NET 后端项目代码 | Azure 移动服务
 description: 了解如何将 .NET 后端项目存储在计算机上的本地 Git 存储库中并从中发布。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

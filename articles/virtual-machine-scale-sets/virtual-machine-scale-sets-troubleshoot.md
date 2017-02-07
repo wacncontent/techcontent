@@ -2,10 +2,10 @@
 title: 疑难解答使用虚拟机规模集的自动缩放问题 | Azure
 description: 疑难解答使用虚拟机规模集的自动缩放问题。了解遇到的典型问题以及如何解决这些问题。
 services: virtual-machine-scale-sets
-documentationcenter: 
+documentationcenter: ''
 author: gbowerman
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: c7d87b72-ee24-4e52-9377-a42f337f76fa

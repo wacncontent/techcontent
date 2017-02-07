@@ -2,11 +2,11 @@
 title: 适用于 Azure 中 Windows VM 的技术文章 | Azure
 description: 与 Windows 虚拟机相关的 Azure 文档文章完整列表
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
 tags: azure-service-management,azure-resource-manager
-editor: 
+editor: ''
 
 ms.service: virtual-machines-windows
 ms.devlang: na

@@ -3,9 +3,9 @@ title: 媒体服务 PlayReady 许可证模板概述
 description: 本主题概述了用于配置 PlayReady 许可证的 PlayReady 许可证模板。
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: media-services
 ms.workload: media

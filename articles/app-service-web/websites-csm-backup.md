@@ -2,10 +2,10 @@
 title: 使用 REST 备份和还原应用服务应用
 description: 了解如何使用 RESTful API 调用在 Azure App Service 中备份和还原应用
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: NKing92
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service
 ms.workload: na

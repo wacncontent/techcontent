@@ -1,11 +1,11 @@
 ---
 title: 实施大型部署
 description: 了解如何使用 Azure Toolkit for Eclipse 实施大型部署。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

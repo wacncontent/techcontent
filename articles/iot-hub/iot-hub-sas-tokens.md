@@ -5,7 +5,7 @@ services: iot-hub
 documentationCenter: .net
 authors: fsautomata
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.date: 06/07/2016

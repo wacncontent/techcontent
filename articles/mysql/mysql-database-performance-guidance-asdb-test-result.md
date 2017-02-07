@@ -1,17 +1,17 @@
 ---
-linkid: 
-urlDisplayName: 
+linkid: ''
+urlDisplayName: ''
 title: 了解服务层和版本 - Azure 微软云
 metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,性能,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS,ASDB基准
 description: 针对服务层和不同版本的性能介绍,为您选择MySQL 数据库 on Azure提供了详细的参考。我们按照ASDB基准,提供了不同版本的测试数据供您参考。
-metaCanonical: 
+metaCanonical: ''
 services: MySQL
 documentationCenter: Services
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: mysql
 ms.date: 07/05/2016

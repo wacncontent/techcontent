@@ -2,7 +2,7 @@
 title: 使用 Azure Site Recovery 和 PowerShell 在 VMM 云中复制 Hyper-V 虚拟机 | Azure
 description: 了解如何使用站点恢复和 PowerShell 在 VMM 云中自动复制 Hyper-V 虚拟机。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: bsiva
 manager: abhiag
 editor: tysonn

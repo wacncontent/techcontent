@@ -3,7 +3,7 @@ title: DocumentDB 分层资源模型和概念 | Azure
 description: 了解 DocumentDB 的数据库、集合、用户自定义函数 (UDF)、文档、管理资源的权限等的分层模型。
 keywords: 分层模型, documentdb, azure, Azure
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: AndrewHoh
 manager: jhubbard
 editor: monicar

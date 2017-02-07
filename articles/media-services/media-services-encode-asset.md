@@ -2,10 +2,10 @@
 title: Azure 按需媒体编码器概述和比较 | Azure
 description: 本主题概述并比较 Azure 按需媒体编码器。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media
@@ -13,7 +13,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 09/19/2016
-wacn.date: 12/27/2016
+wacn.date: 01/24/2017
 ms.author: juliako
 ---
 
@@ -62,15 +62,15 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 
 ###生成缩略图
 
-有关信息，请参阅[如何使用媒体编码器标准生成缩略图](./media-services-custom-mes-presets-with-dotnet.md#thumbnails)。
+有关信息，请参阅[如何使用媒体编码器标准生成缩略图](./media-services-advanced-encoding-with-mes.md#thumbnails)。
 
 ###修剪视频（裁剪）
 
-有关信息，请参阅[如何使用媒体编码器标准修剪视频](./media-services-custom-mes-presets-with-dotnet.md#trim_video)。
+有关信息，请参阅[如何使用媒体编码器标准修剪视频](./media-services-advanced-encoding-with-mes.md#trim_video)。
 
 ###创建覆盖层
 
-有关信息，请参阅[如何使用媒体编码器标准创建覆盖层](./media-services-custom-mes-presets-with-dotnet.md#overlay)。
+有关信息，请参阅[如何使用媒体编码器标准创建覆盖层](./media-services-advanced-encoding-with-mes.md#overlay)。
 
 ###另请参阅
 

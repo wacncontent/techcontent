@@ -3,7 +3,7 @@ title: DocumentDB 的 SQL 语法和 SQL 查询 | Azure
 description: 了解 DocumentDB（一种 NoSQL 数据库）的 SQL 语法、数据库概念和 SQL 查询。SQL 可在 DocumentDB 中作为 JSON 查询语言使用。
 keywords: sql 语法, sql 查询, sql 查询, json 查询语言, 数据库概念和 sql 查询, 聚合函数
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: arramac
 manager: jhubbard
 editor: monicar

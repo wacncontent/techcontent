@@ -12,8 +12,8 @@ ms.devlang: na
 ms.topic: hero-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/25/2016
-wacn.date: 12/30/2016
+ms.date: 12/14/2016
+wacn.date: 01/25/2017
 ms.author: amsriva
 ---
 

@@ -5,7 +5,7 @@ services: load-balancer
 documentationCenter: na
 authors: chkuhtz
 manager: narayan
-editor: 
+editor: ''
 
 ms.service: load-balancer
 ms.devlang: na

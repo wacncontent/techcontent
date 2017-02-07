@@ -5,7 +5,7 @@ services: service-bus
 documentationCenter: java
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.workload: na
@@ -14,7 +14,7 @@ ms.devlang: java
 ms.topic: article
 ms.date: 10/04/2016
 ms.author: sethm
-wacn.date: 11/28/2016
+wacn.date: 02/06/2017
 ---
 
 # 如何将 Java 消息服务 (JMS) API 用于服务总线和 AMQP 1.0
@@ -47,8 +47,6 @@ wacn.date: 11/28/2016
 JMS 使用 Java 命名和目录接口 (JNDI) 创建逻辑名称和物理名称之间的分隔。将使用 JNDI 解析以下两种类型的 JMS 对象：ConnectionFactory 和 Destination。JNDI 使用一个提供程序模型，你可以在其中插入不同目录服务来处理名称解析任务。Apache Qpid JMS AMQP 1.0 库附带一个使用以下格式的属性文件配置的、基于属性文件的简单 JNDI 提供程序。
 
 ```
-
-```
 # servicebus.properties – sample JNDI configuration
 
 # Register a ConnectionFactory in JNDI using the form:
@@ -59,7 +57,6 @@ connectionfactory.SBCF = amqps://[username]:[password]@[namespace].servicebus.ch
 # queue.[jndi_name] = [physical_name]
 # topic.[jndi_name] = [physical_name]
 queue.QUEUE = queue1
-```
 ```
 
 #### 配置 ConnectionFactory
@@ -97,6 +94,7 @@ amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn
 ```
 queue.[jndi_name] = [physical_name]
 ```
+
 或
 
 ```
@@ -124,7 +122,7 @@ Hashtable<String, String> env = new Hashtable<String, String>();
 env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
 env.put(Context.PROVIDER_URL, "servicebus.properties"); 
 InitialContext context = new InitialContext(env);
-``` 
+```
 
 ### 使用服务总线队列的简单 JMS 应用程序
 
@@ -277,15 +275,12 @@ exit
 #### 从 .NET 应用程序输出
 
 ```
-
-```
 > SimpleSenderReceiver.exe	
 Press [enter] to send a message. Type 'exit' + [enter] to quit.
 Received message with MessageID = 4364096528752411591
 Received message with MessageID = 459252991689389983
 Received message with MessageID = 1565011046230456854
 exit
-```
 ```
 
 ### .NET 到 JMS
@@ -342,4 +337,4 @@ exit
 * [服务总线 AMQP 1.0 开发人员指南](./service-bus-amqp-dotnet.md)
 * [如何使用 Service Bus 队列](./service-bus-dotnet-get-started-with-queues.md)
 
-<!---HONumber=Mooncake_0104_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

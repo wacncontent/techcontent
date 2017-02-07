@@ -3,9 +3,9 @@ title: H264 单比特率 720p 音频 5.1 | Azure
 description: 本主题概述了 **H264 单比特率 720p 音频 5.1** 任务预设。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: ba2bfa57-3c87-4b1b-b91b-58f9108f4e85
 ms.service: media-services

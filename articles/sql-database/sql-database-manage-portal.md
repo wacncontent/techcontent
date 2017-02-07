@@ -1,20 +1,22 @@
 ---
-title: 使用 Azure 门户预览管理 Azure SQL 数据库
-description: 了解如何使用 Azure 门户预览管理云中的关系数据库。
+title: 使用 Azure 门户管理 Azure SQL 数据库 | Azure
+description: 有关如何使用 Azure 门户管理云中的关系数据库的快速参考。
 services: sql-database
-documentationCenter: 
-authors: stevestein
+documentationcenter: ''
+author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
+ms.assetid: 3a56e9de-c21a-40ba-9a35-958172cb4e5b
 ms.service: sql-database
+ms.custom: overview
 ms.devlang: NA
 ms.workload: data-management
-ms.topic: article
+ms.topic: get-started-article
 ms.tgt_pltfrm: NA
-ms.date: 09/19/2016
-wacn.date: 12/19/2016
-ms.author: sstein
+ms.date: 01/10/2017
+wacn.date: 01/25/2017
+ms.author: carlrab
 ---
 
 # 使用 Azure 门户预览管理 Azure SQL 数据库
@@ -25,6 +27,9 @@ ms.author: sstein
 - [PowerShell](./sql-database-manage-powershell.md)
 
 在 [Azure 门户预览](https://portal.azure.cn)中，可以创建、监视和管理 Azure SQL 数据库与服务器。本文提供更多常见任务的快速说明和详细信息的链接。
+
+> [!TIP]
+有关演示如何创建服务器、创建基于服务器的防火墙、查看服务器属性、使用 SQL Server Management Studio 进行连接、查询 master 数据库、创建示例数据库和空白数据库、查询数据库属性、使用 SQL Server Management Studio 进行连接和查询示例数据库的教程，请参阅[入门教程](./sql-database-get-started.md)。
 
 ## 查看 Azure SQL 数据库、服务器和池
 
@@ -46,7 +51,7 @@ ms.author: sstein
 
 ## 如何创建或查看 SQL 弹性池？
 
-若要打开“SQL 弹性池”边栏选项卡，请单击“SQL 弹性池”，然后单击要使用的池，或单击“+添加”创建池。有关详细信息，请参阅[使用 Azure 门户创建弹性数据库池](./sql-database-elastic-pool-create-portal.md)。
+若要打开“SQL 弹性池”边栏选项卡，请单击“SQL 弹性池”，然后单击要使用的池，或单击“+添加”创建池。有关详细信息，请参阅[使用 Azure 门户创建弹性池](./sql-database-elastic-pool-create-portal.md)。
 
 ![SQL 弹性池](./media/sql-database-manage-portal/elastic-pools.png)  
 
@@ -141,4 +146,5 @@ ms.author: sstein
 - [SQL 数据库](./sql-database-technical-overview.md)
 - [使用 Azure 门户预览监视和管理弹性数据库池](./sql-database-elastic-pool-manage-portal.md)
 
-<!---HONumber=Mooncake_Quality_Review_1202_2016-->
+<!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: add one tip tag-->

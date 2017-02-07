@@ -2,10 +2,10 @@
 title: Azure IoT 中心直接方法 (Node) | Azure
 description: 如何使用 Azure IoT 中心直接方法。使用 Azure IoT SDK for Node.js 实现包含直接方法的模拟设备应用和调用直接方法的服务应用。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: nberdy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: ea9c73ca-7778-4e38-a8f1-0bee9d142f04
 ms.service: iot-hub
@@ -48,11 +48,13 @@ ms.author: nberdy
     ```
     npm init
     ```
+
 2. 在 **simulateddevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
 
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
+
 3. 在 **simulateddevice** 文件夹中，利用文本编辑器创建新的 **SimulatedDevice.js** 文件。
 4. 在 **SimulatedDevice.js** 文件的开头添加以下 `require` 语句：
 
@@ -69,23 +71,23 @@ ms.author: nberdy
     var connectionString = '{device connection string}';
     var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
     ```
+
 6. 添加以下函数，实现设备上的方法：
 
     ```
     function onWriteLine(request, response) {
         console.log(request.payload);
 
-    ```
-    response.send(200, 'Input was written to log.', function(err) {
-        if(err) {
-            console.error('An error ocurred when sending a method response:\n' + err.toString());
-        } else {
-            console.log('Response to method \'' + request.methodName + '\' sent successfully.' );
-        }
-    });
-    ```
+        response.send(200, 'Input was written to log.', function(err) {
+            if(err) {
+                console.error('An error ocurred when sending a method response:\n' + err.toString());
+            } else {
+                console.log('Response to method \'' + request.methodName + '\' sent successfully.' );
+            }
+        });
     }
     ```
+
 7. 打开与 IoT 中心的连接并开始初始化方法侦听器：
 
     ```
@@ -98,6 +100,7 @@ ms.author: nberdy
         }
     });
     ```
+
 8. 保存并关闭 **SimulatedDevice.js** 文件。
 
 > [!NOTE]
@@ -113,11 +116,13 @@ ms.author: nberdy
     ```
     npm init
     ```
+
 2. 在 **callmethodondevice** 文件夹的命令提示符处，运行以下命令以安装 **azure-iothub** 包：
 
     ```
     npm install azure-iothub --save
     ```
+
 3. 使用文本编辑器，在 **callmethodondevice** 文件夹中创建 **CallMethodOnDevice.js** 文件。
 4. 在 **CallMethodOnDevice.js** 文件的开头添加以下 `require` 语句：
 
@@ -134,11 +139,13 @@ ms.author: nberdy
     var methodName = 'writeLine';
     var deviceId = 'myDeviceId';
     ```
+
 6. 创建客户端，以便打开到 IoT 中心的连接。
 
     ```
     var client = Client.fromConnectionString(connectionString);
     ```
+
 7. 添加以下函数，以便调用设备方法并将设备响应输出到控制台：
 
     ```
@@ -157,6 +164,7 @@ ms.author: nberdy
         }
     });
     ```
+
 8. 保存并关闭 **CallMethodOnDevice.js** 文件。
 
 ## 运行应用

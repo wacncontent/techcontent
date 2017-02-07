@@ -2,10 +2,10 @@
 title: 服务器上的数据库当前不可用，请连接到 SQL 数据库 | Azure
 description: 对应用程序连接到 SQL 数据库时发生的“服务器上的数据库当前不可用”错误进行排查。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: dalechen
 manager: felixwu
-editor: 
+editor: ''
 keywords: 服务器上的数据库当前不可用, 连接到 SQL 数据库
 
 ms.service: sql-database

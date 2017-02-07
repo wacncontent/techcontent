@@ -2,10 +2,10 @@
 title: 什么是 Azure 的自助注册？| Azure
 description: 概述 Azure 的自助注册、如何管理注册过程以及如何接管 DNS 域名。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: b9f01876-29d1-4ab8-8b74-04d43d532f4b
 ms.service: active-directory

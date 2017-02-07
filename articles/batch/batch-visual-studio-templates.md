@@ -5,7 +5,7 @@ services: batch
 documentationCenter: .net
 authors: fayora
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: batch
 ms.devlang: multiple

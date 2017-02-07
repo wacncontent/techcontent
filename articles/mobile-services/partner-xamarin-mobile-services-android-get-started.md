@@ -5,7 +5,7 @@ description: 了解如何对 Xamarin.Android 应用程序使用 Azure 移动服�
 documentationCenter: xamarin
 authors: lindydonna
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

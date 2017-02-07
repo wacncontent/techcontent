@@ -3,9 +3,9 @@ title: 流式传输日志和控制台
 description: 流式传输日志和控制台概述
 authors: btardif
 manager: wpickett
-editor: 
+editor: ''
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: app-service-web
 ms.workload: web

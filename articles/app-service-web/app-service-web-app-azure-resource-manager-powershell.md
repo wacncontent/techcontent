@@ -2,10 +2,10 @@
 title: 适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令 | Azure
 description: 了解如何使用基于 Azure Resource Manager 的新 PowerShell 命令来管理 Azure Web Apps。
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: ahmedelnably
 manager: stefsch
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

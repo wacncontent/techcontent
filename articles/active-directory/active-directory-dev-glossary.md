@@ -2,10 +2,10 @@
 title: Azure Active Directory 开发人员词汇表 | Azure
 description: 常用的 Azure Active Directory 开发人员概念和功能术语列表。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: bryanla
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.assetid: 551512df-46fb-4219-a14b-9c9fc23998ba
 ms.service: active-directory

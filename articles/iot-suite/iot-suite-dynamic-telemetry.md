@@ -1,12 +1,12 @@
 ---
 title: 使用动态遥测 | Azure
 description: 遵循本教程来了解如何配合使用动态遥测和远程监视预配置解决方案。
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na

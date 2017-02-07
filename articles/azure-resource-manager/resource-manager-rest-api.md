@@ -5,7 +5,7 @@ services: azure-resource-manager
 documentationcenter: na
 author: navalev
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: e8d7a1d2-1e82-4212-8288-8697341408c5
 ms.service: azure-resource-manager
@@ -32,7 +32,7 @@ ms.author: navale;tomfitz;
 ## 身份验证
 对 ARM 的身份验证由 Azure Active Directory (AD) 处理。若要连接到任何 API，首先需要使用 Azure AD 进行身份验证，以接收可传递给每个请求的身份验证令牌。由于我们讨论的是如何直接对 REST API 进行单纯调用，因此还假设当弹出屏幕提示输入用户名和密码时，甚至是在双重身份验证方案中使用的其他验证机制中，你不想要使用一般的用户名和密码进行身份验证。因此，我们将创建所谓的 Azure AD 应用程序和一个用于登录的服务主体。但请记住，Azure AD 支持多个身份验证过程，而这些过程全都可用于检索后续 API 请求所需的身份验证令牌。有关分步说明，请参阅[创建 Azure AD 应用程序和服务主体](./resource-group-create-service-principal-portal.md)。
 
-### 生成访问令牌
+### <a name="generating-an-access-token"></a> 生成访问令牌
 通过向外调用位于 login.chinacloudapi.cn 的 Azure AD 来对 Azure AD 进行身份验证。若要进行身份验证，你需要提供以下信息：
 
 * Azure AD 租户 ID（用于登录的 Azure AD 名称，通常与你的公司同名，但不一定总是如此）

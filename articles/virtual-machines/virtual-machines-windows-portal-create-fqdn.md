@@ -2,7 +2,7 @@
 title: 在 Azure 门户预览中为 VM 创建 FQDN | Azure
 description: 了解如何在 Azure 门户预览中为基于 Resource Manager 的虚拟机创建完全限定域名 (FQDN)。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
 editor: tysonn

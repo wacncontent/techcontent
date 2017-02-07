@@ -2,10 +2,10 @@
 title: 如何使用 Redis 缓存创建 Web 应用 | Azure
 description: 了解如何使用 Redis 缓存创建 Web 应用
 services: redis-cache
-documentationcenter: 
+documentationcenter: ''
 author: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 454e23d7-a99b-4e6e-8dd7-156451d2da7c
 ms.service: cache

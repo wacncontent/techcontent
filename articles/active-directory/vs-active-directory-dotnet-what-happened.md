@@ -5,7 +5,7 @@ services: active-directory
 documentationcenter: na
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 8b24adde-547e-4ffe-824a-2029ba210216
 ms.service: active-directory

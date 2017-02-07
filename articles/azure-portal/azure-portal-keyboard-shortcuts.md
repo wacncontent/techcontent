@@ -2,10 +2,10 @@
 title: Azure 门户预览快捷键 | Azure
 description: 本文始终列出可在整个 Azure 门户预览中使用的最新快捷键。单个服务可能有其自身的专用快捷键。
 services: azure-portal
-documentationCenter: 
+documentationCenter: ''
 authors: flanakin
 manager: lwelicki
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.devlang: NA

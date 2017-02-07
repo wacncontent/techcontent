@@ -2,10 +2,10 @@
 title: Windows VM 大小 | Azure
 description: 列出 Azure 中 Windows 虚拟机的不同可用大小。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-windows

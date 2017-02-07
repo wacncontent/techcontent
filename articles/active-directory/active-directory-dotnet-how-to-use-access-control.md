@@ -5,7 +5,7 @@ services: active-directory
 documentationCenter: .net
 authors: msmbaldwin
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.date: 12/05/2015

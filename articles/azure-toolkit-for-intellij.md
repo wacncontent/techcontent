@@ -1,11 +1,11 @@
 ---
 title: Azure Toolkit for IntelliJ | Azure
 description: 了解 Azure Toolkit for IntelliJ。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

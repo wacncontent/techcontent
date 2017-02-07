@@ -2,10 +2,10 @@
 title: 如何在 Azure 虚拟机里配置条带化
 description: 在 Windows Server 2012 R2 Datacenter 中配置条带化
 services: virtual-machines
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: 虚拟机,Windows Server 2012 R2 Datacenter,条带化,striping
 
 ms.service: virtual-machines-aog

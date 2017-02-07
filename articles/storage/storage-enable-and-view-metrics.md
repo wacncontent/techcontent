@@ -2,7 +2,7 @@
 title: 在 Azure 门户中启用存储指标 | Azure
 description: 如何为 Blob、队列、表和文件服务启用存储指标
 services: storage
-documentationCenter: 
+documentationCenter: ''
 authors: robinsh
 manager: carmonm
 editor: tysonn

@@ -2,10 +2,10 @@
 title: 使用 PowerShell 配置 Azure SQL 数据库服务器级别防火墙规则 | Azure
 description: 了解如何为访问 Azure SQL 数据库的 IP 地址配置防火墙。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

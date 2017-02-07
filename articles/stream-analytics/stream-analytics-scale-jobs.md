@@ -3,7 +3,7 @@ title: 扩展流分析作业以增加吞吐量 | Azure
 description: 了解如何通过配置输入分区、细化查询定义和设置作业流式处理单位来扩展流分析作业。
 keywords: 数据流式处理, 流数据处理, 优化分析
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

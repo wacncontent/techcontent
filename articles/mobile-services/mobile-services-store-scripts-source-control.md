@@ -2,10 +2,10 @@
 title: 在源代码管理中存储 JavaScript 后端项目代码 | Azure 移动服务
 description: 了解如何在您的计算机本地 Git 存储库中存储您的服务器脚本文件和模块。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

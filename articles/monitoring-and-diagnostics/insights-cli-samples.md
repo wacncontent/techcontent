@@ -2,8 +2,8 @@
 title: Azure Insights：Azure Insights CLI 快速入门示例 | Azure
 description: 示例 CLI 命令可以帮助访问 Azure Insights 监视功能。Azure Insights 是一种 Azure 服务，允许你基于配置的遥测数据值自动缩放云服务、虚拟机和 Web Apps、发送警报通知或调用 Web URL。
 authors: kamathashwin
-manager: 
-editor: 
+manager: ''
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

@@ -2,10 +2,10 @@
 title: 排查 VM 上的应用程序访问问题 | Azure
 description: 如果无法访问 Azure 虚拟机上运行的应用程序，则可以按照这些步骤来隔离问题来源。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-windows

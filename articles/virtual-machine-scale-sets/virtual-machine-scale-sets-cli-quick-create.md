@@ -3,7 +3,7 @@ title: 规模集 CLI 快速创建 |Azure
 description: 使用 CLI 快速创建部署规模集。
 keywords: 虚拟机规模集
 services: virtual-machine-scale-sets
-documentationCenter: 
+documentationCenter: ''
 authors: gatneil
 manager: madhana
 editor: tysonn

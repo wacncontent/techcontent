@@ -2,10 +2,10 @@
 title: 在 Azure 中打开 Linux VM 的端口和终结点 | Azure
 description: 了解如何使用 Azure Resource Manager 部署模型和 Azure CLI 2.0（预览版）在 Linux VM 上打开端口/创建终结点
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: eef9842b-495a-46cf-99a6-74e49807e74e
 ms.service: virtual-machines-linux
@@ -26,6 +26,8 @@ ms.author: iainfou
 
 - [Azure CLI 1.0](./virtual-machines-linux-nsg-quickstart-nodejs.md)：用于经典部署模型和资源管理部署模型的 CLI
 - [Azure CLI 2.0（预览版）](#quick-commands)：用于资源管理部署模型（本文）的下一代 CLI
+
+[!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
 ## <a name="quick-commands"></a> 快速命令
 若要创建网络安全组和规则，需要安装最新的 [Azure CLI 2.0（预览版）](https://docs.microsoft.com/cli/azure/install-az-cli2)并使用 [az login](https://docs.microsoft.com/cli/azure/#login) 登录到 Azure 帐户。
@@ -78,3 +80,4 @@ az network vnet subnet update --resource-group myResourceGroup \
 * [Azure Resource Manager 中负载均衡器的概述](../load-balancer/load-balancer-arm.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: change the steps from Azure CLI to Azure CLI 2.0-->

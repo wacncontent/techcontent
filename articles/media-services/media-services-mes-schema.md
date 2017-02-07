@@ -3,9 +3,9 @@ title: Media Encoder Standard 架构 | Azure
 description: 本主题概述 Media Encoder Standard 架构。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 4c060062-8ef2-41d9-834e-e81e8eafcf2e
 ms.service: media-services

@@ -2,10 +2,10 @@
 title: 使用 Azure IoT 中心的直接方法 (.NET/Node) | Azure
 description: 如何使用 Azure IoT 中心直接方法。使用适用于 Node.js 的 Azure IoT 设备 SDK 实现包含直接方法的模拟设备应用，并使用适用于 .NET 的 Azure IoT 服务 SDK 实现调用直接方法的服务应用。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: nberdy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: ab035b8e-bff8-4e12-9536-f31d6b6fe425
 ms.service: iot-hub
@@ -49,11 +49,13 @@ ms.author: nberdy
     ```
     npm init
     ```
+
 2. 在 **simulateddevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 和 **azure-iot-device-mqtt** 包：
 
     ```
-        npm install azure-iot-device azure-iot-device-mqtt --save
+    npm install azure-iot-device azure-iot-device-mqtt --save
     ```
+
 3. 在 **simulateddevice** 文件夹中，利用文本编辑器创建新的 **SimulatedDevice.js** 文件。
 4. 在 **SimulatedDevice.js** 文件的开头添加以下 `require` 语句：
 
@@ -70,23 +72,23 @@ ms.author: nberdy
     var connectionString = '{device connection string}';
     var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
     ```
+
 6. 添加以下函数，实现设备上的直接方法：
 
     ```
     function onWriteLine(request, response) {
         console.log(request.payload);
 
-    ```
-    response.send(200, 'Input was written to log.', function(err) {
-        if(err) {
-            console.error('An error ocurred when sending a method response:\n' + err.toString());
-        } else {
-            console.log('Response to method \'' + request.methodName + '\' sent successfully.' );
-        }
-    });
-    ```
+        response.send(200, 'Input was written to log.', function(err) {
+            if(err) {
+                console.error('An error ocurred when sending a method response:\n' + err.toString());
+            } else {
+                console.log('Response to method \'' + request.methodName + '\' sent successfully.' );
+            }
+        });
     }
     ```
+
 7. 打开与 IoT 中心的连接并初始化方法侦听器：
 
     ```
@@ -99,6 +101,7 @@ ms.author: nberdy
         }
     });
     ```
+
 8. 保存并关闭 **SimulatedDevice.js** 文件。
 
 > [!NOTE]
@@ -130,6 +133,7 @@ ms.author: nberdy
     static ServiceClient serviceClient;
     static string connectionString = "{iot hub connection string}";
     ```
+
 6. 将以下方法添加到 **Program** 类：
 
     ```
@@ -146,6 +150,7 @@ ms.author: nberdy
     ```
 
     此方法在 `myDeviceId` 设备上调用名为 `writeLine` 的直接方法，然后将设备提供的响应写入到控制台。请注意如何才能为要响应的设备指定一个超时值。
+
 7. 最后，在 **Main** 方法中添加以下行：
 
     ```

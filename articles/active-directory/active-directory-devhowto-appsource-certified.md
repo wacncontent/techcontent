@@ -2,10 +2,10 @@
 title: 如何使 AppSource 通过 Azure Active Directory 的认证 | Azure
 description: 详细说明如何使应用程序 AppSource 通过 Azure Active Directory 的认证。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: skwan
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.assetid: 21206407-49f8-4c0b-84d1-c25e17cd4183
 ms.service: active-directory

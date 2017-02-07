@@ -2,10 +2,10 @@
 title: 移动 Windows VM | Azure
 description: 在 Resource Manager 部署模型中将 Windows VM 移到其他 Azure 订阅或资源组。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

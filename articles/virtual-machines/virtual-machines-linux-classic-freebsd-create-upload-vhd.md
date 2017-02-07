@@ -2,10 +2,10 @@
 title: 创建和上载 FreeBSD VM 映像 | Azure
 description: 了解如何创建和上载包含 FreeBSD 操作系统的虚拟硬盘 (VHD) 以创建 Azure 虚拟机。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: KylieLiang
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

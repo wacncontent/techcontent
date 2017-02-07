@@ -2,17 +2,17 @@
 title: 云服务中的角色通信 | Azure
 description: 云服务中的角色实例可以定义其终结点（http、https、tcp、udp），以便与外界通信或在其他角色实例之间进行通信。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 12/14/2015
+ms.date: 12/14/2016
 wacn.date: 01/03/2017
 ms.author: adegeo
 ---

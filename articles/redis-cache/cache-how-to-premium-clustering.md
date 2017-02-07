@@ -2,10 +2,10 @@
 title: 如何为高级 Azure Redis 缓存配置 Redis 群集功能 | Azure
 description: 了解如何为高级级别的 Azure Redis 缓存实例创建和管理 Redis 缓存功能
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

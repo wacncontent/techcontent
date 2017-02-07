@@ -2,7 +2,7 @@
 title: 使用流分析生成 IoT 解决方案 | Azure
 description: 使用收费站方案了解流分析 IoT 解决方案的入门教程
 keywords: iot 解决方案, 开窗函数
-documentationCenter: 
+documentationCenter: ''
 services: stream-analytics
 authors: jeffstokes72
 manager: jhubbard

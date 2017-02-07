@@ -1,11 +1,11 @@
 ---
 title: 订阅和帐户准则 | Azure
 description: 了解 Azure 中订阅和帐户的关键设计和实施准则。
-documentationCenter: 
+documentationCenter: ''
 services: virtual-machines-windows
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows
@@ -13,8 +13,8 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 09/08/2016
-wacn.date: 12/26/2016
+ms.date: 12/16/2016
+wacn.date: 01/25/2017
 ms.author: iainfou
 ---
 

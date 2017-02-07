@@ -5,7 +5,7 @@ documentationCenter: na
 services: expressroute
 authors: charwen
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: expressroute
@@ -74,7 +74,7 @@ ms.author: charwen
 
     在此过程中，创建可以共存的连接将需要你删除网关，然后配置新网关。这意味着，在你删除并重新创建网关和连接时，跨界连接将会停止工作，但你无需将任何 VM 或服务迁移到新的虚拟网络。在你配置网关时，如果进行了相应配置，你的 VM 和服务仍可以通过负载均衡器与外界通信。
 
-## <a name="new"></a>创建新的虚拟网络和并存连接
+## <a name="new"></a> 创建新的虚拟网络和并存连接
 
 本过程将指导你创建 VNet，以及创建将共存的站点到站点连接和 ExpressRoute 连接。
 
@@ -118,7 +118,7 @@ ms.author: charwen
     Set-AzureVNetConfig -ConfigurationPath 'C:\NetworkConfig.xml'
     ```
 
-4. <a name="gw"></a>创建 ExpressRoute 网关。请务必将 GatewaySKU 指定为 *Standard*、*HighPerformance* 或 *UltraPerformance*，并将 GatewayType 指定为 *DynamicRouting*。
+4. <a name="gw"></a> 创建 ExpressRoute 网关。请务必将 GatewaySKU 指定为 *Standard* 或 *HighPerformance* ，并将 GatewayType 指定为 *DynamicRouting*。
 
     使用以下示例，将值替换为你自己的值。
 
@@ -132,7 +132,7 @@ ms.author: charwen
     New-AzureDedicatedCircuitLink -ServiceKey <service-key> -VNetName MyAzureVNET
     ```
 
-6. <a name="vpngw"></a>接下来，创建站点到站点 VPN 网关。GatewaySKU 必须为 *Standard*、*HighPerformance* 或 *UltraPerformance*，GatewayType 必须为 *DynamicRouting*。
+6. <a name="vpngw"></a> 接下来，创建站点到站点 VPN 网关。GatewaySKU 必须为 *Standard* 或 *HighPerformance* ，GatewayType 必须为 *DynamicRouting*。
 
     ```
     New-AzureVirtualNetworkGateway -VNetName MyAzureVNET -GatewayName S2SVPN -GatewayType DynamicRouting -GatewaySKU  HighPerformance
@@ -221,8 +221,9 @@ ms.author: charwen
     `Get-AzureVNetConfig -ExportToFile "C:\NetworkConfig.xml"`
 
 4. 编辑网络配置文件架构，使网关子网为 /27 或更短的前缀（例如 /26 或 /25）。请参阅以下示例。
->[!NOTE]
-> 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。有关配置架构的详细信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)。
+
+    >[!NOTE]
+    > 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。有关配置架构的详细信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)。
 
     ```
       <Subnet name="GatewaySubnet">

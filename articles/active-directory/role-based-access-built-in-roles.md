@@ -2,10 +2,10 @@
 title: RBAC：内置角色 | Azure
 description: 本主题介绍适用于基于角色的访问控制 (RBAC) 的内置角色。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: kgremban
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

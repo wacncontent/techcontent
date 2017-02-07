@@ -5,7 +5,7 @@ services: sql-data-warehouse
 documentationCenter: NA
 authors: Lakshmi1812
 manager: barbkess
-editor: 
+editor: ''
 
 ms.service: sql-data-warehouse
 ms.devlang: NA

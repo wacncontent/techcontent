@@ -5,7 +5,7 @@ services: documentdb
 author: syamkmsft
 manager: jhubbard
 editor: mimig
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: d0a3c310-eb63-4e45-8122-b7724095c32f
 ms.service: documentdb

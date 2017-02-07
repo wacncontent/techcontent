@@ -2,10 +2,10 @@
 title: 使用 VM 扩展监视 Linux VM | Azure
 description: 了解如何使用 Linux 诊断扩展监视 Azure 中 Linux VM 的性能和诊断数据。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: NingKuang
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

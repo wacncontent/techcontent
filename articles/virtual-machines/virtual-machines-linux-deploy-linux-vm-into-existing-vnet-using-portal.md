@@ -5,9 +5,9 @@ services: virtual-machines-linux
 documentationcenter: virtual-machines-linux
 author: vlivech
 manager: timlt
-editor: 
+editor: ''
 
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: NA
 ms.topic: article

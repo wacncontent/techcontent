@@ -5,7 +5,7 @@ services: sql-data-warehouse
 documentationcenter: NA
 author: shivaniguptamsft
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: ef170f39-ae24-4b04-af76-53bb4c4d16d3
 ms.service: sql-data-warehouse

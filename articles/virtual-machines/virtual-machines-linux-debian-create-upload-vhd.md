@@ -2,10 +2,10 @@
 title: 准备 Debian Linux VHD | Azure
 description: 了解如何创建 Debian 7 和 8 的 VHD 文件，以便在 Azure 中进行部署。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: szarkos
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-linux

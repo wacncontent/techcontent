@@ -2,10 +2,10 @@
 title: 部署链接到 GitHub 存储库的 Web 应用 | Azure
 description: 使用 Azure 资源管理器模板来部署包含 GitHub 存储库中项目的 Web 应用。
 services: app-service
-documentationcenter: 
+documentationcenter: ''
 author: cephalin
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: 32739607-85fe-43c8-a4dc-1feb46d93a4d
 ms.service: app-service

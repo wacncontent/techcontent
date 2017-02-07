@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：操作任务和注意事项 | Azure
 description: 本主题介绍 Azure AD Connect 同步的操作任务，以及如何准备运行此组件。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: AndKjell
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na
@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 09/01/2016
 ms.author: andkjell
-wacn.date: 01/09/2017
+wacn.date: 01/24/2017
 ---
 
 # Azure AD Connect 同步：操作任务和注意事项
@@ -37,7 +37,7 @@ wacn.date: 01/09/2017
 
 对于熟悉旧式同步技术的人员而言，暂存模式是不同的，因为服务器有自身的 SQL 数据库。此体系结构允许将暂存模式服务器放置在不同的数据中心。
 
-### 验证服务器的配置
+### 验证服务器的配置 <a name="verify-the-configuration-of-a-server"></a>
 若要应用此方法，请遵循以下步骤：
 
 1. [准备](#prepare)

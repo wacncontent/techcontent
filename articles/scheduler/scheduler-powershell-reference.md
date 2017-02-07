@@ -5,7 +5,7 @@ services: scheduler
 documentationCenter: .NET
 authors: krisragh
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: scheduler
 ms.workload: infrastructure-services

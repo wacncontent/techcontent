@@ -2,10 +2,10 @@
 title: Azure 中使用 iPerf 进行网络带宽测试
 description: 了解 Azure 中使用 iPerf 进行网络带宽测试。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: Kyle Fu
-manager: 
-editor: 
+manager: ''
+editor: ''
 tags: Azure,iPerf,带宽,网络
 
 ms.service: virtual-network-aog

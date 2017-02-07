@@ -2,11 +2,11 @@
 title: SQL 数据库的 XEvent 事件文件代码 | Azure
 description: 提供一个双阶段代码示例的 PowerShell 和 Transact-SQL，该示例演示 Azure SQL 数据库的扩展事件中的事件文件目标。此方案的一部分要求使用 Azure 存储。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: MightyPen
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: sql-database
 ms.workload: data-management

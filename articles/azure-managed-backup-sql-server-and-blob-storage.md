@@ -1,15 +1,15 @@
 ---
 title: SQL 数据库 + Blob 存储实现托管备份操作手册
 description: SQL 数据库 + Blob 存储实现托管备份操作手册
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: multiple
-ms.date: 
+ms.date: ''
 wacn.date: 08/24/2016
 ---
 

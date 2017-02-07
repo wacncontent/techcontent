@@ -3,7 +3,7 @@ title: Azure 活动日志概述 | Azure
 description: 了解什么是 Azure 活动日志，以及如何通过它了解发生在 Azure 订阅中的事件。
 authors: johnkemnetz
 manager: rboucher
-editor: 
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

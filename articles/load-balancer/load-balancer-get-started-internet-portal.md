@@ -5,7 +5,7 @@ services: load-balancer
 documentationcenter: na
 author: anavinahar
 manager: narayan
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: aa9d26ca-3d8a-4a99-83b7-c410dd20b9d0

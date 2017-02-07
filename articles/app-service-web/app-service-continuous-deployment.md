@@ -2,7 +2,7 @@
 title: 连续部署到 Azure App Service | Azure
 description: 了解如何实现连续部署到 Azure App Service。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: dariagrigoriu
 manager: wpickett
 editor: mollybos

@@ -2,10 +2,10 @@
 title: 实现故障转移流式处理方案 | Azure
 description: 本主题演示如何实现故障转移流式处理方案。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -5,7 +5,7 @@ services: application-gateway
 documentationcenter: na
 author: georgewallace
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: c2f6516e-3805-49ac-826e-776b909a9104
@@ -14,8 +14,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 11/16/2016
-wacn.date: 12/05/2016
+ms.date: 12/12/2016
+wacn.date: 01/25/2017
 ms.author: gwallace
 ---
 

@@ -2,7 +2,7 @@
 title: 在 Resource Manager 模板中处理状态 | Azure
 description: 显示了如何通过建议的方法来使用复杂对象，以便与 Azure 资源管理器模板和已链接模板共享状态数据
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

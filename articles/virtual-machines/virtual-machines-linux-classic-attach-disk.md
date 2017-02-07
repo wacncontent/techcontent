@@ -2,7 +2,7 @@
 title: 将磁盘附加到 Linux VM | Azure
 description: 了解如何使用经典部署模型将数据磁盘附加到 Linux VM 并将其初始化，以便它可供使用
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
 editor: tysonn
@@ -232,3 +232,4 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 [Logon]: ./virtual-machines-linux-mac-create-ssh-keys.md
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: wording update & adding 2 links to Linux RAID and LVM articles-->

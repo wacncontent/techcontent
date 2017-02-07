@@ -2,13 +2,13 @@
 title: 如何为虚拟机附加磁盘
 description: 如何使用ps为虚拟机附加磁盘
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 06/08/2016
 ---
 

@@ -5,7 +5,7 @@ services: mobile-services,notification-hubs
 documentationCenter: windows
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

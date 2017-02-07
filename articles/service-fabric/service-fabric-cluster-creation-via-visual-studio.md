@@ -5,7 +5,7 @@ services: service-fabric
 documentationCenter: .net
 authors: karolz-ms
 manager: adegeo
-editor: 
+editor: ''
 
 ms.service: service-fabric
 ms.devlang: dotNet

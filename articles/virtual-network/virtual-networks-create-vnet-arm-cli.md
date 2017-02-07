@@ -2,10 +2,10 @@
 title: 使用 Azure CLI 创建虚拟网络 | Azure
 description: 了解如何使用 Azure CLI 创建虚拟网络 | Resource Manager。
 services: virtual-network
-documentationcenter: 
+documentationcenter: ''
 author: jimdial
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 75966bcc-0056-4667-8482-6f08ca38e77a

@@ -2,10 +2,10 @@
 title: Azure Site Recovery：常见问题 | Azure
 description: 本文讨论了有关 Azure Site Recovery 的常见问题。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: cfreeman
-editor: 
+editor: ''
 
 ms.assetid: 5cdc4bcd-b4fe-48c7-8be1-1db39bd9c078
 ms.service: site-recovery

@@ -1,12 +1,12 @@
 ---
 title: 更改 VM 可用性集 | Azure
 description: 了解如何使用 Azure PowerShell 和 Resource Manager 部署模型更改虚拟机的可用性集。
-keywords: 
+keywords: ''
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: Drewm3
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

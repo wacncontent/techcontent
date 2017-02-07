@@ -2,10 +2,10 @@
 title: 使用通知中心向用户发送跨平台通知 (ASP.NET)
 description: 了解如何使用通知中心模板在单个请求中发送针对所有平台的平台未知通知。
 services: notification-hubs
-documentationCenter: 
+documentationCenter: ''
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

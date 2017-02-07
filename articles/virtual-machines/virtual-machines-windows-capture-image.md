@@ -4,10 +4,10 @@
 title: 从通用化 Azure VM 捕获 VM 映像 | Azure
 description: 了解如何从 Resource Manager 部署模型中创建的通用化 Azure VM 捕获 VM 映像
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: afdae4a1-6dfb-47b4-902a-f327f9bfe5b4

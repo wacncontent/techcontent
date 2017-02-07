@@ -2,10 +2,10 @@
 title: 流量管理器工作原理 | Azure
 description: 本文介绍 Azure 流量管理器的工作原理
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

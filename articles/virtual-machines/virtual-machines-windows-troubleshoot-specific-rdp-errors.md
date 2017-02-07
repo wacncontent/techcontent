@@ -5,10 +5,10 @@ title: Azure VM 的特定 RDP 错误消息 | Azure
 description: 了解在尝试使用远程桌面连接到 Azure 中的 Windows 虚拟机时可能会收到的特定错误消息
 keywords: 远程桌面错误,远程桌面连接错误,无法连接到 VM,远程桌面故障排除
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 
 ms.assetid: 5feb1d64-ee6f-4907-949a-a7cffcbc6153

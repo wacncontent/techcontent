@@ -12,8 +12,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: infrastructure-services
-ms.date: 07/12/2016
-wacn.date: 12/21/2016
+ms.date: 11/28/2016
+wacn.date: 01/25/2017
 ms.author: MikeRayMSFT
 ---
 

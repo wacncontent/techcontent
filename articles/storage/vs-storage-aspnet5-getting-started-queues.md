@@ -2,10 +2,10 @@
 title: 队列存储和 Visual Studio 连接服务入门 (ASP.NET 5) | Azure
 description: 如何开始在 Visual Studio 中的 ASP.NET 5 项目中使用 Azure 队列存储
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 04977069-5b2d-4cba-84ae-9fb2f5eb1006
 ms.service: storage

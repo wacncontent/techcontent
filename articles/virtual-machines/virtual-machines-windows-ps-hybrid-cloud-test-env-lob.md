@@ -2,10 +2,10 @@
 title: LOB 应用程序测试环境 | Azure
 description: 了解如何在混合云环境中创建基于 Web 的业务线应用程序，以便进行 IT 专业人员测试或开发测试。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: JoeDavies-MSFT
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.service: virtual-machines-windows

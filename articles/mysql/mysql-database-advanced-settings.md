@@ -1,17 +1,17 @@
 ---
-linkid: 
-urlDisplayName: 
+linkid: ''
+urlDisplayName: ''
 title: 定制MySQL 数据库 on Azure服务器参数 - Azure 微软云
 metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,参数,定制,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS
 description: MySQL 数据库 on Azure支持您根据需求定制化服务器部分参数,帮您了解不同参数的设置范围和区间。
-metaCanonical: 
+metaCanonical: ''
 services: MySQL
 documentationCenter: Services
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: mysql
 ms.date: 07/05/2016
@@ -82,7 +82,7 @@ MySQL 数据库 on Azure支持您对服务器部分参数进行自定义设置�
     <td>1048576</td>
     <td>[1024- 16777216]</td>
   </tr>
-    <tr>
+   <tr>
     <td>server-id</td>
     <td>Random Value</td>
     <td>[1000 - 4294967295]</td>
@@ -115,7 +115,7 @@ MySQL 数据库 on Azure支持您对服务器部分参数进行自定义设置�
     <td>System</td>
     <td>System, [-12:00 to +12:00] </td>
   </tr>
-    <tr>
+   <tr>
     <td >character_set_server</td>
     <td>默认为DB创建时的设置</td>
     <td>utf8|utf16|utf32|utf8mb4|ujis|ucs2|tis620|swe7|sjis|macroman|macce|latin1|latin2|latin5|latin7|koi8r|koi8u|keybcs2|hp8|hebrew|greek|geostd8|gbk|gb2312|euckr|eucjpms|dec8|cp850|cp852|cp866|cp932|cp1250|cp1251|cp1256|cp1257|binary|big5|ascii|armscii8</td>

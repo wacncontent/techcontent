@@ -5,7 +5,7 @@ services: azure-resource-manager,key-vault
 documentationcenter: na
 author: tfitzmac
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: 96433b1a-68ee-4292-85b6-a581618b921b
 ms.service: azure-resource-manager

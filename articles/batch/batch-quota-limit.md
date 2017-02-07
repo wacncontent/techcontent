@@ -2,10 +2,10 @@
 title: Batch 服务的配额和限制 | Azure
 description: 了解默认的 Azure Batch 配额、限制和约束，以及如何请求提高配额
 services: batch
-documentationCenter: 
+documentationCenter: ''
 authors: mmacy
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: batch
 ms.workload: big-compute

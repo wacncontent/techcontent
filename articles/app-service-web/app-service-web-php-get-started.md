@@ -5,7 +5,7 @@ services: app-service\web
 documentationcenter: php
 author: cephalin
 manager: wpickett
-editor: 
+editor: ''
 tags: mysql
 
 ms.assetid: cb73859d-48aa-470a-b486-d984746d6d26

@@ -2,10 +2,10 @@
 title: 排查 Windows VM 分配失败 | Azure
 description: 在 Azure 中创建、重新启动 Windows VM 或调整其大小时排查分配失败
 services: virtual-machines-windows, azure-resource-manager
-documentationCenter: 
+documentationCenter: ''
 authors: jiangchen79
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue,azure-resource-manager,azure-service-management
 
 ms.service: virtual-machines-windows

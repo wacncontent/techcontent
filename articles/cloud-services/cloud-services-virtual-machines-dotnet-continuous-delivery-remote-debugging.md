@@ -5,14 +5,14 @@ services: cloud-services
 documentationCenter: .net
 authors: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-multiple
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 11/08/2016
+ms.date: 11/18/2016
 wacn.date: 01/03/2017
 ms.author: tarcher
 ---

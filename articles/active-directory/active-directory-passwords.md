@@ -2,7 +2,7 @@
 title: Azure AD 密码重置 | Azure
 description: 介绍 Azure AD 中的密码管理功能，包括密码重置、更改、密码管理报告，以及将密码写回到本地 Active Directory。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: asteen
 manager: femila
 editor: curtand

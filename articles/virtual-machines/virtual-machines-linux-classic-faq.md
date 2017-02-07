@@ -2,10 +2,10 @@
 title: 经典 VM 常见问题解答 | Azure
 description: 回答了通过经典部署模型创建的 Azure Linux 虚拟机的一些常见问题。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-linux

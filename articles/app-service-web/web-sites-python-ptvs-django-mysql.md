@@ -5,7 +5,7 @@ services: app-service\web
 documentationcenter: python
 author: huguesv
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: c60a50b5-8b5e-4818-a442-16362273dabb
 ms.service: app-service-web

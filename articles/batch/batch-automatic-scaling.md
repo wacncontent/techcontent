@@ -2,7 +2,7 @@
 title: 自动缩放 Azure Batch 池中的计算节点 | Azure
 description: 对云池启用自动缩放功能可以动态调整池中计算节点的数目。
 services: batch
-documentationCenter: 
+documentationCenter: ''
 authors: mmacy
 manager: timlt
 editor: tysonn

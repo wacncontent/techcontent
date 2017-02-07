@@ -2,10 +2,10 @@
 title: 在 Linux VM 上安装 MongoDB | Azure
 description: 了解如何使用 Resource Manager 部署模型在 Azure 中的 Linux 虚拟机上安装和配置 MongoDB。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: virtual-machines-linux
 ms.devlang: na

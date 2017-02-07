@@ -3,7 +3,7 @@ title: Azure MFA 概述 | Azure
 description: 本主题介绍什么是 Azure 多重身份验证，为何使用 MFA，有关多重身份验证客户端的更多信息，以及可用的不同方法和版本。
 keywords: MFA 简介, mfa 概述, 什么是 mfa
 services: multi-factor-authentication
-documentationcenter: 
+documentationcenter: ''
 author: kgremban
 manager: femila
 editor: yossib
@@ -100,8 +100,8 @@ Azure 多重身份验证有三个不同版本。
 1. 购买 Azure 多重身份验证许可证并将其分配给用户。
 2. 购买随附了 Azure 多重身份验证的许可证（例如 Azure Active Directory Premium、企业移动性套件或企业云套件）并将其分配给用户。
 3. 在 Azure 订阅中创建 Azure 多重身份验证提供程序。使用 Azure 多重身份验证提供程序时，可选择两种使用模式（通过 Azure 订阅计费）：
-    - **按用户**。适用于要为固定数量、需要定期进行身份验证的员工启用双重验证的企业。
-    - **按身份验证**。适用于要为大量的、需要不定期进行身份验证的外部用户启用双重验证的企业。
+   - **按用户**。适用于要为固定数量、需要定期进行身份验证的员工启用双重验证的企业。
+   - **按身份验证**。适用于要为大量的、需要不定期进行身份验证的外部用户启用双重验证的企业。
 
 Azure 多重身份验证为云和服务器提供了可选择的验证方法。这表示可以选择用户可使用的方法：电话呼叫、信息、应用通知或应用代码。有关详细信息，请参阅 [可选择的验证方法](./multi-factor-authentication-whats-next.md#selectable-verification-methods)。
 

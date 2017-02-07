@@ -2,10 +2,10 @@
 title: 如何创建媒体处理器 | Azure
 description: 了解如何创建一个媒体处理器组件来为 Azure 媒体服务编码、转换格式、加密或解密媒体内容。代码示例用 C# 编写且使用适用于 .NET 的媒体服务 SDK。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -2,10 +2,10 @@
 title: 使用 C 和 C++ 连接到 SQL 数据库 | Azure
 description: 使用本快速入门教程中的示例代码，生成一个包含 C++ 代码的新式应用程序，该应用程序由云中强大的关系数据库 Azure SQL 数据库提供支持。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: asthana86
 manager: danmoth
-editor: 
+editor: ''
 
 ms.assetid: 07d9e0b1-3234-4f17-a252-a7559160a9db
 ms.service: sql-database

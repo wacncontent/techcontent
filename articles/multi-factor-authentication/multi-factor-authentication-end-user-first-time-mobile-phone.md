@@ -2,7 +2,7 @@
 title: 在 Azure MFA 中使用手机作为联系方法
 description: 本页说明用户如何使用手机作为 Azure MFA 的主要联系方法。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenp
 editor: curtland

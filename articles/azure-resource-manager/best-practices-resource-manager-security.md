@@ -2,7 +2,7 @@
 title: Resource Manager 的安全注意事项 | Azure
 description: 显示了在 Azure 资源管理器中如何使用建议的方法通过密钥和机密、基于角色的访问控制以及网络安全组来确保资源的安全。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: george-moore
 manager: georgem
 editor: tysonn

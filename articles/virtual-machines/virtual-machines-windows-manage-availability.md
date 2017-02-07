@@ -2,7 +2,7 @@
 title: 管理 Windows VM 的可用性 | Azure
 description: 了解如何使用多个虚拟机确保 Azure 中 Windows 应用程序的高可用性
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

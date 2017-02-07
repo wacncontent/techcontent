@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体服务传送 DRM 许可证或 AES 密钥
 description: 本文介绍如何使用 Azure 媒体服务 (AMS) 传送 PlayReady 和/或 Widevine 许可证与 AES 密钥，但余下的操作（编码、加密、流式传输）使用你的本地服务器完成。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -4,10 +4,10 @@
 title: 在 Windows 中对 Linux VM 使用 SSH 密钥 | Azure
 description: 了解如何在 Windows 计算机上生成和使用 SSH 密钥连接到 Azure 上的 Linux 虚拟机。
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: squillace
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.assetid: 2cacda3b-7949-4036-bd5d-837e8b09a9c8

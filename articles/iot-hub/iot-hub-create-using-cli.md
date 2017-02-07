@@ -5,7 +5,7 @@ services: iot-hub
 documentationcenter: .net
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: ms.service: iot-hub
 ms.devlang: multiple
@@ -27,7 +27,7 @@ ms.author: dobett
 
 可使用以下 CLI 版本之一完成任务：
 
-* [Azure CLI \(azure.js\)](/documentation/articles/iot-hub-create-using-cli-nodejs/)：用于经典部署模型和资源管理部署模型的 CLI。
+* [Azure CLI \(azure.js\)](./iot-hub-create-using-cli-nodejs.md)：用于经典部署模型和资源管理部署模型的 CLI。
 * Azure CLI 2.0（预览版）\(az.py\)：用于本文中所述的资源管理部署模型的下一代 CLI。
 
 要完成本教程，需要具备以下先决条件：
@@ -41,25 +41,35 @@ ms.author: dobett
 
 1. 在命令提示符中，运行 [login 命令][lnk-login-command]：
 
+    ```
     az login
+    ```
 
     按照说明使用代码进行身份验证，并通过 Web 浏览器登录 Azure 帐户。
 
 2. 如果有多个 Azure 订阅，登录 Azure 可获得与凭据关联的所有 Azure 帐户的访问权限。使用以下[命令，列出可供使用的 Azure 帐户][lnk-az-account-command]：
 
+    ```
     az account list 
+    ```
 
     使用以下命令，选择想要用于运行命令以创建 IoT 中心的订阅。可使用上一命令输出中的订阅名称或 ID：
 
+    ```
     az account set --subscription {your subscription name or id}
+    ```
 
 3. 安装 Azure CLI _iot 组件_。运行以下[命令，添加 iot 组件][lnk-az-addcomponent-command]：
 
+    ```
     az component update --add iot
+    ```
 
 4. 必须注册 IoT 提供程序才能部署 IoT 资源。运行以下[命令，注册 IoT 提供程序][lnk-az-register-command]：
 
+    ```
     az provider register -namespace Microsoft.Devices
+    ```
 
 ## 创建 IoT 中心
 
@@ -67,16 +77,20 @@ ms.author: dobett
 
 1. 创建 IoT 中心时，必须在资源组中创建它。使用现有资源组，或运行以下[命令创建资源组][lnk-az-resource-command]：
 
-     az group create --name {your resource group name} --location westus
+    ```
+     az group create --name {your resource group name} --location chinaeast
+    ```
 
     > [!TIP]
-    上一示例在中国西部位置创建资源组。可运行 `az account list-locations -o table` 命令，查看可用位置的列表。
+    上一示例在中国东部位置创建资源组。可运行 `az account list-locations -o table` 命令，查看可用位置的列表。
     >
     >
 
 2. 运行以下[命令，在资源组中创建 IoT 中心][lnk-az-iot-command]：
 
+    ```
     az iot hub create --name {your iot hub name} --resource-group {your resource group name} --sku S1
+    ```
 
 > [!NOTE]
 IoT 中心的名称必须全局唯一。上一命令在计费的 S1 定价层中创建 IoT 中心。有关详细信息，请参阅 [Azure IoT 中心定价][lnk-iot-pricing]。

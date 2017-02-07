@@ -5,7 +5,7 @@ services: active-directory
 documentationCenter: .net
 authors: gsacavdm
 manager: krassk
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

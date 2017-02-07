@@ -242,3 +242,4 @@ ms.author: rclaus
 ```
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: add support for TRIM/UNMAP-->

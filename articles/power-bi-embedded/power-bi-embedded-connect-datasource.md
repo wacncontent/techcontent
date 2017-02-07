@@ -2,20 +2,20 @@
 title: Power BI Embedded - 连接到数据源
 description: Power BI Embedded, 连接到数据源
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: powerbi
-ms.date: 07/05/2016
+ms.date: 10/04/2016
 ms.author: mblythe
-wacn.date: 01/13/2017
+wacn.date: 02/06/2017
 ---
 
 # 连接到数据源

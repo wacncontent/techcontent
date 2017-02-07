@@ -2,7 +2,7 @@
 title: 如何将 Azure Redis 缓存与 Node.js 配合使用 | Azure
 description: 开始将 Azure Redis 缓存与 Node.js 和 node_redis 配合使用。
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
 editor: v-lincan

@@ -2,16 +2,16 @@
 title: 中国区 Azure 应用程序开发说明
 description: 本文主要介绍中国区 Azure 与国际版 Azure 应用程序开发上的区别
 metaKeywords: 中国区 Azure, 开发说明, 境外 Azure, Visual Studio, 资源端点URI, 指南, 云服务, Active Directory, 服务总线, Azure PowerShell, Azure CLI, Azure SDK
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: develop
-authors: 
-solutions: 
+authors: ''
+solutions: ''
 manager: TK
-editor: 
+editor: ''
 
 ms.service: multiple
-ms.date: 
+ms.date: ''
 wacn.date: 11/18/2016
 ---
 

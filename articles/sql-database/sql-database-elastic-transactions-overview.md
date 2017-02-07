@@ -2,7 +2,7 @@
 title: 跨云数据库的分布式事务
 description: Azure SQL 数据库的弹性数据库事务概述
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: torsteng
 manager: jeffreyg
 editor: sidneyh

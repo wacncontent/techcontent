@@ -2,10 +2,10 @@
 title: 将现有 Blob 复制到媒体服务资产中
 description: 本主题说明如何将现有 blob 复制到媒体服务资产。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

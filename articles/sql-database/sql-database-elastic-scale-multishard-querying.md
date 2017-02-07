@@ -2,10 +2,10 @@
 title: 多分片查询 | Azure
 description: 使用弹性数据库客户端库运行跨分片查询。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 manager: jhubbard
 authors: torsteng
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: sql-database

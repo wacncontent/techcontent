@@ -2,10 +2,10 @@
 title: 为 Web 应用程序创建虚拟机 | Azure
 description: 使用 Visual Studio 和 Windows 为 Web 应用程序创建 VM
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: TomArcher
 manager: douge
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows
@@ -13,8 +13,8 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 08/15/2016
-wacn.date: 11/25/2016
+ms.date: 12/09/2016
+wacn.date: 01/25/2017
 ms.author: tarcher
 ---
 

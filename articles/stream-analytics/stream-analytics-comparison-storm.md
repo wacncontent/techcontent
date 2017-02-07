@@ -3,7 +3,7 @@ title: 分析平台：Apache Storm 与流分析之间的比较 | Azure
 description: 使用 Apache Storm 与流分析之间的比较获取有关选择云分析平台的指导。了解功能和区别。
 keywords: 分析平台, 分析平台, 云分析平台, storm 比较
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

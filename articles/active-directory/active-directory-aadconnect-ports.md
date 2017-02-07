@@ -2,7 +2,7 @@
 title: Azure AD Connect：端口 | Azure
 description: 此技术参考页面描述了需要为 Azure AD Connect 打开的端口
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
 editor: curtand

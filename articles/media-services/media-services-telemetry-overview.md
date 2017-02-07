@@ -2,10 +2,10 @@
 title: Azure 媒体服务遥测 | Azure
 description: 本文概述了 Azure 媒体服务遥测。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: 95c20ec4-c782-4063-8042-b79f95741d28
 ms.service: media-services

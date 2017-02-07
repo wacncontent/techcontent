@@ -2,10 +2,10 @@
 title: 如何使用 Azure Redis 缓存 | Azure
 description: 了解如何使用 Azure Redis 缓存提高 Azure 应用程序的性能
 services: redis-cache,app-service
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

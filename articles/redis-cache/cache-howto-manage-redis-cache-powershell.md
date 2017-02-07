@@ -2,10 +2,10 @@
 title: 使用 Azure PowerShell 管理 Azure Redis 缓存 | Azure
 description: 了解如何使用 Azure PowerShell 对 Azure Redis 缓存执行管理任务。
 services: redis-cache
-documentationcenter: 
+documentationcenter: ''
 author: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 1136efe5-1e33-4d91-bb49-c8e2a6dca475
 ms.service: cache
@@ -13,8 +13,8 @@ ms.workload: tbd
 ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
-ms.date: 10/25/2016
-wacn.date: 01/03/2017
+ms.date: 11/28/2016
+wacn.date: 01/25/2017
 ms.author: sdanie
 ---
 

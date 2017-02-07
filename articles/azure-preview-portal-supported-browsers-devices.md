@@ -1,12 +1,12 @@
 ---
 title: 支持的浏览器和设备
 description: 支持的浏览器和设备
-services: 
-documentationCenter: 
+services: ''
+documentationCenter: ''
 authors: flanakin
 writer: flanakin
 manager: lwelicki
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: multiple

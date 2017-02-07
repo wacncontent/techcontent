@@ -2,7 +2,7 @@
 title: 创建和上载 Oracle Linux VHD | Azure
 description: 了解如何创建和上载包含 Oracle Linux 操作系统的 Azure 虚拟硬盘 (VHD)。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: szarkos
 manager: timlt
 editor: tysonn

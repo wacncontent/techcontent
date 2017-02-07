@@ -2,10 +2,10 @@
 title: Azure Batch CLI 入门 | Azure
 description: Azure CLI 中用于管理 Azure Batch 服务资源的 Batch 命令简介
 services: batch
-documentationCenter: 
+documentationCenter: ''
 authors: mmacy
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: batch
 ms.devlang: na

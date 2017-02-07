@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体服务交付按需媒体
 description: 本主题讨论了使用 Azure 媒体服务交付按需媒体的一些常见应用场景。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.date: 06/22/2016

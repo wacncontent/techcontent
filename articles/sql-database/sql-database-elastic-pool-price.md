@@ -2,10 +2,10 @@
 title: SQL 数据库弹性池价格和性能
 description: 特定于弹性数据库池的定价信息。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: sidneyh
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

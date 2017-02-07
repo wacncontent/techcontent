@@ -2,10 +2,10 @@
 title: 流量管理器终结点类型 | Azure
 description: 本文介绍可以通过 Azure 流量管理器来使用的不同类型的终结点
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

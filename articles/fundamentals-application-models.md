@@ -1,11 +1,11 @@
 ---
 title: Azure 提供的计算托管选项
 description: 了解 Azure 计算托管选项及其工作原理：虚拟机、 Web 应用、云服务，等等。
-headerExpose: 
-footerExpose: 
+headerExpose: ''
+footerExpose: ''
 services: cloud-services,virtual-machines
 authors: Thraka
-documentationCenter: 
+documentationCenter: ''
 manager: timlt
 
 ms.service: multiple

@@ -2,7 +2,7 @@
 title: 移动订阅后更改密钥保管库租户 ID | Azure
 description: 了解将订阅移至不同的租户后如何切换密钥保管库的租户 ID
 services: key-vault
-documentationCenter: 
+documentationCenter: ''
 authors: amitbapat
 manager: mbaldwin
 tags: azure-resource-manager

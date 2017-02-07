@@ -2,10 +2,10 @@
 title: 使用资源管理器部署模型将数据还原到 Windows Server 或 Windows 客户端 | Azure
 description: 了解如何从 Windows Server 或 Windows 客户端还原。
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: saurabhsensharma
 manager: shivamg
-editor: 
+editor: ''
 
 ms.assetid: 742f4b9e-c0ab-4eeb-8e22-ee29b83c22c4
 ms.service: backup

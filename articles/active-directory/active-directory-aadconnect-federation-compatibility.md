@@ -2,7 +2,7 @@
 title: Azure AD 联合身份验证兼容性列表
 description: 本页列出了可用于实现单一登录的非 Microsoft 标识提供者。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: femila
 editor: curtand

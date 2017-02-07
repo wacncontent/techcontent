@@ -3,7 +3,7 @@ title: 在流分析中使用引用数据和查找表 | Azure
 description: 在流分析查询中使用引用数据
 keywords: 查找表, 引用数据
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

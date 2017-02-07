@@ -2,13 +2,13 @@
 title: 释放虚拟磁盘未使用空间来减少计费容量
 description: 如何释放未使用的虚拟磁盘空间来减少费用
 services: virtual machine
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: billing-aog
-ms.date: 
+ms.date: ''
 wacn.date: 05/27/2016
 ---
 

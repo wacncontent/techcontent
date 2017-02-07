@@ -1,15 +1,15 @@
 ---
 title: Nodejs-计算 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: Nodejs-计算 - Azure 微软云
-services: 
+services: ''
 documentationCenter: nodejs
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 04/07/2016
 ---
 

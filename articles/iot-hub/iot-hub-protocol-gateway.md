@@ -2,10 +2,10 @@
 title: Azure IoT 协议网关 | Azure
 description: 如何使用 Azure IoT 协议网关扩展 IoT 中心功能及协议支持，使设备利用不由 IoT 中心本机支持的协议即可连接到该中心。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: kdotchkoff
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 555e59ae-3136-4533-8ba8-f3a3b6acf648
 ms.service: iot-hub

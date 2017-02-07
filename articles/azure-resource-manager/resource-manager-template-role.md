@@ -5,7 +5,7 @@ services: azure-resource-manager
 documentationcenter: na
 author: tfitzmac
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: d9541169-00d1-4497-b57f-68896d51849b
 ms.service: azure-resource-manager

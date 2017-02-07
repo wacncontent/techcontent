@@ -2,10 +2,10 @@
 title: Azure SQL 数据库 JSON 功能 | Azure
 description: 通过 Azure SQL 数据库，可对采用 JavaScript 对象表示法 (JSON) 的数据进行分析、查询和格式设置。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: jovanpop-msft
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 55860105-2f5f-4b10-87a0-99faa32b5653
 ms.service: sql-database

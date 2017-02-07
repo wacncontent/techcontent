@@ -5,7 +5,7 @@ services: load-balancer
 documentationCenter: na
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: load-balancer

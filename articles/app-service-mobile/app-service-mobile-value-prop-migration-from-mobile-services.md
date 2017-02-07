@@ -5,7 +5,7 @@ services: app-service\mobile
 documentationCenter: ios
 authors: adrianhall
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

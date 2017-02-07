@@ -2,13 +2,13 @@
 title: 使用 Zabbix 监控 Nginx
 description: 本文介绍在 Azure Linux 虚拟机上使用 Zabbix 监控 Nginx
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

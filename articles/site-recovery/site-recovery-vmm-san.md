@@ -2,10 +2,10 @@
 title: 通过 Azure Site Recovery 使用 SAN 将 VMM 云中的 Hyper-V VM 复制到辅助站点 | Azure
 description: 本文介绍了如何通过 Azure Site Recovery 使用 SAN 复制在两个站点之间复制 Hyper-V 虚拟机。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: eb480459-04d0-4c57-96c6-9b0829e96d65
 ms.service: site-recovery

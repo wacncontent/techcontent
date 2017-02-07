@@ -1,11 +1,11 @@
 ---
 title: Azure 可用性集指导原则 | Azure
 description: 了解用于在 Azure 基础结构服务中部署可用性集的关键设计和实施准则。
-documentationcenter: 
+documentationcenter: ''
 services: virtual-machines-windows
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: f9449f58-664b-4d5d-82f6-84c5d083047f
@@ -52,3 +52,4 @@ Azure 中的底层基础结构分为更新域和容错域。这些域是按共�
 [!INCLUDE [virtual-machines-windows-infrastructure-guidelines-next-steps](../../includes/virtual-machines-windows-infrastructure-guidelines-next-steps.md)]
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & add information about storage limitation when adding VHDs-->

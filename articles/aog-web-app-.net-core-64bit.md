@@ -2,11 +2,11 @@
 title: 在 Azure WebApps 中运行64位 Asp.net Core 应用
 description: 在 Azure WebApps 中运行64位 Asp.net Core 应用
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: app-service-web-aog
 ms.date: 10/27/2016

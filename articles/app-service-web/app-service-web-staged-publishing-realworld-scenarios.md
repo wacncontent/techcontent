@@ -2,10 +2,10 @@
 title: 对 Web 应用有效使用 DevOps 环境 | Azure
 description: 了解如何使用部署槽来设置和管理应用程序的多个开发环境
 services: app-service\web
-documentationcenter: 
+documentationcenter: ''
 author: sunbuild
 manager: yochayk
-editor: 
+editor: ''
 
 ms.assetid: 16a594dc-61f5-4984-b5ca-9d5abc39fb1e
 ms.service: app-service

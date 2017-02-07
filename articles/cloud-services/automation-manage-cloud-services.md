@@ -2,10 +2,10 @@
 title: 使用 Azure 自动化管理 Azure 云服务 | Azure
 description: 了解如何使用 Azure 自动化服务管理大规模 Azure 云服务。
 services: cloud-services, automation
-documentationCenter: 
+documentationCenter: ''
 authors: jodoglevy
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

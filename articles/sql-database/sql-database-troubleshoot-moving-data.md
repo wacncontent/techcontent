@@ -2,10 +2,10 @@
 title: 在服务器之间或订阅之间移动数据库，以及将数据库移入和移出 Azure。
 description: 在 Azure SQL 数据库中复制、移动和迁移数据与数据库的快速步骤。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: v-shysun
 manager: felixwu
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.workload: data-management

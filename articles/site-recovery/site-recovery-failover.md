@@ -2,10 +2,10 @@
 title: Site Recovery 中的故障转移 | Azure
 description: Azure Site Recovery 可以协调虚拟机和物理服务器的复制、故障转移与恢复。了解有关故障转移到 Azure 或辅助数据中心的信息。
 services: site-recovery
-documentationCenter: 
+documentationCenter: ''
 authors: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: site-recovery
 ms.devlang: na

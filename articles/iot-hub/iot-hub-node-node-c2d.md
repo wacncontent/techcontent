@@ -5,7 +5,7 @@ services: iot-hub
 documentationcenter: nodejs
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 3ca8a78f-ade2-46e8-8a49-d5d599cdf1f1
 ms.service: iot-hub
@@ -86,6 +86,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万台设备�
     ```
     npm init
     ```
+
 2. 在命令提示符下的 **sendcloudtodevicemessage** 文件夹中，运行以下命令以安装 **azure-iothub** 包：
 
     ```
@@ -110,6 +111,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万台设备�
 
     var serviceClient = Client.fromConnectionString(connectionString);
     ```
+
 6. 添加以下函数，以便在控制台中列显操作结果：
 
     ```
@@ -120,6 +122,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万台设备�
       };
     }
     ```
+
 7. 添加以下函数，以便在控制台中列显送达反馈消息：
 
     ```
@@ -130,6 +133,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万台设备�
       });
     }
     ```
+
 8. 添加以下代码，以便在设备确认收到云到设备的消息时将消息发送到设备，并处理反馈消息：
 
     ```
@@ -147,6 +151,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万台设备�
       }
     });
     ```
+
 9. 保存并关闭 **SendCloudToDeviceMessage.js** 文件。
 
 ## 运行应用程序

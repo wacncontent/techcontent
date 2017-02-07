@@ -2,7 +2,7 @@
 title: Azure VM 上的 Windows Server Active Directory | Azure
 description: 你可以在 Azure 虚拟机上运行 Windows Server Active Directory 域服务 (AD DS) 或 Active Directory 联合身份验证服务 (AD FS)。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
 tags: azure-classic-portal

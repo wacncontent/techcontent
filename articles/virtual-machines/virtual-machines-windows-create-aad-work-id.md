@@ -2,10 +2,10 @@
 title: 在 AAD 中创建工作或学校标识 | Azure
 description: 了解如何在 Azure Active Directory 中创建工作或学校标识以配合 Windows 虚拟机使用。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: squillace
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-windows

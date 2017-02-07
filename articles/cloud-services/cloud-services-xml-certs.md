@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: .net
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.date: 07/24/2015

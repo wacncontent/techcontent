@@ -2,10 +2,10 @@
 title: 配置流量管理器路由方法 | Azure
 description: 本文介绍如何在流量管理器中配置不同的路由方法
 services: traffic-manager
-documentationcenter: 
+documentationcenter: ''
 author: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.assetid: 6dca6de1-18f7-4962-bd98-6055771fab22
 ms.service: traffic-manager

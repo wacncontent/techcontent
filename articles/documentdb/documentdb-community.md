@@ -2,7 +2,7 @@
 title: DocumentDB 社区和新闻 | Azure
 description: 加入 Azure DocumentDB 社区，在这里建立关系网，展示你的工作，磨练你的技能。
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: aliuy
 manager: jhubbard
 editor: mimig

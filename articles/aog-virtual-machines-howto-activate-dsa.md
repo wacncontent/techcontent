@@ -2,10 +2,10 @@
 title: 如何激活 Trend Micro Deep Sercurity for Azure
 description: 如何激活使用趋势科技的 DSA 
 services: virtual-machines
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Azure VM,DSA,Trend Micro
 
 ms.service: virtual-machines-aog

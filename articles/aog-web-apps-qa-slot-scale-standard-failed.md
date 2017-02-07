@@ -2,10 +2,10 @@
 title: 含有部署槽的标准网站无法缩放到基本模式
 description: Web 应用删除部署槽后从标准模式缩放到基本模式
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: Azure,Web 应用,缩放,Portal
 
 ms.service: app-service-web-aog

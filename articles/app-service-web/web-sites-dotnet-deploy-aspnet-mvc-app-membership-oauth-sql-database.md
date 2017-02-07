@@ -6,7 +6,7 @@ documentationCenter: .net
 authors: Rick-Anderson
 writer: Rick-Anderson
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

@@ -3,7 +3,7 @@ title: 数据连接：事件流中的数据流输入 | Azure
 description: 了解如何设置连接到流分析的名为“输入”的数据连接。输入包括来自事件的数据流，也包括引用数据。
 keywords: 数据流、数据连接、事件流
 services: stream-analytics
-documentationCenter: 
+documentationCenter: ''
 authors: jeffstokes72
 manager: jhubbard
 editor: cgronlun

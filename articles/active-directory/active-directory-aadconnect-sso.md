@@ -3,7 +3,7 @@ title: Azure AD Connect：单一登录 | Azure
 description: 本主题介绍了你需要了解的如何从本地 Active Directory (AD) 单一登录到基于云的 Azure Active Directory (Azure AD) 和连接的服务的信息。
 services: active-directory
 keywords: 什么是 Azure AD Connect, 安装 Active Directory, Azure AD 所需的组件, SSO, 单一登录
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
 

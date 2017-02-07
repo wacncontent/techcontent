@@ -3,58 +3,59 @@ title: 使用 Azure CLI 管理 Hadoop 群集 | Azure
 description: 如何使用 Azure CLI 管理 HDInsight 中的 Hadoop 群集
 services: hdinsight
 editor: cgronlun
-manager: paulettm
-authors: mumian
+manager: jhubbard
+author: mumian
 tags: azure-portal
-documentationCenter: 
+documentationcenter: ''
 
+ms.assetid: 4f26c79f-8540-44bd-a470-84722a9e4eca
 ms.service: hdinsight
 ms.workload: big-data
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 11/15/2016
-wacn.date: 12/30/2016
+wacn.date: 01/25/2017
 ms.author: jgao
 ---
 
 # 使用 Azure CLI 管理 HDInsight 中的 Hadoop 群集
-
 [!INCLUDE [选择器](../../includes/hdinsight-portal-management-selector.md)]
 
 [!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-了解如何使用 [Azure 命令行接口](../xplat-cli-install.md)管理 Azure HDInsight 中的 Hadoop 群集。Azure CLI 在 Node.js 中实现。可以在支持 Node.js 的任意平台上使用。
+了解如何使用 [Azure 命令行接口](../xplat-cli-install.md)管理 Azure HDInsight 中的 Hadoop 群集。Azure CLI 是以 Node.js 实现的。可以在支持 Node.js 的任意平台（包括 Windows、Mac 和 Linux）上使用它。
 
 本文仅介绍如何将 Azure CLI 与 HDInsight 配合使用。有关如何使用 Azure CLI 的常规指南，请参阅[安装和配置 Azure CLI][azure-command-line-tools]。
 
 [!INCLUDE [use-latest-version](../../includes/hdinsight-use-latest-cli.md)]
 
 ## 先决条件
+在开始阅读本文前，你必须具有：
 
-开始阅读本文之前，必须具备以下条件：
-
-- **Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
-- **Azure CLI** - 有关安装和配置信息，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)。
-- 使用以下命令**连接到 Azure**：
+* **一个 Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
+* **Azure CLI** - 有关安装和配置信息，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)。
+* 使用以下命令**连接到 Azure**：
 
     ```
-    azure config mode asm
     azure login -e AzureChinaCloud
     ```
 
-    > [!NOTE]
-    > 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
+    有关使用公司或学校帐户进行身份验证的详细信息，请参阅[从 Azure CLI 连接到 Azure 订阅](../xplat-cli-connect.md)。
+* 使用以下命令**切换到 Azure 资源管理器模式**：
 
-要获取帮助，请使用 **-h** 开关。例如：
+    ```
+    azure config mode arm
+    ```
+
+若要获得帮助，请使用 **-h** 开关。例如：
 
 ```
 azure hdinsight cluster create -h
 ```
 
 ## 创建群集
-
-请参阅[使用 Azure CLI 在 HDInsight 中创建基于 Windows 的 Hadoop 群集](./hdinsight-hadoop-create-windows-clusters-cli.md)。
+请参阅[使用 Azure CLI 在 HDInsight 中创建基于 Linux 的群集](./hdinsight-hadoop-create-linux-clusters-azure-cli.md)。
 
 ## 列出并显示群集详细信息
 使用以下命令列出并显示群集详细信息：
@@ -66,17 +67,42 @@ azure hdinsight cluster show <Cluster Name>
 
 ![HDI.CLIListCluster][image-cli-clusterlisting]
 
-## 删除群集
-使用以下命令删除群集：
+## <a name="delete-clusters"></a> 删除群集
+使用以下命令来删除群集：
 
 ```
 azure hdinsight cluster delete <Cluster Name>
 ```
 
+还可以通过删除包含群集的资源组来删除群集。请注意，这将删除包括默认存储帐户的组中的所有资源。
+
+```
+azure group delete <Resource Group Name>
+```
+
+## <a name="scale-clusters"></a> 缩放群集
+若要更改 Hadoop 群集大小，请执行以下操作：
+
+```
+azure hdinsight cluster resize [options] <clusterName> <Target Instance Count>
+```
+
+## <a name="enabledisable-http-access-for-a-cluster"></a> 启用/禁用对群集的 HTTP 访问
+```
+azure hdinsight cluster enable-http-access [options] <Cluster Name> <userName> <password>
+azure hdinsight cluster disable-http-access [options] <Cluster Name>
+```
+
+## 启用/禁用对群集的 RDP 访问
+```
+  azure hdinsight cluster enable-rdp-access [options] <Cluster Name> <rdpUserName> <rdpPassword> <rdpExpiryDate>
+  azure hdinsight cluster disable-rdp-access [options] <Cluster Name>
+```
+
 ## 后续步骤
 在本文中，已了解如何执行不同的 HDInsight 群集管理任务。要了解更多信息，请参阅下列文章：
 
-* [使用 Azure 经典管理门户管理 HDInsight][hdinsight-admin-portal]
+* [使用 Azure 门户预览管理 HDInsight][hdinsight-admin-portal]
 * [使用 Azure PowerShell 管理 HDInsight][hdinsight-admin-powershell]
 * [Azure HDInsight 入门][hdinsight-get-started]
 * [如何使用 Azure CLI][azure-command-line-tools]
@@ -87,13 +113,13 @@ azure hdinsight cluster delete <Cluster Name>
 [azure-member-offers]: https://www.azure.cn/pricing/member-offers/
 [azure-trial]: https://www.azure.cn/pricing/1rmb-trial/
 
-[hdinsight-admin-portal]: ./hdinsight-administer-use-management-portal-v1.md
+[hdinsight-admin-portal]: ./hdinsight-administer-use-management-portal.md
 [hdinsight-admin-powershell]: ./hdinsight-administer-use-powershell.md
-[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-get-started]: ./hdinsight-hadoop-linux-tutorial-get-started.md
 
 [image-cli-account-download-import]: ./media/hdinsight-administer-use-command-line/HDI.CLIAccountDownloadImport.png
 [image-cli-clustercreation]: ./media/hdinsight-administer-use-command-line/HDI.CLIClusterCreation.png
 [image-cli-clustercreation-config]: ./media/hdinsight-administer-use-command-line/HDI.CLIClusterCreationConfig.png
 [image-cli-clusterlisting]: ./media/hdinsight-administer-use-command-line/HDI.CLIListClusters.png "列出并显示群集"
 
-<!---HONumber=Mooncake_Quality_Review_1202_2016-->
+<!---HONumber=Mooncake_0120_2017-->

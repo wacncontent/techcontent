@@ -2,10 +2,10 @@
 title: v2.0 终结点概述 | Azure
 description: 使用 Microsoft 帐户和 Azure Active Directory 登录的构建应用简介。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

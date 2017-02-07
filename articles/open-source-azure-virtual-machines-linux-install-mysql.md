@@ -2,13 +2,13 @@
 title: 在 Azure Linux 虚拟机上安装 MySQL
 description: 了解如何在 Azure Linux 虚拟机上安装 MySQL
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

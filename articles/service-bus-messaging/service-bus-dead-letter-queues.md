@@ -1,20 +1,20 @@
 ---
-title: 服务总线死信队列 | Microsoft Azure
+title: 服务总线死信队列 | Azure
 description: Azure 服务总线死信队列概述
 services: service-bus
 documentationCenter: .net
 authors: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-bus
 ms.date: 10/03/2016
-wacn.date: 12/02/2016
+wacn.date: 02/06/2017
 ---
 
 # 服务总线死信队列概述
 
-服务总线队列和主题订阅提供了一个辅助子队列，称为死信队列 (DLQ)。死信队列不需要显式创建，并且不能删除或以其他方式独立于主实体进行管理。
+服务总线队列和主题订阅提供了一个辅助子队列，称为*死信队列* (DLQ)。死信队列不需要显式创建，并且不能删除或以其他方式独立于主实体进行管理。
 
 死信队列的用途是存放无法传递给任何接收方的消息或只是存放无法处理的消息。然后，可从 DLQ 中删除和检查这些消息。应用程序可能会在操作员的帮助下，更正问题并重新提交消息，记录出错的实际情况和/或执行更正操作。
 
@@ -87,4 +87,4 @@ while(true)
 - [服务总线队列入门](./service-bus-dotnet-get-started-with-queues.md)
 - [比较 Azure 队列和服务总线队列](./service-bus-azure-and-service-bus-queues-compared-contrasted.md)
 
-<!---HONumber=Mooncake_0328_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

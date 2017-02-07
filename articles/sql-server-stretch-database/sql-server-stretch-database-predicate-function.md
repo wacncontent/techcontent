@@ -2,10 +2,10 @@
 title: 使用筛选器函数来选择要迁移的行 (Stretch Database) | Azure
 description: 了解如何使用筛选器函数来选择要迁移的行。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

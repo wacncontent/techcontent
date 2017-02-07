@@ -2,7 +2,7 @@
 title: 云业务连续性 - 还原已删除的数据库 - SQL 数据库 | Azure
 description: 了解时间点还原，通过此服务可将 Azure SQL 数据库回滚到之前的时间点（最多 35 天）。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: stevestein
 manager: jhubbard
 editor: monicar

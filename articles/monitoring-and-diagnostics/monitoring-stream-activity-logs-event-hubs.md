@@ -3,7 +3,7 @@ title: 将 Azure 活动日志流式传输到事件中心 | Azure
 description: 了解如何将 Azure 活动日志流式传输到事件中心。
 authors: johnkemnetz
 manager: rboucher
-editor: 
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

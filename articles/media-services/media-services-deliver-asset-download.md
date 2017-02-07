@@ -2,10 +2,10 @@
 title: 下载媒体资产
 description: 了解如何将资产下载到计算机。代码示例用 C# 编写且使用适用于 .NET 的媒体服务 SDK。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

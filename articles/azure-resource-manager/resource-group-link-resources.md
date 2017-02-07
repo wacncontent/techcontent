@@ -2,7 +2,7 @@
 title: Azure Resource Manager 中的链接资源 | Azure
 description: 在 Azure Resource Manager 的不同资源组中的相关资源之间创建链接。
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn

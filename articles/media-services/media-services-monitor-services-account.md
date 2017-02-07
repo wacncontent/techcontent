@@ -2,10 +2,10 @@
 title: 监视媒体服务帐户
 description: 介绍如何在 Azure 中为媒体服务帐户配置监视。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.date: 06/22/2016

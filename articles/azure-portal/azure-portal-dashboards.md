@@ -2,7 +2,7 @@
 title: Azure 门户仪表板 |Azure
 description: 本文介绍如何在 Azure 门户中创建和编辑仪表板。
 services: azure-portal
-documentationCenter: 
+documentationCenter: ''
 authors: sewatson
 manager: timlt
 editor: tysonn

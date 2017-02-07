@@ -2,13 +2,13 @@
 title: 在 Azure Linux 虚拟机上配置 Redis 集群 | Azure
 description: 本文档介绍如何在 Azure Linux 虚拟机上安装配置免费的 Redis 集群。
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

@@ -1,14 +1,14 @@
 ---
 title: 使用 Azure Java SDK 管理 VM
 description: 本文介绍如何使用 Azure Java SDK 管理 VM
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-machine-aog
-ms.date: 
+ms.date: ''
 wacn.date: 07/29/2016
 ---
 

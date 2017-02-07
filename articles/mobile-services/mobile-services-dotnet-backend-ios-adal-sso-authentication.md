@@ -4,7 +4,7 @@ description: 了解如何使用 iOS 应用程序中的 ADAL 对单一登录用�
 documentationCenter: ios
 authors: mattchenderson
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

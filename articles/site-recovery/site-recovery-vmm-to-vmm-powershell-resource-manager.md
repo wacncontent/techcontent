@@ -2,7 +2,7 @@
 title: 使用 PowerShell (Resource Manager) 将 VMM 云中的 Hyper-V 虚拟机复制到辅助 VMM 站点 | Azure
 description: 介绍如何部署 Azure Site Recovery，以便使用 PowerShell (Resource Manager) 来协调 VMM 云中 Hyper-V VM 到辅助 VMM 站点的复制、故障转移和恢复
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: sujaytalasila
 manager: rochakm
 editor: raynew

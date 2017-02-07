@@ -4,7 +4,7 @@ description: 有关如何在 Azure 虚拟机中设置和实施 Oracle 数据防�
 services: virtual-machines-windows
 authors: rickstercdn
 manager: timlt
-documentationCenter: 
+documentationCenter: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

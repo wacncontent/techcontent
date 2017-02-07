@@ -5,15 +5,15 @@ services: cloud-services
 documentationCenter: .net
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 09/06/2016
-wacn.date: 12/12/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: adegeo
 ---
 
@@ -83,3 +83,4 @@ public override bool OnStart()
 了解如何[创建云服务包](./cloud-services-model-and-package.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->
+<!--Update_Description:update meta properties-->

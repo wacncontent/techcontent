@@ -2,10 +2,10 @@
 title: 在 Azure 中使用 DPM/Azure 备份服务器保护 SharePoint 场 | Azure
 description: 本文概述如何在 Azure 中使用 DPM/Azure 备份服务器保护 SharePoint 场
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: adigan
 manager: Nkolli1
-editor: 
+editor: ''
 
 ms.service: backup
 ms.workload: storage-backup-recovery

@@ -1,20 +1,20 @@
 ---
 title: 保护物联网部署 | Azure
 description: 本文详细说明如何保护你的 IoT 部署
-services: 
+services: ''
 suite: iot-suite
-documentationCenter: 
+documentationCenter: ''
 authors: YuriDio
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-suite
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/17/2016
-wacn.date: 10/31/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: yurid
 ---
 
@@ -30,3 +30,4 @@ ms.author: yurid
 [lnk-faq]: ./iot-suite-faq.md
 
 <!---HONumber=Mooncake_0829_2016-->
+<!--Update_Description:update meta properties-->

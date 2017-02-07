@@ -2,7 +2,7 @@
 title: 在 Azure 中创建和上载基于 CentOS 的 Linux VHD
 description: 了解如何创建和上载包含基于 CentOS 的 Linux 操作系统的 Azure 虚拟硬盘 (VHD)。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: szarkos
 manager: timlt
 editor: tysonn

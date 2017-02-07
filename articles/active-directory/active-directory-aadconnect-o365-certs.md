@@ -2,7 +2,7 @@
 title: Office 365 和 Azure AD 用户证书续订指南 | Azure
 description: 本文向 Office 365 用户说明了如何解决向其发送证书续订通知的电子邮件的问题。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtand

@@ -6,7 +6,7 @@ documentationCenter: .net
 keywords: 推送通知,push notification,计划推送通知
 authors: wesmc7777
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: notification-hubs
 ms.workload: mobile

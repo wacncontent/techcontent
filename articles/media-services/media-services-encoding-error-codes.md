@@ -2,10 +2,10 @@
 title: 编码错误代码 | Azure
 description: 本主题列出了在执行编码任务期间发生错误时可能返回的错误代码。
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 author: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.assetid: ce4e939f-5aee-41f9-859d-e4429815e9f2
 ms.service: media-services

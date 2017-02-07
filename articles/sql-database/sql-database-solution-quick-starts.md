@@ -2,18 +2,20 @@
 title: Azure SQL 数据库解决方案快速入门 | Azure
 description: 了解 Azure SQL 数据库解决方案
 services: sql-database
-documentationCenter: 
-authors: CarlRabeler
+documentationcenter: ''
+author: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
+ms.assetid: 21399478-6296-4ad3-bde2-5e14ee49a8eb
 ms.service: sql-database
+ms.custom: overview
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: sqldb-quickstart
-ms.date: 09/06/2016
-wacn.date: 12/26/2016
+ms.date: 01/10/2017
+wacn.date: 01/25/2017
 ms.author: carlrab
 ---
 
@@ -72,4 +74,4 @@ Code First 允许使用 C# 或 Visual Basic .NET 类定义模型。可以在类�
 
 [浏览 Azure SQL 数据库教程](./sql-database-explore-tutorials.md)
 
-<!---HONumber=Mooncake_Quality_Review_1215_2016-->
+<!---HONumber=Mooncake_0120_2017-->

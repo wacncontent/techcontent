@@ -2,10 +2,10 @@
 title: Azure AD Connect 同步：了解用户和联系人 | Azure
 description: 介绍 Azure AD Connect 同步中的用户和联系人。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

@@ -2,10 +2,10 @@
 title: SQL 数据库备份 - 自动、异地冗余 | Azure
 description: SQL 数据库每隔数分钟自动创建一个本地数据库备份，并使用 Azure 读取访问异地冗余存储来提供异地冗余。
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 author: anosov1960
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 3ee3d49d-16fa-47cf-a3ab-7b22aa491a8d
 ms.service: sql-database

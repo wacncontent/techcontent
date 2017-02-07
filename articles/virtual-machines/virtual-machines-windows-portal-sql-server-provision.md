@@ -4,7 +4,7 @@ description: 使用门户在 Azure 中创建并连接到 SQL Server 虚拟机。
 services: virtual-machines-windows
 documentationCenter: na
 authors: rothja
-editor: 
+editor: ''
 manager: jhubbard
 tags: azure-resource-manager
 

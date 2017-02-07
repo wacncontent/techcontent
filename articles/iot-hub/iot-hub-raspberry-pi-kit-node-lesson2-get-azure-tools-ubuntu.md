@@ -2,10 +2,10 @@
 title: 获取 Azure 工具 (Ubuntu 16.04) | Azure
 description: 在 Ubuntu 上安装 Python 和 Azure 命令行接口 (Azure CLI)。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: iot 云服务, azure cli
 
 ms.assetid: 2f98923a-5274-4220-87d4-77ac8beb4d0f

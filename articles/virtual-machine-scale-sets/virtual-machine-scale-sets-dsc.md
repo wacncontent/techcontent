@@ -2,12 +2,12 @@
 title: 将 Desired State Configuration 与虚拟机规模集配合使用 | Azure
 description: 将虚拟机规模集与 Azure DSC 扩展配合使用
 services: virtual-machine-scale-sets
-documentationCenter: 
+documentationCenter: ''
 authors: zjalexander
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
-keywords: 
+keywords: ''
 
 ms.service: virtual-machine-scale-sets
 ms.devlang: na

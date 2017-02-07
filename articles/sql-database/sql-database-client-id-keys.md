@@ -2,11 +2,11 @@
 title: 获取对应用程序进行身份验证所需的值以便通过代码访问 SQL 数据库 | Azure
 description: 创建服务主体以便通过代码访问 SQL 数据库。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: sql-database
 ms.devlang: na

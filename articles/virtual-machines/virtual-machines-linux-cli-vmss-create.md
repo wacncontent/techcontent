@@ -3,7 +3,7 @@ title: 什么是 VM 规模集？| Azure
 description: 了解 VM 规模集。
 keywords: linux 虚拟机, 虚拟机规模集
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: gatneil
 manager: madhana
 editor: tysonn

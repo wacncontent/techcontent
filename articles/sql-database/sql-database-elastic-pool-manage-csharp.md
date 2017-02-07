@@ -2,10 +2,10 @@
 title: 使用 C# 监视和管理弹性数据库池 | Azure
 description: 使用 C# 数据库开发技术来管理 Azure SQL 数据库弹性数据库池。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: stevestein
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

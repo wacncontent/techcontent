@@ -2,10 +2,10 @@
 title: 如何使用 Azure 命令行界面 (Azure CLI) 创建和管理 Azure Redis 缓存
 description: 了解如何在任何平台上安装 Azure CLI、如何使用它连接到你的 Azure 帐户，以及如何从 Azure CLI 创建和管理 Redis 缓存。
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

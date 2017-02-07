@@ -2,7 +2,7 @@
 title: 使用 MSDeploy、主机名和 SSL 证书部署 Web 应用
 description: 通过使用 MSDeploy 并设置自定义主机名和 SSL 证书，在 Azure 资源管理器模板中部署 Web 应用
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: jodehavi
 
 ms.service: app-service-web

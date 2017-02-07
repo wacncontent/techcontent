@@ -2,20 +2,20 @@
 title: 通过 Power BI Embedded 进行身份验证和授权
 description: 通过 Power BI Embedded 进行身份验证和授权
 services: power-bi-embedded
-documentationCenter: 
+documentationCenter: ''
 authors: mgblythe
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 
 ms.service: power-bi-embedded
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: powerbi
-ms.date: 07/26/2016
+ms.date: 10/04/2016
 ms.author: mblythe
-wacn.date: 01/13/2017
+wacn.date: 02/06/2017
 ---
 
 # 通过 Power BI Embedded 进行身份验证和授权

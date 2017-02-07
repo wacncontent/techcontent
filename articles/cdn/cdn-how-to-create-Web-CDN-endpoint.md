@@ -4,14 +4,14 @@ urlDisplayName: CDN
 title: How to create Web acceleration type CDN - Azure feature guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN加速, CDN服务, 主流CDN, Web加速, Web, 网页加速, 静态加速, 缓存规则, 图片加速, CDN技术文档, CDN帮助文档, 门户网站加速
 description: Learn How to create Web acceleration type CDN on Azure Management Portal and default caching rules for Web CDN
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn
 ms.date: 7/7/2016
@@ -76,6 +76,6 @@ Azure CDN针对Web加速设置了默认缓存规则（见下文）。您也可�
 终结点创建后将出现在订阅的终结点的列表中。列表视图显示了用于访问缓存内容的自定义域以及原始域。
 原始域是 CDN 所缓存内容的原始位置。自定义域是用于访问CDN缓存内容的URL。
 
-    ![004](./media/cdn-doc/004.png)
+   ![004](./media/cdn-doc/004.png)
 
 >**注意** 为终结点创建的配置将不能立即可用，需要审核所提供的ICP自定义域名和ICP编号是否匹配，详情请参考[使用Azure CDN](./cdn-how-to-use.md)中步骤2：创建新的CDN终结点的后半部分。

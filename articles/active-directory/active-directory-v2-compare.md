@@ -2,10 +2,10 @@
 title: Azure AD v2.0 终结点 | Azure
 description: 原始 Azure AD 终结点与 v2.0 终结点之间的比较。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

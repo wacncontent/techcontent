@@ -2,13 +2,13 @@
 title: 构建网站集群 | Azure
 description: 本文介绍如何构建大规模网站集群，考虑将网站架构的各个模块解耦，服务化，做到整体水平扩展，支持高并发，大流量的访问。
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

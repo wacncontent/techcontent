@@ -2,7 +2,7 @@
 title: 在 Azure Multi-Factor Authentication 中使用通知登录到移动应用
 description: 本页介绍用户如何在 Azure MFA 中使用移动应用通知登录。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtland

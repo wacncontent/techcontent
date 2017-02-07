@@ -5,7 +5,7 @@ services: service-fabric
 documentationCenter: na
 authors: cawams
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.devlang: dotnet

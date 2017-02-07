@@ -2,7 +2,7 @@
 title: Azure Site Recovery 部署先决条件 | Azure
 description: 本文介绍通过 Azure Site Recovery 进行复制设置的先决条件。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
 editor: tysonn

@@ -2,7 +2,7 @@
 title: Azure 应用服务上的操作系统功能
 description: 了解 Azure 应用服务上可供 Web 应用、移动应用后端和 API 应用使用的 OS 功能
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
 editor: mollybos

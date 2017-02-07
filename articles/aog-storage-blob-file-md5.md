@@ -2,10 +2,10 @@
 title: 如何调用 API 获取 Azure 文件存储中文件的 MD5 
 description: Azure storage file中api获取不到MD5的问题解释。
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: File存储,Blob存储,MD5,API
 
 ms.service: storage-aog

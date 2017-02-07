@@ -2,11 +2,11 @@
 title: 应用程序网关中如何获取访问者源 IP
 description: 介绍如何在应用程序网关中获取访问者源 IP。
 services: application-gateway
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: application-gateway-aog
 ms.date: 10/27/2016

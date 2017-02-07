@@ -2,10 +2,10 @@
 title: OS 平台和硬件兼容性 | Azure
 description: 总结 IoT 设备 SDK 与 OS 平台和设备硬件的兼容性。
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: hegate
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: na

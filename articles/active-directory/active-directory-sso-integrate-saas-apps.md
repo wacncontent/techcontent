@@ -3,10 +3,10 @@ title: 将 Azure Active Directory 单一登录与 SaaS 应用相集成 | Azure
 description: 为 Azure Active Directory 中的 SaaS 应用启用单一登录身份验证和用户预配集中式访问管理。有关如何将 Azure Active Directory 集成到 SaaS 应用的概述。
 services: active-directory
 keywords: 将 Azure AD 与 SaaS 应用相集成
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.devlang: na

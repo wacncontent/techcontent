@@ -4,7 +4,7 @@ description: 了解在通用 Windows 应用程序中同步脱机数据时如何�
 documentationCenter: windows
 authors: wesmc7777
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

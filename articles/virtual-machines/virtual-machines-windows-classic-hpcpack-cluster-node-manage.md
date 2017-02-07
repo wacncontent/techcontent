@@ -2,10 +2,10 @@
 title: 管理 HPC Pack 群集计算节点 | Azure
 description: 了解 PowerShell 脚本工具如何添加、删除、启动和停止 Azure 的 HPC Pack 群集计算节点
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: dlepow
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,hpc-pack
 
 ms.service: virtual-machines-windows

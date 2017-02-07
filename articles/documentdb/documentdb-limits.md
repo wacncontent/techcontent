@@ -5,7 +5,7 @@ services: documentdb
 author: mimig1
 manager: jhubbard
 editor: cgronlun
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: a6d6e636-33d6-4617-8e97-d78a75696c39
 ms.service: documentdb

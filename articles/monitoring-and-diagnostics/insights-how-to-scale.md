@@ -2,8 +2,8 @@
 title: 缩放实例计数 | Azure
 description: 了解如何在 Azure 中缩放服务。
 authors: rboucher
-manager: 
-editor: 
+manager: ''
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

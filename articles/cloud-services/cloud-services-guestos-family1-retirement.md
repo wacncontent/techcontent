@@ -5,7 +5,7 @@ services: cloud-services
 documentationCenter: na
 authors: yuemlu
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.devlang: na

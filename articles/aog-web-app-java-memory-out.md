@@ -2,11 +2,11 @@
 title: 如何为 Azure Java web 应用配置更大的内存来解决内存不足的问题
 description: 如何为 Azure Java web 应用配置更大的内存来解决内存不足的问题。
 services: app-service-web
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: app-service-web-aog
 ms.date: 10/27/2016

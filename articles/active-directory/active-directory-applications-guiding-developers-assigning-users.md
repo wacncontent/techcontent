@@ -2,10 +2,10 @@
 title: Azure AD 和应用程序：将用户分配到应用程序 | Azure
 description: 如何为 Azure 应用程序实现用户分配。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: femila
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

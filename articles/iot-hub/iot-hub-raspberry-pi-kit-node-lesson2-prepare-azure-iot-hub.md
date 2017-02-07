@@ -2,10 +2,10 @@
 title: 创建 Azure IoT 中心并注册 Raspberry Pi 3 | Azure
 description: 使用 Azure CLI 创建资源组和 Azure IoT 中心，并在 IoT 中心标识注册表中注册 Pi。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: raspberry pi 云, pi 云连接
 
 ms.assetid: 736215b6-e7e4-46f9-af30-0ded9ffa5204

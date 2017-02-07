@@ -2,10 +2,10 @@
 title: 如何使用 HTML 客户端 | Azure
 description: 了解如何使用适用于 Azure 移动服务的 HTML 客户端。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: ggailey777
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

@@ -2,13 +2,13 @@
 title: 使用 Azure Automation 实现自动开关虚拟机的操作
 description: 本页介绍如何使用 Azure Automation 实现自动开关虚拟机的操作。
 services: automation
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: automation-aog
-ms.date: 
+ms.date: ''
 wacn.date: 06/08/2016
 ---
 

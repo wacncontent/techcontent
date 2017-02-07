@@ -1,11 +1,11 @@
 ---
 title: 安装 Azure Toolkit for IntelliJ | Azure
 description: 了解如何安装 Azure Toolkit for IntelliJ IDEA。
-services: 
+services: ''
 documentationCenter: java
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: multiple
 ms.workload: na

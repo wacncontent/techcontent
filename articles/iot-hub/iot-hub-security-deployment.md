@@ -2,10 +2,10 @@
 title: 保护你的 IoT 部署 | Azure
 description: 如何保护你的 IoT 部署。包括保护设备预配、连接和对 IoT 中心服务的访问的指导原则
 services: iot-hub
-documentationCenter: 
+documentationCenter: ''
 authors: YuriDio
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: iot-hub
 ms.devlang: na

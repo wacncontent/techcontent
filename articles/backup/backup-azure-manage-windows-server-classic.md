@@ -2,7 +2,7 @@
 title: 使用 Azure 经典部署模型管理 Azure 备份保管库和服务器 | Azure
 description: 使用本教程来了解如何管理 Azure 备份保管库和服务器。
 services: backup
-documentationCenter: 
+documentationCenter: ''
 authors: Jim-Parker
 manager: jwhit
 editor: tysonn

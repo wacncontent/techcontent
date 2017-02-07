@@ -5,7 +5,7 @@ documentationCenter: xamarin
 services: mobile-services
 manager: dwrede
 authors: lindydonna
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

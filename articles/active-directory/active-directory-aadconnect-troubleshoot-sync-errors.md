@@ -2,7 +2,7 @@
 title: Azure AD Connect：排查同步过程中发生的错误 | Azure
 description: 介绍如何使用 Azure AD Connect 排查同步过程中遇到的错误。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: karavar
 manager: samueld
 editor: curtand
@@ -68,16 +68,16 @@ Azure Active Directory 架构不允许两个或更多个对象的以下属性使
 2. Bob Smith 的 **UserPrincipalName** 设置为 **bobs@contoso.com**。
 3. **"abcdefghijklmnopqrstuv=="** 是 Azure AD Connect 使用 Bob Smith 在本地 Active Directory 中的 **objectGUID**（在 Azure Active Directory 中，Bob Smith 的该属性为 **immutableId**）计算得出的 **SourceAnchor**。
 4. Bob 还具有以下 **proxyAddresses** 属性值：
-    - smtp:bobs@contoso.com
-    - smtp:bob.smith@contoso.com
-    - **smtp:bob@contoso.com**
+   - smtp:bobs@contoso.com
+   - smtp:bob.smith@contoso.com
+   - **smtp:bob@contoso.com**
 5. 已将新用户 **Bob Taylor** 添加到本地 Active Directory。
 6. Bob Taylor 的 **UserPrincipalName** 设置为 **bobt@contoso.com**。
 7. **"abcdefghijkl0123456789==""** 是 Azure AD Connect 使用 Bob Taylor 在本地 Active Directory 中的 **objectGUID** 计算得出的 **sourceAnchor**。Bob Taylor 的对象尚未同步到 Azure Active Directory。
 8. Bob Taylor 还具有以下 proxyAddresses 属性值
-    - smtp:bobt@contoso.com
-    - smtp:bob.taylor@contoso.com
-    - **smtp:bob@contoso.com**
+   - smtp:bobt@contoso.com
+   - smtp:bob.taylor@contoso.com
+   - **smtp:bob@contoso.com**
 9. 在同步期间，Azure AD Connect 将会识别到在本地 Active Directory 中添加了 Bob Taylor，并要求 Azure AD 做出相同的更改。
 10. Azure AD 首先会执行硬匹配。也就是说，它会搜索 immutableId 等于 "abcdefghijkl0123456789==" 的任何对象。如果 Azure AD 中没有任何其他对象具有该 immutableId，硬匹配将会失败。
 11. 然后，Azure AD 将尝试对 Bob Taylor 进行软匹配。也就是说，它将搜索 proxyAddresses 等于上述三个值（包括 smtp:bob@contoso.com）的任何对象
@@ -136,9 +136,9 @@ Azure Active Directory 架构不允许两个或更多个对象的以下属性使
 1. **Bob Smith** 是 Azure Active Directory 中的一个用户，该用户已从 contoso.com 本地 Active Directory 同步
 2. Bob Smith 在本地的 **UserPrincipalName** 设置为 **bobs@contoso.com**。
 3. Bob 还具有以下 **proxyAddresses** 属性值：
-    - smtp:bobs@contoso.com
-    - smtp:bob.smith@contoso.com
-    - **smtp:bob@contoso.com**
+   - smtp:bobs@contoso.com
+   - smtp:bob.smith@contoso.com
+   - **smtp:bob@contoso.com**
 4. 已将新用户 **Bob Taylor** 添加到本地 Active Directory。
 5. Bob Taylor 的 **UserPrincipalName** 设置为 **bobt@contoso.com**。
 6. **Bob Taylor** 还具有以下 **ProxyAddresses** 属性值：i. smtp:bobt@contoso.com，ii. smtp:bob.taylor@contoso.com

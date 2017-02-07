@@ -2,10 +2,10 @@
 title: Azure AD v2.0 的范围、权限和同意 | Azure
 description: 介绍 Azure AD v2.0 终结点中的授权，包括范围、权限和同意。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

@@ -2,13 +2,13 @@
 title: 使用 Azure 资源管理器自动部署 Zabbix 监控服务
 description: 本文介绍如何使用 Azure 资源管理器自动部署 Zabbix 监控服务
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 08/09/2016
 ---
 

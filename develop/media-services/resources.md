@@ -1,15 +1,15 @@
 ---
 title: 媒体服务资源 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: 媒体服务资源 - Azure 微软云
-services: 
+services: ''
 documentationCenter: media-services-resources
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 04/11/2015
 ---
 

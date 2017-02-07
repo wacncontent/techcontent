@@ -2,10 +2,10 @@
 title: 将公司 Internet 域指向流量管理器域名 | Azure
 description: 本文将帮助你将公司域名指向流量管理器域名。
 services: traffic-manager
-documentationCenter: 
+documentationCenter: ''
 authors: sdwheeler
 manager: carmonm
-editor: 
+editor: ''
 
 ms.service: traffic-manager
 ms.devlang: na

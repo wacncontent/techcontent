@@ -3,10 +3,10 @@ title: 排查 VM 的 SSH 连接问题 | Azure
 description: 如何排查运行 Linux 的 Azure VM 上发生的“SSH 连接失败”或“SSH 连接被拒绝”等问题。
 keywords: ssh 连接被拒绝, ssh 错误, azure ssh, SSH 连接失败
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 
 ms.assetid: dcb82e19-29b2-47bb-99f2-900d4cfb5bbb
@@ -192,9 +192,9 @@ azure vm redeploy --resource-group myResourceGroup --name myVM
     完成此操作后，临时磁盘数据会丢失，并且系统会更新与虚拟机关联的动态 IP 地址。
 * 根据[如何为基于 Linux 的虚拟机重置密码或 SSH](./virtual-machines-linux-classic-reset-access.md) 中的说明执行以下操作：
 
-  * 重置密码或 SSH 密钥。
-  * 创建 *sudo* 用户帐户。
-  * 重置 SSH 配置。
+    * 重置密码或 SSH 密钥。
+    * 创建 *sudo* 用户帐户。
+    * 重置 SSH 配置。
 * 检查 VM 的资源运行状况，了解是否存在任何平台问题。<br> 选择你的 VM 并向下滚动到“设置”>“检查运行状况”。
 
 ## 其他资源
@@ -203,3 +203,4 @@ azure vm redeploy --resource-group myResourceGroup --name myVM
 * 有关对使用经典部署模型创建的虚拟机进行故障排除的详细信息，请参阅[如何为基于 Linux 的虚拟机重置密码或 SSH](./virtual-machines-linux-classic-reset-access.md)。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

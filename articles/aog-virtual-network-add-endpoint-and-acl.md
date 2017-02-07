@@ -2,13 +2,13 @@
 title: 虚拟机添加相应端口并配置 ACL
 description: 本页介绍如何为虚拟机添加相应端口并配置 ACL。
 services: virtual network
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: virtual-network-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/01/2016
 ---
 

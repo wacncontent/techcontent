@@ -2,7 +2,7 @@
 title: 密钥保管库 .NET 2.x API 发行说明 | Azure
 description: .NET 开发人员可使用此 API 来编写 Azure 密钥保管库的代码
 services: key-vault
-documentationCenter: 
+documentationCenter: ''
 authors: BrucePerlerMS
 manager: mbaldwin
 editor: bruceper

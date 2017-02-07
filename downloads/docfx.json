@@ -7,6 +7,7 @@
         ],
         "exclude": [
           "**/obj/**",
+          "opsacndocsdemo/**",
           "**/includes/**",
           "README.md",
           "LICENSE",
@@ -18,12 +19,24 @@
       {
         "files": [
           "**/*.png",
-          "**/*.jpg"
+          "**/*.jpg",
+          "**/*.svg",
+          "**/*.gif"
         ],
         "exclude": [
           "**/obj/**",
-          "**/includes/**"
+          "opsacndocsdemo/**"
         ]
+      },
+      {
+        "files": [
+          "**/*.png",
+          "**/*.jpg",
+          "**/*.svg",
+          "**/*.gif"
+        ],
+        "src": "../includes",
+        "dest": "includes"
       }
     ],
     "overwrite": [],

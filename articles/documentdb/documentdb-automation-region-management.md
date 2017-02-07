@@ -4,9 +4,9 @@ description: 使用 Azure CLI 和 Azure资源管理器管理 DocumentDB 数据�
 services: documentdb
 author: dmakwana
 manager: jhubbard
-editor: 
+editor: ''
 tags: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 7f765c17-8549-4108-9475-46394fc3a218
 ms.service: documentdb

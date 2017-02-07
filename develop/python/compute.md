@@ -1,15 +1,15 @@
 ---
 title: Python-计算 - Azure 微软云
-metakeywords: 
+metakeywords: ''
 description: Python-计算 - Azure 微软云
-services: 
+services: ''
 documentationCenter: python
-authors: 
+authors: ''
 manager: Tiffena
 editor: EricChen
 
-ms.service: 
-ms.date: 
+ms.service: ''
+ms.date: ''
 wacn.date: 04/07/2016
 ---
 

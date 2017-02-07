@@ -5,7 +5,7 @@ services: iot-hub
 documentationcenter: .net
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 3fc5f1a3-3711-4611-9897-d4db079b4250
 ms.service: iot-hub
@@ -115,7 +115,7 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 }
 ```
 
-## 云到设备的消息
+## <a name="cloud-to-device-messages"></a> 云到设备的消息
 可以通过面向服务的终结点 \(**/messages/devicebound**\) 发送云到设备的消息。设备可以通过特定于设备的终结点 \(**/devices/{deviceId}/messages/devicebound**\) 接收这些消息。
 
 每个云到设备的消息都以单个设备为目标，方法是将 **to** 属性设置为 **/devices/{deviceId}/messages/devicebound**。

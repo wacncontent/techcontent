@@ -2,10 +2,10 @@
 title: Azure Redis 缓存高级层简介 | Azure
 description: 了解如何为高级层 Azure Redis 缓存实例创建和管理 Redis 持久性、Redis 群集和 VNET 支持
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

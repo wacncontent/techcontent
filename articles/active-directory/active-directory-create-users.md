@@ -2,10 +2,10 @@
 title: 向 Azure Active Directory 添加新用户 | Azure
 description: 说明如何在 Azure Active Directory 中添加新用户或更改用户信息。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

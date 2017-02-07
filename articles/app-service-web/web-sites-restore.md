@@ -2,7 +2,7 @@
 title: 在 Azure 中还原应用
 description: 了解如何从备份还原应用。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
 editor: jimbe

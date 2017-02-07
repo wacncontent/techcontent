@@ -2,10 +2,10 @@
 title: 移动应用和移动服务中的客户端与服务器 SDK 版本控制 | Azure 应用服务
 description: 客户端 SDK 列表，以及移动服务与 Azure 移动应用的服务器 SDK 版本兼容性
 services: app-service\mobile
-documentationCenter: 
+documentationCenter: ''
 authors: adrianhall
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: app-service-mobile
 ms.workload: mobile

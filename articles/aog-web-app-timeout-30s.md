@@ -2,11 +2,11 @@
 title: 使用应用程序网关网页载入超过 30 秒（错误代码 502）的解决方法
 description: 如何解决载入超过 30 秒出现 502 错误
 services: application-gateway
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: application-gateway-aog
 ms.date: 10/27/2016

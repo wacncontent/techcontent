@@ -5,7 +5,7 @@ services: vpn-gateway
 documentationcenter: na
 author: yushwang
 manager: rossort
-editor: 
+editor: ''
 tags: azure-resource-manager, azure-service-management
 
 ms.assetid: ba449333-2716-4b7f-9889-ecc521e4d616

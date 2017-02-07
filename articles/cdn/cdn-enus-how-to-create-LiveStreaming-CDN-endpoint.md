@@ -4,14 +4,14 @@ urlDisplayName: CDN
 title: Create Live Streaming Acceleration-Type CDNs – Azure Feature Guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-on, Live Streaming, streaming acceleration, CDN acceleration, CDN service, mainstream CDN, live streaming acceleration, media service, Azure Media Service, cache rules, HLS, CDN technical documentation, CDN help files, live video streaming acceleration, direct broadcast acceleration
 description: Learn how to create Live Streaming Acceleration-type CDNs on Azure Management Portal, and learn about default caching rules for Download CDNs.
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn_en
 ms.date: 7/7/2016

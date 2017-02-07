@@ -5,7 +5,7 @@ services: backup
 documentationCenter: NA
 authors: Jim-Parker
 manager: jwhit
-editor: 
+editor: ''
 
 ms.service: backup
 ms.date: 10/05/2015

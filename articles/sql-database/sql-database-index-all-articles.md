@@ -2,7 +2,7 @@
 title: 有关 SQL 数据库服务的所有主题 | Azure
 description: 位于 /documentation/articles/ 的有关 Azure SQL 数据库服务的所有主题的表格，包括标题和描述。
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: MightyPen
 manager: jhubbard
 editor: MightyPen

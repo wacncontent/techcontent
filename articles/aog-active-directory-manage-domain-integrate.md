@@ -2,13 +2,13 @@
 title: 使用 PowerShell 在 Azure Active Directory 中管理域的集成方式
 description: 使用 PowerShell 在 Azure Active Directory 中管理域的集成方式
 services: Active Directory
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: active-directory-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/31/2016
 ---
 

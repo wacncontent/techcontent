@@ -4,10 +4,10 @@
 title: 使用 PowerShell 创建 Azure VM | Azure
 description: 使用 Azure PowerShell 和 Azure Resource Manager 轻松创建运行 Windows Server 的新 VM。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 14fe9ca9-e228-4d3b-a5d8-3101e9478f6e

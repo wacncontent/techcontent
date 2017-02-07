@@ -5,7 +5,7 @@ services: service-fabric
 documentationCenter: .net
 authors: seanmck
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: service-fabric
 ms.date: 06/13/2016

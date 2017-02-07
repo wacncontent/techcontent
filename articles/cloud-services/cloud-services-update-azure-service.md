@@ -2,10 +2,10 @@
 title: 如何更新云服务 | Azure
 description: 了解如何在 Azure 中更新云服务。了解如何云服务上进行更新以确保可用性。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
-editor: 
+editor: ''
 
 ms.service: cloud-services
 ms.workload: tbd

@@ -2,10 +2,10 @@
 title: 在 Azure 经典管理门户中使用网络配置文件创建虚拟网络 | Azure
 description: 了解如何在 Azure 经典管理门户中使用网络配置文件创建虚拟网络。
 services: virtual-network
-documentationCenter: 
+documentationCenter: ''
 authors: telmosampaio
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-network

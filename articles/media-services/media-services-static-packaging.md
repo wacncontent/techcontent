@@ -2,10 +2,10 @@
 title: 使用 Azure 媒体包装器完成静态打包任务 | Azure
 description: 本主题说明了通过 Azure 媒体包装器完成的各种任务。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

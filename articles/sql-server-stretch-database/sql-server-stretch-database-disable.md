@@ -2,10 +2,10 @@
 title: 禁用 Stretch Database 和移回远程数据 | Azure
 description: 了解如何为表禁用延伸数据库并选择性地移回远程数据。
 services: sql-server-stretch-database
-documentationCenter: 
+documentationCenter: ''
 authors: douglaslMS
-manager: 
-editor: 
+manager: ''
+editor: ''
 
 ms.service: sql-server-stretch-database
 ms.workload: data-management

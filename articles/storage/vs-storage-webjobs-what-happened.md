@@ -2,10 +2,10 @@
 title: 我的 WebJob 项目（Visual Studio Azure 存储空间连接服务）发生了什么情况？| Azure
 description: 介绍使用 Visual Studio 连接服务连接到存储帐户后 Azure WebJob 项目中会发生什么情况
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: TomArcher
 manager: douge
-editor: 
+editor: ''
 
 ms.assetid: 36ae7ff7-c22c-47eb-b220-049d61618c74
 ms.service: storage

@@ -2,7 +2,7 @@
 title: 将数据移入和移出 Azure 存储 | Azure
 description: 本文概述了将数据移入和移出 Azure 存储的各种方法。
 services: storage
-documentationcenter: 
+documentationcenter: ''
 author: micurd
 manager: jahogg
 editor: tysonn

@@ -2,11 +2,11 @@
 title: 使用 fio 工具对 Azure 存储进行 IOPS 测试
 description: 介绍如何使用 fio 工具对 Azure 存储进行 IOPS 测试。
 services: storage
-documentationCenter: 
-authors: 
-manager: 
-editor: 
-tags: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+tags: ''
 
 ms.service: storage-aog
 ms.date: 10/27/2016

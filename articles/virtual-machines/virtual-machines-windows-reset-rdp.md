@@ -2,10 +2,10 @@
 title: 在 Windows VM 上重置密码或远程桌面配置 | Azure
 description: 了解如何使用 Azure 门户预览或 Azure PowerShell 在 Windows VM 上重置帐户密码或远程桌面服务。
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 45c69812-d3e4-48de-a98d-39a0f5675777
@@ -167,3 +167,4 @@ Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' 
 [对与基于 Windows 的 Azure 虚拟机的远程桌面连接进行故障排除](./virtual-machines-windows-troubleshoot-rdp-connection.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & update code-->

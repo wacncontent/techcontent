@@ -2,7 +2,7 @@
 title: 将自定义数据注入到虚拟机中 | Azure
 description: 本主题介绍如何在创建实例时将自定义数据注入到 Azure 虚拟机中，以及如何在 Windows 或 Linux 上找到自定义数据。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: squillace
 manager: timlt
 editor: tysonn

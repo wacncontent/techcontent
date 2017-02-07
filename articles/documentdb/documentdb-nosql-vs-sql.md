@@ -3,10 +3,10 @@ title: 何时使用 NoSQL 与 SQL | Azure
 description: 比较使用 NoSQL 非关系解决方案与使用 SQL 解决方案的好处。了解是 Azure NoSQL 服务之一还是 SQL Server 最适合你的应用场景。
 keywords: nosql 与 sql, 何时使用 NoSQL, sql 与 nosql
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: mimig1
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.assetid: 71ef1798-d709-4ccb-9f5c-57948fb96229
 ms.service: documentdb

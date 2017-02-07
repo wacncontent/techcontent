@@ -2,7 +2,7 @@
 title: 使用 REST API 查看部署操作 | Azure
 description: 介绍如何使用 Azure Resource Manager REST API 来检测 Resource Manager 部署的问题。
 services: azure-resource-manager,virtual-machines
-documentationcenter: 
+documentationcenter: ''
 tags: top-support-issue
 author: tfitzmac
 manager: timlt

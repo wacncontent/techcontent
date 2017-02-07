@@ -5,7 +5,7 @@ services: virtual-machines, cloud-services, storage
 documentationCenter: na
 authors: nayak-mahesh
 manager: msStevenPo
-editor: 
+editor: ''
 
 ms.service: azure-security
 ms.date: 12/10/2015

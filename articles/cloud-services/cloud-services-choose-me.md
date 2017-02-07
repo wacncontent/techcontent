@@ -2,7 +2,7 @@
 title: Azure 计算选项 - 云服务 | Azure
 description: 了解 Azure 计算托管选项及其工作原理：应用服务、云服务和虚拟机
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: Thraka
 manager: timlt
 

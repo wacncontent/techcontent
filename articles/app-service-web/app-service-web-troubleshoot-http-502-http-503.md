@@ -2,10 +2,10 @@
 title: 解决 502 错误的网关、503 服务不可用错误 | Azure
 description: 排查 Azure App Service 中托管的 Web 应用出现的“502 错误的网关”和“503 服务不可用”错误。
 services: app-service\web
-documentationCenter: 
+documentationCenter: ''
 authors: cephalin
 manager: wpickett
-editor: 
+editor: ''
 tags: top-support-issue
 keywords: 502 错误的网关, 503 服务不可用, 错误 503, 错误 502
 

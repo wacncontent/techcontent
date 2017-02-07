@@ -5,7 +5,7 @@ services: iot-hub
 documentationcenter: .net
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: d534ff9d-2de5-4995-bb2d-84a02693cb2e
 ms.service: iot-hub

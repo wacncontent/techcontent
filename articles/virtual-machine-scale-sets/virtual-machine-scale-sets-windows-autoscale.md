@@ -2,10 +2,10 @@
 title: 自动缩放 Windows 虚拟机规模集 | Azure
 description: 使用 Azure PowerShell 为 Windows 虚拟机规模集设置自动缩放
 services: virtual-machine-scale-sets
-documentationcenter: 
+documentationcenter: ''
 author: davidmu1
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 88886cad-a2f0-46bc-8b58-32ac2189fc93

@@ -2,7 +2,7 @@
 title: 有关在 Azure 门户预览中导航的参考
 description: 了解在管理门户与 Azure 门户预览中使用 App Service Web 的不同用户体验
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: jaime-espinosa
 manager: wpickett
 editor: jimbe

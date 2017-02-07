@@ -1,17 +1,17 @@
 ---
-linkid: 
-urlDisplayName: 
+linkid: ''
+urlDisplayName: ''
 title: Understand the service limitations of MySQL Database on Azure – Azure cloud
 metakeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, service restrictions and limitations, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
 description: This article helps you understand the service limitations of MySQL Database on Azure during the period of this public preview version. Contact technical support if you have any questions about specific operations.
-metaCanonical: 
+metaCanonical: ''
 services: MySQL
 documentationCenter: Services
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: mysql_en
 ms.date: 07/05/2016

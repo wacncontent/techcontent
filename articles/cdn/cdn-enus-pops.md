@@ -4,14 +4,14 @@ urlDisplayName: CDN
 title: Azure CDN POPs – Azure feature guide
 metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN, node distribution, POP, Azure CDN node distribution, CDN technical documentation, CDN help files
 description: Learn Azure CDN Points of Presence in China
-metaCanonical: 
-services: 
+metaCanonical: ''
+services: ''
 documentationCenter: .NET
-title: 
-authors: 
-solutions: 
-manager: 
-editor: 
+title: ''
+authors: ''
+solutions: ''
+manager: ''
+editor: ''
 
 ms.service: cdn_en
 ms.date: 7/7/2016

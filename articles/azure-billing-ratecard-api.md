@@ -1,11 +1,11 @@
 ---
 title: 获取 Azure 订阅中所用资源的价格和元数据信息 | Azure
 description: 了解如何获取 Azure 订阅中所用资源的价格和元数据信息
-services: 
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+services: ''
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 tags: billing
 
 ms.service: billing

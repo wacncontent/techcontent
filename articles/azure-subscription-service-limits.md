@@ -1,11 +1,11 @@
 ---
 title: Azure 订阅和服务限制、配额和约束
 description: 提供常见的 Azure 订阅和服务限制、配额和约束的列表。这包括有关如何增加限制以及最大值的信息。
-services: 
-documentationcenter: 
+services: ''
+documentationcenter: ''
 author: rothja
 manager: jeffreyg
-editor: 
+editor: ''
 tags: billing
 
 ms.assetid: 60d848f9-ff26-496e-a5ec-ccf92ad7d125

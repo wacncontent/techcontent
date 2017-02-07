@@ -2,10 +2,10 @@
 title: 使用 SendGrid 发送电子邮件 | Microsoft Azure
 description: 了解如何使用 SendGrid 服务从 Azure 移动服务应用程序发送电子邮件。
 services: mobile-services
-documentationCenter: 
+documentationCenter: ''
 authors: Erikre
 manager: sendgrid
-editor: 
+editor: ''
 
 ms.service: mobile-services
 ms.workload: mobile

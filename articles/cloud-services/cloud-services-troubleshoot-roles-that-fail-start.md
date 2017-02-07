@@ -2,10 +2,10 @@
 title: 对无法启动的角色进行故障排除 | Azure
 description: 以下是云服务角色无法启动的一些常见原因。此外还提供了这些问题的解决方案。
 services: cloud-services
-documentationCenter: 
+documentationCenter: ''
 authors: simonxjx
 manager: felixwu
-editor: 
+editor: ''
 tags: top-support-issue
 
 ms.service: cloud-services

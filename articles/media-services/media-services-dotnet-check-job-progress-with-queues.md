@@ -2,10 +2,10 @@
 title: 使用 Azure 队列存储通过 .NET 监视媒体服务作业通知 | Azure
 description: 了解如何使用 Azure 队列存储监视媒体服务作业通知。代码示例用 C# 编写，并使用用于 .NET 的媒体服务 SDK。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: juliako
 manager: erikre
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

@@ -5,7 +5,7 @@ services: site-recovery
 documentationcenter: na
 author: rayne-wiselman
 manager: jwhit
-editor: 
+editor: ''
 
 ms.assetid: 2bc3832f-4d6e-458d-bf0c-f00567200ca0
 ms.service: site-recovery
@@ -39,10 +39,10 @@ ms.author: nisoneji
 
 1. 在主站点上生成要复制的所有 Hyper-V VM 及其所在 Hyper-V 主机/群集的列表。该工具可针对多个独立主机或单个群集运行，但不能同时对这两者运行。它还需要单独针对每个操作系统运行，因此用户应收集有关 Hyper-V 服务器的信息，如下所示：
 
-    * Windows Server 2012 独立服务器
-    * Windows Server 2012 群集
-    * Windows Server 2012 R2 独立服务器
-    * Windows Server 2012 R2 群集
+   * Windows Server 2012 独立服务器
+   * Windows Server 2012 群集
+   * Windows Server 2012 R2 独立服务器
+   * Windows Server 2012 R2 群集
 2. 在所有 Hyper-V 主机和群集上启用 WMI 远程访问。在每个服务器/群集上运行以下命令，以确保设置防火墙规则和用户权限：
 
     ```
@@ -50,7 +50,7 @@ ms.author: nisoneji
     ```
 3. 在服务器和群集上启用性能监视，如下所示：
 
-    * 使用“高级安全性”管理单元打开 Windows 防火墙，然后启用以下入站规则：“COM+ 网络访问(DCOM-IN)”，以及“远程事件日志管理组”中的所有规则。
+   * 使用“高级安全性”管理单元打开 Windows 防火墙，然后启用以下入站规则：“COM+ 网络访问(DCOM-IN)”，以及“远程事件日志管理组”中的所有规则。
 
 ## 步骤 2：准备副本服务器（本地到本地复制）
 如果要复制到 Azure，则不需要执行此操作。

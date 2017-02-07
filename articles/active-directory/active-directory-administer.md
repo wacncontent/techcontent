@@ -2,11 +2,11 @@
 title: 管理 Azure AD 目录 | Azure
 description: 介绍什么是 Azure AD 租户，以及如何通过 Azure Active Directory 管理 Azure。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: markusvi
 writer: markvi
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: infrastructure-services

@@ -2,7 +2,7 @@
 title: Azure 自动化中的计划 | Azure
 description: 自动化计划用于安排自动启动 Azure 自动化中的 Runbook。介绍如何创建和管理计划，以便在特定的时间或按重复计划自动启动 Runbook。
 services: automation
-documentationCenter: 
+documentationCenter: ''
 authors: MGoedtel
 manager: jwhit
 editor: tysonn

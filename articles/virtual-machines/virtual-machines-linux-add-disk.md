@@ -3,7 +3,7 @@ title: 将磁盘添加到 Linux VM | Azure
 description: 了解如何将持久性磁盘添加到 Linux VM
 keywords: linux 虚拟机, 添加资源磁盘
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: rickstercdn
 manager: timlt
 editor: tysonn
@@ -289,3 +289,4 @@ UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail 
 * 可以添加更多的磁盘来扩展存储容量，[配置 RAID](./virtual-machines-linux-configure-raid.md) 来提高性能。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: wording update-->

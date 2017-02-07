@@ -1,11 +1,11 @@
 ---
 title: Azure Linux 虚拟机准则 | Azure
 description: 了解将 Linux 虚拟机部署到 Azure 中的关键设计和实施准则
-documentationcenter: 
+documentationcenter: ''
 services: virtual-machines-linux
 author: iainfoulds
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 
 ms.assetid: 740767d7-9a40-407b-93e7-c29dd976ffd7
@@ -55,3 +55,4 @@ VM 等组件可以在逻辑上组合在一起，以便使用 [Azure 资源组](.
 [!INCLUDE [virtual-machines-linux-infrastructure-guidelines-next-steps](../../includes/virtual-machines-linux-infrastructure-guidelines-next-steps.md)]
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

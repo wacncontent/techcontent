@@ -3,7 +3,7 @@ title: DocumentDB 编程：存储过程、数据库触发器和 UDF | Azure
 description: 了解如何使用 DocumentDB 以 JavaScript 编写存储过程、数据库触发器和用户定义的函数 (UDF)获取数据库编程提示以及更多内容。
 keywords: 数据库触发器, 存储过程, 存储过程, 数据库程序, sproc, documentdb, azure, Azure
 services: documentdb
-documentationcenter: 
+documentationcenter: ''
 author: aliuy
 manager: jhubbard
 editor: mimig

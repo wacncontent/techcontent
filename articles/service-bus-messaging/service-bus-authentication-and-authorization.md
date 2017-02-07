@@ -8,7 +8,7 @@ manager: timlt
 editor: tysonn
 
 ms.service: service-bus
-ms.date: 12/09/2016
+ms.date: 10/03/2016
 wacn.date: 01/04/2017
 ---
 

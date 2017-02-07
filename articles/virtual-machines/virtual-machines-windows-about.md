@@ -2,7 +2,7 @@
 title: 关于 Windows 虚拟机 | Azure
 description: 了解使用两种部署模型的 Azure 中 Windows 虚拟机的基本信息。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: cynthn
 manager: timlt
 editor: tysonn

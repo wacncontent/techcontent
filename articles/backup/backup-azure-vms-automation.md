@@ -2,10 +2,10 @@
 title: 使用 PowerShell 部署和管理资源管理器部署型 VM 的备份 | Azure
 description: 使用 PowerShell 在 Azure 中部署和管理资源管理器部署型 VM 的备份
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: markgalioto
 manager: cfreeman
-editor: 
+editor: ''
 
 ms.assetid: 68606e4f-536d-4eac-9f80-8a198ea94d52
 ms.service: backup

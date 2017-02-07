@@ -1,10 +1,10 @@
 ---
 title: 使用移动服务中的软删除（Windows 应用商店）| Azure
 description: 了解如何在你的应用程序中使用 Azure 移动服务软删除功能
-documentationCenter: 
+documentationCenter: ''
 authors: wesmc7777
 manager: dwrede
-editor: 
+editor: ''
 services: mobile-services
 
 ms.service: mobile-services

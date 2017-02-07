@@ -2,7 +2,7 @@
 title: 使用 Web 作业运行后台任务
 description: 了解如何在 Azure Web 应用中运行后台任务。
 services: app-service
-documentationCenter: 
+documentationCenter: ''
 authors: tdykstra
 manager: wpickett
 editor: jimbe
@@ -12,8 +12,8 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/27/2016
-wacn.date: 12/12/2016
+ms.date: 11/27/2016
+wacn.date: 01/25/2017
 ms.author: tdykstra
 ---
 

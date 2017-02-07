@@ -1,12 +1,12 @@
 ---
 title: Azure SQL 数据库在你的环境中正常工作
 description: 了解 SQL 数据库如何提供帮助、安全和保护
-keywords: 
+keywords: ''
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

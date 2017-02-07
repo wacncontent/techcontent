@@ -2,10 +2,10 @@
 title: Azure Active Directory 服务限制和局限性
 description: Azure Active Directory 服务的使用限制和其他服务限制。
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.assetid: e4166a30-eb45-43b8-a466-6254b664fd1a
 ms.service: active-directory

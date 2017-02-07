@@ -2,10 +2,10 @@
 title: 如何监视 Azure Redis 缓存 | Azure
 description: 了解如何监视 Azure Redis 缓存实例的运行状况和性能
 services: redis-cache
-documentationCenter: 
+documentationCenter: ''
 authors: steved0x
 manager: douge
-editor: 
+editor: ''
 
 ms.service: cache
 ms.workload: tbd

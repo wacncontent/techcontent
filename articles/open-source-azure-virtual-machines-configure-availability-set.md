@@ -2,13 +2,13 @@
 title: 在 Azure 平台配置可用性集 | Azure
 description: 本文介绍如何在创建虚拟机同时创建可用性集、以及如何将现有的虚拟机添加到可用性集
 services: open-source
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: open-source-website
-ms.date: 
+ms.date: ''
 wacn.date: 06/14/2016
 ---
 

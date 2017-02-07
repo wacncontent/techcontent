@@ -2,10 +2,10 @@
 title: 使用 Azure AD 管理对应用的访问 | Azure
 description: 介绍 Azure Active Directory 如何使组织能够指定每个用户有权访问的应用。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: femila
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

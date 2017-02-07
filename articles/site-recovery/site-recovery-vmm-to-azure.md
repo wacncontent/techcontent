@@ -2,7 +2,7 @@
 title: 使用 Azure 门户将 VMM 云中的 Hyper-V 虚拟机复制到 Azure | Azure
 description: 介绍如何部署 Site Recovery，以便协调 VMM 云中 Hyper-V VM 到 Azure 的复制、故障转移和恢复。
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: jwhit
 editor: tysonn

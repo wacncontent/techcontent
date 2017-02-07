@@ -3,7 +3,7 @@ title: 存档 Azure 活动日志 | Azure
 description: 了解如何存档 Azure 活动日志，将其长期保留在存储帐户中。
 authors: johnkemnetz
 manager: rboucher
-editor: 
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 
@@ -12,7 +12,7 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 08/23/2016
+ms.date: 12/09/2016
 wacn.date: 10/17/2016
 ms.author: johnkem
 ---

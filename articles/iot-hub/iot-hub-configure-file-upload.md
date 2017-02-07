@@ -2,10 +2,10 @@
 title: 使用 Azure 门户配置文件上载 | Azure
 description: 如何使用 Azure 门户配置 IoT 中心，以便从连接的设备上传文件。包括有关配置目标 Azure 存储帐户的信息。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: 915f1597-272d-4fd4-8c5b-a0ccb1df0d91
 ms.service: iot-hub
@@ -24,7 +24,7 @@ ms.author: dobett
 
 ![][13]  
 
-**存储容器**：使用 Azure 门户在当前 Azure 订阅中选择 Azure 存储帐户中的 Blob 容器，以便与 IoT 中心关联。如有必要，可在“存储帐户”边栏选项卡上创建 Azure 存储帐户，并在“容器”边栏选项卡上创建 Blob 容器。IoT 中心会自动生成对此 Blob 容器具有写入权限的 SAS URI，以供设备上传文件时使用。
+**存储容器**：使用 Azure 门户预览在当前 Azure 订阅中选择 Azure 存储帐户中的 Blob 容器，以便与 IoT 中心关联。如有必要，可在“存储帐户”边栏选项卡上创建 Azure 存储帐户，并在“容器”边栏选项卡上创建 Blob 容器。IoT 中心会自动生成对此 Blob 容器具有写入权限的 SAS URI，以供设备上传文件时使用。
 
 ![][14]
 

@@ -3,7 +3,7 @@ title: 测试文档
 description: This tutorial walks you through the steps of implementing a Video-on-Demand (VoD) content delivery application with Azure Media Services using REST APIs.
 services: media-services
 documentationCenter: .net
-authors: 
+authors: ''
 manager: Tiffena
 editor: Eric Chen
 

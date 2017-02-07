@@ -2,10 +2,10 @@
 title: 在 Azure Active Directory 中添加来自其他目录或合作伙伴公司的用户 | Azure
 description: 介绍如何在 Azure Active Directory 中添加用户或更改用户信息，包括外部用户和来宾用户。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: curtand
 manager: femila
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

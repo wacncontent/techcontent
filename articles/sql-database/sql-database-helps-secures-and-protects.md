@@ -1,12 +1,12 @@
 ---
 title: Azure SQL 数据库提供安全和保护
 description: 了解 SQL 数据库如何帮助提供安全和保护
-keywords: 
+keywords: ''
 services: sql-database
-documentationCenter: 
+documentationCenter: ''
 authors: CarlRabeler
 manager: jhubbard
-editor: 
+editor: ''
 
 ms.service: sql-database
 ms.devlang: NA

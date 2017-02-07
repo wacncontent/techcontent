@@ -2,8 +2,8 @@
 title: 针对 Azure 指标警报配置 webhook | Azure
 description: 将 Azure 警报重新路由到其他非 Azure 系统。
 authors: kamathashwin
-manager: 
-editor: 
+manager: ''
+editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 

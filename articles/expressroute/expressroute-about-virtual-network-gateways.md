@@ -5,7 +5,7 @@ services: expressroute
 documentationCenter: na
 authors: cherylmc
 manager: carmonm
-editor: 
+editor: ''
 tags: azure-resource-manager, azure-service-management
 
 ms.service: expressroute
@@ -13,7 +13,7 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/03/2016
+ms.date: 12/01/2016
 wacn.date: 10/31/2016
 ms.author: cherylmc
 ---
@@ -32,7 +32,7 @@ ms.author: cherylmc
 
 [!INCLUDE [expressroute-gwsku-include](../../includes/expressroute-gwsku-include.md)]
 
-如果想要将网关升级为功能更强大的网关 SKU，在大多数情况下，可以使用“Resize-AzureRmVirtualNetworkGateway”PowerShell cmdlet。此方法适用于升级到 Standard 和 HighPerformance SKU。但是，若要升级到 UltraPerformance SKU，需要重新创建网关。
+如果想要将网关升级为功能更强大的网关 SKU，在大多数情况下，可以使用“Resize-AzureRmVirtualNetworkGateway”PowerShell cmdlet。此方法适用于升级到 Standard 和 HighPerformance SKU。
 
 ###  <a name="aggthroughput"></a>按网关 SKU 列出的估计聚合吞吐量
 

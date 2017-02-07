@@ -2,10 +2,10 @@
 title: Azure AD Cordova 入门 | Azure
 description: 如何生成一个与 Azure AD 集成以方便登录，并使用 OAuth 调用 Azure AD 保护 API 的 Cordova 应用程序。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: vibronet
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

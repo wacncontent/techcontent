@@ -2,10 +2,10 @@
 title: 使用媒体服务 REST API 配置资产传送策略 | Azure
 description: 本主题说明如何使用媒体服务 REST API 配置不同的资产传送策略。
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 authors: Juliako
 manager: dwrede
-editor: 
+editor: ''
 
 ms.service: media-services
 ms.workload: media

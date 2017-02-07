@@ -2,13 +2,13 @@
 title: 如何更新 Azure 自动化服务的 PowerShell 模块
 description: 本页介绍如何更新 Azure 自动化服务的 PowerShell 模块。
 services: automation
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: automation-aog
-ms.date: 
+ms.date: ''
 wacn.date: 10/28/2016
 ---
 

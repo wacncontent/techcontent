@@ -2,13 +2,13 @@
 title: 终结点（Endpoint）介绍和相关配置
 description: 终结点（Endpoint）介绍和相关配置
 services: cloud-service
-documentationCenter: 
-authors: 
-manager: 
-editor: 
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
 ms.service: cloud-service-aog
-ms.date: 
+ms.date: ''
 wacn.date: 08/31/2016
 ---
 

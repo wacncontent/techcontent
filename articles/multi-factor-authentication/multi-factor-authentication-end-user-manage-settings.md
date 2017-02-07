@@ -3,7 +3,7 @@ title: 管理双重验证设置 | Azure
 description: 管理如何使用 Azure 多重身份验证，包括更改联系信息或配置设备。
 services: multi-factor-authentication
 keywords: 多重身份验证客户端, 身份验证问题, 相关性 ID
-documentationcenter: 
+documentationcenter: ''
 author: kgremban
 manager: femila
 editor: yossib

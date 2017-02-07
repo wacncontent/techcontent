@@ -2,10 +2,10 @@
 title: Azure IoT 中心操作监视 | Azure
 description: 如何使用 Azure IoT 中心操作监视功能实时监视 IoT 中心上的操作状态。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: nberdy
 manager: timlt
-editor: 
+editor: ''
 
 ms.assetid: a299f3a5-b14d-4586-9c3b-44aea14ed013
 ms.service: iot-hub

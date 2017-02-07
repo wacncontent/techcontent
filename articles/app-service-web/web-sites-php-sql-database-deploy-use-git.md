@@ -5,7 +5,7 @@ services: app-service\web, sql-database
 documentationCenter: php
 authors: rmcmurray
 manager: wpickett
-editor: 
+editor: ''
 
 ms.service: app-service-web
 ms.workload: web

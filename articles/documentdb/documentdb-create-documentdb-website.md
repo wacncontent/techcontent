@@ -5,7 +5,7 @@ services: documentdb, app-service\web
 authors: stephbaron
 manager: jhubbard
 editor: monicar
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: documentdb
 ms.workload: data-services

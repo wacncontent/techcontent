@@ -5,7 +5,7 @@ services: virtual-machines-windows
 documentationCenter: windows
 authors: singhkay
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management
 
 ms.service: virtual-machines-windows

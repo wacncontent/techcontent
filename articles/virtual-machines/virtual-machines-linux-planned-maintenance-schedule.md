@@ -2,10 +2,10 @@
 title: 如何为 Azure VM 安排计划内的维护 | Azure
 description: 了解如何在 Azure VM 上安排计划内的维护。
 services: virtual-machines-linux
-documentationCenter: 
+documentationCenter: ''
 authors: igalf
 manager: timlt
-editor: 
+editor: ''
 tags: azure-service-management,azure-resource-manager
 
 ms.service: virtual-machines-linux

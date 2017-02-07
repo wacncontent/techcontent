@@ -3,9 +3,9 @@ title: 使用 REST 发布 Azure 媒体服务内容
 description: 了解如何创建用于生成流式处理 URL 的定位符。代码使用 REST API。
 authors: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationCenter: 
+documentationCenter: ''
 
 ms.service: media-services
 ms.workload: media

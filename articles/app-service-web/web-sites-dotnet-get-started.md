@@ -5,7 +5,7 @@ services: app-service\web
 documentationcenter: .net
 author: tdykstra
 manager: wpickett
-editor: 
+editor: ''
 
 ms.assetid: 69759e3c-384c-4afb-9278-db6724f6cb74
 ms.service: app-service-web

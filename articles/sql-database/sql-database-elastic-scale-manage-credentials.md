@@ -2,10 +2,10 @@
 title: 管理弹性数据库客户端库中的凭据 | Azure
 description: 如何为弹性数据库应用设置适当的凭据级别：管理员到只读
 services: sql-database
-documentationcenter: 
+documentationcenter: ''
 manager: jhubbard
 author: ddove
-editor: 
+editor: ''
 
 ms.assetid: 72e0edaf-795e-4856-84a5-6594f735fb7e
 ms.service: sql-database

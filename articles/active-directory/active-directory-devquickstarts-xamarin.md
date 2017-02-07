@@ -5,7 +5,7 @@ services: active-directory
 documentationCenter: xamarin
 authors: dstrockis
 manager: mbaldwin
-editor: 
+editor: ''
 
 ms.service: active-directory
 ms.workload: identity

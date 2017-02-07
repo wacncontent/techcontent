@@ -2,7 +2,7 @@
 title: 保护 Azure AD 中的特权访问 | Azure
 description: 本主题介绍在 Azure、Azure Active Directory 和 Microsoft 在线服务中保护特许访问的方法。
 services: active-directory
-documentationCenter: 
+documentationCenter: ''
 authors: kgremban
 manager: femila
 editor: mwahl

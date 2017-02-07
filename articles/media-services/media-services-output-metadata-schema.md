@@ -3,9 +3,9 @@ title: Azure 媒体服务输出元数据架构 | Azure
 description: 本主题概述 Azure 媒体服务输出元数据架构。
 author: Juliako
 manager: erikre
-editor: 
+editor: ''
 services: media-services
-documentationcenter: 
+documentationcenter: ''
 
 ms.assetid: 1ed84c88-eea5-4a24-9c4f-f2428157d08a
 ms.service: media-services

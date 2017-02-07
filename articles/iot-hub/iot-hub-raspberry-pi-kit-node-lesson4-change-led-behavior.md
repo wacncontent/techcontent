@@ -2,10 +2,10 @@
 title: 可选：更改 LED 的开关行为 | Azure
 description: 自定义这些消息，以便更改 LED 的开关行为。
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: shizn
 manager: timlt
-tags: 
+tags: ''
 keywords: 使用 raspberry pi 的控制 led, raspberry pi led 控制, raspberry pi 控制 led
 
 ms.assetid: 3b42a4ad-0197-42f6-8ca9-04c883e879e8

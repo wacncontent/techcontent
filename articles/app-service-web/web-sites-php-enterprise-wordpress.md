@@ -2,10 +2,10 @@
 title: Azure App Service 上的企业级 WordPress | Azure
 description: 了解如何在 Azure App Service 上托管企业级 WordPress 网站
 services: app-service\web
-documentationcenter: 
+documentationcenter: ''
 author: sunbuild
 manager: yochayk
-editor: 
+editor: ''
 
 ms.assetid: 22d68588-2511-4600-8527-c518fede8978
 ms.service: app-service-web

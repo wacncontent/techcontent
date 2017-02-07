@@ -2,7 +2,7 @@
 title: 在 Azure Multi-Factor Authentication 中使用验证码登录到移动应用
 description: 本页介绍用户如何在 Azure MFA 中使用移动应用验证码登录。
 services: multi-factor-authentication
-documentationCenter: 
+documentationCenter: ''
 authors: billmath
 manager: stevenpo
 editor: curtland

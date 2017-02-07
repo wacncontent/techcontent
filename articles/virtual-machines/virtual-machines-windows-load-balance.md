@@ -2,10 +2,10 @@
 title: Azure 基础结构服务的负载均衡
 description: 介绍 Azure 所支持的两种不同类型的负载均衡：适用于云服务的负载均衡器，以及适用于客户端流量的 Azure 流量管理器。
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: joaoma
 manager: adinah
-editor: 
+editor: ''
 
 ms.service: load-balancer
 ms.workload: infrastructure-services
