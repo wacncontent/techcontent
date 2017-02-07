@@ -2,39 +2,44 @@
 title: 在 HDInsight 中使用 Hadoop Sqoop | Azure
 description: 了解如何从工作站使用 Azure PowerShell 在 Hadoop 群集和 Azure SQL 数据库之间运行 Sqoop 导入和导出。
 editor: cgronlun
-manager: paulettm
+manager: jhubbard
 services: hdinsight
-documentationCenter: ''
+documentationcenter: ''
 tags: azure-portal
-authors: mumian
+author: mumian
 
+ms.assetid: bbb6f53a-e019-4d01-92bd-92c208c760b6
 ms.service: hdinsight
 ms.workload: big-data
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 09/02/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: jgao
 ---
 
 # 使用 HDInsight 中的 Azure PowerShell for Hadoop 运行 Sqoop 作业
-
 [!INCLUDE [sqoop-selector](../../includes/hdinsight-selector-use-sqoop.md)]
 
 [!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何使用 Azure PowerShell 在 HDInsight 中运行 Sqoop 作业，以在 HDInsight 群集和 Azure SQL 数据库或 SQL Server 数据库之间进行导入和导出。
 
-###先决条件
+> [!NOTE]
+可以对基于 Linux 或 Windows 的 HDInsight 群集使用本文中的步骤，但是，只能从 Windows 客户端执行这些步骤。有关其他作业提交方法，请单击本文顶部的选项卡选择器。
+> 
+> 
 
+### 先决条件
 在开始本教程前，你必须具有以下项：
 
-- **配备 Azure PowerShell 的工作站**。请参阅[安装 Azure PowerShell 1.0 和更高版本](./hdinsight-administer-use-powershell.md#install-azure-powershell-10-and-greater)。
-- **HDInsight 中的 Hadoop 群集**。请参阅[创建群集和 SQL 数据库](./hdinsight-use-sqoop.md#create-cluster-and-sql-database)。
+* **配备 Azure PowerShell 的工作站**。
+
+    [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+* **HDInsight 中的 Hadoop 群集**。请参阅[创建群集和 SQL 数据库](./hdinsight-use-sqoop.md#create-cluster-and-sql-database)。
 
 ## 使用 PowerShell 运行 Sqoop
-
 下面的 PowerShell 脚本预处理源文件，并将它导出到 Azure SQL 数据库：
 
 ```
@@ -54,10 +59,8 @@ $sqlDatabasePassword = "<Password>"
 
 #region - Connect to Azure subscription
 Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
-try{Get-AzureSubscription}
-catch{
-    Add-AzureAccount -Environment AzureChinaCloud
-}
+try{Get-AzureRmContext}
+catch{Login-AzureRmAccount -EnvironmentName AzureChinaCloud}
 #endregion
 
 #region - pre-process the source file
@@ -69,14 +72,14 @@ $sourceBlobName = "example/data/sample.log"
 $destBlobName = "tutorials/usesqoop/data/sample.log"
 
 # Define the connection string
-$defaultStorageAccountKey = Get-AzureStorageKey `
-                                -StorageAccountName $defaultStorageAccountName |  %{ $_.Primary }
+$defaultStorageAccountKey = (Get-AzureRmStorageAccountKey `
+                                -ResourceGroupName $resourceGroupName `
+                                -Name $defaultStorageAccountName)[0].Value
 $storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=$defaultStorageAccountName;AccountKey=$defaultStorageAccountKey"
 
 # Create block blob objects referencing the source and destination blob.
-$storageAccount = [Microsoft.WindowsAzure.Storage.CloudStorageAccount]::Parse($storageConnectionString)
-$storageClient = $storageAccount.CreateCloudBlobClient();
-$storageContainer = $storageClient.GetContainerReference($defaultBlobContainerName)
+$storageAccount = Get-AzureRmStorageAccount -ResourceGroupName $ResourceGroupName -Name $defaultStorageAccountName
+$storageContainer = ($storageAccount |Get-AzureStorageContainer -Name $defaultBlobContainerName).CloudBlobContainer
 $sourceBlob = $storageContainer.GetBlockBlobReference($sourceBlobName)
 $destBlob = $storageContainer.GetBlockBlobReference($destBlobName)
 
@@ -140,35 +143,39 @@ $exportDir_log4j = "/tutorials/usesqoop/data"
 $sqljdbcdriver = "/user/oozie/share/lib/sqoop/sqljdbc41.jar"
 
 # Submit a Sqoop job
-$sqoopDef = New-AzureHDInsightSqoopJobDefinition `
+$sqoopDef = New-AzureRmHDInsightSqoopJobDefinition `
     -Command "export --connect $connectionString --table $tableName_log4j --export-dir $exportDir_log4j --input-fields-terminated-by \0x20 -m 1" `
     -Files $sqljdbcdriver
 
-$sqoopJob = Start-AzureHDInsightJob `
-                -Cluster $hdinsightClusterName `
-                -Credential $httpCredential `
+$sqoopJob = Start-AzureRmHDInsightJob `
+                -ClusterName $hdinsightClusterName `
+                -HttpCredential $httpCredential `
                 -JobDefinition $sqoopDef #-Debug -Verbose
 
-Wait-AzureHDInsightJob `
-    -Cluster $hdinsightClusterName `
-    -Credential $httpCredential `
+Wait-AzureRmHDInsightJob `
+    -ResourceGroupName $resourceGroupName `
+    -ClusterName $hdinsightClusterName `
+    -HttpCredential $httpCredential `
     -JobId $sqoopJob.JobId
 
 Write-Host "Standard Error" -BackgroundColor Green
-Get-AzureHDInsightJobOutput -Cluster $hdinsightClusterName -JobId $sqoopJob.JobId -StandardError
+Get-AzureRmHDInsightJobOutput -ResourceGroupName $resourceGroupName -ClusterName $hdinsightClusterName -DefaultStorageAccountName $defaultStorageAccountName -DefaultStorageAccountKey $defaultStorageAccountKey -DefaultContainer $defaultBlobContainerName -HttpCredential $httpCredential -JobId $sqoopJob.JobId -DisplayOutputType StandardError
 Write-Host "Standard Output" -BackgroundColor Green
-Get-AzureHDInsightJobOutput -Cluster $hdinsightClusterName -JobId $sqoopJob.JobId -StandardOutput
+Get-AzureRmHDInsightJobOutput -ResourceGroupName $resourceGroupName -ClusterName $hdinsightClusterName -DefaultStorageAccountName $defaultStorageAccountName -DefaultStorageAccountKey $defaultStorageAccountKey -DefaultContainer $defaultBlobContainerName -HttpCredential $httpCredential -JobId $sqoopJob.JobId -DisplayOutputType StandardOutput
 #endregion
 ```
 
-##后续步骤
+## 限制
+* 批量导出 - 在基于 Linux 的 HDInsight 上，用于将数据导出到 Microsoft SQL Server 或 Azure SQL 数据库的 Sqoop 连接器目前不支持批量插入。
+* 批处理 - 在基于 Linux 的 HDInsight 上，如果执行插入时使用 `-batch` 开关，Sqoop 将执行多次插入而不是批处理插入操作。
 
+## 后续步骤
 现在你已了解如何使用 Sqoop。若要了解详细信息，请参阅以下文章：
 
-- [将 Oozie 与 HDInsight 配合使用](./hdinsight-use-oozie.md)：在 Oozie 工作流中使用 Sqoop 操作。
-- [使用 HDInsight 分析外部测试版延迟数据](./hdinsight-analyze-flight-delay-data.md)：使用 Hive 分析外部测试版延迟数据，然后使用 Sqoop 将数据导出到 Azure SQL 数据库。
-- [将数据上传到 HDInsight](./hdinsight-upload-data.md)：了解将数据上传到 HDInsight/Azure Blob 存储的其他方法。
+* [将 Oozie 与 HDInsight 配合使用](./hdinsight-use-oozie.md)：在 Oozie 工作流中使用 Sqoop 操作。
+* [使用 HDInsight 分析外部测试版延迟数据](./hdinsight-analyze-flight-delay-data.md)：使用 Hive 分析外部测试版延迟数据，然后使用 Sqoop 将数据导出到 Azure SQL 数据库。
+* [将数据上传到 HDInsight](./hdinsight-upload-data.md)：了解将数据上传到 HDInsight/Azure Blob 存储的其他方法。
 
 [sqoop-user-guide-1.4.4]: https://sqoop.apache.org/docs/1.4.4/SqoopUserGuide.html
 
-<!---HONumber=Mooncake_Quality_Review_1215_2016-->
+<!---HONumber=Mooncake_0120_2017-->

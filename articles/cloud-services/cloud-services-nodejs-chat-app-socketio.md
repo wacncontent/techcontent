@@ -12,8 +12,8 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 11/01/2016
-wacn.date: 12/16/2016
+ms.date: 12/22/2016
+wacn.date: 01/25/2017
 ms.author: robmcm
 ---
 
@@ -29,7 +29,7 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
 
 确保已安装以下产品和版本才能成功完成本文中的示例：
 
-* 安装 [Visual Studio 2013](https://www.visualstudio.com/zh-cn/downloads/download-visual-studio-vs.aspx)
+* 安装 [Visual Studio 2013](https://www.visualstudio.com/downloads/)
 * 安装 [Node.js](https://nodejs.org/download)
 * 安装 [Python 2.7.10 版](https://www.python.org)
 
@@ -192,3 +192,4 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
   [The output of the Publish-AzureService command]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-9.png
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->
+<!--Update_Description:update meta properties-->

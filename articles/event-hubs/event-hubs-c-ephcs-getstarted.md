@@ -12,8 +12,8 @@ ms.workload: na
 ms.tgt_pltfrm: c
 ms.devlang: csharp
 ms.topic: article
-ms.date: 08/16/2016
-wacn.date: 01/04/2017
+ms.date: 11/30/2016
+wacn.date: 01/23/2017
 ms.author: jotaub;sethm
 ---
 
@@ -75,3 +75,4 @@ ms.author: jotaub;sethm
 [使用事件中心扩大事件处理]: https://code.msdn.microsoft.com/windowsazure/Service-Bus-Event-Hub-45f43fc3
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->
+<!--Update_Description:update meta properties-->

@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 08/16/2016
-wacn.date: 10/10/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: yurid
 ---
 
@@ -40,3 +40,4 @@ ms.author: yurid
 [lnk-faq]: ./iot-suite-faq.md
 
 <!---HONumber=Mooncake_0829_2016-->
+<!--Update_Description:update meta properties-->

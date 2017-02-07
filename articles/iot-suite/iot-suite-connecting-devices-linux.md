@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/05/2016
-wacn.date: 12/05/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: dobett
 ---
 
@@ -23,7 +23,6 @@ ms.author: dobett
 [!INCLUDE [iot-suite-selector-connecting](../../includes/iot-suite-selector-connecting.md)]
 
 ## 生成并运行示例 C 客户端 Linux
-
 以下过程演示如何创建一个以 C 编写且在 Ubuntu Linux 系统上生成和运行的客户端应用程序，用来与远程监视预配置解决方案进行通信。若要完成这些步骤，你需要一个运行 Ubuntu 版本 15.04 或 15.10 的设备。继续操作之前，请使用以下命令在 Ubuntu 设备上安装必备组件包：
 
 ```
@@ -156,9 +155,7 @@ IoT 中心序列化程序客户端库使用一个模型来指定设备发送到 
           printf("IoTHubClient accepted the message for delivery\r\n");
         }
 
-    ```
-    IoTHubMessage_Destroy(messageHandle);
-    ```
+        IoTHubMessage_Destroy(messageHandle);
       }
     free((void*)buffer);
     }
@@ -222,110 +219,109 @@ IoT 中心序列化程序客户端库使用一个模型来指定设备发送到 
           IOTHUB_CLIENT_CONFIG config;
           IOTHUB_CLIENT_HANDLE iotHubClientHandle;
 
-    ```
-      config.deviceId = deviceId;
-      config.deviceKey = deviceKey;
-      config.deviceSasToken = NULL;
-      config.iotHubName = hubName;
-      config.iotHubSuffix = hubSuffix;
-      config.protocol = AMQP_Protocol;
-      iotHubClientHandle = IoTHubClient_Create(&config);
-      if (iotHubClientHandle == NULL)
-      {
-        (void)printf("Failed on IoTHubClient_CreateFromConnectionString\r\n");
-      }
-      else
-      {
-        Thermostat* thermostat = CREATE_MODEL_INSTANCE(Contoso, Thermostat);
-        if (thermostat == NULL)
-        {
-          (void)printf("Failed on CREATE_MODEL_INSTANCE\r\n");
-        }
-        else
-        {
-          STRING_HANDLE commandsMetadata;
-
-          if (IoTHubClient_SetMessageCallback(iotHubClientHandle, IoTHubMessage, thermostat) != IOTHUB_CLIENT_OK)
+          config.deviceId = deviceId;
+          config.deviceKey = deviceKey;
+          config.deviceSasToken = NULL;
+          config.iotHubName = hubName;
+          config.iotHubSuffix = hubSuffix;
+          config.protocol = AMQP_Protocol;
+          config.protocolGatewayHostName = NULL;
+          iotHubClientHandle = IoTHubClient_Create(&config);
+          if (iotHubClientHandle == NULL)
           {
-            printf("unable to IoTHubClient_SetMessageCallback\r\n");
+            (void)printf("Failed on IoTHubClient_CreateFromConnectionString\r\n");
           }
           else
           {
-
-            /* send the device info upon startup so that the cloud app knows
-               what commands are available and the fact that the device is up */
-            thermostat->ObjectType = "DeviceInfo";
-            thermostat->IsSimulatedDevice = false;
-            thermostat->Version = "1.0";
-            thermostat->DeviceProperties.HubEnabledState = true;
-            thermostat->DeviceProperties.DeviceID = (char*)deviceId;
-
-            commandsMetadata = STRING_new();
-            if (commandsMetadata == NULL)
+            Thermostat* thermostat = CREATE_MODEL_INSTANCE(Contoso, Thermostat);
+            if (thermostat == NULL)
             {
-              (void)printf("Failed on creating string for commands metadata\r\n");
+              (void)printf("Failed on CREATE_MODEL_INSTANCE\r\n");
             }
             else
             {
-              /* Serialize the commands metadata as a JSON string before sending */
-              if (SchemaSerializer_SerializeCommandMetadata(GET_MODEL_HANDLE(Contoso, Thermostat), commandsMetadata) != SCHEMA_SERIALIZER_OK)
+              STRING_HANDLE commandsMetadata;
+
+              if (IoTHubClient_SetMessageCallback(iotHubClientHandle, IoTHubMessage, thermostat) != IOTHUB_CLIENT_OK)
               {
-                (void)printf("Failed serializing commands metadata\r\n");
+                printf("unable to IoTHubClient_SetMessageCallback\r\n");
               }
               else
               {
-                unsigned char* buffer;
-                size_t bufferSize;
-                thermostat->Commands = (char*)STRING_c_str(commandsMetadata);
 
-                /* Here is the actual send of the Device Info */
-                if (SERIALIZE(&buffer, &bufferSize, thermostat->ObjectType, thermostat->Version, thermostat->IsSimulatedDevice, thermostat->DeviceProperties, thermostat->Commands) != IOT_AGENT_OK)
+                /* send the device info upon startup so that the cloud app knows
+                   what commands are available and the fact that the device is up */
+                thermostat->ObjectType = "DeviceInfo";
+                thermostat->IsSimulatedDevice = false;
+                thermostat->Version = "1.0";
+                thermostat->DeviceProperties.HubEnabledState = true;
+                thermostat->DeviceProperties.DeviceID = (char*)deviceId;
+
+                commandsMetadata = STRING_new();
+                if (commandsMetadata == NULL)
                 {
-                  (void)printf("Failed serializing\r\n");
+                  (void)printf("Failed on creating string for commands metadata\r\n");
                 }
                 else
                 {
-                  sendMessage(iotHubClientHandle, buffer, bufferSize);
+                  /* Serialize the commands metadata as a JSON string before sending */
+                  if (SchemaSerializer_SerializeCommandMetadata(GET_MODEL_HANDLE(Contoso, Thermostat), commandsMetadata) != SCHEMA_SERIALIZER_OK)
+                  {
+                    (void)printf("Failed serializing commands metadata\r\n");
+                  }
+                  else
+                  {
+                    unsigned char* buffer;
+                    size_t bufferSize;
+                    thermostat->Commands = (char*)STRING_c_str(commandsMetadata);
+
+                    /* Here is the actual send of the Device Info */
+                    if (SERIALIZE(&buffer, &bufferSize, thermostat->ObjectType, thermostat->Version, thermostat->IsSimulatedDevice, thermostat->DeviceProperties, thermostat->Commands) != CODEFIRST_OK)
+                    {
+                      (void)printf("Failed serializing\r\n");
+                    }
+                    else
+                    {
+                      sendMessage(iotHubClientHandle, buffer, bufferSize);
+                    }
+
+                  }
+
+                  STRING_delete(commandsMetadata);
                 }
 
+                thermostat->Temperature = 50;
+                thermostat->ExternalTemperature = 55;
+                thermostat->Humidity = 50;
+                thermostat->DeviceId = (char*)deviceId;
+
+                while (1)
+                {
+                  unsigned char*buffer;
+                  size_t bufferSize;
+
+                  (void)printf("Sending sensor value Temperature = %d, Humidity = %d\r\n", thermostat->Temperature, thermostat->Humidity);
+
+                  if (SERIALIZE(&buffer, &bufferSize, thermostat->DeviceId, thermostat->Temperature, thermostat->Humidity, thermostat->ExternalTemperature) != CODEFIRST_OK)
+                  {
+                    (void)printf("Failed sending sensor value\r\n");
+                  }
+                  else
+                  {
+                    sendMessage(iotHubClientHandle, buffer, bufferSize);
+                  }
+
+                  ThreadAPI_Sleep(1000);
+                }
               }
 
-              STRING_delete(commandsMetadata);
+              DESTROY_MODEL_INSTANCE(thermostat);
             }
-
-            thermostat->Temperature = 50;
-            thermostat->ExternalTemperature = 55;
-            thermostat->Humidity = 50;
-            thermostat->DeviceId = (char*)deviceId;
-
-            while (1)
-            {
-              unsigned char*buffer;
-              size_t bufferSize;
-
-              (void)printf("Sending sensor value Temperature = %d, Humidity = %d\r\n", thermostat->Temperature, thermostat->Humidity);
-
-              if (SERIALIZE(&buffer, &bufferSize, thermostat->DeviceId, thermostat->Temperature, thermostat->Humidity, thermostat->ExternalTemperature) != IOT_AGENT_OK)
-              {
-                (void)printf("Failed sending sensor value\r\n");
-              }
-              else
-              {
-                sendMessage(iotHubClientHandle, buffer, bufferSize);
-              }
-
-              ThreadAPI_Sleep(1000);
-            }
+            IoTHubClient_Destroy(iotHubClientHandle);
           }
-
-          DESTROY_MODEL_INSTANCE(thermostat);
+          serializer_deinit();
         }
-        IoTHubClient_Destroy(iotHubClientHandle);
-      }
-      serializer_deinit();
-    }
-    platform_deinit();
-    ```
+        platform_deinit();
       }
     }
     ```
@@ -383,9 +379,7 @@ int main(void)
 {
     remote_monitoring_run();
 
-```
-return 0;
-```
+    return 0;
 }
 ```
 
@@ -400,7 +394,7 @@ return 0;
     ```
     cmake_minimum_required(VERSION 2.8.11)
 
-    set(AZUREIOT_INC_FOLDER ".." "/usr/include/azureiot")
+    set(AZUREIOT_INC_FOLDER ".." "/usr/include/azureiot" "/usr/include/azureiot/inc")
 
     include_directories(${AZUREIOT_INC_FOLDER})
 
@@ -446,4 +440,5 @@ return 0;
 
 [!INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
 
-<!---HONumber=Mooncake_1128_2016-->
+<!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description:update wording-->

@@ -13,24 +13,24 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 11/15/2016
-wacn.date: 12/26/2016
+ms.date: 01/13/2017
+wacn.date: 01/25/2017
 ms.author: tomfitz
 ---
 
 # 使用 Resource Manager 模板和 Resource Manager REST API 部署资源
 > [!div class="op_single_selector"]
-* [Azure PowerShell](./powershell-azure-resource-manager.md)
-* [Azure CLI](./xplat-cli-azure-resource-manager.md)
-* [门户](./resource-group-portal.md)
-* [REST API](./resource-manager-rest-api.md)
+- [PowerShell](./resource-group-template-deploy.md)
+- [Azure CLI](./resource-group-template-deploy-cli.md)
+- [门户](./resource-group-template-deploy-portal.md)
+- [REST API](./resource-group-template-deploy-rest.md)
 
 本文介绍如何将 Resource Manager REST API 与 Resource Manager 模板配合使用向 Azure 部署资源。
 
 > [!TIP]
 有关在部署过程中调试错误的帮助，请参阅：
 > 
-> * [使用 REST API 查看部署操作](./resource-manager-troubleshoot-deployments-rest.md)，了解如何获取有助于排查错误的信息
+> * [查看部署操作](./resource-manager-deployment-operations.md)，了解如何获取有助于排查错误的信息
 > * [排查使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误](./resource-manager-common-deployment-errors.md)，了解如何解决常见的部署错误
 > 
 > 
@@ -47,7 +47,7 @@ ms.author: tomfitz
     PUT https://management.chinacloudapi.cn/subscriptions/<YourSubscriptionId>/resourcegroups/<YourResourceGroupName>?api-version=2015-01-01
       <common headers>
       {
-        "location": "China East",
+        "location": "China North",
         "tags": {
            "tagname1": "tagvalue1"
         }
@@ -93,11 +93,12 @@ ms.author: tomfitz
 [!INCLUDE [resource-manager-parameter-file](../../includes/resource-manager-parameter-file.md)]
 
 ## 后续步骤
+* 若要了解如何处理异步 REST 操作，请参阅[跟踪异步 Azure 操作](./resource-manager-async-operations.md)。
 * 有关通过 .NET 客户端库部署资源的示例，请参阅 [Deploy resources using .NET libraries and a template](../virtual-machines/virtual-machines-windows-csharp-template.md)（使用 .NET 库和模板部署资源）。
 * 若要在模板中定义参数，请参阅[创作模板](./resource-group-authoring-templates.md#parameters)。
-* 有关将解决方案部署到不同环境的指南，请参阅 [Azure 中的开发和测试环境](./solution-dev-test-environments.md)。
-* 有关使用 KeyVault 引用来传递安全值的详细信息，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md)。
+* 有关将解决方案部署到不同环境的指南，请参阅 [Development and test environments in Azure](./solution-dev-test-environments.md)（Azure 中的开发和测试环境）。
 * 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
 * 有关自动化部署的四部分系列教程，请参阅[将应用程序自动部署到 Azure 虚拟机](../virtual-machines/virtual-machines-windows-dotnet-core-1-landing.md)。此系列教程介绍了应用程序体系结构、访问与安全性、可用性与缩放性，以及应用程序部署。
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_0120_2017-->
+<!-- Update_Description: update meta properties ; wording update ; update link reference -->

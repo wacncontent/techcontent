@@ -98,3 +98,4 @@ fsutil behavior set DisableDeleteNotify 0
 如果应用程序需要使用 D: 盘存储数据，可以[更改 Windows 临时磁盘的驱动器号](./virtual-machines-windows-classic-change-drive-letter.md)。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: move content out from include file & add support for TRIM-->

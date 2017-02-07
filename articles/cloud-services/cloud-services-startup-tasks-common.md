@@ -12,8 +12,8 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 10/17/2016
-wacn.date: 12/05/2016
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
 ms.author: adegeo
 ---
 
@@ -509,11 +509,11 @@ EXIT %ERRORLEVEL%
 
 ## 后续步骤
 
-查看云[服务模型和包](./cloud-services-model-and-package.md)
+ - 查看云[服务模型和包](./cloud-services-model-and-package.md)
 
-详细了解[任务](./cloud-services-startup-tasks.md)的工作方式。
+ - 详细了解[任务](./cloud-services-startup-tasks.md)的工作方式。
 
-[创建和部署](./cloud-services-how-to-create-deploy.md)云服务包。
+ - [创建和部署](./cloud-services-how-to-create-deploy.md)云服务包。
 
 [ServiceDefinition.csdef]: ./cloud-services-model-and-package.md#csdef
 [Task]: https://msdn.microsoft.com/zh-cn/library/azure/gg557552.aspx#Task
@@ -529,3 +529,4 @@ EXIT %ERRORLEVEL%
 [RoleInstanceValue]: https://msdn.microsoft.com/zh-cn/library/azure/gg557552.aspx#RoleInstanceValue
 
 <!---HONumber=Mooncake_1128_2016-->
+<!--Update_Description:update meta properties-->

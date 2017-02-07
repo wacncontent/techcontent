@@ -170,11 +170,12 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
     # sudo fstrim /datadrive
     ```
 
-**RHEL/CentOS**
+    **RHEL/CentOS**
 
-```
+    ```
     # sudo yum install util-linux
     # sudo fstrim /datadrive
-```
+    ```
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: add support for TRIM/UNMAP-->

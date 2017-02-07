@@ -12,8 +12,8 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 11/01/2016
-wacn.date: 01/03/2017
+ms.date: 12/22/2016
+wacn.date: 01/25/2017
 ms.author: robmcm
 ---
 
@@ -121,3 +121,4 @@ ms.author: robmcm
 [将远程桌面与 Azure 角色一起使用]: http://msdn.microsoft.com/zh-cn/library/windowsazure/gg443832.aspx
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->
+<!--Update_Description:update meta properties-->

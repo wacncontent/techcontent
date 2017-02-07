@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 11/30/2016
-wacn.date: 01/06/2017
+ms.date: 01/13/2017
+wacn.date: 01/25/2017
 ms.author: tomfitz
 ---
 
@@ -24,13 +24,18 @@ ms.author: tomfitz
 - [Azure CLI](./resource-group-authenticate-service-principal-cli.md)
 - [门户](./resource-group-create-service-principal-portal.md)
 
-当应用程序需要访问或修改资源时，必须设置 Active Directory (AD) 应用程序，并为其分配所需的权限。本主题演示如何通过门户执行这些步骤。重点介绍单租户应用程序，其中应用程序只应在一个组织内运行。通常会将单租户应用程序作为在组织中运行的业务线应用程序使用。
+当应用程序需要访问或修改资源时，必须设置 Active Directory (AD) 应用程序，并为其分配所需的权限。与使用用户自己的凭据运行应用相比，此方法更优，原因在于：
+
+* 可以将权限分配给应用标识，这些权限不同于你自己的权限。通常情况下，这些权限仅限于应用需执行的操作。
+* 你的职责变化时，无需更改应用的凭据。
+
+本主题演示如何通过门户执行这些步骤。重点介绍单租户应用程序，其中应用程序只应在一个组织内运行。通常会将单租户应用程序作为在组织中运行的业务线应用程序使用。
 
 ## <a name="required-permissions"></a> 所需的权限
 为完成本主题，必须具有足够的权限向 Active Directory 注册应用程序，并将应用程序分配到 Azure 订阅中的角色。请确保你拥有适当的权限来执行这些步骤。
 
 ### 检查 Active Directory 权限
-1. 通过 [Azure 门户预览](https://portal.azure.cn)登录 Azure 帐户。
+1. 通过 [Azure 门户预览版](https://portal.azure.cn)登录 Azure 帐户。
 2. 选择“Azure Active Directory”。
 
      ![选择 azure active directory](./media/resource-group-create-service-principal-portal/select-active-directory.png)  
@@ -82,8 +87,8 @@ ms.author: tomfitz
 
      ![显示权限](./media/resource-group-create-service-principal-portal/view-assigned-roles.png)  
 
-## 创建 Active Directory 应用程序
-1. 通过 [Azure 门户预览](https://portal.azure.cn)登录 Azure 帐户。
+## <a name="create-an-active-directory-application"></a> 创建 Active Directory 应用程序
+1. 通过 [Azure 门户预览版](https://portal.azure.cn)登录 Azure 帐户。
 2. 选择“Azure Active Directory”。
 
      ![选择 azure active directory](./media/resource-group-create-service-principal-portal/select-active-directory.png)  
@@ -102,7 +107,7 @@ ms.author: tomfitz
 
 你已创建应用程序。
 
-## 获取应用程序 ID 和身份验证密钥
+## <a name="get-application-id-and-authentication-key"></a> 获取应用程序 ID 和身份验证密钥
 以编程方式登录时，需要使用应用程序的 ID 和身份验证密钥。若要获取这些值，请使用以下步骤：
 
 1. 从 Active Directory 中的“应用注册”，选择你的应用程序。
@@ -125,7 +130,7 @@ ms.author: tomfitz
 
      ![保存的密钥](./media/resource-group-create-service-principal-portal/copy-key.png)  
 
-## 获取租户 ID
+## <a name="get-tenant-id"></a> 获取租户 ID
 以编程方式登录时，需要随身份验证请求传递租户 ID。
 
 1. 若要获取租户 ID，请选择 Active directory 的“属性”。
@@ -167,9 +172,19 @@ ms.author: tomfitz
 
 9. 选择“确定”完成角色分配。该应用程序将显示在分配到该范围角色的用户列表中。
 
-现已在 Active Directory 设置你的应用程序。可使用 ID 和密钥登录为该应用程序。应用程序分配到角色，可以改角色身份对其执行特定操作。可以查看示例应用程序，详细了解如何通过应用程序代码完成任务。
+## 作为应用程序登录
 
-## <a name="sample-applications"></a> 示例应用程序
+现已在 Active Directory 设置你的应用程序。可使用 ID 和密钥登录为该应用程序。应用程序分配到角色，可以该角色身份执行特定操作。
+
+若要通过 PowerShell 登录，请参阅[通过 PowerShell 提供凭据](./resource-group-authenticate-service-principal.md#provide-credentials-through-powershell)。
+
+若要通过 Azure CLI 登录，请参阅[通过 Azure CLI 提供凭据](./resource-group-authenticate-service-principal-cli.md#provide-credentials-through-azure-cli)。
+
+若要获取 REST 操作的访问令牌，请参阅[创建请求](https://docs.microsoft.com/rest/api/#create-the-request)。
+
+查看下面的示例应用程序，了解如何通过应用程序代码登录。
+
+### <a name="sample-applications"></a> 示例应用程序
 以下示例应用程序显示如何登录为 AD 应用程序。
 
 **.NET**
@@ -201,4 +216,5 @@ ms.author: tomfitz
 * 若要设置多租户应用程序，请参阅[使用 Azure Resource Manager API 进行授权的开发人员指南](./resource-manager-api-authentication.md)。
 * 若要了解如何指定安全策略，请参阅 [Azure 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
 
-<!---HONumber=Mooncake_0103_2017-->
+<!---HONumber=Mooncake_0120_2017-->
+<!-- Update_Description: update meta properties ; wording update ; update link references -->

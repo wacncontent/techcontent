@@ -1,20 +1,22 @@
 ---
 title: 使用动态管理视图监视 Azure SQL 数据库 | Azure
-description: 了解如何通过使用动态管理视图监视 Azure SQL 数据库来检测并诊断常见性能问题。
+description: 了解如何通过使用动态管理视图检测常见性能问题来监视 Azure SQL 数据库。
 services: sql-database
-documentationCenter: ''
-authors: CarlRabeler
+documentationcenter: ''
+author: CarlRabeler
 manager: jhubbard
 editor: ''
 tags: ''
 
+ms.assetid: d08f505f-3c62-47d4-bab7-35c9a834b79b
 ms.service: sql-database
+ms.custom: monitor and tune
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: data-management
-ms.date: 09/20/2016
-wacn.date: 12/12/2016
+ms.date: 01/10/2017
+wacn.date: 01/25/2017
 ms.author: carlrab
 ---
 
@@ -31,7 +33,6 @@ SQL 数据库部分支持三种类别的动态管理视图：
 有关动态管理视图的详细信息，请参阅 SQL Server 联机丛书中的[动态管理视图和功能 (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms188754.aspx)。
 
 ## 权限
-
 在 SQL 数据库中，查询动态管理视图需要 **VIEW DATABASE STATE** 权限。**VIEW DATABASE STATE** 权限返回有关当前数据库中的所有对象的信息。若要向特定数据库用户授予 **VIEW DATABASE STATE**权限，请运行以下查询：
 
 ```
@@ -41,7 +42,6 @@ GRANT VIEW DATABASE STATE TO database_user;
 在本地 SQL Server 的实例中，动态管理视图会返回服务器状态信息。在 SQL 数据库中，这些视图会返回只与当前逻辑数据库相关的信息。
 
 ## 计算数据库大小
-
 下面的查询将返回数据库的大小（以 MB 为单位）：
 
 ```
@@ -139,4 +139,4 @@ ORDER BY highest_cpu_queries.total_worker_time DESC;
 
 [SQL 数据库简介](./sql-database-technical-overview.md)
 
-<!---HONumber=Mooncake_Quality_Review_1118_2016-->
+<!---HONumber=Mooncake_0120_2017-->

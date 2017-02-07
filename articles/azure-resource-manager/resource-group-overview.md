@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/12/2016
-wacn.date: 01/06/2017
+ms.date: 01/12/2017
+wacn.date: 01/25/2017
 ms.author: tomfitz
 ---
 
@@ -44,7 +44,7 @@ ms.author: tomfitz
 资源管理器提供了一种新方法来部署和管理您的解决方案。如果你使用早期的部署模型并想要了解这些更改，请参阅[了解资源管理器部署和经典部署](./resource-manager-deployment-model.md)。
 
 ## <a name="consistent-management-layer"></a> 一致的管理层
-Resource Manager 通过 Azure PowerShell、Azure CLI、Azure 门户预览、REST API 和开发工具，为所执行的任务提供一致的管理层。所有工具使用一组通用操作。可以使用最合适的工具，并且可以换用这些工具而不发生混淆。
+Resource Manager 通过 Azure PowerShell、Azure CLI、Azure 门户预览版、REST API 和开发工具，为所执行的任务提供一致的管理层。所有工具使用一组通用操作。可以使用最合适的工具，并且可以换用这些工具而不发生混淆。
 
 下图显示了这些工具如何与同等的 Azure Resource Manager API 交互。API 将请求传递给 Resource Manager 服务，后者对请求进行身份验证和授权。然后，Resource Manager 将请求路由到适当的资源提供程序。
 
@@ -60,7 +60,7 @@ Resource Manager 通过 Azure PowerShell、Azure CLI、Azure 门户预览、REST
 
 有关模板的建议，请参阅 [Best practices for creating Azure Resource Manager templates](./resource-manager-template-best-practices.md)（有关创建 Azure Resource Manager 模板的最佳实践）。
 
-如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure enterprise scaffold - prescriptive subscription governance](./resource-manager-subscription-governance.md)（Azure 企业基架 - 出于合规目的监管订阅）。
+如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业基架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
 
 ## <a name="resource-groups"></a> 资源组
 定义资源组时，需要考虑以下几个重要因素：
@@ -181,7 +181,7 @@ Azure Resource Manager 会分析依赖关系，以确保按正确的顺序创建
 
 * [使用 Resource Manager 模板和 Azure PowerShell 部署资源](./resource-group-template-deploy.md)
 * [使用 Resource Manager 模板和 Azure CLI 部署资源](./resource-group-template-deploy-cli.md)
-* [使用 Resource Manager 模板和 Azure 门户预览部署资源](./resource-group-template-deploy-portal.md)
+* [使用 Resource Manager 模板和 Azure 门户预览版部署资源](./resource-group-template-deploy-portal.md)
 * [使用 Resource Manager 模板和 Resource Manager REST API 部署资源](./resource-group-template-deploy-rest.md)
 
 ## 标记
@@ -218,7 +218,7 @@ Find-AzureRmResource -TagName costCenter -TagValue Finance
 azure resource list -t costCenter=Finance --json
 ```
 
-还可通过 Azure 门户预览查看标记的资源。
+还可通过 Azure 门户预览版查看标记的资源。
 
 订阅的[使用情况报告](../billing-understand-your-bill.md)包含标记名称和值，可让你根据标记划分成本。有关标记的详细信息，请参阅[使用标记来组织 Azure 资源](./resource-group-using-tags.md)。
 
@@ -258,7 +258,7 @@ Azure 还提供资源特定的多种角色。一些常见的角色包括：
 你可以显式锁定关键资源，以防止用户删除或修改这些资源。有关详细信息，请参阅[使用 Azure 资源管理器锁定资源](./resource-group-lock-resources.md)。
 
 ## 活动日志
-Resource Manager 记录所有创建、修改或删除资源的操作。在进行故障排除或监视组织中的用户如何修改资源时，可以使用活动日志来查找错误。若要查看日志，请在资源组的“设置”边栏选项卡中选择“活动日志”。可以按照许多不同的值筛选日志，包括哪位用户启动了操作。有关使用活动日志的信息，请参阅 [Audit operations with Resource Manager](./resource-group-audit.md)（使用 Resource Manager 执行审核操作）。
+Resource Manager 记录所有创建、修改或删除资源的操作。在进行故障排除或监视组织中的用户如何修改资源时，可以使用活动日志来查找错误。若要查看日志，请在资源组的“设置”边栏选项卡中选择“活动日志”。可以按照许多不同的值筛选日志，包括哪位用户启动了操作。有关使用活动日志的信息，请参阅[通过查看活动日志管理 Azure 资源](./resource-group-audit.md)。
 
 ## 自定义的策略
 资源管理器可让你创建自定义策略来管理资源。创建的策略类型可包括各种方案。可以在资源上实施命名约定，限制可部署的资源的类型和实例，或限制可托管资源类型的区域。可以要求资源上的标记值按部门组织计费。可以通过创建策略来降低成本并在订阅中保持一致性。
@@ -293,7 +293,7 @@ Azure SDK 适用于多种语言和平台。每种语言实现可通过其生态�
 [.NET](https://github.com/Azure/azure-sdk-for-net) | [Java](https://github.com/Azure/azure-sdk-for-java) | [Node.js](https://github.com/Azure/azure-sdk-for-node) | [PHP](https://github.com/Azure/azure-sdk-for-php) | [Python](https://github.com/Azure/azure-sdk-for-python) | [Ruby](https://github.com/Azure/azure-sdk-for-ruby)
 
 > [!NOTE]
-如果 SDK 未提供所需的功能，也可以直接调用 [Azure REST API](https://docs.microsoft.com/rest/api/resources/)。
+> 如果 SDK 未提供所需的功能，也可以直接调用 [Azure REST API](https://docs.microsoft.com/rest/api/resources/)。
 > 
 > 
 
@@ -328,4 +328,5 @@ Azure SDK 适用于多种语言和平台。每种语言实现可通过其生态�
 
 [powershellref]: https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.2.0/azurerm.resources
 
-<!---HONumber=Mooncake_0103_2017-->
+<!---HONumber=Mooncake_0120_2017-->
+<!-- Update_Description: update meta properties ; wording update ; update link reference -->

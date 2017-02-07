@@ -140,3 +140,4 @@ ms.author: iainfou
 有关对应用程序访问进行故障排除的详细信息，请参阅[对在 Azure 虚拟机上运行的应用程序的访问进行故障排除](./virtual-machines-linux-troubleshoot-app-connection.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

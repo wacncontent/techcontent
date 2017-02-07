@@ -59,7 +59,7 @@ Warning: Shuffle Join JOIN[8][tables = [t1933775, t1932766]] in Stage 'Stage-4:M
 
 由于查询大约在 26 分钟内完成运行，因此客户忽略了这些警告，反而开始将重点放在如何进一步改善此查询的性能上。
 
-客户参考了[在 HDInsight 中优化 Hadoop 的 Hive 查询](./hdinsight-hadoop-optimize-hive-query-v1.md)，并决定使用 Tez 执行引擎。启用 Tez 设置运行同一个查询之后，该查询运行了 15 分钟，然后引发以下错误：
+客户参考了[在 HDInsight 中优化 Hadoop 的 Hive 查询](./hdinsight-hadoop-optimize-hive-query.md)，并决定使用 Tez 执行引擎。启用 Tez 设置运行同一个查询之后，该查询运行了 15 分钟，然后引发以下错误：
 
 ```
 Status: Failed

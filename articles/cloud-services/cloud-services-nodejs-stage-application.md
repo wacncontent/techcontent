@@ -12,8 +12,8 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 11/01/2016
-wacn.date: 12/26/2016
+ms.date: 12/22/2016
+wacn.date: 01/25/2017
 ms.author: robmcm
 ---
 
@@ -77,3 +77,4 @@ ms.author: robmcm
 [如何在 Azure 中通过交换 VIP 将服务升级部署到生产环境]: ./cloud-services-how-to-manage.md#how-to-swap-deployments-to-promote-a-staged-deployment-to-production
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->
+<!--Update_Description:update meta properties-->

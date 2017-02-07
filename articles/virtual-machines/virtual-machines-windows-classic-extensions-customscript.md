@@ -109,3 +109,4 @@ Set-AzureVMCustomScriptExtension -Uninstall | Update-AzureVM
 [5]: ./media/virtual-machines-windows-classic-extensions-customscript/addcse.png
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & update code-->

@@ -210,11 +210,11 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 
 [hdinsight-visual-studio-tools]: ./hdinsight-hadoop-visual-studio-tools-get-started.md
 [hdinsight-use-sqoop]: ./hdinsight-use-sqoop.md
-[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-provision]: ./hdinsight-provision-clusters.md
 [hdinsight-use-mapreduce]: ./hdinsight-use-mapreduce.md
 [hdinsight-use-hive]: ./hdinsight-use-hive.md
 [hdinsight-use-pig]: ./hdinsight-use-pig.md
-[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows.md
 [hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
 [hdinsight-admin-powershell]: ./hdinsight-administer-use-powershell.md
 

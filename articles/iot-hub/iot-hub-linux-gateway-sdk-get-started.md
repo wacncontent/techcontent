@@ -14,7 +14,7 @@ ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/23/2016
-wacn.date: 01/13/2017
+wacn.date: 02/06/2017
 ms.author: andbuc
 ---
 
@@ -80,9 +80,7 @@ ms.author: andbuc
 3. 浏览到 **azure-iot-gateway-sdk/build** 文件夹。
 4. 运行以下命令：
 
-   ```
-   ./build/samples/hello_world/hello_world_sample ./samples/hello_world/src/hello_world_lin.json
-   ``` 
+       ./build/samples/hello_world/hello_world_sample ./samples/hello_world/src/hello_world_lin.json
 
 [!INCLUDE [iot-hub-gateway-sdk-getstarted-code](../../includes/iot-hub-gateway-sdk-getstarted-code.md)]
 
@@ -90,5 +88,5 @@ ms.author: andbuc
 
 [lnk-setupdevbox]: https://github.com/Azure/azure-iot-gateway-sdk/blob/master/doc/devbox_setup.md
 
-<!---HONumber=Mooncake_0109_2017-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->
 <!--Update_Description:update wording-->

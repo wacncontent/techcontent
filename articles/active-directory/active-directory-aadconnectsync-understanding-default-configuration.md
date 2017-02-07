@@ -14,7 +14,7 @@ ms.devlang: na
 ms.topic: article
 ms.date: 09/01/2016
 ms.author: andkjell
-wacn.date: 01/19/2017
+wacn.date: 01/24/2017
 ---
 
 # Azure AD Connect 同步：了解默认配置
@@ -67,7 +67,7 @@ wacn.date: 01/19/2017
     4. Exchange 相关的属性（GAL 中未显示的技术属性）从 `mailNickname ISNOTNULL` 的林提供。
     5. 如果有多个林匹配其中一个规则，将使用连接器（林）的创建顺序（日期/时间）来确定属性将由哪个林提供。
 
-### 联系人的现成规则
+### 联系人的现成规则 <a name="contact-out-of-box-rules"></a>
 联系人对象必须满足以下条件才进行同步：
 
 - 联系人必须已启用邮件。这可以使用以下规则来验证：

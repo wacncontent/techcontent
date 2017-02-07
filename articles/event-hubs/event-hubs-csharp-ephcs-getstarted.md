@@ -1,6 +1,6 @@
 ---
 title: 通过 C# 使用事件中心入门 | Azure
-description: 遵循本教程开始使用以 C# 编写的 Azure 事件中心和 EventProcessorHost。
+description: 按照本教程，开始通过 C# 使用 Azure 事件中心，并使用事件处理程序主机
 services: event-hubs
 documentationCenter: ''
 authors: jtaubensee
@@ -12,8 +12,8 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: hero-article
-ms.date: 09/02/2016
-wacn.date: 01/04/2017
+ms.date: 12/07/2016
+wacn.date: 01/23/2017
 ms.author: jotaub;sethm
 ---
 
@@ -94,4 +94,5 @@ ms.author: jotaub;sethm
 [使用事件中心扩大事件处理]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-45f43fc3
 [queued messaging solution]: ../service-bus-messaging/service-bus-dotnet-multi-tier-app-using-service-bus-queues.md
 
-<!---HONumber=Mooncake_Quality_Review_1230_2016-->
+<!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description:update meta properties-->

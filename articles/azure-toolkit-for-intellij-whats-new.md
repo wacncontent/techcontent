@@ -78,6 +78,6 @@ Azure Toolkit for IntelliJ - 2016 年 4 月版包含以下增强功能：
 
 [Azure Java 开发人员中心]: /develop/java/
 
-[HDInsight Tools Plugin for IntelliJ]: /documentation/articles/hdinsight-apache-spark-intellij-tool-plugin/
+[HDInsight Tools Plugin for IntelliJ]: ./hdinsight/hdinsight-apache-spark-intellij-tool-plugin.md
 
 <!---HONumber=Mooncake_1128_2016-->

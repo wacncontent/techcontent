@@ -2,18 +2,19 @@
 title: 配置独立群集 | Azure
 description: 本文介绍如何配置独立的或专用的 Service Fabric 群集。
 services: service-fabric
-documentationCenter: .net
-authors: dsk-2015
+documentationcenter: .net
+author: dsk-2015
 manager: timlt
 editor: ''
 
+ms.assetid: 0c5ec720-8f70-40bd-9f86-cd07b84a219d
 ms.service: service-fabric
 ms.devlang: dotnet
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/07/2016
-wacn.date: 11/28/2016
+ms.date: 12/12/2016
+wacn.date: 01/20/2017
 ms.author: dkshir
 ---
 
@@ -37,12 +38,13 @@ ms.author: dkshir
 ```
 "name": "SampleCluster",
 "clusterConfigurationVersion": "1.0.0",
-"apiVersion": "2015-01-01-alpha",
+"apiVersion": "2016-09-26",
 ```
 
 可为 Service Fabric 群集指定任何友好名称，只需将该名称分配到 **name** 变量即可。**clusterConfigurationVersion** 是群集的版本号；每次升级 Service Fabric 群集时，都应该递增该号码。不过，应该将 **apiVersion** 保留为默认值。
 
 <a id="clusternodes"></a>
+
 ## 群集上的节点
 可以使用 **nodes** 节配置 Service Fabric 群集上的节点，如以下代码片段所示。
 
@@ -70,21 +72,21 @@ ms.author: dkshir
 
 一个 Service Fabric 群集必须至少包含 3 个节点。你可以根据设置向此部分添加更多节点。下表说明了每个节点的配置设置。
 
-|**节点配置**|**说明**|
-|-----------------------|--------------------------|
-|nodeName|你可以为节点提供任何友好名称。|
-|iPAddress|打开命令窗口并键入 `ipconfig`，找出节点的 IP 地址。记下 IPV4 地址，并将其分配给 **iPAddress** 变量。|
-|nodeTypeRef|可以为每个节点分配不同的节点类型。[节点类型](#nodetypes)在以下节中定义。|
-|faultDomain|容错域可让群集管理员定义可能因共享的物理依赖项而同时发生故障的物理节点。|
-|upgradeDomain|升级域描述几乎在相同时间关闭以进行 Service Fabric 升级的节点集。你可以选择将哪些节点分配到哪些升级域，因为这不受任何物理要求的限制。| 
+| **节点配置** | **说明** |
+| --- | --- |
+| nodeName |你可以为节点提供任何友好名称。 |
+| iPAddress |打开命令窗口并键入 `ipconfig`，找出节点的 IP 地址。记下 IPV4 地址，并将其分配给 **iPAddress** 变量。 |
+| nodeTypeRef |可以为每个节点分配不同的节点类型。[节点类型](#nodetypes)在以下节中定义。 |
+| faultDomain |容错域可让群集管理员定义可能因共享的物理依赖项而同时发生故障的物理节点。 |
+| upgradeDomain |升级域描述几乎在相同时间关闭以进行 Service Fabric 升级的节点集。你可以选择将哪些节点分配到哪些升级域，因为这不受任何物理要求的限制。 |
 
 ## 群集属性
-
 ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
 
 <a id="reliability"></a>
-### 可靠性 
-**reliabilityLevel** 节定义可在群集的主节点上运行的系统服务副本数。此项可提高这些服务以及此群集的可靠性。可以将此变量设置为 *Bronze*、*Silver*、*Gold* 或 *Platinum*，这样就可以分别运行这些服务的 3、5、7、9 个副本。请参阅以下示例。
+
+### 可靠性
+**reliabilityLevel** 节定义可在群集的主节点上运行的系统服务副本数。此项可提高这些服务以及此群集的可靠性。可以将此变量设置为 *Bronze* 、 *Silver* 、 *Gold* 或 *Platinum* ，这样就可以分别运行这些服务的 3、5、7、9 个副本。请参阅以下示例。
 
 ```
 "reliabilityLevel": "Bronze",
@@ -132,6 +134,7 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
 **metadata** 用于描述安全群集，可根据具体的情况进行设置。**ClusterCredentialType** 和 **ServerCredentialType** 确定群集与节点将要实现的安全类型。可以将这两项设置为 *X509* 来实现基于证书的安全性，或者设置为 *Windows* 来实现基于 Azure Active Directory 的安全性。**security** 节的余下设置基于安全类型。若要了解如何填充 **security** 节的余下设置，请阅读 [独立群集中基于证书的安全性](./service-fabric-windows-cluster-x509-security.md)或 [独立群集中的 Windows 安全性](./service-fabric-windows-cluster-windows-security.md)。
 
 <a id="nodetypes"></a>
+
 ### 节点类型
 **nodeTypes** 节描述群集中的节点类型。一个群集必须指定至少一个节点类型，如以下代码段所示。
 
@@ -143,6 +146,7 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
     "leaseDriverEndpointPort": "19002"
     "serviceConnectionEndpointPort": "19003",
     "httpGatewayEndpointPort": "19080",
+    "reverseProxyEndpointPort": "19081",
     "applicationPorts": {
         "startPort": "20575",
         "endPort": "20605"
@@ -164,7 +168,7 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
 - *leaseDriverEndpointPort* 是群集租用驱动程序用来判断节点是否仍处于活动状态的端口。
 - *serviceConnectionEndpointPort* 是节点上部署的应用程序和服务用来与该特定节点上的 Service Fabric 客户端通信的端口。
 - *httpGatewayEndpointPort* 是 Service Fabric Explorer 用来连接群集的端口。
-- *ephemeralPorts* 是 [OS 使用的动态端口](https://support.microsoft.com/zh-cn/kb/929851)。Service Fabric 将使用其中的一部分端口作为应用程序端口，剩余的端口供 OS 使用。它还会将此范围映射到 OS 中的现有范围，因此，无论何时，你都可以使用示例 JSON 文件中指定的范围。需要确保起始端口与结束端口至少相差 255。
+- *ephemeralPorts* 替代[操作系统使用的动态端口](https://support.microsoft.com/zh-cn/kb/929851)。Service Fabric 将使用其中的一部分端口作为应用程序端口，剩余的端口供 OS 使用。它还会将此范围映射到 OS 中的现有范围，因此，无论何时，你都可以使用示例 JSON 文件中指定的范围。需要确保起始端口与结束端口至少相差 255。如果差值太低，可能会遇到冲突，因为此范围是与操作系统共享的。运行 `netsh int ipv4 show dynamicport tcp`，查看配置的动态端口范围。
 - *applicationPorts* 是 Service Fabric 应用程序使用的端口。这些端口应是 *ephemeralPorts* 的子集，其范围足以满足应用程序的终结点要求。每当需要新端口时，Service Fabric 将使用这些端口，并负责为这些端口打开防火墙。
 - *reverseProxyEndpointPort* 是可选的反向代理终结点。有关详细信息，请参阅 [Service Fabric 反向代理](./service-fabric-reverseproxy.md)。
 
@@ -187,6 +191,7 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
 
 ## 后续步骤
 
-根据独立群集设置配置一个完整的 ClusterConfig.JSON 文件后，可以遵循[在本地或云中创建 Azure Service Fabric 群集](./service-fabric-cluster-creation-for-windows-server.md)部署群集，然后继续[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
+根据独立群集设置配置完整的 ClusterConfig.JSON 文件后，可根据[创建独立 Service Fabric 群集](./service-fabric-cluster-creation-for-windows-server.md)一文部署群集，然后继续[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
-<!---HONumber=Mooncake_1121_2016-->
+<!---HONumber=Mooncake_0116_2017-->
+<!--update: apiversion update from 2015-01-01-alpha to 2016-09-26; add reverseProxyEndpointPort property for nodeTypes definition-->

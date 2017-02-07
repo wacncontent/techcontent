@@ -283,3 +283,4 @@ ssh fedora22
 * [使用 Azure CLI 创建安全 Linux VM](./virtual-machines-linux-quick-create-cli.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

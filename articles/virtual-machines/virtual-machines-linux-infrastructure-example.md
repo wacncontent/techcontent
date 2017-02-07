@@ -13,8 +13,8 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 09/08/2016
-wacn.date: 01/05/2017
+ms.date: 12/16/2016
+wacn.date: 01/25/2017
 ms.author: iainfou
 ---
 

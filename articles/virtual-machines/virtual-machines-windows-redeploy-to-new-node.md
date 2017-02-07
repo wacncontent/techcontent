@@ -39,3 +39,4 @@ Set-AzureRmVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
 如果在连接 VM 时遇到问题，可以在 [RDP 连接故障排除](./virtual-machines-windows-troubleshoot-rdp-connection.md)或[详细的 RDP 故障排除步骤](./virtual-machines-windows-detailed-troubleshoot-rdp.md)中找到特定的帮助。如果无法访问在 VM 上运行的应用程序，还可以阅读[应用程序故障排除问题](./virtual-machines-windows-troubleshoot-app-connection.md)。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update-->

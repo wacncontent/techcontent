@@ -225,7 +225,7 @@ az resource group export --name myResourceGroup > myResourceGroup.json
 
 在以下示例中，请将示例参数名称替换为你自己的值。示例参数名称包括 `myResourceGroup`、`mystorageaccount` 和 `myVM`。
 
-## 创建资源组并选择部署位置
+## <a name="create-resource-groups-and-choose-deployment-locations"></a> 创建资源组并选择部署位置
 Azure 资源组是逻辑部署实体，包含用于启用资源部署逻辑管理的配置信息和元数据。使用 [az group create](https://docs.microsoft.com/cli/azure/group#create) 创建资源组。以下示例在 `westeurope` 位置创建名为 `myResourceGroup` 的资源组：
 
 ```
@@ -246,7 +246,7 @@ az group create --name myResourceGroup --location westeurope
 }
 ```
 
-## 创建存储帐户
+## <a name="create-a-storage-account"></a> 创建存储帐户
 需要为 VM 磁盘和要添加的任何其他数据磁盘创建存储帐户。创建资源组后，应立即创建存储帐户。
 
 此处，我们使用 [az storage account create](https://docs.microsoft.com/cli/azure/storage/account#create)，并传递帐户的位置、控制该帐户的资源组，以及所需的存储支持类型。以下示例创建名为 `mystorageaccount` 的存储帐户：
@@ -326,7 +326,7 @@ az storage container list
 ]
 ```
 
-## 创建虚拟网络和子网
+## <a name="create-a-virtual-network-and-subnet"></a> 创建虚拟网络和子网
 接下来，需要创建在 Azure 中运行的虚拟网络，以及可在其中创建 VM 的子网。以下示例使用 [az network vnet create](https://docs.microsoft.com/cli/azure/network/vnet#create) 创建一个名为 `myVnet`、地址前缀为 `192.168.0.0/16` 的虚拟网络和一个名为 `mySubnet`、子网地址前缀为 `192.168.1.0/24` 的子网：
 
 ```
@@ -374,7 +374,7 @@ az network vnet create --resource-group myResourceGroup --location westeurope \
 }
 ```
 
-## 创建公共 IP 地址
+## <a name="create-a-public-ip-address"></a> 创建公共 IP 地址
 现在，需要创建分配给负载均衡器的公共 IP 地址 (PIP)。使用该地址可以通过 [az network public-ip create](https://docs.microsoft.com/cli/azure/network/public-ip#create) 命令从 Internet 连接到 VM。由于默认地址是动态的，因此可使用 `--domain-name-label` 选项在 **chinacloudapp.cn** 域中创建一个命名的 DNS 条目。以下示例创建名为 `myPublicIP`、DNS 名称为 `mypublicdns` 的公共 IP。由于 DNS 名称必须唯一，因此，请提供自己的唯一 DNS 名称：
 
 ```
@@ -403,7 +403,7 @@ az network public-ip create --resource-group myResourceGroup --location westeuro
 
 公共 IP 地址资源已经以逻辑方式分配，但尚未分配有特定地址。若要获取 IP 地址，需要一个负载均衡器，但该负载均衡器尚未创建。
 
-## 创建负载均衡器和 IP 池
+## <a name="create-a-load-balancer-and-ip-pools"></a> 创建负载均衡器和 IP 池
 创建负载均衡器时，可以将流量分散到多个 VM。负载均衡器还可以在执行维护或承受重负载时运行多个 VM 来响应用户请求，为应用程序提供冗余。以下示例使用 [az network lb create](https://docs.microsoft.com/cli/azure/network/lb#create) 创建一个名为 `myLoadBalancer` 的负载均衡器、一个名为 `myFrontEndPool` 的前端 IP 池，并挂接 `myPublicIP` 资源：
 
 ```
@@ -526,7 +526,7 @@ az network lb address-pool create --resource-group myResourceGroup \
       --lb-name myLoadBalancer --name myLoadBalancerRuleSSH2 --protocol tcp \
       --frontend-port 4223 --backend-port 22 --frontend-ip-name myFrontEndPool
 
-## 创建负载均衡器运行状况探测
+## <a name="create-a-load-balancer-health-probe"></a> 创建负载均衡器运行状况探测
 运行状况探测定期检查受负载均衡器后面的 VM，以确保它们可以根据定义操作和响应请求。否则，将从操作中删除这些 VM，确保不会将用户定向到它们。可以针对运行状况探测定义自定义检查，以及间隔和超时值。有关运行状况探测的详细信息，请参阅 [Load Balancer probes](../load-balancer/load-balancer-custom-probe-overview.md)（负载均衡器探测）。以下示例使用 [az network lb probe create](https://docs.microsoft.com/cli/azure/network/lb/probe#create) 创建名为 `myHealthProbe` 的 TCP 运行状况探测：
 
 ```
@@ -593,7 +593,7 @@ az network lb rule create --resource-group myResourceGroup --lb-name myLoadBalan
 }
 ```
 
-## 验证负载均衡器
+## <a name="verify-the-load-balancer"></a> 验证负载均衡器
 现已完成负载均衡器配置。以下是执行的步骤：
 
 1. 创建负载均衡器。
@@ -902,7 +902,7 @@ az network nsg show --resource-group myResourceGroup --name myNetworkSecurityGro
 }
 ```
 
-## 创建用于 Linux VM 的 NIC
+## <a name="create-an-nic-to-use-with-the-linux-vm"></a> 创建用于 Linux VM 的 NIC
 由于可以对 NIC 使用应用规则，因此能以编程方式使用 NIC。可以创建多个规则。在下面的 [az network nic create](https://docs.microsoft.com/cli/azure/network/nic#create) 命令中，要将 NIC 挂接到负载后端 IP 池，并将其与 NAT 规则关联以允许 SSH 流量和网络安全组。
 
 以下示例创建名为 `myNic1` 的 NIC：
@@ -973,7 +973,7 @@ az network nic create --resource-group myResourceGroup --location westeurope --n
   --lb-inbound-nat-rules myLoadBalancerRuleSSH2
 ```
 
-## 创建可用性集
+## <a name="create-an-availability-set"></a> 创建可用性集
 可用性集有助于将 VM 分散到容错域和升级域。让我们使用 [az vm availability-set create](https://docs.microsoft.com/cli/azure/vm/availability-set#create) 创建 VM 的可用性集。以下示例创建名为 `myAvailabilitySet` 的可用性集：
 
 ```
@@ -987,7 +987,7 @@ az vm availability-set create --resource-group myResourceGroup --location westeu
 
 有关详细信息，请阅读[管理 VM 可用性](./virtual-machines-linux-manage-availability.md)。
 
-## 创建 Linux VM
+## <a name="create-the-linux-vms"></a> 创建 Linux VM
 已经创建存储和网络资源，支持可访问 Internet 的 VM。现在，创建 VM 并使用不含密码的 SSH 密钥保护其安全。在此情况下，我们需要基于最新的 LTS 创建 Ubuntu VM。我们将根据 [finding Azure VM images](./virtual-machines-linux-cli-ps-findimage.md)（查找 Azure VM 映像）中所述，使用 [az vm image list](https://docs.microsoft.com/cli/azure/vm/image#list) 来查找该映像信息。
 
 我们还指定要用于身份验证的 SSH 密钥。如果没有任何 SSH 密钥，可以按照[这些说明](./virtual-machines-linux-mac-create-ssh-keys.md)创建 SSH 密钥。或者，可以在创建 VM 之后，使用 `--admin-password` 方法对 SSH 连接进行身份验证。此方法通常不太安全。
@@ -1093,3 +1093,4 @@ az resource group deployment create --resource-group myNewResourceGroup \
 现在，已准备好开始使用多个网络组件和 VM。可以使用本文介绍的核心组件，通过此示例环境构建应用程序。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: change the steps from Azure CLI to Azure CLI 2.0-->

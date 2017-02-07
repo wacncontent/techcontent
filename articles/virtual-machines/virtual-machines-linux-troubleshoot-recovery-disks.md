@@ -224,3 +224,4 @@ azure vm enable-diag --resource-group myResourceGroup --name myDeployedVM
 如果在连接到 VM 时遇到问题，请参阅 [Troubleshoot SSH connections to an Azure VM](./virtual-machines-linux-troubleshoot-ssh-connection.md)（排查 Azure VM 的 SSH 连接问题）。有关访问 VM 上运行的应用时遇到的问题，请参阅 [Troubleshoot application connectivity issues on a Linux VM](./virtual-machines-linux-troubleshoot-app-connection.md)（排查 Linux VM 上的应用程序连接问题）。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: wording update-->

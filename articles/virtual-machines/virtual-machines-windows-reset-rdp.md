@@ -167,3 +167,4 @@ Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' 
 [对与基于 Windows 的 Azure 虚拟机的远程桌面连接进行故障排除](./virtual-machines-windows-troubleshoot-rdp-connection.md)
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: update meta properties & wording update & update code-->

@@ -12,9 +12,9 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: Java
 ms.topic: article
-ms.date: 08/23/2016
+ms.date: 11/30/2016
 ms.author: sethm
-wacn.date: 01/04/2017
+wacn.date: 01/23/2017
 ---
 
 # 如何使用服务总线主题和订阅
@@ -308,3 +308,4 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
   [3]: ./media/service-bus-java-how-to-use-topics-subscriptions/sb-queues-09.png
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->
+<!--Update_Description:update meta properties-->

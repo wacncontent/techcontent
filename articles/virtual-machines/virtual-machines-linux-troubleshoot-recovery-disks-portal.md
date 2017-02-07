@@ -169,3 +169,4 @@ ms.author: iainfou
 有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
 <!---HONumber=Mooncake_0116_2017-->
+<!--Update_Description: wording update-->
