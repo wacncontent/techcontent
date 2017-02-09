@@ -71,7 +71,7 @@ ms.author: jgao
 2. 根据需要设置参数和变量。
 3. 使用以下 PowerShell 脚本运行模板：
 
-    ```
+    ```powershell
     ####################################
     # Set these variables
     ####################################
@@ -168,7 +168,7 @@ azure group deployment create --resource-group "hdi1229rg" --name "hdi1229" --te
 > [!NOTE]
 > 本示例包括 Hive 元存储和 Oozie 元存储的配置信息。使用模板之前请删除节或配置节。
 
-```
+```json
 {
 "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
 "contentVersion": "1.0.0.0",

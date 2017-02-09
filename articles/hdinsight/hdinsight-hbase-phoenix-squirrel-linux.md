@@ -52,7 +52,7 @@ wacn.date: 02/06/2017
 
 2. 运行以下命令以创建 HBase 表，并插入一些数据：
 
-    ```
+    ```sql
     CREATE TABLE Company (COMPANY_ID INTEGER PRIMARY KEY, NAME VARCHAR(225));
 
     !tables

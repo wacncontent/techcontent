@@ -44,7 +44,7 @@ Azure PowerShell 是一个功能强大的脚本编写环境，可用于在 Azure
 
 通过使用 Azure PowerShell 创建 HDInsight 群集需要执行以下过程：
 
-```
+```powershell
 ####################################
 # Set these variables
 ####################################

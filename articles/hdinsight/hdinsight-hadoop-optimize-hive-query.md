@@ -59,7 +59,7 @@ set hive.execution.engine=tez;
 
 对于基于 Windows 的 HDInsight 群集，必须在预配时启用 Tez。以下 Azure PowerShell 脚本示例用于预配已启用 Tez 的 Hadoop 群集：
 
-```
+```powershell
 $clusterName = "[HDInsightClusterName]"
 $location = "[AzureDataCenter]" #i.e. China North
 $dataNodes = 32 # number of worker nodes in the cluster
@@ -104,7 +104,7 @@ Hive 分区的实现方法是将原始数据刷新成新的目录，而每个分
 
 要创建分区表，请使用 *Partitioned By* 子句：
 
-```
+```sql
 CREATE TABLE lineitem_part
     (L_ORDERKEY INT, L_PARTKEY INT, L_SUPPKEY INT,L_LINENUMBER INT,
      L_QUANTITY DOUBLE, L_EXTENDEDPRICE DOUBLE, L_DISCOUNT DOUBLE,
@@ -120,7 +120,7 @@ STORED AS TEXTFILE;
 
 - **静态分区**表示已在相应目录中创建了分片数据，你可以请求根据目录位置在 Hive 中手动分区。以下代码段对此做了演示。
 
-    ```
+    ```sql
     INSERT OVERWRITE TABLE lineitem_part
     PARTITION (L_SHIPDATE = '5/23/1996 12:00:00 AM')
     SELECT * FROM lineitem 
@@ -132,7 +132,7 @@ STORED AS TEXTFILE;
 
 - **动态分区**表示你希望 Hive 自动创建分区。由于我们已经基于暂存表创建了分区表，我们需要做的就是将数据插入分区表，如下所示：
 
-    ```
+    ```sql
     SET hive.exec.dynamic.partition = true;
     SET hive.exec.dynamic.partition.mode = nonstrict;
     INSERT INTO TABLE lineitem_part
@@ -162,7 +162,7 @@ ORC（优化行纵栏式）格式是存储 Hive 数据的高效方式。与其�
 
 要启用 ORC 格式，请先使用 *Stored as ORC* 子句创建一个表：
 
-```
+```sql
 CREATE TABLE lineitem_orc_part
     (L_ORDERKEY INT, L_PARTKEY INT,L_SUPPKEY INT, L_LINENUMBER INT,
      L_QUANTITY DOUBLE, L_EXTENDEDPRICE DOUBLE, L_DISCOUNT DOUBLE,
@@ -175,7 +175,7 @@ STORED AS ORC;
 
 接下来，从暂存表向 ORC 表插入数据。例如：
 
-```
+```sql
 INSERT INTO TABLE lineitem_orc
 SELECT L_ORDERKEY as L_ORDERKEY, 
        L_PARTKEY as L_PARTKEY , 

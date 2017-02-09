@@ -53,7 +53,7 @@ Hive 非常适用于在 HDInsight 中处理数据，但有时你需要一种更�
 2. 创建该项目后，删除作为项目的一部分创建的 **exampleudf/src/test** 目录；该示例中不使用此目录。
 3. 打开 **exampleudf/pom.xml**，将现有的 `<dependencies>` 条目替换为以下内容：
 
-    ```
+    ```xml
     <dependencies>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -74,7 +74,7 @@ Hive 非常适用于在 HDInsight 中处理数据，但有时你需要一种更�
 
     在文件末尾的 `</project>` 行前面添加 `<build>` 部分。该部分应包含以下内容：
 
-    ```
+    ```xml
     <build>
         <plugins>
             <!-- build for Java 1.7, even if you're on a later version -->
@@ -132,7 +132,7 @@ Hive 非常适用于在 HDInsight 中处理数据，但有时你需要一种更�
 4. 将 **exampleudf/src/main/java/com/microsoft/examples/App.java** 重命名为 **ExampleUDF.java**，然后在编辑器中打开该文件。
 5. 将 **ExampleUDF.java** 文件的内容替换为以下内容，然后保存该文件。
 
-    ```
+    ```java
     package com.microsoft.examples;
 
     import org.apache.hadoop.hive.ql.exec.Description;
@@ -200,13 +200,13 @@ Hive 非常适用于在 HDInsight 中处理数据，但有时你需要一种更�
     该命令假定你使用默认的群集登录帐户 **admin**。
 2. 显示 `jdbc:hive2://localhost:10001/>` 提示符后，输入以下代码将 UDF 添加到 Hive，并将其作为函数公开。
 
-    ```
+    ```sql
     ADD JAR wasbs:///example/jars/ExampleUDF-1.0-SNAPSHOT.jar;
     CREATE TEMPORARY FUNCTION tolower as 'com.microsoft.examples.ExampleUDF';
     ```
 3. 使用该 UDF 将从表中检索的值转换为小写字符串。
 
-    ```
+    ```sql
     SELECT tolower(deviceplatform) FROM hivesampletable LIMIT 10;
     ```
 

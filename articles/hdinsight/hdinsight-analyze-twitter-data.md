@@ -101,7 +101,7 @@ Twitter 使用 OAuth 提供对其 API 的授权访问。OAuth 是一种身份验
 1. 打开 Windows PowerShell 集成脚本环境 (ISE)。（在 Windows 8“开始”屏幕上，键入 **PowerShell\_ISE**，然后单击“Windows PowerShell ISE”。请参阅[在 Windows 8 和 Windows 上启动 Windows PowerShell][powershell-start]）。
 2. 将以下脚本复制到脚本窗格中：
 
-    ```
+    ```powershell
     #region - variables and constants
     $clusterName = "<HDInsightClusterName>" # Enter the HDInsight cluster name
 
@@ -266,7 +266,7 @@ HiveQL 脚本将执行以下操作：
 1. 打开 Windows PowerShell ISE。
 2. 将以下脚本复制到脚本窗格中：
 
-    ```
+    ```powershell
     #region - variables and constants
     $clusterName = "<Existing HDInsight Cluster Name>" # Enter your HDInsight cluster name
     $subscriptionID = "<Azure Subscription ID>"
@@ -459,7 +459,7 @@ HiveQL 脚本将执行以下操作：
 > [!NOTE]
 若要使用最后两部分中上传的推文和 HiveQL 脚本，请将 $hqlScriptFile 设置为“/tutorials/twitter/twitter.hql”。若要使用已为你上传到公共 blob 的推文和 HiveQL 脚本，请将 $hqlScriptFile 设置为“wasbs://twittertrend@hditutorialdata.blob.core.windows.net/twitter.hql”。
 
-```
+```powershell
 #region variables and constants
 $clusterName = "<Existing Azure HDInsight Cluster Name>"
 $httpUserName = "admin"
@@ -498,7 +498,7 @@ Get-AzureRmHDInsightJobOutput -ClusterName $clusterName -JobId $jobID -DefaultCo
 ### 检查结果
 使用以下 Windows PowerShell 脚本检查 Hive 作业输出。你将需要设置前两个变量。
 
-```
+```powershell
 #region variables and constants
 $clusterName = "<Existing Azure HDInsight Cluster Name>"
 

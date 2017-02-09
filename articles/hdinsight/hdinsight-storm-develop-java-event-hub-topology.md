@@ -70,7 +70,7 @@ Azure 事件中心可用于处理网站、应用程序和设备中的大量数�
 **POM.xml** 文件包含此 Maven 项目的配置信息。需要关注的部分是：
 
 #### EventHubs Storm Spout 依赖性
-```
+```xml
 <dependency>
   <groupId>org.apache.storm</groupId>
   <artifactId>storm-eventhubs</artifactId>
@@ -88,7 +88,7 @@ Azure 事件中心可用于处理网站、应用程序和设备中的大量数�
 #### HdfsBolt 和 WASB 组件
 HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。但是，HDInsight 群集使用 Azure 存储空间 (WASB) 作为默认的数据存储区，因此我们必须加载多个组件，使 HdfsBolt 识别 WASB 文件系统。
 
-```
+```xml
   <!--HdfsBolt stuff -->
     <dependency>
     <groupId>org.apache.storm</groupId>
@@ -140,7 +140,7 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
 > 
 
 #### maven-compiler-plugin
-```
+```xml
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-compiler-plugin</artifactId>
@@ -155,7 +155,7 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
 这将告诉 Maven，编译后的项目应与 HDInsight 群集所用的 Java 7 版本兼容。
 
 #### maven-shade-plugin
-```
+```xml
   <!-- build an uber jar -->
   <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -198,7 +198,7 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
 * 确保同一接口的多个实现已合并成一个条目。否则，你将收到错误，指出 Storm-HDFS Bolt 不知道如何与 WASB 文件系统通信。
 
 #### exec-maven-plugin
-```
+```xml
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>exec-maven-plugin</artifactId>
@@ -229,7 +229,7 @@ mvn compile exec:java -Dstorm.topology=<CLASSNAME>
 例如，`mvn compile exec:java -Dstorm.topology=com.microsoft.example.EventHubWriter`。
 
 #### resources 节
-```
+```xml
 <resources>
   <resource>
     <directory>${basedir}/conf</directory>

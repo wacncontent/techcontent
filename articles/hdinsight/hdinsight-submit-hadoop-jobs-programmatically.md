@@ -65,7 +65,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 
 2. 使用以下代码：
 
-    ```
+    ```csharp
     using System.Collections.Generic;
     using System.Security;
     using Microsoft.Azure.Management.HDInsight.Job;

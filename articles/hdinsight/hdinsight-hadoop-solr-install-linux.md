@@ -125,7 +125,7 @@ https://hdiconfigactions.blob.core.windows.net/linuxsolrconfigactionv01/solr-ins
 
     这将会针对 __collection1__ 中匹配 __\*:\*__（在查询字符串中编码为 *%3A*）的所有文档发出查询，并且响应将以 JSON 形式返回。响应看上去应如下所示：
 
-    ```
+    ```json
         "response": {
             "numFound": 2,
             "start": 0,
@@ -229,7 +229,7 @@ Solr 仪表板是一个 Web UI，可让你通过 Web 浏览器使用 Solr。Solr
 
     输出返回两个我们用于为 Solr 编制索引的文档。输出如下所示：
 
-    ```
+    ```json
         "response": {
             "numFound": 2,
             "start": 0,
@@ -309,7 +309,7 @@ sudo start solr
 
     你应该看到如下所示的响应：
 
-    ```
+    ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <response>
       <lst name="responseHeader">

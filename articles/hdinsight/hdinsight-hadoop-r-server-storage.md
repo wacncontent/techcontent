@@ -145,7 +145,7 @@ hadoop fs -mkdir wasbs://container2@storage2.blob.core.chinacloudapi.cn/user/Rev
 ## 在 R Server 中使用 Data Lake Store
 获取 Data Lake Store 访问权限后，便可以在 HDInsight 上的 R Server 中使用 Data Lake Store，其使用方式与使用辅助 Azure 存储帐户类似。唯一的差别在于，前缀 **wasb://** 需更改为 **adl://**，如下所示：
 
-````
+````r
 # Point to the ADL store (e.g. ADLtest)
 myNameNode <- "adl://rkadl1.azuredatalakestore.net"
 myPort <- 0

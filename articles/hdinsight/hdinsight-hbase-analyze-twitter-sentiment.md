@@ -94,7 +94,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 3. 从“解决方案资源管理器”中，将 **System.Configuration** 添加到引用中。
 4. 将新的类文件添加到名为 **HBaseWriter.cs** 的项目中，然后将代码替换为以下内容：
 
-    ```
+    ```csharp
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -359,7 +359,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 
 7. 打开 **Program.cs**，将代码替换为以下内容：
 
-    ```
+    ```csharp
     using System;
     using System.Diagnostics;
     using Tweetinvi;
@@ -479,7 +479,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 3. 在“名称”字段中键入 **HBaseReader.cs**，然后单击“添加”。
 4. 将此代码替换为以下代码：
 
-    ```
+    ```csharp
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -606,7 +606,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 5. 在“解决方案资源管理器”中，双击 TweetsController.cs 打开该文件。
 5. 修改该文件，使其类似于：
 
-    ```
+    ```csharp
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -638,7 +638,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 3. 在“项名称”字段中键入 **heatmap.js**。
 4. 将以下代码粘贴到文件中。该代码由 Alastair Aitchison 编写。有关详细信息，请参阅[必应地图 AJAX v7 HeatMap 库](http://alastaira.wordpress.com/2011/04/15/bing-maps-ajax-v7-heatmap-library/)。
 
-    ```
+    ```js
     /*******************************************************************************
     * Author: Alastair Aitchison
     * Website: http://alastaira.wordpress.com
@@ -895,7 +895,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 3. 在“项名称”字段中键入 **twitterStream.js**。
 4. 将以下代码复制并粘贴到文件中：
 
-    ```
+    ```js
     var liveTweetsPos = [];
     var liveTweets = [];
     var liveTweetsNeg = [];
@@ -1096,7 +1096,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 1. 在“解决方案资源管理器”中，依次展开“TweetSentimentWeb”、“视图”和“共享”，然后双击“\_Layout.cshtml”。
 2. 将文件中的内容替换为以下内容：
 
-    ```
+    ```html
     <!DOCTYPE html>
     <html>
     <head>
@@ -1161,7 +1161,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 1. 在“解决方案资源管理器”中，依次展开“TweetSentimentWeb”、“视图”和“主页”，然后双击“Index.cshtml”。
 2. 将文件中的内容替换为以下内容：
 
-    ```
+    ```html
     @{
         ViewBag.Title = "Tweet Sentiment";
     }
@@ -1176,7 +1176,7 @@ Twitter 流 API 使用 [OAuth](http://oauth.net/) 对请求授权。使用 OAuth
 1. 在“解决方案资源管理器”中，依次展开“TweetSentimentWeb”和“内容”，然后双击“Site.css”。
 2. 将以下代码附加到文件中：
 
-    ```
+    ```css
     /* make container, and thus map, 100% width */
     .map_container {
         width: 100%;

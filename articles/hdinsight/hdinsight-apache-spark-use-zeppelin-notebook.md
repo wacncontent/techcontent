@@ -77,7 +77,7 @@ ms.author: nitinme
 
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
-```
+```powershell
 Login-AzureRMAccount
 
 # PROVIDE VALUES FOR THE VARIABLES

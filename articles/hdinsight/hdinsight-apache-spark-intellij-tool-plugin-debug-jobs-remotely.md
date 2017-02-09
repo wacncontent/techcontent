@@ -167,7 +167,7 @@ ms.author: nitinme
 
     1. `core-site.xml` 包含与群集关联的存储帐户的已加密密钥。在已添加到项目的 `core-site.xml` 中，将已加密密钥替换为与默认存储帐户关联的实际存储密钥。请参阅 [Manage your storage access keys](../storage/storage-create-storage-account.md#manage-your-storage-account)（管理存储访问密钥）。
 
-        ```
+        ```xml
         <property>
               <name>fs.azure.account.key.hdistoragecentral.blob.core.chinacloudapi.cn</name>
               <value>access-key-associated-with-the-account</value>
@@ -176,7 +176,7 @@ ms.author: nitinme
 
     2. 从 `core-site.xml` 中删除以下条目。
 
-        ```
+        ```xml
         <property>
               <name>fs.azure.account.keyprovider.hdistoragecentral.blob.core.chinacloudapi.cn</name>
               <value>org.apache.hadoop.fs.azure.ShellDecryptionKeyProvider</value>
@@ -205,7 +205,7 @@ ms.author: nitinme
 
 9. 在 `MyClusterAppMain.scala` 文件中粘贴以下代码。此代码将创建 Spark 上下文，并从 `SparkSample` 对象启动 `executeJob` 方法。
 
-    ```
+    ```java
     import org.apache.spark.{SparkConf, SparkContext}
 
     object SparkSampleMain {
@@ -223,7 +223,7 @@ ms.author: nitinme
 
 10. 重复上述步骤 8 和 9，添加名为 `SparkSample` 的新 Scala 对象。在此类中添加以下代码。此代码从 HVAC.csv（适用于所有 HDInsight Spark 群集）中读取数据，检索在 CSV 的第七列中只有一个数字的行，并将输出写入群集的默认存储容器下的 **/HVACOut**。
 
-    ```
+    ```java
     import org.apache.spark.SparkContext
 
     object SparkSample {
@@ -245,7 +245,7 @@ ms.author: nitinme
 
 11. 重复上述步骤 8 和 9，添加名为 `RemoteClusterDebugging` 的新类。此类实现用于调试应用程序的 Spark 测试框架。将以下代码添加到 `RemoteClusterDebugging` 类。
 
-    ```
+    ```java
     import org.apache.spark.{SparkConf, SparkContext}
     import org.scalatest.FunSuite
 

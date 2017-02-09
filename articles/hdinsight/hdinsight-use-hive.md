@@ -82,7 +82,7 @@ Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL �
 ## <a id="job"></a>示例作业：将列投影到分隔数据
 以下 HiveQL 语句将列投影到 **wasbs:///example/data** 目录中存储的分隔数据：
 
-```
+```sql
 set hive.execution.engine=tez;
 DROP TABLE log4jLogs;
 CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
@@ -115,7 +115,7 @@ SELECT t4 AS sev, COUNT(*) AS count FROM log4jLogs WHERE t4 = '[ERROR]' AND INPU
 
 创建外部表后，使用以下语句创建**内部**表。
 
-```
+```sql
 set hive.execution.engine=tez;
 CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
 STORED AS ORC;

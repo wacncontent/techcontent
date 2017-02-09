@@ -115,7 +115,7 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
 
     编辑器打开后，使用以下文本作为该文件的内容：
 
-    ```
+    ```python
     #!/usr/bin/env python
 
     import sys

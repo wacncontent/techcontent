@@ -56,7 +56,7 @@ HDInsight 群集使用 Ubuntu 长期支持 (LTS) 作为群集中节点的操作�
 
 1. 查找现有群集的存储帐户和默认容器信息。为此，可以使用以下 Azure PowerShell 脚本。
 
-    ```
+    ```powershell
     $clusterName="Your existing HDInsight cluster name"
     $clusterInfo = Get-AzureRmHDInsightCluster -ClusterName $clusterName
     write-host "Storage account name: $clusterInfo.DefaultStorageAccount.split('.')[0]"

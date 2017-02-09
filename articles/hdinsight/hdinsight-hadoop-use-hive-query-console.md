@@ -42,7 +42,7 @@ HDInsight 查询控制台只能在基于 Windows 的 HDInsight 群集上使用�
 
     将文本 `Select * from hivesampletable` 替换为以下 HiveQL 语句：
 
-    ```
+    ```sql
     set hive.execution.engine=tez;
     DROP TABLE log4jLogs;
     CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)

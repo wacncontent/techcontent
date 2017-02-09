@@ -88,7 +88,7 @@ ms.author: nitinme
     >
     > 请按照 [Install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（安装和配置 Azure PowerShell）中的步骤安装最新版本的 Azure PowerShell。如果你的脚本需要修改才能使用与 Azure Resource Manager 兼容的新 cmdlet，请参阅[迁移到适用于 HDInsight 群集的基于 Azure Resource Manager 的开发工具](./hdinsight-hadoop-development-using-azure-resource-manager.md)，了解详细信息。
 
-    ```
+    ```powershell
     $clusterName = "clustername"
     # Giraph examples jar
     $jarFile = "wasbs:///example/jars/giraph-examples.jar"
@@ -119,7 +119,7 @@ ms.author: nitinme
 在上面的示例中，请将 **clustername** 替换为已装有 Giraph 的 HDInsight 群集的名称。
 3. 查看结果。完成该作业后，结果将存储在 **wasbs:///example/out/shotestpaths** 文件夹中的两个输出文件中。这些文件名为 **part-m-00001** 和 **part-m-00002**。执行以下步骤以下载和查看输出：
 
-    ```
+    ```powershell
     $subscriptionName = "<SubscriptionName>"       # Azure subscription name
     $storageAccountName = "<StorageAccountName>"   # Azure Storage account name
     $containerName = "<ContainerName>"             # Blob storage container name

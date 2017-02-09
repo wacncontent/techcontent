@@ -51,7 +51,7 @@ ms.author: larryfr
     启动 CLI 后，可看到 Hive CLI 提示符：`hive>`。
 3. 在 CLI 中输入以下语句，以使用示例数据创建名为 **log4jLogs** 的新表：
 
-    ```
+    ```sql
     set hive.execution.engine=tez;
     DROP TABLE log4jLogs;
     CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
@@ -77,7 +77,7 @@ ms.author: larryfr
     * **INPUT\_\_FILE\_\_NAME LIKE '%.log'** - 告诉 Hive，我们只应返回以 .log 结尾的文件中的数据。此项将搜索限定为包含数据的 sample.log 文件，而不返回与所定义架构不符的其他示例数据文件中的数据。
 4. 使用以下语句创建名为 **errorLogs** 的新“内部”表：
 
-    ```
+    ```sql
     CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) STORED AS ORC;
     INSERT OVERWRITE TABLE errorLogs SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log';
     ```
@@ -95,7 +95,7 @@ ms.author: larryfr
 
         要验证是否只将第 t4 列中包含 **[ERROR]** 的行存储到了 **errorLogs** 表中，请使用以下语句从 **errorLogs** 返回所有行：
 
-        ```
+        ```sql
         SELECT * from errorLogs;
         ```
 

@@ -80,7 +80,7 @@ mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DgroupI
 
 Maven 允许定义项目级的值，称为属性。在 `<url>http://maven.apache.org</url>` 行的后面添加以下内容：
 
-```
+```xml
 <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!--
@@ -98,7 +98,7 @@ Maven 允许定义项目级的值，称为属性。在 `<url>http://maven.apache
 
 由于这是 Storm 拓扑，因此必须添加 Storm 组件的依赖项。打开 **pom.xml**，并在 **&lt;dependencies>** 节中添加以下代码：
 
-```
+```xml
 <dependency>
   <groupId>org.apache.storm</groupId>
   <artifactId>storm-core</artifactId>
@@ -117,7 +117,7 @@ Maven 允许定义项目级的值，称为属性。在 `<url>http://maven.apache
 
 Maven 插件可让你自定义项目的生成阶段，例如，如何编译项目，或者如何将它打包成 JAR 文件。打开 **pom.xml**，并紧靠在 `</project>` 行的上方添加以下代码。
 
-```
+```xml
 <build>
   <plugins>
   </plugins>
@@ -132,7 +132,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
 
 针对 Storm 拓扑，[Exec Maven 插件](http://www.mojohaus.org/exec-maven-plugin/)十分有用，因为它可让用户轻松地在开发环境本地运行拓扑。将以下内容添加至 **pom.xml** 文件的 `<plugins>` 节，以包括 Exec Maven 插件：
 
-```
+```xml
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>exec-maven-plugin</artifactId>
@@ -161,7 +161,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
 
 在 **pom.xml** 的 `<plugins>` 节中添加以下内容，以包括 Apache Maven Compiler 插件并将源和目标版本设置为 1.7。
 
-```
+```xml
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-compiler-plugin</artifactId>
@@ -177,7 +177,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
 
 使用 resources 节可以包含非代码资源，例如拓扑中组件所需的配置文件。本示例将在 **pom.xml** 文件的 `<resources>` 节中添加以下内容。
 
-```
+```xml
 <resource>
     <directory>${basedir}/resources</directory>
     <filtering>false</filtering>
@@ -210,7 +210,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
 
 对于 Spout，在 **src\\main\\java\\com\\microsoft\\example** 目录中创建名为 **RandomSentenceSpout.java** 的新文件，并使用以下内容做为内容：
 
-```
+```java
 package com.microsoft.example;
 
 import org.apache.storm.spout.SpoutOutputCollector;
@@ -292,7 +292,7 @@ Bolt 几乎可以执行任何操作，例如，计算、保存，或者与外部
 
 **SplitSentence**
 
-```
+```java
 package com.microsoft.example;
 
 import java.text.BreakIterator;
@@ -341,7 +341,7 @@ public class SplitSentence extends BaseBasicBolt {
 
 **WordCount**
 
-```
+```java
 package com.microsoft.example;
 
 import java.util.HashMap;
@@ -434,7 +434,7 @@ public class WordCount extends BaseBasicBolt {
 
 若要实现该拓扑，请在 **src\\main\\java\\com\\microsoft\\example** 目录中创建名为 **WordCountTopology.java** 的新文件。将以下内容用作该文件的内容：
 
-```
+```java
 package com.microsoft.example;
 
 import org.apache.storm.Config;
@@ -502,7 +502,7 @@ public class WordCountTopology {
 
 Storm 使用 Apache Log4j 来记录信息。如果未配置日志记录，拓扑将发出许多难以阅读的诊断信息。若要控制所记录的信息，请在 __resources__ 目录中创建名为 __log4j2.xml__ 的文件。将以下内容用作该文件的内容。
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
 <Appenders>
@@ -567,7 +567,7 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
 
 2. 在 **resources** 目录中，创建名为 **topology.yaml** 的新文件。在此文件中使用以下内容。
 
-    ```
+    ```yaml
     # topology definition
 
     # name to be used when submitting. This is what shows up...
@@ -625,7 +625,7 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
 
    * 在 `<dependencies>` 节中添加以下新依赖关系：
 
-       ```
+       ```xml
         <!-- Add a dependency on the Flux framework -->
         <dependency>
             <groupId>org.apache.storm</groupId>
@@ -636,7 +636,7 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
 
    * 将以下插件添加到 `<plugins>` 节。此插件处理项目包（jar 文件）的创建，并在创建包时应用一些特定于 Flux 的转换。
 
-       ```
+       ```xml
         <!-- build an uber jar -->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -679,7 +679,7 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
 
    * 将以下内容添加到 `<resources>` 节中的 `<includes>`。这样就加入了用于将拓扑定义为项目一部分的 YAML 文件。
 
-       ```
+       ```xml
         <include>topology.yaml</include>
        ```
 

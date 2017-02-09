@@ -121,7 +121,7 @@ Spark Streaming 可以扩展核心 Spark API，以生成可缩放、高吞吐量
 
 5. 打开 **pom.xml** 并确保 Spark 版本正确。在 <properties> 节点下查找以下代码片段，并检查 Spark 版本。
 
-    ```
+    ```xml
     <scala.version>2.10.4</scala.version>
     <scala.compat.version>2.10.4</scala.compat.version>
     <scala.binary.version>2.10</scala.binary.version>
@@ -132,7 +132,7 @@ Spark Streaming 可以扩展核心 Spark API，以生成可缩放、高吞吐量
 
     * **EventHub 接收方 jar**。必须有此 jar，Spark 才能从事件中心接收消息。若要使用此 jar，请更新 **pom.xml**，在 `<dependencies>` 下面添加以下代码。
 
-        ```
+        ```xml
         <dependency>
           <groupId>com.microsoft.azure</groupId>
           <artifactId>spark-streaming-eventhubs_2.10</artifactId>
@@ -209,7 +209,7 @@ curl -k --user "admin:mypassword1!" -v -H "Content-Type: application/json" -X PO
 
 文件 **inputBlob.txt** 中的参数定义如下：
 
-```
+```json
 { "file":"wasbs:///example/jars/microsoft-spark-streaming-examples.jar", "className":"com.microsoft.spark.streaming.examples.workloads.EventhubsEventCount", "args":["--eventhubs-namespace", "mysbnamespace", "--eventhubs-name", "myeventhub", "--policy-name", "myreceivepolicy", "--policy-key", "<put-your-key-here>", "--consumer-group", "$default", "--partition-count", 10, "--batch-interval-in-seconds", 20, "--checkpoint-directory", "/EventCheckpoint", "--event-count-folder", "/EventCount/EventCount10"], "numExecutors":20, "executorMemory":"1G", "executorCores":1, "driverMemory":"2G" }
 ```
 
@@ -257,7 +257,7 @@ curl -k --user "admin:mypassword1!" -v -H "Content-Type: application/json" -X PO
 
 文件 **inputJSON.txt** 中的参数定义如下：
 
-```
+```json
 { "file":"wasbs:///example/jars/microsoft-spark-streaming-examples.jar", "className":"com.microsoft.spark.streaming.examples.workloads.EventhubsToAzureBlobAsJSON", "args":["--eventhubs-namespace", "mysbnamespace", "--eventhubs-name", "myeventhub", "--policy-name", "myreceivepolicy", "--policy-key", "<put-your-key-here>", "--consumer-group", "$default", "--partition-count", 10, "--batch-interval-in-seconds", 20, "--checkpoint-directory", "/EventCheckpoint", "--event-count-folder", "/EventCount/EventCount10", "--event-store-folder", "/EventStore10"], "numExecutors":20, "executorMemory":"1G", "executorCores":1, "driverMemory":"2G" }
 ```
 
@@ -286,7 +286,7 @@ curl -k --user "admin:mypassword1!" -v -H "Content-Type: application/json" -X PO
 
 文件 **inputHive.txt** 中的参数定义如下：
 
-```
+```json
 { "file":"wasbs:///example/jars/microsoft-spark-streaming-examples.jar", "className":"com.microsoft.spark.streaming.examples.workloads.EventhubsToHiveTable", "args":["--eventhubs-namespace", "mysbnamespace", "--eventhubs-name", "myeventhub", "--policy-name", "myreceivepolicy", "--policy-key", "<put-your-key-here>", "--consumer-group", "$default", "--partition-count", 10, "--batch-interval-in-seconds", 20, "--checkpoint-directory", "/EventCheckpoint", "--event-count-folder", "/EventCount/EventCount10", "--event-hive-table", "EventHiveTable10" ], "jars":["wasbs:///example/jars/datanucleus-api-jdo-3.2.6.jar", "wasbs:///example/jars/datanucleus-rdbms-3.2.9.jar", "wasbs:///example/jars/datanucleus-core-3.2.10.jar"], "files":["wasbs:///example/jars/hive-site.xml"], "numExecutors":20, "executorMemory":"1G", "executorCores":1, "driverMemory":"2G" }
 ```
 
@@ -340,13 +340,13 @@ curl -k --user "admin:mypassword1!" -v -H "Content-Type: application/json" -X PO
 
 文件 **inputSQL.txt** 中的参数定义如下：
 
-```
+```json
 { "file":"wasbs:///example/jars/microsoft-spark-streaming-examples.jar", "className":"com.microsoft.spark.streaming.examples.workloads.EventhubsToAzureSQLTable", "args":["--eventhubs-namespace", "mysbnamespace", "--eventhubs-name", "myeventhub", "--policy-name", "myreceivepolicy", "--policy-key", "<put-your-key-here>", "--consumer-group", "$default", "--partition-count", 10, "--batch-interval-in-seconds", 20, "--checkpoint-directory", "/EventCheckpoint", "--event-count-folder", "/EventCount/EventCount10", "--sql-server-fqdn", "<database-server-name>.database.chinacloudapi.cn", "--sql-database-name", "mysparkdatabase", "--database-username", "sparkdbadmin", "--database-password", "<put-password-here>", "--event-sql-table", "EventContent" ], "numExecutors":20, "executorMemory":"1G", "executorCores":1, "driverMemory":"2G" }
 ```
 
 若要验证应用程序是否已成功运行，可以使用 SQL Server Management Studio 连接到 Azure SQL 数据库。有关如何执行该操作的说明，请参阅[使用 SQL Server Management Studio 连接到 SQL 数据库](../sql-database/sql-database-connect-query-ssms.md)。连接到数据库之后，可以导航到流应用程序所创建的 **EventContent** 表。可以运行快速查询以获取该表中的数据。运行以下查询：
 
-```
+```sql
 SELECT * FROM EventCount
 ```
 

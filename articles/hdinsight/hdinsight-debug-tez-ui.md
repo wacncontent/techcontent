@@ -33,7 +33,7 @@ Tez UI 是一个网页，可用于了解和调试在基于 Windows 的 HDInsight
 ## 了解 Tez
 Tez 是 Hadoop 中的一种可扩展数据处理框架，其处理速度比传统的 MapReduce 处理要快。对于基于 Windows 的 HDInsight 群集来说，它是一个可以为 Hive 启用的可选引擎，启用时只需在 Hive 查询中使用以下命令即可：
 
-```
+```sql
 set hive.execution.engine=tez;
 ```
 
@@ -53,13 +53,13 @@ Tez UI 包含数据的前提是使用 Tez 引擎的作业当前正在运行或�
 1. 在 Web 浏览器中导航到 https://CLUSTERNAME.azurehdinsight.cn，其中 **CLUSTERNAME** 是 HDInsight 群集的名称。
 2. 从页面顶部的菜单中，选择“Hive 编辑器”。此时会显示包含以下示例查询的页面。
 
-    ```
+    ```sql
     Select * from hivesampletable
     ```
 
     擦除示例查询，将其替换为以下内容。
 
-    ```
+    ```sql
     set hive.execution.engine=tez;
     select market, state, country from hivesampletable where deviceplatform='Android' group by market, country, state;
     ```

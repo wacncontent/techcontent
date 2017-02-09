@@ -39,7 +39,7 @@ Azure PowerShell 是一个功能强大的脚本编写环境，可用于在 Azure
 
 若要检查所安装的 PowerShell 版本，请执行以下操作：
 
-```
+```powershell
 Get-Module *azure*
 ```
 
@@ -51,27 +51,27 @@ Get-Module *azure*
 ## 列出群集
 使用以下命令可列出当前订阅中的所有群集：
 
-```
+```powershell
 Get-AzureRmHDInsightCluster
 ```
 
 ## 显示群集
 使用以下命令可显示当前订阅中特定群集的详细信息：
 
-```
+```powershell
 Get-AzureRmHDInsightCluster -ClusterName <Cluster Name>
 ```
 
 ## <a name="delete-clusters"></a> 删除群集
 使用以下命令来删除群集：
 
-```
+```powershell
 Remove-AzureRmHDInsightCluster -ClusterName <Cluster Name>
 ```
 
 还可以通过删除包含群集的资源组来删除群集。请注意，这将删除包括默认存储帐户的组中的所有资源。
 
-```
+```powershell
 Remove-AzureRmResourceGroup -Name <Resource Group Name>
 ```
 
@@ -116,7 +116,7 @@ Remove-AzureRmResourceGroup -Name <Resource Group Name>
 
     以下是有关如何使用 CLI 命令重新平衡 Storm 拓扑的示例：
 
-    ```
+    ```bash
     ## Reconfigure the topology "mytopology" to use 5 worker processes,
     ## the spout "blue-spout" to use 3 executors, and
     ## the bolt "yellow-bolt" to use 10 executors
@@ -125,7 +125,7 @@ Remove-AzureRmResourceGroup -Name <Resource Group Name>
 
 若要使用 Azure PowerShell 更改 Hadoop 群集大小，请从客户端计算机运行以下命令：
 
-```
+```powershell
 Set-AzureRmHDInsightClusterSize -ClusterName <Cluster Name> -TargetInstanceCount <NewSize>
 ```
 
@@ -140,13 +140,13 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 默认情况下，将授权这些服务进行访问。你可以撤消/授予访问权限。若要撤消：
 
-```
+```powershell
 Revoke-AzureRmHDInsightHttpServicesAccess -ClusterName <Cluster Name>
 ```
 
 若要授予：
 
-```
+```powershell
 $clusterName = "<HDInsight Cluster Name>"
 
 # Credential option 1
@@ -174,7 +174,7 @@ Grant-AzureRmHDInsightHttpServicesAccess -ClusterName $clusterName -HttpCredenti
 ## 查找默认存储帐户
 以下 Powershell 脚本演示如何获取群集的默认存储帐户名称和默认存储帐户密钥。
 
-```
+```powershell
 $clusterName = "<HDInsight Cluster Name>"
 
 $cluster = Get-AzureRmHDInsightCluster -ClusterName $clusterName
@@ -188,7 +188,7 @@ $defaultStorageAccountContext = New-AzureStorageContext -StorageAccountName $def
 ## 查找资源组
 在 Resource Manager 模式下，每个 HDInsight 群集都属于一个 Azure 资源组。若要查找资源组：
 
-```
+```powershell
 $clusterName = "<HDInsight Cluster Name>"
 
 $cluster = Get-AzureRmHDInsightCluster -ClusterName $clusterName

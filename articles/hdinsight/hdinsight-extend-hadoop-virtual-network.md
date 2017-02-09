@@ -116,7 +116,7 @@ HDInsight 不支持限制出站流量，仅限制入站流量。在定义包含 
 
 **使用 Azure PowerShell**
 
-```
+```powershell
 $vnetName = "Replace with your virtual network name"
 $resourceGroupName = "Replace with the resource group the virtual network is in"
 $subnetName = "Replace with the name of the subnet that HDInsight will be installed into"
@@ -261,7 +261,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)
 
-    ```
+    ```powershell
     $ClusterDnsName = <clustername>
     $Username = <cluster admin username>
     $Password = <cluster admin password>
@@ -292,7 +292,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)
 
-    ```
+    ```powershell
     $ClusterDnsName = <clustername>
     $Username = <cluster admin username>
     $Password = <cluster admin password>
@@ -321,7 +321,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 例如，对于使用 HBase API 的 Java 应用程序，你可以将 **hbase-site.xml** 文件添加到项目，并在此文件中指定仲裁信息，如下所示：
 
-```
+```xml
 <configuration>
   <property>
     <name>hbase.cluster.distributed</name>

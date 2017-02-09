@@ -112,7 +112,7 @@ ms.author: jgao
 
      使用以下 Azure PowerShell 脚本注册 **Get-ClusterDetail** 函数，该函数可用于返回 DNS 后缀：
 
-     ```
+     ```powershell
      function Get-ClusterDetail(
          [String]
          [Parameter( Position=0, Mandatory=$true )]
@@ -236,7 +236,7 @@ ms.author: jgao
 
 要在 Java 应用程序中使用此信息，可以按照[使用 Maven 构建将 HBase 与 HDInsight (Hadoop) 配合使用的 Java 应用程序](./hdinsight-hbase-build-java-maven.md)中的步骤来创建应用程序。要让应用程序连接到远程 HBase 服务器，请修改本示例中的 **hbase-site.xml** 文件，以对 Zookeeper 使用 FQDN。例如：
 
-```
+```xml
 <property>
     <name>hbase.zookeeper.quorum</name>
     <value>zookeeper0.<dns suffix>,zookeeper1.<dns suffix>,zookeeper2.<dns suffix></value>

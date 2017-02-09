@@ -71,7 +71,7 @@ ms.author: jgao
 
 10. 在 .scala 文件中粘贴以下代码：
 
-    ```
+    ```java
     import java.util.Random
     import org.apache.spark.{SparkConf, SparkContext}
     import org.apache.spark.SparkContext._

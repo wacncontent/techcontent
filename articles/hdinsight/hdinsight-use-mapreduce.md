@@ -84,7 +84,7 @@ wasbs:///example/data/gutenberg/davinci.txt
 
 下面提供了用于单词计数 MapReduce 作业的 Java 代码，以供参考：
 
-```
+```java
 package org.apache.hadoop.examples;
 
 import java.io.IOException;

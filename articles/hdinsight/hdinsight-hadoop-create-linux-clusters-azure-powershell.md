@@ -63,7 +63,7 @@ Azure PowerShell 是一个功能强大的脚本编写环境，可用于在 Azure
 
 以下脚本演示了如何创建新群集：
 
-```
+```powershell
 $token ="<SpecifyAnUniqueString>"
 
 $resourceGroupName = $token + "rg"      # Provide a Resource Group name
@@ -128,7 +128,7 @@ New-AzureRmHDInsightCluster `
 
 下面的示例演示了如何添加其他存储帐户：
 
-```
+```powershell
 # Create another storage account used as additional storage account
 $additionalStorageAccountName = $token + "store2"
 New-AzureRmStorageAccount -ResourceGroupName $resourceGroupName -StorageAccountName $additionalStorageAccountName -Location $location -Type Standard_LRS

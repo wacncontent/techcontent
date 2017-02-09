@@ -149,7 +149,7 @@ ms.author: nitinme
 
 4. 在文本编辑器中粘贴以下代码。
 
-    ```
+    ```java
     import org.apache.spark.SparkConf
     import org.apache.spark.SparkContext
 

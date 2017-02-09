@@ -67,7 +67,7 @@ ms.author: nitinme
 
     将以下代码段粘贴到空白单元格中，然后按 **SHIFT + ENTER**。此代码段会将数据注册到名为 **hvac** 的 Hive 表。
 
-    ```
+    ```python
     # Create an RDD from sample data
     hvacText = sc.textFile("wasbs:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
 

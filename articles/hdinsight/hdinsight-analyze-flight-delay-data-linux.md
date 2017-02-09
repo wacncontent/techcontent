@@ -96,7 +96,7 @@ ms.author: larryfr
 
     使用以下项作为此文件的内容：
 
-    ```
+    ```sql
     DROP TABLE delays_raw;
     -- Creates an external table over the csv file
     CREATE EXTERNAL TABLE delays_raw (
@@ -173,7 +173,7 @@ ms.author: larryfr
     ```
 5. 当你收到 `jdbc:hive2://localhost:10001/>` 提示时，请使用以下命令从导入的航班延误数据中检索数据。
 
-    ```
+    ```sql
     INSERT OVERWRITE DIRECTORY '/tutorials/flightdelays/output'
     ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
     SELECT regexp_replace(origin_city_name, '''', ''),
@@ -269,7 +269,7 @@ ms.author: larryfr
 
     连接成功以后，使用以下语句验证数据是否已导出到 mobiledata 表：
 
-    ```
+    ```sql
     SELECT * FROM delays
     GO
     ```

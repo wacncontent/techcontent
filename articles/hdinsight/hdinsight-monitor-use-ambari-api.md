@@ -62,7 +62,7 @@ HDInsight 目前仅支持 Ambari 监视功能。Ambari API 1.0 受 HDInsight 版
 
 以下 Azure PowerShell 脚本可*在 HDInsight 3.1 群集*中获取 MapReduce 作业跟踪器信息。 主要区别在于，我们从 YARN 服务（而非 MapReduce）中拉取这些详细信息。
 
-```
+```powershell
 $clusterName = "<HDInsightClusterName>"
 $clusterUsername = "<HDInsightClusterUsername>"
 $clusterPassword = "<HDInsightClusterPassword>"
@@ -80,7 +80,7 @@ $response.metrics.'yarn.queueMetrics'
 
 以下 PowerShell 脚本可*在 HDInsight 2.1 群集*中获取 MapReduce 作业跟踪器信息：
 
-```
+```powershell
 $clusterName = "<HDInsightClusterName>"
 $clusterUsername = "<HDInsightClusterUsername>"
 $clusterPassword = "<HDInsightClusterPassword>"
@@ -110,7 +110,7 @@ curl -u <username>:<password> -k https://<ClusterName>.azurehdinsight.cn:443/amb
 
 输出为：
 
-```
+```json
 {"href":"https://hdi0211v2.azurehdinsight.cn/ambari/api/v1/clusters/hdi0211v2.azurehdinsight.cn/",
  "Clusters":{"cluster_name":"hdi0211v2.azurehdinsight.cn","version":"2.1.3.0.432823"},
  "services"[

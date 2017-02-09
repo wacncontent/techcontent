@@ -62,7 +62,7 @@ wacn.date: 02/06/2017
 
 1. 编辑 __pom.xml__ 文件，并将以下代码添加到 `<dependencies>` 部分：
 
-    ```
+    ```xml
     <dependency>
         <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-client</artifactId>
@@ -84,7 +84,7 @@ wacn.date: 02/06/2017
 
 2. 如果使用 HDInsight 3.3 或 3.4 群集，则还必须将以下代码添加到 `<dependencies>` 节：
 
-    ```
+    ```xml
     <dependency>
         <groupId>org.apache.phoenix</groupId>
         <artifactId>phoenix-core</artifactId>
@@ -96,7 +96,7 @@ wacn.date: 02/06/2017
 
 2. 将以下代码添加到 __pom.xml__ 文件。它必须位于文件中的 `<project>...</project>` 标记内，例如 `</dependencies>` 和 `</project>` 之间。
 
-    ```
+    ```xml
     <build>
       <sourceDirectory>src</sourceDirectory>
       <resources>
@@ -171,7 +171,7 @@ wacn.date: 02/06/2017
 
 2. 打开 __CreateTable.java__ 文件，并将现有内容替换为以下内容：
 
-    ```
+    ```java
     package com.microsoft.examples;
     import java.io.IOException;
 
@@ -247,7 +247,7 @@ wacn.date: 02/06/2017
 
 4. 在 __hbaseapp/src/main/java/com/microsoft/examples__ 目录中，创建名为 __SearchByEmail.java__ 的新文件。使用以下项作为此文件的内容：
 
-    ```
+    ```java
     package com.microsoft.examples;
     import java.io.IOException;
 
@@ -326,7 +326,7 @@ wacn.date: 02/06/2017
 
 6. 在 __hbaseapp/src/main/hava/com/microsoft/examples__ 目录中，创建名为 __DeleteTable.java__ 的新文件。使用以下项作为此文件的内容：
 
-    ```
+    ```java
     package com.microsoft.examples;
     import java.io.IOException;
 

@@ -187,7 +187,7 @@ Status            : Succeeded
 
 1. 将以下模板复制到你计算机上的某个位置。此模板在群集中的头节点和辅助节点上安装 Giraph。你还可以验证 JSON 模板是否有效。将模板内容粘贴到在线 JSON 验证工具 [JSONLint](http://jsonlint.com/) 中。
 
-    ```
+    ```json
         {
         "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -409,7 +409,7 @@ Status            : Succeeded
 
 1. 打开 Azure PowerShell 控制台并使用以下命令登录到 Azure 订阅，然后声明一些 PowerShell 变量：
 
-    ```
+    ```powershell
     # LOGIN TO ZURE
     Login-AzureRmAccount
 
@@ -426,7 +426,7 @@ Status            : Succeeded
 
 2. 指定配置值（如群集中的节点）和要使用的默认存储。
 
-    ```
+    ```powershell
     # SPECIFY THE CONFIGURATION OPTIONS
     Select-AzureRmSubscription -SubscriptionId $subscriptionId
     $config = New-AzureRmHDInsightClusterConfig
@@ -436,7 +436,7 @@ Status            : Succeeded
 
 3. 使用 **Add-AzureRmHDInsightScriptAction** cmdlet 调用该脚本。以下示例使用一个在群集上安装 Giraph 的脚本：
 
-    ```
+    ```powershell
     # INVOKE THE SCRIPT USING THE SCRIPT ACTION FOR HEADNODE AND WORKERNODE
     $config = Add-AzureRmHDInsightScriptAction -Config $config -Name "Install Giraph"  -NodeType HeadNode -Uri https://hdiconfigactions.blob.core.windows.net/linuxgiraphconfigactionv01/giraph-installer-v01.sh
     $config = Add-AzureRmHDInsightScriptAction -Config $config -Name "Install Giraph"  -NodeType WorkerNode -Uri https://hdiconfigactions.blob.core.windows.net/linuxgiraphconfigactionv01/giraph-installer-v01.sh
@@ -529,7 +529,7 @@ HDInsight .NET SDK 提供客户端库，可简化从 .NET 应用程序中使用 
 
 1. 打开 Azure PowerShell 控制台并使用以下命令登录到 Azure 订阅，然后声明一些 PowerShell 变量：
 
-    ```
+    ```powershell
     # LOGIN TO ZURE
     Login-AzureRmAccount
 
@@ -650,7 +650,7 @@ HDInsight .NET SDK 提供客户端库，可简化从 .NET 应用程序中使用 
 
 以下示例脚本演示如何使用 cmdlet 来升级再降级脚本。
 
-```
+```powershell
 # Get a history of scripts
 Get-AzureRmHDInsightScriptActionHistory -ClusterName mycluster
 

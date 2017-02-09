@@ -26,7 +26,7 @@ ms.author: jgao
 
 可以将空边缘节点添加到现有 HDInsight 群集，或者在创建群集时将此类节点添加到新群集。添加空边缘节点的操作是使用 Azure Resource Manager 模板完成的。以下示例演示如何使用模板执行此操作：
 
-```
+```json
 "resources": [
     {
         "name": "[concat(parameters('clusterName'),'/', variables('applicationName'))]",

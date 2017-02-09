@@ -114,7 +114,7 @@ Windows 未提供内置的 SSH 客户端。建议使用可从 [http://www.chiark
 
 5. 输入以下语句，以使用 HDInsight 群集随附的示例数据来创建名为 **log4jLogs** 的新表：
 
-    ```
+    ```sql
     DROP TABLE log4jLogs;
     CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
@@ -176,7 +176,7 @@ Beeline 还可用于运行包含 HiveQL 语句的文件。使用以下步骤创�
 
 2. 编辑器打开后，使用以下内容作为该文件的内容。此查询将创建名为 **errorLogs** 的新“内部”表：
 
-    ```
+    ```sql
     CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) STORED AS ORC;
     INSERT OVERWRITE TABLE errorLogs SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]' AND INPUT__FILE__NAME LIKE '%.log';
     ```

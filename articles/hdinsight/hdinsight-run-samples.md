@@ -66,7 +66,7 @@ Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编
 1. 打开 **Windows PowerShell ISE**。有关说明，请参阅[安装和配置 Azure PowerShell][powershell-install-configure]。
 2. 粘贴以下 PowerShell 脚本：
 
-    ```
+    ```powershell
     $subscriptionName = "<Azure Subscription Name>"
     $resourceGroupName = "<Resource Group Name>"
     $clusterName = "<HDInsight cluster name>"             # HDInsight cluster name
@@ -142,7 +142,7 @@ Hadoop 向 MapReduce 提供流式处理 API，利用它，可以采用 Java 以�
 
 * 按照[字数统计 - Java](#word-count-java) 中的过程操作，并将作业定义替换为以下内容：
 
-    ```
+    ```powershell
     $mrJobDefinition = New-AzureRmHDInsightStreamingMapReduceJobDefinition `
                             -Files "/example/apps/cat.exe","/example/apps/wc.exe" `
                             -Mapper "cat.exe" `
@@ -166,7 +166,7 @@ pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单�
 
 * 按照[字数统计 - Java](#word-count-java) 中的过程操作，并将作业定义替换为以下内容：
 
-    ```
+    ```powershell
     $mrJobJobDefinition = New-AzureRmHDInsightMapReduceJobDefinition `
                                 -JarFile "wasbs:///example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "pi" `
@@ -194,7 +194,7 @@ pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单�
 
 * 按照[字数统计 - Java](#word-count-java) 中的过程操作，并使用以下作业定义：
 
-    ```
+    ```powershell
     $teragen = New-AzureRmHDInsightMapReduceJobDefinition `
                                 -JarFile "/example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "teragen" `
@@ -223,7 +223,7 @@ pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单�
 
 ## <a name="apendix-a---the-word-count-MapReduce-program-in-java"></a> 附录 A - 字数统计源代码
 
-```
+```java
 package org.apache.hadoop.examples;
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -296,7 +296,7 @@ System.exit(job.waitForCompletion(true) ? 0 : 1);
 ## 附录 B - 字数统计流式处理源代码
 MapReduce 程序使用 cat.exe 应用程序作为映射接口将文本流式传输到控制台，并使用 wc.exe 应用程序作为化简接口来统计从文档中流式传输的字数。映射器和化简器都从标准输入流 (stdin) 逐行读取字符，并写入到标准输出流 (stdout)。
 
-```
+```csharp
 // The source code for the cat.exe (Mapper).
 
 using System;
@@ -325,7 +325,7 @@ namespace cat
 
 cat.cs 文件中的映射器代码使用 [StreamReader][streamreader] 对象将传入流的字符读入到控制台，而控制台使用静态 [Console.Writeline][console-writeline] 方法将流写入标准输出流。
 
-```
+```csharp
 // The source code for wc.exe (Reducer) is:
 
 using System;
@@ -359,7 +359,7 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
 ## 附录 C - PI 估计器源代码
 在下面可以检查包含映射器函数和化简器函数的 pi estimator Java 代码。映射器程序生成在单位正方形内部随机分布的指定点数，然后计算位于圆圈内部的这些点的数目。化简器程序累计由映射器统计的点数，然后根据公式 4R 估算 pi 的值，其中 R 是圆圈内统计的点数与方形内总点数的比率。
 
-```
+```java
 /**
 * Licensed to the Apache Software Foundation (ASF) under one
 * or more contributor license agreements. See the NOTICE file
@@ -698,7 +698,7 @@ System.exit(ToolRunner.run(null, new PiEstimator(), argv));
 ## 附录 D - 10gb graysort 源代码
 本节提供 TeraSort MapReduce 程序的代码以供检查。
 
-```
+```java
 /**
     * Licensed to the Apache Software Foundation (ASF) under one
     * or more contributor license agreements.  See the NOTICE file

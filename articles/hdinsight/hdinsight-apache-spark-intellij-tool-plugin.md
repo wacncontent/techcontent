@@ -105,7 +105,7 @@ ms.author: nitinme
        ![添加源代码](./media/hdinsight-apache-spark-intellij-tool-plugin/hdi-spark-scala-code-object.png)
     3. 在 **MyClusterApp.scala** 文件中，粘贴以下代码。此代码从 HVAC.csv（适用于所有 HDInsight Spark 群集）中读取数据，检索在 CSV 的第七列中只有一个数字的行，并将输出写入群集的默认存储容器下的 **/HVACOut**。
 
-        ```
+        ```java
         import org.apache.spark.SparkConf
         import org.apache.spark.SparkContext
 

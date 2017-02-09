@@ -82,68 +82,69 @@ Azure 经典管理门户不支持使用自定义配置选项预配 HDInsight 群
 1. 在工作站上打开 Windows PowerShell ISE。
 2. 设置脚本开头位置的变量，然后运行该脚本。
 
-        # create hbase cluster with replication enabled
+    ```powershell
+    # create hbase cluster with replication enabled
 
-        $azureSubscriptionName = "[AzureSubscriptionName]"
+    $azureSubscriptionName = "[AzureSubscriptionName]"
 
-        $hbaseClusterName = "Contoso-HBase-CN" # This is the HBase cluster name to be used.
-        $hbaseClusterSize = 1   # You must provision a cluster that contains at least 3 nodes for high availability of the HBase services.
-        $hadoopUserLogin = "[HadoopUserName]"
-        $hadoopUserpw = "[HadoopUserPassword]"
+    $hbaseClusterName = "Contoso-HBase-CN" # This is the HBase cluster name to be used.
+    $hbaseClusterSize = 1   # You must provision a cluster that contains at least 3 nodes for high availability of the HBase services.
+    $hadoopUserLogin = "[HadoopUserName]"
+    $hadoopUserpw = "[HadoopUserPassword]"
 
-        $vNetName = "Contoso-VNet-CN"  # This name must match your Europe virtual network name.
-        $subNetName = 'Subnet-1' # This name must match your Europe virtual network subnet name.  The default name is "Subnet-1".
+    $vNetName = "Contoso-VNet-CN"  # This name must match your Europe virtual network name.
+    $subNetName = 'Subnet-1' # This name must match your Europe virtual network subnet name.  The default name is "Subnet-1".
 
-        $storageAccountName = 'ContosoStoreCN'  # The script will create this storage account for you.  The storage account name doesn't support hyphens.
-        $storageAccountName = $storageAccountName.ToLower() #Storage account name must be in lower case.
-        $blobContainerName = $hbaseClusterName.ToLower()  #Use the cluster name as the default container name.
+    $storageAccountName = 'ContosoStoreCN'  # The script will create this storage account for you.  The storage account name doesn't support hyphens.
+    $storageAccountName = $storageAccountName.ToLower() #Storage account name must be in lower case.
+    $blobContainerName = $hbaseClusterName.ToLower()  #Use the cluster name as the default container name.
 
-        #connect to your Azure subscription
-    ```
+    #connect to your Azure subscription
+
     Add-AzureAccount -Environment AzureChinaCloud
     Select-AzureSubscription $azureSubscriptionName
+
+    # Create a storage account used by the HBase cluster
+    $location = Get-AzureVNetSite -VNetName $vNetName | %{$_.Location} # use the virtual network location
+    New-AzureStorageAccount -StorageAccountName $storageAccountName -Location $location
+
+    # Create a blob container used by the HBase cluster
+    $storageAccountKey = Get-AzureStorageKey -StorageAccountName $storageAccountName | %{$_.Primary}
+    $storageContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
+    New-AzureStorageContainer -Name $blobContainerName -Context $storageContext
+
+    # Create provision configuration object
+    $hbaseConfigValues = new-object 'Microsoft.WindowsAzure.Management.HDInsight.Cmdlet.DataObjects.AzureHDInsightHBaseConfiguration'
+
+    $hbaseConfigValues.Configuration = @{ "hbase.replication"="true" } #this modifies the hbase-site.xml file
+
+    # retrieve vnet id based on vnetname
+    $vNetID = Get-AzureVNetSite -VNetName $vNetName | %{$_.id}
+
+    $config = New-AzureHDInsightClusterConfig `
+                    -ClusterSizeInNodes $hbaseClusterSize `
+                    -ClusterType HBase `
+                    -VirtualNetworkId $vNetID `
+                    -SubnetName $subNetName `
+                | Set-AzureHDInsightDefaultStorage `
+                    -StorageAccountName $storageAccountName `
+                    -StorageAccountKey $storageAccountKey `
+                    -StorageContainerName $blobContainerName `
+                | Add-AzureHDInsightConfigValues `
+                    -HBase $hbaseConfigValues
+
+    # provision HDInsight cluster
+    $hadoopUserPassword = ConvertTo-SecureString -String $hadoopUserpw -AsPlainText -Force
+    $credential = New-Object System.Management.Automation.PSCredential($hadoopUserLogin,$hadoopUserPassword)
+
+    $config | New-AzureHDInsightCluster -Name $hbaseClusterName -Location $location -Credential $credential
     ```
-
-        # Create a storage account used by the HBase cluster
-        $location = Get-AzureVNetSite -VNetName $vNetName | %{$_.Location} # use the virtual network location
-        New-AzureStorageAccount -StorageAccountName $storageAccountName -Location $location
-
-        # Create a blob container used by the HBase cluster
-        $storageAccountKey = Get-AzureStorageKey -StorageAccountName $storageAccountName | %{$_.Primary}
-        $storageContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
-        New-AzureStorageContainer -Name $blobContainerName -Context $storageContext
-
-        # Create provision configuration object
-        $hbaseConfigValues = new-object 'Microsoft.WindowsAzure.Management.HDInsight.Cmdlet.DataObjects.AzureHDInsightHBaseConfiguration'
-
-        $hbaseConfigValues.Configuration = @{ "hbase.replication"="true" } #this modifies the hbase-site.xml file
-
-        # retrieve vnet id based on vnetname
-        $vNetID = Get-AzureVNetSite -VNetName $vNetName | %{$_.id}
-
-        $config = New-AzureHDInsightClusterConfig `
-                        -ClusterSizeInNodes $hbaseClusterSize `
-                        -ClusterType HBase `
-                        -VirtualNetworkId $vNetID `
-                        -SubnetName $subNetName `
-                    | Set-AzureHDInsightDefaultStorage `
-                        -StorageAccountName $storageAccountName `
-                        -StorageAccountKey $storageAccountKey `
-                        -StorageContainerName $blobContainerName `
-                    | Add-AzureHDInsightConfigValues `
-                        -HBase $hbaseConfigValues
-
-        # provision HDInsight cluster
-        $hadoopUserPassword = ConvertTo-SecureString -String $hadoopUserpw -AsPlainText -Force
-        $credential = New-Object System.Management.Automation.PSCredential($hadoopUserLogin,$hadoopUserPassword)
-
-        $config | New-AzureHDInsightCluster -Name $hbaseClusterName -Location $location -Credential $credential
 
 **在 Contoso-VNet-CE 中预配 HBase 群集**
 
 * 使用包含以下值的同一个脚本：
 
-    ```
+    ```PowerShell
     $hbaseClusterName = "Contoso-HBase-CE" # This is the HBase cluster name to be used.
     $vNetName = "Contoso-VNet-CE"  # This name must match your Europe virtual network name.
     $storageAccountName = 'ContosoStoreCE'    

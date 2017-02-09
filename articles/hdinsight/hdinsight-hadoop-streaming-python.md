@@ -71,7 +71,7 @@ Python 可以使用 **sys** 模块从 STDIN 读取数据，并使用 **print** �
 
 创建名为 **mapper.py** 的新文件并使用以下代码作为内容：
 
-```
+```python
 #!/usr/bin/env python
 
 # Use the sys module
@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
 创建名为 **reducer.py** 的新文件并使用以下代码作为内容：
 
-```
+```python
 #!/usr/bin/env python
 
 # import modules

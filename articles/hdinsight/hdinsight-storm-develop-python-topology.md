@@ -70,7 +70,7 @@ Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java 
 
 在此示例中，实际 Python 文件存储在 `/multilang/resources` 目录中。`/multilang` 目录在 **pom.xml** 中引用：
 
-```
+```xml
 <resources>
     <resource>
         <!-- Where the Python bits are kept -->

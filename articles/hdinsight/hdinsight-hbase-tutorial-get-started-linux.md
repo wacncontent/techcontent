@@ -172,7 +172,7 @@ HBase 提供了多种将数据载入表中的方法。有关详细信息，请�
 
 3. 运行以下 HiveQL 脚本，以创建映射到 HBase 表的 Hive 表。确保已创建本教程中前面引用的示例表，方法是在运行此语句前使用 HBase Shell。
 
-    ```
+    ```sql
     CREATE EXTERNAL TABLE hbasecontacts(rowkey STRING, name STRING, homephone STRING, officephone STRING, officeaddress STRING)
     STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
     WITH SERDEPROPERTIES ('hbase.columns.mapping' = ':key,Personal:Name,Personal:Phone,Office:Phone,Office:Address')

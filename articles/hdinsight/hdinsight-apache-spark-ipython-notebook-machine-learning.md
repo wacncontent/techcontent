@@ -66,7 +66,7 @@ ms.author: nitinme
 
 3. 由于笔记本是使用 PySpark 内核创建，因此不需要显式创建任何上下文。运行第一个代码单元格时，系统将自动创建 Spark 和 Hive 上下文。首先，可以导入此方案所需的类型。将以下代码段粘贴到空白单元格中，然后按 **SHIFT + ENTER**。
 
-    ```
+    ```python
     from pyspark.ml import Pipeline
     from pyspark.ml.classification import LogisticRegression
     from pyspark.ml.feature import HashingTF, Tokenizer
@@ -85,7 +85,7 @@ ms.author: nitinme
 
     将以下代码段粘贴到空白单元格中，然后按 **SHIFT + ENTER**。
 
-    ```
+    ```python
     # List the structure of data for better understanding. Becuase the data will be
     # loaded as an array, this structure makes it easy to understand what each element
     # in the array corresponds to
@@ -124,7 +124,7 @@ ms.author: nitinme
 
     将以下代码段粘贴到空白单元格中，然后按 **SHIFT + ENTER**。
 
-    ```
+    ```python
     tokenizer = Tokenizer(inputCol="SystemInfo", outputCol="words")
     hashingTF = HashingTF(inputCol=tokenizer.getOutputCol(), outputCol="features")
     lr = LogisticRegression(maxIter=10, regParam=0.01)
@@ -182,7 +182,7 @@ ms.author: nitinme
 
     将以下代码段粘贴到空白单元格中，然后按 **SHIFT + ENTER**。
 
-    ```
+    ```python
     # SystemInfo here is a combination of system ID followed by system age
     Document = Row("id", "SystemInfo")
     test = sc.parallelize([(1L, "20 25"),
@@ -196,7 +196,7 @@ ms.author: nitinme
 
 9. 最后，对测试数据进行预测。将以下代码段粘贴到空白单元格中，然后按 **SHIFT + ENTER**。
 
-    ```
+    ```python
     # Make predictions on test documents and print columns of interest
     prediction = model.transform(test)
     selected = prediction.select("SystemInfo", "prediction", "probability")

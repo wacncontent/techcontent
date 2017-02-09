@@ -156,7 +156,7 @@ help *azurermhdinsight*
 
 旧命令 (ASM)：
 
-```
+```powershell
 New-AzureHDInsightCluster `
     -Name $clusterName `
     -Location $location `
@@ -173,7 +173,7 @@ New-AzureHDInsightCluster `
 
 新命令 (ARM)：
 
-```
+```powershell
 New-AzureRmHDInsightCluster `
     -ClusterName $clusterName `
     -ResourceGroupName $resourceGroupName `
@@ -271,7 +271,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 旧命令 (ASM)
 
-    ```
+    ```csharp
     //Certificate auth
     //This logs the application in using a subscription administration certificate, which is not offered in Azure Resource Manager (ARM)
 
@@ -282,7 +282,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)（服务主体授权）
 
-    ```
+    ```csharp
     //Service principal auth
     //This will log the application in as itself, rather than on behalf of a specific user.
     //For details, including how to set up the application, see:
@@ -303,7 +303,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)（用户授权）
 
-    ```
+    ```csharp
     //User auth
     //This will log the application in on behalf of the user.
     //The end-user will see a login popup.
@@ -325,7 +325,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 旧命令 (ASM)
 
-    ```
+    ```csharp
     var clusterInfo = new ClusterCreateParameters
                 {
                     Name = dnsName,
@@ -346,7 +346,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)
 
-    ```
+    ```csharp
     var clusterCreateParameters = new ClusterCreateParameters
         {
             Location = "China North",
@@ -378,7 +378,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)
 
-    ```
+    ```csharp
     var httpParams = new HttpSettingsParameters
     {
            HttpUserEnabled = true,

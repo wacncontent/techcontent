@@ -70,7 +70,7 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。它与 Had
 ## 定义 Oozie 工作流及相关 HiveQL 脚本
 Oozie 工作流定义是用 hPDL（一种 XML 过程定义语言）编写的。默认的工作流文件名为 *workflow.xml*。以下是本教程中要使用的工作流文件。
 
-```
+```xml
 <workflow-app name="useooziewf" xmlns="uri:oozie:workflow:0.2">
     <start to = "RunHiveScript"/>
 
@@ -202,7 +202,7 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。可�
 
 脚本如下。可以通过 Windows PowerShell ISE 运行该脚本。只需配置前 7 个变量。
 
-```
+```powershell
 #region - provide the following values
 
 $subscriptionID = "<Enter your Azure subscription ID>"
@@ -592,7 +592,7 @@ Write-Host "$(Get-Date -format 'G'): $oozieJobId is in $JobStatus state!" -Foreg
 
 以下是可以使用的一个示例 PowerShell 脚本：
 
-```
+```powershell
 $resourceGroupName = "<AzureResourceGroupName>"
 
 $defaultStorageAccountName = "<AzureStorageAccountName>"

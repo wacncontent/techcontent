@@ -61,7 +61,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 
 1. 使用编辑器将以下代码保存为 **hivejob.ps1**。必须将 **CLUSTERNAME** 替换为 HDInsight 群集的名称。
 
-    ```
+    ```powershell
     #Specify the values
     $clusterName = "CLUSTERNAME"
     $creds=Get-Credential
@@ -132,7 +132,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 
 4. 如前所述，**Invoke-Hive** 可以用来运行查询，并等待响应。使用以下命令，并将 **CLUSTERNAME** 替换为群集的名称：
 
-    ```
+    ```powershell
     Use-AzureRmHDInsightCluster -ClusterName $clusterName -HttpCredential $creds
     #Get the cluster info so we can get the resource group, storage, etc.
     $clusterInfo = Get-AzureRmHDInsightCluster -ClusterName $clusterName
@@ -174,7 +174,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 
 如果在作业完成时未返回任何信息，则可能表示处理期间发生错误。若要查看此作业的错误信息，请将以下内容添加到 **hivejob.ps1** 文件的末尾，保存，然后重新运行该文件。
 
-```
+```powershell
 # Print the output of the Hive job.
 Get-AzureRmHDInsightJobOutput `
         -Clustername $clusterName `

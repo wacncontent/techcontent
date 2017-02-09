@@ -230,7 +230,7 @@ PowerShell 示例将执行以下步骤：
     若要检查修改后的数据文件，可以使用 Azure 门户预览、Azure 存储资源管理器工具或 Azure PowerShell。[HDInsight 入门][hdinsight-get-started]中有一个关于使用 Azure PowerShell 下载文件并显示文件内容的代码示例。
 
 ### PowerShell 示例
-```
+```powershell
 # Prepare an Azure SQL database to be used by the Sqoop tutorial
 
 #region - provide the following values

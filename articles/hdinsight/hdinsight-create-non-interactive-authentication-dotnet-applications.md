@@ -50,7 +50,7 @@ ms.author: jgao
 1. 创建 C# 控制台应用程序。
 2. 添加以下 Nuget 包：
 
-    ```
+    ```powershell
     Install-Package Microsoft.Azure.Common.Authentication -Pre
     Install-Package Microsoft.Azure.Management.HDInsight -Pre
     Install-Package Microsoft.Azure.Management.Resources -Pre
@@ -58,7 +58,7 @@ ms.author: jgao
 
 3. 使用以下代码示例：
 
-    ```
+    ```csharp
     using System;
     using System.Security;
     using Microsoft.Azure;

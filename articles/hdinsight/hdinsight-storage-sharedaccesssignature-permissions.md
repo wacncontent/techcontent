@@ -107,7 +107,7 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 1. 在文本编辑器中打开 `CreateCluster\HDInsightSAS.ps1` 文件，然后修改位于文档开头的以下值。
 
-    ```
+    ```powershell
     # Replace 'mycluster' with the name of the cluster to be created
     $clusterName = 'mycluster'
     # Valid values are 'Linux' and 'Windows'

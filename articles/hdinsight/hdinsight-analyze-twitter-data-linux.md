@@ -110,7 +110,7 @@ Twitter 允许你通过 REST API 检索[每个推文的数据](https://dev.twitt
     ```
 5. 使用以下内容作为 **gettweets.py** 文件的内容。将“consumer\_secret”、“consumer\_key”、“access/\_token”和“access\_token\_secret”的占位符信息替换为 Twitter 应用程序的信息。
 
-    ```
+    ```python
     #!/usr/bin/python
 
     from tweepy import Stream, OAuthHandler
@@ -196,7 +196,7 @@ hdfs dfs -put tweets.txt /tutorials/twitter/data/tweets.txt
 
     将以下内容用作该文件的内容：
 
-    ```
+    ```sql
     set hive.exec.dynamic.partition = true;
     set hive.exec.dynamic.partition.mode = nonstrict;
     -- Drop table, if it exists
@@ -311,7 +311,7 @@ hdfs dfs -put tweets.txt /tutorials/twitter/data/tweets.txt
     这将加载 Hive shell，运行 **twitter.hql** 文件中的 HiveQL，并最终返回 `jdbc:hive2//localhost:10001/>` 提示符。
 4. 在 Beeline 提示符下，使用以下项来验证是否可从 “twitter.hql”文件中的 HiveQL 创建的“tweets”表中选择数据：
 
-    ```
+    ```sql
     SELECT name, screen_name, count(1) as cc
         FROM tweets
         WHERE text like "%Azure%"

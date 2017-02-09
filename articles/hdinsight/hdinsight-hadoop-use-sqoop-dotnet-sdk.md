@@ -47,7 +47,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
     ```
 3. 在 Program.cs 文件中使用以下代码：
 
-    ```
+    ```csharp
     using System.Collections.Generic;
     using Microsoft.Azure.Management.HDInsight.Job;
     using Microsoft.Azure.Management.HDInsight.Job.Models;

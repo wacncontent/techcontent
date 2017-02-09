@@ -44,7 +44,7 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 **基于 Linux 的 HDInsight**
 
-```
+```sql
 add file wasbs:///streaming.py;
 
 SELECT TRANSFORM (clientid, devicemake, devicemodel)
@@ -56,7 +56,7 @@ ORDER BY clientid LIMIT 50;
 
 **基于 Windows 的 HDInsight**
 
-```
+```sql
 add file wasbs:///streaming.py;
 
 SELECT TRANSFORM (clientid, devicemake, devicemodel)
@@ -78,7 +78,7 @@ ORDER BY clientid LIMIT 50;
 <a name="streamingpy"></a>
 下面是该 HiveQL 示例使用的 **streaming.py** 文件。
 
-```
+```python
 #!/usr/bin/env python
 
 import sys
@@ -142,7 +142,7 @@ DUMP DETAILS;
 实际的 Python 脚本文件在 C Python 与 Jython 之间也很类似，唯一的差别在于，使用 C Python 时必须从 **pig\_util** 导入。下面是 **pig\_python.py** 脚本：
 
 # <a name="streamingpy"></a>如果使用 C Python，请取消注释以下代码
-```
+```python
 #from pig_util import outputSchema
 
 @outputSchema("log: {(date:chararray, time:chararray, classname:chararray, level:chararray, detail:chararray)}")
@@ -202,7 +202,7 @@ return date, time, classname, level, detail
 1. 使用 `hive` 命令来启动 Hive Shell。加载 Shell 后，应可看到 `hive>` 提示符。
 2. 在 `hive>` 提示符下输入以下命令。
 
-    ```
+    ```sql
     add file wasbs:///streaming.py;
     SELECT TRANSFORM (clientid, devicemake, devicemodel)
       USING 'python streaming.py' AS
@@ -276,7 +276,7 @@ return date, time, classname, level, detail
 1. 使用 Python 示例 [streaming.py](#streamingpy) 和 [pig\_python.py](#jythonpy) 在开发计算机上创建文件的本地副本。
 2. 使用以下 PowerShell 脚本将 **streaming.py** 和 **pig\_python.py** 文件上传到服务器。在脚本的前三行中，替换 Azure HDInsight 群集的名称，以及 **streaming.py** 和 **pig\_python.py** 文件的路径。
 
-    ```
+    ```powershell
     $clusterName = YourHDIClusterName
     $pathToStreamingFile = "C:\path\to\streaming.py"
     $pathToJythonFile = "C:\path\to\pig_python.py"
@@ -317,7 +317,7 @@ return date, time, classname, level, detail
 #### Hive
 以下脚本将运行 **streaming.py** 脚本。在运行前，它将提示你输入 HDInsight 群集的 HTTPs/Admin 帐户信息。
 
-```
+```powershell
 # Replace 'YourHDIClusterName' with the name of your cluster
 $clusterName = YourHDIClusterName
 $creds=Get-Credential
@@ -390,7 +390,7 @@ Get-AzureRmHDInsightJobOutput `
 > [!NOTE]
 使用 PowerShell 远程提交作业时，无法使用 C Python 作为解释器。
 
-```
+```powershell
 # Replace 'YourHDIClusterName' with the name of your cluster
 $clusterName = YourHDIClusterName
 

@@ -62,7 +62,7 @@ ms.author: jgao
 2. 如果需要，请设置参数。
 3. 使用以下 PowerShell 脚本运行模板：
 
-    ```
+    ```powershell
     ####################################
     # Set these variables
     ####################################
@@ -150,7 +150,7 @@ azure group deployment create "hdi1229rg" "hdi1229" --template-file "C:\HDITutor
 
 以下 Azure Resource Manager 模板使用依赖的 Azure 存储帐户创建基于 Windows 的 Hadoop 群集。
 
-```
+```json
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",

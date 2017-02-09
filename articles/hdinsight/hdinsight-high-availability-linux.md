@@ -146,7 +146,7 @@ curl -u admin:password https://mycluster.azurehdinsight.cn/api/v1/clusters/myclu
 
 响应将如下所示：
 
-```
+```json
 {
   "href" : "http://hn0-CLUSTERNAME.randomcharacters.cx.internal.chinacloudapp.cn:8080/api/v1/clusters/mycluster/services/HDFS?fields=ServiceInfo/state",
   "ServiceInfo" : {

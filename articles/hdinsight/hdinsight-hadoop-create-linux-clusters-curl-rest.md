@@ -60,7 +60,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
 
 模板通常划分为两个部分：模板本身，以及一个 parameters 文件，你将在其中填充特定于配置的值，例如，群集名称、管理员名称和密码。直接使用 REST API 时，必须将这些值合并到一个文件中。此 JSON 文档的格式为：
 
-```
+```json
 {
     "properties": {
         "template": {
@@ -76,7 +76,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
 
 例如，下面是来自 [https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password](https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password) 的模板与参数文件的组合形式，它创建基于 Linux 的群集，并使用密码来保护 SSH 用户帐户。
 
-```
+```json
 {
     "properties": {
         "template": {

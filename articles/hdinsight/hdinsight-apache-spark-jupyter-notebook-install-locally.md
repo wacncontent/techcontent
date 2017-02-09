@@ -70,7 +70,7 @@ ms.author: nitinme
 
     在 Python shell 中，输入以下命令以找到主目录。
 
-    ```
+    ```python
     import os
     print(os.path.expanduser('~'))
     ```
@@ -78,7 +78,7 @@ ms.author: nitinme
 2. 导航到主目录，然后创建一个名为 **.sparkmagic** 的文件夹（如果尚不存在）。
 3. 在该文件夹中，创建一个名为 **config.json** 的文件，然后在该文件中添加以下 JSON 代码片段。
 
-    ```
+    ```json
     {
       "kernel_python_credentials" : {
         "username": "{USERNAME}",

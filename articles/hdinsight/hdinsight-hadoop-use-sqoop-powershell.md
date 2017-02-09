@@ -42,7 +42,7 @@ ms.author: jgao
 ## 使用 PowerShell 运行 Sqoop
 下面的 PowerShell 脚本预处理源文件，并将它导出到 Azure SQL 数据库：
 
-```
+```powershell
 $resourceGroupName = "<AzureResourceGroupName>"
 $hdinsightClusterName = "<HDInsightClusterName>"
 

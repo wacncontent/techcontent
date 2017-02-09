@@ -104,7 +104,7 @@ hdfs dfs -copyFromLocal /usr/share/java/sqljdbc_4.1/enu/sqljdbc*.jar /tutorials/
     ```
 3. 打开 nano 编辑器后，使用以下内容作为该文件的内容：
 
-    ```
+    ```sql
     DROP TABLE ${hiveTableName};
     CREATE EXTERNAL TABLE ${hiveTableName}(deviceplatform string, count string) ROW FORMAT DELIMITED
     FIELDS TERMINATED BY '\t' STORED AS TEXTFILE LOCATION '${hiveDataFolder}';
@@ -136,7 +136,7 @@ Oozie 工作流定义是用 hPDL（一种 XML 过程定义语言）编写的。�
     ```
 2. 打开 nano 编辑器后，输入以下内容作为文件内容：
 
-    ```
+    ```xml
     <workflow-app name="useooziewf" xmlns="uri:oozie:workflow:0.2">
         <start to = "RunHiveScript"/>
         <action name="RunHiveScript">
@@ -177,9 +177,7 @@ Oozie 工作流定义是用 hPDL（一种 XML 过程定义语言）编写的。�
             <arg>1</arg>
             <arg>--input-fields-terminated-by</arg>
             <arg>"\t"</arg>
-        ```
     <archive>sqljdbc41.jar</archive>
-    ```
             </sqoop>
         <ok to="end"/>
         <error to="fail"/>
@@ -305,7 +303,7 @@ Oozie 工作流定义是用 hPDL（一种 XML 过程定义语言）编写的。�
     ```
 4. 打开 nano 编辑器后，使用以下内容作为该文件的内容：
 
-    ```
+    ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
 
@@ -543,7 +541,7 @@ Oozie Web UI 提供基于 Web 的视图来显示群集上 Oozie 作业的状态�
 
     将以下内容用作该文件的内容：
 
-    ```
+    ```xml
     <coordinator-app name="my_coord_app" frequency="${coordFrequency}" start="${coordStart}" end="${coordEnd}" timezone="${coordTimezone}" xmlns="uri:oozie:coordinator:0.4">
       <action>
         <workflow>

@@ -121,7 +121,7 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
 
 此示例中的架构假定在读取器与写入器之间共享，因此无需采用 Avro 对象容器格式。有关在架构必须与数据一起共享时，如何使用反射和对象容器格式将数据序列化到内存缓冲区，以及如何对内存缓冲区中的数据进行反序列化的示例，请参阅<a href="#Scenario3">使用对象容器文件通过反射进行序列化</a>。
 
-```
+```csharp
 namespace Microsoft.Hadoop.Avro.Sample
 {
     using System;
@@ -245,7 +245,7 @@ namespace Microsoft.Hadoop.Avro.Sample
 
 此示例中的架构假定在读取器与写入器之间共享，因此无需采用 Avro 对象容器格式。有关在架构必须包含在已序列化的数据中时，如何使用通用记录和对象容器格式将数据序列化到内存缓冲区，以及对内存缓冲区中的数据进行反序列化的示例，请参阅<a href="#Scenario4">使用对象容器文件通过通用记录进行序列化</a>示例。
 
-```
+```csharp
 namespace Microsoft.Hadoop.Avro.Sample
 {
 using System;
@@ -370,7 +370,7 @@ public class AvroSample
 
 对象容器文件中的数据是通过 .NET Framework 4 中的默认 [**Deflate**][deflate-100] 压缩编解码器压缩的。请参阅本主题中的<a href="#Scenario5">第五个示例</a>，了解如何使用 .NET Framework 4.5 中提供的更新的 [**Deflate**][deflate-110] 压缩编解码器高级版。
 
-```
+```csharp
 namespace Microsoft.Hadoop.Avro.Sample
 {
     using System;
@@ -612,7 +612,7 @@ namespace Microsoft.Hadoop.Avro.Sample
 
 然后，从文件中读取数据，并将数据反序列化为对象的集合。将此集合与 Avro 记录的初始列表进行比较，以确认它们相同。
 
-```
+```csharp
 namespace Microsoft.Hadoop.Avro.Sample
 {
     using System;
@@ -872,7 +872,7 @@ namespace Microsoft.Hadoop.Avro.Sample
 
 [Avro 规范](http://avro.apache.org/docs/current/spec.html#Required+Codecs)允许使用可选的压缩编解码器（除了 **Null** 和 **Deflate** 默认压缩编解码器外）。此示例未完全实现类似 Snappy（在 [Avro 规范](http://avro.apache.org/docs/current/spec.html#snappy)中作为支持的可选编解码器提及）的新编解码器。它演示如何使用 [**Deflate**][deflate-110] 编解码器的 .NET Framework 4.5 实现，后者基于 [zlib](http://zlib.net/) 压缩库提供比默认的 .NET Framework 4.0 版本更好的压缩算法。
 
-```
+```csharp
 //
 // This code needs to be compiled with the parameter Target Framework set as ".NET Framework 4.5"
 // to ensure the desired implementation of the Deflate compression algorithm is used.

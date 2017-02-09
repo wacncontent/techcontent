@@ -36,7 +36,7 @@ ms.author: jgao
 
 需要以下 Nuget 包：
 
-```
+```powershell
 Install-Package Microsoft.Rest.ClientRuntime.Azure.Authentication -Pre
 Install-Package Microsoft.Azure.Management.ResourceManager -Pre
 Install-Package Microsoft.Azure.Management.HDInsight
@@ -44,7 +44,7 @@ Install-Package Microsoft.Azure.Management.HDInsight
 
 以下代码示例演示如何先连接到 Azure，然后管理 Azure 订阅下面的 HDInsight 群集。
 
-```
+```csharp
 using System;
 using Microsoft.Azure;
 using Microsoft.Azure.Management.HDInsight;
@@ -120,7 +120,7 @@ namespace HDInsightManagement
 ## <a name="list-clusters"></a> 列出群集
 以下代码片段列出了群集和一些属性：
 
-```
+```csharp
 var results = _hdiManagementClient.Clusters.List();
 foreach (var name in results.Clusters) {
     Console.WriteLine("Cluster Name: " + name.Name);
@@ -133,7 +133,7 @@ foreach (var name in results.Clusters) {
 ## <a name="delete-clusters"></a> 删除群集
 使用以下代码片段以同步或异步方式删除群集：
 
-```
+```csharp
 _hdiManagementClient.Clusters.Delete("<Resource Group Name>", "<Cluster Name>");
 _hdiManagementClient.Clusters.DeleteAsync("<Resource Group Name>", "<Cluster Name>");
 ```
@@ -179,7 +179,7 @@ _hdiManagementClient.Clusters.DeleteAsync("<Resource Group Name>", "<Cluster Nam
 
     以下是有关如何使用 CLI 命令重新平衡 Storm 拓扑的示例：
 
-    ```
+    ```bash
     ## Reconfigure the topology "mytopology" to use 5 worker processes,
     ## the spout "blue-spout" to use 3 executors, and
     ## the bolt "yellow-bolt" to use 10 executors
@@ -188,7 +188,7 @@ _hdiManagementClient.Clusters.DeleteAsync("<Resource Group Name>", "<Cluster Nam
 
 以下代码片段显示如何以同步或异步方式调整群集的大小：
 
-```
+```csharp
 _hdiManagementClient.Clusters.Resize("<Resource Group Name>", "<Cluster Name>", <New Size>);   
 _hdiManagementClient.Clusters.ResizeAsync("<Resource Group Name>", "<Cluster Name>", <New Size>);   
 ```
@@ -204,7 +204,7 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 默认情况下，将授权这些服务进行访问。你可以撤消/授予访问权限。若要撤消：
 
-```
+```csharp
 var httpParams = new HttpSettingsParameters
 {
     HttpUserEnabled = false,
@@ -216,7 +216,7 @@ _hdiManagementClient.Clusters.ConfigureHttpSettings("<Resource Group Name>, <Clu
 
 若要授予：
 
-```
+```csharp
 var httpParams = new HttpSettingsParameters
 {
     HttpUserEnabled = enable,
@@ -239,7 +239,7 @@ _hdiManagementClient.Clusters.ConfigureHttpSettings("<Resource Group Name>, <Clu
 ## <a name="find-the-default-storage-account"></a> 查找默认存储帐户
 以下代码片段演示如何获取群集的默认存储帐户名称和默认存储帐户密钥。
 
-```
+```csharp
 var results = _hdiManagementClient.Clusters.GetClusterConfigurations(<Resource Group Name>, <Cluster Name>, "core-site");
 foreach (var key in results.Configuration.Keys)
 {

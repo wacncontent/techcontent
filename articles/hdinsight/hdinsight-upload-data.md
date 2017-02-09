@@ -113,7 +113,7 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
 1. 根据[安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 中的说明打开 Azure PowerShell 控制台。
 2. 设置以下脚本中前五个变量的值：
 
-    ```
+    ```powershell
     $resourceGroupName = "<AzureResourceGroupName>"
     $storageAccountName = "<StorageAccountName>"
     $containerName = "<ContainerName>"

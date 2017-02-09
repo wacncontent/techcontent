@@ -74,7 +74,7 @@ curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters
 
 响应是 JSON 文档，以类似于下面的内容的信息开头：
 
-```
+```json
 {
 "href" : "http://10.0.0.10:8080/api/v1/clusters/CLUSTERNAME",
 "Clusters" : {
@@ -184,7 +184,7 @@ wasbs://CONTAINER@ACCOUNTNAME.blob.core.chinacloudapi.cn
 
     该示例返回一个 JSON 文档，其中包含群集上安装的组件的当前配置（由 *tag* 值标识）。下面的示例是从 Spark 群集类型返回的数据摘录。
 
-    ```
+    ```json
     "spark-metrics-properties" : {
         "tag" : "INITIAL",
         "user" : "admin",

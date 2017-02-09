@@ -84,7 +84,7 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
 1. 按照[附录 C](#appendix-c) 中的说明，为 Sqoop 作业输出创建 Azure SQL 数据库和表。
 2. 打开 Windows PowerShell ISE 并运行以下脚本：
 
-    ```
+    ```powershell
     $subscriptionID = "<Azure Subscription ID>"
     $nameToken = "<Enter an Alias>"
 
@@ -275,7 +275,7 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
 2. 打开 Azure PowerShell ISE。
 3. 将以下脚本粘贴到脚本窗格中：
 
-    ```
+    ```powershell
     [CmdletBinding()]
     Param(
 
@@ -386,7 +386,7 @@ HiveQL 脚本将执行以下操作：
 2. 打开 Azure PowerShell ISE。
 3. 将以下脚本复制并粘贴到脚本窗格中：
 
-    ```
+    ```powershell
     [CmdletBinding()]
     Param(
 
@@ -576,7 +576,7 @@ HiveQL 脚本将执行以下操作：
 2. 打开 Azure PowerShell ISE。
 3. 将以下脚本复制并粘贴到脚本窗格中：
 
-    ```
+    ```powershell
     [CmdletBinding()]
     Param(
 

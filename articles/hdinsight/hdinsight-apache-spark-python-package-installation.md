@@ -63,7 +63,7 @@ ms.author: nitinme
 
     要复制的代码：
 
-    ```
+    ```python
     import tensorflow as tf
     hello = tf.constant('Hello, TensorFlow!')
     sess = tf.Session()

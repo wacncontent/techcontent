@@ -59,7 +59,7 @@ Bootstrap 的使用方式有 3 种：
 ## <a name="use-azure-powershell"></a> 使用 Azure PowerShell
 以下 PowerShell 代码将自定义 Hive 配置：
 
-```
+```powershell
 # hive-site.xml configuration
 $hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
 
@@ -100,7 +100,7 @@ New-AzureRmHDInsightCluster `
 
 下面是有关自定义其他配置文件的更多示例：
 
-```
+```powershell
 # hdfs-site.xml configuration
 $HdfsConfigValues = @{ "dfs.blocksize"="64m" } #default is 128MB in HDI 3.0 and 256MB in HDI 2.1
 
@@ -122,7 +122,7 @@ $OozieConfigValues = @{ "oozie.service.coord.normal.default.timeout"="150" }  # 
 ## 使用 Resource Manager 模板
 可以在 Resource Manager 模板中使用 bootstrap：
 
-```
+```json
 "configurations": {
     …
     "hive-site": {
@@ -154,7 +154,7 @@ $OozieConfigValues = @{ "oozie.service.coord.normal.default.timeout"="150" }  # 
 ## <a name="appx-a:-powershell-sample"></a> 附录 A：PowerShell 示例
 此 PowerShell 脚本将创建一个 HDInsight 群集并自定义 Hive 设置：
 
-```
+```powershell
 ####################################
 # Set these variables
 ####################################

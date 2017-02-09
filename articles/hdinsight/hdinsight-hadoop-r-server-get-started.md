@@ -244,7 +244,7 @@ username@ed00-myrser:~$
 ## 从 Microsoft R Server 或 Microsoft R Client 的远程实例使用 HDI 上的 R Server
 根据上述有关使用公钥/私钥对访问群集的部分，可以设置从台式机或便携式计算机上运行的 Microsoft R Server 或 Microsoft R Client 到 HDI Hadoop Spark 计算上下文的访问（请参阅 [RevoScaleR Hadoop Spark Getting Started guide](https://msdn.microsoft.com/microsoft-r/scaler-spark-getting-started)（RevoScaleR Hadoop Spark 入门）在线指南的 [Creating a Compute Context for Spark](https://msdn.microsoft.com/microsoft-r/scaler-spark-getting-started#creating-a-compute-context-for-spark)（创建 Spark 的计算上下文）部分中的“Using Microsoft R Server as a Hadoop Client”（使用 Microsoft R Server 作为 Hadoop 客户端））。为此，需要在便携式计算机上定义 RxSpark 计算上下文时指定以下选项：hdfsShareDir、shareDir、sshUsername、sshHostname、sshSwitches 和 sshProfileScript。例如：
 
-```
+```r
 myNameNode <- "default"
 myPort <- 0 
 
@@ -273,7 +273,7 @@ mySparkCluster <- RxSpark(
 
 1. 在 RStudio Server 或 R 控制台（在 SSH 会话中）中，使用以下命令将示例数据加载到 HDInsight 的默认存储中。
 
-    ```
+    ```r
     # Set the HDFS (WASB) location of example data
     bigDataDirRoot <- "/example/data"
     # create a local folder for storaging data temporarily
@@ -303,7 +303,7 @@ mySparkCluster <- RxSpark(
 
 2. 接下来，我们要创建一些数据信息并定义两个数据源，以便使用数据。
 
-    ```
+    ```r
     # Define the HDFS (WASB) file system
     hdfsFS <- RxHdfsFileSystem()
     # Create info list for the airline data
@@ -328,7 +328,7 @@ mySparkCluster <- RxSpark(
 
 3. 现在，我们使用本地计算上下文对数据运行逻辑回归。
 
-    ```
+    ```r
     # Set a local compute context
     rxSetComputeContext("local")
     # Run a logistic regression
@@ -369,7 +369,7 @@ mySparkCluster <- RxSpark(
 
 4. 然后，我们使用 Spark 上下文来运行相同的逻辑回归。Spark 上下文会将处理分布到 HDInsight 群集的所有辅助角色节点之间。
 
-    ```
+    ```r
     # Define the Spark compute context 
     mySparkCluster <- RxSpark()
     # Set the compute context 
@@ -419,7 +419,7 @@ R Server 9.0 和更高版本中提供的新功能允许直接访问 Hive 和 Par
 
 下面提供了有关使用这些新函数的一些示例代码：
 
-```
+```r
 #..create a Spark compute context
 
 myHadoopCluster <- rxSparkConnect(reset = TRUE)
@@ -427,7 +427,7 @@ myHadoopCluster <- rxSparkConnect(reset = TRUE)
 
 <br/>  
 
-```
+```r
 #..retrieve some sample data from Hive and run a model 
 
 hiveData <- RxHiveData("select * from hivesampletable", 
@@ -439,7 +439,7 @@ rxLinMod(querydwelltime ~ devicemake, data=hiveData)
 
 <br/>
 
-```
+```r
 #..retrieve some sample data from Parquet and run a model 
 
 rxHadoopMakeDir('/share')
@@ -457,7 +457,7 @@ rxNaiveBayes(type ~ age + cost, data = pqData)
 
 <br/>  
 
-```
+```r
 #..check on Spark data objects, cleanup, and close the Spark session 
 
 lsObj <- rxSparkListData() # two data objs are cached

@@ -113,7 +113,7 @@ ms.author: nitinme
 
 6. 运行以下代码将一些示例数据注册到名为 **hvac** 的临时表中。
 
-    ```
+    ```python
     # Load the data
     hvacText = sc.textFile("wasbs:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
 
