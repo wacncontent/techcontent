@@ -134,20 +134,23 @@ IoT 中心监视 6 种类别的事件：
 - IoT 中心通知消息创建期间未在存储中找到文件时发生的错误。
 
 请注意，此类别不能捕获在设备将文件上载到存储空间时直接发生的错误。
-    {
-         "authType": "{\"scope\":\"hub\",\"type\":\"sas\",\"issuer\":\"iothub\"}",
-         "protocol": "HTTP",
-         "time": " UTC timestamp",
-         "operationName": "ingress",
-         "category": "fileUpload",
-         "level": "Error",
-         "statusCode": 4XX,
-         "statusType": 4XX001,
-         "statusDescription": "MessageDescription",
-         "deviceId": "device-ID",
-         "blobUri": "http//bloburi.com",
-         "durationMs": 1234
-    }
+
+```
+{
+     "authType": "{\"scope\":\"hub\",\"type\":\"sas\",\"issuer\":\"iothub\"}",
+     "protocol": "HTTP",
+     "time": " UTC timestamp",
+     "operationName": "ingress",
+     "category": "fileUpload",
+     "level": "Error",
+     "statusCode": 4XX,
+     "statusType": 4XX001,
+     "statusDescription": "MessageDescription",
+     "deviceId": "device-ID",
+     "blobUri": "http//bloburi.com",
+     "durationMs": 1234
+}
+```
 
 ### 消息路由
 消息路由类别跟踪消息路由评估期间发生的错误以及 IoT 中心感知到的终结点运行状况。此类别包括以下事件：规则评估为“未定义”、IoT 中心将终结点标记为“已停用”，以及从终结点中收到的任何其他错误。请注意，此类别不包含有关消息本身的特定错误（如设备限制错误），这些错误在“设备遥测”类别下报告。

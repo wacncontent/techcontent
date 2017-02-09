@@ -122,7 +122,7 @@ azure insights alerts rule list abhingrgtest123 --ruleName andy0323
 ```
 azure insights alerts actions email create --customEmails foo@microsoft.com
 azure insights alerts actions webhook create https://someuri.com
-azure insights alerts rule metric set andy0323 eastus abhingrgtest123 PT5M GreaterThan 2 /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/Default-Web-EastUS/providers/Microsoft.Web/serverfarms/Default1 BytesReceived Total
+azure insights alerts rule metric set andy0323 eastus abhingrgtest123 PT5M GreaterThan 2 /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/Default-Web-chinaeast/providers/Microsoft.Web/serverfarms/Default1 BytesReceived Total
 ```
 
 ### 创建日志警报规则

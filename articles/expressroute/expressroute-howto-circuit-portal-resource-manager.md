@@ -21,9 +21,9 @@ ms.author: cherylmc
 # 创建和修改 ExpressRoute 线路
 
 > [!div class="op_single_selector"]
-[Azure 门户 - Resource Manager](./expressroute-howto-circuit-portal-resource-manager.md)
-[PowerShell - Resource Manager](./expressroute-howto-circuit-arm.md)
-[PowerShell - 经典](./expressroute-howto-circuit-classic.md)
+- [Azure 门户 - Resource Manager](./expressroute-howto-circuit-portal-resource-manager.md)
+- [PowerShell - Resource Manager](./expressroute-howto-circuit-arm.md)
+- [PowerShell - 经典](./expressroute-howto-circuit-classic.md)
 
 本文介绍如何使用 Azure 门户和 Azure Resource Manager 部署模型创建 Azure ExpressRoute 线路。以下步骤还说明如何查看线路状态，以及如何更新、删除和取消预配线路。
 

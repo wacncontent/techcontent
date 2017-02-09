@@ -21,9 +21,9 @@ ms.author: xshi
 
 # 获取工具（Windows 7 及更高版本）
 >[!div class="op_single_selector"]
-[Windows 7 or later](./iot-hub-gateway-kit-c-lesson2-get-the-tools-win32.md)
-[Ubuntu 16.04](./iot-hub-gateway-kit-c-lesson2-get-the-tools-ubuntu.md)
-[macOS 10.10](./iot-hub-gateway-kit-c-lesson2-get-the-tools-mac.md)
+- [Windows 7 or later](./iot-hub-gateway-kit-c-lesson2-get-the-tools-win32.md)
+- [Ubuntu 16.04](./iot-hub-gateway-kit-c-lesson2-get-the-tools-ubuntu.md)
+- [macOS 10.10](./iot-hub-gateway-kit-c-lesson2-get-the-tools-mac.md)
 
 ## 执行的操作
 
@@ -69,7 +69,7 @@ ms.author: xshi
 按 `Windows + R`，键入 `cmd` 并按 `Enter` 打开命令提示符窗口，然后运行以下命令：
 
 ```
-    npm install -g gulp
+npm install -g gulp
 ```
 
 如果遇到安装问题，请参阅[故障排除指南](./iot-hub-gateway-kit-c-troubleshooting.md)，获取常见问题的解决方案。
@@ -93,8 +93,8 @@ ms.author: xshi
 2. 运行以下命令，安装 Azure CLI：
 
     ```
-       pip install --upgrade azure-cli
-       pip install --upgrade azure-cli-iot
+    pip install --upgrade azure-cli
+    pip install --upgrade azure-cli-iot
     ```
 
     安装过程可能需要 5 分钟。

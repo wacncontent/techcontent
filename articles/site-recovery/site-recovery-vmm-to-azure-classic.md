@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: hero-article
 ms.date: 11/01/2016
-wacn.date: 12/12/2016
+wacn.date: 01/25/2017
 ms.author: raynew
 ---
 
@@ -364,4 +364,4 @@ marsagentinstaller.exe /q /nu
 
 了解[设置恢复计划](./site-recovery-create-recovery-plans.md)和[故障转移](./site-recovery-failover.md)。
 
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

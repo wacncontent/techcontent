@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 10/29/2016
 ms.author: mbaldwin;bryanla
-wacn.date: 01/06/2017
+wacn.date: 02/06/2017
 ---
 
 # 将应用程序与 Azure Active Directory 集成
@@ -313,4 +313,4 @@ Web 应用程序也可为用户提供注册体验。如果你确实提供注册�
 - 请参阅 [Azure AD developer glossary](./active-directory-dev-glossary.md)（Azure AD 开发人员术语表），了解某些核心的 Azure Active Directory (AD) 开发人员概念的定义。
 - 请参阅 [Active Directory 开发人员指南](./active-directory-developers-guide.md)了解与所有开发人员相关内容的概述。
 
-<!---HONumber=Mooncake_1128_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

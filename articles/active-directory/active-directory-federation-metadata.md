@@ -2,18 +2,19 @@
 title: Azure AD 联合元数据 | Azure
 description: 本文介绍 Azure Active Directory 针对接受 Azure Active Directory 令牌的服务发布的联合元数据文档。
 services: active-directory
-documentationCenter: .net
-authors: priyamohanram
+documentationcenter: .net
+author: priyamohanram
 manager: mbaldwin
 editor: ''
 
+ms.assetid: c2d5f80b-aa74-452c-955b-d8eb3ed62652
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 10/03/2016
-wacn.date: 11/08/2016
+ms.date: 01/07/2017
+wacn.date: 02/06/2017
 ms.author: priyamo
 ---
 
@@ -71,7 +72,6 @@ entityID="https://sts.chinacloudapi.cn/{tenant}/">
 ```
 
 ### 令牌签名证书
-
 当服务收到 Azure AD 租户颁发的令牌时，必须使用联合元数据文档中发布的签名密钥来验证该令牌的签名。联合元数据包含租户用来进行令牌签名的证书的公共部分。证书原始字节显示在 `KeyDescriptor` 元素中。仅当 `use` 属性值为 `signing` 时，才可以使用令牌签名证书进行签名。
 
 Azure AD 发布的联合元数据文档可以包含多个签名密钥，例如，当 Azure AD 准备更新签名证书时。如果联合元数据文档包含多个证书，验证令牌的服务应该支持文档中的所有证书。
@@ -164,4 +164,4 @@ https://login.microsoftonline.com/common/wsfed
   </IDPSSODescriptor>
 ```
 
-<!---HONumber=Mooncake_1031_2016-->
+<!---HONumber=Mooncake_0120_2017-->

@@ -13,12 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 07/26/2016
-wacn.date: 08/29/2016
+wacn.date: 01/25/2017
 ms.author: bharatn
 ---
 
 # Reliable Services 基于 WCF 的通信堆栈
-Reliable services 框架使服务创作者能够选择他们要用于其服务的通信堆栈。他们可以通过从 [CreateServiceReplicaListeners 或 CreateServiceInstanceListeners](./service-fabric-reliable-services-communication.md) 方法返回的 **ICommunicationListener**，来插入所选的通信堆栈。对于想要使用基于 Windows Communication Foundation (WCF) 的通信的服务创作者，该框架提供了基于 WCF 的通信堆栈实现。
+Reliable services 框架使服务创作者能够选择他们要用于其服务的通信堆栈。他们可以通过从 [CreateServiceReplicaListeners 或 CreateServiceInstanceListeners](./service-fabric-reliable-services-communication.md) 方法返回的 **ICommunicationListener** 来插入所选的通信堆栈。对于想要使用基于 Windows Communication Foundation (WCF) 的通信的服务创作者，该框架提供了基于 WCF 的通信堆栈实现。
 
 ## WCF 通信侦听器
 特定于 WCF 的 ICommunicationListener 实现由 Microsoft.ServiceFabric.Services.Communication.Wcf.Runtime.WcfCommunicationListener 类提供。
@@ -119,4 +119,4 @@ var result = calculatorServiceCommunicationClient.InvokeWithRetryAsync(
 
 * [确保 Reliable Services 的通信安全](./service-fabric-reliable-services-secure-communication.md)
 
-<!---HONumber=Mooncake_0822_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

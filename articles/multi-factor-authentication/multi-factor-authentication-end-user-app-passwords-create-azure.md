@@ -13,7 +13,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 08/04/2016
-wacn.date: 09/12/2016
+wacn.date: 02/06/2017
 ms.author: kgremban
 ---
 
@@ -32,4 +32,4 @@ ms.author: kgremban
 
 <center>![Cloud](./media/multi-factor-authentication-end-user-app-passwords-create-azure/app2.png)</center>
 
-<!---HONumber=Mooncake_0905_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

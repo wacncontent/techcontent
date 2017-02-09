@@ -107,7 +107,6 @@ azure hdinsight cluster disable-http-access [options] <Cluster Name>
 * [Azure HDInsight 入门][hdinsight-get-started]
 * [如何使用 Azure CLI][azure-command-line-tools]
 
-
 [azure-command-line-tools]: ../xplat-cli-install.md
 [azure-create-storageaccount]: ../storage/storage-create-storage-account.md
 [azure-purchase-options]: https://www.azure.cn/pricing/overview/

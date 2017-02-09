@@ -73,7 +73,7 @@ ms.author: xshi
 若要安装 gulp，请在终端运行以下命令：
 
 ```
-    sudo npm install -g gulp
+sudo npm install -g gulp
 ```
 
 如果遇到安装问题，请参阅[故障排除指南](./iot-hub-gateway-kit-c-sim-troubleshooting.md)，获取常见问题的解决方案。
@@ -102,7 +102,7 @@ ms.author: xshi
 2. 运行以下命令，对安装进行验证：
 
     ```
-       az iot -h
+    az iot -h
     ```
 
     如果安装成功，应看到以下输出。

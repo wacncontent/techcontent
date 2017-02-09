@@ -13,7 +13,7 @@ ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
 ms.date: 06/29/2016
-wacn.date: 08/08/2016
+wacn.date: 02/06/2017
 ms.author: wesmc
 ---
 
@@ -257,4 +257,4 @@ ms.author: wesmc
 
 [通知中心入门]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
 
-<!---HONumber=Mooncake_0801_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

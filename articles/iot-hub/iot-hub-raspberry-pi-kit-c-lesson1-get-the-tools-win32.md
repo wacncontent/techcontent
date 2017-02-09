@@ -21,9 +21,9 @@ ms.author: xshi
 
 # 获取工具（Windows 7 或更高版本）
 >[!div class="op_single_selector"]
-[Windows 7 or later](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-win32.md)
-[Ubuntu 16.04](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-ubuntu.md)
-[macOS 10.10](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-mac.md)
+- [Windows 7 or later](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-win32.md)
+- [Ubuntu 16.04](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-ubuntu.md)
+- [macOS 10.10](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-mac.md)
 
 ## 执行的操作
 下载适用于 Raspberry Pi 3 的第一个示例应用程序的开发工具和软件。如果有问题，可在[故障排除页](./iot-hub-raspberry-pi-kit-c-troubleshooting.md)上查找解决方案。
@@ -62,7 +62,7 @@ ms.author: xshi
 以管理员身份启动命令提示符。通过运行以下命令安装 `gulp` 和 `device-discovery-cli`：
 
 ```
-    npm install -g device-discovery-cli gulp
+npm install -g device-discovery-cli gulp
 ```
 
 如果无法在计算机上安装 Node.js 和这些额外的 Node.js 开发工具，请参阅[故障排除指南](./iot-hub-raspberry-pi-kit-c-troubleshooting.md)，了解常见问题的解决方案。

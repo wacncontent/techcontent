@@ -25,7 +25,7 @@ ms.author: cherylmc
 [PowerShell - Resource Manager](./expressroute-howto-routing-arm.md)
 [PowerShell - Classic](./expressroute-howto-routing-classic.md)
 
-本文将指导你执行相关步骤，以便使用 Azure 门户和 Resource Manager 部署模型创建和管理 ExpressRoute 线路的路由配置。
+本文将指导你执行相关步骤，以便使用 Azure 门户预览和 Resource Manager 部署模型创建和管理 ExpressRoute 线路的路由配置。
 
 **关于 Azure 部署模型**
 

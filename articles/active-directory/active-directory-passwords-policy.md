@@ -13,8 +13,8 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 10/04/2016
-wacn.date: 11/08/2016
 ms.author: curtand
+wacn.date: 02/06/2017
 ---
 
 # Azure Active Directory 中的密码策略和限制
@@ -30,7 +30,7 @@ ms.author: curtand
 
 | 属性 | UserPrincipalName 要求 |
 |   ----------------------- |   ----------------------- |
-| 允许的字符 | <ul> <li>A - Z</li> <li>a -z </li><li>0 - 9</li> <li> . - \_ ! \# ^ \~</li></ul> |
+| 允许的字符 | <ul> <li>A - Z</li> <li>a -z </li><li>0 - 9</li> <li> . - \_ ! # ^ ~</li></ul> |
 | 不允许的字符 | <ul> <li>任何不分隔用户名和域的“@”字符。</li> <li>不能紧靠在“@”符号前面包含点字符“.”</li></ul> |
 | 长度约束 | <ul> <li>总长度不能超过 113 个字符</li><li>“@”符号后面可以有 64 个字符</li><li>“@”符号前面可以有 48 个字符</li></ul>
 
@@ -52,15 +52,15 @@ ms.author: curtand
 
 ## 后续步骤
 
-* **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
-* [从任意位置管理密码](./active-directory-passwords.md)
-* [密码管理的工作原理](./active-directory-passwords-how-it-works.md)
-* [密码管理入门](./active-directory-passwords-getting-started.md)
-* [自定义密码管理](./active-directory-passwords-customize.md)
-* [密码管理最佳实践](./active-directory-passwords-best-practices.md)
-* [如何使用密码管理报告获取 Operational Insights](./active-directory-passwords-get-insights.md)
-* [密码管理常见问题](./active-directory-passwords-faq.md)
-* [排查密码管理问题](./active-directory-passwords-troubleshoot.md)
-* [了解详细信息](./active-directory-passwords-learn-more.md)
+- **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+- [从任意位置管理密码](./active-directory-passwords.md)
+- [密码管理的工作原理](./active-directory-passwords-how-it-works.md)
+- [密码管理入门](./active-directory-passwords-getting-started.md)
+- [自定义密码管理](./active-directory-passwords-customize.md)
+- [密码管理最佳实践](./active-directory-passwords-best-practices.md)
+- [如何使用密码管理报告获取 Operational Insights](./active-directory-passwords-get-insights.md)
+- [密码管理常见问题](./active-directory-passwords-faq.md)
+- [排查密码管理问题](./active-directory-passwords-troubleshoot.md)
+- [了解详细信息](./active-directory-passwords-learn-more.md)
 
-<!---HONumber=Mooncake_1031_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

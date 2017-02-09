@@ -69,7 +69,7 @@ ms.author: xshi
 按 `Windows + R`，键入 `cmd` 并按 `Enter` 打开命令提示符窗口，然后运行以下命令：
 
 ```
-    npm install -g gulp
+npm install -g gulp
 ```
 
 如果遇到安装问题，请参阅[故障排除指南](./iot-hub-gateway-kit-c-sim-troubleshooting.md)，获取常见问题的解决方案。
@@ -94,8 +94,8 @@ ms.author: xshi
 2. 运行以下命令，安装 Azure CLI：
 
     ```
-       pip install --upgrade azure-cli
-       pip install --upgrade azure-cli-iot
+    pip install --upgrade azure-cli
+    pip install --upgrade azure-cli-iot
     ```
 
     安装过程可能需要 5 分钟。
@@ -103,7 +103,7 @@ ms.author: xshi
 3. 运行以下命令，对安装进行验证：
 
     ```
-       az iot -h
+    az iot -h
     ```
 
     如果安装成功，则会看到以下输出。

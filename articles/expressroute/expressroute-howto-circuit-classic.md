@@ -21,9 +21,9 @@ ms.author: ganesr;cherylmc
 # 创建和修改 ExpressRoute 线路
 
 > [!div class="op_single_selector"]
-[Azure Portal - Resource Manager](./expressroute-howto-circuit-portal-resource-manager.md)
-[PowerShell - Resource Manager](./expressroute-howto-circuit-arm.md)
-[PowerShell - Classic](./expressroute-howto-circuit-classic.md)
+ - [Azure Portal - Resource Manager](./expressroute-howto-circuit-portal-resource-manager.md)
+ - [PowerShell - Resource Manager](./expressroute-howto-circuit-arm.md)
+ - [PowerShell - Classic](./expressroute-howto-circuit-classic.md)
 
 本文将指导你执行相关步骤，以便使用 PowerShell cmdlet 和经典部署模型创建 Azure ExpressRoute 线路。本文还将向你显示如何查看状态，以及如何更新、删除和预配 ExpressRoute 线路。
 

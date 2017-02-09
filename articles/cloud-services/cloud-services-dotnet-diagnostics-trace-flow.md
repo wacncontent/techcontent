@@ -58,6 +58,7 @@ Trace、Debug 和 TraceSource 都需要设置“侦听器”来收集和记录�
         </trace>
     </system.diagnostics>
     ```
+
     >[!IMPORTANT]
     > 确保与 Microsoft.WindowsAzure.Diagnostics 程序集建立项目引用。更新上述 xml 中的版本号，以便与引用的 Microsoft.WindowsAzure.Diagnostics 程序集的版本匹配。
 
@@ -71,9 +72,11 @@ Trace、Debug 和 TraceSource 都需要设置“侦听器”来收集和记录�
 
 1. 打开应用程序的源文件。例如，用于辅助角色或 Web 角色的 <RoleName>.cs 文件。
 2. 添加以下 using 语句（如果尚未添加）：
+
     ```
-        using System.Diagnostics;
+    using System.Diagnostics;
     ```
+
 3. 添加 Trace 语句，以便捕获有关应用程序状态的信息。可以使用多种方法格式化 Trace 语句的输出。有关详细信息，请参阅[如何：向应用程序代码添加 Trace 语句](https://msdn.microsoft.com/zh-cn/library/zd83saa2.aspx)。
 4. 保存源文件。
 

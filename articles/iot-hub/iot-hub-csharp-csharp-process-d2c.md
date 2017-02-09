@@ -50,12 +50,12 @@ IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提�
 
 1. 在 Visual Studio 的 **SimulatedDevice** 项目中，将 `SendDeviceToCloudMessagesAsync` 方法替换为以下代码。
 
-    private static async void SendDeviceToCloudMessagesAsync()
-        {
-            double avgWindSpeed = 10; // m/s
-            Random rand = new Random();
-
     ```
+    private static async void SendDeviceToCloudMessagesAsync()
+    {
+        double avgWindSpeed = 10; // m/s
+        Random rand = new Random();
+
         while (true)
         {
             double currentWindSpeed = avgWindSpeed + rand.NextDouble() * 4 - 2;
@@ -91,15 +91,15 @@ IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提�
 
      这会将 `"level": "critical"` 属性随机添加到设备发送的消息，可模拟需要解决方案后端立即执行操作的消息。设备应用会在消息属性中（而非在消息正文中）传递此信息，以便 IoT 中心能够将消息路由到适当的消息目标。
 
-   > [!NOTE]
-   可使用消息属性根据各种方案路由消息，包括冷路径处理和此处所示的热路径示例。
-   > 
-   > 
+    > [!NOTE]
+    > 可使用消息属性根据各种方案路由消息，包括冷路径处理和此处所示的热路径示例。
+    > 
+    > 
 
-   > [!NOTE]
-   为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施指数退让等重试策略。
-   > 
-   > 
+    > [!NOTE]
+    > 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施指数退让等重试策略。
+    > 
+    > 
 
 ## 向 IoT 中心添加一个队列并向其路由消息
 在本部分中，将创建一个服务总线队列并将其连接到 IoT 中心，还会配置 IoT 中心，根据消息上的现有属性发送消息到队列。若要深入了解如何处理来自服务总线队列的消息，请参阅[队列入门][Service Bus queue]教程。
@@ -133,11 +133,14 @@ IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提�
 
 4. 在 **Program.cs** 文件的顶部添加以下 **using** 语句：
 
+    ```
     using System.IO;
     using Microsoft.ServiceBus.Messaging;
+    ```
 
 5. 最后，在 **Main** 方法中添加以下行。将连接字符串替换为队列的 **Listen** 权限：
 
+    ```
     Console.WriteLine("Receive critical messages. Ctrl-C to exit.\n");
     var connectionString = "{service bus listen string}";
     var queueName = "{queue name}";
@@ -153,6 +156,7 @@ IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提�
         });
 
     Console.ReadLine();
+    ```
 
 ## 运行应用程序
 现在，你已准备就绪，可以运行应用程序了。
@@ -160,7 +164,7 @@ IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提�
 1. 在 Visual Studio 的解决方案资源管理器中，右键单击你的解决方案并选择“设置启动项目”。选择“多个启动项目”，然后为 **ReadDeviceToCloudMessages**、**SimulatedDevice** 和 **ReadCriticalQueue** 项目选择“启动”作为操作。
 2. 按 **F5** 启动 3 个控制台应用。**ReadDeviceToCloudMessages** 应用仅拥有 **SimulatedDevice** 应用程序发送的非关键消息，而 **ReadCriticalQueue** 应用仅拥有关键消息。
 
-   ![3 个控制台应用][50]  
+    ![3 个控制台应用][50]  
 
 ## 后续步骤
 在本教程中，介绍了如何使用 IoT 中心的消息路由功能可靠地分派设备到云的消息。

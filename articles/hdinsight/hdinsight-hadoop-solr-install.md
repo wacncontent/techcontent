@@ -38,10 +38,6 @@ wacn.date: 02/06/2017
 
 ## 使用门户安装 Solr
 
-[!INCLUDE [hdinsight-azure-preview-portal](../includes/hdinsight-azure-preview-portal.md)]
-
-* [在 HDInsight 群集上安装 Solr](./hdinsight-hadoop-solr-install.md)
-
 1. 如[在 HDInsight 中创建 Hadoop 群集](./hdinsight-provision-clusters.md)中所述，使用“自定义创建”选项开始创建群集。
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所示：
 

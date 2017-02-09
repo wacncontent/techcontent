@@ -17,7 +17,7 @@ wacn.date: 02/06/2017
 
 # HBase 教程：开始在 HDInsight 中将 Apache HBase 与基于 Windows 的 Hadoop 配合使用
 
-[!INCLUDE [hbase-selector](../includes/hdinsight-hbase-selector.md)]
+[!INCLUDE [hbase-selector](../../includes/hdinsight-hbase-selector.md)]
 
 了解如何使用 Apache Hive 在 HDInsight 中创建 HBase 群集、创建 HBase 表和查询表。有关 HBase 的一般信息，请参阅 [HDInsight HBase 概述][hdinsight-hbase-overview]。
 
@@ -28,7 +28,7 @@ wacn.date: 02/06/2017
 
 ###开始之前
 
-[!INCLUDE [delete-cluster-warning](../includes/hdinsight-delete-cluster-warning.md)]
+[!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
 要阅读本 HBase 教程，必须具备：
 
@@ -37,7 +37,7 @@ wacn.date: 02/06/2017
 
 ## <a name="create-hbase-cluster"></a> 创建 HBase 群集
 
-[!INCLUDE [provisioningnote](../includes/hdinsight-provisioning.md)]
+[!INCLUDE [provisioningnote](../../includes/hdinsight-provisioning.md)]
 
 **使用 Azure 经典管理门户创建 HBase 群集**
 
@@ -318,7 +318,7 @@ http://zookeeper[0-2]: master-status
 
 ##删除群集
 
-[!INCLUDE [delete-cluster-warning](../includes/hdinsight-delete-cluster-warning.md)]
+[!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
 ## 后续步骤
 在针对 HDInsight 的本 HBase 教程中，已学习了如何创建 HBase 群集、如何创建表以及如何从 HBase shell 查看这些表中的数据。还学习了如何对 HBase 表中的数据使用 Hive 查询，以及如何使用 HBase C# REST API 创建 HBase 表并从该表中检索数据。

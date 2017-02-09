@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/01/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: vturecek;mikhegn
 ---
 
@@ -156,4 +156,4 @@ ms.author: vturecek;mikhegn
 [viewremotestreamingtraces]: ./media/service-fabric-debugging-your-application/viewremotestreamingtraces.png
 [disablestreamingtraces]: ./media/service-fabric-debugging-your-application/disablestreamingtraces.png
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

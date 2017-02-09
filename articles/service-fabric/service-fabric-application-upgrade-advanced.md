@@ -13,7 +13,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 11/15/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: subramar
 ---
 
@@ -98,4 +98,4 @@ app1/
 
 参考 [Troubleshooting Application Upgrades](./service-fabric-application-upgrade-troubleshooting.md)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

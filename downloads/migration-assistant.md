@@ -18,7 +18,7 @@ ms.date: 11/22/2014
 wacn.date: 01/21/2016
 ---
 
-#Azure Web 应用迁移助理2
+#Azure Web 应用迁移助理
 <div>
   <p>Azure Websites Migration Assistant 将分析您的 IIS 安装，并识别哪些站点可以迁移至云，突出显示不能迁移或平台不支持的任何元件。</p>
   <p>分析后，迁移助手也将在特定的 Azure 订阅下创建支持您的站点所需的 Web 应用和数据库。</p>

@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 10/31/2016
-wacn.date: 12/22/2016
+wacn.date: 02/07/2017
 ms.author: kgremban
 ---
 
@@ -90,4 +90,4 @@ Azure 多重身份验证服务器可用于保护 Azure AD 帐户所访问的云�
 - [Azure 多重身份验证的设置体验](./multi-factor-authentication-end-user-first-time.md)
 - [Azure 多重身份验证常见问题](./multi-factor-authentication-faq.md)
 
-<!---HONumber=Mooncake_1212_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

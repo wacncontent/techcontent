@@ -13,7 +13,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 03/31/2016
-wacn.date: 07/04/2016
+wacn.date: 01/25/2017
 ms.author: mattrow
 ---
 
@@ -30,11 +30,11 @@ ms.author: mattrow
 在服务类型初始化之前发生的任何异常都将导致进程崩溃。对于这些类型的崩溃，应用程序事件日志将显示服务中的错误。
 这是服务初始化之前遇到的最常见异常。
 
-**System.IO.FileNotFoundException**
+***System.IO.FileNotFoundException***
 
 此错误通常是因为缺少程序集依赖项导致的。请检查 Visual Studio 中的 CopyLocal 属性，或节点的全局程序集缓存。
 
-**System.Runtime.InteropServices.COMException** at System.Fabric.Interop.NativeRuntime+IFabricRuntime.RegisterStatefulServiceFactory(IntPtr, IFabricStatefulServiceFactory)
+***System.Runtime.InteropServices.COMException*** *at System.Fabric.Interop.NativeRuntime+IFabricRuntime.RegisterStatefulServiceFactory(IntPtr, IFabricStatefulServiceFactory)*
 
  这表明注册的服务类型名称与服务清单不匹配。
 
@@ -50,4 +50,4 @@ ms.author: mattrow
 * [Reliable Actors 诊断](./service-fabric-reliable-actors-diagnostics.md)
 * [Reliable Services 诊断](./service-fabric-reliable-services-diagnostics.md)
 
-<!---HONumber=Mooncake_0425_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

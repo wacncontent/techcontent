@@ -48,8 +48,9 @@ ms.author: adrianha
 
 还可直接从 CDN 下载使用预建版本的 SDK：
 
-html
-        <script src="https://zumo.blob.core.windows.net/sdk/azure-mobile-apps-client.min.js"></script>
+```
+<script src="https://zumo.blob.core.windows.net/sdk/azure-mobile-apps-client.min.js"></script>
+```
 
 [!INCLUDE [app-service-mobile-html-js-library](../../includes/app-service-mobile-html-js-library.md)]
 

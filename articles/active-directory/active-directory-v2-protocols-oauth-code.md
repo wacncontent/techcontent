@@ -13,8 +13,8 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 08/08/2016
-wacn.date: 11/08/2016
 ms.author: dastrock
+wacn.date: 02/06/2017
 ---
 
 # v2.0 协议 — OAuth 2.0 授权代码流
@@ -26,7 +26,7 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 > [!NOTE]
     v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
-有关 OAuth 2.0 授权代码流的说明，请参阅 [OAuth 2.0 规范第 4.1 部分](http://tools.ietf.org/html/rfc6749)。它用于在大部分的应用类型（包括 [Web 应用](./active-directory-v2-flows.md)和[本机安装的应用](./active-directory-v2-flows.md)）中执行身份验证与授权。它可让应用程序安全地获取 access\_tokens，用于访问以 v2.0 终结点保护的资源。
+有关 OAuth 2.0 授权代码流的说明，请参阅 [OAuth 2.0 规范第 4.1 部分](http://tools.ietf.org/html/rfc6749)。它用于在大部分的应用类型（包括 [Web 应用](./active-directory-v2-flows.md#web-apps)和[本机安装的应用](./active-directory-v2-flows.md#mobile-and-native-apps)）中执行身份验证与授权。它可让应用程序安全地获取 access\_tokens，用于访问以 v2.0 终结点保护的资源。
 
 ## 协议图
 从较高层面讲，本机/移动应用程序的整个身份验证流有点类似于：
@@ -49,12 +49,11 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 ```
 
 > [!TIP]
-> 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `code` 的 `https://localhost/myapp/`。
-    <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=query&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&state=12345" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
+> 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `code` 的 `https://localhost/myapp/`。<a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=query&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&state=12345" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
-| tenant | 必填 | 请求路径中的 `{tenant}` 值可用于控制哪些用户可以登录应用程序。允许的值为 `common`、`organizations`、`consumers` 和租户标识符。有关更多详细信息，请参阅[协议基础知识](./active-directory-v2-protocols.md)。 |
+| tenant | 必填 | 请求路径中的 `{tenant}` 值可用于控制哪些用户可以登录应用程序。允许的值为 `common`、`organizations`、`consumers` 和租户标识符。有关更多详细信息，请参阅[协议基础知识](./active-directory-v2-protocols.md#endpoints)。 |
 | client\_id | 必填 | 注册门户 ([apps.dev.microsoft.com](https://apps.dev.microsoft.com/?referrer=/documentation/articles&deeplink=/appList)) 分配给应用的应用程序 ID。 |
 | response\_type | 必填 | 必须包括授权代码流的 `code`。 |
 | redirect\_uri | 建议 | 应用程序的 redirect\_uri，应用程序可在此发送及接收身份验证响应。其必须完全符合在门户中注册的其中一个 redirect\_uris，否则必须是编码的 url。对于本机和移动应用，应使用默认值 `https://login.microsoftonline.com/common/oauth2/nativeclient`。 |
@@ -130,8 +129,7 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 ```
 
 > [!TIP]
-> 尝试在 Postman 中执行此请求！ （别忘了替换 `code`）
-    [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
+> 尝试在 Postman 中执行此请求！ （别忘了替换 `code`）[![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------------- |
@@ -191,7 +189,7 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 | trace\_id | 帮助诊断的请求唯一标识符。 |
 | correlation\_id | 帮助跨组件诊断的请求唯一标识符。 |
 
-#### 令牌终结点错误的错误代码
+#### 令牌终结点错误的错误代码 <a name="error-codes-for-token-endpoint-errors"></a>
 
 | 错误代码 | 说明 | 客户端操作 |
 |------------|-------------|---------------|
@@ -208,8 +206,7 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 你已经成功获取 `access_token`，现在可以通过在 `Authorization` 标头中包含令牌，在 Web API 的请求中使用令牌。
 
 > [!TIP]
-> 在 Postman 中执行此请求！ （先替换 `Authorization` 标头）
-    [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
+> 在 Postman 中执行此请求！ （先替换 `Authorization` 标头）[![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
 
 ```
 GET /v1.0/me/messages
@@ -236,8 +233,7 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 ```
 
 > [!TIP]
-> 尝试在 Postman 中执行此请求！ （别忘了替换 `refresh_token`）
-    [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
+> 尝试在 Postman 中执行此请求！ （别忘了替换 `refresh_token`）[![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | -------- |
@@ -296,6 +292,6 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 | trace\_id | 帮助诊断的请求唯一标识符。 |
 | correlation\_id | 帮助跨组件诊断的请求唯一标识符。 |
 
-有关错误代码的描述和建议的客户端操作，请参阅令牌终结点错误的错误代码。
+有关错误代码的描述和建议的客户端操作，请参阅[令牌终结点错误的错误代码](#error-codes-for-token-endpoint-errors)。
 
-<!---HONumber=Mooncake_1031_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

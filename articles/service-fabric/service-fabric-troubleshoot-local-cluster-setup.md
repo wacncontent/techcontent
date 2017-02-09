@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 10/29/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: seanmck
 ---
 
@@ -106,4 +106,4 @@ At line:1 char:1
 - [使用系统运行状况报告了解群集并排除故障](./service-fabric-understand-and-troubleshoot-with-system-health-reports.md)
 - [使用 Service Fabric 资源管理器可视化群集](./service-fabric-visualizing-your-cluster.md)
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

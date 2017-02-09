@@ -13,7 +13,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 10/03/2016
-wacn.date: 11/28/2016
+wacn.date: 01/25/2017
 ms.author: motanv;heeldin
 ---
 
@@ -232,4 +232,4 @@ ReplicaSelector secondaryReplicaSelector = ReplicaSelector.RandomSecondaryOf(par
    - [在服务工作负荷期间模拟故障](./service-fabric-testability-workload-tests.md)
    - [服务到服务通信失败](./service-fabric-testability-scenarios-service-communication.md)
 
-<!---HONumber=Mooncake_1121_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

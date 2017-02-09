@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 11/15/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: subramar
 ---
 
@@ -81,4 +81,4 @@ Azure Service Fabric 确保只升级已更改的服务，并在整个升级过�
 [image3]: ./media/service-fabric-application-upgrade-tutorial/upgrade5.png
 [image4]: ./media/service-fabric-application-upgrade-tutorial/upgrade6.png
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

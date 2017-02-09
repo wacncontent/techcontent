@@ -22,7 +22,7 @@ wacn.date: 10/03/2015
 
 下面是在服务定义中定义的证书的示例。
 
-```xml
+```
 <ServiceDefinition name="WindowsAzureProject4" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <WorkerRole name="MyWokerRole"> <!-- or <WebRole name="MyWebRole" vmsize="Small"> -->
     <ConfigurationSettings>
@@ -47,7 +47,7 @@ wacn.date: 10/03/2015
 
 下面是在服务配置中定义的证书的示例。
 
-```xml
+```
 <Role name="MyWokerRole">
 ...
     <Certificates>

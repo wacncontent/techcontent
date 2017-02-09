@@ -21,9 +21,9 @@ ms.author: xshi
 
 # 获取工具 (macOS 10.10)
 >[!div class="op_single_selector"]
-[Windows 7 or later](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-win32.md)
-[Ubuntu 16.04](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-ubuntu.md)
-[macOS 10.10](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-mac.md)
+- [Windows 7 or later](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-win32.md)
+- [Ubuntu 16.04](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-ubuntu.md)
+- [macOS 10.10](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-mac.md)
 
 ## 执行的操作
 下载适用于 Raspberry Pi 3 的第一个示例应用程序的开发工具和软件。如果有问题，可在[故障排除页](./iot-hub-raspberry-pi-kit-c-troubleshooting.md)上查找解决方案。

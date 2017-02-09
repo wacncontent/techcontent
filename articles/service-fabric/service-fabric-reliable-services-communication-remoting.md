@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 10/19/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: vturecek
 ---
 
@@ -83,4 +83,4 @@ string message = await helloWorldClient.HelloWorldAsync();
 
 * [确保 Reliable Services 的通信安全](./service-fabric-reliable-services-secure-communication.md)
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

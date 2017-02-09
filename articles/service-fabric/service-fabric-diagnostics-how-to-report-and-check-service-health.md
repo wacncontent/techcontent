@@ -13,7 +13,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 09/06/2016
-wacn.date: 10/24/2016
+wacn.date: 01/25/2017
 ms.author: toddabel
 ---
 
@@ -161,4 +161,4 @@ activationContext.ReportApplicationHealth(healthInformation);
 ## 后续步骤
 [深入了解 Service Fabric 运行状况](./service-fabric-health-introduction.md)
 
-<!---HONumber=Mooncake_1017_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

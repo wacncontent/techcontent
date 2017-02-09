@@ -48,7 +48,7 @@ Azure 具有用于创建和处理资源的两个不同的部署模型：[Azure R
 1. 在命令提示符处键入以下命令登录
 
     ```
-    azure login
+    azure login -e AzureChinaCloud
     ```
 
    使用建议的 Web 浏览器和代码进行身份验证。
@@ -97,7 +97,7 @@ azure iothub create -h
 
  若要在资源组 **exampleResourceGroup** 中创建名为 **exampleIoTHubName** 的 IoT 中心，请直接运行以下命令
 
-    azure iothub create -g exampleResourceGroup -n exampleIoTHubName -l westus -k s1 -u 1
+    azure iothub create -g exampleResourceGroup -n exampleIoTHubName -l chinaeast -k s1 -u 1
 
 > [!NOTE]
 此 Azure CLI 命令为用户创建付费的 S1 标准 IoT 中心。可以使用以下命令删除 IoT 中心 **exampleIoTHubName**

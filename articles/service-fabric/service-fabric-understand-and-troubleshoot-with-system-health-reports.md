@@ -13,7 +13,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 09/28/2016
-wacn.date: 11/28/2016
+wacn.date: 01/25/2017
 ms.author: oanapl
 ---
 
@@ -664,4 +664,4 @@ HealthEvents          :
 
 [Service Fabric 应用程序升级](./service-fabric-application-upgrade.md)
 
-<!---HONumber=Mooncake_1121_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

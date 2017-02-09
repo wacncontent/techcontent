@@ -13,7 +13,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 09/14/2016
-wacn.date: 11/17/2016
+wacn.date: 01/25/2017
 ms.author: subramar
 ---
 
@@ -69,4 +69,4 @@ Number of Nodes = (DB_Size * RF)/Node_Size
 
 [10]: ./service-fabric-concepts-partitioning.md
 
-<!---HONumber=Mooncake_1017_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 11/15/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: subramar
 ---
 
@@ -63,4 +63,4 @@ Azure Service Fabric 应用程序是多个服务的集合。在升级期间，Se
 
 [image]: ./media/service-fabric-application-upgrade/service-fabric-application-upgrade-flowchart.png
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->

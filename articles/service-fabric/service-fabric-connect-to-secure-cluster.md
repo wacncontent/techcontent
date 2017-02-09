@@ -14,7 +14,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/11/2016
-wacn.date: 12/26/2016
+wacn.date: 01/25/2017
 ms.author: ryanwi
 ---
 
@@ -322,4 +322,4 @@ Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\TrustedPe
 - [Service Fabric 运行状况模型简介](./service-fabric-health-introduction.md)
 - [应用程序安全性和 RunAs](./service-fabric-application-runas-security.md)
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0125_2017-->
