@@ -62,17 +62,13 @@ sudo vim /etc/ssh/sshd_config
 ```
 # Change PasswordAuthentication to this:
 PasswordAuthentication no
-```
 
-```
 # Change PubkeyAuthentication to this:
 PubkeyAuthentication yes
-```
 
-    # Change PermitRootLogin to this:
-    PermitRootLogin no
+# Change PermitRootLogin to this:
+PermitRootLogin no
 
-```
 # Change ChallengeResponseAuthentication to this:
 ChallengeResponseAuthentication no
 ```
@@ -103,13 +99,17 @@ sudo vim /etc/ssh/sshd_config
 
 #### 禁用密码登录
 
-    # Change PasswordAuthentication to this:
-    PasswordAuthentication no
+```
+# Change PasswordAuthentication to this:
+PasswordAuthentication no
+```
 
 #### 启用公钥身份验证
 
-    # Change PubkeyAuthentication to this:
-    PubkeyAuthentication yes
+```
+# Change PubkeyAuthentication to this:
+PubkeyAuthentication yes
+```
 #### 禁用 Root 登录
 
     # Change PermitRootLogin to this:
@@ -117,8 +117,10 @@ sudo vim /etc/ssh/sshd_config
 
 #### 禁用质询-响应身份验证
 
-    # Change ChallengeResponseAuthentication to this:
-    ChallengeResponseAuthentication no
+```
+# Change ChallengeResponseAuthentication to this:
+ChallengeResponseAuthentication no
+```
 
 ### 重新启动 SSHD
 从 T1 shell 验证你是否仍保持登录。此步骤非常重要，因为我们已禁用密码，这样做能够避免当 SSH 密钥不正确时 VM 被锁定。如果 Linux VM 上有任何不正确的设置，你可以使用 T1 来修复 sshd\_config，因为你仍保持登录状态，并且 SSH 在 SSHD 服务重新启动期间会保持连接的活动状态。

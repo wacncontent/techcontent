@@ -75,8 +75,8 @@ ms.author: robmcm
 2. 请输入以下命令来安装 Express 模块。
 
     ```
-npm install
-``` express-generator@4.2.0 -g
+    npm install express-generator@4.2.0 -g
+    ```
 
     根据操作系统，可能需要将“sudo”放在命令之前：
 
@@ -137,7 +137,9 @@ npm install
 
 在命令行中，输入以下命令，以安装 **package.json** 文件中描述的模块。可能需要使用“sudo”。
 
-    npm install
+```
+npm install
+```
 
 此命令的输出显示类似于以下示例：
 

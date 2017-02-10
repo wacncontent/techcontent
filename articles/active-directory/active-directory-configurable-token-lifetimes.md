@@ -201,8 +201,8 @@ ID 令牌将传递给网站和本机客户端，包含有关用户的配置文�
 3. 运行以下命令，查看租户中创建的所有策略。在以下方案中执行大多数操作之后，都应该使用此命令。此命令还可帮助获取策略的**对象 ID**。
 
     ```
-Get-AzureADPolicy
-```
+    Get-AzureADPolicy
+    ```
 
 ### 示例：管理租户的默认策略
 
@@ -292,7 +292,9 @@ New-AzureADPolicy -Definition @("{`"TokenLifetimePolicy`":{`"Version`":1,`"MaxIn
 
 若要查看新策略并获取其 ObjectID，请运行以下命令。
 
-    Get-AzureADPolicy
+```
+Get-AzureADPolicy
+```
 
 &nbsp;&nbsp;2.**将策略分配到 Web API**。
 

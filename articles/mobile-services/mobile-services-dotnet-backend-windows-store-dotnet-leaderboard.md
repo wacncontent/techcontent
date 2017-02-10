@@ -101,16 +101,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Leaderboard.DataObjects
 {
-```
-public class PlayerRank : EntityData
-{
-    public int Score { get; set; }
-    public int Rank { get; set; }
+    public class PlayerRank : EntityData
+    {
+        public int Score { get; set; }
+        public int Rank { get; set; }
 
-    [ForeignKey("Id")]
-    public virtual Player Player { get; set; }
-}
-```
+        [ForeignKey("Id")]
+        public virtual Player Player { get; set; }
+    }
 }
 ```
 
@@ -152,14 +150,16 @@ public class PlayerRank : EntityData
 
 回想一下，`PlayerRank` 具有相关的 `Player` 实体：
 
-    public class PlayerRank : EntityData
-    {
-        public int Score { get; set; }
-        public int Rank { get; set; }
+```
+public class PlayerRank : EntityData
+{
+    public int Score { get; set; }
+    public int Rank { get; set; }
 
-        [ForeignKey("Id")]
-        public virtual Player Player { get; set; }
-    }
+    [ForeignKey("Id")]
+    public virtual Player Player { get; set; }
+}
+```
 
 移动服务客户端库不支持导航属性，并且这些属性将不序列化。例如，下面是 GET `/tables/PlayerRank` 的原始 HTTP 响应：
 

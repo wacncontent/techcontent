@@ -84,8 +84,8 @@ VNet 名称 = RMVNet <br>
 1. 在 PowerShell 控制台中，使用提升的权限登录到 Azure 帐户。以下 cmdlet 将提示您提供 Azure 帐户的登录凭据。登录后它会下载你的帐户设置，以便这些信息可供 Azure PowerShell 使用。您将使用 SM PowerShell cmdlet 完成此部分配置。
 
     ```
-Add-AzureAccount -Environment AzureChinaCloud
-```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
 2. 通过运行以下命令，导出 Azure 网络配置文件。如有必要，可以将文件的导出位置更改为其他位置。您将编辑文件，然后将其导入到 Azure。
 
@@ -280,7 +280,9 @@ New-AzureVNetGateway -VNetName ClassicVNet -GatewayType DynamicRouting
 
 在网关之间创建连接需要用到 PowerShell。您可能需要添加 Azure 帐户才能使用经典 PowerShell cmdlet。若要执行此操作，可以使用以下 cmdlet：
 
-    Add-AzureAccount -Environment AzureChinaCloud
+```
+Add-AzureAccount -Environment AzureChinaCloud
+```
 
 1. 通过运行以下命令**设置共享密钥**。在本例中，`-VNetName` 是经典 VNet 的名称，`-LocalNetworkSiteName` 是在经典管理门户中配置本地网络时为其指定的名称。`-SharedKey` 是您可以生成并指定的值。此处指定的值必须与下一步中创建连接时指定的值相同。本示例的返回结果应显示“状态: 成功”。
 

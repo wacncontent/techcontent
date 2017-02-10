@@ -273,9 +273,7 @@ Service Fabric 提供了三个分区方案可供选择：
             ServicePartitionKey partitionKey = new ServicePartitionKey(Char.ToUpper(firstLetterOfLastName) - 'A');
 
             ResolvedServicePartition partition = await this.servicePartitionResolver.ResolveAsync(alphabetServiceUri, partitionKey, cancelRequest);
-        ```
-    ResolvedServiceEndpoint ep = partition.GetEndpoint()
-    ```;
+            ResolvedServiceEndpoint ep = partition.GetEndpoint();
 
             JObject addresses = JObject.Parse(ep.Address);
             string primaryReplicaAddress = (string)addresses["Endpoints"].First();
@@ -324,7 +322,9 @@ Service Fabric 提供了三个分区方案可供选择：
 
     `ResolveAsync` 方法采用服务 URI、分区键和取消标记作为参数。处理服务的服务 URI 为 `fabric:/AlphabetPartitions/Processing`。接下来，我们会获取分区的终结点。
 
-        ResolvedServiceEndpoint ep = partition.GetEndpoint()
+    ```
+    ResolvedServiceEndpoint ep = partition.GetEndpoint()
+    ```
 
     最后，我们会构建终结点 URL 以及查询字符串，并调用处理服务。
 

@@ -137,14 +137,14 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 3. 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。如果只有一个订阅，可以使用：
 
     ```
-$tenant = (Get-AzureRmSubscription).TenantId
-```
+    $tenant = (Get-AzureRmSubscription).TenantId
+    ```
 
     如果有多个订阅，请指定 Active Directory 所在的订阅。有关详细信息，请参阅 [Azure 订阅与 Azure Active Directory 的关联方式](../active-directory/active-directory-how-subscriptions-associated-directory.md)。
 
     ```
-$tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
-```
+    $tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
+    ```
 
 4. 通过指定此帐户为服务主体并提供凭据对象来以服务主体身份登录。
 
@@ -240,9 +240,7 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 
      如果有 Azure PowerShell 2.0（2016 年 8 月或之后发布），请使用以下 cmdlet：
 
-    ```
-    $app
-    ``` = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore      
+        $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore      
 
     如果有 Azure PowerShell 1.0，请使用以下 cmdlet：
 
@@ -256,7 +254,9 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 
     检查新的应用程序对象。
 
-        $app
+    ```
+    $app
+    ```
 
     请注意 **ApplicationId** 属性，需要使用该属性来创建服务主体、进行角色分配以及获取访问令牌。
 
@@ -291,11 +291,15 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 ### 通过自动执行的 PowerShell 脚本提供证书
 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。如果只有一个订阅，可以使用：
 
-    $tenant = (Get-AzureRmSubscription).TenantId
+```
+$tenant = (Get-AzureRmSubscription).TenantId
+```
 
 如果有多个订阅，请指定 Active Directory 所在的订阅。有关详细信息，请参阅[管理 Azure AD 目录](../active-directory/active-directory-administer.md)。
 
-    $tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
+```
+$tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
+```
 
 若要在脚本中进行身份验证，请指定帐户为服务主体，并提供证书指纹、应用程序 ID 和租户 ID。若要使脚本自动化，可以将这些值存储为环境变量并在执行操作期间检索它们，或者可以将其包含在脚本中。
 

@@ -133,8 +133,8 @@ MySQL 有多个稳定版本以及多种安装方式，这篇文档以 MySQL 5.6�
 
 5. 授权其他机器访问
 
-        $ sudo sed -i 's/^bind-address/#bind-address/' /etc/mysql/my.cnf
     ```
+    $ sudo sed -i 's/^bind-address/#bind-address/' /etc/mysql/my.cnf
     $mysql -uroot -p
     mysql>grant all privileges on *.* to 'root'@'10.0.0.1' identified by '123456';
     mysql>flush privileges;
@@ -195,10 +195,12 @@ MySQL 有多个稳定版本以及多种安装方式，这篇文档以 MySQL 5.6�
 
 7. 授权其他机器访问。默认 root 只有本机访问。
 
-        $mysql -uroot -p
-        mysql>grant all privileges on *.* to 'root'@'10.0.0.1' identified by '123456';
-        mysql>flush privileges;
-        mysql>exit
+    ```
+    $mysql -uroot -p
+    mysql>grant all privileges on *.* to 'root'@'10.0.0.1' identified by '123456';
+    mysql>flush privileges;
+    mysql>exit
+    ```
 
     注意上面 10.0.0.1 是被授权访问此 MySQL Server 的机器地址，123456 是您 root 密码。如果用%替代 IP 地址的话表明所有机器都可访问此数据库服务器。
 

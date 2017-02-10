@@ -389,9 +389,7 @@ wacn.date: 01/09/2017
             static void Main(string[] args)
             {
 
-            ```
-    ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.AutoDetect;
-    ```         
+                ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.AutoDetect;         
 
                 Console.Write("Your Service Namespace: ");
                 string serviceNamespace = Console.ReadLine();
@@ -581,7 +579,9 @@ wacn.date: 01/09/2017
 
 1. 将连接模式设置为 **AutoDetect**。在 **EchoClient** 应用程序的 `Main()` 方法中添加以下代码。
 
-        ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.AutoDetect;
+    ```
+    ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.AutoDetect;
+    ```
 
 2. 定义变量以保存用于服务命名空间的值，以及从控制台读取的 SAS 密钥。
 

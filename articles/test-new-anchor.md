@@ -466,26 +466,28 @@ Host: wamsbayclus001rest-hs.cloudapp.net
 
 **HTTP Response**
 
-    HTTP/1.1 202 Accepted
-    Cache-Control: no-cache
-    Server: Microsoft-IIS/8.5
-    x-ms-client-request-id: 39f96c93-a4b1-43ce-b97e-b2aaa44ee2dd
-    request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
-    x-ms-request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
 ```
+HTTP/1.1 202 Accepted
+Cache-Control: no-cache
+Server: Microsoft-IIS/8.5
+x-ms-client-request-id: 39f96c93-a4b1-43ce-b97e-b2aaa44ee2dd
+request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
+x-ms-request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
 operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
+X-Content-Type-Options: nosniff
+DataServiceVersion: 1.0;
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Fri, 16 Jan 2015 22:16:43 GMT
+Content-Length: 0
 ```
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 1.0;
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Fri, 16 Jan 2015 22:16:43 GMT
-    Content-Length: 0
 
 ### <a id="long_running_op_status"></a> Check on the status of a long-running operation
 
 The allocation of any new units of on-demand streaming takes around 20 minutes to complete. To check the status of the operation use the **Operations** method and specify the Id of the operation. The operation Id was returned in the response to the **Scale** request.
 
-    operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
+```
+operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
+```
 
 **HTTP Request**:
 

@@ -606,26 +606,28 @@ Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
 **HTTP 响应**
 
-    HTTP/1.1 202 Accepted
-    Cache-Control: no-cache
-    Server: Microsoft-IIS/8.5
-    x-ms-client-request-id: 39f96c93-a4b1-43ce-b97e-b2aaa44ee2dd
-    request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
-    x-ms-request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
 ```
+HTTP/1.1 202 Accepted
+Cache-Control: no-cache
+Server: Microsoft-IIS/8.5
+x-ms-client-request-id: 39f96c93-a4b1-43ce-b97e-b2aaa44ee2dd
+request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
+x-ms-request-id: 3c1ba1c7-281c-4b2d-a898-09cb70a3a424
 operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
+X-Content-Type-Options: nosniff
+DataServiceVersion: 1.0;
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Fri, 16 Jan 2015 22:16:43 GMT
+Content-Length: 0
 ```
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 1.0;
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Fri, 16 Jan 2015 22:16:43 GMT
-    Content-Length: 0
 
 ### <a id="long_running_op_status"></a>检查长时间运行的操作的状态
 
 分配所有新的单位大约需要 20 分钟才能完成。若要检查操作状态，请使用 **Operations** 方法并指定操作的 ID。在 **Scale** 请求的响应中会返回该操作 ID。
 
-    operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
+```
+operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
+```
 
 **HTTP 请求**：
 

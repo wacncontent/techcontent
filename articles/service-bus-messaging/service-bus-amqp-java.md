@@ -45,19 +45,19 @@ JMS 使用 Java 命名和目录接口 (JNDI) 创建逻辑名称和物理名称�
 
 Qpid 属性文件 JNDI 提供程序是使用以下格式的属性文件配置的：
 
-    # servicebus.properties – sample JNDI configuration
-
-    # Register a ConnectionFactory in JNDI using the form:
-    # connectionfactory.[jndi_name] = [ConnectionURL]
-    connectionfactory.SBCONNECTIONFACTORY = amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn
-
-    # Register some queues in JNDI using the form
-    # queue.[jndi_name] = [physical_name]
-    # topic.[jndi_name] = [physical_name]
 ```
+# servicebus.properties – sample JNDI configuration
+
+# Register a ConnectionFactory in JNDI using the form:
+# connectionfactory.[jndi_name] = [ConnectionURL]
+connectionfactory.SBCONNECTIONFACTORY = amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn
+
+# Register some queues in JNDI using the form
+# queue.[jndi_name] = [physical_name]
+# topic.[jndi_name] = [physical_name]
 topic.TOPIC = topic1
+queue.QUEUE = queue1
 ```
-    queue.QUEUE = queue1
 
 #### 配置连接工厂
 
@@ -129,7 +129,9 @@ topic.[jndi_name] = [physical_name]
 
 若要定义映射到名为“topic1”的服务总线主题的名为“TOPIC”的逻辑 JMS 目标，属性文件中的条目应如下所示：
 
-    topic.TOPIC = topic1
+```
+topic.TOPIC = topic1
+```
 
 ### 使用 JMS 发送消息
 

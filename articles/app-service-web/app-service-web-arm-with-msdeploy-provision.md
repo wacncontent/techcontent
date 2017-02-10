@@ -112,9 +112,7 @@ msbuild yourwebapp.csproj /t:Package /p:PackageLocation="path\to\package.zip"
                 "displayName": "webDeploy"
             },
             "properties": {
-            ```
-"packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]"
-```,
+                "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]",
                 "dbType": "None",
                 "connectionString": "",
                 "setParameters": {
@@ -128,7 +126,9 @@ msbuild yourwebapp.csproj /t:Package /p:PackageLocation="path\to\package.zip"
 
 现在，你会注意到 MSDeploy 资源使用了如下定义的 **packageUri** 属性：
 
-    "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]"
+```
+"packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]"
+```
 
 此 **packageUri** 使用的存储帐户 URI 指向包 zip 所要上载到的存储帐户。当你部署模板时，Azure 资源管理器会利用[共享访问签名](../storage/storage-dotnet-shared-access-signature-part-1.md)从存储帐户将包提取到本地。此过程将会通过一个 PowerShell 脚本自动化，该脚本将上载包，调用 Azure 管理 API 以创建所需的密钥，然后将这些密钥作为参数传入模板（ *\_artifactsLocation* 和 *\_artifactsLocationSasToken* ）。你需要针对存储容器下包所上载到的文件夹和文件名定义参数。
 

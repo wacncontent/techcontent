@@ -93,8 +93,6 @@ az network public-ip create --resource-group myResourceGroup --location westeuro
 az network lb inbound-nat-rule create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myLoadBalancerRuleSSH1 --protocol tcp \
   --frontend-port 4222 --backend-port 22 --frontend-ip-name myFrontEndPool
-```
-```
 az network lb inbound-nat-rule create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myLoadBalancerRuleSSH2 --protocol tcp \
   --frontend-port 4223 --backend-port 22 --frontend-ip-name myFrontEndPool
@@ -494,9 +492,11 @@ az network lb address-pool create --resource-group myResourceGroup \
 ## 创建负载均衡器 NAT 规则
 若要获取流经负载均衡器的流量，需要创建网络地址转换 (NAT) 规则来指定入站或出站操作。可以指定要使用的协议，然后根据需要将外部端口映射到内部端口。针对我们的环境，让我们使用 [az network lb inbound-nat-rule create](https://docs.microsoft.com/cli/azure/network/lb/inbound-nat-rule#create) 创建一些规则，以允许通过负载均衡器对 VM 进行 SSH 访问。将 TCP 端口 4222 和 4223 设置为定向到 VM 上的 TCP 端口 22（稍后将会创建）。以下示例创建名为 `myLoadBalancerRuleSSH1` 的规则，用于将 TCP 端口 4222 映射到端口 22：
 
-    az network lb inbound-nat-rule create --resource-group myResourceGroup \
-      --lb-name myLoadBalancer --name myLoadBalancerRuleSSH1 --protocol tcp \
-      --frontend-port 4222 --backend-port 22 --frontend-ip-name myFrontEndPool
+```
+az network lb inbound-nat-rule create --resource-group myResourceGroup \
+  --lb-name myLoadBalancer --name myLoadBalancerRuleSSH1 --protocol tcp \
+  --frontend-port 4222 --backend-port 22 --frontend-ip-name myFrontEndPool
+```
 
 输出：
 
@@ -522,9 +522,11 @@ az network lb address-pool create --resource-group myResourceGroup \
 
 对于第二个 NAT 规则中的 SSH 访问，重复该过程。以下示例创建名为 `myLoadBalancerRuleSSH2` 的规则，用于将 TCP 端口 4223 映射到端口 22：
 
-    az network lb inbound-nat-rule create --resource-group myResourceGroup \
-      --lb-name myLoadBalancer --name myLoadBalancerRuleSSH2 --protocol tcp \
-      --frontend-port 4223 --backend-port 22 --frontend-ip-name myFrontEndPool
+```
+az network lb inbound-nat-rule create --resource-group myResourceGroup \
+  --lb-name myLoadBalancer --name myLoadBalancerRuleSSH2 --protocol tcp \
+  --frontend-port 4223 --backend-port 22 --frontend-ip-name myFrontEndPool
+```
 
 ## <a name="create-a-load-balancer-health-probe"></a> 创建负载均衡器运行状况探测
 运行状况探测定期检查受负载均衡器后面的 VM，以确保它们可以根据定义操作和响应请求。否则，将从操作中删除这些 VM，确保不会将用户定向到它们。可以针对运行状况探测定义自定义检查，以及间隔和超时值。有关运行状况探测的详细信息，请参阅 [Load Balancer probes](../load-balancer/load-balancer-custom-probe-overview.md)（负载均衡器探测）。以下示例使用 [az network lb probe create](https://docs.microsoft.com/cli/azure/network/lb/probe#create) 创建名为 `myHealthProbe` 的 TCP 运行状况探测：

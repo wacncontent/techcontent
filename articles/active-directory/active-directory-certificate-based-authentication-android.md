@@ -135,13 +135,15 @@ enum CertAuthorityType
 2. 获取证书颁发机构：
 
     ```
-Get-AzureADTrustedCertificateAuthority 
-```
+    Get-AzureADTrustedCertificateAuthority 
+    ```
 
 ### 检索证书颁发机构列表
 检索当前存储在 Azure Active Directory 中的租户的证书颁发机构：
 
-    Get-AzureADTrustedCertificateAuthority 
+```
+Get-AzureADTrustedCertificateAuthority 
+```
 
 ### 删除证书颁发机构
 1. 检索证书颁发机构：

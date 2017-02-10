@@ -140,11 +140,9 @@ GROUP BY TumblingWindow(minute, 3), TollBoothId
 
 ```
 WITH Step1 AS (
-```
-SELECT COUNT(*) AS Count, TollBoothId
-FROM Input1 Partition By PartitionId
-GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-```
+    SELECT COUNT(*) AS Count, TollBoothId
+    FROM Input1 Partition By PartitionId
+    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
 )
 
 SELECT SUM(Count) AS Count, TollBoothId
@@ -220,9 +218,11 @@ GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
 
 若要对查询使用更多的流式处理单位，必须对数据流输入和查询进行分区。如果将数据流分区设置为 3，则可将以下修改的查询扩展到 18 个流式处理单位：
 
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
+SELECT COUNT(*) AS Count, TollBoothId
+FROM Input1 Partition By PartitionId
+GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+```
 
 对查询进行分区后，将在独立的分区组中处理和聚合输入事件。此外，还会为每个组生成输出事件。在数据流输入中，当**“分组方式”**字段不是“分区键”时，进行分区可能会导致某些意外的结果。例如，在前面的示例查询中，**TollBoothId** 字段不是 Input1 的“分区键”。可以将 TollBooth #1 提供的数据分布到多个分区中。
 

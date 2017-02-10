@@ -440,43 +440,43 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
     上面的代码会将新注册的用户添加到“canEdit”角色，这为他们提供了对更改（编辑）数据的操作方法的访问权限。以下代码段根据上下文显示了新的代码行。
 
-          // POST: /Account/ExternalLoginConfirmation
-          [HttpPost]
-          [AllowAnonymous]
-          [ValidateAntiForgeryToken]
-          public async Task ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
-          {
-             if (User.Identity.IsAuthenticated)
-             {
-                return RedirectToAction("Index", "Manage");
-             }
-             if (ModelState.IsValid)
-             {
-                // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                   return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                   result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                   if (result.Succeeded)
-                   {
-                  ```
-    await UserManager.AddToRoleAsync(user.Id, "canEdit");
     ```
-                      await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                      return RedirectToLocal(returnUrl);
-                   }
-                }
-                AddErrors(result);
-             }
-             ViewBag.ReturnUrl = returnUrl;
-             return View(model);
-          }
+      // POST: /Account/ExternalLoginConfirmation
+      [HttpPost]
+      [AllowAnonymous]
+      [ValidateAntiForgeryToken]
+      public async Task ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+      {
+         if (User.Identity.IsAuthenticated)
+         {
+            return RedirectToAction("Index", "Manage");
+         }
+         if (ModelState.IsValid)
+         {
+            // Get the information about the user from the external login provider
+            var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+               return View("ExternalLoginFailure");
+            }
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await UserManager.CreateAsync(user);
+            if (result.Succeeded)
+            {
+               result = await UserManager.AddLoginAsync(user.Id, info.Login);
+               if (result.Succeeded)
+               {
+                  await UserManager.AddToRoleAsync(user.Id, "canEdit");
+                  await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                  return RedirectToLocal(returnUrl);
+               }
+            }
+            AddErrors(result);
+         }
+         ViewBag.ReturnUrl = returnUrl;
+         return View(model);
+      }
+    ```
 
 在本教程的后面，你会将应用程序部署到 Azure，在其中你将使用 Google 或其他第三方身份验证提供程序进行登录。这会将你的新注册帐户添加到 *canEdit* 角色。找到 Web 应用的 URL 并且具有 Google ID 的任何人都能注册并更新你的数据库。要阻止其他人这样做，你可以停用该站点。你可以通过检查数据库来验证具有 *canEdit* 角色的人员。
 
@@ -626,7 +626,9 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 1. 从 Account 控制器的 **ExternalLoginConfirmation** 方法中注释掉或删除以下代码：
 
-        await UserManager.AddToRoleAsync(user.Id, "canEdit");
+    ```
+    await UserManager.AddToRoleAsync(user.Id, "canEdit");
+    ```
 
 1. 生成项目（该操作将保存文件更改并确认没有任何编译错误）。
 

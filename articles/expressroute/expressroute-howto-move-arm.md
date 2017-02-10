@@ -38,18 +38,18 @@ ms.author: ganesr
 
 登录到 Azure 经典环境并收集服务密钥。可以使用以下 PowerShell 代码段来收集信息：
 
-    # Sign in to your Azure account
-    Add-AzureAccount -Environment AzureChinaCloud
-
-    # Select the appropriate Azure subscription
-    Select-AzureSubscription "<Enter Subscription Name here>"
-
-    # Import the PowerShell modules for Azure and ExpressRoute
-    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
-    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
-
-    # Get the service keys of all your ExpressRoute circuits
 ```
+# Sign in to your Azure account
+Add-AzureAccount -Environment AzureChinaCloud
+
+# Select the appropriate Azure subscription
+Select-AzureSubscription "<Enter Subscription Name here>"
+
+# Import the PowerShell modules for Azure and ExpressRoute
+Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
+Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
+
+# Get the service keys of all your ExpressRoute circuits
 Get-AzureDedicatedCircuit
 ```
 
@@ -106,7 +106,9 @@ Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
 
 运行以下命令获取 ExpressRoute 线路的详细信息：
 
-    Get-AzureDedicatedCircuit
+```
+Get-AzureDedicatedCircuit
+```
 
 服务密钥必须已列出。现在，你可以通过适用于经典 VNet 的标准经典部署模型命令以及适用于 ARM VNET 的标准 ARM 命令来管理到 ExpressRoute 线路的链接。以下文章将引导你了解如何管理 ExpressRoute 线路的链接：
 

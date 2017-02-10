@@ -117,15 +117,15 @@ FROM    t1
 ```
 IF OBJECT_ID('tempdb..#stats_ddl') IS NOT NULL
 BEGIN
-```
-DROP TABLE #stats_ddl
-```
+    DROP TABLE #stats_ddl
 END
 ```
 
 为了实现编码一致性，好的做法是对表和临时表都使用此模式。当在代码中完成临时表时，使用 `DROP TABLE` 来删除临时表也很不错。在存储过程开发中，将 drop 命令捆绑在过程结尾来确保清除这些对象非常普遍。
 
-    DROP TABLE #stats_ddl
+```
+DROP TABLE #stats_ddl
+```
 
 ##<a name="modularizing-code"></a> 模块化代码
 

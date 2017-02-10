@@ -63,19 +63,19 @@ WebJobs SDK 包括以下组件：
 
 以下是用于轮询队列并为收到的每个队列消息创建 Blob 的简单程序：
 
-        public static void Main()
-        {
-            JobHost host = new JobHost();
-            host.RunAndBlock();
-        }
-
-        public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")] string inputText, 
-            [Blob("containername/blobname")]TextWriter writer)
-        {
-    ```
-    writer.WriteLine(inputText);
 ```
-        }
+    public static void Main()
+    {
+        JobHost host = new JobHost();
+        host.RunAndBlock();
+    }
+
+    public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")] string inputText, 
+        [Blob("containername/blobname")]TextWriter writer)
+    {
+        writer.WriteLine(inputText);
+    }
+```
 
 `JobHost` 对象是一组后台函数的容器。`JobHost` 对象可监视函数，观察触发函数的事件，并在发生触发事件时执行函数。可调用 `JobHost` 方法，指示要在当前线程或后台线程中执行容器进程。在此示例中，`RunAndBlock` 方法将在当前线程中持续运行该进程。
 
@@ -90,7 +90,9 @@ WebJobs SDK 包括以下组件：
 
 然后，该函数使用这些参数将队列消息的值写入 Blob：
 
-        writer.WriteLine(inputText);
+```
+    writer.WriteLine(inputText);
+```
 
 WebJobs SDK 的触发器和绑定器功能可大幅简化编写代码。处理队列、blob 或文件，或启动计划任务所需的低级代码由 WebJobs SDK 框架编写。例如，该框架可创建尚不存在的队列、打开队列、读取队列消息并在处理完成后删除队列消息、创建尚不存在的 Blob 容器、写入 Blob 等。
 

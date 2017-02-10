@@ -317,9 +317,9 @@ Bye
 
 创建集群，启动集群，查看集群状态。
 
-    # pcs cluster setup --name mysqlcluster lqi1ecmy01 lqi1ecmy02
-    # pcs cluster start –all
 ```
+# pcs cluster setup --name mysqlcluster lqi1ecmy01 lqi1ecmy02
+# pcs cluster start –all
 # pcs status
 ```
 
@@ -352,7 +352,9 @@ Bye
 
 配置好之后，查看集群运行状态。正常状态如下，若有异常，请根据错误信息进行故障排除。日志文件在 `/var/log/` 下。
 
-    # pcs status
+```
+# pcs status
+```
 
 ![pcs-status](./media/aog-virtual-machines-howto-lb-corosync-pacemaker-linux-ha/pcs-status.png)
 

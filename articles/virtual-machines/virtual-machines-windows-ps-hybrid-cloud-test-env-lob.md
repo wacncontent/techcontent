@@ -86,8 +86,8 @@ New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
 
 接下来，配置 Windows 防火墙规则，允许基本的连接测试和 SQL Server 流量。在 SQL1 上管理员级 Windows PowerShell 命令提示符下运行这些命令。
 
-    New-NetFirewallRule -DisplayName "SQL Server" -Direction Inbound -Protocol TCP -LocalPort 1433,1434,5022 -Action allow 
 ```
+New-NetFirewallRule -DisplayName "SQL Server" -Direction Inbound -Protocol TCP -LocalPort 1433,1434,5022 -Action allow 
 Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
 ping dc2.corp.contoso.com
 ```
@@ -176,8 +176,10 @@ New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
 
 接下来，配置 Windows 防火墙规则，以允许进行基本的连接测试所需的流量。从 LOB1 上的管理员级 Windows PowerShell 命令提示符下运行这些命令。
 
-    Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
-    ping dc2.corp.contoso.com
+```
+Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
+ping dc2.corp.contoso.com
+```
 
 使用 ping 命令时，会从 IP 地址 192.168.0.4 传回四个成功的答复。
 

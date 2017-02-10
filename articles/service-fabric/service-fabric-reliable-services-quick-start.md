@@ -130,42 +130,44 @@ Service Fabric 引入了一种新的有状态服务。有状态服务能够可�
 
 打开 *HelloWorldStateful* 中的 **HelloWorldStateful.cs**，该文件包含以下 RunAsync 方法：
 
-    protected override async Task RunAsync(CancellationToken cancellationToken)
-    {
-        // TODO: Replace the following sample code with your own logic
-        //       or remove this RunAsync override if it's not needed in your service.
-
-    ```
-var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
 ```
+protected override async Task RunAsync(CancellationToken cancellationToken)
+{
+    // TODO: Replace the following sample code with your own logic
+    //       or remove this RunAsync override if it's not needed in your service.
 
-        while (true)
+    var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
+
+    while (true)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        using (var tx = this.StateManager.CreateTransaction())
         {
-            cancellationToken.ThrowIfCancellationRequested();
+            var result = await myDictionary.TryGetValueAsync(tx, "Counter");
 
-            using (var tx = this.StateManager.CreateTransaction())
-            {
-                var result = await myDictionary.TryGetValueAsync(tx, "Counter");
+            ServiceEventSource.Current.ServiceMessage(this, "Current Counter Value: {0}",
+                result.HasValue ? result.Value.ToString() : "Value does not exist.");
 
-                ServiceEventSource.Current.ServiceMessage(this, "Current Counter Value: {0}",
-                    result.HasValue ? result.Value.ToString() : "Value does not exist.");
+            await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
 
-                await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
-
-                // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
-                // discarded, and nothing is saved to the secondary replicas.
-                await tx.CommitAsync();
-            }
-
-            await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+            // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
+            // discarded, and nothing is saved to the secondary replicas.
+            await tx.CommitAsync();
         }
+
+        await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+    }
+```
 
 ### RunAsync
 `RunAsync()` 在有状态服务和无状态服务中的运行方式类似。只不过在有状态服务中，平台将先代表你执行额外的工作，然后再执行 `RunAsync()`。这项工作可能包括确保可靠状态管理器和可靠集合随时可供使用。
 
 ### 可靠集合与可靠状态管理器
 
-    var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
+```
+var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
+```
 
 [IReliableDictionary](https://msdn.microsoft.com/zh-cn/library/dn971511.aspx) 是一种字典实现，可用于将状态可靠地存储在服务中。利用 Service Fabric 和可靠集合，你可以将数据直接存储在服务中而无需外部持久性存储。可靠集合可让你的数据具备高可用性。Service Fabric 通过创建和管理服务的多个*副本*来实现此目的。它还提供一个抽象 API，消除了管理这些副本及其状态转换所存在的复杂性。
 

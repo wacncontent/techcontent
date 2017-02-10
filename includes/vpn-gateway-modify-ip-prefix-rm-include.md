@@ -3,9 +3,7 @@
 - 若要将其他的地址前缀**添加**到已创建的但尚无网关连接的本地网关，请使用下面的示例。请确保将值更改为自己的值。
 
     ```
-    $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName
-    ``` `
-    ```
+    $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName `
     Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $local `
     -AddressPrefix @('10.0.0.0/24','20.0.0.0/24','30.0.0.0/24')
     ```
@@ -35,12 +33,16 @@
 
     设置 LocalNetworkGateway 的变量。
 
-        $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName
+    ```
+    $local = Get-AzureRmLocalNetworkGateway -Name MyLocalNetworkGWName -ResourceGroupName MyRGName
+    ```
 
     修改前缀。
 
-        Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $local `
-        -AddressPrefix @('10.0.0.0/24','20.0.0.0/24','30.0.0.0/24')
+    ```
+    Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $local `
+    -AddressPrefix @('10.0.0.0/24','20.0.0.0/24','30.0.0.0/24')
+    ```
 
 4. 创建连接。在此示例中，我们将配置 IPsec 连接类型。重新创建连接时，请使用针对配置指定的连接类型。有关其他连接类型，请参阅 [PowerShell cmdlet](https://msdn.microsoft.com/zh-cn/library/mt603611.aspx) 页面。
 

@@ -61,14 +61,14 @@ PS C:\> .\single-lamp-deploy.ps1 -ResourceGroupName rg1 -CentOSVersion 7.0 -Admi
 
 创建过程大概需要 20 分钟，运行成功后会出现如下提示, 这里我们直接去到下面访问网站的步骤去进行验证。
 
-    Deploy LAMP Server successfully.
-    To veriy the lamp server deployment, following below steps:
-    Open the URL  http://<YOUR-DNS-PREFIX>.chinaeast.cloudapp.chinacloudapi.cn/mysql.php to check if php can connect to MySQL, if can do some insert operation, and finally it will return the result on the web page. 
-    If you refresh the webpage, will insert another record into mysql db table.
-    We strongly recommend you to delete /var/www/html/mysql.php after you access the URL and see the successful result because mysql.php stores your mysql root password.
-    You can delete the inserted data by executing below commands:
-    mysql -uroot -p
 ```
+Deploy LAMP Server successfully.
+To veriy the lamp server deployment, following below steps:
+Open the URL  http://<YOUR-DNS-PREFIX>.chinaeast.cloudapp.chinacloudapi.cn/mysql.php to check if php can connect to MySQL, if can do some insert operation, and finally it will return the result on the web page. 
+If you refresh the webpage, will insert another record into mysql db table.
+We strongly recommend you to delete /var/www/html/mysql.php after you access the URL and see the successful result because mysql.php stores your mysql root password.
+You can delete the inserted data by executing below commands:
+mysql -uroot -p
 drop database testdb;
 ```
 
@@ -228,7 +228,9 @@ http://yourcloudservice.chinacloudapp.cn/mysql.php
 
 输入 MySQL root 密码后执行  
 
-    drop database testdb;
+```
+drop database testdb;
+```
 
 即可。
 

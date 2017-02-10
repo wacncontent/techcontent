@@ -158,9 +158,7 @@ Get-AzureRmAlertRule -ResourceGroup montest -TargetResourceId /subscriptions/s1/
 |将电子邮件发送给所有者、参与者和读者|	-SendToServiceOwners|
 
 创建电子邮件操作
-    ```
-$actionEmail = New-AzureRmAlertRuleEmail -CustomEmail myname@company.com
-```
+        $actionEmail = New-AzureRmAlertRuleEmail -CustomEmail myname@company.com
 
 创建 Webhook 操作
 
@@ -191,7 +189,9 @@ Get-AzureRmAlertRule -Name vmcpu_gt_1 -ResourceGroup myrg1 -DetailedOutput
 
 设置电子邮件规则
 
-    $actionEmail = New-AzureRmAlertRuleEmail -CustomEmail myname@company.com
+```
+$actionEmail = New-AzureRmAlertRuleEmail -CustomEmail myname@company.com
+```
 
 设置 webhook 规则
 

@@ -166,8 +166,8 @@ C:\myfolder\subfolder\abcd.txt
 
 在上传操作完成后，容器中将包括以下文件：
 
-  ```
-abc.txt
+```
+  abc.txt
 abc1.txt
 abc2.txt
 subfolder\a.txt
@@ -201,11 +201,13 @@ C:\myfolder\subfolder\abcd.txt
 
 在上传操作完成后，容器中将包括以下文件：
 
-    abc.txt
-    abc1.txt
-    abc2.txt
-    subfolder\a.txt
-    subfolder\abcd.txt
+```
+abc.txt
+abc1.txt
+abc2.txt
+subfolder\a.txt
+subfolder\abcd.txt
+```
 
 如果未指定选项 `/S`，AzCopy 将仅上传不会在虚拟目录中驻留的 blob：
 

@@ -235,20 +235,20 @@ server.js 文件将提供 Web API 服务器的大多数功能。我们要将大�
 
 Javascript
 
-    'use strict';
-    /**
-    * Module dependencies.
-    */
-    var util = require('util');
-    var assert = require('assert-plus');
-    var mongoose = require('mongoose/');
-    var bunyan = require('bunyan');
-    var restify = require('restify');
 ```
+'use strict';
+/**
+* Module dependencies.
+*/
+var util = require('util');
+var assert = require('assert-plus');
+var mongoose = require('mongoose/');
+var bunyan = require('bunyan');
+var restify = require('restify');
 var config = require('./config');
+var passport = require('passport');
+var OIDCBearerStrategy = require('passport-azure-ad').OIDCStrategy;
 ```
-    var passport = require('passport');
-    var OIDCBearerStrategy = require('passport-azure-ad').OIDCStrategy;
 
 保存文件。稍后我们将会使用该文件。
 
@@ -295,7 +295,9 @@ identityMetadata: 'https://login.microsoftonline.com/common/.well-known/openid-c
 
 Javascript
 
-    var config = require('./config');
+```
+var config = require('./config');
+```
 
 然后，在 `server.js` 中替换包含以下代码的新节：
 

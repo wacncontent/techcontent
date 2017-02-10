@@ -180,102 +180,102 @@ ms.author: cephalin
 
 1. 在 *\\Controllers* 文件夹中，创建一个名为 *MemeGeneratorController.cs* 的 .cs 新文件，然后使用以下代码替换其中的内容。将 `~/Content/chuck.bmp` 替换为你的文件路径，将 `yourCDNName` 替换为你的 CDN 名称。
 
-        using System;
-        using System.Collections.Generic;
-        using System.Diagnostics;
-        using System.Drawing;
-        using System.IO;
-        using System.Net;
-        using System.Web.Hosting;
-        using System.Web.Mvc;
-        using System.Web.UI;
+    ```
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.IO;
+    using System.Net;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
+    using System.Web.UI;
 
-        namespace cdnwebapp.Controllers
+    namespace cdnwebapp.Controllers
+    {
+      public class MemeGeneratorController : Controller
+      {
+        static readonly Dictionary<string, Tuple<string ,string>> Memes = new Dictionary<string, Tuple<string, string>>();
+
+        public ActionResult Index()
         {
-          public class MemeGeneratorController : Controller
+          return View();
+        }
+
+        [HttpPost, ActionName("Index")]
+        public ActionResult Index_Post(string top, string bottom)
+        {
+          var identifier = Guid.NewGuid().ToString();
+          if (!Memes.ContainsKey(identifier))
           {
-            static readonly Dictionary<string, Tuple<string ,string>> Memes = new Dictionary<string, Tuple<string, string>>();
+            Memes.Add(identifier, new Tuple<string, string>(top, bottom));
+          }
 
-            public ActionResult Index()
-            {
-              return View();
-            }
+          return Content("<a href="" + Url.Action("Show", new {id = identifier}) + "">here's your meme</a>");
+        }
 
-            [HttpPost, ActionName("Index")]
-            public ActionResult Index_Post(string top, string bottom)
-            {
-              var identifier = Guid.NewGuid().ToString();
-              if (!Memes.ContainsKey(identifier))
-              {
-                Memes.Add(identifier, new Tuple<string, string>(top, bottom));
-              }
+        [OutputCache(VaryByParam = "*", Duration = 1, Location = OutputCacheLocation.Downstream)]
+        public ActionResult Show(string id)
+        {
+          Tuple<string, string> data = null;
+          if (!Memes.TryGetValue(id, out data))
+          {
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+          }
 
-              return Content("<a href="" + Url.Action("Show", new {id = identifier}) + "">here's your meme</a>");
-            }
-
-            [OutputCache(VaryByParam = "*", Duration = 1, Location = OutputCacheLocation.Downstream)]
-            public ActionResult Show(string id)
-            {
-              Tuple<string, string> data = null;
-              if (!Memes.TryGetValue(id, out data))
-              {
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-              }
-
-              if (Debugger.IsAttached) // Preserve the debug experience
-              {
-                return Redirect(string.Format("/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
-              }
-              else // Get content from Azure CDN
-              {
-                return Redirect(string.Format("http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
-              }
-            }
-
-        ```
-[OutputCache(VaryByParam = "*", Duration = 3600, Location = OutputCacheLocation.Downstream)]
-```
-            public ActionResult Generate(string top, string bottom)
-            {
-              string imageFilePath = HostingEnvironment.MapPath("~/Content/chuck.bmp");
-              Bitmap bitmap = (Bitmap)Image.FromFile(imageFilePath);
-
-              using (Graphics graphics = Graphics.FromImage(bitmap))
-              {
-                SizeF size = new SizeF();
-                using (Font arialFont = FindBestFitFont(bitmap, graphics, top.ToUpperInvariant(), new Font("Arial Narrow", 100), out size))
-                {
-                    graphics.DrawString(top.ToUpperInvariant(), arialFont, Brushes.White, new PointF(((bitmap.Width - size.Width) / 2), 10f));
-                }
-                using (Font arialFont = FindBestFitFont(bitmap, graphics, bottom.ToUpperInvariant(), new Font("Arial Narrow", 100), out size))
-                {
-                    graphics.DrawString(bottom.ToUpperInvariant(), arialFont, Brushes.White, new PointF(((bitmap.Width - size.Width) / 2), bitmap.Height - 10f - arialFont.Height));
-                }
-              }
-              MemoryStream ms = new MemoryStream();
-              bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-              return File(ms.ToArray(), "image/png");
-            }
-
-            private Font FindBestFitFont(Image i, Graphics g, String text, Font font, out SizeF size)
-            {
-              // Compute actual size, shrink if needed
-              while (true)
-              {
-                size = g.MeasureString(text, font);
-
-                // It fits, back out
-                if (size.Height < i.Height &&
-                     size.Width < i.Width) { return font; }
-
-                // Try a smaller font (90% of old size)
-                Font oldFont = font;
-                font = new Font(font.Name, (float)(font.Size * .9), font.Style);
-                oldFont.Dispose();
-              }
-            }
+          if (Debugger.IsAttached) // Preserve the debug experience
+          {
+            return Redirect(string.Format("/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
+          }
+          else // Get content from Azure CDN
+          {
+            return Redirect(string.Format("http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top={0}&bottom={1}", data.Item1, data.Item2));
           }
         }
+
+        [OutputCache(VaryByParam = "*", Duration = 3600, Location = OutputCacheLocation.Downstream)]
+        public ActionResult Generate(string top, string bottom)
+        {
+          string imageFilePath = HostingEnvironment.MapPath("~/Content/chuck.bmp");
+          Bitmap bitmap = (Bitmap)Image.FromFile(imageFilePath);
+
+          using (Graphics graphics = Graphics.FromImage(bitmap))
+          {
+            SizeF size = new SizeF();
+            using (Font arialFont = FindBestFitFont(bitmap, graphics, top.ToUpperInvariant(), new Font("Arial Narrow", 100), out size))
+            {
+                graphics.DrawString(top.ToUpperInvariant(), arialFont, Brushes.White, new PointF(((bitmap.Width - size.Width) / 2), 10f));
+            }
+            using (Font arialFont = FindBestFitFont(bitmap, graphics, bottom.ToUpperInvariant(), new Font("Arial Narrow", 100), out size))
+            {
+                graphics.DrawString(bottom.ToUpperInvariant(), arialFont, Brushes.White, new PointF(((bitmap.Width - size.Width) / 2), bitmap.Height - 10f - arialFont.Height));
+            }
+          }
+          MemoryStream ms = new MemoryStream();
+          bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+          return File(ms.ToArray(), "image/png");
+        }
+
+        private Font FindBestFitFont(Image i, Graphics g, String text, Font font, out SizeF size)
+        {
+          // Compute actual size, shrink if needed
+          while (true)
+          {
+            size = g.MeasureString(text, font);
+
+            // It fits, back out
+            if (size.Height < i.Height &&
+                 size.Width < i.Width) { return font; }
+
+            // Try a smaller font (90% of old size)
+            Font oldFont = font;
+            font = new Font(font.Name, (float)(font.Size * .9), font.Style);
+            oldFont.Dispose();
+          }
+        }
+      }
+    }
+    ```
 
 2. 右键单击默认的 `Index()` 操作，然后选择“添加视图”。
 
@@ -344,7 +344,9 @@ http://<yourSiteName>.chinacloudsites.cn/MemeGenerator/Generate?top=<formInput>&
 
 然后，可以使用 `Generate` 方法的 `OutputCacheAttribute` 属性来指定 Azure CDN 认可的操作结果缓存方式。以下代码指定缓存在 1 小时（3,600 秒）后过期。
 
-    [OutputCache(VaryByParam = "*", Duration = 3600, Location = OutputCacheLocation.Downstream)]
+```
+[OutputCache(VaryByParam = "*", Duration = 3600, Location = OutputCacheLocation.Downstream)]
+```
 
 同样，还可以使用所需的缓存选项，在 Azure Web 应用中通过 Azure CDN 的任何控制器操作提供内容。
 
@@ -553,42 +555,44 @@ public static void RegisterBundles(BundleCollection bundles)
 4. 重新发布到 Azure Web 应用并访问主页。
 5. 查看页面的 HTML 代码。你会发现如下所示的已注入脚本：
 
-            ...
-        <link href="http://az673227.azureedge.net/Content/css?1.0.0.25474" rel="stylesheet"/>
-        <script>(function() {
-                        var loadFallback,
-                            len = document.styleSheets.length;
-                        for (var i = 0; i < len; i++) {
-                            var sheet = document.styleSheets[i];
-                        if (sheet.href.indexOf('http://az673227.azureedge.net/Content/css?1.0.0.25474') !== -1) {
-                                var meta = document.createElement('meta');
-                                meta.className = 'sr-only';
-                                document.head.appendChild(meta);
-                                var value = window.getComputedStyle(meta).getPropertyValue('width');
-                                document.head.removeChild(meta);
-                                if (value !== '1px') {
-                                    document.write('<link href="/Content/css" rel="stylesheet" type="text/css" />');
-                                }
+    ```
+        ...
+    <link href="http://az673227.azureedge.net/Content/css?1.0.0.25474" rel="stylesheet"/>
+    <script>(function() {
+                    var loadFallback,
+                        len = document.styleSheets.length;
+                    for (var i = 0; i < len; i++) {
+                        var sheet = document.styleSheets[i];
+                    if (sheet.href.indexOf('http://az673227.azureedge.net/Content/css?1.0.0.25474') !== -1) {
+                            var meta = document.createElement('meta');
+                            meta.className = 'sr-only';
+                            document.head.appendChild(meta);
+                            var value = window.getComputedStyle(meta).getPropertyValue('width');
+                            document.head.removeChild(meta);
+                            if (value !== '1px') {
+                                document.write('<link href="/Content/css" rel="stylesheet" type="text/css" />');
                             }
                         }
-                        return true;
-                ```
-    }())||document.write('<script src="/Content/css"><\/script>');</script>
+                    }
+                    return true;
+                }())||document.write('<script src="/Content/css"><\/script>');</script>
+
+    <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25474"></script>
+         <script>(window.Modernizr)||document.write('<script src="/bundles/modernizr"><\/script>');</script>
+        ... 
+    <script src="http://az673227.azureedge.net/bundles/jquery?1.0.0.25474"></script>
+        <script>(window.jquery)||document.write('<script src="/bundles/jquery"><\/script>');</script>
+
+    <script src="http://az673227.azureedge.net/bundles/bootstrap?1.0.0.25474"></script>
+         <script>($.fn.modal)||document.write('<script src="/bundles/bootstrap"><\/script>');</script>
+        ...
     ```
-
-        <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25474"></script>
-             <script>(window.Modernizr)||document.write('<script src="/bundles/modernizr"><\/script>');</script>
-            ... 
-        <script src="http://az673227.azureedge.net/bundles/jquery?1.0.0.25474"></script>
-            <script>(window.jquery)||document.write('<script src="/bundles/jquery"><\/script>');</script>
-
-        <script src="http://az673227.azureedge.net/bundles/bootstrap?1.0.0.25474"></script>
-             <script>($.fn.modal)||document.write('<script src="/bundles/bootstrap"><\/script>');</script>
-            ...
 
     请注意，CSS 捆绑包的注入脚本仍包含以下行中 `CdnFallbackExpression` 属性的残存错误：
 
-        }())||document.write('<script src="/Content/css"><\/script>');</script>
+    ```
+    }())||document.write('<script src="/Content/css"><\/script>');</script>
+    ```
 
     不过，由于 || 表达式的第一部分始终会返回 true（在紧邻其上的行中），因此始终不会运行 document.write() 函数。
 

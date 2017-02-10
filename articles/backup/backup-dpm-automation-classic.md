@@ -271,12 +271,12 @@ PS C:\> Set-DPMPolicyObjective -ProtectionGroup $MPG -OnlineRetentionRangeList $
 ### 设置备份计划
 如果你使用 ```Set-DPMPolicyObjective``` cmdlet 指定保护目标，DPM 会自动设置默认的备份计划。若要更改默认计划，请依序使用 [Get-DPMPolicySchedule](https://technet.microsoft.com/zh-cn/library/hh881749) cmdlet 和 [Set-DPMPolicySchedule](https://technet.microsoft.com/zh-cn/library/hh881723) cmdlet。
 
-    PS C:\> $onlineSch = Get-DPMPolicySchedule -ProtectionGroup $mpg -LongTerm Online
-    PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[0] -TimesOfDay 02:00
-    PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[1] -TimesOfDay 02:00 -DaysOfWeek Sa,Su -Interval 1
-    PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[2] -TimesOfDay 02:00 -RelativeIntervals First,Third -DaysOfWeek Sa
-    PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[3] -TimesOfDay 02:00 -DaysOfMonth 2,5,8,9 -Months Jan,Jul
 ```
+PS C:\> $onlineSch = Get-DPMPolicySchedule -ProtectionGroup $mpg -LongTerm Online
+PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[0] -TimesOfDay 02:00
+PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[1] -TimesOfDay 02:00 -DaysOfWeek Sa,Su -Interval 1
+PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[2] -TimesOfDay 02:00 -RelativeIntervals First,Third -DaysOfWeek Sa
+PS C:\> Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[3] -TimesOfDay 02:00 -DaysOfMonth 2,5,8,9 -Months Jan,Jul
 PS C:\> Set-DPMProtectionGroup -ProtectionGroup $MPG
 ```
 
@@ -307,7 +307,9 @@ Set-DatasourceDiskAllocation -Datasource $DS -ProtectionGroup $MPG -manual -Repl
 ### 将更改提交到保护组
 最后，需要提交更改，然后 DPM 才可以根据每个新保护组配置进行备份。这可以使用 [Set-DPMProtectionGroup](https://technet.microsoft.com/zh-cn/library/hh881758) cmdlet 来实现。
 
-    PS C:\> Set-DPMProtectionGroup -ProtectionGroup $MPG
+```
+PS C:\> Set-DPMProtectionGroup -ProtectionGroup $MPG
+```
 
 ## 查看备份点
 可以使用 [Get-DPMRecoveryPoint](https://technet.microsoft.com/zh-cn/library/hh881746) cmdlet 来获取数据源的所有恢复点列表。在本示例中，我们将：

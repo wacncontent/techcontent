@@ -358,9 +358,7 @@ Set-AzureRmRedisCache : Conflict: The resource '...' is not in a stable state, a
 PS C:\> Get-Help Get-AzureRmRedisCache -detailed
 
 NAME
-```
-Get-AzureRmRedisCache
-```
+    Get-AzureRmRedisCache
 
 SYNOPSIS
     Gets details about a single cache or all caches in the specified resource group or all caches in the current
@@ -397,7 +395,9 @@ PARAMETERS
 
 若要返回当前订阅中所有缓存的相关信息，请运行不带任何参数的 `Get-AzureRmRedisCache`。
 
-    Get-AzureRmRedisCache
+```
+Get-AzureRmRedisCache
+```
 
 若要返回特定资源组中所有缓存的相关信息，请结合 `ResourceGroupName` 参数运行 `Get-AzureRmRedisCache`。
 

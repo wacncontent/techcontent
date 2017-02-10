@@ -459,8 +459,8 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     将原始磁盘转换为固定大小的 VHD：
 
-     ```
-    # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
+    ```
+     # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
     ```
 
 ### <a id="rhel7xkvm"></a>从 KVM 准备 RHEL 7.1/7.2 虚拟机###
@@ -647,8 +647,8 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     将原始磁盘转换为固定大小的 VHD：
 
-     ```
-    # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
+    ```
+     # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
     ```
 
 ## 从 VMware 准备基于 Red Hat 的虚拟机
@@ -735,16 +735,14 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 9. 将 Hyper-V 模块添加到 initramfs 中：
 
-        Edit `/etc/dracut.conf` and add content:
-
-        ```
-    add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
     ```
+    Edit `/etc/dracut.conf` and add content:
 
-        Rebuild initramfs:
+        add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
 
-        ```
-    # dracut -f -v
+    Rebuild initramfs:
+
+        # dracut -f -v
     ```
 
 10. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。修改 `/etc/ssh/sshd_config` 以包含以下行：
@@ -806,7 +804,9 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     将原始磁盘转换为固定大小的 VHD：
 
-        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
+    ```
+    # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
+    ```
 
 ### <a id="rhel7xvmware"></a>从 VMware 准备 RHEL 7.1/7.2 虚拟机###
 
@@ -867,15 +867,15 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     编辑 `/etc/dracut.conf`，添加内容：
 
-```
+    ```
     add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
-```
+    ```
 
     重新生成 initramfs：
 
-```
+    ```
     # dracut -f -v
-```
+    ```
 
 8. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。修改 `/etc/ssh/sshd_config` 以包含以下行：
 
@@ -940,7 +940,9 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     将原始磁盘转换为固定大小的 VHD：
 
-        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
+    ```
+    # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
+    ```
 
 ## 使用 kickstart 文件自动从 ISO 准备基于 Red Hat 的虚拟机
 
@@ -1115,11 +1117,15 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 编辑 `/etc/dracut.conf` 并添加以下内容：
 
-        add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+```
+    add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+```
 
 重新生成 initramfs：
 
-        # dracut -f -v
+```
+    # dracut -f -v
+```
 
 有关详细信息，请参阅有关[重新生成 initramfs](https://access.redhat.com/solutions/1958) 的信息。
 

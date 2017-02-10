@@ -107,13 +107,13 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 
 3. 创建一个非根用户并修改该用户的配置文件。然后，切换到该新用户（本例中称为 *postgres*）：
 
-        # useradd postgres
-
-        # chown -R postgres.postgres /opt/pgsql_data
-
     ```
-# su - postgres
-```
+    # useradd postgres
+
+    # chown -R postgres.postgres /opt/pgsql_data
+
+    # su - postgres
+    ```
 
    >[!NOTE]
    >出于安全原因，PostgreSQL 将使用非根用户来初始化、启动或关闭数据库。
@@ -217,7 +217,9 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 
 再次切换成 postgres 用户：
 
-    # su - postgres
+```
+# su - postgres
+```
 
 创建一个 Postgres 数据库：
 

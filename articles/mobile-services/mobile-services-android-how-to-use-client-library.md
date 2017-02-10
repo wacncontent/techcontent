@@ -384,9 +384,7 @@ public void checkItem(final ToDoItem item) {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-            ```
-mToDoTable.delete(item);
-```
+                mToDoTable.delete(item);
                 runOnUiThread(new Runnable() {
                     public void run() {
                         if (item.isComplete()) {
@@ -415,9 +413,7 @@ public void deleteItem(View view) {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-            ```
-mToDoTable.delete(ID);
-```
+                mToDoTable.delete(ID);
                 runOnUiThread(new Runnable() {
                     public void run() {
                         refreshItemsFromTable();
@@ -530,11 +526,15 @@ jsonObject.getAsJsonPrimitive("id").getAsInt());
 
 以下代码演示了如何删除一个实例，在本例中，该实例就是我们在前一个 *insert* 示例中创建的 **JsonObject** 的实例。请注意该代码与类型化案例相同，但方法具有不同的签名，因为它引用了 **JsonObject**。
 
-    mToDoTable.delete(item);
+```
+mToDoTable.delete(item);
+```
 
 还可以使用某个实例的 ID 来直接删除该实例：
 
-    mToDoTable.delete(ID);
+```
+mToDoTable.delete(ID);
+```
 
 ### <a name="json_get"></a>如何返回非类型化表中的所有行
 

@@ -34,11 +34,9 @@ $ azure group create -n uniqueResourceGroup -l chinanorth --template-uri https:/
 
 2) 在现有 VM 上部署 LAMP
 
-    # Two commands: one updates packages, the other installs Apache, MySQL, and PHP
 ```
+# Two commands: one updates packages, the other installs Apache, MySQL, and PHP
 user@ubuntu$ sudo apt-get update
-```
-```
 user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
 ```
 
@@ -118,12 +116,16 @@ info:    group deployment create command OK
 你将需要安装以下程序包：`apache2`、`mysql-server`、`php5` 和 `php5-mysql`。你可以通过直接获取这些程序包或使用 Tasksel 进行安装。下面列出了这两种方法的说明。
 在安装之前，需要下载并更新包列表。
 
-    user@ubuntu$ sudo apt-get update
+```
+user@ubuntu$ sudo apt-get update
+```
 
 ##### 单个包
 使用 apt-get：
 
-    user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
+```
+user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
+```
 
 ##### 使用 Tasksel
 此外，你可以下载 Tasksel，它是一个 Debian/Ubuntu 工具，可将多个相关包作为协同“任务”安装到你的系统中。

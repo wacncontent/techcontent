@@ -223,14 +223,16 @@ Redis 集群的优势
 
     Ubuntu Linux: (以Ubuntu 14.04, 64-bit system 为例)
 
-        $sudo apt-get install ruby -y
     ```
+    $sudo apt-get install ruby -y
     $sudo gem install redis
     ```
 
     SUSE Linux: (以 SLES 12, 64-bit system 为例)
 
-        $sudo gem install redis
+    ```
+    $sudo gem install redis
+    ```
 
 4. 在 CentOS 虚拟上执行4-7步骤
 

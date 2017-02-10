@@ -26,27 +26,23 @@ ms.author: v-livech
 
 ## 快速命令
 
-    # Add a new user on RedHat family distros
-    sudo useradd -G wheel exampleUser
-
-    # Add a new user on Debian family distros
-    sudo useradd -G sudo exampleUser
-
-    # Set a password
 ```
+# Add a new user on RedHat family distros
+sudo useradd -G wheel exampleUser
+
+# Add a new user on Debian family distros
+sudo useradd -G sudo exampleUser
+
+# Set a password
 sudo passwd exampleUser
 Enter new UNIX password:
 Retype new UNIX password:
 passwd: password updated successfully
-```
 
-    # Copy the SSH Public Key to the new user
-```
+# Copy the SSH Public Key to the new user
 ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
-```
 
-    # Change sudoers to allow no password
-```
+# Change sudoers to allow no password
 # Execute visudo as root to edit the /etc/sudoers file
 visudo
 
@@ -64,14 +60,14 @@ visudo
 
 # to this
 %sudo   ALL=(ALL) NOPASSWD:ALL
+
+# Verify everything
+# Verify the SSH keys & User account
+bill@slackware$ ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
+
+# Verify sudo access
+sudo top
 ```
-
-    # Verify everything
-    # Verify the SSH keys & User account
-    bill@slackware$ ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
-
-    # Verify sudo access
-    sudo top
 
 ## 详细演练
 
@@ -108,10 +104,12 @@ sudo useradd -G sudo exampleUser
 
 `useradd` 命令将创建用户，并向 `/etc/passwd` 和 `/etc/gpasswd` 同时添加条目，但不实际设置密码。使用 `passwd` 命令将密码添加到条目。
 
-    sudo passwd exampleUser
-    Enter new UNIX password:
-    Retype new UNIX password:
-    passwd: password updated successfully
+```
+sudo passwd exampleUser
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+```
 
 现在，服务器上已有一个具有 sudo 权限的用户。
 
@@ -119,7 +117,9 @@ sudo useradd -G sudo exampleUser
 
 在计算机上，结合新密码使用 `ssh-copy-id` 命令。
 
-    ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
+ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
 
 ### 通过 visudo 允许使用不带密码的 sudo
 
@@ -127,23 +127,25 @@ sudo useradd -G sudo exampleUser
 
 我们已将用户添加到正确的默认组中以进行 sudo 访问。现在我们要让这些组可以在没有密码的情况下使用 sudo。
 
-    # Execute visudo as root to edit the /etc/sudoers file
-    visudo
+```
+# Execute visudo as root to edit the /etc/sudoers file
+visudo
 
-    # On RedHat family distros uncomment this line:
-    ## Same thing without a password
-    # %wheel        ALL=(ALL)       NOPASSWD: ALL
+# On RedHat family distros uncomment this line:
+## Same thing without a password
+# %wheel        ALL=(ALL)       NOPASSWD: ALL
 
-    # to this
-    ## Same thing without a password
-    %wheel        ALL=(ALL)       NOPASSWD: ALL
+# to this
+## Same thing without a password
+%wheel        ALL=(ALL)       NOPASSWD: ALL
 
-    # On Debian family distros change this line:
-    # Allow members of group sudo to execute any command
-    %sudo   ALL=(ALL:ALL) ALL
+# On Debian family distros change this line:
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
 
-    # to this
-    %sudo   ALL=(ALL) NOPASSWD:ALL
+# to this
+%sudo   ALL=(ALL) NOPASSWD:ALL
+```
 
 ### 验证用户、ssh 密钥和 sudo
 

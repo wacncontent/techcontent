@@ -608,9 +608,9 @@ Set-AzureVNetGatewayKey -VNetName hk-vnet-china-north -LocalNetworkSiteName hk-l
 1. 执行 $CASS\_HOME/bin/cqlsh 10.1.2.101 9160
 2. 执行以下 CQL 命令：
 
-        CREATE KEYSPACE customers_ks
-        WITH REPLICATION = { 'class' : 'NetworkToplogyStrategy', 'CHINANORTH' : 3, 'CHINAEAST' : 3};
     ```
+    CREATE KEYSPACE customers_ks
+    WITH REPLICATION = { 'class' : 'NetworkToplogyStrategy', 'CHINANORTH' : 3, 'CHINAEAST' : 3};
     USE customers_ks;
     CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
     INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
@@ -629,11 +629,13 @@ Set-AzureVNetGatewayKey -VNetName hk-vnet-china-north -LocalNetworkSiteName hk-l
 1. 执行 $CASS\_HOME/bin/cqlsh 10.2.2.101 9160
 2. 执行以下 CQL 命令：
 
-        USE customers_ks;
-        CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
-        INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
-        INSERT INTO Customers(customer_id, firstname, lastname) VALUES (2, 'Jane', 'Doe');
-        SELECT * FROM Customers;
+    ```
+    USE customers_ks;
+    CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
+    INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
+    INSERT INTO Customers(customer_id, firstname, lastname) VALUES (2, 'Jane', 'Doe');
+    SELECT * FROM Customers;
+    ```
 
     显示内容与北部区域的显示内容应相同：
 

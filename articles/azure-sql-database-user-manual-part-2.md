@@ -562,16 +562,44 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
 
 3. Azure PowerShell 步骤如下  
 
-        #弹出界面输入用户名密码
-        Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    ```
+    #弹出界面输入用户名密码
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
 
-        #设置当前订阅名称
-        Select-AzureRmSubscription –SubscriptionName "Internal Billing" |  Select-AzureRmSubscription
+    #设置当前订阅名称
+    Select-AzureRmSubscription –SubscriptionName "Internal Billing" |  Select-AzureRmSubscription
 
-        Get-AzureRmResourceGroup | Get-AzureRmSqlServer
+    Get-AzureRmResourceGroup | Get-AzureRmSqlServer
 
-        #通过Management Portal ，在上海创建新的Server: hfgmi3msar，新的Database: LeiDB
-        #通过Management Portal，在北京创建新的Server：dbcljcn986，但是不创建新的Database
+    #通过Management Portal ，在上海创建新的Server: hfgmi3msar，新的Database: LeiDB
+    #通过Management Portal，在北京创建新的Server：dbcljcn986，但是不创建新的Database
+
+    #执行下面的脚本，在北京创建只读库
+    $database1 = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar"
+
+    $secondaryLink = $database1 | New-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" –PartnerServerName "dbcljcn986" -AllowConnections "All"
+
+    #Shanghai读写的连接字符串
+    #hfgmi3msar.database.chinacloudapi.cn,1433
+
+    #Beijing只读的连接字符串
+    #dbcljcn986.database.chinacloudapi.cn,1433
+
+    #Failover, 北京Database，变成读写，上海Database只读
+    #上海Server: hfgmi3msar 只读
+    $database_beijing = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaNorth" –ServerName "dbcljcn986" 
+
+    $database_beijing | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaEast" -Failover
+
+    #Failover, 上海Database读写，北京Database只读
+    $database_shanghai = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar" 
+
+    $database_shanghai | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-	SQL-ChinaNorth" -Failover
+    ```
+
+4. 上面的 PowerShell 分为几部分：  
+
+5. 当执行以下脚本时，会在备份站点 Azure 北京数据中心创建只读数据库  
 
     ```
     #执行下面的脚本，在北京创建只读库
@@ -580,11 +608,9 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
     $secondaryLink = $database1 | New-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" –PartnerServerName "dbcljcn986" -AllowConnections "All"
     ```
 
-        #Shanghai读写的连接字符串
-        #hfgmi3msar.database.chinacloudapi.cn,1433
+    ![创建只读数据库][67]  
 
-        #Beijing只读的连接字符串
-        #dbcljcn986.database.chinacloudapi.cn,1433
+6. 当执行以下脚本的时候，主站点会变成 Azure 北京数据中心，备份站点为 Azure 上海数据中心  
 
     ```
     #Failover, 北京Database，变成读写，上海Database只读
@@ -593,30 +619,6 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
 
     $database_beijing | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaEast" -Failover
     ```
-
-        #Failover, 上海Database读写，北京Database只读
-        $database_shanghai = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar" 
-
-        $database_shanghai | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-	SQL-ChinaNorth" -Failover
-
-4. 上面的 PowerShell 分为几部分：  
-
-5. 当执行以下脚本时，会在备份站点 Azure 北京数据中心创建只读数据库  
-
-        #执行下面的脚本，在北京创建只读库
-        $database1 = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar"
-
-        $secondaryLink = $database1 | New-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" –PartnerServerName "dbcljcn986" -AllowConnections "All"
-
-    ![创建只读数据库][67]  
-
-6. 当执行以下脚本的时候，主站点会变成 Azure 北京数据中心，备份站点为 Azure 上海数据中心  
-
-        #Failover, 北京Database，变成读写，上海Database只读
-        #上海Server: hfgmi3msar 只读
-        $database_beijing = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaNorth" –ServerName "dbcljcn986" 
-
-        $database_beijing | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaEast" -Failover
 
     执行结果，如下图：  
 

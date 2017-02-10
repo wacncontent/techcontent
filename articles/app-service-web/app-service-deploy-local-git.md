@@ -99,8 +99,8 @@ ms.author: dariagrigoriu
 4. 使用刚刚创建的新 **azure** 远程命令将内容推送到应用服务。
 
     ```
-git push azure master
-```
+    git push azure master
+    ```
 
     当你在 Azure 门户预览中重置部署凭据时，系统将提示你输入以前创建的密码。输入该密码（请注意，在键入密码时，Gitbash 不会将星号回显到控制台）。
 
@@ -148,7 +148,9 @@ git push azure master
 
 **解决方法**：请再次执行推送操作，并指定 master 分支。例如：
 
-    git push azure master
+```
+git push azure master
+```
 
 ****
 

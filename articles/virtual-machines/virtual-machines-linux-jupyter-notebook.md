@@ -85,22 +85,22 @@ ms.author: crwilcox
 #### 在 Ubuntu 上安装 Anaconda3 2.3.0（64 位）
 作为一个示例，这演示如何在 Ubuntu 上安装 Anaconda
 
-    # install anaconda
-    cd ~
-    mkdir -p anaconda
-    cd anaconda/
-    curl -O https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
-    sudo bash Anaconda3-2.3.0-Linux-x86_64.sh -b -f -p /anaconda3
-
-    # clean up home directory
-    cd ..
-    rm -rf anaconda/
-
-    # Update Jupyter to the latest install and generate its config file
-    sudo /anaconda3/bin/conda install jupyter -y
 ```
-/anaconda3/bin/jupyter-notebook
-``` --generate-config
+# install anaconda
+cd ~
+mkdir -p anaconda
+cd anaconda/
+curl -O https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
+sudo bash Anaconda3-2.3.0-Linux-x86_64.sh -b -f -p /anaconda3
+
+# clean up home directory
+cd ..
+rm -rf anaconda/
+
+# Update Jupyter to the latest install and generate its config file
+sudo /anaconda3/bin/conda install jupyter -y
+/anaconda3/bin/jupyter-notebook --generate-config
+```
 
 ![屏幕快照](./media/virtual-machines-linux-jupyter-notebook/anaconda-install.png)
 
@@ -159,7 +159,9 @@ c.NotebookApp.open_browser = False
 
 此时，我们已准备好启动 Jupyter Notebook。为此，请导航到要在其中存储 Notebook 的目录并使用以下命令启动 Jupyter Notebook 服务器。
 
-    /anaconda3/bin/jupyter-notebook
+```
+/anaconda3/bin/jupyter-notebook
+```
 
 你现在应能够通过地址 `https://[PUBLIC-IP-ADDRESS]:9999` 访问你的 Jupyter Notebook。
 

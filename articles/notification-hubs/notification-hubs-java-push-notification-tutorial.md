@@ -68,9 +68,7 @@ hub = namespaceManager.createNotificationHub(hub);
 
  或者
 
-```
-hub = new NotificationHub("connection string", "hubname");
-```
+    hub = new NotificationHub("connection string", "hubname");
 
 **获取通知中心：**
 
@@ -94,7 +92,9 @@ namespaceManager.deleteNotificationHub("hubname");
 ### 注册 CRUD
 **创建通知中心客户端：**
 
-    hub = new NotificationHub("connection string", "hubname");
+```
+hub = new NotificationHub("connection string", "hubname");
+```
 
 **创建 Windows 注册：**
 

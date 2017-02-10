@@ -335,9 +335,9 @@ static public IAsset EncodeToAdaptiveBitrateMP4s(IAsset asset, AssetCreationOpti
 
 #### MPEG DASH 的流 URL 采用以下格式：
 
- ```
-{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
-```**(format=mpd-time-csf)**
+```
+ {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest**(format=mpd-time-csf)**
+```
 
 #### HLS 的流 URL 采用以下格式：
 
@@ -347,7 +347,9 @@ static public IAsset EncodeToAdaptiveBitrateMP4s(IAsset asset, AssetCreationOpti
 
 #### 平滑流式处理的流式处理 URL 采用以下格式：
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
 
 用于下载文件的 SAS URL 采用以下格式：
 

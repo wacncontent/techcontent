@@ -184,26 +184,26 @@ wacn.date: 01/12/2017
 
     6. 后台发送端代码编写：
 
-            String baiduid = "580671960443544459";
-            String channelid = "3853836944444043049";
-
-            NotificationHub hub = new NotificationHub("Endpoint=sb://yutaonotification.servicebus.chinacloudapi.cn/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=8xCem7s4223GB/rSLvTi222OhjMBHF5NDwUoTZ8KPTA=", "baidudemotest");
-
-            BaiduRegistration reg = new BaiduRegistration(baiduid,channelid);
-
-            reg.setTagsFromString("tagtest");
-
-            hub.createRegistration(reg);
-
-            //发送测试
-            String message = "{\"title\":\"Java SDK test\",\"description\":\"english !\"}";
-
-            //发送测试
-            Notification n = Notification.createBaiduNotifiation(message);
-
         ```
-    hub.sendNotification(n);
-    ```
+        String baiduid = "580671960443544459";
+        String channelid = "3853836944444043049";
+
+        NotificationHub hub = new NotificationHub("Endpoint=sb://yutaonotification.servicebus.chinacloudapi.cn/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=8xCem7s4223GB/rSLvTi222OhjMBHF5NDwUoTZ8KPTA=", "baidudemotest");
+
+        BaiduRegistration reg = new BaiduRegistration(baiduid,channelid);
+
+        reg.setTagsFromString("tagtest");
+
+        hub.createRegistration(reg);
+
+        //发送测试
+        String message = "{\"title\":\"Java SDK test\",\"description\":\"english !\"}";
+
+        //发送测试
+        Notification n = Notification.createBaiduNotifiation(message);
+
+        hub.sendNotification(n);
+        ```
 
 ## 实验测试
 
@@ -213,7 +213,9 @@ wacn.date: 01/12/2017
 
 - 无 tag 发送：
 
-        hub.sendNotification(n);
+    ```
+    hub.sendNotification(n);
+    ```
 
     ![no-tag](./media/aog-notification-hubs-android-apk-tag-push/no-tag.jpg)
 

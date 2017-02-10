@@ -173,17 +173,17 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 2. 在命令提示符处，导航到新的 process-d2c-messages 文件夹。
 3. 使用文本编辑器打开 process-d2c-messages 文件夹中的 pom.xml 文件，并向 **dependencies** 节点添加以下依赖项。借助这些依赖项，可使用应用程序中的 azure-eventhubs、azure-eventhubs-eph 和 azure-servicebus 包与 IoT 中心和服务总线队列进行交互：
 
-        <dependency>
-          <groupId>com.microsoft.azure</groupId>
-          <artifactId>azure-eventhubs</artifactId>
-          <version>0.8.0</version>
-        </dependency>
-        <dependency>
-          <groupId>com.microsoft.azure</groupId>
-          <artifactId>azure-eventhubs-eph</artifactId>
-          <version>0.8.0</version>
-        </dependency>
     ```
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-eventhubs</artifactId>
+      <version>0.8.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-eventhubs-eph</artifactId>
+      <version>0.8.0</version>
+    </dependency>
     <dependency>
       <groupId>com.microsoft.azure</groupId>
       <artifactId>azure-servicebus</artifactId>
@@ -558,11 +558,13 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 2. 在命令提示符处，导航到新的 process-interactive-messages 文件夹。
 3. 使用文本编辑器打开 process-interactive-messages 文件夹中的 pom.xml 文件，并向 **dependencies** 节点添加以下依赖项。借助该依赖项，可使用应用程序中的 azure-servicebus 包与服务总线队列进行交互：
 
-        <dependency>
-          <groupId>com.microsoft.azure</groupId>
-          <artifactId>azure-servicebus</artifactId>
-          <version>0.9.4</version>
-        </dependency>
+    ```
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-servicebus</artifactId>
+      <version>0.9.4</version>
+    </dependency>
+    ```
 
 4. 保存并关闭 pom.xml 文件。
 
