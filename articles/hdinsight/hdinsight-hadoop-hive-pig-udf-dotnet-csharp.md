@@ -20,6 +20,9 @@ ms.author: larryfr
 ---
 
 # 在 HDInsight 中的 Hadoop 上将 C# 用户定义函数与 Hive 和 Pig 流式处理配合使用
+
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+
 Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需要一种更通用的语言。Hive 和 Pig 都允许通过用户定义的函数 (UDF) 或流式处理来调用外部代码。
 
 本文介绍如何将 C# 与 Hive 和 Pig 配合使用。
@@ -225,3 +228,4 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 * [将 MapReduce 与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update meta properties & wording update-->

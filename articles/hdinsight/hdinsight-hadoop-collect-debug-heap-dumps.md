@@ -71,3 +71,4 @@ clusterInfo.MapReduceConfiguration.ConfigurationCollection.Add(new KeyValuePair<
 ```
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update meta properties & wording update-->

@@ -106,3 +106,4 @@ ClusterCreateParameters clusterInfo = new ClusterCreateParameters()
 * [使用 HDInsight .NET SDK](./hdinsight-provision-clusters.md)
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

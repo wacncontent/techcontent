@@ -11,8 +11,8 @@ editor: cgronlun
 tags: azure-portal
 
 ms.service: hdinsight
-ms.date: 04/06/2016
-wacn.date: 02/06/2017
+ms.date: 10/17/2016
+wacn.date: 02/14/2017
 ---
 
 #使用 HDInsight 中的 .NET SDK for Hadoop 运行 Pig 作业
@@ -76,8 +76,8 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 6. 在控制台中运行以下命令，安装 .NET SDK 包。
 
     ```powershell
-        Install-Package Microsoft.Azure.Common.Authentication -Pre
-        Install-Package Microsoft.Azure.Management.HDInsight -Pre
+    Install-Package Microsoft.Azure.Common.Authentication -Pre
+    Install-Package Microsoft.Azure.Management.HDInsight -Pre
     Install-Package Microsoft.Azure.Management.HDInsight.Job -Pre
     ```
 

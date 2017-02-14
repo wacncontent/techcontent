@@ -1,4 +1,5 @@
 <!-- Temp remove statistics and table overview -->
+
 ---
 title: 将数据从 SQL Server 载入 Azure SQL 数据仓库 (bcp) | Azure
 description: 对于少量的数据，可以使用 bcp 将数据从 SQL Server 导出到平面文件，然后将数据直接导入 Azure SQL 数据仓库。

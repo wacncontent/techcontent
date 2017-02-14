@@ -245,7 +245,6 @@ Data Lake 工具支持显示 Tez 执行引擎运行的 Hive 作业的性能图�
 * [在 HDInsight 中使用 Hadoop Hive][hdinsight.hive]
 * [开始在 HDInsight 中使用 Hadoop][hdinsight.get.started]
 * [在 HDInsight 中提交 Hadoop 作业][hdinsight.submit.jobs]
-* [使用 HDInsight 中的 Hadoop 分析 Twitter 数据][hdinsight.analyze.twitter.data]
 
 <!--Anchors-->
 [Installation]: #installation
@@ -275,10 +274,10 @@ Data Lake 工具支持显示 Tez 执行引擎运行的 Hive 作业的性能图�
 [hdinsight.get.started]: ./hdinsight-hadoop-linux-tutorial-get-started.md
 [hdinsight.hive]: ./hdinsight-use-hive.md
 [hdinsight.submit.jobs]: ./hdinsight-submit-hadoop-jobs-programmatically.md
-[hdinsight.analyze.twitter.data]: ./hdinsight-analyze-twitter-data.md
 [hdinsight.storm.visual.studio.tools]: ./hdinsight-storm-develop-csharp-visual-studio-topology.md
 [hdinsight.access.application.logs]: ./hdinsight-hadoop-access-yarn-app-logs.md
 
 [apache.hive]: http://hive.apache.org
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

@@ -11,8 +11,8 @@ manager: paulettm
 editor: cgronlun
 
 ms.service: hdinsight
-ms.date: 02/05/2016
-wacn.date: 02/06/2017
+ms.date: 10/21/2016
+wacn.date: 02/14/2017
 ---
 
 # HBase 教程：开始在 HDInsight 中将 Apache HBase 与基于 Windows 的 Hadoop 配合使用
@@ -177,7 +177,7 @@ HBase 提供了多种将数据载入表中的方法。有关详细信息，请�
 
 **打开群集仪表板**
 
-1. 浏览到 **https://<HDInsight Cluster Name>.azurehdinsight.cn/**。
+1. 浏览到 **https://\<HDInsight Cluster Name\>.azurehdinsight.cn/**。
 5. 输入 Hadoop 用户帐户用户名和密码。默认用户名是 **admin**，而密码是在创建过程中输入的密码。此时将打开新浏览器标签。
 6. 单击该页顶部的“Hive 编辑器”。Hive 编辑器的外观如下：
 
@@ -199,7 +199,7 @@ HBase 提供了多种将数据载入表中的方法。有关详细信息，请�
 2. 在 Hive 编辑器中输入以下 HiveQL 脚本，然后单击“提交”。Hive 查询会在 HBase 表中查询数据：
 
     ```
-     SELECT count(*) FROM hbasecontacts;
+    SELECT count(*) FROM hbasecontacts;
     ```
 
 4. 要检索 Hive 查询的结果，请在作业完成运行时，单击“作业会话”窗口中的“查看详细信息”链接。由于将一条记录放置在 HBase 表中，因此将只有一个作业输出文件。
@@ -328,7 +328,6 @@ http://zookeeper[0-2]: master-status
 - [HDInsight HBase 概述][hdinsight-hbase-overview]。HBase 是构建于 Hadoop 上的 Apache 开源 NoSQL 数据库，用于为大量非结构化和半结构化数据提供随机访问和高度一致性。
 - [在 Azure 虚拟网络上创建 HBase 群集][hdinsight-hbase-provision-vnet]。通过虚拟网络集成，可以将 HBase 群集部署到应用程序所在的虚拟网络，以便应用程序直接与 HBase 进行通信。
 - [在 HDInsight 中配置 HBase 复制](./hdinsight-hbase-geo-replication.md)。了解如何跨两个 Azure 数据中心配置 HBase 复制。
-- [在 HDInsight 中使用 HBase 分析 Twitter 观点][hbase-twitter-sentiment]。了解如何通过在 HDInsight 的 Hadoop 群集中使用 HBase 对大数据执行实时[情绪分析](http://en.wikipedia.org/wiki/Sentiment_analysis)。
 
 [hdinsight-manage-portal]: ./hdinsight-administer-use-management-portal.md
 [hdinsight-upload-data]: ./hdinsight-upload-data.md
@@ -339,7 +338,6 @@ http://zookeeper[0-2]: master-status
 [hdinsight-hbase-overview]: ./hdinsight-hbase-overview.md
 [hdinsight-hbase-provision-vnet]: ./hdinsight-hbase-provision-vnet.md
 [hdinsight-versions]: ./hdinsight-component-versioning.md
-[hbase-twitter-sentiment]: ./hdinsight-hbase-analyze-twitter-sentiment.md
 [azure-purchase-options]: https://www.azure.cn/pricing/overview/
 [azure-member-offers]: https://www.azure.cn/pricing/member-offers/
 [azure-trial]: https://www.azure.cn/pricing/1rmb-trial/

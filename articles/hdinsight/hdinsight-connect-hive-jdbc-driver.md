@@ -202,3 +202,4 @@ at java.util.concurrent.FutureTask.get(FutureTask.java:206)
 * [将 MapReduce 作业与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

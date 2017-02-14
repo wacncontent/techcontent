@@ -253,7 +253,6 @@ HBase 复制使用 ZooKeeper VM 的 IP 地址。必须为目标 HBase ZooKeeper 
 * [开始在 HDInsight 中使用 Apache HBase][hdinsight-hbase-get-started]
 * [HDInsight HBase 概述][hdinsight-hbase-overview]
 * [在 Azure 虚拟网络中创建 HBase 群集][hdinsight-hbase-provision-vnet]
-* [使用 HBase 分析实时 Twitter 观点][hdinsight-hbase-twitter-sentiment]
 * [使用 HDInsight (Hadoop) 中的 Storm 和 HBase 分析传感器数据][hdinsight-sensor-data]
 
 [hdinsight-hbase-geo-replication-vnet]: /documentation/articles/hdinsight-hbase-geo-replication-configure-vnets/
@@ -265,7 +264,6 @@ HBase 复制使用 ZooKeeper VM 的 IP 地址。必须为目标 HBase ZooKeeper 
 [hdinsight-hbase-get-started]: ./hdinsight-hbase-tutorial-get-started-linux.md
 [hdinsight-manage-portal]: ./hdinsight-administer-use-management-portal.md
 [hdinsight-provision]: ./hdinsight-provision-clusters.md
-[hdinsight-hbase-twitter-sentiment]: ./hdinsight-hbase-analyze-twitter-sentiment.md
 [hdinsight-sensor-data]: ./hdinsight-storm-sensor-data-analysis.md
 [hdinsight-hbase-overview]: ./hdinsight-hbase-overview.md
 [hdinsight-hbase-provision-vnet]: ./hdinsight-hbase-provision-vnet.md

@@ -66,7 +66,7 @@ ms.author: larryfr
 
         > [!NOTE]
         如果希望以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据，则必须使用外部表。
-        > 
+        > <p>
         > 删除外部表**不会**删除数据，只会删除表定义。
 
     * **ROW FORMAT**：告知 Hive 如何设置数据的格式。在此情况下，每个日志中的字段以空格分隔。
@@ -155,3 +155,4 @@ ms.author: larryfr
 [image-hdi-hive-architecture]: ./media/hdinsight-use-hive/HDI.Hive.Architecture.png
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

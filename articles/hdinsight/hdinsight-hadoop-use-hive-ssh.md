@@ -9,8 +9,8 @@ editor: cgronlun
 tags: azure-portal
 
 ms.service: hdinsight
-ms.date: 07/06/2015
-wacn.date: 02/06/2017
+ms.date: 10/04/2016
+wacn.date: 02/14/2017
 ---
 
 #通过 SSH 将 Hive 与 HDInsight 中的 Hadoop 配合使用
@@ -82,7 +82,7 @@ Windows 未提供内置的 SSH 客户端。建议使用可从 [http://www.chiark
 
     > [!NOTE]
     >当你预期以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据时，必须使用外部表。
-    >
+    ><p>
     > 删除外部表**不会**删除数据，只会删除表定义。
 
 4. 使用以下语句可创建名为 **errorLogs** 的新“内部”表：

@@ -156,3 +156,4 @@ Get-AzureRmHDInsightCluster -ClusterName $hdinsightClusterName
 [ssisclusterdelete]: http://msdn.microsoft.com/zh-cn/library/mt146778(v=sql.120).aspx
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

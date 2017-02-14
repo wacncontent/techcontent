@@ -1,4 +1,5 @@
 <!-- Remove MSDN subscription benifits & azure portal sqlDW & load samples  -->
+
 ---
 title: 使用 TSQL 创建 SQL 数据仓库 | Azure
 description: 了解如何使用 TSQL 创建 Azure SQL 数据仓库

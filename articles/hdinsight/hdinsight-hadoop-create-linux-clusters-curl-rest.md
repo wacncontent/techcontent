@@ -29,7 +29,7 @@ Azure REST API 允许你对托管在 Azure 平台中的服务执行管理操作�
 
 > [!IMPORTANT]
 本文档中的步骤对 HDInsight 群集使用默认数目（4 个）的辅助角色节点。如果你计划使用 32 个以上的工作节点（在创建群集时或是在创建之后通过扩展群集进行），则必须选择至少具有 8 个核心和 14GB ram 的头节点大小。
->
+><p>
 > 有关节点大小和相关费用的详细信息，请参阅 [HDInsight 定价](https://www.azure.cn/pricing/details/hdinsight/)。
 
 ## 先决条件
@@ -40,16 +40,18 @@ Azure REST API 允许你对托管在 Azure 平台中的服务执行管理操作�
 
 * **Azure CLI 2.0**（预览版）。Azure CLI 用于创建服务主体，为针对 Azure REST API 的请求生成身份验证令牌时需要使用此主体。有关 Azure CLI 2.0 预览版的详细信息，请参阅 [Azure CLI 2.0 入门](https://docs.microsoft.com/cli/azure/get-started-with-az-cli2)。
 
+    [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
+
 * **cURL**。可通过包管理系统获取此实用工具，也可以从 [http://curl.haxx.se/](http://curl.haxx.se/) 下载此实用工具。
 
-  > [!NOTE]
-  如果使用 PowerShell 运行本文档中的命令，则必须先删除默认创建的 `curl` 别名。当你从 PowerShell 提示符使用 `curl` 命令时，此别名使用 Invoke-WebRequest PowerShell cmdlet 而不是 cURL，这会造成本文档中使用的许多命令返回错误。
-  >
-  > 若要删除此别名，请从 PowerShell 提示符使用以下命令：
-  >
-  > `Remove-item alias:curl`
-  >
-  > 删除别名后，你应该能够使用系统上安装的 cURL 版本。
+    > [!NOTE]
+    如果使用 PowerShell 运行本文档中的命令，则必须先删除默认创建的 `curl` 别名。当你从 PowerShell 提示符使用 `curl` 命令时，此别名使用 Invoke-WebRequest PowerShell cmdlet 而不是 cURL，这会造成本文档中使用的许多命令返回错误。
+    ><p>
+    > 若要删除此别名，请从 PowerShell 提示符使用以下命令：
+    ><p>
+    > `Remove-item alias:curl`
+    ><p>
+    > 删除别名后，你应该能够使用系统上安装的 cURL 版本。
 
 ### 访问控制要求
 [!INCLUDE [access-control](../../includes/hdinsight-access-control-requirements.md)]
@@ -86,15 +88,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
                 "location": {
                     "type": "string",
                     "allowedValues": ["China North",
-                    "China East",
-                    "China East",
-                    "China East",
-                    "China East",
-                    "China North",
-                    "China East",
-                    "China North",
-                    "West Europe",
-                    "China North"],
+                    "China East"],
                     "metadata": {
                         "description": "The location where all azure resources will be deployed."
                     }
@@ -282,7 +276,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
 1. 从命令行使用以下命令列出 Azure 订阅。
 
     ```
-     az account list --query '[].{Subscription_ID:id,Tenant_ID:tenantId,Name:name}'  --output table
+    az account list --query '[].{Subscription_ID:id,Tenant_ID:tenantId,Name:name}'  --output table
     ```
 
     在列表中，选择要使用的订阅并记下 **Subscription\_ID** 和 __Tenant\_ID__ 列。保存这些值。
@@ -306,7 +300,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
     az ad sp create --id <App ID> --query 'objectId'
     ```
 
-     此命令返回的值是__对象 ID__。保存此值。
+    此命令返回的值是__对象 ID__。保存此值。
 
 4. 使用**对象 ID** 值向服务主体分配**所有者**角色。还必须使用前面获取的**订阅 ID**。
 
@@ -368,14 +362,16 @@ The JSON document returned by this request will contain an element named **acces
 * 将 **ResourceGroupName** 替换在上一部分中创建的资源组名称。
 * 将 **DeploymentName** 替换为要用于此部署的名称。
 
+    ```
     curl -X "PUT" "https://management.chinacloudapi.cn/subscriptions/SubscriptionID/resourcegroups/ResourceGroupName/providers/microsoft.resources/deployments/DeploymentName?api-version=2015-01-01" \
     -H "Authorization: Bearer AccessToken" \
     -H "Content-Type: application/json" \
     -d "{set your body string to the template and parameters}"
+    ```
 
 > [!NOTE]
 如果已将包含模板和参数的 JSON 文档保存到某个文件，可以使用以下命令而不是 `-d "{ template and parameters}"`：
->
+><p>
 > `--data-binary "@/path/to/file.json"`  
 
 如果此请求成功，你将收到 200 系列响应，且响应正文包含一个 JSON 文档，其中包含有关部署操作的信息。
@@ -390,9 +386,11 @@ The JSON document returned by this request will contain an element named **acces
 * 将 **SubscriptionID** 和 **AccessToken** 替换为前面使用的值。
 * 将 **ResourceGroupName** 替换在上一部分中创建的资源组名称。
 
+    ```
     curl -X "GET" "https://management.chinacloudapi.cn/subscriptions/SubscriptionID/resourcegroups/ResourceGroupName/providers/microsoft.resources/deployments/DeploymentName?api-version=2015-01-01" \
     -H "Authorization: Bearer AccessToken" \
     -H "Content-Type: application/json"
+    ```
 
 这将返回包含有关部署操作的信息的 JSON 文档。`"provisioningState"` 元素包含部署状态；如果此元素包含 `"Succeeded"` 的值，则表示部署已成功完成。现在，你的群集应可供使用。
 

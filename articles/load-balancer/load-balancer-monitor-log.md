@@ -1,4 +1,5 @@
 <!-- diagnostics unavailable in azure portal-->
+
 ---
 title: 监视负载均衡器的操作、事件和计数器 | Azure
 description: 了解如何为 Azure Load Balancer 启用警报事件以及探测运行状况日志记录

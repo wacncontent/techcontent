@@ -1,57 +1,65 @@
 ---
-title: 外围网络示例 – 使用 NSG 构建简单的外围网络 | Azure
+title: Azure 外围网络示例 - 使用 NSG 构建简单的外围网络 | Azure
 description: 使用网络安全组 (NSG) 构建外围网络
 services: virtual-network
-documentationCenter: na
-authors: tracsman
+documentationcenter: na
+author: tracsman
 manager: rossort
 editor: ''
 
+ms.assetid: f8622b1d-c07d-4ea6-b41c-4ae98d998fff
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/01/2016
-wacn.date: 12/12/2016
-ms.author: jonor;sivae
+ms.date: 01/03/2017
+wacn.date: 02/10/2017
+ms.author: jonor
 ---
 
-# 示例 1 – 使用 NSG 构建简单的外围网络
+# 示例 1 - 将 NSG 与经典 PowerShell 配合使用，构建简单的外围网络
+> [!div class="op_single_selector"]
+- [Resource Manager 模板](./virtual-networks-dmz-nsg.md)
+- [经典 - PowerShell](./virtual-networks-dmz-nsg-asm.md)
 
-本示例将创建一个简单的外围网络，其中包含四个 Windows 服务器和网络安全组。本示例还将演练每个相关命令，让你更加深入地了解每个步骤。另外还提供了“流量方案”部分，让你逐步深入了解流量如何流经外围网络的各个防御层。最后的“参考”部分提供了完整的代码，并说明如何构建此环境来测试和试验各种方案。
+本示例将创建一个原始的外围网络，其中包含四个 Windows Server 和网络安全组。本示例介绍了每个相关的 PowerShell 命令，帮助用户更好地理解每一步。另外还提供了“流量方案”部分，让你逐步深入了解流量如何流经外围网络的各个防御层。最后的“参考”部分提供了完整的代码，并说明如何构建此环境来测试和试验各种方案。
 
-![使用 NSG 的入站外围网络][1]
+![使用 NSG 的入站外围网络][1]  
 
 ## 环境描述
-在本示例中，有一个包含以下项的订阅：
+本示例中的一个订阅包含以下资源：
 
-- 两个云服务：“FrontEnd001”和“BackEnd001”
-- 一个虚拟网络“CorpNetwork”，其中包含两个子网：“FrontEnd”和“BackEnd”
-- 应用到这两个子网的网络安全组
-- 一个代表应用程序 Web 服务器的 Windows Server（“IIS01”）
-- 两个代表应用程序后端服务器的 Windows Server（“AppVM01”、“AppVM02”）
-- 一个代表 DNS 服务器的 Windows Server（“DNS01”）
+* 两个云服务：“FrontEnd001”和“BackEnd001”
+* 一个虚拟网络“CorpNetwork”，其中包含两个子网：“FrontEnd”和“BackEnd”
+* 应用到这两个子网的网络安全组
+* 一个代表应用程序 Web 服务器的 Windows Server（“IIS01”）
+* 两个代表应用程序后端服务器的 Windows Server（“AppVM01”、“AppVM02”）
+* 一个代表 DNS 服务器的 Windows Server（“DNS01”）
 
-下面的“参考”部分提供了可用于构建上述大多数环境的 PowerShell 脚本。尽管该示例脚本还完成了 VM 和虚拟网络的构建，但本文未对其进行详细描述。
+参考部分提供了可用于构建本示例所述的大多数环境的 PowerShell 脚本。尽管该示例脚本还完成了 VM 和虚拟网络的构建，但本文未对其进行详细描述。
 
 构建环境：
 
-  1. 保存“参考”部分中包含的网络配置 xml 文件（更新名称、位置和 IP 地址以符合给定的方案）
-  2. 更新脚本中的用户变量，以符合用于运行脚本的环境（订阅、服务名称等）
-  3. 在 PowerShell 中执行脚本
+1. 保存“参考”部分中包含的网络配置 xml 文件（更新了名称、位置和 IP 地址以匹配给定方案）
+2. 更新脚本中的用户变量，以匹配用于运行脚本的环境（订阅、服务名称等）
+3. 在 PowerShell 中执行脚本
 
-**注意**：PowerShell 脚本中提到的区域必须与网络配置 xml 文件中提到的区域相匹配。
+>[!Note] PowerShell 脚本中提到的区域必须与网络配置 xml 文件中提到的区域相匹配。
+>
+>
 
 成功运行脚本后，可以执行其他可选步骤。“参考”部分中提供了两个脚本，用于设置 Web 服务器和包含简单 Web 应用程序的应用服务器，以便能使用此外围网络配置进行测试。
 
-以下部分通过演练 PowerShell 脚本的关键代码行，详细说明本示例的网络安全组及其运行方式。
+以下部分通过演练 PowerShell 脚本的关键代码行，详细说明了本示例的网络安全组及其运行方式。
 
 ## 网络安全组 (NSG)
-本示例将构建一个 NSG 组，然后加载六个规则。
+此示例将构建一个 NSG 组，然后为其加载六个规则。
 
->[!TIP]
-> 一般而言，应该先创建特定的“允许”规则，最后再创建一般的“拒绝”规则。分配的优先级确定了要先评估哪些规则。发现要向流量应用哪个特定规则后，不需要评估后续规则。可以朝入站或出站方向（从子网的角度看）应用 NSG 规则。
+> [!TIP]
+一般而言，应该先创建特定的“允许”规则，然后创建一般的“拒绝”规则。分配的优先级确定先评估哪些规则。发现要向流量应用的特定规则后，不再需要评估后续规则。可以朝入站或出站方向（从子网的角度看）应用 NSG 规则。
+> 
+> 
 
 以声明性的方式为入站流量构建以下规则：
 
@@ -62,11 +70,11 @@ ms.author: jonor;sivae
 5. 拒绝从 Internet 到整个 VNet（两个子网）的任何流量（所有端口）
 6. 拒绝从前端子网到后端子网的任何流量（所有端口）
 
-将这些规则绑定到每个子网后，如果有从 Internet 到 Web 服务器的入站 HTTP 请求，将应用规则 3（允许）和规则 5（拒绝），但由于规则 3 具有较高的优先级，因此只应用规则 3 并忽略规则 5。这样就会允许 HTTP 请求传往 Web 服务器。如果相同的流量尝试传往 DNS01 服务器，则会先应用规则 5（拒绝），因此不允许该流量传递到服务器。规则 6（拒绝）阻止前端子网与后端子网对话（规则 1 和 4 允许的流量除外），这可在攻击者入侵前端上的 Web 应用程序时保护后端网络，攻击者只能对后端的“受保护”网络进行有限访问（只能访问 AppVM01 服务器上公开的资源）。
+将这些规则绑定到每个子网后，如果有从 Internet 到 Web 服务器的入站 HTTP 请求，那么规则 3（允许）和规则 5（拒绝）均适用，但由于规则 3 具有较高的优先级，因此只应用规则 3，忽略规则 5。这样就会允许 HTTP 请求传往 Web 服务器。如果相同的流量尝试传往 DNS01 服务器，则会先应用规则 5（拒绝），因此不允许该流量传递到服务器。规则 6（拒绝）阻止前端子网与后端子网对话（规则 1 和 4 允许的流量除外），此规则集可在攻击者入侵前端 Web 应用程序时保护后端网络，攻击者只能对后端“受保护”的网络进行有限制的访问（只能访问 AppVM01 服务器上公开的资源）。
 
-有一个默认出站规则可允许流量外流到 Internet。在此示例中，我们允许出站流量，且未修改任何出站规则。如果两个方向的流量都要锁定，则需要用户定义的路由，下面的“示例 3”将对此进行介绍。
+有一个默认出站规则可允许流量外流到 Internet。在此示例中，我们允许出站流量，且未修改任何出站规则。若要锁定两个方向的流量，需使用“用户定义的路由”，详见[安全边界最佳实践页面][HOME]上的“示例 3”。
 
-下面更详细讨论了每个规则（注意：以下列表中以货币符号开头的任何项（例如 $NSGName）均为本文“参考”部分的脚本中的用户定义变量）：
+下面更详细讨论了每个规则（**注意**：以下列表中以货币符号开头的任何项（例如 $NSGName）均为本文档“参考”部分的脚本中的用户定义变量）：
 
 1. 首先需要构建一个网络安全组来保存规则：
 
@@ -77,57 +85,58 @@ ms.author: jonor;sivae
     ```
 
 2. 本示例中的第一个规则允许所有内部网络之间的 DNS 流量发往后端子网上的 DNS 服务器。该规则有一些重要参数：
-  - “Type”表示此规则的流量作用方向；此方向是从子网或虚拟机的角度判断的（取决于此 NSG 绑定到的位置）。因此，如果 Type 是“Inbound”并且流量进入子网，此规则将适用，而离开子网的流量则不受此规则影响。
-  - “Priority”设置流量的评估顺序。编号越低，优先级就越高。只要将某个规则应用于特定的流量，就不再处理其他规则。因此，如果优先级为 1 的规则允许流量，优先级为 2 的规则拒绝流量，并将这两个规则同时应用于流量，则允许流量流动（规则 1 的优先级更高，因此将发生作用，并且不再应用其他规则）。
-  - “Action”表示是要阻止还是允许受此规则影响的流量。
 
-      ```
+    * "Type" 表示此规则对哪个方向的流量生效。方向从子网或虚拟机的角度来定（具体取决于此 NSG 绑定到哪里）。因此，如果 Type 是 "Inbound" 并且流量进入子网，则适用此规则，而离开子网的流量则不受此规则影响。
+    * "Priority" 设置流量的评估顺序。编号越低，优先级就越高。将某个规则应用于特定的流量后，就不再处理其他规则。因此，如果优先级为 1 的规则允许流量，优先级为 2 的规则拒绝流量，并将这两个规则同时应用于流量，则允许流量流动（规则 1 的优先级更高，因此将发生作用，并且不再应用其他规则）。
+    * "Action" 表示是阻止还是允许受此规则影响的流量。
+
+        ```
         Get-AzureNetworkSecurityGroup -Name $NSGName | `
-            Set-AzureNetworkSecurityRule -Name "Enable Internal DNS" `
-            -Type Inbound -Priority 100 -Action Allow `
-            -SourceAddressPrefix VIRTUAL_NETWORK -SourcePortRange '*' `
-            -DestinationAddressPrefix $VMIP[4] `
-            -DestinationPortRange '53' `
-            -Protocol *
-      ```
+        Set-AzureNetworkSecurityRule -Name "Enable Internal DNS" `
+        -Type Inbound -Priority 100 -Action Allow `
+        -SourceAddressPrefix VIRTUAL_NETWORK -SourcePortRange '*' `
+        -DestinationAddressPrefix $VMIP[4] `
+        -DestinationPortRange '53' `
+        -Protocol *
+        ```
 
-3. 此规则允许 RDP 流量从 Internet 发往 VNET 中任一子网上任何服务器的 RDP 端口。此规则使用两种特殊地址前缀：“VIRTUAL\_NETWORK”和“INTERNET”。这样就可以轻松处理较大类别的地址前缀。
+3. 此规则允许 RDP 流量从 Internet 发往绑定子网上任何服务器的 RDP 端口。此规则使用两种特殊地址前缀：“VIRTUAL\_NETWORK”和“INTERNET”。 这些标记可以方便地用于较大类别地址前缀的寻址。
 
     ```
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
-        Set-AzureNetworkSecurityRule -Name "Enable RDP to $VNetName VNet" `
-        -Type Inbound -Priority 110 -Action Allow `
-        -SourceAddressPrefix INTERNET -SourcePortRange '*' `
-        -DestinationAddressPrefix VIRTUAL_NETWORK `
-        -DestinationPortRange '3389' `
-        -Protocol *
+         Set-AzureNetworkSecurityRule -Name "Enable RDP to $VNetName VNet" `
+         -Type Inbound -Priority 110 -Action Allow `
+         -SourceAddressPrefix INTERNET -SourcePortRange '*' `
+         -DestinationAddressPrefix VIRTUAL_NETWORK `
+         -DestinationPortRange '3389' `
+         -Protocol *
     ```
 
-4. 此规则允许入站 Internet 流量抵达 Web 服务器。这不会更改路由行为；只允许目标为 IIS01 的流量通过。因此，如果来自 Internet 的流量将 Web 服务器作为其目标，此规则将允许流量，并停止处理其他规则。（在优先级为 140 的规则中，其他所有入站 Internet 流量均被阻止）。如果你只要处理 HTTP 流量，可将此规则进一步限制为只允许目标端口 80。
+4. 此规则允许入站 Internet 流量抵达 Web 服务器。此规则不会更改路由行为。该规则仅允许发往 IIS01 的流量通过。因此，如果来自 Internet 的流量将 Web 服务器作为其目标，此规则将允许流量，并停止处理其他规则。（在优先级为 140 的规则中，其他所有入站 Internet 流量均被阻止）。如果你只要处理 HTTP 流量，可将此规则进一步限制为只允许目标端口 80。
 
     ```
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
-        Set-AzureNetworkSecurityRule -Name "Enable Internet to $VMName[0]" `
-        -Type Inbound -Priority 120 -Action Allow `
-        -SourceAddressPrefix Internet -SourcePortRange '*' `
-        -DestinationAddressPrefix $VMIP[0] `
-        -DestinationPortRange '*' `
-        -Protocol *
+         Set-AzureNetworkSecurityRule -Name "Enable Internet to $VMName[0]" `
+         -Type Inbound -Priority 120 -Action Allow `
+         -SourceAddressPrefix Internet -SourcePortRange '*' `
+         -DestinationAddressPrefix $VMIP[0] `
+         -DestinationPortRange '*' `
+         -Protocol *
     ```
 
-5. 此规则允许流量从 IIS01 服务器传递到 AppVM01 服务器，后面的规则将阻止其他所有从前端到后端的流量。如果要添加的端口是已知的，则可以改善此规则。例如，如果 IIS 服务器只抵达 AppVM01 上的 SQL Server，并且 Web 应用程序曾遭到入侵，则目标端口范围应该从“*”（任何）更改为 1433（SQL 端口），以缩小 AppVM01 上的入站攻击面。
+5. 此规则允许流量从 IIS01 服务器传递到 AppVM01 服务器，后面的规则将阻止其他所有从前端到后端的流量。如果要添加的端口是已知的，则可以改善此规则。例如，如果 IIS 服务器的流量只抵达 AppVM01 上的 SQL Server，并且 Web 应用程序曾遭到入侵，则目标端口范围应该从 "*"（任意端口）更改为 "1433"（SQL 端口），以缩小 AppVM01 上的入站攻击面。
 
     ```
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
         Set-AzureNetworkSecurityRule -Name "Enable $VMName[1] to $VMName[2]" `
         -Type Inbound -Priority 130 -Action Allow `
-    -SourceAddressPrefix $VMIP[1] -SourcePortRange '*' `
-    -DestinationAddressPrefix $VMIP[2] `
-    -DestinationPortRange '*' `
-    -Protocol *
+        -SourceAddressPrefix $VMIP[1] -SourcePortRange '*' `
+         -DestinationAddressPrefix $VMIP[2] `
+         -DestinationPortRange '*' `
+         -Protocol *
     ```
 
-6. 此规则将拒绝从 Internet 到网络上任何服务器的流量。结合优先级为 110 和 120 的规则，只允许入站 Internet 流量发往防火墙以及通过 RDP 端口发往其他服务器，除此之外的其他流量将被阻止。
+6. 此规则将拒绝从 Internet 到网络上任何服务器的流量。规则的优先级为 110 和 120 时，只有入站 Internet 流量能够发往防火墙和服务器上的 RDP 端口，其他流量将被阻止。此规则属于“防故障”规则，可以阻止所有意外的流量。
 
     ```
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
@@ -140,7 +149,7 @@ ms.author: jonor;sivae
         -Protocol *
     ```
 
-7. 最后一个规则拒绝从前端子网到后端子网的流量。这是仅限入站的规则，因此允许反向流量（从后端到前端）。
+7. 最后一个规则拒绝从前端子网到后端子网的流量。此规则为仅针对入站的规则，因此允许反向流量（从后端到前端）。
 
     ```
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
@@ -154,69 +163,69 @@ ms.author: jonor;sivae
     ```
 
 ## 流量方案
-#### （*允许*）从 Web 访问 Web 服务器
+#### （*允许*）从 Internet 访问 Web 服务器
 1. Internet 用户从 FrontEnd001.CloudApp.Net（面向 Internet 的云服务）请求 HTTP 页面
 2. 云服务通过端口 80 上的开放终结点将流量传递到 IIS01（Web 服务器）
 3. 前端子网开始处理入站规则：
-  1. NSG 规则 1 (DNS) 不适用，将转到下一规则
-  2. NSG 规则 2 (RDP) 不适用，将转到下一规则
-  3. NSG 规则 3（Internet 到 IIS01）适用，允许流量，停止处理规则
+    1. NSG 规则 1 (DNS) 不适用，将转到下一条规则
+    2. NSG 规则 2 (RDP) 不适用，将转到下一条规则
+    3. NSG 规则 3（Internet 到 IIS01）适用，允许流量，停止处理规则
 4. 流量抵达 Web 服务器 IIS01 的内部 IP 地址 (10.0.1.5)
 5. IIS01 正在侦听 Web 流量，将接收此请求并开始处理请求
 6. IIS01 请求 AppVM01 上的 SQL Server 提供信息
-7. 前端子网上没有出站规则，允许流量
+7. 前端子网上没有出站规则，因此允许流量
 8. 后端子网开始处理入站规则：
-  1. NSG 规则 1 (DNS) 不适用，将转到下一规则
-  2. NSG 规则 2 (RDP) 不适用，将转到下一规则
-  3. NSG 规则 3（Internet 到防火墙）不适用，将转到下一规则
-  4. NSG 规则 4（IIS01 到 AppVM01）适用，允许流量，停止规则处理
+    1. NSG 规则 1 (DNS) 不适用，将转到下一条规则
+    2. NSG 规则 2 (RDP) 不适用，将转到下一条规则
+    3. NSG 规则 3（Internet 到防火墙）不适用，将转到下一条规则
+    4. NSG 规则 4（IIS01 到 AppVM01）适用，允许流量，停止规则处理
 9. AppVM01 接收 SQL 查询并做出响应
 10. 后端子网上没有出站规则，因此允许响应
 11. 前端子网开始处理入站规则：
-  1. 后端子网到前端子网的入站流量没有适用的 NSG 规则，因此不会应用任何 NSG 规则
-  2. 允许子网间流量的默认系统规则允许此流量，因此允许流量。
+    1. 后端子网到前端子网的入站流量没有适用的 NSG 规则，因此不会应用任何 NSG 规则
+    2. 允许子网间流量的默认系统规则允许此流量，因此允许流量。
 12. IIS 服务器接收 SQL 响应，完成 HTTP 响应并发送给请求方
 13. 前端子网上没有出站规则，因此允许响应，Internet 用户将收到请求的网页。
 
 #### （*允许*）通过 RDP 访问后端
-1. Internet 上的服务器管理员在 BackEnd001.CloudApp.Net:xxxxx 上请求与 AppVM01 的 RDP 会话，其中 xxxxx 是通过 RDP 访问 AppVM01 所用的随机分配端口号（在 Azure 经典管理门户上或通过 PowerShell 可以找到分配的端口）
+1. Internet 上的服务器管理员在 BackEnd001.CloudApp.Net:xxxxx 上请求与 AppVM01 的 RDP 会话，其中 xxxxx 是通过 RDP 访问 AppVM01 所用的随机分配端口号（在 Azure 门户预览上或通过 PowerShell 可以找到分配的端口）
 2. 后端子网开始处理入站规则：
-  1. NSG 规则 1 (DNS) 不适用，将转到下一规则
-  2. NSG 规则 2 (RDP) 适用，允许流量，停止规则处理
+    1. NSG 规则 1 (DNS) 不适用，将转到下一条规则
+    2. NSG 规则 2 (RDP) 适用，允许流量，停止规则处理
 3. 由于没有出站规则，将应用默认规则并允许返回流量
 4. 已启用 RDP 会话
-5. AppVM01 提示输入用户名和密码
+5. AppVM01 会提示用户提供用户名和密码
 
 #### （*允许*）在 DNS 服务器上执行 Web 服务器 DNS 查找
 1. Web 服务器 IIS01 需要 www.data.gov 上的数据源，但需要解析地址。
 2. VNet 的网络配置将 DNS01（后端子网上的 10.0.2.4）列为主 DNS 服务器，IIS01 将 DNS 请求发送到 DNS01
 3. 前端子网上没有出站规则，允许流量
 4. 后端子网开始处理入站规则：
-  1.  NSG 规则 1 (DNS) 适用，允许流量，停止规则处理
+    * NSG 规则 1 (DNS) 适用，允许流量，停止规则处理
 5. DNS 服务器接收请求
 6. DNS 服务器没有缓存的地址，请求 Internet 上的根 DNS 服务器
 7. 后端子网上没有出站规则，允许流量
 8. Internet DNS 服务器做出响应，由于此会话是从内部发起的，因此允许响应
-9. DNS 服务器缓存响应，然后将初始请求响应给 IIS01
+9. DNS 服务器缓存响应，然后将初始请求响应发送给 IIS01
 10. 后端子网上没有出站规则，允许流量
 11. 前端子网开始处理入站规则：
-  1. 后端子网到前端子网的入站流量没有适用的 NSG 规则，因此不会应用任何 NSG 规则
-  2. 允许子网间流量的默认系统规则允许此流量，因此允许流量
+    1. 后端子网到前端子网的入站流量没有适用的 NSG 规则，因此不会应用任何 NSG 规则
+    2. 允许子网间流量的默认系统规则允许此流量，因此允许流量
 12. IIS01 从 DNS01 接收响应
 
 #### （*允许*）Web 服务器访问 AppVM01 上的文件
 1. IIS01 请求 AppVM01 上的文件
 2. 前端子网上没有出站规则，允许流量
 3. 后端子网开始处理入站规则：
-  1. NSG 规则 1 (DNS) 不适用，将转到下一规则
-  2. NSG 规则 2 (RDP) 不适用，将转到下一规则
-  3. NSG 规则 3（Internet 到 IIS01）不适用，将转到下一规则
-  4. NSG 规则 4（IIS01 到 AppVM01）适用，允许流量，停止规则处理
+    1. NSG 规则 1 (DNS) 不适用，将转到下一条规则
+    2. NSG 规则 2 (RDP) 不适用，将转到下一条规则
+    3. NSG 规则 3（Internet 到 IIS01）不适用，将转到下一条规则
+    4. NSG 规则 4（IIS01 到 AppVM01）适用，允许流量，停止规则处理
 4. AppVM01 接收请求并以文件做出响应（假设已获得访问授权）
 5. 后端子网上没有出站规则，因此允许响应
 6. 前端子网开始处理入站规则：
-  1. 后端子网到前端子网的入站流量没有适用的 NSG 规则，因此不会应用任何 NSG 规则
-  2. 允许子网间流量的默认系统规则允许此流量，因此允许流量。
+    1. 后端子网到前端子网的入站流量没有适用的 NSG 规则，因此不会应用任何 NSG 规则
+    2. 允许子网间流量的默认系统规则允许此流量，因此允许流量。
 7. IIS 服务器接收文件
 
 #### （*拒绝*）通过 Web 访问后端服务器
@@ -233,37 +242,37 @@ ms.author: jonor;sivae
 1. Internet 用户从 FrontEnd001.CloudApp.Net（面向 Internet 的云服务）请求 SQL 数据
 2. 由于没有为 SQL 开放终结点，此流量不会通过云服务抵达防火墙
 3. 如果出于某种原因而开放了终结点，前端子网将开始处理入站规则：
-  1. NSG 规则 1 (DNS) 不适用，将转到下一规则
-  2. NSG 规则 2 (RDP) 不适用，将转到下一规则
-  3. NSG 规则 3（Internet 到 IIS01）适用，允许流量，停止处理规则
+    1. NSG 规则 1 (DNS) 不适用，将转到下一条规则
+    2. NSG 规则 2 (RDP) 不适用，将转到下一条规则
+    3. NSG 规则 3（Internet 到 IIS01）适用，允许流量，停止处理规则
 4. 流量抵达 IIS01 的内部 IP 地址 (10.0.1.5)
 5. IIS01 未侦听端口 1433，因此不会对请求做出响应
 
 ## 结束语
-这种隔离后端子网与入站流量的方式相当直截了当。
-
-<!-- 可以在[此处][HOME]找到更多示例和网络安全边界的概述。-->
+这是一个相对简单的示例，直观演示了如何将后端子网与入站流量隔离。
 
 ## 参考
 ### 主脚本和网络配置
-将完整脚本保存在 PowerShell 脚本文件中。将网络配置保存到名为“NetworkConf1.xml”的文件中。如有需要，请修改用户定义的变量。运行脚本，然后根据上面“示例 1”部分中所述的防火墙规则设置说明操作。
+将完整脚本保存在 PowerShell 脚本文件中。将网络配置保存到名为“NetworkConf1.xml”的文件中。 如有需要，请修改用户定义的变量，然后运行该脚本。
 
 #### 完整脚本
 此脚本基于用户定义的变量执行以下操作：
 
 1. 连接到 Azure 订阅
-2. 新建存储帐户
-3. 根据网络配置文件中的定义创建新的 VNet 和两个子网
-4. 构建 4 个 Windows Server VM
+2. 创建存储帐户
+3. 根据网络配置文件中的定义创建一个 VNet 和两个子网
+4. 生成四个 Windows Server VM
 5. 配置 NSG，包括：
-  - 创建 NSG
-  - 填入规则
-  - 将 NSG 绑定到相应的子网
+    * 创建 NSG
+    * 填入规则
+    * 将 NSG 绑定到相应的子网
 
 此 PowerShell 脚本应该在连接到 Internet 的电脑或服务器上本地运行。
 
->[!IMPORTANT]
-> 此脚本运行时，PowerShell 中可能会弹出警告或其他参考性消息。只有以红色字体显示的错误消息才需要引以关注。
+> [!IMPORTANT]
+此脚本运行时，PowerShell 中可能会弹出警告或其他参考性消息。只需关注红色的错误消息。
+> 
+>
 
 ```
 <# 
@@ -311,7 +320,7 @@ ms.author: jonor;sivae
     $SubnetName = @()
     $VMIP = @()
 
-# User Defined Global Variables
+# User-Defined Global Variables
   # These should be changes to reflect your subscription and services
   # Invalid options will fail in the validation section
 
@@ -341,7 +350,7 @@ ms.author: jonor;sivae
   # NSG Details
     $NSGName = "MyVNetSG"
 
-# User Defined VM Specific Config
+# User-Defined VM Specific Configuration
     # Note: To ensure proper NSG Rule creation later in this script:
     #       - The Web Server must be VM 0
     #       - The AppVM1 Server must be VM 1
@@ -389,25 +398,25 @@ ms.author: jonor;sivae
       $VMIP += "10.0.2.4"
 
 # ----------------------------- #
-# No User Defined Varibles or   #
+# No User-Defined Variables or  #
 # Configuration past this point #
-# ----------------------------- #	
+# ----------------------------- #    
 
   # Get your Azure accounts
     Add-AzureAccount -Environment AzureChinaCloud
-    Set-AzureSubscription –SubscriptionId $subID -ErrorAction Stop
+    Set-AzureSubscription -SubscriptionId $subID -ErrorAction Stop
     Select-AzureSubscription -SubscriptionId $subID -Current -ErrorAction Stop
 
   # Create Storage Account
     If (Test-AzureName -Storage -Name $StorageAccountName) { 
-        Write-Host "Fatal Error: This storage account name is already in use, please pick a diffrent name." -ForegroundColor Red
+        Write-Host "Fatal Error: This storage account name is already in use, please pick a different name." -ForegroundColor Red
         Return}
     Else {Write-Host "Creating Storage Account" -ForegroundColor Cyan 
           New-AzureStorageAccount -Location $DeploymentLocation -StorageAccountName $StorageAccountName}
 
   # Update Subscription Pointer to New Storage Account
     Write-Host "Updating Subscription Pointer to New Storage Account" -ForegroundColor Cyan 
-    Set-AzureSubscription –SubscriptionId $subID -CurrentStorageAccountName $StorageAccountName -ErrorAction Stop
+    Set-AzureSubscription -SubscriptionId $subID -CurrentStorageAccountName $StorageAccountName -ErrorAction Stop
 
 # Validation
 $FatalError = $false
@@ -429,14 +438,14 @@ Else { Write-Host "The BackEndService service name is valid for use." -Foregroun
 If (-Not (Test-Path $NetworkConfigFile)) { 
     Write-Host 'The network config file was not found, please update the $NetworkConfigFile variable to point to the network config xml file.' -ForegroundColor Yellow
     $FatalError = $true}
-Else { Write-Host "The network config file was found" -ForegroundColor Green
+Else { Write-Host "The network configuration file was found" -ForegroundColor Green
         If (-Not (Select-String -Pattern $DeploymentLocation -Path $NetworkConfigFile)) {
-            Write-Host 'The deployment location was not found in the network config file, please check the network config file to ensure the $DeploymentLocation varible is correct and the netowrk config file matches.' -ForegroundColor Yellow
+            Write-Host 'The deployment location was not found in the network config file, please check the network config file to ensure the $DeploymentLocation variable is correct and the network config file matches.' -ForegroundColor Yellow
             $FatalError = $true}
         Else { Write-Host "The deployment location was found in the network config file." -ForegroundColor Green}}
 
 If ($FatalError) {
-    Write-Host "A fatal error has occured, please see the above messages for more information." -ForegroundColor Red
+    Write-Host "A fatal error has occurred, please see the above messages for more information." -ForegroundColor Red
     Return}
 Else { Write-Host "Validation passed, now building the environment." -ForegroundColor Green}
 
@@ -453,13 +462,13 @@ Else { Write-Host "Validation passed, now building the environment." -Foreground
     $i=0
     $VMName | Foreach {
         Write-Host "Building $($VMName[$i])" -ForegroundColor Cyan
-        New-AzureVMConfig -Name $VMName[$i] -ImageName $img[$i] –InstanceSize $size[$i] | `
+        New-AzureVMConfig -Name $VMName[$i] -ImageName $img[$i] -InstanceSize $size[$i] | `
             Add-AzureProvisioningConfig -Windows -AdminUsername $LocalAdmin -Password $LocalAdminPwd  | `
-            Set-AzureSubnet  –SubnetNames $SubnetName[$i] | `
+            Set-AzureSubnet  -SubnetNames $SubnetName[$i] | `
             Set-AzureStaticVNetIP -IPAddress $VMIP[$i] | `
             Set-AzureVMMicrosoftAntimalwareExtension -AntimalwareConfiguration '{"AntimalwareEnabled" : true}' | `
             Remove-AzureEndpoint -Name "PowerShell" | `
-            New-AzureVM –ServiceName $ServiceName[$i] -VNetName $VNetName -Location $DeploymentLocation
+            New-AzureVM -ServiceName $ServiceName[$i] -VNetName $VNetName -Location $DeploymentLocation
             # Note: A Remote Desktop endpoint is automatically created when each VM is created.
         $i++
     }
@@ -558,9 +567,16 @@ Else { Write-Host "Validation passed, now building the environment." -Foreground
 ```
 
 #### 示例应用程序脚本
-如果你想要为本示例和其他外围网络示例安装示例应用程序，以下链接便已提供了一个：[示例应用程序脚本][SampleApp]
+如果需要为其安装示例应用程序和其他外围网络示例，以下链接提供了所需示例：[应用程序脚本示例][SampleApp]
+
+## 后续步骤
+* 更新和保存 XML 文件
+* 运行 PowerShell 脚本来构建环境
+* 安装示例应用程序
+* 通过此外围网络测试不同的流量
 
 <!--Image References-->
+
 [1]: ./media/virtual-networks-dmz-nsg-asm/example1design.png "使用 NSG 的入站外围网络"
 
 <!--Link References-->
@@ -568,4 +584,5 @@ Else { Write-Host "Validation passed, now building the environment." -Foreground
 [HOME]: ../security/best-practices-network-security.md
 [SampleApp]: ./virtual-networks-sample-app.md
 
-<!---HONumber=Mooncake_Quality_Review_1118_2016-->
+<!---HONumber=Mooncake_0206_2017-->
+<!--Update_Description: wording update-->

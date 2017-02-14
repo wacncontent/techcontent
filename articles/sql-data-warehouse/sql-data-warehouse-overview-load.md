@@ -1,4 +1,5 @@
 <!-- Remove solution-partners -->
+
 ---
 title: 将数据载入 Azure SQL 数据仓库 | Azure
 description: 了解将数据载入 SQL 数据仓库的常见方案。这些常见方案包括使用 PolyBase、Azure Blob 存储、平面文件以及磁盘寄送。也可使用第三方工具。

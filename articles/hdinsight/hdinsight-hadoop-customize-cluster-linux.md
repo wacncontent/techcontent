@@ -56,14 +56,11 @@ HDInsight 提供一个称为**脚本操作**的配置选项，该选项可调用
 
     * 本身是 HDInsight 群集之主要存储帐户或其他存储帐户的 **Blob 存储帐户**。由于在创建群集期间，已将这两种存储帐户的访问权限都授予 HDInsight，因此这些存储帐户提供一个使用非公共脚本操作的方式。
 
-    * https://review.docs.microsoft.com/azure/service-bus/?branch=master，例如 Azure Blob、GitHub、OneDrive、Dropbox 等。
+    * 例如 Azure Blob、GitHub、OneDrive、Dropbox 等。
 
         有关存储在 Blob 容器（可公开读取）中的脚本的 URI 示例，请参阅[示例脚本操作脚本](#example-script-action-scripts)部分。
 
 * 可以限制为**只对特定的节点类型运行**，例如头节点或辅助角色节点。
-
-  > [!NOTE]
-  与 HDInsight 高级版配合使用时，可以指定脚本应该在边缘节点上使用。
 
 * 可以是**持久化**或**即席**。
 
@@ -71,15 +68,15 @@ HDInsight 提供一个称为**脚本操作**的配置选项，该选项可调用
 
     持久化脚本还会将更改应用到其他节点类型（例如头节点），但从功能方面看，持久保存脚本的唯一原因就是它将应用到扩展群集时所创建的新辅助角色节点。
 
-  > [!IMPORTANT]
-  持久化脚本操作必须有唯一的名称。
+    > [!IMPORTANT]
+    持久化脚本操作必须有唯一的名称。
 
-    **Ad hoc** scripts are not persisted; however, you can subsequently promote an ad hoc script to a persisted script, or demote a persisted script to an ad hoc script.
+    **Ad hoc** 脚本是不保留的。不过，随后可以提升一个 ad hoc 脚本为保留脚本，或者下降一个保留脚本为 ad hoc 脚本。
 
-  > [!IMPORTANT]
-  创建群集期间使用的脚本操作将自动持久保存下来。
-  >
-  > 即使明确指出应予保存，也不会持久保存失败的脚本。
+    > [!IMPORTANT]
+    创建群集期间使用的脚本操作将自动持久保存下来。
+    ><p>
+    > 即使明确指出应予保存，也不会持久保存失败的脚本。
 
 * 可以接受脚本在执行期间使用的**参数**。
 * 在群集节点上**以 root 级权限**运行。
@@ -112,7 +109,7 @@ HDInsight 提供一个称为**脚本操作**的配置选项，该选项可调用
 
 > [!IMPORTANT]
 脚本操作必须在 60 分钟内完成，否则将会超时。在群集预配期间，脚本将与其他安装和配置进程一同运行。争用 CPU 时间和网络带宽等资源可能导致完成脚本所需的时间要长于在开发环境中所需的时间。
->
+><p>
 > 若要让运行脚本所花费的时间降到最低，请避免从源下载和编译应用程序等任务。应预先编译应用程序，并将二进制文件存储在 Azure Blob 存储中，这样可将其快速下载到群集。
 
 ### <a name="apply-a-script-action-to-a-running-cluster"></a> 正在运行的群集上的脚本操作
@@ -121,7 +118,7 @@ HDInsight 提供一个称为**脚本操作**的配置选项，该选项可调用
 
 > [!IMPORTANT]
 这并不意味着正在运行的群集不受发生错误的脚本的影响。例如，脚本可能会删除群集所需的文件，更改配置从而使服务失败，等等。
->
+><p>
 > 脚本操作以 root 权限运行，因此你应该先确保了解脚本的作用，然后再将它应用到群集。
 
 将脚本应用到群集时，如果脚本运行成功，群集状态将从“正在运行”更改为“已接受”，再更改为“HDInsight 配置”，最后恢复“正在运行”。脚本状态记录在脚本操作历史记录中，可以使用此状态来确定脚本是成功还是失败。例如，可以使用 `Get-AzureRmHDInsightScriptActionHistory` PowerShell cmdlet 来查看脚本的状态。随后将返回类似于下面的信息：
@@ -387,12 +384,12 @@ Status            : Succeeded
 1. 部署资源组后，你将看到部署摘要。
 
     ```
-      DeploymentName    : mydeployment
-      ResourceGroupName : myresourcegroup
-      ProvisioningState : Succeeded
-      Timestamp         : 8/17/2015 7:00:27 PM
-      Mode              : Incremental
-      ...
+    DeploymentName    : mydeployment
+    ResourceGroupName : myresourcegroup
+    ProvisioningState : Succeeded
+    Timestamp         : 8/17/2015 7:00:27 PM
+    Mode              : Incremental
+    ...
     ```
 
 2. 如果你的部署失败，则可以使用以下 cmdlet 获取有关故障的信息。
@@ -498,8 +495,8 @@ HDInsight .NET SDK 提供客户端库，可简化从 .NET 应用程序中使用 
 
     ![脚本操作磁贴](./media/hdinsight-hadoop-customize-cluster-linux/scriptactionstile.png)
 
-   > [!NOTE]
-   也可以从“设置”边栏选项卡中依次选择“所有设置”和“脚本操作”。
+    > [!NOTE]
+    也可以从“设置”边栏选项卡中依次选择“所有设置”和“脚本操作”。
 
 3. 在“脚本操作”边栏选项卡顶部，选择“提交新项”。
 
@@ -507,19 +504,19 @@ HDInsight .NET SDK 提供客户端库，可简化从 .NET 应用程序中使用 
 
 4. 在“添加脚本操作”边栏选项卡中输入以下信息。
 
-   * **名称**：用于此脚本操作的友好名称。在本示例中为 `Add Storage account`。
+    * **名称**：用于此脚本操作的友好名称。在本示例中为 `Add Storage account`。
 
-   * **脚本 URI**：脚本的 URI。在本示例中为 `https://hdiconfigactions.blob.core.windows.net/linuxaddstorageaccountv01/add-storage-account-v01.sh`
+    * **脚本 URI**：脚本的 URI。在本示例中为 `https://hdiconfigactions.blob.core.windows.net/linuxaddstorageaccountv01/add-storage-account-v01.sh`
 
-   * **头**、**辅助角色**和 **Zookeeper**：选中此脚本应该应用到的节点。在本示例中，已选中“头”、“辅助角色”和“Zookeeper”。
+    * **头**、**辅助角色**和 **Zookeeper**：选中此脚本应该应用到的节点。在本示例中，已选中“头”、“辅助角色”和“Zookeeper”。
 
-   * **参数**：如果脚本接受参数，请在此处输入参数。在本示例中，请输入存储帐户名称和存储帐户密钥：
+    * **参数**：如果脚本接受参数，请在此处输入参数。在本示例中，请输入存储帐户名称和存储帐户密钥：
 
-       ![hdinsight 持久化脚本操作, acc 存储帐户, 正在运行的群集](./media/hdinsight-hadoop-customize-cluster-linux/hdinsight-persisted-script-action-add-storage-account.png)
+        ![hdinsight 持久化脚本操作, acc 存储帐户, 正在运行的群集](./media/hdinsight-hadoop-customize-cluster-linux/hdinsight-persisted-script-action-add-storage-account.png)
 
-       在屏幕截图中，`contosodata` 是现有的 Azure 存储帐户，第二行是存储帐户密钥。
+        在屏幕截图中，`contosodata` 是现有的 Azure 存储帐户，第二行是存储帐户密钥。
 
-   * **持久化**：如果想要持久保存脚本以便在扩展群集时将脚本应用到新的辅助角色节点，请选中此项。
+    * **持久化**：如果想要持久保存脚本以便在扩展群集时将脚本应用到新的辅助角色节点，请选中此项。
 
 5. 最后，使用“创建”按钮将脚本应用到群集。
 
@@ -539,9 +536,6 @@ HDInsight .NET SDK 提供客户端库，可简化从 .NET 应用程序中使用 
     $saURI = "<URI to the script>"                  # The URI where the script is located
     $nodeTypes = "headnode", "workernode"
     ```
-
-   > [!NOTE]
-   如果使用的是 HDInsight 高级群集，可以使用 `"edgenode"` 节点类型在边缘节点上运行脚本。
 
 2. 使用以下命令将脚本应用到群集：
 
@@ -563,8 +557,6 @@ HDInsight .NET SDK 提供客户端库，可简化从 .NET 应用程序中使用 
 ### 从 Azure CLI 将脚本操作应用到正在运行的群集
 
 在继续前，确保你已安装并配置 Azure CLI。有关详细信息，请参阅 [Install the Azure CLI](../xplat-cli-install.md)（安装 Azure CLI）。
-
-[!INCLUDE [use-latest-version](../../includes/hdinsight-use-latest-cli.md)]
 
 1. 打开系统的 shell 会话、终端、命令提示符或其他命令行，并使用以下命令切换到 Azure Resource Manager 模式。
 
@@ -699,9 +691,9 @@ HDInsight 服务提供两种类型的开源组件：
 * **自定义组件** - 作为群集用户，你可以安装，或者在工作负荷中使用由社区提供的或你自己创建的任何组件。
 
 > [!WARNING]
-完全支持通过 HDInsight 群集提供的组件，Microsoft 支持部门将帮助你找出并解决与这些组件相关的问题。
->
-> 自定义组件可获得合理范围的支持，有助于进一步解决问题。这可能会促进解决问题，或要求使用可用的开源技术渠道，在渠道中可找到该技术的深厚的专业知识。有许多可以使用的社区站点，例如：[HDInsight 的 MSDN 论坛](https://social.msdn.microsoft.com/Forums/azure/zh-cn/home?forum=hdinsight)、[http://stackoverflow.com](http://stackoverflow.com)。此外，Apache 项目在 [http://apache.org](http://apache.org) 上提供了项目站点，例如 [Hadoop](http://hadoop.apache.org/)。
+完全支持通过 HDInsight 群集提供的组件，Azure 支持部门将帮助你找出并解决与这些组件相关的问题。
+><p>
+> 自定义组件可获得合理范围的支持，有助于进一步解决问题。这可能会促进解决问题，或要求使用可用的开源技术渠道，在渠道中可找到该技术的深厚的专业知识。有许多可以使用的社区站点，例如：[HDInsight 的 MSDN 论坛](https://social.msdn.microsoft.com/Forums/azure/zh-cn/home?forum=hdinsight)、[Azure CSDN](http://azure.csdn.net)。此外，Apache 项目在 [http://apache.org](http://apache.org) 上提供了项目站点，例如 [Hadoop](http://hadoop.apache.org/)。
 
 HDInsight 服务可提供多种方法使用自定义组件。无论在群集上使用或安装组件的方式如何，均适用相同级别的支持。以下是可在 HDInsight 群集上使用自定义组件的最常见方法列表：
 

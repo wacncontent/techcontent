@@ -15,8 +15,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 07/25/2016
-wacn.date: 02/06/2017
+ms.date: 10/19/2016
+wacn.date: 02/14/2017
 ms.author: jgao
 ---
 
@@ -82,7 +82,7 @@ ms.author: jgao
     $defaultStorageAccountName = $namePrefix + "store"
     $defaultBlobContainerName = $hdinsightClusterName
 
-    $location = "China East 2"
+    $location = "China East"
 
     $armDeploymentName = $namePrefix
     #endregion
@@ -123,8 +123,8 @@ ms.author: jgao
 ```
 azure login
 azure config mode arm
-azure group create -n hdi1229rg -l "China East 2"
-azure group deployment create "hdi1229rg" "hdi1229" --template-file "C:\HDITutorials-ARM\hdinsight-arm-template.json" -p "{"clusterName":{"value":"hdi1229win"},"clusterStorageAccountName":{"value":"hdi1229store"},"location":{"value":"China East 2"},"clusterLoginPassword":{"value":"Pass@word1"}}"
+azure group create -n hdi1229rg -l "China East"
+azure group deployment create "hdi1229rg" "hdi1229" --template-file "C:\HDITutorials-ARM\hdinsight-arm-template.json" -p "{"clusterName":{"value":"hdi1229win"},"clusterStorageAccountName":{"value":"hdi1229store"},"location":{"value":"China East"},"clusterLoginPassword":{"value":"Pass@word1"}}"
 ```
 
 ## 使用 REST API 进行部署
@@ -157,25 +157,10 @@ azure group deployment create "hdi1229rg" "hdi1229" --template-file "C:\HDITutor
 "parameters": {
     "location": {
     "type": "string",
-    "defaultValue": "China East 2",
+    "defaultValue": "China East",
     "allowedValues": [
         "China North",
-        "China North",
-        "China East",
-        "China East 2",
-        "China North",
-        "China East",
-        "China North",
-        "China North",
-        "West Europe",
-        "China East",
-        "China North",
-        "China East",
-        "China East",
-        "Brizil South",
-        "Australia East",
-        "Australia Southeast",
-        "Central India"
+        "China East"
     ],
     "metadata": {
         "description": "The location where all azure resources will be deployed."

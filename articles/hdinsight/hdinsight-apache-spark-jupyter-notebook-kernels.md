@@ -15,8 +15,8 @@ ms.workload: big-data
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 08/25/2016
-wacn.date: 02/06/2017
+ms.date: 10/05/2016
+wacn.date: 02/14/2017
 ms.author: nitinme
 ---
 
@@ -44,7 +44,7 @@ ms.author: nitinme
 
     > [!NOTE]
     > 也可以在浏览器中打开以下 URL 来访问群集的 Jupyter 笔记本。将 __CLUSTERNAME__ 替换为群集的名称：
-    >
+    ><p>
     > `https://CLUSTERNAME.azurehdinsight.cn/jupyter`
 
 2. 创建具有新内核的新笔记本。单击“新建”，然后单击“Pyspark”或“Spark”。Spark 内核适用于 Scala 应用程序，PySpark 内核适用于 Python 应用程序。
@@ -171,10 +171,6 @@ Google Chrome 仅支持针对 HDInsight Spark 群集运行的 Jupyter 笔记本�
 * [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展
-
-* [使用适用于 IntelliJ IDEA 的 HDInsight 工具插件创建和提交 Spark Scala 应用程序](./hdinsight-apache-spark-intellij-tool-plugin.md)
-
-* [Use HDInsight Tools Plugin for IntelliJ IDEA to debug Spark applications remotely（使用 IntelliJ IDEA 的 HDInsight 工具插件远程调试 Spark 应用程序）](./hdinsight-apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
 
 * [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](./hdinsight-apache-spark-use-zeppelin-notebook.md)
 

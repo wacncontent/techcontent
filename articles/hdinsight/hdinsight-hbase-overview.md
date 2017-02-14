@@ -53,7 +53,6 @@ HDInsight 实施利用 HBase 的横向扩展架构来提供表自动分片、使
 * [开始在 HDInsight 中将 HBase 与 Hadoop 配合使用][hbase-get-started]
 * [在 Azure 虚拟网络上创建 HDInsight 群集][hbase-provision-vnet]
 * [在 HDInsight 中配置 HBase 复制](./hdinsight-hbase-replication.md)
-* [在 HDInsight 中使用 HBase 分析 Twitter 观点][hbase-twitter-sentiment]
 * [借助 Maven 生成可将 HBase 与 HDInsight (Hadoop) 配合使用的 Java 应用程序][hbase-build-java-maven]
 
 ## <a name="see-also"></a>另请参阅
@@ -61,8 +60,6 @@ HDInsight 实施利用 HBase 的横向扩展架构来提供表自动分片、使
 * [Bigtable：针对结构化数据的分布式存储系统](http://research.google.com/archive/bigtable.html)
 
 [hbase-provision-vnet]: ./hdinsight-hbase-provision-vnet.md
-
-[hbase-twitter-sentiment]: ./hdinsight-hbase-analyze-twitter-sentiment.md
 
 [hbase-build-java-maven]: ./hdinsight-hbase-build-java-maven.md
 
@@ -81,3 +78,4 @@ HDInsight 实施利用 HBase 的横向扩展架构来提供表自动分片、使
 [apache-hadoop]: http://hadoop.apache.org/
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

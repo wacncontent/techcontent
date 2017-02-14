@@ -70,6 +70,9 @@ HDInsight 应用程序是用户可以在基于 Linux 的 HDInsight 群集上安�
 
     单击此按钮可在 Azure 门户预览上打开 Resource Manager 模板。Resource Manager 模板位于 [https://hditutorialdata.blob.core.windows.net/hdinsightapps/create-linux-based-hadoop-cluster-in-hdinsight.json](https://hditutorialdata.blob.core.windows.net/hdinsightapps/create-linux-based-hadoop-cluster-in-hdinsight.json) 中。若要了解如何编写此 Resource Manager 模板，请参阅 [MSDN: Install an HDInsight application](https://msdn.microsoft.com/zh-cn/library/mt706515.aspx)（MSDN：安装 HDInsight 应用程序）。
 
+    >[!NOTE]
+    > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；把允许的地域改成“China North”和“China East”。
+
 2. 根据说明来创建群集并安装 Hue。有关创建 HDInsight 群集的详细信息，请参阅 [在 HDInsight 中创建基于 Linux 的 Hadoop 群集](./hdinsight-hadoop-provision-linux-clusters.md)。
 
 除了 Azure 门户预览，也可以使用 [Azure PowerShell](./hdinsight-hadoop-create-linux-clusters-arm-templates.md#deploy-with-powershell) 和 [Azure CLI](./hdinsight-hadoop-create-linux-clusters-arm-templates.md#deploy-with-azure-cli) 来调用 Resource Manager 模板。

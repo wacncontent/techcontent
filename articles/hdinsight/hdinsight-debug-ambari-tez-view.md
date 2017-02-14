@@ -10,8 +10,8 @@ manager: paulettm
 editor: cgronlun
 
 ms.service: hdinsight
-ms.date: 02/16/2016
-wacn.date: 02/06/2017
+ms.date: 10/04/2016
+wacn.date: 02/14/2017
 ---
 
 # 使用 Ambari 视图来调试 HDInsight 上的 Tez 作业

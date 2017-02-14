@@ -1,4 +1,5 @@
 <!-- Temp remove tables-overview, next task on -->
+
 ---
 title: SQL 数据仓库中表的数据类型 | Azure
 description: Azure SQL 数据仓库表的数据类型入门。

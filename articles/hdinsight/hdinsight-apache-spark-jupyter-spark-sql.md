@@ -29,7 +29,7 @@ ms.author: nitinme
 [!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
 ## 先决条件
-* **一个 Azure 订阅**。在开始学习本教程之前，你必须有一个 Azure 订阅。请参阅[立即创建 Azure 试用帐户](https://azure.microsoft.com/free)。
+* **一个 Azure 订阅**。在开始学习本教程之前，你必须有一个 Azure 订阅。请参阅[立即创建 Azure 试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 * **安全外壳 (SSH) 客户端**：Linux、Unix 和 OS X 系统可通过 `ssh` 命令提供 SSH 客户端。对于 Windows 系统，请参阅[在装有 PuTTY 的 Windows 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-windows.md)；对于 Linux、Unix 或 OS X，请参阅[在 Linux、Unix 或 OS X 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
 
 > [!NOTE]
@@ -41,7 +41,7 @@ ms.author: nitinme
 [!INCLUDE [access-control](../../includes/hdinsight-access-control-requirements.md)]
 
 ## 创建 Spark 群集
-在此部分中，会使用 [Azure Resource Manager 模板](https://azure.microsoft.com/resources/templates/101-hdinsight-spark-linux/)在 HDInsight 中创建 Spark 群集。有关 HDInsight 版本及其 SLA 的信息，请参阅 [HDInsight 组件版本](./hdinsight-component-versioning.md)。有关其他群集创建方法，请参阅 [Create HDInsight clusters](./hdinsight-hadoop-provision-linux-clusters.md)（创建 HDInsight 群集）。
+在此部分中，会使用 [Azure Resource Manager 模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-spark-linux/)在 HDInsight 中创建 Spark 群集。有关 HDInsight 版本及其 SLA 的信息，请参阅 [HDInsight 组件版本](./hdinsight-component-versioning.md)。有关其他群集创建方法，请参阅 [Create HDInsight clusters](./hdinsight-hadoop-provision-linux-clusters.md)（创建 HDInsight 群集）。
 
 1. 单击下面的图像可在 Azure 门户预览中打开模板。
 
@@ -85,7 +85,7 @@ ms.author: nitinme
 
     > [!NOTE]
     也可以在浏览器中打开以下 URL 来访问群集的 Jupyter 笔记本。将 **CLUSTERNAME** 替换为群集的名称：
-    >
+    ><p>
     > `https://CLUSTERNAME.azurehdinsight.cn/jupyter`
     >
     >
@@ -143,7 +143,7 @@ ms.author: nitinme
 
     默认情况下，将显示以下表格输出。
 
-     ![查询结果的表输出](./media/hdinsight-apache-spark-jupyter-spark-sql/tabular.output.png "查询结果的表输出")  
+    ![查询结果的表输出](./media/hdinsight-apache-spark-jupyter-spark-sql/tabular.output.png "查询结果的表输出")  
 
     你也可以在其他视觉效果中查看结果。例如，同一输出的分区图看起来如下所示。
 
@@ -166,8 +166,6 @@ ms.author: nitinme
 * [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展
-* [使用适用于 IntelliJ IDEA 的 HDInsight 工具插件创建和提交 Spark Scala 应用程序](./hdinsight-apache-spark-intellij-tool-plugin.md)
-* [Use HDInsight Tools Plugin for IntelliJ IDEA to debug Spark applications remotely（使用 IntelliJ IDEA 的 HDInsight 工具插件远程调试 Spark 应用程序）](./hdinsight-apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
 * [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](./hdinsight-apache-spark-use-zeppelin-notebook.md)
 * [在 HDInsight 的 Spark 群集中可用于 Jupyter 笔记本的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)
 * [Use external packages with Jupyter notebooks（将外部包与 Jupyter 笔记本配合使用）](./hdinsight-apache-spark-jupyter-notebook-use-external-packages.md)

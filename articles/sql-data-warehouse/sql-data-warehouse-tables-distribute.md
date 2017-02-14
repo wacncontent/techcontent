@@ -1,4 +1,5 @@
 <!-- Temp remove overview, partiion, statistics and temporary -->
+
 ---
 title: 在 SQL 数据仓库中分布表 | Azure
 description: 开始在 Azure SQL 数据仓库中分布表。

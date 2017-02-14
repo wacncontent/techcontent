@@ -23,7 +23,7 @@ ms.author: jgao
 
 > [!NOTE]
 有关 HDInsight 中的 Phoenix 版本信息，请参阅 [HDInsight 提供的 Hadoop 群集版本有有何变化？](./hdinsight-component-versioning.md)。
->
+><p>
 > 此文档中的信息特定于基于 Windows 的 HDInsight 群集。有关在基于 Linux 的 HDInsight 上使用 Phoenix 的信息，请参阅 [Use Apache Phoenix with Linux-based HBase clusters in HDinsight](./hdinsight-hbase-phoenix-squirrel-linux.md)（将 Apache Phoenix 与 HDinsight 中基于 Linux 的 HBase 群集配合使用）。
 >
 >
@@ -158,7 +158,7 @@ ms.author: jgao
 * 从同一命令提示符（必须位于创建根证书的计算机上。必须从根证书生成客户端证书）运行以下命令：
 
     ```
-      makecert.exe -n "CN=HBaseVnetVPNClientCertificate" -pe -sky exchange -m 96 -ss My -in "HBaseVnetVPNRootCertificate" -is my -a sha1
+    makecert.exe -n "CN=HBaseVnetVPNClientCertificate" -pe -sky exchange -m 96 -ss My -in "HBaseVnetVPNRootCertificate" -is my -a sha1
     ```
 
     HBaseVnetVPNRootCertificate 是根证书名称。它必须与根证书名称匹配。
@@ -290,7 +290,6 @@ C:\apps\dist\phoenix-4.0.0.2.1.11.0-2316\phoenix-4.0.0.2.1.11.0-2316-client.jar
 * [HDInsight HBase 概述][hdinsight-hbase-overview]：HBase 是构建于 Hadoop 上的 Apache 开源 NoSQL 数据库，用于为大量非结构化和半结构化数据提供随机访问和高度一致性。
 * [在 Azure 虚拟网络上设置 HBase 群集][hdinsight-hbase-provision-vnet]：通过虚拟网络集成，可以将 HBase 群集部署到应用程序所在的虚拟网络，以便应用程序直接与 HBase 进行通信。
 * [在 HDInsight 中配置 HBase 地域复制](./hdinsight-hbase-replication.md)：了解如何跨两个 Azure 数据中心配置 HBase 复制。
-* [在 HDInsight 中使用 HBase 分析 Twitter 观点][hbase-twitter-sentiment]：了解如何通过在 HDInsight 的 Hadoop 群集中使用 HBase 对大数据执行实时[观点分析](http://en.wikipedia.org/wiki/Sentiment_analysis)。
 
 [azure-portal]: https://portal.azure.cn
 [vnet-point-to-site-connectivity]: https://msdn.microsoft.com/zh-cn/library/azure/09926218-92ab-4f43-aa99-83ab4d355555#BKMK_VNETPT
@@ -300,7 +299,6 @@ C:\apps\dist\phoenix-4.0.0.2.1.11.0-2316\phoenix-4.0.0.2.1.11.0-2316-client.jar
 [hdinsight-manage-portal]: ./hdinsight-administer-use-management-portal.md#connect-to-clusters-using-rdp
 [hdinsight-hbase-provision-vnet]: ./hdinsight-hbase-provision-vnet.md
 [hdinsight-hbase-overview]: ./hdinsight-hbase-overview.md
-[hbase-twitter-sentiment]: ./hdinsight-hbase-analyze-twitter-sentiment.md
 
 [hdinsight-hbase-phoenix-sqlline]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-phoenix-sqlline.png
 [img-certificate]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-vpn-certificate.png
@@ -311,3 +309,4 @@ C:\apps\dist\phoenix-4.0.0.2.1.11.0-2316\phoenix-4.0.0.2.1.11.0-2316-client.jar
 [img-squirrel-sql]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-squirrel-sql.png
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

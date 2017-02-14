@@ -506,3 +506,4 @@ $text = [IO.File]::ReadAllText($original_file) -replace "`r`n", "`n"
 * [将 MapReduce 与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

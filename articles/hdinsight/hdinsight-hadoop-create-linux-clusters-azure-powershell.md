@@ -70,7 +70,7 @@ $resourceGroupName = $token + "rg"      # Provide a Resource Group name
 $clusterName = $token
 $defaultStorageAccountName = $token + "store"   # Provide a Storage account name
 $defaultStorageContainerName = $token + "container"
-$location = "China East 2"     # Change the location if needed
+$location = "China East"     # Change the location if needed
 $clusterNodes = 1           # The number of nodes in the HDInsight cluster
 
 # Sign in to Azure
@@ -121,7 +121,7 @@ New-AzureRmHDInsightCluster `
 
 > [!IMPORTANT]
 > 在此脚本中，必须指定群集中要包含的工作节点数。如果计划使用 32 个以上的辅助角色节点（在创建群集时配置或者是在创建之后通过扩展群集来配置），则还必须指定至少具有 8 个核心和 14 GB RAM 的头节点大小。
->
+><p>
 > 有关节点大小和相关费用的详细信息，请参阅 [HDInsight pricing](https://www.azure.cn/pricing/details/hdinsight/)（HDInsight 定价）。
 
 创建群集可能需要 20 分钟。

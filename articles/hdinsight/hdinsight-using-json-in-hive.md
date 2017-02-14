@@ -161,7 +161,7 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
     2. 单击“环境变量”。
     3. 添加指向 **C:\\Program Files\\Java\\jdk1.7.0\_55** 或任何 JDK 安装位置的新 **JAVA\_HOME** 环境变量。
 
-      ![设置 JDK 的正确配置值][image-hdi-hivejson-jdk]  
+        ![设置 JDK 的正确配置值][image-hdi-hivejson-jdk]  
 
 2. 安装 [Maven 3.3.1](http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.3.1/binaries/apache-maven-3.3.1-bin.zip)
 
@@ -235,10 +235,13 @@ FROM json_table jt
 ![SerDe 查询 2][image-hdi-hivejson-serde_query2]  
 
 查找指定学生在哪些科目取得 80 以上的分数
-    SELECT  
-      jt.StudentClassCollection.ClassId
-    FROM json_table jt
-      lateral view explode(jt.StudentClassCollection.Score) collection as score  where score > 80;
+
+```
+SELECT  
+  jt.StudentClassCollection.ClassId
+FROM json_table jt
+  lateral view explode(jt.StudentClassCollection.Score) collection as score  where score > 80;
+```
 
 上述查询返回一个 Hive 数组，与 get\_json\_object 不同，后者返回一个字符串。
 
@@ -257,7 +260,6 @@ ALTER TABLE json_table SET SERDEPROPERTIES ( "ignore.malformed.json" = "true");
 
 * [将 Hive 和 HiveQL 与 HDInsight 中的 Hadoop 配合使用以分析示例 Apache log4j 文件](./hdinsight-use-hive.md)
 * [使用 HDInsight 中的 Hive 分析航班延误数据](./hdinsight-analyze-flight-delay-data.md)
-* [使用 HDInsight 中的 Hive 分析 Twitter 数据](./hdinsight-analyze-twitter-data.md)
 * [使用 DocumentDB 和 HDInsight 运行 Hadoop 作业](../documentdb/documentdb-run-hadoop-with-hdinsight.md)
 
 [hdinsight-python]: ./hdinsight-python.md
@@ -275,3 +277,4 @@ ALTER TABLE json_table SET SERDEPROPERTIES ( "ignore.malformed.json" = "true");
 [image-hdi-hivejson-serde_result]: ./media/hdinsight-using-json-in-hive/serde_result.png
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

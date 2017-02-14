@@ -31,6 +31,6 @@ wacn.date: 02/06/2017
 ### 另请参阅
 
 - [Power BI Embedded 入门](./power-bi-embedded-get-started.md)
-- [示例入门](./power-bi-embedded-get-started.md)
+- [示例入门](./power-bi-embedded-get-started-sample.md)
 
 <!---HONumber=Mooncake_1010_2016-->

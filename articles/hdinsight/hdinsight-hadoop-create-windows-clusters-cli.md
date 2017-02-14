@@ -34,8 +34,6 @@ ms.author: jgao
 * **Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 * **Azure CLI**。
 
-    [!INCLUDE [use-latest-version](../../includes/hdinsight-use-latest-cli.md)]
-
 ### 访问控制要求
 [!INCLUDE [access-control](../../includes/hdinsight-access-control-requirements.md)]
 
@@ -161,3 +159,4 @@ azure hdinsight cluster create -g myarmgroup01 -l chinanorth -y Windows --cluste
 * [将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure 服务管理配合使用](../virtual-machines-command-line-tools.md)
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

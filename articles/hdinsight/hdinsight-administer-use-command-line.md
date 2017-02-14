@@ -28,8 +28,6 @@ ms.author: jgao
 
 本文仅介绍如何将 Azure CLI 与 HDInsight 配合使用。有关如何使用 Azure CLI 的常规指南，请参阅[安装和配置 Azure CLI][azure-command-line-tools]。
 
-[!INCLUDE [use-latest-version](../../includes/hdinsight-use-latest-cli.md)]
-
 ## 先决条件
 在开始阅读本文前，你必须具有：
 
@@ -95,8 +93,8 @@ azure hdinsight cluster disable-http-access [options] <Cluster Name>
 
 ## 启用/禁用对群集的 RDP 访问
 ```
-  azure hdinsight cluster enable-rdp-access [options] <Cluster Name> <rdpUserName> <rdpPassword> <rdpExpiryDate>
-  azure hdinsight cluster disable-rdp-access [options] <Cluster Name>
+azure hdinsight cluster enable-rdp-access [options] <Cluster Name> <rdpUserName> <rdpPassword> <rdpExpiryDate>
+azure hdinsight cluster disable-rdp-access [options] <Cluster Name>
 ```
 
 ## 后续步骤
@@ -123,3 +121,4 @@ azure hdinsight cluster disable-http-access [options] <Cluster Name>
 [image-cli-clusterlisting]: ./media/hdinsight-administer-use-command-line/HDI.CLIListClusters.png "列出并显示群集"
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

@@ -19,10 +19,6 @@ wacn.date: 02/06/2017
 
 默认情况下，不会为了性能而优化 Hadoop 群集。本文介绍可对查询应用的几种最常见 Hive 性能优化方法。
 
-[!INCLUDE [门户预览](../../includes/hdinsight-azure-preview-portal.md)]
-
-* [在 Hdinsight 中优化 Hadoop 的 Hive 查询](./hdinsight-hadoop-optimize-hive-query.md)。
-
 ##向外缩放辅助节点
 
 增加群集中的辅助节点数目，即可利用更多并行运行的映射器和化简器。在 HDInsight 中，可通过两种方式增加扩大的数目：
@@ -31,7 +27,9 @@ wacn.date: 02/06/2017
 
     ![scaleout\_1][image-hdi-optimize-hive-scaleout_1]
 
-- 在运行时，也可以向外缩放群集，而无需重建群集。如下所示。![scaleout\_1][image-hdi-optimize-hive-scaleout_2]
+- 在运行时，也可以向外缩放群集，而无需重建群集。如下所示。
+
+    ![scaleout\_1][image-hdi-optimize-hive-scaleout_2]
 
 有关 HDInsight 支持的不同虚拟机的详细信息，请参阅 [HDInsight 定价](https://www.azure.cn/pricing/details/hdinsight/)。
 
@@ -223,7 +221,6 @@ set hive.vectorized.execution.enabled = true;
 
 - [使用 HDInsight 中的 Apache Hive](./hdinsight-use-hive.md)
 - [使用 HDInsight 中的 Hive 分析航班延误数据](./hdinsight-analyze-flight-delay-data.md)
-- [使用 HDInsight 中的 Hive 分析 Twitter 数据](./hdinsight-analyze-twitter-data.md)
 - [使用 HDInsight 中 Hadoop上的 Hive 查询控制台分析传感器数据](./hdinsight-hive-analyze-sensor-data.md)
 - [将 Hive 与 HDInsight 配合使用来分析来自网站的日志](./hdinsight-hive-analyze-website-log.md)
 

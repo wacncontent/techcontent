@@ -33,7 +33,7 @@ ms.author: jgao
 ## 先决条件
 在开始阅读本教程前，必须具备以下条件：
 
-* **Azure 订阅**：若要创建免费试用一个月的帐户，请浏览到 [azure.microsoft.com/free](https://azure.microsoft.com/free)。
+* **Azure 订阅**：若要创建免费试用一个月的帐户，请浏览到 [https://www.azure.cn/pricing/1rmb-trial/](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ### 访问控制要求
 [!INCLUDE [access-control](../../includes/hdinsight-access-control-requirements.md)]
@@ -42,7 +42,7 @@ ms.author: jgao
 
 大部分 Hadoop 作业都是批处理作业。你可以创建群集、运行某些作业，然后删除该群集。在此部分中，会使用 [Azure Resource Manager 模板](../azure-resource-manager/resource-group-template-deploy.md)在 HDInsight 中创建基于 Linux 的 Hadoop 群集。可以完全自定义 Resource Manager 模板；采用此模板，可以轻松创建 HDInsight 等 Azure 资源。对于遵循本教程，Resource Manager 模板体验不是必需的。对于其他群集创建方法以及了解本教程中使用的属性，请参阅[创建 HDInsight 群集](./hdinsight-hadoop-provision-linux-clusters.md)。使用页面顶部的选择器来选择群集创建选项。
 
-本教程中所用的 Resource Manager 模板位于 Github 中 (https://azure.microsoft.com/resources/templates/101-hdinsight-linux-ssh-password/)。
+本教程中所用的 Resource Manager 模板位于 Github 中 (https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password/)。
 
 1. 单击以下映像以登录到 Azure，然后在 Azure 门户预览中打开 Resource Manager 模板。
 
@@ -143,9 +143,9 @@ HDInsight 中使用的组件中，[Apache Hive](./hdinsight-use-hive.md) 最为�
 * 若要了解有关创建 HDInsight 群集时可选择的选项的详细信息，请参阅[使用自定义选项在 Linux 上创建 HDInsight](./hdinsight-hadoop-provision-linux-clusters.md)。
 * 如果熟悉 Linux 和 Hadoop，但想要了解有关 HDInsight 上 Hadoop 的具体信息，请参阅[使用 Linux 上的 HDInsight](./hdinsight-hadoop-linux-information.md)。这提供了如下信息：
 
-  * 群集上托管的服务（例如 Ambari 和 WebHCat）的 URL
-  * Hadoop 文件和示例在本地文件系统上的位置
-  * 使用 Azure 存储空间 (WASB) 而不是 HDFS 作为默认数据存储
+    * 群集上托管的服务（例如 Ambari 和 WebHCat）的 URL
+    * Hadoop 文件和示例在本地文件系统上的位置
+    * 使用 Azure 存储空间 (WASB) 而不是 HDFS 作为默认数据存储
 
 [1]: ./hdinsight-hadoop-visual-studio-tools-get-started.md
 

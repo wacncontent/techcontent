@@ -2,18 +2,19 @@
 title: 如何构建可使任何 Azure Active Directory 用户登录的应用程序 | Azure
 description: 有关如何构建一个可使用户从任何 Azure Active Directory 租户登录的应用程序（也称为多租户应用程序）的分步说明。
 services: active-directory
-documentationCenter: ''
-authors: skwan
+documentationcenter: ''
+author: skwan
 manager: mbaldwin
 editor: ''
 
+ms.assetid: 35af95cb-ced3-46ad-b01d-5d2f6fd064a3
 ms.service: active-directory
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 10/11/2016
-wacn.date: 11/21/2016
+ms.date: 01/07/2017
+wacn.date: 02/07/2017
 ms.author: skwan;bryanla
 ---
 
@@ -70,6 +71,8 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 > [!NOTE]
 > 尽管本机客户端应用程序从 Azure AD 请求并接收令牌，但它们这样做是为了将令牌发送到 API 来进行验证。本机应用程序不会验证令牌，并且必须将它们视为不透明。
+> 
+> 
 
 让我们看看应用程序如何验证它从 Azure AD 接收的令牌。单租户应用程序通常采用类似于下面的终结点值：
 
@@ -110,7 +113,7 @@ https://sts.chinacloudapi.cn/{tenantid}/
 ## 了解用户和管理员同意
 若要让用户登录 Azuer AD 中的某个应用程序，必须以用户租户的形式表示该应用程序。这样，组织便可以采取一些措施，例如，当其租户中的用户登录应用程序时应用唯一策略。对于单租户应用程序，此注册过程相当简单，也就是在 [Azure 经典管理门户][AZURE-classic-portal]中注册应用程序所采用的同一个过程。
 
-对于多租户应用程序，应用程序的初始注册过程是在开发人员使用的 Azure AD 租户中进行的。当来自不同租户的用户首次登录应用程序时，Azure AD 将要求他们同意应用程序所请求的权限。如果他们同意，系统将在用户的租户中创建一个称为*服务主体*的应用程序表示形式，然后登录可继续进行。系统还会在记录用户对应用程序的同意意向的目录中创建委托。有关应用程序的 Application 和 ServicePrincipal 对象的详细信息，请参阅 [Application Objects and Service Principal Objects][AAD-App-SP-Objects]（应用程序对象和服务主体对象）。
+对于多租户应用程序，应用程序的初始注册过程是在开发人员使用的 Azure AD 租户中进行的。当来自不同租户的用户首次登录应用程序时，Azure AD 将要求他们同意应用程序所请求的权限。如果他们同意，系统将在用户的租户中创建一个称为*服务主体*的应用程序表示形式，然后登录可继续进行。系统还会在记录用户对应用程序的同意意向的目录中创建委托。有关应用程序的 Application 和 ServicePrincipal 对象的详细信息，请参阅 [Application Objects and Service Principal Objects（应用程序对象和服务主体对象）][AAD-App-SP-Objects]。
 
 ![同意单层应用][Consent-Single-Tier]
 
@@ -135,7 +138,9 @@ https://sts.chinacloudapi.cn/{tenantid}/
 租户管理员可以禁用普通用户同意应用程序的能力。如果禁用此功能，则始终需要管理员同意，才能在租户中设置应用程序。如果想要在禁用普通用户同意的情况下测试应用程序，可以在 [Azure 经典管理门户][AZURE-classic-portal]的 Azure AD 租户配置部分中找到配置开关。
 
 > [!NOTE]
-> 某些应用程序想要提供一种体验，让普通用户能够一开始即表示同意，然后应用程序可让管理员参与操作并请求需要管理员同意的权限。目前在 Azure AD 中还没有任何办法可以使用单个应用程序注册来实现此目的。即将推出的 Azure AD v2 终结点可允许应用程序在运行时（而不是在注册时）请求权限，这样会使这种方案成为可能。有关详细信息，请参阅 [Azure AD App Model v2 Developer Guide][AAD-V2-Dev-Guide]（Azure AD 应用模型 v2 开发人员指南）。
+> 某些应用程序想要提供一种体验，让普通用户能够一开始即表示同意，然后应用程序可让管理员参与操作并请求需要管理员同意的权限。目前在 Azure AD 中还没有任何办法可以使用单个应用程序注册来实现此目的。即将推出的 Azure AD v2 终结点可允许应用程序在运行时（而不是在注册时）请求权限，这样会使这种方案成为可能。有关详细信息，请参阅 [Azure AD App Model v2 Developer Guide（Azure AD 应用模型 v2 开发人员指南）][AAD-V2-Dev-Guide]。
+> 
+> 
 
 ### 同意和多层应用程序
 应用程序可能有多个层，每一层由其自身在 Azure AD 中的注册来表示。例如，一个调用 Web API 的本机应用程序，或者一个调用 Web API 的 Web 应用程序。在这两种情况下，客户端（本机应用或 Web 应用）将请求调用资源 (Web API) 的权限。要让客户端成功获得客户同意添加到其租户中，请求权限的所有资源必须都已在于客户的租户中。如果不符合此条件，Azuer AD 将返回错误，指出必须先添加资源。
@@ -189,7 +194,7 @@ knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
 [AAD-App-Manifest]: ./active-directory-application-manifest.md
 [AAD-App-SP-Objects]: ./active-directory-application-objects.md
 [AAD-Auth-Scenarios]: ./active-directory-authentication-scenarios.md
-[AAD-Consent-Overview]: ./active-directory-integrating-applications.md
+[AAD-Consent-Overview]: ./active-directory-integrating-applications.md#overview-of-the-consent-framework/
 [AAD-Dev-Guide]: ./active-directory-developers-guide.md
 [AAD-Graph-Overview]: ./active-directory-graph-api.md
 [AAD-Graph-Perm-Scopes]: https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/howto/azure-ad-graph-api-permission-scopes
@@ -231,4 +236,5 @@ knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
 [OpenIDConnect]: http://openid.net/specs/openid-connect-core-1_0.html
 [OpenIDConnect-ID-Token]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
 
-<!---HONumber=Mooncake_1024_2016-->
+<!---HONumber=Mooncake_0120_2017-->
+<!---Update_Description: wording update -->

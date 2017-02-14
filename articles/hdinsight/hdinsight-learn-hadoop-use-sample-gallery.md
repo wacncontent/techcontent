@@ -11,8 +11,8 @@ manager: paulettm
 editor: cgronlun
 
 ms.service: hdinsight
-ms.date: 02/04/2016
-wacn.date: 02/06/2017
+ms.date: 10/21/2016
+wacn.date: 02/14/2017
 ---
 
 # 使用 Azure HDInsight 入门库了解 Hadoop
@@ -30,11 +30,7 @@ wacn.date: 02/06/2017
 
 ![包括示例数据的 HDInsight Hadoop、Storm 和 HBase 入门库解决方案。][hdinsight.sample.gallery]
 
-以下视频演示了如何运行 Twitter 趋势分析示例：
-
-<center><a href="https://www.youtube.com/embed/7ePbHot1SN4">https://www.youtube.com/embed/7ePbHot1SN4></a></center>
-
-可以通过浏览至 http://<YourHDInsightClusterName>.azurehdinsight.cn/ 或从 Azure 经典管理门户访问仪表板。
+可以通过浏览至 http://\<YourHDInsightClusterName\>.azurehdinsight.cn/ 或从 Azure 经典管理门户访问仪表板。
 
 **从入门库运行示例**
 

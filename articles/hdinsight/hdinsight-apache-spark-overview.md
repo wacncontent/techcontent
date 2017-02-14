@@ -44,9 +44,8 @@ Azure HDInsight 提供完全托管的 Spark 服务。在 HDInsight 上使用 Spa
 | 易于使用 |HDInsight 群集中的 Spark 包含预先配置的 Jupyter 笔记本。你可以使用这些笔记本执行交互式数据处理和可视化。Jupyter 笔记本的 URL 是 https://CLUSTERNAME.azurehdinsight.cn/jupyter。将 **CLUSTERNAME** 替换为 Spark HDInsight 群集的名称。 |
 | REST API |HDInsight 中的 Spark 包含 [Livy](https://github.com/cloudera/hue/tree/master/apps/spark/java#welcome-to-livy-the-rest-spark-server)，它是基于 REST-API 的 Spark 作业服务器，用于远程提交和监视正在运行的作业。 |
 | 支持 Azure 数据湖存储 |可将 HDInsight 上的 Spark 配置为使用 Azure Data Lake Store 作为附加存储和主存储（仅适用于 HDInsight 3.5 群集）。 |
-| 与 Azure 服务集成 |HDInsight 上的 Spark 随附了 Azure 事件中心的连接器。除了 Spark 提供的 [Kafka](http://kafka.apache.org/) 之外，客户还可以使用事件中心来生成流式处理应用程序。 |
+| 与 Azure 服务集成 |HDInsight 上的 Spark 随附了 Azure 事件中心的连接器。客户还可以使用事件中心来生成流式处理应用程序。 |
 | 支持 R Server |可以在 HDInsight Spark 群集上设置 R Server，以 Spark 群集承诺的速度运行分布式 R 计算。有关详细信息，请参阅[开始使用 HDInsight 上的 R Server](./hdinsight-hadoop-r-server-get-started.md)。 |
-| 与 IntelliJ IDEA 集成 |可以使用 IntelliJ 的 HDInsight 插件来创建应用程序，并将应用程序提交到 HDInsight Spark 群集。有关详细信息，请参阅[使用 IntelliJ IDEA 的 HDInsight 工具插件为 HDInsight Spark Linux 群集创建 Spark 应用程序](./hdinsight-apache-spark-intellij-tool-plugin.md)。 |
 | 并发查询 |HDInsight 中的 Spark 支持并发查询。它允许一个用户运行多个查询，或者不同的用户运行多个查询，以及让应用程序共享相同的群集资源。 |
 | SSD 缓存 |你可以选择将数据缓存在内存中，或缓存在已附加到群集节点的 SSD 中。内存缓存提供最佳的查询性能，但可能费用不菲；SSD 缓存是改善查询性能的绝佳选项，而且你不需要根据内存中的整个数据集创建满足其需求的群集规模。 |
 | 与 BI 工具集成 |HDInsight 上的 Spark 提供用于数据分析的 BI 工具（如[Power BI](http://www.powerbi.com/) 和 [Tableau](http://www.tableau.com/products/desktop)）连接器。 |
@@ -70,7 +69,7 @@ Apache Spark 随附 [MLlib](http://spark.apache.org/mllib/) - 构建在 Spark �
 ### 流式处理和实时数据分析
 [观看教程](./hdinsight-apache-spark-eventhub-streaming.md)
 
-不论是通过在数据抵达时进行处理来缩短获取数据见解的时间，或是生成真正的流式处理解决方案，这些方案都在实时数据分析的适用范围内。HDInsight 中的 Spark 提供丰富的支持供你生成实时分析解决方案。尽管 Spark 已随附从 Kafka、Flume、Twitter、ZeroMQ 或 TCP 套接字等众多来源引入数据的连接器，但 HDInsight 中的 Spark 增加了一流的支持，供你从 Azure 事件中心引入数据。事件中心是 Azure 上最广泛使用的队列服务。拥有立即可用的事件中心支持，让 HDInsight 中的 Spark 成为生成实时分析管道的理想平台。
+不论是通过在数据抵达时进行处理来缩短获取数据见解的时间，或是生成真正的流式处理解决方案，这些方案都在实时数据分析的适用范围内。HDInsight 中的 Spark 提供丰富的支持供你生成实时分析解决方案。尽管 Spark 已随附从 Flume、Twitter、ZeroMQ 或 TCP 套接字等众多来源引入数据的连接器，但 HDInsight 中的 Spark 增加了一流的支持，供你从 Azure 事件中心引入数据。事件中心是 Azure 上最广泛使用的队列服务。拥有立即可用的事件中心支持，让 HDInsight 中的 Spark 成为生成实时分析管道的理想平台。
 
 ## <a name="next-steps"></a>Spark 群集包含哪些组件？
 默认情况下，HDInsight 中的 Spark 可通过群集提供以下组件。
@@ -95,8 +94,6 @@ HDInsight 中的 Spark 还提供 [ODBC 驱动程序](http://go.microsoft.com/fwl
 * [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展
-* [使用适用于 IntelliJ IDEA 的 HDInsight 工具插件创建和提交 Spark Scala 应用程序](./hdinsight-apache-spark-intellij-tool-plugin.md)
-* [Use HDInsight Tools Plugin for IntelliJ IDEA to debug Spark applications remotely（使用 IntelliJ IDEA 的 HDInsight 工具插件远程调试 Spark 应用程序）](./hdinsight-apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
 * [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](./hdinsight-apache-spark-use-zeppelin-notebook.md)
 * [在 HDInsight 的 Spark 群集中可用于 Jupyter 笔记本的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)
 * [Use external packages with Jupyter notebooks（将外部包与 Jupyter 笔记本配合使用）](./hdinsight-apache-spark-jupyter-notebook-use-external-packages.md)

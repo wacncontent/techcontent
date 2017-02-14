@@ -37,17 +37,15 @@ ms.author: larryfr
 * **Azure SQL 数据库**。你将使用 Azure SQL 数据库作为目标数据存储。如果没有 SQL 数据库，请参阅 [SQL 数据库教程：几分钟内即可创建 SQL 数据库](../sql-database/sql-database-get-started.md)。
 * **Azure CLI**。如果你尚未安装 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md) 了解详细步骤。
 
-    [!INCLUDE [use-latest-version](../../includes/hdinsight-use-latest-cli.md)]
-
 ## 下载航班数据
 1. 浏览到[美国研究与技术创新管理部门 - 运输统计局][rita-website]。
 2. 在该页面上，选择以下值：
 
-   | 名称 | 值 | 
-   | --- | --- | 
-   | 筛选年份 |2013 | 
-   | 筛选期间 |1 月 | 
-   | 字段 |Year、FlightDate、UniqueCarrier、Carrier、FlightNum、OriginAirportID、Origin、OriginCityName、OriginState、DestAirportID、Dest、DestCityName、DestState、DepDelayMinutes、ArrDelay、ArrDelayMinutes、CarrierDelay、WeatherDelay、NASDelay、SecurityDelay、LateAircraftDelay。清除所有其他字段 |
+    | 名称 | 值 | 
+    | --- | --- | 
+    | 筛选年份 |2013 | 
+    | 筛选期间 |1 月 | 
+    | 字段 |Year、FlightDate、UniqueCarrier、Carrier、FlightNum、OriginAirportID、Origin、OriginCityName、OriginState、DestAirportID、Dest、DestCityName、DestState、DepDelayMinutes、ArrDelay、ArrDelayMinutes、CarrierDelay、WeatherDelay、NASDelay、SecurityDelay、LateAircraftDelay。清除所有其他字段 |
 3. 单击“下载”。
 
 ## 上载数据
@@ -59,10 +57,10 @@ ms.author: larryfr
 
     将 **FILENAME** 替换为 zip 文件的名称。将 **USERNAME** 替换为 HDInsight 群集的 SSH 登录名。将 CLUSTERNAME 替换为 HDInsight 群集的名称。
 
-   > [!NOTE]
-   如果你使用密码对 SSH 登录名进行身份验证，则系统将提示你输入密码。如果你使用了公钥，则可能需要使用 `-i` 参数并指定匹配私钥的路径。例如，`scp -i ~/.ssh/id_rsa FILENAME.csv USERNAME@CLUSTERNAME-ssh.azurehdinsight.cn:`。
-   > 
-   > 
+    > [!NOTE]
+    如果你使用密码对 SSH 登录名进行身份验证，则系统将提示你输入密码。如果你使用了公钥，则可能需要使用 `-i` 参数并指定匹配私钥的路径。例如，`scp -i ~/.ssh/id_rsa FILENAME.csv USERNAME@CLUSTERNAME-ssh.azurehdinsight.cn:`。
+    > 
+    > 
 2. 上载完成后，使用 SSH 连接到群集：
 
     ```
@@ -71,8 +69,8 @@ ms.author: larryfr
 
     有关将 SSH 与基于 Linux 的 HDInsight 配合使用的详细信息，请参阅以下文章：
 
-   * [在 Linux、Unix 或 OS X 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
-   * [在 Windows 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-windows.md)
+    * [在 Linux、Unix 或 OS X 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
+    * [在 Windows 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-windows.md)
 3. 连接后，使用以下命令来解压缩 .zip 文件：
 
     ```
@@ -82,8 +80,10 @@ ms.author: larryfr
     它将提取大小约为 60MB 的 .csv 文件。
 4. 使用以下命令在 WASB（由 HDInsight 使用的分布式数据存储）上创建一个新目录并复制该文件：
 
+    ```
     hdfs dfs -mkdir -p /tutorials/flightdelays/data
     hdfs dfs -put FILENAME.csv /tutorials/flightdelays/data/
+    ```
 
 ## 创建并运行 HiveQL
 使用以下步骤将 CSV 文件中的数据导入到名为 **Delays** 的 Hive 表中。
@@ -162,10 +162,10 @@ ms.author: larryfr
     beeline -u 'jdbc:hive2://localhost:10001/;transportMode=http' -n admin -f flightdelays.hql
     ```
 
-   > [!NOTE]
-   在此示例中，由于已连接到运行 HiveServer2 的 HDInsight 群集的头节点，因此使用 `localhost`。
-   > 
-   > 
+    > [!NOTE]
+    在此示例中，由于已连接到运行 HiveServer2 的 HDInsight 群集的头节点，因此使用 `localhost`。
+    > 
+    > 
 4. 使用以下命令打开交互式 Beeline 会话：
 
     ```

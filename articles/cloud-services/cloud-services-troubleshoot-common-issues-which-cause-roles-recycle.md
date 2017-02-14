@@ -68,7 +68,7 @@ Azure 是一个 64 位的环境。因此，针对 32 位目标编译的 .NET 程
 
 若要在 SSL 下运行 Web 角色，必须确保导出的管理证书包含私钥。如果使用 *Windows 证书管理器*来导出证书，请务必对“导出私钥”选项选择“是”。该证书必须以 PFX 格式导出，这是当前支持的唯一格式。
 
-[RoleEntryPoint]: https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleentrypoint.aspx
+[RoleEntryPoint]: https://msdn.microsoft.com/library/en-us/Ee758619.aspx
 [OnStart]: https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx
 [OnStop]: https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleentrypoint.onstop.aspx
 [Run]: https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleentrypoint.run.aspx

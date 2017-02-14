@@ -168,8 +168,8 @@ _hdiManagementClient.Clusters.DeleteAsync("<Resource Group Name>", "<Cluster Nam
 
     可以使用两种方法来完成重新平衡操作：
 
-  * Storm Web UI
-  * 命令行界面 (CLI) 工具
+    * Storm Web UI
+    * 命令行界面 (CLI) 工具
 
     有关更多详细信息，请参阅 [Apache Storm 文档](http://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html)。
 
@@ -254,7 +254,7 @@ foreach (var key in results.Configuration.Keys)
 
 **提交 Hive 作业**
 
-请参阅[使用 .NET SDK 运行 Hive 查询）](./hdinsight-hadoop-use-hive-dotnet-sdk.md)。
+请参阅[使用 .NET SDK 运行 Hive 查询](./hdinsight-hadoop-use-hive-dotnet-sdk.md)。
 
 **提交 Pig 作业**
 
@@ -297,3 +297,4 @@ foreach (var key in results.Configuration.Keys)
 [hdinsight-flight]: ./hdinsight-analyze-flight-delay-data.md
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

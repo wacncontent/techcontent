@@ -1,30 +1,31 @@
 ---
-title: 与安全边界环境配合使用的示例应用程序 | Azure
-description: 在创建外围网络后部署这一简单 Web 应用，以测试流量传送方案
+title: 适用于外围网络的 Azure 示例应用程序 | Azure
+description: 在创建外围网络后部署这一简单 Web 应用程序，以测试流量传送方案
 services: virtual-network
-documentationCenter: na
-authors: tracsman
+documentationcenter: na
+author: tracsman
 manager: rossort
 editor: ''
 
+ms.assetid: 60340ab7-b82b-40e0-bd87-83e41fe4519c
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/01/2016
-wacn.date: 12/26/2016
+ms.date: 01/03/2017
+wacn.date: 02/10/2017
 ms.author: jonor
 ---
 
-# 与安全边界环境配合使用的示例应用程序
+# 适用于外围网络的示例应用程序
 
-这些 PowerShell 脚本可以在 IIS01 和 AppVM01 服务器本地上运行，用于安装和设置极简单的 Web 应用程序，显示来自前端 IIS01 服务器的 HTML 页面和来自后端 AppVM01 服务器的内容。
+这些 PowerShell 脚本可以在 IIS01 和 AppVM01 服务器本地上运行，用于安装和设置简单的 Web 应用程序，显示来自前端 IIS01 服务器的 HTML 页面和来自后端 AppVM01 服务器的内容。
 
-此应用程序提供简单的测试环境，可测试许多外围网络示例，以及终结点、NSG、UDR 及防火墙规则的更改如何影响流量。
+此应用程序提供简单的测试环境，可测试许多外围网络示例，以及终结点、NSG、UDR 和防火墙规则的更改如何影响流量。
 
 ## 允许 ICMP 的防火墙规则
-这个简单的 PowerShell 语句可以在任何 Windows VM 上运行，以允许 ICMP (Ping) 流量。这将允许 ping 协议通过 Windows 防火墙，从而更轻松地进行测试和疑难解答（ICMP 在多数的 Linux 分发版上默认为打开）。
+这个简单的 PowerShell 语句可以在任何 Windows VM 上运行，以允许 ICMP (Ping) 流量。此防火墙更新将允许 ping 协议通过 Windows 防火墙，从而更轻松地进行测试和疑难解答（ICMP 在多数的 Linux 分发版上默认为打开）。
 
 ```
 # Turn On ICMPv4
@@ -32,7 +33,7 @@ New-NetFirewallRule -Name Allow_ICMPv4 -DisplayName "Allow ICMPv4" `
     -Protocol ICMPv4 -Enabled True -Profile Any -Action Allow
 ```
 
-**注意：**如果使用以下脚本，添加的这一防火墙规则是第一个语句。
+如果使用以下脚本，则第一个语句是添加这一防火墙规则。
 
 ## IIS01 - Web 应用程序安装脚本
 此脚本将执行以下操作：
@@ -145,13 +146,15 @@ New-NetFirewallRule -Name Allow_ICMPv4 -DisplayName "Allow ICMPv4" `
 此脚本设置此简单应用程序的后端。此脚本将执行以下操作：
 
 1. 在防火墙上打开 IMCPv4 (Ping) 以方便测试
-2. 创建新目录
-3. 创建上述网页要远程访问的文本文件
+2. 为网站创建目录
+3. 创建网页要远程访问的文本文件
 4. 将目录和文件的权限设为匿名以允许访问
-5. 关闭 IE 增强的安全性以方便从此服务器浏览 
+5. 关闭 IE 增强的安全性以方便从此服务器浏览
 
->[!IMPORTANT]
-> **最佳实践**：切勿在生产服务器上关闭“IE 增强的安全性”，并且通常不应从生产服务器浏览网页。此外，最好不要向匿名访问公开文件共享，此处这样做是为了简单起见。
+> [!IMPORTANT]
+**最佳实践**：切勿在生产服务器上关闭“IE 增强的安全性”，并且通常不应从生产服务器浏览网页。此外，最好不要向匿名访问公开文件共享，此处这样做是为了简单起见。
+> 
+> 
 
 通过 RDP 访问 AppVM01 时，此 PowerShell 脚本应在本地运行。必须以管理员身份运行 PowerShell 才能确保成功执行。
 
@@ -182,14 +185,21 @@ New-NetFirewallRule -Name Allow_ICMPv4 -DisplayName "Allow ICMPv4" `
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}" -Name "IsInstalled" -Value 0
 
     Write-Host
-    Write-Host "File Server Setup Successfull!" -ForegroundColor Green
+    Write-Host "File Server Set up Successfull!" -ForegroundColor Green
     Write-Host
 ```
 
 ## DNS01 - DNS 服务器安装脚本
-本示例应用程序中未包含设置 DNS 服务器的脚本。如果测试防火墙规则、NSG 或 UDR 需要包含 DNS 流量，则需手动安装 DNS01 服务器。这两个示例的网络配置 XML 文件都包含 DNS01 作为主要 DNS 服务器，且包含第 3 级托管的公共 DNS 服务器则作为备份 DNS 服务器。第 3 级 DNS 服务器是非本地流量使用的实际 DNS 服务器，若未安装 DNS01，就不会有本地 DNS。
+本示例应用程序中未包含设置 DNS 服务器的脚本。如果测试防火墙规则、NSG 或 UDR 需要包含 DNS 流量，则需手动安装 DNS01 服务器。这两个示例的网络配置 XML 文件和 Resource Manager 模板都包含 DNS01 作为主要 DNS 服务器，且包含第 3 级托管的公共 DNS 服务器则作为备份 DNS 服务器。第 3 级 DNS 服务器是非本地流量使用的实际 DNS 服务器，若未安装 DNS01，就不会有本地网络 DNS。
+
+## 后续步骤
+* 在 IIS 服务器上运行 IIS01 脚本
+* 在 AppVM01 上运行文件服务器脚本
+* 浏览到 IIS01 上的公共 IP，验证你的生成
 
 <!--Link References-->
+
 [HOME]: ../security/best-practices-network-security.md
 
-<!---HONumber=Mooncake_Quality_Review_1215_2016-->
+<!---HONumber=Mooncake_0206_2017-->
+<!--Update_Description: wording update-->

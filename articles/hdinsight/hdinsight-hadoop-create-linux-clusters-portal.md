@@ -57,9 +57,6 @@ Azure 门户预览会公开大部分的群集属性。使用 Azure Resource Mana
         > 
     * **操作系统**：选择“Linux”。
     * **版本**：如果不知道要选择哪个版本，请使用默认版本。有关详细信息，请参阅 [HDInsight 群集版本](./hdinsight-component-versioning.md)。
-    * **群集层**：Azure HDInsight 提供两个类别的大数据云产品：标准层和高级层。有关详细信息，请参阅[群集层](./hdinsight-hadoop-provision-linux-clusters.md#cluster-tiers)。
-
-        ![HDInsight 高级层配置](./media/hdinsight-hadoop-create-linux-cluster-portal/hdinsight-cluster-type-configuration.png)  
 
 6. 单击“应用程序”以安装适用于 HDInsight 群集的应用程序。这些应用程序可能是 Microsoft、独立软件供应商 (ISV) 或你自己开发的。有关详细信息，请参阅[安装 HDInsight 应用程序](./hdinsight-apps-install-applications.md#install-applications-during-cluster-creation)。
 
@@ -97,7 +94,7 @@ Azure 门户预览会公开大部分的群集属性。使用 Azure Resource Mana
 
     > [!IMPORTANT]
     如果你计划使用 32 个以上的工作节点（在创建群集时或是在创建之后通过扩展群集进行），则必须选择至少具有 8 个核心和 14GB ram 的头节点大小。
-    > 
+    > <p>
     > 有关节点大小和相关费用的详细信息，请参阅 [HDInsight 定价](https://www.azure.cn/pricing/details/hdinsight/)。
     > 
     > 

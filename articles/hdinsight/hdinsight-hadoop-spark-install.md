@@ -8,8 +8,8 @@ manager: paulettm
 editor: cgronlun
 
 ms.service: hdinsight
-ms.date: 07/11/2015
-wacn.date: 02/06/2017
+ms.date: 02/05/2016
+wacn.date: 02/14/2017
 ---
 
 # 在 HDInsight Hadoop 群集上安装并使用 Spark

@@ -1,4 +1,5 @@
 <!-- Remove data-factory -->
+
 ---
 title: Azure SQL 数据仓库最佳实践 | Azure
 description: 开发 Azure SQL 数据仓库解决方案时应了解的建议和最佳实践。这些内容可帮助你取得成功。

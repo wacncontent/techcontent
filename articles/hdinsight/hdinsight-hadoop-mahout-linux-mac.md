@@ -246,7 +246,7 @@ hdfs dfs -rm -f -r /temp/mahouttemp
 
 > [!WARNING]
 如需再次运行此命令，则还必须删除输出目录。使用以下命令删除此目录：
-> 
+> <p>
 > ```hdfs dfs -rm -f -r /example/data/mahoutout```  
 
 ## 后续步骤

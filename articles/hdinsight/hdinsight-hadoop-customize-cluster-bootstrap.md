@@ -264,3 +264,4 @@ Get-AzureRmHDInsightCluster -ClusterName $hdinsightClusterName
 ```
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

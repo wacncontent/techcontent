@@ -36,7 +36,7 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。该系统�
 
     > [!IMPORTANT]
     Azure PowerShell 对于使用 Azure Service Manager 管理 HDInsight 资源的支持已**弃用**，将于 2017 年 1 月 1 日删除。本文档中的步骤使用的是与 Azure Resource Manager 兼容的新 HDInsight cmdlet。
-    >
+    ><p>
     > 请按照 [Install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（安装和配置 Azure PowerShell）中的步骤安装最新版 Azure PowerShell。如果脚本需要修改才能使用与 Azure Resource Manager 配合工作的新 cmdlet，请参阅[迁移到适用于 HDInsight 群集的基于 Azure Resource Manager 的开发工具](./hdinsight-hadoop-development-using-azure-resource-manager.md)，了解详细信息。
 
 * **HDInsight 群集**：请参阅 [Linux 上的 HDInsight 入门](./hdinsight-hadoop-linux-tutorial-get-started.md)
@@ -116,7 +116,7 @@ hdfs dfs -copyFromLocal /usr/share/java/sqljdbc_4.1/enu/sqljdbc*.jar /tutorials/
     * **${hiveTableName}**：包含要创建的表的名称
     * **${hiveDataFolder}**：包含表数据文件的存储位置
 
-     工作流定义文件（本教程中的 workflow.xml）在运行时会将三个值传递到这个 HiveQL 脚本。
+        工作流定义文件（本教程中的 workflow.xml）在运行时会将三个值传递到这个 HiveQL 脚本。
 4. 按 Ctrl-X 退出编辑器。出现提示时，请选择“Y”保存文件，然后按 **Enter** 以使用 **useooziewf.hql** 文件名。
 5. 使用以下命令将 **useooziewf.hql** 复制到 **wasbs:///tutorials/useoozie/useooziewf.hql**：
 
@@ -177,7 +177,7 @@ Oozie 工作流定义是用 hPDL（一种 XML 过程定义语言）编写的。�
             <arg>1</arg>
             <arg>--input-fields-terminated-by</arg>
             <arg>"\t"</arg>
-    <archive>sqljdbc41.jar</archive>
+            <archive>sqljdbc41.jar</archive>
             </sqoop>
         <ok to="end"/>
         <error to="fail"/>
@@ -194,14 +194,14 @@ Oozie 工作流定义是用 hPDL（一种 XML 过程定义语言）编写的。�
     * **RunHiveScript**：这是启动操作，运行 **useooziewf.hql** Hive 脚本
     * **RunSqoopExport**：此操作使用 Sqoop 将创建的数据从 Hive 脚本导出到 SQL 数据库。仅当 **RunHiveScript** 操作成功时才运行此操作。
 
-     > [!NOTE]
-     有关 Oozie 工作流和使用工作流操作的详细信息，请参阅 [Apache Oozie 4.0 文档][apache-oozie-400]（适用于 HDInsight 3.0 版）或 [Apache Oozie 3.3.2 文档][apache-oozie-332]（适用于 HDInsight 2.1 版）。
-     >
-     >
+        > [!NOTE]
+        有关 Oozie 工作流和使用工作流操作的详细信息，请参阅 [Apache Oozie 4.0 文档][apache-oozie-400]（适用于 HDInsight 3.0 版）或 [Apache Oozie 3.3.2 文档][apache-oozie-332]（适用于 HDInsight 2.1 版）。
+        >
+        >
 
-     请注意，工作流包含多个条目，例如 `${jobTracker}`，它将替换为本文档稍后的作业定义中使用的值。
+        请注意，工作流包含多个条目，例如 `${jobTracker}`，它将替换为本文档稍后的作业定义中使用的值。
 
-     另请注意 Sqoop 节中的 `<archive>sqljdbc4.jar</arcive>` 条目。该条目指示在运行此操作时 Oozie 要将此存档提供给 Sqoop 使用。
+        另请注意 Sqoop 节中的 `<archive>sqljdbc4.jar</arcive>` 条目。该条目指示在运行此操作时 Oozie 要将此存档提供给 Sqoop 使用。
 3. 依次按 Ctrl-X、**Y** 和 **Enter** 以保存文件。
 4. 使用以下命令将 **workflow.xml** 文件复制到 **wasbs:///tutorials/useoozie/workflow.xml**：
 
@@ -366,20 +366,20 @@ Oozie 工作流定义是用 hPDL（一种 XML 过程定义语言）编写的。�
 
     * 将 **wasbs://mycontainer@mystorageaccount.blob.core.chinacloudapi.cn** 的所有实例替换为前面收到的值。
 
-     > [!WARNING]
-     必须使用完整的 WASB 路径，其中包含容器和存储帐户作为路径的一部分。如果使用短格式 (wasbs:///)，则在作业启动时会导致 RunHiveScript 操作失败。
-     >
-     >
+        > [!WARNING]
+        必须使用完整的 WASB 路径，其中包含容器和存储帐户作为路径的一部分。如果使用短格式 (wasbs:///)，则在作业启动时会导致 RunHiveScript 操作失败。
+        >
+        >
     * 将 **JOBTRACKERADDRESS** 替换为前面收到的 JobTracker/ResourceManager 地址。
     * 将 **YourName** 替换为 HDInsight 群集的登录名。
     * 将 **serverName**、**adminLogin** 和 **adminPassword** 替换为 Azure SQL 数据库的信息。
 
-     此文件中的大多数信息用于填充 workflow.xml 或 ooziewf.hql 文件中使用的值（例如 ${nameNode}）。
+        此文件中的大多数信息用于填充 workflow.xml 或 ooziewf.hql 文件中使用的值（例如 ${nameNode}）。
 
-     > [!NOTE]
-     **oozie.wf.application.path** 条目定义要在何处查找 workflow.xml 文件，该文件包含此作业运行的工作流。
-     >
-     >
+        > [!NOTE]
+        **oozie.wf.application.path** 条目定义要在何处查找 workflow.xml 文件，该文件包含此作业运行的工作流。
+        >
+        >
 5. 依次按 Ctrl-X、**Y** 和 **Enter** 以保存文件。
 
 ## 提交和管理作业
@@ -516,11 +516,11 @@ Oozie Web UI 提供基于 Web 的视图来显示群集上 Oozie 作业的状态�
 
     * **作业日志**：选择“获取日志”按钮获取作业的所有日志，或使用“输入搜索条件”字段来筛选日志
 
-       ![作业日志](./media/hdinsight-use-oozie-linux-mac/joblog.png)  
+        ![作业日志](./media/hdinsight-use-oozie-linux-mac/joblog.png)  
 
     * **JobDAG**：DAG 是整个工作流中使用的数据路径的图形概览
 
-       ![作业 DAG](./media/hdinsight-use-oozie-linux-mac/jobdag.png)  
+        ![作业 DAG](./media/hdinsight-use-oozie-linux-mac/jobdag.png)  
 
 7. 在“作业信息”选项卡中选择一个操作会显示有关该操作的信息。例如，选择 **RunHiveScript** 操作。
 
@@ -575,35 +575,39 @@ Oozie Web UI 提供基于 Web 的视图来显示群集上 Oozie 作业的状态�
     * 将 `<name>oozie.wf.application.path</name>` 更改为 `<name>oozie.coord.application.path</name>`。这会指示 Oozie 运行协调器文件，而不是工作流文件
     * 添进行下内容，以将 coordinator.xml 中使用的变量设置为指向 workflow.xml 的位置：
 
-           <property>
-             <name>workflowPath</name>
-             <value>wasbs://mycontainer@mystorageaccount.blob.core.chinacloudapi.cn/tutorials/useoozie</value>
-           </property>
+        ```
+        <property>
+         <name>workflowPath</name>
+         <value>wasbs://mycontainer@mystorageaccount.blob.core.chinacloudapi.cn/tutorials/useoozie</value>
+        </property>
+        ```
 
-       将 **mycontainer** 和 **mystorageaccount** 的值替换为 job.xml 文件中其他条目使用的值。
+        将 **mycontainer** 和 **mystorageaccount** 的值替换为 job.xml 文件中其他条目使用的值。
     * 添加以下内容，以定义 coordinator.xml 文件使用的开始时间、结束时间和频率：
 
-           <property>
-             <name>coordStart</name>
-             <value>2015-06-25T12:00Z</value>
-           </property>
+        ```
+        <property>
+         <name>coordStart</name>
+         <value>2015-06-25T12:00Z</value>
+        </property>
 
-           <property>
-             <name>coordEnd</name>
-             <value>2015-06-27T12:00Z</value>
-           </property>
+        <property>
+         <name>coordEnd</name>
+         <value>2015-06-27T12:00Z</value>
+        </property>
 
-           <property>
-             <name>coordFrequency</name>
-             <value>1440</value>
-           </property>
+        <property>
+         <name>coordFrequency</name>
+         <value>1440</value>
+        </property>
 
-           <property>
-             <name>coordTimezone</name>
-             <value>UTC</value>
-           </property>
+        <property>
+         <name>coordTimezone</name>
+         <value>UTC</value>
+        </property>
+        ```
 
-       这会将开始时间设置为 2015 年 6 月 25 日中午 12:00、将结束时间设置为 2015 年 6 月 27 日，将运行此作业的间隔设置为每日（频率是以分钟为单位，因此 24 小时 x 60 分钟 = 1440 分钟）。 最后，将时区设置为 UTC。
+        这会将开始时间设置为 2015 年 6 月 25 日中午 12:00、将结束时间设置为 2015 年 6 月 27 日，将运行此作业的间隔设置为每日（频率是以分钟为单位，因此 24 小时 x 60 分钟 = 1440 分钟）。 最后，将时区设置为 UTC。
 5. 依次按 Ctrl-X、**Y** 和 **Enter** 以保存文件。
 6. 若要运行作业，请使用以下命令：
 
@@ -683,11 +687,13 @@ Launcher ERROR, reason: Main class [org.apache.oozie.action.hadoop.SqoopMain], e
 1. 将 sqljdbc4.1.jar 文件复制到 /tutorials/useoozie 目录：
 
     ```
-     hadoop fs -copyFromLocal /usr/share/java/sqljdbc_4.1/enu/sqljdbc41.jar /tutorials/useoozie/sqljdbc41.jar
+    hadoop fs -copyFromLocal /usr/share/java/sqljdbc_4.1/enu/sqljdbc41.jar /tutorials/useoozie/sqljdbc41.jar
     ```
 2. 修改 workflow.xml，在 `</sqoop>` 上方的新行中添加以下内容：
 
-        <archive>sqljdbc41.jar</archive>
+    ```
+    <archive>sqljdbc41.jar</archive>
+    ```
 
 ## 后续步骤
 在本教程中，你已经学习了如何定义 Oozie 工作流，以及如何运行 Oozie 作业。若要了解有关使用 HDInsight 的详细信息，请参阅以下文章：

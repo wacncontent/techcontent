@@ -1,4 +1,5 @@
 <!-- Remove script center in ACOM -->
+
 ---
 title: 使用 Windows PowerShell 脚本发布到开发和测试环境 | Azure
 description: 了解如何使用 Windows PowerShell 脚本通过 Visual Studio 发布到开发和测试环境。

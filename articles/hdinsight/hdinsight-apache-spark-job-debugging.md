@@ -11,8 +11,8 @@ editor: cgronlun
 tags: azure-portal
 
 ms.service: hdinsight
-ms.date: 06/06/2016
-wacn.date: 02/06/2017
+ms.date: 08/25/2016
+wacn.date: 02/14/2017
 ---
 
 # 跟踪和调试 HDInsight Linux 中的 Apache Spark 群集上运行的作业
@@ -121,10 +121,6 @@ wacn.date: 02/06/2017
 * [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展
-
-* [使用适用于 IntelliJ IDEA 的 HDInsight 工具插件创建和提交 Spark Scala 应用程序](./hdinsight-apache-spark-intellij-tool-plugin.md)
-
-* [Use HDInsight Tools Plugin for IntelliJ IDEA to debug Spark applications remotely](./hdinsight-apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)（使用 IntelliJ IDEA 的 HDInsight 工具插件远程调试 Spark 应用程序）
 
 * [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](./hdinsight-apache-spark-use-zeppelin-notebook.md)
 

@@ -157,3 +157,4 @@ ms.author: larryfr
 * [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->
+<!--Update_Description: update from ASM to ARM-->

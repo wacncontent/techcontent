@@ -1,4 +1,5 @@
 <!-- Remove Visual Studio temprorily, doc added next time -->
+
 ---
 title: 查询 Azure SQL 数据仓库 (sqlcmd)| Azure
 description: 使用 sqlcmd 命令行实用工具查询 Azure SQL 数据仓库。

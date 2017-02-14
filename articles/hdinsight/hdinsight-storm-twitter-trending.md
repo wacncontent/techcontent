@@ -9,8 +9,8 @@ editor: cgronlun
 tags: azure-portal
 
 ms.service: hdinsight
-ms.date: 07/06/2015
-wacn.date: 02/06/2017
+ms.date: 09/27/2016
+wacn.date: 02/14/2017
 ---
 
 #使用 Apache Storm on HDInsight 确定 Twitter 趋势主题
@@ -73,12 +73,12 @@ topology.newStream("spout", spout)
 
 > [!NOTE]
 >我们使用的是内置 Trident 功能，而不是 Spout 和 HashtagExtractor。
->
+><p>
 > 有关非 MemoryMapState 的 Trident-state 实现，请参阅：
->
-> * <a href="https://github.com/fhussonnois/storm-trident-elasticsearch" target="_blank">Storm Trident 弹性搜索</a>
->
-> * <a href="https://github.com/kstyrc/trident-redis" target="_blank">trident-redis</a>
+><p>
+><p> * <a href="https://github.com/fhussonnois/storm-trident-elasticsearch" target="_blank">Storm Trident 弹性搜索</a>
+><p>
+><p> * <a href="https://github.com/kstyrc/trident-redis" target="_blank">trident-redis</a>
 
 ###Spout
 

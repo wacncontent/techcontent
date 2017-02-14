@@ -10,8 +10,8 @@ manager: paulettm
 editor: cgronlun
 
 ms.service: hdinsight
-ms.date: 03/04/2016
-wacn.date: 02/06/2017
+ms.date: 09/02/2016
+wacn.date: 02/14/2017
 ---
 
 # 将 Apache Phoenix 与 HDinsight 中基于 Linux 的 HBase 群集配合使用  
@@ -34,7 +34,7 @@ wacn.date: 02/06/2017
 
 **了解 Zookeeper 主机名**
 
-1. 通过浏览到 **https://<ClusterName>.azurehdinsight.cn** 打开 Ambari。
+1. 通过浏览到 **https://\<ClusterName\>.azurehdinsight.cn** 打开 Ambari。
 2. 输入 HTTP（群集）用户名和密码以登录。
 3. 单击左侧菜单中的 **ZooKeeper**。你应看到列出 3 个 **ZooKeeper 服务器**。
 4. 单击列出的其中一个 **ZooKeeper 服务器**。在“摘要”窗格中，找到**主机名**。它类似于 *zk1-jdolehb.3lnng4rcvp5uzokyktxs4a5dhd.bx.internal.chinacloudapp.cn*。
@@ -74,8 +74,6 @@ HBase 是构建于 Hadoop 上的 Apache 开源 NoSQL 数据库，用于为大量
 - [在 Azure 虚拟网络上设置 HBase 群集][hdinsight-hbase-provision-vnet]：
 通过虚拟网络集成，可以将 HBase 群集部署到应用程序所在的虚拟网络，以便应用程序直接与 HBase 进行通信。
 - [在 HDInsight 中配置 HBase 地域复制](./hdinsight-hbase-geo-replication.md)： 了解如何跨两个 Azure 数据中心配置 HBase 复制。 
-- [在 HDInsight 中使用 HBase 分析 Twitter 观点][hbase-twitter-sentiment]：
-了解如何通过在 HDInsight 的 Hadoop 群集中使用 HBase 对大数据执行实时[观点分析](http://en.wikipedia.org/wiki/Sentiment_analysis)。
 
 [azure-portal]: https://manage.windowsazure.cn
 [vnet-point-to-site-connectivity]: https://msdn.microsoft.com/zh-cn/library/azure/09926218-92ab-4f43-aa99-83ab4d355555#BKMK_VNETPT
@@ -85,7 +83,6 @@ HBase 是构建于 Hadoop 上的 Apache 开源 NoSQL 数据库，用于为大量
 [hdinsight-manage-portal]: ./hdinsight-administer-use-management-portal.md#connect-to-hdinsight-clusters-by-using-rdp
 [hdinsight-hbase-provision-vnet]: ./hdinsight-hbase-provision-vnet.md
 [hdinsight-hbase-overview]: ./hdinsight-hbase-overview.md
-[hbase-twitter-sentiment]: ./hdinsight-hbase-analyze-twitter-sentiment.md
 
 [hdinsight-hbase-phoenix-sqlline]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-phoenix-sqlline.png
 [img-certificate]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-vpn-certificate.png

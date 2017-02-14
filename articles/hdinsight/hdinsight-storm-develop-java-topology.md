@@ -47,11 +47,11 @@ Storm 0.10.0 或更高版本中提供了 Flux 框架。HDInsight 3.3 随附了 S
 
 * **PATH** - 应该包含以下路径：
 
-  * **JAVA\_HOME**（或等效路径）
+    * **JAVA\_HOME**（或等效路径）
 
-  * **JAVA\_HOME\\bin**（或等效路径）
+    * **JAVA\_HOME\\bin**（或等效路径）
 
-  * 安装 Maven 的目录
+    * 安装 Maven 的目录
 
 ## 创建新的 Maven 项目
 
@@ -206,7 +206,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
 > [!NOTE]
 有关从外部数据源读取的 Spout 的示例，请参阅以下示例之一：
 ><p> 
-><p> * [TwitterSampleSPout](https://github.com/apache/storm/blob/0.10.x-branch/examples/storm-starter/src/jvm/storm/starter/spout/TwitterSampleSpout.java)：从 Twitter 读取数据的示例 spout <p> * [Storm-Kafka](https://github.com/apache/storm/tree/0.10.x-branch/external/storm-kafka)：从 Kafka 读取数据的 spout
+><p> * [TwitterSampleSPout](https://github.com/apache/storm/blob/0.10.x-branch/examples/storm-starter/src/jvm/storm/starter/spout/TwitterSampleSpout.java)：从 Twitter 读取数据的示例 spout
 
 对于 Spout，在 **src\\main\\java\\com\\microsoft\\example** 目录中创建名为 **RandomSentenceSpout.java** 的新文件，并使用以下内容做为内容：
 
@@ -623,20 +623,20 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
 
 3. 对 **pom.xml** 文件进行以下更改。
 
-   * 在 `<dependencies>` 节中添加以下新依赖关系：
+    * 在 `<dependencies>` 节中添加以下新依赖关系：
 
-       ```xml
+        ```xml
         <!-- Add a dependency on the Flux framework -->
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>flux-core</artifactId>
             <version>${storm.version}</version>
         </dependency>
-       ```
+        ```
 
-   * 将以下插件添加到 `<plugins>` 节。此插件处理项目包（jar 文件）的创建，并在创建包时应用一些特定于 Flux 的转换。
+    * 将以下插件添加到 `<plugins>` 节。此插件处理项目包（jar 文件）的创建，并在创建包时应用一些特定于 Flux 的转换。
 
-       ```xml
+        ```xml
         <!-- build an uber jar -->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -673,15 +673,15 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
                 </execution>
             </executions>
         </plugin>
-       ```
+        ```
 
-   * 在 **exec-maven-plugin** `<configuration>` 节中，将 `<mainClass>` 的值更改为 `org.apache.storm.flux.Flux`。这样，在开发环境本地运行拓扑时，Flux 便可以处理这种运行。
+    * 在 **exec-maven-plugin** `<configuration>` 节中，将 `<mainClass>` 的值更改为 `org.apache.storm.flux.Flux`。这样，在开发环境本地运行拓扑时，Flux 便可以处理这种运行。
 
-   * 将以下内容添加到 `<resources>` 节中的 `<includes>`。这样就加入了用于将拓扑定义为项目一部分的 YAML 文件。
+    * 将以下内容添加到 `<resources>` 节中的 `<includes>`。这样就加入了用于将拓扑定义为项目一部分的 YAML 文件。
 
-       ```xml
+        ```xml
         <include>topology.yaml</include>
-       ```
+        ```
 
 ## 在本地测试 Flux 拓扑
 

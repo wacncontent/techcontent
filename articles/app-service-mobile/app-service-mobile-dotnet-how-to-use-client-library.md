@@ -1103,13 +1103,13 @@ public class MyHandler : DelegatingHandler
 [LoginAsync 方法]: https://msdn.microsoft.com/zh-cn/library/azure/dn296411(v=azure.10).aspx
 [LookupAsync]: https://msdn.microsoft.com/zh-cn/library/azure/jj871654(v=azure.10).aspx
 [OrderBy]: https://msdn.microsoft.com/zh-cn/library/azure/dn250572(v=azure.10).aspx
-[OrderByDescending]: https://msdn.microsoft.com/zh-cn/library/azure/dn250568(v=azure.10).aspx
+[OrderByDescending]: https://msdn.microsoft.com/library/en-us/Dn250568.aspx
 [ReadAsync]: https://msdn.microsoft.com/zh-cn/library/azure/mt691741(v=azure.10).aspx
 [Take]: https://msdn.microsoft.com/zh-cn/library/azure/dn250574(v=azure.10).aspx
 [Select]: https://msdn.microsoft.com/zh-cn/library/azure/dn250569(v=azure.10).aspx
 [Skip]: https://msdn.microsoft.com/zh-cn/library/azure/dn250573(v=azure.10).aspx
 [UpdateAsync]: https://msdn.microsoft.com/zh-cn/library/azure/dn250536.(v=azure.10)aspx
-[UserID]: http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceuser.userid(v=azure.10).aspx
+[UserID]: https://msdn.microsoft.com/library/en-us/JJ553657.aspx
 [Where]: https://msdn.microsoft.com/zh-cn/library/azure/dn250579(v=azure.10).aspx
 [Azure 门户预览]: https://portal.azure.cn/
 [Azure 经典管理门户]: https://manage.windowsazure.cn/

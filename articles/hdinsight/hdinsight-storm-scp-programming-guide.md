@@ -223,17 +223,17 @@ if (Context.pluginType != SCPPluginType.SCP_NET_LOCAL)
 
 以下接口与某个上下文实例相关。上下文实例由 SCP.NET 平台创建，并会传递到用户代码：
 
-    * Declare the Output and Input Stream Schemas *                
-
 ```
-public void DeclareComponentSchema(ComponentStreamSchema schema)
-```;   
+* Declare the Output and Input Stream Schemas *                
 
-    * Emit tuple to default stream. *
-    public abstract void Emit(List<object> values);                   
+public void DeclareComponentSchema(ComponentStreamSchema schema);   
 
-    * Emit tuple to the specific stream. *
-    public abstract void Emit(string streamId, List<object> values);  
+* Emit tuple to default stream. *
+public abstract void Emit(List<object> values);                   
+
+* Emit tuple to the specific stream. *
+public abstract void Emit(string streamId, List<object> values);  
+```
 
 对于支持确认功能的非事务性 Spout，提供了以下方法：
 
@@ -480,7 +480,9 @@ public class ComponentStreamSchema
 
 在上下文对象中，添加了以下 API：
 
-    public void DeclareComponentSchema(ComponentStreamSchema schema)
+```
+public void DeclareComponentSchema(ComponentStreamSchema schema)
+```
 
 用户代码必须确保发送的元组符合为数据流定义的架构，否则，系统可能会引发运行时异常。
 

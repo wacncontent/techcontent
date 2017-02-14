@@ -55,7 +55,7 @@ ms.author: jgao
 
     > [!IMPORTANT]
     Azure PowerShell 对于使用 Azure Service Manager 管理 HDInsight 资源的支持已**弃用**，将于 2017 年 1 月 1 日删除。本文档中的步骤使用的是与 Azure Resource Manager 兼容的新 HDInsight cmdlet。
-    >
+    ><p>
     > 请按照 [Install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（安装和配置 Azure PowerShell）中的步骤安装最新版本的 Azure PowerShell。如果你的脚本需要修改才能使用与 Azure Resource Manager 兼容的新 cmdlet，请参阅[迁移到适用于 HDInsight 群集的基于 Azure Resource Manager 的开发工具](./hdinsight-hadoop-development-using-azure-resource-manager.md)，了解详细信息。
 
 * **已配置 VPN 连接和 DNS 的两个 Azure 虚拟网络**。有关说明，请参阅[在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-replication-vnet]和[在两个 Azure 虚拟网络之间配置 DNS][hdinsight-hbase-replication-dns]。
@@ -100,7 +100,6 @@ Azure 经典管理门户不支持使用自定义配置选项预配 HDInsight 群
     $blobContainerName = $hbaseClusterName.ToLower()  #Use the cluster name as the default container name.
 
     #connect to your Azure subscription
-
     Add-AzureAccount -Environment AzureChinaCloud
     Select-AzureSubscription $azureSubscriptionName
 
@@ -152,8 +151,10 @@ Azure 经典管理门户不支持使用自定义配置选项预配 HDInsight 群
 
     由于已连接到 Azure 帐户，因此不再需要运行以下 cmdlet：
 
-        Add-AzureAccount -Environment AzureChinaCloud
-        Select-AzureSubscription $azureSubscriptionName
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    Select-AzureSubscription $azureSubscriptionName
+    ```
 
 ## 配置 DNS 条件转发器
 在[为虚拟网络配置 DNS][hdinsight-hbase-replication-dns] 中，已经为两个网络配置了 DNS 服务器。HBase 群集具有不同的域后缀。因此，需要配置其他 DNS 条件转发器。
@@ -310,7 +311,6 @@ Azure 经典管理门户不支持使用自定义配置选项预配 HDInsight 群
 * [开始在 HDInsight 中使用 Apache HBase][hdinsight-hbase-get-started]
 * [HDInsight HBase 概述][hdinsight-hbase-overview]
 * [在 Azure 虚拟网络上设置 HBase 群集][hdinsight-hbase-provision-vnet]
-* [使用 HBase 分析实时 Twitter 观点][hdinsight-hbase-twitter-sentiment]
 * [使用 HDInsight (Hadoop) 中的 Storm 和 HBase 分析传感器数据][hdinsight-sensor-data]
 
 [hdinsight-hbase-geo-replication-vnet]: ./hdinsight-hbase-geo-replication-configure-VNets.md
@@ -324,9 +324,9 @@ Azure 经典管理门户不支持使用自定义配置选项预配 HDInsight 群
 [hdinsight-provision]: ./hdinsight-provision-clusters.md
 [hdinsight-hbase-replication-vnet]: ./hdinsight-hbase-geo-replication-configure-VNets.md
 [hdinsight-hbase-replication-dns]: ./hdinsight-hbase-geo-replication-configure-DNS.md
-[hdinsight-hbase-twitter-sentiment]: ./hdinsight-hbase-analyze-twitter-sentiment.md
 [hdinsight-sensor-data]: ./hdinsight-storm-sensor-data-analysis.md
 [hdinsight-hbase-overview]: ./hdinsight-hbase-overview.md
 [hdinsight-hbase-provision-vnet]: ./hdinsight-hbase-provision-vnet.md
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update meta properties & wording update-->

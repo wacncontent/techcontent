@@ -325,7 +325,7 @@ namespaceManager.DeleteSubscription("TestTopic", "HighMessages");
 
   [队列、主题和订阅]: ./service-bus-queues-topics-subscriptions.md
   [主题筛选器示例]: https://github.com/Azure-Samples/azure-servicebus-messaging-samples/tree/master/TopicFilters
-  [SqlFilter]: http://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.sqlfilter.aspx
+  [SqlFilter]: https://docs.microsoft.com/en-us/dotnet/api/microsoft.servicebus.messaging.sqlfilter?redirectedfrom=MSDN#microsoft_servicebus_messaging_sqlfilter
   [SqlFilter.SqlExpression]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.sqlfilter.sqlexpression.aspx
   [服务总线中转消息传送 .NET 教程]: ./service-bus-brokered-tutorial-dotnet.md
   [Azure 示例]: https://code.msdn.microsoft.com/site/search?query=service%20bus&f%5B0%5D.Value=service%20bus&f%5B0%5D.Type=SearchText&ac=2

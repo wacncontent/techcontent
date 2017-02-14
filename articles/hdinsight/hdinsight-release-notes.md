@@ -36,7 +36,6 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 * 进行边缘节点访问的 URI 已更改为 **clustername**-ed-ssh.azurehdinsight.cn
 * R Server on HDInsight 群集预配已简化。
 * R Server on HDInsight 现已作为常用的 HDInsight“R Server”群集类型推出，不再作为单独的 HDInsight 应用程序安装。边缘节点和 R Server 二进制文件现在会在 R Server 群集部署过程中进行预配。这将提高预配的速度和可靠性。R Server 的定价模型会相应地进行更新。
-* R Server 群集类型价格现在取决于标准层价格和 R Server 额外费用价格。高级层现在会为高级功能保留，适用于不同的群集类型，但不适用于 R Server 群集类型。此更改不影响 R Server 的有效定价，只影响帐单中费用的显示形式。在接到弃用通知之前，所有现有的 R Server 群集均可继续使用，ARM 模板也可继续使用。**但若要使用新的 ARM 模板，建议更新脚本化部署。**
 
 ## R Server on HDInsight 2016 年 8 月 30 日发行说明
 随此版本一起部署的基于 Linux 的 HDInsight 群集的所有版本号：
@@ -132,8 +131,8 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 
 | 标题 | 说明 | 受影响区域（例如服务、组件或 SDK） | 群集类型（例如 Spark、Hadoop、HBase 或 Storm） | JIRA（如果适用） |
 | --- | --- | --- | --- | --- |
-| [用于 IntelliJ 的 HDInsight 工具](./hdinsight-apache-spark-intellij-tool-plugin.md) |用于 HDInsight Spark 群集的 IntelliJ IDEA 插件现在集成了用于 IntelliJ 的 Azure 工具包。它支持 Azure SDK v2.9.1（最新 Java SDK），包括用于 IntelliJ 的独立 HDInsight 插件提供的所有功能。 |工具 |Spark |不适用 |
-| [用于 Eclipse 的 HDInsight 工具](./hdinsight-apache-spark-eclipse-tool-plugin.md) |用于 Eclipse 的 Azure 工具包现在支持 HDInsight Spark 群集。它启用以下功能。<ul><li>在 Scala 和 Java 中轻松创建和编写 Spark 应用程序，提供对 IntelliSense、自动格式、错误检查等功能的一流创作支持。</li><li>在本地测试 Spark 应用程序。</li><li>将作业提交到 HDInsight Spark 群集并检索结果。</li><li>登录 Azure 并访问与 Azure 订阅关联的所有 Spark 群集。</li><li>导航 HDInsight Spark 群集的所有关联的存储资源。</li></ul> |工具 |Spark |不适用 |
+| 用于 IntelliJ 的 HDInsight 工具 |用于 HDInsight Spark 群集的 IntelliJ IDEA 插件现在集成了用于 IntelliJ 的 Azure 工具包。它支持 Azure SDK v2.9.1（最新 Java SDK），包括用于 IntelliJ 的独立 HDInsight 插件提供的所有功能。 |工具 |Spark |不适用 |
+| 用于 Eclipse 的 HDInsight 工具 |用于 Eclipse 的 Azure 工具包现在支持 HDInsight Spark 群集。它启用以下功能。<ul><li>在 Scala 和 Java 中轻松创建和编写 Spark 应用程序，提供对 IntelliSense、自动格式、错误检查等功能的一流创作支持。</li><li>在本地测试 Spark 应用程序。</li><li>将作业提交到 HDInsight Spark 群集并检索结果。</li><li>登录 Azure 并访问与 Azure 订阅关联的所有 Spark 群集。</li><li>导航 HDInsight Spark 群集的所有关联的存储资源。</li></ul> |工具 |Spark |不适用 |
 
 从此版本开始，我们更改了基于 Linux 的 HDInsight 群集的来宾 OS 修补策略。新策略的目标是显著减少因修补而导致的重启次数。新策略将继续修补 Linux 群集上的虚拟机 (VM)，开始时间为每个星期一或星期四的凌晨 0 点 (UTC)，采用在任何给定群集中跨节点进行交错修补的方式。但是，任何给定 VM 最多只会因来宾 OS 修补而 30 天重启一次。此外，对于新创建的群集，第一次重启的时间不会早于群集创建日期之后的 30 天。
 
@@ -216,8 +215,6 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 | 标题 | 说明 | 受影响区域（例如服务、组件或 SDK） | 群集类型（例如 Hadoop、HBase 或 STORM） | JIRA（如果适用） |
 | --- | --- | --- | --- | --- |
 | 添加了 HDInsight 3.4 版本并更新了所有 HDInsight 群集的 HDP 版本 |在此版本中，我们添加了 HDInsight v3.4（基于 HDP 2.4）并更新了其他 HDP 版本。[此处](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.4.0/bk_HDP_RelNotes/content/ch_relnotes_v240.html)提供了 HDP 2.4 发行说明；[此处](./hdinsight-component-versioning.md)提供了有关 HDInsight 版本的详细信息。 |服务 |所有 Linux 群集 |不适用 |
-| HDInsight 高级版 |现在提供两种类别的 HDInsight - 标准版和高级版。HDInsight 高级版现在为预览版，仅适用于 Linux 上的 Hadoop 和 Spark 群集。有关详细信息，请参阅[此文](./hdinsight-component-versioning.md#hdinsight-standard-and-hdinsight-premium)。 |服务 |Linux 上的 Hadoop 和 Spark |不适用 |
-| Microsoft R Server |HDInsight 高级版提供的 Microsoft R Server 可能随附在 Linux 的 Hadoop 和 Spark 群集中。有关详细信息，请参阅 [R Server on HDInsight 概述](./hdinsight-hadoop-r-server-overview.md)。 |服务 |Linux 上的 Hadoop 和 Spark |不适用 |
 | Spark 1.6.0 |HDInsight 3.4 群集现在包括 Spark 1.6.0 |服务 |Linux 上的 Spark 群集 |不适用 |
 | Jupyter 笔记本增强功能 |适用于 Spark 群集的 Jupyter 笔记本现在提供更多的 Spark 内核。该笔记本还包括多种增强功能，例如使用 %%幻数、自动可视化，以及集成 Python 可视化库（例如 matplotlib）。有关详细信息，请参阅[可供 Jupyter 笔记本使用的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)。 |服务 |Linux 上的 Spark 群集 |不适用 |
 
@@ -453,7 +450,7 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 </tr>
 <tr>
 <td>其他打开的 HTTPS 端口</td>
-<td>云服务现在会打开群集上的 5 个端口（8001 到 8005），例如 https://<clustername>.azurehdinsight.cn:8001/。对这些 URL 的请求使用和端口 443 相同的基本身份验证密码机制进行验证。这些端口绑定到活动头节点上的相同端口。使用脚本操作可让客户服务在头节点的这些端口上侦听并路由到群集外部。</td>
+<td>云服务现在会打开群集上的 5 个端口（8001 到 8005），例如 https://\<clustername\>.azurehdinsight.cn:8001/。对这些 URL 的请求使用和端口 443 相同的基本身份验证密码机制进行验证。这些端口绑定到活动头节点上的相同端口。使用脚本操作可让客户服务在头节点的这些端口上侦听并路由到群集外部。</td>
 <td>云服务</td>
 <td>全部</td>
 <td>不适用</td>
@@ -1276,17 +1273,21 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 ## 2014 年 8 月 24 日发行说明
 * 我们正在添加以下 WebHCat 配置 (HIVE-7155)，该配置可将 Templeton 控制器作业的默认内存限制设置为 1 GB：（以前的默认值是 512 MB。）
 
-     templeton.mapper.memory.mb (=1024)
+    ```
+    templeton.mapper.memory.mb (=1024)
+    ```
 
-  * 这项更改解决了某些 Hive 查询由于内存限制较低而遇到的以下错误：“容器即将超出物理内存限制”。
-  * 要恢复到旧默认值，你可以在创建群集时使用以下命令通过 Azure PowerShell 将此配置值设置为 512：
+    * 这项更改解决了某些 Hive 查询由于内存限制较低而遇到的以下错误：“容器即将超出物理内存限制”。
+    * 要恢复到旧默认值，你可以在创建群集时使用以下命令通过 Azure PowerShell 将此配置值设置为 512：
 
-      Add-AzureRmHDInsightConfigValues -Core @{"templeton.mapper.memory.mb"="512";}
+        ```
+        Add-AzureRmHDInsightConfigValues -Core @{"templeton.mapper.memory.mb"="512";}
+        ```
 * zookeeper 角色的主机名已更改为 *zookeeper*。这会影响群集内部的名称解析，但不会影响外部 REST API。如果你的组件使用了 *zookeepernode* 主机名，则需更新这些组件，让其使用新名称。三个 zookeeper 节点的新名称为：
 
-  * zookeeper0
-  * zookeeper1
-  * zookeeper2
+    * zookeeper0
+    * zookeeper1
+    * zookeeper2
 * 已更新 HBase 版本支持矩阵。仅 HDInsight 版本 3.1（HBase 版本 0.98）支持 HBase 工作负载生成。版本 3.0（用于预览）将不支持升级。
 
 ## 2014/8/15 之前创建的群集的注意事项
@@ -1296,8 +1297,8 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 
 ## 2014 年 7 月 28 日发行说明
 * **HDInsight 已在新区域推出：**我们已将 HDInsight 的地理覆盖范围扩展到三个新的区域。HDInsight 客户可以在这些区域创建群集。
-  * 中国东部
-  * 中国北部
+    * 中国东部
+    * 中国北部
 * HDInsight 1.6 版（HDP1.1、Hadoop 1.0.3）和 HDInsight 2.1 版（HDP1.3、Hadoop 1.2）即将从 Azure 门户预览中删除。可以继续使用 Azure PowerShell cmdlet [New-AzureRmHDInsightCluster](http://msdn.microsoft.com/zh-cn/library/dn593744.aspx) 或 [HDInsight SDK](http://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx) 来创建这些版本的 Hadoop 群集。有关详细信息，请参阅 [HDInsight 组件版本控制](./hdinsight-component-versioning.md)页。
 * 此版本中发生的 Hortonworks 数据平台 (HDP) 更改：
 
@@ -1514,3 +1515,4 @@ SQL Server 的 Java 数据库连接 (JDBC) 驱动程序由 HDInsight 在内部�
 [hdinsight-r-scripts]: ./hdinsight-hadoop-r-scripts.md
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

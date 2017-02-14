@@ -1,4 +1,5 @@
 <!-- Remove azure portal -->
+
 ---
 title: Stretch Database 概述 | Azure
 description: 了解 Stretch Database 如何透明、安全地将冷数据迁移到 Azure 云。

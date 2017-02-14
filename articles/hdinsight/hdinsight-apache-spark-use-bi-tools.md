@@ -48,7 +48,7 @@ ms.author: nitinme
 
     > [!NOTE]
     也可以在浏览器中打开以下 URL 来访问群集的 Jupyter 笔记本。将 **CLUSTERNAME** 替换为群集的名称：
-    >
+    ><p>
     > `https://CLUSTERNAME.azurehdinsight.cn/jupyter`
     >
     >
@@ -168,7 +168,7 @@ ms.author: nitinme
     ![将表添加到 Tableau](./media/hdinsight-apache-spark-use-bi-tools/hdispark.tableau.drag.table.png "将表添加到 Tableau")
 6. 单击左下角的“工作表 1”选项卡。针对每个日期生成一种视觉效果，用于显示所有建筑物的目标温度和实际温度平均值。将“日期”和“建筑物 ID”拖到“列”，并将“实际温度”/“目标温度”拖到“行”。在“标记”下选择“区域”，以使用区域映射视觉效果。
 
-     ![添加可视化字段](./media/hdinsight-apache-spark-use-bi-tools/hdispark.tableau.drag.fields.png "添加可视化字段")  
+    ![添加可视化字段](./media/hdinsight-apache-spark-use-bi-tools/hdispark.tableau.drag.fields.png "添加可视化字段")  
 
 7. 默认情况下，温度字段显示为聚合值。如果要显示平均温度，可从下拉列表中执行该操作，如下所示。
 
@@ -193,8 +193,6 @@ ms.author: nitinme
 * [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展
-* [使用适用于 IntelliJ IDEA 的 HDInsight 工具插件创建和提交 Spark Scala 应用程序](./hdinsight-apache-spark-intellij-tool-plugin.md)
-* [Use HDInsight Tools Plugin for IntelliJ IDEA to debug Spark applications remotely（使用 IntelliJ IDEA 的 HDInsight 工具插件远程调试 Spark 应用程序）](./hdinsight-apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
 * [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](./hdinsight-apache-spark-use-zeppelin-notebook.md)
 * [在 HDInsight 的 Spark 群集中可用于 Jupyter 笔记本的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)
 * [Use external packages with Jupyter notebooks（将外部包与 Jupyter 笔记本配合使用）](./hdinsight-apache-spark-jupyter-notebook-use-external-packages.md)

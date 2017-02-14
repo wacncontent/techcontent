@@ -65,11 +65,15 @@ ms.author: larryfr
 
     所有请求的 URL 开头 (**https://CLUSTERNAME.azurehdinsight.cn/templeton/v1**) 都是一样的。路径 **/status** 指示请求将返回服务器的 WebHCat（也称为 Templeton）状态。还可以通过使用以下命令请求 Hive 的版本：
 
-       curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/version/hive
+    ```
+    curl -u USERNAME:PASSWORD -G https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/version/hive
+    ```
 
     这应该会返回如下响应：
 
-       {"module":"hive","version":"0.13.0.2.1.6.0-2103"}
+    ```
+    {"module":"hive","version":"0.13.0.2.1.6.0-2103"}
+    ```
 2. 使用以下命令创建名为 **log4jLogs** 的新表：
 
     ```
@@ -208,3 +212,4 @@ ms.author: larryfr
 [powershell-here-strings]: http://technet.microsoft.com/zh-cn/library/ee692792.aspx
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

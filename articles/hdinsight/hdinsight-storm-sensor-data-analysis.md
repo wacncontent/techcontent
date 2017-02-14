@@ -25,7 +25,7 @@ ms.author: larryfr
 
 > [!NOTE]
 本文档中的信息以及提供的示例已使用基于 Linux 的 HDInsight 3.3 和 3.4 群集版本测试过。
->
+><p>
 > Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
 ## 先决条件
@@ -33,11 +33,11 @@ ms.author: larryfr
 
     > [!IMPORTANT]
     不需要现有的 HDInsight 群集；本文档中的步骤将创建以下资源：
-    > 
-    > * 一个 Azure 虚拟网络
-    > * 一个 Storm on HDInsight 群集（基于 Linux，2 个辅助角色节点）
-    > * 一个 HBase on HDInsight 群集（基于 Linux，2 个辅助角色节点）
-    > * 一个 Azure Web 应用，用于托管 Web 仪表板
+    > <p>
+    ><p> * 一个 Azure 虚拟网络
+    ><p> * 一个 Storm on HDInsight 群集（基于 Linux，2 个辅助角色节点）
+    ><p> * 一个 HBase on HDInsight 群集（基于 Linux，2 个辅助角色节点）
+    ><p> * 一个 Azure Web 应用，用于托管 Web 仪表板
     > 
     > 
 * [Node.js](http://nodejs.org/)：用于在开发环境中以本地方式预览 Web 仪表板。
@@ -306,6 +306,10 @@ eventhub.name: sensordata
 1. 单击以下按钮登录到 Azure，然后在 Azure 门户预览中打开 Resource Manager 模板。
 
     <a href="https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fhditutorialdata.blob.core.windows.net%2Farmtemplates%2Fcreate-linux-based-hbase-storm-cluster-in-vnet.json" target="_blank"><img src="./media/hdinsight-storm-sensor-data-analysis/deploy-to-azure.png" alt="Deploy to Azure"></a>
+
+    >[!NOTE]
+    > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；把允许的地域改成“China North”和“China East”。
+
 2. 在“参数”边栏选项卡中，输入以下内容：
 
     ![HDInsight 参数](./media/hdinsight-storm-sensor-data-analysis/parameters.png)  
@@ -564,3 +568,4 @@ scp USERNAME@hbase-BASENAME-ssh.azurehdinsight.cn:/etc/hbase/conf/hbase-site.xml
 [azure-portal]: https://portal.azure.cn
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

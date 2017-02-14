@@ -34,13 +34,11 @@ ms.author: nitinme
 
 假设你具有一个大型非结构化数据集，想要对其运行 Hive 查询以提取一些有意义的信息。这正是你在本教程中要实现的目标。下面说明了如何实现此目标：
 
-   ![Hadoop 教程：创建帐户；创建 Hadoop 群集；提交 Hive 查询；在 Excel 中分析数据。][image-hdi-getstarted-flow]
+![Hadoop 教程：创建帐户；创建 Hadoop 群集；提交 Hive 查询；在 Excel 中分析数据。][image-hdi-getstarted-flow]
 
 观看本教程的演示视频，以了解 HDInsight 上的 Hadoop：
 
 ![第一份 Hadoop 教程的视频：在 Hadoop 群集上提交 Hive 查询，然后在 Excel 中分析结果。][img-hdi-getstarted-video]  
-
-**[观看 YouTube 上的 HDInsight Hadoop 教程](https://www.youtube.com/watch?v=Y4aNjnoeaHA&list=PLDrz-Fkcb9WWdY-Yp6D4fTC1ll_3lU-QS)**
 
 Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HDInsight 开发者预览版*），与 Azure HDInsight 的通用版本结合使用。Emulator 针对开发人员方案，仅支持单节点部署。有关如何使用 HDInsight Emulator 的信息，请参阅 [HDInsight Emulator 入门][hdinsight-emulator]。
 
@@ -137,7 +135,7 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 2. 单击你的存储帐户名称，单击容器名称（与群集名称相同），然后单击“用户”。
 3. 单击“admin”，然后单击其上次修改时间比你前面记下的作业开始时间稍晚的 GUID。复制此 GUID。在后一个部分将要用到它。
 
-       ![在“文件浏览器”选项卡中列出的 Hive 查询输出文件 GUID。][img-hdi-dashboard-query-browse-output]  
+    ![在“文件浏览器”选项卡中列出的 Hive 查询输出文件 GUID。][img-hdi-dashboard-query-browse-output]  
 
 ##连接到 Excel 的 Microsoft 商业智能工具
 
@@ -184,7 +182,6 @@ HDInsight 群集提供包括入门库的查询控制台以直接从门户运行�
 ------ | ---------------
 [传感器数据分析][hdinsight-sensor-data-sample] | 了解如何使用 HDInsight 处理加热、通风和空调 (HVAC) 系统产生的历史数据，以识别无法可靠地保持设定温度的系统
 [网站日志分析][hdinsight-weblogs-sample] | 了解如何使用 HDInsight 分析网站日志文件，以了解一天中从外部网站对该网站的访问次数，以及用户遇到的网站错误汇总
-[Twitter 趋势分析](./hdinsight-analyze-twitter-data.md) | 了解如何使用 HDInsight 分析 Twitter 中的趋势。
 
 ##删除群集
 

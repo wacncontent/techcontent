@@ -41,7 +41,7 @@ ms.author: nitinme
 2. 在群集边栏选项卡中的“快速链接”下，单击“群集仪表板”，然后在“群集仪表板”边栏选项卡上，单击“HDInsight 群集仪表板”。或者，也可以直接使用以下 URL 打开仪表板：
 
     ```
-     https://<clustername>.azurehdinsight.cn
+    https://<clustername>.azurehdinsight.cn
     ```
 
     出现提示时，通过使用设置群集时所用的管理员用户名和密码进行身份验证。
@@ -57,3 +57,4 @@ ms.author: nitinme
 [img-hdi-weblogs-sample]: ./media/hdinsight-hive-analyze-website-log/hdinsight-weblogs-sample.png
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

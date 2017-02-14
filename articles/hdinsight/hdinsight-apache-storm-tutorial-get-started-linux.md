@@ -16,8 +16,8 @@ ms.devlang: java
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 11/18/2016
-wacn.date: 02/06/2017
+ms.date: 01/12/2017
+wacn.date: 02/14/2017
 ms.author: larryfr
 ---
 
@@ -56,6 +56,9 @@ Apache Storm 是一个可扩展的、具有容错能力的分布式实时计算�
 
     该模板位于公共 blob 容器中，*https://hditutorialdata.blob.core.windows.net/armtemplates/create-linux-based-storm-cluster-in-hdinsight.json*。
 
+    >[!NOTE]
+    > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；把允许的地域改成“China North”和“China East”。
+
 2. 在“自定义部署”边栏选项卡中输入以下项：
 
     * __资源组__：在其中创建群集的资源组。
@@ -68,17 +71,17 @@ Apache Storm 是一个可扩展的、具有容错能力的分布式实时计算�
 
     * __位置__：群集的地理位置。
 
-     请记下这些值。本教程后面的步骤中将会用到它们。
+        请记下这些值。本教程后面的步骤中将会用到它们。
 
-     > [!NOTE]
-     使用 SSH 可通过命令行远程访问 HDInsight 群集。在通过 SSH 连接群集时，将用到此处所用的用户名和密码。此外，SSH 用户名必须唯一，因为它将在所有 HDInsight 群集节点上创建一个用户帐户。下面是一些保留给群集上的服务使用的帐户名，不能将其用作 SSH 用户名：
-     > 
-     > root、hdiuser、storm、hbase、ubuntu、zookeeper、hdfs、yarn、mapred、hbase、hive、oozie、falcon、sqoop、admin、tez、hcat、hdinsight-zookeeper。
-     > 
-     > 有关如何将 SSH 与 HDInsight 配合使用的详细信息，请参阅以下文章之一：
-     > 
-     > * [在 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
-     > * [在 Windows 中的 HDInsight 上将 SSH (PuTTY) 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-windows.md)
+        > [!NOTE]
+        使用 SSH 可通过命令行远程访问 HDInsight 群集。在通过 SSH 连接群集时，将用到此处所用的用户名和密码。此外，SSH 用户名必须唯一，因为它将在所有 HDInsight 群集节点上创建一个用户帐户。下面是一些保留给群集上的服务使用的帐户名，不能将其用作 SSH 用户名：
+        > <p>
+        > root、hdiuser、storm、hbase、ubuntu、zookeeper、hdfs、yarn、mapred、hbase、hive、oozie、falcon、sqoop、admin、tez、hcat、hdinsight-zookeeper。
+        > <p>
+        > 有关如何将 SSH 与 HDInsight 配合使用的详细信息，请参阅以下文章之一：
+        > <p>
+        ><p> * [在 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
+        ><p> * [在 Windows 中的 HDInsight 上将 SSH (PuTTY) 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-windows.md)
 
 3. 选中“我同意上述条款和条件\_\_确定”，然后选择“固定到仪表板\_\_”
 
@@ -115,7 +118,7 @@ Apache Storm 是一个可扩展的、具有容错能力的分布式实时计算�
 
     > [!NOTE]
     将自己的拓扑提交到群集时，必须先复制包含群集的 jar 文件，然后再使用 `storm` 命令。可以从文件所在的客户端使用 `scp` 命令来实现此目的。例如 `scp FILENAME.jar USERNAME@CLUSTERNAME-ssh.azurehdinsight.cn:FILENAME.jar`
-    > 
+    > <p>
     > WordCount 示例和其他 Storm 初学者示例已经包含在群集中，其位置为 `/usr/hdp/current/storm-client/contrib/storm-starter/`。
 
 如果想查看 Storm 初学者示例的源代码，可访问 [https://github.com/apache/storm/tree/1.0.x-branch/examples/storm-starter](https://github.com/apache/storm/tree/1.0.x-branch/examples/storm-starter)。该链接针对 HDInsight 3.5 随附的 Storm 1.0.x。如需其他版本的 Storm，单击页面顶部的“分支”按钮即可选择其他 Storm 版本。

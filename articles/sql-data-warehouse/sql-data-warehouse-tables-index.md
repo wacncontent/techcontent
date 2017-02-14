@@ -1,4 +1,5 @@
 <!-- Temp remove overview, partition, statistics and temporary -->
+
 ---
 title: 为 SQL 数据仓库中的表编制索引 | Azure
 description: Azure SQL 数据仓库中的表索引入门。

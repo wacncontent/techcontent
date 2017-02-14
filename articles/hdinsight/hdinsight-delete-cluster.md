@@ -54,3 +54,4 @@ azure hdinsight cluster delete CLUSTERNAME
 将 **CLUSTERNAME** 替换为 HDInsight 群集的名称。
 
 <!---HONumber=Mooncake_0120_2017-->
+<!--Update_Description: update from ASM to ARM-->

@@ -16,8 +16,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 11/22/2016
-wacn.date: 02/06/2017
+ms.date: 12/19/2016
+wacn.date: 02/14/2017
 ms.author: jgao
 ---
 
@@ -28,7 +28,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET Framework 应用
 
 > [!IMPORTANT]
 本文中的步骤创建了包含一个工作节点的群集。如果你计划使用 32 个以上的工作节点（在创建群集时或是在创建之后通过扩展群集进行），则必须选择至少具有 8 个核心和 14GB ram 的头节点大小。
-> 
+> <p>
 > 有关节点大小和相关费用的详细信息，请参阅 [HDInsight 定价](https://www.azure.cn/pricing/details/hdinsight/)。
 > 
 > 
@@ -96,7 +96,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET Framework 应用
             private const string ExistingBlobContainer = "<Enter Default Bob Container Name>";
             private const string NewClusterName = "<Enter HDInsight Cluster Name>";
             private const int NewClusterNumNodes = 2;
-            private const string NewClusterLocation = "EAST US 2";     // Must be the same as the default Storage account
+            private const string NewClusterLocation = "CHINA EAST";     // Must be the same as the default Storage account
             private const OSType NewClusterOSType = OSType.Linux;
             private const string NewClusterType = "Hadoop";
             private const string NewClusterVersion = "3.4";
