@@ -1,23 +1,21 @@
-<properties
-	pageTitle="Stretch Database 的限制 | Azure"
-	description="了解 Stretch Database 的限制。"
-	services="sql-server-stretch-database"
-	documentationCenter=""
-	authors="douglaslMS"
-	manager=""
-	editor=""/>  
+---
+title: Stretch Database 的限制 | Azure
+description: 了解 Stretch Database 的限制。
+services: sql-server-stretch-database
+documentationCenter: ''
+authors: douglaslMS
+manager: ''
+editor: ''
 
-
-<tags
-	ms.service="sql-server-stretch-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/26/2016"
-	wacn.date="01/04/2017"
-	ms.author="douglasl"/>
-
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/26/2016
+wacn.date: 01/04/2017
+ms.author: douglasl
+---
 
 # Stretch Database 的限制
 了解已启用延伸的表的限制，以及当前会阻止你为表启用延伸的限制。
@@ -67,10 +65,10 @@
 * 引用表的索引视图
 
 ## 另请参阅
-[通过运行延伸数据库顾问来识别符合延伸数据库条件的数据库和表](/documentation/articles/sql-server-stretch-database-identify-databases/)
+[通过运行延伸数据库顾问来识别符合延伸数据库条件的数据库和表](./sql-server-stretch-database-identify-databases.md)
 
-[为数据库启用延伸数据库](/documentation/articles/sql-server-stretch-database-enable-database/)
+[为数据库启用延伸数据库](./sql-server-stretch-database-enable-database.md)
 
-[为表启用延伸数据库](/documentation/articles/sql-server-stretch-database-enable-table/)
+[为表启用延伸数据库](./sql-server-stretch-database-enable-table.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

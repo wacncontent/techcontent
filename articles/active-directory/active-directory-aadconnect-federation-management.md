@@ -1,23 +1,23 @@
-<properties
-    pageTitle="使用 Azure AD Connect 进行 Active Directory 联合身份验证服务的管理和自定义 | Azure"
-    description="使用 Azure AD Connect 管理 AD FS 并使用 Azure AD Connect 和 PowerShell 自定义用户的 AD FS 登录体验。"
-    keywords="AD FS,ADFS,AD FS 管理, AAD Connect, Connect, 登录, AD FS 自定义, 修复信任, O365, 联合, 信赖方"
-    services="active-directory"
-    documentationcenter=""
-    author="anandyadavmsft"
-    manager="femila"
-    editor="" />  
+---
+title: 使用 Azure AD Connect 进行 Active Directory 联合身份验证服务的管理和自定义 | Azure
+description: 使用 Azure AD Connect 管理 AD FS 并使用 Azure AD Connect 和 PowerShell 自定义用户的 AD FS 登录体验。
+keywords: AD FS,ADFS,AD FS 管理, AAD Connect, Connect, 登录, AD FS 自定义, 修复信任, O365, 联合, 信赖方
+services: active-directory
+documentationcenter: ''
+author: anandyadavmsft
+manager: femila
+editor: ''
 
-<tags
-    ms.assetid="2593b6c6-dc3f-46ef-8e02-a8e2dc4e9fb9"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/31/2016"
-    ms.author="anandy" 
-    wacn.date="01/19/2017" />
+ms.assetid: 2593b6c6-dc3f-46ef-8e02-a8e2dc4e9fb9
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/31/2016
+ms.author: anandy
+wacn.date: 01/19/2017
+---
 
 # 使用 Azure AD Connect 进行 Active Directory 联合身份验证服务的管理和自定义
 本文详述可以使用 Azure Active Directory Connect 执行的与 Active Directory 联合身份验证服务 (AD FS) 相关的各种任务，以及可能需要完全配置 AD FS 场的其他常见 AD FS 任务。
@@ -57,10 +57,11 @@ Azure AD Connect 可以检查 AD FS 和 Azure Active Directory 信任的当前�
 
 4. 单击“安装”修复信任。
 
-> [AZURE.NOTE] Azure AD Connect 只能对自签名的证书进行修复或采取措施。Azure AD connect 无法修复第三方证书。
+> [!NOTE]
+> Azure AD Connect 只能对自签名的证书进行修复或采取措施。Azure AD connect 无法修复第三方证书。
 
 ### 添加 AD FS 服务器 <a name="addadfsserver"></a>
-> [AZURE.NOTE] 
+> [!NOTE] 
 > Azure AD Connect 要求 PFX 证书文件添加 AD FS 服务器。因此，只有使用 Azure AD Connect 配置了 AD FS 场，才能执行此操作。
 
 1. 选择“部署其他联合服务器”，然后单击“下一步”。
@@ -80,9 +81,8 @@ Azure AD Connect 可以检查 AD FS 和 Azure Active Directory 信任的当前�
 
     ![安装完成](./media/active-directory-aadconnect-federation-management/AddNewADFSServer8.PNG)  
 
-
 ### 添加 AD FS Web 应用程序代理服务器 <a name="addwapserver"></a>
-> [AZURE.NOTE] 
+> [!NOTE] 
 >Azure AD Connect 需要具有 PFX 证书文件才能添加 Web 应用程序代理服务器。因此，只有使用 Azure AD Connect 配置了 AD FS 场，才能执行此操作。
 
 1. 从可用任务列表中选择“部署 Web 应用程序代理”。
@@ -115,7 +115,7 @@ Azure AD Connect 可以检查 AD FS 和 Azure Active Directory 信任的当前�
 4. 在下一页上，向导将提供可与本地目录联合的 Azure AD 域的列表。从列表中选择域。
    ![Azure AD 域](./media/active-directory-aadconnect-federation-management/AdditionalDomain4.PNG)
 
-    选择域后，向导将为你提供有关向导将采取的进一步操作以及配置产生的影响的适当信息。在某些情况下，如果你选择的域尚未在 Azure AD 中进行验证，则向导将为你提供帮助验证域的信息。有关详细信息，请参阅 [Add your custom domain name to Azure Active Directory](/documentation/articles/active-directory-add-domain/)（将自定义域名添加到 Azure Active Directory）。
+    选择域后，向导将为你提供有关向导将采取的进一步操作以及配置产生的影响的适当信息。在某些情况下，如果你选择的域尚未在 Azure AD 中进行验证，则向导将为你提供帮助验证域的信息。有关详细信息，请参阅 [Add your custom domain name to Azure Active Directory](./active-directory-add-domain.md)（将自定义域名添加到 Azure Active Directory）。
 5. 单击“下一步”，“准备好配置”页将显示 Azure AD Connect 将要执行的操作列表。单击“安装”完成配置。
    ![已准备好配置](./media/active-directory-aadconnect-federation-management/AdditionalDomain5.PNG)
 
@@ -125,18 +125,22 @@ Azure AD Connect 可以检查 AD FS 和 Azure Active Directory 信任的当前�
 ### 添加自定义公司徽标或插图 <a name="customlogo"></a>
 若要更改“登录”页上显示的公司徽标，请使用以下 Windows PowerShell cmdlet 和语法。
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 > 建议徽标维度为 260x35 @ 96 dpi，且文件大小不应超过 10 KB。
 
-    Set-AdfsWebTheme -TargetName default -Logo @{path="c:\Contoso\logo.PNG"}
+```
+Set-AdfsWebTheme -TargetName default -Logo @{path="c:\Contoso\logo.PNG"}
+```
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 > *TargetName* 参数是必需的。随 AD FS 一起发布的默认主题名为“默认”。
 
 ### 添加登录说明 <a name="addsignindescription"></a>
 若要将登录页说明添加到“登录”页，请使用以下 Windows PowerShell cmdlet 和语法。
 
-    Set-AdfsGlobalWebContent -SignInPageDescriptionText "<p>Sign-in to Contoso requires device registration. Click <A href='http://fs1.contoso.com/deviceregistration/'>here</A> for more information.</p>"
+```
+Set-AdfsGlobalWebContent -SignInPageDescriptionText "<p>Sign-in to Contoso requires device registration. Click <A href='http://fs1.contoso.com/deviceregistration/'>here</A> for more information.</p>"
+```
 
 ### 修改 AD FS 声明规则 <a name="modclaims"></a>
 AD FS 支持丰富的声明语言，让你用来创建自定义声明规则。有关详细信息，请参阅 [The Role of the Claim Rule Language](https://technet.microsoft.com/zh-cn/library/dd807118.aspx)（声明规则语言的角色）。
@@ -148,8 +152,10 @@ AD FS 支持丰富的声明语言，让你用来创建自定义声明规则。�
 
 **规则 1：查询属性**
 
-    c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname"]
-    => add(store = "Active Directory", types = ("http://contoso.com/ws/2016/02/identity/claims/objectguid", "http://contoso.com/ws/2016/02/identity/claims/msdsconcistencyguid"), query = "; objectGuid,ms-ds-consistencyguid;{0}", param = c.Value);
+```
+c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname"]
+=> add(store = "Active Directory", types = ("http://contoso.com/ws/2016/02/identity/claims/objectguid", "http://contoso.com/ws/2016/02/identity/claims/msdsconcistencyguid"), query = "; objectGuid,ms-ds-consistencyguid;{0}", param = c.Value);
+```
 
 在此规则中，你要对 Active Directory 的用户查询 **ms-ds-consistencyguid** 和 **objectGuid** 的值。请将应用商店名称更改为 AD FS 部署中可用的适当应用商店名称。另外，将声明类型更改为在联合身份验证中为 **objectGuid** 和 **ms-ds-consistencyguid** 定义的正确声明类型。
 
@@ -157,56 +163,68 @@ AD FS 支持丰富的声明语言，让你用来创建自定义声明规则。�
 
 **规则 2：检查用户是否存在 ms-ds-consistencyguid**
 
-    NOT EXISTS([Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconcistencyguid"])
-    => add(Type = "urn:anandmsft:tmp/idflag", Value = "useguid");
+```
+NOT EXISTS([Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconcistencyguid"])
+=> add(Type = "urn:anandmsft:tmp/idflag", Value = "useguid");
+```
 
 如果没有为用户填充 **ms-ds-concistencyguid**，则此规则将定义设置为 **useguid**、名为 **idflag** 的临时标志。这背后的逻辑在于 AD FS 不允许空的声明。因此，在规则 1 中添加声明 http://contoso.com/ws/2016/02/identity/claims/objectguid 和 http://contoso.com/ws/2016/02/identity/claims/msdsconcistencyguid 时，最终能够以 **msdsconsistencyguid** 声明结尾的唯一条件是已经为用户填充了该值。如果未填充该值，在 AD FS 中它就会作为空值出现，然后立即删除。所有对象都具有 **ObjectGuid**，以便在规则 1 执行后，声明仍将始终存在。
 
 **规则 3：如果存在，将 ms-ds-consistencyguid 作为不可变 ID 发出**
 
-    c:[Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconcistencyguid"]
-    => issue(Type = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", Value = c.Value);
+```
+c:[Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconcistencyguid"]
+=> issue(Type = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", Value = c.Value);
+```
 
 这是隐式的 **Exist** 检查。如果声明的值存在，则将其作为不可变 ID 发布。前面的示例使用了 **nameidentifier** 声明。你需要将其更改为你的环境中不可变 ID 的适当声明类型。
 
 **规则 4：如果 ms-ds-consistencyGuid 不存在，则将 objectGuid 作为不可变 ID 发布**
 
-    c1:[Type == "urn:anandmsft:tmp/idflag", Value =~ "useguid"]
-    && c2:[Type == "http://contoso.com/ws/2016/02/identity/claims/objectguid"]
-    => issue(Type = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", Value = c2.Value);
+```
+c1:[Type == "urn:anandmsft:tmp/idflag", Value =~ "useguid"]
+&& c2:[Type == "http://contoso.com/ws/2016/02/identity/claims/objectguid"]
+=> issue(Type = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", Value = c2.Value);
+```
 
 在此规则中，你只需检查临时标志 **idflag**。根据该标志的值决定是否发出声明。
 
-> [AZURE.NOTE] 这些规则的顺序非常重要。
+> [!NOTE]
+> 这些规则的顺序非常重要。
 
 #### 具有子域 UPN 的 SSO
-可以使用 Azure AD Connect 添加要联合的多个域（如 [Add a new federated domain](/documentation/articles/active-directory-aadconnect-federation-management/#addfeddomain/)（添加新的联合域）中所述）。必须修改 UPN 声明，以便颁发者 ID 对应于根域而非子域，因为联合根域也涵盖子级。
+可以使用 Azure AD Connect 添加要联合的多个域（如 [Add a new federated domain](./active-directory-aadconnect-federation-management.md#addfeddomain)（添加新的联合域）中所述）。必须修改 UPN 声明，以便颁发者 ID 对应于根域而非子域，因为联合根域也涵盖子级。
 
 默认情况下，发布者 ID 的声明规则设置为：
 
-    c:[Type
-    == “http://schemas.xmlsoap.org/claims/UPN“]
+```
+c:[Type
+== “http://schemas.xmlsoap.org/claims/UPN“]
 
-    => issue(Type = “http://schemas.microsoft.com/ws/2008/06/identity/claims/issuerid“, Value = regexreplace(c.Value, “.+@(?<domain>.+)“, “http://${domain}/adfs/services/trust/“));
+=> issue(Type = “http://schemas.microsoft.com/ws/2008/06/identity/claims/issuerid“, Value = regexreplace(c.Value, “.+@(?<domain>.+)“, “http://${domain}/adfs/services/trust/“));
+```
 
 ![默认颁发者 ID 声明](./media/active-directory-aadconnect-federation-management/issuer_id_default.png)
 
 默认规则只需使用 UPN 后缀，并将其用于颁发者 ID 声明中。例如，John 是 sub.contoso.com 中的用户，而 contoso.com 与 Azure AD 联合。John 在登录 Azure AD 时输入 john@sub.contoso.com 作为用户名，则 AD FS 中的默认颁发者 ID 声明规则将按以下方式对其进行处理。
 
-    c:[Type == “http://schemas.xmlsoap.org/claims/UPN“]
+```
+c:[Type == “http://schemas.xmlsoap.org/claims/UPN“]
 
-
-    => issue(Type = “http://schemas.microsoft.com/ws/2008/06/identity/claims/issuerid“, Value = regexreplace(john@sub.contoso.com, “.+@(?<domain>.+)“, “http://${domain}/adfs/services/trust/“));
+=> issue(Type = “http://schemas.microsoft.com/ws/2008/06/identity/claims/issuerid“, Value = regexreplace(john@sub.contoso.com, “.+@(?<domain>.+)“, “http://${domain}/adfs/services/trust/“));
+```
 
 **声明值：**http://sub.contoso.com/adfs/services/trust/
 
 若要只在颁发者声明值中包含根域，请更改声明规则，使其与以下内容相符。
 
-    c:[Type == “http://schemas.xmlsoap.org/claims/UPN“]
+```
+c:[Type == “http://schemas.xmlsoap.org/claims/UPN“]
 
-    => issue(Type = “http://schemas.microsoft.com/ws/2008/06/identity/claims/issuerid“, Value = regexreplace(c.Value, “^((.*)([.|@]))?(?<domain>[^.]*[.].*)$”, “http://${domain}/adfs/services/trust/“));
+=> issue(Type = “http://schemas.microsoft.com/ws/2008/06/identity/claims/issuerid“, Value = regexreplace(c.Value, “^((.*)([.|@]))?(?<domain>[^.]*[.].*)$”, “http://${domain}/adfs/services/trust/“));
+```
 
 ## 后续步骤
-了解有关[用户登录选项](/documentation/articles/active-directory-aadconnect-user-signin/)的详细信息。
+了解有关[用户登录选项](./active-directory-aadconnect-user-signin.md)的详细信息。
 
 <!---HONumber=Mooncake_1128_2016-->

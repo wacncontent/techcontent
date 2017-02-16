@@ -1,48 +1,48 @@
-<properties 
-	pageTitle="Azure PaaS Compute 诊断数据" 
-	description="Azure PaaS Compute 诊断数据" 
-	services="cloud-service" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags 
-	ms.service="cloud-service-aog"
-	ms.date="" 
-	wacn.date="09/29/2016"/>
+---
+title: Azure PaaS Compute 诊断数据
+description: Azure PaaS Compute 诊断数据
+services: cloud-service
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+
+ms.service: cloud-service-aog
+ms.date: ''
+wacn.date: 09/29/2016
+---
+
 # Azure PaaS Compute 诊断数据
 
 当我们在故障排除的时候，其中最重要的事情是了解哪些诊断的数据是可用的。如果你不知道在哪里去查看日志或其他的诊断消息，你就不得不反复的试验或者漫无目的的去排除问题。但是无论如何，通过查看日志记录你可以有很好的机会去排除任何问题，甚至这些问题有可能不在你的知识领域内。这篇文章会描述 Azure PaaS 计算环境中的可用信息，如何更加容易的搜集这些数据，接下来，我还会开始写一系列的文章来讨论如何检查和排除在使用 Azure 平台过程中碰到的问题。
 
 在阅读这篇博客前我强烈建议你阅读这篇文章 [Azure Role Architecture](http://blogs.msdn.com/b/kwill/archive/2011/05/05/windows-azure-role-architecture.aspx)，他讲解了 PasS 虚拟机不同的流程以及他们是如何互相交互的。了解关于排除故障的更高层体系结构的理解将显著的提高你解决问题的能力。
 
-
 ## 排除故障系列(每个场景都包涵主要的概念和工具)
 
 1. [Azure PaaS Compute 诊断数据](https://blogs.msdn.microsoft.com/kwill/2013/08/09/windows-azure-paas-compute-diagnostics-data/)
 2. [AzureTools – 开发支持团队使用的有效的诊断工具](https://blogs.msdn.microsoft.com/kwill/2013/08/26/azuretools-the-diagnostic-utility-used-by-the-windows-azure-developer-support-team/)
 3. [排除故障场景 1 – 角色回收](https://blogs.msdn.microsoft.com/kwill/2013/08/20/troubleshooting-scenario-1-role-recycling/) 
-	- 使用任务管理器去确定哪个进程失败，首先需要看哪个日志。
-	- Azure 事件日志
+    - 使用任务管理器去确定哪个进程失败，首先需要看哪个日志。
+    - Azure 事件日志
 4. [排除故障场景 2 – 在成功运行 2 周后角色回收](https://blogs.msdn.microsoft.com/kwill/2013/08/26/troubleshooting-scenario-2-role-recycling-after-running-fine-for-2-weeks/) 
-	- WaHostBootstrapper.log
-	- startup 任务失败
-	- 系统重启
+    - WaHostBootstrapper.log
+    - startup 任务失败
+    - 系统重启
 5. [排除故障场景 3 – 角色一直是 Busy 状态](https://blogs.msdn.microsoft.com/kwill/2013/09/06/troubleshooting-scenario-3-role-stuck-in-busy/)
-	- WaHostBootstrapper.log
-	- startup 任务失败
-	- 修改一个正在运行的服务
+    - WaHostBootstrapper.log
+    - startup 任务失败
+    - 修改一个正在运行的服务
 6. [排除故障场景 5 – Internal Server Error 500 in WebRole](https://blogs.msdn.microsoft.com/kwill/2013/09/19/troubleshooting-scenario-5-internal-server-error-500-in-webrole/)
-	- 使用 DIP 浏览 IIS
+    - 使用 DIP 浏览 IIS
 7. [排除故障场景 6 – 角色在运行一段时间后被回收](https://blogs.msdn.microsoft.com/kwill/2013/09/23/troubleshooting-scenario-6-role-recycling-after-running-for-some-time/)
-	- Deep dive on WindowsAzureGuestAgent.exe logs (AppAgentRuntime.log and WaAppAgent.log)
-	- DiagnosticStore LocalStorage resource
+    - Deep dive on WindowsAzureGuestAgent.exe logs (AppAgentRuntime.log and WaAppAgent.log)
+    - DiagnosticStore LocalStorage resource
 8. [排除故障场景 7 – 角色回收](https://blogs.msdn.microsoft.com/kwill/2013/10/03/troubleshooting-scenario-7-role-recycling/) 
-	- 简单浏览 WaHostBootstrapper 和 WindowsAzureGuestAgent 日志
-	- AzureTools
-	- WinDBG
-	- Intellitrace
-	
+    - 简单浏览 WaHostBootstrapper 和 WindowsAzureGuestAgent 日志
+    - AzureTools
+    - WinDBG
+    - Intellitrace
 
 这儿有个简短的 Channel 9 视频演示了一些本篇博客提到的文件位置以及使用 SDP 包的方法[https://channel9.msdn.com/Series/DIY-Windows-Azure-Troubleshooting/Windows-Azure-PaaS-Diagnostics-Data](https://channel9.msdn.com/Series/DIY-Windows-Azure-Troubleshooting/Windows-Azure-PaaS-Diagnostics-Data).
 
@@ -119,7 +119,7 @@ Azure 开发支持团队已经创建了一个 SDP(Support Diagnostics Platform �
 * **Windows Azure Guest OS Family 2 & 3** (Windows Server 2008 R2 and Windows Server 2012.  Powershell v2) – [2625.CTS_AzurePaaSLogs_global.DiagCab](http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab)
 * **Windows Azure Guest OS Family 1** (Windows Server 2008.  Powershell v1) – [5635.CTS_AzurePaaSLogs_en-US_OSFamily1.EXE](http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_en-Windows2008.EXE)
 
-*您可以在这篇文章中找到更多关于 SDP 的内容：[http://support.microsoft.com/kb/2772488](http://support.microsoft.com/zh-cn/kb/2772488).  
+*您可以在这篇文章中找到更多关于 SDP 的内容：[http://support.microsoft.com/zh-cn/kb/2772488](http://support.microsoft.com/zh-cn/kb/2772488).  
 
 ### 为 Windows Azure Guest OS Family 2 & 3 获取 SDP 组件
 
@@ -129,12 +129,12 @@ Azure 开发支持团队已经创建了一个 SDP(Support Diagnostics Platform �
 2. **打开 Powershell**
 3. **复制/黏贴并执行以下代码**
 
-
-		md c:\Diagnostics; 
-		md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
-		Import-Module bitstransfer; 
-		explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
-
+    ```
+    md c:\Diagnostics; 
+    md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
+    Import-Module bitstransfer; 
+    explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
+    ```
 
 这行代码会做以下的事情:
 

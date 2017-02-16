@@ -1,31 +1,31 @@
-<properties
-    pageTitle="DocumentDB 全局数据库复制 | Azure"
-    description="了解如何通过 Azure 门户预览管理 DocumentDB 帐户的全局复制。"
-    services="documentdb"
-    keywords="全局数据库, 复制"
-    documentationcenter=""
-    author="mimig1"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="8b815047-2868-4b10-af1d-40a1af419a70"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/23/2016"
-    wacn.date="01/23/2017"
-    ms.author="mimig" />  
+---
+title: DocumentDB 全局数据库复制 | Azure
+description: 了解如何通过 Azure 门户预览管理 DocumentDB 帐户的全局复制。
+services: documentdb
+keywords: 全局数据库, 复制
+documentationcenter: ''
+author: mimig1
+manager: jhubbard
+editor: cgronlun
 
+ms.assetid: 8b815047-2868-4b10-af1d-40a1af419a70
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/23/2016
+wacn.date: 01/23/2017
+ms.author: mimig
+---
 
 # 如何使用 Azure 门户预览执行 DocumentDB 全局数据库复制
 
 了解如何使用 Azure 门户预览复制多个区域中的数据，使 Azure DocumentDB 中的数据具有全局可用性。
 
-有关 DocumentDB 中全局数据库复制工作原理的信息，请参阅 [Distribute data globally with DocumentDB](/documentation/articles/documentdb-distribute-data-globally/)（使用 DocumentDB 全局分发数据）。有关以编程方式执行全局数据库复制的信息，请参阅 [Developing with multi-region DocumentDB accounts](/documentation/articles/documentdb-developing-with-multiple-regions/)（使用多区域 DocumentDB 帐户进行开发）。
+有关 DocumentDB 中全局数据库复制工作原理的信息，请参阅 [Distribute data globally with DocumentDB](./documentdb-distribute-data-globally.md)（使用 DocumentDB 全局分发数据）。有关以编程方式执行全局数据库复制的信息，请参阅 [Developing with multi-region DocumentDB accounts](./documentdb-developing-with-multiple-regions.md)（使用多区域 DocumentDB 帐户进行开发）。
 
-> [AZURE.NOTE]
+> [!NOTE]
 DocumentDB 数据库全局分发功能已正式推出，所有新建的 DocumentDB 帐户将自动启用该功能。我们正在努力为所有现有帐户启用全局分发，但在此之前，如果你要为你的帐户启用全局分发，请[与支持部门联系](https://portal.azure.cn/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade)，我们将会帮助你启用。
 > 
 > 
@@ -36,11 +36,10 @@ DocumentDB 已在大部分 [Azure 区域][azureregions]推出。为数据库帐�
 1. 在 [Azure 门户预览](https://portal.azure.cn/)的跳转栏中，单击“NoSQL \(DocumentDB\)”。
 2. 在“NoSQL \(DocumentDB\)”边栏选项卡中，选择要修改的数据库帐户。
 3. 在帐户边栏选项卡上的菜单中单击“全局复制数据”。
-4. 在“全局复制数据”边栏选项卡中，选择要添加或删除的区域，然后单击“保存”。添加区域会产生费用，有关详细信息，请参阅[定价页](/pricing/details/documentdb/)或 [Distribute data globally with DocumentDB](/documentation/articles/documentdb-distribute-data-globally/)（使用 DocumentDB 全局分发数据）。
-   
+4. 在“全局复制数据”边栏选项卡中，选择要添加或删除的区域，然后单击“保存”。添加区域会产生费用，有关详细信息，请参阅[定价页](https://www.azure.cn/pricing/details/documentdb/)或 [Distribute data globally with DocumentDB](./documentdb-distribute-data-globally.md)（使用 DocumentDB 全局分发数据）。
+
     ![单击图中的区域可以添加或删除区域][1]  
 
-    
 添加第二个区域后，会启用门户中“在本地复制数据”**边栏选项卡上的**“手动故障转移”选项。此选项可用于测试故障转移过程。添加第三个区域后，会启用同一边栏选项卡上的“故障转移优先级”选项，以便用户能够更改读取的故障转移顺序。
 
 ### 选择全局数据库区域
@@ -55,7 +54,6 @@ DocumentDB 已在大部分 [Azure 区域][azureregions]推出。为数据库帐�
 
 While all regions associated with your DocumentDB database account can serve reads (both, single item as well as multi-item paginated reads) and queries, only one region can actively receive the write (insert, upsert, replace, delete) requests. To set the active write region, do the following  
 
-
 1. In the **NoSQL (DocumentDB)** blade, select the database account to modify.
 2. In the account blade, if the **All Settings** blade is not already opened, click **All Settings**.
 3. In the **All Settings** blade, click **Write Region Priority**.
@@ -65,9 +63,9 @@ While all regions associated with your DocumentDB database account can serve rea
 -->
 
 ## <a id="next"></a>后续步骤
-阅读 [Consistency levels in DocumentDB](/documentation/articles/documentdb-consistency-levels/)（DocumentDB 中的一致性级别），了解如何管理全局复制帐户的一致性。
+阅读 [Consistency levels in DocumentDB](./documentdb-consistency-levels.md)（DocumentDB 中的一致性级别），了解如何管理全局复制帐户的一致性。
 
-有关 DocumentDB 中全局数据库复制工作原理的信息，请参阅 [Distribute data globally with DocumentDB](/documentation/articles/documentdb-distribute-data-globally/)（使用 DocumentDB 全局分发数据）。有关以编程方式复制多个区域中的数据的信息，请参阅 [Developing with multi-region DocumentDB accounts](/documentation/articles/documentdb-developing-with-multiple-regions/)（使用多区域 DocumentDB 帐户进行开发）。
+有关 DocumentDB 中全局数据库复制工作原理的信息，请参阅 [Distribute data globally with DocumentDB](./documentdb-distribute-data-globally.md)（使用 DocumentDB 全局分发数据）。有关以编程方式复制多个区域中的数据的信息，请参阅 [Developing with multi-region DocumentDB accounts](./documentdb-developing-with-multiple-regions.md)（使用多区域 DocumentDB 帐户进行开发）。
 
 <!--Image references-->
 [1]: ./media/documentdb-portal-global-replication/documentdb-add-region.png
@@ -76,9 +74,9 @@ While all regions associated with your DocumentDB database account can serve rea
 
 <!--Reference style links - using these makes the source content way more readable than using inline links-->
 
-[consistency]: /documentation/articles/documentdb-consistency-levels/
+[consistency]: ./documentdb-consistency-levels.md
 [azureregions]: https://azure.microsoft.com/zh-cn/regions/
-[offers]: /pricing/details/documentdb/
+[offers]: https://www.azure.cn/pricing/details/documentdb/
 
 <!---HONumber=Mooncake_0109_2017-->
 <!---Update_Description: wording update -->

@@ -1,28 +1,26 @@
-<properties
-   pageTitle="在 mbed 上使用 C 连接设备 | Azure"
-   description="介绍如何使用在 mbed 设备上运行的以 C 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。"
-   services=""
-   suite="iot-suite"
-   documentationCenter="na"
-   authors="dominicbetts"
-   manager="timlt"
-   editor=""/>  
+---
+title: 在 mbed 上使用 C 连接设备 | Azure
+description: 介绍如何使用在 mbed 设备上运行的以 C 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。
+services: ''
+suite: iot-suite
+documentationCenter: na
+authors: dominicbetts
+manager: timlt
+editor: ''
 
-
-<tags
-   ms.service="iot-suite"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="01/04/2017"
-   wacn.date="01/25/2017"
-   ms.author="dobett"/>
-
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
+ms.author: dobett
+---
 
 # 将设备连接到远程监视预配置解决方案 (mbed)
 
-[AZURE.INCLUDE [iot-suite-selector-connecting](../../includes/iot-suite-selector-connecting.md)]
+[!INCLUDE [iot-suite-selector-connecting](../../includes/iot-suite-selector-connecting.md)]
 
 ## 生成并运行 C 示例解决方案
 
@@ -46,16 +44,13 @@
 
     ![][6]  
 
-
 4. 在弹出窗口中，输入示例代码 https://developer.mbed.org/users/AzureIoTClient/code/remote_monitoring/ 的链接，然后单击“导入”。
 
     ![][7]  
 
-
 5. 可以在 mbed 编译器窗口中看到导入此项目也会导入各种库。一些库由 Azure IoT 团队提供并维护（azureiot\_common、[iothub\_client](https://developer.mbed.org/users/AzureIoTClient/code/iothub_client/)、[iothub\_amqp\_transport](https://developer.mbed.org/users/AzureIoTClient/code/iothub_amqp_transport/)、azure\_uamqp），而另其他库是 mbed 库目录中可用的第三方库。
 
     ![][8]  
-
 
 6. 打开 remote\_monitoring\\remote\_monitoring.c 文件并在该文件中找到以下代码：
 
@@ -77,7 +72,6 @@
 
     ![][9]  
 
-
 ### 演练代码
 如果对程序的工作原理感兴趣，此部分中介绍了示例代码的一些关键部分。若只需运行代码，请跳到[生成并运行程序](#buildandrun)。
 
@@ -88,58 +82,59 @@
 - 元数据，例如设备 ID、设备属性。
 - 设备对其进行响应的命令：
 
-	BEGIN_NAMESPACE(Contoso);
-	
-	DECLARE_STRUCT(SystemProperties,
-	    ascii_char_ptr, DeviceID,
-	    _Bool, Enabled
-	);
-	
-	DECLARE_STRUCT(DeviceProperties,
-	ascii_char_ptr, DeviceID,
-	_Bool, HubEnabledState
-	);
-	
-	DECLARE_MODEL(Thermostat,
-	
-	    /* Event data (temperature, external temperature and humidity) */
-	    WITH_DATA(int, Temperature),
-	    WITH_DATA(int, ExternalTemperature),
-	    WITH_DATA(int, Humidity),
-	    WITH_DATA(ascii_char_ptr, DeviceId),
-	
-	    /* Device Info - This is command metadata + some extra fields */
-	    WITH_DATA(ascii_char_ptr, ObjectType),
-	    WITH_DATA(_Bool, IsSimulatedDevice),
-	    WITH_DATA(ascii_char_ptr, Version),
-	    WITH_DATA(DeviceProperties, DeviceProperties),
-	    WITH_DATA(ascii_char_ptr_no_quotes, Commands),
-	
-	    /* Commands implemented by the device */
-	    WITH_ACTION(SetTemperature, int, temperature),
-	    WITH_ACTION(SetHumidity, int, humidity)
-	);
-	
-	END_NAMESPACE(Contoso);
+    BEGIN_NAMESPACE(Contoso);
 
+    DECLARE_STRUCT(SystemProperties,
+        ascii_char_ptr, DeviceID,
+        _Bool, Enabled
+    );
+
+    DECLARE_STRUCT(DeviceProperties,
+    ascii_char_ptr, DeviceID,
+    _Bool, HubEnabledState
+    );
+
+    DECLARE_MODEL(Thermostat,
+
+    ```
+    /* Event data (temperature, external temperature and humidity) */
+    WITH_DATA(int, Temperature),
+    WITH_DATA(int, ExternalTemperature),
+    WITH_DATA(int, Humidity),
+    WITH_DATA(ascii_char_ptr, DeviceId),
+
+    /* Device Info - This is command metadata + some extra fields */
+    WITH_DATA(ascii_char_ptr, ObjectType),
+    WITH_DATA(_Bool, IsSimulatedDevice),
+    WITH_DATA(ascii_char_ptr, Version),
+    WITH_DATA(DeviceProperties, DeviceProperties),
+    WITH_DATA(ascii_char_ptr_no_quotes, Commands),
+
+    /* Commands implemented by the device */
+    WITH_ACTION(SetTemperature, int, temperature),
+    WITH_ACTION(SetHumidity, int, humidity)
+    ```
+    );
+
+    END_NAMESPACE(Contoso);
 
 与模型定义相关的是设备响应的 **SetTemperature** 和 **SetHumidity** 命令的定义：
 
-	
-	EXECUTE_COMMAND_RESULT SetTemperature(Thermostat* thermostat, int temperature)
-	{
-	    (void)printf("Received temperature %d\r\n", temperature);
-	    thermostat->Temperature = temperature;
-	    return EXECUTE_COMMAND_SUCCESS;
-	}
-	
-	EXECUTE_COMMAND_RESULT SetHumidity(Thermostat* thermostat, int humidity)
-	{
-	    (void)printf("Received humidity %d\r\n", humidity);
-	    thermostat->Humidity = humidity;
-	    return EXECUTE_COMMAND_SUCCESS;
-	}
+```
+EXECUTE_COMMAND_RESULT SetTemperature(Thermostat* thermostat, int temperature)
+{
+    (void)printf("Received temperature %d\r\n", temperature);
+    thermostat->Temperature = temperature;
+    return EXECUTE_COMMAND_SUCCESS;
+}
 
+EXECUTE_COMMAND_RESULT SetHumidity(Thermostat* thermostat, int humidity)
+{
+    (void)printf("Received humidity %d\r\n", humidity);
+    thermostat->Humidity = humidity;
+    return EXECUTE_COMMAND_SUCCESS;
+}
+```
 
 #### 将模型连接到库
 
@@ -161,39 +156,39 @@
 
 下面提供了一个在启动时发送到 IoT 中心的示例 **DeviceInfo** 消息以供参考：
 
-
-	{
-	  "ObjectType":"DeviceInfo",
-	  "Version":"1.0",
-	  "IsSimulatedDevice":false,
-	  "DeviceProperties":
-	  {
-	    "DeviceID":"mydevice01", "HubEnabledState":true
-	  }, 
-	  "Commands":
-	  [
-	    {"Name":"SetHumidity", "Parameters":[{"Name":"humidity","Type":"double"}]},
-	    { "Name":"SetTemperature", "Parameters":[{"Name":"temperature","Type":"double"}]}
-	  ]
-	}
-
+```
+{
+  "ObjectType":"DeviceInfo",
+  "Version":"1.0",
+  "IsSimulatedDevice":false,
+  "DeviceProperties":
+  {
+    "DeviceID":"mydevice01", "HubEnabledState":true
+  }, 
+  "Commands":
+  [
+    {"Name":"SetHumidity", "Parameters":[{"Name":"humidity","Type":"double"}]},
+    { "Name":"SetTemperature", "Parameters":[{"Name":"temperature","Type":"double"}]}
+  ]
+}
+```
 
 下面提供了一个发送到 IoT 中心的示例 **Telemetry** 消息以供参考：
 
-
-	{"DeviceId":"mydevice01", "Temperature":50, "Humidity":50, "ExternalTemperature":55}
-
+```
+{"DeviceId":"mydevice01", "Temperature":50, "Humidity":50, "ExternalTemperature":55}
+```
 
 下面提供了一个从 IoT 中心接收的示例**命令**以供参考：
 
-
-	{
-	  "Name":"SetHumidity",
-	  "MessageId":"2f3d3c75-3b77-4832-80ed-a5bb3e233391",
-	  "CreatedTime":"2016-03-11T15:09:44.2231295Z",
-	  "Parameters":{"humidity":23}
-	}
-
+```
+{
+  "Name":"SetHumidity",
+  "MessageId":"2f3d3c75-3b77-4832-80ed-a5bb3e233391",
+  "CreatedTime":"2016-03-11T15:09:44.2231295Z",
+  "Parameters":{"humidity":23}
+}
+```
 
 <a id="buildandrun"></a>  
 
@@ -207,16 +202,13 @@
 
     ![][11]  
 
-
 4. 在 PuTTY 中，单击“串行”连接类型。设备通常以 9600 波特进行连接，因此在“速度”框中输入 9600。然后单击“打开”。
 
 5. 程序开始执行。如果程序未在连接时自动启动，则可能必须重置板（按 CTRL+Break 或按板的重置按钮）。
 
     ![][10]  
 
-
-[AZURE.INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
-
+[!INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
 
 [6]: ./media/iot-suite-connecting-devices-mbed/mbed1.png
 [7]: ./media/iot-suite-connecting-devices-mbed/mbed2a.png
@@ -228,7 +220,7 @@
 [lnk-mbed-home]: https://developer.mbed.org/platforms/FRDM-K64F/
 [lnk-mbed-getstarted]: https://developer.mbed.org/platforms/FRDM-K64F/#getting-started-with-mbed
 [lnk-mbed-pcconnect]: https://developer.mbed.org/platforms/FRDM-K64F/#pc-configuration
-[lnk-serializer]: /documentation/articles/iot-hub-device-sdk-c-intro/#serializer
+[lnk-serializer]: ../iot-hub/iot-hub-device-sdk-c-intro.md#serializer
 
 <!---HONumber=Mooncake_0120_2017-->
 <!--Update_Description:update wording-->

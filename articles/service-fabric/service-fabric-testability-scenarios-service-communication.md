@@ -1,21 +1,21 @@
-<properties
-   pageTitle="可测试性：服务通信 | Azure"
-   description="服务到服务通信是 Service Fabric 应用程序的关键集成点。本文讨论设计注意事项和测试技术。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="vturecek"
-   manager="timlt"
-   editor=""/>
+---
+title: 可测试性：服务通信 | Azure
+description: 服务到服务通信是 Service Fabric 应用程序的关键集成点。本文讨论设计注意事项和测试技术。
+services: service-fabric
+documentationCenter: .net
+authors: vturecek
+manager: timlt
+editor: ''
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="07/06/2016"
-   wacn.date="01/25/2017"
-   ms.author="vturecek"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 07/06/2016
+wacn.date: 01/25/2017
+ms.author: vturecek
+---
 
 # Service Fabric 可测试性方案：服务通信
 
@@ -54,11 +54,9 @@
 
     移动有状态服务分区的主副本有无数原因。用此来指定某个特定分区的主副本，以查看你的服务如何以一种非常有控制的方式对移动做出反应。
 
-    
-
-    	PS > Move-ServiceFabricPrimaryReplica -PartitionId 6faa4ffa-521a-44e9-8351-dfca0f7e0466 -ServiceName fabric:/MyApplication/MyService
-
-    
+    ```powershell
+    PS > Move-ServiceFabricPrimaryReplica -PartitionId 6faa4ffa-521a-44e9-8351-dfca0f7e0466 -ServiceName fabric:/MyApplication/MyService
+    ```
 
 2. 停止一个节点。
 
@@ -66,11 +64,9 @@
 
     可以使用 PowerShell **Stop-ServiceFabricNode** cmdlet 来停止节点：
 
-    
-
-    	PS > Restart-ServiceFabricNode -NodeName Node.1
-
-   
+    ```powershell
+    PS > Restart-ServiceFabricNode -NodeName Node.1
+    ```
 
 ## 维持服务可用性
 
@@ -84,18 +80,16 @@
 
 可以使用 Invoke-ServiceFabricPartitionQuorumLoss PowerShell cmdlet 引入仲裁丢失：
 
-
-
-	PS > Invoke-ServiceFabricPartitionQuorumLoss -ServiceName fabric:/Myapplication/MyService -QuorumLossMode QuorumReplicas -QuorumLossDurationInSeconds 20
-
-
+```powershell
+PS > Invoke-ServiceFabricPartitionQuorumLoss -ServiceName fabric:/Myapplication/MyService -QuorumLossMode QuorumReplicas -QuorumLossDurationInSeconds 20
+```
 
 在本示例中，我们将 `QuorumLossMode` 设置为 `QuorumReplicas` 以指出我们希望引入仲裁丢失而不关闭所有副本。这样就仍然能够进行读操作。若要测试整个分区不可用的情形，可将此开关设置为 `AllReplicas`。
 
 ## 后续步骤
 
-[了解有关可测试性操作的详细信息](/documentation/articles/service-fabric-testability-actions/)
+[了解有关可测试性操作的详细信息](./service-fabric-testability-actions.md)
 
-[了解有关可测试性方案的详细信息](/documentation/articles/service-fabric-testability-scenarios/)
+[了解有关可测试性方案的详细信息](./service-fabric-testability-scenarios.md)
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

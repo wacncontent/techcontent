@@ -1,22 +1,22 @@
-<properties 
-   pageTitle="测试云服务的性能 | Azure"
-   description="使用 Visual Studio 探查器测试云服务的性能"
-   services="visual-studio-online"
-   documentationCenter="n/a"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 测试云服务的性能 | Azure
+description: 使用 Visual Studio 探查器测试云服务的性能
+services: visual-studio-online
+documentationCenter: n/a
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags 
-    ms.assetid="7a5501aa-f92c-457c-af9b-92ea50914e24"
-    ms.service="visual-studio-online"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="multiple"
-    ms.workload="na"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 7a5501aa-f92c-457c-af9b-92ea50914e24
+ms.service: visual-studio-online
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: multiple
+ms.workload: na
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 测试云服务的性能 
 
@@ -24,11 +24,9 @@
 
 您可以通过以下方式测试云服务的性能：
 
-- 使用 Azure 诊断，可以收集有关请求和连接的信息，可以查看站点统计信息，其中显示了客户角度的服务执行情况。若要快速入门，请参阅[为 Azure 云服务和虚拟机配置诊断](/documentation/articles/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/)。
+- 使用 Azure 诊断，可以收集有关请求和连接的信息，可以查看站点统计信息，其中显示了客户角度的服务执行情况。若要快速入门，请参阅[为 Azure 云服务和虚拟机配置诊断](./vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines.md)。
 
-- 通过使用 Visual Studio 探查器，可以获取该服务在计算方面运行情况的深入分析。如本主题所述，当服务在 Azure 中运行时，您可以使用探查器来测量其性能。有关当服务在计算模拟器中本地运行时如何使用探查器来测量其性能的信息，请参阅[使用 Visual Studio 探查器来测试在计算模拟器中本地运行的 Azure 云服务的性能](/documentation/articles/cloud-services-performance-testing-visual-studio-profiler/)。
-
-
+- 通过使用 Visual Studio 探查器，可以获取该服务在计算方面运行情况的深入分析。如本主题所述，当服务在 Azure 中运行时，您可以使用探查器来测量其性能。有关当服务在计算模拟器中本地运行时如何使用探查器来测量其性能的信息，请参阅[使用 Visual Studio 探查器来测试在计算模拟器中本地运行的 Azure 云服务的性能](./cloud-services/cloud-services-performance-testing-visual-studio-profiler.md)。
 
 ## 选择性能测试方法
 
@@ -82,7 +80,8 @@
 
 若要了解有关 Visual Studio 中的性能分析的详细信息，请参阅[性能分析初学者指南](https://msdn.microsoft.com/zh-cn/library/azure/ms182372.aspx)和[使用分析工具分析应用程序性能](https://msdn.microsoft.com/zh-cn/library/azure/z9z62c29.aspx)。
 
->[AZURE.NOTE] 发布云服务时，可以启用 IntelliTrace 或分析。但二者不能同时启用。
+>[!NOTE]
+> 发布云服务时，可以启用 IntelliTrace 或分析。但二者不能同时启用。
 
 ###分析集合方法
 
@@ -104,11 +103,12 @@
 
 ![配置分析设置](./media/vs-azure-tools-performance-profiling-cloud-services/IC526984.png)
 
->[AZURE.NOTE] 若要启用“启用分析”复选框，则必须在你用来发布云服务的本地计算上安装了探查器。默认情况下，探查器会在你安装 Visual Studio 时安装。
+>[!NOTE]
+> 若要启用“启用分析”复选框，则必须在你用来发布云服务的本地计算上安装了探查器。默认情况下，探查器会在你安装 Visual Studio 时安装。
 
 ### 配置分析设置
 
-1. 在“解决方案资源管理器”中，打开“Azure 项目”的快捷菜单，然后选择“发布”。有关如何发布云服务的详细步骤，请参阅[使用 Azure Tools 发布云服务](/documentation/articles/vs-azure-tools-publishing-a-cloud-service/)。
+1. 在“解决方案资源管理器”中，打开“Azure 项目”的快捷菜单，然后选择“发布”。有关如何发布云服务的详细步骤，请参阅[使用 Azure Tools 发布云服务](./vs-azure-tools-publishing-a-cloud-service.md)。
 
 1. 在“发布 Azure 应用程序”对话框中，选择“高级设置”选项卡。
 
@@ -141,6 +141,5 @@
     报告是一个 .vsp 文件，它现在已从 Azure 下载，且下载的状态显示在 Azure 活动日志中。下载完成后，分析报告将显示在名为 <Role name>\_<Instance Number>\_<identifier>.vsp 的 Visual Studio 编辑器选项卡中。随即将显示报告的汇总数据。
 
 1. 若要显示报告的其他视图，请在“当前视图”列表中，选择所需视图类型。有关详细信息，请参阅[分析工具报告视图](https://msdn.microsoft.com/zh-cn/library/azure/bb385755.aspx)。
-
 
 <!---HONumber=Mooncake_0509_2016-->

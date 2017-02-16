@@ -1,24 +1,25 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="为 Linux VM 创建 SSH 密钥对 | Azure"
-    description="以安全方式为 Linux VM 创建 SSH 公钥和私钥对。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="vlivech"
-    manager="timlt"
-    editor=""
-    tags="" />
-<tags 
-    ms.assetid="34ae9482-da3e-4b2d-9d0d-9d672aa42498"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="12/14/2016"
-    wacn.date="01/20/2017"
-    ms.author="v-livech" />
+---
+title: 为 Linux VM 创建 SSH 密钥对 | Azure
+description: 以安全方式为 Linux VM 创建 SSH 公钥和私钥对。
+services: virtual-machines-linux
+documentationcenter: ''
+author: vlivech
+manager: timlt
+editor: ''
+tags: ''
+
+ms.assetid: 34ae9482-da3e-4b2d-9d0d-9d672aa42498
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 12/14/2016
+wacn.date: 01/20/2017
+ms.author: v-livech
+---
 
 # 为 Linux VM 创建 SSH 公钥和私钥对
 
@@ -30,34 +31,46 @@
 
 SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`ssh-keygen` 命令将使用正确的权限为你创建一个。`-N` cli 标志是用于加密 SSH 私钥的密码，*不*是用户密码。
 
-    ssh-keygen \
-    -t rsa \
-    -b 2048 \
-    -C "ahmet@myserver" \
-    -f ~/.ssh/id_rsa \
-    -N mypassword
+```bash
+ssh-keygen \
+-t rsa \
+-b 2048 \
+-C "ahmet@myserver" \
+-f ~/.ssh/id_rsa \
+-N mypassword
+```
 
 现在，`~/.ssh` 目录中包含 `id_rsa` 和 `id_rsa.pub` SSH 密钥对。
 
-    ls -al ~/.ssh
+```bash
+ls -al ~/.ssh
+```
 
 请验证 `ssh-agent` 是否正在运行：
 
-    eval "$(ssh-agent -s)"
+```bash
+eval "$(ssh-agent -s)"
+```
 
 将新创建的密钥添加到 `ssh-agent`：
 
-    ssh-add ~/.ssh/id_rsa
+```bash
+ssh-add ~/.ssh/id_rsa
+```
 
 如果已创建 VM，可以使用以下命令将新的 SSH 公钥安装到 Linux VM：
 
-    ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
+```bash
+ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
+```
 
 使用密钥而不是密码测试登录：
 
-    ssh -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -i ~/.ssh/id_rsa ahmet@myserver
-    Last login: Tue April 12 07:07:09 2016 from 66.215.22.201
-    $
+```bash
+ssh -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -i ~/.ssh/id_rsa ahmet@myserver
+Last login: Tue April 12 07:07:09 2016 from 66.215.22.201
+$
+```
 
 如果未提示你输入 SSH 私钥密码或 VM 的登录密码，则 SSH 已成功配置。
 
@@ -79,12 +92,14 @@ Azure 需要至少 2048 位采用 ssh-rsa 格式的公钥和私钥。为了创�
 
 SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`ssh-keygen` 命令将使用正确的权限为你创建一个。
 
-    ssh-keygen \
-    -t rsa \
-    -b 2048 \
-    -C "ahmet@myserver" \
-    -f ~/.ssh/id_rsa \
-    -N mypassword
+```bash
+ssh-keygen \
+-t rsa \
+-b 2048 \
+-C "ahmet@myserver" \
+-f ~/.ssh/id_rsa \
+-N mypassword
+```
 
 *命令解释*
 
@@ -102,12 +117,14 @@ SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`s
 
 从现有的 SSH-RSA 私钥创建 X.509 证书：
 
-    openssl req -x509 \
-    -key ~/.ssh/id_rsa \
-    -nodes \
-    -days 365 \
-    -newkey rsa:2048 \
-    -out ~/.ssh/id_rsa.pem
+```bash
+openssl req -x509 \
+-key ~/.ssh/id_rsa \
+-nodes \
+-days 365 \
+-newkey rsa:2048 \
+-out ~/.ssh/id_rsa.pem
+```
 
 ## 使用 `asm` 进行经典部署
 
@@ -115,52 +132,56 @@ SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`s
 
 从现有的 SSH 公钥创建 RFC4716 格式的密钥：
 
-    ssh-keygen \
-    -f ~/.ssh/id_rsa.pub \
-    -e \
-    -m RFC4716 > ~/.ssh/id_ssh2.pem
+```bash
+ssh-keygen \
+-f ~/.ssh/id_rsa.pub \
+-e \
+-m RFC4716 > ~/.ssh/id_ssh2.pem
+```
 
 ## ssh-keygen 的示例
 
-    ssh-keygen -t rsa -b 2048 -C "ahmet@myserver"
-    Generating public/private rsa key pair.
-    Enter file in which to save the key (/home/ahmet/.ssh/id_rsa): id_rsa
-    Enter passphrase (empty for no passphrase):
-    Enter same passphrase again:
-    Your identification has been saved in id_rsa.
-    Your public key has been saved in id_rsa.pub.
-    The key fingerprint is:
-    14:a3:cb:3e:78:ad:25:cc:55:e9:0c:08:e5:d1:a9:08 ahmet@myserver
-    The keys randomart image is:
-    +--[ RSA 2048]----+
-    |        o o. .   |
-    |      E. = .o    |
-    |      ..o...     |
-    |     . o....     |
-    |      o S =      |
-    |     . + O       |
-    |      + = =      |
-    |       o +       |
-    |        .        |
-    +-----------------+
+```bash
+ssh-keygen -t rsa -b 2048 -C "ahmet@myserver"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ahmet/.ssh/id_rsa): id_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in id_rsa.
+Your public key has been saved in id_rsa.pub.
+The key fingerprint is:
+14:a3:cb:3e:78:ad:25:cc:55:e9:0c:08:e5:d1:a9:08 ahmet@myserver
+The keys randomart image is:
++--[ RSA 2048]----+
+|        o o. .   |
+|      E. = .o    |
+|      ..o...     |
+|     . o....     |
+|      o S =      |
+|     . + O       |
+|      + = =      |
+|       o +       |
+|        .        |
++-----------------+
+```
 
 保存的密钥文件：
 
 `Enter file in which to save the key (/home/ahmet/.ssh/id_rsa): ~/.ssh/id_rsa`  
 
-
 本文中的密钥对名称。系统默认提供名为 **id\_rsa** 的密钥对，有些工具可能要求私钥文件名为 **id\_rsa**，因此最好使用此密钥对。目录 `~/.ssh/` 是 SSH 密钥对和 SSH 配置文件的默认位置。如果未使用完整路径指定，则 `ssh-keygen` 将在当前工作目录（而不是默认 `~/.ssh`）中创建密钥。
 
 `~/.ssh` 目录的列表。
 
-    ls -al ~/.ssh
-    -rw------- 1 ahmet staff  1675 Aug 25 18:04 id_rsa
-    -rw-r--r-- 1 ahmet staff   410 Aug 25 18:04 rsa.pub
+```bash
+ls -al ~/.ssh
+-rw------- 1 ahmet staff  1675 Aug 25 18:04 id_rsa
+-rw-r--r-- 1 ahmet staff   410 Aug 25 18:04 rsa.pub
+```
 
 密钥密码：
 
 `Enter passphrase (empty for no passphrase):`  
-
 
 `ssh-keygen` 将密码称为“通行短语”。 *强烈*建议在密钥对中添加一个密码。如果不使用密码来保护密钥对，任何人只要拥有私钥文件，就可以用它登录到具有相应公钥的任何服务器。添加密码可提供更多保护以防有人能够获取私钥文件，可让用户有时间更改用于进行身份验证的密钥。
 
@@ -170,18 +191,24 @@ SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`s
 
 验证并使用 ssh-agent 和 ssh-add 通知 SSH 系统有关密钥文件的信息，以便无需以交互方式使用密码。
 
-    eval "$(ssh-agent -s)"
+```bash
+eval "$(ssh-agent -s)"
+```
 
 现在，使用命令 `ssh-add` 将私钥添加到 `ssh-agent`。
 
-    ssh-add ~/.ssh/id_rsa
+```bash
+ssh-add ~/.ssh/id_rsa
+```
 
 私钥密码现在存储在 `ssh-agent` 中。
 
 ## 使用 `ssh-copy-id` 安装新密钥
 如果已创建 VM，可以使用以下命令将新的 SSH 公钥安装到 Linux VM：
 
-    ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
+```bash
+ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
+```
 
 ## 创建并配置 SSH 配置文件
 
@@ -191,29 +218,35 @@ SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`s
 
 ### 创建文件
 
-    touch ~/.ssh/config
+```bash
+touch ~/.ssh/config
+```
 
 ### 编辑文件以添加新的 SSH 配置：
 
-    vim ~/.ssh/config
+```bash
+vim ~/.ssh/config
+```
 
 ### 示例 `~/.ssh/config` 文件：
 
-    # Azure Keys
-    Host fedora22
-      Hostname 102.160.203.241
-      User ahmet
-    # ./Azure Keys
-    # Default Settings
-    Host *
-      PubkeyAuthentication=yes
-      IdentitiesOnly=yes
-      ServerAliveInterval=60
-      ServerAliveCountMax=30
-      ControlMaster auto
-      ControlPath ~/.ssh/SSHConnections/ssh-%r@%h:%p
-      ControlPersist 4h
-      IdentityFile ~/.ssh/id_rsa
+```bash
+# Azure Keys
+Host fedora22
+  Hostname 102.160.203.241
+  User ahmet
+# ./Azure Keys
+# Default Settings
+Host *
+  PubkeyAuthentication=yes
+  IdentitiesOnly=yes
+  ServerAliveInterval=60
+  ServerAliveCountMax=30
+  ControlMaster auto
+  ControlPath ~/.ssh/SSHConnections/ssh-%r@%h:%p
+  ControlPersist 4h
+  IdentityFile ~/.ssh/id_rsa
+```
 
 此 SSH 配置可以指定每个服务器的部分，以便它们各自获得专用的密钥对。默认设置 (`Host *`) 适用于不匹配配置文件上部列出的任何特定主机的任何主机。
 
@@ -233,7 +266,9 @@ SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`s
 
 创建 SSH 密钥对并配置 SSH 配置文件后，便可以快速安全地登录到 Linux VM。首次使用 SSH 密钥登录到服务器时，命令将提示用户输入该密钥文件的通行短语。
 
-    ssh fedora22
+```bash
+ssh fedora22
+```
 
 ### 命令解释
 
@@ -243,9 +278,9 @@ SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`s
 
 下一步是使用新 SSH 公钥创建 Azure Linux VM。使用 SSH 公钥作为登录名创建的 Azure VM 可以比使用默认登录方法（即密码）创建的 VM 享受更好的保护。使用 SSH 密钥创建的 Azure VM 默认情况下配置为禁用密码，以避免强力猜测尝试。
 
-* [使用 Azure 模板创建安全 Linux VM](/documentation/articles/virtual-machines-linux-create-ssh-secured-vm-from-template/)
-* [使用 Azure 门户预览创建安全 Linux VM](/documentation/articles/virtual-machines-linux-quick-create-portal/)
-* [使用 Azure CLI 创建安全 Linux VM](/documentation/articles/virtual-machines-linux-quick-create-cli/)
+* [使用 Azure 模板创建安全 Linux VM](./virtual-machines-linux-create-ssh-secured-vm-from-template.md)
+* [使用 Azure 门户预览创建安全 Linux VM](./virtual-machines-linux-quick-create-portal.md)
+* [使用 Azure CLI 创建安全 Linux VM](./virtual-machines-linux-quick-create-cli.md)
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--Update_Description: update meta properties & wording update-->

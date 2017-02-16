@@ -1,29 +1,30 @@
 <!-- not suitable for Mooncake -->
 
-<properties
-    pageTitle="在 Windows、Linux、Unix 或 OS X 上将 SSH 与 HDInsight (Hadoop) 配合使用 | Azure"
-    description=" 使用安全外壳 (SSH) 访问 HDInsight。本文档提供有关在 Windows、Linux、Unix 或 OS X 客户端中将 SSH 与 HDInsight 配合使用的信息。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun"
-    tags="azure-portal" />
-<tags 
-    ms.assetid="a6a16405-a4a7-4151-9bbf-ab26972216c5"
-    ms.service="hdinsight"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="01/12/2017"
-    wacn.date="01/25/2017"
-    ms.author="larryfr" />
+---
+title: 在 Windows、Linux、Unix 或 OS X 上将 SSH 与 HDInsight (Hadoop) 配合使用 | Azure
+description:  使用安全外壳 (SSH) 访问 HDInsight。本文档提供有关在 Windows、Linux、Unix 或 OS X 客户端中将 SSH 与 HDInsight 配合使用的信息。
+services: hdinsight
+documentationcenter: ''
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
+
+ms.assetid: a6a16405-a4a7-4151-9bbf-ab26972216c5
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 01/12/2017
+wacn.date: 01/25/2017
+ms.author: larryfr
+---
 
 # 在 Windows、Linux、Unix 或 OS X 上将 SSH 与 HDInsight (Hadoop) 配合使用
-> [AZURE.SELECTOR]
-- [PuTTY (Windows)](/documentation/articles/hdinsight-hadoop-linux-use-ssh-windows/)
-- [SSH（Windows、Linux、Unix、OS X）](/documentation/articles/hdinsight-hadoop-linux-use-ssh-unix/)
+> [!div class="op_single_selector"]
+- [PuTTY (Windows)](./hdinsight-hadoop-linux-use-ssh-windows.md)
+- [SSH（Windows、Linux、Unix、OS X）](./hdinsight-hadoop-linux-use-ssh-unix.md)
 
 在[安全外壳 (SSH)](https://zh.wikipedia.org/wiki/Secure_Shell) 中，可以使用命令行接口登录到基于 Linux 的 HDInsight 群集并运行命令。本文档提供有关 SSH 的基本信息，以及有关在 HDInsight 中使用 SSH 的具体信息。
 
@@ -31,7 +32,7 @@
 
 SSH 是一种加密网络协议，可用于通过不安全的网络来与远程服务器安全通信。使用 SSH 可以通过命令行安全登录到远程服务器。在本例中，远程服务器是 HDInsight 群集的头节点或边缘节点。
 
-还可以使用 SSH 以隧道方式将网络流量从客户端传送到 HDInsight 群集。使用隧道可以访问 HDInsight 群集中不直接在 Internet 上公开的服务。有关在 HDInsight 中使用 SSH 隧道的详细信息，请参阅 [Use SSH tunneling with HDInsight](/documentation/articles/hdinsight-linux-ambari-ssh-tunnel/)（在 HDInsight 中使用 SSH 隧道）。
+还可以使用 SSH 以隧道方式将网络流量从客户端传送到 HDInsight 群集。使用隧道可以访问 HDInsight 群集中不直接在 Internet 上公开的服务。有关在 HDInsight 中使用 SSH 隧道的详细信息，请参阅 [Use SSH tunneling with HDInsight](./hdinsight-linux-ambari-ssh-tunnel.md)（在 HDInsight 中使用 SSH 隧道）。
 
 ## SSH 客户端
 
@@ -49,7 +50,7 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 * [MobaXterm](http://mobaxterm.mobatek.net/)：提供图形 SSH 客户端。
 * [Cygwin](https://cygwin.com/)：提供 `ssh` 和 `scp` 命令行实用工具。
 
-> [AZURE.NOTE]
+> [!NOTE]
 本文档中的步骤假设你可以访问 `ssh` 命令。如果使用 puTTY 或 MobaXterm 等客户端，请查阅相应产品的文档，了解等效的命令和参数。
 
 ## SSH 身份验证
@@ -68,10 +69,12 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 
 创建用于 HDInsight 的公钥和私钥对的最简单方法是使用 `ssh-keygen` 实用工具。从命令行使用以下命令即可创建用于 HDInsight 的新密钥对：
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果使用 MobaXTerm 或 puTTY 等 GUI SSH 客户端，请查阅客户端的文档了解如何生成密钥。
 
-    ssh-keygen -t rsa -b 2048
+```
+ssh-keygen -t rsa -b 2048
+```
 
 系统将提示输入以下信息：
 
@@ -79,7 +82,7 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 
 * 可选的通行短语：如果输入了一个通行短语，在 HDInsight 群集上身份验证时必须重新输入该通行短语。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 通行短语是私钥的密码。每当使用私钥进行身份验证时，必须先提供通行短语，然后才能使用该密钥。如果有人获取了你的私钥，在不知道通行短语的情况下，他们无法使用该私钥。
 ><p>
 > 但是，如果你忘记了通行短语，就没有办法重置或恢复它。
@@ -88,12 +91,12 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 
 * __id\_rsa__：此文件包含私钥。
 
-    > [AZURE.WARNING]
+    > [!WARNING]
     必须限制对此文件的访问，防止有人未经授权访问公钥保护的服务。
 
 * __id\_rsa.pub__：此文件包含公钥。创建 HDInsght 群集时需要用到此文件。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     谁有权访问_公钥_并不重要。所有公钥的作用无非就是验证私钥。当你使用私钥进行身份验证时，SSH 服务器等服务使用公钥来验证你的身份。
 
 ## 在 HDInsight 上配置 SSH
@@ -102,12 +105,12 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 
 有关在创建群集期间配置 SSH 的详细信息，请参阅以下文档之一：
 
-* [Create HDInsight using the Azure portal preview（使用 Azure 门户预览创建 HDInsight）](/documentation/articles/hdinsight-hadoop-create-linux-clusters-portal/)
-* [Create HDInsight using the Azure CLI（使用 Azure CLI 创建 HDInsight）](/documentation/articles/hdinsight-hadoop-create-linux-clusters-azure-cli/)
-* [Create HDInsight using Azure PowerShell（使用 Azure PowerShell 创建 HDInsight）](/documentation/articles/hdinsight-hadoop-create-linux-clusters-azure-powershell/)
-* [Create HDInsight using Azure Resource Manager templates（使用 Azure Resource Manager 模板创建 HDInsight）](/documentation/articles/hdinsight-hadoop-create-linux-clusters-arm-templates/)
-* [Create HDInsight using the .NET SDK（使用 .NET SDK 创建 HDInsight）](/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/)
-* [Create HDInsight using REST（使用 REST 创建 HDInsight）](/documentation/articles/hdinsight-hadoop-create-linux-clusters-curl-rest/)
+* [Create HDInsight using the Azure portal preview（使用 Azure 门户预览创建 HDInsight）](./hdinsight-hadoop-create-linux-clusters-portal.md)
+* [Create HDInsight using the Azure CLI（使用 Azure CLI 创建 HDInsight）](./hdinsight-hadoop-create-linux-clusters-azure-cli.md)
+* [Create HDInsight using Azure PowerShell（使用 Azure PowerShell 创建 HDInsight）](./hdinsight-hadoop-create-linux-clusters-azure-powershell.md)
+* [Create HDInsight using Azure Resource Manager templates（使用 Azure Resource Manager 模板创建 HDInsight）](./hdinsight-hadoop-create-linux-clusters-arm-templates.md)
+* [Create HDInsight using the .NET SDK（使用 .NET SDK 创建 HDInsight）](./hdinsight-hadoop-create-linux-clusters-dotnet-sdk.md)
+* [Create HDInsight using REST（使用 REST 创建 HDInsight）](./hdinsight-hadoop-create-linux-clusters-curl-rest.md)
 
 ### 其他 SSH 用户
 
@@ -139,7 +142,9 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 
 如果使用公钥保护 SSH 帐户，可能需要使用 `-i` 开关指定匹配的私钥的路径。以下示例演示如何使用 `-i` 开关：
 
-    ssh -i /path/to/public.key sshuser@myhdi-ssh.azurehdinsight.cn
+```
+ssh -i /path/to/public.key sshuser@myhdi-ssh.azurehdinsight.cn
+```
 
 ### 连接到其他节点
 
@@ -147,43 +152,55 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 
 1. 使用 SSH 连接到头节点或边缘节点：
 
-        ssh sshuser@myhdi-ssh.azurehdinsight.cn
+    ```
+    ssh sshuser@myhdi-ssh.azurehdinsight.cn
+    ```
 
 2. 通过 SSH 连接到头节点或边缘节点后，使用 `ssh` 命令连接到群集中的辅助角色节点：
 
-        ssh sshuser@wn0-myhdi
+    ```
+    ssh sshuser@wn0-myhdi
+    ```
 
-    若要检索群集中辅助角色节点的列表，请参阅 [Manage HDInsight by using the Ambari REST API](/documentation/articles/hdinsight-hadoop-manage-ambari-rest-api/#example-get-the-fqdn-of-cluster-nodes)（使用 Ambari REST API 管理 HDInsight）文档中有关如何检索群集节点完全限定域名的示例。
+    若要检索群集中辅助角色节点的列表，请参阅 [Manage HDInsight by using the Ambari REST API](./hdinsight-hadoop-manage-ambari-rest-api.md#example-get-the-fqdn-of-cluster-nodes)（使用 Ambari REST API 管理 HDInsight）文档中有关如何检索群集节点完全限定域名的示例。
 
 如果使用密码保护 SSH 帐户，系统会要求输入该密码来建立连接。
 
 如果使用 SSH 密钥对用户帐户进行身份验证，必须确保为本地环境配置 SSH 代理转发。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 以下步骤假设在基于 Linux/UNIX 的系统上操作，并且能够使用 Bash on Windows 10。如果这些步骤不适用于你的系统，你可能需要查阅 SSH 客户端的文档。
 
 1. 使用文本编辑器打开 `~/.ssh/config`。如果此文件不存在，可以在命令行中输入 `touch ~/.ssh/config` 来创建。
 
 2. 将以下内容添加到该文件中。将 *CLUSTERNAME* 替换为 HDInsight 群集的名称。
 
-        Host CLUSTERNAME-ssh.azurehdinsight.cn
-          ForwardAgent yes
+    ```
+    Host CLUSTERNAME-ssh.azurehdinsight.cn
+      ForwardAgent yes
+    ```
 
     此条目为 HDInsight 群集配置 SSH 代理转发。
 
 3. 在终端中通过使用以下命令测试 SSH 代理转发：
 
-        echo "$SSH_AUTH_SOCK"
+    ```
+    echo "$SSH_AUTH_SOCK"
+    ```
 
     此命令返回类似于以下文本的信息：
 
-        /tmp/ssh-rfSUL1ldCldQ/agent.1792
+    ```
+    /tmp/ssh-rfSUL1ldCldQ/agent.1792
+    ```
 
     如果未返回任何信息，则表示 `ssh-agent` 未运行。请参阅 [Using ssh-agent with ssh (http://mah.everybody.org/docs/ssh)](http://mah.everybody.org/docs/ssh)（将 ssh-agent 与 ssh 配合使用）中的代理启动脚本信息，或者查阅 SSH 客户端文档，了解安装和配置 `ssh-agent` 的具体步骤。
 
 4. 验证了 **ssh-agent** 处于运行状态后，请使用以下方式将你的 SSH 私钥添加到代理：
 
-        ssh-add ~/.ssh/id_rsa
+    ```
+    ssh-add ~/.ssh/id_rsa
+    ```
 
     如果你的私钥存储在不同文件中，请将 `~/.ssh/id_rsa` 替换为该文件的路径。
 
@@ -191,18 +208,18 @@ SSH 是一种加密网络协议，可用于通过不安全的网络来与远程�
 
 可以使用 SSH 来以隧道方式将本地请求（例如 Web 请求）传送到 HDInsight 群集。然后，请求将路由到请求的资源，就像其源自 HDInsight 群集头节点一样。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 访问某些 Hadoop 服务的 Web UI 需要使用 SSH 隧道。例如，作业历史记录 UI 或资源管理器 UI 只能使用 SSH 隧道访问。
 
-有关创建和使用 SSH 隧道的详细信息，请参阅 [Use SSH Tunneling to access Ambari web UI, JobHistory, NameNode, Oozie, and other web UI's](/documentation/articles/hdinsight-linux-ambari-ssh-tunnel/)（使用 SSH 隧道访问 Ambari Web UI、JobHistory、NameNode、Oozie 和其他 Web UI）。
+有关创建和使用 SSH 隧道的详细信息，请参阅 [Use SSH Tunneling to access Ambari web UI, JobHistory, NameNode, Oozie, and other web UI's](./hdinsight-linux-ambari-ssh-tunnel.md)（使用 SSH 隧道访问 Ambari Web UI、JobHistory、NameNode、Oozie 和其他 Web UI）。
 
 ## 后续步骤
 
 既然你了解了如何使用 SSH 密钥进行身份验证，就可以学习如何在 HDInsight 上将 MapReduce 与 Hadoop 配合使用。
 
-* [将 Hive 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-hive/)
-* [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
-* [将 MapReduce 作业与 HDInsight 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 Hive 与 HDInsight 配合使用](./hdinsight-use-hive.md)
+* [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
+* [将 MapReduce 作业与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 [preview-portal]: https://portal.azure.cn/
 

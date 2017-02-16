@@ -1,25 +1,25 @@
-<properties
-	pageTitle="移动服务中的脱机数据同步入门 (iOS) | Azure"
-	description="了解如何在 iOS 应用程序中使用 Azure 移动服务缓存和同步脱机数据"
-	documentationCenter="ios"
-	authors="krisragh"
-	manager="erikre"
-	editor=""
-	services="mobile-services"/>
+---
+title: 移动服务中的脱机数据同步入门 (iOS) | Azure
+description: 了解如何在 iOS 应用程序中使用 Azure 移动服务缓存和同步脱机数据
+documentationCenter: ios
+authors: krisragh
+manager: erikre
+editor: ''
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="krisragh;donnam"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: krisragh;donnam
+---
 
 #  移动服务中的脱机数据同步入门
 
-[AZURE.INCLUDE [mobile-services-selector-offline](../../includes/mobile-services-selector-offline.md)]
+[!INCLUDE [mobile-services-selector-offline](../../includes/mobile-services-selector-offline.md)]
 
 借助脱机同步，即使在没有网络连接的情况下，你也可以查看、添加或修改移动应用中的数据。在本程中，你将了解应用如何在本地脱机数据库中自动存储更改，并在重新联机时同步这些更改。
 
@@ -31,7 +31,8 @@
 * 跨多个设备同步数据
 * 在两个设备修改同一条记录时检测冲突
 
-> [AZURE.NOTE] 若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并获取[免费的移动服务，即使在试用期结束之后仍可继续使用这些服务](/pricing/details/mobile-services/)。有关详细信息，请参阅 [Azure 试用](http://www.azure.cn/pricing/1rmb-trial/)。
+> [!NOTE]
+> 若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并获取[免费的移动服务，即使在试用期结束之后仍可继续使用这些服务](https://www.azure.cn/pricing/details/mobile-services/)。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 本教程是在[移动服务快速入门教程]的基础之上制作的，所以必须先完成该教程。首先，让我们回顾“快速入门”中与脱机同步相关的代码。
 
@@ -42,7 +43,7 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 * 在 **QSTodoService.m** 中，请注意成员 `syncTable` 的类型是 `MSSyncTable`。脱机同步使用此类型而不是 `MSTable`。使用同步表时，所有操作将会转到本地存储，而且只会与具有显式推送和提取操作的远程服务同步。
 
 ```
-		@property (nonatomic, strong)   MSSyncTable *syncTable;
+        @property (nonatomic, strong)   MSSyncTable *syncTable;
 ```
 
 若要获取对同步表的引用，请使用 `syncTableWithName` 方法。若要删除脱机同步功能，请改用 `tableWithName`。
@@ -50,8 +51,8 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 * 在 **QSTodoService.m** 中，执行表操作之前，本地存储将在 `QSTodoService.init` 中初始化：
 
 ```
-		MSCoreDataStore *store = [[MSCoreDataStore alloc] initWithManagedObjectContext:context];
-		self.client.syncContext = [[MSSyncContext alloc] initWithDelegate:nil dataSource:store callback:nil];
+        MSCoreDataStore *store = [[MSCoreDataStore alloc] initWithManagedObjectContext:context];
+        self.client.syncContext = [[MSSyncContext alloc] initWithDelegate:nil dataSource:store callback:nil];
 ```
 
 这会使用 `MSCoreDataStore` 接口创建本地存储。你可以通过实现 `MSSyncContextDataSource` 协议来提供不同的本地存储。
@@ -97,9 +98,8 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
         }
 ```
 
-
->[AZURE.NOTE] 若要从设备本地存储区中删除已在移动设备数据库中删除的记录，应启用“[软删除]”。否则，你的应用程序应定期调用 `MSSyncTable.purgeWithQuery` 以清除本地存储。
-
+>[!NOTE]
+> 若要从设备本地存储区中删除已在移动设备数据库中删除的记录，应启用“[软删除]”。否则，你的应用程序应定期调用 `MSSyncTable.purgeWithQuery` 以清除本地存储。
 
 * 在 **QSTodoService.m** 中，`addItem` 和 `completeItem` 方法会在修改数据后调用 `syncData`。在 **QSTodoListViewController.m** 中，`refresh` 方法也会调用 `syncData`，使 UI 在每次刷新和启动时（**init** 调用 `refresh`）显示最新数据。
 
@@ -116,7 +116,8 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
       * MS\_TableConfig：用于跟踪所有提取操作最后一次同步操作的上次更新时间
       * TodoItem：用于储存 todo 项。系统列 **ms\_createdAt**、**ms\_updatedAt** 和 **ms\_version** 是可选的系统属性。
 
->[AZURE.NOTE]移动服务 SDK 会保留以“**`ms_`**”开头的列名称。请不要在系统列以外的项中使用此前缀。否则，列名称会在使用远程服务时被修改。
+>[!NOTE]
+>移动服务 SDK 会保留以“**`ms_`**”开头的列名称。请不要在系统列以外的项中使用此前缀。否则，列名称会在使用远程服务时被修改。
 
 - 使用脱机同步功能时，必须先定义系统表，如下所示。
 
@@ -143,7 +144,6 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
     #### MS\_TableConfig
 
-
     | 属性 | 类型 |
     |-------------- | ----------  |
     | ID（必需） | String |
@@ -164,8 +164,6 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
     | ms\_createdAt | 日期 | （可选）映射到 \_\_createdAt 系统属性 |
     | ms\_updatedAt | 日期 |（可选）映射到 \_\_updatedAt 系统属性 |
     | ms\_version | 字符串 |（可选）用于检测冲突，映射到 \_\_version |
-
-
 
 ## <a name="setup-sync"></a>更改应用的同步行为
 
@@ -214,9 +212,11 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 为了与服务器同步本地存储，你使用了 `MSSyncTable.pullWithQuery` 和 `MSClient.syncContext.pushWithCompletion`：
 
-		* 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
+```
+    * 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
 
-		* 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
+    * 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
+```
 
 ##  后续步骤
 
@@ -227,7 +227,6 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 ##  其他资源
 
 * [云覆盖：Azure 移动服务中的脱机同步]
-
 
 <!-- URLs. -->
 
@@ -257,20 +256,18 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 [Core Data]: https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreData/cdProgrammingGuide.html
 [Download the preview SDK here]: http://aka.ms/Gc6fex
-[How to use the Mobile Services client library for iOS]: /documentation/articles/mobile-services-ios-how-to-use-client-library/
+[How to use the Mobile Services client library for iOS]: ./mobile-services-ios-how-to-use-client-library.md
 [Offline iOS Sample]: https://github.com/Azure/mobile-services-samples/tree/master/TodoOffline/iOS/blog20140611
 [Mobile Services sample repository on GitHub]: https://github.com/Azure/mobile-services-samples
 
-
-[Get started with Mobile Services]: /documentation/articles/mobile-services-ios-get-started/
-[使用移动服务脱机支持处理冲突]: /documentation/articles/mobile-services-ios-handling-conflicts-offline-data/
-[Soft Delete]: /documentation/articles/mobile-services-using-soft-delete/
-[软删除]: /documentation/articles/mobile-services-using-soft-delete/
+[Get started with Mobile Services]: ./mobile-services-ios-get-started.md
+[使用移动服务脱机支持处理冲突]: ./mobile-services-ios-handling-conflicts-offline-data.md
+[Soft Delete]: ./mobile-services-using-soft-delete.md
+[软删除]: ./mobile-services-using-soft-delete.md
 
 [云覆盖：Azure 移动服务中的脱机同步]: http://channel9.msdn.com/Shows/Cloud+Cover/Episode-155-Offline-Storage-with-Donna-Malayeri
 [Aazure Friday：Azure 移动服务中支持脱机的应用]: http://azure.microsoft.com/documentation/videos/azure-mobile-services-offline-enabled-apps-with-donna-malayeri/
 
-[移动服务快速入门教程]: /documentation/articles/mobile-services-ios-get-started/
- 
+[移动服务快速入门教程]: ./mobile-services-ios-get-started.md
 
 <!---HONumber=Mooncake_0215_2016-->

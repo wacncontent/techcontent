@@ -7,7 +7,6 @@
 3. 选择“队列”节点并从上下文菜单中选择“创建队列”。
 4. 输入队列的名称，然后选择“确定”。   
 
-
 [Image1]: ./media/vs-create-queue-in-server-explorer/vs-storage-queues-create-in-server-explorer.png
 
 <!---HONumber=79-->

@@ -1,32 +1,33 @@
-<properties
-	pageTitle="SQL Server VM 的自动修补（经典）| Azure"
-	description="介绍在 Azure 中运行且使用经典部署模式的 SQL Server 虚拟机的自动修补功能。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="rothja"
-	manager="jhubbard"
-	editor=""
-	tags="azure-service-management" />  
+---
+title: SQL Server VM 的自动修补（经典）| Azure
+description: 介绍在 Azure 中运行且使用经典部署模式的 SQL Server 虚拟机的自动修补功能。
+services: virtual-machines-windows
+documentationCenter: na
+authors: rothja
+manager: jhubbard
+editor: ''
+tags: azure-service-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="09/26/2016"
-	wacn.date="01/05/2017"
-	ms.author="jroth" />
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 09/26/2016
+wacn.date: 01/05/2017
+ms.author: jroth
+---
 
 # Azure 虚拟机中 SQL Server 的自动修补（经典）
 
-> [AZURE.SELECTOR]
-- [Resource Manager](/documentation/articles/virtual-machines-windows-sql-automated-patching/)
-- [经典](/documentation/articles/virtual-machines-windows-classic-sql-automated-patching/)
+> [!div class="op_single_selector"]
+- [Resource Manager](./virtual-machines-windows-sql-automated-patching.md)
+- [经典](./virtual-machines-windows-classic-sql-automated-patching.md)
 
-自动修补将为运行 SQL Server 的 Azure 虚拟机建立一个维护时段。只能在此维护时段内安装自动更新。对于 SQL Server，这可以确保在数据库的最佳可能时间进行系统更新和任何关联的重新启动。自动修补依赖于 [SQL Server IaaS 代理扩展](/documentation/articles/virtual-machines-windows-classic-sql-server-agent-extension/)。
+自动修补将为运行 SQL Server 的 Azure 虚拟机建立一个维护时段。只能在此维护时段内安装自动更新。对于 SQL Server，这可以确保在数据库的最佳可能时间进行系统更新和任何关联的重新启动。自动修补依赖于 [SQL Server IaaS 代理扩展](./virtual-machines-windows-classic-sql-server-agent-extension.md)。
 
-> [AZURE.IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。若要查看本文的 Resource Manager 版本，请参阅 [Azure 虚拟机中 SQL Server 的自动修补 (Resource Manager)](/documentation/articles/virtual-machines-windows-sql-automated-patching/)。
+> [!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。若要查看本文的 Resource Manager 版本，请参阅 [Azure 虚拟机中 SQL Server 的自动修补 (Resource Manager)](./virtual-machines-windows-sql-automated-patching.md)。
 
 ## 先决条件
 
@@ -49,7 +50,7 @@
 
 **SQL Server IaaS 扩展**：
 
-- [安装 SQL Server IaaS 扩展](/documentation/articles/virtual-machines-windows-classic-sql-server-agent-extension/)。
+- [安装 SQL Server IaaS 扩展](./virtual-machines-windows-classic-sql-server-agent-extension.md)。
 
 ## 设置
 
@@ -67,9 +68,11 @@
 
 以下示例将使用 PowerShell 在现有的 SQL Server VM 上配置自动修补。**New-AzureVMSqlServerAutoPatchingConfig** 命令可为自动更新配置新的维护时段。
 
-    $aps = New-AzureVMSqlServerAutoPatchingConfig -Enable -DayOfWeek "Thursday" -MaintenanceWindowStartingHour 11 -MaintenanceWindowDuration 120  -PatchCategory "Important"
+```
+$aps = New-AzureVMSqlServerAutoPatchingConfig -Enable -DayOfWeek "Thursday" -MaintenanceWindowStartingHour 11 -MaintenanceWindowDuration 120  -PatchCategory "Important"
 
-    Get-AzureVM -ServiceName <vmservicename> -Name <vmname> | Set-AzureVMSqlServerExtension -AutoPatchingSettings $aps | Update-AzureVM
+Get-AzureVM -ServiceName <vmservicename> -Name <vmname> | Set-AzureVMSqlServerExtension -AutoPatchingSettings $aps | Update-AzureVM
+```
 
 下表根据此示例描述了对目标 Azure VM 产生的实际效果：
 
@@ -86,8 +89,8 @@
 
 ## 后续步骤
 
-若要了解其他可用的自动化任务，请参阅 [SQL Server IaaS 代理扩展](/documentation/articles/virtual-machines-windows-classic-sql-server-agent-extension/)。
+若要了解其他可用的自动化任务，请参阅 [SQL Server IaaS 代理扩展](./virtual-machines-windows-classic-sql-server-agent-extension.md)。
 
-若要深入了解如何在 Azure VM 上运行 SQL Server，请参阅 [Azure 虚拟机上的 SQL Server 概述](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)。
+若要深入了解如何在 Azure VM 上运行 SQL Server，请参阅 [Azure 虚拟机上的 SQL Server 概述](./virtual-machines-windows-sql-server-iaas-overview.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure IoT 中心开发人员指南 | Azure"
-    description="Azure IoT 中心开发人员指南讨论了终结点、安全性、标识注册表、设备管理、直接方法、设备孪生、文件上传、作业、IoT 中心查询语言以及消息传送。"
-    services="iot-hub"
-    documentationcenter=".net"
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="d534ff9d-2de5-4995-bb2d-84a02693cb2e"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="12/12/2016"
-    wacn.date="01/13/2017"
-    ms.author="dobett" />
+---
+title: Azure IoT 中心开发人员指南 | Azure
+description: Azure IoT 中心开发人员指南讨论了终结点、安全性、标识注册表、设备管理、直接方法、设备孪生、文件上传、作业、IoT 中心查询语言以及消息传送。
+services: iot-hub
+documentationcenter: .net
+author: dominicbetts
+manager: timlt
+editor: ''
+
+ms.assetid: d534ff9d-2de5-4995-bb2d-84a02693cb2e
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/12/2016
+wacn.date: 01/13/2017
+ms.author: dobett
+---
 
 # Azure IoT 中心开发人员指南
 Azure IoT 中心是一项完全托管的服务，有助于在数百万台设备和单个解决方案后端之间实现安全可靠的双向通信。
@@ -45,23 +46,21 @@ Azure IoT 中心提供：
 * [参考 - IoT 中心 MQTT 支持][devguide-mqtt]详细介绍了 IoT 中心如何支持 MQTT 协议。此文章介绍了到 Azure IoT SDK 的 MQTT 协议内置支持，并阐述了如何直接使用 MQTT 协议。
 * [词汇表][devguide-glossary]是与 IoT 中心相关的常见术语的列表。
 
-
-
-[devguide-messaging]: /documentation/articles/iot-hub-devguide-messaging/
-[devguide-upload]: /documentation/articles/iot-hub-devguide-file-upload/
-[devguide-identities]: /documentation/articles/iot-hub-devguide-identity-registry/
-[devguide-security]: /documentation/articles/iot-hub-devguide-security/
-[devguide-device-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[devguide-directmethods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[devguide-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[devguide-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[devguide-query]: /documentation/articles/iot-hub-devguide-query-language/
-[devguide-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
-[devguide-glossary]: /documentation/articles/iot-hub-devguide-glossary/
-[lnk-c2d-guidance]: /documentation/articles/iot-hub-devguide-c2d-guidance/
-[lnk-d2c-guidance]: /documentation/articles/iot-hub-devguide-d2c-guidance/
+[devguide-messaging]: ./iot-hub-devguide-messaging.md
+[devguide-upload]: ./iot-hub-devguide-file-upload.md
+[devguide-identities]: ./iot-hub-devguide-identity-registry.md
+[devguide-security]: ./iot-hub-devguide-security.md
+[devguide-device-twins]: ./iot-hub-devguide-device-twins.md
+[devguide-directmethods]: ./iot-hub-devguide-direct-methods.md
+[devguide-jobs]: ./iot-hub-devguide-jobs.md
+[devguide-endpoints]: ./iot-hub-devguide-endpoints.md
+[devguide-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[devguide-query]: ./iot-hub-devguide-query-language.md
+[devguide-sdks]: ./iot-hub-devguide-sdks.md
+[devguide-mqtt]: ./iot-hub-mqtt-support.md
+[devguide-glossary]: ./iot-hub-devguide-glossary.md
+[lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
+[lnk-d2c-guidance]: ./iot-hub-devguide-d2c-guidance.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

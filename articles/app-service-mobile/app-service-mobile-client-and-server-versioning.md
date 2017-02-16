@@ -1,21 +1,21 @@
-<properties
-  pageTitle="移动应用和移动服务中的客户端与服务器 SDK 版本控制 | Azure 应用服务"
-  description="客户端 SDK 列表，以及移动服务与 Azure 移动应用的服务器 SDK 版本兼容性"
-  services="app-service\mobile"
-  documentationCenter=""
-  authors="adrianhall"
-  manager="erikre"
-  editor=""/>
+---
+title: 移动应用和移动服务中的客户端与服务器 SDK 版本控制 | Azure 应用服务
+description: 客户端 SDK 列表，以及移动服务与 Azure 移动应用的服务器 SDK 版本兼容性
+services: app-service\mobile
+documentationCenter: ''
+authors: adrianhall
+manager: erikre
+editor: ''
 
-<tags
-  ms.service="app-service-mobile"
-  ms.workload="mobile"
-  ms.tgt_pltfrm="mobile-multiple"
-  ms.devlang="dotnet"
-  ms.topic="article"
-  ms.date="10/01/2016"
-  wacn.date="11/21/2016"
-  ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # 移动应用和移动服务中的客户端与服务器版本控制
 
@@ -43,7 +43,8 @@ POST https://service.chinacloudsites.cn/tables/TodoItem?ZUMO-API-VERSION=2.0.0
 
 可以将应用设置 **MS\_SkipVersionCheck** 的值设置为 **true**，选择不进行版本检查。在 web.config 中或在 Azure 门户预览的“应用程序设置”部分中可以指定此设置。
 
-> [AZURE.NOTE] 移动服务和移动应用之间有许多行为发生了变化，尤其是在脱机同步、身份验证和推送通知方面。应该在完成测试之后才选择不要进行版本检查，确保这些行为的更改不会影响应用功能。
+> [!NOTE]
+> 移动服务和移动应用之间有许多行为发生了变化，尤其是在脱机同步、身份验证和推送通知方面。应该在完成测试之后才选择不要进行版本检查，确保这些行为的更改不会影响应用功能。
 
 ## 所有版本的兼容性摘要
 
@@ -55,7 +56,6 @@ POST https://service.chinacloudsites.cn/tables/TodoItem?ZUMO-API-VERSION=2.0.0
 | [移动应用客户端] | 错误* | 正常 |
 
 \*这可以通过指定 **MS\_SkipVersionCheck** 来控制。
-
 
 <!-- IMPORTANT!  The anchors for Mobile Services and Mobile Apps MUST be 1.0.0 and 2.0.0 respectively, since there is an exception error message that uses those anchors. -->
 
@@ -126,18 +126,15 @@ POST https://service.chinacloudsites.cn/tables/TodoItem?ZUMO-API-VERSION=2.0.0
 | 2\.0.0-2.x.y | False/未指定 | 200 - 正常 |
 | 3\.0.0-3.x.y | False/未指定 | 400 - 错误的请求 |
 
-
 ## 后续步骤
 
 - [将移动服务迁移到 Azure 应用服务]
 
-
 [移动服务客户端]: #MobileServicesClients
 [移动应用客户端]: #MobileAppsClients
 
-
 [Mobile App Server SDK]: http://www.nuget.org/packages/microsoft.azure.mobile.server
-[Migrate a Mobile Service to Azure App Service]: /documentation/articles/app-service-mobile-migrating-from-mobile-services/
-[将移动服务迁移到 Azure 应用服务]: /documentation/articles/app-service-mobile-migrating-from-mobile-services/
+[Migrate a Mobile Service to Azure App Service]: ./app-service-mobile-migrating-from-mobile-services.md
+[将移动服务迁移到 Azure 应用服务]: ./app-service-mobile-migrating-from-mobile-services.md
 
 <!---HONumber=Mooncake_0919_2016-->

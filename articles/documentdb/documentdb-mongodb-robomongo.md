@@ -1,34 +1,34 @@
-<properties
-    pageTitle="将 Robomongo 与具有 MongoDB 协议支持的 Azure DocumentDB 帐户配合使用 | Azure"
-    description="了解如何将 Robomongo 与具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）配合使用。"
-    keywords="robomongo"
-    services="documentdb"
-    author="AndrewHoh"
-    manager="jhubbard"
-    editor=""
-    documentationcenter="" />
-<tags
-    ms.assetid="352c5fb9-8772-4c5f-87ac-74885e63ecac"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/29/2016"
-    wacn.date="01/12/2017"
-    ms.author="anhoh" />  
+---
+title: 将 Robomongo 与具有 MongoDB 协议支持的 Azure DocumentDB 帐户配合使用 | Azure
+description: 了解如何将 Robomongo 与具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）配合使用。
+keywords: robomongo
+services: documentdb
+author: AndrewHoh
+manager: jhubbard
+editor: ''
+documentationcenter: ''
 
+ms.assetid: 352c5fb9-8772-4c5f-87ac-74885e63ecac
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/29/2016
+wacn.date: 01/12/2017
+ms.author: anhoh
+---
 
 # 将 Robomongo 与具有 MongoDB 协议支持的 DocumentDB 帐户配合使用
 若要使用 Robomongo 连接到具有 MongoDB 协议支持的 Azure DocumentDB 帐户，必须：
 
 - 下载并安装 [Robomongo](https://robomongo.org/)
-- 提供具有 MongoDB 协议支持的 DocumentDB 帐户的[连接字符串](/documentation/articles/documentdb-connect-mongodb-account/)信息
+- 提供具有 MongoDB 协议支持的 DocumentDB 帐户的[连接字符串](./documentdb-connect-mongodb-account.md)信息
 
 ## 使用 Robomongo 进行连接
 若要将具有 MongoDB 协议支持的 DocumentDB 帐户添加到 Robomongo MongoDB 连接，请执行以下步骤。
 
-1. 使用[此处](/documentation/articles/documentdb-connect-mongodb-account/)的指令检索具有 MongoDB 协议支持的 DocumentDB 的连接信息。
+1. 使用[此处](./documentdb-connect-mongodb-account.md)的指令检索具有 MongoDB 协议支持的 DocumentDB 的连接信息。
 
     ![连接字符串边栏选项卡的屏幕截图](./media/documentdb-mongodb-robomongo/connectionstringblade.png)  
 
@@ -51,6 +51,6 @@
 7. 最后，单击“测试”验证是否能够连接，然后单击“保存”。
 
 ## 后续步骤
-- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](/documentation/articles/documentdb-mongodb-samples/)。
+- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](./documentdb-mongodb-samples.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

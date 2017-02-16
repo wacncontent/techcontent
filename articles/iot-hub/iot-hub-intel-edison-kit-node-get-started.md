@@ -1,36 +1,35 @@
-<properties
-    pageTitle="开始使用 Intel Edison Azure IoT 初学者工具包 | Azure"
-    description="开始使用 Intel Edison，创建 Azure IoT 中心，并将 Edison 连接到 IoT 中心"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="intel edison 开发, azure iot 中心, 开始使用物联网, 物联网教程, adafruit 物联网, intel edison arduino, 开始使用 arduino" />
-<tags
-    ms.assetid="a7c9cf2d-c102-41b0-aa45-41285c6877eb"
-    ms.service="iot-hub"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/7/2016"
-    wacn.date="01/06/2017"
-    ms.author="xshi" />  
+---
+title: 开始使用 Intel Edison Azure IoT 初学者工具包 | Azure
+description: 开始使用 Intel Edison，创建 Azure IoT 中心，并将 Edison 连接到 IoT 中心
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: intel edison 开发, azure iot 中心, 开始使用物联网, 物联网教程, adafruit 物联网, intel edison arduino, 开始使用 arduino
 
+ms.assetid: a7c9cf2d-c102-41b0-aa45-41285c6877eb
+ms.service: iot-hub
+ms.devlang: nodejs
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/7/2016
+wacn.date: 01/06/2017
+ms.author: xshi
+---
 
 # 开始使用 Intel Edison (Node.js)
->[AZURE.SELECTOR]
-- [Node.JS](/documentation/articles/iot-hub-intel-edison-kit-node-get-started/)
-- [C](/documentation/articles/iot-hub-intel-edison-kit-c-get-started/)
+>[!div class="op_single_selector"]
+- [Node.JS](./iot-hub-intel-edison-kit-node-get-started.md)
+- [C](./iot-hub-intel-edison-kit-c-get-started.md)
 
-在本教程中，从学习如何使用 Intel Edison 的基础知识开始。然后学习如何使用 [Azure IoT 中心](/documentation/articles/iot-hub-what-is-iot-hub/)将设备无缝连接到云。
+在本教程中，从学习如何使用 Intel Edison 的基础知识开始。然后学习如何使用 [Azure IoT 中心](./iot-hub-what-is-iot-hub.md)将设备无缝连接到云。
 
 还没有工具包？ 从[此处](/develop/iot/iot-starter-kits)开始
 
 ## 第 1 课：配置设备
 ![第 1 课端到端关系图](./media/iot-hub-intel-edison-lessons/e2e-lesson1.png)  
-
 
 在本课中，会为 Intel Edison 配置操作系统、设置开发环境，以及将应用程序部署到 Edison。
 
@@ -58,7 +57,6 @@
 ## 第 2 课：创建 IoT 中心
 ![第 2 课端到端关系图](./media/iot-hub-intel-edison-lessons/e2e-lesson2.png)  
 
-
 在本课中，用户需创建免费的 Azure 帐户、预配 Azure IoT 中心，以及在 IoT 中心创建第一个设备。
 
 开始本课之前，请完成第 1 课。
@@ -75,11 +73,10 @@
 
 *估计完成时间：10 分钟*
 
-转到[创建 IoT 中心并注册 Intel Edison](/documentation/articles/iot-hub-intel-edison-kit-node-lesson2-prepare-azure-iot-hub/)。
+转到[创建 IoT 中心并注册 Intel Edison](./iot-hub-intel-edison-kit-node-lesson2-prepare-azure-iot-hub.md)。
 
 ## 第 3 课：发送从设备到云的消息
 ![第 3 课端到端关系图](./media/iot-hub-intel-edison-lessons/e2e-lesson3.png)  
-
 
 在本课中，会将消息从 Edison 发送到 IoT 中心。此外还需创建一个 Azure 函数应用，以便获取 IoT 中心发出的传入消息并将其写入到 Azure 表存储。
 
@@ -109,7 +106,6 @@
 ## 第 4 课：发送从云到设备的消息
 ![第 4 课端到端关系图](./media/iot-hub-intel-edison-lessons/e2e-lesson4.png)  
 
-
 本课说明如何将消息从 Azure IoT 中心发送到 Intel Edison。这些消息控制连接到 Edison 的 LED 的开关行为。示例应用程序已准备就绪，你可以执行此任务了。
 
 开始本课之前，请完成第 1 课、第 2 课和第 3 课。
@@ -132,16 +128,15 @@
 如果在课程中遇到任何问题，可在[故障排除][troubleshooting]一文中查找解决方案。
 <!-- Images and links -->
 
-
-[configure-your-device]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson1-configure-your-device/
-[get-the-tools]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson1-get-the-tools-win32/
-[create-and-deploy-the-blink-application]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson1-deploy-blink-app/
-[get-azure-tools]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson2-get-azure-tools-win32/
-[create-an-azure-function-app-and-azure-storage-account]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson3-deploy-resource-manager-template/
-[send-device-to-cloud-messages]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson3-run-azure-blink/
-[read-messages-persisted-in-azure-storage]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson3-read-table-storage/
-[receive-cloud-to-device-messages]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson4-send-cloud-to-device-messages/
-[change-the-on-and-off-behavior-of-the-led]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson4-change-led-behavior/
-[troubleshooting]: /documentation/articles/iot-hub-intel-edison-kit-node-troubleshooting/
+[configure-your-device]: ./iot-hub-intel-edison-kit-node-lesson1-configure-your-device.md
+[get-the-tools]: ./iot-hub-intel-edison-kit-node-lesson1-get-the-tools-win32.md
+[create-and-deploy-the-blink-application]: ./iot-hub-intel-edison-kit-node-lesson1-deploy-blink-app.md
+[get-azure-tools]: ./iot-hub-intel-edison-kit-node-lesson2-get-azure-tools-win32.md
+[create-an-azure-function-app-and-azure-storage-account]: ./iot-hub-intel-edison-kit-node-lesson3-deploy-resource-manager-template.md
+[send-device-to-cloud-messages]: ./iot-hub-intel-edison-kit-node-lesson3-run-azure-blink.md
+[read-messages-persisted-in-azure-storage]: ./iot-hub-intel-edison-kit-node-lesson3-read-table-storage.md
+[receive-cloud-to-device-messages]: ./iot-hub-intel-edison-kit-node-lesson4-send-cloud-to-device-messages.md
+[change-the-on-and-off-behavior-of-the-led]: ./iot-hub-intel-edison-kit-node-lesson4-change-led-behavior.md
+[troubleshooting]: ./iot-hub-intel-edison-kit-node-troubleshooting.md
 
 <!---HONumber=Mooncake_0103_2017-->

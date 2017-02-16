@@ -1,4 +1,3 @@
-
 1. 访问 [Azure 门户预览]。
 2. 依次单击“浏览全部”>“移动应用”> 刚创建的后端。
 3. 在移动应用设置中，依次单击“快速启动”>“Cordova”。
@@ -11,7 +10,6 @@
 后端会将请求中的数据插入 SQL 数据库的 TodoItem 表中，并将新存储项的相关信息返回到移动应用。移动应用会在列表中显示此数据。
 
 ![](./media/app-service-mobile-cordova-quickstart/quickstart-startup.png)  
-
 
 可以为其他平台重复步骤 3 至 5。
 

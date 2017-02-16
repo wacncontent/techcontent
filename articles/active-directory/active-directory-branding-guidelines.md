@@ -1,22 +1,22 @@
-<properties
-    pageTitle="适用于应用程序的品牌准则 | Azure"
-    description="介绍面向开发人员的 Azure Active Directory 资源的综合性指南"
-    services="active-directory"
-    documentationcenter="dev-center-name"
-    author="msmbaldwin"
-    manager="mbaldwin"
-    editor="" />
-<tags
-    ms.assetid="72f4e464-1352-4a49-a18f-c37f58e7d5c4"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="01/07/2017"
-    wacn.date="02/07/2017"
-    ms.author="mbaldwin" />  
+---
+title: 适用于应用程序的品牌准则 | Azure
+description: 介绍面向开发人员的 Azure Active Directory 资源的综合性指南
+services: active-directory
+documentationcenter: dev-center-name
+author: msmbaldwin
+manager: mbaldwin
+editor: ''
 
+ms.assetid: 72f4e464-1352-4a49-a18f-c37f58e7d5c4
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 01/07/2017
+wacn.date: 02/07/2017
+ms.author: mbaldwin
+---
 
 # 适用于应用程序的品牌准则
 本主题讨论在使用 Azure Active Directory (Azure AD) 开发应用程序时应使用的品牌准则。在客户需要使用 Azure AD 中托管的工作或学校帐户或个人帐户进行注册和登录到应用程序时，这些准则将帮助指导客户进行相关操作。
@@ -46,7 +46,7 @@ Microsoft 不会向最终用户显示 Azure 或 Active Directory 品牌名称，
 **如果应用程序需要只有管理员才能授予的权限，或者应用程序需要组织许可**：应该将管理员请求与用户登录区别开来。**“获取此应用程序”按钮**会将管理员重定向到登录页，然后要求他们代表其组织中的用户授权。带来的额外好处是，应用程序中不会显示最终用户许可提示。
 
 ## 有关获取应用程序的可视指南
-“获取应用程序”链接必须将用户重定向到 Azure AD 的访问权限授予（授权）页，以方便组织的管理员对你的应用程序进行授权，使其有权访问 Microsoft 托管的组织数据。有关如何请求访问权限的详细信息，请参阅[将应用程序与 Azure Active Directory 集成](/documentation/articles/active-directory-integrating-applications/)一文。
+“获取应用程序”链接必须将用户重定向到 Azure AD 的访问权限授予（授权）页，以方便组织的管理员对你的应用程序进行授权，使其有权访问 Microsoft 托管的组织数据。有关如何请求访问权限的详细信息，请参阅[将应用程序与 Azure Active Directory 集成](./active-directory-integrating-applications.md)一文。
 
 管理员许可你的应用程序后，可以选择将应用程序添加到其用户的 Office 365 应用程序启动器体验（可从 waffle 和 [https://portal.office.com/myapps](https://portal.office.com/myapps) 访问）。如果你想要广告此功能，可以使用类似于“将此应用程序添加到你的组织”词语，并显示类似于下面的按钮：
 

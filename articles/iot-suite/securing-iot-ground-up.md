@@ -1,25 +1,24 @@
-<properties
- pageTitle="从头开始保障你的物联网的安全 | Azure"
- description="本文介绍了 Azure IoT 套件的内置安全功能"
- services=""
- suite="iot-suite"
- documentationCenter=""
- authors="YuriDio"
- manager="timlt"
- editor=""/>
+---
+title: 从头开始保障你的物联网的安全 | Azure
+description: 本文介绍了 Azure IoT 套件的内置安全功能
+services: ''
+suite: iot-suite
+documentationCenter: ''
+authors: YuriDio
+manager: timlt
+editor: ''
 
-<tags
- ms.service="iot-suite"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="01/04/2017"
- wacn.date="01/25/2017"
- ms.author="yurid"/>  
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
+ms.author: yurid
+---
 
-
-[AZURE.INCLUDE [iot-security-ground-up](../../includes/iot-security-ground-up.md)]
+[!INCLUDE [iot-security-ground-up](../../includes/iot-security-ground-up.md)]
 
 ## 后续步骤
 
@@ -29,16 +28,16 @@
 - [IoT 安全体系结构][lnk-security-architecture]
 - [保护你的 IoT 部署][lnk-security-deployment]
 
-[lnk-security-best-practices]: /documentation/articles/iot-security-best-practices/
-[lnk-security-architecture]: /documentation/articles/iot-security-architecture/
-[lnk-security-deployment]: /documentation/articles/iot-suite-security-deployment/
+[lnk-security-best-practices]: ./iot-security-best-practices.md
+[lnk-security-architecture]: ./iot-security-architecture.md
+[lnk-security-deployment]: ./iot-suite-security-deployment.md
 
 你还可以浏览 IoT 套件预配置的解决方案的一些其他特性和功能：
 
 - [有关 IoT 套件的常见问题][lnk-faq]
 
 [lnk-predictive-overview]: /documentation/articles/iot-suite-predictive-overview/
-[lnk-faq]: /documentation/articles/iot-suite-faq/
+[lnk-faq]: ./iot-suite-faq.md
 
 <!---HONumber=Mooncake_0829_2016-->
 <!--Update_Description:update meta properties-->

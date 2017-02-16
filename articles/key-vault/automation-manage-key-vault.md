@@ -1,23 +1,21 @@
-<properties
-	pageTitle="使用 Azure 自动化管理 Azure 密钥保管库 | Azure"
-	description="了解如何使用 Azure 自动化服务来管理 Azure 密钥保管库。"
-	services="Key-Vault, automation"
-	documentationCenter=""
-	authors="mgoedtel"
-	manager="jwhit"
-	editor=""/>  
+---
+title: 使用 Azure 自动化管理 Azure 密钥保管库 | Azure
+description: 了解如何使用 Azure 自动化服务来管理 Azure 密钥保管库。
+services: Key-Vault, automation
+documentationCenter: ''
+authors: mgoedtel
+manager: jwhit
+editor: ''
 
-<tags
-	ms.service="key-vault"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/29/2016"
-	wacn.date="02/06/2017"
-	ms.author="magoedte;csand"/>
-
-
+ms.service: key-vault
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/29/2016
+wacn.date: 02/06/2017
+ms.author: magoedte;csand
+---
 
 #使用 Azure 自动化管理 Azure 密钥保管库
 
@@ -25,12 +23,11 @@
 
 ## 什么是 Azure 自动化？
 
-[Azure 自动化](/home/features/automation/)是用于通过流程自动化和所需的状态配置简化云管理的一项 Azure 服务。使用 Azure 自动化可以自动完成那些人工操作、重复、长时间运行且易出错的任务，从而改善组织的可靠性、效率和价值生成时间。
+[Azure 自动化](https://www.azure.cn/home/features/automation/)是用于通过流程自动化和所需的状态配置简化云管理的一项 Azure 服务。使用 Azure 自动化可以自动完成那些人工操作、重复、长时间运行且易出错的任务，从而改善组织的可靠性、效率和价值生成时间。
 
 Azure 自动化提供了具有高可靠性和高可用性的工作流执行引擎，该引擎可以根据你的需求进行扩展。在 Azure 自动化中，流程可以手动、通过第三方系统或按计划的间隔启动，使任务能够完全根据需求进行。
 
 通过将云管理任务改为由 Azure 自动化自动运行，可以降低运营开销，解放 IT 和开发运营人员，让他们将精力集中在增加企业价值的工作上。
-
 
 ## Azure 自动化如何帮助管理 Azure 密钥保管库？
 
@@ -48,7 +45,6 @@ Azure 自动化提供了具有高可靠性和高可用性的工作流执行引�
 下面是使用 PowerShell 管理密钥保管库的一些示例：
 - [Azure Key Vault - Step by Step（Azure 密钥保管库 - 分步指南）](https://blogs.technet.microsoft.com/kv/2015/06/02/azure-key-vault-step-by-step/)
 - [Setting Up and Configuring an Azure Key Vault（设置和配置 Azure 密钥保管库）](https://www.simple-talk.com/cloud/platform-as-a-service/setting-up-and-configuring-an-azure-key-vault/)
-
 
 ## 后续步骤
 

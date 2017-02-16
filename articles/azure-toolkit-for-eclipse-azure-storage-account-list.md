@@ -1,21 +1,21 @@
-<properties
-    pageTitle="Azure 存储帐户列表"
-    description="使用 Azure Toolkit for Eclipse 管理存储帐户设置"
-    services=""
-    documentationCenter="java"
-    authors="rmcmurray"
-    manager="wpickett"
-    editor=""/>
+---
+title: Azure 存储帐户列表
+description: 使用 Azure Toolkit for Eclipse 管理存储帐户设置
+services: ''
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: ''
 
-<tags
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016" 
-    wacn.date="12/05/2016" 
-    ms.author="robmcm"/>
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 <!-- Legacy MSDN URL = https://msdn.microsoft.com/library/azure/dn205108.aspx -->
 
@@ -25,7 +25,6 @@
 下面显示了“存储帐户”对话框。
 
 ![][ic719496]
-
 
 也可以从使用存储帐户的对话框中的“帐户”链接打开此对话框，如下所示：
 
@@ -69,7 +68,8 @@
 1. 在“存储帐户”对话框中，单击你要编辑的存储帐户，然后单击“删除”。
 2. 当系统提示你是否删除该存储帐户时，单击“确定”。
 
->[AZURE.NOTE] 通过“存储帐户”对话框删除存储帐户只会从 Eclipse 中可查看的存储帐户列表中删除它，而不会从 Azure 订阅中删除该存储帐户。此外，在 Eclipse 重新加载你的订阅详细信息后，该存储帐户可能会再次出现在列表中。
+>[!NOTE]
+> 通过“存储帐户”对话框删除存储帐户只会从 Eclipse 中可查看的存储帐户列表中删除它，而不会从 Azure 订阅中删除该存储帐户。此外，在 Eclipse 重新加载你的订阅详细信息后，该存储帐户可能会再次出现在列表中。
 
 ## 另请参阅 ##
 
@@ -84,11 +84,11 @@
 <!-- URL List -->
 
 [Azure Java 开发人员中心]: /develop/java/
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
 [Azure 经典管理门户]: http://manage.windowsazure.cn
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[What's New in the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[What's New in the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-whats-new.md
 
 <!-- IMG List -->
 

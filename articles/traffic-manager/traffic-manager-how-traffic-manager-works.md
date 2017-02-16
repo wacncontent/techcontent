@@ -1,24 +1,21 @@
-<properties
-    pageTitle="流量管理器工作原理 | Azure"
-    description="本文介绍 Azure 流量管理器的工作原理"
-    services="traffic-manager"
-    documentationCenter=""
-    authors="sdwheeler"
-    manager="carmonm"
-    editor=""
-/>  
+---
+title: 流量管理器工作原理 | Azure
+description: 本文介绍 Azure 流量管理器的工作原理
+services: traffic-manager
+documentationCenter: ''
+authors: sdwheeler
+manager: carmonm
+editor: ''
 
-<tags
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/11/2016"
-    wacn.date="01/03/2017"
-    ms.author="sewhee"
-/>  
-
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/11/2016
+wacn.date: 01/03/2017
+ms.author: sewhee
+---
 
 # 流量管理器的工作方式
 
@@ -26,8 +23,8 @@
 
 流量管理器具有两大优势：
 
-1. 根据某个[流量路由方法](/documentation/articles/traffic-manager-routing-methods/)对流量进行分布
-2. [连续监视终结点运行状况](/documentation/articles/traffic-manager-monitoring/)，在终结点发生故障时自动进行故障转移
+1. 根据某个[流量路由方法](./traffic-manager-routing-methods.md)对流量进行分布
+2. [连续监视终结点运行状况](./traffic-manager-monitoring.md)，在终结点发生故障时自动进行故障转移
 
 当客户端尝试连接到某个服务时，必须先将该服务的 DNS 名称解析成 IP 地址。然后，客户端就可以连接到该 IP 地址以访问相关服务。
 
@@ -45,8 +42,8 @@ Contoso Corp 开发了一个新的合作伙伴门户。此门户的 URL 为 http
 
 ![流量管理器 DNS 配置][1]  
 
-
-> [AZURE.NOTE] 通过 Azure 流量管理器来使用虚构域时，必须使用 CNAME 将虚构域名指向流量管理器域名。DNS 标准不允许在域的“顶点”（或根）位置创建 CNAME。因此，无法为“contoso.com”（有时称为“裸”域）创建 CNAME。只能为“contoso.com”下的域（例如“www.contoso.com”）创建 CNAME。为了克服此限制，我们建议通过简单的 HTTP 重定向将针对“contoso.com”的请求定向到某个备用名称（例如“www.contoso.com”）。
+> [!NOTE]
+> 通过 Azure 流量管理器来使用虚构域时，必须使用 CNAME 将虚构域名指向流量管理器域名。DNS 标准不允许在域的“顶点”（或根）位置创建 CNAME。因此，无法为“contoso.com”（有时称为“裸”域）创建 CNAME。只能为“contoso.com”下的域（例如“www.contoso.com”）创建 CNAME。为了克服此限制，我们建议通过简单的 HTTP 重定向将针对“contoso.com”的请求定向到某个备用名称（例如“www.contoso.com”）。
 
 ## <a name="how-clients-connect-using-traffic-manager"></a>客户端如何使用流量管理器进行连接
 
@@ -54,15 +51,14 @@ Contoso Corp 开发了一个新的合作伙伴门户。此门户的 URL 为 http
 
 ![使用流量管理器建立连接][2]  
 
-
 1. 客户端向已配置的递归 DNS 服务发送 DNS 查询，以解析名称“partners.contoso.com”。递归 DNS 服务有时称为“本地 DNS”服务，并不直接托管 DNS 域。客户端将联系各种权威 DNS 服务的工作负荷转移到 Internet，以便解析 DNS 名称。
 2. 为了解析 DNS 名称，递归 DNS 服务将查找“contoso.com”域的名称服务器。然后，它会联系这些名称服务器以请求“partners.contoso.com”DNS 记录。contoso.com DNS 服务器返回指向 contoso.trafficmanager.cn 的 CNAME 记录。
 3. 接下来，递归 DNS 服务查找“trafficmanager.cn”域的名称服务器，这些服务器由 Azure 流量管理器服务提供。然后，将针对“contoso.trafficmanager.cn”DNS 记录发出的请求发送到这些 DNS 服务器。
 4. 流量管理器名称服务器接收该请求。终结点的选择依据为：
 
     * 每个终结点的已配置状态（不返回已禁用的终结点）
-    * 每个终结点的当前运行状况，可通过流量管理器运行状况检查来确定。有关详细信息，请参阅 [Traffic Manager Endpoint Monitoring](/documentation/articles/traffic-manager-monitoring/)（流量管理器终结点监视）。
-    * 所选的流量路由方法。有关详细信息，请参阅 [Traffic Manager Routing Methods](/documentation/articles/traffic-manager-routing-methods/)（流量管理器路由方法）。
+    * 每个终结点的当前运行状况，可通过流量管理器运行状况检查来确定。有关详细信息，请参阅 [Traffic Manager Endpoint Monitoring](./traffic-manager-monitoring.md)（流量管理器终结点监视）。
+    * 所选的流量路由方法。有关详细信息，请参阅 [Traffic Manager Routing Methods](./traffic-manager-routing-methods.md)（流量管理器路由方法）。
 
 5. 选择的终结点以另一个 DNS CNAME 记录的形式返回。在本例中，假设返回的是 contoso-us.chinacloudapp.cn is returned。
 6. 接下来，递归 DNS 服务将查找“chinacloudapp.cn”域的名称服务器。它会联系这些名称服务器以请求“contoso-us.chinacloudapp.cn”DNS 记录。返回的 DNS“A”记录包含位于美国的服务终结点的 IP 地址。
@@ -91,7 +87,7 @@ Contoso Corp 开发了一个新的合作伙伴门户。此门户的 URL 为 http
 
 因此，进一步的调查应着重于应用程序。
 
-问题的最常见原因源自客户端浏览器发送的 HTTP 主机标头。请确保将应用程序配置为接受所要使用的域名的正确主机标头。对于使用 Azure 应用服务的终结点，请参阅 [configuring a custom domain name for a web app in Azure App Service using Traffic Manager](/documentation/articles/web-sites-traffic-manager-custom-domain-name/)（使用流量管理器为 Azure 应用服务中的 Web 应用配置自定义域名）。
+问题的最常见原因源自客户端浏览器发送的 HTTP 主机标头。请确保将应用程序配置为接受所要使用的域名的正确主机标头。对于使用 Azure 应用服务的终结点，请参阅 [configuring a custom domain name for a web app in Azure App Service using Traffic Manager](../app-service-web/web-sites-traffic-manager-custom-domain-name.md)（使用流量管理器为 Azure 应用服务中的 Web 应用配置自定义域名）。
 
 ### 使用流量管理器对性能有什么影响？
 
@@ -117,9 +113,9 @@ Contoso Corp 开发了一个新的合作伙伴门户。此门户的 URL 为 http
 
 ## 后续步骤
 
-详细了解流量管理器[终结点监视和自动故障转移](/documentation/articles/traffic-manager-monitoring/)。
+详细了解流量管理器[终结点监视和自动故障转移](./traffic-manager-monitoring.md)。
 
-详细了解流量管理器[流量路由方法](/documentation/articles/traffic-manager-routing-methods/)。
+详细了解流量管理器[流量路由方法](./traffic-manager-routing-methods.md)。
 
 <!--Image references-->
 

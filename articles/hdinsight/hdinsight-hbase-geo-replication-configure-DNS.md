@@ -1,30 +1,30 @@
-<properties
-    pageTitle="在两个 Azure 虚拟网络之间配置 DNS | Azure"
-    description="了解如何在两个 Azure 虚拟网络之间配置 VPN 连接和域名解析，以及如何配置 HBase 异地复制。"
-    services="hdinsight,virtual-network"
-    documentationcenter=""
-    author="mumian"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="881f4c60-0cac-481b-aedb-e7c0c9400df1"
-    ms.service="hdinsight"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="06/28/2016"
-    wacn.date="01/25/2017"
-    ms.author="jgao" />  
+---
+title: 在两个 Azure 虚拟网络之间配置 DNS | Azure
+description: 了解如何在两个 Azure 虚拟网络之间配置 VPN 连接和域名解析，以及如何配置 HBase 异地复制。
+services: hdinsight,virtual-network
+documentationcenter: ''
+author: mumian
+manager: jhubbard
+editor: cgronlun
 
+ms.assetid: 881f4c60-0cac-481b-aedb-e7c0c9400df1
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 06/28/2016
+wacn.date: 01/25/2017
+ms.author: jgao
+---
 
 # 在两个 Azure 虚拟网络之间配置 DNS
-> [AZURE.SELECTOR]
-- [配置 VPN 连接](/documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/)
-- [配置 DNS](/documentation/articles/hdinsight-hbase-geo-replication-configure-DNS/)
-- [配置 HBase 复制](/documentation/articles/hdinsight-hbase-geo-replication/)
+> [!div class="op_single_selector"]
+- [配置 VPN 连接](./hdinsight-hbase-geo-replication-configure-VNets.md)
+- [配置 DNS](./hdinsight-hbase-geo-replication-configure-DNS.md)
+- [配置 HBase 复制](./hdinsight-hbase-geo-replication.md)
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何向 Azure 虚拟网络添加和配置 DNS 服务器，以处理虚拟机内部和跨虚拟网络的名称解析。
 
@@ -38,29 +38,32 @@
 
 ![HDInsight HBase 复制虚拟网络示意图][img-vnet-diagram]  
 
-
 ## 先决条件
 在开始阅读本教程前，你必须具有：
 
-* **Azure 订阅**。请参阅[获取 Azure 试用版](/pricing/1rmb-trial/)。
+* **Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 * **配备 Azure PowerShell 的工作站**。
 
     运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
-        Add-AzureAccount -Environment AzureChinaCloud
+    ```
+    Add-AzureAccount -Environment AzureChinaCloud
+    ```
 
     如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
 
-        Select-AzureSubscription <AzureSubscriptionName>
+    ```
+    Select-AzureSubscription <AzureSubscriptionName>
+    ```
 
-    > [AZURE.IMPORTANT]
+    > [!IMPORTANT]
     Azure PowerShell 对于使用 Azure Service Manager 管理 HDInsight 资源的支持已**弃用**，将于 2017 年 1 月 1 日删除。本文档中的步骤使用的是与 Azure Resource Manager 兼容的新 HDInsight cmdlet。
     ><p>
-    > 请按照 [Install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（安装和配置 Azure PowerShell）中的步骤安装最新版本的 Azure PowerShell。如果你的脚本需要修改才能使用与 Azure Resource Manager 兼容的新 cmdlet，请参阅[迁移到适用于 HDInsight 群集的基于 Azure Resource Manager 的开发工具](/documentation/articles/hdinsight-hadoop-development-using-azure-resource-manager/)，了解详细信息。
+    > 请按照 [Install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（安装和配置 Azure PowerShell）中的步骤安装最新版本的 Azure PowerShell。如果你的脚本需要修改才能使用与 Azure Resource Manager 兼容的新 cmdlet，请参阅[迁移到适用于 HDInsight 群集的基于 Azure Resource Manager 的开发工具](./hdinsight-hadoop-development-using-azure-resource-manager.md)，了解详细信息。
 
 * **建立了 VPN 连接的两个 Azure 虚拟网络**。有关说明，请参阅[在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-geo-replication-vnet]。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     Azure 服务名称和虚拟机名称均必须唯一。本教程中使用的名称是 Contoso-[Azure Service/VM name]-[CN/CE]。例如，Contoso-VNet-CN 是位于中国北部数据中心的 Azure 虚拟网络；Contoso-DNS-CE 是位于中国东部数据中心的 DNS 服务器 VM。必须选择适合自己的名称。
 
 ## 创建用作 DNS 服务器的 Azure 虚拟机
@@ -109,11 +112,13 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 1. 打开 Windows PowerShell ISE。
 2. 运行以下 cmdlet：
 
-        Add-AzureAccount -Environment AzureChinaCloud
-        Select-AzureSubscription [YourAzureSubscriptionName]
+    ```powershell
+    Add-AzureAccount -Environment AzureChinaCloud
+    Select-AzureSubscription [YourAzureSubscriptionName]
 
-        Get-AzureVM -ServiceName Contoso-DNS-CN -Name Contoso-DNS-CN | Set-AzureStaticVNetIP -IPAddress 10.1.0.4 | Update-AzureVM
-        Get-AzureVM -ServiceName Contoso-DNS-CE -Name Contoso-DNS-CE | Set-AzureStaticVNetIP -IPAddress 10.2.0.4 | Update-AzureVM
+    Get-AzureVM -ServiceName Contoso-DNS-CN -Name Contoso-DNS-CN | Set-AzureStaticVNetIP -IPAddress 10.1.0.4 | Update-AzureVM
+    Get-AzureVM -ServiceName Contoso-DNS-CE -Name Contoso-DNS-CE | Set-AzureStaticVNetIP -IPAddress 10.2.0.4 | Update-AzureVM
+    ```
 
     ServiceName 是云服务名称。由于 DNS 服务器是云服务的第一个虚拟机，因此云服务名称与虚拟机名称相同。
 
@@ -208,8 +213,8 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 * [在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-geo-replication-vnet]
 * [配置 HBase 异地复制][hdinsight-hbase-geo-replication]
 
-[hdinsight-hbase-geo-replication]: /documentation/articles/hdinsight-hbase-geo-replication/
-[hdinsight-hbase-geo-replication-vnet]: /documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/
+[hdinsight-hbase-geo-replication]: ./hdinsight-hbase-geo-replication.md
+[hdinsight-hbase-geo-replication-vnet]: ./hdinsight-hbase-geo-replication-configure-VNets.md
 [powershell-install]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 
 [img-vnet-diagram]: ./media/hdinsight-hbase-geo-replication-configure-DNS/HDInsight.HBase.VPN.diagram.png

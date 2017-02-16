@@ -1,39 +1,40 @@
-<properties
-    pageTitle="密钥保管库中机密的 Resource Manager 模板 | Azure"
-    description="介绍用于通过模板部署密钥保管库机密的Resource Manager 架构。"
-    services="azure-resource-manager,key-vault"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="" />  
+---
+title: 密钥保管库中机密的 Resource Manager 模板 | Azure
+description: 介绍用于通过模板部署密钥保管库机密的Resource Manager 架构。
+services: azure-resource-manager,key-vault
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: ''
 
-<tags
-    ms.assetid="fd12bc81-b609-4ca8-b7e0-ee1049d70ab3"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="06/23/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: fd12bc81-b609-4ca8-b7e0-ee1049d70ab3
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 06/23/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 密钥保管库机密模板架构
-创建存储于密钥保管库中的机密。此资源类型通常部署为[密钥保管库](/documentation/articles/resource-manager-template-keyvault/)的子资源。
+创建存储于密钥保管库中的机密。此资源类型通常部署为[密钥保管库](./resource-manager-template-keyvault.md)的子资源。
 
 ## 架构格式
 若要创建密钥保管库机密，请将以下架构添加到你的模板。可将机密定义为密钥保管库的子资源或定义为顶级资源。在同一个模板中部署密钥保管库时，可将机密定义为子资源。如果密钥保管库不是部署在同一个模板中，或者需要通过对资源类型执行循环来创建多个密码，则需要将机密定义为顶级资源。
 
-    {
-        "type": enum,
-        "apiVersion": "2015-06-01",
-        "name": string,
-        "properties": {
-            "value": string
-        },
-        "dependsOn": [ array values ]
-    }
+```
+{
+    "type": enum,
+    "apiVersion": "2015-06-01",
+    "name": string,
+    "properties": {
+        "value": string
+    },
+    "dependsOn": [ array values ]
+}
+```
 
 ## 值
 下表描述了需要在架构中设置的值。
@@ -54,172 +55,175 @@
 ## 示例
 第一个示例将机密部署为密钥保管库的子资源。
 
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the vault"
+            }
+        },
+        "tenantId": {
+            "type": "string",
+            "metadata": {
+               "description": "Tenant ID for the subscription and use assigned access to the vault. Available from the Get-AzureRmSubscription PowerShell cmdlet"
+            }
+        },
+        "objectId": {
+            "type": "string",
+            "metadata": {
+                "description": "Object ID of the AAD user or service principal that will have access to the vault. Available from the Get-AzureRmADUser or the Get-AzureRmADServicePrincipal cmdlets"
+            }
+        },
+        "keysPermissions": {
+            "type": "array",
+            "defaultValue": [ "all" ],
+            "metadata": {
+                "description": "Permissions to grant user to keys in the vault. Valid values are: all, create, import, update, get, list, delete, backup, restore, encrypt, decrypt, wrapkey, unwrapkey, sign, and verify."
+            }
+        },
+        "secretsPermissions": {
+            "type": "array",
+            "defaultValue": [ "all" ],
+            "metadata": {
+                "description": "Permissions to grant user to secrets in the vault. Valid values are: all, get, set, list, and delete."
+            }
+        },
+        "vaultSku": {
+            "type": "string",
+            "defaultValue": "Standard",
+            "allowedValues": [
+                "Standard",
+                "Premium"
+            ],
+            "metadata": {
+                "description": "SKU for the vault"
+            }
+        },
+        "enabledForDeployment": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Specifies if the vault is enabled for VM or Service Fabric deployment"
+            }
+        },
+        "enabledForTemplateDeployment": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Specifies if the vault is enabled for ARM template deployment"
+            }
+        },
+        "enableVaultForVolumeEncryption": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Specifies if the vault is enabled for volume encryption"
+            }
+        },
+        "secretName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the secret to store in the vault"
+            }
+        },
+        "secretValue": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Value of the secret to store in the vault"
+            }
+        }
+    },
+    "resources": [
     {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "keyVaultName": {
-                "type": "string",
-                "metadata": {
-                    "description": "Name of the vault"
+        "type": "Microsoft.KeyVault/vaults",
+        "name": "[parameters('keyVaultName')]",
+        "apiVersion": "2015-06-01",
+        "location": "[resourceGroup().location]",
+        "tags": {
+            "displayName": "KeyVault"
+        },
+        "properties": {
+            "enabledForDeployment": "[parameters('enabledForDeployment')]",
+            "enabledForTemplateDeployment": "[parameters('enabledForTemplateDeployment')]",
+            "enabledForVolumeEncryption": "[parameters('enableVaultForVolumeEncryption')]",
+            "tenantId": "[parameters('tenantId')]",
+            "accessPolicies": [
+            {
+                "tenantId": "[parameters('tenantId')]",
+                "objectId": "[parameters('objectId')]",
+                "permissions": {
+                    "keys": "[parameters('keysPermissions')]",
+                    "secrets": "[parameters('secretsPermissions')]"
                 }
-            },
-            "tenantId": {
-                "type": "string",
-                "metadata": {
-                   "description": "Tenant ID for the subscription and use assigned access to the vault. Available from the Get-AzureRmSubscription PowerShell cmdlet"
-                }
-            },
-            "objectId": {
-                "type": "string",
-                "metadata": {
-                    "description": "Object ID of the AAD user or service principal that will have access to the vault. Available from the Get-AzureRmADUser or the Get-AzureRmADServicePrincipal cmdlets"
-                }
-            },
-            "keysPermissions": {
-                "type": "array",
-                "defaultValue": [ "all" ],
-                "metadata": {
-                    "description": "Permissions to grant user to keys in the vault. Valid values are: all, create, import, update, get, list, delete, backup, restore, encrypt, decrypt, wrapkey, unwrapkey, sign, and verify."
-                }
-            },
-            "secretsPermissions": {
-                "type": "array",
-                "defaultValue": [ "all" ],
-                "metadata": {
-                    "description": "Permissions to grant user to secrets in the vault. Valid values are: all, get, set, list, and delete."
-                }
-            },
-            "vaultSku": {
-                "type": "string",
-                "defaultValue": "Standard",
-                "allowedValues": [
-                    "Standard",
-                    "Premium"
-                ],
-                "metadata": {
-                    "description": "SKU for the vault"
-                }
-            },
-            "enabledForDeployment": {
-                "type": "bool",
-                "defaultValue": false,
-                "metadata": {
-                    "description": "Specifies if the vault is enabled for VM or Service Fabric deployment"
-                }
-            },
-            "enabledForTemplateDeployment": {
-                "type": "bool",
-                "defaultValue": false,
-                "metadata": {
-                    "description": "Specifies if the vault is enabled for ARM template deployment"
-                }
-            },
-            "enableVaultForVolumeEncryption": {
-                "type": "bool",
-                "defaultValue": false,
-                "metadata": {
-                    "description": "Specifies if the vault is enabled for volume encryption"
-                }
-            },
-            "secretName": {
-                "type": "string",
-                "metadata": {
-                    "description": "Name of the secret to store in the vault"
-                }
-            },
-            "secretValue": {
-                "type": "securestring",
-                "metadata": {
-                    "description": "Value of the secret to store in the vault"
-                }
+            }],
+            "sku": {
+                "name": "[parameters('vaultSku')]",
+                "family": "A"
             }
         },
         "resources": [
         {
-            "type": "Microsoft.KeyVault/vaults",
-            "name": "[parameters('keyVaultName')]",
+            "type": "secrets",
+            "name": "[parameters('secretName')]",
             "apiVersion": "2015-06-01",
-            "location": "[resourceGroup().location]",
-            "tags": {
-                "displayName": "KeyVault"
-            },
             "properties": {
-                "enabledForDeployment": "[parameters('enabledForDeployment')]",
-                "enabledForTemplateDeployment": "[parameters('enabledForTemplateDeployment')]",
-                "enabledForVolumeEncryption": "[parameters('enableVaultForVolumeEncryption')]",
-                "tenantId": "[parameters('tenantId')]",
-                "accessPolicies": [
-                {
-                    "tenantId": "[parameters('tenantId')]",
-                    "objectId": "[parameters('objectId')]",
-                    "permissions": {
-                        "keys": "[parameters('keysPermissions')]",
-                        "secrets": "[parameters('secretsPermissions')]"
-                    }
-                }],
-                "sku": {
-                    "name": "[parameters('vaultSku')]",
-                    "family": "A"
-                }
+                "value": "[parameters('secretValue')]"
             },
-            "resources": [
-            {
-                "type": "secrets",
-                "name": "[parameters('secretName')]",
-                "apiVersion": "2015-06-01",
-                "properties": {
-                    "value": "[parameters('secretValue')]"
-                },
-                "dependsOn": [
-                    "[concat('Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
-                ]
-            }]
+            "dependsOn": [
+                "[concat('Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
+            ]
         }]
-    }
+    }]
+}
+```
 
 第二个示例将机密部署为存储在现有密钥保管库中的顶级资源。
 
-    {
-        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        "contentVersion": "1.0.0.0",
-        "parameters": {
-            "keyVaultName": {
-                "type": "string",
-                "metadata": {
-                    "description": "Name of the existing vault"
-                }
-            },
-            "secretName": {
-                "type": "string",
-                "metadata": {
-                    "description": "Name of the secret to store in the vault"
-                }
-            },
-            "secretValue": {
-                "type": "securestring",
-                "metadata": {
-                    "description": "Value of the secret to store in the vault"
-                }
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the existing vault"
             }
         },
-        "variables": {},
-        "resources": [
-            {
-                "type": "Microsoft.KeyVault/vaults/secrets",
-                "apiVersion": "2015-06-01",
-                "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'))]",
-                "properties": {
-                    "value": "[parameters('secretValue')]"
-                }
+        "secretName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the secret to store in the vault"
             }
-        ],
-        "outputs": {}
-    }
-
+        },
+        "secretValue": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Value of the secret to store in the vault"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2015-06-01",
+            "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'))]",
+            "properties": {
+                "value": "[parameters('secretValue')]"
+            }
+        }
+    ],
+    "outputs": {}
+}
+```
 
 ## 后续步骤
-* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)。
-* 有关在部署模板时引用密钥保管库机密的示例，请参阅[在部署期间传递安全值](/documentation/articles/resource-manager-keyvault-parameter/)。
+* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)。
+* 有关在部署模板时引用密钥保管库机密的示例，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

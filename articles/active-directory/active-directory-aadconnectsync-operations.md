@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Azure AD Connect 同步：操作任务和注意事项 | Azure"
-   description="本主题介绍 Azure AD Connect 同步的操作任务，以及如何准备运行此组件。"
-   services="active-directory"
-   documentationCenter=""
-   authors="AndKjell"
-   manager="femila"
-   editor=""/>
+---
+title: Azure AD Connect 同步：操作任务和注意事项 | Azure
+description: 本主题介绍 Azure AD Connect 同步的操作任务，以及如何准备运行此组件。
+services: active-directory
+documentationCenter: ''
+authors: AndKjell
+manager: femila
+editor: ''
 
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="09/01/2016"
-   ms.author="andkjell"
-   wacn.date="01/24/2017"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 09/01/2016
+ms.author: andkjell
+wacn.date: 01/24/2017
+---
 
 # Azure AD Connect 同步：操作任务和注意事项
 本主题旨在介绍 Azure AD Connect 同步的操作任务。
@@ -23,9 +23,9 @@
 ## 过渡模式  <a name="staging-mode"></a>
 暂存模式可以用于许多方案，包括：
 
--	高可用性。
--	测试和部署新的配置更改。
--	引入新的服务器并解除旧服务器。
+- 高可用性。
+- 测试和部署新的配置更改。
+- 引入新的服务器并解除旧服务器。
 
 使用处于暂存模式的服务器，可以在激活服务器之前更改配置和预览更改。它还允许运行完全导入和完全同步，以便在生产环境中应用所有更改之前验证这些更改是否符合预期。
 
@@ -84,15 +84,15 @@
 ## 灾难恢复 <a name="disaster-recovery"></a>
 实现设计的一部分是规划在灾难中失去同步服务器时如何应对。有不同的模型可用，要使用哪一种模型取决于许多因素，包括：
 
--	停机期间无法对 Azure AD 中的对象进行更改的容限度如何？
--	如果使用密码同步，用户是否接受他们在本地更改时必须在 Azure AD 中使用旧密码？
--	是否对实时操作具有依赖性，例如密码写回？
+- 停机期间无法对 Azure AD 中的对象进行更改的容限度如何？
+- 如果使用密码同步，用户是否接受他们在本地更改时必须在 Azure AD 中使用旧密码？
+- 是否对实时操作具有依赖性，例如密码写回？
 
 根据这些问题的回答和组织的策略，实施下列其中一个策略：
 
--	根据需要重建。
--	具有备用的待机服务器（称为**暂存模式**）。
--	使用虚拟机
+- 根据需要重建。
+- 具有备用的待机服务器（称为**暂存模式**）。
+- 使用虚拟机
 
 如果不使用内置的 SQL Express 数据库，应查看 [SQL 高可用性](#sql-high-availability)部分。
 
@@ -116,7 +116,7 @@
 
 **概述主题**
 
-- [Azure AD Connect 同步：理解和自定义同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [Azure AD Connect 同步：理解和自定义同步](./active-directory-aadconnectsync-whatis.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

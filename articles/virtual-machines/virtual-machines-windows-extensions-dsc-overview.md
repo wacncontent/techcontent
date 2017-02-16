@@ -1,29 +1,27 @@
-<properties
-   pageTitle="适用于 Azure 的 Desired State Configuration 概述 | Azure"
-   description="有关使用 PowerShell Desired State Configuration 的 Azure 扩展的概述。内容涉及先决条件、体系结构和 cmdlet。"
-   services="virtual-machines-windows"
-   documentationCenter=""
-   authors="zjalexander"
-   manager="timlt"
-   editor=""
-   tags="azure-service-management,azure-resource-manager"
-   keywords=""/>  
+---
+title: 适用于 Azure 的 Desired State Configuration 概述 | Azure
+description: 有关使用 PowerShell Desired State Configuration 的 Azure 扩展的概述。内容涉及先决条件、体系结构和 cmdlet。
+services: virtual-machines-windows
+documentationCenter: ''
+authors: zjalexander
+manager: timlt
+editor: ''
+tags: azure-service-management,azure-resource-manager
+keywords: ''
 
-
-<tags
-   ms.service="virtual-machines-windows"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows"
-   ms.workload="na"
-   ms.date="09/15/2016"
-   wacn.date="12/16/2016"
-   ms.author="zachal"/>  
-
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: na
+ms.date: 09/15/2016
+wacn.date: 12/16/2016
+ms.author: zachal
+---
 
 # Azure Desired State Configuration 扩展处理程序简介 #
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
 
 Azure VM 代理和关联的扩展是 Azure 基础结构服务的一部分。VM 扩展是软件组件，可以扩展 VM 功能并简化各种 VM 管理操作。例如，VMAccess 扩展可用于重置管理员的密码，自定义脚本扩展可用于在 VM 上执行脚本。
 
@@ -81,14 +79,13 @@ Azure DSC 扩展使用 Azure VM 代理框架来传送、启用和报告 Azure VM
 - StorageEndpointSuffix 在 ARM 中名为 ArchiveStorageEndpointSuffix
 - 已将 AutoUpdate 参数添加到 ARM，使扩展处理程序能够在有最新版本时自动更新。请注意，当发布了新版本的 WMF 时，此参数可能会导致 VM 重新启动。
 
-
 ## Azure 门户预览功能 ##
 浏览到经典 VM。在“设置”->“常规”下面，单击“扩展”。 此时将创建一个新窗格。单击“添加”，然后选择“PowerShell DSC”。
 
 门户需要输入。**配置模块或脚本**：此字段必填。需要一个包含配置脚本的 .ps1 文件，或者需要一个 .zip 文件，其中的 .ps1 配置脚本位于根目录，所有依赖资源位于模块文件夹。可以使用 Azure PowerShell SDK 随附的 `Publish-AzureVMDscConfiguration -ConfigurationArchivePath` cmdlet 来创建该文件。系统会将 .zip 文件上载到受 SAS 令牌保护的用户 Blob 存储。
 
 **配置数据 PSD1 文件**：此字段选填。如果配置要求 .psd1 中有配置数据文件，请使用此字段来进行选择，然后将它上载到受 SAS 令牌保护的用户 Blob 存储。
- 
+
 **配置的模块限定名称**：.ps1 文件可以包含多个配置函数。请输入配置 .ps1 脚本的名称，后面再加上 '' 和配置函数的名称。例如，如果 .ps1 脚本的名称为“configuration.ps1”，而配置为“IisInstall”，则可输入：`configuration.ps1\IisInstall`
 
 **配置参数**：如果配置函数采用参数，请使用 `argumentName1=value1,argumentName2=value2` 格式在此处输入。请注意，此格式与通过 PowerShell cmdlet 或 Resource Manager 模板接受配置参数的方式不同。
@@ -97,37 +94,41 @@ Azure DSC 扩展使用 Azure VM 代理框架来传送、启用和报告 Azure VM
 
 Azure DSC 扩展将检索并在 Azure VM 上启用 DSC 配置文档。下面是一个简单的配置示例。以“IisInstall.ps1”的名称将它保存在本地：
 
-	configuration IISInstall 
-	{ 
-	    node "localhost"
-	    { 
-	        WindowsFeature IIS 
-	        { 
-	            Ensure = "Present" 
-	            Name = "Web-Server"                       
-	        } 
-	    } 
-	}
+```powershell
+configuration IISInstall 
+{ 
+    node "localhost"
+    { 
+        WindowsFeature IIS 
+        { 
+            Ensure = "Present" 
+            Name = "Web-Server"                       
+        } 
+    } 
+}
+```
 
 以下步骤将 IisInstall.ps1 脚本放在指定的 VM 上，执行配置，然后报告状态。
- 
-	#Azure PowerShell cmdlets are required
-	Import-Module Azure
-	
-	#Use an existing Azure Virtual Machine, 'DscDemo1'
-	$demoVM = Get-AzureVM DscDemo1
-	
-	#Publish the configuration script into user storage.
-	Publish-AzureVMDscConfiguration -ConfigurationPath ".\IisInstall.ps1" -StorageContext $storageContext -Verbose -Force
-	
-	#Set the VM to run the DSC configuration
-	Set-AzureVMDscExtension -VM $demoVM -ConfigurationArchive "demo.ps1.zip" -StorageContext $storageContext -ConfigurationName "runScript" -Verbose
-	
-	#Update the configuration of an Azure Virtual Machine
-	$demoVM | Update-AzureVM -Verbose
-	
-	#check on status
-	Get-AzureVMDscExtensionStatus -VM $demovm -Verbose
+
+```powershell
+#Azure PowerShell cmdlets are required
+Import-Module Azure
+
+#Use an existing Azure Virtual Machine, 'DscDemo1'
+$demoVM = Get-AzureVM DscDemo1
+
+#Publish the configuration script into user storage.
+Publish-AzureVMDscConfiguration -ConfigurationPath ".\IisInstall.ps1" -StorageContext $storageContext -Verbose -Force
+
+#Set the VM to run the DSC configuration
+Set-AzureVMDscExtension -VM $demoVM -ConfigurationArchive "demo.ps1.zip" -StorageContext $storageContext -ConfigurationName "runScript" -Verbose
+
+#Update the configuration of an Azure Virtual Machine
+$demoVM | Update-AzureVM -Verbose
+
+#check on status
+Get-AzureVMDscExtensionStatus -VM $demovm -Verbose
+```
 
 ## 日志记录 ##
 
@@ -139,10 +140,10 @@ C:\\WindowsAzure\\Logs\\Plugins\\Microsoft.Powershell.DSC[Version Number]
 
 有关 PowerShell DSC 的详细信息，请[访问 PowerShell 文档中心](https://msdn.microsoft.com/powershell/dsc/overview)。
 
-检查 [Azure Resource Manager template for the DSC extension](/documentation/articles/virtual-machines-windows-extensions-dsc-template/)（适用于 DSC 扩展的 Azure Resource Manager 模板）。
+检查 [Azure Resource Manager template for the DSC extension](./virtual-machines-windows-extensions-dsc-template.md)（适用于 DSC 扩展的 Azure Resource Manager 模板）。
 
 若要查找可以使用 PowerShell DSC 管理的其他功能，请[浏览 PowerShell 库](https://www.powershellgallery.com/packages?q=DscResource&x=0&y=0)以获取更多 DSC 资源。
 
-有关将敏感参数传入配置的详细信息，请参阅 [Manage credentials securely with the DSC extension handler](/documentation/articles/virtual-machines-windows-extensions-dsc-credentials/)（使用 DSC 扩展处理程序安全管理凭据）。
+有关将敏感参数传入配置的详细信息，请参阅 [Manage credentials securely with the DSC extension handler](./virtual-machines-windows-extensions-dsc-credentials.md)（使用 DSC 扩展处理程序安全管理凭据）。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

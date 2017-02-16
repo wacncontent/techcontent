@@ -1,29 +1,28 @@
-<properties
-   pageTitle="了解如何将文件和文件夹从 Windows 备份到 Azure | Azure"
-   description="了解如何通过创建保管库、安装备份代理，并将文件和文件夹备份到 Azure，来备份 Windows Server 数据。"
-   services="backup"
-   documentationCenter=""
-   authors="Jim-Parker"
-   manager="jwhit"
-   editor=""
-   keywords="如何备份;怎样备份"/>  
+---
+title: 了解如何将文件和文件夹从 Windows 备份到 Azure | Azure
+description: 了解如何通过创建保管库、安装备份代理，并将文件和文件夹备份到 Azure，来备份 Windows Server 数据。
+services: backup
+documentationCenter: ''
+authors: Jim-Parker
+manager: jwhit
+editor: ''
+keywords: 如何备份;怎样备份
 
-<tags
-   ms.service="backup"
-   ms.workload="storage-backup-recovery"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="hero-article"
-   ms.date="09/27/2016"
-   wacn.date="11/15/2016"
-   ms.author="markgal;"/>  
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 09/27/2016
+wacn.date: 11/15/2016
+ms.author: markgal;
+---
 
 # 先睹为快：将文件和文件夹从 Windows Server 或客户端备份到 Azure
 
 本文介绍如何使用 Azure 备份将 Windows Server（或 Windows 客户端）文件和文件夹备份到 Azure。本教程旨在引导你完成基本操作。如果想要开始使用 Azure 备份，本文的内容非常合适。
 
-如果想要深入了解 Azure 备份，请阅读此[概述](/documentation/articles/backup-introduction-to-azure-backup/)。
+如果想要深入了解 Azure 备份，请阅读此[概述](./backup-introduction-to-azure-backup.md)。
 
 将文件和文件夹备份到 Azure 需要进行以下活动：
 
@@ -32,12 +31,11 @@
 ![步骤 3](./media/backup-try-azure-backup-in-10-mins/step-3.png) 下载并注册备份代理。<br>
 ![步骤 4](./media/backup-try-azure-backup-in-10-mins/step-4.png) 备份文件和文件夹。
 
-
 ![如何使用 Azure 备份来备份 Windows 计算机](./media/backup-try-azure-backup-in-10-mins/windows-machine-backup-process.png)
 
 ## 步骤 1：获取 Azure 订阅
 
-如果你没有 Azure 订阅，可以创建一个[试用帐户](/pricing/1rmb-trial/)，这样便可以访问任何 Azure 服务。
+如果你没有 Azure 订阅，可以创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial/)，这样便可以访问任何 Azure 服务。
 
 ## 步骤 2：创建备份保管库并下载所需的项
 
@@ -68,9 +66,9 @@
 
     选择存储冗余选项的最佳时机是在创建保管库之后、将任何计算机注册到保管库之前。将某个项注册到保管库后，存储冗余选项将会锁定且不能修改。
 
-    如果你要使用 Azure 作为主要备份存储终结点（例如，你要从 Windows Server 备份到 Azure），应考虑选择（默认的）[异地冗余存储](/documentation/articles/storage-redundancy/#geo-redundant-storage)选项。
+    如果你要使用 Azure 作为主要备份存储终结点（例如，你要从 Windows Server 备份到 Azure），应考虑选择（默认的）[异地冗余存储](../storage/storage-redundancy.md#geo-redundant-storage)选项。
 
-    如果使用 Azure 作为第三级备份存储终结点（例如，你正在使用 SCDPM 在本地创建本地备份复制，使用 Azure 满足长期数据保留需求），应考虑选择[本地冗余存储](/documentation/articles/storage-redundancy/#locally-redundant-storage)。这可以降低在 Azure 中存储数据的成本，但提供的数据持久性更低，不过，对于第三级副本是可接受的。
+    如果使用 Azure 作为第三级备份存储终结点（例如，你正在使用 SCDPM 在本地创建本地备份复制，使用 Azure 满足长期数据保留需求），应考虑选择[本地冗余存储](../storage/storage-redundancy.md#locally-redundant-storage)。这可以降低在 Azure 中存储数据的成本，但提供的数据持久性更低，不过，对于第三级副本是可接受的。
 
     a.单击刚刚创建的保管库。
 
@@ -100,7 +98,8 @@
 
     经典管理门户将使用保管库名称和当前日期的组合生成保管库凭据。
 
-    >[AZURE.NOTE] 保管库凭据文件仅在注册工作流中使用，48 小时后过期。
+    >[!NOTE]
+    > 保管库凭据文件仅在注册工作流中使用，48 小时后过期。
 
 6. 单击“保存”将保管库凭据下载到本地帐户的 **downloads** 文件夹，或者从“保存”菜单中选择“另存为”以指定保管库凭据保存到的位置。
 
@@ -108,7 +107,8 @@
 
     确保将保管库凭据保存到可从计算机访问的位置。如果将该文件存储在文件共享/SMB 中，请检查访问权限。
 
-    >[AZURE.NOTE] 此时不需打开保管库凭据。
+    >[!NOTE]
+    > 此时不需打开保管库凭据。
 
     接下来，需要下载备份代理
 
@@ -160,7 +160,8 @@
 
 7. 在“加密设置”屏幕中，你可以生成一个通行短语，或者提供一个通行短语（最少包含 16 个字符）。请记住将通行短语保存在安全位置。
 
-    > [AZURE.WARNING] 如果你丢失或忘记了通行短语，Microsoft 无法帮助你恢复备份的数据。加密通行短语由最终用户拥有，Microsoft 看不到最终用户所用的通行短语。请将该文件保存在安全位置，因为在恢复操作期间需要用到它。
+    > [!WARNING]
+    > 如果你丢失或忘记了通行短语，Microsoft 无法帮助你恢复备份的数据。加密通行短语由最终用户拥有，Microsoft 看不到最终用户所用的通行短语。请将该文件保存在安全位置，因为在恢复操作期间需要用到它。
 
     单击“完成”。
 
@@ -206,7 +207,8 @@
 
 5. 选择备份副本的“保留策略”。你可以根据需要修改每日、每周、每月和每年保留策略。
 
-    >[AZURE.NOTE] [此文](/documentation/articles/backup-azure-backup-cloud-as-tape/)中详细介绍了备份计划。
+    >[!NOTE]
+    > [此文](./backup-azure-backup-cloud-as-tape.md)中详细介绍了备份计划。
 
      单击“下一步”
 
@@ -247,8 +249,8 @@
 祝贺你，你已将文件和文件夹成功备份到 Azure 备份。
 
 ## 后续步骤
-+ 若要了解有关 Azure 备份的详细信息，请参阅 [Azure 备份概述](/documentation/articles/backup-introduction-to-azure-backup/)。
-- [备份 Windows Server](/documentation/articles/backup-configure-vault/)
++ 若要了解有关 Azure 备份的详细信息，请参阅 [Azure 备份概述](./backup-introduction-to-azure-backup.md)。
+- [备份 Windows Server](./backup-configure-vault.md)
 + 访问 [Azure 备份论坛](https://social.msdn.microsoft.com/forums/azure/zh-cn/home?forum=windowsazureonlinebackup)。
 
 <!---HONumber=Mooncake_1107_2016-->

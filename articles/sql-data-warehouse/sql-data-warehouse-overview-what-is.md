@@ -1,24 +1,21 @@
-<properties
-   pageTitle="什么是 Azure SQL 数据仓库 | Azure"
-   description="企业级分布式数据库，可处理 1 千万亿字节的关系数据和非关系数据量。它是行业首个云数据仓库，可以在数秒内增长、收缩和暂停。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="lodipalm"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 什么是 Azure SQL 数据仓库 | Azure
+description: 企业级分布式数据库，可处理 1 千万亿字节的关系数据和非关系数据量。它是行业首个云数据仓库，可以在数秒内增长、收缩和暂停。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: lodipalm
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/03/2017"
-   ms.author="lodipalm;barbkess;mausher;jrj;sonyama;kevin"/>
-
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: get-started-article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/03/2017
+ms.author: lodipalm;barbkess;mausher;jrj;sonyama;kevin
+---
 
 # 什么是 Azure SQL 数据仓库？
 Azure SQL 数据仓库是一种基于云的向外扩展数据库，可以处理大量数据（关系数据和非关系数据）。SQL 数据仓库在大规模并行处理 (MPP) 体系结构的基础上构建，可以处理你的企业工作负荷。
@@ -44,7 +41,6 @@ SQL 数据仓库是一种大规模并行处理 (MPP) 分布式数据库系统。
 下图更详细地说明了此体系结构。
 
 ![SQL 数据仓库体系结构][1]  
-
 
 **控制节点：**控制节点管理和优化查询。它是与所有应用程序和连接进行交互的前端。在 SQL 数据仓库中，控制节点由 SQL 数据库提供支持，并且连接到它时它看起来就像 SQL 数据库。表面之下，控制节点协调对分布式数据运行并行查询所需的所有数据移动和计算。当你将 T-SQL 查询提交到 SQL 数据仓库时，控制节点会将其转换为可在每个计算节点上并行运行的单独查询。
 
@@ -142,7 +138,6 @@ Polybase 可让你使用熟悉的 T-SQL 命令利用不同源中的数据。Poly
 - [博客]
 - [MSDN 论坛]
 
-
 <!--Image references-->
 
 [1]: ./media/sql-data-warehouse-overview-what-is/dwarchitecture.png
@@ -150,11 +145,11 @@ Polybase 可让你使用熟悉的 T-SQL 命令利用不同源中的数据。Poly
 <!--Article references-->
 [创建支持票证]: /documentation/articles/sql-data-warehouse-get-started-create-support-ticket/
 [how to load sample data]: /documentation/articles/sql-data-warehouse-get-started-load-sample-databases/
-[创建 SQL 数据仓库]: /documentation/articles/sql-data-warehouse-get-started-provision/
-[迁移文档]: /documentation/articles/sql-data-warehouse-overview-migrate/
-[集成工具概述]: /documentation/articles/sql-data-warehouse-overview-integrate/
-[备份和还原概述]: /documentation/articles/sql-data-warehouse-restore-database-overview/
-[Azure 术语表]: /documentation/articles/azure-glossary-cloud-terminology/
+[创建 SQL 数据仓库]: ./sql-data-warehouse-get-started-provision.md
+[迁移文档]: ./sql-data-warehouse-overview-migrate.md
+[集成工具概述]: ./sql-data-warehouse-overview-integrate.md
+[备份和还原概述]: ./sql-data-warehouse-restore-database-overview.md
+[Azure 术语表]: ../azure-glossary-cloud-terminology.md
 
 <!--MSDN references-->
 

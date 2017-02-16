@@ -1,22 +1,22 @@
-<properties
-    pageTitle="MFA 最佳安全做法 | Azure"
-    description="本文档提供有关配合使用 Azure MFA 与 Azure 帐户的最佳实践"
-    services="multi-factor-authentication"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="yossib" />  
+---
+title: MFA 最佳安全做法 | Azure
+description: 本文档提供有关配合使用 Azure MFA 与 Azure 帐户的最佳实践
+services: multi-factor-authentication
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: yossib
 
-<tags
-    ms.assetid="3be7d968-96bb-4320-8701-869fd04a2595"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/31/2016"
-    wacn.date="02/07/2017"
-    ms.author="kgremban" />
+ms.assetid: 3be7d968-96bb-4320-8701-869fd04a2595
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/31/2016
+wacn.date: 02/07/2017
+ms.author: kgremban
+---
 
 # 将 Azure 多重身份验证与 Azure AD 帐户配合使用时的安全最佳实践
 在增强身份验证过程时，双重验证是大多数组织的首选。Azure 多重身份验证 (MFA) 能使公司符合其安全和法规遵从要求，同时为用户提供简单的登录体验。本文介绍计划采用 Azure MFA 时应该考虑的一些最佳做法。
@@ -28,7 +28,6 @@
 
 ### Multi-Factor Auth 提供程序
 ![Multi-Factor Auth 提供程序](./media/multi-factor-authentication-security-best-practices/authprovider.png)  
-
 
 如果没有 Azure AD Premium 或企业移动性套件，则在云中采用 Azure MFA 的第一个步骤是创建 MFA 身份验证提供程序。尽管 MFA 默认可供拥有 Azure Active Directory 的全局管理员使用，但为组织部署 MFA 时，需要将双重验证功能扩展到所有用户。为此，需要多重身份验证提供程序。选择 Auth 提供程序时，需要选择一个目录并注意以下事项：
 
@@ -48,7 +47,7 @@
 - 用户状态设置为“已启用”时，表示该用户可使用双重验证，但尚未完成注册过程。这些用户在下次登录时，系统将提示其完成注册过程。此设置不会影响非浏览器应用。所有应用继续工作，直到注册过程完成。
 - 用户状态设置为“强制”时，表示该用户可能（但不一定）已完成注册。如果他们已完成注册过程，则表示他们正在执行执行双重验证。否则，在他们下次登录时，系统将提示其完成注册过程。此设置不会影响非浏览器应用。在创建并使用应用密码之前，这些应用无法工作。
 
-使用[云中的 Azure 多重身份验证入门](/documentation/articles/multi-factor-authentication-get-started-cloud/)一文中所述的用户通知模板，向用户发送有关采用 MFA 的电子邮件。
+使用[云中的 Azure 多重身份验证入门](./multi-factor-authentication-get-started-cloud.md)一文中所述的用户通知模板，向用户发送有关采用 MFA 的电子邮件。
 
 ### 可支持性
 由于大多数用户习惯只使用密码进行身份验证，因此公司必须让所有用户了解此过程。如果用户熟悉该过程，则他们就不会在出现 MFA 相关的小问题时经常呼叫技术支持。但是，在某些情况下，需要暂时禁用 MFA。使用以下指导原则了解如何处理这些情况：
@@ -88,7 +87,7 @@ Azure 多重身份验证服务器可用于保护 Azure AD 帐户所访问的云�
 ## 其他资源
 尽管本文重点介绍了 Azure MFA 的一些最佳实践，但其他一些资源也可以帮助你规划 MFA 的部署。以下列表提供了在此过程中也许能够帮到你的一些重要文章：
 
-- [Azure 多重身份验证的设置体验](/documentation/articles/multi-factor-authentication-end-user-first-time/)
-- [Azure 多重身份验证常见问题](/documentation/articles/multi-factor-authentication-faq/)
+- [Azure 多重身份验证的设置体验](./multi-factor-authentication-end-user-first-time.md)
+- [Azure 多重身份验证常见问题](./multi-factor-authentication-faq.md)
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

@@ -1,23 +1,23 @@
-<properties
-    pageTitle="什么是 DocumentDB 的 MongoDB 协议支持？| Azure"
-    description="什么是 DocumentDB 的 MongoDB 协议支持？ 借助它，可将 Azure DocumentDB（托管的基于云的服务）用作为 MongoDB 编写的应用的数据存储。"
-    keywords="什么是 MongoDB"
-    services="documentdb"
-    author="AndrewHoh"
-    manager="jhubbard"
-    editor=""
-    documentationcenter="" />
-<tags
-    ms.assetid="4afaf40d-c560-42e0-83b4-a64d94671f0a"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/23/2016"
-    wacn.date="01/23/2017"
-    ms.author="anhoh" />  
+---
+title: 什么是 DocumentDB 的 MongoDB 协议支持？| Azure
+description: 什么是 DocumentDB 的 MongoDB 协议支持？ 借助它，可将 Azure DocumentDB（托管的基于云的服务）用作为 MongoDB 编写的应用的数据存储。
+keywords: 什么是 MongoDB
+services: documentdb
+author: AndrewHoh
+manager: jhubbard
+editor: ''
+documentationcenter: ''
 
+ms.assetid: 4afaf40d-c560-42e0-83b4-a64d94671f0a
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/23/2016
+wacn.date: 01/23/2017
+ms.author: anhoh
+---
 
 # 什么是 DocumentDB 的 MongoDB 协议支持？
 
@@ -37,13 +37,13 @@
 
 *就这么简单！*
 
-有关更多详细说明，请参阅[创建帐户](/documentation/articles/documentdb-create-mongodb-account/)和[连接到帐户](/documentation/articles/documentdb-connect-mongodb-account/)。
+有关更多详细说明，请参阅[创建帐户](./documentdb-create-mongodb-account.md)和[连接到帐户](./documentdb-connect-mongodb-account.md)。
 
 ## 后续步骤
-- 请参阅[创建具有 MongoDB 协议支持的 DocumentDB 帐户](/documentation/articles/documentdb-create-mongodb-account/)教程，了解如何创建 DocumentDB 帐户。
-- 请参阅[连接到具有 MongoDB 协议支持的 DocumentDB 帐户](/documentation/articles/documentdb-connect-mongodb-account/)教程，了解如何获取帐户连接字符串信息。
-- 请参阅[将 MongoChef 与具有 MongoDB 协议支持的 DocumentDB 帐户配合使用](/documentation/articles/documentdb-mongodb-mongochef/)教程，了解如何在 MongoChef 中的 DocumentDB 数据库和 MongoDB 应用之间创建连接。
-- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](/documentation/articles/documentdb-mongodb-samples/)。
+- 请参阅[创建具有 MongoDB 协议支持的 DocumentDB 帐户](./documentdb-create-mongodb-account.md)教程，了解如何创建 DocumentDB 帐户。
+- 请参阅[连接到具有 MongoDB 协议支持的 DocumentDB 帐户](./documentdb-connect-mongodb-account.md)教程，了解如何获取帐户连接字符串信息。
+- 请参阅[将 MongoChef 与具有 MongoDB 协议支持的 DocumentDB 帐户配合使用](./documentdb-mongodb-mongochef.md)教程，了解如何在 MongoChef 中的 DocumentDB 数据库和 MongoDB 应用之间创建连接。
+- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](./documentdb-mongodb-samples.md)。
 
 <!---HONumber=Mooncake_0109_2017-->
 <!---Update_Description: add content to describe What is the benefit of using DocumentDB protocol -->

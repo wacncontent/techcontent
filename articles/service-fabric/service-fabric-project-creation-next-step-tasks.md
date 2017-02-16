@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Service Fabric 项目创建后续步骤 | Azure"
-    description="本文包含针对 Service Fabric 执行的一组核心开发任务的链接"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="seanmck"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="299d1f97-1ca9-440d-9f81-d1d0dd2bf4df"
-    ms.service="service-fabric"
-    ms.devlang="dotNet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="11/01/2016"
-    wacn.date="12/26/2016"
-    ms.author="seanmck" />
+---
+title: Service Fabric 项目创建后续步骤 | Azure
+description: 本文包含针对 Service Fabric 执行的一组核心开发任务的链接
+services: service-fabric
+documentationcenter: .net
+author: seanmck
+manager: timlt
+editor: ''
+
+ms.assetid: 299d1f97-1ca9-440d-9f81-d1d0dd2bf4df
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/01/2016
+wacn.date: 12/26/2016
+ms.author: seanmck
+---
 
 # Service Fabric 应用程序和后续步骤
 已创建你的 Azure Service Fabric 应用程序。本文说明项目的构成以及有可能要执行的一些后续步骤。
@@ -44,7 +45,7 @@
 执行组件项目提供所需的方法用于设置和获取可靠保存在执行组件状态中的计数器的值。接口项目提供其他服务可用来调用执行组件的接口。
 
 ### 无状态 Web API
-无状态 Web API 项目提供一个基本 Web 服务，可用于向外部客户端打开你的应用程序。有关如何构建项目的详细信息，请参阅 [Service Fabric Web API 服务与 OWIN 自托管](/documentation/articles/service-fabric-reliable-services-communication-webapi/)。
+无状态 Web API 项目提供一个基本 Web 服务，可用于向外部客户端打开你的应用程序。有关如何构建项目的详细信息，请参阅 [Service Fabric Web API 服务与 OWIN 自托管](./service-fabric-reliable-services-communication-webapi.md)。
 
 ### ASP.NET core
 Service Fabric SDK 提供一组相同的 ASP.NET Core 模板，可用于独立 ASP.NET Core 项目：空项目、[Web API][aspnet-webapi] 项目和 [Web 应用程序][aspnet-webapp]项目。
@@ -52,7 +53,6 @@ Service Fabric SDK 提供一组相同的 ASP.NET Core 模板，可用于独立 A
 ## 后续步骤
 ### 创建 Azure 群集
 Service Fabric SDK 提供一个用于开发和测试的本地群集。若要在 Azure 中创建群集，请参阅[从 Azure 门户预览设置 Service Fabric 群集][create-cluster-in-portal]。
-
 
 ### 将应用程序发布到 Azure
 可以直接从 Visual Studio 将应用程序发布到 Azure 群集。若要了解具体方法，请参阅[将应用程序发布到 Azure][publish-app-to-azure]。
@@ -68,13 +68,13 @@ Service Fabric 支持单独对应用程序中的独立服务进行版本控制�
 
 <!-- Links -->
 
-[add-web-frontend]: /documentation/articles/service-fabric-add-a-web-frontend/
-[create-cluster-in-portal]: /documentation/articles/service-fabric-cluster-creation-via-portal/
-[publish-app-to-azure]: /documentation/articles/service-fabric-publish-app-remote-cluster/
-[visualize-with-sfx]: /documentation/articles/service-fabric-visualizing-your-cluster/
-[ci-with-vso]: /documentation/articles/service-fabric-set-up-continuous-integration/
-[reliable-services-webapi]: /documentation/articles/service-fabric-reliable-services-communication-webapi/
-[app-upgrade-tutorial]: /documentation/articles/service-fabric-application-upgrade-tutorial/
+[add-web-frontend]: ./service-fabric-add-a-web-frontend.md
+[create-cluster-in-portal]: ./service-fabric-cluster-creation-via-portal.md
+[publish-app-to-azure]: ./service-fabric-publish-app-remote-cluster.md
+[visualize-with-sfx]: ./service-fabric-visualizing-your-cluster.md
+[ci-with-vso]: ./service-fabric-set-up-continuous-integration.md
+[reliable-services-webapi]: ./service-fabric-reliable-services-communication-webapi.md
+[app-upgrade-tutorial]: ./service-fabric-application-upgrade-tutorial.md
 [aspnet-webapi]: https://docs.asp.net/en/latest/tutorials/first-web-api.html
 [aspnet-webapp]: https://docs.asp.net/en/latest/tutorials/first-mvc-app/index.html
 

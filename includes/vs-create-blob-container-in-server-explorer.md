@@ -9,7 +9,6 @@
 
 默认情况下，新容器是专用容器，因此你必须指定存储访问密钥才能从该容器下载 Blob。如果你想要使容器中的文件成为公共，请在**服务器资源管理器**中选择该容器，然后按 `F4` 以显示“属性”窗口。将“公共读取访问权限”设置为“Blob”。Internet 中的所有人都可以查看公共容器中的 Blob，但是，仅在你具有相应的访问密钥时，才能修改或删除它们。
 
-
 [Image1]: ./media/vs-create-blob-container-in-server-explorer/vs-storage-create-blob-containers-in-Server-Explorer.png
 
 <!---HONumber=79-->

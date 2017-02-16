@@ -1,28 +1,29 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="Azure VM 的特定 RDP 错误消息 | Azure"
-    description="了解在尝试使用远程桌面连接到 Azure 中的 Windows 虚拟机时可能会收到的特定错误消息"
-    keywords="远程桌面错误,远程桌面连接错误,无法连接到 VM,远程桌面故障排除"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="iainfoulds"
-    manager="timlt"
-    editor=""
-    tags="top-support-issue,azure-service-management,azure-resource-manager" />
-<tags 
-    ms.assetid="5feb1d64-ee6f-4907-949a-a7cffcbc6153"
-    ms.service="virtual-machines-windows"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-windows"
-    ms.devlang="na"
-    ms.topic="support-article"
-    ms.date="10/14/2016"
-    wacn.date="12/20/2016"
-    ms.author="iainfou" />
+---
+title: Azure VM 的特定 RDP 错误消息 | Azure
+description: 了解在尝试使用远程桌面连接到 Azure 中的 Windows 虚拟机时可能会收到的特定错误消息
+keywords: 远程桌面错误,远程桌面连接错误,无法连接到 VM,远程桌面故障排除
+services: virtual-machines-windows
+documentationcenter: ''
+author: iainfoulds
+manager: timlt
+editor: ''
+tags: top-support-issue,azure-service-management,azure-resource-manager
+
+ms.assetid: 5feb1d64-ee6f-4907-949a-a7cffcbc6153
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: support-article
+ms.date: 10/14/2016
+wacn.date: 12/20/2016
+ms.author: iainfou
+---
 
 # 排查发送到 Azure 中 Windows VM 的特定 RDP 错误消息
-在 Azure 中使用远程桌面连接登录到 Windows 虚拟机 (VM) 时，可能会收到特定错误消息。本文详细介绍遇到的一些更常见的错误消息，以及解决这些错误消息的故障排除步骤。如果是在使用 RDP 连接 VM 时遇到问题，而不是遇到特定错误消息，请参阅[远程桌面故障排除指南](/documentation/articles/virtual-machines-windows-troubleshoot-rdp-connection/)。
+在 Azure 中使用远程桌面连接登录到 Windows 虚拟机 (VM) 时，可能会收到特定错误消息。本文详细介绍遇到的一些更常见的错误消息，以及解决这些错误消息的故障排除步骤。如果是在使用 RDP 连接 VM 时遇到问题，而不是遇到特定错误消息，请参阅[远程桌面故障排除指南](./virtual-machines-windows-troubleshoot-rdp-connection.md)。
 
 有关特定错误消息的信息，请参阅以下文章：
 
@@ -37,7 +38,9 @@
 
 解决方法是，从门户保存 RDP 文件的本地副本，然后在 PowerShell 命令提示符下运行此命令以进行连接。此步骤仅禁用该连接的许可：
 
-        mstsc <File name>.RDP /admin
+```
+    mstsc <File name>.RDP /admin
+```
 
 如果实际上不需要两个以上同时与 VM 的远程桌面连接，可以使用服务器管理器删除远程桌面服务器角色。
 
@@ -50,9 +53,11 @@
 
 * 如果使用组织的 Intranet，请确保计算机可以访问代理服务器，并可以向其发送 HTTPS 流量。
 * 如果使用本地存储的 RDP 文件，请尝试使用门户生成的 RDP 文件。此步骤可确保使用虚拟机或云服务的正确 DNS 名称和 VM 的终结点端口。以下是门户生成的 RDP 文件示例：
-  
-        full address:s:tailspin-azdatatier.chinacloudapp.cn:55919
-        prompt for credentials:i:1
+
+    ```
+    full address:s:tailspin-azdatatier.chinacloudapp.cn:55919
+    prompt for credentials:i:1
+    ```
 
 此 RDP 文件的地址部分包含：
 
@@ -84,7 +89,7 @@
 
 请确保帐户名称是虚拟机可以验证为有效帐户的名称，并且密码正确。
 
-如果需要更改本地管理员帐户的密码，请参阅[如何为 Windows 虚拟机重置密码或远程桌面服务](/documentation/articles/virtual-machines-windows-reset-rdp/)。
+如果需要更改本地管理员帐户的密码，请参阅[如何为 Windows 虚拟机重置密码或远程桌面服务](./virtual-machines-windows-reset-rdp.md)。
 
 ## <a id="rdpconnect"></a>此计算机无法连接到远程计算机。
 原因：用于连接的帐户没有远程桌面登录权限。
@@ -94,10 +99,10 @@
 确保用于连接的帐户具有远程桌面登录权限。解决方法是使用域管理员或本地管理员帐户通过远程桌面建立连接。若要将所需帐户添加到远程桌面用户本地组，请使用 Microsoft 管理控制台管理单元（“系统工具”>“本地用户和组”>“组”>“远程桌面用户”）。
 
 ## 后续步骤
-如果未发生这些错误，而是在使用 RDP 进行连接时遇到未知问题，请参阅[远程桌面故障排除指南](/documentation/articles/virtual-machines-windows-troubleshoot-rdp-connection/)。
+如果未发生这些错误，而是在使用 RDP 进行连接时遇到未知问题，请参阅[远程桌面故障排除指南](./virtual-machines-windows-troubleshoot-rdp-connection.md)。
 
 * [Azure IaaS (Windows) 诊断程序包](https://home.diagnostics.support.microsoft.com/SelfHelp?knowledgebaseArticleFilter=2976864)
-* 有关排查访问 VM 上运行的应用程序时遇到的问题的步骤，请参阅 [Troubleshoot access to an application running on an Azure VM](/documentation/articles/virtual-machines-linux-troubleshoot-app-connection/)（排查访问 Azure VM 上运行的应用程序时遇到的问题）。
-* 如果在 Azure 中使用安全外壳 (SSH) 连接到 Linux VM 时遇到问题，请参阅 [Troubleshoot SSH connections to a Linux VM in Azure](/documentation/articles/virtual-machines-linux-troubleshoot-ssh-connection/)（排查 Azure 中 Linux VM 的 SSH 连接问题）。
+* 有关排查访问 VM 上运行的应用程序时遇到的问题的步骤，请参阅 [Troubleshoot access to an application running on an Azure VM](./virtual-machines-linux-troubleshoot-app-connection.md)（排查访问 Azure VM 上运行的应用程序时遇到的问题）。
+* 如果在 Azure 中使用安全外壳 (SSH) 连接到 Linux VM 时遇到问题，请参阅 [Troubleshoot SSH connections to a Linux VM in Azure](./virtual-machines-linux-troubleshoot-ssh-connection.md)（排查 Azure 中 Linux VM 的 SSH 连接问题）。
 
 <!---HONumber=Mooncake_1212_2016-->

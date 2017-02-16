@@ -1,16 +1,16 @@
-<properties
- pageTitle="Azure IoT 中心 SDK 的列表 | Azure"
- description="有关各种 Azure IoT 中心设备和服务 SDK 的信息以及指向这些 SDK 的链接。"
- services="iot-hub"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>
+---
+title: Azure IoT 中心 SDK 的列表 | Azure
+description: 有关各种 Azure IoT 中心设备和服务 SDK 的信息以及指向这些 SDK 的链接。
+services: iot-hub
+documentationCenter: ''
+authors: dominicbetts
+manager: timlt
+editor: ''
 
-<tags
- ms.service="iot-hub"
- ms.date="09/13/2016"
- wacn.date="01/04/2017"/>
+ms.service: iot-hub
+ms.date: 09/13/2016
+wacn.date: 01/04/2017
+---
 
 # IoT 中心 SDK
 
@@ -66,7 +66,6 @@ Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中心进行交
 - [使用网关 SDK 模拟设备][lnk-gateway]
 - [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
-
 [Azure IoT SDK]: https://github.com/Azure/azure-iot-sdks/blob/master/readme.md
 [适用于 C 的 Azure IoT 设备 SDK]: https://github.com/Azure/azure-iot-sdks/blob/master/c/readme.md
 [适用于 .NET 的 Azure IoT 设备 SDK]: https://github.com/Azure/azure-iot-sdks/blob/master/csharp/device/readme.md
@@ -75,7 +74,7 @@ Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中心进行交
 [适用于 Node.js 的 Azure IoT 设备 SDK]: https://github.com/Azure/azure-iot-sdks/blob/master/node/device/readme.md
 [适用于 Node.js 的 Azure IoT 服务 SDK]: https://github.com/Azure/azure-iot-sdks/blob/master/node/service/README.md
 [适用于 Python 2.7 的 Azure IoT 设备 SDK]: https://github.com/Azure/azure-iot-sdks/blob/master/python/device/readme.md
-[OS Platforms and hardware compatibility]: /documentation/articles/iot-hub-tested-configurations/
+[OS Platforms and hardware compatibility]: ./iot-hub-tested-configurations.md
 
 [Azure IoT Gateway SDK]: https://github.com/Azure/azure-iot-gateway-sdk/blob/master/README.md
 
@@ -87,8 +86,8 @@ Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中心进行交
 [适用于 Java 的 Azure IoT 服务 SDK]: http://azure.github.io/azure-iot-sdks/java/service/api_reference/index.html
 [适用于 Node.js 的 Azure IoT 服务 SDK]: http://azure.github.io/azure-iot-sdks/node/api_reference/azure-iothub/1.0.3/index.html
 [Azure IoT 网关 SDK]: http://azure.github.io/azure-iot-gateway-sdk/api_reference/c/html/
-[lnk-design]: /documentation/articles/iot-hub-guidance/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-portal]: /documentation/articles/iot-hub-manage-through-portal/
+[lnk-design]: ./iot-hub-guidance.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-portal]: ./iot-hub-manage-through-portal.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -1,58 +1,58 @@
-<properties
-    pageTitle="如何使用 Azure 媒体服务执行实时传送视频流以通过 Azure 经典管理门户创建多比特率流 | Azure"
-    description="本教程介绍了创建通道的步骤，该通道接收单比特率实时流并利用 Azure 经典管理门户将其编码为多比特率流。"
-    services="media-services"
-    documentationcenter=""
-    author="anilmur"
-    manager="erikre"
-    editor="" />  
+---
+title: 如何使用 Azure 媒体服务执行实时传送视频流以通过 Azure 经典管理门户创建多比特率流 | Azure
+description: 本教程介绍了创建通道的步骤，该通道接收单比特率实时流并利用 Azure 经典管理门户将其编码为多比特率流。
+services: media-services
+documentationcenter: ''
+author: anilmur
+manager: erikre
+editor: ''
 
-<tags
-    ms.assetid="504f74c2-3103-42a0-897b-9ff52f279e23"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="10/24/2016"
-    wacn.date="12/27/2016"
-    ms.author="juliako" />  
-
-
+ms.assetid: 504f74c2-3103-42a0-897b-9ff52f279e23
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 10/24/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #如何使用 Azure 媒体服务执行实时传送视频流以通过 Azure 经典管理门户创建多比特率流
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/media-services-portal-creating-live-encoder-enabled-channel/)
-- [.NET](/documentation/articles/media-services-dotnet-creating-live-encoder-enabled-channel/)
+> [!div class="op_single_selector"]
+- [门户](./media-services-portal-creating-live-encoder-enabled-channel.md)
+- [.NET](./media-services-dotnet-creating-live-encoder-enabled-channel.md)
 - [REST API](https://docs.microsoft.com/zh-cn/rest/api/media/operations/channel)
 
 本教程介绍了创建**频道**的步骤，该频道接收单比特率实时流，并将其编码为多比特率流。
 
->[AZURE.NOTE]有关为实时编码启用的通道的更多相关概念信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+>[!NOTE]
+>有关为实时编码启用的通道的更多相关概念信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ## 常见的实时流方案
 以下是创建常见的实时流应用程序时涉及的常规步骤。
 
->[AZURE.NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的频道，请通过 Azure.cn 联系 amslived。
+>[!NOTE]
+> 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的频道，请通过 Azure.cn 联系 amslived。
 
 1. 将视频摄像机连接到计算机。启动并配置可以通过以下协议之一输出单比特率流的本地实时编码器：RTMP、平滑流式处理或 RTP (MPEG-TS)。有关详细信息，请参阅 [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/zh-cn/blog/azure-media-services-rtmp-support-and-live-encoders/)。
-	
-	此步骤也可以在创建频道后执行。
+
+    此步骤也可以在创建频道后执行。
 
 1. 创建并启动频道。
 
 1. 检索频道引入 URL。
 
-	实时编码器使用引入 URL 将流发送到频道。
+    实时编码器使用引入 URL 将流发送到频道。
 1. 检索频道预览 URL。
 
-	使用此 URL 来验证频道是否正常接收实时流。
+    使用此 URL 来验证频道是否正常接收实时流。
 
 3. 创建事件/节目（还将创建一个资产）。
 1. 发布事件（将创建相关资产的按需定位符）。
 
-	确保你要从中以流形式传输内容的流式传输终结点上至少有一个流式传输保留单元。
+    确保你要从中以流形式传输内容的流式传输终结点上至少有一个流式传输保留单元。
 1. 在准备好开始流式传输和存档时，启动节目。
 2. （可选）可以向实时编码器发信号，以启动广告。将广告插入到输出流中。
 1. 在要停止对事件进行流式传输和存档时，停止节目。
@@ -73,8 +73,8 @@
 ##先决条件
 以下是完成本教程所需具备的条件。
 
-- 若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/)。
-- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[创建帐户](/documentation/articles/media-services-create-account/)。
+- 若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
+- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[创建帐户](./media-services-create-account.md)。
 - 可以发送单比特率实时流的摄像头和编码器。
 
 ##配置流式处理终结点 
@@ -91,25 +91,24 @@
 
 3. 若要指定流式处理单元数，请选择“缩放”选项卡并移动**“保留容量”**滑块。
 
-	![“缩放”页](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-origin-scale.png)
+    ![“缩放”页](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-origin-scale.png)
 
 4. 按“保存”按钮保存更改。
 
-	分配所有新的单元大约需要 20 分钟才能完成。
+    分配所有新的单元大约需要 20 分钟才能完成。
 
-	 
-	>[AZURE.NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
-	>
-	> 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅[媒体服务定价详细信息](/pricing/details/media-services/)。
+    >[!NOTE]
+    > 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
+    >
+    > 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅[媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
- 
 ##<a id="create-a-channel"></a>创建频道
 
-1.	在 [Azure 经典管理门户](http://manage.windowsazure.cn/)中，单击“媒体服务”，然后单击媒体服务帐户名。
-2.	选择“频道”页。
-3.	选择“添加+”以添加新频道。
+1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn/)中，单击“媒体服务”，然后单击媒体服务帐户名。
+2. 选择“频道”页。
+3. 选择“添加+”以添加新频道。
 
-选择**“标准”**编码类型。此类型指定要创建能够进行实时编码的频道。这意味着传入单比特率流将发送到频道，并使用指定的实时编码器设置编码为多比特率流。有关详细信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+选择**“标准”**编码类型。此类型指定要创建能够进行实时编码的频道。这意味着传入单比特率流将发送到频道，并使用指定的实时编码器设置编码为多比特率流。有关详细信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ![standard0][standard0]
 
@@ -119,7 +118,7 @@
 - 单比特率 RTMP
 - RTP (MPEG-TS)：RTP 上的 MPEG-2 传输流。
 
-有关每个协议的详细说明，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+有关每个协议的详细说明，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ![standard1][standard1]
 
@@ -127,10 +126,9 @@
 
 在**“广告配置”**页上，可以指定 Ad 标记信号源。使用门户时，只能选择“API”，它指示频道内的实时编码器应侦听异步 Ad 标记 API。使用门户时，只能选择“API”。
 
-有关详细信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+有关详细信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ![standard2][standard2]  
-
 
 在**“编码预设”**页上，可以选择系统预设。目前，唯一可以选择的系统预设是**“默认 720p”**。
 
@@ -140,17 +138,16 @@
 
 如果未指定 IP 地址并且没有规则定义，则不会允许任何 IP 地址。若要允许任何 IP 地址，请创建一个规则并设置 0.0.0.0/0。
 
-
 ![standard4][standard4]
 
->[AZURE.NOTE] 目前，通道启动可能最多需要 30 分钟。频道重置可能最多需要 5 分钟。
+>[!NOTE]
+> 目前，通道启动可能最多需要 30 分钟。频道重置可能最多需要 5 分钟。
 
 创建频道后，可以选择**“编码器”**选项卡，从中可以查看频道配置。此外，还可以管理广告和清单。
 
 ![standard5][standard5]
 
-有关详细信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
-
+有关详细信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ##获取引入 URL
 
@@ -158,9 +155,7 @@
 
 ![readychannel](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-ready-channel.png)
 
-
 ![ingesturls](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-ingest-urls.png)
-
 
 ##<a id="create-and-manage-a-program"></a>创建和管理节目
 
@@ -192,34 +187,31 @@
 
 1. 在**“频道”**页上，按**“添加”**以添加新节目。
 
-	指定：节目名称、资产名称、存档时段和加密选项。
-	
-	![createprogram](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-create-program.png)
-	
-	如果保留选中**“立即发布此节目”**，将会创建节目的发布 URL。
-	
-	在准备好流式传输节目时，可以按**“开始”**。
+    指定：节目名称、资产名称、存档时段和加密选项。
 
-	启动节目后，你可以按“播放”开始播放内容。
+    ![createprogram](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-create-program.png)
 
+    如果保留选中**“立即发布此节目”**，将会创建节目的发布 URL。
 
-	![createdprogram](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-created-program.png)
+    在准备好流式传输节目时，可以按**“开始”**。
+
+    启动节目后，你可以按“播放”开始播放内容。
+
+    ![createdprogram](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-created-program.png)
 
 2. 或者，可以使用快捷方式或按**“频道”**页上的**“开始流式传输”**按钮。这将会创建资产、节目和流定位符。
 
-	节目命名为 DefaultProgram，存档时段设置为 1 小时。
+    节目命名为 DefaultProgram，存档时段设置为 1 小时。
 
-	你可以从“通道”页播放发布的节目。
+    你可以从“通道”页播放发布的节目。
 
-	![channelpublish](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-channel-play.png)
-
+    ![channelpublish](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-channel-play.png)
 
 如果你在**“频道”**页上单击**“停止流式传输”**，将会停止并删除默认节目。资源仍在那里，并且你可以从**“内容”**页发布或取消发布它。
 
 如果你切换到**“内容”**页，你将看到为节目创建的资源。
 
 ![contentasset](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-content-assets.png)
-
 
 ##播放内容
 
@@ -231,17 +223,23 @@
 
 默认情况下，流 URL 采用以下格式，你可以用它来播放平滑流资产：
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+```
 
 若要生成 HLS 流 URL，请将 (format=m3u8-aapl) 附加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
 
 若要生成 MPEG DASH 流 URL，请将 (format=mpd-time-csf) 追加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
+{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
 
-有关传送内容的详细信息，请参阅[传送内容](/documentation/articles/media-services-deliver-content-overview/)。
+有关传送内容的详细信息，请参阅[传送内容](./media-services-deliver-content-overview.md)。
 
 你可以使用 [AMS 播放器](http://amsplayer.azurewebsites.net/azuremediaplayer.html)播放平滑流，或使用 iOS 和 Android 设备播放 HLS 版本 3。
 
@@ -252,13 +250,11 @@
 - 停止从编码器推送流。
 - 停止通道。停止通道后，将不会产生任何费用。需要重新启动它时，它将采用相同的引入 URL，因此无需重新配置编码器。
 - 除非想要继续以点播流形式提供实时事件的存档，否则可以停止流式处理终结点。如果通道处于停止状态，则不会产生任何费用。
-  
 
 ##注意事项
 
 - 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的频道，请通过 Azure.cn 联系 amslived。
 - 确保你要从中以流形式传输内容的流式传输终结点上至少有一个流式传输保留单元。
-
 
 [standard0]: ./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-create-channel-standard0.png
 [standard1]: ./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-create-channel-standard1.png

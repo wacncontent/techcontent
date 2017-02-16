@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Intel Edison Azure IoT 初学者工具包故障排除 | Azure"
-    description="Intel Edison Node.js 体验的故障排除页"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="arduino 故障排除" />
-<tags
-    ms.assetid="f11c5521-8a36-44c0-baad-f5ec26ab4618"
-    ms.service="iot-hub"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/8/2016"
-    wacn.date="01/06/2017"
-    ms.author="xshi" />  
+---
+title: Intel Edison Azure IoT 初学者工具包故障排除 | Azure
+description: Intel Edison Node.js 体验的故障排除页
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: arduino 故障排除
 
+ms.assetid: f11c5521-8a36-44c0-baad-f5ec26ab4618
+ms.service: iot-hub
+ms.devlang: nodejs
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/8/2016
+wacn.date: 01/06/2017
+ms.author: xshi
+---
 
 # 故障排除
 ## 硬件问题
@@ -27,16 +27,16 @@
 ### 在 Gulp 任务期间没有响应
 如果在运行 gulp 任务时遇到问题，可添加 `--verbose` 选项进行调试。请尝试使用 `Ctrl + C` 终止当前 gulp 任务，然后在控制台窗口中运行以下命令，以便查看调试消息。可以在控制台输出中查看详细的错误消息。
 
-
-	gulp --verbose
-
+```bash
+gulp --verbose
+```
 
 ### NPM 问题
 请尝试使用以下命令更新 NPM 包：
 
-
-	npm install -g npm
-
+```bash
+npm install -g npm
+```
 
 如果问题仍然存在，请在本文末尾留下你的评论，或者在[示例存储库][sample-repository]中创建一个 GitHub 问题。
 
@@ -44,9 +44,9 @@
 
 ### 在调试模式下运行示例应用程序
 
-
-	gulp run --debug
-
+```bash
+gulp run --debug
+```
 
 调试引擎就绪以后，应可从控制台输出中看到 `Debugger listening on port 5858`。
 
@@ -58,28 +58,27 @@
 
 使用以下内容更新 **launch.json** 文件，将 `[device hostname or IP address]` 替换为实际设备 IP 地址或主机名。
 
-
-	{
-	    "version": "0.2.0",
-	    "configurations": [
-	        {
-	            "name": "Attach",
-	            "type": "node",
-	            "request": "attach",
-	            "port": 5858,
-	            "address": "[device hostname or IP address]",
-	            "restart": false,
-	            "sourceMaps": false,
-	            "outDir": null,
-	            "localRoot": "${workspaceRoot}",
-	            "remoteRoot": null
-	        }
-	    ]
-	}
-
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach",
+            "type": "node",
+            "request": "attach",
+            "port": 5858,
+            "address": "[device hostname or IP address]",
+            "restart": false,
+            "sourceMaps": false,
+            "outDir": null,
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": null
+        }
+    ]
+}
+```
 
 ![远程调试配置](./media/iot-hub-intel-edison-lessons/troubleshooting/remote_debugging_configuration.png)  
-
 
 ### 连接到远程应用程序
 
@@ -88,7 +87,6 @@
 若要详细了解调试器，请参阅 [JavaScript in VS Code](https://code.visualstudio.com/docs/languages/javascript#_debugging)（VS Code 中的 JavaScript）。
 
 ![交互式远程调试](./media/iot-hub-intel-edison-lessons/troubleshooting/remote_debugging_interactive.png)  
-
 
 ## Azure-CLI 问题
 Azure 命令行接口 (Azure CLI) 为预览版。
@@ -99,9 +97,9 @@ Azure 命令行接口 (Azure CLI) 为预览版。
 
 如果遇到“找不到满足需求的版本”，请运行以下命令，将 pip 升级到最新版本。
 
-
-	python -m pip install --upgrade pip
-
+```bash
+python -m pip install --upgrade pip
+```
 
 ## Python 安装问题
 ### 旧版安装问题 (macOS)
@@ -116,7 +114,7 @@ Azure 命令行接口 (Azure CLI) 为预览版。
 如果已通过 `azure-cli` 成功预配 Azure IoT 中心，且需使用工具管理连接到 IoT 中心的设备，可尝试以下工具：
 
 ### 设备资源管理器
-[设备资源管理器](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer)在 Windows 本地计算机上运行，并连接到 Azure 中的 IoT 中心。它与以下 [IoT 中心终结点](/documentation/articles/iot-hub-devguide/)通信：
+[设备资源管理器](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer)在 Windows 本地计算机上运行，并连接到 Azure 中的 IoT 中心。它与以下 [IoT 中心终结点](./iot-hub-devguide.md)通信：
 
 - _设备标识管理_：用于预配和管理注册到 IoT 中心的设备。
 - _接收从设备到云的消息_：用于监视从设备发送到 IoT 中心的消息。
@@ -129,29 +127,28 @@ Azure 命令行接口 (Azure CLI) 为预览版。
 
 若要安装最新（预发行）版的 iothub-explorer 工具，请在命令行环境中运行以下命令：
 
-
-	npm install -g iothub-explorer@latest
-
+```bash
+npm install -g iothub-explorer@latest
+```
 
 可以使用以下命令获取所有 iothub-explorer 命令及其参数的更多帮助：
 
-
-	iothub-explorer help
-
+```bash
+iothub-explorer help
+```
 
 ### Azure 门户
-完整的 CLI 体验有助于用户创建和管理其所有 Azure 资源。还可能需要借助 [Azure 门户预览](/documentation/articles/azure-portal-overview/)对 Azure 资源进行预配、管理和调试。
+完整的 CLI 体验有助于用户创建和管理其所有 Azure 资源。还可能需要借助 [Azure 门户预览](../azure-portal-overview.md)对 Azure 资源进行预配、管理和调试。
 
 ## Azure 存储问题
-[Microsoft Azure 存储资源管理器（预览版）](http://storageexplorer.com)是 Microsoft 推出的一款独立应用，可用于在 Windows、macOS和 Linux 上处理 [Azure 存储](/documentation/services/storage/)数据。可以使用此工具连接到表并查看其中的数据。可以使用此工具排查 Azure 存储问题。
+[Microsoft Azure 存储资源管理器（预览版）](http://storageexplorer.com)是 Microsoft 推出的一款独立应用，可用于在 Windows、macOS和 Linux 上处理 [Azure 存储](../storage/index.md)数据。可以使用此工具连接到表并查看其中的数据。可以使用此工具排查 Azure 存储问题。
 
 ## 后续步骤
 本页仅包括 Intel Edison 工具包最常见的问题。可在底部留下注释，报告问题，进行进一步故障排除。
 
-返回到 [Intel Edison (Node.js) 入门](/documentation/articles/iot-hub-intel-edison-kit-node-get-started/)
+返回到 [Intel Edison (Node.js) 入门](./iot-hub-intel-edison-kit-node-get-started.md)
 
 <!-- Images and links -->
-
 
 [sample-repository]: https://github.com/Azure-Samples/iot-hub-node-edison-getting-started
 

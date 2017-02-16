@@ -1,21 +1,22 @@
-<properties
-    pageTitle="规划升级到 SQL 数据库 V12 | Azure"
-    description="介绍升级到 Azure SQL 数据库 V12 版本所涉及的准备工作和限制。"
-    services="sql-database"
-    documentationcenter=""
-    author="MightyPen"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="8020f904-ad27-40c5-8c59-bdf2e690f77d"
-    ms.service="sql-database"
-    ms.workload="data-management"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="genemi" />
+---
+title: 规划升级到 SQL 数据库 V12 | Azure
+description: 介绍升级到 Azure SQL 数据库 V12 版本所涉及的准备工作和限制。
+services: sql-database
+documentationcenter: ''
+author: MightyPen
+manager: jhubbard
+editor: ''
+
+ms.assetid: 8020f904-ad27-40c5-8c59-bdf2e690f77d
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: genemi
+---
 
 # 规划和准备升级到 SQL 数据库 V12
 本主题介绍将 Azure SQL 数据库从 V11 版本升级到 V12 时必须执行的规划和准备工作。
@@ -26,8 +27,8 @@ ms.author="genemi" />
 
 | 标题和链接 | 内容说明 |
 | :--- | :--- |
-| [SQL 数据库 V12 中的新增功能](/documentation/articles/sql-database-v12-whats-new/) | 介绍 V12 如何使 Azure SQL 数据库几乎能够完全与 Microsoft SQL Server 兼容。 |
-| [在 SQL 数据库 V12 中创建数据库](/documentation/articles/sql-database-get-started/) | 介绍如何在版本 V12 中创建新的 Azure SQL 数据库。其中介绍了各个选项，而不仅仅是如何创建空数据库。 |
+| [SQL 数据库 V12 中的新增功能](./sql-database-v12-whats-new.md) | 介绍 V12 如何使 Azure SQL 数据库几乎能够完全与 Microsoft SQL Server 兼容。 |
+| [在 SQL 数据库 V12 中创建数据库](./sql-database-get-started.md) | 介绍如何在版本 V12 中创建新的 Azure SQL 数据库。其中介绍了各个选项，而不仅仅是如何创建空数据库。 |
 
 ## 提前规划
 以下小节介绍了在采取行动将 Azure SQL 数据库升级到 V12 之前，必须了解的知识和做出的决策。
@@ -44,8 +45,8 @@ ms.author="genemi" />
 
 有关基本、标准和高级服务层的详细信息，请参阅：
 
-- [SQL 数据库服务层](/documentation/articles/sql-database-service-tiers/)
-- [将 SQL 数据库 Web/企业数据库升级到新服务层](/documentation/articles/sql-database-upgrade-server-portal/)
+- [SQL 数据库服务层](./sql-database-service-tiers.md)
+- [将 SQL 数据库 Web/企业数据库升级到新服务层](./sql-database-upgrade-server-portal.md)
 
 ### 查看异地复制配置
 如果已为异地复制配置了 Azure SQL 数据库，则应该先记录其当前配置并停止异地复制，然后才能启动升级准备操作。升级完成后，必须重新为异地复制配置数据库。
@@ -77,26 +78,23 @@ V12 不支持 Web 和企业服务定价层。
 * 11000-11999
 * 14000-14999
 
-单击[此处](/documentation/articles/sql-database-develop-direct-route-ports-adonet-v12/)可了解有关 SQL 数据库 V12 的端口的详细信息。SQL 数据库 V12 中的性能增强功能需要这些端口。
+单击[此处](./sql-database-develop-direct-route-ports-adonet-v12.md)可了解有关 SQL 数据库 V12 的端口的详细信息。SQL 数据库 V12 中的性能增强功能需要这些端口。
 
 ## <a id="limitations"></a>升级到 V12 期间和之后的限制
 ### V12 的门户
 Azure 有三个门户，每个门户针对 SQL 数据库 V12 提供不同的功能。
 
-- [http://portal.azure.cn/](https://portal.azure.cn)<br/>此 Azure 门户预览是新门户，仍处于预览状态。此门户尚未完全正式发布 (GA)。此门户：
+- [https://portal.azure.cn](https://portal.azure.cn)<br/>此 Azure 门户预览是新门户，仍处于预览状态。此门户尚未完全正式发布 (GA)。此门户：
  - 可以管理 V12 服务器和数据库。
  - 可以将 V11 数据库升级到 V12。
-
 
 - [http://manage.windowsazure.cn](http://manage.windowsazure.cn)<br/>此 Azure 经典管理门户最终可能会淘汰。此门户：
  - 可以管理 V12 服务器和数据库。
  - *无法*将 V11 数据库升级到 V12。
 
-
 - (http://*yourservername*.database.chinacloudapi.cn)<br/>
 Azure SQL 数据库经典门户：
  - *无法*管理 V12 服务器。
-
 
 我们建议你使用 Visual Studio 2013 (VS2013) 连接到 Azure SQL 数据库。VS2013 可用于如下所述的任务：
 
@@ -110,9 +108,8 @@ Azure SQL 数据库经典门户：
 
 另一种方法是使用装有 [CU6](http://support.microsoft.com/zh-cn/kb/3031047) 的 SQL Server Management Studio (SSMS) 2014 来连接到 Azure SQL 数据库。以下博客文章提供了更多详细信息：<br/>[Azure SQL 数据库的客户端工具更新](https://azure.microsoft.com/blog/2014/12/22/client-tooling-updates-for-azure-sql-database)。
 
-
-> [AZURE.IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
-
+> [!IMPORTANT]
+> 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ### 升级到 V12 *期间*的限制
 在升级到 V12 期间，V11 数据库仍然支持数据访问。但你要考虑到几个限制。
@@ -142,10 +139,8 @@ Azure SQL 数据库经典门户：
 - [Visual Studio 2013 中的 SQL Server 数据库工具 2015 年 2 月更新版](https://msdn.microsoft.com/data/hh297027)
 - [Azure SQL 数据库 V12 数据层应用程序框架 (DacFx) 2015 年 2 月版](http://www.microsoft.com/zh-cn/download/details.aspx?id=45886)
 
-
-> [AZURE.NOTE] 前面的工具链接已在 2015 年 3 月 2 日或之后更新。我们建议你使用这些工具的较新更新版。
-
-
+> [!NOTE]
+> 前面的工具链接已在 2015 年 3 月 2 日或之后更新。我们建议你使用这些工具的较新更新版。
 
 ### 将已删除的 V11 数据库还原到 V12
 以下方案说明了可以将已删除的 V11 Azure SQL 数据库还原到 V12 Azure SQL 数据库服务器。
@@ -159,7 +154,7 @@ Azure SQL 数据库经典门户：
 ### PowerShell cmdlet
 可以使用 PowerShell cmdlett 来启动、停止或监视从 Azure SQL 数据库 V11 或其他任何低于 V12 的版本到 V12 的升级。
 
-- [使用 PowerShell 升级到 SQL 数据库 V12](/documentation/articles/sql-database-upgrade-server-powershell/)
+- [使用 PowerShell 升级到 SQL 数据库 V12](./sql-database-upgrade-server-powershell.md)
 
 有关这些 PowerShell cmdlet 的参考文档，请参阅：
 
@@ -171,7 +166,6 @@ Stop- cmdlet 表示取消，而不是暂停。无法在中途恢复升级，只�
 
 ## 失败解决方法
 如果任何奇怪的原因导致升级失败，V11 数据库将保持活动状态并像平常一样工作。
-
 
 <!--Anchors-->
 

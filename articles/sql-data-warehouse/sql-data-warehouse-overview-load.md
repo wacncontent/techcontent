@@ -1,22 +1,23 @@
 <!-- Remove solution-partners -->
-<properties
-   pageTitle="将数据载入 Azure SQL 数据仓库 | Azure"
-   description="了解将数据载入 SQL 数据仓库的常见方案。这些常见方案包括使用 PolyBase、Azure Blob 存储、平面文件以及磁盘寄送。也可使用第三方工具。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="lodipalm"
-   manager="barbkess"
-   editor=""/>
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="lodipalm;barbkess;sonyama"/>
+---
+title: 将数据载入 Azure SQL 数据仓库 | Azure
+description: 了解将数据载入 SQL 数据仓库的常见方案。这些常见方案包括使用 PolyBase、Azure Blob 存储、平面文件以及磁盘寄送。也可使用第三方工具。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: lodipalm
+manager: barbkess
+editor: ''
+
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: lodipalm;barbkess;sonyama
+---
 
 # 将数据载入 Azure SQL 数据仓库
 
@@ -79,7 +80,6 @@
 
 如需教程，请参阅[《Load data from SQL Server to Azure SQL Data Warehouse (bcp)》][]（将数据从 SQL Server 加载到 Azure SQL 数据仓库 (bcp)）。
 
-
 ### 使用导入/导出（建议用于数据量 > 10 TB 的情况）
 如果你的数据大小 > 10 TB 并且你需要将数据移至 Azure，则建议你使用磁盘寄送服务：[导入/导出][Import/Export]。
 
@@ -110,28 +110,27 @@ SQL 数据仓库支持通过 PolyBase 从 HDInsight 加载数据。该过程和�
 
 基于新加载的数据创建统计信息。Azure SQL 数据仓库尚不支持自动创建或自动更新统计信息。为了获得查询的最佳性能，在首次加载数据或者在数据发生重大更改之后，创建所有表的所有列统计信息非常重要。有关详细信息，请参阅[统计信息][]。
 
-
 ## 后续步骤
 有关更多开发技巧，请参阅[开发概述][]。
 
 <!--Image references-->
 
 <!--Article references-->
-[《Load data from Azure blob storage to SQL Data Warehouse (PolyBase)》]: /documentation/articles/sql-data-warehouse-load-from-azure-blob-storage-with-polybase/
+[《Load data from Azure blob storage to SQL Data Warehouse (PolyBase)》]: ./sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md
 [《Load data from Azure blob storage to SQL Data Warehouse (Azure Data Factory)》]: /documentation/articles/sql-data-warehouse-load-from-azure-blob-storage-with-data-factory/
-[《Load data from SQL Server to Azure SQL Data Warehouse (SSIS)》]: /documentation/articles/sql-data-warehouse-load-from-sql-server-with-integration-services/
-[《Load data from SQL Server to Azure SQL Data Warehouse (bcp)》]: /documentation/articles/sql-data-warehouse-load-from-sql-server-with-bcp/
-[Load data from SQL Server to Azure SQL Data Warehouse (AZCopy)]: /documentation/articles/sql-data-warehouse-load-from-sql-server-with-azcopy/
+[《Load data from SQL Server to Azure SQL Data Warehouse (SSIS)》]: ./sql-data-warehouse-load-from-sql-server-with-integration-services.md
+[《Load data from SQL Server to Azure SQL Data Warehouse (bcp)》]: ./sql-data-warehouse-load-from-sql-server-with-bcp.md
+[Load data from SQL Server to Azure SQL Data Warehouse (AZCopy)]: ./sql-data-warehouse-load-from-sql-server-with-azcopy.md
 
-[《Load sample databases》]: /documentation/articles/sql-data-warehouse-load-sample-databases/
-[《Migration overview》]: /documentation/articles/sql-data-warehouse-overview-migrate/
+[《Load sample databases》]: ./sql-data-warehouse-load-sample-databases.md
+[《Migration overview》]: ./sql-data-warehouse-overview-migrate.md
 [解决方案合作伙伴]: /documentation/articles/sql-data-warehouse-solution-partners/
-[开发概述]: /documentation/articles/sql-data-warehouse-overview-develop/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
+[开发概述]: ./sql-data-warehouse-overview-develop.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
 
 <!--MSDN references-->
 
 <!--Other Web references-->
-[导入/导出]: /documentation/articles/storage-import-export-service/
+[导入/导出]: ../storage/storage-import-export-service.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

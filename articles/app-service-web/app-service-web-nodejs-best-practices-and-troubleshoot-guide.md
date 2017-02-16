@@ -1,31 +1,30 @@
-<properties
-	pageTitle="Azure Web Apps 上节点应用程序的最佳做法和故障排除指南"
-	description="了解 Azure Web Apps 上节点应用程序的最佳做法和故障排除步骤。"
-	services="app-service\web"
-	documentationCenter="nodejs"
-	authors="ranjithr"
-	manager="wadeh"
-	editor=""/>  
+---
+title: Azure Web Apps 上节点应用程序的最佳做法和故障排除指南
+description: 了解 Azure Web Apps 上节点应用程序的最佳做法和故障排除步骤。
+services: app-service\web
+documentationCenter: nodejs
+authors: ranjithr
+manager: wadeh
+editor: ''
 
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 06/06/2016
+wacn.date: 09/26/2016
+ms.author: ranjithr;wadeh
+---
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="nodejs"
-	ms.topic="article"
-	ms.date="06/06/2016"
-	wacn.date="09/26/2016"
-	ms.author="ranjithr;wadeh"/>  
-
-    
 # Azure Web Apps 上节点应用程序的最佳做法和故障排除指南
 
-[AZURE.INCLUDE [选项卡](../../includes/app-service-web-get-started-nav-tabs.md)]
+[!INCLUDE [选项卡](../../includes/app-service-web-get-started-nav-tabs.md)]
 
-在本文中，你将了解 Azure Webapps 上运行的[节点应用程序](/documentation/articles/app-service-web-nodejs-get-started/)的最佳做法和故障排除步骤（通过 [iisnode](https://github.com/azure/iisnode)）。
+在本文中，你将了解 Azure Webapps 上运行的[节点应用程序](./app-service-web-nodejs-get-started.md)的最佳做法和故障排除步骤（通过 [iisnode](https://github.com/azure/iisnode)）。
 
->[AZURE.WARNING] 在生产站点上使用故障排除步骤时，请格外小心。建议在非生产安装（例如过渡槽）上排查应用问题，当问题修复后，请交换过渡槽与生产槽。
+>[!WARNING]
+> 在生产站点上使用故障排除步骤时，请格外小心。建议在非生产安装（例如过渡槽）上排查应用问题，当问题修复后，请交换过渡槽与生产槽。
 
 ## IISNODE 配置
 
@@ -65,7 +64,7 @@
 * flushResponse
 
     IIS 的默认行为是在刷新之前或直到响应结束时（以较早出现者为准），缓冲最多 4MB 的响应数据。iisnode 会提供配置设置来替代此行为：若要在 iisnode 从 node.exe 收到响应实体主体片段时立刻刷新该片段，需在 web.config 中将 iisnode/@flushResponse 属性设置为“true”：
-    
+
     ```
     <configuration>    
         <system.webServer>    
@@ -78,7 +77,7 @@
     支持刷新每个响应实体主体片段会增加性能开销，而降低约 5% 的系统吞吐量（从 v0.1.13 起），因此，最好让此设置的范围仅限于需要响应流式处理的终结点（例如，在 web.config 中使用 <location> 元素）
 
     除此之外，对于流式处理应用程序，还需要将 iisnode 处理程序的 responseBufferLimit 设置为 0。
-    
+
     ```
     <handlers>    
         <add name="iisnode" path="app.js" verb="*" modules="iisnode" responseBufferLimit="0"/>    
@@ -97,7 +96,8 @@
 
     默认值为 0，这表示已禁用此功能。如果设置为大于 0 的值，iisnode 会每隔“idlePageOutTimePeriod”毫秒将其所有子进程移出分页。若要了解移出分页的意思，请参考此[文档](https://msdn.microsoft.com/zh-cn/library/windows/desktop/ms682606.aspx)。对于耗用大量内存并且偶尔想要将内存页出至磁盘以释放一些 RAM 的应用程序，此设置很有用。
 
->[AZURE.WARNING] 在生产应用程序上启用以下配置设置时，请格外小心。建议不要在实际生产应用程序上启用它们。
+>[!WARNING]
+> 在生产应用程序上启用以下配置设置时，请格外小心。建议不要在实际生产应用程序上启用它们。
 
 * debugHeaderEnabled
 
@@ -110,7 +110,7 @@
 * devErrorsEnabled
 
     默认值为 false。如果设置为 true，iisnode 会在浏览器上显示 HTTP 状态代码和 Win32 错误代码。在调试特定类型的问题时，win32 代码很有用。
-    
+
 * debuggingEnabled（请勿在实际生产站点上启用）
 
     此设置控制调试功能。Iisnode 与节点检查器集成。通过启用此设置，可启用节点应用程序的调试功能。启用此设置后，iisnode 会在对节点应用程序发出第一个调试请求时，在“debuggerVirtualDir”目录中布置所需的节点检查器文件。你可以将请求发送到 http://yoursite/server.js/debug，以加载节点检查器。你可以使用“debuggerPathSegment”设置来控制调试 URL 段。默认情况下，debuggerPathSegment =“debug”。你可以将其设置为 GUID 之类的值，这样，其他人就更难发现。
@@ -138,7 +138,7 @@ var keepaliveAgent = new Agent({
 
 ### 节点应用程序耗用太多 CPU。
 
-你可能会在门户上获取 Azure Webapps 针对高 CPU 耗用量提供的建议。你也可以设置监视器以监视某些[度量值](/documentation/articles/web-sites-monitor/)。在 Azure 门户预览仪表板上检查 CPU 使用率时，请检查 CPU 的 MAX 值，你才不会错过峰值。
+你可能会在门户上获取 Azure Webapps 针对高 CPU 耗用量提供的建议。你也可以设置监视器以监视某些[度量值](./web-sites-monitor.md)。在 Azure 门户预览仪表板上检查 CPU 使用率时，请检查 CPU 的 MAX 值，你才不会错过峰值。
 在你认为应用程序耗用太多 CPU，但你无法解释的情况下，必须分析节点应用程序。
 
 ###
@@ -171,7 +171,6 @@ http.createServer(function (req, res) {
 你会看到一个命令提示符，如下所示。进入 site/wwwroot 目录
 
 ![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/scm_install_v8.png)  
-
 
 运行“npm install v8-profiler”命令
 
@@ -209,12 +208,11 @@ http.createServer(function (req, res) {
 
 ![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/chrome_tools_view.png)  
 
-
 你会看到 WriteConsoleLog 函数已耗用 95% 的时间，如下所示。这也会显示造成此问题的确切行号和源文件。
 
 ### 节点应用程序耗用太多内存。
 
-你可能会在门户上获取 Azure Webapps 针对高内存耗用量提供的建议。你也可以设置监视器以监视某些[度量值](/documentation/articles/web-sites-monitor/)。在 Azure 门户预览仪表板上检查内存使用率时，请检查内存的 MAX 值，你才不会错过峰值。
+你可能会在门户上获取 Azure Webapps 针对高内存耗用量提供的建议。你也可以设置监视器以监视某些[度量值](./web-sites-monitor.md)。在 Azure 门户预览仪表板上检查内存使用率时，请检查内存的 MAX 值，你才不会错过峰值。
 
 #### node.js 的泄漏检测和堆区分 
 
@@ -254,7 +252,7 @@ http.createServer(function (req, res) {
 
 2.  试着延迟加载 node\_modules，而不要在启动时加载所有模块。这表示对 require('module') 的调用应该在尝试使用模块的函数中有实际需要时进行。
 
-3.  Azure Webapps 会提供一项称为本地缓存的功能。此功能会将你的内容从网络共享复制到 VM 上的本地磁盘。由于文件位于本地，因此，node\_modules 的加载时间快很多。 - 这篇[文档](/documentation/articles/app-service-local-cache/)更加详细地解释了如何使用本地缓存。
+3.  Azure Webapps 会提供一项称为本地缓存的功能。此功能会将你的内容从网络共享复制到 VM 上的本地磁盘。由于文件位于本地，因此，node\_modules 的加载时间快很多。 - 这篇[文档](../app-service/app-service-local-cache.md)更加详细地解释了如何使用本地缓存。
 
 ## IISNODE http 状态和子状态
 
@@ -273,19 +271,18 @@ http.createServer(function (req, res) {
 | 503 | 1001 | 无法将请求分派至 node.exe，因为应用程序正在回收。应用程序回收之后，应该会正常处理请求。 |
 | 503 | 1002 | 检查 win32 错误代码的实际原因 — 无法将请求分派至 node.exe。 |
 | 503 | 1003 | 命名管道太忙 — 检查节点是否正耗用大量 CPU                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
 NODE.exe 内有名为 NODE\_PENDING\_PIPE\_INSTANCES 的设置。默认情况下，此值在 Azure Webapps 外部为 4。这表示 node.exe 在命名管道上一次只能接受 4 个请求。在 Azure Webapps 上，此值设置为 5000，应足以满足 Azure Webapps 上运行的大多数节点应用程序。你不应该在 Azure Webapps 上看到 503.1003，因为我们 NODE\_PENDING\_PIPE\_INSTANCES 的值较高。|
 
 ## 更多资源
 
 请访问以下链接，了解有关 Azure Web Apps 上的 node.js 应用程序的详细信息。
 
-* [Azure App Service 中的 Node.js Web 应用入门](/documentation/articles/app-service-web-nodejs-get-started/)
-* [如何在 Azure App Service 中调试 Node.js Web 应用](/documentation/articles/web-sites-nodejs-debug/)
-* [将 Node.js 模块与 Azure 应用程序一起使用](/documentation/articles/nodejs-use-node-modules-azure-apps/)
+* [Azure App Service 中的 Node.js Web 应用入门](./app-service-web-nodejs-get-started.md)
+* [如何在 Azure App Service 中调试 Node.js Web 应用](./web-sites-nodejs-debug.md)
+* [将 Node.js 模块与 Azure 应用程序一起使用](../nodejs-use-node-modules-azure-apps.md)
 * [Azure App Service Web Apps: Node.js](https://blogs.msdn.microsoft.com/silverlining/2012/06/14/windows-azure-websites-node-js/)
-* [Node.js 开发人员中心](/documentation/articles/nodejs-use-node-modules-azure-apps/)
-* [探索神秘无比的 Kudu 调试控制台](/documentation/articles/aog-web-app-diagnostics-kudu/)
+* [Node.js 开发人员中心](../nodejs-use-node-modules-azure-apps.md)
+* [探索神秘无比的 Kudu 调试控制台](../aog-web-app-diagnostics-kudu.md)
 
 <!---HONumber=Mooncake_0815_2016-->

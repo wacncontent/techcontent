@@ -1,27 +1,27 @@
-<properties
-    pageTitle="DocumentDB 简介 - 一个 Azure NoSQL 数据库 | Azure"
-    description="下载 David Chappell 撰写的关于 DocumentDB（Azure 上一个托管 NoSQL 数据库）的白皮书。"
-    services="documentdb"
-    documentationcenter=""
-    author="mimig1"
-    manager="jhubbard"
-    editor="" />  
+---
+title: DocumentDB 简介 - 一个 Azure NoSQL 数据库 | Azure
+description: 下载 David Chappell 撰写的关于 DocumentDB（Azure 上一个托管 NoSQL 数据库）的白皮书。
+services: documentdb
+documentationcenter: ''
+author: mimig1
+manager: jhubbard
+editor: ''
 
-<tags
-    ms.assetid="61079e82-5b81-41de-81ff-1f963ff55d65"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/27/2016"
-    wacn.date="12/27/2016"
-    ms.author="mimig" />  
-
+ms.assetid: 61079e82-5b81-41de-81ff-1f963ff55d65
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/27/2016
+wacn.date: 12/27/2016
+ms.author: mimig
+---
 
 # DocumentDB 简介 - 一个 Azure NoSQL 数据库 
 
-> [AZURE.NOTE] 本白皮书上次更新于 2015 年，尚未更新到 DocumentDB 更新（如[全局分发数据](/documentation/articles/documentdb-distribute-data-globally/)和[分区集合](/documentation/articles/documentdb-partition-data/)）的帐户。有关 DocumentDB 的最新简介，请参阅 [DocumentDB 简介：NoSQL JSON 数据库](/documentation/articles/documentdb-introduction/)。
+> [!NOTE]
+> 本白皮书上次更新于 2015 年，尚未更新到 DocumentDB 更新（如[全局分发数据](./documentdb-distribute-data-globally.md)和[分区集合](./documentdb-partition-data.md)）的帐户。有关 DocumentDB 的最新简介，请参阅 [DocumentDB 简介：NoSQL JSON 数据库](./documentdb-introduction.md)。
 
 不确定 DocumentDB 是否适合你的应用程序或数据？ 想要了解如何在 Azure DocumentDB 中存储和访问 JSON 数据？ 如果是这样，可从这份由 David Chappell 创作的这一介绍性白皮书开始。它讨论了无架构 JSON 数据提供的灵活性带来的好处，使你能够轻松处理对数据结构的更改。
 

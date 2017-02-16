@@ -1,20 +1,21 @@
-<properties
-   pageTitle="Azure 虚拟网络对等互连 | Azure"
-   description="了解 Azure 中的 VNet 对等互连。"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="NarayanAnnamalai"
-   manager="jefco"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/17/2016"
-   wacn.date="12/07/2016"
-   ms.author="narayan" />
+---
+title: Azure 虚拟网络对等互连 | Azure
+description: 了解 Azure 中的 VNet 对等互连。
+services: virtual-network
+documentationCenter: na
+authors: NarayanAnnamalai
+manager: jefco
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/17/2016
+wacn.date: 12/07/2016
+ms.author: narayan
+---
 
 # VNet 对等互连
 
@@ -35,7 +36,6 @@ VNet 对等互连的要求和关键：
 - Resouce Manager 模型与经典部署模型中虚拟网络之间的对等互连要求 VNet 位于同一个订阅中。
 - 使用 Resource Manager 部署模型的虚拟网络可与使用此模型的另一个虚拟网络对等，或与使用经典部署模型的虚拟网络对等。但使用经典部署模型的虚拟网络不能彼此对等。
 - 尽管对等虚拟网络中虚拟机之间的通信没有任何额外的带宽限制，但基于 VM 大小的带宽上限仍适用。
-
 
 ![基本 VNet 对等互连](./media/virtual-networks-peering-overview/figure01.png)
 
@@ -58,7 +58,7 @@ Azure 为虚拟机提供的内部 DNS 名称解析在对等虚拟网络中无效
 用户还有效构建中心辐射型环境，中心可在其中托管基础结构组件，如网络虚拟设备。然后，所有分散虚拟网络均可与之对等，以及与运行于中心虚拟网络的装置的流量子集对等。简言之，VNet 对等互连使“用户定义的路由表”中的下一跃点 IP 地址成为对等虚拟网络中虚拟机的 IP 地址。
 
 ## 网关和本地连接
-无论与另一个虚拟网络对等与否，每个虚拟网络仍可有自己的网关，使用其连接到本地。即使虚拟网络对等，用户也可以使用网关配置 [VNet 到 VNet 连接](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)。
+无论与另一个虚拟网络对等与否，每个虚拟网络仍可有自己的网关，使用其连接到本地。即使虚拟网络对等，用户也可以使用网关配置 [VNet 到 VNet 连接](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)。
 
 若已配置虚拟网络互连的两个选项，则虚拟网络之间的流量将通过对等配置（即通过 Azure 主干）流通。
 
@@ -78,15 +78,14 @@ VNet 对等互连是一项特权操作。它是 VirtualNetworks 命名空间下�
 请参阅“后续步骤”部分的文章，了解如何建立两个虚拟网络之间的 VNet 对等互连的详细信息。
 
 ## 限制
-允许单个虚拟网络建立的对等互连数存在限制。有关详细信息，请参阅 [Azure 网络限制](/documentation/articles/azure-subscription-service-limits/#networking-limits)。
+允许单个虚拟网络建立的对等互连数存在限制。有关详细信息，请参阅 [Azure 网络限制](../azure-subscription-service-limits.md#networking-limits)。
 
 ## 定价
-VNet 对等互连在审核期间免费。正式发布后，会对利用对等互连的入口和出口流量收取小额费用。有关详细信息，请参阅[定价页](/pricing/details/networking/)。
-
+VNet 对等互连在审核期间免费。正式发布后，会对利用对等互连的入口和出口流量收取小额费用。有关详细信息，请参阅[定价页](https://www.azure.cn/pricing/details/networking/)。
 
 ## 后续步骤
-- [设置虚拟网络间的对等互连](/documentation/articles/virtual-networks-create-vnetpeering-arm-portal/)。
-- 了解 [NSG](/documentation/articles/virtual-networks-nsg/)。
-- 了解[用户定义的路由和 IP 转发](/documentation/articles/virtual-networks-udr-overview/)。
+- [设置虚拟网络间的对等互连](./virtual-networks-create-vnetpeering-arm-portal.md)。
+- 了解 [NSG](./virtual-networks-nsg.md)。
+- 了解[用户定义的路由和 IP 转发](./virtual-networks-udr-overview.md)。
 
 <!---HONumber=Mooncake_1107_2016-->

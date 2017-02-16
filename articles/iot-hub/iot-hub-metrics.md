@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure IoT 中心度量值 | Azure"
-    description="如何使用 Azure IoT 中心度量值评估和监视 IoT 中心的总体运行状况。"
-    services="iot-hub"
-    documentationcenter=""
-    author="nberdy"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="a47108fd-f994-4105-b21d-5b8f697b699c"
-    ms.service="iot-hub"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/16/2016"
-    wacn.date="01/13/2017"
-    ms.author="nberdy" />  
+---
+title: Azure IoT 中心度量值 | Azure
+description: 如何使用 Azure IoT 中心度量值评估和监视 IoT 中心的总体运行状况。
+services: iot-hub
+documentationcenter: ''
+author: nberdy
+manager: timlt
+editor: ''
 
+ms.assetid: a47108fd-f994-4105-b21d-5b8f697b699c
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/16/2016
+wacn.date: 01/13/2017
+ms.author: nberdy
+---
 
 # IoT 中心度量值
 IoT 中心度量值提供更棒的数据，清晰显示 Azure 订阅中的 Azure IoT 资源状态。通过 IoT 中心度量值，可评估 IoT 中心服务及其所连接的设备的总体运行状况。面向用户的统计信息非常重要，因为它们可以帮助了解 IoT 中心的情况，并可以帮助在不联系 Azure 支持人员的情况下解决根本问题。
@@ -26,13 +26,12 @@ IoT 中心度量值提供更棒的数据，清晰显示 Azure 订阅中的 Azure
 ## 如何查看 IoT 中心度量值
 1. 创建 IoT 中心。有关如何创建 IoT 中心的说明，请参阅[入门][lnk-get-started]指南。
 2. 打开 IoT 中心的边栏选项卡。在此处单击“度量值”。
-   
+
     ![][1]  
 
 3. 在“度量值”边栏选项卡中，可查看 IoT 中心的度量值并创建度量值的自定义视图。单击“诊断设置”，即可选择将度量值数据发送到事件中心终结点或 Azure 存储帐户。
-   
-    ![][2]  
 
+    ![][2]  
 
 ## IoT 中心度量值及其用法
 IoT 中心提供多个度量值，帮助你大致了解中心的运行状况以及所连接的设备总数。可以结合多个度量值的信息，更清楚地了解 IoT 中心的状态。下表描述了每个 IoT 中心所跟踪的度量值，以及每个度量值与 IoT 中心总体状态的关联。
@@ -71,15 +70,15 @@ IoT 中心提供多个度量值，帮助你大致了解中心的运行状况以�
 [1]: ./media/iot-hub-metrics/enable-metrics-1.png
 [2]: ./media/iot-hub-metrics/enable-metrics-2.png
 
-[lnk-get-started]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[lnk-operations-monitoring]: /documentation/articles/iot-hub-operations-monitoring/
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-dr]: /documentation/articles/iot-hub-ha-dr/
+[lnk-get-started]: ./iot-hub-csharp-csharp-getstarted.md
+[lnk-operations-monitoring]: ./iot-hub-operations-monitoring.md
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-dr]: ./iot-hub-ha-dr.md
 
-[lnk-monitor]: /documentation/articles/iot-hub-operations-monitoring/
+[lnk-monitor]: ./iot-hub-operations-monitoring.md
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

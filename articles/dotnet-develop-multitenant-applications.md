@@ -1,21 +1,21 @@
-<properties
-	pageTitle="多租户 Web 应用模式 | Azure"
-	description="查找介绍如何在 Azure 中实现多租户 Web 应用的体系结构概述和设计模式。"
-	services=""
-	documentationCenter=".net"
-	authors="wadepickett" 
-	manager="wpickett"
-	editor=""/>
+---
+title: 多租户 Web 应用模式 | Azure
+description: 查找介绍如何在 Azure 中实现多租户 Web 应用的体系结构概述和设计模式。
+services: ''
+documentationCenter: .net
+authors: wadepickett
+manager: wpickett
+editor: ''
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="06/05/2015"
-	wacn.date="01/21/2016"
-	ms.author="wpickett"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/05/2015
+wacn.date: 01/21/2016
+ms.author: wpickett
+---
 
 # Azure 中的多租户应用程序
 
@@ -48,8 +48,8 @@ Azure 提供了许多功能，使你能够解决在设计多租户系统时遇�
 - 按使用或不使用 SSL 通信的主机头对 Web 应用租户进行分段
 - 按查询参数对 Web 应用租户进行分段
 - 辅助角色中的 Web 服务
-	- 通常在应用程序后端处理数据的辅助角色。
-	- 通常充当应用程序前端的 Web 角色。
+    - 通常在应用程序后端处理数据的辅助角色。
+    - 通常充当应用程序前端的 Web 角色。
 
 **存储**
 
@@ -59,7 +59,6 @@ Azure 提供了许多功能，使你能够解决在设计多租户系统时遇�
 - 对应用程序资源使用 Azure 表 - 通过指定容器级别的访问策略，你可以调整权限，且无需为使用共享访问签名加以保护的资源发布新 URL。
 - 对应用程序资源使用 Azure 队列 - Azure 队列通常用于代表租户驱动处理过程，但也可以将其用于分发配置或管理所需的工作。
 - 对应用程序资源使用 Service Bus 队列 - 对于将工作推送到共享服务的租户特定应用程序功能，你可以使用单个队列，该队列中的每个租户发送方只有推送到该队列的权限（派生自 ACS 发布的声明），同时只有服务接收方有权从该队列中提取来自多个租户的数据。
-
 
 **连接和安全服务**
 
@@ -74,8 +73,6 @@ Azure 提供了一些联网服务，它们支持身份验证且提高了托管�
 - Azure Active Directory (Azure AD) 是一项基于 REST 的新型服务，它可为你的云应用程序提供标识管理和访问控制功能。可对应用程序资源使用 Azure AD - Azure AD 不仅允许将身份验证和授权功能从代码中分离出来，而且还提供对用户进行身份验证和授权以获取对 Web 应用和服务的访问权限的简便方法。
 - Azure Service Bus 为分布式应用程序和混合应用程序提供了安全消息传送和数据流功能，例如在 Azure 托管的应用程序与本地应用程序和服务之间进行通信，而不需要复杂的防火墙和安全基础结构。可对应用程序资源使用 Service Bus 中继 - 公开为终结点的服务可能属于租户（例如托管在系统之外的服务，如本地服务），也可能是专门为租户配置的服务（因为特定于租户的敏感数据通过这些服务传输）。
 
-
-
 **配置资源**
 
 Azure 提供了许多方法来为应用程序配置新租户。对于具有大量租户的多租户应用程序，通常必须通过启用自助服务配置来自动化此过程。
@@ -84,12 +81,10 @@ Azure 提供了许多方法来为应用程序配置新租户。对于具有大�
 - Azure Blob 可用于为新租户配置计算资源或预先初始化的存储资源，同时可提供容量级别访问策略以保护计算服务包、VHD 映像和其他资源。
 - 为租户配置 SQL 数据库资源的方式包括：
 
-	- 	在脚本中使用 DDL 或将其作为资源嵌入程序集
-	- 	使用以编程方式部署的 SQL Server 2008 R2 DAC 包。
-	- 	从主引用数据库进行复制
-	- 	使用数据库“导入”和“导出”从文件中配置新数据库。
-
-
+    - 	在脚本中使用 DDL 或将其作为资源嵌入程序集
+    - 	使用以编程方式部署的 SQL Server 2008 R2 DAC 包。
+    - 	从主引用数据库进行复制
+    - 	使用数据库“导入”和“导出”从文件中配置新数据库。
 
 <!--links-->
 

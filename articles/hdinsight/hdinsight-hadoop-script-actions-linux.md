@@ -1,30 +1,31 @@
 <!-- not suitable for Mooncake -->
 
-<properties
-    pageTitle="使用基于 Linux 的 HDInsight 进行脚本操作开发 | Azure"
-    description="如何使用脚本操作自定义基于 Linux 的 HDInsight 群集。使用脚本操作可以通过指定群集配置设置，或者在群集上安装额外的服务、工具或其他软件，来自定义 Azure HDInsight 群集。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags 
-    ms.assetid="cf4c89cd-f7da-4a10-857f-838004965d3e"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/14/2016"
-    wacn.date="02/06/2017"
-    ms.author="larryfr" />
+---
+title: 使用基于 Linux 的 HDInsight 进行脚本操作开发 | Azure
+description: 如何使用脚本操作自定义基于 Linux 的 HDInsight 群集。使用脚本操作可以通过指定群集配置设置，或者在群集上安装额外的服务、工具或其他软件，来自定义 Azure HDInsight 群集。
+services: hdinsight
+documentationcenter: ''
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+
+ms.assetid: cf4c89cd-f7da-4a10-857f-838004965d3e
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/14/2016
+wacn.date: 02/06/2017
+ms.author: larryfr
+---
 
 # 使用 HDInsight 进行脚本操作开发
 
 使用脚本操作可以通过指定群集配置设置，或者在群集上安装额外的服务、工具或其他软件，来自定义 Azure HDInsight 群集。你可以在创建群集期间或者在运行中的群集上使用脚本操作。
 
-> [AZURE.NOTE]
-本文档中的信息针对基于 Linux 的 HDInsight 群集。有关在基于 Windows 的群集上使用脚本操作的信息，请参阅 [Script action development with HDInsight (Windows)](/documentation/articles/hdinsight-hadoop-script-actions/)（使用 HDInsight 进行脚本操作开发 (Windows)）。
+> [!NOTE]
+本文档中的信息针对基于 Linux 的 HDInsight 群集。有关在基于 Windows 的群集上使用脚本操作的信息，请参阅 [Script action development with HDInsight (Windows)](./hdinsight-hadoop-script-actions.md)（使用 HDInsight 进行脚本操作开发 (Windows)）。
 > 
 > 
 
@@ -42,7 +43,7 @@
 | HDInsight .NET SDK |✓ |✓ |
 | Azure Resource Manager 模板 |✓ |&nbsp; |
 
-有关使用这些方法应用脚本操作的详细信息，请参阅 [Customize HDInsight clusters using script actions](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/)（使用脚本操作自定义 HDInsight 群集）。
+有关使用这些方法应用脚本操作的详细信息，请参阅 [Customize HDInsight clusters using script actions](./hdinsight-hadoop-customize-cluster-linux.md)（使用脚本操作自定义 HDInsight 群集）。
 
 ## <a name="bestPracticeScripting"></a>脚本开发最佳实践
 
@@ -59,16 +60,16 @@
 * [将文件另存为包含 LF 行尾的 ASCII](#bps8)
 * [使用重试逻辑从暂时性错误中恢复](#bps9)
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 脚本操作必须在 60 分钟内完成，否则将会超时。在节点预配期间，脚本将与其他安装和配置进程一同运行。争用 CPU 时间和网络带宽等资源可能导致完成脚本所需的时间要长于在开发环境中所需的时间。
 
 ### <a name="bPS1"></a>选择目标 Hadoop 版本
 
-不同版本的 HDInsight 有不同版本的 Hadoop 服务和已安装的组件。如果脚本需要特定版本的服务或组件，你应该只在包含所需组件的 HDInsight 版本中使用该脚本。可以使用 [HDInsight component versioning](/documentation/articles/hdinsight-component-versioning/)（HDInsight 组件版本控制）来查找有关 HDInsight 随附组件版本的信息。
+不同版本的 HDInsight 有不同版本的 Hadoop 服务和已安装的组件。如果脚本需要特定版本的服务或组件，你应该只在包含所需组件的 HDInsight 版本中使用该脚本。可以使用 [HDInsight component versioning](./hdinsight-component-versioning.md)（HDInsight 组件版本控制）来查找有关 HDInsight 随附组件版本的信息。
 
 ### <a name="bps10"></a> 选择目标 OS 版本
 
-[AZURE.INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
 
 基于 Linux 的 HDInsight 取决于 Ubuntu Linux 分发版。不同版本的 HDInsight 依赖于不同版本的 Ubuntu，这可能会影响脚本的行为方式。例如，HDInsight 3.4 及更低版本基于使用 Upstart 的 Ubuntu 版本。3.5 版本取决于使用 Systemd 的 Ubuntu 16.04。Systemd 和 Upstart 采用不同的命令，因此你编写的脚本应能与这两者配合使用。
 
@@ -76,36 +77,38 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 可通过使用 `lsb_release` 检查 OS 版本。色调安装脚本的以下代码片段演示如何确定该脚本是在 Ubuntu 14 上运行还是在 Ubuntu 16 上运行：
 
-    OS_VERSION=$(lsb_release -sr)
-    if [[ $OS_VERSION == 14* ]]; then
-        echo "OS verion is $OS_VERSION. Using hue-binaries-14-04."
-        HUE_TARFILE=hue-binaries-14-04.tgz
-    elif [[ $OS_VERSION == 16* ]]; then
-        echo "OS verion is $OS_VERSION. Using hue-binaries-16-04."
-        HUE_TARFILE=hue-binaries-16-04.tgz
-    fi
-    ...
-    if [[ $OS_VERSION == 16* ]]; then
-        echo "Using systemd configuration"
-        systemctl daemon-reload
-        systemctl stop webwasb.service    
-        systemctl start webwasb.service
-    else
-        echo "Using upstart configuration"
-        initctl reload-configuration
-        stop webwasb
-        start webwasb
-    fi
-    ...
-    if [[ $OS_VERSION == 14* ]]; then
-        export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-    elif [[ $OS_VERSION == 16* ]]; then
-        export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-    fi
+```
+OS_VERSION=$(lsb_release -sr)
+if [[ $OS_VERSION == 14* ]]; then
+    echo "OS verion is $OS_VERSION. Using hue-binaries-14-04."
+    HUE_TARFILE=hue-binaries-14-04.tgz
+elif [[ $OS_VERSION == 16* ]]; then
+    echo "OS verion is $OS_VERSION. Using hue-binaries-16-04."
+    HUE_TARFILE=hue-binaries-16-04.tgz
+fi
+...
+if [[ $OS_VERSION == 16* ]]; then
+    echo "Using systemd configuration"
+    systemctl daemon-reload
+    systemctl stop webwasb.service    
+    systemctl start webwasb.service
+else
+    echo "Using upstart configuration"
+    initctl reload-configuration
+    stop webwasb
+    start webwasb
+fi
+...
+if [[ $OS_VERSION == 14* ]]; then
+    export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+elif [[ $OS_VERSION == 16* ]]; then
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+fi
+```
 
 包含这些片段的完整脚本位于此处：https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh。
 
-有关 HDInsight 使用的 Ubuntu 版本，请参阅 [HDInsight 组件版本](/documentation/articles/hdinsight-component-versioning/)文档。
+有关 HDInsight 使用的 Ubuntu 版本，请参阅 [HDInsight 组件版本](./hdinsight-component-versioning.md)文档。
 
 若要了解 Systemd 和 Upstart 之间的差异，请参阅 [Upstart 用户的 Systemd](https://wiki.ubuntu.com/SystemdForUpstartUsers)。
 
@@ -115,7 +118,7 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 最佳做法是下载订阅上 Azure 存储帐户中的所有内容并将其存档。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 使用的存储帐户必须是群集的默认存储帐户，或其他任何存储帐户的公共只读容器。
 
 例如，Microsoft 提供的示例存储在 [https://hdiconfigactions.blob.core.windows.net/](https://hdiconfigactions.blob.core.windows.net/) 存储帐户中，这是 HDInsight 团队维护的公共只读容器。
@@ -134,7 +137,7 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 基于 Linux 的 HDInsight 群集提供在群集中保持活动状态的两个头节点，而脚本操作将针对这两个节点运行。如果安装的组件预期只有一个头节点，则必须将脚本设计为只在群集中两个头节点之一上安装组件。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 安装为 HDInsight 一部分的默认服务旨在根据需要在两个头节点之间故障转移，但是此功能未扩展到通过脚本操作安装的自定义组件。如果需要让通过脚本操作安装的组件高度可用，则必须实现自己的、使用两个可用头节点的故障转移机制。
 
 ### <a name="bPS6"></a>配置自定义组件以使用 Azure Blob 存储
@@ -143,33 +146,41 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 例如，以下脚本将 giraph-examples.jar 文件从本地文件系统复制到 WASB：
 
-    hadoop fs -copyFromLocal /usr/hdp/current/giraph/giraph-examples.jar /example/jars/
+```
+hadoop fs -copyFromLocal /usr/hdp/current/giraph/giraph-examples.jar /example/jars/
+```
 
 ### <a name="bPS7"></a>将信息写入 STDOUT 和 STDERR
 
 系统将会记录脚本执行期间写入 STDOUT 和 STDERR 的信息，你可以使用 Ambari Web UI 来查看这些信息。
 
-> [AZURE.NOTE]
-只有在成功创建群集之后，才能使用 Ambari。如果在群集创建期间使用脚本操作但创建失败，请参阅 [Customize HDInsight clusters using script action](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/#troubleshooting)（使用脚本操作自定义 HDInsight 群集）的故障排除部分，以了解访问所记录信息的其他方式。
+> [!NOTE]
+只有在成功创建群集之后，才能使用 Ambari。如果在群集创建期间使用脚本操作但创建失败，请参阅 [Customize HDInsight clusters using script action](./hdinsight-hadoop-customize-cluster-linux.md#troubleshooting)（使用脚本操作自定义 HDInsight 群集）的故障排除部分，以了解访问所记录信息的其他方式。
 
 大多数实用工具和安装包会将信息写入 STDOUT 和 STDERR，不过你可能想要添加更多日志记录。若要将文本发送到 STDOUT，可使用 `echo`。例如：
 
-    echo "Getting ready to install Foo"
+```
+echo "Getting ready to install Foo"
+```
 
 默认情况下，`echo` 会将字符串发送到 STDOUT。若要将它定向到 STDERR，请在 `echo` 的前面添加 `>&2`。例如：
 
-    >&2 echo "An error occurred installing Foo"
+```
+>&2 echo "An error occurred installing Foo"
+```
 
 这会将发送到 STDOUT（1，这是默认设置，因此未在此处列出）的信息重定向到 STDERR (2)。有关 IO 重定向的详细信息，请参阅 [http://www.tldp.org/LDP/abs/html/io-redirection.html](http://www.tldp.org/LDP/abs/html/io-redirection.html)。
 
-有关查看脚本操作记录的信息的详细信息，请参阅 [Customize HDInsight clusters using script actions](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/#troubleshooting)（使用脚本操作自定义 HDInsight 群集）。
+有关查看脚本操作记录的信息的详细信息，请参阅 [Customize HDInsight clusters using script actions](./hdinsight-hadoop-customize-cluster-linux.md#troubleshooting)（使用脚本操作自定义 HDInsight 群集）。
 
 ### <a name="bps8"></a>将文件另存为包含 LF 行尾的 ASCII
 
 应将 Bash 脚本存储为 ASCII 格式，该格式以 LF 作为行尾。如果将文件存储为 UTF-8，文件开头可能包含字节顺序标记，或者以 CRLF 作为行尾，这对于 Windows 编辑器很常见，在这种情况下，脚本将会失败并返回如下所示的错误：
 
-    $'\r': command not found
-    line 1: #!/usr/bin/env: No such file or directory
+```
+$'\r': command not found
+line 1: #!/usr/bin/env: No such file or directory
+```
 
 ### <a name="bps9"></a>使用重试逻辑从暂时性错误中恢复
 
@@ -177,40 +188,46 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 若要使脚本能够从暂时性错误中恢复，可以实现重试逻辑。下面是一个示例函数，它将运行任何传入的命令，并且在命令失败时最多重试三次。每两次重试的间隔时间为两秒。
 
-    #retry
-    MAXATTEMPTS=3
+```
+#retry
+MAXATTEMPTS=3
 
-    retry() {
-        local -r CMD="$@"
-        local -i ATTMEPTNUM=1
-        local -i RETRYINTERVAL=2
+retry() {
+    local -r CMD="$@"
+    local -i ATTMEPTNUM=1
+    local -i RETRYINTERVAL=2
 
-        until $CMD
-        do
-            if (( ATTMEPTNUM == MAXATTEMPTS ))
-            then
-                    echo "Attempt $ATTMEPTNUM failed. no more attempts left."
-                    return 1
-            else
-                    echo "Attempt $ATTMEPTNUM failed! Retrying in $RETRYINTERVAL seconds..."
-                    sleep $(( RETRYINTERVAL ))
-                    ATTMEPTNUM=$ATTMEPTNUM+1
-            fi
-        done
-    }
+    until $CMD
+    do
+        if (( ATTMEPTNUM == MAXATTEMPTS ))
+        then
+                echo "Attempt $ATTMEPTNUM failed. no more attempts left."
+                return 1
+        else
+                echo "Attempt $ATTMEPTNUM failed! Retrying in $RETRYINTERVAL seconds..."
+                sleep $(( RETRYINTERVAL ))
+                ATTMEPTNUM=$ATTMEPTNUM+1
+        fi
+    done
+}
+```
 
 下面是使用此函数的示例。
 
-    retry ls -ltr foo
+```
+retry ls -ltr foo
 
-    retry wget -O ./tmpfile.sh https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh
+retry wget -O ./tmpfile.sh https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh
+```
 
 ## <a name="helpermethods"></a>自定义脚本的帮助器方法
 
 脚本操作帮助器方法是可以在编写自定义脚本时使用的实用工具。这些方法在 [https://hdiconfigactions.blob.core.windows.net/linuxconfigactionmodulev01/HDInsightUtilities-v01.sh](https://hdiconfigactions.blob.core.windows.net/linuxconfigactionmodulev01/HDInsightUtilities-v01.sh) 中定义，可以使用以下语法包括在你的脚本中：
 
-    # Import the helper method module.
-    wget -O /tmp/HDInsightUtilities-v01.sh -q https://hdiconfigactions.blob.core.windows.net/linuxconfigactionmodulev01/HDInsightUtilities-v01.sh && source /tmp/HDInsightUtilities-v01.sh && rm -f /tmp/HDInsightUtilities-v01.sh
+```
+# Import the helper method module.
+wget -O /tmp/HDInsightUtilities-v01.sh -q https://hdiconfigactions.blob.core.windows.net/linuxconfigactionmodulev01/HDInsightUtilities-v01.sh && source /tmp/HDInsightUtilities-v01.sh && rm -f /tmp/HDInsightUtilities-v01.sh
+```
 
 这样，便可以在你的脚本中使用以下帮助器：
 
@@ -244,17 +261,23 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 按如下所示设置环境变量：
 
-    VARIABLENAME=value
+```
+VARIABLENAME=value
+```
 
 其中，VARIABLENAME 是变量的名称。若要访问其后面的变量，请使用 `$VARIABLENAME`。例如，若要将位置参数提供的值指定为名为 PASSWORD 的环境变量，请使用以下语句：
 
-    PASSWORD=$1
+```
+PASSWORD=$1
+```
 
 对信息进行后续访问时可以使用 `$PASSWORD`。
 
 在脚本中设置的环境变量只在脚本范围内存在。在某些情况下，可能需要添加整个系统的环境变量，这些变量在脚本完成之后仍会保存。通常，这就是为何通过 SSH 连接到群集的用户可以使用脚本所安装的组件的原因。可以通过将环境变量添加 `/etc/environment` 来实现此目的。例如，以下语句添加了 **HADOOP\_CONF\_DIR**：
 
-    echo "HADOOP_CONF_DIR=/etc/hadoop/conf" | sudo tee -a /etc/environment
+```
+echo "HADOOP_CONF_DIR=/etc/hadoop/conf" | sudo tee -a /etc/environment
+```
 
 ### 访问存储自定义脚本的位置
 
@@ -270,7 +293,7 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 将文件存储在群集可访问的 Azure 存储帐户（例如默认存储帐户）中可以提供快速访问，因为此存储在 Azure 网络内。
 
-> [AZURE.NOTE]
+> [!NOTE]
 用于引用脚本的 URI 格式因所使用的服务而异。对于与 HDInsight 群集关联的存储帐户，请使用 `wasb://` 或 `wasbs://`。对于可公开读取的 URI，请使用 `http://` 或 `https://`。
 
 ### 检查操作系统版本
@@ -279,14 +302,16 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 若要检查 OS 版本，请使用 `lsb_release`。例如，以下代码演示如何根据 OS 版本引用不同的 tar 文件：
 
-    OS_VERSION=$(lsb_release -sr)
-    if [[ $OS_VERSION == 14* ]]; then
-        echo "OS verion is $OS_VERSION. Using hue-binaries-14-04."
-        HUE_TARFILE=hue-binaries-14-04.tgz
-    elif [[ $OS_VERSION == 16* ]]; then
-        echo "OS verion is $OS_VERSION. Using hue-binaries-16-04."
-        HUE_TARFILE=hue-binaries-16-04.tgz
-    fi
+```
+OS_VERSION=$(lsb_release -sr)
+if [[ $OS_VERSION == 14* ]]; then
+    echo "OS verion is $OS_VERSION. Using hue-binaries-14-04."
+    HUE_TARFILE=hue-binaries-14-04.tgz
+elif [[ $OS_VERSION == 16* ]]; then
+    echo "OS verion is $OS_VERSION. Using hue-binaries-16-04."
+    HUE_TARFILE=hue-binaries-16-04.tgz
+fi
+```
 
 ## <a name="deployScript"></a>有关部署脚本操作的清单
 
@@ -299,19 +324,19 @@ HDInsight 3.4 和 3.5 的另一个重要区别在于 `JAVA_HOME` 现在能够指
 
 ## <a name="runScriptAction"></a>如何运行脚本操作
 
-可以通过 Azure 门户、Azure PowerShell、Azure Resource Manager 模板或 HDInsight .NET SDK 使用脚本操作来自定义 HDInsight 群集。有关说明，请参阅 [How to use script action](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/)（如何使用脚本操作）。
+可以通过 Azure 门户、Azure PowerShell、Azure Resource Manager 模板或 HDInsight .NET SDK 使用脚本操作来自定义 HDInsight 群集。有关说明，请参阅 [How to use script action](./hdinsight-hadoop-customize-cluster-linux.md)（如何使用脚本操作）。
 
 ## <a name="sampleScripts"></a>自定义脚本示例
 
 Microsoft 提供了在 HDInsight 群集上安装组件的示例脚本。示例脚本以及有关如何使用这些脚本的说明可以在以下链接上找到：
 
-* [Install and use Hue on HDInsight clusters（在 HDInsight 群集上安装并使用 Hue）](/documentation/articles/hdinsight-hadoop-hue-linux/)
-* [在 HDInsight Hadoop 群集上安装并使用 R](/documentation/articles/hdinsight-hadoop-r-scripts/)
-* [在 HDInsight 群集上安装并使用 Solr](/documentation/articles/hdinsight-hadoop-solr-install-linux/)
-* [在 HDInsight 群集上安装并使用 Giraph](/documentation/articles/hdinsight-hadoop-giraph-install-linux/)
+* [Install and use Hue on HDInsight clusters（在 HDInsight 群集上安装并使用 Hue）](./hdinsight-hadoop-hue-linux.md)
+* [在 HDInsight Hadoop 群集上安装并使用 R](./hdinsight-hadoop-r-scripts.md)
+* [在 HDInsight 群集上安装并使用 Solr](./hdinsight-hadoop-solr-install-linux.md)
+* [在 HDInsight 群集上安装并使用 Giraph](./hdinsight-hadoop-giraph-install-linux.md)
 
-> [AZURE.NOTE]
-上面链接的文档针对基于 Linux 的 HDInsight 群集。有关适用于基于 Windows 的 HDInsight 的脚本，请参阅 [Script action development with HDInsight (Windows)](/documentation/articles/hdinsight-hadoop-script-actions/)（使用 HDInsight 进行脚本操作开发 (Windows)）或使用每篇文章顶部提供的链接。
+> [!NOTE]
+上面链接的文档针对基于 Linux 的 HDInsight 群集。有关适用于基于 Windows 的 HDInsight 的脚本，请参阅 [Script action development with HDInsight (Windows)](./hdinsight-hadoop-script-actions.md)（使用 HDInsight 进行脚本操作开发 (Windows)）或使用每篇文章顶部提供的链接。
 
 ## 故障排除
 
@@ -325,7 +350,7 @@ Microsoft 提供了在 HDInsight 群集上安装组件的示例脚本。示例�
 
 *解决方法*：如果文本编辑器提供了选项，请选择 Unix 格式或 LF 作为行尾。也可以在 Unix 系统上使用以下命令，将 CRLF 更改为 LF：
 
-> [AZURE.NOTE]
+> [!NOTE]
 以下命令大致相当于将 CRLF 行尾更改为 LF。根据系统中提供的实用工具选择一种解决方法。
 
 | 命令 | 说明 |
@@ -341,13 +366,15 @@ Microsoft 提供了在 HDInsight 群集上安装组件的示例脚本。示例�
 
 *解决方法*：将文件另存为 ASCII，或者不带 BOM 的 UTF-8。也可以在 Linux 或 Unix 系统上使用以下命令来创建不带 BOM 的新文件：
 
-    awk 'NR==1{sub(/^\xef\xbb\xbf/,"")}{print}' INFILE > OUTFILE
+```
+awk 'NR==1{sub(/^\xef\xbb\xbf/,"")}{print}' INFILE > OUTFILE
+```
 
 对于上述命令，请将 **INFILE** 替换为包含 BOM 的文件。**OUTFILE** 应是新文件的名称，包含不带 BOM 的脚本。
 
 ## <a name="seeAlso"></a>后续步骤
 
-* 了解如何[使用脚本操作自定义 HDInsight 群集](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/)。
+* 了解如何[使用脚本操作自定义 HDInsight 群集](./hdinsight-hadoop-customize-cluster-linux.md)。
 * 使用 [HDInsight .NET SDK reference](https://msdn.microsoft.com/zh-cn/library/mt271028.aspx)（HDInsight.NET SDK 参考）详细了解如何创建用于管理 HDInsight 的 .NET 应用程序
 * 使用 [HDInsight REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt622197.aspx) 了解如何通过 REST 在 HDInsight 群集上执行管理操作。
 

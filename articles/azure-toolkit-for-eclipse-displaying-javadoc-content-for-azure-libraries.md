@@ -1,24 +1,21 @@
-<properties
-    pageTitle="在 Eclipse 中显示 Azure Libraries Package for Java 的 Javadoc 内容"
-    description="如何在 Eclipse 中显示 Azure Libraries 的 Javadoc 内容。"
-    services=""
-    documentationCenter="java"
-    authors="rmcmurray"
-    manager="wpickett"
-    editor=""/>  
+---
+title: 在 Eclipse 中显示 Azure Libraries Package for Java 的 Javadoc 内容
+description: 如何在 Eclipse 中显示 Azure Libraries 的 Javadoc 内容。
+services: ''
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: ''
 
-
-<tags
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016" 
-    wacn.date="12/30/2016" 
-    ms.author="robmcm"/>
-
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 # 在 Eclipse 中显示 Azure Libraries Package for Java 的 Javadoc 内容 #
 通过将 Javadoc 内容关联到 Azure Libraries for Java，可以在 Eclipse 环境中查看 Azure Libraries for Java 的 Javadoc 内容。以下步骤说明如何在 Eclipse 中使用此功能。
@@ -40,7 +37,6 @@
 
 ![][ic553488]  
 
-
 ## 另请参阅
 [适用于 Eclipse 的 Azure 工具包][]
 
@@ -53,14 +49,13 @@
 <!-- URL List -->
 
 [Azure Java 开发人员中心]: /develop/java/
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 
 [ic553487]: ./media/azure-toolkit-for-eclipse-displaying-javadoc-content-for-azure-libraries/ic553487.png
 [ic553488]: ./media/azure-toolkit-for-eclipse-displaying-javadoc-content-for-azure-libraries/ic553488.png
-
 
 <!---HONumber=Mooncake_1128_2016-->

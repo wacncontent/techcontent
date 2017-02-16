@@ -1,23 +1,21 @@
-<properties
-   pageTitle="故障排除：“Active Directory”项缺失或不可用 | Azure "
-   description="Azure 管理门户中未显示 Active Directory 菜单项时怎么办。"
-   services="active-directory"
-   documentationCenter="na"
-   authors="msmbaldwin"
-   manager="mbaldwin"
-   editor=""/>  
+---
+title: 故障排除：“Active Directory”项缺失或不可用 | Azure 
+description: Azure 管理门户中未显示 Active Directory 菜单项时怎么办。
+services: active-directory
+documentationCenter: na
+authors: msmbaldwin
+manager: mbaldwin
+editor: ''
 
-
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="09/16/2016"
-   wacn.date="10/25/2016"
-   ms.author="mbaldwin"/>  
-
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 09/16/2016
+wacn.date: 10/25/2016
+ms.author: mbaldwin
+---
 
 # 故障排除：“Active Directory”项缺失或不可用
 
@@ -47,7 +45,7 @@
 
 若要创建访问控制命名空间或多重身份验证提供程序，请单击“+新建”>“应用程序服务”>“Active Directory”。
 
-要获取对目录的管理权限，请让管理员为你的帐户分配管理员角色。有关详细信息，请参阅[分配管理员角色](/documentation/articles/active-directory-assign-admin-roles/)。
+要获取对目录的管理权限，请让管理员为你的帐户分配管理员角色。有关详细信息，请参阅[分配管理员角色](./active-directory-assign-admin-roles.md)。
 
 ## Active Directory 不可用
 

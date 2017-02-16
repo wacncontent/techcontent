@@ -1,35 +1,34 @@
-<properties
-    pageTitle="Azure 外围网络示例 - 使用 NSG 构建简单的外围网络 | Azure"
-    description="使用网络安全组 (NSG) 构建外围网络"
-    services="virtual-network"
-    documentationcenter="na"
-    author="tracsman"
-    manager="rossort"
-    editor="" />
-<tags
-    ms.assetid=""
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="01/03/2017"
-    wacn.date="02/10/2017"
-    ms.author="jonor" />  
+---
+title: Azure 外围网络示例 - 使用 NSG 构建简单的外围网络 | Azure
+description: 使用网络安全组 (NSG) 构建外围网络
+services: virtual-network
+documentationcenter: na
+author: tracsman
+manager: rossort
+editor: ''
 
+ms.assetid: ''
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 01/03/2017
+wacn.date: 02/10/2017
+ms.author: jonor
+---
 
 # 示例 1 - 将 NSG 与 Azure Resource Manager 模板配合使用，构建简单的外围网络
 [返回安全边界最佳实践页面][HOME]
-> [AZURE.SELECTOR]
-- [Resource Manager 模板](/documentation/articles/virtual-networks-dmz-nsg/)
-- [经典 - PowerShell](/documentation/articles/virtual-networks-dmz-nsg-asm/)
+> [!div class="op_single_selector"]
+- [Resource Manager 模板](./virtual-networks-dmz-nsg.md)
+- [经典 - PowerShell](./virtual-networks-dmz-nsg-asm.md)
 
 本示例将创建一个原始的外围网络，其中包含四个 Windows Server 和网络安全组。本示例介绍了每个相关的模板部分，帮助用户更好地理解每一步。另外还提供了“流量方案”部分，帮助用户逐步深入了解流量如何流经外围网络的各个防御层。最后的“参考”部分提供了完整的模板代码，并说明如何构建此环境来测试和试验各种方案。
 
-[AZURE.INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
+[!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
 
 ![使用 NSG 的入站外围网络][1]  
-
 
 ## 环境描述
 本示例中的一个订阅包含以下资源：
@@ -49,7 +48,7 @@
 1. 部署 [Azure 快速启动模板][Template]中的 Azure Resource Manager 模板
 2. 安装[示例应用程序脚本][SampleApp]中的示例应用程序
 
->[AZURE.NOTE]
+>[!NOTE]
 若要通过 RDP 连接到本实例中的任何后端服务器，可使用 IIS 服务器作为“跳转盒”。 首先通过 RDP 连接到 IIS 服务器，然后再从 IIS 服务器通过 RDP 连接到后端服务器。也可将一个公共 IP 与每个服务器 NIC 关联，方便 RDP 的执行。
 > 
 >
@@ -59,7 +58,7 @@
 ## 网络安全组 (NSG)
 此示例将构建一个 NSG 组，然后为其加载六个规则。
 
->[AZURE.TIP]
+>[!TIP]
 一般而言，应该先创建特定的“允许”规则，然后创建一般的“拒绝”规则。分配的优先级确定先评估哪些规则。发现要向流量应用的特定规则后，不再需要评估后续规则。可以朝入站或出站方向（从子网的角度看）应用 NSG 规则。
 >
 >
@@ -81,15 +80,17 @@
 
 1. 网络安全组资源必须实例化才能在其中保留以下规则：
 
-        "resources": [
-          {
-            "apiVersion": "2015-05-01-preview",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "name": "[variables('NSGName')]",
-            "location": "[resourceGroup().location]",
-            "properties": { }
-          }
-        ]
+    ```JSON
+    "resources": [
+      {
+        "apiVersion": "2015-05-01-preview",
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "name": "[variables('NSGName')]",
+        "location": "[resourceGroup().location]",
+        "properties": { }
+      }
+    ]
+    ```
 
 2. 本示例中的第一个规则允许所有内部网络之间的 DNS 流量发往后端子网上的 DNS 服务器。该规则有一些重要参数：
     * "destinationAddressPrefix" - 规则可以使用名为“默认标记”的特殊类型的地址前缀，这些标记是系统提供的标识符，方便更大类别的地址前缀的寻址。此规则使用默认标记 "Internet" 表示 VNet 外部的任何地址。其他前缀标签还有 VirtualNetwork 和 AzureLoadBalancer。
@@ -97,107 +98,119 @@
     * "Priority" 设置流量的评估顺序。编号越低，优先级就越高。将某个规则应用于特定的流量后，就不再处理其他规则。因此，如果优先级为 1 的规则允许流量，优先级为 2 的规则拒绝流量，并将这两个规则同时应用于流量，则允许流量流动（规则 1 的优先级更高，因此将发生作用，并且不再应用其他规则）。
     * "Access" 表示是阻止 ("Deny") 还是允许 ("Allow") 受此规则影响的流量。
 
+        ```JSON
+        "properties": {
+        "securityRules": [
+          {
+            "name": "enable_dns_rule",
             "properties": {
-            "securityRules": [
-              {
-                "name": "enable_dns_rule",
-                "properties": {
-                  "description": "Enable Internal DNS",
-                  "protocol": "*",
-                  "sourcePortRange": "*",
-                  "destinationPortRange": "53",
-                  "sourceAddressPrefix": "VirtualNetwork",
-                  "destinationAddressPrefix": "10.0.2.4",
-                  "access": "Allow",
-                  "priority": 100,
-                  "direction": "Inbound"
-                }
-              },
+              "description": "Enable Internal DNS",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "53",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "10.0.2.4",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          },
+        ```
 
 3. 此规则允许 RDP 流量从 Internet 发往绑定子网上任何服务器的 RDP 端口。
 
-        {
-          "name": "enable_rdp_rule",
-          "properties": {
-            "description": "Allow RDP",
-            "protocol": "Tcp",
-            "sourcePortRange": "*",
-            "destinationPortRange": "3389",
-            "sourceAddressPrefix": "*",
-            "destinationAddressPrefix": "*",
-            "access": "Allow",
-            "priority": 110,
-            "direction": "Inbound"
-          }
-        },
+    ```JSON
+    {
+      "name": "enable_rdp_rule",
+      "properties": {
+        "description": "Allow RDP",
+        "protocol": "Tcp",
+        "sourcePortRange": "*",
+        "destinationPortRange": "3389",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "*",
+        "access": "Allow",
+        "priority": 110,
+        "direction": "Inbound"
+      }
+    },
+    ```
 
 4. 此规则允许入站 Internet 流量抵达 Web 服务器。此规则不会更改路由行为。该规则仅允许发往 IIS01 的流量通过。因此，如果来自 Internet 的流量将 Web 服务器作为其目标，此规则将允许流量，并停止处理其他规则。（在优先级为 140 的规则中，其他所有入站 Internet 流量均被阻止）。如果你只要处理 HTTP 流量，可将此规则进一步限制为只允许目标端口 80。
 
-        {
-          "name": "enable_web_rule",
-          "properties": {
-            "description": "Enable Internet to [variables('VM01Name')]",
-            "protocol": "Tcp",
-            "sourcePortRange": "*",
-            "destinationPortRange": "80",
-            "sourceAddressPrefix": "Internet",
-            "destinationAddressPrefix": "10.0.1.5",
-            "access": "Allow",
-            "priority": 120,
-            "direction": "Inbound"
-            }
-          },
+    ```JSON
+    {
+      "name": "enable_web_rule",
+      "properties": {
+        "description": "Enable Internet to [variables('VM01Name')]",
+        "protocol": "Tcp",
+        "sourcePortRange": "*",
+        "destinationPortRange": "80",
+        "sourceAddressPrefix": "Internet",
+        "destinationAddressPrefix": "10.0.1.5",
+        "access": "Allow",
+        "priority": 120,
+        "direction": "Inbound"
+        }
+      },
+    ```
 
 5. 此规则允许流量从 IIS01 服务器传递到 AppVM01 服务器，后面的规则将阻止其他所有从前端到后端的流量。如果要添加的端口是已知的，则可以改善此规则。例如，如果 IIS 服务器的流量只抵达 AppVM01 上的 SQL Server，并且 Web 应用程序曾遭到入侵，则目标端口范围应该从 "*"（任意端口）更改为 "1433"（SQL 端口），以缩小 AppVM01 上的入站攻击面。
 
-        {
-          "name": "enable_app_rule",
-          "properties": {
-            "description": "Enable [variables('VM01Name')] to [variables('VM02Name')]",
-            "protocol": "*",
-            "sourcePortRange": "*",
-            "destinationPortRange": "*",
-            "sourceAddressPrefix": "10.0.1.5",
-            "destinationAddressPrefix": "10.0.2.5",
-            "access": "Allow",
-            "priority": 130,
-            "direction": "Inbound"
-          }
-        },
+    ```JSON
+    {
+      "name": "enable_app_rule",
+      "properties": {
+        "description": "Enable [variables('VM01Name')] to [variables('VM02Name')]",
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "sourceAddressPrefix": "10.0.1.5",
+        "destinationAddressPrefix": "10.0.2.5",
+        "access": "Allow",
+        "priority": 130,
+        "direction": "Inbound"
+      }
+    },
+    ```
 
 6. 此规则将拒绝从 Internet 到网络上任何服务器的流量。规则的优先级为 110 和 120 时，只有入站 Internet 流量能够发往防火墙和服务器上的 RDP 端口，其他流量将被阻止。此规则属于“防故障”规则，可以阻止所有意外的流量。
 
-        {
-          "name": "deny_internet_rule",
-          "properties": {
-            "description": "Isolate the [variables('VNetName')] VNet from the Internet",
-            "protocol": "*",
-            "sourcePortRange": "*",
-            "destinationPortRange": "*",
-            "sourceAddressPrefix": "Internet",
-            "destinationAddressPrefix": "VirtualNetwork",
-            "access": "Deny",
-            "priority": 140,
-            "direction": "Inbound"
-          }
-        },
+    ```JSON
+    {
+      "name": "deny_internet_rule",
+      "properties": {
+        "description": "Isolate the [variables('VNetName')] VNet from the Internet",
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationAddressPrefix": "VirtualNetwork",
+        "access": "Deny",
+        "priority": 140,
+        "direction": "Inbound"
+      }
+    },
+    ```
 
 7. 最后一个规则拒绝从前端子网到后端子网的流量。此规则为仅针对入站的规则，因此允许反向流量（从后端到前端）。
 
-        {
-          "name": "deny_frontend_rule",
-          "properties": {
-            "description": "Isolate the [variables('Subnet1Name')] subnet from the [variables('Subnet2Name')] subnet",
-            "protocol": "*",
-            "sourcePortRange": "*",
-            "destinationPortRange": "*",
-            "sourceAddressPrefix": "[variables('Subnet1Prefix')]",
-            "destinationAddressPrefix": "[variables('Subnet2Prefix')]",
-            "access": "Deny",
-            "priority": 150,
-            "direction": "Inbound"
-          }
-        }
+    ```JSON
+    {
+      "name": "deny_frontend_rule",
+      "properties": {
+        "description": "Isolate the [variables('Subnet1Name')] subnet from the [variables('Subnet2Name')] subnet",
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "sourceAddressPrefix": "[variables('Subnet1Prefix')]",
+        "destinationAddressPrefix": "[variables('Subnet2Prefix')]",
+        "access": "Deny",
+        "priority": 150,
+        "direction": "Inbound"
+      }
+    }
+    ```
 
 ## 流量方案
 #### （*允许*）从 Internet 访问 Web 服务器
@@ -234,7 +247,7 @@
 5. 已启用 RDP 会话
 6. IIS01 会提示用户提供用户名和密码
 
->[AZURE.NOTE]
+>[!NOTE]
 若要通过 RDP 连接到本实例中的任何后端服务器，可使用 IIS 服务器作为“跳转盒”。 首先通过 RDP 连接到 IIS 服务器，然后再从 IIS 服务器通过 RDP 连接到后端服务器。
 >
 >
@@ -276,7 +289,7 @@
 2. 由于没有公共 IP 地址与此服务器 NIC 关联，因此该流量不会进入 VNet，不会抵达服务器
 3. 但是，如果某个公共 IP 地址因某种原因而启用，则 NSG 规则 2 (RDP) 会允许此流量
 
->[AZURE.NOTE]
+>[!NOTE]
 若要通过 RDP 连接到本实例中的任何后端服务器，可使用 IIS 服务器作为“跳转盒”。 首先通过 RDP 连接到 IIS 服务器，然后再从 IIS 服务器通过 RDP 连接到后端服务器。
 >
 >
@@ -323,7 +336,7 @@
 8. 单击“创建”开始部署此模板。
 9. 部署成功完成以后，导航到为此部署创建的“资源组”，查看其中配置的资源。
 
->[AZURE.NOTE]
+>[!NOTE]
 此模板仅允许通过 RDP 访问 IIS01 服务器（在门户中查找 IIS01 的公共 IP）。若要通过 RDP 连接到本实例中的任何后端服务器，可使用 IIS 服务器作为“跳转盒”。 首先通过 RDP 连接到 IIS 服务器，然后再从 IIS 服务器通过 RDP 连接到后端服务器。
 >
 >
@@ -345,8 +358,8 @@
 
 <!--Link References-->
 
-[HOME]: /documentation/articles/best-practices-network-security/
+[HOME]: ../security/best-practices-network-security.md
 [Template]: https://github.com/Azure/azure-quickstart-templates/tree/master/301-dmz-nsg
-[SampleApp]: /documentation/articles/virtual-networks-sample-app/
+[SampleApp]: ./virtual-networks-sample-app.md
 
 <!---HONumber=Mooncake_0206_2017-->

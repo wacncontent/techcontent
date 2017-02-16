@@ -1,22 +1,22 @@
-<properties
-   pageTitle="使用 Visual Studio 配置 Azure 云服务的角色 | Azure"
-   description="了解如何使用 Visual Studio 设置和配置 Azure 云服务的角色。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 使用 Visual Studio 配置 Azure 云服务的角色 | Azure
+description: 了解如何使用 Visual Studio 设置和配置 Azure 云服务的角色。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="d397ef87-64e5-401a-aad5-7f83f1022e16"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: d397ef87-64e5-401a-aad5-7f83f1022e16
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 使用 Visual Studio 配置 Azure 云服务的角色
 
@@ -54,13 +54,14 @@
 
     如果要对角色的所有服务配置进行更改，则可选择“所有配置”。
 
-    >[AZURE.IMPORTANT] 如果要选择特定的服务配置，需禁用一些属性，因为其只能设置为所有配置。若要编辑这些属性，必须选择“所有配置”。
+    >[!IMPORTANT]
+    > 如果要选择特定的服务配置，需禁用一些属性，因为其只能设置为所有配置。若要编辑这些属性，必须选择“所有配置”。
 
     现在可选择选项卡以更新在该视图上任意启动的属性。
 
 ## 更改角色实例的数目
 
-若要提高云服务的性能，可根据用户或某个特定角色的预期负载的数目，更改正在运行的角色实例的数目。当云服务在 Azure 中运行时，将为每个角色实例创建单独的虚拟机。这将会影响部署此云服务的计费。有关计费的详细信息，请参阅[了解你的 Azure 帐单](/documentation/articles/billing-understand-your-bill/)。
+若要提高云服务的性能，可根据用户或某个特定角色的预期负载的数目，更改正在运行的角色实例的数目。当云服务在 Azure 中运行时，将为每个角色实例创建单独的虚拟机。这将会影响部署此云服务的计费。有关计费的详细信息，请参阅[了解你的 Azure 帐单](./billing-understand-your-bill.md)。
 
 ### 更改角色的实例数目
 
@@ -68,11 +69,13 @@
 
 1. 在“服务配置”列表中，选择你要更新的服务配置。
 
-    >[AZURE.NOTE] 可为特定的服务配置或所有的配置设置实例计数。
+    >[!NOTE]
+    > 可为特定的服务配置或所有的配置设置实例计数。
 
 1. 在“实例计数”文本框中，键入想要启动此角色的实例数。
 
-    >[AZURE.NOTE] 当你将云服务发布到 Azure 时，每个实例将在单独的虚拟机上运行。
+    >[!NOTE]
+    > 当你将云服务发布到 Azure 时，每个实例将在单独的虚拟机上运行。
 
 1. 选择工具栏中的“保存”按钮，将这些更改保存到服务配置文件。
 
@@ -80,7 +83,8 @@
 
 可添加、删除或修改服务配置的连接字符串。对于不同的服务的配置，你可能需要不同的连接字符串。例如，你可能希望本地服务配置的本地连接字符串，该本地服务配置具有 `UseDevelopmentStorage=true` 值。你可能还希望将云服务配置为使用 Azure 中的存储帐户。
 
->[AZURE.WARNING] 当输入存储帐户连接字符串的 Azure 存储帐户关键信息时，此信息存储在本地服务配置文件中。但是，此信息当前未存储为加密文本。
+>[!WARNING]
+> 当输入存储帐户连接字符串的 Azure 存储帐户关键信息时，此信息存储在本地服务配置文件中。但是，此信息当前未存储为加密文本。
 
 由于每个服务配置使用不同的值，当你将云服务发布到 Azure 时，不必在云服务中使用不同的连接字符串或修改你的代码。可以在代码中对连接字符串使用同一名称，但值会不同，该值基于在生成云服务或发布云服务时选择的服务配置。
 
@@ -90,7 +94,8 @@
 
 1. 在“服务配置”列表中，选择你要更新的服务配置。
 
-    >[AZURE.NOTE] 可更新特定服务配置的连接字符串，但是，如果需要添加或删除连接字符串，则必须选择“所有配置”。
+    >[!NOTE]
+    > 可更新特定服务配置的连接字符串，但是，如果需要添加或删除连接字符串，则必须选择“所有配置”。
 
 1. 若要添加连接字符串，请选择“添加设置”按钮。一个新条目将添加到列表中。
 
@@ -150,7 +155,8 @@
 
 1. 在“服务配置”列表中，选择你要更新的服务配置。
 
-    >[AZURE.NOTE] 可更新特定服务配置的字符串，但是，如果需要添加或删除字符串，则必须选择“所有配置”。
+    >[!NOTE]
+    > 可更新特定服务配置的字符串，但是，如果需要添加或删除字符串，则必须选择“所有配置”。
 
 1. 若要添加字符串，请选择“添加设置”按钮。一个新条目将添加到列表中。
 
@@ -186,7 +192,7 @@
 
 ## 管理每个角色实例的本地存储
 
-可以为角色的每个实例添加本地文件系统存储。可在此处存储其他角色不需要访问的本地数据。不需要保存到表、Blob 或 SQL 数据库存储的任何数据都可以存储在此处。例如，可以使用此本地存储缓存可能需要再次使用的数据。角色的其他实例无法访问此处存储的数据。有关本地存储资源的详细信息，请参阅[配置本地存储资源](/documentation/articles/cloud-services-configure-local-storage-resources/)。
+可以为角色的每个实例添加本地文件系统存储。可在此处存储其他角色不需要访问的本地数据。不需要保存到表、Blob 或 SQL 数据库存储的任何数据都可以存储在此处。例如，可以使用此本地存储缓存可能需要再次使用的数据。角色的其他实例无法访问此处存储的数据。有关本地存储资源的详细信息，请参阅[配置本地存储资源](./cloud-services/cloud-services-configure-local-storage-resources.md)。
 
 本地存储设置将应用到所有服务配置。你只能添加、删除或修改所有服务配置的本地存储。
 
@@ -256,7 +262,8 @@
 
 你可以为 Azure 云服务收集诊断数据。此数据将添加到存储帐户。对于不同的服务的配置，你可能需要不同的连接字符串。例如，对于具有 UseDevelopmentStorage=true 值的本地服务配置，你可能想要使用本地存储帐户。你可能还希望将云服务配置为使用 Azure 中的存储帐户。有关 Azure 诊断的详细信息，请参阅“Collect Logging Data by Using Azure Diagnostics”（使用 Azure 诊断收集日志记录数据）。
 
->[AZURE.NOTE] 本地服务已配置为使用本地资源。如果使用云服务配置来发布 Azure 云服务，在发布时指定的连接字符串也将用于诊断连接字符串，除非已指定连接字符串。如果你使用 Visual Studio 打包云服务，不会更改服务配置中的连接字符串。
+>[!NOTE]
+> 本地服务已配置为使用本地资源。如果使用云服务配置来发布 Azure 云服务，在发布时指定的连接字符串也将用于诊断连接字符串，除非已指定连接字符串。如果你使用 Visual Studio 打包云服务，不会更改服务配置中的连接字符串。
 
 ### 收集云服务诊断数据
 
@@ -264,7 +271,8 @@
 
 1. 在“服务配置”列表中，选择你要更新的服务配置或选择“所有配置”。
 
-    >[AZURE.NOTE] 你可以更新特定服务配置的存储帐户，但如果想要启用或禁用诊断，则必须选择“所有配置”。
+    >[!NOTE]
+    > 你可以更新特定服务配置的存储帐户，但如果想要启用或禁用诊断，则必须选择“所有配置”。
 
 1. 若要启用诊断，请选中“启用诊断”复选框。
 
@@ -278,12 +286,12 @@
 
 1. 若要使用本地连接字符串的存储帐户，请选择“手动输入的凭据”选项。
 
-    有关如何创建存储帐户以及如何在“创建存储连接字符串”对话框中输入存储帐户详细信息的信息，请参阅[准备从 Visual Studio 发布或部署 Azure 应用程序](/documentation/articles/vs-azure-tools-cloud-service-publish-set-up-required-services-in-visual-studio/)。
+    有关如何创建存储帐户以及如何在“创建存储连接字符串”对话框中输入存储帐户详细信息的信息，请参阅[准备从 Visual Studio 发布或部署 Azure 应用程序](./vs-azure-tools-cloud-service-publish-set-up-required-services-in-visual-studio.md)。
 
 1. 在“帐户名称”中选择你要使用的存储帐户。
 
     如果手动输入存储帐户凭据，请在“帐户密钥”中复制或键入你的主密钥。可从 [Azure 经典门户](http://manage.windowsazure.cn)复制此密钥。若要复制此密钥，请在 [Azure 经典门户](http://manage.windowsazure.cn)的“存储帐户”视图中遵循以下步骤：
-    
+
   1. 选择要用于云服务的存储帐户。
 
   1. 选择位于屏幕底部的“管理访问密钥”按钮。此时将显示“管理访问密钥”对话框。
@@ -298,7 +306,7 @@
 
 你可以设置每个角色的虚拟机大小。只能针对所有服务配置设置此大小。如果选择较小的计算机大小，将分配较少的 CPU 核心、内存和本地磁盘存储空间。分配的带宽也将较小。
 
-在 Azure 中每个虚拟机所需的资源将影响在 Azure 中运行云服务的成本。有关 Azure 计费的详细信息，请参阅[了解你的 Azure 帐单](/documentation/articles/billing-understand-your-bill/)。
+在 Azure 中每个虚拟机所需的资源将影响在 Azure 中运行云服务的成本。有关 Azure 计费的详细信息，请参阅[了解你的 Azure 帐单](./billing-understand-your-bill.md)。
 
 ### 更改虚拟机的大小
 
@@ -318,11 +326,13 @@
 
 你还可以添加可在内部或外部使用的终结点。外部终结点称为输入终结点。输入终结点可为用户提供云服务的另一个访问点。如果你有一个 WCF 服务，你可能要公开使用 Web 角色的内部终结点来访问此服务。
 
->[AZURE.IMPORTANT] 只能针对所有服务配置更新终结点。
+>[!IMPORTANT]
+> 只能针对所有服务配置更新终结点。
 
 如果添加 HTTPS 终结点，需要使用 SSL 证书。为此，你可以将证书与所有服务配置的角色相关联，并将其用于终结点。
 
->[AZURE.IMPORTANT] 这些证书不会与服务一起打包。必须通过 Azure 平台经典管理门户将证书分别上载到 Azure
+>[!IMPORTANT]
+> 这些证书不会与服务一起打包。必须通过 Azure 平台经典管理门户将证书分别上载到 Azure
 
 与服务配置关联的任何管理证书仅当云服务在 Azure 中运行时适用。当云服务在本地开发环境中运行时，将使用由 Azure 计算模拟器管理的标准证书。
 
@@ -332,7 +342,8 @@
 
 1. 在“服务配置”列表中，选择“所有配置”。
 
-    >[AZURE.NOTE] 若要添加或删除证书，必须选择“所有配置”。可以根据需要更新特定服务配置的名称和指纹。
+    >[!NOTE]
+    > 若要添加或删除证书，必须选择“所有配置”。可以根据需要更新特定服务配置的名称和指纹。
 
 1. 若要添加此角色的证书，请选择“添加证书”按钮。一个新条目将添加到列表中。
 
@@ -346,7 +357,8 @@
 
 1. 从列表中选择要使用的证书，然后选择“确定”按钮。
 
-    >[AZURE.NOTE] 当你添加来自证书存储区中的证书时，系统会自动将任何中间证书添加到配置设置。若要正确为服务配置 SSL，还必须将这些中间证书上载到 Azure。
+    >[!NOTE]
+    > 当你添加来自证书存储区中的证书时，系统会自动将任何中间证书添加到配置设置。若要正确为服务配置 SSL，还必须将这些中间证书上载到 Azure。
 
 1. 若要删除某个证书，请选择该证书，然后选择“删除证书”按钮。
 
@@ -372,11 +384,12 @@
 
 1. 如果终结点需要 https 协议，请在“SSL 证书名称”列表中选择要使用的证书。
 
-    >[AZURE.NOTE] 此列表将显示你在“证书”选项卡中为此角色添加的证书。
+    >[!NOTE]
+    > 此列表将显示你在“证书”选项卡中为此角色添加的证书。
 
 1. 选择工具栏中的“保存”按钮，将这些更改保存到服务配置文件。
 
 ## 后续步骤
-阅读[配置 Azure 项目](/documentation/articles/vs-azure-tools-configuring-an-azure-project/)以详细了解 Visual Studio 中的 Azure 项目。阅读[架构参考](https://msdn.microsoft.com/zh-cn/library/azure/dd179398)以详细了解云服务架构。
+阅读[配置 Azure 项目](./vs-azure-tools-configuring-an-azure-project.md)以详细了解 Visual Studio 中的 Azure 项目。阅读[架构参考](https://msdn.microsoft.com/zh-cn/library/azure/dd179398)以详细了解云服务架构。
 
 <!---HONumber=Mooncake_0815_2016-->

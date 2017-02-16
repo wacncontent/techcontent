@@ -1,27 +1,27 @@
-<properties
-    pageTitle="配置设备 | Azure"
-    description="对 Raspberry Pi 3 进行首次使用配置，并安装 Raspbian OS，这是一个免费操作系统，已针对 Raspberry Pi 硬件优化。"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="安装 raspbian, raspbian 下载, 如何安装 raspbian, raspbian 安装程序, raspberry pi 安装 raspbian, raspberry pi 安装 os, raspberry pi sd 卡安装, raspberry pi 连接, 连接到 raspberry pi, raspberry pi 连接" />
-<tags
-    ms.assetid="8ee9b23c-93f7-43ff-8ea1-e7761eb87a6f"
-    ms.service="iot-hub"
-    ms.devlang="c"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/28/2016"
-    wacn.date="01/06/2017"
-    ms.author="xshi" />  
+---
+title: 配置设备 | Azure
+description: 对 Raspberry Pi 3 进行首次使用配置，并安装 Raspbian OS，这是一个免费操作系统，已针对 Raspberry Pi 硬件优化。
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: 安装 raspbian, raspbian 下载, 如何安装 raspbian, raspbian 安装程序, raspberry pi 安装 raspbian, raspberry pi 安装 os, raspberry pi sd 卡安装, raspberry pi 连接, 连接到 raspberry pi, raspberry pi 连接
 
+ms.assetid: 8ee9b23c-93f7-43ff-8ea1-e7761eb87a6f
+ms.service: iot-hub
+ms.devlang: c
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/28/2016
+wacn.date: 01/06/2017
+ms.author: xshi
+---
 
 # 配置设备
 ## 执行的操作
-对 Pi 进行首次使用配置，并安装 Raspbian 操作系统。Raspbian 是一种免费的操作系统，已针对 Raspberry Pi 硬件进行优化。如果有问题，可在[故障排除页](/documentation/articles/iot-hub-raspberry-pi-kit-c-troubleshooting/)上查找解决方案。
+对 Pi 进行首次使用配置，并安装 Raspbian 操作系统。Raspbian 是一种免费的操作系统，已针对 Raspberry Pi 硬件进行优化。如果有问题，可在[故障排除页](./iot-hub-raspberry-pi-kit-c-troubleshooting.md)上查找解决方案。
 
 ## 你要学习的知识
 本文介绍：
@@ -44,7 +44,6 @@
 * 以太网电缆
 
 ![初学者工具包中的内容](./media/iot-hub-raspberry-pi-lessons/lesson1/starter_kit.jpg)  
-
 
 用户还需要：
 
@@ -69,14 +68,12 @@
 
 ![插入 SD 卡](./media/iot-hub-raspberry-pi-lessons/lesson1/insert_sdcard.jpg)  
 
-
 ## 开启 Pi
 使用 USB 微电缆和电源开启 Pi。
 
 ![开启](./media/iot-hub-raspberry-pi-lessons/lesson1/micro_usb_power_on.jpg)  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 必须使用工具包中至少为 2 安的电源，确保 Raspberry 有正常运行所需的足够电力。
 
 ## 将 Raspberry Pi 3 连接到网络
@@ -87,7 +84,6 @@
 
 ![使用以太网电缆进行连接](./media/iot-hub-raspberry-pi-lessons/lesson1/connect_ethernet.jpg)  
 
-
 ### 连接到无线网络
 按照 Raspberry Pi Foundation 提供的[说明](https://www.raspberrypi.org/learning/software-guide/wifi/)，将 Pi 连接到无线网络。这些说明要求用户先将监视器和键盘连接到 Pi。
 
@@ -95,7 +91,6 @@
 若要完成此任务，请使用[电路试验板](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard)、连接器电缆、LED 和电阻器。将它们连接到 Pi 的[通用输入/输出](https://www.raspberrypi.org/documentation/usage/gpio/) (GPIO) 端口。
 
 ![电路试验板、LED 和电阻器](./media/iot-hub-raspberry-pi-lessons/lesson1/breadboard_led_resistor.jpg)  
-
 
 1. 将 LED 的短脚连接到 **GPIO GND（管脚 6）**。
 2. 将 LED 的长脚连接到电阻器的一个脚。
@@ -105,7 +100,6 @@
 
 ![引出线](./media/iot-hub-raspberry-pi-lessons/lesson1/pinout_breadboard.png)  
 
-
 祝贺你！ 你已成功配置 Pi。
 
 ## 摘要
@@ -113,8 +107,7 @@
 
 ![硬件准备就绪](./media/iot-hub-raspberry-pi-lessons/lesson1/hardware_ready.jpg)  
 
-
 ## 后续步骤
-[获取工具](/documentation/articles/iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-win32/)
+[获取工具](./iot-hub-raspberry-pi-kit-c-lesson1-get-the-tools-win32.md)
 
 <!---HONumber=Mooncake_0103_2017-->

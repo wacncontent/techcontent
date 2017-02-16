@@ -14,20 +14,28 @@
 
 如果您想要跳过所有特定于 Python 的部署步骤，可以创建此空文件：
 
-    \.skipPythonDeployment
+```
+\.skipPythonDeployment
+```
 
 如果您想要跳过为 Django 应用程序收集静态文件的操作：
 
-    \.skipDjango 
+```
+\.skipDjango 
+```
 
 为了更大程度控制部署，可以通过创建以下文件来覆盖默认部署脚本：
 
-    \.deployment
-    \deploy.cmd
+```
+\.deployment
+\deploy.cmd
+```
 
 你可以使用 [Azure 命令行界面][]来创建这些文件。从项目文件夹使用以下命令：
 
-    azure site deploymentscript --python
+```
+azure site deploymentscript --python
+```
 
 这些文件不存在时，Azure 创建一个临时部署脚本然后运行此脚本。它等同于使用以上命令创建的脚本。
 

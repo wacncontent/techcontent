@@ -23,20 +23,21 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 2.  在管理门户的左侧导航窗格中，单击“Service Bus”。
 
 3.  在管理门户的下方窗格中，单击“创建”。
-	
-	![](./media/howto-service-bus-queues/sb-queues-03.png)
+
+    ![](./media/howto-service-bus-queues/sb-queues-03.png)
 
 4.  在“添加新命名空间”对话框中，输入命名空间名称。系统会立即检查该名称是否可用。
 
-	![](./media/howto-service-bus-queues/sb-queues-04.png)
+    ![](./media/howto-service-bus-queues/sb-queues-04.png)
 
 5.  在确保命名空间名称可用后，选择应承载您的命名空间的国家或地区（确保使用在其中部署计算资源的同一国家/地区）。
 
-	 >[AZURE.IMPORTANT]选取要选择用于部署应用程序的**相同区域**。这将为您提供最佳性能。
+     >[!IMPORTANT]
+     >选取要选择用于部署应用程序的**相同区域**。这将为您提供最佳性能。
 
 6. 	将对话框中的其他字段保留其默认值（“消息传送”和“标准层”），然后单击“确定”复选标记。系统现已创建命名空间并已将其启用。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
 
-	![](./media/howto-service-bus-queues/getting-started-multi-tier-27.png)
+    ![](./media/howto-service-bus-queues/getting-started-multi-tier-27.png)
 
 创建的命名空间将花费一段时间来激活，然后显示在管理门户中。请等到命名空间状态变为“活动”后再继续操作。
 
@@ -48,20 +49,20 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 1.  在左侧导航窗格中，单击“Service Bus”节点以显示可用命名空间的列表：
 
-	![](./media/howto-service-bus-queues/sb-queues-13.png)
+    ![](./media/howto-service-bus-queues/sb-queues-13.png)
 
 2.  从显示的列表中选择刚刚创建的命名空间：
 
-	![](./media/howto-service-bus-queues/sb-queues-09.png)
+    ![](./media/howto-service-bus-queues/sb-queues-09.png)
 
 3.  单击“连接信息”。
 
-	![](./media/howto-service-bus-queues/sb-queues-06.png)
+    ![](./media/howto-service-bus-queues/sb-queues-06.png)
 
 4.  在“访问连接信息”窗格中，找到包含 SAS 密钥和密钥名称的连接字符串。
 
-	![](./media/howto-service-bus-queues/multi-web-45.png)
-    
+    ![](./media/howto-service-bus-queues/multi-web-45.png)
+
 5.  记下该密钥或将其复制到剪贴板。
 
   [Azure 经典管理门户]: http://manage.windowsazure.cn

@@ -1,36 +1,36 @@
-<properties
-    pageTitle="在虚拟机规模集上部署应用 | Azure"
-    description="在虚拟机规模集上部署应用"
-    services="virtual-machine-scale-sets"
-    documentationcenter=""
-    author="gbowerman"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="f8892199-f2e2-4b82-988a-28ca8a7fd1eb"
-    ms.service="virtual-machine-scale-sets"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="08/26/2016"
-    wacn.date="01/20/2017"
-    ms.author="guybo" />  
+---
+title: 在虚拟机规模集上部署应用 | Azure
+description: 在虚拟机规模集上部署应用
+services: virtual-machine-scale-sets
+documentationcenter: ''
+author: gbowerman
+manager: timlt
+editor: ''
+tags: azure-resource-manager
 
+ms.assetid: f8892199-f2e2-4b82-988a-28ca8a7fd1eb
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/26/2016
+wacn.date: 01/20/2017
+ms.author: guybo
+---
 
 # 在虚拟机规模集上部署应用
 在 VM 规模集上运行的应用程序通常是以三种方法之一部署的：
 
 * 部署时在平台映像中安装新软件。在本文的语境中，平台映像是指从 Azure 应用商店获取的操作系统映像，例如 Ubuntu 16.04、Windows Server 2012 R2 等。
 
-可以使用 [VM 扩展](/documentation/articles/virtual-machines-windows-extensions-features/)在平台映像中安装新软件。VM 扩展是部署 VM 时运行的软件。可以使用自定义脚本扩展，在部署时运行所需的任何代码。[此处](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-lapstack-autoscale)提供了包含以下两个 VM 扩展的示例 Azure Resource Manager 模板：用于安装 Apache 和 PHP 的“Linux 自定义脚本扩展”，用于发出 Azure 自动缩放所用性能数据的“诊断扩展”。
+可以使用 [VM 扩展](../virtual-machines/virtual-machines-windows-extensions-features.md)在平台映像中安装新软件。VM 扩展是部署 VM 时运行的软件。可以使用自定义脚本扩展，在部署时运行所需的任何代码。[此处](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-lapstack-autoscale)提供了包含以下两个 VM 扩展的示例 Azure Resource Manager 模板：用于安装 Apache 和 PHP 的“Linux 自定义脚本扩展”，用于发出 Azure 自动缩放所用性能数据的“诊断扩展”。
 
 此方法的优点是在应用程序代码与 OS 之间提供某种程度的隔离，可以单独维护应用程序。当然，这也意味着会出现更多的运动组件，如果脚本需要下载和配置的项很多，VM 部署时间也可能更长。
 
 **如果在自定义脚本扩展命令中传递敏感信息（例如密码），请务必在自定义脚本扩展的 `protectedSettings` 属性（而不是 `settings` 属性）中指定 `commandToExecute`。**
 
-* 创建在单个 VHD 中包含 OS 和应用程序的自定义 VM 映像。此处的规模集由一组 VM 构成，这些 VM 是从创建的映像复制的，必须对其进行维护。这种方法不需要在部署 VM 时进行额外的配置。但是，在 `2016-03-30` 版（和更低版本）的 VM 规模集中，VM 的 OS 磁盘限制为一个存储帐户。因此，一个规模集中最多能包含 40 个 VM，而不像在平台映像中，每个规模集限制为 100 个 VM。有关详细信息，请参阅 [Scale Set Design Overview](/documentation/articles/virtual-machine-scale-sets-design-overview/)（规模集设计概述）。
+* 创建在单个 VHD 中包含 OS 和应用程序的自定义 VM 映像。此处的规模集由一组 VM 构成，这些 VM 是从创建的映像复制的，必须对其进行维护。这种方法不需要在部署 VM 时进行额外的配置。但是，在 `2016-03-30` 版（和更低版本）的 VM 规模集中，VM 的 OS 磁盘限制为一个存储帐户。因此，一个规模集中最多能包含 40 个 VM，而不像在平台映像中，每个规模集限制为 100 个 VM。有关详细信息，请参阅 [Scale Set Design Overview](./virtual-machine-scale-sets-design-overview.md)（规模集设计概述）。
 * 可以部署一个平台或自定义映像（简单地说，就是一个容器主机），然后将应用程序安装为一个或多个可以使用 Orchestrator 或配置管理工具进行管理的容器。这种方法的优势是可以从应用程序层抽象化云基础结构，并且可以独立维护应用程序。
 
 ## 扩展 VM 规模集会发生什么情况？
@@ -49,7 +49,7 @@ Packer 和 Terraform 也支持 Azure Resource Manager，因此也可以“代码
 然后，规模集 VM 将变成容器的稳定基础，只需偶尔进行安全和 OS 相关的更新。如前所述，Azure 容器服务就是采用此方法并围绕它构建服务的好例子。
 
 ## 如何跨更新域推出 OS 更新？
-假设要在更新 OS 映像的同时让 VM 规模集持续运行。为此，一种做法是每次更新一个 VM 的 VM 映像。可以使用 PowerShell 或 Azure CLI 实现此目的。有单独的命令可在单个 VM 上更新 VM 规模集模型（其配置的定义方式），以及发出“手动升级”调用。[升级虚拟机规模集](/documentation/articles/virtual-machine-scale-sets-upgrade-scale-set/) Azure 文档还提供了有关哪些选项可用于对 VM 规模集执行 OS 升级的详细信息。
+假设要在更新 OS 映像的同时让 VM 规模集持续运行。为此，一种做法是每次更新一个 VM 的 VM 映像。可以使用 PowerShell 或 Azure CLI 实现此目的。有单独的命令可在单个 VM 上更新 VM 规模集模型（其配置的定义方式），以及发出“手动升级”调用。[升级虚拟机规模集](./virtual-machine-scale-sets-upgrade-scale-set.md) Azure 文档还提供了有关哪些选项可用于对 VM 规模集执行 OS 升级的详细信息。
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--Update_Description: update meta properties & wording update-->

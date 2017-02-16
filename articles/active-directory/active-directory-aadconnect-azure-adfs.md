@@ -1,24 +1,23 @@
-<properties
-    pageTitle="Azure 中的 Active Directory 联合身份验证服务 | Azure"
-    description="在本文档中，你将学习如何在 Azure 中部署 AD FS 以实现高可用性。"
-    keywords="在 azure 中部署 AD FS, 部署 azure adfs, azure adfs, azure ad fs,部署 adfs, 部署 ad fs, azure 中的 adfs, 在 azure 中部署 adfs, 在 azure 中部署 AD FS, adfs azure, AD FS 简介, Azure, Azure 中的 AD FS, iaas, ADFS, 将 adfs 移到 azure"
-    services="active-directory"
-    documentationcenter=""
-    author="anandyadavmsft"
-    manager="femila"
-    editor="" />  
+---
+title: Azure 中的 Active Directory 联合身份验证服务 | Azure
+description: 在本文档中，你将学习如何在 Azure 中部署 AD FS 以实现高可用性。
+keywords: 在 azure 中部署 AD FS, 部署 azure adfs, azure adfs, azure ad fs,部署 adfs, 部署 ad fs, azure 中的 adfs, 在 azure 中部署 adfs, 在 azure 中部署 AD FS, adfs azure, AD FS 简介, Azure, Azure 中的 AD FS, iaas, ADFS, 将 adfs 移到 azure
+services: active-directory
+documentationcenter: ''
+author: anandyadavmsft
+manager: femila
+editor: ''
 
-<tags
-    ms.assetid="692a188c-badc-44aa-ba86-71c0e8074510"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="10/03/2016"
-    ms.author="anandy;billmath" 
-    wacn.date="01/19/2017"/>  
-
+ms.assetid: 692a188c-badc-44aa-ba86-71c0e8074510
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 10/03/2016
+ms.author: anandy;billmath
+wacn.date: 01/19/2017
+---
 
 # Azure 中的 AD FS 部署
 AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。与 Azure AD 或 O365 联合可让用户使用本地凭据进行身份验证，并访问云中的所有资源。这样，就必须建立高可用性的 AD FS 基础结构来确保能够访问本地和云中的资源。在 Azure 中部署 AD FS 有助于以最少量的工作实现所需的高可用性。在 Azure 中部署 AD FS 可带来几项优势，下面列出了其中几项：
@@ -98,7 +97,6 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 ![创建存储帐户](./media/active-directory-aadconnect-azure-adfs/storageaccount1.png)  
 
-
 ### 3\.创建可用性集
 针对每个角色（DC/AD FS 和 WAP）创建可用性集，使每个可用性集至少包含 2 个计算机。这有助于使每个角色实现更高的可用性。在创建可用性集时，必须针对以下项目做出决定：
 
@@ -143,7 +141,8 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 **6.1.创建 ILB**
 
 若要部署 ILB，请在 Azure 门户预览选择“负载均衡器”，然后单击“添加”(+)。
->[AZURE.NOTE] 如果菜单中未显示“负载均衡器”，请单击门户左下角的“浏览”并向下滚动，直到看到“负载均衡器”。然后，单击黄色星号将它添加到菜单中。现在，请选择新负载均衡器的图标打开面板，并开始配置负载均衡器。
+>[!NOTE]
+> 如果菜单中未显示“负载均衡器”，请单击门户左下角的“浏览”并向下滚动，直到看到“负载均衡器”。然后，单击黄色星号将它添加到菜单中。现在，请选择新负载均衡器的图标打开面板，并开始配置负载均衡器。
 
 ![浏览负载均衡器](./media/active-directory-aadconnect-azure-adfs/browseloadbalancer.png)
 
@@ -185,7 +184,6 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
    e.**不正常阈值限制**：2（默认值）- 这是连续探测失败阈值，达到此阈值后，ILB 会将后端池中的计算机声明为无响应，并停止向它发送流量。
 
 ![配置 ILB 探测](./media/active-directory-aadconnect-azure-adfs/ilbdeployment4.png)  
-
 
 **6.4.创建负载均衡规则**
 
@@ -241,7 +239,6 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 ![配置面向 Internet 的负载均衡器](./media/active-directory-aadconnect-azure-adfs/elbdeployment3.png)  
 
-
 ![配置面向 Internet 的负载均衡器 (DNS)](./media/active-directory-aadconnect-azure-adfs/elbdeployment4.png)
 
 **8.3.为面向 Internet 的（公共）负载均衡器配置后端池**
@@ -274,7 +271,6 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 ![INT 访问规则（入站）](./media/active-directory-aadconnect-azure-adfs/nsg_int.png)  
 
-
 **9.2.保护外围网络子网**
 
 | 规则 | 说明 | 流向 |
@@ -284,9 +280,8 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 ![EXT 访问规则（入站）](./media/active-directory-aadconnect-azure-adfs/nsg_dmz.png)  
 
-
-
->[AZURE.NOTE] 如果需要使用客户端用户证书身份验证（使用 X509 用户证书进行 clientTLS 身份验证），则 AD FS 要求为入站访问启用 TCP 端口 49443。
+>[!NOTE]
+> 如果需要使用客户端用户证书身份验证（使用 X509 用户证书进行 clientTLS 身份验证），则 AD FS 要求为入站访问启用 TCP 端口 49443。
 
 ### 10\.测试 AD FS 登录
 测试 AD FS 的最简单方法是使用 IdpInitiatedSignon.aspx 页。若要执行此操作，必须在 AD FS 属性中启用 IdpInitiatedSignOn。请遵循以下步骤来验证你的 AD FS 设置
@@ -297,11 +292,9 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 
 ![测试登录页](./media/active-directory-aadconnect-azure-adfs/test1.png)  
 
-
 成功登录后，该页将提供如下所示的成功消息：
 
 ![测试成功](./media/active-directory-aadconnect-azure-adfs/test2.png)  
-
 
 ## 用于在 Azure 中部署 AD FS 的模板
 该模板将部署包含 6 台计算机的设置，为域控制器、AD FS 和 WAP 各部署 2 台。
@@ -348,8 +341,8 @@ AD FS 提供简化、安全的标识联合与 Web 单一登录 (SSO) 功能。�
 - [AD FS and Web Application Proxy Links（AD FS 和 Web 应用程序代理链接）](http://aka.ms/ADFSLinks)
 
 ## 后续步骤
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
-- [Configuring and managing your AD FS using Azure AD Connect（使用 Azure AD Connect 配置和管理 AD FS）](/documentation/articles/active-directory-aadconnectfed-whatis/)
-- [使用 Azure 流量管理器在 Azure 中部署高可用性跨地域 AD FS](/documentation/articles/active-directory-adfs-in-azure-with-azure-traffic-manager/)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
+- [Configuring and managing your AD FS using Azure AD Connect（使用 Azure AD Connect 配置和管理 AD FS）](./active-directory-aadconnectfed-whatis.md)
+- [使用 Azure 流量管理器在 Azure 中部署高可用性跨地域 AD FS](./active-directory-adfs-in-azure-with-azure-traffic-manager.md)
 
 <!---HONumber=Mooncake_1128_2016-->

@@ -8,6 +8,6 @@
 * 将一个虚拟网络网关配置为主动-主动时，支持在一对虚拟网络之间设置冗余隧道。
 * 虚拟网络的所有 VPN 隧道共享 Azure VPN 网关上的可用带宽，以及 Azure 中的相同 VPN 网关运行时间 SLA。
 * VNet 到 VNet 流量通过 Microsoft 网络而不是 Internet 传输。
-* 同一区域中的 VNet 到 VNet 流量两个方向都是免费的。跨区域 VNet 到 VNet 出口流量根据源区域的出站 VNet 间数据传输费率收费。有关详细信息，请参阅[定价页](/pricing/details/vpn-gateway/)。
+* 同一区域中的 VNet 到 VNet 流量两个方向都是免费的。跨区域 VNet 到 VNet 出口流量根据源区域的出站 VNet 间数据传输费率收费。有关详细信息，请参阅[定价页](https://www.azure.cn/pricing/details/vpn-gateway/)。
 
 <!---HONumber=Mooncake_0206_2017-->

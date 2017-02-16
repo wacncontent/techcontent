@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用门户将 Linux VM 部署到现有 Azure 虚拟网络 | Azure"
-    description="使用门户将 Linux VM 部署到现有 Azure 虚拟网络。"
-    services="virtual-machines-linux"
-    documentationcenter="virtual-machines-linux"
-    author="vlivech"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid=""
-    ms.service="virtual-machines-linux"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure"
-    ms.date="11/21/2016"
-    wacn.date="01/13/2017"
-    ms.author="v-livech" />  
+---
+title: 使用门户将 Linux VM 部署到现有 Azure 虚拟网络 | Azure
+description: 使用门户将 Linux VM 部署到现有 Azure 虚拟网络。
+services: virtual-machines-linux
+documentationcenter: virtual-machines-linux
+author: vlivech
+manager: timlt
+editor: ''
 
+ms.assetid: ''
+ms.service: virtual-machines-linux
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 11/21/2016
+wacn.date: 01/13/2017
+ms.author: v-livech
+---
 
 # 使用门户将 Linux VM 部署到现有 VNet 和 NSG 中
 
@@ -26,11 +26,9 @@
 
 ## 创建资源组
 
-首先，我们将部署资源组，以便组织在本演练中创建的所有内容。有关 Azure 资源组的详细信息，请参阅 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)
+首先，我们将部署资源组，以便组织在本演练中创建的所有内容。有关 Azure 资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)
 
 ![createResourceGroup](./media/virtual-machines-linux-deploy-linux-vm-into-existing-vnet-using-portal/createResourceGroup.png)  
-
-
 
 ## 创建 VNet
 
@@ -38,20 +36,17 @@
 
 ![createVNet](./media/virtual-machines-linux-deploy-linux-vm-into-existing-vnet-using-portal/createVNet.png)  
 
-
 ## 将 VNic 添加到子网
 
 虚拟网卡 (VNic) 很重要，因为用户可以将它们连接到不同的 VM，这使 VNic 保持作为静态资源，而 VM 可以是临时 VM。创建 VNic 并将其与上一步中创建的子网相关联。
 
 ![createVNic](./media/virtual-machines-linux-deploy-linux-vm-into-existing-vnet-using-portal/createVNic.png)  
 
-
 ## 创建 NSG
 
-Azure NSG 相当于网络层防火墙。有关 Azure NSG 的详细信息，请参阅[什么是网络安全组](/documentation/articles/virtual-networks-nsg/)。
+Azure NSG 相当于网络层防火墙。有关 Azure NSG 的详细信息，请参阅[什么是网络安全组](../virtual-network/virtual-networks-nsg.md)。
 
 ![createNSG](./media/virtual-machines-linux-deploy-linux-vm-into-existing-vnet-using-portal/createNSG.png)  
-
 
 ## 添加入站 SSH 允许规则
 
@@ -59,14 +54,11 @@ Linux VM 需要从 Internet 访问，因此将创建允许通过网络将入站�
 
 ![createInboundSSH](./media/virtual-machines-linux-deploy-linux-vm-into-existing-vnet-using-portal/createInboundSSH.png)  
 
-
 ## 将 NSG 与子网相关联
 
 创建 VNet 和子网后，我们将 NSG 与子网相关联。NSG 可与整个子网或单个 VNic 相关联。由于防火墙在子网级别筛选流量，子网中的所有 VNic 和 VM 都受 NSG 保护；与此相对，NSG 只与单个 VNic 相关联且只保护一个 VM。
 
 ![associateNSG](./media/virtual-machines-linux-deploy-linux-vm-into-existing-vnet-using-portal/associateNSG.png)  
-
-
 
 ## 将 VM 部署到 VNet 和 NSG 中
 
@@ -74,13 +66,12 @@ Linux VM 需要从 Internet 访问，因此将创建允许通过网络将入站�
 
 ![createVM](./media/virtual-machines-linux-deploy-linux-vm-into-existing-vnet-using-portal/createVM.png)  
 
-
 通过使用门户选择现有资源，我们指示 Azure 将 VM 部署在现有网络内部。重述一遍，VNet 和子网一经部署，便可在 Azure 区域内保留为静态或永久资源。
 
 ## 后续步骤
 
-* [Use an Azure Resource Manager template to create a specific deployment（使用 Azure Resource Manager 模板创建特定部署）](/documentation/articles/virtual-machines-linux-cli-deploy-templates/)
-* [Create your own custom environment for a Linux VM using Azure CLI commands directly（直接使用 Azure CLI 命令为 Linux VM 创建用户自己的自定义环境）](/documentation/articles/virtual-machines-linux-create-cli-complete/)
-* [使用模板在 Azure 上创建 Linux VM](/documentation/articles/virtual-machines-linux-create-ssh-secured-vm-from-template/)
+* [Use an Azure Resource Manager template to create a specific deployment（使用 Azure Resource Manager 模板创建特定部署）](./virtual-machines-linux-cli-deploy-templates.md)
+* [Create your own custom environment for a Linux VM using Azure CLI commands directly（直接使用 Azure CLI 命令为 Linux VM 创建用户自己的自定义环境）](./virtual-machines-linux-create-cli-complete.md)
+* [使用模板在 Azure 上创建 Linux VM](./virtual-machines-linux-create-ssh-secured-vm-from-template.md)
 
 <!---HONumber=Mooncake_0109_2017-->

@@ -1,22 +1,22 @@
-<properties
-   pageTitle="可用性清单 | Azure"
-   description="为设计过程中的可用性考虑因素提供指导的核对清单。"
-   services=""
-   documentationCenter="na"
-   authors="dragon119"
-   manager="masimms"
-   editor=""
-   tags=""/>
+---
+title: 可用性清单 | Azure
+description: 为设计过程中的可用性考虑因素提供指导的核对清单。
+services: ''
+documentationCenter: na
+authors: dragon119
+manager: masimms
+editor: ''
+tags: ''
 
-<tags
-   ms.service="best-practice"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="07/13/2016"
-   wacn.date="12/30/2016"
-   ms.author="masashin"/>
+ms.service: best-practice
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 07/13/2016
+wacn.date: 12/30/2016
+ms.author: masashin
+---
 
 # 可用性核对清单
 
@@ -39,16 +39,17 @@
 - 尽量**在不回收实例的情况下应用配置更改**。在许多情况下，可以更改 Azure 应用程序或服务的配置设置，而无需重新启动角色。角色公开可以处理的事件以检测配置更改，并将其应用到应用程序中的组件。但是，对核心平台设置所做的某些更改需要重新启动角色。在构建组件和服务时，通过将其设计为可接受配置设置的更改而无需重新启动整个应用程序，来最大化可用性并将停机时间减到最小。
 - **在更新期间使用升级域实现零停机时间。** Azure 计算单元（如 Web 角色和辅助角色）已配置到升级域。升级域将角色实例分组在一起，因此，在发生滚动更新时，升级域中的每个角色都将轮流停止、更新并且重新启动。这可以最大程度地减小对应用程序可用性的影响。你可以指定在部署服务时，应该为服务创建几个升级域。
 
-	> [AZURE.NOTE] 角色还分布在容错域之间，每个容错域在服务器机架、电源和散热设置等方面彼此独立，以便将故障影响所有角色实例的可能性降到最低。这种分布是自动发生的，你无法控制它。
+    > [!NOTE]
+    > 角色还分布在容错域之间，每个容错域在服务器机架、电源和散热设置等方面彼此独立，以便将故障影响所有角色实例的可能性降到最低。这种分布是自动发生的，你无法控制它。
 
 - **配置 Azure 虚拟机的可用性集。** 将两个或更多个虚拟机放在同一个可用性集中可保证这些虚拟机不会部署到同一个容错域。若要最大化可用性，应该为系统使用的每个重要虚拟机创建多个实例，并将这些实例放在同一个可用性集中。如果你正在运行多个满足不同目的的虚拟机，请为每个虚拟机创建可用性集。将每个虚拟机的实例添加到每个可用性集。例如，如果你已创建不同的虚拟机来充当 Web 服务器和报告服务器，请为 Web 服务器创建一个可用性集，并为报告服务器创建另一个可用性集。将 Web 服务器虚拟机的实例添加到 Web 服务器可用性集，并将报告服务器虚拟机的实例添加到报告服务器可用性集。
 
 ## 数据管理
 
-- 通过本地和地理冗余**利用数据复制**。Azure 存储空间中的数据会自动复制，以防止基础结构故障时发生数据丢失，你可以配置这种复制的某些方面。例如，可以在多个地理区域中复制数据的只读副本（称为全局读取访问冗余存储，简称 RA-GRS）。请注意，使用 RA-GRS 会产生额外的费用。有关详细信息，请参阅 [Azure 存储空间定价](/pricing/details/storage/)。
+- 通过本地和地理冗余**利用数据复制**。Azure 存储空间中的数据会自动复制，以防止基础结构故障时发生数据丢失，你可以配置这种复制的某些方面。例如，可以在多个地理区域中复制数据的只读副本（称为全局读取访问冗余存储，简称 RA-GRS）。请注意，使用 RA-GRS 会产生额外的费用。有关详细信息，请参阅 [Azure 存储空间定价](https://www.azure.cn/pricing/details/storage/)。
 - 尽可能**使用乐观并发访问和最终一致性**。通过锁定（悲观并发）阻止访问资源的事务可能会导致性能不佳，并大幅降低可用性。这些问题在分布式系统中可能会变得特别严重。在许多情况下，谨慎的设计和方法（例如分区）可以将发生更新冲突的可能性降到最低。复制数据或者从独立更新的存储中读取数据时，数据只会保持最终一致性。但其优点通常超越了使用事务来确保即时一致性所导致的可用性影响。
 - **使用定期备份和时间点还原**，并确保符合恢复点目标 (RPO)。定期自动备份未保留在其他位置的数据，并确认可以在发生故障时可靠还原数据和应用程序本身。数据复制并不是备份功能，因为故障、错误或恶意操作造成的错误和不一致性将会复制到所有存储中。备份过程必须是安全的，这样才能保护传输中和存储中的数据。数据库或部分数据存储通常可以使用事务日志恢复到以前的某个时间点。Azure 针对存储在 Azure SQL 数据库中的数据提供备份工具。数据将导出到 Azure Blob 存储上的备份包，并且可下载到存储的安全本地位置。
-- **启用高可用性选项来维护 Azure Redis 缓存的辅助副本。** 使用 Azure Redis 缓存时，请选择“标准”选项来维护内容的辅助副本。有关详细信息，请参阅 [在 Azure Redis 缓存中创建缓存](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/#create-a-cache)。
+- **启用高可用性选项来维护 Azure Redis 缓存的辅助副本。** 使用 Azure Redis 缓存时，请选择“标准”选项来维护内容的辅助副本。有关详细信息，请参阅 [在 Azure Redis 缓存中创建缓存](./redis-cache/cache-dotnet-how-to-use-azure-redis-cache.md#create-a-cache)。
 
 ## 错误和故障
 
@@ -68,9 +69,9 @@
 - **规划灾难恢复。** 对于可能导致主系统全部或部分不可用的任何类型的故障，请确保有记录、接受和经过全面测试的计划。定期测试这些恢复过程，并确保所有操作人员熟悉相关过程。
 
 ## 其他最佳实践
-- [可伸缩性清单](/documentation/articles/best-practices-scalability-checklist/)
-- [监视和诊断指南](/documentation/articles/best-practices-monitoring/)
-- [数据分区指南](/documentation/articles/best-practices-data-partitioning/)
-- [缓存指南](/documentation/articles/best-practices-caching/)
+- [可伸缩性清单](./best-practices-scalability-checklist.md)
+- [监视和诊断指南](./best-practices-monitoring.md)
+- [数据分区指南](./best-practices-data-partitioning.md)
+- [缓存指南](./best-practices-caching.md)
 
 <!---HONumber=Mooncake_0503_2016-->

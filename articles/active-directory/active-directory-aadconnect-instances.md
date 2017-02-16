@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure AD Connect：同步服务实例 | Azure"
-	description="本页记录了 Azure AD 实例的特殊注意事项。"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="stevenpo"
-	editor=""/>
+---
+title: Azure AD Connect：同步服务实例 | Azure
+description: 本页记录了 Azure AD 实例的特殊注意事项。
+services: active-directory
+documentationCenter: ''
+authors: andkjell
+manager: stevenpo
+editor: ''
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/27/2016"
-	wacn.date="02/06/2017"
-	ms.author="billmath"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/27/2016
+wacn.date: 02/06/2017
+ms.author: billmath
+---
 
 # Azure AD Connect：有关实例的特殊注意事项
 Azure AD Connect 最常用于全球范围内的 Azure AD 和 Office 365 实例。但也有其他实例，这些实例对 URL 具有不同的要求并且具有其他的特殊注意事项。
@@ -63,6 +63,6 @@ Azure 政府版云中当前不存在的功能：
 - 密码写回未提供。
 
 ## 后续步骤
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

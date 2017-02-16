@@ -1,28 +1,25 @@
-<properties
-   pageTitle="SQL 数据仓库还原 | Azure"
-   description="在 Azure SQL 数据仓库中恢复数据库时的数据库还原选项概述。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="Lakshmi1812"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库还原 | Azure
+description: 在 Azure SQL 数据仓库中恢复数据库时的数据库还原选项概述。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: Lakshmi1812
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="lakshmir;barbkess"/>  
-
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: lakshmir;barbkess
+---
 
 # SQL 数据仓库还原
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [概述][]
 - [门户][]
 - [PowerShell][]
@@ -38,14 +35,13 @@ SQL 数据仓库提供本地和异地还原功能，这是其数据仓库灾难�
 
 有关详细信息，请参阅：
 
--  [SQL 数据仓库备份](/documentation/articles/sql-data-warehouse-backups/)
--  [业务连续性概述](/documentation/articles/sql-database-business-continuity/)
+-  [SQL 数据仓库备份](./sql-data-warehouse-backups.md)
+-  [业务连续性概述](../sql-database/sql-database-business-continuity.md)
 
 ## 数据仓库还原点
 使用 Azure 高级存储的好处是，SQL 数据仓库可以使用 Azure 存储 Blob 快照备份主数据仓库。每个快照都有一个还原点，代表启动快照的时间。若要还原数据仓库，请选择一个还原点，然后发出还原命令。
 
 SQL 数据仓库始终将备份还原到新的数据仓库。可以保留还原的数据仓库和当前的数据仓库，也可以删除其中一个。若要将当前的数据仓库替换为还原的数据仓库，将其重命名即可。
-
 
 ## 还原时间线
 
@@ -57,7 +53,7 @@ SQL 数据仓库始终将备份还原到新的数据仓库。可以保留还原�
 
 如果暂停还原的数据仓库，则存储费用按 Azure 高级存储费率计算。暂停的好处是不会对 DWU 计算资源收费。
 
-有关 SQL 数据仓库定价的详细信息，请参阅 [SQL 数据仓库定价](/pricing/details/sql-data-warehouse/)。
+有关 SQL 数据仓库定价的详细信息，请参阅 [SQL 数据仓库定价](https://www.azure.cn/pricing/details/sql-data-warehouse/)。
 
 ## 还原的用途
 
@@ -69,32 +65,28 @@ SQL 数据仓库始终将备份还原到新的数据仓库。可以保留还原�
 
 ### 方案
 
-- 有关业务连续性概述，请参阅[业务连续性概述](/documentation/articles/sql-database-business-continuity/)
-
+- 有关业务连续性概述，请参阅[业务连续性概述](../sql-database/sql-database-business-continuity.md)
 
 <!-- ### Tasks -->
 
-
 若要执行数据仓库还原，请使用以下还原方式：
 
-- Azure 门户：请参阅 [Restore a data warehouse using the Azure portal](/documentation/articles/sql-data-warehouse-restore-database-portal/)（使用 Azure 门户还原数据仓库）
-- PowerShell cmdlets：请参阅 [Restore a data warehouse using PowerShell cmdlets](/documentation/articles/sql-data-warehouse-restore-database-powershell/)（使用 PowerShell cmdlet 还原数据仓库）
-- REST API：请参阅 [Restore a data warehouse using the REST APIs](/documentation/articles/sql-data-warehouse-restore-database-rest-api/)（使用 REST API 还原数据仓库）
+- Azure 门户：请参阅 [Restore a data warehouse using the Azure portal](./sql-data-warehouse-restore-database-portal.md)（使用 Azure 门户还原数据仓库）
+- PowerShell cmdlets：请参阅 [Restore a data warehouse using PowerShell cmdlets](./sql-data-warehouse-restore-database-powershell.md)（使用 PowerShell cmdlet 还原数据仓库）
+- REST API：请参阅 [Restore a data warehouse using the REST APIs](./sql-data-warehouse-restore-database-rest-api.md)（使用 REST API 还原数据仓库）
 
 <!-- ### Tutorials -->
-
 
 <!--Image references-->
 
 <!--Article references-->
-[Azure SQL Database business continuity overview]: /documentation/articles/sql-database-business-continuity/
-[概述]: /documentation/articles/sql-data-warehouse-restore-database-overview/
-[门户]: /documentation/articles/sql-data-warehouse-restore-database-portal/
-[PowerShell]: /documentation/articles/sql-data-warehouse-restore-database-powershell/
-[REST]: /documentation/articles/sql-data-warehouse-restore-database-rest-api/
+[Azure SQL Database business continuity overview]: ../sql-database/sql-database-business-continuity.md
+[概述]: ./sql-data-warehouse-restore-database-overview.md
+[门户]: ./sql-data-warehouse-restore-database-portal.md
+[PowerShell]: ./sql-data-warehouse-restore-database-powershell.md
+[REST]: ./sql-data-warehouse-restore-database-rest-api.md
 
 <!--MSDN references-->
-
 
 <!--Other Web references-->
 

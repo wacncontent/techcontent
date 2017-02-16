@@ -1,24 +1,26 @@
-<properties
-	pageTitle="使 Azure 虚拟机可 Ping 的方法"
-	description="开启实例级公共 IP 使 Azure 虚拟机开放 Ping 功能"
-	service=""
-	resource="virtualmachines"
-	authors=""
-	displayOrder=""
-	selfHelpType=""
-    supportTopicIds=""
-    productPesIds=""
-    resourceTags="Azure, Ping, NSG, PIP, ILPIP"
-    cloudEnvironments="MoonCake" />
-<tags
-	ms.service="virtual-machines-aog"
-	ms.date=""
-	wacn.date="1/20/2016" />
+---
+title: 使 Azure 虚拟机可 Ping 的方法
+description: 开启实例级公共 IP 使 Azure 虚拟机开放 Ping 功能
+service: ''
+resource: virtualmachines
+authors: ''
+displayOrder: ''
+selfHelpType: ''
+supportTopicIds: ''
+productPesIds: ''
+resourceTags: Azure, Ping, NSG, PIP, ILPIP
+cloudEnvironments: MoonCake
+
+ms.service: virtual-machines-aog
+ms.date: ''
+wacn.date: 1/20/2016
+---
+
 # 如何开放 Azure 虚拟机 Ping 功能
 
 ## 前言
 
-文章[《使用 PsPing & PaPing 进行 TCP 端口连通性测试》](/documentation/articles/aog-virtual-network-tcp-psping-paping-connectivity/)中提到，ICMP 协议的数据包无法通过 Azure 的防火墙和负载平衡器，所以不能直接使用 Ping 来测试 Azure 中的虚拟机和服务的连通性。实际上，我们仍然能够通过一些特殊设置，使 ICMP 协议的数据包能够进出 Azure 中的虚拟机，来完成 Ping 测试。针对 Azure 云服务管理器 (ASM) 和 Azure 资源管理器 (ARM) 中的部署，设置方法有所不同，下文将分别进行介绍。
+文章[《使用 PsPing & PaPing 进行 TCP 端口连通性测试》](./aog-virtual-network-tcp-psping-paping-connectivity.md)中提到，ICMP 协议的数据包无法通过 Azure 的防火墙和负载平衡器，所以不能直接使用 Ping 来测试 Azure 中的虚拟机和服务的连通性。实际上，我们仍然能够通过一些特殊设置，使 ICMP 协议的数据包能够进出 Azure 中的虚拟机，来完成 Ping 测试。针对 Azure 云服务管理器 (ASM) 和 Azure 资源管理器 (ARM) 中的部署，设置方法有所不同，下文将分别进行介绍。
 
 ## ASM 虚拟机的设置方法
 
@@ -28,7 +30,7 @@ ASM 中的虚拟机开放 Ping 功能的方法就是为其添加 ILPIP（Instanc
 
 ASM 中的虚拟机设置 ILPIP 的途径有两种。
 
-您可以使用 Powershell 命令，为虚拟机添加 ILPIP。具体步骤请参考：[实例级公共 IP（经典）概述](/documentation/articles/virtual-networks-instance-level-public-ip/)
+您可以使用 Powershell 命令，为虚拟机添加 ILPIP。具体步骤请参考：[实例级公共 IP（经典）概述](./virtual-network/virtual-networks-instance-level-public-ip.md)
 
 您也可以在 Azure 门户预览中，通过页面中的选项来开启虚拟机的 ILPIP 功能。大致步骤是在 Azure 门户预览中选择 **虚拟机（经典）**，紧接着选择要设置 ILPIP 的虚拟机，然后再选择 **IP 地址** 选项，最后在 **实例 IP 地址** 功能中点击 **开**，并保存。具体位置见下图。
 
@@ -40,7 +42,7 @@ ASM 中的虚拟机设置 ILPIP 的途径有两种。
 
 这样设置虽然简便，但是虚拟机的所有端口通过 ILPIP 直接面向公网，所以有一定的安全隐患。您需要在虚拟机中配置相应的防火墙规则，来增强对虚拟机的安全防护。您也可以参考后文对 NSG 的相关介绍来配置安全规则。
 
-在默认情况下，每个订阅能够设置 5 个 ILPIP。如果需要更多，您可以与支持人员联系，请求增加 ILPIP 的配额。当然，我们更推荐部署 ARM 模式下的虚拟机。ARM 模式下每个订阅的每个区域的能获得的公共 IP 数量更多。详见：[Azure 订阅和服务限制、配额和约束](/documentation/articles/azure-subscription-service-limits/#networking-limits), **网络限制 - Azure Resource Manager**。
+在默认情况下，每个订阅能够设置 5 个 ILPIP。如果需要更多，您可以与支持人员联系，请求增加 ILPIP 的配额。当然，我们更推荐部署 ARM 模式下的虚拟机。ARM 模式下每个订阅的每个区域的能获得的公共 IP 数量更多。详见：[Azure 订阅和服务限制、配额和约束](./azure-subscription-service-limits.md#networking-limits), **网络限制 - Azure Resource Manager**。
 
 ## ARM 虚拟机的设置方法
 
@@ -100,10 +102,10 @@ Azure 后台任务完成后，我们就能看到这条新添加的规则了。
 
 此时，我们就可以用 Ping 来测试这台虚拟机了。
 
-
 ![test-ping-with-cmd](./media/aog-virtual-machines-howto-verify-connectivity-with-ping-command/test-ping-with-cmd.png)
 
->[AZURE.NOTE]这样配置 NSG 虽然开放了 ICMP 协议的通信，但是实际上这台虚拟机所有 TCP、UDP 的端口也都暴露在了公网上，有安全隐患。
+>[!NOTE]
+>这样配置 NSG 虽然开放了 ICMP 协议的通信，但是实际上这台虚拟机所有 TCP、UDP 的端口也都暴露在了公网上，有安全隐患。
 
 ## 更安全的 NSG 配置
 

@@ -1,26 +1,28 @@
-<properties
-    pageTitle="在本地群集上部署和升级应用入门 | Azure"
-    description="设置本地 Service Fabric 群集，将现有应用程序部署到其中，然后升级该应用程序。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="rwike77"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="60a1f6a5-5478-46c0-80a8-18fe62da17a8"
-    ms.service="service-fabric"
-    ms.devlang="dotNet"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="12/14/2016"
-    wacn.date="01/20/2017"
-    ms.author="ryanwi;mikhegn" />
+---
+title: 在本地群集上部署和升级应用入门 | Azure
+description: 设置本地 Service Fabric 群集，将现有应用程序部署到其中，然后升级该应用程序。
+services: service-fabric
+documentationcenter: .net
+author: rwike77
+manager: timlt
+editor: ''
+
+ms.assetid: 60a1f6a5-5478-46c0-80a8-18fe62da17a8
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: get-started-article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 12/14/2016
+wacn.date: 01/20/2017
+ms.author: ryanwi;mikhegn
+---
 
 # 在本地群集上部署和升级应用程序入门
 Azure Service Fabric SDK 包含完整的本地开发环境，可让你快速地在本地群集上开始部署和管理应用程序。本文介绍如何从 Windows PowerShell 创建本地群集、将现有应用程序部署到该群集，然后将该应用程序升级到新版本。
 
-> [AZURE.NOTE] 本文假设用户已[设置开发环境](/documentation/articles/service-fabric-get-started/)。
+> [!NOTE]
+> 本文假设用户已[设置开发环境](./service-fabric-get-started.md)。
 
 ## 创建本地群集
 Service Fabric 群集代表一组可将应用程序到的硬件资源。通常，群集由任意数量的计算机（从 5 台到数千台）组成。不过，Service Fabric SDK 包含可在一台计算机上运行的群集配置。
@@ -29,16 +31,16 @@ Service Fabric 本地群集不是模拟器或仿真器，了解这一点非常�
 
 SDK 提供两种方式来设置本地群集：Windows PowerShell 脚本和本地群集管理器系统托盘应用。在本教程中，我们使用 PowerShell 脚本。
 
-> [AZURE.NOTE] 如果已通过从 Visual Studio 部署应用程序创建了本地群集，可跳过本节。
-
+> [!NOTE]
+> 如果已通过从 Visual Studio 部署应用程序创建了本地群集，可跳过本节。
 
 1. 以管理员身份启动新的 PowerShell 窗口。
 
 2. 从 SDK 文件夹运行群集设置脚本：
 
-	
-		& "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1"
-	
+    ```powershell
+    & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1"
+    ```
 
     群集设置需要一段时间。完成设置后，应会看到类似如下的输出：
 
@@ -47,45 +49,45 @@ SDK 提供两种方式来设置本地群集：Windows PowerShell 脚本和本地
     现已准备好将应用程序部署到群集。
 
 ## 部署应用程序
-Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的开发人员工具。如果有兴趣了解如何在 Visual Studio 中创建应用程序，请参阅[在 Visual Studio 中创建你的第一个 Service Fabric 应用程序](/documentation/articles/service-fabric-create-your-first-application-in-visual-studio/)。
+Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的开发人员工具。如果有兴趣了解如何在 Visual Studio 中创建应用程序，请参阅[在 Visual Studio 中创建你的第一个 Service Fabric 应用程序](./service-fabric-create-your-first-application-in-visual-studio.md)。
 
 在本教程中，使用现有的示例应用程序（称为 WordCount），以便专注于平台的管理层面，包括部署、监视和升级。
 
 1. 以管理员身份启动新的 PowerShell 窗口。
 2. 导入 Service Fabric SDK PowerShell 模块。
 
-    
-    	Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
-   
+    ```powershell
+    Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
+    ```
 
 3. 创建一个目录，用于存储要下载和部署的应用程序，例如 C:\\ServiceFabric。
 
-    
-	    mkdir c:\ServiceFabric\
-	    cd c:\ServiceFabric\
-    
+    ```powershell
+    mkdir c:\ServiceFabric\
+    cd c:\ServiceFabric\
+    ```
 
 4. [下载 WordCount 应用程序](http://aka.ms/servicefabric-wordcountapp)到创建的位置。注意：Microsoft Edge 浏览器以 *.zip* 扩展名保存文件。请将文件扩展名更改为 *.sfpkg* 。
 
 5. 连接到本地群集：
 
-    
-    	Connect-ServiceFabricCluster localhost:19000
-    
+    ```powershell
+    Connect-ServiceFabricCluster localhost:19000
+    ```
 
 6. 使用 SDK 的部署命令来创建新的应用程序，并提供应用程序包的名称和路径。
 
-		Publish-NewServiceFabricApplication -ApplicationPackagePath c:\ServiceFabric\WordCountV1.sfpkg -ApplicationName "fabric:/WordCount"
-    
+    ```powershell
+    Publish-NewServiceFabricApplication -ApplicationPackagePath c:\ServiceFabric\WordCountV1.sfpkg -ApplicationName "fabric:/WordCount"
+    ```
 
     如果一切正常，应会看到如下所示的输出：
 
     ![将应用程序部署到本地群集][deploy-app-to-local-cluster]
 
 7. 若要查看应用程序的操作情况，请启动浏览器并导航到 [http://localhost:8081/wordcount/index.html](http://localhost:8081/wordcount/index.html)。应会显示以下内容：
-   
-    ![已部署的应用程序的 UI][deployed-app-ui]  
 
+    ![已部署的应用程序的 UI][deployed-app-ui]  
 
     WordCount 应用程序非常简单。它包含的客户端 JavaScript 代码可生成包含五个随机字符的“单词”，然后通过 ASP.NET Web API 将这些单词中继到应用程序。有状态服务跟踪统计的字数。这些单词根据其第一个字符进行分区。
 
@@ -96,9 +98,9 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. 查询群集上所有已部署的应用程序：
 
-    
-    	Get-ServiceFabricApplication
-    
+    ```powershell
+    Get-ServiceFabricApplication
+    ```
 
     假设只部署了 WordCount 应用，将看到类似如下的内容：
 
@@ -106,29 +108,29 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 2. 通过查询 WordCount 应用程序中包含的服务集转到下一个级别。
 
-    
-    	Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
-    
+    ```powershell
+    Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
+    ```
 
     ![在 PowerShell 中列出应用程序的服务][ps-getsfsvc]
 
     该应用程序由两个服务组成：Web 前端服务和用于管理单词的有状态服务。
 3. 最后，看看 WordCountService 的分区列表：
 
-    
-    	Get-ServiceFabricPartition 'fabric:/WordCount/WordCountService'
-    
+    ```powershell
+    Get-ServiceFabricPartition 'fabric:/WordCount/WordCountService'
+    ```
 
     ![在 PowerShell 中查看服务分区][ps-getsfpartitions]
 
-   
     所用命令集（例如所有 Service Fabric PowerShell 命令）可用于可（本地或远程）连接的任何群集。
-   
+
     若要以更直观的方式与群集交互，可以在浏览器中导航到 [http://localhost:19080/Explorer](http://localhost:19080/Explorer)，以使用基于 Web 的 Service Fabric Explorer 工具。
-   
+
     ![在 Service Fabric Explorer 中查看应用程序详细信息][sfx-service-overview]
 
-    > [AZURE.NOTE] 要了解有关 Service Fabric Explorer 的详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](/documentation/articles/service-fabric-visualizing-your-cluster/)。
+    > [!NOTE]
+    > 要了解有关 Service Fabric Explorer 的详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
 ## 升级应用程序
 在群集中推出应用程序时，Service Fabric 将监视其运行状况，从而提供无需停机的升级。对 WordCount 应用程序执行升级。
@@ -137,31 +139,31 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. [下载 WordCount v2 包](http://aka.ms/servicefabric-wordcountappv2)到 v1 包下载到的位置。
 2. 返回 PowerShell 窗口并，使用 SDK 的升级命令在群集中注册新版本。然后开始升级 fabric:/WordCount 应用程序。
-    
-    	Publish-UpgradedServiceFabricApplication -ApplicationPackagePath C:\ServiceFabric\WordCountV2.sfpkg -ApplicationName "fabric:/WordCount" -UpgradeParameters @{"FailureAction"="Rollback"; "UpgradeReplicaSetCheckTimeout"=1; "Monitored"=$true; "Force"=$true}
-    
+
+    ```powershell
+    Publish-UpgradedServiceFabricApplication -ApplicationPackagePath C:\ServiceFabric\WordCountV2.sfpkg -ApplicationName "fabric:/WordCount" -UpgradeParameters @{"FailureAction"="Rollback"; "UpgradeReplicaSetCheckTimeout"=1; "Monitored"=$true; "Force"=$true}
+    ```
 
     开始升级时，可在 PowerShell 中看到如下所示的输出。
-   
+
     ![PowerShell 中的升级进度][ps-appupgradeprogress]  
 
 3. 升级进行时，从 Service Fabric Explorer 监视其状态可能更加轻松。启动浏览器窗口并导航到 [http://localhost:19080/Explorer](http://localhost:19080/Explorer)。展开左侧树中的 **Applications**，然后依次选择 **WordCount** 和 **fabric:/WordCount**。随着群集升级域的升级，“基本信息”选项卡中将显示升级状态。
-   
+
     ![Service Fabric Explorer 中的升级进度][sfx-upgradeprogress]  
 
-   
     随着每个域不断升级，系统将执行运行状况检查，以确保应用程序行为正常。
 4. 如果重新运行对 fabric:/WordCount 应用程序中的服务集以前的查询，则会发现 WordCountService 的版本已更改，但 WordCountWebService 的版本维持不变：
-    
-    	Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
-    
+
+    ```powershell
+    Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
+    ```
 
     ![升级后查询应用程序服务][ps-getsfsvc-postupgrade]
 
-   
     此示例突出显示了 Service Fabric 管理应用程序升级的方法。它只会影响已更改的服务集（或这些服务中的代码/配置包），使升级过程变得更快速且更可靠。
 5. 最后，返回浏览器来观察新应用程序版本的行为。与预期一样，计数进行得更加缓慢，且第一个分区中最终有更多的卷。
-   
+
     ![在浏览器中查看应用程序的新版本][deployed-app-ui-v2]
 
 ## 清理
@@ -169,19 +171,21 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. 若要删除单个应用程序及其所有数据，请运行以下命令：
 
-    
-    	Unpublish-ServiceFabricApplication -ApplicationName "fabric:/WordCount"
-    
+    ```powershell
+    Unpublish-ServiceFabricApplication -ApplicationName "fabric:/WordCount"
+    ```
 
     也可以在 Service Fabric Explorer 的“操作”菜单或在左侧的应用程序列表视图的上下文菜单中删除应用程序。
-   
+
     ![在 Service Fabric Explorer 中删除应用程序][sfe-delete-application]  
 
 2. 从群集中删除应用程序后，注销 WordCount 应用程序类型的版本 1.0.0 和 2.0.0。删除操作将从群集的映像存储区删除该应用程序包，包括其代码和配置。
-    
-	    Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 2.0.0
-	    Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 1.0.0
-	    
+
+    ```powershell
+    Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 2.0.0
+    Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 1.0.0
+    ```
+
     或者，在 Service Fabric Explorer 中为应用程序选择“取消预配类型”。
 3. 若要关闭群集，但保留应用程序数据和跟踪，请在系统托盘应用中单击“停止本地群集”。
 4. 要完全删除群集，请在系统托盘应用中单击“删除本地群集”。选择此选项，下次在 Visual Studio 中按 F5 时将再次慢速部署。仅当在一段时间内不想使用本地群集时，或者当需要回收资源时，才删除本地群集。
@@ -191,7 +195,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 单节点群集或五节点群集模式均不是仿真程序或模拟器。本地开发群集运行和多计算机群集上相同的平台代码。
 
-> [AZURE.WARNING]
+> [!WARNING]
 更改群集模式时，从系统中删除当前群集并创建新群集。更改群集模式时，删除存储在群集中的数据。
 > 
 > 
@@ -200,25 +204,23 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 ![切换群集模式][switch-cluster-mode]  
 
-
 或者，使用 PowerShell 更改群集模式：
 
 1. 以管理员身份启动新的 PowerShell 窗口。
 2. 从 SDK 文件夹运行群集设置脚本：
 
-
-        & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1" -CreateOneNodeCluster
-
+    ```powershell
+    & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1" -CreateOneNodeCluster
+    ```
 
     群集设置需要一段时间。完成设置后，应会看到类似如下的输出：
-   
+
     ![群集设置输出][cluster-setup-success-1-node]  
 
-
 ## 后续步骤
-- 现在，您已部署并升级某些预先生成的应用程序，接下来可以[尝试在 Visual Studio 中生成您自己的应用程序](/documentation/articles/service-fabric-create-your-first-application-in-visual-studio/)。
-- 也可以对 [Azure 群集](/documentation/articles/service-fabric-cluster-creation-via-portal/)执行本文中所述的对本地群集执行的所有操作。
-- 本文中执行的升级是基本的升级。若要深入了解 Service Fabric 升级的功能和灵活性，请参阅[升级文档](/documentation/articles/service-fabric-application-upgrade/)。
+- 现在，您已部署并升级某些预先生成的应用程序，接下来可以[尝试在 Visual Studio 中生成您自己的应用程序](./service-fabric-create-your-first-application-in-visual-studio.md)。
+- 也可以对 [Azure 群集](./service-fabric-cluster-creation-via-portal.md)执行本文中所述的对本地群集执行的所有操作。
+- 本文中执行的升级是基本的升级。若要深入了解 Service Fabric 升级的功能和灵活性，请参阅[升级文档](./service-fabric-application-upgrade.md)。
 
 <!-- Images -->
 

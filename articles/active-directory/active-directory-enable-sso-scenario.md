@@ -1,21 +1,21 @@
-<properties
-    pageTitle="使用 Azure Active Directory 管理应用程序 | Azure"
-    description="本文介绍将 Azure Active Directory 与本地、云和 SaaS 应用程序集成的好处。"
-    services="active-directory"
-    documentationcenter=""
-    author="MarkusVi"
-    manager="femila" />
-<tags
-    ms.assetid="95b96f10-2d5c-4b78-8af8-d3657a24140f"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="01/11/2017"
-    wacn.date="02/07/2017"
-    ms.author="markvi" />  
+---
+title: 使用 Azure Active Directory 管理应用程序 | Azure
+description: 本文介绍将 Azure Active Directory 与本地、云和 SaaS 应用程序集成的好处。
+services: active-directory
+documentationcenter: ''
+author: MarkusVi
+manager: femila
 
+ms.assetid: 95b96f10-2d5c-4b78-8af8-d3657a24140f
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 01/11/2017
+wacn.date: 02/07/2017
+ms.author: markvi
+---
 
 # 使用 Azure Active Directory 管理应用程序
 除了实际工作流或内容以外，企业对所有应用程序还有另外两个基本要求：
@@ -102,13 +102,13 @@ SSO 过程分为两个步骤：
 Azure AD 提供预先集成的报告和监视功能，使你能够知道谁有权访问应用程序，以及他们使用应用程序的实际时间。
 
 ## 相关功能
-借助 Azure AD，可以使用精细的访问策略和预先集成的 MFA 来保护应用程序。若要了解有关 Azure MFA 的详细信息，请参阅 [Azure MFA](/home/features/multi-factor-authentication/)。
+借助 Azure AD，可以使用精细的访问策略和预先集成的 MFA 来保护应用程序。若要了解有关 Azure MFA 的详细信息，请参阅 [Azure MFA](https://www.azure.cn/home/features/multi-factor-authentication/)。
 
 ## 入门
-若要开始将应用程序与 Azure AD 集成，请参阅[将 Azure Active Directory 与应用程序集成入门指南](/documentation/articles/active-directory-integrating-applications-getting-started/)。
+若要开始将应用程序与 Azure AD 集成，请参阅[将 Azure Active Directory 与应用程序集成入门指南](./active-directory-integrating-applications-getting-started.md)。
 
 ## 另请参阅
-[有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
+[有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 
 <!---HONumber=Mooncake_0120_2017-->
 <!---Update_Description: wording update -->

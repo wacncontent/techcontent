@@ -1,26 +1,25 @@
-<properties
-	pageTitle="Azure AD Connect 同步：Synchronization Service Manager UI | Azure"
-	description="了解 Azure AD Connect 的 Synchronization Service Manager 中的“连接器”选项卡。"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="femila"
-	editor=""/>
+---
+title: Azure AD Connect 同步：Synchronization Service Manager UI | Azure
+description: 了解 Azure AD Connect 的 Synchronization Service Manager 中的“连接器”选项卡。
+services: active-directory
+documentationCenter: ''
+authors: andkjell
+manager: femila
+editor: ''
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/07/2016"
-	ms.author="andkjell"
-	wacn.date="02/06/2017"/>
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/07/2016
+ms.author: andkjell
+wacn.date: 02/06/2017
+---
 
 # Azure AD Connect 同步：Synchronization Service Manager
 
-[操作](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-operations/) | [连接器](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-connectors/) | [Metaverse 设计器](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-mvdesigner/) | [Metaverse 搜索](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-mvsearch/)
+[操作](./active-directory-aadconnectsync-service-manager-ui-operations.md) | [连接器](./active-directory-aadconnectsync-service-manager-ui-connectors.md) | [Metaverse 设计器](./active-directory-aadconnectsync-service-manager-ui-mvdesigner.md) | [Metaverse 搜索](./active-directory-aadconnectsync-service-manager-ui-mvsearch.md)
 --- | --- | --- | ---
 
 ![Sync Service Manager](./media/active-directory-aadconnectsync-service-manager-ui/connectors.png)
@@ -78,7 +77,7 @@
 “旧值”显示当前存储在系统中的数据，而“新值”显示从源系统收到但尚未应用的数据。在本例中，由于发生同步错误，因此无法应用更改。
 
 **错误** 
-对象出现问题时才会显示“错误”页面。有关如何[排查同步错误](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-operations/#troubleshoot-errors-in-operations-tab/)的详细信息，请参阅“操作”页上的详细信息。
+对象出现问题时才会显示“错误”页面。有关如何[排查同步错误](./active-directory-aadconnectsync-service-manager-ui-operations.md#troubleshoot-errors-in-operations-tab)的详细信息，请参阅“操作”页上的详细信息。
 
 **沿袭** 
 “沿袭”选项卡显示连接器空间对象与 Metaverse 对象关联的方式。可以看到连接器上次从连接的系统导入更改的时间，以及应用哪些规则以便在 Metaverse 中填充数据。
@@ -98,7 +97,7 @@
 ![Sync Service Manager](./media/active-directory-aadconnectsync-service-manager-ui/preview2.png)
 
 **日志**
-“日志”页用于查看密码同步状态和历史记录。有关详细信息，请参阅 [Troubleshoot password synchronization](/documentation/articles/active-directory-aadconnectsync-implement-password-synchronization/#troubleshoot-password-synchronization/)（排查密码同步问题）。
+“日志”页用于查看密码同步状态和历史记录。有关详细信息，请参阅 [Troubleshoot password synchronization](./active-directory-aadconnectsync-implement-password-synchronization.md#troubleshoot-password-synchronization)（排查密码同步问题）。
 
 ### Metaverse 对象属性 <a name="metaverse-object-properties"></a>
 **属性**
@@ -110,8 +109,8 @@
 此选项卡也可让你导航到[连接器空间对象](#connector-space-object-properties)。
 
 ## 后续步骤
-了解有关 [Azure AD Connect 同步](/documentation/articles/active-directory-aadconnectsync-whatis/)配置的详细信息。
+了解有关 [Azure AD Connect 同步](./active-directory-aadconnectsync-whatis.md)配置的详细信息。
 
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

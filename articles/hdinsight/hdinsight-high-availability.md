@@ -1,27 +1,27 @@
-<properties
-    pageTitle="HDInsight 中 Hadoop 群集的可用性 | Azure"
-    description="HDInsight 可部署包含附加头节点的高度可用且可靠的群集。"
-    services="hdinsight"
-    tags="azure-portal"
-    editor="cgronlun"
-    manager="jhubbard"
-    author="mumian"
-    documentationcenter="" />
-<tags
-    ms.assetid="ccab792d-60d6-4287-96c2-479e5d0cf358"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.date="10/21/2016"
-    wacn.date="01/25/2017"
-    ms.author="jgao" />  
+---
+title: HDInsight 中 Hadoop 群集的可用性 | Azure
+description: HDInsight 可部署包含附加头节点的高度可用且可靠的群集。
+services: hdinsight
+tags: azure-portal
+editor: cgronlun
+manager: jhubbard
+author: mumian
+documentationcenter: ''
 
+ms.assetid: ccab792d-60d6-4287-96c2-479e5d0cf358
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/21/2016
+wacn.date: 01/25/2017
+ms.author: jgao
+---
 
 # HDInsight 中基于 Windows 的 Hadoop 群集的可用性和可靠性
-> [AZURE.NOTE]
-本文档中使用的步骤特定于基于 Windows 的 HDInsight 群集。如果使用基于 Linux 的群集，请参阅 [HDInsight 中基于 Linux 的 Hadoop 群集的可用性和可靠性](/documentation/articles/hdinsight-high-availability-linux/)，以了解有关特定于 Linux 的信息。
+> [!NOTE]
+本文档中使用的步骤特定于基于 Windows 的 HDInsight 群集。如果使用基于 Linux 的群集，请参阅 [HDInsight 中基于 Linux 的 Hadoop 群集的可用性和可靠性](./hdinsight-high-availability-linux.md)，以了解有关特定于 Linux 的信息。
 >
 >
 
@@ -49,10 +49,9 @@ Hadoop 群集的标准实现通常具有单个头节点。HDInsight 通过添加
 ![HDInsight Hadoop 实现中高度可靠的头节点示意图。](./media/hdinsight-high-availability/hadoop.high.availability.architecture.diagram.png)
 
 ## 检查活动头节点服务的状态
-若要确定头节点处于活动状态，并检查该头节点上运行的服务状态，必需通过使用远程桌面协议 (RDP) 连接到 Hadoop 群集。有关 RDP 的说明，请参阅[使用 Azure 门户预览管理 HDInsight 中的 Hadoop 群集](/documentation/articles/hdinsight-administer-use-management-portal/#connect-to-clusters-using-rdp)。连接到该群集后，请双击位于桌面上的“Hadoop 服务可用状态”图标，以便通过相关状态来了解 Namenode、Jobtracker、Templeton、Oozieservice、Metastore 和 Hiveserver2 服务正在哪个头节点上运行，如果是 HDI 3.0，则可通过相关状态来了解 Namenode、Resource Manager、History Server、Templeton、Oozieservice、Metastore 和 Hiveserver2 服务正在哪个头节点上运行。
+若要确定头节点处于活动状态，并检查该头节点上运行的服务状态，必需通过使用远程桌面协议 (RDP) 连接到 Hadoop 群集。有关 RDP 的说明，请参阅[使用 Azure 门户预览管理 HDInsight 中的 Hadoop 群集](./hdinsight-administer-use-management-portal.md#connect-to-clusters-using-rdp)。连接到该群集后，请双击位于桌面上的“Hadoop 服务可用状态”图标，以便通过相关状态来了解 Namenode、Jobtracker、Templeton、Oozieservice、Metastore 和 Hiveserver2 服务正在哪个头节点上运行，如果是 HDI 3.0，则可通过相关状态来了解 Namenode、Resource Manager、History Server、Templeton、Oozieservice、Metastore 和 Hiveserver2 服务正在哪个头节点上运行。
 
 ![](./media/hdinsight-high-availability/Hadoop.Service.Availability.Status.png)  
-
 
 在屏幕截图中，活动头节点是 *headnode0*。
 
@@ -66,41 +65,45 @@ Hadoop 群集的标准实现通常具有单个头节点。HDInsight 通过添加
 
 超大 VM 可通过使用 Azure PowerShell cmdlet 或 HDInsight SDK 来配置。
 
-通过使用 Azure PowerShell 创建和预配群集的过程记录在[使用 PowerShell 管理 HDInsight](/documentation/articles/hdinsight-administer-use-powershell/) 中。配置超大头节点需要将 `-HeadNodeVMSize ExtraLarge` 参数添加到此代码中使用的 `New-AzureRmHDInsightcluster` cmdlet。
+通过使用 Azure PowerShell 创建和预配群集的过程记录在[使用 PowerShell 管理 HDInsight](./hdinsight-administer-use-powershell.md) 中。配置超大头节点需要将 `-HeadNodeVMSize ExtraLarge` 参数添加到此代码中使用的 `New-AzureRmHDInsightcluster` cmdlet。
 
-    # Create a new HDInsight cluster in Azure PowerShell
-    # Configured with an ExtraLarge head-node VM
-    New-AzureRmHDInsightCluster `
-                -ResourceGroupName $resourceGroupName `
-                -ClusterName $clusterName `
-                -Location $location `
-                -HeadNodeVMSize ExtraLarge `
-                -DefaultStorageAccountName "$storageAccountName.blob.core.chinacloudapi.cn" `
-                -DefaultStorageAccountKey $storageAccountKey `
-                -DefaultStorageContainerName $containerName  `
-                -ClusterSizeInNodes $clusterNodes
+```
+# Create a new HDInsight cluster in Azure PowerShell
+# Configured with an ExtraLarge head-node VM
+New-AzureRmHDInsightCluster `
+            -ResourceGroupName $resourceGroupName `
+            -ClusterName $clusterName `
+            -Location $location `
+            -HeadNodeVMSize ExtraLarge `
+            -DefaultStorageAccountName "$storageAccountName.blob.core.chinacloudapi.cn" `
+            -DefaultStorageAccountKey $storageAccountKey `
+            -DefaultStorageContainerName $containerName  `
+            -ClusterSizeInNodes $clusterNodes
+```
 
-对于 SDK，情况也是如此。通过使用 SDK 创建和预配群集的过程记录在[使用 HDInsight .NET SDK](/documentation/articles/hdinsight-provision-clusters/) 中。配置超大头节点需要将 `HeadNodeSize = NodeVMSize.ExtraLarge` 参数添加到此代码中使用的 `ClusterCreateParameters()` 方法。
+对于 SDK，情况也是如此。通过使用 SDK 创建和预配群集的过程记录在[使用 HDInsight .NET SDK](./hdinsight-provision-clusters.md) 中。配置超大头节点需要将 `HeadNodeSize = NodeVMSize.ExtraLarge` 参数添加到此代码中使用的 `ClusterCreateParameters()` 方法。
 
-    # Create a new HDInsight cluster with the HDInsight SDK
-    # Configured with an ExtraLarge head-node VM
-    ClusterCreateParameters clusterInfo = new ClusterCreateParameters()
-    {
-        Name = clustername,
-        Location = location,
-        HeadNodeSize = NodeVMSize.ExtraLarge,
-        DefaultStorageAccountName = storageaccountname,
-        DefaultStorageAccountKey = storageaccountkey,
-        DefaultStorageContainer = containername,
-        UserName = username,
-        Password = password,
-        ClusterSizeInNodes = clustersize
-    };
+```
+# Create a new HDInsight cluster with the HDInsight SDK
+# Configured with an ExtraLarge head-node VM
+ClusterCreateParameters clusterInfo = new ClusterCreateParameters()
+{
+    Name = clustername,
+    Location = location,
+    HeadNodeSize = NodeVMSize.ExtraLarge,
+    DefaultStorageAccountName = storageaccountname,
+    DefaultStorageAccountKey = storageaccountkey,
+    DefaultStorageContainer = containername,
+    UserName = username,
+    Password = password,
+    ClusterSizeInNodes = clustersize
+};
+```
 
 ## 后续步骤
 * [Apache ZooKeeper](http://zookeeper.apache.org/)
-* [使用 RDP 连接到 HDInsight 群集](/documentation/articles/hdinsight-administer-use-management-portal/#connect-to-clusters-using-rdp)
-* [使用 HDInsight .NET SDK](/documentation/articles/hdinsight-provision-clusters/)
+* [使用 RDP 连接到 HDInsight 群集](./hdinsight-administer-use-management-portal.md#connect-to-clusters-using-rdp)
+* [使用 HDInsight .NET SDK](./hdinsight-provision-clusters.md)
 
 <!---HONumber=Mooncake_0120_2017-->
 <!--Update_Description: update from ASM to ARM-->

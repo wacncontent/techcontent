@@ -1,22 +1,22 @@
-<properties 
-   pageTitle="发布 Azure 应用程序向导 | Azure"
-   description="发布 Azure 应用程序向导"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 发布 Azure 应用程序向导 | Azure
+description: 发布 Azure 应用程序向导
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="7d8f1ac9-e439-47e0-a183-0642c4ea1920"
-    ms.service="multiple"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 7d8f1ac9-e439-47e0-a183-0642c4ea1920
+ms.service: multiple
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 发布 Azure 应用程序向导
 
@@ -24,13 +24,14 @@
 
 在 Visual Studio 中开发 Web 应用程序后，可以使用**发布 Azure 应用程序**向导更轻松地将该应用程序发布到 Azure 云服务。第一部分说明使用该向导前必须完成的步骤，其余部分将解释该向导的功能。
 
->[AZURE.NOTE] 本主题是关于如何部署到云服务，而不是部署到网站。有关如何部署到网站的信息，请参阅 [How to Deploy an Azure Web Site](https://social.msdn.microsoft.com/Search/windowsazure?query=How%20to%20Deploy%20an%20Azure%20Web%20Site&Refinement=138&ac=4#refinementChanges=117&pageNumber=1&showMore=false)（如何部署 Azure 网站）。
+>[!NOTE]
+> 本主题是关于如何部署到云服务，而不是部署到网站。有关如何部署到网站的信息，请参阅 [How to Deploy an Azure Web Site](https://social.msdn.microsoft.com/Search/windowsazure?query=How%20to%20Deploy%20an%20Azure%20Web%20Site&Refinement=138&ac=4#refinementChanges=117&pageNumber=1&showMore=false)（如何部署 Azure 网站）。
 
 ## 先决条件
 
 在将 Web 应用程序发布到 Azure 之前，需要有一个 Microsoft 帐户和一个 Azure 订阅，并且必须将 Web 应用程序与 Azure 云服务关联。如果你已完成这些任务，则可以跳到下一部分。
 
-1. 获取 Microsoft 帐户和 Azure 订阅。可以在[此处](/pricing/1rmb-trial/)免费试用 Azure 订阅一个月
+1. 获取 Microsoft 帐户和 Azure 订阅。可以在[此处](https://www.azure.cn/pricing/1rmb-trial/)免费试用 Azure 订阅一个月
 
 1. 在 Azure 上创建云服务和存储帐户。可以通过 Visual Studio 中的服务器资源管理器或使用 [Azure 经典管理门户](http://manage.windowsazure.cn)执行此操作。
 
@@ -38,7 +39,8 @@
 
 1. 将云服务项目添加到解决方案后，请再次打开同一个快捷菜单并选择“发布”。
 
->[AZURE.NOTE] 确保使用管理员凭据启动 Visual Studio（以管理员身份运行）。
+>[!NOTE]
+> 确保使用管理员凭据启动 Visual Studio（以管理员身份运行）。
 
 1. 准备好发布应用程序时，请打开 Azure 云服务项目的快捷菜单，然后选择“发布”。以下步骤演示了发布 Azure 应用程序向导。
 
@@ -57,8 +59,9 @@
     如果你选择“<管理...>”，将显示“管理订阅”对话框，你可以选择要使用的订阅和用户帐户。“帐户”选项卡显示所有帐户，“订阅”选项卡显示与帐户关联的所有订阅。你也可以选择要从中使用 Azure 资源的区域，并从 Azure 经典管理门户创建或导入订阅的证书。如果你从订阅文件导入了任何订阅，关联的证书将显示在“证书”选项卡下。完成后，请选择“关闭”按钮。
 
     ![Manage subscriptions](./media/vs-azure-tools-publish-azure-application-wizard/IC799160.png)
-    
-    >[AZURE.NOTE] A subscription file can contain more than one subscription.
+
+    >[!NOTE]
+    > A subscription file can contain more than one subscription.
 
 1. 选择“下一步”按钮继续。 
 
@@ -68,7 +71,8 @@
 
 1. 修改要用于此部署的任何设置，然后选择“发布”按钮将它发布（下一部分将提供各项设置的详细信息）。若要在发布之前检查设置，请选择“下一步”按钮。
 
-    >[AZURE.NOTE] 如果在此步骤中选择“发布”，你可以在 Visual Studio 中监视此部署的状态。
+    >[!NOTE]
+    > 如果在此步骤中选择“发布”，你可以在 Visual Studio 中监视此部署的状态。
 
 可以使用“发布 Azure 应用程序”向导修改部署的通用和高级设置。例如，你可以选择某项设置，在发布应用程序之前将它部署到测试环境。下图显示了 Azure 部署的“通用设置”选项卡。
 
@@ -100,7 +104,8 @@
 
 1. 在“存储帐户”列表中，选择要用于此部署的存储帐户。比较云服务和存储帐户的数据中心位置。理想情况下，这些位置应该相同。
 
-    >[AZURE.NOTE] Azure 存储帐户将存储应用程序部署的包。部署应用程序之后，将从存储帐户中删除该包。
+    >[!NOTE]
+    > Azure 存储帐户将存储应用程序部署的包。部署应用程序之后，将从存储帐户中删除该包。
 
 1. 如果你只想要部署更新的组件，请选中“部署更新”复选框。这种部署类型比完整部署更快速。选择“设置”链接打开“部署更新设置”对话框，如下图所示。
 
@@ -110,13 +115,12 @@
 
     如果无法更新部署，则应选中此复选框；如果想要在更新部署失败时自动更新完整部署，请执行完整部署。完整部署将重置云服务的虚拟 IP (VIP) 地址。有关详细信息，请参阅 [如何：为云服务保留固定的虚拟 IP 地址](https://msdn.microsoft.com/zh-cn/library/azure/jj614593.aspx)。
 
-
 1. 若要调试你的服务，请选中“启用 IntelliTrace”复选框；如果要部署“调试”配置并想要在 Azure 中调试云服务，请选中“为所有角色启用远程调试器”复选框以部署远程调试服务。
 
 2. 若要分析应用程序，请选中“启用分析”复选框，然后选择“设置”链接显示分析选项。
 
-
-    >[AZURE.NOTE] 必须使用 Visual Studio Ultimate 来启用 IntelliTrace 或层交互分析 (TIP)，但不能同时启用两者。
+    >[!NOTE]
+    > 必须使用 Visual Studio Ultimate 来启用 IntelliTrace 或层交互分析 (TIP)，但不能同时启用两者。
 
     有关详细信息，请参阅 [使用 IntelliTrace 和 Visual Studio 调试已发布的云服务](https://msdn.microsoft.com/zh-cn/library/azure/ff683671.aspx)和 [测试云服务的性能](https://msdn.microsoft.com/zh-cn/library/azure/hh369930.aspx)。
 
@@ -128,7 +132,8 @@
 
     ![发布向导的摘要屏幕](./media/vs-azure-tools-publish-azure-application-wizard/IC749015.png)
 
-    >[AZURE.NOTE] 发布配置文件将出现在 Visual Studio 的解决方案资源管理器中，配置文件设置将写入扩展名为.azurePubxml 的文件。设置将保存为 XML 标记的属性。
+    >[!NOTE]
+    > 发布配置文件将出现在 Visual Studio 的解决方案资源管理器中，配置文件设置将写入扩展名为.azurePubxml 的文件。设置将保存为 XML 标记的属性。
 
 1. 选择“发布”以发布应用程序。可以在 Visual Studio 的“输出”窗口中监视过程状态。
 
@@ -141,6 +146,5 @@
 [使用 IntelliTrace 和 Visual Studio 调试已发布的云服务](https://msdn.microsoft.com/zh-cn/library/azure/ff683671.aspx)
 
 [测试云服务的性能](https://msdn.microsoft.com/zh-cn/library/azure/hh369930.aspx)
-
 
 <!---HONumber=Mooncake_0509_2016-->

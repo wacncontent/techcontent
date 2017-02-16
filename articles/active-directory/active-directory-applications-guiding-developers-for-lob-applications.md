@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure AD 和应用程序：开发人员指导 | Azure"
-	description="本文专门为 IT 专业人员编写，提供有关将 Azure 应用程序与 Active Directory 集成的指导。"
-	services="active-directory"
-	documentationCenter=""
-	authors="kgremban"
-	manager="femila"
-	editor=""/>
+---
+title: Azure AD 和应用程序：开发人员指导 | Azure
+description: 本文专门为 IT 专业人员编写，提供有关将 Azure 应用程序与 Active Directory 集成的指导。
+services: active-directory
+documentationCenter: ''
+authors: kgremban
+manager: femila
+editor: ''
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/03/2016"
-	wacn.date="01/19/2017"
-	ms.author="kgremban"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/03/2016
+wacn.date: 01/19/2017
+ms.author: kgremban
+---
 
 # Azure AD 和应用程序：开发业务线应用
 
@@ -39,11 +39,11 @@
   - 使用 Azure Active Directory 作为 oAuth 授权服务器（保护应用程序公开的 API）
 
 - 声明让应用程序按预期运行所需的权限，包括：
-	  - 应用权限（仅限全局管理员）。例如：另一个 Azure AD 应用程序中的角色成员身份，或相对于 Azure 资源、资源组或订阅的角色成员身份
-	  - 委派的权限（任何用户）。例如：Azure AD、登录和读取配置文件
+      - 应用权限（仅限全局管理员）。例如：另一个 Azure AD 应用程序中的角色成员身份，或相对于 Azure 资源、资源组或订阅的角色成员身份
+      - 委派的权限（任何用户）。例如：Azure AD、登录和读取配置文件
 
-
-> [AZURE.NOTE]默认情况下，任何成员都可以注册应用程序。若要了解如何限定只有特定成员拥有注册应用程序的权限，请参阅 [How applications are added to Azure AD（如何将应用程序添加到 Azure AD）](/documentation/articles/active-directory-how-applications-are-added/#who-has-permission-to-add-applications-to-my-azure-ad-instance)文档。
+> [!NOTE]
+>默认情况下，任何成员都可以注册应用程序。若要了解如何限定只有特定成员拥有注册应用程序的权限，请参阅 [How applications are added to Azure AD（如何将应用程序添加到 Azure AD）](./active-directory-how-applications-are-added.md#who-has-permission-to-add-applications-to-my-azure-ad-instance)文档。
 
 下面是全局管理员需要执行哪些操作，才能帮助开发人员将其应用程序投放到生产环境：
 
@@ -59,12 +59,11 @@
 
 默认情况下，用户无需分配即可访问应用程序。不过，如果应用程序公开角色或者你希望应用程序出现在用户的访问面板上，则你应该要求用户分配。
 
-[要求用户分配](/documentation/articles/active-directory-applications-guiding-developers-requiring-user-assignment/)
+[要求用户分配](./active-directory-applications-guiding-developers-requiring-user-assignment.md)
 
 如果你是 Azure AD Premium 或 Enterprise Mobility Suite (EMS) 的订阅者，我们强烈建议使用组。将组分配到应用程序可让你将持续进行的访问管理委派给组所有者。你可以创建组，或使用组管理功能请求组织中负责人创建组。
 
-[将用户分配到应用程序](/documentation/articles/active-directory-applications-guiding-developers-assigning-users/)  
-
+[将用户分配到应用程序](./active-directory-applications-guiding-developers-assigning-users.md)  
 
 ## 抑制用户同意
 
@@ -72,10 +71,10 @@
 
 对于你信任的应用程序，你可以代表组织来同意应用程序，以简化用户体验。
 
-有关 Azure 中的用户同意和同意体验的详细信息，请参阅 [Integrating Applications with Azure Active Directory（将应用程序与 Azure Active Directory 集成）](/documentation/articles/active-directory-integrating-applications/)。
+有关 Azure 中的用户同意和同意体验的详细信息，请参阅 [Integrating Applications with Azure Active Directory（将应用程序与 Azure Active Directory 集成）](./active-directory-integrating-applications.md)。
 
 ##相关文章
 
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 
 <!---HONumber=Mooncake_0829_2016-->

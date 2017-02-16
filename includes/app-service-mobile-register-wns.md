@@ -1,4 +1,3 @@
-
 1. 在 Visual Studio 解决方案资源管理器中，右键单击 Windows 应用商店应用项目，单击“应用商店”>“将应用与应用商店关联”。
 
     ![关联应用与 Windows 应用商店](./media/app-service-mobile-register-wns/notification-hub-associate-win8-app.png)  
@@ -11,7 +10,7 @@
 
     ![开发人员中心中的应用设置](./media/app-service-mobile-register-wns/mobile-services-win8-app-push-auth.png)  
 
-
-    > [AZURE.IMPORTANT] 应用程序密钥和程序包 SID 是重要的安全凭据。请勿将这些值告知任何人或随你的应用程序分发它们。
+    > [!IMPORTANT]
+    > 应用程序密钥和程序包 SID 是重要的安全凭据。请勿将这些值告知任何人或随你的应用程序分发它们。
 
 <!---HONumber=Mooncake_0116_2017-->

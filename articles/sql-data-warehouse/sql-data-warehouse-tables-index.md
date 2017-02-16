@@ -1,26 +1,27 @@
 <!-- Temp remove overview, partition, statistics and temporary -->
-<properties
-   pageTitle="为 SQL 数据仓库中的表编制索引 | Azure"
-   description="Azure SQL 数据仓库中的表索引入门。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="07/12/2016"
-   wacn.date="12/12/2016"
-   ms.author="jrj;barbkess;sonyama"/>
+---
+title: 为 SQL 数据仓库中的表编制索引 | Azure
+description: Azure SQL 数据仓库中的表索引入门。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: ''
+
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 07/12/2016
+wacn.date: 12/12/2016
+ms.author: jrj;barbkess;sonyama
+---
 
 # 为 SQL 数据仓库中的表编制索引
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [数据类型][]
 - [分布][]
 - [索引][]
@@ -39,15 +40,15 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 若要创建聚集列存储表，只需在 WITH 子句中指定 CLUSTERED COLUMNSTORE INDEX，或省略 WITH 子句：
 
-
-    CREATE TABLE myTable   
-      (  
-        id int NOT NULL,  
-        lastName varchar(20),  
-        zipCode varchar(6)  
-      )  
-    WITH ( CLUSTERED COLUMNSTORE INDEX );
-
+```SQL
+CREATE TABLE myTable   
+  (  
+    id int NOT NULL,  
+    lastName varchar(20),  
+    zipCode varchar(6)  
+  )  
+WITH ( CLUSTERED COLUMNSTORE INDEX );
+```
 
 在某些情况下，聚集列存储可能不是很好的选择：
 
@@ -64,15 +65,15 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 若要创建堆表，只需在 WITH 子句中指定 HEAP：
 
-
-    CREATE TABLE myTable   
-      (  
-        id int NOT NULL,  
-        lastName varchar(20),  
-        zipCode varchar(6)  
-      )  
-    WITH ( HEAP );
-
+```SQL
+CREATE TABLE myTable   
+  (  
+    id int NOT NULL,  
+    lastName varchar(20),  
+    zipCode varchar(6)  
+  )  
+WITH ( HEAP );
+```
 
 ## 聚集与非聚集索引
 
@@ -80,21 +81,21 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 若要创建聚集索引表，只需在 WITH 子句中指定 CLUSTERED INDEX：
 
-
-    CREATE TABLE myTable   
-      (  
-        id int NOT NULL,  
-        lastName varchar(20),  
-        zipCode varchar(6)  
-      )  
-    WITH ( CLUSTERED INDEX (id) );
-
+```SQL
+CREATE TABLE myTable   
+  (  
+    id int NOT NULL,  
+    lastName varchar(20),  
+    zipCode varchar(6)  
+  )  
+WITH ( CLUSTERED INDEX (id) );
+```
 
 若要在表中添加非聚集索引，只需在 WITH 子句中指定 CLUSTERED INDEX：
 
-
-    CREATE INDEX zipCodeIndex ON t1 (zipCode);
-
+```SQL
+CREATE INDEX zipCodeIndex ON t1 (zipCode);
+```
 
 ## 优化聚集列存储索引
 
@@ -102,64 +103,63 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 可以在系统上创建并使用以下视图来计算每个行组的平均行数，以及识别所有欠佳的聚集列存储索引。此视图中的最后一列将生成为 SQL 语句，以用于重建索引。
 
-
-    CREATE VIEW dbo.vColumnstoreDensity
-    AS
-    SELECT
-            GETDATE()                                                               AS [execution_date]
-    ,       DB_Name()                                                               AS [database_name]
-    ,       s.name                                                                  AS [schema_name]
-    ,       t.name                                                                  AS [table_name]
-    ,	COUNT(DISTINCT rg.[partition_number])					AS [table_partition_count]
-    ,       SUM(rg.[total_rows])                                                    AS [row_count_total]
-    ,       SUM(rg.[total_rows])/COUNT(DISTINCT rg.[distribution_id])               AS [row_count_per_distribution_MAX]
-    ,	CEILING	((SUM(rg.[total_rows])*1.0/COUNT(DISTINCT rg.[distribution_id]))/1048576) AS [rowgroup_per_distribution_MAX]
-    ,       SUM(CASE WHEN rg.[State] = 0 THEN 1                   ELSE 0    END)    AS [INVISIBLE_rowgroup_count]
-    ,       SUM(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE 0    END)    AS [INVISIBLE_rowgroup_rows]
-    ,       MIN(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE NULL END)    AS [INVISIBLE_rowgroup_rows_MIN]
-    ,       MAX(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE NULL END)    AS [INVISIBLE_rowgroup_rows_MAX]
-    ,       AVG(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE NULL END)    AS [INVISIBLE_rowgroup_rows_AVG]
-    ,       SUM(CASE WHEN rg.[State] = 1 THEN 1                   ELSE 0    END)    AS [OPEN_rowgroup_count]
-    ,       SUM(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE 0    END)    AS [OPEN_rowgroup_rows]
-    ,       MIN(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE NULL END)    AS [OPEN_rowgroup_rows_MIN]
-    ,       MAX(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE NULL END)    AS [OPEN_rowgroup_rows_MAX]
-    ,       AVG(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE NULL END)    AS [OPEN_rowgroup_rows_AVG]
-    ,       SUM(CASE WHEN rg.[State] = 2 THEN 1                   ELSE 0    END)    AS [CLOSED_rowgroup_count]
-    ,       SUM(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE 0    END)    AS [CLOSED_rowgroup_rows]
-    ,       MIN(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE NULL END)    AS [CLOSED_rowgroup_rows_MIN]
-    ,       MAX(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE NULL END)    AS [CLOSED_rowgroup_rows_MAX]
-    ,       AVG(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE NULL END)    AS [CLOSED_rowgroup_rows_AVG]
-    ,       SUM(CASE WHEN rg.[State] = 3 THEN 1                   ELSE 0    END)    AS [COMPRESSED_rowgroup_count]
-    ,       SUM(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE 0    END)    AS [COMPRESSED_rowgroup_rows]
-    ,       SUM(CASE WHEN rg.[State] = 3 THEN rg.[deleted_rows]   ELSE 0    END)    AS [COMPRESSED_rowgroup_rows_DELETED]
-    ,       MIN(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE NULL END)    AS [COMPRESSED_rowgroup_rows_MIN]
-    ,       MAX(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE NULL END)    AS [COMPRESSED_rowgroup_rows_MAX]
-    ,       AVG(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE NULL END)    AS [COMPRESSED_rowgroup_rows_AVG]
-    ,       'ALTER INDEX ALL ON ' + s.name + '.' + t.NAME + ' REBUILD;'             AS [Rebuild_Index_SQL]
-    FROM    sys.[pdw_nodes_column_store_row_groups] rg
-    JOIN    sys.[pdw_nodes_tables] nt                   ON  rg.[object_id]          = nt.[object_id]
-                                                        AND rg.[pdw_node_id]        = nt.[pdw_node_id]
-                                                        AND rg.[distribution_id]    = nt.[distribution_id]
-    JOIN    sys.[pdw_table_mappings] mp                 ON  nt.[name]               = mp.[physical_name]
-    JOIN    sys.[tables] t                              ON  mp.[object_id]          = t.[object_id]
-    JOIN    sys.[schemas] s                             ON t.[schema_id]            = s.[schema_id]
-    GROUP BY
-            s.[name]
-    ,       t.[name]
-    ;
-
+```sql
+CREATE VIEW dbo.vColumnstoreDensity
+AS
+SELECT
+        GETDATE()                                                               AS [execution_date]
+,       DB_Name()                                                               AS [database_name]
+,       s.name                                                                  AS [schema_name]
+,       t.name                                                                  AS [table_name]
+,	COUNT(DISTINCT rg.[partition_number])					AS [table_partition_count]
+,       SUM(rg.[total_rows])                                                    AS [row_count_total]
+,       SUM(rg.[total_rows])/COUNT(DISTINCT rg.[distribution_id])               AS [row_count_per_distribution_MAX]
+,	CEILING	((SUM(rg.[total_rows])*1.0/COUNT(DISTINCT rg.[distribution_id]))/1048576) AS [rowgroup_per_distribution_MAX]
+,       SUM(CASE WHEN rg.[State] = 0 THEN 1                   ELSE 0    END)    AS [INVISIBLE_rowgroup_count]
+,       SUM(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE 0    END)    AS [INVISIBLE_rowgroup_rows]
+,       MIN(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE NULL END)    AS [INVISIBLE_rowgroup_rows_MIN]
+,       MAX(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE NULL END)    AS [INVISIBLE_rowgroup_rows_MAX]
+,       AVG(CASE WHEN rg.[State] = 0 THEN rg.[total_rows]     ELSE NULL END)    AS [INVISIBLE_rowgroup_rows_AVG]
+,       SUM(CASE WHEN rg.[State] = 1 THEN 1                   ELSE 0    END)    AS [OPEN_rowgroup_count]
+,       SUM(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE 0    END)    AS [OPEN_rowgroup_rows]
+,       MIN(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE NULL END)    AS [OPEN_rowgroup_rows_MIN]
+,       MAX(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE NULL END)    AS [OPEN_rowgroup_rows_MAX]
+,       AVG(CASE WHEN rg.[State] = 1 THEN rg.[total_rows]     ELSE NULL END)    AS [OPEN_rowgroup_rows_AVG]
+,       SUM(CASE WHEN rg.[State] = 2 THEN 1                   ELSE 0    END)    AS [CLOSED_rowgroup_count]
+,       SUM(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE 0    END)    AS [CLOSED_rowgroup_rows]
+,       MIN(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE NULL END)    AS [CLOSED_rowgroup_rows_MIN]
+,       MAX(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE NULL END)    AS [CLOSED_rowgroup_rows_MAX]
+,       AVG(CASE WHEN rg.[State] = 2 THEN rg.[total_rows]     ELSE NULL END)    AS [CLOSED_rowgroup_rows_AVG]
+,       SUM(CASE WHEN rg.[State] = 3 THEN 1                   ELSE 0    END)    AS [COMPRESSED_rowgroup_count]
+,       SUM(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE 0    END)    AS [COMPRESSED_rowgroup_rows]
+,       SUM(CASE WHEN rg.[State] = 3 THEN rg.[deleted_rows]   ELSE 0    END)    AS [COMPRESSED_rowgroup_rows_DELETED]
+,       MIN(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE NULL END)    AS [COMPRESSED_rowgroup_rows_MIN]
+,       MAX(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE NULL END)    AS [COMPRESSED_rowgroup_rows_MAX]
+,       AVG(CASE WHEN rg.[State] = 3 THEN rg.[total_rows]     ELSE NULL END)    AS [COMPRESSED_rowgroup_rows_AVG]
+,       'ALTER INDEX ALL ON ' + s.name + '.' + t.NAME + ' REBUILD;'             AS [Rebuild_Index_SQL]
+FROM    sys.[pdw_nodes_column_store_row_groups] rg
+JOIN    sys.[pdw_nodes_tables] nt                   ON  rg.[object_id]          = nt.[object_id]
+                                                    AND rg.[pdw_node_id]        = nt.[pdw_node_id]
+                                                    AND rg.[distribution_id]    = nt.[distribution_id]
+JOIN    sys.[pdw_table_mappings] mp                 ON  nt.[name]               = mp.[physical_name]
+JOIN    sys.[tables] t                              ON  mp.[object_id]          = t.[object_id]
+JOIN    sys.[schemas] s                             ON t.[schema_id]            = s.[schema_id]
+GROUP BY
+        s.[name]
+,       t.[name]
+;
+```
 
 现在你已创建视图，请运行此查询来识别哪些表的行组中包含的行少于 10 万个。当然，如果你要寻求更理想的段质量，可以将 10 万这个阈值增大。
 
-
-    SELECT	*
-    FROM	[dbo].[vColumnstoreDensity]
-    WHERE	COMPRESSED_rowgroup_rows_AVG < 100000
-            OR INVISIBLE_rowgroup_rows_AVG < 100000
-
+```sql
+SELECT	*
+FROM	[dbo].[vColumnstoreDensity]
+WHERE	COMPRESSED_rowgroup_rows_AVG < 100000
+        OR INVISIBLE_rowgroup_rows_AVG < 100000
+```
 
 运行查询后就可以开始查看数据并分析结果。下表解释了要在行组分析中查看的内容。
-
 
 | 列 | 如何使用此数据 |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -229,82 +229,73 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 以下示例演示如何通过提高资源类向用户分配更多内存。有关资源类以及如何创建新用户的详细信息，请参阅 [concurrency and workload management][Concurrency]（并发性和工作负荷管理）一文。
 
-
   EXEC sp_addrolemember 'xlargerc', 'LoadUser'
-
 
 ### 步骤 2：使用更高的用户资源类重建聚集列存储索引
 以步骤 1 中所述用户的身份（例如 LoadUser，该用户现在使用更高的资源类）登录，然后执行 ALTER INDEX 语句。请确保此用户对重建索引的表拥有 ALTER 权限。这些示例演示如何重新生成整个列存储索引或如何重建单个分区。对于大型表，一次重建一个分区的索引比较合适。
 
 或者，可以使用 [CTAS][] 将表复制到新表，而不要重建索引。哪种方法最合适？ 如果数据量很大，[CTAS][] 的速度通常比 [ALTER INDEX][] 要快。对于少量的数据，[ALTER INDEX][] 更容易使用，不需要你换出表。有关如何使用 CTAS 重建索引的详细信息，请参阅下面的**使用 CTAS 和分区切换重建索引**。
 
+```
+-- Rebuild the entire clustered index
+ALTER INDEX ALL ON [dbo].[DimProduct] REBUILD
 
-    -- Rebuild the entire clustered index
-    ALTER INDEX ALL ON [dbo].[DimProduct] REBUILD
-    
-    
-    
-    -- Rebuild a single partition
-    ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5
-    
-    
-    
-    -- Rebuild a single partition with archival compression
-    ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE)
-    
-    
-    
-    -- Rebuild a single partition with columnstore compression
-    ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE)
+-- Rebuild a single partition
+ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5
 
+-- Rebuild a single partition with archival compression
+ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE)
+
+-- Rebuild a single partition with columnstore compression
+ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE)
+```
 
 在 SQL 数据仓库中重建索引是一项脱机操作。有关重建索引的详细信息，请参阅 [Columnstore Indexes Defragmentation][]（列存储索引碎片整理）中的 ALTER INDEX REBUILD 部分和语法主题 [ALTER INDEX][]。
- 
+
 ### 步骤 3：验证聚集列存储段质量是否已改善
 重新运行识别出段质量不佳的表的查询，并验证段质量是否已改善。如果段质量并未改善，原因可能是表中的行太宽。请考虑在重建索引时使用较高的资源类或 DWU。如果需要更多内存，
 
- 
 ## 使用 CTAS 和分区切换重建索引
 
 此示例使用 [CTAS][] 和分区切换重建表分区。
 
-
-    -- Step 1: Select the partition of data and write it out to a new table using CTAS
-    CREATE TABLE [dbo].[FactInternetSales_20000101_20010101]
-        WITH    (   DISTRIBUTION = HASH([ProductKey])
-                ,   CLUSTERED COLUMNSTORE INDEX
-                ,   PARTITION   (   [OrderDateKey] RANGE RIGHT FOR VALUES
-                                    (20000101,20010101
-                                    )
+```sql
+-- Step 1: Select the partition of data and write it out to a new table using CTAS
+CREATE TABLE [dbo].[FactInternetSales_20000101_20010101]
+    WITH    (   DISTRIBUTION = HASH([ProductKey])
+            ,   CLUSTERED COLUMNSTORE INDEX
+            ,   PARTITION   (   [OrderDateKey] RANGE RIGHT FOR VALUES
+                                (20000101,20010101
                                 )
-                )
-    AS
-    SELECT  *
-    FROM    [dbo].[FactInternetSales]
-    WHERE   [OrderDateKey] >= 20000101
-    AND     [OrderDateKey] <  20010101
-    ;
+                            )
+            )
+AS
+SELECT  *
+FROM    [dbo].[FactInternetSales]
+WHERE   [OrderDateKey] >= 20000101
+AND     [OrderDateKey] <  20010101
+;
 
-    -- Step 2: Create a SWITCH out table
-    CREATE TABLE dbo.FactInternetSales_20000101
-        WITH    (   DISTRIBUTION = HASH(ProductKey)
-                ,   CLUSTERED COLUMNSTORE INDEX
-                ,   PARTITION   (   [OrderDateKey] RANGE RIGHT FOR VALUES
-                                    (20000101
-                                    )
+-- Step 2: Create a SWITCH out table
+CREATE TABLE dbo.FactInternetSales_20000101
+    WITH    (   DISTRIBUTION = HASH(ProductKey)
+            ,   CLUSTERED COLUMNSTORE INDEX
+            ,   PARTITION   (   [OrderDateKey] RANGE RIGHT FOR VALUES
+                                (20000101
                                 )
-                )
-    AS
-    SELECT *
-    FROM    [dbo].[FactInternetSales]
-    WHERE   1=2 -- Note this table will be empty
+                            )
+            )
+AS
+SELECT *
+FROM    [dbo].[FactInternetSales]
+WHERE   1=2 -- Note this table will be empty
 
-    -- Step 3: Switch OUT the data 
-    ALTER TABLE [dbo].[FactInternetSales] SWITCH PARTITION 2 TO  [dbo].[FactInternetSales_20000101] PARTITION 2;
+-- Step 3: Switch OUT the data 
+ALTER TABLE [dbo].[FactInternetSales] SWITCH PARTITION 2 TO  [dbo].[FactInternetSales_20000101] PARTITION 2;
 
-    -- Step 4: Switch IN the rebuilt data
-    ALTER TABLE [dbo].[FactInternetSales_20000101_20010101] SWITCH PARTITION 2 TO  [dbo].[FactInternetSales] PARTITION 2;
-
+-- Step 4: Switch IN the rebuilt data
+ALTER TABLE [dbo].[FactInternetSales_20000101_20010101] SWITCH PARTITION 2 TO  [dbo].[FactInternetSales] PARTITION 2;
+```
 
 有关使用 `CTAS` 重新创建分区的更多详细信息，请参阅 [Partition][]（分区）一文。
 
@@ -315,21 +306,21 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 <!--Image references-->
 
 <!--Article references-->
-[Overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[概述]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Data Types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[分布]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[索引]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[临时]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[Concurrency]: /documentation/articles/sql-data-warehouse-develop-concurrency/
-[CTAS]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[SQL Data Warehouse Best Practices]: /documentation/articles/sql-data-warehouse-best-practices/
+[Overview]: ./sql-data-warehouse-tables-overview.md
+[概述]: ./sql-data-warehouse-tables-overview.md
+[Data Types]: ./sql-data-warehouse-tables-data-types.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[分布]: ./sql-data-warehouse-tables-distribute.md
+[索引]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
+[Temporary]: ./sql-data-warehouse-tables-temporary.md
+[临时]: ./sql-data-warehouse-tables-temporary.md
+[Concurrency]: ./sql-data-warehouse-develop-concurrency.md
+[CTAS]: ./sql-data-warehouse-develop-ctas.md
+[SQL Data Warehouse Best Practices]: ./sql-data-warehouse-best-practices.md
 
 <!--MSDN references-->
 [ALTER INDEX]: https://msdn.microsoft.com/zh-cn/library/ms188388.aspx

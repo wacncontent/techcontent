@@ -1,22 +1,22 @@
-<properties
-    pageTitle="了解 Azure IoT 中心直接方法 | Azure"
-    description="开发人员指南 - 使用直接方法从服务应用调用设备上的代码。"
-    services="iot-hub"
-    documentationcenter=".net"
-    author="nberdy"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="9f0535f1-02e6-467a-9fc4-c0950702102d"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/11/2017"
-    wacn.date="02/10/2017"
-    ms.author="nberdy" />  
+---
+title: 了解 Azure IoT 中心直接方法 | Azure
+description: 开发人员指南 - 使用直接方法从服务应用调用设备上的代码。
+services: iot-hub
+documentationcenter: .net
+author: nberdy
+manager: timlt
+editor: ''
 
+ms.assetid: 9f0535f1-02e6-467a-9fc4-c0950702102d
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/11/2017
+wacn.date: 02/10/2017
+ms.author: nberdy
+---
 
 # 直接方法
 ## 概述
@@ -34,7 +34,7 @@
 ## 方法生命周期
 直接方法在设备上实现，可能需要在方法有效负载中进行 0 次或 0 次以上的输入才能正确地实例化。可以通过面向服务的 URI (`{iot hub}/twins/{device id}/methods/`) 调用直接方法。设备通过特定于设备的 MQTT 主题 (`$iothub/methods/POST/{method name}/`) 接收直接方法。将来可能会支持在更多的设备端网络协议上使用直接方法。
 
-> [AZURE.NOTE]
+> [!NOTE]
 调用设备上的直接方法时，属性名称和值只能包含 US ASCII 可打印字母数字，但下列组中的任一项除外：``{'$', '(', ')', '<', '>', '@', ',', ';', ':', '\', '"', '/', '[', ']', '?', '=', '{', '}', SP, HT}``。
 > 
 > 
@@ -55,16 +55,16 @@
 * *标头*，其中包含身份验证、请求 ID、内容类型和内容编码
 * 透明的 JSON *正文*，采用以下格式：
 
-
-    	{
-    	    "methodName": "reboot",
-    	    "responseTimeoutInSeconds": 200,
-    	    "payload": {
-    	        "input1": "someInput",
-    	        "input2": "anotherInput"
-    	    }
-    	}
-
+    ```
+    {
+        "methodName": "reboot",
+        "responseTimeoutInSeconds": 200,
+        "payload": {
+            "input1": "someInput",
+            "input2": "anotherInput"
+        }
+    }
+    ```
 
     超时以秒为单位。如果未设置超时，则默认为 30 秒。
 
@@ -75,12 +75,12 @@
 * *标头*，其中包含 ETag、请求 ID、内容类型和内容编码
 * JSON *正文*，采用以下格式：
 
-
-    	{
-    	    "status" : 201,
-    	    "payload" : {...}
-    	}
-
+    ```
+    {
+        "status" : 201,
+        "payload" : {...}
+    }
+    ```
 
     `status` 和 `body` 均由设备提供，用于响应，其中包含设备自身的状态代码和/或描述。
 
@@ -90,12 +90,12 @@
 
 设备接收的正文采用以下格式：
 
-
-	{
-	    "input1": "someInput",
-	    "input2": "anotherInput"
-	}
-
+```
+{
+    "input1": "someInput",
+    "input2": "anotherInput"
+}
+```
 
 方法请求为 QoS 0。
 
@@ -127,17 +127,16 @@ IoT 中心开发人员指南中的其他参考主题包括：
 
 <!-- links and images -->
 
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
-
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-devguide-messages]: /documentation/articles/iot-hub-devguide-messaging/
-[lnk-c2d-guidance]: /documentation/articles/iot-hub-devguide-c2d-guidance/
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
+[lnk-devguide-messages]: ./iot-hub-devguide-messaging.md
+[lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update meta properties-->

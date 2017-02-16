@@ -1,22 +1,22 @@
-<properties
-   pageTitle="使用 Visual Studio 创建 Azure 项目 | Azure"
-   description="使用 Visual Studio 创建 Azure 项目"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 使用 Visual Studio 创建 Azure 项目 | Azure
+description: 使用 Visual Studio 创建 Azure 项目
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="ec580df7-3dcc-45a9-a1d9-8c110678dfb5"
-    ms.service="multiple"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: ec580df7-3dcc-45a9-a1d9-8c110678dfb5
+ms.service: multiple
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 使用 Visual Studio 创建 Azure 项目
 
@@ -45,7 +45,7 @@ Azure 云服务解决方案包含以下类型的项目：
 
 - **具有服务总线队列的辅助角色**
 
-    提供消息队列功能以便与辅助进程通信的服务总线队列。有关详细信息，请参阅[如何使用服务总线队列](/documentation/articles/service-bus-dotnet-how-to-use-queues/)。
+    提供消息队列功能以便与辅助进程通信的服务总线队列。有关详细信息，请参阅[如何使用服务总线队列](./service-bus-messaging/service-bus-dotnet-how-to-use-queues.md)。
 
 ## 在 Visual Studio 中创建 Azure 云服务项目
 

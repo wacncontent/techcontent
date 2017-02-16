@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure SQL 数据库数据保护概述 | Azure"
-    description="了解如何保护 Azure SQL 数据库中的数据。"
-    services="sql-database"
-    documentationcenter=""
-    author="CarlRabeler"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.service="sql-database"
-    ms.custom="secure and protect"
-    ms.devlang="NA"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="data-management"
-    ms.date="12/21/2016"
-    wacn.date="01/25/2017"
-    ms.author="carlrab" />  
+---
+title: Azure SQL 数据库数据保护概述 | Azure
+description: 了解如何保护 Azure SQL 数据库中的数据。
+services: sql-database
+documentationcenter: ''
+author: CarlRabeler
+manager: jhubbard
+editor: ''
 
+ms.service: sql-database
+ms.custom: secure and protect
+ms.devlang: NA
+ms.topic: get-started-article
+ms.tgt_pltfrm: NA
+ms.workload: data-management
+ms.date: 12/21/2016
+wacn.date: 01/25/2017
+ms.author: carlrab
+---
 
 # 保护 SQL 数据库中的数据
 
@@ -24,21 +24,20 @@ SQL 数据库使用加密来保护数据。
 
 ## 概述
 
-SQL 数据库可以保护数据。对于动态数据，它使用[传输层安全性](https://support.microsoft.com/zh-cn/kb/3135244)提供加密；对于静态数据，使用[透明数据加密](https://msdn.microsoft.com/zh-cn/library/dn948096.aspx)提供加密；对于使用中的数据，使用 [Always Encrypted](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx) 提供加密。有关 SQL 数据库中这些数据保护功能的用法介绍，请参阅[数据保护和安全性](/documentation/articles/sql-database-protect-data/)。
+SQL 数据库可以保护数据。对于动态数据，它使用[传输层安全性](https://support.microsoft.com/zh-cn/kb/3135244)提供加密；对于静态数据，使用[透明数据加密](https://msdn.microsoft.com/zh-cn/library/dn948096.aspx)提供加密；对于使用中的数据，使用 [Always Encrypted](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx) 提供加密。有关 SQL 数据库中这些数据保护功能的用法介绍，请参阅[数据保护和安全性](./sql-database-protect-data.md)。
 
 若要通过其他方法加密数据，请考虑：
 
 * 使用[单元格级加密](https://msdn.microsoft.com/zh-cn/library/ms179331.aspx)，借助不同的加密密钥来加密特定的数据列甚至数据单元格。
 * 如果需要硬件安全模块或需要加密密钥层次结构的集中管理，请考虑[对 Azure VM 中的 SQL Server 使用 Azure 密钥保管库](http://blogs.technet.com/b/kv/archive/2015/01/12/using-the-key-vault-for-sql-server-encryption.aspx)。
 
-
 SQL 数据库通过提供审核和威胁检测功能来保护数据。
 
 ### 审核
-Azure SQL 数据库审核可跟踪数据库活动，通过将数据库事件记录到 Azure 存储帐户中的审核日志，帮助用户保持合规性。使用审核可以了解正在进行的数据库活动，以及分析和调查历史活动，标识潜在威胁或可疑的滥用行为和安全违规。有关更多信息，请参阅 [SQL 数据库审核入门](/documentation/articles/sql-database-auditing-get-started/)。
+Azure SQL 数据库审核可跟踪数据库活动，通过将数据库事件记录到 Azure 存储帐户中的审核日志，帮助用户保持合规性。使用审核可以了解正在进行的数据库活动，以及分析和调查历史活动，标识潜在威胁或可疑的滥用行为和安全违规。有关更多信息，请参阅 [SQL 数据库审核入门](./sql-database-auditing-get-started.md)。
 
 ### 威胁检测
-威胁检测是审核的补充，它在 Azure SQL 数据库服务中提供一个内置的附加安全智能层。它会全天候探查、分析和检测异常数据库活动。出现可疑活动、潜在漏洞、 SQL 注入攻击和异常数据库访问模式时，它会发出警报。用户可以遵照提供的参考说明与可行的说明对警报做出响应。有关详细信息，请参阅 [SQL 数据库威胁检测入门](/documentation/articles/sql-database-threat-detection-get-started/)。
+威胁检测是审核的补充，它在 Azure SQL 数据库服务中提供一个内置的附加安全智能层。它会全天候探查、分析和检测异常数据库活动。出现可疑活动、潜在漏洞、 SQL 注入攻击和异常数据库访问模式时，它会发出警报。用户可以遵照提供的参考说明与可行的说明对警报做出响应。有关详细信息，请参阅 [SQL 数据库威胁检测入门](./sql-database-threat-detection-get-started.md)。
 
 ## 连接安全性
 连接安全性是指如何使用防火墙规则和连接加密来限制和保护数据库连接。
@@ -53,31 +52,31 @@ Azure SQL 数据库审核可跟踪数据库活动，通过将数据库事件记�
 * **SQL 身份验证**，使用用户名和密码
 * **Azure Active Directory 身份验证**，使用 Azure Active Directory 管理的标识，并支持托管域和集成域
 
-在为数据库创建逻辑服务器时，已指定了一个包含用户名和密码的“服务器管理员”登录名。通过这些凭据，你可以使用数据库所有者（即“dbo”）的身份通过服务器上任何数据库的身份验证。 如果想要使用 Azure Active Directory 身份验证，则必须创建名为“Azure AD 管理员”的另一个服务器管理员，用于管理 Azure AD 用户和组。此管理员还能执行普通服务器管理员可以执行的所有操作。有关如何创建 Azure AD 管理员以启用 Azure Active Directory 身份验证的演练，请参阅[通过使用 Azure Active Directory 身份验证连接到 SQL 数据库](/documentation/articles/sql-database-aad-authentication/)。
+在为数据库创建逻辑服务器时，已指定了一个包含用户名和密码的“服务器管理员”登录名。通过这些凭据，你可以使用数据库所有者（即“dbo”）的身份通过服务器上任何数据库的身份验证。 如果想要使用 Azure Active Directory 身份验证，则必须创建名为“Azure AD 管理员”的另一个服务器管理员，用于管理 Azure AD 用户和组。此管理员还能执行普通服务器管理员可以执行的所有操作。有关如何创建 Azure AD 管理员以启用 Azure Active Directory 身份验证的演练，请参阅[通过使用 Azure Active Directory 身份验证连接到 SQL 数据库](./sql-database-aad-authentication.md)。
 
 作为最佳实践，应用程序应使用不同的帐户进行身份验证 – 这样，就可以限制授予应用程序的权限，并在应用程序代码容易受到 SQL 注入攻击的情况下降低恶意活动的风险。建议的方法是创建[包含的数据库用户](https://msdn.microsoft.com/zh-cn/library/ff929188)，使应用程序能够直接向数据库进行身份验证。可以通过执行以下 T-SQL 命令，在以服务器管理员身份登录连接到用户数据库时，创建使用 SQL 身份验证的包含数据库用户：
 
-
-	CREATE USER ApplicationUser WITH PASSWORD = 'strong_password'; -- SQL Authentication
-
+```
+CREATE USER ApplicationUser WITH PASSWORD = 'strong_password'; -- SQL Authentication
+```
 
 如果创建了 Azure AD 管理员，可以通过执行以下 T-SQL 命令，在以 Azure AD 管理员身份登录连接到用户数据库时，创建使用 Azure Active Directory 身份验证的包含数据库用户：
 
-
-	CREATE USER [Azure_AD_principal_name | Azure_AD_group_display_name] FROM EXTERNAL PROVIDER; -- Azure Active Directory Authentication
-
+```
+CREATE USER [Azure_AD_principal_name | Azure_AD_group_display_name] FROM EXTERNAL PROVIDER; -- Azure Active Directory Authentication
+```
 
 在任一情况下，应用程序的连接字符串应该指定这些用户凭据而不是服务器管理员登录名以连接到数据库。
 
-有关在 SQL 数据库上进行身份验证的详细信息，请参阅[在 Azure SQL 数据库中管理数据库和登录名](/documentation/articles/sql-database-manage-logins/)。
+有关在 SQL 数据库上进行身份验证的详细信息，请参阅[在 Azure SQL 数据库中管理数据库和登录名](./sql-database-manage-logins.md)。
 
 ## 授权
 授权是指可以在 Azure SQL 数据库中执行哪些操作，这由你的用户帐户角色成员身份和权限来控制。作为最佳实践，应向用户授予所需的最低权限。Azure SQL 数据库允许在 T-SQL 中使用角色方便管理这种权限：
 
-
-	ALTER ROLE db_datareader ADD MEMBER ApplicationUser; -- allows ApplicationUser to read data
-	ALTER ROLE db_datawriter ADD MEMBER ApplicationUser; -- allows ApplicationUser to write data
-
+```
+ALTER ROLE db_datareader ADD MEMBER ApplicationUser; -- allows ApplicationUser to read data
+ALTER ROLE db_datawriter ADD MEMBER ApplicationUser; -- allows ApplicationUser to write data
+```
 
 用于连接的服务器管理员帐户是 db\_owner 所有者的成员，该帐户有权在数据库中执行任何操作。请保存此帐户，以便部署架构升级并执行其他管理操作。权限受到更多限制的“ApplicationUser”帐户可让用户使用应用程序所需的最低权限从应用程序连接到数据库。
 
@@ -87,17 +86,17 @@ Azure SQL 数据库审核可跟踪数据库活动，通过将数据库事件记�
 * 精细[权限](https://msdn.microsoft.com/zh-cn/library/ms191291)可让你控制可以对数据库中单个列、表、视图、过程和其他对象执行的操作。
 * [模拟](https://msdn.microsoft.com/zh-cn/library/vstudio/bb669087)和[模块签名](https://msdn.microsoft.com/zh-cn/library/bb669102)可用于安全地暂时提升权限。
 * [行级安全性](https://msdn.microsoft.com/zh-cn/library/dn765131)可用于限制用户可访问的行。
-* [数据屏蔽](/documentation/articles/sql-database-dynamic-data-masking-get-started/)可用于限制敏感数据的公开。
+* [数据屏蔽](./sql-database-dynamic-data-masking-get-started.md)可用于限制敏感数据的公开。
 * [存储过程](https://msdn.microsoft.com/zh-cn/library/ms190782)可用于限制可对数据库执行的操作。
 
-从 Azure 经典管理门户或使用 Azure Resource Manager API 管理数据库和逻辑服务器的操作将会根据门户用户帐户的角色分配进行控制。有关此主题的详细信息，请参阅 [Azure 门户中基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)。
+从 Azure 经典管理门户或使用 Azure Resource Manager API 管理数据库和逻辑服务器的操作将会根据门户用户帐户的角色分配进行控制。有关此主题的详细信息，请参阅 [Azure 门户中基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
 
 ## 加密
 Azure SQL 数据库将会帮助你通过使用[透明数据加密](https://msdn.microsoft.com/zh-cn/library/dn948096.aspx)来加密处于“静止”状态或存储在数据库文件的数据，从而保护数据。若要加密数据库，请以数据库所有者身份连接，然后执行：
 
-
-	ALTER DATABASE [AdventureWorks] SET ENCRYPTION ON;
-
+```
+ALTER DATABASE [AdventureWorks] SET ENCRYPTION ON;
+```
 
 如需通过其他方法加密数据机密，请考虑：
 
@@ -106,17 +105,17 @@ Azure SQL 数据库将会帮助你通过使用[透明数据加密](https://msdn.
 * [始终加密](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx)（预览版）使得加密对于应用程序来说是透明的，从而让客户端能够加密客户端应用程序中的敏感数据，不必与 SQL 数据库共享加密密钥。
 
 ## 审核
-审核和跟踪数据库事件可帮助你保持合规性，以及识别可疑活动。SQL 数据库审核可让你将数据库中的事件记录到 Azure 存储帐户中的审核日志。SQL 数据库审核还与 Microsoft Power BI 集成，以帮助向下钻取报告和分析数据。有关详细信息，请参阅 [SQL 数据库审核入门](/documentation/articles/sql-database-auditing-get-started/)。
+审核和跟踪数据库事件可帮助你保持合规性，以及识别可疑活动。SQL 数据库审核可让你将数据库中的事件记录到 Azure 存储帐户中的审核日志。SQL 数据库审核还与 Microsoft Power BI 集成，以帮助向下钻取报告和分析数据。有关详细信息，请参阅 [SQL 数据库审核入门](./sql-database-auditing-get-started.md)。
 
-SQL 数据库威胁检测除审核之外，还提供额外的安全层。通过提供对异常活动的安全警报，它使你可以在威胁发生时就对其作出响应。有关详细信息，请参阅 [SQL 数据库威胁检测入门](/documentation/articles/sql-database-threat-detection-get-started/)。
+SQL 数据库威胁检测除审核之外，还提供额外的安全层。通过提供对异常活动的安全警报，它使你可以在威胁发生时就对其作出响应。有关详细信息，请参阅 [SQL 数据库威胁检测入门](./sql-database-threat-detection-get-started.md)。
 
 ## 合规性
 除了上述可帮助应用程序符合各项安全法规要求的特性和功能以外，Azure SQL 数据库还定期参与审核，并已通过许多法规标准的认证。有关详细信息，请参阅 [Azure 信任中心](https://www.trustcenter.cn/)，可以在其中找到 [SQL 数据库法规认证](https://www.trustcenter.cn/zh-cn/compliance/default.html)的最新列表。
 
 ## 后续步骤
 
-- 有关所有 SQL 数据库安全功能的概述，请参阅 [SQL 安全概述](/documentation/articles/sql-database-security-overview/)。
-- 有关使用 SQL 数据库中的访问控制功能的介绍，请参阅[控制访问](/documentation/articles/sql-database-control-access/)。
-- 有关主动监视的介绍，请参阅 [SQL 数据库审核入门](/documentation/articles/sql-database-auditing-get-started/)和 [SQL 数据库威胁检测入门](/documentation/articles/sql-database-threat-detection-get-started/)。
+- 有关所有 SQL 数据库安全功能的概述，请参阅 [SQL 安全概述](./sql-database-security-overview.md)。
+- 有关使用 SQL 数据库中的访问控制功能的介绍，请参阅[控制访问](./sql-database-control-access.md)。
+- 有关主动监视的介绍，请参阅 [SQL 数据库审核入门](./sql-database-auditing-get-started.md)和 [SQL 数据库威胁检测入门](./sql-database-threat-detection-get-started.md)。
 
 <!---HONumber=Mooncake_0120_2017-->

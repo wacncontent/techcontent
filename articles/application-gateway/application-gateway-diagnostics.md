@@ -1,24 +1,23 @@
-<properties
-    pageTitle="监视应用程序网关的访问和性能日志及度量值 | Azure"
-    description="了解如何启用和管理应用程序网关的访问和性能日志"
-    services="application-gateway"
-    documentationcenter="na"
-    author="amitsriva"
-    manager="rossort"
-    editor="tysonn"
-    tags="azure-resource-manager" />  
+---
+title: 监视应用程序网关的访问和性能日志及度量值 | Azure
+description: 了解如何启用和管理应用程序网关的访问和性能日志
+services: application-gateway
+documentationcenter: na
+author: amitsriva
+manager: rossort
+editor: tysonn
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="300628b8-8e3d-40ab-b294-3ecc5e48ef98"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/13/2016"
-    wacn.date="01/25/2017"
-    ms.author="amitsriva" />  
-
+ms.assetid: 300628b8-8e3d-40ab-b294-3ecc5e48ef98
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/13/2016
+wacn.date: 01/25/2017
+ms.author: amitsriva
+---
 
 # 应用程序网关的诊断日志记录和度量值
 
@@ -30,13 +29,13 @@ Azure 提供使用日志记录和度量值来监视资源的功能
 
 可在 Azure 中使用不同类型的日志来对应用程序网关进行管理和故障排除。可通过门户访问其中某些日志，且可从 Azure Blob 存储提取并在 Excel 和 PowerBI 等各种工具中查看所有日志。可从以下列表了解有关不同类型日志的详细信息：
 
-* **活动日志：**可以使用 [Azure 活动日志](/documentation/articles/insights-debugging-with-events/)（以前称为操作日志和审核日志）查看提交到 Azure 订阅的所有操作及其状态。默认收集活动日志条目，并可在 Azure 门户预览中查看。
+* **活动日志：**可以使用 [Azure 活动日志](../monitoring-and-diagnostics/insights-debugging-with-events.md)（以前称为操作日志和审核日志）查看提交到 Azure 订阅的所有操作及其状态。默认收集活动日志条目，并可在 Azure 门户预览中查看。
 * **访问日志：**可以使用此日志来查看应用程序网关访问模式并分析重要信息，包括调用方的 IP、请求的 URL、响应延迟、返回问代码、输入和输出字节数。每隔 300 秒会收集一次访问日志。此日志包含每个应用程序网关实例的一条记录。应用程序网关实例可以由“instanceId”属性标识。
 * **性能日志：**可以使用此日志来查看应用程序网关实例的执行情况。此日志会捕获每个实例的性能信息，包括提供的请求总数、吞吐量（以字节为单位）、失败的请求计数、正常和不正常的后端实例计数。每隔 60 秒会收集一次性能日志。
 * **防火墙日志：**可以使用此日志来查看通过应用程序网关的检测或阻止模式（通过 Web 应用程序防火墙配置）记录的请求。
 
-> [AZURE.WARNING]
-日志仅适用于在资源管理器部署模型中部署的资源。不能将日志用于经典部署模型中的资源。若要更好地了解两种模型，请参考[了解 Resource Manager 部署和典型部署](/documentation/articles/resource-manager-deployment-model/)一文。
+> [!WARNING]
+日志仅适用于在资源管理器部署模型中部署的资源。不能将日志用于经典部署模型中的资源。若要更好地了解两种模型，请参考[了解 Resource Manager 部署和典型部署](../azure-resource-manager/resource-manager-deployment-model.md)一文。
 
 对于日志，若要存储日志，可使用两个不同的选项。
 
@@ -51,17 +50,17 @@ Azure 提供使用日志记录和度量值来监视资源的功能
 
     ![门户预览 - 应用程序网关诊断](./media/application-gateway-diagnostics/diagnostics1.png)  
 
-
 2. 记下应用程序网关的资源 ID（会为其启用日志记录）。此值的形式如下：/subscriptions/<subscriptionId>/resourceGroups/<资源组名称>/providers/Microsoft.Network/applicationGateways/<应用程序网关名称>。可以使用门户预览来查找此信息。
 
     ![门户预览 - 应用程序网关诊断](./media/application-gateway-diagnostics/diagnostics2.png)  
 
-
 3. 使用以下 PowerShell cmdlet 启用诊断日志记录：
 
-        Set-AzureRmDiagnosticSetting  -ResourceId /subscriptions/<subscriptionId>/resourceGroups/<resource group name>/providers/Microsoft.Network/applicationGateways/<application gateway name> -StorageAccountId /subscriptions/<subscriptionId>/resourceGroups/<resource group name>/providers/Microsoft.Storage/storageAccounts/<storage account name> -Enabled $true     
+    ```powershell
+    Set-AzureRmDiagnosticSetting  -ResourceId /subscriptions/<subscriptionId>/resourceGroups/<resource group name>/providers/Microsoft.Network/applicationGateways/<application gateway name> -StorageAccountId /subscriptions/<subscriptionId>/resourceGroups/<resource group name>/providers/Microsoft.Storage/storageAccounts/<storage account name> -Enabled $true     
+    ```
 
-> [AZURE.TIP] 
+> [!TIP] 
 活动日志不需要单独的存储帐户。使用存储来记录访问和性能需支付服务费用。
 
 ## 使用 Azure 门户预览启用日志记录
@@ -80,13 +79,11 @@ Azure 提供使用日志记录和度量值来监视资源的功能
 
 ![诊断设置边栏选项卡][1]  
 
-
 ### 步骤 2
 
 “诊断设置”边栏选项卡用于设置诊断日志的设置。在此示例中，Log Analytics 用于存储日志。单击“Log Analytics”下的“配置”来配置工作区。事件中心和存储帐户也可用于保存诊断日志。
 
 ![诊断边栏选项卡][2]  
-
 
 ### 步骤 3
 
@@ -94,99 +91,103 @@ Azure 提供使用日志记录和度量值来监视资源的功能
 
 ![oms 工作区][3]  
 
-
 ### 步骤 4
 
 完成后，确认设置，然后单击“保存”保存设置。
 
 ![确认所选内容][4]  
 
-
 ## 活动日志
 
-Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azure 的事件日志存储区中保留 90 天。若要深入了解这些日志，请阅读[查看事件和活动日志](/documentation/articles/insights-debugging-with-events/)文章。
+Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azure 的事件日志存储区中保留 90 天。若要深入了解这些日志，请阅读[查看事件和活动日志](../monitoring-and-diagnostics/insights-debugging-with-events.md)文章。
 
 ## 访问日志
 
 只有按照上述步骤基于每个应用程序网关启用了此日志，才会生成此日志。数据存储在你启用日志记录时指定的存储帐户中。应用程序网关的每次访问均以 JSON 格式记录下来，如以下示例所示：
 
-    {
-        "resourceId": "/SUBSCRIPTIONS/<subscription id>/RESOURCEGROUPS/<resource group name>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<application gateway name>",
-        "operationName": "ApplicationGatewayAccess",
-        "time": "2016-04-11T04:24:37Z",
-        "category": "ApplicationGatewayAccessLog",
-        "properties": {
-            "instanceId":"ApplicationGatewayRole_IN_0",
-            "clientIP":"37.186.113.170",
-            "clientPort":"12345",
-            "httpMethod":"HEAD",
-            "requestUri":"/xyz/portal",
-            "requestQuery":"",
-            "userAgent":"-",
-            "httpStatus":"200",
-            "httpVersion":"HTTP/1.0",
-            "receivedBytes":"27",
-            "sentBytes":"202",
-            "timeTaken":"359",
-            "sslEnabled":"off"
-        }
+```json
+{
+    "resourceId": "/SUBSCRIPTIONS/<subscription id>/RESOURCEGROUPS/<resource group name>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<application gateway name>",
+    "operationName": "ApplicationGatewayAccess",
+    "time": "2016-04-11T04:24:37Z",
+    "category": "ApplicationGatewayAccessLog",
+    "properties": {
+        "instanceId":"ApplicationGatewayRole_IN_0",
+        "clientIP":"37.186.113.170",
+        "clientPort":"12345",
+        "httpMethod":"HEAD",
+        "requestUri":"/xyz/portal",
+        "requestQuery":"",
+        "userAgent":"-",
+        "httpStatus":"200",
+        "httpVersion":"HTTP/1.0",
+        "receivedBytes":"27",
+        "sentBytes":"202",
+        "timeTaken":"359",
+        "sslEnabled":"off"
     }
+}
+```
 
 ## 性能日志
 
 只有按照上述步骤基于每个应用程序网关启用了此日志，才会生成此日志。数据存储在你启用日志记录时指定的存储帐户中。将记录以下数据：
 
+```json
+{
+    "resourceId": "/SUBSCRIPTIONS/<subscription id>/RESOURCEGROUPS/<resource group name>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<application gateway name>",
+    "operationName": "ApplicationGatewayPerformance",
+    "time": "2016-04-09T00:00:00Z",
+    "category": "ApplicationGatewayPerformanceLog",
+    "properties":
     {
-        "resourceId": "/SUBSCRIPTIONS/<subscription id>/RESOURCEGROUPS/<resource group name>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<application gateway name>",
-        "operationName": "ApplicationGatewayPerformance",
-        "time": "2016-04-09T00:00:00Z",
-        "category": "ApplicationGatewayPerformanceLog",
-        "properties":
-        {
-            "instanceId":"ApplicationGatewayRole_IN_1",
-            "healthyHostCount":"4",
-            "unHealthyHostCount":"0",
-            "requestCount":"185",
-            "latency":"0",
-            "failedRequestCount":"0",
-            "throughput":"119427"
-        }
+        "instanceId":"ApplicationGatewayRole_IN_1",
+        "healthyHostCount":"4",
+        "unHealthyHostCount":"0",
+        "requestCount":"185",
+        "latency":"0",
+        "failedRequestCount":"0",
+        "throughput":"119427"
     }
+}
+```
 
 ## 防火墙日志
 
 只有按照上述步骤基于每个应用程序网关启用了此日志，才会生成此日志。此日志还需要在应用程序网关上配置 Web 应用程序防火墙。数据存储在你启用日志记录时指定的存储帐户中。将记录以下数据：
 
-    {
-        "resourceId": "/SUBSCRIPTIONS/<subscriptionId>/RESOURCEGROUPS/<resourceGroupName>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<applicationGatewayName>",
-        "operationName": "ApplicationGatewayFirewall",
-        "time": "2016-09-20T00:40:04.9138513Z",
-        "category": "ApplicationGatewayFirewallLog",
-        "properties":     {
-            "instanceId":"ApplicationGatewayRole_IN_0",
-            "clientIp":"108.41.16.164",
-            "clientPort":1815,
-            "requestUri":"/wavsep/active/RXSS-Detection-Evaluation-POST/",
-            "ruleId":"OWASP_973336",
-            "message":"XSS Filter - Category 1: Script Tag Vector",
-            "action":"Logged",
-            "site":"Global",
-            "message":"XSS Filter - Category 1: Script Tag Vector",
-            "details":{"message":" Warning. Pattern match "(?i)(<script","file":"/owasp_crs/base_rules/modsecurity_crs_41_xss_attacks.conf","line":"14"}}
-    }
+```json
+{
+    "resourceId": "/SUBSCRIPTIONS/<subscriptionId>/RESOURCEGROUPS/<resourceGroupName>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<applicationGatewayName>",
+    "operationName": "ApplicationGatewayFirewall",
+    "time": "2016-09-20T00:40:04.9138513Z",
+    "category": "ApplicationGatewayFirewallLog",
+    "properties":     {
+        "instanceId":"ApplicationGatewayRole_IN_0",
+        "clientIp":"108.41.16.164",
+        "clientPort":1815,
+        "requestUri":"/wavsep/active/RXSS-Detection-Evaluation-POST/",
+        "ruleId":"OWASP_973336",
+        "message":"XSS Filter - Category 1: Script Tag Vector",
+        "action":"Logged",
+        "site":"Global",
+        "message":"XSS Filter - Category 1: Script Tag Vector",
+        "details":{"message":" Warning. Pattern match "(?i)(<script","file":"/owasp_crs/base_rules/modsecurity_crs_41_xss_attacks.conf","line":"14"}}
+}
+```
 
 ## 查看和分析活动日志
 
 可使用以下任意方法查看和分析活动日志数据：
 
-* **Azure 工具：**通过 Azure PowerShell、Azure 命令行界面 (CLI)、Azure REST API 或 Azure 门户预览检索活动日志中的信息。[使用 Resource Manager 的活动操作](/documentation/articles/resource-group-audit/)一文中详细介绍了每种方法的分步说明。
+* **Azure 工具：**通过 Azure PowerShell、Azure 命令行界面 (CLI)、Azure REST API 或 Azure 门户预览检索活动日志中的信息。[使用 Resource Manager 的活动操作](../azure-resource-manager/resource-group-audit.md)一文中详细介绍了每种方法的分步说明。
 * **Power BI：**如果尚无 [Power BI](https://powerbi.microsoft.com/pricing) 帐户，可免费试用。使用[适用于 Power BI 的 Azure 活动日志内容包](https://powerbi.microsoft.com/documentation/powerbi-content-pack-azure-audit-logs/)，可借助预配置的仪表板（直接使用或进行自定义）分析数据。
 
 ## 查看并分析访问、性能和防火墙日志
 
 可以连接到存储帐户并检索访问和性能日志的 JSON 日志条目。下载 JSON 文件后，你可以将它们转换为 CSV 并在 Excel、PowerBI 或任何其他数据可视化工具中查看。
 
-> [AZURE.TIP]
+> [!TIP]
 如果你熟悉 Visual Studio 和更改 C# 中的常量和变量值的基本概念，则可以使用 Github 提供的[日志转换器工具](https://github.com/Azure-Samples/networking-dotnet-log-converter)。
 > 
 > 
@@ -207,7 +208,6 @@ Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azur
 
 ![警报规则边栏选项卡][6]  
 
-
 ### 步骤 2
 
 在“添加规则”边栏选项卡中，填写名称、条件和通知部分，完成时单击“确定”。
@@ -220,20 +220,17 @@ Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azur
 
 ![添加规则边栏选项卡][7]  
 
-
 如果达到阈值，送达的电子邮件内容类似下图所示：
 
 ![达到阈值时的电子邮件][8]  
-
 
 创建度量值警报后即会显示警报列表，并提供所有警报规则的概述。
 
 ![警报规则视图][9]  
 
+若要了解有关警报通知的详细信息，请参阅[接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
 
-若要了解有关警报通知的详细信息，请参阅[接收警报通知](/documentation/articles/insights-receive-alert-notifications/)
-
-若要了解有关 webhook 以及如何与其搭配使用警报的详细信息，请参阅[针对 Azure 度量值警报配置 webhook](/documentation/articles/insights-webhooks-alerts/)
+若要了解有关 webhook 以及如何与其搭配使用警报的详细信息，请参阅[针对 Azure 度量值警报配置 webhook](../monitoring-and-diagnostics/insights-webhooks-alerts.md)
 
 ## 后续步骤
 

@@ -1,21 +1,21 @@
-<properties
-   pageTitle="可测试性概述 | Microsoft Azure"
-   description="本文介绍 Service Fabric 中用于针对服务引入故障和运行测试方案的可测试性子系统。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="rishirsinha"
-   manager="timlt"
-   editor=""/>
+---
+title: 可测试性概述 | Microsoft Azure
+description: 本文介绍 Service Fabric 中用于针对服务引入故障和运行测试方案的可测试性子系统。
+services: service-fabric
+documentationCenter: .net
+authors: rishirsinha
+manager: timlt
+editor: ''
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="04/06/2016"
-   wacn.date="01/17/2017"
-   ms.author="rsinha"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 04/06/2016
+wacn.date: 01/17/2017
+ms.author: rsinha
+---
 
 # 可测试性概述
 
@@ -110,12 +110,10 @@ Service Fabric 让编写和管理分布式可扩展应用程序的工作变得�
 
 ## 后续步骤
 
-- [可测试性操作](/documentation/articles/service-fabric-testability-actions/)
-- [可测试性方案](/documentation/articles/service-fabric-testability-actions/)
+- [可测试性操作](./service-fabric-testability-actions.md)
+- [可测试性方案](./service-fabric-testability-actions.md)
 - 如何测试你的服务
-  - [在服务工作负荷期间模拟故障](/documentation/articles/service-fabric-testability-workload-tests/)
-  - [服务到服务通信失败](/documentation/articles/service-fabric-testability-scenarios-service-communication/)
-
- 
+  - [在服务工作负荷期间模拟故障](./service-fabric-testability-workload-tests.md)
+  - [服务到服务通信失败](./service-fabric-testability-scenarios-service-communication.md)
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

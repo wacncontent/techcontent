@@ -23,7 +23,6 @@
 |-c |必需|代理与进程服务器之间的通信模式<br>（将在下一个版本中弃用） |*https*|
 |-P |必需|配置服务器通行短语|任何有效的 UNC 或本地文件路径|
 
-
 #### 示例用法
 ```
 sudo ./install -t both -a host -R Agent -d /usr/local/ASR -i 192.168.2.53 -p 443 -s y -c https -P /tmp/MobSvc.passphrase

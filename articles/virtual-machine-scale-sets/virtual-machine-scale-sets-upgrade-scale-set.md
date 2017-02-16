@@ -1,25 +1,22 @@
-<properties
-	pageTitle="在虚拟机规模集上部署应用 | Azure"
-	description="在虚拟机规模集上部署应用"
-	services="virtual-machine-scale-sets"
-	documentationCenter=""
-	authors="gbowerman"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 在虚拟机规模集上部署应用 | Azure
+description: 在虚拟机规模集上部署应用
+services: virtual-machine-scale-sets
+documentationCenter: ''
+authors: gbowerman
+manager: timlt
+editor: ''
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machine-scale-sets"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/13/2016"
-	wacn.date="10/31/2016"
-	ms.author="guybo"/>  
-
-
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/13/2016
+wacn.date: 10/31/2016
+ms.author: guybo
+---
 
 # 升级虚拟机规模集
 
@@ -35,7 +32,7 @@
 
 前两个选项是本文中所讨论的受支持的要求。若要执行第三个选项，需要创建新的规模集。
 
-此处不讨论部署为 [Azure Service Fabric](/home/features/service-fabric/) 的一部分的虚拟机规模集。
+此处不讨论部署为 [Azure Service Fabric](https://www.azure.cn/home/features/service-fabric/) 的一部分的虚拟机规模集。
 
 更改平台映像的 OS 版本/SKU 或自定义映像的 URI 的基本顺序，如下所示：
 
@@ -47,34 +44,37 @@
 
 4. 对规模集中的虚拟机执行 *manualUpgrade* 调用。只有将规模集中的 *upgradePolicy* 设置为“手动”时，此步骤才适用。如果设置为“自动”，所有的虚拟机则会同时升级，从而导致停机。
 
-
 在记住了这些背景信息后，来看一下如何通过使用 REST API 在 PowerShell 中更新规模集的版本。尽管这些示例涵盖了关于平台映像的示例，但是本文提供了足量的信息使用户能够适应此过程以自定义映像。
 
 ## PowerShell ##
 
 此示例会将 Windows 虚拟机规模集更新到新版本 4.0.20160229。更新模型后，它将一次更新一个虚拟机实例。
 
-	$rgname = "myrg"
-	$vmssname = "myvmss"
-	$newversion = "4.0.20160229"
-	$instanceid = "1"
+```powershell
+$rgname = "myrg"
+$vmssname = "myvmss"
+$newversion = "4.0.20160229"
+$instanceid = "1"
 
-	# get the VMSS model
-	$vmss = Get-AzureRmVmss -ResourceGroupName $rgname -VMScaleSetName $vmssname
+# get the VMSS model
+$vmss = Get-AzureRmVmss -ResourceGroupName $rgname -VMScaleSetName $vmssname
 
-	# set the new version in the model data
-	$vmss.virtualMachineProfile.storageProfile.imageReference.version = $newversion
+# set the new version in the model data
+$vmss.virtualMachineProfile.storageProfile.imageReference.version = $newversion
 
-	# update the virtual machine scale set model
-	Update-AzureRmVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet $vmss
+# update the virtual machine scale set model
+Update-AzureRmVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet $vmss
 
-	# now start updating instances
-	Update-AzureRmVmssInstance -ResourceGroupName $rgname -VMScaleSetName $vmssname -InstanceId $instanceId
+# now start updating instances
+Update-AzureRmVmssInstance -ResourceGroupName $rgname -VMScaleSetName $vmssname -InstanceId $instanceId
+```
 
 如果要更新自定义映像的 URI，而不是更改平台映像版本，请将“设置新版本”一行替换为以下内容：
 
-	# set the new version in the model data
-	$vmss.virtualMachineProfile.storageProfile.osDisk.image.uri= $newURI
+```powershell
+# set the new version in the model data
+$vmss.virtualMachineProfile.storageProfile.osDisk.image.uri= $newURI
+```
 
 ## REST API
 
@@ -86,7 +86,6 @@
 
 ![用于选择虚拟机或更新域的 Vmssupgrade 脚本](./media/virtual-machine-scale-sets-upgrade-scale-set/vmssupgrade-screenshot.png)  
 
-
 使用此脚本，可选择要更新的具体虚拟机或者指定更新域。它支持更改平台映像版本或更改自定义映像的 URI。
 
 ### Vmsseditor
@@ -96,7 +95,6 @@
 以下屏幕截图显示了 Ubuntu 14.04-2LTS 版本 14.04.201507060 的规模集的模型。自此屏幕截图截取之后，又为此工具添加了更多的选项。
 
 ![适用于 Ubuntu 14.04-2LTS 的规模集的 Vmsseditor 模型](./media/virtual-machine-scale-sets-upgrade-scale-set/vmssEditor1.png)  
-
 
 单击“升级”和“获取详细信息”之后，UD 0 中的虚拟机将开始进行更新。
 

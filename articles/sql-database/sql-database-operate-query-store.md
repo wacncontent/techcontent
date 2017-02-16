@@ -1,29 +1,31 @@
-<properties
-    pageTitle="在 Azure SQL 数据库中操作查询存储"
-    description="了解如何在 Azure SQL 数据库中操作查询存储"
-    keywords=""
-    services="sql-database"
-    documentationcenter=""
-    author="CarlRabeler"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="0cccf6bd-1327-44f7-a6f9-8eff0c210463"
-    ms.service="sql-database"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="sqldb-performance"
-    ms.workload="data-management"
-    ms.date="11/08/2016"
-    wacn.date="12/19/2016"
-ms.author="carlrab" />
+---
+title: 在 Azure SQL 数据库中操作查询存储
+description: 了解如何在 Azure SQL 数据库中操作查询存储
+keywords: ''
+services: sql-database
+documentationcenter: ''
+author: CarlRabeler
+manager: jhubbard
+editor: ''
+
+ms.assetid: 0cccf6bd-1327-44f7-a6f9-8eff0c210463
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: sqldb-performance
+ms.workload: data-management
+ms.date: 11/08/2016
+wacn.date: 12/19/2016
+ms.author: carlrab
+---
 
 # 在 Azure SQL 数据库中操作 Query Store
 Azure 中的 Query Store 是完全托管的数据库功能，可持续收集和提供有关所有查询的详细历史信息。可以将 Query Store 视为一个航班数据记录器，它可以大幅简化云与本地客户的查询性能故障排除。本文说明在 Azure 中操作 Query Store 的具体方法。使用这些预先收集的查询数据，可以快速诊断并解决性能问题，因此将更多的时间投入到业务上。
 
 从 2015 年 11 月开始，Query Store 已在 Azure SQL 数据库中[全球推出](https://azure.microsoft.com/updates/general-availability-azure-sql-database-query-store/)。Query Store 是性能分析和优化功能的基础。在本文发布时，Query Store 正在 Azure 中运行 200,000 多个用户数据库，不间断地收集多个月的查询相关信息。
 
-> [AZURE.IMPORTANT] Microsoft 即将为所有 Azure SQL 数据库（现有的和新的）激活 Query Store。
+> [!IMPORTANT]
+> Microsoft 即将为所有 Azure SQL 数据库（现有的和新的）激活 Query Store。
 
 ## 最佳的 Query Store 配置
 本部分描述最佳的配置默认值，这些默认值旨在确保 Query Store 以及依赖功能能够可靠运行。默认配置已针对持续数据收集操作进行优化，即，在 OFF/READ\_ONLY 状态下花费最少的时间。
@@ -38,12 +40,13 @@ Azure 中的 Query Store 是完全托管的数据库功能，可持续收集和�
 | FLUSH\_INTERVAL\_SECONDS |指定捕获的运行时统计信息在刷新到磁盘之前，保留在内存中的最大期限 |900 |对新数据库强制实施 |
 | | | | |
 
-> [AZURE.IMPORTANT] 在 Query Store 的最终激活阶段，将在所有 Azure SQL 数据库中自动应用这些默认值（请参阅上面的重要说明）。激活后，Azure SQL 数据库不会更改客户设置的配置值，除非这些值对主要工作负荷或 Query Store 的可靠运行造成负面影响。
+> [!IMPORTANT]
+> 在 Query Store 的最终激活阶段，将在所有 Azure SQL 数据库中自动应用这些默认值（请参阅上面的重要说明）。激活后，Azure SQL 数据库不会更改客户设置的配置值，除非这些值对主要工作负荷或 Query Store 的可靠运行造成负面影响。
 
 如果想要保持使用自定义设置，请[结合 Query Store 选项使用 ALTER DATABASE](https://msdn.microsoft.com/zh-cn/library/bb522682.aspx)，将配置还原到以前的状态。请查看 [Query Store 最佳实践](https://msdn.microsoft.com/zh-cn/library/mt604821.aspx)，了解如何选择最佳的配置参数。
 
 ## 后续步骤
-[SQL 数据库性能见解](/documentation/articles/sql-database-performance/)
+[SQL 数据库性能见解](./sql-database-performance.md)
 
 ## 其他资源
 有关详细信息，请查看以下文章：

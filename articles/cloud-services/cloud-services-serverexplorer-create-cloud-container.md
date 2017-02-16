@@ -1,17 +1,16 @@
-<properties 
-   pageTitle="如何使用 Visual Studio 创建云服务容器" 
-   description="本文介绍如何在 Visual Studio 服务器资源管理器中创建云服务" 
-   services="cloud-services" 
-   documentationCenter=".net" 
-   authors="cawaMS" 
-   manager="paulyuk" 
-   editor=""/>  
+---
+title: 如何使用 Visual Studio 创建云服务容器
+description: 本文介绍如何在 Visual Studio 服务器资源管理器中创建云服务
+services: cloud-services
+documentationCenter: .net
+authors: cawaMS
+manager: paulyuk
+editor: ''
 
-
-<tags
-   ms.service="cloud-services"
-   ms.date="10/14/2015"
-   wacn.date="12/26/2016"/>
+ms.service: cloud-services
+ms.date: 10/14/2015
+wacn.date: 12/26/2016
+---
 
 # 如何使用 Visual Studio 创建云服务容器
 
@@ -27,7 +26,6 @@
 
 ## 后续步骤
 
-创建云服务容器后，可以[创建和部署](/documentation/articles/cloud-services-how-to-create-deploy)云服务。
- 
+创建云服务容器后，可以[创建和部署](./cloud-services-how-to-create-deploy.md)云服务。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

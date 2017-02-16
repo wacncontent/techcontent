@@ -1,4 +1,19 @@
-<properties linkid="downloads" urlDisplayName="下载和安装 Azure SDK工具" pageTitle="Azure 服务管理" metaKeywords="下载和安装 Azure SDK工具" description="下载和安装 Azure SDK、Azure PowerShell 和用于管理和部署的命令行工具" metaCanonical="" services="downloads" documentationCenter="downloads" title="下载和安装 Azure SDK工具" authors="ACom" solutions="" manager="" editor="Haifeng Liu" />
+---
+linkid: downloads
+urlDisplayName: 下载和安装 Azure SDK工具
+title: Azure 服务管理
+metaKeywords: 下载和安装 Azure SDK工具
+description: 下载和安装 Azure SDK、Azure PowerShell 和用于管理和部署的命令行工具
+metaCanonical: ''
+services: downloads
+documentationCenter: downloads
+title: 下载和安装 Azure SDK工具
+authors: ACom
+solutions: ''
+manager: ''
+editor: Haifeng Liu
+---
+
 <div>
   <h2>SDK</h2>
   <p>为所选平台下载并安装语言特定的 SDK 和工具。</p>
@@ -94,7 +109,7 @@
     <h4>Windows PowerShell</h4>
     <ul>
       <li><a href="http://go.microsoft.com/?linkid=9811175&amp;clcid=0x804">安装</a></li>
-      <li><a href="/zh-cn/documentation/articles/powershell-install-configure/">文档</a></li>
+      <li><a href="../articles/powershell-install-configure.md">文档</a></li>
       <li><a href="/zh-cn/documentation/scripts/">浏览脚本中心</a></li>
     </ul>
   </div>
@@ -104,7 +119,7 @@
       <li><a href="http://go.microsoft.com/?linkid=9828653&amp;clcid=0x804">Windows 安装</a></li>
       <li><a href="http://go.microsoft.com/fwlink/?linkid=253471&amp;clcid=0x804">Mac 安装</a></li>
       <li><a href="http://go.microsoft.com/fwlink/?linkid=253472&amp;clcid=0x804">Linux 安装</a></li>
-      <li><a href="/documentation/articles/xplat-cli-install/">文档</a></li>
+      <li><a href="../articles/xplat-cli-install.md">文档</a></li>
     </ul>
   </div>
   <div>

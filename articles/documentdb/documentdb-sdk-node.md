@@ -1,30 +1,29 @@
-<properties
-	pageTitle="DocumentDB Node.js API 和 SDK | Azure"
-	description="了解有关 Node.js API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Node.js SDK 各版本之间所做的更改。"
-	services="documentdb"
-	documentationCenter="nodejs"
-	authors="rnagpal"
-	manager="jhubbard"
-	editor="cgronlun"/>  
+---
+title: DocumentDB Node.js API 和 SDK | Azure
+description: 了解有关 Node.js API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Node.js SDK 各版本之间所做的更改。
+services: documentdb
+documentationCenter: nodejs
+authors: rnagpal
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="documentdb"
-	ms.workload="data-services"
-	ms.tgt_pltfrm="na"
-	ms.devlang="nodejs"
-	ms.topic="article"
-	ms.date="10/03/2016"
-	ms.author="rnagpal"
-	wacn.date="01/19/2017"/>
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 10/03/2016
+ms.author: rnagpal
+wacn.date: 01/19/2017
+---
 
 # DocumentDB API 和 SDK
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-sdk-dotnet/)
-- [Node.js](/documentation/articles/documentdb-sdk-node/)
-- [Java](/documentation/articles/documentdb-sdk-java/)
-- [Python](/documentation/articles/documentdb-sdk-python/)
+> [!div class="op_single_selector"]
+- [.NET](./documentdb-sdk-dotnet.md)
+- [Node.js](./documentdb-sdk-node.md)
+- [Java](./documentdb-sdk-java.md)
+- [Python](./documentdb-sdk-python.md)
 - [REST](https://go.microsoft.com/fwlink/?LinkId=402413)
 - [SQL](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)
 
@@ -35,9 +34,9 @@
 <tr><td>**API 文档**</td><td>[Node.js API 参考文档](http://azure.github.io/azure-documentdb-node/DocumentClient.html)</td></tr>
 <tr><td>**SDK 安装说明**</td><td>[安装说明](http://azure.github.io/azure-documentdb-node/)</td></tr>
 <tr><td>**参与 SDK**</td><td>[GitHub](https://github.com/Azure/azure-documentdb-node/tree/master/source)</td></tr>
-<tr><td>**示例**</td><td>[Node.js 代码示例](/documentation/articles/documentdb-nodejs-samples/)</td></tr>
-<tr><td>**入门教程**</td><td>[Node.js SDK 入门](/documentation/articles/documentdb-nodejs-get-started/)</td></tr>
-<tr><td>**Web 应用教程**</td><td>[使用 DocumentDB 构建 Node.js Web 应用程序](/documentation/articles/documentdb-nodejs-application/)</td></tr>
+<tr><td>**示例**</td><td>[Node.js 代码示例](./documentdb-nodejs-samples.md)</td></tr>
+<tr><td>**入门教程**</td><td>[Node.js SDK 入门](./documentdb-nodejs-get-started.md)</td></tr>
+<tr><td>**Web 应用教程**</td><td>[使用 DocumentDB 构建 Node.js Web 应用程序](./documentdb-nodejs-application.md)</td></tr>
 <tr><td>**当前受支持的平台**</td><td>[Node.js v0.10](https://nodejs.org/en/blog/release/v0.10.0/)<br/>[Node.js v0.12](https://nodejs.org/en/blog/release/v0.12.0/)<br/>[Node.js v4.2.0](https://nodejs.org/en/blog/release/v4.2.0/)</td></tr>
 </table>
 
@@ -66,7 +65,7 @@
 
 ###<a name="1.6.0"/>1.6.0</a>
 
-- 实现了[分区集合](/documentation/articles/documentdb-partition-data/)和[用户定义的性能级别](/documentation/articles/documentdb-performance-levels/)。
+- 实现了[分区集合](./documentdb-partition-data.md)和[用户定义的性能级别](./documentdb-performance-levels.md)。
 
 ###<a name="1.5.6"/>1.5.6</a>
 
@@ -149,7 +148,7 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 
 使用已停用的 SDK 对 DocumentDB 发出的任何请求都将被服务拒绝。
 
-> [AZURE.WARNING]
+> [!WARNING]
 Azure DocumentDB SDK for Node.js 在 **1.0.0** 版之前的所有版本都将在 **2016 年 2 月 29 日**停用。
 
 <br/>
@@ -184,12 +183,11 @@ Azure DocumentDB SDK for Node.js 在 **1.0.0** 版之前的所有版本都将在
 | 0.9.1-prerelease | 2014 年 8 月 22 日 | 2016 年 2 月 29 日 
 | 0.9.0-prerelease | 2014 年 8 月 21 日 | 2016 年 2 月 29日
 
-
 ## 常见问题
-[AZURE.INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
+[!INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
 
 ## 另请参阅
 
-若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](/home/features/documentdb/) 服务页。
+若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 服务页。
 
 <!---HONumber=Mooncake_1121_2016-->

@@ -1,21 +1,21 @@
-<properties
-	pageTitle="暂停和恢复数据迁移（SQL Server Stretch Database）| Azure"
-	description="了解如何暂停或继续将数据迁移到 Azure。"
-	services="sql-server-stretch-database"
-	documentationCenter=""
-	authors="douglasl"
-	manager="jhubbard"
-	editor="monicar"/>
+---
+title: 暂停和恢复数据迁移（SQL Server Stretch Database）| Azure
+description: 了解如何暂停或继续将数据迁移到 Azure。
+services: sql-server-stretch-database
+documentationCenter: ''
+authors: douglasl
+manager: jhubbard
+editor: monicar
 
-<tags
-	ms.service="sql-server-stretch-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/14/2016"
-	wacn.date="01/04/2017"
-	ms.author="douglasl"/>
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/14/2016
+wacn.date: 01/04/2017
+ms.author: douglasl
+---
 
 # 暂停和恢复数据迁移（SQL Server Stretch Database）
 

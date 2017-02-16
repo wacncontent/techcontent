@@ -1,23 +1,21 @@
-<properties
-	pageTitle="Azure AD Connect 同步：如何更改默认配置 | Azure"
-	description="介绍如何对 Azure AD Connect 同步中的配置进行更改。"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="femila"
-	editor=""/>
+---
+title: Azure AD Connect 同步：如何更改默认配置 | Azure
+description: 介绍如何对 Azure AD Connect 同步中的配置进行更改。
+services: active-directory
+documentationCenter: ''
+authors: andkjell
+manager: femila
+editor: ''
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/31/2016"
-	wacn.date="01/24/2017"
-	ms.author="billmath"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/31/2016
+wacn.date: 01/24/2017
+ms.author: billmath
+---
 
 # Azure AD Connect 同步：如何更改默认配置
 本主题旨在介绍如何对 Azure AD Connect 同步中的默认配置进行更改。其中提供了一些常见方案的步骤。了解这些知识后，用户应该能够根据自己的业务规则对自己的配置进行一些简单的更改。
@@ -30,7 +28,6 @@
 打开时，将看到现成可用的默认规则。
 
 ![同步规则编辑器](./media/active-directory-aadconnectsync-change-the-configuration/sre2.png)  
-
 
 ### 在编辑器中导航
 通过编辑器顶部的下拉列表可以快速查找特定规则。例如，如果想要查看包含属性 proxyAddresses 的规则，可将下拉列表更改为：
@@ -45,23 +42,22 @@
 最常见的更改是对属性流的更改。源目录中的数据可能与 Azure AD 中的不同。在本部分的示例中，需要确保用户的给定名称始终为**首字母大写**。
 
 ### 禁用计划程序
-默认情况下，[计划程序](/documentation/articles/active-directory-aadconnectsync-feature-scheduler/)每 30 分钟运行一次。进行更改以及排查新规则错误时，需要确保其未启动。若要临时禁用计划程序，请启动 PowerShell，然后运行 `Set-ADSyncScheduler -SyncCycleEnabled $false`
+默认情况下，[计划程序](./active-directory-aadconnectsync-feature-scheduler.md)每 30 分钟运行一次。进行更改以及排查新规则错误时，需要确保其未启动。若要临时禁用计划程序，请启动 PowerShell，然后运行 `Set-ADSyncScheduler -SyncCycleEnabled $false`
 
 ![禁用计划程序](./media/active-directory-aadconnectsync-change-the-configuration/schedulerdisable.png)  
-
 
 ### 创建规则
 
 1. 单击“添加新规则”。
 2. 在“说明”页上输入以下内容：
 ![入站规则筛选](./media/active-directory-aadconnectsync-change-the-configuration/description2.png)
-	- 名称：为规则提供说明性名称。
-	- 说明：提供一些说明以便他人可以理解规则的用途。
-	- 连接的系统：可从中找到对象的系统。这种情况下，选择 Active Directory 连接器。
-	- 连接的系统/Metaverse 对象类型：分别选择“用户”和“人员”。
-	- 链接类型：将该值更改为“联接”。
-	- 优先级：提供系统中唯一的值。较低的数值表示较高的优先级。
-	- 标记：留空。只有 Microsoft 中现成可用的规则应该会要求在此框中填入值。
+    - 名称：为规则提供说明性名称。
+    - 说明：提供一些说明以便他人可以理解规则的用途。
+    - 连接的系统：可从中找到对象的系统。这种情况下，选择 Active Directory 连接器。
+    - 连接的系统/Metaverse 对象类型：分别选择“用户”和“人员”。
+    - 链接类型：将该值更改为“联接”。
+    - 优先级：提供系统中唯一的值。较低的数值表示较高的优先级。
+    - 标记：留空。只有 Microsoft 中现成可用的规则应该会要求在此框中填入值。
 3. 在“范围筛选器”页上，输入“givenName ISNOTNULL”。
 ![入站规则范围筛选器](./media/active-directory-aadconnectsync-change-the-configuration/scopingfilter.png) 
 此部分用于定义规则应该应用到哪些对象。如果留空，该规则会应用到所有用户对象。但也可包括会议室、服务帐户和其他非个人用户对象。
@@ -136,9 +132,9 @@ Active Directory 中的某些属性在架构中是多值，不过它们在 Activ
 在此表达式中，如果属性具有值，我们会使用属性中的第一项 (Item)，删除前导空格和尾随空格 (Trim)，然后保留字符串中的前 448 个字符（左）。
 
 ### 不要流送属性 <a name="do-not-flow-an-attribute"></a>
-有关本部分方案的背景信息，请参阅[控制属性流过程](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning/)。
+有关本部分方案的背景信息，请参阅[控制属性流过程](./active-directory-aadconnectsync-understanding-declarative-provisioning.md)。
 
-有两种方法可防止流送属性。第一种方法可在安装向导中使用，可让你[删除选定的属性](/documentation/articles/active-directory-aadconnect-get-started-custom/)。如果你以前未曾同步该属性，则可以使用这个选项。但是，如果已开始同步此属性，后来使用此功能将它删除，则同步引擎将停止管理属性，现有值将保留在 Azure AD 中。
+有两种方法可防止流送属性。第一种方法可在安装向导中使用，可让你[删除选定的属性](./active-directory-aadconnect-get-started-custom.md)。如果你以前未曾同步该属性，则可以使用这个选项。但是，如果已开始同步此属性，后来使用此功能将它删除，则同步引擎将停止管理属性，现有值将保留在 Azure AD 中。
 
 如果想要删除某个属性的值并确保将来不会流送该属性，则需要改为创建自定义规则。
 
@@ -155,12 +151,12 @@ Active Directory 中的某些属性在架构中是多值，不过它们在 Activ
 
 ## 后续步骤
 
-- 在 [Understanding Declarative Provisioning](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning/)（了解声明性预配）中了解有关配置模型的详细信息。
-- 在 [Understanding Declarative Provisioning Expressions](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning-expressions/)（了解声明性预配表达式）中了解有关表达式语言的详细信息。
+- 在 [Understanding Declarative Provisioning](./active-directory-aadconnectsync-understanding-declarative-provisioning.md)（了解声明性预配）中了解有关配置模型的详细信息。
+- 在 [Understanding Declarative Provisioning Expressions](./active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)（了解声明性预配表达式）中了解有关表达式语言的详细信息。
 
 **概述主题**
 
-- [Azure AD Connect 同步：理解和自定义同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [Azure AD Connect 同步：理解和自定义同步](./active-directory-aadconnectsync-whatis.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 <!---HONumber=Mooncake_1017_2016-->

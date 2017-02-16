@@ -1,21 +1,21 @@
-<properties 
-    pageTitle="事件中心身份验证和安全模型概述 | Azure"
-    description="事件中心身份验证和安全模型概述。"
-    services="event-hubs"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />  
+---
+title: 事件中心身份验证和安全模型概述 | Azure
+description: 事件中心身份验证和安全模型概述。
+services: event-hubs
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-<tags 
-    ms.service="event-hubs"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/30/2016"
-    wacn.date="01/23/2017"
-    ms.author="sethm;clemensv" />
+ms.service: event-hubs
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/30/2016
+wacn.date: 01/23/2017
+ms.author: sethm;clemensv
+---
 
 # 事件中心身份验证和安全模型概述
 Azure 事件中心安全模型满足以下要求：
@@ -26,7 +26,7 @@ Azure 事件中心安全模型满足以下要求：
 
 ## 设备身份验证
 
-事件中心安全模型基于[共享访问签名 (SAS)](/documentation/articles/service-bus-shared-access-signature-authentication/) 令牌与发布者的组合。事件发布者定义事件中心的虚拟终结点。发布者只能用于将消息发送到事件中心。无法从发布者接收消息。
+事件中心安全模型基于[共享访问签名 (SAS)](../service-bus-messaging/service-bus-shared-access-signature-authentication.md) 令牌与发布者的组合。事件发布者定义事件中心的虚拟终结点。发布者只能用于将消息发送到事件中心。无法从发布者接收消息。
 
 通常，事件中心为每个设备使用一个发布者。发送到事件中心的任何发布者的所有消息都将在该事件中心内排队。发布者允许进行精细的访问控制和限制。
 
@@ -41,44 +41,45 @@ Azure 事件中心安全模型满足以下要求：
 
 创建事件中心时，以下示例将创建一个仅限发送的密钥：
 
+```csharp
+    // Create namespace manager.
+    string serviceNamespace = "YOUR_NAMESPACE";
+    string namespaceManageKeyName = "RootManageSharedAccessKey";
+    string namespaceManageKey = "YOUR_ROOT_MANAGE_SHARED_ACCESS_KEY";
+    Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", serviceNamespace, string.Empty);
+    TokenProvider td = TokenProvider.CreateSharedAccessSignatureTokenProvider(namespaceManageKeyName, namespaceManageKey);
+    NamespaceManager nm = new NamespaceManager(namespaceUri, namespaceManageTokenProvider);
 
-		// Create namespace manager.
-		string serviceNamespace = "YOUR_NAMESPACE";
-		string namespaceManageKeyName = "RootManageSharedAccessKey";
-		string namespaceManageKey = "YOUR_ROOT_MANAGE_SHARED_ACCESS_KEY";
-		Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", serviceNamespace, string.Empty);
-		TokenProvider td = TokenProvider.CreateSharedAccessSignatureTokenProvider(namespaceManageKeyName, namespaceManageKey);
-		NamespaceManager nm = new NamespaceManager(namespaceUri, namespaceManageTokenProvider);
-
-		// Create Event Hub with a SAS rule that enables sending to that Event Hub
-		EventHubDescription ed = new EventHubDescription("MY_EVENT_HUB") { PartitionCount = 32 };
-		string eventHubSendKeyName = "EventHubSendKey";
-		string eventHubSendKey = SharedAccessAuthorizationRule.GenerateRandomKey();
-		SharedAccessAuthorizationRule eventHubSendRule = new SharedAccessAuthorizationRule(eventHubSendKeyName, eventHubSendKey, new[] { AccessRights.Send });
-		ed.Authorization.Add(eventHubSendRule); 
-		nm.CreateEventHub(ed);
-
+    // Create Event Hub with a SAS rule that enables sending to that Event Hub
+    EventHubDescription ed = new EventHubDescription("MY_EVENT_HUB") { PartitionCount = 32 };
+    string eventHubSendKeyName = "EventHubSendKey";
+    string eventHubSendKey = SharedAccessAuthorizationRule.GenerateRandomKey();
+    SharedAccessAuthorizationRule eventHubSendRule = new SharedAccessAuthorizationRule(eventHubSendKeyName, eventHubSendKey, new[] { AccessRights.Send });
+    ed.Authorization.Add(eventHubSendRule); 
+    nm.CreateEventHub(ed);
+```
 
 ### 生成令牌
 
 可以使用 SAS 密钥生成令牌。对于每个设备，只能生成一个令牌。然后，可以使用以下方法生成令牌。所有令牌都使用 **EventHubSendKey** 密钥生成。将为每个令牌分配一个唯一 URI。
 
-
-		public static string SharedAccessSignatureTokenProvider.GetSharedAccessSignature(string keyName, string sharedAccessKey, string resource, TimeSpan tokenTimeToLive)
-
+```csharp
+    public static string SharedAccessSignatureTokenProvider.GetSharedAccessSignature(string keyName, string sharedAccessKey, string resource, TimeSpan tokenTimeToLive)
+```
 
 调用此方法时，应将 URI 指定为 `//<NAMESPACE>.servicebus.chinacloudapi.cn/<EVENT_HUB_NAME>/publishers/<PUBLISHER_NAME>`。所有令牌的 URI 都是相同的，但每个令牌的 `PUBLISHER_NAME` 应该不同。`PUBLISHER_NAME` 最好是表示要接收该令牌的设备的 ID。
 
 此方法将生成具有以下结构的令牌：
 
-
-		SharedAccessSignature sr={URI}&sig={HMAC_SHA256_SIGNATURE}&se={EXPIRATION_TIME}&skn={KEY_NAME}
-
+```csharp
+    SharedAccessSignature sr={URI}&sig={HMAC_SHA256_SIGNATURE}&se={EXPIRATION_TIME}&skn={KEY_NAME}
+```
 
 令牌过期时间以从 1970 年 1 月 1 日开始算起的秒数指定。下面是一个令牌示例：
 
-		SharedAccessSignature sr=contoso&sig=nPzdNN%2Gli0ifrfJwaK4mkK0RqAB%2byJUlt%2bGFmBHG77A%3d&se=1403130337&skn=RootManageSharedAccessKey
-
+```csharp
+    SharedAccessSignature sr=contoso&sig=nPzdNN%2Gli0ifrfJwaK4mkK0RqAB%2byJUlt%2bGFmBHG77A%3d&se=1403130337&skn=RootManageSharedAccessKey
+```
 
 通常，令牌的使用期限相当于或长于设备的使用期限。如果设备能够获取新令牌，可以使用使用期限较短的令牌。
 
@@ -108,9 +109,9 @@ Azure 事件中心安全模型满足以下要求：
 - [SAS 概述]
 - [使用事件中心的完整示例应用程序]
 
-[事件中心概述]: /documentation/articles/event-hubs-overview/
+[事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
-[SAS 概述]: /documentation/articles/service-bus-sas-overview/
+[SAS 概述]: ../service-bus-messaging/service-bus-sas-overview.md
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--Update_Description:update wording-->

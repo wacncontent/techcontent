@@ -1,23 +1,21 @@
-<properties
-   pageTitle="将示例数据载入 SQL 数据仓库 | Azure"
-   description="将示例数据载入 SQL 数据仓库"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="lodipalm"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 将示例数据载入 SQL 数据仓库 | Azure
+description: 将示例数据载入 SQL 数据仓库
+services: sql-data-warehouse
+documentationCenter: NA
+authors: lodipalm
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="lodipalm;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: lodipalm;barbkess;sonyama
+---
 
 # 将示例数据载入 SQL 数据仓库
 请遵循以下简单步骤，加载并查询 Adventure Works 示例数据库。这些脚本首先使用 sqlcmd 运行 SQL，这会创建表和视图。创建了表之后，脚本会使用 bcp 加载数据。如果还没有安装 sqlcmd和 bcp，请单击以下链接[安装 bcp][install bcp] 并[安装 sqlcmd][install sqlcmd]。
@@ -27,14 +25,15 @@
 2. 将下载的 zip 中的文件解压缩到本地计算机上的目录。
 3. 编辑解压缩的 aw\_create.bat 文件，并设置位于文件顶部的以下变量。切勿在“=”和参数之间留有空格。下面是编辑后的内容示例。
 
-        server=mylogicalserver.database.chinacloudapi.cn
-        user=mydwuser
-        password=Mydwpassw0rd
-        database=mydwdatabase
-    
+    ```
+    server=mylogicalserver.database.chinacloudapi.cn
+    user=mydwuser
+    password=Mydwpassw0rd
+    database=mydwdatabase
+    ```
 
 4. 从 Windows 命令提示符运行编辑过的 aw\_create.bat。确保你所在的目录是保存了所编辑 aw\_create.bat 版本的位置。此脚本将...
-   
+
    * 删除所有 Adventure Works 表或所有已在你数据库中的视图
    * 创建 Adventure Works 表和视图
    * 使用 bcp 加载每个 Adventure Works 表
@@ -46,25 +45,28 @@
 
 用于获取所有员工信息的简单 select 语句示例：
 
-
-    SELECT * FROM DimEmployee;
+```sql
+SELECT * FROM DimEmployee;
+```
 
 下面是一个更复杂的查询示例，它使用构造（例如 GROUP BY）来查看每天所有销售活动的总金额：
 
-
-    SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales
-    FROM FactInternetSales
-    GROUP BY OrderDateKey
-    ORDER BY OrderDateKey;
-
+```sql
+SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales
+FROM FactInternetSales
+GROUP BY OrderDateKey
+ORDER BY OrderDateKey;
+```
 
 用于筛选出特定日期之前的订单的 SELECT 与 WHERE 子句示例：
 
-    SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales
-    FROM FactInternetSales
-    WHERE OrderDateKey > '20020801'
-    GROUP BY OrderDateKey
-    ORDER BY OrderDateKey;
+```sql
+SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales
+FROM FactInternetSales
+WHERE OrderDateKey > '20020801'
+GROUP BY OrderDateKey
+ORDER BY OrderDateKey;
+```
 
 SQL 数据仓库几乎支持 SQL Server 所能支持的所有 T-SQL 构造。[迁移代码][migrate code]文档中描述了两者的所有差别。
 
@@ -73,15 +75,14 @@ SQL 数据仓库几乎支持 SQL Server 所能支持的所有 T-SQL 构造。[�
 
 <!--Image references-->
 
-
 <!--Article references-->
-[migrate]: /documentation/articles/sql-data-warehouse-overview-migrate/
-[develop]: /documentation/articles/sql-data-warehouse-overview-develop/
-[load]: /documentation/articles/sql-data-warehouse-overview-load/
-[query with Visual Studio]: /documentation/articles/sql-data-warehouse-query-visual-studio/
-[migrate code]: /documentation/articles/sql-data-warehouse-migrate-code/
-[install bcp]: /documentation/articles/sql-data-warehouse-load-with-bcp/
-[install sqlcmd]: /documentation/articles/sql-data-warehouse-get-started-connect-sqlcmd/
+[migrate]: ./sql-data-warehouse-overview-migrate.md
+[develop]: ./sql-data-warehouse-overview-develop.md
+[load]: ./sql-data-warehouse-overview-load.md
+[query with Visual Studio]: ./sql-data-warehouse-query-visual-studio.md
+[migrate code]: ./sql-data-warehouse-migrate-code.md
+[install bcp]: ./sql-data-warehouse-load-with-bcp.md
+[install sqlcmd]: ./sql-data-warehouse-get-started-connect-sqlcmd.md
 
 <!--Other Web references-->
 

@@ -1,19 +1,19 @@
-<properties 
-pageTitle="Azure 开发人员中心：Azure IoT" 
-description="Azure 开发人员中心：Azure IoT" 
-services="IoT" 
-documentationCenter="Develop" 
-authors="" 
-manager="" 
-editor="" />
-<tags ms.service="IoT"
-    ms.date=""
-    wacn.date=""
-    />
+---
+title: Azure 开发人员中心：Azure IoT
+description: Azure 开发人员中心：Azure IoT
+services: IoT
+documentationCenter: Develop
+authors: ''
+manager: ''
+editor: ''
+
+ms.service: IoT
+ms.date: ''
+wacn.date: ''
+---
 
 # Azure 初学者套件
 立即采用套件（包括为“Azure Certified for IoT”的开发板、传感器和传送器）开始创新。简单的用户友好教程可帮助你使用 Azure IoT 将你的设备无缝连接到云。
-
 
 ##Adafruit Raspberry Pi 套件
 
@@ -31,7 +31,6 @@ Feather 是 Adafruit 新的开发板，它就如其名称一样，非常轻薄�
 
 [购买](https://www.adafruit.com/azure)  |   [入门](https://azure.microsoft.com/zh-cn/documentation/samples/iot-hub-c-m0wifi-getstartedkit/)
 
-
 ##Adafruit Huzzah Feather ESP8266 套件
 
 ![](./media/HUZZAH.png)
@@ -39,7 +38,6 @@ Feather 是 Adafruit 新的开发板，它就如其名称一样，非常轻薄�
 针对那些希望使用价格便宜、带有 ESP8266 WiFi 微控制器的新 Adafruit Feather HUZZAH 并且习惯使用该平台探索 Azure IoT 的人群而设计。不需要 Arduino 或其他微控制器。
 
 [购买](https://www.adafruit.com/azure)  |   [入门](https://azure.microsoft.com/zh-cn/documentation/samples/iot-hub-c-huzzah-getstartedkit/)
-
 
 ##Seeed - Intel Edison 套件
 
@@ -49,7 +47,6 @@ Feather 是 Adafruit 新的开发板，它就如其名称一样，非常轻薄�
 
 [购买](http://www.seeedstudio.com/depot/Grove-IoT-Developer-Kit-Microsoft-Azure-Edition-p-2631.html?ref=newInBazaar)  |   [入门](https://azure.microsoft.com/zh-cn/documentation/samples/iot-hub-node-intel-edison-getstartedkit/)
 
-
 ##SparkFun Thing Dev 套件
 
 ![](./media/SparkFun.jpg)
@@ -58,8 +55,7 @@ Feather 是 Adafruit 新的开发板，它就如其名称一样，非常轻薄�
 
 [购买](https://www.sparkfun.com/products/13799)  |   [入门](https://azure.microsoft.com/zh-cn/documentation/samples/iot-hub-c-thingdev-getstartedkit/)
 
-
 ##了解更多
 
-- [物联网](/documentation/services/iot-hub/)    了解我们的全新 IoT 服务 Azure IoT 中心，连接物联网。
+- [物联网](../../articles/iot-hub/index.md)    了解我们的全新 IoT 服务 Azure IoT 中心，连接物联网。
 - [示例库](https://azure.microsoft.com/zh-cn/documentation/samples/?service=iot-hub)    发现将设备、传感器和云服务结合在一起的端到端示例。

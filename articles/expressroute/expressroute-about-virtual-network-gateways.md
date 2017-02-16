@@ -1,26 +1,24 @@
-<properties 
-   pageTitle="关于 ExpressRoute 虚拟网络网关 | Azure"
-   description="了解 ExpressRoute 的虚拟网络网关。"
-   services="expressroute"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager, azure-service-management"/>  
+---
+title: 关于 ExpressRoute 虚拟网络网关 | Azure
+description: 了解 ExpressRoute 的虚拟网络网关。
+services: expressroute
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: ''
+tags: azure-resource-manager, azure-service-management
 
-<tags 
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="12/01/2016"
-   wacn.date="10/31/2016"
-   ms.author="cherylmc" />  
-
+ms.service: expressroute
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/01/2016
+wacn.date: 10/31/2016
+ms.author: cherylmc
+---
 
 # 关于 ExpressRoute 的虚拟网络网关
-
 
 虚拟网络网关用于在 Azure 虚拟网络和本地位置之间发送网络流量。配置 ExpressRoute 连接时，必须创建并配置虚拟网络网关和虚拟网络网关连接。
 
@@ -32,17 +30,15 @@
 
 ## <a name="gwsku"></a>网关 SKU
 
-[AZURE.INCLUDE [expressroute-gwsku-include](../../includes/expressroute-gwsku-include.md)]
+[!INCLUDE [expressroute-gwsku-include](../../includes/expressroute-gwsku-include.md)]
 
 如果想要将网关升级为功能更强大的网关 SKU，在大多数情况下，可以使用“Resize-AzureRmVirtualNetworkGateway”PowerShell cmdlet。此方法适用于升级到 Standard 和 HighPerformance SKU。
 
 ###  <a name="aggthroughput"></a>按网关 SKU 列出的估计聚合吞吐量
 
-
 下表显示网关类型和估计的聚合吞吐量。此表适用于 Resource Manager 与经典部署模型。
 
-[AZURE.INCLUDE [expressroute-table-aggthroughput](../../includes/expressroute-table-aggtput-include.md)]
-
+[!INCLUDE [expressroute-table-aggthroughput](../../includes/expressroute-table-aggtput-include.md)]
 
 ## <a name="resources"></a>REST API 和 PowerShell cmdlet
 
@@ -53,17 +49,8 @@
 |[PowerShell](https://msdn.microsoft.com/zh-cn/library/mt270335.aspx)|[PowerShell](https://msdn.microsoft.com/zh-cn/library/mt163510.aspx)|
 |[REST API](https://msdn.microsoft.com/zh-cn/library/jj154113.aspx)|[REST API](https://msdn.microsoft.com/zh-cn/library/mt163859.aspx)|
 
-
 ## 后续步骤
 
-有关可用连接配置的详细信息，请参阅 [ExpressRoute 概述](/documentation/articles/expressroute-introduction/)。
-
-
-
-
-
-
-
- 
+有关可用连接配置的详细信息，请参阅 [ExpressRoute 概述](./expressroute-introduction.md)。
 
 <!---HONumber=Mooncake_1024_2016-->

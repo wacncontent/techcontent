@@ -1,22 +1,22 @@
-<properties
-    pageTitle="了解 Azure IoT 中心消息传送 | Azure"
-    description="开发人员指南 - 使用 IoT 中心进行设备到云和云到设备的消息传送。包括消息格式和支持的通信协议的相关信息。"
-    services="iot-hub"
-    documentationcenter=".net"
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="3fc5f1a3-3711-4611-9897-d4db079b4250"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="12/13/2016"
-    wacn.date="01/13/2017"
-    ms.author="dobett" />  
+---
+title: 了解 Azure IoT 中心消息传送 | Azure
+description: 开发人员指南 - 使用 IoT 中心进行设备到云和云到设备的消息传送。包括消息格式和支持的通信协议的相关信息。
+services: iot-hub
+documentationcenter: .net
+author: dominicbetts
+manager: timlt
+editor: ''
 
+ms.assetid: 3fc5f1a3-3711-4611-9897-d4db079b4250
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/13/2016
+wacn.date: 01/13/2017
+ms.author: dobett
+---
 
 # 使用 IoT 中心发送和接收消息
 ## 概述
@@ -61,7 +61,7 @@ IoT 中心使用流式消息传递模式实现设备到云的消息传递。与[
 
 有关如何设置消息路由的详细信息，请参阅以下设备到云配置选项。
 
-> [AZURE.NOTE]
+> [!NOTE]
 使用 HTTP 发送设备到云的消息时，属性名称和值只能包含 ASCII 字母数字字符加上 ``{'!', '#', '$', '%, '&', "'", '*', '*', '+', '-', '.', '^', '_', '`', '|', '~'}``。
 > 
 > 
@@ -107,21 +107,23 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 
 **ConnectionAuthMethod** 属性包含具有以下属性的 JSON 序列化对象：
 
-	{
-	  "scope": "{ hub | device}",
-	  "type": "{ symkey | sas}",
-	  "issuer": "iothub"
-	}
+```
+{
+  "scope": "{ hub | device}",
+  "type": "{ symkey | sas}",
+  "issuer": "iothub"
+}
+```
 
 ## <a name="cloud-to-device-messages"></a> 云到设备的消息
 可以通过面向服务的终结点 \(**/messages/devicebound**\) 发送云到设备的消息。设备可以通过特定于设备的终结点 \(**/devices/{deviceId}/messages/devicebound**\) 接收这些消息。
 
 每个云到设备的消息都以单个设备为目标，方法是将 **to** 属性设置为 **/devices/{deviceId}/messages/devicebound**。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 每个设备队列最多可以保留 50 条云到设备的消息。尝试将更多消息传送到同一设备将导致错误。
 > 
-> [AZURE.NOTE]
+> [!NOTE]
 发送云到设备的消息时，属性名称和值只能包含 ASCII 字母数字字符加上 ``{'!', '#', '$', '%, '&', "'", '*', '*', '+', '-', '.', '^', '_', '`', '|', '~'}``。
 > 
 > 
@@ -132,7 +134,6 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 下图显示了云到设备消息的生命周期状态图。
 
 ![云到设备的消息生命周期][img-lifecycle]  
-
 
 当服务发送消息时，该消息被视为*已排队*。当设备想要*接收*消息时，IoT 中心将*锁定*该消息（将状态设置为**不可见**），以便让同一设备上的其他线程开始接收其他消息。当设备线程完成消息的处理后，将通过*完成*消息来通知 IoT 中心。
 
@@ -147,7 +148,7 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 
 有关云到设备的消息的教程，请参阅[教程：如何使用 IoT 中心发送云到设备的消息][lnk-c2d-tutorial]。有关不同 Azure IoT SDK 如何公开云到设备功能的参考主题，请参阅 [Azure IoT SDK][lnk-sdks]。
 
-> [AZURE.NOTE]
+> [!NOTE]
 通常只要丢失消息不影响应用程序逻辑，就会完成云到设备的消息。例如，消息内容已成功保留在本地存储空间中，或已成功执行某操作。该消息还可能携带暂时性信息，该信息的丢失不会影响应用程序的功能。有时，对于长时间运行的任务，你可以在将任务说明保留到本地存储空间后完成该云到设备的消息。然后，在作业进度的不同阶段，可以使用一条或多条设备到云的消息通知解决方案后端。
 > 
 > 
@@ -155,7 +156,7 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 ### <a name="message-expiration-time-to-live"></a> 消息到期时间（生存时间）
 每条云到设备的消息都有过期时间。此时间可以由服务（在 **ExpiryTimeUtc** 属性中）设置，或者由 IoT 中心使用指定为 IoT 中心属性的默认 *生存时间* 来设置。请参阅[云到设备的配置选项][lnk-c2d-configuration]。
 
-> [AZURE.NOTE]
+> [!NOTE]
 利用消息到期时间并避免将消息发送到已断开连接的设备的常见方法是设置较短的生存时间值。此方法可达到与维护设备连接状态一样的效果，而且更加有效。请求消息确认时，IoT 中心可以通知你哪些设备可以接收消息、哪些设备脱机或已出现故障。
 > 
 > 
@@ -167,7 +168,7 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 * 如果将 **Ack** 属性设置为 **negative**，则当且仅当云到设备的消息达到**死信**状态时，IoT 中心才生成反馈消息。
 * 如果将 **Ack** 属性设置为 **full**，则 IoT 中心在上述任一情况下都会生成反馈消息。
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果 **Ack** 为 **full**，且未收到反馈消息，则意味着反馈消息已过期。该服务无法了解原始消息的经历。实际上，服务应该确保它可以在反馈过期之前对其进行处理。最长过期时间是两天，因此当发生失败时，有相当充裕的时间让服务再次运行。
 > 
 > 
@@ -191,28 +192,29 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 | DeviceId |此反馈信息所属的云到设备的消息的目标设备的 **DeviceId**。 |
 | DeviceGenerationId |此反馈信息所属的云到设备的消息的目标设备的 **DeviceGenerationId**。 |
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 服务必须指定云到设备的消息的 **MessageId**，才能将其反馈与原始消息相关联。
 > 
 > 
 
 以下示例演示了反馈消息的正文。
 
-	[
-	  {
-	    "OriginalMessageId": "0987654321",
-	    "EnqueuedTimeUtc": "2015-07-28T16:24:48.789Z",
-	    "StatusCode": 0
-	    "Description": "Success",
-	    "DeviceId": "123",
-	    "DeviceGenerationId": "abcdefghijklmnopqrstuvwxyz"
-	  },
-	  {
-	    ...
-	  },
-	  ...
-	]
-
+```
+[
+  {
+    "OriginalMessageId": "0987654321",
+    "EnqueuedTimeUtc": "2015-07-28T16:24:48.789Z",
+    "StatusCode": 0
+    "Description": "Success",
+    "DeviceId": "123",
+    "DeviceGenerationId": "abcdefghijklmnopqrstuvwxyz"
+  },
+  {
+    ...
+  },
+  ...
+]
+```
 
 ### <a name="cloud-to-device-configuration-options"></a> 云到设备的配置选项
 每个 IoT 中心都针对云到设备的消息传送公开以下配置选项。
@@ -225,7 +227,6 @@ IoT 中心还支持用户管理内置设备到云接收终结点上的使用者�
 | feedback.maxDeliveryCount | 反馈队列的最大传送计数。 | 1 到 100。默认值：100。 |
 
 有关详细信息，请参阅[创建 IoT 中心][lnk-portal]。
-
 
 ## <a name="read-device-to-cloud-messages"></a> 读取设备到云的消息
 IoT 中心向后端服务公开内置终结点，以便让后端服务读取中心 - 即 **messages/events** 终结点收到的设备到云的消息。此终结点与事件中心兼容，这样就可以使用事件中心服务支持的任何机制读取消息。
@@ -240,15 +241,15 @@ IoT 中心向后端服务公开内置终结点，以便让后端服务读取中�
 
 1. 单击“IoT 中心边栏选项卡”中的“终结点”。
 2. 在“内置终结点”部分，单击“事件”。边栏选项卡包含以下值：“事件中心兼容的终结点”、“事件中心兼容的名称”、“分区”、“保留时间”和“使用者组”。
-   
+
     ![设备到云的设置][img-eventhubcompatible]  
 
-> [AZURE.NOTE]
+> [!NOTE]
 IoT 中心 SDK 需要 IoT 中心终结点名称，即“终结点”边栏选项卡中所示的 **messages/events**。
 >
 >
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果当前使用的 SDK 需要“主机名”或“命名空间”值，请从“事件中心兼容的终结点”中删除方案。例如，如果与事件中心兼容的终结点为 **sb://iothub-ns-myiothub-1234.servicebus.chinacloudapi.cn/**，则**主机名**为 **iothub-ns-myiothub-1234.servicebus.chinacloudapi.cn**，**命名空间**为 **iothub-ns-myiothub-1234**。
 > 
 >
@@ -264,12 +265,11 @@ Endpoint={Event Hub-compatible endpoint};SharedAccessKeyName={iot hub policy nam
 以下是可以配合 IoT 中心公开的事件中心兼容终结点使用的 SDK 和集成项目列表：
 
 - [Java 事件中心客户端](https://github.com/hdinsight/eventhubs-client)
-- [Apache Storm Spout](/documentation/articles/hdinsight-storm-develop-csharp-event-hub-topology/)。可以在 GitHub 上查看 [Spout 源代码](https://github.com/apache/storm/tree/master/external/storm-eventhubs)。
+- [Apache Storm Spout](../hdinsight/hdinsight-storm-develop-csharp-event-hub-topology.md)。可以在 GitHub 上查看 [Spout 源代码](https://github.com/apache/storm/tree/master/external/storm-eventhubs)。
 
 ## 参考主题：
 
 以下参考主题提供有关与 IoT 中心交换消息的详细信息。
-
 
 ## <a name="message-format"></a> 消息格式
 IoT 中心消息包含：
@@ -323,7 +323,8 @@ IoT 中心允许设备使用 [MQTT][lnk-mqtt]、基于 WebSocket 的 MQQT、[AMQ
 * **网络遍历**。标准 AMQP 协议使用端口 5671，而 MQTT 在端口 8883 上侦听，这可能会导致对非 HTTP 协议关闭的网络发生问题。基于 WebSocket 的 MQTT、基于 WebSocket 的 AMQP 和 HTTP 均可用于此方案。
 * **有效负载大小**。MQTT 和 AMQP 是二进制协议，因此其有效负载比 HTTP 的有效负载更精简。
 
-> [AZURE.NOTE] 使用 HTTP 时，每台设备应每 25 分钟或更长时间轮询一次云到设备消息。但在开发期间，可按低于 25 分钟的更高频率进行轮询。
+> [!NOTE]
+> 使用 HTTP 时，每台设备应每 25 分钟或更长时间轮询一次云到设备消息。但在开发期间，可按低于 25 分钟的更高频率进行轮询。
 
 ## 端口号
 
@@ -339,7 +340,6 @@ IoT 中心允许设备使用 [MQTT][lnk-mqtt]、基于 WebSocket 的 MQQT、[AMQ
 | LWM2M（设备管理） |5684 |
 
 在 Azure 区域创建 IoT 中心后，该 IoT 中心在其生存期内会保留同一 IP 地址。但为了保证服务质量，如果 Microsoft 调整 IoT 中心的大小，则向其分配新 IP 地址。
-
 
 ## <a name="notes-on-mqtt-support"></a> 有关 MQTT 支持的说明
 IoT 中心实现 MQTT v3.1.1 协议，但具有以下限制和特定行为：
@@ -376,61 +376,60 @@ IoT 中心开发人员指南中的其他参考主题包括：
 - [如何使用 IoT 中心发送云到设备的消息][lnk-c2d-tutorial]
 - [如何处理 IoT 中心设备到云的消息][lnk-d2c-tutorial]
 
-
 [img-lifecycle]: ./media/iot-hub-devguide-messaging/lifecycle.png
 [img-eventhubcompatible]: ./media/iot-hub-devguide-messaging/eventhubcompatible.png
 
 [lnk-resource-provider-apis]: https://msdn.microsoft.com/zh-cn/library/mt548492.aspx
-[lnk-azure-gateway-guidance]: /documentation/articles/iot-hub-devguide-endpoints/#field-gateways
-[lnk-guidance-scale]: /documentation/articles/iot-hub-scaling/
-[lnk-azure-protocol-gateway]: /documentation/articles/iot-hub-protocol-gateway/
+[lnk-azure-gateway-guidance]: ./iot-hub-devguide-endpoints.md#field-gateways
+[lnk-guidance-scale]: ./iot-hub-scaling.md
+[lnk-azure-protocol-gateway]: ./iot-hub-protocol-gateway.md
 [lnk-amqp]: http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf
 [lnk-mqtt]: http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.pdf
-[lnk-event-hubs]: /documentation/services/event-hubs/
-[lnk-event-hubs-consuming-events]: /documentation/articles/event-hubs-programming-guide/#event-consumers
+[lnk-event-hubs]: ../event-hubs/index.md
+[lnk-event-hubs-consuming-events]: ../event-hubs/event-hubs-programming-guide.md#event-consumers
 [lnk-management-portal]: https://portal.azure.cn
-[lnk-servicebus]: /documentation/services/service-bus/
-[lnk-eventhub-partitions]: /documentation/articles/event-hubs-overview/#partitions
-[lnk-portal]: /documentation/articles/iot-hub-create-through-portal/
-[lnk-getstarted-eh]: /documentation/articles/event-hubs-csharp-ephcs-getstarted/
-[lnk-getstarted-queue]: /documentation/articles/service-bus-dotnet-get-started-with-queues/
-[lnk-getstarted-topic]: /documentation/articles/service-bus-dotnet-how-to-use-topics-subscriptions/
+[lnk-servicebus]: ../service-bus/index.md
+[lnk-eventhub-partitions]: ../event-hubs/event-hubs-overview.md#partitions
+[lnk-portal]: ./iot-hub-create-through-portal.md
+[lnk-getstarted-eh]: ../event-hubs/event-hubs-csharp-ephcs-getstarted.md
+[lnk-getstarted-queue]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
+[lnk-getstarted-topic]: ../service-bus-messaging/service-bus-dotnet-how-to-use-topics-subscriptions.md
 
-[lnk-c2d-guidance]: /documentation/articles/iot-hub-devguide-c2d-guidance/
-[lnk-d2c-guidance]: /documentation/articles/iot-hub-devguide-d2c-guidance/
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-c2d]: /documentation/articles/iot-hub-devguide-messaging/#cloud-to-device-messages
-[lnk-compatible-endpoint]: /documentation/articles/iot-hub-devguide-messaging/#read-device-to-cloud-messages
-[lnk-protocols]: /documentation/articles/iot-hub-devguide-messaging/#communication-protocols
-[lnk-message-format]: /documentation/articles/iot-hub-devguide-messaging/#message-format
-[lnk-d2c-configuration]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-configuration-options
-[lnk-device-properties]: /documentation/articles/iot-hub-devguide-identity-registry/#device-identity-properties
-[lnk-ttl]: /documentation/articles/iot-hub-devguide-messaging/#message-expiration-time-to-live
-[lnk-c2d-configuration]: /documentation/articles/iot-hub-devguide-messaging/#cloud-to-device-configuration-options
-[lnk-lifecycle]: /documentation/articles/iot-hub-devguide-messaging/#message-lifecycle
-[lnk-feedback]: /documentation/articles/iot-hub-devguide-messaging/#message-feedback
-[lnk-antispoofing]: /documentation/articles/iot-hub-devguide-messaging/#anti-spoofing-properties
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
+[lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
+[lnk-d2c-guidance]: ./iot-hub-devguide-d2c-guidance.md
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-c2d]: ./iot-hub-devguide-messaging.md#cloud-to-device-messages
+[lnk-compatible-endpoint]: ./iot-hub-devguide-messaging.md#read-device-to-cloud-messages
+[lnk-protocols]: ./iot-hub-devguide-messaging.md#communication-protocols
+[lnk-message-format]: ./iot-hub-devguide-messaging.md#message-format
+[lnk-d2c-configuration]: ./iot-hub-devguide-messaging.md#device-to-cloud-configuration-options
+[lnk-device-properties]: ./iot-hub-devguide-identity-registry.md#device-identity-properties
+[lnk-ttl]: ./iot-hub-devguide-messaging.md#message-expiration-time-to-live
+[lnk-c2d-configuration]: ./iot-hub-devguide-messaging.md#cloud-to-device-configuration-options
+[lnk-lifecycle]: ./iot-hub-devguide-messaging.md#message-lifecycle
+[lnk-feedback]: ./iot-hub-devguide-messaging.md#message-feedback
+[lnk-antispoofing]: ./iot-hub-devguide-messaging.md#anti-spoofing-properties
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
 
-[lnk-devguide-upload]: /documentation/articles/iot-hub-devguide-file-upload/
-[lnk-devguide-identities]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-devguide-security]: /documentation/articles/iot-hub-devguide-security/
-[lnk-devguide-device-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-devguide-directmethods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
+[lnk-devguide-upload]: ./iot-hub-devguide-file-upload.md
+[lnk-devguide-identities]: ./iot-hub-devguide-identity-registry.md
+[lnk-devguide-security]: ./iot-hub-devguide-security.md
+[lnk-devguide-device-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-devguide-directmethods]: ./iot-hub-devguide-direct-methods.md
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
 [lnk-servicebus-sdk]: https://www.nuget.org/packages/WindowsAzure.ServiceBus
 [lnk-eventprocessorhost]: http://blogs.msdn.com/b/servicebus/archive/2015/01/16/event-processor-host-best-practices-part-1.aspx
-[lnk-devguide-query-language]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
+[lnk-devguide-query-language]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-endpoints]: ./iot-hub-devguide-endpoints.md
 
-[lnk-getstarted-tutorial]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[lnk-c2d-tutorial]: /documentation/articles/iot-hub-csharp-csharp-c2d/
-[lnk-d2c-tutorial]: /documentation/articles/iot-hub-csharp-csharp-process-d2c/
+[lnk-getstarted-tutorial]: ./iot-hub-csharp-csharp-getstarted.md
+[lnk-c2d-tutorial]: ./iot-hub-csharp-csharp-c2d.md
+[lnk-d2c-tutorial]: ./iot-hub-csharp-csharp-process-d2c.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording and add build-in endpoints-->

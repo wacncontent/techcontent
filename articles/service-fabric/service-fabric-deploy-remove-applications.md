@@ -1,26 +1,27 @@
-<properties
-    pageTitle="Service Fabric 应用程序部署 | Azure"
-    description="如何在 Service Fabric 中部署和删除应用程序"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="rwike77"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="b120ffbf-f1e3-4b26-a492-347c29f8f66b"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="12/16/2016"
-    wacn.date="01/20/2017"
-    ms.author="ryanwi" />
+---
+title: Service Fabric 应用程序部署 | Azure
+description: 如何在 Service Fabric 中部署和删除应用程序
+services: service-fabric
+documentationcenter: .net
+author: rwike77
+manager: timlt
+editor: ''
+
+ms.assetid: b120ffbf-f1e3-4b26-a492-347c29f8f66b
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 12/16/2016
+wacn.date: 01/20/2017
+ms.author: ryanwi
+---
 
 #<a name="deploy-an-application"></a> 使用 PowerShell 部署和删除应用程序
->[AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/service-fabric-deploy-remove-applications/)
-- [Visual Studio](/documentation/articles/service-fabric-publish-app-remote-cluster/)
+>[!div class="op_single_selector"]
+- [PowerShell](./service-fabric-deploy-remove-applications.md)
+- [Visual Studio](./service-fabric-publish-app-remote-cluster.md)
 
 [打包应用程序类型后][10]，就可以部署到 Azure Service Fabric 群集中。部署涉及以下三个步骤：
 
@@ -28,24 +29,26 @@
 2. 注册应用程序类型
 3. 创建应用程序实例
 
->[AZURE.NOTE] 如果使用 Visual Studio 在本地开发群集上部署和调试应用程序，则通过 PowerShell 脚本自动处理以下步骤。此脚本可在应用程序项目的“Scripts”文件夹中找到。本文提供有关这些脚本所执行操作的背景，让用户可以在 Visual Studio 外部执行相同的操作。
+>[!NOTE]
+> 如果使用 Visual Studio 在本地开发群集上部署和调试应用程序，则通过 PowerShell 脚本自动处理以下步骤。此脚本可在应用程序项目的“Scripts”文件夹中找到。本文提供有关这些脚本所执行操作的背景，让用户可以在 Visual Studio 外部执行相同的操作。
 
 ## 上传应用程序包
 上传应用程序包会将其放在可由内部 Service Fabric 组件访问的位置。可使用 PowerShell 执行上传。在运行本文中的任何 PowerShell 命令之前，请始终先使用 [Connect-ServiceFabricCluster](https://docs.microsoft.com/powershell/servicefabric/vlatest/connect-servicefabriccluster) 连接到 Service Fabric 群集。
 
 假设您有一个名为 *MyApplicationType* 的文件夹，其中包含必要的应用程序清单、服务清单以及代码/配置/数据包。[Copy-ServiceFabricApplicationPackage](https://docs.microsoft.com/powershell/servicefabric/vlatest/copy-servicefabricapplicationpackage) 命令可将包上传到群集映像存储。Service Fabric SDK PowerShell 模块中包含的 **Get-ImageStoreConnectionStringFromClusterManifest** cmdlet 用于获取映像存储连接字符串。要导入 SDK 模块，请运行：
 
-
-	Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
-
+```
+Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
+```
 
 可以将应用程序包从 *C:\\users\\ryanwi\\Documents\\Visual Studio 2015\\Projects\\MyApplication\\myapplication\\pkg\\debug* 复制到 *c:\\temp\\MyApplicationType* （将“debug”目录重命名为“MyApplicationType”）。以下示例将上传包：
 
 ~~~
 PS C:\temp> dir
 
-    Directory: c:\temp
-
+```
+Directory: c:\temp
+```
 
 Mode                LastWriteTime         Length Name                                                                                   
 ----                -------------         ------ ----                                                                                   
@@ -199,38 +202,37 @@ PS D:\temp>
 ### Copy-ServiceFabricApplicationPackage 请求 ImageStoreConnectionString
 Service Fabric SDK 环境应已默认设置正确。若有需要，所有命令的 ImageStoreConnectionString 都应匹配 Service Fabric 群集使用的值。可以在使用 [Get-ServiceFabricClusterManifest](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricclustermanifest) 命令检索到的群集清单中找到 ImageStoreConnectionString：
 
-
-	PS D:\temp> Get-ServiceFabricClusterManifest
-
+```powershell
+PS D:\temp> Get-ServiceFabricClusterManifest
+```
 
 在群集清单中找到 ImageStoreConnectionString：
 
+```xml
+<ClusterManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Server-Default-SingleNode" Version="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
 
-	<ClusterManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Server-Default-SingleNode" Version="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+    [...]
 
-	    [...]
+    <Section Name="Management">
+      <Parameter Name="ImageStoreConnectionString" Value="file:D:\ServiceFabric\Data\ImageStore" />
+    </Section>
 
-	    <Section Name="Management">
-	      <Parameter Name="ImageStoreConnectionString" Value="file:D:\ServiceFabric\Data\ImageStore" />
-	    </Section>
-
-	    [...]
-
+    [...]
+```
 
 ## 后续步骤
 
-[Service Fabric 应用程序升级](/documentation/articles/service-fabric-application-upgrade/)
+[Service Fabric 应用程序升级](./service-fabric-application-upgrade.md)
 
-[Service Fabric 运行状况简介](/documentation/articles/service-fabric-health-introduction/)
+[Service Fabric 运行状况简介](./service-fabric-health-introduction.md)
 
-[对 Service Fabric 进行诊断和故障排除](/documentation/articles/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/)
+[对 Service Fabric 进行诊断和故障排除](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)
 
-[在 Service Fabric 中对应用程序建模](/documentation/articles/service-fabric-application-model/)
+[在 Service Fabric 中对应用程序建模](./service-fabric-application-model.md)
 
 <!--Link references--In actual articles, you only need a single period before the slash-->
-[10]: /documentation/articles/service-fabric-application-model/
-[11]: /documentation/articles/service-fabric-application-upgrade/
- 
+[10]: ./service-fabric-application-model.md
+[11]: ./service-fabric-application-upgrade.md
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--update: add selector at the beginning; wording update; remove some cmds-->

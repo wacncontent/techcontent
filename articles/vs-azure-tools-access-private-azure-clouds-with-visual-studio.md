@@ -1,23 +1,22 @@
-<properties 
-   pageTitle="使用 Visual Studio 访问私有 Azure 云 | Azure"
-   description="了解如何通过使用 Visual Studio 访问私有云资源。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />  
+---
+title: 使用 Visual Studio 访问私有 Azure 云 | Azure
+description: 了解如何通过使用 Visual Studio 访问私有云资源。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags 
-	ms.assetid="9d733c8d-703b-44e7-a210-bb75874c45c8"
-	ms.service="multiple"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="multiple"
-	ms.date="11/11/2016"
-	ms.author="tarcher"
-	wacn.date="02/04/2017" />
-
+ms.assetid: 9d733c8d-703b-44e7-a210-bb75874c45c8
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+ms.author: tarcher
+wacn.date: 02/04/2017
+---
 
 # 使用 Visual Studio 访问私有 Azure 云
 
@@ -40,7 +39,6 @@
 1. 在“导入 Microsoft Azure 订阅”对话框中，浏览到保存发布设置文件的文件夹，选择文件，然后选择“导入”按钮。这会将发布设置文件中的证书导入到 Visual Studio 中。现在，你应该能够与你的私有云资源进行交互。
 
     ![导入发布设置](./media/vs-azure-tools-access-private-azure-clouds-with-visual-studio/IC790780.png)  
-
 
 ## 后续步骤
 

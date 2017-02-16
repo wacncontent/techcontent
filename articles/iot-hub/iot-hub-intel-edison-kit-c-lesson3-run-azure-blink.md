@@ -1,23 +1,23 @@
-<properties
-    pageTitle="运行示例应用程序，将设备到云消息发送到 Azure IoT 中心 | Azure"
-    description="在 Intel Edison 上部署并运行示例应用程序，将消息发送到 IoT 中心并使 LED 闪烁。"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="iot 云服务, arduino 向云发送数据" />
-<tags
-    ms.assetid="12672b64-795a-4dfc-86fd-df53ed3eeef7"
-    ms.service="iot-hub"
-    ms.devlang="c"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/8/2016"
-    wacn.date="01/06/2017"
-    ms.author="xshi" />  
+---
+title: 运行示例应用程序，将设备到云消息发送到 Azure IoT 中心 | Azure
+description: 在 Intel Edison 上部署并运行示例应用程序，将消息发送到 IoT 中心并使 LED 闪烁。
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: iot 云服务, arduino 向云发送数据
 
+ms.assetid: 12672b64-795a-4dfc-86fd-df53ed3eeef7
+ms.service: iot-hub
+ms.devlang: c
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/8/2016
+wacn.date: 01/06/2017
+ms.author: xshi
+---
 
 # 运行示例应用程序，以便发送从设备到云的消息
 ## 执行的操作
@@ -34,50 +34,50 @@
 
 * 运行以下 Azure CLI 命令，列出资源组中的所有 IoT 中心：
 
-
-		az iot hub list -g iot-sample --query [].name
-
+    ```bash
+    az iot hub list -g iot-sample --query [].name
+    ```
 
     使用 `iot-sample` 作为 `{resource group name}` 的值（如果尚未更改此值）。
 
 * 运行以下 Azure CLI 命令，获取 IoT 中心连接字符串：
 
-
-		az iot hub show-connection-string --name {my hub name}
-
+    ```bash
+    az iot hub show-connection-string --name {my hub name}
+    ```
 
     `{my hub name}` 是创建 IoT 中心和注册 Edison 时指定的名称。
 
 * 运行以下命令，获取设备连接字符串：
 
-
-		az iot device show-connection-string --hub-name {my hub name} --device-id myinteledison
-
+    ```bash
+    az iot device show-connection-string --hub-name {my hub name} --device-id myinteledison
+    ```
 
     使用 `myinteledison` 作为 `{device id}` 的值（如果尚未更改此值）。
 
 ## 配置设备连接
 1. 运行以下命令初始化配置文件：
 
-   
-		   npm install
-		   gulp init
-   
-    > [AZURE.NOTE]
+    ```bash
+       npm install
+       gulp init
+    ```
+
+    > [!NOTE]
     > 如果尚未在第 1 课中完成，请同时运行 **gulp install-tools**。
 
 2. 运行以下命令，在 Visual Studio Code 中打开设备配置文件 `config-edison.json`：
 
-   
-		   # For Windows command prompt
-		   code %USERPROFILE%\.iot-hub-getting-started\config-edison.json
+    ```bash
+       # For Windows command prompt
+       code %USERPROFILE%\.iot-hub-getting-started\config-edison.json
 
-		   # For MacOS or Ubuntu
-		   code ~/.iot-hub-getting-started/config-edison.json
-   
+       # For MacOS or Ubuntu
+       code ~/.iot-hub-getting-started/config-edison.json
+    ```
 
     ![config.json](./media/iot-hub-intel-edison-lessons/lesson3/config.png)  
-
 
 3. 在 `config-edison.json` 文件中进行以下替换：
 
@@ -85,21 +85,20 @@
    * 将 **[IoT 设备连接字符串]** 替换为获得的 `device connection string`。
    * 将 **[IoT 中心连接字符串]** 替换为获得的 `iot hub connection string`。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     > 本文中不需要 `azure_storage_connection_string`。请保留该名称。
 
 ## 部署并运行示例应用程序
 运行以下命令，在 Edison 上部署并运行示例应用程序：
 
-
-    gulp deploy && gulp run
-
+```bash
+gulp deploy && gulp run
+```
 
 ## 验证示例应用程序是否正常运行
 应看到连接到 Edison 的 LED 每隔两秒闪烁一次。每次 LED 闪烁时，示例应用程序都会将消息发送到 IoT 中心，并验证该消息是否已成功发送到 IoT 中心。此外，IoT 中心收到的每条消息都会在控制台窗口输出。示例应用程序发送 20 条消息后会自动终止。
 
 ![包含已发送和已接收消息的示例应用程序][sample-application-with-sent-and-received-messages]  
-
 
 ## 摘要
 已在 Edison 上部署和运行新的 blink 示例应用程序，目的是将设备到云消息发送到 IoT 中心。现可在将消息写入存储帐户时对其进行监视。
@@ -108,10 +107,9 @@
 [读取保存在 Azure 存储中的消息][read-messages-persisted-in-azure-storage]
 <!-- Images and links -->
 
-
-[troubleshooting]: /documentation/articles/iot-hub-intel-edison-kit-c-troubleshooting/
-[process-and-store-iot-hub-messages]: /documentation/articles/iot-hub-intel-edison-kit-c-lesson3-deploy-resource-manager-template/
+[troubleshooting]: ./iot-hub-intel-edison-kit-c-troubleshooting.md
+[process-and-store-iot-hub-messages]: ./iot-hub-intel-edison-kit-c-lesson3-deploy-resource-manager-template.md
 [sample-application-with-sent-and-received-messages]: ./media/iot-hub-intel-edison-lessons/lesson3/gulp_run_c.png
-[read-messages-persisted-in-azure-storage]: /documentation/articles/iot-hub-intel-edison-kit-c-lesson3-read-table-storage/
+[read-messages-persisted-in-azure-storage]: ./iot-hub-intel-edison-kit-c-lesson3-read-table-storage.md
 
 <!---HONumber=Mooncake_0103_2017-->

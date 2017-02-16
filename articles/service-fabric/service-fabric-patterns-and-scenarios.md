@@ -1,25 +1,25 @@
-<properties
-    pageTitle="Azure Service Fabric 模式和应用场景 | Azure"
-    description="了解最佳做法和经验证的可重复使用的模式，以便在 Service Fabric 上设计、开发和操作你的微服务。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="rwike77"
-    manager="timlt" />
-<tags
-    ms.assetid="d5aa75ff-98b9-4573-a2e5-7f5ab288157a"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="11/30/2016"
-    wacn.date="01/20/2017"
-    ms.author="ryanwi" />  
+---
+title: Azure Service Fabric 模式和应用场景 | Azure
+description: 了解最佳做法和经验证的可重复使用的模式，以便在 Service Fabric 上设计、开发和操作你的微服务。
+services: service-fabric
+documentationcenter: .net
+author: rwike77
+manager: timlt
 
+ms.assetid: d5aa75ff-98b9-4573-a2e5-7f5ab288157a
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/30/2016
+wacn.date: 01/20/2017
+ms.author: ryanwi
+---
 
 # Service Fabric 模式和应用场景
 如果你正在寻求如何使用 Azure Service Fabric 构建大规模的微服务，那么可以向设计和构建平台即服务 (PaaS) 的专家咨询。从构建合适的体系结构开始，然后了解如何优化应用程序的资源。[Service Fabric 模式和实践](https://mva.microsoft.com/en-us/training-courses/service-fabric-patterns-and-practices-16925?l=mudwqISGD_6005167344)课程回答了实际客户最常询问的有关 Service Fabric 应用场景和应用领域的问题。
- 
+
 了解如何使用最佳做法和经验证的可重复使用的模式在 Service Fabric 上设计、开发和操作你的微服务。了解 Service Fabric 的基本知识，然后深入探讨相关主题，包括群集优化和安全性、迁移旧的应用、大规模的 IoT、托管游戏引擎等等。
 
 ## 介绍
@@ -85,8 +85,7 @@
 </a></td><td><a target="_blank" href="https://mva.microsoft.com/en-us/training-courses/service-fabric-patterns-and-practices-16925?l=GQAq4QSGD_8305167344">迁移</a></td></tr>
 </table>
 
-
 ## 后续步骤
-现在，你已了解 Service Fabric 模式和应用场景，请阅读有关如何[创建和管理群集](/documentation/articles/service-fabric-deploy-anywhere/)、[将云服务应用迁移到 Service Fabric](/documentation/articles/service-fabric-cloud-services-migration-worker-role-stateless-service/)和[设置持续交付](/documentation/articles/service-fabric-set-up-continuous-integration/)的详细信息。
+现在，你已了解 Service Fabric 模式和应用场景，请阅读有关如何[创建和管理群集](./service-fabric-deploy-anywhere.md)、[将云服务应用迁移到 Service Fabric](./service-fabric-cloud-services-migration-worker-role-stateless-service.md)和[设置持续交付](./service-fabric-set-up-continuous-integration.md)的详细信息。
 
 <!---HONumber=Mooncake_0116_2017-->

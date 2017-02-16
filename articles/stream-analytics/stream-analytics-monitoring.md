@@ -1,23 +1,22 @@
-<properties 
-	pageTitle="了解流分析作业监视 | Azure" 
-	description="了解流分析作业监视" 
-	keywords="查询监视器"
-	services="stream-analytics" 
-	documentationCenter="" 
-	authors="jeffstokes72" 
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: 了解流分析作业监视 | Azure
+description: 了解流分析作业监视
+keywords: 查询监视器
+services: stream-analytics
+documentationCenter: ''
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags 
-	ms.service="stream-analytics" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.tgt_pltfrm="na" 
-	ms.workload="data-services" 
-	ms.date="11/11/2016"
-	wacn.date="12/05/2016"
-	ms.author="jeffstok"/>
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 11/11/2016
+wacn.date: 12/05/2016
+ms.author: jeffstok
+---
 
 # 了解流分析作业监视以及如何监视查询
 ## 简介：“监视”页
@@ -63,7 +62,7 @@ Azure 经典管理门户和 Azure 门户预览都提供了可用于监视和故�
 你可以设置规则，在作业超过定义的阈值时以电子邮件的方式通知你。
 
 ## 在 Azure 门户预览中自定义监视
-可以在“编辑图表”设置中调整图表类型、显示的指标和时间范围。有关详细信息，请参阅[如何自定义监视](/documentation/articles/insights-how-to-customize-monitoring/)。
+可以在“编辑图表”设置中调整图表类型、显示的指标和时间范围。有关详细信息，请参阅[如何自定义监视](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md)。
 
   ![查询监视器时间关系图](./media/stream-analytics-monitoring/08-stream-analytics-monitoring.png)
 
@@ -94,9 +93,9 @@ Azure 经典管理门户和 Azure 门户预览都提供了可用于监视和故�
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
 
 ## 后续步骤
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 

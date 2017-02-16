@@ -1,23 +1,22 @@
-<properties
-    pageTitle="检索 Azure 导入/导出服务作业的状态信息 | Azure"
-    description="了解如何获取 Azure 导入/导出服务作业的状态信息"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 检索 Azure 导入/导出服务作业的状态信息 | Azure
+description: 了解如何获取 Azure 导入/导出服务作业的状态信息
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: ''
 
-<tags
-    ms.assetid="22d7e5f0-94da-49b4-a1ac-dd4c14a423c2"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/16/2016"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: 22d7e5f0-94da-49b4-a1ac-dd4c14a423c2
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/16/2016
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 检索作业的状态信息
 可以调用[获取作业](https://docs.microsoft.com/zh-CN/rest/api/storageimportexport/jobs#Jobs_Get)操作来检索有关导入和导出作业的信息。返回的信息包括：
@@ -36,7 +35,6 @@
 下面的表格和状态图描述了作业在其生命周期内经历的各种状态。可通过调用“`Get Job`”操作来确定作业的当前状态。
 
 ![JobStates](./media/storage-import-export-retrieving-state-info-for-a-job/JobStates.png "JobStates")  
-
 
 下表描述了作业可能经历的每种状态。
 
@@ -67,7 +65,6 @@
 
 ![DriveStates](./media/storage-import-export-retrieving-state-info-for-a-job/DriveStates.png "DriveStates")  
 
-
 下表描述了驱动器可能经历的每种状态。
 
 |驱动器状态|说明|
@@ -91,6 +88,6 @@
 当作业或驱动器未能正常完成其预期生命周期时，作业或驱动器将转换为 `Faulted` 状态。此时，运营团队将通过电子邮件或电话联系客户。解决问题后，出错的作业或驱动器将退出 `Faulted` 状态并转换为适当的状态。
 
 ## 另请参阅
-[使用导入/导出服务 REST API](/documentation/articles/storage-import-export-using-the-rest-api/)
+[使用导入/导出服务 REST API](./storage-import-export-using-the-rest-api.md)
 
 <!---HONumber=Mooncake_1226_2016-->

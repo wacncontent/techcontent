@@ -1,21 +1,21 @@
-<properties
-   pageTitle="为 Azure 虚拟机中的 SQL Server AlwaysOn 可用性组创建侦听器"
-   description="有关为 Azure 虚拟机中的 SQL Server AlwaysOn 可用性组创建侦听器的分步说明"
-   services="virtual-machines"
-   documentationCenter="na"
-   authors="MikeRayMSFT"
-   manager="jhubbard"
-   editor="monicar"/>
+---
+title: 为 Azure 虚拟机中的 SQL Server AlwaysOn 可用性组创建侦听器
+description: 有关为 Azure 虚拟机中的 SQL Server AlwaysOn 可用性组创建侦听器的分步说明
+services: virtual-machines
+documentationCenter: na
+authors: MikeRayMSFT
+manager: jhubbard
+editor: monicar
 
-<tags
-   ms.service="virtual-machines-windows"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows-sql-server"
-   ms.workload="infrastructure-services"
-   ms.date="11/28/2016"
-   wacn.date="01/25/2017"
-   ms.author="MikeRayMSFT"/>
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 11/28/2016
+wacn.date: 01/25/2017
+ms.author: MikeRayMSFT
+---
 
 # 在 Azure 中为 AlwaysOn 可用性组配置内部负载均衡器
 
@@ -23,15 +23,15 @@
 
 若要完成此任务，需要在 Resource Manager 模型中的 Azure 虚拟机上部署 SQL Server AlwaysOn 可用性组。这两个 SQL Server 虚拟机必须属于同一个可用性集。
 
-如果需要，你可以[手动配置 AlwaysOn 可用性组](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/)。
+如果需要，你可以[手动配置 AlwaysOn 可用性组](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)。
 
 本主题要求事先配置可用性组。
 
 相关主题包括：
 
- - [在 Azure VM (GUI) 中配置 AlwaysOn 可用性组](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/)   
- 
- - [使用 Azure Resource Manager 和 PowerShell 配置 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)
+ - [在 Azure VM (GUI) 中配置 AlwaysOn 可用性组](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)   
+
+ - [使用 Azure Resource Manager 和 PowerShell 配置 VNet 到 VNet 连接](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)
 
 ## 步骤
 
@@ -49,7 +49,8 @@
 
 1. 设置负载均衡规则
 
->[AZURE.NOTE] 如果 SQL Server 位于不同的资源组和区域，则需要执行上述所有步骤两次：在每个资源组中各执行一次。
+>[!NOTE]
+> 如果 SQL Server 位于不同的资源组和区域，则需要执行上述所有步骤两次：在每个资源组中各执行一次。
 
 ## 1\.创建负载均衡器并配置 IP 地址
 
@@ -90,8 +91,6 @@ Azure 将创建上面配置的负载均衡器。该负载均衡器属于特定�
 - 保存设置。
 
 现在，负载均衡器有了一个 IP 地址。请记下此 IP 地址。当你在群集上创建侦听器时，将要用到此 IP 地址。本文稍后的 PowerShell 脚本会将此地址用于 `$ILBIP` 变量。
-
-
 
 ## 2\.配置后端池
 
@@ -135,7 +134,8 @@ Azure 将更新后端地址池的设置。现在，可用性集具有包含两�
 
 - 单击**“确定”**。 
 
->[AZURE.NOTE] 确保指定的端口已在两个 SQL Server 的防火墙上打开。这两个服务器需要所用 TCP 端口的入站规则。有关详细信息，请参阅 [Add or Edit Firewall Rule（添加或编辑防火墙规则）](http://technet.microsoft.com/zh-cn/library/cc753558.aspx)。
+>[!NOTE]
+> 确保指定的端口已在两个 SQL Server 的防火墙上打开。这两个服务器需要所用 TCP 端口的入站规则。有关详细信息，请参阅 [Add or Edit Firewall Rule（添加或编辑防火墙规则）](http://technet.microsoft.com/zh-cn/library/cc753558.aspx)。
 
 Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可用性组的侦听器。
 
@@ -160,7 +160,8 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 | **空闲超时(分钟)** | *4* | 
 | **浮动 IP (直接服务器返回)** | **已启用** | 
 
- >[AZURE.NOTE] 可能需要在边栏选项卡中向下滚动才能看到所有设置。
+ >[!NOTE]
+ > 可能需要在边栏选项卡中向下滚动才能看到所有设置。
 
 - 单击**“确定”**。 
 
@@ -168,7 +169,8 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 
 此时，资源组有一个连接到这两个 SQL Server 计算机的负载均衡器。负载均衡器还包含 SQL Server AlwaysOn 可用性组侦听器的 IP 地址，以便任一计算机可以响应针对可用性组的请求。
 
->[AZURE.NOTE] 如果 SQL Server 位于两个不同的区域，请在另一个区域重复上述步骤。每个区域都需要一个负载均衡器。
+>[!NOTE]
+> 如果 SQL Server 位于两个不同的区域，请在另一个区域重复上述步骤。每个区域都需要一个负载均衡器。
 
 ## 将群集配置为使用负载均衡器 IP 地址 
 
@@ -194,7 +196,8 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 
 - 在“名称”框中，为此新的侦听器创建一个名称，单击“下一步”两次，然后单击“完成”。不要在此时使侦听器或资源联机。
 
- >[AZURE.NOTE] 新侦听器的名称是应用程序用来连接 SQL Server 可用性组中数据库的网络名称。
+ >[!NOTE]
+ > 新侦听器的名称是应用程序用来连接 SQL Server 可用性组中数据库的网络名称。
 
 - 单击“资源”选项卡，然后展开刚创建的客户端访问点。右键单击 IP 资源，然后单击“属性”。记下 IP 地址的名称。你将在 PowerShell 脚本的 `$IPResourceName` 变量中使用此名称。
 
@@ -202,17 +205,20 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 
 - 在当前托管主副本的群集节点上，打开已提升权限的 PowerShell ISE，然后将以下命令粘贴到新脚本中。
 
-        $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
-        $IPResourceName = "<IPResourceName>" # the IP Address resource name
-        $ILBIP = "<X.X.X.X>" # the IP Address of the Internal Load Balancer (ILB). This is the static IP address for the load balancer you configured in the Azure portal.
-    
-        Import-Module FailoverClusters
-    
-        Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"="59999";"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
+    ```
+    $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
+    $IPResourceName = "<IPResourceName>" # the IP Address resource name
+    $ILBIP = "<X.X.X.X>" # the IP Address of the Internal Load Balancer (ILB). This is the static IP address for the load balancer you configured in the Azure portal.
+
+    Import-Module FailoverClusters
+
+    Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"="59999";"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
+    ```
 
 - 更新变量并运行 PowerShell 脚本，以配置新侦听器的 IP 地址和端口。
 
- >[AZURE.NOTE] 如果 SQL Server 位于不同的区域，则需要运行 PowerShell 脚本两次。第一次使用第一个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。第二次使用第二个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。
+ >[!NOTE]
+ > 如果 SQL Server 位于不同的区域，则需要运行 PowerShell 脚本两次。第一次使用第一个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。第二次使用第二个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。
 
 现在，群集包含可用性组侦听器资源。
 
@@ -226,20 +232,15 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 
 - 右键单击侦听器名称，然后单击“联机”。
 
-
 - 侦听器处于联机状态后，在“资源”选项卡上，右键单击可用性组，然后单击“属性”。
 
 - 在侦听器名称资源（而不是 IP 地址资源名称）上创建依赖项。单击**“确定”**。
 
-
 - 启动 SQL Server Management Studio 并连接到主副本。
-
 
 - 导航到“AlwaysOn 高可用性”|“可用性组”|“可用性组侦听器”。
 
-
 - 你现在应看到在故障转移群集管理器中创建的侦听器名称。右键单击侦听器名称，然后单击“属性”。
-
 
 - 在“端口”框中，通过使用先前使用过的 $EndpointPort 为可用性组侦听器指定端口号（默认值为 1433），然后单击“确定”。
 
@@ -253,7 +254,9 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 
 1. 使用 **sqlcmd** 实用工具来测试连接。例如，以下脚本通过侦听器与 Windows 身份验证来与主副本建立 **sqlcmd** 连接：
 
-        sqlcmd -S <listenerName> -E
+    ```
+    sqlcmd -S <listenerName> -E
+    ```
 
 SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。
 
@@ -264,6 +267,5 @@ SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。
 - 每个云服务只支持一个内部可用性组侦听器，因为该侦听器将配置给负载均衡器，并且只有一个内部负载均衡器。但是，可以创建多个外部侦听器。 
 
 - 使用内部负载均衡器只能从同一个虚拟网络中访问侦听器。
- 
 
 <!---HONumber=Mooncake_0613_2016-->

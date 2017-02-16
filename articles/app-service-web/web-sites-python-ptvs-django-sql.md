@@ -1,29 +1,28 @@
-<properties
-    pageTitle="具有 Python Tools 2.2 for Visual Studio 的 Azure 上的 Django 和 SQL 数据库"
-    description="了解如何使用 Python Tools for Visual Studio 来创建在 SQL 数据库实例中存储数据的 Django Web 应用，以及将应用部署到 Azure App Service Web Apps 中。"
-    services="app-service\web"
-    tags="python"
-    documentationcenter="python"
-    author="huguesv"
-    manager="wpickett"
-    editor="" />  
+---
+title: 具有 Python Tools 2.2 for Visual Studio 的 Azure 上的 Django 和 SQL 数据库
+description: 了解如何使用 Python Tools for Visual Studio 来创建在 SQL 数据库实例中存储数据的 Django Web 应用，以及将应用部署到 Azure App Service Web Apps 中。
+services: app-service\web
+tags: python
+documentationcenter: python
+author: huguesv
+manager: wpickett
+editor: ''
 
-<tags
-    ms.assetid="3a677e64-b5a9-4d43-b9c0-66246368b483"
-    ms.service="app-service-web"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="python"
-    ms.topic="article"
-    ms.date="07/07/2016"
-    wacn.date="12/26/2016"
-    ms.author="huguesv" />  
-
+ms.assetid: 3a677e64-b5a9-4d43-b9c0-66246368b483
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 07/07/2016
+wacn.date: 12/26/2016
+ms.author: huguesv
+---
 
 # 具有 Python Tools 2.2 for Visual Studio 的 Azure 上的 Django 和 SQL 数据库
 在本教程中，我们将使用 [Python Tools for Visual Studio] 通过一个 PTVS 样本模板创建简单的轮询 Web 应用。
 
-我们将了解如何使用在 Azure 上托管的 SQL 数据库、如何将 Web 应用配置为使用 SQL 数据库，以及如何将 Web 应用发布到 [Azure App Service Web Apps](/documentation/articles/app-service-changes-existing-services/) 中。
+我们将了解如何使用在 Azure 上托管的 SQL 数据库、如何将 Web 应用配置为使用 SQL 数据库，以及如何将 Web 应用发布到 [Azure App Service Web Apps](./app-service-changes-existing-services.md) 中。
 
 请访问 [Python 开发人员中心]，查看更多有关使用 PTVS 以及 Bottle、Flask 和 Django Web 框架、Azure 表存储、MySQL、SQL 数据库服务开发 Azure 应用服务 Web 应用的文章。虽然本文将着重介绍 App Service，但步骤与 [Azure 云服务]的开发步骤类似。
 
@@ -35,7 +34,7 @@
 * [Azure SDK Tools for VS 2015]
 * Django 1.9 或更高版本
 
-[AZURE.INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
+[!INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
 
 ## 创建项目
 在此部分中，我们使用样本模板创建 Visual Studio 项目。我们将创建虚拟环境并安装所需软件包。我们将创建一个使用 sqlite 的本地数据库。然后，我们将在本地运行 Web 应用。
@@ -71,7 +70,6 @@
 
       ![Web 浏览器](./media/web-sites-python-ptvs-django-sql/PollsDjangoSqliteBrowser.png)  
 
-
 ## 创建 SQL 数据库
 对于数据库，我们将创建 Azure SQL 数据库。
 
@@ -93,24 +91,28 @@
 
 1. 在 Visual Studio 中，打开“项目名称” 文件夹中的 **settings.py**。暂时将连接字符串粘贴在编辑器中。连接字符串是按以下格式：
 
-        Server=<ServerName>,<ServerPort>;Database=<DatabaseName>;User ID=<UserName>;Password={your\_password\_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    ```
+    Server=<ServerName>,<ServerPort>;Database=<DatabaseName>;User ID=<UserName>;Password={your\_password\_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    ```
 
 编辑 `DATABASES` 的定义，使用上面的值。
 
-        DATABASES = {
-            'default': {
-                'ENGINE': 'sql_server.pyodbc',
-                'NAME': '<DatabaseName>',
-                'USER': '<UserName>',
-                'PASSWORD': '{your_password_here}',
-                'HOST': '<ServerName>',
-                'PORT': '<ServerPort>',
-                'OPTIONS': {
-                    'driver': 'SQL Server Native Client 11.0',
-                    'MARS_Connection': 'True',
-                }
+```
+    DATABASES = {
+        'default': {
+            'ENGINE': 'sql_server.pyodbc',
+            'NAME': '<DatabaseName>',
+            'USER': '<UserName>',
+            'PASSWORD': '{your_password_here}',
+            'HOST': '<ServerName>',
+            'PORT': '<ServerPort>',
+            'OPTIONS': {
+                'driver': 'SQL Server Native Client 11.0',
+                'MARS_Connection': 'True',
             }
         }
+    }
+```
 
 1. 在“解决方案资源管理器”的“Python 环境”下，右键单击虚拟环境，然后选择“安装 Python 包”。
 2. 使用 **pip** 安装包 `pyodbc`。
@@ -159,11 +161,11 @@
 * [SQL 数据库]
 
 ## 发生的更改
-* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 <!--Link references-->
 [Python 开发人员中心]: /develop/python/
-[Azure 云服务]: /documentation/articles/cloud-services-python-ptvs/
+[Azure 云服务]: ../cloud-services/cloud-services-python-ptvs.md
 
 <!--External Link references-->
 
@@ -178,6 +180,6 @@
 [Web 项目]: http://go.microsoft.com/fwlink/?LinkId=624027
 [云服务项目]: http://go.microsoft.com/fwlink/?LinkId=624028
 [Django 文档]: https://www.djangoproject.com/
-[SQL 数据库]: /documentation/services/sql-databases/
+[SQL 数据库]: ../sql-database/index.md
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

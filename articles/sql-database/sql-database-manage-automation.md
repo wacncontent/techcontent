@@ -1,37 +1,33 @@
-<properties
-	pageTitle="使用 Azure 自动化管理 Azure SQL 数据库 | Azure"
-	description="了解如何使用 Azure 自动化服务来方便管理 Azure SQL 数据库。"
-	services="sql-database, automation"
-	documentationCenter=""
-	authors="jodoglevy"
-	manager="jhubbard"
-	editor="monicar"/>
+---
+title: 使用 Azure 自动化管理 Azure SQL 数据库 | Azure
+description: 了解如何使用 Azure 自动化服务来方便管理 Azure SQL 数据库。
+services: sql-database, automation
+documentationCenter: ''
+authors: jodoglevy
+manager: jhubbard
+editor: monicar
 
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="05/26/2016"
-	wacn.date="08/15/2016"
-	ms.author="jolevy"/>
-
-
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/26/2016
+wacn.date: 08/15/2016
+ms.author: jolevy
+---
 
 #使用 Azure 自动化管理 Azure SQL 数据库
 
 本指南介绍 Azure 自动化服务，以及如何使用它来简化 Azure SQL 数据库的管理。
 
-
 ## 什么是 Azure 自动化？
 
-[Azure 自动化](/home/features/automation/)是用于通过流程自动化简化云管理的一项 Azure 服务。使用 Azure 自动化可以自动完成那些长时间运行、人工操作、易出错和经常重复的任务，从而改善组织的可靠性、效率和价值生成时间。
+[Azure 自动化](https://www.azure.cn/home/features/automation/)是用于通过流程自动化简化云管理的一项 Azure 服务。使用 Azure 自动化可以自动完成那些长时间运行、人工操作、易出错和经常重复的任务，从而改善组织的可靠性、效率和价值生成时间。
 
 Azure 自动化提供高度可靠且高度可用的工作流执行引擎，它可以随着组织的发展，根据你的需求扩展。在 Azure 自动化中，流程可以手动、通过第三方系统或按计划的间隔启动，使任务能够完全根据需求进行。
 
 通过将云管理任务改为由 Azure 自动化自动运行，可以降低运营开销，解放 IT/开发运营人员，让他们将精力集中在增加企业价值的工作上。
-
 
 ## Azure 自动化如何帮助管理 Azure SQL 数据库？
 
@@ -50,9 +46,8 @@ Azure 自动化还可以通过使用 PowerShell 发出 SQL 命令，来与 SQL �
 
 在了解 Azure 自动化 以及如何使用它来管理 Azure SQL 数据库的基础知识后，请使用以下链接了解有关 Azure 自动化的更多信息。
 
-- [Azure 自动化概述](/documentation/articles/automation-intro/)
-- [我的第一个 Runbook](/documentation/articles/automation-first-runbook-textual/)
+- [Azure 自动化概述](../automation/automation-intro.md)
+- [我的第一个 Runbook](../automation/automation-first-runbook-textual.md)
 - [Azure 自动化：你在云中的 SQL 代理](https://azure.microsoft.com/blog/2014/06/26/azure-automation-your-sql-agent-in-the-cloud/)
- 
 
 <!---HONumber=Mooncake_0808_2016-->

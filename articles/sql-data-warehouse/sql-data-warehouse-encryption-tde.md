@@ -1,31 +1,29 @@
-<properties
-   pageTitle="SQL 数据仓库（门户）中的透明数据加密 | Azure"
-   description="SQL 数据仓库中的透明数据加密 (TDE)"
-   services="sql-data-warehouse"
-   documentationCenter=""
-   authors="ronortloff"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库（门户）中的透明数据加密 | Azure
+description: SQL 数据仓库中的透明数据加密 (TDE)
+services: sql-data-warehouse
+documentationCenter: ''
+authors: ronortloff
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.workload="data-management"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="10/31/2016" 
-   wacn.date="12/12/2016"
-   ms.author="rortloff;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: rortloff;barbkess;sonyama
+---
 
 # SQL 数据仓库中的透明数据加密 (TDE) 入门
 
-> [AZURE.SELECTOR]
-- [安全性概述](/documentation/articles/sql-data-warehouse-overview-manage-security/)
-- [身份验证](/documentation/articles/sql-data-warehouse-authentication/)
-- [加密（门户）](/documentation/articles/sql-data-warehouse-encryption-tde/)
-- [加密 (T-SQL)](/documentation/articles/sql-data-warehouse-encryption-tde-tsql/)
+> [!div class="op_single_selector"]
+- [安全性概述](./sql-data-warehouse-overview-manage-security.md)
+- [身份验证](./sql-data-warehouse-authentication.md)
+- [加密（门户）](./sql-data-warehouse-encryption-tde.md)
+- [加密 (T-SQL)](./sql-data-warehouse-encryption-tde-tsql.md)
 
 ## 所需的权限
 若要启用透明数据加密 (TDE)，用户必须是管理员或 dbmanager 角色的成员。

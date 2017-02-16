@@ -1,21 +1,21 @@
-<properties
-    pageTitle="已知网络 | Azure"
-    description="配置已知网络后，你可以避免将你组织拥有的 IP 地址包含在“从多个地理区域登录”和“从具有可疑活动的 IP 地址登录”报告中。"
-    services="active-directory"
-    documentationcenter=""
-    author="MarkusVi"
-    manager="femila" />
-<tags
-    ms.assetid="f56e042a-78d5-4ea3-be33-94004f2a0fc3"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/11/2017"
-    wacn.date="02/07/2017"
-    ms.author="markvi" />  
+---
+title: 已知网络 | Azure
+description: 配置已知网络后，你可以避免将你组织拥有的 IP 地址包含在“从多个地理区域登录”和“从具有可疑活动的 IP 地址登录”报告中。
+services: active-directory
+documentationcenter: ''
+author: MarkusVi
+manager: femila
 
+ms.assetid: f56e042a-78d5-4ea3-be33-94004f2a0fc3
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/11/2017
+wacn.date: 02/07/2017
+ms.author: markvi
+---
 
 # 已知网络
 你可以使用 Azure Active Directory 的访问和使用情况报告来监控你所在组织的目录的完整性和安全性。使用此信息，目录管理员可以更好地确定哪里可能存在安全风险，以便制定相应的计划来降低风险。

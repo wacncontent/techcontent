@@ -1,29 +1,28 @@
-<properties
-    pageTitle="使用 Azure 门户配置文件上载 | Azure"
-    description="如何使用 Azure 门户配置 IoT 中心，以便从连接的设备上传文件。包括有关配置目标 Azure 存储帐户的信息。"
-    services="iot-hub"
-    documentationcenter=""
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="915f1597-272d-4fd4-8c5b-a0ccb1df0d91"
-    ms.service="iot-hub"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/05/2017"
-    wacn.date="02/10/2017"
-    ms.author="dobett" />  
+---
+title: 使用 Azure 门户配置文件上载 | Azure
+description: 如何使用 Azure 门户配置 IoT 中心，以便从连接的设备上传文件。包括有关配置目标 Azure 存储帐户的信息。
+services: iot-hub
+documentationcenter: ''
+author: dominicbetts
+manager: timlt
+editor: ''
 
+ms.assetid: 915f1597-272d-4fd4-8c5b-a0ccb1df0d91
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/05/2017
+wacn.date: 02/10/2017
+ms.author: dobett
+---
 
 # 使用 Azure 门户预览配置 IoT 中心文件上传
 ## 文件上载
 若要使用 [IoT 中心的文件上载功能][lnk-upload]，必须先将 Azure 存储帐户与中心关联。选择“文件上传”设置，即可显示正在修改的 IoT 中心的文件上传属性列表。
 
 ![][13]  
-
 
 **存储容器**：使用 Azure 门户预览在当前 Azure 订阅中选择 Azure 存储帐户中的 Blob 容器，以便与 IoT 中心关联。如有必要，可在“存储帐户”边栏选项卡上创建 Azure 存储帐户，并在“容器”边栏选项卡上创建 Blob 容器。IoT 中心会自动生成对此 Blob 容器具有写入权限的 SAS URI，以供设备上传文件时使用。
 
@@ -39,7 +38,6 @@
 
 ![][15]  
 
-
 ## 后续步骤
 有关 IoT 中心文件上传功能的详细信息，请参阅 IoT 中心开发人员指南中的[从设备上传文件][lnk-upload]。
 
@@ -54,19 +52,18 @@
 * [IoT 中心开发人员指南][lnk-devguide]
 * [使用 IoT 网关 SDK 模拟设备][lnk-gateway]
 
-
   [13]: ./media/iot-hub-configure-file-upload/file-upload-settings.png
   [14]: ./media/iot-hub-configure-file-upload/file-upload-container-selection.png
   [15]: ./media/iot-hub-configure-file-upload/file-upload-selected-container.png
 
-[lnk-upload]: /documentation/articles/iot-hub-devguide-file-upload/
+[lnk-upload]: ./iot-hub-devguide-file-upload.md
 
-[lnk-bulk]: /documentation/articles/iot-hub-bulk-identity-mgmt/
-[lnk-metrics]: /documentation/articles/iot-hub-metrics/
-[lnk-monitor]: /documentation/articles/iot-hub-operations-monitoring/
+[lnk-bulk]: ./iot-hub-bulk-identity-mgmt.md
+[lnk-metrics]: ./iot-hub-metrics.md
+[lnk-monitor]: ./iot-hub-operations-monitoring.md
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update meta properties-->

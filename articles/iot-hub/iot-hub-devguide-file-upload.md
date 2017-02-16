@@ -1,22 +1,22 @@
-<properties
-    pageTitle="了解 Azure IoT 中心文件上传 | Azure"
-    description="开发人员指南 - 使用 IoT 中心的文件上传功能，可将文件从设备上传到 Azure 存储 blob 容器。"
-    services="iot-hub"
-    documentationcenter=".net"
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="a0427925-3e40-4fcd-96c1-2a31d1ddc14b"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/04/2017"
-    wacn.date="02/10/2017"
-    ms.author="dobett" />  
+---
+title: 了解 Azure IoT 中心文件上传 | Azure
+description: 开发人员指南 - 使用 IoT 中心的文件上传功能，可将文件从设备上传到 Azure 存储 blob 容器。
+services: iot-hub
+documentationcenter: .net
+author: dominicbetts
+manager: timlt
+editor: ''
 
+ms.assetid: a0427925-3e40-4fcd-96c1-2a31d1ddc14b
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/04/2017
+wacn.date: 02/10/2017
+ms.author: dobett
+---
 
 # 使用 IoT 中心上传文件
 ## 概述
@@ -36,48 +36,49 @@ IoT 中心本身不中转消息，而是充当关联 Azure 存储帐户的调度
 ## <a name="associate-an-azure-storage-account-with-iot-hub"></a> 将 Azure 存储帐户与 IoT 中心相关联
 若要使用文件上传功能，必须首先将 Azure 存储帐户链接到 IoT 中心。可以通过 [Azure 门户预览][lnk-management-portal]完成此任务，或通过 [IoT 中心资源提供程序 REST API][lnk-resource-provider-apis] 以编程方式完成此任务。将 Azure 存储帐户与 IoT 中心关联后，当设备启动文件上传请求时，此服务将向该设备返回 SAS URI。
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 > [Azure IoT SDK][lnk-sdks] 自动处理检索 SAS URI、上载文件和通知 IoT 中心已完成上载。
 > 
 
 ## <a name="initialize-a-file-upload"></a> 初始化文件上传
 IoT 中心有一个终结点，专供设备在上载文件时请求用于存储的 SAS URI。设备可以使用以下 JSON 正文向 IoT 中心的 `{iot hub}.azure-devices.cn/devices/{deviceId}/files` 发送 POST，从而启动文件上载过程：
 
-
-        {
-            "blobName": "{name of the file for which a SAS URI will be generated}"
-        }
-
+```
+    {
+        "blobName": "{name of the file for which a SAS URI will be generated}"
+    }
+```
 
 IoT 中心返回以下数据，供设备用来上载文件：
 
-
-        {
-            "correlationId": "somecorrelationid",
-            "hostname": "contoso.azure-devices.cn",
-            "containerName": "testcontainer",
-            "blobName": "test-device1/image.jpg",
-            "sasToken": "1234asdfSAStoken"
-        }
-
+```
+    {
+        "correlationId": "somecorrelationid",
+        "hostname": "contoso.azure-devices.cn",
+        "containerName": "testcontainer",
+        "blobName": "test-device1/image.jpg",
+        "sasToken": "1234asdfSAStoken"
+    }
+```
 
 ### 已弃用：使用 GET 初始化文件上载
 
-> [AZURE.NOTE] 本部分介绍已弃用的功能，这些功能用于从 IoT 中心接收 SAS URI。应使用前面所述的 POST 方法。
+> [!NOTE]
+> 本部分介绍已弃用的功能，这些功能用于从 IoT 中心接收 SAS URI。应使用前面所述的 POST 方法。
 
 IoT 中心有两个 REST 终结点支持文件上传，一个用于获取存储空间的 SAS URI，另一个用于通知 IoT 中心已完成上传。设备通过在 `{iot hub}.azure-devices.cn/devices/{deviceId}/files/{filename}` 向 IoT 中心发送 GET 来启动文件上载过程。该 IoT 中心将返回特定于要上载的文件的 SAS URI，以及上载完成时要使用的相关性 ID。
 
 ## <a name="notify-iot-hub-of-a-completed-file-upload"></a> 通知 IoT 中心已完成文件上传
 设备负责使用 Azure 存储 SDK 将文件上传到存储空间。上载完成后，设备会使用以下 JSON 正文向 IoT 中心的 `{iot hub}.azure-devices.cn/devices/{deviceId}/files/notifications` 发送 POST：
 
-
-        {
-            "correlationId": "{correlation ID received from the initial request}",
-            "isSuccess": bool,
-            "statusCode": XXX,
-            "statusDescription": "Description of status"
-        }
-
+```
+    {
+        "correlationId": "{correlation ID received from the initial request}",
+        "isSuccess": bool,
+        "statusCode": XXX,
+        "statusDescription": "Description of status"
+    }
+```
 
 `isSuccess` 的值为布尔值，表示文件是否上载成功。`statusCode` 的状态代码表示将文件上载到存储时的状态，`statusDescription` 对应于 `statusCode`。
 
@@ -100,16 +101,16 @@ IoT 中心有两个 REST 终结点支持文件上传，一个用于获取存储�
 
 **示例**。此示例显示文件上载通知消息的正文。
 
-
-        {
-        	"deviceId":"mydevice",
-        	"blobUri":"https://{storage account}.blob.core.chinacloudapi.cn/{container name}/mydevice/myfile.jpg",
-        	"blobName":"mydevice/myfile.jpg",
-        	"lastUpdatedTime":"2016-06-01T21:22:41+00:00",
-        	"blobSizeInBytes":1234,
-        	"enqueuedTimeUtc":"2016-06-01T21:22:43.7996883Z"
-        }
-
+```
+    {
+        "deviceId":"mydevice",
+        "blobUri":"https://{storage account}.blob.core.chinacloudapi.cn/{container name}/mydevice/myfile.jpg",
+        "blobName":"mydevice/myfile.jpg",
+        "lastUpdatedTime":"2016-06-01T21:22:41+00:00",
+        "blobSizeInBytes":1234,
+        "enqueuedTimeUtc":"2016-06-01T21:22:43.7996883Z"
+    }
+```
 
 ## 文件上载通知配置选项
 每个 IoT 中心都为文件上传通知公开以下配置选项：
@@ -144,25 +145,25 @@ IoT 中心开发人员指南中的其他参考主题包括：
 - [如何使用 IoT 中心将文件从设备上载到云中][lnk-fileupload-tutorial]
 
 [lnk-resource-provider-apis]: https://msdn.microsoft.com/zh-cn/library/mt548492.aspx
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 [lnk-management-portal]: https://portal.azure.cn
-[lnk-fileupload-tutorial]: /documentation/articles/iot-hub-csharp-csharp-file-upload/
-[lnk-associate-storage]: /documentation/articles/iot-hub-devguide-file-upload/#associate-an-azure-storage-account-with-iot-hub
-[lnk-initialize]: /documentation/articles/iot-hub-devguide-file-upload/#initialize-a-file-upload
-[lnk-notify]: /documentation/articles/iot-hub-devguide-file-upload/#notify-iot-hub-of-a-completed-file-upload
-[lnk-service-notification]: /documentation/articles/iot-hub-devguide-file-upload/#file-upload-notifications
-[lnk-lifecycle]: /documentation/articles/iot-hub-devguide-messaging/#message-lifecycle
-[lnk-d2c-guidance]: /documentation/articles/iot-hub-devguide-d2c-guidance/
+[lnk-fileupload-tutorial]: ./iot-hub-csharp-csharp-file-upload.md
+[lnk-associate-storage]: ./iot-hub-devguide-file-upload.md#associate-an-azure-storage-account-with-iot-hub
+[lnk-initialize]: ./iot-hub-devguide-file-upload.md#initialize-a-file-upload
+[lnk-notify]: ./iot-hub-devguide-file-upload.md#notify-iot-hub-of-a-completed-file-upload
+[lnk-service-notification]: ./iot-hub-devguide-file-upload.md#file-upload-notifications
+[lnk-lifecycle]: ./iot-hub-devguide-messaging.md#message-lifecycle
+[lnk-d2c-guidance]: ./iot-hub-devguide-d2c-guidance.md
 
-[lnk-devguide-identities]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-devguide-security]: /documentation/articles/iot-hub-devguide-security/
-[lnk-devguide-device-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-devguide-directmethods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
+[lnk-devguide-identities]: ./iot-hub-devguide-identity-registry.md
+[lnk-devguide-security]: ./iot-hub-devguide-security.md
+[lnk-devguide-device-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-devguide-directmethods]: ./iot-hub-devguide-direct-methods.md
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
 
 <!---HONumber=Mooncake_0206_2017-->
 <!--Update_Description:update wording-->

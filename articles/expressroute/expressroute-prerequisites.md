@@ -1,21 +1,21 @@
-<properties
-   pageTitle="采用 ExpressRoute 所要满足的先决条件 | Azure"
-   description="本页提供了在订购 Azure ExpressRoute 线路之前需要满足的要求列表。"
-   documentationCenter="na"
-   services="expressroute"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""/>
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="01/04/2017"
-   ms.author="cherylmc"/>
+---
+title: 采用 ExpressRoute 所要满足的先决条件 | Azure
+description: 本页提供了在订购 Azure ExpressRoute 线路之前需要满足的要求列表。
+documentationCenter: na
+services: expressroute
+authors: cherylmc
+manager: carmonm
+editor: ''
 
+ms.service: expressroute
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 01/04/2017
+ms.author: cherylmc
+---
 
 # ExpressRoute 先决条件和清单  
 
@@ -29,7 +29,7 @@
 
 - 与支持列表中的连接服务提供商建立关系，通过这些提供商便于建立连接。你必须与连接服务提供商存在现有的业务关系。你需要确保通过连接服务提供商获得的服务与 ExpressRoute 兼容。
 - 如果你要使用某家网络服务提供商，但该提供商不在上面的列表中，你仍可以创建与 Azure 的连接。
-	- 请咨询你的网络服务提供商，让你的网络提供商将你的网络扩展到连接提供商。
+    - 请咨询你的网络服务提供商，让你的网络提供商将你的网络扩展到连接提供商。
 
 ## 在你的网络与连接服务提供商之间建立物理连接
 
@@ -41,18 +41,16 @@
 
 ## IP 地址和路由注意事项
 
-使用点到点以太网提供商连接到 Azure 的客户必须为每个对等互连配置冗余 BGP 会话，以符合可用性 SLA 要求。连接服务提供商可能会提供此项增值服务。有关限制的详细信息，请参阅 [ExpressRoute 线路和路由域](/documentation/articles/expressroute-circuit-peerings/)一文中的路由域表。
-
+使用点到点以太网提供商连接到 Azure 的客户必须为每个对等互连配置冗余 BGP 会话，以符合可用性 SLA 要求。连接服务提供商可能会提供此项增值服务。有关限制的详细信息，请参阅 [ExpressRoute 线路和路由域](./expressroute-circuit-peerings.md)一文中的路由域表。
 
 ## 后续步骤
 
-- 有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](/documentation/articles/expressroute-faqs/)。
-- 查找 ExpressRoute 连接服务提供商。请参阅 [ExpressRoute 合作伙伴和对等位置](/documentation/articles/expressroute-locations/)。
-- 请参阅[路由](/documentation/articles/expressroute-routing/)的要求。
+- 有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](./expressroute-faqs.md)。
+- 查找 ExpressRoute 连接服务提供商。请参阅 [ExpressRoute 合作伙伴和对等位置](./expressroute-locations.md)。
+- 请参阅[路由](./expressroute-routing.md)的要求。
 - 配置 ExpressRoute 连接。
-	- [创建 ExpressRoute 线路](/documentation/articles/expressroute-howto-circuit-classic/)
-	- [配置路由](/documentation/articles/expressroute-howto-routing-classic/)
-	- [将 VNet 链接到 ExpressRoute 线路](/documentation/articles/expressroute-howto-linkvnet-classic/)
- 
+    - [创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)
+    - [配置路由](./expressroute-howto-routing-classic.md)
+    - [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

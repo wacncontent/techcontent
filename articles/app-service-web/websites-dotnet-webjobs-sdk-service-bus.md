@@ -1,44 +1,46 @@
-<properties 
-	pageTitle="如何通过 WebJobs SDK 使用 Azure Service Bus" 
-	description="了解如何通过 WebJobs SDK 使用 Azure Service Bus 队列和主题。" 
-	services="app-service\web, service-bus" 
-	documentationCenter=".net" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 如何通过 WebJobs SDK 使用 Azure Service Bus
+description: 了解如何通过 WebJobs SDK 使用 Azure Service Bus 队列和主题。
+services: app-service\web, service-bus
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="06/01/2016" 
-	wacn.date="12/16/2016" 
-	ms.author="tdykstra"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/01/2016
+wacn.date: 12/16/2016
+ms.author: tdykstra
+---
 
 # 如何通过 WebJobs SDK 使用 Azure Service Bus
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述
 
-本指南提供 C# 代码示例，用于演示如何在创建或更新 Azure Blob 后触发进程。这些代码示例使用 [WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk/) 版本 1.x。
+本指南提供 C# 代码示例，用于演示如何在创建或更新 Azure Blob 后触发进程。这些代码示例使用 [WebJobs SDK](./websites-dotnet-webjobs-sdk.md) 版本 1.x。
 
-本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/)。
+本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](./websites-dotnet-webjobs-sdk-get-started.md)。
 
 代码段只显示函数，不同于创建 `JobHost` 对象的代码（如以下示例所示）：
 
-    public class Program
-    {
-           public static void Main()
-           {
-                  JobHostConfiguration config = new JobHostConfiguration();
-                  config.UseServiceBus();
-                  JobHost host = new JobHost(config);
-                  host.RunAndBlock();
-           }
-    }
+```
+public class Program
+{
+       public static void Main()
+       {
+              JobHostConfiguration config = new JobHostConfiguration();
+              config.UseServiceBus();
+              JobHost host = new JobHost(config);
+              host.RunAndBlock();
+       }
+}
+```
 
 在 GitHub.com 上的 azure-webjobs-sdk-samples 存储库中有[完整的服务总线代码示例](https://github.com/Azure/azure-webjobs-sdk-samples/blob/master/BasicSamples/ServiceBus/Program.cs)。
 
@@ -48,15 +50,17 @@
 
 你还必须设置 AzureWebJobsServiceBus 连接字符串，以及存储连接字符串。你可以在 App.config 文件的 `connectionStrings` 部分中执行此操作，如以下示例所示：
 
-        <connectionStrings>
-            <add name="AzureWebJobsDashboard" connectionString="DefaultEndpointsProtocol=https;AccountName=[accountname];AccountKey=[accesskey]"/>
-            <add name="AzureWebJobsStorage" connectionString="DefaultEndpointsProtocol=https;AccountName=[accountname];AccountKey=[accesskey]"/>
-            <add name="AzureWebJobsServiceBus" connectionString="Endpoint=sb://[yourServiceNamespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[yourKey]"/>
-        </connectionStrings>
+```
+    <connectionStrings>
+        <add name="AzureWebJobsDashboard" connectionString="DefaultEndpointsProtocol=https;AccountName=[accountname];AccountKey=[accesskey]"/>
+        <add name="AzureWebJobsStorage" connectionString="DefaultEndpointsProtocol=https;AccountName=[accountname];AccountKey=[accesskey]"/>
+        <add name="AzureWebJobsServiceBus" connectionString="Endpoint=sb://[yourServiceNamespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[yourKey]"/>
+    </connectionStrings>
+```
 
 有关在 App.config 文件中包含服务总线连接字符串设置的示例项目，请参阅[服务总线示例](https://github.com/Azure/azure-webjobs-sdk-samples/tree/master/BasicSamples/ServiceBus)。
 
-也可以在 Azure 运行时环境中设置连接字符串，当 Web 作业在 Azure 中运行时，这些设置将覆盖 App.config 设置；有关详细信息，请参阅 [WebJobs SDK 入门](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/#configure-the-web-app-to-use-your-azure-sql-database-and-storage-account)。
+也可以在 Azure 运行时环境中设置连接字符串，当 Web 作业在 Azure 中运行时，这些设置将覆盖 App.config 设置；有关详细信息，请参阅 [WebJobs SDK 入门](./websites-dotnet-webjobs-sdk-get-started.md#configure-the-web-app-to-use-your-azure-sql-database-and-storage-account)。
 
 ## <a id="trigger"></a>如何在接收服务总线队列消息时触发函数
 
@@ -72,11 +76,13 @@ SDK 接收 `PeekLock` 模式的消息。如果函数成功完成，则对此消�
 
 以下代码示例读取包含字符串的队列消息，并将字符串写入 WebJobs SDK 仪表板。
 
-        public static void ProcessQueueMessage([ServiceBusTrigger("inputqueue")] string message, 
-            TextWriter logger)
-        {
-            logger.WriteLine(message);
-        }
+```
+    public static void ProcessQueueMessage([ServiceBusTrigger("inputqueue")] string message, 
+        TextWriter logger)
+    {
+        logger.WriteLine(message);
+    }
+```
 
 **注意：**如果你在未使用 WebJobs SDK 的应用程序中创建队列消息，请务必将 [BrokeredMessage.ContentType](http://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.messaging.brokeredmessage.contenttype.aspx) 设置为 “text/plain”。
 
@@ -84,20 +90,24 @@ SDK 接收 `PeekLock` 模式的消息。如果函数成功完成，则对此消�
 
 SDK 会自动反序列化包含 POCO[（普通旧 CLR 对象](http://en.wikipedia.org/wiki/Plain_Old_CLR_Object)）类型 JSON 的队列消息。以下代码示例读取包含 `BlobInformation` 对象（具有 `BlobName` 属性）的队列消息：
 
-        public static void WriteLogPOCO([ServiceBusTrigger("inputqueue")] BlobInformation blobInfo,
-            TextWriter logger)
-        {
-            logger.WriteLine("Queue message refers to blob: " + blobInfo.BlobName);
-        }
+```
+    public static void WriteLogPOCO([ServiceBusTrigger("inputqueue")] BlobInformation blobInfo,
+        TextWriter logger)
+    {
+        logger.WriteLine("Queue message refers to blob: " + blobInfo.BlobName);
+    }
+```
 
-有关展示如何使用 POCO 属性在同一函数中处理 blob 和表的代码示例，请参阅[这篇文章的存储队列版本](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#pocoblobs)。
+有关展示如何使用 POCO 属性在同一函数中处理 blob 和表的代码示例，请参阅[这篇文章的存储队列版本](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#pocoblobs)。
 
 如果创建队列消息的代码不使用 WebJobs SDK，请使用类似于以下示例的代码：
 
-        var client = QueueClient.CreateFromConnectionString(ConfigurationManager.ConnectionStrings["AzureWebJobsServiceBus"].ConnectionString, "blobadded");
-        BlobInformation blobInformation = new BlobInformation () ;
-        var message = new BrokeredMessage(blobInformation);
-        client.Send(message);
+```
+    var client = QueueClient.CreateFromConnectionString(ConfigurationManager.ConnectionStrings["AzureWebJobsServiceBus"].ConnectionString, "blobadded");
+    BlobInformation blobInformation = new BlobInformation () ;
+    var message = new BrokeredMessage(blobInformation);
+    client.Send(message);
+```
 
 ### ServiceBusTrigger 适用的类型
 
@@ -107,17 +117,18 @@ SDK 会自动反序列化包含 POCO[（普通旧 CLR 对象](http://en.wikipedi
 
 若要编写用于新建队列消息的函数，请使用 `ServiceBus` 属性，并将队列名称传递给属性构造函数。
 
-
 ### 在非异步函数中创建单个队列消息
 
 以下代码示例使用输出参数在名为“outputqueue”的队列中创建新的消息，该消息的内容与名为“inputqueue”的队列中收到的队列消息相同。
 
-        public static void CreateQueueMessage(
-            [ServiceBusTrigger("inputqueue")] string queueMessage,
-            [ServiceBus("outputqueue")] out string outputQueueMessage)
-        {
-            outputQueueMessage = queueMessage;
-        }
+```
+    public static void CreateQueueMessage(
+        [ServiceBusTrigger("inputqueue")] string queueMessage,
+        [ServiceBus("outputqueue")] out string outputQueueMessage)
+    {
+        outputQueueMessage = queueMessage;
+    }
+```
 
 用于创建单个队列消息的输出参数可以是以下任何类型：
 
@@ -132,15 +143,17 @@ SDK 会自动反序列化包含 POCO[（普通旧 CLR 对象](http://en.wikipedi
 
 若要创建多个消息，请使用包含 `ICollector<T>` 或 `IAsyncCollector<T>` 的 `ServiceBus` 属性，如以下代码示例所示：
 
-        public static void CreateQueueMessages(
-            [ServiceBusTrigger("inputqueue")] string queueMessage,
-            [ServiceBus("outputqueue")] ICollector<string> outputQueueMessage,
-            TextWriter logger)
-        {
-            logger.WriteLine("Creating 2 messages in outputqueue");
-            outputQueueMessage.Add(queueMessage + "1");
-            outputQueueMessage.Add(queueMessage + "2");
-        }
+```
+    public static void CreateQueueMessages(
+        [ServiceBusTrigger("inputqueue")] string queueMessage,
+        [ServiceBus("outputqueue")] ICollector<string> outputQueueMessage,
+        TextWriter logger)
+    {
+        logger.WriteLine("Creating 2 messages in outputqueue");
+        outputQueueMessage.Add(queueMessage + "1");
+        outputQueueMessage.Add(queueMessage + "2");
+    }
+```
 
 调用 `Add` 方法时，将立即创建每个队列消息。
 
@@ -148,11 +161,13 @@ SDK 会自动反序列化包含 POCO[（普通旧 CLR 对象](http://en.wikipedi
 
 若要编写 SDK 在收到服务总线主题消息时调用的函数，请使用 `ServiceBusTrigger` 属性以及捕获主题名称和订阅名称的构造函数，如以下代码示例所示：
 
-        public static void WriteLog([ServiceBusTrigger("outputtopic","subscription1")] string message,
-            TextWriter logger)
-        {
-            logger.WriteLine("Topic message: " + message);
-        }
+```
+    public static void WriteLog([ServiceBusTrigger("outputtopic","subscription1")] string message,
+        TextWriter logger)
+    {
+        logger.WriteLine("Topic message: " + message);
+    }
+```
 
 若要创建某主题的消息，请使用 `ServiceBus` 属性和主题名称，过程与使用此属性和队列名称一样。
 
@@ -169,7 +184,7 @@ SDK 会自动反序列化包含 POCO[（普通旧 CLR 对象](http://en.wikipedi
 
 ## <a id="queues"></a>存储队列操作说明文章涉及的相关主题
 
-若要了解非服务总线专用 WebJobs SDK 方案，请参阅[如何结合使用 Azure 队列存储和 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/)。
+若要了解非服务总线专用 WebJobs SDK 方案，请参阅[如何结合使用 Azure 队列存储和 WebJobs SDK](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md)。
 
 该文章涵盖的主题包括：
 
@@ -184,7 +199,6 @@ SDK 会自动反序列化包含 POCO[（普通旧 CLR 对象](http://en.wikipedi
 
 ## <a id="nextsteps"></a>后续步骤
 
-本指南中包含的代码示例展示了如何处理常见方案来结合使用 Azure 服务总线。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](/documentation/articles/websites-webjobs-resources/)。
- 
+本指南中包含的代码示例展示了如何处理常见方案来结合使用 Azure 服务总线。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

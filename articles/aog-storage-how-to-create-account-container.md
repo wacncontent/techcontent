@@ -1,13 +1,16 @@
-<properties 
-	pageTitle="如何创建存储账号及容器" 
-	description="本页介绍如何创建存储账号及容器。" 
-	services="storage" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
+---
+title: 如何创建存储账号及容器
+description: 本页介绍如何创建存储账号及容器。
+services: storage
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
 
-<tags ms.service="storage-aog" ms.date="" wacn.date="12/14/2015"/>
+ms.service: storage-aog
+ms.date: ''
+wacn.date: 12/14/2015
+---
 
 #如何创建存储账号及容器
 
@@ -16,7 +19,7 @@
 * [相关概念](#concept)
 * [详细步骤](#operation)
 * [推荐工具](#tool)
- 
+
 ## <a id="concept"></a>相关概念
 
 **位置/地缘组**：中国版Azure有上海和北京中国东部和中国北部两个数据中心，我们可以选择其中的一个作为我们存储的位置。地缘组的概念就是将我们的存储和其他Azure服务放置在同一个数据中心，可以有效的提高我们的访问速度和降低成本。
@@ -29,11 +32,11 @@
 
 **读取访问地域冗余(RA-GRS)**：读取访问地域冗余存储将你的数据复制到一个辅助地理位置，同时提供对你在辅助位置中的数据的读访问权限。读取访问地域冗余存储允许你从主位置或辅助位置访问数据，以防其中一个位置不可用。
 
-更多详细请阅读[这篇文章](/documentation/articles/storage-redundancy/)
+更多详细请阅读[这篇文章](./storage/storage-redundancy.md)
 
 ###存储和容器的命名规则###
 Azure存储的命名规则可以阅读[这篇文章](http://blogs.msdn.com/b/jmstall/archive/2014/06/12/azure-storage-naming-rules.aspx)，文章包含了Azure存储中所涉及的Blob、Table、Queue的命名规则。
- 
+
 **容器的属性**
 
 **私有**：不允许匿名用户读取该容器中的Blob
@@ -48,10 +51,8 @@ Azure存储的命名规则可以阅读[这篇文章](http://blogs.msdn.com/b/jms
 2. Lib存储帐户-右箭头  ![](./media/aog-storage-how-to-create-account-container/enter-storage.png)
 **Note**：存储账号创建完成后我们可以通过最下方的“管理访问密钥”按钮获取或者更新密钥。
 3.  容器-创建容器-名称![](./media/aog-storage-how-to-create-account-container/create-container.png)
- 
+
 4. 容器创建完成![](./media/aog-storage-how-to-create-account-container/container-dashboard.png)
- 
- 
- 
+
 ## <a id="tool"></a>推荐工具##
 Azure Store Explorer是一个不错的工具，可以让我们很直观的管理我们的存储，请点击[此处](https://azurestorageexplorer.codeplex.com/)下载。

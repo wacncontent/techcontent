@@ -1,20 +1,21 @@
-<properties
- pageTitle="如何使用 Azure 计划程序生成复杂的计划和高级循环"
- description="如何使用 Azure 计划程序生成复杂的计划和高级循环"
- services="scheduler"
- documentationCenter=".NET"
- authors="krisragh"
- manager="dwrede"
- editor=""/>
-<tags
- ms.service="scheduler"
- ms.workload="infrastructure-services"
- ms.tgt_pltfrm="na"
- ms.devlang="dotnet"
- ms.topic="article"
- ms.date="08/18/2016"
- wacn.date="01/03/2017"
- ms.author="krisragh"/>
+---
+title: 如何使用 Azure 计划程序生成复杂的计划和高级循环
+description: 如何使用 Azure 计划程序生成复杂的计划和高级循环
+services: scheduler
+documentationCenter: .NET
+authors: krisragh
+manager: dwrede
+editor: ''
+
+ms.service: scheduler
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/18/2016
+wacn.date: 01/03/2017
+ms.author: krisragh
+---
 
 # 如何使用 Azure 计划程序生成复杂的计划和高级循环  
 
@@ -26,11 +27,10 @@ Azure 计划程序允许你为作业指定不同的一次性计划和重复性�
 
 由于具有这种灵活性，Azure 计划程序可让你支持各种业务方案：
 
--	周期性数据清理 – 例如，每日删除 3 个月以前的所有推文
--	存档 – 例如，每月向备份服务推送发票历史记录
--	请求外部数据 – 例如，每隔 15 分钟从 NOAA 提取新的滑雪天气报告
--	图像处理 – 例如，在每个工作日的非高峰时间，使用云计算来压缩当天上载的图像
-
+- 周期性数据清理 – 例如，每日删除 3 个月以前的所有推文
+- 存档 – 例如，每月向备份服务推送发票历史记录
+- 请求外部数据 – 例如，每隔 15 分钟从 NOAA 提取新的滑雪天气报告
+- 图像处理 – 例如，在每个工作日的非高峰时间，使用云计算来压缩当天上载的图像
 
 在本文中，我们将会演练你可以使用 Azure 计划程序创建的示例作业。我们将提供用于描述每个计划的 JSON 数据。如果你熟悉[计划程序 REST API](https://msdn.microsoft.com/zh-cn/library/mt629143.aspx)，可以使用与此相同的 JSON 来[创建 Azure 计划程序作业](https://msdn.microsoft.com/zh-cn/library/mt629145.aspx)。
 
@@ -38,12 +38,12 @@ Azure 计划程序允许你为作业指定不同的一次性计划和重复性�
 
 本主题中的许多示例演示了 Azure 计划程序支持的各种方案。从广义上讲，这些示例演示了如何为多种行为模式创建计划，这些行为模式包括：
 
--	在特定的日期和时间运行一次
--	运行并重复明确的次数
--	立即运行，然后重复
--	运行并每隔 *n* 分钟、小时、天、周、月在特定的时间开始重复
--	运行并根据每周或每月的频率重复，不过，只会在特定的日期、特定的星期或特定的月份日次重复
--	运行并在某个时间段中的多个时间重复 - 例如，每月的最后一个星期五和星期一，或者每天的 5:15AM 和 5:15PM
+- 在特定的日期和时间运行一次
+- 运行并重复明确的次数
+- 立即运行，然后重复
+- 运行并每隔 *n* 分钟、小时、天、周、月在特定的时间开始重复
+- 运行并根据每周或每月的频率重复，不过，只会在特定的日期、特定的星期或特定的月份日次重复
+- 运行并在某个时间段中的多个时间重复 - 例如，每月的最后一个星期五和星期一，或者每天的 5:15AM 和 5:15PM
 
 ## 日期和日期时间
 
@@ -55,23 +55,25 @@ Azure 计划程序作业中的日期时间引用遵循 [ISO-8601 规范](http://
 
 若要使用 [Azure 计划程序 REST API](https://msdn.microsoft.com/zh-cn/library/mt629143) 创建简单计划，将首先[使用资源提供程序注册订阅](https://msdn.microsoft.com/zh-cn/library/azure/dn790548.aspx)（计划程序的提供程序名称是 Microsoft.Scheduler），然后[创建作业集合](https://msdn.microsoft.com/zh-cn/library/mt629159.aspx)，最后[创建作业](https://msdn.microsoft.com/zh-cn/library/mt629145.aspx)。在创建作业时，可以使用类似于以下摘录内容的 JSON 指定计划和循环：
 
-	{
-	    "startTime": "2012-08-04T00:00Z", // optional
-	     …
-	    "recurrence":                     // optional
-	    {
-	        "frequency": "week",     // can be "year" "month" "day" "week" "hour" "minute"
-	        "interval": 1,                // optional, how often to fire (default to 1)
-	        "schedule":                   // optional (advanced scheduling specifics)
-	        {
-	            "weekDays": ["monday", "wednesday", "friday"],
-	            "hours": [10, 22]                      
-	        },
-	        "count": 10,                  // optional (default to recur infinitely)
-	        "endTime": "2012-11-04",      // optional (default to recur infinitely)
-	    },
-	    …
-	}
+```
+{
+    "startTime": "2012-08-04T00:00Z", // optional
+     …
+    "recurrence":                     // optional
+    {
+        "frequency": "week",     // can be "year" "month" "day" "week" "hour" "minute"
+        "interval": 1,                // optional, how often to fire (default to 1)
+        "schedule":                   // optional (advanced scheduling specifics)
+        {
+            "weekDays": ["monday", "wednesday", "friday"],
+            "hours": [10, 22]                      
+        },
+        "count": 10,                  // optional (default to recur infinitely)
+        "endTime": "2012-11-04",      // optional (default to recur infinitely)
+    },
+    …
+}
+```
 
 ## 概述：作业架构基础知识
 
@@ -179,25 +181,22 @@ Azure 计划程序作业中的日期时间引用遵循 [ISO-8601 规范](http://
 
 ## 另请参阅
 
+ [计划程序是什么？](./scheduler-intro.md)
 
- [计划程序是什么？](/documentation/articles/scheduler-intro/)
- 
- [Azure 计划程序的概念、术语和实体层次结构](/documentation/articles/scheduler-concepts-terms/)
- 
- [开始在管理门户中使用计划程序](/documentation/articles/scheduler-get-started-portal/)
- 
- [Azure 计划程序中的计划和计费](/documentation/articles/scheduler-plans-billing/)
- 
+ [Azure 计划程序的概念、术语和实体层次结构](./scheduler-concepts-terms.md)
+
+ [开始在管理门户中使用计划程序](./scheduler-get-started-portal.md)
+
+ [Azure 计划程序中的计划和计费](./scheduler-plans-billing.md)
+
  [Azure 计划程序 REST API 参考](https://msdn.microsoft.com/zh-cn/library/mt629143)
- 
- [Azure 计划程序 PowerShell cmdlet 参考](/documentation/articles/scheduler-powershell-reference/)
- 
- [Azure 计划程序的高可用性和可靠性](/documentation/articles/scheduler-high-availability-reliability/)
- 
- [Azure 计划程序的限制、默认值和错误代码](/documentation/articles/scheduler-limits-defaults-errors/)
- 
- [Azure 计划程序出站身份验证](/documentation/articles/scheduler-outbound-authentication/)
- 
-  
+
+ [Azure 计划程序 PowerShell cmdlet 参考](./scheduler-powershell-reference.md)
+
+ [Azure 计划程序的高可用性和可靠性](./scheduler-high-availability-reliability.md)
+
+ [Azure 计划程序的限制、默认值和错误代码](./scheduler-limits-defaults-errors.md)
+
+ [Azure 计划程序出站身份验证](./scheduler-outbound-authentication.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

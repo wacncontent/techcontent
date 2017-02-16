@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="Microsoft Azure Multi-Factor Authentication 用户状态" 
-	description="在 Azure MFA 中了解用户状态信息。" 
-	services="multi-factor-authentication" 
-	documentationCenter="" 
-	authors="billmath" 
-	manager="stevenpo" 
-	editor="curtand"/>
+---
+title: Microsoft Azure Multi-Factor Authentication 用户状态
+description: 在 Azure MFA 中了解用户状态信息。
+services: multi-factor-authentication
+documentationCenter: ''
+authors: billmath
+manager: stevenpo
+editor: curtand
 
-<tags
-	ms.service="multi-factor-authentication"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/04/2016"
-	wacn.date="09/28/2016"
-	ms.author="kgremban"/>
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/04/2016
+wacn.date: 09/28/2016
+ms.author: kgremban
+---
 
 # Azure Multi-Factor Authentication 中的用户状态
 

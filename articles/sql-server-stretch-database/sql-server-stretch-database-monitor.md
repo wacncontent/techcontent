@@ -1,21 +1,21 @@
-<properties
-	pageTitle="数据迁移的监视和故障排除（延伸数据库）| Azure"
-	description="了解如何监视数据迁移状态。"
-	services="sql-server-stretch-database"
-	documentationCenter=""
-	authors="douglaslMS"
-	manager=""
-	editor=""/>
+---
+title: 数据迁移的监视和故障排除（延伸数据库）| Azure
+description: 了解如何监视数据迁移状态。
+services: sql-server-stretch-database
+documentationCenter: ''
+authors: douglaslMS
+manager: ''
+editor: ''
 
-<tags
-	ms.service="sql-server-stretch-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/14/2016"
-	wacn.date="01/04/2017"
-	ms.author="douglasl"/>
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/14/2016
+wacn.date: 01/04/2017
+ms.author: douglasl
+---
 
 # 数据迁移的监视和故障排除（SQL Server Stretch Database）
 
@@ -55,7 +55,7 @@
 
 ## 另请参阅
 
-[延伸数据库的管理和故障排除](/documentation/articles/sql-server-stretch-database-manage/)
+[延伸数据库的管理和故障排除](./sql-server-stretch-database-manage.md)
 
 <!--Image references-->
 [StretchMonitorImage1]: ./media/sql-server-stretch-database-monitor/StretchDBMonitor.png

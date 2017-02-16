@@ -1,24 +1,22 @@
-<properties 
-	pageTitle="如何配置流分析作业的数据输出 | Azure" 
-	description="配置流分析作业的输出 | 学习路径段。"
-	keywords="数据输出、数据移动"
-	documentationCenter=""
-	services="stream-analytics"
-	authors="jeffstokes72" 
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: 如何配置流分析作业的数据输出 | Azure
+description: 配置流分析作业的输出 | 学习路径段。
+keywords: 数据输出、数据移动
+documentationCenter: ''
+services: stream-analytics
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags 
-	ms.service="stream-analytics" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.tgt_pltfrm="na" 
-	ms.workload="data-services" 
-	ms.date="09/26/2016" 
-	wacn.date="01/25/2017" 
-	ms.author="jeffstok"/>  
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 01/25/2017
+ms.author: jeffstok
+---
 
 # 如何配置流分析作业的数据输出
 
@@ -32,47 +30,41 @@ Azure 流分析作业可以连接到一个或多个数据输出，这些数据�
 
     ![添加输出](./media/stream-analytics-add-outputs/1-stream-analytics-add-outputs.png)  
 
-
     在 Azure 门户预览中，单击流分析作业中的“输出”磁贴。
 
     ![Azure 门户预览添加输出](./media/stream-analytics-add-outputs/5-stream-analytics-add-outputs.png)  
-
 
 2. 指定输出的类型：
 
     ![选择数据移动类型](./media/stream-analytics-add-outputs/2-stream-analytics-add-outputs.png)  
 
-
     ![Azure 门户预览选择数据移动类型](./media/stream-analytics-add-outputs/6-stream-analytics-add-outputs.png)  
 
-
 3. 在“输出别名”框中为该输出提供一个友好的名称。此名称以后会用于你的作业查询以引用该输出。
-    
+
     填充所需连接属性的其余部分以连接到你的输出。这些字段根据输出类型而变化，在此处进行了详细定义。
 
     ![添加数据输出属性](./media/stream-analytics-add-outputs/3-stream-analytics-add-outputs.png)  
 
-
 4. 根据输出类型，你可能需要指定序列化或格式化数据的方式。此处记录了每个输出类型的特定序列化设置。
 
-    填充所需连接属性的其余部分以连接到你的数据源。这些字段根据输入类型和源类型而变化，[此处](/documentation/articles/stream-analytics-create-a-job/)进行了详细定义。
+    填充所需连接属性的其余部分以连接到你的数据源。这些字段根据输入类型和源类型而变化，[此处](./stream-analytics-create-a-job.md)进行了详细定义。
 
     ![将数据输出添加到事件中心](./media/stream-analytics-add-outputs/4-stream-analytics-add-outputs.png)  
 
-
     ![Azure 门户预览将数据输出添加到事件中心](./media/stream-analytics-add-outputs/7-stream-analytics-add-outputs.png)  
 
-
-> [AZURE.NOTE] 必须先存在添加到作业的输出元素，然后才能启动作业并开始事件的流动。例如，如果你使用 Blob 存储作为输出，该作业将不会自动创建存储帐户。在启动 ASA 作业之前，需要由用户创建该存储帐户。
+> [!NOTE]
+> 必须先存在添加到作业的输出元素，然后才能启动作业并开始事件的流动。例如，如果你使用 Blob 存储作为输出，该作业将不会自动创建存储帐户。在启动 ASA 作业之前，需要由用户创建该存储帐户。
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=AzureStreamAnalytics)。
 
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 

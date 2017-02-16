@@ -1,31 +1,30 @@
-<properties 
-	pageTitle="使用移动服务中的脱机数据处理冲突 (iOS) | 移动开发人员中心" 
-	description="了解在 iOS 应用程序中同步脱机数据时如何使用 Azure 移动服务处理冲突" 
-	documentationCenter="ios" 
-	authors="krisragh" 
-	manager="erikre"
-	editor="" 
-	services="mobile-services"/>
+---
+title: 使用移动服务中的脱机数据处理冲突 (iOS) | 移动开发人员中心
+description: 了解在 iOS 应用程序中同步脱机数据时如何使用 Azure 移动服务处理冲突
+documentationCenter: ios
+authors: krisragh
+manager: erikre
+editor: ''
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="krisragh;donnam"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: krisragh;donnam
+---
 
 #  使用移动服务中的脱机数据处理冲突
 
-[AZURE.INCLUDE [mobile-services-selector-offline-conflicts](../../includes/mobile-services-selector-offline-conflicts.md)]
+[!INCLUDE [mobile-services-selector-offline-conflicts](../../includes/mobile-services-selector-offline-conflicts.md)]
 
 本主题演示在使用 Azure 移动服务的脱机功能时如何同步数据和处理冲突。本教程基于[脱机数据入门]教程编写。
 
->[AZURE.NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="/pricing/1rmb-trial/?WT.mc_id=AE564AB28" target="_blank">Azure 试用</a>。
-
+>[!NOTE]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=AE564AB28" target="_blank">Azure 试用</a>。
 
 ## 下载 iOS 项目
 
@@ -42,60 +41,68 @@
 
 1. 在 **QSTodoListViewController.m** 中，编辑 **viewDidLoad**。将对 **defaultService** 的调用替换为对 **defaultServiceWithDelegate** 的调用：
 
-        self.todoService = [QSTodoService defaultServiceWithDelegate:self];
+    ```
+    self.todoService = [QSTodoService defaultServiceWithDelegate:self];
+    ```
 
 2. 在 **QSTodoListViewController.h** 中，将 **&lt;MSSyncContextDelegate&gt;** 添加到接口声明，以便实现 **MSSyncContextDelegate** 协议。
 
-        @interface QSTodoListViewController : UITableViewController<MSSyncContextDelegate, NSFetchedResultsControllerDelegate>
+    ```
+    @interface QSTodoListViewController : UITableViewController<MSSyncContextDelegate, NSFetchedResultsControllerDelegate>
+    ```
 
 3. 在 **QSTodoListViewController.m** 的顶部添加以下 import 语句：
 
-        #import "QSUIAlertViewWithBlock.h"
+    ```
+    #import "QSUIAlertViewWithBlock.h"
+    ```
 
 4. 最后，让我们将以下两项操作添加到 **QSTodoListViewController.m**，以便使用此帮助器类，并提示用户以三种方式之一协调冲突。
 
-        - (void)tableOperation:(MSTableOperation *)operation onComplete:(MSSyncItemBlock)completion
-        {
-            [self doOperation:operation complete:completion];
-        }
+    ```
+    - (void)tableOperation:(MSTableOperation *)operation onComplete:(MSSyncItemBlock)completion
+    {
+        [self doOperation:operation complete:completion];
+    }
 
-        -(void)doOperation:(MSTableOperation *)operation complete:(MSSyncItemBlock)completion
-        {
-            [operation executeWithCompletion:^(NSDictionary *item, NSError *error) {
+    -(void)doOperation:(MSTableOperation *)operation complete:(MSSyncItemBlock)completion
+    {
+        [operation executeWithCompletion:^(NSDictionary *item, NSError *error) {
 
-                NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
+            NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
 
-                if (error.code == MSErrorPreconditionFailed) {
-                    QSUIAlertViewWithBlock *alert = [[QSUIAlertViewWithBlock alloc] initWithCallback:^(NSInteger buttonIndex) {
-                        if (buttonIndex == 1) { // Client
-                            NSMutableDictionary *adjustedItem = [operation.item mutableCopy];
+            if (error.code == MSErrorPreconditionFailed) {
+                QSUIAlertViewWithBlock *alert = [[QSUIAlertViewWithBlock alloc] initWithCallback:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) { // Client
+                        NSMutableDictionary *adjustedItem = [operation.item mutableCopy];
 
-                            [adjustedItem setValue:[serverItem objectForKey:MSSystemColumnVersion] forKey:MSSystemColumnVersion];
-                            operation.item = adjustedItem;
+                        [adjustedItem setValue:[serverItem objectForKey:MSSystemColumnVersion] forKey:MSSystemColumnVersion];
+                        operation.item = adjustedItem;
 
-                            [self doOperation:operation complete:completion];
-                            return;
+                        [self doOperation:operation complete:completion];
+                        return;
 
-                        } else if (buttonIndex == 2) { // Server
-                            NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
-                            completion(serverItem, nil);
-                        } else { // Cancel
-                            [operation cancelPush];
-                            completion(nil, error);
-                        }
-                    }];
+                    } else if (buttonIndex == 2) { // Server
+                        NSDictionary *serverItem = [error.userInfo objectForKey:MSErrorServerItemKey];
+                        completion(serverItem, nil);
+                    } else { // Cancel
+                        [operation cancelPush];
+                        completion(nil, error);
+                    }
+                }];
 
-                    NSString *message = [NSString stringWithFormat:@"Client value: %@\nServer value: %@", operation.item[@"text"], serverItem[@"text"]];
+                NSString *message = [NSString stringWithFormat:@"Client value: %@\nServer value: %@", operation.item[@"text"], serverItem[@"text"]];
 
-                    [alert showAlertWithTitle:@"Server Conflict"
-                                      message:message
-                            cancelButtonTitle:@"Cancel"
-                            otherButtonTitles:[NSArray arrayWithObjects:@"Use Client", @"Use Server", nil]];
-                } else {
-                    completion(item, error);
-                }
-            }];
-        }
+                [alert showAlertWithTitle:@"Server Conflict"
+                                  message:message
+                        cancelButtonTitle:@"Cancel"
+                        otherButtonTitles:[NSArray arrayWithObjects:@"Use Client", @"Use Server", nil]];
+            } else {
+                completion(item, error);
+            }
+        }];
+    }
+    ```
 
 ## <a name="test-app"></a>测试应用程序
 
@@ -119,7 +126,6 @@
 [Add Conflict Handler to Todo List View Controller]: #add-conflict-handling
 [Test the App]: #test-app
 
-
 [add-todo-item-view-controller-3]: ./media/mobile-services-ios-handling-conflicts-offline-data/add-todo-item-view-controller-3.png
 [add-todo-item-view-controller-4]: ./media/mobile-services-ios-handling-conflicts-offline-data/add-todo-item-view-controller-4.png
 [add-todo-item-view-controller-5]: ./media/mobile-services-ios-handling-conflicts-offline-data/add-todo-item-view-controller-5.png
@@ -129,7 +135,6 @@
 [conflict-handling-problem-1]: ./media/mobile-services-ios-handling-conflicts-offline-data/conflict-handling-problem-1.png
 [conflict-ui]: ./media/mobile-services-ios-handling-conflicts-offline-data/conflict-ui.png
 
-
 [Segmented Controls]: https://developer.apple.com/zh-cn/library/ios/documentation/UserExperience/Conceptual/UIKitUICatalog/UISegmentedControl.html
 [Core Data Model Editor Help]: https://developer.apple.com/zh-cn/library/mac/recipes/xcode_help-core_data_modeling_tool/Articles/about_cd_modeling_tool.html
 [Creating an Outlet Connection]: https://developer.apple.com/zh-cn/library/mac/recipes/xcode_help-interface_builder/articles-connections_bindings/CreatingOutlet.html
@@ -138,10 +143,9 @@
 [Adding a Scene to a Storyboard]: https://developer.apple.com/zh-cn/library/ios/recipes/xcode_help-IB_storyboard/chapters/StoryboardScene.html
 [Core Data]: https://developer.apple.com/zh-cn/library/ios/documentation/Cocoa/Conceptual/CoreData/cdProgrammingGuide.html
 [Download the preview SDK here]: http://aka.ms/Gc6fex
-[How to use the Mobile Services client library for iOS]: /documentation/articles/mobile-services-ios-how-to-use-client-library/
+[How to use the Mobile Services client library for iOS]: ./mobile-services-ios-how-to-use-client-library.md
 [Getting Started Offline iOS Sample]: https://github.com/Azure/mobile-services-samples/tree/master/TodoOffline/iOS/blog20140611
-[脱机数据入门]: /documentation/articles/mobile-services-ios-get-started-offline-data/
-[Get started with Mobile Services]: /documentation/articles/mobile-services-ios-get-started/
- 
+[脱机数据入门]: ./mobile-services-ios-get-started-offline-data.md
+[Get started with Mobile Services]: ./mobile-services-ios-get-started.md
 
 <!---HONumber=Mooncake_0118_2016-->

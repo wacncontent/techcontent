@@ -1,29 +1,29 @@
-<properties
-	pageTitle="移动服务的概念"
-	description="Azure 经典管理门户上的帮助集合中提供的移动服务概念主题的链接。"
-	services="mobile-services"
-	documentationCenter="na"
-	authors="ggailey777"
-	manager="dwrede"
-	editor=""/>
+---
+title: 移动服务的概念
+description: Azure 经典管理门户上的帮助集合中提供的移动服务概念主题的链接。
+services: mobile-services
+documentationCenter: na
+authors: ggailey777
+manager: dwrede
+editor: ''
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: na
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 移动服务的概念
 
 下面链接的主题提供有关 Azure 移动服务的具体行为的信息。Azure 经典管理门户中也提供了这些主题作为帮助信息。
 
-[AZURE.INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
+[!INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
 
-[概述主题](https://msdn.microsoft.com/zh-cn/library/azure/jj193167.aspx)介绍了移动服务的优势，以及可在 Azure 经典管理门户中执行的任务。有关移动服务的一般信息以及如何在应用中使用移动服务的示例，请参阅[移动服务教程和资源](/documentation/services/mobile-services/)。
+[概述主题](https://msdn.microsoft.com/zh-cn/library/azure/jj193167.aspx)介绍了移动服务的优势，以及可在 Azure 经典管理门户中执行的任务。有关移动服务的一般信息以及如何在应用中使用移动服务的示例，请参阅[移动服务教程和资源](./index.md)。
 
 ##配置
 以下主题提供有关创建、删除和配置移动服务的信息：
@@ -82,9 +82,5 @@
 - [限制管理员访问权限](https://msdn.microsoft.com/zh-cn/library/azure/jj712649.aspx) 
 - [错误处理](https://msdn.microsoft.com/zh-cn/library/azure/jj631632.aspx) 
 - [快捷键](https://msdn.microsoft.com/zh-cn/library/azure/jj552469.aspx) 
-
-
-
- 
 
 <!---HONumber=Mooncake_0118_2016-->

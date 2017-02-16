@@ -1,23 +1,23 @@
-<properties
-    pageTitle="DocumentDB 分层资源模型和概念 | Azure"
-    description="了解 DocumentDB 的数据库、集合、用户自定义函数 (UDF)、文档、管理资源的权限等的分层模型。"
-    keywords="分层模型, documentdb, azure, Azure"
-    services="documentdb"
-    documentationcenter=""
-    author="AndrewHoh"
-    manager="jhubbard"
-    editor="monicar" />
-<tags
-    ms.assetid="ef9d5c0c-0867-4317-bb1b-98e219799fd5"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/14/2016"
-    wacn.date="01/23/2017"
-    ms.author="anhoh" />  
+---
+title: DocumentDB 分层资源模型和概念 | Azure
+description: 了解 DocumentDB 的数据库、集合、用户自定义函数 (UDF)、文档、管理资源的权限等的分层模型。
+keywords: 分层模型, documentdb, azure, Azure
+services: documentdb
+documentationcenter: ''
+author: AndrewHoh
+manager: jhubbard
+editor: monicar
 
+ms.assetid: ef9d5c0c-0867-4317-bb1b-98e219799fd5
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/14/2016
+wacn.date: 01/23/2017
+ms.author: anhoh
+---
 
 # DocumentDB 分层资源模型和概念
 DocumentDB 管理的数据库实体被称为**资源**。每个资源都通过逻辑 URI 进行唯一标识。你可以使用标准 HTTP 谓词、请求/响应标头和状态代码与资源进行交互。
@@ -33,7 +33,7 @@ DocumentDB 管理的数据库实体被称为**资源**。每个资源都通过�
 ## 分层资源模型
 如下面的关系图所示，DocumentDB 分层**资源模型**由数据库帐户下的数组资源构成，每个帐户可通过一个逻辑且稳定的 URI 进行寻址。本文将一组资源称为一个**源**。
 
-> [AZURE.NOTE]
+> [!NOTE]
 DocumentDB 提供了高效的 TCP 协议，该协议在其通信模型中也是 RESTful，可通过 [.NET 客户端 SDK](https://msdn.microsoft.com/zh-cn/library/azure/dn781482.aspx) 获得。
 > 
 > 
@@ -41,15 +41,15 @@ DocumentDB 提供了高效的 TCP 协议，该协议在其通信模型中也是 
 ![DocumentDB 分层资源模型][1]  
 **分层资源模型**
 
-若要开始使用资源，必须使用 Azure 订阅[创建 DocumentDB 数据库帐户](/documentation/articles/documentdb-create-account/)。数据库帐户可以包含的一组**数据库**、每个数据库都包含多个**集合**，每个集合又包含**存储过程、触发器、UDF、文档**及相关**附件**（预览功能）。数据库也有关联的**用户**，每个用户都有一组**权限**，用于访问集合、存储过程、触发器、UDF、文档或附件。而数据库、用户、权限和集合就是系统定义的资源，其中已知的架构、文档和附件包含用户定义的任意 JSON 内容。
+若要开始使用资源，必须使用 Azure 订阅[创建 DocumentDB 数据库帐户](./documentdb-create-account.md)。数据库帐户可以包含的一组**数据库**、每个数据库都包含多个**集合**，每个集合又包含**存储过程、触发器、UDF、文档**及相关**附件**（预览功能）。数据库也有关联的**用户**，每个用户都有一组**权限**，用于访问集合、存储过程、触发器、UDF、文档或附件。而数据库、用户、权限和集合就是系统定义的资源，其中已知的架构、文档和附件包含用户定义的任意 JSON 内容。
 
 | 资源 | 说明 |
 | --- | --- |
-| 数据库帐户 |每个数据库帐户都与一组数据库和一个固定大小的附件（预览功能）blob 存储相关联。你可以使用 Azure 订阅创建一个或多个数据库帐户。有关详细信息，请访问[定价页](/pricing/details/documentdb/)。 |
+| 数据库帐户 |每个数据库帐户都与一组数据库和一个固定大小的附件（预览功能）blob 存储相关联。你可以使用 Azure 订阅创建一个或多个数据库帐户。有关详细信息，请访问[定价页](https://www.azure.cn/pricing/details/documentdb/)。 |
 | 数据库 |数据库是跨集合分区的文档存储的逻辑容器。它也是一个用户容器。 |
 | 用户 |范围权限的逻辑命名空间。 |
 | 权限 |与用户关联用于访问特定资源的授权令牌。 |
-| 集合 |集合是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。集合是一个计费实体，其中[成本](/documentation/articles/documentdb-performance-levels/)由与集合关联的性能级别确定。集合可以跨一个或多个分区/服务器，并且能伸缩以处理几乎无限制增长的存储或吞吐量。 |
+| 集合 |集合是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。集合是一个计费实体，其中[成本](./documentdb-performance-levels.md)由与集合关联的性能级别确定。集合可以跨一个或多个分区/服务器，并且能伸缩以处理几乎无限制增长的存储或吞吐量。 |
 | 存储过程 |以 JavaScript 编写的应用程序逻辑，使用集合注册且在数据库引擎中以事务方式执行。 |
 | 触发器 |在插入、替换或删除操作之前或之后执行的以 JavaScript 编写的应用程序逻辑。 |
 | UDF |用 JavaScript 编写的应用程序逻辑。UDF 让你可以建立自定义查询运算符模型，从而扩展核心 DocumentDB 查询语言。 |
@@ -59,7 +59,7 @@ DocumentDB 提供了高效的 TCP 协议，该协议在其通信模型中也是 
 ## 系统定义的资源对比用户定义的资源
 资源（例如数据库帐户、数据库、集合、用户、权限、存储过程、触发器和 UDF）都具有固定的架构并且都称为系统资源。与此相反，文档和附件这一类资源的架构不受限制，这一类资源就是用户定义的资源。在 DocumentDB 中，系统和用户定义的资源均由符合标准的 JSON 表示并进行管理。所有系统或用户定义的资源都具有以下公共属性。
 
-> [AZURE.NOTE]
+> [!NOTE]
 请注意，资源中所有系统生成的属性在其 JSON 表示形式中前面都加有下划线 \(\_\)。
 > 
 > 
@@ -67,34 +67,34 @@ DocumentDB 提供了高效的 TCP 协议，该协议在其通信模型中也是 
 <table>
     <tbody>
         <tr>
-	    <td valign="top"><p><strong>属性</strong></p></td>
-	    <td valign="top"><p><strong>是用户设置的还是系统生成的？</strong></p></td>
-	    <td valign="top"><p><strong>目的</strong></p></td>
+        <td valign="top"><p><strong>属性</strong></p></td>
+        <td valign="top"><p><strong>是用户设置的还是系统生成的？</strong></p></td>
+        <td valign="top"><p><strong>目的</strong></p></td>
         </tr>
         <tr>
-	    <td valign="top"><p>_rid</p></td>
-	    <td valign="top"><p>系统生成的</p></td>
-	    <td valign="top"><p>系统生成的、资源的唯一分层标识符</p></td>
+        <td valign="top"><p>_rid</p></td>
+        <td valign="top"><p>系统生成的</p></td>
+        <td valign="top"><p>系统生成的、资源的唯一分层标识符</p></td>
         </tr>
         <tr>
-	    <td valign="top"><p>_etag</p></td>
-	    <td valign="top"><p>系统生成的</p></td>
-	    <td valign="top"><p>乐观并发控制所需的资源的 ETag</p></td>
+        <td valign="top"><p>_etag</p></td>
+        <td valign="top"><p>系统生成的</p></td>
+        <td valign="top"><p>乐观并发控制所需的资源的 ETag</p></td>
         </tr>
         <tr>
-	    <td valign="top"><p>_ts</p></td>
-	    <td valign="top"><p>系统生成的</p></td>
-	    <td valign="top"><p>资源上次更新的时间戳</p></td>
+        <td valign="top"><p>_ts</p></td>
+        <td valign="top"><p>系统生成的</p></td>
+        <td valign="top"><p>资源上次更新的时间戳</p></td>
         </tr>
         <tr>
-	    <td valign="top"><p>_self</p></td>
-	    <td valign="top"><p>系统生成的</p></td>
-	    <td valign="top"><p>资源的唯一可寻址 URI</p></td>
+        <td valign="top"><p>_self</p></td>
+        <td valign="top"><p>系统生成的</p></td>
+        <td valign="top"><p>资源的唯一可寻址 URI</p></td>
         </tr>
         <tr>
-	    <td valign="top"><p>id</p></td>
-	    <td valign="top"><p>系统生成的</p></td>
-	    <td valign="top"><p>资源的用户定义的唯一名称（具有相同分区键值）。如果用户未指定 ID，系统将生成 ID</p></td>
+        <td valign="top"><p>id</p></td>
+        <td valign="top"><p>系统生成的</p></td>
+        <td valign="top"><p>资源的用户定义的唯一名称（具有相同分区键值）。如果用户未指定 ID，系统将生成 ID</p></td>
         </tr>
     </tbody>
 </table>
@@ -127,7 +127,7 @@ DocumentDB REST API 支持资源寻址和由 ID 和 \_rid 属性提出的请求�
 ## 数据库帐户
 你可以使用 Azure 订阅创建一个或多个 DocumentDB 数据库帐户。
 
-可以通过在 [http://portal.azure.cn/](https://portal.azure.cn/) 的 Azure 门户预览[创建和管理 DocumentDB 数据库帐户](/documentation/articles/documentdb-create-account/)。创建和管理数据库帐户需要具有管理访问权限，并且只能在你的 Azure 订阅下执行。
+可以通过在 [https://portal.azure.cn/](https://portal.azure.cn/) 的 Azure 门户预览[创建和管理 DocumentDB 数据库帐户](./documentdb-create-account.md)。创建和管理数据库帐户需要具有管理访问权限，并且只能在你的 Azure 订阅下执行。
 
 ### 数据库帐户属性
 作为设置和管理数据库帐户的一部分，你可以配置并读取以下属性：
@@ -135,16 +135,16 @@ DocumentDB REST API 支持资源寻址和由 ID 和 \_rid 属性提出的请求�
 <table border="0" cellspacing="0" cellpadding="0">
     <tbody>
         <tr>
-	    <td valign="top"><p><strong>属性名称</strong></p></td>
-	    <td valign="top"><p><strong>说明</strong></p></td>
+        <td valign="top"><p><strong>属性名称</strong></p></td>
+        <td valign="top"><p><strong>说明</strong></p></td>
         </tr>
         <tr>
-	    <td valign="top"><p>一致性策略</p></td>
-	    <td valign="top"><p>设置此属性来配置数据库帐户下的所有集合的默认一致性级别。你可以使用 [x-ms-consistency-level] 请求标头重写基于每个请求的一致性级别。<p><p>请注意，此属性仅适用于<i>用户定义的资源</i>。所有系统定义的资源都配置为支持具有高度一致性的读取/查询。</p></td>
+        <td valign="top"><p>一致性策略</p></td>
+        <td valign="top"><p>设置此属性来配置数据库帐户下的所有集合的默认一致性级别。你可以使用 [x-ms-consistency-level] 请求标头重写基于每个请求的一致性级别。<p><p>请注意，此属性仅适用于<i>用户定义的资源</i>。所有系统定义的资源都配置为支持具有高度一致性的读取/查询。</p></td>
         </tr>
         <tr>
-	    <td valign="top"><p>授权密钥</p></td>
-	    <td valign="top"><p>这些是提供对所有数据库帐户下的资源的管理访问权限的主要、次要和只读密钥。</p></td>
+        <td valign="top"><p>授权密钥</p></td>
+        <td valign="top"><p>这些是提供对所有数据库帐户下的资源的管理访问权限的主要、次要和只读密钥。</p></td>
         </tr>
     </tbody>
 </table>
@@ -197,7 +197,7 @@ DocumentDB 是真正无架构的数据库系统。无需为 JSON 文档假设或
 
 DocumentDB 查询模型尝试在功能、效率和简单性之间取得平衡。DocumentDB 数据库引擎在本机上进行编译和执行 SQL 查询语句。可以使用 [Azure DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或任一[客户端 SDK](https://msdn.microsoft.com/zh-cn/library/azure/dn781482.aspx) 查询集合。.NET SDK 附带了 LINQ 提供程序。
 
-> [AZURE.TIP]
+> [!TIP]
 可以在[查询板块](https://www.documentdb.com/sql/demo)中尝试 DocumentDB 并对数据集运行 SQL 查询。
 > 
 > 
@@ -219,52 +219,55 @@ DocumentDB 查询模型尝试在功能、效率和简单性之间取得平衡。
 
 创建集合之后即可使用 [Azure DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或任一[客户端 SDK](https://msdn.microsoft.com/zh-cn/library/azure/dn781482.aspx) 向集合注册存储过程、触发器和 UDF。注册后，你可以引用并执行它们。请考虑以下完全使用 JavaScript 编写的存储过程，此代码采用两个参数（书名和作者姓名），并创建了一个新文档，对文档进行查询，然后更新文档 — 所有这些操作都是在一个隐式的 ACID 事务内完成。在执行期间的任何时刻，如果引发 JavaScript 异常，则中止整个事务。
 
-    function businessLogic(name, author) {
-        var context = getContext();
-        var collectionManager = context.getCollection();        
-        var collectionLink = collectionManager.getSelfLink()
+```
+function businessLogic(name, author) {
+    var context = getContext();
+    var collectionManager = context.getCollection();        
+    var collectionLink = collectionManager.getSelfLink()
 
-        // create a new document.
-        collectionManager.createDocument(collectionLink,
-            {id: name, author: author},
-            function(err, documentCreated) {
-                if(err) throw new Error(err.message);
+    // create a new document.
+    collectionManager.createDocument(collectionLink,
+        {id: name, author: author},
+        function(err, documentCreated) {
+            if(err) throw new Error(err.message);
 
-                // filter documents by author
-                var filterQuery = "SELECT * from root r WHERE r.author = 'George R.'";
-                collectionManager.queryDocuments(collectionLink,
-                    filterQuery,
-                    function(err, matchingDocuments) {
-                        if(err) throw new Error(err.message);
+            // filter documents by author
+            var filterQuery = "SELECT * from root r WHERE r.author = 'George R.'";
+            collectionManager.queryDocuments(collectionLink,
+                filterQuery,
+                function(err, matchingDocuments) {
+                    if(err) throw new Error(err.message);
 
-                        context.getResponse().setBody(matchingDocuments.length);
+                    context.getResponse().setBody(matchingDocuments.length);
 
-                        // Replace the author name for all documents that satisfied the query.
-                        for (var i = 0; i < matchingDocuments.length; i++) {
-                            matchingDocuments[i].author = "George R. R. Martin";
-                            // we don’t need to execute a callback because they are in parallel
-                            collectionManager.replaceDocument(matchingDocuments[i]._self,
-                                matchingDocuments[i]);   
-                        }
-                    })
-            })
-    };
+                    // Replace the author name for all documents that satisfied the query.
+                    for (var i = 0; i < matchingDocuments.length; i++) {
+                        matchingDocuments[i].author = "George R. R. Martin";
+                        // we don’t need to execute a callback because they are in parallel
+                        collectionManager.replaceDocument(matchingDocuments[i]._self,
+                            matchingDocuments[i]);   
+                    }
+                })
+        })
+};
+```
 
 客户端可以将以上 JavaScript 逻辑“运送”到用于通过 HTTP POST 进行的事务性执行的数据库。有关使用 HTTP 方法的详细信息，请参阅 [RESTful interactions with DocumentDB resources](https://msdn.microsoft.com/zh-cn/library/azure/mt622086.aspx)（与 DocumentDB 资源进行 RESTful 交互）。
 
-    client.createStoredProcedureAsync(collection._self, {id: "CRUDProc", body: businessLogic})
-       .then(function(createdStoredProcedure) {
-            return client.executeStoredProcedureAsync(createdStoredProcedure.resource._self,
-                "NoSQL Distilled",
-                "Martin Fowler");
-        })
-        .then(function(result) {
-            console.log(result);
-        },
-        function(error) {
-            console.log(error);
-        });
-
+```
+client.createStoredProcedureAsync(collection._self, {id: "CRUDProc", body: businessLogic})
+   .then(function(createdStoredProcedure) {
+        return client.executeStoredProcedureAsync(createdStoredProcedure.resource._self,
+            "NoSQL Distilled",
+            "Martin Fowler");
+    })
+    .then(function(result) {
+        console.log(result);
+    },
+    function(error) {
+        console.log(error);
+    });
+```
 
 请注意，由于数据库本身能够识别 JSON 和 JavaScript，因此没有任何类型系统不匹配，也不需要“OR 映射”或代码生成方法。
 
@@ -278,131 +281,147 @@ DocumentDB 查询模型尝试在功能、效率和简单性之间取得平衡。
 ### 注册存储过程
 注册存储过程将通过 HTTP POST 在集合上创建新的存储过程资源。
 
-    var storedProc = {
-        id: "validateAndCreate",
-        body: function (documentToCreate) {
-            documentToCreate.id = documentToCreate.id.toUpperCase();
+```
+var storedProc = {
+    id: "validateAndCreate",
+    body: function (documentToCreate) {
+        documentToCreate.id = documentToCreate.id.toUpperCase();
 
-            var collectionManager = getContext().getCollection();
-            collectionManager.createDocument(collectionManager.getSelfLink(),
-                documentToCreate,
-                function(err, documentCreated) {
-                    if(err) throw new Error('Error while creating document: ' + err.message;
-                    getContext().getResponse().setBody('success - created ' + 
-                            documentCreated.name);
-                });
-        }
-    };
+        var collectionManager = getContext().getCollection();
+        collectionManager.createDocument(collectionManager.getSelfLink(),
+            documentToCreate,
+            function(err, documentCreated) {
+                if(err) throw new Error('Error while creating document: ' + err.message;
+                getContext().getResponse().setBody('success - created ' + 
+                        documentCreated.name);
+            });
+    }
+};
 
-    client.createStoredProcedureAsync(collection._self, storedProc)
-        .then(function (createdStoredProcedure) {
-            console.log("Successfully created stored procedure");
-        }, function(error) {
-            console.log("Error");
-        });
+client.createStoredProcedureAsync(collection._self, storedProc)
+    .then(function (createdStoredProcedure) {
+        console.log("Successfully created stored procedure");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 执行存储过程
 执行存储过程是针对现有的存储过程资源通过将参数传递给请求正文中的过程发出 HTTP POST 而实现的。
 
-    var inputDocument = {id : "document1", author: "G. G. Marquez"};
-    client.executeStoredProcedureAsync(createdStoredProcedure.resource._self, inputDocument)
-        .then(function(executionResult) {
-            assert.equal(executionResult, "success - created DOCUMENT1");
-        }, function(error) {
-            console.log("Error");
-        });
+```
+var inputDocument = {id : "document1", author: "G. G. Marquez"};
+client.executeStoredProcedureAsync(createdStoredProcedure.resource._self, inputDocument)
+    .then(function(executionResult) {
+        assert.equal(executionResult, "success - created DOCUMENT1");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 取消注册存储过程
 取消注册存储过程只需针对现有的存储过程资源发出 HTTP DELETE 即可完成。
 
-    client.deleteStoredProcedureAsync(createdStoredProcedure.resource._self)
-        .then(function (response) {
-            return;
-        }, function(error) {
-            console.log("Error");
-        });
-
+```
+client.deleteStoredProcedureAsync(createdStoredProcedure.resource._self)
+    .then(function (response) {
+        return;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 注册预触发器
 注册触发器将通过 HTTP POST 在集合上创建新的触发器资源。你可以指定触发器是前触发还是后触发，也可以指定与之关联的操作类型（例如创建、替换、删除或全部）。
 
-    var preTrigger = {
-        id: "upperCaseId",
-        body: function() {
-                var item = getContext().getRequest().getBody();
-                item.id = item.id.toUpperCase();
-                getContext().getRequest().setBody(item);
-        },
-        triggerType: TriggerType.Pre,
-        triggerOperation: TriggerOperation.All
-    }
+```
+var preTrigger = {
+    id: "upperCaseId",
+    body: function() {
+            var item = getContext().getRequest().getBody();
+            item.id = item.id.toUpperCase();
+            getContext().getRequest().setBody(item);
+    },
+    triggerType: TriggerType.Pre,
+    triggerOperation: TriggerOperation.All
+}
 
-    client.createTriggerAsync(collection._self, preTrigger)
-        .then(function (createdPreTrigger) {
-            console.log("Successfully created trigger");
-        }, function(error) {
-            console.log("Error");
-        });
+client.createTriggerAsync(collection._self, preTrigger)
+    .then(function (createdPreTrigger) {
+        console.log("Successfully created trigger");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 执行前触发
 触发器的执行是通过在通过请求标头发出文档资源的 POST/PUT/DELETE 请求时指定现有触发器名称完成的。
 
-    client.createDocumentAsync(collection._self, { id: "doc1", key: "Love in the Time of Cholera" }, { preTriggerInclude: "upperCaseId" })
-        .then(function(createdDocument) {
-            assert.equal(createdDocument.resource.id, "DOC1");
-        }, function(error) {
-            console.log("Error");
-        });
+```
+client.createDocumentAsync(collection._self, { id: "doc1", key: "Love in the Time of Cholera" }, { preTriggerInclude: "upperCaseId" })
+    .then(function(createdDocument) {
+        assert.equal(createdDocument.resource.id, "DOC1");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 取消注册前触发
 取消注册触发器只需针对现有的触发器资源发出 HTTP DELETE 即可完成。
 
-    client.deleteTriggerAsync(createdPreTrigger._self);
-        .then(function(response) {
-            return;
-        }, function(error) {
-            console.log("Error");
-        });
+```
+client.deleteTriggerAsync(createdPreTrigger._self);
+    .then(function(response) {
+        return;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 注册 UDF
 注册 UDF 将通过 HTTP POST 在集合上创建新的UDF 资源。
 
-    var udf = { 
-        id: "mathSqrt",
-        body: function(number) {
-                return Math.sqrt(number);
-        },
-    };
-    client.createUserDefinedFunctionAsync(collection._self, udf)
-        .then(function (createdUdf) {
-            console.log("Successfully created stored procedure");
-        }, function(error) {
-            console.log("Error");
-        });
+```
+var udf = { 
+    id: "mathSqrt",
+    body: function(number) {
+            return Math.sqrt(number);
+    },
+};
+client.createUserDefinedFunctionAsync(collection._self, udf)
+    .then(function (createdUdf) {
+        console.log("Successfully created stored procedure");
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 执行作为查询的一部分的 UDF
 可以将 UDF 指定为 SQL 查询的一部分，将其用作一种扩展核心 [DocumentDB 的 SQL 查询语言](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)的方法。
 
-    var filterQuery = "SELECT udf.mathSqrt(r.Age) AS sqrtAge FROM root r WHERE r.FirstName='John'";
-    client.queryDocuments(collection._self, filterQuery).toArrayAsync();
-        .then(function(queryResponse) {
-            var queryResponseDocuments = queryResponse.feed;
-        }, function(error) {
-            console.log("Error");
-        });
+```
+var filterQuery = "SELECT udf.mathSqrt(r.Age) AS sqrtAge FROM root r WHERE r.FirstName='John'";
+client.queryDocuments(collection._self, filterQuery).toArrayAsync();
+    .then(function(queryResponse) {
+        var queryResponseDocuments = queryResponse.feed;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 ### 取消注册 UDF
 取消注册 UDF 只需针对现有的 UDF 资源发出 HTTP DELETE 即可完成。
 
-    client.deleteUserDefinedFunctionAsync(createdUdf._self)
-        .then(function(response) {
-            return;
-        }, function(error) {
-            console.log("Error");
-        });
+```
+client.deleteUserDefinedFunctionAsync(createdUdf._self)
+    .then(function(response) {
+        return;
+    }, function(error) {
+        console.log("Error");
+    });
+```
 
 尽管上面的代码段演示了通过 [DocumentDB JavaScript SDK](https://github.com/Azure/azure-documentdb-js) 注册 \(POST\)、取消注册 \(PUT\)、读取/列出 \(GET\) 和执行 \(POST\)，但也可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或其他[客户端 SDK](https://msdn.microsoft.com/zh-cn/library/azure/dn781482.aspx)。
-
 
 ## 文档  <a name="documents"></a>
 你可以插入、替换、删除、读取、枚举和查询集合中的任意 JSON 文档。DocumentDB 不强制要求任何架构，并且对集合中的文档进行查询也不需要辅助索引的支持。
@@ -412,7 +431,7 @@ DocumentDB 查询模型尝试在功能、效率和简单性之间取得平衡。
 与所有其他资源一样，可以使用 REST API 或任一[客户端 SDK](https://msdn.microsoft.com/zh-cn/library/azure/dn781482.aspx) 轻松创建、替换、删除、读取、枚举和查询文档。删除文档将立即释放与所有嵌套附件相对应的配额。文档的读取一致性级别遵守数据库帐户中的一致性策略。可以根据你的应用程序的数据一致性要求在每个请求中重写此策略。查询文档时，读取一致性遵循集合上的索引编制模式设置。对于“一致性”，将遵循帐户的一致性策略。
 
 ## 附件和媒体
-> [AZURE.NOTE]
+> [!NOTE]
 附件和媒体资源是预览功能。
 > 
 > 
@@ -459,7 +478,6 @@ DocumentDB 用户是指对权限进行分组的逻辑命名空间。DocumentDB �
 
 ## 后续步骤
 有关通过 HTTP 命令使用资源的详细信息，请参阅 [RESTful interactions with DocumentDB resources](https://msdn.microsoft.com/zh-cn/library/azure/mt622086.aspx)（与 DocumentDB 资源进行 RESTful 交互）。
-
 
 [1]: ./media/documentdb-resources/resources1.png
 [2]: ./media/documentdb-resources/resources2.png

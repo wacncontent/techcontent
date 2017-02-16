@@ -3,33 +3,34 @@
 2. 请确保已在开发计算机上安装 Node.js 0.12.x 或更高版本。在命令提示符或 shell 中运行 `node --version` 以检查版本。有关使用包管理器在 Linux 上安装 Node.js 的信息，请参阅 [Installing Node.js via package manager][node-linux]（通过包管理器安装 Node.js）。
 3. 安装 Node.js 之后，请将最新版本的 [azure-iot-sdk-node][lnk-github-repo] 存储库复制到开发计算机。始终对最新版的库和示例使用**主**分支。
 4. 在 [azure-iot-sdk-node][lnk-github-repo] 存储库的本地副本中，将以下两个文件从 node/device/samples 文件夹复制到开发计算机上的某个空文件夹：
-   
+
    - packages.json
    - remote\_monitoring.js
 
-
 5. 打开 remote\_monitoring.js 文件并查找以下变量定义：
-   
-    
-        var connectionString = "[IoT Hub device connection string]";
-    
+
+    ```
+    var connectionString = "[IoT Hub device connection string]";
+    ```
+
 6. 将 **[IoT Hub device connection string]** 替换为设备连接字符串。使用在步骤 1 中记下的 IoT 中心主机名、设备 ID 和设备密钥的值。设备连接字符串具有以下格式：
-   
-    
-        HostName={your IoT Hub hostname};DeviceId={your device id};SharedAccessKey={your device key}
-    
-   
+
+    ```
+    HostName={your IoT Hub hostname};DeviceId={your device id};SharedAccessKey={your device key}
+    ```
+
     如果 IoT 中心主机名是 **contoso**，而设备 ID 为 **mydevice**，则连接字符串如下代码片段所示：
-   
-    
-        var connectionString = "HostName=contoso.azure-devices.cn;DeviceId=mydevice;SharedAccessKey=2s ... =="
-    
+
+    ```
+    var connectionString = "HostName=contoso.azure-devices.cn;DeviceId=mydevice;SharedAccessKey=2s ... =="
+    ```
+
 7. 保存文件。在包含这些文件的文件夹中的 shell 或命令提示符处运行以下命令，以安装所需包，然后运行示例应用程序：
-   
-    
-        npm install
-        node remote_monitoring.js
-    
+
+    ```
+    npm install
+    node remote_monitoring.js
+    ```
 
 ## 观察动态遥测的工作动态
 仪表板将显示现有模拟设备的温度与湿度遥测数据：

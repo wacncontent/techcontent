@@ -1,30 +1,27 @@
-<properties
-   pageTitle="升级 Azure Service Fabric 群集 | Azure"
-   description="升级运行 Service Fabric 群集的 Service Fabric 代码和/或配置，包括设置群集升级模式、升级证书、添加应用程序端口、执行 OS 修补，等等。执行升级时你会预料到哪种结果？"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="ChackDan"
-   manager="timlt"
-   editor=""/>  
+---
+title: 升级 Azure Service Fabric 群集 | Azure
+description: 升级运行 Service Fabric 群集的 Service Fabric 代码和/或配置，包括设置群集升级模式、升级证书、添加应用程序端口、执行 OS 修补，等等。执行升级时你会预料到哪种结果？
+services: service-fabric
+documentationCenter: .net
+authors: ChackDan
+manager: timlt
+editor: ''
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="10/10/2016"
-   wacn.date="01/25/2017"
-   ms.author="chackdan"/>  
-
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/10/2016
+wacn.date: 01/25/2017
+ms.author: chackdan
+---
 
 # 升级 Azure Service Fabric 群集
 
-> [AZURE.SELECTOR]
-- [Azure 群集](/documentation/articles/service-fabric-cluster-upgrade/)
-- [独立群集](/documentation/articles/service-fabric-cluster-upgrade-windows-server/)
+> [!div class="op_single_selector"]
+- [Azure 群集](./service-fabric-cluster-upgrade.md)
+- [独立群集](./service-fabric-cluster-upgrade-windows-server.md)
 
 对于任何新式系统而言，为可升级性做好规划是实现产品长期成功的关键所在。Azure Service Fabric 群集是你拥有的，但部分由 Microsoft 管理的资源。本文说明自动管理的项目以及你可以自行配置的项目。
 
@@ -34,10 +31,10 @@
 
 为此，请门户上设置“upgradeMode”群集配置，或者在创建时或稍后在实时群集上使用 Resource Manager 进行设置。
 
->[AZURE.NOTE] 请确保群集始终运行受支持的结构版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
+>[!NOTE]
+> 请确保群集始终运行受支持的结构版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
 
 群集运行的版本过期前 14 天，系统会生成运行状况事件，使群集进入警告运行状况状态。在升级到支持的结构版本之前，群集将保持警告状态。
-
 
 ### 通过门户设置升级模式 
 
@@ -45,11 +42,10 @@
 
 ![Create\_Manualmode][Create_Manualmode]  
 
-
 在实时群集上，可以使用管理体验将群集设置为自动或手动。
 
 #### 在设置为手动模式的群集上，通过门户升级到新版本。
- 
+
 若要升级到新版本，只需从下拉列表中选择可用的版本并保存即可。结构升级将自动开始。在升级过程中，将遵守群集运行状况策略（节点运行状况和所有在群集中运行的应用程序的运行状况的组合）。
 
 如果不符合现行的群集运行状况策略，则回滚升级。请在本文档中向下滚动，详细了解如何设置这些自定义运行状况策略。
@@ -58,16 +54,14 @@
 
 ![Manage\_Automaticmode][Manage_Automaticmode]  
 
-
 ### 通过 Resource Manager 模板设置升级模式 
 
 将“upgradeMode”配置添加到 Microsoft.ServiceFabric/clusters 资源定义，将“clusterCodeVersion”设置为支持的结构版本之一，如下所示，然后部署模板。“upgradeMode”的有效值为“Manual”或“Automatic”。
- 
+
 ![ARMUpgradeMode][ARMUpgradeMode]  
 
-
 #### 在设置为手动模式的群集上，通过 Resource Manager 模板升级到新版本。
- 
+
 当群集处于手动模式时，若要升级到新版本，请将“clusterCodeVersion”更改为支持的版本，然后部署该版本。部署模板时，将自动开始结构升级。在升级过程中，将遵守群集运行状况策略（节点运行状况和所有在群集中运行的应用程序的运行状况的组合）。
 
 如果不符合现行的群集运行状况策略，则回滚升级。请在本文档中向下滚动，详细了解如何设置这些自定义运行状况策略。
@@ -80,47 +74,45 @@
 
 “supportExpiryUtc”告知给定的版本即将过期或已过期。最新版本没有有效日期 - 它的值为“9999-12-31T23:59:59.9999999”，这只是表示尚未设置过期日期。
 
+```REST
+GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
 
-	GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
-
-	Output:
-	{
-	                  "value": [
-	                    {
-	                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.0.1427.9490",
-	                      "name": "5.0.1427.9490",
-	                      "type": "Microsoft.ServiceFabric/environments/clusterVersions",
-	                      "properties": {
-	                        "codeVersion": "5.0.1427.9490",
-	                        "supportExpiryUtc": "2016-11-26T23:59:59.9999999",
-	                        "environment": "Windows"
-	                      }
-	                    },
-	                    {
-	                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.0.1427.9490",
-	                      "name": "5.1.1427.9490",
-	                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
-	                      "properties": {
-	                        "codeVersion": "5.1.1427.9490",
-	                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-	                        "environment": "Windows"
-	                      }
-	                    },
-	                    {
-	                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.4.1427.9490",
-	                      "name": "4.4.1427.9490",
-	                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
-	                      "properties": {
-	                        "codeVersion": "4.4.1427.9490",
-	                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-	                        "environment": "Linux"
-	                      }
-	                    }
-	                  ]
-	                }
-
-
-
+Output:
+{
+                  "value": [
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.0.1427.9490",
+                      "name": "5.0.1427.9490",
+                      "type": "Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "5.0.1427.9490",
+                        "supportExpiryUtc": "2016-11-26T23:59:59.9999999",
+                        "environment": "Windows"
+                      }
+                    },
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.0.1427.9490",
+                      "name": "5.1.1427.9490",
+                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "5.1.1427.9490",
+                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                        "environment": "Windows"
+                      }
+                    },
+                    {
+                      "id": "subscriptions/35349203-a0b3-405e-8a23-9f1450984307/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/4.4.1427.9490",
+                      "name": "4.4.1427.9490",
+                      "type": " Microsoft.ServiceFabric/environments/clusterVersions",
+                      "properties": {
+                        "codeVersion": "4.4.1427.9490",
+                        "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                        "environment": "Linux"
+                      }
+                    }
+                  ]
+                }
+```
 
 ## 群集升级模式为“自动”时的结构升级行为
 
@@ -172,11 +164,9 @@ Microsoft 将维护 Azure 群集中运行的结构代码和配置。我们将根
 
 ### 证书
 
-通过门户可以轻松为群集新增或删除证书。请参阅[此文档中的详细说明](/documentation/articles/service-fabric-cluster-security-update-certs-azure/)
+通过门户可以轻松为群集新增或删除证书。请参阅[此文档中的详细说明](./service-fabric-cluster-security-update-certs-azure.md)
 
 ![显示 Azure 门户中证书指纹的屏幕截图。][CertificateUpgrade]  
-
-
 
 ### 应用程序端口
 
@@ -190,24 +180,22 @@ Microsoft 将维护 Azure 群集中运行的结构代码和配置。我们将根
 
     ![显示如何在门户中向负载均衡器添加探测的屏幕截图。][AddingProbes]  
 
-
 2. 将新规则添加到负载均衡器。
 
     使用在上一个步骤中创建的探测，向同一负载均衡器添加新规则。
 
     ![在门户中向负载均衡器添加新规则。][AddingLBRules]  
 
-
-
 ### 放置属性
 
 对于每个节点类型，可以添加要在应用程序中使用的自定义放置属性。NodeType 是无需显式添加即可使用的默认属性。
 
->[AZURE.NOTE] 有关使用放置约束、节点属性以及如何定义它们的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)中的“放置约束和节点属性”部分。
+>[!NOTE]
+> 有关使用放置约束、节点属性以及如何定义它们的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](./service-fabric-cluster-resource-manager-cluster-description.md)中的“放置约束和节点属性”部分。
 
 ### 容量度量值
 
-对于每个节点类型，可以添加要在应用程序中用于报告负载的自定义容量度量值。有关使用容量指标来报告负载的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)以及[指标和负载](/documentation/articles/service-fabric-cluster-resource-manager-metrics/)。
+对于每个节点类型，可以添加要在应用程序中用于报告负载的自定义容量度量值。有关使用容量指标来报告负载的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](./service-fabric-cluster-resource-manager-cluster-description.md)以及[指标和负载](./service-fabric-cluster-resource-manager-metrics.md)。
 
 ### 结构升级设置 - 运行状况策略
 
@@ -217,10 +205,9 @@ Microsoft 将维护 Azure 群集中运行的结构代码和配置。我们将根
 
 ![管理自定义运行状况策略][HealthPolices]  
 
-
 ### 自定义群集的结构设置
 
-请参阅 [Service Fabric 群集结构设置](/documentation/articles/service-fabric-cluster-fabric-settings/)，了解可以自定义哪些设置，以及如何自定义。
+请参阅 [Service Fabric 群集结构设置](./service-fabric-cluster-fabric-settings.md)，了解可以自定义哪些设置，以及如何自定义。
 
 ### 构成群集的 VM 上的操作系统修补
 
@@ -231,9 +218,9 @@ Microsoft 将维护 Azure 群集中运行的结构代码和配置。我们将根
 如果你必须升级群集虚拟机上的操作系统映像，必须一次升级一个 VM。你需要自行负责这种升级 - 目前没有自动化的功能用于实现此目的。
 
 ## 后续步骤
-- 了解如何自定义某些 [Service Fabric 群集结构设置](/documentation/articles/service-fabric-cluster-fabric-settings/)
-- 了解如何[扩展和缩减群集](/documentation/articles/service-fabric-cluster-scale-up-down/)
-- 了解[应用程序升级](/documentation/articles/service-fabric-application-upgrade/)
+- 了解如何自定义某些 [Service Fabric 群集结构设置](./service-fabric-cluster-fabric-settings.md)
+- 了解如何[扩展和缩减群集](./service-fabric-cluster-scale-up-down.md)
+- 了解[应用程序升级](./service-fabric-application-upgrade.md)
 
 <!--Image references-->
 

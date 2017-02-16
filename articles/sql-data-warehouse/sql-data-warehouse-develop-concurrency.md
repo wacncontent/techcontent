@@ -1,23 +1,21 @@
-<properties
-   pageTitle="SQL 数据仓库中的并发性和工作负荷管理 | Azure"
-   description="在开发解决方案之前，了解 SQL 数据仓库中的并发性和工作负荷管理。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="sonyam"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库中的并发性和工作负荷管理 | Azure
+description: 在开发解决方案之前，了解 SQL 数据仓库中的并发性和工作负荷管理。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: sonyam
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/03/2017"
-   ms.author="sonyama;barbkess;jrj"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/03/2017
+ms.author: sonyama;barbkess;jrj
+---
 
 # SQL 数据仓库中的并发性和工作负荷管理
 若要大规模提供可预测性能，可以通过 Azure SQL 数据仓库控制并发级别和资源分配（例如内存和 CPU 优先级）。本文将介绍并发性和工作负荷管理的概念，说明如何实现这两种功能，以及如何在数据仓库中控制它们。SQL 数据仓库工作负荷管理旨在协助你提供多用户环境支持。它不适用于多租户工作负荷。
@@ -51,16 +49,17 @@ SQL 数据仓库允许多达 1,024 个并发连接。所有 1,024 个连接都�
 
 满足其中一个阈值时，就会按“先进先出”原则排队执行新查询。如果查询已经完成且查询和槽的数目降至限制以下，则会释放排队的查询。
 
-> [AZURE.NOTE]  以独占方式在动态管理视图 (DMV) 或目录视图上执行的 *Select* 查询不受任何并发限制的约束。用户可以对系统进行监视，而不用考虑在系统中执行的查询的数目。
+> [!NOTE]
+>  以独占方式在动态管理视图 (DMV) 或目录视图上执行的 *Select* 查询不受任何并发限制的约束。用户可以对系统进行监视，而不用考虑在系统中执行的查询的数目。
 
 ##<a name="resource-classes"></a> 资源类
 资源类有助于控制针对查询的内存分配和 CPU 周期。可以*数据库角色*的形式向用户分配四个资源类。这四个资源类是：**smallrc**、**mediumrc**、**largerc** 和 **xlargerc**。smallrc 类的用户获得的内存量较小，但是可以利用更高的并发性。与之相反，分配给 xlargerc 类的用户获得的内存量大，因此可以并发运行的查询数较少。
 
 默认情况下，每个用户都是小型资源类 (smallrc) 的成员。过程 `sp_addrolemember` 用于提高资源类的级别，过程 `sp_droprolemember` 用于降低资源类的级别。例如，以下命令会将 loaduser 的资源类提高到 largerc 级别：
 
-
-	EXEC sp_addrolemember 'largerc', 'loaduser'
-
+```sql
+EXEC sp_addrolemember 'largerc', 'loaduser'
+```
 
 较好的做法是将用户永久分配给资源类，而不是更改用户的资源类。例如，加载到聚集列存储表时，如果分配了更多的内存，则可创建质量更高的索引。为了确保加载项能够访问更多的内存，可创建一个用户来专门加载数据，并将该用户永久分配给更高级的资源类。
 
@@ -166,51 +165,51 @@ SQL 数据仓库通过使用工作负荷组来实现资源类。总共有八个�
 
 在进行故障诊断时，可以使用以下 DMV 查询，从资源调控器的角度来详细查看内存资源分配的差异，或者分析工作负荷组目前的和历史上的使用情况：
 
-
-	WITH rg
-	AS
-	(   SELECT  
-	     pn.name						AS node_name
-	    ,pn.[type]						AS node_type
-	    ,pn.pdw_node_id					AS node_id
-	    ,rp.name						AS pool_name
-	    ,rp.max_memory_kb*1.0/1024				AS pool_max_mem_MB
-	    ,wg.name						AS group_name
-	    ,wg.importance					AS group_importance
-	    ,wg.request_max_memory_grant_percent		AS group_request_max_memory_grant_pcnt
-	    ,wg.max_dop						AS group_max_dop
-	    ,wg.effective_max_dop				AS group_effective_max_dop
-	    ,wg.total_request_count				AS group_total_request_count
-	    ,wg.total_queued_request_count			AS group_total_queued_request_count
-	    ,wg.active_request_count				AS group_active_request_count
-	    ,wg.queued_request_count				AS group_queued_request_count
-	    FROM    sys.dm_pdw_nodes_resource_governor_workload_groups wg
-	    JOIN    sys.dm_pdw_nodes_resource_governor_resource_pools rp    
-	            ON  wg.pdw_node_id  = rp.pdw_node_id
-	    	    AND wg.pool_id      = rp.pool_id
-	    JOIN    sys.dm_pdw_nodes pn
-	            ON	wg.pdw_node_id	= pn.pdw_node_id
-	    WHERE   wg.name like 'SloDWGroup%'
-	        AND     rp.name = 'SloDWPool'
-	)
-	SELECT	pool_name
-	,		pool_max_mem_MB
-	,		group_name
-	,		group_importance
-	,		(pool_max_mem_MB/100)*group_request_max_memory_grant_pcnt AS max_memory_grant_MB
-	,		node_name
-	,		node_type
-	,       group_total_request_count
-	,       group_total_queued_request_count
-	,       group_active_request_count
-	,       group_queued_request_count
-	FROM	rg
-	ORDER BY
-		node_name
-	,	group_request_max_memory_grant_pcnt
-	,	group_importance
-	;
-
+```sql
+WITH rg
+AS
+(   SELECT  
+     pn.name						AS node_name
+    ,pn.[type]						AS node_type
+    ,pn.pdw_node_id					AS node_id
+    ,rp.name						AS pool_name
+    ,rp.max_memory_kb*1.0/1024				AS pool_max_mem_MB
+    ,wg.name						AS group_name
+    ,wg.importance					AS group_importance
+    ,wg.request_max_memory_grant_percent		AS group_request_max_memory_grant_pcnt
+    ,wg.max_dop						AS group_max_dop
+    ,wg.effective_max_dop				AS group_effective_max_dop
+    ,wg.total_request_count				AS group_total_request_count
+    ,wg.total_queued_request_count			AS group_total_queued_request_count
+    ,wg.active_request_count				AS group_active_request_count
+    ,wg.queued_request_count				AS group_queued_request_count
+    FROM    sys.dm_pdw_nodes_resource_governor_workload_groups wg
+    JOIN    sys.dm_pdw_nodes_resource_governor_resource_pools rp    
+            ON  wg.pdw_node_id  = rp.pdw_node_id
+            AND wg.pool_id      = rp.pool_id
+    JOIN    sys.dm_pdw_nodes pn
+            ON	wg.pdw_node_id	= pn.pdw_node_id
+    WHERE   wg.name like 'SloDWGroup%'
+        AND     rp.name = 'SloDWPool'
+)
+SELECT	pool_name
+,		pool_max_mem_MB
+,		group_name
+,		group_importance
+,		(pool_max_mem_MB/100)*group_request_max_memory_grant_pcnt AS max_memory_grant_MB
+,		node_name
+,		node_type
+,       group_total_request_count
+,       group_total_queued_request_count
+,       group_active_request_count
+,       group_queued_request_count
+FROM	rg
+ORDER BY
+    node_name
+,	group_request_max_memory_grant_pcnt
+,	group_importance
+;
+```
 
 ## 遵循并发限制的查询
 大多数查询都受资源类的约束。这些查询必须同时不超出并发查询和并发槽的阈值。用户无法选择从并发槽模型中排除查询。
@@ -263,73 +262,69 @@ Removed as these two are not confirmed / supported under SQLDW
 
 1. **创建登录名：**在托管 SQL 数据仓库数据库的 SQL Server 上与 **master** 数据库建立连接，然后执行以下命令。
 
+    CREATE LOGIN newperson WITH PASSWORD = 'mypassword';
+    CREATE USER newperson for LOGIN newperson;
 
-	CREATE LOGIN newperson WITH PASSWORD = 'mypassword';
-	CREATE USER newperson for LOGIN newperson;
-
-
-	> [AZURE.NOTE] 最好是在针对 Azure SQL 数据仓库用户的 master 数据库中创建一个用户。在 master 中创建用户以后，用户即可使用 SSMS 之类的工具登录，不需指定数据库名称。此外，用户还可以使用对象资源管理器查看 SQL Server 上的所有数据库。有关创建和管理用户的详细信息，请参阅[保护 SQL 数据仓库中的数据库][]。
+    > [!NOTE]
+    > 最好是在针对 Azure SQL 数据仓库用户的 master 数据库中创建一个用户。在 master 中创建用户以后，用户即可使用 SSMS 之类的工具登录，不需指定数据库名称。此外，用户还可以使用对象资源管理器查看 SQL Server 上的所有数据库。有关创建和管理用户的详细信息，请参阅[保护 SQL 数据仓库中的数据库][]。
 
 2. **创建 SQL 数据仓库用户：**与 **SQL 数据仓库**数据库建立连接，然后执行以下命令。
 
-
-		CREATE USER newperson FOR LOGIN newperson;
-
+    ```sql
+    CREATE USER newperson FOR LOGIN newperson;
+    ```
 
 3. **授予权限：**以下示例授予对 **SQL 数据仓库**数据库的 `CONTROL` 权限。数据库级别的 `CONTROL` 相当于 SQL Server 中的 db\_owner。
 
-
-	GRANT CONTROL ON DATABASE::MySQLDW to newperson;
-
+    GRANT CONTROL ON DATABASE::MySQLDW to newperson;
 
 4. **提高资源类的级别：**若要将用户添加到更高级别的工作负荷管理角色，请使用以下查询。
 
-
-	EXEC sp_addrolemember 'largerc', 'newperson'
-
+    EXEC sp_addrolemember 'largerc', 'newperson'
 
 5. **降低资源类的级别：**若要将用户从工作负荷管理角色中删除，请使用以下查询。
 
+    ```sql
+    EXEC sp_droprolemember 'largerc', 'newperson'
+    ```
 
-		EXEC sp_droprolemember 'largerc', 'newperson'
-
-
-	> [AZURE.NOTE] 无法从 smallrc 中删除用户。
+    > [!NOTE]
+    > 无法从 smallrc 中删除用户。
 
 ## 对排队的查询进行的检测，以及其他 DMV
 
 可以使用 `sys.dm_pdw_exec_requests` DMV 来确定在并发队列中等待的查询。正在等待并发槽的查询的状态为**挂起**。
 
-
-	SELECT 	 r.[request_id]									AS Request_ID
-			,r.[status]										AS Request_Status
-			,r.[submit_time]								AS Request_SubmitTime
-			,r.[start_time]									AS Request_StartTime
-	        ,DATEDIFF(ms,[submit_time],[start_time])		AS Request_InitiateDuration_ms
-	        ,r.resource_class                               AS Request_resource_class
-	FROM    sys.dm_pdw_exec_requests r;
-	;
-
+```
+SELECT 	 r.[request_id]									AS Request_ID
+        ,r.[status]										AS Request_Status
+        ,r.[submit_time]								AS Request_SubmitTime
+        ,r.[start_time]									AS Request_StartTime
+        ,DATEDIFF(ms,[submit_time],[start_time])		AS Request_InitiateDuration_ms
+        ,r.resource_class                               AS Request_resource_class
+FROM    sys.dm_pdw_exec_requests r;
+;
+```
 
 可以使用 `sys.database_principals` 来查看工作负荷管理角色。
 
-
-	SELECT  ro.[name]           AS [db_role_name]
-	FROM    sys.database_principals ro
-	WHERE   ro.[type_desc]      = 'DATABASE_ROLE'
-	AND     ro.[is_fixed_role]  = 0;
-
+```sql
+SELECT  ro.[name]           AS [db_role_name]
+FROM    sys.database_principals ro
+WHERE   ro.[type_desc]      = 'DATABASE_ROLE'
+AND     ro.[is_fixed_role]  = 0;
+```
 
 以下查询显示分配给每个用户的角色。
 
-
-	SELECT	r.name AS role_principal_name
-	,		m.name AS member_principal_name
-	FROM	sys.database_role_members rm
-	JOIN	sys.database_principals AS r			ON rm.role_principal_id		= r.principal_id
-	JOIN	sys.database_principals AS m			ON rm.member_principal_id	= m.principal_id
-	WHERE	r.name IN ('mediumrc','largerc', 'xlargerc');
-
+```
+SELECT	r.name AS role_principal_name
+,		m.name AS member_principal_name
+FROM	sys.database_role_members rm
+JOIN	sys.database_principals AS r			ON rm.role_principal_id		= r.principal_id
+JOIN	sys.database_principals AS m			ON rm.member_principal_id	= m.principal_id
+WHERE	r.name IN ('mediumrc','largerc', 'xlargerc');
+```
 
 SQL 数据仓库具有以下等待类型：
 
@@ -340,81 +335,80 @@ SQL 数据仓库具有以下等待类型：
 
 可以使用 `sys.dm_pdw_waits` DMV 来查看请求所等待的具体资源。
 
-
-	SELECT  w.[wait_id]
-	,       w.[session_id]
-	,       w.[type]											AS Wait_type
-	,       w.[object_type]
-	,       w.[object_name]
-	,       w.[request_id]
-	,       w.[request_time]
-	,       w.[acquire_time]
-	,       w.[state]
-	,       w.[priority]
-	,		SESSION_ID()										AS Current_session
-	,		s.[status]											AS Session_status
-	,		s.[login_name]
-	,		s.[query_count]
-	,		s.[client_id]
-	,		s.[sql_spid]
-	,		r.[command]											AS Request_command
-	,		r.[label]
-	,		r.[status]											AS Request_status
-	,		r.[submit_time]
-	,		r.[start_time]
-	,		r.[end_compile_time]
-	,		r.[end_time]
-	,		DATEDIFF(ms,r.[submit_time],r.[start_time])			AS Request_queue_time_ms
-	,		DATEDIFF(ms,r.[start_time],r.[end_compile_time])	AS Request_compile_time_ms
-	,		DATEDIFF(ms,r.[end_compile_time],r.[end_time])		AS Request_execution_time_ms
-	,		r.[total_elapsed_time]
-	FROM    sys.dm_pdw_waits w
-	JOIN    sys.dm_pdw_exec_sessions s  ON w.[session_id] = s.[session_id]
-	JOIN    sys.dm_pdw_exec_requests r  ON w.[request_id] = r.[request_id]
-	WHERE	w.[session_id] <> SESSION_ID();
-
+```sql
+SELECT  w.[wait_id]
+,       w.[session_id]
+,       w.[type]											AS Wait_type
+,       w.[object_type]
+,       w.[object_name]
+,       w.[request_id]
+,       w.[request_time]
+,       w.[acquire_time]
+,       w.[state]
+,       w.[priority]
+,		SESSION_ID()										AS Current_session
+,		s.[status]											AS Session_status
+,		s.[login_name]
+,		s.[query_count]
+,		s.[client_id]
+,		s.[sql_spid]
+,		r.[command]											AS Request_command
+,		r.[label]
+,		r.[status]											AS Request_status
+,		r.[submit_time]
+,		r.[start_time]
+,		r.[end_compile_time]
+,		r.[end_time]
+,		DATEDIFF(ms,r.[submit_time],r.[start_time])			AS Request_queue_time_ms
+,		DATEDIFF(ms,r.[start_time],r.[end_compile_time])	AS Request_compile_time_ms
+,		DATEDIFF(ms,r.[end_compile_time],r.[end_time])		AS Request_execution_time_ms
+,		r.[total_elapsed_time]
+FROM    sys.dm_pdw_waits w
+JOIN    sys.dm_pdw_exec_sessions s  ON w.[session_id] = s.[session_id]
+JOIN    sys.dm_pdw_exec_requests r  ON w.[request_id] = r.[request_id]
+WHERE	w.[session_id] <> SESSION_ID();
+```
 
 `sys.dm_pdw_resource_waits` DMV 仅显示给定查询所占用的资源等待。资源等待时间只度量等待提供资源的时间，与信号等待时间相反，后者是基础 SQL Server 将查询调度到 CPU 所需的时间。
 
-
-	SELECT  [session_id]
-	,       [type]
-	,       [object_type]
-	,       [object_name]
-	,       [request_id]
-	,       [request_time]
-	,       [acquire_time]
-	,       DATEDIFF(ms,[request_time],[acquire_time])  AS acquire_duration_ms
-	,       [concurrency_slots_used]                    AS concurrency_slots_reserved
-	,       [resource_class]
-	,       [wait_id]                                   AS queue_position
-	FROM    sys.dm_pdw_resource_waits
-	WHERE	[session_id] <> SESSION_ID();
-
+```sql
+SELECT  [session_id]
+,       [type]
+,       [object_type]
+,       [object_name]
+,       [request_id]
+,       [request_time]
+,       [acquire_time]
+,       DATEDIFF(ms,[request_time],[acquire_time])  AS acquire_duration_ms
+,       [concurrency_slots_used]                    AS concurrency_slots_reserved
+,       [resource_class]
+,       [wait_id]                                   AS queue_position
+FROM    sys.dm_pdw_resource_waits
+WHERE	[session_id] <> SESSION_ID();
+```
 
 可以使用 `sys.dm_pdw_wait_stats` DMV 对等待进行历史趋势分析。
 
-
-	SELECT	w.[pdw_node_id]
-	,		w.[wait_name]
-	,		w.[max_wait_time]
-	,		w.[request_count]
-	,		w.[signal_time]
-	,		w.[completed_count]
-	,		w.[wait_time]
-	FROM	sys.dm_pdw_wait_stats w;
-
+```sql
+SELECT	w.[pdw_node_id]
+,		w.[wait_name]
+,		w.[max_wait_time]
+,		w.[request_count]
+,		w.[signal_time]
+,		w.[completed_count]
+,		w.[wait_time]
+FROM	sys.dm_pdw_wait_stats w;
+```
 
 ## 后续步骤
 有关如何管理数据库用户和安全性的详细信息，请参阅[保护 SQL 数据仓库中的数据库][Secure a database in SQL Data Warehouse]。有关如何通过更大型资源类来改进聚集列存储索引质量的详细信息，请参阅[重新生成索引以提高段质量]。
 
 <!--Image references-->
 
-
 <!--Article references-->
-[Secure a database in SQL Data Warehouse]: /documentation/articles/sql-data-warehouse-overview-manage-security/
-[重新生成索引以提高段质量]: /documentation/articles/sql-data-warehouse-tables-index/#rebuilding-indexes-to-improve-segment-quality
-[保护 SQL 数据仓库中的数据库]: /documentation/articles/sql-data-warehouse-overview-manage-security/
+[Secure a database in SQL Data Warehouse]: ./sql-data-warehouse-overview-manage-security.md
+[重新生成索引以提高段质量]: ./sql-data-warehouse-tables-index.md#rebuilding-indexes-to-improve-segment-quality
+[保护 SQL 数据仓库中的数据库]: ./sql-data-warehouse-overview-manage-security.md
 
 <!--MSDN references-->
 [Managing Databases and Logins in Azure SQL Database]: https://msdn.microsoft.com/zh-cn/library/azure/ee336235.aspx

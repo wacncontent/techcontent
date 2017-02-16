@@ -1,37 +1,36 @@
-<properties 
-   pageTitle="在 Resource Manager 中使用模板创建内部负载均衡器 | Azure"
-   description="了解如何在 Resource Manager 中使用模板创建内部负载均衡器"
-   services="load-balancer"
-   documentationCenter="na"
-   authors="joaoma"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager"
-/>  
+---
+title: 在 Resource Manager 中使用模板创建内部负载均衡器 | Azure
+description: 了解如何在 Resource Manager 中使用模板创建内部负载均衡器
+services: load-balancer
+documentationCenter: na
+authors: joaoma
+manager: carmonm
+editor: ''
+tags: azure-resource-manager
 
-<tags  
-   ms.service="load-balancer"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/24/2016"
-   wacn.date="01/05/2017" />  
-
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/24/2016
+wacn.date: 01/05/2017
+---
 
 # 开始使用模板创建内部负载均衡器
 
-> [AZURE.SELECTOR]
-[Azure Portal](/documentation/articles/load-balancer-get-started-ilb-arm-portal/)
-[PowerShell](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)
-[Azure CLI](/documentation/articles/load-balancer-get-started-ilb-arm-cli/)
-[Template](/documentation/articles/load-balancer-get-started-ilb-arm-template/)
+> [!div class="op_single_selector"]
+[Azure Portal](./load-balancer-get-started-ilb-arm-portal.md)
+[PowerShell](./load-balancer-get-started-ilb-arm-ps.md)
+[Azure CLI](./load-balancer-get-started-ilb-arm-cli.md)
+[Template](./load-balancer-get-started-ilb-arm-template.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
->[AZURE.NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Microsoft 建议对大多数新部署使用该模型，而不要使用[经典部署模型](/documentation/articles/load-balancer-get-started-ilb-classic-ps/)。
+>[!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Microsoft 建议对大多数新部署使用该模型，而不要使用[经典部署模型](./load-balancer-get-started-ilb-classic-ps.md)。
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
 
 ## 通过单击部署方式部署模板
 
@@ -50,34 +49,40 @@
 
 4. 运行 **New-AzureRmResourceGroupDeployment** cmdlet 以使用模板创建资源组。
 
-		New-AzureRmResourceGroupDeployment -Name TestRG `
-		    -TemplateFile 'c:\lb\azuredeploy.json' `
-		    -TemplateParameterFile 'c:\lb\azuredeploy.parameters.json'
+    ```azurecli
+    New-AzureRmResourceGroupDeployment -Name TestRG `
+        -TemplateFile 'c:\lb\azuredeploy.json' `
+        -TemplateParameterFile 'c:\lb\azuredeploy.parameters.json'
+    ```
 
-		
 ## 使用 Azure CLI 部署模板
 
 若要使用 Azure CLI 部署模板，请执行以下步骤。
 
-1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到资源管理器模式，如下所示。
 
-		azure config mode arm
+    ```azurecli
+    azure config mode arm
+    ```
 
-	下面是上述命令的预期输出：
+    下面是上述命令的预期输出：
 
-		info:    New mode is arm
+    ```
+    info:    New mode is arm
+    ```
 
 3. 打开参数文件，选择其内容，然后将其保存到计算机上的文件中。对于本示例，我们将参数文件保存到 *parameters.json* 。
 4. 运行 **azure group deployment create** 命令以使用你在前面下载并修改的模板和参数文件部署新的内部负载均衡器。在输出后显示的列表说明了所用的参数。
 
-		azure group create -n TestRG -l chinaeast --template-file 'c:\lb\azuredeploy.json' -e 'c:\lb\azuredeploy.parameters.json'
-
+    ```
+    azure group create -n TestRG -l chinaeast --template-file 'c:\lb\azuredeploy.json' -e 'c:\lb\azuredeploy.parameters.json'
+    ```
 
 ## 后续步骤
 
-[使用源 IP 关联配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[使用源 IP 关联配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_1128_2016-->

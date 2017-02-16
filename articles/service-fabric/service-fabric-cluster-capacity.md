@@ -1,24 +1,21 @@
-<properties
-   pageTitle="规划 Service Fabric 群集容量 | Azure"
-   description="Service Fabric 群集容量规划注意事项。节点类型、持久性和可靠性层"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="ChackDan"
-   manager="timlt"
-   editor=""/>  
+---
+title: 规划 Service Fabric 群集容量 | Azure
+description: Service Fabric 群集容量规划注意事项。节点类型、持久性和可靠性层
+services: service-fabric
+documentationCenter: .net
+authors: ChackDan
+manager: timlt
+editor: ''
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="09/09/2016"
-   wacn.date="01/25/2017"
-   ms.author="chackdan"/>  
-
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/09/2016
+wacn.date: 01/25/2017
+ms.author: chackdan
+---
 
 # Service Fabric 群集容量规划注意事项
 
@@ -61,14 +58,12 @@
 
 ![显示具有两个节点类型的群集的屏幕截图][SystemServices]
 
-
 ### 非主节点类型
 包含多个节点类型的群集有一个主节点类型，剩余的是非主节点类型。下面是非主节点类型的特征：
 
 - 此节点类型的 VM 大小下限取决于选择的持久性层。持久性层的默认值为 Bronze。有关持久性层的定义以及可采用的值的详细信息，请向下滚动。
 
 - 此节点类型的 VM 数目下限可以是 1。但是，你应该根据想要在此节点类型中运行的应用程序/服务的副本数目选择此数目。部署群集之后，节点类型中的 VM 数目可能会增加。
-
 
 ## 群集的持久性特征
 
@@ -96,7 +91,8 @@
 
 - Bronze - 运行包含 3 个目标副本集的系统服务
 
->[AZURE.NOTE] 选择的可靠性层决定了主节点类型必须具有的节点数下限。可靠性层与群集大小上限没有关系。因此，你可以在 Bronze 可靠性层运行包含 20 个节点的群集。
+>[!NOTE]
+> 选择的可靠性层决定了主节点类型必须具有的节点数下限。可靠性层与群集大小上限没有关系。因此，你可以在 Bronze 可靠性层运行包含 20 个节点的群集。
 
  随时可以选择将群集的可靠性从一个层更新为另一个层。这样做会触发更改系统服务副本集计数所需的群集升级。等待升级完成，然后对群集做出其他任何更改，如添加节点，等等。可以在 Service Fabric Explorer 中运行 [Get-ServiceFabricClusterUpgrade](https://msdn.microsoft.com/zh-cn/library/mt126012.aspx) 来监视升级进度
 
@@ -106,8 +102,8 @@
 
 完成容量规划并设置群集后，请阅读以下文章：
 
-- [Service Fabric 群集安全性](/documentation/articles/service-fabric-cluster-security/)
-- [Service Fabric 运行状况模型简介](/documentation/articles/service-fabric-health-introduction/)
+- [Service Fabric 群集安全性](./service-fabric-cluster-security.md)
+- [Service Fabric 运行状况模型简介](./service-fabric-health-introduction.md)
 
 <!--Image references-->
 

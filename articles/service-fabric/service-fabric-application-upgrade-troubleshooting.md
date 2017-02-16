@@ -1,23 +1,21 @@
-<properties
-   pageTitle="应用程序升级故障排除 | Azure"
-   description="本文涵盖了有关升级 Service Fabric 应用程序的一些常见问题以及如何解决这些问题。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="mani-ramaswamy"
-   manager="timlt"
-   editor=""/>  
+---
+title: 应用程序升级故障排除 | Azure
+description: 本文涵盖了有关升级 Service Fabric 应用程序的一些常见问题以及如何解决这些问题。
+services: service-fabric
+documentationCenter: .net
+authors: mani-ramaswamy
+manager: timlt
+editor: ''
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="11/15/2016"
-   wacn.date="01/25/2017"
-   ms.author="subramar"/>  
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/15/2016
+wacn.date: 01/25/2017
+ms.author: subramar
+---
 
 # 应用程序升级故障排除
 本文介绍一些围绕升级 Azure Service Fabric 应用程序的常见问题以及这些问题的解决方法。
@@ -55,15 +53,17 @@ FailureTimestampUtc            : 4/14/2015 9:27:05 PM
 FailureReason                  : UpgradeDomainTimeout
 UpgradeDomainProgressAtFailure : MYUD1
 
-                                 NodeName            : Node4
-                                 UpgradePhase        : PostUpgradeSafetyCheck
-                                 PendingSafetyChecks :
-                                     WaitForPrimaryPlacement - PartitionId: 744c8d9f-1d26-417e-a60e-cd48f5c098f0
+```
+                             NodeName            : Node4
+                             UpgradePhase        : PostUpgradeSafetyCheck
+                             PendingSafetyChecks :
+                                 WaitForPrimaryPlacement - PartitionId: 744c8d9f-1d26-417e-a60e-cd48f5c098f0
 
-                                 NodeName            : Node1
-                                 UpgradePhase        : PostUpgradeSafetyCheck
-                                 PendingSafetyChecks :
-                                     WaitForPrimaryPlacement - PartitionId: 4b43f4d8-b26b-424e-9307-7a7a62e79750
+                             NodeName            : Node1
+                             UpgradePhase        : PostUpgradeSafetyCheck
+                             PendingSafetyChecks :
+                                 WaitForPrimaryPlacement - PartitionId: 4b43f4d8-b26b-424e-9307-7a7a62e79750
+```
 UpgradeState                   : RollingBackCompleted
 UpgradeDuration                : 00:00:46
 CurrentUpgradeDomainDuration   : 00:00:00
@@ -86,7 +86,7 @@ UpgradeReplicaSetCheckTimeout  : 00:00:00
 当前 **UpgradeState** 为 *RollingBackCompleted*，因此必须已使用回滚 **FailureAction**（将在失败时自动回滚升级）执行原始升级。如果已使用手动 **FailureAction** 执行了原始升级，则升级将改为处于挂起状态，以允许对应用程序进行实时调试。
 
 ### 调查运行状况检查失败
-运行状况检查失败可能由各种其他问题触发，这些问题可能发生在升级域中所有节点完成升级、通过所有安全检查之后。此段落后面的输出是升级因运行状况检查失败而失败时的典型输出。**UnhealthyEvaluations** 字段根据指定的[运行状况策略](/documentation/articles/service-fabric-health-introduction/)，捕获升级失败时失败的运行状况检查的快照。
+运行状况检查失败可能由各种其他问题触发，这些问题可能发生在升级域中所有节点完成升级、通过所有安全检查之后。此段落后面的输出是升级因运行状况检查失败而失败时的典型输出。**UnhealthyEvaluations** 字段根据指定的[运行状况策略](./service-fabric-health-introduction.md)，捕获升级失败时失败的运行状况检查的快照。
 
 ~~~
 PS D:\temp> Get-ServiceFabricApplicationUpgrade fabric:/DemoApp
@@ -106,21 +106,23 @@ UpgradeDomainsStatus                    : { "MYUD1" = "Completed";
 UnhealthyEvaluations                    :
                                           Unhealthy services: 50% (2/4), ServiceType='PersistedServiceType', MaxPercentUnhealthyServices=0%.
 
-                                          Unhealthy service: ServiceName='fabric:/DemoApp/Svc3', AggregatedHealthState='Error'.
+```
+                                      Unhealthy service: ServiceName='fabric:/DemoApp/Svc3', AggregatedHealthState='Error'.
 
-                                              Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
+                                          Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
 
-                                              Unhealthy partition: PartitionId='3a9911f6-a2e5-452d-89a8-09271e7e49a8', AggregatedHealthState='Error'.
+                                          Unhealthy partition: PartitionId='3a9911f6-a2e5-452d-89a8-09271e7e49a8', AggregatedHealthState='Error'.
 
-                                                  Error event: SourceId='Replica', Property='InjectedFault'.
+                                              Error event: SourceId='Replica', Property='InjectedFault'.
 
-                                          Unhealthy service: ServiceName='fabric:/DemoApp/Svc2', AggregatedHealthState='Error'.
+                                      Unhealthy service: ServiceName='fabric:/DemoApp/Svc2', AggregatedHealthState='Error'.
 
-                                              Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
+                                          Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
 
-                                              Unhealthy partition: PartitionId='744c8d9f-1d26-417e-a60e-cd48f5c098f0', AggregatedHealthState='Error'.
+                                          Unhealthy partition: PartitionId='744c8d9f-1d26-417e-a60e-cd48f5c098f0', AggregatedHealthState='Error'.
 
-                                                  Error event: SourceId='Replica', Property='InjectedFault'.
+                                              Error event: SourceId='Replica', Property='InjectedFault'.
+```
 
 UpgradeKind                             : Rolling
 RollingUpgradeMode                      : Monitored
@@ -212,17 +214,16 @@ Service Fabric 将所有百分比转换为实际实体（如副本、分区和�
 
 ## 后续步骤
 
-[使用 Visual Studio 升级应用程序](/documentation/articles/service-fabric-application-upgrade-tutorial/)逐步讲解了如何使用 Visual Studio 进行应用程序升级。
+[使用 Visual Studio 升级应用程序](./service-fabric-application-upgrade-tutorial.md)逐步讲解了如何使用 Visual Studio 进行应用程序升级。
 
-[使用 PowerShell 升级应用程序](/documentation/articles/service-fabric-application-upgrade-tutorial-powershell/)逐步讲解了如何使用 PowerShell 进行应用程序升级。
+[使用 PowerShell 升级应用程序](./service-fabric-application-upgrade-tutorial-powershell.md)逐步讲解了如何使用 PowerShell 进行应用程序升级。
 
-使用[升级参数](/documentation/articles/service-fabric-application-upgrade-parameters/)来控制应用程序的升级方式。
+使用[升级参数](./service-fabric-application-upgrade-parameters.md)来控制应用程序的升级方式。
 
-了解如何使用[数据序列化](/documentation/articles/service-fabric-application-upgrade-data-serialization/)，使应用程序在升级后保持兼容。
+了解如何使用[数据序列化](./service-fabric-application-upgrade-data-serialization.md)，使应用程序在升级后保持兼容。
 
-参考[高级主题](/documentation/articles/service-fabric-application-upgrade-advanced/)，了解如何在升级应用程序时使用高级功能。
+参考[高级主题](./service-fabric-application-upgrade-advanced.md)，了解如何在升级应用程序时使用高级功能。
 
-参考 [Troubleshooting Application Upgrades](/documentation/articles/service-fabric-application-upgrade-troubleshooting/)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
- 
+参考 [Troubleshooting Application Upgrades](./service-fabric-application-upgrade-troubleshooting.md)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

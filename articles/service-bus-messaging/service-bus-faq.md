@@ -1,22 +1,21 @@
-<properties 
-    pageTitle="服务总线常见问题解答 | Azure"
-    description="回答了一些关于 Azure 服务总线的常见问题。"
-    services="service-bus"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager=""
-    editor="" />  
+---
+title: 服务总线常见问题解答 | Azure
+description: 回答了一些关于 Azure 服务总线的常见问题。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: ''
+editor: ''
 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/04/2016"
-    ms.author="sethm;juconway"
-    wacn.date="12/26/2016"/>  
-
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/04/2016
+ms.author: sethm;juconway
+wacn.date: 12/26/2016
+---
 
 # 服务总线常见问题解答
 
@@ -33,7 +32,7 @@
 
 ### 什么是 Azure 服务总线消息传送？
 
-[Azure 服务总线消息传送](/documentation/articles/service-bus-messaging-overview/)是一个异步消息传送云平台，可让你在分离的系统之间发送数据。Microsoft 以服务的形式提供 Azure 服务总线消息传送，这表示你不需要托管任何自有硬件就能使用它。
+[Azure 服务总线消息传送](./service-bus-messaging-overview.md)是一个异步消息传送云平台，可让你在分离的系统之间发送数据。Microsoft 以服务的形式提供 Azure 服务总线消息传送，这表示你不需要托管任何自有硬件就能使用它。
 
 ### 什么是服务总线命名空间？
 
@@ -41,7 +40,7 @@
 
 ### 什么是 Azure 服务总线队列？
 
-[服务总线队列](/documentation/articles/service-bus-queues-topics-subscriptions/)是用于存储消息的实体。当你有多个应用程序，或者多个需要彼此通信的分布式应用程序部分时，队列特别有用。队列和发行中心的相似之处在于，两者都会接收多个产品（消息），再从该处送出。
+[服务总线队列](./service-bus-queues-topics-subscriptions.md)是用于存储消息的实体。当你有多个应用程序，或者多个需要彼此通信的分布式应用程序部分时，队列特别有用。队列和发行中心的相似之处在于，两者都会接收多个产品（消息），再从该处送出。
 
 ### 什么是 Azure 服务总线主题和订阅？
 
@@ -49,7 +48,7 @@
 
 ### 什么是分区实体？
 
-传统的队列或主题由单个消息中转站进行处理并存储在一个消息存储中。[分区队列或主题](/documentation/articles/service-bus-partitioning/)由多个消息代理处理，并存储在多个消息传送存储中。这意味着分区的队列或主题的总吞吐量不再受到单个消息中转站或消息存储的性能所限制。此外，消息传送存储的临时中断不会导致分区的队列或主题不可用。
+传统的队列或主题由单个消息中转站进行处理并存储在一个消息存储中。[分区队列或主题](./service-bus-partitioning.md)由多个消息代理处理，并存储在多个消息传送存储中。这意味着分区的队列或主题的总吞吐量不再受到单个消息中转站或消息存储的性能所限制。此外，消息传送存储的临时中断不会导致分区的队列或主题不可用。
 
 请注意，使用分区实体时不保证排序。如果某个分区不可用，你仍可从其他分区发送和接收消息。
 
@@ -74,7 +73,7 @@
 
 ## <a name="service-bus-pricing"></a> 服务总线定价
 
-本部分回答了一些关于服务总线定价结构的常见问题。你还可以访问 [Azure 支持常见问题](http://go.microsoft.com/fwlink/?LinkID=185083)了解一般的 Azure 定价信息。有关服务总线定价的完整信息，请参阅[服务总线定价](/pricing/details/messaging/)。
+本部分回答了一些关于服务总线定价结构的常见问题。你还可以访问 [Azure 支持常见问题](http://go.microsoft.com/fwlink/?LinkID=185083)了解一般的 Azure 定价信息。有关服务总线定价的完整信息，请参阅[服务总线定价](https://www.azure.cn/pricing/details/messaging/)。
 
 ### 服务总线如何收取费用？
 
@@ -166,17 +165,17 @@
 
 若要了解有关服务总线消息传送的详细信息，请参阅以下主题。
 
-- [服务总线消息传送概述](/documentation/articles/service-bus-messaging-overview/)
-- [Azure 服务总线体系结构概述](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
-- [服务总线队列入门](/documentation/articles/service-bus-dotnet-get-started-with-queues/)
+- [服务总线消息传送概述](./service-bus-messaging-overview.md)
+- [Azure 服务总线体系结构概述](./service-bus-fundamentals-hybrid-solutions.md)
+- [服务总线队列入门](./service-bus-dotnet-get-started-with-queues.md)
 
-[使用服务总线中转消息传送改进性能的最佳实践]: /documentation/articles/service-bus-performance-improvements/
-[使应用程序免受服务总线中断和灾难影响的最佳实践]: /documentation/articles/service-bus-outages-disasters/
-[Pricing overview]: /pricing/details/messaging/
-[配额概述]: /documentation/articles/service-bus-quotas/
-[此处]: /documentation/articles/service-bus-powershell-how-to-provision/#migrate-a-namespace-to-another-azure-subscription
-[Exceptions overview]: /documentation/articles/service-bus-messaging-exceptions/
-[异常概述]: /documentation/articles/service-bus-messaging-exceptions/
-[共享访问签名]: /documentation/articles/service-bus-sas-overview/
+[使用服务总线中转消息传送改进性能的最佳实践]: ./service-bus-performance-improvements.md
+[使应用程序免受服务总线中断和灾难影响的最佳实践]: ./service-bus-outages-disasters.md
+[Pricing overview]: https://www.azure.cn/pricing/details/messaging/
+[配额概述]: ./service-bus-quotas.md
+[此处]: ./service-bus-powershell-how-to-provision.md#migrate-a-namespace-to-another-azure-subscription
+[Exceptions overview]: ./service-bus-messaging-exceptions.md
+[异常概述]: ./service-bus-messaging-exceptions.md
+[共享访问签名]: ./service-bus-sas-overview.md
 
 <!---HONumber=Mooncake_1219_2016-->

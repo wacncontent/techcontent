@@ -12,6 +12,4 @@
 
 不一定要使用 Azure Configuration Manager。还可以使用 API，如 .NET Framework 的 [ConfigurationManager 类](https://msdn.microsoft.com/zh-cn/library/system.configuration.configurationmanager.aspx)。
 
-
-
 <!---HONumber=Mooncake_0405_2016-->

@@ -1,24 +1,21 @@
-<properties
-	pageTitle="Azure 通知中心"
-	description="了解如何在 Azure 中使用通知中心。代码示例是使用 .NET API 通过 C# 编写的。"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""
-	services="notification-hubs"
-	documentationCenter=""/>  
+---
+title: Azure 通知中心
+description: 了解如何在 Azure 中使用通知中心。代码示例是使用 .NET API 通过 C# 编写的。
+authors: wesmc7777
+manager: erikre
+editor: ''
+services: notification-hubs
+documentationCenter: ''
 
-
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="multiple"
-	ms.devlang="multiple"
-	ms.topic="hero-article"
-	ms.date="08/25/2016"
-	ms.author="wesmc"
-   	wacn.date="01/10/2017"/>  
-
-
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: multiple
+ms.devlang: multiple
+ms.topic: hero-article
+ms.date: 08/25/2016
+ms.author: wesmc
+wacn.date: 01/10/2017
+---
 
 #Azure 通知中心
 
@@ -35,8 +32,6 @@ Azure 通知中心提供易用的基础结构，使你能够从任何后端（�
 - 向体育/财经/游戏应用程序的用户或组发送事件通知。
 - 向用户通知企业事件，如新消息/电子邮件和销售商机。
 - 发送多重身份验证所需的一次性密码。
-
-
 
 ##什么是推送通知？
 
@@ -76,9 +71,9 @@ Azure 通知中心提供易用的基础结构，使你能够从任何后端（�
 - **平台依赖性。** 若要将通知发送到位于不同平台的设备，必须在后端中为多个界面编码。不但具体细节不同，而且通知的呈现方式（磁贴、toast 或提醒）也与平台相关。这些差异可能会迫使开发人员编写复杂且难以维护的后端代码。
 
 - **扩展。** 扩展此基础结构涉及两方面：
-	+ 根据 PNS 规定，每次启动应用程序时都必须刷新设备令牌。这会产生大量流量（和随之发生的数据库访问）以保持设备令牌最新。当设备数量增长（可能达到数百万台）时，创建并维护此基础结构的成本不可忽视。
+    + 根据 PNS 规定，每次启动应用程序时都必须刷新设备令牌。这会产生大量流量（和随之发生的数据库访问）以保持设备令牌最新。当设备数量增长（可能达到数百万台）时，创建并维护此基础结构的成本不可忽视。
 
-	+ 大多数 PNS 不支持广播到多台设备。因此，广播到数百万台设备将调用 PNS 数百万次。能够扩展这些请求很重要，因为应用开发人员通常要维持较低的总延迟。例如，接收消息的最后一台设备不应在发送通知 30 分钟后才收到通知，因为在许多情况下，这违背使用推送通知的目的。
+    + 大多数 PNS 不支持广播到多台设备。因此，广播到数百万台设备将调用 PNS 数百万次。能够扩展这些请求很重要，因为应用开发人员通常要维持较低的总延迟。例如，接收消息的最后一台设备不应在发送通知 30 分钟后才收到通知，因为在许多情况下，这违背使用推送通知的目的。
 - **路由。** PNS 提供了一种将消息发送到设备的方法。但是，在大多数应用程序中，通知将定向到用户和/或兴趣组（例如，分配到某个客户帐户的所有员工）。因此，为了将通知路由到正确的设备，应用程序后端必须维护将兴趣组与设备令牌相关联的注册表。此开销增加了应用程序的上市总时间和维护成本。
 
 ##为何使用通知中心？
@@ -87,37 +82,34 @@ Azure 通知中心提供易用的基础结构，使你能够从任何后端（�
 
 ![][1]
 
-
 通知中心提供了随时可用的推送通知基础结构，该基础结构具有以下优势：
 
 - **多个平台。**
-	+  支持所有主要移动平台。通知中心可将推送通知发送到 Windows 应用商店、iOS、Android 和 Windows Phone 应用程序。
+    +  支持所有主要移动平台。通知中心可将推送通知发送到 Windows 应用商店、iOS、Android 和 Windows Phone 应用程序。
 
-	+  通知中心提供了用于将通知发送到所有受支持平台的常见界面。不需要特定于平台的协议。应用程序后端可以采用特定于平台的格式或独立于平台的格式发送通知。应用程序只与通知中心通信。
+    +  通知中心提供了用于将通知发送到所有受支持平台的常见界面。不需要特定于平台的协议。应用程序后端可以采用特定于平台的格式或独立于平台的格式发送通知。应用程序只与通知中心通信。
 
-	+  设备句柄管理。通知中心维护 PNS 的句柄注册表和反馈。
+    +  设备句柄管理。通知中心维护 PNS 的句柄注册表和反馈。
 
 - **适用于任何后端**：云或本地后端、.NET、PHP、Java、Node 等。
 
 - **扩展。** 通知中心可扩展到数百万台设备，并且无需重新架构或分片。
 
-
 - **丰富的传送模式集**：
 
-	- *广播*：只需单次 API 调用，即可向数百万台设备几乎同时地进行广播。
+    - *广播*：只需单次 API 调用，即可向数百万台设备几乎同时地进行广播。
 
-	- *单播/多播*：推送到表示单个用户的标记，包括其所有设备；或更广泛的组；例如，单独的窗体因素（平板电脑与手机）。
+    - *单播/多播*：推送到表示单个用户的标记，包括其所有设备；或更广泛的组；例如，单独的窗体因素（平板电脑与手机）。
 
-	- *分段*：推送到由标记表达式定义的复杂段（例如，纽约市属于美国北部人群的设备）。
+    - *分段*：推送到由标记表达式定义的复杂段（例如，纽约市属于美国北部人群的设备）。
 
-	每台设备在将其句柄发送到通知中心时，都可以指定一个或多个_标记_。有关[标记]的详细信息。无需预设置或处理标记。标记提供了一种用于将通知发送给用户或兴趣组的简单方法。由于标记可以包含任何特定于应用程序的标识符（例如用户 ID 或组 ID），因此，使用它们将使应用程序后端不必再存储和管理设备句柄。
+    每台设备在将其句柄发送到通知中心时，都可以指定一个或多个_标记_。有关[标记]的详细信息。无需预设置或处理标记。标记提供了一种用于将通知发送给用户或兴趣组的简单方法。由于标记可以包含任何特定于应用程序的标识符（例如用户 ID 或组 ID），因此，使用它们将使应用程序后端不必再存储和管理设备句柄。
 
 - **个性化**：每个设备都可以有一个或多个模板，以实现按设备本地化和个性化设置，而不会影响后端代码。
 
 - **安全性**：共享访问机密 (SAS) 或联合身份验证。
 
 - **丰富的遥测功能**：可以在门户中或以编程方式使用。
-
 
 ##与 App Service Mobile Apps 集成 <a name="integration-with-app-service-mobile-apps"></a>
 
@@ -135,14 +127,12 @@ Mobile Apps 开发人员可以借助以下工作流来利用通知中心：
 - **Mobile Apps 客户端 SDK。** 这些多平台 SDK 提供简单的 API 用于注册，然后自动与链接到移动应用的通知中心联系。开发人员不需要深入了解通知中心凭据和使用其他服务。
     + SDK 将使用 Mobile Apps 的已经过身份验证的用户 ID 来自动标记给定设备，以实现推送到用户的方案。
     + SDK 自动使用 Mobile Apps 安装 ID 作为 GUID 来注册到通知中心，省去了开发人员维护多个服务 GUID 的麻烦。
-    
+
 - **安装模型。** Mobile Apps 使用通知中心的最新推送模型来呈现 JSON 安装中所有与设备关联的推送属性，该模型与推送通知密切合作且易于使用。
 
 - **灵活性。** 即使是就地集成的，开发人员也始终可以选择直接使用通知中心。
 
 - **[Azure 门户预览]中的集成体验。** Mobile Apps 以可视化方式呈现推送功能，开发人员可以通过 Mobile Apps 轻松使用关联的通知中心。
-
-
 
 ##后续步骤
 
@@ -159,19 +149,18 @@ Mobile Apps 开发人员可以借助以下工作流来利用通知中心：
 + [Microsoft.WindowsAzure.Messaging.NotificationHub]
 + [Microsoft.ServiceBus.Notifications]
 
-
   [0]: ./media/notification-hubs-overview/registration-diagram.png
   [1]: ./media/notification-hubs-overview/notification-hub-diagram.png
-  [客户如何使用通知中心]: /home/features/notification-hubs/
-  [通知中心教程和指南]: /documentation/services/notification-hubs/
-  [iOS]: /documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/
-  [Windows Universal]: /documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/
-  [Windows Phone]: /documentation/articles/notification-hubs-windows-mobile-push-notifications-mpns/
-  [Kindle]: /documentation/articles/notification-hubs-kindle-amazon-adm-push-notification/
+  [客户如何使用通知中心]: https://www.azure.cn/home/features/notification-hubs/
+  [通知中心教程和指南]: ./index.md
+  [iOS]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
+  [Windows Universal]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
+  [Windows Phone]: ./notification-hubs-windows-mobile-push-notifications-mpns.md
+  [Kindle]: ./notification-hubs-kindle-amazon-adm-push-notification.md
   [Microsoft.WindowsAzure.Messaging.NotificationHub]: http://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.messaging.notificationhub.aspx
   [Microsoft.ServiceBus.Notifications]: http://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.notifications.aspx
-  [应用服务移动应用]: /documentation/articles/app-service-mobile-value-prop/
-  [模板]: /documentation/articles/notification-hubs-templates-cross-platform-push-messages/
+  [应用服务移动应用]: ../app-service-mobile/app-service-mobile-value-prop.md
+  [模板]: ./notification-hubs-templates-cross-platform-push-messages.md
   [Azure 门户预览]: https://portal.azure.cn
   [标记]: http://msdn.microsoft.com/zh-cn/library/azure/dn530749.aspx
 

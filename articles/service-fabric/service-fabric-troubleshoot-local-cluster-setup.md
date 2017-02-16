@@ -1,21 +1,22 @@
-<properties
-    pageTitle="对本地 Service Fabric 群集设置进行故障排除 | Azure"
-    description="本文就本地开发群集的故障排除提供一些建议"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="seanmck"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="97f4feaa-bba0-47af-8fdd-07f811fe2202"
-    ms.service="service-fabric"
-    ms.devlang="dotNet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="10/29/2016"
-    wacn.date="01/25/2017"
-    ms.author="seanmck" />
+---
+title: 对本地 Service Fabric 群集设置进行故障排除 | Azure
+description: 本文就本地开发群集的故障排除提供一些建议
+services: service-fabric
+documentationcenter: .net
+author: seanmck
+manager: timlt
+editor: ''
+
+ms.assetid: 97f4feaa-bba0-47af-8fdd-07f811fe2202
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/29/2016
+wacn.date: 01/25/2017
+ms.author: seanmck
+---
 
 # 排除本地开发群集安装的故障
 
@@ -29,12 +30,13 @@
 
 在运行 DevClusterSetup 脚本时，你看到了类似下面的错误：
 
-    Cannot clean up C:\SfDevCluster\Log fully as references are likely being held to items in it. Please remove those and run this script again.
-    At line:1 char:1 + .\DevClusterSetup.ps1
-    + ~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo : NotSpecified: (:) [Write-Error], WriteErrorException
-    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DevClusterSetup.ps1
-
+```
+Cannot clean up C:\SfDevCluster\Log fully as references are likely being held to items in it. Please remove those and run this script again.
+At line:1 char:1 + .\DevClusterSetup.ps1
++ ~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : NotSpecified: (:) [Write-Error], WriteErrorException
++ FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DevClusterSetup.ps1
+```
 
 #### 解决方案
 
@@ -52,7 +54,8 @@
 
 始终直接从 Windows PowerShell 运行 Service Fabric cmdlet。
 
->[AZURE.NOTE] 最新版本的 Azure PowerShell 不创建特殊的快捷方式，因此不会再出现此问题。
+>[!NOTE]
+> 最新版本的 Azure PowerShell 不创建特殊的快捷方式，因此不会再出现此问题。
 
 ### 类型初始化异常
 
@@ -70,12 +73,14 @@
 
 对 Connect-ServiceFabricCluster 的调用失败，并显示类似下面的错误：
 
-    Connect-ServiceFabricCluster : The object is closed.
-    At line:1 char:1
-    + Connect-ServiceFabricCluster
-    + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo : InvalidOperation: (:) [Connect-ServiceFabricCluster], FabricObjectClosedException
-    + FullyQualifiedErrorId : CreateClusterConnectionErrorId,Microsoft.ServiceFabric.Powershell.ConnectCluster
+```
+Connect-ServiceFabricCluster : The object is closed.
+At line:1 char:1
++ Connect-ServiceFabricCluster
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : InvalidOperation: (:) [Connect-ServiceFabricCluster], FabricObjectClosedException
++ FullyQualifiedErrorId : CreateClusterConnectionErrorId,Microsoft.ServiceFabric.Powershell.ConnectCluster
+```
 
 #### 解决方案
 
@@ -93,11 +98,12 @@
 
 确保在你的解决方案中没有将任何服务项目设置为启动项目。只应将 Service Fabric 应用程序项目设置为启动项目。
 
->[AZURE.TIP] 如果本地群集在设置后开始出现异常行为，则可使用本地群集管理器系统托盘应用程序来重置它。该操作将删除现有群集，然后设置一个新的。请注意，所有部署的应用程序和关联的数据都会被删除。
+>[!TIP]
+> 如果本地群集在设置后开始出现异常行为，则可使用本地群集管理器系统托盘应用程序来重置它。该操作将删除现有群集，然后设置一个新的。请注意，所有部署的应用程序和关联的数据都会被删除。
 
 ## 后续步骤
 
-- [使用系统运行状况报告了解群集并排除故障](/documentation/articles/service-fabric-understand-and-troubleshoot-with-system-health-reports/)
-- [使用 Service Fabric 资源管理器可视化群集](/documentation/articles/service-fabric-visualizing-your-cluster/)
+- [使用系统运行状况报告了解群集并排除故障](./service-fabric-understand-and-troubleshoot-with-system-health-reports.md)
+- [使用 Service Fabric 资源管理器可视化群集](./service-fabric-visualizing-your-cluster.md)
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

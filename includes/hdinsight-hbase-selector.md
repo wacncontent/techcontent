@@ -1,3 +1,3 @@
-> [AZURE.SELECTOR]
-- [Linux cluster](/documentation/articles/hdinsight-hbase-tutorial-get-started-linux/)
-- [Windows cluster](/documentation/articles/hdinsight-hbase-tutorial-get-started/)
+> [!div class="op_single_selector"]
+- [Linux cluster](../articles/hdinsight/hdinsight-hbase-tutorial-get-started-linux.md)
+- [Windows cluster](../articles/hdinsight/hdinsight-hbase-tutorial-get-started.md)

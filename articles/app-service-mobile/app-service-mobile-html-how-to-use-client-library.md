@@ -1,24 +1,24 @@
-<properties
-	pageTitle="如何使用适用于 Azure 移动应用的 JavaScript SDK"
-	description="如何为 Azure 移动应用使用 v"
-	services="app-service\mobile"
-	documentationCenter="javascript"
-	authors="adrianhall"
-	manager="erikre"
-	editor=""/>
+---
+title: 如何使用适用于 Azure 移动应用的 JavaScript SDK
+description: 如何为 Azure 移动应用使用 v
+services: app-service\mobile
+documentationCenter: javascript
+authors: adrianhall
+manager: erikre
+editor: ''
 
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="html"
-	ms.devlang="javascript"
-	ms.topic="article"
-	ms.date="10/30/2016"
-	wacn.date="01/23/2017"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: html
+ms.devlang: javascript
+ms.topic: article
+ms.date: 10/30/2016
+wacn.date: 01/23/2017
+ms.author: adrianha
+---
 
 # 如何使用适用于 Azure 移动应用的 JavaScript 客户端库
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 本指南介绍如何使用最新的 [Azure 移动应用 JavaScript SDK] 执行常见任务。对于 Azure 移动应用的新手，请先完成 [Azure Mobile Apps Quick Start]（Azure 移动应用快速入门）创建后端和表。本指南着重介绍如何在 HTML/JavaScript Web 应用程序中使用移动后端。
 
@@ -33,26 +33,26 @@
 
 可以通过 `npm` 命令安装 Azure 移动应用 JavaScript SDK：
 
-
-		npm install azure-mobile-apps-client --save
-
+```
+    npm install azure-mobile-apps-client --save
+```
 
 也可将库用作 CommonJS 环境（例如 Browserify 和 Webpack）中的 ES2015 模块，或者用作 AMD 库。例如：
 
-
-		# For ECMAScript 5.1 CommonJS
-		var WindowsAzure = require('azure-mobile-apps-client');
-		# For ES2015 modules
-		import * as WindowsAzure from 'azure-mobile-apps-client';
-
+```
+    # For ECMAScript 5.1 CommonJS
+    var WindowsAzure = require('azure-mobile-apps-client');
+    # For ES2015 modules
+    import * as WindowsAzure from 'azure-mobile-apps-client';
+```
 
 还可直接从 CDN 下载使用预建版本的 SDK：
 
+```html
+<script src="https://zumo.blob.core.windows.net/sdk/azure-mobile-apps-client.min.js"></script>
+```
 
-	<script src="https://zumo.blob.core.windows.net/sdk/azure-mobile-apps-client.min.js"></script>
-
-
-[AZURE.INCLUDE [app-service-mobile-html-js-library](../../includes/app-service-mobile-html-js-library.md)]
+[!INCLUDE [app-service-mobile-html-js-library](../../includes/app-service-mobile-html-js-library.md)]
 
 ##<a name="auth"></a>如何：对用户进行身份验证
 
@@ -60,7 +60,7 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 
 支持两种身份验证流：服务器流和客户端流。服务器流依赖于提供者的 Web 身份验证界面，因此可提供最简便的身份验证体验。客户端流依赖于提供程序特定的 SDK，因此允许与设备特定的功能（例如单一登录）进行更深入的集成。
 
-[AZURE.INCLUDE [app-service-mobile-html-js-auth-library](../../includes/app-service-mobile-html-js-auth-library.md)]
+[!INCLUDE [app-service-mobile-html-js-auth-library](../../includes/app-service-mobile-html-js-auth-library.md)]
 
 ###<a name="configure-external-redirect-urls"></a>如何为外部重定向 URL 配置移动应用服务。
 
@@ -80,10 +80,12 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 6. 单击“编辑”按钮启用对资源的编辑。
 7. 查找 **allowedExternalRedirectUrls** 元素，此元素应为 null。在数组中添加 URL：
 
-         "allowedExternalRedirectUrls": [
-             "http://localhost:3000",
-             "https://localhost:3000"
-         ],
+    ```
+     "allowedExternalRedirectUrls": [
+         "http://localhost:3000",
+         "https://localhost:3000"
+     ],
+    ```
 
     将数组中的 URL 替换为服务的 URL，在本示例中为本地 Node.js 示例服务的 `http://localhost:3000`。对于 Ripple 服务，也可以根据应用的配置方式，使用 `http://localhost:4400` 或其他某个 URL。
 
@@ -96,13 +98,13 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 3. 在“API”菜单中单击“CORS”。
 4. 在空的“允许的来源”文本框中输入每个 URL ，将创建新的文本框。
 5. 单击“保存”。
-    
+
 后端更新后，可以在应用中使用新的环回 URL。
 
 <!-- URLs. -->
-[Azure Mobile Apps Quick Start]: /documentation/articles/app-service-mobile-cordova-get-started/
-[Get started with authentication]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[Add authentication to your app]: /documentation/articles/app-service-mobile-cordova-get-started-users/
+[Azure Mobile Apps Quick Start]: ./app-service-mobile-cordova-get-started.md
+[Get started with authentication]: ./app-service-mobile-cordova-get-started-users.md
+[Add authentication to your app]: ./app-service-mobile-cordova-get-started-users.md
 
 [Azure 门户预览]: https://portal.azure.cn/
 [Azure 移动应用 JavaScript SDK]: https://www.npmjs.com/package/azure-mobile-apps-client

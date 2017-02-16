@@ -1,27 +1,22 @@
-<properties
-	pageTitle="流分析开窗函数简介 | Azure"
-	description="了解流分析中的三个开窗函数（翻转、跳跃、滑动）。"
-	keywords="翻转窗口, 滑动窗口, 跳跃窗口"
-	documentationCenter=""
-	services="stream-analytics"
-	authors="jeffstokes72"
-	manager="jhubbard"
-	editor="cgronlun"
-/>  
+---
+title: 流分析开窗函数简介 | Azure
+description: 了解流分析中的三个开窗函数（翻转、跳跃、滑动）。
+keywords: 翻转窗口, 滑动窗口, 跳跃窗口
+documentationCenter: ''
+services: stream-analytics
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-services"
-	ms.date="09/26/2016"
-	wacn.date="11/14/2016"
-	ms.author="jeffstok"
-/>  
-
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 11/14/2016
+ms.author: jeffstok
+---
 
 # 流分析开窗函数简介
 
@@ -41,7 +36,6 @@
 
 ![流分析跳跃开窗函数简介](./media/stream-analytics-window-functions/stream-analytics-window-functions-hopping-intro.png)  
 
-
 ## 滑动窗口
 
 不同于翻转或跳跃窗口，滑动开窗函数**只**在事件发生时生成输出。每个窗口至少有一个事件，并且窗口持续根据 € (epsilon) 向前移动。与跳跃窗口一样，事件可以属于多个滑动窗口。
@@ -54,9 +48,9 @@
 
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 

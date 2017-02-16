@@ -1,24 +1,21 @@
-<properties 
-	pageTitle="Azure 多重身份验证对我而言有什么用途？" 
-	description="本 Azure 多重身份验证页面将会帮助你的最终用户开始使用 Azure 多重身份验证。" 
-	services="multi-factor-authentication" 
-	documentationCenter="" 
-	authors="billmath" 
-	manager="stevenpo" 
-	editor="curtland"/>
+---
+title: Azure 多重身份验证对我而言有什么用途？
+description: 本 Azure 多重身份验证页面将会帮助你的最终用户开始使用 Azure 多重身份验证。
+services: multi-factor-authentication
+documentationCenter: ''
+authors: billmath
+manager: stevenpo
+editor: curtland
 
-<tags
-	ms.service="multi-factor-authentication"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/22/2016"
-	wacn.date="10/19/2016"
-	ms.author="kgremban"/>  
-
-
-
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/22/2016
+wacn.date: 10/19/2016
+ms.author: kgremban
+---
 
 # Azure 多重身份验证对我而言有什么用途？
 
@@ -32,10 +29,10 @@
 - **通过手机通话、短信还是移动应用** - 如果使用手机，请选择是要接听电话、接收短信还是使用移动应用。
 - **使用移动应用中的通知还是验证码** - 如果使用移动应用，请选择是要接收你需要回复的通知还是验证码。
 
-> [AZURE.NOTE]  请注意，你的 IT 部门可能会禁用上述一个或多个选项。如果存在这种情况，在注册过程中这些禁用的选项将不可用。
+> [!NOTE]
+>  请注意，你的 IT 部门可能会禁用上述一个或多个选项。如果存在这种情况，在注册过程中这些禁用的选项将不可用。
 
-在确定验证方法后，你可以开始注册。使用[设置体验](/documentation/articles/multi-factor-authentication-end-user-first-time/)链接开始逐步完成注册过程。
-
+在确定验证方法后，你可以开始注册。使用[设置体验](./multi-factor-authentication-end-user-first-time.md)链接开始逐步完成注册过程。
 
 ## 如何开始使用多重身份验证
 
@@ -43,12 +40,10 @@
 
 主题|说明
 :------------- | :------------- | 
-[设置体验](/documentation/articles/multi-factor-authentication-end-user-first-time/)| 介绍第一次设置多重身份验证的过程。
-[登录体验](/documentation/articles/multi-factor-authentication-end-user-signin/)|说明使用各种方法（例如电话或应用）登录时预期会发生的情况。
-[更改设置](/documentation/articles/multi-factor-authentication-end-user-manage-settings/)|说明如何更改你的设置，例如电话号码或首选的注册方法。
-[有关应用密码的帮助](/documentation/articles/multi-factor-authentication-end-user-app-passwords/)| 查找有关创建和使用应用密码的信息。
-[使用移动应用](/documentation/articles/multi-factor-authentication-microsoft-authenticator/)|Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。
-
- 
+[设置体验](./multi-factor-authentication-end-user-first-time.md)| 介绍第一次设置多重身份验证的过程。
+[登录体验](./multi-factor-authentication-end-user-signin.md)|说明使用各种方法（例如电话或应用）登录时预期会发生的情况。
+[更改设置](./multi-factor-authentication-end-user-manage-settings.md)|说明如何更改你的设置，例如电话号码或首选的注册方法。
+[有关应用密码的帮助](./multi-factor-authentication-end-user-app-passwords.md)| 查找有关创建和使用应用密码的信息。
+[使用移动应用](./multi-factor-authentication-microsoft-authenticator.md)|Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。
 
 <!---HONumber=Mooncake_1010_2016-->

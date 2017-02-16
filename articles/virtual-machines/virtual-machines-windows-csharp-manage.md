@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用 Azure Resource Manager 和 C# 管理 VM | Azure"
-	description="使用 Azure Resource Manager 和 C# 来管理虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 使用 Azure Resource Manager 和 C# 管理 VM | Azure
+description: 使用 Azure Resource Manager 和 C# 来管理虚拟机。
+services: virtual-machines-windows
+documentationCenter: ''
+authors: davidmu1
+manager: timlt
+editor: ''
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="12/16/2016"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 12/16/2016
+ms.author: davidmu
+---
 
 # 使用 Azure Resource Manager 与 C 来管理 Azure 虚拟机#  
 
@@ -27,7 +25,7 @@
 若要完成本文中的任务，你需要：
 
 - [Visual Studio](http://msdn.microsoft.com/zh-cn/library/dd831853.aspx)
-- [身份验证令牌](/documentation/articles/resource-group-authenticate-service-principal/)
+- [身份验证令牌](../azure-resource-manager/resource-group-authenticate-service-principal.md)
 
 ## 创建 Visual Studio 项目并安装包
 
@@ -51,40 +49,48 @@
 
 1. 打开你为项目创建的 Program.cs 文件，然后在该文件的顶部添加以下 using 语句：
 
-        using Microsoft.Azure;
-        using Microsoft.IdentityModel.Clients.ActiveDirectory;
-        using Microsoft.Azure.Management.Compute;
-        using Microsoft.Azure.Management.Compute.Models;
-        using Microsoft.Rest;
-        
+    ```
+    using Microsoft.Azure;
+    using Microsoft.IdentityModel.Clients.ActiveDirectory;
+    using Microsoft.Azure.Management.Compute;
+    using Microsoft.Azure.Management.Compute.Models;
+    using Microsoft.Rest;
+    ```
+
 2. 将变量添加到 Program 类的 Main 方法，指定资源组名称、虚拟机名称和订阅标识符：
 
-        var groupName = "resource group name";
-        var vmName = "virtual machine name";  
-        var subscriptionId = "subsciption id";
+    ```
+    var groupName = "resource group name";
+    var vmName = "virtual machine name";  
+    var subscriptionId = "subsciption id";
+    ```
 
     可以通过运行 Get-AzureRmSubscription 查找订阅标识符。
-    
+
 3. 若要获取创建凭据所需的令牌，请将以下方法添加到 Program 类：
 
-	    private static async Task<AuthenticationResult> GetAccessTokenAsync()
-	    {
-          var cc = new ClientCredential("{client-id}", "{client-secret}");
-          var context = new AuthenticationContext("https://login.chinacloudapi.cn/{tenant-id}");
-          var token = await context.AcquireTokenAsync("https://management.chinacloudapi.cn/", cc);
-          if (token == null)
-          {
-            throw new InvalidOperationException("Could not get the token");
-          }
-          return token;
-        }
-	
+    ```
+    private static async Task<AuthenticationResult> GetAccessTokenAsync()
+    {
+      var cc = new ClientCredential("{client-id}", "{client-secret}");
+      var context = new AuthenticationContext("https://login.chinacloudapi.cn/{tenant-id}");
+      var token = await context.AcquireTokenAsync("https://management.chinacloudapi.cn/", cc);
+      if (token == null)
+      {
+        throw new InvalidOperationException("Could not get the token");
+      }
+      return token;
+    }
+    ```
+
     将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
-    
+
 4. 若要创建凭据，请将以下代码添加到 Program.cs 中的 Main 方法：
 
-        var token = GetAccessTokenAsync();
-        var credential = new TokenCredentials(token.Result.AccessToken);
+    ```
+    var token = GetAccessTokenAsync();
+    var credential = new TokenCredentials(token.Result.AccessToken);
+    ```
 
 5. 保存 Program.cs 文件。
 
@@ -92,167 +98,173 @@
 
 1. 将以下方法添加到前面创建的项目中的 Program 类：
 
-        public static async void GetVirtualMachineAsync(
-          TokenCredentials credential, 
-          string groupName, 
-          string vmName, 
-          string subscriptionId)
+    ```
+    public static async void GetVirtualMachineAsync(
+      TokenCredentials credential, 
+      string groupName, 
+      string vmName, 
+      string subscriptionId)
+    {
+      Console.WriteLine("Getting information about the virtual machine...");
+
+      var computeManagementClient = new ComputeManagementClient(credential)
+        { SubscriptionId = subscriptionId };
+      var vmResult = await computeManagementClient.VirtualMachines.GetAsync(
+        groupName, 
+        vmName, 
+        InstanceViewTypes.InstanceView);
+
+      Console.WriteLine("hardwareProfile");
+      Console.WriteLine("   vmSize: " + vmResult.HardwareProfile.VmSize);
+
+      Console.WriteLine("\nstorageProfile");
+      Console.WriteLine("  imageReference");
+      Console.WriteLine("    publisher: " + vmResult.StorageProfile.ImageReference.Publisher);
+      Console.WriteLine("    offer: " + vmResult.StorageProfile.ImageReference.Offer);
+      Console.WriteLine("    sku: " + vmResult.StorageProfile.ImageReference.Sku);
+      Console.WriteLine("    version: " + vmResult.StorageProfile.ImageReference.Version);
+      Console.WriteLine("  osDisk");
+      Console.WriteLine("    osType: " + vmResult.StorageProfile.OsDisk.OsType);
+      Console.WriteLine("    name: " + vmResult.StorageProfile.OsDisk.Name);
+      Console.WriteLine("    createOption: " + vmResult.StorageProfile.OsDisk.CreateOption);
+      Console.WriteLine("    uri: " + vmResult.StorageProfile.OsDisk.Vhd.Uri);
+      Console.WriteLine("    caching: " + vmResult.StorageProfile.OsDisk.Caching);
+
+      Console.WriteLine("\nosProfile");
+      Console.WriteLine("  computerName: " + vmResult.OsProfile.ComputerName);
+      Console.WriteLine("  adminUsername: " + vmResult.OsProfile.AdminUsername);
+      Console.WriteLine("  provisionVMAgent: " + vmResult.OsProfile.WindowsConfiguration.ProvisionVMAgent.Value);
+      Console.WriteLine("  enableAutomaticUpdates: " + vmResult.OsProfile.WindowsConfiguration.EnableAutomaticUpdates.Value);
+
+      Console.WriteLine("\nnetworkProfile");
+      foreach (NetworkInterfaceReference nic in vmResult.NetworkProfile.NetworkInterfaces)
+      {
+        Console.WriteLine("  networkInterface id: " + nic.Id);
+      }
+
+      Console.WriteLine("\nvmAgent");
+      Console.WriteLine("  vmAgentVersion" + vmResult.InstanceView.VmAgent.VmAgentVersion);
+      Console.WriteLine("    statuses");
+      foreach (InstanceViewStatus stat in vmResult.InstanceView.VmAgent.Statuses)
+      {
+        Console.WriteLine("    code: " + stat.Code);
+        Console.WriteLine("    level: " + stat.Level);
+        Console.WriteLine("    displayStatus: " + stat.DisplayStatus);
+        Console.WriteLine("    message: " + stat.Message);
+        Console.WriteLine("    time: " + stat.Time);
+      }
+
+      Console.WriteLine("\ndisks");
+      foreach (DiskInstanceView idisk in vmResult.InstanceView.Disks)
+      {
+        Console.WriteLine("  name: " + idisk.Name);
+        Console.WriteLine("  statuses");
+        foreach (InstanceViewStatus istat in idisk.Statuses)
         {
-          Console.WriteLine("Getting information about the virtual machine...");
-
-          var computeManagementClient = new ComputeManagementClient(credential)
-            { SubscriptionId = subscriptionId };
-          var vmResult = await computeManagementClient.VirtualMachines.GetAsync(
-            groupName, 
-            vmName, 
-            InstanceViewTypes.InstanceView);
-
-          Console.WriteLine("hardwareProfile");
-          Console.WriteLine("   vmSize: " + vmResult.HardwareProfile.VmSize);
-
-          Console.WriteLine("\nstorageProfile");
-          Console.WriteLine("  imageReference");
-          Console.WriteLine("    publisher: " + vmResult.StorageProfile.ImageReference.Publisher);
-          Console.WriteLine("    offer: " + vmResult.StorageProfile.ImageReference.Offer);
-          Console.WriteLine("    sku: " + vmResult.StorageProfile.ImageReference.Sku);
-          Console.WriteLine("    version: " + vmResult.StorageProfile.ImageReference.Version);
-          Console.WriteLine("  osDisk");
-          Console.WriteLine("    osType: " + vmResult.StorageProfile.OsDisk.OsType);
-          Console.WriteLine("    name: " + vmResult.StorageProfile.OsDisk.Name);
-          Console.WriteLine("    createOption: " + vmResult.StorageProfile.OsDisk.CreateOption);
-          Console.WriteLine("    uri: " + vmResult.StorageProfile.OsDisk.Vhd.Uri);
-          Console.WriteLine("    caching: " + vmResult.StorageProfile.OsDisk.Caching);
-
-          Console.WriteLine("\nosProfile");
-          Console.WriteLine("  computerName: " + vmResult.OsProfile.ComputerName);
-          Console.WriteLine("  adminUsername: " + vmResult.OsProfile.AdminUsername);
-          Console.WriteLine("  provisionVMAgent: " + vmResult.OsProfile.WindowsConfiguration.ProvisionVMAgent.Value);
-          Console.WriteLine("  enableAutomaticUpdates: " + vmResult.OsProfile.WindowsConfiguration.EnableAutomaticUpdates.Value);
-
-          Console.WriteLine("\nnetworkProfile");
-          foreach (NetworkInterfaceReference nic in vmResult.NetworkProfile.NetworkInterfaces)
-          {
-            Console.WriteLine("  networkInterface id: " + nic.Id);
-          }
-
-          Console.WriteLine("\nvmAgent");
-          Console.WriteLine("  vmAgentVersion" + vmResult.InstanceView.VmAgent.VmAgentVersion);
-          Console.WriteLine("    statuses");
-          foreach (InstanceViewStatus stat in vmResult.InstanceView.VmAgent.Statuses)
-          {
-            Console.WriteLine("    code: " + stat.Code);
-            Console.WriteLine("    level: " + stat.Level);
-            Console.WriteLine("    displayStatus: " + stat.DisplayStatus);
-            Console.WriteLine("    message: " + stat.Message);
-            Console.WriteLine("    time: " + stat.Time);
-          }
-
-          Console.WriteLine("\ndisks");
-          foreach (DiskInstanceView idisk in vmResult.InstanceView.Disks)
-          {
-            Console.WriteLine("  name: " + idisk.Name);
-            Console.WriteLine("  statuses");
-            foreach (InstanceViewStatus istat in idisk.Statuses)
-            {
-              Console.WriteLine("    code: " + istat.Code);
-              Console.WriteLine("    level: " + istat.Level);
-              Console.WriteLine("    displayStatus: " + istat.DisplayStatus);
-              Console.WriteLine("    time: " + istat.Time);
-            }
-          }
-
-          Console.WriteLine("\nVM general status");
-          Console.WriteLine("  provisioningStatus: " + vmResult.ProvisioningState);
-          Console.WriteLine("  id: " + vmResult.Id);
-          Console.WriteLine("  name: " + vmResult.Name);
-          Console.WriteLine("  type: " + vmResult.Type);
-          Console.WriteLine("  location: " + vmResult.Location);
-          Console.WriteLine("\nVM instance status");
-          foreach (InstanceViewStatus istat in vmResult.InstanceView.Statuses)
-          {
-            Console.WriteLine("\n  code: " + istat.Code);
-            Console.WriteLine("  level: " + istat.Level);
-            Console.WriteLine("  displayStatus: " + istat.DisplayStatus);
-          }
-          
+          Console.WriteLine("    code: " + istat.Code);
+          Console.WriteLine("    level: " + istat.Level);
+          Console.WriteLine("    displayStatus: " + istat.DisplayStatus);
+          Console.WriteLine("    time: " + istat.Time);
         }
+      }
+
+      Console.WriteLine("\nVM general status");
+      Console.WriteLine("  provisioningStatus: " + vmResult.ProvisioningState);
+      Console.WriteLine("  id: " + vmResult.Id);
+      Console.WriteLine("  name: " + vmResult.Name);
+      Console.WriteLine("  type: " + vmResult.Type);
+      Console.WriteLine("  location: " + vmResult.Location);
+      Console.WriteLine("\nVM instance status");
+      foreach (InstanceViewStatus istat in vmResult.InstanceView.Statuses)
+      {
+        Console.WriteLine("\n  code: " + istat.Code);
+        Console.WriteLine("  level: " + istat.Level);
+        Console.WriteLine("  displayStatus: " + istat.DisplayStatus);
+      }
+
+    }
+    ```
 
 2. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        GetVirtualMachineAsync(
-          credential,
-          groupName,
-          vmName,
-          subscriptionId);
-        Console.WriteLine("\nPress enter to continue...");
-        Console.ReadLine();
-    
+    ```
+    GetVirtualMachineAsync(
+      credential,
+      groupName,
+      vmName,
+      subscriptionId);
+    Console.WriteLine("\nPress enter to continue...");
+    Console.ReadLine();
+    ```
+
 3. 保存 Program.cs 文件。
 
 4. 在 Visual Studio 中单击“启动”，然后使用订阅所用的相同用户名和密码登录到 Azure AD。
 
-	运行此方法时，应会显示与下例类似的内容：
-    
-        Getting information about the virtual machine...
-        hardwareProfile
-          vmSize: Standard_A0
+    运行此方法时，应会显示与下例类似的内容：
 
-        storageProfile
-          imageReference
-            publisher: MicrosoftWindowsServer
-            offer: WindowsServer
-            sku: 2012-R2-Datacenter
-            version: latest
-          osDisk
-            osType: Windows
-            name: myosdisk
-            createOption: FromImage
-            uri: http://store1.blob.core.chinacloudapi.cn/vhds/myosdisk.vhd
-            caching: ReadWrite
+    ```
+    Getting information about the virtual machine...
+    hardwareProfile
+      vmSize: Standard_A0
 
-          osProfile
-            computerName: vm1
-            adminUsername: account1
-            provisionVMAgent: True
-            enableAutomaticUpdates: True
+    storageProfile
+      imageReference
+        publisher: MicrosoftWindowsServer
+        offer: WindowsServer
+        sku: 2012-R2-Datacenter
+        version: latest
+      osDisk
+        osType: Windows
+        name: myosdisk
+        createOption: FromImage
+        uri: http://store1.blob.core.chinacloudapi.cn/vhds/myosdisk.vhd
+        caching: ReadWrite
 
-          networkProfile
-            networkInterface 
-              id: /subscriptions/{subscription-id}
-                /resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nc1
+      osProfile
+        computerName: vm1
+        adminUsername: account1
+        provisionVMAgent: True
+        enableAutomaticUpdates: True
 
-          vmAgent
-            vmAgentVersion2.7.1198.766
-            statuses
-            code: ProvisioningState/succeeded
-            level: Info
-            displayStatus: Ready
-            message: GuestAgent is running and accepting new configurations.
-            time: 4/13/2016 8:35:32 PM
+      networkProfile
+        networkInterface 
+          id: /subscriptions/{subscription-id}
+            /resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nc1
 
-          disks
-            name: myosdisk
-            statuses
-              code: ProvisioningState/succeeded
-              level: Info
-              displayStatus: Provisioning succeeded
-              time: 4/13/2016 8:04:36 PM
+      vmAgent
+        vmAgentVersion2.7.1198.766
+        statuses
+        code: ProvisioningState/succeeded
+        level: Info
+        displayStatus: Ready
+        message: GuestAgent is running and accepting new configurations.
+        time: 4/13/2016 8:35:32 PM
 
-          VM general status
-            provisioningStatus: Succeeded
-            id: /subscriptions/{subscription-id}
-              /resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1
-            name: vm1
-            type: Microsoft.Compute/virtualMachines
-            location: chinaeast
+      disks
+        name: myosdisk
+        statuses
+          code: ProvisioningState/succeeded
+          level: Info
+          displayStatus: Provisioning succeeded
+          time: 4/13/2016 8:04:36 PM
 
-          VM instance status
-            code: ProvisioningState/succeeded
-              level: Info
-              displayStatus: Provisioning succeeded
-            code: PowerState/running
-              level: Info
-              displayStatus: VM running
+      VM general status
+        provisioningStatus: Succeeded
+        id: /subscriptions/{subscription-id}
+          /resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1
+        name: vm1
+        type: Microsoft.Compute/virtualMachines
+        location: chinaeast
+
+      VM instance status
+        code: ProvisioningState/succeeded
+          level: Info
+          displayStatus: Provisioning succeeded
+        code: PowerState/running
+          level: Info
+          displayStatus: VM running
+    ```
 
 ## 停止虚拟机
 
@@ -262,31 +274,37 @@
 
 2. 将以下方法添加到 Program 类：
 
-        public static async void StopVirtualMachineAsync(
-          TokenCredentials credential, 
-          string groupName, 
-          string vmName, 
-          string subscriptionId)
-        {
-          Console.WriteLine("Stopping the virtual machine...");
-          var computeManagementClient = new ComputeManagementClient(credential)
-            { SubscriptionId = subscriptionId };
-          await computeManagementClient.VirtualMachines.PowerOffAsync(groupName, vmName);
-        }
+    ```
+    public static async void StopVirtualMachineAsync(
+      TokenCredentials credential, 
+      string groupName, 
+      string vmName, 
+      string subscriptionId)
+    {
+      Console.WriteLine("Stopping the virtual machine...");
+      var computeManagementClient = new ComputeManagementClient(credential)
+        { SubscriptionId = subscriptionId };
+      await computeManagementClient.VirtualMachines.PowerOffAsync(groupName, vmName);
+    }
+    ```
 
-	若要解除分配虚拟机，请将 PowerOff 调用更改为以下代码：
+    若要解除分配虚拟机，请将 PowerOff 调用更改为以下代码：
 
-        computeManagementClient.VirtualMachines.Deallocate(groupName, vmName);
+    ```
+    computeManagementClient.VirtualMachines.Deallocate(groupName, vmName);
+    ```
 
 3. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        StopVirtualMachineAsync(
-          credential,
-          groupName,
-          vmName,
-          subscriptionId);
-        Console.WriteLine("\nPress enter to continue...");
-        Console.ReadLine();
+    ```
+    StopVirtualMachineAsync(
+      credential,
+      groupName,
+      vmName,
+      subscriptionId);
+    Console.WriteLine("\nPress enter to continue...");
+    Console.ReadLine();
+    ```
 
 4. 保存 Program.cs 文件。
 
@@ -300,33 +318,37 @@
 
 2. 将以下方法添加到 Program 类：
 
-        public static async void StartVirtualMachineAsync(
-          TokenCredentials credential, 
-          string groupName, 
-          string vmName, 
-          string subscriptionId)
-        {
-          Console.WriteLine("Starting the virtual machine...");
-          var computeManagementClient = new ComputeManagementClient(credential)
-            { SubscriptionId = subscriptionId };
-          await computeManagementClient.VirtualMachines.StartAsync(groupName, vmName);
-        }
+    ```
+    public static async void StartVirtualMachineAsync(
+      TokenCredentials credential, 
+      string groupName, 
+      string vmName, 
+      string subscriptionId)
+    {
+      Console.WriteLine("Starting the virtual machine...");
+      var computeManagementClient = new ComputeManagementClient(credential)
+        { SubscriptionId = subscriptionId };
+      await computeManagementClient.VirtualMachines.StartAsync(groupName, vmName);
+    }
+    ```
 
 3. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        StartVirtualMachineAsync(
-          credential,
-          groupName,
-          vmName,
-          subscriptionId);
-        Console.WriteLine("\nPress enter to continue...");
-        Console.ReadLine();
+    ```
+    StartVirtualMachineAsync(
+      credential,
+      groupName,
+      vmName,
+      subscriptionId);
+    Console.WriteLine("\nPress enter to continue...");
+    Console.ReadLine();
+    ```
 
 4. 保存 Program.cs 文件。
 
 5. 在 Visual Studio 中单击“启动”，然后使用订阅所用的相同用户名和密码登录到 Azure AD。
 
-	你应会看到虚拟机的状态更改为“正在运行”。
+    你应会看到虚拟机的状态更改为“正在运行”。
 
 ## 重新启动正在运行的虚拟机
 
@@ -334,27 +356,31 @@
 
 2. 将以下方法添加到 Program 类：
 
-        public static async void RestartVirtualMachineAsync(
-          TokenCredentials credential,
-          string groupName,
-          string vmName,
-          string subscriptionId)
-        {
-          Console.WriteLine("Restarting the virtual machine...");
-          var computeManagementClient = new ComputeManagementClient(credential)
-            { SubscriptionId = subscriptionId };
-          await computeManagementClient.VirtualMachines.RestartAsync(groupName, vmName);
-        }
+    ```
+    public static async void RestartVirtualMachineAsync(
+      TokenCredentials credential,
+      string groupName,
+      string vmName,
+      string subscriptionId)
+    {
+      Console.WriteLine("Restarting the virtual machine...");
+      var computeManagementClient = new ComputeManagementClient(credential)
+        { SubscriptionId = subscriptionId };
+      await computeManagementClient.VirtualMachines.RestartAsync(groupName, vmName);
+    }
+    ```
 
 3. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        RestartVirtualMachineAsync(
-          credential,
-          groupName,
-          vmName,
-          subscriptionId);
-        Console.WriteLine("\nPress enter to continue...");
-        Console.ReadLine();
+    ```
+    RestartVirtualMachineAsync(
+      credential,
+      groupName,
+      vmName,
+      subscriptionId);
+    Console.WriteLine("\nPress enter to continue...");
+    Console.ReadLine();
+    ```
 
 4. 保存 Program.cs 文件。
 
@@ -368,29 +394,33 @@
 
 2. 将以下方法添加到 Program 类：
 
-        public static async void UpdateVirtualMachineAsync(
-          TokenCredentials credential, 
-          string groupName, 
-          string vmName, 
-          string subscriptionId)
-        {
-          Console.WriteLine("Updating the virtual machine...");
-          var computeManagementClient = new ComputeManagementClient(credential)
-            { SubscriptionId = subscriptionId };
-          var vmResult = await computeManagementClient.VirtualMachines.GetAsync(groupName, vmName);
-          vmResult.HardwareProfile.VmSize = "Standard_A1";
-          await computeManagementClient.VirtualMachines.CreateOrUpdateAsync(groupName, vmName, vmResult);
-        }
+    ```
+    public static async void UpdateVirtualMachineAsync(
+      TokenCredentials credential, 
+      string groupName, 
+      string vmName, 
+      string subscriptionId)
+    {
+      Console.WriteLine("Updating the virtual machine...");
+      var computeManagementClient = new ComputeManagementClient(credential)
+        { SubscriptionId = subscriptionId };
+      var vmResult = await computeManagementClient.VirtualMachines.GetAsync(groupName, vmName);
+      vmResult.HardwareProfile.VmSize = "Standard_A1";
+      await computeManagementClient.VirtualMachines.CreateOrUpdateAsync(groupName, vmName, vmResult);
+    }
+    ```
 
 3. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        UpdateVirtualMachineAsync(
-          credential,
-          groupName,
-          vmName,
-          subscriptionId);
-        Console.WriteLine("\nPress enter to continue...");
-        Console.ReadLine();
+    ```
+    UpdateVirtualMachineAsync(
+      credential,
+      groupName,
+      vmName,
+      subscriptionId);
+    Console.WriteLine("\nPress enter to continue...");
+    Console.ReadLine();
+    ```
 
 4. 保存 Program.cs 文件。
 
@@ -406,41 +436,45 @@
 
 2. 将以下方法添加到 Program 类：
 
-        public static async void AddDataDiskAsync(
-          TokenCredentials credential, 
-          string groupName, 
-          string vmName, 
-          string subscriptionId)
-        {
-          Console.WriteLine("Adding the disk to the virtual machine...");
-          var computeManagementClient = new ComputeManagementClient(credential)
-            { SubscriptionId = subscriptionId };
-          var vmResult = await computeManagementClient.VirtualMachines.GetAsync(groupName, vmName);
-          vmResult.StorageProfile.DataDisks.Add(
-            new DataDisk
+    ```
+    public static async void AddDataDiskAsync(
+      TokenCredentials credential, 
+      string groupName, 
+      string vmName, 
+      string subscriptionId)
+    {
+      Console.WriteLine("Adding the disk to the virtual machine...");
+      var computeManagementClient = new ComputeManagementClient(credential)
+        { SubscriptionId = subscriptionId };
+      var vmResult = await computeManagementClient.VirtualMachines.GetAsync(groupName, vmName);
+      vmResult.StorageProfile.DataDisks.Add(
+        new DataDisk
+          {
+            Lun = 0,
+            Name = "mydatadisk1",
+            Vhd = new VirtualHardDisk
               {
-                Lun = 0,
-                Name = "mydatadisk1",
-                Vhd = new VirtualHardDisk
-                  {
-                    Uri = "https://mystorage1.blob.core.chinacloudapi.cn/vhds/mydatadisk1.vhd"
-                  },
-                CreateOption = DiskCreateOptionTypes.Empty,
-                DiskSizeGB = 2,
-                Caching = CachingTypes.ReadWrite
-              });
-          await computeManagementClient.VirtualMachines.CreateOrUpdateAsync(groupName, vmName, vmResult);
-        }
+                Uri = "https://mystorage1.blob.core.chinacloudapi.cn/vhds/mydatadisk1.vhd"
+              },
+            CreateOption = DiskCreateOptionTypes.Empty,
+            DiskSizeGB = 2,
+            Caching = CachingTypes.ReadWrite
+          });
+      await computeManagementClient.VirtualMachines.CreateOrUpdateAsync(groupName, vmName, vmResult);
+    }
+    ```
 
 3. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        AddDataDiskAsync(
-          credential,
-          groupName,
-          vmName,
-          subscriptionId);
-        Console.WriteLine("\nPress enter to continue...");
-        Console.ReadLine();
+    ```
+    AddDataDiskAsync(
+      credential,
+      groupName,
+      vmName,
+      subscriptionId);
+    Console.WriteLine("\nPress enter to continue...");
+    Console.ReadLine();
+    ```
 
 4. 保存 Program.cs 文件。
 
@@ -452,27 +486,31 @@
 
 2. 将以下方法添加到 Program 类：
 
-        public static async void DeleteVirtualMachineAsync(
-          TokenCredentials credential, 
-          string groupName, 
-          string vmName, 
-          string subscriptionId)
-        {
-          Console.WriteLine("Deleting the virtual machine...");
-          var computeManagementClient = new ComputeManagementClient(credential)
-            { SubscriptionId = subscriptionId };
-          await computeManagementClient.VirtualMachines.DeleteAsync(groupName, vmName);
-        }
+    ```
+    public static async void DeleteVirtualMachineAsync(
+      TokenCredentials credential, 
+      string groupName, 
+      string vmName, 
+      string subscriptionId)
+    {
+      Console.WriteLine("Deleting the virtual machine...");
+      var computeManagementClient = new ComputeManagementClient(credential)
+        { SubscriptionId = subscriptionId };
+      await computeManagementClient.VirtualMachines.DeleteAsync(groupName, vmName);
+    }
+    ```
 
 3. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
-        DeleteVirtualMachineAsync(
-          credential,
-          groupName,
-          vmName,
-          subscriptionId);
-        Console.WriteLine("\nPress enter to continue...");
-        Console.ReadLine();
+    ```
+    DeleteVirtualMachineAsync(
+      credential,
+      groupName,
+      vmName,
+      subscriptionId);
+    Console.WriteLine("\nPress enter to continue...");
+    Console.ReadLine();
+    ```
 
 4. 保存 Program.cs 文件。
 
@@ -480,6 +518,6 @@
 
 ## 后续步骤
 
-如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)
+如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](../azure-resource-manager/resource-manager-troubleshoot-deployments-portal.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

@@ -1,21 +1,21 @@
-<properties
-	pageTitle="有关平台支持的从经典部署模型到 Azure Resource Manager 的迁移的技术深入探讨 | Azure"
-	description="本文对平台支持的从经典部署模型到 Azure Resource Manager 的资源迁移做了深入的技术探讨"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="mahthi"
-	manager="drewm"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 有关平台支持的从经典部署模型到 Azure Resource Manager 的迁移的技术深入探讨 | Azure
+description: 本文对平台支持的从经典部署模型到 Azure Resource Manager 的资源迁移做了深入的技术探讨
+services: virtual-machines-linux
+documentationCenter: ''
+authors: mahthi
+manager: drewm
+editor: ''
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.date="10/12/2016"
-	wacn.date="12/30/2016"/>
+ms.service: virtual-machines-linux
+ms.date: 10/12/2016
+wacn.date: 12/30/2016
+---
 
 # 有关平台支持的从经典部署模型到 Azure Resource Manager 的迁移的技术深入探讨
 
-在本文中，我们将针对资源和功能级别的迁移进行深入的技术探讨，帮助你了解平台如何将资源从经典部署模型迁移到 Azure Resource Manager 部署模型。有关详细信息，请阅读服务通告文章：[平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移](/documentation/articles/virtual-machines-windows-migration-classic-resource-manager/)。
+在本文中，我们将针对资源和功能级别的迁移进行深入的技术探讨，帮助你了解平台如何将资源从经典部署模型迁移到 Azure Resource Manager 部署模型。有关详细信息，请阅读服务通告文章：[平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移](./virtual-machines-windows-migration-classic-resource-manager.md)。
 
 ## 有关资源和功能级别迁移的详细指导
 
@@ -35,7 +35,7 @@
 | 负载均衡的终结点集 | 负载均衡器 | 在经典部署模型中，平台已经为每个云服务分配一个隐式负载均衡器。在迁移期间，我们将创建新的负载均衡器资源，负载均衡终结点集将成为负载均衡器规则。 | | |
 | 入站 NAT 规则 | 入站 NAT 规则 | 在迁移期间，VM 上定义的输入终结点将转换成负载均衡器下的入站网络访问转换规则。 | | |
 | VIP 地址 | 具有 DNS 名称的公共 IP 地址 | 虚拟 IP 地址会变成公共 IP 地址并与负载均衡器关联。 | | |
-| 虚拟网络 | 虚拟网络 | 虚拟网络将连同其所有属性一起迁移到 Resource Manager 部署模型。将创建名为 `-migrated` 的新资源组。请注意[不支持的配置](/documentation/articles/virtual-machines-windows-migration-classic-resource-manager/)。 | | |
+| 虚拟网络 | 虚拟网络 | 虚拟网络将连同其所有属性一起迁移到 Resource Manager 部署模型。将创建名为 `-migrated` 的新资源组。请注意[不支持的配置](./virtual-machines-windows-migration-classic-resource-manager.md)。 | | |
 | 保留 IP | 具有静态分配方法的公共 IP 地址 | 与负载均衡器关联的保留 IP 将在迁移云服务或虚拟机的过程中一起迁移。目前不支持迁移未关联的保留 IP。 | | |
 | 每个 VM 的公共 IP 地址 | 具有动态分配方法的公共 IP 地址 | 与 VM 关联的公共 IP 地址将转换为公共 IP 地址资源，分配方法将设置为静态。 | | |
 | NSG | NSG | 在迁移到 Resource Manager 部署模型的过程中，将克隆与子网关联的网络安全组。请注意，在迁移期间不会删除经典部署模型中的 NSG。但是，当迁移正在进行时，会阻止 NSG 的管理平面操作。 | | |
@@ -56,9 +56,9 @@
 
 你已经了解经典 IaaS 资源到 Resource Manager 的迁移，现在可以开始迁移资源。
 
-- [使用 PowerShell 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](/documentation/articles/virtual-machines-windows-ps-migration-classic-resource-manager/)
-- [使用 CLI 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](/documentation/articles/virtual-machines-linux-cli-migration-classic-resource-manager/)
-- [平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移](/documentation/articles/virtual-machines-windows-migration-classic-resource-manager/)
-- [使用社区 PowerShell 脚本将经典虚拟机克隆到 Azure Resource Manager](/documentation/articles/virtual-machines-windows-migration-scripts/)
+- [使用 PowerShell 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](./virtual-machines-windows-ps-migration-classic-resource-manager.md)
+- [使用 CLI 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](./virtual-machines-linux-cli-migration-classic-resource-manager.md)
+- [平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移](./virtual-machines-windows-migration-classic-resource-manager.md)
+- [使用社区 PowerShell 脚本将经典虚拟机克隆到 Azure Resource Manager](./virtual-machines-windows-migration-scripts.md)
 
 <!---HONumber=Mooncake_0829_2016-->

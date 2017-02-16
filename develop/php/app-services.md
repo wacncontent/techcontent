@@ -1,25 +1,25 @@
-<properties 
-  pageTitle="Php-应用服务 - Azure 微软云"
-  metakeywords="" 
-  description="Php-应用服务 - Azure 微软云" 
-  services="" 
-  documentationCenter="php" 
-  authors="" 
-  manager="Tiffena" 
-  editor="EricChen"/>
-<tags ms.service=""
-    ms.date=""
-    wacn.date="04/11/2015"
-    />
+---
+title: Php-应用服务 - Azure 微软云
+metakeywords: ''
+description: Php-应用服务 - Azure 微软云
+services: ''
+documentationCenter: php
+authors: ''
+manager: Tiffena
+editor: EricChen
 
+ms.service: ''
+ms.date: ''
+wacn.date: 04/11/2015
+---
 
 <h1 id="menu-php-appservices">应用程序服务</h1>
 <h2 id="header-0">消息传递</h2>
-<h3>功能指南： <a href="/documentation/articles/storage-php-how-to-use-queues/">队列服务</a></h3>
+<h3>功能指南： <a href="../../articles/storage/storage-php-how-to-use-queues.md">队列服务</a></h3>
 <p>Service Bus 队列提供简单且有保证的先入先出消息传送策略，支持一系列标准协议（REST、AMQP 和 WS*）以及用于将消息放入/推出队列的 API。</p>
-<h3>功能指南： <a href="/documentation/articles/service-bus-php-how-to-use-queues/">Service Bus 队列</a></h3>
+<h3>功能指南： <a href="../../articles/service-bus-messaging/service-bus-php-how-to-use-queues.md">Service Bus 队列</a></h3>
 <p>Service Bus 队列提供简单且有保证的先入先出消息传送策略，支持一系列标准协议（REST、AMQP 和 WS*）以及用于将消息放入/推出队列的 API。</p>
-<h3>功能指南： <a href="/documentation/articles/service-bus-php-how-to-use-topics-subscriptions/">Service Bus 主题</a></h3>
+<h3>功能指南： <a href="../../articles/service-bus-messaging/service-bus-php-how-to-use-topics-subscriptions.md">Service Bus 主题</a></h3>
 <p>Service Bus 主题提供发布/订阅消息传送模型，以支持一对多通信。您可以选择以每个订阅为基础注册主题的筛选规则，这样就能限制哪些主题订阅接收某个主题下的哪些消息。</p>
 <!--<h2 id="header-1">通信</h2>
 <h3>功能指南： <a href="/documentation/articles/store-sendgrid-php-how-to-send-email/">SendGrid 电子邮件服务</a></h3>

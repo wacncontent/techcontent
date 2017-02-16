@@ -1,25 +1,25 @@
-<properties
-    pageTitle="Azure 应用服务上的操作系统功能"
-    description="了解 Azure Web 应用上可供应用服务、移动应用后端和 API 应用使用的 OS 功能"
-    services="app-service"
-    documentationcenter=""
-    author="cephalin"
-    manager="wpickett"
-    editor="mollybos" />
-<tags
-    ms.assetid="39d5514f-0139-453a-b52e-4a1c06d8d914"
-    ms.service="app-service"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="07/01/2016"
-    wacn.date="02/10/2017"
-    ms.author="cephalin" />  
+---
+title: Azure 应用服务上的操作系统功能
+description: 了解 Azure Web 应用上可供应用服务、移动应用后端和 API 应用使用的 OS 功能
+services: app-service
+documentationcenter: ''
+author: cephalin
+manager: wpickett
+editor: mollybos
 
+ms.assetid: 39d5514f-0139-453a-b52e-4a1c06d8d914
+ms.service: app-service
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/01/2016
+wacn.date: 02/10/2017
+ms.author: cephalin
+---
 
 # Azure 应用服务上的操作系统功能
-本文介绍可用于在 [Azure 应用服务](/documentation/articles/app-service-changes-existing-services/)上运行的所有应用的常见基准操作系统功能。这些功能包括文件、网络和注册表访问以及诊断日志和事件。
+本文介绍可用于在 [Azure 应用服务](./app-service-changes-existing-services.md)上运行的所有应用的常见基准操作系统功能。这些功能包括文件、网络和注册表访问以及诊断日志和事件。
 
 ## <a id="tiers"></a> 应用服务计划层
 应用服务在多租户托管环境中运行客户应用。部署在“免费”和“共享”层中的应用在共享虚拟机上的辅助进程中运行，而部署在“标准”和“高级”层中的应用在专用于与单个客户关联的应用的虚拟机上运行。

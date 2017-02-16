@@ -1,24 +1,23 @@
-<properties
-    pageTitle="DocumentDB 简介：一种 JSON 数据库 | Azure"
-    description="了解 Azure DocumentDB，一种 NoSQL JSON 数据库。此文档数据库是针对大数据、灵活的可扩展性和高可用性构建的。"
-    keywords="json 数据库，文档数据库"
-    services="documentdb"
-    author="mimig1"
-    manager="jhubbard"
-    editor="monicar"
-    documentationcenter="" />  
+---
+title: DocumentDB 简介：一种 JSON 数据库 | Azure
+description: 了解 Azure DocumentDB，一种 NoSQL JSON 数据库。此文档数据库是针对大数据、灵活的可扩展性和高可用性构建的。
+keywords: json 数据库，文档数据库
+services: documentdb
+author: mimig1
+manager: jhubbard
+editor: monicar
+documentationcenter: ''
 
-<tags
-    ms.assetid="686cdd2b-704a-4488-921e-8eefb70d5c63"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="11/16/2016"
-    wacn.date="01/04/2017"
-    ms.author="mimig" />  
-
+ms.assetid: 686cdd2b-704a-4488-921e-8eefb70d5c63
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 11/16/2016
+wacn.date: 01/04/2017
+ms.author: mimig
+---
 
 # DocumentDB 简介：一种 NoSQL JSON 数据库
 ## 什么是 DocumentDB？
@@ -35,13 +34,13 @@ DocumentDB 是一个完全托管的 NoSQL 数据库服务，其构建目的是�
 Azure DocumentDB 具有以下主要功能和优势：
 
 - **可灵活增减的吞吐量和存储：**轻松增大或减小 DocumentDB JSON 数据库规模来满足应用程序需求。你的数据存储在固态硬盘 (SSD) 上，以实现可预测的低延迟。DocumentDB 支持使用容器来存储称为集合的 JSON 数据，这些数据可以扩展到几乎无限的存储空间大小和设置的吞吐量。随着应用程序规模的增长，你可以灵活无缝地扩展具有可预测的性能的 DocumentDB。
-- **多区域复制：**DocumentDB 以透明方式将数据复制到与 DocumentDB 帐户关联的所有区域，使用户可以开发那些对全局性数据访问有要求的应用程序，与此同时还在一致性、可用性和性能方面做出权衡，所有这些都有相应的保证。DocumentDB 提供了具有多宿主 API 的透明区域故障转移，还可以弹性缩放全局吞吐量和存储空间。有关详细信息，请参阅[使用 DocumentDB 全局分发数据](/documentation/articles/documentdb-distribute-data-globally/)。
-- **使用熟悉的 SQL 语法进行即席查询：**在 DocumentDB 中存储异类 JSON 文档，并通过熟悉的 SQL 语法查询这些文档。DocumentDB 使用高并发、无锁、日志结构化索引技术为所有文档内容自动创建索引。这样可以实现各种实时查询，而无需指定架构提示、二级索引或视图。有关详细信息，请参阅[查询 DocumentDB](/documentation/articles/documentdb-sql-query/)。
-- **在数据库中执行 JavaScript：**使用标准 JavaScript 将应用程序逻辑表示为存储过程、触发器和用户定义函数 (UDF)。这样，你的应用程序逻辑可基于数据进行运作，而无需担心应用程序和数据库架构之间的不匹配。DocumentDB 支持在数据库引擎内部直接进行 JavaScript 应用程序逻辑的完全事务执行。对 JavaScript 的深度集成支持在一个 JavaScript 程序中将 INSERT、REPLACE、DELETE 和 SELECT 操作作为独立的事务来执行。有关详细信息，请参阅 [DocumentDB 服务器端编程](/documentation/articles/documentdb-programming/)。
-- **可调整的一致性级别：**从 4 个定义完好的一致性级别中选择，以实现一致性和性能之间的最佳平衡。对于查询和读取操作，DocumentDB 提供了四种不同的一致性级别：强、有限过时、会话和最终。通过这些细化的定义完好的一致性级别，你可以在一致性、可用性和延迟之间实现合理的平衡。有关详细信息，请参阅[使用一致性级别最大化 DocumentDB 中的可用性和性能](/documentation/articles/documentdb-consistency-levels/)。
+- **多区域复制：**DocumentDB 以透明方式将数据复制到与 DocumentDB 帐户关联的所有区域，使用户可以开发那些对全局性数据访问有要求的应用程序，与此同时还在一致性、可用性和性能方面做出权衡，所有这些都有相应的保证。DocumentDB 提供了具有多宿主 API 的透明区域故障转移，还可以弹性缩放全局吞吐量和存储空间。有关详细信息，请参阅[使用 DocumentDB 全局分发数据](./documentdb-distribute-data-globally.md)。
+- **使用熟悉的 SQL 语法进行即席查询：**在 DocumentDB 中存储异类 JSON 文档，并通过熟悉的 SQL 语法查询这些文档。DocumentDB 使用高并发、无锁、日志结构化索引技术为所有文档内容自动创建索引。这样可以实现各种实时查询，而无需指定架构提示、二级索引或视图。有关详细信息，请参阅[查询 DocumentDB](./documentdb-sql-query.md)。
+- **在数据库中执行 JavaScript：**使用标准 JavaScript 将应用程序逻辑表示为存储过程、触发器和用户定义函数 (UDF)。这样，你的应用程序逻辑可基于数据进行运作，而无需担心应用程序和数据库架构之间的不匹配。DocumentDB 支持在数据库引擎内部直接进行 JavaScript 应用程序逻辑的完全事务执行。对 JavaScript 的深度集成支持在一个 JavaScript 程序中将 INSERT、REPLACE、DELETE 和 SELECT 操作作为独立的事务来执行。有关详细信息，请参阅 [DocumentDB 服务器端编程](./documentdb-programming.md)。
+- **可调整的一致性级别：**从 4 个定义完好的一致性级别中选择，以实现一致性和性能之间的最佳平衡。对于查询和读取操作，DocumentDB 提供了四种不同的一致性级别：强、有限过时、会话和最终。通过这些细化的定义完好的一致性级别，你可以在一致性、可用性和延迟之间实现合理的平衡。有关详细信息，请参阅[使用一致性级别最大化 DocumentDB 中的可用性和性能](./documentdb-consistency-levels.md)。
 - **完全托管：**无需管理数据库和计算机资源。作为一种完全托管的 Azure 服务，用户无需管理虚拟机、部署并配置软件、管理缩放或处理复杂的数据层升级。每个数据库都将自动备份，以防受到区域故障的影响。你可以轻松添加 DocumentDB 帐户并按照你的需求设置容量，从而使你专注于你的应用程序而不是操作和管理你的数据库。
 - **源于设计的开放性：**通过使用现有的技能和工具快速入门。针对 DocumentDB 的编程非常简单易学，你无需使用新的工具或遵循 JSON 或 JavaScript 的自定义扩展。你可以通过简单的 RESTful HTTP 接口访问所有数据库功能，包括 CRUD、查询和 JavaScript 处理。DocumentDB 包含现有格式、语言和标准，并同时基于这些内容提供高价值的数据库功能。
-- **自动编制索引：**默认情况下，DocumentDB 将对数据库中的所有文档[自动编制索引](/documentation/articles/documentdb-indexing/)，并且不期望或要求任何架构或创建二级索引。不想对所有内容编制索引？ 别担心，还可以[在 JSON 文件中选择不编制索引的路径](/documentation/articles/documentdb-indexing-policies/)。
+- **自动编制索引：**默认情况下，DocumentDB 将对数据库中的所有文档[自动编制索引](./documentdb-indexing.md)，并且不期望或要求任何架构或创建二级索引。不想对所有内容编制索引？ 别担心，还可以[在 JSON 文件中选择不编制索引的路径](./documentdb-indexing-policies.md)。
 
 ## <a name="data-management"></a>DocumentDB 如何管理数据？
 Azure DocumentDB 通过定义完好的数据库资源管理 JSON 数据。这些资源经过复制具有高可用性，并且使用其逻辑 URI 进行唯一寻址。DocumentDB 为所有资源提供简单的基于 HTTP 的 RESTful 编程模型。
@@ -53,7 +52,6 @@ DocumentDB 中的所有资源都以 JSON 文档的形式建模和存储。将资
 下图显示了 DocumentDB 资源之间的关系：
 
 ![DocumentDB（一种 NoSQL JSON 数据库）中资源之间的层级关系][1]  
-
 
 一个数据库帐户可以包含一组数据库，每个数据库都包含多个集合，每个集合又包含存储过程、触发器、UDF、文档及相关附件。数据库也有关联的用户，每个用户都有一组权限来访问其他各种集合、存储过程、触发器、UDF、文档或附件。尽管数据库、用户、权限和集合是系统定义的具有已知架构的资源，文档、存储过程、触发器、UDF 和附件也包含任意的用户定义的 JSON 内容。
 
@@ -69,7 +67,7 @@ Azure DocumentDB 通过 REST API 公开资源，此 API 可以使用能够发出
 | 不适用 |[服务器端 JavaScript SDK](http://azure.github.io/azure-documentdb-js-server/) |
 | [Python SDK](https://pypi.python.org/pypi/pydocumentdb) |[Python 库](http://azure.github.io/azure-documentdb-python/) |
 
-使用 [Azure DocumentDB 模拟器](/documentation/articles/documentdb-nosql-local-emulator/)，可以在本地开发并测试应用程序，而无需创建 Azure 订阅且不会产生任何费用。如果对应用程序在 DocumentDB 模拟器中的工作情况感到满意，则可以切换到在云中使用 Azure DocumentDB 帐户。
+使用 [Azure DocumentDB 模拟器](./documentdb-nosql-local-emulator.md)，可以在本地开发并测试应用程序，而无需创建 Azure 订阅且不会产生任何费用。如果对应用程序在 DocumentDB 模拟器中的工作情况感到满意，则可以切换到在云中使用 Azure DocumentDB 帐户。
 
 除了基本的创建、读取、更新和删除操作，DocumentDB 还提供丰富的 SQL 查询接口用于检索 JSON 文档和针对 JavaScript 应用程序逻辑的事务执行的服务器端支持。可通过所有平台库获取查询和脚本执行接口以及 REST API。
 
@@ -86,12 +84,12 @@ DocumentDB 允许将应用程序逻辑编写为完全使用 JavaScript 编写的
 DocumentDB 中的 JavaScript 执行是在关系型数据库系统所支持的概念的基础之上建立的，只是现代性的将 Transact-SQL 换成了 JavaScript。所有 JavaScript 逻辑都在使用快照隔离的环境 ACID 事务内执行。在其执行过程中，如果 JavaScript 引发异常，则整个事务将被中止。
 
 ## 后续步骤
-已有 Azure 帐户？ 那么可以在 [Azure 门户预览](https://portal.azure.cn/#gallery/Microsoft.DocumentDB)中通过[创建 DocumentDB 数据库帐户](/documentation/articles/documentdb-create-account/)开始使用 DocumentDB。
+已有 Azure 帐户？ 那么可以在 [Azure 门户预览](https://portal.azure.cn/#gallery/Microsoft.DocumentDB)中通过[创建 DocumentDB 数据库帐户](./documentdb-create-account.md)开始使用 DocumentDB。
 
 没有 Azure 帐户？ 你可以：
 
-- 注册 [Azure 试用版](/pricing/1rmb-trial/)。
-- 下载 [Azure DocumentDB 模拟器](/documentation/articles/documentdb-nosql-local-emulator/)以便在本地开发应用程序。
+- 注册 [Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
+- 下载 [Azure DocumentDB 模拟器](./documentdb-nosql-local-emulator.md)以便在本地开发应用程序。
 
 [1]: ./media/documentdb-introduction/json-database-resources1.png
 

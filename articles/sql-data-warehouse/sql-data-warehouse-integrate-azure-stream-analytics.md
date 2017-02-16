@@ -1,23 +1,21 @@
-<properties
-   pageTitle="将 Azure 流分析与 SQL 数据仓库配合使用 | Azure"
-   description="有关在开发解决方案时将 Azure 流分析与 Azure SQL 数据仓库配合使用的技巧。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="kevinvngo"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 将 Azure 流分析与 SQL 数据仓库配合使用 | Azure
+description: 有关在开发解决方案时将 Azure 流分析与 Azure SQL 数据仓库配合使用的技巧。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: kevinvngo
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="kevin;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: kevin;barbkess;sonyama
+---
 
 # 将 Azure 流分析与 SQL 数据仓库配合使用
 Azure 流分析是一种完全托管的服务，可以在云中通过流式数据进行低延迟、高度可用、可缩放且复杂的事件处理。你可以先阅读 [Azure 流分析简介][Introduction to Azure Stream Analytics]了解基本知识。然后，可以参考[开始使用 Azure 流分析][Get started using Azure Stream Analytics]教程，了解如何使用流分析创建端到端解决方案。
@@ -48,13 +46,12 @@ Azure 流分析是一种完全托管的服务，可以在云中通过流式数�
 
 - *输出别名* ：输入此作业输出的友好名称。
 - *订阅* ：
-	- 如果 SQL 数据仓库数据库与此流分析作业位于同一订阅中，请选择“使用当前订阅中的 SQL 数据库”。
-	- 如果数据库在不同的订阅中，请选择“使用其他订阅中的 SQL 数据库”。
+    - 如果 SQL 数据仓库数据库与此流分析作业位于同一订阅中，请选择“使用当前订阅中的 SQL 数据库”。
+    - 如果数据库在不同的订阅中，请选择“使用其他订阅中的 SQL 数据库”。
 - *数据库* ：指定目标数据库的名称。
 - *服务器名称* ：为刚刚指定的数据库指定服务器名称。可以使用 Azure 经典门户查找此信息。
 
 ![][server-name]  
-
 
 - *用户名* ：指定具有数据库写入访问权限的帐户的用户名。
 - *密码* ：提供指定的用户帐户的密码。
@@ -76,7 +73,6 @@ Azure 流分析是一种完全托管的服务，可以在云中通过流式数�
 
 <!--Image references-->
 
-
 [add-output]: ./media/sql-data-warehouse-integrate-azure-stream-analytics/add-output.png
 [server-name]: ./media/sql-data-warehouse-integrate-azure-stream-analytics/dw-server-name.png
 [add-database]: ./media/sql-data-warehouse-integrate-azure-stream-analytics/add-database.png
@@ -84,15 +80,15 @@ Azure 流分析是一种完全托管的服务，可以在云中通过流式数�
 
 <!--Article references-->
 
-[Introduction to Azure Stream Analytics]: /documentation/articles/stream-analytics-introduction/
-[Get started using Azure Stream Analytics]: /documentation/articles/stream-analytics-get-started/
-[SQL Data Warehouse development overview]: /documentation/articles/sql-data-warehouse-overview-develop/
-[SQL Data Warehouse integration overview]: /documentation/articles/sql-data-warehouse-overview-integrate/
+[Introduction to Azure Stream Analytics]: ../stream-analytics/stream-analytics-introduction.md
+[Get started using Azure Stream Analytics]: ../stream-analytics/stream-analytics-get-started.md
+[SQL Data Warehouse development overview]: ./sql-data-warehouse-overview-develop.md
+[SQL Data Warehouse integration overview]: ./sql-data-warehouse-overview-integrate.md
 
 <!--MSDN references-->
 
 <!--Other Web references-->
 
-[Azure Stream Analytics documentation]: /documentation/services/stream-analytics/
+[Azure Stream Analytics documentation]: ../stream-analytics/index.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

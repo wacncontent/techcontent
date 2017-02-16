@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Blob 的 Azure 冷存储 | Azure"
-    description="Azure Blob 存储的存储层基于访问模式为对象数据提供经济高效的存储。冷存储层适用于不常访问的数据。"
-    services="storage"
-    documentationcenter=""
-    author="michaelhauss"
-    manager="vamshik"
-    editor="tysonn" />  
+---
+title: Blob 的 Azure 冷存储 | Azure
+description: Azure Blob 存储的存储层基于访问模式为对象数据提供经济高效的存储。冷存储层适用于不常访问的数据。
+services: storage
+documentationcenter: ''
+author: michaelhauss
+manager: vamshik
+editor: tysonn
 
-<tags
-    ms.assetid="eb33ed4f-1b17-4fd6-82e2-8d5372800eef"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="10/18/2016"
-    wacn.date="12/05/2016"
-    ms.author="mihauss" />
+ms.assetid: eb33ed4f-1b17-4fd6-82e2-8d5372800eef
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 10/18/2016
+wacn.date: 12/05/2016
+ms.author: mihauss
+---
 
 # Azure Blob 存储：“热”和“冷”存储层
 ## 概述
@@ -30,11 +30,13 @@ Azure 存储空间现在为 Blob 存储（对象存储）提供两个存储层�
 
 **Blob 存储帐户**是将非结构化数据作为 Blob（对象）存储在 Azure 存储空间的专用存储帐户。使用 Blob 存储帐户，你现在可以在热和冷存储层之间进行选择，以便以较低的存储成本存储你不经常访问的冷数据，并且以较低的访问成本存储更频繁访问的热数据。Blob 存储帐户类似于你现有的通用存储帐户，并且具有你现在使用的所有卓越的持续性、可用性、可伸缩性和性能功能，包括用于块 blob 和追加 blob 的 100% API 一致性。
 
-> [AZURE.NOTE] Blob 存储帐户仅支持块 blob 和追加 blob，不支持页 blob。
+> [!NOTE]
+> Blob 存储帐户仅支持块 blob 和追加 blob，不支持页 blob。
 
 Blob 存储帐户公开**访问层**属性，它允许你将存储层指定为**热**或**冷**，具体取决于存储在帐户中的数据。如果你的数据的使用模式有所更改，你也可以随时在这些存储层之间切换。
 
-> [AZURE.NOTE] 更改存储层可能会产生额外费用。有关更多详细信息，请参阅[定价和计费](/documentation/articles/storage-blob-storage-tiers/#pricing-and-billing)部分。
+> [!NOTE]
+> 更改存储层可能会产生额外费用。有关更多详细信息，请参阅[定价和计费](./storage-blob-storage-tiers.md#pricing-and-billing)部分。
 
 热存储层的示例使用方案包括：
 
@@ -49,7 +51,7 @@ Blob 存储帐户公开**访问层**属性，它允许你将存储层指定为**
 * 必须保留的原始数据，即使它已被处理为最终可用的形式。（ *例如* ，转码为其他格式后的原始媒体文件）
 * 需要长时间存储并且几乎不访问的合规性和存档数据。（ *例如* ，安全相机数据片段、面向医疗保健机构旧 X-Rays/MRI、面向金融服务的客户呼叫录音和记录）
 
-有关存储帐户的详细信息，请参阅[关于 Azure 存储空间帐户](/documentation/articles/storage-create-storage-account/)。
+有关存储帐户的详细信息，请参阅[关于 Azure 存储空间帐户](./storage-create-storage-account.md)。
 
 对于仅需要块 blob 或追加 blob 存储的应用程序，我们建议使用 Blob 存储帐户，以利用分层存储的不同定价模型。但是，我们知道这在某些情况（可以选择使用通用存储帐户）下是不可能的，如：
 
@@ -58,7 +60,8 @@ Blob 存储帐户公开**访问层**属性，它允许你将存储层指定为**
 * 你需要使用页 blob。Blob 存储帐户不支持页 blob。我们通常建议使用块 blob，除非你对页 blob 有特定需求。
 * 使用早于 2014-02-14 的[存储服务 REST API](https://msdn.microsoft.com/zh-cn/library/azure/dd894041.aspx)的版本或使用版本低于 4.x 的客户端库，并且无法升级你的应用程序。
 
-> [AZURE.NOTE] Blob 存储帐户当前在大多数 Azure 区域受支持，后续会有更多。
+> [!NOTE]
+> Blob 存储帐户当前在大多数 Azure 区域受支持，后续会有更多。
 
 ## 存储层之间的比较
 下表突出显示了两种存储层之间的比较：
@@ -107,8 +110,8 @@ Blob 存储帐户公开**访问层**属性，它允许你将存储层指定为**
 </tbody>
 </table>
 
-> [AZURE.NOTE] Blob 存储帐户支持与通用存储帐户相同的性能和可伸缩性目标。有关详细信息，请参阅 [Azure 存储空间的可伸缩性和性能目标](/documentation/articles/storage-scalability-targets/)。
-
+> [!NOTE]
+> Blob 存储帐户支持与通用存储帐户相同的性能和可伸缩性目标。有关详细信息，请参阅 [Azure 存储空间的可伸缩性和性能目标](./storage-scalability-targets.md)。
 
 Blob 存储帐户使用基于存储层的 Blob 存储的新定价模型。使用 Blob 存储帐户时，请注意以下计费方式：
 
@@ -119,7 +122,8 @@ Blob 存储帐户使用基于存储层的 Blob 存储的新定价模型。使用
 * **出站数据传输成本**：出站数据传输（传出 Azure 区域的数据）会按每 GB 产生带宽使用费，与通用存储帐户一致。
 * **更改存储层**：将存储层从“冷”更改为“热”将会产生费用，此费用等于读取每个转换的存储帐户中存在的所有数据的费用。另一方面，将存储层从“热”更改为“冷”则免费。
 
-> [AZURE.NOTE] 为了使用户能够试用新的存储层并在上市后验证功能，在 2016 年 6 月 30 日之前，将免收将存储层从“冷”更改为“热”的费用。从 2016 年 7 月 1 日 开始，将对所有从“冷”到“热”的转换收取费用。有关 Blob 存储帐户的定价模型的详细信息，请参阅 [Azure 存储空间定价](/pricing/details/storage/)页。有关出站数据传输费用的详细信息，请参阅[数据传输定价详细信息](/pricing/details/data-transfer/)页。
+> [!NOTE]
+> 为了使用户能够试用新的存储层并在上市后验证功能，在 2016 年 6 月 30 日之前，将免收将存储层从“冷”更改为“热”的费用。从 2016 年 7 月 1 日 开始，将对所有从“冷”到“热”的转换收取费用。有关 Blob 存储帐户的定价模型的详细信息，请参阅 [Azure 存储空间定价](https://www.azure.cn/pricing/details/storage/)页。有关出站数据传输费用的详细信息，请参阅[数据传输定价详细信息](https://www.azure.cn/pricing/details/data-transfer/)页。
 
 ## 快速启动
 在本部分，我们将使用 Azure 门户预览演示以下方案：
@@ -133,28 +137,28 @@ Blob 存储帐户使用基于存储层的 Blob 存储的新定价模型。使用
 2. 在“中心”菜单上，选择“新建”->“数据 + 存储”->“存储帐户”。
 3. 输入你的存储帐户的名称。
 
-	该名称必须全局唯一；在访问存储帐户中的对象时，该名称用作所需 URL 的一部分。
+    该名称必须全局唯一；在访问存储帐户中的对象时，该名称用作所需 URL 的一部分。
 
 4. 选择 **Resource Manager** 作为部署模型。
 
-	分层存储只能用于 Resource Manager 存储帐户；建议对新资源使用该部署模型。有关详细信息，请参阅 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)。
+    分层存储只能用于 Resource Manager 存储帐户；建议对新资源使用该部署模型。有关详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
 5. 在“帐户类型”下拉列表中，选择“Blob 存储”。
 
-	你可以在这里选择存储帐户的类型。分层存储不适用于通用存储，只适用于 Blob 存储类型帐户。
+    你可以在这里选择存储帐户的类型。分层存储不适用于通用存储，只适用于 Blob 存储类型帐户。
 
-	请注意，当你选择此项时，性能层将设置为“标准”。分层存储不适用于“高级”性能层。
+    请注意，当你选择此项时，性能层将设置为“标准”。分层存储不适用于“高级”性能层。
 
 6. 选择存储帐户的复制选项：“LRS”、“GRS”或“RA-GRS”。默认值为“RA-GRS”。
 
-	LRS = 本地冗余存储；GRS = 异地冗余存储（2 个区域）；RA-GRS 是可以进行读取访问的异地冗余存储（2 个区域，可以对第二个区域进行读取访问）。
+    LRS = 本地冗余存储；GRS = 异地冗余存储（2 个区域）；RA-GRS 是可以进行读取访问的异地冗余存储（2 个区域，可以对第二个区域进行读取访问）。
 
-	有关 Azure 存储空间复制选项的详细信息，请参阅 [Azure 存储空间复制](/documentation/articles/storage-redundancy/)。
+    有关 Azure 存储空间复制选项的详细信息，请参阅 [Azure 存储空间复制](./storage-redundancy.md)。
 
 7. 根据需要选择正确的存储层：将“访问层”设置为“冷”或“热”。默认值为“热”。
 8. 选择想在其中创建新存储帐户的订阅。
 
-9. 指定新资源组或选择现有资源组。有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)。
+9. 指定新资源组或选择现有资源组。有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
 10. 选择存储帐户的区域。
 11. 单击“创建”以创建存储帐户。
@@ -171,7 +175,8 @@ Blob 存储帐户使用基于存储层的 Blob 存储的新定价模型。使用
 
 5. 单击边栏选项卡顶部的“保存”。
 
-> [AZURE.NOTE] 更改存储层可能会产生额外费用。有关更多详细信息，请参阅[定价和计费](/documentation/articles/storage-blob-storage-tiers/#pricing-and-billing)部分。
+> [!NOTE]
+> 更改存储层可能会产生额外费用。有关更多详细信息，请参阅[定价和计费](./storage-blob-storage-tiers.md#pricing-and-billing)部分。
 
 ## 评估 Blob 存储帐户和迁移到 Blob 存储帐户
 
@@ -193,19 +198,22 @@ Blob 存储帐户使用基于存储层的 Blob 存储的新定价模型。使用
 
 如需更多详细信息，请参阅[关于存储分析指标](https://msdn.microsoft.com/zh-cn/library/azure/hh343258.aspx)和[存储分析指标表架构](https://msdn.microsoft.com/zh-cn/library/azure/hh343264.aspx)
 
-> [AZURE.NOTE] Blob 存储帐户公开表服务终结点的目的只是为了存储和访问该帐户的度量值数据。
+> [!NOTE]
+> Blob 存储帐户公开表服务终结点的目的只是为了存储和访问该帐户的度量值数据。
 
 若要监视 Blob 存储服务的存储消耗情况，需启用容量度量值。启用此功能后，将会每天为存储帐户的 Blob 服务记录容量数据，并将容量数据记录为表条目写入到同一存储帐户中的 *$MetricsCapacityBlob* 表。
 
 若要监视 Blob 存储服务的数据访问模式，需在 API 级别启用每小时事务度量值。启用此功能后，将会每小时聚合按 API 进行的事务，并将这些事务记录为表条目写入到同一存储帐户中的 *$MetricsHourPrimaryTransactionsBlob* 表。在使用 RA-GRS 存储帐户时，*$MetricsHourSecondaryTransactionsBlob* 表会将事务记录到辅助终结点。
 
-> [AZURE.NOTE] 如果你有一个通用存储帐户，并且在其中存储了页 Blob、虚拟机磁盘以及块 Blob 数据和追加 Blob 数据，则不适合使用此估算过程。这是因为，你将无法根据 Blob 的类型来区分块 Blob 和追加 Blob（均可迁移到 Blob 存储帐户）的容量和事务度量值。
+> [!NOTE]
+> 如果你有一个通用存储帐户，并且在其中存储了页 Blob、虚拟机磁盘以及块 Blob 数据和追加 Blob 数据，则不适合使用此估算过程。这是因为，你将无法根据 Blob 的类型来区分块 Blob 和追加 Blob（均可迁移到 Blob 存储帐户）的容量和事务度量值。
 
 若要对数据使用和访问模式进行准确的估算，建议你为度量值选择一个可代表你日常使用情况的保留期，然后进行推断。一种选择是让度量值数据保留 7 天，每周收集一次数据，然后在月底进行分析。另一种选择是让度量值数据保留 30 天，在 30 天到期以后再收集和分析数据。
 
-如需详细了解如何启用、收集和查看度量值数据，请参阅[启用 Azure 存储空间度量值并查看度量值数据](/documentation/articles/storage-enable-and-view-metrics/)。
+如需详细了解如何启用、收集和查看度量值数据，请参阅[启用 Azure 存储空间度量值并查看度量值数据](./storage-enable-and-view-metrics.md)。
 
-> [AZURE.NOTE] 存储、访问和下载分析数据也会收费，就像使用常规用户数据一样。
+> [!NOTE]
+> 存储、访问和下载分析数据也会收费，就像使用常规用户数据一样。
 
 ####<a name="pricing-and-billing"></a> 通过使用情况度量值来估算费用
 ##### 存储费用
@@ -234,7 +242,8 @@ Blob 存储帐户使用基于存储层的 Blob 存储的新定价模型。使用
 
 在使用 GRS 或 RA-GRS 存储帐户时，也可以通过所写入数据量的估算值来计算 Blob 存储帐户的异地复制数据传输费用。
 
-> [AZURE.NOTE] 如需更详细的示例来了解如何计算热存储层或冷存储层的使用费用，请参阅 [Azure 存储空间定价](/pricing/details/storage/)页中名为“什么是‘热’和‘冷’访问层以及如何确定应使用哪一个？”的常见问题。
+> [!NOTE]
+> 如需更详细的示例来了解如何计算热存储层或冷存储层的使用费用，请参阅 [Azure 存储空间定价](https://www.azure.cn/pricing/details/storage/)页中名为“什么是‘热’和‘冷’访问层以及如何确定应使用哪一个？”的常见问题。
 
 ### 迁移现有数据
 Blob 存储帐户专用于仅存储块 blob 和追加 blob。现有的通用存储帐户（使你可以存储表、队列、文件和磁盘以及 Blob）无法转换为 Blob 存储帐户。若要使用存储层，将需要创建新的 Blob 存储帐户并将你现有的数据迁移到新创建的帐户。可以使用以下方法从本地存储设备、第三方云存储提供程序或 Azure 中现有的通用存储帐户将现有数据迁移到 Blob 存储帐户：
@@ -242,7 +251,7 @@ Blob 存储帐户专用于仅存储块 blob 和追加 blob。现有的通用存�
 #### AzCopy
 AzCopy 是一个 Windows 命令行实用程序，旨在实现高性能地将数据复制到 Azure 存储空间和从 Azure 存储空间中复制。可以使用 AzCopy 从现有的通用存储帐户将数据复制到你的 Blob 存储帐户，或从你的本地存储设备将数据上传到 Blob 存储帐户。
 
-有关更多详细信息，请参阅[使用 AzCopy 命令行实用工具传输数据](/documentation/articles/storage-use-azcopy/)。
+有关更多详细信息，请参阅[使用 AzCopy 命令行实用工具传输数据](./storage-use-azcopy.md)。
 
 #### 数据移动库
 适用于 .NET 的 Azure 存储空间数据移动库基于为 AzCopy 提供技术支持的核心数据移动框架。库旨在实现类似于 AzCopy 的高性能、可靠且简单的数据传输操作。这样使你能够以本机模式利用应用程序中的 AzCopy 提供的功能的全部好处，而无需处理运行和监视 AzCopy 的外部实例。
@@ -252,9 +261,10 @@ AzCopy 是一个 Windows 命令行实用程序，旨在实现高性能地将数�
 #### REST API 或客户端库
 你可以创建自定义应用程序以使用其中一个 Azure 客户端库或 Azure 存储空间服务 REST API 将数据迁移到 Blob 存储帐户。Azure 存储空间对多种语言和平台（如 .NET、Java、C++、Node.JS、PHP、Ruby 和 Python）提供了内容丰富的客户端库。客户端库提供高级功能，如重试逻辑、日志记录和并行上传。你也可以直接针对可以由发出 HTTP/HTTPS 请求的任何语言调用的 REST API 进行开发。
 
-有关更多详细信息，请参阅[开始使用 Azure Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)。
+有关更多详细信息，请参阅[开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md)。
 
-> [AZURE.NOTE] 使用客户端加密进行加密的 blob 将存储与 blob 一起存储的加密相关元数据。任何复制机制应确保保留 blob 元数据，尤其是与加密相关的元数据，这一点非常重要。如果复制不包含此元数据的 blob，则 blob 内容将不再可进行检索。有关加密相关元数据的详细信息，请参阅 [Azure 存储空间客户端加密](/documentation/articles/storage-client-side-encryption/)。
+> [!NOTE]
+> 使用客户端加密进行加密的 blob 将存储与 blob 一起存储的加密相关元数据。任何复制机制应确保保留 blob 元数据，尤其是与加密相关的元数据，这一点非常重要。如果复制不包含此元数据的 blob，则 blob 内容将不再可进行检索。有关加密相关元数据的详细信息，请参阅 [Azure 存储空间客户端加密](./storage-client-side-encryption.md)。
 
 ## 常见问题
 1. **现有存储帐户是否仍然可用？**
@@ -285,7 +295,7 @@ AzCopy 是一个 Windows 命令行实用程序，旨在实现高性能地将数�
 
     热存储层中的 Blob 具有与通用存储帐户中的 Blob 相同的延迟。冷存储层中的 Blob 具有与通用存储帐户中的 Blob 类似的延迟（以毫秒为单位）。
 
-    冷存储层中的 Blob 将具有的可用性服务级别 (SLA) 比存储在热存储层中的 Blob 略低。有关更多详细信息，请参阅[存储的 SLA](/support/sla/storage/)。
+    冷存储层中的 Blob 将具有的可用性服务级别 (SLA) 比存储在热存储层中的 Blob 略低。有关更多详细信息，请参阅[存储的 SLA](https://www.azure.cn/support/sla/storage/)。
 
 8. **是否可以将页 blob 和虚拟机磁盘存储在 Blob 存储帐户中？**
 
@@ -302,19 +312,18 @@ AzCopy 是一个 Windows 命令行实用程序，旨在实现高性能地将数�
 ## 后续步骤
 ### 评估 Blob 存储帐户
 
+[通过启用 Azure 存储空间度量值来评估当前存储帐户的使用情况](./storage-enable-and-view-metrics.md)
 
-[通过启用 Azure 存储空间度量值来评估当前存储帐户的使用情况](/documentation/articles/storage-enable-and-view-metrics/)
+[按区域检查 Blob 存储定价](https://www.azure.cn/pricing/details/storage/)
 
-[按区域检查 Blob 存储定价](/pricing/details/storage/)
-
-[检查数据传输定价](/pricing/details/data-transfer/)
+[检查数据传输定价](https://www.azure.cn/pricing/details/data-transfer/)
 
 ### 开始使用 Blob 存储帐户
-[开始使用 Azure Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)
+[开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md)
 
-[将数据移动到和移出 Azure 存储空间](/documentation/articles/storage-moving-data/)
+[将数据移动到和移出 Azure 存储空间](./storage-moving-data.md)
 
-[使用 AzCopy 命令行实用程序传输数据](/documentation/articles/storage-use-azcopy/)
+[使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
 
 [浏览和了解你的存储帐户](http://storageexplorer.com/)
 

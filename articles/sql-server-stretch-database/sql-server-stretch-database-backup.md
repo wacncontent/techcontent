@@ -1,23 +1,21 @@
-<properties
-	pageTitle="备份启用了延伸的数据库 | Azure"
-	description="了解如何备份启用了延伸的数据库。"
-	services="sql-server-stretch-database"
-	documentationCenter=""
-	authors="douglaslMS"
-	manager=""
-	editor=""/>  
+---
+title: 备份启用了延伸的数据库 | Azure
+description: 了解如何备份启用了延伸的数据库。
+services: sql-server-stretch-database
+documentationCenter: ''
+authors: douglaslMS
+manager: ''
+editor: ''
 
-
-<tags
-	ms.service="sql-server-stretch-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/14/2016"
-	wacn.date="01/04/2017"
-	ms.author="douglasl"/>
-
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/14/2016
+wacn.date: 01/04/2017
+ms.author: douglasl
+---
 
 # 备份启用了延伸的数据库
 数据库备用有助于从多种类型的故障、错误和灾难中恢复。
@@ -25,7 +23,8 @@
 * 必须备份启用了延伸的 SQL Server 数据库。
 * Azure 会自动备份 Stretch Database 从 SQL Server 迁移到 Azure 的远程数据。
 
->    [AZURE.NOTE] 备份只是完整的高可用性和业务连续性解决方案的一个部分。有关高可用性的详细信息，请参阅[高可用性解决方案](https://msdn.microsoft.com/zh-cn/library/ms190202.aspx)。
+>    [!NOTE]
+> 备份只是完整的高可用性和业务连续性解决方案的一个部分。有关高可用性的详细信息，请参阅[高可用性解决方案](https://msdn.microsoft.com/zh-cn/library/ms190202.aspx)。
 
 ## 备份 SQL Server 数据
 若要备份启用了延伸的 SQL Server 数据库，可继续使用当前所用的 SQL Server 备份方法。有关详细信息，请参阅 [SQL Server 数据库的备份和还原](https://msdn.microsoft.com/zh-cn/library/ms187048.aspx)。
@@ -52,12 +51,13 @@ Azure 数据库备份存储在异地冗余的 Azure 存储空间 (RA-GRS) 中，
 * 出问题后识别问题和决定还原备份所需的时间。
 * Azure 还原操作的持续时间。
 
-> [AZURE.NOTE] 通过增加 Stretch Database 在临时表中暂时保留的数据量，可增加 SQL Server 上所需的空间量。
+> [!NOTE]
+> 通过增加 Stretch Database 在临时表中暂时保留的数据量，可增加 SQL Server 上所需的空间量。
 
 若要查看 Stretch Database 当前在临时表中暂时保留的数据小时数，请运行存储过程 [sys.sp\_rda\_get\_rpo\_duration](https://msdn.microsoft.com/zh-cn/library/mt707767.aspx)。
 
 ## 另请参阅
-[延伸数据库的管理和故障排除](/documentation/articles/sql-server-stretch-database-manage/)
+[延伸数据库的管理和故障排除](./sql-server-stretch-database-manage.md)
 
 [sys.sp\_rda\_reauthorize\_db (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt131016.aspx)
 

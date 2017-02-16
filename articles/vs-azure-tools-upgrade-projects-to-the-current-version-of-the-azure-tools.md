@@ -1,22 +1,22 @@
-<properties
-   pageTitle="如何将项目升级到最新版本的 Azure Tools | Azure"
-   description="了解如何在 Visual Studio 中将 Azure 项目升级到最新版本的 Azure Tools"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 如何将项目升级到最新版本的 Azure Tools | Azure
+description: 了解如何在 Visual Studio 中将 Azure 项目升级到最新版本的 Azure Tools
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="1d64070a-078d-468a-87f4-e6715de6475f"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/18/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 1d64070a-078d-468a-87f4-e6715de6475f
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/18/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 如何将项目升级到最新版本的 Azure Tools for Visual Studio
 
@@ -40,7 +40,8 @@
 
 - 如果 Azure Caching 托管在一个或多个项目的角色中，当项目升级时，服务配置（.cscfg 文件）和服务定义（.csdef 文件）中的某些属性将会更改。如果项目使用 Azure Caching NuGet 包，项目将升级到最新版本的包。你应该打开 Web.config 文件，并验证客户端配置在升级期间是否已得到适当维护。如果添加了对 Azure Caching 客户端程序集的引用而未使用 NuGet 包，则不会更新这些程序集；你必须手动更新对新版本的这些引用。
 
->[AZURE.IMPORTANT] 对于 F# 项目，必须手动更新对 Azure 程序集的引用，使项目引用这些程序集的较新版本。
+>[!IMPORTANT]
+> 对于 F# 项目，必须手动更新对 Azure 程序集的引用，使项目引用这些程序集的较新版本。
 
 ### 如何将 Azure 项目升级到最新版本
 

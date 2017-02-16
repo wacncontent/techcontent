@@ -1,26 +1,25 @@
-<properties
-	pageTitle="如何使用适用于 Azure 移动应用的 iOS SDK"
-	description="如何使用适用于 Azure 移动应用的 iOS SDK"
-	services="app-service\mobile"
-	documentationCenter="ios"
-	authors="yuaxu"
-	manager="yochayk"
-	editor=""/>  
+---
+title: 如何使用适用于 Azure 移动应用的 iOS SDK
+description: 如何使用适用于 Azure 移动应用的 iOS SDK
+services: app-service\mobile
+documentationCenter: ios
+authors: yuaxu
+manager: yochayk
+editor: ''
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/26/2016"
-	ms.author="yuaxu"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: yuaxu
+---
 
 # 如何使用适用于 Azure 移动应用的 iOS 客户端库
 
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 本指南介绍如何使用最新的 [Azure 移动应用 iOS SDK][1] 执行常见任务。对于 Azure 移动应用的新手，请先完成 [Azure Mobile Apps Quick Start]（Azure 移动应用快速入门），创建后端、创建表并下载预先生成的 iOS Xcode 项目。本指南侧重于客户端 iOS SDK。若要了解有关用于后端的服务器端 SDK 的详细信息，请参阅 Server SDK 操作方法。
 
@@ -54,7 +53,6 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl"];
 let client = MSClient(applicationURLString: "AppUrl")
 ```
 
-
 ##<a name="table-reference"></a>如何：创建表引用
 
 若要访问或更新数据，请创建到后端表的引用。将 `TodoItem` 替换为表名称
@@ -71,7 +69,6 @@ MSTable *table = [client tableWithName:@"TodoItem"];
 let table = client.tableWithName("TodoItem")
 ```
 
-
 ##<a name="querying"></a>如何：查询数据
 
 若要创建数据库查询，请查询 `MSTable` 对象。以下查询将获取 `TodoItem` 中的所有项，并记录每个项的文本。
@@ -80,13 +77,13 @@ let table = client.tableWithName("TodoItem")
 
 ```
 [table readWithCompletion:^(MSQueryResult *result, NSError *error) {
-		if(error) { // error is nil if no error occured
-				NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) { // items is NSArray of records that match query
-						NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-				}
-		}
+        if(error) { // error is nil if no error occured
+                NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) { // items is NSArray of records that match query
+                        NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+                }
+        }
 }];
 ```
 
@@ -117,13 +114,13 @@ table.readWithCompletion { (result, error) in
 NSPredicate * predicate = [NSPredicate predicateWithFormat:@"complete == NO"];
 // Query the TodoItem table
 [table readWithPredicate:predicate completion:^(MSQueryResult *result, NSError *error) {
-		if(error) {
-				NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) {
-						NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-				}
-		}
+        if(error) {
+                NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) {
+                        NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+                }
+        }
 }];
 ```
 
@@ -183,13 +180,13 @@ let query = table.queryWithPredicate(NSPredicate(format: "complete == NO"))
 [query orderByAscending:@"text"];
 [query orderByDescending:@"complete"];
 [query readWithCompletion:^(MSQueryResult *result, NSError *error) {
-		if(error) {
-				NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) {
-						NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-				}
-		}
+        if(error) {
+                NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) {
+                        NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+                }
+        }
 }];
 ```
 
@@ -208,7 +205,6 @@ query.readWithCompletion { (result, error) in
     }
 }
 ```
-
 
 ## <a name="selecting"></a><a name="parameters"></a>如何：使用 MSQuery 限制字段和展开查询字符串参数
 
@@ -232,8 +228,8 @@ query.selectFields = ["text", "complete"]
 
 ```
 query.parameters = @{
-	@"myKey1" : @"value1",
-	@"myKey2" : @"value2",
+    @"myKey1" : @"value1",
+    @"myKey2" : @"value2",
 };
 ```
 
@@ -255,7 +251,7 @@ query.parameters = ["myKey1": "value1", "myKey2": "value2"]
 
 此设置也是数据记录数目，而不是字节大小。
 
-如果要增加客户端页面大小，还应增加服务器上的页面大小。有关此操作的步骤，请参阅[“如何调整表分页大小”](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/)。
+如果要增加客户端页面大小，还应增加服务器上的页面大小。有关此操作的步骤，请参阅[“如何调整表分页大小”](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)。
 
 **Objective-C**：
 
@@ -264,11 +260,10 @@ query.parameters = ["myKey1": "value1", "myKey2": "value2"]
   [table  pullWithQuery:query queryId:@nil settings:pullSettings
                         completion:^(NSError * _Nullable error) {
                                if(error) {
-					NSLog(@"ERROR %@", error);
-				} 
+                    NSLog(@"ERROR %@", error);
+                } 
                            }];
 ```
-
 
 **Swift**：
 
@@ -294,11 +289,11 @@ table.pullWithQuery(query, queryId:nil, settings: pullSettings) { (error) in
 ```
 NSDictionary *newItem = @{@"id": @"custom-id", @"text": @"my new item", @"complete" : @NO};
 [table insert:newItem completion:^(NSDictionary *result, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
+    }
 }];
 ```
 
@@ -325,11 +320,11 @@ table.insert(newItem) { (result, error) in
 NSMutableDictionary *newItem = [oldItem mutableCopy]; // oldItem is NSDictionary
 [newItem setValue:@"Updated text" forKey:@"text"];
 [table update:newItem completion:^(NSDictionary *result, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
+    }
 }];
 ```
 
@@ -354,11 +349,11 @@ if let newItem = oldItem.mutableCopy() as? NSMutableDictionary {
 
 ```
 [table update:@{@"id":@"custom-id", @"text":"my EDITED item"} completion:^(NSDictionary *result, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
+    }
 }];
 ```
 
@@ -384,11 +379,11 @@ table.update(["id": "custom-id", "text": "my EDITED item"]) { (result, error) in
 
 ```
 [table delete:item completion:^(id itemId, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item ID: %@", itemId);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item ID: %@", itemId);
+    }
 }];
 ```
 
@@ -410,11 +405,11 @@ table.delete(newItem as [NSObject: AnyObject]) { (itemId, error) in
 
 ```
 [table deleteWithId:@"37BBF396-11F0-4B39-85C8-B319C729AF6D" completion:^(id itemId, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item ID: %@", itemId);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item ID: %@", itemId);
+    }
 }];
 ```
 
@@ -434,7 +429,7 @@ table.deleteWithId("37BBF396-11F0-4B39-85C8-B319C729AF6D") { (itemId, error) in
 
 ##<a name="customapi"></a>如何调用自定义 API
 
-使用自定义 API 可以公开任何后端功能。无需映射到表操作。不仅能进一步控制消息，甚至还可以读取或设置标头，并更改响应正文格式。若要了解如何在后端上创建自定义 API，请阅读 [Custom APIs](/documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#work-easy-apis)（自定义 API）
+使用自定义 API 可以公开任何后端功能。无需映射到表操作。不仅能进一步控制消息，甚至还可以读取或设置标头，并更改响应正文格式。若要了解如何在后端上创建自定义 API，请阅读 [Custom APIs](./app-service-mobile-node-backend-how-to-use-server-sdk.md#work-easy-apis)（自定义 API）
 
 若要调用自定义 API，请调用 `MSClient.invokeAPI`。请求和响应内容被视为 JSON。若要使用其他媒体类型，请[使用 `invokeAPI` 的其他重载][5]。若要发出 `GET` 请求而不是 `POST` 请求，请将参数 `HTTPMethod` 设置为 `"GET"`，将参数 `body` 设置为 `nil`（因为 GET 请求没有消息正文）。 如果自定义 API 支持其他 HTTP 谓词，请相应地更改 `HTTPMethod`。
 
@@ -480,9 +475,9 @@ client.invokeAPI("sendEmail",
 
 ```
 [client.push registerDeviceToken:deviceToken template:iOSTemplate completion:^(NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    }
 }];
 ```
 
@@ -552,12 +547,14 @@ if (error.code == MSErrorPreconditionFailed) {
 
 2. 使用 Cocoapods 安装 ADAL。编辑 Podfile 以包含以下定义，将 **YOUR-PROJECT** 替换为 Xcode 项目的名称：
 
-		source 'https://github.com/CocoaPods/Specs.git'
-		link_with ['YOUR-PROJECT']
-		xcodeproj 'YOUR-PROJECT'
+    ```
+    source 'https://github.com/CocoaPods/Specs.git'
+    link_with ['YOUR-PROJECT']
+    xcodeproj 'YOUR-PROJECT'
+    ```
 Pod：
 
-		pod 'ADALiOS'
+        pod 'ADALiOS'
 
 3. 使用终端，从包含项目的目录运行 `pod install`，然后打开生成的 Xcode 工作区（而不是项目）。
 
@@ -570,65 +567,67 @@ Pod：
 
 **Objective-C**：
 
-	#import <ADALiOS/ADAuthenticationContext.h>
-	#import <ADALiOS/ADAuthenticationSettings.h>
-	// ...
-	- (void) authenticate:(UIViewController*) parent
-	           completion:(void (^) (MSUser*, NSError*))completionBlock;
-	{
-	    NSString *authority = @"INSERT-AUTHORITY-HERE";
-	    NSString *resourceId = @"INSERT-RESOURCE-ID-HERE";
-	    NSString *clientId = @"INSERT-CLIENT-ID-HERE";
-	    NSURL *redirectUri = [[NSURL alloc]initWithString:@"INSERT-REDIRECT-URI-HERE"];
-	    ADAuthenticationError *error;
-	    ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
-	    authContext.parentController = parent;
-	    [ADAuthenticationSettings sharedInstance].enableFullScreen = YES;
-	    [authContext acquireTokenWithResource:resourceId
-	                                 clientId:clientId
-	                              redirectUri:redirectUri
-	                          completionBlock:^(ADAuthenticationResult *result) {
-	                              if (result.status != AD_SUCCEEDED)
-	                              {
-	                                  completionBlock(nil, result.error);;
-	                              }
-	                              else
-	                              {
-	                                  NSDictionary *payload = @{
-	                                                            @"access_token" : result.tokenCacheStoreItem.accessToken
-	                                                            };
-	                                  [client loginWithProvider:@"aad" token:payload completion:completionBlock];
-	                              }
-	                          }];
-	}
-
+```
+#import <ADALiOS/ADAuthenticationContext.h>
+#import <ADALiOS/ADAuthenticationSettings.h>
+// ...
+- (void) authenticate:(UIViewController*) parent
+           completion:(void (^) (MSUser*, NSError*))completionBlock;
+{
+    NSString *authority = @"INSERT-AUTHORITY-HERE";
+    NSString *resourceId = @"INSERT-RESOURCE-ID-HERE";
+    NSString *clientId = @"INSERT-CLIENT-ID-HERE";
+    NSURL *redirectUri = [[NSURL alloc]initWithString:@"INSERT-REDIRECT-URI-HERE"];
+    ADAuthenticationError *error;
+    ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
+    authContext.parentController = parent;
+    [ADAuthenticationSettings sharedInstance].enableFullScreen = YES;
+    [authContext acquireTokenWithResource:resourceId
+                                 clientId:clientId
+                              redirectUri:redirectUri
+                          completionBlock:^(ADAuthenticationResult *result) {
+                              if (result.status != AD_SUCCEEDED)
+                              {
+                                  completionBlock(nil, result.error);;
+                              }
+                              else
+                              {
+                                  NSDictionary *payload = @{
+                                                            @"access_token" : result.tokenCacheStoreItem.accessToken
+                                                            };
+                                  [client loginWithProvider:@"aad" token:payload completion:completionBlock];
+                              }
+                          }];
+}
+```
 
 **Swift**：
 
-	// add the following imports to your bridging header:
-	//		#import <ADALiOS/ADAuthenticationContext.h>
-	//		#import <ADALiOS/ADAuthenticationSettings.h>
+```
+// add the following imports to your bridging header:
+//		#import <ADALiOS/ADAuthenticationContext.h>
+//		#import <ADALiOS/ADAuthenticationSettings.h>
 
-	func authenticate(parent: UIViewController, completion: (MSUser?, NSError?) -> Void) {
-		let authority = "INSERT-AUTHORITY-HERE"
-		let resourceId = "INSERT-RESOURCE-ID-HERE"
-		let clientId = "INSERT-CLIENT-ID-HERE"
-		let redirectUri = NSURL(string: "INSERT-REDIRECT-URI-HERE")
-		var error: AutoreleasingUnsafeMutablePointer<ADAuthenticationError?> = nil
-		let authContext = ADAuthenticationContext(authority: authority, error: error)
-		authContext.parentController = parent
-		ADAuthenticationSettings.sharedInstance().enableFullScreen = true
-		authContext.acquireTokenWithResource(resourceId, clientId: clientId, redirectUri: redirectUri) { (result) in
-		        if result.status != AD_SUCCEEDED {
-		            completion(nil, result.error)
-		        }
-		        else {
-		            let payload: [String: String] = ["access_token": result.tokenCacheStoreItem.accessToken]
-		            client.loginWithProvider("aad", token: payload, completion: completion)
-		        }
-    		}
-	}
-
+func authenticate(parent: UIViewController, completion: (MSUser?, NSError?) -> Void) {
+    let authority = "INSERT-AUTHORITY-HERE"
+    let resourceId = "INSERT-RESOURCE-ID-HERE"
+    let clientId = "INSERT-CLIENT-ID-HERE"
+    let redirectUri = NSURL(string: "INSERT-REDIRECT-URI-HERE")
+    var error: AutoreleasingUnsafeMutablePointer<ADAuthenticationError?> = nil
+    let authContext = ADAuthenticationContext(authority: authority, error: error)
+    authContext.parentController = parent
+    ADAuthenticationSettings.sharedInstance().enableFullScreen = true
+    authContext.acquireTokenWithResource(resourceId, clientId: clientId, redirectUri: redirectUri) { (result) in
+            if result.status != AD_SUCCEEDED {
+                completion(nil, result.error)
+            }
+            else {
+                let payload: [String: String] = ["access_token": result.tokenCacheStoreItem.accessToken]
+                client.loginWithProvider("aad", token: payload, completion: completion)
+            }
+        }
+}
+```
 
 <!-- Anchors. -->
 
@@ -659,38 +658,37 @@ Pod：
 <!-- Images. -->
 
 <!-- URLs. -->
-[Azure Mobile Apps Quick Start]: /documentation/articles/app-service-mobile-ios-get-started/
+[Azure Mobile Apps Quick Start]: ./app-service-mobile-ios-get-started.md
 
-[Add Mobile Services to Existing App]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/-data
-[Get started with Mobile Services]: /documentation/articles/mobile-services-ios-get-started/
+[Add Mobile Services to Existing App]: ../mobile-services/mobile-services-javascript-backend-windows-store-dotnet-get-started.md-data
+[Get started with Mobile Services]: ../mobile-services/mobile-services-ios-get-started.md
 [Validate and modify data in Mobile Services by using server scripts]: /develop/mobile/tutorials/validate-modify-and-augment-data-ios
 [Mobile Services SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
-[Authentication]: /documentation/articles/mobile-services-ios-get-started-users/
+[Authentication]: ../mobile-services/mobile-services-ios-get-started-users.md
 [iOS SDK]: https://developer.apple.com/xcode
 
 [Handling Expired Tokens]: http://go.microsoft.com/fwlink/p/?LinkId=301955
 [Live Connect SDK]: http://go.microsoft.com/fwlink/p/?LinkId=301960
 [Permissions]: http://msdn.microsoft.com/zh-cn/library/azure/jj193161.aspx
-[Service-side Authorization]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
-[Use scripts to authorize users]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
+[Service-side Authorization]: ../mobile-services/mobile-services-javascript-backend-service-side-authorization.md
+[Use scripts to authorize users]: ../mobile-services/mobile-services-javascript-backend-service-side-authorization.md
 [动态架构]: https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx
 [How to: access custom parameters]: /develop/mobile/how-to-guides/work-with-server-scripts#access-headers
 [Create a table]: http://msdn.microsoft.com/zh-cn/library/azure/jj193162.aspx
 [NSDictionary object]: http://go.microsoft.com/fwlink/p/?LinkId=301965
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
-[CLI to manage Mobile Services tables]: /documentation/articles/virtual-machines-command-line-tools/#Mobile_Tables
-[Conflict-Handler]: /documentation/articles/mobile-services-ios-handling-conflicts-offline-data/#add-conflict-handling
+[CLI to manage Mobile Services tables]: ../virtual-machines-command-line-tools.md#Mobile_Tables
+[Conflict-Handler]: ../mobile-services/mobile-services-ios-handling-conflicts-offline-data.md#add-conflict-handling
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 [Fabric Dashboard]: https://www.fabric.io/home
 [Fabric for iOS - Getting Started]: https://docs.fabric.io/ios/fabric/getting-started.html
 [1]: https://github.com/Azure/azure-mobile-apps-ios-client/blob/master/README.md#ios-client-sdk
 [2]: http://azure.github.io/azure-mobile-apps-ios-client/
 [3]: https://msdn.microsoft.com/zh-cn/library/azure/dn495101.aspx
-[4]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags
+[4]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags
 [5]: http://azure.github.io/azure-mobile-services/iOS/v3/Classes/MSClient.html#//api/name/invokeAPI:data:HTTPMethod:parameters:headers:completion:
 [6]: https://github.com/Azure/azure-mobile-services/blob/master/sdk/iOS/src/MSError.h
-[7]: /documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/
-
+[7]: ./app-service-mobile-how-to-configure-active-directory-authentication.md
 
 [10]: https://developers.facebook.com/docs/ios/getting-started
 

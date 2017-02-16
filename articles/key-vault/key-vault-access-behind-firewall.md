@@ -1,23 +1,21 @@
-<properties
-	pageTitle="访问防火墙后面的密钥保管库 | Azure"
-	description="了解如何从防火墙后面的应用程序访问密钥保管库"
-	services="key-vault"
-	documentationCenter=""
-	authors="amitbapat"
-	manager="mbaldwin"
-	tags="azure-resource-manager"/>  
+---
+title: 访问防火墙后面的密钥保管库 | Azure
+description: 了解如何从防火墙后面的应用程序访问密钥保管库
+services: key-vault
+documentationCenter: ''
+authors: amitbapat
+manager: mbaldwin
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="key-vault"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="hero-article"
-	ms.date="09/13/2016"
-	wacn.date="10/19/2016"
-	ms.author="ambapat"/>  
-
+ms.service: key-vault
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 09/13/2016
+wacn.date: 10/19/2016
+ms.author: ambapat
+---
 
 # 访问防火墙后面的密钥保管库
 ### 问：我的密钥保管库客户端应用程序需要位于防火墙后面，我应该开放哪些端口/主机/IP 地址应才能访问密钥保管库？
@@ -44,7 +42,7 @@
 | 使用具有 AAD 的组织 ID 的用户/服务主体（例如 user@contoso.com） | **全球：**<br>login.microsoftonline.com:443<br><br> **Azure China：**<br>login.chinacloudapi.cn:443<br><br>**Azure US Government：**<br>login-us.microsoftonline.com:443<br><br>**Azure Germany：**<br>login.microsoftonline.de:443 |
 | 使用组织 ID + ADFS 或其他联合终结点的用户/服务主体（例如 user@contoso.com） | 所有上述组织 ID 终结点加上 ADFS 或其他联合终结点 |
 
-还有其他可能的复杂情况。有关其他信息，请参阅 [Azure Active Directory 身份验证流](/documentation/articles/active-directory-authentication-scenarios/)、[将应用程序与 Azure Active Directory 集成](/documentation/articles/active-directory-integrating-applications/)和 [Active Directory 身份验证协议](/documentation/articles/active-directory-developers-guide/)。
+还有其他可能的复杂情况。有关其他信息，请参阅 [Azure Active Directory 身份验证流](../active-directory/active-directory-authentication-scenarios.md)、[将应用程序与 Azure Active Directory 集成](../active-directory/active-directory-integrating-applications.md)和 [Active Directory 身份验证协议](../active-directory/active-directory-developers-guide.md)。
 
 ## 密钥保管库管理
 

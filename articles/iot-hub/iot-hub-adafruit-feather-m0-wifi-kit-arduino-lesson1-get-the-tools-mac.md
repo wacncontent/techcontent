@@ -1,26 +1,26 @@
-<properties
-    pageTitle="获取用于 Azure IoT 初学者工具包 (macOS 10.10) 的工具 | Azure"
-    description="下载并安装适用于 macOS 上 Adafruit Feather M0 WiFi 的第一个示例应用程序的必需工具和软件。"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="arduino 开发工具, iot 开发, iot 软件, 物联网软件, 在 mac 上安装 git, 安装 node js mac" />
-<tags
-    ms.assetid="0262f3dd-0259-4eb0-962f-9fb534f8359e"
-    ms.service="iot-hub"
-    ms.devlang="arduino"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/13/2016"
-    wacn.date="01/23/2017"
-    ms.author="xshi" />  
+---
+title: 获取用于 Azure IoT 初学者工具包 (macOS 10.10) 的工具 | Azure
+description: 下载并安装适用于 macOS 上 Adafruit Feather M0 WiFi 的第一个示例应用程序的必需工具和软件。
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: arduino 开发工具, iot 开发, iot 软件, 物联网软件, 在 mac 上安装 git, 安装 node js mac
 
+ms.assetid: 0262f3dd-0259-4eb0-962f-9fb534f8359e
+ms.service: iot-hub
+ms.devlang: arduino
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/13/2016
+wacn.date: 01/23/2017
+ms.author: xshi
+---
 
 # 获取工具 (macOS 10.10)
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [Windows 7 或更高版本][windows]
 - [Ubuntu 16.04][ubuntu]
 - [macOS 10.10][macos]
@@ -31,7 +31,7 @@
 
 如果有问题，可在[故障排除页][troubleshooting]上查找解决方案。
 
-> [AZURE.NOTE]
+> [!NOTE]
 尽管主逻辑的编程语言为 Arduino，课程中仍使用 Node.js 工具生成和部署示例应用程序。
 
 ## 你要学习的知识
@@ -57,23 +57,24 @@
    1. 按 `Cmd + Space` 并输入 `Terminal` 即可打开终端。
    2. 运行以下命令：
 
-      
-      		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-      
+       ```bash
+          /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+       ```
+
 2. 运行以下命令，安装 Git 和 Node.js：
 
-   
-   		brew install node git
-   
+    ```bash
+       brew install node git
+    ```
 
 ## 安装其他 Node.js 开发工具
 使用 [gulp.js](http://gulpjs.com) 将示例应用程序自动部署到 Arduino 开发板。
 
 在终端运行以下命令，安装 `gulp` 和 `device-discovery-cli`：
 
-
-	sudo npm install -g gulp device-discovery-cli
-
+```bash
+sudo npm install -g gulp device-discovery-cli
+```
 
 如果无法在 macOS 上安装 Node.js 和这些额外的开发工具，请参阅[故障排除指南][troubleshooting]，了解常见问题的解决方案。
 
@@ -87,11 +88,10 @@
 [创建和部署 blink 应用程序][create-and-deploy-the-blink-application]
 <!-- Images and links -->
 
-
-[windows]: /documentation/articles/iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-get-the-tools-win32/
-[ubuntu]: /documentation/articles/iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-get-the-tools-ubuntu/
-[macos]: /documentation/articles/iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-get-the-tools-mac/
-[troubleshooting]: /documentation/articles/iot-hub-adafruit-feather-m0-wifi-kit-arduino-troubleshooting/
-[create-and-deploy-the-blink-application]: /documentation/articles/iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-deploy-blink-app/
+[windows]: ./iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-get-the-tools-win32.md
+[ubuntu]: ./iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-get-the-tools-ubuntu.md
+[macos]: ./iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-get-the-tools-mac.md
+[troubleshooting]: ./iot-hub-adafruit-feather-m0-wifi-kit-arduino-troubleshooting.md
+[create-and-deploy-the-blink-application]: ./iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson1-deploy-blink-app.md
 
 <!---HONumber=Mooncake_0116_2017-->

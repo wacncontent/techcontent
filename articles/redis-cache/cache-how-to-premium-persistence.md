@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="如何为高级 Azure Redis 缓存配置数据暂留" 
-	description="了解如何为高级级别的 Azure Redis 缓存实例配置和管理数据暂留" 
-	services="redis-cache" 
-	documentationCenter="" 
-	authors="steved0x" 
-	manager="douge" 
-	editor=""/>  
+---
+title: 如何为高级 Azure Redis 缓存配置数据暂留
+description: 了解如何为高级级别的 Azure Redis 缓存实例配置和管理数据暂留
+services: redis-cache
+documentationCenter: ''
+authors: steved0x
+manager: douge
+editor: ''
 
-
-<tags 
-	ms.service="cache" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="cache-redis" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/30/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="sdanie"/>
+ms.service: cache
+ms.workload: tbd
+ms.tgt_pltfrm: cache-redis
+ms.devlang: na
+ms.topic: article
+ms.date: 09/30/2016
+wacn.date: 01/03/2017
+ms.author: sdanie
+---
 
 # 如何为高级 Azure Redis 缓存配置数据暂留
 
@@ -24,7 +23,7 @@ Azure Redis 缓存具有不同的缓存产品（包括新推出的高级层）�
 
 Azure Redis 缓存高级层包括群集、持久性和虚拟网络支持等功能。本文介绍如何配置高级 Azure Redis 缓存实例中的暂留。
 
-有关其他高级缓存功能的信息，请参阅 [Azure Redis 缓存高级层简介](/documentation/articles/cache-premium-tier-intro/)。
+有关其他高级缓存功能的信息，请参阅 [Azure Redis 缓存高级层简介](./cache-premium-tier-intro.md)。
 
 ## 什么是数据暂留？
 Redis 暂留可让你保留存储在 Redis 中的数据。还可以获取快照并备份数据，以便在出现硬件故障时进行加载。这相对于基本级别或标准级别是一项巨大优势，因为基本级别或标准级别将所有数据存储在内存中，在出现故障的情况下，如果缓存节点停机，则可能导致数据丢失。
@@ -39,7 +38,6 @@ Azure Redis 缓存使用 [RDB 模型](http://redis.io/topics/persistence)提供�
 
 ![创建 Redis 缓存][redis-cache-new-cache-menu]  
 
-
 若要配置暂留，请首先在“选择定价层”边栏选项卡中选择一个“高级”缓存。
 
 ![选择你的定价层][redis-cache-premium-pricing-tier]
@@ -47,7 +45,6 @@ Azure Redis 缓存使用 [RDB 模型](http://redis.io/topics/persistence)提供�
 一旦选中某个高级定价层，则请单击“Redis 暂留”。
 
 ![Redis 暂留][redis-cache-persistence]  
-
 
 以下部分中的步骤说明如何在新的高级缓存上配置 Redis 持久性。配置 Redis 持久性后，单击“创建”以创建具有 Redis 持久性的新高级版缓存。
 
@@ -63,26 +60,24 @@ Azure Redis 缓存使用 [RDB 模型](http://redis.io/topics/persistence)提供�
 
 单击“存储帐户”以选择要使用的存储帐户，然后从“存储密钥”下拉列表中选择要使用的“主密钥”或“辅助密钥”。必须选择与缓存处于相同区域的存储帐户，建议选择“高级存储”帐户，因为高级存储的吞吐量较高。
 
->[AZURE.IMPORTANT] 如果重新生成了持久性帐户的存储密钥，必须从“存储密钥”下拉列表中重新选择所需的密钥。
+>[!IMPORTANT]
+> 如果重新生成了持久性帐户的存储密钥，必须从“存储密钥”下拉列表中重新选择所需的密钥。
 
 ![Redis 暂留][redis-cache-persistence-selected]  
-
 
 单击“确定”可保存暂留配置。
 
 一旦备份频率间隔时间已过，则会启动下一次备份（或新缓存的首次备份）。
 
-
-
 ## 保留常见问题
 
 以下列表包含有关 Azure Redis 缓存保留常见问题的解答。
 
--	[能否在此前已创建的缓存的基础上启用保留？](#can-i-enable-persistence-on-a-previously-created-cache)
--	[能否在创建缓存后更改备份频率？](#can-i-change-the-backup-frequency-after-i-create-the-cache)
--	[为何我的备份频率为 60 分钟，而两次备份的间隔却超过 60 分钟？](#why-if-i-have-a-backup-frequency-of-60-minutes-there-is-more-than-60-minutes-between-backups)
--	[进行新备份以后，旧备份会发生什么情况？](#what-happens-to-the-old-backups-when-a-new-backup-is-made)
--	[如果我缩放到不同大小并还原了缩放操作之前生成的备份，会发生什么情况？](#what-happens-if-i-have-scaled-to-a-different-size-and-a-backup-is-restored-that-was-made-before-the-scaling-operation)
+- [能否在此前已创建的缓存的基础上启用保留？](#can-i-enable-persistence-on-a-previously-created-cache)
+- [能否在创建缓存后更改备份频率？](#can-i-change-the-backup-frequency-after-i-create-the-cache)
+- [为何我的备份频率为 60 分钟，而两次备份的间隔却超过 60 分钟？](#why-if-i-have-a-backup-frequency-of-60-minutes-there-is-more-than-60-minutes-between-backups)
+- [进行新备份以后，旧备份会发生什么情况？](#what-happens-to-the-old-backups-when-a-new-backup-is-made)
+- [如果我缩放到不同大小并还原了缩放操作之前生成的备份，会发生什么情况？](#what-happens-if-i-have-scaled-to-a-different-size-and-a-backup-is-restored-that-was-made-before-the-scaling-operation)
 
 ### <a name="can-i-enable-persistence-on-a-previously-created-cache"></a>能否在此前已创建的缓存的基础上启用持久性？
 
@@ -102,17 +97,16 @@ Azure Redis 缓存使用 [RDB 模型](http://redis.io/topics/persistence)提供�
 
 ### <a name="what-happens-if-i-have-scaled-to-a-different-size-and-a-backup-is-restored-that-was-made-before-the-scaling-operation"></a>如果我缩放到不同大小并还原了缩放操作之前生成的备份，会发生什么情况？
 
--	如果缩放到更大的大小，则没有任何影响。
--	如果缩放到更小的大小，并且自定义[数据库](/documentation/articles/cache-configure/#databases)设置大于新大小的[数据库限制](/documentation/articles/cache-configure/#databases)，则不会还原这些数据库中的数据。有关详细信息，请参阅[在缩放过程中，自定义数据库设置是否会受影响？](/documentation/articles/cache-how-to-scale/#is-my-custom-databases-setting-affected-during-scaling)
--	如果缩放到更小的大小，并且更小的大小空间不足，无法容纳上次备份的所有数据，则在还原过程中，通常会使用 [allkeys-lru](http://redis.io/topics/lru-cache) 逐出策略逐出密钥。
+- 如果缩放到更大的大小，则没有任何影响。
+- 如果缩放到更小的大小，并且自定义[数据库](./cache-configure.md#databases)设置大于新大小的[数据库限制](./cache-configure.md#databases)，则不会还原这些数据库中的数据。有关详细信息，请参阅[在缩放过程中，自定义数据库设置是否会受影响？](./cache-how-to-scale.md#is-my-custom-databases-setting-affected-during-scaling)
+- 如果缩放到更小的大小，并且更小的大小空间不足，无法容纳上次备份的所有数据，则在还原过程中，通常会使用 [allkeys-lru](http://redis.io/topics/lru-cache) 逐出策略逐出密钥。
 
 ## 后续步骤
 了解如何使用更多的高级版缓存功能。
 
--	[Azure Redis 缓存高级层简介](/documentation/articles/cache-premium-tier-intro/)
-  
-<!-- IMAGES -->
+- [Azure Redis 缓存高级层简介](./cache-premium-tier-intro.md)
 
+<!-- IMAGES -->
 
 [redis-cache-new-cache-menu]: ./media/cache-how-to-premium-persistence/redis-cache-new-cache-menu.png
 

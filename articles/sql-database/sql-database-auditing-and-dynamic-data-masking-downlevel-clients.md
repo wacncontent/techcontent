@@ -1,27 +1,27 @@
-<properties
-    pageTitle="Azure SQL 数据库的审核、TDS 重定向和 IP 终结点 | Azure"
-    description="了解在 Azure SQL 数据库中实现表审核时，审核、TDS 重定向和 IP 终结点的变化。"
-    services="sql-database"
-    documentationcenter=""
-    author="ronitr"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="4ef19ed1-e798-43a2-ad99-0e563f93ab53"
-    ms.service="sql-database"
-    ms.custom="secure and protect"
-    ms.workload="data-management"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/05/2017"
-    wacn.date="01/25/2017"
-    ms.author="ronitr" />
+---
+title: Azure SQL 数据库的审核、TDS 重定向和 IP 终结点 | Azure
+description: 了解在 Azure SQL 数据库中实现表审核时，审核、TDS 重定向和 IP 终结点的变化。
+services: sql-database
+documentationcenter: ''
+author: ronitr
+manager: jhubbard
+editor: ''
+
+ms.assetid: 4ef19ed1-e798-43a2-ad99-0e563f93ab53
+ms.service: sql-database
+ms.custom: secure and protect
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/05/2017
+wacn.date: 01/25/2017
+ms.author: ronitr
+---
 
 # SQL 数据库 - 针对审核的下层客户端支持和 IP 终结点更改
 
-
-对于支持 TDS 重定向的 SQL 客户端，可以自动使用 [SQL 数据库表审核](/documentation/articles/sql-database-auditing-get-started/)。请注意，使用 Blob 审核方法时，重定向不适用。
+对于支持 TDS 重定向的 SQL 客户端，可以自动使用 [SQL 数据库表审核](./sql-database-auditing-get-started.md)。请注意，使用 Blob 审核方法时，重定向不适用。
 
 ## <a id="subheading-1"></a>下层客户端支持
 任何实现了 TDS 7.4 的客户端同样应当支持重定向。例外情况包括不完全支持重定向功能的 JDBC 4.0 以及未实现重定向的 Tedious（适用于 Node.JS）。

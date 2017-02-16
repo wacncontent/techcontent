@@ -1,23 +1,21 @@
-<properties
-   pageTitle="Azure Service Fabric 中的指标重整 | Azure"
-   description="概述如何对 Service Fabric 中的指标使用重整或打包作为策略"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="masnider"
-   manager="timlt"
-   editor=""/>  
+---
+title: Azure Service Fabric 中的指标重整 | Azure
+description: 概述如何对 Service Fabric 中的指标使用重整或打包作为策略
+services: service-fabric
+documentationCenter: .net
+authors: masnider
+manager: timlt
+editor: ''
 
-
-<tags
-   ms.service="Service-Fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="08/19/2016"
-   wacn.date="01/25/2017"
-   ms.author="masnider"/>  
-
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 08/19/2016
+wacn.date: 01/25/2017
+ms.author: masnider
+---
 
 # Service Fabric 中指标和负载的重整
 Service Fabric 群集资源管理器主要与分布负载方面的平衡有关 - 确保均衡使用群集中的所有节点。若要幸免于故障，这通常是最安全且最明智的布局，因为它可确保任何给定的故障不会导致给定的工作负荷大部分失效。Service Fabric 群集资源管理器还支持另一种策略 - 重整。重整通常意味着我们应实际尝试合并指标，而不是尝试将指标的使用分布到群集中。这是我们一般策略的幸运反转 – 我们通过增加偏差来开始优化，而不是针对给定指标将指标负载的平均标准偏差最小化，来优化群集。但我们为什么要使用此策略？
@@ -48,16 +46,16 @@ Service Fabric 群集资源管理器主要与分布负载方面的平衡有关 -
 
 ClusterManifest.xml：
 
-
-	<Section Name="DefragmentationMetrics">
-	    <Parameter Name="Disk" Value="true" />
-	    <Parameter Name="CPU" Value="false" />
-	</Section>
-
+```xml
+<Section Name="DefragmentationMetrics">
+    <Parameter Name="Disk" Value="true" />
+    <Parameter Name="CPU" Value="false" />
+</Section>
+```
 
 ## 后续步骤
-- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇有关[描述 Service Fabric 群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)的文章
-- 指标是 Service Fabric 群集资源管理器在群集中管理消耗和容量的方式。若要详细了解指标及其配置方式，请查看[此文](/documentation/articles/service-fabric-cluster-resource-manager-metrics/)
+- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇有关[描述 Service Fabric 群集](./service-fabric-cluster-resource-manager-cluster-description.md)的文章
+- 指标是 Service Fabric 群集资源管理器在群集中管理消耗和容量的方式。若要详细了解指标及其配置方式，请查看[此文](./service-fabric-cluster-resource-manager-metrics.md)
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-defragmentation-metrics/balancing-defrag-compared.png
 

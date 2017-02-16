@@ -1,25 +1,24 @@
-<properties
-   pageTitle="Azure 自动化错误处理 | Azure"
-   description="本文提供了排查并解决常见 Azure 自动化错误的基本错误处理步骤。"
-   services="automation"
-   documentationCenter=""
-   authors="mgoedtel"
-   manager="stevenka"
-   editor="tysonn"
-   tags="top-support-issue"
-   keywords="自动化错误, 错误处理"/>
+---
+title: Azure 自动化错误处理 | Azure
+description: 本文提供了排查并解决常见 Azure 自动化错误的基本错误处理步骤。
+services: automation
+documentationCenter: ''
+authors: mgoedtel
+manager: stevenka
+editor: tysonn
+tags: top-support-issue
+keywords: 自动化错误, 错误处理
 
-<tags
-    ms.assetid="5f3cfe61-70b0-4e9c-b892-d02daaeee07d"
-    ms.service="automation"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/12/2016"
-    wacn.date="01/18/2017"
-    ms.author="sngun; v-reagie" />  
-
+ms.assetid: 5f3cfe61-70b0-4e9c-b892-d02daaeee07d
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/12/2016
+wacn.date: 01/18/2017
+ms.author: sngun; v-reagie
+---
 
 # 常见 Azure 自动化错误的错误处理提示
 本文介绍你可能会遇到的一些常见 Azure 自动化错误并建议可能的错误处理步骤。
@@ -41,11 +40,13 @@
 
 2. 查看你是否能够在本地 PowerShell ISE 编辑器中使用存储在 Azure 自动化凭据中的用户名和密码。为此，你可以在 PowerShell ISE 中运行以下 cmdlet：
 
-        $Cred = Get-Credential  
-        #Using Azure Service Management   
-        Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred  
-        #Using Azure Resource Manager  
-        Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $Cred
+    ```
+    $Cred = Get-Credential  
+    #Using Azure Service Management   
+    Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred  
+    #Using Azure Resource Manager  
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $Cred
+    ```
 
 3. 如果本地身份验证失败，则意味着你尚未正确设置 Azure Active Directory 凭据。请参阅[使用 Azure Active Directory 向 Azure 进行身份验证](https://azure.microsoft.com/blog/azure-automation-authenticating-to-azure-using-azure-active-directory/)博客文章，了解如何正确设置 Azure Active Directory 帐户。
 
@@ -76,7 +77,7 @@
 如果你对 Azure 帐户设置了多重身份验证，则不能使用 Azure Active Directory 用户向 Azure 进行身份验证，而只能使用证书或服务主体向 Azure 进行身份验证。
 
 **疑难解答提示：**
-若要将证书用于 Azure 服务管理 cmdlet，请参阅[创建并添加管理 Azure 服务所需的证书](http://blogs.technet.com/b/orchestrator/archive/2014/04/11/managing-azure-services-with-the-microsoft-azure-automation-preview-service.aspx)。 若要将服务主体用于 Azure Resource Manager cmdlet，请参阅[使用 Azure 门户预览创建服务主体](/documentation/articles/resource-group-create-service-principal-portal/)和[通过 Azure Resource Manager 对服务主体进行身份验证](/documentation/articles/resource-group-authenticate-service-principal/)。
+若要将证书用于 Azure 服务管理 cmdlet，请参阅[创建并添加管理 Azure 服务所需的证书](http://blogs.technet.com/b/orchestrator/archive/2014/04/11/managing-azure-services-with-the-microsoft-azure-automation-preview-service.aspx)。 若要将服务主体用于 Azure Resource Manager cmdlet，请参阅[使用 Azure 门户预览创建服务主体](../azure-resource-manager/resource-group-create-service-principal-portal.md)和[通过 Azure Resource Manager 对服务主体进行身份验证](../azure-resource-manager/resource-group-authenticate-service-principal.md)。
 
 ## 解决使用 Runbook 时的常见错误
 
@@ -101,7 +102,7 @@ Runbook 作业失败，出现“已达到此订阅的每月总作业运行时间
 
 **错误原因：**
 
-当作业执行时间超过你帐户的 500 分钟免费配额时，就会出现此错误。此配额适用于所有类型的作业执行任务，例如测试作业、从门户启动作业、使用 Webhook 执行作业，以及通过 Azure 经典管理门户或数据中心计划要执行的作业。若要详细了解自动化的定价，请参阅[自动化定价](/pricing/details/automation/)。
+当作业执行时间超过你帐户的 500 分钟免费配额时，就会出现此错误。此配额适用于所有类型的作业执行任务，例如测试作业、从门户启动作业、使用 Webhook 执行作业，以及通过 Azure 经典管理门户或数据中心计划要执行的作业。若要详细了解自动化的定价，请参阅[自动化定价](https://www.azure.cn/pricing/details/automation/)。
 
 **疑难解答提示：**
 如果你想要每月使用 500 分钟以上的处理时间，则需将订阅从免费层改为基本层。你可以通过下述步骤升级到基本层：
@@ -133,7 +134,7 @@ Runbook 作业失败，出现“``<cmdlet name>``: 无法将 ``<cmdlet name>`` �
 这是设计使然。Azure 自动化中对进程的“公平份额”监视会自动暂停执行时间超过 3 小时的 Runbook。但是，返回的错误消息不会提供“后续措施”选项。Runbook 可能会出于多种原因而暂停。发生暂停的主要原因是出错。例如，Runbook 中出现未捕获到的异常、网络故障、运行 Runbook 的 Runbook 辅助角色崩溃，都会导致 Runbook 暂停，并在恢复时从其最后一个检查点开始运行。
 
 **疑难解答提示：**
-避免此问题的有记录解决方法是在工作流中使用检查点。若要了解详细信息，请参阅 [Learning PowerShell Workflows](/documentation/articles/automation-powershell-workflow/#Checkpoints)（了解 PowerShell 工作流）。[Using Checkpoints in Runbooks](https://azure.microsoft.com/blog/azure-automation-reliable-fault-tolerant-runbook-execution-using-checkpoints/)（在 Runbook 中使用检查点）博客文章中提供了有关“公平份额”和检查点的更全面说明。
+避免此问题的有记录解决方法是在工作流中使用检查点。若要了解详细信息，请参阅 [Learning PowerShell Workflows](./automation-powershell-workflow.md#Checkpoints)（了解 PowerShell 工作流）。[Using Checkpoints in Runbooks](https://azure.microsoft.com/blog/azure-automation-reliable-fault-tolerant-runbook-execution-using-checkpoints/)（在 Runbook 中使用检查点）博客文章中提供了有关“公平份额”和检查点的更全面说明。
 
 ## 解决导入模块时的常见错误
 
@@ -162,8 +163,8 @@ Runbook 作业失败，出现“``<cmdlet name>``: 无法将 ``<cmdlet name>`` �
 
 如果你在完成上述疑难解答步骤以后仍对本文中的内容存有疑问，你可以：
 
-* 从 Azure 专家那里获取帮助。向 [MSDN Azure 或 CSDN Azure](/support/forums/) 提交问题。
-* 提出 Azure 支持事件。转到[“Azure 支持站点”](/support/contact/)，单击“技术和帐单支持”下的“获得支持”。
-* 将关于 Azure 自动化的反馈或功能请求发布到[用户之声](/product-feedback)。
+* 从 Azure 专家那里获取帮助。向 [MSDN Azure 或 CSDN Azure](https://www.azure.cn/support/forums/) 提交问题。
+* 提出 Azure 支持事件。转到[“Azure 支持站点”](https://www.azure.cn/support/contact/)，单击“技术和帐单支持”下的“获得支持”。
+* 将关于 Azure 自动化的反馈或功能请求发布到[用户之声](https://www.azure.cn/product-feedback)。
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

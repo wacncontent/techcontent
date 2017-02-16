@@ -1,21 +1,21 @@
-<properties
-   pageTitle="为 Azure TSQL 上的 SQL Server Stretch Database 启用透明数据加密 (TDE) | Azure"
-   description="为 Azure TSQL 上的 SQL Server Stretch Database 启用透明数据加密 (TDE)"
-   services="sql-server-stretch-database"
-   documentationCenter=""
-   authors="douglaslMS"
-   manager=""
-   editor=""/>
+---
+title: 为 Azure TSQL 上的 SQL Server Stretch Database 启用透明数据加密 (TDE) | Azure
+description: 为 Azure TSQL 上的 SQL Server Stretch Database 启用透明数据加密 (TDE)
+services: sql-server-stretch-database
+documentationCenter: ''
+authors: douglaslMS
+manager: ''
+editor: ''
 
-<tags
-   ms.service="sql-server-stretch-database"
-   ms.workload="data-management"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="06/14/2016"
-   wacn.date="07/25/2016"
-   ms.author="douglaslMS"/>
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/14/2016
+wacn.date: 07/25/2016
+ms.author: douglaslMS
+---
 
 # 为 Azure 上的 SQL Server Stretch Database 启用透明数据加密 (TDE)
 
@@ -54,18 +54,16 @@ ALTER DATABASE [database_name] SET ENCRYPTION OFF;
 
 ```sql
 SELECT
-	[name],
-	[is_encrypted]
+    [name],
+    [is_encrypted]
 FROM
-	sys.databases;
+    sys.databases;
 ```
 
 结果 ```1``` 表示数据库已加密，```0``` 表示数据库未加密。
 
-
 <!--Anchors-->
 [透明数据加密 (TDE)]: https://msdn.microsoft.com/zh-cn/library/bb934049.aspx
-
 
 <!--Image references-->
 

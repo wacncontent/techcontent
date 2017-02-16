@@ -1,24 +1,23 @@
-<properties
-   pageTitle="Azure SQL 数据库提供安全和保护"
-   description="了解 SQL 数据库如何帮助提供安全和保护"
-   keywords=""
-   services="sql-database"
-   documentationCenter=""
-   authors="CarlRabeler"
-   manager="jhubbard"
-   editor=""/>
+---
+title: Azure SQL 数据库提供安全和保护
+description: 了解 SQL 数据库如何帮助提供安全和保护
+keywords: ''
+services: sql-database
+documentationCenter: ''
+authors: CarlRabeler
+manager: jhubbard
+editor: ''
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-management"
-   ms.date="09/13/2016"
-   wacn.date="12/26/2016"
-   ms.author="carlrab"/>  
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-management
+ms.date: 09/13/2016
+wacn.date: 12/26/2016
+ms.author: carlrab
+---
 
-   
 # Azure SQL 数据库提供安全和保护
 
 ## 确保应用数据安全可靠
@@ -31,7 +30,7 @@ Azure SQL 数据库支持云中数以百万计的任务关键型数据库，它�
 
 你能做的只是希望不用访问昨天的备份或从灾难中进行恢复。但如果你发现自己处于这种情况时，SQL 数据库能够提供帮助。凭借 99.99% 的可用性、自动备份、时间点还原、内置的异地复制以及故障转移选项，你便可以高枕无忧，因为你知道应用将能够正常安全地运行。
 
-[阅读文档](/documentation/articles/sql-database-business-continuity/)
+[阅读文档](./sql-database-business-continuity.md)
 
 ## 最大的合规性项目组合
 
@@ -46,16 +45,16 @@ SQL 数据库提供多层数据保护。通过在空闲时、运转中或使用�
 [阅读文档](http://go.microsoft.com/fwlink/?LinkID=787593)
 
 转到主页以查看 SQL 数据库可提供的其他功能。
-[请查看](/home/features/sql-database/)
+[请查看](https://www.azure.cn/home/features/sql-database/)
 
 ## 后续步骤
 
-获取 [Azure 订阅](/pricing/1rmb-trial)，并[创建首个 Azure SQL 数据库](/documentation/articles/sql-database-get-started/)。
+获取 [Azure 订阅](https://www.azure.cn/pricing/1rmb-trial)，并[创建首个 Azure SQL 数据库](./sql-database-get-started.md)。
 
 ## 其他资源
 
-浏览所有 [SQL 数据库的功能](/home/features/sql-database/)。
- 
-查看 [SQL 数据库技术概述](/documentation/articles/sql-database-technical-overview/)。
+浏览所有 [SQL 数据库的功能](https://www.azure.cn/home/features/sql-database/)。
+
+查看 [SQL 数据库技术概述](./sql-database-technical-overview.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

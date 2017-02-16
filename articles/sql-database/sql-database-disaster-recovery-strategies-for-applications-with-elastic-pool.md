@@ -1,25 +1,25 @@
-<properties 
-   pageTitle="使用 SQL 数据库异地复制设计灾难恢复云解决方案 | Azure"
-   description="了解如何通过选择合适的故障转移模式来设计灾难恢复云解决方案。"
-   services="sql-database"
-   documentationCenter="" 
-   authors="anosov1960" 
-   manager="jhubbard" 
-   editor="monicar"/>
+---
+title: 使用 SQL 数据库异地复制设计灾难恢复云解决方案 | Azure
+description: 了解如何通过选择合适的故障转移模式来设计灾难恢复云解决方案。
+services: sql-database
+documentationCenter: ''
+authors: anosov1960
+manager: jhubbard
+editor: monicar
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA" 
-   ms.date="07/16/2016" 
-   wacn.date="12/26/2016"
-   ms.author="sashan"/>
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 07/16/2016
+wacn.date: 12/26/2016
+ms.author: sashan
+---
 
 # 使用 SQL 数据库弹性池的应用程序的灾难恢复策略 
 
-这些年来，我们已经认识到云服务并不能做到万无一失，可能并且将会发生灾难性事件。SQL 数据库具备许多功能，可在发生这些事件时保证应用程序的业务连续性。[弹性池](/documentation/articles/sql-database-elastic-pool/)和独立数据库支持相同类型的灾难恢复功能。本文介绍了几种针对利用这些 SQL 数据库业务连续性功能的弹性池的 DR 策略。
+这些年来，我们已经认识到云服务并不能做到万无一失，可能并且将会发生灾难性事件。SQL 数据库具备许多功能，可在发生这些事件时保证应用程序的业务连续性。[弹性池](./sql-database-elastic-pool.md)和独立数据库支持相同类型的灾难恢复功能。本文介绍了几种针对利用这些 SQL 数据库业务连续性功能的弹性池的 DR 策略。
 
 为实现本文目的，将使用规范的 SaaS ISV 应用程序模式：
 
@@ -47,7 +47,7 @@
 ![图 2](./media/sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool/diagram-2.png)
 
 如果中断是暂时的，Azure 可能会在 DR 区域中先恢复主要区域，然后再完成所有还原。在这种情况下，应安排将应用程序移回主要区域。此过程将采用下图所示的步骤。
- 
+
 - 取消所有未完成的异地还原请求。   
 - 将管理数据库故障转移到主要区域 (5)。注意：区域恢复后，旧的主数据库便已自动成为辅助数据库。现在将再次切换角色。 
 - 更改应用程序的连接字符串，使其重新指向主要区域。现在将在主要区域中创建所有新帐户和租户数据库。某些现有客户的数据将暂时不可用。   
@@ -88,7 +88,7 @@
 此时，应用程序便已在 DR 区域中恢复为联机状态。所有付费客户均可访问其数据，而试用客户则将在访问数据时遇到延迟。
 
 在 DR 区域中还原了应用程序*之后*，如果 Azure 恢复了主要区域，则可以决定在该区域继续运行应用程序或故障回复到主要区域。如果在故障转移过程完成*之前*恢复了主要区域，则应考虑立即进行故障回复。此故障回复将采用下图所示的步骤：
- 
+
 ![图 6](./media/sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool/diagram-6.png)
 
 - 取消所有未完成的异地还原请求。   
@@ -99,7 +99,8 @@
 - 将 DR 池中已更新的数据库复制到主池 (12)。 
 - 删除 DR 池 (13) 
 
-> [AZURE.NOTE] 故障转移是异步操作。为了最大限度缩短恢复时间，请务必按每批至少 20 个数据库执行租户数据库的故障转移命令。
+> [!NOTE]
+> 故障转移是异步操作。为了最大限度缩短恢复时间，请务必按每批至少 20 个数据库执行租户数据库的故障转移命令。
 
 该策略的主要**优点**在于它为付费客户提供了最高的 SLA。它还确保一旦创建了试用 DR 池，系统将取消阻止新试用。**权衡**是指此设置需对付费客户的辅助 DR 池成本进行收费从而增加租户数据库的总成本。此外，如果辅助池大小不同，付费客户将在故障转移后体验较低性能，直到完成 DR 区域的池升级才能恢复往常性能。
 
@@ -128,13 +129,13 @@
 - 为试用客户的数据库创建与区域 B 中的弹性池具有相同名称和配置的新弹性池 (6)。 
 - 创建新弹性池后，请使用异地还原以将各个试用租户数据库还原到该池 (7)。可以考虑通过最终用户连接或使用其他应用程序特定的优先级方案来触发各个还原。
 
-
-> [AZURE.NOTE] 故障转移是异步操作。为了最大限度缩短恢复时间，请务必按每批至少 20 个数据库执行租户数据库的故障转移命令。
+> [!NOTE]
+> 故障转移是异步操作。为了最大限度缩短恢复时间，请务必按每批至少 20 个数据库执行租户数据库的故障转移命令。
 
 此时，应用程序便已在区域 B 中恢复为联机状态。所有付费客户均可访问其数据，而试用客户则将在访问数据时遇到延迟。
 
 恢复区域 A 时，需要决定想要为试用客户使用区域 B 还是进行故障回复以在区域 A 中使用试用客户池。其中一个条件就是自恢复以来修改的试用租户数据库的百分比。无论做何决定，均需重新平衡两个池之间的付费租户。下图说明了试用租户数据库故障回复到区域 A 的过程。
- 
+
 ![图 6](./media/sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool/diagram-9.png)
 
 - 取消所有未完成的异地还原请求以试用 DR 池。   
@@ -160,15 +161,14 @@
 
 ## 摘要
 
-本文重点介绍了关于 SaaS ISV 多租户应用程序使用的数据库层的灾难恢复策略。应基于应用程序的需要选择策略，例如业务模式、想要为客户提供的 SLA、预算限制等...所述的每个策略都概述了其优点和权衡，以便可以做出明智的决策。此外，特定应用程序可能包括其他 Azure 组件。因此，应查看其业务连续性指南并根据指南安排数据库层的恢复。若要深入了解如何管理 Azure 中的数据库应用程序恢复，请参阅[设计灾难恢复云解决方案](/documentation/articles/sql-database-designing-cloud-solutions-for-disaster-recovery/)。
-
+本文重点介绍了关于 SaaS ISV 多租户应用程序使用的数据库层的灾难恢复策略。应基于应用程序的需要选择策略，例如业务模式、想要为客户提供的 SLA、预算限制等...所述的每个策略都概述了其优点和权衡，以便可以做出明智的决策。此外，特定应用程序可能包括其他 Azure 组件。因此，应查看其业务连续性指南并根据指南安排数据库层的恢复。若要深入了解如何管理 Azure 中的数据库应用程序恢复，请参阅[设计灾难恢复云解决方案](./sql-database-designing-cloud-solutions-for-disaster-recovery.md)。
 
 ## 后续步骤
 
-- 若要了解 Azure SQL 数据库的自动备份，请参阅 [SQL 数据库自动备份](/documentation/articles/sql-database-automated-backups/)
-- 有关业务连续性概述和应用场景，请参阅[业务连续性概述](/documentation/articles/sql-database-business-continuity/)
-- 若要了解如何使用自动备份进行恢复，请参阅[从服务启动的备份中还原数据库](/documentation/articles/sql-database-recovery-using-backups/)
-- 若要了解更快的恢复选项，请参阅[活动异地复制](/documentation/articles/sql-database-geo-replication-overview/)
-- 若要了解如何使用自动备份进行存档，请参阅[数据库复制](/documentation/articles/sql-database-copy/)
+- 若要了解 Azure SQL 数据库的自动备份，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)
+- 有关业务连续性概述和应用场景，请参阅[业务连续性概述](./sql-database-business-continuity.md)
+- 若要了解如何使用自动备份进行恢复，请参阅[从服务启动的备份中还原数据库](./sql-database-recovery-using-backups.md)
+- 若要了解更快的恢复选项，请参阅[活动异地复制](./sql-database-geo-replication-overview.md)
+- 若要了解如何使用自动备份进行存档，请参阅[数据库复制](./sql-database-copy.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

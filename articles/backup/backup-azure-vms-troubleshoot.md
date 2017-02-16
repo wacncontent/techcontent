@@ -1,28 +1,28 @@
-<properties
-    pageTitle="Azure 虚拟机备份疑难解答 | Azure"
-    description="Azure 虚拟机备份和还原疑难解答"
-    services="backup"
-    documentationcenter=""
-    author="trinadhk"
-    manager="shreeshd"
-    editor="" />
-<tags
-    ms.assetid="73214212-57a4-4b57-a2e2-eaf9d7fde67f"
-    ms.service="backup"
-    ms.workload="storage-backup-recovery"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/28/2016"
-    wacn.date="01/24/2017"
-    ms.author="trinadhk;jimpark;" />
+---
+title: Azure 虚拟机备份疑难解答 | Azure
+description: Azure 虚拟机备份和还原疑难解答
+services: backup
+documentationcenter: ''
+author: trinadhk
+manager: shreeshd
+editor: ''
 
+ms.assetid: 73214212-57a4-4b57-a2e2-eaf9d7fde67f
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/28/2016
+wacn.date: 01/24/2017
+ms.author: trinadhk;jimpark;
+---
 
 # Azure 虚拟机备份疑难解答
 
-> [AZURE.SELECTOR]
-- [恢复服务保管库](/documentation/articles/backup-azure-vms-troubleshoot/)
-- [备份保管库](/documentation/articles/backup-azure-vms-troubleshoot-classic/)
+> [!div class="op_single_selector"]
+- [恢复服务保管库](./backup-azure-vms-troubleshoot.md)
+- [备份保管库](./backup-azure-vms-troubleshoot-classic.md)
 
 可参考下表中所列的信息，排查使用 Azure 备份时遇到的错误。
 
@@ -72,7 +72,6 @@
 | -------- | -------- | -------|
 | 创建策略 | 无法创建策略 - 请减少保留选项数，以便继续进行策略配置。 | 无 |
 
-
 ## VM 代理 <a name="vm-agent"></a>
 
 ### 设置 VM 代理
@@ -95,8 +94,7 @@
 
 对于 Linux VM：
 
-- 按照[更新 Linux VM 代理](/documentation/articles/virtual-machines-linux-update-agent?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json/)上的说明进行操作。
-
+- 按照[更新 Linux VM 代理](../virtual-machines/virtual-machines-linux-update-agent.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json/)上的说明进行操作。
 
 ### 验证 VM 代理安装 <a name="validating-vm-agent-installation"></a>
 如何检查 Windows VM 上的 VM 代理版本：
@@ -107,11 +105,13 @@
 ## 排查 VM 快照问题
 VM 备份依赖于向底层存储发出快照命令。如果无法访问存储或者快照任务执行延迟，则可能会导致备份作业失败。以下因素可能会导致快照任务失败。
 
-1. 使用 NSG 阻止对存储进行网络访问<br>详细了解如何使用 IP 允许列表或通过代理服务器对存储[启用网络访问](/documentation/articles/backup-azure-vms-prepare/#network-connectivity/)。
+1. 使用 NSG 阻止对存储进行网络访问<br>详细了解如何使用 IP 允许列表或通过代理服务器对存储[启用网络访问](./backup-azure-vms-prepare.md#network-connectivity)。
 2. 配置了 SQL Server 备份的 VM 可导致快照任务延迟<br>默认情况下，VM 备份将在 Windows VM 上发出 VSS 完整备份命令。在运行 SQL Server 且已配置 SQL Server 备份的 VM 上，这可能会造成快照执行延迟。如果由于快照问题而导致备份失败，请设置以下注册表项。
 
-		[HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\BCDRAGENT]
-		"USEVSSCOPYBACKUP"="TRUE"
+    ```
+    [HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\BCDRAGENT]
+    "USEVSSCOPYBACKUP"="TRUE"
+    ```
 
 3.  由于在 RDP 中关闭了 VM，VM 状态报告不正确。<br>如果在 RDP 中关闭了虚拟机，请返回门户检查是否正确反映了 VM 的状态。如果没有，请在门户中使用 VM 仪表板上的“关机”选项关闭 VM。
 4.  如果四个以上的 VM 共享同一云服务，请配置多个备份策略以将备份时间错开，避免同时启动四个以上的 VM 备份。尝试使策略之间的备份开始时间相差一个小时。
@@ -133,11 +133,11 @@ VM 备份依赖于向底层存储发出快照命令。如果无法访问存储�
    - 使用 [New-NetRoute](https://technet.microsoft.com/zh-cn/library/hh826148.aspx) cmdlet 取消阻止 IP。在 Azure VM 上提升权限的 PowerShell 窗口中运行此 cmdlet（以管理员身份运行）。
    - 向 NSG 添加规则（如果已创建规则），以允许访问这些 IP。
 2. 为 HTTP 流量创建路径
-   - 如果你指定了某种网络限制（例如网络安全组），请部署 HTTP 代理服务器来路由流量。可在[此处](/documentation/articles/backup-azure-vms-prepare/#network-connectivity/)找到部署 HTTP 代理服务器的步骤。
+   - 如果你指定了某种网络限制（例如网络安全组），请部署 HTTP 代理服务器来路由流量。可在[此处](./backup-azure-vms-prepare.md#network-connectivity)找到部署 HTTP 代理服务器的步骤。
    - 向 NSG 添加规则（如果已创建规则），以允许从 HTTP 代理访问 INTERNET。
 
-> [AZURE.NOTE]
-必须在来宾内启用 DHCP，才能正常进行 IaaS VM 备份。如果需要静态专用 IP 地址，你应该通过平台配置该 IP。VM 内的 DHCP 选项应保持启用。查看有关[设置静态内部专用 IP](/documentation/articles/virtual-networks-reserved-private-ip/) 的详细信息。
+> [!NOTE]
+必须在来宾内启用 DHCP，才能正常进行 IaaS VM 备份。如果需要静态专用 IP 地址，你应该通过平台配置该 IP。VM 内的 DHCP 选项应保持启用。查看有关[设置静态内部专用 IP](../virtual-network/virtual-networks-reserved-private-ip.md) 的详细信息。
 >
 >
 

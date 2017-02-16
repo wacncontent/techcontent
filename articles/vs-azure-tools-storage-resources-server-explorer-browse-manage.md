@@ -1,33 +1,31 @@
-<properties
-   pageTitle="使用服务器资源管理器浏览和管理存储资源 | Azure"
-   description="使用服务器资源管理器浏览和管理存储资源"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 使用服务器资源管理器浏览和管理存储资源 | Azure
+description: 使用服务器资源管理器浏览和管理存储资源
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="658dc064-4a4e-414b-ae5a-a977a34c930d"
-    ms.service="storage"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/18/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 658dc064-4a4e-414b-ae5a-a977a34c930d
+ms.service: storage
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/18/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 使用服务器资源管理器浏览和管理存储资源
-
 
 ## 概述
 如果你已安装 Azure Tools for Microsoft Visual Studio，可以从 Azure 的存储帐户中查看 Blob、队列和表数据。服务器资源管理器中的“Azure 存储空间”节点显示了位于本地存储模拟器帐户和其他 Azure 存储帐户中的数据。
 
 若要在 Visual Studio 中查看服务器资源管理器，请在菜单栏上选择“查看”>“服务器资源管理器”。存储节点显示用户要连接到的每个 Azure 订阅/证书下的所有存储帐户
 
-从 Azure SDK 2.7 开始，你也可以使用新的云资源管理器来查看和管理 Azure 资源。有关详细信息，请参阅 [Managing Azure Resources with Cloud Explorer](/documentation/articles/vs-azure-tools-resources-managing-with-cloud-explorer/)（使用云资源管理器管理 Azure 资源）。
-
+从 Azure SDK 2.7 开始，你也可以使用新的云资源管理器来查看和管理 Azure 资源。有关详细信息，请参阅 [Managing Azure Resources with Cloud Explorer](./vs-azure-tools-resources-managing-with-cloud-explorer.md)（使用云资源管理器管理 Azure 资源）。
 
 ## 在 Visual Studio 中查看和管理存储资源
 
@@ -45,7 +43,7 @@
 
 ## 处理 Blob 资源
 
-Blob 节点显示所选存储帐户的容器列表。Blob 容器包含 Blob 文件，可以将这些 Blob 组织成文件夹和子文件夹。有关详细信息，请参阅[如何通过 .NET 使用 Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)。
+Blob 节点显示所选存储帐户的容器列表。Blob 容器包含 Blob 文件，可以将这些 Blob 组织成文件夹和子文件夹。有关详细信息，请参阅[如何通过 .NET 使用 Blob 存储](./storage/storage-dotnet-how-to-use-blobs.md)。
 
 ### 创建 Blob 容器
 
@@ -55,7 +53,8 @@ Blob 节点显示所选存储帐户的容器列表。Blob 容器包含 Blob 文�
 
     ![添加新的 Blob 容器](./media/vs-azure-tools-storage-resources-server-explorer-browse-manage/IC744153.bmp)
 
-    >[AZURE.NOTE] Blob 容器名称必须以数字 (0-9) 或小写字母 (a-z) 开头。
+    >[!NOTE]
+    > Blob 容器名称必须以数字 (0-9) 或小写字母 (a-z) 开头。
 
 ### 删除 Blob 容器
 
@@ -79,7 +78,8 @@ Blob 节点显示所选存储帐户的容器列表。Blob 容器包含 Blob 文�
 
     - 删除 Blob
 
-      >[AZURE.NOTE] 从 Blob 容器中删除文件不会删除基础文件，而只是将它从 Blob 容器删除。
+      >[!NOTE]
+      > 从 Blob 容器中删除文件不会删除基础文件，而只是将它从 Blob 容器删除。
 
     - 打开 Blob
 
@@ -103,7 +103,8 @@ Blob 节点显示所选存储帐户的容器列表。Blob 容器包含 Blob 文�
 
  - 删除文件夹中的所有文件
 
-    >[AZURE.NOTE] 由于 Blob 容器中的文件夹是一个虚拟文件夹，因此无法创建空文件夹，也无法删除文件夹并删除其文件内容。只有删除了文件夹的整个内容才能删除该文件夹。
+    >[!NOTE]
+    > 由于 Blob 容器中的文件夹是一个虚拟文件夹，因此无法创建空文件夹，也无法删除文件夹并删除其文件内容。只有删除了文件夹的整个内容才能删除该文件夹。
 
 ### 在容器中筛选 Blob
 
@@ -113,8 +114,8 @@ Blob 节点显示所选存储帐户的容器列表。Blob 容器包含 Blob 文�
 
 ![VST\_SE\_FilterBlobs](./media/vs-azure-tools-storage-resources-server-explorer-browse-manage/IC519076.png)
 
-
->[AZURE.NOTE] 筛选字段区分大小写，并且不支持使用通配符筛选。只能按前缀筛选 Blob。如果你使用分隔符以虚拟分层结构形式组织 Blob，则前缀可能包含分隔符。例如，针对前缀 HelloFabric/ 进行筛选将返回以该字符串开头的所有 Blob。
+>[!NOTE]
+> 筛选字段区分大小写，并且不支持使用通配符筛选。只能按前缀筛选 Blob。如果你使用分隔符以虚拟分层结构形式组织 Blob，则前缀可能包含分隔符。例如，针对前缀 HelloFabric/ 进行筛选将返回以该字符串开头的所有 Blob。
 
 ### 下载 Blob 数据
 
@@ -166,9 +167,10 @@ Blob 节点显示所选存储帐户的容器列表。Blob 容器包含 Blob 文�
 
 ![查看队列](./media/vs-azure-tools-storage-resources-server-explorer-browse-manage/IC651470.png)
 
-有关存储服务队列的详细信息，请参阅 [如何：使用队列存储服务](/documentation/articles/storage-dotnet-how-to-use-queues/)。有关存储服务队列的 Web 服务的详细信息，请参阅 [队列服务的概念](https://msdn.microsoft.com/zh-cn/library/azure/dd179353.aspx)。
+有关存储服务队列的详细信息，请参阅 [如何：使用队列存储服务](./storage/storage-dotnet-how-to-use-queues.md)。有关存储服务队列的 Web 服务的详细信息，请参阅 [队列服务的概念](https://msdn.microsoft.com/zh-cn/library/azure/dd179353.aspx)。
 
->[AZURE.NOTE] 存储服务队列不同于服务总线队列。有关服务总线队列的详细信息，请参阅“Service Bus Queues, Topics, and Subscriptions”（服务总线队列、主题和订阅）。
+>[!NOTE]
+> 存储服务队列不同于服务总线队列。有关服务总线队列的详细信息，请参阅“Service Bus Queues, Topics, and Subscriptions”（服务总线队列、主题和订阅）。
 
 ## 处理表资源
 
@@ -313,6 +315,7 @@ Azure 表存储服务可存储大量结构化数据。该服务是一个 NoSQL �
 
 - 在服务器资源管理器中，打开帐户名称的快捷菜单，然后选择“删除”。如果删除某个存储帐户，则也会删除该帐户的所有已保存密钥信息。
 
-    >[AZURE.NOTE] 从服务器资源管理器中删除存储帐户不会影响到存储帐户或其所包含的任何数据，它只是将引用从服务器资源管理器中删除了。若要永久删除存储帐户，请使用 Azure 经典管理门户。
+    >[!NOTE]
+    > 从服务器资源管理器中删除存储帐户不会影响到存储帐户或其所包含的任何数据，它只是将引用从服务器资源管理器中删除了。若要永久删除存储帐户，请使用 Azure 经典管理门户。
 
 <!---HONumber=Mooncake_0912_2016-->

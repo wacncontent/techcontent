@@ -1,27 +1,27 @@
-<properties
-    pageTitle="使用负载均衡集组建 MySQL 的群集 | Azure"
-    description="在 Azure 上设置使用经典部署模型创建的负载均衡且高度可用的 Linux MySQL 群集"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="bureado"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="6c413a16-e9b5-4ffe-a8a3-ae67046bbdf3"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="04/14/2015"
-    wacn.date="01/20/2017"
-    ms.author="jparrel" />  
+---
+title: 使用负载均衡集组建 MySQL 的群集 | Azure
+description: 在 Azure 上设置使用经典部署模型创建的负载均衡且高度可用的 Linux MySQL 群集
+services: virtual-machines-linux
+documentationcenter: ''
+author: bureado
+manager: timlt
+editor: ''
+tags: azure-service-management
 
+ms.assetid: 6c413a16-e9b5-4ffe-a8a3-ae67046bbdf3
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 04/14/2015
+wacn.date: 01/20/2017
+ms.author: jparrel
+---
 
 # 使用负载均衡集群集化 Linux 上的 MySQL
-> [AZURE.IMPORTANT] 
-Azure 提供两个不同的部署模型用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。有关用于部署 MySQL 群集的 Resource Manager 模板，请参阅[此处](https://github.com/Azure/azure-quickstart-templates/tree/master/mysql-replication/)。
+> [!IMPORTANT] 
+Azure 提供两个不同的部署模型用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。有关用于部署 MySQL 群集的 Resource Manager 模板，请参阅[此处](https://github.com/Azure/azure-quickstart-templates/tree/master/mysql-replication/)。
 
 本文旨在探索并说明可用于在 Azure 上部署基于 Linux 的高度可用服务的不同方法，并作为入门书探索 MySQL 服务器的高可用性。演示此方法的视频可在[第 9 频道](http://channel9.msdn.com/Blogs/Open/Load-balancing-highly-available-Linux-services-on-Windows-Azure-OpenLDAP-and-MySQL)上找到。
 
@@ -63,7 +63,9 @@ MySQL 的其他可能体系结构包括 NBD 群集、Percona 和 Galera 以及�
 ## 设置群集
 在这两个 Ubuntu VM 中，将需要使用 APT 安装 Corosync、Pacemaker 和 DRBD。使用 `apt-get`：
 
-    sudo apt-get install corosync pacemaker drbd8-utils.
+```
+sudo apt-get install corosync pacemaker drbd8-utils.
+```
 
 **这次不安装 MySQL**。Debian 和 Ubuntu 安装脚本将在 `/var/lib/mysql` 上初始化 MySQL 数据目录，但由于该目录将由 DRBD 文件系统取代，因此我们需要稍后执行此操作。
 
@@ -72,73 +74,93 @@ MySQL 的其他可能体系结构包括 NBD 群集、Percona 和 Galera 以及�
 ### 设置 DRBD
 我们将创建一个 DRBD 资源，该资源使用基础 `/dev/sdc1` 分区生成能够使用 ext3 格式化并在主节点和辅助节点中使用的 `/dev/drbd1` 资源。若要执行此操作，请打开 `/etc/drbd.d/r0.res` 并复制以下资源定义。在这两个 VM 中执行此操作：
 
-    resource r0 {
-      on `hadb01` {
-        device  /dev/drbd1;
-        disk   /dev/sdc1;
-        address  10.10.10.4:7789;
-        meta-disk internal;
-      }
-      on `hadb02` {
-        device  /dev/drbd1;
-        disk   /dev/sdc1;
-        address  10.10.10.5:7789;
-        meta-disk internal;
-      }
-    }
+```
+resource r0 {
+  on `hadb01` {
+    device  /dev/drbd1;
+    disk   /dev/sdc1;
+    address  10.10.10.4:7789;
+    meta-disk internal;
+  }
+  on `hadb02` {
+    device  /dev/drbd1;
+    disk   /dev/sdc1;
+    address  10.10.10.5:7789;
+    meta-disk internal;
+  }
+}
+```
 
 执行此操作后，在这两个 VM 中使用 `drbdadm` 初始化资源：
 
-    sudo drbdadm -c /etc/drbd.conf role r0
-    sudo drbdadm up r0
+```
+sudo drbdadm -c /etc/drbd.conf role r0
+sudo drbdadm up r0
+```
 
 最后，在主节点 (`hadb01`) 中强制实施 DRBD 资源的所有权（主）：
 
-    sudo drbdadm primary --force r0
+```
+sudo drbdadm primary --force r0
+```
 
 如果你在这两个 VM 中检查 /proc/drbd (`sudo cat /proc/drbd`) 的内容，你应在 `hadb01` 上看到 `Primary/Secondary`，在 `hadb02` 上看到 `Secondary/Primary`，与此时的解决方案保持一致。5 GB 磁盘将通过 10.10.10.0/24 网络进行同步，而不会向客户收取费用。
 
 同步磁盘后，便可以在 `hadb01` 上创建文件系统了。出于测试目的，我们使用了 ext2，但以下指令将创建一个 ext3 文件系统：
 
-    mkfs.ext3 /dev/drbd1
+```
+mkfs.ext3 /dev/drbd1
+```
 
 ### 装载 DRBD 资源
 在 `hadb01` 上，我们现已准备好装载 DRBD 资源。Debian 和派生物使用 `/var/lib/mysql` 作为 MySQL 的数据目录。由于我们尚未安装 MySQL，我们将创建该目录并装载 DRBD 资源。在 `hadb01` 上：
 
-    sudo mkdir /var/lib/mysql
-    sudo mount /dev/drbd1 /var/lib/mysql
+```
+sudo mkdir /var/lib/mysql
+sudo mount /dev/drbd1 /var/lib/mysql
+```
 
 ## 设置 MySQL
 现在你已准备好在 `hadb01` 上安装 MySQL：
 
-    sudo apt-get install mysql-server
+```
+sudo apt-get install mysql-server
+```
 
 对于 `hadb02`，可以使用两个选项。现在可以安装 mysql-server 了，这将创建 /var/lib/mysql 并填入一个新的数据目录，然后继续执行以删除内容。在 `hadb02` 上：
 
-    sudo apt-get install mysql-server
-    sudo service mysql stop
-    sudo rm -rf /var/lib/mysql/*
+```
+sudo apt-get install mysql-server
+sudo service mysql stop
+sudo rm -rf /var/lib/mysql/*
+```
 
 第二个选项用于故障转移到 `hadb02`，然后在该处安装 mysql-server（安装脚本会注意到现有安装并且不会动它）
 
 在 `hadb01` 上：
 
-    sudo drbdadm secondary -force r0
+```
+sudo drbdadm secondary -force r0
+```
 
 在 `hadb02` 上：
 
-    sudo drbdadm primary -force r0
-    sudo apt-get install mysql-server
+```
+sudo drbdadm primary -force r0
+sudo apt-get install mysql-server
+```
 
 如果你现在不打算故障转移 DRBD，则第一个选项虽说算不上极好但更容易。设置此项后，但可以开始处理 MySQL 数据库了。在 `hadb02`（或根据 DRBD 处于活动状态的服务器之一）上：
 
-    mysql -u root -p
-    CREATE DATABASE azureha;
-    CREATE TABLE things ( id SERIAL, name VARCHAR(255) );
-    INSERT INTO things VALUES (1, "Yet another entity");
-    GRANT ALL ON things.* TO root;
+```
+mysql -u root -p
+CREATE DATABASE azureha;
+CREATE TABLE things ( id SERIAL, name VARCHAR(255) );
+INSERT INTO things VALUES (1, "Yet another entity");
+GRANT ALL ON things.* TO root;
+```
 
-> [AZURE.WARNING]
+> [!WARNING]
 此最后一条语句有效地对该表中的根用户禁用身份验证。这应替换为生产级别 GRANT 语句，并且仅为说明目的才包括在内。
 
 如果要从 VM 外部进行查询，则还需要为 MySQL 启用网络，这是本指南的目的。在这两个 VM 上，打开 `/etc/mysql/my.cnf` 并浏览到 `bind-address`，将它从 127.0.0.1 更改为 0.0.0.0。保存该文件之后，在当前主节点上发出 `sudo service mysql restart`。
@@ -153,18 +175,24 @@ MySQL 的其他可能体系结构包括 NBD 群集、Percona 和 Galera 以及�
 ### 测试负载均衡集
 可以从外部计算机使用任何 MySQL 客户端以及应用程序（例如，作为 Azure 网站运行的 phpMyAdmin）执行测试。在这种情况下，我们在另一台 Linux 计算机上使用 MySQL 的命令行工具：
 
-    mysql azureha -u root -h hadb.chinacloudapp.cn -e "select * from things;"
+```
+mysql azureha -u root -h hadb.chinacloudapp.cn -e "select * from things;"
+```
 
 ### 手动故障转移
 现在可以通过关闭 MySQL、切换 DRBD 的主节点并重启 MySQL 来模拟故障转移。
 
 在 hadb01 上：
 
-    service mysql stop && umount /var/lib/mysql ; drbdadm secondary r0
+```
+service mysql stop && umount /var/lib/mysql ; drbdadm secondary r0
+```
 
 然后，在 hadb02 上：
 
-    drbdadm primary r0 ; mount /dev/drbd1 /var/lib/mysql && service mysql start
+```
+drbdadm primary r0 ; mount /dev/drbd1 /var/lib/mysql && service mysql start
+```
 
 手动故障转移后，你可以重复执行远程查询，并且它应该能够完美运行。
 
@@ -175,65 +203,70 @@ Azure 上 Corosync 的主要约束是 Corosync 首选多播，其次广播，再
 
 幸运的是，Corosync 具有一种工作单播模式，并且唯一的真正约束是，由于并非所有节点之间都*自动*互相通信，因此需要在配置文件中定义节点，包括其 IP 地址。我们可以对单播使用 Corosync 示例文件，并只需更改绑定地址、节点列表和日志记录目录（Ubuntu 使用 `/var/log/corosync`，而示例文件使用 `/var/log/cluster`），并启用仲裁工具。
 
-> [AZURE.NOTE]
+> [!NOTE]
 下面的 `transport: udpu` 指令以及为节点手动定义的 IP 地址**。
 
 在两个节点的 `/etc/corosync/corosync.conf` 上：
 
-    totem {
-      version: 2
-      crypto_cipher: none
-      crypto_hash: none
-      interface {
-        ringnumber: 0
-        bindnetaddr: 10.10.10.0
-        mcastport: 5405
-        ttl: 1
-      }
-      transport: udpu
+```
+totem {
+  version: 2
+  crypto_cipher: none
+  crypto_hash: none
+  interface {
+    ringnumber: 0
+    bindnetaddr: 10.10.10.0
+    mcastport: 5405
+    ttl: 1
+  }
+  transport: udpu
+}
+
+logging {
+  fileline: off
+  to_logfile: yes
+  to_syslog: yes
+  logfile: /var/log/corosync/corosync.log
+  debug: off
+  timestamp: on
+  logger_subsys {
+    subsys: QUORUM
+    debug: off
     }
+  }
 
-    logging {
-      fileline: off
-      to_logfile: yes
-      to_syslog: yes
-      logfile: /var/log/corosync/corosync.log
-      debug: off
-      timestamp: on
-      logger_subsys {
-        subsys: QUORUM
-        debug: off
-        }
-      }
+nodelist {
+  node {
+    ring0_addr: 10.10.10.4
+    nodeid: 1
+  }
 
-    nodelist {
-      node {
-        ring0_addr: 10.10.10.4
-        nodeid: 1
-      }
+  node {
+    ring0_addr: 10.10.10.5
+    nodeid: 2
+  }
+}
 
-      node {
-        ring0_addr: 10.10.10.5
-        nodeid: 2
-      }
-    }
-
-    quorum {
-      provider: corosync_votequorum
-    }
+quorum {
+  provider: corosync_votequorum
+}
+```
 
 我们将此配置文件复制到这两个 VM 中，并在这两个节点中启动 Corosync：
 
-    sudo service start corosync
+```
+sudo service start corosync
+```
 
 启动该服务后不久，群集应在当前环中建立，并应构成仲裁。我们可以通过查看日志或以下项来检查此功能：
 
-    sudo corosync-quorumtool -l
+```
+sudo corosync-quorumtool -l
+```
 
 应符合类似于下图所示的输出：
 
 ![corosync-quorumtool -l sample output](./media/virtual-machines-linux-classic-mysql-cluster/image001.png)  
-
 
 ## 设置 Pacemaker
 Pacemaker 使用群集监视资源、定义主节点何时停机，并将这些资源切换到辅助节点。可以通过一组可用脚本或 LSB（类似 init）脚本以及其他选项定义资源。
@@ -242,51 +275,59 @@ Pacemaker 使用群集监视资源、定义主节点何时停机，并将这些�
 
 首次安装 Pacemaker 时，你的配置应足够简单，如下所示：
 
-    node $id="1" hadb01
-      attributes standby="off"
-    node $id="2" hadb02
-      attributes standby="off"
+```
+node $id="1" hadb01
+  attributes standby="off"
+node $id="2" hadb02
+  attributes standby="off"
+```
 
 通过运行 `sudo crm configure show` 来检查它。现在，使用以下资源创建一个文件（假设 `/tmp/cluster.conf`）：
 
-    primitive drbd_mysql ocf:linbit:drbd \
-          params drbd_resource="r0" \
-          op monitor interval="29s" role="Master" \
-          op monitor interval="31s" role="Slave"
+```
+primitive drbd_mysql ocf:linbit:drbd \
+      params drbd_resource="r0" \
+      op monitor interval="29s" role="Master" \
+      op monitor interval="31s" role="Slave"
 
-    ms ms_drbd_mysql drbd_mysql \
-          meta master-max="1" master-node-max="1" \
-            clone-max="2" clone-node-max="1" \
-            notify="true"
+ms ms_drbd_mysql drbd_mysql \
+      meta master-max="1" master-node-max="1" \
+        clone-max="2" clone-node-max="1" \
+        notify="true"
 
-    primitive fs_mysql ocf:heartbeat:Filesystem \
-          params device="/dev/drbd/by-res/r0" \
-          directory="/var/lib/mysql" fstype="ext3"
+primitive fs_mysql ocf:heartbeat:Filesystem \
+      params device="/dev/drbd/by-res/r0" \
+      directory="/var/lib/mysql" fstype="ext3"
 
-    primitive mysqld lsb:mysql
+primitive mysqld lsb:mysql
 
-    group mysql fs_mysql mysqld
+group mysql fs_mysql mysqld
 
-    colocation mysql_on_drbd \
-           inf: mysql ms_drbd_mysql:Master
+colocation mysql_on_drbd \
+       inf: mysql ms_drbd_mysql:Master
 
-    order mysql_after_drbd \
-           inf: ms_drbd_mysql:promote mysql:start
+order mysql_after_drbd \
+       inf: ms_drbd_mysql:promote mysql:start
 
-    property stonith-enabled=false
+property stonith-enabled=false
 
-    property no-quorum-policy=ignore
+property no-quorum-policy=ignore
+```
 
 并立即将其加载到配置中（只需在一个节点上执行此操作）：
 
-    sudo crm configure
-      load update /tmp/cluster.conf
-      commit
-      exit
+```
+sudo crm configure
+  load update /tmp/cluster.conf
+  commit
+  exit
+```
 
 此处，请确保 Pacemaker 在这两个节点中引导时启动：
 
-    sudo update-rc.d pacemaker defaults
+```
+sudo update-rc.d pacemaker defaults
+```
 
 几秒钟后，请使用 `sudo crm_mon -L` 验证你的节点之一是否已成为群集的主节点并且正在运行所有资源。可以使用 mount 和 PS 来检查资源是否正在运行。
 
@@ -294,11 +335,9 @@ Pacemaker 使用群集监视资源、定义主节点何时停机，并将这些�
 
 ![crm\_mon 节点已停止](./media/virtual-machines-linux-classic-mysql-cluster/image002.png)  
 
-
 并且此屏幕截图显示这两个节点（一个主节点和一个从节点）：
 
 ![crm\_mon 操作主/从](./media/virtual-machines-linux-classic-mysql-cluster/image003.png)  
-
 
 ## 测试
 我们已准备好进行自动故障转移模拟。可通过两种方式执行此操作：软方式和硬方式。软方式是使用群集的关闭功能：``crm_standby -U `uname -n` -v on``。在主节点上使用此功能时，从节点将接管。记住将此功能重新设为 off（crm\_mon 会指示一个节点处于启用状态，其他节点处于待机状态）
@@ -310,13 +349,15 @@ Pacemaker 使用群集监视资源、定义主节点何时停机，并将这些�
 
 资源的示例代码可在 [GitHub](https://github.com/bureado/aztonith) 上找到。你需要更改群集的配置，方法是将以下代码添加到 `sudo crm configure`：
 
-    primitive st-azure stonith:external/azure \
-      params hostlist="hadb01 hadb02" \
-      clone fencing st-azure \
-      property stonith-enabled=true \
-      commit
+```
+primitive st-azure stonith:external/azure \
+  params hostlist="hadb01 hadb02" \
+  clone fencing st-azure \
+  property stonith-enabled=true \
+  commit
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 该脚本不执行向上/向下检查。原始 SSH 资源使用 15 次 ping 检查，但 Azure VM 的恢复时间可能更多变。
 
 ## 限制

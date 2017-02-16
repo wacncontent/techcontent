@@ -1,23 +1,21 @@
-<properties
-	pageTitle="管理 Azure Active Directory 中的自定义域名 | Azure"
-	description="用于管理 Azure Active Directory 中的自定义域的管理概念和操作指南"
-	services="active-directory"
-	documentationCenter=""
-	authors="jeffsta"
-	manager="femila"
-	editor=""/>  
+---
+title: 管理 Azure Active Directory 中的自定义域名 | Azure
+description: 用于管理 Azure Active Directory 中的自定义域的管理概念和操作指南
+services: active-directory
+documentationCenter: ''
+authors: jeffsta
+manager: femila
+editor: ''
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/04/2016"
-	ms.author="curtand;jeffsta"
-	wacn.date="02/06/2017"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/04/2016
+ms.author: curtand;jeffsta
+wacn.date: 02/06/2017
+---
 
 # 管理 Azure Active Directory 中的自定义域名
 
@@ -45,7 +43,7 @@
 
 ## 将自定义域名添加到你的 Azure AD
 
-可以将最多 900 个自定义域名添加到每个 Azure AD 目录。[添加其他自定义域名](/documentation/articles/active-directory-add-domain/)的过程与第一个自定义域名的相同。
+可以将最多 900 个自定义域名添加到每个 Azure AD 目录。[添加其他自定义域名](./active-directory-add-domain.md)的过程与第一个自定义域名的相同。
 
 ## 添加自定义域的子域
 
@@ -79,8 +77,8 @@
 
 ## 后续步骤
 
--   [了解 Azure AD 中的域名](/documentation/articles/active-directory-add-domain-concepts/)
+-   [了解 Azure AD 中的域名](./active-directory-add-domain-concepts.md)
 
--   [管理自定义域名](/documentation/articles/active-directory-add-manage-domain-names/)
+-   [管理自定义域名](./active-directory-add-manage-domain-names.md)
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

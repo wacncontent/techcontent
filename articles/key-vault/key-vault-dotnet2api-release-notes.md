@@ -1,22 +1,21 @@
-<properties
-   pageTitle="密钥保管库 .NET 2.x API 发行说明 | Azure"
-   description=".NET 开发人员可使用此 API 来编写 Azure 密钥保管库的代码"
-   services="key-vault"
-   documentationCenter=""
-   authors="BrucePerlerMS"
-   manager="mbaldwin"
-   editor="bruceper" />  
+---
+title: 密钥保管库 .NET 2.x API 发行说明 | Azure
+description: .NET 开发人员可使用此 API 来编写 Azure 密钥保管库的代码
+services: key-vault
+documentationCenter: ''
+authors: BrucePerlerMS
+manager: mbaldwin
+editor: bruceper
 
-<tags
-   ms.service="key-vault"
-   ms.devlang="CSharp"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="10/07/2016"
-   ms.author="bruceper" 
-   wacn.date="11/22/2016"/>  
-
+ms.service: key-vault
+ms.devlang: CSharp
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 10/07/2016
+ms.author: bruceper
+wacn.date: 11/22/2016
+---
 
 # Azure 密钥保管库 .NET 2.0 - 发行说明和迁移指南
 
@@ -35,7 +34,6 @@
 -   支持在选定的颁发者（密钥保管库合作伙伴 X509 证书提供者/证书颁发机构）处自动续订证书。
     - 注意 - 也允许在未建立合作关系的提供者/颁发机构那里获取证书，但这些机构不支持自动续订功能。
 
-
 ## .NET 支持
 - **.NET 4.0** 不受 Azure 密钥保管库 .NET/C# 库 2.0 版的支持
 - **.NET Core** 受 Azure 密钥保管库 .NET/C# 库 2.0 版的支持
@@ -45,13 +43,11 @@
 - **Microsoft.Azure.KeyVault.Internal** 命名空间被弃用。
 - Azure SDK 依赖项命名空间已从 **Hyak.Common** 和 **Hyak.Common.Internals** 更改为 **Microsoft.Rest** 和 **Microsoft.Rest.Serialization**
 
-
 ## 类型更改
 - *Secret* 已更改为 *SecretBundle*
 - *Dictionary* 已更改为 *IDictionary*
 - *List<T>, string * 已更改为 *IList<T>*
 - *NextList* 已更改为 *NextPageLink*
-
 
 ## 返回类型
 - **KeyList** 和 **SecretList** 将返回 *IPage<T>* 而不是 *ListKeysResponseMessage*
@@ -64,8 +60,6 @@
 
 ## 构造函数
 - 构造函数仅接受 *HttpClientHandler* 或 *DelegatingHandler*，而不接受 *HttpClient* 作为构造函数的参数。
-
-
 
 ## 下载的包  
 当客户端处理密钥保管库中的依赖项时，将下载以下包
@@ -84,7 +78,6 @@
 - package id="Microsoft.Rest.ClientRuntime" version="2.2.0" targetFramework="net45"
 - package id="Microsoft.Rest.ClientRuntime.Azure" version="3.2.0" targetFramework="net45"
 
-
 ## 类更改
 
 - **UnixEpoch** 类已删除
@@ -93,8 +86,6 @@
 ## 其他更改
 
 - 在此版本的 API 中，添加了针对暂时性故障配置 KV 操作重试策略的支持。
-
-
 
 ## Microsoft.Azure.Management.KeyVault NuGet
 - 对于返回*保管库*的操作，返回类型是包含 Vault 属性的类。返回类型现在为 *Vault*。

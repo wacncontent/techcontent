@@ -1,13 +1,16 @@
-<properties 
-	pageTitle="如何更新 Azure 自动化服务的 PowerShell 模块" 
-	description="本页介绍如何更新 Azure 自动化服务的 PowerShell 模块。" 
-	services="automation" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-	
-<tags ms.service="automation-aog" ms.date="" wacn.date="10/28/2016"/>
+---
+title: 如何更新 Azure 自动化服务的 PowerShell 模块
+description: 本页介绍如何更新 Azure 自动化服务的 PowerShell 模块。
+services: automation
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+
+ms.service: automation-aog
+ms.date: ''
+wacn.date: 10/28/2016
+---
 
 # 如何更新 Azure 自动化服务的 PowerShell 模块 #
 
@@ -38,7 +41,7 @@
 
 在自动化->自动化账户->资产页面，点击下方的导入模块，并上传打包成 .zip 文件的 PowerShell 模块。当提示安装完成后，点击模块查看版本。
 
-需要注意某些模块可能依赖于其他模块，如安装 AzureRM.Resources 模块需要首先安装 AzureRM.Profile 模块。如果安装模块时报错，可以仔细查阅报错信息，并安装相应的前提模块。更多排错信息，请参阅[常见 Azure 自动化错误的错误处理提示](/documentation/articles/automation-troubleshooting-automation-errors/)。
+需要注意某些模块可能依赖于其他模块，如安装 AzureRM.Resources 模块需要首先安装 AzureRM.Profile 模块。如果安装模块时报错，可以仔细查阅报错信息，并安装相应的前提模块。更多排错信息，请参阅[常见 Azure 自动化错误的错误处理提示](./automation/automation-troubleshooting-automation-errors.md)。
 
 ![powershell-model](./media/aog-automation-powershell-module-update/powershell-model.png "powershell-model")
 
@@ -52,5 +55,5 @@
 
 **更多信息**
 
-- [Azure 自动化概述](/documentation/articles/automation-intro/)
-- [常见 Azure 自动化错误的错误处理提示](/documentation/articles/automation-troubleshooting-automation-errors/)
+- [Azure 自动化概述](./automation/automation-intro.md)
+- [常见 Azure 自动化错误的错误处理提示](./automation/automation-troubleshooting-automation-errors.md)

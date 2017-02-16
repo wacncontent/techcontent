@@ -1,25 +1,26 @@
-<properties 
-	pageTitle="SQL Server 商业智能 | Azure"
-	description="本主题使用通过经典部署模型创建的资源并介绍了为运行在 Azure 虚拟机 (VM) 上的 SQL Server 提供的商业智能 (BI) 功能。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="rothja"
-	manager="jeffreyg"
-	editor="monicar" 
-	tags="azure-service-management"/>
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="10/04/2016"
-	wacn.date="11/21/2016"
-	ms.author="asaxton" />
+---
+title: SQL Server 商业智能 | Azure
+description: 本主题使用通过经典部署模型创建的资源并介绍了为运行在 Azure 虚拟机 (VM) 上的 SQL Server 提供的商业智能 (BI) 功能。
+services: virtual-machines-windows
+documentationCenter: na
+authors: rothja
+manager: jeffreyg
+editor: monicar
+tags: azure-service-management
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 10/04/2016
+wacn.date: 11/21/2016
+ms.author: asaxton
+---
 
 # Azure 虚拟机中的 SQL Server Business Intelligence
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 Azure 虚拟机库包括含有 SQL Server 安装的映像。库映像中支持的 SQL Server 版本是可以安装到本地计算机和虚拟机的相同安装文件。本主题总结了在映像上安装的 SQL Server 商业智能 (BI) 功能和配置虚拟机后所需的配置步骤。本主题还介绍了 BI 功能和最佳实践支持的部署拓扑。
 
@@ -27,11 +28,11 @@ Azure 虚拟机库包括含有 SQL Server 安装的映像。库映像中支持�
 
 授权 Azure 虚拟机中的 SQL Server 有两种方式：
 
-1. 属于软件保障的许可证移动性权益。有关详细信息，请参阅 [Azure 上通过软件保障实现的许可证移动性](/pricing/license-mobility/)。
+1. 属于软件保障的许可证移动性权益。有关详细信息，请参阅 [Azure 上通过软件保障实现的许可证移动性](https://www.azure.cn/pricing/license-mobility/)。
 
-1. 已安装 SQL Server 的 Azure 虚拟机按小时付费。请参阅[虚拟机定价](/home/features/virtual-machines/#SQL)中的“SQL Server”部分。
+1. 已安装 SQL Server 的 Azure 虚拟机按小时付费。请参阅[虚拟机定价](https://www.azure.cn/home/features/virtual-machines/#SQL)中的“SQL Server”部分。
 
-有关授权和当前费率的详细信息，请参阅[虚拟机授权常见问题](/pricing/overview/)。
+有关授权和当前费率的详细信息，请参阅[虚拟机授权常见问题](https://www.azure.cn/pricing/overview/)。
 
 ## 在 Azure 虚拟机库中提供的 SQL Server 映像
 
@@ -41,22 +42,24 @@ Azure 虚拟机库包括若干含有 Microsoft SQL Server 的映像。虚拟机�
 
 ![PowerShell](./media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif)以下 PowerShell 脚本返回 ImageName 中包含“SQL-Server”的 Azure 映像列表：
 
-	# assumes you have already uploaded a management certificate to your Azure Subscription. View the thumbprint value from the "settings" menu in Azure classic portal.
+```
+# assumes you have already uploaded a management certificate to your Azure Subscription. View the thumbprint value from the "settings" menu in Azure classic portal.
 
-	$subscriptionID = ""    # REQUIRED: Provide your subscription ID.
-	$subscriptionName = "" # REQUIRED: Provide your subscription name.
-	$thumbPrint = "" # REQUIRED: Provide your certificate thumbprint.
-	$certificate = Get-Item cert:\currentuser\my\$thumbPrint # REQUIRED: If your certificate is in a different store, provide it here.-Ser  store is the one specified with the -ss parameter on MakeCert
+$subscriptionID = ""    # REQUIRED: Provide your subscription ID.
+$subscriptionName = "" # REQUIRED: Provide your subscription name.
+$thumbPrint = "" # REQUIRED: Provide your certificate thumbprint.
+$certificate = Get-Item cert:\currentuser\my\$thumbPrint # REQUIRED: If your certificate is in a different store, provide it here.-Ser  store is the one specified with the -ss parameter on MakeCert
 
-	Set-AzureSubscription -SubscriptionName $subscriptionName -Certificate $certificate -SubscriptionID $subscriptionID
+Set-AzureSubscription -SubscriptionName $subscriptionName -Certificate $certificate -SubscriptionID $subscriptionID
 
-	Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2016"
-	Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-	get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2016*"} | select imagename,category, location, label, description
+Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2016"
+Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2016*"} | select imagename,category, location, label, description
 
-	Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2014"
-	Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-	get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2014*"} | select imagename,category, location, label, description
+Write-Host -foregroundcolor green "List of available gallery images where imagename contains 2014"
+Write-Host -foregroundcolor green ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+get-azurevmimage | where {$_.ImageName -Like "*SQL-Server-2014*"} | select imagename,category, location, label, description
+```
 
 有关 SQL Server 支持的版本和功能的详细信息，请参阅以下各部分：
 
@@ -90,29 +93,32 @@ Azure 虚拟机库包括若干含有 Microsoft SQL Server 的映像。虚拟机�
 
 ![PowerShell](./media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif) 运行以下 PowerShell 命令来获取服务名称中包含"SQL"的已安装服务列表。
 
-	get-service | Where-Object{ $_.DisplayName -like '*SQL*' } | Select DisplayName, status, servicetype, dependentservices | format-Table -AutoSize
+```
+get-service | Where-Object{ $_.DisplayName -like '*SQL*' } | Select DisplayName, status, servicetype, dependentservices | format-Table -AutoSize
+```
 
 ## 一般建议和最佳实践
 
 - 在使用 SQL Server Enterprise Edition 时，虚拟机的最小建议大小是 **A3**。对于 Analysis Services 和 Reporting Services 的 SQL Server BI 部署，其建议虚拟机大小为 **A4**。
 
-	有关当前 VM 大小的信息，请参阅 [Azure 的虚拟机大小](/documentation/articles/virtual-machines-windows-sizes/)。
+    有关当前 VM 大小的信息，请参阅 [Azure 的虚拟机大小](./virtual-machines-windows-sizes.md)。
 
 - 磁盘管理的最佳做法是在 **C**: 和 **D**: 以外的驱动器上存储数据、日志和备份文件。例如，创建数据磁盘 **E**: 和 **F**:。
 
-	- 默认驱动器 **C**: 的驱动器缓存策略未针对处理数据进行优化。
-	
-	- **D**: 驱动器是主要用于页面文件的临时驱动器。**D**: 驱动器不会持久保留且不保存在 blob 存储中。诸如更改虚拟机大小之类的管理任务会重置 **D**: 驱动器。建议**不**要将 **D**: 驱动器用于数据库文件（包括 tempdb）。
+    - 默认驱动器 **C**: 的驱动器缓存策略未针对处理数据进行优化。
 
-	有关创建和附加磁盘的详细信息，请参阅[如何将数据磁盘附加到虚拟机](/documentation/articles/virtual-machines-windows-classic-attach-disk/)。
+    - **D**: 驱动器是主要用于页面文件的临时驱动器。**D**: 驱动器不会持久保留且不保存在 blob 存储中。诸如更改虚拟机大小之类的管理任务会重置 **D**: 驱动器。建议**不**要将 **D**: 驱动器用于数据库文件（包括 tempdb）。
+
+    有关创建和附加磁盘的详细信息，请参阅[如何将数据磁盘附加到虚拟机](./virtual-machines-windows-classic-attach-disk.md)。
 
 - 停止或卸载计划不使用的服务。例如，如果虚拟机仅用于 Reporting Services，停止或卸载 Analysis Services 和 SQL Server Integration Services。下图是默认情况下启动的服务的示例。
 
-	![SQL Server 服务](./media/virtual-machines-windows-classic-ps-sql-bi/IC650107.gif)
+    ![SQL Server 服务](./media/virtual-machines-windows-classic-ps-sql-bi/IC650107.gif)
 
-	>[AZURE.NOTE]支持的 BI 方案中需要 SQL Server 数据库引擎。在单服务器 VM 拓扑中，数据库引擎需要在同一个 VM 上运行。
+    >[!NOTE]
+    >支持的 BI 方案中需要 SQL Server 数据库引擎。在单服务器 VM 拓扑中，数据库引擎需要在同一个 VM 上运行。
 
-	有关详细信息，请参阅以下部分：[卸载 Reporting Services](https://msdn.microsoft.com/zh-cn/library/hh479745.aspx) 和[卸载 Analysis Services 实例](https://msdn.microsoft.com/zh-cn/library/ms143687.aspx)。
+    有关详细信息，请参阅以下部分：[卸载 Reporting Services](https://msdn.microsoft.com/zh-cn/library/hh479745.aspx) 和[卸载 Analysis Services 实例](https://msdn.microsoft.com/zh-cn/library/ms143687.aspx)。
 
 - 检查 **Windows Update** 以获取新的“重要更新”。Azure 虚拟机映像会经常刷新；但是在最近刷新 VM 映像后 **Windows Update** 可能还会提供重要更新。
 
@@ -154,7 +160,8 @@ Analysis Services、Reporting Services、SQL Server 数据库引擎和数据源�
 
 SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式，但未配置报表服务器。本部分中的步骤配置 Reporting Services 报表服务器。有关配置 Reporting Services 本机模式的更多详细信息，请参阅[安装 Reporting Services 本机模式报表服务器 (SSRS)](https://msdn.microsoft.com/zh-cn/library/ms143711.aspx)。
 
->[AZURE.NOTE]有关使用 Windows PowerShell 脚本配置报表服务器的类似内容，请参阅[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](/documentation/articles/virtual-machines-windows-classic-ps-sql-report/)。
+>[!NOTE]
+>有关使用 Windows PowerShell 脚本配置报表服务器的类似内容，请参阅[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](./virtual-machines-windows-classic-ps-sql-report.md)。
 
 ### <a name="connect-to-the-virtual-machine-and-start-the-reporting-services-configuration-manager"></a> 连接到虚拟机并启动 Reporting Services 配置管理器
 
@@ -162,17 +169,17 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 
 - 若要连接，请单击虚拟机的名称，然后单击“连接”。远程桌面连接打开并自动填充计算机名称。
 
-	![连接到 Azure 虚拟机](./media/virtual-machines-windows-classic-ps-sql-bi/IC650112.gif)
+    ![连接到 Azure 虚拟机](./media/virtual-machines-windows-classic-ps-sql-bi/IC650112.gif)
 
 - 通过 Windows 远程桌面连接到虚拟机。在远程桌面的用户界面中：
 
-	1. 键入**云服务名称**作为计算机名称。
-	
-	1. 键入冒号 (:) 和为 TCP 远程桌面终结点配置的公共端口号。
-		
-		Myservice.chinacloudapp.cn:63133
-		
-		有关详细信息，请参阅[什么是云服务？](/documentation/articles/cloud-services-choose-me/)。
+    1. 键入**云服务名称**作为计算机名称。
+
+    1. 键入冒号 (:) 和为 TCP 远程桌面终结点配置的公共端口号。
+
+        Myservice.chinacloudapp.cn:63133
+
+        有关详细信息，请参阅[什么是云服务？](../cloud-services/cloud-services-choose-me.md)。
 
 **启动 Reporting Services 配置管理器。**
 
@@ -200,7 +207,7 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 
 1. 右键单击 **Reporting Services 配置管理器**并单击“以管理员身份运行”。
 
-	![搜索 ssrs 配置管理器](./media/virtual-machines-windows-classic-ps-sql-bi/IC650113.gif)
+    ![搜索 ssrs 配置管理器](./media/virtual-machines-windows-classic-ps-sql-bi/IC650113.gif)
 
 ### <a name="configure-reporting-services"></a> 配置 Reporting Services
 
@@ -272,40 +279,40 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 
 1. 使用 Azure 虚拟机“DNS 名称”作为 URL 中的服务器名称浏览到网页门户，或者报表管理器。例如：
 
-	**报表服务器**：http://uebi.chinacloudapp.cn/reportserver
-	**网页服务器**：http://uebi.chinacloudapp.cn/reports
+    **报表服务器**：http://uebi.chinacloudapp.cn/reportserver
+    **网页服务器**：http://uebi.chinacloudapp.cn/reports
 
-	[为报表服务器访问配置防火墙](https://msdn.microsoft.com/zh-cn/library/bb934283.aspx)
+    [为报表服务器访问配置防火墙](https://msdn.microsoft.com/zh-cn/library/bb934283.aspx)
 
 ### 创建报表并将其发布到 Azure 虚拟机
 
 下表汇总一些选项，可用于将现有报表从本地计算机发布到 Azure 虚拟机上托管的报表服务器：
 
 - **报表生成器**：虚拟机包括 Microsoft SQL Server 报表生成器的单击一次版本。若要首次在虚拟机上启动报表生成器：
-											
-	1. 使用管理权限启动你的浏览器。
-	
-	1. 浏览到虚拟机上的网页门户，然后选择右上角的“下载”图标。
-	
-	1. 选择“报表生成器”。
-	
-	有关详细信息，请参阅[“启动报表生成器”。](https://msdn.microsoft.com/zh-cn/library/ms159221.aspx)
+
+    1. 使用管理权限启动你的浏览器。
+
+    1. 浏览到虚拟机上的网页门户，然后选择右上角的“下载”图标。
+
+    1. 选择“报表生成器”。
+
+    有关详细信息，请参阅[“启动报表生成器”。](https://msdn.microsoft.com/zh-cn/library/ms159221.aspx)
 
 - **SQL Server Data Tools**：VM：SQL Server Data Tools 安装在该虚拟机上并可用于在该虚拟机上创建**报表服务器项目**和报表。SQL Server Data Tools 可以将报表发布到虚拟机上的报表服务器。
 
 - **SQL Server Data Tools：远程**：在本地计算机上，在 SQL Server Data Tools 中创建一个包含 Reporting Services 报表的 Reporting Services 项目。将项目配置为连接到 web 服务 URL。
 
-	![SSRS 项目的 ssdt 项目属性](./media/virtual-machines-windows-classic-ps-sql-bi/IC650114.gif)
+    ![SSRS 项目的 ssdt 项目属性](./media/virtual-machines-windows-classic-ps-sql-bi/IC650114.gif)
 
 - 创建一个包含报表的 .VHD 硬盘驱动器，然后上载并附加该驱动器。
 
-	1. 在本地计算机上创建一个包含您的报表的 .VHD 硬盘驱动器。
-	
-	1. 创建并安装管理证书。
-	
-	1. 使用 Add-azurevhd cmdlet 将 VHD 文件上载到 Azure [创建 Windows Server VHD 并上载到 Azure](/documentation/articles/virtual-machines-windows-classic-createupload-vhd/)。
-	
-	1. 将磁盘附加到虚拟机。
+    1. 在本地计算机上创建一个包含您的报表的 .VHD 硬盘驱动器。
+
+    1. 创建并安装管理证书。
+
+    1. 使用 Add-azurevhd cmdlet 将 VHD 文件上载到 Azure [创建 Windows Server VHD 并上载到 Azure](./virtual-machines-windows-classic-createupload-vhd.md)。
+
+    1. 将磁盘附加到虚拟机。
 
 ## 安装其他 SQL Server 服务和功能
 
@@ -319,7 +326,8 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 
 或运行 C:\SQLServer\_13.0\_full\setup.exe，C:\\SQLServer\_12.0\_full\\setup.exe 或 C:\\SQLServer\_11.0\_full\\setup.exe
 
->[AZURE.NOTE]首次运行 SQL Server 安装程序时可能会下载更多安装文件并需要重新启动虚拟机和重新启动 SQL Server 安装程序。
+>[!NOTE]
+>首次运行 SQL Server 安装程序时可能会下载更多安装文件并需要重新启动虚拟机和重新启动 SQL Server 安装程序。
 ><p>如果需要反复自定义从 Azure 虚拟机中选择的映像，请考虑创建您自己的 SQL Server 映像。Analysis Services SysPrep 功能在 SQL Server 2012 SP1 CU2 中已启用。有关详细信息，请参阅[使用 SysPrep 安装 SQL Server 的注意事项](https://msdn.microsoft.com/zh-cn/library/ee210754.aspx)。
 
 ### 若要安装 Analysis Services 表格模式
@@ -334,7 +342,7 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 
 1. 在 SQL Server 安装向导中，单击左窗格中的“安装”，然后单击“新的 SQL Server 独立安装或向现有安装添加功能”。
 
-	- 如果您看到“浏览文件夹”，浏览到 c:\SQLServer\_13.0\_full，c:\\SQLServer\_12.0\_full 或 c:\\SQLServer\_11.0\_full，然后单击“确定”。
+    - 如果您看到“浏览文件夹”，浏览到 c:\SQLServer\_13.0\_full，c:\\SQLServer\_12.0\_full 或 c:\\SQLServer\_11.0\_full，然后单击“确定”。
 
 1. 单击产品更新页面上的“下一步”。
 
@@ -354,7 +362,7 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 
 ### 对 Analysis Services 服务器的远程访问
 
-Analysis Services 服务器仅支持 windows 身份验证。若要从客户端应用程序（如 SQL Server Management Studio 或 SQL Server Data Tools）远程访问 Analysis Services，虚拟机需要使用 Azure 虚拟网络加入到本地域。有关详细信息，请参阅 [Azure 虚拟网络](/documentation/articles/virtual-networks-overview/)。
+Analysis Services 服务器仅支持 windows 身份验证。若要从客户端应用程序（如 SQL Server Management Studio 或 SQL Server Data Tools）远程访问 Analysis Services，虚拟机需要使用 Azure 虚拟网络加入到本地域。有关详细信息，请参阅 [Azure 虚拟网络](../virtual-network/virtual-networks-overview.md)。
 
 Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机防火墙中打开该端口。Analysis Services 的群集命名实例也侦听端口 **2383**。
 
@@ -364,7 +372,9 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 1. 若要验证在 VM 上已使用的端口和哪个进程正在使用该端口，请使用管理权限运行以下命令：
 
-		netstat /ao
+    ```
+    netstat /ao
+    ```
 
 1. 使用 SQL Server Management Studio 通过更新表格 AS 实例常规属性中的“端口”值来创建一个静态的 Analysis Services 命名实例端口。有关详细信息，请参阅[配置 Windows 防火墙以允许 Analysis Services 访问](https://msdn.microsoft.com/zh-cn/library/ms174937.aspx#bkmk_fixed)中的“对默认或命名实例使用固定端口”。
 
@@ -378,19 +388,19 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 - 如果您使用的是单个 VM 并且下列两项为 true，不需要创建 VM 终结点并且不需要在 VM 上的防火墙中打开端口。
 
-	- 你未远程连接到 VM 上的 SQL Server 功能。与 VM 建立远程桌面连接和从本地访问 VM 上的 SQL Server 功能，不被视为与 SQL Server 功能远程连接。
-	
-	- 不通过 Azure 虚拟网络或其他 VPN 隧道解决方案将 VM 加入到本地域。
+    - 你未远程连接到 VM 上的 SQL Server 功能。与 VM 建立远程桌面连接和从本地访问 VM 上的 SQL Server 功能，不被视为与 SQL Server 功能远程连接。
+
+    - 不通过 Azure 虚拟网络或其他 VPN 隧道解决方案将 VM 加入到本地域。
 
 - 如果虚拟机未加入到域，但您希望远程连接到 VM 上的 SQL Server 功能：
 
-	- 在 VM 防火墙中打开端口。
-	
-	- 为前述端口 (*) 打开虚拟机终结点。
+    - 在 VM 防火墙中打开端口。
+
+    - 为前述端口 (*) 打开虚拟机终结点。
 
 - 如果虚拟机使用 Azure 虚拟网络等 VPN 隧道加入域，则不需要终结点。但是要在 VM 防火墙中打开端口。
 
-	|端口|类型|说明|
+    |端口|类型|说明|
 |---|---|---|
 |**80**|TCP|报表服务器远程访问 (*)。|
 |**1433**|TCP|SQL Server Management Studio (*)。|
@@ -401,9 +411,9 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 有关创建终结点的详细信息，请参阅以下资源：
 
-- 创建终结点：[如何设置虚拟机的终结点](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/)。
+- 创建终结点：[如何设置虚拟机的终结点](./virtual-machines-windows-classic-setup-endpoints.md)。
 
-- SQL Server：请参阅[在 Azure 上设置 SQL Server 虚拟机](/documentation/articles/virtual-machines-windows-classic-ps-sql-create/)的“完成配置步骤以使用 SQL Server Management Studio 连接到虚拟机”。
+- SQL Server：请参阅[在 Azure 上设置 SQL Server 虚拟机](./virtual-machines-windows-classic-ps-sql-create.md)的“完成配置步骤以使用 SQL Server Management Studio 连接到虚拟机”。
 
 下图说明了要允许远程访问 VM 上的功能和组件，需要在 VM 防火墙上打开的端口。
 
@@ -413,15 +423,15 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 - 查看在 Azure 虚拟机环境中使用的 Microsoft 服务器软件的支持策略。以下主题概述对 BitLocker、故障转移群集和网络负载均衡等功能的支持。[Microsoft 服务器软件对 Azure 虚拟机的支持](http://support.microsoft.com/kb/2721672)。
 
-- [Azure 虚拟机中的 SQL Server 概述](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)
+- [Azure 虚拟机中的 SQL Server 概述](./virtual-machines-windows-sql-server-iaas-overview.md)
 
-- [虚拟机](/documentation/services/virtual-machines/)
+- [虚拟机](./index.md)
 
-- [在 Azure 上设置 SQL Server 虚拟机](/documentation/articles/virtual-machines-windows-classic-ps-sql-create/)
+- [在 Azure 上设置 SQL Server 虚拟机](./virtual-machines-windows-classic-ps-sql-create.md)
 
-- [如何将数据磁盘附加到虚拟机](/documentation/articles/virtual-machines-windows-classic-attach-disk/)
+- [如何将数据磁盘附加到虚拟机](./virtual-machines-windows-classic-attach-disk.md)
 
-- [将数据库迁移到 Azure VM 上的 SQL Server](/documentation/articles/virtual-machines-windows-migrate-sql/)
+- [将数据库迁移到 Azure VM 上的 SQL Server](./virtual-machines-windows-migrate-sql.md)
 
 - [确定 Analysis Services 实例的服务器模式](https://msdn.microsoft.com/zh-cn/library/gg471594.aspx)
 
@@ -431,7 +441,8 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 - [在混合环境中使用 Power BI](https://msdn.microsoft.com/zh-cn/library/dn798994.aspx)
 
->[AZURE.NOTE] [Submit feedback and contact information through Microsoft SQL Server Connect](https://connect.microsoft.com/SQLServer/Feedback)
+>[!NOTE]
+> [Submit feedback and contact information through Microsoft SQL Server Connect](https://connect.microsoft.com/SQLServer/Feedback)
 
 ### 社区内容
 

@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Service Fabric 应用程序模型 | Azure"
-    description="如何在 Service Fabric 中建模和描述应用程序。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="rwike77"
-    manager="timlt"
-    editor="mani-ramaswamy" />
-<tags
-    ms.assetid="17a99380-5ed8-4ed9-b884-e9b827431b02"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="12/01/2016"
-    wacn.date="01/20/2017"
-    ms.author="ryanwi" />
+---
+title: Service Fabric 应用程序模型 | Azure
+description: 如何在 Service Fabric 中建模和描述应用程序。
+services: service-fabric
+documentationcenter: .net
+author: rwike77
+manager: timlt
+editor: mani-ramaswamy
+
+ms.assetid: 17a99380-5ed8-4ed9-b884-e9b827431b02
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 12/01/2016
+wacn.date: 01/20/2017
+ms.author: ryanwi
+---
 
 # 在 Service Fabric 中对应用程序建模
 本文提供 Azure Service Fabric 应用程序模型的概述。同时介绍如何通过清单文件定义应用程序和服务，以及如何打包应用程序并准备好进行部署。
@@ -35,14 +36,14 @@
 
 使用两种清单文件来描述应用程序和服务，即服务清单和应用程序清单。后续部分将详细介绍这两种清单。
 
-群集中可以有某一服务类型一个或多个实例处于活动状态。例如，有状态服务实例（或称副本）通过在群集中不同节点上的副本之间复制状态实现高可靠性。这种复制本质上是提供冗余，使服务即使在群集中的一个节点出现故障时也可用。[分区服务](/documentation/articles/service-fabric-concepts-partitioning/)进一步跨群集中的节点划分其状态（和该状态的访问模式）。
+群集中可以有某一服务类型一个或多个实例处于活动状态。例如，有状态服务实例（或称副本）通过在群集中不同节点上的副本之间复制状态实现高可靠性。这种复制本质上是提供冗余，使服务即使在群集中的一个节点出现故障时也可用。[分区服务](./service-fabric-concepts-partitioning.md)进一步跨群集中的节点划分其状态（和该状态的访问模式）。
 
 下图显示应用程序和服务实例、分区与副本之间的关系。
 
 ![服务中的分区和副本][cluster-application-instances]
 
-
->[AZURE.TIP] 可以使用 http://&lt;yourclusteraddress&gt;:19080/Explorer 上提供的 Service Fabric Explorer 工具查看群集中应用程序的布局。有关详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](/documentation/articles/service-fabric-visualizing-your-cluster/)。
+>[!TIP]
+> 可以使用 http://&lt;yourclusteraddress&gt;:19080/Explorer 上提供的 Service Fabric Explorer 工具查看群集中应用程序的布局。有关详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
 ## 描述服务
 服务清单以声明方式定义服务类型和版本。它指定服务元数据，例如服务类型、运行状况属性、负载均衡度量值、服务二进制文件和配置文件。换言之，它描述了组成一个服务包以支持一个或多个服务类型的代码、配置和数据包。下面是服务清单的简单示例：
@@ -90,7 +91,8 @@
 </Settings>
 ~~~
 
-> [AZURE.NOTE] 服务清单可以包含多段代码、多个配置和数据包。可对它们进行独立的版本控制。
+> [!NOTE]
+> 服务清单可以包含多段代码、多个配置和数据包。可对它们进行独立的版本控制。
 
 <!--
 For more information about other features supported by service manifests, refer to the following articles:
@@ -103,7 +105,6 @@ For more information about other features supported by service manifests, refer 
 -->
 
 ##<a name="describe-an-application"></a> 描述应用程序
-
 
 应用程序清单以声明方式描述应用程序类型和版本。它指定服务组合元数据（如稳定名称、分区方案、实例计数/复制因子、安全/隔离策略、布置约束、配置替代和成分服务类型）。此外还描述用于容纳应用程序的负载均衡域。
 
@@ -136,9 +137,10 @@ For more information about other features supported by service manifests, refer 
 
 **DefaultServices** 声明每当一个应用程序依据此应用程序类型进行实例化时自动创建的服务实例。默认服务只是提供便利，创建后，其行为皆如常规服务。它们与应用程序实例中的任何其他服务一起升级，也可将其删除。
 
-> [AZURE.NOTE] 应用程序清单可以包含多个服务清单导入和默认服务。可对每个服务清单导入进行独立的版本控制。
+> [!NOTE]
+> 应用程序清单可以包含多个服务清单导入和默认服务。可对每个服务清单导入进行独立的版本控制。
 
-若要了解如何维护不同的应用程序和用于单个环境的服务参数，请参阅[管理多个环境的应用程序参数](/documentation/articles/service-fabric-manage-multiple-environment-app-configuration/)。
+若要了解如何维护不同的应用程序和用于单个环境的服务参数，请参阅[管理多个环境的应用程序参数](./service-fabric-manage-multiple-environment-app-configuration.md)。
 
 <!--
 For more information about other features supported by application manifests, refer to the following articles:
@@ -243,9 +245,9 @@ PS D:\temp>
 [vs-package-command]: ./media/service-fabric-application-model/vs-package-command.png
 
 <!--Link references--In actual articles, you only need a single period before the slash-->
-[10]: /documentation/articles/service-fabric-deploy-remove-applications/
-[11]: /documentation/articles/service-fabric-manage-multiple-environment-app-configuration/
-[12]: /documentation/articles/service-fabric-application-runas-security/
+[10]: ./service-fabric-deploy-remove-applications.md
+[11]: ./service-fabric-manage-multiple-environment-app-configuration.md
+[12]: ./service-fabric-application-runas-security.md
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--update: wording update-->

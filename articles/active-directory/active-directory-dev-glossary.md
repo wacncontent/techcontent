@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure Active Directory 开发人员词汇表 | Azure"
-    description="常用的 Azure Active Directory 开发人员概念和功能术语列表。"
-    services="active-directory"
-    documentationcenter=""
-    author="bryanla"
-    manager="mbaldwin"
-    editor="" />  
+---
+title: Azure Active Directory 开发人员词汇表 | Azure
+description: 常用的 Azure Active Directory 开发人员概念和功能术语列表。
+services: active-directory
+documentationcenter: ''
+author: bryanla
+manager: mbaldwin
+editor: ''
 
-<tags
-    ms.assetid="551512df-46fb-4219-a14b-9c9fc23998ba"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="11/15/2016"
-    ms.author="bryanla" 
-    wacn.date="12/15/2016"/>
+ms.assetid: 551512df-46fb-4219-a14b-9c9fc23998ba
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/15/2016
+ms.author: bryanla
+wacn.date: 12/15/2016
+---
 
 # Azure Active Directory 开发人员词汇表
 本文包含一些核心 Azure Active Directory (AD) 开发人员概念的定义，帮助你了解 Azure AD 的应用程序开发。
@@ -178,21 +178,21 @@ Azure AD 目录的实例称为 Azure AD 租户。所提供的功能包括：
 <!--Image references-->
 
 <!--Reference style links -->
-[AAD-App-Manifest]: /documentation/articles/active-directory-application-manifest/
-[AAD-App-SP-Objects]: /documentation/articles/active-directory-application-objects/
-[AAD-Auth-Scenarios]: /documentation/articles/active-directory-authentication-scenarios/
-[AAD-Dev-Guide]: /documentation/articles/active-directory-developers-guide/
+[AAD-App-Manifest]: ./active-directory-application-manifest.md
+[AAD-App-SP-Objects]: ./active-directory-application-objects.md
+[AAD-Auth-Scenarios]: ./active-directory-authentication-scenarios.md
+[AAD-Dev-Guide]: ./active-directory-developers-guide.md
 [AAD-Graph-Perm-Scopes]: https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/howto/azure-ad-graph-api-permission-scopes
 [AAD-Graph-App-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#application-entity
 [AAD-Graph-Sp-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity
 [AAD-Graph-User-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#user-entity
-[AAD-How-Subscriptions-Assoc]: /documentation/articles/active-directory-how-subscriptions-associated-directory/
-[AAD-How-To-Integrate]: /documentation/articles/active-directory-how-to-integrate/
-[AAD-How-To-Tenant]: /documentation/articles/active-directory-howto-tenant/
-[AAD-Integrating-Apps]: /documentation/articles/active-directory-integrating-applications/
-[AAD-Multi-Tenant-Overview]: /documentation/articles/active-directory-devhowto-multi-tenant-overview/
+[AAD-How-Subscriptions-Assoc]: ./active-directory-how-subscriptions-associated-directory.md
+[AAD-How-To-Integrate]: ./active-directory-how-to-integrate.md
+[AAD-How-To-Tenant]: ./active-directory-howto-tenant.md
+[AAD-Integrating-Apps]: ./active-directory-integrating-applications.md
+[AAD-Multi-Tenant-Overview]: ./active-directory-devhowto-multi-tenant-overview.md
 [AAD-Security-Token-Claims]: ./active-directory-authentication-scenarios/#claims-in-azure-ad-security-tokens
-[AAD-Tokens-Claims]: /documentation/articles/active-directory-token-and-claims/
+[AAD-Tokens-Claims]: ./active-directory-token-and-claims.md
 [AZURE-classic-portal]: https://manage.windowsazure.cn
 [JWT]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32
 [Microsoft-Graph]: https://graph.microsoft.io

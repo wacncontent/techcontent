@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用 Visual Studio Team Services 设置 Service Fabric 持续集成和部署 | Azure"
-    description="大致了解如何使用 Visual Studio Team Services (VSTS) 为 Service Fabric 应用程序设置持续集成和部署。"
-    services="service-fabric"
-    documentationcenter="na"
-    author="mthalman-msft"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="3e8c2290-9e7a-456a-9b2c-db44d1b3988d"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="12/06/2016"
-    wacn.date="01/20/2017"
-    ms.author="mthalman;mikhegn" />  
+---
+title: 使用 Visual Studio Team Services 设置 Service Fabric 持续集成和部署 | Azure
+description: 大致了解如何使用 Visual Studio Team Services (VSTS) 为 Service Fabric 应用程序设置持续集成和部署。
+services: service-fabric
+documentationcenter: na
+author: mthalman-msft
+manager: timlt
+editor: ''
 
+ms.assetid: 3e8c2290-9e7a-456a-9b2c-db44d1b3988d
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 12/06/2016
+wacn.date: 01/20/2017
+ms.author: mthalman;mikhegn
+---
 
 # 使用 Visual Studio Team Services 设置 Service Fabric 持续集成和部署
 本文介绍使用 Visual Studio Team Services (VSTS) 为 Azure Service Fabric 应用程序设置持续集成和部署的步骤。
@@ -29,33 +29,34 @@
 1. 确保有权访问 Team Services 帐户，或自行[创建帐户](https://www.visualstudio.com/docs/setup-admin/team-services/sign-up-for-visual-studio-team-services)。
 2. 确保有权访问 Team Services 团队项目，或自行[创建项目](https://www.visualstudio.com/docs/setup-admin/create-team-project)。
 
-3. 确保拥有可以向其中部署应用程序的 Service Fabric 群集，或者使用 [Azure 门户预览](/documentation/articles/service-fabric-cluster-creation-via-portal/)、[Azure Resource Manager 模板](/documentation/articles/service-fabric-cluster-creation-via-arm/)或 [Visual Studio](/documentation/articles/service-fabric-cluster-creation-via-visual-studio/) 创建群集。
+3. 确保拥有可以向其中部署应用程序的 Service Fabric 群集，或者使用 [Azure 门户预览](./service-fabric-cluster-creation-via-portal.md)、[Azure Resource Manager 模板](./service-fabric-cluster-creation-via-arm.md)或 [Visual Studio](./service-fabric-cluster-creation-via-visual-studio.md) 创建群集。
 
 4. 确保已创建 Service Fabric 应用程序 (.sfproj) 项目。必须具有使用 Service Fabric SDK 2.1 或更高版本创建或升级的项目（.sfproj 文件应包含 1.1 或更高的 ProjectVersion 属性值）。
 
->[AZURE.NOTE] 不再需要自定义生成代理。Team Services 托管代理现在预装了 Service Fabric 群集管理软件，因此可以直接从这些代理部署应用程序。
+>[!NOTE]
+> 不再需要自定义生成代理。Team Services 托管代理现在预装了 Service Fabric 群集管理软件，因此可以直接从这些代理部署应用程序。
 
 ## 配置和共享源文件
 首先需要准备发布配置文件，供将在 Team Services 中执行的部署进程使用。应将发布配置文件配置为针对此前已准备好的群集：
 
-1.	在应用程序项目中选择想要用于持续集成工作流的发布配置文件。按照有关如何将应用程序发布到远程群集的[发布说明](/documentation/articles/service-fabric-publish-app-remote-cluster/)进行操作。但不需要实际发布应用程序。正确地完成配置操作以后，单击发布对话框中的“保存”超链接即可。
-2.	如果想要在 Team Services 中对每个部署升级应用程序，则需要配置发布配置文件以启用升级。在步骤 1 所使用的发布对话框中，确保选中了“升级应用程序”复选框。详细了解如何[配置其他升级设置](/documentation/articles/service-fabric-visualstudio-configure-upgrade/)。单击“保存”超链接，将设置保存到发布配置文件。
-3.	确保将更改保存到发布配置文件以后，即可取消发布对话框。
-4.	现在可以在 Team Services 中[共享应用程序项目源文件](https://www.visualstudio.com/docs/setup-admin/team-services/connect-to-visual-studio-team-services#vs)。能够在 Team Services 中访问源文件以后，即可继续进行创建生成内容的下一步。
+1. 在应用程序项目中选择想要用于持续集成工作流的发布配置文件。按照有关如何将应用程序发布到远程群集的[发布说明](./service-fabric-publish-app-remote-cluster.md)进行操作。但不需要实际发布应用程序。正确地完成配置操作以后，单击发布对话框中的“保存”超链接即可。
+2. 如果想要在 Team Services 中对每个部署升级应用程序，则需要配置发布配置文件以启用升级。在步骤 1 所使用的发布对话框中，确保选中了“升级应用程序”复选框。详细了解如何[配置其他升级设置](./service-fabric-visualstudio-configure-upgrade.md)。单击“保存”超链接，将设置保存到发布配置文件。
+3. 确保将更改保存到发布配置文件以后，即可取消发布对话框。
+4. 现在可以在 Team Services 中[共享应用程序项目源文件](https://www.visualstudio.com/docs/setup-admin/team-services/connect-to-visual-studio-team-services#vs)。能够在 Team Services 中访问源文件以后，即可继续进行创建生成内容的下一步。
 
 ## 创建生成定义
 Team Services 生成定义所描述的工作流由一系列按顺序执行的生成步骤组成。创建生成定义的目标是：生成可用来部署应用程序的 Service Fabric 应用程序包和其他项目。详细了解 Team Services [生成定义](https://www.visualstudio.com/docs/build/define/create)。
 
 ### 从生成模板创建定义
 
-1.	在 Visual Studio Team Services 中打开团队项目。
-2.	选择“生成”选项卡。
-3.	选择绿色的 **+** 号以创建新的生成定义。
-4.	在打开的对话框中，选择“生成”模板类别中的“Azure Service Fabric 应用程序”。
-5.	选择“下一步”。
-6.	选择与 Service Fabric 应用程序关联的存储库和分支。
-7.	选择要使用的代理队列。支持托管代理。
-8.	选择“创建”。
+1. 在 Visual Studio Team Services 中打开团队项目。
+2. 选择“生成”选项卡。
+3. 选择绿色的 **+** 号以创建新的生成定义。
+4. 在打开的对话框中，选择“生成”模板类别中的“Azure Service Fabric 应用程序”。
+5. 选择“下一步”。
+6. 选择与 Service Fabric 应用程序关联的存储库和分支。
+7. 选择要使用的代理队列。支持托管代理。
+8. 选择“创建”。
 9. 保存生成定义并为其命名。
 10. 由此模板提供的生成步骤说明如下：
 

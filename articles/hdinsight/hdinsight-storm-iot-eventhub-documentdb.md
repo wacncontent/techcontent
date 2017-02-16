@@ -1,21 +1,21 @@
-<properties
- pageTitle="使用 Apache Storm on HDInsight 处理车辆传感器数据 | Azure"
- description="了解如何使用 Apache Storm on HDInsight 处理事件中心的车辆传感器数据。添加 DocumentDB 提供的车型数据，然后将输出存储到存储空间。"
- services="hdinsight,documentdb,notification-hubs"
- documentationCenter=""
- authors="Blackmist"
- manager="paulettm"
- editor="cgronlun"/>
+---
+title: 使用 Apache Storm on HDInsight 处理车辆传感器数据 | Azure
+description: 了解如何使用 Apache Storm on HDInsight 处理事件中心的车辆传感器数据。添加 DocumentDB 提供的车型数据，然后将输出存储到存储空间。
+services: hdinsight,documentdb,notification-hubs
+documentationCenter: ''
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
 
-<tags
-ms.service="hdinsight"
-ms.devlang="java"
-ms.topic="article"
-ms.tgt_pltfrm="na"
-ms.workload="big-data"
-ms.date="11/08/2016"
-wacn.date="12/30/2016"
-ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/08/2016
+wacn.date: 12/30/2016
+ms.author: larryfr
+---
 
 #使用 Apache Storm on HDInsight 处理 Azure 事件中心的车辆传感器数据
 
@@ -49,7 +49,8 @@ Azure 事件中心可用于处理传感器生成的大量数据，而 Apache Sto
 
 ![storm 拓扑](./media/hdinsight-storm-iot-eventhub-documentdb/iottopology.png)
 
-> [AZURE.NOTE]这是一个简化的关系图，解决方案中的每个组件可能有多个实例。例如，拓扑中每个组件的多个实例分布在 Storm on HDInsight 群集的多个节点中。
+> [!NOTE]
+>这是一个简化的关系图，解决方案中的每个组件可能有多个实例。例如，拓扑中每个组件的多个实例分布在 Storm on HDInsight 群集的多个节点中。
 
 ##实现
 
@@ -57,6 +58,6 @@ GitHub 上的 [HDInsight-Storm-Examples](https://github.com/hdinsight/hdinsight-
 
 ## 后续步骤
 
-如需更多 Storm 拓扑示例，请参阅 [Storm on HDInsight 拓扑示例](/documentation/articles/hdinsight-storm-example-topology/)。
+如需更多 Storm 拓扑示例，请参阅 [Storm on HDInsight 拓扑示例](./hdinsight-storm-example-topology.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

@@ -1,28 +1,29 @@
-<properties
-    pageTitle="创建和管理独立 Azure Service Fabric 群集 | Azure"
-    description="在运行 Windows Server 的任何本地或任意云计算机上创建和管理 Azure Service Fabric 群集（物理或虚拟）。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="ChackDan"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="31349169-de19-4be6-8742-ca20ac41eb9e"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="12/06/2016"
-    wacn.date="01/20/2017"
-    ms.author="dkshir;chackdan" />
+---
+title: 创建和管理独立 Azure Service Fabric 群集 | Azure
+description: 在运行 Windows Server 的任何本地或任意云计算机上创建和管理 Azure Service Fabric 群集（物理或虚拟）。
+services: service-fabric
+documentationcenter: .net
+author: ChackDan
+manager: timlt
+editor: ''
+
+ms.assetid: 31349169-de19-4be6-8742-ca20ac41eb9e
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 12/06/2016
+wacn.date: 01/20/2017
+ms.author: dkshir;chackdan
+---
 
 # 创建和管理在 Windows Server 上运行的群集
 可以使用 Azure Service Fabric 在运行 Windows Server 的任何虚拟机或计算机上创建 Service Fabric 群集。这意味着，可以在包含一组相互连接的 Windows Server 计算机的任何环境（无论是本地环境还是任何云提供商所提供的环境）中部署和运行 Service Fabric 应用程序。Service Fabric 提供了一个安装程序包，用于创建名为“Windows Server 独立包”的 Service Fabric 群集。
 
 本文逐步讲解如何使用 Service Fabric 的独立包在本地完成创建群集的步骤，不过，也可以针对其他任何环境（例如其他云提供商）轻松调整这些步骤。
 
-> [AZURE.NOTE]
+> [!NOTE]
 此独立的 Windows Server 包已经可供购买，并且可用于生产部署。此包可能包含“预览版”中的全新 Service Fabric 功能。向下滚动到“此包中包含的预览版功能”部分，获取预览版功能的列表。可以立即[下载一份 EULA](http://go.microsoft.com/fwlink/?LinkID=733084)。
 > 
 > 
@@ -87,7 +88,6 @@
 - "faultDomain": "fd:/FD1"
 - "faultDomain": "fd:/Room1/Rack1/PDU1/M1"
 
-
 *升级域* (UD) 是节点的逻辑单元。在 Service Fabric 协调式升级（应用程序升级或群集升级）期间，将关闭 UD 中的所有节点以执行升级，其他 UD 中的节点仍可用来为请求提供服务。对计算机进行的固件升级将不遵循 UD，因此每次必须在一台计算机上执行此操作。
 
 领会这些概念的最简单方法是将 FD 视为非计划内故障的单元，将 UD 视为计划维护的单元。
@@ -99,7 +99,7 @@
 - "upgradeDomain": "DomainRed"
 - "upgradeDomain": "Blue"
 
-有关升级域和容错域的更多详细信息，请参阅[描述 Service Fabric 群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)一文。
+有关升级域和容错域的更多详细信息，请参阅[描述 Service Fabric 群集](./service-fabric-cluster-resource-manager-cluster-description.md)一文。
 
 ### 步骤 5：下载适用于 Windows Server 的 Service Fabric 独立包
 下载[适用于 Windows Server 的 Service Fabric 独立包](http://go.microsoft.com/fwlink/?LinkId=730690)，并将包解压缩到群集外的一台部署计算机中或解压缩到群集内的其中一台计算机中。可以重命名解压缩的文件夹 `Microsoft.Azure.ServiceFabric.WindowsServer`。
@@ -110,8 +110,7 @@
 完成规划和准备步骤后，可以开始创建群集。
 
 ### 步骤 1：修改群集配置
-ClusterConfig.json 文件对群集做了描述。有关此文件中各个节的详细信息，请参阅 [Windows 独立群集的配置设置](/documentation/articles/service-fabric-cluster-manifest/)。从已下载的包中打开某个 ClusterConfig.json 文件，然后修改以下设置：
-
+ClusterConfig.json 文件对群集做了描述。有关此文件中各个节的详细信息，请参阅 [Windows 独立群集的配置设置](./service-fabric-cluster-manifest.md)。从已下载的包中打开某个 ClusterConfig.json 文件，然后修改以下设置：
 
 | **配置设置** | **说明** |
 | --- | --- |
@@ -123,74 +122,69 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
+```powershell
+PS C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer> .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json
+Trace folder already exists. Traces will be written to existing trace folder: C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer\DeploymentTraces
+Running Best Practices Analyzer...
+Best Practices Analyzer completed successfully.
 
-
-	PS C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer> .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json
-	Trace folder already exists. Traces will be written to existing trace folder: C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer\DeploymentTraces
-	Running Best Practices Analyzer...
-	Best Practices Analyzer completed successfully.
-
-
-	LocalAdminPrivilege        : True
-	IsJsonValid                : True
-	IsCabValid                 : True
-	RequiredPortsOpen          : True
-	RemoteRegistryAvailable    : True
-	FirewallAvailable          : True
-	RpcCheckPassed             : True
-	NoConflictingInstallations : True
-	FabricInstallable          : True
-	Passed                     : True
-
-
-
+LocalAdminPrivilege        : True
+IsJsonValid                : True
+IsCabValid                 : True
+RequiredPortsOpen          : True
+RemoteRegistryAvailable    : True
+FirewallAvailable          : True
+RpcCheckPassed             : True
+NoConflictingInstallations : True
+FabricInstallable          : True
+Passed                     : True
+```
 
 ### 步骤 3：运行创建群集脚本
 在 JSON 文档中修改群集配置并在其中添加所有节点信息后，请运行包文件夹中用于创建群集的 *CreateServiceFabricCluster.ps1* PowerShell 脚本，并传入 JSON 配置文件的路径。完成此操作后，请接受 EULA。
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
+```
+#Create an unsecured local development cluster
 
-	#Create an unsecured local development cluster
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json -AcceptEULA
 
-	.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json -AcceptEULA
+#Create an unsecured multi-machine cluster
 
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json -AcceptEULA
+```
 
-	#Create an unsecured multi-machine cluster
-
-	.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json -AcceptEULA
-
-
->[AZURE.NOTE] 运行 CreateServiceFabricCluster Powershell 的 VM/计算机会在本地提供部署日志。这些日志位于运行 PowerShell 命令的文件夹下名为 DeploymentTraces 的子文件夹中。若要查看 Service Fabric 是否已正确部署到某个计算机，可在 C:\\ProgramData 目录中查找已安装的文件，并且可在任务管理器中查看正在运行的 FabricHost.exe 和 Fabric.exe 进程。
+>[!NOTE]
+> 运行 CreateServiceFabricCluster Powershell 的 VM/计算机会在本地提供部署日志。这些日志位于运行 PowerShell 命令的文件夹下名为 DeploymentTraces 的子文件夹中。若要查看 Service Fabric 是否已正确部署到某个计算机，可在 C:\\ProgramData 目录中查找已安装的文件，并且可在任务管理器中查看正在运行的 FabricHost.exe 和 Fabric.exe 进程。
 
 ### 步骤 4：连接到群集
 
-若要连接到安全群集，请参阅 [Service fabric connect to secure cluster](/documentation/articles/service-fabric-connect-to-secure-cluster/)（在 Service Fabric 中连接到安全群集）。
+若要连接到安全群集，请参阅 [Service fabric connect to secure cluster](./service-fabric-connect-to-secure-cluster.md)（在 Service Fabric 中连接到安全群集）。
 
 若要连接到非安全群集，请运行以下 PowerShell 命令：
 
+```powershell
+Connect-ServiceFabricCluster -ConnectionEndpoint <*IPAddressofaMachine*>:<Client connection end point port>
 
-
-	Connect-ServiceFabricCluster -ConnectionEndpoint <*IPAddressofaMachine*>:<Client connection end point port>
-
-	Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000
-
+Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000
+```
 
 ### 步骤 5：打开 Service Fabric Explorer
 现在，可以在 Service Fabric Explorer 中使用 http://localhost:19080/Explorer/index.html 直接从某台计算机连接到群集，或者使用 http://<*计算机 IP 地址*>:19080/Explorer/index.html 远程连接到群集。
 
 ## 添加和删除节点
 
-当业务需要改变时，您可以向独立 Service Fabric 群集添加或删除节点。请参阅[向 Service Fabric 独立群集添加或删节点](/documentation/articles/service-fabric-cluster-windows-server-add-remove-nodes/)了解详细步骤。
+当业务需要改变时，您可以向独立 Service Fabric 群集添加或删除节点。请参阅[向 Service Fabric 独立群集添加或删节点](./service-fabric-cluster-windows-server-add-remove-nodes.md)了解详细步骤。
 
 ## 删除群集
 若要删除群集，请运行包文件夹中的 *RemoveServiceFabricCluster.ps1* Powershell 脚本，并传入 JSON 配置文件的路径。可以选择性地指定删除日志的位置。
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
-
-	.\RemoveServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json   
-
+```
+.\RemoveServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json   
+```
 
 <a id="telemetry"></a>
 
@@ -200,26 +194,26 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 1. 遥测管道每天都会尝试一次将以下数据上载到 [https://vortex.data.microsoft.com/collect/v1](https://vortex.data.microsoft.com/collect/v1)。这是一种尽力而为的上传操作，不会影响群集功能。遥测数据只会从运行主要故障转移管理器的节点发送。其他节点都不会发送遥测数据。
 2. 遥测数据由以下内容组成：
 
-	- 服务数目
-	- ServiceTypes 数目
-	- Applications 数目
-	- ApplicationUpgrades 数目
-	- FailoverUnits 数目
-	- InBuildFailoverUnits 数目
-	- UnhealthyFailoverUnits 数目
-	- Replicas 数目
-	- InBuildReplicas 数目
-	- StandByReplicas 数目
-	- OfflineReplicas 数目
-	- CommonQueueLength
-	- QueryQueueLength
-	- FailoverUnitQueueLength
-	- CommitQueueLength
-	- Nodes 数目
-	- IsContextComplete: True/False
-	- ClusterId：为每个群集随机生成的 GUID。
-	- ServiceFabricVersion
-	- 从中上传遥测数据的虚拟机或计算机的 IP 地址
+    - 服务数目
+    - ServiceTypes 数目
+    - Applications 数目
+    - ApplicationUpgrades 数目
+    - FailoverUnits 数目
+    - InBuildFailoverUnits 数目
+    - UnhealthyFailoverUnits 数目
+    - Replicas 数目
+    - InBuildReplicas 数目
+    - StandByReplicas 数目
+    - OfflineReplicas 数目
+    - CommonQueueLength
+    - QueryQueueLength
+    - FailoverUnitQueueLength
+    - CommitQueueLength
+    - Nodes 数目
+    - IsContextComplete: True/False
+    - ClusterId：为每个群集随机生成的 GUID。
+    - ServiceFabricVersion
+    - 从中上传遥测数据的虚拟机或计算机的 IP 地址
 
 若要禁用遥测，请将以下参数添加到群集配置中的 *properties* ： *enableTelemetry: false* 。
 
@@ -228,19 +222,18 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 ## 此包中的预览版功能
 无。
 
-
-> [AZURE.NOTE]
-从新的[用于 Windows Server 的独立群集通用版本（5.3.204.x 版）](https://azure.microsoft.com/blog/azure-service-fabric-for-windows-server-now-ga/)开始，可手动或自动将群集升级到将来的版本。请参阅[升级独立 Service Fabric 群集版本](/documentation/articles/service-fabric-cluster-upgrade-windows-server/)文档获取详细信息。
+> [!NOTE]
+从新的[用于 Windows Server 的独立群集通用版本（5.3.204.x 版）](https://azure.microsoft.com/blog/azure-service-fabric-for-windows-server-now-ga/)开始，可手动或自动将群集升级到将来的版本。请参阅[升级独立 Service Fabric 群集版本](./service-fabric-cluster-upgrade-windows-server.md)文档获取详细信息。
 > 
 > 
 
 ## 后续步骤
-- [Windows 独立群集的配置设置](/documentation/articles/service-fabric-cluster-manifest/)
-- [向独立 Service Fabric 群集添加或删除节点](/documentation/articles/service-fabric-cluster-windows-server-add-remove-nodes/)
-- [升级独立 Service Fabric 群集版本](/documentation/articles/service-fabric-cluster-upgrade-windows-server/)
-- [使用运行 Windows 的 Azure VM 创建独立 Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-with-windows-azure-vms/)
-- [使用 Windows 安全性保护 Windows 上的独立群集](/documentation/articles/service-fabric-windows-cluster-windows-security/)
-- [使用 X509 证书保护 Windows 上的独立群集](/documentation/articles/service-fabric-windows-cluster-x509-security/)
+- [Windows 独立群集的配置设置](./service-fabric-cluster-manifest.md)
+- [向独立 Service Fabric 群集添加或删除节点](./service-fabric-cluster-windows-server-add-remove-nodes.md)
+- [升级独立 Service Fabric 群集版本](./service-fabric-cluster-upgrade-windows-server.md)
+- [使用运行 Windows 的 Azure VM 创建独立 Service Fabric 群集](./service-fabric-cluster-creation-with-windows-azure-vms.md)
+- [使用 Windows 安全性保护 Windows 上的独立群集](./service-fabric-windows-cluster-windows-security.md)
+- [使用 X509 证书保护 Windows 上的独立群集](./service-fabric-windows-cluster-x509-security.md)
 
 <!--Image references-->
 

@@ -1,23 +1,22 @@
-<properties
-   pageTitle="Azure SQL 数据库在你的环境中正常工作"
-   description="了解 SQL 数据库如何提供帮助、安全和保护"
-   keywords=""
-   services="sql-database"
-   documentationCenter=""
-   authors="CarlRabeler"
-   manager="jhubbard"
-   editor=""/>  
+---
+title: Azure SQL 数据库在你的环境中正常工作
+description: 了解 SQL 数据库如何提供帮助、安全和保护
+keywords: ''
+services: sql-database
+documentationCenter: ''
+authors: CarlRabeler
+manager: jhubbard
+editor: ''
 
-
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-management"
-   ms.date="10/13/2016"
-   wacn.date="10/31/2016"
-   ms.author="carlrab"/>
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-management
+ms.date: 10/13/2016
+wacn.date: 10/31/2016
+ms.author: carlrab
+---
 
 # Azure SQL 数据库在你的环境中正常工作
 
@@ -29,7 +28,7 @@
 
 选择数据库时，不必移动到新平台或学习新语言。SQL 数据库提供代码示例，无论身在何处均可帮助入门。
 
-[了解有关 SQL 数据库开发的更多信息](/documentation/articles/sql-database-develop-overview/)
+[了解有关 SQL 数据库开发的更多信息](./sql-database-develop-overview.md)
 
 ## 适合于作业的工具
 
@@ -39,15 +38,15 @@
 
 通过相关教程（如创建第一个 SQL 数据库、排查查询问题和快速入门代码示例），SQL 数据库问题的正确答案并不是遥不可及。
 
-[了解有关 SQL 数据库的详细信息](/documentation/articles/sql-database-technical-overview/)
+[了解有关 SQL 数据库的详细信息](./sql-database-technical-overview.md)
 
 ## 后续步骤
 
-获取 [Azure 订阅](/pricing/1rmb-trial)，并[创建首个 Azure SQL 数据库](/documentation/articles/sql-database-get-started/)。
+获取 [Azure 订阅](https://www.azure.cn/pricing/1rmb-trial)，并[创建首个 Azure SQL 数据库](./sql-database-get-started.md)。
 
 ## 其他资源
 
-浏览所有 [SQL 数据库的功能](/home/features/sql-database/)。查看 [SQL 数据库技术概述](/documentation/articles/sql-database-technical-overview/)。
-* [SQL 数据库开发概述](/documentation/articles/sql-database-develop-overview/)
+浏览所有 [SQL 数据库的功能](https://www.azure.cn/home/features/sql-database/)。查看 [SQL 数据库技术概述](./sql-database-technical-overview.md)。
+* [SQL 数据库开发概述](./sql-database-develop-overview.md)
 
 <!---HONumber=Mooncake_1024_2016-->

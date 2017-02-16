@@ -1,33 +1,30 @@
-<properties
-   pageTitle="管理 Azure SQL 数据仓库中的计算能力（Azure 门户预览）| Azure"
-   description="用于管理计算能力的 Azure 门户预览任务。通过调整 DWU 缩放计算资源。或者，暂停和恢复计算资源来节省成本。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 管理 Azure SQL 数据仓库中的计算能力（Azure 门户预览）| Azure
+description: 用于管理计算能力的 Azure 门户预览任务。通过调整 DWU 缩放计算资源。或者，暂停和恢复计算资源来节省成本。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: barbkess;sonyama
+---
 
 # 管理 Azure SQL 数据仓库中的计算能力（Azure 门户）
 
-> [AZURE.SELECTOR]
-- [概述](/documentation/articles/sql-data-warehouse-manage-compute-overview/)
-- [门户](/documentation/articles/sql-data-warehouse-manage-compute-portal/)
-- [PowerShell](/documentation/articles/sql-data-warehouse-manage-compute-powershell/)
-- [REST](/documentation/articles/sql-data-warehouse-manage-compute-rest-api/)
-- [TSQL](/documentation/articles/sql-data-warehouse-manage-compute-tsql/)
-
+> [!div class="op_single_selector"]
+- [概述](./sql-data-warehouse-manage-compute-overview.md)
+- [门户](./sql-data-warehouse-manage-compute-portal.md)
+- [PowerShell](./sql-data-warehouse-manage-compute-powershell.md)
+- [REST](./sql-data-warehouse-manage-compute-rest-api.md)
+- [TSQL](./sql-data-warehouse-manage-compute-tsql.md)
 
 通过扩大计算资源和内存来提升性能，从而满足工作负荷不断变化的需求。通过在非高峰时段缩减资源或同时暂停计算来节省成本。
 
@@ -45,7 +42,7 @@
 
 ## 缩放计算能力
 
-[AZURE.INCLUDE [SQL Data Warehouse scale DWUs description（SQL 数据仓库缩放 DWU 说明）](../../includes/sql-data-warehouse-scale-dwus-description.md)]
+[!INCLUDE [SQL Data Warehouse scale DWUs description（SQL 数据仓库缩放 DWU 说明）](../../includes/sql-data-warehouse-scale-dwus-description.md)]
 
 更改计算资源：
 
@@ -64,7 +61,7 @@
 
 ##<a name="pause-compute"></a> 暂停计算
 
-[AZURE.INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description.md)]
+[!INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description.md)]
 
 暂停数据库：
 
@@ -72,40 +69,34 @@
 
     ![联机状态][6]  
 
-
 1. 若要挂起计算和内存资源，请单击“暂停”，随后将显示确认消息。单击“是”以确认或“否”以取消。
 
     ![确认暂停][7]  
-
 
 1. 当 SQL 数据仓库正在启动数据库时，状态为“正在暂停”。
 2. 当状态为“已暂停”时，则暂停操作完成，将停止对用户收取 DWU 费用。
 
     ![暂停状态][4]  
 
-
 <a name="resume-compute-bk"></a>
 
 ## 恢复计算
 
-[AZURE.INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description.md)] 
+[!INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description.md)] 
 恢复数据库：
 
 1. 打开 [Azure 门户预览][]，并打开数据库。请注意，状态为“已暂停”。
 
     ![暂停数据库][4]  
 
-
 1. 若要恢复数据库，请单击“启动”，随后将显示确认消息。单击“是”确认，单击“否”取消。
 
     ![确认恢复][5]  
-
 
 1. 当 SQL 数据仓库正在启动数据库时，状态为“正在恢复”。
 2. 当状态为“联机”时，该数据库已就绪。
 
     ![联机状态][6]  
-
 
 <a name="next-steps-bk"></a>
 
@@ -122,11 +113,10 @@
 [7]: ./media/sql-data-warehouse-manage-compute-portal/pause-confirm.png
 
 <!--Article references-->
-[Management overview]: /documentation/articles/sql-data-warehouse-overview-manage/
-[Manage compute power overview]: /documentation/articles/sql-data-warehouse-manage-compute-overview/
+[Management overview]: ./sql-data-warehouse-overview-manage.md
+[Manage compute power overview]: ./sql-data-warehouse-manage-compute-overview.md
 
 <!--MSDN references-->
-
 
 <!--Other Web references-->
 

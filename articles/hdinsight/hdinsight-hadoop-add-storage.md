@@ -1,30 +1,31 @@
 <!-- not suitable for Mooncake -->
 
-<properties
-    pageTitle="将其他 Azure 存储帐户添加到 HDInsight | Azure"
-    description="了解如何将其他 Azure 存储帐户添加到现有 HDInsight 群集。"
-    services="hdinsight"
-    documentationCenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun"
-    tags="azure-portal" />
-<tags 
-    ms.service="hdinsight"
-    ms.devlang=""
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="11/28/2016"
-    wacn.date="02/06/2017"
-    ms.author="larryfr" />
+---
+title: 将其他 Azure 存储帐户添加到 HDInsight | Azure
+description: 了解如何将其他 Azure 存储帐户添加到现有 HDInsight 群集。
+services: hdinsight
+documentationCenter: ''
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
+
+ms.service: hdinsight
+ms.devlang: ''
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/28/2016
+wacn.date: 02/06/2017
+ms.author: larryfr
+---
 
 # 将其他 Azure 存储帐户添加到 HDInsight
 
 了解如何使用脚本操作将其他 Azure 存储帐户添加到现有 HDInsight 群集。
 
-> [AZURE.IMPORTANT]
-本文档中的信息是关于在创建群集后将其他存储添加到群集。有关在群集创建过程中添加其他存储帐户的信息，请参阅[创建基于 Linux 的 HDInsight 群集](/documentation/articles/hdinsight-hadoop-provision-linux-clusters/#use-additional-storage)文档的__使用其他存储__部分。
+> [!IMPORTANT]
+本文档中的信息是关于在创建群集后将其他存储添加到群集。有关在群集创建过程中添加其他存储帐户的信息，请参阅[创建基于 Linux 的 HDInsight 群集](./hdinsight-hadoop-provision-linux-clusters.md#use-additional-storage)文档的__使用其他存储__部分。
 
 ## 工作原理
 
@@ -48,7 +49,7 @@
 
 * 停止并重新启动 Oozie、YARN、MapReduce2 和 HDFS 服务，使这些服务选取新的存储帐户信息。
 
-> [AZURE.WARNING]
+> [!WARNING]
 如果存储帐户与 HDInsight 群集不在同一个区域中，你可能会遇到性能不佳的情况。访问不同区域中的数据会在区域 Azure 数据中心外部跨公共 Internet 发送网络流量，从而会导致延迟。此外，将数据发送出区域的数据中心可能成本更高，因为数据离开数据中心时会产生出口费用。
 
 ## 脚本
@@ -61,11 +62,11 @@ __要求__：
 
 ## 使用脚本
 
-有关通过 Azure 门户预览、Azure PowerShell 和 Azure CLI 使用脚本操作的信息，请参阅[使用脚本操作自定义基于 Linux 的 HDInsight 群集](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/#apply-a-script-action-to-a-running-cluster)文档的“将脚本操作应用于正在运行的群集”部分。
+有关通过 Azure 门户预览、Azure PowerShell 和 Azure CLI 使用脚本操作的信息，请参阅[使用脚本操作自定义基于 Linux 的 HDInsight 群集](./hdinsight-hadoop-customize-cluster-linux.md#apply-a-script-action-to-a-running-cluster)文档的“将脚本操作应用于正在运行的群集”部分。
 
 使用自定义文档中提供的信息时，请将任何示例脚本操作 URI 替换为此脚本的 URI (https://hdiconfigactions.blob.core.windows.net/linuxaddstorageaccountv01/add-storage-account-v01.sh)。将任何示例参数替换为要添加到群集的存储帐户的 Azure 存储帐户名称和密钥。
 
-> [AZURE.NOTE]
+> [!NOTE]
 无需将此脚本标记为__持久化__，因为它直接更新群集的 Ambari 配置。
 
 ## 已知问题
@@ -87,7 +88,9 @@ __要求__：
 
 使用此命令时，将 __CLUSTERNAME__ 替换为 HDInsight 群集的名称。将 __PASSWORD__ 替换为群集的 HTTP 登录密码。将 __STORAGEACCOUNT__ 替换为使用脚本操作添加的存储帐户的名称。此命令返回的信息类似于以下文本：
 
-    "MIIB+gYJKoZIhvcNAQcDoIIB6zCCAecCAQAxggFaMIIBVgIBADA+MCoxKDAmBgNVBAMTH2RiZW5jcnlwdGlvbi5henVyZWhkaW5zaWdodC5uZXQCEA6GDZMW1oiESKFHFOOEgjcwDQYJKoZIhvcNAQEBBQAEggEATIuO8MJ45KEQAYBQld7WaRkJOWqaCLwFub9zNpscrquA2f3o0emy9Vr6vu5cD3GTt7PmaAF0pvssbKVMf/Z8yRpHmeezSco2y7e9Qd7xJKRLYtRHm80fsjiBHSW9CYkQwxHaOqdR7DBhZyhnj+DHhODsIO2FGM8MxWk4fgBRVO6CZ5eTmZ6KVR8wYbFLi8YZXb7GkUEeSn2PsjrKGiQjtpXw1RAyanCagr5vlg8CicZg1HuhCHWf/RYFWM3EBbVz+uFZPR3BqTgbvBhWYXRJaISwssvxotppe0ikevnEgaBYrflB2P+PVrwPTZ7f36HQcn4ifY1WRJQ4qRaUxdYEfzCBgwYJKoZIhvcNAQcBMBQGCCqGSIb3DQMHBAhRdscgRV3wmYBg3j/T1aEnO3wLWCRpgZa16MWqmfQPuansKHjLwbZjTpeirqUAQpZVyXdK/w4gKlK+t1heNsNo1Wwqu+Y47bSAX1k9Ud7+Ed2oETDI7724IJ213YeGxvu4Ngcf2eHW+FRK"
+```
+"MIIB+gYJKoZIhvcNAQcDoIIB6zCCAecCAQAxggFaMIIBVgIBADA+MCoxKDAmBgNVBAMTH2RiZW5jcnlwdGlvbi5henVyZWhkaW5zaWdodC5uZXQCEA6GDZMW1oiESKFHFOOEgjcwDQYJKoZIhvcNAQEBBQAEggEATIuO8MJ45KEQAYBQld7WaRkJOWqaCLwFub9zNpscrquA2f3o0emy9Vr6vu5cD3GTt7PmaAF0pvssbKVMf/Z8yRpHmeezSco2y7e9Qd7xJKRLYtRHm80fsjiBHSW9CYkQwxHaOqdR7DBhZyhnj+DHhODsIO2FGM8MxWk4fgBRVO6CZ5eTmZ6KVR8wYbFLi8YZXb7GkUEeSn2PsjrKGiQjtpXw1RAyanCagr5vlg8CicZg1HuhCHWf/RYFWM3EBbVz+uFZPR3BqTgbvBhWYXRJaISwssvxotppe0ikevnEgaBYrflB2P+PVrwPTZ7f36HQcn4ifY1WRJQ4qRaUxdYEfzCBgwYJKoZIhvcNAQcBMBQGCCqGSIb3DQMHBAhRdscgRV3wmYBg3j/T1aEnO3wLWCRpgZa16MWqmfQPuansKHjLwbZjTpeirqUAQpZVyXdK/w4gKlK+t1heNsNo1Wwqu+Y47bSAX1k9Ud7+Ed2oETDI7724IJ213YeGxvu4Ngcf2eHW+FRK"
+```
 
 此文本是用于访问存储帐户的加密密钥的示例。
 
@@ -111,8 +114,10 @@ __要求__：
 
     以下是名为 __mystorage__ 的存储帐户的示例条目：
 
-        fs.azure.account.keyprovider.mystorage.blob.core.chinacloudapi.cn
-        fs.azure.account.key.mystorage.blob.core.chinacloudapi.cn
+    ```
+    fs.azure.account.keyprovider.mystorage.blob.core.chinacloudapi.cn
+    fs.azure.account.key.mystorage.blob.core.chinacloudapi.cn
+    ```
 
 4. 确定该存储帐户的密钥后，需要使用该条目右侧的红色“-”图标删除该条目。然后使用“保存”按钮保存更改。
 
@@ -128,6 +133,6 @@ __要求__：
 
 ## 后续步骤
 
-在本文档中，已学习如何将其他存储帐户添加到现有 HDInsight 群集。有关脚本操作的详细信息，请参阅 [Customize Linux-based HDInsight clusters using script action](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/)（使用脚本操作自定义基于 Linux 的 HDInsight 群集）
+在本文档中，已学习如何将其他存储帐户添加到现有 HDInsight 群集。有关脚本操作的详细信息，请参阅 [Customize Linux-based HDInsight clusters using script action](./hdinsight-hadoop-customize-cluster-linux.md)（使用脚本操作自定义基于 Linux 的 HDInsight 群集）
 
 <!---HONumber=Mooncake_0103_2017-->

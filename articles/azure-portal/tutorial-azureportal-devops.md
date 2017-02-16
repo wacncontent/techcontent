@@ -1,22 +1,21 @@
-<properties
-	pageTitle="教程：使用 Azure 门户进行开发运营 | Azure"
-	description="了解 Azure 门户中的各种 DevOps 工作流。"
-	services="azure-portal"
-	documentationCenter=""
-	authors="mlearned"
-	manager="douge"
-	editor="mlearned"/>
+---
+title: 教程：使用 Azure 门户进行开发运营 | Azure
+description: 了解 Azure 门户中的各种 DevOps 工作流。
+services: azure-portal
+documentationCenter: ''
+authors: mlearned
+manager: douge
+editor: mlearned
 
-<tags
-	ms.service="multiple"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="hero-article"
-	ms.date="06/05/2016"
-	wacn.date="11/14/2016"
-	ms.author="mlearned"/>
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 06/05/2016
+wacn.date: 11/14/2016
+ms.author: mlearned
+---
 
 # 教程：使用 Azure 门户进行开发运营
 
@@ -32,24 +31,23 @@ Azure 平台提供各式各样的灵活 DevOps（开发运营）工作流。在�
 
 ## 创建 Web 应用程序和启用连续部署
 
-创建一个要在本教程余下部分中使用的、包含 [Azure App Service](/documentation/services/app-service/) 的 Web 应用。首先，你要启用从源代码存储库到正在运行的 Azure 环境的连续部署。
+创建一个要在本教程余下部分中使用的、包含 [Azure App Service](../app-service/index.md) 的 Web 应用。首先，你要启用从源代码存储库到正在运行的 Azure 环境的连续部署。
 
 1.  登录到 Azure 门户预览。 
 
 2.  选择“应用程序服务”&gt;“添加”图标并输入名称，选择订阅，然后创建新的资源组作为服务的容器。
 
-    资源组可让你管理解决方案的各个方面，例如计费、部署和监视，所有这些操作都可以通过 [Azure Resource Manager](/documentation/articles/resource-group-overview/) 以单个组的形式完成。
+    资源组可让你管理解决方案的各个方面，例如计费、部署和监视，所有这些操作都可以通过 [Azure Resource Manager](../azure-resource-manager/resource-group-overview.md) 以单个组的形式完成。
 
-	![image1][image1]
-
+    ![image1][image1]
 
 3.  片刻之后即可创建 App Service。请花几分钟时间在门户中了解服务的各个菜单选项。
 
-	![image2][image2]
+    ![image2][image2]
 
 4.  单击 URL。请注意工具和存储库的各个可用选项。你也可以使用自己选择的语言和框架，包括 .NET、Java 和 Ruby。
 
-	![image3][image3]
+    ![image3][image3]
 
 3.  Azure 门户能使连续部署变成只需执行几个简单步骤的轻松过程。在 Azure 门户预览中，通过刚刚创建的 App Service 对应的图标选择设置。
 
@@ -61,7 +59,7 @@ Azure 平台提供各式各样的灵活 DevOps（开发运营）工作流。在�
 
 4.  然后，配置某些设置，以便为应用启用连续部署。单击“部署源”，然后单击“选择源”。请注意针对存储库源提供的各个选项。
 
-	![image6][image6]
+    ![image6][image6]
 
 1.  对于本示例，请选择“GitHub”。（可选）选择所需的存储库，并设置授权凭据。
 
@@ -89,11 +87,11 @@ Azure 平台提供各式各样的灵活 DevOps（开发运营）工作流。在�
 
 7.  此时，如果你尝试加载 App Service 页面，可能会收到 403 错误。在本示例中，这是因为页面（例如 index.htm 或 default.html 之类的文件）没有典型的默认文档设置。可以使用 Azure 门户中的工具快速解决此问题。在 Azure 门户中，选择“设置”&gt;“应用程序设置”。
 
-	 ![image13][image13]
+     ![image13][image13]
 
 8.  此时将打开应用程序设置边栏选项卡。输入“SamplePage.html”页面的名称，然后单击“保存”。花几分钟时间了解其他设置。
 
-	![image14][image14]
+    ![image14][image14]
 
 9.  （可选）刷新浏览器 URL，以确保看到预期的更改。在本例中，页面上填充了一些简单的文本。每次对存储库进行额外的更改都会导致进行新的自动部署。
 
@@ -165,7 +163,7 @@ Azure 平台提供各式各样的灵活 DevOps（开发运营）工作流。在�
 
     ![image30][image30]
 
-	![image31][image31]
+    ![image31][image31]
 
 1.  开始运行测试后，可以监视状态。
 
@@ -221,7 +219,7 @@ Azure 提供了许多功能用于对正在运行的应用程序进行监视和�
 
 7.  向下滚动到“功能”类别，并选择“诊断日志”。
 
-  	 ![image45][image45]
+       ![image45][image45]
 
 8.  请注意日志记录的各个选项。打开“Web 服务器日志记录”，然后单击“保存”。
 
@@ -271,7 +269,7 @@ Azure 提供了许多功能用于对正在运行的应用程序进行监视和�
 
 2.  在右侧的边栏选项卡中，向下滚动到“功能”类别。
 
-	 ![image57][image57]
+     ![image57][image57]
 
 1.  选择“备份”；一个边栏选项卡随即在右侧打开。
 
@@ -321,18 +319,15 @@ Azure 提供了许多功能用于对正在运行的应用程序进行监视和�
 
      ![image69][image69]
 
-
 ## 摘要
 
 本教程演示了 Azure 平台的某些强大功能，包括快速启用 Web 应用的连续部署、执行各种开发和测试活动、对 Live App 进行监视和故障排除，以及管理密钥策略（例如灾难恢复、标识和基于角色的访问控制）。Azure 平台支持对这些 DevOps 工作流使用集成体验，你既可以高效地工作，同时又不会超出手头任务的范围。
 
-
 ## 后续步骤 
 
-* Azure Resource Manager 对于在 Azure 平台中启用 DevOps 至关重要。有关详细信息，请访问 [Azure Resource Manager overview](/documentation/articles/resource-group-overview/)（Azure Resource Manager 概述）。
+* Azure Resource Manager 对于在 Azure 平台中启用 DevOps 至关重要。有关详细信息，请访问 [Azure Resource Manager overview](../azure-resource-manager/resource-group-overview.md)（Azure Resource Manager 概述）。
 
-* 有关 Azure App Service 部署的详细信息，请访问 [Deploy your app to Azure App Service](/documentation/articles/web-sites-deploy/)（将应用部署到 Azure App Service）
-
+* 有关 Azure App Service 部署的详细信息，请访问 [Deploy your app to Azure App Service](../app-service-web/web-sites-deploy.md)（将应用部署到 Azure App Service）
 
 [image1]: ./media/tutorial-azureportal-devops/image1.png
 [image2]: ./media/tutorial-azureportal-devops/image2.png

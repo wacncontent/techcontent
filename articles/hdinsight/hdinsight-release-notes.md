@@ -1,34 +1,35 @@
-<properties
-    pageTitle="Azure HDInsight 上的 Hadoop 组件发行说明 | Azure"
-    description="Azure HDInsight 的 Hadoop 组件的最新发行说明和版本。获取有关 Hadoop、Apache Storm 和 HBase 的开发技巧和详细信息。"
-    services="hdinsight"
-    documentationcenter=""
-    editor="cgronlun"
-    manager="jhubbard"
-    author="nitinme"
-    tags="azure-portal" />
-<tags
-    ms.assetid="a363e5f6-dd75-476a-87fa-46beb480c1fe"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/23/2016"
-    wacn.date="01/25/2017"
-    ms.author="nitinme" />
+---
+title: Azure HDInsight 上的 Hadoop 组件发行说明 | Azure
+description: Azure HDInsight 的 Hadoop 组件的最新发行说明和版本。获取有关 Hadoop、Apache Storm 和 HBase 的开发技巧和详细信息。
+services: hdinsight
+documentationcenter: ''
+editor: cgronlun
+manager: jhubbard
+author: nitinme
+tags: azure-portal
+
+ms.assetid: a363e5f6-dd75-476a-87fa-46beb480c1fe
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/23/2016
+wacn.date: 01/25/2017
+ms.author: nitinme
+---
 
 # Azure HDInsight 上的 Hadoop 组件发行说明
 
-[AZURE.INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
 
 ##Spark 2.0.1 on HDInsight 3.5 2016 年 11 月 18 日发行说明
 Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 
 ## R Server 9.0 on HDInsight 3.5 (Spark 2.0) 2016 年 11 月 16 日发行说明
-*	R Server 群集现在包括以下两个版本的选项：R Server 9.0 on HDI 3.5 (Spark 2.0) 和 R Server 8.0 on HDI 3.4 (Spark 1.6)。
-*	R Server 9.0 on HDI 3.5 (Spark 2.0) 以 R 3.3.2 为基础构建，包括名为 RxHiveData 和 RxParquetData 的全新 ScaleR 数据源功能，可以将数据从 Hive 和 Parquet 直接加载到 Spark DataFrames 供 ScaleR 分析。有关详细信息，可以使用 ?RxHiveData 和 ?RxParquetData 命令查看 R 中这些函数的内联帮助。
-*	RStudio Server 社区版现在可作为预配流的一部分在“群集配置”边栏选项卡上默认安装（附带退出选项）。
+* R Server 群集现在包括以下两个版本的选项：R Server 9.0 on HDI 3.5 (Spark 2.0) 和 R Server 8.0 on HDI 3.4 (Spark 1.6)。
+* R Server 9.0 on HDI 3.5 (Spark 2.0) 以 R 3.3.2 为基础构建，包括名为 RxHiveData 和 RxParquetData 的全新 ScaleR 数据源功能，可以将数据从 Hive 和 Parquet 直接加载到 Spark DataFrames 供 ScaleR 分析。有关详细信息，可以使用 ?RxHiveData 和 ?RxParquetData 命令查看 R 中这些函数的内联帮助。
+* RStudio Server 社区版现在可作为预配流的一部分在“群集配置”边栏选项卡上默认安装（附带退出选项）。
 
 ## Spark 2.0 on HDInsight 2016 年 11 月 9 日发行说明
 * HDInsight 3.5 上的 Spark 2.0 群集现在支持 Livy 和 Jupyter 服务。
@@ -59,9 +60,9 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 
 ## R Server on HDInsight 2016 年 8 月 17 日发行说明
 * R Server 8.0.5 - 此版本主要包含 Bug 修复。有关详细信息，请参阅 [R Server Release Notes](https://msdn.microsoft.com/microsoft-r/notes/r-server-notes)（R Server 发行说明）。
-* 边缘节点上的 AzureML 包 - 可以通过[此 R 包](https://cran.r-project.org/web/packages/AzureML/vignettes/getting_started.html)以 Azure ML Web 服务形式发布和使用 R 模型。有关详细信息，请参阅[“R Server on HDInsight 概述”](/documentation/articles/hdinsight-hadoop-r-server-overview/)一文的[“使模型具有可操作性”](/documentation/articles/hdinsight-hadoop-r-server-overview/#operationalize-a-model)部分。
+* 边缘节点上的 AzureML 包 - 可以通过[此 R 包](https://cran.r-project.org/web/packages/AzureML/vignettes/getting_started.html)以 Azure ML Web 服务形式发布和使用 R 模型。有关详细信息，请参阅[“R Server on HDInsight 概述”](./hdinsight-hadoop-r-server-overview.md)一文的[“使模型具有可操作性”](./hdinsight-hadoop-r-server-overview.md#operationalize-a-model)部分。
 * [最常用的 100 个 R 包](https://github.com/metacran/cranlogs)的 Linux 依赖项 - 现已预装这些 Linux 包依赖项。
-* 将 R 包添加到数据节点时的 CRAN 存储库使用选项。有关详细信息，请参阅[“开始使用 R Server on HDInsight”](/documentation/articles/hdinsight-hadoop-r-server-get-started/)一文的[“安装 R 包”](/documentation/articles/hdinsight-hadoop-r-server-get-started/#install-r-packages)部分。
+* 将 R 包添加到数据节点时的 CRAN 存储库使用选项。有关详细信息，请参阅[“开始使用 R Server on HDInsight”](./hdinsight-hadoop-r-server-get-started.md)一文的[“安装 R 包”](./hdinsight-hadoop-r-server-get-started.md#install-r-packages)部分。
 * 改进在创建群集时进行 R Server 预配的可靠性。
 
 ## HDInsight 2016 年 8 月 1 日发行说明
@@ -137,7 +138,7 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 
 从此版本开始，我们更改了基于 Linux 的 HDInsight 群集的来宾 OS 修补策略。新策略的目标是显著减少因修补而导致的重启次数。新策略将继续修补 Linux 群集上的虚拟机 (VM)，开始时间为每个星期一或星期四的凌晨 0 点 (UTC)，采用在任何给定群集中跨节点进行交错修补的方式。但是，任何给定 VM 最多只会因来宾 OS 修补而 30 天重启一次。此外，对于新创建的群集，第一次重启的时间不会早于群集创建日期之后的 30 天。
 
-> [AZURE.NOTE]
+> [!NOTE]
 这些更改只适用于其版本号不低于此发行版本的新建群集。
 >
 >
@@ -194,8 +195,8 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 | --- | --- | --- | --- | --- |
 | 自定义 HDI 3.4 的元存储升级问题 |如果使用的是此前已在另一低版 HDInsight 群集上使用过的自定义元存储，则无法创建群集。这是由于升级脚本错误（现已修复） |群集创建 |全部 |不适用 |
 | Livy 崩溃恢复 |为通过 Livy 提交的任何作业提供作业状态复原 |可靠性 |Linux 上的 Spark |不适用 |
-| Jupyter 内容 HA |提供通过与群集关联的存储帐户来回保存和加载 Jupyter 笔记本内容的功能。有关详细信息，请参阅[可供 Jupyter 笔记本使用的内核](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-kernels/)。 |笔记本 |Linux 上的 Spark |不适用 |
-| 删除 Jupter 笔记本中的 hiveContext |使用 `%%sql` 幻数而非 `%%hive` 幻数。SqlContext 相当于 hiveContext。有关详细信息，请参阅[可供 Jupyter 笔记本使用的内核](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-kernels/) |笔记本 |Linux 上的 Spark 群集 |不适用 |
+| Jupyter 内容 HA |提供通过与群集关联的存储帐户来回保存和加载 Jupyter 笔记本内容的功能。有关详细信息，请参阅[可供 Jupyter 笔记本使用的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)。 |笔记本 |Linux 上的 Spark |不适用 |
+| 删除 Jupter 笔记本中的 hiveContext |使用 `%%sql` 幻数而非 `%%hive` 幻数。SqlContext 相当于 hiveContext。有关详细信息，请参阅[可供 Jupyter 笔记本使用的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md) |笔记本 |Linux 上的 Spark 群集 |不适用 |
 | 不推荐使用较早的 Spark 版本 |较早的 Spark 版本 1.3.1 将于 5 月 31 日从服务中删除 |服务 |Windows 上的 Spark 群集 |不适用 |
 
 ## HDInsight 2016 年 3 月 29 日发行说明
@@ -215,9 +216,9 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 
 | 标题 | 说明 | 受影响区域（例如服务、组件或 SDK） | 群集类型（例如 Hadoop、HBase 或 STORM） | JIRA（如果适用） |
 | --- | --- | --- | --- | --- |
-| 添加了 HDInsight 3.4 版本并更新了所有 HDInsight 群集的 HDP 版本 |在此版本中，我们添加了 HDInsight v3.4（基于 HDP 2.4）并更新了其他 HDP 版本。[此处](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.4.0/bk_HDP_RelNotes/content/ch_relnotes_v240.html)提供了 HDP 2.4 发行说明；[此处](/documentation/articles/hdinsight-component-versioning/)提供了有关 HDInsight 版本的详细信息。 |服务 |所有 Linux 群集 |不适用 |
+| 添加了 HDInsight 3.4 版本并更新了所有 HDInsight 群集的 HDP 版本 |在此版本中，我们添加了 HDInsight v3.4（基于 HDP 2.4）并更新了其他 HDP 版本。[此处](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.4.0/bk_HDP_RelNotes/content/ch_relnotes_v240.html)提供了 HDP 2.4 发行说明；[此处](./hdinsight-component-versioning.md)提供了有关 HDInsight 版本的详细信息。 |服务 |所有 Linux 群集 |不适用 |
 | Spark 1.6.0 |HDInsight 3.4 群集现在包括 Spark 1.6.0 |服务 |Linux 上的 Spark 群集 |不适用 |
-| Jupyter 笔记本增强功能 |适用于 Spark 群集的 Jupyter 笔记本现在提供更多的 Spark 内核。该笔记本还包括多种增强功能，例如使用 %%幻数、自动可视化，以及集成 Python 可视化库（例如 matplotlib）。有关详细信息，请参阅[可供 Jupyter 笔记本使用的内核](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-kernels/)。 |服务 |Linux 上的 Spark 群集 |不适用 |
+| Jupyter 笔记本增强功能 |适用于 Spark 群集的 Jupyter 笔记本现在提供更多的 Spark 内核。该笔记本还包括多种增强功能，例如使用 %%幻数、自动可视化，以及集成 Python 可视化库（例如 matplotlib）。有关详细信息，请参阅[可供 Jupyter 笔记本使用的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)。 |服务 |Linux 上的 Spark 群集 |不适用 |
 
 ## HDInsight 2016 年 3 月 22 日发行说明
 随此版本一起部署的 HDInsight 群集的所有版本号包括：
@@ -289,7 +290,7 @@ Spark 2.0.1 现可在 Spark 群集（HDInsight 版本 3.5）上使用。
 
 | 标题 | 说明 | 受影响区域（例如服务、组件或 SDK） | 群集类型（例如 Hadoop、HBase 或 STORM） | JIRA（如果适用） |
 | --- | --- | --- | --- | --- |
-| 添加了 HDInsight 3.3 版本并更新了所有 HDInsight 群集的 HDP 版本 |在此版本中，我们添加了 HDInsight v3.3（基于 HDP 2.3）并更新了其他 HDP 版本。[此处](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_RelNotes/content/ch_relnotes_v230.html)提供了 HDP 2.3 发行说明；[此处](/documentation/articles/hdinsight-component-versioning/)提供了有关 HDInsight 版本的详细信息。 |服务 |全部 |不适用 |
+| 添加了 HDInsight 3.3 版本并更新了所有 HDInsight 群集的 HDP 版本 |在此版本中，我们添加了 HDInsight v3.3（基于 HDP 2.3）并更新了其他 HDP 版本。[此处](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_RelNotes/content/ch_relnotes_v230.html)提供了 HDP 2.3 发行说明；[此处](./hdinsight-component-versioning.md)提供了有关 HDInsight 版本的详细信息。 |服务 |全部 |不适用 |
 
 ## HDInsight 2015 年 11 月 30 日发行说明
 随此版本一起部署的 HDInsight 群集的所有版本号包括：
@@ -1063,8 +1064,8 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 <th>JIRA（如果适用）</th>
 </tr>
 <tr>
-<td><a href = "/documentation/articles/hdinsight-hadoop-customize-cluster" target="_blank">群集自定义正式发布</a></td>
-<td><p>自定义可让你自定义 Azure HDInsight 群集，以搭配使用 Apache Hadoop 生态系统的项目。使用这项新功能，现在可以试验并部署 Hadoop 项目到 Azure HDInsight。这通过启用“脚本操作”功能启用，该功能可以使用自定义脚本，以任意方式修改 Hadoop 群集。此自定义适用于所有类型的 HDInsight 群集，包括 Hadoop、HBase 和 Storm。为了演示这项强大功能，我们记录了过程以安装流行的 <a href = "/documentation/articles/hdinsight-hadoop-spark-install" target="_blank">Spark</a>、<a href = "/documentation/articles/hdinsight-hadoop-r-scripts" target="_blank">R</a><a href = "/documentation/articles/hdinsight-hadoop-solr-install" target="_blank">、Solr</a> 和 <a href = "/documentation/articles/hdinsight-hadoop-giraph-install" target="_blank">Giraph</a> 模块。这个版本还添加了让客户通过 Azure 门户预览指定其自定义脚本操作的功能、提供如何使用帮助器方法生成自定义脚本操作的指导和最佳作法，并提供有关如何测试脚本操作的指导。</p></td>
+<td><a href = "./hdinsight-hadoop-customize-cluster.md" target="_blank">群集自定义正式发布</a></td>
+<td><p>自定义可让你自定义 Azure HDInsight 群集，以搭配使用 Apache Hadoop 生态系统的项目。使用这项新功能，现在可以试验并部署 Hadoop 项目到 Azure HDInsight。这通过启用“脚本操作”功能启用，该功能可以使用自定义脚本，以任意方式修改 Hadoop 群集。此自定义适用于所有类型的 HDInsight 群集，包括 Hadoop、HBase 和 Storm。为了演示这项强大功能，我们记录了过程以安装流行的 <a href = "./hdinsight-hadoop-spark-install.md" target="_blank">Spark</a>、<a href = "./hdinsight-hadoop-r-scripts.md" target="_blank">R</a><a href = "./hdinsight-hadoop-solr-install.md" target="_blank">、Solr</a> 和 <a href = "./hdinsight-hadoop-giraph-install.md" target="_blank">Giraph</a> 模块。这个版本还添加了让客户通过 Azure 门户预览指定其自定义脚本操作的功能、提供如何使用帮助器方法生成自定义脚本操作的指导和最佳作法，并提供有关如何测试脚本操作的指导。</p></td>
 <td>功能正式发布</td>
 <td>全部</td>
 <td>不适用</td>
@@ -1193,11 +1194,11 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 </tr>
 </table>
 
-> [AZURE.NOTE]
+> [!NOTE]
 为了演示群集自定义所提供的新功能，此过程使用脚本操作在所述的群集上安装 Spark 和 R 模块。有关详细信息，请参阅：
 
-* [在 HDInsight 群集上安装和使用 Spark 1.0](/documentation/articles/hdinsight-hadoop-spark-install/)
-* [在 HDInsight Hadoop 群集上安装并使用 R](/documentation/articles/hdinsight-hadoop-r-scripts/)
+* [在 HDInsight 群集上安装和使用 Spark 1.0](./hdinsight-hadoop-spark-install.md)
+* [在 HDInsight Hadoop 群集上安装并使用 R](./hdinsight-hadoop-r-scripts.md)
 
 ## HDInsight 2014 年 11 月 7 日发行说明
 
@@ -1234,7 +1235,7 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 </tr>
 </table>
 
-> [AZURE.NOTE]
+> [!NOTE]
 这个版本已修复防止门户显示、防止 SDK 或 Windows PowerShell 返回完整版本号的错误。
 
 ## 2014 年 10 月 15 日发行说明
@@ -1274,12 +1275,16 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 ## 2014 年 8 月 24 日发行说明
 * 我们正在添加以下 WebHCat 配置 (HIVE-7155)，该配置可将 Templeton 控制器作业的默认内存限制设置为 1 GB：（以前的默认值是 512 MB。）
 
-        templeton.mapper.memory.mb (=1024)
+    ```
+    templeton.mapper.memory.mb (=1024)
+    ```
 
     * 这项更改解决了某些 Hive 查询由于内存限制较低而遇到的以下错误：“容器即将超出物理内存限制”。
     * 要恢复到旧默认值，你可以在创建群集时使用以下命令通过 Azure PowerShell 将此配置值设置为 512：
 
-            Add-AzureRmHDInsightConfigValues -Core @{"templeton.mapper.memory.mb"="512";}
+        ```
+        Add-AzureRmHDInsightConfigValues -Core @{"templeton.mapper.memory.mb"="512";}
+        ```
 * zookeeper 角色的主机名已更改为 *zookeeper*。这会影响群集内部的名称解析，但不会影响外部 REST API。如果你的组件使用了 *zookeepernode* 主机名，则需更新这些组件，让其使用新名称。三个 zookeeper 节点的新名称为：
 
     * zookeeper0
@@ -1296,7 +1301,7 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 * **HDInsight 已在新区域推出：**我们已将 HDInsight 的地理覆盖范围扩展到三个新的区域。HDInsight 客户可以在这些区域创建群集。
     * 中国东部
     * 中国北部
-* HDInsight 1.6 版（HDP1.1、Hadoop 1.0.3）和 HDInsight 2.1 版（HDP1.3、Hadoop 1.2）即将从 Azure 门户预览中删除。可以继续使用 Azure PowerShell cmdlet [New-AzureRmHDInsightCluster](http://msdn.microsoft.com/zh-cn/library/dn593744.aspx) 或 [HDInsight SDK](http://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx) 来创建这些版本的 Hadoop 群集。有关详细信息，请参阅 [HDInsight 组件版本控制](/documentation/articles/hdinsight-component-versioning/)页。
+* HDInsight 1.6 版（HDP1.1、Hadoop 1.0.3）和 HDInsight 2.1 版（HDP1.3、Hadoop 1.2）即将从 Azure 门户预览中删除。可以继续使用 Azure PowerShell cmdlet [New-AzureRmHDInsightCluster](http://msdn.microsoft.com/zh-cn/library/dn593744.aspx) 或 [HDInsight SDK](http://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx) 来创建这些版本的 Hadoop 群集。有关详细信息，请参阅 [HDInsight 组件版本控制](./hdinsight-component-versioning.md)页。
 * 此版本中发生的 Hortonworks 数据平台 (HDP) 更改：
 
 <table border="1">
@@ -1317,17 +1322,21 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 ### Apache Mahout 已预装在 HDInsight 3.1 上
  [Mahout](http://hortonworks.com/hadoop/mahout/) 已预装在 HDInsight 3.1 Hadoop 群集上，从而无需任何其他群集配置，就能运行 Mahout 作业。例如，可以使用远程桌面协议 (RDP) 远程访问 Hadoop 群集，并且无需执行附加的步骤就能运行 Hello World Mahout 命令：
 
-        mahout org.apache.mahout.classifier.df.tools.Describe -p /user/hdp/glass.data -f /user/hdp/glass.info -d I 9 N L
+ ```
+    mahout org.apache.mahout.classifier.df.tools.Describe -p /user/hdp/glass.data -f /user/hdp/glass.info -d I 9 N L
 
-        mahout org.apache.mahout.classifier.df.BreimanExample -d /user/hdp/glass.data -ds /user/hdp/glass.info -i 10 -t 100
+    mahout org.apache.mahout.classifier.df.BreimanExample -d /user/hdp/glass.data -ds /user/hdp/glass.info -i 10 -t 100
+ ```
 
 有关此过程的更完整说明，请参阅 Apache Mahout 网站上的 [Breiman 示例](https://mahout.apache.org/users/classification/breiman-example.html)文档。
 
 ### Hive 查询可以在 HDInsight 3.1 中使用 Tez
 Hive 0.13 已在 HDInsight 3.1 中提供，并且能够使用 Tez 运行查询，这带来了极大的性能改善。默认情况下，没有为 Hive 查询启用 Tez。要使用 Tez，必须选择启用它。可以通过运行以下代码片段来启用 Tez：
 
-        set hive.execution.engine=tez;
-        select sc_status, count(*), histogram_numeric(sc_bytes,5) from website_logs_orc_local group by sc_status;
+```
+    set hive.execution.engine=tez;
+    select sc_status, count(*), histogram_numeric(sc_bytes,5) from website_logs_orc_local group by sc_status;
+```
 
 Hortonworks 发布了使用以标准基准版提供的 Tez 后，Hive 查询性能得到增强的明细。有关详细信息，请参阅[适用于 Enterprise Hadoop 的 Apache Hive 13 基准](http://hortonworks.com/blog/benchmarking-apache-hive-13-enterprise-hadoop/)。
 
@@ -1473,7 +1482,7 @@ HDInsight 3.x (HDP2.x) 中不再存在以下依赖项：
 * 0\.8.0.RELEASE']
 
 ### 驱动程序
-SQL Server 的 Java 数据库连接 (JDBC) 驱动程序由 HDInsight 在内部使用，不用于外部操作。如果希望使用开放数据库连接 (ODBC) 连接到 HDInsight，请使用 Microsoft Hive ODBC 驱动程序。有关详细信息，请参阅[使用 Microsoft Hive ODBC 驱动程序将 Excel 连接到 HDInsight](/documentation/articles/hdinsight-connect-excel-hive-ODBC-driver/)。
+SQL Server 的 Java 数据库连接 (JDBC) 驱动程序由 HDInsight 在内部使用，不用于外部操作。如果希望使用开放数据库连接 (ODBC) 连接到 HDInsight，请使用 Microsoft Hive ODBC 驱动程序。有关详细信息，请参阅[使用 Microsoft Hive ODBC 驱动程序将 Excel 连接到 HDInsight](./hdinsight-connect-excel-hive-ODBC-driver.md)。
 
 ### Bug 修复
 随着此版本的发行，我们已完成了多项 Bug 修复，并更新了以下 HDInsight 版本：
@@ -1504,8 +1513,8 @@ SQL Server 的 Java 数据库连接 (JDBC) 驱动程序由 HDInsight 在内部�
 
 [webpi-link]: http://go.microsoft.com/?linkid=9811175&clcid=0x409
 
-[hdinsight-install-spark]: /documentation/articles/hdinsight-hadoop-spark-install/
-[hdinsight-r-scripts]: /documentation/articles/hdinsight-hadoop-r-scripts/
+[hdinsight-install-spark]: ./hdinsight-hadoop-spark-install.md
+[hdinsight-r-scripts]: ./hdinsight-hadoop-r-scripts.md
 
 <!---HONumber=Mooncake_0120_2017-->
 <!--Update_Description: update from ASM to ARM-->

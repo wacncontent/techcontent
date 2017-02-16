@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Lotus Domino 连接器 | Azure"
-    description="本文介绍如何配置 Microsoft 的 Lotus Domino 连接器。"
-    services="active-directory"
-    documentationcenter=""
-    author="AndKjell"
-    manager="femila"
-    editor="" />  
+---
+title: Lotus Domino 连接器 | Azure
+description: 本文介绍如何配置 Microsoft 的 Lotus Domino 连接器。
+services: active-directory
+documentationcenter: ''
+author: AndKjell
+manager: femila
+editor: ''
 
-<tags
-    ms.assetid="e07fd469-d862-470f-a3c6-3ed2a8d745bf"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/01/2016"
-    ms.author="billmath"
-    wacn.date="12/15/2016"/>
+ms.assetid: e07fd469-d862-470f-a3c6-3ed2a8d745bf
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/01/2016
+ms.author: billmath
+wacn.date: 12/15/2016
+---
 
 # Lotus Domino 连接器技术参考
 本指南介绍 Lotus Domino 连接器。本文适用于以下产品：

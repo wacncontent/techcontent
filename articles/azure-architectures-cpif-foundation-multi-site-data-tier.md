@@ -1,20 +1,20 @@
-<properties 
-   pageTitle="多站点数据层（Azure 体系结构模式）" 
-   description="多站点数据层模式是 Foundation 区域的一部分，在 CPIF 体系结构文档中对其进行了广泛的介绍。" 
-   services="" 
-   documentationCenter="" 
-   authors="arynes" 
-   manager="fredhar" 
-   editor=""/>
+---
+title: 多站点数据层（Azure 体系结构模式）
+description: 多站点数据层模式是 Foundation 区域的一部分，在 CPIF 体系结构文档中对其进行了广泛的介绍。
+services: ''
+documentationCenter: ''
+authors: arynes
+manager: fredhar
+editor: ''
 
-<tags
-   ms.service="cloud-services"
-   ms.date="03/25/2015"
-   wacn.date="10/03/2015"/>
+ms.service: cloud-services
+ms.date: 03/25/2015
+wacn.date: 10/03/2015
+---
 
 # 多站点数据层（Azure 体系结构模式）
 
-[云平台集成框架 (CPIF)](/documentation/articles/azure-architectures-cpif-overview/) 提供工作负荷整合指南，将应用程序载入到 Microsoft 云解决方案中。
+[云平台集成框架 (CPIF)](./azure-architectures-cpif-overview.md) 提供工作负荷整合指南，将应用程序载入到 Microsoft 云解决方案中。
 
 CPIF 介绍了组织、客户和合作伙伴应该如何设计和部署使用混合云平台及 Azure、System Center 和 Windows Server 管理功能的面向云的工作负荷。
 
@@ -35,7 +35,7 @@ CPIF 介绍了组织、客户和合作伙伴应该如何设计和部署使用混
 本文档介绍了出于可用性和冗余性的目的，在多个地理区域对 Microsoft SQL Server 的内容提供访问的模式。关键的服务如下图所示，不考虑将访问数据本身的应用程序或 Web 层。下图是相关服务的简单说明，及其作为此模式的一部分它们将如何使用。
 
 以下关系图更详细地描述了每个主服务区域。
- 
+
 ![资源和资源组边栏选项卡上的“标记”部件](./media/azure-architectures-cpif-foundation-multi-site-data-tier/overview.png)
 
 ##  其他资源

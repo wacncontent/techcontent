@@ -1,110 +1,109 @@
-<properties
-    pageTitle="导入/导出服务日志文件格式 | Azure"
-    description="了解针对导入/导出服务作业执行步骤时创建的日志文件的格式"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 导入/导出服务日志文件格式 | Azure
+description: 了解针对导入/导出服务作业执行步骤时创建的日志文件的格式
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: ''
 
-<tags
-    ms.assetid="38cc16bd-ad55-4625-9a85-e1726c35fd1b"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="01/24/2017"
-    ms.author="renash" />  
-
+ms.assetid: 38cc16bd-ad55-4625-9a85-e1726c35fd1b
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 01/24/2017
+ms.author: renash
+---
 
 # 导入/导出服务日志文件格式
 当 Azure 导入/导出服务在执行导入作业或导出作业的过程中针对驱动器执行某个操作时，会将日志写入到与该作业关联的存储帐户中的块 Blob 中。
-  
+
 导入/导出服务可能会写入两种日志：
-  
+
 -   发生错误时始终生成错误日志。
-  
+
 -   详细日志默认未启用，但可通过对[放置作业](https://docs.microsoft.com/en-us/rest/api/storageimportexport/jobs#Jobs_CreateOrUpdate)或[更新作业属性](https://docs.microsoft.com/en-us/rest/api/storageimportexport/jobs#Jobs_Update)操作设置 `EnableVerboseLog` 属性来启用该日志。
-  
+
 ## 日志文件的位置  
 日志将写入到 `ImportExportStatesPath` 设置（可在“`Put Job`”操作中设置）指定的容器或虚拟目录中的块 Blob。日志写入到的位置取决于为该作业指定身份验证的方式，以及为 `ImportExportStatesPath` 指定的值。可通过存储帐户密钥或容器 SAS（共享访问签名）为作业指定身份验证。
-  
+
 容器或虚拟目录的名称可以是 `waimportexport` 的默认名称，也可以是指定的另一个容器或虚拟目录名称。
-  
+
 下表显示了可能的选项：
-  
+
 |身份验证方法|`ImportExportStatesPath` 元素的值|日志 Blob 的位置|  
 |---------------------------|----------------------------------------------|---------------------------|  
 |存储帐户密钥|默认值|<p>名为 `waimportexport` 的容器，这是默认容器。例如：</p><p> `https://myaccount.blob.core.chinacloudapi.cn/waimportexport`</p>|  
 |存储帐户密钥|用户指定的值|<p>由用户命名的容器。例如：</p><p> `https://myaccount.blob.core.chinacloudapi.cn/mylogcontainer`</p>|  
 |容器 SAS|默认值|<p>名为 `waimportexport` 的虚拟目录，这是默认名称，位于 SAS 中指定的容器下方。</p><p> 例如，如果为作业指定的 SAS 是 `https://myaccount.blob.core.chinacloudapi.cn/mylogcontainer?sv=2012-02-12&se=2015-05-22T06%3A54%3A55Z&sr=c&sp=wl&sig=sigvalue`，则日志位置应为 `https://myaccount.blob.core.chinacloudapi.cn/mylogcontainer/waimportexport`</p>|  
 |容器 SAS|用户指定的值|<p>由用户命名的虚拟目录，位于 SAS 中指定的容器下方。</p><p> 例如，如果为作业指定的 SAS 是 `https://myaccount.blob.core.chinacloudapi.cn/mylogcontainer?sv=2012-02-12&se=2015-05-22T06%3A54%3A55Z&sr=c&sp=wl&sig=sigvalue`，指定的虚拟目录名为 `mylogblobs`，则日志位置应为 `https://myaccount.blob.core.chinacloudapi.cn/mylogcontainer/waimportexport/mylogblobs`。</p>|  
-  
+
 可以通过调用[获取作业](https://docs.microsoft.com/en-us/rest/api/storageimportexport/jobs#Jobs_CreateOrUpdate)操作来检索错误日志和详细日志的 URL。处理完驱动器后，将提供日志。
-  
+
 ## 日志文件格式  
 这两种日志的格式相同：它是一个 Blob，包含在硬盘驱动器与客户帐户之间复制 Blob 时发生的事件的 XML 说明。
-  
+
 详细日志包含有关每个 Blob（针对导入作业）或文件（针对导出作业）的复制操作状态的完整信息，错误日志仅包含执行导入作业或导出作业期间遇到错误的 Blob 或文件的信息。
-  
+
 详细日志格式如下所示。错误日志具有相同的结构，但可筛选出成功的操作。
 
+```xml
+<DriveLog Version="2014-11-01">  
+  <DriveId>drive-id</DriveId>  
+  [<Blob Status="blob-status">  
+   <BlobPath>blob-path</BlobPath>  
+   <FilePath>file-path</FilePath>  
+   [<Snapshot>snapshot</Snapshot>]  
+   <Length>length</Length>  
+   [<LastModified>last-modified</LastModified>]  
+   [<ImportDisposition Status="import-disposition-status">import-disposition</ImportDisposition>]  
+   [page-range-list-or-block-list]  
+   [metadata-status]  
+   [properties-status]  
+  </Blob>]  
+  [<Blob>  
+    . . .  
+  </Blob>]  
+  <Status>drive-status</Status>  
+</DriveLog>  
 
-	<DriveLog Version="2014-11-01">  
-	  <DriveId>drive-id</DriveId>  
-	  [<Blob Status="blob-status">  
-	   <BlobPath>blob-path</BlobPath>  
-	   <FilePath>file-path</FilePath>  
-	   [<Snapshot>snapshot</Snapshot>]  
-	   <Length>length</Length>  
-	   [<LastModified>last-modified</LastModified>]  
-	   [<ImportDisposition Status="import-disposition-status">import-disposition</ImportDisposition>]  
-	   [page-range-list-or-block-list]  
-	   [metadata-status]  
-	   [properties-status]  
-	  </Blob>]  
-	  [<Blob>  
-	    . . .  
-	  </Blob>]  
-	  <Status>drive-status</Status>  
-	</DriveLog>  
-  
-	page-range-list-or-block-list ::= 
-	  page-range-list | block-list  
-  
-	page-range-list ::=   
-	<PageRangeList>  
-	      [<PageRange Offset="page-range-offset" Length="page-range-length"   
-	       [Hash="md5-hash"] Status="page-range-status"/>]  
-	      [<PageRange Offset="page-range-offset" Length="page-range-length"   
-	       [Hash="md5-hash"] Status="page-range-status"/>]  
-	</PageRangeList>  
-  
-	block-list ::=  
-	<BlockList>  
-	      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
-	       [Hash="md5-hash"] Status="block-status"/>]  
-	      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
-	       [Hash="md5-hash"] Status="block-status"/>]  
-	</BlockList>  
-  
-	metadata-status ::=  
-	<Metadata Status="metadata-status">  
-	   [<GlobalPath Hash="md5-hash">global-metadata-file-path</GlobalPath>]  
-	   [<Path Hash="md5-hash">metadata-file-path</Path>]  
-	</Metadata>  
-  
-	properties-status ::=  
-	<Properties Status="properties-status">  
-	   [<GlobalPath Hash="md5-hash">global-properties-file-path</GlobalPath>]  
-	   [<Path Hash="md5-hash">properties-file-path</Path>]  
-	</Properties>  
+page-range-list-or-block-list ::= 
+  page-range-list | block-list  
 
+page-range-list ::=   
+<PageRangeList>  
+      [<PageRange Offset="page-range-offset" Length="page-range-length"   
+       [Hash="md5-hash"] Status="page-range-status"/>]  
+      [<PageRange Offset="page-range-offset" Length="page-range-length"   
+       [Hash="md5-hash"] Status="page-range-status"/>]  
+</PageRangeList>  
+
+block-list ::=  
+<BlockList>  
+      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
+       [Hash="md5-hash"] Status="block-status"/>]  
+      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
+       [Hash="md5-hash"] Status="block-status"/>]  
+</BlockList>  
+
+metadata-status ::=  
+<Metadata Status="metadata-status">  
+   [<GlobalPath Hash="md5-hash">global-metadata-file-path</GlobalPath>]  
+   [<Path Hash="md5-hash">metadata-file-path</Path>]  
+</Metadata>  
+
+properties-status ::=  
+<Properties Status="properties-status">  
+   [<GlobalPath Hash="md5-hash">global-properties-file-path</GlobalPath>]  
+   [<Path Hash="md5-hash">properties-file-path</Path>]  
+</Properties>  
+```
 
 下表介绍了日志文件的元素。
-  
+
 |XML 元素|类型|说明|  
 |-----------------|----------|-----------------|  
 |`DriveLog`|XML 元素|表示驱动器日志。|  
@@ -145,10 +144,10 @@
 |`Properties/Path`|String|properties 文件的相对路径。|  
 |`Properties/Path/@Hash`|属性，字符串|properties 文件的 Base16 编码 MD5 哈希。|  
 |`Blob/Status`|String|Blob 的处理状态。|  
-  
+
 ### 驱动器状态代码  
 下表列出了驱动器的处理状态代码。
-  
+
 |状态代码|说明|  
 |-----------------|-----------------|  
 |`Completed`|驱动器已完成处理，未出现任何错误。|  
@@ -174,10 +173,10 @@
 |`BlobListFormatInvalid`|导出 Blob 列表 Blob 不符合所需的格式。|  
 |`BlobRequestForbidden`|禁止访问存储帐户中的 Blob。这可能是因为存储帐户密钥或容器 SAS 无效。|  
 |`InternalError`|处理驱动器时出现内部错误。|  
-  
+
 ### Blob 状态代码  
 下表列出了 Blob 的处理状态代码。
-  
+
 |状态代码|说明|  
 |-----------------|-----------------|  
 |`Completed`|Blob 已完成处理，未出现错误。|  
@@ -193,10 +192,10 @@
 |`LeasePresent`|Blob 上存在租约。|  
 |`IOFailed`|处理 Blob 时出现磁盘或网络 I/O 故障。|  
 |`Failed`|处理 Blob 时出现未知错误。|  
-  
+
 ### 导入处置状态代码  
 下表列出了导入处置的解决状态代码。
-  
+
 |状态代码|说明|  
 |-----------------|-----------------|  
 |`Created`|已创建 Blob。|  
@@ -204,10 +203,10 @@
 |`Skipped`|已根据 `no-overwrite` 导入处置跳过 Blob。|  
 |`Overwritten`|Blob 已根据 `overwrite` 导入处置覆盖现有 Blob。|  
 |`Cancelled`|前一个错误导致停止进一步处理导入处置。|  
-  
+
 ### 页面范围/块状态代码  
 下表列出了页面范围或块的处理状态代码。
-  
+
 |状态代码|说明|  
 |-----------------|-----------------|  
 |`Completed`|页面范围或块已完成处理，未出现任何错误。|  
@@ -220,10 +219,10 @@
 |`IOFailed`|处理页面范围或块时出现磁盘或网络 I/O 故障。|  
 |`Failed`|处理页面范围或块时出现未知错误。|  
 |`Cancelled`|前一个错误导致停止进一步处理页面范围或块。|  
-  
+
 ### 元数据状态代码  
 下表列出了 Blob 元数据的处理状态代码。
-  
+
 |状态代码|说明|  
 |-----------------|-----------------|  
 |`Completed`|元数据已完成处理，未出现错误。|  
@@ -238,10 +237,10 @@
 |`IOFailed`|处理元数据时出现磁盘或网络 I/O 故障。|  
 |`Failed`|处理元数据时出现未知错误。|  
 |`Cancelled`|前一个错误导致停止进一步处理元数据。|  
-  
+
 ### 属性状态代码  
 下表列出了 Blob 属性的处理状态代码。
-  
+
 |状态代码|说明|  
 |-----------------|-----------------|  
 |`Completed`|属性已完成处理，未出现任何错误。|  
@@ -256,105 +255,103 @@
 |`IOFailed`|处理属性时出现磁盘或网络 I/O 故障。|  
 |`Failed`|处理属性时出现未知错误。|  
 |`Cancelled`|前一个错误导致停止进一步处理属性。|  
-  
+
 ## 示例日志  
 下面是一个详细日志示例。
-  
 
-	<?xml version="1.0" encoding="UTF-8"?>  
-	<DriveLog Version="2014-11-01">  
-	    <DriveId>WD-WMATV123456</DriveId>  
-	    <Blob Status="Completed">  
-	       <BlobPath>pictures/bob/wild/desert.jpg</BlobPath>  
-	       <FilePath>\Users\bob\Pictures\wild\desert.jpg</FilePath>  
-	       <Length>98304</Length>  
-	       <ImportDisposition Status="Created">overwrite</ImportDisposition>  
-	       <BlockList>  
-	          <Block Offset="0" Length="65536" Id="AAAAAA==" Hash=" 9C8AE14A55241F98533C4D80D85CDC68" Status="Completed"/>  
-	          <Block Offset="65536" Length="32768" Id="AQAAAA==" Hash=" DF54C531C9B3CA2570FDDDB3BCD0E27D" Status="Completed"/>  
-	       </BlockList>  
-	       <Metadata Status="Completed">  
-	          <GlobalPath Hash=" E34F54B7086BCF4EC1601D056F4C7E37">\Users\bob\Pictures\wild\metadata.xml</GlobalPath>  
-	       </Metadata>  
-	    </Blob>  
-	    <Blob Status="CompletedWithErrors">  
-	       <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
-	       <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
-	       <Length>163840</Length>  
-	       <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
-	       <PageRangeList>  
-	          <PageRange Offset="0" Length="65536" Hash="19701B8877418393CB3CB567F53EE225" Status="Completed"/>  
-	          <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
-	          <PageRange Offset="131072" Length="4096" Hash="9BA552E1C3EEAFFC91B42B979900A996" Status="Completed"/>  
-	       </PageRangeList>  
-	       <Properties Status="Completed">  
-	          <Path Hash="38D7AE80653F47F63C0222FEE90EC4E7">\Users\bob\Pictures\animals\koala.jpg.properties</Path>  
-	       </Properties>  
-	    </Blob>  
-	    <Status>CompletedWithErrors</Status>  
-	</DriveLog>  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>  
+<DriveLog Version="2014-11-01">  
+    <DriveId>WD-WMATV123456</DriveId>  
+    <Blob Status="Completed">  
+       <BlobPath>pictures/bob/wild/desert.jpg</BlobPath>  
+       <FilePath>\Users\bob\Pictures\wild\desert.jpg</FilePath>  
+       <Length>98304</Length>  
+       <ImportDisposition Status="Created">overwrite</ImportDisposition>  
+       <BlockList>  
+          <Block Offset="0" Length="65536" Id="AAAAAA==" Hash=" 9C8AE14A55241F98533C4D80D85CDC68" Status="Completed"/>  
+          <Block Offset="65536" Length="32768" Id="AQAAAA==" Hash=" DF54C531C9B3CA2570FDDDB3BCD0E27D" Status="Completed"/>  
+       </BlockList>  
+       <Metadata Status="Completed">  
+          <GlobalPath Hash=" E34F54B7086BCF4EC1601D056F4C7E37">\Users\bob\Pictures\wild\metadata.xml</GlobalPath>  
+       </Metadata>  
+    </Blob>  
+    <Blob Status="CompletedWithErrors">  
+       <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
+       <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
+       <Length>163840</Length>  
+       <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
+       <PageRangeList>  
+          <PageRange Offset="0" Length="65536" Hash="19701B8877418393CB3CB567F53EE225" Status="Completed"/>  
+          <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
+          <PageRange Offset="131072" Length="4096" Hash="9BA552E1C3EEAFFC91B42B979900A996" Status="Completed"/>  
+       </PageRangeList>  
+       <Properties Status="Completed">  
+          <Path Hash="38D7AE80653F47F63C0222FEE90EC4E7">\Users\bob\Pictures\animals\koala.jpg.properties</Path>  
+       </Properties>  
+    </Blob>  
+    <Status>CompletedWithErrors</Status>  
+</DriveLog>  
+```
 
-  
 相应的错误日志如下所示。
-  
 
-	<?xml version="1.0" encoding="UTF-8"?>  
-	<DriveLog Version="2014-11-01">  
-	    <DriveId>WD-WMATV6965824</DriveId>  
-	    <Blob Status="CompletedWithErrors">  
-	       <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
-	       <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
-	       <Length>163840</Length>  
-	       <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
-	       <PageRangeList>  
-	          <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
-	       </PageRangeList>  
-	    </Blob>  
-	    <Status>CompletedWithErrors</Status>  
-	</DriveLog>  
-
+```xml
+<?xml version="1.0" encoding="UTF-8"?>  
+<DriveLog Version="2014-11-01">  
+    <DriveId>WD-WMATV6965824</DriveId>  
+    <Blob Status="CompletedWithErrors">  
+       <BlobPath>pictures/bob/animals/koala.jpg</BlobPath>  
+       <FilePath>\Users\bob\Pictures\animals\koala.jpg</FilePath>  
+       <Length>163840</Length>  
+       <ImportDisposition Status="Overwritten">overwrite</ImportDisposition>  
+       <PageRangeList>  
+          <PageRange Offset="65536" Length="65536" Hash="AA2585F6F6FD01C4AD4256E018240CD4" Status="Corrupted"/>  
+       </PageRangeList>  
+    </Blob>  
+    <Status>CompletedWithErrors</Status>  
+</DriveLog>  
+```
 
  以下导入作业的错误日志包含有关在导入驱动器上找不到的文件的错误。请注意，后续组件的状态为 `Cancelled`。
-  
 
-	<?xml version="1.0" encoding="utf-8"?>  
-	<DriveLog Version="2014-11-01">  
-	  <DriveId>9WM35C2V</DriveId>  
-	  <Blob Status="FileNotFound">  
-	    <BlobPath>pictures/animals/koala.jpg</BlobPath>  
-	    <FilePath>\animals\koala.jpg</FilePath>  
-	    <Length>30310</Length>  
-	    <ImportDisposition Status="Cancelled">rename</ImportDisposition>  
-	    <BlockList>  
-	      <Block Offset="0" Length="6062" Id="MD5/cAzn4h7VVSWXf696qp5Uaw==" Hash="700CE7E21ED55525977FAF7AAA9E546B" Status="Cancelled" />  
-	      <Block Offset="6062" Length="6062" Id="MD5/PEnGwYOI8LPLNYdfKr7kAg==" Hash="3C49C6C18388F0B3CB35875F2ABEE402" Status="Cancelled" />  
-	      <Block Offset="12124" Length="6062" Id="MD5/FG4WxqfZKuUWZ2nGTU2qVA==" Hash="146E16C6A7D92AE5166769C64D4DAA54" Status="Cancelled" />  
-	      <Block Offset="18186" Length="6062" Id="MD5/ZzibNDzr3IRBQENRyegeXQ==" Hash="67389B343CEBDC8441404351C9E81E5D" Status="Cancelled" />  
-	      <Block Offset="24248" Length="6062" Id="MD5/ZzibNDzr3IRBQENRyegeXQ==" Hash="67389B343CEBDC8441404351C9E81E5D" Status="Cancelled" />  
-	    </BlockList>  
-	  </Blob>  
-	  <Status>CompletedWithErrors</Status>  
-	</DriveLog>  
-
+    <?xml version="1.0" encoding="utf-8"?>  
+    <DriveLog Version="2014-11-01">  
+      <DriveId>9WM35C2V</DriveId>  
+      <Blob Status="FileNotFound">  
+        <BlobPath>pictures/animals/koala.jpg</BlobPath>  
+        <FilePath>\animals\koala.jpg</FilePath>  
+        <Length>30310</Length>  
+        <ImportDisposition Status="Cancelled">rename</ImportDisposition>  
+        <BlockList>  
+          <Block Offset="0" Length="6062" Id="MD5/cAzn4h7VVSWXf696qp5Uaw==" Hash="700CE7E21ED55525977FAF7AAA9E546B" Status="Cancelled" />  
+          <Block Offset="6062" Length="6062" Id="MD5/PEnGwYOI8LPLNYdfKr7kAg==" Hash="3C49C6C18388F0B3CB35875F2ABEE402" Status="Cancelled" />  
+          <Block Offset="12124" Length="6062" Id="MD5/FG4WxqfZKuUWZ2nGTU2qVA==" Hash="146E16C6A7D92AE5166769C64D4DAA54" Status="Cancelled" />  
+          <Block Offset="18186" Length="6062" Id="MD5/ZzibNDzr3IRBQENRyegeXQ==" Hash="67389B343CEBDC8441404351C9E81E5D" Status="Cancelled" />  
+          <Block Offset="24248" Length="6062" Id="MD5/ZzibNDzr3IRBQENRyegeXQ==" Hash="67389B343CEBDC8441404351C9E81E5D" Status="Cancelled" />  
+        </BlockList>  
+      </Blob>  
+      <Status>CompletedWithErrors</Status>  
+    </DriveLog>  
 
 以下导出作业的错误日志指示已将 Blob 内容成功写入驱动器，但在导出 Blob 的属性时出错。
-  
 
-	<?xml version="1.0" encoding="utf-8"?>  
-	<DriveLog Version="2014-11-01">  
-	  <DriveId>9WM35C3U</DriveId>  
-	  <Blob Status="CompletedWithErrors">  
-	    <BlobPath>pictures/wild/canyon.jpg</BlobPath>  
-	    <FilePath>\pictures\wild\canyon.jpg</FilePath>  
-	    <LastModified>2012-09-18T23:47:08Z</LastModified>  
-	    <Length>163840</Length>  
-	    <BlockList />  
-	    <Properties Status="Failed" />  
-	  </Blob>  
-	  <Status>CompletedWithErrors</Status>  
-	</DriveLog>  
+```xml
+<?xml version="1.0" encoding="utf-8"?>  
+<DriveLog Version="2014-11-01">  
+  <DriveId>9WM35C3U</DriveId>  
+  <Blob Status="CompletedWithErrors">  
+    <BlobPath>pictures/wild/canyon.jpg</BlobPath>  
+    <FilePath>\pictures\wild\canyon.jpg</FilePath>  
+    <LastModified>2012-09-18T23:47:08Z</LastModified>  
+    <Length>163840</Length>  
+    <BlockList />  
+    <Properties Status="Failed" />  
+  </Blob>  
+  <Status>CompletedWithErrors</Status>  
+</DriveLog>  
+```
 
-  
 ## 另请参阅  
 [存储导入/导出 REST](https://docs.microsoft.com/en-us/rest/api/storageimportexport/)
 

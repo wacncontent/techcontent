@@ -1,8 +1,8 @@
-> [AZURE.SELECTOR]
-- [Linux-based](/documentation/articles/hdinsight-hadoop-provision-linux-clusters/)
-- [Overview](/documentation/articles/hdinsight-provision-clusters/)
-- [Azure portal preview](/documentation/articles/hdinsight-hadoop-create-windows-clusters-portal/)
-- [Azure CLI](/documentation/articles/hdinsight-hadoop-create-windows-clusters-cli/)
-- [Azure PowerShell](/documentation/articles/hdinsight-hadoop-create-windows-clusters-powershell/)
-- [.NET SDK](/documentation/articles/hdinsight-hadoop-create-windows-clusters-dotnet-sdk/)
-- [ARM templates](/documentation/articles/hdinsight-hadoop-create-windows-clusters-arm-templates/)
+> [!div class="op_single_selector"]
+- [Linux-based](../articles/hdinsight/hdinsight-hadoop-provision-linux-clusters.md)
+- [Overview](../articles/hdinsight/hdinsight-provision-clusters.md)
+- [Azure portal preview](../articles/hdinsight/hdinsight-hadoop-create-windows-clusters-portal.md)
+- [Azure CLI](../articles/hdinsight/hdinsight-hadoop-create-windows-clusters-cli.md)
+- [Azure PowerShell](../articles/hdinsight/hdinsight-hadoop-create-windows-clusters-powershell.md)
+- [.NET SDK](../articles/hdinsight/hdinsight-hadoop-create-windows-clusters-dotnet-sdk.md)
+- [ARM templates](../articles/hdinsight/hdinsight-hadoop-create-windows-clusters-arm-templates.md)

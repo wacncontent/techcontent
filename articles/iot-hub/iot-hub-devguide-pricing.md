@@ -1,22 +1,22 @@
-<properties
-    pageTitle="了解 Azure IoT 中心定价 | Azure"
-    description="开发人员指南 - 介绍了如何实现 IoT 中心（包括样例）的计数和定价。"
-    services="iot-hub"
-    documentationcenter=""
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="1ac90923-1edf-4134-bbd4-77fee9b68d24"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="12/12/2016"
-    wacn.date="01/13/2017"
-    ms.author="elioda" />  
+---
+title: 了解 Azure IoT 中心定价 | Azure
+description: 开发人员指南 - 介绍了如何实现 IoT 中心（包括样例）的计数和定价。
+services: iot-hub
+documentationcenter: ''
+author: dominicbetts
+manager: timlt
+editor: ''
 
+ms.assetid: 1ac90923-1edf-4134-bbd4-77fee9b68d24
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/12/2016
+wacn.date: 01/13/2017
+ms.author: elioda
+---
 
 # Azure IoT 中心定价信息
 
@@ -37,7 +37,7 @@
 | 作业操作<br/>（创建、更新、列出、删除） | 不收费。 |
 | 作业的每设备操作数 | 作业操作（例如设备孪生更新和方法）正常收费。例如，如果某作业生成 1000 个含 1KB 请求的方法调用和正文为空的响应，则按 1000 条消息收费。 |
 
-> [AZURE.NOTE]
+> [!NOTE]
 所有大小均按以字节为单位的有效负载大小进行计算（忽略协议组帧）。就消息（包含属性和正文）来说，大小以无关协议的方式计算，详见 [IoT 中心消息传送开发人员指南][lnk-message-size]。
 
 ## 示例 1 
@@ -54,9 +54,8 @@
 
 设备和解决方案后端每天总共使用 185 条消息。
 
-
-[lnk-pricing]: /pricing/details/iot-hub
-[lnk-message-size]: /documentation/articles/iot-hub-devguide-messaging/#message-size
+[lnk-pricing]: https://www.azure.cn/pricing/details/iot-hub
+[lnk-message-size]: ./iot-hub-devguide-messaging.md#message-size
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

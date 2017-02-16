@@ -1,27 +1,27 @@
-<properties
-	pageTitle="使用 Azure CustomScript Extension 部署 Linux 应用程序"
-	description="了解如何使用 Azure CustomScript 扩展在 Linux 虚拟机上部署应用程序"
-	editor="tysonn"
-	manager="timlt"
-	documentationCenter=""
-	services="virtual-machines-linux"
-	authors="gbowerman"/>
+---
+title: 使用 Azure CustomScript Extension 部署 Linux 应用程序
+description: 了解如何使用 Azure CustomScript 扩展在 Linux 虚拟机上部署应用程序
+editor: tysonn
+manager: timlt
+documentationCenter: ''
+services: virtual-machines-linux
+authors: gbowerman
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/13/2016"
-	wacn.date="01/05/2017"
-	ms.author="guybo"/>
+ms.service: virtual-machines-linux
+ms.workload: multiple
+ms.tgt_pltfrm: linux
+ms.devlang: na
+ms.topic: article
+ms.date: 09/13/2016
+wacn.date: 01/05/2017
+ms.author: guybo
+---
 
 #使用适用于 Linux 的 Azure CustomScript 扩展部署 LAMP 应用程序#
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
-想查看更多关于使用资源管理器模型部署 LAMP 堆栈的信息，请点击[这里](/documentation/articles/virtual-machines-linux-create-lamp-stack/)。
+想查看更多关于使用资源管理器模型部署 LAMP 堆栈的信息，请点击[这里](./virtual-machines-linux-create-lamp-stack.md)。
 
 适用于 Linux 的 Azure CustomScript 扩展提供了一种方式来通过运行以 VM 支持的任何脚本语言（例如，Python、Bash 等）编写的任意代码来自定义你的虚拟机 (VM)。这提供了一种非常灵活的方式来在多台计算机上自动执行应用程序部署。
 
@@ -37,7 +37,7 @@
 
 虽然特定的安装命令将采用 Ubuntu，但你可以针对任何受支持的发行版改编一般步骤。
 
-*script-vm* VM 需要使用与 Azure 之间的有效链接安装 Azure CLI。有关这方面的帮助，请参阅[安装和配置 Azure 命令行界面](/documentation/articles/xplat-cli-install/)。
+*script-vm* VM 需要使用与 Azure 之间的有效链接安装 Azure CLI。有关这方面的帮助，请参阅[安装和配置 Azure 命令行界面](../xplat-cli-install.md)。
 
 ## 上载脚本
 
@@ -47,53 +47,64 @@
 
 此脚本将 LAMP 堆栈安装到 Ubuntu（包括设置 MySQL 的无提示安装类）、编写简单的 PHP 文件并启动 Apache：
 
-	#!/bin/bash
-	# set up a silent install of MySQL
-	dbpass="mySQLPassw0rd"
+```
+#!/bin/bash
+# set up a silent install of MySQL
+dbpass="mySQLPassw0rd"
 
-	export DEBIAN_FRONTEND=noninteractive
-	echo mysql-server-5.6 mysql-server/root_password password $dbpass | debconf-set-selections
-	echo mysql-server-5.6 mysql-server/root_password_again password $dbpass | debconf-set-selections
+export DEBIAN_FRONTEND=noninteractive
+echo mysql-server-5.6 mysql-server/root_password password $dbpass | debconf-set-selections
+echo mysql-server-5.6 mysql-server/root_password_again password $dbpass | debconf-set-selections
 
-	# install the LAMP stack
-	apt-get -y install apache2 mysql-server php5 php5-mysql  
+# install the LAMP stack
+apt-get -y install apache2 mysql-server php5 php5-mysql  
 
-	# write some PHP
-	echo <center><h1>My Demo App</h1><br/></center> > /var/www/html/phpinfo.php
-	echo <\?php phpinfo()\; \?> >> /var/www/html/phpinfo.php
+# write some PHP
+echo <center><h1>My Demo App</h1><br/></center> > /var/www/html/phpinfo.php
+echo <\?php phpinfo()\; \?> >> /var/www/html/phpinfo.php
 
-	# restart Apache
-	apachectl restart
+# restart Apache
+apachectl restart
+```
 
 **上载**
 
 将脚本另存为文本文件，例如 *lamp\_install.sh*，然后将其上载到 Azure 存储空间。你可以使用 Azure CLI 轻松执行此操作。以下示例将文件上载到名为“scripts”的存储容器。注意：如果该容器不存在，你需要先创建它。
 
-    azure storage blob upload -a <yourStorageAccountName> -k <yourStorageKey> --container scripts ./lamp_install.sh
+```
+azure storage blob upload -a <yourStorageAccountName> -k <yourStorageKey> --container scripts ./lamp_install.sh
+```
 
 还要创建一个描述如何从 Azure 存储下载脚本的 JSON 文件。将该文件另存为 *public\_config.json*（使用你的存储帐户的名称替换“mystorage”）：
 
-    {"fileUris":["https://mystorage.blob.core.chinacloudapi.cn/scripts/lamp_install.sh"], "commandToExecute":"sudo sh install_lamp.sh" }
-
+```
+{"fileUris":["https://mystorage.blob.core.chinacloudapi.cn/scripts/lamp_install.sh"], "commandToExecute":"sudo sh install_lamp.sh" }
+```
 
 ## 部署扩展
 
 现在，我们已准备好使用 Azure CLI 将 Linux CustomScript 扩展部署到远程 VM：
 
-    azure vm extension set -c "./public_config.json" lamp-vm CustomScriptForLinux Microsoft.OSTCExtensions 1.*
+```
+azure vm extension set -c "./public_config.json" lamp-vm CustomScriptForLinux Microsoft.OSTCExtensions 1.*
+```
 
 这将在名为 *lamp-vm* 的 VM 上下载并执行 *lamp\_install.sh* 脚本。
 
 因为应用程序包括一个 web 服务器，请记得在远程 VM 上打开 HTTP 侦听端口：
 
-    azure vm endpoint create -n Apache -o tcp lamp-vm 80 80
+```
+azure vm endpoint create -n Apache -o tcp lamp-vm 80 80
+```
 
 ## 监视和故障排除
 
 你可以通过查看远程 VM 上的日志文件来检查自定义脚本的执行进度。对 *lamp-vm* 使用 SSH 并对日志文件执行 tail 命令：
 
-    cd /var/log/azure/Microsoft.OSTCExtensions.CustomScriptForLinux/1.3.0.0/
-    tail -f extension.log
+```
+cd /var/log/azure/Microsoft.OSTCExtensions.CustomScriptForLinux/1.3.0.0/
+tail -f extension.log
+```
 
 当 CustomScript 扩展完成执行后，你可以浏览找到你创建的 PHP 页面，在本例中将是：*http://lamp-vm.chinacloudapp.cn/phpinfo.php*。
 
@@ -107,6 +118,6 @@
 
 [Azure Linux 扩展 (GitHub)](https://github.com/Azure/azure-linux-extensions)
 
-[Azure 上的 Linux 和开源计算](/documentation/articles/virtual-machines-linux-opensource-links/)
+[Azure 上的 Linux 和开源计算](./virtual-machines-linux-opensource-links.md)
 
 <!---HONumber=70-->

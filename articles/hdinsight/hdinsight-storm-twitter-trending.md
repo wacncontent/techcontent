@@ -1,17 +1,17 @@
-<properties
-   pageTitle="使用 Apache Storm on HDInsight 确定 Twitter 趋势主题 | Microsoft Azure"
-   description="了解如何使用 Trident 创建一个 Apache Storm 拓扑，根据哈希标记确定 Twitter 上的流行主题。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-   tags="azure-portal"/>
+---
+title: 使用 Apache Storm on HDInsight 确定 Twitter 趋势主题 | Microsoft Azure
+description: 了解如何使用 Trident 创建一个 Apache Storm 拓扑，根据哈希标记确定 Twitter 上的流行主题。
+services: hdinsight
+documentationCenter: ''
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.date="09/27/2016"
-   wacn.date="02/14/2017"/>
+ms.service: hdinsight
+ms.date: 09/27/2016
+wacn.date: 02/14/2017
+---
 
 #使用 Apache Storm on HDInsight 确定 Twitter 趋势主题
 
@@ -19,7 +19,8 @@
 
 Trident 是一种高级抽象，可提供联接、聚合、分组、函数和筛选器等工具。此外，Trident 还添加了基元，用于执行有状态增量处理。本示例演示如何使用自定义 Spout、函数和 Trident 提供的多个内置函数来生成拓扑。
 
-> [AZURE.NOTE]本示例在很大程度上基于 Juan Alonso 制作的 [Trident Storm](https://github.com/jalonsoramos/trident-storm) 示例。
+> [!NOTE]
+>本示例在很大程度上基于 Juan Alonso 制作的 [Trident Storm](https://github.com/jalonsoramos/trident-storm) 示例。
 
 ##要求
 
@@ -35,7 +36,9 @@ Trident 是一种高级抽象，可提供联接、聚合、分组、函数和筛
 
 使用以下代码在本地复制项目。
 
-	git clone https://github.com/Blackmist/TwitterTrending
+```
+git clone https://github.com/Blackmist/TwitterTrending
+```
 
 ##拓扑
 
@@ -43,17 +46,20 @@ Trident 是一种高级抽象，可提供联接、聚合、分组、函数和筛
 
 ![拓扑](./media/hdinsight-storm-twitter-trending/trident.png)
 
-> [AZURE.NOTE]这是一个简化的拓扑视图。组件的多个实例分散在群集中的节点上。
+> [!NOTE]
+>这是一个简化的拓扑视图。组件的多个实例分散在群集中的节点上。
 
 实现拓扑的 Trident 代码如下：
 
-	topology.newStream("spout", spout)
-	    .each(new Fields("tweet"), new HashtagExtractor(), new Fields("hashtag"))
-	    .groupBy(new Fields("hashtag"))
-	    .persistentAggregate(new MemoryMapState.Factory(), new Count(), new Fields("count"))
-	    .newValuesStream()
-	    .applyAssembly(new FirstN(10, "count"))
-		.each(new Fields("hashtag", "count"), new Debug());
+```
+topology.newStream("spout", spout)
+    .each(new Fields("tweet"), new HashtagExtractor(), new Fields("hashtag"))
+    .groupBy(new Fields("hashtag"))
+    .persistentAggregate(new MemoryMapState.Factory(), new Count(), new Fields("count"))
+    .newValuesStream()
+    .applyAssembly(new FirstN(10, "count"))
+    .each(new Fields("hashtag", "count"), new Debug());
+```
 
 此代码将执行以下操作：
 
@@ -65,7 +71,8 @@ Trident 是一种高级抽象，可提供联接、聚合、分组、函数和筛
 
 4. 由于我们只对指定的这批推文中最受欢迎的哈希标记感兴趣，因此应用 **FirstN** 程序集，并仅根据计数字段返回前 10 个值。
 
-> [AZURE.NOTE]我们使用的是内置 Trident 功能，而不是 Spout 和 HashtagExtractor。
+> [!NOTE]
+>我们使用的是内置 Trident 功能，而不是 Spout 和 HashtagExtractor。
 ><p>
 > 有关非 MemoryMapState 的 Trident-state 实现，请参阅：
 ><p>
@@ -99,39 +106,45 @@ Spout **TwitterSpout** 使用 <a href="http://twitter4j.org/en/" target="_blank"
 
 使用以下代码生成项目：
 
-		cd [directoryname]
-		mvn compile
+```
+    cd [directoryname]
+    mvn compile
+```
 
 ##测试拓扑
 
 使用以下命令在本地测试拓扑：
 
-	mvn compile exec:java -Dstorm.topology=com.microsoft.example.TwitterTrendingTopology
+```
+mvn compile exec:java -Dstorm.topology=com.microsoft.example.TwitterTrendingTopology
+```
 
 拓扑启动后，你应会看到包含拓扑发出的哈希标记和计数的调试信息。输出应如下所示：
 
-	DEBUG: [Quicktellervalentine, 7]
-	DEBUG: [GRAMMYs, 7]
-	DEBUG: [AskSam, 7]
-	DEBUG: [poppunk, 1]
-	DEBUG: [rock, 1]
-	DEBUG: [punkrock, 1]
-	DEBUG: [band, 1]
-	DEBUG: [punk, 1]
-	DEBUG: [indonesiapunkrock, 1]
+```
+DEBUG: [Quicktellervalentine, 7]
+DEBUG: [GRAMMYs, 7]
+DEBUG: [AskSam, 7]
+DEBUG: [poppunk, 1]
+DEBUG: [rock, 1]
+DEBUG: [punkrock, 1]
+DEBUG: [band, 1]
+DEBUG: [punk, 1]
+DEBUG: [indonesiapunkrock, 1]
+```
 
 ##后续步骤
 
-在本地测试拓扑后，请探索如何部署拓扑：[在 HDInsight 上部署和管理 Apache Storm 拓扑](/documentation/articles/hdinsight-storm-deploy-monitor-topology/)。
+在本地测试拓扑后，请探索如何部署拓扑：[在 HDInsight 上部署和管理 Apache Storm 拓扑](./hdinsight-storm-deploy-monitor-topology.md)。
 
 你也可能对以下 Storm 主题感兴趣：
 
-* [使用 Maven 为 Storm on HDInsight 开发 Java 拓扑](/documentation/articles/hdinsight-storm-develop-java-topology/)
+* [使用 Maven 为 Storm on HDInsight 开发 Java 拓扑](./hdinsight-storm-develop-java-topology.md)
 
-* [使用 Visual Studio 开发 Storm on HDInsight 的 C# 拓扑](/documentation/articles/hdinsight-storm-develop-csharp-visual-studio-topology/)
+* [使用 Visual Studio 开发 Storm on HDInsight 的 C# 拓扑](./hdinsight-storm-develop-csharp-visual-studio-topology.md)
 
 有关 HDinsight 的 Storm 示例：
 
-* [Storm on HDInsight 的示例拓扑](/documentation/articles/hdinsight-storm-example-topology/)
+* [Storm on HDInsight 的示例拓扑](./hdinsight-storm-example-topology.md)
 
 <!---HONumber=71-->

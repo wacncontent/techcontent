@@ -1,19 +1,20 @@
-<properties 
-   pageTitle="为 SQL AlwaysOn 配置负载均衡器 | Azure"
-   description="介绍如何将负载均衡器配置为与 SQL AlwaysOn 配合工作，以及如何利用 powershell 为 SQL 实现创建负载均衡器"
-   services="load-balancer"
-   documentationCenter="na"
-   author="sdwheeler"
-   manager="carmonm" />  
-<tags 
-   ms.service="load-balancer"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/24/2016"
-   wacn.date="12/05/2016"
-   ms.author="joaoma" />
+---
+title: 为 SQL AlwaysOn 配置负载均衡器 | Azure
+description: 介绍如何将负载均衡器配置为与 SQL AlwaysOn 配合工作，以及如何利用 powershell 为 SQL 实现创建负载均衡器
+services: load-balancer
+documentationCenter: na
+author: sdwheeler
+manager: carmonm
+
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/24/2016
+wacn.date: 12/05/2016
+ms.author: joaoma
+---
 
 # 为 SQL AlwaysOn 配置负载均衡器
 
@@ -31,32 +32,35 @@ SQL Server AlwaysOn 可用性组现在可与 ILB 配合运行。可用性组是 
 
 ![ILB\_SQLAO\_NewPic](./media/load-balancer-configure-sqlao/sqlao1.png)  
 
-
 图 1 - 使用面向 Internet 的负载均衡器配置的 SQL AlwaysOn
 
 ## 将内部负载均衡器添加到服务
 
 1. 在以下示例中，我们会配置包含名为“Subnet-1”的子网的虚拟网络：
 
-	    Add-AzureInternalLoadBalancer -InternalLoadBalancerName ILB\_SQL\_AO -SubnetName Subnet-1 -ServiceName SqlSvc
+    ```powershell
+    Add-AzureInternalLoadBalancer -InternalLoadBalancerName ILB\_SQL\_AO -SubnetName Subnet-1 -ServiceName SqlSvc
+    ```
 
 2. 为每个 VM 上的 ILB 添加负载均衡终结点
 
-	    Get-AzureVM -ServiceName SqlSvc -Name sqlsvc1 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 – DirectServerReturn $true -InternalLoadBalancerName ILB\_SQL\_AO | Update-AzureVM
+    ```powershell
+    Get-AzureVM -ServiceName SqlSvc -Name sqlsvc1 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 – DirectServerReturn $true -InternalLoadBalancerName ILB\_SQL\_AO | Update-AzureVM
 
- 	    Get-AzureVM -ServiceName SqlSvc -Name sqlsvc2 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 –DirectServerReturn $true -InternalLoadBalancerName ILB\_SQL\_AO | Update-AzureVM
+     Get-AzureVM -ServiceName SqlSvc -Name sqlsvc2 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 –DirectServerReturn $true -InternalLoadBalancerName ILB\_SQL\_AO | Update-AzureVM
+    ```
 
     在上述示例中，有 2 个分别名为“sqlsvc1”和“sqlsvc2”的 VM 在云服务“Sqlsvc”中运行。使用 `DirectServerReturn` 开关创建 ILB 后，可以将经过负载均衡的终结点添加到 ILB，以便 SQL 为可用性组配置侦听器。
 
-有关 SQL AlwaysOn 的详细信息，请参阅[在 Azure 中为 AlwaysOn 可用性组配置内部负载均衡器](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-int-listener/)。
+有关 SQL AlwaysOn 的详细信息，请参阅[在 Azure 中为 AlwaysOn 可用性组配置内部负载均衡器](../virtual-machines/virtual-machines-windows-portal-sql-alwayson-int-listener.md)。
 
 ## 另请参阅
-[开始配置面向 Internet 的负载均衡器](/documentation/articles/load-balancer-get-started-internet-arm-ps/)
+[开始配置面向 Internet 的负载均衡器](./load-balancer-get-started-internet-arm-ps.md)
 
-[Get started configuring an Internal load balancer（开始配置内部负载均衡器）](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)
+[Get started configuring an Internal load balancer（开始配置内部负载均衡器）](./load-balancer-get-started-ilb-arm-ps.md)
 
-[配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_1128_2016-->

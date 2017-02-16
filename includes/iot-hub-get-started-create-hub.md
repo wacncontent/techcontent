@@ -29,8 +29,6 @@
 
     ![共享访问策略边栏选项卡][5]  
 
-
-
 <!-- Images. -->
 [1]: ./media/iot-hub-get-started-create-hub/create-iot-hub1.png
 [2]: ./media/iot-hub-get-started-create-hub/create-iot-hub2.png
@@ -39,9 +37,8 @@
 [5]: ./media/iot-hub-get-started-create-hub/create-iot-hub5.png
 
 <!-- Links -->
-[lnk-resource-groups]: /documentation/articles/resource-group-portal/
+[lnk-resource-groups]: ../articles/azure-resource-manager/resource-group-portal.md
 [lnk-portal]: https://portal.azure.cn/
-[lnk-pricing]: /home/features/iot-hub/#pricing
-
+[lnk-pricing]: https://www.azure.cn/home/features/iot-hub/#pricing
 
 <!---HONumber=Mooncake_0425_2016-->
