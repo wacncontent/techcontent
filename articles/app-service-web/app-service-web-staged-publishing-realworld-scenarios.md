@@ -112,7 +112,7 @@ ms.author: sumuth
 
 4. 复制 `wp-config.azure.php` 中的以下代码：
 
-    ```    
+    ```
     <?php
     // MySQL settings
     /** The name of the database for WordPress */

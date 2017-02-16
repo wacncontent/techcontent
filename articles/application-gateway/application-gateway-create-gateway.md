@@ -215,7 +215,7 @@ DnsName       :
 
 下一步，设置应用程序网关。将 `Set-AzureApplicationGatewayConfig` cmdlet 与配置 XML 文件配合使用。
 
-```xml
+```powershell
 Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile "D:\config.xml"
 ```
 
@@ -349,7 +349,7 @@ $appgwconfig.HttpLoadBalancingRules.Add($rule)
 ### 步骤 3
 使用 `Set-AzureApplicationGatewayConfig` 将配置对象提交到应用程序网关资源。
 
-```xml
+```powershell
 Set-AzureApplicationGatewayConfig -Name AppGwTest -Config $appgwconfig
 ```
 

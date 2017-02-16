@@ -22,7 +22,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
 事件中心的 Java 客户端库可用于 [Maven 中央存储库](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs%22)中的 Maven 项目，并且可以使用 Maven 项目文件中的以下依赖项声明进行引用：
 
-```XML
+```
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-eventhubs</artifactId>

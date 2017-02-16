@@ -78,7 +78,7 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 
 2. 通过提供显示名称、用于描述应用程序的 URI、用于标识应用程序的 URI，以及应用程序标识的密码来创建新的 Active Directory 应用程序。
 
-    ```powershell   
+    ```powershell
     $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org/exampleapp" -IdentifierUris "https://www.contoso.org/exampleapp" -Password "{Your_Password}"
     ```
 
@@ -126,7 +126,7 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 
 1. 运行 `Get-Credential` 命令，以创建包含你的凭据的 `PSCredential` 对象。运行此命令之前需要 `ApplicationId`，所以请确保可以使用它进行粘贴。
 
-    ```powershell   
+    ```powershell
     $creds = Get-Credential
     ```
 
@@ -136,13 +136,13 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 
 3. 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。如果只有一个订阅，可以使用：
 
-    ```powershell   
+    ```powershell
     $tenant = (Get-AzureRmSubscription).TenantId
     ```
 
     如果有多个订阅，请指定 Active Directory 所在的订阅。有关详细信息，请参阅 [Azure 订阅与 Azure Active Directory 的关联方式](../active-directory/active-directory-how-subscriptions-associated-directory.md)。
 
-    ```powershell   
+    ```powershell
     $tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
     ```
 
@@ -210,7 +210,7 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 
 * 如果未使用 **Windows 10 或 Windows Server 2016 Technical Preview**，需要从 Microsoft 脚本中心下载[自签名证书生成器](https://gallery.technet.microsoft.com/scriptcenter/Self-signed-certificate-5920a7c6/)。解压其内容，并导入所需的 cmdlet。
 
-    ```powershell  
+    ```powershell
     # Only run if you could not use New-SelfSignedCertificate
     Import-Module -Name c:\ExtractedModule\New-SelfSignedCertificateEx.ps1
     ```
@@ -291,13 +291,13 @@ New-AzureRmRoleAssignment -RoleDefinitionName Reader -ServicePrincipalName $app.
 ### 通过自动执行的 PowerShell 脚本提供证书
 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。如果只有一个订阅，可以使用：
 
-```powershell   
+```powershell
 $tenant = (Get-AzureRmSubscription).TenantId
 ```
 
 如果有多个订阅，请指定 Active Directory 所在的订阅。有关详细信息，请参阅[管理 Azure AD 目录](../active-directory/active-directory-administer.md)。
 
-```powershell   
+```powershell
 $tenant = (Get-AzureRmSubscription -SubscriptionName "Contoso Default").TenantId
 ```
 

@@ -108,7 +108,7 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 
 在创建策略定义时声明参数。
 
-```json
+```
 "parameters": {
   "listOfLocations": {
     "type": "array",

@@ -58,7 +58,7 @@ Azure Service Fabric 的 Visual Studio 工具提供发布到本地或远程群�
 
     ServiceTypeHealthPolicyMap 是另一个接受哈希表输入（格式如下）的可选参数：
 
-    ```    
+    ```
     @ {"ServiceTypeName" : "MaxPercentUnhealthyPartitionsPerService,MaxPercentUnhealthyReplicasPerPartition,MaxPercentUnhealthyServices"}
     ```
 

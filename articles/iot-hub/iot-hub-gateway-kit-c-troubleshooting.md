@@ -77,7 +77,7 @@ gulp run --debug
 2. 单击绿色的“开始调试”(F5) 按钮。Visual Studio Code 打开 `launch.json` 文件。
 3. 使用以下内容更新 `launch.json` 文件。将 `[device hostname or IP address]` 替换为实际的设备 IP 地址或主机名。
 
-    ``` json
+    ```json
        {
          "version": "0.2.0",
          "configurations": [

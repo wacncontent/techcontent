@@ -41,7 +41,7 @@ ms.author: rclaus
 
 * **SLES 和 openSUSE**
 
-    ```bash  
+    ```bash
     zypper install mdadm
     ```
 
@@ -70,7 +70,7 @@ ms.author: rclaus
 
 3. 接下来，按 P 键以创建主分区：
 
-    ```bash 
+    ```bash
     Command action
             e   extended
             p   primary partition (1-4)
@@ -84,21 +84,21 @@ ms.author: rclaus
 
 5. 选择新分区的起始点，或者按 `<enter>` 接受默认值，将该分区放在驱动器可用空间的开头：
 
-    ```bash   
+    ```bash
     First cylinder (1-1305, default 1):
     Using default value 1
     ```
 
 6. 选择分区大小，如键入“+10G”创建一个 10 GB 的分区。或者，按 `<enter>` 创建跨整个驱动器的单个分区：
 
-    ```bash   
+    ```bash
     Last cylinder, +cylinders or +size{K,M,G} (1-1305, default 1305): 
     Using default value 1305
     ```
 
 7. 接下来，将该分区的 ID 和类型从默认的 ID“83”(Linux) 更改为 ID“fd”(Linux raid auto)：
 
-    ```bash  
+    ```bash
     Command (m for help): t
     Selected partition 1
     Hex code (type L to list codes): fd
@@ -106,7 +106,7 @@ ms.author: rclaus
 
 8. 最后，将分区表写入驱动器并退出 fdisk：
 
-    ```bash   
+    ```bash
     Command (m for help): w
     The partition table has been altered!
     ```
@@ -114,7 +114,7 @@ ms.author: rclaus
 ## 创建 RAID 阵列
 1. 以下示例为位于三个不同数据磁盘 (sdc1, sdd1, sde1) 上的三个分区设置带区（RAID 级别 0）。运行此命令后将创建一个名为 **/dev/md127** 的新 RAID 设备。另请注意，如果这些数据磁盘之前属于另一失效的 RAID 阵列，则可能需要将 `--force` 参数添加到 `mdadm` 命令：
 
-    ```bash  
+    ```bash
     sudo mdadm --create /dev/md127 --level 0 --raid-devices 3 \
         /dev/sdc1 /dev/sdd1 /dev/sde1
     ```
@@ -123,13 +123,13 @@ ms.author: rclaus
 
     a.**CentOS、Oracle Linux、SLES 12、openSUSE 和 Ubuntu**
 
-    ```bash   
+    ```bash
     sudo mkfs -t ext4 /dev/md127
     ```
 
     b.**SLES 11**
 
-    ```bash   
+    ```bash
     sudo mkfs -t ext3 /dev/md127
     ```
 
@@ -157,7 +157,7 @@ ms.author: rclaus
 
 2. 编辑 /etc/fstab 文件时，使用 **UUID** 引用文件系统，而非设备名称。使用 `blkid` 实用程序确定新文件系统的 UUID：
 
-    ```bash   
+    ```bash
     sudo /sbin/blkid
     ...........
     /dev/md127: UUID="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" TYPE="ext4"
@@ -165,13 +165,13 @@ ms.author: rclaus
 
 3. 在文本编辑器中打开 /etc/fstab，并为新文件系统添加条目，例如：
 
-    ```bash   
+    ```bash
     UUID=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee  /data  ext4  defaults  0  2
     ```
 
     或者，在 **SLES 11 和 openSUSE** 中：
 
-    ```bash   
+    ```bash
     /dev/disk/by-uuid/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee  /data  ext3  defaults  0  2
     ```
 
@@ -179,7 +179,7 @@ ms.author: rclaus
 
 4. 测试该 /etc/fstab 条目是否正确：
 
-    ```bash  
+    ```bash
     sudo mount -a
     ```
 
@@ -187,7 +187,7 @@ ms.author: rclaus
 
     接下来，运行 `mount` 命令以确保文件系统已装入：
 
-    ```bash   
+    ```bash
     mount
     .................
     /dev/md127 on /data type ext4 (rw)
@@ -201,7 +201,7 @@ ms.author: rclaus
 
     示例 (Ubuntu)：
 
-    ```bash   
+    ```bash
     UUID=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee  /data  ext4  defaults,nobootwait  0  2
     ```
 
@@ -221,7 +221,7 @@ ms.author: rclaus
 
 - 在 `/etc/fstab` 中使用 `discard` 装载选项，例如：
 
-    ```bash   
+    ```bash
     UUID=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee  /data  ext4  defaults,discard  0  2
     ```
 

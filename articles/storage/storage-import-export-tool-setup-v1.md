@@ -115,7 +115,7 @@ Azure 导入/导出工具是可与 Azure 导入/导出服务一起使用的驱�
 
     Parameters:  
 
-    ```  
+    ```
     /j:<JournalFile>  
         - Required. Path to the journal file. Each drive must have one and only one  
           journal file. The journal file corresponding to the target drive must always  

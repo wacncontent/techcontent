@@ -400,7 +400,7 @@ HealthEvents                    :
 
 以下 PowerShell cmdlet 传入自定义策略。它还筛选子项和事件。
 
-```xml
+```powershell
 PS C:\> Get-ServiceFabricApplicationHealth -ApplicationName fabric:/WordCount -ConsiderWarningAsError $true -ServicesFilter Error -EventsFilter Error -DeployedApplicationsFilter Error
 
 ApplicationName                 : fabric:/WordCount

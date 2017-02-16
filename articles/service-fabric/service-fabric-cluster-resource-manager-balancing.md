@@ -31,7 +31,7 @@ Service Fabric 群集资源管理器可用于报告动态负载、对群集中�
 
 ClusterManifest.xml：
 
-``` xml
+```xml
     <Section Name="PlacementAndLoadBalancing">
         <Parameter Name="PLBRefreshGap" Value="0.1" />
         <Parameter Name="MinPlacementInterval" Value="1.0" />

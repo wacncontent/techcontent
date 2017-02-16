@@ -100,7 +100,7 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 ### 在环境变量中设置默认的 Azure 存储帐户
 可以在订阅中设置多个存储帐户。你可以选择其中的一个存储帐户，并在环境变量中将其设置为同一会话中所有存储命令的默认存储帐户。这样，你便可以在不显式指定存储帐户和密钥的情况下运行 Azure CLI 存储命令。
 
-```bash
+```azurecli
     export AZURE_STORAGE_ACCOUNT=<account_name>
     export AZURE_STORAGE_ACCESS_KEY=<key>
 ```
@@ -123,7 +123,7 @@ Azure Blob 存储是用于存储大量非结构化数据（例如文本或二进
 ### 创建容器
 Azure 存储服务中的每个 Blob 都必须在容器中。你可以使用 `azure storage container create` 命令创建专用容器：
 
-```bash
+```azurecli
     azure storage container create mycontainer
 ```
 

@@ -206,7 +206,7 @@ wasbs://CONTAINER@ACCOUNTNAME.blob.core.chinacloudapi.cn
 
 2. 使用以下命令检索组件和标记的配置。将 **spark-thrift-sparkconf** 和 **INITIAL** 替换为要检索其配置的组件和标记。
 
-    ```PowerShell
+    ```
     curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME/configurations?type=spark-thrift-sparkconf&tag=INITIAL" | jq --arg newtag $(echo version$(date +%s%N)) '.items[] | del(.href, .version, .Config) | .tag |= $newtag | {"Clusters": {"desired_config": .}}' > newconfig.json
     ```
 

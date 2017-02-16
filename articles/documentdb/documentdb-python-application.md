@@ -354,7 +354,7 @@ ms.author: syamk
 4. 返回到 Azure 门户预览，在“密钥”边栏选项卡中，复制“主密钥”或“辅助密钥”的值，并将其粘贴到 **config.py** 文件，作为 **DOCUMENTDB\_KEY** 属性的值。
 5. 在 **\_\_init\_\_.py** 文件中，添加以下行。
 
-    ```python
+    ```
     app.config.from_object('config')
     ```
 

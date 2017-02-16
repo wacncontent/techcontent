@@ -91,7 +91,7 @@ ms.author: jonor
     * "Priority" 设置流量的评估顺序。编号越低，优先级就越高。将某个规则应用于特定的流量后，就不再处理其他规则。因此，如果优先级为 1 的规则允许流量，优先级为 2 的规则拒绝流量，并将这两个规则同时应用于流量，则允许流量流动（规则 1 的优先级更高，因此将发生作用，并且不再应用其他规则）。
     * "Action" 表示是阻止还是允许受此规则影响的流量。
 
-        ```PowerShell    
+        ```PowerShell
         Get-AzureNetworkSecurityGroup -Name $NSGName | `
         Set-AzureNetworkSecurityRule -Name "Enable Internal DNS" `
         -Type Inbound -Priority 100 -Action Allow `
@@ -115,7 +115,7 @@ ms.author: jonor
 
 4. 此规则允许入站 Internet 流量抵达 Web 服务器。此规则不会更改路由行为。该规则仅允许发往 IIS01 的流量通过。因此，如果来自 Internet 的流量将 Web 服务器作为其目标，此规则将允许流量，并停止处理其他规则。（在优先级为 140 的规则中，其他所有入站 Internet 流量均被阻止）。如果你只要处理 HTTP 流量，可将此规则进一步限制为只允许目标端口 80。
 
-    ```PowerShell    
+    ```PowerShell
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
          Set-AzureNetworkSecurityRule -Name "Enable Internet to $VMName[0]" `
          -Type Inbound -Priority 120 -Action Allow `
@@ -127,7 +127,7 @@ ms.author: jonor
 
 5. 此规则允许流量从 IIS01 服务器传递到 AppVM01 服务器，后面的规则将阻止其他所有从前端到后端的流量。如果要添加的端口是已知的，则可以改善此规则。例如，如果 IIS 服务器的流量只抵达 AppVM01 上的 SQL Server，并且 Web 应用程序曾遭到入侵，则目标端口范围应该从 "*"（任意端口）更改为 "1433"（SQL 端口），以缩小 AppVM01 上的入站攻击面。
 
-    ```PowerShell    
+    ```PowerShell
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
         Set-AzureNetworkSecurityRule -Name "Enable $VMName[1] to $VMName[2]" `
         -Type Inbound -Priority 130 -Action Allow `
@@ -139,7 +139,7 @@ ms.author: jonor
 
 6. 此规则将拒绝从 Internet 到网络上任何服务器的流量。规则的优先级为 110 和 120 时，只有入站 Internet 流量能够发往防火墙和服务器上的 RDP 端口，其他流量将被阻止。此规则属于“防故障”规则，可以阻止所有意外的流量。
 
-    ```PowerShell    
+    ```PowerShell
     Get-AzureNetworkSecurityGroup -Name $NSGName | `
         Set-AzureNetworkSecurityRule `
         -Name "Isolate the $VNetName VNet from the Internet" `

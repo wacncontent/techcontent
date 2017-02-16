@@ -46,7 +46,7 @@ ms.author: cynthn
 * 你需要[安装 Azure CLI](../xplat-cli-install.md)，并[连接到你的订阅](../xplat-cli-connect.md)以使用与你帐户关联的 Azure 资源。
 * 在命令提示符下键入以下命令，为经典部署模型设置正确的模式：
 
-    ``` 
+    ```
     azure config mode asm
     ```
 
@@ -55,7 +55,7 @@ ms.author: cynthn
 ## <a name="pwresetcli"></a>重置密码
 1. 使用以下代码行在本地计算机上创建名为 PrivateConf.json 的文件。将 **myUserName** 和 **myP@ssW0rd** 替换为自己的用户名和密码，并设置自己的过期日期。
 
-    ```   
+    ```
     {
     "username":"myUserName",
     "password":"myP@ssW0rd",
@@ -65,14 +65,14 @@ ms.author: cynthn
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-    ```   
+    ```
     azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
     ```
 
 ## <a name="sshkeyresetcli"></a>重置 SSH 密钥
 1. 使用以下内容创建名为 PrivateConf.json 的文件。将 **myUserName** 和 **mySSHKey** 值替换为自己的信息。
 
-    ```   
+    ```
     {
     "username":"myUserName",
     "ssh_key":"mySSHKey"
@@ -81,14 +81,14 @@ ms.author: cynthn
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-    ```   
+    ```
     azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
     ```
 
 ## <a name="resetbothcli"></a>重置密码和 SSH 密钥
 1. 使用以下内容创建名为 PrivateConf.json 的文件。将 **myUserName**、**mySSHKey** 和 **myP@ssW0rd** 值替换为自己的信息。
 
-    ```   
+    ```
     {
     "username":"myUserName",
     "ssh_key":"mySSHKey",
@@ -98,7 +98,7 @@ ms.author: cynthn
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-    ```   
+    ```
     azure vm extension set MyVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
     ```
 
@@ -122,7 +122,7 @@ ms.author: cynthn
 
 1. 使用以下内容创建名为 PrivateConf.json 的文件。
 
-    ```   
+    ```
     {
     "reset_ssh":"True"
     }
@@ -130,7 +130,7 @@ ms.author: cynthn
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-    ```   
+    ```
     azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
     ```
 
@@ -139,7 +139,7 @@ ms.author: cynthn
 
 1. 创建包含以下内容的名为 PrivateConf.json 的文件（请将 **removeUserName** 替换为要删除的用户名）。
 
-    ```   
+    ```
     {
     "remove_user":"removeUserName"
     }
@@ -147,14 +147,14 @@ ms.author: cynthn
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-    ```   
+    ```
     azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
     ```
 
 ## <a name="statuscli"></a>显示 VMAccess 扩展的状态
 若要显示 VMAccess 扩展的状态，请运行以下命令。
 
-```   
+```
     azure vm extension get
 ```
 
@@ -163,7 +163,7 @@ ms.author: cynthn
 
 1. 使用以下内容创建名为 PublicConf.json 的文件。Check Disk 采用的布尔值表示是否检查附加到虚拟机的磁盘。
 
-    ```   
+    ```
     {   
     "check_disk": "true"
     }
@@ -171,7 +171,7 @@ ms.author: cynthn
 
 2. 执行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-    ```   
+    ```
     azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --public-config-path PublicConf.json 
     ```
 
@@ -180,7 +180,7 @@ ms.author: cynthn
 
 1. 使用以下内容创建名为 PublicConf.json 的文件。
 
-    ```   
+    ```
     {
     "repair_disk":"true",
     "disk_name":"myDisk"
@@ -189,7 +189,7 @@ ms.author: cynthn
 
 2. 执行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
 
-    ```   
+    ```
     azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --public-config-path PublicConf.json
     ```
 

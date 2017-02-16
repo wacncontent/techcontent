@@ -95,7 +95,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 
 当你通过 .NET SDK 以编程方式连接到角色实例时，可以相对较容易地访问终结点信息。例如，在连接到特定的角色环境后，你可以使用以下代码获取特定终结点的端口：
 
-```xml
+```csharp
     int port = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["StandardWeb"].IPEndpoint.Port;
 ```
 

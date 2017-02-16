@@ -173,7 +173,7 @@ ms.author: sdanie
     ![Web.config][cache-web-config]
 2. 将以下连接字符串添加到 `connectionStrings` 节。连接字符串的名称必须与实体框架数据库上下文类（即 `TeamContext`）的名称相匹配。
 
-    ```xml   
+    ```xml
     <add name="TeamContext" connectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Teams.mdf;Integrated Security=True" providerName="System.Data.SqlClient" />
     ```
 
@@ -276,14 +276,14 @@ ms.author: sdanie
 
 4. 将以下两个 `using` 语句添加到 **TeamsController.cs**。
 
-    ```c#   
+    ```c#
     using System.Configuration;
     using StackExchange.Redis;
     ```
 
 5. 将以下两个属性添加到 `TeamsController` 类。
 
-    ```c#   
+    ```c#
     // Redis Connection string info
     private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
     {
@@ -330,7 +330,7 @@ ms.author: sdanie
 
 1. 将以下 `using` 语句添加到 `TeamsController.cs` 文件顶部，与其他 `using` 语句放置在一起。
 
-    ```c#   
+    ```c#
     using System.Diagnostics;
     using Newtonsoft.Json;
     ```

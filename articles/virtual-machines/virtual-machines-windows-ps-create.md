@@ -64,7 +64,7 @@ ms.author: davidmu
     如果此命令返回 **True**，表示建议的名称在 Azure 中唯一。
 2. 现在，创建存储帐户。
 
-    ```powershell    
+    ```powershell
     $myStorageAccount = New-AzureRmStorageAccount -ResourceGroupName $myResourceGroup `
         -Name $myStorageAccountName -SkuName "Standard_LRS" -Kind "Storage" -Location $location
     ```

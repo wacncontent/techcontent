@@ -55,7 +55,7 @@ data:    Contoso production                xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 
 若要设置当前 Azure 订阅，请键入以下内容。使用具有你要管理的资源的订阅名称或 ID。
 
-```azure cli
+```azurecli
 azure account set <subscription name or ID> true
 ```
 

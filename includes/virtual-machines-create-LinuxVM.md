@@ -10,7 +10,7 @@
 
 3. 从可用映像中找出你想要加载的 Linux 映像，如下所示：
 
-    ```azurecli   
+    ```azurecli
     azure vm image list | grep "Linux"
     ```
 

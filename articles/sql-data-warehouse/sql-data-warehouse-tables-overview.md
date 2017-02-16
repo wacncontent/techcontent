@@ -30,7 +30,7 @@ ms.author: sonyama;barbkess;jrj
 
 在 Azure SQL 数据仓库中创建表的入门操作很简单。基本的 [CREATE TABLE][] 语法与常用语法无异，这种语法你在使用其他数据库时很可能已经很熟悉了。创建表时，只需为表和列命名，然后为每个列定义数据类型即可。如果你已经在其他数据库中创建过表，则此操作对你来说应该很熟悉。
 
-```sql  
+```sql
 CREATE TABLE Customers (FirstName VARCHAR(25), LastName VARCHAR(25))
 ```
 
@@ -38,7 +38,7 @@ CREATE TABLE Customers (FirstName VARCHAR(25), LastName VARCHAR(25))
 
 [重命名][RENAME] SQL 数据仓库表的操作如下所示：
 
-```sql  
+```sql
 RENAME OBJECT Customer TO CustomerOrig; 
 ```
 

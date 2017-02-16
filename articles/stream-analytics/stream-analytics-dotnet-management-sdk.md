@@ -96,7 +96,7 @@ Azure 流分析是一种完全托管的服务，可以在云中通过流式数�
 
 6. 添加一个身份验证帮助器方法：
 
-    ```   
+    ```
     public static string GetAuthorizationHeader()
     {
         AuthenticationResult result = null;

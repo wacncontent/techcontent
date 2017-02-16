@@ -77,7 +77,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 6. 使用 SDK 的部署命令来创建新的应用程序，并提供应用程序包的名称和路径。
 
-    ```powershell  
+    ```powershell
     Publish-NewServiceFabricApplication -ApplicationPackagePath c:\ServiceFabric\WordCountV1.sfpkg -ApplicationName "fabric:/WordCount"
     ```
 
@@ -98,7 +98,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. 查询群集上所有已部署的应用程序：
 
-    ```powershell  
+    ```powershell
     Get-ServiceFabricApplication
     ```
 
@@ -171,7 +171,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. 若要删除单个应用程序及其所有数据，请运行以下命令：
 
-    ```powershell  
+    ```powershell
     Unpublish-ServiceFabricApplication -ApplicationName "fabric:/WordCount"
     ```
 

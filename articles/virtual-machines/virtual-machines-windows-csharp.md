@@ -532,7 +532,7 @@ ms.author: davidmu
 
 2. 若要调用之前添加的方法，请将此代码添加到 Main 方法：
 
-    ```   
+    ```
     DeleteResourceGroupAsync(
       credential,
       groupName,

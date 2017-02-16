@@ -166,7 +166,7 @@ ms.author: adegeo
 
 若要配置诊断，请打开 *diagnostics.wadcfgx*，并在 **Directories** 节点下添加以下内容：
 
-```xml 
+```xml
     <DataSources>
      <DirectoryConfiguration containerName="netfx-install">
       <LocalResource name="NETFXInstall" relativePath="log"/>

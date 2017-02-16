@@ -193,7 +193,7 @@ ALTER TABLE SensorTelemetry
 
 1. 反向迁移，并取回已迁移的数据。启动此操作后将无法取消此操作。你还会在 Azure 上为出站数据传输（传出）产生费用。<!-- 有关详细信息，请参阅 [Azure 如何定价](https://www.azure.cn/pricing/details/data-transfers/)。-->
 
-    ```tsql  
+    ```tsql
     ALTER TABLE <table name>  
          SET ( REMOTE_DATA_ARCHIVE ( MIGRATION_STATE = INBOUND ) ) ;   
     ```
@@ -204,7 +204,7 @@ ALTER TABLE SensorTelemetry
 
 4. 将该函数添加到表，并重新启动到 Azure 的数据迁移。
 
-    ```tsql  
+    ```tsql
     ALTER TABLE <table name>  
         SET ( REMOTE_DATA_ARCHIVE  
             (           

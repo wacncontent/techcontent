@@ -89,7 +89,7 @@ ms.author: tomfitz
 
     就此示例来说，该命令显示 someone@contoso.com 执行了停止操作。
 
-    ```powershell 
+    ```powershell
     Authorization     :
     Scope     : /subscriptions/xxxxx/resourcegroups/ExampleGroup/providers/Microsoft.Web/sites/ExampleSite
     Action    : Microsoft.Web/sites/stop/action
@@ -109,7 +109,7 @@ ms.author: tomfitz
 
 3. 你可以查看特定用户针对某个资源组执行的操作，即使该资源组不再存在。
 
-    ```powershell 
+    ```powershell
     Get-AzureRmLog -ResourceGroup deletedgroup -StartTime (Get-Date).AddDays(-14) -Caller someone@contoso.com
     ```
 

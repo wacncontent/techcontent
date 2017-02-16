@@ -282,7 +282,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [cURL](http://curl.haxx.se/) 和 [jq](http://stedolan.github.io/jq/)
 
-    ```xml
+    ```
     curl -G -u <username>:<password> https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azurehdinsight.cn/services/yarn/components/resourcemanager | jq .host_components[0].HostRoles.host_name
     ```
 
@@ -312,7 +312,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [cURL](http://curl.haxx.se/) 和 [jq](http://stedolan.github.io/jq/)
 
-    ```xml
+    ```
     curl -G -u <username>:<password> "https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azurehdinsight.cn/configurations?type=hbase-site&tag=default&fields=items/properties/hbase.zookeeper.quorum" | jq .items[0].properties[]
     ```
 

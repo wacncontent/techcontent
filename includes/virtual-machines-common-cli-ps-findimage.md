@@ -87,7 +87,7 @@ info:    vm image list-offers command OK
 
 现在，我们知道在中国北部区域中，Canonical 在 Azure 上发布 **UbuntuServer** 产品。但是，有哪些 SKU 呢？ 若要获取 SKU 信息，请调用 `azure vm image list-skus`，并在提示文字后面输入你找到的位置、发布者和产品信息。
 
-```azurecli
+```
 azure vm image list-skus
 info:    Executing command vm image list-skus
 Location: chinanorth

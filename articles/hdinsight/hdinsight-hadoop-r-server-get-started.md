@@ -458,7 +458,7 @@ rxNaiveBayes(type ~ age + cost, data = pqData)
 
 <br/>  
 
-``` 
+```
 #..check on Spark data objects, cleanup, and close the Spark session 
 
 lsObj <- rxSparkListData() # two data objs are cached

@@ -251,7 +251,7 @@ return date, time, classname, level, detail
 
 5. 进入编辑器后，删除行开头的 `#` 字符以取消注释以下行：
 
-    ```python
+    ```
     #from pig_util import outputSchema
     ```
 

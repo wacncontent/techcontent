@@ -168,7 +168,7 @@ Get-AzureApplicationGateway AppGwTest
 
 使用 Get-AzureApplicationGatewayConfig 获取 XML 文件。这会导出要修改的配置 XML 以添加探测设置。
 
-```xml
+```powershell
 Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofile "<path to file>"
 ```
 
@@ -209,7 +209,7 @@ Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofi
 
 使用 `Set-AzureApplicationGatewayConfig` 在新的 XML 文件中更新应用程序网关配置。这将以新的配置更新应用程序网关。
 
-```xml
+```powershell
 Set-AzureApplicationGatewayConfig -Name "<application gateway name>" -Configfile "<path to file>"
 ```
 

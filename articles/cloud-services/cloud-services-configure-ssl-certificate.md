@@ -99,7 +99,7 @@ ms.author: adegeo
 
 3.  在你的服务定义文件中，在 **Sites** 节中添加 **Binding** 元素。此节添加 HTTPS 绑定以将终结点映射到您的网站：
 
-    ```xml   
+    ```xml
     <WebRole name="CertificateTesting" vmsize="Small">
     ...
         <Sites>
@@ -117,7 +117,7 @@ ms.author: adegeo
 
 4.  在你的服务配置文件 (CSCFG) ServiceConfiguration.Cloud.cscfg 中，在** Role** 节中添加 **Certificates **节，并将下面显示的示例指纹值替换为你的证书的指纹值：
 
-    ```xml   
+    ```xml
     <Role name="Deployment">
     ...
         <Certificates>

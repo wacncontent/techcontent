@@ -23,7 +23,7 @@ ms.author: renash
 ## 在已将数据复制到磁盘的情况下准备磁盘
  以下示例命令演示在已将数据复制到尚未使用 BitLocker 加密的硬盘驱动器的情况下如何准备磁盘：
 
- ```  
+ ```
   WAImportExport.exe PrepImport /j:9WM35C2V.jrn /id:session#1 /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /t:d /encrypt /srcdir:d:\movies\drama /dstdir:movies/drama/ /skipwrite
  ```
 

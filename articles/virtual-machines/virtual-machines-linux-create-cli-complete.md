@@ -232,7 +232,7 @@ az group create --name myResourceGroup --location westeurope
 
 默认情况下，输出采用 JSON 格式（JavaScript 对象表示法）。若要输出为列表或表（例如），请使用 [az configure --output](https://docs.microsoft.com/cli/azure/#configure)。还可以向任何命令添加 `--output` 以一次性地更改输出格式。以下示例演示 **az resource group create** 命令的 JSON 输出：
 
-```json                       
+```json
 {
   "id": "/subscriptions/guid/resourceGroups/myResourceGroup",
   "location": "westeurope",

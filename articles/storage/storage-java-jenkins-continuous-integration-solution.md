@@ -86,7 +86,7 @@ Jenkins 通过允许开发人员轻松地集成其代码更改以及自动和频
 3. 在作业配置的“生成”部分，单击“添加生成步骤”并选择“执行 Windows 批处理命令”。
 4. 在“命令”中，使用下列命令：
 
-    ```   
+    ```
     md text
     cd text
     echo Hello Azure Storage from Jenkins > hello.txt

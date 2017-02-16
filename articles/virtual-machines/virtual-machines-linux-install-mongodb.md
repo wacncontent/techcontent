@@ -63,7 +63,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc
 
 按如下所示使用 `yum` 安装 MongoDB：
 
-```sh
+```bash
 sudo yum install -y mongodb-org
 ```
 
@@ -82,7 +82,7 @@ sudo service mongod start
 
 通过使用本地 `mongo` 客户端进行连接来验证 MongoDB 安装：
 
-```sh
+```bash
 mongo
 ```
 
@@ -135,7 +135,7 @@ ssh ops@138.91.149.74
 
 如下所示，通过使用本地 `mongo` 客户端进行连接来验证 MongoDB 安装：
 
-```sh
+```bash
 mongo
 ```
 

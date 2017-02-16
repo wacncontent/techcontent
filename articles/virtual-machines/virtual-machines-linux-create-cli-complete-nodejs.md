@@ -284,7 +284,7 @@ azure group create --name myResourceGroup --location chinanorth
 
 输出：
 
-```azurecli                        
+```azurecli
 info:    Executing command group create
 + Getting resource group myResourceGroup
 + Creating resource group myResourceGroup
@@ -359,7 +359,7 @@ azure group show myResourceGroup --json | jq '.'
 
 若要使用 CLI 检查存储帐户，首先需要设置帐户名和密钥。将下例中的存储帐户名替换为所选的名称：
 
-```azurecli
+```bash
 export AZURE_STORAGE_CONNECTION_STRING="$(azure storage account connectionstring show mystorageaccount --resource-group myResourceGroup --json | jq -r '.string')"
 ```
 

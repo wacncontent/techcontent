@@ -142,7 +142,7 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 
 1. 确保安装 `rfkill` 实用程序。
 
-    ``` 
+    ```
     sudo apt-get install rfkill
     ```
 
@@ -162,7 +162,7 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 
 4. 输入“启动”命令，打开蓝牙控制器。你应看到如下输出：
 
-    ```json
+    ```
     [NEW] Controller 98:4F:EE:04:1F:DF C3 raspberrypi [default]
     ```
 
@@ -238,7 +238,7 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 
 安装 Azure IoT 网关 SDK 的依赖项。
 
-``` 
+```
     sudo apt-get install cmake uuid-dev curl libcurl4-openssl-dev libssl-dev
 ```
 

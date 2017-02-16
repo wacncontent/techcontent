@@ -101,7 +101,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
     前面的两个示例不包括参数值。可以在[参数](#parameters)部分了解传递参数值的选项。现在，可通过以下语法提示用户提供参数值：
 
-    ```poweshell  
+    ```poweshell
     cmdlet New-AzureRmResourceGroupDeployment at command pipeline position 1
     Supply values for the following parameters:
     (Type !? for Help.)
@@ -110,7 +110,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
     部署资源组后，将看到部署摘要。摘要包含 **ProvisioningState**，指示部署是否成功。
 
-    ```poweshell   
+    ```poweshell
     DeploymentName    : ExampleDeployment
     ResourceGroupName : ExampleResourceGroup
     ProvisioningState : Succeeded
@@ -202,7 +202,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 - 参数对象。包括 **-TemplateParameterObject** 参数。
 
-    ```powershell   
+    ```powershell
     $parameters = @{"<ParameterName>"="<Parameter Value>"}
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile <PathToTemplate> -TemplateParameterObject $parameters
     ```

@@ -254,7 +254,7 @@ JSON
 
 C#
 
-```JSON
+```C#
 =@{triggerBody()['Subject']}
 ```
 
@@ -469,7 +469,7 @@ JSON
 
 C#
 
-```JSON
+```C#
 unixTimeStamp=@{body('Conversion')}
 ```
 
@@ -1012,7 +1012,7 @@ public string GetUtcDate(
 
  C#
 
- ``` C#
+ ```C#
     /// <summary>
     ///     Converts DateTime to double
     /// </summary>

@@ -152,7 +152,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
 
 例如，完成前面的步骤后，可以从本地客户端查询作业，如下所示：
 
-```powershell 
+```powershell
 Get-HpcJob -State All -Scheduler https://<Azure load balancer DNS name> -Owner <Azure AD account>
 ```
 

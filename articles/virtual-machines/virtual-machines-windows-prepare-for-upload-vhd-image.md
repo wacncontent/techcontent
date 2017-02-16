@@ -70,7 +70,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
 3. 将磁盘 SAN 策略配置为 [Onlineall](https://technet.microsoft.com/zh-cn/library/gg252636.aspx)：
 
-    ```CMD
+    ```
     diskpart san policy=onlineall
     ```
 

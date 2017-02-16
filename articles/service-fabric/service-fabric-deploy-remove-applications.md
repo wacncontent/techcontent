@@ -46,7 +46,7 @@ Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\Se
 ~~~
 PS C:\temp> dir
 
-```powershell
+```
 Directory: c:\temp
 ```
 

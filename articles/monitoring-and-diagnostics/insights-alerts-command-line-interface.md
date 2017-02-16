@@ -93,7 +93,7 @@ azure insights alerts actions email create -help
 
 4. 若要创建基于指标的警报规则，请使用以下形式的命令：
 
-    ```console
+    ```
     **azure insights alerts rule metric set** *[options] &lt;ruleName&gt; &lt;location&gt; &lt;resourceGroup&gt; &lt;windowSize&gt; &lt;operator&gt; &lt;threshold&gt; &lt;targetResourceId&gt; &lt;metricName&gt; &lt;timeAggregationOperator&gt;*
     ```
 

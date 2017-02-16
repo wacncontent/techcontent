@@ -44,7 +44,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 2. 如有必要，创建一个新的资源组，如下所示。对于此方案，创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](../azure-resource-manager/resource-group-overview.md)。
 
-    ```powershell   
+    ```powershell
     New-AzureRmResourceGroup -Name TestRG -Location chinaeast
     ```
 

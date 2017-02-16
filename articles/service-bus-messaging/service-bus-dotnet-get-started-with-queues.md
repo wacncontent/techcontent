@@ -132,7 +132,7 @@ wacn.date: 01/23/2017
                 var connectionString = "<Your connection string>";
                 var queueName = "<Your queue name>";
 
-    ```csharp
+    ```
             var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
             var message = new BrokeredMessage("This is a test message!");
 
