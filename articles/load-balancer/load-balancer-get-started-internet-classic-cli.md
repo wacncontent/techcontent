@@ -39,7 +39,7 @@ ms.author: kumud
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到经典模式，如下所示。
 
-    ```
+    ```azurecli
     azure config mode asm
     ```
 
@@ -58,7 +58,7 @@ ms.author: kumud
 
 使用 `azure network vm endpoint create` 为虚拟机“web1”创建第一个终结点和负载均衡器集。
 
-```
+```azurecli
 azure vm endpoint create web1 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
 ```
 
@@ -66,7 +66,7 @@ azure vm endpoint create web1 80 --local-port 80 --protocol tcp --probe-port 80 
 
 将第二个虚拟机“web2”添加到负载均衡器集。
 
-```
+```azurecli
 azure vm endpoint create web2 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
 ```
 
@@ -74,7 +74,7 @@ azure vm endpoint create web2 80 --local-port 80 --protocol tcp --probe-port 80 
 
 使用 `azure vm show` 验证负载均衡器配置。
 
-```
+```azurecli
 azure vm show web1
 ```
 
@@ -128,7 +128,7 @@ info:    vm show command OK
 
 你可以使用 `azure vm endpoint create` 创建远程桌面终结点，将网络流量从公共端口转发到特定虚拟机的本地端口。
 
-```
+```azurecli
 azure vm endpoint create web1 54580 -k 3389
 ```
 
@@ -138,7 +138,7 @@ azure vm endpoint create web1 54580 -k 3389
 
 使用上面的示例，你可以使用命令 `azure vm endpoint delete` 从负载均衡器“lbset”中删除为虚拟机“web1”创建的终结点。
 
-```
+```azurecli
 azure vm endpoint delete web1 tcp-80-80
 ```
 

@@ -46,7 +46,7 @@ ms.author: singhkay
 
 #### 验证问题
 
-```
+```PowerShell
 # Store the VM details in the VM object
 $vm = Get-AzureVM -ServiceName $servicename -Name $vmname
 
@@ -83,7 +83,7 @@ Name              : coreosvm-dd1.vhd
 
 #### 缓解问题
 
-```
+```PowerShell
 # Convert the blob size in bytes to GB into a variable which we'll use later
 $newSize = [int]($blob.Length / 1GB)
 

@@ -50,7 +50,7 @@ ms.author: barbkess;sonyama
 1. 打开 Azure PowerShell。
 2. 在 PowerShell 提示符下，运行以下命令以登录到 Azure Resource Manager，然后选择你的订阅。
 
-    ```
+    ```PowerShell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     Get-AzureRmSubscription
     Select-AzureRmSubscription -SubscriptionName "MySubscription"
@@ -65,7 +65,7 @@ ms.author: barbkess;sonyama
 
 若要更改 DWU，请使用 [Set-AzureRmSqlDatabase][] PowerShell cmdlet。以下示例将托管在服务器 MyServer 上的数据库 MySQLDW 的服务级别目标设置为 DW1000。
 
-```
+```Powershell
 Set-AzureRmSqlDatabase -DatabaseName "MySQLDW" -ServerName "MyServer" -RequestedServiceObjectiveName "DW1000"
 ```
 
@@ -80,14 +80,14 @@ Set-AzureRmSqlDatabase -DatabaseName "MySQLDW" -ServerName "MyServer" -Requested
 > [!NOTE]
 > 注意，如果服务器是 foo.database.chinacloudapi.cn，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
 
-```
+```Powershell
 Suspend-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
 –ServerName "Server01" –DatabaseName "Database02"
 ```
 
 一种变异，下一个示例将数据库检索到 $database 对象中。然后，它通过管道将该对象传递给 [Suspend-AzureRmSqlDatabase][]。结果存储在对象 resultDatabase 中。最后一个命令显示结果。
 
-```
+```Powershell
 $database = Get-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
 –ServerName "Server01" –DatabaseName "Database02"
 $resultDatabase = $database | Suspend-AzureRmSqlDatabase
@@ -102,14 +102,14 @@ $resultDatabase
 
 若要启动数据库，请使用 [Resume-AzureRmSqlDatabase][] cmdlet。以下示例将启动 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
-```
+```Powershell
 Resume-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
 –ServerName "Server01" -DatabaseName "Database02"
 ```
 
 一种变异，下一个示例将数据库检索到 $database 对象中。然后，它通过管道将对象传递给 [Resume-AzureRmSqlDatabase][]，并将结果存储在 $resultDatabase 中。最后一个命令显示结果。
 
-```
+```Powershell
 $database = Get-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
 –ServerName "Server01" –DatabaseName "Database02"
 $resultDatabase = $database | Resume-AzureRmSqlDatabase

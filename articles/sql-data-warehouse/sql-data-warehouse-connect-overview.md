@@ -38,13 +38,13 @@ Azure SQL 数据仓库支持 [ADO.NET][ADO.NET]、[ODBC][ODBC]、[PHP][PHP] 和 
 
 ### ADO.NET 连接字符串示例
 
-```
+```C#
 Server=tcp:{your_server}.database.chinacloudapi.cn,1433;Database={your_database};User ID={your_user_name};Password={your_password_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
 ```
 
 ### ODBC 连接字符串示例
 
-```
+```C#
 Driver={SQL Server Native Client 11.0};Server=tcp:{your_server}.database.chinacloudapi.cn,1433;Database={your_database};Uid={your_user_name};Pwd={your_password_here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;
 ```
 
@@ -56,7 +56,7 @@ Server: {your_server}.database.chinacloudapi.cn,1433 \r\nSQL Database: {your_dat
 
 ### JDBC 连接字符串示例
 
-```
+```Java
 jdbc:sqlserver://yourserver.database.chinacloudapi.cn:1433;database=yourdatabase;user={your_user_name};password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.chinacloudapi.cn;loginTimeout=30;
 ```
 

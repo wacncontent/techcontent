@@ -53,7 +53,7 @@ ms.author: marsma
 
 csharp
 
-```
+```csharp
 CloudPool pool =
     batchClient.PoolOperations.CreatePool(
         poolId: "mypool",
@@ -71,7 +71,7 @@ pool.Commit();
 
 json
 
-```
+```json
 {
   "odata.metadata":"https://myaccount.myregion.batch.azure.com/$metadata#pools/@Element",
   "id":"mypool",

@@ -41,7 +41,7 @@ ms.author: dobett
 
 1. 在命令提示符中，运行 [login 命令][lnk-login-command]：
 
-    ```
+    ```azurecli
     az login
     ```
 
@@ -51,25 +51,25 @@ ms.author: dobett
 
 2. 如果有多个 Azure 订阅，登录 Azure 可获得与凭据关联的所有 Azure 帐户的访问权限。使用以下[命令，列出可供使用的 Azure 帐户][lnk-az-account-command]：
 
-    ```
+    ```azurecli
     az account list 
     ```
 
     使用以下命令，选择想要用于运行命令以创建 IoT 中心的订阅。可使用上一命令输出中的订阅名称或 ID：
 
-    ```
+    ```azurecli
     az account set --subscription {your subscription name or id}
     ```
 
 3. 安装 Azure CLI *iot 组件* 。运行以下[命令，添加 iot 组件][lnk-az-addcomponent-command]：
 
-    ```
+    ```azurecli
     az component update --add iot
     ```
 
 4. 必须注册 IoT 提供程序才能部署 IoT 资源。运行以下[命令，注册 IoT 提供程序][lnk-az-register-command]：
 
-    ```
+    ```azurecli
     az provider register -namespace Microsoft.Devices
     ```
 
@@ -79,7 +79,7 @@ ms.author: dobett
 
 1. 创建 IoT 中心时，必须在资源组中创建它。使用现有资源组，或运行以下[命令创建资源组][lnk-az-resource-command]：
 
-    ```
+    ```azurecli
      az group create --name {your resource group name} --location chinaeast
     ```
 
@@ -90,7 +90,7 @@ ms.author: dobett
 
 2. 运行以下[命令，在资源组中创建 IoT 中心][lnk-az-iot-command]：
 
-    ```
+    ```azurecli
     az iot hub create --name {your iot hub name} --resource-group {your resource group name} --sku S1
     ```
 
@@ -105,13 +105,13 @@ IoT 中心的名称必须全局唯一。上一命令在计费的 S1 定价层中
 
 若要删除 IoT 中心，请运行以下命令：
 
-```
+```azurecli
 az resource delete --name {your iot hub name} --resource-group {your resource group name} --resource-type Microsoft.Devices/IotHubs
 ```
 
 若要删除资源组及其所有资源，请运行以下命令：
 
-```
+```azurecli
 az group delete --name {your resource group name}
 ```
 

@@ -37,7 +37,7 @@ ms.author: robb
 ### 步骤 2：检测代码
 将 WorkerRole.cs 的内容替换为以下代码。继承自 [EventSource 类][]的 SampleEventSourceWriter 类实现四个日志记录方法：**SendEnums**、**MessageMethod**、**SetOther** 和 **HighFreq**。**WriteEvent** 方法的第一个参数定义相关事件的 ID。Run 方法实现一个无限循环，该循环每隔 10 秒调用 **SampleEventSourceWriter** 类中实现的每个日志记录方法。
 
-```
+```csharp
 using Microsoft.WindowsAzure.ServiceRuntime;
 using System;
 using System.Diagnostics;
@@ -140,7 +140,7 @@ public class WorkerRole : RoleEntryPoint
 3. 将 WadConfig.xsd 与配置文件相关联。确保 WadExample.xml 编辑器窗口是活动的窗口。按 **F4** 打开“属性”窗口。在“属性”窗口中单击“架构”属性。在“架构”属性中单击“...”。单击“添加...”按钮并导航到 XSD 文件的保存位置，然后选择文件 WadConfig.xsd。单击“确定”。
 4. 将 WadExample.xml 配置文件的内容替换为以下 XML 并保存该文件。此配置文件定义两个要收集的性能计数器：一个对应于 CPU 使用率，另一个对应于内存使用率。配置将定义对应于 SampleEventSourceWriter 类中方法的四个事件。
 
-    ```
+    ```xml
     <?xml version="1.0" encoding="utf-8"?>
     <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
           <WadCfg>
@@ -169,7 +169,7 @@ public class WorkerRole : RoleEntryPoint
 1. 打开 Azure PowerShell。
 2. 执行脚本以在辅助角色上安装 Diagnostics（将 *StorageAccountKey* 替换为 wadexample 存储帐户的存储帐户密钥）：
 
-    ```
+    ```powershell
     $storage_name = "wadexample"
     $key = "<StorageAccountKey>"
     $config_path="c:\users<user>\documents\visual studio 2013\Projects\WadExample\WorkerRole1\WadExample.xml"

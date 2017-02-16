@@ -121,7 +121,7 @@ Web 应用 Memcache 填充码可以与任何应用程序一起使用，前提是
 
 在 `wp-config.php` 文件中，将以下代码添加到该文件末尾附近停止编辑备注的上方。
 
-```
+```php
 $memcached_servers = array(
     'default' => array('localhost:' . getenv("MEMCACHESHIM_PORT"))
 );
@@ -169,7 +169,7 @@ $memcached_servers = array(
 
 打开你选择的命令行控制台并键入以下命令：
 
-```
+```shell
 redis-cli -h <hostname-for-redis-cache> -a <primary-key-for-redis-cache> -p 6379
 ```
 

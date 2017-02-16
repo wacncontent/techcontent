@@ -37,7 +37,7 @@ ms.author: douglasl
 ## 筛选器函数的基本要求
 Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例。
 
-```
+```tsql
 CREATE FUNCTION dbo.fn_stretchpredicate(@column1 datatype1, @column2 datatype2 [, ...n])
 RETURNS TABLE
 WITH SCHEMABINDING
@@ -82,7 +82,7 @@ RETURN	SELECT 1 AS is_eligible
 
     以下示例将检查 *date* 列的值是否 &lt; 1/1/2016。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_stretchpredicate(@column1 datetime)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -103,7 +103,7 @@ RETURN	SELECT 1 AS is_eligible
 
     以下示例将检查 *shipment\_status* 列的值是否为 `IN (N'Completed', N'Returned', N'Cancelled')`。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_stretchpredicate(@column1 nvarchar(15))
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -146,7 +146,7 @@ RETURN	SELECT 1 AS is_eligible
 ## 向表中添加筛选器函数
 通过运行 **ALTER TABLE** 语句并将现有的内联表值函数指定为 **FILTER\_PREDICATE** 参数的值，来向表中添加筛选器函数。例如：
 
-```
+```tsql
 ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
     FILTER_PREDICATE = dbo.fn_stretchpredicate(column1, column2),
     MIGRATION_STATE = <desired_migration_state>
@@ -169,7 +169,7 @@ ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
 
 例如，如果你指定下面的示例中所示的三部分列名，该语句将成功运行，但对该表的后续查询将失败。
 
-```
+```tsql
 ALTER TABLE SensorTelemetry
   SET ( REMOTE_DATA_ARCHIVE = ON (
     FILTER_PREDICATE=dbo.fn_stretchpredicate(dbo.SensorTelemetry.ScanDate),
@@ -179,7 +179,7 @@ ALTER TABLE SensorTelemetry
 
 请改为使用一部分列名指定筛选器函数，如下面的示例中所示。
 
-```
+```tsql
 ALTER TABLE SensorTelemetry
   SET ( REMOTE_DATA_ARCHIVE = ON  (
     FILTER_PREDICATE=dbo.fn_stretchpredicate(ScanDate),
@@ -193,7 +193,7 @@ ALTER TABLE SensorTelemetry
 
 1. 反向迁移，并取回已迁移的数据。启动此操作后将无法取消此操作。你还会在 Azure 上为出站数据传输（传出）产生费用。<!-- 有关详细信息，请参阅 [Azure 如何定价](https://www.azure.cn/pricing/details/data-transfers/)。-->
 
-    ```
+    ```tsql  
     ALTER TABLE <table name>  
          SET ( REMOTE_DATA_ARCHIVE ( MIGRATION_STATE = INBOUND ) ) ;   
     ```
@@ -204,7 +204,7 @@ ALTER TABLE SensorTelemetry
 
 4. 将该函数添加到表，并重新启动到 Azure 的数据迁移。
 
-    ```
+    ```tsql  
     ALTER TABLE <table name>  
         SET ( REMOTE_DATA_ARCHIVE  
             (           
@@ -217,7 +217,7 @@ ALTER TABLE SensorTelemetry
 ## 按日期筛选行
 下面的示例将迁移 **date** 列包含的值早于 2016 年 1 月 1 日的行。
 
-```
+```tsql
 -- Filter by date
 --
 CREATE FUNCTION dbo.fn_stretch_by_date(@date datetime2)
@@ -231,7 +231,7 @@ GO
 ## 按状态列中的值筛选行
 下面的示例将迁移 **status** 列包含指定的值之一的行。
 
-```
+```tsql
 -- Filter by status column
 --
 CREATE FUNCTION dbo.fn_stretch_by_status(@status nvarchar(128))
@@ -251,7 +251,7 @@ GO
 
 从类似于下面的示例的筛选器函数开始，该函数将迁移 **systemEndTime** 列包含的值早于 2016 年 1 月 1 日的行。
 
-```
+```tsql
 CREATE FUNCTION dbo.fn_StretchBySystemEndTime20160101(@systemEndTime datetime2)
 RETURNS TABLE
 WITH SCHEMABINDING  
@@ -262,7 +262,7 @@ RETURN SELECT 1 AS is_eligible
 
 对表应用筛选器函数。
 
-```
+```tsql
 ALTER TABLE <table name>
 SET (
         REMOTE_DATA_ARCHIVE = ON
@@ -293,7 +293,7 @@ SET (
                    WHERE @systemEndTime < CONVERT(datetime2,'2016-01-02T00:00:00', 101)
             GO
 
-    ```
+    ```tsql
         /*(2) Set the new function as the filter predicate */
         ALTER TABLE <table name>
         SET
@@ -311,7 +311,7 @@ SET (
 
 -   以下示例使用 AND 逻辑运算符组合两个基元条件。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_stretchpredicate((@column1 datetime, @column2 nvarchar(15))
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -328,7 +328,7 @@ SET (
 
 -   以下示例使用了多个条件，并使用 CONVERT 执行确定性转换。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_stretchpredicate_example1(@column1 datetime, @column2 int, @column3 nvarchar)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -340,7 +340,7 @@ SET (
 
 -   以下示例使用数学运算符和函数。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_stretchpredicate_example2(@column1 float)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -352,7 +352,7 @@ SET (
 
 -   以下示例使用 BETWEEN 和 NOT BETWEEN 运算符。这种用法是有效的，因为在将 BETWEEN 和 NOT BETWEEN 运算符替换为等效的 AND 和 OR 表达式后，生成的谓词符合本文所述的规则。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_stretchpredicate_example3(@column1 int, @column2 int)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -365,7 +365,7 @@ SET (
 
     在将 BETWEEN 和 NOT BETWEEN 运算符替换为等效的 AND 和 OR 表达式后，上面的函数等效于下面的函数。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_stretchpredicate_example4(@column1 int, @column2 int)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -379,7 +379,7 @@ SET (
 
 -   以下函数无效，因为它包含不确定性转换。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_example5(@column1 datetime)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -391,7 +391,7 @@ SET (
 
 -   以下函数无效，因为它包含不确定性函数调用。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_example6(@column1 datetime)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -403,7 +403,7 @@ SET (
 
 -   以下函数无效，因为它包含子查询。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_example7(@column1 int)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -415,7 +415,7 @@ SET (
 
 -   以下函数无效，因为使用代数运算符或内置函数的表达式在你定义函数时必须求值为常量。不能在代数表达式或函数调用中包含列引用。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_example8(@column1 int)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -435,7 +435,7 @@ SET (
 
 -   以下函数无效，因为在将 BETWEEN 运算符替换为等效的 AND 表达式后，该函数将违反本文所述的规则。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_example10(@column1 int, @column2 int)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -447,7 +447,7 @@ SET (
 
     在将 BETWEEN 运算符替换为等效的 AND 表达式后，上面的函数等效于下面的函数。此函数无效，因为基元条件只能使用 OR 逻辑运算符。
 
-    ```
+    ```tsql
     CREATE FUNCTION dbo.fn_example11(@column1 int, @column2 int)
     RETURNS TABLE
     WITH SCHEMABINDING
@@ -460,7 +460,7 @@ SET (
 ## Stretch Database 如何应用筛选器函数
 Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确定符合条件的行。例如：
 
-```
+```tsql
 SELECT * FROM stretch_table_name CROSS APPLY fn_stretchpredicate(column1, column2)
 ```
 
@@ -469,7 +469,7 @@ SELECT * FROM stretch_table_name CROSS APPLY fn_stretchpredicate(column1, column
 ## <a name="replacePredicate"></a>替换现有的筛选器函数
 可以通过再次运行 **ALTER TABLE** 语句并为 **FILTER\_PREDICATE** 参数指定新值，来替换以前指定的筛选器函数。例如：
 
-```
+```tsql
 ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
     FILTER_PREDICATE = dbo.fn_stretchpredicate2(column1, column2),
     MIGRATION_STATE = <desired_migration_state>
@@ -490,7 +490,7 @@ ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
 ### 有效替换的示例
 假设以下函数是当前的筛选器谓词。
 
-```
+```tsql
 CREATE FUNCTION dbo.fn_stretchpredicate_old (@column1 datetime, @column2 int)
 RETURNS TABLE
 WITH SCHEMABINDING
@@ -503,7 +503,7 @@ GO
 
 以下函数是有效的替换，因为新日期常量（指定一个更迟的截止日期）会使该谓词的限制强度更低。
 
-```
+```tsql
 CREATE FUNCTION dbo.fn_stretchpredicate_new (@column1 datetime, @column2 int)
 RETURNS TABLE
 WITH SCHEMABINDING
@@ -517,7 +517,7 @@ GO
 ### 无效替换的示例
 以下函数不是有效的替换，因为新日期常量（指定一个更早的截止日期）不能使该谓词的限制强度更低。
 
-```
+```tsql
 CREATE FUNCTION dbo.fn_notvalidreplacement_1 (@column1 datetime, @column2 int)
 RETURNS TABLE
 WITH SCHEMABINDING
@@ -530,7 +530,7 @@ GO
 
 以下函数不是有效的替换，因为删除了某个比较运算符。
 
-```
+```tsql
 CREATE FUNCTION dbo.fn_notvalidreplacement_2 (@column1 datetime, @column2 int)
 RETURNS TABLE
 WITH SCHEMABINDING
@@ -543,7 +543,7 @@ GO
 
 以下函数不是有效的替换，因为使用 AND 逻辑运算符添加了新的条件。
 
-```
+```tsql
 CREATE FUNCTION dbo.fn_notvalidreplacement_3 (@column1 datetime, @column2 int)
 RETURNS TABLE
 WITH SCHEMABINDING
@@ -558,7 +558,7 @@ GO
 ## 从表中删除筛选器函数
 若要迁移整个表而不是选定的行，可以通过将 **FILTER\_PREDICATE** 设置为 null 来删除现有函数。例如：
 
-```
+```tsql
 ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
     FILTER_PREDICATE = NULL,
     MIGRATION_STATE = <desired_migration_state>

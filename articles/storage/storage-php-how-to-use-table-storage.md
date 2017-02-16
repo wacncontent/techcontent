@@ -47,7 +47,7 @@ ms.author: marsma
 > [!NOTE]
 > 本文的示例假定用户已通过 Composer 安装了用于 Azure 的 PHP 客户端库。如果手动安装了这些库，需要引用 <code>WindowsAzure.php</code> autoloader 文件。
 
-```
+```php
 require_once 'vendor/autoload.php';
 use WindowsAzure\Common\ServicesBuilder;
 ```
@@ -59,13 +59,13 @@ use WindowsAzure\Common\ServicesBuilder;
 
 若要访问实时服务：
 
-```
+```php
 DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey];EndpointSuffix=core.chinacloudapi.cn
 ```
 
 若要访问模拟器存储：
 
-```
+```php
 UseDevelopmentStorage=true
 ```
 
@@ -78,7 +78,7 @@ UseDevelopmentStorage=true
 
 在此处列出的示例中，将直接传递连接字符串。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -89,7 +89,7 @@ $tableRestProxy = ServicesBuilder::getInstance()->createTableService($connection
 ## 创建表
 利用 **TableRestProxy** 对象，可以使用 **createTable** 方法创建表。创建表时，可以设置表服务超时。（有关表服务超时的详细信息，请参阅[为表服务操作设置超时][table-service-timeouts]。）
 
-```
+```php
 require_once 'vendor\autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -117,7 +117,7 @@ catch(ServiceException $e){
 
 若要将实体添加到表，请创建一个新的 **Entity** 对象并将其传递到 **TableRestProxy->insertEntity**。请注意，在创建实体时，你必须指定 `PartitionKey` 和 `RowKey`。这些值是条目的唯一标识符，查询它们比查询其他条目属性快得多。系统使用 `PartitionKey` 自动将表的实体分发到多个存储节点上。具有相同 `PartitionKey` 的实体存储在同一个节点上。（对存储在同一节点上的多个条目执行操作，执行效果优于对存储在不同节点上的条目执行的操作。） `RowKey` 是实体在分区中的唯一 ID。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -153,7 +153,7 @@ catch(ServiceException $e){
 
 **TableRestProxy** 类提供了用于插入实体的两个替代方法：**insertOrMergeEntity** 和 **insertOrReplaceEntity**。若要使用这些方法，请创建一个新的 **Entity**，并将其作为参数传递到上述任一方法。如果条目不存在，则每种方法都将插入条目。在实体已存在的情况下，如果属性已存在，则 **insertOrMergeEntity** 将更新属性值；如果属性不存在，则该方法将添加新属性，而 **insertOrReplaceEntity** 将完全替换现有实体。下面的示例演示如何使用 **insertOrMergeEntity**。如果实体具有 `PartitionKey`“tasksSeattle”并且 `RowKey`“1”不存在，则将插入该实体。但是，如果之前已插入该实体（如上面的示例所示），则将更新 `DueDate` 属性并添加 `Status` 属性。系统还将更新 `Description` 和 `Location` 属性，但使用的值实际上会使其保持不变。如果并非如示例所示添加后两个属性，而这两个数学已存在于目标条目上，则其现有值将保持不变。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -196,7 +196,7 @@ catch(ServiceException $e){
 ## 检索单个条目
 利用 **TableRestProxy->getEntity** 方法，可以通过查询实体的 `PartitionKey` 和 `RowKey` 来检索它。在以下示例中，分区键 `tasksSeattle` 和行键 `1` 传递给 **getEntity** 方法。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -225,7 +225,7 @@ echo $entity->getPartitionKey().":".$entity->getRowKey();
 ## 检索分区中的所有条目
 使用筛选器来构造实体查询（有关详细信息，请参阅[查询表和实体][filters]）。若要检索分区中的所有实体，请使用筛选器“PartitionKey eq *partition\_name* ”。下面的示例演示如何通过将筛选器传递到 **queryEntities** 方法来检索 `tasksSeattle` 分区中的所有实体。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -258,7 +258,7 @@ foreach($entities as $entity){
 ## 检索分区中条目的子集
 可使用上一示例中所用模式来检索分区中条目的子集。检索的实体子集将由所使用的筛选器确定（有关详细信息，请参阅[查询表和实体][filters]）。下面的示例演示如何使用筛选器检索具有特定的 `Location` 和早于指定日期的 `DueDate` 的所有实体。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -291,7 +291,7 @@ foreach($entities as $entity){
 ## 检索条目属性的子集
 查询可检索条目属性的子集。此方法称为“投影”，可减少带宽并提高查询性能，尤其适用于大型实体。若要指定要检索的属性，请将该属性的名称传递到 **Query->addSelectField** 方法。可以多次调用此方法来添加更多属性。执行 **TableRestProxy->queryEntities** 后，返回的实体将仅具有选定的属性。（若要返回表中条目的子集，请使用筛选器，如以上查询中所示。）
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -330,7 +330,7 @@ foreach($entities as $entity){
 ## 更新条目
 可通过对现有实体使用 **Entity->setProperty** 和 **Entity->addProperty** 方法并调用 **TableRestProxy->updateEntity** 来更新该实体。下面的示例将检索一个条目、修改一个属性、删除另一个属性并添加一个新属性。请注意，通过将属性的值设为 **null** 可删除该属性。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -367,7 +367,7 @@ catch(ServiceException $e){
 ## 删除条目
 若要删除实体，请将表名称以及实体的 `PartitionKey` 和 `RowKey` 传递到 **TableRestProxy->deleteEntity** 方法。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -404,7 +404,7 @@ catch(ServiceException $e){
 
 下面的示例演示了如何通过单个请求执行 **insertEntity** 和 **deleteEntity** 操作：
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -452,7 +452,7 @@ catch(ServiceException $e){
 ## 删除表
 最后，若要删除表，请将表名传递到 **TableRestProxy->deleteTable** 方法。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;

@@ -66,7 +66,7 @@ MSAL 遵守的基本原理是，每当应用需要访问令牌时，只需调用
 
 C#
 
-```
+```C#
 protected override async void OnInitialized(EventArgs e)
 {
     base.OnInitialized(e);
@@ -81,7 +81,7 @@ protected override async void OnInitialized(EventArgs e)
 
 C#
 
-```
+```C#
 // As the app starts, we want to check to see if the user is already signed in.
 // You can do so by trying to get a token from MSAL, using the method
 // AcquireTokenSilent.  This forces MSAL to throw an exception if it cannot
@@ -122,7 +122,7 @@ catch (MsalException ex)
 
 C#
 
-```
+```C#
 private async void SignIn(object sender = null, RoutedEventArgs args = null)
 {
     // TODO: Sign the user out if they clicked the "Clear Cache" button
@@ -171,7 +171,7 @@ private async void SignIn(object sender = null, RoutedEventArgs args = null)
 
 C#
 
-```
+```C#
 private async void GetTodoList()
 {
     AuthenticationResult result = null;

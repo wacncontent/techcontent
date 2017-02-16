@@ -150,7 +150,7 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 
 csharp
 
-```
+```csharp
 /// <summary>
 /// Gets the tasks into which to split the job. This is where you inject
 /// your application-specific logic for decomposing the job into tasks.
@@ -233,7 +233,7 @@ Split() 实现具有以下项的访问权限：
 
 csharp
 
-```
+```csharp
 job.JobManagerTask.EnvironmentSettings = new [] {
     new EnvironmentSetting("YOUR\_BATCH\_URL", "https://account.region.batch.azure.com"),
     new EnvironmentSetting("YOUR\_BATCH\_KEY", "{your\_base64\_encoded\_account\_key}"),
@@ -246,7 +246,7 @@ job.JobManagerTask.EnvironmentSettings = new [] {
 
 csharp
 
-```
+```csharp
 job.JobManagerTask.EnvironmentSettings = new [] {
     /* other environment settings */
     new EnvironmentSetting("LINKED\_STORAGE\_ACCOUNT", "{storageAccountName}"),
@@ -347,7 +347,7 @@ job.JobManagerTask.EnvironmentSettings = new [] {
 
 csharp
 
-```
+```csharp
 /// <summary>
 /// Runs the task processing logic. This is where you inject
 /// your application-specific logic for decomposing the job into tasks.
@@ -431,7 +431,7 @@ Run() 实现具有以下项的访问权限：
 
 csharp
 
-```
+```csharp
 job.CommonEnvironmentSettings = new [] {
     new EnvironmentSetting("LINKED_STORAGE_ACCOUNT", "{storageAccountName}"),
     new EnvironmentSetting("LINKED_STORAGE_KEY", "{storageAccountKey}"),

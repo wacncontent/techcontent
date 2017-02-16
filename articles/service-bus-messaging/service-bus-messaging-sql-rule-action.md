@@ -60,7 +60,7 @@ ms.author: sethm
 
 ## property\_name  
 
-```
+```  
     <property_name> ::=  
          <identifier>  
          | <delimited_identifier>  
@@ -72,7 +72,7 @@ ms.author: sethm
 ### 参数  
  `<regular_identifier>` 是字符串，由以下正则表达式表示：
 
- ```
+ ```  
     [[:IsLetter:]][_[:IsLetter:][:IsDigit:]]*  
  ```
 
@@ -86,20 +86,20 @@ ms.author: sethm
 
  `<delimited_identifier>` 是指使用左/右方括号 ([]) 括起来的任何字符串。右方括号以两个右方括号表示。下面是 `<delimited_identifier>` 的示例：
 
- ```
+ ```  
     [Property With Space]  
     [HR-EmployeeID]  
  ```
 
  `<quoted_identifier>` 是指使用双引号引起来的任何字符串。标识符中的双引号以两个双引号表示。不建议使用带引号的标识符，因为很容易将其与字符串常量混淆。如果可能，请使用分隔标识符。下面是 `<quoted_identifier>` 的示例：
 
- ```
+ ```  
     "Contoso & Northwind"  
  ```
 
 ## pattern  
 
-```
+```  
     <pattern> ::=  
           <expression>  
 ```
@@ -114,7 +114,7 @@ ms.author: sethm
 
 ## escape\_char  
 
-```
+```  
     <escape_char> ::=  
           <expression>  
 ```
@@ -127,7 +127,7 @@ ms.author: sethm
 
 ## constant  
 
-```
+```  
     <constant> ::=  
           <integer_constant> | <decimal_constant> | <approximate_number_constant> | <boolean_constant> | NULL  
 ```
@@ -152,14 +152,14 @@ ms.author: sethm
 
 -   `<approximate_number_constant>` 是指使用科学记数法书写的数字。这些值作为 `System.Double` 在内部存储，并具有相同的作用域/精度。下面是近似数常量的示例：
 
-    ```
+    ```  
     101.5E5  
     0.5E-2  
     ```
 
 ## boolean\_constant  
 
-```
+```  
     <boolean_constant> :=  
           TRUE | FALSE  
 ```
@@ -170,7 +170,7 @@ ms.author: sethm
 
 ## string\_constant  
 
-```
+```  
     <string_constant>  
 ```
 
@@ -180,7 +180,7 @@ ms.author: sethm
 
 ## function  
 
-```
+```  
     <function> :=  
           newid() |  
           property(name) | p(name)  

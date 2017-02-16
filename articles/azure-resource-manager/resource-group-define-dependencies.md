@@ -28,7 +28,7 @@ Resource Manager 将评估资源之间的依赖关系，并根据其依赖顺序
 
 以下示例显示了一个虚拟机规模集，该集依赖于负载均衡器、虚拟网络以及创建多个存储帐户的循环。下面的示例中未显示其他这些资源，但它们需要存在于模板的其他位置。
 
-```
+```json
 {
   "type": "Microsoft.Compute/virtualMachineScaleSets",
   "name": "[variables('namingInfix')]",
@@ -50,7 +50,7 @@ Resource Manager 将评估资源之间的依赖关系，并根据其依赖顺序
 
 定义依赖关系时，可以包含资源提供程序命名空间和资源类型，以避免多义性。例如，为明确表示可能与其他资源同名的负载均衡器和虚拟网络，可使用以下格式：
 
-```
+```json
 "dependsOn": [
   "[concat('Microsoft.Network/loadBalancers/', variables('loadBalancerName'))]",
   "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
@@ -66,7 +66,7 @@ Resource Manager 将评估资源之间的依赖关系，并根据其依赖顺序
 
 以下示例演示了 SQL 服务器和 SQL 数据库。请注意，在 SQL 数据库与 SQL 服务器之间定义了显式依赖关系，尽管数据库是服务器的子级。
 
-```
+```json
 "resources": [
   {
     "name": "[variables('sqlserverName')]",
@@ -107,13 +107,13 @@ Resource Manager 将评估资源之间的依赖关系，并根据其依赖顺序
 ## 引用函数
 [引用函数](./resource-group-template-functions.md#reference)使表达式能够从其他 JSON 名值对或运行时资源中派生其值。引用表达式隐式声明一个资源依赖于另一个资源。常规格式为：
 
-```
+```json
 reference('resourceName').propertyPath
 ```
 
 在以下示例中，CDN 终结点显式依赖于 CDN 配置文件，隐式依赖于 Web 应用。
 
-```
+```json
 {
     "name": "[variables('endpointName')]",
     "type": "endpoints",

@@ -51,19 +51,19 @@ ms.author: cynthn
 
 登录到 Resource Manager 模型的帐户。
 
-```
+```powershell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
 使用以下命令获取可用订阅：
 
-```
+```powershell
     Get-AzureRMSubscription | Sort SubscriptionName | Select SubscriptionName
 ```
 
 设置当前会话的 Azure 订阅。此示例将默认订阅名称设置为 **My Azure Subscription**。使用自己的订阅名称替换示例名称。
 
-```
+```powershell
     Select-AzureRmSubscription -SubscriptionName "My Azure Subscription"
 ```
 
@@ -76,13 +76,13 @@ ms.author: cynthn
 
 使用以下命令向迁移资源提供程序注册：
 
-```
+```powershell
     Register-AzureRmResourceProvider -ProviderNamespace Microsoft.ClassicInfrastructureMigrate
 ```
 
 请等五分钟让注册完成。可以使用以下命令来检查审批状态：
 
-```
+```powershell
     Get-AzureRmResourceProvider -ProviderNamespace Microsoft.ClassicInfrastructureMigrate
 ```
 
@@ -90,19 +90,19 @@ ms.author: cynthn
 
 现在，请登录到经典模型的帐户。
 
-```
+```powershell
     Add-AzureAccount -Environment AzureChinaCloud
 ```
 
 使用以下命令获取可用订阅：
 
-```
+```powershell
     Get-AzureSubscription | Sort SubscriptionName | Select SubscriptionName
 ```
 
 设置当前会话的 Azure 订阅。此示例将默认订阅设置为 **My Azure Subscription**。使用自己的订阅名称替换示例名称。
 
-```
+```powershell
     Select-AzureSubscription -SubscriptionName "My Azure Subscription"
 ```
 
@@ -113,7 +113,7 @@ ms.author: cynthn
 
 此示例检查**中国北部**区域的可用性。使用自己的区域名称替换示例名称。
 
-```
+```powershell
 Get-AzureRmVMUsage -Location "China North"
 ```
 
@@ -126,13 +126,13 @@ Get-AzureRmVMUsage -Location "China North"
 ### 迁移云服务中的虚拟机（不在虚拟网络中）
 使用以下命令获取云服务列表，然后选取要迁移的云服务。如果云服务中的 VM 在虚拟网络中或者具有 Web 角色或辅助角色，该命令会返回错误消息。
 
-```
+```powershell
     Get-AzureService | ft Servicename
 ```
 
 获取云服务的部署名称。在此示例中，服务名称是 **My Service**。使用自己的服务名称替换示例名称。
 
-```
+```powershell
     $serviceName = "My Service"
     $deployment = Get-AzureDeployment -ServiceName $serviceName
     $deploymentName = $deployment.DeploymentName
@@ -144,7 +144,7 @@ Get-AzureRmVMUsage -Location "China North"
 
     首先，使用以下命令验证用户是否可以迁移云服务：
 
-    ```
+    ```powershell
     $validate = Move-AzureService -Validate -ServiceName $serviceName `
         -DeploymentName $deploymentName -CreateNewVirtualNetwork
     $validate.ValidationMessages
@@ -152,7 +152,7 @@ Get-AzureRmVMUsage -Location "China North"
 
 前一个命令会显示任何阻止迁移的警告和错误。如果验证成功，则可继续执行**准备**步骤：
 
-```
+```powershell
     Move-AzureService -Prepare -ServiceName $serviceName `
         -DeploymentName $deploymentName -CreateNewVirtualNetwork
 ```
@@ -161,7 +161,7 @@ Get-AzureRmVMUsage -Location "China North"
 
     此示例将资源组名称设置为 **myResourceGroup**，将虚拟网络名称设置为 **myVirtualNetwork**，将子网名称设置为 **mySubNet**。使用自己的资源名称替换示例名称。
 
-    ```
+    ```powershell
     $existingVnetRGName = "myResourceGroup"
     $vnetName = "myVirtualNetwork"
     $subnetName = "mySubNet"
@@ -169,7 +169,7 @@ Get-AzureRmVMUsage -Location "China North"
 
 首先，使用以下命令验证用户是否可以迁移云服务：
 
-```
+```powershell
     $validate = Move-AzureService -Validate -ServiceName $serviceName `
         -DeploymentName $deploymentName -UseExistingVirtualNetwork -VirtualNetworkResourceGroupName $existingVnetRGName -VirtualNetworkName $vnetName -SubnetName $subnetName
     $validate.ValidationMessages
@@ -177,7 +177,7 @@ Get-AzureRmVMUsage -Location "China North"
 
 前一个命令会显示任何阻止迁移的警告和错误。如果验证成功，则可继续执行以下准备步骤：
 
-```
+```powershell
     Move-AzureService -Prepare -ServiceName $serviceName -DeploymentName $deploymentName `
         -UseExistingVirtualNetwork -VirtualNetworkResourceGroupName $existingVnetRGName `
         -VirtualNetworkName $vnetName -SubnetName $subnetName
@@ -187,7 +187,7 @@ Get-AzureRmVMUsage -Location "China North"
 
 此示例将 VM 名称设置为 **myVM**。使用自己的 VM 名称替换示例名称。
 
-```
+```powershell
     $vmName = "myVM"
     $vm = Get-AzureVM -ServiceName $serviceName -Name $vmName
     $vm.VM.MigrationState
@@ -195,13 +195,13 @@ Get-AzureRmVMUsage -Location "China North"
 
 使用 PowerShell 或 Azure 门户预览，检查准备就绪的资源的配置。如果尚未做好迁移准备，因此想要回到旧的状态，请使用以下命令：
 
-```
+```powershell
     Move-AzureService -Abort -ServiceName $serviceName -DeploymentName $deploymentName
 ```
 
 如果准备好的配置看起来没问题，则可继续进行，使用以下命令提交资源：
 
-```
+```powershell
     Move-AzureService -Commit -ServiceName $serviceName -DeploymentName $deploymentName
 ```
 
@@ -210,7 +210,7 @@ Get-AzureRmVMUsage -Location "China North"
 
 此示例将虚拟网络名称设置为 **myVnet**。使用自己的虚拟网络名称替换示例名称。
 
-```
+```powershell
     $vnetName = "myVnet"
 ```
 
@@ -221,25 +221,25 @@ Get-AzureRmVMUsage -Location "China North"
 
 首先，请使用以下命令验证用户是否可以迁移虚拟网络：
 
-```
+```powershell
     Move-AzureVirtualNetwork -Validate -VirtualNetworkName $vnetName
 ```
 
 前一个命令会显示任何阻止迁移的警告和错误。如果验证成功，则可继续执行以下准备步骤：
 
-```
+```powershell
     Move-AzureVirtualNetwork -Prepare -VirtualNetworkName $vnetName
 ```
 
 使用 Azure PowerShell 或 Azure 门户预览，检查准备就绪的虚拟机的配置。如果尚未做好迁移准备，因此想要回到旧的状态，请使用以下命令：
 
-```
+```powershell
     Move-AzureVirtualNetwork -Abort -VirtualNetworkName $vnetName
 ```
 
 如果准备好的配置看起来没问题，则可继续进行，使用以下命令提交资源：
 
-```
+```powershell
     Move-AzureVirtualNetwork -Commit -VirtualNetworkName $vnetName
 ```
 
@@ -248,20 +248,20 @@ Get-AzureRmVMUsage -Location "China North"
 
 使用以下命令准备要迁移的每个存储帐户。在此示例中，存储帐户名称为 **myStorageAccount**。使用自己的存储帐户名称替换示例名称。
 
-```
+```powershell
     $storageAccountName = "myStorageAccount"
     Move-AzureStorageAccount -Prepare -StorageAccountName $storageAccountName
 ```
 
 使用 Azure PowerShell 或 Azure 门户预览，检查准备就绪的存储帐户的配置。如果尚未做好迁移准备，因此想要回到旧的状态，请使用以下命令：
 
-```
+```powershell
     Move-AzureStorageAccount -Abort -StorageAccountName $storageAccountName
 ```
 
 如果准备好的配置看起来没问题，则可继续进行，使用以下命令提交资源：
 
-```
+```powershell
     Move-AzureStorageAccount -Commit -StorageAccountName $storageAccountName
 ```
 

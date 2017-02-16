@@ -32,7 +32,7 @@ Azure Service Fabric 能够保护群集中以不同用户帐户运行的应用�
 
 下面是一个简单的服务清单示例，其中显示服务的 SetupEntryPoint 和主要 EntryPoint。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <ServiceManifest Name="MyServiceManifest" Version="SvcManifestVersion1" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Description>An example service manifest</Description>
@@ -60,7 +60,7 @@ Azure Service Fabric 能够保护群集中以不同用户帐户运行的应用�
 
 在配置服务以获取设置入口点之后，你可以在应用程序清单中更改用于运行服务的安全权限。以下示例演示如何将服务配置为以用户管理员帐户特权运行。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="MyApplicationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <ServiceManifestImport>
@@ -120,7 +120,7 @@ C:\SfDevCluster\Data\_App\Node.2\MyApplicationType_App\work\out.txt
 ###  使用本地系统帐户配置策略
 如上所示，通常建议使用本地系统帐户，而不是管理员帐户运行启动脚本。用管理员帐户运行 RunAs 策略通常效果不佳，因为计算机在默认情况下启用用户访问控制 (UAC)。在这种情况下，**建议将 SetupEntryPoint 作为 LocalSystem 运行，而不要作为添加到管理员组的本地用户来运行**。以下示例演示如何将 SetupEntryPoint 设置为作为 LocalSystem 运行。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="MyApplicationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <ServiceManifestImport>
@@ -156,7 +156,7 @@ powershell.exe -ExecutionPolicy Bypass -Command ".\MySetup.ps1"
 
 **注意：**默认情况下，批处理文件运行时会在名为 **work** 的应用程序文件夹中查找文件。此示例中，当 MySetup.bat 运行时，我们想在相同的文件夹（即应用程序的 **code package** 文件夹）中查找 MySetup.ps1。若要更改此文件夹，请如下所示设置工作文件夹。
 
-```
+```xml
 <SetupEntryPoint>
     <ExeHost>
     <Program>MySetup.bat</Program>
@@ -172,7 +172,7 @@ powershell.exe -ExecutionPolicy Bypass -Command ".\MySetup.ps1"
 
 以下示例演示如何使用 FileRetentionCount 值设置控制台重定向。
 
-```
+```xml
 <SetupEntryPoint>
     <ExeHost>
     <Program>MySetup.bat</Program>
@@ -196,7 +196,7 @@ Echo "Test console redirection which writes to the application log folder on the
 ### 创建本地用户组
 可以定义和创建用户组，然后将一个或多个用户添加到组。如果不同的服务入口点有多个用户，而且这些用户需要拥有可在组级别使用的某些常用权限，则这种做法特别有用。以下示例显示名为 **LocalAdminGroup** 且具有管理员特权的本地组。Customer1 和 Customer2 这两个用户已成为此本地组的成员。
 
-```
+```xml
 <Principals>
  <Groups>
    <Group Name="LocalAdminGroup">
@@ -223,7 +223,7 @@ Echo "Test console redirection which writes to the application log folder on the
 ### 创建本地用户
 你可以创建一个本地用户，用于保护应用程序中的服务。在应用程序清单的 principals 节中指定 **LocalUser** 帐户类型时，Service Fabric 将在部署应用程序的计算机上创建本地用户帐户。默认情况下，这些帐户的名称不与应用程序清单中指定的名称相同（例如，以下示例中的 Customer3）。相反，它们是动态生成的并带有随机密码。
 
-```
+```xml
 <Principals>
   <Users>
      <User Name="Customer3" AccountType="LocalUser" />
@@ -243,7 +243,7 @@ Echo "Test console redirection which writes to the application log folder on the
 ### 将策略分配到服务代码包
 **ServiceManifestImport** 的 **RunAsPolicy** 部分指定 principals 节中应该用来运行代码包的帐户。它还将服务清单中的代码包关联到 principals 节中的用户帐户。可以为设置入口点或主入口点指定此策略，或者指定 `All` 以将其应用到两者。以下示例演示如何应用不同的策略：
 
-```
+```xml
 <Policies>
 <RunAsPolicy CodePackageRef="Code" UserRef="LocalAdmin" EntryPointType="Setup"/>
 <RunAsPolicy CodePackageRef="Code" UserRef="Customer3" EntryPointType="Main"/>
@@ -255,7 +255,7 @@ Echo "Test console redirection which writes to the application log folder on the
 ### 将默认策略应用到所有服务代码包
 **DefaultRunAsPolicy** 部分用于针对未定义特定 **RunAsPolicy** 的所有代码包指定默认用户帐户。如果在应用程序所用的服务清单中指定的大多数代码包必须以同一用户运行，则应用程序可以只定义该用户帐户的默认 RunAs 策略。以下示例指定如果代码包未指定 **RunAsPolicy**，则此代码包应该以 principals 节中指定的 **MyDefaultAccount** 运行。
 
-```
+```xml
 <Policies>
   <DefaultRunAsPolicy UserRef="MyDefaultAccount"/>
 </Policies>
@@ -265,7 +265,7 @@ Echo "Test console redirection which writes to the application log folder on the
 
 以下示例显示名为 *TestUser* 的 AD 用户，其域密码已使用名为 *MyCert* 的证书加密。可以使用 `Invoke-ServiceFabricEncryptText` Powershell 命令创建机密加密文本。有关具体的操作方法，请参阅[管理 Service Fabric 应用程序中的机密](./service-fabric-application-secret-management.md)一文。用于解密密码的证书私钥必须以带外方法部署到本地计算机（在 Azure 中，可以通过 Resource Manager 实现此目的）。然后，当 Service Fabric 将服务包部署到计算机时，便可以解密机密，并连同用户名使用这些凭据在 AD 中进行身份验证。
 
-```
+```xml
 <Principals>
   <Users>
     <User Name="TestUser" AccountType="DomainUser" AccountName="Domain\User" Password="[Put encrypted password here using MyCert certificate]" PasswordEncrypted="true" />
@@ -290,7 +290,7 @@ Echo "Test console redirection which writes to the application log folder on the
 
 针对 HTTPS 终结点，你还必须指出要返回给客户端的证书名称。可以使用 **EndpointBindingPolicy** 结合应用程序清单的 certificates 部分定义的证书，来实现此目的。
 
-```
+```xml
 <Policies>
    <RunAsPolicy CodePackageRef="Code" UserRef="Customer1" />
   <!--SecurityAccessPolicy is needed if RunAsPolicy is defined and the Endpoint is http -->
@@ -303,7 +303,7 @@ Echo "Test console redirection which writes to the application log folder on the
 ## 完整应用程序清单的示例
 以下应用程序清单显示了许多不同的设置：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Application3Type" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <Parameters>

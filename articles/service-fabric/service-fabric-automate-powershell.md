@@ -37,33 +37,33 @@ ms.author: ryanwi
 ### 步骤 1：上载应用程序包
 将应用程序包上载到映像存储会将其放在一个可由内部 Service Fabric 组件访问的位置。应用程序包包含所需的应用程序清单、服务清单，以及用于创建应用程序和服务实例的代码、配置和数据包。[**Copy-ServiceFabricApplicationPackage**](https://docs.microsoft.com/powershell/servicefabric/vlatest/copy-servicefabricapplicationpackage) 命令会上载包。例如：
 
-```
+```powershell
 Copy-ServiceFabricApplicationPackage C:\Temp\WordCount\ -ImageStoreConnectionString file:C:\SfDevCluster\Data\ImageStoreShare -ApplicationPackagePathInImageStore WordCount
 ```
 
 ### 步骤 2：注册应用程序类型
 注册应用程序包，使应用程序清单中声明的应用程序类型和版本可供使用。系统将读取步骤 1 中上传的包，验证此包（等效于在本地运行 [**Test-ServiceFabricApplicationPackage**](https://docs.microsoft.com/powershell/servicefabric/vlatest/test-servicefabricapplicationpackage)），处理包的内容，并将已处理的包复制到内部系统位置。运行 [**Register-ServiceFabricApplicationType**](https://docs.microsoft.com/powershell/servicefabric/vlatest/register-servicefabricapplicationtype) cmdlet：
 
-```
+```powershell
 Register-ServiceFabricApplicationType WordCount
 ```
 
 若要查看在群集中注册的所有应用程序类型，请运行 [Get-ServiceFabricApplicationType](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricapplicationtype) cmdlet：
 
-```
+```powershell
 Get-ServiceFabricApplicationType
 ```
 
 ### 步骤 3：创建应用程序实例
 可以使用已使用 [**New-ServiceFabricApplication**](https://docs.microsoft.com/powershell/servicefabric/vlatest/new-servicefabricapplication) 命令成功注册的任何应用程序类型版本实例化应用程序。每个应用程序的名称在部署时声明且必须以 **fabric:** 方案开头，并且对每个应用程序实例是唯一的。应用程序类型名称和应用程序类型版本在应用程序包的 **ApplicationManifest.xml** 文件中声明。如果目标应用程序类型的应用程序清单中定义有任何默认服务，则此时将还创建那些服务。
 
-```
+```powershell
 New-ServiceFabricApplication fabric:/WordCount WordCount 1.0.0
 ```
 
 [**Get-ServiceFabricApplication**](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricapplication) 命令将列出已成功创建的所有应用程序实例以及其整体状态。[**Get-ServiceFabricService**](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricservice) 命令将列出在给定的应用程序实例中成功创建的所有服务实例。列出默认服务（如果有）。
 
-```
+```powershell
 Get-ServiceFabricApplication
 
 Get-ServiceFabricApplication | Get-ServiceFabricService
@@ -79,14 +79,14 @@ WordCount v1 应用程序已准备好升级。如果以管理员身份打开 Pow
 
 现在，将更新的应用程序包复制到 Service Fabric 映像存储（Service Fabric 存储应用程序包的位置）。参数 **ApplicationPackagePathInImageStore** 告知 Service Fabric 可在何处找到应用程序包。以下命令将应用程序包复制到映像存储中的 **WordCountV2**：
 
-```
+```powershell
 Copy-ServiceFabricApplicationPackage C:\Temp\WordCountV2\ -ImageStoreConnectionString file:C:\SfDevCluster\Data\ImageStoreShare -ApplicationPackagePathInImageStore WordCountV2
 ```
 
 ### 步骤 2：注册已更新的应用程序类型
 下一步是将新版本的应用程序注册到 Service Fabric，这可以使用 [**Register-ServiceFabricApplicationType**](https://docs.microsoft.com/powershell/servicefabric/vlatest/register-servicefabricapplicationtype) cmdlet 来执行：
 
-```
+```powershell
 Register-ServiceFabricApplicationType WordCountV2
 ```
 
@@ -95,7 +95,7 @@ Register-ServiceFabricApplicationType WordCountV2
 
 现在你可以使用 [**Start-ServiceFabricApplicationUpgrade**](https://docs.microsoft.com/powershell/servicefabric/vlatest/start-servicefabricapplicationupgrade) cmdlet 开始升级应用程序：
 
-```
+```powershell
 Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/WordCount -ApplicationTypeVersion 2.0.0 -HealthCheckStableDurationSec 60 -UpgradeDomainTimeoutSec 1200 -UpgradeTimeout 3000  -FailureAction Rollback -Monitored
 ```
 
@@ -104,7 +104,7 @@ Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/WordCount -Applic
 ### 步骤 4 ：查看升级进度
 可以使用 [Service Fabric Explorer](./service-fabric-visualizing-your-cluster.md) 或 [**Get-ServiceFabricApplicationUpgrade**](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricapplicationupgrade) cmdlet 来监视应用程序升级的进度：
 
-```
+```powershell
 Get-ServiceFabricApplicationUpgrade fabric:/WordCount
 ```
 
@@ -116,7 +116,7 @@ Get-ServiceFabricApplicationUpgrade fabric:/WordCount
 ### 步骤 1：运行混沌测试方案
 混沌测试方案跨整个 Service Fabric 群集生成故障。一般而言，该方案将几个月或几年经历的故障压缩到几小时。各种交叉故障的组合并具有高故障率，能够找出很有可能被忽视的极端状况。以下示例运行了 60 分钟的混沌测试方案。
 
-```
+```powershell
 $timeToRun = 60
 $maxStabilizationTimeSecs = 180
 $concurrentFaults = 3
@@ -128,7 +128,7 @@ Invoke-ServiceFabricChaosTestScenario -TimeToRunMinute $timeToRun -MaxClusterSta
 ### 步骤 2：运行故障转移测试方案
 故障转移测试方案针对特定的服务分区，而不是整个群集，其他服务不受影响。该方案将遍历一系列的模块故障和服务验证，同时你的业务逻辑将保持运行。服务验证失败指出存在需要进一步调查的问题。故障转移测试一次只引入一个故障，而不像混沌测试方案那样引入多个故障。以下示例针对 fabric:/WordCount/WordCountService 服务运行故障转移测试 60 分钟。
 
-```
+```powershell
 $timeToRun = 60
 $maxStabilizationTimeSecs = 180
 $waitTimeBetweenFaultsSec = 10
@@ -143,21 +143,21 @@ Invoke-ServiceFabricFailoverTestScenario -TimeToRunMinute $timeToRun -MaxService
 ### 步骤 1：删除应用程序实例
 当不再需要某应用程序实例时，可以使用 [**Remove-ServiceFabricApplication**](https://docs.microsoft.com/powershell/servicefabric/vlatest/remove-servicefabricapplication) cmdlet 将它永久删除。这也会将自动删除属于该应用程序的所有服务，永久删除所有服务状态。此操作无法撤消，并且无法恢复应用程序状态。
 
-```
+```powershell
 Remove-ServiceFabricApplication fabric:/WordCount
 ```
 
 ### 步骤 2：注销应用程序类型
 当不再需要应用程序类型的某个特定版本时，可以使用 [**Unregister-ServiceFabricApplicationType**](https://docs.microsoft.com/powershell/servicefabric/vlatest/unregister-servicefabricapplicationtype) cmdlet 将它注销。注销未使用的类型将在映像存储中释放该应用程序包使用的存储空间。只要没有针对其实例化的应用程序或引用它的挂起应用程序升级，就可以注销应用程序类型。
 
-```
+```powershell
 Unregister-ServiceFabricApplicationType WordCount 1.0.0
 ```
 
 ### 步骤 3：删除应用程序包
 注销应用程序类型后，可以使用 [**Remove-ServiceFabricApplicationPackage**](https://docs.microsoft.com/powershell/servicefabric/vlatest/remove-servicefabricapplicationpackage) cmdlet 从映像存储中删除应用程序包。
 
-```
+```powershell
 Remove-ServiceFabricApplicationPackage -ImageStoreConnectionString file:C:\SfDevCluster\Data\ImageStoreShare -ApplicationPackagePathInImageStore WordCount
 ```
 

@@ -13,8 +13,8 @@ ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/30/2016
-wacn.date: 01/13/2017
+ms.date: 01/11/2017
+wacn.date: 02/10/2017
 ms.author: nberdy
 ---
 
@@ -55,6 +55,7 @@ ms.author: nberdy
 * *标头*，其中包含身份验证、请求 ID、内容类型和内容编码
 * 透明的 JSON *正文*，采用以下格式：
 
+    ```
     {
         "methodName": "reboot",
         "responseTimeoutInSeconds": 200,
@@ -63,8 +64,9 @@ ms.author: nberdy
             "input2": "anotherInput"
         }
     }
+    ```
 
-超时以秒为单位。如果未设置超时，则默认为 30 秒。
+    超时以秒为单位。如果未设置超时，则默认为 30 秒。
 
 ### 响应
 由后端应用接收响应，其中包括：
@@ -73,12 +75,14 @@ ms.author: nberdy
 * *标头*，其中包含 ETag、请求 ID、内容类型和内容编码
 * JSON *正文*，采用以下格式：
 
+    ```
     {
         "status" : 201,
         "payload" : {...}
     }
+    ```
 
-   `status` 和 `body` 均由设备提供，用于响应，其中包含设备自身的状态代码和/或描述。
+    `status` 和 `body` 均由设备提供，用于响应，其中包含设备自身的状态代码和/或描述。
 
 ## 处理针对设备的直接方法
 ### 方法调用
@@ -135,4 +139,4 @@ IoT 中心开发人员指南中的其他参考主题包括：
 [lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
 
 <!---HONumber=Mooncake_0109_2017-->
-<!--Update_Description:update wording-->
+<!--Update_Description:update meta properties-->

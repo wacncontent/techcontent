@@ -26,7 +26,7 @@ ms.author: rashimg;jgao
 
 某个客户使用 Hive 运行了以下查询。
 
-```sql
+```
 SELECT
     COUNT (T1.COLUMN1) as DisplayColumn1,
     …
@@ -99,7 +99,7 @@ When hive.auto.convert.join.noconditionaltask = true we check noconditionaltask.
 
 我们通过调查 hive-site.xml 文件，确认 **hive.auto.convert.join.noconditionaltask** 确实已设置为 **true**：
 
-```xml
+```
 <property>
     <name>hive.auto.convert.join.noconditionaltask</name>
     <value>true</value>
@@ -124,7 +124,7 @@ When hive.auto.convert.join.noconditionaltask = true we check noconditionaltask.
 
 由于 D12 计算机具有 28GB 内存，因此我们决定使用 10GB (10240MB) 的容器大小并将 80% 分配给 java.opts。可以在 Hive 控制台上使用以下设置完成此操作：
 
-```sql
+```
 SET hive.tez.container.size=10240
 SET hive.tez.java.opts=-Xmx8192m
 ```

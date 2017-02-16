@@ -35,7 +35,7 @@ ms.author: jdial
 
 以下部分说明如何根据方案定义前端 NSG。
 
-```
+```json
 "apiVersion": "2015-06-15",
 "type": "Microsoft.Network/networkSecurityGroups",
 "name": "[parameters('frontEndNSGName')]",
@@ -79,7 +79,7 @@ ms.author: jdial
 
 若要将 NSG 关联到前端子网，需要更改模板中的子网定义，并使用 NSG 的引用 ID。
 
-```
+```json
 "subnets": [
   {
     "name": "[parameters('frontEndSubnetName')]",
@@ -100,7 +100,7 @@ ms.author: jdial
 1. 如果从未使用过 Azure PowerShell，请按照[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 一文中的说明进行安装和配置。
 2. 运行 **`New-AzureRmResourceGroup`** cmdlet，使用模板创建资源组。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name TestRG -Location chinanorth `
     -TemplateFile 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/201-IaaS-WebFrontEnd-SQLBackEnd/azuredeploy.json' `
     -TemplateParameterFile 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/201-IaaS-WebFrontEnd-SQLBackEnd/azuredeploy.parameters.json'
@@ -150,7 +150,7 @@ ms.author: jdial
 1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **`azure config mode`** 命令，切换到 Resource Manager 模式，如下所示。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
@@ -162,7 +162,7 @@ ms.author: jdial
 
 3. 运行 **`azure group deployment create`** cmdlet，使用上面下载并修改的模板和参数文件部署新的 VNet。输出后显示的列表阐释了所用参数。
 
-    ```
+    ```azurecli
     azure group create -n TestRG -l chinanorth -f 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/201-IaaS-WebFrontEnd-SQLBackEnd/azuredeploy.json' -e 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/201-IaaS-WebFrontEnd-SQLBackEnd/azuredeploy.parameters.json'
     ```
 

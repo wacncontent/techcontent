@@ -54,7 +54,7 @@ ms.author: vturecek
 
     移动有状态服务分区的主副本有无数原因。用此来指定某个特定分区的主副本，以查看你的服务如何以一种非常有控制的方式对移动做出反应。
 
-    ```
+    ```powershell
     PS > Move-ServiceFabricPrimaryReplica -PartitionId 6faa4ffa-521a-44e9-8351-dfca0f7e0466 -ServiceName fabric:/MyApplication/MyService
     ```
 
@@ -64,7 +64,7 @@ ms.author: vturecek
 
     可以使用 PowerShell **Stop-ServiceFabricNode** cmdlet 来停止节点：
 
-    ```
+    ```powershell
     PS > Restart-ServiceFabricNode -NodeName Node.1
     ```
 
@@ -80,7 +80,7 @@ ms.author: vturecek
 
 可以使用 Invoke-ServiceFabricPartitionQuorumLoss PowerShell cmdlet 引入仲裁丢失：
 
-```
+```powershell
 PS > Invoke-ServiceFabricPartitionQuorumLoss -ServiceName fabric:/Myapplication/MyService -QuorumLossMode QuorumReplicas -QuorumLossDurationInSeconds 20
 ```
 

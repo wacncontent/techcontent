@@ -35,7 +35,7 @@ ms.author: adegeo
 
 可使用 Azure 经典管理门户或 Powershell 在 Azure 中创建虚拟网络。在本教程中，我们将使用 Powershell。若要使用 Azure 经典管理门户创建虚拟网络，请参阅[创建虚拟网络](../virtual-network/virtual-networks-create-vnet-arm-pportal.md)。
 
-```
+```powershell
 #创建虚拟网络
 $vnetStr =
 @"<?xml version="1.0" encoding="utf-8"?>
@@ -67,7 +67,7 @@ Set-AzureVNetConfig -ConfigurationPath $vnetConfigPath;
 
 为此，请使用以下命令通过 Powershell 创建虚拟机。
 
-```
+```powershell
 # Initialize variables
 # VNet and subnet must be classic virtual network resources, not Azure Resource Manager resources.
 
@@ -99,7 +99,7 @@ Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-
 
 接下来，需要将云服务部署添加到刚刚创建的 VNET。为此，请使用 Visual Studio 或选择的编辑器将相关节添加到 cscfg，以修改云服务 cscfg。
 
-```
+```xml
 <ServiceConfiguration serviceName="[hosted-service-name]" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="[os-family]" osVersion="*">
     <Role name="[role-name]">
     <Instances count="[number-of-instances]" />
@@ -134,7 +134,7 @@ Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-
 
 在 Azure 上部署云服务项目后，请使用 AD 域扩展将角色实例连接到自定义 AD 域。若要将 AD 域扩展添加到现有云服务部署并加入自定义域，请在 Powershell 中执行以下命令：
 
-```
+```powershell
 # 初始化域变量
 $domain = '<your-domain-name>'
 $dmuser = '$domain<your-username>'
@@ -150,7 +150,7 @@ Set-AzureServiceADDomainExtension -Service <your-cloud-service-hosted-service-na
 
 云服务现在应已加入自定义域控制器。如果想要详细了解可用于配置 AD 域扩展的其他选项，请如下所示使用 PowerShell 帮助。
 
-```
+```powershell
 help Set-AzureServiceADDomainExtension
 help New-AzureServiceADDomainExtensionConfig
 ```

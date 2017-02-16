@@ -134,7 +134,7 @@ KEK 必须实现以下方法才能成功加密数据：
 ### Blob 服务加密
 设置 blockblobservice 对象中的加密策略字段。其他所有事项均由客户端库在内部处理。
 
-```
+```python
 # Create the KEK used for encryption.
 # KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
 kek = KeyWrapper('local:key1') # Key identifier
@@ -158,7 +158,7 @@ blob = my_block_blob_service.get_blob_to_bytes(container_name, blob_name)
 ### 队列服务加密
 设置 queueservice 对象中的加密策略字段。其他所有事项均由客户端库在内部处理。
 
-```
+```python
 # Create the KEK used for encryption.
 # KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
 kek = KeyWrapper('local:key1') # Key identifier
@@ -184,7 +184,7 @@ retrieved_message_list = my_queue_service.get_messages(queue_name)
 
 ### 使用解析程序
 
-```
+```python
 # Create the KEK used for encryption.
 # KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
 kek = KeyWrapper('local:key1') # Key identifier
@@ -216,7 +216,7 @@ my_table_service.get_entity(table_name, entity['PartitionKey'], entity['RowKey']
 ### 使用属性
 如上所述，可能通过将某个属性存储在 EntityProperty 对象中并设置 encrypt 字段，将该属性标记为进行加密。
 
-```
+```python
 encrypted_property_1 = EntityProperty(EdmType.STRING, value, encrypt=True)
 ```
 

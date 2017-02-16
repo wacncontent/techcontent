@@ -50,7 +50,7 @@ ms.author: xshi
 ## 安装 Git、Node.js 和 NPM
 使用键盘快捷方式 `Ctrl + Alt + T` 打开一个终端并运行以下命令：
 
-```
+```bash
     sudo apt-get update
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
     sudo apt-get install -y nodejs
@@ -62,7 +62,7 @@ ms.author: xshi
 
 在终端运行以下命令，安装 `gulp`：
 
-```
+```bash
 sudo npm install -g gulp
 ```
 

@@ -29,7 +29,7 @@ ms.author: iainfou
 
 以下示例重新部署名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM：
 
-```
+```azurecli
 azure vm redeploy --resource-group myResourceGroup --vm-name myVM 
 ```
 

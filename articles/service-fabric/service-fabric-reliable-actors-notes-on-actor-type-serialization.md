@@ -25,7 +25,7 @@ ms.author: vturecek
 ## 自定义数据类型
 在此示例中，以下执行组件接口定义了一个返回自定义数据类型（名为 `VoicemailBox`）的方法。
 
-```
+```csharp
 public interface IVoiceMailBoxActor : IActor
 {
     Task<VoicemailBox> GetMailBoxAsync();
@@ -34,7 +34,7 @@ public interface IVoiceMailBoxActor : IActor
 
 此接口由使用状态管理器来存储 `VoicemailBox` 对象的执行组件实现：
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 public class VoiceMailBoxActor : Actor, IVoicemailBoxActor
 {

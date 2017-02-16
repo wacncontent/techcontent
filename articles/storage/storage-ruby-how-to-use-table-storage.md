@@ -43,7 +43,7 @@ ms.author: marsma
 ### 导入包
 使用常用的文本编辑器将以下内容添加到要在其中使用存储的 Ruby 文件的顶部：
 
-```
+```ruby
 require "azure"
 ```
 
@@ -51,7 +51,7 @@ require "azure"
 
 Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY**，以便获取连接到 Azure 存储帐户所需的信息。如果未设置这些环境变量，则在使用 **Azure::TableService** 之前必须通过以下代码指定帐户信息：
 
-```
+```ruby
 Azure.config.storage_account_name = "<your azure storage account>"
 Azure.config.storage_access_key = "<your azure storage access key>"
 ```
@@ -76,7 +76,7 @@ Azure.config.storage_access_key = "<your azure storage access key>"
 
 使用 **Azure::TableService** 对象可用于处理表和条目。若要创建表，请使用 **create\_table()** 方法。以下示例将创建表或输出存在的错误。
 
-```
+```ruby
 azure_table_service = Azure::TableService.new
 begin
   azure_table_service.create_table("testtable")
@@ -88,7 +88,7 @@ end
 ## 向表中添加条目
 若要添加条目，应首先创建定义条目属性的哈希对象。请注意，必须为每个条目指定 **PartitionKey** 和 **RowKey**。这些值是条目的唯一标识符，查询它们比查询其他属性快很多。Azure 存储使用 **PartitionKey** 将表中条目自动分发到多个存储节点。具有相同 **PartitionKey** 的条目存储在同一个节点上。**RowKey** 是条目在其所属分区内的唯一 ID。
 
-```
+```ruby
 entity = { "content" => "test entity",
   :PartitionKey => "test-partition-key", :RowKey => "1" }
 azure_table_service.insert_entity("testtable", entity)
@@ -105,7 +105,7 @@ azure_table_service.insert_entity("testtable", entity)
 
 以下示例演示如何使用 **update\_entity()** 更新条目：
 
-```
+```ruby
 entity = { "content" => "test entity with updated content",
   :PartitionKey => "test-partition-key", :RowKey => "1" }
 azure_table_service.update_entity("testtable", entity)
@@ -117,7 +117,7 @@ azure_table_service.update_entity("testtable", entity)
 
 有时，有必要成批地同时提交多项操作以确保通过服务器进行原子处理。若要完成此操作，首先要创建一个 **Batch** 对象，然后对 **TableService** 使用 **execute\_batch()** 方法。以下示例演示在一个批次中提交 RowKey 为 2 和 3 的两个条目。请注意，此操作仅适用于具有相同 PartitionKey 的条目。
 
-```
+```ruby
 azure_table_service = Azure::TableService.new
 batch = Azure::Storage::Table::Batch.new("testtable",
   "test-partition-key") do
@@ -131,7 +131,7 @@ results = azure_table_service.execute_batch(batch)
 
 若要查询表中条目，请使用 **get\_entity()** 方法并传递表名称、**PartitionKey** 和 **RowKey**。
 
-```
+```ruby
 result = azure_table_service.get_entity("testtable", "test-partition-key",
   "1")
 ```
@@ -140,7 +140,7 @@ result = azure_table_service.get_entity("testtable", "test-partition-key",
 
 若要查询表中的一组条目，请创建查询哈希对象并使用 **query\_entities()** 方法。以下示例演示如何获取具有相同 **PartitionKey** 的所有条目：
 
-```
+```ruby
 query = { :filter => "PartitionKey eq 'test-partition-key'" }
 result, token = azure_table_service.query_entities("testtable", query)
 ```
@@ -151,7 +151,7 @@ result, token = azure_table_service.query_entities("testtable", query)
 ## 查询条目属性的子集
 对表的查询可以只检索条目的几个属性。这种技术称为“投影”，可减少带宽并提高查询性能，尤其适用于大型条目。请使用 select 子句并传递你希望显示给客户端的属性的名称。
 
-```
+```ruby
 query = { :filter => "PartitionKey eq 'test-partition-key'",
   :select => ["content"] }
 result, token = azure_table_service.query_entities("testtable", query)
@@ -161,7 +161,7 @@ result, token = azure_table_service.query_entities("testtable", query)
 
 若要删除条目，请使用 **delete\_entity()** 方法。需要传入包含该条目的表的名称、条目的 PartitionKey 和 RowKey。
 
-```
+```ruby
     azure_table_service.delete_entity("testtable", "test-partition-key", "1")
 ```
 
@@ -169,7 +169,7 @@ result, token = azure_table_service.query_entities("testtable", query)
 
 若要删除表，请使用 **delete\_table()** 方法并传入要删除的表的名称。
 
-```
+```ruby
     azure_table_service.delete_table("testtable")
 ```
 

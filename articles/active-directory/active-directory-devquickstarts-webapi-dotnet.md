@@ -65,7 +65,7 @@ ms.author: dastrock
 
     C#
 
-    ```
+    ```C#
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -79,7 +79,7 @@ ms.author: dastrock
 
     C#
 
-    ```
+    ```C#
     public void ConfigureAuth(IAppBuilder app)
     {
         app.UseWindowsAzureActiveDirectoryBearerAuthentication(
@@ -95,7 +95,7 @@ ms.author: dastrock
 
     C#
 
-    ```
+    ```C#
     [Authorize]
     public class TodoListController : ApiController
     {
@@ -106,7 +106,7 @@ ms.author: dastrock
 
     C#
 
-    ```
+    ```C#
     public IEnumerable<TodoItem> Get()
     {
         // user_impersonation is the default permission exposed by applications in AAD

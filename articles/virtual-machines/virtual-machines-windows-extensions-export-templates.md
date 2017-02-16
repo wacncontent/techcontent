@@ -60,7 +60,7 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 导出资源组时，会创建单个模板参数，为导出的受保护设置提供值。可以删除此参数。若要删除此参数，可通过参数列表查找并删除看起来类似于此 JSON 示例的参数。
 
-```
+```json
 "extensions_extensionname_protectedSettings": {
     "defaultValue": null,
     "type": "SecureObject"
@@ -73,7 +73,7 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 从架构存储库中搜索所需的扩展（在本示例中为 `IaaSDiagnostics`）。找到扩展的 `protectedSettings` 对象以后，记下每个参数。以 `IaasDiagnostic` 扩展为例，所需参数为 `storageAccountName`、`storageAccountKey` 和 `storageAccountEndPoint`。
 
-```
+```json
 "protectedSettings": {
     "type": "object",
     "properties": {
@@ -101,7 +101,7 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 以 `IaasDiagnostic` 扩展为例，新的受保护设置配置将如以下示例所示：
 
-```
+```json
 "protectedSettings": {
     "storageAccountName": "[parameters('storageAccountName')]",
     "storageAccountKey": "[parameters('storageAccountKey')]",
@@ -111,7 +111,7 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 最终的扩展资源看起来类似于以下 JSON 示例：
 
-```
+```json
 {
     "name": "Microsoft.Insights.VMDiagnosticsSettings",
     "type": "extensions",
@@ -145,7 +145,7 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
 
 以 `IaasDiagnostic` 扩展为例，将在 Resource Manager 模板的参数部分创建以下参数。
 
-```
+```json
 "storageAccountName": {
     "defaultValue": null,
     "type": "SecureObject"

@@ -14,7 +14,7 @@
 
 ## 语法
 
-```
+```PowerShell
 New-HPCIaaSCluster.ps1 [-ConfigFile] <String> [-AdminUserName]<String> [[-AdminPassword] <String>] [[-HPCImageName] <String>] [[-LogFile] <String>] [-Force] [-NoCleanOnFailure] [-PSSessionSkipCACheck] [<CommonParameters>]
 ```
 
@@ -49,7 +49,7 @@ New-HPCIaaSCluster.ps1 [-ConfigFile] <String> [-AdminUserName]<String> [[-AdminP
 
 以下示例将使用配置文件 *MyConfigFile.xml* 创建一个新的 HPC Pack 群集，并指定用于安装该群集的管理凭据。
 
-```
+```PowerShell
 .\New-HPCIaaSCluster.ps1 -ConfigFile MyConfigFile.xml -AdminUserName <username> -AdminPassword <password>
 ```
 

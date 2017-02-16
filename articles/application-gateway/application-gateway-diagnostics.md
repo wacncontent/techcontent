@@ -56,7 +56,7 @@ Azure 提供使用日志记录和度量值来监视资源的功能
 
 3. 使用以下 PowerShell cmdlet 启用诊断日志记录：
 
-    ```
+    ```powershell
     Set-AzureRmDiagnosticSetting  -ResourceId /subscriptions/<subscriptionId>/resourceGroups/<resource group name>/providers/Microsoft.Network/applicationGateways/<application gateway name> -StorageAccountId /subscriptions/<subscriptionId>/resourceGroups/<resource group name>/providers/Microsoft.Storage/storageAccounts/<storage account name> -Enabled $true     
     ```
 
@@ -105,7 +105,7 @@ Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azur
 
 只有按照上述步骤基于每个应用程序网关启用了此日志，才会生成此日志。数据存储在你启用日志记录时指定的存储帐户中。应用程序网关的每次访问均以 JSON 格式记录下来，如以下示例所示：
 
-```
+```json
 {
     "resourceId": "/SUBSCRIPTIONS/<subscription id>/RESOURCEGROUPS/<resource group name>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<application gateway name>",
     "operationName": "ApplicationGatewayAccess",
@@ -133,7 +133,7 @@ Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azur
 
 只有按照上述步骤基于每个应用程序网关启用了此日志，才会生成此日志。数据存储在你启用日志记录时指定的存储帐户中。将记录以下数据：
 
-```
+```json
 {
     "resourceId": "/SUBSCRIPTIONS/<subscription id>/RESOURCEGROUPS/<resource group name>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<application gateway name>",
     "operationName": "ApplicationGatewayPerformance",
@@ -156,7 +156,7 @@ Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azur
 
 只有按照上述步骤基于每个应用程序网关启用了此日志，才会生成此日志。此日志还需要在应用程序网关上配置 Web 应用程序防火墙。数据存储在你启用日志记录时指定的存储帐户中。将记录以下数据：
 
-```
+```json
 {
     "resourceId": "/SUBSCRIPTIONS/<subscriptionId>/RESOURCEGROUPS/<resourceGroupName>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<applicationGatewayName>",
     "operationName": "ApplicationGatewayFirewall",

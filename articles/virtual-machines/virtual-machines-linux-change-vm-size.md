@@ -35,13 +35,13 @@ ms.author: mikewasson
 
 1. 运行以下 CLI 命令。此命令将列出托管 VM 的硬件群集上的可用 VM 大小。
 
-    ```
+    ```azurecli
     azure vm sizes -g <resource-group> --vm-name <vm-name>
     ```
 
 2. 如果列出了所需大小，请运行以下命令来调整 VM 的大小。
 
-    ```
+    ```azurecli
     azure vm set -g <resource-group> --vm-size <new-vm-size> -n <vm-name>  
         --enable-boot-diagnostics --boot-diagnostics-storage-uri
         https://<storage-account-name>.blob.core.chinacloudapi.cn/ 

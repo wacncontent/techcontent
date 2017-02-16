@@ -57,7 +57,7 @@ SQL 数据仓库每隔 4 到 8 小时创建一次联机数据仓库的快照，�
 
 若要查看上一个快照的启动时间，可对联机 SQL 数据仓库运行以下查询。
 
-```
+```sql
 select top 1 *
 from sys.pdw_loader_backup_runs 
 order by run_id desc;

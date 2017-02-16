@@ -53,7 +53,7 @@ ms.author: sewhee
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到资源管理器模式，如下所示。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
@@ -71,7 +71,7 @@ ms.author: sewhee
 
     使用 *NRPVnet* 中 10.0.0.0/24 的 CIDR 块创建名为 *NRPVnetSubnet* 的子网。
 
-    ```
+    ```azurecli
     azure network vnet subnet create NRPRG NRPVnet NRPVnetSubnet -a 10.0.0.0/24
     ```
 
@@ -86,7 +86,7 @@ ms.author: sewhee
 
 以下命令会在*中国东部* Azure 位置的 *NRPRG* 资源组中创建 *NRPlb* 负载均衡器。
 
-```
+```azurecli
 azure network lb create NRPRG NRPlb chinaeast
 ```
 
@@ -95,13 +95,13 @@ azure network lb create NRPRG NRPlb chinaeast
 
 1. 创建前端 IP 池，它与负载均衡器和上一步中创建的公共 IP 相关联。
 
-    ```
+    ```azurecli
     azure network lb frontend-ip create nrpRG NRPlb NRPfrontendpool -i nrppublicip
     ```
 
 2. 设置后端地址池，它用于接收前端 IP 池的传入流量。
 
-    ```
+    ```azurecli
     azure network lb address-pool create NRPRG NRPlb NRPbackendpool
     ```
 
@@ -125,7 +125,7 @@ azure network lb create NRPRG NRPlb chinaeast
 
 2. 创建负载均衡器规则。
 
-    ```
+    ```azurecli
     azure network lb rule create nrprg nrplb lbrule -p tcp -f 80 -b 80 -t NRPfrontendpool -o NRPbackendpool
     ```
 
@@ -137,7 +137,7 @@ azure network lb create NRPRG NRPlb chinaeast
 
 4. 检查你的设置。
 
-    ```
+    ```azurecli
     azure network lb show nrprg nrplb
     ```
 
@@ -244,13 +244,13 @@ azure network lb create NRPRG NRPlb chinaeast
 
 2. 创建名为 *lb-nic2-be* 的 NIC，并将其与 *rdp2* NAT 规则和 *NRPbackendpool* 后端地址池相关联。
 
-    ```
+    ```azurecli
     azure network nic create --resource-group nrprg --name lb-nic2-be --subnet-name nrpvnetsubnet --subnet-vnet-name nrpvnet --lb-address-pool-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool" --lb-inbound-nat-rule-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp2" eastus
     ```
 
 3. 创建名为 *web1* 的虚拟机 (VM)，并将其与名为 *lb-nic1-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 
-    ```
+    ```azurecli
     azure vm create --resource-group nrprg --name web1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
     ```
 
@@ -285,21 +285,21 @@ azure network lb create NRPRG NRPlb chinaeast
 
 4. 创建名为 *web2* 的虚拟机 (VM)，并将其与名为 *lb-nic2-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 
-    ```
+    ```azurecli
     azure vm create --resource-group nrprg --name web2 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic2-be --availset-name nrp-avset --storage-account-name web2nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
     ```
 
 ## 更新现有的负载均衡器
 可添加引用现有负载均衡器的规则。在下例中，向现有负载均衡器 **NRPlb** 添加了新的负载均衡器规则
 
-```
+```azurecli
 azure network lb rule create --resource-group nrprg --lb-name nrplb --name lbrule2 --protocol tcp --frontend-port 8080 --backend-port 8051 --frontend-ip-name frontendnrppool --backend-address-pool-name NRPbackendpool
 ```
 
 ## 删除负载均衡器
 以下命令可删除负载均衡器：
 
-```
+```azurecli
 azure network lb delete --resource-group nrprg --name nrplb
 ```
 

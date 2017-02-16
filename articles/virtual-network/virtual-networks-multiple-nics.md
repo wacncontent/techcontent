@@ -81,28 +81,28 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 从 Azure VM 映像库中选择 VM 映像。请注意，映像会经常更改，并按区域提供。以下示例中指定的映像可能会更改，也可能不在你的区域提供，因此务必指定所需的映像。
 
-    ```
+    ```powershell
     $image = Get-AzureVMImage `
     -ImageName "a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-R2-201410.01-en.us-127GB.vhd"
     ```
 
 2. 创建 VM 配置。
 
-    ```
+    ```powershell
     $vm = New-AzureVMConfig -Name "MultiNicVM" -InstanceSize "ExtraLarge" `
     -Image $image.ImageName -AvailabilitySetName "MyAVSet"
     ```
 
 3. 创建默认的管理员登录名。
 
-    ```
+    ```powershell
     Add-AzureProvisioningConfig -VM $vm -Windows -AdminUserName "<YourAdminUID>" `
     -Password "<YourAdminPassword>"
     ```
 
 4. 将其他 NIC 添加到 VM 配置。
 
-    ```
+    ```powershell
     Add-AzureNetworkInterfaceConfig -Name "Ethernet1" `
     -SubnetName "Midtier" -StaticVNetIPAddress "10.1.1.111" -VM $vm
     Add-AzureNetworkInterfaceConfig -Name "Ethernet2" `
@@ -111,14 +111,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 5. 指定默认 NIC 的子网和 IP 地址。
 
-    ```
+    ```powershell
     Set-AzureSubnet -SubnetNames "Frontend" -VM $vm
     Set-AzureStaticVNetIP -IPAddress "10.1.0.100" -VM $vm
     ```
 
 6. 在虚拟网络中创建 VM。
 
-    ```
+    ```powershell
     New-AzureVM -ServiceName "MultiNIC-CS" -VNetName "MultiNIC-VNet" -VMs $vm
     ```
 

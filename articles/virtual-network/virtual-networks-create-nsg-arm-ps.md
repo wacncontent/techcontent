@@ -36,7 +36,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 1. 如果从未使用过 Azure PowerShell，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)，按照说明逐步完成操作，登录到 Azure 并选择订阅。
 2. 创建允许从 Internet 访问端口 3389 的安全规则。
 
-    ```
+    ```powershell
     $rule1 = New-AzureRmNetworkSecurityRuleConfig -Name rdp-rule -Description "Allow RDP" `
     -Access Allow -Protocol Tcp -Direction Inbound -Priority 100 `
     -SourceAddressPrefix Internet -SourcePortRange * `
@@ -45,7 +45,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 3. 创建允许从 Internet 访问端口 80 的安全规则。
 
-    ```
+    ```powershell
     $rule2 = New-AzureRmNetworkSecurityRuleConfig -Name web-rule -Description "Allow HTTP" `
     -Access Allow -Protocol Tcp -Direction Inbound -Priority 101 `
     -SourceAddressPrefix Internet -SourcePortRange * -DestinationAddressPrefix * `
@@ -54,14 +54,14 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 4. 将上面创建的规则添加到名为 **NSG-FrontEnd** 的新 NSG。
 
-    ```
+    ```powershell
     $nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName TestRG -Location chinanorth `
     -Name "NSG-FrontEnd" -SecurityRules $rule1,$rule2
     ```
 
 5. 通过键入以下内容，查看在 NSG 中创建的规则：
 
-    ```
+    ```powershell
     $nsg
     ```
 
@@ -103,7 +103,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
     ```
 6. 将上面创建的 NSG 与 *FrontEnd* 子网关联起来。
 
-    ```
+    ```powershell
     $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
     Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name FrontEnd `
     -AddressPrefix 192.168.1.0/24 -NetworkSecurityGroup $nsg
@@ -140,7 +140,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
     > 
 7. 将新的 VNet 设置保存到 Azure。
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     ```
 
@@ -157,7 +157,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 1. 创建允许从前端子网访问端口 1433（SQL Server 使用的默认端口）的安全规则。
 
-    ```
+    ```powershell
     $rule1 = New-AzureRmNetworkSecurityRuleConfig -Name frontend-rule `
     -Description "Allow FE subnet" `
     -Access Allow -Protocol Tcp -Direction Inbound -Priority 100 `
@@ -167,7 +167,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 2. 创建阻止访问 Internet 的安全规则。
 
-    ```
+    ```powershell
     $rule2 = New-AzureRmNetworkSecurityRuleConfig -Name web-rule `
     -Description "Block Internet" `
     -Access Deny -Protocol * -Direction Outbound -Priority 200 `
@@ -177,7 +177,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 3. 将上面创建的规则添加到名为 **NSG-BackEnd** 的新 NSG。
 
-    ```
+    ```powershell
     $nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName TestRG `
     -Location chinanorth -Name "NSG-BackEnd" `
     -SecurityRules $rule1,$rule2
@@ -185,7 +185,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 4. 将上面创建的 NSG 与 *BackEnd* 子网关联起来。
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name BackEnd ` 
     -AddressPrefix 192.168.2.0/24 -NetworkSecurityGroup $nsg
     ```
@@ -209,7 +209,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
     ```
 5. 将新的 VNet 设置保存到 Azure。
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     ```
 
@@ -218,7 +218,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 如下所示运行 **Remove-AzureRmNetworkSecurityGroup**，请务必包含 NSG 所在的资源组。
 
-```
+```powershell
 Remove-AzureRmNetworkSecurityGroup -Name "NSG-FrontEnd" -ResourceGroupName "TestRG"
 ```
 

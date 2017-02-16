@@ -49,7 +49,7 @@ ms.author: motanv
 ### 如何运行混沌测试
 C# 示例
 
-```
+```csharp
 using System;
 using System.Fabric;
 using System.Fabric.Testability.Scenario;
@@ -124,7 +124,7 @@ class Test
 
 PowerShell
 
-```
+```powershell
 $connection = "localhost:19000"
 $timeToRun = 60
 $maxStabilizationTimeSecs = 180
@@ -160,7 +160,7 @@ Invoke-ServiceFabricChaosTestScenario -TimeToRunMinute $timeToRun -MaxClusterSta
 
 **C#**
 
-```
+```csharp
 using System;
 using System.Fabric;
 using System.Fabric.Testability.Scenario;
@@ -234,7 +234,7 @@ class Test
 
 **PowerShell**
 
-```
+```powershell
 $connection = "localhost:19000"
 $timeToRun = 60
 $maxStabilizationTimeSecs = 180

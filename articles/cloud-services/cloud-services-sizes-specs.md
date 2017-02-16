@@ -167,7 +167,7 @@ Azure H 系列虚拟机是下一代高性能计算 VM，旨在满足高端计算
 
 下面是一个将 Web 角色实例的角色大小设置为 Standard_D2 的示例：
 
-```
+```xml
 <WorkerRole name="Worker1" vmsize="Standard_D2">
 ...
 </WorkerRole>
@@ -185,7 +185,7 @@ Azure H 系列虚拟机是下一代高性能计算 VM，旨在满足高端计算
 ## 获取大小列表
 可以使用 PowerShell 或 REST API 获取大小列表。[此处](https://msdn.microsoft.com/zh-cn/library/azure/dn469422.aspx)介绍了 REST API。以下代码是一个 PowerShell 命令，用于列出当前可用于云服务的所有大小。
 
-```
+```powershell
 Get-AzureRoleSize | where SupportedByWebWorkerRoles -eq $true | select InstanceSize
 ```
 

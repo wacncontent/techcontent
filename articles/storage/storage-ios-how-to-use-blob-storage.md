@@ -68,7 +68,7 @@ ms.author: micurd
 ## Import 语句
 需要在要调用 Azure 存储 API 的文件中添加以下导入语句。
 
-```
+```objc
 // Include the following import statement to use blob APIs.
 #import <AZSClient/AZSClient.h>
 ```
@@ -82,7 +82,7 @@ ms.author: micurd
 ## 创建容器
 Azure 存储中的每个 Blob 都必须驻留在一个容器中。以下示例演示如何在存储帐户中创建一个名为 *newcontainer* 的容器（如果它尚不存在）。在选择容器的名称时，请注意上面提到的命名规则。
 
-```
+```objc
 -(void)createContainer{
   NSError *accountCreationError;
 
@@ -119,7 +119,7 @@ Azure 存储中的每个 Blob 都必须驻留在一个容器中。以下示例�
 
 以下示例演示如何创建一个具有**容器**访问权限的容器，这将允许 Internet 上的所有用户对其进行公共只读访问：
 
-```
+```objc
 -(void)createContainerWithPublicAccess{
     NSError *accountCreationError;
 
@@ -150,7 +150,7 @@ Azure 存储中的每个 Blob 都必须驻留在一个容器中。以下示例�
 
 以下示例演示如何从 NSString 上传块 Blob。如果此容器中已存在同名的 Blob，则将覆盖该 Blob 的内容。
 
-```
+```objc
 -(void)uploadBlobToContainer{
     NSError *accountCreationError;
 
@@ -213,7 +213,7 @@ https://nameofyourstorageaccount.blob.core.chinacloudapi.cn/containerpublic/samp
 
 在此示例中，帮助器方法用于在每次返回继续标记时递归调用列出 Blob 方法。
 
-```
+```objc
 -(void)listBlobsInContainer{
     NSError *accountCreationError;
 
@@ -267,7 +267,7 @@ https://nameofyourstorageaccount.blob.core.chinacloudapi.cn/containerpublic/samp
 ## 下载 Blob
 以下示例演示如何将 Blob 下载到 NSString 对象。
 
-```
+```objc
 -(void)downloadBlobToString{
     NSError *accountCreationError;
 
@@ -302,7 +302,7 @@ https://nameofyourstorageaccount.blob.core.chinacloudapi.cn/containerpublic/samp
 ## 删除 Blob
 以下示例说明如何删除 Blob。
 
-```
+```objc
 -(void)deleteBlob{
     NSError *accountCreationError;
 
@@ -334,7 +334,7 @@ https://nameofyourstorageaccount.blob.core.chinacloudapi.cn/containerpublic/samp
 ## 删除 Blob 容器
 以下示例说明如何删除容器。
 
-```
+```objc
 -(void)deleteContainer{
   NSError *accountCreationError;
 

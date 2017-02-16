@@ -33,32 +33,32 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 ## 安装 LVM 实用工具
 * **Ubuntu**
 
-    ```
+    ```bash  
     sudo apt-get update
     sudo apt-get install lvm2
     ```
 
 * **RHEL、CentOS 和 Oracle Linux**
 
-    ```
+    ```bash  
     sudo yum install lvm2
     ```
 
 * **SLES 12 和 openSUSE**
 
-    ```
+    ```bash  
     sudo zypper install lvm2
     ```
 
 * **SLES 11**
 
-    ```
+    ```bash  
     sudo zypper install lvm2
     ```
 
     在 SLES11 上，还必须编辑 `/etc/sysconfig/lvm` 并将 `LVM_ACTIVATED_ON_DISCOVERED` 设置为“enable”：
 
-    ```
+    ```sh   
     LVM_ACTIVATED_ON_DISCOVERED="enable" 
     ```
 
@@ -67,7 +67,7 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 1. 准备物理卷：
 
-    ```
+    ```bash    
     sudo pvcreate /dev/sd[cde]
     Physical volume "/dev/sdc" successfully created
     Physical volume "/dev/sdd" successfully created
@@ -76,21 +76,21 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 2. 创建卷组。在本例中，我们将调用卷组 `data-vg01`：
 
-    ```
+    ```bash    
     sudo vgcreate data-vg01 /dev/sd[cde]
     Volume group "data-vg01" successfully created
     ```
 
 3. 创建一个或多个逻辑卷。以下命令将创建跨整个卷组的名为 `data-lv01` 的单个逻辑卷，但请注意，在卷组中创建多个逻辑卷也是可行的。
 
-    ```
+    ```bash   
     sudo lvcreate --extents 100%FREE --stripes 3 --name data-lv01 data-vg01
     Logical volume "data-lv01" created.
     ```
 
 4. 格式化逻辑卷
 
-    ```
+    ```bash  
     sudo mkfs -t ext4 /dev/data-vg01/data-lv01
     ```
 
@@ -103,13 +103,13 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 1. 为新文件系统创建所需的装入点，例如：
 
-    ```
+    ```bash  
     sudo mkdir /data
     ```
 
 2. 查找逻辑卷路径
 
-    ```
+    ```bash    
     lvdisplay
     --- Logical volume ---
     LV Path                /dev/data-vg01/data-lv01
@@ -118,7 +118,7 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 3. 在文本编辑器中打开 `/etc/fstab` 并为新文件系统添加新条目，例如：
 
-    ```
+    ```bash    
     /dev/data-vg01/data-lv01  /data  ext4  defaults  0  2
     ```
 
@@ -126,7 +126,7 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 4. 测试该 `/etc/fstab` 条目是否正确：
 
-    ```
+    ```bash    
     sudo mount -a
     ```
 
@@ -134,7 +134,7 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
     接下来，运行 `mount` 命令以确保文件系统已装入：
 
-    ```
+    ```bash    
     mount
     ......
     /dev/mapper/data--vg01-data--lv01 on /data type ext4 (rw)
@@ -146,7 +146,7 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
     示例 (Ubuntu)：
 
-    ```
+    ```bash    
     /dev/data-vg01/data-lv01  /data  ext4  defaults,nobootwait  0  2
     ```
 
@@ -157,7 +157,7 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
 - 在 `/etc/fstab` 中使用 `discard` 装载选项，例如：
 
-    ```
+    ```bash    
     /dev/data-vg01/data-lv01  /data  ext4  defaults,discard  0  2
     ```
 
@@ -165,14 +165,14 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
     **Ubuntu**
 
-    ```
+    ```bash 
     # sudo apt-get install util-linux
     # sudo fstrim /datadrive
     ```
 
     **RHEL/CentOS**
 
-    ```
+    ```bash 
     # sudo yum install util-linux
     # sudo fstrim /datadrive
     ```

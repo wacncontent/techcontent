@@ -50,7 +50,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 根据在上述[先决条件](#Prerequisites)中部署的现有资源组，更改以下变量的值。
 
-    ```
+    ```powershell
     $location              = "China North"
     $vnetName              = "WTestVNet"
     $backendSubnetName     = "BackEnd"
@@ -58,7 +58,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 2. 根据要用于后端部署的值，更改以下变量的值。
 
-    ```
+    ```powershell
     $backendCSName         = "IaaSStory-Backend"
     $prmStorageAccountName = "iaasstoryprmstorage"
     $avSetName             = "ASDB"
@@ -75,20 +75,20 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 创建新的云服务。
 
-    ```
+    ```powershell
     New-AzureService -ServiceName $backendCSName -Location $location
     ```
 
 2. 创建新的高级存储帐户。
 
-    ```
+    ```powershell
     New-AzureStorageAccount -StorageAccountName $prmStorageAccountName `
     -Location $location -Type Premium_LRS
     ```
 
 3. 将上面创建的存储帐户设置为订阅的当前存储帐户。
 
-    ```
+    ```powershell
     $subscription = Get-AzureSubscription | where {$_.IsCurrent -eq $true}  
     Set-AzureSubscription -SubscriptionName $subscription.SubscriptionName `
     -CurrentStorageAccountName $prmStorageAccountName
@@ -96,7 +96,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 为 VM 选择映像。
 
-    ```
+    ```powershell
     $image = Get-AzureVMImage `
     | where{$_.ImageFamily -eq "SQL Server 2014 RTM Web on Windows Server 2012 R2"} `
     | sort PublishedDate -Descending `
@@ -105,7 +105,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 5. 设置本地管理员帐户凭据。
 
-    ```
+    ```powershell
     $cred = Get-Credential -Message "Enter username and password for local admin account"
     ```
 
@@ -114,13 +114,13 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 启动 `for` 循环，基于 `$numberOfVMs` 变量的值重复执行命令，从而以所需次数创建一个 VM 和两个 NIC。
 
-    ```
+    ```powershell
     for ($suffixNumber = 1; $suffixNumber -le $numberOfVMs; $suffixNumber++){
     ```
 
 2. 创建 `VMConfig` 对象，它为 VM 指定映像、大小和可用性集。
 
-    ```
+    ```powershell
     $vmName = $vmNamePrefix + $suffixNumber
     $vmConfig = New-AzureVMConfig -Name $vmName `
         -ImageName $image `
@@ -130,7 +130,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 将 VM 预配为 Windows VM。
 
-    ```
+    ```powershell
     Add-AzureProvisioningConfig -VM $vmConfig -Windows `
         -AdminUsername $cred.UserName `
         -Password $cred.Password
@@ -138,14 +138,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 设置默认 NIC，并为其分配静态 IP 地址。
 
-    ```
+    ```powershell
     Set-AzureSubnet            -SubnetNames $backendSubnetName -VM $vmConfig
     Set-AzureStaticVNetIP     -IPAddress ($ipAddressPrefix+$suffixNumber+3) -VM $vmConfig
     ```
 
 5. 为每个 VM 添加第二个 NIC。
 
-    ```
+    ```powershell
     Add-AzureNetworkInterfaceConfig -Name ("RemoteAccessNIC"+$suffixNumber) `
     -SubnetName $backendSubnetName `
     -StaticVNetIPAddress ($ipAddressPrefix+(53+$suffixNumber)) `
@@ -154,7 +154,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 6. 为每个 VM 创建两个数据磁盘。
 
-    ```
+    ```powershell
     $dataDisk1Name = $vmName + "-" + $dataDiskSuffix + "-1"    
     Add-AzureDataDisk -CreateNew -VM $vmConfig `
     -DiskSizeInGB $diskSize `
@@ -170,7 +170,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 7. 创建每个 VM，然后结束循环。
 
-    ```
+    ```powershell
     New-AzureVM -VM $vmConfig `
     -ServiceName $backendCSName `
     -Location $location `

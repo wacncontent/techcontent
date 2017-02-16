@@ -98,7 +98,7 @@ SQL 数据仓库不支持递归 CTE。递归 CTE 的迁移过程可能有点复�
 
 若要解决缺少对 @@ROWCOUNT 支持的问题，创建将检索 sys.dm\_pdw\_request\_steps 中的最后一个行计数的存储过程，然后在 DML 语句后执行 `EXEC LastRowCount`。
 
-```
+```sql
 CREATE PROCEDURE LastRowCount AS
 WITH LastRequest as 
 (   SELECT TOP 1    request_id

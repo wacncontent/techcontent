@@ -127,7 +127,7 @@ PolyBase 使用外部表来访问 Azure Blob 存储中的数据。由于数据�
 
 请针对你的 SQL 数据仓库数据库运行此查询。它将在 dbo 架构中创建指向 Azure Blob 存储中 DimDate2.txt 示例数据的、名为 DimDate2External 的外部表。
 
-```
+```sql
 -- A: Create a master key.
 -- Only necessary if one does not already exist.
 -- Required to encrypt the credential secret in the next step.
@@ -213,7 +213,7 @@ SQL 数据仓库不会自动创建或自动更新统计信息。因此，若要�
 
 本示例将基于新的 DimDate2 表创建单列统计信息。
 
-```
+```sql
 CREATE STATISTICS [DateId] on [DimDate2] ([DateId]);
 CREATE STATISTICS [CalendarQuarter] on [DimDate2] ([CalendarQuarter]);
 CREATE STATISTICS [FiscalQuarter] on [DimDate2] ([FiscalQuarter]);

@@ -23,6 +23,8 @@ ms.author: larryfr
 
 了解如何使用 Maven 为 HDInsight 上的 Apache Storm 创建基于 Java 的拓扑。本文将会演练使用 Maven 和 Java（如果拓扑是在 Java 中定义的）创建基本单词计数应用程序的过程。然后，介绍如何使用 Flux 框架定义拓扑。
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 > [!NOTE]
 Storm 0.10.0 或更高版本中提供了 Flux 框架。HDInsight 3.3 随附了 Storm 0.10.0。
 
@@ -712,7 +714,7 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
 
 2. 从项目创建 `topology.yaml` 文件的副本。为其指定类似于 `newtopology.yaml` 的名称。在该文件中，找到以下节，将 `10` 的值更改为 `5`。这会将发出单词计数批的间隔时间从 10 秒更改为 5 秒。
 
-    ```
+    ```yaml
      - id: "counter-bolt"
        className: "com.microsoft.example.WordCount"
        constructorArgs:

@@ -14,7 +14,7 @@ Account key: Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZ
 
 从你的应用程序连接到存储模拟器的最简单方式是在你的应用程序的配置文件内配置一个引用快捷方式 `UseDevelopmentStorage=true` 的连接字符串。以下是 app.config 文件中指向存储模拟器的连接字符串示例：
 
-```
+```xml
 <appSettings>
   <add key="StorageConnectionString" value="UseDevelopmentStorage=true" />
 </appSettings>

@@ -25,7 +25,7 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
 
 假设我们有 `ICalculator` 类型的服务协定
 
-```
+```csharp
 [ServiceContract]
 public interface ICalculator
 {
@@ -36,7 +36,7 @@ public interface ICalculator
 
 我们可以通过下列方式在服务中创建 WCF 通信侦听器。
 
-```
+```csharp
 protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
 {
     return new[] { new ServiceReplicaListener((context) =>
@@ -61,7 +61,7 @@ protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListe
 ## 为 WCF 通信堆栈编写客户端
 为编写客户端以便使用 WCF 与服务进行通信，该框架提供了 **WcfClientCommunicationFactory**，这是特定于 WCF 的 [ClientCommunicationFactoryBase](./service-fabric-reliable-services-communication.md) 实现。
 
-```
+```csharp
 public WcfCommunicationClientFactory(
     Binding clientBinding = null,
     IEnumerable<IExceptionHandler> exceptionHandlers = null,
@@ -72,7 +72,7 @@ public WcfCommunicationClientFactory(
 
 可以从 **WcfCommunicationClientFactory** 创建的 **WcfCommunicationClient** 访问 WCF 通信通道。
 
-```
+```csharp
 public class WcfCommunicationClient : ServicePartitionClient<WcfCommunicationClient<ICalculator>>
    {
        public WcfCommunicationClient(ICommunicationClientFactory<WcfCommunicationClient<ICalculator>> communicationClientFactory, Uri serviceUri, ServicePartitionKey partitionKey = null, TargetReplicaSelector targetReplicaSelector = TargetReplicaSelector.Default, string listenerName = null, OperationRetrySettings retrySettings = null)
@@ -84,7 +84,7 @@ public class WcfCommunicationClient : ServicePartitionClient<WcfCommunicationCli
 
 客户端代码可以使用 **WcfCommunicationClientFactory** 以及用于实现 **ServicePartitionClient** 的 **WcfCommunicationClient** 来确定服务终结点，并与服务通信。
 
-```
+```csharp
 // Create binding
 Binding binding = WcfUtility.CreateTcpClientBinding();
 // Create a partition resolver

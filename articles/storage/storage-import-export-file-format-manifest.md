@@ -25,7 +25,7 @@ ms.author: renash
 
 下面介绍驱动器清单文件的一般格式：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <DriveManifest Version="2014-11-01">  
   <Drive>  

@@ -30,7 +30,7 @@ ms.author: marsma
 
 csharp
 
-```
+```csharp
 // Get a collection of all of the tasks and all of their properties for job-001
 IPagedEnumerable<CloudTask> allTasks =
     batchClient.JobOperations.ListTasks("job-001");
@@ -40,7 +40,7 @@ IPagedEnumerable<CloudTask> allTasks =
 
 csharp
 
-```
+```csharp
 // Configure an ODATADetailLevel specifying a subset of tasks and
 // their properties to return
 ODATADetailLevel detailLevel = new ODATADetailLevel();
@@ -106,7 +106,7 @@ expand 字符串用于减少获取特定信息所需的 API 调用数。使用 e
 
 csharp
 
-```
+```csharp
 // First we need an ODATADetailLevel instance on which to set the filter, select,
 // and expand clause strings
 ODATADetailLevel detailLevel = new ODATADetailLevel();
@@ -225,7 +225,7 @@ Sample complete, hit ENTER to continue...
 
 csharp
 
-```
+```csharp
 internal static ODATADetailLevel OnlyChangedAfter(DateTime time)
 {
     return new ODATADetailLevel(

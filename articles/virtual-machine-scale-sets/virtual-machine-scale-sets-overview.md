@@ -78,8 +78,6 @@ ms.author: guybo
 
     PaaS v1 辅助角色虽然在平台/运行时支持方面受到限制（仅 Windows 平台映像），但它也包括多项服务，如 VIP 交换，可配置升级设置，以及*尚未*在 VM 规模集中提供，或者将由 Service Fabric 等其他更高级别 PaaS 服务提供的特定于运行时/应用部署的设置。考虑到这一点，你可以将 VM 规模集视为支持 PaaS 的基础结构。即，生成 Service Fabric 等 PaaS 解决方案或 Mesos 等群集管理器时，可以在将 VM 规模集作为可缩放计算层的基础上进行生成。
 
-    [作为此方法的一个示例，此模板创建了一个简单的 Mesos 群集，其中包含一个独立的主 VM，用于管理由 VM 组成的基于 VM 规模集的群集。](https://github.com/gbowerman/azure-myriad/blob/master/mesos-vmss-simple-cluster.json)
-
 ## VM 规模集性能和缩放指南
 * 不要一次在多个 VM 规模集中创建超过 500 个 VM。
 * 为每个存储帐户规划不超过 20 个 VM（除非将“overprovision”属性设置为"false"，这种情况下最多可规划 40 个 VM）。

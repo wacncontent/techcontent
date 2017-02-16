@@ -34,19 +34,19 @@ ms.author: v-livech
 
 为本地装载创建目录
 
-```
+```bash
 mkdir -p /mnt/mymountpoint
 ```
 
 将 Azure 文件存储 SMB 共享装载到装入点
 
-```
+```bash
 sudo mount -t cifs //myaccountname.file.core.chinacloudapi.cn/mysharename /mymountpoint -o vers=3.0,username=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
 ```
 
 若要在重新启动后保留装载，请向 `/etc/fstab` 添加一行
 
-```
+```bash
 //myaccountname.file.core.chinacloudapi.cn/mysharename /mymountpoint cifs vers=3.0,username=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
 ```
 
@@ -60,7 +60,7 @@ Azure 文件存储使用标准 SMB 协议在云中提供文件共享。并且使
 
 ## 创建 Azure 存储帐户
 
-```
+```azurecli
 azure storage account create myStorageAccount \
 --sku-name lrs \
 --kind storage \
@@ -72,7 +72,7 @@ azure storage account create myStorageAccount \
 
 创建存储帐户时，将成对创建 Azure 存储帐户密钥。之所以成对创建存储帐户密钥是为了不中断任何服务就可轮换密钥。将密钥轮换到密钥对中的第二个密钥后，将创建新的密钥对。新的存储帐户密钥始终成对创建，可确保始终至少有一个未使用的存储密钥可以轮换到。
 
-```
+```azurecli
 azure storage account keys list myStorageAccount \
 --resource-group myResourceGroup
 ```
@@ -81,7 +81,7 @@ azure storage account keys list myStorageAccount \
 
 创建包含 SMB 共享的文件存储共享。配额始终以千兆字节 (GB) 为单位。
 
-```
+```azurecli
 azure storage share create mystorageshare \
 --quota 10 \
 --account-name myStorageAccount \
@@ -92,13 +92,13 @@ azure storage share create mystorageshare \
 
 在 Linux 文件系统上需要有要将 SMB 共享装载到的本地目录。写入到本地装载目录或从本地装载目录读取的任何内容都将转发到 Azure 文件存储上托管的 SMB 共享。
 
-```
+```bash
 sudo mkdir -p /mnt/mymountdirectory
 ```
 
 ## 装载 SMB 共享
 
-```
+```azurecli
 sudo mount -t cifs //myStorageAccount.file.core.chinacloudapi.cn/mystorageshare /mnt/mymountdirectory -o vers=3.0,username=myStorageAccount,password=myStorageAccountkey,dir_mode=0777,file_mode=0777
 ```
 
@@ -106,7 +106,7 @@ sudo mount -t cifs //myStorageAccount.file.core.chinacloudapi.cn/mystorageshare 
 
 重新启动 Linux VM 后，已装载的 SMB 共享会在关闭过程中卸载。若要在启动时重新装载 SMB 共享，必须向 Linux `/etc/fstab` 添加一行。Linux 使用 `fstab` 文件列出它需要在启动期间装载哪些文件系统。添加 SMB 共享可确保 Azure 文件存储共享是 Linux VM 的永久装载文件系统。使用 `cloud-init` 可以将 Azure 文件存储 SMB 共享添加到新的 VM。
 
-```
+```bash
 //myaccountname.file.core.chinacloudapi.cn/mysharename /mymountpoint cifs vers=3.0,username=myaccountname,password=StorageAccountKeyEndingIn==,dir_mode=0777,file_mode=0777
 ```
 

@@ -56,7 +56,7 @@ ms.author: ryanwi
 5. 保存更改后的 ApplicationManifest.xml 文件。
 6. 以管理员身份运行以下 PowerShell 脚本，将应用程序复制到映像存储：
 
-    ```
+    ```powershell
     # Deploy the WordCount and upgrade applications
     $applicationPathWordCount = "C:\Temp\WordCount"
     $applicationPathUpgrade = "C:\Temp\WordCountUpgrade"
@@ -76,7 +76,7 @@ ms.author: ryanwi
 ## 示例
 以下示例演示 Service Fabric 应用程序生命周期。
 
-```
+```csharp
     using System;
     using System.Collections.Generic;
     using System.Fabric;

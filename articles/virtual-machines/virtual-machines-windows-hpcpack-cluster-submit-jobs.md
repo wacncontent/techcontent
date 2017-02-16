@@ -57,13 +57,13 @@ ms.author: danlep
 
 2. 若要将目录切换到配置脚本所在的位置，请键入以下命令：
 
-    ```
+    ```powershell
     cd $env:CCP_HOME\bin
     ```
 
 3. 若要配置 REST 接口并启动 HPC Web 服务，请键入以下命令：
 
-    ```
+    ```powershell
     .\Set-HPCWebComponents.ps1 -Service REST -enable 
     ```
 
@@ -74,13 +74,13 @@ ms.author: danlep
 
 5. 若要配置用于作业提交的 Web 门户，请键入以下命令：
 
-    ```
+    ```powershell
     .\Set-HPCWebComponents.ps1 -Service Portal -enable
     ```
 
 6. 脚本完成后，请键入以下命令停止并重启 HPC 作业计划程序服务：
 
-    ```
+    ```powershell
     net stop hpcscheduler
     net start hpcscheduler
     ```
@@ -128,13 +128,13 @@ ms.author: danlep
 
 2. 键入示例命令。例如，若要列出群集中的所有作业，可键入如下所示的某个命令，具体取决于头节点的完整 DNS 名称：
 
-    ```
+    ```command
     job list /scheduler:https://<HeadNodeDnsName>.chinacloudapp.cn /all
     ```
 
     或
 
-    ```
+    ```command
     job list /scheduler:https://<HeadNodeDnsName>.<region>.chinacloudapp.cn /all
     ```
 

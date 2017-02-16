@@ -128,7 +128,7 @@ Batch Python 教程代码示例由两个 Python 脚本和若干数据文件组�
 
 Python
 
-```
+```python
 # Update the Batch and Storage account credential strings below with the values
 # unique to your accounts. These are used when constructing connection strings
 # for the Batch and Storage client objects.
@@ -154,7 +154,7 @@ storage_account_key  = "";
 
 Python
 
-```
+```python
 if __name__ == '__main__':
 ```
 
@@ -172,7 +172,7 @@ Batch 包含的内置支持支持与 Azure 存储空间交互。存储帐户中�
 
 Python
 
-```
+```python
  # Create the blob client, for use in obtaining references to
  # blob storage containers and uploading files to containers.
  blob_client = azureblob.BlockBlobService(
@@ -204,7 +204,7 @@ Python
 
 Python
 
-```
+```python
  # Paths to the task script. This script will be executed by the tasks that
  # run on the compute nodes.
  application_file_paths = [os.path.realpath('python_tutorial_task.py')]
@@ -299,7 +299,7 @@ Batch **池**是 Batch 执行作业任务时所在的计算节点（虚拟机）
 
 Python
 
-```
+```python
  # Create a Batch service client. We'll now be interacting with the Batch
  # service in addition to Storage.
  credentials = batchauth.SharedKeyCredentials(_BATCH_ACCOUNT_NAME,
@@ -314,7 +314,7 @@ Python
 
 Python
 
-```
+```python
 def create_pool(batch_service_client, pool_id,
                 resource_files, publisher, offer, sku):
     """
@@ -409,7 +409,7 @@ Batch **作业**是任务的集合，它与计算节点池相关联。作业中�
 
 Python
 
-```
+```python
 def create_job(batch_service_client, job_id, pool_id):
     """
     Creates a job with the specified ID, associated with the specified pool.
@@ -445,7 +445,7 @@ Batch **任务**是在计算节点上执行的各个工作单位。任务有一�
 
 Python
 
-```
+```python
 def add_tasks(batch_service_client, job_id, input_files,
               output_container_name, output_container_sas_token):
     """
@@ -502,7 +502,7 @@ def add_tasks(batch_service_client, job_id, input_files,
 
 Python
 
-```
+```python
 # NOTE: Taken from python_tutorial_task.py
 
 # Create the blob client using the container's SAS token.
@@ -523,7 +523,7 @@ blob_client = azureblob.BlockBlobService(account_name=args.storageaccount,
 
 Python
 
-```
+```python
 def wait_for_tasks_to_complete(batch_service_client, job_id, timeout):
     """
     Returns when all tasks in the specified job reach the Completed state.
@@ -566,7 +566,7 @@ def wait_for_tasks_to_complete(batch_service_client, job_id, timeout):
 
 Python
 
-```
+```python
 def download_blobs_from_container(block_blob_client,
                                   container_name, directory_path):
     """
@@ -622,7 +622,7 @@ BatchServiceClient 的 [JobOperations][py_job] 和 [PoolOperations][py_pool] 都
 
 Python
 
-```
+```python
 # Clean up Batch resources (if the user so chooses).
 if query_yes_no('Delete job?') == 'yes':
     batch_client.job.delete(_JOB_ID)

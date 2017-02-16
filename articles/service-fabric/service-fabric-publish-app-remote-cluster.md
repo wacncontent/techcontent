@@ -90,7 +90,7 @@ Visual Studio 发布体验已针对发布到远程群集（与某个 Azure 订�
 
 如果要连接到未受保护的群集，只需提供群集连接终结点，例如 `partycluster1.chinaeast.chinacloudapp.cn:19000`。在此情况下，发布配置文件中的连接终结点看起来类似于：
 
-```
+```XML
 <ClusterConnectionParameters ConnectionEndpoint="partycluster1.chinaeast.chinacloudapp.cn:19000" />
 ```
 

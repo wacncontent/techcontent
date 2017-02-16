@@ -65,7 +65,7 @@ git clone https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet.git
 
 C#
 
-```
+```C#
 public partial class Startup
 {
     public void Configuration(IAppBuilder app)
@@ -79,7 +79,7 @@ public partial class Startup
 
 C#
 
-```
+```C#
 public void ConfigureAuth(IAppBuilder app)
 {
         var tvps = new TokenValidationParameters
@@ -118,7 +118,7 @@ public void ConfigureAuth(IAppBuilder app)
 
 C#
 
-```
+```C#
 [Authorize]
 public class TodoListController : ApiController
 {
@@ -128,7 +128,7 @@ public class TodoListController : ApiController
 
 C#
 
-```
+```C#
 public IEnumerable<TodoItem> Get()
 {
     // You can use the ClaimsPrincipal to access information about the

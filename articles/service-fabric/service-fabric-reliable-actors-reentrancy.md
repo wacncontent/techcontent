@@ -36,7 +36,7 @@ ms.author: vturecek
 
 以下示例演示了将重入模式设置为 `ActorReentrancyMode.Disallowed` 的执行组件服务。在这种情况下，如果执行组件向另一个执行组件发送可重入消息，则会引发类型为 `FabricException` 的异常。
 
-```
+```csharp
 static class Program
 {
     static void Main()

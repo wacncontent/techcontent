@@ -65,7 +65,7 @@ ms.author: adegeo
 
 **ServiceDefinition.csdef**：
 
-```
+```xml
     <Startup>
         <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple" >
             <Environment>
@@ -77,7 +77,7 @@ ms.author: adegeo
 
 在下面的示例中，**Startup.cmd** 批处理文件会将行“当前版本是 1.0.0.0”写入到由 TEMP 环境变量指定的目录下的 StartupLog.txt 文件中。`EXIT /B 0` 行确保启动任务以为零的 **errorlevel** 结尾。
 
-```
+```cmd
     ECHO The current version is %MyVersionNumber% >> "%TEMP%\StartupLog.txt" 2>&1
     EXIT /B 0
 ```
@@ -135,7 +135,7 @@ ms.author: adegeo
 
 例如，若要创建这样一个环境变量（当实例在计算模拟器中运行时为**“true”**，在云中运行时为**“false”**），请使用以下 [Variable] 和 [RoleInstanceValue] 元素：
 
-```
+```xml
     <Startup>
         <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple">
             <Environment>

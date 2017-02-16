@@ -43,19 +43,19 @@ ms.author: cynthn
 
 1. 打开 Azure PowerShell 并登录到 Azure 帐户。将打开一个弹出窗口，可以输入 Azure 帐户凭据。
 
-    ```
+    ```powershell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     ```
 
 2. 获取可用订阅的订阅 ID。
 
-    ```
+    ```powershell
     Get-AzureRmSubscription
     ```
 
 3. 使用订阅 ID 设置正确的订阅。将 `<subscriptionID>` 替换为正确订阅的 ID。
 
-    ```
+    ```powershell
     Select-AzureRmSubscription -SubscriptionId "<subscriptionID>"
     ```
 
@@ -65,7 +65,7 @@ ms.author: cynthn
 
 显示可用的存储帐户，请键入：
 
-```
+```powershell
 Get-AzureRmStorageAccount
 ```
 
@@ -75,19 +75,19 @@ Get-AzureRmStorageAccount
 
 1. 需要应在其中创建存储帐户的资源组的名称。若要查找订阅中的所有资源组，请键入：
 
-    ```
+    ```powershell
     Get-AzureRmResourceGroup
     ```
 
     若要在**中国北部**区域中创建名称为 **myResourceGroup** 的资源组，请键入：
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name myResourceGroup -Location "China North"
     ```
 
 2. 使用 [New-AzureRmStorageAccount](https://msdn.microsoft.com/zh-cn/library/mt607148.aspx) cmdlet 在此资源组中创建名称为 **mystorageaccount** 存储帐户：
 
-    ```
+    ```powershell
     New-AzureRmStorageAccount -ResourceGroupName myResourceGroup -Name mystorageaccount -Location "China North" -SkuName "Standard_LRS" -Kind "Storage"
     ```
 
@@ -111,7 +111,7 @@ Add-AzureRmVhd -ResourceGroupName $rgName -Destination $urlOfUploadedImageVhd -L
 
 如果成功，显示如下所示的响应：
 
-```
+```powershell
   C:\> Add-AzureRmVhd -ResourceGroupName myResourceGroup -Destination https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myUploadedVHD.vhd -LocalFilePath "C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd"
   MD5 hash is being calculated for the file C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd.
   MD5 hash calculation is completed.

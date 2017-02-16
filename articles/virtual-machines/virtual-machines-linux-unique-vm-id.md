@@ -40,19 +40,19 @@ Azure VM 唯一 ID 是只读属性。在重新启动关机（计划中或计划�
 
 命令（示例使用 **Ubuntu**）：
 
-```
+```bash
 sudo dmidecode | grep UUID
 ```
 
 示例的预期结果：
 
-```
+```bash
 UUID: 090556DA-D4FA-764F-A9F1-63614EDA019A
 ```
 
 由于 Big Endian 位顺序的原因，此案例中实际的唯一 VM ID 将是：
 
-```
+```bash
 DA 56 05 09 - FA D4 - 4f 76 - A9F1-63614EDA019A
 ```
 

@@ -97,7 +97,7 @@ ALTER DATABASE CurrentDatabasename MODIFY NAME = NewDatabaseName;
 - 执行脚本的用户应为 [mediumrc 角色][mediumrc role]或更高级角色。若要将用户添加到此角色中，请执行下列语句：
         a. `EXEC sp_addrolemember 'xlargerc', 'MyUser'`
 
-    ```
+    ```sql
         -------------------------------------------------------------------------------
         -- 步骤 1：创建表来控制索引重新生成
         -- 在 mediumrc 或更高版本中以用户身份运行

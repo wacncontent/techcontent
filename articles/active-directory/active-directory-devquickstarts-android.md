@@ -132,7 +132,7 @@ cd ./azure-activedirectory-library-for-android/src
 
 gradle
 
-```
+```gradle
     repositories {
         mavenCentral()
         flatDir {
@@ -155,7 +155,7 @@ gradle
 
 xml
 
-```
+```xml
     <dependency>
         <groupId>com.microsoft.aad</groupId>
         <artifactId>adal</artifactId>

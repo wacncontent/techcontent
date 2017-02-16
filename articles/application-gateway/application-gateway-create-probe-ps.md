@@ -36,7 +36,7 @@ Azure 具有用于创建和处理资源的两个不同的部署模型：[资源�
 
 使用 Login-AzureRmAccount 进行身份验证。
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -44,7 +44,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 检查该帐户的订阅。
 
-```
+```powershell
 Get-AzureRmSubscription
 ```
 
@@ -52,7 +52,7 @@ Get-AzureRmSubscription
 
 选择要使用的 Azure 订阅。<BR>
 
-```
+```powershell
 Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 ```
 
@@ -60,7 +60,7 @@ Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 
 创建资源组（如果要使用现有的资源组，请跳过此步骤）。
 
-```
+```powershell
 New-AzureRmResourceGroup -Name appgw-rg -location "China North"
 ```
 
@@ -76,7 +76,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 将地址范围 10.0.0.0/24 分配给用于创建虚拟网络的子网变量。
 
-```
+```powershell
 $subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
 ```
 
@@ -84,7 +84,7 @@ $subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10
 
 使用前缀 10.0.0.0/16 和子网 10.0.0.0/24，在中国北部区域的“appgw-rg”资源组中创建名为“appgwvnet”的虚拟网络。
 
-```
+```powershell
 $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnet
 ```
 
@@ -92,7 +92,7 @@ $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -L
 
 分配子网变量，以完成后面的创建应用程序网关的步骤。
 
-```
+```powershell
 $subnet = $vnet.Subnets[0]
 ```
 
@@ -100,7 +100,7 @@ $subnet = $vnet.Subnets[0]
 
 在中国北部区域的“appgw-rg”资源组中创建公共 IP 资源“publicIP01”。
 
-```
+```powershell
 $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name publicIP01 -location "China North" -AllocationMethod Dynamic
 ```
 
@@ -112,7 +112,7 @@ $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name publicI
 
 创建名为“gatewayIP01”的应用程序网关 IP 配置。当应用程序网关启动时，它会从配置的子网获取 IP 地址，再将网络流量路由到后端 IP 池中的 IP 地址。请记住，每个实例需要一个 IP 地址。
 
-```
+```powershell
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
 ```
 
@@ -120,7 +120,7 @@ $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Sub
 
 配置名为“pool01”的后端 IP 地址池，其 IP 地址为“134.170.185.46”、“134.170.188.221”、“134.170.185.50”。这些值是接收来自前端 IP 终结点的网络流量的 IP 地址。可通过替换上述 IP 地址的方式添加用户自己的应用程序 IP 地址终结点。
 
-```
+```powershell
 $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
 ```
 
@@ -141,7 +141,7 @@ $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPA
 
 为后端池中的流量配置应用程序网关设置“poolsetting01”。此步骤还包括针对应用程序网关请求配置后端池响应超时。后端响应达到超时限制时，应用程序网关取消请求。此值与仅适用于探测检查的后端响应的探测超时不同。
 
-```
+```powershell
 $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsetting01 -Port 80 -Protocol Http -CookieBasedAffinity Disabled -Probe $probe -RequestTimeout 80
 ```
 
@@ -149,7 +149,7 @@ $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsettin
 
 为公共 IP 终结点配置名为“frontendport01”的前端 IP 端口。
 
-```
+```powershell
 $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 80
 ```
 
@@ -157,7 +157,7 @@ $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 80
 
 创建名为“fipconfig01”的前端 IP 配置，并将公共 IP 地址与前端 IP 配置相关联。
 
-```
+```powershell
 $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -PublicIPAddress $publicip
 ```
 
@@ -165,7 +165,7 @@ $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -Pu
 
 创建名为“listener01”的侦听器，并将前端端口与前端 IP 配置相关联。
 
-```
+```powershell
 $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protocol Http -FrontendIPConfiguration $fipconfig -FrontendPort $fp
 ```
 
@@ -173,7 +173,7 @@ $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protoco
 
 创建名为“rule01”的负载均衡器路由规则，并配置负载均衡器的行为。
 
-```
+```powershell
 $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
 ```
 
@@ -181,7 +181,7 @@ $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType B
 
 配置应用程序网关的实例大小。
 
-```
+```powershell
 $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
 ```
 
@@ -194,7 +194,7 @@ $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Cap
 
 创建包含上述步骤中所有配置项的应用程序网关。示例中的应用程序网关名为“appgwtest”。
 
-```
+```powershell
 $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location "China North" -BackendAddressPools $pool -Probes $probe -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku
 ```
 
@@ -206,7 +206,7 @@ $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-
 
 使用 `Get-AzureRmApplicationGateway` 将应用程序网关资源加载到 PowerShell 变量。
 
-```
+```powershell
 $getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
 ```
 
@@ -214,7 +214,7 @@ $getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw
 
 将探测添加到现有网关配置。
 
-```
+```powershell
 $getgw = Add-AzureRmApplicationGatewayProbeConfig -ApplicationGateway $getgw -Name probe01 -Protocol Http -HostName "contoso.com" -Path "/path/custompath.htm" -Interval 30 -Timeout 120 -UnhealthyThreshold 8
 ```
 
@@ -224,7 +224,7 @@ $getgw = Add-AzureRmApplicationGatewayProbeConfig -ApplicationGateway $getgw -Na
 
 使用 `Set-AzureRmApplicationGatewayBackendHttpSettings` 将探测添加到后端池设置配置和超时。
 
-```
+```powershell
  $getgw = Set-AzureRmApplicationGatewayBackendHttpSettings -ApplicationGateway $getgw -Name $getgw.BackendHttpSettingsCollection.name -Port 80 -Protocol Http -CookieBasedAffinity Disabled -Probe $probe -RequestTimeout 120
 ```
 
@@ -232,7 +232,7 @@ $getgw = Add-AzureRmApplicationGatewayProbeConfig -ApplicationGateway $getgw -Na
 
 使用 `Set-AzureRmApplicationGateway` 将配置保存到应用程序网关。
 
-```
+```powershell
 Set-AzureRmApplicationGateway -ApplicationGateway $getgw
 ```
 
@@ -244,7 +244,7 @@ Set-AzureRmApplicationGateway -ApplicationGateway $getgw
 
 使用 `Get-AzureRmApplicationGateway` 将应用程序网关资源加载到 PowerShell 变量。
 
-```
+```powershell
 $getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
 ```
 
@@ -252,7 +252,7 @@ $getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw
 
 使用 `Remove-AzureRmApplicationGatewayProbeConfig` 将探测配置从应用程序网关删除。
 
-```
+```powershell
 $getgw = Remove-AzureRmApplicationGatewayProbeConfig -ApplicationGateway $getgw -Name $getgw.Probes.name
 ```
 
@@ -260,7 +260,7 @@ $getgw = Remove-AzureRmApplicationGatewayProbeConfig -ApplicationGateway $getgw 
 
 使用 `Set-AzureRmApplicationGatewayBackendHttpSettings` 更新后端池设置，删除探测与超时设置。
 
-```
+```powershell
  $getgw = Set-AzureRmApplicationGatewayBackendHttpSettings -ApplicationGateway $getgw -Name $getgw.BackendHttpSettingsCollection.name -Port 80 -Protocol http -CookieBasedAffinity Disabled
 ```
 
@@ -268,7 +268,7 @@ $getgw = Remove-AzureRmApplicationGatewayProbeConfig -ApplicationGateway $getgw 
 
 使用 `Set-AzureRmApplicationGateway` 将配置保存到应用程序网关。
 
-```
+```powershell
 Set-AzureRmApplicationGateway -ApplicationGateway $getgw
 ```
 

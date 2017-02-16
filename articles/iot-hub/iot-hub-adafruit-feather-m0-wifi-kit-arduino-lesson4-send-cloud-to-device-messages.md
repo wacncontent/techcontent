@@ -46,7 +46,7 @@ ms.author: xshi
 
     通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
     cd Lesson4
     code .
     ```
@@ -57,7 +57,7 @@ ms.author: xshi
 
 2. 使用设备发现 CLI 获取设备的串行端口：
 
-    ```
+    ```bash
     devdisco list --usb
     ```
 
@@ -67,7 +67,7 @@ ms.author: xshi
 
 3. 打开课程文件夹中的 `config.json` 文件，并输入找到的 COM 端口号的值：
 
-    ```
+    ```json
     {
         "device_port" : "COM1"
     }
@@ -80,7 +80,7 @@ ms.author: xshi
 
 4. 运行以下命令初始化配置文件：
 
-    ```
+    ```bash
     # For Windows command prompt
     npm install
     gulp init
@@ -101,7 +101,7 @@ ms.author: xshi
 ## 部署并运行示例应用程序
 运行以下命令，在 Arduino 开发板上部署并运行示例应用程序：
 
-```
+```bash
     gulp run
     # You can monitor the serial port by running listen task:
     gulp listen

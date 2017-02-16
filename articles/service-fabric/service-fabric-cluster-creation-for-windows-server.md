@@ -122,7 +122,7 @@ TestConfiguration 脚本可测试 cluster.json 中定义的基础结构，确保
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
-```
+```powershell
 PS C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer> .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json
 Trace folder already exists. Traces will be written to existing trace folder: C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer\DeploymentTraces
 Running Best Practices Analyzer...
@@ -164,7 +164,7 @@ Passed                     : True
 
 若要连接到非安全群集，请运行以下 PowerShell 命令：
 
-```
+```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint <*IPAddressofaMachine*>:<Client connection end point port>
 
 Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000

@@ -38,7 +38,7 @@ ms.author: v-six
 
 下面的代码示例演示了如何在 OnStart 方法中修改 TEMP 和 TMP 的目标目录：
 
-```
+```csharp
 using System;
 using Microsoft.WindowsAzure.ServiceRuntime;
 

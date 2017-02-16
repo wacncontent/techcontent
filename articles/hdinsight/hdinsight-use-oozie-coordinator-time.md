@@ -269,7 +269,7 @@ HDInsight 使用 Azure Blob 存储进行数据存储。wasbs:// 是 Microsoft �
 
 设置 HDInsight 群集时，将 Azure Blob 存储帐户和该帐户的特定容器指定为默认文件系统，如在 HDFS 中。除此存储帐户以外，在预配过程中还可以从相同或不同 Azure 订阅添加其他存储帐户。有关添加其他存储帐户的说明，请参阅[设置 HDInsight 群集][hdinsight-provision]。为简化本教程中使用的 Azure PowerShell 脚本，将所有文件都存储在默认文件系统容器（位于 */tutorials/useoozie*）中。默认情况下，此容器与 HDInsight 群集同名。语法为：
 
-```
+```xml
 wasb[s]://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/<path>/<filename>
 ```
 
@@ -309,7 +309,7 @@ tutorials/useoozie/workflow.xml
 1. 打开 Windows PowerShell ISE（在 Windows 8“开始”屏幕上，键入 **PowerShell\_ISE**，然后单击“Windows PowerShell ISE”。有关详细信息，请参阅[在 Windows 8 和 Windows 上启动 Windows PowerShell][powershell-start]。
 2. 在底部窗格中，运行以下命令连接到 Azure 订阅：
 
-    ```
+    ```powershell
     Add-AzureAccount -Environment AzureChinaCloud
     ```
 

@@ -74,7 +74,7 @@ SQL 数据仓库支持最常用的数据类型。下面是 SQL 数据仓库支�
 
 可以在当前 SQL 数据库上运行以下 SQL 来识别 Azure SQL 数据仓库不支持的列：
 
-```
+```sql
 SELECT  t.[name], c.[name], c.[system_type_id], c.[user_type_id], y.[is_user_defined], y.[name]
 FROM sys.tables  t
 JOIN sys.columns c on t.[object_id]    = c.[object_id]

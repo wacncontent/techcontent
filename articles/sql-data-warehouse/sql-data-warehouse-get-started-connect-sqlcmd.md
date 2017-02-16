@@ -41,7 +41,7 @@ ms.author: barbkess;sonyama
 
 例如，你的连接字符串可能如下所示：
 
-```
+```sql
 C:\>sqlcmd -S MySqlDw.database.chinacloudapi.cn -d Adventure_Works -U myuser -P myP@ssword -I
 ```
 
@@ -51,7 +51,7 @@ C:\>sqlcmd -S MySqlDw.database.chinacloudapi.cn -d Adventure_Works -U myuser -P 
 
 例如，你的连接字符串可能如下所示：
 
-```
+```sql
 C:\>sqlcmd -S MySqlDw.database.chinacloudapi.cn -d Adventure_Works -G -I
 ```
 
@@ -61,7 +61,7 @@ C:\>sqlcmd -S MySqlDw.database.chinacloudapi.cn -d Adventure_Works -G -I
 ## 2\.查询
 连接后，可以对实例发出任何支持的 Transact-SQL 语句。在此示例中，查询以交互模式进行提交。
 
-```
+```sql
 C:\>sqlcmd -S MySqlDw.database.chinacloudapi.cn -d Adventure_Works -U myuser -P myP@ssword -I
 1> SELECT name FROM sys.tables;
 2> GO

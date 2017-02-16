@@ -722,7 +722,7 @@ _**图 11：**指定 SAP 高可用性 Azure Resource Manager 参数_
 
 运行以下 PowerShell 命令获取所有 Azure 网络子网的列表：
 
-```
+```PowerShell
 (Get-AzureRmVirtualNetwork -Name <azureVnetName>  -ResourceGroupName <ResourceGroupOfVNET>).Subnets
 ```
 
@@ -730,7 +730,7 @@ _**图 11：**指定 SAP 高可用性 Azure Resource Manager 参数_
 
 可以使用以下 PowerShell 命令检索所有 SUBNETID 值的列表：
 
-```
+```PowerShell
 (Get-AzureRmVirtualNetwork -Name <azureVnetName>  -ResourceGroupName <ResourceGroupOfVNET>).Subnets.Id
 ```
 
@@ -1428,7 +1428,7 @@ enque/encni/set_so_keepalive = true
 
 首先，请使用此 PowerShell 命令检查当前 **ProbePort** 设置。在群集配置中的某个虚拟机上执行该检查：
 
-```
+```PowerShell
 $SAPSID = "PR1"     # SAP <SID>
 
 $SAPNetworkIPClusterName = "SAP $SAPSID IP"
@@ -1447,7 +1447,7 @@ SAP Azure Resource Manager 模板中已定义端口号。可在 PowerShell 中�
 
 更新环境的 PowerShell 变量。
 
-```
+```PowerShell
 $SAPSID = "PR1"      # SAP <SID>
 $ProbePort = 62000   # ProbePort of the Azure Internal Load Balancer
 
@@ -1505,7 +1505,7 @@ if($ActivateChanges -eq "yes"){
 
 将 **SAP <*SID*>** 群集角色联机之后，验证 **ProbePort** 是否已设置为新值：
 
-```
+```PowerShell
 $SAPSID = "PR1"     # SAP <SID>
 
 $SAPNetworkIPClusterName = "SAP $SAPSID IP"
@@ -1522,7 +1522,7 @@ _**图 59：**设置新值后探测群集端口_
 
 以下脚本可打开 Windows 防火墙探测端口。更新环境的 PowerShell 变量。
 
-```
+```PowerShell
 $ProbePort = 62000   # ProbePort of the Azure Internal Load Balancer
 
 New-NetFirewallRule -Name AzureProbePort -DisplayName "Rule for Azure Probe Port" -Direction Inbound -Action Allow -Protocol TCP -LocalPort $ProbePort

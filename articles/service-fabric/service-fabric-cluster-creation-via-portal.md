@@ -41,13 +41,13 @@ ms.author: vturecek
 
 登录到 Azure 帐户：
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinacloud
 ```
 
 选择订阅：
 
-```
+```powershell
 Get-AzureRmSubscription
 Set-AzureRmContext -SubscriptionId <guid>
 ```
@@ -66,7 +66,7 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 第一个步骤是专门针对密钥保管库创建资源组。建议将密钥保管库放入其自身的资源组中，以便可以删除计算与存储资源组（例如包含 Service Fabric 群集的资源组），而不会丢失密钥和密码。包含密钥保管库的资源组必须与正在使用它的群集位于同一区域。
 
-```
+```powershell
     PS C:\Users\vturecek> New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
     WARNING: The output object type of this cmdlet will be modified in a future release.
 
@@ -81,7 +81,7 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 在新资源组中创建密钥保管库。**必须针对部署启用**密钥保管库，使 Service Fabric 资源提供程序能够从中获取证书并将其安装在群集节点上：
 
-```
+```powershell
     PS C:\Users\vturecek> New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
 
     Vault Name                       : myvault
@@ -107,7 +107,7 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 如果有现有的密钥保管库，可以使用 Azure CLI 针对部署启用该保管库：
 
-```
+```cli
 > azure login -e AzureChinaCloud
 > azure account set "your account"
 > azure config mode arm 
@@ -163,7 +163,7 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 此 PowerShell 模块中的 `Invoke-AddCertToKeyVault` 命令自动将证书私钥的格式设置为 JSON 字符串，并将它上载到密钥保管库。使用该字符串可将群集证书与任何其他应用程序证书添加到密钥保管库。针对要在群集中安装的其他任何证书重复此步骤。
 
-```
+```powershell
 PS C:\Users\vturecek> Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
 
     Switching context to SubscriptionId <guid>

@@ -42,7 +42,7 @@ ms.author: robinsh
 
 将下列 import 语句添加到需要在其中使用 Azure 存储 API 来访问队列的 Java 文件的顶部：
 
-```
+```java
 // Include the following imports to use queue APIs.
 import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.queue.*;
@@ -52,7 +52,7 @@ import com.microsoft.azure.storage.queue.*;
 
 Azure 存储客户端使用存储连接字符串来存储用于访问数据管理服务的终结点和凭据。在客户端应用程序中运行时，必须提供以下格式的存储连接字符串，并对 *AccountName* 和 *AccountKey* 值使用 [Azure 门户预览](https://portal.azure.cn)中列出的存储帐户的名称和存储帐户的主访问密钥。此示例演示如何声明一个静态字段以保存连接字符串：
 
-```
+```java
 // Define the connection-string with your values.
 public static final String storageConnectionString =
     "DefaultEndpointsProtocol=http;" +
@@ -63,7 +63,7 @@ public static final String storageConnectionString =
 
 在 Azure 的角色中运行的应用程序中，此字符串可存储在服务配置文件 *ServiceConfiguration.cscfg* 中，并可通过调用 **RoleEnvironment.getConfigurationSettings** 方法进行访问。下面是从服务配置文件中名为 *StorageConnectionString* 的 **Setting** 元素中获取连接字符串的示例：
 
-```
+```java
 // Retrieve storage account from connection-string.
 String storageConnectionString =
     RoleEnvironment.getConfigurationSettings().get("StorageConnectionString");
@@ -77,7 +77,7 @@ String storageConnectionString =
 
 使用 **CloudQueueClient** 对象获取对你要使用的队列的引用。如果队列不存在，你可以创建它。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -104,7 +104,7 @@ catch (Exception e)
 
 若要将消息插入现有队列，请先创建一个新的 **CloudQueueMessage**。接下来，调用 **addMessage** 方法。可从字符串（UTF-8 格式）或字节数组创建 **CloudQueueMessage**。以下代码将创建队列（如果队列不存在）并插入消息“Hello, World”。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -135,7 +135,7 @@ catch (Exception e)
 
 通过调用 **peekMessage**，你可以扫视队列前面的消息，而不会从队列中删除它。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -170,7 +170,7 @@ catch (Exception e)
 
 下面的代码示例将搜索队列中的消息，查找内容中第一个与“Hello, World”匹配的消息，然后对消息内容进行修改并退出。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -213,7 +213,7 @@ catch (Exception e)
 
 或者，以下代码示例只更新了队列中第一个可见消息
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -252,7 +252,7 @@ catch (Exception e)
 
 你可以获取队列中消息的估计数。**downloadAttributes** 方法会询问队列服务一些当前值，包括队列中消息的计数。此计数仅为近似值，因为只能在队列服务响应您的请求后添加或删除消息。**getApproximateMessageCount** 方法返回通过调用 **downloadAttributes** 检索到的最后一个值，而不会调用队列服务。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -285,7 +285,7 @@ catch (Exception e)
 
 你的代码通过两个步骤来取消对队列中某条消息的排队。在调用 **retrieveMessage** 时，你将获得队列中的下一条消息。从 **retrieveMessage** 返回的消息变得对从此队列读取消息的任何其他代码不可见。默认情况下，此消息将持续 30 秒不可见。若要从队列中删除消息，你还必须调用 **deleteMessage**。此删除消息的两步过程可确保，如果你的代码因硬件或软件故障而无法处理消息，则你的代码的其他实例可以获取相同消息并重试。你的代码在处理消息后会立即调用 **deleteMessage**。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -320,7 +320,7 @@ catch (Exception e)
 
 下面的代码示例使用 **retrieveMessages** 方法以在一次调用中获取 20 条消息。然后，它会使用 **for** 循环处理每条消息。它还将每条消息的不可见超时设置为五分钟（300 秒）。请注意，这五分钟超时对于所有消息都是同时开始的，因此在调用 **retrieveMessages** 五分钟后，尚未删除的任何消息都将再次变得可见。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -351,7 +351,7 @@ catch (Exception e)
 
 若要获取当前队列的列表，请调用 **CloudQueueClient.listQueues()** 方法，它将返回 **CloudQueue** 对象的集合。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -380,7 +380,7 @@ catch (Exception e)
 
 若要删除队列及其包含的所有消息，请对 **CloudQueue** 对象调用 **deleteIfExists** 方法。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.

@@ -31,7 +31,7 @@ ms.author: masnider
 
 代码：
 
-```
+```csharp
 this.ServicePartition.ReportMoveCost(MoveCost.Medium);
 ```
 

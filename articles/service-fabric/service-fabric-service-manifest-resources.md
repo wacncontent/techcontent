@@ -27,7 +27,7 @@ ms.author: subramar
 
 在服务清单中定义了终结点资源时，如果未显式指定端口，则 Service Fabric 从保留的应用程序端口范围中分配端口。例如，可以查看本段落后面提供的清单代码段中指定的终结点 *ServiceEndpoint1*。此外，服务还可以请求在资源中使用特定端口。在不同群集节点上运行的服务副本可以分配不同的端口号，而运行在同一节点上的服务副本共享同一个端口。之后服务副本可根据需要将这些端口用于复制和侦听客户端请求。
 
-```
+```xml
 <Resources>
   <Endpoints>
     <Endpoint Name="ServiceEndpoint1" Protocol="http"/>
@@ -45,7 +45,7 @@ ms.author: subramar
 
 HTTP 终结点由 Service Fabric 自动建立 ACL。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceManifest Name="Stateful1Pkg"
                  Version="1.0.0"

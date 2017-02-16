@@ -34,7 +34,7 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 
 ### 持久化状态
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 class MyActor : Actor, IMyActor
 {
@@ -45,7 +45,7 @@ class MyActor : Actor, IMyActor
 
 ### 易失性状态
 
-```
+```csharp
 [StatePersistence(StatePersistence.Volatile)]
 class MyActor : Actor, IMyActor
 {
@@ -56,7 +56,7 @@ class MyActor : Actor, IMyActor
 
 ### 非持久化状态
 
-```
+```csharp
 [StatePersistence(StatePersistence.None)]
 class MyActor : Actor, IMyActor
 {
@@ -68,7 +68,7 @@ class MyActor : Actor, IMyActor
 ### 默认值和生成的设置
 如果使用 `StatePersistence` 属性，在执行组件服务启动时，系统会在运行时自动选择状态提供程序。但是，副本计数将在编译时由 Visual Studio 执行组件构建工具设置。生成工具在 ApplicationManifest.xml 中自动为执行组件服务生成*默认服务*。参数是针对**副本集大小下限**和**目标副本集大小**创建的。当然，可以手动更改这些参数，但是，`StatePersistence` 属性每次更改时，参数会设置为所选 `StatePersistence` 属性的默认副本集大小值，并替代所有旧值。换而言之，更改 `StatePersistence` 属性值时，在 ServiceManifest.xml 中设置的值**仅**会在生成时被替代。
 
-```
+```xml
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Application12Type" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <Parameters>
       <Parameter Name="MyActorService_PartitionCount" DefaultValue="10" />
@@ -104,7 +104,7 @@ class MyActor : Actor, IMyActor
 
 如果给定键的条目不存在，可以使用引发 `KeyNotFoundException` 的标准 *Get* 操作来检索状态：
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 class MyActor : Actor, IMyActor
 {
@@ -121,7 +121,7 @@ class MyActor : Actor, IMyActor
 
 如果给定键的条目不存在，还可以使用不引发异常的 *TryGet* 方法来检索状态：
 
-```
+```csharp
 class MyActor : Actor, IMyActor
 {
     public MyActor(ActorService actorService, ActorId actorId)
@@ -147,7 +147,7 @@ class MyActor : Actor, IMyActor
 
 可以使用无条件的 *Set*（相当于 `dictionary["key"] = value` 语法）来插入状态：
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 class MyActor : Actor, IMyActor
 {
@@ -164,7 +164,7 @@ class MyActor : Actor, IMyActor
 
 可以使用 *Add* 方法来添加状态，但尝试添加已存在的键时会引发 `InvalidOperationException`：
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 class MyActor : Actor, IMyActor
 {
@@ -181,7 +181,7 @@ class MyActor : Actor, IMyActor
 
 还可以使用 *TryAdd* 方法来添加状态，但尝试添加已存在的键时不会引发异常：
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 class MyActor : Actor, IMyActor
 {
@@ -205,7 +205,7 @@ class MyActor : Actor, IMyActor
 
 还可以通过对执行组件基调用 `SaveStateAsync` 方法来手动保存状态：
 
-```
+```csharp
 async Task IMyActor.SetCountAsync(int count)
 {
     await this.StateManager.AddOrUpdateStateAsync("count", count, (key, value) => count > value ? count : value);
@@ -218,7 +218,7 @@ async Task IMyActor.SetCountAsync(int count)
 
 可以通过调用 *Remove* 方法，从执行组件的状态管理器中永久删除状态。尝试删除不存在的键时，此方法会引发 `KeyNotFoundException`：
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 class MyActor : Actor, IMyActor
 {
@@ -235,7 +235,7 @@ class MyActor : Actor, IMyActor
 
 还可以使用 *TryRemove* 方法永久删除状态，此方法在尝试删除不存在的键时不会引发异常：
 
-```
+```csharp
 [StatePersistence(StatePersistence.Persisted)]
 class MyActor : Actor, IMyActor
 {

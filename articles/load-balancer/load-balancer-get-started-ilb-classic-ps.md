@@ -46,7 +46,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 对于现有的云服务或在区域虚拟网络下部署的云服务，可以使用以下 Windows PowerShell 命令创建内部负载均衡实例：
 
-```
+```powershell
 $svc="<Cloud Service Name>"
 $ilb="<Name of your ILB instance>"
 $subnet="<Name of the subnet within your virtual network>"
@@ -61,7 +61,7 @@ Add-AzureInternalLoadBalancer -ServiceName $svc -InternalLoadBalancerName $ilb -
 
 下面是一个示例：
 
-```
+```powershell
 $svc="mytestcloud"
 $vmname="DB1"
 $epname="TCP-1433-1433"
@@ -79,14 +79,14 @@ Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -L
 
 如果在创建内部负载均衡实例期间指定了 IP 地址，则你已有 VIP。否则，你可以通过以下命令查看 VIP：
 
-```
+```powershell
 $svc="<Cloud Service Name>"
 Get-AzureService -ServiceName $svc | Get-AzureInternalLoadBalancer
 ```
 
 若要使用这些命令，请填充值并删除 \< 和 \>。下面是一个示例：
 
-```
+```powershell
 $svc="mytestcloud"
 Get-AzureService -ServiceName $svc | Get-AzureInternalLoadBalancer
 ```
@@ -114,7 +114,7 @@ Azure Platform 对各种管理方案使用一个公开可路由的静态 IPv4 �
 
 以下命令将配置名为 **ILBset** 的新内部负载均衡实例，并向对应于两个数据库服务器的虚拟机添加终结点：
 
-```
+```powershell
 $svc="mytestcloud"
 $ilb="ilbset"
 Add-AzureInternalLoadBalancer -ServiceName $svc -InternalLoadBalancerName $ilb
@@ -135,7 +135,7 @@ Get-AzureVM -ServiceName $svc -Name $vmname | Add-AzureEndpoint -Name $epname -L
 
 若要从内部负载均衡器实例删除作为终结点的虚拟机，请使用以下命令：
 
-```
+```powershell
 $svc="<Cloud service name>"
 $vmname="<Name of the VM>"
 $epname="<Name of the endpoint>"
@@ -146,7 +146,7 @@ Get-AzureVM -ServiceName $svc -Name $vmname | Remove-AzureEndpoint -Name $epname
 
 下面是一个示例：
 
-```
+```powershell
 $svc="mytestcloud"
 $vmname="DB1"
 $epname="TCP-1433-1433"
@@ -155,7 +155,7 @@ Get-AzureVM -ServiceName $svc -Name $vmname | Remove-AzureEndpoint -Name $epname
 
 若要从云服务中删除内部负载均衡器实例，请使用以下命令：
 
-```
+```powershell
 $svc="<Cloud service name>"
 Remove-AzureInternalLoadBalancer -ServiceName $svc
 ```
@@ -164,7 +164,7 @@ Remove-AzureInternalLoadBalancer -ServiceName $svc
 
 下面是一个示例：
 
-```
+```powershell
 $svc="mytestcloud"
 Remove-AzureInternalLoadBalancer -ServiceName $svc
 ```
@@ -173,7 +173,7 @@ Remove-AzureInternalLoadBalancer -ServiceName $svc
 
 若要获取有关内部负载均衡 cmdlet 的其他信息，请在 Windows PowerShell 提示符处运行以下命令：
 
-```
+```powershell
 Get-Help New-AzureInternalLoadBalancerConfig -full
 Get-Help Add-AzureInternalLoadBalancer -full
 Get-Help Get-AzureInternalLoadbalancer -full

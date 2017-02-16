@@ -43,7 +43,7 @@ ms.author: jdial
 
 1. 创建一个路由，用于将流向后端子网 (192.168.2.0/24) 的所有流量路由到 **FW1** 虚拟设备 (192.168.0.4)。
 
-    ```
+    ```powershell
     $route = New-AzureRmRouteConfig -Name RouteToBackEnd `
     -AddressPrefix 192.168.2.0/24 -NextHopType VirtualAppliance `
     -NextHopIpAddress 192.168.0.4
@@ -51,20 +51,20 @@ ms.author: jdial
 
 2. 在 **chinanorth** 区域中创建一个名为 **UDR-FrontEnd** 的路由表，其中包含路由。
 
-    ```
+    ```powershell
     $routeTable = New-AzureRmRouteTable -ResourceGroupName TestRG -Location chinanorth `
     -Name UDR-FrontEnd -Route $route
     ```
 
 3. 创建一个变量，包含该子网所在的 VNet。在我们的方案中，VNet 名为 **TestVNet**。
 
-    ```
+    ```powershell
     $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
     ```
 
 4. 将上面创建的路由表与 **FrontEnd** 子网关联起来。
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name FrontEnd `
     -AddressPrefix 192.168.1.0/24 -RouteTable $routeTable
     ```
@@ -75,7 +75,7 @@ ms.author: jdial
 
 5. 将新的子网配置保存在 Azure 中。
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     ```
 
@@ -135,7 +135,7 @@ ms.author: jdial
 
 1. 创建一个路由，用于将流向前端子网 (192.168.1.0/24) 的所有流量路由到 **FW1** 虚拟设备 (192.168.0.4)。
 
-    ```
+    ```powershell
     $route = New-AzureRmRouteConfig -Name RouteToFrontEnd `
     -AddressPrefix 192.168.1.0/24 -NextHopType VirtualAppliance `
     -NextHopIpAddress 192.168.0.4
@@ -143,21 +143,21 @@ ms.author: jdial
 
 2. 在 **chinanorth** 区域中创建一个名为 **UDR-BackEnd** 的路由表，其中包含上面创建的路由。
 
-    ```
+    ```powershell
     $routeTable = New-AzureRmRouteTable -ResourceGroupName TestRG -Location chinanorth `
     -Name UDR-BackEnd -Route $route
     ```
 
 3. 将上面创建的路由表与 **BackEnd** 子网关联起来。
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name BackEnd `
     -AddressPrefix 192.168.2.0/24 -RouteTable $routeTable
     ```
 
 4. 将新的子网配置保存在 Azure 中。
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     ```
 
@@ -215,13 +215,13 @@ ms.author: jdial
 
 1. 创建一个变量，包含由 FW1 使用的 NIC 的设置。在我们的方案中，NIC 名为 **NICFW1**。
 
-    ```
+    ```powershell
     $nicfw1 = Get-AzureRmNetworkInterface -ResourceGroupName TestRG -Name NICFW1
     ```
 
 2. 启用 IP 转发，并保存 NIC 设置。
 
-    ```
+    ```powershell
     $nicfw1.EnableIPForwarding = 1
     Set-AzureRmNetworkInterface -NetworkInterface $nicfw1
     ```

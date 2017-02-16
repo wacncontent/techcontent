@@ -92,7 +92,7 @@ ms.author: msfussell;mikhegn
 
 所生成的 ServiceManifest.xml 现在有一个描述应该如何启动 Node.js Web 服务器的节，如以下代码段所示：
 
-```
+```xml
 <CodePackage Name="C" Version="1.0">
     <EntryPoint>
         <ExeHost>
@@ -106,7 +106,7 @@ ms.author: msfussell;mikhegn
 
 在此示例中，Node.js Web 服务器会侦听端口 3000，所以你需要更新 ServiceManifest.xml 文件中的终结点信息，如下所示。
 
-```
+```xml
 <Resources>
       <Endpoints>
          <Endpoint Name="NodeServiceEndpoint" Protocol="http" Port="3000" Type="Input" />
@@ -163,7 +163,7 @@ mongod.exe --dbpath [path to data]
 
 如你所见，工具已将新文件夹“MongoDB”添加到包含 MongoDB 二进制文件的目录中。如果打开 `ApplicationManifest.xml` 文件，可以看到包现在包含 Node.js 应用程序和 MongoDB。以下代码会显示应用程序清单的内容。
 
-```
+```xml
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="MyNodeApp" ApplicationTypeVersion="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <ServiceManifestImport>
       <ServiceManifestRef ServiceManifestName="MongoDB" ServiceManifestVersion="1.0" />

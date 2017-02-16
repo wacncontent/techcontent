@@ -38,7 +38,7 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     a) 日志中 SCSI 设备的 Grep，例如，在以下命令中：
 
-    ```
+    ```bash
     sudo grep SCSI /var/log/messages
     ```
 
@@ -52,13 +52,13 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     b) 使用 `lsscsi` 命令找出设备 ID。可以通过 `yum install lsscsi`（在基于 Red Hat 的分发上）或 `apt-get install lsscsi`（在基于 Debian 的分发上）安装 `lsscsi`。可以通过磁盘的 *lun*（即 **逻辑单元号**）找到所需磁盘。例如，所附加磁盘的 *lun* 可以轻松地通过 `azure vm disk list <virtual-machine>` 来查看，如下所示：
 
-    ```
+    ```azurecli
     azure vm disk list myVM
     ```
 
     输出与下面类似：
 
-    ```
+    ```azurecli
     info:    Executing command vm disk list
     + Fetching disk images
     + Getting virtual machines
@@ -72,7 +72,7 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     将此数据与同一示例性虚拟机的 `lsscsi` 的输出进行比较：
 
-    ```
+    ```bash
     [1:0:0:0]    cd/dvd  Msft     Virtual CD/ROM   1.0   /dev/sr0
     [2:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sda
     [3:0:1:0]    disk    Msft     Virtual Disk     1.0   /dev/sdb
@@ -82,7 +82,7 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
     每一行的元组中的最后一个数字就是 *lun*。有关详细信息，请参阅 `man lsscsi`。
 3. 在提示符下，键入以下命令以创建设备：
 
-    ```
+    ```bash
     sudo fdisk /dev/sdc
     ```
 
@@ -104,7 +104,7 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
 8. 现在，可以在新分区上创建文件系统。在设备 ID 后面追加磁盘分区号（在以下示例中为 `/dev/sdc1`）。以下示例在 /dev/sdc1 上创建 ext4 磁盘分区：
 
-    ```
+    ```bash
     sudo mkfs -t ext4 /dev/sdc1
     ```
 
@@ -115,13 +115,13 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
 9. 创建一个目录来装载新的文件系统，如下所示：
 
-    ```
+    ```bash
     sudo mkdir /datadrive
     ```
 
 10. 最后可以装载驱动器，如下所示：
 
-    ```
+    ```bash
     sudo mount /dev/sdc1 /datadrive
     ```
 
@@ -133,13 +133,13 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     若要确保在重新引导后自动重新装载驱动器，必须将其添加到 /etc/fstab 文件。此外，强烈建议在 /etc/fstab 中使用 UUID（全局唯一标识符）来引用驱动器而不是只使用设备名称（即 /dev/sdc1）。如果 OS 在启动过程中检测到磁盘错误，使用 UUID 可以避免将错误的磁盘装载到给定位置，然后为剩余的数据磁盘分配这些设备 ID。若要查找新驱动器的 UUID，可以使用 **blkid** 实用程序：
 
-    ```
+    ```bash
     sudo -i blkid
     ```
 
     输出内容类似于下面的示例：
 
-    ```
+    ```bash
     /dev/sda1: UUID="11111111-1b1b-1c1c-1d1d-1e1e1e1e1e1e" TYPE="ext4"
     /dev/sdb1: UUID="22222222-2b2b-2c2c-2d2d-2e2e2e2e2e2e" TYPE="ext4"
     /dev/sdc1: UUID="33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e" TYPE="ext4"
@@ -150,19 +150,19 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     接下来，请在文本编辑器中打开 **/etc/fstab** 文件：
 
-    ```
+    ```bash
     sudo vi /etc/fstab
     ```
 
     在此示例中，将使用在之前的步骤中创建的新 **/dev/sdc1** 设备的 UUID 值并使用装载点 **/datadrive**。将以下行添加到 **/etc/fstab** 文件的末尾：
 
-    ```
+    ```sh
     UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail   1   2
     ```
 
     另外，在基于 SuSE Linux 的系统上，你可能需要使用稍微不同的格式：
 
-    ```
+    ```sh
     /dev/disk/by-uuid/33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext3   defaults,nofail   1   2
     ```
 
@@ -171,7 +171,7 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     现在，可以通过卸载并重新装载文件系统（即使用在之前的步骤中创建的示例装载点 `/datadrive`）来测试文件系统是否已正确装载：
 
-    ```
+    ```bash
     sudo umount /datadrive
     sudo mount /datadrive
     ```
@@ -180,7 +180,7 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     需要使用以下命令将驱动器设为可写：
 
-    ```
+    ```bash
     sudo chmod go+w /datadrive
     ```
 
@@ -194,7 +194,7 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
 * 在 `/etc/fstab` 中使用 `discard` 装载选项，例如：
 
-    ```
+    ```sh
     UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,discard   1   2
     ```
 
@@ -202,14 +202,14 @@ Azure 提供两个不同的部署模型用于创建和处理资源：[Resource M
 
     **Ubuntu**
 
-    ```
+    ```bash
     sudo apt-get install util-linux
     sudo fstrim /datadrive
     ```
 
     **RHEL/CentOS**
 
-    ```
+    ```bash
     sudo yum install util-linux
     sudo fstrim /datadrive
     ```

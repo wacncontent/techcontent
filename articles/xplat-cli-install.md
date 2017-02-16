@@ -38,13 +38,13 @@ ms.author: danlep
 
 若要从 npm 包安装 CLI，请确保已下载并安装[最新的 Node.js 和 npm](https://nodejs.org/en/download/package-manager/)。然后，运行 **npm install** 以安装 azure-cli 包：
 
-```
+```bash
 npm install -g azure-cli
 ```
 
 在 Linux 分发版中，可能需要使用 **sudo** 才能成功运行 __npm__ 命令，如下所示：
 
-```
+```bash
 sudo npm install -g azure-cli
 ```
 
@@ -53,7 +53,7 @@ sudo npm install -g azure-cli
 
 如果喜欢，也可以将 npm 包的最新 Linux [tar 文件][linux-installer]下载到本地。然后，按照以下步骤安装下载的 npm 包（在 Linux 分发版上可能需要使用 **sudo**）：
 
-```
+```bash
 npm install -g <path to downloaded tar file>
 ```
 
@@ -72,27 +72,27 @@ npm install -g <path to downloaded tar file>
 
 如果将计算机设置为 [Docker](https://docs.docker.com/engine/understanding-docker/) 主机，则可以在 Docker 容器中运行最新的 Azure CLI。运行以下命令（在 Linux 分发版中，可能需要使用 **sudo**）：
 
-```
+```bash
 docker run -it microsoft/azure-cli
 ```
 
 ## 运行 Azure CLI 命令
 安装 Azure CLI 之后，请从命令行用户界面（Bash、终端、命令提示符等）运行 **azure** 命令。例如，若要运行帮助命令，请键入以下命令：
 
-```
+```azurecli
 azure help
 ```
 
 > [!NOTE]
 >在某些 Linux 分发版中，可能会收到类似于“`/usr/bin/env: ‘node’: No such file or directory`”的错误。此错误来自最近安装在 /usr/bin/nodejs 中的 Node.js 安装。若要解决此错误，请运行以下命令创建 /usr/bin/node 的符号链接：
 
-```
+```bash
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
 若要查看安装的 Azure CLI 版本，请键入以下命令：
 
-```
+```azurecli
 azure --version
 ```
 
@@ -105,7 +105,7 @@ azure --version
 
 Microsoft 会频繁发布 Azure CLI 的更新版本。使用适用于操作系统的安装程序来重新安装 CLI，或运行最新的 Docker 容器。如果已安装最新的 Node.js 和 npm，请键入以下命令（在 Linux 分发版上可能需要使用 **sudo**）进行更新。
 
-```
+```bash
 npm update -g azure-cli
 ```
 
@@ -115,13 +115,13 @@ Mac 和 Linux 支持 tab 自动补全 CLI 命令。
 
 如要在 zsh 中启用，运行：
 
-```
+```bash
 echo '. <(azure --completion)' >> .zshrc
 ```
 
 若要在 bash 中启用，运行：
 
-```
+```bash
 azure --completion >> ~/azure.completion.sh
 echo 'source ~/azure.completion.sh' >> ~/.bash_profile
 ```

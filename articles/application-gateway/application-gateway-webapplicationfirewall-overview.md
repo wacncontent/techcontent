@@ -58,7 +58,7 @@ Web 应用程序防火墙 (WAF) 是 Azure 应用程序网关的功能，用于�
 
 ![imageURLroute](./media/application-gateway-webapplicationfirewall-overview/waf2.png)  
 
-```
+```json
 {
     "resourceId": "/SUBSCRIPTIONS/<subscriptionId>/RESOURCEGROUPS/<resourceGroupName>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<applicationGatewayName>",
     "operationName": "ApplicationGatewayFirewall",

@@ -29,7 +29,7 @@ ms.author: iainfou
 ## <a name="quick-commands"></a> 快速命令
 若要创建网络安全组和规则，需要安装 [Azure CLI 1.0](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
-```
+```azurecli
 azure config mode arm
 ```
 
@@ -37,14 +37,14 @@ azure config mode arm
 
 正确输入自己的名称和位置来创建网络安全组。以下示例在 `ChinaNorth` 位置创建名为 `myNetworkSecurityGroup` 的网络安全组：
 
-```
+```azurecli
 azure network nsg create --resource-group myResourceGroup --location chinanorth \
     --name myNetworkSecurityGroup
 ```
 
 添加规则以允许 HTTP 流量流向 Web 服务器（或者根据自己的情况（例如 SSH 访问或数据库连接）来调整此规则）。以下示例创建名为 `myNetworkSecurityGroupRule` 的规则，以便允许在端口 80 上传输 TCP 流量：
 
-```
+```azurecli
 azure network nsg rule create --resource-group myResourceGroup \
     --nsg-name myNetworkSecurityGroup --name myNetworkSecurityGroupRule \
     --protocol tcp --direction inbound --priority 1000 \
@@ -53,14 +53,14 @@ azure network nsg rule create --resource-group myResourceGroup \
 
 将网络安全组与 VM 的网络接口 (NIC) 相关联。以下示例将名为 `myNic` 的现有 NIC 与名为 `myNetworkSecurityGroup` 的网络安全组相关联：
 
-```
+```azurecli
 azure network nic set --resource-group myResourceGroup \
     --network-security-group-name myNetworkSecurityGroup --name myNic
 ```
 
 或者，也可以将网络安全组与虚拟网络的子网相关联，而不是只与单个 VM 上的网络接口相关联。以下示例将 `myVnet` 虚拟网络中名为 `mySubnet` 的现有子网与名为 `myNetworkSecurityGroup` 的网络安全组相关联：
 
-```
+```azurecli
 azure network vnet subnet set --resource-group myResourceGroup \
     --network-security-group-name myNetworkSecurityGroup \
     --vnet-name myVnet --name mySubnet

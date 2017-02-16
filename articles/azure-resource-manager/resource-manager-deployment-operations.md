@@ -61,7 +61,7 @@ ms.author: tomfitz
 
 也可以筛选结果，以便只获取失败的部署。
 
-```
+```powershell
   Get-AzureRmResourceGroupDeployment -ResourceGroupName ExampleGroup | Where-Object ProvisioningState -eq Failed
 ```
 
@@ -71,7 +71,7 @@ ms.author: tomfitz
 
 它将返回多个操作，其中每个操作采用以下格式：
 
-```
+```powershell
   Id             : /subscriptions/{guid}/resourceGroups/ExampleGroup/providers/Microsoft.Resources/deployments/Microsoft.Template/operations/A3EB2DA598E0A780
   OperationId    : A3EB2DA598E0A780
   Properties     : @{provisioningOperation=Create; provisioningState=Succeeded; timestamp=2016-06-14T21:55:15.0156208Z;
@@ -87,7 +87,7 @@ ms.author: tomfitz
 
 它将返回所有失败的操作，其中每个操作采用以下格式：
 
-```
+```powershell
   provisioningOperation : Create
   provisioningState     : Failed
   timestamp             : 2016-06-14T21:54:55.1468068Z
@@ -108,7 +108,7 @@ ms.author: tomfitz
 
 将返回：
 
-```
+```powershell
   code           message                                                                        details
   ----           -------                                                                        -------
   DnsRecordInUse DNS record dns.chinanorth.chinacloudapp.cn is already used by another public IP. {}
@@ -122,7 +122,7 @@ ms.author: tomfitz
 
 返回的值之一是 **correlationId**。此值可用于跟踪相关事件，在与技术支持人员合作排查部署问题时非常有用。
 
-```
+```azurecli
   "properties": {
     "provisioningState": "Failed",
     "correlationId": "4002062a-a506-4b5e-aaba-4147036b771a",
@@ -140,7 +140,7 @@ ms.author: tomfitz
 
 在响应中，请特别注意 **provisioningState**、**correlationId** 和 **error** 元素。**correlationId** 可用于跟踪相关事件，在与技术支持人员合作排查部署问题时非常有用。
 
-```
+```json
   { 
     ...
     "properties": {
@@ -161,7 +161,7 @@ ms.author: tomfitz
 
 响应包含请求和/或响应信息，具体取决于部署期间在 **debugSetting** 属性中指定的内容。
 
-```
+```json
   {
     ...
     "properties": 

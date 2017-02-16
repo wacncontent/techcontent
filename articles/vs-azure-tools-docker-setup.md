@@ -29,13 +29,13 @@ wacn.date: 06/20/2016
 
 1. 创建默认 Docker 主机实例。
 
-    ```
+    ```PowerShell
     docker-machine create --driver virtualbox default
     ```
 
 1. 验证默认实例是否已配置且在运行。（你应该会看到名为“default”的实例正在运行。
 
-    ```
+    ```PowerShell
     docker-machine ls 
     ```
 
@@ -43,13 +43,13 @@ wacn.date: 06/20/2016
 
 1. 将“default”设置为当前主机，并配置你的 Shell。
 
-    ```
+    ```PowerShell
     docker-machine env default | Invoke-Expression
     ```
 
 1. 显示活动的 Docker 容器。列表应为空。
 
-    ```
+    ```PowerShell
     docker ps
     ```
 

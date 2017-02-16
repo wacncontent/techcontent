@@ -68,7 +68,7 @@ Batch 节点代理是一个程序，它在池中的每个节点上运行，并�
 
 Python
 
-```
+```python
 # Import the required modules from the
 # Azure Batch Client Library for Python
 import azure.batch.batch_service_client as batch
@@ -126,7 +126,7 @@ client.pool.add(new_pool)
 
 Python
 
-```
+```python
 # Get the list of node agents from the Batch service
 nodeagents = client.account.list_node_agent_skus()
 
@@ -150,7 +150,7 @@ vmc = batchmodels.VirtualMachineConfiguration(
 
 csharp
 
-```
+```csharp
 // Pool settings
 const string poolId = "LinuxNodesSamplePoolDotNet";
 const string vmSize = "STANDARD_A1";
@@ -202,7 +202,7 @@ pool.Commit();
 
 csharp
 
-```
+```csharp
 ImageReference imageReference = new ImageReference(
     publisher: "Canonical",
     offer: "UbuntuServer",
@@ -250,7 +250,7 @@ ImageReference imageReference = new ImageReference(
 
 Python
 
-```
+```python
 import datetime
 import getpass
 import azure.batch.batch_service_client as batch

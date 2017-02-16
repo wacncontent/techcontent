@@ -37,7 +37,7 @@ ms.author: v-livech
 
 以下示例演示如何部署 CoreOS VM 并附加安全外壳 (SSH) 密钥（你的参数可能与此不同）：
 
-```
+```azurecli
 azure vm quick-create -M ~/.ssh/id_rsa.pub -Q CoreOS
 ```
 
@@ -69,7 +69,7 @@ azure vm quick-create -M ~/.ssh/id_rsa.pub -Q CoreOS
 
 以下示例会指定所有值，因此不会再有进一步的提示。只要使用 `~/.ssh/id_rsa.pub` 作为 ssh-rsa 格式公钥文件，它就会正常运行：
 
-```
+```azurecli
 azure vm quick-create \
   --resource-group myResourceGroup \
   --name myVM \
@@ -82,7 +82,7 @@ azure vm quick-create \
 
 输出应类似于以下输出块：
 
-```
+```azurecli
 info:    Executing command vm quick-create
 + Listing virtual machine sizes available in the location "chinanorth"
 + Looking up the VM "myVM"
@@ -161,13 +161,13 @@ info:    vm quick-create command OK
 ## 登录到新 VM
 使用输出中列出的公共 IP 地址登录到 VM。可以使用列出的完全限定域名 (FQDN)：
 
-```
+```bash
 ssh -i ~/.ssh/id_rsa.pub ahmet@138.91.247.29
 ```
 
 登录过程应如以下输出块所示：
 
-```
+```bash
 Warning: Permanently added '138.91.247.29' (ECDSA) to the list of known hosts.
 Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.19.0-65-generic x86_64)
 

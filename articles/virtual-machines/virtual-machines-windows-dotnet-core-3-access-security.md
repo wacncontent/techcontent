@@ -34,7 +34,7 @@ ms.author: nepeters
 >[!NOTE]
 > 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Network/publicIPAddresses",
@@ -57,7 +57,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [公共 IP 地址与负载均衡器的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L211)。
 
-```
+```json
 "frontendIPConfigurations": [
   {
     "properties": {
@@ -81,7 +81,7 @@ Azure 门户预览中显示的公共 IP 地址。请注意，公共 IP 地址与
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络安全组](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L57)。
 
-```
+```json
 {
   "apiVersion": "2016-03-30",
   "type": "Microsoft.Network/networkSecurityGroups",
@@ -116,7 +116,7 @@ Azure 门户预览中显示的公共 IP 地址。请注意，公共 IP 地址与
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络安全组与虚拟网络的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L143)。
 
-```
+```json
 "subnets": [
   {
     "name": "[variables('subnetName')]",

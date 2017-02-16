@@ -67,7 +67,7 @@ ms.author: iainfou
 ## <a name="using-the-azure-cli"></a> 使用 Azure CLI
 [安装 Azure CLI 并连接到 Azure 订阅](../xplat-cli-install.md)（如果尚未这样做）。确保按如下所示使用 Resource Manager 模式：
 
-```
+```azurecli
 azure config mode arm
 ```
 
@@ -78,7 +78,7 @@ SSHD 配置本身可能有误或服务遇到错误。你可以重置 SSHD 以确
 
 以下示例重置 `myResourceGroup` 资源组中名为 `myVM` 的 VM 上的 SSHD。请使用自己的 VM 和资源组名称，如下所示：
 
-```
+```azurecli
 azure vm reset-access --resource-group myResourceGroup --name myVM \
     --reset-ssh
 ```
@@ -86,14 +86,14 @@ azure vm reset-access --resource-group myResourceGroup --name myVM \
 ### 重置用户的 SSH 凭据
 如果 SSHD 看上去运行正常，可以重置给定用户的密码。以下示例在 `myResourceGroup` 中名为 `myVM` 的 VM 上，将 `myUsername` 的凭据重置为 `myPassword` 中指定的值。请如下所示使用自己的值：
 
-```
+```azurecli
 azure vm reset-access --resource-group myResourceGroup --name myVM \
      --username myUsername --password myPassword
 ```
 
 如果使用 SSH 密钥身份验证，可以重置给定用户的 SSH 密钥。以下示例在 `myResourceGroup` 中名为 `myVM` 的 VM 上，更新 `~/.ssh/azure_id_rsa.pub` 中为用户 `myUsername` 存储的 SSH 密钥。请如下所示使用自己的值：
 
-```
+```azurecli
 azure vm reset-access --resource-group myResourceGroup --name myVM \
     --username myUsername --ssh-key-file ~/.ssh/azure_id_rsa.pub
 ```
@@ -104,7 +104,7 @@ azure vm reset-access --resource-group myResourceGroup --name myVM \
 ### 重置 SSHD
 创建包含以下内容的名为 `PrivateConf.json` 的文件：
 
-```
+```json
 {  
     "reset_ssh":"True"
 }
@@ -112,7 +112,7 @@ azure vm reset-access --resource-group myResourceGroup --name myVM \
 
 使用 Azure CLI，然后调用 `VMAccessForLinux` 扩展并指定 json 文件来重置 SSHD 连接。以下示例重置 `myResourceGroup` 中名为 `myVM` 的 VM 上的 SSHD。请如下所示使用自己的值：
 
-```
+```azurecli
 azure vm extension set myResourceGroup myVM \
     VMAccessForLinux Microsoft.OSTCExtensions "1.2" \
     --private-config-path PrivateConf.json
@@ -121,7 +121,7 @@ azure vm extension set myResourceGroup myVM \
 ### 重置用户的 SSH 凭据
 如果 SSHD 看上去运行正常，可以重置给定用户的凭据。若要重置用户的密码，请创建名为 `PrivateConf.json` 的文件。以下示例将 `myUsername` 的凭据重置为 `myPassword` 中指定的值。在 `PrivateConf.json` 文件中使用自己的值输入以下行：
 
-```
+```json
 {
     "username":"myUsername", "password":"myPassword"
 }
@@ -129,7 +129,7 @@ azure vm extension set myResourceGroup myVM \
 
 若要重置用户的 SSH 密钥，请先创建名为 `PrivateConf.json` 的文件。以下示例在 `myResourceGroup` 中名为 `myVM` 的 VM 上，将 `myUsername` 的凭据重置为 `myPassword` 中指定的值。在 `PrivateConf.json` 文件中使用自己的值输入以下行：
 
-```
+```json
 {
     "username":"myUsername", "ssh_key":"mySSHKey"
 }
@@ -137,7 +137,7 @@ azure vm extension set myResourceGroup myVM \
 
 创建 json 文件之后，使用 Azure CLI 调用 `VMAccessForLinux` 扩展并指定 json 文件来重置 SSH 用户凭据。以下示例重置 `myResourceGroup` 中名为 `myVM` 的 VM 上的凭据。请如下所示使用自己的值：
 
-```
+```azurecli
 azure vm extension set myResourceGroup myVM \
     VMAccessForLinux Microsoft.OSTCExtensions "1.2" \
     --private-config-path PrivateConf.json
@@ -154,7 +154,7 @@ azure vm extension set myResourceGroup myVM \
 ### Azure CLI
 以下示例重新启动 `myResourceGroup` 资源组中名为 `myVM` 的 VM。请如下所示使用自己的值：
 
-```
+```azurecli
 azure vm restart --resource-group myResourceGroup --name myVM
 ```
 
@@ -174,7 +174,7 @@ azure vm restart --resource-group myResourceGroup --name myVM
 ### Azure CLI
 以下示例重新部署 `myResourceGroup` 资源组中名为 `myVM` 的 VM。请如下所示使用自己的值：
 
-```
+```azurecli
 azure vm redeploy --resource-group myResourceGroup --name myVM
 ```
 

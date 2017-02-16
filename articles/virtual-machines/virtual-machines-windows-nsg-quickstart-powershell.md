@@ -28,7 +28,7 @@ ms.author: iainfou
 
 登录 Azure 帐户：
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -36,7 +36,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 创建规则。以下示例创建名为 `myNetworkSecurityGroupRule` 的规则，以便允许在端口 80 上传输 TCP 流量：
 
-```
+```powershell
 $httprule = New-AzureRmNetworkSecurityRuleConfig -Name "myNetworkSecurityGroupRule" `
     -Description "Allow HTTP" -Access "Allow" -Protocol "Tcp" -Direction "Inbound" `
     -Priority "100" -SourceAddressPrefix "Internet" -SourcePortRange * `
@@ -45,21 +45,21 @@ $httprule = New-AzureRmNetworkSecurityRuleConfig -Name "myNetworkSecurityGroupRu
 
 接下来，创建网络安全组，并按如下所示分配刚刚创建的 HTTP 规则。以下示例创建名为 `myNetworkSecurityGroup` 的网络安全组：
 
-```
+```powershell
 $nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName "myResourceGroup" `
     -Location "ChinaNorth" -Name "myNetworkSecurityGroup" -SecurityRules $httprule
 ```
 
 现在将网络安全组分配给子网。以下示例将名为 `myVnet` 的现有虚拟网络分配给变量 `$vnet`：
 
-```
+```powershell
 $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName "myResourceGroup" `
     -Name "myVnet"
 ```
 
 将网络安全组与子网相关联。以下示例将名为 `mySubnet` 的子网与网络安全组相关联：
 
-```
+```powershell
 $subnetPrefix = $vnet.Subnets|?{$_.Name -eq 'mySubnet'}
 
 Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "mySubnet" `
@@ -69,7 +69,7 @@ Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "mySubnet" `
 
 最后，更新虚拟网络以使做出的更改生效：
 
-```
+```powershell
 Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 ```
 

@@ -102,6 +102,8 @@ HDInsight 可以使用各种方法来运行 Pig Latin 作业。使用下表来�
 | [Windows PowerShell](./hdinsight-hadoop-use-pig-powershell.md) |&nbsp; |✔ |Linux 或 Windows |Windows |
 | [远程桌面](./hdinsight-hadoop-use-pig-remote-desktop.md) |✔ |✔ |Windows |Windows |
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 > [!IMPORTANT]
 Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 

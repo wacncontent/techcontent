@@ -28,7 +28,7 @@ ms.author: douglasl
 
 若要查看已启用延伸的表在 SQL Server 中使用的空间量，请运行以下语句。
 
-```
+```tsql
 USE <Stretch-enabled database name>;
 GO
 EXEC sp_spaceused '<Stretch-enabled table name>', 'true', 'LOCAL_ONLY';
@@ -55,7 +55,7 @@ GO
 
 若要查看已启用延伸的表在 Azure 中使用的空间量，请运行以下语句。
 
-```
+```tsql
 USE <Stretch-enabled database name>;
 GO
 EXEC sp_spaceused '<Stretch-enabled table name>', 'true', 'REMOTE_ONLY';
@@ -108,7 +108,7 @@ GO
 
 例如，以下查询仅返回本地结果。
 
-```
+```tsql
  USE <Stretch-enabled database name>;
  GO
  SELECT * FROM <Stretch_enabled table name> WITH (REMOTE_DATA_ARCHIVE_OVERRIDE = LOCAL_ONLY) WHERE ... ;

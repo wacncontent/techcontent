@@ -46,7 +46,7 @@ ms.author: jrj;barbkess;sonyama
 ### 示例:
 基于数据库名称实现用户定义的架构
 
-```
+```sql
 CREATE SCHEMA [stg]; -- stg previously database name for staging database
 GO
 CREATE SCHEMA [edw]; -- edw previously database name for the data warehouse
@@ -64,7 +64,7 @@ CREATE TABLE [edw].[customer] -- create data warehouse tables in the edw schema
 
 在表名称前面附加旧架构名称，以保留旧架构名称。使用工作负荷边界的架构。
 
-```
+```sql
 CREATE SCHEMA [stg]; -- stg defines the staging boundary
 GO
 CREATE SCHEMA [edw]; -- edw defines the data warehouse boundary
@@ -82,7 +82,7 @@ CREATE TABLE [edw].[dim_customer] --pre-pend the old schema name to the table an
 
 使用视图保留旧架构名称
 
-```
+```sql
 CREATE SCHEMA [stg]; -- stg defines the staging boundary
 GO
 CREATE SCHEMA [edw]; -- stg defines the data warehouse boundary

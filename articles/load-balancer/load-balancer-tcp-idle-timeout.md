@@ -35,7 +35,7 @@ TCP 保持连接状态非常适用于不受电池寿命限制的情况。不建�
 
 ## 将实例级公共 IP 的 TCP 超时值配置为 15 分钟
 
-```
+```powershell
 Set-AzurePublicIP -PublicIPName webip -VM MyVM -IdleTimeoutInMinutes 15
 ```
 
@@ -45,7 +45,7 @@ Set-AzurePublicIP -PublicIPName webip -VM MyVM -IdleTimeoutInMinutes 15
 
 若要更改终结点的超时设置，请执行以下命令：
 
-```
+```powershell
 Get-AzureVM -ServiceName "mySvc" -Name "MyVM1" | Add-AzureEndpoint -Name "HttpIn" -Protocol "tcp" -PublicPort 80 -LocalPort 8080 -IdleTimeoutInMinutes 15| Update-AzureVM
 ```
 
@@ -75,7 +75,7 @@ IdleTimeoutInMinutes : 15
 
 如果终结点是负载均衡的终结点集的一部分，则必须在负载均衡的终结点集上设置 TCP 超时。例如：
 
-```
+```powershell
 Set-AzureLoadBalancedEndpoint -ServiceName "MyService" -LBSetName "LBSet1" -Protocol tcp -LocalPort 80 -ProbeProtocolTCP -ProbePort 8080 -IdleTimeoutInMinutes 15
 ```
 
@@ -85,7 +85,7 @@ Set-AzureLoadBalancedEndpoint -ServiceName "MyService" -LBSetName "LBSet1" -Prot
 
 终结点设置的 .csdef 更改如下：
 
-```
+```xml
 <WorkerRole name="worker-role-name" vmsize="worker-role-size" enableNativeCodeExecution="[true|false]">
     <Endpoints>
     <InputEndpoint name="input-endpoint-name" protocol="[http|https|tcp|udp]" localPort="local-port-number" port="port-number" certificate="certificate-name" loadBalancerProbe="load-balancer-probe-name" idleTimeoutInMinutes="tcp-timeout" />
@@ -95,7 +95,7 @@ Set-AzureLoadBalancedEndpoint -ServiceName "MyService" -LBSetName "LBSet1" -Prot
 
 进行公共 IP 的超时设置时，.cscfg 更改如下：
 
-```
+```xml
 <NetworkConfiguration>
     <VirtualNetworkSite name="VNet"/>
     <AddressAssignments>
@@ -120,7 +120,7 @@ POST https://management.core.chinacloudapi.cn/<subscription-id>/services/hosteds
 
 ### 响应
 
-```
+```xml
 <LoadBalancedEndpointList xmlns="http://schemas.microsoft.com/windowsazure" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
     <InputEndpoint>
     <LoadBalancedEndpointSetName>endpoint-set-name</LoadBalancedEndpointSetName>

@@ -64,7 +64,7 @@ ms.author: dobett
 
 3. 打开文件 Infrastructure\\Models\\DeviceRuleBlobEntity.cs，并按如下所示添加 **ExternalTemperature** 属性：
 
-    ```
+    ```csharp
     public double? Temperature { get; set; }
     public double? Humidity { get; set; }
     public double? ExternalTemperature { get; set; }
@@ -72,7 +72,7 @@ ms.author: dobett
 
 4. 在同一文件中，按如下所示添加 **ExternalTemperatureRuleOutput** 属性：
 
-    ```
+    ```csharp
     public string TemperatureRuleOutput { get; set; }
     public string HumidityRuleOutput { get; set; }
     public string ExternalTemperatureRuleOutput { get; set; }
@@ -80,7 +80,7 @@ ms.author: dobett
 
 5. 打开文件 Infrastructure\\Models\\DeviceRuleDataFields.cs，并在现有 **Humidity** 属性后添加以下 **ExternalTemperature** 属性：
 
-    ```
+    ```csharp
     public static string ExternalTemperature
     {
         get { return "ExternalTemperature"; }
@@ -89,7 +89,7 @@ ms.author: dobett
 
 6. 在同一文件中，按如下所示更新 **\_availableDataFields** 方法，使其包含 **ExternalTemperature**：
 
-    ```
+    ```csharp
     private static List<string> _availableDataFields = new List<string>
     {                    
         Temperature, Humidity, ExternalTemperature
@@ -98,7 +98,7 @@ ms.author: dobett
 
 7. 打开文件 Infrastructure\\Repository\\DeviceRulesRepository.cs，并按如下所示修改 **BuildBlobEntityListFromTableRows** 方法：
 
-    ```
+    ```csharp
     else if (rule.DataField == DeviceRuleDataFields.Humidity)
     {
         entity.Humidity = rule.Threshold;

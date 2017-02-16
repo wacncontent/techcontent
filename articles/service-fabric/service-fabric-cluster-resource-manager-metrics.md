@@ -58,7 +58,7 @@ ms.author: masnider
 
 代码：
 
-```
+```csharp
 StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
 StatefulServiceLoadMetricDescription memoryMetric = new StatefulServiceLoadMetricDescription();
 memoryMetric.Name = "MemoryInMb";
@@ -127,7 +127,7 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 
 代码：
 
-```
+```csharp
 this.ServicePartition.ReportLoad(new List<LoadMetric> { new LoadMetric("Memory", 1234), new LoadMetric("metric1", 42) });
 ```
 

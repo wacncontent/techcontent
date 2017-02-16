@@ -55,7 +55,7 @@ wacn.date: 12/12/2016
 
 1. 登录 Azure。
 
-    ```
+    ```powershell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     ```
 
@@ -63,19 +63,19 @@ wacn.date: 12/12/2016
 
 2. 检查该帐户的订阅。
 
-    ```
+    ```powershell
     Get-AzureRmSubscription
     ```
 
 3. 选择要使用的 Azure 订阅。
 
-    ```
+    ```powershell
     Select-AzureRmSubscription -SubscriptionId 'GUID of subscription'
     ```
 
 4. 创建资源组。（若要使用现有资源组，请跳过此步骤。）
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name NRP-RG -location "China East"
     ```
 
@@ -83,14 +83,14 @@ wacn.date: 12/12/2016
 
 1. 创建子网和虚拟网络。
 
-    ```
+    ```powershell
     $backendSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name LB-Subnet-BE -AddressPrefix 10.0.2.0/24
     New-AzureRmvirtualNetwork -Name NRPVNet -ResourceGroupName NRP-RG -Location 'China East' -AddressPrefix 10.0.0.0/16 -Subnet $backendSubnet
     ```
 
 2. 使用 DNS 名称 **loadbalancernrp.chinaeast.chinacloudapp.cn** 创建要由前端 IP 池使用的名为 **PublicIP** 的 Azure 公共 IP 地址 资源。以下命令使用静态分配类型。
 
-    ```
+    ```powershell
     $publicIP = New-AzureRmPublicIpAddress -Name PublicIp -ResourceGroupName NRP-RG -Location 'China East' –AllocationMethod Static -DomainNameLabel loadbalancernrp 
     ```
 
@@ -101,13 +101,13 @@ wacn.date: 12/12/2016
 
 1. 创建使用 **PublicIp** 资源且名为 **LB-Frontend** 的前端 IP 池。
 
-    ```
+    ```powershell
     $frontendIP = New-AzureRmLoadBalancerFrontendIpConfig -Name LB-Frontend -PublicIpAddress $publicIP
     ```
 
 2. 创建名为 **LB-backend** 的后端地址池。
 
-    ```
+    ```powershell
     $beaddresspool = New-AzureRmLoadBalancerBackendAddressPoolConfig -Name LB-backend
     ```
 
@@ -125,7 +125,7 @@ wacn.date: 12/12/2016
 
 1. 创建 NAT 规则。
 
-    ```
+    ```powershell
     $inboundNATRule1= New-AzureRmLoadBalancerInboundNatRuleConfig -Name RDP1 -FrontendIpConfiguration $frontendIP -Protocol TCP -FrontendPort 3441 -BackendPort 3389
 
     $inboundNATRule2= New-AzureRmLoadBalancerInboundNatRuleConfig -Name RDP2 -FrontendIpConfiguration $frontendIP -Protocol TCP -FrontendPort 3442 -BackendPort 3389
@@ -135,25 +135,25 @@ wacn.date: 12/12/2016
 
     HTTP 探测器
 
-    ```
+    ```powershell
     $healthProbe = New-AzureRmLoadBalancerProbeConfig -Name HealthProbe -RequestPath 'HealthProbe.aspx' -Protocol http -Port 80 -IntervalInSeconds 15 -ProbeCount 2
     ```
 
     TCP 探测器
 
-    ```
+    ```powershell
     $healthProbe = New-AzureRmLoadBalancerProbeConfig -Name HealthProbe -Protocol Tcp -Port 80 -IntervalInSeconds 15 -ProbeCount 2
     ```
 
 3. 创建负载均衡器规则。
 
-    ```
+    ```powershell
     $lbrule = New-AzureRmLoadBalancerRuleConfig -Name HTTP -FrontendIpConfiguration $frontendIP -BackendAddressPool  $beAddressPool -Probe $healthProbe -Protocol Tcp -FrontendPort 80 -BackendPort 80
     ```
 
 4. 使用之前创建的对象创建负载均衡器。
 
-    ```
+    ```powershell
     $NRPLB = New-AzureRmLoadBalancer -ResourceGroupName NRP-RG -Name NRP-LB -Location 'China East' -FrontendIpConfiguration $frontendIP -InboundNatRule $inboundNATRule1,$inboundNatRule2 -LoadBalancingRule $lbrule -BackendAddressPool $beAddressPool -Probe $healthProbe
     ```
 
@@ -163,26 +163,26 @@ wacn.date: 12/12/2016
 
 1. 获取需创建 NIC 的虚拟网络和虚拟网络子网。
 
-    ```
+    ```powershell
     $vnet = Get-AzureRmVirtualNetwork -Name NRPVNet -ResourceGroupName NRP-RG
     $backendSubnet = Get-AzureRmVirtualNetworkSubnetConfig -Name LB-Subnet-BE -VirtualNetwork $vnet
     ```
 
 2. 创建名为 **lb-nic1-be** 的 NIC，并将其与第一个 NAT 规则和第一个（且仅有的）后端地址池相关联。
 
-    ```
+    ```powershell
     $backendnic1= New-AzureRmNetworkInterface -ResourceGroupName NRP-RG -Name lb-nic1-be -Location 'China East' -PrivateIpAddress 10.0.2.6 -Subnet $backendSubnet -LoadBalancerBackendAddressPool $nrplb.BackendAddressPools[0] -LoadBalancerInboundNatRule $nrplb.InboundNatRules[0]
     ```
 
 3. 创建名为 **lb-nic2-be** 的 NIC，并将其与第二个 NAT 规则和第一个（且仅有的）后端地址池相关联。
 
-    ```
+    ```powershell
     $backendnic2= New-AzureRmNetworkInterface -ResourceGroupName NRP-RG -Name lb-nic2-be -Location 'China East' -PrivateIpAddress 10.0.2.7 -Subnet $backendSubnet -LoadBalancerBackendAddressPool $nrplb.BackendAddressPools[0] -LoadBalancerInboundNatRule $nrplb.InboundNatRules[1]
     ```
 
 4. 检查 NIC。
 
-    ```
+    ```powershell
     $backendnic1
     ```
 
@@ -249,31 +249,31 @@ wacn.date: 12/12/2016
 
     将负载均衡器资源加载到变量中（如果你还没有这样做）。该变量称为 **$lb**。使用与先前创建的负载均衡器资源相同的名称。
 
-    ```
+    ```powershell
     $lb= get-azurermloadbalancer –name NRP-LB -resourcegroupname NRP-RG
     ```
 
 2. 将后端配置加载到变量。
 
-    ```
+    ```powershell
     $backend=Get-AzureRmLoadBalancerBackendAddressPoolConfig -name backendpool1 -LoadBalancer $lb
     ```
 
 3. 将创建好的网络接口加载到变量中。变量名为 **$nic**。网络接口名称与上例中的相同。
 
-    ```
+    ```powershell
     $nic =get-azurermnetworkinterface –name lb-nic1-be -resourcegroupname NRP-RG
     ```
 
 4. 更改网络接口上的后端配置。
 
-    ```
+    ```powershell
     $nic.IpConfigurations[0].LoadBalancerBackendAddressPools=$backend
     ```
 
 5. 保存网络接口对象。
 
-    ```
+    ```powershell
     Set-AzureRmNetworkInterface -NetworkInterface $nic
     ```
 
@@ -283,19 +283,19 @@ wacn.date: 12/12/2016
 
 1. 通过上例中的负载均衡器，使用 `Get-AzureLoadBalancer` 将负载均衡器对象分配给变量 **$slb**。
 
-    ```
+    ```powershell
     $slb = get-AzureRmLoadBalancer -Name NRPLB -ResourceGroupName NRP-RG
     ```
 
 2. 在下例中，使用前端池中的端口 81 和后端池中的端口 8181 将入站 NAT 规则添加到现有负载均衡器中。
 
-    ```
+    ```powershell
     $slb | Add-AzureRmLoadBalancerInboundNatRuleConfig -Name NewRule -FrontendIpConfiguration $slb.FrontendIpConfigurations[0] -FrontendPort 81  -BackendPort 8181 -Protocol TCP
     ```
 
 3. 通过 `Set-AzureLoadBalancer` 保存新配置。
 
-    ```
+    ```powershell
     $slb | Set-AzureRmLoadBalancer
     ```
 
@@ -303,7 +303,7 @@ wacn.date: 12/12/2016
 
 使用命令 `Remove-AzureLoadBalancer` 删除之前在 **NRP-RG** 资源组中创建的 **NRP-LB** 负载均衡器。
 
-```
+```powershell
 Remove-AzureRmLoadBalancer -Name NRPLB -ResourceGroupName NRP-RG
 ```
 

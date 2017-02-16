@@ -33,13 +33,13 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 ## 创建容器
 根据要使用的 Blob 的类型，创建 **BlockBlobService**、**AppendBlobService** 或 **PageBlobService** 对象。以下代码使用 **BlockBlobService** 对象。在希望在其中以编程方式访问 Azure 块 Blob 存储的任何 Python 文件中，将以下代码添加到文件的顶部附近。
 
-```
+```python
 from azure.storage.blob import BlockBlobService
 ```
 
 以下代码使用存储帐户名称和帐户密钥创建一个 **BlockBlobService** 对象。使用帐户名称和密钥替换“myaccount”和“mykey”。
 
-```
+```python
 block_blob_service = BlockBlobService(account_name='myaccount', account_key='mykey', endpoint_suffix='core.chinacloudapi.cn')
 ```
 
@@ -47,20 +47,20 @@ block_blob_service = BlockBlobService(account_name='myaccount', account_key='myk
 
 在以下代码示例中，如果容器不存在，可以使用 **BlockBlobService** 对象来创建它。
 
-```
+```python
 block_blob_service.create_container('mycontainer')
 ```
 
 默认情况下，新容器是专用容器，因此必须指定存储访问密钥（如之前所做的那样）才能从该容器下载 Blob。如果要让容器中的 Blob 可供所有人使用，则可以使用以下代码创建容器并传递公共访问级别。
 
-```
+```python
 from azure.storage.blob import PublicAccess
 block_blob_service.create_container('mycontainer', public_access=PublicAccess.Container)
 ```
 
 或者，也可以在创建容器后使用以下代码修改该容器。
 
-```
+```python
 block_blob_service.set_container_acl('mycontainer', public_access=PublicAccess.Container)
 ```
 
@@ -73,7 +73,7 @@ block_blob_service.set_container_acl('mycontainer', public_access=PublicAccess.C
 
 下面的示例将 **sunset.png** 文件的内容上传到 **myblob** Blob。
 
-```
+```python
 from azure.storage.blob import ContentSettings
 block_blob_service.create_blob_from_path(
     'mycontainer',
@@ -86,7 +86,7 @@ block_blob_service.create_blob_from_path(
 ## 列出容器中的 Blob
 若要列出容器中的 Blob，请使用 **list\_blobs** 方法。此方法会返回一个生成器。以下代码将容器中每个 Blob 的“名称”输出到控制台。
 
-```
+```python
 generator = block_blob_service.list_blobs('mycontainer')
 for blob in generator:
     print(blob.name)
@@ -97,14 +97,14 @@ for blob in generator:
 
 以下示例演示了如何使用 **get\_blob\_to\_path** 下载 **myblob** Blob 的内容，并将其存储到 **out-sunset.png** 文件：
 
-```
+```python
 block_blob_service.get_blob_to_path('mycontainer', 'myblockblob', 'out-sunset.png')
 ```
 
 ## 删除 Blob
 最后，若要删除 Blob，请调用 **delete\_blob**。
 
-```
+```python
 block_blob_service.delete_blob('mycontainer', 'myblockblob')
 ```
 
@@ -115,7 +115,7 @@ block_blob_service.delete_blob('mycontainer', 'myblockblob')
 
 下面的示例创建一个新的追加 Blob 并向其追加某些数据，模拟一个简单的日志记录操作。
 
-```
+```python
 from azure.storage.blob import AppendBlobService
 append_blob_service = AppendBlobService(account_name='myaccount', account_key='mykey', endpoint_suffix='core.chinacloudapi.cn')
 

@@ -62,13 +62,13 @@ ms.author: jgao
 
     运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
-    ```
+    ```powershell
     Add-AzureAccount -Environment AzureChinaCloud
     ```
 
     如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
 
-    ```
+    ```powershell
     Select-AzureSubscription <AzureSubscriptionName>
     ```
 
@@ -143,7 +143,7 @@ Azure 经典管理门户不支持使用自定义配置选项预配 HDInsight 群
 
 * 使用包含以下值的同一个脚本：
 
-    ```PowerShell
+    ```powershell
     $hbaseClusterName = "Contoso-HBase-CE" # This is the HBase cluster name to be used.
     $vNetName = "Contoso-VNet-CE"  # This name must match your Europe virtual network name.
     $storageAccountName = 'ContosoStoreCE'    
@@ -151,7 +151,7 @@ Azure 经典管理门户不支持使用自定义配置选项预配 HDInsight 群
 
     由于已连接到 Azure 帐户，因此不再需要运行以下 cmdlet：
 
-    ```
+    ```powershell
     Add-AzureAccount -Environment AzureChinaCloud
     Select-AzureSubscription $azureSubscriptionName
     ```

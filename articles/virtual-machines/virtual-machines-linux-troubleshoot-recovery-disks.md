@@ -33,7 +33,7 @@ ms.author: iainfou
 
 确保已登录 [Azure CLI](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
-```
+```azurecli
 azure config mode arm
 ```
 
@@ -44,7 +44,7 @@ azure config mode arm
 
 以下示例从名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM 获取串行输出：
 
-```
+```azurecli
 azure vm get-serial-output --resource-group myResourceGroup --name myVM
 ```
 
@@ -55,13 +55,13 @@ azure vm get-serial-output --resource-group myResourceGroup --name myVM
 
 以下示例从名为 `myResourceGroup` 的资源组中获取名为 `myVM` 的 VM 的信息：
 
-```
+```azurecli
 azure vm show --resource-group myResourceGroup --name myVM
 ```
 
 在上述命令的输出中查找 `Vhd URI`。以下截取的示例输出在最后一行显示 `Vhd URI`：
 
-```
+```azurecli
 info:    Executing command vm show
 + Looking up the VM "myVM"
 + Looking up the NIC "myNic"
@@ -84,7 +84,7 @@ data:          Uri                       :https://mystorageaccount.blob.core.chi
 
 以下示例从名为 `myResourceGroup` 的资源组中删除名为 `myVM` 的 VM：
 
-```
+```azurecli
 azure vm delete --resource-group myResourceGroup --name myVM 
 ```
 
@@ -95,7 +95,7 @@ azure vm delete --resource-group myResourceGroup --name myVM
 
 附加现有的虚拟硬盘时，指定在前面的 `azure vm show` 命令中获取的磁盘 URL。以下示例将现有的虚拟硬盘附加到名为 `myResourceGroup` 的资源组中名为 `myVMRecovery` 的故障排除 VM：
 
-```
+```azurecli
 azure vm disk attach --resource-group myResourceGroup --name myVMRecovery \
     --vhd-url https://mystorageaccount.blob.core.chinacloudapi.cn/vhds/myVM.vhd
 ```
@@ -107,13 +107,13 @@ azure vm disk attach --resource-group myResourceGroup --name myVMRecovery \
 
 1. 使用相应的凭据通过 SSH 连接到故障排除 VM。如果此磁盘是附加到故障排除 VM 的第一个数据磁盘，则此磁盘可能已连接到 `/dev/sdc`。使用 `dmseg` 查看附加的磁盘：
 
-    ```
+    ```bash
     dmesg | grep SCSI
     ```
 
     输出类似于以下示例：
 
-    ```
+    ```bash
     [    0.294784] SCSI subsystem initialized
     [    0.573458] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
     [    7.110271] sd 2:0:0:0: [sda] Attached SCSI disk
@@ -125,13 +125,13 @@ azure vm disk attach --resource-group myResourceGroup --name myVMRecovery \
 
 2. 创建一个目录来装载现有的虚拟硬盘。以下示例创建一个名为 `troubleshootingdisk` 的目录：
 
-    ```
+    ```bash
     sudo mkdir /mnt/troubleshootingdisk
     ```
 
 3. 如果现有的虚拟硬盘上有多个分区，则装载所需的分区。以下示例在 `/dev/sdc1` 中装载第一个主分区：
 
-    ```
+    ```bash
     sudo mount /dev/sdc1 /mnt/troubleshootingdisk
     ```
 
@@ -146,25 +146,25 @@ azure vm disk attach --resource-group myResourceGroup --name myVMRecovery \
 
 1. 通过 SSH 会话登录到故障排除 VM 中，卸载现有的虚拟硬盘。首先更改出装入点的父目录：
 
-    ```
+    ```bash
     cd /
     ```
 
     现在卸载现有的虚拟硬盘。以下示例卸载 `/dev/sdc1` 中的设备：
 
-    ```
+    ```bash
     sudo umount /dev/sdc1
     ```
 
 2. 现在从 VM 中分离虚拟硬盘。退出故障排除 VM 的 SSH 会话。在 Azure CLI 中，首先列出附加到故障排除 VM 的数据磁盘。以下示例列出附加到名为 `myResourceGroup` 的资源组中名为 `myVMRecovery` 的 VM 的数据磁盘：
 
-    ```
+    ```azurecli
     azure vm disk list --resource-group myResourceGroup --vm-name myVMRecovery
     ```
 
     记下现有虚拟硬盘的 `Lun` 值。以下示例命令输出显示在 LUN 0 附加的现有虚拟磁盘：
 
-    ```
+    ```azurecli
     info:    Executing command vm disk list
     + Looking up the VM "myVMRecovery"
     data:    Name              Lun  DiskSizeGB  Caching  URI
@@ -175,7 +175,7 @@ azure vm disk attach --resource-group myResourceGroup --name myVMRecovery \
 
     使用适当的 `Lun` 值将数据磁盘从 VM 中分离：
 
-    ```
+    ```azurecli
     azure vm disk detach --resource-group myResourceGroup --vm-name myVMRecovery \
         --lun 0
     ```
@@ -187,14 +187,14 @@ azure vm disk attach --resource-group myResourceGroup --name myVMRecovery \
 
 该模板使用先前命令中的 VHD URL 将 VM 部署到现有虚拟网络中。以下示例将模板部署到名为 `myResourceGroup` 的资源组：
 
-```
+```azurecli
 azure group deployment create --resource-group myResourceGroup --name myDeployment \
     --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-specialized-vhd-existing-vnet/azuredeploy.json
 ```
 
 响应有关模板的提示，例如 VM 名称（以下示例中为 `myDeployedVM`）、OS 类型 (`Linux`) 和 VM 大小 (`Standard_DS1_v2`)。`osDiskVhdUri` 与前面将现有虚拟硬盘附加到故障排除 VM 时使用的相同。命令输出和提示的示例如下所示：
 
-```
+```azurecli
 info:    Executing command group deployment create
 info:    Supply values for the following parameters
 vmName:  myDeployedVM
@@ -216,7 +216,7 @@ info:    Created template deployment "mydeployment"
 
 从现有虚拟硬盘创建 VM 时，启动诊断可能不会自动启用。以下示例在名为 `myResourceGroup` 的资源组中名为 `myDeployedVM` 的 VM 上启用诊断扩展：
 
-```
+```azurecli
 azure vm enable-diag --resource-group myResourceGroup --name myDeployedVM
 ```
 

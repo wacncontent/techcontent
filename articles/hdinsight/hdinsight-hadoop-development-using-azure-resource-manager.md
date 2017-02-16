@@ -146,17 +146,13 @@ help *azurermhdinsight*
 
 有关其他用法信息，请参阅 [Customize Linux-based HDInsight clusters using Script Action（使用脚本操作自定义基于 Linux 的 HDInsight 群集）](./hdinsight-hadoop-customize-cluster.md)。
 
-**与群集标识相关的 cmdlet：**
-
-- **Add-AzureRmHDInsightClusterIdentity**：将群集标识添加到群集配置对象，使 HDInsight 群集能够访问 Azure 数据湖存储。
-
 ### 示例
 
 **创建群集**
 
 旧命令 (ASM)：
 
-```powershell
+```
 New-AzureHDInsightCluster `
     -Name $clusterName `
     -Location $location `
@@ -166,14 +162,14 @@ New-AzureHDInsightCluster `
     -ClusterSizeInNodes 2 `
     -ClusterType Hadoop `
     -OSType Linux `
-    -Version "3.2" `
+    -Version "3.5" `
     -Credential $httpCredential `
     -SshCredential $sshCredential
 ```
 
 新命令 (ARM)：
 
-```powershell
+```
 New-AzureRmHDInsightCluster `
     -ClusterName $clusterName `
     -ResourceGroupName $resourceGroupName `
@@ -184,7 +180,7 @@ New-AzureRmHDInsightCluster `
     -ClusterSizeInNodes 2 `
     -ClusterType Hadoop `
     -OSType Linux `
-    -Version "3.2" `
+    -Version "3.5" `
     -HttpCredential $httpcredentials `
     -SshCredential $sshCredentials
 ```
@@ -271,7 +267,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 旧命令 (ASM)
 
-    ```csharp
+    ```
     //Certificate auth
     //This logs the application in using a subscription administration certificate, which is not offered in Azure Resource Manager (ARM)
 
@@ -282,7 +278,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)（服务主体授权）
 
-    ```csharp
+    ```
     //Service principal auth
     //This will log the application in as itself, rather than on behalf of a specific user.
     //For details, including how to set up the application, see:
@@ -303,7 +299,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)（用户授权）
 
-    ```csharp
+    ```
     //User auth
     //This will log the application in on behalf of the user.
     //The end-user will see a login popup.
@@ -325,7 +321,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 旧命令 (ASM)
 
-    ```csharp
+    ```
     var clusterInfo = new ClusterCreateParameters
                 {
                     Name = dnsName,
@@ -346,7 +342,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)
 
-    ```csharp
+    ```
     var clusterCreateParameters = new ClusterCreateParameters
         {
             Location = "China North",
@@ -378,7 +374,7 @@ Get-AzureRmHDInsightCluster -ResourceGroupName $resourceGroupName -clusterName $
 
 * 新命令 (ARM)
 
-    ```csharp
+    ```
     var httpParams = new HttpSettingsParameters
     {
            HttpUserEnabled = true,

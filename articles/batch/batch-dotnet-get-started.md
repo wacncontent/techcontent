@@ -91,7 +91,7 @@ ms.author: marsma
 
 csharp
 
-```
+```csharp
 // Update the Batch and Storage account credential strings below with the values
 // unique to your accounts. These are used when constructing connection strings
 // for the Batch and Storage client objects.
@@ -136,7 +136,7 @@ Batch 包含的内置支持支持与 Azure 存储空间交互。存储帐户中�
 
 csharp
 
-```
+```csharp
 // Construct the Storage account connection string
 string storageConnectionString = String.Format(
     "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.chinacloudapi.cn",
@@ -169,7 +169,7 @@ await CreateContainerIfNotExistAsync(blobClient, outputContainerName);
 
 csharp
 
-```
+```csharp
 private static async Task CreateContainerIfNotExistAsync(
     CloudBlobClient blobClient,
     string containerName)
@@ -202,7 +202,7 @@ private static async Task CreateContainerIfNotExistAsync(
 
 csharp
 
-```
+```csharp
 // Paths to the executable and its dependencies that will be executed by the tasks
 List<string> applicationFilePaths = new List<string>
 {
@@ -243,7 +243,7 @@ List<ResourceFile> inputFiles = await UploadFilesToContainerAsync(
 
 csharp
 
-```
+```csharp
 private static async Task<ResourceFile> UploadFileToContainerAsync(
     CloudBlobClient blobClient,
     string containerName,
@@ -303,7 +303,7 @@ Batch **池**是 Batch 执行作业任务时所在的计算节点（虚拟机）
 
 csharp
 
-```
+```csharp
 BatchSharedKeyCredentials cred = new BatchSharedKeyCredentials(
     BatchAccountUrl,
     BatchAccountName,
@@ -318,7 +318,7 @@ using (BatchClient batchClient = BatchClient.Open(cred))
 
 csharp
 
-```
+```csharp
 private static async Task CreatePoolAsync(
     BatchClient batchClient,
     string poolId,
@@ -388,7 +388,7 @@ Batch **作业**是任务的集合，它与计算节点池相关联。作业中�
 
 csharp
 
-```
+```csharp
 private static async Task CreateJobAsync(
     BatchClient batchClient,
     string jobId,
@@ -416,7 +416,7 @@ Batch **任务**是在计算节点上执行的各个工作单位。任务有一�
 
 csharp
 
-```
+```csharp
 private static async Task<List<CloudTask>> AddTasksAsync(
     BatchClient batchClient,
     string jobId,
@@ -464,7 +464,7 @@ private static async Task<List<CloudTask>> AddTasksAsync(
 
 csharp
 
-```
+```csharp
 // NOTE: From project TaskApplication Program.cs
 
 private static void UploadFileToContainer(string filePath, string containerSas)
@@ -516,7 +516,7 @@ private static void UploadFileToContainer(string filePath, string containerSas)
 
 csharp
 
-```
+```csharp
 private static async Task<bool> MonitorTasks(
     BatchClient batchClient,
     string jobId,
@@ -613,7 +613,7 @@ private static async Task<bool> MonitorTasks(
 
 csharp
 
-```
+```csharp
 private static async Task DownloadBlobsFromContainerAsync(
     CloudBlobClient blobClient,
     string containerName,
@@ -649,7 +649,7 @@ private static async Task DownloadBlobsFromContainerAsync(
 
 csharp
 
-```
+```csharp
 // Clean up Storage resources
 await DeleteContainerAsync(blobClient, appContainerName);
 await DeleteContainerAsync(blobClient, inputContainerName);
@@ -660,7 +660,7 @@ await DeleteContainerAsync(blobClient, outputContainerName);
 
 csharp
 
-```
+```csharp
 private static async Task DeleteContainerAsync(
     CloudBlobClient blobClient,
     string containerName)
@@ -686,7 +686,7 @@ BatchClient 的 [JobOperations][net_joboperations] 和 [PoolOperations][net_pool
 
 csharp
 
-```
+```csharp
 // Clean up the resources we've created in the Batch account if the user so chooses
 Console.WriteLine();
 Console.WriteLine("Delete job? [yes] no");

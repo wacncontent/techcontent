@@ -34,7 +34,7 @@ ms.author: rortloff;barbkess
 1. 使用在 master 数据库中充当管理员或 **dbmanager** 角色成员的登录名，连接到托管数据库的服务器上的 *master* 数据库
 2. 执行以下语句来加密数据库。
 
-    ```
+    ```sql
     ALTER DATABASE [AdventureWorks] SET ENCRYPTION ON;
     ```
 
@@ -44,7 +44,7 @@ ms.author: rortloff;barbkess
 1. 使用在 master 数据库中充当管理员或 **dbmanager** 角色成员的登录名，连接到 *master* 数据库
 2. 执行以下语句来加密数据库。
 
-    ```
+    ```sql
     ALTER DATABASE [AdventureWorks] SET ENCRYPTION OFF;
     ```
 

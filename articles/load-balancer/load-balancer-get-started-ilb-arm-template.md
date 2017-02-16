@@ -49,7 +49,7 @@ wacn.date: 01/05/2017
 
 4. 运行 **New-AzureRmResourceGroupDeployment** cmdlet 以使用模板创建资源组。
 
-    ```
+    ```azurecli
     New-AzureRmResourceGroupDeployment -Name TestRG `
         -TemplateFile 'c:\lb\azuredeploy.json' `
         -TemplateParameterFile 'c:\lb\azuredeploy.parameters.json'
@@ -62,7 +62,7 @@ wacn.date: 01/05/2017
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到资源管理器模式，如下所示。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 

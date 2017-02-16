@@ -34,7 +34,7 @@ ms.author: xshi
 
 * 运行以下 Azure CLI 命令，列出资源组中的所有 IoT 中心：
 
-    ```
+    ```bash
     az iot hub list -g iot-sample --query [].name
     ```
 
@@ -42,7 +42,7 @@ ms.author: xshi
 
 * 运行以下 Azure CLI 命令，获取 IoT 中心连接字符串：
 
-    ```
+    ```bash
     az iot hub show-connection-string --name {my hub name}
     ```
 
@@ -50,7 +50,7 @@ ms.author: xshi
 
 * 运行以下命令，获取设备连接字符串：
 
-    ```
+    ```bash
     az iot device show-connection-string --hub-name {my hub name} --device-id myinteledison
     ```
 
@@ -59,14 +59,14 @@ ms.author: xshi
 ## 配置设备连接
 1. 运行以下命令初始化配置文件：
 
-    ```
+    ```bash
        npm install
        gulp init
     ```
 
 2. 运行以下命令，在 Visual Studio Code 中打开设备配置文件 `config-edison.json`：
 
-    ```
+    ```bash
        # For Windows command prompt
        code %USERPROFILE%\.iot-hub-getting-started\config-edison.json
 
@@ -88,7 +88,7 @@ ms.author: xshi
 ## 部署并运行示例应用程序
 运行以下命令，在 Edison 上部署并运行示例应用程序：
 
-```
+```bash
 gulp deploy && gulp run
 ```
 

@@ -48,7 +48,7 @@ ms.author: sewhee
 
 在本示例中，我们想要查看探测 URL 返回的响应：http://watestsdp2008r2.chinacloudapp.cn:80/Probe。以下 PowerShell 示例演示了该问题。
 
-```
+```powershell
 Invoke-WebRequest 'http://watestsdp2008r2.chinacloudapp.cn/Probe' -MaximumRedirection 0 -ErrorAction SilentlyContinue | Select-Object StatusCode,StatusDescription
 ```
 
@@ -64,7 +64,7 @@ StatusCode StatusDescription
 
 如果探测使用 HTTPS 协议，可能需要禁用证书检查，避免测试期间出现 SSL/TLS 错误。以下 PowerShell 语句禁用当前 PowerShell 会话的证书验证：
 
-```
+```powershell
 add-type @"
 using System.Net;
 using System.Security.Cryptography.X509Certificates;

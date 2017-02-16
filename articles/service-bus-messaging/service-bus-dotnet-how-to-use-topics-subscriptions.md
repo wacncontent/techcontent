@@ -55,7 +55,7 @@ wacn.date: 01/04/2017
 
 利用该服务配置机制，可以从 [Azure 经典管理门户][]动态更改配置设置，而无需重新部署应用程序。例如，向服务定义 (**.csdef**) 文件中添加 `Setting` 标签，如以下示例所示。
 
-```
+```xml
     <ServiceDefinition name="Azure1">
     ...
         <WebRole name="MyRole" vmsize="Small">
@@ -69,7 +69,7 @@ wacn.date: 01/04/2017
 
 然后在服务配置 (.cscfg) 文件中指定值。
 
-```
+```xml
     <ServiceConfiguration serviceName="Azure1">
     ...
         <Role name="MyRole">
@@ -88,7 +88,7 @@ wacn.date: 01/04/2017
 
 在使用网站或虚拟机时，建议你使用 .NET 配置系统（如 Web.config）。你可以使用 `<appSettings>` 元素存储连接字符串。
 
-```
+```xml
     <configuration>
         <appSettings>
             <add key="Microsoft.ServiceBus.ConnectionString"
@@ -105,7 +105,7 @@ wacn.date: 01/04/2017
 
 以下示例使用带连接字符串的 Azure `CloudConfigurationManager` 类构造 `NamespaceManager` 对象，此连接字符串包含服务总线命名空间的基址和有权管理该命名空间的相应 SAS 凭据。此连接字符串的形式如下。
 
-```
+```xml
     Endpoint=sb://<yourNamespace>.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourKey
 ```
 
@@ -158,7 +158,7 @@ wacn.date: 01/04/2017
 
 如果创建新订阅时未指定筛选器，则 **MatchAll** 筛选器是所使用的默认筛选器。使用 **MatchAll** 筛选器时，发布到主题的所有消息都将置于订阅的虚拟队列中。以下示例创建名为“AllMessages”的订阅，并使用默认的 **MatchAll** 筛选器。
 
-```
+```csharp
     string connectionString =
         CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
 
@@ -179,7 +179,7 @@ wacn.date: 01/04/2017
 
 以下示例创建了一个名为 **HighMessages** 的订阅，该订阅具有一个仅选择自定义 **MessageNumber** 属性大于 3 的消息的 [SqlFilter][] 对象。
 
-```
+```csharp
     // Create a "HighMessages" filtered subscription.
     SqlFilter highMessagesFilter =
        new SqlFilter("MessageNumber > 3");
@@ -191,7 +191,7 @@ wacn.date: 01/04/2017
 
 类似地，以下示例创建一个名为 **LowMessages** 的订阅，其 [SqlFilter][] 只选择 **MessageNumber** 属性小于或等于 3 的消息。
 
-```
+```csharp
     // Create a "LowMessages" filtered subscription.
     SqlFilter lowMessagesFilter =
        new SqlFilter("MessageNumber <= 3");
@@ -209,7 +209,7 @@ wacn.date: 01/04/2017
 
 以下代码演示了如何使用 [`CreateFromConnectionString`](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicclient.createfromconnectionstring.aspx) API 调用为以前创建的 **TestTopic** 主题创建 [TopicClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicclient.aspx) 对象。
 
-```
+```csharp
     string connectionString =
         CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
 
@@ -223,7 +223,7 @@ wacn.date: 01/04/2017
 
 以下示例演示了如何将五条测试消息发送到在前面的代码示例中获取的 **TestTopic** [TopicClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicclient.aspx) 对象。请注意，每条消息的 [MessageNumber](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.properties.aspx) 属性值因循环迭代而异（这将确定哪些订阅接收它）。
 
-```
+```csharp
     for (int i=0; i<5; i++)
     {
       // Create message, passing a string message for the body.
@@ -249,7 +249,7 @@ wacn.date: 01/04/2017
 
 以下示例演示如何使用默认的 **PeekLock** 模式接收和处理消息。若要指定不同的 [ReceiveMode](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.receivemode.aspx) 值，可以使用 [CreateFromConnectionString](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.subscriptionclient.createfromconnectionstring.aspx) 的另一个重载。此示例使用 [OnMessage](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.subscriptionclient.onmessage.aspx) 回调来处理传入 **HighMessages** 订阅的消息。
 
-```
+```csharp
     string connectionString =
         CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
 
@@ -298,14 +298,14 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
 以下示例演示了如何从 **HowToSample** 服务命名空间中删除主题 **TestTopic**。
 
-```
+```csharp
 // Delete Topic.
 namespaceManager.DeleteTopic("TestTopic");
 ```
 
 删除某个主题也会删除向该主题注册的所有订阅。也可以单独删除订阅。以下代码演示如何从 **TestTopic** 主题中删除名为 **HighMessages** 的订阅。
 
-```
+```csharp
 namespaceManager.DeleteSubscription("TestTopic", "HighMessages");
 ```
 

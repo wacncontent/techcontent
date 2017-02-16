@@ -49,37 +49,37 @@ ms.author: danlep
 
 **启用 AutoGrowShrink 属性**
 
-```
+```powershell
 Set-HpcClusterProperty -EnableGrowShrink 1
 ```
 
 **禁用 AutoGrowShrink 属性**
 
-```
+```powershell
 Set-HpcClusterProperty -EnableGrowShrink 0
 ```
 
 **更改扩展间隔（以分钟为单位）**
 
-```
+```powershell
 Set-HpcClusterProperty -GrowInterval <interval>
 ```
 
 **更改收缩间隔（以分钟为单位）**
 
-```
+```powershell
 Set-HpcClusterProperty -ShrinkInterval <interval>
 ```
 
 **查看 AutoGrowShrink 的当前配置**
 
-```
+```powershell
 Get-HpcClusterProperty -AutoGrowShrink
 ```
 
 **从 AutoGrowShrink 中排除节点组**
 
-```
+```powershell
 Set-HpcClusterProperty -ExcludeNodeGroups <group1,group2,group3>
 ```
 
@@ -140,7 +140,7 @@ Set-HpcClusterProperty -ExtraNodesGrowRatio 10
 
 ### 语法
 
-```
+```powershell
 AzureAutoGrowShrink.ps1 [-NodeTemplates <String[]>] [-JobTemplates <String[]>] [-NodeType <String>]
     -NumOfActiveQueuedTasksPerNodeToGrow <Single> [-NumOfActiveQueuedTasksToGrowThreshold <Int32>]
     [-NumOfInitialNodesToGrow <Int32>] [-GrowCheckIntervalMins <Int32>] [-ShrinkCheckIntervalMins <Int32>]
@@ -178,7 +178,7 @@ AzureAutoGrowShrink.ps1 -UseLastConfigurations [-ArgFile <String>] [-LogFilePref
 ### 示例 1
 下面的示例可将使用默认 AzureNode 模板部署的 Azure 突发节点配置为自动扩展和收缩。如果所有节点最初都处于**未部署**状态，则至少启动了 3 个节点。如果已排队作业的数量超过 8 个，则脚本会启动节点，直至节点数量超过已排队作业与 **NumOfQueuedJobsPerNodeToGrow** 的比。如果连续 3 次发现一个节点闲置，则会停止此节点。
 
-```
+```powershell
 .\AzureAutoGrowShrink.ps1 -NodeTemplates @('Default AzureNode
 Template') -NodeType AzureNodes -NumOfQueuedJobsPerNodeToGrow 5
 -NumOfQueuedJobsToGrowThreshold 8 -NumOfInitialNodesToGrow 3
@@ -188,7 +188,7 @@ Template') -NodeType AzureNodes -NumOfQueuedJobsPerNodeToGrow 5
 ### 示例 2
 下面的示例可将使用默认 ComputeNode 模板部署的 Azure 计算节点 VM 配置为自动扩展和收缩。由默认作业模板配置的作业可定义群集上工作负荷的范围。如果所有节点最初都处于已停止状态，则至少启动了 5 个节点。如果活动已排队任务的数量超过 15 个，则脚本会启动节点，直至节点数量超过活动已排队任务与 **NumOfActiveQueuedTasksPerNodeToGrow** 的比。如果连续 10 次发现一个节点闲置，则会停止此节点。
 
-```
+```powershell
 .\AzureAutoGrowShrink.ps1 -NodeTemplates 'Default ComputeNode Template' -JobTemplates 'Default' -NodeType ComputeNodes -NumOfActiveQueuedTasksPerNodeToGrow 10 -NumOfActiveQueuedTasksToGrowThreshold 15 -NumOfInitialNodesToGrow 5 -GrowCheckIntervalMins 1 -ShrinkCheckIntervalMins 1 -ShrinkCheckIdleTimes 10 -ArgFile 'IaaSVMComputeNodes_Arg.xml' -LogFilePrefix 'IaaSVMComputeNodes_log'
 ```
 

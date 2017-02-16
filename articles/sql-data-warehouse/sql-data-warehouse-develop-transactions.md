@@ -62,7 +62,7 @@ SQL 数据仓库使用 XACT\_STATE() 函数（采用值 -2）来报告失败的�
 
 例如，在 SQL Server 中，您可能会看到如下所示的事务：
 
-```
+```sql
 SET NOCOUNT ON;
 DECLARE @xact_state smallint = 0;
 
@@ -106,7 +106,7 @@ Msg 111233, Level 16, State 1, Line 1 111233；当前事务已中止，所有挂
 
 在 SQL 数据仓库中，该代码需要稍做更改：
 
-```
+```sql
 SET NOCOUNT ON;
 DECLARE @xact_state smallint = 0;
 

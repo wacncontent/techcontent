@@ -51,7 +51,7 @@ ms.author: sewhee
 1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)。按照说明执行，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到 Resource Manager 模式，如下所示：
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
@@ -65,7 +65,7 @@ ms.author: sewhee
 
 1. 登录 Azure。
 
-    ```
+    ```azurecli
     azure login -e AzureChinaCloud
     ```
 
@@ -73,7 +73,7 @@ ms.author: sewhee
 
 2. 将命令工具更改为 Azure Resource Manager 模式。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
@@ -81,7 +81,7 @@ ms.author: sewhee
 
 Azure Resource Manager 中的所有资源将与资源组关联。创建资源组（如果你尚未这样做）。
 
-```
+```azurecli
 azure group create <resource group name> <location>
 ```
 
@@ -91,7 +91,7 @@ azure group create <resource group name> <location>
 
     在以下方案中，将在中国东部区域中创建一个名为 nrprg 的资源组。
 
-    ```
+    ```azurecli
     azure network lb create -n nrprg -l chinaeast
     ```
 
@@ -118,14 +118,14 @@ azure group create <resource group name> <location>
 
     按照前面的步骤执行时，该命令将创建负载均衡器规则，以侦听前端池中的端口 1433，还使用端口 1433 将经过负载均衡的网络流量发送到后端地址池。
 
-    ```
+    ```azurecli
     azure network lb rule create --resource-group nrprg --lb-name ilbset --name ilbrule --protocol tcp --frontend-port 1433 --backend-port 1433 --frontend-ip-name feilb --backend-address-pool-name beilb
     ```
 5. 创建入站 NAT 规则。
 
     入站 NAT 规则用于在负载均衡器中创建要转到特定虚拟机实例的终结点。前面的步骤为远程桌面创建了两个 NAT 规则。
 
-    ```
+    ```azurecli
     azure network lb inbound-nat-rule create --resource-group nrprg --lb-name ilbset --name NATrule1 --protocol TCP --frontend-port 5432 --backend-port 3389
 
     azure network lb inbound-nat-rule create --resource-group nrprg --lb-name ilbset --name NATrule2 --protocol TCP --frontend-port 5433 --backend-port 3389
@@ -135,7 +135,7 @@ azure group create <resource group name> <location>
 
     运行状况探测器将检查所有虚拟机实例，以确保它们可以发送网络流量。探测器检查失败的虚拟机实例将从负载均衡器中删除，直到它恢复联机状态并且探测器检查确定它运行正常。
 
-    ```
+    ```azurecli
     azure network lb probe create --resource-group nrprg --lb-name ilbset --name ilbprobe --protocol tcp --interval 300 --count 4
     ```
 
@@ -180,13 +180,13 @@ azure group create <resource group name> <location>
 
 2. 创建名为 *lb-nic2-be* 的 NIC，然后将其与 *rdp2* NAT 规则和 *beilb* 后端地址池相关联。
 
-    ```
+    ```azurecli
     azure network nic create --resource-group nrprg --name lb-nic2-be --subnet-name nrpvnetsubnet --subnet-vnet-name nrpvnet --lb-address-pool-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/beilb" --lb-inbound-nat-rule-ids "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp2" --location chinaeast
     ```
 
 3. 创建名为 *DB1* 的虚拟机，然后将其与名为 *lb-nic1-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在以下命令运行之前已创建：
 
-    ```
+    ```azurecli
     azure vm create --resource--resource-grouproup nrprg --name DB1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
     ```
 
@@ -195,7 +195,7 @@ azure group create <resource group name> <location>
 
 4. 创建名为 *DB2* 的虚拟机 (VM)，然后将其与名为 *lb-nic2-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 
-    ```
+    ```azurecli
     azure vm create --resource--resource-grouproup nrprg --name DB2 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic2-be --availset-name nrp-avset --storage-account-name web2nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
     ```
 
@@ -203,7 +203,7 @@ azure group create <resource group name> <location>
 
 若要删除负载均衡器，请使用以下命令：
 
-```
+```azurecli
 azure network lb delete --resource-group nrprg --name ilbset
 ```
 

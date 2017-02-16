@@ -43,19 +43,19 @@ ms.author: annahar
 1. 按链接的文章中的步骤[安装和配置 Azure CLI](../xplat-cli-install.md)，并登录 Azure 帐户。
 2. [创建资源组](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-resource-groups-and-choose-deployment-locations) contosofabrikam。
 
-    ```
+    ```azurecli
     azure group create contosofabrikam chinaeast
     ```
 
 3. 为两个 VM [创建可用性集](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-an-availability-set)。对于此场景，请使用以下命令：
 
-    ```
+    ```azurecli
     azure availset create --resource-group contosofabrikam --location chinaeast --name myAvailabilitySet
     ```
 
 4. [创建虚拟网络](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-a-virtual-network-and-subnet) myVNet 和子网 mySubnet：
 
-    ```
+    ```azurecli
     azure network vnet create --resource-group contosofabrikam --name myVnet --address-prefixes 10.0.0.0/16  --location chinaeast
 
     azure network vnet subnet create --resource-group contosofabrikam --vnet-name myVnet --name mySubnet --address-prefix 10.0.0.0/24
@@ -63,13 +63,13 @@ ms.author: annahar
 
 5. [创建负载均衡器](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-a-load-balancer-and-ip-pools) mylb：
 
-    ```
+    ```azurecli
     azure network lb create --resource-group contosofabrikam --location chinaeast --name mylb
     ```
 
 6. 为负载均衡器的前端 IP 配置创建两个动态公共 IP 地址：
 
-    ```
+    ```azurecli
     azure network public-ip create --resource-group contosofabrikam --location chinaeast --name PublicIp1 --domain-name-label contoso --allocation-method Dynamic
 
     azure network public-ip create --resource-group contosofabrikam --location chinaeast --name PublicIp2 --domain-name-label fabrikam --allocation-method Dynamic
@@ -77,14 +77,14 @@ ms.author: annahar
 
 7. 分别创建两个前端 IP 配置，contosofe 和 fabrikamfe：
 
-    ```
+    ```azurecli
     azure network lb frontend-ip create --resource-group contosofabrikam --lb-name mylb --public-ip-name PublicIp1 --name contosofe
     azure network lb frontend-ip create --resource-group contosofabrikam --lb-name mylb --public-ip-name PublicIp2 --name fabrkamfe
     ```
 
 8. 创建后端地址池（contosopool 和 fabrikampool）、[探测程序](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-a-load-balancer-health-probe)（HTTP）和负载均衡规则（HTTPc 和 HTTPf）：
 
-    ```
+    ```azurecli
     azure network lb address-pool create --resource-group contosofabrikam --lb-name mylb --name contosopool
     azure network lb address-pool create --resource-group contosofabrikam --lb-name mylb --name fabrikampool
 
@@ -96,13 +96,13 @@ ms.author: annahar
 
 9. 运行以下命令，然后检查输出以[验证负载均衡器](../virtual-machines/virtual-machines-linux-create-cli-complete.md#verify-the-load-balancer)是否已正确创建：
 
-    ```
+    ```azurecli
     azure network lb show --resource-group contosofabrikam --name mylb
     ```
 
 10. 为你的第一台虚拟机 VM1 [创建公共 IP](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-a-public-ip-address) myPublicIp 和[存储帐户](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-a-storage-account) mystorageaccont1，如下所示：
 
-    ```
+    ```azurecli
     azure network public-ip create --resource-group contosofabrikam --location chinaeast --name myPublicIP --domain-name-label mypublicdns345 --allocation-method Dynamic
 
     azure storage account create --location chinaeast --resource-group contosofabrikam --kind Storage --sku-name GRS mystorageaccount1
@@ -110,7 +110,7 @@ ms.author: annahar
 
 11. 为 VM1 [创建网络接口](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-an-nic-to-use-with-the-linux-vm) VM1-NIC，添加第二个 IP 配置 VM1-ipconfig2，然后[创建 VM](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-the-linux-vms)，如下所示：
 
-    ```
+    ```azurecli
     azure network nic create --resource-group contosofabrikam --location chinaeast --subnet-vnet-name myVnet --subnet-name mySubnet --name myNic --ip-config-name VM1-ipconfig1 --public-ip-name myPublicIP --lb-address-pool-ids "/subscriptions/<your subscription ID>/resourceGroups/contosofabrikam/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/contosopool"
     azure network nic ip-config create --resource-group contosofabrikam --nic-name myNic --name VM1-ipconfig2 --lb-address-pool-ids "/subscriptions/<your subscription ID>/resourceGroups/contosofabrikam/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/fabrikampool"
     azure vm create --resource-group contosofabrikam --name VM1 --location chinaeast --os-type linux --nic-name myNic --vnet-name VNet1 --vnet-subnet-name Subnet1 --availset-name myAvailabilitySet --vm-size Standard_DS3_v2 --storage-account-name mystorageaccount1 --image-urn canonical:UbuntuServer:16.04.0-LTS:latest --admin-username <your username>  --admin-password <your password>
@@ -118,7 +118,7 @@ ms.author: annahar
 
 12. 为第二个 VM 重复步骤 10-11：
 
-    ```
+    ```azurecli
     azure network public-ip create --resource-group contosofabrikam --location chinaeast --name myPublicIP2 --domain-name-label mypublicdns785 --allocation-method Dynamic
     azure storage account create --location chinaeast --resource-group contosofabrikam --kind Storage --sku-name GRS mystorageaccount3426
     azure network nic create --resource-group contosofabrikam --location chinaeast --subnet-vnet-name myVnet --subnet-name mySubnet --name myNic2 --ip-config-name VM2-ipconfig1 --public-ip-name myPublicIP2 --lb-address-pool-ids "/subscriptions/<your subscription ID>/resourceGroups/contosofabrikam/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/contosopool"

@@ -39,7 +39,7 @@ ms.author: xshi
 ## 获取 Pi 的 IP 地址和主机名
 在 Windows 或者 macOS 或 Ubuntu 的终端中打开命令提示符，然后运行以下命令：
 
-```
+```bash
 devdisco list --eth
 ```
 
@@ -57,13 +57,13 @@ devdisco list --eth
 
 1. 通过运行以下命令克隆 GitHub 中的示例存储库：
 
-    ```
+    ```bash
     git clone https://github.com/Azure-Samples/iot-hub-c-raspberrypi-getting-started.git
     ```
 
 2. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
         cd iot-hub-c-raspberrypi-getting-started
         cd Lesson1
         code .
@@ -76,7 +76,7 @@ devdisco list --eth
 ### 安装应用程序依赖项
 运行以下命令，安装示例应用程序所需的库和其他模块：
 
-```
+```bash
 npm install
 ```
 
@@ -85,7 +85,7 @@ npm install
 
 1. 运行以下命令，生成设备配置文件：
 
-    ```
+    ```bash
     gulp init
     ```
 
@@ -93,7 +93,7 @@ npm install
 
 2. 运行以下命令，在 Visual Studio Code 中打开设备配置文件：
 
-    ```
+    ```bash
        # For Windows command prompt
        code %USERPROFILE%\.iot-hub-getting-started\config-raspberrypi.json
 
@@ -123,7 +123,7 @@ npm install
 ### 在 Pi 上安装 Azure IoT 中心 SDK
 通过运行以下命令来安装 Azure IoT 中心 SDK：
 
-```
+```bash
 gulp install-tools
 ```
 
@@ -132,7 +132,7 @@ gulp install-tools
 ### 部署并运行示例应用
 运行以下命令，部署并运行示例应用程序：
 
-```
+```bash
 gulp deploy && gulp run
 ```
 

@@ -41,7 +41,7 @@ ms.author: iainfou
 1. 使用 SSH 客户端连接到 Linux VM。
 2. 在 SSH 窗口中，键入以下命令：
 
-    ```
+    ```bash
     sudo waagent -deprovision+user
     ```
 
@@ -57,25 +57,25 @@ ms.author: iainfou
 1. 从本计算机打开 Azure CLI 并[登录到你的 Azure 订阅](../xplat-cli-connect.md)。
 2. 请确保你处于 Resource Manager 模式。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
 3. 使用以下命令关闭已取消预配的 VM：
 
-    ```
+    ```azurecli
     azure vm deallocate -g myResourceGroup -n myVM
     ```
 
 4. 使用以下命令一般化 VM：
 
-    ```
+    ```azurecli
     azure vm generalize -g myResourceGroup -n myVM
     ```
 
 5. 现在，运行 **azure vm capture** 命令来捕获 VM。以下示例将捕获名称以 **MyVHDNamePrefix** 开头的映像 VHD，其中，**-t** 选项指定模板 **MyTemplate.json** 的路径。
 
-    ```
+    ```azurecli
     azure vm capture -g myResourceGroup -n myVM -p myVHDNamePrefix -t myTemplate.json
     ```
 
@@ -90,7 +90,7 @@ ms.author: iainfou
 ### 创建网络资源
 要使用模板，首先需要为新的 VM 设置虚拟网络和 NIC。建议在 VM 映像的存储位置中，为这些资源创建一个资源组。运行类似于下面的命令，并替换资源名称和相应的 Azure 位置（这些命令中的“chinaeast”）：
 
-```
+```azurecli
 azure group create myResourceGroup1 -l "chinaeast"
 
 azure network vnet create myResourceGroup1 myVnet -l "chinaeast"
@@ -105,7 +105,7 @@ azure network nic create myResourceGroup1 myNIC -k mySubnet -m myVnet -p myPubli
 ### 获取 NIC 的 ID
 若要使用在捕获期间保存的 JSON 从映像部署 VM，需要获取 NIC 的 ID。运行以下命令可获取该 ID：
 
-```
+```azurecli
 azure network nic show myResourceGroup1 myNIC
 ```
 
@@ -114,13 +114,13 @@ azure network nic show myResourceGroup1 myNIC
 ### 创建 VM
 现在运行以下命令，从捕获的 VM 映像创建 VM。使用 **-f** 参数指定所保存的模板 JSON 文件的路径。
 
-```
+```azurecli
 azure group deployment create myResourceGroup1 MyDeployment -f MyTemplate.json
 ```
 
 在命令输出中，系统将提示提供新 VM 名称、管理员用户名和密码，以及以前创建的 NIC 的 ID。
 
-```
+```bash
 info:    Executing command group deployment create
 info:    Supply values for the following parameters
 vmName: myNewVM
@@ -131,7 +131,7 @@ networkInterfaceId: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resource
 
 以下示例显示成功部署后看到的内容：
 
-```
+```bash
 + Initializing template configurations and parameters
 + Creating a deployment
 info:    Created template deployment xxxxxxx
@@ -160,7 +160,7 @@ info:    group deployment create command OK
 ### 验证部署
 现在将 SSH 连接到你创建的虚拟机以验证部署并开始使用新的 VM。若要通过 SSH 连接，找到通过运行以下命令创建的 VM 的 IP 地址：
 
-```
+```azurecli
 azure network public-ip show myResourceGroup1 myPublicIP
 ```
 
@@ -190,7 +190,7 @@ azure network public-ip show myResourceGroup1 myPublicIP
 
 然后运行一个可将 URI 传递给新 OS VHD 文件和现有映像的命令。本示例在中国东部区域创建 Standard\_A1 大小的 VM。
 
-```
+```azurecli
 azure vm create -g myResourceGroup1 -n myNewVM -l chinaeast -y Linux \
 -z Standard_A1 -u myAdminname -p myPassword -f myNIC \
 -d "https://xxxxxxxxxxxxxx.blob.core.chinacloudapi.cn/vhds/MyNewVHDNamePrefix.vhd" \

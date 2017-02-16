@@ -7,18 +7,18 @@ author: chipalost
 manager: timlt
 editor: ''
 
+ms.assetid: 212dacbf-e5e9-48b2-9c8a-1c14d9e7b913
 ms.service: iot-hub
 ms.devlang: cpp
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/14/2016
-wacn.date: 01/17/2017
+wacn.date: 02/10/2017
 ms.author: andbuc
 ---
 
-# 使用 Azure IoT 网关 SDK，通过物理设备发送设备到云的消息(Linux)
-
+# 使用 Azure IoT 网关 SDK，通过物理设备发送设备到云的消息 (Linux)
 [蓝牙低功耗示例][lnk-ble-samplecode]演练展示了如何使用 [Azure IoT 网关 SDK][lnk-sdk] 将设备到云的遥测从物理设备转发到 IoT 中心，并介绍了如何将命令从 IoT 中心路由到物理设备。
 
 本文介绍的内容包括：
@@ -142,7 +142,7 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 
 1. 确保安装 `rfkill` 实用程序。
 
-    ```
+    ``` 
     sudo apt-get install rfkill
     ```
 
@@ -162,7 +162,7 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 
 4. 输入“启动”命令，打开蓝牙控制器。你应看到如下输出：
 
-    ```
+    ```json
     [NEW] Controller 98:4F:EE:04:1F:DF C3 raspberrypi [default]
     ```
 
@@ -238,7 +238,7 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 
 安装 Azure IoT 网关 SDK 的依赖项。
 
-```
+``` 
     sudo apt-get install cmake uuid-dev curl libcurl4-openssl-dev libssl-dev
 ```
 
@@ -263,7 +263,7 @@ Raspberry Pi 3 上有 IoT 网关 SDK 存储库的完整副本时，可以从包�
 #### 记录器配置
 假设网关存储库位于 **/home/pi/azure-iot-gateway-sdk/** 文件夹中，请按如下所示配置记录器模块：
 
-```
+```json
     {
       "name": "Logger",
       "loader": {
@@ -282,7 +282,7 @@ Raspberry Pi 3 上有 IoT 网关 SDK 存储库的完整副本时，可以从包�
 #### BLE 模块配置
 BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任何可以作为 GATT 外围设备运行的标准 BLE 设备都应可以使用，但你需要更新 GATT 特征 ID 和数据（用于编写说明）。添加 SensorTag 设备的 MAC 地址：
 
-```
+```json
     {
       "name": "SensorTag",
       "loader": {
@@ -342,7 +342,7 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 #### IoT 中心模块
 添加 IoT 中心的名称。后缀值通常是 **azure-devices.net**：
 
-```
+```json
     {
       "name": "IoTHub",
       "loader": {
@@ -362,7 +362,7 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 #### 标识映射模块配置
 添加 SensorTag 设备的 MAC 地址，以及添至 IoT 中心的 **SensorTag\_01** 设备的设备 ID 和密钥：
 
-```
+```json
     {
       "name": "mapping",
       "loader": {
@@ -383,7 +383,7 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 
 #### BLE 打印机模块配置
 
-```
+```json
     {
       "name": "BLE Printer",
       "loader": {
@@ -398,7 +398,7 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 
 #### BLEC2D 模块配置
 
-```
+```json
     {
       "name": "BLEC2D",
       "loader": {
@@ -420,7 +420,7 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 - **mapping** 模块将消息发送到 **BLEC2D** 模块。
 - **BLEC2D** 模块将消息发回 **SensorTag** 模块。
 
-    ```
+    ```json
     "links" : [
         {"source" : "*", "sink" : "Logger" },
         {"source" : "SensorTag", "sink" : "mapping" },
@@ -440,14 +440,14 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 
 在运行示例前，可能需要按 SensorTag 设备上的小按钮，使其可被发现。
 
-运行示例时，可使用[设备资源管理器或 iothub-explorer][lnk-explorer-tools] 工具来监视网关从 SensorTag 设备转发的消息。
+运行示例时，可使用设备资源管理器或 iothub-explorer 工具来监视网关从 SensorTag 设备转发的消息。
 
 ## 发送云到设备的消息
-BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用 Azure IoT 中心设备资源管理器或 IoT 中心资源管理器将传递 BLE 网关模块的 JSON 消息发送到 BLE 设备。如果使用 Texas Instruments SensorTag 设备，则可以从 IoT 中心发送命令，打开红色 LED、绿色 LED 或蜂鸣器。为此，请首先按顺序发送以下两个 JSON 消息。然后，可以发送任何命令，打开指示灯或蜂鸣器。
+BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用[设备资源管理器](https://github.com/Azure/azure-iot-sdk-csharp/blob/master/tools/DeviceExplorer)或 [iothub-explorer](https://github.com/Azure/iothub-explorer) 工具将传递 BLE 网关模块的 JSON 消息发送到 BLE 设备。如果使用 Texas Instruments SensorTag 设备，则可以从 IoT 中心发送命令，打开红色 LED、绿色 LED 或蜂鸣器。为此，请首先按顺序发送以下两个 JSON 消息。然后，可以发送任何命令，打开指示灯或蜂鸣器。
 
 - 重置所有 LED 和蜂鸣器（将它们关闭）
 
-    ```
+    ```json
     {
       "type": "write_once",
       "characteristic_uuid": "F000AA65-0451-4000-B000-000000000000",
@@ -457,7 +457,7 @@ BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用 Azur
 
 - 将 I/O 配置为“远程”
 
-    ```
+    ```json
     {
       "type": "write_once",
       "characteristic_uuid": "F000AA66-0451-4000-B000-000000000000",
@@ -465,9 +465,11 @@ BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用 Azur
     }
     ```
 
-- 打开红色 LED
+然后，可以发送以下任何命令，打开指示灯或蜂鸣器。
 
-    ```
+- 打开红色 LED：
+
+    ```json
     {
       "type": "write_once",
       "characteristic_uuid": "F000AA65-0451-4000-B000-000000000000",
@@ -477,7 +479,7 @@ BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用 Azur
 
 - 打开绿色 LED
 
-    ```
+    ```json
     {
       "type": "write_once",
       "characteristic_uuid": "F000AA65-0451-4000-B000-000000000000",
@@ -487,7 +489,7 @@ BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用 Azur
 
 - 打开蜂鸣器
 
-    ```
+    ```json
     {
       "type": "write_once",
       "characteristic_uuid": "F000AA65-0451-4000-B000-000000000000",

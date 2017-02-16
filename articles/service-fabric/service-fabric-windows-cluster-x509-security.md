@@ -188,7 +188,7 @@ ms.author: dkshir
 
 现在，请将证书导出到使用受保护密码的 PFX 文件。首先获取证书的指纹。从“开始”菜单上，运行“管理计算机证书”。导航到 **Local Computer\\Personal** 文件夹，找到刚创建的证书。双击证书将其打开，选择“详细信息”选项卡，然后向下滚动到“指纹”字段。删除空格后将指纹值复制到下面的 PowerShell 命令中。将 `String` 值更改为一个合适的安全密码，以保护该值，然后在 PowerShell 中运行以下命令：
 
-```
+```   
 $pswd = ConvertTo-SecureString -String "1234" -Force -AsPlainText
 Get-ChildItem -Path cert:\localMachine\my<Thumbprint> | Export-PfxCertificate -FilePath C:\mypfx.pfx -Password $pswd
 ```

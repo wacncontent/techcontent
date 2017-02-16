@@ -45,13 +45,13 @@ ms.author: lodipalm;barbkess;sonyama
 
 用于获取所有员工信息的简单 select 语句示例：
 
-```
+```sql
 SELECT * FROM DimEmployee;
 ```
 
 下面是一个更复杂的查询示例，它使用构造（例如 GROUP BY）来查看每天所有销售活动的总金额：
 
-```
+```sql
 SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales
 FROM FactInternetSales
 GROUP BY OrderDateKey
@@ -60,7 +60,7 @@ ORDER BY OrderDateKey;
 
 用于筛选出特定日期之前的订单的 SELECT 与 WHERE 子句示例：
 
-```
+```sql
 SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales
 FROM FactInternetSales
 WHERE OrderDateKey > '20020801'

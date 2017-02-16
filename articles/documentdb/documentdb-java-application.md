@@ -477,7 +477,7 @@ ms.author: denlee
     ```
 3. 我们需要一个 Web 用户界面来向用户显示。让我们重新编写之前创建的 index.jsp：
 
-    ```
+    ```html
     <html>
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

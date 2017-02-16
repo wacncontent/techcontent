@@ -51,7 +51,7 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 > [!NOTE]
 > 本示例（以及本文中的其他示例）假定已通过 Composer 安装了用于 Azure 的 PHP 客户端库。如果已手动安装这些库，则需要引用 `WindowsAzure.php` autoloader 文件。
 
-```
+```php
 require_once 'vendor/autoload.php';
 use WindowsAzure\Common\ServicesBuilder;
 ```
@@ -64,13 +64,13 @@ use WindowsAzure\Common\ServicesBuilder;
 
 对于访问实时服务：
 
-```
+```php
 DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey];EndpointSuffix=core.chinacloudapi.cn
 ```
 
 访问存储模拟器：
 
-```
+```php
 UseDevelopmentStorage=true
 ```
 
@@ -83,7 +83,7 @@ UseDevelopmentStorage=true
 
 在此处列出的示例中，将直接传递连接字符串。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -96,7 +96,7 @@ $blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionSt
 
 利用 **BlobRestProxy** 对象，可以使用 **createContainer** 方法创建 Blob 容器。创建容器时，可以在该容器上设置选项，但此操作不是必需的。（下面的示例演示了如何设置容器访问控制列表 (ACL) 和容器元数据。）
 
-```
+```php
 require_once 'vendor\autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -153,7 +153,7 @@ catch(ServiceException $e){
 
 若要将文件作为 Blob 上传，请使用 **BlobRestProxy->createBlockBlob** 方法。此操作将创建 Blob（如果该 Blob 不存在），或者覆盖它（如果该 Blob 存在）。下面的代码示例假定已创建了容器，并使用 [fopen][fopen] 将文件作为流打开。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -185,7 +185,7 @@ catch(ServiceException $e){
 
 若要列出容器中的 Blob，请将 **BlobRestProxy->listBlobs** 方法与 **foreach** 循环一起使用来循环访问结果。以下代码将容器中的每个 Blob 的名称作为容器中的输出并将其 URI 显示到浏览器。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -218,7 +218,7 @@ catch(ServiceException $e){
 
 若要下载 Blob，请调用 **BlobRestProxy->getBlob** 方法，然后对生成的 **GetBlobResult** 对象调用 **getContentStream** 方法。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -248,7 +248,7 @@ catch(ServiceException $e){
 
 若要删除 Blob，请将容器名称和 Blob 名称传递到 **BlobRestProxy->deleteBlob**。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
@@ -275,7 +275,7 @@ catch(ServiceException $e){
 
 最后，若要删除 Blob 容器，请将容器名称传递到 **BlobRestProxy->deleteContainer**。
 
-```
+```php
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;

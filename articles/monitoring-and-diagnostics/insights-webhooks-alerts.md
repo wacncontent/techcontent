@@ -42,7 +42,7 @@ Webhook 可以使用以下任一方法进行身份验证：
 
 POST 操作对于所有基于度量值的警报包含以下 JSON 有效负载和架构。
 
-```
+```JSON
     {
     "status": "Activated",
     "context": {

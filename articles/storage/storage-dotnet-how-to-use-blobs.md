@@ -45,7 +45,7 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 ### 添加命名空间声明
 将以下 **using** 语句添加到 `program.cs` 文件的顶部：
 
-```
+```csharp
 using Microsoft.Azure; // Namespace for CloudConfigurationManager
 using Microsoft.WindowsAzure.Storage; // Namespace for CloudStorageAccount
 using Microsoft.WindowsAzure.Storage.Blob; // Namespace for Blob storage types
@@ -57,7 +57,7 @@ using Microsoft.WindowsAzure.Storage.Blob; // Namespace for Blob storage types
 ### 创建 Blob 服务客户端
 **CloudBlobClient** 类使你能够在 Blob 存储中检索容器和 blob。下面是创建服务客户端的一种方法：
 
-```
+```csharp
 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 ```
 
@@ -68,7 +68,7 @@ CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
 此示例演示如何创建一个容器（如果该容器不存在）：
 
-```
+```csharp
 // Retrieve storage account from connection string.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -85,7 +85,7 @@ container.CreateIfNotExists();
 
 默认情况下，新容器是专用容器，意思是必须指定存储访问密钥才能从该容器下载 blob。如果你要让容器中的文件可供所有人使用，则可以使用以下代码将容器设置为公共容器：
 
-```
+```csharp
 container.SetPermissions(
     new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
 ```
@@ -99,7 +99,7 @@ Azure Blob 存储支持块 Blob 和页 Blob。大多数情况下，推荐使用�
 
 下面的示例演示了如何将 Blob 上载到容器中，并假定已创建容器。
 
-```
+```csharp
 // Retrieve storage account from connection string.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -124,7 +124,7 @@ using (var fileStream = System.IO.File.OpenRead(@"path\myfile"))
 
 若要列出容器中的 Blob，首先需要获取容器引用。然后，您可以使用容器的 **ListBlobs** 方法来检索其中的 Blob 和/或目录。若要访问返回的 **IListBlobItem** 的丰富属性和方法，您必须将它转换到 **CloudBlockBlob**、**CloudPageBlob** 或 **CloudBlobDirectory** 对象。如果类型未知，你可以使用类型检查来确定要将其转换为哪种类型。以下代码演示了如何检索和输出 _photos_ 容器中每项的 URI：
 
-```
+```csharp
 // Retrieve storage account from connection string.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -186,7 +186,7 @@ Block blob of length 505623: https://<accountname>.blob.core.chinacloudapi.cn/ph
 
 另外，也可以将 **ListBlobs** 方法的 **UseFlatBlobListing** 参数设置为 **true**。在这种情况下，作为 **CloudBlockBlob** 对象返回容器中的每一个 Blob。对 **ListBlobs** 的调用返回一个平面列表，如下所示：
 
-```
+```csharp
 // Loop over items within the container and output the length and URI.
 foreach (IListBlobItem item in container.ListBlobs(null, true))
 {
@@ -211,7 +211,7 @@ Block blob of length 505623: https://<accountname>.blob.core.chinacloudapi.cn/ph
 
 若要下载 Blob，请首先检索 Blob 引用，然后调用 **DownloadToStream** 方法。以下示例使用 **DownloadToStream** 方法将 Blob 内容传输到一个流对象，然后您可以将该对象保存到本地文件。
 
-```
+```csharp
 // Retrieve storage account from connection string.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -234,7 +234,7 @@ using (var fileStream = System.IO.File.OpenWrite(@"path\myfile"))
 
 也可以使用 **DownloadToStream** 方法以文本字符串形式下载 Blob 的内容。
 
-```
+```csharp
 // Retrieve storage account from connection string.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -259,7 +259,7 @@ using (var memoryStream = new MemoryStream())
 ## 删除 Blob
 若要删除 Blob，首先要获取 Blob 引用，然后对其调用 **Delete** 方法。
 
-```
+```csharp
 // Retrieve storage account from connection string.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -284,7 +284,7 @@ blockBlob.Delete();
 
 由于示例方法调用异步方法，因此必须以 _async_ 关键字开头，且必须返回 **Task** 对象。为 **ListBlobsSegmentedAsync** 方法指定的 await 关键字将挂起示例方法的执行，直至列表任务完成。
 
-```
+```csharp
 async public static Task ListBlobsSegmentedInFlatListing(CloudBlobContainer container)
 {
     //List blobs to the console window, with paging.
@@ -323,7 +323,7 @@ async public static Task ListBlobsSegmentedInFlatListing(CloudBlobContainer cont
 
 下面的示例创建一个新的追加 Blob 并向其追加某些数据，模拟一个简单的日志记录操作。
 
-```
+```csharp
 //Parse the connection string for the storage account.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     Microsoft.Azure.CloudConfigurationManager.GetSetting("StorageConnectionString"));

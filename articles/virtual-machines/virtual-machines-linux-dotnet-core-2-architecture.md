@@ -32,7 +32,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机 JSON](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L295)。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Compute/virtualMachines",
@@ -68,7 +68,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [存储帐户](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L109)。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Storage/storageAccounts",
@@ -87,7 +87,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机与存储帐户的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L341)。
 
-```
+```json
 "osDisk": {
   "name": "osdisk",
   "vhd": {
@@ -114,7 +114,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟网络和子网](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L136)。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Network/virtualNetworks",
@@ -204,7 +204,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机网络配置文件](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L350)。
 
-```
+```json
 "networkProfile": {
   "networkInterfaces": [
     {
@@ -228,7 +228,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [Azure SQL 数据库](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L401)。
 
-```
+```json
 {
   "apiVersion": "2014-04-01-preview",
   "type": "Microsoft.Sql/servers",

@@ -43,7 +43,7 @@ ms.author: navale;tomfitz
 
 让我们从最简单的模板开始：
 
-```
+```json
     {
       "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
       "contentVersion": "1.0.0.0",
@@ -59,7 +59,7 @@ ms.author: navale;tomfitz
 ## 创建存储帐户
 在 **resources** 节内，添加用于定义存储帐户的对象，如下所示。
 
-```
+```json
 "resources": [
   {
     "type": "Microsoft.Storage/storageAccounts",
@@ -79,7 +79,7 @@ ms.author: navale;tomfitz
 
 现在，让我们跳回到 **parameters** 节，并了解如何定义存储帐户的名称。你可以在 [Parameters](./resource-group-authoring-templates.md#parameters) 中了解有关如何使用参数的更多信息。
 
-```
+```json
 "parameters" : {
     "storageAccountName": {
       "type": "string",
@@ -95,7 +95,7 @@ ms.author: navale;tomfitz
 ## 部署模板
 我们已有用于创建新存储帐户的完整模板。你应该还记得，该模板保存在 **azuredeploy.json** 文件中：
 
-```
+```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -123,7 +123,7 @@ ms.author: navale;tomfitz
 
 有很多方法可以部署模板，如[资源部署](./resource-group-template-deploy.md)一文所示。若要使用 Azure PowerShell 部署模板，请使用：
 
-```
+```powershell
 # create a new resource group
 New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "China East"
 
@@ -134,7 +134,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 或者，若要使用 Azure CLI 部署模板，请使用：
 
-```
+```azurecli
 azure group create -n ExampleResourceGroup -l "China East"
 
 azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n ExampleDeployment
@@ -147,7 +147,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 ## 可用性集
 在存储帐户的定义后面，添加虚拟机的可用性集。在本例中，无需其他属性，因此其定义相当简单。如果想要定义更新域计数和容错域计数值，请参阅[用于创建可用性集的 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163607.aspx) 中的完整 properties 节。
 
-```
+```json
 {
     "type": "Microsoft.Compute/availabilitySets",
     "name": "[variables('availabilitySetName')]",
@@ -161,13 +161,13 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 
 为 **type** 指定的值同时包含资源提供程序和资源类型。在可用性集中，资源提供程序为 **Microsoft.Compute**，资源类型为 **availabilitySets**。可通过运行以下 PowerShell 命令获取可用的资源提供程序列表：
 
-```
+```powershell
     Get-AzureRmResourceProvider -ListAvailable
 ```
 
 或者，如果你使用 Azure CLI，可以运行以下命令：
 
-```
+```azurecli
     azure provider list
 ```
 
@@ -179,13 +179,13 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 
 若要查看特定提供程序的资源类型，请运行以下 PowerShell 命令：
 
-```
+```powershell
     (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Compute).ResourceTypes
 ```
 
 或者，在 Azure CLI 中，以下命令将以 JSON 格式返回可用的类型，并将它保存到文件中。
 
-```
+```azurecli
     azure provider show Microsoft.Compute --json > c:\temp.json
 ```
 
@@ -194,7 +194,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 ## 公共 IP
 定义公共 IP 地址。再次查看[公共 IP 地址的 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163590.aspx) 中要设置的属性。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Network/publicIPAddresses",
@@ -213,7 +213,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 
 现在，让我们看看如何确定 **apiVersion**。指定的值完全匹配创建资源时所要使用的 REST API 版本。因此，你可以查看该资源类型的 REST API 文档。或者，可以对特定类型运行以下 PowerShell 命令。
 
-```
+```powershell
     ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Network).ResourceTypes | Where-Object ResourceTypeName -eq publicIPAddresses).ApiVersions
 ```
 
@@ -232,7 +232,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 ## 虚拟网络和子网
 创建具有一个子网的虚拟网络。有关要设置的所有属性，请查看 [REST API for virtual networks](https://msdn.microsoft.com/zh-cn/library/azure/mt163661.aspx)（虚拟网络的 REST API）。
 
-```
+```json
 {
     "apiVersion": "2015-06-15",
     "type": "Microsoft.Network/virtualNetworks",
@@ -261,7 +261,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 
 你还要在此资源定义中创建后端地址池、几个用于通过 RDP 连接到 VM 的入站 NAT 规则，以及端口 80 上包含 TCP 探测的负载均衡规则。有关所有属性，请查看 [REST API for load balancer](https://msdn.microsoft.com/zh-cn/library/azure/mt163574.aspx)（负载均衡器的 REST API）。
 
-```
+```json
 {
     "apiVersion": "2015-06-15",
     "name": "[parameters('lbName')]",
@@ -351,7 +351,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 ## <a name="network-interface"></a> 网络接口
 你将创建 2 个网络接口，每个 VM 各用一个。可以使用 [copyIndex() 函数](./resource-group-create-multiple.md) 来迭代复制循环（称为 nicLoop），并创建 `numberOfInstances` 变量中定义的网络接口个数，而不必包含重复的网络接口项。网络接口取决于虚拟网络和负载均衡器的创建。它使用创建虚拟网络时所定义的子网，以及负载均衡器 ID 来配置负载均衡器地址池和入站 NAT 规则。有关所有属性，请查看 [REST API for network interfaces](https://msdn.microsoft.com/zh-cn/library/azure/mt163668.aspx)（网络接口的 REST API）。
 
-```
+```json
 {
     "apiVersion": "2015-06-15",
     "type": "Microsoft.Network/networkInterfaces",
@@ -396,7 +396,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 
 若要查找应用商店映像的相关属性，请遵循[选择 Linux 虚拟机映像](../virtual-machines/virtual-machines-linux-cli-ps-findimage.md)一文或[选择 Windows 虚拟机映像](../virtual-machines/virtual-machines-windows-cli-ps-findimage.md)一文。
 
-```
+```json
 {
     "apiVersion": "2015-06-15",
     "type": "Microsoft.Compute/virtualMachines",
@@ -465,7 +465,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 ## Parameters
 在 parameters 节中，定义可在部署模板时指定的值。只针对你认为应在部署期间更改的值定义参数。如果部署期间不提供默认值，你可以为所用的参数提供默认值。如 **imageSKU** 参数所示，也可以定义允许的值。
 
-```
+```json
 "parameters": {
     "storageAccountName": {
       "type": "string",
@@ -565,7 +565,7 @@ azure group deployment create -f azuredeploy.json -g ExampleResourceGroup -n Exa
 ## 变量
 在 variables 节中，可以定义在模板中多处使用的值，或从其他表达式或变量构造的值。我们经常使用变量来简化模板的语法。
 
-```
+```json
 "variables": {
     "availabilitySetName": "myAvSet",
     "subnetName": "Subnet-1",

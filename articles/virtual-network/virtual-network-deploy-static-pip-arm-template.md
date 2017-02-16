@@ -39,7 +39,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 以下部分说明如何根据上述方案定义公共 IP 资源：
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Network/publicIPAddresses",
@@ -58,7 +58,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 以下部分说明公共 IP 地址与网络接口的关联：
 
-```
+```json
   {
     "apiVersion": "2015-06-15",
     "type": "Microsoft.Network/networkInterfaces",
@@ -95,7 +95,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 最后，上述网络接口列在要创建的 VM 的 **networkProfile** 属性中。
 
-```
+```json
       "networkProfile": {
         "networkInterfaces": [
           {
@@ -112,7 +112,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 1. 如果从未使用过 Azure PowerShell，请完成[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 一文中的步骤。
 2. 在 PowerShell 控制台中，根据需要运行 `New-AzureRmResourceGroup` cmdlet，创建新资源组。如果已创建资源组，请转到步骤 3。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name PIPTEST -Location chinanorth
     ```
 
@@ -128,7 +128,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 在 PowerShell 控制台中，运行 `New-AzureRmResourceGroupDeployment` cmdlet 部署模板。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name DeployVM -ResourceGroupName PIPTEST `
         -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/03-Static-public-IP/azuredeploy.json `
         -TemplateParameterUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/03-Static-public-IP/azuredeploy.parameters.json
@@ -169,7 +169,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 1. 如果从未使用过 Azure CLI，请按照[安装和配置 Azure CLI](../xplat-cli-install.md) 一文中的步骤进行安装和配置。
 2. 运行 `azure config mode` 命令以切换到 Resource Manager 模式，如下所示。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
@@ -182,7 +182,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 3. 打开[参数文件](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/03-Static-public-IP/azuredeploy.parameters.json)，选择其内容，然后将其保存到计算机上的文件中。在本示例中，参数保存到名为 *parameters.json* 的文件。如果需要，请更改文件中的参数值，但建议至少将 adminPassword 参数的值更改为唯一的复杂密码。
 4. 运行 `azure group deployment create` cmd，使用上面下载并修改的模板和参数文件部署新的 VNet。在以下命令中，将 <path> 替换为文件保存到的目标路径。
 
-    ```
+    ```azurecli
     azure group create -n PIPTEST2 -l chinanorth --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/03-Static-public-IP/azuredeploy.json -e <path>\parameters.json
     ```
 

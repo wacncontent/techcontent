@@ -53,6 +53,8 @@ ms.author: nitinme
 ## 安装内核和 Spark magic
 有关如何安装 Spark magic、PySpark 和 Spark 内核的说明，请参阅 GitHub 上的 [sparkmagic 文档](https://github.com/jupyter-incubator/sparkmagic#installation)。
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 对于群集 v3.4，请通过执行 `pip install sparkmagic==0.2.3` 安装 sparkmagic 0.5.0。
 
 对于群集 v3.5，请通过执行 `pip install sparkmagic==0.8.4` 安装 sparkmagic 0.8.4。
@@ -70,7 +72,7 @@ ms.author: nitinme
 
     在 Python shell 中，输入以下命令以找到主目录。
 
-    ```python
+    ```
     import os
     print(os.path.expanduser('~'))
     ```
@@ -78,7 +80,7 @@ ms.author: nitinme
 2. 导航到主目录，然后创建一个名为 **.sparkmagic** 的文件夹（如果尚不存在）。
 3. 在该文件夹中，创建一个名为 **config.json** 的文件，然后在该文件中添加以下 JSON 代码片段。
 
-    ```json
+    ```
     {
       "kernel_python_credentials" : {
         "username": "{USERNAME}",

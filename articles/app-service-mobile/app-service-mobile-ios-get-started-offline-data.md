@@ -45,7 +45,7 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 
     在 `QSTodoService.init` 方法中：
 
-    ```
+    ```objc
         MSCoreDataStore *store = [[MSCoreDataStore alloc] initWithManagedObjectContext:context];
         self.client.syncContext = [[MSSyncContext alloc] initWithDelegate:nil dataSource:store callback:nil];
     ```
@@ -54,7 +54,7 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 
     在 `ToDoTableViewController.viewDidLoad` 方法中：
 
-    ```
+    ```swift
         let client = MSClient(applicationURLString: "http:// ...") // URI of the Mobile App
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
         self.store = MSCoreDataStore(managedObjectContext: managedObjectContext)
@@ -71,7 +71,7 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 
     `syncData` 首先推送新更改，然后调用 `pullData` 从远程后端获取数据。接下来，`pullData` 方法获取符合查询的新数据：
 
-    ```
+    ```objc
         -(void)syncData:(QSCompletionBlock)completion
         {
             // push all changes in the sync context, then pull new data
@@ -104,7 +104,7 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
         func onRefresh(sender: UIRefreshControl!) {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 
-        ```
+        ```swift
         self.table!.pullWithQuery(self.table?.query(), queryId: "AllRecords") {
             (error) -> Void in
 
@@ -221,7 +221,7 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 
 2. 在 **QSTodoService.m** 中修改 `addItem` 的定义，使其不会在插入项后同步。删除 `self syncData` 块并将它替换为以下内容：
 
-    ```
+    ```objc
         if (completion != nil) {
             dispatch_async(dispatch_get_main_queue(), completion);
         }
@@ -229,7 +229,7 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 
 3. 如上所示修改 `completeItem` 的定义；删除 `self syncData` 的块并将它替换为以下内容：
 
-    ```
+    ```objc
         if (completion != nil) {
             dispatch_async(dispatch_get_main_queue(), completion);
         }
@@ -239,7 +239,7 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 
 1. 在 **ToDoTableViewController.swift** 中的 `viewDidLoad` 内，注释掉以下两行，停止在应用启动时同步。在编写本文时，当某人添加或完成某个项时，Swift Todo 应用不会更新，只会在应用启动时才更新。
 
-    ```
+    ```swift
     self.refreshControl?.beginRefreshing()
     self.onRefresh(self.refreshControl)
     ```
@@ -252,13 +252,13 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 
     **Objective C**：在 QSTodoService.m 中：
 
-    ```
+    ```objc
         self.client = [MSClient clientWithApplicationURLString:@"https://sitename.chinacloudsites.cn.fail"];
     ```
 
     **Swift**：在 ToDoTableViewController.swift 中：
 
-    ```
+    ```swift
     let client = MSClient(applicationURLString: "https://sitename.chinacloudsites.cn.fail")
     ```
 

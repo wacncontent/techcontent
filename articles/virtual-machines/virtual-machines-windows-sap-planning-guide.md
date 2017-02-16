@@ -984,7 +984,7 @@ Azure 基础结构即服务不仅能够上载 VHD 和 SAP 系统，而且你还�
 
 然后，只需定义参数 SourceUri 作为要下载的 VHD 的 URL，定义 LocalFilePath 作为 VHD 的物理位置（包括其名称），即可利用该命令来实现此目的。该命令如下所示：
 
-```
+```powerhell
 Save-AzureRmVhd -ResourceGroupName <resource group name of storage account> -SourceUri http://<storage account name>.blob.core.chinacloudapi.cn/<container name>/sapidedata.vhd -LocalFilePath E:\Azure_downloads\sapidesdata.vhd
 ```
 
@@ -1033,7 +1033,7 @@ http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vh
 
 ##### Powershell
 
-```
+```powershell
 # attach a vhd to a vm
 $vm = Get-AzureRmVM -ResourceGroupName <resource group name> -Name <vm name>
 $vm = Add-AzureRmVMDataDisk -VM $vm -Name newdatadisk -VhdUri <path to vhd> -Caching <caching option> -DiskSizeInGB $null -Lun <lun e.g. 0> -CreateOption attach
@@ -1287,21 +1287,21 @@ SAP GUI 不会立即连接到运行中的任何 SAP 实例（端口 32xx），�
 
 * 为每个培训/演示布局创建新资源组
 
-    ```
+    ```powershell
     $rgName = "SAPERPDemo1"
     New-AzureRmResourceGroup -Name $rgName -Location "China North"
     ```
 
 * 新建存储帐户
 
-    ```
+    ```powershell
     $suffix = Get-Random -Minimum 100000 -Maximum 999999
     $account = New-AzureRmStorageAccount -ResourceGroupName $rgName -Name "saperpdemo$suffix" -SkuName Standard_LRS -Kind "Storage" -Location "China North"
     ```
 
 * 为每个培训/演示布局创建新的虚拟网络，以允许使用相同的主机名和 IP 地址。虚拟网络受网络安全组的保护，只允许发往端口 3389 的流量，以针对 SSH 启用远程桌面访问和端口 22。
 
-    ```
+    ```powershell
     # Create a new Virtual Network
     $rdpRule = New-AzureRmNetworkSecurityRuleConfig -Name SAPERPDemoNSGRDP -Protocol * -SourcePortRange * -DestinationPortRange 3389 -Access Allow -Direction Inbound -SourceAddressPrefix * -DestinationAddressPrefix * -Priority 100
     $sshRule = New-AzureRmNetworkSecurityRuleConfig -Name SAPERPDemoNSGSSH -Protocol * -SourcePortRange * -DestinationPortRange 22 -Access Allow -Direction Inbound -SourceAddressPrefix * -DestinationAddressPrefix * -Priority 101
@@ -1313,14 +1313,14 @@ SAP GUI 不会立即连接到运行中的任何 SAP 实例（端口 32xx），�
 
 * 创建可用于从 Internet 访问虚拟机的新公共 IP 地址
 
-    ```
+    ```powershell
     # Create a public IP address with a DNS name
     $pip = New-AzureRmPublicIpAddress -Name SAPERPDemoPIP -ResourceGroupName $rgName -Location "China North" -DomainNameLabel $rgName.ToLower() -AllocationMethod Dynamic
     ```
 
 * 为虚拟机创建新网络接口
 
-    ```
+    ```powershell
     # Create a new Network Interface
     $nic = New-AzureRmNetworkInterface -Name SAPERPDemoNIC -ResourceGroupName $rgName -Location "China North" -Subnet $vnet.Subnets[0] -PublicIpAddress $pip 
     ```
@@ -1351,7 +1351,7 @@ SAP GUI 不会立即连接到运行中的任何 SAP 实例（端口 32xx），�
 
     <br/>
 
-    ```
+    ```powershell
     #####
     # Create a new virtual machine with a VHD that contains the private image that you want to use
     #####
@@ -1373,7 +1373,7 @@ SAP GUI 不会立即连接到运行中的任何 SAP 实例（端口 32xx），�
 
 * （可选）添加更多磁盘，并还原所需的内容。请注意，所有 Blob 名称（Blob 的 URL）在 Azure 中必须唯一。
 
-    ```
+    ```powershell
     # Optional: Attach additional data disks
     $vm = Get-AzureRmVM -ResourceGroupName $rgName -Name SAPERPDemo
     $dataDiskUri = $account.PrimaryEndpoints.Blob.ToString() + "vhds/datadisk.vhd"

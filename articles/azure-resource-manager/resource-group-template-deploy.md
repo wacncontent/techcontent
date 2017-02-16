@@ -38,7 +38,7 @@ ms.author: tomfitz
 ## 快速部署步骤
 若要快速开始进行部署，请使用以下命令：
 
-```
+```powershell
 New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "China North"
 New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile c:\MyTemplates\example.json -TemplateParameterFile c:\MyTemplates\example.params.json
 ```
@@ -50,7 +50,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 ## 部署
 1. 登录到你的 Azure 帐户。
 
-    ```
+    ```powershell
     Add-AzureRmAccount -EnvironmentName AzureChinaCloud
     ```
 
@@ -65,7 +65,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 2. 如果有多个订阅，请使用 **Set-AzureRmContext** 命令提供要用于部署的订阅 ID。
 
-    ```
+    ```powershell
     Set-AzureRmContext -SubscriptionID <YourSubscriptionId>
     ```
 
@@ -73,7 +73,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
     若要创建资源组，请提供资源组的名称和位置。提供资源组的位置是因为资源组存储与资源有关的元数据。出于合规性原因，你可能会想要指定该元数据的存储位置。一般情况下，建议指定大部分资源将驻留的位置。使用相同位置可简化模板。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "China North"
     ```
 
@@ -81,7 +81,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 4. 在执行部署前，可以验证部署设置。使用 **Test-AzureRmResourceGroupDeployment** cmdlet 可以在创建实际资源之前找出问题。下面的示例演示如何验证部署。
 
-    ```
+    ```powershell
     Test-AzureRmResourceGroupDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile <PathToTemplate>
     ```
 
@@ -89,19 +89,19 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
     若要部署本地模板，请使用 **TemplateFile** 参数：
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile c:\MyTemplates\example.json
     ```
 
     若要部署外部模板，请使用 **TemplateUri** 参数：
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateUri https://raw.githubusercontent.com/exampleuser/MyTemplates/master/example.json
     ```
 
     前面的两个示例不包括参数值。可以在[参数](#parameters)部分了解传递参数值的选项。现在，可通过以下语法提示用户提供参数值：
 
-    ```
+    ```poweshell  
     cmdlet New-AzureRmResourceGroupDeployment at command pipeline position 1
     Supply values for the following parameters:
     (Type !? for Help.)
@@ -110,7 +110,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
     部署资源组后，将看到部署摘要。摘要包含 **ProvisioningState**，指示部署是否成功。
 
-    ```
+    ```poweshell   
     DeploymentName    : ExampleDeployment
     ResourceGroupName : ExampleResourceGroup
     ProvisioningState : Succeeded
@@ -120,7 +120,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 6. 如果要记录可能帮助你排查任何部署错误的有关部署的其他信息，请使用 **DeploymentDebugLogLevel** 参数。你可以指定在对部署操作进行日志记录时记录请求内容或/和响应内容。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -DeploymentDebugLogLevel All -ResourceGroupName ExampleResourceGroup -TemplateFile <PathOrLinkToTemplate>
     ```
 
@@ -139,31 +139,31 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 1. 创建资源组。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name ManageGroup -Location "China North"
     ```
 
 2. 创建存储帐户。存储帐户名称必须在 Azure 中唯一，因此，请为帐户提供自己的名称。
 
-    ```
+    ```powershell
     New-AzureRmStorageAccount -ResourceGroupName ManageGroup -Name storagecontosotemplates -Type Standard_LRS -Location "China North"
     ```
 
 3. 设置当前存储帐户。
 
-    ```
+    ```powershell
     Set-AzureRmCurrentStorageAccount -ResourceGroupName ManageGroup -Name storagecontosotemplates
     ```
 
 4. 创建容器。权限设置为“关闭”，这意味着只有所有者可以访问该容器。
 
-    ```
+    ```powershell
     New-AzureStorageContainer -Name templates -Permission Off
     ```
 
 5. 将模板添加到该容器。
 
-    ```
+    ```powershell
     Set-AzureStorageBlobContent -Container templates -File c:\Azure\Templates\azuredeploy.json
     ```
 
@@ -172,19 +172,19 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 1. 如果已更改当前存储帐户，请将当前存储帐户设置为包含你的模板的存储帐户。
 
-    ```
+    ```powershell
     Set-AzureRmCurrentStorageAccount -ResourceGroupName ManageGroup -Name storagecontosotemplates
     ```
 
 2. 创建具有读取权限和到期时间的 SAS 令牌来限制访问。检索包括 SAS 令牌的模板的完整 URI。
 
-    ```
+    ```powershell
     $templateuri = New-AzureStorageBlobSASToken -Container templates -Blob azuredeploy.json -Permission r -ExpiryTime (Get-Date).AddHours(2.0) -FullUri
     ```
 
 3. 通过提供包括 SAS 令牌的 URI 来部署该模板。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -ResourceGroupName ExampleResourceGroup -TemplateUri $templateuri
     ```
 
@@ -196,26 +196,26 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 
 - 内联参数。在 cmdlet 中包括各个参数名称（例如，**-myParameterName**。）
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile <PathToTemplate> -myParameterName "parameterValue"
     ```
 
 - 参数对象。包括 **-TemplateParameterObject** 参数。
 
-    ```
+    ```powershell   
     $parameters = @{"<ParameterName>"="<Parameter Value>"}
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile <PathToTemplate> -TemplateParameterObject $parameters
     ```
 
 - 本地参数文件。包括 **-TemplateParameterFile** 参数。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile <PathToTemplate> -TemplateParameterFile c:\MyTemplates\example.params.json
     ```
 
 - 外部参数文件。包括 **-TemplateParameterUri** 参数。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateUri <LinkToTemplate> -TemplateParameterUri https://raw.githubusercontent.com/exampleuser/MyTemplates/master/example.params.json
     ```
 

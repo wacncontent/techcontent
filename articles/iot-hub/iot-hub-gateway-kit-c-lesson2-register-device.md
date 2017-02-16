@@ -48,7 +48,7 @@ ms.author: xshi
 
 1. 通过运行以下命令登录到 Azure 帐户：
 
-    ```
+    ```bash
     az login
     ```
 
@@ -58,7 +58,7 @@ ms.author: xshi
 
 2. 运行以下命令，设置默认的需要使用的 Azure 订阅：
 
-    ```
+    ```bash
     az account set --subscription {subscription id or name}
     ```
 
@@ -66,21 +66,21 @@ ms.author: xshi
 
 3. 运行以下命令，注册提供程序。资源提供程序是指为应用程序提供资源的服务。必须先注册提供程序，然后才能部署该提供程序提供的 Azure 资源。
 
-    ```
+    ```bash
     az provider register -n "Microsoft.Devices"
     ```
 
-4. 运行以下命令，在“中国东部”区域创建名为 `iot-gateway` 的资源组：
+4. 运行以下命令，在“中国东部”区域中创建名为 `iot-gateway` 的资源组：
 
-    ```
-    az resource group create --name iot-gateway --location chinaeast
+    ```bash
+    az group create --name iot-gateway --location chinaeast
     ```
 
     `chinaeast` 是创建资源组所在的位置。如果想要使用其他位置，可运行 `az account list-locations -o table` 来查看 Azure 支持的所有位置。
 
 5. 运行以下命令，在 `iot-gateway` 资源组中创建 IoT 中心：
 
-    ```
+    ```bash
     az iot hub create --name {my hub name} --resource-group iot-gateway
     ```
 
@@ -93,7 +93,7 @@ ms.author: xshi
 
 每个将消息发送到 IoT 中心并从 IoT 中心接收消息的设备都必须使用唯一 ID 注册。运行以下命令，在 IoT 中心注册设备：
 
-```
+```bash
 az iot device create --device-id mydevice --hub-name {my hub name} --resource-group iot-gateway
 ```
 
@@ -104,4 +104,5 @@ az iot device create --device-id mydevice --hub-name {my hub name} --resource-gr
 ## 后续步骤
 [配置和运行 BLE 示例应用](./iot-hub-gateway-kit-c-lesson3-configure-ble-app.md)
 
-<!---HONumber=Mooncake_0116_2017-->
+<!---HONumber=Mooncake_0206_2017-->
+<!--Update_Description:update wording and code-->

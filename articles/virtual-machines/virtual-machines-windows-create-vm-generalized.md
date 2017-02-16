@@ -36,7 +36,7 @@ ms.author: cynthn
 
 VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.chinacloudapi.cn/**mycontainer**/**MyVhdName**.vhd。在此示例中，名为 **myVHD** 的 VHD 位于存储帐户 **mystorageaccount** 的 **mycontainer** 容器中。
 
-```
+```powershell
 $imageURI = "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myVhd.vhd"
 ```
 
@@ -46,7 +46,7 @@ $imageURI = "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myV
 
 1. 创建子网。以下示例在资源组 **myResourceGroup** 中创建具有 **10.0.0.0/24** 地址前缀的、名为 **mySubnet** 的子网。
 
-    ```
+    ```powershell
     $rgName = "myResourceGroup"
     $subnetName = "mySubNet"
     $singleSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix 10.0.0.0/24
@@ -54,7 +54,7 @@ $imageURI = "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myV
 
 2. 创建虚拟网络。以下示例在**中国北部**位置创建具有 **10.0.0.0/16** 地址前缀的、名为 **myVnet** 的虚拟网络。
 
-    ```
+    ```powershell
     $location = "China North"
     $vnetName = "myVnet"
     $vnet = New-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName -Location $location `
@@ -67,7 +67,7 @@ $imageURI = "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myV
 
 1. 创建公共 IP 地址。此示例创建名为 **myPip** 的公共 IP 地址。
 
-    ```
+    ```powershell
     $ipName = "myPip"
     $pip = New-AzureRmPublicIpAddress -Name $ipName -ResourceGroupName $rgName -Location $location `
         -AllocationMethod Dynamic
@@ -75,7 +75,7 @@ $imageURI = "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myV
 
 2. 创建 NIC。此示例创建名为 **myNic** 的 NIC。
 
-    ```
+    ```powershell
     $nicName = "myNic"
     $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName -Location $location `
         -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id
@@ -87,7 +87,7 @@ $imageURI = "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myV
 
 此示例创建名为 **myNsg** 的 NSG，其中包含一个允许通过端口 3389 传输 RDP 流量的、名为 **myRdpRule** 的规则。有关 NSG 的详细信息，请参阅 [Opening ports to a VM in Azure using PowerShell](./virtual-machines-windows-nsg-quickstart-powershell.md)（使用 PowerShell 在 Azure 中打开 VM 端口）。
 
-```
+```powershell
 $nsgName = "myNsg"
 
 $rdpRule = New-AzureRmNetworkSecurityRuleConfig -Name myRdpRule -Description "Allow RDP" `
@@ -103,7 +103,7 @@ $nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName $rgName -Location $loc
 
 为完成的虚拟网络创建变量。
 
-```
+```powershell
 $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
 ```
 
@@ -113,7 +113,7 @@ $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
 
 </br>  
 
-```
+```powershell
 # Enter a new user name and password to use as the local administrator account 
 # for remotely accessing the VM.
 $cred = Get-Credential
@@ -171,7 +171,7 @@ New-AzureRmVM -ResourceGroupName $rgName -Location $location -VM $vm
 
 完成后，应会在 [Azure 门户预览](https://portal.azure.cn)的“浏览”>“虚拟机”下看到新建的 VM，也可以使用以下 PowerShell 命令查看该 VM：
 
-```
+```powershell
 $vmList = Get-AzureRmVM -ResourceGroupName $rgName
 $vmList.Name
 ```

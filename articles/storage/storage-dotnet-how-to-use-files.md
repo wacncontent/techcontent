@@ -132,7 +132,7 @@ ms.author: minet
 
 请将下面示例中的 `storage-account-name` 和 `storage-account-key` 替换为你的存储帐户名称和密钥。
 
-```
+```powershell
 # create a context for account and key
 $ctx=New-AzureStorageContext -Environment AzureChinaCloud storage-account-name storage-account-key
 ```
@@ -141,7 +141,7 @@ $ctx=New-AzureStorageContext -Environment AzureChinaCloud storage-account-name s
 
 接下来，创建名为 `logs` 的新共享。
 
-```
+```powershell
 # create a new share
 $s = New-AzureStorageShare logs -Context $ctx
 ```
@@ -155,7 +155,7 @@ $s = New-AzureStorageShare logs -Context $ctx
 
 接下来，将在共享中创建目录。在下面的示例中，目录名为 `CustomLogs`。
 
-```
+```powershell
 # create a directory in the share
 New-AzureStorageDirectory -Share $s -Path CustomLogs
 ```
@@ -164,7 +164,7 @@ New-AzureStorageDirectory -Share $s -Path CustomLogs
 
 现在，将本地文件上载到该目录。以下示例从 `C:\temp\Log1.txt` 上载文件。请编辑文件路径，使其指向你本地计算机上的有效文件。
 
-```
+```powershell
 # upload a local file to the new directory
 Set-AzureStorageFileContent -Share $s -Source C:\temp\Log1.txt -Path CustomLogs
 ```
@@ -173,7 +173,7 @@ Set-AzureStorageFileContent -Share $s -Source C:\temp\Log1.txt -Path CustomLogs
 
 若要查看目录中的文件，你可以列出目录的所有文件。此命令将返回 CustomLogs 目录中的文件和子目录（如果有的话）。
 
-```
+```powershell
 # list files in the new directory
 Get-AzureStorageFile -Share $s -Path CustomLogs | Get-AzureStorageFile
 ```
@@ -184,7 +184,7 @@ Get-AzureStorageFile 将返回任何传入的目录对象的文件和目录列�
 
 从 Azure PowerShell 的 0.9.7 版开始，可以将一个文件复制到另一个文件，将一个文件复制到一个 Blob，或将一个 Blob 复制到一个文件。下面，我们演示如何使用 PowerShell cmdlet 执行这些复制操作。
 
-```
+```powershell
 # copy a file to the new directory
 Start-AzureStorageFileCopy -SrcShareName srcshare -SrcFilePath srcdir/hello.txt -DestShareName destshare -DestFilePath destdir/hellocopy.txt -Context $srcCtx -DestContext $destCtx
 
@@ -283,7 +283,7 @@ net use z: \\samples.file.core.chinacloudapi.cn\logs /u:samples <storage-account
 
 接下来，将你的凭据保存到项目的 app.config 文件中。编辑 app.config 文件，使其看起来类似于下面的示例，将 `myaccount` 替换为你的存储帐户名称，并将 `mykey` 替换为你的存储帐户密钥。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <startup>
@@ -302,7 +302,7 @@ net use z: \\samples.file.core.chinacloudapi.cn\logs /u:samples <storage-account
 
 从解决方案资源管理器打开 `program.cs` 文件，并在该文件顶部添加以下命名空间声明。
 
-```
+```csharp
 using Microsoft.Azure; // Namespace for Azure Configuration Manager
 using Microsoft.WindowsAzure.Storage; // Namespace for Storage Client Library
 using Microsoft.WindowsAzure.Storage.Blob; // Namespace for Blob storage
@@ -315,7 +315,7 @@ using Microsoft.WindowsAzure.Storage.File; // Namespace for File storage
 
 接下来，将以下代码添加到 `Main()` 方法（在上面显示的代码后面）以检索连接字符串。此代码将获取我们先前创建的文件的引用，并将其内容输出到控制台窗口中。
 
-```
+```csharp
 // Create a CloudFileClient object for credentialed access to File storage.
 CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
 
@@ -357,7 +357,7 @@ if (share.Exists())
 
 下面的示例演示如何检查共享的当前使用情况，以及如何设置共享的配额。
 
-```
+```csharp
 // Parse the connection string for the storage account.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     Microsoft.Azure.CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -393,7 +393,7 @@ if (share.Exists())
 
 以下示例在一个共享上创建共享访问策略，然后使用该策略为共享中的一个文件提供 SAS 约束。
 
-```
+```csharp
 // Parse the connection string for the storage account.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     Microsoft.Azure.CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -451,7 +451,7 @@ if (share.Exists())
 
 以下示例将一个文件复制到同一共享中的另一个文件。因为此操作在同一存储帐户中的文件之间进行复制，可以使用共享密钥身份验证来进行复制。
 
-```
+```csharp
 // Parse the connection string for the storage account.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     Microsoft.Azure.CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -497,7 +497,7 @@ if (share.Exists())
 
 以下示例创建一个文件并将其复制到同一存储帐户中的某个 blob。该示例为源文件创建一个 SAS，服务在复制操作期间使用该 SAS 验证对源文件的访问。
 
-```
+```csharp
 // Parse the connection string for the storage account.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     Microsoft.Azure.CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -553,14 +553,14 @@ Azure 存储服务分析现在支持用于文件存储的指标。使用指标�
 
 首先，在添加以上语句后，将以下 `using` 语句添加到你的 program.cs 文件中：
 
-```
+```csharp
 using Microsoft.WindowsAzure.Storage.File.Protocol;
 using Microsoft.WindowsAzure.Storage.Shared.Protocol;
 ```
 
 请注意，Blob、表和队列存储使用 `Microsoft.WindowsAzure.Storage.Shared.Protocol` 命名空间中的共享 `ServiceProperties` 类型，而文件存储使用其自己的类型，即 `Microsoft.WindowsAzure.Storage.File.Protocol` 命名空间中的 `FileServiceProperties` 类型。但是，你的代码中必须同时引用这两个命名空间，才能编译后续代码。
 
-```
+```csharp
 // Parse your storage connection string from your application's configuration file.
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
         Microsoft.Azure.CloudConfigurationManager.GetSetting("StorageConnectionString"));

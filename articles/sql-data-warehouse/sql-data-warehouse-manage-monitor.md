@@ -23,7 +23,7 @@ ms.author: sonyama;barbkess
 ## 权限
 若要查询本文中的 DMV，需具有 VIEW DATABASE STATE 或 CONTROL 权限。通常情况下，首选授予 VIEW DATABASE STATE 权限，因为该权限的限制要大得多。
 
-```
+```sql
 GRANT VIEW DATABASE STATE TO myuser;
 ```
 
@@ -31,7 +31,7 @@ GRANT VIEW DATABASE STATE TO myuser;
 
 所有登录到 SQL 数据仓库的操作都记录到 [sys.dm\_pdw\_exec\_sessions][sys.dm_pdw_exec_sessions]。此 DMV 包含最后 10,000 个登录。session\_id 是主键，每次进行新的登录时按顺序分配。
 
-```
+```sql
 -- Other Active Connections
 SELECT * FROM sys.dm_pdw_exec_sessions where status <> 'Closed' and session_id <> session_id();
 ```
@@ -47,7 +47,7 @@ SELECT * FROM sys.dm_pdw_exec_sessions where status <> 'Closed' and session_id <
 
 ### 步骤 1：确定想要调查的查询
 
-```
+```sql
 -- Monitor active queries
 SELECT * 
 FROM sys.dm_pdw_exec_requests 
@@ -73,7 +73,7 @@ WHERE   [label] = 'My Query';
 
 为了简化在 sys.dm\_pdw\_exec\_requests 表中查找查询的过程，请使用 [LABEL][LABEL] 将注释指定给可在 sys.dm\_pdw\_exec\_requests 视图中查找的查询。
 
-```
+```sql
 -- Query with Label
 SELECT *
 FROM sys.tables
@@ -84,7 +84,7 @@ OPTION (LABEL = 'My Query')
 ### 步骤 2：调查查询计划
 使用请求 ID 从 [sys.dm\_pdw\_request\_steps][sys.dm_pdw_request_steps] 检索查询的分布式 SQL (DSQL) 计划。
 
-```
+```sql
 -- Find the distributed query plan steps for a specific query.
 -- Replace request_id with value from Step 1.
 
@@ -103,7 +103,7 @@ ORDER BY step_index;
 ### 步骤 3a：查看分布式数据库上的 SQL
 使用请求 ID 和步骤索引从 [sys.dm\_pdw\_sql\_requests][sys.dm_pdw_sql_requests] 中检索详细信息，其中包含所有分布式数据库上的查询步骤的执行信息。
 
-```
+```sql
 -- Find the distribution run times for a SQL step.
 -- Replace request_id and step_index with values from Step 1 and 3.
 
@@ -113,7 +113,7 @@ WHERE request_id = 'QID####' AND step_index = 2;
 
 当查询步骤正在运行时，可以使用 [DBCC PDW\_SHOWEXECUTIONPLAN][DBCC PDW_SHOWEXECUTIONPLAN] 从 SQL Server 计划缓存中检索 SQL Server 估计计划，了解在特定分布基础上运行的步骤。
 
-```
+```sql
 -- Find the SQL Server execution plan for a query running on a specific SQL Data Warehouse Compute or Control node.
 -- Replace distribution_id and spid with values from previous query.
 
@@ -123,7 +123,7 @@ DBCC PDW_SHOWEXECUTIONPLAN(1, 78);
 ### 步骤 3b：查看在分布式数据库上进行的数据移动
 使用请求 ID 和步骤索引检索在 [sys.dm\_pdw\_dms\_workers][sys.dm_pdw_dms_workers] 中的每个分布上运行的数据移动步骤的相关信息。
 
-```
+```sql
 -- Find the information about all the workers completing a Data Movement Step.
 -- Replace request_id and step_index with values from Step 1 and 3.
 
@@ -136,7 +136,7 @@ WHERE request_id = 'QID####' AND step_index = 2;
 
 如果查询正在运行，则可以使用 [DBCC PDW\_SHOWEXECUTIONPLAN][DBCC PDW_SHOWEXECUTIONPLAN] 检索特定分发中当前正在运行的 SQL 步骤的 SQL Server 计划高速缓存中的 SQL Server 估计计划。
 
-```
+```sql
 -- Find the SQL Server estimated plan for a query running on a specific SQL Data Warehouse Compute or Control node.
 -- Replace distribution_id and spid with values from previous query.
 
@@ -148,7 +148,7 @@ DBCC PDW_SHOWEXECUTIONPLAN(55, 238);
 ## 监视正在等待的查询
 如果查询未取得进展（因其正在等待资源），下面是显示查询正在等待的所有资源的查询。
 
-```
+```sql
 -- Find queries 
 -- Replace request_id with value from Step 1.
 

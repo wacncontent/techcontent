@@ -225,7 +225,7 @@ Web 项目和辅助角色项目自身具有数据库连接字符串，并且当�
 
 1. 在 ContosoAdsWeb 项目中，为应用程序 *Web.config* 文件打开 *Web.Release.config* 转换文件，删除包含 `<connectionStrings>` 元素的注释块，并在其原位置粘贴下面的代码。
 
-    ```
+    ```xml
     <connectionStrings>
         <add name="ContosoAdsContext" connectionString="{connectionstring}"
         providerName="System.Data.SqlClient" xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/>
@@ -300,7 +300,7 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 例如，ServiceDefinition.csdef 包括以下定义：
 
-```
+```xml
     <ConfigurationSettings>
       <Setting name="StorageConnectionString" />
       <Setting name="ContosoAdsDbConnectionString" />
@@ -309,7 +309,7 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 *ServiceConfiguration.Cloud.cscfg* 文件包括你为 Visual Studio 中的设置输入的值。
 
-```
+```xml
     <Role name="ContosoAdsWorker">
       <Instances count="1" />
       <ConfigurationSettings>
@@ -438,7 +438,7 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 1. 在 ContosoAdsWeb 项目中，打开应用程序 Web.config 文件，并在 `configSections` 元素后面插入以下 `connectionStrings` 元素。
 
-    ```
+    ```xml
     <connectionStrings>
       <add name="ContosoAdsContext" connectionString="Data Source=(localdb)\v11.0; Initial Catalog=ContosoAds; Integrated Security=True; MultipleActiveResultSets=True;" providerName="System.Data.SqlClient" />
     </connectionStrings>
@@ -503,7 +503,7 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 Ad.cs 文件为 ad 类别定义一个枚举，为 ad 信息定义一个 POCO 实体类。
 
-```
+```csharp
     public enum Category
     {
         Cars,
@@ -548,7 +548,7 @@ Ad.cs 文件为 ad 类别定义一个枚举，为 ad 信息定义一个 POCO 实
 
 ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存储在 SQL 数据库中。
 
-```
+```csharp
     public class ContosoAdsContext : DbContext
     {
         public ContosoAdsContext() : base("name=ContosoAdsContext")
@@ -570,14 +570,14 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 此代码通过使用来自 *.cscfg* 文件的存储连接字符串获取存储帐户的访问权限。
 
-```
+```csharp
     var storageAccount = CloudStorageAccount.Parse
         (RoleEnvironment.GetConfigurationSettingValue("StorageConnectionString"));
 ```
 
 然后，它获取对*图像* Blob 容器的引用，创建尚不存在的容器，并在新容器上设置访问权限。默认情况下，新容器只允许带存储帐户凭据的客户端访问 Blob。网站需要 Blob 是公共的，以便它可以使用指向图像 Blob 的 Url 显示图像。
 
-```
+```csharp
     var blobClient = storageAccount.CreateCloudBlobClient();
     var imagesBlobContainer = blobClient.GetContainerReference("images");
     if (imagesBlobContainer.CreateIfNotExists())
@@ -592,7 +592,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 类似代码获取对*图像*队列的引用并创建一个新队列。这种情况不需要权限更改。
 
-```
+```csharp
     CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
     var imagesQueue = queueClient.GetQueueReference("images");
     imagesQueue.CreateIfNotExists();
@@ -606,7 +606,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 *Views\\Home\\Index.cshtml* 文件在主页上显示类别链接。链接将查询字符串变量中的 `Category` 枚举的整数值传递到“广告索引”页面。
 
-```
+```razor
     <li>@Html.ActionLink("Cars", "Index", "Ad", new { category = (int)Category.Cars }, null)</li>
     <li>@Html.ActionLink("Real estate", "Index", "Ad", new { category = (int)Category.RealEstate }, null)</li>
     <li>@Html.ActionLink("Free stuff", "Index", "Ad", new { category = (int)Category.FreeStuff }, null)</li>
@@ -619,7 +619,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 然后，代码获取对*图像* Blob 容器的引用，正如你之前在 *Global.asax.cs* 中看到的。在执行该操作时，它设置适用于 Web 应用程序的默认[重试策略](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/transient-fault-handling)。对于超过暂时性故障反复重试超过一分钟的 Web 应用程序，默认指数回退重试策略将其可能挂起。此处指定的重试策略将在每次尝试后等待 3 秒，最多可尝试 3 次。
 
-```
+```csharp
     var blobClient = storageAccount.CreateCloudBlobClient();
     blobClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
     imagesBlobContainer = blobClient.GetContainerReference("images");
@@ -627,7 +627,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 类似代码获取对*图像*队列的引用。
 
-```
+```csharp
     CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
     queueClient.DefaultRequestOptions.RetryPolicy = new LinearRetry(TimeSpan.FromSeconds(3), 3);
     imagesQueue = queueClient.GetQueueReference("images");
@@ -635,7 +635,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 大部分控制器代码通常用于使用 DbContext 类的实体框架数据模型。例外情况是 HttpPost `Create` 方法，它上载文件并将其保存在 Blob 存储中。模型联编程序为该方法提供一个 [HttpPostedFileBase](http://msdn.microsoft.com/zh-cn/library/system.web.httppostedfilebase.aspx) 对象。
 
-```
+```csharp
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<ActionResult> Create(
@@ -645,7 +645,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 如果用户选择要上载的文件，则代码上载该文件，将其保存在 Blob 中，并使用指向 Blob 的 URL 更新广告数据库记录。
 
-```
+```csharp
     if (imageFile != null && imageFile.ContentLength != 0)
     {
         blob = await UploadAndSaveBlobAsync(imageFile);
@@ -655,7 +655,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 执行上载的代码位于 `UploadAndSaveBlobAsync` 方法中。它将创建 Blob 的 GUID 名称，上载和保存该文件，并将引用返回已保存的 Blob。
 
-```
+```csharp
     private async Task<CloudBlockBlob> UploadAndSaveBlobAsync(HttpPostedFileBase imageFile)
     {
         string blobName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
@@ -670,7 +670,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 之后 HttpPost `Create` 方法上载 Blob 并更新数据库，它会创建队列消息，以通知后端进程图像已准备好转换为一个缩略图。
 
-```
+```csharp
     string queueMessageString = ad.AdId.ToString();
     var queueMessage = new CloudQueueMessage(queueMessageString);
     await queue.AddMessageAsync(queueMessage);
@@ -678,7 +678,7 @@ ContosoAdsContext 类指定 DbSet 集合中使用的 Ad 类，实体框架将存
 
 HttpPost `Edit` 方法的代码和它类似，不同之处在于如果用户选择新图像文件，则必须删除已存在的任何 blob。
 
-```
+```csharp
     if (imageFile != null && imageFile.ContentLength != 0)
     {
         await DeleteAdBlobsAsync(ad);
@@ -689,7 +689,7 @@ HttpPost `Edit` 方法的代码和它类似，不同之处在于如果用户选�
 
 以下示例演示了当你删除广告时删除 Blob 的代码：
 
-```
+```csharp
     private async Task DeleteAdBlobsAsync(Ad ad)
     {
         if (!string.IsNullOrWhiteSpace(ad.ImageURL))
@@ -715,13 +715,13 @@ HttpPost `Edit` 方法的代码和它类似，不同之处在于如果用户选�
 
 *Index.cshtml* 文件显示带有其他广告数据的缩略图。
 
-```
+```razor
     <img  src="@Html.Raw(item.ThumbnailURL)" />
 ```
 
 *Details.cshtml* 文件显示完全尺寸的图像。
 
-```
+```razor
     <img src="@Html.Raw(Model.ImageURL)" />
 ```
 
@@ -729,13 +729,13 @@ HttpPost `Edit` 方法的代码和它类似，不同之处在于如果用户选�
 
 *Create.cshtml* 和 *Edit.cshtml* 文件指定窗体编码，允许控制器获取 `HttpPostedFileBase` 对象。
 
-```
+```razor
     @using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
 ```
 
 `<input>` 元素通知浏览器提供文件选择对话框。
 
-```
+```razor
     <input type="file" name="imageFile" accept="image/*" class="form-control fileupload" />
 ```
 
@@ -745,7 +745,7 @@ Azure 辅助角色环境在辅助角色启动时调用 `WorkerRole` 类中的 `O
 
 `OnStart` 方法从 *.cscfg* 文件获取数据库连接字符串，并将其传递给实体框架 DbContext 类。在默认情况下使用 SQLClient 提供程序，因此不需要指定提供程序。
 
-```
+```csharp
     var dbConnString = CloudConfigurationManager.GetSetting("ContosoAdsDbConnectionString");
     db = new ContosoAdsContext(dbConnString);
 ```
@@ -756,7 +756,7 @@ Azure 辅助角色环境在辅助角色启动时调用 `WorkerRole` 类中的 `O
 
 `Run` 方法完成其初始化工作时调用 `OnStart` 方法。该方法执行监视新队列消息的一个无限循环，并在它们到达时进行处理。
 
-```
+```csharp
     public override void Run()
     {
         CloudQueueMessage msg = null;
@@ -793,7 +793,7 @@ Azure 辅助角色环境在辅助角色启动时调用 `WorkerRole` 类中的 `O
 
 找到队列消息时调用 `ProcessQueueMessage`。
 
-```
+```csharp
     private void ProcessQueueMessage(CloudQueueMessage msg)
     {
         var adId = int.Parse(msg.AsString);

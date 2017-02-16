@@ -58,7 +58,7 @@ ms.author: gwallace
 
 ### 步骤 1
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -66,7 +66,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 检查帐户的订阅。
 
-```
+```powershell
 Get-AzureRmSubscription
 ```
 
@@ -76,7 +76,7 @@ Get-AzureRmSubscription
 
 选择要使用的 Azure 订阅。
 
-```
+```powershell
 Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 ```
 
@@ -84,7 +84,7 @@ Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 
 创建新的资源组（如果要使用现有的资源组，请跳过此步骤）。
 
-```
+```powershell
 New-AzureRmResourceGroup -Name appgw-rg -location "China North"
 ```
 
@@ -98,7 +98,7 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 ### 步骤 1
 
-```
+```powershell
 $subnetconfig = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
 ```
 
@@ -106,7 +106,7 @@ $subnetconfig = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPre
 
 ### 步骤 2
 
-```
+```powershell
 $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnetconfig
 ```
 
@@ -114,7 +114,7 @@ $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -L
 
 ### 步骤 3
 
-```
+```powershell
 $subnet = $vnet.subnets[0]
 ```
 
@@ -124,7 +124,7 @@ $subnet = $vnet.subnets[0]
 
 ### 步骤 1
 
-```
+```powershell
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
 ```
 
@@ -132,7 +132,7 @@ $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Sub
 
 ### 步骤 2
 
-```
+```powershell
 $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
 ```
 
@@ -140,7 +140,7 @@ $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPA
 
 ### 步骤 3
 
-```
+```powershell
 $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsetting01 -Port 80 -Protocol Http -CookieBasedAffinity Disabled
 ```
 
@@ -148,7 +148,7 @@ $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsettin
 
 ### 步骤 4
 
-```
+```powershell
 $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 80
 ```
 
@@ -156,7 +156,7 @@ $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 80
 
 ### 步骤 5
 
-```
+```powershell
 $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -Subnet $subnet
 ```
 
@@ -164,7 +164,7 @@ $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -Su
 
 ### 步骤 6
 
-```
+```powershell
 $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protocol Http -FrontendIPConfiguration $fipconfig -FrontendPort $fp
 ```
 
@@ -172,7 +172,7 @@ $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protoco
 
 ### 步骤 7
 
-```
+```powershell
 $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
 ```
 
@@ -180,7 +180,7 @@ $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType B
 
 ### 步骤 8
 
-```
+```powershell
 $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
 ```
 
@@ -193,7 +193,7 @@ $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Cap
 
 创建包含上述步骤中所有配置项目的应用程序网关。示例中的应用程序网关名为“appgwtest”。
 
-```
+```powershell
 $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location "China North" -BackendAddressPools $pool -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku
 ```
 
@@ -211,7 +211,7 @@ $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-
 
 获取应用程序网关对象，并将其关联到变量“$getgw”。
 
-```
+```powershell
 $getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
 ```
 
@@ -235,7 +235,7 @@ Successful OK                   ce6c6c95-77b4-2118-9d65-e29defadffb8
 
 应用程序网关进入停止状态后，请使用 `Remove-AzureRmApplicationGateway` cmdlet 删除该服务。
 
-```
+```powershell
 Remove-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Force
 ```
 
@@ -254,7 +254,7 @@ Successful OK                   055f3a96-8681-2094-a304-8d9a11ad8301
 
 若要验证是否已删除服务，可以使用 `Get-AzureRmApplicationGateway` cmdlet。此步骤不是必需的。
 
-```
+```powershell
 Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
 ```
 

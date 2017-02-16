@@ -73,7 +73,7 @@ data:    TrendMicro.DeepSecurity                          chinanorth
 
 这些列表可能相当长，因此上面的示例列表只是一个代码片段。假设我注意到 Canonical 事实上是中国北部位置的映像发布者。现在可以调用 `azure vm image list-offers` 来查找其发布的产品，并在提示文字后面输入位置和发布者，如以下示例所示：
 
-```
+```azurecli
 azure vm image list-offers
 info:    Executing command vm image list-offers
 Location: chinanorth
@@ -87,7 +87,7 @@ info:    vm image list-offers command OK
 
 现在，我们知道在中国北部区域中，Canonical 在 Azure 上发布 **UbuntuServer** 产品。但是，有哪些 SKU 呢？ 若要获取 SKU 信息，请调用 `azure vm image list-skus`，并在提示文字后面输入你找到的位置、发布者和产品信息。
 
-```
+```azurecli
 azure vm image list-skus
 info:    Executing command vm image list-skus
 Location: chinanorth
@@ -111,7 +111,7 @@ info:    vm image list-skus command OK
 
 利用这些信息，现在可以通过在顶部调用原始调用，准确地找到你需要的映像。
 
-```
+```azurecli
 azure vm image list chinanorth canonical ubuntuserver 16.04.0-LTS
 info:    Executing command vm image list
 + Getting virtual machine images (Publisher:"canonical" Offer:"ubuntuserver" Sku: "16.04.0-LTS" Location:"chinanorth")
@@ -144,21 +144,21 @@ info:    vm image list command OK
 
 首先，使用以下命令列出发布者：
 
-```
+```powershell
 $locName="<Azure location, such as China North>"
 Get-AzureRMVMImagePublisher -Location $locName | Select PublisherName
 ```
 
 填写选择的发布者名称，然后运行以下命令：
 
-```
+```powershell
 $pubName="<publisher>"
 Get-AzureRMVMImageOffer -Location $locName -Publisher $pubName | Select Offer
 ```
 
 填写选择的产品名称，然后运行以下命令：
 
-```
+```powershell
 $offerName="<offer>"
 Get-AzureRMVMImageSku -Location $locName -Publisher $pubName -Offer $offerName | Select Skus
 ```
@@ -167,7 +167,7 @@ Get-AzureRMVMImageSku -Location $locName -Publisher $pubName -Offer $offerName |
 
 下面是一个完整示例：
 
-```
+```powershell
 PS C:\> $locName="China North"
 PS C:\> Get-AzureRMVMImagePublisher -Location $locName | Select PublisherName
 
@@ -181,7 +181,7 @@ credativ
 
 对于“MicrosoftWindowsServer”发布者：
 
-```
+```powershell
 PS C:\> $pubName="MicrosoftWindowsServer"
 PS C:\> Get-AzureRMVMImageOffer -Location $locName -Publisher $pubName | Select Offer
 
@@ -192,7 +192,7 @@ WindowsServer
 
 对于“WindowsServer”产品：
 
-```
+```powershell
 PS C:\> $offerName="WindowsServer"
 PS C:\> Get-AzureRMVMImageSku -Location $locName -Publisher $pubName -Offer $offerName | Select Skus
 

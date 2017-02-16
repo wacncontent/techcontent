@@ -348,7 +348,7 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
 
 如果选择使用其他方法上传文件，请确保文件路径是 tutorials/flightdelay/data。用于访问文件的语法是：
 
-```
+```powershell
 wasbs://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/tutorials/flightdelay/data
 ```
 

@@ -32,7 +32,7 @@ ms.author: nepeters
 >[!NOTE]
 > 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Compute/availabilitySets",
@@ -50,7 +50,7 @@ ms.author: nepeters
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [可用性集与虚拟机的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L302)。
 
-```
+```json
 "properties": {
   "availabilitySet": {
     "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
@@ -68,7 +68,7 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络负载均衡器](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L198)。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Network/loadBalancers",
@@ -85,7 +85,7 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络负载均衡器与公共 IP 地址的关联](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L211)。
 
-```
+```json
 "frontendIPConfigurations": [
   {
     "properties": {
@@ -107,7 +107,7 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [负载均衡器规则](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L226)。
 
-```
+```json
 "loadBalancingRules": [
   {
     "name": "[variables('loadBalencerRule')]",
@@ -140,7 +140,7 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [负载均衡器探测](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L247)。
 
-```
+```json
 "probes": [
   {
     "properties": {
@@ -165,7 +165,7 @@ Azure 门户预览中显示的负载均衡器探测。
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [入站 NAT 规则](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L260)。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Network/loadBalancers/inboundNatRules",
@@ -204,7 +204,7 @@ Azure 门户预览中显示的一个示例入站 NAT 规则。在部署中为每
 
 音乐应用商店示例模板中已定义一个提取实例计数的参数。创建虚拟机和相关资源时，将在整个模板中使用此数字。
 
-```
+```json
 "numberOfInstances": {
   "type": "int",
   "minValue": 1,
@@ -219,7 +219,7 @@ Azure 门户预览中显示的一个示例入站 NAT 规则。在部署中为每
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机复制函数](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L290)。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "Microsoft.Compute/virtualMachines",
@@ -235,7 +235,7 @@ Azure 门户预览中显示的一个示例入站 NAT 规则。在部署中为每
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [复制索引函数](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L309)。
 
-```
+```json
 "osProfile": {
   "computerName": "[concat(variables('vmName'),copyindex())]",
   "adminUsername": "[parameters('adminUsername')]",

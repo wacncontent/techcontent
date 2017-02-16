@@ -26,7 +26,7 @@ ms.author: vturecek
 
 Reliable Services API 为服务通信使用一个简单的接口。若要打开服务的终结点，只需实现此接口即可：
 
-```
+```csharp
 public interface ICommunicationListener
 {
     Task<string> OpenAsync(CancellationToken cancellationToken);
@@ -41,7 +41,7 @@ public interface ICommunicationListener
 
 对于无状态服务：
 
-```
+```csharp
 class MyStatelessService : StatelessService
 {
     protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
@@ -54,7 +54,7 @@ class MyStatelessService : StatelessService
 
 对于有状态服务：
 
-```
+```csharp
 class MyStatefulService : StatefulService
 {
     protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
@@ -71,7 +71,7 @@ class MyStatefulService : StatefulService
 
 例如，你可以创建一个只在主副本上接受 RPC 调用的 ServiceRemotingListener，并创建另一个可通过 HTTP 在辅助副本上接受读取请求的自定义侦听器：
 
-```
+```csharp
 protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
 {
     return new[]
@@ -94,7 +94,7 @@ protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListe
 
 最后，在[服务清单](./service-fabric-application-model.md)中有关终结点的部分下面描述服务所需的终结点。
 
-```
+```xml
 <Resources>
     <Endpoints>
       <Endpoint Name="WebServiceEndpoint" Protocol="http" Port="80" />
@@ -105,7 +105,7 @@ protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListe
 
 通信侦听器可以从 `ServiceContext` 中的 `CodePackageActivationContext` 访问分配给它的终结点资源。然后侦听器在打开时开始侦听请求。
 
-```
+```csharp
 var codePackageActivationContext = serviceContext.CodePackageActivationContext;
 var port = codePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;
 ```
@@ -116,7 +116,7 @@ var port = codePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;
 ### 服务地址注册
 名为*命名服务*的系统服务在 Service Fabric 群集上运行。命名服务是服务及其地址（服务的每个实例或副本正在其上侦听）的注册机构。`ICommunicationListener` 的 `OpenAsync` 方法完成时，它的返回值会在命名服务中注册。这个在命名服务中发布的返回值是一个字符串，其值完全可以是任何内容。此字符串值是客户端向命名服务请求服务的地址时将看到的内容。
 
-```
+```csharp
 public Task<string> OpenAsync(CancellationToken cancellationToken)
 {
     EndpointResourceDescription serviceEndpoint = serviceContext.CodePackageActivationContext.GetEndpoint("ServiceEndpoint");
@@ -149,31 +149,31 @@ Reliable Services API 提供以下库来编写与服务通信的客户端。
 
 若要连接到群集内的服务，可使用默认设置创建 `ServicePartitionResolver`。这是针对大多数情况的建议用法：
 
-```
+```csharp
 ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
 ```
 
 若要连接到其他群集中的服务，可利用一组群集网关终结点来创建 `ServicePartitionResolver`。请注意，网关终结点只是可用来连接到相同群集的不同终结点。例如：
 
-```
+```csharp
 ServicePartitionResolver resolver = new  ServicePartitionResolver("mycluster.chinacloudapp.cn:19000", "mycluster.chinacloudapp.cn:19001");
 ```
 
 或者，可为 `ServicePartitionResolver` 指定一个函数来创建 `FabricClient`，以便在内部使用：
 
-```
+```csharp
 public delegate FabricClient CreateFabricClientDelegate();
 ```
 
 `FabricClient` 是用于与 Service Fabric 群集通信，以便在群集上实现各种管理操作的对象。想要更好地控制 `ServicePartitionResolver` 与群集交互的方式时，这非常有用。`FabricClient` 会在内部执行缓存，但创建成本通常很高，因此一定要尽可能重复使用 `FabricClient` 实例。
 
-```
+```csharp
 ServicePartitionResolver resolver = new  ServicePartitionResolver(() => CreateMyFabricClient());
 ```
 
 接下来，使用解析方法来检索服务的地址或已分区服务的服务分区的地址。
 
-```
+```csharp
 ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
 
 ResolvedServicePartition partition =
@@ -191,7 +191,7 @@ ResolvedServicePartition partition =
 
 通信客户端只接收地址，并使用它来连接到服务。客户端可以使用它想要的任何协议。
 
-```
+```csharp
 class MyCommunicationClient : ICommunicationClient
 {
     public ResolvedServiceEndpoint Endpoint { get; set; }
@@ -204,7 +204,7 @@ class MyCommunicationClient : ICommunicationClient
 
 客户端工厂主要负责创建通信客户端。对于不会维持持续连接的客户端（例如 HTTP 客户端），工厂只需创建并返回客户端。其他会维持持续连接的协议（例如某些二进制协议）也应该由工厂验证，以确定是否需要重新创建连接。
 
-```
+```csharp
 public class MyCommunicationClientFactory : CommunicationClientFactoryBase<MyCommunicationClient>
 {
     protected override void AbortClient(MyCommunicationClient client)
@@ -234,7 +234,7 @@ public class MyCommunicationClientFactory : CommunicationClientFactoryBase<MyCom
 
 `TryHandleException` 针对给定异常做出决定。如果它**不知道**要对异常做出哪些决定，则应返回 **false**。如果它**知道**要做出哪些决定，则应该相应地设置结果并返回 **true**。
 
-```
+```csharp
 class MyExceptionHandler : IExceptionHandler
 {
     public bool TryHandleException(ExceptionInformation exceptionInformation, OperationRetrySettings retrySettings, out ExceptionHandlingResult result)
@@ -257,7 +257,7 @@ class MyExceptionHandler : IExceptionHandler
 ### 汇总
 使用根据通信协议生成的 `ICommunicationClient`、`ICommunicationClientFactory` 和 `IExceptionHandler` 时，`ServicePartitionClient` 会将它全部包装在一起，并为这些组件提供错误处理和服务分区地址解析循环。
 
-```
+```csharp
 private MyCommunicationClientFactory myCommunicationClientFactory;
 private Uri myServiceUri;
 

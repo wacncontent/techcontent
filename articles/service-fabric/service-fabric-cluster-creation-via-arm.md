@@ -38,13 +38,13 @@ ms.author: chackdan
 
 登录到 Azure 帐户：
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
 选择订阅：
 
-```
+```powershell
 Get-AzureRmSubscription
 Set-AzureRmContext -SubscriptionId <guid>
 ```
@@ -63,7 +63,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 
 如果计划在多个区域部署群集，建议在命名资源组和 keyvault 时，使其名称可告知其所属的区域。
 
-```
+```powershell
     New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
 ```
 应看到如下所示的输出。警告：此 cmdlet 的输出对象类型会在将来的版本中进行修改。
@@ -85,7 +85,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 
 应看到如下所示的输出。
 
-```
+```powershell
     Vault Name                       : myvault
     Resource Group Name              : mycluster-keyvault
     Location                         : China East
@@ -113,7 +113,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 
 如果拥有 Key Vault 并且想要使用，必须针对部署启用它。**必须针对部署启用** Key Vault，使计算资源提供程序能够从中获取证书并在群集节点上安装：
 
-```
+```powershell
 Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -EnabledForDeployment
 ```
 
@@ -150,7 +150,7 @@ Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -EnabledForDeployme
 2. 导航到本地目录
 2. 在 PowerShell 窗口中导入 ServiceFabricRPHelpers 模块：
 
-    ```
+    ```powershell
     Import-Module "C:..\\ServiceFabricRPHelpers\\ServiceFabricRPHelpers.psm1"
     ```
 
@@ -201,7 +201,7 @@ Value : https://mychinaeastvault.vault.azure.net:443/secrets/mycert/4d087088df97
 
 如果已将证书上传到 keyvault，则跳过此步骤，此步骤用于生成新的自签名证书并将其上传到 keyvault。更改以下参数并运行脚本。应提示输入证书密码。
 
-```
+```powershell
 $ResouceGroup = "chackochinaeastkv"
 $VName = "chackokv2"
 $SubID = "6c653126-e4ba-42cd-a1dd-f7bf96ae7a47"
@@ -274,7 +274,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 3. 解压缩 zip 文件。
 4. 运行 `SetupApplications.ps1` 并提供 TenantId、ClusterName 和 WebApplicationReplyUrl 作为参数。例如：
 
-    ```
+    ```powershell
     .\SetupApplications.ps1 -TenantId '690ec069-8200-4068-9d01-5aaf188e557a' -ClusterName 'mycluster' -WebApplicationReplyUrl 'https://mycluster.chinaeast.chinacloudapp.cn:19080/Explorer/index.html'
     ```
 
@@ -313,7 +313,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 #### 将所有证书添加到 VMSS osProfile
 必须在 VMSS 资源 (Microsoft.Compute/virtualMachineScaleSets) 的 osProfile 节中配置应在群集中安装的每个证书。这样就会指示资源提供程序在 VM 上安装证书。这包括群集证书，以及打算用于应用程序的任何应用程序安全证书：
 
-```
+```json
 {
   "apiVersion": "2016-03-30",
   "type": "Microsoft.Compute/virtualMachineScaleSets",
@@ -350,7 +350,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 ##### VMSS 资源：
 
-```
+```json
 {
   "apiVersion": "2016-03-30",
   "type": "Microsoft.Compute/virtualMachineScaleSets",
@@ -383,7 +383,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 ##### Service Fabric 资源：
 
-```
+```json
 {
   "apiVersion": "2016-03-01",
   "type": "Microsoft.ServiceFabric/clusters",
@@ -405,7 +405,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 ### 插入 AAD 配置
 可将前面创建的 AAD 配置直接插入 Resource Manager 模板，不过建议最好先将参数值提取到 parameters 文件，以便可以重复使用 Resource Manager 模板文件，避免输入特定于部署的值。
 
-```
+```json
 {
   "apiVersion": "2016-03-01",
   "type": "Microsoft.ServiceFabric/clusters",
@@ -431,7 +431,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 最后，使用密钥保管库和 AAD PowerShell 命令的输出值填充参数文件：
 
-```
+```json
 {
     "$schema": "http://schema.management.chinacloudapi.cn/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
@@ -493,14 +493,14 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 #### 测试
 运行以下 PowerShell 命令，使用 parameters 文件测试 Resource Manager 模板：
 
-```
+```powershell
 Test-AzureRmResourceGroupDeployment -ResourceGroupName "myresourcegroup" -TemplateFile .\azuredeploy.json -TemplateParameterFile .\azuredeploy.parameters.json
 ```
 
 #### 部署
 如果 Resource Manager 模板通过测试，请运行以下 PowerShell 命令，使用 parameters 文件来部署 Resource Manager 模板：
 
-```
+```powershell
 New-AzureRmResourceGroupDeployment -ResourceGroupName "myresourcegroup" -TemplateFile .\azuredeploy.json -TemplateParameterFile .\azuredeploy.parameters.json
 ```
 
@@ -565,7 +565,7 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName "myresourcegroup" -Templat
 ### 如何通过 PowerShell 将群集与 AAD 身份验证连接
 使用以下 PowerShell 命令示例连接 Service Fabric 群集：
 
-```
+```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint <endpoint> -KeepAliveIntervalInSec 10 -AzureActiveDirectory -ServerCertThumbprint <thumbprint>
 ```
 

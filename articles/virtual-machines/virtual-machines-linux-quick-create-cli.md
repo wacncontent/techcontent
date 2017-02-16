@@ -41,13 +41,13 @@ Azure CLI 2.0 预览版是下一代的多平台 CLI。欢迎通过 [GitHub 项�
 
 首先，键入 [az resource group create](https://docs.microsoft.com/cli/azure/group#create) 创建包含所有已部署资源的资源组：
 
-```
+```azurecli
 az resource group create -n myResourceGroup -l chinanorth
 ```
 
 输出如下所示（如果需要，可以选择一个不同的 `--output` 选项）：
 
-```
+```json
 {
   "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup",
   "location": "chinanorth",
@@ -63,7 +63,7 @@ az resource group create -n myResourceGroup -l chinanorth
 
 现在，可以创建 VM 及其环境。请记得将 `----public-ip-address-dns-name` 值替换为唯一值；下面的值可能已被使用。
 
-```
+```azurecli
 az vm create \
 --image credativ:Debian:8:latest \
 --admin-username ops \
@@ -76,7 +76,7 @@ az vm create \
 
 输出如下所示。请注意通过 **ssh** 连接到 VM 时使用的 `publicIpAddress` 或 `fqdn` 值。
 
-```
+```json
 {
   "fqdn": "mydns.chinanorth.chinacloudapp.cn",
   "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
@@ -89,7 +89,7 @@ az vm create \
 
 使用输出中列出的公共 IP 地址登录到 VM。可以使用列出的完全限定域名 (FQDN)。
 
-```
+```bash
 ssh ops@mydns.chinanorth.chinacloudapp.cn
 ```
 

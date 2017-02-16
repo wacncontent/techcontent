@@ -45,7 +45,7 @@ Azure Batch 服务日志包含 Azure Batch 服务在 Batch 资源（诸如池或
 
 json
 
-```
+```json
 {
     "poolId": "myPool1",
     "displayName": "Production Pool",

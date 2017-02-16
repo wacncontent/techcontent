@@ -57,7 +57,7 @@ ms.author: tomfitz
 
 1. 登录到你的帐户。
 
-    ```
+    ```azurecli
     azure login -e AzureChinaCloud
     ```
 
@@ -65,7 +65,7 @@ ms.author: tomfitz
 
     * 若要一步创建 AD 应用程序和服务主体，请提供应用名称和密码，如以下命令中所示：
 
-        ```
+        ```azurecli
         azure ad sp create -n exampleapp -p {your-password}
         ```
 
@@ -78,13 +78,13 @@ ms.author: tomfitz
 
       如以下命令所示：
 
-      ```
+      ```azurecli
         azure ad app create -n exampleapp --home-page http://www.contoso.org --identifier-uris https://www.contoso.org/example -p {Your_Password}
       ```
 
     上述命令会返回 AppId 值。若要创建服务主体，请在以下命令中提供该值作为参数：
 
-    ```
+    ```azurecli
      azure ad sp create -a {AppId}
     ```
 
@@ -92,7 +92,7 @@ ms.author: tomfitz
 
     对于这两个选项，都会返回新的服务主体。授权时需要使用 `Object Id`。登录时需要提供随 `Service Principal Names` 列出的 GUID。此 GUID 与 AppId 的值一样。在示例应用程序中，此值称为 `Client ID`。
 
-    ```
+    ```azurecli
      info:    Executing command ad sp create
 
      Creating application exampleapp
@@ -107,7 +107,7 @@ ms.author: tomfitz
 
 3. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)。对于 `objectid` 参数，请提供创建应用程序时使用的 `Object Id`。运行此命令之前，必须留出一些时间将新的服务主体传遍 Active Directory。手动运行这些命令时，任务之间通常已经过足够的时间。在脚本中，应在命令间添加休眠步骤（如 `sleep 15`）。如果看到错误称主体不存在于目录中，请重新运行该命令。
 
-    ```
+    ```azurecli
     azure role assignment create --objectId ff863613-e5e2-4a6b-af07-fff6f2de3f4e -o Reader -c /subscriptions/{subscriptionId}/
     ```
 
@@ -120,13 +120,13 @@ ms.author: tomfitz
 
 1. 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。若要检索当前已经过身份验证的订阅的租户 ID，请使用：
 
-    ```
+    ```azurecli
     azure account show
     ```
 
     将返回：
 
-    ```
+    ```azurecli
     info:    Executing command account show
     data:    Name                        : Microsoft Azure MSDN - Visual Studio Ultimate
     data:    ID                          : {guid}
@@ -138,19 +138,19 @@ ms.author: tomfitz
 
     如果需要获取另一个订阅的租户 ID，请使用以下命令：
 
-    ```
+    ```azurecli
     azure account show -s {subscription-id}
     ```
 
 2. 如果需要检索用于登录的客户端 ID，请使用以下命令：
 
-    ```
+    ```azurecli
     azure ad sp show -c exampleapp --json
     ```
 
     用于登录的值是服务主体名称中列出的 GUID。
 
-    ```
+    ```azurecli
     [
       {
         "objectId": "ff863613-e5e2-4a6b-af07-fff6f2de3f4e",
@@ -167,13 +167,13 @@ ms.author: tomfitz
 
 3. 以服务主体方式登录。
 
-    ```
+    ```azurecli
     azure login -e AzureChinaCloud -u 7132aca4-1bdb-4238-ad81-996ff91d8db4 --service-principal --tenant {tenant-id}
     ```
 
     系统将提示输入密码。提供在创建 AD 应用程序时指定的密码。
 
-    ```
+    ```azurecli
     info:    Executing command login
     Password: ********
     ```
@@ -206,7 +206,7 @@ ms.author: tomfitz
 3. 打开 **examplecert.pem** 文件并查找 **-----BEGIN CERTIFICATE-----** 和 **-----END CERTIFICATE-----** 之间的长字符序列。复制证书数据。创建服务主体时将此数据作为参数传递。
 4. 登录到你的帐户。
 
-    ```
+    ```azurecli
     azure login -e AzureChinaCloud
     ```
 
@@ -214,7 +214,7 @@ ms.author: tomfitz
 
     * 若要一步创建 AD 应用程序和服务主体，请提供应用名称和证书数据，如以下命令中所示：
 
-        ```
+        ```azurecli
         azure ad sp create -n exampleapp --cert-value {certificate data}
         ```
 
@@ -227,13 +227,13 @@ ms.author: tomfitz
 
       如以下命令所示：
 
-      ```
+      ```azurecli
         azure ad app create -n exampleapp --home-page http://www.contoso.org --identifier-uris https://www.contoso.org/example --cert-value {certificate data}
       ```
 
     上述命令会返回 AppId 值。若要创建服务主体，请在以下命令中提供该值作为参数：
 
-    ```
+    ```azurecli
      azure ad sp create -a {AppId}
     ```
 
@@ -241,7 +241,7 @@ ms.author: tomfitz
 
     对于这两个选项，都会返回新的服务主体。授权时需要使用对象 ID。登录时需要提供随 `Service Principal Names` 列出的 GUID。此 GUID 与 AppId 的值一样。在示例应用程序中，此值称为 `Client ID`。
 
-    ```
+    ```azurecli
      info:    Executing command ad sp create
 
      Creating service principal for application 4fd39843-c338-417d-b549-a545f584a74+
@@ -255,7 +255,7 @@ ms.author: tomfitz
 
 6. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)。对于 `objectid` 参数，请提供创建应用程序时使用的 `Object Id`。运行此命令之前，必须留出一些时间将新的服务主体传遍 Active Directory。手动运行这些命令时，任务之间通常已经过足够的时间。在脚本中，应在命令间添加休眠步骤（如 `sleep 15`）。如果看到错误称主体不存在于目录中，请重新运行该命令。
 
-    ```
+    ```azurecli
     azure role assignment create --objectId 7dbc8265-51ed-4038-8e13-31948c7f4ce7 -o Reader -c /subscriptions/{subscriptionId}/
     ```
 
@@ -266,13 +266,13 @@ ms.author: tomfitz
 
 1. 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。若要检索当前已经过身份验证的订阅的租户 ID，请使用：
 
-    ```
+    ```azurecli
     azure account show
     ```
 
     将返回：
 
-    ```
+    ```azurecli
     info:    Executing command account show
     data:    Name                        : Microsoft Azure MSDN - Visual Studio Ultimate
     data:    ID                          : {guid}
@@ -284,7 +284,7 @@ ms.author: tomfitz
 
     如果需要获取另一个订阅的租户 ID，请使用以下命令：
 
-    ```
+    ```azurecli
     azure account show -s {subscription-id}
     ```
 
@@ -302,13 +302,13 @@ ms.author: tomfitz
 
 3. 如果需要检索用于登录的客户端 ID，请使用以下命令：
 
-    ```
+    ```azurecli
     azure ad sp show -c exampleapp
     ```
 
     用于登录的值是服务主体名称中列出的 GUID。
 
-    ```
+    ```azurecli
     [
       {
         "objectId": "7dbc8265-51ed-4038-8e13-31948c7f4ce7",
@@ -325,7 +325,7 @@ ms.author: tomfitz
 
 4. 以服务主体方式登录。
 
-    ```
+    ```azurecli
     azure login -e AzureChinaCloud --service-principal --tenant {tenant-id} -u 4fd39843-c338-417d-b549-a545f584a745 --certificate-file C:\certificates\examplecert.pem --thumbprint {thumbprint}
     ```
 
@@ -337,13 +337,13 @@ ms.author: tomfitz
 
 若要更改密码，请使用：
 
-```
+```azurecli
 azure ad app set --applicationId 4fd39843-c338-417d-b549-a545f584a745 --password p@ssword
 ```
 
 若要更改证书值，请使用：
 
-```
+```azurecli
 azure ad app set --applicationId 4fd39843-c338-417d-b549-a545f584a745 --cert-value {certificate data}
 ```
 

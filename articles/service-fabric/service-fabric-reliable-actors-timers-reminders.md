@@ -26,7 +26,7 @@ ms.author: vturecek
 
 执行组件可以对其基类使用 `RegisterTimer` 和 `UnregisterTimer` 方法以注册和注销其计时器。下面的示例演示了如何使用计时器 API。这些 API 非常类似于 .NET 计时器。在本示例中，计时器运行结束时，执行组件运行时会调用 `MoveObject` 方法。可保证该方法遵循基于轮次的并发。这意味着，任何其他执行组件方法或计时器/提醒回调将一直进行，直到此回调完成执行为止。
 
-```
+```csharp
 class VisualObjectActor : Actor, IVisualObject
 {
     private IActorTimer _updateTimer;
@@ -77,7 +77,7 @@ class VisualObjectActor : Actor, IVisualObject
 
 为了注册提醒，执行组件会调用基类上提供的 `RegisterReminderAsync` 方法，如以下示例中所示：
 
-```
+```csharp
 protected override async Task OnActivateAsync()
 {
     string reminderName = "Pay cell phone bill";
@@ -95,7 +95,7 @@ protected override async Task OnActivateAsync()
 
 使用提醒的执行组件必须实现 `IRemindable` 接口，如以下示例中所示。
 
-```
+```csharp
 public class ToDoListActor : Actor, IToDoListActor, IRemindable
 {
     public ToDoListActor(ActorService actorService, ActorId actorId)
@@ -120,7 +120,7 @@ public class ToDoListActor : Actor, IToDoListActor, IRemindable
 
 为了注销提醒，执行组件会调用 `UnregisterReminderAsync` 方法，如以下示例中所示。
 
-```
+```csharp
 IActorReminder reminder = GetReminder("Pay cell phone bill");
 Task reminderUnregistration = UnregisterReminderAsync(reminder);
 ```

@@ -44,14 +44,14 @@ Service Fabric 的群集资源管理器通常通过将负载（通过指标表�
 
 Powershell
 
-```
+``` posh
 New-ServiceFabricApplication -ApplicationName fabric:/AppName -ApplicationTypeName AppType1 -ApplicationTypeVersion 1.0.0.0 -MaximumNodes 3
 Update-ServiceFabricApplication –Name fabric:/AppName –MaximumNodes 5
 ```
 
 C#
 
-```
+``` csharp
 ApplicationDescription ad = new ApplicationDescription();
 ad.ApplicationName = new Uri("fabric:/AppName");
 ad.ApplicationTypeName = "AppType1";
@@ -102,7 +102,7 @@ adUpdate.Metrics.Add(appMetric);
 
 例如，可以使用以下 PowerShell cmdlet 检索负载：
 
-```
+``` posh
 Get-ServiceFabricApplicationLoad –ApplicationName fabric:/MyApplication1
 ```
 
@@ -115,7 +115,7 @@ Get-ServiceFabricApplicationLoad –ApplicationName fabric:/MyApplication1
 ## 删除应用程序容量
 为应用程序设置应用程序容量参数后，可以使用更新应用程序 API 或 PowerShell cmdlet 来删除这些参数。例如：
 
-```
+``` posh
 Update-ServiceFabricApplication –Name fabric:/MyApplication1 –RemoveApplicationCapacity
 ```
 

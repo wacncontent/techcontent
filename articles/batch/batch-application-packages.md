@@ -184,7 +184,7 @@ Batch 服务在应用程序包的存储和检索操作中使用关联的存储�
 
 csharp
 
-```
+```csharp
 // Create the unbound CloudPool
 CloudPool myCloudPool =
     batchClient.PoolOperations.CreatePool(
@@ -216,7 +216,7 @@ await myCloudPool.CommitAsync();
 
 csharp
 
-```
+```csharp
 CloudTask task =
     new CloudTask(
         "litwaretask001",
@@ -249,7 +249,7 @@ task.ApplicationPackageReferences = new List<ApplicationPackageReference>
 
 csharp
 
-```
+```csharp
 string taskId = "blendertask01";
 string commandLine =
     @"cmd /c %AZ_BATCH_APP_PACKAGE_BLENDER%\blender.exe -args -here";
@@ -270,7 +270,7 @@ CloudTask blenderTask = new CloudTask(taskId, commandLine);
 
 csharp
 
-```
+```csharp
 string newVersion = "2.76b";
 CloudPool boundPool = await batchClient.PoolOperations.GetPoolAsync("myPool");
 boundPool.ApplicationPackageReferences = new List<ApplicationPackageReference>
@@ -289,7 +289,7 @@ await boundPool.CommitAsync();
 
 csharp
 
-```
+```csharp
 // List the applications and their application packages in the Batch account.
 List<ApplicationSummary> applications = await batchClient.ApplicationOperations.ListApplicationSummaries().ToListAsync();
 foreach (ApplicationSummary app in applications)

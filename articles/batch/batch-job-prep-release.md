@@ -75,7 +75,7 @@ Batch 作业通常需要一组通用的数据作为作业任务的输入。例�
 
 csharp
 
-```
+```csharp
 // Create the CloudJob for CloudPool "myPool"
 CloudJob myJob =
     myBatchClient.JobOperations.CreateJob(
@@ -103,7 +103,7 @@ await myJob.CommitAsync();
 
 csharp
 
-```
+```csharp
 // Terminate the job to mark it as Completed; this will initiate the
 // Job Release Task on any node that executed job tasks. Note that the
 // Job Release Task is also executed when a job is deleted, thus you

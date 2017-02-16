@@ -66,7 +66,7 @@ ms.author: dastrock
 
     js
 
-    ```
+    ```js
     ...
     <script src="App/Scripts/adal.js"></script>
     <script src="App/Scripts/adal-angular.js"></script>
@@ -84,7 +84,7 @@ Adal.js 能够与 AngularJS 路由和 http 提供程序集成，使你可以在 
 
     js
 
-    ```
+    ```js
     angular.module('todoApp', ['ngRoute','AdalAngular'])
     .config(['$routeProvider','$httpProvider', 'adalAuthenticationServiceProvider',
      function ($routeProvider, $httpProvider, adalProvider) {
@@ -95,7 +95,7 @@ Adal.js 能够与 AngularJS 路由和 http 提供程序集成，使你可以在 
 
     js
 
-    ```
+    ```js
     adalProvider.init(
       {
           instance: 'https://login.microsoftonline.com/',
@@ -112,7 +112,7 @@ Adal.js 能够与 AngularJS 路由和 http 提供程序集成，使你可以在 
 
     js
 
-    ```
+    ```js
     ...
     }).when("/TodoList", {
             controller: "todoListCtrl",
@@ -127,7 +127,7 @@ Adal.js 能够与 AngularJS 路由和 http 提供程序集成，使你可以在 
 
     js
 
-    ```
+    ```js
     ...
     $scope.login = function () {
         adalService.login();
@@ -142,7 +142,7 @@ Adal.js 能够与 AngularJS 路由和 http 提供程序集成，使你可以在 
 
     js
 
-    ```
+    ```js
     <p>{{userInfo.userName}}</p>
     <p>aud:{{userInfo.profile.aud}}</p>
     <p>iss:{{userInfo.profile.iss}}</p>
@@ -153,7 +153,7 @@ Adal.js 能够与 AngularJS 路由和 http 提供程序集成，使你可以在 
 
     js
 
-    ```
+    ```js
     <li><a class="btn btn-link" ng-show="userInfo.isAuthenticated" ng-click="logout()">Logout</a></li>
     <li><a class="btn btn-link" ng-hide=" userInfo.isAuthenticated" ng-click="login()">Login</a></li>
     ```

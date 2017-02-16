@@ -43,14 +43,14 @@ ms.author: lodipalm;barbkess;sonyama
 ## 使用 Visual Studio 创建数据库
 若不熟悉 Visual Studio，请参阅 [Query Azure SQL Data Warehouse (Visual Studio)][Query Azure SQL Data Warehouse (Visual Studio)]（查询 Azure SQL 数据仓库 (Visual Studio)）一文。若要开始操作，请在 Visual Studio 中打开 SQL Server 对象资源管理器，并连接到要托管 SQL 数据仓库数据库的服务器。连接后，可针对 **master** 数据库运行以下 SQL 命令来创建 SQL 数据仓库。此命令创建服务目标为 DW400 的数据库 MySqlDwDb，并允许此数据库增长到大小上限 10 TB。
 
-```
+```sql
 CREATE DATABASE MySqlDwDb COLLATE SQL_Latin1_General_CP1_CI_AS (EDITION='datawarehouse', SERVICE_OBJECTIVE = 'DW400', MAXSIZE= 10240 GB);
 ```
 
 ## 使用 sqlcmd 创建数据库
 也可以在命令提示符处运行以下命令，以使用 sqlcmd 运行相同的命令。
 
-```
+```sql
 sqlcmd -S <Server Name>.database.chinacloudapi.cn -I -U <User> -P <Password> -Q "CREATE DATABASE MySqlDwDb COLLATE SQL_Latin1_General_CP1_CI_AS(EDITION='datawarehouse', SERVICE_OBJECTIVE = 'DW400', MAXSIZE= 10240 GB)"
 ```
 

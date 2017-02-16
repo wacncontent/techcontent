@@ -49,7 +49,7 @@ ms.author: mcoskun
 
 若要注册事务通知和/或状态管理器通知，需要在可靠状态管理器上注册 **TransactionChanged** 或 **StateManagerChanged** 事件。注册这些事件处理程序的常见位置是有状态服务的构造函数。如果在构造函数上注册，也不会错过 **IReliableStateManager** 生存期内的更改导致的任何通知。
 
-```
+```C#
 public MyService(StatefulServiceContext context)
         : base(MyService.EndpointName, context, CreateReliableStateManager(context))
 {
@@ -65,7 +65,7 @@ public MyService(StatefulServiceContext context)
 
 以下是 **TransactionChanged** 事件处理程序示例。
 
-```
+```C#
 private void OnTransactionChangedHandler(object sender, NotifyTransactionChangedEventArgs e)
 {
         if (e.Action == NotifyTransactionChangedAction.Commit)
@@ -85,7 +85,7 @@ private void OnTransactionChangedHandler(object sender, NotifyTransactionChanged
 
 以下是 **StateManagerChanged** 通知处理程序示例。
 
-```
+```C#
 public void OnStateManagerChangedHandler(object sender, NotifyStateManagerChangedEventArgs e)
 {
         if (e.Action == NotifyStateManagerChangedAction.Rebuild)
@@ -110,7 +110,7 @@ public void OnStateManagerChangedHandler(object sender, NotifyStateManagerChange
 
 若要获取可靠字典通知，需要在 **IReliableDictionary** 上注册 **DictionaryChanged** 事件处理程序。通常在 **ReliableStateManager.StateManagerChanged** 添加通知中注册这些事件处理程序。在将 **IReliableDictionary** 添加到 **IReliableStateManager** 时注册，可确保不会错过任何通知。
 
-```
+```C#
 private void ProcessStateManagerSingleEntityNotification(NotifyStateManagerChangedEventArgs e)
 {
         var operation = e as NotifyStateManagerSingleEntityChangedEventArgs;
@@ -133,7 +133,7 @@ private void ProcessStateManagerSingleEntityNotification(NotifyStateManagerChang
 
 上述代码会设置 **IReliableNotificationAsyncCallback** 接口以及 **DictionaryChanged**。**NotifyDictionaryRebuildEventArgs** 包含需要以异步方式枚举的 **IAsyncEnumerable** 接口，因此，会通过 **RebuildNotificationAsyncCallback**（而不是 **OnDictionaryChangedHandler**）来触发重新生成通知。
 
-```
+```C#
 public async Task OnDictionaryRebuildNotificationHandlerAsync(
         IReliableDictionary<TKey, TValue> origin,
         NotifyDictionaryRebuildEventArgs<TKey, TValue> rebuildNotification)
@@ -159,7 +159,7 @@ public async Task OnDictionaryRebuildNotificationHandlerAsync(
 - **NotifyDictionaryChangedAction.Update**：**NotifyDictionaryItemUpdatedEventArgs**
 - **NotifyDictionaryChangedAction.Remove**：**NotifyDictionaryItemRemovedEventArgs**
 
-    ```
+    ```C#
     public void OnDictionaryChangedHandler(object sender, NotifyDictionaryChangedEventArgs<TKey, TValue> e)
     {
             switch (e.Action)

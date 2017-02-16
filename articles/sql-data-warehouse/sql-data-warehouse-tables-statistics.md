@@ -63,7 +63,7 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
 > [!NOTE]
 > 请记住，如果给定列的值分布有重大变化，则应该更新统计信息，不管上次更新时间为何。
 
-```
+```sql
 SELECT
     sm.[name] AS [schema_name],
     tb.[name] AS [table_name],
@@ -121,13 +121,13 @@ WHERE
 
 此语法使用所有默认选项。默认情况下，SQL 数据仓库在创建统计信息时对 20% 的表采样。
 
-```
+```sql
 CREATE STATISTICS [statistics_name] ON [schema_name].[table_name]([column_name]);
 ```
 
 例如：
 
-```
+```sql
 CREATE STATISTICS col1_stats ON dbo.table1 (col1);
 ```
 
@@ -137,13 +137,13 @@ CREATE STATISTICS col1_stats ON dbo.table1 (col1);
 
 若要采样整个表，请使用此语法：
 
-```
+```sql
 CREATE STATISTICS [statistics_name] ON [schema_name].[table_name]([column_name]) WITH FULLSCAN;
 ```
 
 例如：
 
-```
+```sql
 CREATE STATISTICS col1_stats ON dbo.table1 (col1) WITH FULLSCAN;
 ```
 
@@ -151,7 +151,7 @@ CREATE STATISTICS col1_stats ON dbo.table1 (col1) WITH FULLSCAN;
 
 或者，你可以以百分比指定样本大小：
 
-```
+```sql
 CREATE STATISTICS col1_stats ON dbo.table1 (col1) WITH SAMPLE = 50 PERCENT;
 ```
 
@@ -163,7 +163,7 @@ CREATE STATISTICS col1_stats ON dbo.table1 (col1) WITH SAMPLE = 50 PERCENT;
 
 此示例将会基于一系列的值创建统计信息。可以轻松定义这些值以匹配分区中的值范围。
 
-```
+```sql
 CREATE STATISTICS stats_col1 ON table1(col1) WHERE col1 > '2000101' AND col1 < '20001231';
 ```
 
@@ -174,7 +174,7 @@ CREATE STATISTICS stats_col1 ON table1(col1) WHERE col1 > '2000101' AND col1 < '
 
 当然，你可以将选项组合在一起。以下示例使用自定义样本大小创建筛选的统计信息对象：
 
-```
+```sql
 CREATE STATISTICS stats_col1 ON table1 (col1) WHERE col1 > '2000101' AND col1 < '20001231' WITH SAMPLE = 50 PERCENT;
 ```
 
@@ -189,7 +189,7 @@ CREATE STATISTICS stats_col1 ON table1 (col1) WHERE col1 > '2000101' AND col1 < 
 
 在此示例中，直方图位于 *product\_category*。跨列统计信息是根据 *product\_category* 和 *product\_sub\_category* 计算的：
 
-```
+```sql
 CREATE STATISTICS stats_2cols ON table1 (product_category, product_sub_category) WHERE product_category > '2000101' AND product_category < '20001231' WITH SAMPLE = 50 PERCENT;
 ```
 
@@ -199,7 +199,7 @@ CREATE STATISTICS stats_2cols ON table1 (product_category, product_sub_category)
 
 创建统计信息的方法之一是在创建表后发出 CREATE STATISTICS 命令。
 
-```
+```sql
 CREATE TABLE dbo.table1
 (
 col1 int
@@ -223,7 +223,7 @@ SQL 数据仓库不提供相当于 SQL Server 中 [sp\_create\_stats][] 的系�
 
 这可以帮助你开始进行数据库设计。你可以根据需要任意改写此存储过程。
 
-```
+```sql
 CREATE PROCEDURE    [dbo].[prc_sqldw_create_stats]
 (   @create_type    tinyint -- 1 default 2 Fullscan 3 Sample
 ,   @sample_pct     tinyint
@@ -306,7 +306,7 @@ DROP TABLE #stats_ddl;
 
 若要使用此过程对表中的所有列创建统计信息，只需调用该过程即可。
 
-```
+```sql
 prc_sqldw_create_stats;
 ```
 
@@ -320,13 +320,13 @@ prc_sqldw_create_stats;
 ### A.更新一个特定的统计信息对象 ###
 使用以下语法来更新特定的统计信息对象：
 
-```
+```sql
 UPDATE STATISTICS [schema_name].[table_name]([stat_name]);
 ```
 
 例如：
 
-```
+```sql
 UPDATE STATISTICS [dbo].[table1] ([stats_col1]);
 ```
 
@@ -335,13 +335,13 @@ UPDATE STATISTICS [dbo].[table1] ([stats_col1]);
 ### B.更新表中的所有统计信息 ###
 此示例演示了更新表中所有统计信息对象的一个简单方法。
 
-```
+```sql
 UPDATE STATISTICS [schema_name].[table_name];
 ```
 
 例如：
 
-```
+```sql
 UPDATE STATISTICS dbo.table1;
 ```
 
@@ -382,7 +382,7 @@ UPDATE STATISTICS dbo.table1;
 
 此视图将统计信息相关的列以及 [STATS\_DATE()][] 函数的结果合并在一起。
 
-```
+```sql
 CREATE VIEW dbo.vstats_columns
 AS
 SELECT
@@ -432,13 +432,13 @@ DBCC SHOW\_STATISTICS() 显示统计信息对象中保存的数据。这些数�
 
 此简单示例显示了统计信息对象的所有三个组成部分。
 
-```
+```sql
 DBCC SHOW_STATISTICS([<schema_name>.<table_name>],<stats_name>)
 ```
 
 例如：
 
-```
+```sql
 DBCC SHOW_STATISTICS (dbo.table1, stats_col1);
 ```
 
@@ -446,13 +446,13 @@ DBCC SHOW_STATISTICS (dbo.table1, stats_col1);
 
 如果你只想要查看特定部分，请使用 `WITH` 子句并指定要查看哪些部分：
 
-```
+```sql
 DBCC SHOW_STATISTICS([<schema_name>.<table_name>],<stats_name>) WITH stat_header, histogram, density_vector
 ```
 
 例如：
 
-```
+```sql
 DBCC SHOW_STATISTICS (dbo.table1, stats_col1) WITH histogram, density_vector
 ```
 

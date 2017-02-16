@@ -42,7 +42,7 @@ ms.author: carlrab
 
 若要创建表，请打开命令提示符并使用 sqlcmd.exe 运行以下命令：
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "
     CREATE TABLE DimDate2
     (
@@ -75,20 +75,20 @@ sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q
 
 （可选）若要从 SQL Server 数据库导出自己的数据，请打开命令提示符并运行以下命令。将 TableName、ServerName、DatabaseName、Username 和 Password 替换为你自己的信息。
 
-```
+```sql
 bcp <TableName> out C:\Temp\DimDate2_export.txt -S <ServerName> -d <DatabaseName> -U <Username> -P <Password> -q -c -t ','
 ```
 
 ## 3\.加载数据
 若要加载数据，请打开命令提示符并运行以下命令，请注意将 Server Name、Database Name、Username 和 Password 替换为你自己的信息。
 
-```
+```sql
 bcp DimDate2 in C:\Temp\DimDate2.txt -S <ServerName> -d <DatabaseName> -U <Username> -P <password> -q -c -t  ','
 ```
 
 使用此命令来验证是否已正确加载数据
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "SELECT * FROM DimDate2 ORDER BY 1;"
 ```
 

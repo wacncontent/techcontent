@@ -22,6 +22,8 @@ ms.author: larryfr
 
 Apache Storm 支持多种语言，甚至可将多种语言的组件合并成一个拓扑。在本文档中，将学习如何在 HDInsight 上基于 Java 和 Clojure 的 Storm 拓扑中使用 Python 组件。
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 > [!IMPORTANT]
 本文档提供了使用基于 Windows 和基于 Linux 的 HDInsight 群集的步骤。Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
@@ -70,7 +72,7 @@ Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java 
 
 在此示例中，实际 Python 文件存储在 `/multilang/resources` 目录中。`/multilang` 目录在 **pom.xml** 中引用：
 
-```xml
+```
 <resources>
     <resource>
         <!-- Where the Python bits are kept -->

@@ -171,7 +171,7 @@ Spark SQL 允许你使用 Spark 运行以结构化查询语言 (SQL)、HiveQL �
 
 1. 打开文本编辑器，并粘贴以下代码：
 
-    ```java
+    ```
     /* SimpleApp.scala */
     import org.apache.spark.SparkContext
     import org.apache.spark.SparkContext._
@@ -198,7 +198,7 @@ Spark SQL 允许你使用 Spark 运行以结构化查询语言 (SQL)、HiveQL �
 1. 从 http://www.scala-sbt.org/0.13/tutorial/Installing-sbt-on-Windows.html 安装 sbt。
 2. 创建名为 **SimpleScalaApp** 的文件夹，并在此文件夹中创建名为 **simple.sbt** 的文件。这是包含有关 Scala 版本和库依赖项等内容的信息的配置文件。将以下内容粘贴到 simple.sbt 文件中并保存它：
 
-    ```java
+    ```
     name := "SimpleApp"
 
     version := "1.0"
@@ -270,7 +270,7 @@ Spark SQL 允许你使用 Spark 运行以结构化查询语言 (SQL)、HiveQL �
 
 3. 使用 **Add-AzureHDInsightScriptAction** cmdlet 将脚本操作添加到群集配置。稍后，在创建群集时，将执行脚本操作。
 
-    ```
+    ```powershell
     # Add a script action to the cluster configuration
     $config = Add-AzureHDInsightScriptAction -Config $config -Name "Install Spark" -ClusterRoleCollection HeadNode -Uri https://hdiconfigactions.blob.core.windows.net/sparkconfigactionv03/spark-installer-v03.ps1
     ```
@@ -301,7 +301,7 @@ Spark SQL 允许你使用 Spark 运行以结构化查询语言 (SQL)、HiveQL �
 
 4. 最后，开始设置安装有 Spark 的自定义群集。
 
-    ```
+    ```powershell
     # Start provisioning a cluster with Spark installed
     New-AzureHDInsightCluster -Config $config -Name $clusterName -Location $location -Version $version 
     ```
@@ -364,7 +364,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
 
 8. 将下列 using 语句添加到文件顶部：
 
-    ```csharp
+    ```
     using System.Security.Cryptography.X509Certificates;
     using Microsoft.WindowsAzure.Management.HDInsight;
     using Microsoft.WindowsAzure.Management.HDInsight.ClusterProvisioning;
@@ -373,7 +373,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
 
 9. 在 Main() 函数中，复制并粘贴以下代码，然后提供变量值：
 
-    ```csharp
+    ```
     var clusterName = args[0];
 
     // Provide values for the variables
@@ -413,7 +413,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
 
 10. 将以下代码追加到 Main() 函数，以使用 [ScriptAction](http://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.management.hdinsight.clusterprovisioning.data.scriptaction.aspx) 类通过调用自定义脚本来安装 Spark。
 
-    ```csharp
+    ```
     // Add the script action to install Spark
     clusterInfo.ConfigActions.Add(new ScriptAction(
       "Install Spark", // Name of the config action

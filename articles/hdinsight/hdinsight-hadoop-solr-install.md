@@ -91,7 +91,7 @@ wacn.date: 02/06/2017
 
     输出返回两个我们用于为 Solr 编制索引的文档。输出如下所示：
 
-    ```json
+    ```
         "response": {
             "numFound": 2,
             "start": 0,
@@ -155,7 +155,7 @@ wacn.date: 02/06/2017
 
         你应该看到如下所示的响应：
 
-        ```xml
+        ```
         <?xml version="1.0" encoding="UTF-8"?>
         <response>
           <lst name="responseHeader">

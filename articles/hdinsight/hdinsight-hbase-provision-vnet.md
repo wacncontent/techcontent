@@ -42,8 +42,8 @@ ms.author: jgao
 > [!NOTE]
 某些属性已在模板中硬编码。例如：
 ><p>
-><p> * **位置**：中国东部 2
-><p> * **群集版本**：3.4
+><p> * **位置**：中国东部
+><p> * **群集版本**：3.5
 ><p> * **群集辅助角色节点计数**：4
 ><p> * **默认存储帐户**：唯一字符串
 ><p> * **虚拟网络名称**：<群集名称>-vnet
@@ -58,6 +58,10 @@ ms.author: jgao
 1. 单击下面的图像可在 Azure 门户预览中打开模板。模板位于 [Azure 快速入门模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-hbase-linux-vnet/)中。
 
     <a href="https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-hdinsight-hbase-linux-vnet%2Fazuredeploy.json" target="_blank"><img src="./media/hdinsight-hbase-provision-vnet/deploy-to-azure.png" alt="Deploy to Azure"></a>
+
+    >[!NOTE]
+    > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；把允许的地域改成“China North”和“China East”；把 HDInsight Linux 版本改为 Azure 中国所支持的 3.5。
+
 2. 在“自定义部署”边栏选项卡中输入以下项：
 
     * **订阅**：选择用于创建 HDInsight 群集、从属存储帐户和 Azure 虚拟网络的 Azure 订阅。
@@ -114,7 +118,7 @@ ms.author: jgao
 
         使用以下 Azure PowerShell 脚本注册 **Get-ClusterDetail** 函数，该函数可用于返回 DNS 后缀：
 
-        ```powershell
+        ```
         function Get-ClusterDetail(
             [String]
             [Parameter( Position=0, Mandatory=$true )]
@@ -238,7 +242,7 @@ ms.author: jgao
 
 要在 Java 应用程序中使用此信息，可以按照[使用 Maven 构建将 HBase 与 HDInsight (Hadoop) 配合使用的 Java 应用程序](./hdinsight-hbase-build-java-maven.md)中的步骤来创建应用程序。要让应用程序连接到远程 HBase 服务器，请修改本示例中的 **hbase-site.xml** 文件，以对 Zookeeper 使用 FQDN。例如：
 
-```xml
+```
 <property>
     <name>hbase.zookeeper.quorum</name>
     <value>zookeeper0.<dns suffix>,zookeeper1.<dns suffix>,zookeeper2.<dns suffix></value>

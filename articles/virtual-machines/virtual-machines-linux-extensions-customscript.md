@@ -39,7 +39,7 @@ ms.author: nepeters
 - **fileUris**：（可选，字符串数组）要下载的文件的 URL。
 - **timestamp**：（可选，整数）仅当通过更改此字段的值来触发脚本的重新运行时，才需使用此字段。
 
-    ```
+    ```json
     {
       "fileUris": ["<url>"],
       "commandToExecute": "<command-to-execute>"
@@ -54,7 +54,7 @@ ms.author: nepeters
 - **storageAccountName**：（可选，字符串）存储帐户的名称。如果指定存储凭据，所有 fileUri 必须是 Azure Blob 的 URL。
 - **storageAccountKey**：（可选，字符串）存储帐户的访问密钥。
 
-    ```
+    ```json
     {
       "commandToExecute": "<command-to-execute>",
       "storageAccountName": "<storage-account-name>",
@@ -66,14 +66,14 @@ ms.author: nepeters
 
 使用 Azure CLI 来运行自定义脚本扩展时，请创建一个或多个至少包含文件 URI 和脚本执行命令的配置文件。
 
-```
+```azurecli
 azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
   --auto-upgrade-minor-version --public-config-path /script-config.json
 ```
 
 （可选）可以使用 `--public-config` 和 `--private-config` 选项来运行命令，这样，便可以在执行期间指定配置，而无需使用单独的配置文件。
 
-```
+```azurecli
 azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
   --auto-upgrade-minor-version \
   --public-config '{"fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],"commandToExecute": "./hello.sh"}'
@@ -83,7 +83,7 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 **示例 1** - 包含脚本文件的公共配置。
 
-```
+```json
 {
   "fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],
   "commandToExecute": "./hello.sh"
@@ -92,14 +92,14 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 Azure CLI 命令：
 
-```
+```azurecli
 azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
   --auto-upgrade-minor-version --public-config-path /public.json
 ```
 
 **示例 2** - 不包含脚本文件的公共配置。
 
-```
+```json
 {
   "commandToExecute": "apt-get -y update && apt-get install -y apache2"
 }
@@ -107,7 +107,7 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 Azure CLI 命令：
 
-```
+```azurecli
 azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
   --auto-upgrade-minor-version --public-config-path /public.json
 ```
@@ -116,7 +116,7 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 公共配置文件：
 
-```
+```json
 {
   "fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],
 }
@@ -124,7 +124,7 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 受保护的配置文件：
 
-```
+```json
 {
   "commandToExecute": "./hello.sh <password>"
 }
@@ -132,7 +132,7 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 Azure CLI 命令：
 
-```
+```azurecli
 azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
   --auto-upgrade-minor-version --public-config-path ./public.json --private-config-path ./protected.json
 ```
@@ -145,7 +145,7 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 **示例 1** - 公共配置。
 
-```
+```json
 {
     "name": "scriptextensiondemo",
     "type": "extensions",
@@ -174,7 +174,7 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 **示例 2** - 受保护配置中的执行命令。
 
-```
+```json
 {
   "name": "config-app",
   "type": "extensions",
@@ -209,25 +209,25 @@ azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensi
 
 运行自定义脚本扩展时，将会创建脚本，或将脚本下载到类似于以下示例的目录。命令输出也会保存到此目录中的 `stdout` 和 `stderr` 文件中。
 
-```
+```bash
 /var/lib/waagent/custom-script/download/0/
 ```
 
 Azure 脚本扩展生成一个日志，位置如下。
 
-```
+```bash
 /var/log/azure/customscript/handler.log
 ```
 
 也可以使用 Azure CLI 来检索自定义脚本扩展的执行状态。
 
-```
+```azurecli
 azure vm extension get myResourceGroup myVM
 ```
 
 输出类似于以下文本：
 
-```
+```azurecli
 info:    Executing command vm extension get
 + Looking up the VM "scripttst001"
 data:    Publisher                   Name                                      Version  State

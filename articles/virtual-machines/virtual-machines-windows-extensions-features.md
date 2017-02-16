@@ -51,7 +51,7 @@ Azure VM 代理可管理 Azure 虚拟机与 Azure 结构控制器之间的交互
 ## 发现 VM 扩展
 有许多不同的 VM 扩展可与 Azure 虚拟机配合使用。若要查看完整列表，请使用 Azure Resource Manager PowerShell 模块运行以下命令。运行此命令时请确保指定所需的位置。
 
-```
+```powershell
 Get-AzureRmVmImagePublisher -Location ChinaNorth | `
 Get-AzureRmVMExtensionImageType | ` 
 Get-AzureRmVMExtensionImage | Select Type, Version
@@ -67,13 +67,13 @@ Azure 虚拟机扩展可以在现有虚拟机上运行，当需要在已部署�
 
 存在多个用于运行单个扩展的 PowerShell 命令。若要查看列表，请运行以下 PowerShell 命令：
 
-```
+```powershell
 get-command Set-AzureRM*Extension* -Module AzureRM.Compute
 ```
 
 这提供类似如下的输出：
 
-```
+```powershell
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
 Cmdlet          Set-AzureRmVMAccessExtension                       2.2.0      AzureRM.Compute
@@ -92,7 +92,7 @@ Cmdlet          Set-AzureRmVMSqlServerExtension                    2.2.0      Az
 
 以下示例使用自定义脚本扩展从 GitHub 存储库将脚本下载到目标虚拟机上，然后运行该脚本。有关 VM 访问扩展的详细信息，请参阅[自定义脚本扩展概述](./virtual-machines-windows-extensions-customscript.md)。
 
-```
+```powershell
 Set-AzureRmVMCustomScriptExtension -ResourceGroupName "myResourceGroup" `
     -VMName "myVM" -Name "myCustomScript" `
     -FileUri "https://raw.githubusercontent.com/neilpeterson/nepeters-azure-templates/master/windows-custom-script-simple/support-scripts/Create-File.ps1" `
@@ -101,7 +101,7 @@ Set-AzureRmVMCustomScriptExtension -ResourceGroupName "myResourceGroup" `
 
 在此示例中，VM 访问扩展用于重置 Windows 虚拟机的管理密码。有关 VM 访问扩展的详细信息，请参阅[重置 Windows VM 中的远程桌面服务](./virtual-machines-windows-reset-rdp.md)。
 
-```
+```powershell
 $cred=Get-Credential
 
 Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" -VMName "myVM" -Name "myVMAccess" `
@@ -128,7 +128,7 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 >[!NOTE]
 > 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```
+```json
 {
     "apiVersion": "2015-06-15",
     "type": "extensions",
@@ -166,7 +166,7 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 以下示例演示了适用于 Windows 的自定义脚本扩展的实例。请注意，要执行的命令包含一组凭据。在此示例中，不会加密要执行的命令。
 
-```
+```json
 {
     "apiVersion": "2015-06-15",
     "type": "extensions",
@@ -196,7 +196,7 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 将“要执行的命令”属性移到受保护配置可保护执行字符串。
 
-```
+```json
 {
     "apiVersion": "2015-06-15",
     "type": "extensions",
@@ -236,13 +236,13 @@ VM 扩展可添加到 Azure Resource Manager 模板，并在部署模板的过�
 
 针对虚拟机运行虚拟机扩展后，使用以下 PowerShell 命令返回扩展状态。请将示例参数名称替换为你自己的值。`Name` 参数采用执行时提供给扩展的名称。
 
-```
+```PowerShell
 Get-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
 ```
 
 输出与下面类似：
 
-```
+```json
 ResourceGroupName       : myResourceGroup
 VMName                  : myVM
 Name                    : myExtensionName
@@ -267,7 +267,7 @@ ForceUpdateTag          :
 
 在某些情况下，可能需要重新运行虚拟机扩展。这可以通过删除扩展，然后使用所选执行方法重新运行扩展来实现。若要删除扩展，请使用 Azure PowerShell 模块运行以下命令。请将示例参数名称替换为你自己的值。
 
-```
+```PowerShell
 Remove-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
 ```
 

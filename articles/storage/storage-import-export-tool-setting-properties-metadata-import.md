@@ -32,7 +32,7 @@ ms.author: renash
 
 若要指定 Blob 属性，请创建一个本地文本文件，同时包含将属性名称指定为元素、将属性值指定为值的 XML。以下示例演示如何指定一些属性值：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Properties>
     <Content-Type>application/octet-stream</Content-Type>
@@ -47,7 +47,7 @@ ms.author: renash
 
 同样，若要指定 Blob 元数据，请创建一个本地文本文件，用于将元数据名称指定为元素、将元数据值指定为值。以下示例演示如何指定一些元数据值：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Metadata>
     <UploadMethod>Microsoft Azure Import/Export Service</UploadMethod>

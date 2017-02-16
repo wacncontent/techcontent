@@ -40,7 +40,7 @@ ms.author: xshi
 ## 将示例应用程序连接到 IoT 中心
 1. 确保位于存储库文件夹 `iot-hub-c-edison-getting-started` 中。通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
     cd Lesson4
     code .
     ```
@@ -51,7 +51,7 @@ ms.author: xshi
 
 2. 运行以下命令初始化配置文件：
 
-    ```
+    ```bash
     npm install
     gulp init
     ```
@@ -70,7 +70,7 @@ ms.author: xshi
 ## 部署并运行示例应用程序
 运行以下命令，在 Edison 上部署并运行示例应用程序：
 
-```
+```bash
 gulp deploy && gulp run
 ```
 

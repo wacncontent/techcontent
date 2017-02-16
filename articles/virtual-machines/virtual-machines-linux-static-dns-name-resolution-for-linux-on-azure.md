@@ -38,7 +38,7 @@ ms.author: v-livech
 
 `-r` cli 标志用于设置 DNS 标签，该标签为 VNic 提供静态 DNS 名称。
 
-```
+```azurecli
 azure network nic create jenkinsVNic \
 -g myResourceGroup \
 -l chinanorth \
@@ -51,7 +51,7 @@ azure network nic create jenkinsVNic \
 
 在部署到 Azure 期间，`-N` 将 VNic 连接到新 VM。
 
-```
+```azurecli
 azure vm create jenkins \
 -g myResourceGroup \
 -l chinanorth \
@@ -77,7 +77,7 @@ _将任何示例替换为你自己的命名_。
 
 需要使用资源组来组织在本演练中创建的所有内容。有关 Azure 资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)
 
-```
+```azurecli
 azure group create myResourceGroup \
 --location chinanorth
 ```
@@ -86,7 +86,7 @@ azure group create myResourceGroup \
 
 第一步是生成用于在其中启动 VM 的 VNet。该 VNet 包含本演练所用的一个子网。有关 Azure VNet 的详细信息，请参阅[使用 Azure CLI 创建虚拟网络](../virtual-network/virtual-networks-create-vnet-arm-cli.md)
 
-```
+```azurecli
 azure network vnet create myVNet \
 --resource-group myResourceGroup \
 --address-prefixes 10.10.0.0/24 \
@@ -97,7 +97,7 @@ azure network vnet create myVNet \
 
 子网在现有网络安全组后面构建，因此我们在构建子网之前先构建 NSG。Azure NSG 相当于网络层防火墙。有关 Azure NSG 的详细信息，请参阅[如何在 Azure CLI 中创建 NSG](../virtual-network/virtual-networks-create-nsg-arm-cli.md)
 
-```
+```azurecli
 azure network nsg create myNSG \
 --resource-group myResourceGroup \
 --location chinanorth
@@ -107,7 +107,7 @@ azure network nsg create myNSG \
 
 Linux VM 需要从 Internet 访问，因此需要允许通过网络将入站端口 22 流量传递到 Linux VM 上的端口 22 的规则。
 
-```
+```azurecli
 azure network nsg rule create inboundSSH \
 --resource-group myResourceGroup \
 --nsg-name myNSG \
@@ -125,7 +125,7 @@ azure network nsg rule create inboundSSH \
 
 VNet 中的 VM 必须位于一个子网中。每个 VNet 可以有多个子网。创建子网并将子网与 NSG 相关联，以便将防火墙添加到子网。
 
-```
+```azurecli
 azure network vnet subnet create mySubNet \
 --resource-group myResourceGroup \
 --vnet-name myVNet \
@@ -139,7 +139,7 @@ azure network vnet subnet create mySubNet \
 
 Azure 非常灵活，但若要使用 DNS 名称进行 VM 名称解析，需要使用 DNS 标签将它们创建为虚拟网卡 (VNic)。VNic 很重要，因为用户可以通过将它们连接到不同的 VM 来重新使用它们，这使 VNic 保持作为静态资源，而 VM 可以是临时 VM。通过在 VNic 上使用 DNS 标签，我们将能够从 VNet 中的其他 VM 启用简单名称解析。使用可解析名称可使其他 VM 能够通过 DNS 名称 `Jenkins` 或作为 `gitrepo` 的Git 服务器访问自动化服务器。创建 VNic 并将其与上一步中创建的子网相关联。
 
-```
+```azurecli
 azure network nic create jenkinsVNic \
 -g myResourceGroup \
 -l chinanorth \
@@ -154,7 +154,7 @@ azure network nic create jenkinsVNic \
 
 使用 Azure CLI 和 `azure vm create` 命令，将 Linux VM 部署到现有的 Azure 资源组、VNet、子网和 VNic 中。有关使用 CLI 部署完整的 VM 的详细信息，请参阅[使用 Azure CLI 创建完整的 Linux 环境](./virtual-machines-linux-create-cli-complete.md)
 
-```
+```azurecli
 azure vm create jenkins \
 --resource-group myResourceGroup myVM \
 --location chinanorth \

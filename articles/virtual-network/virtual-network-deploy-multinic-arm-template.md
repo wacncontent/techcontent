@@ -54,7 +54,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 2. 单击 **azuredeploy.json** 以打开模板文件。
 3. 注意下面列出的 *osType* 参数。此参数用于选择要用于数据库服务器的 VM 映像，以及多个与操作系统相关的设置。
 
-    ```
+    ```json
     "osType": {
       "type": "string",
       "defaultValue": "Windows",
@@ -70,13 +70,13 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 向下滚动到变量列表，并检查下面列出的 **dbVMSetting** 变量的定义。它接收 **dbVMSettings** 变量中包含的数组元素之一。如果熟悉软件开发术语，可将 **dbVMSettings** 变量视为哈希表或字典。
 
-    ```
+    ```json
     "dbVMSetting": "[variables('dbVMSettings')[parameters('osType')]]"
     ```
 
 5. 假设决定在后端部署运行 SQL 的 Windows VM。那么 **osType** 的值将为 *Windows* ，**dbVMSetting** 变量将包含下面列出的元素，它表示 **dbVMSettings** 变量中的第一个值。
 
-    ```
+    ```json
     "Windows": {
       "vmSize": "Standard_DS3",
       "publisher": "MicrosoftSQLServer",
@@ -99,7 +99,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 7. 向下滚动到“资源”，注意第一个元素。它描述存储帐户。此存储帐户将用于维护每个数据库 VM 使用的数据磁盘。在此方案中，每个数据库 VM 将 OS 磁盘存储在常规存储器内，并将两个数据磁盘存储在 SSD（高级）存储器内。
 
-    ```
+    ```json
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Storage/storageAccounts",
@@ -116,7 +116,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 8. 向下滚动到下一项资源，如下所示。此资源表示用于访问每个数据库 VM 中数据库的 NIC。注意此资源中 **copy** 函数的使用。根据 **dbCount** 参数，此模板允许部署所需的任意多个 VM。因此，你需要为数据库访问创建相同数量的 NIC，每个 VM 一个。
 
-    ```
+    ```json
     {
     "apiVersion": "2015-06-15",
     "type": "Microsoft.Network/networkInterfaces",
@@ -148,7 +148,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 9. 向下滚动到下一项资源，如下所示。此资源表示每个数据库 VM 中用于管理的 NIC。同样，需要为每个数据库 VM 创建一个此类 NIC。请注意链接 NSG 的 **networkSecurityGroup** 元素，它仅允许访问连接到此 NIC 的 RDP/SSH。
 
-    ```
+    ```json
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/networkInterfaces",
@@ -183,7 +183,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 10. 向下滚动到下一项资源，如下所示。此资源表示要由所有数据库 VM 共享的可用性集。这样可保证，在维护期间集中始终有一个 VM 在运行。
 
-    ```
+    ```json
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/availabilitySets",
@@ -197,7 +197,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 11. 向下滚动到下一个资源。此资源表示数据库 VM，如下面所列的前几行所示。再次注意 **copy** 函数的使用，确保根据 **dbCount** 参数创建了多个 VM。另请注意 **dependsOn** 集合。它列出了需要在部署 VM 之前创建的两个 NIC，以及可用性集和存储帐户。
 
-    ```
+    ```json
     "apiVersion": "2015-06-15",
     "type": "Microsoft.Compute/virtualMachines",
     "name": "[concat(variables('dbVMSetting').vmName,copyindex(1))]",
@@ -219,7 +219,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 12. 在 VM 资源中向下滚动到 **networkProfile** 元素，如下所示。注意每个 VM 有两个 NIC 作为引用。为一个 VM 创建多个 NIC 时，必须将其一个 NIC 的 **primary** 属性设为 *true* ，并将其余 NIC 的该属性设为 *false* 。
 
-    ```
+    ```json
     "networkProfile": {
       "networkInterfaces": [
         {
@@ -239,7 +239,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 运行 **`New-AzureRmResourceGroup`** cmdlet，使用模板创建资源组。
 
-```
+```powershell
 New-AzureRmResourceGroup -Name IaaSStory-Backend -Location chinanorth `
 -TemplateFile 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.json' `
 -TemplateParameterFile 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.parameters.json'
@@ -276,7 +276,7 @@ ResourceId        : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resource
 1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **`azure config mode`** 命令，切换到 Resource Manager 模式，如下所示。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
@@ -289,7 +289,7 @@ ResourceId        : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resource
 3. 打开[参数文件](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.parameters.json)，选择其内容，然后将其保存到计算机上的文件中。对于本示例，我们将参数文件保存到 *parameters.json*。
 4. 运行 **`azure group deployment create`** cmdlet，使用上面下载并修改的模板和参数文件部署新的 VNet。输出后显示的列表阐释了所用参数。
 
-    ```
+    ```azurecli
     azure group create -n IaaSStory-Backend -l chinanorth --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.json -e parameters.json
     ```
 

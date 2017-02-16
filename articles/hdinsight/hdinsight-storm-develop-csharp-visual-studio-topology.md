@@ -27,6 +27,8 @@ ms.author: larryfr
 
 你还将学习如何创建使用 C# 和 Java 组件的混合拓扑。
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 > [!IMPORTANT]
 虽然本文档中的步骤依赖于带 Visual Studio 的 Windows 开发环境，但是也可将编译的项目提交到基于 Linux 或 Windows 的 HDInsight 群集。__仅在 2016 年 10 月 28 日以后创建的基于 Linux 的群集支持 SCP.NET 拓扑__。
 > <p>
@@ -116,7 +118,7 @@ EventHub 读取器模板随附的基于 Java 的 EventHub Spout 组件不适用�
     * **Fail**（仅限事务拓扑）：处理无法处理拓扑中其他组件的 Tuple。这可提供重新发出以便重新处理元组的机会。
 2. 将 **Spout** 类的内容替换为以下内容。这会创建将句子随机发出到拓扑中的 Spout。
 
-    ```csharp
+    ```
     private Context ctx;
     private Random r = new Random();
     string[] sentences = new string[] {
@@ -190,7 +192,7 @@ EventHub 读取器模板随附的基于 Java 的 EventHub Spout 组件不适用�
 3. 打开 **Splitter.cs**。请注意，默认情况下它只包含一个方法 **Execute**。在 Bolt 收到要处理的元组时将调用此方法。此时，可读取和处理传入元组，以及发出传出元组。
 4. 将 **Splitter** 类的内容替换为以下代码：
 
-    ```csharp
+    ```
     private Context ctx;
 
     // Constructor
@@ -237,7 +239,7 @@ EventHub 读取器模板随附的基于 Java 的 EventHub Spout 组件不适用�
     请花费片刻时间阅读注释，以了解此代码的作用。
 5. 打开 **Counter.cs** 并将类内容替换为以下内容。
 
-    ```csharp
+    ```
     private Context ctx;
 
     // Dictionary for holding words and counts
@@ -302,7 +304,7 @@ Spout 和 Bolt 以图形方式排列，用于定义数据在组件之间的流�
 
 打开 **Program.cs**。重要的方法是 **GetTopologyBuilder**，用于定义提交到 Storm 的拓扑。将 **GetTopologyBuilder** 的内容替换为以下代码，以实现上面所述的拓扑。
 
-```csharp
+```
     // Create a new topology named 'WordCount'
     TopologyBuilder topologyBuilder = new TopologyBuilder("WordCount" + DateTime.Now.ToString("yyyyMMddHHmmss"));
 
@@ -445,7 +447,7 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 下面的代码演示如何检索这些值：
 
-```csharp
+```
 public class MyComponent : ISCPBolt
 {
     // To hold configuration information loaded from context
@@ -469,7 +471,7 @@ public class MyComponent : ISCPBolt
 
 如果使用 `Get` 方法返回组件的一个实例，则必须确保该实例将 `Context` 和 `Dictionary<string, Object>` 参数传递给构造函数。以下示例是一个基本的 `Get` 方法，用于正确传递这些值：
 
-```csharp
+```
 public static MyComponent Get(Context ctx, Dictionary<string, Object> parms)
 {
     return new MyComponent(ctx, parms);
@@ -485,8 +487,8 @@ public static MyComponent Get(Context ctx, Dictionary<string, Object> parms)
 > [!IMPORTANT]
 如果项目是通过未使用 NuGet 进行包更新的旧版 SCP.NET 创建的，则必须执行以下步骤以更新到新版本：
 > <p>
-> 1. 在“解决方案资源管理器”中，右键单击项目，然后选择“管理 NuGet 包”。
-> 2. 使用“搜索”字段搜索 **Microsoft.SCP.Net.SDK**，然后将其添加到项目中。
+><p> 1. 在“解决方案资源管理器”中，右键单击项目，然后选择“管理 NuGet 包”。
+><p> 2. 使用“搜索”字段搜索 **Microsoft.SCP.Net.SDK**，然后将其添加到项目中。
 > 
 > 
 
@@ -537,7 +539,7 @@ System.TypeLoadException: Failure has occurred while loading a type.
     ```
 4. 使用以下内容作为 **LocalTest** 类的内容：
 
-    ```csharp
+    ```
     // Drives the topology components
     public void RunTestCase()
     {
@@ -618,7 +620,7 @@ System.TypeLoadException: Failure has occurred while loading a type.
 
 1. 打开 **Program.cs**，将以下代码添加到 **Main** 方法中：
 
-    ```csharp
+    ```
     Console.WriteLine("Starting tests");
     System.Environment.SetEnvironmentVariable("microsoft.scp.logPrefix", "WordCount-LocalTest");
     // Initialize the runtime

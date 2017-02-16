@@ -40,7 +40,7 @@ ms.author: amsriva
 
 现有的 HTTPListener 配置元素得到了增强，因此可以支持主机名称和服务器名称指示元素，方便应用程序网关将流量路由到相应的后端池。这是模板文件中 HttpListeners 元素的代码片段。
 
-```
+```json
      "httpListeners": [
                 {
                     "name": "appGatewayHttpsListener1",
@@ -82,7 +82,7 @@ ms.author: amsriva
 
 不需更改路由规则。应继续选择“基本”路由规则，以便将适当的站点侦听器绑定到相应的后端地址池。
 
-```
+```json
 "requestRoutingRules": [
 {
     "name": "<ruleName1>",

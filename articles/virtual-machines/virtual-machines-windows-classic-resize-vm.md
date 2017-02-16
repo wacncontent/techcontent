@@ -41,13 +41,13 @@ ms.author: drewm
 
 1. 运行以下 PowerShell 命令，列出托管包含 VM 的云服务的硬件群集中可用的 VM 大小。
 
-    ```
+    ```powershell
     Get-AzureService | where {$_.ServiceName -eq "<cloudServiceName>"}
     ```
 
 2. 运行以下命令以调整 VM 大小。
 
-    ```
+    ```powershell
     Get-AzureVM -ServiceName <cloudServiceName> -Name <vmName> | Set-AzureVMSize -InstanceSize <newVMSize> | Update-AzureVM
     ```
 
@@ -56,7 +56,7 @@ ms.author: drewm
 
 1. 运行以下 PowerShell 命令，列出区域中可用的 VM 大小。
 
-    ```
+    ```powershell
     Get-AzureLocation | where {$_.Name -eq "<locationName>"}
     ```
 

@@ -243,7 +243,7 @@ pvk2pfx -pvk MyCert.pvk -spc MyCert.cer -pfx MyCert.pfx -pi <password>
 
     示例命令行：
 
-    ```
+    ```   
     .\SetupSampleSplitMergeEnvironment.ps1 `
         -UserName 'mysqluser' `
         -Password 'MySqlPassw0rd' `
@@ -252,7 +252,7 @@ pvk2pfx -pvk MyCert.pvk -spc MyCert.cer -pfx MyCert.pfx -pi <password>
 
 4.    执行 Getmappings.ps1 脚本以查看示例环境中当前存在的映射。
 
-    ```
+    ```   
     .\GetMappings.ps1 `
         -UserName 'mysqluser' `
         -Password 'MySqlPassw0rd' `
@@ -263,7 +263,7 @@ pvk2pfx -pvk MyCert.pvk -spc MyCert.cer -pfx MyCert.pfx -pi <password>
 
     示例命令行：
 
-    ```
+    ```   
     .\ExecuteSampleSplitMerge.ps1 `
         -UserName 'mysqluser' `
         -Password 'MySqlPassw0rd' `

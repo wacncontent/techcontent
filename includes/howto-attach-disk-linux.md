@@ -6,19 +6,19 @@
 1. 打开 Azure CLI 并[连接到 Azure 订阅](../articles/xplat-cli-connect.md)。确保你处于 Azure 服务管理模式 (`azure config mode asm`) 下。
 2. 输入 `azure vm disk attach-new` 以创建并附加新磁盘，如以下示例所示。将 myVM 替换为你的 Linux 虚拟机的名称，并以 GB 为单位指定磁盘大小，此示例中为 100 GB：
 
-    ```
+    ```azurecli
     azure vm disk attach-new myVM 100
     ```
 
 3. 创建并附加数据磁盘后，它列出在 `azure vm disk list <virtual-machine-name>` 的输出中，如以下示例所示：
 
-    ```
+    ```azurecli
     azure vm disk list TestVM
     ```
 
     输出类似于以下示例：
 
-    ```
+    ```bash
     info:    Executing command vm disk list
 
     * Fetching disk images
@@ -37,13 +37,13 @@
 1. 打开 Azure CLI 并[连接到 Azure 订阅](../articles/xplat-cli-connect.md)。确保你处于 Azure 服务管理模式 (`azure config mode asm`) 下。
 2. 检查你想要附加的 VHD 是否已上载到你的 Azure 订阅：
 
-    ```
+    ```azurecli
     azure vm disk list
     ```
 
     输出类似于以下示例：
 
-    ```
+    ```azurecli
     info:    Executing command vm disk list
 
     * Fetching disk images
@@ -57,13 +57,13 @@
 
 3. 如果没有找到你想要使用的磁盘，可以使用 `azure vm disk create` 或 `azure vm disk upload` 将一个本地 VHD 上载到你的订阅。以下是 `disk create` 的一个示例：
 
-    ```
+    ```azurecli
     azure vm disk create myVhd .\TempDisk\test.VHD -l "China East" -o Linux
     ```
 
     输出类似于以下示例：
 
-    ```
+    ```azurecli
     info:    Executing command vm disk create
     + Retrieving storage accounts
     info:    VHD size : 10 GB
@@ -79,7 +79,7 @@
 
 4. 现在将所需 VHD 附加到虚拟机：
 
-    ```
+    ```azurecli
     azure vm disk attach myVM myVhd
     ```
 
@@ -87,13 +87,13 @@
 
 5. 可以使用 `azure vm disk list <virtual-machine-name>` 验证磁盘是否已附加到虚拟机：
 
-    ```
+    ```azurecli
     azure vm disk list myVM
     ```
 
     输出类似于以下示例：
 
-    ```
+    ```bash
     info:    Executing command vm disk list
 
     * Fetching disk images

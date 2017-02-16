@@ -535,7 +535,7 @@ Azure 存储允许启用 CORS – 跨域资源共享。对于每个存储帐户�
 
 默认情况下，对所有服务禁用了 CORS。可以使用 REST API 或存储客户端库调用某个方法来设置服务策略，以启用 CORS。执行该操作时，将在 XML 中包含 CORS 规则。以下示例将针对存储帐户的 Blob 服务使用“设置服务属性”操作来设置 CORS 规则。可以使用存储客户端库或 REST API 针对 Azure 存储执行该操作。
 
-```
+```xml
 <Cors>    
     <CorsRule>
         <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>

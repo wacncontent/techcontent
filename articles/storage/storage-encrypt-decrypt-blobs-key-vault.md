@@ -74,7 +74,7 @@ Install-Package Microsoft.Azure.KeyVault.Extensions
 
 将 AppSettings 添加到 App.Config。
 
-```
+```xml
 <appSettings>
     <add key="accountName" value="myaccount"/>
     <add key="accountKey" value="theaccountkey"/>
@@ -86,7 +86,7 @@ Install-Package Microsoft.Azure.KeyVault.Extensions
 
 添加以下 `using` 语句并确保将对 System.Configuration 的引用添加到项目中。
 
-```
+```csharp
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System.Configuration;
 using Microsoft.WindowsAzure.Storage.Auth;
@@ -100,7 +100,7 @@ using System.IO;
 ## 添加方法以便为控制台应用程序获取令牌
 以下方法由密钥保管库类使用，这些类需要进行身份验证才能访问密钥保管库。
 
-```
+```csharp
 private async static Task<string> GetToken(string authority, string resource, string scope)
 {
     var authContext = new AuthenticationContext(authority);
@@ -119,7 +119,7 @@ private async static Task<string> GetToken(string authority, string resource, st
 ## 在程序中访问存储和密钥保管库
 在 Main 函数中，添加以下代码。
 
-```
+```csharp
 // This is standard code to interact with Blob storage.
 StorageCredentials creds = new StorageCredentials(
     ConfigurationManager.AppSettings["accountName"],
@@ -146,7 +146,7 @@ KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(GetToken);
 ## 加密 Blob 和上传
 添加以下代码以加密 Blob 并将其上传到 Azure 存储帐户。使用的 **ResolveKeyAsync** 方法会返回 IKey。
 
-```
+```csharp
 // Retrieve the key that you created previously.
 // The IKey that is returned here is an RsaKey.
 // Remember that we used the names contosokeyvault and testrsakey1.
@@ -178,7 +178,7 @@ RSA 密钥的私钥则保留在密钥保管库中，因此，为了进行解密�
 
 添加以下代码以解密刚刚上传的 Blob。
 
-```
+```csharp
 // In this case, we will not pass a key and only pass the resolver because
 // this policy will only be used for downloading / decrypting.
 BlobEncryptionPolicy policy = new BlobEncryptionPolicy(null, cloudResolver);
@@ -200,7 +200,7 @@ using (var np = File.Open(@"C:\data\MyFileDecrypted.txt", FileMode.Create))
 
 以下是使用 PowerShell 在密钥保管库中创建可用作 SymmetricKey 的密钥的示例。注意：硬编码值 $key 仅用于演示目的。在你自己的代码中需要生成此密钥。
 
-```
+```csharp
 // Here we are making a 128-bit key so we have 16 characters.
 // 	The characters are in the ASCII range of UTF8 so they are
 //	each 1 byte. 16 x 8 = 128.
@@ -215,7 +215,7 @@ $secret = Set-AzureKeyVaultSecret -VaultName 'ContoseKeyVault' -Name 'TestSecret
 
 在控制台应用程序中，可以使用与之前相同的调用将此密钥作为 SymmetricKey 进行检索。
 
-```
+```csharp
 SymmetricKey sec = (SymmetricKey) cloudResolver.ResolveKeyAsync(
     "https://contosokeyvault.vault.chinacloudapi.cn/secrets/TestSecret2/", 
     CancellationToken.None).GetAwaiter().GetResult();

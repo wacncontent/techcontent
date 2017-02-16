@@ -64,7 +64,7 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 打开 **Azure 命令提示符**，然后登录。
 
-```
+```azurecli
 azure login -e AzureChinaCloud
 ```
 
@@ -82,7 +82,7 @@ azure login -e AzureChinaCloud
 
 ## 切换到 Resource Manager 模式
 
-```
+```azurecli
 azure config mode arm
 ```
 
@@ -90,7 +90,7 @@ azure config mode arm
 
 在创建应用程序网关前，会创建资源组以包含应用程序网关。以下显示该命令。
 
-```
+```azurecli
 azure group create -n AdatumAppGatewayRG -l chinaeast
 ```
 
@@ -98,7 +98,7 @@ azure group create -n AdatumAppGatewayRG -l chinaeast
 
 创建资源组后，会为应用程序网关创建虚拟网络。在以下示例中，地址空间为前述方案说明中定义的 10.0.0.0/16。
 
-```
+```azurecli
 azure network vnet create -n AdatumAppGatewayVNET -a 10.0.0.0/16 -g AdatumAppGatewayRG -l chinaeast
 ```
 
@@ -106,7 +106,7 @@ azure network vnet create -n AdatumAppGatewayVNET -a 10.0.0.0/16 -g AdatumAppGat
 
 创建虚拟网络后，会为应用程序网关添加子网。如果计划搭配使用应用程序网关和与其在同一虚拟网络中托管的 Web 应用，请确保为其他子网留出足够的空间。
 
-```
+```azurecli
 azure network vnet subnet create -g AdatumAppGatewayRG -n Appgatewaysubnet -v AdatumAppGatewayVNET -a 10.0.0.0/28 
 ```
 
@@ -114,7 +114,7 @@ azure network vnet subnet create -g AdatumAppGatewayRG -n Appgatewaysubnet -v Ad
 
 创建虚拟网络和子网后，即已满足应用程序网关的先决条件。此外，以下步骤还需要之前导出的 .pfx 证书和证书密码：用于后端的 IP 地址是后端服务器的 IP 地址。这些值可以是虚拟网络中的专用 IP、公共 IP 或后端服务器的完全限定域名。
 
-```
+```azurecli
 azure network application-gateway create -n AdatumAppGateway -l chinaeast -g AdatumAppGatewayRG -e AdatumAppGatewayVNET -m Appgatewaysubnet -r 134.170.185.46,134.170.188.221,134.170.185.50 -y c:\AdatumAppGateway\adatumcert.pfx -x P@ssw0rd -z 2 -a Standard_Medium -w Basic -j 443 -f Enabled -o 80 -i http -b https -u Standard
 ```
 

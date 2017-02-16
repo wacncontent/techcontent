@@ -28,7 +28,7 @@ ms.author: adegeo
 
 若要创建输入终结点，请将 **InputEndpoint** 子元素添加到 Web 角色或辅助角色的 **Endpoints** 元素。
 
-```
+```xml
     <Endpoints>
       <InputEndpoint name="StandardWeb" protocol="http" port="80" localPort="80" />
     </Endpoints> 
@@ -41,7 +41,7 @@ ms.author: adegeo
 
 若要创建实例输入终结点，请将 **InstanceInputEndpoint** 子元素添加到 Web 角色或辅助角色的 **Endpoints** 元素。
 
-```
+```xml
     <Endpoints>
       <InstanceInputEndpoint name="Endpoint2" protocol="tcp" localPort="10100">
         <AllocatePublicPortFrom>
@@ -58,7 +58,7 @@ ms.author: adegeo
 
 若要创建内部输入终结点，请将 **InternalEndpoint** 子元素添加到 Web 角色或辅助角色的 **Endpoints** 元素。
 
-```
+```xml
     <Endpoints>
       <InternalEndpoint name="Endpoint3" protocol="any" port="8999" />
     </Endpoints> 
@@ -66,7 +66,7 @@ ms.author: adegeo
 
 你也可以使用端口范围。
 
-```
+```xml
     <Endpoints>
       <InternalEndpoint name="Endpoint3" protocol="any">
         <FixedPortRange max="8995" min="8999" />
@@ -78,7 +78,7 @@ ms.author: adegeo
 
 当你使用辅助角色和 web 角色时，在终结点方面需要注意一个细微的差别。Web 角色必须至少有一个使用 **HTTP** 协议的输入终结点。
 
-```
+```xml
     <Endpoints>
       <InputEndpoint name="StandardWeb" protocol="http" port="80" localPort="80"/>
       <!-- more endpoints may be declared after the first InputEndPoint -->
@@ -95,7 +95,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 
 当你通过 .NET SDK 以编程方式连接到角色实例时，可以相对较容易地访问终结点信息。例如，在连接到特定的角色环境后，你可以使用以下代码获取特定终结点的端口：
 
-```
+```xml
     int port = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["StandardWeb"].IPEndpoint.Port;
 ```
 
@@ -108,7 +108,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 
 下面是一个循环访问角色实例的示例。
 
-```
+```csharp
     foreach (RoleInstance roleInst in RoleEnvironment.CurrentRoleInstance.Role.Instances)
     {
         Trace.WriteLine("Instance ID: " + roleInst.Id);
@@ -124,7 +124,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 > [!WARNING]
 >此代码仅适用于已部署的服务。在 Azure 计算模拟器中运行时，将忽略创建直接端口终结点的服务配置元素（**InstanceInputEndpoint** 元素）。
 
-```
+```csharp
     using System;
     using System.Diagnostics;
     using System.Linq;
@@ -215,7 +215,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 
 以下代码示例演示了上图中显示的角色的角色定义。每个角色定义包含至少一个已定义的内部终结点：
 
-```
+```xml
     <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
       <WebRole name="WebRole1" vmsize="Medium">
         <Sites>
@@ -252,7 +252,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 ### 方案 1
 仅允许从 **WebRole1** 到 **WorkerRole1** 的网络流量。
 
-```
+```xml
     <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
       <NetworkTrafficRules>
         <OnlyAllowTrafficTo>
@@ -271,7 +271,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 ### 方案 2
 仅允许从 **WebRole1** 到 **WorkerRole1** 和 **WorkerRole2** 的网络流量。
 
-```
+```xml
     <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
       <NetworkTrafficRules>
         <OnlyAllowTrafficTo>
@@ -290,7 +290,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 ### 方案 3
 仅允许从 **WebRole1** 到 **WorkerRole1** 以及从 **WorkerRole1** 到 **WorkerRole2** 的网络流量。
 
-```
+```xml
     <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
       <NetworkTrafficRules>
         <OnlyAllowTrafficTo>
@@ -319,7 +319,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 ### 方案 4
 仅允许从 **WebRole1** 到 **WorkerRole1**、从 **WebRole1** 到 **WorkerRole2** 以及从 **WorkerRole1** 到 **WorkerRole2** 的网络流量。
 
-```
+```xml
     <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
       <NetworkTrafficRules>
         <OnlyAllowTrafficTo>

@@ -119,7 +119,7 @@ connectionfactory.SBCF = amqps://[SASPolicyName]:[SASPolicyKey]@[namespace].serv
 
 JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialContext 类的构造函数中来配置的。哈希表中的两个必需元素是初始上下文工厂的类名称和提供程序 URL。以下代码演示了如何配置 JNDI 环境以将基于 Qpid 属性文件的 JNDI 提供程序用于名为 **servicebus.properties** 的属性文件。
 
-```
+```java
     Hashtable<String, String> env = new Hashtable<String, String>(); 
     env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
     env.put(Context.PROVIDER_URL, "servicebus.properties"); 
@@ -130,7 +130,7 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
 
 以下示例程序将 JMS TextMessages 发送到 JNDI 逻辑名称为 QUEUE 的 Service Bus 队列，然后接收返回的消息。
 
-```
+```java
     // SimpleSenderReceiver.java
 
     import javax.jms.*;

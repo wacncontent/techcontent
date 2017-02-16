@@ -37,7 +37,7 @@ ms.author: tomfitz
 
 以下示例显示了一个包含标记的存储帐户。
 
-```
+```json
 "resources": [
     {
         "type": "Microsoft.Storage/storageAccounts",
@@ -57,7 +57,7 @@ ms.author: tomfitz
 
 Resource Manager 当前不支持处理标记名称和值对象。可以传递标记值对象，但仍需指定标记名称，如以下示例所示：
 
-```
+```json
 {
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",

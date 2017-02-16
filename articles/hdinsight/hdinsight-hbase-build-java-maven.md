@@ -34,6 +34,8 @@ ms.author: larryfr
 * [Maven](http://maven.apache.org/)
 * [装有 HBase 的基于 Windows 的 HDInsight 群集](./hdinsight-hbase-tutorial-get-started.md#create-hbase-cluster)
 
+    [!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
     > [!NOTE]
     > 本文档中的步骤已在 HDInsight 群集版本 3.2 和 3.3 中测试。示例中提供的默认值适用于 HDInsight 3.3 群集。
 
@@ -54,7 +56,7 @@ ms.author: larryfr
 ## 更新项目对象模型
 1. 编辑 **pom.xml** 文件，并将以下代码添加到 `<dependencies>` 部分：
 
-    ```xml
+    ```
     <dependency>
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-client</artifactId>
@@ -77,7 +79,7 @@ ms.author: larryfr
     有关 HDInsight 版本和组件的详细信息，请参阅 [What are the different Hadoop components available with HDInsight](./hdinsight-component-versioning.md)（HDInsight 提供哪些不同的 Hadoop 组件）。
 2. 如果使用 HDInsight 3.3 群集，则还必须将以下代码添加到 `<dependencies>` 节：
 
-    ```xml
+    ```
     <dependency>
         <groupId>org.apache.phoenix</groupId>
         <artifactId>phoenix-core</artifactId>
@@ -88,7 +90,7 @@ ms.author: larryfr
     此依赖项会加载 Hbase 版本 1.1.x 使用的 phoenix-core 组件。
 3. 将以下代码添加到 **pom.xml** 文件。此部分必须位于文件中的 `<project>...</project>` 标记内，例如，`</dependencies>` 和 `</project>` 之间。
 
-    ```xml
+    ```
     <build>
       <sourceDirectory>src</sourceDirectory>
       <resources>
@@ -146,7 +148,7 @@ ms.author: larryfr
 4. 保存 **pom.xml** 文件。
 5. 在 **hbaseapp** 目录中创建名为 **conf** 的新目录。在 **conf** 目录中，创建一个名为 **hbase-site.xml** 的文件。将以下内容用作该文件的内容：
 
-    ```xml
+    ```
     <?xml version="1.0"?>
     <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
     <!--
@@ -198,7 +200,7 @@ ms.author: larryfr
 1. 转到 **hbaseapp\\src\\main\\java\\com\\microsoft\\examples** 目录，然后将 app.java 文件重命名为 **CreateTable.java**。
 2. 打开 **CreateTable.java** 文件，将现有内容替换为以下代码：
 
-    ```java
+    ```
     package com.microsoft.examples;
     import java.io.IOException;
 
@@ -268,7 +270,7 @@ ms.author: larryfr
 3. 保存 **CreateTable.java** 文件。
 4. 在 **hbaseapp\\src\\main\\java\\com\\microsoft\\examples** 目录中，创建名为 **SearchByEmail.java** 的新文件。使用以下代码作为此文件的内容：
 
-    ```java
+    ```
     package com.microsoft.examples;
     import java.io.IOException;
 
@@ -345,7 +347,7 @@ ms.author: larryfr
 5. 保存 **SearchByEmail.java** 文件。
 6. 在 **hbaseapp\\src\\main\\hava\\com\\microsoft\\examples** 目录中，创建名为 **DeleteTable.java** 的新文件。使用以下代码作为此文件的内容：
 
-    ```java
+    ```
     package com.microsoft.examples;
     import java.io.IOException;
 
@@ -393,7 +395,7 @@ ms.author: larryfr
 
 1. 安装并配置 Azure PowerShell 后，请创建名为 **hbase-runner.psm1** 的新文件。使用以下项作为此文件的内容：
 
-    ```powershell
+    ```
     <#
     .SYNOPSIS
     Copies a file to the primary storage of an HDInsight cluster.

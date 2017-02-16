@@ -37,7 +37,7 @@ Azure 存储中的对象支持系统属性和用户定义的元数据，及其�
 
 以下代码示例创建容器并将它的一些属性值写入到控制台窗口：
 
-```
+```csharp
 //Parse the connection string for the storage account.
 const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
@@ -67,7 +67,7 @@ Console.WriteLine();
 
 以下代码示例在容器上设置元数据。一个值是使用集合的 **Add** 方法设置的。另一个值是使用隐式键/值语法设置的。这两种方法都有效。
 
-```
+```csharp
 public static void AddContainerMetadata(CloudBlobContainer container)
 {
     //Add some metadata to the container.
@@ -81,7 +81,7 @@ public static void AddContainerMetadata(CloudBlobContainer container)
 
 若要检索元数据，请对 Blob 或容器调用 **FetchAttributes** 方法以填充 **Metadata** 集合，然后读取值，如下面的示例所示。
 
-```
+```csharp
 public static void ListContainerMetadata(CloudBlobContainer container)
 {
     //Fetch container attributes in order to populate the container's properties and metadata.

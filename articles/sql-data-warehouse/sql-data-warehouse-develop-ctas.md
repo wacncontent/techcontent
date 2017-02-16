@@ -25,7 +25,7 @@ Create Table As Select (`CTAS`) 是所提供的最重要的 T-SQL 功能之一�
 
 假设你在 `CREATE TABLE` 中没有指定分布列，因而使用 `ROUND_ROBIN` 分布的默认分布类型创建此表。
 
-```
+```sql
 CREATE TABLE FactInternetSales
 (
     ProductKey int NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE FactInternetSales
 
 现在你想要创建此表的新副本并包含群集列存储索引，以便可以使用群集列存储表的性能。你还想要在 ProductKey 上分布此表（因为你预期此列会发生联接）并在联接 ProductKey 期间避免数据移动。最后，你还想要在 OrderDateKey 上添加分区，以便通过删除旧分区来快速删除旧数据。以下是用于将旧表复制到新表的 CTAS 语句。
 
-```
+```sql
 CREATE TABLE FactInternetSales_new
 WITH 
 (
@@ -77,7 +77,7 @@ AS SELECT * FROM FactInternetSales;
 
 最后，你可以重命名表以切换到新表，然后删除旧表。
 
-```
+```sql
 RENAME OBJECT FactInternetSales TO FactInternetSales_old;
 RENAME OBJECT FactInternetSales_new TO FactInternetSales;
 
@@ -104,7 +104,7 @@ DROP TABLE FactInternetSales_old;
 
 下面是 `SELECT..INTO` 语句的一个示例：
 
-```
+```sql
 SELECT *
 INTO    #tmp_fct
 FROM    [dbo].[FactInternetSales]
@@ -112,7 +112,7 @@ FROM    [dbo].[FactInternetSales]
 
 将上述代码转换为 `CTAS` 相当直接：
 
-```
+```sql
 CREATE TABLE #tmp_fct
 WITH
 (
@@ -133,7 +133,7 @@ FROM    [dbo].[FactInternetSales]
 
 假设你必须更新此表：
 
-```
+```sql
 CREATE TABLE [dbo].[AnnualCategorySales]
 (	[EnglishProductCategoryName]	NVARCHAR(50)	NOT NULL
 ,	[CalendarYear]					SMALLINT		NOT NULL
@@ -175,7 +175,7 @@ AND	[acs].[CalendarYear]				= [fis].[CalendarYear]
 
 你可以使用 `CTAS` 和隐式联接的组合来替换此代码：
 
-```
+```sql
 -- Create an interim table
 CREATE TABLE CTAS_acs
 WITH (DISTRIBUTION = ROUND_ROBIN)
@@ -212,7 +212,7 @@ DROP TABLE CTAS_acs
 
 转换后的 DELETE 语句示例如下所示：
 
-```
+```sql
 CREATE TABLE dbo.DimProduct_upsert
 WITH 
 (   Distribution=HASH(ProductKey)
@@ -236,7 +236,7 @@ RENAME OBJECT dbo.DimProduct_upsert TO DimProduct;
 
 `UPSERT` 的示例如下：
 
-```
+```sql
 CREATE TABLE dbo.[DimProduct_upsert]
 WITH 
 (   DISTRIBUTION = HASH([ProductKey])
@@ -268,7 +268,7 @@ RENAME OBJECT dbo.[DimpProduct_upsert]  TO [DimProduct];
 ## CTAS 建议：显式声明数据类型和输出是否可为 null
 迁移代码时，你可能会遇到这种类型的编码模式：
 
-```
+```sql
 DECLARE @d decimal(7,2) = 85.455
 ,       @f float(24)    = 85.455
 
@@ -286,7 +286,7 @@ SELECT @d*@f
 
 以下代码不会生成相同的结果：
 
-```
+```sql
 DECLARE @d decimal(7,2) = 85.455
 ,       @f float(24)    = 85.455
 ;
@@ -302,7 +302,7 @@ SELECT @d*@f as result
 
 尝试使用以下内容作为示例：
 
-```
+```sql
 SELECT result,result*@d
 from result
 ;
@@ -324,7 +324,7 @@ from ctas_r
 
 以下示例演示如何修复代码：
 
-```
+```sql
 DECLARE @d decimal(7,2) = 85.455
 ,       @f float(24)    = 85.455
 
@@ -346,7 +346,7 @@ SELECT ISNULL(CAST(@d*@f AS DECIMAL(7,2)),0) as result
 
 此技巧不仅可用于确保计算的完整性，它对表分区切换也很重要。假设你根据事实定义了此表：
 
-```
+```sql
 CREATE TABLE [dbo].[Sales]
 (
     [date]      INT     NOT NULL
@@ -371,7 +371,7 @@ WITH
 
 若要创建分区数据集，你可能需要执行：
 
-```
+```sql
 CREATE TABLE [dbo].[Sales_in]
 WITH    
 (   DISTRIBUTION = HASH([product])
@@ -395,7 +395,7 @@ OPTION (LABEL = 'CTAS : Partition IN table : Create')
 
 该查询将会顺利运行。但是，当你尝试执行分区切换时，将会出现问题。表定义不匹配。若要使表定义匹配，需要修改 CTAS。
 
-```
+```sql
 CREATE TABLE [dbo].[Sales_in]
 WITH    
 (   DISTRIBUTION = HASH([product])

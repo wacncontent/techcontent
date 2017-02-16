@@ -29,13 +29,13 @@ ms.author: drewm
 ## 调整不在可用性集中的 Windows VM 的大小
 1. 列出托管 VM 的硬件群集上可用的 VM 大小。
 
-    ```
+    ```powershell
     Get-AzureRmVMSize -ResourceGroupName <resourceGroupName> -VMName <vmName> 
     ```
 
 2. 如果列出了所需大小，请运行以下命令来调整 VM 的大小。如果未列出所需大小，请转到步骤 3。
 
-    ```
+    ```powershell
     $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
     $vm.HardwareProfile.VmSize = "<newVMsize>"
     Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
@@ -43,7 +43,7 @@ ms.author: drewm
 
 3. 如果未列出所需大小，请运行以下命令来解除分配 VM、调整其大小，然后将它重新启动。
 
-    ```
+    ```powershell
     $rgname = "<resourceGroupName>"
     $vmname = "<vmName>"
     Stop-AzureRmVM -ResourceGroupName $rgname -VMName $vmname -Force
@@ -63,13 +63,13 @@ ms.author: drewm
 
 1. 列出托管 VM 的硬件群集上可用的 VM 大小。
 
-    ```
+    ```powershell
     Get-AzureRmVMSize -ResourceGroupName <resourceGroupName> -VMName <vmName>
     ```
 
 2. 如果列出了所需大小，请运行以下命令来调整 VM 的大小。如果未列出所需大小，请转到步骤 3。
 
-    ```
+    ```powershell
     $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
     $vm.HardwareProfile.VmSize = "<newVmSize>"
     Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
@@ -78,7 +78,7 @@ ms.author: drewm
 3. 如果未列出所需大小，则继续执行以下步骤以解除分配可用性集中的所有 VM、调整 VM 大小，然后重新启动 VM。
 4. 停止可用性集中的所有 VM。
 
-    ```
+    ```powershell
     $rg = "<resourceGroupName>"
     $as = Get-AzureRmAvailabilitySet -ResourceGroupName $rg
     $vmIds = $as.VirtualMachinesReferences
@@ -91,7 +91,7 @@ ms.author: drewm
 
 5. 调整可用性集中 VM 的大小并重新启动 VM。
 
-    ```
+    ```powershell
     $rg = "<resourceGroupName>"
     $newSize = "<newVmSize>"
     $as = Get-AzureRmAvailabilitySet -ResourceGroupName $rg

@@ -47,7 +47,7 @@ ms.author: subramar
 
 完成更改后，清单应该如下所示（突出显示的部分即为所做的更改）：
 
-```
+```xml
 <ServiceManifestName="VisualObjects.ActorService" Version="2.0" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 <CodePackageName="Code" Version="2.0">
@@ -55,7 +55,7 @@ ms.author: subramar
 
 现在，*ApplicationManifest.xml* 文件（位于 **VisualObjects** 解决方案下的 **VisualObjects** 项目下）已更新为 **VisualObjects.ActorService** 项目的 2.0 版。此外，应用程序版本已从 1.0.0.0 更新为 2.0.0.0。*ApplicationManifest.xml* 应类似于以下代码片段：
 
-```
+```xml
 <ApplicationManifestxmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="VisualObjects" ApplicationTypeVersion="2.0.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
 
  <ServiceManifestRefServiceManifestName="VisualObjects.ActorService" ServiceManifestVersion="2.0" />
@@ -85,14 +85,14 @@ UpgradeTimeout = 3000
 
 现在，让我们将更新的应用程序包复制到 Service Fabric ImageStore（Service Fabric 存储应用程序包的位置）。参数 *ApplicationPackagePathInImageStore* 告知 Service Fabric 可在何处找到应用程序包。我们已使用以下命令将更新的应用程序放入“VisualObjects\_V2”（可能需要再次相应地修改路径）。
 
-```
+```powershell
 Copy-ServiceFabricApplicationPackage  -ApplicationPackagePath .\Samples\Services\Stateful\VisualObjects\VisualObjects\obj\x64\Debug\Package
 -ImageStoreConnectionString fabric:ImageStore   -ApplicationPackagePathInImageStore "VisualObjects\_V2"
 ```
 
 下一步是向 Service Fabric 注册此应用程序，可使用以下命令执行此操作：
 
-```
+```powershell
 Register-ServiceFabricApplicationType -ApplicationPathInImageStore "VisualObjects\_V2"
 ```
 
@@ -101,7 +101,7 @@ Register-ServiceFabricApplicationType -ApplicationPathInImageStore "VisualObject
 ## 步骤 5：启动应用程序升级
 现在，我们将使用以下命令启动应用程序升级：
 
-```
+```powershell
 Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/VisualObjects -ApplicationTypeVersion 2.0.0.0 -HealthCheckStableDurationSec 60 -UpgradeDomainTimeoutSec 1200 -UpgradeTimeout 3000   -FailureAction Rollback -Monitored
 ```
 

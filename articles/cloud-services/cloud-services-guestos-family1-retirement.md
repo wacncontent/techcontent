@@ -37,7 +37,7 @@ ms.author: raiye
 
 若要了解哪些云服务正在运行哪个 OS 系列，可以在 Azure PowerShell 中运行以下脚本，但必须首先[设置 Azure PowerShell](../powershell-install-configure.md)。
 
-```
+```Powershell
     foreach($subscription in Get-AzureSubscription) {
         Select-AzureSubscription -SubscriptionName $subscription.SubscriptionName 
 

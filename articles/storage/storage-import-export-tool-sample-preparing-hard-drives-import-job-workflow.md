@@ -81,7 +81,7 @@ Y,Format,SilentMode,Encrypt,
 
 若要为导入的文件设置元数据，请创建包含以下内容的文本文件 `c:\WAImportExport\SampleMetadata.txt`：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Metadata>
     <UploadMethod>Microsoft Azure Import/Export Service</UploadMethod>
@@ -98,7 +98,7 @@ Y,Format,SilentMode,Encrypt,
 
 若要设置这些属性，请创建文本文件 `c:\WAImportExport\SampleProperties.txt`：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Properties>
     <Content-Type>application/octet-stream</Content-Type>

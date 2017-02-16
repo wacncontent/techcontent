@@ -37,7 +37,7 @@ Azure VM 代理默认安装在任何通过 Azure 库映像部署的 Windows 虚�
 
 双击 Windows 安装程序文件即可安装 VM 代理。若要以自动或无人参与方式安装 VM 代理，请运行以下命令。
 
-```
+```cmd
 msiexec.exe /i WindowsAzureVmAgent.2.7.1198.778.rd_art_stable.160617-1120.fre /quiet
 ```
 
@@ -47,13 +47,13 @@ msiexec.exe /i WindowsAzureVmAgent.2.7.1198.778.rd_art_stable.160617-1120.fre /q
 
 可以使用 Azure Resource Manager PowerShell 模块检索有关 Azure 虚拟机的信息。运行 `Get-AzureRmVM` 会返回大量信息，包括 Azure VM 代理的预配状态。
 
-```
+```PowerShell
 Get-AzureRmVM
 ```
 
 下面仅仅是部分 `Get-AzureRmVM` 输出。请注意嵌套在 `OSProfile` 中的 `ProvisionVMAgent` 属性，可以使用该属性来确定 VM 代理是否已部署到虚拟机。
 
-```
+```PowerShell
 OSProfile                  :
   ComputerName             : myVM
   AdminUsername            : muUserName
@@ -64,7 +64,7 @@ OSProfile                  :
 
 可以使用以下脚本返回一个简明列表，其中包含虚拟机名称以及 VM 代理的状态。
 
-```
+```PowerShell
 $vms = Get-AzureRmVM
 
 foreach ($vm in $vms) {

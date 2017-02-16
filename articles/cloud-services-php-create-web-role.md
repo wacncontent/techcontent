@@ -112,12 +112,12 @@ PS C:\myProject> Set-AzureServiceProjectRole roleName php 5.4.0
 2. 在位于 Web 角色的根目录中的 `bin` 文件夹中创建一个 `php` 文件夹，然后将 PHP 运行时（所有二进制文件、配置文件、子文件夹等）添加到该 `php` 文件夹中。
 3. （可选）如果 PHP 运行时使用 [Microsoft Drivers for PHP for SQL Server][sqlsrv drivers]，则需要将 Web 角色配置为在预配它时安装 [SQL Server Native Client 2012][sql native client]。为此，将 [sqlncli.msi x64 安装程序]添加到 Web 角色的根目录中的 `bin` 文件夹。下一步中所述的启动脚本将在设置角色时以静默方式运行安装程序。如果你的 PHP 运行时不使用 Microsoft Drivers for PHP for SQL Server，则可从下一步所示的脚本中删除以下行：
 
-    ```
+    ```cmd
     msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
     ```
 4. 定义将 [Internet Information Services (IIS)][iis.net] 配置为使用 PHP 运行时来处理 `.php` 页的请求的启动任务。为此，请在文本编辑器中打开 `setup_web.cmd` 文件（位于 Web 角色的根目录的 `bin` 文件夹中），并将其内容替换为以下脚本：
 
-    ```
+    ```cmd
     @ECHO ON
     cd "%~dp0"
 
@@ -148,12 +148,12 @@ PS C:\myProject> Set-AzureServiceProjectRole roleName php 5.4.0
 2. 在辅助角色的根目录中创建一个 `php` 文件夹，然后将 PHP 运行时（所有二进制文件、配置文件、子文件夹等）添加到该 `php` 文件夹中。
 3. （可选）如果 PHP 运行时使用 [Microsoft Drivers for PHP for SQL Server][sqlsrv drivers]，则需要将辅助角色配置为在预配它时安装 [SQL Server Native Client 2012][sql native client]。为此，将 [sqlncli.msi x64 安装程序]添加到辅助角色的根目录。下一步中所述的启动脚本将在设置角色时以静默方式运行安装程序。如果你的 PHP 运行时不使用 Microsoft Drivers for PHP for SQL Server，则可从下一步所示的脚本中删除以下行：
 
-    ```
+    ```cmd
     msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
     ```
 4. 定义在设置角色时将 `php.exe` 可执行文件添加到辅助角色的 PATH 环境变量中的启动任务。为此，请在文本编辑器中打开 `setup_worker.cmd` 文件（位于辅助角色的根目录中），并将其内容替换为以下脚本：
 
-    ```
+    ```cmd
     @echo on
 
     cd "%~dp0"

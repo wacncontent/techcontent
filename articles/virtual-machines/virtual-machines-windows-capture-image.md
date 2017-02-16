@@ -31,40 +31,40 @@ ms.author: cynthn
 ## 登录到 Azure PowerShell
 1. 打开 Azure PowerShell 并登录到 Azure 帐户。
 
-    ```
+    ```powershell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     ```
 
     将打开一个弹出窗口，可以输入 Azure 帐户凭据。
 2. 获取可用订阅的订阅 ID。
 
-    ```
+    ```powershell
     Get-AzureRmSubscription
     ```
 
 3. 使用订阅 ID 设置正确的订阅。
 
-    ```
+    ```powershell
     Select-AzureRmSubscription -SubscriptionId "<subscriptionID>"
     ```
 
 ## <a name="prepare-the-vm-for-image-capture"></a> 解除分配 VM 并将状态设置为通用化
 1. 解除分配 VM 资源。
 
-    ```
+    ```powershell
     Stop-AzureRmVM -ResourceGroupName <resourceGroup> -Name <vmName>
     ```
 
     Azure 门户预览中该 VM 的“状态”将从“已停止”更改为“已停止(已解除分配)”。
 2. 将虚拟机的状态设置为“通用化”。
 
-    ```
+    ```powershell
     Set-AzureRmVm -ResourceGroupName <resourceGroup> -Name <vmName> -Generalized
     ```
 
 3. 检查 VM 的状态。VM 的“OSState/通用化”部分中的“DisplayStatus”应设置为“VM 已通用化”。
 
-    ```
+    ```powershell
     $vm = Get-AzureRmVM -ResourceGroupName <resourceGroup> -Name <vmName> -Status
     $vm.Statuses
     ```
@@ -72,7 +72,7 @@ ms.author: cynthn
 ## <a name="capture-the-vm"></a> 创建映像
 1. 使用以下命令将虚拟机映像复制到目标存储容器。该映像在创建时所在的存储帐户与原始虚拟机的相同。`-Path` 参数在本地保存 JSON 模板的副本。`-DestinationContainerName` 参数是要在其中保存映像的容器的名称。如果该容器不存在，系统将自动创建。
 
-    ```
+    ```powershell
     Save-AzureRmVMImage -ResourceGroupName <resourceGroupName> -Name <vmName> `
         -DestinationContainerName <destinationContainerName> -VHDNamePrefix <templateNamePrefix> `
         -Path <C:\local\Filepath\Filename.json>

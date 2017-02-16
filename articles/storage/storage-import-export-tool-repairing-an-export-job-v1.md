@@ -52,13 +52,13 @@ ms.author: renash
 
 若要在 **RepairExport** 模式下运行该工具，首先需要将包含已导出文件的驱动器连接到计算机。接下来，运行 Azure 导入/导出工具，并使用 `/d` 参数指定该驱动器的路径。还需要指定已下载的驱动器复制日志文件的路径。以下示例命令行将运行该工具，修复未能导出的所有文件：
 
-```
+```  
 WAImportExport.exe RepairExport /r:C:\WAImportExport\9WM35C3U.rep /d:G:\ /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C3U.log  
 ```
 
 下面是复制日志文件的一个示例，显示未能导出的 Blob 中的一个块：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>  
 <DriveLog>  
   <DriveId>9WM35C2V</DriveId>  
@@ -84,13 +84,13 @@ Azure 导入/导出服务还可以在导出过程中将清单文件保存到某�
 
 以下示例演示如何结合 **/ManifestFile** 和 **/CopyLogFile** 参数运行 Azure 导入/导出工具：
 
-```
+```  
 WAImportExport.exe RepairExport /r:C:\WAImportExport\9WM35C3U.rep /d:G:\ /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C3U.log /ManifestFile:G:\9WM35C3U.manifest  
 ```
 
 下面是清单文件的一个示例：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>  
 <DriveManifest Version="2011-10-01">  
   <Drive>  

@@ -31,7 +31,7 @@ ms.author: nepeters
 
 > 此示例用于演示目的。
 
-```
+```PowerShell
 <#
     .SYNOPSIS
         Downloads and configures .Net Core Music Store application sample across IIS and Azure SQL DB.
@@ -89,7 +89,7 @@ New-Website -Name "MusicStore" -Port 80 -PhysicalPath C:\music\ -ApplicationPool
 
 请注意，在以下 JSON 中，脚本存储在 GitHub 中。此脚本也可以存储在 Azure Blob 存储中。此外，Azure Resource Manager 模板允许构建脚本执行字符串，使模板参数值可用作脚本执行参数。在本例中，数据是在部署模板时提供的，然后，可在执行脚本时使用这些值。
 
-```
+```json
 {
   "apiVersion": "2015-06-15",
   "type": "extensions",

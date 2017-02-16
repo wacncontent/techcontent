@@ -46,7 +46,7 @@ Service Fabric 群集资源管理器主要与分布负载方面的平衡有关 -
 
 ClusterManifest.xml：
 
-```
+```xml
 <Section Name="DefragmentationMetrics">
     <Parameter Name="Disk" Value="true" />
     <Parameter Name="CPU" Value="false" />

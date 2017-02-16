@@ -38,13 +38,13 @@ ms.author: v-livech
 
 ## 创建资源组和 Linux VM
 
-```
+```bash
 azure group create myResourceGroup chinanorth
 ```
 
 ## 创建 Debian VM
 
-```
+```azurecli
 azure vm quick-create \
   -M ~/.ssh/id_rsa.pub \
   -u myAdminUser \
@@ -58,7 +58,7 @@ azure vm quick-create \
 ## 重置根密码
 重置根密码：
 
-```
+```azurecli
 azure vm reset-access \
   -g myResourceGroup \
   -n myVM \
@@ -69,7 +69,7 @@ azure vm reset-access \
 ## SSH 密钥重置
 重置非根用户的 SSH 密钥：
 
-```
+```azurecli
 azure vm reset-access \
   -g myResourceGroup \
   -n myVM \
@@ -80,7 +80,7 @@ azure vm reset-access \
 ## 创建用户
 创建用户：
 
-```
+```azurecli
 azure vm reset-access \
   -g myResourceGroup \
   -n myVM \
@@ -90,7 +90,7 @@ azure vm reset-access \
 
 ## 删除用户
 
-```
+```azurecli
 azure vm reset-access \
   -g myResourceGroup \
   -n myVM \
@@ -100,7 +100,7 @@ azure vm reset-access \
 ## 重置 SSHD
 重置 SSHD 配置：
 
-```
+```azurecli
 azure vm reset-access \
   -g myResourceGroup \
   -n myVM
@@ -120,7 +120,7 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
 
 `disk_check_repair.json`  
 
-```
+```json
 {
   "check_disk": "true",
   "repair_disk": "true, user-disk-name"
@@ -129,7 +129,7 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
 
 结合以下参数执行 VMAccess 脚本：
 
-```
+```azurecli
 azure vm extension set \
   myResourceGroup \
   myVM \
@@ -145,7 +145,7 @@ azure vm extension set \
 
 `reset_root_password.json`  
 
-```
+```json
 {
   "username":"root",
   "password":"myNewPassword",   
@@ -154,7 +154,7 @@ azure vm extension set \
 
 结合以下参数执行 VMAccess 脚本：
 
-```
+```azurecli
 azure vm extension set \
   myResourceGroup \
   myVM \
@@ -167,7 +167,7 @@ azure vm extension set \
 
 `reset_ssh_key.json`  
 
-```
+```json
 {
   "username":"myAdminUser",
   "ssh_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ3S7gGp3rcbKmG2Y4vGZFMuMZCwoUzZNG1vHY7P2XV2x9FfAhy8iGD+lF8UdjFX3t5ebMm6BnnMh8fHwkTRdOt3LDQq8o8ElTBrZaKPxZN2thMZnODs5Hlemb2UX0oRIGRcvWqsd4oJmxsXa/Si98Wa6RHWbc9QZhw80KAcOVhmndZAZAGR+Wq6yslNo5TMOr1/ZyQAook5C4FtcSGn3Y+WczaoGWIxG4ZaWk128g79VIeJcIQqOjPodHvQAhll7qDlItVvBfMOben3GyhYTm7k4YwlEdkONm4yV/UIW0la1rmyztSBQIm9sZmSq44XXgjVmDHNF8UfCZ1ToE4r2SdwTmZv00T2i5faeYnHzxiLPA3Enub7iUo5IdwFArnqad7MO1SY1kLemhX9eFjLWN4mJe56Fu4NiWJkR9APSZQrYeKaqru4KUC68QpVasNJHbuxPSf/PcjF3cjO1+X+4x6L1H5HTPuqUkyZGgDO4ynUHbko4dhlanALcriF7tIfQR9i2r2xOyv5gxJEW/zztGqWma/d4rBoPjnf6tO7rLFHXMt/DVTkAfn5woYtLDwkn5FMyvThRmex3BDf0gujoI1y6cOWLe9Y5geNX0oj+MXg/W0cXAtzSFocstV1PoVqy883hNoeQZ3mIGB3Q0rIUm5d9MA2bMMt31m1g3Sin6EQ== myAdminUser@myVM",   
@@ -176,7 +176,7 @@ azure vm extension set \
 
 结合以下参数执行 VMAccess 脚本：
 
-```
+```azurecli
 azure vm extension set \
   myResourceGroup \
   myVM \
@@ -192,7 +192,7 @@ VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而�
 
 `create_new_user.json`  
 
-```
+```json
 {
 "username":"myNewUser",
 "ssh_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ3S7gGp3rcbKmG2Y4vGZFMuMZCwoUzZNG1vHY7P2XV2x9FfAhy8iGD+lF8UdjFX3t5ebMm6BnnMh8fHwkTRdOt3LDQq8o8ElTBrZaKPxZN2thMZnODs5Hlemb2UX0oRIGRcvWqsd4oJmxsXa/Si98Wa6RHWbc9QZhw80KAcOVhmndZAZAGR+Wq6yslNo5TMOr1/ZyQAook5C4FtcSGn3Y+WczaoGWIxG4ZaWk128g79VIeJcIQqOjPodHvQAhll7qDlItVvBfMOben3GyhYTm7k4YwlEdkONm4yV/UIW0la1rmyztSBQIm9sZmSq44XXgjVmDHNF8UfCZ1ToE4r2SdwTmZv00T2i5faeYnHzxiLPA3Enub7iUo5IdwFArnqad7MO1SY1kLemhX9eFjLWN4mJe56Fu4NiWJkR9APSZQrYeKaqru4KUC68QpVasNJHbuxPSf/PcjF3cjO1+X+4x6L1H5HTPuqUkyZGgDO4ynUHbko4dhlanALcriF7tIfQR9i2r2xOyv5gxJEW/zztGqWma/d4rBoPjnf6tO7rLFHXMt/DVTkAfn5woYtLDwkn5FMyvThRmex3BDf0gujoI1y6cOWLe9Y5geNX0oj+MXg/W0cXAtzSFocstV1PoVqy883hNoeQZ3mIGB3Q0rIUm5d9MA2bMMt31m1g3Sin6EQ== myNewUser@myVM",
@@ -202,7 +202,7 @@ VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而�
 
 结合以下参数执行 VMAccess 脚本：
 
-```
+```azurecli
 azure vm extension set \
   myResourceGroup \
   myVM \
@@ -215,7 +215,7 @@ azure vm extension set \
 
 `remove_user.json`  
 
-```
+```json
 {
 "remove_user":"myDeletedUser",
 }
@@ -223,7 +223,7 @@ azure vm extension set \
 
 结合以下参数执行 VMAccess 脚本：
 
-```
+```azurecli
 azure vm extension set \
   myResourceGroup \
   myVM \
@@ -239,7 +239,7 @@ azure vm extension set \
 
 `reset_sshd.json`  
 
-```
+```json
 {
   "reset_ssh": true
 }
@@ -247,7 +247,7 @@ azure vm extension set \
 
 结合以下参数执行 VMAccess 脚本：
 
-```
+```azurecli
 azure vm extension set \
   myResourceGroup \
   myVM \

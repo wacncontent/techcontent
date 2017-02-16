@@ -240,7 +240,7 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 [1rmb-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-preconfigured-solutions]: ./iot-suite-what-are-preconfigured-solutions.md
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn
-[lnk-logic-apps]: /documentation/services/app-service/logic/
+[lnk-logic-apps]: ../app-service-logic/index.md
 [lnk-portal]: http://portal.azure.cn/
 [lnk-rmgithub]: https://github.com/Azure/azure-iot-remote-monitoring
 [lnk-devicemetadata]: ./iot-suite-what-are-preconfigured-solutions.md#device-identity-registry-and-documentdb

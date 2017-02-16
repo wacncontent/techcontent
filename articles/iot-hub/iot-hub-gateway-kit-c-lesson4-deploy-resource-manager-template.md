@@ -15,13 +15,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/28/2016
-wacn.date: 01/23/2017
+wacn.date: 02/10/2017
 ms.author: xshi
 ---
 
 # 创建 Azure Function App 和存储帐户
 
-Azure Functions 是一种解决方案，可轻松地在云中运行_函数_（小代码片段）。Azure 函数应用在 Azure 中托管函数的执行。
+Azure Functions 是一种解决方案，可轻松地在云中运行 _函数_ （小代码片段）。Azure 函数应用在 Azure 中托管函数的执行。
 
 ## 执行的操作
 
@@ -48,7 +48,7 @@ Azure Functions 是一种解决方案，可轻松地在云中运行_函数_（�
 
 转到 `iot-hub-c-intel-nuc-gateway-getting-started` 存储库文件夹，初始化配置文件，然后运行以下命令，在 Visual Studio Code 中打开示例项目：
 
-```
+```bash
     cd Lesson4
     npm install
     gulp init
@@ -71,8 +71,8 @@ Azure Functions 是一种解决方案，可轻松地在云中运行_函数_（�
 
     更新 `arm-template-param.json` 文件后，请运行以下命令，将资源部署到 Azure：
 
-    ```
-    az resource group deployment create --template-file arm-template.json --parameters @arm-template-param.json -g iot-gateway
+    ```bash
+    az group deployment create --template-file arm-template.json --parameters @arm-template-param.json -g iot-gateway
     ```
 
     使用 `iot-gateway` 作为 `{resource group name}` 的值（如果尚未更改第 2 课中的值）。
@@ -84,4 +84,5 @@ Azure Functions 是一种解决方案，可轻松地在云中运行_函数_（�
 ## 后续步骤
 [读取保存在 Azure 存储中的消息](./iot-hub-gateway-kit-c-lesson4-read-table-storage.md)。
 
-<!---HONumber=Mooncake_0116_2017-->
+<!---HONumber=Mooncake_0206_2017-->
+<!--Update_Description:update wording and code-->

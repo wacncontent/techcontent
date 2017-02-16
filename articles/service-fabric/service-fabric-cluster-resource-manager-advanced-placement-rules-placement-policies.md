@@ -27,7 +27,7 @@ InvalidDomain 放置策略可让你指定特定的容错域对此工作负荷是
 
 代码：
 
-```
+```csharp
 ServicePlacementInvalidDomainPolicyDescription invalidDomain = new ServicePlacementInvalidDomainPolicyDescription();
 invalidDomain.DomainName = "fd:/DCEast"; //regulations prohibit this workload here
 serviceDescription.PlacementPolicies.Add(invalidDomain);
@@ -35,7 +35,7 @@ serviceDescription.PlacementPolicies.Add(invalidDomain);
 
 Powershell：
 
-```
+```posh
 New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("InvalidDomain,fd:/DCEast”)
 ```
 
@@ -46,7 +46,7 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 
 代码：
 
-```
+```csharp
 ServicePlacementRequiredDomainPolicyDescription requiredDomain = new ServicePlacementRequiredDomainPolicyDescription();
 requiredDomain.DomainName = "fd:/DC01/RK03/BL2";
 serviceDescription.PlacementPolicies.Add(requiredDomain);
@@ -54,7 +54,7 @@ serviceDescription.PlacementPolicies.Add(requiredDomain);
 
 Powershell：
 
-```
+```posh
 New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("RequiredDomain,fd:/DC01/RK03/BL2")
 ```
 
@@ -63,7 +63,7 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 
 ![首选主域和故障转移][Image3]  
 
-```
+```csharp
 ServicePlacementPreferPrimaryDomainPolicyDescription primaryDomain = new ServicePlacementPreferPrimaryDomainPolicyDescription();
 primaryDomain.DomainName = "fd:/ChinaEast/";
 serviceDescription.PlacementPolicies.Add(invalidDomain);
@@ -71,7 +71,7 @@ serviceDescription.PlacementPolicies.Add(invalidDomain);
 
 Powershell：
 
-```
+```posh
 New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("PreferredPrimaryDomain,fd:/ChinaEast")
 ```
 
@@ -84,14 +84,14 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 
 代码：
 
-```
+```csharp
 ServicePlacementRequireDomainDistributionPolicyDescription distributeDomain = new ServicePlacementRequireDomainDistributionPolicyDescription();
 serviceDescription.PlacementPolicies.Add(distributeDomain);
 ```
 
 Powershell：
 
-```
+```posh
 New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("RequiredDomainDistribution")
 ```
 

@@ -37,7 +37,7 @@ ms.author: danlep
 
 以下配置文件将部署 1 个 HPC Pack 群集，其中包含 1 个具有本地数据库的头节点和 5 个运行 Windows Server 2012 R2 操作系统的计算节点。所有云服务直接在“中国北部”位置创建。头节点充当域林的域控制器。
 
-```
+```Xml
 <?xml version="1.0" encoding="utf-8" ?>
 <IaaSClusterConfig>
   <Subscription>
@@ -75,7 +75,7 @@ ms.author: danlep
 
 以下配置文件将在现有域林中部署一个 HPC Pack 群集。该群集包含 1 个具有本地数据库的头节点和 12 个应用了 BGInfo VM 扩展的计算节点。域林中的所有 VM 均已禁用 Windows 更新的自动安装。所有云服务直接在“中国东部”位置创建。计算节点在 3 个云服务和 3 个存储帐户中创建：_MyHPCCNService01_ 和 _mycnstorage01_ 中的 _MyHPCCN-0001_ 到 _MyHPCCN-0005_；_MyHPCCNService02_ 和 _mycnstorage02_ 中的 _MyHPCCN-0006_ 到 _MyHPCCN0010_；_MyHPCCNService03_ 和 _mycnstorage03_ 中的 _MyHPCCN-0011_ 到 _MyHPCCN-0012_。计算节点基于从计算节点捕获的现有专用映像创建。已启用自动扩展和收缩服务，并采用默认的扩展和收缩间隔。
 
-```
+```Xml
 <?xml version="1.0" encoding="utf-8" ?>
 <IaaSClusterConfig>
   <Subscription>
@@ -138,7 +138,7 @@ ms.author: danlep
 
 以下配置文件将在现有域林中部署一个 HPC Pack 群集。该群集包含 1 个头节点、 1 个具有 500 GB 数据磁盘的数据库服务器、2 个运行 Windows Server 2012 R2 操作系统的中转节点，以及 5 个运行 Windows Server 2012 R2 操作系统的计算节点。云服务 MyHPCCNService 在地缘组 *MyIBAffinityGroup* 中创建，其他云服务在地缘组 *MyAffinityGroup* 中创建。已在头节点上启用了 HPC 作业计划程序 REST API 和 HPC Web 门户。
 
-```
+```Xml
 <?xml version="1.0" encoding="utf-8" ?>
 <IaaSClusterConfig>
   <Subscription>
@@ -192,7 +192,7 @@ ms.author: danlep
 
 以下配置文件将在现有域林中部署一个 HPC Pack 群集。该群集包含 2 个具有本地数据库的头节点，此外还将创建 2 个 Azure 节点模板并为 Azure 节点模板 _AzureTemplate1_ 创建 3 个中等大小的 Azure 节点。配置头节点后，将在其上运行脚本文件。
 
-```
+```Xml
 <?xml version="1.0" encoding="utf-8" ?>
 <IaaSClusterConfig>
   <Subscription>

@@ -22,7 +22,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
 事件中心的 Java 客户端库可用于 [Maven 中央存储库](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs%22)中的 Maven 项目，并且可以使用 Maven 项目文件中的以下依赖项声明进行引用：
 
-```
+```XML
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-eventhubs</artifactId>
@@ -34,7 +34,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
 1. 对于下面的示例，请首先在你最喜欢的 Java 开发环境中为控制台/shell 应用程序创建一个新的 Maven 项目。该类将称为 ```ErrorNotificationHandler```。
 
-    ```
+    ```Java
     import java.util.function.Consumer;
     import com.microsoft.azure.eventprocessorhost.ExceptionReceivedEventArgs;
 
@@ -50,7 +50,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
 2. 使用以下代码创建名为 ```EventProcessor``` 的新类。
 
-    ```
+    ```Java
     import com.microsoft.azure.eventhubs.EventData;
     import com.microsoft.azure.eventprocessorhost.CloseReason;
     import com.microsoft.azure.eventprocessorhost.IEventProcessor;
@@ -104,7 +104,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
 3. 使用以下代码创建一个名为 ```EventProcessorSample``` 的最终类。
 
-    ```
+    ```Java
     import com.microsoft.azure.eventprocessorhost.*;
     import com.microsoft.azure.servicebus.ConnectionStringBuilder;
     import com.microsoft.azure.eventhubs.EventData;
@@ -170,7 +170,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
 4. 将以下字段替换为创建事件中心和存储帐户时所使用的值。
 
-    ```
+    ```Java
     final String namespaceName = "----ServiceBusNamespaceName-----";
     final String eventHubName = "----EventHubName-----";
 

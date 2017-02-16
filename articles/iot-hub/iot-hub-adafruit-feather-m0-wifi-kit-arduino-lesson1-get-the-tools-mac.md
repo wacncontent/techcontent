@@ -57,13 +57,13 @@ ms.author: xshi
    1. 按 `Cmd + Space` 并输入 `Terminal` 即可打开终端。
    2. 运行以下命令：
 
-       ```
+       ```bash
           /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
        ```
 
 2. 运行以下命令，安装 Git 和 Node.js：
 
-    ```
+    ```bash
        brew install node git
     ```
 
@@ -72,7 +72,7 @@ ms.author: xshi
 
 在终端运行以下命令，安装 `gulp` 和 `device-discovery-cli`：
 
-```
+```bash
 sudo npm install -g gulp device-discovery-cli
 ```
 

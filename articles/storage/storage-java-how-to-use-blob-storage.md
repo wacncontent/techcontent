@@ -42,7 +42,7 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 ## 配置你的应用程序以访问 Blob 存储
 将下列导入语句添加到要在其中使用 Azure 存储 API 以访问 Blob 的 Java 文件的顶部：
 
-```
+```java
 // Include the following imports to use blob APIs.
 import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.blob.*;
@@ -52,7 +52,7 @@ import com.microsoft.azure.storage.blob.*;
 
 Azure 存储客户端使用存储连接字符串来存储用于访问数据管理服务的终结点和凭据。在客户端应用程序中运行时，必须提供以下格式的存储连接字符串，并对 *AccountName* 和 *AccountKey* 值使用 [Azure 门户预览](https://portal.azure.cn)中列出的存储帐户的名称和存储帐户的主访问密钥。下面的示例演示如何声明一个静态字段以保存连接字符串。
 
-```
+```java
 // Define the connection-string with your values
 public static final String storageConnectionString =
     "DefaultEndpointsProtocol=http;" +
@@ -63,7 +63,7 @@ public static final String storageConnectionString =
 
 在 Azure 的角色中运行的应用程序中，此字符串可存储在服务配置文件  *ServiceConfiguration.cscfg* 中，并可通过调用 **RoleEnvironment.getConfigurationSettings** 方法进行访问。下面的示例从服务配置文件中名为  *StorageConnectionString* 的 **Setting** 元素获取连接字符串
 
-```
+```java
 // Retrieve storage account from connection-string.
 String storageConnectionString =
     RoleEnvironment.getConfigurationSettings().get("StorageConnectionString");
@@ -81,7 +81,7 @@ String storageConnectionString =
 
 使用 **CloudBlobClient** 对象获取对你要使用的容器的引用。可使用 **createIfNotExists** 方法创建容器（如果不存在），否则将返回现有容器。默认情况下，新容器是专用容器，因此您必须指定存储访问密钥（如之前所做的那样）才能从该容器下载 Blob。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -107,7 +107,7 @@ catch (Exception e)
 ### 可选：配置进行公共访问的容器
 默认情况下，容器的权限已配置为允许进行私有访问，但你也可以轻松地将容器的权限配置为允许 Internet 上的用户进行公开的、只读的访问：
 
-```
+```java
 // Create a permissions object.
 BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
 
@@ -122,7 +122,7 @@ container.uploadPermissions(containerPermissions);
 
 若要将文件上传到 Blob，请获取容器引用，并使用它获取 Blob 引用。获取 Blob 引用后，可以通过对该 Blob 引用调用 upload 来上传任何数据流。此操作将创建 Blob（如果该 Blob 不存在），或者覆盖它（如果该 Blob 存在）。下面的代码示例演示了这一点，并假定已创建容器。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -153,7 +153,7 @@ catch (Exception e)
 
 若要列出容器中的 Blob，请先获取容器引用，就像上传 Blob 时执行的操作一样。可将容器的 **listBlobs** 方法用于 **for** 循环。以下代码将容器中每个 Blob 的 URI 输出到控制台。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -187,7 +187,7 @@ catch (Exception e)
 
 若要下载 Blob，请执行之前用于上传 Blob 的相同步骤以获取 Blob 引用。在上传示例中，您对 Blob 对象调用了 upload。在下面的示例中，调用 download 以将 Blob 内容传输到可用于将 Blob 保存到本地文件的流对象（如 **FileOutputStream**）。
 
-```
+```java
 try
 {
     // Retrieve storage account from connection-string.
@@ -219,7 +219,7 @@ catch (Exception e)
 ## 删除 Blob
 若要删除 Blob，请获取 Blob 引用，然后调用 **deleteIfExists**。
 
-```
+```java
 try
 {
    // Retrieve storage account from connection-string.
@@ -247,7 +247,7 @@ catch (Exception e)
 ## 删除 Blob 容器
 最后，若要删除 Blob 容器，请获取 Blob 容器引用，然后调用 **deleteIfExists**。
 
-```
+```java
 try
 {
    // Retrieve storage account from connection-string.

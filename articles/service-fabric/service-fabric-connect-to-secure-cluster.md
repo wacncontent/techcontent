@@ -66,7 +66,7 @@ azure servicefabric cluster connect --connection-endpoint https://ip:19080 --cli
 
 若要连接到不安全群集，请向 **Connect-ServiceFabricCluster** 命令提供群集终结点地址：
 
-```
+```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint <Cluster FQDN>:19000 
 ```
 
@@ -74,7 +74,7 @@ Connect-ServiceFabricCluster -ConnectionEndpoint <Cluster FQDN>:19000
 
 若要连接到使用 Azure Active Directory 授权群集管理员访问权限的安全集群，请提供群集证书指纹，并使用 *AzureActiveDirectory* 标志。
 
-```
+```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint <Cluster FQDN>:19000 `
 -ServerCertThumbprint <Server Certificate Thumbprint> `
 -AzureActiveDirectory
@@ -83,7 +83,7 @@ Connect-ServiceFabricCluster -ConnectionEndpoint <Cluster FQDN>:19000 `
 ### 使用客户端证书连接到安全群集
 运行以下 PowerShell 命令以连接到使用客户端证书授权管理员访问权限的安全群集。提供群集证书指纹以及已授予群集管理权限的客户端证书的指纹。证书详细信息必须与群集节点上的证书匹配。
 
-```
+```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint <Cluster FQDN>:19000 `
           -KeepAliveIntervalInSec 10 `
           -X509Credential -ServerCertThumbprint <Certificate Thumbprint> `
@@ -93,7 +93,7 @@ Connect-ServiceFabricCluster -ConnectionEndpoint <Cluster FQDN>:19000 `
 
 *ServerCertThumbprint* 是群集节点上安装的服务器证书的指纹。*FindValue* 是管理客户端证书的指纹。填充参数时，命令如以下示例所示：
 
-```
+```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint clustername.chinaeast.chinacloudapp.cn:19000 `
           -KeepAliveIntervalInSec 10 `
           -X509Credential -ServerCertThumbprint A8136758F4AB8962AF2BF3F27921BE1DF67F4326 `
@@ -110,13 +110,13 @@ Service Fabric SDK 为群集管理提供 [FabricClient](https://msdn.microsoft.c
 
 若要连接到远程不安全群集，只需创建一个 FabricClient 实例并提供群集地址：
 
-```
+```csharp
 FabricClient fabricClient = new FabricClient("clustername.chinaeast.chinacloudapp.cn:19000");
 ```
 
 对于在群集内运行的代码（例如，在可靠服务中），请创建 FabricClient，无需指定群集地址。FabricClient 连接到代码当前正在运行的节点上的本地管理网关，从而避免额外的网络跃点。
 
-```
+```csharp
 FabricClient fabricClient = new FabricClient();
 ```
 
@@ -124,7 +124,7 @@ FabricClient fabricClient = new FabricClient();
 
 群集中的节点必须具有有效的证书，在 SAN 中，这些证书的公用名或 DNS 名出现在 [FabricClient](https://msdn.microsoft.com/zh-cn/library/system.fabric.fabricclient.aspx) 上设置的 [RemoteCommonNames 属性](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.x509credentials.remotecommonnames.aspx)中。按照此流程操作可在客户端与群集节点之间进行相互身份验证。
 
-```
+```csharp
 string clientCertThumb = "71DE04467C9ED0544D021098BCD44C71E183414E";
 string serverCertThumb = "A8136758F4AB8962AF2BF3F27921BE1DF67F4326";
 string CommonName = "www.clustername.chinaeast.chinacloudapp.cn";
@@ -172,7 +172,7 @@ static X509Credentials GetCredentials(string clientCertThumb, string serverCertT
 
 使用交互模式，此模式会弹出 AAD 交互式登录对话框：
 
-```
+```csharp
 string serverCertThumb = "A8136758F4AB8962AF2BF3F27921BE1DF67F4326";
 string connection = "clustername.chinaeast.chinacloudapp.cn:19000";
 
@@ -204,7 +204,7 @@ catch (Exception e)
 
 有关如何获取令牌以及其他信息，请参阅 [Microsoft.IdentityModel.Clients.ActiveDirectory Namespace](https://msdn.microsoft.com/zh-cn/library/microsoft.identitymodel.clients.activedirectory.aspx)（Microsoft.IdentityModel.Clients.ActiveDirectory 命名空间））
 
-```
+```csharp
 string tenantId = "c15cfcea-02c1-40dc-8466-fbd0ee0b05d2";
 string clientApplicationId = "118473c2-7619-46e3-a8e4-6da8d5f56e12";
 string webApplicationId = "53E6948C-0897-4DA6-B26A-EE2A38A690B4";
@@ -301,7 +301,7 @@ Azure 门户的群集基本信息窗格中也提供了完整 URL。
 
 运行以下 PowerShell cmdlet，在访问群集的计算机上设置客户端证书。
 
-```
+```powershell
 Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My `
         -FilePath C:\docDemo\certs\DocDemoClusterCert.pfx `
         -Password (ConvertTo-SecureString -String test -AsPlainText -Force)
@@ -309,7 +309,7 @@ Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My `
 
 如果它是自签名证书，则需要将其导入计算机的“受信任人”存储中才能使用此证书连接到安全群集。
 
-```
+```powershell
 Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\TrustedPeople `
 -FilePath C:\docDemo\certs\DocDemoClusterCert.pfx `
 -Password (ConvertTo-SecureString -String test -AsPlainText -Force)

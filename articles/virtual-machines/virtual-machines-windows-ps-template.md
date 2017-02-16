@@ -215,7 +215,7 @@ ms.author: davidmu
 
 1. 获取可以创建资源的可用位置列表。
 
-    ```
+    ```powershell   
     Get-AzureRmLocation | sort DisplayName | Select DisplayName
     ```
 

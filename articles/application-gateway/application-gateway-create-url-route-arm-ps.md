@@ -73,7 +73,7 @@ PathPattern：要匹配的路径模式列表。每个模式必须以 / 开头，
 
 登录到 Azure
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -83,7 +83,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 检查帐户的订阅。
 
-```
+```powershell
 Get-AzureRmSubscription
 ```
 
@@ -91,7 +91,7 @@ Get-AzureRmSubscription
 
 选择要使用的 Azure 订阅。<BR>
 
-```
+```powershell
 Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 ```
 
@@ -99,13 +99,13 @@ Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 
 创建资源组（如果要使用现有的资源组，请跳过此步骤）。
 
-```
+```powershell
 New-AzureRmResourceGroup -Name appgw-RG -Location "China North"
 ```
 
 或者，可以为应用程序网关的资源组创建标记：
 
-```
+```powershell
 $resourceGroup = New-AzureRmResourceGroup -Name appgw-RG -Location "China North" -Tags @{Name = "testtag"; Value = "Application Gateway URL routing"} 
 ```
 
@@ -126,7 +126,7 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 将地址范围 10.0.0.0/24 分配给用于创建虚拟网络的子网变量。
 
-```
+```powershell
 $subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
 ```
 
@@ -134,7 +134,7 @@ $subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10
 
 使用前缀 10.0.0.0/16 和子网 10.0.0.0/24，在中国北部区域的“appgw-rg”资源组中创建名为“appgwvnet”的虚拟网络。
 
-```
+```powershell
 $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-RG -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnet
 ```
 
@@ -142,7 +142,7 @@ $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-RG -L
 
 分配子网变量，便于完成后面的创建应用程序网关的步骤。
 
-```
+```powershell
 $subnet=$vnet.Subnets[0]
 ```
 
@@ -150,7 +150,7 @@ $subnet=$vnet.Subnets[0]
 
 在中国北部区域的“appgw-rg”资源组中创建公共 IP 资源“publicIP01”。
 
-```
+```powershell
 $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -name publicIP01 -location "China North" -AllocationMethod Dynamic
 ```
 
@@ -164,7 +164,7 @@ $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -name publicI
 
 创建名为“gatewayIP01”的应用程序网关 IP 配置。当应用程序网关启动时，它会从配置的子网获取 IP 地址，再将网络流量路由到后端 IP 池中的 IP 地址。请记住，每个实例需要一个 IP 地址。
 
-```
+```powershell
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
 ```
 
@@ -172,7 +172,7 @@ $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Sub
 
 分别配置名为“pool01”和“pool2”的后端 IP 地址池，其中，“pool1”的 IP 地址为“134.170.185.46”、“134.170.188.221”、“134.170.185.50”；“pool2”的 IP 地址为“134.170.186.46”、“134.170.189.221”、“134.170.186.50”。
 
-```
+```powershell
 $pool1 = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
 
 $pool2 = New-AzureRmApplicationGatewayBackendAddressPool -Name pool02 -BackendIPAddresses 134.170.186.46, 134.170.189.221,134.170.186.50
@@ -184,7 +184,7 @@ $pool2 = New-AzureRmApplicationGatewayBackendAddressPool -Name pool02 -BackendIP
 
 为后端池中进行了负载均衡的网络流量配置应用程序网关设置“poolsetting01”和“poolsetting02”。在本示例中，将为后端池配置不同的后端池设置。每个后端池可有自身的后端池设置。
 
-```
+```powershell
 $poolSetting01 = New-AzureRmApplicationGatewayBackendHttpSettings -Name "besetting01" -Port 80 -Protocol Http -CookieBasedAffinity Disabled -RequestTimeout 120
 
 $poolSetting02 = New-AzureRmApplicationGatewayBackendHttpSettings -Name "besetting02" -Port 80 -Protocol Http -CookieBasedAffinity Enabled -RequestTimeout 240
@@ -194,7 +194,7 @@ $poolSetting02 = New-AzureRmApplicationGatewayBackendHttpSettings -Name "besetti
 
 使用公共 IP 终结点配置前端 IP。
 
-```
+```powershell
 $fipconfig01 = New-AzureRmApplicationGatewayFrontendIPConfig -Name "frontend1" -PublicIPAddress $publicip
 ```
 
@@ -202,7 +202,7 @@ $fipconfig01 = New-AzureRmApplicationGatewayFrontendIPConfig -Name "frontend1" -
 
 配置应用程序网关的前端端口。
 
-```
+```powershell
 $fp01 = New-AzureRmApplicationGatewayFrontendPort -Name "fep01" -Port 80
 ```
 
@@ -210,7 +210,7 @@ $fp01 = New-AzureRmApplicationGatewayFrontendPort -Name "fep01" -Port 80
 
 配置侦听器。此步骤针对用于接收传入网络流量的公共 IP 地址和连接端口配置侦听器。
 
-```
+```powershell
 $listener = New-AzureRmApplicationGatewayHttpListener -Name "listener01" -Protocol Http -FrontendIPConfiguration $fipconfig01 -FrontendPort $fp01
 ```
 
@@ -220,7 +220,7 @@ $listener = New-AzureRmApplicationGatewayHttpListener -Name "listener01" -Protoc
 
 以下示例将创建两个规则：一个用于将流量路由到后端“pool1”的“/image/”路径，另一个用于将流量路由到后端“pool2”的“/video/”路径。
 
-```
+```powershell
 $imagePathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "pathrule1" -Paths "/image/*" -BackendAddressPool $pool1 -BackendHttpSettings $poolSetting01
 
 $videoPathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "pathrule2" -Paths "/video/*" -BackendAddressPool $pool2 -BackendHttpSettings $poolSetting02
@@ -228,7 +228,7 @@ $videoPathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "pathrule2" -
 
 如果路径不符合任何预定义的路径规则，规则路径映射配置也会配置默认的后端地址池。
 
-```
+```powershell
 $urlPathMap = New-AzureRmApplicationGatewayUrlPathMapConfig -Name "urlpathmap" -PathRules $videoPathRule, $imagePathRule -DefaultBackendAddressPool $pool1 -DefaultBackendHttpSettings $poolSetting02
 ```
 
@@ -236,7 +236,7 @@ $urlPathMap = New-AzureRmApplicationGatewayUrlPathMapConfig -Name "urlpathmap" -
 
 创建规则设置。此步骤将应用程序网关配置为使用基于 URL 路径的路由。
 
-```
+```powershell
 $rule01 = New-AzureRmApplicationGatewayRequestRoutingRule -Name "rule1" -RuleType PathBasedRouting -HttpListener $listener -UrlPathMap $urlPathMap
 ```
 
@@ -244,7 +244,7 @@ $rule01 = New-AzureRmApplicationGatewayRequestRoutingRule -Name "rule1" -RuleTyp
 
 配置实例数目和应用程序网关的大小。
 
-```
+```powershell
 $sku = New-AzureRmApplicationGatewaySku -Name "Standard_Small" -Tier Standard -Capacity 2
 ```
 
@@ -252,7 +252,7 @@ $sku = New-AzureRmApplicationGatewaySku -Name "Standard_Small" -Tier Standard -C
 
 创建包含前述步骤中所有配置对象的应用程序网关。
 
-```
+```powershell
 $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-RG -Location "China North" -BackendAddressPools $pool1,$pool2 -BackendHttpSettingsCollection $poolSetting01, $poolSetting02 -FrontendIpConfigurations $fipconfig01 -GatewayIpConfigurations $gipconfig -FrontendPorts $fp01 -HttpListeners $listener -UrlPathMaps $urlPathMap -RequestRoutingRules $rule01 -Sku $sku
 ```
 

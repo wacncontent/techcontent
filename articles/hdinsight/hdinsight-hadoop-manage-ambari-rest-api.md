@@ -68,13 +68,13 @@ URI 的完全限定域名 (FQDN) 部分 (CLUSTERNAME.azurehdinsight.cn) 中的�
 
 下面是使用 cURL 对 REST API 发出 GET 请求的示例：将 **PASSWORD** 替换为群集的管理员密码。将 **CLUSTERNAME** 替换为群集的名称：
 
-```
+```bash
 curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME"
 ```
 
 响应是 JSON 文档，以类似于下面的内容的信息开头：
 
-```json
+```
 {
 "href" : "http://10.0.0.10:8080/api/v1/clusters/CLUSTERNAME",
 "Clusters" : {
@@ -95,7 +95,7 @@ curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters
 
 由于这是一个 JSON 文档，因此使用 JSON 解析器来处理数据通常会更简单。例如，下面的示例使用 jq 仅显示 `health_report` 元素。
 
-```
+```bash
 curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME" | jq '.Clusters.health_report'
 ```
 
@@ -129,13 +129,13 @@ jq '[.host_components[].HostRoles.host_name][0]'
 
 以下命令将检索群集默认存储的 WASB URI：
 
-```
+```bash
 curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME/configurations/service_config_versions?service_name=HDFS&service_config_version=1" | jq '.items[].configurations[].properties["fs.defaultFS"] | select(. != null)'
 ```
 
 PowerShell 对于使用单引号和双引号具有略有不同的规则。使用 PowerShell 中的以下命令：
 
-```
+```bash
 curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME/configurations/service_config_versions?service_name=HDFS&service_config_version=1" | jq '.items[].configurations[].properties["""fs.defaultFS"""] | select(. != null)'
 ```
 
@@ -178,13 +178,13 @@ wasbs://CONTAINER@ACCOUNTNAME.blob.core.chinacloudapi.cn
 
 1. 获取当前配置，即 Ambari 存储为“所需配置”的配置：
 
-    ```
+    ```bash
     curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME?fields=Clusters/desired_configs"
     ```
 
     该示例返回一个 JSON 文档，其中包含群集上安装的组件的当前配置（由 *tag* 值标识）。下面的示例是从 Spark 群集类型返回的数据摘录。
 
-    ```json
+    ```
     "spark-metrics-properties" : {
         "tag" : "INITIAL",
         "user" : "admin",
@@ -206,49 +206,49 @@ wasbs://CONTAINER@ACCOUNTNAME.blob.core.chinacloudapi.cn
 
 2. 使用以下命令检索组件和标记的配置。将 **spark-thrift-sparkconf** 和 **INITIAL** 替换为要检索其配置的组件和标记。
 
-    ```
+    ```PowerShell
     curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME/configurations?type=spark-thrift-sparkconf&tag=INITIAL" | jq --arg newtag $(echo version$(date +%s%N)) '.items[] | del(.href, .version, .Config) | .tag |= $newtag | {"Clusters": {"desired_config": .}}' > newconfig.json
     ```
 
-<br/>  
+    <br/>  
 
-```
+    ```PowerShell
     $epoch = Get-Date -Year 1970 -Month 1 -Day 1 -Hour 0 -Minute 0 -Second 0
     $now = Get-Date
     $unixTimeStamp = [math]::truncate($now.ToUniversalTime().Subtract($epoch).TotalMilliSeconds)
 
     curl -u admin:PASSWORD -G "https://CLUSTERNAME.azurehdinsight.cn/api/v1/clusters/CLUSTERNAME/configurations?type=spark-thrift-sparkconf&tag=INITIAL" | jq --arg newtag "version$unixTimeStamp" '.items[] | del(.href, .version, .Config) | .tag |= $newtag | {"Clusters": {"desired_config": .}}' > newconfig.json
-```
-
-Curl 检索 JSON 文档，然后使用 jq 修改数据以创建模板。然后使用模板添加/修改配置值。具体操作如下：
-
-* 创造一个值，这个值包含“版本”字符串和日期，然后保存在“newtag”。
-
-* 为新的所需配置创建根文档。
-
-* 得到 `.items[]` 数组的内容，然后加到“desired_config”元素下。
-
-* 删除“href”、“version”和“Config”元素，因为新建配置是不需要这些元素的。
-
-* 添加一个新的“tag”元素，然后把值设置为“version#################”。数值部分根据当钱的日期来设置。每一个配置都得有一个独特的标签。
-
-    最后，数据保存到“newconfig.json”文档。这个文档的结构应该跟以下示例类似：
-
     ```
-    {
-        "Clusters": {
-            "desired_config": {
-            "tag": "version1459260185774265400",
-            "type": "spark-thrift-sparkconf",
-            "properties": {
-                ....
-            },
-            "properties_attributes": {
-                ....
+
+    Curl 检索 JSON 文档，然后使用 jq 修改数据以创建模板。然后使用模板添加/修改配置值。具体操作如下：
+
+    * 创造一个值，这个值包含“版本”字符串和日期，然后保存在“newtag”。
+
+    * 为新的所需配置创建根文档。
+
+    * 得到 `.items[]` 数组的内容，然后加到“desired_config”元素下。
+
+    * 删除“href”、“version”和“Config”元素，因为新建配置是不需要这些元素的。
+
+    * 添加一个新的“tag”元素，然后把值设置为“version#################”。数值部分根据当钱的日期来设置。每一个配置都得有一个独特的标签。
+
+        最后，数据保存到“newconfig.json”文档。这个文档的结构应该跟以下示例类似：
+
+        ```json
+        {
+            "Clusters": {
+                "desired_config": {
+                "tag": "version1459260185774265400",
+                "type": "spark-thrift-sparkconf",
+                "properties": {
+                    ....
+                },
+                "properties_attributes": {
+                    ....
+                }
             }
         }
-    }
-    ```
+        ```
 
 3. 打开 **newconfig.json** 文档并在 **properties** 对象中修改/添加值。例如，下面的示例将“spark.yarn.am.memory”的值从“1g”更改为“3g”，并针对值为“256m”的“spark.kryoserializer.buffer.max”添加新元素。
 
@@ -292,7 +292,7 @@ Curl 检索 JSON 文档，然后使用 jq 修改数据以创建模板。然后�
 
 此命令返回如下响应。
 
-```
+```json
     {
         "href" : "http://10.0.0.18:8080/api/v1/clusters/CLUSTERNAME/requests/29",
         "Requests" : {

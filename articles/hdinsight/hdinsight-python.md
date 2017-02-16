@@ -27,6 +27,8 @@ Hive 和 Pig 非常适用于在 HDInsight 中处理数据，但有时需要使�
 
 * HDInsight 群集
 
+    [!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
     > [!IMPORTANT]
     Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
@@ -44,7 +46,7 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 **基于 Linux 的 HDInsight**
 
-```sql
+```hiveql
 add file wasbs:///streaming.py;
 
 SELECT TRANSFORM (clientid, devicemake, devicemodel)
@@ -56,7 +58,7 @@ ORDER BY clientid LIMIT 50;
 
 **基于 Windows 的 HDInsight**
 
-```sql
+```hiveql
 add file wasbs:///streaming.py;
 
 SELECT TRANSFORM (clientid, devicemake, devicemodel)
@@ -125,7 +127,7 @@ while True:
 
 通过注册后，此示例的 Pig Latin 对于两个脚本是相同的：
 
-```
+```pig
 LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
 LOG = FILTER LOGS by LINE is not null;
 DETAILS = FOREACH LOG GENERATE myfuncs.create_structure(LINE);
@@ -202,7 +204,7 @@ return date, time, classname, level, detail
 1. 使用 `hive` 命令来启动 Hive Shell。加载 Shell 后，应可看到 `hive>` 提示符。
 2. 在 `hive>` 提示符下输入以下命令。
 
-    ```sql
+    ```hiveql
     add file wasbs:///streaming.py;
     SELECT TRANSFORM (clientid, devicemake, devicemodel)
       USING 'python streaming.py' AS
@@ -226,7 +228,7 @@ return date, time, classname, level, detail
 1. 使用 `pig` 命令来启动该 shell。加载 Shell 后，应可看到 `grunt>` 提示符。
 2. 在 `grunt>` 提示符下输入以下语句，使用 Jython 解释器运行 Python 脚本。
 
-    ```
+    ```pig
     Register wasbs:///pig_python.py using jython as myfuncs;
     LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
     LOG = FILTER LOGS by LINE is not null;
@@ -249,7 +251,7 @@ return date, time, classname, level, detail
 
 5. 进入编辑器后，删除行开头的 `#` 字符以取消注释以下行：
 
-    ```
+    ```python
     #from pig_util import outputSchema
     ```
 
@@ -257,7 +259,7 @@ return date, time, classname, level, detail
 
 6. 使用 `pig` 命令再次启动 shell。在 `grunt>` 提示符下，使用以下命令运行带有 Jython 解释器的 Python 脚本。
 
-    ```
+    ```pig
     Register 'pig_python.py' using streaming_python as myfuncs;
     LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
     LOG = FILTER LOGS by LINE is not null;
@@ -469,7 +471,7 @@ Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An e
 
 如果所用编辑器无法创建 LF 行尾结束符号，或者不确定要使用什么行尾结束符号，在将文件上传到 HDInsight 之前，请使用以下 PowerShell 语句删除 CR 字符：
 
-```
+```powershell
 $original_file ='c:\path\to\streaming.py'
 $text = [IO.File]::ReadAllText($original_file) -replace "`r`n", "`n"
 [IO.File]::WriteAllText($original_file, $text)
@@ -478,7 +480,7 @@ $text = [IO.File]::ReadAllText($original_file) -replace "`r`n", "`n"
 ### PowerShell 脚本
 用于运行示例的两个示例 PowerShell 脚本都包含一个带注释的行，该行将显示作业的错误输出。如果你未看到作业的预期输出，请取消注释以下行，并查看错误信息中是否指明了问题。
 
-```
+```powershell
 # Get-AzureRmHDInsightJobOutput `
         -Clustername $clusterName `
         -JobId $job.JobId `

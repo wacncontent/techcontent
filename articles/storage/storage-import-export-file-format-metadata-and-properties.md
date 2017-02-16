@@ -24,7 +24,7 @@ ms.author: renash
 ## 元数据文件格式  
 元数据文件的格式如下所示：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <Metadata>  
 [<metadata-name-1>metadata-value-1</metadata-name-1>]  
@@ -43,7 +43,7 @@ ms.author: renash
 ## 属性文件格式  
 属性文件的格式如下：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <Properties>  
 [<Last-Modified>date-time-value</Last-Modified>]  

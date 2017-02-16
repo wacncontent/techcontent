@@ -53,19 +53,19 @@ ms.author: cynthn
 
 1. 登录到 CLI。
 
-    ```
+    ```azurecli
     azure login -e AzureChinaCloud
     ```
 
 2. 请确保你处于 Resource Manager 模式。
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
 3. 设置正确的订阅。可以使用“azure account list”查看所有订阅。
 
-    ```
+    ```azurecli
     azure account set mySubscriptionID
     ```
 
@@ -73,7 +73,7 @@ ms.author: cynthn
 
 停止源 VM 并将其解除分配。可以使用“azure vm list”获取订阅中所有 VM 及其资源组名称的列表。
 
-```
+```azurecli
 azure vm stop myResourceGroup myVM
 azure vm deallocate myResourceGroup MyVM
 ```
@@ -84,7 +84,7 @@ azure vm deallocate myResourceGroup MyVM
 
 若要将 VHD 复制到同一存储帐户中的另一个容器，请键入：
 
-```
+```azurecli
 azure storage blob copy start \
         https://mystorageaccountname.blob.core.chinacloudapi.cn:8080/mycontainername/myVHD.vhd \
         myNewContainerName
@@ -94,7 +94,7 @@ azure storage blob copy start \
 
 为新 VM 设置虚拟网络和 NIC。
 
-```
+```azurecli
 azure network vnet create myResourceGroup myVnet -l myLocation
 
 azure network vnet subnet create -a <address.prefix.in.CIDR/format> myResourceGroup myVnet mySubnet
@@ -108,7 +108,7 @@ azure network nic create myResourceGroup myNic -k mySubnet -m myVnet -p myPublic
 
 现在可以[使用 Resource Manager 模板](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-specialized-vhd)从已上载的虚拟磁盘创建 VM，或者通过在 CLI 中输入以下命令指定所复制磁盘的 URI 来创建 VM：
 
-```
+```azurecli
 azure vm create -n myVM -l myLocation -g myResourceGroup -f myNic \
         -z Standard_DS1_v2 -y Linux \
         https://mystorageaccountname.blob.core.chinacloudapi.cn:8080/mycontainername/myVHD.vhd 

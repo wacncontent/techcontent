@@ -33,6 +33,8 @@ Mahout 是适用于 Apache Hadoop 的[计算机学习][ml]库。Mahout 包含用
 
 * 基于 Linux 的 HDInsight 群集。有关创建该群集的信息，请参阅[开始在 HDInsight 中使用基于 Linux 的 Hadoop][getstarted]。
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 > [!IMPORTANT]
 Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
@@ -72,7 +74,7 @@ user-ratings.txt 中包含的数据具有 `userID`、`movieID`、`userRating` �
 
 通过 SSH 到群集的连接，使用以下命令运行推荐作业：
 
-```
+```bash
 mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/MahoutMovieData/user-ratings.txt -o /example/data/mahoutout --tempDir /temp/mahouttemp
 ```
 
@@ -83,7 +85,7 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
 
 1. 作业完成后，使用以下命令查看生成的输出：
 
-    ```
+    ```bash
     hdfs dfs -text /example/data/mahoutout/part-r-00000
     ```
 
@@ -100,7 +102,7 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
 
 2. 可以使用输出和 moviedb.txt 显示更多适用于用户的信息。首先需使用以下命令按本地方式复制文件：
 
-    ```
+    ```bash
     hdfs dfs -get /example/data/mahoutout/part-r-00000 recommendations.txt
     hdfs dfs -get /HdiSamples/HdiSamples/MahoutMovieData/* .
     ```
@@ -109,7 +111,7 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
 
 3. 使用以下命令创建新的 Python 脚本，该脚本查找电影名称中是否存在建议输出中的数据：
 
-    ```
+    ```bash
     nano show_recommendations.py
     ```
 
@@ -171,13 +173,13 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
 
 4. 使用以下命令以使该文件成为可执行文件：
 
-    ```
+    ```bash
     chmod +x show_recommendations.py
     ```
 
 5. 运行 Python 脚本。以下命令假设用户处于内含所有已下载文件的目录中：
 
-    ```
+    ```bash
     ./show_recommendations.py 4 user-ratings.txt moviedb.txt recommendations.txt
     ```
 
@@ -240,7 +242,7 @@ mahout recommenditembased -s SIMILARITY_COOCCURRENCE -i /HdiSamples/HdiSamples/M
 
 Mahout 作业不删除在处理作业时创建的临时数据。在示例作业中指定 `--tempDir` 参数，以将临时文件隔离到特定路径中轻松删除。若要删除临时文件，请使用以下命令：
 
-```
+```bash
 hdfs dfs -rm -f -r /temp/mahouttemp
 ```
 

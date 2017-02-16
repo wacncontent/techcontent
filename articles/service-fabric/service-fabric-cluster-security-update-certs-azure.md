@@ -71,7 +71,7 @@ ms.author: chackdan
 2. 添加“字符串”类型的新参数“secCertificateThumbprint”。如果使用的 Resource Manager 模板是在创建群集时从门户下载的，或者是从快速入门模板下载的，则只需搜索该参数，就会发现它已做了定义。
 3. 找到“Microsoft.ServiceFabric/clusters”资源定义。在属性下面找到“Certificate”JSON 标记，如以下 JSON 代码片段所示。
 
-    ```
+    ```JSON
       "properties": {
         "certificate": {
           "thumbprint": "[parameters('certificateThumbprint')]",
@@ -83,7 +83,7 @@ ms.author: chackdan
 
 资源定义现在应如下所示（根据具体的模板源，有时与下面的代码片段不完全相同）。在下面可以看到，执行的操作是指定一个新证书作为主要证书，同时将当前主要证书交换为辅助证书。这样就可以通过一个部署步骤，将当前证书滚动更新为新证书。
 
-```
+```JSON
       "properties": {
         "certificate": {
             "thumbprint": "[parameters('certificateThumbprint')]",
@@ -129,7 +129,7 @@ ms.author: chackdan
 
 部署模板之前先进行测试。使用群集当前部署到的同一个资源组。
 
-```
+```powershell
 Test-AzureRmResourceGroupDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
 ```
 
@@ -138,13 +138,13 @@ Test-AzureRmResourceGroupDeployment -ResourceGroupName <Resource Group that your
 >[!NOTE]
 如果将 Mode 设置为 Complete，可能会无意中删除不在模板中的资源。因此请不要在此方案中使用该模式。
 
-```
+```powershell
 New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
 ```
 
 下面是已填充数据的同一个 Powershell 命令示例。
 
-```
+```powershell
 $ResouceGroup2 = "chackosecure5"
 $TemplateFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure_Step2.json"
 $TemplateParmFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure.parameters_Step2.json"
@@ -156,7 +156,7 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $ResouceGroup2 -TemplatePa
 
 如果使用自签名证书，请务必将它们导入本地 TrustedPeople 证书存储。
 
-```
+```powershell
 ######## Set up the certs on your local box
 Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\TrustedPeople -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
 Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
@@ -164,7 +164,7 @@ Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My -FileP
 
 以下快速参考提供了用于连接到安全群集的命令
 
-```
+```powershell
 $ClusterName= "chackosecure5.chinaeast.chinacloudapp.cn:19000"
 $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7SD1D630F8F3" 
 
@@ -179,7 +179,7 @@ Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveInterval
 
 以下快速参考提供了用于获取群集运行状况的命令
 
-```
+```powershell
 Get-ServiceFabricClusterHealth 
 ```
 

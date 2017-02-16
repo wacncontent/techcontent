@@ -27,14 +27,14 @@ ms.author: xshi
 ### 在 Gulp 任务期间没有响应
 如果在运行 gulp 任务时遇到问题，可添加 `--verbose` 选项进行调试。请尝试使用 `Ctrl + C` 终止当前 gulp 任务，然后在控制台窗口中运行以下命令，以便查看调试消息。可以在控制台输出中查看详细的错误消息。
 
-```
+```bash
 gulp --verbose
 ```
 
 ### NPM 问题
 请尝试使用以下命令更新 NPM 包：
 
-```
+```bash
 npm install -g npm
 ```
 
@@ -44,7 +44,7 @@ npm install -g npm
 
 ### 在调试模式下运行示例应用程序
 
-```
+```bash
 gulp run --debug
 ```
 
@@ -58,7 +58,7 @@ gulp run --debug
 
 使用以下内容更新 **launch.json** 文件，将 `[device hostname or IP address]` 替换为实际设备 IP 地址或主机名。
 
-```
+```json
 {
     "version": "0.2.0",
     "configurations": [
@@ -97,7 +97,7 @@ Azure 命令行接口 (Azure CLI) 为预览版。
 
 如果遇到“找不到满足需求的版本”，请运行以下命令，将 pip 升级到最新版本。
 
-```
+```bash
 python -m pip install --upgrade pip
 ```
 
@@ -127,13 +127,13 @@ python -m pip install --upgrade pip
 
 若要安装最新（预发行）版的 iothub-explorer 工具，请在命令行环境中运行以下命令：
 
-```
+```bash
 npm install -g iothub-explorer@latest
 ```
 
 可以使用以下命令获取所有 iothub-explorer 命令及其参数的更多帮助：
 
-```
+```bash
 iothub-explorer help
 ```
 

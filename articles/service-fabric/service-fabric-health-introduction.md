@@ -101,7 +101,7 @@ Service Fabric 使用三种运行状况状态来说明实体是否正常：“�
 
 以下示例摘自某个群集清单。若要定义应用程序类型映射中的条目，请在参数名称前面添加“ApplicationTypeMaxPercentUnhealthyApplications-”，后接应用程序类型名称。
 
-```
+```xml
 <FabricSettings>
   <Section Name="HealthManager/ClusterHealthPolicy">
     <Parameter Name="ConsiderWarningAsError" Value="False" />
@@ -135,7 +135,7 @@ Service Fabric 使用三种运行状况状态来说明实体是否正常：“�
 
 以下示例摘自某个应用程序清单：
 
-```
+```xml
 <Policies>
     <HealthPolicy ConsiderWarningAsError="true" MaxPercentUnhealthyDeployedApplications="20">
         <DefaultServiceTypeHealthPolicy
@@ -262,7 +262,7 @@ Service Fabric 使用三种运行状况状态来说明实体是否正常：“�
 ## 示例：报告和评估应用程序运行状况
 下列示例在源 **MyWatchdog** 中的应用程序 **fabric:/WordCount** 上通过 PowerShell 发送运行状况报告。运行状况报告包含有关“错误”运行状况状态下的运行状况属性可用性的信息，含无限 TimeToLive。然后，它会查询应用程序运行状况，此查询会返回已聚合运行状况状态错误和运行状况事件列表中的已报告运行状况事件。
 
-```
+```powershell
 PS C:\> Send-ServiceFabricApplicationHealthReport –ApplicationName fabric:/WordCount –SourceId "MyWatchdog" –HealthProperty "Availability" –HealthState Error
 
 PS C:\> Get-ServiceFabricApplicationHealth fabric:/WordCount

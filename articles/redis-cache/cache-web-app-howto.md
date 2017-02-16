@@ -90,7 +90,7 @@ ms.author: sdanie
 
 3. 将 `Team.cs` 文件顶部的 `using` 语句替换为以下 `using` 语句。
 
-    ```
+    ```c#
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -99,7 +99,7 @@ ms.author: sdanie
 
 1. 将 `Team` 类的定义替换为以下代码片段，其中包含更新的 `Team` 类定义以及某些其他实体框架帮助器类。有关本教程中使用的实体框架 Code First 方法的详细信息，请参阅[对新数据库使用 Code First](https://msdn.microsoft.com/data/jj193542)。
 
-    ```
+    ```c#
     public class Team
     {
         public int ID { get; set; }
@@ -173,13 +173,13 @@ ms.author: sdanie
     ![Web.config][cache-web-config]
 2. 将以下连接字符串添加到 `connectionStrings` 节。连接字符串的名称必须与实体框架数据库上下文类（即 `TeamContext`）的名称相匹配。
 
-    ```
+    ```xml   
     <add name="TeamContext" connectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Teams.mdf;Integrated Security=True" providerName="System.Data.SqlClient" />
     ```
 
     添加完此项以后，`connectionStrings` 节应如以下示例所示。
 
-    ```
+    ```xml
     <connectionStrings>
         <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-ContosoTeamStats-20160216120918.mdf;Initial Catalog=aspnet-ContosoTeamStats-20160216120918;Integrated Security=True"
             providerName="System.Data.SqlClient" />
@@ -206,14 +206,14 @@ ms.author: sdanie
 
 6. 将以下两个 `using` 语句添加到文件顶部的其他 `using` 语句下方。
 
-    ```
+    ```c#
     using System.Data.Entity;
     using ContosoTeamStats.Models;
     ```
 
 1. 在 `Application_Start` 方法的末尾添加以下代码行。
 
-    ```
+    ```c#
     Database.SetInitializer<TeamContext>(new TeamInitializer());
     ```
 
@@ -223,7 +223,7 @@ ms.author: sdanie
 
 2. 将以下代码的 `RegisterRoutes` 方法中的 `controller = "Home"` 替换为 `controller = "Teams"`，如以下示例所示。
 
-    ```
+    ```c#
     routes.MapRoute(
         name: "Default",
         url: "{controller}/{action}/{id}",
@@ -237,7 +237,7 @@ ms.author: sdanie
     ![\_Layout.cshtml][cache-layout-cshtml]
 2. 更改 `title` 元素的内容，将 `My ASP.NET Application` 替换为 `Contoso Team Stats`，如以下示例所示。
 
-    ```
+    ```html
     <title>@ViewBag.Title - Contoso Team Stats</title>
     ```
 
@@ -276,14 +276,14 @@ ms.author: sdanie
 
 4. 将以下两个 `using` 语句添加到 **TeamsController.cs**。
 
-    ```
+    ```c#   
     using System.Configuration;
     using StackExchange.Redis;
     ```
 
 5. 将以下两个属性添加到 `TeamsController` 类。
 
-    ```
+    ```c#   
     // Redis Connection string info
     private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
     {
@@ -304,7 +304,7 @@ ms.author: sdanie
 
     编辑 `WebAppPlusCacheAppSecrets.config` 文件，添加以下内容。如果在本地运行该应用程序，则可利用此信息连接到 Azure Redis 缓存实例。在本教程中，你随后将设置 Azure Redis 缓存实例并更新缓存名称和密码。如果你不打算在本地运行示例应用程序，则可跳过此文件的创建步骤以及后续的文件引用步骤，因为当你部署到 Azure 时，应用程序会从 Web 应用的应用设置而非从此文件中检索缓存连接信息。由于 `WebAppPlusCacheAppSecrets.config` 不与应用程序一起部署到 Azure，因此除非您要在本地运行应用程序，否则不需要它。
 
-    ```
+    ```xml
     <appSettings>
       <add key="CacheConnection" value="MyCache.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=..."/>
     </appSettings>
@@ -330,14 +330,14 @@ ms.author: sdanie
 
 1. 将以下 `using` 语句添加到 `TeamsController.cs` 文件顶部，与其他 `using` 语句放置在一起。
 
-    ```
+    ```c#   
     using System.Diagnostics;
     using Newtonsoft.Json;
     ```
 
 2. 将当前的 `public ActionResult Index()` 方法实现替换为以下实现。
 
-    ```
+    ```c#
     // GET: Teams
     public ActionResult Index(string actionType, string resultType)
     {
@@ -395,7 +395,7 @@ ms.author: sdanie
 
     `PlayGames` 方法可以通过对赛季进行模拟来更新团队统计信息，将结果保存到数据库，然后从缓存中清除现已过时的数据。
 
-    ```
+    ```c#
     void PlayGames()
     {
         ViewBag.msg += "Updating team statistics. ";
@@ -414,7 +414,7 @@ ms.author: sdanie
 
     `RebuildDB` 方法使用默认的团队集来重新初始化数据库，为其生成统计信息，然后从缓存中清除现已过时的数据。
 
-    ```
+    ```c#
     void RebuildDB()
     {
         ViewBag.msg += "Rebuilding DB. ";
@@ -429,7 +429,7 @@ ms.author: sdanie
 
     `ClearCachedTeams` 方法从缓存中删除任何已缓存的团队统计信息。
 
-    ```
+    ```c#
     void ClearCachedTeams()
     {
         IDatabase cache = Connection.GetDatabase();
@@ -443,7 +443,7 @@ ms.author: sdanie
 
     `GetFromDB` 方法从数据库读取团队统计信息。
 
-    ```
+    ```c#
     List<Team> GetFromDB()
     {
         ViewBag.msg += "Results read from DB. ";
@@ -457,7 +457,7 @@ ms.author: sdanie
 
     `GetFromList` 方法以序列化 `List<Team>` 的形式从缓存读取团队统计信息。如果缓存未命中，则会从数据库读取团队统计信息，然后将该信息存储在缓存中留待下次使用。在此示例中，我们将通过 JSON.NET 序列化来序列化进出缓存的 .NET 对象。有关详细信息，请参阅[如何处理 Azure Redis 缓存中的 .NET 对象](./cache-dotnet-how-to-use-azure-redis-cache.md#work-with-net-objects-in-the-cache)。
 
-    ```
+    ```c#
     List<Team> GetFromList()
     {
         List<Team> teams = null;
@@ -485,7 +485,7 @@ ms.author: sdanie
 
     `GetFromSortedSet` 方法从缓存的排序集读取团队统计信息。如果缓存未命中，则会从数据库读取团队统计信息，然后将该信息以排序集的形式存储在缓存中。
 
-    ```
+    ```c#
     List<Team> GetFromSortedSet()
     {
         List<Team> teams = null;
@@ -522,7 +522,7 @@ ms.author: sdanie
 
     `GetFromSortedSetTop5` 方法从缓存的排序集中读取排名前 5 的团队。该方法首先会检查缓存中是否存在 `teamsSortedSet` 键。如果该键不存在，则会调用 `GetFromSortedSet` 方法以读取团队统计信息并将其存储在缓存中。接下来会对缓存的排序集进行查询，以便返回排名前 5 的团队。
 
-    ```
+    ```c#
     List<Team> GetFromSortedSetTop5()
     {
         List<Team> teams = null;
@@ -555,7 +555,7 @@ ms.author: sdanie
 
 1. 浏览到 `TeamsController` 类中的 `Create(Team team)` 方法。添加对 `ClearCachedTeams` 方法的调用，如以下示例所示。
 
-    ```
+    ```c#
     // POST: Teams/Create
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -579,7 +579,7 @@ ms.author: sdanie
 
 1. 浏览到 `TeamsController` 类中的 `Edit(Team team)` 方法。添加对 `ClearCachedTeams` 方法的调用，如以下示例所示。
 
-    ```
+    ```c#
     // POST: Teams/Edit/5
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -602,7 +602,7 @@ ms.author: sdanie
 
 1. 浏览到 `TeamsController` 类中的 `DeleteConfirmed(int id)` 方法。添加对 `ClearCachedTeams` 方法的调用，如以下示例所示。
 
-    ```
+    ```c#
     // POST: Teams/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
@@ -629,7 +629,7 @@ ms.author: sdanie
 
     这是创建新团队的链接。将段落元素替换为下表内容。该表的操作链接可用于创建新的团队、举行新赛季的比赛、清除缓存、以多种格式从缓存中检索团队、从数据库检索团队，以及使用最新的示例数据重新构建数据库。
 
-    ```
+    ```html
     <table class="table">
         <tr>
             <td>
@@ -662,7 +662,7 @@ ms.author: sdanie
 
 1. 滚动到 **Index.cshtml** 文件底部，然后添加下面的 `tr` 元素，使之成为文件中最后一个表的最后一行。
 
-    ```
+    ```html
     <tr><td colspan="5">@ViewBag.Msg</td></tr>
     ```
 
@@ -792,7 +792,7 @@ ms.author: sdanie
 1. 使用所选编辑器打开在本教程的[配置应用程序以使用 Redis 缓存](#configure-the-application-to-use-redis-cache)步骤中创建的 `WebAppPlusCacheAppSecrets.config` 文件。
 2. 编辑 `value` 属性，将 `MyCache.redis.cache.chinacloudapi.cn` 替换为缓存的[主机名](./cache-configure.md#properties)，并指定缓存的[主密钥或辅助密钥](./cache-configure.md#access-keys)作为密码。
 
-    ```
+    ```xml
     <appSettings>
       <add key="CacheConnection" value="MyCache.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=..."/>
     </appSettings>

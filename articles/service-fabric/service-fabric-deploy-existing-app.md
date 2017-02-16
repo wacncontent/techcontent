@@ -119,7 +119,7 @@ Service Fabric 对应用程序根目录下的内容执行了 xcopy，因此除�
 
 下面是 `ServiceManifest.xml` 文件的示例：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="NodeApp" Version="1.0.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <ServiceTypes>
@@ -151,7 +151,7 @@ Service Fabric 对应用程序根目录下的内容执行了 xcopy，因此除�
 
 #### 更新 ServiceTypes
 
-```
+```xml
 <ServiceTypes>
   <StatelessServiceType ServiceTypeName="NodeApp" UseImplicitHost="true" />
 </ServiceTypes>
@@ -163,7 +163,7 @@ Service Fabric 对应用程序根目录下的内容执行了 xcopy，因此除�
 #### 更新 CodePackage
 CodePackage 元素指定服务代码的位置（和版本）。
 
-```
+```xml
 <CodePackage Name="Code" Version="1.0.0.0">
 ```
 
@@ -171,7 +171,7 @@ CodePackage 元素指定服务代码的位置（和版本）。
 
 #### 可选：更新 SetupEntrypoint
 
-```
+```xml
 <SetupEntryPoint>
    <ExeHost>
        <Program>scripts\launchConfig.cmd</Program>
@@ -187,7 +187,7 @@ SetupEntryPoint 元素用于指定在启动服务代码之前应执行的任何�
 
 #### 更新 EntryPoint
 
-```
+```xml
 <EntryPoint>
   <ExeHost>
     <Program>node.exe</Program>
@@ -210,7 +210,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 
 #### 更新终结点并在命名服务中注册以进行通信
 
-```
+```xml
 <Endpoints>
        <Endpoint Name="NodeAppTypeEndpoint" Protocol="http" Port="3000" Type="Input" />
 </Endpoints>
@@ -222,7 +222,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 
 在以下示例中，部署服务后，Service Fabric Explorer 中会显示针对服务实例发布的终结点（类似于 `http://10.1.4.92:3000/myapp/`）。如果这是本地计算机，则显示 `http://localhost:3000/myapp/`。
 
-```
+```xml
 <Endpoints>
    <Endpoint Name="NodeAppTypeEndpoint" Protocol="http" Port="3000"  UriScheme="http" PathSuffix="myapp/" Type="Input" />
 </Endpoints>
@@ -233,7 +233,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 ### 编辑应用程序清单文件
 配置 `Servicemanifest.xml` 文件之后，需要对 `ApplicationManifest.xml` 文件进行一些更改，确保使用正确的服务类型和名称。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="NodeAppType" ApplicationTypeVersion="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <ServiceManifestImport>
@@ -245,7 +245,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 #### ServiceManifestImport
 在 `ServiceManifestImport` 元素中，可以指定要包含在应用中的一个或多个服务。`ServiceManifestName` 指定 `ServiceManifest.xml` 文件所在目录的名称，可用于引用服务。
 
-```
+```xml
 <ServiceManifestImport>
   <ServiceManifestRef ServiceManifestName="NodeApp" ServiceManifestVersion="1.0.0.0" />
 </ServiceManifestImport>
@@ -254,7 +254,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 ## 设置日志记录
 对于来宾可执行文件，最好能够查看控制台日志，以查明应用程序和配置脚本是否显示了任何错误。可以使用 `ConsoleRedirection` 元素在 `ServiceManifest.xml` 文件中配置控制台重定向。
 
-```
+```xml
 <EntryPoint>
   <ExeHost>
     <Program>node.exe</Program>
@@ -276,7 +276,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 ## 部署
 最后一步是部署应用程序。以下 PowerShell 脚本演示如何将应用程序部署到本地开发群集并启动新的 Service Fabric 服务。
 
-```
+```PowerShell
 Connect-ServiceFabricCluster localhost:19000
 
 Write-Host 'Copying application package...'

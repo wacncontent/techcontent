@@ -86,7 +86,7 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 将以下 `import` 语句添加到 Java 文件顶部：
 
-```
+```java
     // Include the following imports to use Service Bus APIs
     import com.microsoft.windowsazure.services.servicebus.*;
     import com.microsoft.windowsazure.services.servicebus.models.*;
@@ -100,7 +100,7 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 **ServiceBusService** 类提供了创建、枚举和删除队列的方法。以下示例演示了如何通过名为“HowToSample”的命名空间，使用 **ServiceBusService** 对象创建名为“TestQueue”的队列：
 
-```
+```java
     Configuration config =
         ServiceBusConfiguration.configureWithSASAuthentication(
                 "HowToSample",
@@ -125,7 +125,7 @@ catch (ServiceException e)
 
 可对 **QueueInfo** 执行某些方法，以调整队列的属性（例如，将默认的生存时间 (TTL) 值设置为应用于发送到队列的消息）。以下示例演示了如何创建最大大小为 5GB 且名为 `TestQueue` 的队列：
 
-```
+```java
 long maxSizeInMegabytes = 5120;
 QueueInfo queueInfo = new QueueInfo("TestQueue");
 queueInfo.setMaxSizeInMegabytes(maxSizeInMegabytes);
@@ -138,7 +138,7 @@ CreateQueueResult result = service.createQueue(queueInfo);
 
 若要将消息发送到服务总线队列，你的应用程序将获得 **ServiceBusContract** 对象。以下代码演示了如何将消息发送到先前在 `HowToSample` 命名空间中创建的 `TestQueue` 队列。
 
-```
+```java
 try
 {
     BrokeredMessage message = new BrokeredMessage("MyMessage");
@@ -156,7 +156,7 @@ catch (ServiceException e)
 
 以下示例演示了如何将五条测试消息发送到在前面的代码段中获取的 `TestQueue` **MessageSender**：
 
-```
+```java
 for (int i=0; i<5; i++)
 {
      // Create message, passing a string message for the body.
@@ -180,7 +180,7 @@ for (int i=0; i<5; i++)
 
 以下示例演示如何使用 **PeekLock** 模式（非默认模式）接收和处理消息。下面的示例将执行无限循环并在消息达到我们的“TestQueue”后进行处理：
 
-```
+```java
     try
 {
     ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;

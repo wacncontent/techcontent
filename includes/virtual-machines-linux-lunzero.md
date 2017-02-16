@@ -2,7 +2,7 @@
 
 请考虑以下示例，其中显示了 `lsscsi` 输出的代码片段：
 
-```
+```bash
 [5:0:0:0]    disk    Msft     Virtual Disk     1.0   /dev/sdc 
 [5:0:0:1]    disk    Msft     Virtual Disk     1.0   /dev/sdd 
 ```

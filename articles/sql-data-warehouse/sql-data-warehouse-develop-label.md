@@ -20,7 +20,7 @@ ms.author: jrj;barbkess;sonyama
 # 在 SQL 数据仓库中使用标签检测查询
 SQL 数据仓库支持称为查询标签的概念。在继续之前，让我们看一个示例：
 
-```
+```sql
 SELECT *
 FROM sys.tables
 OPTION (LABEL = 'My Query Label')
@@ -33,7 +33,7 @@ OPTION (LABEL = 'My Query Label')
 
 若要按标签进行搜索，可以运行以下使用动态管理视图的查询：
 
-```
+```sql
 SELECT  *
 FROM    sys.dm_pdw_exec_requests r
 WHERE   r.[label] = 'My Query Label'

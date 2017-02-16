@@ -54,7 +54,7 @@ ms.author: marsma
 ### 导入包
 使用记事本或其他文本编辑器将以下内容添加到要在其中使用存储的应用程序的 **server.js** 文件的顶部：
 
-```
+```nodejs
 var azure = require('azure-storage');
 ```
 
@@ -66,7 +66,7 @@ Azure 模块将读取环境变量 `AZURE_STORAGE_ACCOUNT`、`AZURE_STORAGE_ACCES
 ## 创建容器
 使用 **BlobService** 对象可以对容器和 Blob 进行操作。以下代码创建 **BlobService** 对象。将以下内容添加到 **server.js** 顶部附近。
 
-```
+```nodejs
 var blobSvc = azure.createBlobService();
 ```
 
@@ -77,7 +77,7 @@ var blobSvc = azure.createBlobService();
 
 若要创建一个新的容器，请使用 **createContainerIfNotExists**。以下代码示例将创建名为“mycontainer”的新容器：
 
-```
+```nodejs
 blobSvc.createContainerIfNotExists('mycontainer', function(error, result, response){
     if(!error){
           // Container exists and is private
@@ -95,7 +95,7 @@ blobSvc.createContainerIfNotExists('mycontainer', function(error, result, respon
 
 以下代码示例演示了如何将访问级别设置为“Blob”：
 
-```
+```nodejs
 blobSvc.createContainerIfNotExists('mycontainer', {publicAccessLevel : 'blob'}, function(error, result, response){
     if(!error){
       // Container exists and allows
@@ -107,7 +107,7 @@ blobSvc.createContainerIfNotExists('mycontainer', {publicAccessLevel : 'blob'}, 
 
 另外，可以通过使用 **setContainerAcl** 指定访问级别来修改容器的访问级别。以下代码示例将访问级别更改为“容器”：
 
-```
+```nodejs
 blobSvc.setContainerAcl('mycontainer', null /* signedIdentifiers */, {publicAccessLevel : 'container'} /* publicAccessLevel*/, function(error, result, response){
   if(!error){
     // Container access level set to 'container'
@@ -120,13 +120,13 @@ blobSvc.setContainerAcl('mycontainer', null /* signedIdentifiers */, {publicAcce
 ### 筛选器
 可以向使用 **BlobService** 执行的操作应用可选的筛选操作。筛选操作可包括日志记录、自动重试等。筛选器是实现具有签名的方法的对象：
 
-```
+```nodejs
 function handle (requestOptions, next)
 ```
 
 在对请求选项执行预处理后，该方法需要调用“next”并且传递具有以下签名的回调：
 
-```
+```nodejs
 function (returnObject, finalCallback, next)
 ```
 
@@ -134,7 +134,7 @@ function (returnObject, finalCallback, next)
 
 Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别是 **ExponentialRetryPolicyFilter** 和 **LinearRetryPolicyFilter**。下面的代码将创建一个 **BlobService** 对象，该对象使用 **ExponentialRetryPolicyFilter**：
 
-```
+```nodejs
 var retryOperations = new azure.ExponentialRetryPolicyFilter();
 var blobSvc = azure.createBlobService().withFilter(retryOperations);
 ```
@@ -152,7 +152,7 @@ var blobSvc = azure.createBlobService().withFilter(retryOperations);
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myblob** 中。
 
-```
+```nodejs
 blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', function(error, result, response){
   if(!error){
     // file uploaded
@@ -172,7 +172,7 @@ blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', functi
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myappendblob** 中。
 
-```
+```nodejs
 blobSvc.createAppendBlobFromLocalFile('mycontainer', 'myappendblob', 'test.txt', function(error, result, response){
   if(!error){
     // file uploaded
@@ -193,7 +193,7 @@ blobSvc.createAppendBlobFromLocalFile('mycontainer', 'myappendblob', 'test.txt',
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myappendblob** 中。
 
-```
+```nodejs
 blobSvc.appendFromText('mycontainer', 'myappendblob', 'text to be appended', function(error, result, response){
   if(!error){
     // text appended
@@ -212,7 +212,7 @@ blobSvc.appendFromText('mycontainer', 'myappendblob', 'text to be appended', fun
 
 以下代码示例将 **test.txt** 文件的内容上传到 **mypageblob** 中。
 
-```
+```nodejs
 blobSvc.createPageBlobFromLocalFile('mycontainer', 'mypageblob', 'test.txt', function(error, result, response){
   if(!error){
     // file uploaded
@@ -226,7 +226,7 @@ blobSvc.createPageBlobFromLocalFile('mycontainer', 'mypageblob', 'test.txt', fun
 ## 列出容器中的 Blob
 若要列出容器中的 Blob，请使用 **listBlobsSegmented** 方法。如果想要返回带特定前缀的 Blob，请使用 **listBlobsSegmentedWithPrefix**。
 
-```
+```nodejs
 blobSvc.listBlobsSegmented('mycontainer', null, function(error, result, response){
   if(!error){
       // result.entries contains the entries
@@ -247,7 +247,7 @@ blobSvc.listBlobsSegmented('mycontainer', null, function(error, result, response
 
 以下代码示例演示了如何使用 **getBlobToStream** 下载 **myblob** Blob 的内容，并使用一个流将其存储到 **output.txt** 文件：
 
-```
+```nodejs
 var fs = require('fs');
 blobSvc.getBlobToStream('mycontainer', 'myblob', fs.createWriteStream('output.txt'), function(error, result, response){
   if(!error){
@@ -261,7 +261,7 @@ blobSvc.getBlobToStream('mycontainer', 'myblob', fs.createWriteStream('output.tx
 ## 删除 Blob
 最后，若要删除 Blob，请调用 **deleteBlob**。以下代码示例将删除名为 **myblob** 的 Blob。
 
-```
+```nodejs
 blobSvc.deleteBlob(containerName, 'myblob', function(error, response){
   if(!error){
     // Blob has been deleted
@@ -280,7 +280,7 @@ blobSvc.deleteBlob(containerName, 'myblob', function(error, response){
 
 可以使用可选的 `options.accessConditions` 参数设置 ETag 条件。如果 Blob 已存在且具有 `etagToMatch` 所包含的 ETag 值，则以下代码示例将仅上传 **test.txt** 文件。
 
-```
+```nodejs
 blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', { accessConditions: { EtagMatch: etagToMatch} }, function(error, result, response){
     if(!error){
     // file uploaded
@@ -299,7 +299,7 @@ blobSvc.createBlockBlobFromLocalFile('mycontainer', 'myblob', 'test.txt', { acce
 
 新的租约可使用 **acquireLease** 方法获取，只需指定希望获取其租约的 Blob 或容器即可。例如，以下代码将获取 **myblob** 的租约。
 
-```
+```nodejs
 blobSvc.acquireLease('mycontainer', 'myblob', function(error, result, response){
   if(!error) {
     console.log('leaseId: ' + result.id);
@@ -324,7 +324,7 @@ blobSvc.acquireLease('mycontainer', 'myblob', function(error, result, response){
 
 以下代码示例生成了一个新的共享访问策略，该策略将允许共享访问签名持有者对 **myblob** Blob 执行读取操作，并且在创建后 100 分钟过期。
 
-```
+```nodejs
 var startDate = new Date();
 var expiryDate = new Date(startDate);
 expiryDate.setMinutes(startDate.getMinutes() + 100);
@@ -346,7 +346,7 @@ var host = blobSvc.host;
 
 然后，客户端应用程序将共享访问签名用于 **BlobServiceWithSAS**，以便针对 Blob 执行操作。以下语句获取有关 **myblob** 的信息。
 
-```
+```nodejs
 var sharedBlobSvc = azure.createBlobServiceWithSas(host, blobSAS);
 sharedBlobSvc.getBlobProperties('mycontainer', 'myblob', function (error, result, response) {
   if(!error) {
@@ -362,7 +362,7 @@ sharedBlobSvc.getBlobProperties('mycontainer', 'myblob', function (error, result
 
 ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID。以下代码示例定义了两个策略，一个用于“user1”，一个用于“user2”：
 
-```
+```nodejs
 var sharedAccessPolicy = {
   user1: {
     Permissions: azure.BlobUtilities.SharedAccessPermissions.READ,
@@ -379,7 +379,7 @@ var sharedAccessPolicy = {
 
 以下代码示例将获取 **mycontainer** 的当前 ACL，然后使用 **setBlobAcl** 添加新策略。此方法具有以下用途：
 
-```
+```nodejs
 var extend = require('extend');
 blobSvc.getBlobAcl('mycontainer', function(error, result, response) {
   if(!error){
@@ -395,7 +395,7 @@ blobSvc.getBlobAcl('mycontainer', function(error, result, response) {
 
 设置 ACL 后，可以根据某个策略的 ID 创建共享访问签名。以下代码示例将为“user2”创建新的共享访问签名：
 
-```
+```nodejs
 blobSAS = blobSvc.generateSharedAccessSignature('mycontainer', { Id: 'user2' });
 ```
 

@@ -42,7 +42,7 @@ ms.author: annahar
 1. 安装 Azure PowerShell 中的说明进行操作。有关安装最新版本的 Azure PowerShell、选择订阅和登录帐户的信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 2. 使用以下设置创建资源组：
 
-    ```
+    ```powershell
     $location = "chinaeast".
     $myResourceGroup = "contosofabrikam"
     ```
@@ -51,13 +51,13 @@ ms.author: annahar
 
 3. [创建用于包含 VM 的可用性集](../virtual-machines/virtual-machines-windows-create-availability-set.md)。对于此场景，请使用以下命令：
 
-    ```
+    ```powershell
     New-AzureRmAvailabilitySet -ResourceGroupName "contosofabrikam" -Name "myAvailset" -Location "China North"
     ```
 
 4. 按照[创建 Windows VM](../virtual-machines/virtual-machines-windows-ps-create.md) 中步骤 3 至 5 的说明准备创建具有单个 NIC 的 VM。执行步骤 6.1，使用以下命令而不是步骤 6.2：
 
-    ```
+    ```powershell
     $availset = Get-AzureRmAvailabilitySet -ResourceGroupName "contosofabrikam" -Name "myAvailset"
     New-AzureRmVMConfig -VMName "VM1" -VMSize "Standard_DS1_v2" -AvailabilitySetId $availset.Id
     ```
@@ -66,7 +66,7 @@ ms.author: annahar
 
 5. 向每个 VM 中添加另一个 IP 配置。按照[将多个 IP 地址分配给虚拟机](../virtual-network/virtual-network-multiple-ip-addresses-powershell.md#add)文章中的说明执行操作。请使用以下配置设置：
 
-    ```
+    ```powershell
     $NicName = "VM1-NIC"
     $RgName = "contosofabrikam"
     $NicLocation = "China North"
@@ -80,7 +80,7 @@ ms.author: annahar
 
 7. 创建两个公共 IP 地址并将它们存储在相应的变量中，如下所示：
 
-    ```
+    ```powershell
     $publicIP1 = New-AzureRmPublicIpAddress -Name PublicIp1 -ResourceGroupName contosofabrikam -Location 'China North' -AllocationMethod Dynamic -DomainNameLabel contoso
     $publicIP2 = New-AzureRmPublicIpAddress -Name PublicIp2 -ResourceGroupName contosofabrikam -Location 'China North' -AllocationMethod Dynamic -DomainNameLabel fabrikam
 
@@ -90,14 +90,14 @@ ms.author: annahar
 
 8. 创建两个前端 IP 配置：
 
-    ```
+    ```powershell
     $frontendIP1 = New-AzureRmLoadBalancerFrontendIpConfig -Name contosofe -PublicIpAddress $publicIP1
     $frontendIP2 = New-AzureRmLoadBalancerFrontendIpConfig -Name fabrikamfe -PublicIpAddress $publicIP2
     ```
 
 9. 创建后端地址池、探测程序和负载均衡规则：
 
-    ```
+    ```powershell
     $beaddresspool1 = New-AzureRmLoadBalancerBackendAddressPoolConfig -Name contosopool
     $beaddresspool2 = New-AzureRmLoadBalancerBackendAddressPoolConfig -Name fabrikampool
 
@@ -109,13 +109,13 @@ ms.author: annahar
 
 10. 一旦创建这些资源后，即可创建负载均衡器：
 
-    ```
+    ```powershell
     $mylb = New-AzureRmLoadBalancer -ResourceGroupName contosofabrikam -Name mylb -Location 'China North' -FrontendIpConfiguration $frontendIP1 -LoadBalancingRule $lbrule -BackendAddressPool $beAddressPool -Probe $healthProbe
     ```
 
 11. 将第二个后端地址池和前端 IP 配置添加到新创建的负载均衡器：
 
-    ```
+    ```powershell
     $mylb = Get-AzureRmLoadBalancer -Name "mylb" -ResourceGroupName $myResourceGroup | Add-AzureRmLoadBalancerBackendAddressPoolConfig -Name fabrikampool | Set-AzureRmLoadBalancer
 
     $mylb | Add-AzureRmLoadBalancerFrontendIpConfig -Name fabrikamfe -PublicIpAddress $publicIP2 | Set-AzureRmLoadBalancer
@@ -125,7 +125,7 @@ ms.author: annahar
 
 12. 下面的命令获取 NIC，然后将每个 NIC 的两个 IP 配置添加到负载均衡器的后端地址池：
 
-    ```
+    ```powershell
     $nic1 = Get-AzureRmNetworkInterface -Name "VM1-NIC" -ResourceGroupName "MyResourcegroup";
     $nic2 = Get-AzureRmNetworkInterface -Name "VM2-NIC" -ResourceGroupName "MyResourcegroup";
 

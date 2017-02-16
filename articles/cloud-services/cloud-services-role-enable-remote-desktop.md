@@ -90,7 +90,7 @@ Azure 经典管理门户使用远程桌面扩展方法，即使在部署应用�
 
 服务定义文件应类似于下面的示例，并添加 `<Imports>` 元素。
 
-```
+```xml
     <ServiceDefinition name="<name-of-cloud-service>" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
         <WebRole name="WebRole1" vmsize="Small">
             <Sites>

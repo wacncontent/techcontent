@@ -58,7 +58,7 @@ Azure 支持各种 Linux 分发版（请参阅 [认可的分发版](./virtual-ma
 ## <a id="connect"></a> 步骤 2：准备连接到 Azure
 请确保在经典部署模型中使用 Azure CLI (`azure config mode asm`)，然后登录帐户：
 
-```
+```azurecli
 azure login -e AzureChinaCloud
 ```
 
@@ -67,7 +67,7 @@ azure login -e AzureChinaCloud
 
 在 Azure CLI 中使用以下命令来上载映像：
 
-```
+```azurecli
 azure vm image create <ImageName> `
     --blob-url <BlobStorageURL>/<YourImagesFolder>/<VHDName> `
     --os Linux <PathToVHDFile>
@@ -82,7 +82,7 @@ azure vm image create <ImageName> `
 
 以下命令显示一个完整示例：
 
-```
+```azurecli
 azure vm image create myImage `
     --blob-url https://mystorage.blob.core.chinacloudapi.cn/vhds/myimage.vhd `
     --os Linux /home/ahmet/myimage.vhd
@@ -91,7 +91,7 @@ azure vm image create myImage `
 ## 步骤 4：从映像创建 VM
 使用 `azure vm create` 以与创建常规 VM 相同的方式创建 VM。指定在上一步中为映像提供的名称。在以下示例中，使用上一步中指定的映像名称 **myImage**：
 
-```
+```azurecli
 azure vm create --userName ops --password P@ssw0rd! --vm-size Small --ssh `
     --location "China North" "myDeployedVM" myImage
 ```

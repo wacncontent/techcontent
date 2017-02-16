@@ -41,7 +41,7 @@ ms.author: sethm;shvija
 
 要创建的事件中心命名空间的名称。
 
-```
+```json
     "eventHubNamespaceName": {
     "type": "string"
     }
@@ -51,7 +51,7 @@ ms.author: sethm;shvija
 
 在事件中心命名空间中创建的事件中心的名称。
 
-```
+```json
     "eventHubName": {
     "type": "string"
     }
@@ -61,7 +61,7 @@ ms.author: sethm;shvija
 
 为事件中心创建的使用者组的名称。
 
-```
+```json
     "eventHubConsumerGroupName": {
     "type": "string"
     }
@@ -71,7 +71,7 @@ ms.author: sethm;shvija
 
 模板的 API 版本。
 
-```
+```json
     "apiVersion": {
     "type": "string"
     }
@@ -81,7 +81,7 @@ ms.author: sethm;shvija
 
 创建包含事件中心和使用者组的 **EventHubs** 类型的命名空间。
 
-```
+```json
     "resources":[  
           {  
              "apiVersion":"[variables('ehVersion')]",
@@ -128,7 +128,7 @@ ms.author: sethm;shvija
 
 ## PowerShell
 
-```
+```powershell
     New-AzureRmResourceGroupDeployment -ResourceGroupName \<resource-group-name\> -TemplateFile https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-event-hubs-create-event-hub-and-consumer-group/azuredeploy.json
 ```
 

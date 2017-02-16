@@ -34,13 +34,13 @@ ms.author: renash
 
 以下示例演示了 `PreviewExport` 命令：
 
-```
+```  
 WAImportExport.exe PreviewExport /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /ExportBlobListFile:C:\WAImportExport\mybloblist.xml /DriveSize:500GB    
 ```
 
 导出 Blob 列表文件可能包含 Blob 名称和 Blob 前缀，如下所示：
 
-```
+```xml 
 <?xml version="1.0" encoding="utf-8"?>  
 <BlobList>  
 <BlobPath>pictures/animals/koala.jpg</BlobPath>  
@@ -53,7 +53,7 @@ Azure 导入/导出工具可列出要导出的所有 Blob，在考虑所有必�
 
 下面是一个省略了信息性日志的输出示例：
 
-```
+```  
 Number of unique blob paths/prefixes:   3  
 Number of duplicate blob paths/prefixes:        0  
 Number of nonexistent blob paths/prefixes:      1  

@@ -62,7 +62,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
 
 模板通常划分为两个部分：模板本身，以及一个 parameters 文件，你将在其中填充特定于配置的值，例如，群集名称、管理员名称和密码。直接使用 REST API 时，必须将这些值合并到一个文件中。此 JSON 文档的格式为：
 
-```json
+```
 {
     "properties": {
         "template": {
@@ -78,7 +78,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
 
 例如，下面是来自 [https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password](https://github.com/Azure/azure-quickstart-templates/tree/master/101-hdinsight-linux-ssh-password) 的模板与参数文件的组合形式，它创建基于 Linux 的群集，并使用密码来保护 SSH 用户帐户。
 
-```json
+```
 {
     "properties": {
         "template": {
@@ -174,7 +174,7 @@ Azure Resource Manager 模板是描述**资源组**及其包含的所有资源�
 
                 },
                 "properties": {
-                    "clusterVersion": "3.2",
+                    "clusterVersion": "3.5",
                     "osType": "Linux",
                     "clusterDefinition": {
                         "kind": "[parameters('clusterType')]",
@@ -345,12 +345,14 @@ The JSON document returned by this request will contain an element named **acces
 * 将 **DataCenterLocation** 替换为要在其中创建资源组和资源的数据中心。例如“China East”。
 * 将 **ResourceGroupName** 替换为要用于此组的名称：
 
+    ```
     curl -X "PUT" "https://management.chinacloudapi.cn/subscriptions/SubscriptionID/resourcegroups/ResourceGroupName?api-version=2015-01-01" \
         -H "Authorization: Bearer AccessToken" \
         -H "Content-Type: application/json" \
         -d $'{
     "location": "DataCenterLocation"
     }'
+    ```
 
 如果此请求成功，你将收到 200 系列响应，且响应正文包含一个 JSON 文档，其中包含有关组的信息。`"provisioningState"` 元素包含 `"Succeeded"` 值。
 

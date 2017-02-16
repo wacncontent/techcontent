@@ -29,7 +29,7 @@ ms.author: sonyama;barbkess;mausher
 1. 打开 Windows PowerShell。
 2. 在 PowerShell 提示符下，运行以下命令以登录到 Azure Resource Manager，然后选择你的订阅。
 
-    ```
+    ```PowerShell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     Get-AzureRmSubscription
     Select-AzureRmSubscription -SubscriptionName "MySubscription"
@@ -55,7 +55,7 @@ $resultDatabase
 
 恢复“Server01”的服务器上托管的“Database02”数据库的运行。 该服务器包含在名为“ResourceGroup1”的资源组中。
 
-```
+```Powershell
 Resume-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" –ServerName "Server01" -DatabaseName "Database02"
 ```
 

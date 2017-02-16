@@ -32,7 +32,7 @@ try {
       // secondary replicas
       await m_dic.AddAsync(tx, key, value, cancellationToken);
 
-```
+```csharp
   // CommitAsync sends Commit record to log & secondary replicas
   // After quorum responds, all locks released
   await tx.CommitAsync();

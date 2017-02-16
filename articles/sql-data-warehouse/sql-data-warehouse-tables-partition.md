@@ -56,7 +56,7 @@ SQL 数据仓库引入了简化的分区定义，这与 SQL Server 略有不同�
 
 以下为 SQL 数据仓库分区的 [CREATE TABLE][] 语句示例，根据 OrderDateKey 列对 FactInternetSales 表进行了分区：
 
-```
+```sql
 CREATE TABLE [dbo].[FactInternetSales]
 (
     [ProductKey]            int          NOT NULL
@@ -89,7 +89,7 @@ WITH
 
 如果你要从 SQL Server 实例迁移分区的表，则可使用以下 SQL 来查询每个分区中的行数。请记住，如果在 SQL 数据仓库上使用相同的分区粒度，则每个分区的行数将会下降到原来的 1/60。
 
-```
+```sql
 -- Partition information for a SQL Server Database
 SELECT      s.[name]                        AS      [schema_name]
 ,           t.[name]                        AS      [table_name]
@@ -129,7 +129,7 @@ GROUP BY    s.[name]
 
 查询资源调控器动态管理视图即可获取每个分布的内存分配信息。事实上，内存授予小于以下数据。但是，这可以提供指导，以便你在针对数据管理操作调整分区大小时使用。尽量避免将分区大小调整超过超大型资源类所提供的内存授予。如果分区成长超过此数据，就冒着内存压力的风险，进而导致比较不理想的压缩。
 
-```
+```sql
 SELECT  rp.[name]								AS [pool_name]
 ,       rp.[max_memory_kb]						AS [max_memory_kb]
 ,       rp.[max_memory_kb]/1024					AS [max_memory_mb]
@@ -157,7 +157,7 @@ SQL 数据仓库支持分区拆分、合并和切换。这些函数中，每个�
 
 以下示例显示了每个分区包含一个行的分区列存储表：
 
-```
+```sql
 CREATE TABLE [dbo].[FactInternetSales]
 (
         [ProductKey]            int          NOT NULL
@@ -192,7 +192,7 @@ CREATE STATISTICS Stat_dbo_FactInternetSales_OrderDateKey ON dbo.FactInternetSal
 
 然后，我们可以使用 `sys.partitions` 目录视图查询行计数：
 
-```
+```sql
 SELECT  QUOTENAME(s.[name])+'.'+QUOTENAME(t.[name]) as Table_name
 ,       i.[name] as Index_name
 ,       p.partition_number as Partition_nmbr
@@ -209,7 +209,7 @@ WHERE t.[name] = 'FactInternetSales'
 
 如果尝试拆分此表，将会收到错误：
 
-```
+```sql
 ALTER TABLE FactInternetSales SPLIT RANGE (20010101);
 ```
 
@@ -217,7 +217,7 @@ ALTER TABLE FactInternetSales SPLIT RANGE (20010101);
 
 但是，我们可以使用 `CTAS` 创建新表以保存数据。
 
-```
+```sql
 CREATE TABLE dbo.FactInternetSales_20000101
     WITH    (   DISTRIBUTION = HASH(ProductKey)
             ,   CLUSTERED COLUMNSTORE INDEX
@@ -235,7 +235,7 @@ WHERE   1=2
 
 分区边界已对齐，因此允许切换。这使源表有空白分区可供我们完成后续拆分。
 
-```
+```sql
 ALTER TABLE FactInternetSales SWITCH PARTITION 2 TO  FactInternetSales_20000101 PARTITION 2;
 
 ALTER TABLE FactInternetSales SPLIT RANGE (20010101);
@@ -243,7 +243,7 @@ ALTER TABLE FactInternetSales SPLIT RANGE (20010101);
 
 接下来只需使用 `CTAS` 将数据对齐新的分区边界，并将数据切换回到主表
 
-```
+```sql
 CREATE TABLE [dbo].[FactInternetSales_20000101_20010101]
     WITH    (   DISTRIBUTION = HASH([ProductKey])
             ,   CLUSTERED COLUMNSTORE INDEX
@@ -264,7 +264,7 @@ ALTER TABLE dbo.FactInternetSales_20000101_20010101 SWITCH PARTITION 2 TO dbo.Fa
 
 完成数据移动后，最好是刷新目标表上的统计信息，确保统计信息可在其各自的分区中准确反映数据的新分布：
 
-```
+```sql
 UPDATE STATISTICS [dbo].[FactInternetSales];
 ```
 
@@ -274,7 +274,7 @@ UPDATE STATISTICS [dbo].[FactInternetSales];
 
 1. 将表创建为分区表，但不包含分区值
 
-    ```
+    ```sql
     CREATE TABLE [dbo].[FactInternetSales]
     (
         [ProductKey]            int          NOT NULL
@@ -298,7 +298,7 @@ UPDATE STATISTICS [dbo].[FactInternetSales];
 
 2. 在部署过程中 `SPLIT` 表：
 
-    ```
+    ```sql
     -- Create a table containing the partition boundaries
 
     CREATE TABLE #partitions

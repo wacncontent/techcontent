@@ -52,7 +52,7 @@ wacn.date: 01/09/2017
 
 使用记事本或其他文本编辑器将以下内容添加到应用程序的 **server.js** 文件的顶部：
 
-```
+```javascript
     var azure = require('azure');
 ```
 
@@ -68,13 +68,13 @@ Azure 模块将读取环境变量 AZURE_SERVICEBUS_NAMESPACE 和 AZURE_SERVICEBU
 
 可以通过 **ServiceBusService** 对象处理服务总线队列。以下代码创建 **ServiceBusService** 对象。将它添加到靠近 **server.js** 文件顶部，用于导入 Azure 模块的语句之后的位置：
 
-```
+```javascript
     var serviceBusService = azure.createServiceBusService();
 ```
 
 通过对 **ServiceBusService** 对象调用 **createQueueIfNotExists**，将返回指定的队列（如果存在），否则将使用指定的名称创建一个新队列。以下代码使用 **createQueueIfNotExists** 创建或连接到名为 `myqueue` 的队列：
 
-```
+```javascript
     serviceBusService.createQueueIfNotExists('myqueue', function(error){
         if(!error){
             // Queue exists
@@ -84,7 +84,7 @@ Azure 模块将读取环境变量 AZURE_SERVICEBUS_NAMESPACE 和 AZURE_SERVICEBU
 
 **createServiceBusService** 也支持其他选项，这些选项允许你重写默认队列设置，如消息生存时间或最大队列大小。以下示例将最大队列大小设置为 5 GB，将生存时间 (TTL) 值设置为 1 分钟：
 
-```
+```javascript
     var queueOptions = {
           MaxSizeInMegabytes: '5120',
           DefaultMessageTimeToLive: 'PT1M'
@@ -101,13 +101,13 @@ Azure 模块将读取环境变量 AZURE_SERVICEBUS_NAMESPACE 和 AZURE_SERVICEBU
 
 可选的筛选操作可应用于使用 **ServiceBusService** 执行的操作。筛选操作可包括日志记录、自动重试等。筛选器是实现具有签名的方法的对象：
 
-```
+```javascript
     function handle (requestOptions, next)
 ```
 
 在对请求选项执行预处理后，该方法必须调用 `next` 并传递具有以下签名的回调：
 
-```
+```javascript
     function (returnObject, finalCallback, next)
 ```
 
@@ -115,7 +115,7 @@ Azure 模块将读取环境变量 AZURE_SERVICEBUS_NAMESPACE 和 AZURE_SERVICEBU
 
 Azure SDK for Node.js 中附带了两个实现了重试逻辑的筛选器，分别是 **ExponentialRetryPolicyFilter** 和 **LinearRetryPolicyFilter**。以下代码创建一个 **ServiceBusService** 对象，该对象使用 **ExponentialRetryPolicyFilter**：
 
-```
+```javascript
     var retryOperations = new azure.ExponentialRetryPolicyFilter();
     var serviceBusService = azure.createServiceBusService().withFilter(retryOperations);
 ```
@@ -126,7 +126,7 @@ Azure SDK for Node.js 中附带了两个实现了重试逻辑的筛选器，分�
 
 以下示例演示如何使用 **sendQueueMessage** 向名为 `myqueue` 的队列发送一条测试消息：
 
-```
+```javascript
     var message = {
         body: 'Test message',
         customProperties: {
@@ -151,7 +151,7 @@ Azure SDK for Node.js 中附带了两个实现了重试逻辑的筛选器，分�
 
 以下示例演示如何使用 **receiveQueueMessage** 接收和处理消息。该示例先接收并删除一条消息，然后使用设置为 **true** 的 **isPeekLock** 接收一条消息，最后使用 **deleteMessage** 删除该消息：
 
-```
+```javascript
     serviceBusService.receiveQueueMessage('myqueue', function(error, receivedMessage){
         if(!error){
             // Message received and deleted

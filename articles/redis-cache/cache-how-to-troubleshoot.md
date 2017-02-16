@@ -232,7 +232,7 @@ System.TimeoutException: Timeout performing MGET 2728cc84-58ae-406b-8ec8-3f96241
 
 1. 请确保你在使用 StackExchange.Redis 客户端时，按照以下模式进行连接，这是一种最佳做法。
 
-    ```
+    ```c#
     private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
     {
         return ConnectionMultiplexer.Connect("cachename.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
@@ -254,7 +254,7 @@ System.TimeoutException: Timeout performing MGET 2728cc84-58ae-406b-8ec8-3f96241
 
     强烈建议你将缓存和客户端置于同一 Azure 区域。如果你的方案包括跨区域调用，则应将 `synctimeout` 时间间隔设置为比默认的 1000 毫秒时间间隔更高的值，方法是在连接字符串中增加一个 `synctimeout` 属性。以下示例显示的是 StackExchange.Redis 缓存连接字符串代码段，其中的 `synctimeout` 为 2000 毫秒。
 
-    ```
+    ```c#
     synctimeout=2000,cachename.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...
     ```
 

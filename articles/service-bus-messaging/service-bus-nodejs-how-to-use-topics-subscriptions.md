@@ -59,7 +59,7 @@ wacn.date: 01/04/2017
 
 使用记事本或其他文本编辑器将以下内容添加到应用程序的 **server.js** 文件的顶部：
 
-```
+```javascript
     var azure = require('azure');
 ```
 
@@ -75,13 +75,13 @@ Azure 模块将读取环境变量 AZURE\_SERVICEBUS\_NAMESPACE 和 AZURE\_SERVIC
 
 可以通过 **ServiceBusService** 对象处理主题。以下代码创建 **ServiceBusService** 对象。将它添加到靠近 **server.js** 文件顶部、用于导入 azure 模块的语句之后的位置：
 
-```
+```javascript
     var serviceBusService = azure.createServiceBusService();
 ```
 
 通过对 **ServiceBusService** 对象调用 **createTopicIfNotExists**，将返回指定的主题（如果存在），否则将使用指定名称创建新主题。以下代码使用 **createTopicIfNotExists** 创建或连接到名为“MyTopic”的主题：
 
-```
+```javascript
     serviceBusService.createTopicIfNotExists('MyTopic',function(error){
         if(!error){
             // Topic was created or exists
@@ -92,7 +92,7 @@ Azure 模块将读取环境变量 AZURE\_SERVICEBUS\_NAMESPACE 和 AZURE\_SERVIC
 
 **createServiceBusService** 还支持其他选项，以允许重写默认主题设置，如消息生存时间或最大主题大小。以下示例将最大主题大小设置为 5GB，将生存时间设置为 1 分钟：
 
-```
+```javascript
     var topicOptions = {
             MaxSizeInMegabytes: '5120',
             DefaultMessageTimeToLive: 'PT1M'
@@ -109,13 +109,13 @@ Azure 模块将读取环境变量 AZURE\_SERVICEBUS\_NAMESPACE 和 AZURE\_SERVIC
 
 可选的筛选操作可应用于使用 **ServiceBusService** 执行的操作。筛选操作可包括日志记录、自动重试等。筛选器是实现具有签名的方法的对象：
 
-```
+```javascript
     function handle (requestOptions, next)
 ```
 
 在对请求选项执行预处理后，该方法将调用 `next` 并传递具有以下签名的回调：
 
-```
+```javascript
     function (returnObject, finalCallback, next)
 ```
 
@@ -123,7 +123,7 @@ Azure 模块将读取环境变量 AZURE\_SERVICEBUS\_NAMESPACE 和 AZURE\_SERVIC
 
 Azure SDK for Node.js 中附带了两个实现了重试逻辑的筛选器，分别是 **ExponentialRetryPolicyFilter** 和 **LinearRetryPolicyFilter**。以下代码创建一个 **ServiceBusService** 对象，该对象使用 **ExponentialRetryPolicyFilter**：
 
-```
+```javascript
 var retryOperations = new azure.ExponentialRetryPolicyFilter();
 var serviceBusService = azure.createServiceBusService().withFilter(retryOperations);
 ```
@@ -139,7 +139,7 @@ var serviceBusService = azure.createServiceBusService().withFilter(retryOperatio
 
 **MatchAll** 筛选器是默认筛选器，在创建新订阅时未指定筛选器的情况下使用。使用 **MatchAll** 筛选器时，发布到主题的所有消息都将置于订阅的虚拟队列中。以下示例创建名为“AllMessages”的订阅，并使用默认的 **MatchAll** 筛选器。
 
-```
+```javascript
     serviceBusService.createSubscription('MyTopic','AllMessages',function(error){
         if(!error){
             // subscription created
@@ -160,7 +160,7 @@ var serviceBusService = azure.createServiceBusService().withFilter(retryOperatio
 
 以下示例创建了一个名为 `HighMessages` 的订阅，其 **SqlFilter** 只选择自定义 **messagenumber** 属性大于 3 的消息：
 
-```
+```javascript
     serviceBusService.createSubscription('MyTopic', 'HighMessages', function (error){
         if(!error){
             // subscription created
@@ -195,7 +195,7 @@ var serviceBusService = azure.createServiceBusService().withFilter(retryOperatio
 
 类似地，以下示例创建一个名为 `LowMessages` 的订阅，其 **SqlFilter** 只选择 **messagenumber** 属性小于或等于 3 的消息：
 
-```
+```javascript
     serviceBusService.createSubscription('MyTopic', 'LowMessages', function (error){
         if(!error){
             // subscription created
@@ -236,7 +236,7 @@ var serviceBusService = azure.createServiceBusService().withFilter(retryOperatio
 
 下面的示例演示如何向“MyTopic”发送五条测试消息。请注意，每条消息的 **messagenumber** 属性值因循环迭代而异（这将确定由哪些订阅接收它）：
 
-```
+```javascript
     var message = {
         body: '',
         customProperties: {
@@ -267,7 +267,7 @@ var serviceBusService = azure.createServiceBusService().withFilter(retryOperatio
 
 以下示例演示如何使用 **receiveSubscriptionMessage** 接收和处理消息。该示例先从“LowMessages”订阅接收并删除一条消息，然后使用设置为 true 的 **isPeekLock** 从“HighMessages”订阅接收一条消息。最后使用 **deleteMessage** 删除该消息：
 
-```
+```javascript
     serviceBusService.receiveSubscriptionMessage('MyTopic', 'LowMessages', function(error, receivedMessage){
         if(!error){
             // Message received and deleted
@@ -300,7 +300,7 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
 主题和订阅具有持久性，必须通过 [Azure 经典管理门户][]或以编程方式显式删除。以下示例演示了如何删除名为 `MyTopic` 的主题：
 
-```
+```javascript
     serviceBusService.deleteTopic('MyTopic', function (error) {
         if (error) {
             console.log(error);
@@ -310,7 +310,7 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
 删除某个主题也会删除向该主题注册的所有订阅。也可以单独删除订阅。以下示例演示了如何从 `MyTopic` 主题中删除名为 `HighMessages` 的订阅：
 
-```
+```javascript
     serviceBusService.deleteSubscription('MyTopic', 'HighMessages', function (error) {
         if(error) {
             console.log(error);

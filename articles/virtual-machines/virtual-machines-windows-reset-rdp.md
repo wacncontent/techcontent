@@ -55,7 +55,7 @@ ms.author: iainfou
 
 使用以下命令创建本地管理员帐户凭据：
 
-```
+```powershell
 $cred=Get-Credential
 ```
 
@@ -63,7 +63,7 @@ $cred=Get-Credential
 
 使用 VM Access 扩展设置新凭据，如下所示：
 
-```
+```powershell
 Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" -VMName "myVM" `
     -Name "myVMAccess" -Location ChinaNorth -UserName $cred.GetNetworkCredential().Username `
     -Password $cred.GetNetworkCredential().Password -typeHandlerVersion "2.0"
@@ -74,7 +74,7 @@ Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" -VMName "myVM"
 ### **重置远程桌面服务配置**
 可以使用 [Set-AzureRmVMExtension](https://msdn.microsoft.com/zh-cn/library/mt603745.aspx) 或 [Set-AzureRmVMAccessExtension](https://msdn.microsoft.com/zh-cn/library/mt619447.aspx) 重置对 VM 的远程访问，如下所示。（将 `myResourceGroup`、`myVM`、`myVMAccess` 和 location 替换为自己的值。）
 
-```
+```powershell
 Set-AzureRmVMExtension -ResourceGroupName "myResourceGroup" -VMName "myVM" `
     -Name "myVMAccess" -ExtensionType "VMAccessAgent" -Location ChinaNorth `
     -Publisher "Microsoft.Compute" -typeHandlerVersion "2.0"
@@ -82,7 +82,7 @@ Set-AzureRmVMExtension -ResourceGroupName "myResourceGroup" -VMName "myVM" `
 
 或者：
 
-```
+```powershell
 Set-AzureRmVMAccessExtension -ResourceGroupName "myResoureGroup" -VMName "myVM" `
     -Name "myVMAccess" -Location ChinaNorth -typeHandlerVersion "2.0
 ```
@@ -108,7 +108,7 @@ Set-AzureRmVMAccessExtension -ResourceGroupName "myResoureGroup" -VMName "myVM" 
 ## <a name="vmaccess-extension-and-powershell---classic"></a> VMAccess 扩展和 PowerShell - 经典
 确保在虚拟机上安装 VM 代理。只要 VM 代理可用，就无需事先安装 VMAccess 扩展。使用以下命令验证是否已在虚拟机上安装 VM 代理。（分别将“myCloudService”和“myVM”替换为云服务和 VM 的名称。若要了解这些名称，可运行不带任何参数的 `Get-AzureVM`。）
 
-```
+```powershell
 $vm = Get-AzureVM -ServiceName "myCloudService" -Name "myVM"
 write-host $vm.VM.ProvisionGuestAgent
 ```
@@ -117,7 +117,7 @@ write-host $vm.VM.ProvisionGuestAgent
 
 如果使用门户创建虚拟机，检查 `$vm.GetInstance().ProvisionGuestAgent` 是否返回 **True**。如果不是，使用以下命令进行设置：
 
-```
+```powershell
 $vm.GetInstance().ProvisionGuestAgent = $true
 ```
 
@@ -126,7 +126,7 @@ $vm.GetInstance().ProvisionGuestAgent = $true
 ### **重置本地管理员帐户密码**
 使用当前的本地管理员帐户名和新密码创建登录凭据，然后运行 `Set-AzureVMAccessExtension`，如下所示。
 
-```
+```powershell
 $cred=Get-Credential
 Set-AzureVMAccessExtension -vm $vm -UserName $cred.GetNetworkCredential().Username `
     -Password $cred.GetNetworkCredential().Password  | Update-AzureVM
@@ -139,19 +139,19 @@ Set-AzureVMAccessExtension -vm $vm -UserName $cred.GetNetworkCredential().Userna
 ### **重置远程桌面服务配置**
 若要重置远程桌面服务配置，请运行以下命令：
 
-```
+```powershell
 Set-AzureVMAccessExtension -vm $vm | Update-AzureVM
 ```
 
 VMAccess 扩展在虚拟机上运行两个命令：
 
-```
+```powershell
 netsh advfirewall firewall set rule group="Remote Desktop" new enable=Yes
 ```
 
 此命令启用允许传入远程桌面流量（使用 TCP 端口 3389）的内置 Windows 防火墙组。
 
-```
+```powershell
 Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -Value 0
 ```
 

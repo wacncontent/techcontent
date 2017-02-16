@@ -12,8 +12,8 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/05/2016
-wacn.date: 01/13/2017
+ms.date: 01/04/2017
+wacn.date: 02/10/2017
 ms.author: dobett
 ---
 
@@ -45,4 +45,4 @@ Azure IoT 中心是一项 Azure 服务，可在解决方案后端和数百万台
 [lnk-device-management]: ./iot-hub-device-management-overview.md
 
 <!---HONumber=Mooncake_0109_2017-->
-<!--Update_Description:update wording-->
+<!--Update_Description:update meta properties-->

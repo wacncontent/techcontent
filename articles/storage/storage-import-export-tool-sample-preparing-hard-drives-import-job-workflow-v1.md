@@ -78,7 +78,7 @@ ms.author: renash
 
 若要为导入的文件设置元数据，请创建包含以下内容的文本文件 `c:\WAImportExport\SampleMetadata.txt`：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <Metadata>  
     <UploadMethod>Microsoft Azure Import/Export Service</UploadMethod>  
@@ -97,7 +97,7 @@ ms.author: renash
 
 若要设置这些属性，请创建文本文件 `c:\WAImportExport\SampleProperties.txt`：
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <Properties>  
     <Content-Type>application/octet-stream</Content-Type>  
@@ -137,7 +137,7 @@ WAImportExport.exe PrepImport /j:FirstDrive.jrn /id:Video1 /logdir:c:\logs /sk:8
 
 ## 第一个驱动器的第二个复制会话  
 
-```
+```  
 WAImportExport.exe PrepImport /j:FirstDrive.jrn /id:Photo /srcdir:H:\Photo /dstdir:photo/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt
 ```
 

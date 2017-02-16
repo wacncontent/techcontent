@@ -38,14 +38,14 @@
 
 8. 在 SimpleEventProcessor.cs 文件的顶部添加以下语句：
 
-    ```
+    ```csharp
     using Microsoft.ServiceBus.Messaging;
     using System.Diagnostics;
     ```
 
     然后，用以下代码替换该类的正文：
 
-    ```
+    ```csharp
     class SimpleEventProcessor : IEventProcessor
     {
         Stopwatch checkpointStopWatch;
@@ -91,13 +91,13 @@
 
 9. 在 **Program** 类中，在文件顶部添加以下 `using` 语句：
 
-    ```
+    ```csharp
     using Microsoft.ServiceBus.Messaging;
     ```
 
     然后，将 `Program` 类中的 `Main` 方法替换为以下代码，从而替换为以前保存的事件中心名称和命名空间级别连接字符串，以及在前面部分复制的存储帐户和密钥。
 
-    ```
+    ```csharp
     static void Main(string[] args)
     {
       string eventHubConnectionString = "{Event Hub connection string}";

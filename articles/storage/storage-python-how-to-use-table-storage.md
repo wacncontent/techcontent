@@ -31,13 +31,13 @@ ms.author: marsma
 ## 创建表
 可通过 **TableService** 对象使用表服务。以下代码创建 **TableService** 对象。在希望在其中以编程方式访问 Azure 存储的任何 Python 文件中，将代码添加到文件的顶部附近：
 
-```
+```python
 from azure.storage.table import TableService, Entity
 ```
 
 以下代码使用存储帐户名称和帐户密钥创建 **TableService** 对象。使用帐户名称和密钥替换“myaccount”和“mykey”。
 
-```
+```python
 table_service = TableService(account_name='myaccount', account_key='mykey', endpoint_suffix='core.chinacloudapi.cn')
 
 table_service.create_table('tasktable')
@@ -48,14 +48,14 @@ table_service.create_table('tasktable')
 
 若要将实体添加到表中，请将字典对象传递给 **insert\_entity** 方法。
 
-```
+```python
 task = {'PartitionKey': 'tasksSeattle', 'RowKey': '1', 'description' : 'Take out the trash', 'priority' : 200}
 table_service.insert_entity('tasktable', task)
 ```
 
 还可以将 **Entity** 类的实例传递给 **insert\_entity** 方法。
 
-```
+```python
 task = Entity()
 task.PartitionKey = 'tasksSeattle'
 task.RowKey = '2'
@@ -67,14 +67,14 @@ table_service.insert_entity('tasktable', task)
 ## 更新实体
 此代码演示如何使用更新版本替换现有实体的旧版本。
 
-```
+```python
 task = {'PartitionKey': 'tasksSeattle', 'RowKey': '1', 'description' : 'Take out the garbage', 'priority' : 250}
 table_service.update_entity('tasktable', 'tasksSeattle', '1', task, content_type='application/atom+xml')
 ```
 
 如果要更新的实体不存在，更新操作将失败。如果要存储实体，无论它以前是否已存在，请使用 **insert\_or\_replace\_entity**。在下面的示例中，第一次调用将替换现有实体。第二次调用将插入新实体，因为表中不存在具有指定的 **PartitionKey** 和 **RowKey** 的实体。
 
-```
+```python
 task = {'PartitionKey': 'tasksSeattle', 'RowKey': '1', 'description' : 'Take out the garbage again', 'priority' : 250}
 table_service.insert_or_replace_entity('tasktable', 'tasksSeattle', '1', task, content_type='application/atom+xml')
 
@@ -85,7 +85,7 @@ table_service.insert_or_replace_entity('tasktable', 'tasksSeattle', '1', task, c
 ## 更改实体组
 有时，有必要批量同时提交多项操作以确保通过服务器进行原子处理。若要完成此操作，请使用 **TableBatch** 类。在确实要批量提交时，可调用 **commit\_batch**。请注意，所有实体必须在相同分区中才能更改为批处理。下面的示例将两个实体一起添加到批处理中。
 
-```
+```python
 from azure.storage.table import TableBatch
 batch = TableBatch()
 task10 = {'PartitionKey': 'tasksSeattle', 'RowKey': '10', 'description' : 'Go grocery shopping', 'priority' : 400}
@@ -97,7 +97,7 @@ table_service.commit_batch('tasktable', batch)
 
 还可以通过上下文管理器语法来使用批处理：
 
-```
+```python
 task12 = {'PartitionKey': 'tasksSeattle', 'RowKey': '12', 'description' : 'Go grocery shopping', 'priority' : 400}
 task13 = {'PartitionKey': 'tasksSeattle', 'RowKey': '13', 'description' : 'Clean the bathroom', 'priority' : 100}
 
@@ -109,7 +109,7 @@ with table_service.batch('tasktable') as batch:
 ## 查询实体
 若要查询表中的实体，请使用 **get\_entity** 方法并传递 **PartitionKey** 和 **RowKey**。
 
-```
+```python
 task = table_service.get_entity('tasktable', 'tasksSeattle', '1')
 print(task.description)
 print(task.priority)
@@ -118,7 +118,7 @@ print(task.priority)
 ## 查询实体集
 此示例基于 **PartitionKey** 查找 Seattle 中的所有任务。
 
-```
+```python
 tasks = table_service.query_entities('tasktable', filter="PartitionKey eq 'tasksSeattle'")
 for task in tasks:
     print(task.description)
@@ -133,7 +133,7 @@ for task in tasks:
 >[!NOTE]
 > 下面的代码段仅对云存储服务有效。不受存储模拟器支持。
 
-```
+```python
 tasks = table_service.query_entities('tasktable', filter="PartitionKey eq 'tasksSeattle'", select='description')
 for task in tasks:
     print(task.description)
@@ -142,14 +142,14 @@ for task in tasks:
 ## 删除实体
 可以使用实体的分区键和行键删除实体。
 
-```
+```python
 table_service.delete_entity('tasktable', 'tasksSeattle', '1')
 ```
 
 ## 删除表
 以下代码从存储帐户中删除一个表。
 
-```
+```python
 table_service.delete_table('tasktable')
 ```
 

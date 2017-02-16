@@ -80,7 +80,7 @@ ms.author: danlep
 
     b.对于默认头节点配置，以管理员身份启动 Windows PowerShell 并键入以下命令：
 
-    ```
+    ```PowerShell
     & $env:CCP_HOME\bin\HPCHNPrepare.ps1 –DBServerInstance ".\ComputeCluster"
     ```
 

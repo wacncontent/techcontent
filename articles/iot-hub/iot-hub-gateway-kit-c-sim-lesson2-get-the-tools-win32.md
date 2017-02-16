@@ -68,7 +68,7 @@ ms.author: xshi
 
 按 `Windows + R`，键入 `cmd` 并按 `Enter` 打开命令提示符窗口，然后运行以下命令：
 
-```
+```cmd
 npm install -g gulp
 ```
 
@@ -93,7 +93,7 @@ npm install -g gulp
 
 2. 运行以下命令，安装 Azure CLI：
 
-    ```
+    ```cmd
     pip install --upgrade azure-cli
     pip install --upgrade azure-cli-iot
     ```
@@ -102,7 +102,7 @@ npm install -g gulp
 
 3. 运行以下命令，对安装进行验证：
 
-    ```
+    ```cmd
     az iot -h
     ```
 

@@ -29,7 +29,7 @@ ms.author: v-livech
 ## 快速命令
 创建 cloud-init.txt 脚本，用于设置主机名、更新所有包，并将 sudo 用户添加到 Linux。
 
-```
+```sh
 #cloud-config
 hostname: myVMhostname
 apt_upgrade: true
@@ -44,13 +44,13 @@ users:
 
 创建要在其中启动 VM 的资源组。
 
-```
+```azurecli
 azure group create myResourceGroup chinanorth
 ```
 
 使用 cloud-init 创建要在启动过程中进行配置的 Linux VM。
 
-```
+```azurecli
 azure vm create \
   -g myResourceGroup \
   -n myVM \
@@ -105,13 +105,13 @@ Microsoft 正在与合作伙伴合作，将 cloud-init 包含在用户向 Azure 
 
 创建要在其中启动 VM 的资源组。
 
-```
+```azurecli
 azure group create myResourceGroup chinanorth
 ```
 
 使用 cloud-init 创建要在启动过程中进行配置的 Linux VM。
 
-```
+```azurecli
 azure vm create \
   --resource-group myResourceGroup \
   --name myVM \
@@ -133,14 +133,14 @@ azure vm create \
 
 ### 名为 `cloud_config_hostname.txt` 的示例 cloud-init 脚本。
 
-```
+```sh
 #cloud-config
 hostname: myservername
 ```
 
 初始启动 VM 期间，此 cloud-init 脚本将主机名设置为 `myservername`。
 
-```
+```azurecli
 azure vm create \
   --resource-group myResourceGroup \
   --name myVM \
@@ -159,7 +159,7 @@ azure vm create \
 
 登录并验证新 VM 的主机名。
 
-```
+```bash
 ssh myVM
 hostname
 myservername
@@ -170,14 +170,14 @@ myservername
 
 ### 适用于 Debian 系列的示例 cloud-init 脚本 `cloud_config_apt_upgrade.txt`
 
-```
+```sh
 #cloud-config
 apt_upgrade: true
 ```
 
 Linux 启动后，所有已安装的包将通过 `apt-get` 进行更新。
 
-```
+```azurecli
 azure vm create \
   --resource-group myResourceGroup \
   --name myVM \
@@ -196,7 +196,7 @@ azure vm create \
 
 登录并验证所有包是否都已更新。
 
-```
+```bash
 ssh myUbuntuVM
 sudo apt-get upgrade
 Reading package lists... Done
@@ -213,7 +213,7 @@ The following packages have been kept back:
 
 ### 适用于 Debian 系列的示例 cloud-init 脚本 `cloud_config_add_users.txt`
 
-```
+```sh
 #cloud-config
 users:
   - name: myCloudInitAddedAdminUser
@@ -226,7 +226,7 @@ users:
 
 Linux 启动后，所有列出的用户都已创建并添加到 sudo 组。
 
-```
+```azurecli
 azure vm create \
   --resource-group myResourceGroup \
   --name myVM \
@@ -245,14 +245,14 @@ azure vm create \
 
 登录并验证新建的用户。
 
-```
+```bash
 ssh myVM
 cat /etc/group
 ```
 
 输出
 
-```
+```bash
 root:x:0:
 <snip />
 sudo:x:27:myCloudInitAddedAdminUser

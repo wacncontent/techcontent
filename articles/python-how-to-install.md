@@ -61,14 +61,14 @@ Azure SDK for Python 包括允许您针对 Azure 开发、部署和管理 Python
 
 可以为每个 Azure 服务分别安装每个库：
 
-```
+```console
 $ pip install azure-batch          # Install the latest Batch runtime library
 $ pip install azure-mgmt-scheduler # Install the latest Storage management library
 ```
 
 可以使用 `--pre` 标志安装预览包：
 
-```
+```console
 $ pip install --pre azure-mgmt-compute # will install only the latest Compute Management library
 ```
 
@@ -77,13 +77,13 @@ $ pip install --pre azure-mgmt-compute # will install only the latest Compute Ma
 
 由于这是预览版本，需要使用 `--pre` 标志：
 
-```
+```console
 $ pip install --pre azure
 ```
 
 或直接
 
-```
+```console
 $ pip install azure==2.0.0rc6
 ```
 

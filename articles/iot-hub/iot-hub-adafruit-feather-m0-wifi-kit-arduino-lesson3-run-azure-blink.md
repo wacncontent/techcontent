@@ -36,7 +36,7 @@ ms.author: xshi
 
 * 运行以下 Azure CLI 命令，列出资源组中的所有 IoT 中心：
 
-    ```
+    ```bash
     az iot hub list -g iot-sample --query [].name
     ```
 
@@ -44,7 +44,7 @@ ms.author: xshi
 
 * 运行以下 Azure CLI 命令，获取 IoT 中心连接字符串：
 
-    ```
+    ```bash
     az iot hub show-connection-string --name {my hub name}
     ```
 
@@ -52,7 +52,7 @@ ms.author: xshi
 
 * 运行以下命令，获取设备连接字符串：
 
-    ```
+    ```bash
     az iot device show-connection-string --hub-name {my hub name} --device-id mym0wifi
     ```
 
@@ -62,7 +62,7 @@ ms.author: xshi
 
 1. 使用设备发现 CLI 获取设备的串行端口：
 
-    ```
+    ```bash
     devdisco list --usb
     ```
 
@@ -72,7 +72,7 @@ ms.author: xshi
 
 2. 打开课程文件夹中的 `config.json` 文件，并添加找到的 COM 端口号的值：
 
-    ```
+    ```json
        {
            "device_port" : "COM1"
        }
@@ -85,7 +85,7 @@ ms.author: xshi
 
 3. 运行以下命令初始化配置文件：
 
-    ```
+    ```bash
        npm install
        gulp init
        gulp install-tools
@@ -93,7 +93,7 @@ ms.author: xshi
 
 4. 运行以下命令，在 Visual Studio Code 中打开设备配置文件 `config-arduino.json`：
 
-    ```
+    ```bash
        # For Windows command prompt
        code %USERPROFILE%\.iot-hub-getting-started\config-arduino.json
 
@@ -116,7 +116,7 @@ ms.author: xshi
 ## 部署并运行示例应用程序
 运行以下命令，在 Arduino 开发板上部署并运行示例应用程序：
 
-```
+```bash
     gulp run
     # You can monitor the serial port by running listen task:
     gulp listen

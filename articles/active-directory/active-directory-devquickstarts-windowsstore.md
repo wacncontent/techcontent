@@ -79,7 +79,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
 C#
 
-```
+```C#
 public MainPage()
 {
     ...
@@ -92,7 +92,7 @@ public MainPage()
 
 C#
 
-```
+```C#
 private async void Search(object sender, RoutedEventArgs e)
 {
     ...
@@ -119,7 +119,7 @@ private async void Search(object sender, RoutedEventArgs e)
 
 C#
 
-```
+```C#
 // Add the access token to the Authorization Header of the call to the Graph API, and call the Graph API.
 httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", result.AccessToken);
 ```
@@ -128,7 +128,7 @@ httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue(
 
 C#
 
-```
+```C#
 // Update the Page UI to represent the signed in user
 ActiveUser.Text = result.UserInfo.DisplayableId;
 ```
@@ -137,7 +137,7 @@ ActiveUser.Text = result.UserInfo.DisplayableId;
 
 C#
 
-```
+```C#
 private void SignOut()
 {
     // Clear session state from the token cache.

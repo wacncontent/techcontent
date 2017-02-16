@@ -60,7 +60,7 @@ ms.author: vturecek
 
 ### 辅助角色
 
-```
+```C#
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace WorkerRole1
@@ -84,7 +84,7 @@ namespace WorkerRole1
 
 ### Service Fabric 无状态服务
 
-```
+```C#
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -141,7 +141,7 @@ Service Fabric 为侦听客户端请求的服务提供可选的通信设置入�
 #### 云服务
 可通过 `RoleEnvironment` 访问 ServiceConfiguration.*.cscfg 中的配置设置。这些设置可全局提供给同一云服务部署中的所有角色实例使用。
 
-```
+```C#
 string value = RoleEnvironment.GetConfigurationSettingValue("Key");
 ```
 
@@ -151,7 +151,7 @@ string value = RoleEnvironment.GetConfigurationSettingValue("Key");
 
 通过服务的 `CodePackageActivationContext` 可在每个服务实例中访问配置设置。
 
-```
+```C#
 ConfigurationPackage configPackage = this.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
 
 // Access Settings.xml
@@ -170,7 +170,7 @@ using (StreamReader reader = new StreamReader(Path.Combine(configPackage.Path, "
 #### 云服务
 当环境中发生更改（例如配置更改）时，使用 `RoleEnvironment.Changed` 事件来通知所有角色实例。通过此事件可以使用配置更新，却无需回收角色实例或重新启动辅助角色进程。
 
-```
+```C#
 RoleEnvironment.Changed += RoleEnvironmentChanged;
 
 private void RoleEnvironmentChanged(object sender, RoleEnvironmentChangedEventArgs e)
@@ -190,7 +190,7 @@ foreach (var settingChange in settingChanges)
 
 通过这些事件可以使用服务包中的更改，而无需重新启动服务实例。
 
-```
+```C#
 this.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent +=
                     this.CodePackageActivationContext_ConfigurationPackageModifiedEvent;
 
@@ -213,7 +213,7 @@ private void CodePackageActivationContext_ConfigurationPackageModifiedEvent(obje
 ### 云服务
 在云服务中，在 ServiceDefintion.csdef 中针对每个角色配置了启动入口点。
 
-```
+```xml
 <ServiceDefinition>
     <Startup>
         <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple" >
@@ -229,7 +229,7 @@ private void CodePackageActivationContext_ConfigurationPackageModifiedEvent(obje
 ### Service Fabric
 Service Fabric 中的启动入口点是在 ServiceManifest.xml 中针对每个服务配置的。
 
-```
+```xml
 <ServiceManifest>
   <CodePackage Name="Code" Version="1.0.0">
     <SetupEntryPoint>

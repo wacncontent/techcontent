@@ -40,7 +40,7 @@ ms.author: marsma
 
 在 Program.cs 文件的顶部，添加以下 **using** 语句：
 
-```
+```csharp
 using System.IO;    
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
@@ -49,7 +49,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 编辑 app.config 文件，使其所含配置设置中的连接字符串指向你的存储帐户。你的 app.config 文件应如下所示：
 
-```
+```xml
 <configuration>
   <startup>
     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
@@ -65,7 +65,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 首先，向 **Main()** 方法中添加代码，以便验证对你的存储帐户的访问并且创建一个新容器：
 
-```
+```csharp
 static void Main(string[] args)
 {
     //Parse the connection string and return a reference to the storage account.
@@ -87,7 +87,7 @@ static void Main(string[] args)
 
 接下来，添加一个新方法，该方法为容器生成共享访问签名并且返回签名 URI：
 
-```
+```csharp
 static string GetContainerSasUri(CloudBlobContainer container)
 {
     //Set the expiry time and permissions for the container.
@@ -106,7 +106,7 @@ static string GetContainerSasUri(CloudBlobContainer container)
 
 在 **Main()** 方法的底部，在调用 **Console.ReadLine()** 之前，添加以下代码行以调用 **GetContainerSasUri()** 并将签名 URI 写入控制台窗口：
 
-```
+```csharp
 //Generate a SAS URI for the container, without a stored access policy.
 Console.WriteLine("Container SAS URI: " + GetContainerSasUri(container));
 Console.WriteLine();
@@ -125,7 +125,7 @@ https://storageaccount.blob.core.chinacloudapi.cn/sascontainer?sv=2012-02-12&se=
 
 添加一个新方法，该方法创建一个新 Blob 并且向其写入某些文本，然后生成共享访问签名并且返回签名 URI：
 
-```
+```csharp
 static string GetBlobSasUri(CloudBlobContainer container)
 {
     //Get a reference to a blob within the container.
@@ -159,7 +159,7 @@ static string GetBlobSasUri(CloudBlobContainer container)
 
 在 **Main()** 方法的底部，在调用 **Console.ReadLine()** 之前，添加以下代码行以调用 **GetBlobSasUri()**，并将共享访问签名 URI 写入控制台窗口：
 
-```
+```csharp
 //Generate a SAS URI for a blob within the container, without a stored access policy.
 Console.WriteLine("Blob SAS URI: " + GetBlobSasUri(container));
 Console.WriteLine();
@@ -182,7 +182,7 @@ https://storageaccount.blob.core.chinacloudapi.cn/sascontainer/sasblob.txt?sv=20
 
 添加一个新方法，该方法在窗口上创建一个新的存储访问策略并返回该策略的名称：
 
-```
+```csharp
 static void CreateSharedAccessPolicy(CloudBlobClient blobClient, CloudBlobContainer container,
     string policyName)
 {
@@ -204,7 +204,7 @@ static void CreateSharedAccessPolicy(CloudBlobClient blobClient, CloudBlobContai
 
 在 **Main()** 方法的底部，在调用 **Console.ReadLine()** 之前，添加以下代码行以首先清除任何现有访问策略，然后调用 **CreateSharedAccessPolicy()** 方法：
 
-```
+```csharp
 //Clear any existing access policies on container.
 BlobContainerPermissions perms = container.GetPermissions();
 perms.SharedAccessPolicies.Clear();
@@ -223,7 +223,7 @@ CreateSharedAccessPolicy(blobClient, container, sharedAccessPolicyName);
 
 添加一个新方法以便在容器上生成另一个共享访问签名：
 
-```
+```csharp
 static string GetContainerSasUriWithPolicy(CloudBlobContainer container, string policyName)
 {
     //Generate the shared access signature on the container. In this case, all of the constraints for the
@@ -237,7 +237,7 @@ static string GetContainerSasUriWithPolicy(CloudBlobContainer container, string 
 
 在 **Main()** 方法的底部，在调用 **Console.ReadLine()** 之前，添加以下代码行以调用 **GetContainerSasUriWithPolicy** 方法：
 
-```
+```csharp
 //Generate a SAS URI for the container, using a stored access policy to set constraints on the SAS.
 Console.WriteLine("Container SAS URI using stored access policy: " + GetContainerSasUriWithPolicy(container, sharedAccessPolicyName));
 Console.WriteLine();
@@ -248,7 +248,7 @@ Console.WriteLine();
 
 添加一个新方法以便创建 Blob 并且生成共享访问签名：
 
-```
+```csharp
 static string GetBlobSasUriWithPolicy(CloudBlobContainer container, string policyName)
 {
     //Get a reference to a blob within the container.
@@ -275,7 +275,7 @@ static string GetBlobSasUriWithPolicy(CloudBlobContainer container, string polic
 
 在 **Main()** 方法的底部，在调用 **Console.ReadLine()** 之前，添加以下代码行以调用 **GetBlobSasUriWithPolicy** 方法：
 
-```
+```csharp
 //Generate a SAS URI for a blob within the container, using a stored access policy to set constraints on the SAS.
 Console.WriteLine("Blob SAS URI using stored access policy: " + GetBlobSasUriWithPolicy(container, sharedAccessPolicyName));
 Console.WriteLine();
@@ -283,7 +283,7 @@ Console.WriteLine();
 
 现在，完整的 **Main()** 方法看起来应如下所示。运行它以将共享访问签名 URI 写入控制台窗口，然后将它们复制并粘贴到一个文本文件中以在本教程的第二部分中使用。
 
-```
+```csharp
 static void Main(string[] args)
 {
     //Parse the connection string and return a reference to the storage account.
@@ -340,7 +340,7 @@ static void Main(string[] args)
 
 在 Program.cs 文件的顶部，添加以下 **using** 语句：
 
-```
+```csharp
 using System.IO;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -348,7 +348,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 在 **Main()** 方法的主体中，添加以下约束，并且将其值更新为你在本教程的第 1 部分中生成的共享访问签名。
 
-```
+```csharp
 static void Main(string[] args)
 {
     string containerSAS = "<your container SAS>";
@@ -364,7 +364,7 @@ static void Main(string[] args)
 
 将以下方法添加到 Program.cs：
 
-```
+```csharp
 static void UseContainerSAS(string sas)
 {
     //Try performing container operations with the SAS provided.
@@ -454,7 +454,7 @@ static void UseContainerSAS(string sas)
 
 更新 **Main()** 方法以使用你在容器上创建的两个共享访问签名调用 **UseContainerSAS()**：
 
-```
+```csharp
 static void Main(string[] args)
 {
     string containerSAS = "<your container SAS>";
@@ -475,7 +475,7 @@ static void Main(string[] args)
 
 将以下方法添加到 Program.cs：
 
-```
+```csharp
 static void UseBlobSAS(string sas)
 {
     //Try performing blob operations using the SAS provided.
@@ -548,7 +548,7 @@ static void UseBlobSAS(string sas)
 
 更新 **Main()** 方法以使用你在 Blob 上创建的两个共享访问签名调用 **UseBlobSAS()**：
 
-```
+```csharp
 static void Main(string[] args)
 {
     string containerSAS = "<your container SAS>";

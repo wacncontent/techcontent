@@ -65,7 +65,7 @@ wacn.date: 01/23/2017
 
 3. 在 Program.cs 中，确保 `using` 语句如下所示：
 
-    ```
+    ```csharp
     using System;
     using System.Globalization;
     using System.IO;
@@ -79,7 +79,7 @@ wacn.date: 01/23/2017
 
 5. 在 `Program` 类中，添加以下全局变量：
 
-    ```
+    ```csharp
     static string serviceNamespace;
     static string baseAddress;
     static string token;
@@ -88,7 +88,7 @@ wacn.date: 01/23/2017
 
 6. 在 `Main()` 中，粘贴以下代码：
 
-    ```
+    ```csharp
     Console.Write("Enter your service namespace: ");
     serviceNamespace = Console.ReadLine();
 
@@ -166,7 +166,7 @@ wacn.date: 01/23/2017
 
 在 `Main()` 方法后面的 `Program` 类中粘贴以下代码：
 
-```
+```csharp
     private static string GetSASToken(string SASKeyName, string SASKeyValue)
     {
       TimeSpan fromEpochStart = DateTime.UtcNow - new DateTime(1970, 1, 1);
@@ -187,7 +187,7 @@ wacn.date: 01/23/2017
 
 在上一步中添加的 `GetSASToken()` 代码后直接粘贴以下代码：
 
-```
+```csharp
     // Uses HTTP PUT to create the queue
     private static string CreateQueue(string queueName, string token)
     {
@@ -216,7 +216,7 @@ wacn.date: 01/23/2017
 
 1. 在上一步中添加的 `CreateQueue()` 代码后直接粘贴以下代码：
 
-    ```
+    ```csharp
     // Sends a message to the "queueName" queue, given the name and the value to enqueue
     // Uses an HTTP POST request.
     private static void SendMessage(string queueName, string body)
@@ -232,7 +232,7 @@ wacn.date: 01/23/2017
 
 2. 标准中转消息属性位于 `BrokerProperties` HTTP 标头中。中转站属性必须以 JSON 格式序列化。若要指定 30 秒的 **TimeToLive** 值并向消息添加消息标签“M1”，请在前面的示例所示的 `webClient.UploadData()` 调用之前添加以下代码：
 
-    ```
+    ```csharp
     // Add brokered message properties "TimeToLive" and "Label"
     webClient.Headers.Add("BrokerProperties", "{ "TimeToLive":30, "Label":"M1"}");
     ```
@@ -241,7 +241,7 @@ wacn.date: 01/23/2017
 
 3. 自定义消息属性被定义为一组键值对。每个自定义属性都存储在其自身的 TPPT 标头中。若要添加自定义属性“Priority”和“Customer”，请在前面的示例所示的 `webClient.UploadData()` 调用之前直接添加以下代码：
 
-    ```
+    ```csharp
     // Add custom properties "Priority" and "Customer".
     webClient.Headers.Add("Priority", "High");
     webClient.Headers.Add("Customer", "12345");
@@ -253,7 +253,7 @@ wacn.date: 01/23/2017
 
 在上一步中添加的 `SendMessage()` 代码后直接粘贴以下代码：
 
-```
+```csharp
     // Receives and deletes the next message from the given resource (queue, topic, or subscription)
     // using the resourceName and an HTTP DELETE request
     private static string ReceiveAndDeleteMessage(string resourceName)
@@ -279,7 +279,7 @@ wacn.date: 01/23/2017
 
 在上一步中添加的 `ReceiveAndDeleteMessage()` 代码后直接粘贴以下代码：
 
-```
+```csharp
     // Using an HTTP PUT request.
     private static string CreateTopic(string topicName)
     {
@@ -305,7 +305,7 @@ wacn.date: 01/23/2017
 
 以下代码将创建对上一步中创建的主题的订阅。在 `CreateTopic()` 定义后直接添加以下代码：
 
-```
+```csharp
     private static string CreateSubscription(string topicName, string subscriptionName)
     {
         var subscriptionAddress = baseAddress + topicName + "/Subscriptions/" + subscriptionName;
@@ -334,7 +334,7 @@ wacn.date: 01/23/2017
 
 在上一步中添加的 `CreateSubscription()` 方法后直接添加以下代码：
 
-```
+```csharp
     private static string GetResources(string resourceAddress)
     {
         string fullAddress = baseAddress + resourceAddress;
@@ -349,7 +349,7 @@ wacn.date: 01/23/2017
 
 在上一步中添加的代码后直接添加以下代码：
 
-```
+```csharp
     private static string DeleteResource(string resourceName)
     {
         string fullAddress = baseAddress + resourceName;
@@ -366,7 +366,7 @@ wacn.date: 01/23/2017
 
 `GetResources()` 方法包含对 `FormatXml()` 方法的调用，用于对检索到的 Atom 馈送进行再次格式化，以增强其可读性。以下是 `FormatXml()` 的定义；请在在上一部分中添加的 `DeleteResource()` 代码后直接添加它：
 
-```
+```csharp
     // Formats the XML string to be more human-readable; intended for display purposes
     private static string FormatXml(string inputXml)
     {
@@ -396,7 +396,7 @@ wacn.date: 01/23/2017
 
 下例为完整的代码，它是遵循本教程中所有步骤之后的预期结果。
 
-```
+```csharp
     using System;
     using System.Globalization;
     using System.IO;

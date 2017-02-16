@@ -41,7 +41,7 @@ Azure 事件中心安全模型满足以下要求：
 
 创建事件中心时，以下示例将创建一个仅限发送的密钥：
 
-```
+```csharp
     // Create namespace manager.
     string serviceNamespace = "YOUR_NAMESPACE";
     string namespaceManageKeyName = "RootManageSharedAccessKey";
@@ -63,7 +63,7 @@ Azure 事件中心安全模型满足以下要求：
 
 可以使用 SAS 密钥生成令牌。对于每个设备，只能生成一个令牌。然后，可以使用以下方法生成令牌。所有令牌都使用 **EventHubSendKey** 密钥生成。将为每个令牌分配一个唯一 URI。
 
-```
+```csharp
     public static string SharedAccessSignatureTokenProvider.GetSharedAccessSignature(string keyName, string sharedAccessKey, string resource, TimeSpan tokenTimeToLive)
 ```
 
@@ -71,13 +71,13 @@ Azure 事件中心安全模型满足以下要求：
 
 此方法将生成具有以下结构的令牌：
 
-```
+```csharp
     SharedAccessSignature sr={URI}&sig={HMAC_SHA256_SIGNATURE}&se={EXPIRATION_TIME}&skn={KEY_NAME}
 ```
 
 令牌过期时间以从 1970 年 1 月 1 日开始算起的秒数指定。下面是一个令牌示例：
 
-```
+```csharp
     SharedAccessSignature sr=contoso&sig=nPzdNN%2Gli0ifrfJwaK4mkK0RqAB%2byJUlt%2bGFmBHG77A%3d&se=1403130337&skn=RootManageSharedAccessKey
 ```
 

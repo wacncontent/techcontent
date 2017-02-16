@@ -32,14 +32,14 @@ ms.author: xshi
 ## 添加 Node.js 函数
 1. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
     cd Lesson4
     code .
     ```
 
 2. 打开 `app.js` 文件，然后在末尾添加以下函数：
 
-    ```
+    ```javascript
     function turnOnLED() {
       wpi.digitalWrite(CONFIG_PIN, 1);
     }
@@ -53,7 +53,7 @@ ms.author: xshi
 
 3. 在 `receiveMessageCallback` 函数的 switch-case 块的默认条件之前添加以下条件：
 
-    ```
+    ```javascript
     case 'on':
       turnOnLED();
       break;
@@ -66,7 +66,7 @@ ms.author: xshi
 
 4. 打开 gulpfile.js 文件，然后在函数 `sendMessage` 之前添加新函数：
 
-    ```
+    ```javascript
     var buildCustomMessage = function (messageId) {
       if ((messageId & 1) && (messageId < MAX_MESSAGE_COUNT)) {
         return new Message(JSON.stringify({ command: 'on', messageId: messageId }));
@@ -82,7 +82,7 @@ ms.author: xshi
 
 5. 在 `sendMessage` 函数中，将 `var message = buildMessage(sentMessageCount);` 行替换为新行，如以下代码片段所示：
 
-    ```
+    ```javascript
     var message = buildCustomMessage(sentMessageCount);
     ```
 
@@ -91,7 +91,7 @@ ms.author: xshi
 ### 部署并运行示例应用程序
 运行以下命令，在 Pi 上部署并运行示例应用程序：
 
-```
+```bash
 gulp deploy && gulp run
 ```
 

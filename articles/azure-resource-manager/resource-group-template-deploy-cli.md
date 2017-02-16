@@ -72,7 +72,7 @@ azure group deployment create -f "c:\MyTemplates\example.json" -e "c:\MyTemplate
 
 5. 在执行部署之前先运行 **azure group template validate** 命令验证部署。测试部署时，请提供与执行部署时所提供的完全相同的参数（如下一步中所示）。
 
-    ```
+    ```   
     azure group template validate -f <PathToTemplate> -p "{\"ParameterName\":{\"value\":\"ParameterValue\"}}" -g ExampleResourceGroup
     ```
 
@@ -170,7 +170,7 @@ azure group deployment create -f "c:\MyTemplates\example.json" -e "c:\MyTemplate
 
 2. 通过提供包括 SAS 令牌的 URI 来部署该模板。
 
-    ```
+    ```   
     azure group deployment create --template-uri $fullurl -g ExampleResourceGroup
     ```
 
@@ -182,13 +182,13 @@ azure group deployment create -f "c:\MyTemplates\example.json" -e "c:\MyTemplate
 
 - 使用内联参数。每个参数采用以下格式：`"ParameterName": { "value": "ParameterValue" }`。以下示例显示带转义符的参数。
 
-    ```
+    ```   
     azure group deployment create -f <PathToTemplate> -p "{\"ParameterName\":{\"value\":\"ParameterValue\"}}" -g ExampleResourceGroup -n ExampleDeployment
     ```
 
 - 使用参数文件。
 
-    ```
+    ```   
     azure group deployment create -f "c:\MyTemplates\example.json" -e "c:\MyTemplates\example.params.json" -g ExampleResourceGroup -n ExampleDeployment
     ```
 

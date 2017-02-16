@@ -82,7 +82,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-Web
 
 JavaScript
 
-```
+```JavaScript
 var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 
 // Add some logging
@@ -95,7 +95,7 @@ var log = bunyan.createLogger({
 
 JavaScript
 
-```
+```JavaScript
 // Use the OIDCStrategy within Passport. (Section 2)
 //
 //   Strategies in passport require a `validate` function, which accept
@@ -142,7 +142,7 @@ Passport 使用适用于它的所有策略（Twitter、Facebook 等），所有�
 
 JavaScript
 
-```
+```JavaScript
 // Passport session setup. (Section 2)
 
 //   To support persistent login sessions, Passport needs to be able to
@@ -178,7 +178,7 @@ var findByEmail = function(email, fn) {
 
 JavaScript
 
-```
+```JavaScript
 // configure Express (Section 2)
 
 var app = express();
@@ -204,7 +204,7 @@ app.configure(function() {
 
 JavaScript
 
-```
+```JavaScript
 // Our Auth routes (Section 3)
 
 // GET /auth/openid
@@ -255,7 +255,7 @@ app.post('/auth/openid/return',
 
 JavaScript
 
-```
+```JavaScript
 //Routes (Section 4)
 
 app.get('/', function(req, res){
@@ -289,7 +289,7 @@ app.get('/logout', function(req, res){
 
 JavaScript
 
-```
+```JavaScript
 // Simple route middleware to ensure user is authenticated. (Section 4)
 
 //   Use this route middleware on any resource that needs to be protected.  If
@@ -306,7 +306,7 @@ function ensureAuthenticated(req, res, next) {
 
 JavaScript
 
-```
+```JavaScript
 app.listen(3000);
 ```
 
@@ -318,7 +318,7 @@ app.listen(3000);
 
 JavaScript
 
-```
+```JavaScript
 /*
  * GET home page.
  */
@@ -332,7 +332,7 @@ exports.index = function(req, res){
 
 JavaScript
 
-```
+```JavaScript
 /*
  * GET users listing.
  */
@@ -348,7 +348,7 @@ exports.list = function(req, res){
 
 JavaScript
 
-```
+```JavaScript
 <% if (!user) { %>
     <h2>Welcome! Please log in.</h2>
     <a href="/login">Log In</a>
@@ -363,7 +363,7 @@ JavaScript
 
 Javascript
 
-```
+```Javascript
 <% if (!user) { %>
     <h2>Welcome! Please log in.</h2>
     <a href="/login">Log In</a>
@@ -384,7 +384,7 @@ Javascript
 
 HTML
 
-```
+```HTML
 <!DOCTYPE html>
 <html>
     <head>

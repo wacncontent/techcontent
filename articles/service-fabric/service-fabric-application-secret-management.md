@@ -57,13 +57,13 @@ Service Fabric SDK 提供内置的机密加密和解密函数。可以在生成�
 
 以下 PowerShell 命令用于加密机密。若要生成机密值的密文，必须使用群集中安装的同一个加密证书：
 
-```
+```powershell
 Invoke-ServiceFabricEncryptText -CertStore -CertThumbprint "<thumbprint>" -Text "mysecret" -StoreLocation CurrentUser -StoreName My
 ```
 
 生成的 base-64 字符串包含机密密文，以及用来将其加密的证书相关信息。当 `IsEncrypted` 属性设置为 `true` 时，可将 base-64 编码字符串插入服务 Settings.xml 配置文件中的参数内：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Section Name="MySettings">
@@ -80,7 +80,7 @@ Invoke-ServiceFabricEncryptText -CertStore -CertThumbprint "<thumbprint>" -Text 
 
 Settings.xml 配置文件允许使用可在创建应用程序时提供的可重写参数。使用 `MustOverride` 属性而不要提供参数值：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Section Name="MySettings">
@@ -91,7 +91,7 @@ Settings.xml 配置文件允许使用可在创建应用程序时提供的可重�
 
 若要重写 Settings.xml 中的值，可在 ApplicationManifest.xml 中声明服务的 override 参数：
 
-```
+```xml
 <ApplicationManifest ... >
   <Parameters>
     <Parameter Name="MySecret" DefaultValue="" />
@@ -114,13 +114,13 @@ Settings.xml 配置文件允许使用可在创建应用程序时提供的可重�
 
 使用 PowerShell 时，参数将以[哈希表](https://technet.microsoft.com/zh-cn/library/ee692803.aspx)的形式提供给 `New-ServiceFabricApplication`：
 
-```
+```powershell
 PS C:\Users\vturecek> New-ServiceFabricApplication -ApplicationName fabric:/MyApp -ApplicationTypeName MyAppType -ApplicationTypeVersion 1.0.0 -ApplicationParameter @{"MySecret" = "I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM="}
 ```
 
 使用 C# 时，应用程序参数将以 `NameValueCollection` 的形式在 `ApplicationDescription` 中指定：
 
-```
+```csharp
 FabricClient fabricClient = new FabricClient();
 
 NameValueCollection applicationParameters = new NameValueCollection();
@@ -141,7 +141,7 @@ await fabricClient.ApplicationManager.CreateApplicationAsync(applicationDescript
 
 使用数据加密证书时，需确保“网络服务”或运行服务的任何用户帐户可以访问该证书的私钥。如果提供了相应的配置，Service Fabric 可自动处理服务授权。可以通过在 ApplicationManifest.xml 中定义用户和证书安全策略来完成此配置。在以下示例中，已授予“网络服务”帐户对某个按指纹定义的证书的读取访问权限：
 
-```
+```xml
 <ApplicationManifest … >
     <Principals>
         <Users>
@@ -166,7 +166,7 @@ await fabricClient.ApplicationManager.CreateApplicationAsync(applicationDescript
 
 借助用于访问配置包中 Settings.xml 内的配置值的 API，可以轻松解密 `IsEncrypted` 属性设置为 `true` 的值。由于加密的文本包含用于加密的证书相关信息，因此不需要手动查找证书。只需在运行服务的节点上安装该证书。调用 `DecryptValue()` 方法即可检索原始机密值：
 
-```
+```csharp
 ConfigurationPackage configPackage = this.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
 SecureString mySecretValue = configPackage.Settings.Sections["MySettings"].Parameters["MySecret"].DecryptValue()
 ```

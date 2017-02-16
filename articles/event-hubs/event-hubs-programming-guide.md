@@ -37,14 +37,14 @@ ms.author: sethm
 
 可以使用 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类来创建事件中心。例如：
 
-```
+```csharp
     var manager = new Microsoft.ServiceBus.NamespaceManager("mynamespace.servicebus.chinacloudapi.cn");
     var description = manager.CreateEventHub("MyEventHub");
 ```
 
 在大多数情况下，建议使用 [CreateEventHubIfNotExists](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.createeventhubifnotexists.aspx) 方法，避免服务重启时生成异常。例如：
 
-```
+```csharp
     var description = manager.CreateEventHubIfNotExists("MyEventHub");
 ```
 
@@ -56,7 +56,7 @@ ms.author: sethm
 
 与事件中心交互的主类是 [Microsoft.ServiceBus.Messaging.EventHubClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.eventhubclient.aspx) 类。此类提供发送者和接收者功能。可以使用 [Create](https://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.messaging.eventhubclient.create.aspx) 方法实例化此类，如以下示例中所示。
 
-```
+```csharp
     var client = EventHubClient.Create(description.Path);
 ```
 
@@ -64,19 +64,19 @@ ms.author: sethm
 
 另一个选项是从连接字符串创建客户端。使用 Azure 辅助角色时，此选项非常合适，因为你可以在辅助角色的配置属性中存储字符串。例如：
 
-```
+```csharp
     EventHubClient.CreateFromConnectionString("your_connection_string");
 ```
 
 连接字符串的格式与前面所用方法的 App.config 文件中显示的格式相同：
 
-```
+```xml
     Endpoint=sb://[namespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[key]
 ```
 
 最后，还可以从 [MessagingFactory](https://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.messaging.messagingfactory.aspx) 实例创建 [EventHubClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.eventhubclient.aspx) 对象，如以下代码示例中所示。
 
-```
+```csharp
     var factory = MessagingFactory.CreateFromConnectionString("your_connection_string");
     var client = factory.CreateEventHubClient("MyEventHub");
 ```
@@ -99,7 +99,7 @@ ms.author: sethm
 
 分批发送事件可以极大地提高吞吐量。[SendBatch](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.eventhubclient.sendbatch.aspx) 方法采用 [EventData](https://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.messaging.eventdata.aspx) 类型的 **IEnumerable** 参数，并将整批作为一个原子操作发送到事件中心。
 
-```
+```csharp
     public void SendBatch(IEnumerable<EventData> eventDataList);
 ```
 
@@ -113,7 +113,7 @@ ms.author: sethm
 
 尽管最常见的做法是使用分区键将事件发送到事件中心，但在某些情况下，你可能需要将事件直接发送到给定的分区。例如：
 
-```
+```csharp
     var partitionedSender = client.CreatePartitionedSender(description.PartitionIds[0]);
 ```
 
@@ -128,14 +128,14 @@ ms.author: sethm
 
 从使用者组中的分区读取数据的最直接方式是使用 [EventHubReceiver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.eventhubreceiver.aspx) 类。若要创建此类的实例，必须使用 [EventHubConsumerGroup](https://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.messaging.eventhubconsumergroup.aspx) 类的实例。在以下示例中，创建使用者组的接收者时，必须指定分区 ID。
 
-```
+```csharp
     EventHubConsumerGroup group = client.GetDefaultConsumerGroup();
     var receiver = group.CreateReceiver(client.GetRuntimeInformation().PartitionIds[0]);
 ```
 
 [CreateReceiver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.eventhubconsumergroup.createreceiver.aspx) 方法有多个重载，可以简化对所创建读取者的控制。这些方法包括以字符串或时间戳的形式指定偏移量，并能够指定是要在返回的流中包含此指定偏移量，还是要在该偏移量的后面启动。创建接收者后，可以在返回的对象上开始接收事件。[Receive](https://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.messaging.eventhubreceiver.receive.aspx) 方法有四个重载，它们控制接收操作参数，如批大小和等待时间。可以使用这些方法的异步版本来提高使用者的吞吐量。例如：
 
-```
+```csharp
     bool receive = true;
     string myOffset;
     while(receive)

@@ -41,7 +41,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 根据需要用于部署的值更改以下变量的值。以下值映射到本文中使用的方案：
 
-```
+```azurecli
 # Set variables for the new resource group
 rgName="IaaSStory"
 location="chinanorth"
@@ -77,13 +77,13 @@ dnsName="iaasstoryws1"
 
 1. 创建新的资源组。
 
-    ```
+    ```azurecli
     azure group create $rgName $location
     ```
 
 2. 创建 VNet 和子网。
 
-    ```
+    ```azurecli
     azure network vnet create --resource-group $rgName \
         --name $vnetName \
         --address-prefixes $vnetPrefix \
@@ -96,7 +96,7 @@ dnsName="iaasstoryws1"
 
 3. 创建公共 IP 资源。
 
-    ```
+    ```azurecli
     azure network public-ip create --resource-group $rgName \
         --name $pipName \
         --location $location \
@@ -106,7 +106,7 @@ dnsName="iaasstoryws1"
 
 4. 使用公共 IP 为上面创建的子网中的 VM 创建网络接口 (NIC)。请注意，第一组命令用于检索上面创建的子网的 **ID**。
 
-    ```
+    ```azurecli
     subnetId="$(azure network vnet subnet show --resource-group $rgName \
         --vnet-name $vnetName \
         --name $subnetName|grep Id)"
@@ -127,7 +127,7 @@ dnsName="iaasstoryws1"
 
 5. 创建存储帐户，以托管 VM OS 驱动器。
 
-    ```
+    ```azurecli
     azure storage account create $stdStorageAccountName \
         --resource-group $rgName \
         --location $location --type LRS
@@ -138,7 +138,7 @@ dnsName="iaasstoryws1"
 
 1. 创建 VM。
 
-    ```
+    ```azurecli
     azure vm create --resource-group $rgName \
         --name $vmName \
         --location $location \
@@ -161,7 +161,7 @@ dnsName="iaasstoryws1"
 
 1. 在 bash 控制台中运行上面的脚本。
 
-    ```
+    ```azurecli
     sh myscript.sh
     ```
 

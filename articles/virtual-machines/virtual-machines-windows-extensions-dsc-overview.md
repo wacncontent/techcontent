@@ -94,7 +94,7 @@ Azure DSC 扩展使用 Azure VM 代理框架来传送、启用和报告 Azure VM
 
 Azure DSC 扩展将检索并在 Azure VM 上启用 DSC 配置文档。下面是一个简单的配置示例。以“IisInstall.ps1”的名称将它保存在本地：
 
-```
+```powershell
 configuration IISInstall 
 { 
     node "localhost"
@@ -110,7 +110,7 @@ configuration IISInstall
 
 以下步骤将 IisInstall.ps1 脚本放在指定的 VM 上，执行配置，然后报告状态。
 
-```
+```powershell
 #Azure PowerShell cmdlets are required
 Import-Module Azure
 

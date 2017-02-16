@@ -53,7 +53,7 @@ ms.author: cynthn
 
 最后一个命令更新虚拟机的状态，以完成删除数据磁盘过程。
 
-```
+```powershell
 $VirtualMachine = Get-AzureRmVM -ResourceGroupName "RG11" -Name "MyVM07" 
 Remove-AzureRmVMDataDisk -VM $VirtualMachine -Name "DataDisk3"
 Update-AzureRmVM -ResourceGroupName "RG11" -Name "MyVM07" -VM $VirtualMachine

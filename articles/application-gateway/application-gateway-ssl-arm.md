@@ -64,7 +64,7 @@ ms.author: gwallace
 
 ### 步骤 1
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -72,7 +72,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 检查该帐户的订阅。
 
-```
+```powershell
 Get-AzureRmSubscription
 ```
 
@@ -82,7 +82,7 @@ Get-AzureRmSubscription
 
 选择要使用的 Azure 订阅。
 
-```
+```powershell
 Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 ```
 
@@ -90,7 +90,7 @@ Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 
 创建资源组（如果要使用现有的资源组，请跳过此步骤）。
 
-```
+```powershell
 New-AzureRmResourceGroup -Name appgw-rg -Location "China North"
 ```
 
@@ -104,7 +104,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此设置用作�
 
 ### 步骤 1
 
-```
+```powershell
 $subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
 ```
 
@@ -112,7 +112,7 @@ $subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10
 
 ### 步骤 2
 
-```
+```powershell
 $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $subnet
 ```
 
@@ -120,7 +120,7 @@ $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -L
 
 ### 步骤 3
 
-```
+```powershell
 $subnet = $vnet.Subnets[0]
 ```
 
@@ -128,7 +128,7 @@ $subnet = $vnet.Subnets[0]
 
 ## 创建前端配置的公共 IP 地址
 
-```
+```powershell
 $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name publicIP01 -location "China North" -AllocationMethod Dynamic
 ```
 
@@ -138,7 +138,7 @@ $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name publicI
 
 ### 步骤 1
 
-```
+```powershell
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
 ```
 
@@ -146,7 +146,7 @@ $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Sub
 
 ### 步骤 2
 
-```
+```powershell
 $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
 ```
 
@@ -154,7 +154,7 @@ $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPA
 
 ### 步骤 3
 
-```
+```powershell
 $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsetting01 -Port 80 -Protocol Http -CookieBasedAffinity Enabled
 ```
 
@@ -162,7 +162,7 @@ $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsettin
 
 ### 步骤 4
 
-```
+```powershell
 $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 443
 ```
 
@@ -170,7 +170,7 @@ $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 443
 
 ### 步骤 5
 
-```
+```powershell
 $cert = New-AzureRmApplicationGatewaySslCertificate -Name cert01 -CertificateFile <full path for certificate file> -Password "<password>"
 ```
 
@@ -178,7 +178,7 @@ $cert = New-AzureRmApplicationGatewaySslCertificate -Name cert01 -CertificateFil
 
 ### 步骤 6
 
-```
+```powershell
 $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -PublicIPAddress $publicip
 ```
 
@@ -186,7 +186,7 @@ $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -Pu
 
 ### 步骤 7
 
-```
+```powershell
 $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protocol Https -FrontendIPConfiguration $fipconfig -FrontendPort $fp -SslCertificate $cert
 ```
 
@@ -194,7 +194,7 @@ $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protoco
 
 ### 步骤 8
 
-```
+```powershell
 $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
 ```
 
@@ -202,7 +202,7 @@ $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType B
 
 ### 步骤 9
 
-```
+```powershell
 $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
 ```
 
@@ -215,7 +215,7 @@ $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Cap
 
 ## 使用 New-AzureApplicationGateway 创建应用程序网关
 
-```
+```powershell
 $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location "China North" -BackendAddressPools $pool -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku -SslCertificates $cert
 ```
 

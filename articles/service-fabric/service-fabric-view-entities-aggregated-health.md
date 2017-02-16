@@ -32,7 +32,7 @@ Service Fabric 提供多种方式来获取实体聚合运行状况：
 
 为了演示这些选项，让我们使用一个具有五个节点的本地群集。fabric:/System 应用程序（原本即已存在）旁边，已部署其他一些应用程序。其中一个应用程序是 **fabric:/WordCount**。该应用程序包含一个配置有七个副本的有状态服务。由于只有五个节点，因此系统组件显示分区低于目标计数的警告。
 
-```
+```xml
 <Service Name="WordCountService">
     <StatefulService ServiceTypeName="WordCountServiceType" TargetReplicaSetSize="7" MinReplicaSetSize="2">
       <UniformInt64Partition PartitionCount="1" LowKey="1" HighKey="26" />
@@ -95,13 +95,13 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
 
 以下调用将获取群集运行状况：
 
-```
+```csharp
 ClusterHealth clusterHealth = await fabricClient.HealthManager.GetClusterHealthAsync();
 ```
 
 以下代码使用针对节点和应用程序的自定义运行状况策略和筛选器获取群集运行状况。它将创建包含输入信息的 [ClusterHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.clusterhealthquerydescription.aspx)。
 
-```
+```csharp
 var policy = new ClusterHealthPolicy()
 {
     MaxPercentUnhealthyNodes = 20
@@ -131,7 +131,7 @@ ClusterHealth clusterHealth = await fabricClient.HealthManager.GetClusterHealthA
 
 以下 cmdlet 使用默认运行状况策略获取群集运行状况。聚合的运行状况为警告，因为 fabric:/WordCount 应用程序处于警告状态。请注意不正常评估如何提供触发聚合运行状况的详细条件。
 
-```
+```xml
 PS C:\> Get-ServiceFabricClusterHealth
 
 AggregatedHealthState   : Warning
@@ -176,7 +176,7 @@ HealthEvents            : None
 
 以下 PowerShell cmdlet 使用自定义应用程序策略获取群集的运行状况。它筛选结果以只获取有错误或警告的应用程序和节点。因此，不会返回任何节点，因为这些节点都是正常的。仅 fabric:/WordCount 应用程序符合应用程序筛选器。因为自定义策略指定对于 fabric:/WordCount 应用程序将警告视为错误，应用程序被评估为错误，从而群集也被评估为错误。
 
-```
+```xml
 PS c:> $appHealthPolicy = New-Object -TypeName System.Fabric.Health.ApplicationHealthPolicy
 $appHealthPolicy.ConsiderWarningAsError = $true
 $appHealthPolicyMap = New-Object -TypeName System.Fabric.Health.ApplicationHealthPolicyMap
@@ -223,13 +223,13 @@ HealthEvents            : None
 
 以下代码获取具有指定节点名称的节点运行状况：
 
-```
+```csharp
 NodeHealth nodeHealth = await fabricClient.HealthManager.GetNodeHealthAsync(nodeName);
 ```
 
 以下代码获取指定节点名称的节点运行状况，并通过 [NodeHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.nodehealthquerydescription.aspx) 传入事件筛选器和自定义策略：
 
-```
+```csharp
 var queryDescription = new NodeHealthQueryDescription(nodeName)
 {
     HealthPolicy = new ClusterHealthPolicy() {  ConsiderWarningAsError = true },
@@ -242,7 +242,7 @@ NodeHealth nodeHealth = await fabricClient.HealthManager.GetNodeHealthAsync(quer
 ### PowerShell
 用于获取节点运行状况的 cmdlet 为 [Get-ServiceFabricNodeHealth](https://msdn.microsoft.com/zh-cn/library/mt125937.aspx)。首先使用 [Connect-ServiceFabricCluster](https://msdn.microsoft.com/zh-cn/library/mt125938.aspx) cmdlet 连接到群集。以下 cmdlet 使用默认运行状况策略获取节点运行状况：
 
-```
+```powershell
 PS C:\> Get-ServiceFabricNodeHealth _Node_1
 
 NodeName              : _Node_1
@@ -263,7 +263,7 @@ HealthEvents          :
 
 以下 cmdlet 获取群集中所有节点的运行状况：
 
-```
+```powershell
 PS C:\> Get-ServiceFabricNode | Get-ServiceFabricNodeHealth | select NodeName, AggregatedHealthState | ft -AutoSize
 
 NodeName AggregatedHealthState
@@ -292,13 +292,13 @@ _Node_4                     Ok
 
 以下代码获取具有指定应用程序名称 (URI) 的应用程序的运行状况：
 
-```
+```csharp
 ApplicationHealth applicationHealth = await fabricClient.HealthManager.GetApplicationHealthAsync(applicationName);
 ```
 
 以下代码使用通过 [ApplicationHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.applicationhealthquerydescription.aspx) 指定的筛选器和自定义策略，获取指定应用程序名称 (URI) 的应用程序运行状况。
 
-```
+```csharp
 HealthStateFilter warningAndErrors = HealthStateFilter.Error | HealthStateFilter.Warning;
 var serviceTypePolicy = new ServiceTypeHealthPolicy()
 {
@@ -329,7 +329,7 @@ ApplicationHealth applicationHealth = await fabricClient.HealthManager.GetApplic
 
 以下 cmdlet 返回 **fabric:/WordCount** 应用程序的运行状况：
 
-```
+```powershell
 PS c:\>
 PS C:\WINDOWS\system32>  Get-ServiceFabricApplicationHealth fabric:/WordCount
 
@@ -400,7 +400,7 @@ HealthEvents                    :
 
 以下 PowerShell cmdlet 传入自定义策略。它还筛选子项和事件。
 
-```
+```xml
 PS C:\> Get-ServiceFabricApplicationHealth -ApplicationName fabric:/WordCount -ConsiderWarningAsError $true -ServicesFilter Error -EventsFilter Error -DeployedApplicationsFilter Error
 
 ApplicationName                 : fabric:/WordCount
@@ -439,13 +439,13 @@ HealthEvents                    : None
 
 以下示例获取具有指定服务名称 (URI) 的服务的运行状况：
 
-```
+```charp
 ServiceHealth serviceHealth = await fabricClient.HealthManager.GetServiceHealthAsync(serviceName);
 ```
 
 以下代码通过 [ServiceHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.servicehealthquerydescription.aspx) 指定筛选器和自定义策略，从而获取指定服务名称 (URI) 的服务运行状况：
 
-```
+```csharp
 var queryDescription = new ServiceHealthQueryDescription(serviceName)
 {
     EventsFilter = new HealthEventsFilter() { HealthStateFilterValue = HealthStateFilter.All },
@@ -460,7 +460,7 @@ ServiceHealth serviceHealth = await fabricClient.HealthManager.GetServiceHealthA
 
 以下 cmdlet 使用默认运行状况策略获取服务运行状况：
 
-```
+```powershell
 PS C:\> Get-ServiceFabricServiceHealth -ServiceName fabric:/WordCount/WordCountService
 
 ServiceName           : fabric:/WordCount/WordCountService
@@ -539,7 +539,7 @@ HealthEvents          :
 ### API
 若要通过 API 获取分区运行状况，请创建 `FabricClient` 并在其 HealthManager 上调用 [GetPartitionHealthAsync](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.healthclient.getpartitionhealthasync.aspx) 方法。若要指定可选参数，请创建 [PartitionHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.partitionhealthquerydescription.aspx)。
 
-```
+```csharp
 PartitionHealth partitionHealth = await fabricClient.HealthManager.GetPartitionHealthAsync(partitionId);
 ```
 
@@ -548,7 +548,7 @@ PartitionHealth partitionHealth = await fabricClient.HealthManager.GetPartitionH
 
 以下 cmdlet 获取 **fabric:/WordCount/WordCountService** 服务的所有分区的运行状况：
 
-```
+```powershell
 PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService | Get-ServiceFabricPartitionHealth
 
 PartitionId           : a1f83a35-d6bf-4d39-b90d-28d15f39599b
@@ -601,7 +601,7 @@ HealthEvents          :
 ### API
 若要通过 API 获取副本运行状况，请创建 `FabricClient` 并在其 HealthManager 上调用 [GetReplicaHealthAsync](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.healthclient.getreplicahealthasync.aspx) 方法。若要指定高级参数，请使用 [ReplicaHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.replicahealthquerydescription.aspx)。
 
-```
+```csharp
 ReplicaHealth replicaHealth = await fabricClient.HealthManager.GetReplicaHealthAsync(partitionId, replicaId);
 ```
 
@@ -610,7 +610,7 @@ ReplicaHealth replicaHealth = await fabricClient.HealthManager.GetReplicaHealthA
 
 以下 cmdlet 获取服务所有分区的主副本的运行状况：
 
-```
+```powershell
 PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService | Get-ServiceFabricReplica | where {$_.ReplicaRole -eq "Primary"} | Get-ServiceFabricReplicaHealth
 
 PartitionId           : a1f83a35-d6bf-4d39-b90d-28d15f39599b
@@ -645,7 +645,7 @@ HealthEvents          :
 ### API
 若要通过 API 获取部署在节点上的一个应用程序的运行状况，请创建 `FabricClient` 并在其 HealthManager 上调用 [GetDeployedApplicationHealthAsync](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.healthclient.getdeployedapplicationhealthasync.aspx) 方法。若要指定可选参数，请使用 [DeployedApplicationHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.deployedapplicationhealthquerydescription.aspx)。
 
-```
+```csharp
 DeployedApplicationHealth health = await fabricClient.HealthManager.GetDeployedApplicationHealthAsync(
     new DeployedApplicationHealthQueryDescription(applicationName, nodeName));
 ```
@@ -655,7 +655,7 @@ DeployedApplicationHealth health = await fabricClient.HealthManager.GetDeployedA
 
 以下 cmdlet 获取部署在 **_Node_2** 上的 **fabric:/WordCount** 应用程序的运行状况。
 
-```
+```powershell
 PS C:\> Get-ServiceFabricDeployedApplicationHealth -ApplicationName fabric:/WordCount -NodeName _Node_2
 
 ApplicationName                    : fabric:/WordCount
@@ -699,7 +699,7 @@ HealthEvents                       :
 ### API
 若要通过 API 获取一个已部署服务包的运行状况，请创建 `FabricClient` 并在其 HealthManager 上调用 [GetDeployedServicePackageHealthAsync](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.healthclient.getdeployedservicepackagehealthasync.aspx) 方法。若要指定可选参数，请使用 [DeployedServicePackageHealthQueryDescription](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.description.deployedservicepackagehealthquerydescription.aspx)。
 
-```
+```csharp
 DeployedServicePackageHealth health = await fabricClient.HealthManager.GetDeployedServicePackageHealthAsync(
     new DeployedServicePackageHealthQueryDescription(applicationName, nodeName, serviceManifestName));
 ```
@@ -709,7 +709,7 @@ DeployedServicePackageHealth health = await fabricClient.HealthManager.GetDeploy
 
 以下 cmdlet 获取部署在 **_Node_2** 上的 **fabric:/WordCount** 应用程序的 **WordCountServicePkg** 服务包的运行状况。此实体的 **System.Hosting** 报告包含成功的服务包和入口点激活以及成功的服务类型注册。
 
-```
+```powershell
 PS C:\> Get-ServiceFabricDeployedApplication -ApplicationName fabric:/WordCount -NodeName _Node_2 | Get-ServiceFabricDeployedServicePackageHealth -ServiceManifestName WordCountServicePkg
 
 ApplicationName       : fabric:/WordCount
@@ -802,7 +802,7 @@ HealthEvents          :
 
 以下代码使用高级筛选器获取群集运行状况区块。
 
-```
+```csharp
 var queryDescription = new ClusterHealthChunkQueryDescription();
 queryDescription.ApplicationFilters.Add(new ApplicationHealthStateFilter()
     {
@@ -848,7 +848,7 @@ var result = await fabricClient.HealthManager.GetClusterHealthChunkAsync(queryDe
 
 以下代码仅在节点处于“错误”状态时才获取节点，只有一个特定节点例外，任何情况下都应返回该节点。
 
-```
+```xml
 PS C:\> $errorFilter = [System.Fabric.Health.HealthStateFilter]::Error;
 $allFilter = [System.Fabric.Health.HealthStateFilter]::All;
 
@@ -873,7 +873,7 @@ ApplicationHealthStateChunks : None
 
 以下 cmdlet 利用应用程序筛选器获取群集区块。
 
-```
+```xml
 $errorFilter = [System.Fabric.Health.HealthStateFilter]::Error;
 $allFilter = [System.Fabric.Health.HealthStateFilter]::All;
 
@@ -938,7 +938,7 @@ ApplicationHealthStateChunks :
 
 以下 cmdlet 返回某个节点上所有已部署的实体。
 
-```
+```xml
 $errorFilter = [System.Fabric.Health.HealthStateFilter]::Error;
 $allFilter = [System.Fabric.Health.HealthStateFilter]::All;
 
@@ -1031,14 +1031,14 @@ ApplicationHealthStateChunks :
 
 以下代码获取群集中不正常的应用程序：
 
-```
+```csharp
 var applications = fabricClient.QueryManager.GetApplicationListAsync().Result.Where(
   app => app.HealthState == HealthState.Error);
 ```
 
 以下 cmdlet 获取 fabric:/WordCount 应用程序的详细信息。请注意，运行状况状态为警告。
 
-```
+```powershell
 PS C:\> Get-ServiceFabricApplication -ApplicationName fabric:/WordCount
 
 ApplicationName        : fabric:/WordCount
@@ -1058,7 +1058,7 @@ ApplicationParameters  : { "WordCountWebService_InstanceCount" = "1";
 
 以下 cmdlet 获取运行状况状态为警告的服务：
 
-```
+```powershell
 PS C:\> Get-ServiceFabricApplication | Get-ServiceFabricService | where {$_.HealthState -eq "Warning"}
 
 ServiceName            : fabric:/WordCount/WordCountService
@@ -1080,7 +1080,7 @@ HealthState            : Warning
 
 以下代码显示修改后的 fabric:/WordCount 应用程序的升级状态。监视程序在其中一个副本上报告一个错误。因为运行状况检查不合格，升级回滚。
 
-```
+```powershell
 PS C:\> Get-ServiceFabricApplicationUpgrade fabric:/WordCount
 
 ApplicationName               : fabric:/WordCount

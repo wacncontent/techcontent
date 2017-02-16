@@ -31,7 +31,7 @@ ms.author: iainfou
 
 确保已安装[最新 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 并登录到订阅：
 
-```
+```powershell
 Login-AzureRMAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -40,7 +40,7 @@ Login-AzureRMAccount -EnvironmentName AzureChinaCloud
 ## 确定启动问题
 用户可以通过查看 Azure 中 VM 的屏幕快照来排查启动问题。此屏幕快照有助于确定为何 VM 无法启动。以下示例从名为 `myResourceGroup` 的资源组中名为 `myVM` 的 Windows VM 获取屏幕快照：
 
-```
+```powershell
 Get-AzureRmVMBootDiagnosticsData -ResourceGroupName myResourceGroup `
     -Name myVM -Windows -LocalPath C:\Users\ops\
 ```
@@ -52,13 +52,13 @@ Get-AzureRmVMBootDiagnosticsData -ResourceGroupName myResourceGroup `
 
 以下示例从名为 `myResourceGroup` 的资源组中获取名为 `myVM` 的 VM 的信息：
 
-```
+```powershell
 Get-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVM"
 ```
 
 在前一个命令的输出的 `StorageProfile` 部分查找 `Vhd URI`。下面这个截断的示例输出显示了代码块末尾的 `Vhd URI`：
 
-```
+```powershell
 RequestId                     : 8a134642-2f01-4e08-bb12-d89b5b81a0a0
 StatusCode                    : OK
 ResourceGroupName             : myResourceGroup
@@ -88,7 +88,7 @@ StorageProfile                :
 
 以下示例从名为 `myResourceGroup` 的资源组中删除名为 `myVM` 的 VM：
 
-```
+```powershell
 Remove-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVM"
 ```
 
@@ -99,7 +99,7 @@ Remove-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVM"
 
 附加现有的虚拟硬盘时，指定在前面的 `Get-AzureRmVM` 命令中获取的磁盘 URL。以下示例将现有的虚拟硬盘附加到名为 `myResourceGroup` 的资源组中名为 `myVMRecovery` 的故障排除 VM：
 
-```
+```powershell
 $myVM = Get-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVMRecovery"
 Add-AzureRmVMDataDisk -VM $myVM -CreateOption "Attach" -Name "DataDisk" -DiskSizeInGB $null `
     -VhdUri "https://mystorageaccount.blob.core.chinacloudapi.cn/vhds/myVM.vhd"
@@ -113,20 +113,20 @@ Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
 
 1. 使用相应的凭据通过 RDP 连接到故障排除 VM。以下示例为名为 `myResourceGroup` 的资源组中名为 `myVMRecovery` 的 VM 下载 RDP 连接文件，该文件下载到 `C:\Users\ops\Documents`。
 
-    ```
+    ```powershell
     Get-AzureRMRemoteDesktopFile -ResourceGroupName "myResourceGroup" -Name "myVMRecovery" `
         -LocalPath "C:\Users\ops\Documents\myVMRecovery.rdp"
     ```
 
 2. 系统会自动检测并附加数据磁盘。查看已附加卷的列表以确定驱动器号，如下所示：
 
-    ```
+    ```powershell
     Get-Disk
     ```
 
 以下示例输出显示虚拟硬盘连接了磁盘 **2**。（也可使用 `Get-Volume` 查看驱动器号）：
 
-```
+```powershell
     Number   Friendly Name   Serial Number   HealthStatus   OperationalStatus   Total Size   Partition
                                                                                              Style
     ------   -------------   -------------   ------------   -----------------   ----------   ----------
@@ -143,13 +143,13 @@ Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
 
 1. 从 RDP 会话卸载恢复 VM 上的数据磁盘。需要以前的 `Get-Disk` cmdlet 中的磁盘编号。然后，使用 `Set-Disk` 将磁盘设置为脱机：
 
-    ```
+    ```powershell
     Set-Disk -Number 2 -IsOffline $True
     ```
 
 再次使用 `Get-Disk` 确认磁盘现已设置为脱机。下面的示例输出显示磁盘现已设置为脱机：
 
-```
+```powershell
     Number   Friendly Name   Serial Number   HealthStatus   OperationalStatus   Total Size   Partition
                                                                                              Style
     ------   -------------   -------------   ------------   -----------------   ----------   ----------
@@ -160,7 +160,7 @@ Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
 
 2. 退出 RDP 会话。通过 Azure PowerShell 会话删除故障排除 VM 中的虚拟硬盘。
 
-    ```
+    ```powershell
     $myVM = Get-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVMRecovery"
     Remove-AzureRmVMDataDisk -VM $myVM -Name "DataDisk"
     Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
@@ -173,7 +173,7 @@ Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
 
 该模板使用先前命令中的 VHD URL 将 VM 部署到现有虚拟网络中。以下示例将模板部署到名为 `myResourceGroup` 的资源组：
 
-```
+```powershell
 New-AzureRmResourceGroupDeployment -Name myDeployment -ResourceGroupName myResourceGroup `
   -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-specialized-vhd-existing-vnet/azuredeploy.json
 ```
@@ -184,7 +184,7 @@ New-AzureRmResourceGroupDeployment -Name myDeployment -ResourceGroupName myResou
 
 从现有虚拟硬盘创建 VM 时，启动诊断可能不会自动启用。以下示例在名为 `myResourceGroup` 的资源组中名为 `myVMDeployed` 的 VM 上启用诊断扩展：
 
-```
+```powershell
 $myVM = Get-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVMDeployed"
 Set-AzureRmVMBootDiagnostics -ResourceGroupName myResourceGroup -VM $myVM -enable
 Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM

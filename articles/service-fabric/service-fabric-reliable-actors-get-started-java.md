@@ -51,13 +51,13 @@ ms.author: vturecek
 ## 创建执行组件服务
 首先创建新的 Service Fabric 应用程序。适用于 Linux 的 Service Fabric SDK 包括一个 Yeoman 生成器，它为包含无状态服务的 Service Fabric 应用程序提供基架。首先，请运行以下 Yeoman 命令：
 
-```
+```bash
 $ yo azuresfjava
 ```
 
 按照说明创建 **Reliable Actor 服务**。本教程将应用程序命名为“HelloWorldActorApplication”，将执行组件命名为“HelloWorldActor”。 将创建以下基架：
 
-```
+```bash
 HelloWorldActorApplication/
 ├── build.gradle
 ├── HelloWorldActor
@@ -107,7 +107,7 @@ HelloWorldActorApplication/
 
 `HelloWorldActorInterface/src/reliableactor/HelloWorldActor.java`：
 
-```
+```java
 public interface HelloWorldActor extends Actor {
     @Readonly   
     CompletableFuture<Integer> getCountAsync();
@@ -121,7 +121,7 @@ public interface HelloWorldActor extends Actor {
 
 `HelloWorldActor/src/reliableactor/HelloWorldActorImpl`：
 
-```
+```java
 @ActorServiceAttribute(name = "HelloWorldActor.HelloWorldActorService")
 @StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
 public class HelloWorldActorImpl extends ReliableActor implements HelloWorldActor {
@@ -153,7 +153,7 @@ public class HelloWorldActorImpl extends ReliableActor implements HelloWorldActo
 
 `HelloWorldActor/src/reliableactor/HelloWorldActorHost`：
 
-```
+```java
 public class HelloWorldActorHost {
 
     public static void main(String[] args) throws Exception {
@@ -183,13 +183,13 @@ public class HelloWorldActorHost {
 
 Yeoman 基架包含一个用于构建应用程序的 gradle 脚本，以及一个用于部署和取消部署应用程序的 bash 脚本。若要运行应用程序，请先使用 gradle 构建应用程序：
 
-```
+```bash
 $ gradle
 ```
 
 这会生成可以使用 Service Fabric Azure CLI 部署的 Service Fabric 应用程序包。Install.sh 脚本包含用于部署应用程序包的 Azure CLI 命令。只需运行 install.sh 脚本即可部署：
 
-```
+```bask
 $ ./install.sh
 ```
 

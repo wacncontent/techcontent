@@ -29,7 +29,7 @@ ms.author: amsriva
 
 现有的 HTTPListener 可用于支持 WebSocket。以下是示例模板文件中 HttpListeners 元素的代码片段。需要同时拥有 HTTP 和 HTTPS 侦听器才能支持 WebSocket 并保护 WebSocket 流量。同样，可以使用[门户](./application-gateway-create-gateway-portal.md)或 [PowerShell](./application-gateway-create-gateway-arm.md) 在端口 80/443 上创建具有侦听器的应用程序网关，以支持 WebSocket 通信。
 
-```
+```json
 "httpListeners": [
             {
                 "name": "appGatewayHttpsListener",
@@ -65,7 +65,7 @@ ms.author: amsriva
 
 如果后端池具有已启用 WebSocket 的服务器，那么应使用 BackendAddressPool 对其进行定义。只能使用后端端口 80/443 对 BackendHttpSetting 进行定义。基于 cookie 的相关性和 requestTimeouts 的属性与 WebSocket 流量不相关。不需更改路由规则。应继续使用“基本”路由规则，以便将适当的侦听器绑定到相应的后端地址池。
 
-```
+```json
 "requestRoutingRules": [{
     "name": "<ruleName1>",
     "properties": {

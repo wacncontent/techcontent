@@ -40,7 +40,7 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 
 下面显示了 App.config 文件示例：
 
-```
+```xml
     <?xml version="1.0" encoding="utf-8" ?>
     <configuration>
           <appSettings>
@@ -71,7 +71,7 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 
 以下示例向 Service Bus 队列发送消息以及从中接收消息。
 
-```
+```csharp
     // SimpleSenderReceiver.cs
 
     using System;

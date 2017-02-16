@@ -51,7 +51,7 @@ ms.author: lemai
 
 以下示例代码演示如何启动一个命令在特定的分区上导致数据丢失，然后检查该命令的进度。
 
-```
+```csharp
     static async Task PerformDataLossSample()
     {
         // Create a unique operation id for the command below
@@ -134,7 +134,7 @@ ms.author: lemai
 
 下面的示例演示了如何使用 PartitionSelector 来选择指定服务的随机分区：
 
-```
+```csharp
     static async Task PerformDataLossUseSelectorSample()
     {
         // Create a unique operation id for the command below

@@ -29,7 +29,7 @@ Reliable Actors 框架要求至少定义一个要由执行组件类型实现的�
 ## 类型
 你还可以创建执行组件类型的层次结构，这些类型派生自由平台提供的执行组件基类。如果是形状，你可能具有一个 `Shape` 基类型：
 
-```
+```csharp
 public abstract class Shape : Actor, IShape
 {
     public abstract Task<int> GetVerticeCount();
@@ -40,7 +40,7 @@ public abstract class Shape : Actor, IShape
 
 `Shape` 的子类型可以重写基类型的方法。
 
-```
+```csharp
 [ActorService(Name = "Circle")]
 [StatePersistence(StatePersistence.Persisted)]
 public class Circle : Shape, ICircle

@@ -63,7 +63,7 @@ ms.author: darosa;sethm
 
 3.  将以下代码粘贴到 sender.py 中：
 
-    ```
+    ```python
     import uuid
     import datetime
     import random
@@ -93,7 +93,7 @@ ms.author: darosa;sethm
 
 3.  将以下代码粘贴到 archivereader.py 中：
 
-    ```
+    ```python
     import os
     import string
     import json

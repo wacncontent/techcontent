@@ -27,7 +27,7 @@ ms.author: adegeo
 
 下例演示如何使用 WebRole 和 WorkerRole（每个都拥有不同的诊断配置）启用云服务的诊断。
 
-```
+```powershell
 $service_name = "MyService"
 $service_package = "CloudService.cspkg"
 $service_config = "ServiceConfiguration.Cloud.cscfg"
@@ -44,7 +44,7 @@ New-AzureDeployment -ServiceName $service_name -Slot Production -Package $servic
 
 从 Azure SDK 2.6 开始，MSBuild 发布目标输出生成的扩展配置文件将包括基于服务配置文件 (.cscfg) 中指定的诊断配置字符串的存储帐户名称。以下脚本演示了在部署云服务时如何分析发布目标输出中的扩展配置文件并为每个角色配置诊断扩展。
 
-```
+```powershell
 $service_name = "MyService"
 $service_package = "C:\build\output\CloudService.cspkg"
 $service_config = "C:\build\output\ServiceConfiguration.Cloud.cscfg"
@@ -89,7 +89,7 @@ Visual Studio Online 使用类似的方法通过诊断扩展自动部署云服�
 
 如果诊断存储帐户与云服务在不同订阅中，则需要将 StorageAccountName 和 StorageAccountKey 参数显式传递给 cmdlet。当诊断存储帐户在同一订阅中时，不需要 StorageAccountKey 参数，因为 cmdlet 可以在启用诊断扩展时自动查询和设置密钥值。但是，如果诊断存储帐户在不同订阅中，则 cmdlet 可能无法自动获取密钥，需要通过 StorageAccountKey 参数显式指定该密钥。
 
-```
+```powershell
 $webrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WebRole" -DiagnosticsConfigurationPath $webrole_diagconfigpath -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key
 $workerrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WorkerRole" -DiagnosticsConfigurationPath $workerrole_diagconfigpath -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key
 ```
@@ -98,7 +98,7 @@ $workerrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "Worke
 
 可以使用 [Set-AzureServiceDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/azure/mt589140.aspx) cmdlet 在已运行的云服务上启用或更新诊断配置。
 
-```
+```powershell
 $service_name = "MyService"
 $webrole_diagconfigpath = "MyService.WebRole.PubConfig.xml" 
 $workerrole_diagconfigpath = "MyService.WorkerRole.PubConfig.xml"
@@ -112,14 +112,14 @@ Set-AzureServiceDiagnosticsExtension -DiagnosticsConfiguration @($webrole_diagco
 ## 获取当前诊断扩展配置
 使用 [Get AzureServiceDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/azure/mt589204.aspx) cmdlet 可以获取云服务的当前诊断配置。
 
-```
+```powershell
 Get-AzureServiceDiagnosticsExtension -ServiceName "MyService"
 ```
 
 ## 删除诊断扩展
 若要在云服务上关闭诊断，可以使用 [Remove-AzureServiceDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/azure/mt589183.aspx) cmdlet。
 
-```
+```powershell
 Remove-AzureServiceDiagnosticsExtension -ServiceName "MyService"
 ```
 
@@ -127,7 +127,7 @@ Remove-AzureServiceDiagnosticsExtension -ServiceName "MyService"
 
 若要从单个角色中删除诊断扩展，请使用以下命令：
 
-```
+```powershell
 Remove-AzureServiceDiagnosticsExtension -ServiceName "MyService" -Role "WebRole"
 ```
 

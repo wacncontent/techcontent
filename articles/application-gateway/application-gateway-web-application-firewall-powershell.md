@@ -49,7 +49,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 登录 Azure 帐户。
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -57,7 +57,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 选择要用于此方案的订阅。
 
-```
+```powershell
 Select-AzureRmSubscription -SubscriptionName "<Subscription name>"
 ```
 
@@ -65,7 +65,7 @@ Select-AzureRmSubscription -SubscriptionName "<Subscription name>"
 
 检索要将 Web 应用程序防火墙添加到的网关。
 
-```
+```powershell
 $gw = Get-AzureRmApplicationGateway -Name "AdatumGateway" -ResourceGroupName "MyResourceGroup"
 ```
 
@@ -73,7 +73,7 @@ $gw = Get-AzureRmApplicationGateway -Name "AdatumGateway" -ResourceGroupName "My
 
 配置 Web 应用程序防火墙 SKU。可用大小为 **WAF\_Large** 和 **WAF\_Medium**。使用 Web 应用程序防火墙时，层必须是 **WAF**；设置 sku 时，必须确认容量。
 
-```
+```powershell
 $gw | Set-AzureRmApplicationGatewaySku -Name WAF_Large -Tier WAF -Capacity 2
 ```
 
@@ -83,7 +83,7 @@ $gw | Set-AzureRmApplicationGatewaySku -Name WAF_Large -Tier WAF -Capacity 2
 
 对于 **WafMode** 设置，可用值为“阻止”和“检测”。
 
-```
+```powershell
 $gw | Set-AzureRmApplicationGatewayWebApplicationFirewallConfiguration -Enabled $true -FirewallMode Prevention
 ```
 
@@ -91,7 +91,7 @@ $gw | Set-AzureRmApplicationGatewayWebApplicationFirewallConfiguration -Enabled 
 
 使用上述步骤中定义的设置更新应用程序网关。
 
-```
+```powershell
 Set-AzureRmApplicationGateway -ApplicationGateway $gw
 ```
 
@@ -107,7 +107,7 @@ Set-AzureRmApplicationGateway -ApplicationGateway $gw
 
 登录 Azure
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -117,7 +117,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 检查该帐户的订阅。
 
-```
+```powershell
 Get-AzureRmSubscription
 ```
 
@@ -125,7 +125,7 @@ Get-AzureRmSubscription
 
 选择要使用的 Azure 订阅。
 
-```
+```powershell
 Select-AzureRmsubscription -SubscriptionName "<Subscription name>"
 ```
 
@@ -133,7 +133,7 @@ Select-AzureRmsubscription -SubscriptionName "<Subscription name>"
 
 创建资源组（如果要使用现有的资源组，请跳过此步骤）。
 
-```
+```powershell
 New-AzureRmResourceGroup -Name appgw-rg -Location "China North"
 ```
 
@@ -150,7 +150,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 分配要用于应用程序网关本身的子网地址范围。
 
-```
+```powershell
 $gwSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name 'appgwsubnet' -AddressPrefix 10.0.0.0/24
 ```
 
@@ -163,7 +163,7 @@ $gwSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name 'appgwsubnet' -AddressPr
 
 分配要用于后端地址池的地址范围。
 
-```
+```powershell
 $nicSubnet = New-AzureRmVirtualNetworkSubnetConfig  -Name 'appsubnet' -AddressPrefix 10.0.2.0/24
 ```
 
@@ -171,7 +171,7 @@ $nicSubnet = New-AzureRmVirtualNetworkSubnetConfig  -Name 'appsubnet' -AddressPr
 
 使用[创建资源组](#create-the-resource-group)步骤中创建的资源组中的上述子网创建虚拟网络
 
-```
+```powershell
 $vnet = New-AzureRmvirtualNetwork -Name 'appgwvnet' -ResourceGroupName appgw-rg -Location "China North" -AddressPrefix 10.0.0.0/16 -Subnet $gwSubnet, $nicSubnet
 ```
 
@@ -179,7 +179,7 @@ $vnet = New-AzureRmvirtualNetwork -Name 'appgwvnet' -ResourceGroupName appgw-rg 
 
 检索要用于以下步骤的虚拟网络资源和子网资源：
 
-```
+```powershell
 $vnet = Get-AzureRmvirtualNetwork -Name 'appgwvnet' -ResourceGroupName appgw-rg
 $gwSubnet = Get-AzureRmVirtualNetworkSubnetConfig -Name 'appgwsubnet' -VirtualNetwork $vnet
 $nicSubnet = Get-AzureRmVirtualNetworkSubnetConfig -Name 'appsubnet' -VirtualNetwork $vnet
@@ -189,7 +189,7 @@ $nicSubnet = Get-AzureRmVirtualNetworkSubnetConfig -Name 'appsubnet' -VirtualNet
 
 创建要用于应用程序网关的公共 IP 资源。此公共 IP 地址会用于以下步骤之一：
 
-```
+```powershell
 $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name 'appgwpip' -Location "China North" -AllocationMethod Dynamic
 ```
 
@@ -204,7 +204,7 @@ $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name 'appgwp
 
 创建应用程序网关 IP 配置，此设置配置应用程序网关使用的子网。应用程序网关启动时，它会从配置的子网获取 IP 地址，再将网络流量路由到后端 IP 池中的 IP 地址。请记住，每个实例需要一个 IP 地址。
 
-```
+```powershell
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name 'gwconfig' -Subnet $gwSubnet
 ```
 
@@ -212,7 +212,7 @@ $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name 'gwconfig' -Subn
 
 使用后端 Web 服务器的 IP 地址配置后端 IP 地址池。这些 IP 地址是接收来自前端 IP 终结点的网络流量的 IP 地址。替换以下 IP 地址，添加自己的应用程序 IP 地址终结点。
 
-```
+```powershell
 $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name 'pool01' -BackendIPAddresses 1.1.1.1, 2.2.2.2, 3.3.3.3
 ```
 
@@ -220,7 +220,7 @@ $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name 'pool01' -BackendI
 
 上传要在已启用 SSL 的后端池资源上使用的证书。
 
-```
+```powershell
 $authcert = New-AzureRmApplicationGatewayAuthenticationCertificate -Name 'whitelistcert1' -CertificateFile <full path to .cer file>
 ```
 
@@ -228,7 +228,7 @@ $authcert = New-AzureRmApplicationGatewayAuthenticationCertificate -Name 'whitel
 
 配置应用程序网关后端 http 设置。将上述步骤中上传的证书分配给 http 设置。
 
-```
+```powershell
 $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name 'setting01' -Port 443 -Protocol Https -CookieBasedAffinity Enabled -AuthenticationCertificates $authcert
 ```
 
@@ -236,7 +236,7 @@ $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name 'setting01
 
 配置公共 IP 终结点的前端 IP 端口。此端口是最终用户连接到的端口。
 
-```
+```powershell
 $fp = New-AzureRmApplicationGatewayFrontendPort -Name 'port01'  -Port 443
 ```
 
@@ -244,7 +244,7 @@ $fp = New-AzureRmApplicationGatewayFrontendPort -Name 'port01'  -Port 443
 
 创建前端 IP 配置，此设置将专用或公共 IP 地址映射到应用程序网关的前端。以下步骤将上述步骤中的公共 IP 地址与前端 IP 配置关联。
 
-```
+```powershell
 $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name 'fip01' -PublicIPAddress $publicip
 ```
 
@@ -252,7 +252,7 @@ $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name 'fip01' -Public
 
 配置应用程序网关的证书。此证书用于加密和解密应用程序网关上的流量。
 
-```
+```powershell
 $cert = New-AzureRmApplicationGatewaySslCertificate -Name cert01 -CertificateFile <full path to .pfx file> -Password <password for certificate file>
 ```
 
@@ -260,7 +260,7 @@ $cert = New-AzureRmApplicationGatewaySslCertificate -Name cert01 -CertificateFil
 
 创建应用程序网关的 HTTP 侦听器。分配要使用的前端 IP 配置、端口和 SSL 证书。
 
-```
+```powershell
 $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01 -Protocol Https -FrontendIPConfiguration $fipconfig -FrontendPort $fp -SslCertificate $cert
 ```
 
@@ -268,7 +268,7 @@ $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01 -Protocol
 
 创建配置负载均衡器行为的负载均衡器路由规则。在此示例中，创建基本轮循机制规则。
 
-```
+```powershell
 $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name 'rule01' -RuleType basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
 ```
 
@@ -276,7 +276,7 @@ $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name 'rule01' -RuleType
 
 配置应用程序网关的实例大小。
 
-```
+```powershell
 $sku = New-AzureRmApplicationGatewaySku -Name WAF_Medium -Tier WAF -Capacity 2
 ```
 
@@ -289,7 +289,7 @@ $sku = New-AzureRmApplicationGatewaySku -Name WAF_Medium -Tier WAF -Capacity 2
 
 配置 WAF 的模式，可接受的值为**阻止**和**检测**。
 
-```
+```powershell
 $config = New-AzureRmApplicationGatewayWafConfig -Enabled $true -WafMode "Prevention"
 ```
 
@@ -297,7 +297,7 @@ $config = New-AzureRmApplicationGatewayWafConfig -Enabled $true -WafMode "Preven
 
 创建包含前述步骤中所有配置项的应用程序网关。示例中的应用程序网关名为“appgwtest”。
 
-```
+```powershell
 $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location "China North" -BackendAddressPools $pool -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku -WebApplicationFirewallConfig $config -SslCertificates $cert -AuthenticationCertificates $authcert
 ```
 

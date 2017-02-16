@@ -40,14 +40,14 @@ ms.author: marsma
 ### 将库用于 Blob 和队列服务
 此时，应用已可调用 Azure Blob 和队列服务。添加以下 using 语句，以便可以直接引用 Azure 存储类型：
 
-```
+```csharp
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 ```
 
 接下来，向页面添加一个按钮。将以下代码添加到其 **Click** 事件，并使用 [async 关键字](http://msdn.microsoft.com/zh-cn/library/vstudio/hh156513.aspx)修改事件处理程序方法：
 
-```
+```csharp
 var credentials = new StorageCredentials(accountName, accountKey);
 var account = new CloudStorageAccount(credentials, true);
 var blobClient = account.CreateCloudBlobClient();
@@ -74,7 +74,7 @@ Install-Package Microsoft.Data.OData.WindowsStore -Source "C:\Program Files (x86
 
 引用 WCF Data Services NuGet 程序包后，在按钮的 Click 事件中更改代码：
 
-```
+```csharp
 var credentials = new StorageCredentials(accountName, accountKey);
 var account = new CloudStorageAccount(credentials, true);
 var tableClient = account.CreateCloudTableClient();

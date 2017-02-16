@@ -113,7 +113,7 @@ Azure IoT 中心引入的数据可供多种服务（例如 Azure 流分析和 Az
 [lnk-docdb]: ../articles/documentdb/index.md
 [lnk-asa]: ../articles/stream-analytics/index.md
 [lnk-appservices]: ../articles/app-service/index.md
-[lnk-logicapps]: ../articles/app-service/index.mdlogic/
+[lnk-logicapps]: ../articles/app-service-logic/index.md
 [lnk-blob]: ../articles/storage/index.md
 
 <!---HONumber=Mooncake_1226_2016-->

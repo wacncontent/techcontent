@@ -59,7 +59,7 @@ Visual Studio Service Fabric 工具支持所有用于连接到群集来进行发
 
     下面是连接到基于 x509 证书的安全群集的示例：
 
-    ```
+    ```xml
     <ClusterConnectionParameters
     ConnectionEndpoint="mycluster.chinaeast.chinacloudapp.cn:19000"
     X509Credential="true"

@@ -75,7 +75,7 @@ ms.author: tomfitz
 
     此错误很容易发生，因为模板表达式可能很复杂。例如，存储帐户的以下名称分配包含一组方括号、三个函数、三组圆括号、一组单引号和一个属性：
 
-    ```
+    ```json
     "name": "[concat('storage', uniqueString(resourceGroup().id))]",
     ```
 
@@ -95,7 +95,7 @@ ms.author: tomfitz
 
     根级别的资源其名称中的段必须比资源类型中的段少一个。段之间用斜杠隔开。在下面的示例中，类型有两个段，名称有一个段，因此为**有效名称**。
 
-    ```
+    ```json
     {
       "type": "Microsoft.Web/serverfarms",
       "name": "myHostingPlanName",
@@ -105,7 +105,7 @@ ms.author: tomfitz
 
     但下一个示例**不是有效名称**，因为其段数与类型的段数相同。
 
-    ```
+    ```json
     {
       "type": "Microsoft.Web/serverfarms",
       "name": "appPlan/myHostingPlanName",
@@ -115,7 +115,7 @@ ms.author: tomfitz
 
     对于子资源来说，类型和名称的段数必须相同。之所以必须这样，是因为子资源的完整名称和类型包含父名称和类型。因此，完整名称的段仍比完整类型的段少一个。
 
-    ```
+    ```json
     "resources": [
         {
             "type": "Microsoft.KeyVault/vaults",
@@ -134,7 +134,7 @@ ms.author: tomfitz
 
     确保段数正确对于 Resource Manager 类型来说可能很困难，这些类型应用到各个资源提供程序。例如，对网站应用资源锁需要使用包含四个段的类型。因此，该名称包含三个段：
 
-    ```
+    ```json
     {
         "type": "Microsoft.Web/sites/providers/locks",
         "name": "[concat(variables('siteName'),'/Microsoft.Authorization/MySiteLock')]",
@@ -173,7 +173,7 @@ Message=Cannot find ServerFarm with name exampleplan.
 
 若要部署模板中缺少的资源，请检查是否需要添加依赖关系。如果可能，Resource Manager 将通过并行创建资源来优化部署。如果一个资源必须在另一个资源之后部署，则需在模板中使用 **dependsOn** 元素创建与其他资源的依赖关系。例如，在部署 Web 应用时，App Service 计划必须存在。如果未指定该 Web 应用与应用服务计划的依赖关系，Resource Manager 将同时创建这两个资源。此时将出现一条错误消息，指出找不到应用服务计划资源，因为尝试在 Web 应用上设置属性时它尚不存在。在 Web 应用中设置依赖关系可避免此错误。
 
-```
+```json
 {
   "apiVersion": "2015-08-01",
   "type": "Microsoft.Web/sites",
@@ -188,7 +188,7 @@ Message=Cannot find ServerFarm with name exampleplan.
 
 如果资源所在的资源组不是要部署到的资源组，也可能会出现此错误。在这种情况下，请使用 [resourceId 函数](./resource-group-template-functions.md#resourceid)获取资源的完全限定名称。
 
-```
+```json
 "properties": {
     "name": "[parameters('siteName')]",
     "serverFarmId": "[resourceId('plangroup', 'Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
@@ -216,7 +216,7 @@ group {resource group name} was not found.
 
 子资源的名称包括父名称。例如，SQL 数据库可能定义为：
 
-```
+```json
 {
   "type": "Microsoft.Sql/servers/databases",
   "name": "[concat(variables('databaseServerName'), '/', parameters('databaseName'))]",
@@ -225,7 +225,7 @@ group {resource group name} was not found.
 
 但是，如果你不指定对父资源的依赖关系，则可能在部署父资源之前部署子资源。为更正此错误，请添加依赖关系。
 
-```
+```json
 "dependsOn": [
     "[variables('databaseServerName')]"
 ]
@@ -241,7 +241,7 @@ Message=The storage account named mystorage is already taken.
 
 可将命名约定与 [uniqueString](./resource-group-template-functions.md#uniquestring) 函数的结果连接起来创建一个唯一名称。
 
-```
+```json
 "name": "[concat('storage', uniqueString(resourceGroup().id))]",
 "type": "Microsoft.Storage/storageAccounts",
 ```
@@ -295,25 +295,25 @@ Message: The subscription is not registered to use namespace {resource-provider-
 
 若要查看注册状态，请使用 **Get-AzureRmResourceProvider**。
 
-```
+```powershell
 Get-AzureRmResourceProvider -ListAvailable
 ```
 
 若要注册提供程序，请使用 **Register-AzureRmResourceProvider**，并提供想要注册的资源提供程序的名称。
 
-```
+```powershell
 Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Cdn
 ```
 
 若要获取特定类型的资源支持的位置，请使用：
 
-```
+```powershell
 ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).Locations
 ```
 
 若要获取特定类型的资源支持的 API 版本，请使用：
 
-```
+```powershell
 ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).ApiVersions
 ```
 
@@ -321,19 +321,19 @@ Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Cdn
 
 若要查看是否已注册提供程序，请使用 `azure provider list` 命令。
 
-```
+```azurecli
 azure provider list
 ```
 
 若要注册资源提供程序，请使用 `azure provider register` 命令，并指定要注册的 *命名空间* 。
 
-```
+```azurecli
 azure provider register Microsoft.Cdn
 ```
 
 若要查看资源提供程序支持的位置和 API 版本，请使用：
 
-```
+```azurecli
 azure provider show -n Microsoft.Compute --json > compute.json
 ```
 
@@ -342,13 +342,13 @@ azure provider show -n Microsoft.Compute --json > compute.json
 
 若要检查订阅的核心配额，可以使用 Azure CLI 中的 `azure vm list-usage` 命令。以下示例显示，试用帐户的核心配额为 4 ：
 
-```
+```azurecli
 azure vm list-usage
 ```
 
 将返回：
 
-```
+```azurecli
 info:    Executing command vm list-usage
 Location: chinanorth
 data:    Name   Unit   CurrentValue  Limit
@@ -367,13 +367,13 @@ Maximum allowed: 4, Current in use: 4, Additional requested: 2.
 
 或者，可以在 PowerShell 中使用 **Get-AzureRmVMUsage** cmdlet。
 
-```
+```powershell
 Get-AzureRmVMUsage
 ```
 
 将返回：
 
-```
+```powershell
 ...
 CurrentValue : 0
 Limit        : 4
@@ -411,13 +411,13 @@ Policy identifier(s): '/subscriptions/{guid}/providers/Microsoft.Authorization/p
 
 在 **PowerShell** 中以 **Id** 参数形式提供该策略标识符即可检索有关阻止部署的策略的详细信息。
 
-```
+```powershell
 (Get-AzureRmPolicyAssignment -Id "/subscriptions/{guid}/providers/Microsoft.Authorization/policyDefinitions/regionPolicyDefinition").Properties.policyRule | ConvertTo-Json
 ```
 
 在 **Azure CLI** 中，请提供策略定义的名称：
 
-```
+```azurecli
 azure policy definition show regionPolicyDefinition --json
 ```
 
@@ -454,19 +454,19 @@ Message: The requested tier for resource '<resource>' is currently not available
 
     在 PowerShell 中，将 **DeploymentDebugLogLevel** 参数设置为 All、ResponseContent 或 RequestContent。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -ResourceGroupName examplegroup -TemplateFile c:\\Azure\\Templates\\storage.json -DeploymentDebugLogLevel All
     ```
 
     使用以下 cmdlet 检查请求内容：
 
-    ```
+    ```powershell
     (Get-AzureRmResourceGroupDeploymentOperation -DeploymentName storageonly -ResourceGroupName startgroup).Properties.request | ConvertTo-Json
     ```
 
     或者，使用以下命令检查响应内容：
 
-    ```
+    ```powershell
     (Get-AzureRmResourceGroupDeploymentOperation -DeploymentName storageonly -ResourceGroupName startgroup).Properties.response | ConvertTo-Json
     ```
 
@@ -476,13 +476,13 @@ Message: The requested tier for resource '<resource>' is currently not available
 
     在 Azure CLI 中，将 **--debug-setting** 参数设置为 All、ResponseContent 或 RequestContent。
 
-    ```
+    ```powershell
     azure group deployment create --debug-setting All -f c:\\Azure\\Templates\\storage.json -g examplegroup -n ExampleDeployment
     ```
 
     使用以下命令检查记录的请求和响应内容：
 
-    ```
+    ```azurecli
     azure group deployment operation list --resource-group examplegroup --name ExampleDeployment --json
     ```
 
@@ -492,7 +492,7 @@ Message: The requested tier for resource '<resource>' is currently not available
 
     若要记录嵌套模板的调试信息，请使用 **debugSetting** 元素。
 
-    ```
+    ```json
     {
         "apiVersion": "2016-09-01",
         "name": "nestedTemplate",
@@ -513,7 +513,7 @@ Message: The requested tier for resource '<resource>' is currently not available
 ### 创建故障排除模板
 在某些情况下，排查模板问题的最简单方法是测试模板的部件。可以创建一个简化的模板，专注于调查你认为是错误起源的部件。例如，假设在引用资源时出现了错误。请勿处理整个模板，而是创建可返回可能导致问题的部件的模板。这可以帮助确定是否传入了正确的参数、是否正确使用了模板函数，以及是否获取了所需的资源。
 
-```
+```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",

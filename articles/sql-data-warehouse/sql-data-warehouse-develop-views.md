@@ -28,7 +28,7 @@ SQL 数据仓库中的视图特别有用。可以通过多种不同的方式使�
 
 以下示例将新的日期记录添加到日期维度。请注意，这里先创建了一个新表 DimDate\_New，然后将它重命名以替换表的原始版本。
 
-```
+```sql
 CREATE TABLE dbo.DimDate_New
 WITH (DISTRIBUTION = ROUND_ROBIN
 , CLUSTERED INDEX (DateKey ASC)

@@ -38,7 +38,7 @@ SDK 提供两种方式来设置本地群集：Windows PowerShell 脚本和本地
 
 2. 从 SDK 文件夹运行群集设置脚本：
 
-    ```
+    ```powershell
     & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1"
     ```
 
@@ -56,13 +56,13 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 1. 以管理员身份启动新的 PowerShell 窗口。
 2. 导入 Service Fabric SDK PowerShell 模块。
 
-    ```
+    ```powershell
     Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\ServiceFabricSDK\ServiceFabricSDK.psm1"
     ```
 
 3. 创建一个目录，用于存储要下载和部署的应用程序，例如 C:\\ServiceFabric。
 
-    ```
+    ```powershell
     mkdir c:\ServiceFabric\
     cd c:\ServiceFabric\
     ```
@@ -71,13 +71,13 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 5. 连接到本地群集：
 
-    ```
+    ```powershell
     Connect-ServiceFabricCluster localhost:19000
     ```
 
 6. 使用 SDK 的部署命令来创建新的应用程序，并提供应用程序包的名称和路径。
 
-    ```
+    ```powershell  
     Publish-NewServiceFabricApplication -ApplicationPackagePath c:\ServiceFabric\WordCountV1.sfpkg -ApplicationName "fabric:/WordCount"
     ```
 
@@ -98,7 +98,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. 查询群集上所有已部署的应用程序：
 
-    ```
+    ```powershell  
     Get-ServiceFabricApplication
     ```
 
@@ -108,7 +108,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 2. 通过查询 WordCount 应用程序中包含的服务集转到下一个级别。
 
-    ```
+    ```powershell
     Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
     ```
 
@@ -117,7 +117,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
     该应用程序由两个服务组成：Web 前端服务和用于管理单词的有状态服务。
 3. 最后，看看 WordCountService 的分区列表：
 
-    ```
+    ```powershell
     Get-ServiceFabricPartition 'fabric:/WordCount/WordCountService'
     ```
 
@@ -140,7 +140,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 1. [下载 WordCount v2 包](http://aka.ms/servicefabric-wordcountappv2)到 v1 包下载到的位置。
 2. 返回 PowerShell 窗口并，使用 SDK 的升级命令在群集中注册新版本。然后开始升级 fabric:/WordCount 应用程序。
 
-    ```
+    ```powershell
     Publish-UpgradedServiceFabricApplication -ApplicationPackagePath C:\ServiceFabric\WordCountV2.sfpkg -ApplicationName "fabric:/WordCount" -UpgradeParameters @{"FailureAction"="Rollback"; "UpgradeReplicaSetCheckTimeout"=1; "Monitored"=$true; "Force"=$true}
     ```
 
@@ -155,7 +155,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
     随着每个域不断升级，系统将执行运行状况检查，以确保应用程序行为正常。
 4. 如果重新运行对 fabric:/WordCount 应用程序中的服务集以前的查询，则会发现 WordCountService 的版本已更改，但 WordCountWebService 的版本维持不变：
 
-    ```
+    ```powershell
     Get-ServiceFabricService -ApplicationName 'fabric:/WordCount'
     ```
 
@@ -171,7 +171,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 1. 若要删除单个应用程序及其所有数据，请运行以下命令：
 
-    ```
+    ```powershell  
     Unpublish-ServiceFabricApplication -ApplicationName "fabric:/WordCount"
     ```
 
@@ -181,7 +181,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
 2. 从群集中删除应用程序后，注销 WordCount 应用程序类型的版本 1.0.0 和 2.0.0。删除操作将从群集的映像存储区删除该应用程序包，包括其代码和配置。
 
-    ```
+    ```powershell
     Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 2.0.0
     Remove-ServiceFabricApplicationType -ApplicationTypeName WordCount -ApplicationTypeVersion 1.0.0
     ```
@@ -209,7 +209,7 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 1. 以管理员身份启动新的 PowerShell 窗口。
 2. 从 SDK 文件夹运行群集设置脚本：
 
-    ```
+    ```powershell
     & "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1" -CreateOneNodeCluster
     ```
 

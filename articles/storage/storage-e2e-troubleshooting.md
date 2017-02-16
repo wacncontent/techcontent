@@ -107,14 +107,14 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 
 1. 使用 [Add-AzureAccount](http://msdn.microsoft.com/zh-cn/library/azure/dn722528.aspx) cmdlet 将 Azure 用户帐户添加到 PowerShell 窗口中：
 
-    ```
+    ```powershell
     Add-AzureAccount -Environment AzureChinaCloud
     ```
 
 2. 在“登录 Azure”窗口中，键入与帐户关联的电子邮件地址和密码。Azure 将对凭据信息进行身份验证和保存，然后关闭该窗口。
 3. 通过在 PowerShell 窗口中执行以下命令，将默认存储帐户设置为用于本教程的存储帐户：
 
-    ```
+    ```powershell
     $SubscriptionName = 'Your subscription name'
     $StorageAccountName = 'yourstorageaccount' 
     Set-AzureSubscription -Environment AzureChinaCloud -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName 
@@ -122,13 +122,13 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 
 4. 为 Blob 服务启用存储日志记录：
 
-    ```
+    ```powershell
     Set-AzureStorageServiceLoggingProperty -ServiceType Blob -LoggingOperations Read,Write,Delete -PassThru -RetentionDays 7 -Version 1.0 
     ```
 
 5. 为 Blob 服务启用存储指标，确保将 **-MetricsType** 设置为 `Minute`：
 
-    ```
+    ```powershell
     Set-AzureStorageServiceMetricsProperty -ServiceType Blob -MetricsType Minute -MetricsLevel ServiceAndApi -PassThru -RetentionDays 7 -Version 1.0 
     ```
 
@@ -160,7 +160,7 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 5. 在“高级设置”对话框中，单击“提供程序”选项卡。
 6. 在“主机名筛选器”字段中，指定存储终结点，以空格分隔。例如，可按如下所示指定终结点；将 `storagesample` 更改为存储帐户名称：
 
-    ```
+    ```   
     storagesample.blob.core.chinacloudapi.cn storagesample.queue.core.chinacloudapi.cn storagesample.table.core.chinacloudapi.cn 
     ```
 
@@ -188,7 +188,7 @@ Azure 存储将服务器日志数据写入 Blob，将指标写入表。存储帐
 
 可以使用 AzCopy 命令行工具将这些服务器端日志文件下载到本地计算机上的所选位置。例如，可以使用以下命令将发生于 2015 年 1 月 2 日 Blob 操作的日志文件下载到文件夹 `C:\Temp\Logs\Server`；将 `<storageaccountname>` 替换为存储帐户名称，将 `<storageaccountkey>` 替换为帐户访问密钥：
 
-```
+```azcopy
 AzCopy.exe /Source:http://<storageaccountname>.blob.core.chinacloudapi.cn/$logs /Dest:C:\Temp\Logs\Server /Pattern:"blob/2015/01/02" /SourceKey:<storageaccountkey> /S /V
 ```
 
@@ -286,7 +286,7 @@ Message Analyzer 的存储空间资产包括 Azure 存储视图布局，这是�
 1. 显示“视图筛选器”工具窗口（如果尚未显示）。在工具栏功能区中，选择“工具窗口”，然后选择“视图筛选器”。
 2. 若要将日志数据筛选为仅显示 400 范围错误，请将以下筛选条件添加到“视图筛选器”窗口，然后单击“应用”：
 
-    ```
+    ```   
     (AzureStorageLog.StatusCode >= 400 && AzureStorageLog.StatusCode <=499) || (HTTP.StatusCode >= 400 && HTTP.StatusCode <= 499)
     ```
 
@@ -313,7 +313,7 @@ Message Analyzer 的存储空间资产包括 Azure 存储视图布局，这是�
 4. 将筛选器中显示的时间戳编辑为想要查看的范围。这有助于缩小分析数据的范围。
 5. 筛选器应类似于以下示例。单击“应用”将筛选器应用到分析网格。
 
-    ```
+    ```   
     ((AzureStorageLog.StatusCode == 404 || HTTP.StatusCode == 404)) And
     (#Timestamp >= 2014-10-20T16:36:38 and #Timestamp <= 2014-10-20T16:36:39)
     ```

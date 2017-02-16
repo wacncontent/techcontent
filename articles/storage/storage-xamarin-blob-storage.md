@@ -50,7 +50,7 @@ Xamarin 使开发人员能够通过共享的 C# 代码库来使用其本机用�
 
 接下来，将一些代码添加到共享类 `MyClass.cs` 以创建容器，然后将 Blob 上传到此容器。`MyClass.cs` 应如下所示：
 
-```
+```csharp
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Threading.Tasks;
@@ -91,7 +91,7 @@ namespace XamarinApp
 
 ### XamarinApp.Droid > MainActivity.cs
 
-```
+```csharp
 using Android.App;
 using Android.Widget;
 using Android.OS;
@@ -126,7 +126,7 @@ namespace XamarinApp.Droid
 
 ### XamarinApp.iOS > ViewController.cs
 
-```
+```csharp
 using System;
 using UIKit;
 
@@ -164,7 +164,7 @@ namespace XamarinApp.iOS
 
 ### XamarinApp.WinPhone > MainPage.xaml > MainPage.xaml.cs
 
-```
+```csharp
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 

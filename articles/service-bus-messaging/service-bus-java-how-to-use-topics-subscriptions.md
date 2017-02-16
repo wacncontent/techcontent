@@ -85,7 +85,7 @@ wacn.date: 01/23/2017
 
 将以下导入语句添加到 Java 文件顶部：
 
-```
+```java
     import com.microsoft.windowsazure.services.servicebus.*;
     import com.microsoft.windowsazure.services.servicebus.models.*;
     import com.microsoft.windowsazure.core.*;
@@ -100,7 +100,7 @@ wacn.date: 01/23/2017
 
 **ServiceBusService** 类提供了创建、枚举和删除主题的方法。以下示例演示了如何通过名为 `HowToSample` 的命名空间，使用 **ServiceBusService** 对象创建名为 `TestTopic` 的主题：
 
-```
+```java
 Configuration config =
     ServiceBusConfiguration.configureWithSASAuthentication(
       "HowToSample",
@@ -124,7 +124,7 @@ catch (ServiceException e) {
 
 **TopicInfo** 上有一些方法可设置主题的属性（例如，将默认的生存时间 (TTL) 值设置为应用于发送到主题的消息）。以下示例演示了如何创建最大空间为 5 GB 且名为 `TestTopic` 的主题：
 
-```
+```java
 long maxSizeInMegabytes = 5120;  
 TopicInfo topicInfo = new TopicInfo("TestTopic");  
 topicInfo.setMaxSizeInMegabytes(maxSizeInMegabytes);
@@ -141,7 +141,7 @@ CreateTopicResult result = service.createTopic(topicInfo);
 
 **MatchAll** 筛选器是默认筛选器，在创建新订阅时未指定筛选器的情况下使用。使用 **MatchAll** 筛选器时，发布到主题的所有消息都将置于订阅的虚拟队列中。以下示例创建名为“AllMessages”的订阅，并使用默认的 **MatchAll** 筛选器。
 
-```
+```java
 SubscriptionInfo subInfo = new SubscriptionInfo("AllMessages");
 CreateSubscriptionResult result = 
     service.createSubscription("TestTopic", subInfo);
@@ -155,7 +155,7 @@ CreateSubscriptionResult result =
 
 以下示例创建了一个名为 `HighMessages` 的订阅（带有只选择自定义 **MessageNumber** 属性大于 3 的消息的 [SqlFilter][] 对象）：
 
-```
+```java
     // Create a "HighMessages" filtered subscription  
     SubscriptionInfo subInfo = new SubscriptionInfo("HighMessages");
     CreateSubscriptionResult result = service.createSubscription("TestTopic", subInfo);
@@ -168,7 +168,7 @@ CreateSubscriptionResult result =
 
 类似地，以下示例创建一个名为 `LowMessages` 的订阅，其 [SqlFilter][] 对象只选择 **MessageNumber** 属性小于或等于 3 的消息：
 
-```
+```java
     // Create a "LowMessages" filtered subscription
     SubscriptionInfo subInfo = new SubscriptionInfo("LowMessages");
     CreateSubscriptionResult result = service.createSubscription("TestTopic", subInfo);
@@ -185,7 +185,7 @@ CreateSubscriptionResult result =
 
 将消息发送到服务总线主题，应用程序获得 **ServiceBusContract** 对象。以下代码演示了如何将消息发送到之前在 `HowToSample` 命名空间内创建的 `TestTopic` 主题：
 
-```
+```java
     BrokeredMessage message = new BrokeredMessage("MyMessage");
     service.sendTopicMessage("TestTopic", message);
 ```
@@ -194,7 +194,7 @@ CreateSubscriptionResult result =
 
 以下示例演示了如何将五条测试消息发送到我们在前面的代码段中获得的 `TestTopic` **MessageSender**。请注意每条消息的 **MessageNumber** 属性值如何随循环迭代而变化（这将确定接收消息的订阅）：
 
-```
+```java
     for (int i=0; i<5; i++)  {
     // Create message, passing a string message for the body
     BrokeredMessage message = new BrokeredMessage("Test message " + i);
@@ -217,7 +217,7 @@ CreateSubscriptionResult result =
 
 以下示例演示了如何使用 **PeekLock** 模式（非默认模式）接收和处理消息。以下示例执行一个循环并处理“HighMessages”订阅中的消息，然后在处理完所有消息后退出循环（或者，可将其设置为等待新消息）。
 
-```
+```java
     try
     {
         ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;
@@ -282,7 +282,7 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
 删除主题和订阅的主要方法是使用 **ServiceBusContract** 对象。删除某个主题也会删除向该主题注册的所有订阅。也可以单独删除订阅。
 
-```
+```java
     // Delete subscriptions
     service.deleteSubscription("TestTopic", "AllMessages");
     service.deleteSubscription("TestTopic", "HighMessages");

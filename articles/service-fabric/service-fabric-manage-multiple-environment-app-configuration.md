@@ -34,7 +34,7 @@ ms.author: seanmck
 
 Service Fabric 应用程序由服务实例的集合组成。尽管你可以先创建一个空应用程序，然后动态创建所有服务实例，但是，大多数应用程序都有一套核心服务，这些服务始终应该在实例化应用程序时创建。这些服务称为“默认服务”。它们在应用程序清单中指定。方括号中包含每个环境配置的占位符：
 
-```
+```xml
 <DefaultServices>
     <Service Name="Stateful1">
         <StatefulService
@@ -54,7 +54,7 @@ Service Fabric 应用程序由服务实例的集合组成。尽管你可以先�
 
 必须在应用程序清单的 Parameters 元素中定义每个命名参数：
 
-```
+```xml
 <Parameters>
     <Parameter Name="Stateful1_MinReplicaSetSize" DefaultValue="2" />
     <Parameter Name="Stateful1_PartitionCount" DefaultValue="1" />
@@ -73,7 +73,7 @@ DefaultValue 属性指定当给定的环境缺少更具体的参数时所要使�
 
 假设`Stateful1`服务的 Config\\Settings.xml 文件中存在以下设置：
 
-```
+```xml
 <Section Name="MyConfigSection">
   <Parameter Name="MaxQueueSize" Value="25" />
 </Section>
@@ -81,7 +81,7 @@ DefaultValue 属性指定当给定的环境缺少更具体的参数时所要使�
 
 若要重写特定应用程序/环境对的此值，请在应用程序清单中导入服务清单时创建 `ConfigOverride`。
 
-```
+```xml
 <ConfigOverrides>
  <ConfigOverride Name="Config">
     <Settings>
@@ -102,7 +102,7 @@ DefaultValue 属性指定当给定的环境缺少更具体的参数时所要使�
 
 Service Fabric 应用程序项目可以包含一个或多个应用程序参数文件。每个文件为应用程序清单中定义的参数定义特定值：
 
-```
+```xml
 <!-- ApplicationParameters\Local.xml -->
 
 <Application Name="fabric:/Application1" xmlns="http://schemas.microsoft.com/2011/01/fabric">
@@ -134,7 +134,7 @@ Service Fabric 应用程序项目可以包含一个或多个应用程序参数�
 
 应用程序项目模板中包含的 `Deploy-FabricApplication.ps1` PowerShell 脚本可接受发布配置文件作为参数，而 PublishProfile 包含对应用程序参数文件的引用。
 
-```
+```xml
 ./Deploy-FabricApplication -ApplicationPackagePath <app_package_path> -PublishProfileFile <publishprofile_path>
 ```
 

@@ -30,7 +30,7 @@ ms.author: vturecek
 
 例如，以下无状态服务公开了一个方法，此方法通过远程过程调用获取“Hello World”。
 
-```
+```csharp
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
@@ -67,7 +67,7 @@ class MyService : StatelessService, IMyService
 ## 调用远程服务的方法
 若要使用远程处理堆栈在服务上调用方法，可以通过 `Microsoft.ServiceFabric.Services.Remoting.Client.ServiceProxy` 类对该服务使用本地代理。`ServiceProxy` 方法通过使用该服务实现的同一接口来创建本地代理。使用此代理，你只需在此接口上远程调用方法。
 
-```
+```csharp
 IMyService helloWorldClient = ServiceProxy.Create<IMyService>(new Uri("fabric:/MyApplication/MyHelloWorldService"));
 
 string message = await helloWorldClient.HelloWorldAsync();

@@ -107,7 +107,7 @@ ms.author: billmath
 
 SQL
 
-```
+```SQL
 ---Creating the Database---------
 Create Database GSQLDEMO
 Go

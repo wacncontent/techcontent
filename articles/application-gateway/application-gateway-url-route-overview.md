@@ -30,7 +30,7 @@ ms.author: gwallace
 
 UrlPathMap 元素是用于指定后端服务器池映射的路径模式。这是模板文件中 urlPathMap 元素的代码段。
 
-```
+```json
 "urlPathMaps": [
 {
 "name": "<urlPathMapName>",
@@ -71,7 +71,7 @@ UrlPathMap 元素是用于指定后端服务器池映射的路径模式。这是
 
 PathBasedRouting 类型的 RequestRoutingRule 可用于将侦听器绑定到 urlPathMap。针对此侦听器收到的所有请求将根据 urlPathMap 中指定的策略进行路由。PathBasedRouting 规则的代码段：
 
-```
+```json
 "requestRoutingRules": [
   {
 

@@ -34,7 +34,7 @@ AMQP 1.0 支持在服务总线 SDK 2.1 版或更高版本中提供。为确保�
 
 应用程序使用 App.config 配置文件存储设置是一个很好的做法。对于服务总线应用程序，你可以使用 App.config 来存储服务总线 **ConnectionString** 值的设置。示例 App.config 文件如下所示：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <appSettings>

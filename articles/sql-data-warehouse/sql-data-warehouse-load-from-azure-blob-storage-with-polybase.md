@@ -43,7 +43,7 @@ PolyBase 使用 T-SQL 外部对象来定义外部数据的位置和属性。外�
 
 如果你使用本教程作为加载自己数据的模板，请**不要跳过此步骤**。若要通过凭据访问数据，请使用以下脚本创建数据库范围的凭据，然后在定义数据源的位置时使用该凭据。
 
-```
+```sql
 -- A: Create a master key.
 -- Only necessary if one does not already exist.
 -- Required to encrypt the credential secret in the next step.
@@ -78,7 +78,7 @@ WITH (
 ### 1\.2.创建外部数据源
 使用 [CREATE EXTERNAL DATA SOURCE][CREATE EXTERNAL DATA SOURCE] 命令存储数据的位置以及数据的类型。
 
-```
+```sql
 CREATE EXTERNAL DATA SOURCE AzureStorage_west_public
 WITH 
 (  
@@ -94,7 +94,7 @@ WITH
 
 数据存储在 Azure Blob 存储中的文本文件内，每个字段以分隔符隔开。运行 [CREATE EXTERNAL FILE FORMAT][] 命令，指定文本文件中数据的格式。Contoso 数据未压缩，以坚线分隔。
 
-```
+```sql
 CREATE EXTERNAL FILE FORMAT TextFileFormat 
 WITH 
 (   FORMAT_TYPE = DELIMITEDTEXT
@@ -112,7 +112,7 @@ WITH
 ### 3\.1.创建数据的架构。
 若要创建一个位置用于存储数据库中的 Contoso 数据，请创建架构。
 
-```
+```sql
 CREATE SCHEMA [asb]
 GO
 ```
@@ -122,7 +122,7 @@ GO
 
 **LOCATION** 参数是 Azure 存储 Blob 中根文件夹下的文件夹。每个表位于不同的文件夹中。
 
-```
+```sql
 --DimProduct
 CREATE EXTERNAL TABLE [asb].DimProduct (
     [ProductKey] [int] NOT NULL,
@@ -210,7 +210,7 @@ WITH
 ### 4\.1.创建新架构
 CTAS 可创建包含数据的新表。首先，请创建 contoso 数据的架构。
 
-```
+```sql
 CREATE SCHEMA [cso]
 GO
 ```
@@ -222,7 +222,7 @@ CTAS 将创建新表，并在该表中填充 select 语句的结果。CTAS 将�
 
 在此示例中，我们将以哈希分布表的形式创建维度表和事实表。
 
-```
+```sql
 SELECT GETDATE();
 GO
 
@@ -233,7 +233,7 @@ CREATE TABLE [cso].[FactOnlineSales]       WITH (DISTRIBUTION = HASH([ProductKey
 ### 4\.3 跟踪加载进度
 可以使用动态管理视图 (DMV) 跟踪加载操作的进度。
 
-```
+```sql
 -- To see all requests
 SELECT * FROM sys.dm_pdw_exec_requests;
 
@@ -271,7 +271,7 @@ ORDER BY
 
 若要在加载后优化查询性能和列存储压缩，请重新生成表，以强制列存储索引压缩所有行。
 
-```
+```sql
 SELECT GETDATE();
 GO
 
@@ -288,7 +288,7 @@ ALTER INDEX ALL ON [cso].[FactOnlineSales]          REBUILD;
 
 以下示例是创建统计信息的不错起点。它会针对维度表中的每个列以及事实表中的每个联接列创建单列统计信息。以后，你随时可以将单列或多列统计信息添加到其他事实表列。
 
-```
+```sql
 CREATE STATISTICS [stat_cso_DimProduct_AvailableForSaleDate] ON [cso].[DimProduct]([AvailableForSaleDate]);
 CREATE STATISTICS [stat_cso_DimProduct_BrandName] ON [cso].[DimProduct]([BrandName]);
 CREATE STATISTICS [stat_cso_DimProduct_ClassID] ON [cso].[DimProduct]([ClassID]);
@@ -335,7 +335,7 @@ CREATE STATISTICS [stat_cso_FactOnlineSales_StoreKey] ON [cso].[FactOnlineSales]
 
 现在，你可以使用如下所示的查询，开始查询表：
 
-```
+```sql
 SELECT  SUM(f.[SalesAmount]) AS [sales_by_brand_amount]
 ,       p.[BrandName]
 FROM    [cso].[FactOnlineSales] AS f

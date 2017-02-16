@@ -127,7 +127,7 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 3. 下载角色实例的配置文件，并更新该文件以包含所有自定义性能计数器。例如，若要监视 *C 盘*的*磁盘写入字节数/秒*，请在 **PerformanceCounters\\Subscriptions** 节点下添加以下内容
 
-    ```
+    ```xml
     <PerformanceCounterConfiguration>
     <CounterSpecifier>\LogicalDisk(C:)\Disk Write Bytes/sec</CounterSpecifier>
     <SampleRateInSeconds>180</SampleRateInSeconds>

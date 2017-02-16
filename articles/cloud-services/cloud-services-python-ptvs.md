@@ -70,7 +70,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 以下脚本是针对 Python 3.5 编写的。若要使用 2.x 版 Python，请针对两个启动任务以及运行时任务将 **PYTHON2** 变量文件设置为 **on**：`<Variable name="PYTHON2" value="<mark>on</mark>" />`。
 
-```
+```xml
 <Startup>
 
   <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PrepPython.ps1">
@@ -96,7 +96,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 需将 **PYTHON2** 和 **PYPATH** 变量添加到辅助角色启动任务。仅当 **PYTHON2** 变量设置为 **on** 时，才使用 **PYPATH** 变量。
 
-```
+```xml
 <Runtime>
   <Environment>
     <Variable name="EMULATED">
@@ -113,7 +113,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 #### ServiceDefinition.csdef 示例
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="AzureCloudServicePython" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
   <WorkerRole name="WorkerRole1" vmsize="Small">
@@ -165,7 +165,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 此脚本可安装 Python。如果 **PYTHON2** 环境变量设置为 **on**，则安装 Python 2.7，否则安装 Python 3.5。
 
-```
+```powershell
 $is_emulated = $env:EMULATED -eq "true"
 $is_python2 = $env:PYTHON2 -eq "on"
 $nl = [Environment]::NewLine
@@ -212,7 +212,7 @@ Write-Output "Checking if python is installed...$nl"
 
 此脚本调用 pip 并安装 **requirements.txt** 文件中的所有依赖项。如果 **PYTHON2** 环境变量设置为 **on**，则使用 Python 2.7，否则使用 Python 3.5。
 
-```
+```powershell
 $is_emulated = $env:EMULATED -eq "true"
 $is_python2 = $env:PYTHON2 -eq "on"
 $nl = [Environment]::NewLine
@@ -246,7 +246,7 @@ Write-Output "Checking if requirements.txt exists$nl"
 
 此脚本从 Python 项目调用 **worker.py** 文件。如果 **PYTHON2** 环境变量设置为 **on**，则使用 Python 2.7，否则使用 Python 3.5。
 
-```
+```powershell
 $is_emulated = $env:EMULATED -eq "true"
 $is_python2 = $env:PYTHON2 -eq "on"
 $nl = [Environment]::NewLine
@@ -285,7 +285,7 @@ Write-Output "Running (EMULATED) worker.py$nl"
 
 Visual Studio 模板应在 **./bin** 文件夹中创建了一个 **ps.cmd** 文件。此 shell 脚本调用上述 PowerShell 包装脚本，并根据所调用 PowerShell 包装的名称提供日志记录。如果未创建此文件，请注意，下面是该文件应该包含的内容。
 
-```
+```bat
 @echo off
 
 cd /D %~dp0

@@ -57,7 +57,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 根据在上述[先决条件](#Prerequisites)中部署的现有资源组，更改以下变量的值。
 
-    ```
+    ```azurecli
     existingRGName="IaaSStory"
     location="chinanorth"
     vnetName="WTestVNet"
@@ -67,7 +67,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 2. 根据要用于后端部署的值，更改以下变量的值。
 
-    ```
+    ```azurecli
     backendRGName="IaaSStory-Backend"
     prmStorageAccountName="wtestvnetstorageprm"
     avSetName="ASDB"
@@ -89,7 +89,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 检索要在其中创建 VM 的 `BackEnd` 子网的 ID。你需要执行此操作，因为要关联到此子网的 NIC 位于不同的资源组中。
 
-    ```
+    ```azurecli
     subnetId="$(azure network vnet subnet show --resource-group $existingRGName \
             --vnet-name $vnetName \
             --name $backendSubnetName|grep Id)"
@@ -102,7 +102,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 检索 `NSG-RemoteAccess` NSG 的 ID。你需要执行此操作，因为要关联到此 NSG 的 NIC 位于不同的资源组中。
 
-    ```
+    ```azurecli
     nsgId="$(azure network nsg show --resource-group $existingRGName \
         --name $remoteAccessNSGName|grep Id)"
         nsgId=${nsgId#*/}
@@ -112,13 +112,13 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 为所有后端资源创建新的资源组。请注意使用 `$backendRGName` 变量表示资源组名称，使用 `$location` 表示 Azure 区域。
 
-    ```
+    ```azurecli
     azure group create $backendRGName $location
     ```
 
 2. 为 VM 将使用的 OS 和数据磁盘创建高级存储帐户。
 
-    ```
+    ```azurecli
     azure storage account create $prmStorageAccountName \
         --resource-group $backendRGName \
         --location $location \
@@ -127,7 +127,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 为 VM 创建可用性集。
 
-    ```
+    ```azurecli
     azure availset create --resource-group $backendRGName \
         --location $location \
         --name $avSetName
@@ -137,14 +137,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 启动循环，根据 `numberOfVMs` 变量创建多个 VM。
 
-    ```
+    ```azurecli
     for ((suffixNumber=1;suffixNumber<=numberOfVMs;suffixNumber++));
     do
     ```
 
 2. 对于每个 VM，创建一个 NIC 用于数据库访问。
 
-    ```
+    ```azurecli
     nic1Name=$nicNamePrefix$suffixNumber-DA
     x=$((suffixNumber+3))
     ipAddress1=$ipAddressPrefix$x
@@ -157,7 +157,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 对于每个 VM，创建一个 NIC 用于远程访问。请注意 `--network-security-group` 参数，它用于将 NIC 关联到 NSG。
 
-    ```
+    ```azurecli
     nic2Name=$nicNamePrefix$suffixNumber-RA
     x=$((suffixNumber+53))
     ipAddress2=$ipAddressPrefix$x
@@ -171,7 +171,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 创建 VM。
 
-    ```
+    ```azurecli
     azure vm create --resource-group $backendRGName \
         --name $vmNamePrefix$suffixNumber \
         --location $location \
@@ -190,7 +190,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 5. 对于每个 VM，创建两个数据磁盘，并以 `done` 命令结束循环。
 
-    ```
+    ```azurecli
     azure vm disk attach-new --resource-group $backendRGName \
         --vm-name $vmNamePrefix$suffixNumber \
         --storage-account-name $prmStorageAccountName \

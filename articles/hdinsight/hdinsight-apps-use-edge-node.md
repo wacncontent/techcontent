@@ -26,7 +26,7 @@ ms.author: jgao
 
 可以将空边缘节点添加到现有 HDInsight 群集，或者在创建群集时将此类节点添加到新群集。添加空边缘节点的操作是使用 Azure Resource Manager 模板完成的。以下示例演示如何使用模板执行此操作：
 
-```json
+```
 "resources": [
     {
         "name": "[concat(parameters('clusterName'),'/', variables('applicationName'))]",
@@ -89,6 +89,10 @@ ms.author: jgao
 2. 单击以下图像登录到 Azure，然后在 Azure 门户预览中打开 Azure Resource Manager 模板。
 
     <a href="https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-hdinsight-linux-with-edge-node%2Fazuredeploy.json" target="_blank"><img src="./media/hdinsight-apps-use-edge-node/deploy-to-azure.png" alt="Deploy to Azure"></a>
+
+    >[!NOTE]
+    > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；把允许的地域改成“China North”和“China East”；把 HDInsight Linux 版本改为 Azure 中国所支持的 3.5。
+
 3. 配置以下属性：
 
     * **订阅**：选择用于创建此群集的 Azure 订阅。

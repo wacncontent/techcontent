@@ -34,7 +34,7 @@ ms.author: danlep
 
     * **导入 Azure 发布设置文件**。为此，在头节点上运行以下 Azure PowerShell cmdlet：
 
-        ```
+        ```PowerShell
         Get-AzurePublishSettingsFile
 
         Import-AzurePublishSettingsFile -PublishSettingsFile <publish settings file>
@@ -42,7 +42,7 @@ ms.author: danlep
 
     * **在头节点上配置 Azure 管理证书**。如果你有 .cer 文件，将其导入至 CurrentUser\\My certificate store，然后为 Azure 环境（AzureCloud 或 AzureChinaCloud）运行以下 Azure PowerShell cmdlet：
 
-        ```
+        ```PowerShell
         Set-AzureSubscription -SubscriptionName <Sub Name> -SubscriptionId <Sub ID> -Certificate (Get-Item Cert:\CurrentUser\My<Cert Thrumbprint>) -Environment <AzureCloud | AzureChinaCloud>
         ```
 
@@ -52,7 +52,7 @@ ms.author: danlep
 
 ### 语法
 
-```
+```PowerShell
 Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String> `
     [-Quantity] <Int32> [-InstanceSize] <String> [-DomainUserName] <String> [[-DomainUserPassword] <String>] `
     [[-NodeNameSeries] <String>] [<CommonParameters>]
@@ -84,7 +84,7 @@ Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String> `
 
 下面的示例基于 VM 映像 *hpccnimage1*，在云服务 *hpcservice1* 中添加了 20 个大型计算节点 VM。
 
-```
+```PowerShell
 Add-HPCIaaSNode.ps1 -ServiceName hpcservice1 -ImageName hpccniamge1 `
     -Quantity 20 -InstanceSize Large -DomainUserName <username> `
     -DomainUserPassword <password> `
@@ -96,7 +96,7 @@ Add-HPCIaaSNode.ps1 -ServiceName hpcservice1 -ImageName hpccniamge1 `
 
 ### 语法
 
-```
+```PowerShell
 Remove-HPCIaaSNode.ps1 -Name <String[]> [-DeleteVHD] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 
 Remove-HPCIaaSNode.ps1 -Node <Object> [-DeleteVHD] [-Force] [-Confirm] [<CommonParameters>]
@@ -120,7 +120,7 @@ Remove-HPCIaaSNode.ps1 -Node <Object> [-DeleteVHD] [-Force] [-Confirm] [<CommonP
 
 下面的示例强制名称以 *HPCNode-CN-* 开头的脱机节点，然后删除这些节点及其关联磁盘。
 
-```
+```PowerShell
 Remove-HPCIaaSNode.ps1 -Name HPCNodeCN-* -DeleteVHD -Force
 ```
 
@@ -130,7 +130,7 @@ Remove-HPCIaaSNode.ps1 -Name HPCNodeCN-* -DeleteVHD -Force
 
 ### 语法
 
-```
+```PowerShell
 Start-HPCIaaSNode.ps1 -Name <String[]> [<CommonParameters>]
 
 Start-HPCIaaSNode.ps1 -Node <Object> [<CommonParameters>]
@@ -146,7 +146,7 @@ Start-HPCIaaSNode.ps1 -Node <Object> [<CommonParameters>]
 
 下面的示例启动名称以 *HPCNode-CN-* 开头的节点。
 
-```
+```PowerShell
 Start-HPCIaaSNode.ps1 -Name HPCNodeCN-*
 ```
 
@@ -156,7 +156,7 @@ Start-HPCIaaSNode.ps1 -Name HPCNodeCN-*
 
 ### 语法
 
-```
+```PowerShell
 Stop-HPCIaaSNode.ps1 -Name <String[]> [-Force] [<CommonParameters>]
 
 Stop-HPCIaaSNode.ps1 -Node <Object> [-Force] [<CommonParameters>]
@@ -174,7 +174,7 @@ Stop-HPCIaaSNode.ps1 -Node <Object> [-Force] [<CommonParameters>]
 
 下面的示例强制名称以 *HPCNode-CN-* 开头的脱机节点，然后停止这些节点。
 
-```
+```PowerShell
 Stop-HPCIaaSNode.ps1 -Name HPCNodeCN-* -Force
 ```
 

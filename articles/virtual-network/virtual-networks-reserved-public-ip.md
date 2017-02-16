@@ -58,13 +58,13 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 在使用保留 IP 之前，必须先将其添加到订阅。若要从 *中国北部* 位置中提供的公共 IP 地址池创建保留 IP，请运行以下命令：
 
-```
+```powershell
 New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North"
 ```
 
 但请注意，你不能指定要保留的具体 IP。若要查看你的订阅中哪些 IP 地址为保留 IP 地址，请运行以下 PowerShell 命令，然后注意观察 *ReservedIPName* 和 *Address* 的值：
 
-```
+```powershell
 Get-AzureReservedIP
 ```
 
@@ -87,21 +87,21 @@ OperationStatus      : Succeeded
 
 某个 IP 成为保留 IP 后，它就会始终与你的订阅相关联，直至将它删除。若要删除如上所示的保留 IP，请运行以下 PowerShell 命令：
 
-```
+```powershell
 Remove-AzureReservedIP -ReservedIPName "MyReservedIP"
 ```
 
 ## 保留现有云服务的 IP 地址
 可通过添加 `-ServiceName` 参数保留现有云服务的 IP 地址。若要在中国北部位置中保留云服务 *TestService* 的 IP 地址，请运行以下 PowerShell 命令：
 
-```
+```powershell
 New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North" -ServiceName TestService
 ```
 
 ## 将保留 IP 关联到新的云服务
 下面的脚本将创建新的保留 IP，然后将其关联到新的名为 *TestService* 的云服务。
 
-```
+```powershell
 New-AzureReservedIP -ReservedIPName MyReservedIP -Location "China North"
 
 $image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
@@ -118,7 +118,7 @@ New-AzureVMConfig -Name TestVM -InstanceSize Small -ImageName $image.ImageName `
 ## 从正在运行的部署中删除保留 IP
 若要删除已添加到以上脚本中创建的新服务中的保留 IP，请运行以下 PowerShell 命令：
 
-```
+```powershell
 Remove-AzureReservedIPAssociation -ReservedIPName MyReservedIP -ServiceName TestService
 ```
 
@@ -129,7 +129,7 @@ Remove-AzureReservedIPAssociation -ReservedIPName MyReservedIP -ServiceName Test
 ## 将保留 IP 关联到正在运行的部署
 以下命令将新建名为 *TestService2* 的云服务，以及名为 *TestVM2* 的 VM，然后将名为 *MyReservedIP* 的现有保留 IP 关联到云服务：
 
-```
+```powershell
 $image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
 
 New-AzureVMConfig -Name TestVM2 -InstanceSize Small -ImageName $image.ImageName `

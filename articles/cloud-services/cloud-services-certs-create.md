@@ -65,7 +65,7 @@ Azure 使用的证书可以包含一个私钥或公钥。证书具有指纹，�
 
 ### PowerShell
 
-```
+```powershell
     $cert = New-SelfSignedCertificate -DnsName yourdomain.cloudapp.net -CertStoreLocation "cert:\LocalMachine\My"
     $password = ConvertTo-SecureString -String "your-password" -Force -AsPlainText
     Export-PfxCertificate -Cert $cert -FilePath ".\my-cert-file.pfx" -Password $password
@@ -76,7 +76,7 @@ Azure 使用的证书可以包含一个私钥或公钥。证书具有指纹，�
 
 如果要[在经典管理门户中使用此证书](../azure-api-management-certs.md)，请将其导出到 **.cer** 文件：
 
-```
+```powershell
     Export-Certificate -Type CERT -Cert $cert -FilePath .\my-cert-file.cer
 ```
 

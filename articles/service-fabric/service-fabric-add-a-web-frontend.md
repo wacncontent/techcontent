@@ -83,7 +83,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 5. 在类库中，使用单个方法 `GetCountAsync` 创建接口，并从 IService 扩展接口。
 
-    ```
+    ```c#
     namespace MyStatefulService.Interfaces
     {
         using Microsoft.ServiceFabric.Services.Remoting;
@@ -105,7 +105,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 2. 找到继承自 `StatefulService` 的类（例如 `MyStatefulService`），然后扩展它以实现 `ICounter` 接口。
 
-    ```
+    ```c#
     using MyStatefulService.Interfaces;
 
     ...
@@ -118,7 +118,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 3. 现在实现 `ICounter` 接口中定义的单个方法，即 `GetCountAsync`。
 
-    ```
+    ```c#
     public async Task<long> GetCountAsync()
     {
       var myDictionary =
@@ -141,7 +141,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 在本例中，我们将替换现有的 `CreateServiceReplicaListeners` 方法，并提供 `ServiceRemotingListener` 的实例，该实例通过 `ServiceProxy` 来创建可从客户端调用的 RPC 终结点。
 
-```
+```c#
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 
 ...
@@ -175,7 +175,7 @@ protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListe
 
 4. 在 **Controllers** 文件夹中，打开 `ValuesController` 类。请注意，`Get` 方法目前只返回“value1”和“value2”的硬编码字符串数组，这符合前面在浏览器中看到的内容。使用以下代码替换此实现：
 
-    ```
+    ```c#
     using MyStatefulService.Interfaces;
     using Microsoft.ServiceFabric.Services.Remoting.Client;
 

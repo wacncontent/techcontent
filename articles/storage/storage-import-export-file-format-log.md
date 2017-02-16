@@ -50,7 +50,7 @@ ms.author: renash
 
 详细日志格式如下所示。错误日志具有相同的结构，但可筛选出成功的操作。
 
-```
+```xml
 <DriveLog Version="2014-11-01">  
   <DriveId>drive-id</DriveId>  
   [<Blob Status="blob-status">  
@@ -259,7 +259,7 @@ properties-status ::=
 ## 示例日志  
 下面是一个详细日志示例。
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <DriveLog Version="2014-11-01">  
     <DriveId>WD-WMATV123456</DriveId>  
@@ -296,7 +296,7 @@ properties-status ::=
 
 相应的错误日志如下所示。
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <DriveLog Version="2014-11-01">  
     <DriveId>WD-WMATV6965824</DriveId>  
@@ -336,7 +336,7 @@ properties-status ::=
 
 以下导出作业的错误日志指示已将 Blob 内容成功写入驱动器，但在导出 Blob 的属性时出错。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>  
 <DriveLog Version="2014-11-01">  
   <DriveId>9WM35C3U</DriveId>  

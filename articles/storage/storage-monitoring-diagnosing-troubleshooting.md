@@ -268,7 +268,7 @@ Azure SDK 提供了一个存储模拟器，你可以在开发工作站上运行�
 
 下面的代码示例演示如何通过附加 **OperationContext** 对象（向存储服务发出的请求）设置自定义 **ClientRequestId** 值。它还演示了如何从响应消息中检索 **ServerRequestId** 值。
 
-```
+```csharp
 //Parse the connection string for the storage account.
 const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
@@ -378,7 +378,7 @@ catch (StorageException storageException)
 
 对于表和队列服务，Nagle 算法也可能会导致高 **AverageE2ELatency**（与 **AverageServerLatency** 相比）：有关详细信息，请参阅 Azure 存储空间团队博客上的文章 <a href="http://blogs.msdn.com/b/windowsazurestorage/archive/2010/06/25/nagle-s-algorithm-is-not-friendly-towards-small-requests.aspx" target="_blank">Nagle 算法对小请求不友好</a>。你可以通过使用 **System.Net** 命名空间中的 **ServicePointManager** 类在代码中禁用 Nagle 算法。应在应用程序中调用表或队列服务之前执行此操作，因为这样做不会影响已打开的连接。下面的示例来自辅助角色中的 **Application_Start** 方法。
 
-```
+```csharp
 var storageAccount = CloudStorageAccount.Parse(connStr);
 ServicePoint tableServicePoint = ServicePointManager.FindServicePoint(storageAccount.TableEndpoint);
 tableServicePoint.UseNagleAlgorithm = false;
@@ -642,7 +642,7 @@ SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
 
 下面的代码示例演示如何配置 Blob 服务，以允许在 Contoso 域中运行的 JavaScript 访问 Blob 存储服务中的 Blob：
 
-```
+```csharp
 CloudBlobClient client = new CloudBlobClient(blobEndpoint, new StorageCredentials(accountName, accountKey));
 // Set the service properties.
 ServiceProperties sp = client.GetServiceProperties();

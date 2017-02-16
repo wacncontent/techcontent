@@ -86,7 +86,7 @@ CRON 表达式由 6 个字段组成：`{second} {minute} {hour} {day} {month} {d
 
 例如，若要每 15 分钟触发一次 Web 作业，`settings.job` 需要：
 
-```
+```json
 {
     "schedule": "0 */15 * * * *"
 }

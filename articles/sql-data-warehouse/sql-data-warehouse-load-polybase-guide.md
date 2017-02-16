@@ -41,7 +41,7 @@ wacn.date: 01/04/2017
 ## 查询 Azure Blob 存储数据
 针对外部表的查询只使用表名称，如关系表一样。
 
-```
+```sql
 -- Query Azure storage resident data via external table.
 SELECT * FROM [ext].[CarSensor_Data]
 ;
@@ -59,7 +59,7 @@ SELECT * FROM [ext].[CarSensor_Data]
 
 CREATE TABLE AS SELECT 是高性能 TRANSACT-SQL 语句，可将数据并行加载到 SQL 数据仓库的所有计算节点。它最初是针对分析平台系统中的大规模并行处理 (MPP) 引擎开发的，现已纳入 SQL 数据仓库。
 
-```
+```sql
 -- Load data from Azure blob storage to SQL Data Warehouse
 
 CREATE TABLE [dbo].[Customer_Speed]
@@ -80,7 +80,7 @@ FROM   [ext].[CarSensor_Data]
 
 Azure SQL 数据仓库尚不支持自动创建或自动更新统计信息。为了获得查询的最佳性能，在首次加载数据或者在数据发生重大更改之后，创建所有表的所有列统计信息非常重要。有关统计信息的详细说明，请参阅开发主题组中的[统计信息][]主题。以下快速示例说明如何基于此示例中加载的表创建统计信息。
 
-```
+```sql
 create statistics [SensorKey] on [Customer_Speed] ([SensorKey]);
 create statistics [CustomerKey] on [Customer_Speed] ([CustomerKey]);
 create statistics [GeographyKey] on [Customer_Speed] ([GeographyKey]);
@@ -93,7 +93,7 @@ create statistics [YearMeasured] on [Customer_Speed] ([YearMeasured]);
 
 以下示例使用 dbo.Weblogs 表中的列定义和数据从 dbo 创建外部表 Weblogs2014。外部表定义存储在 SQL 数据仓库中，SELECT 语句的结果将导出到数据源所指定的 Blob 容器下的“/archive/log2014/”目录中。将以指定的文本文件格式导出数据。
 
-```
+```sql
 CREATE EXTERNAL TABLE Weblogs2014 WITH
 (
     LOCATION='/archive/log2014/',
@@ -122,7 +122,7 @@ WHERE
 ### 适用于小文件的简单示例
 以下是用于创建文件的一行简单 Powershell 脚本。
 
-```
+```PowerShell
 Get-Content <input_file_name> -Encoding Unicode | Set-Content <output_file_name> -Encoding utf8
 ```
 
@@ -131,7 +131,7 @@ Get-Content <input_file_name> -Encoding Unicode | Set-Content <output_file_name>
 ### 适用于较大文件的 IO 流式处理示例
 以下代码示例更为复杂，但在流式处理从源到目标的数据行时要有效得多。请对较大的文件应用此方法。
 
-```
+```PowerShell
 #Static variables
 $ascii = [System.Text.Encoding]::ASCII
 $utf16le = [System.Text.Encoding]::Unicode

@@ -132,7 +132,7 @@ git@github.com:kalemontes/OIDCAndroidLib.git
 
     xml
 
-    ```
+    ```xml
     <bool name="oidc_oauth2only">true</bool>
     ```
 
@@ -140,7 +140,7 @@ git@github.com:kalemontes/OIDCAndroidLib.git
 
     xml
 
-    ```
+    ```xml
     <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
     <string name="oidc_clientSecret"></string>
     ```
@@ -149,7 +149,7 @@ git@github.com:kalemontes/OIDCAndroidLib.git
 
     xml
 
-    ```
+    ```xml
     <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
     ```
 
@@ -157,7 +157,7 @@ git@github.com:kalemontes/OIDCAndroidLib.git
 
     xml
 
-    ```
+    ```xml
     <string-array name="oidc_scopes">
         <item>openid</item>
         <item>https://graph.microsoft.com/User.Read</item>
@@ -176,7 +176,7 @@ git@github.com:kalemontes/OIDCAndroidLib.git
 
 xml
 
-```
+```xml
 <!-- Stores OpenID Connect provider endpoints. -->
 <resources>
     <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
@@ -197,7 +197,7 @@ xml
 
 Java
 
-```
+```Java
    //TODO: set your protected resource url
     private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
 ```

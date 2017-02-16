@@ -80,7 +80,7 @@ wacn.date: 01/04/2017
 
 使用常用的文本编辑器将以下内容添加到你要在其中使用存储的 Ruby 文件的顶部：
 
-```
+```ruby
     require "azure"
 ```
 
@@ -88,7 +88,7 @@ wacn.date: 01/04/2017
 
 Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_SERVICEBUS\_ACCESS\_KEY** 以获取连接到命名空间所需的信息。如果未设置这些环境变量，则在使用 **Azure::ServiceBusService** 之前必须通过以下代码指定命名空间信息：
 
-```
+```ruby
     Azure.config.sb_namespace = "<your azure service bus namespace>"
     Azure.config.sb_access_key = "<your azure service bus access key>"
 ```
@@ -99,7 +99,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 可以通过 **Azure::ServiceBusService** 对象处理主题。以下代码将创建 **Azure::ServiceBusService** 对象。若要创建主题，请使用 **create\_topic()** 方法。以下示例将创建一个主题或输出错误（如果有）。
 
-```
+```ruby
     azure_service_bus_service = Azure::ServiceBusService.new
     begin
       topic = azure_service_bus_service.create_queue("test-topic")
@@ -110,7 +110,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 还可以通过其他选项传递 **Azure::ServiceBus::Topic** 对象，这些选项允许用户重写默认主题设置，如消息保存时间或最大队列大小。下面的示例演示如何将最大队列大小设置为 5 GB，将保存时间设置为 1 分钟：
 
-```
+```ruby
     topic = Azure::ServiceBus::Topic.new("test-topic")
     topic.max_size_in_megabytes = 5120
     topic.default_message_time_to_live = "PT1M"
@@ -128,7 +128,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 **MatchAll** 筛选器是默认筛选器，在创建新订阅时未指定筛选器的情况下使用。使用 **MatchAll** 筛选器时，发布到主题的所有消息都将置于订阅的虚拟队列中。以下示例创建了名为“all-messages”的订阅并使用了默认的 **MatchAll** 筛选器。
 
-```
+```ruby
     subscription = azure_service_bus_service.create_subscription("test-topic", "all-messages")
 ```
 
@@ -144,7 +144,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 以下示例将创建一个名为“high-messages”的订阅，该订阅包含一个 **Azure::ServiceBus::SqlFilter**，它仅选择自定义 **message\_number** 属性大于 3 的消息：
 
-```
+```ruby
     subscription = azure_service_bus_service.create_subscription("test-topic", "high-messages")
     azure_service_bus_service.delete_rule("test-topic", "high-messages", "$Default")
 
@@ -158,7 +158,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 类似地，以下示例将创建一个名为“low-messages”的订阅，其中包含的 **Azure::ServiceBus::SqlFilter** 仅选择 **message\_number** 属性小于或等于 3 的消息：
 
-```
+```ruby
     subscription = azure_service_bus_service.create_subscription("test-topic", "low-messages")
     azure_service_bus_service.delete_rule("test-topic", "low-messages", "$Default")
 
@@ -178,7 +178,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 下面的示例演示如何向“test-topic”发送五条测试消息。请注意，每条消息的 **message\_number** 自定义属性值因循环迭代而异（这将确定哪些订阅接收它）：
 
-```
+```ruby
     5.times do |i|
       message = Azure::ServiceBus::BrokeredMessage.new("test message " + i,
         { :message_number => i })
@@ -198,7 +198,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 以下示例演示如何使用 **receive\_subscription\_message()** 接收和处理消息。该示例先通过将 **:peek\_lock** 设置为 **false** 从“low-messages”订阅接收并删除一条消息，然后再从“high-messages”接收另一条消息，最后使用 **delete\_subscription\_message()** 删除该消息：
 
-```
+```ruby
     message = azure_service_bus_service.receive_subscription_message(
       "test-topic", "low-messages", { :peek_lock => false })
     message = azure_service_bus_service.receive_subscription_message(
@@ -218,13 +218,13 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
 主题和订阅具有持久性，必须通过 [Azure 经典管理门户](https://manage.windowsazure.cn)或以编程方式显式删除。下面的示例演示如何删除名为“test-topic”的主题：
 
-```
+```ruby
     azure_service_bus_service.delete_topic("test-topic")
 ```
 
 删除某个主题也会删除向该主题注册的所有订阅。也可以单独删除订阅。下面的代码演示如何从“test-topic”主题中删除名为“high-messages”的订阅：
 
-```
+```ruby
     azure_service_bus_service.delete_subscription("test-topic", "high-messages")
 ```
 

@@ -164,7 +164,7 @@ https://myaccount.blob.core.chinacloudapi.cn/?restype=service&comp=properties&sv
 
 例如，此处使用 SAS URI 创建对块 blob 的引用。SAS 提供请求所需的唯一凭据。之后将块 blob 引用用于写入操作：
 
-```
+```csharp
 string sasUri = "https://storagesample.blob.core.chinacloudapi.cn/sample-container/" +
     "sampleBlob.txt?sv=2015-07-08&sr=b&sig=39Up9JzHkxhUIhFEjEH9594DJxe7w6cIRCg0V6lCGSo%3D" +
     "&se=2016-10-18T21%3A51%3A37Z&sp=rcw";
@@ -232,7 +232,7 @@ catch (StorageException e)
 ### 示例：创建并使用帐户 SAS
 以下代码示例将创建一个帐户 SAS，该 SAS 对 Blob 和文件服务是有效的，并授予客户端读取、写入和列表权限，使其能够访问服务级别 API。帐户 SAS 将协议限制为 HTTPS，因此请求必须使用 HTTPS 发出。
 
-```
+```csharp
 static string GetAccountSASToken()
 {
     // To create the account SAS, you need to use your shared key credentials. Modify for your account.
@@ -256,7 +256,7 @@ static string GetAccountSASToken()
 
 若要使用帐户 SAS 访问 Blob 服务的服务级别 API，请使用 SAS 和存储帐户的 Blob 存储终结点构造 Blob 客户端对象。
 
-```
+```csharp
 static void UseAccountSAS(string sasToken)
 {
     // Create new storage credentials using the SAS token.
@@ -299,7 +299,7 @@ static void UseAccountSAS(string sasToken)
 ### 示例：创建存储访问策略
 下面的代码在容器上创建存储访问策略。可以使用访问策略指定对容器或其 Blob 上的服务 SAS 的约束。
 
-```
+```csharp
 private static async Task CreateSharedAccessPolicyAsync(CloudBlobContainer container, string policyName)
 {
     // Create a new shared access policy and define its constraints.
@@ -325,7 +325,7 @@ private static async Task CreateSharedAccessPolicyAsync(CloudBlobContainer conta
 ### 示例：在容器上创建服务 SAS
 下面的代码在容器上创建 SAS。如果提供现有存储访问策略的名称，则该策略与 SAS 关联。如果未提供存储访问策略，则代码会在容器上创建一个临时 SAS。
 
-```
+```csharp
 private static string GetContainerSasUri(CloudBlobContainer container, string storedPolicyName = null)
 {
     string sasContainerToken;
@@ -368,7 +368,7 @@ private static string GetContainerSasUri(CloudBlobContainer container, string st
 ### 示例：在 Blob 上创建服务 SAS
 下面的代码在 Blob 上创建 SAS。如果提供现有存储访问策略的名称，则该策略与 SAS 关联。如果未提供存储访问策略，则代码会在 Blob 上创建一个临时 SAS。
 
-```
+```csharp
 private static string GetBlobSasUri(CloudBlobContainer container, string blobName, string policyName = null)
 {
     string sasBlobToken;

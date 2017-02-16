@@ -80,7 +80,7 @@ ms.author: tomfitz
 
 从用于将值传递到模板的 **参数文件（而不是模板）** 内部引用密钥。你可以通过传递密钥保管库的资源标识符和机密的名称来引用机密。在以下示例中，密钥保管库机密必须已存在，而且用户提供其资源 ID 的静态值。
 
-```
+```json
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
@@ -102,7 +102,7 @@ ms.author: tomfitz
 
 在模板中，接受密钥的参数应是 **securestring**。以下示例显示了某个模板的相关部分，该模板将部署需要管理员密码的 SQL Server。
 
-```
+```json
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
@@ -142,7 +142,7 @@ ms.author: tomfitz
 
 若要动态生成密钥保管库机密的资源 ID，必须将需要机密的资源移至嵌套式模板中。需要在主模板中添加嵌套式模板，然后传入包含动态生成的资源 ID 的参数。
 
-```
+```json
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",

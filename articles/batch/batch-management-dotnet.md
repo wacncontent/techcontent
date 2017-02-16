@@ -42,7 +42,7 @@ ms.author: marsma
 
 csharp
 
-```
+```csharp
 // Create a new Batch account
 await batchManagementClient.Account.CreateAsync("MyResourceGroup",
     "mynewaccount",
@@ -65,7 +65,7 @@ await batchManagementClient.Account.DeleteAsync("MyResourceGroup", account.Name)
 
 csharp
 
-```
+```csharp
 // Get and print the primary and secondary keys
 BatchAccountListKeyResult accountKeys =
     await batchManagementClient.Account.ListKeysAsync(
@@ -97,7 +97,7 @@ Azure 订阅和类似于 Batch 的各个 Azure 服务均有默认配额，用于
 
 csharp
 
-```
+```csharp
 // Get a collection of all Batch accounts within the subscription
 BatchAccountListResponse listResponse =
         await batchManagementClient.Account.ListAsync(new AccountListParameters());
@@ -126,7 +126,7 @@ Console.WriteLine("You can create {0} accounts in the {1} region.", quotaRespons
 
 csharp
 
-```
+```csharp
 // First obtain the Batch account
 BatchAccountGetResponse getResponse =
     await batchManagementClient.Account.GetAsync("MyResourceGroup", "mybatchaccount");

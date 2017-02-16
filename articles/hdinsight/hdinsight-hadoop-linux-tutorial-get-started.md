@@ -33,7 +33,7 @@ ms.author: jgao
 ## 先决条件
 在开始阅读本教程前，必须具备以下条件：
 
-* **Azure 订阅**：若要创建免费试用一个月的帐户，请浏览到 [https://www.azure.cn/pricing/1rmb-trial/](https://www.azure.cn/pricing/1rmb-trial/)。
+* **Azure 订阅**：若要创建试用一个月的帐户，请浏览到 [https://www.azure.cn/pricing/1rmb-trial/](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ### 访问控制要求
 [!INCLUDE [access-control](../../includes/hdinsight-access-control-requirements.md)]
@@ -62,7 +62,7 @@ ms.author: jgao
     某些属性已在模板中硬编码。可以在模板中配置这些值。
 
     * **位置**：群集和依赖的存储帐户的位置都使用与资源组相同的位置。
-    * **群集版本**：3.4
+    * **群集版本**：3.5
     * **OS 类型**：Linux
     * **工作节点数**：2
 

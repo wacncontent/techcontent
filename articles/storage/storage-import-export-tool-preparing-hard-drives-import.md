@@ -227,7 +227,7 @@ WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /ResumeSession
 
 ### 示例驱动器清单文件
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <DriveManifest Version="2011-MM-DD">
    <Drive>
@@ -267,7 +267,7 @@ WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /ResumeSession
 
 ### 每个驱动器的示例日记文件：以 .xml 结尾
 
-```
+```xml
 [BeginUpdateRecord][2016/11/01 21:22:25.379][Type:ActivityRecord]
 ActivityId: DriveInfo
 DriveState: [BeginValue]

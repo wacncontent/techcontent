@@ -35,7 +35,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 1. 为要使用的存储帐户、位置、资源组和凭据设置变量。需要为 VM 输入用户名和密码。存储帐户和资源组必须已存在。
 
-    ```
+    ```powershell
     $stName  = "vnetstorage"
     $locName = "China North"
     $rgName  = "TestRG"
@@ -44,21 +44,21 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 2. 检索要在其中创建 VM 的虚拟网络和子网。
 
-    ```
+    ```powershell
     $vnet   = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
     $subnet = $vnet.Subnets[0].Id
     ```
 
 3. 如有必要，创建用于从 Internet 访问 VM 的公共 IP 地址。
 
-    ```
+    ```powershell
     $pip = New-AzureRmPublicIpAddress -Name TestPIP -ResourceGroupName $rgName `
     -Location $locName -AllocationMethod Dynamic
     ```
 
 4. 使用要分配给 VM 的静态专用 IP 地址创建 NIC。确保 IP 处于要将 VM 添加到的子网范围中。这是本文的主要步骤，其中将专用 IP 设为静态。
 
-    ```
+    ```powershell
     $nic = New-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName $rgName `
     -Location $locName -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id `
     -PrivateIpAddress 192.168.1.101
@@ -66,7 +66,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 5. 使用前面创建的 NIC 创建 VM。
 
-    ```
+    ```powershell
     $vm = New-AzureRmVMConfig -VMName DNS01 -VMSize "Standard_A1"
     $vm = Set-AzureRmVMOperatingSystem -VM $vm -Windows -ComputerName DNS01 `
     -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
@@ -95,7 +95,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 ## 检索 VM 的静态专用 IP 地址信息
 若要查看使用上述脚本创建的 VM 的静态专用 IP 地址信息，请运行以下 PowerShell 命令并观察 *PrivateIpAddress* 和 *PrivateIpAllocationMethod* 的值：
 
-```
+```powershell
 Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
 ```
 
@@ -144,7 +144,7 @@ Primary              : True
 ## 从 VM 中删除静态专用 IP 地址
 若要删除使用上述脚本添加到 VM 的静态专用 IP 地址，请运行以下 PowerShell 命令：
 
-```
+```powershell
 $nic=Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
 $nic.IpConfigurations[0].PrivateIpAllocationMethod = "Dynamic"
 Set-AzureRmNetworkInterface -NetworkInterface $nic
@@ -195,7 +195,7 @@ Primary              : True
 ## 将静态专用 IP 地址添加到现有 VM
 若要向使用上述脚本创建的 VM 添加静态专用 IP 地址，请运行以下命令：
 
-```
+```powershell
 $nic=Get-AzureRmNetworkInterface -Name TestNIC -ResourceGroupName TestRG
 $nic.IpConfigurations[0].PrivateIpAllocationMethod = "Static"
 $nic.IpConfigurations[0].PrivateIpAddress = "192.168.1.101"

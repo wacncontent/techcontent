@@ -39,13 +39,13 @@ ms.author: xshi
 
 1. 通过运行以下命令克隆 GitHub 中的示例存储库：
 
-    ```
+    ```bash
     git clone https://github.com/Azure-Samples/iot-hub-c-feather-m0-getting-started.git
     ```
 
 2. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
        cd iot-hub-c-feather-m0-getting-started
        cd Lesson1
        code .
@@ -58,7 +58,7 @@ ms.author: xshi
 ### 安装应用程序依赖项
 运行以下命令，安装示例应用程序所需的库和其他模块：
 
-```
+```bash
 npm install
 ```
 
@@ -67,7 +67,7 @@ npm install
 
 1. 使用设备发现 CLI 获取设备的串行端口：
 
-    ```
+    ```bash
     devdisco list --usb
     ```
 
@@ -77,7 +77,7 @@ npm install
 
 2. 打开课程文件夹中的 `config.json` 文件，并添加找到的 COM 端口号的值：
 
-    ```
+    ```json
        {
            "device_port" : "COM1"
        }
@@ -93,7 +93,7 @@ npm install
 
 通过运行以下命令安装 Arduino 开发板的 Azure IoT 中心 SDK：
 
-```
+```bash
 gulp install-tools
 ```
 
@@ -105,7 +105,7 @@ gulp install-tools
 ### 部署并运行示例应用
 运行以下命令，部署并运行示例应用程序：
 
-```
+```bash
     gulp run
 
     # You can monitor the serial port by running listen task:

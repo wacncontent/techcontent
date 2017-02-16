@@ -53,13 +53,13 @@ SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook 或 Linux �
 ## 快速命令
 *只需要 TLDR 版本的资深 Linux 管理员请从此处开始。其他需要详细说明和演练的用户请跳过本部分。*
 
-```
+```bash
 sudo vim /etc/ssh/sshd_config
 ```
 
 如下所示编辑配置文件：
 
-```
+```sh
 # Change PasswordAuthentication to this:
 PasswordAuthentication no
 
@@ -75,13 +75,13 @@ ChallengeResponseAuthentication no
 
 重新启动 SSHD 服务。在基于 Debian 的分发版上：
 
-```
+```bash
 sudo service ssh restart
 ```
 
 在基于 Red Hat 的分发版上：
 
-```
+```bash
 sudo service sshd restart
 ```
 
@@ -91,7 +91,7 @@ sudo service sshd restart
 
 我们将在 T2 上编辑 SSHD 配置文件。
 
-```
+```bash
 sudo vim /etc/ssh/sshd_config
 ```
 
@@ -99,14 +99,14 @@ sudo vim /etc/ssh/sshd_config
 
 #### 禁用密码登录
 
-```
+```sh
 # Change PasswordAuthentication to this:
 PasswordAuthentication no
 ```
 
 #### 启用公钥身份验证
 
-```
+```sh
 # Change PubkeyAuthentication to this:
 PubkeyAuthentication yes
 ```
@@ -117,7 +117,7 @@ PubkeyAuthentication yes
 
 #### 禁用质询-响应身份验证
 
-```
+```sh
 # Change ChallengeResponseAuthentication to this:
 ChallengeResponseAuthentication no
 ```
@@ -129,13 +129,13 @@ ChallengeResponseAuthentication no
 
 ##### 在 Debian 系列上
 
-```
+```bash
 sudo service ssh restart
 ```
 
 ##### 在 RedHat 系列上
 
-```
+```bash
 sudo service sshd restart
 ```
 

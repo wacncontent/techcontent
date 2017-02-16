@@ -34,25 +34,25 @@ ms.author: iainfou
 ## <a name="manually-install-and-configure-mongodb-on-a-vm"></a> 在 VM 上手动安装和配置 MongoDB
 MongoDB 为 Red Hat/CentOS、SUSE、Ubuntu 和 Debian 等 Linux 分发版[提供了安装说明](https://docs.mongodb.com/manual/administration/install-on-linux/)。以下示例使用 `.ssh/azure_id_rsa.pub` 中存储的 SSH 密钥创建 `CoreOS` VM。出现提供存储帐户名称、DNS 名称和管理员凭据的提示时，请输入所需的信息：
 
-```
+```azurecli
 azure vm quick-create --ssh-publickey-file .ssh/azure_id_rsa.pub --image-urn CentOS
 ```
 
 使用上述 VM 创建步骤结束时显示的公共 IP 地址登录到 VM：
 
-```
+```bash
 ssh ops@40.78.23.145
 ```
 
 若要为 MongoDB 添加安装源，请按如下所示创建一个 `yum` 存储库文件：
 
-```
+```bash
 sudo touch /etc/yum.repos.d/mongodb-org-3.2.repo
 ```
 
 打开该 MongoDB 存储库文件进行编辑。添加以下行：
 
-```
+```sh
 [mongodb-org-3.2]
 name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/
@@ -63,32 +63,32 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc
 
 按如下所示使用 `yum` 安装 MongoDB：
 
-```
+```sh
 sudo yum install -y mongodb-org
 ```
 
 默认情况下，CentOS 映像中强制实施 SELinux，会阻止你访问 MongoDB。安装策略管理工具并配置 SELinux 可让 MongoDB 在其默认 TCP 端口 27017 上运行，如下所示。
 
-```
+```bash
 sudo yum install -y policycoreutils-python
 sudo semanage port -a -t mongod_port_t -p tcp 27017
 ```
 
 按如下所示启动 MongoDB 服务：
 
-```
+```bash
 sudo service mongod start
 ```
 
 通过使用本地 `mongo` 客户端进行连接来验证 MongoDB 安装：
 
-```
+```sh
 mongo
 ```
 
 现在，通过添加一些数据并执行搜索来测试 MongoDB 实例：
 
-```
+```sh
 > db
 test
 > db.foo.insert( { a : 1 } )  
@@ -99,7 +99,7 @@ test
 
 如果需要，可将 MongoDB 配置为在系统重新引导期间自动启动：
 
-```
+```bash
 sudo chkconfig mongod on
 ```
 
@@ -113,7 +113,7 @@ sudo chkconfig mongod on
 >[!NOTE]
 > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```
+```azurecli
 azure group create --name myResourceGroup --location ChinaNorth \
     --template-file /path/to/azuredeploy.json
 ```
@@ -123,25 +123,25 @@ azure group create --name myResourceGroup --location ChinaNorth \
 
 完成部署后，通过 SSH 连接到 VM。按以下示例中所示，使用 `azure vm show` 命令获取 VM 的 IP 地址：
 
-```
+```azurecli
 azure vm show --resource-group myResourceGroup --name myVM
 ```
 
 在靠近输出的末尾处显示了 `Public IP address`。使用 VM 的 IP 地址通过 SSH 连接到 VM：
 
-```
+```bash
 ssh ops@138.91.149.74
 ```
 
 如下所示，通过使用本地 `mongo` 客户端进行连接来验证 MongoDB 安装：
 
-```
+```sh
 mongo
 ```
 
 现在，按如下所示，通过添加一些数据并执行搜索来测试实例：
 
-```
+```sh
 > db
 test
 > db.foo.insert( { a : 1 } )  
@@ -163,7 +163,7 @@ test
 >[!NOTE]
 > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```
+```azurecli
 azure group create --name myResourceGroup --location ChinaNorth \
     --template-file /path/to/azuredeploy.json
 ```

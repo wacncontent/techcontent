@@ -22,7 +22,7 @@ ms.author: jrj;barbkess;sonyama
 
 一个简单的示例：
 
-```
+```sql
 DECLARE @sql_fragment1 VARCHAR(8000)=' SELECT name '
 ,       @sql_fragment2 VARCHAR(8000)=' FROM sys.system_views '
 ,       @sql_fragment3 VARCHAR(8000)=' WHERE name like ''%table%''';

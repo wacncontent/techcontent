@@ -47,7 +47,7 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
             Uri applicationName = new Uri("fabric:/samples/PersistentToDoListApp");
             Uri serviceName = new Uri("fabric:/samples/PersistentToDoListApp/PersistentToDoListService");
 
-    ```
+    ```csharp
         Console.WriteLine("Starting Workload Test...");
         try
         {

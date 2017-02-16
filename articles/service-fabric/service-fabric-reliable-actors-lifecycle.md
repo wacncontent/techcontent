@@ -57,7 +57,7 @@ ms.author: amanbha
 
 通常不需要更改这些默认值。但是，如果有必要，可在注册[执行组件服务](./service-fabric-reliable-actors-platform.md)时通过 `ActorServiceSettings` 更改这些时间间隔。
 
-```
+```csharp
 public class Program
 {
     public static void Main(string[] args)
@@ -101,7 +101,7 @@ public class Program
 
 [执行组件服务](./service-fabric-reliable-actors-platform.md)提供了一个函数，用于从远程调用方删除执行组件：
 
-```
+```csharp
 ActorId actorToDelete = new ActorId(id);
 
 IActorService myActorServiceProxy = ActorServiceProxy.Create(

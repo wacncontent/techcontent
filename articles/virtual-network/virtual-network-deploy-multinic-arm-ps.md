@@ -62,7 +62,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 根据在上述[先决条件](#Prerequisites)中部署的现有资源组，更改以下变量的值。
 
-    ```
+    ```powershell
     $existingRGName        = "IaaSStory"
     $location              = "China North"
     $vnetName              = "WTestVNet"
@@ -73,7 +73,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 2. 根据要用于后端部署的值，更改以下变量的值。
 
-    ```
+    ```powershell
     $backendRGName         = "IaaSStory-Backend"
     $prmStorageAccountName = "wtestvnetstorageprm"
     $avSetName             = "ASDB"
@@ -93,7 +93,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 检索部署所需的现有资源。
 
-    ```
+    ```powershell
     $vnet                  = Get-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $existingRGName
     $backendSubnet         = $vnet.Subnets|?{$_.Name -eq $backendSubnetName}
     $remoteAccessNSG       = Get-AzureRmNetworkSecurityGroup -Name $remoteAccessNSGName -ResourceGroupName $existingRGName
@@ -105,26 +105,26 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 创建新的资源组。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name $backendRGName -Location $location
     ```
 
 2. 在上面创建的资源组中创建新的高级存储帐户。
 
-    ```
+    ```powershell
     $prmStorageAccount = New-AzureRmStorageAccount -Name $prmStorageAccountName `
     -ResourceGroupName $backendRGName -Type Premium_LRS -Location $location
     ```
 
 3. 创建新的可用性集
 
-    ```
+    ```powershell
     $avSet = New-AzureRmAvailabilitySet -Name $avSetName -ResourceGroupName $backendRGName -Location $location
     ```
 
 4. 获取要用于每个 VM 的本地管理员帐户凭据。
 
-    ```
+    ```powershell
     $cred = Get-Credential -Message "Type the name and password for the local administrator account."
     ```
 
@@ -133,13 +133,13 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 启动 `for` 循环，基于 `$numberOfVMs` 变量的值重复执行命令，从而以所需次数创建一个 VM 和两个 NIC。
 
-    ```
+    ```powershell
     for ($suffixNumber = 1; $suffixNumber -le $numberOfVMs; $suffixNumber++){
     ```
 
 2. 创建用于数据库访问的 NIC。
 
-    ```
+    ```powershell
     $nic1Name = $nicNamePrefix + $suffixNumber + "-DA"
     $ipAddress1 = $ipAddressPrefix + ($suffixNumber + 3)
     $nic1 = New-AzureRmNetworkInterface -Name $nic1Name -ResourceGroupName $backendRGName `
@@ -148,7 +148,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 创建用于远程访问的 NIC。请注意，此 NIC 有关联的 NSG。
 
-    ```
+    ```powershell
     $nic2Name = $nicNamePrefix + $suffixNumber + "-RA"
     $ipAddress2 = $ipAddressPrefix + (53 + $suffixNumber)
     $nic2 = New-AzureRmNetworkInterface -Name $nic2Name -ResourceGroupName $backendRGName `
@@ -158,14 +158,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 创建 `vmConfig` 对象。
 
-    ```
+    ```powershell
     $vmName = $vmNamePrefix + $suffixNumber
     $vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize $vmSize -AvailabilitySetId $avSet.Id
     ```
 
 5. 为每个 VM 创建两个数据磁盘。请注意，数据磁盘位于前面创建的高级存储帐户中。
 
-    ```
+    ```powershell
     $dataDisk1Name = $vmName + "-" + $osDiskPrefix + "-1"
     $data1VhdUri = $prmStorageAccount.PrimaryEndpoints.Blob.ToString() + "vhds/" + $dataDisk1Name + ".vhd"
     Add-AzureRmVMDataDisk -VM $vmConfig -Name $dataDisk1Name -DiskSizeInGB $diskSize `
@@ -179,21 +179,21 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 6. 配置要用于 VM 的操作系统和映像。
 
-    ```
+    ```powershell
     $vmConfig = Set-AzureRmVMOperatingSystem -VM $vmConfig -Windows -ComputerName $vmName -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
     $vmConfig = Set-AzureRmVMSourceImage -VM $vmConfig -PublisherName $publisher -Offer $offer -Skus $sku -Version $version
     ```
 
 7. 将上面创建的两个 NIC 添加到 `vmConfig` 对象。
 
-    ```
+    ```powershell
     $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $nic1.Id -Primary
     $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $nic2.Id
     ```
 
 8. 创建 OS 磁盘，并创建 VM。请注意以 `}` 结束 `for` 循环。
 
-    ```
+    ```powershell
     $osDiskName = $vmName + "-" + $osDiskSuffix
     $osVhdUri = $stdStorageAccount.PrimaryEndpoints.Blob.ToString() + "vhds/" + $osDiskName + ".vhd"
     $vmConfig = Set-AzureRmVMOSDisk -VM $vmConfig -Name $osDiskName -VhdUri $osVhdUri -CreateOption fromImage

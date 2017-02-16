@@ -57,7 +57,7 @@ Azure Service Fabric 是一个高可用性平台，用于复制多个节点中�
 
 如下所示，**BackupAsync** 采用 **BackupDescription** 对象，用户可以在其中指定完整或增量备份，以及指定在本地创建备份文件夹并准备好移出到某个外部存储时调用的回调函数 **Func<< BackupInfo, CancellationToken, Task<bool>>>**。
 
-```
+```C#
 BackupDescription myBackupDescription = new BackupDescription(backupOption.Incremental,this.BackupCallbackAsync);
 
 await this.BackupAsync(myBackupDescription);
@@ -75,7 +75,7 @@ await this.BackupAsync(myBackupDescription);
 
 以下代码演示如何使用 **BackupCallbackAsync** 方法将备份上传到 Azure 存储：
 
-```
+```C#
 private async Task<bool> BackupCallbackAsync(BackupInfo backupInfo, CancellationToken cancellationToken)
 {
     var backupId = Guid.NewGuid();
@@ -122,7 +122,7 @@ private async Task<bool> BackupCallbackAsync(BackupInfo backupInfo, Cancellation
 
 以下是 **OnDataLossAsync** 方法的实现示例：
 
-```
+```C#
 protected override async Task<bool> OnDataLossAsync(RestoreContext restoreCtx, CancellationToken cancellationToken)
 {
     var backupFolder = await this.externalBackupStore.DownloadLastBackupAsync(cancellationToken);

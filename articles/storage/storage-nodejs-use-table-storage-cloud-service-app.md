@@ -49,7 +49,7 @@ ms.author: marsma
 
 3.  从 Azure Powershell 窗口中，输入以下 cmdlet 以检索存储帐户信息：
 
-    ```
+    ```powershell
     PS C:\node\tasklist\WebRole1> Get-AzureStorageAccounts
     ```
 
@@ -60,7 +60,7 @@ ms.author: marsma
 
 4.  打开 **ServiceDefinition.csdef** 文件，该文件包含将应用程序部署到 Azure 时所使用的环境设置：
 
-    ```
+    ```powershell
     PS C:\node\tasklist> notepad ServiceDefinition.csdef
     ```
 
@@ -79,7 +79,7 @@ ms.author: marsma
 
 2. 使用以下命令在本地安装 azure、[node-uuid]、[nconf] 和 [async] 模块，并将它们的一个条目保存到 **package.json** 文件：
 
-    ```
+    ```powershell
     PS C:\node\tasklist\WebRole1> npm install azure-storage node-uuid async nconf --save
     ```
 
@@ -116,7 +116,7 @@ ms.author: marsma
 
 3. 在 **task.js** 文件的开头，添加以下代码来引用所需的库：
 
-    ```
+    ```nodejs
     var azure = require('azure-storage');
       var uuid = require('node-uuid');
     var entityGen = azure.TableUtilities.entityGenerator;
@@ -124,7 +124,7 @@ ms.author: marsma
 
 4. 接下来，你将添加代码以定义和导出 Task 对象。此对象负责与表连接。
 
-    ```
+    ```nodejs
       module.exports = Task;
 
     function Task(storageClient, tableName, partitionKey) {
@@ -141,7 +141,7 @@ ms.author: marsma
 
 5. 接下来，添加以下代码来定义 Task 对象的其他方法，这些方法允许与表中存储的数据交互：
 
-    ```
+    ```nodejs
     Task.prototype = {
       find: function(query, callback) {
         self = this;
@@ -201,7 +201,7 @@ ms.author: marsma
 
 2. 将以下代码添加到 **tasklist.js**。这将加载 **tasklist.js** 使用的 azure 和 async 模块。这还将定义 **TaskList** 函数，将向该函数传递我们之前定义的 **Task** 对象的一个实例：
 
-    ```
+    ```nodejs
     var azure = require('azure-storage');
     var async = require('async');
 
@@ -214,7 +214,7 @@ ms.author: marsma
 
 2. 继续向 **tasklist.js** 文件添加用于**showTasks**、**addTask** 和 **completeTasks** 的方法：
 
-    ```
+    ```nodejs
     TaskList.prototype = {
       showTasks: function(req, res) {
         self = this;
@@ -266,7 +266,7 @@ ms.author: marsma
 
 2. 在该文件的开头，添加以下内容来加载 azure 模块并设置表名称和分区键：
 
-    ```
+    ```nodejs
     var azure = require('azure-storage');
     var tableName = 'tasks';
     var partitionKey = 'hometasks';
@@ -274,14 +274,14 @@ ms.author: marsma
 
 3. 在 app.js 文件中，向下滚动到以下行：
 
-    ```
+    ```nodejs
     app.use('/', routes);
     app.use('/users', users);
     ```
 
     将上面的行替换为下面显示的代码。这将通过连接到你的存储帐户来初始化 <strong>Task</strong> 的实例。这是 <strong>TaskList</strong> 的密码，TaskList 将使用该密码与表服务进行通信：
 
-    ```
+    ```nodejs
     var TaskList = require('./routes/tasklist');
     var Task = require('./models/task');
     var task = new Task(azure.createTableService(), tableName, partitionKey);
@@ -369,7 +369,7 @@ ms.author: marsma
 
 使用以下命令在模拟器中启动应用程序。
 
-```
+```powershell
 PS C:\node\tasklist\WebRole1> start-azureemulator -launch
 ```
 
@@ -383,7 +383,7 @@ PS C:\node\tasklist\WebRole1> start-azureemulator -launch
 
 在 Windows PowerShell 窗口中，调用以下 cmdlet 将托管服务重新部署到 Azure。
 
-```
+```powershell
 PS C:\node\tasklist\WebRole1> Publish-AzureServiceProject -name myuniquename -location datacentername -launch
 ```
 
@@ -419,7 +419,7 @@ Azure 将按使用的服务器小时数对 Web 角色实例计费。你的应用
 
 1.  在 Windows PowerShell 窗口中，使用以下 cmdlet 以停止上一节中创建的服务部署：
 
-    ```
+    ```powershell
     PS C:\node\tasklist\WebRole1> Stop-AzureService
     ```
 
@@ -427,7 +427,7 @@ Azure 将按使用的服务器小时数对 Web 角色实例计费。你的应用
 
 3.  若要删除服务，请调用以下 cmdlet：
 
-    ```
+    ```powershell
     PS C:\node\tasklist\WebRole1> Remove-AzureService contosotasklist
     ```
 

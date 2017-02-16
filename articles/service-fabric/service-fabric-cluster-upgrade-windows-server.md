@@ -54,7 +54,7 @@ ms.author: chackdan
 
 1. 从对群集配置文件中列为节点的所有计算机拥有管理员访问权限的任何计算机连接到该群集。运行此脚本的计算机不必要是群集的一部分
 
-    ```
+    ```powershell
     ###### connect to the secure cluster using certs
     $ClusterName= "mysecurecluster.something.com:19000"
     $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7FG2D630F8F3" 
@@ -69,7 +69,7 @@ ms.author: chackdan
 
 2. 获取可升级到的 Service Fabric 版本列表
 
-    ```
+    ```powershell
     ###### Get the list of available service fabric versions 
     Get-ServiceFabricRegisteredClusterCodeVersion
     ```
@@ -80,7 +80,7 @@ ms.author: chackdan
 
 3. 开始使用 [Start-ServiceFabricClusterUpgrade PowerShell 命令](https://msdn.microsoft.com/zh-cn/library/mt125872.aspx)，将群集升级到可用的版本之一
 
-    ```
+    ```Powershell
     Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion <codeversion#> -Monitored -FailureAction Rollback
 
     ###### Here is a filled out example
@@ -111,7 +111,7 @@ ms.author: chackdan
 
 然后开始升级配置。有关用法详细信息，请参阅 [Start-ServiceFabricClusterUpgrade PS 命令](https://msdn.microsoft.com/zh-cn/library/mt125872.aspx)。群集清单版本是 clusterConfig.JSON 中指定的版本。请务必在开始升级配置之前更新该版本。
 
-```
+```powershell
 Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureAction Rollback -Monitored 
 ```
 
@@ -121,7 +121,7 @@ Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureActi
 
 1. 从对群集配置文件中列为节点的所有计算机拥有管理员访问权限的任何计算机连接到该群集。运行此脚本的计算机不必要是群集的一部分
 
-    ```
+    ```powershell
     ###### connect to the cluster
     $ClusterName= "mysecurecluster.something.com:19000"
     $CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7FG2D630F8F3" 
@@ -136,7 +136,7 @@ Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureActi
 
 2. 将下载的包复制到群集映像存储中。
 
-    ```
+    ```powershell
     ###### Get the list of available service fabric versions 
     Copy-ServiceFabricClusterPackage -Code -CodePackagePath <name of the .cab file including the path to it> -ImageStoreConnectionString "fabric:ImageStore"
 
@@ -146,7 +146,7 @@ Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureActi
 
 2. 注册复制的包
 
-    ```
+    ```powershell
     ###### Get the list of available service fabric versions 
     Register-ServiceFabricClusterPackage -Code -CodePackagePath <name of the .cab file> 
 
@@ -156,7 +156,7 @@ Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureActi
 
 3. 开始将群集升级到可用的版本之一。
 
-    ```
+    ```Powershell
     Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion <codeversion#> -Monitored -FailureAction Rollback
 
     ###### Here is a filled out example
@@ -165,7 +165,7 @@ Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureActi
 
 可以在 Service Fabric Explorer 中或者通过运行以下 PowerShell 命令来监视升级进度
 
-```
+```powershell
     Get-ServiceFabricClusterUpgrade
 ```
 

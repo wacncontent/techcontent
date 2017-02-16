@@ -24,6 +24,8 @@ ms.author: larryfr
 
 本文介绍如何使用远程桌面连接到 HDInsight 群集上的 Hadoop，然后使用 Hadoop 命令运行 MapReduce 作业。
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 > [!IMPORTANT]
 远程桌面只能在基于 Windows 的 HDInsight 群集上使用。Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 ><p>

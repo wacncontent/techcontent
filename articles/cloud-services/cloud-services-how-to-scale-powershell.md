@@ -26,19 +26,19 @@ ms.author: seanmck
 
 若希望通过 PowerShell 对订阅执行任何操作，必须首先登录：
 
-```
+```powershell
 Add-AzureAccount -Environment $(Get-AzureRmEnvironment -Name AzureChinaCloud)
 ```
 
 如果有多个订阅与帐户关联，可能需要根据云服务的所在位置更改当前订阅。若要查看当前订阅，请运行：
 
-```
+```powershell
 Get-AzureSubscription -Current
 ```
 
 如果需要更改当前订阅，请运行：
 
-```
+```powershell
 Set-AzureSubscription -SubscriptionId <subscription_id>
 ```
 
@@ -46,7 +46,7 @@ Set-AzureSubscription -SubscriptionId <subscription_id>
 
 若要查看角色的当前状态，请运行：
 
-```
+```powershell
 Get-AzureRole -ServiceName '<your_service_name>' -RoleName '<your_role_name>'
 ```
 
@@ -58,7 +58,7 @@ Get-AzureRole -ServiceName '<your_service_name>' -RoleName '<your_role_name>'
 
 若要扩展角色，请将所需的实例数作为**计数**参数传递给 **Set-AzureRole** cmdlet：
 
-```
+```powershell
 Set-AzureRole -ServiceName '<your_service_name>' -RoleName '<your_role_name>' -Slot <target_slot> -Count <desired_instances>
 ```
 

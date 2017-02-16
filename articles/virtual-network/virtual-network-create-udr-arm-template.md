@@ -121,13 +121,13 @@ ms.author: jdial
 1. 如果从未使用过 Azure PowerShell，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)，按照说明逐步完成操作，登录到 Azure 并选择订阅。
 2. 运行以下命令创建资源组：
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name TestRG -Location chinanorth
     ```
 
 3. 运行以下命令，部署模板：
 
-    ```
+    ```powershell
     New-AzureRmResourceGroupDeployment -Name DeployUDR -ResourceGroupName TestRG `
         -TemplateUri https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/azuredeploy.json `
         -TemplateParameterUri https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/azuredeploy.parameters.json
@@ -184,7 +184,7 @@ ms.author: jdial
 1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行以下命令，切换到 Resource Manager 模式：
 
-    ```
+    ```azurecli
     azure config mode arm
     ```
 
@@ -196,7 +196,7 @@ ms.author: jdial
 
 3. 从浏览器导航到 **https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/azuredeploy.parameters.json** ，复制 json 文件的内容并粘贴到计算机中的新文件。对于此方案，将下面的值复制到名为 **c:\\udr\\azuredeploy.parameters.json** 的文件。
 
-    ```
+    ```json
         {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
           "contentVersion": "1.0.0.0",
@@ -216,7 +216,7 @@ ms.author: jdial
 
 4. 运行以下命令，使用上面下载并修改的模板和参数文件部署新的 VNet：
 
-    ```
+    ```azurecli
     azure group create -n TestRG -l chinanorth --template-uri 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/azuredeploy.json' -e 'c:\udr\azuredeploy.parameters.json'
     ```
 
@@ -241,7 +241,7 @@ ms.author: jdial
 
 5. 运行以下命令，查看在新资源组中创建的资源：
 
-    ```
+    ```azurecli
     azure group show TestRG
     ```
 

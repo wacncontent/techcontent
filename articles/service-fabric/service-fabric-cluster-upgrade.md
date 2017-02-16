@@ -74,7 +74,7 @@ ms.author: chackdan
 
 “supportExpiryUtc”告知给定的版本即将过期或已过期。最新版本没有有效日期 - 它的值为“9999-12-31T23:59:59.9999999”，这只是表示尚未设置过期日期。
 
-```
+```REST
 GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
 
 Output:

@@ -31,7 +31,7 @@ ms.author: iainfou
 ## 创建核心资源
 确保[已安装并配置最新的 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。登录 Azure 帐户：
 
-```
+```powershell
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -39,13 +39,13 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 首先创建一个资源组。以下示例在 `WestUs` 位置创建名为 `myResourceGroup` 的资源组：
 
-```
+```powershell
 New-AzureRmResourceGroup -Name "myResourceGroup" -Location "ChinaNorth"
 ```
 
 创建一个存储帐户用于存放 VM。以下示例创建名为 `mystorageaccount` 的存储帐户：
 
-```
+```powershell
 $storageAcc = New-AzureRmStorageAccount -ResourceGroupName "myResourceGroup" `
     -Location "ChinaNorth" -Name "mystorageaccount" `
     -Kind "Storage" -SkuName "Premium_LRS" 
@@ -54,7 +54,7 @@ $storageAcc = New-AzureRmStorageAccount -ResourceGroupName "myResourceGroup" `
 ## 创建虚拟网络和子网
 定义两个虚拟网络子网 - 一个用于前端流量，一个用于后端流量。以下示例定义两个子网，分别名为 `mySubnetFrontEnd` 和 `mySubnetBackEnd`：
 
-```
+```powershell
 $mySubnetFrontEnd = New-AzureRmVirtualNetworkSubnetConfig -Name "mySubnetFrontEnd" `
     -AddressPrefix "192.168.1.0/24"
 $mySubnetBackEnd = New-AzureRmVirtualNetworkSubnetConfig -Name "mySubnetBackEnd" `
@@ -63,7 +63,7 @@ $mySubnetBackEnd = New-AzureRmVirtualNetworkSubnetConfig -Name "mySubnetBackEnd"
 
 创建虚拟网络和子网。以下示例创建名为 `myVnet` 的虚拟网络：
 
-```
+```powershell
 $myVnet = New-AzureRmVirtualNetwork -ResourceGroupName "myResourceGroup" `
     -Location "ChinaNorth" -Name "myVnet" -AddressPrefix "192.168.0.0/16" `
     -Subnet $mySubnetFrontEnd,$mySubnetBackEnd
@@ -72,7 +72,7 @@ $myVnet = New-AzureRmVirtualNetwork -ResourceGroupName "myResourceGroup" `
 ## 创建多个 NIC
 创建两个 NIC，并将其中一个 NIC 附加到前端子网，将另一个 NIC 附加到后端子网。以下示例创建两个 NIC，分别名为 `myNic1` 和 `myNic2`：
 
-```
+```powershell
 $frontEnd = $myVnet.Subnets|?{$_.Name -eq 'mySubnetFrontEnd'}
 $myNic1 = New-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" `
     -Location "ChinaNorth" -Name "myNic1" -SubnetId $frontEnd.Id
@@ -89,19 +89,19 @@ $myNic2 = New-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" `
 
 首先，将 VM 凭据设置为 `$cred` 变量，如下所示：
 
-```
+```powershell
 $cred = Get-Credential
 ```
 
 以下示例定义名为 `myVM` 的 VM，使用最多支持两个 NIC 的 VM 大小 (`Standard_DS2_v2`)：
 
-```
+```powershell
 $vmConfig = New-AzureRmVMConfig -VMName "myVM" -VMSize "Standard_DS2_v2"
 ```
 
 创建 VM 配置的其余部分。以下示例创建一个 Windows Server 2012 R2 VM：
 
-```
+```powershell
 $vmConfig = Set-AzureRmVMOperatingSystem -VM $vmConfig -Windows -ComputerName "myVM" `
     -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
 $vmConfig = Set-AzureRmVMSourceImage -VM $vmConfig -PublisherName "MicrosoftWindowsServer" `
@@ -110,14 +110,14 @@ $vmConfig = Set-AzureRmVMSourceImage -VM $vmConfig -PublisherName "MicrosoftWind
 
 附加前面创建的两个 NIC：
 
-```
+```powershell
 $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $myNic1.Id -Primary
 $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $myNic2.Id
 ```
 
 为新 VM 配置存储和虚拟磁盘：
 
-```
+```powershell
 $blobPath = "vhds/WindowsVMosDisk.vhd"
 $osDiskUri = $storageAcc.PrimaryEndpoints.Blob.ToString() + $blobPath
 $diskName = "windowsvmosdisk"
@@ -127,14 +127,14 @@ $vmConfig = Set-AzureRmVMOSDisk -VM $vmConfig -Name $diskName -VhdUri $osDiskUri
 
 最后，创建 VM：
 
-```
+```powershell
 New-AzureRmVM -VM $vmConfig -ResourceGroupName "myResourceGroup" -Location "ChinaNorth"
 ```
 
 ## 使用 Resource Manager 模板创建多个 NIC
 Azure Resource Manager 模板使用声明性 JSON 文件来定义环境。阅读 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。Resource Manager 模板可让你在部署期间创建资源的多个实例，例如，创建多个 NIC。使用 *copy* 指定要创建的实例数：
 
-```
+```json
 "copy": {
     "name": "multiplenics"
     "count": "[parameters('count')]"
@@ -145,7 +145,7 @@ Azure Resource Manager 模板使用声明性 JSON 文件来定义环境。阅读
 
 也可以使用 `copyIndex()` 并在资源名称中追加一个数字，来创建 `myNic1`、`MyNic2`，等等。下面显示了追加索引值的示例：
 
-```
+```json
 "name": "[concat('myNic', copyIndex())]", 
 ```
 

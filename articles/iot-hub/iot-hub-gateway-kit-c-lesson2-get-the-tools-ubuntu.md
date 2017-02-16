@@ -59,7 +59,7 @@ ms.author: xshi
 1. 按 `Ctrl + Alt + T` 打开终端。
 2. 运行以下命令：
 
-    ```
+    ```bash
        sudo apt-get update
        curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
        sudo apt-get install -y nodejs
@@ -72,7 +72,7 @@ ms.author: xshi
 
 若要安装 gulp，请在终端运行以下命令：
 
-```
+```bash
 sudo npm install -g gulp
 ```
 
@@ -87,7 +87,7 @@ sudo npm install -g gulp
 
 1. 在终端运行以下命令：
 
-    ```
+    ```bash
        sudo apt-get update
        sudo apt-get install -y libssl-dev libffi-dev
        sudo apt-get install -y python-dev
@@ -101,7 +101,7 @@ sudo npm install -g gulp
 
 2. 运行以下命令，对安装进行验证：
 
-    ```
+    ```bash
     az iot -h
     ```
 

@@ -109,7 +109,7 @@ NXOAuth2Client 库要求设置一些值。完成该任务之后，你可以使�
 
 objc
 
-```
+```objc
 NSString *scopes = @"offline_access User.ReadBasic.All";
 NSString *authURL = @"https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
 NSString *loginURL = @"https://login.microsoftonline.com/common/login";
@@ -144,7 +144,7 @@ NSURL *authcode;
 
 objc
 
-```
+```objc
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.loginView.delegate = self;
@@ -164,7 +164,7 @@ Web 视图可提示用户提供短信等附加因素（如果已配置）或向�
 
 objc
 
-```
+```objc
 -(void)requestOAuth2Access {
     //to sign in to Microsoft APIs using OAuth2, we must show an embedded browser (UIWebView)
     [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"myGraphService"
@@ -183,7 +183,7 @@ objc
 
 objc
 
-```
+```objc
 - (void)resolveUsingUIWebView:(NSURL *)URL {
 
     // We get the auth token from a redirect so we need to handle that in the webview.
@@ -239,7 +239,7 @@ objc
 
 objc
 
-```
+```objc
 - (void)handleOAuth2AccessResult:(NSString *)accessResult {
 
     AppData* data = [AppData getInstance];
@@ -262,7 +262,7 @@ objc
 
 objc
 
-```
+```objc
     - (void)setupOAuth2AccountStore {
 
         AppData* data = [AppData getInstance];
@@ -319,7 +319,7 @@ objc
 
 objc
 
-```
+```objc
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -342,7 +342,7 @@ objc
 
 objc
 
-```
+```objc
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -379,7 +379,7 @@ objc
 
 objc
 
-```
+```objc
     -(void)lookupInGraph:(NSString *)searchText {
     if (searchText.length > 0) {
 
@@ -417,7 +417,7 @@ objc
 
 objc
 
-```
+```objc
 @interface GraphAPICaller : NSObject<NSURLConnectionDataDelegate>
 
 +(void) searchUserList:(NSString*)searchString
@@ -434,7 +434,7 @@ objc
 
 objc
 
-```
+```objc
     +(void) searchUserList:(NSString*)searchString
        completionBlock:(void (^) (NSMutableArray* Users, NSError* error)) completionBlock
 {
@@ -508,7 +508,7 @@ objc
 
 objc
 
-```
+```objc
 NSString *graphURL = [NSString stringWithFormat:@"%@%@/users", data.graphApiUrlString, data.apiversion];
 ```
 
@@ -516,7 +516,7 @@ NSString *graphURL = [NSString stringWithFormat:@"%@%@/users", data.graphApiUrlS
 
 objc
 
-```
+```objc
 NSDictionary* params = [self convertParamsToDictionary:searchString];
 ```
 
@@ -524,7 +524,7 @@ NSDictionary* params = [self convertParamsToDictionary:searchString];
 
 objc
 
-```
+```objc
     +(NSDictionary*) convertParamsToDictionary:(NSString*)searchString
 {
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc]init];
@@ -541,7 +541,7 @@ objc
 
 objc
 
-```
+```objc
 NSArray *accounts = [store accountsWithAccountType:@"myGraphService"];
 [NXOAuth2Request performMethod:@"GET"
                     onResource:[NSURL URLWithString:graphURL]
@@ -565,7 +565,7 @@ NSArray *accounts = [store accountsWithAccountType:@"myGraphService"];
 
 objc
 
-```
+```objc
 // We can grab the top most JSON node to get our graph data.
 NSArray *graphDataArray = [dataReturned objectForKey:@"value"];
 

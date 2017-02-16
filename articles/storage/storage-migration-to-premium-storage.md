@@ -180,7 +180,7 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 ##### 选项 2：使用 PowerShell 复制 VHD（同步复制）
 还可以使用 PowerShell cmdlet Start-AzureStorageBlobCopy 复制 VHD 文件。在 Azure PowerShell 上使用以下命令复制 VHD。将 <> 中的值替换为源和目标存储帐户中的相应值。若要使用此命令，必须在目标存储帐户中有名为 vhds 的容器。如果该容器不存在，则应在运行此命令之前创建一个。
 
-```
+```powershell
 $sourceBlobUri = <source-vhd-uri>
 
 $sourceContext = New-AzureStorageContext  –StorageAccountName <source-account> -StorageAccountKey <source-account-key>
@@ -192,7 +192,7 @@ Start-AzureStorageBlobCopy -srcUri $sourceBlobUri -SrcContext $sourceContext -De
 
 示例：
 
-```
+```powershell
 C:\PS> $sourceBlobUri = "https://sourceaccount.blob.core.chinacloudapi.cn/vhds/myvhd.vhd"
 
 C:\PS> $sourceContext = New-AzureStorageContext  –StorageAccountName "sourceaccount" -StorageAccountKey "J4zUI9T5b8gvHohkiRg"
@@ -235,7 +235,7 @@ C:\PS> Start-AzureStorageBlobCopy -srcUri $sourceBlobUri -SrcContext $sourceCont
 
 ##### 选项 1：使用 Azure PowerShell Add-azurevhd 上传 .vhd 文件
 
-```
+```powershell
 Add-AzureVhd [-Destination] <Uri> [-LocalFilePath] <FileInfo>
 ```
 
@@ -248,12 +248,12 @@ Add-AzureVhd [-Destination] <Uri> [-LocalFilePath] <FileInfo>
 2. 打开 Azure PowerShell，并转到安装 AzCopy 的文件夹。
 3. 使用以下命令从“Source”将 VHD 文件复制到“Destination”。
 
-    ```
+    ```azcopy
     AzCopy /Source: <source> /SourceKey: <source-account-key> /Dest: <destination> /DestKey: <dest-account-key> /BlobType:page /Pattern: <file-name>
     ```
     示例：
 
-        ```
+        ```azcopy
         AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /SourceKey:key1 /Dest:https://destaccount.blob.core.windows.net/mycontainer2 /DestKey:key2 /BlobType:page /Pattern:abc.vhd
         ```
 
@@ -300,7 +300,7 @@ Add-AzureVhd [-Destination] <Uri> [-LocalFilePath] <FileInfo>
 #### 用于创建多个 Azure VM 实例的通用操作系统 VHD
 将通用 OS 映像 VHD 上传到存储帐户后，将其注册为 **Azure VM 映像**，以便可从中创建一个或多个 VM 实例。使用以下 PowerShell cmdlet 将 VHD 注册为 Azure VM OS 映像。提供 VHD 已复制到的完整容器 URL。
 
-```
+```powershell
 Add-AzureVMImage -ImageName "OSImageName" -MediaLocation "https://storageaccount.blob.core.chinacloudapi.cn/vhdcontainer/osimage.vhd" -OS Windows
 ```
 
@@ -309,7 +309,7 @@ Add-AzureVMImage -ImageName "OSImageName" -MediaLocation "https://storageaccount
 #### 用于创建单个 Azure VM 实例的唯一操作系统 VHD
 将唯一的 OS VHD 上传到存储帐户后，将其注册为 **Azure OS 磁盘**，以便可从中创建 VM 实例。使用这些 PowerShell cmdlet 将 VHD 注册为 Azure OS 磁盘。提供 VHD 已复制到的完整容器 URL。
 
-```
+```powershell
 Add-AzureDisk -DiskName "OSDisk" -MediaLocation "https://storageaccount.blob.core.chinacloudapi.cn/vhdcontainer/osdisk.vhd" -Label "My OS Disk" -OS "Windows"
 ```
 
@@ -320,7 +320,7 @@ Add-AzureDisk -DiskName "OSDisk" -MediaLocation "https://storageaccount.blob.cor
 
 使用这些 PowerShell cmdlet 将 VHD 注册为 Azure 数据磁盘。提供 VHD 已复制到的完整容器 URL。
 
-```
+```powershell
 Add-AzureDisk -DiskName "DataDisk" -MediaLocation "https://storageaccount.blob.core.chinacloudapi.cn/vhdcontainer/datadisk.vhd" -Label "My Data Disk"
 ```
 
@@ -334,7 +334,7 @@ Add-AzureDisk -DiskName "DataDisk" -MediaLocation "https://storageaccount.blob.c
 
 逐步执行以下 PowerShell cmdlet 创建新的 VM。首先，设置公共参数：
 
-```
+```powershell
 $serviceName = "yourVM"
 $location = "location-name" (e.g., China East) 
 $vmSize ="Standard_DS2"
@@ -346,7 +346,7 @@ $vmSize = "Standard_DS2"
 
 首先，创建要在其中托管新 VM 的云服务。
 
-```
+```powershell
 New-AzureService -ServiceName $serviceName -Location $location
 ```
 
@@ -355,7 +355,7 @@ New-AzureService -ServiceName $serviceName -Location $location
 #### 用于创建多个 Azure VM 实例的通用操作系统 VHD
 使用注册的 **Azure OS 映像**创建一个或多个新的 DS 系列 Azure VM 实例。创建新 VM 时，在 VM 配置中指定此 OS 映像名称，如下所示。
 
-```
+```powershell
 $OSImage = Get-AzureVMImage –ImageName "OSImageName"
 
 $vm = New-AzureVMConfig -Name $vmName –InstanceSize $vmSize -ImageName $OSImage.ImageName
@@ -368,7 +368,7 @@ New-AzureVM -ServiceName $serviceName -VM $vm
 #### 用于创建单个 Azure VM 实例的唯一操作系统 VHD
 使用注册的 **Azure OS 磁盘**创建新的 DS 系列 Azure VM 实例。创建新的 VM 时，在 VM 配置中指定此 OS 磁盘名称，如下所示。
 
-```
+```powershell
 $OSDisk = Get-AzureDisk –DiskName "OSDisk"
 
 $vm = New-AzureVMConfig -Name $vmName -InstanceSize $vmSize -DiskName $OSDisk.DiskName
@@ -383,7 +383,7 @@ New-AzureVM -ServiceName $serviceName –VM $vm
 
 使用以下 PowerShell cmdlet 将数据磁盘附加到新的 VM，并指定缓存策略。在以下示例中，缓存策略设为 *ReadOnly*。
 
-```
+```powershell
 $vm = Get-AzureVM -ServiceName $serviceName -Name $vmName
 
 Add-AzureDataDisk -ImportFrom -DiskName "DataDisk" -LUN 0 –HostCaching ReadOnly –VM $vm

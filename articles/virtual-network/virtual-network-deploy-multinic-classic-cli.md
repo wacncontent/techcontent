@@ -48,7 +48,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 根据在上述[先决条件](#Prerequisites)中部署的现有资源组，更改以下变量的值。
 
-    ```
+    ```azurecli
     location="chinaeast"
     vnetName="WTestVNet"
     backendSubnetName="BackEnd"
@@ -56,7 +56,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 2. 根据要用于后端部署的值，更改以下变量的值。
 
-    ```
+    ```azurecli
     backendCSName="IaaSStory-Backend"
     prmStorageAccountName="iaasstoryprmstorage"
     image="0b11de9248dd4d87b18621318e037d37__RightImage-Ubuntu-14.04-x64-v14.2.1"
@@ -76,14 +76,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ### 步骤 2 - 为 VM 创建必要的资源
 1. 为所有后端 VM 创建新的云服务。请注意，使用 `$backendCSName` 变量表示资源组名称，使用 `$location` 表示 Azure 区域。
 
-    ```
+    ```azurecli
     azure service create --serviceName $backendCSName \
         --location $location
     ```
 
 2. 为 VM 将使用的 OS 和数据磁盘创建高级存储帐户。
 
-    ```
+    ```azurecli
     azure storage account create $prmStorageAccountName \
         --location $location \
         --type PLRS
@@ -92,14 +92,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ### 步骤 3 - 创建具有多个 NIC 的 VM
 1. 启动循环，根据 `numberOfVMs` 变量创建多个 VM。
 
-    ```
+    ```azurecli
     for ((suffixNumber=1;suffixNumber<=numberOfVMs;suffixNumber++));
     do
     ```
 
 2. 对于每个 VM，分别指定两个 NIC 的名称和 IP 地址。
 
-    ```
+    ```azurecli
     nic1Name=$vmNamePrefix$suffixNumber-DA
     x=$((suffixNumber+3))
     ipAddress1=$ipAddressPrefix$x
@@ -111,7 +111,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 3. 创建 VM。请注意 `--nic-config` 参数的用法，其中包含所有 NIC 的列表（包含名称、子网和 IP 地址）。
 
-    ```
+    ```azurecli
     azure vm create $backendCSName $image $username $password \
         --connect $backendCSName \
         --vm-name $vmNamePrefix$suffixNumber \
@@ -125,7 +125,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 为每个 VM 创建两个数据磁盘。
 
-    ```
+    ```azurecli
     azure vm disk attach-new $vmNamePrefix$suffixNumber \
         $diskSize \
         vhds/$dataDiskPrefix$suffixNumber$dataDiskName-1.vhd

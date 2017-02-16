@@ -82,7 +82,7 @@ ms.author: marsma
 
 csharp
 
-```
+```csharp
 CloudJob job = batchClient.JobOperations.CreateJob(
     "myJob",
     new PoolInformation { PoolId = "myPool" });
@@ -103,7 +103,7 @@ await job.PrepareOutputStorageAsync(linkedStorageAccount);
 
 csharp
 
-```
+```csharp
 CloudStorageAccount linkedStorageAccount = new CloudStorageAccount(myCredentials);
 string jobId = Environment.GetEnvironmentVariable("AZ_BATCH_JOB_ID");
 string taskId = Environment.GetEnvironmentVariable("AZ_BATCH_TASK_ID");
@@ -148,7 +148,7 @@ await jobOutputStorage.SaveAsync(JobOutputKind.JobPreview, "mymovie_preview.mp4"
 
 csharp
 
-```
+```csharp
 TimeSpan stdoutFlushDelay = TimeSpan.FromSeconds(3);
 string logFilePath = Path.Combine(
     Environment.GetEnvironmentVariable("AZ_BATCH_TASK_DIR"), "stdout.txt");
@@ -186,7 +186,7 @@ using (ITrackedSaveOperation stdout =
 
 csharp
 
-```
+```csharp
 foreach (CloudTask task in myJob.ListTasks())
 {
     foreach (TaskOutputStorage output in

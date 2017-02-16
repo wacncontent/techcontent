@@ -30,7 +30,7 @@ ms.author: v-livech
 
 ## 快速命令摘要
 
-```
+```azurecli
 azure group create \
     -n myResourceGroup \
     -l chinanorth \
@@ -48,7 +48,7 @@ Azure Resource Manager 模板是可用于一次性简易任务（如启动 Ubunt
 >[!NOTE]
 > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```
+```azurecli
 azure group create \
     --name myResourceGroup \
     --location chinanorth \
@@ -57,7 +57,7 @@ azure group create \
 
 输出应类似于以下输出块：
 
-```
+```azurecli
 info:    Executing command group create
 + Getting resource group myResourceGroup
 + Creating resource group myResourceGroup

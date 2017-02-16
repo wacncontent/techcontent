@@ -41,7 +41,7 @@ ms.author: xshi
 
 - 运行以下命令，列出资源组中的所有 IoT 中心：
 
-    ```
+    ```bash
     az iot hub list -g iot-gateway --query [].name
     ```
 
@@ -49,7 +49,7 @@ ms.author: xshi
 
 - 运行以下命令，获取 IoT 中心连接字符串：
 
-    ```
+    ```bash
     az iot hub show-connection-string --name {my hub name} -g iot-gateway
     ```
 
@@ -61,7 +61,7 @@ ms.author: xshi
 
 1. 在控制台窗口中运行以下命令，在 Visual Studio Code 中打开 `config-azure.json`：
 
-    ```
+    ```bash
        # For Windows command prompt
        code %USERPROFILE%\.iot-hub-getting-started\config-azure.json
        # For MacOS or Ubuntu
@@ -78,7 +78,7 @@ ms.author: xshi
 
 通过以下命令运行模拟设备示例应用程序及读取 IoT 中心消息：
 
-```
+```bash
 gulp run --iot-hub
 ```
 

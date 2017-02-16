@@ -43,7 +43,7 @@ ms.author: vturecek
 ### 使用执行组件服务
 执行组件实例可访问执行这些实例的执行组件服务。通过执行组件服务，执行组件实例可以编程方式获取服务上下文，其中包括分区 ID、服务名称、应用程序名称和其他特定于 Service Fabric 平台的信息。
 
-```
+```csharp
 Task MyActorMethod()
 {
     Guid partitionId = this.ActorService.Context.PartitionId;
@@ -55,7 +55,7 @@ Task MyActorMethod()
 
 与所有 Reliable Services 一样，执行组件服务必须使用 Service Fabric 运行时中的服务类型注册。为了使执行组件服务能够运行执行组件实例，还必须向执行组件服务注册你的执行组件类型。`ActorRuntime` 注册方法将为执行组件执行此操作。最简单的情况是，你只需注册执行组件类型，然后隐式使用具有默认设置的执行组件服务：
 
-```
+```csharp
 static class Program
 {
     private static void Main()
@@ -69,7 +69,7 @@ static class Program
 
 或者，可以使用此注册方法提供的 lambda 自己构造执行组件服务。这种方法允许你配置执行组件服务和显式构造你的执行组件实例，你可以从中通过执行组件的构造函数向执行组件注入依赖项：
 
-```
+```csharp
 static class Program
 {
     private static void Main()
@@ -89,7 +89,7 @@ static class Program
 #### 枚举执行组件
 执行组件服务允许客户端枚举有关该服务托管的执行组件的元数据。由于执行组件服务是已分区的有状态服务，因此将按分区执行枚举。因为每个分区可能包含大量执行组件，所以枚举以一组分页结果的形式返回。将循环读取这些页面，直到读取所有页面。以下示例演示了如何创建执行组件服务的一个分区中所有活动执行组件的列表：
 
-```
+```csharp
 IActorService actorServiceProxy = ActorServiceProxy.Create(
     new Uri("fabric:/MyApp/MyService"), partitionKey);
 
@@ -110,7 +110,7 @@ while (continuationToken != null);
 #### 删除执行组件
 执行组件服务提供了一个用于删除执行组件的函数：
 
-```
+```csharp
 ActorId actorToDelete = new ActorId(id);
 
 IActorService myActorServiceProxy = ActorServiceProxy.Create(
@@ -159,7 +159,7 @@ static class Program
             : base(context, typeInfo, newActor)
         { }
 
-    ```
+    ```csharp
     public Task BackupActorsAsync()
     {
         return this.BackupAsync(new BackupDescription(PerformBackupAsync));
@@ -182,7 +182,7 @@ static class Program
 
 在本示例中，`IMyActorService` 是一个远程协定，它实现 `IService`，然后由 `MyActorService` 实现。通过添加此远程协定，并使用 `ActorServiceProxy` 创建远程代理，现在 `IMyActorService` 的方法也可用于客户端：
 
-```
+```csharp
 IMyActorService myActorServiceProxy = ActorServiceProxy.Create<IMyActorService>(
     new Uri("fabric:/MyApp/MyService"), ActorId.CreateRandom());
 
@@ -218,13 +218,13 @@ await myActorServiceProxy.BackupActorsAsync();
 ### 执行组件 ID
 服务中创建的每个执行组件都具有与之关联的唯一 ID，并使用 `ActorId` 类表示。`ActorId` 是一个不透明的 ID 值，通过生成随机 ID，可将此值用于在各个服务分区中统一分布执行组件：
 
-```
+```csharp
 ActorProxy.Create<IMyActor>(ActorId.CreateRandom());
 ```
 
 每个 `ActorId` 都经过哈希算法转换为 Int64 类型值，这就是执行组件服务必须使用具有完整 Int64 键范围的 Int64 分区方案的原因。不过，`ActorID` 也可以使用自定义 ID 值，包括 GUID、字符串和 Int64。
 
-```
+```csharp
 ActorProxy.Create<IMyActor>(new ActorId(Guid.NewGuid()));
 ActorProxy.Create<IMyActor>(new ActorId("myActorId"));
 ActorProxy.Create<IMyActor>(new ActorId(1234));

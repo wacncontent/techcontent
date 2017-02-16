@@ -55,7 +55,7 @@ azure vm sizes --location <location>
 
 添加一个或多个数据磁盘。刚创建的 VHD 尚未格式化，请登录 VM 格式化该磁盘。在 Linux shell 中，数据磁盘显示为 `/dev/sdc`、`/dev/sdd` 等。你可以运行 `lsblk` 以列出块设备，包括磁盘。若要使用数据磁盘，请创建一个分区和文件系统，然后装载磁盘。例如：
 
-```
+```bat
 # Create a partition.
 sudo fdisk /dev/sdc     # Enter 'n' to partition, 'w' to write the change.     
 

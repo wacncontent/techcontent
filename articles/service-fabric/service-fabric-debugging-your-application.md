@@ -47,7 +47,7 @@ ms.author: vturecek;mikhegn
 
 6. 诊断事件可以在自动生成的 **ServiceEventSource.cs** 文件中查看并从应用程序代码中进行调用。
 
-    ```
+    ```csharp
     ServiceEventSource.Current.ServiceMessage(this, "My ServiceMessage with a parameter {0}", result.Value.ToString());
     ```
 

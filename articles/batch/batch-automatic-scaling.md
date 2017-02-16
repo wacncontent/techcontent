@@ -415,7 +415,7 @@ $TargetDedicated = min(400, $TotalNodes)
 
 下面的代码段演示如何通过 [Batch .NET][net_api] 库创建启用自动缩放的池 ([CloudPool][net_cloudpool])。该池的自动缩放公式在星期一将节点的目标数设置为 5，在每星期的其他日子将该目标数设置为 1。此外，自动缩放间隔设置为 30 分钟（请参阅下面的[自动缩放间隔](#automatic-scaling-interval)）。在本文的此部分与其他 C# 代码段中，“myBatchClient”是适当初始化的 [BatchClient][net_batchclient] 实例。
 
-```
+```csharp
 CloudPool pool = myBatchClient.PoolOperations.CreatePool("mypool", "3", "small");
 pool.AutoScaleEnabled = true;
 pool.AutoScaleFormula = "$TargetDedicated = (time().weekday==1?5:1);";
@@ -469,7 +469,7 @@ myBatchClient.PoolOperations.EnableAutoScale("mypool", myAutoScaleFormula);
 
 在这个使用 [Batch .NET][net_api] 库的代码段中，我们先对公式求值，然后将其应用到池 ([CloudPool][net_cloudpool])。
 
-```
+```csharp
 // First obtain a reference to the existing pool
 CloudPool pool = myBatchClient.PoolOperations.GetPool("mypool");
 
@@ -542,7 +542,7 @@ $TargetDedicated=$IsWorkingWeekdayHour?20:10;
 
 在此示例中，池大小是根据队列中的任务数来调整的。请注意，在公式字符串中，注释和分行符都是可以接受的。
 
-```
+```csharp
 // Get pending tasks for the past 15 minutes.
 $Samples = $ActiveTasks.GetSamplePercent(TimeInterval_Minute * 15);
 // If we have fewer than 70 percent data points, we use the last sample point, otherwise we use the maximum of
@@ -561,7 +561,7 @@ $NodeDeallocationOption = taskcompletion;
 
 这是另一个示例，可根据任务数调整池大小。此公式还考虑为池设置的 [MaxTasksPerComputeNode][net_maxtasks] 值。在对池启用了[并行任务执行](./batch-parallel-node-tasks.md)的情况下，此公式特别有用。
 
-```
+```csharp
 // Determine whether 70 percent of the samples have been recorded in the past 15 minutes; if not, use last sample
 $Samples = $ActiveTasks.GetSamplePercent(TimeInterval_Minute * 15);
 $Tasks = $Samples < 70 ? max(0,$ActiveTasks.GetSample(1)) : max( $ActiveTasks.GetSample(1),avg($ActiveTasks.GetSample(TimeInterval_Minute * 15)));
@@ -580,7 +580,7 @@ $NodeDeallocationOption = taskcompletion;
 
 此示例演示了一个 C# 代码段，其中的自动缩放公式可在初始时间段内将池大小设置为特定的节点数。然后，在初始时间段过后，该公式会根据正在运行和处于活动状态的任务的数目调整池大小。
 
-```
+```csharp
 string now = DateTime.UtcNow.ToString("r");
 string formula = string.Format(@"
 

@@ -92,18 +92,18 @@ Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文
 1. 打开 PowerShell 命令提示符
 2. 若要登录，请键入：
 
-    ```
+    ```powershell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud 
     ```
 3. 如果有多个订阅，请使用以下命令获取订阅列表：
 
-    ```
+    ```powershell 
     Get-AzureRmSubscription
     ```
 
     选择要使用的订阅。
 
-    ```
+    ```powershell 
     Select-AzureRmSubscription -SubscriptionId <Subscription Id>
     ```
 4. 更新 parameters.json 文件中的参数
@@ -113,18 +113,18 @@ Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文
 1. 打开终端窗口
 2. 若要登录，请键入：
 
-    ```
+    ```azurecli
     azure login -e AzureChinaCloud 
     ```
 3. 如果有多个订阅，请使用以下命令选择适当的订阅：
 
-    ```
+    ```powershell 
     azure account set <subscriptionNameOrId> 
     ```
 4. 更新 parameters.json 文件中的参数。
 5. 若要部署模板，请运行：
 
-    ```
+    ```azurecli 
     azure group deployment create -f <PathToTemplate> 
     ```
 

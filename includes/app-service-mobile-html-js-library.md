@@ -120,7 +120,7 @@ table
 
 使用相应日期创建 JavaScript 对象并异步调用 table.insert()：
 
-```
+```javascript
 var newItem = {
     name: 'My Name',
     signupDate: new Date()
@@ -141,7 +141,7 @@ Azure 移动应用 Node.js Server SDK 支持用于开发的动态架构。在动
 
 类似于 .insert() 方法，应创建 Update 对象，然后调用 .update()。Update 对象必须包含要更新的记录的 ID，此 ID 在读取记录或调用 .insert() 时获取。
 
-```
+```javascript
 var updateItem = {
     id: '7163bc7a-70b2-4dde-98e9-8818969611bd',
     name: 'My New Name'

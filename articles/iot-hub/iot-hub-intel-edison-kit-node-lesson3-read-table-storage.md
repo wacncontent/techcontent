@@ -36,7 +36,7 @@ ms.author: xshi
 
 1. 运行以下命令，获取连接字符串：
 
-    ```
+    ```bash
     az storage account list -g iot-sample --query [].name
     az storage account show-connection-string -g iot-sample -n {storage name}
     ```
@@ -45,7 +45,7 @@ ms.author: xshi
 
 2. 运行以下命令，在 Visual Studio Code 中打开配置文件 `config-edison.json`：
 
-    ```
+    ```bash
        # For Windows command prompt
        code %USERPROFILE%\.iot-hub-getting-started\config-edison.json
 
@@ -57,7 +57,7 @@ ms.author: xshi
 4. 保存 `config-edison.json` 文件。
 5. 运行以下命令，再次发送消息并从 Azure 表存储中读取这些消息：
 
-    ```
+    ```bash
        gulp run --read-storage
     ```
 

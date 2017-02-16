@@ -50,7 +50,7 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 1. 安装 Azure PowerShell（如果尚未安装）。建议使用 Azure PowerShell cmdlet 最新版本。请查看[如何安装和配置 Azure PowerShell](../powershell-install-configure.md#Install) 以获取安装说明。
 2. 请打开 Azure PowerShell 并运行以下命令。请记住要使用自己的凭据替换 *ACCOUNT\_NAME* 和 *ACCOUNT\_KEY = =* 。将 *CONTAINER\_NAME* 替换为选择的名称。
 
-    ```
+    ```powershell
     $context = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName "ACCOUNT_NAME" -StorageAccountKey "ACCOUNT_KEY=="
 
     New-AzureStorageContainer CONTAINER_NAME -Permission Off -Context $context

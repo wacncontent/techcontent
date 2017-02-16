@@ -82,7 +82,7 @@ Azure SQL 数据仓库使用事务日志将更改提交到数据库。每个分�
 ## 优化删除
 `DELETE` 是完整记录的操作。如果需要删除表或分区中的大量数据，`SELECT` 要保留的数据通常更有意义，其可作为最少记录的操作来运行。为此，可使用 [CTAS][CTAS] 创建新表。创建完以后，可通过 [RENAME][RENAME] 操作使用新创建的表将旧表交换出来。
 
-```
+```sql
 -- Delete all sales transactions for Promotions except PromotionKey 2.
 
 --Step 01. Create a new table select only the records we want to kep (PromotionKey 2)
@@ -117,7 +117,7 @@ RENAME OBJECT [dbo].[FactInternetSales_d] TO [FactInternetSales];
 
 在该案例中，我们回顾性地向表中的销售额添加折扣金额：
 
-```
+```sql
 --Step 01. Create a new table containing the "Update". 
 CREATE TABLE [dbo].[FactInternetSales_u]
 WITH
@@ -235,7 +235,7 @@ GO
 
 下面的代码演示上述五个步骤，讲述如何实现完整的分区切换例程。
 
-```
+```sql
 --Create a partitioned aligned empty table to switch out the data 
 IF OBJECT_ID('[dbo].[FactInternetSales_out]') IS NOT NULL
 BEGIN
@@ -341,7 +341,7 @@ DROP TABLE #ptn_data
 
 下面提供了可用示例。批大小已设置为一个简单的数字来突显该方法。实际中批大小会变得非常大。
 
-```
+```sql
 SET NO_COUNT ON;
 IF OBJECT_ID('tempdb..#t') IS NOT NULL
 BEGIN

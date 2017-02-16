@@ -46,26 +46,26 @@ ms.author: tomfitz
 
 例如，在 **C#** 中，可以使用以下代码从名为 **response** 的 **HttpWebResponse** 对象检索标头值：
 
-```
+```cs
 response.Headers.GetValues("x-ms-ratelimit-remaining-subscription-reads").GetValue(0)
 ```
 
 在 **PowerShell** 中，可以通过 Invoke-WebRequest 操作检索标头值。
 
-```
+```powershell
 $r = Invoke-WebRequest -Uri https://management.chinacloudapi.cn/subscriptions/{guid}/resourcegroups?api-version=2016-09-01 -Method GET -Headers $authHeaders
 $r.Headers["x-ms-ratelimit-remaining-subscription-reads"]
 ```
 
 或者，如果需要查看剩余请求数以便进行调试，可在 **PowerShell** cmdlet 中提供 **-Debug** 参数。
 
-```
+```powershell
 Get-AzureRmResourceGroup -Debug
 ```
 
 这会返回大量的信息，包括以下响应值：
 
-```
+```powershell
 ...
 DEBUG: ============================ HTTP RESPONSE ============================
 
@@ -80,13 +80,13 @@ x-ms-ratelimit-remaining-subscription-reads: 14999
 
 在 **Azure CLI** 中，可以使用更详细的选项检索标头值。
 
-```
+```azurecli
 azure group list -vv --json
 ```
 
 这会返回大量的信息，包括以下对象：
 
-```
+```azurecli
 ...
 silly: returnObject
 {

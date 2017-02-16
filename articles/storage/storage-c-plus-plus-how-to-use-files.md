@@ -46,7 +46,7 @@ ms.author: seguler;robinsh
 
 将以下 include 语句添加到 C++ 文件的顶部，会在此使用 Azure 存储 API 来访问文件：
 
-```
+```cpp
 #include "was/storage_account.h"
 #include "was/file.h"
 ```
@@ -55,7 +55,7 @@ ms.author: seguler;robinsh
 
 若要使用文件存储，你需要连接到你的 Azure 存储帐户。第一步是配置连接字符串，我们会使用该字符串连接到存储帐户。为此，我们需要定义一个静态变量。
 
-```
+```cpp
 // Define the connection-string with your values.
 const utility::string_t 
 storage_connection_string(U("DefaultEndpointsProtocol=https;AccountName=your_storage_account;AccountKey=your_storage_account_key;EndpointSuffix=core.chinacloudapi.cn"));
@@ -65,7 +65,7 @@ storage_connection_string(U("DefaultEndpointsProtocol=https;AccountName=your_sto
 
 可以使用 **cloud\_storage\_account** 类来表示您的存储帐户信息。若要从存储连接字符串中检索您的存储帐户信息，您可以使用 **parse** 方法。
 
-```
+```cpp
 // Retrieve storage account from connection string.	
 azure::storage::cloud_storage_account storage_account = 
   azure::storage::cloud_storage_account::parse(storage_connection_string);
@@ -75,7 +75,7 @@ azure::storage::cloud_storage_account storage_account =
 
 文件存储中的所有文件和目录都位于名为 **Share** 的容器内。存储帐户可以拥有无数的共享，只要帐户容量允许。若要获得共享及其内容的访问权限，你需要使用文件存储客户端。
 
-```
+```cpp
 // Create the file storage client.
 azure::storage::cloud_file_client file_client = 
   storage_account.create_cloud_file_client();
@@ -83,7 +83,7 @@ azure::storage::cloud_file_client file_client =
 
 使用文件存储客户端以后，你就可以获得对共享的引用。
 
-```
+```cpp
 // Get a reference to the file share
 azure::storage::cloud_file_share share = 
   file_client.get_share_reference(_XPLATSTR("my-sample-share"));
@@ -91,7 +91,7 @@ azure::storage::cloud_file_share share =
 
 若要创建共享，可使用 **cloud\_file\_share** 对象的 **create\_if\_not\_exists** 方法。
 
-```
+```cpp
 if (share.create_if_not_exists()) {	
     std::wcout << U("New share created") << std::endl;	
 }
@@ -105,14 +105,14 @@ Azure 文件存储共享至少包含文件所在的根目录。在本部分，�
 
 上载文件的第一步是获取对文件所在的目录的引用。为此，需要调用共享对象的 **get\_root\_directory\_reference** 方法。
 
-```
+```cpp
 //Get a reference to the root directory for the share.
 azure::storage::cloud_file_directory root_dir = share.get_root_directory_reference();
 ```
 
 现在，已经拥有共享所在的根目录的引用，因此可以将文件上传到其中。此示例从文件、文本和流上传。
 
-```
+```cpp
 // Upload a file from a stream.
 concurrency::streams::istream input_stream = 
   concurrency::streams::file_stream<uint8_t>::open_istream(_XPLATSTR("DataFile.txt")).get();
@@ -136,7 +136,7 @@ file4.upload_from_file(_XPLATSTR("DataFile.txt"));
 
 也可以将文件置于子目录中，不必将其全部置于根目录中，以便对存储进行有效的组织。Azure 文件存储服务可以创建任意数目的目录，只要你的帐户允许。下面的代码会在根目录下创建一个名为 **my-sample-directory** 的目录，以及一个名为 **my-sample-subdirectory** 的子目录。
 
-```
+```cpp
 // Retrieve a reference to a directory
 azure::storage::cloud_file_directory directory = share.get_directory_reference(_XPLATSTR("my-sample-directory"));
 
@@ -155,7 +155,7 @@ subdirectory.create_if_not_exists();
 
 下面的代码演示如何检索和输出共享的根目录中每一项的 URI。
 
-```
+```cpp
 //Get a reference to the root directory for the share.
 azure::storage::cloud_file_directory root_dir = 
   share.get_root_directory_reference();
@@ -182,7 +182,7 @@ for (auto it = directory.list_files_and_directories(); it != end_of_results; ++i
 
 下面的示例使用 **download\_to\_stream** 和 **download\_text** 方法，演示如何下载之前部门中创建的文件。
 
-```
+```cpp
 // Download as text
 azure::storage::cloud_file text_file = 
   root_dir.get_file_reference(_XPLATSTR("my-sample-file-2"));
@@ -206,7 +206,7 @@ outfile.close();
 
 另一项常见的文件存储操作是删除文件。下面的代码删除存储在根目录下的名为 my-sample-file-3 的文件。
 
-```
+```cpp
 // Get a reference to the root directory for the share.	
 azure::storage::cloud_file_share share = 
   file_client.get_share_reference(_XPLATSTR("my-sample-share"));
@@ -224,7 +224,7 @@ file.delete_file_if_exists();
 
 删除目录很简单，但需注意的是，不能删除仍然包含文件或其他目录的目录。
 
-```
+```cpp
 // Get a reference to the share.
 azure::storage::cloud_file_share share = 
   file_client.get_share_reference(_XPLATSTR("my-sample-share"));
@@ -247,7 +247,7 @@ directory.delete_directory_if_exists();
 
 删除共享时，可针对 cloud\_file\_share 对象调用 **delete\_if\_exists** 方法。以下是具有此类功能的示例代码。
 
-```
+```cpp
 // Get a reference to the share.
 azure::storage::cloud_file_share share = 
   file_client.get_share_reference(_XPLATSTR("my-sample-share"));
@@ -264,7 +264,7 @@ share.delete_share_if_exists();
 
 下面的示例演示如何检查共享的当前使用情况，以及如何设置共享的配额。
 
-```
+```cpp
 // Parse the connection string for the storage account.
 azure::storage::cloud_storage_account storage_account = 
   azure::storage::cloud_storage_account::parse(storage_connection_string);
@@ -294,7 +294,7 @@ if (share.exists())
 
 以下示例在一个共享上创建共享访问策略，然后使用该策略为共享中的一个文件提供 SAS 约束。
 
-```
+```cpp
 // Parse the connection string for the storage account.
 azure::storage::cloud_storage_account storage_account = 
   azure::storage::cloud_storage_account::parse(storage_connection_string);

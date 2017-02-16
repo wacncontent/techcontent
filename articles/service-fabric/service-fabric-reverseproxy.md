@@ -134,7 +134,7 @@ http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
 
 1. 在模板的[“参数”部分](../azure-resource-manager/resource-group-authoring-templates.md)定义反向代理的端口。
 
-    ```
+    ```json
     "SFReverseProxyPort": {
         "type": "int",
         "defaultValue": 19008,
@@ -148,7 +148,7 @@ http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
 
     对于“2016-09-01”以前的 apiVersion，端口由参数名称 ***httpApplicationGatewayEndpointPort*** 标识
 
-    ```
+    ```json
     {
         "apiVersion": "2016-03-01",
         "type": "Microsoft.ServiceFabric/clusters",
@@ -169,7 +169,7 @@ http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
 
     对于“2016-09-01”或以后的 apiVersion，端口由参数名称 ***reverseProxyEndpointPort*** 标识
 
-    ```
+    ```json
     {
         "apiVersion": "2016-09-01",
         "type": "Microsoft.ServiceFabric/clusters",
@@ -190,7 +190,7 @@ http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
 
 3. 若要从 Azure 群集外部与反向代理通信，请为步骤 1 中指定的端口设置 **Azure 负载均衡器规则**。
 
-    ```
+    ```json
     {
         "apiVersion": "[variables('lbApiVersion')]",
         "type": "Microsoft.Network/loadBalancers",
@@ -237,7 +237,7 @@ http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
 
     对于“2016-09-01”以前的 apiVersion，证书由参数名称 ***httpApplicationGatewayCertificate*** 标识
 
-    ```
+    ```json
     {
         "apiVersion": "2016-03-01",
         "type": "Microsoft.ServiceFabric/clusters",
@@ -260,7 +260,7 @@ http://10.0.05:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
 
     对于“2016-09-01”或以后的 apiVersion，证书由参数名称 ***reverseProxyCertificate*** 标识
 
-    ```
+    ```json
     {
         "apiVersion": "2016-09-01",
         "type": "Microsoft.ServiceFabric/clusters",

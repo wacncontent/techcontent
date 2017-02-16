@@ -39,7 +39,7 @@ Azure 服务总线使用多个消息中转站来处理消息，并用多个消�
 
 有多种方法可以创建分区的队列或主题。当从你的应用程序中创建队列或主题时，可以通过分别将 [QueueDescription.EnablePartitioning][] 或 [TopicDescription.EnablePartitioning][] 属性设置为 **true** 来启用队列或主题的分区。这些属性必须在队列或主题创建时设置。无法更改现有队列或主题上的这些属性。例如：
 
-```
+```csharp
     // Create partitioned topic
     NamespaceManager ns = NamespaceManager.CreateFromConnectionString(myConnectionString);
     TopicDescription td = new TopicDescription(TopicName);
@@ -77,7 +77,7 @@ Azure 服务总线使用多个消息中转站来处理消息，并用多个消�
 
 作为事务一部分发送的消息必须指定分区键。这可以是以下属性之一：[BrokeredMessage.SessionId][]、[BrokeredMessage.PartitionKey][] 或 [BrokeredMessage.MessageId][]。所有作为同一事务一部分发送的消息必须指定相同的分区键。如果你尝试在事务中发送一条没有分区键的消息，服务总线会返回 **InvalidOperationException** 异常。如果你尝试在同一事务中发送多条具有不同分区键的消息，服务总线会返回 **InvalidOperationException** 异常。例如：
 
-```
+```csharp
     CommittableTransaction committableTransaction = new CommittableTransaction();
     using (TransactionScope ts = new TransactionScope(committableTransaction))
     {
@@ -97,7 +97,7 @@ Azure 服务总线使用多个消息中转站来处理消息，并用多个消�
 
 与常规（非分区）的队列或主题不同，不可能使用单一事务来将多条消息发送到不同会话。如果进行尝试，服务总线返回 **InvalidOperationException **异常。例如：
 
-```
+```csharp
     CommittableTransaction committableTransaction = new CommittableTransaction();
     using (TransactionScope ts = new TransactionScope(committableTransaction))
     {

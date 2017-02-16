@@ -140,7 +140,7 @@ azure storage container create <containername> --account-name <storageaccountnam
 
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
-```powershell
+```
 $SubscriptionID = "<Your Azure Subscription ID>"
 $ResourceGroupName = "<New Azure Resource Group Name>"
 $Location = "CHINA EAST"
@@ -250,7 +250,7 @@ Get-Command *blob*
 ### 下载文件
 以下脚本将一个块 Blob 下载到当前文件夹。运行该脚本之前，请将该目录更改为你有写权限的文件夹。
 
-```powershell
+```
 $resourceGroupName = "<AzureResourceGroupName>"
 $storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at creation.
 $containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
@@ -273,7 +273,7 @@ cat "./$blob"
 
 如果提供资源组名称和群集名称，可以使用以下代码：
 
-```powershell
+```
 $resourceGroupName = "<AzureResourceGroupName>"
 $clusterName = "<HDInsightClusterName>"
 $blob = "example/data/sample.log" # The name of the blob to be downloaded.
@@ -301,7 +301,7 @@ Get-AzureStorageBlob -Container $containerName -Context $storageContext -prefix 
 ### 使用未定义的存储帐户运行 Hive 查询
 此示例显示如何列出在创建过程中未定义的存储帐户的文件夹。
 
-```powershell
+```
 $clusterName = "<HDInsightClusterName>"
 
 $undefinedStorageAccount = "<UnboundedStorageAccountUnderTheSameSubscription>"

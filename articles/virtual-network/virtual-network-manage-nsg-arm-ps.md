@@ -122,7 +122,7 @@ Subnets              : [...]
 ### 列出 NSG 的所有规则
 若要查看名为 **NSG-FrontEnd** 的 NSG 的规则，请输入以下命令：
 
-```
+```powershell
 Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd | Select SecurityRules -ExpandProperty SecurityRules
 ```
 
@@ -165,7 +165,7 @@ Direction                : Inbound
 ### <a name="View-NSGs-associations"></a>查看 NSG 关联项
 若要查看与 **NSG-FrontEnd** NSG 关联的资源，请运行以下命令：
 
-```
+```powershell
 Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd
 ```
 
@@ -191,13 +191,13 @@ Subnets              : [
 
 1. 运行以下命令，检索现有 NSG 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nsg = Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd
     ```
 
 2. 运行以下命令，将规则添加到 NSG 中：
 
-    ```
+    ```powershell
     Add-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $nsg `
     -Name https-rule `
     -Description "Allow HTTPS" `
@@ -213,7 +213,7 @@ Subnets              : [
 
 3. 若要保存对 NSG 所做的更改，请运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg
     ```
 
@@ -254,13 +254,13 @@ Subnets              : [
 
 1. 运行以下命令，检索现有 NSG 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nsg = Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd
     ```
 
 2. 使用新规则设置运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $nsg `
     -Name https-rule `
     -Description "Allow HTTPS" `
@@ -276,7 +276,7 @@ Subnets              : [
 
 3. 若要保存对 NSG 所做的更改，请运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg
     ```
 
@@ -315,19 +315,19 @@ Subnets              : [
 ### 删除规则
 1. 运行以下命令，检索现有 NSG 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nsg = Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd
     ```
 
 2. 运行以下命令，从 NSG 中删除规则：
 
-    ```
+    ```powershell
     Remove-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $nsg -Name https-rule
     ```
 
 3. 运行以下命令，保存对 NSG 所做的更改：
 
-    ```
+    ```powershell
     Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg
     ```
 
@@ -356,25 +356,25 @@ Subnets              : [
 
 1. 运行以下命令，检索现有 NSG 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nsg = Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd
     ```
 
 2. 运行以下命令，检索现有 NIC 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nic = Get-AzureRmNetworkInterface -ResourceGroupName RG-NSG -Name TestNICWeb1
     ```
 
 3. 输入以下命令，将 **NIC** 变量的 **NetworkSecurityGroup** 属性设置为 **NSG** 变量的值：
 
-    ```
+    ```powershell
     $nic.NetworkSecurityGroup = $nsg
     ```
 
 4. 若要保存对 NIC 所做的更改，请运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmNetworkInterface -NetworkInterface $nic
     ```
 
@@ -395,25 +395,25 @@ Subnets              : [
 
 1. 运行以下命令，检索现有 NSG 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nsg = Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd
     ```
 
 2. 运行以下命令，检索现有 NIC 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nic = Get-AzureRmNetworkInterface -ResourceGroupName RG-NSG -Name TestNICWeb1
     ```
 
 3. 运行以下命令，将 **NIC** 变量的 **NetworkSecurityGroup** 属性设置为 **$null**：
 
-    ```
+    ```powershell
     $nic.NetworkSecurityGroup = $null
     ```
 
 4. 若要保存对 NIC 所做的更改，请运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmNetworkInterface -NetworkInterface $nic
     ```
 
@@ -428,25 +428,25 @@ Subnets              : [
 
 1. 运行以下命令，检索现有 VNet 并将其存储在变量中：
 
-    ```
+    ```powershell
     $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName RG-NSG -Name TestVNet
     ```
 
 2. 运行以下命令，检索 **FrontEnd** 子网并将其存储在变量中：
 
-    ```
+    ```powershell
     $subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name FrontEnd
     ```
 
 3. 输入以下命令，将 **subnet** 变量的 **NetworkSecurityGroup** 属性设置为 **$null**：
 
-    ```
+    ```powershell
     $subnet.NetworkSecurityGroup = $null
     ```
 
 4. 若要保存对子网所做的更改，请运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     ```
 
@@ -479,31 +479,31 @@ Subnets              : [
 
 1. 运行以下命令，检索现有 VNet 并将其存储在变量中：
 
-    ```
+    ```powershell
     $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName RG-NSG -Name TestVNet
     ```
 
 2. 运行以下命令，检索 **FrontEnd** 子网并将其存储在变量中：
 
-    ```
+    ```powershell
     $subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name FrontEnd
     ```
 
 3. 运行以下命令，检索现有 NSG 并将其存储在变量中：
 
-    ```
+    ```powershell
     $nsg = Get-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd
     ```
 
 4. 运行以下命令，将 **subnet** 变量的 **NetworkSecurityGroup** 属性设置为 **$null**：
 
-    ```
+    ```powershell
     $subnet.NetworkSecurityGroup = $nsg
     ```
 
 5. 若要保存对子网所做的更改，请运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     ```
 
@@ -529,7 +529,7 @@ Subnets              : [
 3. 如果 NSG 关联到任意子网，请为每个子网运行 `azure network vnet subnet set`，如[取消 NSG 与子网之间的关联](#Dissociate-an-NSG-from-a-subnet)中所示。
 4. 若要删除 NSG，请运行以下命令：
 
-    ```
+    ```powershell
     Remove-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd -Force
     ```
 

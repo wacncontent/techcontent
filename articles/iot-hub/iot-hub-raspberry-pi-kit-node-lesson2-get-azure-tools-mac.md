@@ -42,7 +42,7 @@ ms.author: xshi
 
 通过运行以下命令安装 Python 和 pip：
 
-```
+```bash
     brew install python
 ```
 
@@ -57,7 +57,7 @@ Azure CLI 提供适用于 Azure 的多平台命令行体验。可以直接通过
        pip install --upgrade azure-cli-iot
 2. 运行以下命令，对安装进行验证：
 
-    ```
+    ```bash
     az iot -h
     ```
 

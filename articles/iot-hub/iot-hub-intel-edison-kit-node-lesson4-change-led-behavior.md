@@ -32,14 +32,14 @@ ms.author: xshi
 ## 将函数添加到 app.js 和 gulpfile.js
 1. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
     cd Lesson4
     code .
     ```
 
 2. 打开 `app.js` 文件，然后在 blinkLED() 函数之后添加以下函数：
 
-    ```
+    ```javascript
        function turnOnLED() {
          myLed.write(1);
        }
@@ -53,7 +53,7 @@ ms.author: xshi
 
 3. 在 `receiveMessageCallback` 函数的 switch-case 块中的“blink”案例之前添加以下条件：
 
-    ```
+    ```javascript
        case 'on':
          turnOnLED();
          break;
@@ -65,7 +65,7 @@ ms.author: xshi
     现在已将示例应用程序配置为通过消息响应更多指令。“on”指令打开 LED，“off”指令关闭 LED。
 4. 打开 gulpfile.js 文件，然后在函数 `sendMessage` 之前添加新函数：
 
-    ```
+    ```javascript
        var buildCustomMessage = function (messageId) {
          if ((messageId & 1) && (messageId < MAX_MESSAGE_COUNT)) {
            return new Message(JSON.stringify({ command: 'on', messageId: messageId }));
@@ -81,7 +81,7 @@ ms.author: xshi
 
 5. 在 `sendMessage` 函数中，将 `var message = buildMessage(sentMessageCount);` 行替换为新行，如以下代码片段所示：
 
-    ```
+    ```javascript
        var message = buildCustomMessage(sentMessageCount);
     ```
 
@@ -90,7 +90,7 @@ ms.author: xshi
 ### 部署并运行示例应用程序
 运行以下命令，在 Edison 上部署并运行示例应用程序：
 
-```
+```bash
 gulp deploy && gulp run
 ```
 

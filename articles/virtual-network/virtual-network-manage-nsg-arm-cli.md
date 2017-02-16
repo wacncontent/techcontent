@@ -39,7 +39,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ### 查看现有 NSG
 若要查看特定资源组中 NSG 的列表，请运行 `azure network nsg list` 命令，如下所示。
 
-```
+```azurecli
 azure network nsg list --resource-group RG-NSG
 ```
 
@@ -58,7 +58,7 @@ info:    network nsg list command OK
 ### 列出 NSG 的所有规则
 若要查看名为 **NSG-FrontEnd** 的 NSG 的规则，请运行 `azure network nsg show` 命令，如下所示。
 
-```
+```azurecli
 azure network nsg show --resource-group RG-NSG --name NSG-FrontEnd
 ```
 
@@ -95,7 +95,7 @@ info:    network nsg show command OK
 
 若要查看与 **NSG-FrontEnd** NSG 关联的资源，请运行 `azure network nsg show` 命令，如下所示。请注意，唯一的区别是 **--json** 参数的使用。
 
-```
+```azurecli
 azure network nsg show --resource-group RG-NSG --name NSG-FrontEnd --json
 ```
 
@@ -120,7 +120,7 @@ azure network nsg show --resource-group RG-NSG --name NSG-FrontEnd --json
 ### 添加规则
 若要向 **NSG-FrontEnd** NSG 添加允许来自任何计算机的**入站**流量流入端口 **443** 的规则，请输入以下命令：
 
-```
+```azurecli
 azure network nsg rule create --resource-group RG-NSG \
     --nsg-name NSG-FrontEnd \
     --name allow-https \
@@ -161,7 +161,7 @@ info:    network nsg rule create command OK
 ### 更改规则
 若要将上面创建的规则更改为仅允许来自 **Internet** 的入站流量，请运行以下命令：
 
-```
+```azurecli
 azure network nsg rule set --resource-group RG-NSG \
     --nsg-name NSG-FrontEnd \
     --name allow-https \
@@ -194,7 +194,7 @@ info:    network nsg rule set command OK
 ### 删除规则
 若要删除上面创建的规则，请运行以下命令：
 
-```
+```azurecli
 azure network nsg rule delete --resource-group RG-NSG \
     --nsg-name NSG-FrontEnd \
     --name allow-https \
@@ -220,7 +220,7 @@ info:    network nsg rule delete command OK
 ### 将 NSG 关联到 NIC
 若要将 **NSG-FrontEnd** NSG 关联到 **TestNICWeb1** NIC，请运行以下命令：
 
-```
+```azurecli
 azure network nic set --resource-group RG-NSG \
     --name TestNICWeb1 \
     --network-security-group-name NSG-FrontEnd
@@ -259,7 +259,7 @@ info:    network nic set command OK
 
 若要取消 **NSG-FrontEnd** NSG 与 **TestNICWeb1** NIC 之间的关联，请运行以下命令：
 
-```
+```azurecli
 azure network nic set --resource-group RG-NSG --name TestNICWeb1 --network-security-group-id ""
 ```
 
@@ -297,7 +297,7 @@ info:    network nic set command OK
 ### <a name="Dissociate-an-NSG-from-a-subnet"></a>取消 NSG 与子网之间的关联
 若要取消 **NSG-FrontEnd** NSG 与 **FrontEnd** 子网之间的关联，请运行以下命令：
 
-```
+```azurecli
 azure network vnet subnet set --resource-group RG-NSG \
     --vnet-name TestVNet \
     --name FrontEnd \
@@ -326,7 +326,7 @@ info:    network vnet subnet set command OK
 ### 将 NSG 关联到子网
 若要再次将 **NSG-FrontEnd** NSG 关联到 **FronEnd** 子网，请运行以下命令：
 
-```
+```azurecli
 azure network vnet subnet set --resource-group RG-NSG \
     --vnet-name TestVNet \
     --name FrontEnd \
@@ -366,7 +366,7 @@ azure network vnet subnet set --resource-group RG-NSG \
 3. 如果 NSG 关联到任意子网，请为每个子网运行 `azure network vnet subnet set`，如[取消 NSG 与子网之间的关联](#Dissociate-an-NSG-from-a-subnet)中所示。
 4. 若要删除 NSG，请运行以下命令：
 
-    ```
+    ```azurecli
     azure network nsg delete --resource-group RG-NSG --name NSG-FrontEnd --quiet
     ```
 

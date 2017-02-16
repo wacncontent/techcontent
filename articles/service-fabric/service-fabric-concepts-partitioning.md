@@ -126,7 +126,7 @@ Service Fabric 提供了三个分区方案可供选择：
 
 5. 设置分区数。打开 AlphabetPartitions 项目的 ApplicationPackageRoot 文件夹中的 Applicationmanifest.xml 文件，然后将参数 Processing\_PartitionCount 更新为 26，如下所示。
 
-    ```
+    ```xml
     <Parameter Name="Processing_PartitionCount" DefaultValue="26" />
     ```
 
@@ -140,7 +140,7 @@ Service Fabric 提供了三个分区方案可供选择：
 
 6. 要使访问可以访问，请通过添加 Alphabet.Processing 服务的 ServiceManifest.xml（位于 PackageRoot 文件夹中）的终结点元素，在某个端口上打开终结点，如下所示：
 
-    ```
+    ```xml
     <Endpoint Name="ProcessingServiceEndpoint" Port="8089" Protocol="http" Type="Internal" />
     ```
 
@@ -157,7 +157,7 @@ Service Fabric 提供了三个分区方案可供选择：
 
     额外 GUID 在其中用于辅助副本也针对只读请求进行侦听的高级情况。如果是这种情况，则要确保在从主副本转换为辅助副本时使用新的唯一地址，以强制客户端重新解析地址。“+”在此处用作地址，以便副本在所有可用主机（IP、FQDM、localhost 等）上进行侦听 下面的代码演示一个示例。
 
-    ```
+    ```CSharp
     protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
     {
          return new[] { new ServiceReplicaListener(context => this.CreateInternalListener(context))};
@@ -185,7 +185,7 @@ Service Fabric 提供了三个分区方案可供选择：
 
 9. 最后一步是将处理逻辑添加到服务，如下所示。
 
-    ```
+    ```CSharp
     private async Task ProcessInternalRequest(HttpListenerContext context, CancellationToken cancelRequest)
     {
         string output = null;
@@ -239,13 +239,13 @@ Service Fabric 提供了三个分区方案可供选择：
 
 12. 在 Alphabet.WebApi 服务的 ServiceManifest.xml 中更新终结点信息，以打开端口，如下所示。
 
-    ```
+    ```xml
     <Endpoint Name="WebApiServiceEndpoint" Protocol="http" Port="8081"/>
     ```
 
 13. 需要在 Web 类中返回 ServiceInstanceListeners 的集合。同样，可以选择实现简单 HttpCommunicationListener。
 
-    ```
+    ```CSharp
     protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
     {
         return new[] {new ServiceInstanceListener(context => this.CreateInputListener(context))};
@@ -262,7 +262,7 @@ Service Fabric 提供了三个分区方案可供选择：
 
 14. 现在需要实现处理逻辑。HttpCommunicationListener 在请求进入时调用 `ProcessInputRequest`。那么，我们来继续进行，添加下面的代码。
 
-    ```
+    ```CSharp
     private async Task ProcessInputRequest(HttpListenerContext context, CancellationToken cancelRequest)
     {
         String output = null;
@@ -308,7 +308,7 @@ Service Fabric 提供了三个分区方案可供选择：
 
     让我们逐步演练其步骤。此代码将查询字符串参数 `lastname` 的第一个字母读入一个字符中。随后，从姓氏第一个字母的十六进制值减去 `A` 的十六进制值，以确定此字母的分区键。
 
-    ```
+    ```CSharp
     string lastname = context.Request.QueryString["lastname"];
     char firstLetterOfLastName = lastname.First();
     ServicePartitionKey partitionKey = new ServicePartitionKey(Char.ToUpper(firstLetterOfLastName) - 'A');
@@ -316,19 +316,19 @@ Service Fabric 提供了三个分区方案可供选择：
 
     请记住，对于此示例，我们在使用 26 个分区，其中每个分区有一个分区键。接下来，通过对 `servicePartitionResolver` 对象使用 `ResolveAsync` 方法，获取此键的服务分区 `partition`。`servicePartitionResolver` 定义为
 
-    ```
+    ```CSharp
     private readonly ServicePartitionResolver servicePartitionResolver = ServicePartitionResolver.GetDefault();
     ```
 
     `ResolveAsync` 方法采用服务 URI、分区键和取消标记作为参数。处理服务的服务 URI 为 `fabric:/AlphabetPartitions/Processing`。接下来，我们会获取分区的终结点。
 
-    ```
+    ```CSharp
     ResolvedServiceEndpoint ep = partition.GetEndpoint()
     ```
 
     最后，我们会构建终结点 URL 以及查询字符串，并调用处理服务。
 
-    ```
+    ```CSharp
     JObject addresses = JObject.Parse(ep.Address);
     string primaryReplicaAddress = (string)addresses["Endpoints"].First();
 
@@ -342,7 +342,7 @@ Service Fabric 提供了三个分区方案可供选择：
 
 15. 最后一步是测试服务。Visual Studio 将应用程序参数用于本地和云部署。要在本地测试具有 26 个分区的服务，需要在 AlphabetPartitions 项目的 ApplicationParameters 文件夹中更新 `Local.xml` 文件，如下所示：
 
-    ```
+    ```xml
     <Parameters>
         <Parameter Name="Processing_PartitionCount" Value="26" />
         <Parameter Name="WebApi_InstanceCount" Value="1" />

@@ -67,19 +67,19 @@ ms.author: tomfitz
 ## PowerShell
 1. 若要检索日志条目，请运行 **Get-AzureRmLog** 命令。你可以提供附加参数来筛选条目列表。如果未指定开始和结束时间，将返回最后一个小时的条目。例如，若要检索过去一小时针对某个资源组的操作，请运行：
 
-    ```
+    ```powershell
     Get-AzureRmLog -ResourceGroup ExampleGroup
     ```
 
     以下示例演示了如何使用活动日志来调查在指定时间内执行的操作。开始日期和结束日期以日期格式指定。
 
-    ```
+    ```powershell
     Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime 2015-08-28T06:00 -EndTime 2015-09-10T06:00
     ```
 
     或者，可以使用 date 函数来指定日期范围，例如过去 14 天。
 
-    ```
+    ```powershell
     Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14)
     ```
 
@@ -89,7 +89,7 @@ ms.author: tomfitz
 
     就此示例来说，该命令显示 someone@contoso.com 执行了停止操作。
 
-    ```
+    ```powershell 
     Authorization     :
     Scope     : /subscriptions/xxxxx/resourcegroups/ExampleGroup/providers/Microsoft.Web/sites/ExampleSite
     Action    : Microsoft.Web/sites/stop/action
@@ -109,13 +109,13 @@ ms.author: tomfitz
 
 3. 你可以查看特定用户针对某个资源组执行的操作，即使该资源组不再存在。
 
-    ```
+    ```powershell 
     Get-AzureRmLog -ResourceGroup deletedgroup -StartTime (Get-Date).AddDays(-14) -Caller someone@contoso.com
     ```
 
 4. 可以筛选失败的操作。
 
-    ```
+    ```powershell
     Get-AzureRmLog -ResourceGroup ExampleGroup -Status Failed
     ```
 
@@ -136,7 +136,7 @@ ms.author: tomfitz
 ## Azure CLI
 * 若要检索日志条目，请运行 **azure group log show** 命令。
 
-    ```
+    ```azurecli
     azure group log show ExampleGroup --json
     ```
 

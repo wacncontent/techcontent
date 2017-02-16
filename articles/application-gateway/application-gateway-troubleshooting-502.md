@@ -41,7 +41,7 @@ ms.author: amsriva
 
 确保后端地址池不为空。这可以通过 PowerShell、CLI 或门户来实现。
 
-```
+```powershell
 Get-AzureRmApplicationGateway -Name "SampleGateway" -ResourceGroupName "ExampleResourceGroup"
 ```
 
@@ -49,7 +49,7 @@ Get-AzureRmApplicationGateway -Name "SampleGateway" -ResourceGroupName "ExampleR
 
 BackendAddressPoolsText：
 
-```
+```json
 [{
     "BackendAddresses": [{
         "ipAddress": "10.0.0.10",
@@ -141,7 +141,7 @@ BackendAddressPoolsText：
 
 应用程序网关允许用户通过 BackendHttpSetting 配置此设置，然后可将此设置应用到不同的池。不同的后端池可以有不同的 BackendHttpSetting，因此可配置不同的请求超时。
 
-```
+```powershell
 New-AzureRmApplicationGatewayBackendHttpSettings -Name 'Setting01' -Port 80 -Protocol Http -CookieBasedAffinity Enabled -RequestTimeout 60
 ```
 

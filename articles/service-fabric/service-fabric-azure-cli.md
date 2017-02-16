@@ -23,7 +23,7 @@ ms.author: subramar
 
 第一步是通过 git rep 获取最新版本的 CLI，然后使用以下命令在路径中设置该版本：
 
-```
+```sh
  git clone https://github.com/Azure/azure-xplat-cli.git
  cd azure-xplat-cli
  npm install
@@ -33,19 +33,19 @@ ms.author: subramar
 
 对于 CLI 支持的每个命令，可以键入该命令的名称获取相关的帮助。这些命令支持自动补全。例如，使用以下命令可以获取所有应用程序命令的帮助。
 
-```
+```sh
  azure servicefabric application 
 ```
 
 可以进一步筛选特定命令的帮助，如以下示例所示：
 
-```
+```sh
  azure servicefabric application  create
 ```
 
 若要在 CLI 中启用自动补全，请运行以下命令：
 
-```
+```sh
 azure --completion >> ~/azure.completion.sh
 echo 'source ~/azure.completion.sh' >> ~/.sh\_profile
 source ~/azure.completion.sh
@@ -53,27 +53,27 @@ source ~/azure.completion.sh
 
 以下命令连接到群集，并显示群集中的节点：
 
-```
+```sh
  azure servicefabric cluster connect http://localhost:19080
  azure servicefabric node show
 ```
 
 若要使用命名参数并了解其用途，可以在命令后面键入 --help。例如：
 
-```
+```sh
  azure servicefabric node show --help
  azure servicefabric application create --help
 ```
 
 从**不属于群集**的计算机连接到多计算机群集时，可以使用以下命令：
 
-```
+```sh
  azure servicefabric cluster connect http://PublicIPorFQDN:19080
 ```
 
 将 PublicIPorFQDN 标记适当地替换为实际 IP 或 FQDN。从**属于群集**的计算机连接到多计算机群集时，可以使用以下命令：
 
-```
+```sh
  azure servicefabric cluster connect --connection-endpoint http://localhost:19080 --client-connection-endpoint PublicIPorFQDN:19000
 ```
 
@@ -85,13 +85,13 @@ source ~/azure.completion.sh
 
 以下 Azure CLI 命令说明如何连接到安全群集。证书详细信息必须与群集节点上的证书匹配。
 
-```
+```sh
 azure servicefabric cluster connect --connection-endpoint http://ip:19080 --client-key-path /tmp/key --client-cert-path /tmp/cert
 ```
 
 如果证书具有证书颁发机构 (CA)，需要按以下示例所示添加 --ca-cert-path 参数：
 
-```
+```sh
  azure servicefabric cluster connect --connection-endpoint http://ip:19080 --client-key-path /tmp/key --client-cert-path /tmp/cert --ca-cert-path /tmp/ca1,/tmp/ca2 
 ```
 
@@ -99,13 +99,13 @@ azure servicefabric cluster connect --connection-endpoint http://ip:19080 --clie
 
 如果证书中的“公用名”与连接终结点不匹配，可以使用 `--strict-ssl` 参数绕过验证，如以下命令中所示：
 
-```
+```sh
 azure servicefabric cluster connect --connection-endpoint http://ip:19080 --client-key-path /tmp/key --client-cert-path /tmp/cert --strict-ssl false 
 ```
 
 如果想要跳过 CA 验证，可以添加 --reject-unauthorized 参数，如以下命令中所示：
 
-```
+```sh
 azure servicefabric cluster connect --connection-endpoint http://ip:19080 --client-key-path /tmp/key --client-cert-path /tmp/cert --reject-unauthorized false 
 ```
 
@@ -144,7 +144,7 @@ azure servicefabric application create [applicationName] [applicationTypeName] [
 
 接下来，可以使用以下命令启动应用程序升级：
 
-```
+```sh
  azure servicefabric application upgrade start -–application-name fabric:/MySFApp -–target-application-type-version 2.0  --rolling-upgrade-mode UnmonitoredAuto
 ```
 
@@ -162,7 +162,7 @@ azure servicefabric application create [applicationName] [applicationTypeName] [
 
 如果该问题持续出现，请使用以下命令更改 **sshd\_config** 文件，尝试对 ssh 禁用 PAM：
 
-```
+```sh
  sudo vi /etc/ssh/sshd_config
 #Change the line with UsePAM to the following: UsePAM no
  sudo service sshd reload
@@ -170,7 +170,7 @@ azure servicefabric application create [applicationName] [applicationTypeName] [
 
 如果问题还是没有解决，请运行以下命令尝试增加 ssh 会话数目：
 
-```
+```sh
  sudo vi /etc/ssh/sshd\_config
 # Add the following to lines:
 # MaxSessions 500

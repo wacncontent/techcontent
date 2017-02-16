@@ -89,7 +89,7 @@ require "azure"
 
 Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_SERVICEBUS\_ACCESS\_KEY** 以获取连接到服务总线命名空间所需的信息。如果未设置这些环境变量，则在使用 **Azure::ServiceBusService** 之前必须通过以下代码指定命名空间信息：
 
-```
+```ruby
 Azure.config.sb_namespace = "<your azure service bus namespace>"
 Azure.config.sb_access_key = "<your azure service bus access key>"
 ```
@@ -100,7 +100,7 @@ Azure.config.sb_access_key = "<your azure service bus access key>"
 
 可以通过 **Azure::ServiceBusService** 对象处理队列。若要创建队列，请使用 **create\_queue()** 方法。以下示例将创建一个队列或输出任何错误。
 
-```
+```ruby
 azure_service_bus_service = Azure::ServiceBusService.new
 begin
   queue = azure_service_bus_service.create_queue("test-queue")
@@ -111,7 +111,7 @@ end
 
 还可以通过其他选项传递 **Azure::ServiceBus::Queue** 对象，这些选项可让你重写默认队列设置，如消息保存时间或最大队列大小。以下示例演示如何将最大队列大小设置为 5GB，将生存时间设置为 1 分钟：
 
-```
+```ruby
 queue = Azure::ServiceBus::Queue.new("test-queue")
 queue.max_size_in_megabytes = 5120
 queue.default_message_time_to_live = "PT1M"
@@ -125,7 +125,7 @@ queue = azure_service_bus_service.create_queue(queue)
 
 以下示例演示了如何使用 **send\_queue\_message()** 向名为“test-queue”的队列发送测试消息：
 
-```
+```ruby
 message = Azure::ServiceBus::BrokeredMessage.new("test queue message")
 message.correlation_id = "test-correlation-id"
 azure_service_bus_service.send_queue_message("test-queue", message)
@@ -143,7 +143,7 @@ azure_service_bus_service.send_queue_message("test-queue", message)
 
 以下示例演示如何使用 **receive\_queue\_message()** 接收和处理消息。该示例先通过将 **:peek\_lock** 设置为 **false** 接收并删除一条消息，然后再接收另一条消息，最后使用 **delete\_queue\_message()** 删除该消息：
 
-```
+```ruby
 message = azure_service_bus_service.receive_queue_message("test-queue", 
   { :peek_lock => false })
 message = azure_service_bus_service.receive_queue_message("test-queue")

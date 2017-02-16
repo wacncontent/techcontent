@@ -36,7 +36,7 @@ Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一
 ## 创建快照
 以下代码示例演示如何在 .NET 中创建快照。本示例在创建快照时为其指定了单独的元数据。
 
-```
+```csharp
 private static async Task CreateBlockBlobSnapshot(CloudBlobContainer container)
 {
     // Create a new block blob in the container.
@@ -85,7 +85,7 @@ private static async Task CreateBlockBlobSnapshot(CloudBlobContainer container)
 
 以下代码示例演示如何在 .NET 中删除 Blob 及其快照，其中 `blockBlob` 是 **CloudBlockBlob** 类型的变量：
 
-```
+```csharp
 await blockBlob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, null, null, null);
 ```
 
@@ -99,7 +99,7 @@ await blockBlob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, null
 ## 返回快照的绝对 URI
 此 C# 代码示例创建一个快照并写出主位置的绝对 URI。
 
-```
+```csharp
 //Create the blob service client object.
 const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
 

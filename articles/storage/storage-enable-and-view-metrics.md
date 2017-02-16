@@ -65,7 +65,7 @@ ms.author: fryu;robinsh
 
 下面的 C# 代码段演示了如何使用 .NET 的存储客户端库为 Blob 服务启用指标和日志记录：
 
-```
+```csharp
 //Parse the connection string for the storage account.
 const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
@@ -153,7 +153,7 @@ blobClient.SetServiceProperties(properties);
 
 以下列表显示示例 C# 代码，该代码用于访问分钟范围的分钟指标，并在控制台窗口中显示结果。它使用 Azure 存储库版本 4，其中包括 CloudAnalyticsClient 类，用于简化访问存储中的指标表的过程。
 
-```
+```csharp
 private static void PrintMinuteMetrics(CloudAnalyticsClient analyticsClient, DateTimeOffset startDateTime, DateTimeOffset endDateTime)
 {
 // Convert the dates to the format used in the PartitionKey

@@ -80,7 +80,7 @@ Service Fabric 执行组件是虚拟的，这表示其生存期不依赖于其�
 #### 执行组件代理
 Reliable Actors 客户端 API 提供一个执行组件实例和一个执行组件客户端之间的通信。若要与执行组件进行通信，客户端需创建实现执行组件接口的执行组件代理对象。客户端通过调用代理对象上的方法与执行组件进行交互。执行组件代理可以用于从客户端到执行组件以及从执行组件到执行组件的通信。
 
-```
+```csharp
 // Create a randomly distributed actor ID
 ActorId actorId = ActorId.CreateRandom();
 

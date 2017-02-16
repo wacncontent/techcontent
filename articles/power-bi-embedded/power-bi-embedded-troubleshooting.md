@@ -1,6 +1,6 @@
 ---
-title: Power BI Embedded 预览版疑难解答
-description: Power BI Embedded 预览版疑难解答
+title: Power BI Embedded 疑难解答
+description: Power BI Embedded 疑难解答
 services: power-bi-embedded
 documentationCenter: ''
 authors: mgblythe
@@ -18,7 +18,7 @@ ms.author: mblythe
 wacn.date: 02/06/2017
 ---
 
-# Power BI Embedded 预览版疑难解答
+# Power BI Embedded 疑难解答
 本文提供了有关如何解决 **Power BI Embedded** 问题的信息。
 
 ## 设置 SQL Server 连接字符串 <a name="connection-string"/>

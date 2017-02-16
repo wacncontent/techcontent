@@ -69,7 +69,7 @@ PM> Install-Package Microsoft.Owin.Host.SystemWeb -ProjectName TodoList-WebApp
 
 C#
 
-```
+```C#
 public void ConfigureAuth(IAppBuilder app)
 {
     app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
@@ -119,7 +119,7 @@ public void ConfigureAuth(IAppBuilder app)
 
 C#
 
-```
+```C#
 private async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedNotification notification)
 {
         string userObjectId = notification.AuthenticationTicket.Identity.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
@@ -149,7 +149,7 @@ private async Task OnAuthorizationCodeReceived(AuthorizationCodeReceivedNotifica
 
 C#
 
-```
+```C#
 ...
 string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
 string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
@@ -167,7 +167,7 @@ result = await app.AcquireTokenSilentAsync(new string[] { Startup.clientId });
 
 C#
 
-```
+```C#
 // ...
 // If the call failed with access denied, then drop the current access token from the cache,
 // and show the user an error indicating they might need to sign-in again.
@@ -184,7 +184,7 @@ if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
 
 C#
 
-```
+```C#
 // ...
 catch (MsalException ee)
 {

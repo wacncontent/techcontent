@@ -45,7 +45,7 @@ ms.author: tomfitz
 
 检索这些标头值与检索请求的任何标头值一样。例如，在 C# 中，可以使用以下代码从名为 `response` 的 `HttpWebResponse` 对象检索标头值：
 
-```
+```cs
 response.Headers.GetValues("Azure-AsyncOperation").GetValue(0)
 ```
 
@@ -55,7 +55,7 @@ response.Headers.GetValues("Azure-AsyncOperation").GetValue(0)
 
 来自此操作的响应的正文包含有关操作的信息。以下示例显示从操作中返回的可能值：
 
-```
+```json
 {
     "id": "{resource path from GET operation}",
     "name": "{operation-id}", 
@@ -90,27 +90,27 @@ response.Headers.GetValues("Azure-AsyncOperation").GetValue(0)
 ### 启动虚拟机（Azure-AsyncOperation 标头出现 202 响应）
 此示例演示如何确定虚拟机的“启动”操作的状态。初始请求采用以下格式：
 
-```
+```HTTP
 POST 
 https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.Compute/virtualMachines/{vm-name}/start?api-version=2016-03-30
 ```
 
 它返回状态代码 202。在标头值中可以看到：
 
-```
+```HTTP
 Azure-AsyncOperation : https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/{region}/operations/{operation-id}?api-version=2016-03-30
 ```
 
 若要检查异步操作的状态，请向该 URL 发送另一请求。
 
-```
+```HTTP
 GET 
 https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/{region}/operations/{operation-id}?api-version=2016-03-30
 ```
 
 响应正文包含操作的状态：
 
-```
+```json
 {
   "startTime": "2017-01-06T18:58:24.7596323+00:00",
   "status": "InProgress",
@@ -122,39 +122,39 @@ https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Mi
 
 此示例演示将资源部署到 Azure 时，如何确定“部署”操作的状态。初始请求采用以下格式：
 
-```
+```HTTP
 PUT
 https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourcegroups/{resource-group}/providers/microsoft.resources/deployments/{deployment-name}?api-version=2016-09-01
 ```
 
 它返回状态代码 201。响应的正文包括：
 
-```
+```json
 "provisioningState":"Accepted",
 ```
 
 在标头值中可以看到：
 
-```
+```HTTP
 Azure-AsyncOperation: https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourcegroups/{resource-group}/providers/Microsoft.Resources/deployments/{deployment-name}/operationStatuses/{operation-id}?api-version=2016-09-01
 ```
 
 若要检查异步操作的状态，请向该 URL 发送另一请求。
 
-```
+```HTTP
 GET 
 https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourcegroups/{resource-group}/providers/Microsoft.Resources/deployments/{deployment-name}/operationStatuses/{operation-id}?api-version=2016-09-01
 ```
 
 响应正文包含操作的状态：
 
-```
+```json
 {"status":"Running"}
 ```
 
 部署完成后，响应包含：
 
-```
+```json
 {"status":"Succeeded"}
 ```
 
@@ -162,27 +162,27 @@ https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourcegrou
 
 此示例演示如何确定存储帐户的“创建”操作的状态。初始请求采用以下格式：
 
-```
+```HTTP
 PUT
 https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.Storage/storageAccounts/{storage-name}?api-version=2016-01-01
 ```
 
 请求正文包含存储帐户的属性：
 
-```
+```json
 { "location": "China East", "properties": {}, "sku": { "name": "Standard_LRS" }, "kind": "Storage" }
 ```
 
 它返回状态代码 202。在标头值中会出现以下两个值：
 
-```
+```HTTP
 Location: https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.Storage/operations/{operation-id}?monitor=true&api-version=2016-01-01
 Retry-After: 17
 ```
 
 等待特定的秒数（在 Retry-After 中指定）后，查看异步操作的状态，方法是向该 URL 发送另一请求。
 
-```
+```HTTP
 GET 
 https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.Storage/operations/{operation-id}?monitor=true&api-version=2016-01-01
 ```

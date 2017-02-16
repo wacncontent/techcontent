@@ -24,7 +24,7 @@ ms.author: iainfou
 ## 先决条件
 需要安装[最新的 Azure CLI](../xplat-cli-install.md)，然后按如下所示，使用 Resource Manager 模式登录 [Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)：
 
-```
+```azurecli
 azure config mode arm
 ```
 
@@ -34,7 +34,7 @@ azure config mode arm
 
 1. VM 正在运行时，无法在虚拟硬盘上执行操作。以下示例停止并解除分配名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM：
 
-    ```
+    ```azurecli
     azure vm deallocate --resource-group myResourceGroup --name myVM
     ```
 
@@ -43,19 +43,19 @@ azure config mode arm
 
 2. 使用 `azure vm set` 命令更新 OS 磁盘的大小。以下示例将名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM 更新为 `50` GB：
 
-    ```
+    ```azurecli
     azure vm set --resource-group myResourceGroup --name myVM --new-os-disk-size 50
     ```
 
 3. 启动 VM，如下所示：
 
-    ```
+    ```azurecli
     azure vm start --resource-group myResourceGroup --name myVM
     ```
 
 4. 使用相应的凭据通过 SSH 连接到 VM。若要验证 OS 磁盘是否已调整大小，请使用 `df -h`。以下示例输出显示主分区 (`/dev/sda1`) 现在为 50 GB：
 
-    ```
+    ```bash
     Filesystem      Size  Used Avail Use% Mounted on
     udev            1.7G     0  1.7G   0% /dev
     tmpfs           344M  5.0M  340M   2% /run

@@ -29,43 +29,43 @@ ms.author: v-livech
 
 ### 禁用密码登录
 
-```
+```bash
 PasswordAuthentication no
 ```
 
 ### 禁止根用户登录
 
-```
+```bash
 PermitRootLogin no
 ```
 
 ### 允许的组列表
 
-```
+```bash
 AllowGroups wheel
 ```
 
 ### 允许的用户列表
 
-```
+```bash
 AllowUsers ahmet ralph
 ```
 
 ### 禁用 SSH 协议版本 1
 
-```
+```bash
 Protocol 2
 ```
 
 ### 最小密钥位
 
-```
+```bash
 ServerKeyBits 2048
 ```
 
 ### 断开空闲用户的连接
 
-```
+```bash
 ClientAliveInterval 300
 ClientAliveCountMax 0
 ```
@@ -82,7 +82,7 @@ SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook、Linux 工
 
 保护 Linux VM 的最快捷方法是禁用密码登录。启用密码登录后，在 Web 上爬行的机器人将立即开始尝试使用 SSH 暴力猜测 Linux VM 的密码。完全禁用密码登录可使 SSH 服务器忽略所有密码登录尝试。
 
-```
+```bash
 PasswordAuthentication no
 ```
 
@@ -90,7 +90,7 @@ PasswordAuthentication no
 
 按照 Linux 最佳做法，`root` 用户应从不通过 SSH 或使用 `sudo su` 登录。需要根级别权限的所有命令始终都应通过 `sudo` 命令运行，后者将记录所有操作以便进一步审核。禁止 `root` 用户通过 SSH 登录是安全最佳实践步骤，可确保只有获得授权的用户可以通过 SSH 登录。
 
-```
+```bash
 PermitRootLogin no
 ```
 
@@ -98,7 +98,7 @@ PermitRootLogin no
 
 SSH 提供了限制用户和组的方法，以允许或禁止用户和组通过 SSH 登录。此功能使用列表来批准或拒绝特定用户和组登录。将 wheel 组设置到 `AllowGroups` 列表可将批准的通过 SSH 登录限制为只是 wheel 组中的用户帐户。
 
-```
+```bash
 AllowGroups wheel
 ```
 
@@ -106,7 +106,7 @@ AllowGroups wheel
 
 将 SSH 登录限制为只是用户是完成 `AllowGroups` 实现的同一任务的更具体方法。
 
-```
+```bash
 AllowUsers ahmet ralph
 ```
 
@@ -114,7 +114,7 @@ AllowUsers ahmet ralph
 
 SSH 协议版本 1 不安全，应禁用。SSH 协议版本 2 是当前版本，提供通过 SSH 登录到服务器的安全方法。禁用 SSH 版本 1 将拒绝尝试使用 SSH 版本 1 与 SSH 服务器建立连接的任何 SSH 客户端。仅允许使用 SSH 版本 2 连接与 SSH 服务器协商连接。
 
-```
+```bash
 Protocol 2
 ```
 
@@ -122,7 +122,7 @@ Protocol 2
 
 按照安全最佳实践，将禁用密码 SSH 登录，仅允许使用 SSH 密钥向 SSH 服务器进行身份验证。可以使用不同长度的密钥（以位为单位）来创建这些 SSH 密钥。最佳实践指出长度为 2048 位的密钥是可接受的最小密钥强度。从理论上讲，小于 2048 位的密钥可能被破坏。将 `ServerKeyBits` 设置为 `2048` 允许使用 2048 位或更大密钥的任何连接并拒绝使用小于 2048 位的密钥的连接。
 
-```
+```bash
 ServerKeyBits 2048
 ```
 
@@ -130,7 +130,7 @@ ServerKeyBits 2048
 
 SSH 能够断开这样的用户的连接：具有打开的连接且空闲持续时间超过设定的秒段。只保留处于活动状态的这些用户的打开会话可限制 Linux VM 的暴露。
 
-```
+```bash
 ClientAliveInterval 300
 ClientAliveCountMax 0
 ```
@@ -141,13 +141,13 @@ ClientAliveCountMax 0
 
 ### 在 Redhat、Centos 和 Fedora 上
 
-```
+```bash
 service sshd restart
 ```
 
 ### 在 Debian 和 Ubuntu 上
 
-```
+```bash
 service ssh restart
 ```
 
@@ -157,7 +157,7 @@ service ssh restart
 
 将任何示例名称替换为你自己的名称。
 
-```
+```azurecli
 azure vm reset-access \
 --resource-group myResourceGroup \
 --name myVM \

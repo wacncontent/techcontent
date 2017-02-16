@@ -97,7 +97,7 @@ HDInsight 提供可集成到 HDInsight 群集中的 R Server 选项。这将允�
 
      或者在客户端上为 R Server 定义 Hadoop Spark 计算上下文的过程中（请参阅 [Get started with SacaleR on Apache Spark document](https://msdn.microsoft.com/microsoft-r/scaler-spark-getting-started)（Apache Spark 上的 SacaleR 入门）在线指南的 [Creating a Compute Context for Spark](https://msdn.microsoft.com/microsoft-r/scaler-spark-getting-started#creating-a-compute-context-for-spark)（创建 Spark 的计算上下文）部分中的“Using Microsoft R Server as a Hadoop Client”（使用 Microsoft R Server 作为 Hadoop 客户端））。
 
-6. 选择“数据源”，以便选择要作为群集所用的 HDFS 文件系统的主位置的数据源。选择新的或现有的 Azure 存储帐户或者现有的 Data Lake Storage 帐户。
+6. 选择“数据源”，以便选择要作为群集所用的 HDFS 文件系统的主位置的数据源。选择新的或现有的 Azure 存储帐户。
 
     1. 如果选择 Azure 存储帐户，则可以选择现有的存储帐户，方法是选择“选择存储帐户”，然后选择帐户；也可以使用“选择存储帐户”部分中的“新建”链接创建新帐户。
 
@@ -110,12 +110,6 @@ HDInsight 提供可集成到 HDInsight 群集中的 R Server 选项。这将允�
 
       > [!IMPORTANT]
       选择默认数据源位置的同时会设置 HDInsight 群集位置。群集和默认数据源必须位于同一区域。
-
-    2. 如果选择使用现有 Data Lake Store，则选择要使用的 ADLS 存储帐户，并将群集 ADD 标识添加到群集以允许访问存储。有关此过程的详细信息，请参阅 [Createan HDInsight cluster with Data Lake Store using Azure Portal Preview](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-hdinsight-hadoop-use-portal)（使用 Azure 门户预览创建包含 Data Lake Store 的 HDInsight 群集）。
-
-      使用“选择”按钮保存数据源配置。
-
-       ![数据源边栏选项卡](./media/hdinsight-getting-started-with-r/datastore.png)
 
 7. 选择“节点定价层”显示针对此群集创建的节点的相关信息。除非确定需要更大的群集，否则请保留辅助角色节点数目的默认值 `4`。该群集的预估成本将显示在边栏选项卡内。
 
@@ -251,7 +245,7 @@ username@ed00-myrser:~$
 ## 从 Microsoft R Server 或 Microsoft R Client 的远程实例使用 HDI 上的 R Server
 根据上述有关使用公钥/私钥对访问群集的部分，可以设置从台式机或便携式计算机上运行的 Microsoft R Server 或 Microsoft R Client 到 HDI Hadoop Spark 计算上下文的访问（请参阅 [RevoScaleR Hadoop Spark Getting Started guide](https://msdn.microsoft.com/microsoft-r/scaler-spark-getting-started)（RevoScaleR Hadoop Spark 入门）在线指南的 [Creating a Compute Context for Spark](https://msdn.microsoft.com/microsoft-r/scaler-spark-getting-started#creating-a-compute-context-for-spark)（创建 Spark 的计算上下文）部分中的“Using Microsoft R Server as a Hadoop Client”（使用 Microsoft R Server 作为 Hadoop 客户端））。为此，需要在便携式计算机上定义 RxSpark 计算上下文时指定以下选项：hdfsShareDir、shareDir、sshUsername、sshHostname、sshSwitches 和 sshProfileScript。例如：
 
-```r
+```
 myNameNode <- "default"
 myPort <- 0 
 
@@ -280,7 +274,7 @@ mySparkCluster <- RxSpark(
 
 1. 在 RStudio Server 或 R 控制台（在 SSH 会话中）中，使用以下命令将示例数据加载到 HDInsight 的默认存储中。
 
-    ```r
+    ```
     # Set the HDFS (WASB) location of example data
     bigDataDirRoot <- "/example/data"
     # create a local folder for storaging data temporarily
@@ -310,7 +304,7 @@ mySparkCluster <- RxSpark(
 
 2. 接下来，我们要创建一些数据信息并定义两个数据源，以便使用数据。
 
-    ```r
+    ```
     # Define the HDFS (WASB) file system
     hdfsFS <- RxHdfsFileSystem()
     # Create info list for the airline data
@@ -335,7 +329,7 @@ mySparkCluster <- RxSpark(
 
 3. 现在，我们使用本地计算上下文对数据运行逻辑回归。
 
-    ```r
+    ```
     # Set a local compute context
     rxSetComputeContext("local")
     # Run a logistic regression
@@ -376,7 +370,7 @@ mySparkCluster <- RxSpark(
 
 4. 然后，我们使用 Spark 上下文来运行相同的逻辑回归。Spark 上下文会将处理分布到 HDInsight 群集的所有辅助角色节点之间。
 
-    ```r
+    ```
     # Define the Spark compute context 
     mySparkCluster <- RxSpark()
     # Set the compute context 
@@ -426,7 +420,7 @@ R Server 9.0 和更高版本中提供的新功能允许直接访问 Hive 和 Par
 
 下面提供了有关使用这些新函数的一些示例代码：
 
-```r
+```
 #..create a Spark compute context
 
 myHadoopCluster <- rxSparkConnect(reset = TRUE)
@@ -434,7 +428,7 @@ myHadoopCluster <- rxSparkConnect(reset = TRUE)
 
 <br/>  
 
-```r
+```
 #..retrieve some sample data from Hive and run a model 
 
 hiveData <- RxHiveData("select * from hivesampletable", 
@@ -446,7 +440,7 @@ rxLinMod(querydwelltime ~ devicemake, data=hiveData)
 
 <br/>
 
-```r
+```
 #..retrieve some sample data from Parquet and run a model 
 
 rxHadoopMakeDir('/share')
@@ -464,7 +458,7 @@ rxNaiveBayes(type ~ age + cost, data = pqData)
 
 <br/>  
 
-```r
+``` 
 #..check on Spark data objects, cleanup, and close the Spark session 
 
 lsObj <- rxSparkListData() # two data objs are cached
@@ -511,7 +505,7 @@ rxSparkDisconnect(myHadoopCluster)
 
         > [!NOTE]
         > 1. 默认情况下，将从与安装的 R Server 版本一致的 Microsoft MRAN 存储库快照中安装所有 R 包。如果想要安装更新版本的包，则会出现不兼容的风险，不过，这种做法是可行的，只需指定 `useCRAN` 作为包列表的第一个元素即可，例如 `useCRAN bitops, stringr, arules`。
-        > 2. 某些 R 包需要额外的 Linux 系统库。为方便起见，我们已预先安装了最流行的 100 个 R 包所需的依赖项。但是，如果安装的 R 包需要除此之外的库，则必须下载此处使用的基本脚本，并添加安装系统库的步骤。接下来，必须将修改的脚本上载到 Azure 存储空间中的公共 Blob 容器，并使用修改的脚本来安装包。有关开发脚本操作的详细信息，请参阅 [Script Action development](./hdinsight-hadoop-script-actions-linux.md)（脚本操作开发）。
+        ><p> 2. 某些 R 包需要额外的 Linux 系统库。为方便起见，我们已预先安装了最流行的 100 个 R 包所需的依赖项。但是，如果安装的 R 包需要除此之外的库，则必须下载此处使用的基本脚本，并添加安装系统库的步骤。接下来，必须将修改的脚本上载到 Azure 存储空间中的公共 Blob 容器，并使用修改的脚本来安装包。有关开发脚本操作的详细信息，请参阅 [Script Action development](./hdinsight-hadoop-script-actions-linux.md)（脚本操作开发）。
         >
         >
 

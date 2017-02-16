@@ -26,7 +26,7 @@ ms.author: tomfitz
 ## 链接到模板
 通过在主模板内添加部署源，从而在两个模板间创建指向链接模板的链接。对链接模版的 URI 设置 **templateLink** 属性。您可以通过直接在您的模板中指定值或通过链接到参数文件，为链接模板提供参数值。以下示例使用 **parameters** 属性直接指定参数值。
 
-```
+```json
 "resources": [ 
   { 
       "apiVersion": "2015-01-01", 
@@ -48,13 +48,13 @@ ms.author: tomfitz
 
 链接模板与其他资源类型相似，也可在它与其他资源之间设置依赖关系。因此，如有其他资源需要来自链接模板的输出值，你可以确保在部署这些资源之前部署链接模板。如果链接模板依赖于其他资源，你也可以确保在部署链接模板前部署其他资源。可使用以下语法检索链接模板中的值：
 
-```
+```json
 "[reference('linkedTemplate').outputs.exampleProperty]"
 ```
 
 Resource Manager 服务必须能够访问链接的模板。无法为链接的模板指定本地文件或者只能在本地网络中访问的文件。只能提供包含 **http** 或 **https** 的 URI 值。一个选项是将链接模板置于存储帐户中，并使用该项目的 URI，如以下示例所示：
 
-```
+```json
 "templateLink": {
     "uri": "http://mystorageaccount.blob.core.chinacloudapi.cn/templates/template.json",
     "contentVersion": "1.0.0.0",
@@ -65,7 +65,7 @@ Resource Manager 服务必须能够访问链接的模板。无法为链接的模
 
 下面的示例演示了链接到其他模板的父模板。使用作为参数传入的 SAS 令牌访问链接模板。
 
-```
+```json
 "parameters": {
     "sasToken": { "type": "securestring" }
 },
@@ -94,7 +94,7 @@ Resource Manager 会将每个链接模板作为单独的部署来处理。在资
 ## 链接到参数文件
 以下示例使用 **parametersLink** 属性链接到参数文件。
 
-```
+```json
 "resources": [ 
   { 
      "apiVersion": "2015-01-01", 
@@ -122,7 +122,7 @@ Resource Manager 会将每个链接模板作为单独的部署来处理。在资
 
 以下示例演示如何使用基 URL 来创建两个用于链接模板的 URL（**sharedTemplateUrl** 和 **vmTemplate**）。
 
-```
+```json
 "variables": {
     "templateBaseUrl": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/postgresql-on-ubuntu/",
     "sharedTemplateUrl": "[concat(variables('templateBaseUrl'), 'shared-resources.json')]",
@@ -132,7 +132,7 @@ Resource Manager 会将每个链接模板作为单独的部署来处理。在资
 
 你还可以使用 [deployment()](./resource-group-template-functions.md#deployment) 获取当前模板的基 URL，并使用该 URL 来获取同一位置其他模板的 URL。如果模板位置发生变化（原因可能是改版）或者想要避免对模板文件中的 URL 进行硬编码，则此方法非常有用。
 
-```
+```json
 "variables": {
     "sharedTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'shared-resources.json')]"
 }
@@ -143,7 +143,7 @@ Resource Manager 会将每个链接模板作为单独的部署来处理。在资
 
 以下示例显示了存储帐户名的参数，以及用于指定存储帐户是新帐户还是现有帐户的参数。
 
-```
+```json
 "parameters": {
     "storageAccountName": {
         "type": "String"
@@ -160,7 +160,7 @@ Resource Manager 会将每个链接模板作为单独的部署来处理。在资
 
 为模板 URI 创建变量，其中包含新参数或现有参数的值。
 
-```
+```json
 "variables": {
     "templatelink": "[concat('https://raw.githubusercontent.com/exampleuser/templates/master/',parameters('newOrExisting'),'StorageAccount.json')]"
 },
@@ -168,7 +168,7 @@ Resource Manager 会将每个链接模板作为单独的部署来处理。在资
 
 将该变量值提供给部署资源。
 
-```
+```json
 "resources": [
     {
         "apiVersion": "2015-01-01",
@@ -194,7 +194,7 @@ URI 将解析成名为 **existingStorageAccount.json** 或 **newStorageAccount.j
 
 以下示例显示了 **existingStorageAccount.json** 模板。
 
-```
+```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -216,7 +216,7 @@ URI 将解析成名为 **existingStorageAccount.json** 或 **newStorageAccount.j
 
 下一个示例显示了 **newStorageAccount.json** 模板。可以看到，与现有存储帐户模板一样，存储帐户对象已在输出中返回。主控模板能够与任一链接模板配合运行。
 
-```
+```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -253,7 +253,7 @@ URI 将解析成名为 **existingStorageAccount.json** 或 **newStorageAccount.j
 
 **parent.json** 文件由以下部分组成：
 
-```
+```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -285,7 +285,7 @@ URI 将解析成名为 **existingStorageAccount.json** 或 **newStorageAccount.j
 
 **helloworld.json** 文件由以下部分组成：
 
-```
+```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -303,7 +303,7 @@ URI 将解析成名为 **existingStorageAccount.json** 或 **newStorageAccount.j
 
 在 PowerShell 中，你使用以下命令获取容器的令牌并部署模板：
 
-```
+```powershell
 Set-AzureRmCurrentStorageAccount -ResourceGroupName ManageGroup -Name storagecontosotemplates
 $token = New-AzureStorageContainerSASToken -Name templates -Permission r -ExpiryTime (Get-Date).AddMinutes(30.0)
 New-AzureRmResourceGroupDeployment -ResourceGroupName ExampleGroup -TemplateUri ("https://storagecontosotemplates.blob.core.chinacloudapi.cn/templates/parent.json" + $token) -containerSasToken $token

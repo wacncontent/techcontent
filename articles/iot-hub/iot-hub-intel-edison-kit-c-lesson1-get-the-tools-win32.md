@@ -61,7 +61,7 @@ ms.author: xshi
 
 以管理员身份启动命令提示符。运行以下命令，安装 `gulp`：
 
-```
+```cmd
 npm install -g gulp
 ```
 

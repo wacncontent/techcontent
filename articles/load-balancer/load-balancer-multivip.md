@@ -49,7 +49,7 @@ ms.author: kumud
 ## 如何将 VIP 添加到云服务
 若要将 VIP 添加到你的服务，请运行以下 PowerShell 命令：
 
-```
+```powershell
 Add-AzureVirtualIP -VirtualIPName Vip3 -ServiceName myService
 ```
 
@@ -64,7 +64,7 @@ Add-AzureVirtualIP   4bd7b638-d2e7-216f-ba38-5221233d70ce Succeeded
 ## 如何从云服务中删除 VIP
 若要删除在上述示例中添加到服务的 VIP，请运行以下 PowerShell 命令：
 
-```
+```powershell
 Remove-AzureVirtualIP -VirtualIPName Vip3 -ServiceName myService
 ```
 
@@ -74,7 +74,7 @@ Remove-AzureVirtualIP -VirtualIPName Vip3 -ServiceName myService
 ## 如何从云服务检索 VIP 信息
 若要检索与云服务关联的 VIP，请运行以下 PowerShell 脚本：
 
-```
+```powershell
 $deployment = Get-AzureDeployment -ServiceName myService
 $deployment.VirtualIPs
 ```
@@ -113,7 +113,7 @@ ExtensionData   :
 
 若要将云服务上的 VIP 关联到终结点，请运行以下 PowerShell 命令：
 
-```
+```powershell
 Get-AzureVM -ServiceName myService -Name myVM1 |
     Add-AzureEndpoint -Name myEndpoint -Protocol tcp -LocalPort 8080 -PublicPort 80 -VirtualIPName Vip2 |
     Update-AzureVM
@@ -123,7 +123,7 @@ Get-AzureVM -ServiceName myService -Name myVM1 |
 
 若要验证配置，请运行以下 PowerShell 命令：
 
-```
+```powershell
 $deployment = Get-AzureDeployment -ServiceName myService
 $deployment.VirtualIPs
 ```
@@ -154,7 +154,7 @@ ExtensionData   :
 
 可以将单个 VIP 与多个虚拟机相关联，以实现负载均衡。例如，你有名为 *myService* 的云服务，以及名为 *myVM1* 和 *myVM2* 的两个虚拟机。而你的云服务有多个 VIP，其中一个名为 *Vip2*。如果你想要确保发往 *Vip2* 上端口 *81* 的所有流量都在端口 *8181* 上的 *myVM1* 与 *myVM2* 之间平衡，请运行以下 PowerShell 脚本：
 
-```
+```powershell
 Get-AzureVM -ServiceName myService -Name myVM1 |
     Add-AzureEndpoint -Name myEndpoint -LoadBalancedEndpointSetName myLBSet -Protocol tcp -LocalPort 8181 -PublicPort 81 -VirtualIPName Vip2 -DefaultProbe |
     Update-AzureVM
@@ -166,7 +166,7 @@ Get-AzureVM -ServiceName myService -Name myVM2 |
 
 你也可以更新你的负载均衡器，以使用不同的 VIP。例如，如果运行以下 PowerShell 命令，则会将负载均衡集更改为使用名为 Vip1 的 VIP：
 
-```
+```powershell
 Set-AzureLoadBalancedEndpoint -ServiceName myService -LBSetName myLBSet -VirtualIPName Vip1
 ```
 

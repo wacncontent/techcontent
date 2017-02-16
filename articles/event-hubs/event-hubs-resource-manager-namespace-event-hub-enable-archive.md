@@ -44,7 +44,7 @@ ms.author: shvija:sethm
 
 要创建的事件中心命名空间的名称。
 
-```
+```json
     "eventHubNamespaceName":{  
          "type":"string",
          "metadata":{  
@@ -57,7 +57,7 @@ ms.author: shvija:sethm
 
 在事件中心命名空间中创建的事件中心的名称。
 
-```
+```json
     "eventHubName":{  
         "type":"string",
         "metadata":{  
@@ -70,7 +70,7 @@ ms.author: shvija:sethm
 
 要将消息保留在事件中心中的天数。
 
-```
+```json
     "messageRetentionInDays":{
         "type":"int",
         "defaultValue": 1,
@@ -86,7 +86,7 @@ ms.author: shvija:sethm
 
 事件中心中所需的分区数。
 
-```
+```json
     "partitionCount":{
         "type":"int",
         "defaultValue":2,
@@ -102,7 +102,7 @@ ms.author: shvija:sethm
 
 在事件中心上启用存档。
 
-```
+```json
     "archiveEnabled":{
         "type":"string",
         "defaultValue":"true",
@@ -119,7 +119,7 @@ ms.author: shvija:sethm
 
 指定用于序列化事件数据的编码格式。
 
-```
+```json
     "archiveEncodingFormat":{
         "type":"string",
         "defaultValue":"Avro",
@@ -135,7 +135,7 @@ ms.author: shvija:sethm
 
 存档开始将数据存档在 Azure Blob 存储中的时间间隔。
 
-```
+```json
     "archiveTime":{
         "type":"int",
         "defaultValue":300,
@@ -151,7 +151,7 @@ ms.author: shvija:sethm
 
 存档开始将数据存档在 Azure Blob 存储中的大小间隔。
 
-```
+```json
     "archiveSize":{
         "type":"int",
         "defaultValue":314572800,
@@ -166,7 +166,7 @@ ms.author: shvija:sethm
 ### destinationStorageAccountResourceId
 存档需要 Azure 存储帐户资源 ID，以启用到所需存储帐户的存档。
 
-```
+```json
      "destinationStorageAccountResourceId":{
         "type":"string",
         "metadata":{
@@ -179,7 +179,7 @@ ms.author: shvija:sethm
 
 要在其中存档事件数据的 blob 容器。
 
-```
+```json
      "blobContainerName":{
         "type":"string",
         "metadata":{
@@ -192,7 +192,7 @@ ms.author: shvija:sethm
 
 模板的 API 版本。
 
-```
+```json
      "apiVersion":{  
         "type":"string",
         "defaultValue":"2015-08-01",
@@ -205,7 +205,7 @@ ms.author: shvija:sethm
 ## 要部署的资源
 创建包含事件中心的 **EventHubs** 类型的命名空间并启用存档。
 
-```
+```json
     "resources":[  
           {  
              "apiVersion":"[variables('ehVersion')]",
@@ -256,7 +256,7 @@ ms.author: shvija:sethm
 
 ## PowerShell
 
-```
+```powershell
     New-AzureRmResourceGroupDeployment -ResourceGroupName \<resource-group-name\> -TemplateFile https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-archive/azuredeploy.json
 ```
 

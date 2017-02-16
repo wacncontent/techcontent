@@ -31,7 +31,7 @@ ms.author: jrj;barbkess;sonyama
 
 以下是使用 `ROLLUP` 选项的 Group By 语句示例：
 
-```
+```sql
 SELECT [SalesTerritoryCountry]
 ,      [SalesTerritoryRegion]
 ,      SUM(SalesAmount)             AS TotalSalesAmount
@@ -52,7 +52,7 @@ GROUP BY ROLLUP (
 
 若要替换此语句，需要使用 `UNION ALL`；显式指定所需的聚合以返回相同的结果：
 
-```
+```sql
 SELECT [SalesTerritoryCountry]
 ,      [SalesTerritoryRegion]
 ,      SUM(SalesAmount) AS TotalSalesAmount
@@ -86,7 +86,7 @@ JOIN  dbo.DimSalesTerritory t     ON s.SalesTerritoryKey       = t.SalesTerritor
 
 第一步是定义“cube”，它定义我们想要创建的所有聚合级别。请务必记下两个派生表的 CROSS JOIN。这样就会生成所有级别。剩余代码确实可以设置格式。
 
-```
+```sql
 CREATE TABLE #Cube
 WITH 
 (   DISTRIBUTION = ROUND_ROBIN
@@ -121,7 +121,7 @@ CTAS 的结果如下所示：
 
 第二步是指定目标表用于存储临时结果：
 
-```
+```sql
 DECLARE
  @SQL NVARCHAR(4000)
 ,@Columns NVARCHAR(4000)
@@ -144,7 +144,7 @@ WITH
 
 第三步是是循环访问执行聚合的列 cube。查询将为 #Cube 临时表中的每个行运行一次，并将结果存储在 #Results 临时表中
 
-```
+```sql
 SET @nbr =(SELECT MAX(Seq) FROM #Cube);
 
 WHILE @i<=@nbr
@@ -168,7 +168,7 @@ END
 
 最后，我们只需读取 #Results 临时表即可返回结果
 
-```
+```sql
 SELECT *
 FROM #Results
 ORDER BY 1,2,3

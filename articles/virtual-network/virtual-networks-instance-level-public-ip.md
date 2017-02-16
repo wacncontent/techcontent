@@ -51,7 +51,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ## 如何在 VM 创建期间使用 PowerShell 请求 ILPIP
 下面的 PowerShell 脚本将创建名为 *FTPService* 的全新云服务，然后从 Azure 中检索映像，并使用检索到的映像创建名为 *FTPInstance* 的 VM，接着将 VM 设置为使用 ILPIP，最后再将 VM 添加到新服务：
 
-```
+```powershell
 New-AzureService -ServiceName FTPService -Location "China North"
 
 $image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"} `
@@ -63,7 +63,7 @@ New-AzureVMConfig -Name FTPInstance -InstanceSize Small -ImageName $image.ImageN
 ## 如何检索 VM 的 ILPIP 信息
 若要查看使用以上脚本创建的 VM 的 ILPIP 信息，请运行以下 PowerShell 命令，然后观察 *PublicIPAddress* 和 *PublicIPName* 的值：
 
-```
+```powershell
 Get-AzureVM -Name FTPInstance -ServiceName FTPService
 ```
 
@@ -101,14 +101,14 @@ OperationStatus             : OK
 ## 如何删除 VM 的 ILPIP
 若要删除在以上脚本中添加到 VM 的 ILPIP，请运行以下 PowerShell 命令：
 
-```
+```powershell
 Get-AzureVM -ServiceName FTPService -Name FTPInstance | Remove-AzurePublicIP | Update-AzureVM
 ```
 
 ## 如何向现有 VM 添加 ILPIP
 若要向使用以上脚本创建的 VM 添加 ILPIP，请运行以下命令：
 
-```
+```powershell
 Get-AzureVM -ServiceName FTPService -Name FTPInstance | Set-AzurePublicIP -PublicIPName ftpip2 | Update-AzureVM
 ```
 

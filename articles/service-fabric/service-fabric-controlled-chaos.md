@@ -59,7 +59,7 @@ ms.author: motanv
 ## 如何运行混沌测试
 **C#：**
 
-```
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -142,7 +142,7 @@ class Program
 
 **PowerShell：**
 
-```
+```powershell
 $connection = "localhost:19000"
 $timeToRun = 60
 $maxStabilizationTimeSecs = 180

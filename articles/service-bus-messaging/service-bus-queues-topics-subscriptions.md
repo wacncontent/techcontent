@@ -28,7 +28,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 创建队列是一个多步骤过程。你可以通过 [Microsoft.ServiceBus.NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类执行服务总线消息传送实例（队列和主题）的管理操作，该类可通过提供服务总线命名空间的基址和用户凭据进行构建。[NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 提供了创建、枚举和删除消息传送实体的方法。在使用 SAS 名称和密钥创建 [Microsoft.ServiceBus.TokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.aspx) 对象（服务命名空间管理对象）之后，你可以使用 [Microsoft.ServiceBus.NamespaceManager.CreateQueue](https://msdn.microsoft.com/zh-cn/library/azure/hh293157.aspx) 方法以创建队列。例如：
 
-```
+```csharp
     // Create management credentials
     TokenProvider credentials = TokenProvider. CreateSharedAccessSignatureTokenProvider(sasKeyName,sasKeyValue);
     // Create namespace client
@@ -37,7 +37,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 你可以随后创建一个队列对象和消息工厂，将服务总线 URI 用作参数。例如：
 
-```
+```csharp
     QueueDescription myQueue;
     myQueue = namespaceClient.CreateQueue("TestQueue");
     MessagingFactory factory = MessagingFactory.Create(ServiceBusEnvironment.CreateServiceUri("sb", ServiceNamespace, string.Empty), credentials); 
@@ -46,7 +46,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 你可以随后向队列发送消息。例如，如果具有名为 `MessageList` 的中转消息列表，将出现此代码，类似如下形式：
 
-```
+```csharp
     for (int count = 0; count < 6; count++)
     {
         var issue = MessageList[count];
@@ -57,7 +57,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 你可以随后接收来自队列的消息，如下所示：
 
-```
+```csharp
     while ((message = myQueueClient.Receive(new TimeSpan(hours: 0, minutes: 0, seconds: 5))) != null)
         {
             Console.WriteLine(string.Format("Message received: {0}, {1}, {2}", message.SequenceNumber, message.Label, message.MessageId));
@@ -86,27 +86,27 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 创建主题类似于创建队列，如前一节中的示例所示。创建服务 URI，然后使用 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类来创建命名空间客户端。然后，你可以使用 [CreateTopic](https://msdn.microsoft.com/zh-cn/library/azure/hh293080.aspx) 方法创建主题。例如：
 
-```
+```csharp
     TopicDescription dataCollectionTopic = namespaceClient.CreateTopic("DataCollectionTopic");
 ```
 
 接下来，根据需要添加订阅：
 
-```
+```csharp
     SubscriptionDescription myAgentSubscription = namespaceClient.CreateSubscription(myTopic.Path, "Inventory");
     SubscriptionDescription myAuditSubscription = namespaceClient.CreateSubscription(myTopic.Path, "Dashboard");
 ```
 
 然后可以创建主题客户端。例如：
 
-```
+```csharp
     MessagingFactory factory = MessagingFactory.Create(serviceUri, tokenProvider);
     TopicClient myTopicClient = factory.CreateTopicClient(myTopic.Path)
 ```
 
 通过消息发送方，你可以将消息发送至主题和从主题接收消息，如上一节所述。例如：
 
-```
+```csharp
     foreach (BrokeredMessage message in messageList)
     {
         myTopicClient.Send(message);
@@ -117,7 +117,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 与队列类似，可使用 [SubscriptionClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.subscriptionclient.aspx) 对象而不是 [QueueClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx) 对象接收来自订阅的消息。创建订阅客户端，将主题的名称、订阅的名称和（可选）接收模式作为参数传递。例如，对于“库存”订阅：
 
-```
+```csharp
     // Create the subscription client
     MessagingFactory factory = MessagingFactory.Create(serviceUri, tokenProvider); 
 
@@ -145,7 +145,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 使用上述示例，要仅筛选来自 **Store1** 的消息，如下所示创建“仪表板”订阅：
 
-```
+```csharp
     namespaceManager.CreateSubscription("IssueTrackingTopic", "Dashboard", new SqlFilter("StoreName = 'Store1'"));
 ```
 

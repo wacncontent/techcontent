@@ -100,7 +100,7 @@ DnsName:
 
  **配置 XML 示例**
 
- ```
+ ```xml
     <?xml version="1.0" encoding="utf-8"?>
     <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
         <FrontendIPConfigurations>

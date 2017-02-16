@@ -38,13 +38,13 @@ SQL 数据仓库最多支持 8 个嵌套级别。这与 SQL Server 稍有不同�
 
 最上层存储过程调用等同于嵌套级别 1
 
-```
+```sql
 EXEC prc_nesting
 ```
 
 如果存储过程还调用另一个 EXEC，则嵌套级别将增加到 2
 
-```
+```sql
 CREATE PROCEDURE prc_nesting
 AS
 EXEC prc_nesting_2  -- This call is nest level 2
@@ -54,7 +54,7 @@ EXEC prc_nesting
 
 如果第二个过程随后执行某种动态 sql，则嵌套级别将增加到 3
 
-```
+```sql
 CREATE PROCEDURE prc_nesting_2
 AS
 EXEC sp_executesql 'SELECT 'another nest level'  -- This call is nest level 2

@@ -46,7 +46,7 @@ Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\Se
 ~~~
 PS C:\temp> dir
 
-```
+```powershell
 Directory: c:\temp
 ```
 
@@ -202,13 +202,13 @@ PS D:\temp>
 ### Copy-ServiceFabricApplicationPackage 请求 ImageStoreConnectionString
 Service Fabric SDK 环境应已默认设置正确。若有需要，所有命令的 ImageStoreConnectionString 都应匹配 Service Fabric 群集使用的值。可以在使用 [Get-ServiceFabricClusterManifest](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricclustermanifest) 命令检索到的群集清单中找到 ImageStoreConnectionString：
 
-```
+```powershell
 PS D:\temp> Get-ServiceFabricClusterManifest
 ```
 
 在群集清单中找到 ImageStoreConnectionString：
 
-```
+```xml
 <ClusterManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="Server-Default-SingleNode" Version="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
 
     [...]

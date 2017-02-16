@@ -663,7 +663,7 @@ Azure 可让用户从 Azure 应用商店部署 VM 实例，该库提供 Windows 
 
 可以使用以下 PS 命令检查台式机/便携式计算机上当前安装的 Azure cmdlet 版本：
 
-```
+```powershell
 Import-Module Azure
 (Get-Module Azure).Version
 ```
@@ -779,7 +779,7 @@ sudo service waagent restart
 * 确保已安装最新版本的 Azure PowerShell cmdlet。请参阅本文档的[部署 Azure PowerShell cmdlet][deployment-guide-4.1] 一章。
 * 运行以下 Azure PowerShell cmdlet。有关可用环境的列表，请运行 cmdlet Get-AzureRmEnvironment。如果想要使用公共 Azure，你的环境将是 AzureCloud。对于中国区 Azure，请选择 AzureChinaCloud。
 
-    ```
+    ```powershell
     $env = Get-AzureRmEnvironment -Name <name of the environment>
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Environment $env
     Set-AzureRmContext -SubscriptionName <subscription name>

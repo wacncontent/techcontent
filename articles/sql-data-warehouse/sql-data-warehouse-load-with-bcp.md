@@ -57,7 +57,7 @@ bcp 是将较小数据集移入和移出 SQL 数据仓库数据库的快速轻�
 
 在命令提示符下，使用 sqlcmd 运行以下查询，以在实例上创建表：
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "
     CREATE TABLE DimDate2
     (
@@ -101,13 +101,13 @@ sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q
 ### 步骤 3：连接并导入数据
 在 bcp 中，可以使用以下命令来连接并导入数据（相应地替换其中的值）：
 
-```
+```sql
 bcp DimDate2 in C:\Temp\DimDate2.txt -S <Server Name> -d <Database Name> -U <Username> -P <password> -q -c -t  ','
 ```
 
 可以使用 sqlcmd 运行以下查询来验证是否已加载数据：
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "SELECT * FROM DimDate2 ORDER BY 1;"
 ```
 
@@ -133,7 +133,7 @@ Azure SQL 数据仓库尚不支持自动创建或自动更新统计信息。为�
 
 在 sqlcmd 提示符下执行以下 CREATE STATISTICS 语句：
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "
     create statistics [DateId] on [DimDate2] ([DateId]);
     create statistics [CalendarQuarter] on [DimDate2] ([CalendarQuarter]);
@@ -147,7 +147,7 @@ sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q
 ### 步骤 1：导出数据
 在 bcp 实用程序中，可以使用以下命令来连接并导出数据（相应地替换其中的值）：
 
-```
+```sql
 bcp DimDate2 out C:\Temp\DimDate2_export.txt -S <Server Name> -d <Database Name> -U <Username> -P <password> -q -c -t ','
 ```
 

@@ -27,13 +27,13 @@ wacn.date: 01/04/2017
 
 可以通过 **ServiceBusService** 对象处理队列。将以下代码添加到任何 Python 文件的顶部附近，你希望在其中以编程方式访问服务总线：
 
-```
+```python
     from azure.servicebus import ServiceBusService, Message, Queue
 ```
 
 以下代码创建 **ServiceBusService** 对象。将 `mynamespace`、`sharedaccesskeyname` 和 `sharedaccesskey` 替换为你的命名空间、共享访问签名 (SAS) 密钥名称和值。
 
-```
+```python
     bus_service = ServiceBusService(
         service_namespace='mynamespace',
         shared_access_key_name='sharedaccesskeyname',
@@ -42,13 +42,13 @@ wacn.date: 01/04/2017
 
 SAS 密钥名称和值可以在 [Azure 经典管理门户][]连接信息中找到，也可以在服务器资源管理器中选择服务总线命名空间后，在 Visual Studio “属性”窗格中找到（如前一部分中所示）。
 
-```
+```python
     bus_service.create_queue('taskqueue')
 ```
 
 **create\_queue** 还支持其他选项，使你可以重写默认队列设置，例如消息生存时间 (TTL) 或最大队列大小。以下示例将最大队列大小设置为 5GB，将 TTL 值设置为 1 分钟：
 
-```
+```python
     queue_options = Queue()
     queue_options.max_size_in_megabytes = '5120'
     queue_options.default_message_time_to_live = 'PT1M'
@@ -62,7 +62,7 @@ SAS 密钥名称和值可以在 [Azure 经典管理门户][]连接信息中找�
 
 以下示例演示如何使用 **send\_queue\_message** 向名为 *taskqueue* 的队列发送测试消息：
 
-```
+```python
     msg = Message(b'Test Message')
     bus_service.send_queue_message('taskqueue', msg)
 ```
@@ -73,7 +73,7 @@ SAS 密钥名称和值可以在 [Azure 经典管理门户][]连接信息中找�
 
 对 **ServiceBusService** 对象使用 **receive\_queue\_message** 方法可从队列接收消息：
 
-```
+```python
     msg = bus_service.receive_queue_message('taskqueue', peek_lock=False)
     print(msg.body)
 ```
@@ -84,7 +84,7 @@ SAS 密钥名称和值可以在 [Azure 经典管理门户][]连接信息中找�
 
 如果将 **peek\_lock** 参数设置为 **True**，则接收将变成一个两阶段操作，这样就可以支持无法容忍遗漏消息的应用程序。当 Service Bus 收到请求时，它会查找下一条要使用的消息，锁定该消息以防其他使用者接收，然后将该消息返回到应用程序。在应用程序处理完消息（或安全存储该消息以供将来处理）后，它会通过对 **Message** 对象调用 **delete** 方法来完成接收过程的第二个阶段。**delete** 方法会将消息标记为已使用，并从队列中删除它。
 
-```
+```python
     msg = bus_service.receive_queue_message('taskqueue', peek_lock=True)
     print(msg.body)
 

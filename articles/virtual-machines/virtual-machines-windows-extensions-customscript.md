@@ -26,7 +26,7 @@ ms.author: kundanap
 
 在模板的 Resource 节中定义以下资源。
 
-```
+```json
    {
    "type": "Microsoft.Compute/virtualMachines/extensions",
    "name": "MyCustomScriptExtension",
@@ -57,7 +57,7 @@ ms.author: kundanap
 
 ## 使用受保护设置的 Windows VM 模板示例
 
-```
+```json
     {
     "publisher": "Microsoft.Compute",
     "type": "CustomScriptExtension",

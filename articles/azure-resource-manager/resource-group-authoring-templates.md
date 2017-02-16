@@ -30,7 +30,7 @@ ms.author: tomfitz
 ## <a name="template-format"></a> 模板格式
 使用最简单的结构时，模板包含以下元素：
 
-```
+```json
 {
    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
    "contentVersion": "",
@@ -59,7 +59,7 @@ ms.author: tomfitz
 
 以下示例演示如何在构造值时使用一些函数：
 
-```
+```json
 "variables": {
    "location": "[resourceGroup().location]",
    "usernameAndPassword": "[concat(parameters('username'), ':', parameters('password'))]",
@@ -76,7 +76,7 @@ ms.author: tomfitz
 
 使用以下结构定义参数：
 
-```
+```json
 "parameters": {
    "<parameter-name>" : {
      "type" : "<type-of-parameter-value>",
@@ -129,7 +129,7 @@ ms.author: tomfitz
 
 以下示例演示如何定义参数：
 
-```
+```json
 "parameters": {
   "siteName": {
     "type": "string",
@@ -172,7 +172,7 @@ ms.author: tomfitz
 
 使用以下结构定义变量：
 
-```
+```json
 "variables": {
    "<variable-name>": "<variable-value>",
    "<variable-name>": { 
@@ -183,7 +183,7 @@ ms.author: tomfitz
 
 以下示例演示如何定义从两个参数值构造出的变量：
 
-```
+```json
 "variables": {
     "connectionString": "[concat('Name=', parameters('username'), ';Password=', parameters('password'))]"
 }
@@ -191,7 +191,7 @@ ms.author: tomfitz
 
 下一个示例演示一个属于复杂的 JSON 类型的变量，以及从其他变量构造出的变量：
 
-```
+```json
 "parameters": {
    "environmentName": {
      "type": "string",
@@ -223,7 +223,7 @@ ms.author: tomfitz
 
 使用以下结构定义资源：
 
-```
+```json
 "resources": [
    {
      "apiVersion": "<api-version-of-resource>",
@@ -264,43 +264,43 @@ ms.author: tomfitz
 
 若要通过 **PowerShell** 获取所有资源提供程序，请使用：
 
-```
+```powershell
 Get-AzureRmResourceProvider -ListAvailable
 ```
 
 从返回的列表中，找到感兴趣的资源提供程序。若要获取资源提供程序（如存储）的资源类型，请使用：
 
-```
+```powershell
 (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes
 ```
 
 若要获取资源类型（如存储帐户）的 API 版本，请使用：
 
-```
+```powershell
 ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).ApiVersions
 ```
 
 若要获取资源类型支持的位置，请使用：
 
-```
+```powershell
 ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).Locations
 ```
 
 若要通过 **Azure CLI** 获取所有资源提供程序，请使用：
 
-```
+```azurecli
 azure provider list
 ```
 
 从返回的列表中，找到感兴趣的资源提供程序。若要获取资源提供程序（如存储）的资源类型，请使用：
 
-```
+```azurecli
 azure provider show Microsoft.Storage
 ```
 
 若要获取支持的位置和 API 版本，请使用：
 
-```
+```azurecli
 azure provider show Microsoft.Storage --details --json
 ```
 
@@ -308,7 +308,7 @@ azure provider show Microsoft.Storage --details --json
 
 resources 节包含要部署的资源数组。在每个资源内，还可以定义子资源数组。因此，resources 节的结构可能类似于：
 
-```
+```json
 "resources": [
    {
        "name": "resourceA",
@@ -332,7 +332,7 @@ resources 节包含要部署的资源数组。在每个资源内，还可以定�
 
 以下示例演示了 **Microsoft.Web/serverfarms** 资源，以及一个包含 **Extensions** 子资源的 **Microsoft.Web/sites** 资源。请注意，站点标记为依赖于服务器场，因为只有该服务器场存在，才能部署该站点。另请注意，**Extensions** 资源是站点的子级。
 
-```
+```json
 "resources": [
   {
     "apiVersion": "2015-08-01",
@@ -394,7 +394,7 @@ resources 节包含要部署的资源数组。在每个资源内，还可以定�
 
 以下示例演示了输出定义的结构：
 
-```
+```json
 "outputs": {
    "<outputName>" : {
      "type" : "<type-of-output-value>",
@@ -411,7 +411,7 @@ resources 节包含要部署的资源数组。在每个资源内，还可以定�
 
 以下示例演示了 Outputs 节中返回的值。
 
-```
+```json
 "outputs": {
    "siteUri" : {
      "type" : "string",

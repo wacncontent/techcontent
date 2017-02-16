@@ -54,7 +54,7 @@ ms.author: marsma
 
 以下示例将容器的权限设置为完全公共读取访问。若要将权限设置为仅针对 blob 的公共读取访问，请将 **PublicAccess** 属性设置为 **BlobContainerPublicAccessType.Blob**。若要删除匿名用户的所有权限，请将该属性设置为 **BlobContainerPublicAccessType.Off**。
 
-```
+```csharp
 public static void SetPublicContainerPermissions(CloudBlobContainer container)
 {
     BlobContainerPermissions permissions = container.GetPermissions();
@@ -69,7 +69,7 @@ public static void SetPublicContainerPermissions(CloudBlobContainer container)
 ### 创建匿名客户端对象
 通过提供帐户的 Blob 服务终结点，即可以创建一个用于匿名访问的新的服务客户端对象。但是，也必须要知道该帐户中允许进行匿名访问的容器的名称。
 
-```
+```csharp
 public static void CreateAnonymousBlobClient()
 {
     // Create the client object using the Blob service endpoint.
@@ -88,7 +88,7 @@ public static void CreateAnonymousBlobClient()
 ### 以匿名方式引用容器
 如果拥有可以通过匿名方式使用的容器的 URL，则可使用该 URL 来直接引用容器。
 
-```
+```csharp
 public static void ListBlobsAnonymously()
 {
     // Get a reference to a container that's available for anonymous access.
@@ -105,7 +105,7 @@ public static void ListBlobsAnonymously()
 ### 以匿名方式引用 Blob
 如果拥有允许进行匿名访问的 Blob 的 URL，则可使用该 URL 来直接引用 Blob：
 
-```
+```csharp
 public static void DownloadBlobAnonymously()
 {
     CloudBlockBlob blob = new CloudBlockBlob(new Uri(@"https://storagesample.blob.Chinacloudapi.cn/sample-container/logfile.txt"));

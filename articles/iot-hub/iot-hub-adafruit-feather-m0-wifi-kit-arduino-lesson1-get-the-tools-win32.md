@@ -65,7 +65,7 @@ ms.author: xshi
 
 以管理员身份启动命令提示符。在终端运行以下命令，安装 `gulp` 和 `device-discovery-cli`：
 
-```
+```bash
 npm install -g gulp device-discovery-cli
 ```
 

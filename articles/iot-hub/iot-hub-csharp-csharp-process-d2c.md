@@ -190,7 +190,7 @@ IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提�
 <!-- Links -->
 
 [Azure Blob storage]: ../storage/storage-dotnet-how-to-use-blobs.md
-[Azure Data Factory]: /documentation/services/data-factory/
+[Azure Data Factory]: ../data-factory/index.md
 [HDInsight (Hadoop)]: ../hdinsight/index.md
 [Service Bus Queue]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
 

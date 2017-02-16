@@ -44,7 +44,7 @@ template.json 文件是模板。
 
 也可以使用 [Export-AzureRMResourceGroup](https://msdn.microsoft.com/zh-cn/library/mt715427.aspx) cmdlet 下载 .json 模板文件。可以使用 `-path` 参数提供 .json 文件的文件名和路径。本示例演示如何将名为 **myResourceGroup** 的资源组的模板下载到本地计算机上的 **C:\\users\\public\\downloads** 文件夹。
 
-```
+```powershell
 Export-AzureRmResourceGroup -ResourceGroupName "myResourceGroup" -Path "C:\users\public\downloads"
 ```
 

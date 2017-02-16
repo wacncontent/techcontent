@@ -28,14 +28,14 @@ ms.author: suchia
 
     需要将此属性应用于执行组件客户端和执行组件服务程序集。下面的示例演示如何更改 FabricTransport OperationTimeout 设置的默认值。
 
-    ```
+    ```csharp
     using Microsoft.ServiceFabric.Actors.Remoting.FabricTransport;
     [assembly:FabricTransportActorRemotingProvider(OperationTimeoutInSeconds = 600)]
     ```
 
     第二个示例更改了 FabricTransport MaxMessageSize 和 OperationTimeoutInSeconds 的默认值
 
-    ```
+    ```csharp
     using Microsoft.ServiceFabric.Actors.Remoting.FabricTransport;
     [assembly:FabricTransportActorRemotingProvider(OperationTimeoutInSeconds = 600,MaxMessageSize = 134217728)]
     ```
@@ -48,7 +48,7 @@ ms.author: suchia
 
     * SectionName：默认情况下，执行组件代码以“&lt;ActorName&gt;TransportSettings”查找 SectionName。 如果未找到，则以“TransportSettings”查找 SectionName。
 
-        ```
+        ```xml
         <Section Name="MyActorServiceTransportSettings">
                <Parameter Name="MaxMessageSize" Value="10000000" />
                <Parameter Name="OperationTimeoutInSeconds" Value="300" />

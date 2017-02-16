@@ -27,7 +27,7 @@ ms.author: suchiagicha
 
 1. 创建接口 `IHelloWorldStateful`，用于定义可供服务的远程过程调用使用的方法。服务将使用 `Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime` 命名空间中声明的 `FabricTransportServiceRemotingListener`。这是可以提供远程处理功能的 `ICommunicationListener` 实现。
 
-    ```
+    ```csharp
     public interface IHelloWorldStateful : IService
     {
         Task<string> GetHelloWorld();
@@ -55,7 +55,7 @@ ms.author: suchiagicha
 
     1. 在服务代码中直接提供：
 
-        ```
+        ```csharp
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
             FabricTransportListenerSettings listenerSettings = new FabricTransportListenerSettings
@@ -90,7 +90,7 @@ ms.author: suchiagicha
 
         在 settings.xml 文件中添加 `TransportSettings` 节。
 
-        ```
+        ```xml
         <!--Section name should always end with "TransportSettings".-->
         <!--Here we are using a prefix "HelloWorldStateful".-->
         <Section Name="HelloWorldStatefulTransportSettings">
@@ -107,7 +107,7 @@ ms.author: suchiagicha
 
         在这种情况下，`CreateServiceReplicaListeners` 方法如下所示：
 
-        ```
+        ```csharp
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
             return new[]
@@ -121,7 +121,7 @@ ms.author: suchiagicha
 
          如果将在 settings.xml 中添加 `TransportSettings` 节而不添加任何前缀，则 `FabricTransportListenerSettings` 将按默认加载此节中的所有设置。
 
-         ```
+         ```xml
          <!--"TransportSettings" section without any prefix.-->
          <Section Name="TransportSettings">
              ...
@@ -130,7 +130,7 @@ ms.author: suchiagicha
 
          在这种情况下，`CreateServiceReplicaListeners` 方法如下所示：
 
-         ```
+         ```csharp
          protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
          {
              return new[]
@@ -144,7 +144,7 @@ ms.author: suchiagicha
 
 3. 在安全服务上使用远程堆栈而不是使用 `Microsoft.ServiceFabric.Services.Remoting.Client.ServiceProxy` 类调用方法来创建服务代理时，请使用 `Microsoft.ServiceFabric.Services.Remoting.Client.ServiceProxyFactory`。传入包含 `SecurityCredentials` 的 `FabricTransportSettings`。
 
-    ```
+    ```csharp
     var x509Credentials = new X509Credentials
     {
         FindType = X509FindType.FindByThumbprint,
@@ -171,7 +171,7 @@ ms.author: suchiagicha
 
     如果客户端代码正在作为服务一部分运行，你可以从 settings.xml 中加载 `FabricTransportSettings`。创建与服务代码类似的 TransportSettings 节，如上所示。对客户端代码进行以下更改。
 
-    ```
+    ```csharp
     ServiceProxyFactory serviceProxyFactory = new ServiceProxyFactory(
         (c) => new FabricTransportServiceRemotingClientFactory(FabricTransportSettings.LoadFrom("TransportSettingsPrefix")));
 
@@ -187,7 +187,7 @@ ms.author: suchiagicha
 
     在此情况下，上述代码将进一步简化：
 
-    ```
+    ```csharp
     IHelloWorldStateful client = ServiceProxy.Create<IHelloWorldStateful>(
                  new Uri("fabric:/MyApplication/MyHelloWorldService"));
 
@@ -200,7 +200,7 @@ ms.author: suchiagicha
 
 1. 对于服务，需要帮助保护你创建的 WCF 通信侦听器 (`WcfCommunicationListener`)。为此，请修改 `CreateServiceReplicaListeners` 方法。
 
-    ```
+    ```csharp
     protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
     {
         return new[]
@@ -238,7 +238,7 @@ ms.author: suchiagicha
 
 2. 在客户端中，在前面[示例](./service-fabric-reliable-services-communication-wcf.md)中创建的 `WcfCommunicationClient` 类保持不变。但是，需要重写 `WcfCommunicationClientFactory` 的 `CreateClientAsync` 方法：
 
-    ```
+    ```csharp
     public class SecureWcfCommunicationClientFactory<TServiceContract> : WcfCommunicationClientFactory<TServiceContract> where TServiceContract : class
     {
         private readonly Binding clientBinding;
@@ -288,7 +288,7 @@ ms.author: suchiagicha
 
     使用 `SecureWcfCommunicationClientFactory` 创建 WCF 通信客户端 (`WcfCommunicationClient`)。使用客户端调用服务方法。
 
-    ```
+    ```csharp
     IServicePartitionResolver partitionResolver = ServicePartitionResolver.GetDefault();
 
     var wcfClientFactory = new SecureWcfCommunicationClientFactory<ICalculator>(clientBinding: GetNetTcpBinding(), servicePartitionResolver: partitionResolver);

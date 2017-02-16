@@ -53,7 +53,7 @@ DLL 或程序集缺失的症状可能为：
 
 3. 在 web.config 文件中，找到 system.web 部分并添加以下行：
 
-    ```
+    ```xml
     <customErrors mode="Off" />
     ```
 

@@ -46,7 +46,7 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
 
 下面说明如何在 PowerShell 脚本中实现这些步骤：
 
-```
+```powershell
     try
     {
         # WARNING: Make sure to reference the latest version of Microsoft.ServiceBus.dll
@@ -83,7 +83,7 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
 2. 如果找到该命名空间，则报告它找到的内容。
 3. 如果找不到该命名空间，则会创建该命名空间，然后检索新创建的命名空间。
 
-    ```
+    ```powershell
     $Namespace = "MyServiceBusNS"
     $Location = "China East"
 
@@ -107,7 +107,7 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
 
 若要预配其他服务总线实体，请从 SDK 创建 [NamespaceManager][] 类的实例。可以使用 [Get-AzureSBAuthorizationRule][] cmdlet 来检索用于提供连接字符串的授权规则。我们将在 `$NamespaceManager` 变量中存储对 `NamespaceManager` 实例的引用。我们稍后将在脚本中使用 `$NamespaceManager` 来预配其他实体。
 
-```
+```powershell
 $sbr = Get-AzureSBAuthorizationRule -Namespace $Namespace
 # Create the NamespaceManager object to create the event hub
 Write-Output "Creating a NamespaceManager object for the [$Namespace] namespace..."
@@ -125,7 +125,7 @@ Write-Output "NamespaceManager object for the [$Namespace] namespace has been su
 2. 如果不存在，将创建 `EventHubDescription` 并将其传递到 `NamespaceManager` 类的 `CreateEventHubIfNotExists` 方法。
 3. 确定事件中心可用后，请使用 `ConsumerGroupDescription` 和 `NamespaceManager` 创建使用者组。
 
-    ```
+    ```powershell
     $Path  = "MyEventHub"
     $PartitionCount = 12
     $MessageRetentionInDays = 7
@@ -161,7 +161,7 @@ Write-Output "NamespaceManager object for the [$Namespace] namespace has been su
 
 通过运行以下顺序的命令，可在 Azure 订阅之间移动命名空间。若要执行此操作，命名空间必须已经处于活动状态，而且运行 PowerShell 命令的用户必须既是源订阅又是目标订阅的管理员。
 
-```
+```powershell
     # Create a new resource group in target subscription
     Select-AzureRmSubscription -SubscriptionId 'ffffffff-ffff-ffff-ffff-ffffffffffff'
     New-AzureRmResourceGroup -Name 'targetRG' -Location 'China East'

@@ -29,7 +29,7 @@ ms.author: iainfou
 
 以下示例在名为 `myResourceGroup` 的资源组中部署名为 `myVM` 的 VM：
 
-```
+```powershell
 Set-AzureRmVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
 ```
 

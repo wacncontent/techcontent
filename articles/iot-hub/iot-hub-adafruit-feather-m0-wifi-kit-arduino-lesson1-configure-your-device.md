@@ -59,7 +59,7 @@ ms.author: xshi
 
 1. 现在，作为终端的普通用户：
 
-    ```
+    ```bash
        ls -l /dev/ttyUSB*
        # Or
        ls -l /dev/ttyACM*
@@ -67,7 +67,7 @@ ms.author: xshi
 
     将看到类似于下面的内容：
 
-    ```
+    ```bash
        crw-rw---- 1 root uucp 188, 0 5 apr 23.01 ttyUSB0
        # Or
        crw-rw---- 1 root dialout 188, 0 5 apr 23.01 ttyACM0
@@ -77,7 +77,7 @@ ms.author: xshi
 
 2. 将用户添加到组：
 
-    ```
+    ```bash
     sudo usermod -a -G group-name username
     ```
 

@@ -37,7 +37,7 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 
 若要在 Batch 应用程序中使用任务依赖关系，必须先告知 Batch 服务：作业要使用任务依赖关系。在 Batch .NET 中，为 [CloudJob][net_cloudjob] 启用任务依赖关系的方法是将其 [UsesTaskDependencies][net_usestaskdependencies] 属性设置为 `true`：
 
-```
+```csharp
 CloudJob unboundJob = batchClient.JobOperations.CreateJob( "job001",
     new PoolInformation { PoolId = "pool001" });
 
@@ -51,7 +51,7 @@ unboundJob.UsesTaskDependencies = true;
 
 若要创建一个依赖于一个或多个其他任务的成功完成的任务，需告知 Batch：该任务“依赖于”其他任务。在 Batch .NET 中，为 [CloudTask][net_cloudtask].[DependsOn][net_dependson] 属性配置 [TaskDependencies][net_taskdependencies] 类的一个实例：
 
-```
+```csharp
 // Task 'Flowers' depends on completion of both 'Rain' and 'Sun'
 // before it is run.
 new CloudTask("Flowers", "cmd.exe /c echo Flowers")
@@ -82,7 +82,7 @@ new CloudTask("Flowers", "cmd.exe /c echo Flowers")
 
 若要创建依赖于一个其他任务的成功完成的任务，可在填充 [CloudTask][net_cloudtask] 的 [DependsOn][net_dependson] 属性时，向 [TaskDependencies][net_taskdependencies].[OnId][net_onid] 静态方法提供单个任务 ID。
 
-```
+```csharp
 // Task 'taskA' doesn't depend on any other tasks
 new CloudTask("taskA", "cmd.exe /c echo taskA"),
 
@@ -97,7 +97,7 @@ new CloudTask("taskB", "cmd.exe /c echo taskB")
 
 若要创建依赖于多个任务的成功完成的任务，可在填充 [CloudTask][net_cloudtask] 的 [DependsOn][net_dependson] 属性时，向 [TaskDependencies][net_taskdependencies].[OnIds][net_onids] 静态方法提供任务 ID 的集合。
 
-```
+```csharp
 // 'Rain' and 'Sun' don't depend on any other tasks
 new CloudTask("Rain", "cmd.exe /c echo Rain"),
 new CloudTask("Sun", "cmd.exe /c echo Sun"),
@@ -117,7 +117,7 @@ new CloudTask("Flowers", "cmd.exe /c echo Flowers")
 >[!IMPORTANT]
 > 将任务 ID 范围用于依赖关系时，该范围内的任务 ID *必须*采用整数值的字符串表示形式。此外，范围内的每项任务必须成功完成，依赖任务才能按计划执行。
 
-```
+```csharp
 // Tasks 1, 2, and 3 don't depend on any other tasks. Because
 // we will be using them for a task range dependency, we must
 // specify string representations of integers as their ids.

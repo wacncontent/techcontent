@@ -57,7 +57,7 @@ SQL 数据仓库允许多达 1,024 个并发连接。所有 1,024 个连接都�
 
 默认情况下，每个用户都是小型资源类 (smallrc) 的成员。过程 `sp_addrolemember` 用于提高资源类的级别，过程 `sp_droprolemember` 用于降低资源类的级别。例如，以下命令会将 loaduser 的资源类提高到 largerc 级别：
 
-```
+```sql
 EXEC sp_addrolemember 'largerc', 'loaduser'
 ```
 
@@ -165,7 +165,7 @@ SQL 数据仓库通过使用工作负荷组来实现资源类。总共有八个�
 
 在进行故障诊断时，可以使用以下 DMV 查询，从资源调控器的角度来详细查看内存资源分配的差异，或者分析工作负荷组目前的和历史上的使用情况：
 
-```
+```sql
 WITH rg
 AS
 (   SELECT  
@@ -270,7 +270,7 @@ Removed as these two are not confirmed / supported under SQLDW
 
 2. **创建 SQL 数据仓库用户：**与 **SQL 数据仓库**数据库建立连接，然后执行以下命令。
 
-    ```
+    ```sql
     CREATE USER newperson FOR LOGIN newperson;
     ```
 
@@ -284,7 +284,7 @@ Removed as these two are not confirmed / supported under SQLDW
 
 5. **降低资源类的级别：**若要将用户从工作负荷管理角色中删除，请使用以下查询。
 
-    ```
+    ```sql
     EXEC sp_droprolemember 'largerc', 'newperson'
     ```
 
@@ -308,7 +308,7 @@ FROM    sys.dm_pdw_exec_requests r;
 
 可以使用 `sys.database_principals` 来查看工作负荷管理角色。
 
-```
+```sql
 SELECT  ro.[name]           AS [db_role_name]
 FROM    sys.database_principals ro
 WHERE   ro.[type_desc]      = 'DATABASE_ROLE'
@@ -335,7 +335,7 @@ SQL 数据仓库具有以下等待类型：
 
 可以使用 `sys.dm_pdw_waits` DMV 来查看请求所等待的具体资源。
 
-```
+```sql
 SELECT  w.[wait_id]
 ,       w.[session_id]
 ,       w.[type]											AS Wait_type
@@ -371,7 +371,7 @@ WHERE	w.[session_id] <> SESSION_ID();
 
 `sys.dm_pdw_resource_waits` DMV 仅显示给定查询所占用的资源等待。资源等待时间只度量等待提供资源的时间，与信号等待时间相反，后者是基础 SQL Server 将查询调度到 CPU 所需的时间。
 
-```
+```sql
 SELECT  [session_id]
 ,       [type]
 ,       [object_type]
@@ -389,7 +389,7 @@ WHERE	[session_id] <> SESSION_ID();
 
 可以使用 `sys.dm_pdw_wait_stats` DMV 对等待进行历史趋势分析。
 
-```
+```sql
 SELECT	w.[pdw_node_id]
 ,		w.[wait_name]
 ,		w.[max_wait_time]

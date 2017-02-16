@@ -64,7 +64,7 @@ Azure CLI 可通过 npm 包、提供发行版的程序包或 Docker 容器跨平
 
 列出可用的发布者，如下所示：
 
-```
+```azurecli
 azure vm image list-publishers --location ChinaNorth
 ```
 
@@ -82,7 +82,7 @@ azure vm image list-skus --location ChinaNorth --publisher Canonical --offer Ubu
 
 列出给定版本的所有可用映像，如下所示：
 
-```
+```azurecli
 azure vm image list --location ChinaNorth --publisher Canonical --offer UbuntuServer --sku 16.04.0-LTS
 ```
 

@@ -53,7 +53,7 @@ Web API 应用程序本身不会更改。它与你可能已在过去编写的 We
 
 **ValuesController.cs**
 
-```
+```csharp
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -95,7 +95,7 @@ namespace WebService.Controllers
 
 **Startup.cs**
 
-```
+```csharp
 using System.Web.Http;
 using Owin;
 
@@ -127,7 +127,7 @@ namespace WebService
 ## 服务托管
 在 Service Fabric 中，服务在*服务主机进程*（运行服务代码的可执行文件）中运行。当你使用 Reliable Services API 编写服务时，服务项目只编译成注册服务类型并运行代码的可执行文件。当你在 .NET 中的 Service Fabric 上编写服务时，在大多数情况下都是如此。如果你打开无状态服务项目中的 Program.cs，则应该看到：
 
-```
+```csharp
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -171,7 +171,7 @@ internal static class Program
 ## 设置 Web 服务器
 Reliable Services API 提供通信入口点，可在其中插入通信堆栈，以便用户和客户端能够连接到服务：
 
-```
+```csharp
 protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
 {
     ...
@@ -184,7 +184,7 @@ Web 服务器（以及可能在将来使用的任何其他通信堆栈，如 Web
 
 **OwinCommunicationListener.cs**
 
-```
+```csharp
 using Microsoft.Owin.Hosting;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Owin;
@@ -221,7 +221,7 @@ ICommunicationListener 接口提供了三个方法来为服务管理通信侦听
 
 若要开始操作，请为侦听器运行所需的项目添加私有类成员。这些成员会通过构造函数初始化，并在后面设置侦听 URL 时使用。
 
-```
+```csharp
 internal class OwinCommunicationListener : ICommunicationListener
 {
     private readonly ServiceEventSource eventSource;
@@ -281,7 +281,7 @@ internal class OwinCommunicationListener : ICommunicationListener
 
 在 PackageRoot\\ServiceManifest.xml 中配置 HTTP 终结点：
 
-```
+```xml
 <Resources>
     <Endpoints>
         <Endpoint Name="ServiceEndpoint" Type="Input" Protocol="http" Port="8281" />
@@ -293,7 +293,7 @@ internal class OwinCommunicationListener : ICommunicationListener
 
 返回到 OwinCommunicationListener.cs 中，现在可以开始实现 OpenAsync。从此处启动 Web 服务器。首先，获取终结点信息，并创建服务将侦听的 URL。视侦听器用于无状态服务还是有状态服务而定，URL 会有所不同。如果用于有状态服务，侦听器必须针对它所侦听的每个有状态服务副本创建唯一的地址。如果用于无状态服务，此地址可以简单得多。
 
-```
+```csharp
 public Task<string> OpenAsync(CancellationToken cancellationToken)
 {
     var serviceEndpoint = this.serviceContext.CodePackageActivationContext.GetEndpoint(this.endpointName);
@@ -341,7 +341,7 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 
 明确这一点后，OpenAsync 会启动 Web 服务器，并返回它所侦听的地址。请注意它侦听“http://+”，但在 OpenAsync 返回地址之前，“+”会替换为它当前所处节点的 IP 或 FQDN。此方法所返回的地址就是向系统注册的地址。它也是客户端和其他服务在请求服务地址时所看到的地址。要使客户端可以正确连接到它，它们在地址中需要实际 IP 或 FQDN。
 
-```
+```csharp
     ...
 
     this.publishAddress = this.listeningAddress.Replace("+", FabricRuntime.GetNodeContext().IPAddressOrFQDN);
@@ -374,7 +374,7 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 ## 实现 CloseAsync 和 Abort
 最后，实现 CloseAsync 和 Abort 以停止 Web 服务器。可以通过释放在 OpenAsync 过程中创建的服务器句柄来停止 Web 服务器。
 
-```
+```csharp
 public Task CloseAsync(CancellationToken cancellationToken)
 {
     this.eventSource.Message("Closing web server on endpoint {0}", this.endpointName);
@@ -412,7 +412,7 @@ private void StopWebServer()
 ## 启动 Web 服务器
 你现在已准备好创建并返回 OwinCommunicationListener 的实例以启动 Web 服务器。返回到 Service 类 (WebService.cs) 中，替代 `CreateServiceInstanceListeners()` 方法：
 
-```
+```csharp
 protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
 {
     var endpoints = Context.CodePackageActivationContext.GetEndpoints()
@@ -431,7 +431,7 @@ protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceLis
 
 最终的服务实现应该非常简单。它只需创建通信侦听器：
 
-```
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Fabric;
@@ -463,7 +463,7 @@ namespace WebService
 
 完整的 `OwinCommunicationListener` 类：
 
-```
+```csharp
 using System;
 using System.Diagnostics;
 using System.Fabric;
@@ -636,13 +636,13 @@ namespace WebService
 ## 将其扩展
 扩展无状态 Web 应用通常意味着添加更多计算机并在其上运行 Web 应用。每当向群集添加新节点时，Service Fabric 的业务流程引擎可以为你执行此操作。创建无状态服务的实例时，可以指定要创建的实例数。Service Fabric 将该数目的实例放置在群集中的节点上。它可以确保不会在任一节点上创建多个实例。还可以通过为实例计数指定 **-1**，指示 Service Fabric 始终在每个节点上创建一个实例。这可保证每当添加节点以扩展群集时，都会在新节点上创建无状态服务的实例。此值是服务实例的属性，因此它是在你创建服务实例时设置的：可以通过 PowerShell 设置：
 
-```
+```powershell
 New-ServiceFabricService -ApplicationName "fabric:/WebServiceApplication" -ServiceName "fabric:/WebServiceApplication/WebService" -ServiceTypeName "WebServiceType" -Stateless -PartitionSchemeSingleton -InstanceCount -1
 ```
 
 也可以在 Visual Studio 无状态服务项目中定义默认服务时设置：
 
-```
+```xml
 <DefaultServices>
   <Service Name="WebService">
     <StatelessService ServiceTypeName="WebServiceType" InstanceCount="-1">

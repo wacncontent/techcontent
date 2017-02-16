@@ -26,7 +26,7 @@ ms.author: zachal
 
 模板的“资源”部分中要使用以下代码片段。
 
-```
+```json
         "name": "Microsoft.Powershell.DSC",
         "type": "extensions",
          "location": "[resourceGroup().location]",
@@ -59,7 +59,7 @@ ms.author: zachal
 
 VMSS 节点具有“properties”节，其中包含“VirtualMachineProfile”和“extensionProfile”属性。DSC 添加在“extensions”下面。
 
-```
+```json
 "extensionProfile": {
         "extensions": [
             {
@@ -92,7 +92,7 @@ VMSS 节点具有“properties”节，其中包含“VirtualMachineProfile”�
 
 Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用以下架构。
 
-```
+```json
 "settings": {
 "wmfVersion": "latest",
 "configuration": {
@@ -154,7 +154,7 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 
 如果配置需要凭据，可将凭据包含在 protectedSettings 中：
 
-```
+```json
 "protectedSettings": {
     "configurationArguments": {
         "parameterOfTypePSCredential1": {
@@ -173,7 +173,7 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 
 在 Azure Resource Manager 模板中，以下代码指示 VM 下载正确的文件并运行适当的 PowerShell 函数：
 
-```
+```json
 "settings": {
     "configuration": {
         "url": "https://demo.blob.core.chinacloudapi.cn/",
@@ -192,7 +192,7 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 
 以前的 settings 架构如下所示：
 
-```
+```json
 "settings": {
     "WMFVersion": "latest",
     "ModulesUrl": "https://UrlToZipContainingConfigurationScript.ps1.zip",

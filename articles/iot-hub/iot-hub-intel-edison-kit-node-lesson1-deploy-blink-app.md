@@ -37,13 +37,13 @@ ms.author: xshi
 
 1. 通过运行以下命令克隆 GitHub 中的示例存储库：
 
-    ```
+    ```bash
     git clone https://github.com/Azure-Samples/iot-hub-node-edison-getting-started.git
     ```
 
 2. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
     cd iot-hub-node-edison-getting-started
     cd Lesson1
     code .
@@ -56,7 +56,7 @@ ms.author: xshi
 ### 安装应用程序依赖项
 运行以下命令，安装示例应用程序所需的库和其他模块：
 
-```
+```bash
 npm install
 ```
 
@@ -65,7 +65,7 @@ npm install
 
 1. 运行以下命令，生成设备配置文件：
 
-    ```
+    ```bash
     gulp init
     ```
 
@@ -73,7 +73,7 @@ npm install
 
 2. 运行以下命令，在 Visual Studio Code 中打开设备配置文件：
 
-    ```
+    ```bash
        # For Windows command prompt
        code %USERPROFILE%\.iot-hub-getting-started\config-edison.json
 
@@ -92,7 +92,7 @@ npm install
 ### 部署并运行示例应用
 运行以下命令，部署并运行示例应用程序：
 
-```
+```bash
 gulp deploy && gulp run
 ```
 

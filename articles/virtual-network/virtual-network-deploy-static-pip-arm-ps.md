@@ -41,7 +41,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 根据需要用于部署的值更改以下变量的值。以下值映射到本文中使用的方案：
 
-```
+```powershell
 # Set variables resource group
 $rgName                = "IaaSStory"
 $location              = "China North"
@@ -75,13 +75,13 @@ $dnsName               = "iaasstoryws1"
 
 1. 创建新的资源组。
 
-    ```
+    ```powershell
     New-AzureRmResourceGroup -Name $rgName -Location $location
     ```
 
 2. 创建 VNet 和子网。
 
-    ```
+    ```powershell
     $vnet = New-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName `
         -AddressPrefix $vnetPrefix -Location $location
 
@@ -93,14 +93,14 @@ $dnsName               = "iaasstoryws1"
 
 3. 创建公共 IP 资源。
 
-    ```
+    ```powershell
     $pip = New-AzureRmPublicIpAddress -Name $pipName -ResourceGroupName $rgName `
         -AllocationMethod Static -DomainNameLabel $dnsName -Location $location
     ```
 
 4. 使用公共 IP 为上面创建的子网中的 VM 创建网络接口 (NIC)。请注意第一个用于从 Azure 检索 VNet 的 cmdlet。该 cmdlet 是必需的，因为现有 VNet 是通过执行 `Set-AzureRmVirtualNetwork` 进行更改的。
 
-    ```
+    ```powershell
     $vnet = Get-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName
     $subnet = Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
     $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName `
@@ -110,7 +110,7 @@ $dnsName               = "iaasstoryws1"
 
 5. 创建存储帐户，以托管 VM OS 驱动器。
 
-    ```
+    ```powershell
     $stdStorageAccount = New-AzureRmStorageAccount -Name $stdStorageAccountName `
     -ResourceGroupName $rgName -Type Standard_LRS -Location $location
     ```
@@ -120,46 +120,46 @@ $dnsName               = "iaasstoryws1"
 
 1. 创建 VM 配置对象。
 
-    ```
+    ```powershell
     $vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize $vmSize
     ```
 
 2. 获取 VM 本地管理员帐户的凭据。
 
-    ```
+    ```powershell
     $cred = Get-Credential -Message "Type the name and password for the local administrator account."
     ```
 
 3. 创建 VM 配置对象。
 
-    ```
+    ```powershell
     $vmConfig = Set-AzureRmVMOperatingSystem -VM $vmConfig -Windows -ComputerName $vmName `
         -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
     ```
 
 4. 设置 VM 的操作系统映像。
 
-    ```
+    ```powershell
     $vmConfig = Set-AzureRmVMSourceImage -VM $vmConfig -PublisherName $publisher `
         -Offer $offer -Skus $sku -Version $version
     ```
 
 5. 配置 OS 磁盘。
 
-    ```
+    ```powershell
     $osVhdUri = $stdStorageAccount.PrimaryEndpoints.Blob.ToString() + "vhds/" + $osDiskName + ".vhd"
     $vmConfig = Set-AzureRmVMOSDisk -VM $vmConfig -Name $osDiskName -VhdUri $osVhdUri -CreateOption fromImage
     ```
 
 6. 将 NIC 添加到 VM。
 
-    ```
+    ```powershell
     $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $nic.Id -Primary
     ```
 
 7. 创建 VM。
 
-    ```
+    ```powershell
     New-AzureRmVM -VM $vmConfig -ResourceGroupName $rgName -Location $location
     ```
 

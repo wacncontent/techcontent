@@ -26,20 +26,20 @@ ms.author: rclaus
 ## 快速命令
 以下示例将一个 `50`GB 的磁盘附加到资源组 `myResourceGroup` 中名为 `myVM` 的 VM：
 
-```
+```azurecli
 azure vm disk attach-new myResourceGroup myVM 50
 ```
 
 ## 附加磁盘
 连接新的磁盘很快。键入 `azure vm disk attach-new myResourceGroup myVM sizeInGB` 可为 VM 创建和连接新的 GB 磁盘。如果你未显式标识存储帐户，则创建的所有磁盘都将位于 OS 磁盘所在的同一个存储帐户中。以下示例将一个 `50`GB 的磁盘附加到资源组 `myResourceGroup` 中名为 `myVM` 的 VM：
 
-```
+```azurecli
 azure vm disk attach-new myResourceGroup myVM 50
 ```
 
 输出
 
-```
+```azurecli
 info:    Executing command vm disk attach-new
 + Looking up the VM "myVM"
 info:    New data disk location: https://mystorageaccount.blob.core.chinacloudapi.cn/vhds/myVM-20150526-043.vhd
@@ -55,13 +55,13 @@ info:    vm disk attach-new command OK
 
 需要使用 SSH 访问 Azure VM 才能分区、格式化和装入新磁盘以供 Linux VM 使用。如果你不熟悉如何使用 **ssh** 进行连接，请注意，该命令采用 `ssh <username>@<FQDNofAzureVM> -p <the ssh port>` 格式，如下所示：
 
-```
+```bash
 ssh ops@mypublicdns.chinanorth.chinacloudapp.cn -p 22
 ```
 
 输出
 
-```
+```bash
 The authenticity of host 'mypublicdns.chinanorth.chinacloudapp.cn (191.239.51.1)' can't be established.
 ECDSA key fingerprint is bx:xx:xx:xx:xx:xx:xx:xx:xx:x:x:x:x:x:x:xx.
 Are you sure you want to continue connecting (yes/no)? yes
@@ -97,13 +97,13 @@ ops@myVM:~$
 
 现在，你已连接到 VM，可以附加磁盘了。首先，使用 `dmesg | grep SCSI` 来查找磁盘（用于发现新磁盘的方法可能各不相同）。在本示例中，键入的内容如下所示：
 
-```
+```bash
 dmesg | grep SCSI
 ```
 
 输出
 
-```
+```bash
 [    0.294784] SCSI subsystem initialized
 [    0.573458] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
 [    7.110271] sd 2:0:0:0: [sda] Attached SCSI disk
@@ -113,13 +113,13 @@ dmesg | grep SCSI
 
 而在本主题中，`sdc` 磁盘是我们所需要的。现在使用 `sudo fdisk /dev/sdc` 对磁盘进行分区 -- 假定你需要的磁盘为 `sdc`，则应将其设置为分区 1 中的主磁盘，并接受其他默认设置值。
 
-```
+```bash
 sudo fdisk /dev/sdc
 ```
 
 输出
 
-```
+```bash
 Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
 Building a new DOS disklabel with disk identifier 0x2a59b123.
 Changes will remain in memory only, until you decide to write them.
@@ -141,7 +141,7 @@ Using default value 10485759
 
 系统提示时，键入 `p` 创建分区：
 
-```
+```bash
 Command (m for help): p
 
 Disk /dev/sdc: 5368 MB, 5368709120 bytes
@@ -163,13 +163,13 @@ Syncing disks.
 
 另外，通过使用 **mkfs** 命令并指定文件系统类型和设备名称，将文件系统写入分区。在本主题中，我们将使用上面提供的 `ext4` 和 `/dev/sdc1`：
 
-```
+```bash
 sudo mkfs -t ext4 /dev/sdc1
 ```
 
 输出
 
-```
+```bash
 mke2fs 1.42.9 (4-Feb-2014)
 Discarding device blocks: done
 Filesystem label=
@@ -194,38 +194,38 @@ Writing superblocks and filesystem accounting information: done
 
 现在，我们使用 `mkdir` 创建一个目录来装载文件系统：
 
-```
+```bash
 sudo mkdir /datadrive
 ```
 
 并使用 `mount` 来装载目录：
 
-```
+```bash
 sudo mount /dev/sdc1 /datadrive
 ```
 
 数据磁盘现在可以作为 `/datadrive` 使用。
 
-```
+```bash
 ls
 ```
 
 输出
 
-```
+```bash
 bin   datadrive  etc   initrd.img  lib64       media  opt   root  sbin  sys  usr  vmlinuz
 boot  dev        home  lib         lost+found  mnt    proc  run   srv   tmp  var
 ```
 
 若要确保在重新引导后自动重新装载驱动器，必须将其添加到 /etc/fstab 文件。此外，强烈建议在 /etc/fstab 中使用 UUID（全局唯一标识符）来引用驱动器而不是只使用设备名称（例如 `/dev/sdc1`）。如果 OS 在启动过程中检测到磁盘错误，使用 UUID 可以避免将错误的磁盘装载到给定位置。然后为剩余的数据磁盘分配这些设备 ID。若要查找新驱动器的 UUID，可以使用 **blkid** 实用工具：
 
-```
+```bash
 sudo -i blkid
 ```
 
 输出与下面类似：
 
-```
+```bash
 /dev/sda1: UUID="11111111-1b1b-1c1c-1d1d-1e1e1e1e1e1e" TYPE="ext4"
 /dev/sdb1: UUID="22222222-2b2b-2c2c-2d2d-2e2e2e2e2e2e" TYPE="ext4"
 /dev/sdc1: UUID="33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e" TYPE="ext4"
@@ -238,13 +238,13 @@ sudo -i blkid
 
 接下来，请在文本编辑器中打开 **/etc/fstab** 文件：
 
-```
+```bash
 sudo vi /etc/fstab
 ```
 
 在此示例中，将使用在之前的步骤中创建的新 **/dev/sdc1** 设备的 UUID 值并使用装载点 **/datadrive**。将以下行添加到 **/etc/fstab** 文件的末尾：
 
-```
+```bash
 UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail   1   2
 ```
 
@@ -260,7 +260,7 @@ UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail 
 
 * 在 `/etc/fstab` 中使用 `discard` 装载选项，例如：
 
-    ```
+    ```bash
     UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,discard   1   2
     ```
 
@@ -268,14 +268,14 @@ UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail 
 
     **Ubuntu**
 
-    ```
+    ```bash
     sudo apt-get install util-linux
     sudo fstrim /datadrive
     ```
 
     **RHEL/CentOS**
 
-    ```
+    ```bash
     sudo yum install util-linux
     sudo fstrim /datadrive
     ```

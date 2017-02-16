@@ -46,13 +46,13 @@ Azure 导入/导出服务可能无法将某些文件或某个文件的部分内�
 ## 使用 RepairImport 命令  
 若要通过网络流式传输导入数据来修复这些数据，必须使用 `/d` 参数指定包含导入的原始文件的目录。此外，必须指定从存储帐户下载的复制日志文件。下面显示了一个用于修复部分失败的导入作业的典型命令行：
 
-```
+```  
 WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bob\Pictures;X:\BobBackup\photos /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C2V.log  
 ```
 
 下面是复制日志文件的示例。在此示例中，为导入作业寄送的驱动器上某个文件的 64K 内容已损坏。由于这只是指示失败，作业中剩余 Blob 已成功导入。
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>  
 <DriveLog>  
  <DriveId>9WM35C2V</DriveId>  
@@ -78,7 +78,7 @@ WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bo
 
 使用 `/PathMapFile` 选项可以解决这些错误。可以指定包含工具无法正确识别的文件列表的文件名称。下面是可填充 `9WM35C2V_pathmap.txt` 的示例命令行：
 
-```
+```  
 WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bob\Pictures;X:\BobBackup\photos /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C2V.log /PathMapFile:C:\WAImportExport\9WM35C2V_pathmap.txt  
 ```
 

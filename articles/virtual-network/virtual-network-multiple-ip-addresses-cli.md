@@ -37,7 +37,7 @@ ms.author: annahar
 
 3. [创建资源组](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-resource-groups-and-choose-deployment-locations)，然后创建[虚拟网络和子网](../virtual-machines/virtual-machines-linux-create-cli-complete.md#create-a-virtual-network-and-subnet)。按如下所示，更改 ``` --address-prefixes ``` 和 ```--address-prefix``` 字段，满足本文列出的具体方案要求：
 
-    ```
+    ```azurecli
     --address-prefixes 10.0.0.0/16
     --address-prefix 10.0.0.0/24
     ```
@@ -61,7 +61,7 @@ ms.author: annahar
     > [!NOTE]
     公共 IP 地址会产生少许费用。有关 IP 地址定价的详细信息，请阅读 [IP address pricing](https://www.azure.cn/pricing/details/reserved-ip-addresses/)（IP 地址定价）页。可在一个订阅中使用的公共 IP 地址数有限制。若要了解有关限制的详细信息，请阅读 [Azure 限制](../azure-subscription-service-limits.md#networking-limits)一文。
 
-    ```
+    ```azurecli
     azure network nic create --resource-group myResourceGroup --location chinaeast --subnet-vnet-name myVnet --subnet-name mySubnet --name myNic1 --public-ip-name myPublicIP
     ```
 
@@ -77,7 +77,7 @@ ms.author: annahar
 
     输入以下命令，创建具有一个动态专用 IP 地址且没有公共 IP 地址的 IP 配置：
 
-    ```
+    ```azurecli
     azure network nic ip-config create --resource-group myResourceGroup --nic-name myNic1 --name IPConfig-3
     ```
 
@@ -95,7 +95,7 @@ ms.author: annahar
 
 7. 输入以下命令，查看 NIC 和关联的 IP 配置：
 
-    ```
+    ```azurecli
     azure network nic show --resource-group myResourceGroup --name myNic1
     ```
 
@@ -113,7 +113,7 @@ ms.author: annahar
 
     若要将专用 IP 地址添加到 NIC，必须使用以下命令创建 IP 配置。如果想要添加动态专用 IP 地址，请在输入命令前删除 ```-PrivateIpAddress 10.0.0.7```。指定的静态 IP 地址必须是子网的未使用地址。
 
-    ```
+    ```azurecli
     azure network nic ip-config create --resource-group myResourceGroup --nic-name myNic1 --private-ip-address 10.0.0.7 --name IPConfig-4
     ```
 
@@ -131,7 +131,7 @@ ms.author: annahar
 
     每次在新 IP 配置中添加公共 IP 地址时，还必须添加专用 IP 地址，因为所有 IP 配置都必须具有专用 IP 地址。可添加现有公共 IP 地址资源，也可创建新的公共 IP 地址资源。若要新建，请输入以下命令：
 
-    ```
+    ```azurecli
       azure network public-ip create --resource-group myResourceGroup --location chinaeast --name myPublicIP3 --domain-name-label mypublicdns3
     ```
 
@@ -142,7 +142,7 @@ ms.author: annahar
     **将资源关联到现有 IP 配置**
     公共 IP 地址资源仅可关联到尚未关联公共 IP 地址资源的 IP 配置。可输入以下命令，确定某个 IP 配置是否具有关联的公共 IP 地址：
 
-    ```
+    ```azurecli
     azure network nic ip-config list --resource-group myResourceGroup --nic-name myNic1
     ```
 
@@ -158,19 +158,19 @@ ms.author: annahar
 
     *IpConfig-3* 的**公共 IP** 列为空白，因此，当前没有公共 IP 地址资源与其关联。可将现有公共 IP 地址资源添加到 IpConfig-3，或输入以下命令进行创建：
 
-    ```
+    ```azurecli
     azure network public-ip create --resource-group  myResourceGroup --location chinaeast --name myPublicIP3 --domain-name-label mypublicdns3 --allocation-method Static
     ```
 
     输入以下命令，将公共 IP 地址资源关联到名为 *IPConfig-3* 的现有 IP 配置：
 
-    ```
+    ```azurecli
     azure network nic ip-config set --resource-group myResourceGroup --nic-name myNic1 --name IPConfig-3 --public-ip-name myPublicIP3
     ```
 
 7. 输入以下命令，查看分配给 NIC 的专用 IP 地址和公共 IP 地址资源：
 
-    ```
+    ```azurecli
     azure network nic ip-config list --resource-group myResourceGroup --nic-name myNic1
     ```
 

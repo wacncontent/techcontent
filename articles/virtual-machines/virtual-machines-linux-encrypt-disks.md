@@ -26,7 +26,7 @@ ms.author: iainfou
 
 需要安装[最新的 Azure CLI](../xplat-cli-install.md)，然后按如下所示，使用 Resource Manager 模式登录：
 
-```
+```azurecli
 azure config mode arm
 ```
 
@@ -34,21 +34,21 @@ azure config mode arm
 
 首先，在 Azure 订阅中启用 Azure 密钥保管库提供程序，并创建一个资源组。以下示例在 `ChinaNorth` 位置创建资源组名称 `myResourceGroup`：
 
-```
+```azurecli
 azure provider register Microsoft.KeyVault
 azure group create myResourceGroup --location ChinaNorth
 ```
 
 创建 Azure 密钥保管库。以下示例创建名为 `myKeyVault` 的密钥保管库：
 
-```
+```azurecli
 azure keyvault create --vault-name myKeyVault --resource-group myResourceGroup \
   --location ChinaNorth
 ```
 
 在密钥保管库中创建加密密钥，并启用该密钥进行加密磁盘。以下示例创建名为 `myKey` 的密钥：
 
-```
+```azurecli
 azure keyvault key create --vault-name myKeyVault --key-name myKey \
   --destination software
 azure keyvault set-policy --vault-name myKeyVault --resource-group myResourceGroup \
@@ -57,7 +57,7 @@ azure keyvault set-policy --vault-name myKeyVault --resource-group myResourceGro
 
 使用 Azure Active Directory 创建一个终结点，用于处理身份验证以及从密钥保管库交换加密密钥。`--home-page` 和 `--identifier-uris` 不需要是实际的可路由地址。为实现高级别的安全性，应使用客户端机密而不是密码。Azure CLI 目前无法生成客户端机密。只能在 Azure 门户预览中生成客户端机密。以下示例创建名为 `myAADApp` 的 Azure Active Directory 终结点，并使用密码 `myPassword`。指定自己的密码，如下所示：
 
-```
+```azurecli
 azure ad app create --name myAADApp \
   --home-page http://testencrypt.contoso.com \
   --identifier-uris http://testencrypt.contoso.com \
@@ -66,7 +66,7 @@ azure ad app create --name myAADApp \
 
 请注意上述命令的输出中显示的 `applicationId`。在以下步骤中使用此应用程序 ID：
 
-```
+```azurecli
 azure ad sp create --applicationId myApplicationID
 azure keyvault set-policy --vault-name myKeyVault --spn myApplicationID \
   --perms-to-keys ["all"] --perms-to-secrets ["all"]
@@ -74,21 +74,21 @@ azure keyvault set-policy --vault-name myKeyVault --spn myApplicationID \
 
 将数据磁盘添加到现有 VM。以下示例将数据磁盘添加到名为 `myVM` 的 VM：
 
-```
+```azurecli
 azure vm disk attach-new --resource-group myResourceGroup --vm-name myVM \
   --size-in-gb 5
 ```
 
 检查密钥保管库和所创建的密钥的详细信息。在最后一个步骤中，需要使用密钥保管库 ID、URI 和密钥 URL。以下示例检查名为 `myKeyVault` 的密钥保管库和名为 `myKey` 的密钥的详细信息：
 
-```
+```azurecli
 azure keyvault show myKeyVault
 azure keyvault key show myKeyVault myKey
 ```
 
 按如下所示加密磁盘，在整个过程中请输入自己的参数名称：
 
-```
+```azurecli
 azure vm enable-disk-encryption --resource-group myResourceGroup --vm-name myVM \
   --aad-client-id myApplicationID --aad-client-secret myApplicationPassword \
   --disk-encryption-key-vault-url myKeyVaultVaultURI \
@@ -100,7 +100,7 @@ azure vm enable-disk-encryption --resource-group myResourceGroup --vm-name myVM 
 
 在加密过程中，Azure CLI 不提供详细错误。有关其他故障排除信息，请查看 `/var/log/azure/Microsoft.OSTCExtensions.AzureDiskEncryptionForLinux/0.x.x.x/extension.log`。由于上述命令包含许多变量，你可能不太明白为何进程会失败，为此，我们提供了如下所示的完整命令示例：
 
-```
+```azurecli
 azure vm enable-disk-encryption -g myResourceGroup -n MyVM \
   --aad-client-id 147bc426-595d-4bad-b267-58a7cbd8e0b6 \
   --aad-client-secret P@ssw0rd! \
@@ -113,7 +113,7 @@ azure vm enable-disk-encryption -g myResourceGroup -n MyVM \
 
 最后，再次检查加密状态，确认虚拟磁盘现在是否已加密。以下示例检查 `myResourceGroup` 资源组中名为 `myVM` 的 VM 的状态：
 
-```
+```azurecli
 azure vm show-disk-encryption-status --resource-group myResourceGroup --name myVM
 ```
 
@@ -156,7 +156,7 @@ Linux VM 上的虚拟磁盘是使用 [dm-crypt](https://wikipedia.org/wiki/Dm-cr
 ## 创建 Azure 密钥保管库和密钥
 若要安装本指南的余下部分，需要安装[最新的 Azure CLI](../xplat-cli-install.md)，然后按如下所示，使用 Resource Manager 模式登录：
 
-```
+```azurecli
 azure config mode arm
 ```
 
@@ -166,14 +166,14 @@ azure config mode arm
 
 在 Azure 订阅中启用 Azure 密钥保管库提供程序，然后创建一个资源组。以下示例在 `ChinaNorth` 位置创建名为 `myResourceGroup` 的资源组：
 
-```
+```azurecli
 azure provider register Microsoft.KeyVault
 azure group create myResourceGroup --location ChinaNorth
 ```
 
 包含加密密钥和关联的计算资源（例如存储和 VM 本身）的 Azure 密钥保管库必须位于同一区域。以下示例创建名为 `myKeyVault` 的 Azure 密钥保管库：
 
-```
+```azurecli
 azure keyvault create --vault-name myKeyVault --resource-group myResourceGroup \
   --location ChinaNorth
 ```
@@ -182,7 +182,7 @@ azure keyvault create --vault-name myKeyVault --resource-group myResourceGroup \
 
 对于这两种保护模型，在启动 VM 解密虚拟磁盘时，都需要向 Azure 平台授予请求加密密钥的访问权限。在密钥保管库中创建加密密钥，然后启用该密钥，以便进行虚拟磁盘加密。以下示例创建名为 `myKey` 的密钥，然后为磁盘加密启用该密钥：
 
-```
+```azurecli
 azure keyvault key create --vault-name myKeyVault --key-name myKey \
   --destination software
 azure keyvault set-policy --vault-name myKeyVault --resource-group myResourceGroup \
@@ -196,7 +196,7 @@ azure keyvault set-policy --vault-name myKeyVault --resource-group myResourceGro
 
 创建 Azure Active Directory 应用程序。以下示例创建名为 `myAADApp` 的应用程序并使用密码 `myPassword`。指定自己的密码，如下所示：
 
-```
+```azurecli
 azure ad app create --name myAADApp \
   --home-page http://testencrypt.contoso.com \
   --identifier-uris http://testencrypt.contoso.com \
@@ -207,7 +207,7 @@ azure ad app create --name myAADApp \
 
 创建 SPN，然后按如下所示设置相应的权限：
 
-```
+```azurecli
 azure ad sp create --applicationId myApplicationID
 azure keyvault set-policy --vault-name myKeyVault --spn myApplicationID \
   --perms-to-keys ["all"] --perms-to-secrets ["all"]
@@ -216,14 +216,14 @@ azure keyvault set-policy --vault-name myKeyVault --spn myApplicationID \
 ## 添加虚拟磁盘并检查加密状态
 为了实践加密一些虚拟磁盘，让我们在现有 VM 中添加一个磁盘。按如下所示，将一个 5Gb 的数据磁盘添加到现有 VM：
 
-```
+```azurecli
 azure vm disk attach-new --resource-group myResourceGroup --vm-name myVM \
   --size-in-gb 5
 ```
 
 这些虚拟磁盘当前未加密。按如下所示检查 VM 的当前加密状态：
 
-```
+```azurecli
 azure vm show-disk-encryption-status --resource-group myResourceGroup --name myVM
 ```
 
@@ -237,14 +237,14 @@ azure vm show-disk-encryption-status --resource-group myResourceGroup --name myV
 
 让我们查看 Azure 密钥保管库和所创建的密钥的详细信息，因为最后一个步骤需要先后用到密钥保管库 ID、URI 和密钥 URL：
 
-```
+```azurecli
 azure keyvault show myKeyVault
 azure keyvault key show myKeyVault myKey
 ```
 
 按如下所示，使用 `azure keyvault show` 和 `azure keyvault key show` 命令的输出加密虚拟磁盘：
 
-```
+```azurecli
 azure vm enable-disk-encryption --resource-group myResourceGroup --vm-name myVM \
   --aad-client-id myApplicationID --aad-client-secret myApplicationPassword \
   --disk-encryption-key-vault-url myKeyVaultVaultURI \
@@ -256,7 +256,7 @@ azure vm enable-disk-encryption --resource-group myResourceGroup --vm-name myVM 
 
 由于上述命令包含许多变量，下面提供了一个完整的命令示例供参考：
 
-```
+```azurecli
 azure vm enable-disk-encryption -g myResourceGroup -n MyVM \
   --aad-client-id 147bc426-595d-4bad-b267-58a7cbd8e0b6 \
   --aad-client-secret P@ssw0rd! \
@@ -271,7 +271,7 @@ azure vm enable-disk-encryption -g myResourceGroup -n MyVM \
 
 最后，让我们再次检查加密状态，确认虚拟磁盘现在是否已加密。
 
-```
+```azurecli
 azure vm show-disk-encryption-status --resource-group myResourceGroup --name myVM
 ```
 
@@ -280,14 +280,14 @@ azure vm show-disk-encryption-status --resource-group myResourceGroup --name myV
 
 例如，按如下所示将另一个虚拟磁盘添加到 VM：
 
-```
+```azurecli
 azure vm disk attach-new --resource-group myResourceGroup --vm-name myVM \
   --size-in-gb 5
 ```
 
 重新运行上述命令来加密虚拟磁盘，不过这次请添加 `--sequence-version` 参数，以便递增第一次运行中使用的值，如下所示：
 
-```
+```azurecli
 azure vm enable-disk-encryption --resource-group myResourceGroup --vm-name myVM \
   --aad-client-id myApplicationID --aad-client-secret myApplicationPassword \
   --disk-encryption-key-vault-url myKeyVaultVaultURI \

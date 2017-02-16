@@ -24,7 +24,7 @@
 1. 打开终端窗口。
 2. 请确保以 root 用户身份操作。如果不是，请输入以下命令：
 
-    ```
+    ```bash
     sudo -i
     ```
 
@@ -33,7 +33,7 @@
     * 保留 dhcp 的现有行项。主 IP 地址会保留之前的配置。
     * 使用以下命令添加其他静态 IP 地址的配置：
 
-        ```
+        ```bash
         cd /etc/network/interfaces.d/
         ls
         ```
@@ -43,27 +43,27 @@
 
     该文件的末尾应会显示以下命令行：
 
-    ```
+    ```bash
     auto eth0
     iface eth0 inet dhcp
     ```
 
 5. 在此文件包含的命令行后面添加以下命令行：
 
-    ```
+    ```bash
     iface eth0 inet static
     address <your private IP address here>
     ```
 
 6. 使用以下命令保存该文件：
 
-    ```
+    ```bash
     :wq
     ```
 
 7. 使用以下命令重置网络接口：
 
-    ```
+    ```bash
     sudo ifdown eth0 && sudo ifup eth0
     ```
 
@@ -73,7 +73,7 @@
 
 8. 使用以下命令验证 IP 地址是否已添加到网络接口：
 
-    ```
+    ```bash
     Ip addr list eth0
     ```
 
@@ -84,19 +84,19 @@
 1. 打开终端窗口。
 2. 请确保以 root 用户身份操作。如果不是，请输入以下命令：
 
-    ```
+    ```bash
     sudo -i
     ```
 
 3. 输入密码，根据提示的说明操作。切换为 root 用户后，使用以下命令导航到网络脚本文件夹：
 
-    ```
+    ```bash
     cd /etc/sysconfig/network-scripts
     ```
 
 4. 使用以下命令列出相关的 ifcfg 文件：
 
-    ```
+    ```bash
     ls ifcfg-*
     ```
 
@@ -104,32 +104,32 @@
 
 5. 使用以下命令复制 *ifcfg-eth0* 文件并将它命名为 *ifcfg-eth0:0*：
 
-    ```
+    ```bash
     cp ifcfg-eth0 ifcfg-eth0:0
     ```
 
 6. 使用以下命令编辑 *ifcfg-eth0:0* 文件：
 
-    ```
+    ```bash
     vi ifcfg-eth1
     ```
 
 7. 使用以下命令在文件中将设备更改为适当的名称，在本例中为 *eth0:0*：
 
-    ```
+    ```bash
     DEVICE=eth0:0
     ```
 
 8. 更改 *IPADDR = YourPrivateIPAddress* 行以反映 IP 地址。
 9. 使用以下命令保存该文件：
 
-    ```
+    ```bash
     :wq
     ```
 
 10. 运行以下命令重新启动网络服务，确保更改成功：
 
-    ```
+    ```bash
     /etc/init.d/network restart
     Ipconfig
     ```

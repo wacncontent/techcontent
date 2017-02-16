@@ -44,7 +44,7 @@ ms.author: jdial
 
 1. 运行以下命令，为前端子网创建路由表：
 
-    ```
+    ```powershell
     New-AzureRouteTable -Name UDR-FrontEnd -Location chinanorth `
     -Label "Route table for front end subnet"
     ```
@@ -58,7 +58,7 @@ ms.author: jdial
     ```
 2. 运行以下命令，在路由表中创建路由，将流向后端子网 (192.168.2.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-    ```
+    ```powershell
     Get-AzureRouteTable UDR-FrontEnd `
     |Set-AzureRoute -RouteName RouteToBackEnd -AddressPrefix 192.168.2.0/24 `
     -NextHopType VirtualAppliance `
@@ -78,7 +78,7 @@ ms.author: jdial
     ```
 3. 运行以下命令，将路由表与 **FrontEnd** 子网关联：
 
-    ```
+    ```powershell
     Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
     -SubnetName FrontEnd `
     -RouteTableName UDR-FrontEnd
@@ -89,7 +89,7 @@ ms.author: jdial
 
 1. 运行以下命令，为后端子网创建路由表：
 
-    ```
+    ```powershell
     New-AzureRouteTable -Name UDR-BackEnd `
     -Location chinanorth `
     -Label "Route table for back end subnet"
@@ -97,7 +97,7 @@ ms.author: jdial
 
 2. 运行以下命令，在路由表中创建路由，将流向前端子网 (192.168.1.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-    ```
+    ```powershell
     Get-AzureRouteTable UDR-BackEnd `
     |Set-AzureRoute -RouteName RouteToFrontEnd -AddressPrefix 192.168.1.0/24 `
     -NextHopType VirtualAppliance `
@@ -106,7 +106,7 @@ ms.author: jdial
 
 3. 运行以下命令，将路由表与 **BackEnd** 子网关联：
 
-    ```
+    ```powershell
     Set-AzureSubnetRouteTable -VirtualNetworkName TestVNet `
     -SubnetName BackEnd `
     -RouteTableName UDR-BackEnd
@@ -118,7 +118,7 @@ ms.author: jdial
 
 1. 运行以下命令，检查 IP 转发的状态：
 
-    ```
+    ```powershell
     Get-AzureVM -Name FW1 -ServiceName TestRGFW `
     | Get-AzureIPForwarding
     ```
@@ -130,7 +130,7 @@ ms.author: jdial
     ```
 2. 运行以下命令，为 *FW1* VM 启用 IP 转发：
 
-    ```
+    ```powershell
     Get-AzureVM -Name FW1 -ServiceName TestRGFW `
     | Set-AzureIPForwarding -Enable
     ```

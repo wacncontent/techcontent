@@ -56,7 +56,7 @@ Service Fabric 应用程序可以通过预配一个完整且独立的应用程�
 
 例如，让我们从以下应用程序开始（为便于理解，这里提供了版本号）：
 
-```
+```text
 app1       	1.0.0
   service1 	1.0.0
     code   	1.0.0
@@ -68,7 +68,7 @@ app1       	1.0.0
 
 现在，假设你只想要使用 PowerShell 和差异包来更新 service1 的代码包。现在，更新的应用程序使用以下文件夹结构：
 
-```
+```text
 app1       	2.0.0      <-- new version
   service1 	2.0.0      <-- new version
     code   	2.0.0      <-- new version
@@ -80,7 +80,7 @@ app1       	2.0.0      <-- new version
 
 在本例中，你已将应用程序清单更新为 2.0.0，并更新了 service1 的服务清单以反映代码包更新。应用程序包的文件夹使用以下结构：
 
-```
+```text
 app1/
   service1/
     code/

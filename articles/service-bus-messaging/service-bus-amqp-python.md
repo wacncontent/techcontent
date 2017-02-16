@@ -32,7 +32,7 @@ Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Py
 
 以下代码演示如何向服务总线消息实体发送消息。
 
-```
+```python
     messenger = Messenger()
     message = Message()
     message.address = "amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn/[entity]"
@@ -46,7 +46,7 @@ Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Py
 
 以下代码演示如何从服务总线消息实体接收消息。
 
-```
+```python
     messenger = Messenger()
     address = "amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn/[entity]"
     messenger.subscribe(address)
@@ -67,7 +67,7 @@ Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Py
 
 Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**、**float**、**uuid**、**bool**、**string**。以下 Python 代码显示如何使用上述每种属性类型在消息上设置属性。
 
-```
+```python
     message.properties[u"TestString"] = u"This is a string"    
     message.properties[u"TestInt"] = 1
     message.properties[u"TestLong"] = 1000L
@@ -77,7 +77,7 @@ Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**
 
 在服务总线 .NET API 中，在 [BrokeredMessage][] 的 **Properties** 集合中携带消息应用程序属性。以下代码演示如何读取从 Python 客户端收到的消息的应用程序属性。
 
-```
+```csharp
     if (message.Properties.Keys.Count > 0)
     {
       foreach (string name in message.Properties.Keys)
@@ -104,7 +104,7 @@ Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**
 
 [BrokeredMessage][] 类型支持以下类型的应用程序属性：**byte**、**sbyte**、**char**、**short**、**ushort**、**int**、**uint**、**long**、**ulong**、**float**、**double**、**decimal**、**bool**、**Guid**、**string**、**Uri**、**DateTime**、**DateTimeOffset** 和 **TimeSpan**。以下 .NET 代码显示如何使用上述每种属性类型在 [BrokeredMessage][] 对象上设置属性。
 
-```
+```csharp
     message.Properties["TestByte"] = (byte)128;
     message.Properties["TestSbyte"] = (sbyte)-22;
     message.Properties["TestChar"] = (char) 'X';
@@ -129,7 +129,7 @@ Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**
 
 以下 Python 代码演示如何读取从服务总线 .NET 客户端收到的消息的应用程序属性。
 
-```
+```python
     if message.properties != None:
        for k,v in message.properties.items():         
              print "--   %s : %s (%s)" % (k, str(v), type(v))         

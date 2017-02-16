@@ -118,7 +118,7 @@ HDInsight 不支持限制出站流量，仅限制入站流量。在定义包含 
 
 **使用 Azure PowerShell**
 
-```powershell
+```
 $vnetName = "Replace with your virtual network name"
 $resourceGroupName = "Replace with the resource group the virtual network is in"
 $subnetName = "Replace with the name of the subnet that HDInsight will be installed into"
@@ -263,7 +263,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)
 
-    ```powershell
+    ```
     $ClusterDnsName = <clustername>
     $Username = <cluster admin username>
     $Password = <cluster admin password>
@@ -282,7 +282,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [cURL](http://curl.haxx.se/) 和 [jq](http://stedolan.github.io/jq/)
 
-    ```
+    ```xml
     curl -G -u <username>:<password> https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azurehdinsight.cn/services/yarn/components/resourcemanager | jq .host_components[0].HostRoles.host_name
     ```
 
@@ -294,7 +294,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)
 
-    ```powershell
+    ```
     $ClusterDnsName = <clustername>
     $Username = <cluster admin username>
     $Password = <cluster admin password>
@@ -312,7 +312,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 * [cURL](http://curl.haxx.se/) 和 [jq](http://stedolan.github.io/jq/)
 
-    ```
+    ```xml
     curl -G -u <username>:<password> "https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azurehdinsight.cn/configurations?type=hbase-site&tag=default&fields=items/properties/hbase.zookeeper.quorum" | jq .items[0].properties[]
     ```
 

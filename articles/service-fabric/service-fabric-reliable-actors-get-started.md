@@ -83,7 +83,7 @@ ms.author: vturecek
 
 执行组件服务必须使用 Service Fabric 运行时中的服务类型注册。为了使执行组件服务能够运行执行组件实例，还必须向执行组件服务注册你的执行组件类型。`ActorRuntime` 注册方法将为执行组件执行此操作。
 
-```
+```csharp
 internal static class Program
 {
     private static void Main()
@@ -106,7 +106,7 @@ internal static class Program
 
 如果在 Visual Studio 中从新项目开始，并且只有一个执行组件定义，那么默认情况下，在 Visual Studio 生成的代码中包含此注册。如果在服务中定义其他执行组件，则需要使用以下操作添加执行组件注册：
 
-```
+```csharp
 ActorRuntime.RegisterActorAsync<MyOtherActor>();
 ```
 

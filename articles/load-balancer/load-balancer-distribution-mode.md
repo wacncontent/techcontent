@@ -52,7 +52,7 @@ ms.author: sewhee
 
 将 Azure 终结点添加到虚拟机并设置负载均衡器分发模式
 
-```
+```powershell
 Get-AzureVM -ServiceName mySvc -Name MyVM1 | Add-AzureEndpoint -Name HttpIn -Protocol TCP -PublicPort 80 -LocalPort 8080 –LoadBalancerDistribution sourceIP | Update-AzureVM
 ```
 
@@ -97,7 +97,7 @@ Set-AzureLoadBalancedEndpoint -ServiceName MyService -LBSetName LBSet1 -Protocol
 
 可利用用于 .NET 2.5 的 Azure SDK（于 11 月发布）来更新云服务。云服务的终结点设置在 .csdef 中进行。若要更新云服务部署的负载均衡器分发模式，需要进行部署升级。下面是终结点设置的 .csdef 更改的示例：
 
-```
+```xml
 <WorkerRole name="worker-role-name" vmsize="worker-role-size" enableNativeCodeExecution="[true|false]">
   <Endpoints>
 <InputEndpoint name="input-endpoint-name" protocol="[http|https|tcp|udp]" localPort="local-port-number" port="port-number" certificate="certificate-name" loadBalancerProbe="load-balancer-probe-name" loadBalancerDistribution="sourceIP" />

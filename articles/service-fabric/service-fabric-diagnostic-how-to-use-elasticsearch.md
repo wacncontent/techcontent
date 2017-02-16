@@ -49,7 +49,7 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 
 3. 假设 Git 已安装，但未包含在系统路径中，请打开 Azure PowerShell 窗口并运行下列命令：
 
-    ```
+    ```powershell
     $ENV:PATH += ";<Git installation folder>\usr\bin"
     $ENV:OPENSSL_CONF = "<Git installation folder>\usr\ssl\openssl.cnf"
     ```
@@ -75,7 +75,7 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 
 你现在可以开始运行脚本。发出以下命令：
 
-```
+```powershell
 CreateElasticSearchCluster -ResourceGroupName <es-group-name> -Region <azure-region> -EsPassword <es-password>
 ```
 
@@ -177,7 +177,7 @@ Microsoft.Diagnostic.Listeners 库是 PartyCluster 示例 Service Fabric 应用�
 ### Elasticsearch 侦听器实例化和配置
 将诊断数据发送到 Elasticsearch 所需的最后一个步骤就是创建 `ElasticSearchListener` 的实例并使用 Elasticsearch 连接数据来配置它。侦听器会自动捕获所有通过服务项目中定义的 EventSource 类引发的事件。它必须在服务的生存期内保持活动状态，所以创建它的最佳位置是在服务初始化代码中。以下是无状态服务的初始化代码在完成必要更改后的样子（以 `****` 开头的注释指出新增的部分）：
 
-```
+```csharp
 using System;
 using System.Diagnostics;
 using System.Fabric;
@@ -236,7 +236,7 @@ namespace Stateless1
 
 Elasticsearch 连接数据应该放在服务配置文件 (**PackageRoot\\Config\\Settings.xml**) 中的单独节中。该节的名称必须与传递给 `FabricConfigurationProvider` 构造函数的值对应，例如：
 
-```
+```xml
 <Section Name="ElasticSearchEventListener">
       <Parameter Name="serviceUri" Value="http://myBigCluster.chinaeast.chinacloudapp.cn/es/" />
       <Parameter Name="userName" Value="(ES user name)" />

@@ -158,7 +158,7 @@ wacn.date: 01/04/2017
 
 1.  在 Visual Studio 的 OnlineOrder.cs 文件中将现有命名空间定义替换为以下代码：
 
-    ```
+    ```csharp
     namespace FrontendWebRole.Models
     {
         public class OnlineOrder
@@ -171,7 +171,7 @@ wacn.date: 01/04/2017
 
 2.  在“解决方案资源管理器”中，双击“Controllers\\HomeController.cs”。在文件顶部添加以下 **using** 语句以包括针对你刚创建的模型以及服务总线的命名空间。
 
-    ```
+    ```csharp
     using FrontendWebRole.Models;
     using Microsoft.ServiceBus.Messaging;
     using Microsoft.ServiceBus;
@@ -179,7 +179,7 @@ wacn.date: 01/04/2017
 
 3.  仍在 Visual Studio 的 HomeController.cs 文件中，将现有命名空间定义替换为以下代码。此代码包含用于处理将项提交到队列这一任务的方法。
 
-    ```
+    ```csharp
     namespace FrontendWebRole.Controllers
     {
         public class HomeController : Controller
@@ -268,7 +268,7 @@ wacn.date: 01/04/2017
 
 3.  现在，将添加可封装连接信息并初始化服务总线队列连接的代码。将 QueueConnector.cs 的全部内容替换为下面的代码，并输入 `your Service Bus namespace`（命名空间名称）和 `yourKey`（即之前在“创建服务总线命名空间”部分的步骤 12 中的 [Azure 经典管理门户][]中获取的**主要密钥**）的值。
 
-    ```
+    ```csharp
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -332,7 +332,7 @@ wacn.date: 01/04/2017
 
 5.  在 **Application\_Start** 方法的末尾添加以下代码行。
 
-    ```
+    ```csharp
     FrontendWebRole.QueueConnector.Initialize();
     ```
 
@@ -340,7 +340,7 @@ wacn.date: 01/04/2017
 
 7.  更新 `Submit()` 方法（不带任何参数的重载函数），如下所示，以获取队列的消息数。
 
-    ```
+    ```csharp
     public ActionResult Submit()
     {
         // Get a NamespaceManager which allows you to perform management and
@@ -357,7 +357,7 @@ wacn.date: 01/04/2017
 
 8.  更新 `Submit(OnlineOrder order)` 方法（包含一个参数的重载函数），如下所示，以将订单信息提交到队列。
 
-    ```
+    ```csharp
     public ActionResult Submit(OnlineOrder order)
     {
         if (ModelState.IsValid)

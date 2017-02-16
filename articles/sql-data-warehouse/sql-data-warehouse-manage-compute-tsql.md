@@ -67,7 +67,7 @@ ms.author: barbkess;sonyama
 1. 连接到与逻辑 SQL 数据库服务器关联的 master 数据库。
 2. 使用 [ALTER DATABASE][ALTER DATABASE] TSQL 语句。以下示例将数据库 MySQLDW 的服务级别目标设置为 DW1000。
 
-    ```
+    ```Sql
     ALTER DATABASE MySQLDW
     MODIFY (SERVICE_OBJECTIVE = 'DW1000')
     ;

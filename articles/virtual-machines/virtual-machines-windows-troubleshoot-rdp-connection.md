@@ -128,7 +128,7 @@ ms.author: iainfou
 
     以下示例在位于 `ChinaNorth`、名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM 上重置 RDP 连接：
 
-    ```
+    ```powershell
     Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" `
         -VMName "myVM" -Location Westus -Name "myVMAccessExtension"
     ```
@@ -137,20 +137,20 @@ ms.author: iainfou
 
     首先，将网络安全组的所有配置数据分配到 `$rules` 变量。以下示例在名为 `myResourceGroup` 的资源组中获取名为 `myNetworkSecurityGroup` 的网络安全组的相关信息：
 
-    ```
+    ```powershell
     $rules = Get-AzureRmNetworkSecurityGroup -ResourceGroupName "myResourceGroup" `
         -Name "myNetworkSecurityGroup"
     ```
 
     现在，查看针对此网络安全组配置的规则。验证是否存在一个允许使用 TCP 端口 3389 进行入站连接的规则，如下所示：
 
-    ```
+    ```powershell
     $rules.SecurityRules
     ```
 
     以下示例显示了一个允许 RDP 流量的有效安全规则。可以看到其中已正确配置 `Protocol`、`DestinationPortRange`、`Access` 和 `Direction`：
 
-    ```
+    ```powershell
     Name                     : default-allow-rdp
     Id                       : /subscriptions/guid/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup/securityRules/default-allow-rdp
     Etag                     : 
@@ -171,13 +171,13 @@ ms.author: iainfou
 
     首先，通过将凭据分配到 `$cred` 变量来指定用户名和新密码，如下所示：
 
-    ```
+    ```powershell
     $cred=Get-Credential
     ```
 
     接下来，更新 VM 上的凭据。以下示例在位于 `ChinaNorth`、名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM 上更新凭据：
 
-    ```
+    ```powershell
     Set-AzureRmVMAccessExtension -ResourceGroupName "myResourceGroup" `
         -VMName "myVM" -Location ChinaNorth -Name "myVMAccessExtension" `
         -UserName $cred.GetNetworkCredential().Username `
@@ -188,7 +188,7 @@ ms.author: iainfou
 
     以下示例重新启动 `myResourceGroup` 资源组中名为 `myVM` 的 VM：
 
-    ```
+    ```powershell
     Restart-AzureRmVM -ResourceGroup "myResourceGroup" -Name "myVM"
     ```
 
@@ -196,7 +196,7 @@ ms.author: iainfou
 
     以下示例重新部署位于 `ChinaNorth`、名为 `myResourceGroup` 的资源组中名为 `myVM` 的 VM：
 
-    ```
+    ```powershell
     Set-AzureRmVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
     ```
 

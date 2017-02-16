@@ -44,7 +44,7 @@ ms.author: mikeray
 
 以下 PowerShell 脚本创建内部负载均衡器、配置负载均衡规则，并设置负载均衡器的 IP 地址。若要运行该脚本，请打开 Windows PowerShell ISE，然后将脚本粘贴到“脚本”窗格中。使用 `Login-AzureRMAccount` 登录到 PowerShell。如果有多个 Azure 订阅，请使用 `Select-AzureRmSubscription ` 设置订阅。
 
-```
+```powershell
 # Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
 
@@ -105,7 +105,7 @@ foreach($VMName in $VMNames)
 
 以下脚本将新的 IP 地址添加到现有负载均衡器。请更新环境的变量。ILB 使用侦听器端口作为负载均衡前端端口。此端口可以是 SQL Server 正在侦听的端口。对于 SQL Server 的默认实例，此端口为 1433。可用性组的负载均衡规则需要浮动 IP（直接服务器返回），因此后端端口与前端端口相同。
 
-```
+```powershell
 # Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
 
@@ -208,7 +208,7 @@ $ILB | Add-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConf
 
 设置群集参数。为此，请更新以下 PowerShell 脚本。使用环境值设置变量。在某个群集节点上运行 PowerShell 脚本。
 
-```
+```PowerShell
     $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
     $IPResourceName = "<IPResourceName>" # the IP Address resource name
     $ILBIP = "<n.n.n.n>" # the IP Address of the Internal Load Balancer (ILB). This is the static IP address for the load balancer you configured in the Azure portal preview.

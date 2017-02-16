@@ -15,7 +15,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/13/2016
-wacn.date: 01/23/2017
+wacn.date: 02/10/2017
 ms.author: xshi
 ---
 
@@ -42,9 +42,9 @@ Azure Functions 是一种解决方案，特别适合在云中运行*函数*（�
 ## 打开示例应用
 通过运行以下命令在 Visual Studio Code 中打开示例项目：
 
-```
-    cd Lesson3
-    code .
+```bash
+cd Lesson3
+code .
 ```
 
 ![存储库结构][repo-structure]  
@@ -65,8 +65,8 @@ Azure Functions 是一种解决方案，特别适合在云中运行*函数*（�
 
 更新 `arm-template-param.json` 文件后，请运行以下命令，将资源部署到 Azure：
 
-```
-    az resource group deployment create --template-file arm-template.json --parameters @arm-template-param.json -g iot-sample
+```bash
+az group deployment create --template-file arm-template.json --parameters @arm-template-param.json -g iot-sample
 ```
 
 创建这些资源约需五分钟。在创建这些资源时，用户可以阅读下一篇文章。
@@ -86,4 +86,5 @@ Azure Functions 是一种解决方案，特别适合在云中运行*函数*（�
 [created-iot-hub-and-registered-arduino-board]: ./iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson2-prepare-azure-iot-hub.md
 [send-device-to-cloud-messages]: ./iot-hub-adafruit-feather-m0-wifi-kit-arduino-lesson3-run-azure-blink.md
 
-<!---HONumber=Mooncake_0116_2017-->
+<!---HONumber=Mooncake_0206_2017-->
+<!--Update_Description:update wording and code-->

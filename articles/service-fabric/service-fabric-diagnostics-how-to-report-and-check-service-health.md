@@ -74,13 +74,13 @@ Visual Studio 中的 Service Fabric 项目模板包含相同的代码。以下�
 
     a.将 `System.Fabric.Health` 命名空间添加到 Stateful1.cs 文件。
 
-    ```
+    ```csharp
     using System.Fabric.Health;
     ```
 
     b.在 `myDictionary.TryGetValueAsync` 调用的后面添加以下代码。
 
-    ```
+    ```csharp
     if (!result.HasValue)
     {
         HealthInformation healthInformation = new HealthInformation("ServiceCode", "StateDictionary", HealthState.Error);
@@ -92,7 +92,7 @@ Visual Studio 中的 Service Fabric 项目模板包含相同的代码。以下�
 
     如果你创建了无状态服务，请使用以下代码
 
-    ```
+    ```csharp
     if (!result.HasValue)
     {
         HealthInformation healthInformation = new HealthInformation("ServiceCode", "StateDictionary", HealthState.Error);
@@ -104,13 +104,13 @@ Visual Studio 中的 Service Fabric 项目模板包含相同的代码。以下�
 
     a.在 `var myDictionary` 声明后面创建 `FabricClient`。
 
-    ```
+    ```csharp
     var fabricClient = new FabricClient(new FabricClientSettings() { HealthReportSendInterval = TimeSpan.FromSeconds(0) });
     ```
 
     b.在 `myDictionary.TryGetValueAsync` 调用的后面添加以下代码。
 
-    ```
+    ```csharp
     if (!result.HasValue)
     {
            var replicaHealthReport = new StatefulServiceReplicaHealthReport(
@@ -123,7 +123,7 @@ Visual Studio 中的 Service Fabric 项目模板包含相同的代码。以下�
 
 5. 让我们模拟这种失败并看看它如何显示在运行状况监视工具中。若要模拟这种失败，请注释掉前面添加的运行状况报告代码中的第一行。注释掉第一行之后，代码将如以下示例所示。
 
-    ```
+    ```csharp
     //if(!result.HasValue)
     {
         HealthInformation healthInformation = new HealthInformation("ServiceCode", "StateDictionary", HealthState.Error);
@@ -145,14 +145,14 @@ Visual Studio 中的 Service Fabric 项目模板包含相同的代码。以下�
 
 我们建议在最细微的级别（在本例中为副本）报告运行状况。你也可以报告 `Partition` 的运行状况。
 
-```
+```csharp
 HealthInformation healthInformation = new HealthInformation("ServiceCode", "StateDictionary", HealthState.Error);
 this.Partition.ReportPartitionHealth(healthInformation);
 ```
 
 若要报告 `Application`、`DeployedApplication` 和 `DeployedServicePackage` 的运行状况，请使用 `CodePackageActivationContext`。
 
-```
+```csharp
 HealthInformation healthInformation = new HealthInformation("ServiceCode", "StateDictionary", HealthState.Error);
 var activationContext = FabricRuntime.GetActivationContext();
 activationContext.ReportApplicationHealth(healthInformation);

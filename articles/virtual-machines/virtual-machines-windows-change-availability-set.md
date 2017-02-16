@@ -29,26 +29,26 @@ ms.author: drewm
 
     VM 的名称
 
-    ```
+    ```powershell
     $vm = Get-AzureRmVM -ResourceGroupName <Name-of-resource-group> -Name <name-of-VM>
     $vm.Name
     ```
 
     VM 大小
 
-    ```
+    ```powershell
     $vm.HardwareProfile.VmSize
     ```
 
     网络主要网络接口和可选的网络接口（如果在 VM 上存在）
 
-    ```
+    ```powershell
     $vm.NetworkProfile.NetworkInterfaces[0].Id
     ```
 
     OS 磁盘配置文件
 
-    ```
+    ```powershell
     $vm.StorageProfile.OsDisk.OsType
     $vm.StorageProfile.OsDisk.Name
     $vm.StorageProfile.OsDisk.Vhd.Uri
@@ -56,32 +56,32 @@ ms.author: drewm
 
     每个数据磁盘的磁盘配置文件
 
-    ```
+    ```powershell
     $vm.StorageProfile.DataDisks[<index>].Lun
     $vm.StorageProfile.DataDisks[<index>].Vhd.Uri
     ```
 
     已安装的 VM 扩展
 
-    ```
+    ```powershell
     $vm.Extensions
     ```
 
 2. 删除 VM 但不删除任何磁盘或网络接口。
 
-    ```
+    ```powershell
     Remove-AzureRmVM -ResourceGroupName <resourceGroupName> -Name <vmName> 
     ```
 
 3. 创建可用性集（如果尚不存在）
 
-    ```
+    ```powershell
     New-AzureRmAvailabilitySet -ResourceGroupName <resourceGroupName> -Name <availabilitySetName> -Location "<location>" 
     ```
 
 4. 使用新可用性集重新创建 VM
 
-    ```
+    ```powershell
     $vm2 = New-AzureRmVMConfig -VMName <VM-name> -VMSize <vm-size> -AvailabilitySetId <availability-set-id>
 
     Set-AzureRmVMOSDisk -CreateOption "Attach" -VM <vmConfig> -VhdUri <osDiskURI> -Name <osDiskName> [-Windows | -Linux]
@@ -97,7 +97,7 @@ ms.author: drewm
 
 以下脚本提供一个示例，该示例收集所需的信息、删除原始 VM，然后在新可用性集中重新创建 VM。
 
-```
+```powershell
 #set variables
 $rg = "demo-resource-group"
 $vmName = "demo-vm"

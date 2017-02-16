@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/05/2016
-wacn.date: 01/13/2017
+ms.date: 01/11/2017
+wacn.date: 02/10/2017
 ms.author: nberdy
 ---
 
@@ -226,4 +226,4 @@ ms.author: nberdy
 [IoT 中心入门]: ./iot-hub-node-node-getstarted.md
 
 <!---HONumber=Mooncake_0109_2017-->
-<!--Update_Description:update wording-->
+<!--Update_Description:update meta properties-->

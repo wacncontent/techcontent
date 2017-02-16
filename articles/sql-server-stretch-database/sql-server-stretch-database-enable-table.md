@@ -81,7 +81,7 @@ ms.author: douglasl
 
 以下示例将迁移整个表并立即开始数据迁移。
 
-```
+```tsql
 USE <Stretch-enabled database name>;
 GO
 ALTER TABLE <table name>  
@@ -105,7 +105,7 @@ GO
 
 以下示例将迁移整个表并立即开始数据迁移。
 
-```
+```tsql
 USE <Stretch-enabled database name>;
 GO
 CREATE TABLE <table name>
@@ -116,7 +116,7 @@ GO
 
 以下示例只会迁移 `dbo.fn_stretchpredicate` 内联表值函数识别的行，并推迟数据迁移。有关筛选器函数的详细信息，请参阅[使用筛选器函数选择要迁移的行](./sql-server-stretch-database-predicate-function.md)。
 
-```
+```tsql
 USE <Stretch-enabled database name>;
 GO
 CREATE TABLE <table name>

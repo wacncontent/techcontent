@@ -38,13 +38,13 @@ SQL Server AlwaysOn 可用性组现在可与 ILB 配合运行。可用性组是 
 
 1. 在以下示例中，我们会配置包含名为“Subnet-1”的子网的虚拟网络：
 
-    ```
+    ```powershell
     Add-AzureInternalLoadBalancer -InternalLoadBalancerName ILB\_SQL\_AO -SubnetName Subnet-1 -ServiceName SqlSvc
     ```
 
 2. 为每个 VM 上的 ILB 添加负载均衡终结点
 
-    ```
+    ```powershell
     Get-AzureVM -ServiceName SqlSvc -Name sqlsvc1 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 – DirectServerReturn $true -InternalLoadBalancerName ILB\_SQL\_AO | Update-AzureVM
 
      Get-AzureVM -ServiceName SqlSvc -Name sqlsvc2 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 –DirectServerReturn $true -InternalLoadBalancerName ILB\_SQL\_AO | Update-AzureVM

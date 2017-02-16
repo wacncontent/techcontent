@@ -45,7 +45,7 @@ Azure CLI 提供适用于 Azure 的多平台命令行体验，让用户能够直
 
 1. 在终端窗口运行以下命令。安装 Azure CLI 可能需要五分钟。
 
-    ```
+    ```bash
        sudo apt-get update
        sudo apt-get install -y libssl-dev libffi-dev
        sudo apt-get install -y python-dev
@@ -57,7 +57,7 @@ Azure CLI 提供适用于 Azure 的多平台命令行体验，让用户能够直
 
 2. 运行以下命令，对安装进行验证：
 
-    ```
+    ```bash
        az iot -h
     ```
 

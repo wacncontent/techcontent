@@ -45,7 +45,7 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 ### 使用 PowerShell 转换
 可以使用 [Convert-VHD PowerShell cmdlet](http://technet.microsoft.com/zh-cn/library/hh848454.aspx) 来转换虚拟磁盘。以下示例演示如何从 VHDX 转换为 VHD，然后从动态类型转换为固定类型：
 
-```
+```powershell
 Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHDType Fixed
 ```
 
@@ -64,13 +64,13 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
 2. 删除 WinHTTP 代理：
 
-    ```
+    ```CMD
     netsh winhttp reset proxy
     ```
 
 3. 将磁盘 SAN 策略配置为 [Onlineall](https://technet.microsoft.com/zh-cn/library/gg252636.aspx)：
 
-    ```
+    ```CMD
     diskpart san policy=onlineall
     ```
 
@@ -84,7 +84,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 ## 配置 Windows 服务
 5. 确保下面的每个 Windows 服务均设置为 **Windows 默认值**。这些服务是使用以下列表中所述的启动设置配置的。可以运行以下命令重置启动设置：
 
-    ```
+    ```CMD
     sc config bfe start= auto
 
     sc config dcomlaunch start= auto
@@ -131,7 +131,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 ## 远程桌面配置
 6. 如果有任何自签名证书绑定到远程桌面协议 (RDP) 侦听器，请删除这些证书：
 
-    ```
+    ```CMD
     REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\SSLCertificateSHA1Hash"
     ```
 
@@ -159,14 +159,14 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
 9. 通过在注册表中添加以下子项来启用 RDP 服务：
 
-    ```
+    ```CMD
     REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD  /d 0 /f
     ```
 
 ## 配置 Windows 防火墙规则
 10. 允许 WinRM 通过三个防火墙配置文件（“域”、“专用”和“公共”）并启用 PowerShell 远程服务：
 
-    ```
+    ```powershell
     Enable-PSRemoting -force
     ```
 
@@ -174,7 +174,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
     - 入站
 
-        ```
+        ```CMD
         netsh advfirewall firewall set rule dir=in name="File and Printer Sharing (Echo Request - ICMPv4-In)" new enable=yes
 
         netsh advfirewall firewall set rule dir=in name="Network Discovery (LLMNR-UDP-In)" new enable=yes
@@ -198,7 +198,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
     - 入站和出站
 
-        ```
+        ```CMD
         netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes
 
         netsh advfirewall firewall set rule group="Core Networking" new enable=yes
@@ -206,7 +206,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
     - 出站
 
-        ```
+        ```CMD
         netsh advfirewall firewall set rule dir=out name="Network Discovery (LLMNR-UDP-Out)" new enable=yes
 
         netsh advfirewall firewall set rule dir=out name="Network Discovery (NB-Datagram-Out)" new enable=yes
@@ -233,7 +233,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
 13. 确保“引导配置数据”(BCD) 设置与以下内容相符：
 
-    ```
+    ```CMD
     bcdedit /set {bootmgr} integrityservices enable
 
     bcdedit /set {default} device partition=C:
@@ -295,7 +295,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
 - 转储日志可帮助排查 Windows 崩溃问题。启用转储日志收集：
 
-    ```
+    ```CMD
     REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v CrashDumpEnabled /t REG_DWORD /d 2 /f`
 
     REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps" /v DumpFolder /t REG_EXPAND_SZ /d "c:\CrashDumps" /f
@@ -309,7 +309,7 @@ Convert-VHD -Path c:\test\MY-VM.vhdx -DestinationPath c:\test\MY-NEW-VM.vhd -VHD
 
 - 在 Azure 中创建 VM 后，在 D: 驱动器上配置系统定义大小的页面文件
 
-    ```
+    ```CMD
     REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /t REG_MULTI_SZ /v PagingFiles /d "D:\pagefile.sys 0 0" /f
     ```
 

@@ -1008,7 +1008,7 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 执行点查询的最简单方法是使用 **Retrieve** 表操作，如以下 C# 代码段中所示，该代码段检索 **PartitionKey** 值为“Sales”并且 **RowKey** 值为“212”的实体：
 
-```
+```csharp
 TableOperation retrieveOperation =
     TableOperation.Retrieve<EmployeeEntity>("Sales", "212");
 var retrieveResult = employeeTable.Execute(retrieveOperation);
@@ -1025,7 +1025,7 @@ EmployeeEntity employee = (EmployeeEntity)retrieveResult.Result;
 
 可以通过将 LINQ 与存储客户端库配合使用，并为查询指定 **where** 子句来检索多个实体。若要避免表扫描，应始终在 where 子句中包括 **PartitionKey** 值，如有可能也包括 **RowKey** 值以避免表和分区扫描。表服务支持一组有限的比较运算符（大于、大于等于、小于、小于等于、等于和不等于）可用于 where 子句。下面的 C# 代码段在销售部门（假定 **RowKey** 存储部门名称）中查找姓氏以“B”开头（假定 **PartitionKey** 存储姓氏）的所有员工：
 
-```
+```csharp
 TableQuery<EmployeeEntity> employeeQuery =
           employeeTable.CreateQuery<EmployeeEntity>();
 var query = (from employee in employeeQuery
@@ -1040,7 +1040,7 @@ var employees = query.Execute();
 
 以下代码示例演示使用 Fluent API 的等效功能（有关 Fluent API 各个方面的详细信息，请参阅[设计 Fluent API 的最佳实践](http://visualstudiomagazine.com/articles/2013/12/01/best-practices-for-designing-a-fluent-api.aspx)）：
 
-```
+```csharp
 TableQuery<EmployeeEntity> employeeQuery = new TableQuery<EmployeeEntity>().Where(
   TableQuery.CombineFilters(
     TableQuery.CombineFilters(
@@ -1070,7 +1070,7 @@ var employees = employeeTable.ExecuteQuery(employeeQuery);
 
 如果你使用的是存储客户端库，当它从表服务返回实体时，可以自动为你处理继续标记。以下 C# 代码示例使用存储客户端库自动处理继续标记（如果表服务在响应中返回继续标记）：
 
-```
+```csharp
 string filter = TableQuery.GenerateFilterCondition(
       "PartitionKey", QueryComparisons.Equal, "Sales");
 TableQuery<EmployeeEntity> employeeQuery =
@@ -1085,7 +1085,7 @@ foreach (var emp in employees)
 
 以下 C# 代码显式处理继续标记：
 
-```
+```csharp
 string filter = TableQuery.GenerateFilterCondition(
       "PartitionKey", QueryComparisons.Equal, "Sales");
 TableQuery<EmployeeEntity> employeeQuery =
@@ -1116,7 +1116,7 @@ do
 
 以下 C# 代码演示如何修改段内返回的实体数：
 
-```
+```csharp
 employeeQuery.TakeCount = 50;  
 ```
 
@@ -1124,7 +1124,7 @@ employeeQuery.TakeCount = 50;
 
 单个实体最多可以具有 255 个属性，并且大小最多可以为 1 MB。当你查询表并检索实体时，你可能不需要所有属性，并可以避免不必要地传输数据（以帮助减少延迟和降低成本）。你可以使用服务器端投影来只传输你需要的属性。以下示例只检索查询选择的实体的 **Email** 属性（与 **PartitionKey**、**RowKey**、**Timestamp** 和 **ETag** 一起）。
 
-```
+```csharp
 string filter = TableQuery.GenerateFilterCondition(
       "PartitionKey", QueryComparisons.Equal, "Sales");
 List<string> columns = new List<string>() { "Email" };
@@ -1369,7 +1369,7 @@ foreach (var e in entities)
 
 第二个选项是使用 **DynamicTableEntity** 类型（属性包）而不是具体的 POCO 实体类型（此选项还可以提高性能，因为无需序列化实体和将实体反序列化为 .NET 类型）。以下 C# 代码可能会从表中检索多个不同类型的实体，但会将所有实体作 **DynamicTableEntity** 实例返回。然后，它使用 **EntityType** 属性来确定每个实体的类型：
 
-```
+```csharp
 string filter = 	TableQuery.CombineFilters(
     TableQuery.GenerateFilterCondition("PartitionKey",
   QueryComparisons.Equal, "Sales"),
@@ -1404,7 +1404,7 @@ if (e.Properties.TryGetValue("EntityType", out entityTypeProperty))
 
 第三个选项是组合使用 **DynamicTableEntity** 类型和 **EntityResolver** 实例。使用此选项可以在同一查询中解析为多种 POCO 类型。在此示例中，**EntityResolver** 委托使用 **EntityType** 属性来区分查询返回的两种实体类型。 **Resolve** 方法使用 **resolver** 委托将 **DynamicTableEntity** 实例解析为 **TableEntity** 实例。
 
-```
+```csharp
 EntityResolver<TableEntity> resolver = (pk, rk, ts, props, etag) =>
 {
 
@@ -1450,7 +1450,7 @@ foreach (var e in entities)
 
 无需知道实体的类型就可删除该实体，在插入实体时你始终知道该实体的类型。但是，你可以使用 **DynamicTableEntity** 类型来更新实体，而不必知道其类型，也无需使用 POCO 实体类。以下代码示例检索单个实体，并在更新该实体前检查 **EmployeeCount** 属性是否存在。
 
-```
+```csharp
 TableResult result =
       employeeTable.Execute(TableOperation.Retrieve(partitionKey, rowKey));
 DynamicTableEntity department = (DynamicTableEntity)result.Result;
@@ -1486,7 +1486,7 @@ employeeTable.Execute(TableOperation.Merge(department));
 
 在客户端实例中，可以通过以异步方式执行存储操作来提高吞吐量。使用存储客户端库，可以轻松地编写异步查询和修改。例如，你可以从用于检索某个分区中的所有实体的同步方法开始，如以下 C# 代码中所示：
 
-```
+```csharp
 private static void ManyEntitiesQuery(CloudTable employeeTable, string department)
 {
       string filter = TableQuery.GenerateFilterCondition(
@@ -1511,7 +1511,7 @@ private static void ManyEntitiesQuery(CloudTable employeeTable, string departmen
 
 可以轻松地修改此代码，使查询以异步方式运行，如下所示：
 
-```
+```csharp
 private static async Task ManyEntitiesQueryAsync(CloudTable employeeTable, string department)
 {
       string filter = TableQuery.GenerateFilterCondition(
@@ -1544,7 +1544,7 @@ private static async Task ManyEntitiesQueryAsync(CloudTable employeeTable, strin
 
 此外，还可以用异步方式插入、更新和删除实体。以下 C# 示例说明了一个简单的同步方法，该方法用于插入或替换员工实体：
 
-```
+```csharp
 private static void SimpleEmployeeUpsert(CloudTable employeeTable,
       EmployeeEntity employee)
 {
@@ -1556,7 +1556,7 @@ private static void SimpleEmployeeUpsert(CloudTable employeeTable,
 
 可以轻松地修改此代码，使更新以异步方式运行，如下所示：
 
-```
+```csharp
 private static async Task SimpleEmployeeUpsertAsync(CloudTable employeeTable,
       EmployeeEntity employee)
 {

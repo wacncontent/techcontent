@@ -14,7 +14,7 @@ ms.tgt_pltfrm: vs-getting-started
 ms.devlang: na
 ms.topic: article
 ms.date: 12/02/2016
-wacn.date: 01/06/2017
+wacn.date: 02/14/2017
 ms.author: tarcher
 ---
 
@@ -53,14 +53,14 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 
 1. 将以下 *using* 指令添加到 `BlobsController.cs` 文件。
 
-    ```
+    ```csharp
     using Microsoft.Azure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
     ```
 
-## 创建 Blob 容器
+##<a name="create-a-blob-container"></a> 创建 Blob 容器
 
 Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤演示了如何创建 Blob 容器。
 
@@ -68,7 +68,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 添加名为 **CreateBlobContainer** 的方法，以便返回 **ActionResult**。
 
-    ```
+    ```csharp
     public ActionResult CreateBlobContainer()
     {
         // The code in this section goes here.
@@ -79,32 +79,32 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在 **CreateBlobContainer** 方法中，获取表示存储帐户信息的 **CloudStorageAccount** 对象。使用下面的代码获取存储连接字符串和 Azure 服务配置中的存储帐户信息。（将 *&lt;storage-account-name>* 更改为要访问的 Azure 存储帐户的名称。）
 
-    ```
+    ```csharp
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
        CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
     ```
 
 1. 获取表示 Blob 服务客户端的 **CloudBlobClient** 对象。
 
-    ```
+    ```csharp
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
     ```
 
 1. 获取表示所需 Blob 容器名称引用的 **CloudBlobContainer** 对象。**CloudBlobClient.GetContainerReference** 方法并不针对 Blob 存储发出请求。不管 Blob 容器是否存在，都会返回引用。
 
-    ```
+    ```csharp
     CloudBlobContainer container = blobClient.GetContainerReference("test-blob-container");
     ```
 
 1. 如果容器不存在，则调用 **CloudBlobContainer.CreateIfNotExists** 方法来创建容器。如果容器原本不存在，但已成功创建，则 **CloudBlobContainer.CreateIfNotExists** 方法返回 **true**；否则返回 **false**。
 
-    ```
+    ```csharp
     ViewBag.Success = container.CreateIfNotExists();
     ```
 
 1. 将 **ViewBag** 更新为 Blob 容器的名称。
 
-    ```
+    ```csharp
     ViewBag.BlobContainerName = container.Name;
     ```
 
@@ -114,7 +114,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 打开 `CreateBlobContainer.cshtml` 并对其进行修改，使之看起来如下所示。
 
-    ```
+    ```csharp
     @{
         ViewBag.Title = "Create blob container";
     }
@@ -128,7 +128,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在最后一个 **Html.ActionLink** 之后，添加以下 **Html.ActionLink**。
 
-    ```
+    ```html
     <li>@Html.ActionLink("Create blob container", "CreateBlobContainer", "Blobs")</li>
     ```
 
@@ -146,7 +146,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 添加名为 **UploadBlob** 的方法，以便返回 **EmptyResult**。
 
-    ```
+    ```csharp
     public EmptyResult UploadBlob()
     {
         // The code in this section goes here.
@@ -157,32 +157,32 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在 **UploadBlob** 方法中，获取表示存储帐户信息的 **CloudStorageAccount** 对象。使用下面的代码获取存储连接字符串和 Azure 服务配置中的存储帐户信息。（将 *&lt;storage-account-name>* 更改为要访问的 Azure 存储帐户的名称。）
 
-    ```
+    ```csharp
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
        CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
     ```
 
 1. 获取表示 Blob 服务客户端的 **CloudBlobClient** 对象。
 
-    ```
+    ```csharp
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
     ```
 
 1. 获取表示 Blob 容器名称引用的 **CloudBlobContainer** 对象。
 
-    ```
+    ```csharp
     CloudBlobContainer container = blobClient.GetContainerReference("test-blob-container");
     ```
 
 1. 如前所述，Azure 存储支持不同的 Blob 类型。若要检索页 Blob 引用，请调用 **CloudBlobContainer.GetPageBlobReference** 方法。若要检索块 Blob 引用，请调用 **CloudBlobContainer.GetBlockBlobReference** 方法。通常情况下，推荐使用块 Blob 类型。（将 *<blob-name>* 更改为在上载 Blob 后需要提供给 Blob 的名称。）
 
-    ```
+    ```csharp
     CloudBlockBlob blob = container.GetBlockBlobReference(<blob-name>);
     ```
 
 1. 有了 Blob 引用以后，即可通过调用 Blob 引用对象的 **UploadFromStream** 方法，将任何数据流上载到该引用。**UploadFromStream** 方法会根据 Blob 是否存在来覆盖或创建 Blob。（将 *&lt;file-to-upload>* 更改为需上载文件的完全限定路径。）
 
-    ```
+    ```csharp
     using (var fileStream = System.IO.File.OpenRead(<file-to-upload>))
     {
         blob.UploadFromStream(fileStream);
@@ -195,7 +195,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在最后一个 **Html.ActionLink** 之后，添加以下 **Html.ActionLink**。
 
-    ```
+    ```html
     <li>@Html.ActionLink("Upload blob", "UploadBlob", "Blobs")</li>
     ```
 
@@ -211,7 +211,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 添加名为 **ListBlobs** 的方法，以便返回 **ActionResult**。
 
-    ```
+    ```csharp
     public ActionResult ListBlobs()
     {
         // The code in this section goes here.
@@ -222,26 +222,26 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在 **ListBlobs** 方法中，获取表示存储帐户信息的 **CloudStorageAccount** 对象。使用下面的代码获取存储连接字符串和 Azure 服务配置中的存储帐户信息。（将 *&lt;storage-account-name>* 更改为要访问的 Azure 存储帐户的名称。）
 
-    ```
+    ```csharp
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
        CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
     ```
 
 1. 获取表示 Blob 服务客户端的 **CloudBlobClient** 对象。
 
-    ```
+    ```csharp
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
     ```
 
 1. 获取表示 Blob 容器名称引用的 **CloudBlobContainer** 对象。
 
-    ```
+    ```csharp
     CloudBlobContainer container = blobClient.GetContainerReference("test-blob-container");
     ```
 
 1. 若要列出 Blob 容器中的 Blob，请使用 **CloudBlobContainer.ListBlobs** 方法。**CloudBlobContainer.ListBlobs** 方法返回 **IListBlobItem** 对象，该对象可强制转换为 **CloudBlockBlob**、**CloudPageBlob** 或 **CloudBlobDirectory** 对象。以下代码片段枚举 Blob 容器中的所有 Blob，根据类型将已返回对象强制转换为相应的对象，并将名称添加到可以显示的列表中（如果强制转换为 **CloudBlobDirectory** 对象，则添加 URI）。
 
-    ```
+    ```csharp
     List<string> blobs = new List<string>();
 
     foreach (IListBlobItem item in container.ListBlobs(null, false))
@@ -284,7 +284,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
     可以看到，该列表仅包含顶级实体，而不包含嵌套实体（ *bar.png* 和 *baz.png* ）。若要列出 Blob 容器中的所有实体，必须调用 **CloudBlobContainer.ListBlobs** 方法，为 **useFlatBlobListing** 参数传递 **true**。
 
-    ```
+    ```csharp
     ...
     foreach (IListBlobItem item in container.ListBlobs(useFlatBlobListing:true))
     ...
@@ -304,7 +304,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 打开 `ListBlobs.cshtml` 并对其进行修改，使之看起来如下所示。
 
-    ```
+    ```html
     @model List<string>
     @{
         ViewBag.Title = "List blobs";
@@ -324,7 +324,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在最后一个 **Html.ActionLink** 之后，添加以下 **Html.ActionLink**。
 
-    ```
+    ```html
     <li>@Html.ActionLink("List blobs", "ListBlobs", "Blobs")</li>
     ```
 
@@ -340,7 +340,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 添加名为 **DownloadBlob** 的方法，以便返回 **ActionResult**。
 
-    ```
+    ```csharp
     public EmptyResult DownloadBlob()
     {
         // The code in this section goes here.
@@ -351,32 +351,32 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在 **DownloadBlob** 方法中，获取表示存储帐户信息的 **CloudStorageAccount** 对象。使用下面的代码获取存储连接字符串和 Azure 服务配置中的存储帐户信息。（将 *&lt;storage-account-name>* 更改为要访问的 Azure 存储帐户的名称。）
 
-    ```
+    ```csharp
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
        CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
     ```
 
 1. 获取表示 Blob 服务客户端的 **CloudBlobClient** 对象。
 
-    ```
+    ```csharp
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
     ```
 
 1. 获取表示 Blob 容器名称引用的 **CloudBlobContainer** 对象。
 
-    ```
+    ```csharp
     CloudBlobContainer container = blobClient.GetContainerReference("test-blob-container");
     ```
 
 1. 通过调用 **CloudBlobContainer.GetBlockBlobReference** 或 **CloudBlobContainer.GetPageBlobReference** 方法获取 Blob 引用对象。（将 *&lt;blob-name>* 更改为要下载的 Blob 的名称。）
 
-    ```
+    ```csharp
     CloudBlockBlob blob = container.GetBlockBlobReference(<blob-name>);
     ```
 
 1. 若要下载 Blob，请使用 **CloudBlockBlob.DownloadToStream** 或 **CloudPageBlob.DownloadToStream** 方法，具体取决于 Blob 类型。以下代码片段使用 **CloudBlockBlob.DownloadToStream** 方法将 Blob 的内容传输到流对象，然后将该对象保存到本地文件。（将 *&lt;local-file-name>* 更改为完全限定文件名，代表要将 Blob 下载到的位置。）
 
-    ```
+    ```csharp
     using (var fileStream = System.IO.File.OpenWrite(<local-file-name>))
     {
         blob.DownloadToStream(fileStream);
@@ -387,7 +387,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在最后一个 **Html.ActionLink** 之后，添加以下 **Html.ActionLink**。
 
-    ```
+    ```html
     <li>@Html.ActionLink("Download blob", "DownloadBlob", "Blobs")</li>
     ```
 
@@ -401,7 +401,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 添加名为 **DeleteBlob** 的方法，以便返回 **ActionResult**。
 
-    ```
+    ```csharp
     public EmptyResult DeleteBlob()
     {
         // The code in this section goes here.
@@ -412,32 +412,32 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 获取表示存储帐户信息的 **CloudStorageAccount** 对象。使用下面的代码获取存储连接字符串和 Azure 服务配置中的存储帐户信息。（将 *&lt;storage-account-name>* 更改为要访问的 Azure 存储帐户的名称。）
 
-    ```
+    ```csharp
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
        CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
     ```
 
 1. 获取表示 Blob 服务客户端的 **CloudBlobClient** 对象。
 
-    ```
+    ```csharp
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
     ```
 
 1. 获取表示 Blob 容器名称引用的 **CloudBlobContainer** 对象。
 
-    ```
+    ```csharp
     CloudBlobContainer container = blobClient.GetContainerReference("test-blob-container");
     ```
 
 1. 通过调用 **CloudBlobContainer.GetBlockBlobReference** 或 **CloudBlobContainer.GetPageBlobReference** 方法获取 Blob 引用对象。（将 *&lt;blob-name>* 更改为要删除的 Blob 的名称。）
 
-    ```
+    ```csharp
     CloudBlockBlob blob = container.GetBlockBlobReference(<blob-name>);
     ```
 
 1. 若要删除 Blob，请使用 **Delete** 方法。
 
-    ```
+    ```csharp
     blob.Delete();
     ```
 
@@ -445,7 +445,7 @@ Blob 容器是由 Blob 和文件夹组成的嵌套式层次结构。以下步骤
 
 1. 在最后一个 **Html.ActionLink** 之后，添加以下 **Html.ActionLink**。
 
-    ```
+    ```html
     <li>@Html.ActionLink("Delete blob", "DeleteBlob", "Blobs")</li>
     ```
 

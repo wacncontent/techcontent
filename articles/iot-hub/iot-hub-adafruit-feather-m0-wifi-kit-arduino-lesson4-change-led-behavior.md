@@ -32,14 +32,14 @@ ms.author: xshi
 ## 将函数添加到 main.c 和 gulpfile.js
 1. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
 
-    ```
+    ```bash
        cd Lesson4
        code .
     ```
 
 2. 打开 `app.ino` 文件，然后在 blinkLED() 函数之后添加以下函数：
 
-    ```
+    ```arduino
        static void turnOnLED()
        {
          digitalWrite(LED_PIN, HIGH);
@@ -55,7 +55,7 @@ ms.author: xshi
 
 3. 在 `receiveMessageCallback` 函数的 `else if` 块之前添加以下条件：
 
-    ```
+    ```arduino
        else if (strcmp((const char*)value, ""on"") == 0)
        {
            turnOnLED();
@@ -70,7 +70,7 @@ ms.author: xshi
 
 4. 打开 gulpfile.js 文件，然后在函数 `sendMessage` 之前添加新函数：
 
-    ```
+    ```javascript
        var buildCustomMessage = function (messageId) {
          if ((messageId & 1) && (messageId < MAX_MESSAGE_COUNT)) {
            return new Message(JSON.stringify({ command: 'on', messageId: messageId }));
@@ -86,7 +86,7 @@ ms.author: xshi
 
 5. 在 `sendMessage` 函数中，将 `var message = buildMessage(sentMessageCount);` 行替换为新行，如以下代码片段所示：
 
-    ```
+    ```javascript
     var message = buildCustomMessage(sentMessageCount);
     ```
 
@@ -95,7 +95,7 @@ ms.author: xshi
 ### 部署并运行示例应用程序
 运行以下命令，在 Arduino 开发板上部署并运行示例应用程序：
 
-```
+```bash
     gulp run
     # You can monitor the serial port by running listen task:
     gulp listen

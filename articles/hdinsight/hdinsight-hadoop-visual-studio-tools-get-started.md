@@ -188,6 +188,9 @@ ms.author: jgao
     ![Data Lake 工具：HDInsight Visual Studio 工具新建 hive 作业][12]
 
 ### 通过 HiveServer2 的更快路径 Hive 执行
+
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 > [!NOTE]
 此功能仅适用于 HDInsight 群集 3.2 和更高版本。
 > 

@@ -26,7 +26,7 @@ ms.author: v-livech
 
 ## 快速命令
 
-```
+```bash
 # Add a new user on RedHat family distros
 sudo useradd -G wheel exampleUser
 
@@ -92,7 +92,7 @@ sudo top
 
 #### 添加用户
 
-```
+```bash
 # On RedHat family distros
 sudo useradd -G wheel exampleUser
 
@@ -104,7 +104,7 @@ sudo useradd -G sudo exampleUser
 
 `useradd` 命令将创建用户，并向 `/etc/passwd` 和 `/etc/gpasswd` 同时添加条目，但不实际设置密码。使用 `passwd` 命令将密码添加到条目。
 
-```
+```bash
 sudo passwd exampleUser
 Enter new UNIX password:
 Retype new UNIX password:
@@ -117,7 +117,7 @@ passwd: password updated successfully
 
 在计算机上，结合新密码使用 `ssh-copy-id` 命令。
 
-```
+```bash
 ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
 ```
 
@@ -127,7 +127,7 @@ ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
 
 我们已将用户添加到正确的默认组中以进行 sudo 访问。现在我们要让这些组可以在没有密码的情况下使用 sudo。
 
-```
+```bash
 # Execute visudo as root to edit the /etc/sudoers file
 visudo
 
@@ -149,7 +149,7 @@ visudo
 
 ### 验证用户、ssh 密钥和 sudo
 
-```
+```bash
 # Verify the SSH keys & User account
 ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
 

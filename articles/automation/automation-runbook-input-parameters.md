@@ -67,7 +67,7 @@ PowerShell 工作流 Runbook 中的参数定义采用以下常规格式，其中
 
 则可将以下值传递到该参数：
 
-```
+```      
 @{"FirstName"="Joe";"MiddleName"="Bob";"LastName"="Smith"}
 ```
 
@@ -107,7 +107,7 @@ Runbook 有多种启动方式：通过 Azure 经典管理门户、webhook、Powe
 
 - **Azure 服务管理方法：**可以使用编程语言的 SDK 启动 Runbook。以下 C# 代码段用于在自动化帐户中启动 Runbook。可以在 [GitHub 存储库](https://github.com/Azure/azure-sdk-for-net/blob/master/src/ServiceManagement/Automation/Automation.Tests/TestSupport/AutomationTestBase.cs)中查看完整代码。
 
-    ```
+    ```      
     public Job StartRunbook(string runbookName, IDictionary<string, string> parameters = null)
     {
         var response = AutomationClient.Jobs.Create(automationAccount, new JobCreateParameters

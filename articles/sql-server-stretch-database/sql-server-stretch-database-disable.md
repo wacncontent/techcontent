@@ -63,7 +63,7 @@ ms.author: douglasl
 
 -   若要为某个表禁用延伸并放弃远程数据，请运行以下命令。
 
-    ```
+    ```tsql
     ALTER TABLE <table_name>
        SET ( REMOTE_DATA_ARCHIVE = OFF_WITHOUT_DATA_RECOVERY ( MIGRATION_STATE = PAUSED ) ) ;
     ```
@@ -86,7 +86,7 @@ ms.author: douglasl
 ### 使用 Transact-SQL 为数据库禁用延伸数据库
 运行以下命令。
 
-```
+```tsql
 ALTER DATABASE <database name>
     SET REMOTE_DATA_ARCHIVE = OFF ;
 ```

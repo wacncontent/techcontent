@@ -37,13 +37,13 @@ ms.author: dineshm
 ## 异步与同步
 由于 C++ 的存储客户端库在 [C++ REST 库](https://github.com/Microsoft/cpprestsdk)基础上生成，因此我们实际上也支持使用 [pplx::task](http://microsoft.github.io/cpprestsdk/classpplx_1_1task.html) 进行异步操作。例如：
 
-```
+```cpp
 pplx::task<list_blob_item_segment> list_blobs_segmented_async(continuation_token& token) const;
 ```
 
 同步操作包装相应的异步操作：
 
-```
+```cpp
 list_blob_item_segment list_blobs_segmented(const continuation_token& token) const
 {
     return list_blobs_segmented_async(token).get();
@@ -64,7 +64,7 @@ list_blob_item_segment list_blobs_segmented(const continuation_token& token) con
 
 例如，进行典型调用以列出容器中的所有 blob 时，该调用的代码段可能如下所示。我们的[示例](https://github.com/Azure/azure-storage-cpp/blob/master/Microsoft.WindowsAzure.Storage/samples/BlobsGettingStarted/Application.cpp)中提供了该代码：
 
-```
+```cpp
 // List blobs in the blob container
 azure::storage::continuation_token token;
 do
@@ -89,7 +89,7 @@ while (!token.empty());
 
 请注意，一页中返回的结果数可以通过每个 API 的重载中的参数 *max\_results* 进行控制，例如：
 
-```
+```cpp
 list_blob_item_segment list_blobs_segmented(const utility::string_t& prefix, bool use_flat_blob_listing,
     blob_listing_details::values includes, int max_results, const continuation_token& token,
     const blob_request_options& options, operation_context context)
@@ -104,7 +104,7 @@ list_blob_item_segment list_blobs_segmented(const utility::string_t& prefix, boo
 ## 贪婪列表
 早期版本的用于 C++ 的存储客户端库（0.5.0 预览版以及更低版本）包括适用于表和查询的不分段列表 API，如以下示例所示：
 
-```
+```cpp
 std::vector<cloud_table> list_tables(const utility::string_t& prefix) const;
 std::vector<table_entity> execute_query(const table_query& query) const;
 std::vector<cloud_queue> list_queues() const;
@@ -118,7 +118,7 @@ SDK 中的此类贪婪列表 API 在 C#、Java 或 JavaScript Node.js 环境中�
 
 如果你的代码调用这些贪婪 API：
 
-```
+```cpp
 std::vector<azure::storage::table_entity> entities = table.execute_query(query);
 for (auto it = entities.cbegin(); it != entities.cend(); ++it)
 {
@@ -128,7 +128,7 @@ for (auto it = entities.cbegin(); it != entities.cend(); ++it)
 
 你应该修改代码，改用分段列表 API：
 
-```
+```cpp
 azure::storage::continuation_token token;
 do
 {
@@ -154,13 +154,13 @@ do
 
 典型的懒惰列表 API（使用 **list\_blobs** 作为示例）如下所示：
 
-```
+```cpp
 list_blob_item_iterator list_blobs() const;
 ```
 
 使用懒惰列表模式的典型代码片段可能如下所示：
 
-```
+```cpp
 // List blobs in the blob container
 azure::storage::list_blob_item_iterator end_of_results;
 for (auto it = container.list_blobs(); it != end_of_results; ++it)

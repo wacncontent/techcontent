@@ -214,7 +214,7 @@ SQL 数据仓库不会自动创建或自动更新统计信息。因此，若要�
 
 本示例将基于新的 DimDate2 表创建单列统计信息。
 
-```
+```sql
 CREATE STATISTICS [DateId] on [DimDate2] ([DateId]);
 CREATE STATISTICS [CalendarQuarter] on [DimDate2] ([CalendarQuarter]);
 CREATE STATISTICS [FiscalQuarter] on [DimDate2] ([FiscalQuarter]);

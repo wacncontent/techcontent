@@ -53,14 +53,14 @@ Pi 使用设备连接字符串连接到 IoT 中心。IoT 中心连接字符串�
 ## 配置设备连接
 1. 运行以下命令初始化配置文件：
 
-    ```
+    ```bash
     npm install
     gulp init
     ```
 
 2. 运行以下命令，在 Visual Studio Code 中打开设备配置文件 `config-raspberrypi.json`：
 
-    ```
+    ```bash
     # For Windows command prompt
     code %USERPROFILE%\.iot-hub-getting-started\config-raspberrypi.json
 
@@ -81,7 +81,7 @@ Pi 使用设备连接字符串连接到 IoT 中心。IoT 中心连接字符串�
 ## 部署并运行示例应用程序
 运行以下命令，在 Pi 上部署并运行示例应用程序：
 
-```
+```bash
 gulp deploy && gulp run
 ```
 

@@ -42,7 +42,7 @@ ms.author: sethm
 
 创建用于发送请求的管理节点链接。
 
-```
+```  
     requestLink = session.attach( 	  
     role: SENDER,   
            target: { address: "<entity address>/$management" },   
@@ -54,7 +54,7 @@ ms.author: sethm
 
 创建用于从管理节点接收响应的链接。
 
-```
+```  
     responseLink = session.attach(	  
     role: RECEIVER,   
         source: { address: "<entity address>/$management" }   
@@ -66,7 +66,7 @@ ms.author: sethm
 
 传输请求消息。
 
-```
+```  
     requestLink.sendTransfer(  
             Message(  
                     properties: {  
@@ -83,13 +83,13 @@ ms.author: sethm
 
 从响应链接接收响应消息。
 
-```
+```  
     responseMessage = responseLink.receiveTransfer()  
 ```
 
 响应消息格式如下。
 
-```
+```  
     Message(  
     properties: {	  
             correlation-id: <request id>  

@@ -33,7 +33,7 @@ ms.author: ambapat
 
 powershell
 
-```
+```powershell
 # Connect to Azure AD 
 Connect-AzureAD 
  

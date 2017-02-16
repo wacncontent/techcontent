@@ -43,7 +43,7 @@ ms.author: jdial
 
 1. 运行以下命令，切换到经典模式：
 
-    ```
+    ```azurecli
     azure config mode asm
     ```
 
@@ -55,7 +55,7 @@ ms.author: jdial
 
 2. 运行以下命令，为前端子网创建路由表：
 
-    ```
+    ```azurecli
     azure network route-table create -n UDR-FrontEnd -l chinanorth
     ```
 
@@ -76,7 +76,7 @@ ms.author: jdial
    * **-n（或 --name）**。新 NSG 的名称。对于我们的方案，为 *NSG-FrontEnd* 。
 3. 运行以下命令，在路由表中创建路由，将流向后端子网 (192.168.2.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-    ```
+    ```azurecli
     azure network route-table route set -r UDR-FrontEnd -n RouteToBackEnd -a 192.168.2.0/24 -t VirtualAppliance -p 192.168.0.4
     ```
 
@@ -97,7 +97,7 @@ ms.author: jdial
    * **-p（或 --next-hop-ip-address**）。下一个跃点的 IP 地址。对于我们的方案，为 *192.168.0.4* 。
 4. 运行以下命令，将创建的路由表与 **FrontEnd** 子网关联：
 
-    ```
+    ```azurecli
     azure network vnet subnet route-table add -t TestVNet -n FrontEnd -r UDR-FrontEnd
     ```
 
@@ -126,19 +126,19 @@ ms.author: jdial
 
 1. 运行以下命令，为后端子网创建路由表：
 
-    ```
+    ```azurecli
     azure network route-table create -n UDR-BackEnd -l chinanorth
     ```
 
 2. 运行以下命令，在路由表中创建路由，将流向前端子网 (192.168.1.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
 
-    ```
+    ```azurecli
     azure network route-table route set -r UDR-BackEnd -n RouteToFrontEnd -a 192.168.1.0/24 -t VirtualAppliance -p 192.168.0.4
     ```
 
 3. 运行以下命令，将路由表与 **BackEnd** 子网关联：
 
-    ```
+    ```azurecli
     azure network vnet subnet route-table add -t TestVNet -n BackEnd -r UDR-BackEnd
     ```
 

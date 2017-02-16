@@ -125,7 +125,7 @@ Service Fabric 群集资源管理器提供多种机制用于描述群集。在�
 
 ClusterManifest.xml
 
-```
+```xml
   <Infrastructure>
     <!-- IsScaleMin indicates that this cluster runs on one-box /one single server -->
     <WindowsServer IsScaleMin="true">
@@ -188,7 +188,7 @@ Service Fabric 还定义了一些默认属性，无需用户进行定义，系�
 
 假设为给定节点类型定义了以下节点属性：ClusterManifest.xml
 
-```
+```xml
 <NodeType Name="NodeType01">
   <PlacementProperties>
     <Property Name="HasSSD" Value="true"/>
@@ -202,7 +202,7 @@ Service Fabric 还定义了一些默认属性，无需用户进行定义，系�
 
 C#
 
-```
+```csharp
 FabricClient fabricClient = new FabricClient();
 StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
 serviceDescription.PlacementConstraints = "(HasSSD == true && SomeProperty >= 4)";
@@ -213,7 +213,7 @@ await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
 
 Powershell：
 
-```
+```posh
 New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceType -Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementConstraint "HasSSD == true && SomeProperty >= 4"
 ```
 
@@ -223,7 +223,7 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 
 C#：
 
-```
+```csharp
 StatefulServiceUpdateDescription updateDescription = new StatefulServiceUpdateDescription();
 updateDescription.PlacementConstraints = "NodeType == NodeType01";
 await fabricClient.ServiceManager.UpdateServiceAsync(new Uri("fabric:/app/service"), updateDescription);
@@ -231,7 +231,7 @@ await fabricClient.ServiceManager.UpdateServiceAsync(new Uri("fabric:/app/servic
 
 Powershell：
 
-```
+```posh
 Update-ServiceFabricService -Stateful -ServiceName $serviceName -PlacementConstraints "NodeType == NodeType01"
 ```
 
@@ -250,7 +250,7 @@ Service Fabric 使用“指标”表示资源。指标是你想要向 Service Fa
 
 C#：
 
-```
+```csharp
 StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
 ServiceLoadMetricDescription metric = new ServiceLoadMetricDescription();
 metric.Name = "MemoryInMb";
@@ -273,7 +273,7 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 
 ClusterManifest.xml
 
-```
+```xml
 <NodeType Name="NodeType02">
   <Capacities>
     <Capacity Name="MemoryInMb" Value="2048"/>
@@ -298,7 +298,7 @@ ClusterManifest.xml
 
 ClusterManifest.xml
 
-```
+```xml
     <Section Name="NodeBufferPercentage">
         <Parameter Name="DiskSpace" Value="0.10" />
         <Parameter Name="Memory" Value="0.15" />
@@ -308,7 +308,7 @@ ClusterManifest.xml
 
 创建新服务会在群集耗尽缓冲容量时失败，确保群集保留足够的备用额外负荷，使升级和失败不会造成节点实际超过容量。群集资源管理器通过 PowerShell 和查询 API 公开许多此类信息，以便查看缓冲容量设置、总容量及每个群集中使用的每个指标的当前消耗量。下面提供了该输出的示例：
 
-```
+```posh
 PS C:\Users\user> Get-ServiceFabricClusterLoadInformation
 LastBalancingStartTimeUtc : 9/1/2015 12:54:59 AM
 LastBalancingEndTimeUtc   : 9/1/2015 12:54:59 AM

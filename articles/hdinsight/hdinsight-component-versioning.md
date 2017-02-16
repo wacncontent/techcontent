@@ -24,6 +24,8 @@ ms.author: saurinsh
 # 可与 HDInsight 使用的不同 Hadoop 组件有哪些？
 了解 HDInsight 提供的不同服务级别，以及 HDInsight 所包括的不同 Hadoop 组件版本。
 
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+
 ## 可与不同 HDInsight 版本使用的 Hadoop 组件
 Azure HDInsight 支持多个可随时部署的 Hadoop 群集版本。每个版本选项创建 Hortonworks 数据平台 (HDP) 分发的特定版本和该分发内包含的一组组件。下表中逐项列出了与 HDInsight 群集版本关联的组件版本。请注意，Azure HDInsight 使用的默认群集版本当前是 3.4（到 09/14/2016 为止）并基于 HDP 2.4。
 
@@ -90,14 +92,14 @@ SLA 用“支持窗口”来定义。“支持窗口”是指 HDInsight 群集�
 > 
 
 ##HDInsight 在 Windows 上弃用
-从 HDI 版本 3.4 开始，我们仅发布 Linux 操作系统上的 HDInsight。HDInsight 的一些产品/服务仅适用于 Linux - Apache Ranger、HDInsight 应用程序、作为主 FS 的 Azure Data Lake Store 等。这对于客户来说有多个优势
+从 HDI 版本 3.4 开始，我们仅发布 Linux 操作系统上的 HDInsight。HDInsight 的一些产品/服务仅适用于 Linux - Apache Ranger、HDInsight 应用程序等。这对于客户来说有多个优势
 
 * 我们可以通过 HDInsight 服务更快地为市场带来开源大数据技术
 * 有大型社区和生态系统可以支持
 * 开源社区可以主动开发实现 Hadoop 和更新的大数据技术
 * HDInsight 服务可以更专注于大数据开放源代码技术
 
-为了对开放源代码大数据技术持续投资，将来的 HDInsight 版本将仅在 Linux 操作系统上可用。Windows 操作系统上的 HDInsight 将不会有任何将来版本。Windows 上的最后一个 HDInsight 版本是 HDI 3.3。对 HDI 3.3 的支持于 06/27/2016 到期，并将于 07/31/2017 弃用。若要从基于 Windows 的 HDInsight 群集迁移到基于 Linux 的群集，请参阅[此文](https://docs.microsoft.com/en-gb/azure/hdinsight/hdinsight-migrate-from-windows-to-linux)。
+为了对开放源代码大数据技术持续投资，将来的 HDInsight 版本将仅在 Linux 操作系统上可用。Windows 操作系统上的 HDInsight 将不会有任何将来版本。Windows 上的最后一个 HDInsight 版本是 HDI 3.3。对 HDI 3.3 的支持于 06/27/2016 到期，并将于 07/31/2017 弃用。若要从基于 Windows 的 HDInsight 群集迁移到基于 Linux 的群集，请参阅[此文](./hdinsight-migrate-from-windows-to-linux.md)。
 
 ## 与 HDInsight 版本相关的 Hortonworks 发行说明
 * HDInsight 群集版本 3.4 使用基于 [Hortonworks 数据平台 2.4](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.4.0/bk_HDP_RelNotes/content/ch_relnotes_v240.html) 的 Hadoop 分发版。这是使用门户时创建的**默认** Hadoop 群集。

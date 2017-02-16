@@ -69,7 +69,7 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
 
 在这里，操作 **Restart-ServiceFabricNode** 在一个名为“Node1”的节点上运行。完成模式指定不应该验证实际上是否成功执行了重启节点操作。将完成模式指定为“Verify”会让其验证实际是否成功执行了重新启动操作。除了按其名称直接指定节点以外，还可以通过分区键和副本类型指定节点，如下所示：
 
-```
+```powershell
 Restart-ServiceFabricNode -ReplicaKindPrimary  -PartitionKindNamed -PartitionKey Partition3 -CompletionMode Verify
 
 $connection = "localhost:19000"
@@ -96,7 +96,7 @@ Restart-ServiceFabricNode -NodeName $nodeName -CompletionMode DoNotVerify
 若要使用 C# 运行可测试性操作，首先你需要使用 FabricClient 连接到群集。然后获取运行该操作所需的参数。可用不同的参数来运行相同的操作。
 请看一看 RestartServiceFabricNode 操作，运行该操作的方式之一是在群集中使用节点信息（节点名称和节点实例 ID）。
 
-```
+```csharp
 RestartNodeAsync(nodeName, nodeInstanceId, completeMode, operationTimeout, CancellationToken.None)
 ```
 
@@ -110,7 +110,7 @@ RestartNodeAsync(nodeName, nodeInstanceId, completeMode, operationTimeout, Cance
 
 有关更多信息，请参阅 [PartitionSelector 和 ReplicaSelector](#partition_replica_selector)。
 
-```
+```csharp
 // Add a reference to System.Fabric.Testability.dll and System.Fabric.dll
 using System;
 using System.Collections.Generic;
@@ -183,7 +183,7 @@ PartitionSelector 是在可测试性中运用的一个帮助程序，用于选�
 
 若要使用此帮助器，请创建 PartitionSelector 对象，并使用 Select* 方法之一选择分区。然后在 PartitionSelector 对象中将其传递给需要它的 API。如果未选择任何选项，则默认为随机分区。
 
-```
+```csharp
 Uri serviceName = new Uri("fabric:/samples/InMemoryToDoListApp/InMemoryToDoListService");
 Guid partitionIdGuid = new Guid("8fb7ebcc-56ee-4862-9cc0-7c6421e68829");
 string partitionName = "Partition1";
@@ -207,7 +207,7 @@ ReplicaSelector 是在可测试性中运用的一个帮助程序，用于帮助�
 
 若要使用此帮助器，请创建一个 ReplicaSelector 对象，并设置副本的分区的选择方式。然后，你可以将它传递给需要它的 API。如果未选择任何选项，则默认为随机副本和随机分区。
 
-```
+```csharp
 Guid partitionIdGuid = new Guid("8fb7ebcc-56ee-4862-9cc0-7c6421e68829");
 PartitionSelector partitionSelector = PartitionSelector.PartitionIdOf(serviceName, partitionIdGuid);
 long replicaId = 130559876481875498;

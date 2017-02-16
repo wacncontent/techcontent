@@ -43,7 +43,7 @@ ms.author: navale;tomfitz;
 
 **常规 HTTP 请求：**
 
-```
+```HTTP
 POST /<Azure AD Tenant ID>/oauth2/token?api-version=1.0 HTTP/1.1 HTTP/1.1
 Host: login.chinacloudapi.cn
 Cache-Control: no-cache
@@ -54,7 +54,7 @@ grant_type=client_credentials&resource=https%3A%2F%2Fmanagement.core.chinaclouda
 
 将（如果身份验证成功）导致类似于下面的响应：
 
-```
+```json
 {
   "token_type": "Bearer",
   "expires_in": "3600",
@@ -69,13 +69,13 @@ grant_type=client_credentials&resource=https%3A%2F%2Fmanagement.core.chinaclouda
 
 **使用 Bash 生成访问令牌：**
 
-```
+```console
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=client_credentials&resource=https://management.core.chinacloudapi.cn&client_id=<application id>&client_secret=<password you selected for authentication>" https://login.chinacloudapi.cn/<Azure AD Tenant ID>/oauth2/token?api-version=1.0
 ```
 
 **使用 PowerShell 生成访问令牌：**
 
-```
+```powershell
 Invoke-RestMethod -Uri https://login.chinacloudapi.cn/<Azure AD Tenant ID>/oauth2/token?api-version=1.0 -Method Post
  -Body @{"grant_type" = "client_credentials"; "resource" = "https://management.core.chinacloudapi.cn/"; "client_id" = "<application id>"; "client_secret" = "<password you selected for authentication>" }
 ```
@@ -92,7 +92,7 @@ Invoke-RestMethod -Uri https://login.chinacloudapi.cn/<Azure AD Tenant ID>/oauth
 
 （将 YOUR\_ACCESS\_TOKEN 替换为实际访问令牌。）
 
-```
+```HTTP
 GET /subscriptions?api-version=2015-01-01 HTTP/1.1
 Host: management.chinacloudapi.cn
 Authorization: Bearer YOUR_ACCESS_TOKEN
@@ -103,7 +103,7 @@ Content-Type: application/json
 
 （为了方便阅读，以下订阅 ID 已缩短）
 
-```
+```json
 {
   "value": [
     {
@@ -125,7 +125,7 @@ Content-Type: application/json
 
 （将 YOUR\_ACCESS\_TOKEN 和 SUBSCRIPTION\_ID 替换为实际的访问令牌和订阅 ID）
 
-```
+```HTTP
 GET /subscriptions/SUBSCRIPTION_ID/resourcegroups?api-version=2015-01-01 HTTP/1.1
 Host: management.chinacloudapi.cn
 Authorization: Bearer YOUR_ACCESS_TOKEN
@@ -136,7 +136,7 @@ Content-Type: application/json
 
 （为了方便阅读，以下订阅 ID 已缩短）
 
-```
+```json
 {
     "value": [
         {
@@ -167,7 +167,7 @@ Content-Type: application/json
 
 （将 YOUR\_ACCESS\_TOKEN、SUBSCRIPTION\_ID、RESOURCE\_GROUP\_NAME 替换为实际的访问令牌、订阅 ID 和要创建的资源组名称）
 
-```
+```HTTP
 PUT /subscriptions/SUBSCRIPTION_ID/resourcegroups/RESOURCE_GROUP_NAME?api-version=2015-01-01 HTTP/1.1
 Host: management.chinacloudapi.cn
 Authorization: Bearer YOUR_ACCESS_TOKEN
@@ -183,7 +183,7 @@ Content-Type: application/json
 
 如果成功，你将获得类似于下面的响应
 
-```
+```json
 {
   "id": "/subscriptions/3a8555...555995/resourceGroups/RESOURCE_GROUP_NAME",
   "name": "RESOURCE_GROUP_NAME",
@@ -208,7 +208,7 @@ ARM 模板的部署与调用其他 API 的方式并没有太大差别。其中�
 
 （将 SUBSCRIPTION\_ID、RESOURCE\_GROUP\_NAME、DEPLOYMENT\_NAME、YOUR\_ACCESS\_TOKEN、GLOBALY\_UNIQUE\_STORAGE\_ACCOUNT\_NAME、ADMIN\_USER\_NAME、ADMIN\_PASSWORD 和 DNS\_NAME\_FOR\_PUBLIC\_IP 替换为请求适用的值）
 
-```
+```HTTP
 PUT /subscriptions/SUBSCRIPTION_ID/resourcegroups/RESOURCE_GROUP_NAME/providers/microsoft.resources/deployments/DEPLOYMENT_NAME?api-version=2015-01-01 HTTP/1.1
 Host: management.chinacloudapi.cn
 Authorization: Bearer YOUR_ACCESS_TOKEN

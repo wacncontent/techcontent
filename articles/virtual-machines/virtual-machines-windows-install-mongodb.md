@@ -151,7 +151,7 @@ exit
 ## 配置防火墙和网络安全组规则
 安装并运行 MongoDB 后，请在 Windows 防火墙中打开一个端口，以便能够远程连接到 MongoDB。若要创建一个新的入站规则以允许 TCP 端口 27017，请打开管理 PowerShell 提示符并输入以下命令：
 
-```
+```powerShell
 New-NetFirewallRule -DisplayName "Allow MongoDB" -Direction Inbound `
     -Protocol TCP -LocalPort 27017 -Action Allow
 ```

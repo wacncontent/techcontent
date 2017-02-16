@@ -15,7 +15,7 @@ ms.tgt_pltfrm: na
 ms.devlang: python
 ms.topic: article
 ms.date: 01/03/2016
-wacn.date: 01/25/2017
+wacn.date: 02/14/2017
 ms.author: meetb
 ---
 
@@ -176,7 +176,7 @@ cnxn.rollback()
 ## 其他资源 
 
 * [多租户 SaaS 应用程序和 Azure SQL 数据库的设计模式](./sql-database-design-patterns-multi-tenancy-saas-applications.md)
-* 浏览所有 [SQL 数据库的功能](https://www.azure.cn/home/features/sql-databases/)
+* 浏览所有 [SQL 数据库的功能](https://www.azure.cn/home/features/sql-database/)
 
 <!---HONumber=Mooncake_0120_2017-->
 <!--Update_Description: whole content update(steps, scripts)-->

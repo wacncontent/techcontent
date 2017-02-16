@@ -50,7 +50,7 @@ ms.author: guybo
 
 此示例会将 Windows 虚拟机规模集更新到新版本 4.0.20160229。更新模型后，它将一次更新一个虚拟机实例。
 
-```
+```powershell
 $rgname = "myrg"
 $vmssname = "myvmss"
 $newversion = "4.0.20160229"
@@ -71,7 +71,7 @@ Update-AzureRmVmssInstance -ResourceGroupName $rgname -VMScaleSetName $vmssname 
 
 如果要更新自定义映像的 URI，而不是更改平台映像版本，请将“设置新版本”一行替换为以下内容：
 
-```
+```powershell
 # set the new version in the model data
 $vmss.virtualMachineProfile.storageProfile.osDisk.image.uri= $newURI
 ```

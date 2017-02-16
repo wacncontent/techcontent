@@ -78,7 +78,7 @@ Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这
 
 或者，也可以下载 Resource Manager 示例，进行更改，然后在 Azure PowerShell 窗口中输入 `New-AzureRmResourceGroupDeployment` 命令，使用修改后的模板创建群集。有关要在命令中传入哪些参数，请参阅以下代码。有关如何使用 PowerShell 部署资源组的详细信息，请参阅 [使用 Azure Resource Manager 模板部署资源组](../azure-resource-manager/resource-group-template-deploy.md)一文。
 
-```
+```powershell
 New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $pathToARMConfigJsonFile -TemplateParameterFile $pathToParameterFile –Verbose
 ```
 
@@ -87,7 +87,7 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $
 
 通过将存储资源添加到 resources 节将其添加到模板。
 
-```
+```json
 {
   "apiVersion": "2015-05-01-preview",
   "type": "Microsoft.Storage/storageAccounts",
@@ -105,7 +105,7 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $
 
  接下来，将该资源添加到存储帐户定义后面的 `supportLogStorageAccountName` 与 `vmNodeType0Name` 之间的 parameters 节中。将占位符文本 *storage account name goes here* 替换为存储帐户的名称。
 
- ```
+ ```json
     "applicationDiagnosticsStorageAccountType": {
       "type": "string",
       "allowedValues": [
@@ -128,7 +128,7 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $
 
 然后，通过在 extensions 数组中添进行下代码来更新 template.json 的 `VirtualMachineProfile` 节。请务必根据插入位置，在开头或末尾添加逗点。
 
-```
+```json
 {
     "name": "[concat(parameters('vmNodeType0Name'),'_Microsoft.Insights.VMDiagnosticsSettings')]",
     "properties": {
@@ -192,7 +192,7 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $
 
 例如，如果事件源名为 My-Eventsource，请添加以下代码，将来自 My-Eventsource 的事件放入名为 MyDestinationTableName 的表中。
 
-```
+```json
     {
         "provider": "My-Eventsource",
         "scheduledTransferPeriod": "PT5M",

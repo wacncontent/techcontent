@@ -42,7 +42,7 @@ Redis 会话状态提供程序 NuGet 包依赖于 StackExchange.Redis.StrongName
 
 NuGet 程序包会下载并添加所需的程序集引用，并将以下部分添加到您的 web.config 文件，包含 ASP.NET 应用程序所需的配置，以使用 Redis Cache 会话状态提供程序。
 
-```
+```xml
 <sessionState mode="Custom" customProvider="MySessionStateStore">
     <providers>
     <!--
@@ -84,7 +84,7 @@ NuGet 程序包会下载并添加所需的程序集引用，并将以下部分�
 
 别忘了在 web.config 中注释禁止标准 InProc 会话状态提供程序部分。
 
-```
+```xml
 <!-- <sessionState mode="InProc"
      customProvider="DefaultSessionProvider">
      <providers>

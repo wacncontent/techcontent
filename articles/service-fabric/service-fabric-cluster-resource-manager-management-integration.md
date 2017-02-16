@@ -27,7 +27,7 @@ Service Fabric 群集资源管理器不是负责处理管理操作（如应用�
 
 下面是此类运行状况报告的示例。在这种情况下，运行状况报告适用于系统服务的分区之一，因为该分区的副本暂时打包成少量的升级域，这类似于连续失败时发生的情况：
 
-```
+```posh
 PS C:\Users\User > Get-WindowsFabricPartitionHealth -PartitionId '00000000-0000-0000-0000-000000000001'
 
 PartitionId           : 00000000-0000-0000-0000-000000000001
@@ -101,7 +101,7 @@ HealthEvents          :
 
 ClusterManifest.xml
 
-```
+```xml
     <Section Name="PlacementAndLoadBalancing">
         <Parameter Name="PlacementConstraintPriority" Value="0" />
         <Parameter Name="CapacityConstraintPriority" Value="0" />

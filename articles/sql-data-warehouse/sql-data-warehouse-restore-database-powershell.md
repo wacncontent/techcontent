@@ -47,7 +47,7 @@ ms.author: lakshmir;barbkess;sonyama
 6. 将数据库还原到所需的还原点。
 7. 验证已还原的数据库是否处于联机状态。
 
-    ```
+    ```Powershell
     $SubscriptionName="<YourSubscriptionName>"
     $ResourceGroupName="<YourResourceGroupName>"
     $ServerName="<YourServerNameWithoutURLSuffixSeeNote>"  # Without database.chinacloudapi.cn
@@ -91,7 +91,7 @@ ms.author: lakshmir;barbkess;sonyama
 5. 还原已删除的数据库。
 6. 验证已还原的数据库是否处于联机状态。
 
-    ```
+    ```Powershell
     $SubscriptionName="<YourSubscriptionName>"
     $ResourceGroupName="<YourResourceGroupName>"
     $ServerName="<YourServerNameWithoutURLSuffixSeeNote>"  # Without database.chinacloudapi.cn
@@ -126,7 +126,7 @@ ms.author: lakshmir;barbkess;sonyama
 5. 创建对数据库的恢复请求。
 6. 验证异地还原的数据库的状态。
 
-    ```
+    ```Powershell
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     Get-AzureRmSubscription
     Select-AzureRmSubscription -SubscriptionName "<Subscription_name>"

@@ -34,7 +34,7 @@ Azure 在“映像”下存储映像，以及任何已上载的映像。有关�
 1. 使用所选的 SSH 客户端[连接到 VM](./virtual-machines-linux-mac-create-ssh-keys.md)。
 2. 在 SSH 窗口中，键入以下命令。`waagent` 的输出结果可能会因此实用程序的版本而略有差异：
 
-    ```
+    ```bash
     sudo waagent -deprovision+user
     ```
 
@@ -59,13 +59,13 @@ Azure 在“映像”下存储映像，以及任何已上载的映像。有关�
 5. 从客户端计算机中打开 Azure CLI 并登录到你的 Azure 订阅。有关详细信息，请阅读[从 Azure CLI 连接到 Azure 订阅](../xplat-cli-connect.md)。
 6. 请确保处于服务管理模式下：
 
-    ```
+    ```azurecli
     azure config mode asm
     ```
 
 7. 关闭已取消预配的 VM。以下示例将关闭名为 `myVM` 的 VM：
 
-    ```
+    ```azurecli
     azure vm shutdown myVM
     ```
 
@@ -74,7 +74,7 @@ Azure 在“映像”下存储映像，以及任何已上载的映像。有关�
 
 8. 停止 VM 后，捕获映像。以下示例捕获名为 `myVM` 的 VM，并创建名为 `myNewVM` 的通用映像：
 
-    ```
+    ```azurecli
     azure vm capture -t myVM myNewVM
     ```
 
@@ -82,7 +82,7 @@ Azure 在“映像”下存储映像，以及任何已上载的映像。有关�
 
 9. 新映像现在会出现在映像列表中，可以用于配置任何新的 VM。可以使用以下命令来查看它：
 
-    ```
+    ```azurecli
     azure vm image list
     ```
 

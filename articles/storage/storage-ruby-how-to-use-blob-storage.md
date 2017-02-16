@@ -43,7 +43,7 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 ### 导入包
 使用常用的文本编辑器将以下内容添加到要在其中使用存储的 Ruby 文件的顶部：
 
-```
+```ruby
 require "azure"
 ```
 
@@ -51,7 +51,7 @@ require "azure"
 
 Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY**，以便获取连接到 Azure 存储帐户所需的信息。如果未设置这些环境变量，则在使用 **Azure::Blob::BlobService** 之前必须通过以下代码指定帐户信息：
 
-```
+```ruby
 Azure.config.storage_account_name = "<your azure storage account>"
 Azure.config.storage_access_key = "<your azure storage access key>"
 ```
@@ -79,7 +79,7 @@ Azure.config.storage_access_key = "<your azure storage access key>"
 
 以下代码示例创建一个容器或输出存在的错误。
 
-```
+```ruby
 azure_blob_service = Azure::Blob::BlobService.new
 begin
   container = azure_blob_service.create_container("test-container")
@@ -92,7 +92,7 @@ end
 
 只需修改 <strong>create\_container()</strong> 调用即可传递 **:public\_access\_level** 选项：
 
-```
+```ruby
 container = azure_blob_service.create_container("test-container",
   :public_access_level => "<public access level>")
 ```
@@ -106,7 +106,7 @@ container = azure_blob_service.create_container("test-container",
 
 以下代码示例将更改**容器**的公共访问级别：
 
-```
+```ruby
 azure_blob_service.set_container_acl('test-container', "container")
 ```
 
@@ -115,7 +115,7 @@ azure_blob_service.set_container_acl('test-container', "container")
 
 以下代码会将文件 **test.png** 作为名为“image-blob”的新 blob 上传到容器中。
 
-```
+```ruby
 content = File.open("test.png", "rb") { |file| file.read }
 blob = azure_blob_service.create_block_blob(container.name,
   "image-blob", content)
@@ -127,7 +127,7 @@ puts blob.name
 
 这将输出帐户的所有容器中的所有 Blog 的 URL。
 
-```
+```ruby
 containers = azure_blob_service.list_containers()
 containers.each do |container|
   blobs = azure_blob_service.list_blobs(container.name)
@@ -142,7 +142,7 @@ end
 
 以下代码示例演示了如何使用 **get\_blob()** 下载“image-blob”的内容并将其写入本地文件中。
 
-```
+```ruby
 blob, content = azure_blob_service.get_blob(container.name,"image-blob")
 File.open("download.png","wb") {|f| f.write(content)}
 ```
@@ -150,7 +150,7 @@ File.open("download.png","wb") {|f| f.write(content)}
 ## 删除 Blob
 最后，若要删除 Blob，请使用 **delete\_blob()** 方法。以下代码示例演示了如何删除 blob。
 
-```
+```ruby
 azure_blob_service.delete_blob(container.name, "image-blob")
 ```
 

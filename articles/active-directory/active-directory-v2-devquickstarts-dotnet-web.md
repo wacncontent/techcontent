@@ -58,7 +58,7 @@ ms.author: dastrock
 
 C#
 
-```
+```C#
 [assembly: OwinStartup(typeof(Startup))]
 
 namespace TodoList_WebApp
@@ -77,7 +77,7 @@ namespace TodoList_WebApp
 
 C#
 
-```
+```C#
 public void ConfigureAuth(IAppBuilder app)
 {
     app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
@@ -116,7 +116,7 @@ public void ConfigureAuth(IAppBuilder app)
 
 C#
 
-```
+```C#
 [Authorize]
 public ActionResult About()
 {
@@ -127,7 +127,7 @@ public ActionResult About()
 
 C#
 
-```
+```C#
 public void SignIn()
 {
     // Send an OpenID Connect sign-in request.
@@ -150,7 +150,7 @@ public void SignOut()
 
 HTML
 
-```
+```HTML
 @if (Request.IsAuthenticated)
 {
     <text>
@@ -182,7 +182,7 @@ else
 
 C#
 
-```
+```C#
 [Authorize]
 public ActionResult About()
 {

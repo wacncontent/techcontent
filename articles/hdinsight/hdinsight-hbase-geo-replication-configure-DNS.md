@@ -46,13 +46,13 @@ ms.author: jgao
 
     运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
-    ```
+    ```powershell
     Add-AzureAccount -Environment AzureChinaCloud
     ```
 
     如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
 
-    ```
+    ```powershell
     Select-AzureSubscription <AzureSubscriptionName>
     ```
 
@@ -112,7 +112,7 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 1. 打开 Windows PowerShell ISE。
 2. 运行以下 cmdlet：
 
-    ```
+    ```powershell
     Add-AzureAccount -Environment AzureChinaCloud
     Select-AzureSubscription [YourAzureSubscriptionName]
 

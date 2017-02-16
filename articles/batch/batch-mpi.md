@@ -45,7 +45,7 @@ ms.author: marsma
 
 csharp
 
-```
+```csharp
 CloudPool myCloudPool =
     myBatchClient.PoolOperations.CreatePool(
         poolId: "MultiInstanceSamplePool",
@@ -66,7 +66,7 @@ myCloudPool.MaxTasksPerComputeNode = 1;
 
 csharp
 
-```
+```csharp
 // Create a StartTask for the pool which we use for installing MS-MPI on
 // the nodes as they join the pool (or when they are restarted).
 StartTask startTask = new StartTask
@@ -103,7 +103,7 @@ await myCloudPool.CommitAsync();
 
 csharp
 
-```
+```csharp
 // Create the multi-instance task. Its command line is the "application command"
 // and will be executed *only* by the primary, and only after the primary and
 // subtasks execute the CoordinationCommandLine.
@@ -133,7 +133,7 @@ await myBatchClient.JobOperations.AddTaskAsync("mybatchjob", myMultiInstanceTask
 
 csharp
 
-```
+```csharp
 int numberOfNodes = 10;
 myMultiInstanceTask.MultiInstanceSettings = new MultiInstanceSettings(numberOfNodes);
 ```
@@ -213,7 +213,7 @@ cmd /c ""%MSMPI_BIN%\mpiexec.exe"" -c 1 -wdir %AZ_BATCH_TASK_SHARED_DIR% MyMPIAp
 
 csharp
 
-```
+```csharp
 // Obtain the job and the multi-instance task from the Batch service
 CloudJob boundJob = batchClient.JobOperations.GetJob("mybatchjob");
 CloudTask myMultiInstanceTask = boundJob.GetTask("mymultiinstancetask");

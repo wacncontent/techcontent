@@ -33,19 +33,19 @@ ms.author: robinsh
 ## 创建共享
 通过 **FileService** 对象，可使用共享、目录和文件。以下代码创建 **FileService** 对象。在要在其中以编程方式访问 Azure 存储的 Python 文件中，在顶部附近添加以下内容：
 
-```
+```python
 from azure.storage.file import FileService
 ```
 
 以下代码使用存储帐户名称和帐户密钥创建 **FileService** 对象。将“myaccount”和“mykey”替换为你的帐户名称和密钥。
 
-```
+```python
 file_service = **FileService** (account_name='myaccount', account_key='mykey',endpoint_suffix='core.chinacloudapi.cn')
 ```
 
 在以下代码示例中，如果共享不存在，可以使用 **FileService** 对象来创建它。
 
-```
+```python
 file_service.create_share('myshare')
 ```
 
@@ -59,7 +59,7 @@ Azure 文件存储共享至少包含文件所在的根目录。本部分介绍�
 
 下面的示例将 **sunset.png** 文件的内容上传到 **myfile** 文件中。
 
-```
+```python
 from azure.storage.file import ContentSettings
 file_service.create_file_from_path(
     'myshare',
@@ -73,7 +73,7 @@ file_service.create_file_from_path(
 
 也可将文件置于子目录中，而不将其全部置于根目录中，以便对存储进行有效的组织。Azure 文件存储服务允许创建帐户所允许任意数目的目录。以下代码将在根目录下创建名为 **sampledir** 的子目录。
 
-```
+```python
 file_service.create_directory('myshare', 'sampledir')
 ```
 
@@ -81,7 +81,7 @@ file_service.create_directory('myshare', 'sampledir')
 
 若要列出共享中的文件和目录，请使用 **list\_directories\_and\_files** 方法。此方法会返回一个生成器。以下代码将共享中每个文件和目录的**名称**输出到控制台。
 
-```
+```python
 generator = file_service.list_directories_and_files('myshare')
 for file_or_dir in generator:
     print(file_or_dir.name)
@@ -93,7 +93,7 @@ for file_or_dir in generator:
 
 以下示例演示了如何使用 **get\_file\_to\_path** 下载 **myfile** 文件的内容，并将其存储到 **out-sunset.png** 文件。
 
-```
+```python
 file_service.get_file_to_path('myshare', None, 'myfile', 'out-sunset.png')
 ```
 
@@ -101,7 +101,7 @@ file_service.get_file_to_path('myshare', None, 'myfile', 'out-sunset.png')
 
 最后，若要删除文件，请调用 **delete\_file**。
 
-```
+```python
 file_service.delete_file('myshare', None, 'myfile')
 ```
 

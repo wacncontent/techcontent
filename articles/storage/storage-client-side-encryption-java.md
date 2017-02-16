@@ -65,7 +65,7 @@ ms.author: dineshm
 
 在加密过程中，客户端库将生成 16 个字节的随机 IV 和 32 个字节的随机 CEK，并使用此信息对队列消息文本执行信封加密。然后，将已包装的 CEK 和一些附加加密元数据添加到已加密的队列消息中。此修改后的消息（如下所示）将存储在服务中。
 
-```
+```java
 <MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
 ```
 
@@ -142,7 +142,7 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ### Blob 服务加密
 创建 **BlobEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-```
+```java
 // Create the IKey used for encryption.
 RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
@@ -164,7 +164,7 @@ blob.download(outputStream, null, options, null);
 ### 队列服务加密  
 创建 **QueueEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-```
+```java
 // Create the IKey used for encryption.
 RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
@@ -186,7 +186,7 @@ CloudQueueMessage retrMessage = queue.retrieveMessage(30, options, null);
 
 ### 使用解析程序  
 
-```
+```java
 // Create the IKey used for encryption.
 RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
@@ -220,7 +220,7 @@ TableResult result = currentTable.execute(operation, retrieveOptions, null);
 ### 使用属性  
 如上所述，如果实体实现了 TableEntity，则可以使用 [Encrypt] 特性修饰属性 getter 和 setter，而不用指定 **EncryptionResolver**。
 
-```
+```java
 private string encryptedProperty1;
 
 @Encrypt

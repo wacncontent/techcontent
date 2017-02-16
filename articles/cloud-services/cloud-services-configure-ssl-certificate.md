@@ -51,7 +51,7 @@ ms.author: adegeo
 
 1.  在你的开发环境中，打开服务定义文件 (CSDEF)，在 **WebRole** 节中添加 **Certificates** 节，并包含以下证书（和中间证书）的相关信息：
 
-    ```
+    ```xml
     <WebRole name="CertificateTesting" vmsize="Small">
     ...
         <Certificates>
@@ -86,7 +86,7 @@ ms.author: adegeo
 
 2.  在你的服务定义文件中，在** Endpoints** 节中添加 **InputEndpoint** 元素以启用 HTTPS：
 
-    ```
+    ```xml
     <WebRole name="CertificateTesting" vmsize="Small">
     ...
         <Endpoints>
@@ -99,7 +99,7 @@ ms.author: adegeo
 
 3.  在你的服务定义文件中，在 **Sites** 节中添加 **Binding** 元素。此节添加 HTTPS 绑定以将终结点映射到您的网站：
 
-    ```
+    ```xml   
     <WebRole name="CertificateTesting" vmsize="Small">
     ...
         <Sites>
@@ -117,7 +117,7 @@ ms.author: adegeo
 
 4.  在你的服务配置文件 (CSCFG) ServiceConfiguration.Cloud.cscfg 中，在** Role** 节中添加 **Certificates **节，并将下面显示的示例指纹值替换为你的证书的指纹值：
 
-    ```
+    ```xml   
     <Role name="Deployment">
     ...
         <Certificates>

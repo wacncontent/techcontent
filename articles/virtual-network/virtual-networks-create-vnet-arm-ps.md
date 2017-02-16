@@ -44,7 +44,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 2. 如有必要，创建一个新的资源组，如下所示。对于此方案，创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](../azure-resource-manager/resource-group-overview.md)。
 
-    ```
+    ```powershell   
     New-AzureRmResourceGroup -Name TestRG -Location chinaeast
     ```
 
@@ -59,7 +59,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
     ```
 3. 创建名为 *TestVNet* 的新 VNet：
 
-    ```
+    ```powershell
     New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet `
     -AddressPrefix 192.168.0.0/16 -Location chinaeast
     ```
@@ -85,7 +85,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
     ```
 4. 将虚拟网络对象存储在变量中：
 
-    ```
+    ```powershell
     $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
     ```
 
@@ -95,7 +95,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 5. 将子网添加到新的 VNet 变量中：
 
-    ```
+    ```powershell
     Add-AzureRmVirtualNetworkSubnetConfig -Name FrontEnd `
     -VirtualNetwork $vnet -AddressPrefix 192.168.1.0/24
     ```
@@ -127,14 +127,14 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 6. 对要创建的每个子网重复执行上面的步骤 5。对于此方案，以下命令将创建 *BackEnd* 子网：
 
-    ```
+    ```powershell
     Add-AzureRmVirtualNetworkSubnetConfig -Name BackEnd `
     -VirtualNetwork $vnet -AddressPrefix 192.168.2.0/24
     ```
 
 7. 尽管你创建了子网，但它们当前仅存在于用于检索你在上面的步骤 4 中创建的 VNet 的本地变量中。若要将更改保存到 Azure，请运行以下命令：
 
-    ```
+    ```powershell
     Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
     ```
 

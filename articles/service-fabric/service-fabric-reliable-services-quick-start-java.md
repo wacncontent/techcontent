@@ -43,13 +43,13 @@ ms.author: vturecek
 
 首先创建新的 Service Fabric 应用程序。适用于 Linux 的 Service Fabric SDK 包括一个 Yeoman 生成器，它为包含无状态服务的 Service Fabric 应用程序提供基架。首先，请运行以下 Yeoman 命令：
 
-```
+```bash
 $ yo azuresfjava
 ```
 
 按照说明创建**可靠无状态服务**。本教程将应用程序命名为“HelloWorldApplication”，将服务命名为“HelloWorld”。结果包含 `HelloWorldApplication` 和 `HelloWorld` 的目录。
 
-```
+```bash
 HelloWorldApplication/
 ├── build.gradle
 ├── HelloWorld
@@ -147,7 +147,7 @@ Service Fabric 将管理此业务流程，以便保持服务的高度可用和�
 
 必须将服务类型注册到 Service Fabric 运行时。服务类型在 `ServiceManifest.xml` 中以及实现 `StatelessService` 的服务类中定义。服务注册在进程主入口点中执行。在本示例中，进程主入口点为 `HelloWorldServiceHost.java`：
 
-```
+```java
 public static void main(String[] args) throws Exception {
     try {
         ServiceRuntime.registerStatelessServiceAsync("HelloWorldType", (context) -> new HelloWorldService(), Duration.ofSeconds(10));
@@ -165,13 +165,13 @@ public static void main(String[] args) throws Exception {
 
 Yeoman 基架包含一个用于构建应用程序的 gradle 脚本，以及一个用于部署和取消部署应用程序的 bash 脚本。若要运行应用程序，请先使用 gradle 构建应用程序：
 
-```
+```bash
 $ gradle
 ```
 
 这会生成可以使用 Service Fabric Azure CLI 部署的 Service Fabric 应用程序包。Install.sh 脚本包含用于部署应用程序包的 Azure CLI 命令。只需运行 install.sh 脚本即可部署：
 
-```
+```bash
 $ ./install.sh
 ```
 

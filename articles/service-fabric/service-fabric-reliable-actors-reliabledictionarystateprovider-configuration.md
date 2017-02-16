@@ -45,7 +45,7 @@ Azure Service Fabric 运行时在 settings.xml 文件中查找预定义的节名
 
 ### 群集清单节示例
 
-```
+```xml
    <Section Name="KtlLogger">
      <Parameter Name="WriteBufferMemoryPoolMinimumInKB" Value="8192" />
      <Parameter Name="WriteBufferMemoryPoolMaximumInKB" Value="8192" />
@@ -93,7 +93,7 @@ SharedLogSizeInMB 指定要预先分配给所有节点上的默认共享日志�
 
 ## 示例配置文件
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <Section Name="MyActorServiceReplicatorConfig">

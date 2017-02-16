@@ -40,7 +40,7 @@ ms.author: kumud
 
 检查云部署生成的 .csdef 文件的代码片段，可以看到配置的外部终结点，以便在端口 10000、10001 和 10002 上使用端口 HTTP。
 
-```
+```xml
 <ServiceDefinition name="Tenant">
     <WorkerRole name="FERole" vmsize="Small">
 <Endpoints>
@@ -65,7 +65,7 @@ ms.author: kumud
 
 下面是运行状况探测器的示例：
 
-```
+```xml
 <LoadBalancerProbes>
     <LoadBalancerProbe name="MyProbe" protocol="http" path="Probe.aspx" intervalInSeconds="5" timeoutInSeconds="100" />
 </LoadBalancerProbes>

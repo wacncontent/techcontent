@@ -30,7 +30,7 @@ ms.author: robmcm
 
 1.  发布服务时，只需将 **-Slot** 参数传递到 **Publish-AzureServiceProject** cmdlet。
 
-    ```
+    ```powershell
     Publish-AzureServiceProject -Slot staging
     ```
 

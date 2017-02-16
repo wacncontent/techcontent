@@ -31,7 +31,7 @@ ms.author: v-livech
 
 SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`ssh-keygen` 命令将使用正确的权限为你创建一个。`-N` cli 标志是用于加密 SSH 私钥的密码，*不*是用户密码。
 
-```
+```bash
 ssh-keygen \
 -t rsa \
 -b 2048 \
@@ -42,31 +42,31 @@ ssh-keygen \
 
 现在，`~/.ssh` 目录中包含 `id_rsa` 和 `id_rsa.pub` SSH 密钥对。
 
-```
+```bash
 ls -al ~/.ssh
 ```
 
 请验证 `ssh-agent` 是否正在运行：
 
-```
+```bash
 eval "$(ssh-agent -s)"
 ```
 
 将新创建的密钥添加到 `ssh-agent`：
 
-```
+```bash
 ssh-add ~/.ssh/id_rsa
 ```
 
 如果已创建 VM，可以使用以下命令将新的 SSH 公钥安装到 Linux VM：
 
-```
+```bash
 ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
 ```
 
 使用密钥而不是密码测试登录：
 
-```
+```bash
 ssh -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -i ~/.ssh/id_rsa ahmet@myserver
 Last login: Tue April 12 07:07:09 2016 from 66.215.22.201
 $
@@ -92,7 +92,7 @@ Azure 需要至少 2048 位采用 ssh-rsa 格式的公钥和私钥。为了创�
 
 SSH 密钥默认保留在 `~/.ssh` 目录中。如果没有 `~/.ssh` 目录，`ssh-keygen` 命令将使用正确的权限为你创建一个。
 
-```
+```bash
 ssh-keygen \
 -t rsa \
 -b 2048 \
@@ -117,7 +117,7 @@ ssh-keygen \
 
 从现有的 SSH-RSA 私钥创建 X.509 证书：
 
-```
+```bash
 openssl req -x509 \
 -key ~/.ssh/id_rsa \
 -nodes \
@@ -132,7 +132,7 @@ openssl req -x509 \
 
 从现有的 SSH 公钥创建 RFC4716 格式的密钥：
 
-```
+```bash
 ssh-keygen \
 -f ~/.ssh/id_rsa.pub \
 -e \
@@ -141,7 +141,7 @@ ssh-keygen \
 
 ## ssh-keygen 的示例
 
-```
+```bash
 ssh-keygen -t rsa -b 2048 -C "ahmet@myserver"
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/ahmet/.ssh/id_rsa): id_rsa
@@ -173,7 +173,7 @@ The keys randomart image is:
 
 `~/.ssh` 目录的列表。
 
-```
+```bash
 ls -al ~/.ssh
 -rw------- 1 ahmet staff  1675 Aug 25 18:04 id_rsa
 -rw-r--r-- 1 ahmet staff   410 Aug 25 18:04 rsa.pub
@@ -191,13 +191,13 @@ ls -al ~/.ssh
 
 验证并使用 ssh-agent 和 ssh-add 通知 SSH 系统有关密钥文件的信息，以便无需以交互方式使用密码。
 
-```
+```bash
 eval "$(ssh-agent -s)"
 ```
 
 现在，使用命令 `ssh-add` 将私钥添加到 `ssh-agent`。
 
-```
+```bash
 ssh-add ~/.ssh/id_rsa
 ```
 
@@ -206,7 +206,7 @@ ssh-add ~/.ssh/id_rsa
 ## 使用 `ssh-copy-id` 安装新密钥
 如果已创建 VM，可以使用以下命令将新的 SSH 公钥安装到 Linux VM：
 
-```
+```bash
 ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
 ```
 
@@ -218,19 +218,19 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub ahmet@myserver
 
 ### 创建文件
 
-```
+```bash
 touch ~/.ssh/config
 ```
 
 ### 编辑文件以添加新的 SSH 配置：
 
-```
+```bash
 vim ~/.ssh/config
 ```
 
 ### 示例 `~/.ssh/config` 文件：
 
-```
+```bash
 # Azure Keys
 Host fedora22
   Hostname 102.160.203.241
@@ -266,7 +266,7 @@ Host *
 
 创建 SSH 密钥对并配置 SSH 配置文件后，便可以快速安全地登录到 Linux VM。首次使用 SSH 密钥登录到服务器时，命令将提示用户输入该密钥文件的通行短语。
 
-```
+```bash
 ssh fedora22
 ```
 

@@ -381,7 +381,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
 
 如果找不到该项，则使用 `GetItemFromDataSourceAsync` 方法（这是一个本地方法，它不是 StackExchange 库的一部分）从底层数据源提取该项。然后，使用 `StringSetAsync` 方法将该项添加到缓存，便于下次更快检索。
 
-```
+```csharp
 // Connect to the Azure Redis cache
 ConfigurationOptions config = new ConfigurationOptions();
 config.EndPoints.Add("<your DNS name>.redis.cache.chinacloudapi.cn");
@@ -411,7 +411,7 @@ private async Task<string> RetrieveItem(string itemKey)
 
 同样地，你可以使用 `StringGet` 方法从缓存中读取对象，并将其反序列化为 .NET 对象。以下代码演示了 IDatabase 接口的一组扩展方法（Redis 连接的 `GetDatabase` 方法返回 `IDatabase` 对象），使用这些方法的某些示例代码可以在缓存中读取和写入 `BlogPost` 对象：
 
-```
+```csharp
 public static class RedisCacheExtensions
 {
     public static async Task<T> GetAsync<T>(this IDatabase cache, string key)
@@ -466,7 +466,7 @@ public static class RedisCacheExtensions
 
 以下代码演示了 `RetrieveBlogPost` 的方法，该方法使用这些扩展方法，遵循缓存端模式在缓存中读取和写入可序列化的 `BlogPost` 对象：
 
-```
+```csharp
 // The BlogPost type
 [Serializable]
 private class BlogPost
@@ -504,7 +504,7 @@ private async Task<BlogPost> RetrieveBlogPost(string blogPostKey)
 
 此方法可以更有效地使用网络来帮助降低延迟。以下代码段演示了并行检索两个客户的详细信息的示例。该代码将提交两个请求，再执行其他某种处理（未显示），然后等待接收结果。缓存对象的 `Wait` 方法类似于 .NET Framework `Task.Wait` 方法：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -537,7 +537,7 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
 
 - `INCR`、`INCRBY`、`DECR` 和 `DECRBY`，用于对整数数字数据值执行原子递增和递减操作。StackExchange 库提供了 `IDatabase.StringIncrementAsync` 和 `IDatabase.StringDecrementAsync` 方法的重载版本，用于执行这些操作并返回存储在缓存中的结果值。以下代码段演示了如何使用这些方法：
 
-    ```
+    ```csharp
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
     ...
@@ -554,7 +554,7 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
 
 - `GETSET` 用于检索与键关联的值，并将其更改为新值。StackExchange 库通过 `IDatabase.StringGetSetAsync` 方法使此操作可供使用。以下代码段演示了此方法的示例。此代码从前一示例返回与键 "data:counter" 关联的当前值。然后将此键的值重置为零，这些都是同一操作的一部分：
 
-    ```
+    ```csharp
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
     ...
@@ -563,7 +563,7 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
 
 - `MGET` 和 `MSET` 可以作为单个操作返回或更改一组字符串值。`IDatabase.StringGetAsync` 和 `IDatabase.StringSetAsync` 已重载以支持此功能，如以下示例中所示：
 
-    ```
+    ```csharp
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
     ...
@@ -594,7 +594,7 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
 
 以下代码段显示的示例将在执行同一事务期间递增和递减两个计数器：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -617,7 +617,7 @@ Console.WriteLine("Result of decrement: {0}", tx2.Result);
 
 可以使用 `IDatabase.CreateBatch` 方法来创建 `IBatch` 对象，然后使用 `IBatch.Execute` 方法来运行批处理，如以下示例所示。这段代码仅设置字符串值，递增和递减前面示例中使用的相同计数器，然后显示结果：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -636,7 +636,7 @@ Console.WriteLine("{0}", t2.Result);
 
 Redis 通过使用命令标志来支持即发即弃操作。在此情况下，客户端仅启动操作，但不关注结果，且并不会等待命令完成。以下示例演示了如何以即发即弃操作的形式执行 INCR 命令：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -651,7 +651,7 @@ cache.StringIncrement("data:key1", flags: CommandFlags.FireAndForget);
 
 以下代码段演示了如何将密钥过期时间设置为 20 秒，并查询密钥剩余生存期：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -665,7 +665,7 @@ TimeSpan? expiry = cache.KeyTimeToLive("data:key1");
 
 还可以使用 StackExchange 库中作为 `KeyExpireAsync` 方法提供的 EXPIRE 命令将过期时间设置为特定的日期和时间：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -688,7 +688,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
 
 `BlogPost` 对象包含四个字段：ID、标题、排名分数和标记集合。以下第一个代码段演示了用于填充 `BlogPost` 对象的 C# 列表的示例数据：
 
-```
+```csharp
 List<string[]> tags = new List<string[]>()
 {
     new string[] { "iot","csharp" },
@@ -723,7 +723,7 @@ for (int i = 0; i < numberOfPosts; i++)
 
 可以在 Redis 缓存中针对每个 `BlogPost` 对象将标记存储为集，并将每个集与 `BlogPost` ID关联。这样，应用程序便可以快速查找属于特定博客文章的所有标记。若要启用反向搜索并查找所有共享特定标记的博客文章，可以创建另一个集，用于保存引用键中标记 ID 的博客文章：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -747,7 +747,7 @@ foreach (BlogPost post in posts)
 
 这些结构可让你以非常有效的方式执行许多常见查询。例如，你可以按如下所示查找并显示博客文章 1 的所有标记：
 
-```
+```csharp
 // Show the tags for blog post #1
 foreach (var value in await cache.SetMembersAsync("blog:posts:1:tags"))
 {
@@ -757,7 +757,7 @@ foreach (var value in await cache.SetMembersAsync("blog:posts:1:tags"))
 
 你可以通过执行交集操作，查找博客文章 1 和博客文章 2 公用的所有标记，如下所示：
 
-```
+```csharp
 // Show the tags in common for blog posts #1 and #2
 foreach (var value in await cache.SetCombineAsync(SetOperation.Intersect, new RedisKey[]
     { "blog:posts:1:tags", "blog:posts:2:tags" }))
@@ -768,7 +768,7 @@ foreach (var value in await cache.SetCombineAsync(SetOperation.Intersect, new Re
 
 你可以查找包含特定标记的所有博客文章：
 
-```
+```csharp
 // Show the ids of the blog posts that have the tag "iot".
 foreach (var value in await cache.SetMembersAsync("tag:iot:blog:posts"))
 {
@@ -784,7 +784,7 @@ foreach (var value in await cache.SetMembersAsync("tag:iot:blog:posts"))
 
 以下代码段演示了如何使用 StackExchange 库来执行这些操作。此代码使用前面示例中的 `BlogPost` 类型。当用户阅读博客文章时，`IDatabase.ListLeftPushAsync` 方法将博客文章的标题推送到与 Redis 缓存中键 "blog:recent\_posts" 关联的列表。
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -798,7 +798,7 @@ await cache.ListLeftPushAsync(
 
 可以使用 `IDatabase.ListRange` 方法显示最近阅读的文章的标题。此方法采用包含列表、起点和终点的键。以下代码将从列表的最左端检索 10 篇博客文章的标题（项为 0 到 9）：
 
-```
+```csharp
 // Show latest ten posts
 foreach (string postTitle in await cache.ListRangeAsync(redisKey, 0, 9))
 {
@@ -810,7 +810,7 @@ foreach (string postTitle in await cache.ListRangeAsync(redisKey, 0, 9))
 
 若要防止列表无限增长，可以通过修剪列表来定期删除项。以下代码段演示了如何只保留列表中位于最左端的 5 个项并删除其他所有项：
 
-```
+```csharp
 await cache.ListTrimAsync(redisKey, 0, 5);
 ```
 
@@ -820,7 +820,7 @@ await cache.ListTrimAsync(redisKey, 0, 5);
 
 以下代码段将博客文章的标题添加到排序列表。在示例中，每篇博客文章还有包含博客文章排名的评分字段。
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 IDatabase cache = redisHostConnection.GetDatabase();
 ...
@@ -831,7 +831,7 @@ await cache.SortedSetAddAsync(redisKey, blogPost.Title, blogpost.Score);
 
 可以使用 `IDatabase.SortedSetRangeByRankWithScores` 方法以评分递增顺序来检索博客文章标题和评分：
 
-```
+```csharp
 foreach (var post in await cache.SortedSetRangeByRankWithScoresAsync(redisKey))
 {
     Console.WriteLine(post);
@@ -843,7 +843,7 @@ foreach (var post in await cache.SortedSetRangeByRankWithScoresAsync(redisKey))
 
 你也可以使用评分递减顺序来检索项，并通过将额外参数提供给 `IDatabase.SortedSetRangeByRankWithScoresAsync` 方法来限制返回项的数目。以下示例演示了排名前 10 位博客文章的标题和评分：
 
-```
+```csharp
 foreach (var post in await cache.SortedSetRangeByRankWithScoresAsync(
                                redisKey, 0, 9, Order.Descending))
 {
@@ -853,7 +853,7 @@ foreach (var post in await cache.SortedSetRangeByRankWithScoresAsync(
 
 以下示例使用了 `IDatabase.SortedSetRangeByScoreWithScoresAsync` 方法，该方法可用于限制返回给那些处于给定评分范围内的项：
 
-```
+```csharp
 // Blog posts with scores between 5000 and 100000
 foreach (var post in await cache.SortedSetRangeByScoreWithScoresAsync(
                                redisKey, 5000, 100000))
@@ -870,7 +870,7 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
 
 使用 Redis 服务器连接的 `GetSubscriber` 方法创建 `ISubscription` 对象。然后使用此对象的 `SubscribeAsync` 方法来侦听通道上的消息。以下代码示例演示了如何订阅名为“messages:blogPosts”的通道：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 ISubscriber subscriber = redisHostConnection.GetSubscriber();
 ...
@@ -888,7 +888,7 @@ await subscriber.SubscribeAsync("messages:blogPosts", (channel, message) =>
 
 若要发布到通道，应用程序可以使用 Redis PUBLISH 命令。StackExchange 库提供了 `IServer.PublishAsync` 方法来执行此操作。以下代码段演示了如何将消息发布到“messages:blogPosts”通道：
 
-```
+```csharp
 ConnectionMultiplexer redisHostConnection = ...;
 ISubscriber subscriber = redisHostConnection.GetSubscriber();
 ...

@@ -537,7 +537,7 @@ _**图 4：**定义附加的新 SAP ASCS/SCS 群集虚拟名称和 TCP/IP 地址
 
 以下脚本将新的 IP 地址添加到现有负载均衡器。更新环境的 PowerShell 变量。该脚本将为所有 SAP ASCS/SCS 端口创建全部所需的负载均衡规则。
 
-```
+```powershell
 # Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
 Clear-Host

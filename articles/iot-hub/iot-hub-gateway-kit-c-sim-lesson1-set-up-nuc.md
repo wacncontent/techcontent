@@ -88,7 +88,7 @@ Azure IoT 网关 SDK 包中包含 SDK 及其依赖项的预编译二进制文件
 
 1. 在终端窗口中运行以下命令，添加 IoT 云存储库：
 
-    ```
+    ```bash
        rpm --import http://iotdk.intel.com/misc/iot_pub.key
        smart channel --add IoT_Cloud type=rpm-md name="IoT_Cloud" baseurl=http://iotdk.intel.com/repos/iot-cloud/wrlinux7/rcpl13/ -y
     ```
@@ -97,13 +97,13 @@ Azure IoT 网关 SDK 包中包含 SDK 及其依赖项的预编译二进制文件
 
     ![rpm 和智能通道命令输出](./media/iot-hub-gateway-kit-lessons/lesson1/rpm_smart_channel.png)  
 
-    ```
+    ```bash
     smart update
     ```
 
 2. 运行以下命令来安装包：
 
-    ```
+    ```bash
     smart install packagegroup-cloud-azure -y
     ```
 
@@ -117,7 +117,7 @@ Azure IoT 网关 SDK 包中包含 SDK 及其依赖项的预编译二进制文件
 
 运行以下命令，运行“hello\_world”示例应用程序：
 
-```
+```bash
     cd /usr/share/azureiotgatewaysdk/samples/hello_world/
     ./hello_world hello_world.json
 ```

@@ -112,7 +112,7 @@ ms.author: sumuth
 
 4. 复制 `wp-config.azure.php` 中的以下代码：
 
-    ```
+    ```    
     <?php
     // MySQL settings
     /** The name of the database for WordPress */
@@ -349,7 +349,7 @@ require_once(ABSPATH. 'wp-settings.php');
 
 3. 若要配置包，需要更新 Web 应用的 **Config** 文件夹下的 courier.config 文件。
 
-    ```
+    ```xml
     <!-- Repository connection settings -->
      <!-- For each site, a custom repository must be configured, so Courier knows how to connect and authenticate-->
      <repositories>
@@ -368,7 +368,7 @@ require_once(ABSPATH. 'wp-settings.php');
 
 5. 同样，在生产站点上安装 Courier2 模块，并在其相应的 courier.config 文件中将其配置为指向过渡 Web 应用，如下所示。
 
-    ```
+    ```xml
      <!-- Repository connection settings -->
      <!-- For each site, a custom repository must be configured, so Courier knows how to connect and authenticate-->
      <repositories>

@@ -54,7 +54,7 @@ PolyBase 支持 UTF-8，但尚不支持 UTF-16。请注意，如果你要结合�
 
 若要创建表，请打开命令提示符并使用 sqlcmd.exe 运行以下命令：
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "
     CREATE TABLE DimDate2
     (
@@ -91,20 +91,20 @@ sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q
 
 （可选）若要从 SQL Server 数据库导出自己的数据，请打开命令提示符并运行以下命令。将 TableName、ServerName、DatabaseName、Username 和 Password 替换为你自己的信息。
 
-```
+```sql
 bcp <TableName> out C:\Temp\DimDate2_export.txt -S <ServerName> -d <DatabaseName> -U <Username> -P <Password> -q -c -t ','
 ```
 
 ## 3\.加载数据
 若要加载数据，请打开命令提示符并运行以下命令，请注意将 Server Name、Database Name、Username 和 Password 替换为你自己的信息。
 
-```
+```sql
 bcp DimDate2 in C:\Temp\DimDate2.txt -S <ServerName> -d <DatabaseName> -U <Username> -P <password> -q -c -t  ','
 ```
 
 使用此命令来验证是否已正确加载数据
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "SELECT * FROM DimDate2 ORDER BY 1;"
 ```
 
@@ -130,7 +130,7 @@ SQL 数据仓库尚不支持自动创建或自动更新统计信息。为了获�
 
 运行以下命令针对新加载的表创建统计信息。
 
-```
+```sql
 sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q "
     create statistics [DateId] on [DimDate2] ([DateId]);
     create statistics [CalendarQuarter] on [DimDate2] ([CalendarQuarter]);
@@ -146,7 +146,7 @@ sqlcmd.exe -S <server name> -d <database name> -U <username> -P <password> -I -Q
 ### 导出表并比较导出的结果
 若要查看导出的数据，请打开命令提示符并使用自己的参数运行此命令。ServerName 是 Azure 逻辑 SQL Server 的名称。
 
-```
+```sql
 bcp DimDate2 out C:\Temp\DimDate2_export.txt -S <Server Name> -d <Database Name> -U <Username> -P <password> -q -c -t ','
 ```
 

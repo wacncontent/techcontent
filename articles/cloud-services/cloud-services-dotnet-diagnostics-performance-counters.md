@@ -106,7 +106,7 @@ Azure 缓存性能计数器数据和其他诊断信息。当正在运行的角�
 
 打开诊断文件（在 SDK 2.4 及更低版本中为 diagnostics.wadcfg，在 SDK 2.5 及更高版本中为 diagnostics.wadcfgx），将以下代码添加到 DiagnosticMonitorConfiguration 元素：
 
-```
+```xml
 <PerformanceCounters bufferQuotaInMB="0" scheduledTransferPeriod="PT30M">
    <PerformanceCounterConfiguration counterSpecifier="\Memory\Available Bytes" sampleRate="PT30S" />
    <PerformanceCounterConfiguration counterSpecifier="\Processor(_Total)\% Processor Time" sampleRate="PT30S" />
@@ -196,7 +196,7 @@ Azure 诊断代理会在启动后一分钟刷新 .wadcfg 文件中的性能计�
 5. 保存文件。
 6. 先使用角色的 OnStart 方法创建自定义性能计数器类别，然后再调用 base.OnStart。以下 C# 示例创建自定义类别（如果尚不存在）：
 
-    ```
+    ```csharp
     public override bool OnStart()
     {
     if (!PerformanceCounterCategory.Exists("MyCustomCounterCategory"))
@@ -250,7 +250,7 @@ Azure 诊断代理会在启动后一分钟刷新 .wadcfg 文件中的性能计�
 
 以下 C# 示例显示针对 WADPerformanceCountersTable 表的简单查询，并将诊断数据保存到 CSV 文件。将性能计数器保存到 CSV 文件后，可以使用 Microsoft Excel 或其他一些工具中的图形功能可视化数据。请务必添加对 Microsoft.WindowsAzure.Storage.dll（包含在 2012 年 10 月版的用于 .NET 的 Azure SDK 及更高版本中）的引用。程序集安装在 %Program Files%\\Microsoft SDKs\\Azure.NET SDK\\version-num\\ref\\ 目录中。
 
-```
+```csharp
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -310,7 +310,7 @@ sw.Close();
 
 实体映射到使用派生自 **TableEntity** 的自定义类的 C# 对象。以下代码定义表示 **WADPerformanceCountersTable** 表中性能计数器的实体类。
 
-```
+```csharp
 public class PerformanceCountersEntity : TableEntity
 {
    public long EventTickCount { get; set; }

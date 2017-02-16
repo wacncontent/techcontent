@@ -77,7 +77,7 @@ Azure Service Fabric 应用程序包含一个或多个运行你的代码的服�
 
 ### RunAsync
 
-```
+```csharp
 protected override async Task RunAsync(CancellationToken cancellationToken)
 {
     // TODO: Replace the following sample code with your own logic
@@ -130,7 +130,7 @@ Service Fabric 引入了一种新的有状态服务。有状态服务能够可�
 
 打开 *HelloWorldStateful* 中的 **HelloWorldStateful.cs**，该文件包含以下 RunAsync 方法：
 
-```
+```csharp
 protected override async Task RunAsync(CancellationToken cancellationToken)
 {
     // TODO: Replace the following sample code with your own logic
@@ -165,7 +165,7 @@ protected override async Task RunAsync(CancellationToken cancellationToken)
 
 ### 可靠集合与可靠状态管理器
 
-```
+```csharp
 var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
 ```
 
@@ -183,7 +183,7 @@ var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<str
 
 ### 事务和异步操作
 
-```
+```C#
 using (ITransaction tx = this.StateManager.CreateTransaction())
 {
     var result = await myDictionary.TryGetValueAsync(tx, "Counter-1");

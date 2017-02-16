@@ -36,7 +36,7 @@ ms.author: masnider
 ## 如何配置相关性
 若要设置相关性，可以定义两个不同服务之间的相关性关系。可以将相关性想象成在一个服务上“指向”另一个服务，同时假设“这个服务只有在那个服务正在运行时才能运行”。 有时我们将这种相关性称为父子关系（将子级指向父级）。相关性确保将一个服务的副本或实例放置在与另一个服务的副本或实例相同的节点上。
 
-```
+``` csharp
 ServiceCorrelationDescription affinityDescription = new ServiceCorrelationDescription();
 affinityDescription.Scheme = ServiceCorrelationScheme.Affinity;
 affinityDescription.ServiceName = new Uri("fabric:/otherApplication/parentService");
