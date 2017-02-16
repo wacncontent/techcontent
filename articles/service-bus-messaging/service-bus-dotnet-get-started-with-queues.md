@@ -132,14 +132,12 @@ wacn.date: 01/23/2017
                 var connectionString = "<Your connection string>";
                 var queueName = "<Your queue name>";
 
-    ```
-            var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
-            var message = new BrokeredMessage("This is a test message!");
+                var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
+                var message = new BrokeredMessage("This is a test message!");
 
-            client.Send(message);
+                client.Send(message);
+            }
         }
-    }
-    ```
     }
     ```
 
@@ -189,18 +187,16 @@ wacn.date: 01/23/2017
           var connectionString = "";
           var queueName = "samplequeue";
 
-    ```csharp
-      var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
+          var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
 
-      client.OnMessage(message =>
-      {
-        Console.WriteLine(String.Format("Message body: {0}", message.GetBody<String>()));
-        Console.WriteLine(String.Format("Message id: {0}", message.MessageId));
-      });
+          client.OnMessage(message =>
+          {
+            Console.WriteLine(String.Format("Message body: {0}", message.GetBody<String>()));
+            Console.WriteLine(String.Format("Message id: {0}", message.MessageId));
+          });
 
-      Console.ReadLine();
-    }
-    ```
+          Console.ReadLine();
+        }
       }
     }
     ```

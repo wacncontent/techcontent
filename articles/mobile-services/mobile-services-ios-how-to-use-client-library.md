@@ -143,22 +143,20 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 {
     MSQuery *query = [self.table query];
 
-```
-    query.includeTotalCount = YES;
-query.fetchLimit = 5;
-    query.fetchOffset = self.loadedItems.count;
+        query.includeTotalCount = YES;
+    query.fetchLimit = 5;
+        query.fetchOffset = self.loadedItems.count;
 
-[query readWithCompletion:^(MSQueryResult *result, NSError *error) {
-        if(!error) {
-            // Add the items to our local copy
-        [self.loadedItems addObjectsFromArray:result.items];
+    [query readWithCompletion:^(MSQueryResult *result, NSError *error) {
+            if(!error) {
+                // Add the items to our local copy
+            [self.loadedItems addObjectsFromArray:result.items];
 
-        // Set a flag to keep track if there are any additional records we need to load
-        self.moreResults = (self.loadedItems.count <= result.totalCount);
-        }
-    }];
-}
-```
+            // Set a flag to keep track if there are any additional records we need to load
+            self.moreResults = (self.loadedItems.count <= result.totalCount);
+            }
+        }];
+    }
 
 ```
 

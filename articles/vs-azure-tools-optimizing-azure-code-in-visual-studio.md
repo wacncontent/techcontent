@@ -81,21 +81,19 @@ public async Task RunAsync()
     //Asynchronous operations code logic
     // This is a sample worker implementation. Replace with your logic.
 
-```
-Trace.TraceInformation("WorkerRole1 entry point called");
+    Trace.TraceInformation("WorkerRole1 entry point called");
 
-HttpClient client = new HttpClient();
+    HttpClient client = new HttpClient();
 
-Task<string> urlString = client.GetStringAsync("http://msdn.microsoft.com");
+    Task<string> urlString = client.GetStringAsync("http://msdn.microsoft.com");
 
-while (true)
-{
-    Thread.Sleep(10000);
-    Trace.TraceInformation("Working");
+    while (true)
+    {
+        Thread.Sleep(10000);
+        Trace.TraceInformation("Working");
 
-    string stream = await urlString;
-}
-```
+        string stream = await urlString;
+    }
 
 }
 ```
@@ -169,16 +167,14 @@ void ReceiveMessages()
     options.MaxConcurrentCalls = 1; // Indicates the maximum number of concurrent calls to the callback the pump should initiate.
     options.ExceptionReceived += LogErrors; // Enables you to get notified of any errors encountered by the message pump.
 
-```
-// Start receiving messages.
-QueueClient client = QueueClient.Create("myQueue");
-client.OnMessage((receivedMessage) => // Initiates the message pump and callback is invoked for each message that is recieved, calling close on the client will stop the pump.
-{
-    // Process the message.
-}, options);
-Console.WriteLine("Press any key to exit.");
-Console.ReadKey();
-```
+    // Start receiving messages.
+    QueueClient client = QueueClient.Create("myQueue");
+    client.OnMessage((receivedMessage) => // Initiates the message pump and callback is invoked for each message that is recieved, calling close on the client will stop the pump.
+    {
+        // Process the message.
+    }, options);
+    Console.WriteLine("Press any key to exit.");
+    Console.ReadKey();
 ```
 
 下面是使用 **Receive** 和默认服务器等待时间的示例。
@@ -202,17 +198,15 @@ while (true)
          Console.WriteLine("Test Property: " +  
             message.Properties["TestProperty"]);
 
-```
-     // Remove message from queue
-     message.Complete();
-  }
+         // Remove message from queue
+         message.Complete();
+      }
 
-  catch (Exception)
-  {
-     // Indicate a problem, unlock message in queue
-     message.Abandon();
-  }
-```
+      catch (Exception)
+      {
+         // Indicate a problem, unlock message in queue
+         message.Abandon();
+      }
    }
 ```
 
@@ -232,10 +226,8 @@ while (true)
          Console.WriteLine("Test Property: " +  
             message.Properties["TestProperty"]);
 
-   ```
-     // Remove message from queue
-     message.Complete();
-   ```
+         // Remove message from queue
+         message.Complete();
       }
 
       catch (Exception)

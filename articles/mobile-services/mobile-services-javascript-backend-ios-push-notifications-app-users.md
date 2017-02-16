@@ -33,22 +33,20 @@ ms.author: krisragh
 
 ```
 
-```
-// Get the ID of the logged-in user.
-var userId = user.userId; 
+    // Get the ID of the logged-in user.
+    var userId = user.userId; 
 
-        function insert(item, user, request) {
-            request.execute();
-            setTimeout(function() {
-        push.apns.send(userId, {
-                    alert: "Alert: " + item.text,
-                    payload: {
-                        "Hey, a new item arrived: '" + item.text + "'"
-                    }
-                });
-            }, 2500);
-        }
-```
+            function insert(item, user, request) {
+                request.execute();
+                setTimeout(function() {
+            push.apns.send(userId, {
+                        alert: "Alert: " + item.text,
+                        payload: {
+                            "Hey, a new item arrived: '" + item.text + "'"
+                        }
+                    });
+                }, 2500);
+            }
 ```
 
 ## <a name="update-app"></a>更新应用程序以要求在注册之前登录
