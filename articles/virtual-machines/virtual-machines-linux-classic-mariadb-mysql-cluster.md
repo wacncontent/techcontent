@@ -318,18 +318,21 @@ ms.author: v-ahsab
     --vm-name mariadb2
     --connect mariadbha mariadb-galera-image azureuser
     ```
-以及对于 MariaDB3
 
-        azure vm create
-        --virtual-network-name mariadbvnet
-        --subnet-names mariadb 
-        --availability-set clusteravset
-        --vm-size Medium
-        --ssh-cert "/path/to/key.pem"
-        --no-ssh-password
-        --ssh 24
-        --vm-name mariadb3
-        --connect mariadbha mariadb-galera-image azureuser
+    以及对于 MariaDB3
+
+    ```
+    azure vm create
+    --virtual-network-name mariadbvnet
+    --subnet-names mariadb 
+    --availability-set clusteravset
+    --vm-size Medium
+    --ssh-cert "/path/to/key.pem"
+    --no-ssh-password
+    --ssh 24
+    --vm-name mariadb3
+    --connect mariadbha mariadb-galera-image azureuser
+    ```
 
 3. 你需获取 3 个 VM 各自的内部 IP 地址，才能执行后续步骤：
 

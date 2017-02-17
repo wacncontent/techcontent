@@ -138,7 +138,7 @@ Azure Resource Manager 模板使用声明性 JSON 文件来定义环境。阅读
 
 ```json
 "copy": {
-    "name": "multiplenics"
+    "name": "multiplenics",
     "count": "[parameters('count')]"
 }
 ```

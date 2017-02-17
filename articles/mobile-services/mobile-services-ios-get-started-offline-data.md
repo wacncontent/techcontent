@@ -84,20 +84,18 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
         {
           MSQuery *query = [self.syncTable query];
 
-```
-      // Pulls data from the remote server into the local table.
-      // We're pulling all items and filtering in the view
-      // query ID is used for incremental sync
-      [self.syncTable pullWithQuery:query queryId:@"allTodoItems" completion:^(NSError *error) {
-          [self logErrorIfNotNil:error];
+          // Pulls data from the remote server into the local table.
+          // We're pulling all items and filtering in the view
+          // query ID is used for incremental sync
+          [self.syncTable pullWithQuery:query queryId:@"allTodoItems" completion:^(NSError *error) {
+              [self logErrorIfNotNil:error];
 
-          // Let the caller know that we have finished
-          if (completion != nil) {
-              dispatch_async(dispatch_get_main_queue(), completion);
-    }
-      }];
-    }
-```
+              // Let the caller know that we have finished
+              if (completion != nil) {
+                  dispatch_async(dispatch_get_main_queue(), completion);
+        }
+          }];
+        }
 ```
 
 >[!NOTE]

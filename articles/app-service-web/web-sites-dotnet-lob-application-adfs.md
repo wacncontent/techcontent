@@ -268,9 +268,7 @@ ms.author: cephalin
     {
         ViewBag.Message = "Your application description page.";
 
-    ```
-    return View();
-    ```
+        return View();
     }
 
     <mark>[Authorize(Roles="Domain Admins")]</mark>
@@ -278,9 +276,7 @@ ms.author: cephalin
     {
         ViewBag.Message = "Your contact page.";
 
-    ```
-    return View();
-    ```
+        return View();
     }
     </pre>
 

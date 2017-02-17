@@ -234,12 +234,12 @@ ms.author: rclaus
     # sudo fstrim /data
     ```
 
-**RHEL/CentOS**
+    **RHEL/CentOS**
 
-```bash
+    ```bash
     # sudo yum install util-linux
     # sudo fstrim /data
-```
+    ```
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--Update_Description: add support for TRIM/UNMAP-->

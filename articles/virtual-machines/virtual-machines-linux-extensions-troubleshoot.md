@@ -59,9 +59,9 @@ Azure CLI：
       "Message": "",
       "Time": null
     }
+  ]
 }
 ```
-  ]
 
 ## 对扩展故障进行故障排除：
 

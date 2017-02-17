@@ -1098,7 +1098,11 @@ info:    network lb address-pool list command OK
  -s, --subscription <subscription>      the subscription identifier
 ```
 
-<BR> network lb address-pool delete [选项] <resource-group> <lb-name> <name>
+<BR>
+
+```
+network lb address-pool delete [options] <resource-group> <lb-name> <name>
+```
 
 从负载均衡器中删除后端 IP 池范围资源。
 
@@ -1392,9 +1396,12 @@ info:    network lb inbound-nat-rule list command OK
 -l, --lb-name <lb-name>                the name of the load balancer
 -s, --subscription <subscription>      the subscription identifier
 ```
+
 <BR>
 
-    network lb inbound-nat-rule delete [options] <resource-group> <lb-name> <name>
+```
+network lb inbound-nat-rule delete [options] <resource-group> <lb-name> <name>
+```
 
 删除特定资源组中负载均衡器的 NAT 规则。
 
@@ -1543,8 +1550,12 @@ data:    mytestpublicip1  chinaeast   Static (Static IP address) 4             a
 -g, --resource-group <resource-group>  the name of the resource group
 -s, --subscription <subscription>      the subscription identifier
 ```
+
 <BR>
-    network public-ip show [选项] <resource-group> <name>
+
+```
+network public-ip show [options] <resource-group> <name>
+```
 
 显示资源组中公共 IP 资源的公共 IP 属性。
 

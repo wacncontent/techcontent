@@ -19,7 +19,7 @@ articles/sql-database/sql-database-get-started-tutorial.md
 
 2. 登录页出现时，请提供订阅的凭据
 
-    ![登录][1]
+   ![登录][1]
 
 <!-- Image references. -->
 

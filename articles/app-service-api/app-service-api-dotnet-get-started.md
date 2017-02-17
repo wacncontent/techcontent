@@ -418,13 +418,13 @@ ToDoListAPI 项目已有生成的客户端代码，但在以下步骤中，要�
         var client = new ToDoListDataAPI(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
     ```
 
-更改为：
+    更改为：
 
-```
+    ```
     private static ToDoListDataAPI071316 NewDataAPIClient()
     {
         var client = new ToDoListDataAPI071316(new Uri(ConfigurationManager.AppSettings["toDoListDataAPIURL"]));
-```
+    ```
 
 ## 创建用于托管中间层的 API 应用
 
