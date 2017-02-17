@@ -53,17 +53,15 @@ FailureTimestampUtc            : 4/14/2015 9:27:05 PM
 FailureReason                  : UpgradeDomainTimeout
 UpgradeDomainProgressAtFailure : MYUD1
 
-```
-                             NodeName            : Node4
-                             UpgradePhase        : PostUpgradeSafetyCheck
-                             PendingSafetyChecks :
-                                 WaitForPrimaryPlacement - PartitionId: 744c8d9f-1d26-417e-a60e-cd48f5c098f0
+                                 NodeName            : Node4
+                                 UpgradePhase        : PostUpgradeSafetyCheck
+                                 PendingSafetyChecks :
+                                     WaitForPrimaryPlacement - PartitionId: 744c8d9f-1d26-417e-a60e-cd48f5c098f0
 
-                             NodeName            : Node1
-                             UpgradePhase        : PostUpgradeSafetyCheck
-                             PendingSafetyChecks :
-                                 WaitForPrimaryPlacement - PartitionId: 4b43f4d8-b26b-424e-9307-7a7a62e79750
-```
+                                 NodeName            : Node1
+                                 UpgradePhase        : PostUpgradeSafetyCheck
+                                 PendingSafetyChecks :
+                                     WaitForPrimaryPlacement - PartitionId: 4b43f4d8-b26b-424e-9307-7a7a62e79750
 UpgradeState                   : RollingBackCompleted
 UpgradeDuration                : 00:00:46
 CurrentUpgradeDomainDuration   : 00:00:00
@@ -106,23 +104,21 @@ UpgradeDomainsStatus                    : { "MYUD1" = "Completed";
 UnhealthyEvaluations                    :
                                           Unhealthy services: 50% (2/4), ServiceType='PersistedServiceType', MaxPercentUnhealthyServices=0%.
 
-```
-                                      Unhealthy service: ServiceName='fabric:/DemoApp/Svc3', AggregatedHealthState='Error'.
+                                          Unhealthy service: ServiceName='fabric:/DemoApp/Svc3', AggregatedHealthState='Error'.
 
-                                          Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
+                                              Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
 
-                                          Unhealthy partition: PartitionId='3a9911f6-a2e5-452d-89a8-09271e7e49a8', AggregatedHealthState='Error'.
+                                              Unhealthy partition: PartitionId='3a9911f6-a2e5-452d-89a8-09271e7e49a8', AggregatedHealthState='Error'.
 
-                                              Error event: SourceId='Replica', Property='InjectedFault'.
+                                                  Error event: SourceId='Replica', Property='InjectedFault'.
 
-                                      Unhealthy service: ServiceName='fabric:/DemoApp/Svc2', AggregatedHealthState='Error'.
+                                          Unhealthy service: ServiceName='fabric:/DemoApp/Svc2', AggregatedHealthState='Error'.
 
-                                          Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
+                                              Unhealthy partitions: 100% (1/1), MaxPercentUnhealthyPartitionsPerService=0%.
 
-                                          Unhealthy partition: PartitionId='744c8d9f-1d26-417e-a60e-cd48f5c098f0', AggregatedHealthState='Error'.
+                                              Unhealthy partition: PartitionId='744c8d9f-1d26-417e-a60e-cd48f5c098f0', AggregatedHealthState='Error'.
 
-                                              Error event: SourceId='Replica', Property='InjectedFault'.
-```
+                                                  Error event: SourceId='Replica', Property='InjectedFault'.
 
 UpgradeKind                             : Rolling
 RollingUpgradeMode                      : Monitored
