@@ -476,7 +476,7 @@ GROUP BY 的正式语法为：
 
 [lnk-query-where]: ./iot-hub-devguide-query-language.md#where-clause
 [lnk-query-expressions]: ./iot-hub-devguide-query-language.md#expressions-and-conditions
-[lnk-query-getstarted]: ./iot-hub-devguide-query-language.md#get-started-with-device-twin-queries
+[lnk-query-getstarted]: ./iot-hub-devguide-query-language.md#getting-started-with-device-twin-queries
 
 [lnk-twins]: ./iot-hub-devguide-device-twins.md
 [lnk-jobs]: ./iot-hub-devguide-jobs.md

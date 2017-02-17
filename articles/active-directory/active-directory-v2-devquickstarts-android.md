@@ -2,23 +2,23 @@
 title: Azure Active Directory v2.0 Android 应用 | Azure
 description: 如何生成一个使用 Microsoft 个人帐户和工作或学校帐户让用户登录并通过第三方库调用图形 API 的 Android 应用。
 services: active-directory
-documentationCenter: ''
-authors: brandwe
+documentationcenter: ''
+author: xerners
 manager: mbaldwin
 editor: ''
 
+ms.assetid: 16294c07-f27d-45c9-833f-7dbb12083794
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 09/16/2016
-wacn.date: 01/24/2017
+ms.date: 01/07/2017
+wacn.date: 02/13/2017
 ms.author: brandwe
 ---
 
-#  使用 v2.0 终结点，通过图形 API 将登录添加到使用第三方库的 Android 应用
-
+# 使用 v2.0 终结点，通过图形 API 将登录添加到使用第三方库的 Android 应用
 Microsoft 标识平台使用开放式标准，例如 OAuth2 和 OpenID Connect。开发人员可以使用任何想要的库来与我们的服务集成。为了帮助开发人员将我们的平台与其他库结合使用，我们撰写了数篇演练（例如本演练），演示如何配置第三方库，使其连接到 Microsoft 标识平台。大部分实施 [RFC6749 OAuth2 规范](https://tools.ietf.org/html/rfc6749)的库都能连接到 Microsoft 标识平台。
 
 借助本演练创建的应用程序，用户可以使用图形 API 登录到其组织，然后在组织中搜索他们自己。
@@ -26,15 +26,19 @@ Microsoft 标识平台使用开放式标准，例如 OAuth2 和 OpenID Connect�
 如果你是 OAuth2 或 OpenID Connect 新手，此示例配置可能不太适合你。建议阅读 [2\.0 协议 — OAuth 2.0 授权代码流](./active-directory-v2-protocols-oauth-code.md)了解背景信息。
 
 > [!NOTE]
-> 我们平台中的有些功能（例如条件访问和 Intune 策略管理）采用 OAuth2 或 OpenID Connect 标准中的表达式，所以会要求使用开放源代码 Azure 标识库。
+我们平台中的有些功能（例如条件访问和 Intune 策略管理）采用 OAuth2 或 OpenID Connect 标准中的表达式，所以会要求使用开放源代码 Azure 标识库。
+> 
+> 
 
 v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 > [!NOTE]
-> 若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+> 
+> 
 
 ## 从 GitHub 下载代码。
-本教程的代码在 GitHub 上维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git/archive/skeleton.zip)，或克隆该骨架：
+本教程的代码在 GitHub 上维护。若要遵照该代码，可以下载 .zip 格式应用骨架，或克隆该骨架：
 
 ```
 git clone --branch skeleton git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
@@ -52,10 +56,10 @@ git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.g
 - 复制分配给应用的“应用程序 ID”，因为稍后将要用到。
 - 为应用添加**移动**平台。
 
-> 注：应用程序注册门户提供**重定向 URI** 值。但是，在此示例中，必须使用 `https://login.microsoftonline.com/common/oauth2/nativeclient` 的默认值。
+> [!NOTE]
+应用程序注册门户提供**重定向 URI** 值。但是，在此示例中，必须使用 `https://login.microsoftonline.com/common/oauth2/nativeclient` 的默认值。
 
 ## 下载 NXOAuth2 第三方库并创建工作区
-
 在本演练中，你将使用来自 GitHub 的 OIDCAndroidLib，这是基于 Google 的 OpenID Connect 代码 OAuth2 库。它将实现本机应用程序配置文件，并支持用户的授权终结点。这些是需要与 Microsoft 标识平台集成的所有项目。
 
 将 OIDCAndroidLib 副本克隆到你的计算机。
@@ -123,11 +127,9 @@ git@github.com:kalemontes/OIDCAndroidLib.git
     ![应用程序的运行配置](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample11.PNG)
 
 ## 配置示例的终结点
-
 现在 `oidlib-sample` 已成功运行，让我们编辑一些终结点，使其与 Azure Active Directory 配合使用。
 
 ### 通过编辑 oidc\_clientconf.xml 文件来配置你的客户端
-
 1. 由于你只使用 OAuth2 流来获得令牌并调用图形 API，因此将客户端设置为只使用 OAuth2。在后面的示例中将使用 OIDC。
 
     xml
@@ -174,33 +176,35 @@ git@github.com:kalemontes/OIDCAndroidLib.git
 
 - 打开 `oidc_endpoints.xml` 文件并进行以下更改：
 
-xml
+    xml
 
-```xml
-<!-- Stores OpenID Connect provider endpoints. -->
-<resources>
-    <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
-    <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
-    <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
-    <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
-</resources>
-```
+    ```xml
+    <!-- Stores OpenID Connect provider endpoints. -->
+    <resources>
+        <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
+        <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
+        <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
+        <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
+    </resources>
+    ```
 
 如果你使用 OAuth2 作为你的协议，应始终不更改这些终结点。
 
 > [!NOTE]
 目前 Azure Active Directory 不支持 `userInfoEndpoint` 和 `revocationEndpoint` 的终结点。如果保留这些终结点的默认值 example.com，那么将提示你这些终结点不可用于该示例中:-)
+> 
+> 
 
 ## 配置图形 API 调用
 
 - 打开 `HomeActivity.java` 文件并进行以下更改：
 
-Java
+    Java
 
-```Java
-   //TODO: set your protected resource url
-    private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
-```
+    ```Java
+       //TODO: set your protected resource url
+        private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
+    ```
 
 此处简单的图形 API 调用将返回我们的信息。
 
@@ -209,7 +213,7 @@ Java
 身份验证成功后，请选择“请求受保护资源”按钮测试对图形 API 的调用。
 
 ## 获取产品的安全更新
-
 我们建议你通过访问[安全技术中心](https://technet.microsoft.com/security/dd252948)并订阅“安全公告”来获取有关安全事件的通知。
 
-<!---HONumber=Mooncake_1017_2016-->
+<!---HONumber=Mooncake_0206_2017-->
+<!--Update_Description: wording update-->

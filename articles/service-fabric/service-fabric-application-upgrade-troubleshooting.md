@@ -41,7 +41,7 @@ ms.author: subramar
 ### 调查升级超时
 升级超时失败通常由服务可用性问题引起。当服务副本或实例未能在新代码版本中启动时，此段落后面的输出是升级的典型输出。**UpgradeDomainProgressAtFailure** 字段捕获失败时所有挂起的升级工作的快照。
 
-~~~
+```
 PS D:\temp> Get-ServiceFabricApplicationUpgrade fabric:/DemoApp
 
 ApplicationName                : fabric:/DemoApp
@@ -75,7 +75,7 @@ UpgradeKind                    : Rolling
 RollingUpgradeMode             : UnmonitoredAuto
 ForceRestart                   : False
 UpgradeReplicaSetCheckTimeout  : 00:00:00
-~~~
+```
 
 在本示例中，升级域 *MYUD1* 的升级失败，两个分区（*744c8d9f-1d26-417e-a60e-cd48f5c098f0* 和 *4b43f4d8-b26b-424e-9307-7a7a62e79750*）已停滞。分区由于运行时无法将主副本 (*WaitForPrimaryPlacement*) 放在在目标节点 *Node1* 和 *Node4* 上而停滞。
 
@@ -88,7 +88,7 @@ UpgradeReplicaSetCheckTimeout  : 00:00:00
 ### 调查运行状况检查失败
 运行状况检查失败可能由各种其他问题触发，这些问题可能发生在升级域中所有节点完成升级、通过所有安全检查之后。此段落后面的输出是升级因运行状况检查失败而失败时的典型输出。**UnhealthyEvaluations** 字段根据指定的[运行状况策略](./service-fabric-health-introduction.md)，捕获升级失败时失败的运行状况检查的快照。
 
-~~~
+```
 PS D:\temp> Get-ServiceFabricApplicationUpgrade fabric:/DemoApp
 
 ApplicationName                         : fabric:/DemoApp
@@ -140,7 +140,7 @@ MaxPercentUnhealthyReplicasPerPartition :
 MaxPercentUnhealthyServices             :
 MaxPercentUnhealthyDeployedApplications :
 ServiceTypeHealthPolicyMap              :
-~~~
+```
 
 调查运行状况检查失败原因首先需要了解 Service Fabric 运行状况模型。但即使没有深入理解，我们也可以看到有两个服务是不正常的：*fabric:/DemoApp/Svc3* 和 *fabric:/DemoApp/Svc2*，还可看到错误运行状况报告（本例中为“InjectedFault”）。在本示例中，四个服务中有两个服务不正常，低于不正常运行状况的默认目标 (*MaxPercentUnhealthyServices*) 0%。
 
@@ -159,7 +159,7 @@ ServiceTypeHealthPolicyMap              :
 
 **Update-ServiceFabricApplicationUpgrade** 命令可用于继续进行受监控的升级，同时执行安全检查和运行状况检查。
 
-~~~
+```
 PS D:\temp> Update-ServiceFabricApplicationUpgrade fabric:/DemoApp -UpgradeMode Monitored
 
 UpgradeMode                             : Monitored
@@ -179,7 +179,7 @@ MaxPercentUnhealthyDeployedApplications :
 ServiceTypeHealthPolicyMap              :
 
 PS D:\temp>
-~~~
+```
 
 升级将从上次挂起的升级域继续，并使用与以前相同的升级参数和运行状况策略。如果需要，在继续进行升级时，可使用同一命令更改上面的输出中显示的任何升级参数和运行状况策略。在本示例中，升级以监视模式继续，参数和运行状况策略保持不变。
 

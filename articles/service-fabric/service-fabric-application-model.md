@@ -48,7 +48,7 @@ ms.author: ryanwi
 ## 描述服务
 服务清单以声明方式定义服务类型和版本。它指定服务元数据，例如服务类型、运行状况属性、负载均衡度量值、服务二进制文件和配置文件。换言之，它描述了组成一个服务包以支持一个或多个服务类型的代码、配置和数据包。下面是服务清单的简单示例：
 
-~~~
+```
 <?xml version="1.0" encoding="utf-8" ?>
 <ServiceManifest Name="MyServiceManifest" Version="SvcManifestVersion1" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Description>An example service manifest</Description>
@@ -70,7 +70,7 @@ ms.author: ryanwi
   <ConfigPackage Name="MyConfig" Version="ConfigVersion1" />
   <DataPackage Name="MyData" Version="DataVersion1" />
 </ServiceManifest>
-~~~
+```
 
 **Version** 特性是未结构化的字符串，并且不由系统进行分析。这些特性用于对每个组件进行版本控制，以进行升级。
 
@@ -82,14 +82,14 @@ ms.author: ryanwi
 
 **ConfigPackage** 声明一个由 **Name** 特性命名的文件夹，该文件夹中包含 *Settings.xml* 文件。此文件包含用户定义的键值对设置部分，进程可在运行时读回这些设置。升级期间，如果仅更改了 **ConfigPackage** **版本**，则不重启正在运行的进程。相反，将通过回调告知进程配置设置已更改，以便动态重新加载。下面是 *Settings.xml* 文件的一个示例：
 
-~~~
+```
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Section Name="MyConfigurationSecion">
     <Parameter Name="MySettingA" Value="Example1" />
     <Parameter Name="MySettingB" Value="Example2" />
   </Section>
 </Settings>
-~~~
+```
 
 > [!NOTE]
 > 服务清单可以包含多段代码、多个配置和数据包。可对它们进行独立的版本控制。
@@ -110,7 +110,7 @@ For more information about other features supported by service manifests, refer 
 
 因此，应用程序清单在应用程序级别描述元素，并引用一个或多个服务清单，以组成应用程序类型。下面是应用程序清单的简单示例：
 
-~~~
+```
 <?xml version="1.0" encoding="utf-8" ?>
 <ApplicationManifest
       ApplicationTypeName="MyApplicationType"
@@ -129,7 +129,7 @@ For more information about other features supported by service manifests, refer 
      </Service>
   </DefaultServices>
 </ApplicationManifest>
-~~~
+```
 
 类似于服务清单，**Version** 特性是未结构化的字符串，并且不由系统进行分析。这些特性也用于对每个组件进行版本控制，以进行升级。
 
@@ -155,7 +155,7 @@ For more information about other features supported by application manifests, re
 ### 包布局
 必须以特定布局组织应用程序清单、服务清单和其他必要的包文件，以便将其部署到 Service Fabric 群集中。本文中的示例清单需按以下目录结构进行组织：
 
-~~~
+```
 PS D:\temp> tree /f .\MyApplicationType
 
 D:\TEMP\MYAPPLICATIONTYPE
@@ -172,7 +172,7 @@ D:\TEMP\MYAPPLICATIONTYPE
     │
     └───MyData
             init.dat
-~~~
+```
 
 文件夹的名称与每个相应元素的 **Name** 特性匹配。例如，如果服务清单包含两个名为 **MyCodeA** 和 **MyCodeB** 的代码包，则两个同名的文件夹将包含用于每个代码包的必要二进制文件。
 
@@ -196,16 +196,16 @@ D:\TEMP\MYAPPLICATIONTYPE
 ### 测试包
 可以使用 **Test-ServiceFabricApplicationPackage** 命令，通过 PowerShell 在本地验证包结构。此命令将检查是否存在清单分析问题，并验证所有引用。请注意，此命令只验证包中文件与目录结构的正确性。它不验证任何代码或数据包内容，而只检查所有必要的文件是否存在。
 
-~~~
+```
 PS D:\temp> Test-ServiceFabricApplicationPackage .\MyApplicationType
 False
 Test-ServiceFabricApplicationPackage : The EntryPoint MySetup.bat is not found.
 FileName: C:\Users\servicefabric\AppData\Local\Temp\TestApplicationPackage_7195781181\nrri205a.e2h\MyApplicationType\MyServiceManifest\ServiceManifest.xml
-~~~
+```
 
 此错误显示代码包中缺少服务清单 **SetupEntryPoint** 中引用的 *MySetup.bat* 文件。添加缺少的文件后，应用程序验证通过：
 
-~~~
+```
 PS D:\temp> tree /f .\MyApplicationType
 
 D:\TEMP\MYAPPLICATIONTYPE
@@ -227,7 +227,7 @@ D:\TEMP\MYAPPLICATIONTYPE
 PS D:\temp> Test-ServiceFabricApplicationPackage .\MyApplicationType
 True
 PS D:\temp>
-~~~
+```
 
 正确打包应用程序并通过验证后，应用程序即已准备就绪，可供部署。
 

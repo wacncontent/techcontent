@@ -43,12 +43,10 @@ Import-Module "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\Tools\PSModule\Se
 
 可以将应用程序包从 *C:\\users\\ryanwi\\Documents\\Visual Studio 2015\\Projects\\MyApplication\\myapplication\\pkg\\debug* 复制到 *c:\\temp\\MyApplicationType* （将“debug”目录重命名为“MyApplicationType”）。以下示例将上传包：
 
-~~~
+```
 PS C:\temp> dir
 
-```
-Directory: c:\temp
-```
+    Directory: c:\temp
 
 Mode                LastWriteTime         Length Name                                                                                   
 ----                -------------         ------ ----                                                                                   
@@ -89,12 +87,12 @@ PS C:\temp> Copy-ServiceFabricApplicationPackage -ApplicationPackagePath MyAppli
 Copy application package succeeded
 
 PS D:\temp>
-~~~
+```
 
 ## 注册应用程序包
 注册应用包时，应用程序清单中声明的应用程序类型和版本可供使用。系统读取上一步中上传的包，验证此包，处理包的内容，并将已处理的包复制到内部系统位置。如果想要本地验证应用包，请使用 [Test-ServiceFabricApplicationPackage](https://docs.microsoft.com/powershell/servicefabric/vlatest/test-servicefabricapplicationpackage) cmdlet。
 
-~~~
+```
 PS D:\temp> Register-ServiceFabricApplicationType MyApplicationType
 Register application type succeeded
 
@@ -105,7 +103,7 @@ ApplicationTypeVersion : AppManifestVersion1
 DefaultParameters      : {}
 
 PS D:\temp>
-~~~
+```
 
 [Register-ServiceFabricApplicationType](https://docs.microsoft.com/powershell/servicefabric/vlatest/register-servicefabricapplicationtype) 命令将仅在系统成功复制应用程序包后返回。注册花费的时间取决于应用程序包的大小和内容。如果需要，**-TimeoutSec** 参数可用于提供更长的超时时间（默认超时为 60 秒）。如果在处理大型应用包时遇到超时，请使用 **-Async** 参数。
 
@@ -114,7 +112,7 @@ PS D:\temp>
 ## 创建应用程序
 可以使用已通过 [New-ServiceFabricApplication](https://docs.microsoft.com/powershell/servicefabric/vlatest/new-servicefabricapplication) 命令成功注册的任何应用程序类型版本来实例化应用程序。每个应用程序的名称必须以 *fabric:* 方案开头，并且对每个应用程序实例是唯一的。还创建了目标应用程序类型的应用程序清单中定义的任何默认服务。
 
-~~~
+```
 PS D:\temp> New-ServiceFabricApplication fabric:/MyApp MyApplicationType AppManifestVersion1
 
 ApplicationName        : fabric:/MyApp
@@ -142,7 +140,7 @@ ServiceStatus          : Active
 HealthState            : Ok
 
 PS D:\temp>
-~~~
+```
 
 [Get-ServiceFabricApplication](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricapplication) 命令将列出已成功创建的所有应用程序实例及其整体状态。
 
@@ -153,7 +151,7 @@ PS D:\temp>
 ## 删除应用程序
 不再需要某个应用程序实例时，可以使用 [Remove-ServiceFabricApplication](https://docs.microsoft.com/powershell/servicefabric/vlatest/remove-servicefabricapplication) 命令将其永久删除。此命令也将自动删除属于该应用程序的所有服务，永久删除所有服务状态。此操作无法撤消，应用程序状态无法恢复。
 
-~~~
+```
 PS D:\temp> Remove-ServiceFabricApplication fabric:/MyApp
 
 Confirm
@@ -163,11 +161,11 @@ Remove application instance succeeded
 
 PS D:\temp> Get-ServiceFabricApplication
 PS D:\temp>
-~~~
+```
 
 不再需要应用程序类型的某个特定版本时，应使用 [Unregister-ServiceFabricApplicationType](https://docs.microsoft.com/powershell/servicefabric/vlatest/unregister-servicefabricapplicationtype) 命令将其注销。注销未使用的类型将在映像存储区中释放该类型的应用程序包内容所使用的存储空间。只要没有针对其实例化的应用程序或引用它的挂起应用程序升级，就可以注销应用程序类型。
 
-~~~
+```
 PS D:\temp> Get-ServiceFabricApplicationType
 
 ApplicationTypeName    : DemoAppType
@@ -196,7 +194,7 @@ ApplicationTypeVersion : v2
 DefaultParameters      : {}
 
 PS D:\temp>
-~~~
+```
 
 ## 故障排除
 ### Copy-ServiceFabricApplicationPackage 请求 ImageStoreConnectionString

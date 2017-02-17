@@ -2,29 +2,32 @@
 title: 指定 Node.js 版本
 description: 了解如何指定 Azure 网站和云服务使用的 Node.js 版本
 services: ''
-documentationCenter: nodejs
-authors: rmcmurray
-manager: wpickett
+documentationcenter: nodejs
+author: rmcmurray
+manager: erikre
 editor: ''
 
+ms.assetid: d0e15278-2ab4-4ec8-8256-913839c6d5ef
 ms.service: multiple
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 11/01/2016
-wacn.date: 12/23/2016
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm
 ---
 
 # 在 Azure 应用程序中指定 Node.js 版本
 托管 Node.js 应用程序时，您可能希望确保您的应用程序使用特定版本的 Node.js。有几种方法可为托管在 Azure 上的应用程序完成此操作。
 
-##默认版本
-
-由 Azure 提供的 Node.js 版本会不断更新。除非另行指定，否则将使用最新可用版本。
+## 默认版本
+由 Azure 提供的 Node.js 版本会不断更新。除非另行指定，否则将使用 `WEBSITE_NODE_DEFAULT_VERSION` 环境变量中指定的默认版本。若要覆盖此默认值，请遵循本文后续部分中的步骤。
 
 > [!NOTE]
-> 如果你在 Azure 云服务（Web 角色或辅助角色）中托管应用程序，并且这是你首次部署应用程序，Azure 将尝试使用你在部署环境中所安装的 Node.js 的版本（如果该版本与 Azure 中提供的默认版本之一相匹配）。
+如果你在 Azure 云服务（Web 角色或辅助角色）中托管应用程序，并且这是你首次部署应用程序，Azure 将尝试使用你在部署环境中所安装的 Node.js 的版本（如果该版本与 Azure 中提供的默认版本之一相匹配）。
+>
+>
 
 ## 使用 package.json 进行版本控制
 可通过将以下内容添加到你的 **package.json** 文件中来指定要使用的 Node.js 的版本：
@@ -33,7 +36,7 @@ wacn.date: 12/23/2016
 "engines":{"node":version}
 ```
 
-其中，*version* 是要使用的特定版本号。你可以为版本指定更复杂的条件，例如：
+其中，*version* 是要使用的特定版本号。可为版本指定更复杂的条件，例如：
 
 ```
 "engines":{"node": "0.6.22 || 0.8.x"}
@@ -109,4 +112,5 @@ Set-AzureServiceProjectRole WebRole1 Node 0.8.4
 [如何使用模块]: ./nodejs-use-node-modules-azure-apps.md
 [build and deploy a Node.js Web Site]: ./app-service-web/web-sites-nodejs-develop-deploy-mac.md
 
-<!---HONumber=Mooncake_1212_2016-->
+<!---HONumber=Mooncake_0206_2017-->
+<!--Update_Description: wording update-->

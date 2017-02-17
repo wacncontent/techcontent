@@ -21,7 +21,7 @@ ms.author: jeffreyr
 
 Service Fabric 通过可靠集合向 .NET 开发人员提供有状态的编程模型。具体而言，Service Fabric 提供可靠字典和可靠队列类。当你使用这些类时，状态是分区的（实现可缩放性）、复制的（实现可用性），并在分区内进行事务处理（实现 ACID 语义）。让我们看一下可靠字典对象的典型用法，并看一看它究竟做些什么。
 
-~~~
+```
 retry:
 try {
    // Create a new Transaction object for this partition
@@ -44,7 +44,7 @@ try {
 catch (TimeoutException) { 
    await Task.Delay(100, cancellationToken); goto retry; 
 }
-~~~
+```
 
 可靠字典对象上的所有操作（无法恢复的 ClearAsync 除外）都需要一个 ITransaction 对象。此对象与在单个分区中对任何可靠字典和/或可靠队列对象尝试进行的任何及所有更改具有关联性。可通过调用分区的 StateManager 的 CreateTransaction 方法获取 ITransaction 对象。
 
@@ -61,7 +61,7 @@ catch (TimeoutException) {
 ## 常见陷阱及其规避方法
 现在你已了解可靠集合在内部的工作原理，让我们了解一些常见的误用。参阅以下代码：
 
-~~~
+```
 using (ITransaction tx = StateManager.CreateTransaction()) {
    // AddAsync serializes the name/user, logs the bytes, 
    // & sends the bytes to the secondary replicas.
@@ -73,23 +73,23 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
 
    await tx.CommitAsync();
 }
-~~~
+```
 
 使用常规 .NET 字典时，可以在字典中添加键/值，然后更改属性的值（例如 LastLogin）。不过，此代码无法对可靠字典正常运行。我们前面讨论过：调用 AddAsync 将键/值对象序列化成字节数组，然后将数组存储到本地文件，并将它们发送到辅助副本。稍后如果更改属性，只会更改内存中的属性值，而不影响本地文件或发送到副本的数据。如果进程崩溃，内存中的内容将全部丢失。启动新的进程或另一个副本变成主副本时，旧属性值是可用的值。
 
 再次强调，上面这种错误是很容易发生的。你只有在进程崩溃时才能发现错误。编写代码的正确方式是只需反转两行：
 
-~~~
+```
 using (ITransaction tx = StateManager.CreateTransaction()) {
    user.LastLogin = DateTime.UtcNow;  // Do this BEFORE calling AddAsync
    await m_dic.AddAsync(tx, name, user);
    await tx.CommitAsync(); 
 }
-~~~
+```
 
 这是另一个常见的错误：
 
-~~~
+```
 using (ITransaction tx = StateManager.CreateTransaction()) {
    // Use the user’s name to look up their data
    ConditionalValue<User> user = 
@@ -103,7 +103,7 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
       await tx.CommitAsync(); 
    }
 }
-~~~
+```
 
 同样地，使用常规 .NET 字典时，以上代码以常见的模式正常运行：开发人员使用键查询值。如果值存在，开发人员将更改属性的值。不过，使用可靠集合时，此代码将出现前面所述的相同问题：__将对象分配给可靠集合后，你不得修改该对象__。
 
@@ -111,7 +111,7 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
 
 以下代码演示在可靠集合中更新值的正确方式：
 
-~~~
+```
 using (ITransaction tx = StateManager.CreateTransaction()) {
    // Use the user’s name to look up their data
    ConditionalValue<User> currentUser = 
@@ -133,7 +133,7 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
       await tx.CommitAsync(); 
    }
 }
-~~~
+```
 
 ## 定义不可变的数据类型以防止编程器错误
 
@@ -141,7 +141,7 @@ using (ITransaction tx = StateManager.CreateTransaction()) {
 
 以下 UserInfo 类型演示如何利用上述建议定义不可变类型。
 
-~~~
+```
 [DataContract]
 // If you don’t seal, you must ensure that any derived classes are also immutable
 public sealed class UserInfo {
@@ -172,11 +172,11 @@ public sealed class UserInfo {
       return new UserInfo(Email, ((ImmutableList<ItemId>)ItemsBidding).Add(itemId));
    }
 }
-~~~
+```
 
 ItemId 类型也是不可变类型，如下所示：
 
-~~~
+```
 [DataContract]
 public struct ItemId {
 
@@ -187,7 +187,7 @@ public struct ItemId {
       ItemName = itemName;
    }
 }
-~~~
+```
 
 ## 架构版本控制（升级）
 
