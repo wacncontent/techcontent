@@ -12,8 +12,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/03/2016
-wacn.date: 01/04/2017
+ms.date: 01/13/2017
+wacn.date: 02/20/2017
 ---
 
 # 使用 AMQP 1.0 通过 .NET 使用服务总线
@@ -34,7 +34,7 @@ AMQP 1.0 支持在服务总线 SDK 2.1 版或更高版本中提供。为确保�
 
 应用程序使用 App.config 配置文件存储设置是一个很好的做法。对于服务总线应用程序，你可以使用 App.config 来存储服务总线 **ConnectionString** 值的设置。示例 App.config 文件如下所示：
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <appSettings>
@@ -144,3 +144,4 @@ Endpoint=sb://[namespace].servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootM
 [适用于 Windows Server 的服务总线中的 AMQP]: https://msdn.microsoft.com/zh-cn/library/dn574799.aspx
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->
+<!--Update_Description:update meta properties-->

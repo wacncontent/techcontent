@@ -1,5 +1,5 @@
 ---
-title: 开始使用 PowerShell 在经典模式下创建面向 Internet 的负载均衡器 | Azure
+title: 创建面向 Internet 的负载均衡器 - Azure PowerShell 经典 | Azure
 description: 了解如何使用 PowerShell 在经典模式下创建面向 Internet 的负载均衡器
 services: load-balancer
 documentationcenter: na
@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 04/05/2016
-wacn.date: 01/13/2017
+ms.date: 01/23/2017
+wacn.date: 03/03/2017
 ms.author: kumud
 ---
 
@@ -45,7 +45,7 @@ ms.author: kumud
 
 为第一个 VM“web1”创建负载均衡终结点
 
-```powershell
+```
 Get-AzureVM -ServiceName "mytestcloud" -Name "web1" | Add-AzureEndpoint -Name "HttpIn" -Protocol "tcp" -PublicPort 80 -LocalPort 80 -LBSetName "WebFarm" -ProbePort 80 -ProbeProtocol "http" -ProbePath '/' | Update-AzureVM
 ```
 
@@ -53,7 +53,7 @@ Get-AzureVM -ServiceName "mytestcloud" -Name "web1" | Add-AzureEndpoint -Name "H
 
 使用相同的负载均衡器集名称为第二个 VM “web2”创建另一个终结点
 
-```powershell
+```
 Get-AzureVM -ServiceName "mytestcloud" -Name "web2" | Add-AzureEndpoint -Name "HttpIn" -Protocol "tcp" -PublicPort 80 -LocalPort 80 -LBSetName "WebFarm" -ProbePort 80 -ProbeProtocol "http" -ProbePath '/' | Update-AzureVM
 ```
 
@@ -61,7 +61,7 @@ Get-AzureVM -ServiceName "mytestcloud" -Name "web2" | Add-AzureEndpoint -Name "H
 
 可以使用 Remove-AzureEndpoint 从负载均衡器中删除虚拟机终结点
 
-```powershell
+```
 Get-azureVM -ServiceName mytestcloud  -Name web1 |Remove-AzureEndpoint -Name httpin | Update-AzureVM
 ```
 
@@ -71,5 +71,5 @@ Get-azureVM -ServiceName mytestcloud  -Name web1 |Remove-AzureEndpoint -Name htt
 
 如果应用程序需要始终保持对负载均衡器后面的服务器的连接，你可以详细了解[负载均衡器的空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)。该文章将有助于你了解使用 Azure Load Balancer 时的空闲连接行为。
 
-<!---HONumber=Mooncake_0109_2017-->
-<!--Update_Description: update meta properties & wording update & update link references-->
+<!---HONumber=Mooncake_0227_2017-->
+<!--Update_Description: update meta properties; wording update -->

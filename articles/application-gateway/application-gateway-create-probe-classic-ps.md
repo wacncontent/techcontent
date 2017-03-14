@@ -47,13 +47,13 @@ ms.author: gwallace
 
 以下示例使用名为“testvnet1”的虚拟网络和名为“subnet-1”的子网创建应用程序网关。
 
-```powershell
+```
 New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
 ```
 
 若要验证是否已创建网关，可以使用 `Get-AzureApplicationGateway` cmdlet。
 
-```powershell
+```
 Get-AzureApplicationGateway AppGwTest
 ```
 
@@ -76,7 +76,7 @@ Get-AzureApplicationGateway AppGwTest
 
 将以下文本复制到记事本中。
 
-```xml
+```
 <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
 <FrontendIPConfigurations>
     <FrontendIPConfiguration>
@@ -168,7 +168,7 @@ Get-AzureApplicationGateway AppGwTest
 
 使用 Get-AzureApplicationGatewayConfig 获取 XML 文件。这会导出要修改的配置 XML 以添加探测设置。
 
-```powershell
+```
 Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofile "<path to file>"
 ```
 
@@ -176,7 +176,7 @@ Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofi
 
 在文本编辑器中打开 XML 文件。将 `<probe>` 节添加到 `<frontendport>` 的后面。
 
-```xml
+```
 <Probes>
     <Probe>
         <Name>Probe01</Name>
@@ -192,7 +192,7 @@ Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofi
 
 在 XML 的 backendHttpSettings 节中，添加以下示例中所示的探测名称：
 
-```xml
+```
     <BackendHttpSettings>
         <Name>setting1</Name>
         <Port>80</Port>
@@ -209,7 +209,7 @@ Get-AzureApplicationGatewayConfig -Name "<application gateway name>" -Exporttofi
 
 使用 `Set-AzureApplicationGatewayConfig` 在新的 XML 文件中更新应用程序网关配置。这将以新的配置更新应用程序网关。
 
-```powershell
+```
 Set-AzureApplicationGatewayConfig -Name "<application gateway name>" -Configfile "<path to file>"
 ```
 

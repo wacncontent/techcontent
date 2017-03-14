@@ -8,8 +8,8 @@ manager: timlt
 editor: ''
 
 ms.service: service-bus
-ms.date: 09/29/2016
-wacn.date: 01/09/2017
+ms.date: 01/11/2017
+wacn.date: 02/20/2017
 ---
 
 # 在 Azure Linux VM 上安装 Apache Qpid Proton-C
@@ -114,3 +114,4 @@ wacn.date: 01/09/2017
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->
+<!--Update_Description:update meta properties-->

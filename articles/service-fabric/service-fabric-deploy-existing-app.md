@@ -1,6 +1,6 @@
 ---
 title: 将现有可执行文件部署到 Azure Service Fabric | Azure
-description: 演示如何将现有应用程序打包为来宾可执行文件，以便将其部署到 Service Fabric 群集
+description: 有关如何将现有应用程序打包为来宾可执行文件，以便可以部署到 Service Fabric 群集的演练
 services: service-fabric
 documentationcenter: .net
 author: msfussell
@@ -13,8 +13,8 @@ ms.devlang: dotnet
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: na
-ms.date: 10/22/2016
-wacn.date: 01/24/2017
+ms.date: 02/17/2016
+wacn.date: 03/03/2017
 ms.author: msfussell;mikhegn
 ---
 
@@ -23,13 +23,17 @@ ms.author: msfussell;mikhegn
 
 其中将会介绍打包来宾可执行文件并将它部署到 Service Fabric 的基本步骤。
 
-## 在 Service Fabric 中运行来宾可执行文件的好处
+## 在 Service Fabric 中运行来宾可执行文件的优势
 在 Service Fabric 群集中运行来宾可执行文件有几个优势：
 
 * 高可用性。Service Fabric 中运行的应用程序具有高可用性。Service Fabric 可确保应用程序的实例保持运行。
 * 运行状况监视。Service Fabric 运行状况监视会检测应用程序是否正在运行，在发生故障时可提供诊断信息。
-* 应用程序生命周期管理。除了提供无需停机的升级，如果升级期间报告了不正常的事件，Service Fabric 还支持回滚到以前的版本。
+* 应用程序生命周期管理。除了提供无需停机的升级，如果升级期间报告了运行不正常事件，Service Fabric 还支持回滚到以前的版本。
 * 密度。可以在群集中运行多个应用程序，这样便无需使每个应用程序在自己的硬件上运行。
+
+## 示例
+* [用于打包和部署来宾可执行文件的示例](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/tree/master/GuestExe/SimpleApplication)
+* [使用 REST 通过命名服务通信的两个来宾可执行文件（C# 和 nodejs）的示例](https://github.com/Azure-Samples/service-fabric-dotnet-containers)
 
 ## 应用程序和服务清单文件概述
 在部署来宾可执行文件的过程中，最好先了解[应用程序模型](./service-fabric-application-model.md)中所述的 Service Fabric 打包和部署模型。Service Fabric 打包模型依赖于两个 XML 文件：应用程序清单和服务清单。ApplicationManifest.xml 和 ServiceManifest.xml 文件的架构定义随 Service Fabric SDK 一起安装到 *C:\\Program Files\\Microsoft SDKs\\Service Fabric\\schemas\\ServiceFabricServiceModel.xsd* 中。
@@ -37,7 +41,7 @@ ms.author: msfussell;mikhegn
 * **应用程序清单**
 应用程序清单用于描述应用程序。它列出自身的构成服务，以及用于定义应如何部署一个或多个服务的其他参数（如实例数）。
 
-  在 Service Fabric 中，一个应用程序是一个部署和升级单位。应用程序可以作为一个单元升级，其中的潜在失败（潜在回滚）由系统管理。Service Fabric 保证升级过程成功，一旦升级失败，它不会使应用程序保持未知或不稳定状态。
+  在 Service Fabric 中，应用程序是部署和升级的单位。可将应用程序作为一个单位进行升级，其中潜在的失败和潜在回滚受到管理。Service Fabric 保证升级过程成功，一旦升级失败，它不会使应用程序保持未知或不稳定状态。
 * **服务清单**
 服务清单描述服务的组件。其中包含服务的名称和类型、其代码以及配置等数据。服务清单还包含一些可以用于在部署之后配置服务的其他参数。
 
@@ -119,7 +123,7 @@ Service Fabric 对应用程序根目录下的内容执行了 xcopy，因此除�
 
 下面是 `ServiceManifest.xml` 文件的示例：
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="NodeApp" Version="1.0.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <ServiceTypes>
@@ -151,7 +155,7 @@ Service Fabric 对应用程序根目录下的内容执行了 xcopy，因此除�
 
 #### 更新 ServiceTypes
 
-```xml
+```
 <ServiceTypes>
   <StatelessServiceType ServiceTypeName="NodeApp" UseImplicitHost="true" />
 </ServiceTypes>
@@ -163,7 +167,7 @@ Service Fabric 对应用程序根目录下的内容执行了 xcopy，因此除�
 #### 更新 CodePackage
 CodePackage 元素指定服务代码的位置（和版本）。
 
-```xml
+```
 <CodePackage Name="Code" Version="1.0.0.0">
 ```
 
@@ -171,7 +175,7 @@ CodePackage 元素指定服务代码的位置（和版本）。
 
 #### 可选：更新 SetupEntrypoint
 
-```xml
+```
 <SetupEntryPoint>
    <ExeHost>
        <Program>scripts\launchConfig.cmd</Program>
@@ -187,7 +191,7 @@ SetupEntryPoint 元素用于指定在启动服务代码之前应执行的任何�
 
 #### 更新 EntryPoint
 
-```xml
+```
 <EntryPoint>
   <ExeHost>
     <Program>node.exe</Program>
@@ -210,7 +214,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 
 #### 更新终结点并在命名服务中注册以进行通信
 
-```xml
+```
 <Endpoints>
        <Endpoint Name="NodeAppTypeEndpoint" Protocol="http" Port="3000" Type="Input" />
 </Endpoints>
@@ -222,7 +226,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 
 在以下示例中，部署服务后，Service Fabric Explorer 中会显示针对服务实例发布的终结点（类似于 `http://10.1.4.92:3000/myapp/`）。如果这是本地计算机，则显示 `http://localhost:3000/myapp/`。
 
-```xml
+```
 <Endpoints>
    <Endpoint Name="NodeAppTypeEndpoint" Protocol="http" Port="3000"  UriScheme="http" PathSuffix="myapp/" Type="Input" />
 </Endpoints>
@@ -233,7 +237,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 ### 编辑应用程序清单文件
 配置 `Servicemanifest.xml` 文件之后，需要对 `ApplicationManifest.xml` 文件进行一些更改，确保使用正确的服务类型和名称。
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="NodeAppType" ApplicationTypeVersion="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <ServiceManifestImport>
@@ -245,7 +249,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 #### ServiceManifestImport
 在 `ServiceManifestImport` 元素中，可以指定要包含在应用中的一个或多个服务。`ServiceManifestName` 指定 `ServiceManifest.xml` 文件所在目录的名称，可用于引用服务。
 
-```xml
+```
 <ServiceManifestImport>
   <ServiceManifestRef ServiceManifestName="NodeApp" ServiceManifestVersion="1.0.0.0" />
 </ServiceManifestImport>
@@ -254,7 +258,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 ## 设置日志记录
 对于来宾可执行文件，最好能够查看控制台日志，以查明应用程序和配置脚本是否显示了任何错误。可以使用 `ConsoleRedirection` 元素在 `ServiceManifest.xml` 文件中配置控制台重定向。
 
-```xml
+```
 <EntryPoint>
   <ExeHost>
     <Program>node.exe</Program>
@@ -276,7 +280,7 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 ## 部署
 最后一步是部署应用程序。以下 PowerShell 脚本演示如何将应用程序部署到本地开发群集并启动新的 Service Fabric 服务。
 
-```PowerShell
+```
 Connect-ServiceFabricCluster localhost:19000
 
 Write-Host 'Copying application package...'
@@ -300,7 +304,7 @@ Service Fabric 服务可以采用各种“配置”进行部署。 例如，可�
 这是前端应用程序（不包括 REST 终结点）的有用配置，因为客户端应用程序需要“连接到”群集中的任何节点才能使用该终结点。例如，当 Service Fabric 群集的所有节点都连接到负载均衡器时，也可以使用此配置。然后，客户端流量可以分布于在集群中所有节点上运行的服务。
 
 ## 检查正在运行的应用程序
-在 Service Fabric 资源管理器中，确定服务在其中运行的节点。在此示例中，它在节点 1 上运行：
+在 Service Fabric Explorer 中，确定服务在其中运行的节点。在此示例中，它在节点 1 上运行：
 
 ![运行服务的节点](./media/service-fabric-deploy-existing-app/nodeappinsfx.png)  
 
@@ -316,7 +320,9 @@ Service Fabric 服务可以采用各种“配置”进行部署。 例如，可�
 在本文中，我们了解了如何打包来宾可执行文件并将它部署到 Service Fabric。有关相关信息和任务，请参阅以下文章。
 
 - [在 GitHub 上打包和部署来宾可执行文件的示例](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/tree/master/GuestExe/SimpleApplication)，包括打包工具的预发行版本的链接
+- [使用 REST 通过命名服务通信的两个来宾可执行文件（C# 和 nodejs）的示例](https://github.com/Azure-Samples/service-fabric-dotnet-containers)
 - [部署多个来宾可执行文件](./service-fabric-deploy-multiple-apps.md)
 - [使用 Visual Studio 创建第一个 Service Fabric 应用程序](./service-fabric-create-your-first-application-in-visual-studio.md)
 
-<!---HONumber=Mooncake_Quality_Review_0104_2017-->
+<!---HONumber=Mooncake_0227_2017-->
+<!--Update_Description: wording update-->

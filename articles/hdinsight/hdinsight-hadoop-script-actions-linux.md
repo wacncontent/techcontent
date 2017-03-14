@@ -1,5 +1,3 @@
-<!-- not suitable for Mooncake -->
-
 ---
 title: 使用基于 Linux 的 HDInsight 进行脚本操作开发 | Azure
 description: 如何使用脚本操作自定义基于 Linux 的 HDInsight 群集。使用脚本操作可以通过指定群集配置设置，或者在群集上安装额外的服务、工具或其他软件，来自定义 Azure HDInsight 群集。
@@ -15,8 +13,8 @@ ms.workload: big-data
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 11/14/2016
-wacn.date: 02/06/2017
+ms.date: 02/10/2017
+wacn.date: 03/10/2017
 ms.author: larryfr
 ---
 
@@ -24,10 +22,8 @@ ms.author: larryfr
 
 使用脚本操作可以通过指定群集配置设置，或者在群集上安装额外的服务、工具或其他软件，来自定义 Azure HDInsight 群集。你可以在创建群集期间或者在运行中的群集上使用脚本操作。
 
-> [!NOTE]
-本文档中的信息针对基于 Linux 的 HDInsight 群集。有关在基于 Windows 的群集上使用脚本操作的信息，请参阅 [Script action development with HDInsight (Windows)](./hdinsight-hadoop-script-actions.md)（使用 HDInsight 进行脚本操作开发 (Windows)）。
-> 
-> 
+> [!IMPORTANT]
+本文档中的步骤需要使用 Linux 的 HDInsight 群集。Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
 ## 什么是脚本操作？
 
@@ -37,7 +33,7 @@ ms.author: larryfr
 
 | 使用此方法来应用脚本... | 在创建群集期间... | 在运行中的群集上... |
 | --- |:---:|:---:|
-| Azure 门户 |✓ |✓ |
+| Azure 门户预览 |✓ |✓ |
 | Azure PowerShell |✓ |✓ |
 | Azure CLI |&nbsp; |✓ |
 | HDInsight .NET SDK |✓ |✓ |
@@ -147,7 +143,7 @@ fi
 例如，以下脚本将 giraph-examples.jar 文件从本地文件系统复制到 WASB：
 
 ```
-hadoop fs -copyFromLocal /usr/hdp/current/giraph/giraph-examples.jar /example/jars/
+hdfs dfs -put /usr/hdp/current/giraph/giraph-examples.jar /example/jars/
 ```
 
 ### <a name="bPS7"></a>将信息写入 STDOUT 和 STDERR
@@ -324,14 +320,14 @@ fi
 
 ## <a name="runScriptAction"></a>如何运行脚本操作
 
-可以通过 Azure 门户、Azure PowerShell、Azure Resource Manager 模板或 HDInsight .NET SDK 使用脚本操作来自定义 HDInsight 群集。有关说明，请参阅 [How to use script action](./hdinsight-hadoop-customize-cluster-linux.md)（如何使用脚本操作）。
+可以通过 Azure 门户预览、Azure PowerShell、Azure Resource Manager 模板或 HDInsight .NET SDK 使用脚本操作来自定义 HDInsight 群集。有关说明，请参阅 [How to use script action](./hdinsight-hadoop-customize-cluster-linux.md)（如何使用脚本操作）。
 
 ## <a name="sampleScripts"></a>自定义脚本示例
 
 Microsoft 提供了在 HDInsight 群集上安装组件的示例脚本。示例脚本以及有关如何使用这些脚本的说明可以在以下链接上找到：
 
 * [Install and use Hue on HDInsight clusters（在 HDInsight 群集上安装并使用 Hue）](./hdinsight-hadoop-hue-linux.md)
-* [在 HDInsight Hadoop 群集上安装并使用 R](./hdinsight-hadoop-r-scripts.md)
+* [在 HDInsight Hadoop 群集上安装并使用 R](./hdinsight-hadoop-r-scripts-linux.md)
 * [在 HDInsight 群集上安装并使用 Solr](./hdinsight-hadoop-solr-install-linux.md)
 * [在 HDInsight 群集上安装并使用 Giraph](./hdinsight-hadoop-giraph-install-linux.md)
 
@@ -378,4 +374,5 @@ awk 'NR==1{sub(/^\xef\xbb\xbf/,"")}{print}' INFILE > OUTFILE
 * 使用 [HDInsight .NET SDK reference](https://msdn.microsoft.com/zh-cn/library/mt271028.aspx)（HDInsight.NET SDK 参考）详细了解如何创建用于管理 HDInsight 的 .NET 应用程序
 * 使用 [HDInsight REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt622197.aspx) 了解如何通过 REST 在 HDInsight 群集上执行管理操作。
 
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_0306_2017-->
+<!--Update_Description: add information about HDInsight Windows is going to be abandoned-->

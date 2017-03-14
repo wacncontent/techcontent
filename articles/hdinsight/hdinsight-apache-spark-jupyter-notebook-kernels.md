@@ -1,5 +1,3 @@
-<!-- not suitable for Mooncake -->
-
 ---
 title: Linux 上的 HDInsight Spark 群集所包含的 Jupyter 笔记本可用的内核 | Azure
 description: 了解 HDInsight Linux 上的 Spark 群集可用的其他 Jupyter 笔记本内核。
@@ -36,7 +34,7 @@ ms.author: nitinme
 - Azure 订阅。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 - HDInsight Linux 上的 Apache Spark 群集。有关说明，请参阅 [Create Apache Spark clusters in Azure HDInsight](./hdinsight-apache-spark-jupyter-spark-sql.md)（在 Azure HDInsight 中创建 Apache Spark 群集）。
 
-## 如何使用内核？ 
+## <a name="choose-between-the-kernels"></a> 如何使用内核？ 
 
 1. 在 [Azure 门户预览](https://portal.azure.cn/)上的启动板中，单击 Spark 群集的磁贴（如果已将它固定到启动板）。也可以单击“全部浏览”>“HDInsight 群集”导航到你的群集。
 
@@ -164,9 +162,15 @@ Google Chrome 仅支持针对 HDInsight Spark 群集运行的 Jupyter 笔记本�
 
 * [Spark 和机器学习：使用 HDInsight 中的 Spark 对使用 HVAC 数据生成温度进行分析](./hdinsight-apache-spark-ipython-notebook-machine-learning.md)
 
+* [Spark 和机器学习：使用 HDInsight 中的 Spark 预测食品检查结果](./hdinsight-apache-spark-machine-learning-mllib-ipython.md)
+
 * [Spark 流式处理：使用 HDInsight 中的 Spark 生成实时流式处理应用程序](./hdinsight-apache-spark-eventhub-streaming.md)
 
+* [使用 HDInsight 中的 Spark 分析网站日志](./hdinsight-apache-spark-custom-library-website-log-analysis.md)
+
 ### 创建和运行应用程序
+
+* [使用 Scala 创建独立的应用程序](./hdinsight-apache-spark-create-standalone-application.md)
 
 * [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 

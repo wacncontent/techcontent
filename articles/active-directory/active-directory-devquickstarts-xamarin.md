@@ -89,7 +89,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     public static async Task<List<User>> SearchByAlias(string alias, IPlatformParameters parent)
     {
     ```
@@ -98,7 +98,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     ...
     AuthenticationResult authResult = null;
     try
@@ -120,7 +120,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     ...
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
     ...
@@ -133,7 +133,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     List<User> results = await DirectorySearcher.SearchByAlias(searchTermText.Text, new PlatformParameters(this));
     ```
 
@@ -141,7 +141,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     ...
     protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
     {
@@ -156,7 +156,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     List<User> results = await DirectorySearcher.SearchByAlias(
       SearchTermText.Text,
       new PlatformParameters(PromptBehavior.Auto, this.Handle));
@@ -167,7 +167,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     List<User> results = await DirectorySearcher.SearchByAlias(
       SearchTermText.Text,
       new PlatformParameters(PromptBehavior.Auto, this.Handle));
@@ -178,7 +178,7 @@ Xamarin 允许你使用 C# 编写可在 iOS、Android 和 Windows（移动设备
 
     C#
 
-    ```C#
+    ```
     ...
         List<User> results = await DirectorySearcherLib.DirectorySearcher.SearchByAlias(SearchTermText.Text, new PlatformParameters(PromptBehavior.Auto, false));
     ...

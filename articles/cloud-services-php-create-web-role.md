@@ -121,7 +121,7 @@ PS C:\myProject> Set-AzureServiceProjectRole roleName php 5.4.0
 
     cmd
 
-    ```cmd
+    ```
     @ECHO ON
     cd "%~dp0"
 
@@ -159,7 +159,7 @@ PS C:\myProject> Set-AzureServiceProjectRole roleName php 5.4.0
 
     cmd
 
-    ```cmd
+    ```
     @echo on
 
     cd "%~dp0"

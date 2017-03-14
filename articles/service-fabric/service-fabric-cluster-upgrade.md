@@ -74,7 +74,7 @@ ms.author: chackdan
 
 “supportExpiryUtc”告知给定的版本即将过期或已过期。最新版本没有有效日期 - 它的值为“9999-12-31T23:59:59.9999999”，这只是表示尚未设置过期日期。
 
-```REST
+```
 GET https://<endpoint>/subscriptions/{{subscriptionId}}/providers/Microsoft.ServiceFabric/clusterVersions?api-version= 2016-09-01
 
 Output:
@@ -219,7 +219,6 @@ Microsoft 将维护 Azure 群集中运行的结构代码和配置。我们将根
 
 ## 后续步骤
 - 了解如何自定义某些 [Service Fabric 群集结构设置](./service-fabric-cluster-fabric-settings.md)
-- 了解如何[扩展和缩减群集](./service-fabric-cluster-scale-up-down.md)
 - 了解[应用程序升级](./service-fabric-application-upgrade.md)
 
 <!--Image references-->

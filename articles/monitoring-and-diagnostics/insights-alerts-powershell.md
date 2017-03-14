@@ -1,23 +1,23 @@
 ---
-title: 使用 PowerShell 为 Azure 服务创建警报 | Azure
-description: 使用 PowerShell 创建 Azure 警报，以便在满足指定的条件时触发通知或自动化操作。
+title: 为 Azure 服务创建警报 - PowerShell | Azure
+description: 满足指定的条件时，触发电子邮件、通知、调用网站 URL (webhook) 或自动执行。
 authors: rboucher
-manager: ''
+manager: carmonm
 editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 
-ms.service: azure-portal
+ms.service: monitoring-and-diagnostics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 10/20/2016
-wacn.date: 12/26/2016
+wacn.date: 03/03/2017
 ms.author: robb
 ---
 
-# 使用 PowerShell 为 Azure 服务创建警报 
+# 在 Azure Monitor 中为 Azure 服务创建警报 - 跨平台 CLI 
 
 > [!div class="op_single_selector"]
 - [门户预览](./insights-alerts-portal.md)
@@ -25,7 +25,6 @@ ms.author: robb
 - [CLI](./insights-alerts-command-line-interface.md)
 
 ## 概述
-
 本文将展示如何使用 PowerShell 设置 Azure 警报。
 
 可以根据监视指标或事件接收 Azure 服务的警报。
@@ -59,7 +58,7 @@ ms.author: robb
 
 2. 获取可用订阅的列表。验证你使用的是否为正确的订阅。如果不是，请根据 `Get-AzureRmSubscription` 的输出将其设置为正确的一个。
 
-    ```PowerShell
+    ```
     Get-AzureRmSubscription
     Get-AzureRmContext
     Set-AzureRmContext -SubscriptionId <subscriptionid>
@@ -67,7 +66,7 @@ ms.author: robb
 
 3.  若要列出资源组上的现有规则，请使用以下命令：
 
-    ```PowerShell
+    ```
     Get-AzureRmAlertRule -ResourceGroup <myresourcegroup> -DetailedOutput
     ```
 
@@ -75,23 +74,23 @@ ms.author: robb
     - 要为其设置警报的资源的**资源 ID**
     - 可用于该资源的**指标定义**
 
-    获取资源 ID 的方法是使用 Azure 门户预览。假定该资源已创建，则在门户预览中将其选中。然后，在下一个边栏选项卡中的“设置”部分下选择“属性”。“资源 ID”是下一个边栏选项卡中的一个字段。
+    获取资源 ID 的一种方法是使用 Azure 门户预览。假定该资源已创建，则在门户中将其选中。然后，在下一个边栏选项卡中，在“设置”部分下选择“属性”。“资源 ID”是下一个边栏选项卡中的一个字段。
 
     下面是 Web 应用的一个示例资源 ID：
 
-    ```PowerShell
+    ```
     /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename
     ```
 
     可以使用 `Get-AzureRmMetricDefinition` 查看特定资源的所有指标定义的列表。
 
-    ```PowerShell
+    ```
     Get-AzureRmMetricDefinition -ResourceId <resource_id>
     ```
 
     以下示例将生成一个表，其中包含指标名称和该指标的单位。
 
-    ```PowerShell
+    ```
     Get-AzureRmMetricDefinition -ResourceId <resource_id> | Format-Table -Property Name,Unit
     ```
 
@@ -99,13 +98,13 @@ ms.author: robb
 
 5. 以下示例在一个网站资源上设置警报。当在 5 分钟内持续收到任何流量以及再次在 5 分钟内未收到任何流量时，警报将触发。
 
-    ```PowerShell
+    ```
     Add-AzureRmMetricAlertRule -Name myMetricRuleWithWebhookAndEmail -Location "china east" -ResourceGroup myresourcegroup -TargetResourceId /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename -MetricName "BytesReceived" -Operator GreaterThan -Threshold 2 -WindowSize 00:05:00 -TimeAggregationOperator Total -Description "alert on any website activity"
     ```
 
 6. 若要在警报触发时创建 Webhook 或发送电子邮件，请首先创建电子邮件和/或 Webhook。然后，紧随其后使用 -Actions 标记创建规则，如以下示例中所示。无法通过 PowerShell 将 Webhook 或电子邮件与已创建的规则相关联。
 
-    ```PowerShell
+    ```
     $actionEmail = New-AzureRmAlertRuleEmail -CustomEmail myname@company.com
     $actionWebhook = New-AzureRmAlertRuleWebhook -ServiceUri https://www.contoso.com?token=mytoken
 
@@ -114,7 +113,7 @@ ms.author: robb
 
 7. 若要创建在活动日志中出现特定条件时触发的警报，请使用以下形式的命令：
 
-    ```PowerShell
+    ```
     $actionEmail = New-AzureRmAlertRuleEmail -CustomEmail myname@company.com
     $actionWebhook = New-AzureRmAlertRuleWebhook -ServiceUri https://www.contoso.com?token=mytoken
 
@@ -127,7 +126,7 @@ ms.author: robb
 
 8. 通过查看各个规则来验证是否已正确创建了警报。
 
-    ```PowerShell
+    ```
     Get-AzureRmAlertRule -Name myMetricRuleWithWebhookAndEmail -ResourceGroup myresourcegroup -DetailedOutput
 
     Get-AzureRmAlertRule -Name myLogAlertRule -ResourceGroup myresourcegroup -DetailedOutput
@@ -135,7 +134,7 @@ ms.author: robb
 
 9. 删除警报。这些命令将删除本文中前面创建的规则。
 
-    ```PowerShell
+    ```
     Remove-AzureRmAlertRule -ResourceGroup myresourcegroup -Name myrule
     Remove-AzureRmAlertRule -ResourceGroup myresourcegroup -Name myMetricRuleWithWebhookAndEmail
     Remove-AzureRmAlertRule -ResourceGroup myresourcegroup -Name myLogAlertRule
@@ -147,4 +146,5 @@ ms.author: robb
 * 详细了解 [Azure 自动化 Runbook](../automation/automation-starting-a-runbook.md)。
 * [大致了解指标收集](./insights-how-to-customize-monitoring.md)以确保你的服务可用且响应迅速。
 
-<!---HONumber=Mooncake_1107_2016-->
+<!---HONumber=Mooncake_0227_2017-->
+<!--Update_Description:update wording -->

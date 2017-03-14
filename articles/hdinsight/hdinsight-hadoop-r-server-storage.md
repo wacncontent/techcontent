@@ -1,5 +1,3 @@
-<!-- not suitable for Mooncake -->
-
 ---
 title: 适用于 HDInsight 上的 R Server 的 Azure 存储选项 | Azure
 description: 了解用户可用于 HDInsight 上的 R Server 的不同存储选项
@@ -80,50 +78,50 @@ HDInsight 上的 Microsoft R Server 有权访问 Azure Blob，作为持久保存
 
 在 R 代码中，将名称节点引用指向 **storage2** 存储帐户。
 
-````
+```
 myNameNode <- "wasbs://container2@storage2.blob.core.chinacloudapi.cn"
 myPort <- 0
-````
+```
 
 数据的位置：
 
-````
+```
 bigDataDirRoot <- "/private"
-````
+```
 
 定义 Spark 计算上下文：
 
-````
+```
 mySparkCluster <- RxSpark(consoleOutput=TRUE, nameNode=myNameNode, port=myPort)
-````
+```
 
 设置计算上下文：
 
-````
+```
 rxSetComputeContext(mySparkCluster)
-````
+```
 
 定义 HDFS 文件系统：
 
-````
+```
 hdfsFS <- RxHdfsFileSystem(hostName=myNameNode, port=myPort)
-````
+```
 
 指定 HDFS 中要分析的输入文件：
 
-````
+```
 inputFile <-file.path(bigDataDirRoot,"mySpecial.csv")
-````
+```
 
 所有目录和文件引用现在都指向存储帐户 wasbs://container2@storage2.blob.core.chinacloudapi.cn。这是你指定的**名称节点**。
 
 请注意，必须在 **storage2** 上配置 /user/RevoShare/<SSH 用户名> 目录，如下所示：
 
-````
+```
 hadoop fs -mkdir wasbs://container2@storage2.blob.core.chinacloudapi.cn/user
 hadoop fs -mkdir wasbs://container2@storage2.blob.core.chinacloudapi.cn/user/RevoShare
 hadoop fs -mkdir wasbs://container2@storage2.blob.core.chinacloudapi.cn/user/RevoShare/<RDP username>
-````
+```
 
 ## 在边缘节点上使用 Azure 文件
 还有一个可在边缘节点上使用的便利数据存储选项，我们称之为 [Azure 文件](../storage/storage-how-to-use-files-linux.md "Azure 文件")。使用该选项可将 Azure 存储空间的文件共享装载到 Linux 文件系统。对比 HDFS，如果可以在边缘节点上使用本机文件系统，则存储数据文件、R 脚本以及随后可能需要的结果对象将更方便。

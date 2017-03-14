@@ -1,23 +1,23 @@
 ---
-title: 使用跨平台命令行界面 (CLI) 为 Azure 服务创建警报 | Azure
-description: 使用命令行界面创建 Azure 警报，以便在满足指定的条件时触发通知或自动化操作。
+title: 为 Azure 服务创建警报 - 跨平台 CLI | Azure
+description: 满足指定的条件时，触发电子邮件、通知、调用网站 URL (webhook) 或自动执行。
 authors: rboucher
-manager: ''
+manager: carmonm
 editor: ''
 services: monitoring-and-diagnostics
 documentationCenter: monitoring-and-diagnostics
 
-ms.service: azure-portal
+ms.service: monitoring-and-diagnostics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 10/24/2016
-wacn.date: 12/05/2016
+wacn.date: 03/03/2017
 ms.author: robb
 ---
 
-# 使用跨平台命令行界面 (CLI) 为 Azure 服务创建警报 
+# 在 Azure Monitor 中为 Azure 服务创建警报 - 跨平台 CLI
 
 > [!div class="op_single_selector"]
 - [门户预览](./insights-alerts-portal.md)
@@ -25,8 +25,7 @@ ms.author: robb
 - [CLI](./insights-alerts-command-line-interface.md)
 
 ## 概述
-
-本文将展示如何使用命令行界面 (CLI) 设置 Azure 警报。
+本文说明如何使用跨平台命令行接口 (CLI) 设置 Azure 警报。
 
 > [!NOTE]
 > “Azure Insights”在 2016 年 9 月 25 日后称为 Azure Monitor。但是，命名空间和以下命令中仍然包含“insights”。
@@ -52,7 +51,7 @@ ms.author: robb
 
 始终可以通过键入一个命令并将 -help 置于末尾来获取有关该命令的帮助信息。例如：
 
-```console
+```
 azure insights alerts -help
 azure insights alerts actions email create -help
 ```
@@ -60,7 +59,7 @@ azure insights alerts actions email create -help
 ## 使用 CLI 创建警报规则
 1. 执行先决条件并登录到 Azure。请参阅 [Azure Monitor CLI 示例](./insights-cli-samples.md)。简而言之，就是安装 CLI 并运行以下命令。这些命令可帮助登录、显示当前使用的订阅，以及为运行 Azure Monitor 命令做好准备。
 
-    ```console
+    ```
     azure login -e AzureChinaCloud
     azure account show
     azure config mode arm 
@@ -68,7 +67,7 @@ azure insights alerts actions email create -help
 
 2.  若要列出资源组上的现有规则，请使用以下形式：**azure insights alerts rule list** *[options] &lt;resourceGroup&gt;*
 
-    ```console
+    ```
     azure insights alerts rule list myresourcegroupname
     ```
 
@@ -79,13 +78,13 @@ azure insights alerts actions email create -help
     获取资源 ID 的方法是使用 Azure 门户预览。假定该资源已创建，则在门户预览中将其选中。然后，在下一个边栏选项卡中，在“设置”部分下选择“属性”。“资源 ID”是下一个边栏选项卡中的一个字段。
     下面是 Web 应用的一个示例资源 ID：
 
-    ```console
+    ```
     /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename
     ```
 
     对于前面的资源示例，若要获取可用指标的列表和这些指标的单位，请使用以下 CLI 命令：
 
-    ```console
+    ```
     azure insights metrics list /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename PT1M 
     ```
 
@@ -99,13 +98,13 @@ azure insights alerts actions email create -help
 
     以下示例在一个网站资源上设置警报。当在 5 分钟内持续收到任何流量以及再次在 5 分钟内未收到任何流量时，警报将触发。
 
-    ```console
+    ```
     azure insights alerts rule metric set myrule eastus myreasourcegroup PT5M GreaterThan 2 /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename BytesReceived Total
     ```
 
 5. 若要在警报触发时创建 Webhook 或发送电子邮件，请首先创建电子邮件和/或 Webhook。然后紧随其后创建规则。无法使用 CLI 将 Webhook 或电子邮件与已创建的规则相关联。
 
-    ```console
+    ```
     azure insights alerts actions email create --customEmails myemail@contoso.com
 
     azure insights alerts actions webhook create https://www.contoso.com
@@ -121,7 +120,7 @@ azure insights alerts actions email create -help
 
     例如
 
-    ```console
+    ```
     azure insights alerts rule log set myActivityLogRule eastus myresourceGroupName Microsoft.Storage/storageAccounts/listKeys/action
     ```
 
@@ -131,7 +130,7 @@ azure insights alerts actions email create -help
 
 7. 可以通过查看各个规则来验证是否已正确创建了警报。
 
-    ```console
+    ```
     azure insights alerts rule list myresourcegroup --ruleName myrule
     ```
 
@@ -143,7 +142,7 @@ azure insights alerts actions email create -help
 
     这些命令将删除本文中前面创建的规则。
 
-    ```console
+    ```
     azure insights alerts rule delete myresourcegroup myrule
     azure insights alerts rule delete myresourcegroup myrulewithwebhookandemail
     azure insights alerts rule delete myresourcegroup myActivityLogRule
@@ -155,4 +154,5 @@ azure insights alerts actions email create -help
 * 详细了解 [Azure 自动化 Runbook](../automation/automation-starting-a-runbook.md)。
 * [大致了解指标收集](./insights-how-to-customize-monitoring.md)以确保你的服务可用且响应迅速。
 
-<!---HONumber=Mooncake_1107_2016-->
+<!---HONumber=Mooncake_0227_2017-->
+<!--Update_Description:update wording -->

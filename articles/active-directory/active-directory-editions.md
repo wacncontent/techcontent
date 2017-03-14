@@ -64,11 +64,6 @@ Office 365 订阅包括以下比较表中所述的其他 Azure Active Directory 
 - [MIM CAL + MIM 服务器](#mim-cal-mim-server)
 - [组帐户的自动密码滚动更新](#automatic-password-rollover-for-group-accounts)
 
-**Azure Active Directory Join - 仅适用于 Windows 10 的相关功能**
-
-- [让设备加入 Azure AD、Desktop SSO、Microsoft Passport for Azure AD 和 Administrator Bitlocker 恢复](#join-a-device-to-azure-ad-desktop-sso-microsoft-passport-for-azure-ad-administrator-bitlocker-recovery)
-- [MDM 自动注册、自助 Bitlocker 恢复、通过 Azure AD Join 将其他本地管理员加入 Windows 10 设备](#mdm-auto-enrollment)
-
 ## 常用功能
 #### 目录对象 <a name="directory-objects"></a>
 **类型：**常用功能

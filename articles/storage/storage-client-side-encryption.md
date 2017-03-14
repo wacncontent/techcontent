@@ -148,7 +148,7 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ### Blob 服务加密
 创建 **BlobEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-```csharp
+```
 // Create the IKey used for encryption.
  RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
@@ -169,7 +169,7 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ### 队列服务加密
 创建 **QueueEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-```csharp
+```
 // Create the IKey used for encryption.
  RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
@@ -189,7 +189,7 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 
 #### 使用解析程序
 
-```csharp
+```
 // Create the IKey used for encryption.
  RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
@@ -226,7 +226,7 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 #### 使用特性
 如上所述，如果实体实现了 TableEntity，则可以使用 [EncryptProperty] 特性修饰属性，而不用指定 **EncryptionResolver**。
 
-```csharp
+```
 [EncryptProperty]
  public string EncryptedProperty1 { get; set; }
 ```

@@ -60,7 +60,7 @@ Visual Studio 生成的 Windows PowerShell 模块包含发布脚本使用的函�
 
 JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配置数据用于确切指定要将哪些资源部署到 Azure。Visual Studio 生成的文件的名称为 project-name-WAWS-dev.json（如果创建的是网站），或 project name-VM-dev.json（如果创建的是虚拟机）。以下是当你创建网站时生成的 JSON 配置文件的示例。大多数值的含义都一目了然。网站名称由 Azure 生成，因此，它可能与你的项目名称不匹配。
 
-```json
+```
 {
 "environmentSettings": {
 "webSite": {
@@ -86,7 +86,7 @@ JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配�
 
 当你创建虚拟机时，JSON 配置文件类似于下面所示。请注意，创建的云服务用作虚拟机的容器。虚拟机包含通过 HTTP 和 HTTPS 进行 Web 访问时使用的普通终结点，以及用于 Web 部署的终结点，你可以从本地计算机、远程桌面和 Windows PowerShell 通过这些终结点发布到网站。
 
-```json
+```
 {
 "environmentSettings": {
 "cloudService": {
@@ -185,13 +185,13 @@ JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配�
 
 1. （可选）如果你希望创建虚拟机、数据库和网站等 Azure 资源，而不发布你的 Web 应用程序，请使用 **Publish-WebApplication.ps1** 命令，并结合设置为 JSON 配置文件的 **-Configuration** 参数。此命令行使用 JSON 配置文件来确定要创建的资源。由于它的其他命令行参数使用默认设置，因此它会创建资源，但不发布你的 Web 应用程序。-Verbose 选项可为你提供有关运行情况的更多信息。
 
-    ```powershell
+    ```
     Publish-WebApplication.ps1 -Verbose –Configuration C:\Path\WebProject-WAWS-dev.json
     ```
 
 1. 如以下示例之一所示，使用 **Publish-WebApplication.ps1** 命令可调用脚本并发布你的 Web 应用程序。如果需要覆盖其他任何参数（例如订阅名称、发布包名称、虚拟机凭据或数据库服务器凭据）的默认设置，可以指定这些参数。使用 **-Verbose** 选项可以查看有关发布进度的详细信息。
 
-    ```powershell
+    ```
     Publish-WebApplication.ps1
     -Configuration C:\\Path\\WebProject-WAWS-dev-json `
     -SubscriptionName Contoso `
@@ -202,7 +202,7 @@ JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配�
 
 如果你要创建虚拟机，则命令类似于以下形式：此示例还显示了如何为多个数据库指定凭据。对于这些脚本创建的虚拟机，SSL 证书不是来自受信任的根证书颁发机构。因此，需要使用 **-AllowUntrusted** 选项。
 
-```powershell
+```
     Publish-WebApplication.ps1 `
     -Configuration C:\Path\ADVM-VM-test.json `
     -SubscriptionName Contoso `
@@ -225,7 +225,7 @@ JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配�
 
 1. 在 global param 节中添加 `$ProjectFile` 参数。
 
-    ```powershell
+    ```
     [Parameter(Mandatory = $false)]
     [ValidateScript({Test-Path $_ -PathType Leaf})]
     [String]
@@ -234,7 +234,7 @@ JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配�
 
 1. 将函数 `Get-MSBuildCmd` 复制到脚本文件。
 
-    ```powershell
+    ```
     function Get-MSBuildCmd
     {
             process
@@ -289,7 +289,7 @@ JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配�
 
 1. 在此行之前调用 `New-WebDeployPackage` 函数：`$Config = Read-ConfigFile $Configuration`（适用于 Web 应用）或 `$Config = Read-ConfigFile $Configuration -HasWebDeployPackage:([Bool]$WebDeployPackage)`（适用于虚拟机）。
 
-    ```powershell
+    ```
     if($ProjectFile)
     {
     $WebDeployPackage = New-WebDeployPackage
@@ -298,7 +298,7 @@ JSON 文件是在 **Configurations** 文件夹中创建的，其中包含的配�
 
 1. 从命令行通过传递 `$Project` 参数调用自定义脚本，如以下示例命令行所示。
 
-    ```powershell
+    ```
     .\Publish-WebApplicationVM.ps1 -Configuration .\Configurations\WebApplication5-VM-dev.json `
     -ProjectFile ..\WebApplication5\WebApplication5.csproj `
     -VMPassword @{Name="VMUser";Password="Test.123"} `

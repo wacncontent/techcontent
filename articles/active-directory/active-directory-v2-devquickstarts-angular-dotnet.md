@@ -63,7 +63,7 @@ bower install adal-angular#experimental
 
 html
 
-```html
+```
 <!--index.html-->
 
 ...
@@ -80,7 +80,7 @@ html
 
 xml
 
-```xml
+```
 <!--web.config-->
 
 ...
@@ -99,7 +99,7 @@ xml
 
 js
 
-```js
+```
 // app/scripts/app.js
 
 angular.module('todoApp', ['ngRoute','AdalAngular'])
@@ -113,7 +113,7 @@ angular.module('todoApp', ['ngRoute','AdalAngular'])
 
 js
 
-```js
+```
 // app/scripts/app.js
 
 ...
@@ -139,7 +139,7 @@ adalProvider.init({
 
 js
 
-```js
+```
 // app/scripts/app.js
 
 ...
@@ -157,7 +157,7 @@ js
 
 js
 
-```js
+```
 // app/scripts/homeCtrl.js
 
 angular.module('todoApp')
@@ -183,7 +183,7 @@ angular.module('todoApp')
 
 js
 
-```js
+```
 // app/scripts/userDataCtrl.js
 
 angular.module('todoApp')
@@ -195,7 +195,7 @@ angular.module('todoApp')
 
 html
 
-```html
+```
 <!--app/views/UserData.html-->
 
 ...
@@ -212,7 +212,7 @@ html
 
 html
 
-```html
+```
     <!--index.html-->
 
     ...
@@ -234,7 +234,7 @@ html
 
 js
 
-```js
+```
 // app/scripts/todoListSvc.js
 
 ...

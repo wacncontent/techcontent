@@ -139,7 +139,7 @@ ms.author: syamk
 
     Python
 
-    ```python
+    ```
     from flask.ext.wtf import Form
     from wtforms import RadioField
 
@@ -156,7 +156,7 @@ ms.author: syamk
 
     Python
 
-    ```python
+    ```
     from forms import VoteForm
     import config
     import pydocumentdb.document_client as document_client
@@ -167,7 +167,7 @@ ms.author: syamk
 
     Python
 
-    ```python
+    ```
     @app.route('/create')
     def create():
         """Renders the contact page."""
@@ -210,7 +210,7 @@ ms.author: syamk
 
     Python
 
-    ```python
+    ```
     @app.route('/vote', methods=['GET', 'POST'])
     def vote(): 
         form = VoteForm()
@@ -265,7 +265,7 @@ ms.author: syamk
 
     html
 
-    ```html
+    ```
     {% extends "layout.html" %}
     {% block content %}
     <h2>{{ title }}.</h2>
@@ -278,7 +278,7 @@ ms.author: syamk
 
     html
 
-    ```html
+    ```
     {% extends "layout.html" %}
     {% block content %}
     <h2>Results of the vote</h2>
@@ -306,7 +306,7 @@ ms.author: syamk
 
     html
 
-    ```html
+    ```
     {% extends "layout.html" %}
     {% block content %}
     <h2>What is your favorite way to host an application on Azure?</h2>
@@ -322,7 +322,7 @@ ms.author: syamk
 
     html
 
-    ```html
+    ```
     {% extends "layout.html" %}
     {% block content %}
     <h2>Python + DocumentDB Voting Application.</h2>
@@ -338,7 +338,7 @@ ms.author: syamk
 
     Python
 
-    ```python
+    ```
     CSRF_ENABLED = True
     SECRET_KEY = 'you-will-never-guess'
 
@@ -362,7 +362,7 @@ ms.author: syamk
 
     Python
 
-    ```python
+    ```
     from flask import Flask
     app = Flask(__name__)
     app.config.from_object('config')

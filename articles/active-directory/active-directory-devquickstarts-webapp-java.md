@@ -60,7 +60,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
         <modelVersion>4.0.0</modelVersion>
@@ -178,7 +178,7 @@ ms.author: brandwe
 
     xml
 
-    ```xml
+    ```
     <?xml version="1.0"?>
     <web-app id="WebApp_ID" version="2.4"
         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -248,7 +248,7 @@ ms.author: brandwe
 
     xml
 
-    ```xml
+    ```
     <beans xmlns="http://www.springframework.org/schema/beans"
         xmlns:context="http://www.springframework.org/schema/context"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -286,7 +286,7 @@ ms.author: brandwe
 
     jsp
 
-    ```jsp
+    ```
     <html>
     <body>
         <h2>Hello World!</h2>
@@ -303,7 +303,7 @@ ms.author: brandwe
 
     jsp
 
-    ```jsp
+    ```
     <html>
     <body>
         <h2>ERROR PAGE!</h2>
@@ -322,7 +322,7 @@ ms.author: brandwe
 
     jsp
 
-    ```jsp
+    ```
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html>
     <head>
@@ -372,7 +372,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     package com.microsoft.aad.adal4jsample;
 
     import java.lang.reflect.Field;
@@ -595,7 +595,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     package com.microsoft.aad.adal4jsample;
 
     import java.io.BufferedReader;
@@ -754,7 +754,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     package com.microsoft.aad.adal4jsample;
 
     /**
@@ -809,7 +809,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     package com.microsoft.aad.adal4jsample;
 
     import java.security.acl.Group;
@@ -1332,7 +1332,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     package com.microsoft.aad.adal4jsample;
 
     import java.util.Map;
@@ -1382,7 +1382,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     package com.microsoft.aad.adal4jsample;
 
     public final class AuthParameterNames {
@@ -1404,7 +1404,7 @@ ms.author: brandwe
 
     Java
 
-    ```Java
+    ```
     package com.microsoft.aad.adal4jsample;
 
     import java.net.HttpURLConnection;
@@ -1485,7 +1485,7 @@ ms.author: brandwe
 
 Java
 
-```Java
+```
 package com.microsoft.aad.adal4jsample;
 
 import java.io.IOException;

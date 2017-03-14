@@ -40,7 +40,7 @@ Azure Functions 是一种解决方案，特别适合在云中运行 *函数* （
 ## 打开示例应用
 通过运行以下命令在 Visual Studio Code 中打开示例项目：
 
-```bash
+```
 cd Lesson3
 code .
 ```
@@ -62,7 +62,7 @@ code .
 
 更新 `arm-template-param.json` 文件后，请运行以下命令，将资源部署到 Azure：
 
-```bash
+```
 az group deployment create --template-file arm-template.json --parameters @arm-template-param.json -g iot-sample
 ```
 

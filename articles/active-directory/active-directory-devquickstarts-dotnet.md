@@ -73,7 +73,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     public MainWindow()
     {
         InitializeComponent();
@@ -88,7 +88,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     private async void Search(object sender, RoutedEventArgs e)
     {
         // Validate the Input String
@@ -125,7 +125,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     private void SignOut(object sender = null, RoutedEventArgs args = null)
     {
         // Clear the token cache
@@ -139,7 +139,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     public async void CheckForCachedToken() 
     {
         // As the application starts, try to get an access token without prompting the user.  If one exists, show the user as signed in.

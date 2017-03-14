@@ -1,5 +1,3 @@
-<!-- need to be verified -->
-
 ---
 title: 在门户中使用 Linux 故障排除 VM | Azure
 description: 了解如何通过使用 Azure 门户预览将 OS 磁盘连接到恢复 VM 来排查 Linux 虚拟机问题
@@ -96,13 +94,13 @@ ms.author: iainfou
 
 1. 使用相应的凭据通过 SSH 连接到故障排除 VM。如果此磁盘是附加到故障排除 VM 的第一个数据磁盘，则它可能已连接到 `/dev/sdc`。使用 `dmseg` 列出附加的磁盘：
 
-    ```bash
+    ```
     dmesg | grep SCSI
     ```
 
     输出类似于以下示例：
 
-    ```bash
+    ```
     [    0.294784] SCSI subsystem initialized
     [    0.573458] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
     [    7.110271] sd 2:0:0:0: [sda] Attached SCSI disk
@@ -114,13 +112,13 @@ ms.author: iainfou
 
 2. 创建一个目录来装载现有的虚拟硬盘。以下示例创建一个名为 `troubleshootingdisk` 的目录：
 
-    ```bash
+    ```
     sudo mkdir /mnt/troubleshootingdisk
     ```
 
 3. 如果现有的虚拟硬盘上有多个分区，则装载所需的分区。以下示例在 `/dev/sdc1` 中装载第一个主分区：
 
-    ```bash
+    ```
     sudo mount /dev/sdc1 /mnt/troubleshootingdisk
     ```
 
@@ -135,13 +133,13 @@ ms.author: iainfou
 
 1. 通过 SSH 会话登录到故障排除 VM 中，卸载现有的虚拟硬盘。首先更改出装入点的父目录：
 
-    ```bash
+    ```
     cd /
     ```
 
     现在卸载现有的虚拟硬盘。以下示例卸载 `/dev/sdc1` 中的设备：
 
-    ```bash
+    ```
     sudo umount /dev/sdc1
     ```
 

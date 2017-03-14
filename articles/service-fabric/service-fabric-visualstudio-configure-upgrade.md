@@ -80,7 +80,7 @@ Service Fabric 应用程序中的每个服务可能有自身的运行状况策�
 
 以下示例演示如何对应用程序列表中的每个服务应用唯一的运行状况检查策略。
 
-```xml
+```
 <Policies>
     <HealthPolicy ConsiderWarningAsError="false" MaxPercentUnhealthyDeployedApplications="20">
         <DefaultServiceTypeHealthPolicy MaxPercentUnhealthyServices="20"               

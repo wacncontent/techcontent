@@ -8,8 +8,8 @@ manager: timlt
 editor: ''
 
 ms.service: service-bus
-ms.date: 09/29/2016
-wacn.date: 01/09/2017
+ms.date: 01/17/2017
+wacn.date: 03/03/2017
 ---
 
 # 使用 AMQP 1.0 通过 PHP 使用服务总线
@@ -33,7 +33,7 @@ Proton-PHP 是绑定到 Proton-C 的 PHP 语言；也就是说，Proton-PHP 是�
 
 以下代码演示如何向服务总线消息实体发送消息。
 
-```php
+```
     $messenger = new Messenger();
     $message = new Message();
     $message->address = "amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn/[entity]";
@@ -47,7 +47,7 @@ Proton-PHP 是绑定到 Proton-C 的 PHP 语言；也就是说，Proton-PHP 是�
 
 以下代码演示如何从服务总线消息实体接收消息。
 
-```php
+```
     $messenger = new Messenger();
     $address = "amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn/[entity]";
     $messenger->subscribe($address);
@@ -72,7 +72,7 @@ Proton-PHP 是绑定到 Proton-C 的 PHP 语言；也就是说，Proton-PHP 是�
 
 Proton-PHP 消息支持以下类型的应用程序属性：**integer**、**double**、**Boolean**、**string** 和 **object**。以下 PHP 代码演示如何使用上述每种属性类型在消息上设置属性。
 
-```php
+```
     $message->properties["TestInt"] = 1;    
     $message->properties["TestDouble"] = 1.5;      
     $message->properties["TestBoolean"] = False;
@@ -82,7 +82,7 @@ Proton-PHP 消息支持以下类型的应用程序属性：**integer**、**doubl
 
 在服务总线 .NET API 中，在 [BrokeredMessage][] 的 **Properties** 集合中携带消息应用程序属性。以下代码演示如何读取从 PHP 客户端收到的消息的应用程序属性。
 
-```csharp
+```
     if (message.Properties.Keys.Count > 0)
     {
       foreach (string name in message.Properties.Keys)
@@ -116,7 +116,7 @@ Proton-PHP 消息支持以下类型的应用程序属性：**integer**、**doubl
 
 [BrokeredMessage][] 类型支持以下类型的应用程序属性：**byte**、**sbyte**、**char**、**short**、**ushort**、**int**、**uint**、**long**、**ulong**、**float**、**double**、**decimal**、**bool**、**Guid**、**string**、**Uri**、**DateTime**、**DateTimeOffset** 和 **TimeSpan**。以下 .NET 代码显示如何使用上述每种属性类型在 [BrokeredMessage][] 对象上设置属性。
 
-```csharp
+```
     message.Properties["TestByte"] = (byte)128;
     message.Properties["TestSbyte"] = (sbyte)-22;
     message.Properties["TestChar"] = (char) 'X';
@@ -140,7 +140,7 @@ Proton-PHP 消息支持以下类型的应用程序属性：**integer**、**doubl
 
 以下 PHP 代码演示如何读取从服务总线 .NET 客户端收到的消息的应用程序属性。
 
-```php
+```
     if ($message->properties != null)
     {
       foreach($message->properties as $key => $value)
@@ -230,3 +230,4 @@ Proton-PHP 消息支持以下类型的应用程序属性：**integer**、**doubl
 [服务总线 AMQP 概述]: ./service-bus-amqp-overview.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->
+<!--Update_Description:update meta properties-->

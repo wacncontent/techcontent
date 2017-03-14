@@ -27,7 +27,7 @@ ms.author: iainfou
 
 确保已登录 [Azure CLI](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
-```bash
+```
 azure config mode arm
 ```
 
@@ -35,40 +35,40 @@ azure config mode arm
 
 首先创建一个资源组。以下示例在 `WestUs` 位置创建一个名为 `myResourceGroup` 的资源组：
 
-```bash
+```
 azure group create myResourceGroup --location "ChinaNorth"
 ```
 
 创建一个用于存放虚拟磁盘的存储帐户。以下示例创建一个名为 `mystorageaccount` 的存储帐户：
 
-```bash
+```
 azure storage account create mystorageaccount --resource-group myResourceGroup \
     --location "ChinaNorth" --kind Storage --sku-name PLRS
 ```
 
 列出存储帐户的访问密钥。记下 `key1`：
 
-```bash
+```
 azure storage account keys list mystorageaccount --resource-group myResourceGroup
 ```
 
 使用得到的存储密钥在存储帐户中创建一个容器。以下示例使用来自 `key1` 的存储密钥值创建一个名为 `myimages` 的容器：
 
-```bash
+```
 azure storage container create --account-name mystorageaccount \
     --account-key key1 --container myimages
 ```
 
 最后，将 VHD 上载到创建的容器。在 `/path/to/disk/mydisk.vhd` 下指定 VHD 的本地路径：
 
-```bash
+```
 azure storage blob upload --blobtype page --account-name mystorageaccount \
     --account-key key1 --container myimages /path/to/disk/mydisk.vhd
 ```
 
 现在，可以[使用 Resource Manager 模板](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-specialized-vhd)从上载的虚拟磁盘创建 VM。也可以使用 CLI 指定磁盘的 URI (`--image-urn`)。以下示例使用前面上载的虚拟磁盘创建一个名为 `myVM` 的 VM：
 
-```bash
+```
 azure vm create myVM -l "ChinaNorth" --resource-group myResourceGroup \
     --image-urn https://mystorageaccount.blob.core.chinacloudapi.cn/myimages/mydisk.vhd
 ```
@@ -91,7 +91,7 @@ azure vm create myVM -l "ChinaNorth" --resource-group myResourceGroup \
 
 确保已登录 [Azure CLI](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
-```bash
+```
 azure config mode arm
 ```
 
@@ -119,7 +119,7 @@ Azure 支持各种 Linux 分发版（请参阅 [认可的分发版](./virtual-ma
 
 以下示例在 `ChinaNorth` 位置创建一个名为 `myResourceGroup` 的资源组：
 
-```bash
+```
 azure group create myResourceGroup --location "ChinaNorth"
 ```
 
@@ -128,7 +128,7 @@ VM 以页 Blob 形式存储在存储帐户中。可以在这里了解有关 [Azu
 
 以下示例在前面创建的资源组中创建一个名为 `mystorageaccount` 的存储帐户：
 
-```bash
+```
 azure storage account create mystorageaccount --resource-group myResourceGroup \
     --location "ChinaNorth" --kind Storage --sku-name PLRS
 ```
@@ -138,7 +138,7 @@ Azure 将为每个存储帐户生成两个 512 位的访问密钥。在向存储
 
 查看创建的存储帐户的访问密钥：
 
-```bash
+```
 azure storage account keys list mystorageaccount --resource-group myResourceGroup
 ```
 
@@ -161,7 +161,7 @@ info:    storage account keys list command OK
 
 以下示例创建一个名为 `myimages` 的容器，并指定了上一步骤中获取的访问密钥 (`key1`) ：
 
-```bash
+```
 azure storage container create --account-name mystorageaccount \
     --account-key key1 --container myimages
 ```
@@ -171,7 +171,7 @@ azure storage container create --account-name mystorageaccount \
 
 指定访问密钥、在上一步中创建的容器，以及自定义磁盘映像在本地计算机上的路径：
 
-```bash
+```
 azure storage blob upload --blobtype page --account-name mystorageaccount \
     --account-key key1 --container myimages /path/to/disk/mydisk.vhd
 ```
@@ -184,7 +184,7 @@ azure storage blob upload --blobtype page --account-name mystorageaccount \
 
 以下示例从自定义磁盘映像创建一个名为 `myVM` 的 VM：
 
-```bash
+```
 azure vm create myVM -l "ChinaNorth" --resource-group myResourceGroup \
     --image-urn https://mystorageaccount.blob.core.chinacloudapi.cn/myimages/mydisk.vhd
     --storage-account-name mystorageaccount
@@ -197,7 +197,7 @@ Azure Resource Manager 模板是一个 JavaScript 对象表示法 (JSON) 文件�
 
 在模板的 `Microsoft.Compute/virtualMachines` 提供程序中有一个 `storageProfile` 节点，其中包含 VM 的配置详细信息。需要编辑的两个主要参数为 `image` 和 `vhd` URI，它们指向自定义磁盘映像和新 VM 的虚拟磁盘。下面显示了使用自定义磁盘映像的 JSON 示例：
 
-```bash
+```
 "storageProfile": {
           "osDisk": {
             "name": "myVM",
@@ -217,14 +217,14 @@ Azure Resource Manager 模板是一个 JavaScript 对象表示法 (JSON) 文件�
 
 一旦配置了模板，就可以使用 `azure group deployment create` 命令创建 VM。使用 `--template-uri` 参数指定 JSON 模板的 URI：
 
-```bash
+```
 azure group deployment create --resource-group myResourceGroup
     --template-uri https://uri.to.template/mytemplate.json
 ```
 
 如果在计算机上以本地方式存储了一个 JSON 文件，则可以改用 `--template-file` 参数：
 
-```bash
+```
 azure group deployment create --resource-group myResourceGroup
     --template-file /path/to/mytemplate.json
 ```

@@ -1,5 +1,5 @@
 ---
-title: 采用 ExpressRoute 所要满足的先决条件 | Azure
+title: 采用 ExpressRoute 要要满足的先决条件 | Azure
 description: 本页提供了在订购 Azure ExpressRoute 线路之前需要满足的要求列表。
 documentationCenter: na
 services: expressroute
@@ -12,8 +12,8 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/10/2016
-wacn.date: 01/04/2017
+ms.date: 01/06/2017
+wacn.date: 03/03/2017
 ms.author: cherylmc
 ---
 
@@ -53,4 +53,4 @@ ms.author: cherylmc
     - [配置路由](./expressroute-howto-routing-classic.md)
     - [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)
 
-<!---HONumber=Mooncake_Quality_Review_1230_2016-->
+<!---HONumber=Mooncake_0220_2017-->

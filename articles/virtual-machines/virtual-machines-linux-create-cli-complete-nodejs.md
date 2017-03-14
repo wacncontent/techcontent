@@ -38,14 +38,14 @@ ms.author: iainfou
 可使用以下 CLI 版本之一完成任务：
 
 - [Azure CLI 1.0](#quick-commands)：用于经典部署模型和资源管理部署模型（本文）的 CLI
-- [Azure CLI 2.0（预览版）](./virtual-machines-linux-create-cli-complete.md)：用于资源管理部署模型的下一代 CLI
+- Azure CLI 2.0：因为 API 版本的问题， CLI 2.0 在 Azure 中国还不支持 Azure 虚拟机。
 
 ## <a name="quick-commands"></a> 快速命令
 如果需要快速完成任务，请参阅以下部分，其中详细说明了用于将 VM 上载到 Azure 的基本命令。本文档的余下部分（[从此处开始](#detailed-walkthrough)）提供了每个步骤的更详细信息和应用背景。
 
 确保已登录 [Azure CLI 1.0](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
-```azurecli
+```
 azure config mode arm
 ```
 
@@ -53,79 +53,79 @@ azure config mode arm
 
 创建资源组。以下示例在 `chinanorth` 位置创建名为 `myResourceGroup` 的资源组：
 
-```azurecli
+```
 azure group create -n myResourceGroup -l chinanorth
 ```
 
 使用 JSON 分析器验证资源组：
 
-```azurecli
+```
 azure group show myResourceGroup --json | jq '.'
 ```
 
 创建存储帐户。以下示例创建名为 `mystorageaccount` 的存储帐户。（存储帐户名称必须唯一，因此，请提供自己的唯一名称。）
 
-```azurecli
+```
 azure storage account create -g myResourceGroup -l chinanorth \
   --kind Storage --sku-name GRS mystorageaccount
 ```
 
 使用 JSON 分析器验证存储帐户：
 
-```azurecli
+```
 azure storage account show -g myResourceGroup mystorageaccount --json | jq '.'
 ```
 
 创建虚拟网络。以下示例创建名为 `myVnet` 的虚拟网络：
 
-```azurecli
+```
 azure network vnet create -g myResourceGroup -l chinanorth\
   -n myVnet -a 192.168.0.0/16
 ```
 
 创建子网。以下示例创建名为 `mySubnet` 的子网：
 
-```azurecli
+```
 azure network vnet subnet create -g myResourceGroup \
   -e myVnet -n mySubnet -a 192.168.1.0/24
 ```
 
 使用 JSON 分析器验证虚拟网络和子网：
 
-```azurecli
+```
 azure network vnet show myResourceGroup myVnet --json | jq '.'
 ```
 
 创建公共 IP。以下示例创建名为 `myPublicIP`、DNS 名称为 `mypublicdns` 的公共 IP。（DNS 名称必须唯一，因此，请提供自己的唯一名称。）
 
-```azurecli
+```
 azure network public-ip create -g myResourceGroup -l chinanorth \
   -n myPublicIP  -d mypublicdns -a static -i 4
 ```
 
 创建负载均衡器。以下示例创建名为 `myLoadBalancer` 的负载均衡器：
 
-```azurecli
+```
 azure network lb create -g myResourceGroup -l chinanorth -n myLoadBalancer
 ```
 
 创建负载均衡器的前端 IP 池并关联公共 IP。以下示例创建名为 `mySubnetPool` 的前端 IP 池：
 
-```azurecli
+```
 azure network lb frontend-ip create -g myResourceGroup -l myLoadBalancer \
   -i myPublicIP -n myFrontEndPool
 ```
 
 创建负载均衡器的后端 IP 池。以下示例创建名为 `myBackEndPool` 的后端 IP 池：
 
-```azurecli
+```
 azure network lb address-pool create -g myResourceGroup -l myLoadBalancer \
   -n myBackEndPool
 ```
 
 创建负载均衡器的 SSH 入站网络地址转换 (NAT) 规则。以下示例创建两个负载均衡器规则，分别名为 `myLoadBalancerRuleSSH1` 和 `myLoadBalancerRuleSSH2`：
 
-```azurecli
+```
 azure network lb inbound-nat-rule create -g myResourceGroup -l myLoadBalancer \
   -n myLoadBalancerRuleSSH1 -p tcp -f 4222 -b 22
 azure network lb inbound-nat-rule create -g myResourceGroup -l myLoadBalancer \
@@ -134,7 +134,7 @@ azure network lb inbound-nat-rule create -g myResourceGroup -l myLoadBalancer \
 
 创建负载均衡器的 Web 入站 NAT 规则。以下示例创建名为 `myLoadBalancerRuleWeb` 的负载均衡器规则：
 
-```azurecli
+```
 azure network lb rule create -g myResourceGroup -l myLoadBalancer \
   -n myLoadBalancerRuleWeb -p tcp -f 80 -b 80 \
   -t myFrontEndPool -o myBackEndPool
@@ -142,14 +142,14 @@ azure network lb rule create -g myResourceGroup -l myLoadBalancer \
 
 创建负载均衡器运行状况探测。以下示例创建名为 `myHealthProbe` 的 TCP 探测：
 
-```azurecli
+```
 azure network lb probe create -g myResourceGroup -l myLoadBalancer \
   -n myHealthProbe -p "tcp" -i 15 -c 4
 ```
 
 使用 JSON 分析器验证虚拟机规模集、IP 池和 NAT 规则：
 
-```azurecli
+```
 azure network lb show -g myResourceGroup -n myLoadBalancer --json | jq '.'
 ```
 
@@ -157,7 +157,7 @@ azure network lb show -g myResourceGroup -n myLoadBalancer --json | jq '.'
 
 以下示例创建名为 `myNic1` 的 NIC：
 
-```azurecli
+```
 azure network nic create -g myResourceGroup -l chinanorth \
   -n myNic1 -m myVnet -k mySubnet \
   -d "/subscriptions/########-####-####-####-############/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLoadBalancer/backendAddressPools/myBackEndPool" \
@@ -166,7 +166,7 @@ azure network nic create -g myResourceGroup -l chinanorth \
 
 创建第二个 NIC。以下示例创建名为 `myNic2` 的 NIC：
 
-```azurecli
+```
 azure network nic create -g myResourceGroup -l chinanorth \
   -n myNic2 -m myVnet -k mySubnet \
   -d "/subscriptions/########-####-####-####-############/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLoadBalancer/backendAddressPools/myBackEndPool" \
@@ -175,21 +175,21 @@ azure network nic create -g myResourceGroup -l chinanorth \
 
 使用 JSON 分析器验证两个 NIC。
 
-```azurecli
+```
 azure network nic show myResourceGroup myNic1 --json | jq '.'
 azure network nic show myResourceGroup myNic2 --json | jq '.'
 ```
 
 创建网络安全组。以下示例创建名为 `myNetworkSecurityGroup` 的网络安全组：
 
-```azurecli
+```
 azure network nsg create -g myResourceGroup -l chinanorth \
   -n myNetworkSecurityGroup
 ```
 
 为网络安全组添加两个入站规则。以下示例创建两个规则，分别名为 `myNetworkSecurityGroupRuleSSH` 和 `myNetworkSecurityGroupRuleHTTP`：
 
-```azurecli
+```
 azure network nsg rule create -p tcp -r inbound -y 1000 -u 22 -c allow \
   -g myResourceGroup -a myNetworkSecurityGroup -n myNetworkSecurityGroupRuleSSH
 azure network nsg rule create -p tcp -r inbound -y 1001 -u 80 -c allow \
@@ -198,26 +198,26 @@ azure network nsg rule create -p tcp -r inbound -y 1001 -u 80 -c allow \
 
 使用 JSON 分析器验证网络安全组和入站规则：
 
-```azurecli
+```
 azure network nsg show -g myResourceGroup -n myNetworkSecurityGroup --json | jq '.'
 ```
 
 将网络安全组绑定到两个 NIC：
 
-```azurecli
+```
 azure network nic set -g myResourceGroup -o myNetworkSecurityGroup -n myNic1
 azure network nic set -g myResourceGroup -o myNetworkSecurityGroup -n myNic2
 ```
 
 创建可用性集。以下示例创建名为 `myAvailabilitySet` 的可用性集：
 
-```azurecli
+```
 azure availset create -g myResourceGroup -l chinanorth -n myAvailabilitySet
 ```
 
 创建第一个 Linux VM。以下示例创建名为 `myVM1` 的 VM：
 
-```azurecli
+```
 azure vm create \
     --resource-group myResourceGroup \
     --name myVM1 \
@@ -235,7 +235,7 @@ azure vm create \
 
 创建第二个 Linux VM。以下示例创建名为 `myVM2` 的 VM：
 
-```azurecli
+```
 azure vm create \
     --resource-group myResourceGroup \
     --name myVM2 \
@@ -253,14 +253,14 @@ azure vm create \
 
 使用 JSON 分析器验证构建的所有组件：
 
-```azurecli
+```
 azure vm show -g myResourceGroup -n myVM1 --json | jq '.'
 azure vm show -g myResourceGroup -n myVM2 --json | jq '.'
 ```
 
 将新环境导出到模板，以便快速重新创建新实例：
 
-```azurecli
+```
 azure group export myResourceGroup
 ```
 
@@ -269,7 +269,7 @@ azure group export myResourceGroup
 
 确保已登录 [Azure CLI 1.0](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
-```azurecli
+```
 azure config mode arm
 ```
 
@@ -278,13 +278,13 @@ azure config mode arm
 ## 创建资源组并选择部署位置
 Azure 资源组是逻辑部署实体，包含用于启用资源部署逻辑管理的配置信息和元数据。以下示例在 `chinanorth` 位置创建名为 `myResourceGroup` 的资源组：
 
-```azurecli
+```
 azure group create --name myResourceGroup --location chinanorth
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command group create
 + Getting resource group myResourceGroup
 + Creating resource group myResourceGroup
@@ -303,7 +303,7 @@ info:    group create command OK
 
 此处，使用 `azure storage account create` 命令传递帐户的位置、控制该帐户的资源组，以及所需的存储支持类型。以下示例创建名为 `mystorageaccount` 的存储帐户：
 
-```azurecli
+```
 azure storage account create \  
   --location chinanorth \
   --resource-group myResourceGroup \
@@ -313,7 +313,7 @@ azure storage account create \
 
 输出：
 
-```azurecli
+```
 info:    Executing command storage account create
 + Creating storage account
 info:    storage account create command OK
@@ -321,13 +321,13 @@ info:    storage account create command OK
 
 若要通过 `azure group show` 命令检查资源组，可在 [jq](https://stedolan.github.io/jq/) 工具中结合使用 `--json` Azure CLI 选项。（可以使用 **jsawk** 或用于分析 JSON 的任何语言库。）
 
-```azurecli
+```
 azure group show myResourceGroup --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
   "tags": {},
   "id": "/subscriptions/guid/resourceGroups/myResourceGroup",
@@ -359,19 +359,19 @@ azure group show myResourceGroup --json | jq '.'
 
 若要使用 CLI 检查存储帐户，首先需要设置帐户名和密钥。将下例中的存储帐户名替换为所选的名称：
 
-```bash
+```
 export AZURE_STORAGE_CONNECTION_STRING="$(azure storage account connectionstring show mystorageaccount --resource-group myResourceGroup --json | jq -r '.string')"
 ```
 
 然后，可以轻松查看存储信息：
 
-```azurecli
+```
 azure storage container list
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command storage container list
 + Getting storage containers
 data:    Name  Public-Access  Last-Modified
@@ -383,14 +383,14 @@ info:    storage container list command OK
 ## 创建虚拟网络和子网
 接下来，需要创建在 Azure 中运行的虚拟网络，以及可在其中创建 VM 的子网。以下示例创建名为 `myVnet`、地址前缀为 `192.168.0.0/16` 的虚拟网络：
 
-```azurecli
+```
 azure network vnet create --resource-group myResourceGroup --location chinanorth \
   --name myVnet --address-prefixes 192.168.0.0/16
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command network vnet create
 + Looking up virtual network "myVnet"
 + Creating virtual network "myVnet"
@@ -407,13 +407,13 @@ info:    network vnet create command OK
 
 同样，让我们使用 `azure group show` 的 --json 选项和 `jq` 来了解如何构建资源。现在，已经创建 `storageAccounts` 资源和 `virtualNetworks` 资源。
 
-```azurecli
+```
 azure group show myResourceGroup --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
   "tags": {},
   "id": "/subscriptions/guid/resourceGroups/myResourceGroup",
@@ -452,14 +452,14 @@ azure group show myResourceGroup --json | jq '.'
 
 现在，需在部署 VM 的 `myVnet` 虚拟网络中创建子网。使用 `azure network vnet subnet create` 命令以及已创建的资源：`myResourceGroup` 资源组和 `myVnet` 虚拟网络。以下示例添加名为 `mySubnet`、地址前缀为 `192.168.1.0/24` 的子网：
 
-```azurecli
+```
 azure network vnet subnet create --resource-group myResourceGroup \
   --vnet-name myVnet --name mySubnet --address-prefix 192.168.1.0/24
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command network vnet subnet create
 + Looking up the subnet "mySubnet"
 + Creating subnet "mySubnet"
@@ -475,13 +475,13 @@ info:    network vnet subnet create command OK
 
 由于子网以逻辑方式出现在虚拟网络中，可使用稍微不同的命令来查找子网信息。使用的命令为 `azure network vnet show`，但将继续使用 `jq` 检查 JSON 输出。
 
-```azurecli
+```
 azure network vnet show myResourceGroup myVnet --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
   "subnets": [
     {
@@ -513,14 +513,14 @@ azure network vnet show myResourceGroup myVnet --json | jq '.'
 ## 创建公共 IP 地址
 现在，需要创建分配给负载均衡器的公共 IP 地址 (PIP)。使用该地址可以通过 `azure network public-ip create` 命令从 Internet 连接到 VM。由于默认地址是动态的，因此可使用 `--domain-name-label` 选项在 **chinacloudapp.cn** 域中创建一个命名的 DNS 条目。以下示例创建名为 `myPublicIP`、DNS 名称为 `mypublicdns` 的公共 IP。由于 DNS 名称必须唯一，因此，请提供自己的唯一 DNS 名称：
 
-```azurecli
+```
 azure network public-ip create --resource-group myResourceGroup \
   --location chinanorth --name myPublicIP --domain-name-label mypublicdns
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command network public-ip create
 + Looking up the public ip "myPublicIP"
 + Creating public ip address "myPublicIP"
@@ -539,13 +539,13 @@ info:    network public-ip create command OK
 
 公共 IP 地址也是顶级资源，因此可以使用 `azure group show` 查看。
 
-```azurecli
+```
 azure group show myResourceGroup --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
 "tags": {},
 "id": "/subscriptions/guid/resourceGroups/myResourceGroup",
@@ -591,13 +591,13 @@ azure group show myResourceGroup --json | jq '.'
 
 可以查看更多资源详细信息，包括使用完整的 `azure network public-ip show` 命令查看子域的完全限定域名 (FQDN)。公共 IP 地址资源已经以逻辑方式分配，但尚未分配有特定地址。若要获取 IP 地址，需要一个负载均衡器，但该负载均衡器尚未创建。
 
-```azurecli
+```
 azure network public-ip show myResourceGroup myPublicIP --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
 "tags": {},
 "publicIpAllocationMethod": "Dynamic",
@@ -617,14 +617,14 @@ azure network public-ip show myResourceGroup myPublicIP --json | jq '.'
 ## 创建虚拟机规模集和 IP 池
 创建负载均衡器时，可以将流量分散到多个 VM。虚拟机规模集还可以在执行维护或承受重负载时运行多个 VM 来响应用户请求，为应用程序提供冗余。以下示例创建名为 `myLoadBalancer` 的负载均衡器：
 
-```azurecli
+```
 azure network lb create --resource-group myResourceGroup --location chinanorth \
   --name myLoadBalancer
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command network lb create
 + Looking up the load balancer "myLoadBalancer"
 + Creating load balancer "myLoadBalancer"
@@ -640,7 +640,7 @@ info:    network lb create command OK
 
 首先，创建前端 IP 池。以下示例创建名为 `myFrontEndPool` 的前端池：
 
-```azurecli
+```
 azure network lb frontend-ip create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --public-ip-name myPublicIP \
   --name myFrontEndPool
@@ -648,7 +648,7 @@ azure network lb frontend-ip create --resource-group myResourceGroup \
 
 输出：
 
-```azurecli
+```
 info:    Executing command network lb frontend-ip create
 + Looking up the load balancer "myLoadBalancer"
 + Looking up the public ip "myPublicIP"
@@ -664,14 +664,14 @@ info:    network lb mySubnet-ip create command OK
 
 接下来，创建第二个 IP 池，用于传输后端流量。以下示例创建名为 `myBackEndPool` 的后端池：
 
-```azurecli
+```
 azure network lb address-pool create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myBackEndPool
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command network lb address-pool create
 + Looking up the load balancer "myLoadBalancer"
 + Updating load balancer "myLoadBalancer"
@@ -682,13 +682,13 @@ info:    network lb address-pool create command OK
 
 可以通过查看 `azure network lb show` 和 JSON 输出来了解负载均衡器的工作情况：
 
-```azurecli
+```
 azure network lb show myResourceGroup myLoadBalancer --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
   "etag": "W/"29c38649-77d6-43ff-ab8f-977536b0047c"",
   "provisioningState": "Succeeded",
@@ -728,7 +728,7 @@ azure network lb show myResourceGroup myLoadBalancer --json | jq '.'
 ## 创建虚拟机规模集 NAT 规则
 若要获取流经负载均衡器的流量，需要创建网络地址转换 (NAT) 规则来指定入站或出站操作。可以指定要使用的协议，然后根据需要将外部端口映射到内部端口。针对我们的环境，让我们创建一些规则，以允许通过负载均衡器对 VM 进行 SSH 访问。将 TCP 端口 4222 和 4223 设置为定向到 VM 上的 TCP 端口 22（稍后将会创建）。以下示例创建名为 `myLoadBalancerRuleSSH1` 的规则，用于将 TCP 端口 4222 映射到端口 22：
 
-```azurecli
+```
 azure network lb inbound-nat-rule create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myLoadBalancerRuleSSH1 \
   --protocol tcp --frontend-port 4222 --backend-port 22
@@ -736,7 +736,7 @@ azure network lb inbound-nat-rule create --resource-group myResourceGroup \
 
 输出：
 
-```azurecli
+```
 info:    Executing command network lb inbound-nat-rule create
 + Looking up the load balancer "myLoadBalancer"
 warn:    Using default enable floating ip: false
@@ -756,7 +756,7 @@ info:    network lb inbound-nat-rule create command OK
 
 对于第二个 NAT 规则中的 SSH 访问，重复该过程。以下示例创建名为 `myLoadBalancerRuleSSH2` 的规则，用于将 TCP 端口 4223 映射到端口 22：
 
-```azurecli
+```
 azure network lb inbound-nat-rule create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myLoadBalancerRuleSSH2 --protocol tcp \
   --frontend-port 4223 --backend-port 22
@@ -764,7 +764,7 @@ azure network lb inbound-nat-rule create --resource-group myResourceGroup \
 
 让我们继续为用于传输 Web 流量的 TCP 端口 80 创建 NAT 规则，并将该规则挂接到 IP 池。如果将规则挂接到 IP 池，而不是将规则逐个挂接到 VM，则可以在 IP 池中添加或删除 VM。然后，负载均衡器会自动调整流量流。以下示例创建名为 `myLoadBalancerRuleWeb` 的规则，用于将 TCP 端口 80 映射到端口 80：
 
-```azurecli
+```
 azure network lb rule create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myLoadBalancerRuleWeb --protocol tcp \
   --frontend-port 80 --backend-port 80 --frontend-ip-name myFrontEndPool \
@@ -773,7 +773,7 @@ azure network lb rule create --resource-group myResourceGroup \
 
 输出：
 
-```azurecli
+```
 info:    Executing command network lb rule create
 + Looking up the load balancer "myLoadBalancer"
 warn:    Using default idle timeout: 4
@@ -796,7 +796,7 @@ info:    network lb rule create command OK
 ## 创建虚拟机规模集运行状况探测
 运行状况探测定期检查受负载均衡器后面的 VM，以确保它们可以根据定义操作和响应请求。否则，将从操作中删除这些 VM，确保不会将用户定向到它们。可以针对运行状况探测定义自定义检查，以及间隔和超时值。有关运行状况探测的详细信息，请参阅 [Load Balancer probes](../load-balancer/load-balancer-custom-probe-overview.md)（虚拟机规模集探测）。以下示例创建名为 `myHealthProbe` 的 TCP 运行状况探测：
 
-```azurecli
+```
 azure network lb probe create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myHealthProbe --protocol "tcp" \
   --interval 15 --count 4
@@ -804,7 +804,7 @@ azure network lb probe create --resource-group myResourceGroup \
 
 输出：
 
-```azurecli
+```
 info:    Executing command network lb probe create
 warn:    Using default probe port: 80
 + Looking up the load balancer "myLoadBalancer"
@@ -831,14 +831,14 @@ info:    network lb probe create command OK
 
 让我们查看负载均衡器现在的情形：
 
-```azurecli
+```
 azure network lb show --resource-group myResourceGroup \
   --name myLoadBalancer --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
   "etag": "W/\"62a7c8e7-859c-48d3-8e76-5e078c5e4a02\"",
   "provisioningState": "Succeeded",
@@ -959,7 +959,7 @@ azure network lb show --resource-group myResourceGroup \
 
 以下示例创建名为 `myNic1` 的 NIC：
 
-```azurecli
+```
 azure network nic create --resource-group myResourceGroup --location chinanorth \
   --subnet-vnet-name myVnet --subnet-name mySubnet --name myNic1 \
   --lb-address-pool-ids /subscriptions/########-####-####-####-############/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLoadBalancer/backendAddressPools/myBackEndPool \
@@ -968,7 +968,7 @@ azure network nic create --resource-group myResourceGroup --location chinanorth 
 
 输出：
 
-```azurecli
+```
 info:    Executing command network nic create
 + Looking up the subnet "mySubnet"
 + Looking up the network interface "myNic1"
@@ -995,13 +995,13 @@ info:    network nic create command OK
 
 可以通过直接检查资源来查看详细信息。使用 `azure network nic show` 命令检查资源：
 
-```azurecli
+```
 azure network nic show myResourceGroup myNic1 --json | jq '.'
 ```
 
 输出：
 
-```json
+```
 {
   "etag": "W/\"fc1eaaa1-ee55-45bd-b847-5a08c7f4264a\"",
   "provisioningState": "Succeeded",
@@ -1043,7 +1043,7 @@ azure network nic show myResourceGroup myNic1 --json | jq '.'
 
 现在，我们将创建第二个 NIC 并同样将其挂接到后端 IP 池。这一次，第二个 NAT 规则将允许 SSH 流。以下示例创建名为 `myNic2` 的 NIC：
 
-```azurecli
+```
 azure network nic create --resource-group myResourceGroup --location chinanorth \
   --subnet-vnet-name myVnet --subnet-name mySubnet --name myNic2 \
   --lb-address-pool-ids  /subscriptions/########-####-####-####-############/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLoadBalancer/backendAddressPools/myBackEndPool \
@@ -1053,14 +1053,14 @@ azure network nic create --resource-group myResourceGroup --location chinanorth 
 ## 创建网络安全组和规则
 现在，我们创建网络安全组和用于控制 NIC 访问权限的入站规则。可将网络安全组应用到 NIC 或子网。定义用于控制传入和传出 VM 的流量流的规则。以下示例创建名为 `myNetworkSecurityGroup` 的网络安全组：
 
-```azurecli
+```
 azure network nsg create --resource-group myResourceGroup --location chinanorth \
   --name myNetworkSecurityGroup
 ```
 
 添加 NSG 的入站规则，允许端口 22 上的入站连接（以支持 SSH）。以下示例创建名为 `myNetworkSecurityGroupRuleSSH` 的规则，以便在 端口 22 上允许 TCP：
 
-```azurecli
+```
 azure network nsg rule create --resource-group myResourceGroup \
   --nsg-name myNetworkSecurityGroup --protocol tcp --direction inbound \
   --priority 1000 --destination-port-range 22 --access allow \
@@ -1069,7 +1069,7 @@ azure network nsg rule create --resource-group myResourceGroup \
 
 现在，添加 NSG 的入站规则，允许端口 80 上的入站连接（以支持 Web 流量）。以下示例创建名为 `myNetworkSecurityGroupRuleHTTP` 的规则，以便在 端口 80 上允许 TCP：
 
-```azurecli
+```
 azure network nsg rule create --resource-group myResourceGroup \
   --nsg-name myNetworkSecurityGroup --protocol tcp --direction inbound \
   --priority 1001 --destination-port-range 80 --access allow \
@@ -1084,14 +1084,13 @@ azure network nsg rule create --resource-group myResourceGroup \
 ## 绑定到 NIC
 将 NSG 绑定到 NIC。需要将 NIC 与网络安全组相连接。运行以下两个命令来挂接两个 NIC：
 
-```azurecli
+```
 azure network nic set --resource-group myResourceGroup --name myNic1 \
   --network-security-group-name myNetworkSecurityGroup
 ```
 
-<br/>  
 
-```azurecli
+```
 azure network nic set --resource-group myResourceGroup --name myNic2 \
   --network-security-group-name myNetworkSecurityGroup
 ```
@@ -1099,7 +1098,7 @@ azure network nic set --resource-group myResourceGroup --name myNic2 \
 ## 创建可用性集
 可用性集有助于将 VM 分散到容错域和升级域。让我们为 VM 创建一个可用性集。以下示例创建名为 `myAvailabilitySet` 的可用性集：
 
-```azurecli
+```
 azure availset create --resource-group myResourceGroup --location chinanorth
   --name myAvailabilitySet
 ```
@@ -1124,7 +1123,7 @@ azure availset create --resource-group myResourceGroup --location chinanorth
 
 我们使用 `azure vm create` 命令并结合所有资源和信息来创建 VM：
 
-```azurecli
+```
 azure vm create \
   --resource-group myResourceGroup \
   --name myVM1 \
@@ -1142,7 +1141,7 @@ azure vm create \
 
 输出：
 
-```azurecli
+```
 info:    Executing command vm create
 + Looking up the VM "myVM1"
 info:    Verifying the public key SSH file: /home/ahmet/.ssh/id_rsa.pub
@@ -1161,13 +1160,13 @@ info:    vm create command OK
 
 可以使用默认的 SSH 密钥立即连接到 VM。请确保指定适当的端口，因为我们要通过负载均衡器传递流量。（对于第一个 VM，设置 NAT 规则以将端口 4222 转发到 VM。）
 
-```bash
+```
 ssh ops@mypublicdns.chinanorth.chinacloudapp.cn -p 4222
 ```
 
 输出：
 
-```bash
+```
 The authenticity of host '[mypublicdns.chinanorth.chinacloudapp.cn]:4222 ([xx.xx.xx.xx]:4222)' can't be established.
 ECDSA key fingerprint is 94:2d:d0:ce:6b:fb:7f:ad:5b:3c:78:93:75:82:12:f9.
 Are you sure you want to continue connecting (yes/no)? yes
@@ -1189,7 +1188,7 @@ ops@myVM1:~$
 
 以相同的方式继续创建第二个 VM：
 
-```azurecli
+```
 azure vm create \
   --resource-group myResourceGroup \
   --name myVM2 \
@@ -1207,13 +1206,13 @@ azure vm create \
 
 现在，可以使用 `azure vm show myResourceGroup myVM1` 命令检查创建的内容。此时，已在 Azure 中运行了一个位于负载均衡器后面的 Ubuntu VM，只能使用 SSH 密钥对登录到该 VM（因为密码已禁用）。可以安装 nginx 或 httpd、部署 Web 应用，以及查看流量是否通过虚拟机规模集流向两个 VM。
 
-```azurecli
+```
 azure vm show --resource-group myResourceGroup --name myVM1
 ```
 
 输出：
 
-```azurecli
+```
 info:    Executing command vm show
 + Looking up the VM "TestVM1"
 + Looking up the NIC "myNic1"
@@ -1270,7 +1269,7 @@ info:    vm show command OK
 ## 将环境导出为模板
 现已构建此环境，如果要使用相同的参数创建与其相符的额外开发环境或生产环境，该怎么办？ Resource Manager 使用定义了所有环境参数的 JSON 模板。通过引用此 JSON 模板构建出整个环境。可以[手动构建 JSON 模板](../azure-resource-manager/resource-group-authoring-templates.md)，也可以通过导出现有环境来为自己创建 JSON 模板：
 
-```azurecli
+```
 azure group export --name myResourceGroup
 ```
 
@@ -1278,7 +1277,7 @@ azure group export --name myResourceGroup
 
 使用模板创建环境：
 
-```azurecli
+```
 azure group deployment create --resource-group myNewResourceGroup \
   --template-file myResourceGroup.json
 ```

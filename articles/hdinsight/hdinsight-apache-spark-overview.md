@@ -1,5 +1,3 @@
-<!-- not suitable for Mooncake -->
-
 ---
 title: HDInsight 中的 Apache Spark 概述 | Azure
 description: 介绍 HDInsight 中的 Apache Spark，以及可在应用程序中使用 HDInsight 上的 Spark 的情况。
@@ -63,6 +61,8 @@ HDInsight 中的 Apache Spark 将数据存储在 Azure Blob 内。商务专家�
 ### 迭代机器学习
 [查看教程：使用 HVAC 数据预测建筑物温度](./hdinsight-apache-spark-ipython-notebook-machine-learning.md)
 
+[查看教程：预测食品检测结果](./hdinsight-apache-spark-machine-learning-mllib-ipython.md)
+
 Apache Spark 随附 [MLlib](http://spark.apache.org/mllib/) - 构建在 Spark 基础之上的机器学习库。此外，HDInsight 上的 Spark 还包含 Anaconda - 为机器学习提供各种包的 Python 分发版。结合内置的 Jupyter 笔记本支持，你将拥有最先进的机器学习应用程序创建环境。
 
 ### 流式处理和实时数据分析
@@ -87,9 +87,12 @@ HDInsight 中的 Spark 还提供 [ODBC 驱动程序](http://go.microsoft.com/fwl
 ### 方案
 * [Spark 和 BI：使用 HDInsight 中的 Spark 和 BI 工具执行交互式数据分析](./hdinsight-apache-spark-use-bi-tools.md)
 * [Spark 和机器学习：使用 HDInsight 中的 Spark 对使用 HVAC 数据生成温度进行分析](./hdinsight-apache-spark-ipython-notebook-machine-learning.md)
+* [Spark 和机器学习：使用 HDInsight 中的 Spark 预测食品检查结果](./hdinsight-apache-spark-machine-learning-mllib-ipython.md)
 * [Spark 流式处理：使用 HDInsight 中的 Spark 生成实时流式处理应用程序](./hdinsight-apache-spark-eventhub-streaming.md)
+* [使用 HDInsight 中的 Spark 分析网站日志](./hdinsight-apache-spark-custom-library-website-log-analysis.md)
 
 ### 创建和运行应用程序
+* [使用 Scala 创建独立的应用程序](./hdinsight-apache-spark-create-standalone-application.md)
 * [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展

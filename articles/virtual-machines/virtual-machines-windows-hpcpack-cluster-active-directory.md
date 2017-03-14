@@ -65,7 +65,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
 
 6. 单击“保存”。完成保存后，单击“管理清单”。此操作将下载应用程序的清单 JavaScript 对象表示法 (JSON) 文件。通过找到 `appRoles` 设置并将添加以下应用程序角色来编辑下载的清单：
 
-    ```json
+    ```
     "appRoles": [
         {
         "allowedMemberTypes": [
@@ -119,7 +119,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
 
 3. 运行以下命令：
 
-    ```powershell
+    ```
     Set-HpcClusterRegistry -SupportAAD true -AADInstance https://login.chinacloudapi.cn/ -AADAppName HpcClusterServer -AADTenant <your AAD tenant name> -AADClientAppId <client ID> -AADClientAppRedirectUri http://hpcclient
     ```
 
@@ -132,7 +132,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
 
     在具有多个头节点的群集中，可以在头节点上运行以下 PowerShell 命令，切换 HpcSchedulerStateful 服务的主副本：
 
-    ```powershell
+    ```
     Connect-ServiceFabricCluster
 
     Move-ServiceFabricPrimaryReplica -ServiceName "fabric:/HpcApplication/SchedulerStatefulService"
@@ -152,7 +152,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
 
 例如，完成前面的步骤后，可以从本地客户端查询作业，如下所示：
 
-```powershell
+```
 Get-HpcJob -State All -Scheduler https://<Azure load balancer DNS name> -Owner <Azure AD account>
 ```
 
@@ -162,7 +162,7 @@ Get-HpcJob -State All -Scheduler https://<Azure load balancer DNS name> -Owner <
 
 HPC Pack 2016 提供两个新的 HPC PowerShell cmdlet 来管理本地令牌缓存。这些 cmdlet 可用于以非交互方式提交作业。请参阅以下示例：
 
-```powershell
+```
 Remove-HpcTokenCache
 
 $SecurePassword = "<password>" | ConvertTo-SecureString -AsPlainText -Force
@@ -176,7 +176,7 @@ Set-HpcTokenCache -UserName <AADUsername> -Password $SecurePassword -scheduler h
 
 1. 使用以下命令以设置凭据：
 
-    ```powershell
+    ```
     $localUser = "<username>"
 
     $localUserPassword="<password>"
@@ -190,7 +190,7 @@ Set-HpcTokenCache -UserName <AADUsername> -Password $SecurePassword -scheduler h
 
 2. 然后提交作业，如下所示。作业/任务在计算节点的 $localUser 下运行。
 
-    ```powershell
+    ```
     $emptycreds = New-Object System.Management.Automation.PSCredential ($localUser, (new-object System.Security.SecureString))
     ...
     $job = New-HpcJob -Scheduler https://<Azure load balancer DNS name>
@@ -206,13 +206,13 @@ Set-HpcTokenCache -UserName <AADUsername> -Password $SecurePassword -scheduler h
 
     * 为 Azure AD 帐户本身设置扩展的数据
 
-        ```powershell
+        ```
         Set-HpcJobCredential -Scheduler https://<Azure load balancer DNS name> -ExtendedData <data> -AadUser
         ```
 
     * 设置扩展的数据和 HPC 群集的运行方式用户
 
-        ```powershell
+        ```
         Set-HpcJobCredential -Credential $mycreds -Scheduler https://<Azure load balancer DNS name> -ExtendedData <data>
         ```
 

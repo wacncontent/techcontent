@@ -19,6 +19,10 @@ ms.author: adegeo
 
 # 在 Azure 中为应用程序配置 SSL
 
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./cloud-services-configure-ssl-certificate-portal.md)
+- [Azure 经典管理门户](./cloud-services-configure-ssl-certificate.md)
+
 安全套接字层 (SSL) 加密是用于保护通过 Internet 发送的数据的最常见方法。此常见任务讨论了如何为 Web 角色指定 HTTPS 终结点以及如何上载 SSL 证书来保护你的应用程序。
 
 > [!NOTE]
@@ -51,7 +55,7 @@ ms.author: adegeo
 
 1.  在你的开发环境中，打开服务定义文件 (CSDEF)，在 **WebRole** 节中添加 **Certificates** 节，并包含以下证书（和中间证书）的相关信息：
 
-    ```xml
+    ```
     <WebRole name="CertificateTesting" vmsize="Small">
     ...
         <Certificates>
@@ -84,9 +88,9 @@ ms.author: adegeo
     | limitedOrElevated | **（默认）**所有角色进程都可以访问该私钥。 |
     | elevated | 仅提升的进程可以访问该私钥。|
 
-2.  在你的服务定义文件中，在** Endpoints** 节中添加 **InputEndpoint** 元素以启用 HTTPS：
+2.  在你的服务定义文件中，在 **Endpoints** 节中添加 **InputEndpoint** 元素以启用 HTTPS：
 
-    ```xml
+    ```
     <WebRole name="CertificateTesting" vmsize="Small">
     ...
         <Endpoints>
@@ -99,7 +103,7 @@ ms.author: adegeo
 
 3.  在你的服务定义文件中，在 **Sites** 节中添加 **Binding** 元素。此节添加 HTTPS 绑定以将终结点映射到您的网站：
 
-    ```xml
+    ```
     <WebRole name="CertificateTesting" vmsize="Small">
     ...
         <Sites>
@@ -115,9 +119,9 @@ ms.author: adegeo
 
     对服务定义文件进行的所有必需更改已完成，但还需要将证书信息添加到服务配置文件中。
 
-4.  在你的服务配置文件 (CSCFG) ServiceConfiguration.Cloud.cscfg 中，在** Role** 节中添加 **Certificates **节，并将下面显示的示例指纹值替换为你的证书的指纹值：
+4.  在你的服务配置文件 (CSCFG) ServiceConfiguration.Cloud.cscfg 中，在 **Role** 节中添加 **Certificates** 节，并将下面显示的示例指纹值替换为你的证书的指纹值：
 
-    ```xml
+    ```
     <Role name="Deployment">
     ...
         <Certificates>

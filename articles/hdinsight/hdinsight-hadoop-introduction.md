@@ -53,7 +53,7 @@ HDInsight 提供以下群集类型：
 
 * [Hue](./hdinsight-hadoop-hue-linux.md)：一组 Web 应用程序，用来与群集交互。仅 Linux 群集。
 * [Giraph](./hdinsight-hadoop-giraph-install-linux.md)：通过图形处理对事物或人员之间的关系建模。
-* [R](./hdinsight-hadoop-r-scripts.md)：机器学习中用于统计计算的开源语言和环境。
+* [R](./hdinsight-hadoop-r-scripts-linux.md)：机器学习中用于统计计算的开源语言和环境。
 * [Solr](./hdinsight-hadoop-solr-install-linux.md)：允许对数据进行全文搜索的企业级搜索平台。
 
 有关开发你自己的脚本操作的信息，请参阅[使用 HDInsight 进行脚本操作开发](./hdinsight-hadoop-script-actions-linux.md)。
@@ -85,7 +85,7 @@ Apache Ambari 用于设置、管理和监视 Apache Hadoop 群集。它包括一
 请参阅[使用 Ambari 管理 HDInsight 群集](./hdinsight-hadoop-manage-ambari.md)（仅限 Linux）、[使用 Ambari API 监视 HDInsight 中的 Hadoop 群集](./hdinsight-monitor-use-ambari-api.md)和 <a target="_blank" href="https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md">Apache Ambari API 参考</a>。
 
 ### <a name="avro"></a>Avro (Microsoft .NET Library for Avro)
-Microsoft .NET Library for Avro 针对 Microsoft.NET 环境序列化实现了 Apache Avro 紧凑的二进制数据交换格式。它使用 <a target="_blank" href="http://www.json.org/">JavaScript 对象表示法 (JSON)</a> 定义与语言无关的架构，以支持语言互操作性，这意味着可以用一种语言读取以另一种语言序列化的数据。<a target=_"blank" href="http://avro.apache.org/docs/current/spec.html">Apache Avro 规范</a>中可找到有关格式的详细信息。Avro 文件格式支持分布式 MapReduce 编程模型。文件是“可拆分的”，这意味着可搜寻文件中的任意点，并可从某特定块开始读取。若要了解相关方法，请参阅[使用 Microsoft .NET Library for Avro 序列化数据](./hdinsight-dotnet-avro-serialization.md)。
+Microsoft .NET Library for Avro 针对 Microsoft.NET 环境序列化实现了 Apache Avro 紧凑的二进制数据交换格式。它使用 <a target="_blank" href="http://www.json.org/">JavaScript 对象表示法 (JSON)</a> 定义与语言无关的架构，以支持语言互操作性，这意味着可以用一种语言读取以另一种语言序列化的数据。<a target="_blank" href="http://avro.apache.org/docs/current/spec.html">Apache Avro 规范</a>中可找到有关格式的详细信息。Avro 文件格式支持分布式 MapReduce 编程模型。文件是“可拆分的”，这意味着可搜寻文件中的任意点，并可从某特定块开始读取。若要了解相关方法，请参阅[使用 Microsoft .NET Library for Avro 序列化数据](./hdinsight-dotnet-avro-serialization.md)。
 
 ### <a name="hdfs" id="HDFS"></a>HDFS
 Hadoop 分布式文件系统 (HDFS) 是一种分布式文件系统，采用 MapReduce 和 YARN，是 Hadoop 生态系统的核心。HDFS 是 HDInsight 上 Hadoop 群集的标准文件系统。

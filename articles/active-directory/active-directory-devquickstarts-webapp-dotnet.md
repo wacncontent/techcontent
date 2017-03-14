@@ -65,7 +65,7 @@ ms.author: dastrock
 
     C#
 
-    ```C#
+    ```
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -79,7 +79,7 @@ ms.author: dastrock
 
     C#
 
-    ```C#
+    ```
     public void ConfigureAuth(IAppBuilder app)
     {
         app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
@@ -108,7 +108,7 @@ ms.author: dastrock
 
     C#
 
-    ```C#
+    ```
     [Authorize]
     public ActionResult About()
     {
@@ -119,7 +119,7 @@ ms.author: dastrock
 
     C#
 
-    ```C#
+    ```
     public void SignIn()
     {
         // Send an OpenID Connect sign-in request.
@@ -140,7 +140,7 @@ ms.author: dastrock
 
     HTML
 
-    ```HTML
+    ```
     @if (Request.IsAuthenticated)
     {
         <text>
@@ -169,7 +169,7 @@ ms.author: dastrock
 
     C#
 
-    ```C#
+    ```
     public ActionResult About()
     {
         ViewBag.Name = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;

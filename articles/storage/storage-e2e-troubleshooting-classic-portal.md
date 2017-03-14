@@ -104,14 +104,14 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 
 1. 使用 [Add-AzureAccount](http://msdn.microsoft.com/zh-cn/library/azure/dn722528.aspx) cmdlet 将 Azure 用户帐户添加到 PowerShell 窗口中：
 
-    ```powershell
+    ```
     Add-AzureAccount -Environment azurechinacloud
     ```
 
 2. 在“登录 Azure”窗口中，键入与你的帐户关联的电子邮件地址和密码。Azure 将对凭据信息进行身份验证和保存，然后关闭该窗口。
 3. 通过在 PowerShell 窗口中执行以下命令，将默认存储帐户设置为用于本教程的存储帐户：
 
-    ```powershell
+    ```
     $SubscriptionName = 'Your subscription name'
     $StorageAccountName = 'yourstorageaccount' 
     Set-AzureSubscription -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName 
@@ -119,13 +119,13 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 
 4. 为 Blob 服务启用存储日志记录：
 
-    ```powershell
+    ```
     Set-AzureStorageServiceLoggingProperty -ServiceType Blob -LoggingOperations Read,Write,Delete -PassThru -RetentionDays 7 -Version 1.0 
     ```
 
 5. 为 Blob 服务启用存储度量值，确保将 **-MetricsType** 设置为 `Minute`：
 
-    ```powershell
+    ```
     Set-AzureStorageServiceMetricsProperty -ServiceType Blob -MetricsType Minute -MetricsLevel ServiceAndApi -PassThru -RetentionDays 7 -Version 1.0 
     ```
 
@@ -193,7 +193,7 @@ Azure 存储将服务器日志数据写入 Blob，将度量值写入表。存储
 
 可以使用 AzCopy 命令行工具将这些服务器端日志文件下载到你本地计算机上的所选位置。例如，可以使用以下命令将发生于 2015 年 1 月 2 日 Blob 操作的日志文件下载到文件夹 `C:\Temp\Logs\Server`；将 `<storageaccountname>` 替换为存储帐户名称，将 `<storageaccountkey>` 替换为帐户访问密钥：
 
-```azcopy
+```
 AzCopy.exe /Source:http://<storageaccountname>.blob.core.chinacloudapi.cn/$logs /Dest:C:\Temp\Logs\Server /Pattern:"blob/2015/01/02" /SourceKey:<storageaccountkey> /S /V
 ```
 

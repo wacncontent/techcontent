@@ -104,7 +104,7 @@ npm install restify
 
 Shell
 
-```Shell
+```
 clang: error: no such file or directory: 'HD/azuread/node_modules/restify/node_modules/dtrace-provider/libusdt'
 make: *** [Release/DTraceProviderBindings.node] Error 1
 gyp ERR! build error
@@ -234,7 +234,7 @@ cd azuread
 
 Javascript
 
-```Javascript
+```
 'use strict';
 
 /**
@@ -269,7 +269,7 @@ cd azuread
 
 Javascript
 
-```Javascript
+```
  exports.creds = {
      mongoose_auth_local: 'mongodb://localhost/tasklist', // Your mongo auth uri goes here
      clientID: 'your client ID',
@@ -300,7 +300,7 @@ cd azuread
 
 Javascript
 
-```Javascript
+```
 var config = require('./config');
 ```
 
@@ -308,7 +308,7 @@ var config = require('./config');
 
 Javascript
 
-```Javascript
+```
 var options = {
     // The URL of the metadata document for your app. We will put the keys for token validation from the URL found in the jwks_uri tag of the in the metadata.
     identityMetadata: config.creds.identityMetadata,
@@ -385,7 +385,7 @@ cd azuread
 
 Javascript
 
-```Javascript
+```
 // Connect to MongoDB
 global.db = mongoose.connect(serverURI);
 var Schema = mongoose.Schema;
@@ -418,7 +418,7 @@ Restify 路由的典型模式是：
 
 Javascript
 
-```Javascript
+```
 function createObject(req, res, next) {
 
 // do work on Object
@@ -451,7 +451,7 @@ cd azuread
 
 Javascript
 
-```Javascript
+```
 /**
  *
  * APIs for our REST Task server
@@ -637,7 +637,7 @@ Restify（和 Express）允许对 REST API 服务器执行大量的深度自定�
 
 Javascript
 
-```Javascript
+```
 /**
  * Our Server
  */
@@ -680,7 +680,7 @@ server.use(restify.bodyParser({
 
 Javascript
 
-```Javascript
+```
 /// Now the real handlers. Here we just CRUD
 /**
 /*
@@ -758,7 +758,7 @@ $ curl -isS http://127.0.0.1:8080 | json
 
 Shell
 
-```Shell
+```
 HTTP/1.1 200 OK
 Connection: close
 Content-Type: application/json
@@ -785,7 +785,7 @@ $ curl -isS -X POST http://127.0.0.1:8080/tasks/brandon/Hello
 
 Shell
 
-```Shell
+```
 HTTP/1.1 201 Created
 Connection: close
 Access-Control-Allow-Origin: *
@@ -822,7 +822,7 @@ cd azuread
 
 Javascript
 
-```Javascript
+```
 // Let's start using Passport.js
 
 server.use(passport.initialize()); // Starts passport
@@ -838,7 +838,7 @@ server.use(passport.session()); // Provides session support
 
 Javascript
 
-```Javascript
+```
 /**
 /*
 /* Calling the OIDCBearerStrategy and managing users
@@ -899,7 +899,7 @@ Passport 对其所有策略（Twitter、Facebook 等）都使用所有策略写�
 
 Javascript
 
-```Javascript
+```
 server.get('/tasks', passport.authenticate('oauth-bearer', {
 session: false
 }), listTasks);
@@ -959,7 +959,7 @@ $ curl -isS -X POST http://127.0.0.1:8080/tasks/brandon/Hello
 
 Shell
 
-```Shell
+```
 HTTP/1.1 401 Unauthorized
 Connection: close
 WWW-Authenticate: Bearer realm="Users"

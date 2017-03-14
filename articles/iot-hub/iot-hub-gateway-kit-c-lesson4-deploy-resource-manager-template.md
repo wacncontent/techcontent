@@ -48,7 +48,7 @@ Azure Functions 是一种解决方案，可轻松地在云中运行 _函数_ （
 
 转到 `iot-hub-c-intel-nuc-gateway-getting-started` 存储库文件夹，初始化配置文件，然后运行以下命令，在 Visual Studio Code 中打开示例项目：
 
-```bash
+```
     cd Lesson4
     npm install
     gulp init
@@ -71,7 +71,7 @@ Azure Functions 是一种解决方案，可轻松地在云中运行 _函数_ （
 
     更新 `arm-template-param.json` 文件后，请运行以下命令，将资源部署到 Azure：
 
-    ```bash
+    ```
     az group deployment create --template-file arm-template.json --parameters @arm-template-param.json -g iot-gateway
     ```
 

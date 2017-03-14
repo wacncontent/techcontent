@@ -86,7 +86,7 @@ Install MongoDB from [http://www.mongodb.org](http://www.mongodb.org).
 
 Shell
 
-```Shell
+```
 clang: error: no such file or directory: 'HD/azuread/node_modules/restify/node_modules/dtrace-provider/libusdt'
 make: *** [Release/DTraceProviderBindings.node] Error 1
 gyp ERR! build error
@@ -235,7 +235,7 @@ server.js 文件将提供 Web API 服务器的大多数功能。我们要将大�
 
 Javascript
 
-```Javascript
+```
 'use strict';
 /**
 * Module dependencies.
@@ -264,7 +264,7 @@ var OIDCBearerStrategy = require('passport-azure-ad').OIDCStrategy;
 
 Javascript
 
-```Javascript
+```
 // Don't commit this file to your public repos. This config is for first-run
 exports.creds = {
 mongoose_auth_local: 'mongodb://localhost/tasklist', // Your mongo auth uri goes here
@@ -295,7 +295,7 @@ identityMetadata: 'https://login.microsoftonline.com/common/.well-known/openid-c
 
 Javascript
 
-```Javascript
+```
 var config = require('./config');
 ```
 
@@ -303,7 +303,7 @@ var config = require('./config');
 
 Javascript
 
-```Javascript
+```
 // We pass these options in to the ODICBearerStrategy.
 var options = {
 // The URL of the metadata document for your app. We will put the keys for token validation from the URL found in the jwks_uri tag of the in the metadata.
@@ -352,7 +352,7 @@ COMPLETED - 任务是否已完成。一个***布尔值***
 
 Javascript
 
-```Javascript
+```
 // MongoDB setup
 // Setup some configuration
 var serverPort = process.env.PORT || 8080;
@@ -371,7 +371,7 @@ log.info('MongoDB Schema loaded');
 
 Javascript
 
-```Javascript
+```
 // Here we create a schema to store our tasks and users. Pretty simple schema for now.
 var TaskSchema = new Schema({
 owner: String,
@@ -398,7 +398,7 @@ Restify 路由的典型模式是：
 
 Javascript
 
-```Javascript
+```
 function createObject(req, res, next) {
 // do work on Object
 _object.name = req.params.object; // passed value is in req.params under object
@@ -423,7 +423,7 @@ server.post('/service/:add/:object', createObject); // calls createObject on rou
 
 Javascript
 
-```Javascript
+```
 /**
 *
 * APIs for our REST Task server
@@ -531,7 +531,7 @@ return next();
 
 Javascript
 
-```Javascript
+```
 ///--- Errors for communicating something interesting back to the client
 function MissingTaskError() {
 restify.RestError.call(this, {
@@ -575,7 +575,7 @@ Restify（和 Express）允许你对 REST API 执行大量的深度自定义，�
 
 Javascript
 
-```Javascript
+```
 /**
 * Our Server
 */
@@ -611,7 +611,7 @@ mapParams: true
 
 Javascript
 
-```Javascript
+```
 /// Now the real handlers. Here we just CRUD
 /**
 /*
@@ -684,7 +684,7 @@ consoleMessage += '+++++++++++++++++++++++++++++++++++++++++++++++++++++ \n\n';
 
 Shell
 
-```Shell
+```
 HTTP/1.1 2.0OK
 Connection: close
 Content-Type: application/json
@@ -709,7 +709,7 @@ Date: Tue, 14 Jul 2015 05:43:38 GMT
 
 Shell
 
-```Shell
+```
 HTTP/1.1 201 Created
 Connection: close
 Access-Control-Allow-Origin: *
@@ -744,7 +744,7 @@ Hello
 
 Javascript
 
-```Javascript
+```
 // Let's start using Passport.js
 
 server.use(passport.initialize()); // Starts passport
@@ -758,7 +758,7 @@ server.use(passport.session()); // Provides session support
 
 Javascript
 
-```Javascript
+```
 /**
 /*
 /* Calling the OIDCBearerStrategy and managing users
@@ -814,7 +814,7 @@ Passport 使用适用于它的所有策略（Twitter、Facebook 等），所有�
 
 Javascript
 
-```Javascript
+```
 server.get('/tasks', passport.authenticate('oidc-bearer', {
 session: false
 }), listTasks);
@@ -873,7 +873,7 @@ $ node server.js
 
 Shell
 
-```Shell
+```
 HTTP/1.1 401 Unauthorized
 Connection: close
 WWW-Authenticate: Bearer realm="Users"

@@ -12,9 +12,9 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/04/2016
+ms.date: 01/13/2017
 ms.author: sethm
-wacn.date: 01/09/2017
+wacn.date: 02/20/2017
 ---
 
 # 异步消息传送模式和高可用性
@@ -107,13 +107,13 @@ Azure 中的其他组件可能偶尔会发生服务问题。例如，当服务�
 
 成对命名空间功能包含针对 [Microsoft.ServiceBus.Messaging.MessagingFactory][] 类的 [PairNamespaceAsync][] 方法：
 
-```csharp
+```
     public Task PairNamespaceAsync(PairedNamespaceOptions options);
 ```
 
 任务完成后，命名空间配对也随即完成并可以响应使用 [MessagingFactory][] 实例创建的任何 [MessageReceiver][]、[QueueClient][] 或 [TopicClient][]。[Microsoft.ServiceBus.Messaging.PairedNamespaceOptions][] 是各种配对类型的基类，可通过 [MessagingFactory][] 对象使用它。目前，唯一的派生类名为 [SendAvailabilityPairedNamespaceOptions][]，它可实现发送可用性要求。[SendAvailabilityPairedNamespaceOptions][] 具有一组相互依存的构造函数。查看参数最多的构造函数，你就能理解其他构造函数的行为。
 
-```csharp
+```
     public SendAvailabilityPairedNamespaceOptions(
         NamespaceManager secondaryNamespaceManager,
         MessagingFactory messagingFactory,
@@ -136,14 +136,14 @@ Azure 中的其他组件可能偶尔会发生服务问题。例如，当服务�
 
 若要使用的代码，请创建一个 [MessagingFactory][] 主实例、一个 [MessagingFactory][] 辅助实例、一个 [NamespaceManager][] 辅助实例，和一个 [SendAvailabilityPairedNamespaceOptions][] 实例。调用可以很简单，如下所示：
 
-```csharp
+```
     SendAvailabilityPairedNamespaceOptions sendAvailabilityOptions = new SendAvailabilityPairedNamespaceOptions(secondaryNamespaceManager, secondary);
     primary.PairNamespaceAsync(sendAvailabilityOptions).Wait();
 ```
 
 当 [PairNamespaceAsync][] 方法返回的任务完成后，所有内容都已设置完毕并且可供使用。在该任务返回之前，你可能尚未完成使所有配对正确工作所需的后台工作。因此，应在任务返回后才开始发送消息。如果出现任何故障（例如凭据错误或无法创建积压工作队列），则会在该任务完成后立即引发这些异常。该任务返回后，请通过检查 [SendAvailabilityPairedNamespaceOptions][] 实例的 [BacklogQueueCount][] 属性来验证已找到或创建队列。对于前面的代码，该操作将显示如下：
 
-```csharp
+```
     if (sendAvailabilityOptions.BacklogQueueCount < 1)
     {
         // Handle case where no queues were created.
@@ -175,3 +175,4 @@ Azure 中的其他组件可能偶尔会发生服务问题。例如，当服务�
   [成对命名空间]: ./service-bus-paired-namespaces.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->
+<!--Update_Description:update meta properties-->

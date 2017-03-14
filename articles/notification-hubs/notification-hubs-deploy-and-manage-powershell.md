@@ -55,7 +55,7 @@ Azure PowerShell 中的 PowerShell cmdlet 尚不支持管理 Azure 通知中心�
 
 powershell
 
-```powershell
+```
     try
     {
         # WARNING: Make sure to reference the latest version of Microsoft.Azure.NotificationHubs.dll
@@ -82,7 +82,7 @@ powershell
 
 powershell
 
-```powershell
+```
 $sbr = Get-AzureSBAuthorizationRule -Namespace $Namespace
 # Create the NamespaceManager object to create the hub
 Write-Output "Creating a NamespaceManager object for the [$Namespace] namespace..."
@@ -109,7 +109,7 @@ Write-Output "NamespaceManager object for the [$Namespace] namespace has been su
 
 powershell
 
-```powershell
+```
 $Namespace = "<Enter your namespace>"
 $Path  = "<Enter a name for your notification hub>"
 $WnsPackageSid = "<your package sid>"

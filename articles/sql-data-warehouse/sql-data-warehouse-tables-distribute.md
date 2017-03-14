@@ -66,7 +66,7 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 
 这两个示例都将创建轮循机制表：
 
-```SQL
+```
 -- Round Robin created by default
 CREATE TABLE [dbo].[FactInternetSales]
 (   [ProductKey]            int          NOT NULL
@@ -107,7 +107,7 @@ WITH
 
 本示例将创建基于 ID 分布的表：
 
-```SQL
+```
 CREATE TABLE [dbo].[FactInternetSales]
 (   [ProductKey]            int          NOT NULL
 ,   [OrderDateKey]          int          NOT NULL
@@ -181,14 +181,14 @@ WITH
 
 识别表偏斜的简单方法是使用 `DBCC PDW_SHOWSPACEUSED`。这是一种非常快捷简便的方法，可以查看存储在数据库中每组 60 个分布区内的表行数目。请记住，为了获得最平衡的性能，分布式表中的行应该平均分散在所有分布区中。
 
-```sql
+```
 -- Find data skew for a distributed table
 DBCC PDW_SHOWSPACEUSED('dbo.FactInternetSales');
 ```
 
 但是，如果你查询 Azure SQL 数据仓库动态管理视图 (DMV)，则可以执行更详细的分析。若要开始，请使用 [Table Overview][Overview]（表概述）一文中的 SQL 创建 <!--[-->dbo.vTableSizes<!--][]--> 视图。创建该视图后，运行此查询来识别哪些表有 10% 以上的数据偏斜。
 
-```sql
+```
 select *
 from dbo.vTableSizes 
 where two_part_name in 
@@ -215,7 +215,7 @@ order by two_part_name, row_count
 
 本示例使用 [CTAS][] 来重新创建具有不同哈希分布列的表。
 
-```sql
+```
 CREATE TABLE [dbo].[FactInternetSales_CustomerKey] 
 WITH (  CLUSTERED COLUMNSTORE INDEX
     ,  DISTRIBUTION =  HASH([CustomerKey])
@@ -255,7 +255,7 @@ RENAME OBJECT [dbo].[FactInternetSales_CustomerKey] TO [FactInternetSales];
 
 本示例使用 [CTAS][] 来重新创建具有轮循机制分布而不是哈希分布的表。这种变化将生成平均的数据分布，但代价是数据移动加大。
 
-```sql
+```
 CREATE TABLE [dbo].[FactInternetSales_ROUND_ROBIN] 
 WITH (  CLUSTERED COLUMNSTORE INDEX
     ,  DISTRIBUTION =  ROUND_ROBIN

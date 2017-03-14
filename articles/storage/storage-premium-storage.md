@@ -447,7 +447,7 @@ sudo yum install microsoft-hyper-v
 1. 根据[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中提供的步骤设置 PowerShell 环境。
 2. 启动 PowerShell 控制台，连接到订阅，并在控制台窗口中运行以下 PowerShell cmdlet。如此 PowerShell 语句中所示，创建高级存储帐户时，必须将 **Type** 参数指定为 **Premium\_LRS**。
 
-    ```powershell
+    ```
     New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
     ```
 
@@ -455,7 +455,7 @@ sudo yum install microsoft-hyper-v
 
 接下来，请创建新的 DS 系列 VM，并在控制台窗口中运行以下 PowerShell cmdlet 以指定要使用高级存储：
 
-```powershell
+```
     $storageAccount = "yourpremiumaccount"
     $adminName = "youradmin"
     $adminPassword = "yourpassword"
@@ -473,7 +473,7 @@ sudo yum install microsoft-hyper-v
 
 如果希望 VM 有更多的磁盘空间，请在创建虚拟机后于控制台窗口中运行以下 PowerShell cmdlet 以将新的数据磁盘附加到支持高级存储的现有 VM：
 
-```powershell
+```
     $storageAccount = "yourpremiumaccount"
     $vmName ="yourVM"
     $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
@@ -487,7 +487,7 @@ sudo yum install microsoft-hyper-v
 
 若要更新磁盘缓存策略，请记下附加的数据磁盘的 LUN 编号。运行以下命令，将附加到 LUN 编号 2 的数据磁盘更新为 ReadOnly。
 
-```powershell
+```
     Get-AzureVM "myservice" -name "MyVM" | Set-AzureDataDisk -LUN 2 -HostCaching ReadOnly | Update-AzureVM
 ```
 

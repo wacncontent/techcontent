@@ -1,6 +1,6 @@
 ---
-title: 用于管理 Azure 资源的活动日志 | Azure
-description: 使用 Resource Manager 中的活动日志查看用户操作和错误。显示 Azure 门户预览版、PowerShell、Azure CLI 和 REST。
+title: 查看 Azure 活动日志，以便监视资源 | Azure
+description: 使用活动日志查看用户操作和错误。显示 Azure 门户预览、PowerShell、Azure CLI 和 REST。
 services: azure-resource-manager
 documentationcenter: ''
 author: tfitzmac
@@ -14,11 +14,11 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
-wacn.date: 01/25/2017
+wacn.date: 03/03/2017
 ms.author: tomfitz
 ---
 
-# 通过查看活动日志管理 Azure 资源
+# 查看活动日志，以便审核对资源的操作
 通过活动日志，可以确定：
 
 * 对订阅中的资源执行了什么操作
@@ -67,29 +67,31 @@ ms.author: tomfitz
 ## PowerShell
 1. 若要检索日志条目，请运行 **Get-AzureRmLog** 命令。你可以提供附加参数来筛选条目列表。如果未指定开始和结束时间，将返回最后一个小时的条目。例如，若要检索过去一小时针对某个资源组的操作，请运行：
 
-    ```powershell
+    ```
     Get-AzureRmLog -ResourceGroup ExampleGroup
     ```
 
     以下示例演示了如何使用活动日志来调查在指定时间内执行的操作。开始日期和结束日期以日期格式指定。
 
-    ```powershell
+    ```
     Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime 2015-08-28T06:00 -EndTime 2015-09-10T06:00
     ```
 
     或者，可以使用 date 函数来指定日期范围，例如过去 14 天。
 
-    ```powershell
+    ```
     Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14)
     ```
 
 2. 根据指定的开始时间，前面的命令可能会返回对该资源组执行的一长串操作。你可以提供搜索条件，以筛选所要查找的结果。例如，若要调查 Web 应用的停止方式，可运行以下命令：
 
-      Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14) | Where-Object OperationName -eq Microsoft.Web/sites/stop/action
+    ```
+    Get-AzureRmLog -ResourceGroup ExampleGroup -StartTime (Get-Date).AddDays(-14) | Where-Object OperationName -eq Microsoft.Web/sites/stop/action
+    ```
 
     就此示例来说，该命令显示 someone@contoso.com 执行了停止操作。
 
-    ```powershell
+    ```
     Authorization     :
     Scope     : /subscriptions/xxxxx/resourcegroups/ExampleGroup/providers/Microsoft.Web/sites/ExampleSite
     Action    : Microsoft.Web/sites/stop/action
@@ -109,13 +111,13 @@ ms.author: tomfitz
 
 3. 你可以查看特定用户针对某个资源组执行的操作，即使该资源组不再存在。
 
-    ```powershell
+    ```
     Get-AzureRmLog -ResourceGroup deletedgroup -StartTime (Get-Date).AddDays(-14) -Caller someone@contoso.com
     ```
 
 4. 可以筛选失败的操作。
 
-    ```powershell
+    ```
     Get-AzureRmLog -ResourceGroup ExampleGroup -Status Failed
     ```
 
@@ -136,7 +138,7 @@ ms.author: tomfitz
 ## Azure CLI
 * 若要检索日志条目，请运行 **azure group log show** 命令。
 
-    ```azurecli
+    ```
     azure group log show ExampleGroup --json
     ```
 
@@ -149,5 +151,5 @@ ms.author: tomfitz
 * 若要了解查看部署操作的命令，请参阅[查看部署操作](./resource-manager-deployment-operations.md)。
 * 若要了解如何防止对所有用户的资源执行删除操作，请参阅[使用 Azure Resource Manager 锁定资源](./resource-group-lock-resources.md)。
 
-<!---HONumber=Mooncake_0120_2017-->
-<!-- Update_Description: update meta properties ; wording update ; update link references ; add quick review feature via built-in query , e.g. fail deployment. -->
+<!---HONumber=Mooncake_0227_2017-->
+<!-- Update_Description: update meta properties ; wording update-->

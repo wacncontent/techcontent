@@ -12,8 +12,8 @@ ms.workload: tbd
 ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
-ms.date: 12/13/2016
-wacn.date: 01/25/2017
+ms.date: 01/06/2017
+wacn.date: 03/01/2017
 ms.author: sdanie
 ---
 
@@ -232,7 +232,7 @@ System.TimeoutException: Timeout performing MGET 2728cc84-58ae-406b-8ec8-3f96241
 
 1. 请确保你在使用 StackExchange.Redis 客户端时，按照以下模式进行连接，这是一种最佳做法。
 
-    ```c#
+    ```
     private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
     {
         return ConnectionMultiplexer.Connect("cachename.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");

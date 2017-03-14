@@ -18,7 +18,7 @@
 
 键入 `azure --version` 即可查看安装的是否为版本 0.9.0 或更高版本。
 
-```azurecli
+```
 azure --version
 0.9.0 (node: 0.10.25)
 ```
@@ -27,7 +27,7 @@ azure --version
 
 你也可以使用以下 [Docker 映像](https://registry.hub.docker.com/u/microsoft/azure-cli/)运行 Docker 容器形式的 Azure CLI。在 Docker 主机上运行以下命令：
 
-```bash
+```
 docker run -it microsoft/azure-cli
 ```
 
@@ -42,7 +42,7 @@ docker run -it microsoft/azure-cli
 
 你的帐户可能有多个订阅。可以通过键入 `azure account list` 列出订阅，如下所示：
 
-```azure cli
+```
 azure account list
 info:    Executing command account list
 data:    Name                              Id                                    Tenant Id                            Current
@@ -55,7 +55,7 @@ data:    Contoso production                xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 
 若要设置当前 Azure 订阅，请键入以下内容。使用具有你要管理的资源的订阅名称或 ID。
 
-```azurecli
+```
 azure account set <subscription name or ID> true
 ```
 
@@ -63,7 +63,7 @@ azure account set <subscription name or ID> true
 
 默认情况下，Azure CLI 在服务管理模式下启动（**asm** 模式）。键入以下内容，切换到资源组模式。
 
-```azurecli
+```
 azure config mode arm
 ```
 
@@ -88,7 +88,7 @@ azure config mode arm
 
 首先，创建资源组。
 
-```azurecli
+```
 azure group create coreos-quick chinanorth
 info:    Executing command group create
 + Getting resource group coreos-quick
@@ -125,7 +125,7 @@ info:    group create command OK
 
 只要输入 `azure vm quick-create` 命令，然后根据系统提示操作，就可以创建 VM。你应该会看到类似下面的屏幕：
 
-```azurecli
+```
 azure vm quick-create
 info:    Executing command vm quick-create
 Resource group name: coreos-quick
@@ -235,7 +235,7 @@ info:    vm quick-create command OK
 
 确定这些值之后，就可以为模板创建组，并将此模板部署到 Azure 订阅。
 
-```json
+```
 {
 "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
 "contentVersion": "1.0.0.0",
@@ -418,7 +418,7 @@ info:    vm quick-create command OK
 
 若要创建资源组，请键入 `azure group create <group name> <location>` 和要使用的组的名称，以及要部署到的数据中心位置。此过程很快就能完成：
 
-```azurecli
+```
 azure group create myResourceGroup chinanorth
 info:    Executing command group create
 + Getting resource group myResourceGroup
@@ -446,7 +446,7 @@ info:    group create command OK
 
 下载 [azuredeploy.json](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-simple-linux/azuredeploy.json)，将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，以及将“cloudapp.azure.com”替换为“chinacloudapp.cn”，并运行以下命令。
 
-```azurecli
+```
 azure group deployment create --template-file /path/to/azuredeploy.json myResourceGroup firstDeployment
 info:    Executing command group deployment create
 info:    Supply values for the following parameters
@@ -496,7 +496,7 @@ info:    group deployment create command OK
 
 同样，参数如果没有默认值，就必须找出你想输入的值。当你运行 `azure group deployment create` 命令时，Azure CLI 会提示你输入这些值。
 
-```json
+```
 {
     "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
@@ -691,7 +691,7 @@ info:    group deployment create command OK
 
 现在你已准备好使用 .vhd 创建新的虚拟机。使用 `azure group create <location>` 创建一个要部署到的组：
 
-```azurecli
+```
 azure group create myResourceGroupUser chinaeast
 info:    Executing command group create
 + Getting resource group myResourceGroupUser
@@ -711,7 +711,7 @@ info:    group create command OK
 >[!NOTE]
 > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```azurecli
+```
 azure group deployment create \
 > --template-file /path/to/azuredeploy.json \
 > myResourceGroup \
@@ -726,7 +726,7 @@ subscriptionId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 输出如下所示：
 
-```azurecli
+```
 + Initializing template configurations and parameters
 + Creating a deployment
 info:    Created template deployment "customVhdDeployment"
@@ -773,7 +773,7 @@ info:    group deployment create command OK
 >[!NOTE]
 > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
-```json
+```
 {
     "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
@@ -1109,7 +1109,7 @@ info:    group deployment create command OK
 
 使用 `azure group create <location>` 为模板创建资源组。然后在该资源组中创建部署，方式是使用 `azure group deployment create` 并传递资源组、部署名称，然后根据提示为模板中没有默认值的参数输入相关的值。
 
-```azurecli
+```
 azure group create lbgroup chinanorth
 info:    Executing command group create
 + Getting resource group lbgroup
@@ -1126,7 +1126,7 @@ info:    group create command OK
 
 现在使用 `azure group deployment create` 命令和 `--template-file` 选项来部署模板。根据提示输入参数值，如下所示。
 
-```azurecli
+```
 azure group deployment create \
 > --template-file /path/to/azuredeploy.json \
 > lbgroup \
@@ -1175,7 +1175,7 @@ info:    group deployment create command OK
 
 请记住，你可以重新部署到资源组，但是如果其中一个不想使用了，可以使用 `azure group delete <group name>` 删除它。
 
-```azurecli
+```
 azure group delete myResourceGroup
 info:    Executing command group delete
 Delete resource group myResourceGroup? [y/n] y
@@ -1185,17 +1185,17 @@ info:    group delete command OK
 
 ## <a id="show-the-log-for-a-resource-group-deployment"></a>任务：显示资源组部署日志
 
-创建或使用模板时，这种情况很常见。可以使用 `azure group log show <groupname>` 调用来显示组的部署日志，它会显示相当多的有用信息，帮助你了解为何发生某些状况，或者为何未发生某些状况。（有关部署故障排除的详细信息以及有关问题的其他信息，请参阅[在 Azure 中排查资源组部署问题](../articles/azure-resource-manager/resource-manager-troubleshoot-deployments-cli.md)。）
+创建或使用模板时，这种情况很常见。可以使用 `azure group log show <groupname>` 调用来显示组的部署日志，它会显示相当多的有用信息，帮助你了解为何发生某些状况，或者为何未发生某些状况。（有关部署故障排除的详细信息以及有关问题的其他信息，请参阅[在 Azure 中排查资源组部署问题](../articles/azure-resource-manager/resource-manager-deployment-operations.md)。）
 
 为了查明特定的失败，你可以使用 **jq** 等工具来更清楚地查明前因后果，例如，你需要更正的单个失败。以下示例使用 **jq** 分析 **lbgroup** 的部署日志，以找出失败的原因。
 
-```azurecli
+```
 azure group log show lbgroup -l --json | jq '.[] | select(.status.value == "Failed") | .properties'
 ```
 
 你可以快速发现问题所在，予以纠正，然后再试一次。在以下情况下，模板同时创建了两个 VM，导致在 .vhd 中创建了锁。（修改模板后，很快就部署成功。）
 
-```json
+```
 {
   "statusCode": "Conflict",
   "statusMessage": "{"status":"Failed","error":{"code":"ResourceDeploymentFailure","message":"The resource operation completed with terminal provisioning state 'Failed'.","details":[{"code":"AcquireDiskLeaseFailed","message":"Failed to acquire lease while creating disk 'osdisk' using blob with URI http://storage.blob.core.chinacloudapi.cn/vhds/osdisk.vhd."}]}}"
@@ -1206,7 +1206,7 @@ azure group log show lbgroup -l --json | jq '.[] | select(.status.value == "Fail
 
 可以使用 `azure vm show <groupname> <vmname>` 命令查看资源组中特定 VM 的相关信息。如果你组中的 VM 超过一个，可能首先需要使用 `azure vm list <groupname>` 列出组中的 VM。
 
-```azurecli
+```
 azure vm list zoo
 info:    Executing command vm list
 + Getting virtual machines
@@ -1218,7 +1218,7 @@ data:    myVM1  Failed             chinanorth    Standard_A1
 
 然后，查找 myVM1：
 
-```azurecli
+```
 azure vm show zoo myVM1
 info:    Executing command vm show
 + Looking up the VM "myVM1"
@@ -1281,7 +1281,7 @@ info:    vm show command OK
 
 运行以下命令：
 
-```azurecli
+```
 azure vm stop <group name> <virtual machine name>
 ```
 
@@ -1292,7 +1292,7 @@ azure vm stop <group name> <virtual machine name>
 
 运行以下命令：
 
-```azurecli
+```
 azure vm start <group name> <virtual machine name>
 ```
 
@@ -1302,13 +1302,13 @@ azure vm start <group name> <virtual machine name>
 
 若要附加新磁盘，请运行以下命令：
 
-```azurecli
+```
  azure vm disk attach-new <resource-group> <vm-name> <size-in-gb>
 ```
 
 若要附加现有数据磁盘，请运行以下命令：
 
-```azurecli
+```
 azure vm disk attach <resource-group> <vm-name> [vhd-url]
 ```
 

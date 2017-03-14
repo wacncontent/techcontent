@@ -42,7 +42,7 @@ Azure IoT 中心用于连接、监视并管理数百万 IoT 资产。若要创�
 
 1. 通过运行以下命令登录到 Azure 帐户：
 
-    ```bash
+    ```
     az login 
     ```
 
@@ -52,7 +52,7 @@ Azure IoT 中心用于连接、监视并管理数百万 IoT 资产。若要创�
 
 2. 运行以下命令，设置想要使用的默认订阅：
 
-    ```bash
+    ```
     az account set --subscription {subscription id or name}
     ```
 
@@ -60,13 +60,13 @@ Azure IoT 中心用于连接、监视并管理数百万 IoT 资产。若要创�
 
 3. 运行以下命令，注册提供程序。资源提供程序是指为应用程序提供资源的服务。必须先注册提供程序，然后才能部署该提供程序提供的 Azure 资源。
 
-    ```bash
+    ```
     az provider register -n "Microsoft.Devices"
     ```
 
 4. 运行以下命令，在“中国东部”区域中创建名为 iot-sample 的资源组：
 
-    ```bash
+    ```
     az group create --name iot-sample --location chinaeast
     ```
 
@@ -74,7 +74,7 @@ Azure IoT 中心用于连接、监视并管理数百万 IoT 资产。若要创�
 
 5. 运行以下命令，在 iot-sample 资源组中创建 IoT 中心：
 
-    ```bash
+    ```
     az iot hub create --name {my hub name} --resource-group iot-sample
     ```
 
@@ -88,7 +88,7 @@ IoT 中心的名称必须全局唯一。在 Azure 订阅下只能创建一个 F1
 
 运行以下命令，在 IoT 中心注册 Edison：
 
-```bash
+```
 az iot device create --device-id myinteledison --hub-name {my hub name}
 ```
 

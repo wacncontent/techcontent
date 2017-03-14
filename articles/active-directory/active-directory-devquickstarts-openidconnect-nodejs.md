@@ -81,7 +81,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 
     // add a logger
@@ -95,7 +95,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     // Use the OIDCStrategy within Passport. (Section 2) 
     // 
     //   Strategies in passport require a `validate` function, which accept
@@ -145,7 +145,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     // Passport session setup. (Section 2)
 
     //   To support persistent login sessions, Passport needs to be able to
@@ -181,7 +181,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     // configure Express (Section 2)
 
     var app = express();
@@ -207,7 +207,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     // Our Auth routes (Section 3)
 
     // GET /auth/openid
@@ -256,7 +256,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     //Routes (Section 4)
 
     app.get('/', function(req, res){
@@ -290,7 +290,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     // Simple route middleware to ensure user is authenticated. (Section 4)
 
     //   Use this route middleware on any resource that needs to be protected.  If
@@ -307,7 +307,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     app.listen(3000);
     ```
 
@@ -318,7 +318,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     /*
      * GET home page.
      */
@@ -332,7 +332,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     /*
      * GET users listing.
      */
@@ -348,7 +348,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     JavaScript
 
-    ```JavaScript
+    ```
     <% if (!user) { %>
         <h2>Welcome! Please log in.</h2>
         <a href="/login">Log In</a>
@@ -363,7 +363,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     Javascript
 
-    ```Javascript
+    ```
     <% if (!user) { %>
         <h2>Welcome! Please log in.</h2>
         <a href="/login">Log In</a>
@@ -384,7 +384,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
     HTML
 
-    ```HTML
+    ```
     <!DOCTYPE html>
     <html>
         <head>

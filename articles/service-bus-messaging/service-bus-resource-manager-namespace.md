@@ -12,9 +12,9 @@ ms.devlang: tbd
 ms.topic: article
 ms.tgt_pltfrm: dotnet
 ms.workload: na
-ms.date: 10/04/2016
+ms.date: 01/10/2017
 ms.author: sethm;shvija
-wacn.date: 12/30/2016
+wacn.date: 02/20/2017
 ---
 
 # 使用 Azure Resource Manager 模板创建服务总线命名空间
@@ -76,7 +76,6 @@ wacn.date: 12/30/2016
     "metadata": { 
         "description": "The messaging tier for service Bus namespace" 
     } 
-
 ```
 
 模板定义此参数允许的值（Basic 或 Standard），如果未指定任何值，则分配默认值 (Standard)。
@@ -152,3 +151,4 @@ azure group deployment create <my-resource-group> <my-deployment-name> --templat
   [Using the Azure CLI for Mac, Linux, and Windows with Azure Resource Management]: ../azure-resource-manager/xplat-cli-azure-resource-manager.md
 
 <!---HONumber=Mooncake_1219_2016-->
+<!--Update_Description:update meta properties-->

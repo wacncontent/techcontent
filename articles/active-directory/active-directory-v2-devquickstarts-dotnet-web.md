@@ -64,7 +64,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-Web
 
     C#
 
-    ```C#
+    ```
     [assembly: OwinStartup(typeof(Startup))]
 
     namespace TodoList_WebApp
@@ -83,7 +83,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-Web
 
     C#
 
-    ```C#
+    ```
     public void ConfigureAuth(IAppBuilder app)
     {
         app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
@@ -122,7 +122,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-Web
 
     C#
 
-    ```C#
+    ```
     [Authorize]
     public ActionResult About()
     {
@@ -133,7 +133,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-Web
 
     C#
 
-    ```C#
+    ```
     public void SignIn()
     {
         // Send an OpenID Connect sign-in request.
@@ -156,7 +156,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-Web
 
     HTML
 
-    ```HTML
+    ```
     @if (Request.IsAuthenticated)
     {
         <text>
@@ -188,7 +188,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-Web
 
     C#
 
-    ```C#
+    ```
     [Authorize]
     public ActionResult About()
     {

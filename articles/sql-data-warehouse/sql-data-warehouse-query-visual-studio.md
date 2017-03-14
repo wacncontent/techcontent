@@ -74,7 +74,7 @@ ms.author: sonyama;barbkess
 
 3. 将以下 TSQL 查询复制到查询窗口中：
 
-    ```sql
+    ```
     SELECT COUNT(*) FROM dbo.FactInternetSales;
     ```
 

@@ -33,7 +33,7 @@ ms.author: adegeo
 ## <a name="csdef"></a> ServiceDefinition.csdef
 **ServiceDefinition.csdef** 文件指定 Azure 用于配置云服务的设置。[Azure 服务定义架构（.csdef 文件）](https://msdn.microsoft.com/zh-cn/library/azure/ee758711.aspx)为服务定义文件提供允许的格式。以下示例显示了可为 Web 角色和辅助角色定义的设置：
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="MyServiceName" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <WebRole name="WebRole1" vmsize="Medium">
@@ -113,7 +113,7 @@ ms.author: adegeo
 
 服务配置文件不与应用程序一起打包，而是作为单独的文件上传到 Azure 并用于配置云服务。无需重新部署云服务即可上传新的服务配置文件。云服务正在运行时可以更改云服务的配置值。以下示例显示了可为 Web 角色和辅助角色定义的配置设置：
 
-```xml
+```
 <?xml version="1.0"?>
 <ServiceConfiguration serviceName="MyServiceName" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration">
   <Role name="WebRole1">
@@ -152,7 +152,7 @@ Azure 仅允许 Web 角色有一个入口点。即所有通信都通过一个 IP
 
 以下示例显示了具有网站和 Web 应用程序的 Web 角色的配置。该网站配置为端口 80 上的默认入口位置，Web 应用程序配置为接收来自名为“mail.mysite.chinacloudapp.cn”的备用主机标头的请求。
 
-```xml
+```
     <WebRole>
       <ConfigurationSettings>
         <Setting name="DiagnosticsConnectionString" />
@@ -227,7 +227,7 @@ CSPack.exe（在 Windows 中）可通过运行随 SDK 一起安装的“Azure �
 ### 打包云服务的示例命令
 以下示例创建包含 Web 角色信息的应用程序包。该命令指定待使用的服务定义文件、可以找到二进制文件的目录以及包文件名称。
 
-```cmd
+```
 cspack [DirectoryName]\[ServiceDefinition]
        /role:[RoleName];[RoleBinariesDirectory]
        /sites:[RoleName];[VirtualPath];[PhysicalPath]
@@ -236,7 +236,7 @@ cspack [DirectoryName]\[ServiceDefinition]
 
 如果应用程序包含 Web 角色和辅助角色，则使用以下命令：
 
-```cmd
+```
 cspack [DirectoryName]\[ServiceDefinition]
        /out:[OutputFileName]
        /role:[RoleName];[RoleBinariesDirectory]

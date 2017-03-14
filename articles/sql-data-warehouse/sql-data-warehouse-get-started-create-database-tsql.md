@@ -43,14 +43,14 @@ ms.author: lodipalm;barbkess;sonyama
 ## 使用 Visual Studio 创建数据库
 若不熟悉 Visual Studio，请参阅 [Query Azure SQL Data Warehouse (Visual Studio)][Query Azure SQL Data Warehouse (Visual Studio)]（查询 Azure SQL 数据仓库 (Visual Studio)）一文。若要开始操作，请在 Visual Studio 中打开 SQL Server 对象资源管理器，并连接到要托管 SQL 数据仓库数据库的服务器。连接后，可针对 **master** 数据库运行以下 SQL 命令来创建 SQL 数据仓库。此命令创建服务目标为 DW400 的数据库 MySqlDwDb，并允许此数据库增长到大小上限 10 TB。
 
-```sql
+```
 CREATE DATABASE MySqlDwDb COLLATE SQL_Latin1_General_CP1_CI_AS (EDITION='datawarehouse', SERVICE_OBJECTIVE = 'DW400', MAXSIZE= 10240 GB);
 ```
 
 ## 使用 sqlcmd 创建数据库
 也可以在命令提示符处运行以下命令，以使用 sqlcmd 运行相同的命令。
 
-```sql
+```
 sqlcmd -S <Server Name>.database.chinacloudapi.cn -I -U <User> -P <Password> -Q "CREATE DATABASE MySqlDwDb COLLATE SQL_Latin1_General_CP1_CI_AS(EDITION='datawarehouse', SERVICE_OBJECTIVE = 'DW400', MAXSIZE= 10240 GB)"
 ```
 
@@ -68,7 +68,7 @@ sqlcmd -S <Server Name>.database.chinacloudapi.cn -I -U <User> -P <Password> -Q 
 [load]: ./sql-data-warehouse-overview-load.md
 [load sample data]: ./sql-data-warehouse-load-sample-databases.md
 [使用 Azure 门户预览创建 Azure SQL 数据库逻辑服务器]: ../sql-database/sql-database-get-started.md#create-an-azure-sql-database-logical-server
-[使用 PowerShell 创建 Azure SQL 数据库逻辑服务器]: ../sql-database/sql-database-get-started-powershell.md#database-setup-create-a-resource-group-server-and-firewall-rule
+[使用 PowerShell 创建 Azure SQL 数据库逻辑服务器]: ../sql-database/sql-database-get-started-powershell.md#complete-azure-powershell-script-to-create-a-server-firewall-rule-and-database
 [如何创建资源组]: ../azure-resource-manager/resource-group-template-deploy-portal.md#create-resource-group
 [Installing Visual Studio and SSDT]: ./sql-data-warehouse-install-visual-studio.md
 [sqlcmd]: ./sql-data-warehouse-get-started-connect-sqlcmd.md

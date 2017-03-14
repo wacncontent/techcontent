@@ -37,7 +37,7 @@ ms.author: xshi
 ### 在 Gulp 任务期间没有响应
 如果在运行 Gulp 任务时遇到问题，可添加 `--verbose` 选项进行调试。请尝试使用 Ctrl + C 终止当前的 Gulp 任务，然后在控制台窗口中运行以下命令，以便查看调试消息。可以在控制台输出中查看详细的错误消息。
 
-```bash
+```
     gulp --verbose
 ```
 
@@ -47,7 +47,7 @@ ms.author: xshi
 ### npm 问题
 请尝试使用以下命令更新 npm 包：
 
-```bash
+```
     npm install -g npm
 ```
 
@@ -56,7 +56,7 @@ ms.author: xshi
 ## 远程调试
 ### 在调试模式下运行示例应用程序
 
-```bash
+```
     gulp run --debug
 ```
 
@@ -70,7 +70,7 @@ ms.author: xshi
 > [!NOTE]
 若要深入了解 Visual Studio 调试，请参阅[在 Visual Studio Code 中调试](https://code.visualstudio.com/Docs/editor/debugging#_launchjson-attributes)。
 
-```json
+```
     {
         "version": "0.2.0",
         "configurations": [
@@ -104,8 +104,6 @@ Azure 命令行接口 (Azure CLI) 为预览版。
 
 如果在使用此工具时遇到 Bug，请在 GitHub 存储库的“问题”部分提交[问题](https://github.com/Azure/azure-cli/issues)。
 
-如需常见问题的疑难解答帮助，请查看[自述文件](https://github.com/Azure/azure-cli/blob/master/README.rst)。
-
 ## Python 安装问题
 ### 旧版安装问题 (macOS)
 安装 pip 时，如果使用 **su** 权限安装的包较旧，则会引发权限错误。之所以会出现这种情况，是因为未彻底卸载以前使用 brew (macOS) 安装的 Python。以前安装时留下的某些 pip 包是通过根权限创建的，因此会导致权限错误。删除这些通过根权限安装的包即可解决问题。通过以下步骤完成该任务：
@@ -132,13 +130,13 @@ Azure 命令行接口 (Azure CLI) 为预览版。
 
 若要安装最新（预发行）版的 iothub-explorer 工具，请在命令行环境中运行以下命令：
 
-```bash
+```
     npm install -g iothub-explorer@latest
 ```
 
 可以使用以下命令获取所有 iothub-explorer 命令及其参数的更多帮助：
 
-```bash
+```
     iothub-explorer help
 ```
 

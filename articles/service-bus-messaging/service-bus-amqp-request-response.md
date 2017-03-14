@@ -1,14 +1,14 @@
 ---
 title: 服务总线基于请求/响应的操作中的 AMQP 1.0 | Azure
 description: Microsoft Azure 服务总线基于请求/响应的操作的列表。
-services: service-bus-messaging
+services: service-bus
 documentationcenter: na
 author: sethmanheim
 manager: timlt
 editor: ''
 
 ms.assetid: ''
-ms.service: service-bus-messaging
+ms.service: service-bus
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na

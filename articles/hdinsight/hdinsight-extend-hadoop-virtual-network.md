@@ -323,7 +323,7 @@ https://<clustername>.azurehdinsight.cn/ambari/api/v1/clusters/<clustername>.azu
 
 例如，对于使用 HBase API 的 Java 应用程序，你可以将 **hbase-site.xml** 文件添加到项目，并在此文件中指定仲裁信息，如下所示：
 
-```xml
+```
 <configuration>
   <property>
     <name>hbase.cluster.distributed</name>

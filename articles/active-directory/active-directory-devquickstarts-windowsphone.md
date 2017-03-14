@@ -90,7 +90,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     public MainPage()
     {
         ...
@@ -104,7 +104,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     private async void Search(object sender, RoutedEventArgs e)
     {
         ...
@@ -130,7 +130,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     // This method is automatically invoked when the application
     // is reactivated after an authentication interaction through WebAuthenticationBroker.
     public async void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
@@ -145,7 +145,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     private async void QueryGraph(AuthenticationResult result)
     {
         if (result.Status != AuthenticationStatus.Success)
@@ -165,7 +165,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     // Update the Page UI to represent the signed in user
     ActiveUser.Text = result.UserInfo.DisplayableId;
     ```
@@ -174,7 +174,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     C#
 
-    ```C#
+    ```
     private void SignOut()
     {
         // Clear session state from the token cache.

@@ -1,5 +1,3 @@
-<!-- not suitable for Mooncake -->
-
 ---
 title: 使用 Azure 门户预览管理 HDInsight 中的 Hadoop 群集 | Azure
 description: 了解如何管理 HDInsight 服务。创建 HDInsight 群集，打开交互式 JavaScript 控制台，然后打开 Hadoop 命令控制台。
@@ -32,7 +30,7 @@ wacn.date: 02/14/2017
 - **Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 - **Azure 存储帐户** - HDInsight 群集使用 Azure Blob 存储容器作为默认文件系统。有关 Azure Blob 存储如何提供与 HDInsight 群集无缝体验的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](./hdinsight-hadoop-use-blob-storage.md)。有关创建 Azure 存储帐户的详细信息，请参阅[如何创建存储帐户](../storage/storage-create-storage-account.md)。
 
-##打开门户
+## 打开门户
 
 1. 登录 [https://portal.azure.cn](https://portal.azure.cn)。
 2. 打开门户后，可以：
@@ -48,7 +46,7 @@ wacn.date: 02/14/2017
 
     ![Azure 门户预览浏览群集按钮](./media/hdinsight-administer-use-management-portal/azure-portal-browse-button.png)
 
-##创建群集
+## 创建群集
 
 有关使用门户创建群集的说明，请参阅[创建 HDInsight 群集](./hdinsight-provision-clusters.md)。
 

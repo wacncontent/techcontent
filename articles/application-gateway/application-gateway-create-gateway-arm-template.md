@@ -82,7 +82,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 9. 将该文件保存到计算机上的本地文件夹中。
 10. 打开保存的文件并编辑参数的值。使用以下值部署本方案中所述的应用程序网关。
 
-    ```json
+    ```
        {
        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
        {
@@ -118,7 +118,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 ### 步骤 1
 
-```powershell
+```
 Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 ```
 
@@ -126,7 +126,7 @@ Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 检查帐户的订阅。
 
-```powershell
+```
 Get-AzureRmSubscription
 ```
 
@@ -136,7 +136,7 @@ Get-AzureRmSubscription
 
 选择要使用的 Azure 订阅。
 
-```powershell
+```
 Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 ```
 
@@ -144,13 +144,13 @@ Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 
 如有必要，请使用 **New-AzureResourceGroup** cmdlet 创建资源组。在下面的示例中，将在“中国东部”位置创建名为 AppgatewayRG 的资源组。
 
-```powershell
+```
 New-AzureRmResourceGroup -Name AppgatewayRG -Location "China East"
 ```
 
 运行 **New-AzureRmResourceGroupDeployment** cmdlet，使用在前面下载并修改的模板和参数文件部署新虚拟网络。
 
-```powershell
+```
 New-AzureRmResourceGroupDeployment -Name TestAppgatewayDeployment -ResourceGroupName AppgatewayRG `
 -TemplateFile C:\ARM\azuredeploy.json -TemplateParameterFile C:\ARM\azuredeploy-parameters.json
 ```
@@ -167,13 +167,13 @@ New-AzureRmResourceGroupDeployment -Name TestAppgatewayDeployment -ResourceGroup
 
 运行 **azure config mode** 命令切换到 Resource Manager 模式，如以下代码片段中所示。
 
-```azurecli
+```
 azure config mode arm
 ```
 
 下面是上述命令的预期输出：
 
-```azurecli
+```
 info:    New mode is arm
 ```
 
@@ -181,7 +181,7 @@ info:    New mode is arm
 
 如有必要，请运行 **azure group create** 命令创建新资源组，如以下代码片段中所示。请注意命令的输出。在输出后显示的列表说明了所使用的参数。有关资源组的详细信息，请访问 [Azure Resource Manager overview](../azure-resource-manager/resource-group-overview.md)（Azure Resource Manager 概述）。
 
-```azurecli
+```
 azure group create -n appgatewayRG -l chinaeast
 ```
 
@@ -193,7 +193,7 @@ azure group create -n appgatewayRG -l chinaeast
 
 运行 **azure group deployment create** cmdlet，使用上述步骤中下载并修改的模板和参数文件部署新虚拟网络。输出后显示的列表阐释了所用参数。
 
-```azurecli
+```
 azure group deployment create -g appgatewayRG -n TestAppgatewayDeployment -f C:\ARM\azuredeploy.json -e C:\ARM\azuredeploy-parameters.json
 ```
 
@@ -229,7 +229,7 @@ azure group deployment create -g appgatewayRG -n TestAppgatewayDeployment -f C:\
 
 如果将 SSL 与模板一起使用，请提供 base64 字符串的证书，而不是上传证书。若要将 .pfx 或 .cer 转换为 base64 字符串，请运行以下 PowerShell 命令。此代码片段会证书将转换为 base64 字符串，以便将其提供给模板。预期输出为一个字符串，它可以存储在变量中，并粘贴到模板中。
 
-```powershell
+```
 [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("<certificate path and name>.pfx"))
 ```
 

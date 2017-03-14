@@ -74,7 +74,7 @@ ms.author: adegeo
 
 3. 将以下脚本添加到 **install.cmd** 文件：
 
-    ```cmd
+    ```
     REM Set the value of netfx to install appropriate .NET Framework. 
     REM ***** To install .NET 4.5.2 set the variable netfx to "NDP452" *****
     REM ***** To install .NET 4.6 set the variable netfx to "NDP46" *****
@@ -166,7 +166,7 @@ ms.author: adegeo
 
 若要配置诊断，请打开 *diagnostics.wadcfgx*，并在 **Directories** 节点下添加以下内容：
 
-```xml
+```
     <DataSources>
      <DirectoryConfiguration containerName="netfx-install">
       <LocalResource name="NETFXInstall" relativePath="log"/>

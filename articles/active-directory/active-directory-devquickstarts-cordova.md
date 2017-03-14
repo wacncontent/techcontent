@@ -151,7 +151,7 @@ cordova plugin add cordova-plugin-ms-adal
 
 javascript
 
-```javascript
+```
 var authority = "https://login.chinacloudapi.cn/common",
 redirectUri = "http://MyDirectorySearcherApp",
 resourceUri = "https://graph.chinacloudapi.cn",
@@ -166,7 +166,7 @@ graphApiVersion = "2013-11-08";
 
 javascript
 
-```javascript
+```
 // Shows user authentication dialog if required.
 authenticate: function (authCompletedCallback) {
 
@@ -196,7 +196,7 @@ authenticate: function (authCompletedCallback) {
 
 javascript
 
-```javascript
+```
     app.context = new Microsoft.ADAL.AuthenticationContext(authority);
     app.context.tokenCache.readItems().then(function (items) {
         if (items.length > 0) {
@@ -211,7 +211,7 @@ javascript
 
 javascript
 
-```javascript
+```
         // Attempt to authorize user silently
         app.context.acquireTokenSilentAsync(resourceUri, clientId)
         .then(authCompletedCallback, function () {
@@ -227,7 +227,7 @@ javascript
 
 javascript
 
-```javascript
+```
 // Makes Api call to receive user list.
     requestData: function (authResult, searchText) {
         var req = new XMLHttpRequest();

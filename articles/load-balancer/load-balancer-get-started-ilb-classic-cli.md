@@ -1,5 +1,5 @@
 ---
-title: 在经典部署模型中使用 Azure CLI 创建内部负载均衡器 | Azure
+title: 创建内部负载均衡器 - Azure CLI 经典 | Azure
 description: 了解如何在经典部署模型中使用 Azure CLI 创建内部负载均衡器
 services: load-balancer
 documentationcenter: na
@@ -14,8 +14,8 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/09/2016
-wacn.date: 01/13/2017
+ms.date: 01/23/2017
+wacn.date: 03/03/2017
 ms.author: kumud
 ---
 
@@ -38,7 +38,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 创建内部负载均衡实例，该实例将是要在负载均衡集的服务器上进行负载均衡的传入流量的终结点。
 2. 添加与虚拟机对应的终结点以接收传入流量。
-3. 配置将发送要进行负载均衡的流量的服务器，以将其流量发送到内部负载均衡实例的虚拟 IP \(VIP\) 地址。
+3. 配置将发送要进行负载均衡的流量的服务器，以将其流量发送到内部负载均衡实例的虚拟 IP (VIP) 地址。
 
 ## 使用 CLI 逐步创建内部负载均衡器
 
@@ -47,7 +47,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到经典模式，如下所示。
 
-    ```azurecli
+    ```
     azure config mode asm
     ```
 
@@ -69,7 +69,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 使用 `azure network service internal-load-balancer add` 创建内部负载均衡器集。
 
-```azurecli
+```
 azure service internal-load-balancer add --serviceName mytestcloud --internalLBName ilbset --subnet-name subnet-1 --static-virtualnetwork-ipaddress 192.168.2.7
 ```
 
@@ -93,7 +93,7 @@ info:    service internal-load-balancer list command OK
 
 当你添加第一个终结点时，可配置内部负载均衡器集。在此步骤中，你会将终结点、虚拟机和探测器端口关联到内部负载均衡器集。
 
-```azurecli
+```
 azure vm endpoint create db1 1433 --local-port 1433 --protocol tcp --probe-port 1433 --probe-protocol tcp --probe-interval 300 --probe-timeout 600 --internal-load-balancer-name ilbset
 ```
 
@@ -101,7 +101,7 @@ azure vm endpoint create db1 1433 --local-port 1433 --protocol tcp --probe-port 
 
 使用 `azure vm show`*虚拟机名称*验证负载均衡器配置
 
-```azurecli
+```
 azure vm show DB1
 ```
 
@@ -160,7 +160,7 @@ info:    vm show command OK
 
 你可以使用 `azure vm endpoint create` 创建远程桌面终结点，将网络流量从公共端口转发到特定虚拟机的本地端口。
 
-```azurecli
+```
 azure vm endpoint create web1 54580 -k 3389
 ```
 
@@ -170,7 +170,7 @@ azure vm endpoint create web1 54580 -k 3389
 
 使用上面的示例，你可以使用命令 `azure vm endpoint delete` 从内部负载均衡器“ilbset”中删除为虚拟机“DB1”创建的终结点。
 
-```azurecli
+```
 azure vm endpoint delete DB1 tcp-1433-1433
 ```
 
@@ -182,5 +182,5 @@ azure vm endpoint delete DB1 tcp-1433-1433
 
 [为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
-<!---HONumber=Mooncake_0109_2017-->
-<!--Update_Description: update meta properties & wording update & update link references & update code-->
+<!---HONumber=Mooncake_0227_2017-->
+<!--Update_Description: update meta properties; wording update -->

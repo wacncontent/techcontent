@@ -107,7 +107,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     ObjC
 
-    ```ObjC
+    ```
     +(void) getToken : (BOOL) clearCache
                parent:(UIViewController*) parent
     completionHandler:(void (^) (NSString*, NSError*))completionBlock;
@@ -149,7 +149,7 @@ ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只
 
     ObjC
 
-    ```ObjC
+    ```
     +(void) searchUserList:(NSString*)searchString
                     parent:(UIViewController*) parent
            completionBlock:(void (^) (NSMutableArray* Users, NSError* error)) completionBlock

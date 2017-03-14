@@ -1,5 +1,5 @@
 ---
-title: 在经典部署模型中为云服务创建内部负载均衡器 | Azure
+title: 为 Azure 云服务创建内部负载均衡器 | Azure
 description: 了解如何在经典部署模型中使用 PowerShell 创建内部负载均衡器
 services: load-balancer
 documentationcenter: na
@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/09/2016
-wacn.date: 01/13/2017
+ms.date: 01/23/2017
+wacn.date: 03/03/2017
 ms.author: kumud
 ---
 
@@ -38,9 +38,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 ### 步骤 1
 
-在 Visual Studio 中打开云部署的服务配置文件 \(.cscfg\)，并在网络配置的最后一个“`</Role>`”项下添加以下节，以便创建内部负载均衡。
+在 Visual Studio 中打开云部署的服务配置文件 (.cscfg)，并在网络配置的最后一个“`</Role>`”项下添加以下节，以便创建内部负载均衡。
 
-```xml
+```
 <NetworkConfiguration>
     <LoadBalancers>
     <LoadBalancer name="name of the load balancer">
@@ -52,7 +52,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 让我们为网络配置文件添加值，以便显示其外观。在此示例中，假定你创建了一个名为“test\_vnet”的子网，其中包含一个名为 test\_subnet 的子网 10.0.0.0/24 并具有静态 IP 10.0.0.4。负载均衡器将名为 testLB。
 
-```xml
+```
 <NetworkConfiguration>
     <LoadBalancers>
     <LoadBalancer name="testLB">
@@ -66,9 +66,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 ### 步骤 2
 
-更改服务定义 \(.csdef\) 文件，以便向内部负载均衡添加终结点。创建角色实例的那一刻，服务定义文件会将角色实例添加到内部负载均衡。
+更改服务定义 (.csdef) 文件，以便向内部负载均衡添加终结点。创建角色实例的那一刻，服务定义文件会将角色实例添加到内部负载均衡。
 
-```xml
+```
 <WorkerRole name="worker-role-name" vmsize="worker-role-size" enableNativeCodeExecution="[true|false]">
     <Endpoints>
     <InputEndpoint name="input-endpoint-name" protocol="[http|https|tcp|udp]" localPort="local-port-number" port="port-number" certificate="certificate-name" loadBalancerProbe="load-balancer-probe-name" loadBalancer="load-balancer-name" />
@@ -78,7 +78,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 按照上面的示例的相同值，让我们将值添加到服务定义文件。
 
-```xml
+```
 <WorkerRole name="WorkerRole1" vmsize="A7" enableNativeCodeExecution="[true|false]">
     <Endpoints>
     <InputEndpoint name="endpoint1" protocol="http" localPort="80" port="80" loadBalancer="testLB" />
@@ -94,5 +94,5 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 [为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
-<!---HONumber=Mooncake_0109_2017-->
-<!--Update_Description: update meta properties & wording update & update link references & update code-->
+<!---HONumber=Mooncake_0227_2017-->
+<!--Update_Description: update meta properties; wording update-->

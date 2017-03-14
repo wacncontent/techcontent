@@ -13,8 +13,8 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 11/16/2016
-wacn.date: 12/05/2016
+ms.date: 01/04/2017
+wacn.date: 02/24/2017
 ms.author: micurd
 ---
 
@@ -44,7 +44,7 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 3. 在命令行界面中，输入 `azure storage` 即可列出所有 Azure 存储服务命令，并初步了解 Azure CLI 提供的功能。你可以输入带 **-h** 参数的命令名称（例如，`azure storage share create -h`），了解命令语法的详细信息。
 4. 现在，我们将提供一个简单的脚本，演示用于访问 Azure 存储服务的基本 Azure CLI 命令。该脚本会首先要求你针对存储帐户和密钥设置两个变量。然后，该脚本将在此新存储帐户中创建新容器，并将现有图像文件 (Blob) 上载到该容器。脚本在列出该容器中的所有 Blob 后，就会将图像文件下载到本地计算机上的目标目录。
 
-    ```bash
+    ```
     #!/bin/bash
     # A simple Azure storage example
 
@@ -100,7 +100,7 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 ### 在环境变量中设置默认的 Azure 存储帐户
 可以在订阅中设置多个存储帐户。你可以选择其中的一个存储帐户，并在环境变量中将其设置为同一会话中所有存储命令的默认存储帐户。这样，你便可以在不显式指定存储帐户和密钥的情况下运行 Azure CLI 存储命令。
 
-```azurecli
+```
     export AZURE_STORAGE_ACCOUNT=<account_name>
     export AZURE_STORAGE_ACCESS_KEY=<key>
 ```
@@ -113,7 +113,7 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 
 然后复制输出连接字符串，并将其设置为环境变量：
 
-```azurecli
+```
     export AZURE_STORAGE_CONNECTION_STRING=<connection_string>
 ```
 
@@ -123,7 +123,7 @@ Azure Blob 存储是用于存储大量非结构化数据（例如文本或二进
 ### 创建容器
 Azure 存储服务中的每个 Blob 都必须在容器中。你可以使用 `azure storage container create` 命令创建专用容器：
 
-```azurecli
+```
     azure storage container create mycontainer
 ```
 
@@ -178,14 +178,14 @@ Azure 文件存储使用标准 SMB 协议为应用程序提供共享存储。Azu
 ### 创建文件共享
 Azure 文件共享是 Azure 中的 SMB 文件共享。所有目录和文件都必须在文件共享中创建。一个帐户可以包含无限数量的共享，一个共享可以存储无限数量的文件，直到达到存储帐户的容量限制为止。下面的示例创建名为 **myshare** 的文件共享。
 
-```azurecli
+```
     azure storage share create myshare
 ```
 
 ### 创建目录
 目录提供了进行 Azure 文件共享时可以选择的层次结构。以下示例在文件共享中创建名为 **myDir** 的目录。
 
-```azurecli
+```
     azure storage directory create myshare myDir
 ```
 

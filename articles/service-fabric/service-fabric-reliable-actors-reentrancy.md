@@ -1,5 +1,5 @@
 ---
-title: Reliable Actors 可重入性 | Azure
+title: 基于执行组件的 Azure 微服务中的重新进入 | Azure
 description: Service Fabric Reliable Actors 的可重入性简介
 services: service-fabric
 documentationcenter: .net
@@ -13,8 +13,8 @@ ms.devlang: dotnet
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 10/19/2016
-wacn.date: 01/25/2017
+ms.date: 02/10/2017
+wacn.date: 03/03/2017
 ms.author: vturecek
 ---
 
@@ -36,7 +36,7 @@ ms.author: vturecek
 
 以下示例演示了将重入模式设置为 `ActorReentrancyMode.Disallowed` 的执行组件服务。在这种情况下，如果执行组件向另一个执行组件发送可重入消息，则会引发类型为 `FabricException` 的异常。
 
-```csharp
+```
 static class Program
 {
     static void Main()
@@ -72,4 +72,4 @@ static class Program
  - [执行组件 API 参考文档](https://msdn.microsoft.com/zh-cn/library/azure/dn971626.aspx)
  - [代码示例](https://github.com/Azure/servicefabric-samples)
 
-<!---HONumber=Mooncake_Quality_Review_0125_2017-->
+<!---HONumber=Mooncake_0227_2017-->

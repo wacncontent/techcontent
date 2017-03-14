@@ -60,7 +60,7 @@ ms.author: jdial
 ### 事件日志
 此日志包含的信息涉及哪些 NSG 规则根据 MAC 地址应用到 VM 和云服务角色实例。以下示例数据是针对每个事件记录的：
 
-```json
+```
 {
     "time": "[DATE-TIME]",
     "systemId": "007d0441-5d6b-41f6-8bfd-930db640ec03",
@@ -91,7 +91,7 @@ ms.author: jdial
 
 此日志包含的信息涉及每个应用到资源的规则。每次应用规则时，都会记录以下示例数据：
 
-```json
+```
 {
     "time": "[DATE-TIME]",
     "systemId": "007d0441-5d6b-41f6-8bfd-930db640ec03",

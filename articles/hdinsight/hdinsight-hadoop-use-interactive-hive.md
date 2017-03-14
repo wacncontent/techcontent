@@ -1,5 +1,3 @@
-<!-- not suitable for Mooncake -->
-
 ---
 title: 在 HDInsight 中使用交互式 Hive | Azure
 description: 了解如何在 HDInsight 中使用交互式 Hive（基于 LLAP 的 Hive）。
@@ -39,6 +37,8 @@ ms.author: jgao
 执行 Hive 查询的方式有多种：
 
 - 使用 Ambari Hive 视图运行 Hive
+
+    有关使用 Hive 视图的信息，请参阅[在 HDInsight 中将 Hive 视图与 Hadoop 配合使用](./hdinsight-hadoop-use-hive-ambari-view.md)。
 
 - 使用 Beeline 运行 Hive
 

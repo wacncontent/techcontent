@@ -30,7 +30,7 @@ ms.author: adegeo
 
 如果需要为特定任务定义环境变量，则可以在 [Task] 元素内使用 [Environment] 元素。
 
-```xml
+```
 <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
     <WorkerRole name="WorkerRole1">
         ...
@@ -47,7 +47,7 @@ ms.author: adegeo
 
 此外，变量还可以使用[有效的 Azure XPath 值](./cloud-services-role-config-xpath.md)引用有关部署的内容。请不要使用 `value` 属性，而是定义 [RoleInstanceValue] 子元素。
 
-```xml
+```
 <Variable name="PathToStartupStorage">
     <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='StartupLocalStorage']/@path" />
 </Variable>
@@ -73,7 +73,7 @@ ms.author: adegeo
 
 此处显示了 [ServiceDefinition.csdef] 文件的相关节，其中包括将 [executionContext](https://msdn.microsoft.com/zh-cn/library/azure/gg557552.aspx#Task) 属性设为 `elevated` 以为 *AppCmd.exe* 提供足够的权限来更改 *Web.config* 文件中的设置：
 
-```xml
+```
 <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
     <WorkerRole name="WorkerRole1">
         ...
@@ -86,7 +86,7 @@ ms.author: adegeo
 
 *Startup.cmd* 批处理文件使用 *AppCmd.exe* 将 JSON 的压缩节和压缩条目添加到 *Web.config* 文件。使用 VERIFY.EXE 命令行程序将预期的 **errorlevel** 183 设为零。意外的 errorlevel 将记录到 StartupErrorLog.txt 中。
 
-```cmd
+```
 REM   *** Add a compression section to the Web.config file. ***
 %windir%\system32\inetsrv\appcmd set config /section:urlCompression /doDynamicCompression:True /commit:apphost >> "%TEMP%\StartupLog.txt" 2>&1
 
@@ -132,7 +132,7 @@ Azure 将为你角色中启动的进程创建防火墙规则。例如，当你�
 
 创建防火墙规则的启动任务的 [executionContext][Task] 必须为 **elevated**。将以下启动任务添加到 [ServiceDefinition.csdef] 文件。
 
-```xml
+```
 <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
     <WorkerRole name="WorkerRole1">
         ...
@@ -145,7 +145,7 @@ Azure 将为你角色中启动的进程创建防火墙规则。例如，当你�
 
 若要添加防火墙规则，必须在启动批处理文件中使用相应的 `netsh advfirewall firewall` 命令。在此示例中，启动任务对 TCP 端口 80 具有安全性和加密要求。
 
-```cmd
+```
 REM   Add a firewall rule in a startup task.
 
 REM   Add an inbound rule requiring security and encryption for TCP port 80 traffic.
@@ -163,7 +163,7 @@ EXIT /B %errorlevel%
 
 将以下启动任务添加到 [ServiceDefinition.csdef] 文件。
 
-```xml
+```
 <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
     <WebRole name="WebRole1">
         ...
@@ -176,7 +176,7 @@ EXIT /B %errorlevel%
 
 将此命令添加到 **startup.cmd** 文件：
 
-```cmd
+```
 @echo off
 @echo Installing "IPv4 Address and Domain Restrictions" feature 
 powershell -ExecutionPolicy Unrestricted -command "Install-WindowsFeature Web-IP-Security"
@@ -190,7 +190,7 @@ powershell -ExecutionPolicy Unrestricted -command "Install-WindowsFeature Web-IP
 
 此示例配置**允许**所有 IP（两个已定义的 IP 除外）访问服务器
 
-```xml
+```
 <system.webServer>
     <security>
     <!--Unlisted IP addresses are granted access-->
@@ -205,7 +205,7 @@ powershell -ExecutionPolicy Unrestricted -command "Install-WindowsFeature Web-IP
 
 此示例配置**拒绝**所有 IP（两个已定义的 IP 除外）访问服务器。
 
-```xml
+```
 <system.webServer>
     <security>
     <!--Unlisted IP addresses are denied access-->
@@ -224,7 +224,7 @@ Windows PowerShell 脚本不能直接从 [ServiceDefinition.csdef] 文件调用�
 
 默认情况下，PowerShell 不会运行未签名的脚本。除非为脚本签名，否则需要将 PowerShell 配置为运行未签名的脚本。若要运行未签名的脚本，**ExecutionPolicy** 必须设置为 **Unrestricted**。你使用的 **ExecutionPolicy** 设置基于 Windows PowerShell 的版本。
 
-```cmd
+```
 REM   Run an unsigned PowerShell script and log the output
 PowerShell -ExecutionPolicy Unrestricted .\startup.ps1 >> "%TEMP%\StartupLog.txt" 2>&1
 
@@ -234,7 +234,7 @@ EXIT /B %errorlevel%
 
 如果使用的是运行 PowerShell 2.0 或 1.0 的来宾 OS，则可强制运行版本 2，如果不可用，则使用版本 1。
 
-```cmd
+```
 REM   Attempt to set the execution policy by using PowerShell version 2.0 syntax.
 PowerShell -Version 2.0 -ExecutionPolicy Unrestricted .\startup.ps1 >> "%TEMP%\StartupLog.txt" 2>&1
 
@@ -259,7 +259,7 @@ EXIT /B %errorlevel%
 
 在此处显示 **ServiceDefinition.csdef** 文件的相关节：
 
-```xml
+```
 <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <WorkerRole name="WorkerRole1">
     ...
@@ -283,7 +283,7 @@ EXIT /B %errorlevel%
 
 例如，这个 **Startup.cmd** 批处理文件使用 **PathToStartupStorage** 环境变量在本地存储位置上创建文件 **MyTest.txt**。
 
-```cmd
+```
 REM   Create a simple text file.
 
 ECHO This text will go into the MyTest.txt file which will be in the    >  "%PathToStartupStorage%\MyTest.txt"
@@ -298,7 +298,7 @@ EXIT /b 0
 
 可以从 Azure SDK 中使用 [GetLocalResource](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.getlocalresource.aspx) 方法访问本地存储文件夹。
 
-```csharp
+```
 string localStoragePath = Microsoft.WindowsAzure.ServiceRuntime.RoleEnvironment.GetLocalResource("StartupLocalStorage").RootPath;
 
 string fileContent = System.IO.File.ReadAllText(System.IO.Path.Combine(localStoragePath, "MyTestFile.txt"));
@@ -312,7 +312,7 @@ string fileContent = System.IO.File.ReadAllText(System.IO.Path.Combine(localStor
 
 若要创建环境变量，请添加 [Variable]/[RoleInstanceValue] 元素并创建 `/RoleEnvironment/Deployment/@emulated` 的 XPath 值。在计算模拟器中运行时，**%ComputeEmulatorRunning%** 环境变量的值为 `true`，而在云中运行时，该值为 `false`。
 
-```xml
+```
 <ServiceDefinition name="MyService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <WorkerRole name="WorkerRole1">
 
@@ -334,7 +334,7 @@ string fileContent = System.IO.File.ReadAllText(System.IO.Path.Combine(localStor
 
 该任务现在可以使用 **%ComputeEmulatorRunning%** 环境变量根据角色是在云中还是在模拟器中运行来执行不同的操作。下面是用于检查该环境变量的 .cmd shell 脚本。
 
-```cmd
+```
 REM   Check if this task is running on the compute emulator.
 
 IF "%ComputeEmulatorRunning%" == "true" (
@@ -352,7 +352,7 @@ IF "%ComputeEmulatorRunning%" == "true" (
 
 检测任务是否已运行的最简单方式是在任务成功时在 **%TEMP%** 文件夹中创建一个文件，然后在任务开始时查找该文件。下面是可执行该操作的示例 cmd shell 脚本。
 
-```cmd
+```
 REM   If Task1_Success.txt exists, then Application 1 is already installed.
 IF EXIST "%RoleRoot%\Task1_Success.txt" (
   ECHO Application 1 is already installed. Exiting. >> "%TEMP%\StartupLog.txt" 2>&1
@@ -402,7 +402,7 @@ Visual Studio 未提供用于单步调试批处理文件的调试器，因此最
 
 ServiceDefinition.cmd：
 
-```xml
+```
 <Startup>
     <Task commandLine="logwrap.cmd startup2.cmd" executionContext="limited" taskType="simple" />
 </Startup>
@@ -410,7 +410,7 @@ ServiceDefinition.cmd：
 
 **logwrap.cmd：**
 
-```cmd
+```
 @ECHO OFF
 
 REM   logwrap.cmd calls passed in batch file, redirecting all output to the StartupLog.txt log file.
@@ -444,7 +444,7 @@ IF %ERRORLEVEL% EQU 0 (
 
 **Startup2.cmd：**
 
-```cmd
+```
 @ECHO OFF
 
 REM   This is the batch file where the startup steps should be performed. Because of the
@@ -462,7 +462,7 @@ EXIT %ERRORLEVEL%
 
 **StartupLog.txt** 文件中的示例输出：
 
-```txt
+```
 [Mon 10/17/2016 20:24:46.75] == START logwrap.cmd ============================================== 
 [Mon 10/17/2016 20:24:46.75] Running command1.cmd 
 [Mon 10/17/2016 20:24:46.77] Some log information about this task

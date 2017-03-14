@@ -27,7 +27,7 @@ ms.author: jonor
 ## 允许 ICMP 的防火墙规则
 这个简单的 PowerShell 语句可以在任何 Windows VM 上运行，以允许 ICMP (Ping) 流量。此防火墙更新将允许 ping 协议通过 Windows 防火墙，从而更轻松地进行测试和疑难解答（ICMP 在多数的 Linux 分发版上默认为打开）。
 
-```PowerShell
+```
 # Turn On ICMPv4
 New-NetFirewallRule -Name Allow_ICMPv4 -DisplayName "Allow ICMPv4" `
     -Protocol ICMPv4 -Enabled True -Profile Any -Action Allow
@@ -46,7 +46,7 @@ New-NetFirewallRule -Name Allow_ICMPv4 -DisplayName "Allow ICMPv4" `
 
 通过 RDP 访问 IIS01 时，此 PowerShell 脚本应在本地运行。
 
-```PowerShell
+```
 # IIS Server Post Build Config Script
 # Get Admin Account and Password
     Write-Host "Please enter the admin account information used to create this VM:" -ForegroundColor Cyan
@@ -158,7 +158,7 @@ New-NetFirewallRule -Name Allow_ICMPv4 -DisplayName "Allow ICMPv4" `
 
 通过 RDP 访问 AppVM01 时，此 PowerShell 脚本应在本地运行。必须以管理员身份运行 PowerShell 才能确保成功执行。
 
-```PowerShell
+```
 # AppVM01 Server Post Build Config Script
 # PowerShell must be run as Administrator for Net Share commands to work
 

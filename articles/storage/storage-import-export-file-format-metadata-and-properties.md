@@ -1,8 +1,8 @@
 ---
 title: 导入/导出服务元数据和属性文件格式 | Azure
 description: 了解如何为导入或导出作业包含的一个或多个 Blob 指定元数据和属性。
-author: renashahmsft
-manager: aungoo
+author: muralikk
+manager: syadav
 editor: tysonn
 services: storage
 documentationcenter: ''
@@ -13,9 +13,9 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/25/2015
-wacn.date: 12/29/2016
-ms.author: renash
+ms.date: 01/15/2017
+wacn.date: 02/24/2017
+ms.author: muralikk
 ---
 
 # 导入/导出服务元数据和属性文件格式
@@ -24,7 +24,7 @@ ms.author: renash
 ## 元数据文件格式  
 元数据文件的格式如下所示：
 
-```xml
+```
 <?xml version="1.0" encoding="UTF-8"?>  
 <Metadata>  
 [<metadata-name-1>metadata-value-1</metadata-name-1>]  
@@ -35,15 +35,13 @@ ms.author: renash
 
 |XML 元素|类型|说明|  
 |-----------------|----------|-----------------|  
-|`Metadata`  
-|Root 元素|元数据文件的根元素。|  
-|`metadata-name`  
-|String|可选。XML 元素指定 Blob 的元数据名称，其值指定元数据设置值。|  
+|`Metadata`|Root 元素|元数据文件的根元素。|  
+|`metadata-name`|String|可选。XML 元素指定 Blob 的元数据名称，其值指定元数据设置值。|  
 
 ## 属性文件格式  
 属性文件的格式如下：
 
-```xml
+```
 <?xml version="1.0" encoding="UTF-8"?>  
 <Properties>  
 [<Last-Modified>date-time-value</Last-Modified>]  
@@ -71,4 +69,4 @@ ms.author: renash
 
  有关设置 Blob 元数据和属性的详细规则，请参阅，请参阅[设置 Blob 属性](https://docs.microsoft.com/zh-CN/rest/api/storageservices/fileservices/set-blob-properties)、[设置 Blob 元数据](https://docs.microsoft.com/zh-CN/rest/api/storageservices/fileservices/set-blob-metadata)以及[设置和检索 Blob 资源的属性与元数据](https://docs.microsoft.com/zh-CN/rest/api/storageservices/fileservices/setting-and-retrieving-properties-and-metadata-for-blob-resources)。
 
-<!---HONumber=Mooncake_1226_2016-->
+<!---HONumber=Mooncake_0220_2017-->

@@ -41,19 +41,19 @@ ms.author: lodipalm;barbkess;sonyama
 1. 打开 Windows PowerShell。
 2. 运行此 cmdlet 以登录到 Azure Resource Manager 中。
 
-    ```Powershell
+    ```
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     ```
 
 3. 选择要用于当前会话的订阅。
 
-    ```Powershell
+    ```
     Get-AzureRmSubscription	-SubscriptionName "MySubscription" | Select-AzureRmSubscription
     ```
 
 4.  创建数据库。此示例将在名为“mywesteuroperesgp1”的资源组中的名为“sqldwserver1”的服务器中创建一个名为“mynewsqldw”且服务目标级别为“DW400”的新数据库。**注意：创建新的 SQL 数据仓库数据库可能会导致新的计费费用。有关定价的详细信息，请参阅 [SQL 数据仓库定价][]。**
 
-    ```Powershell
+    ```
     New-AzureRmSqlDatabase -RequestedServiceObjectiveName "DW400" -DatabaseName "mynewsqldw" -ServerName "sqldwserver1" -ResourceGroupName "mywesteuroperesgp1" -Edition "DataWarehouse"
     ```
 
@@ -90,8 +90,8 @@ ms.author: lodipalm;barbkess;sonyama
 
 [How to install and configure Azure PowerShell]: ../powershell-install-configure.md
 [how to create a SQL Data Warehouse from the Azure Portal]: ./sql-data-warehouse-get-started-provision.md
-[Create an Azure SQL Database logical server with the Azure Portal]: ../sql-database/sql-database-get-started.md#create-an-azure-sql-database-logical-server
-[Create an Azure SQL Database logical server with PowerShell]: ../sql-database/sql-database-get-started-powershell.md#database-setup-create-a-resource-group-server-and-firewall-rule
+[Create an Azure SQL Database logical server with the Azure Portal]: ../sql-database/sql-database-get-started.md#create-a-new-logical-sql-server
+[Create an Azure SQL Database logical server with PowerShell]: ../sql-database/sql-database-get-started-powershell.md#complete-azure-powershell-script-to-create-a-server-firewall-rule-and-database
 [how to create a resource group]: ../azure-resource-manager/resource-group-portal.md
 
 <!--MSDN references--> 

@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 10/11/2016
-wacn.date: 01/25/2017
+ms.date: 01/17/2017
+wacn.date: 03/10/2017
 ms.author: larryfr
 ---
 
@@ -30,6 +30,10 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
     * Visual Studio 的版本必须是 2013 或 2015。
     * Python 的版本必须是 2.7 或更高版本
 * 基于 Linux 的 HDInsight 群集或 [Azure PowerShell][powershell] - 如果已有基于 Linux 的群集，则可以使用 Ambari 将共享访问签名添加到群集。如果没有，则可以使用 Azure PowerShell 新建群集，并在创建群集期间添加共享访问签名。
+
+    > [!IMPORTANT]
+    Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
+
 * 来自以下网址的示例文件：[https://github.com/Azure-Samples/hdinsight-dotnet-python-azure-storage-shared-access-signature](https://github.com/Azure-Samples/hdinsight-dotnet-python-azure-storage-shared-access-signature)。此存储库包含以下项目：
 
     * Visual Studio 项目，可以创建存储容器、存储策略，以及与 HDInsight 配合使用的 SAS
@@ -153,11 +157,8 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
     > [!IMPORTANT]
     出现输入 HTTP/s 或 SSH 用户名和密码的提示时，必须提供符合以下条件的密码：
-    > <p>
-    ><p> * 长度必须至少为 10 个字符
-    ><p> * 必须至少包含一个数字
-    ><p> * 必须至少包含一个非字母数字字符
-    ><p> * 必须至少包含一个大写或小写字母
+    > <p> 
+    ><p>* 长度必须至少为 10 个字符 <p> * 必须至少包含一个数字 <p> * 必须至少包含一个非字母数字字符 <p> * 必须至少包含一个大写或小写字母
     > 
     > 
 
@@ -273,5 +274,5 @@ At C:\Users\larryfr\Documents\GitHub\hdinsight-azure-storage-sas\CreateCluster\H
 
 [powershell]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 
-<!---HONumber=Mooncake_0120_2017-->
-<!--Update_Description: update from ASM to ARM-->
+<!---HONumber=Mooncake_0306_2017-->
+<!--Update_Description: add information about HDInsight Windows is going to be abandoned-->

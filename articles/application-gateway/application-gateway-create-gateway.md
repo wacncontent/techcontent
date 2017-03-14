@@ -69,7 +69,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 以下示例使用名为“testvnet1”的虚拟网络和名为“subnet-1”的子网创建应用程序网关。
 
-```powershell
+```
 New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
 ```
 
@@ -77,11 +77,10 @@ New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subn
 
 若要验证是否已创建网关，可以使用 `Get-AzureApplicationGateway` cmdlet。
 
-```powershell
+```
 Get-AzureApplicationGateway AppGwTest
 ```
 
-<br/>  
 
 ```
 Name          : AppGwTest
@@ -114,7 +113,7 @@ DnsName       :
 
 将以下文本复制到记事本中。
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
     <FrontendPorts>
@@ -166,7 +165,7 @@ DnsName       :
 
 以下示例演示如何使用配置文件设置应用程序网关。此示例对公共端口 80 上的 HTTP 流量进行负载均衡，将网络流量发送到两个 IP 地址之间的后端端口 80。
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
     <FrontendPorts>
@@ -215,7 +214,7 @@ DnsName       :
 
 下一步，设置应用程序网关。将 `Set-AzureApplicationGatewayConfig` cmdlet 与配置 XML 文件配合使用。
 
-```powershell
+```
 Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile "D:\config.xml"
 ```
 
@@ -234,7 +233,7 @@ Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile "D:\config.xml"
 
 按以下示例中所示创建前端 IP。
 
-```powershell
+```
 $fip = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendIPConfiguration
 $fip.Name = "fip1"
 $fip.Type = "Private"
@@ -243,7 +242,7 @@ $fip.StaticIPAddress = "10.0.0.5"
 
 按以下示例中所示创建前端端口。
 
-```powershell
+```
 $fep = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendPort
 $fep.Name = "fep1"
 $fep.Port = 80
@@ -253,7 +252,7 @@ $fep.Port = 80
 
 按以下示例中所示定义要添加到后端服务器池的 IP 地址。
 
-```powershell
+```
 $servers = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendServerCollection
 $servers.Add("10.0.0.1")
 $servers.Add("10.0.0.2")
@@ -261,7 +260,7 @@ $servers.Add("10.0.0.2")
 
 使用 $server 对象将值添加到后端池对象 ($pool)。
 
-```powershell
+```
 $pool = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendAddressPool
 $pool.BackendServers = $servers
 $pool.Name = "pool1"
@@ -269,7 +268,7 @@ $pool.Name = "pool1"
 
 创建后端服务器池设置。
 
-```powershell
+```
 $setting = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendHttpSettings
 $setting.Name = "setting1"
 $setting.CookieBasedAffinity = "enabled"
@@ -279,7 +278,7 @@ $setting.Protocol = "http"
 
 创建侦听器。
 
-```powershell
+```
 $listener = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpListener
 $listener.Name = "listener1"
 $listener.FrontendPort = "fep1"
@@ -290,7 +289,7 @@ $listener.SslCert = ""
 
 创建规则。
 
-```powershell
+```
 $rule = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpLoadBalancingRule
 $rule.Name = "rule1"
 $rule.Type = "basic"
@@ -305,7 +304,7 @@ $rule.BackendAddressPool = "pool1"
 
 将前端 IP 添加到配置。
 
-```powershell
+```
 $appgwconfig = New-Object Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.ApplicationGatewayConfiguration
 $appgwconfig.FrontendIPConfigurations = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendIPConfiguration]"
 $appgwconfig.FrontendIPConfigurations.Add($fip)
@@ -313,35 +312,35 @@ $appgwconfig.FrontendIPConfigurations.Add($fip)
 
 将前端端口添加到配置。
 
-```powershell
+```
 $appgwconfig.FrontendPorts = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.FrontendPort]"
 $appgwconfig.FrontendPorts.Add($fep)
 ```
 
 将后端服务器池添加到配置。
 
-```powershell
+```
 $appgwconfig.BackendAddressPools = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendAddressPool]"
 $appgwconfig.BackendAddressPools.Add($pool)  
 ```
 
 将后端池设置添加到配置。
 
-```powershell
+```
 $appgwconfig.BackendHttpSettingsList = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.BackendHttpSettings]"
 $appgwconfig.BackendHttpSettingsList.Add($setting)
 ```
 
 将侦听器添加到配置。
 
-```powershell
+```
 $appgwconfig.HttpListeners = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpListener]"
 $appgwconfig.HttpListeners.Add($listener)
 ```
 
 将规则添加到配置。
 
-```powershell
+```
 $appgwconfig.HttpLoadBalancingRules = New-Object "System.Collections.Generic.List[Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model.HttpLoadBalancingRule]"
 $appgwconfig.HttpLoadBalancingRules.Add($rule)
 ```
@@ -349,7 +348,7 @@ $appgwconfig.HttpLoadBalancingRules.Add($rule)
 ### 步骤 3
 使用 `Set-AzureApplicationGatewayConfig` 将配置对象提交到应用程序网关资源。
 
-```powershell
+```
 Set-AzureApplicationGatewayConfig -Name AppGwTest -Config $appgwconfig
 ```
 
@@ -362,7 +361,7 @@ Set-AzureApplicationGatewayConfig -Name AppGwTest -Config $appgwconfig
 > 
 > 
 
-```powershell
+```
 Start-AzureApplicationGateway AppGwTest
 ```
 
@@ -372,11 +371,10 @@ Start-AzureApplicationGateway AppGwTest
 
 以下示例演示了一个正常运行并已准备好将流量定向到 `http://<generated-dns-name>.chinacloudapp.cn` 的应用程序网关。
 
-```powershell
+```
 Get-AzureApplicationGateway AppGwTest
 ```
 
-<br/>  
 
 ```
 VERBOSE: 8:09:28 PM - Begin Operation: Get-AzureApplicationGateway
@@ -414,11 +412,10 @@ Successful OK                   ce6c6c95-77b4-2118-9d65-e29defadffb8
 
 应用程序网关进入停止状态后，请使用 `Remove-AzureApplicationGateway` cmdlet 删除该服务。
 
-```powershell
+```
 Remove-AzureApplicationGateway AppGwTest
 ```
 
-<br/>  
 
 ```
 VERBOSE: 10:49:34 PM - Begin Operation: Remove-AzureApplicationGateway
@@ -430,11 +427,10 @@ Successful OK                   055f3a96-8681-2094-a304-8d9a11ad8301
 
 若要验证是否已删除服务，可以使用 `Get-AzureApplicationGateway` cmdlet。此步骤不是必需的。
 
-```powershell
+```
 Get-AzureApplicationGateway AppGwTest
 ```
 
-<br/>  
 
 ```
 VERBOSE: 10:52:46 PM - Begin Operation: Get-AzureApplicationGateway

@@ -1,5 +1,5 @@
 ---
-title: 开始使用 Azure CLI 在经典部署模型中创建面向 Internet 的负载均衡器 | Azure
+title: 创建面向 Internet 的负载均衡器 - Azure CLI 经典 | Azure
 description: 了解如何使用 Azure CLI 在经典部署模型中创建面向 Internet 的负载均衡器
 services: load-balancer
 documentationcenter: na
@@ -13,8 +13,8 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/09/2016
-wacn.date: 01/13/2017
+ms.date: 01/23/2017
+wacn.date: 03/03/2017
 ms.author: kumud
 ---
 
@@ -39,7 +39,7 @@ ms.author: kumud
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到经典模式，如下所示。
 
-    ```azurecli
+    ```
     azure config mode asm
     ```
 
@@ -51,30 +51,29 @@ ms.author: kumud
 
 ## 创建终结点和负载均衡器集
 
-此方案假定已创建虚拟机“web1”和“web2”。本指南将使用端口 80 作为公用端口和本地端口创建负载均衡器集。
-还将在端口 80 上配置探测端口，并将负载均衡器集命名为“lbset”。
+此方案假定已创建虚拟机“web1”和“web2”。本指南将使用端口 80 作为公用端口和本地端口创建负载均衡器集。还将在端口 80 上配置探测端口，并将负载均衡器集命名为“lbset”。
 
 ### 步骤 1
 
 使用 `azure network vm endpoint create` 为虚拟机“web1”创建第一个终结点和负载均衡器集。
 
-```azurecli
+```
 azure vm endpoint create web1 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
 ```
 
-## 步骤 2
+### 步骤 2
 
 将第二个虚拟机“web2”添加到负载均衡器集。
 
-```azurecli
+```
 azure vm endpoint create web2 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
 ```
 
-## 步骤 3
+### 步骤 3
 
 使用 `azure vm show` 验证负载均衡器配置。
 
-```azurecli
+```
 azure vm show web1
 ```
 
@@ -128,7 +127,7 @@ info:    vm show command OK
 
 你可以使用 `azure vm endpoint create` 创建远程桌面终结点，将网络流量从公共端口转发到特定虚拟机的本地端口。
 
-```azurecli
+```
 azure vm endpoint create web1 54580 -k 3389
 ```
 
@@ -138,7 +137,7 @@ azure vm endpoint create web1 54580 -k 3389
 
 使用上面的示例，你可以使用命令 `azure vm endpoint delete` 从负载均衡器“lbset”中删除为虚拟机“web1”创建的终结点。
 
-```azurecli
+```
 azure vm endpoint delete web1 tcp-80-80
 ```
 
@@ -153,5 +152,5 @@ azure vm endpoint delete web1 tcp-80-80
 
 [为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
-<!---HONumber=Mooncake_0109_2017-->
-<!--Update_Description: update meta properties & wording update & update link references & update code-->
+<!---HONumber=Mooncake_0227_2017-->
+<!--Update_Description: update meta properties; wording update-->

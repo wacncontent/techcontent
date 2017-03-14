@@ -40,7 +40,7 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 若要创建聚集列存储表，只需在 WITH 子句中指定 CLUSTERED COLUMNSTORE INDEX，或省略 WITH 子句：
 
-```SQL
+```
 CREATE TABLE myTable   
   (  
     id int NOT NULL,  
@@ -65,7 +65,7 @@ WITH ( CLUSTERED COLUMNSTORE INDEX );
 
 若要创建堆表，只需在 WITH 子句中指定 HEAP：
 
-```SQL
+```
 CREATE TABLE myTable   
   (  
     id int NOT NULL,  
@@ -81,7 +81,7 @@ WITH ( HEAP );
 
 若要创建聚集索引表，只需在 WITH 子句中指定 CLUSTERED INDEX：
 
-```SQL
+```
 CREATE TABLE myTable   
   (  
     id int NOT NULL,  
@@ -93,7 +93,7 @@ WITH ( CLUSTERED INDEX (id) );
 
 若要在表中添加非聚集索引，只需在 WITH 子句中指定 CLUSTERED INDEX：
 
-```SQL
+```
 CREATE INDEX zipCodeIndex ON t1 (zipCode);
 ```
 
@@ -103,7 +103,7 @@ CREATE INDEX zipCodeIndex ON t1 (zipCode);
 
 可以在系统上创建并使用以下视图来计算每个行组的平均行数，以及识别所有欠佳的聚集列存储索引。此视图中的最后一列将生成为 SQL 语句，以用于重建索引。
 
-```sql
+```
 CREATE VIEW dbo.vColumnstoreDensity
 AS
 SELECT
@@ -152,7 +152,7 @@ GROUP BY
 
 现在你已创建视图，请运行此查询来识别哪些表的行组中包含的行少于 10 万个。当然，如果你要寻求更理想的段质量，可以将 10 万这个阈值增大。
 
-```sql
+```
 SELECT	*
 FROM	[dbo].[vColumnstoreDensity]
 WHERE	COMPRESSED_rowgroup_rows_AVG < 100000
@@ -259,7 +259,7 @@ ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_CO
 
 此示例使用 [CTAS][] 和分区切换重建表分区。
 
-```sql
+```
 -- Step 1: Select the partition of data and write it out to a new table using CTAS
 CREATE TABLE [dbo].[FactInternetSales_20000101_20010101]
     WITH    (   DISTRIBUTION = HASH([ProductKey])

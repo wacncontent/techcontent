@@ -15,7 +15,7 @@ editor: Eric Chen
 
 ms.service: ''
 ms.date: ''
-wacn.date: 02/08/2017
+wacn.date: 03/01/2017
 ---
 
 #文档中心
@@ -180,6 +180,12 @@ wacn.date: 02/08/2017
     <td><a href="./articles/backup/index.md">备份</a></td>
     <td><a href="./articles/site-recovery/index.md">站点恢复</a></td>
     <td><a href="./articles/scheduler/index.md">计划程序</a></td>
+  </tr>
+  <tr>
+  <td><a href="./articles/azure-resource-manager/index.md">Azure 资源管理器</a></td>
+  <td><a href=""></a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 

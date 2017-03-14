@@ -24,12 +24,14 @@ ms.author: iainfou
 ## 先决条件
 本文需要 Azure 中的现有 Linux VM。如果需要创建 VM，请使用以下方法之一：
 
-- [Azure CLI 1.0](./virtual-machines-linux-quick-create-cli-nodejs.md) 或 [Azure CLI 2.0（预览版）](./virtual-machines-linux-quick-create-cli.md)
+- [Azure CLI 1.0](./virtual-machines-linux-quick-create-cli-nodejs.md)
 - [Azure 门户预览](./virtual-machines-linux-quick-create-portal.md)
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-还需要安装最新的 [Azure CLI 1.0](../xplat-cli-install.md) 或 [Azure CLI 2.0（预览版）](https://docs.microsoft.com/cli/azure/install-az-cli2)并登录到[有效的 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。
+还需要安装最新的 [Azure CLI 1.0](../xplat-cli-install.md) 并登录到[有效的 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。
+
+[!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
 ## 快速命令
 如果需要快速完成任务，以下部分详细说明了在 VM 上安装和配置远程桌面所需的基本命令。本文档的余下部分（[从此处开始](#install-graphical-environment-on-linux-vm)）提供了每个步骤的更详细信息和应用背景。
@@ -38,56 +40,43 @@ ms.author: iainfou
 
 通过 SSH 连接到 VM。安装 xfce 桌面环境，如下所示：
 
-```bash
+```
 sudo apt-get update
 sudo apt-get install xfce4
 ```
 
 安装 xrdp，如下所示：
 
-```bash
+```
 sudo apt-get install xrdp
 ```
 
 配置 xrdp 以使用 xfce 作为桌面环境，如下所示：
 
-```bash
+```
 echo xfce4-session >~/.xsession
 ```
 
 重新启动 xrdp 服务：
 
-```bash
+```
 sudo service xrdp restart
 ```
 
 如果当前仅使用 SSH 密钥进行身份验证，请为用户帐户设置密码：
 
-```bash
+```
 sudo passwd ops
 ```
 
 退出 Linux VM 的 SSH 会话。使用本地计算机上的 Azure CLI 创建网络安全组规则，以允许远程桌面流量。以下示例使用 Azure CLI 1.0 在 `myNetworkSecurityGroup` 内创建名为 `myNetworkSecurityGroupRule` 的规则，以允许 tcp 端口 3389 上的流量：
 
-```azurecli
+```
 azure network nsg rule create --resource-group myResourceGroup \
     --nsg-name myNetworkSecurityGroup --name myNetworkSecurityGroupRule \
     --protocol tcp --direction inbound --priority 1010 \
     --destination-port-range 3389 --access allow
 ```
-
-或者，将 [az network nsg rule create](https://docs.microsoft.com/cli/azure/network/nsg/rule#create) 与 Azure CLI 2.0（预览版）配合使用：
-
-```azurecli
-az network nsg rule create --resource-group myResourceGroup \
-    --nsg-name myNetworkSecurityGroup --name myNetworkSecurityGroupRule \
-    --protocol tcp --direction inbound --priority 1010 \
-    --source-address-prefix '*' --source-port-range '*' \
-    --destination-address-prefix '*' --destination-port-range 3389 \
-    --access allow
-```
-
-使用所选的远程桌面客户端连接到 Linux VM。
 
 ![使用远程桌面客户端连接到 xrdp](./media/virtual-machines-linux-use-remote-desktop/remote-desktop-client.png)  
 
@@ -98,7 +87,7 @@ Azure 中的大多数 Linux VM 默认情况下未安装桌面环境。通常使�
 
 首先，通过 SSH 连接到 VM。以下示例使用用户名 `ops` 连接到名为 `myvm.chinanorth.chinacloudapp.cn` 的 VM：
 
-```bash
+```
 ssh ops@myvm.chinanorth.chinacloudapp.cn ~/.ssh/id_rsa.pub
 ```
 
@@ -106,7 +95,7 @@ ssh ops@myvm.chinanorth.chinacloudapp.cn ~/.ssh/id_rsa.pub
 
 接下来，使用 `apt` 安装 xfce，如下所示：
 
-```bash
+```
 sudo apt-get update
 sudo apt-get install xfce4
 ```
@@ -114,26 +103,26 @@ sudo apt-get install xfce4
 ## 安装和配置远程桌面服务器
 现在，已安装桌面环境，可配置远程桌面服务以侦听传入连接。[xrdp](http://www.xrdp.org/) 是一个在大多数 Linux 发行版中提供的开放源代码远程桌面协议 (RDP) 服务器，非常适用于 xfce。在 Ubuntu VM 上安装 xrdp，如下所示：
 
-```bash
+```
 sudo apt-get install xrdp
 ```
 
 告诉 xrdp 在启动会话时要使用的桌面环境。配置 xrdp 以使用 xfce 作为桌面环境，如下所示：
 
-```bash
+```
 echo xfce4-session >~/.xsession
 ```
 
 重新启动 xrdp 服务使更改生效，如下所示：
 
-```bash
+```
 sudo service xrdp restart
 ```
 
 ## 设置本地用户帐户密码
 如果在创建 VM 时已为用户帐户创建密码，请跳过此步骤。如果仅使用 SSH 密钥身份验证，并且未设置本地帐户密码，请在使用 xrdp 之前指定密码以登录到 VM。xrdp 无法接受使用 SSH 密钥进行身份验证。以下示例为用户帐户 `ops` 指定密码：
 
-```bash
+```
 sudo passwd ops
 ```
 
@@ -147,22 +136,11 @@ sudo passwd ops
 
 - 使用 Azure CLI 1.0：
 
-    ```azurecli
+    ```
     azure network nsg rule create --resource-group myResourceGroup \
         --nsg-name myNetworkSecurityGroup --name myNetworkSecurityGroupRule \
         --protocol tcp --direction inbound --priority 1010 \
         --destination-port-range 3389 --access allow
-    ```
-
-- 或者，将 [az network nsg rule create](https://docs.microsoft.com/cli/azure/network/nsg/rule#create) 与 Azure CLI 2.0（预览版）配合使用：
-
-    ```azurecli
-    az network nsg rule create --resource-group myResourceGroup \
-        --nsg-name myNetworkSecurityGroup --name myNetworkSecurityGroupRule \
-        --protocol tcp --direction inbound --priority 1010 \
-        --source-address-prefix '*' --source-port-range '*' \
-        --destination-address-prefix '*' --destination-port-range 3389 \
-        --access allow
     ```
 
 ## 使用远程桌面客户端连接 Linux VM
@@ -177,26 +155,26 @@ sudo passwd ops
 ## 故障排除
 如果无法使用远程桌面客户端连接到 Linux VM，请在 Linux VM上使用 `netstat` 验证 VM 是否正在侦听 RDP 连接，如下所示：
 
-```bash
+```
 sudo netstat -plnt | grep rdp
 ```
 
 以下示例显示正在按预期方式侦听 TCP 端口 3389 的 VM：
 
-```bash
+```
 tcp     0     0      127.0.0.1:3350     0.0.0.0:*     LISTEN     53192/xrdp-sesman
 tcp     0     0      0.0.0.0:3389       0.0.0.0:*     LISTEN     53188/xrdp
 ```
 
 如果 xrdp 服务未在侦听，请在 Ubuntu VM 上重新启动该服务，如下所示：
 
-```bash
+```
 sudo service xrdp restart
 ```
 
 请在 Ubuntu VM 上的 `/var/log` 中查看日志，以获得该服务可能未响应的原因的指示。也可以在远程桌面连接尝试期间监视 syslog 以查看任何错误：
 
-```bash
+```
 tail -f /var/log/syslog
 ```
 

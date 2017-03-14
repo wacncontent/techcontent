@@ -1,8 +1,8 @@
 ---
 title: 修复导入作业 | Azure
 description: 了解如何使用导入/导出服务修复已创建和运行的导入作业。
-author: renashahmsft
-manager: aungoo
+author: muralikk
+manager: syadav
 editor: tysonn
 services: storage
 documentationcenter: ''
@@ -13,9 +13,9 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/25/2015
-wacn.date: 12/29/2016
-ms.author: renash
+ms.date: 01/15/2017
+wacn.date: 02/24/2017
+ms.author: muralikk
 ---
 
 # 修复导入作业
@@ -52,7 +52,7 @@ WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bo
 
 下面是复制日志文件的示例。在此示例中，为导入作业寄送的驱动器上某个文件的 64K 内容已损坏。由于这只是指示失败，作业中剩余 Blob 已成功导入。
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>  
 <DriveLog>  
  <DriveId>9WM35C2V</DriveId>  
@@ -97,6 +97,11 @@ WAImportExport.exe RepairImport /r:C:\WAImportExport\9WM35C2V.rep /d:C:\Users\bo
 使工具可以处理所需的文件或者更新路径映射文件后，可返回此工具完成导入过程。
 
 ## 另请参阅  
-[设置 Azure 导入/导出工具](./storage-import-export-tool-setup-v1.md) [为导入作业准备硬盘驱动器](./storage-import-export-tool-preparing-hard-drives-import-v1.md) [使用复制日志文件查看作业状态](./storage-import-export-tool-reviewing-job-status-v1.md) [修复导出作业](./storage-import-export-tool-repairing-an-export-job-v1.md) [排查 Azure 导入/导出工具问题](./storage-import-export-tool-troubleshooting-v1.md)
 
-<!---HONumber=Mooncake_1226_2016-->
+[设置 Azure 导入/导出工具](./storage-import-export-tool-setup-v1.md)  
+[为导入作业准备硬盘驱动器](./storage-import-export-tool-preparing-hard-drives-import-v1.md)  
+[使用复制日志文件查看作业状态](./storage-import-export-tool-reviewing-job-status-v1.md)  
+[修复导出作业](./storage-import-export-tool-repairing-an-export-job-v1.md)  
+[排查 Azure 导入/导出工具问题](./storage-import-export-tool-troubleshooting-v1.md)
+
+<!---HONumber=Mooncake_0220_2017-->
