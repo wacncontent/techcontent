@@ -1,31 +1,31 @@
-<properties
-    pageTitle="在网站中使用 ReportViewer | Azure"
-    description="本主题介绍如何使用 Visual Studio ReportViewer 控件构建 Azure 网站，该控件用于显示 Azure 虚拟机上存储的报表。"
-    services="virtual-machines-windows"
-    documentationcenter="na"
-    author="guyinacube"
-    manager="erikre"
-    editor="monicar"
-    tags="azure-service-management" />
-<tags
-    ms.assetid="78b76318-d9bf-48ef-9d9e-d1b7d8cf3042"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows-sql-server"
-    ms.workload="infrastructure-services"
-    ms.date="10/04/2016"
-    wacn.date="02/24/2017"
-    ms.author="asaxton" />  
+---
+title: 在网站中使用 ReportViewer | Azure
+description: 本主题介绍如何使用 Visual Studio ReportViewer 控件构建 Azure 网站，该控件用于显示 Azure 虚拟机上存储的报表。
+services: virtual-machines-windows
+documentationcenter: na
+author: guyinacube
+manager: erikre
+editor: monicar
+tags: azure-service-management
 
+ms.assetid: 78b76318-d9bf-48ef-9d9e-d1b7d8cf3042
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 10/04/2016
+wacn.date: 02/24/2017
+ms.author: asaxton
+---
 
 # 在 Azure 中托管的网站中使用 ReportViewer
-> [AZURE.IMPORTANT] 
-Azure 提供两个不同的部署模型用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。
+> [!IMPORTANT] 
+Azure 提供两个不同的部署模型用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。
 
 可使用 Visual Studio ReportViewer 控件构建 Azure 网站，该控件用于显示 Azure 虚拟机上存储的报表。ReportViewer 控件位于使用 ASP.NET Web 应用程序模板生成的 Web 应用程序中。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 ASP.NET MVC Web 应用程序模板不支持 ReportViewer 控件。
 > 
 > 
@@ -37,9 +37,9 @@ ASP.NET MVC Web 应用程序模板不支持 ReportViewer 控件。
 * **发布** ASP.NET Web 应用程序到 Azure
 
 ## 先决条件
-请查看 [Azure 虚拟机的 SQL Server Business Intelligence](/documentation/articles/virtual-machines-windows-classic-ps-sql-bi/) 中的“常规建议和最佳实践”部分。
+请查看 [Azure 虚拟机的 SQL Server Business Intelligence](./virtual-machines-windows-classic-ps-sql-bi.md) 中的“常规建议和最佳实践”部分。
 
-> [AZURE.NOTE]
+> [!NOTE]
 ReportViewer 控件随 Visual Studio Standard Edition 或更高版本提供。如果你使用的是 Web Developer Express Edition，则必须安装 [MICROSOFT REPORT VIEWER 2012 RUNTIME](https://www.microsoft.com/download/details.aspx?id=35747) 才能使用 ReportViewer 运行时功能。
 ><p> 
 ><p>Azure 中不支持在本地处理模式下配置的 ReportViewer。
@@ -81,9 +81,9 @@ ReportViewer 控件随 Visual Studio Standard Edition 或更高版本提供。�
 ReportViewer 需要使用正确的凭据向报表服务器进行身份验证，并且凭据必须经报表服务器授权才能访问所需的报表。有关身份验证的信息，请参阅白皮书 [Reporting Services 报表查看器控件和基于 Azure 虚拟机的报表服务器](https://msdn.microsoft.com/zh-cn/library/azure/dn753698.aspx)。
 
 ## 发布 ASP.NET Web 应用程序到 Azure
-有关将 ASP.NET Web 应用程序发布到 Azure 的说明，请参阅[如何：从 Visual Studio 将 Web 应用程序迁移和发布到 Azure](/documentation/articles/vs-azure-tools-migrate-publish-web-app-to-cloud-service/) 和 [Web Apps 和 ASP.NET 入门](/documentation/articles/web-sites-dotnet-get-started/)。
+有关将 ASP.NET Web 应用程序发布到 Azure 的说明，请参阅[如何：从 Visual Studio 将 Web 应用程序迁移和发布到 Azure](../vs-azure-tools-migrate-publish-web-app-to-cloud-service.md) 和 [Web Apps 和 ASP.NET 入门](../app-service-web/web-sites-dotnet-get-started.md)。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 如果在解决方案资源管理器中的快捷菜单中未显示添加Azure 部署项目或添加 Azure 云服务项目命令，你可能需要将该项目的目标框架更改为 .NET Framework 4。
 > <p>
 > 两个命令提供基本相同的功能。其中一个命令将在快捷菜单中显示，具体取决于安装的 Azure SDK 版本。
@@ -93,9 +93,9 @@ ReportViewer 需要使用正确的凭据向报表服务器进行身份验证，�
 ## 资源
 [Microsoft 报表](https://msdn.microsoft.com/zh-cn/library/bb885185.aspx)
 
-[Azure 虚拟机中的 SQL Server Business Intelligence](/documentation/articles/virtual-machines-windows-classic-ps-sql-bi/)
+[Azure 虚拟机中的 SQL Server Business Intelligence](./virtual-machines-windows-classic-ps-sql-bi.md)
 
-[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](/documentation/articles/virtual-machines-windows-classic-ps-sql-report/)
+[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](./virtual-machines-windows-classic-ps-sql-report.md)
 
 [Reporting Services 报表查看器控件和基于 Azure 虚拟机的报表服务器](http://download.microsoft.com/download/2/2/0/220DE2F1-8AB3-474D-8F8B-C998F7C56B5D/Reporting%20Services%20report%20viewer%20control%20and%20Azure%20VM%20based%20report%20servers.docx)
 

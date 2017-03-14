@@ -1,17 +1,16 @@
-<properties 
-	pageTitle="使用 Azure 媒体服务交付按需媒体" 
-	description="本主题讨论了使用 Azure 媒体服务交付按需媒体的一些常见应用场景。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 Azure 媒体服务交付按需媒体
+description: 本主题讨论了使用 Azure 媒体服务交付按需媒体的一些常见应用场景。
+services: media-services
+documentationCenter: ''
+authors: Juliako
+manager: erikre
+editor: ''
 
-<tags
-	ms.service="media-services"
-	ms.date="06/22/2016"
-	wacn.date="12/26/2016"/>
-
+ms.service: media-services
+ms.date: 06/22/2016
+wacn.date: 12/26/2016
+---
 
 #使用 Azure 媒体服务交付按需媒体
 
@@ -29,19 +28,19 @@
 ###保护存储中的内容并以明文（非加密）形式交付流式处理媒体
 
 1. 将优质夹层文件上传到资产中。
-	
-	建议向资产应用存储加密选项，以便在内容上传期间以及当内容在存储中处于静态时，为其提供保护。
+
+    建议向资产应用存储加密选项，以便在内容上传期间以及当内容在存储中处于静态时，为其提供保护。
 1. 编码为自适应比特率 MP4 集。
 
-	建议向输出资产应用存储加密选项，以便保护静态内容。
-	
+    建议向输出资产应用存储加密选项，以便保护静态内容。
+
 1. 配置资产传送策略（由动态打包使用）。
-	
-	如果你的资产已经过存储加密，则**必须**配置资产传送策略。
+
+    如果你的资产已经过存储加密，则**必须**配置资产传送策略。
 
 1. 通过创建 OnDemand 定位符发布资产。
 
-	确保你要从中以流形式传输内容的流式处理终结点上至少有一个流式传输保留单元。
+    确保你要从中以流形式传输内容的流式处理终结点上至少有一个流式传输保留单元。
 
 1. 流式传输已发布的内容。
 
@@ -62,10 +61,9 @@
 1. 将优质夹层文件上传到资产中。
 1. 为内容编制索引。
 
-	索引作业将生成可用作视频播放中的隐藏式字幕 (CC) 的文件。它还将生成让你能够执行视频内搜索并跳转到视频确切位置的文件。
+    索引作业将生成可用作视频播放中的隐藏式字幕 (CC) 的文件。它还将生成让你能够执行视频内搜索并跳转到视频确切位置的文件。
 
 1. 使用已编制索引的内容。
-
 
 ###提供渐进式下载 
 
@@ -73,23 +71,18 @@
 1. 编码为自适应比特率 MP4 集或单个 MP4。
 1. 通过创建 OnDemand 或 SAS 定位符发布资产。
 
-	如果使用 OnDemand 定位符，请确保你要从中以渐进方式下载内容的流式处理终结点上至少有一个串流保留单元。
+    如果使用 OnDemand 定位符，请确保你要从中以渐进方式下载内容的流式处理终结点上至少有一个串流保留单元。
 
-	如果使用 SAS 定位符，将从 Azure Blob 存储中下载内容。在这种情况下，不需要串流保留单元。
-  
+    如果使用 SAS 定位符，将从 Azure Blob 存储中下载内容。在这种情况下，不需要串流保留单元。
+
 1. 渐进式下载内容。
 
 本文包含一些链接，指向说明如何设置开发环境和执行上述任务的主题。
 
-
 ##概念
 
-有关与按需交付内容相关的概念，请参阅[媒体服务概念](/documentation/articles/media-services-concepts/)。
-
-
-
+有关与按需交付内容相关的概念，请参阅[媒体服务概念](./media-services-concepts.md)。
 
 [vod-overview]: ./media/media-services-video-on-demand-workflow/media-services-video-on-demand.png
- 
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

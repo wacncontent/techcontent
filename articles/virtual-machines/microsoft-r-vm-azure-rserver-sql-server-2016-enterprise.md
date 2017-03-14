@@ -1,23 +1,23 @@
-<properties
-    pageTitle="预配 Azure 上的 R Server Only SQL Server 2016 Enterprise VM"
-    description="预配 Azure 上的 R Server Only SQL Server 2016 Enterprise VM"
-    keywords="Microsoft R Server"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    tags=""
-    author=""
-    manager=""
-    editor="" />
-<tags
-    ms.service="virtual-machines-windows"
-    ms.workload=""
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic=""
-    ms.date="01/22/2016"
-    wacn.date="02/27/2017"
-    ms.author="" />  
+---
+title: 预配 Azure 上的 R Server Only SQL Server 2016 Enterprise VM
+description: 预配 Azure 上的 R Server Only SQL Server 2016 Enterprise VM
+keywords: Microsoft R Server
+services: virtual-machines-windows
+documentationcenter: ''
+tags: ''
+author: ''
+manager: ''
+editor: ''
 
+ms.service: virtual-machines-windows
+ms.workload: ''
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: ''
+ms.date: 01/22/2016
+wacn.date: 02/27/2017
+ms.author: ''
+---
 
 # 预配 Azure 上的 R Server Only SQL Server 2016 Enterprise VM
 
@@ -35,7 +35,7 @@ Azure 上的 R Server Only SQL Server 2016 Enterprise 虚拟机是可快速轻�
 
 ## 预配 R Server 虚拟机
 
-如果你是 Azure VM 的新手，我们建议参阅本文，了解有关使用门户和配置虚拟机的详细信息。[虚拟机 - 入门](/documentation/services/virtual-machines/windows/)
+如果你是 Azure VM 的新手，我们建议参阅本文，了解有关使用门户和配置虚拟机的详细信息。[虚拟机 - 入门](./windows/index.md)
 
 从 Azure 应用商店创建 R Server VM
 
@@ -79,11 +79,10 @@ Azure 上的 R Server Only SQL Server 2016 Enterprise 虚拟机是可快速轻�
 
 ## 访问 Azure 存储帐户中的数据
 
-
 需要使用 Azure 存储帐户中的数据时，可通过多个选项来访问或移动数据：
 
-* 使用 [AzCopy](/documentation/articles/storage-use-azcopy/) 等实用工具将数据从存储帐户复制到本地文件系统。
-* 将文件添加到存储帐户中的某个文件共享，然后将该文件共享装载为 VM 上的网络驱动器。有关详细信息，请参阅[装载 Azure 文件](/documentation/articles/storage-dotnet-how-to-use-files/)。
+* 使用 [AzCopy](../storage/storage-use-azcopy.md) 等实用工具将数据从存储帐户复制到本地文件系统。
+* 将文件添加到存储帐户中的某个文件共享，然后将该文件共享装载为 VM 上的网络驱动器。有关详细信息，请参阅[装载 Azure 文件](../storage/storage-dotnet-how-to-use-files.md)。
 
 ## 资源
 

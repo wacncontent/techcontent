@@ -1,26 +1,27 @@
-<properties
-pageTitle="将 Ambari Tez 视图与 HDInsight 配合使用 | Azure"
-description="了解如何使用 Ambari Tez 视图来调试 HDInsight 上的 Tez 作业。"
-services="hdinsight"
-documentationCenter=""
-authors="Blackmist"
-manager="paulettm"
-editor="cgronlun"/>
+---
+title: 将 Ambari Tez 视图与 HDInsight 配合使用 | Azure
+description: 了解如何使用 Ambari Tez 视图来调试 HDInsight 上的 Tez 作业。
+services: hdinsight
+documentationCenter: ''
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
 
-<tags
-	ms.service="hdinsight"
-	ms.date="10/04/2016"
-	wacn.date="02/14/2017"/>
+ms.service: hdinsight
+ms.date: 10/04/2016
+wacn.date: 02/14/2017
+---
 
 # 使用 Ambari 视图来调试 HDInsight 上的 Tez 作业
 
 适用于 HDInsight 的 Ambari Web UI 所含的 Tez 视图可用于了解和调试将 Tez 用作执行引擎的作业。利用 Tez 视图，你可以将作业显示为包含已连接项目的图形，深入了解每个项目并检索统计信息和日志记录信息。
 
-> [AZURE.NOTE] 本文档中的信息针对基于 Linux 的 HDInsight 群集。如需了解如何使用基于 Windows 的 HDInsight 来调试 Tez 作业，请参阅[在基于 Windows 的 HDInsight 上使用 Tez UI 来调试 Tez 作业](/documentation/articles/hdinsight-debug-tez-ui/)。
+> [!NOTE]
+> 本文档中的信息针对基于 Linux 的 HDInsight 群集。如需了解如何使用基于 Windows 的 HDInsight 来调试 Tez 作业，请参阅[在基于 Windows 的 HDInsight 上使用 Tez UI 来调试 Tez 作业](./hdinsight-debug-tez-ui.md)。
 
 ##先决条件
 
-* 基于 Linux 的 HDInsight 群集。有关创建新群集的步骤，请参阅[开始使用基于 Linux 的 HDInsight](/documentation/articles/hdinsight-hadoop-linux-tutorial-get-started/)。
+* 基于 Linux 的 HDInsight 群集。有关创建新群集的步骤，请参阅[开始使用基于 Linux 的 HDInsight](./hdinsight-hadoop-linux-tutorial-get-started.md)。
 
 * 支持 HTML5 的现代 Web 浏览器。
 
@@ -52,20 +53,26 @@ Tez 视图包含数据的前提是使用 Tez 引擎的作业当前正在运行�
 
 3. 在 Hive 视图加载以后，将以下语句粘贴到查询编辑器中，然后单击“执行”。
 
-        select market, state, country from hivesampletable where deviceplatform='Android' group by market, country, state;
-    
-    完成该作业后，你会看到输出显示在“查询处理结果”部分。结果应如下所示：
-    
-        market  state       country
-        en-GB   Hessen      Germany
-        en-GB   Kingston    Jamaica
-        
-4. 选择“日志”选项卡。你会看到如下信息：
-    
-        INFO : Session is already open
-        INFO :
+    ```
+    select market, state, country from hivesampletable where deviceplatform='Android' group by market, country, state;
+    ```
 
-        INFO : Status: Running (Executing on YARN cluster with App id application_1454546500517_0063)
+    完成该作业后，你会看到输出显示在“查询处理结果”部分。结果应如下所示：
+
+    ```
+    market  state       country
+    en-GB   Hessen      Germany
+    en-GB   Kingston    Jamaica
+    ```
+
+4. 选择“日志”选项卡。你会看到如下信息：
+
+    ```
+    INFO : Session is already open
+    INFO :
+
+    INFO : Status: Running (Executing on YARN cluster with App id application_1454546500517_0063)
+    ```
 
     保存 __App id__ 值，因为下一部分需要用到该值。
 
@@ -88,19 +95,20 @@ Tez 视图包含数据的前提是使用 Tez 引擎的作业当前正在运行�
 5. “DAG 详细信息”上方是多个可用于显示 DAG 相关信息的链接。
 
     * __DAG 计数器__显示为此 DAG 的计数器信息。
-    
+
     * __图形视图__显示此 DAG 的图形表示方式。
-    
+
     * __所有顶点__显示此 DAG 中顶点的列表。
-    
+
     * __所有任务__显示此 DAG 中所有顶点的任务的列表。
-    
+
     * __所有 TaskAttempts__ 显示尝试针对此 DAG 运行任务的信息。
-    
-    > [AZURE.NOTE] 如果滚动“顶点”、“任务”和“TaskAttempts”的列显示，你会注意到存在查看“计数器”的链接，以及每个行的“查看或下载日志”链接。
+
+    > [!NOTE]
+    > 如果滚动“顶点”、“任务”和“TaskAttempts”的列显示，你会注意到存在查看“计数器”的链接，以及每个行的“查看或下载日志”链接。
 
     如果作业失败，“DAG 详细信息”会显示状态“已失败”，同时会显示有关已失败任务的信息链接。DAG 详细信息下方会显示诊断信息。
-    
+
     ![详述故障情况的“DAG 详细信息”屏幕](./media/hdinsight-debug-ambari-tez-view/faileddag.png)
 
 7. 选择“图形视图”。此视图显示 DAG 的图形表示方式。将鼠标放在视图中的单个顶点上即可显示其信息。
@@ -113,17 +121,19 @@ Tez 视图包含数据的前提是使用 Tez 引擎的作业当前正在运行�
 
 9. 请注意，此时页面顶部会存在与顶点和任务相关的链接。
 
-    > [AZURE.NOTE] 你还可以通过以下方式访问此页：回到“DAG 详细信息”，选择“顶点详细信息”，然后选择“映射 1”顶点。
+    > [!NOTE]
+    > 你还可以通过以下方式访问此页：回到“DAG 详细信息”，选择“顶点详细信息”，然后选择“映射 1”顶点。
 
     * __顶点计数器__显示此顶点的计数器信息。
-    
+
     * __任务__显示此顶点的任务。
-    
+
     * __任务尝试__显示尝试针对此顶点运行任务的信息。
-    
+
     * __源和接收器__显示此顶点的数据源和接收器。
 
-    > [AZURE.NOTE] 与前一菜单一样，你可以滚动“任务”、“任务尝试”、“源和接收器”的列显示，以便显示每个项的详细信息链接。
+    > [!NOTE]
+    > 与前一菜单一样，你可以滚动“任务”、“任务尝试”、“源和接收器”的列显示，以便显示每个项的详细信息链接。
 
 10. 选择“任务”，然后选择名为“00\_000000”的项。此时会针对此任务显示“任务详细信息”。在此屏幕中，你可以查看“任务计数器”和“任务尝试”。
 
@@ -131,9 +141,9 @@ Tez 视图包含数据的前提是使用 Tez 引擎的作业当前正在运行�
 
 ##后续步骤
 
-现在，你已了解如何使用 Tez 视图，因此可以详细了解如何[使用 Hive on HDInsight](/documentation/articles/hdinsight-use-hive/)。
+现在，你已了解如何使用 Tez 视图，因此可以详细了解如何[使用 Hive on HDInsight](./hdinsight-use-hive.md)。
 
 有关 Tez 的更多详细的技术信息，请参阅 [Hortonworks 的 Tez 页](http://hortonworks.com/hadoop/tez/)。
 
-有关如何将 Ambari 与 HDInsight 配合使用的详细信息，请参阅[使用 Ambari Web UI 管理 HDInsight 群集](/documentation/articles/hdinsight-hadoop-manage-ambari/)。
+有关如何将 Ambari 与 HDInsight 配合使用的详细信息，请参阅[使用 Ambari Web UI 管理 HDInsight 群集](./hdinsight-hadoop-manage-ambari.md)。
 <!---HONumber=Mooncake_0405_2016-->

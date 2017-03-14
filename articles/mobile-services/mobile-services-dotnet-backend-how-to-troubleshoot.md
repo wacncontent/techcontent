@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="移动服务 .NET 后端故障排除 | Azure" 
-	description="了解如何诊断和修复使用 .NET 后端的移动服务遇到的问题" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="wesmc7777" 
-	manager="erikre"
-	editor="mollybos"/>
+---
+title: 移动服务 .NET 后端故障排除 | Azure
+description: 了解如何诊断和修复使用 .NET 后端的移动服务遇到的问题
+services: mobile-services
+documentationCenter: ''
+authors: wesmc7777
+manager: erikre
+editor: mollybos
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="multiple"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016" 
-	ms.author="wesmc;ricksal"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: multiple
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: wesmc;ricksal
+---
 
 # 移动服务 .NET 后端故障排除
 
@@ -37,7 +37,7 @@
 1. 首先，在 **Visual Studio 2013 Update 2** 或更高版本中打开移动服务服务器项目。如果你尚无此项目，可以通过依次选择“文件”、“新建”、“项目”、“云”节点和“Microsoft Azure 移动服务”模板来创建一个项目。
 2. 按 **F5**，以生成并运行该项目。在起始页上，选择“试用”。 
 
-    >[AZURE.NOTE]
+    >[!NOTE]
     如果服务在本地托管，则单击链接会定向至下一页。但是，如果在云中托管，则系统会提示你提供一组凭据。这是为了确保未经授权的用户无法访问你的 API 和负载的相关信息。若要查看该页，你需要使用**空白用户名**以及**应用程序密钥**（充当密码）来登录。若要获取应用程序密钥，你可以在 Azure 经典管理门户中导航至移动服务的“仪表板”选项卡，并选择“管理密钥”。
     >
     > ![访问帮助页时的身份验证提示][HelpPageAuth]
@@ -120,7 +120,8 @@
 
 有时，版本会因为引用了所需程序集的不同主要版本而发生冲突（允许不同的次要版本）。当 NuGet 提示你升级到移动服务 .NET 后端所用某个包的最新版本时，经常发生此情况。
 
->[AZURE.NOTE]移动服务目前只与 ASP.NET 5.1 兼容；当前不支持 ASP.NET 5.2。部署后，将 ASP.NET NuGet 包升级到 5.2.* 可能会导致错误。
+>[!NOTE]
+>移动服务目前只与 ASP.NET 5.1 兼容；当前不支持 ASP.NET 5.2。部署后，将 ASP.NET NuGet 包升级到 5.2.* 可能会导致错误。
 
 如果升级了任何此类的包，当你将更新的服务发布到 Azure 时，将会看到指出冲突的警告页：
 
@@ -128,7 +129,9 @@
 
 同时，将在服务日志中记录如下所示的异常消息：
 
-    Found conflicts between different versions of the same dependent assembly 'Microsoft.ServiceBus': 2.2.0.0, 2.3.0.0. Please change your project to use version '2.2.0.0' which is the one currently supported by the hosting environment.
+```
+Found conflicts between different versions of the same dependent assembly 'Microsoft.ServiceBus': 2.2.0.0, 2.3.0.0. Please change your project to use version '2.2.0.0' which is the one currently supported by the hosting environment.
+```
 
 此问题很容易解决：只需恢复到所需程序集的支持版本，然后重新发布服务。
 
@@ -137,7 +140,7 @@
 
 使用包含 SQL 数据库的移动服务 .NET 后端时，将以 Entity Framework (EF) 作为数据访问技术，让你查询数据库及保存对象。EF 代表开发人员处理的重要方面之一是数据库列（也称为架构）如何随着代码中指定的模型类的更改而更改。此过程称为 [Code First 迁移](http://msdn.microsoft.com/zh-cn/data/jj591621)。
 
-迁移可能很复杂，只有数据库状态与 EF 模型保持同步才能成功。有关如何处理移动服务的迁移和可能发生的错误的说明，请参阅[如何对 .NET 后端移动服务进行数据模型更改](/documentation/articles/mobile-services-dotnet-backend-how-to-use-code-first-migrations/)。
+迁移可能很复杂，只有数据库状态与 EF 模型保持同步才能成功。有关如何处理移动服务的迁移和可能发生的错误的说明，请参阅[如何对 .NET 后端移动服务进行数据模型更改](./mobile-services-dotnet-backend-how-to-use-code-first-migrations.md)。
 
 <!-- IMAGES -->
 
@@ -155,7 +158,6 @@
 [LogsServerExplorer]: ./media/mobile-services-dotnet-backend-how-to-troubleshoot/12.png
 [LogsPortal]: ./media/mobile-services-dotnet-backend-how-to-troubleshoot/13.png
 [HelpConflict]: ./media/mobile-services-dotnet-backend-how-to-troubleshoot/14.png
-
 
 <!-- Links -->
 [SymbolSource]: http://www.symbolsource.org/Public

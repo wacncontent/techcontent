@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用 Azure 诊断收集日志 | Azure"
-    description="本文介绍如何将 Azure 诊断设置为从在 Azure 中运行的 Service Fabric 群集收集日志。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="ms-toddabel"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="9f7e1fa5-6543-4efd-b53f-39510f18df56"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/17/2017"
-    wacn.date="03/03/2017"
-    ms.author="toddabel" />  
+---
+title: 使用 Azure 诊断收集日志 | Azure
+description: 本文介绍如何将 Azure 诊断设置为从在 Azure 中运行的 Service Fabric 群集收集日志。
+services: service-fabric
+documentationcenter: .net
+author: ms-toddabel
+manager: timlt
+editor: ''
 
+ms.assetid: 9f7e1fa5-6543-4efd-b53f-39510f18df56
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/17/2017
+wacn.date: 03/03/2017
+ms.author: toddabel
+---
 
 # 使用 Azure 诊断收集日志
 
@@ -27,18 +27,18 @@
 ## 先决条件
 使用以下工具执行本文档中的某些操作：
 
-* [Azure 诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)（与 Azure 云服务相关，但包含有用的信息和示例）
-* [Azure 资源管理器](/documentation/articles/resource-group-overview/)
-* [Azure PowerShell](/documentation/articles/powershell-install-configure/)
+* [Azure 诊断](../cloud-services/cloud-services-dotnet-diagnostics.md)（与 Azure 云服务相关，但包含有用的信息和示例）
+* [Azure 资源管理器](../azure-resource-manager/resource-group-overview.md)
+* [Azure PowerShell](../powershell-install-configure.md)
 * [Azure Resource Manager 客户端](https://github.com/projectkudu/ARMClient)
-* [Azure Resource Manager 模板](/documentation/articles/virtual-machines-windows-extensions-diagnostics-template/)
+* [Azure Resource Manager 模板](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)
 
 ## 想要收集的日志源
 - **Service Fabric 日志：**由平台发送到标准 Windows 事件跟踪 \(ETW\) 和 EventSource 通道。日志有以下几种类型：
   - 操作事件：Service Fabric 平台执行的操作的日志。示例包括创建应用程序和服务、节点状态更改和升级信息。
-  - [Reliable Actors 编程模型事件](/documentation/articles/service-fabric-reliable-actors-diagnostics/)
-  - [Reliable Services 编程模型事件](/documentation/articles/service-fabric-reliable-services-diagnostics/)
-- **应用程序事件：**从服务代码发出，使用 Visual Studio 模板中提供的 EventSource 帮助程序类写出的事件。有关如何从应用程序写入日志的详细信息，请参阅[在本地计算机开发设置中监视和诊断服务](/documentation/articles/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/)。
+  - [Reliable Actors 编程模型事件](./service-fabric-reliable-actors-diagnostics.md)
+  - [Reliable Services 编程模型事件](./service-fabric-reliable-services-diagnostics.md)
+- **应用程序事件：**从服务代码发出，使用 Visual Studio 模板中提供的 EventSource 帮助程序类写出的事件。有关如何从应用程序写入日志的详细信息，请参阅[在本地计算机开发设置中监视和诊断服务](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)。
 
 ## 部署诊断扩展
 收集日志的第一个步骤是将诊断扩展部署在 Service Fabric 群集中的每个 VM 上。诊断扩展将收集每个 VM 上的日志，并将它们上传到指定的存储帐户。根据使用的是 Azure 门户预览还是 Azure Resource Manager，步骤稍有不同。另外，根据扩展是在创建群集时部署，还是针对现有群集部署，步骤也有所不同。让我们看看每个方案的步骤。
@@ -48,10 +48,9 @@
 
 ![门户中有关创建群集的 Azure 诊断设置](./media/service-fabric-diagnostics-how-to-setup-wad/portal-cluster-creation-diagnostics-setting.png)  
 
-Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这些日志是实时收集的，存储在创建于资源组中的某个存储帐户内。诊断设置将配置应用程序级事件。这些事件包括 [Reliable Actors](/documentation/articles/service-fabric-reliable-actors-diagnostics/) 事件、[Reliable Services](/documentation/articles/service-fabric-reliable-services-diagnostics/) 事件，以及要存储在 Azure 存储中的某些系统级 Service Fabric 事件。
+Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这些日志是实时收集的，存储在创建于资源组中的某个存储帐户内。诊断设置将配置应用程序级事件。这些事件包括 [Reliable Actors](./service-fabric-reliable-actors-diagnostics.md) 事件、[Reliable Services](./service-fabric-reliable-services-diagnostics.md) 事件，以及要存储在 Azure 存储中的某些系统级 Service Fabric 事件。
 
-
-使用门户创建群集时，我们强烈建议先下载模板，*然后单击“确定”*\*\*创建群集。有关详细信息，请参阅[使用 Azure Resource Manager 模板设置 Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-via-arm/)。以后，需要通过模板进行更改，因为无法使用门户进行某些更改。
+使用门户创建群集时，我们强烈建议先下载模板，*然后单击“确定”*\*\*创建群集。有关详细信息，请参阅[使用 Azure Resource Manager 模板设置 Service Fabric 群集](./service-fabric-cluster-creation-via-arm.md)。以后，需要通过模板进行更改，因为无法使用门户进行某些更改。
 
 可以使用以下步骤从门户导出模板。但是，这些模板可能难以使用，因为它们可能包含 null 值，缺少必需的信息。
 
@@ -71,121 +70,117 @@ Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这
 3. 启动 PowerShell 并更改为内容解压缩到的文件夹。
 4. 运行 **deploy.ps1** 并填入订阅 ID、资源组名称（使用相同名称更新配置）和唯一的部署名称。
 
-
 ###<a name="deploywadarm"></a> 使用 Azure Resource Manager 在创建群集的过程中部署诊断扩展
 若要使用 Resource Manager 创建群集，需要在创建群集之前，将诊断配置 JSON 添加到整个群集 Resource Manager 模板。我们将在 Resource Manager 模板示例中提供包含五个 VM 的群集 Resource Manager 模板，并在演示 Resource Manager 模板示例的过程中添加诊断配置。可以在 Azure 示例库中的以下位置找到该示例：[包含五节点群集的诊断 Resource Manager 模板示例](https://github.com/Azure/azure-quickstart-templates/tree/master/service-fabric-secure-cluster-5-node-1-nodetype)。
 
 若要查看 Resource Manager 模板中的诊断设置，请打开 azuredeploy.json 文件并搜索 **IaaSDiagnostics**。若要使用此模板创建群集，请选择在上面的链接中提供的“部署到 Azure”按钮。
 
-或者，也可以下载 Resource Manager 示例，进行更改，然后在 Azure PowerShell 窗口中输入 `New-AzureRmResourceGroupDeployment` 命令，使用修改后的模板创建群集。有关要在命令中传入的参数，请参阅以下代码。有关如何使用 PowerShell 部署资源组的详细信息，请参阅[使用 Azure Resource Manager 模板部署资源组](/documentation/articles/resource-group-template-deploy/)一文。
+或者，也可以下载 Resource Manager 示例，进行更改，然后在 Azure PowerShell 窗口中输入 `New-AzureRmResourceGroupDeployment` 命令，使用修改后的模板创建群集。有关要在命令中传入的参数，请参阅以下代码。有关如何使用 PowerShell 部署资源组的详细信息，请参阅[使用 Azure Resource Manager 模板部署资源组](../azure-resource-manager/resource-group-template-deploy.md)一文。
 
-
-
-	New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $pathToARMConfigJsonFile -TemplateParameterFile $pathToParameterFile –Verbose
-
+```
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $pathToARMConfigJsonFile -TemplateParameterFile $pathToParameterFile –Verbose
+```
 
 ### 将诊断扩展部署到现有群集
 如果现有的群集上未部署诊断或者你要修改现有配置，可以添加或更新配置。修改用于创建现有群集的 Resource Manager 模板，或者如前所述从门户下载该模板。执行以下任务可修改 template.json 文件。
 
 通过将新存储资源添加到资源部分将其添加到模板。
 
-
-
-	{
-	  "apiVersion": "2015-05-01-preview",
-	  "type": "Microsoft.Storage/storageAccounts",
-	  "name": "[parameters('applicationDiagnosticsStorageAccountName')]",
-	  "location": "[parameters('computeLocation')]",
-	  "properties": {
-	    "accountType": "[parameters('applicationDiagnosticsStorageAccountType')]"
-	  },
-	  "tags": {
-	    "resourceType": "Service Fabric",
-	    "clusterName": "[parameters('clusterName')]"
-	  }
-	},
-
+```
+{
+  "apiVersion": "2015-05-01-preview",
+  "type": "Microsoft.Storage/storageAccounts",
+  "name": "[parameters('applicationDiagnosticsStorageAccountName')]",
+  "location": "[parameters('computeLocation')]",
+  "properties": {
+    "accountType": "[parameters('applicationDiagnosticsStorageAccountType')]"
+  },
+  "tags": {
+    "resourceType": "Service Fabric",
+    "clusterName": "[parameters('clusterName')]"
+  }
+},
+```
 
  接下来，将该资源添加到存储帐户定义后面的 `supportLogStorageAccountName` 与 `vmNodeType0Name` 之间的参数部分中。将占位符文本 *storage account name goes here* 替换为存储帐户的名称。
 
-
-
-	    "applicationDiagnosticsStorageAccountType": {
-	      "type": "string",
-	      "allowedValues": [
-	        "Standard_LRS",
-	        "Standard_GRS"
-	      ],
-	      "defaultValue": "Standard_LRS",
-	      "metadata": {
-	        "description": "Replication option for the application diagnostics storage account"
-	      }
-	    },
-	    "applicationDiagnosticsStorageAccountName": {
-	      "type": "string",
-	      "defaultValue": "storage account name goes here",
-	      "metadata": {
-	        "description": "Name for the storage account that contains application diagnostics data from the cluster"
-	      }
-	    },
+ ```
+    "applicationDiagnosticsStorageAccountType": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_GRS"
+      ],
+      "defaultValue": "Standard_LRS",
+      "metadata": {
+        "description": "Replication option for the application diagnostics storage account"
+      }
+    },
+    "applicationDiagnosticsStorageAccountName": {
+      "type": "string",
+      "defaultValue": "storage account name goes here",
+      "metadata": {
+        "description": "Name for the storage account that contains application diagnostics data from the cluster"
+      }
+    },
+ ```
 
 然后，通过在 extensions 数组中添加以下代码更新 template.json 的 `VirtualMachineProfile` 部分。请务必根据插入位置，在开头或末尾添加逗点。
 
-
-
-	{
-		"name": "[concat(parameters('vmNodeType0Name'),'_Microsoft.Insights.VMDiagnosticsSettings')]",
-		"properties": {
-			"type": "IaaSDiagnostics",
-			"autoUpgradeMinorVersion": true,
-			"protectedSettings": {
-			"storageAccountName": "[parameters('applicationDiagnosticsStorageAccountName')]",
-			"storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('applicationDiagnosticsStorageAccountName')),'2015-05-01-preview').key1]",
-			"storageAccountEndPoint": "https://core.chinacloudapi.cn/"
-			},
-			"publisher": "Microsoft.Azure.Diagnostics",
-			"settings": {
-			"WadCfg": {
-				"DiagnosticMonitorConfiguration": {
-				"overallQuotaInMB": "50000",
-				"EtwProviders": {
-					"EtwEventSourceProviderConfiguration": [
-					{
-						"provider": "Microsoft-ServiceFabric-Actors",
-						"scheduledTransferKeywordFilter": "1",
-						"scheduledTransferPeriod": "PT5M",
-						"DefaultEvents": {
-						"eventDestination": "ServiceFabricReliableActorEventTable"
-						}
-					},
-					{
-						"provider": "Microsoft-ServiceFabric-Services",
-						"scheduledTransferPeriod": "PT5M",
-						"DefaultEvents": {
-						"eventDestination": "ServiceFabricReliableServiceEventTable"
-						}
-					}
-					],
-					"EtwManifestProviderConfiguration": [
-					{
-						"provider": "cbd93bc2-71e5-4566-b3a7-595d8eeca6e8",
-						"scheduledTransferLogLevelFilter": "Information",
-						"scheduledTransferKeywordFilter": "4611686018427387904",
-						"scheduledTransferPeriod": "PT5M",
-						"DefaultEvents": {
-						"eventDestination": "ServiceFabricSystemEventTable"
-						}
-					}
-					]
-				}
-				}
-			},
-			"StorageAccount": "[parameters('applicationDiagnosticsStorageAccountName')]"
-			},
-			"typeHandlerVersion": "1.5"
-		}
-	}
-
+```
+{
+    "name": "[concat(parameters('vmNodeType0Name'),'_Microsoft.Insights.VMDiagnosticsSettings')]",
+    "properties": {
+        "type": "IaaSDiagnostics",
+        "autoUpgradeMinorVersion": true,
+        "protectedSettings": {
+        "storageAccountName": "[parameters('applicationDiagnosticsStorageAccountName')]",
+        "storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('applicationDiagnosticsStorageAccountName')),'2015-05-01-preview').key1]",
+        "storageAccountEndPoint": "https://core.chinacloudapi.cn/"
+        },
+        "publisher": "Microsoft.Azure.Diagnostics",
+        "settings": {
+        "WadCfg": {
+            "DiagnosticMonitorConfiguration": {
+            "overallQuotaInMB": "50000",
+            "EtwProviders": {
+                "EtwEventSourceProviderConfiguration": [
+                {
+                    "provider": "Microsoft-ServiceFabric-Actors",
+                    "scheduledTransferKeywordFilter": "1",
+                    "scheduledTransferPeriod": "PT5M",
+                    "DefaultEvents": {
+                    "eventDestination": "ServiceFabricReliableActorEventTable"
+                    }
+                },
+                {
+                    "provider": "Microsoft-ServiceFabric-Services",
+                    "scheduledTransferPeriod": "PT5M",
+                    "DefaultEvents": {
+                    "eventDestination": "ServiceFabricReliableServiceEventTable"
+                    }
+                }
+                ],
+                "EtwManifestProviderConfiguration": [
+                {
+                    "provider": "cbd93bc2-71e5-4566-b3a7-595d8eeca6e8",
+                    "scheduledTransferLogLevelFilter": "Information",
+                    "scheduledTransferKeywordFilter": "4611686018427387904",
+                    "scheduledTransferPeriod": "PT5M",
+                    "DefaultEvents": {
+                    "eventDestination": "ServiceFabricSystemEventTable"
+                    }
+                }
+                ]
+            }
+            }
+        },
+        "StorageAccount": "[parameters('applicationDiagnosticsStorageAccountName')]"
+        },
+        "typeHandlerVersion": "1.5"
+    }
+}
+```
 
 如上所述修改 template.json 文件后，请重新发布 Resource Manager 模板。如果已导出模板，则运行 deploy.ps1 文件会重新发布模板。部署后，请确保 **ProvisioningState** 为 **Succeeded**。
 
@@ -195,18 +190,18 @@ Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这
 
 若要收集事件，请修改 Resource Manager 模板以包括
 
-
-	  "EtwManifestProviderConfiguration": [
-	    {
-	      "provider": "cbd93bc2-71e5-4566-b3a7-595d8eeca6e8",
-	      "scheduledTransferLogLevelFilter": "Information",
-	      "scheduledTransferKeywordFilter": "4611686018427387912",
-	      "scheduledTransferPeriod": "PT5M",
-	      "DefaultEvents": {
-	        "eventDestination": "ServiceFabricSystemEventTable"
-	      }
-	    }
-
+```
+  "EtwManifestProviderConfiguration": [
+    {
+      "provider": "cbd93bc2-71e5-4566-b3a7-595d8eeca6e8",
+      "scheduledTransferLogLevelFilter": "Information",
+      "scheduledTransferKeywordFilter": "4611686018427387912",
+      "scheduledTransferPeriod": "PT5M",
+      "DefaultEvents": {
+        "eventDestination": "ServiceFabricSystemEventTable"
+      }
+    }
+```
 
 ## 更新诊断以从新的 EventSource 通道收集并上传日志
 若要将诊断更新为从新的 EventSource 通道（表示要部署的新应用程序）收集日志，请执行[前一部分](#deploywadarm)中相同的步骤，其中描述了现有群集的诊断设置。
@@ -215,21 +210,23 @@ Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这
 
 例如，如果事件源名为 My-Eventsource，请添加以下代码，将来自 My-Eventsource 的事件放入名为 MyDestinationTableName 的表中。
 
-		{
-			"provider": "My-Eventsource",
-			"scheduledTransferPeriod": "PT5M",
-			"DefaultEvents": {
-			"eventDestination": "MyDestinationTableName"
-			}
-		}
+```
+    {
+        "provider": "My-Eventsource",
+        "scheduledTransferPeriod": "PT5M",
+        "DefaultEvents": {
+        "eventDestination": "MyDestinationTableName"
+        }
+    }
+```
 
-若要收集性能计数器或事件日志，请参考[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](/documentation/articles/virtual-machines-windows-extensions-diagnostics-template/)中提供的示例修改 Resource Manager 模板。然后重新发布 Resource Manager 模板。
+若要收集性能计数器或事件日志，请参考[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)中提供的示例修改 Resource Manager 模板。然后重新发布 Resource Manager 模板。
 
 ## 后续步骤
-若要详细了解排查问题时应该调查哪些事件，请查看针对 [Reliable Actors](/documentation/articles/service-fabric-reliable-actors-diagnostics/) 和 [Reliable Services](/documentation/articles/service-fabric-reliable-services-diagnostics/) 发出的诊断事件。
+若要详细了解排查问题时应该调查哪些事件，请查看针对 [Reliable Actors](./service-fabric-reliable-actors-diagnostics.md) 和 [Reliable Services](./service-fabric-reliable-services-diagnostics.md) 发出的诊断事件。
 
 ## 相关文章
-* [了解如何使用诊断扩展收集性能计数器或日志](/documentation/articles/virtual-machines-windows-extensions-diagnostics-template/)
+* [了解如何使用诊断扩展收集性能计数器或日志](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: add "更新诊断以收集运行状况和负载事件" section-->

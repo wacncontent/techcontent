@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Service Fabric 中的应用程序生命周期 | Azure"
-    description="介绍了如何开发、部署、测试、升级、维护和删除 Service Fabric 应用程序。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="rwike77"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="08837cca-5aa7-40da-b087-2b657224a097"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="02/16/2017"
-    wacn.date="03/03/2017"
-    ms.author="ryanwi" />  
+---
+title: Service Fabric 中的应用程序生命周期 | Azure
+description: 介绍了如何开发、部署、测试、升级、维护和删除 Service Fabric 应用程序。
+services: service-fabric
+documentationcenter: .net
+author: rwike77
+manager: timlt
+editor: ''
 
+ms.assetid: 08837cca-5aa7-40da-b087-2b657224a097
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 02/16/2017
+wacn.date: 03/03/2017
+ms.author: ryanwi
+---
 
 # Service Fabric 应用程序生命周期
 与其他平台一样，Azure Service Fabric 上的应用程序通常将经历以下几个阶段：设计、开发、测试、部署、升级、维护和删除。Service Fabric 为云应用程序的整个应用程序生命周期提供一流的支持：从开发到部署、到日常管理和维护，再到最终解除授权。服务模型使多个不同角色可以独立参与到应用程序生命周期中。本文提供了有关 API 的概述，以及不同角色在 Service Fabric 应用程序生命周期的各个阶段如何使用它们。
@@ -36,12 +36,12 @@
 - **操作员**：基于由应用程序管理员指定的应用程序配置和要求部署应用程序。例如，操作员预配和部署应用程序并确保它在 Azure 中运行。操作员监视应用程序运行状况和性能信息，并根据需要维护物理基础结构。
 
 ## 开发
-1. *服务开发人员* [Reliable Actors ](/documentation/articles/service-fabric-reliable-actors-introduction/)或 [Reliable Services](/documentation/articles/service-fabric-reliable-services-introduction/) 编程模型开发不同类型的服务。
+1. *服务开发人员* [Reliable Actors ](./service-fabric-reliable-actors-introduction.md)或 [Reliable Services](./service-fabric-reliable-services-introduction.md) 编程模型开发不同类型的服务。
 2. *服务开发人员*以声明的方式描述包含一个或多个代码、配置和数据包的服务清单文件中的开发服务类型。
 3. 随后，*应用程序开发人员*构建使用不同服务类型的应用程序。
 4. *应用程序开发人员*以声明的方式，通过引用构成服务的服务清单并相应地重写并参数化构成服务的不同配置与部署设置，描述了应用程序清单中的应用程序类型。
 
-有关示例，请参阅 [Reliable Actors 入门](/documentation/articles/service-fabric-reliable-actors-get-started/)和 [Reliable Services 入门](/documentation/articles/service-fabric-reliable-services-quick-start/)。
+有关示例，请参阅 [Reliable Actors 入门](./service-fabric-reliable-actors-get-started.md)和 [Reliable Services 入门](./service-fabric-reliable-services-quick-start.md)。
 
 ## 部署
 1. *应用程序管理员*通过在应用程序清单中指定相应的 **ApplicationType** 元素的参数，将定制应用程序类型定制为将被部署到 Service Fabric 群集的特定应用程序。
@@ -56,16 +56,16 @@
 
 6. 该应用程序现在在 Service Fabric 群集中运行。
 
-有关示例，请参阅[部署应用程序](/documentation/articles/service-fabric-deploy-remove-applications/)。
+有关示例，请参阅[部署应用程序](./service-fabric-deploy-remove-applications.md)。
 
 ## 测试
 1. 部署到本地开发群集或测试群集后，*服务开发人员*使用 [**FailoverTestScenarioParameters**](https://docs.microsoft.com/dotnet/api/system.fabric.testability.scenario.failovertestscenarioparameters#System_Fabric_Testability_Scenario_FailoverTestScenarioParameters) 和 [**FailoverTestScenario**](https://docs.microsoft.com/dotnet/api/system.fabric.testability.scenario.failovertestscenario#System_Fabric_Testability_Scenario_FailoverTestScenario) 类或 [**Invoke ServiceFabricFailoverTestScenario** cmdlet](https://docs.microsoft.com/powershell/servicefabric/vlatest/invoke-servicefabricfailovertestscenario) 运行内置的故障转移测试方案。故障转移测试方案在重要转换和故障转移中运行指定的服务，以确保其仍然可用并正在工作。
 
 2. 然后，*服务开发人员*使用 [**ChaosTestScenarioParameters**](https://docs.microsoft.com/dotnet/api/system.fabric.testability.scenario.chaostestscenarioparameters#System_Fabric_Testability_Scenario_ChaosTestScenarioParameters) 和 [**ChaosTestScenario**](https://docs.microsoft.com/dotnet/api/system.fabric.testability.scenario.chaostestscenario#System_Fabric_Testability_Scenario_ChaosTestScenario) 类，或 [**Invoke ServiceFabricChaosTestScenario** cmdlet](https://docs.microsoft.com/powershell/servicefabric/vlatest/invoke-servicefabricchaostestscenario) 运行内置的混乱测试方案。任意混沌测试方案会将多个节点、代码包和副本错误包括到群集中。
 
-3. *服务开发人员*通过创建围绕群集移动主副本的测试方案，来[测试服务之间的通信](/documentation/articles/service-fabric-testability-scenarios-service-communication/)。
+3. *服务开发人员*通过创建围绕群集移动主副本的测试方案，来[测试服务之间的通信](./service-fabric-testability-scenarios-service-communication.md)。
 
-有关详细信息，请参阅[故障分析服务简介](/documentation/articles/service-fabric-testability-overview/)。
+有关详细信息，请参阅[故障分析服务简介](./service-fabric-testability-overview.md)。
 
 ## 升级
 1. *服务开发人员*将更新实例化应用程序的构成服务并/或修复 bug，并提供服务清单的新版本。
@@ -88,7 +88,7 @@
 
 10. Service Fabric 对在群集中运行的目标应用程序进行升级，并且不会丢失其任何构成服务的可用性。
 
-有关示例，请参阅[应用程序升级教程](/documentation/articles/service-fabric-application-upgrade-tutorial/)。
+有关示例，请参阅[应用程序升级教程](./service-fabric-application-upgrade-tutorial.md)。
 
 ## 维护
 1. 对于操作系统升级和修补程序，Service Fabric 与 Azure 基础结构连接，以确保在群集中运行的所有应用程序的可用性。
@@ -110,17 +110,17 @@
 
 4. *操作员*使用 [**RemoveApplicationPackage** 方法](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.applicationmanagementclient#System_Fabric_FabricClient_ApplicationManagementClient_RemoveApplicationPackage_System_String_System_String_)或 [**Remove-ServiceFabricApplicationPackage** cmdlet](https://docs.microsoft.com/powershell/servicefabric/vlatest/remove-servicefabricapplicationpackage) 从 ImageStore 中删除应用程序包。
 
-有关示例，请参阅[部署应用程序](/documentation/articles/service-fabric-deploy-remove-applications/)。
+有关示例，请参阅[部署应用程序](./service-fabric-deploy-remove-applications.md)。
 
 ## 后续步骤
 有关开发、测试和管理 Service Fabric 应用程序与服务的详细信息，请参阅：
 
-- [Reliable Actors](/documentation/articles/service-fabric-reliable-actors-introduction/)
-- [Reliable Services](/documentation/articles/service-fabric-reliable-services-introduction/)
-- [部署应用程序](/documentation/articles/service-fabric-deploy-remove-applications/)
-- [应用程序升级](/documentation/articles/service-fabric-application-upgrade/)
-- [可测试性概述](/documentation/articles/service-fabric-testability-overview/)
-- [基于 REST 的应用程序生命周期示例](/documentation/articles/service-fabric-rest-based-application-lifecycle-sample/)
+- [Reliable Actors](./service-fabric-reliable-actors-introduction.md)
+- [Reliable Services](./service-fabric-reliable-services-introduction.md)
+- [部署应用程序](./service-fabric-deploy-remove-applications.md)
+- [应用程序升级](./service-fabric-application-upgrade.md)
+- [可测试性概述](./service-fabric-testability-overview.md)
+- [基于 REST 的应用程序生命周期示例](./service-fabric-rest-based-application-lifecycle-sample.md)
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: add a MVA video; wording update-->

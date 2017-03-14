@@ -7,8 +7,7 @@
 
     ![详细信息](./media/site-recovery-add-vcenter-account/credentials2.png)  
 
-
-	> [AZURE.Note]
+    > [AZURE.Note]
   帐户名称出现在门户中可能需要 15 分钟或更长时间。若要立即更新，请单击“配置服务器”> ***服务器名称*** >“刷新服务器”。
 
 <!---HONumber=Mooncake_0306_2017-->

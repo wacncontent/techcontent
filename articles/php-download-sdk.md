@@ -1,21 +1,21 @@
-<properties
-	pageTitle="下载 Azure SDK for PHP"
-	description="了解如何下载和安装 Azure SDK for PHP。"
-	documentationCenter="php"
-	services="app-service\web"
-	authors="allclark"
-	manager="douge"
-	editor=""/>
+---
+title: 下载 Azure SDK for PHP
+description: 了解如何下载和安装 Azure SDK for PHP。
+documentationCenter: php
+services: app-service\web
+authors: allclark
+manager: douge
+editor: ''
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="PHP"
-	ms.topic="article"
-	ms.date="06/01/2016"
-	wacn.date="07/04/2016"
-	ms.author="allclark;yaqiyang"/>
+ms.service: app-service-web
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 06/01/2016
+wacn.date: 07/04/2016
+ms.author: allclark;yaqiyang
+---
 
 # 下载 Azure SDK for PHP
 
@@ -32,7 +32,8 @@ Azure SDK for PHP 包括允许你针对 Azure 开发、部署和管理 PHP 应�
 
 本主题中的说明假定您已安装 [PHP][install-php]。
 
-> [AZURE.NOTE] 若要使用 Azure 的 PHP 客户端库，则必须安装 PHP 5.5 或更高版本。
+> [!NOTE]
+> 若要使用 Azure 的 PHP 客户端库，则必须安装 PHP 5.5 或更高版本。
 
 ##Azure 的 PHP 客户端库
 
@@ -44,24 +45,29 @@ Azure 的 PHP 客户端库提供了一个用于从任何操作系统访问 Azure
 
 1. [安装 Git][install-git]。
 
-
-	> [AZURE.NOTE] 在 Windows 上，您还需要向您的 PATH 环境变量添加 Git 可执行文件。
+    > [!NOTE]
+    > 在 Windows 上，您还需要向您的 PATH 环境变量添加 Git 可执行文件。
 
 2. 在你的项目的根目录中创建一个名为 **composer.json** 的文件并向其添加以下代码：
 
-        {
-			"require": {
-				"microsoft/windowsazure": "^0.4"
-			}
+    ```
+    {
+        "require": {
+            "microsoft/windowsazure": "^0.4"
         }
+    }
+    ```
 
 3. 将 **[composer.phar][composer-phar]** 下载到您的项目根目录中。
 
 4. 打开命令提示符并在项目根目录中执行该文件
 
-		php composer.phar install
+    ```
+    php composer.phar install
+    ```
 
->[AZURE.NOTE] 安装完毕后，需要对终结点做一个全局的替换--把“windows.net”替换为“chinacloudapi.cn”，不然工具将会尝试连接到 Azure 全球，而不是 Azure 中国。
+>[!NOTE]
+> 安装完毕后，需要对终结点做一个全局的替换--把“windows.net”替换为“chinacloudapi.cn”，不然工具将会尝试连接到 Azure 全球，而不是 Azure 中国。
 
 ##Azure PowerShell 和 Azure 模拟器
 
@@ -73,12 +79,11 @@ Azure PowerShell 是一组用于部署和管理 Azure 服务（例如，云服�
 
 ##Azure CLI
 
-Azure CLI 是一组用于部署和管理 Azure 服务（例如 Azure 网站和 Azure 虚拟机）的命令。有关安装 Azure CLI 的信息，请参阅[安装 Azure CLI](/documentation/articles/xplat-cli-install/)。
+Azure CLI 是一组用于部署和管理 Azure 服务（例如 Azure 网站和 Azure 虚拟机）的命令。有关安装 Azure CLI 的信息，请参阅[安装 Azure CLI](./xplat-cli-install.md)。
 
 ## 后续步骤
 
 有关详细信息，请参阅 [PHP 开发中心](/develop/php/)。
-
 
 [install-php]: http://www.php.net/manual/en/install.php
 [composer-github]: https://github.com/composer/composer
@@ -87,11 +92,11 @@ Azure CLI 是一组用于部署和管理 Azure 服务（例如 Azure 网站和 A
 [install-node-linux]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 [download-wpi]: http://go.microsoft.com/fwlink/?LinkId=253447
 [mac-installer]: http://go.microsoft.com/fwlink/?LinkId=252249
-[blob-service]: /documentation/articles/storage-php-how-to-use-blobs/
-[table-service]: /documentation/articles/storage-php-how-to-use-table-storage/
-[queue-service]: /documentation/articles/storage-php-how-to-use-queues/
-[azure cli]: /documentation/articles/xplat-cli-install/
-[powershell-tools]: /documentation/articles/powershell-install-configure/
+[blob-service]: ./storage/storage-php-how-to-use-blobs.md
+[table-service]: ./storage/storage-php-how-to-use-table-storage.md
+[queue-service]: ./storage/storage-php-how-to-use-queues.md
+[azure cli]: ./xplat-cli-install.md
+[powershell-tools]: ./powershell-install-configure.md
 [php-sdk-github]: http://go.microsoft.com/fwlink/?LinkId=252719
 [install-git]: http://git-scm.com/book/en/Getting-Started-Installing-Git
 

@@ -1,22 +1,21 @@
-<properties 
-    pageTitle="事件中心消息传送异常 | Azure"
-    description="Azure 事件中心消息传送异常和建议操作列表。"
-    services="event-hubs"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />  
+---
+title: 事件中心消息传送异常 | Azure
+description: Azure 事件中心消息传送异常和建议操作列表。
+services: event-hubs
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-<tags 
-    ms.service="event-hubs"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/14/2016"
-    wacn.date="11/08/2016"
-    ms.author="sethm" />  
-
+ms.service: event-hubs
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/14/2016
+wacn.date: 11/08/2016
+ms.author: sethm
+---
 
 # 事件中心消息传送异常
 
@@ -85,10 +84,10 @@
 此错误有两个常见的原因：配置不正确或暂时性服务错误。
 
 1. **配置不正确**：
-	运行条件下的操作超时值可能太小。客户端 SDK 的操作超时默认值为 60 秒。请查看代码是否将该值设置得过小。请注意，网络和 CPU 使用率的状况会影响完成特定操作所用的时间，因此，操作超时不应设置为非常小的值。
+    运行条件下的操作超时值可能太小。客户端 SDK 的操作超时默认值为 60 秒。请查看代码是否将该值设置得过小。请注意，网络和 CPU 使用率的状况会影响完成特定操作所用的时间，因此，操作超时不应设置为非常小的值。
 
 2. **暂时性服务错误**：
-	有时，事件中心服务在处理请求时会遇到延迟，例如，高流量时段。在这种情况下，你可以在延迟后重试操作，直到操作成功为止。如果多次尝试同一操作后仍然失败，请访问 [Azure 服务状态站点](/support/service-dashboard/)，看是否有任何已知的服务中断。
+    有时，事件中心服务在处理请求时会遇到延迟，例如，高流量时段。在这种情况下，你可以在延迟后重试操作，直到操作成功为止。如果多次尝试同一操作后仍然失败，请访问 [Azure 服务状态站点](https://www.azure.cn/support/service-dashboard/)，看是否有任何已知的服务中断。
 
 ## 后续步骤
 

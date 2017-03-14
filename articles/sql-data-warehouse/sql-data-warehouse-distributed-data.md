@@ -1,29 +1,27 @@
-<properties
-   pageTitle="适用于 SQL 数据仓库和并行数据仓库大规模并行处理 (MPP) 系统的分布式数据和分布式表选项 | Azure"
-   description="了解如何分布数据以便进行大规模并行处理 (MPP)，以及在 Azure SQL 数据仓库和并行数据仓库中分布表的选项。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 适用于 SQL 数据仓库和并行数据仓库大规模并行处理 (MPP) 系统的分布式数据和分布式表选项 | Azure
+description: 了解如何分布数据以便进行大规模并行处理 (MPP)，以及在 Azure SQL 数据仓库和并行数据仓库中分布表的选项。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="barbkess"/>  
-
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: barbkess
+---
 
 # 适用于大规模并行处理 (MPP) 的分布式数据和分布式表
 了解用户数据在 Azure SQL 数据仓库和并行数据仓库中是如何分布的，这些仓库是 Microsoft 的大规模并行处理 (MPP) 系统。设计数据仓库时，需考虑到有效使用分布式数据，充分利用 MPP 体系结构的查询处理优势。某些数据库设计选择可能会对查询性能有着重大影响。
 
->[AZURE.NOTE] Azure SQL 数据仓库和并行数据仓库使用相同的大规模并行处理 (MPP) 设计，但由于基础平台的不同，也存在一些区别。SQL 数据仓库是在 Azure 上运行的平台即服务 (PaaS)。并行数据仓库运行在分析平台系统 (APS) 上，后者是运行在 Windows Server 上的本地设备。
+>[!NOTE]
+> Azure SQL 数据仓库和并行数据仓库使用相同的大规模并行处理 (MPP) 设计，但由于基础平台的不同，也存在一些区别。SQL 数据仓库是在 Azure 上运行的平台即服务 (PaaS)。并行数据仓库运行在分析平台系统 (APS) 上，后者是运行在 Windows Server 上的本地设备。
 
 ## 什么是分布式数据？
 在 SQL 数据仓库和并行数据仓库中，分布式数据是指存储在 MPP 系统的多个位置的用户数据。每个这样的位置都可以充当独立的存储和处理单元，对部分数据运行查询。若要并行运行查询以提高查询性能，则分布式数据是基础。
@@ -37,7 +35,6 @@
 
 ![分布式表](./media/sql-data-warehouse-distributed-data/hash-distributed-table.png "分布式表")  
 
-
 * 一个行属于一个分布区。
 * 通过确定性哈希算法将一个行分配到一个分布区。
 * 不同大小的表显示，每个分布区的表行的数目各不相同。
@@ -49,7 +46,7 @@
 一个分布式位置称为一个分布区。以并行方式运行查询时，每个分布区都会对区内数据执行 SQL 查询。SQL 数据仓库使用 SQL 数据库运行查询。并行数据仓库使用 SQL Server 运行查询。此非共享式体系结构设计是进行向外缩放并行计算的基础。
 
 ### 能否查看分布区？
-每个分布区都有一个分布 ID，可以在与 SQL 数据仓库和并行数据仓库相关的系统视图中查看。可以使用分布 ID 排查查询性能问题和其他问题。如需系统视图的列表，请参阅 [MPP 系统视图](/documentation/articles/sql-data-warehouse-reference-tsql-statements/)。
+每个分布区都有一个分布 ID，可以在与 SQL 数据仓库和并行数据仓库相关的系统视图中查看。可以使用分布 ID 排查查询性能问题和其他问题。如需系统视图的列表，请参阅 [MPP 系统视图](./sql-data-warehouse-reference-tsql-statements.md)。
 
 ## 分布区和计算节点的差异
 分布区是存储分布式数据和处理并行查询的基本单位。可以将分布区组合到计算节点中。每个计算节点跟踪一个或多个分布区。
@@ -58,7 +55,7 @@
 * SQL 数据仓库的分布区数是固定的，即 60 个，而计算节点数则是可变的。计算节点使用 Azure 计算和存储资源实现。计算节点数可能会根据用户为数据仓库指定的后端服务工作负荷和计算能力 (DWU) 而变化。计算节点数变化时，每个计算节点的分布区数也变化。
 
 ### 能否查看计算节点？
-每个计算节点都有一个节点 ID，可在与 SQL 数据仓库和并行数据仓库相关的系统视图中查看。在名称以 sys.pdw\_nodes 开头的系统视图中找到 node\_id 列即可查看计算节点。如需系统视图的列表，请参阅 [MPP 系统视图](/documentation/articles/sql-data-warehouse-reference-tsql-statements/)。
+每个计算节点都有一个节点 ID，可在与 SQL 数据仓库和并行数据仓库相关的系统视图中查看。在名称以 sys.pdw\_nodes 开头的系统视图中找到 node\_id 列即可查看计算节点。如需系统视图的列表，请参阅 [MPP 系统视图](./sql-data-warehouse-reference-tsql-statements.md)。
 
 ## <a name="Replicated"></a>并行数据仓库的复制表
 适用于：并行数据仓库
@@ -69,8 +66,7 @@
 
 ![复制表](./media/sql-data-warehouse-distributed-data/replicated-table.png "复制表")  
 
-
 ## 后续步骤
-若要有效地使用分布式表，请参阅 [Distributing tables in SQL Data Warehouse](/documentation/articles/sql-data-warehouse-tables-distribute/)（在 SQL 数据仓库中分布表）
+若要有效地使用分布式表，请参阅 [Distributing tables in SQL Data Warehouse](./sql-data-warehouse-tables-distribute.md)（在 SQL 数据仓库中分布表）
 
 <!---HONumber=Mooncake_1205_2016-->

@@ -1,22 +1,22 @@
-<properties
-	pageTitle="Azure AD Connect 同步：如何管理 Azure AD 服务帐户 | Azure"
-	description="本主题介绍如何还原 Azure AD 服务帐户。"
-	services="active-directory"
-    keywords="AADSTS70002、AADSTS50054：如何重置 Azure AD Connect 同步连接器服务帐户的密码"
-	documentationCenter=""
-	authors="andkjell"
-	manager="femila"
-	editor=""/>
+---
+title: Azure AD Connect 同步：如何管理 Azure AD 服务帐户 | Azure
+description: 本主题介绍如何还原 Azure AD 服务帐户。
+services: active-directory
+keywords: AADSTS70002、AADSTS50054：如何重置 Azure AD Connect 同步连接器服务帐户的密码
+documentationCenter: ''
+authors: andkjell
+manager: femila
+editor: ''
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/01/2016"
-	wacn.date="10/11/2016"
-	ms.author="billmath"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/01/2016
+wacn.date: 10/11/2016
+ms.author: billmath
+---
 
 # Azure AD Connect 同步：如何管理 Azure AD 服务帐户
 Azure AD 连接器所使用的服务帐户应该是免费服务。但如果需要重置其凭据，则可以参阅本主题。例如，全局管理员错误地使用 PowerShell 对服务帐户重置了密码。
@@ -48,7 +48,7 @@ AADSTS70002: 验证凭据时出错。AADSTS50054: 使用旧密码进行身份验
 
 **概述主题**
 
-- [Azure AD Connect 同步：理解和自定义同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [Azure AD Connect 同步：理解和自定义同步](./active-directory-aadconnectsync-whatis.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 <!---HONumber=Mooncake_0926_2016-->

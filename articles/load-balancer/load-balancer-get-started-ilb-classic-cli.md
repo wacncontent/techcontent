@@ -1,36 +1,36 @@
-<properties
-    pageTitle="创建内部负载均衡器 - Azure CLI 经典 | Azure"
-    description="了解如何在经典部署模型中使用 Azure CLI 创建内部负载均衡器"
-    services="load-balancer"
-    documentationcenter="na"
-    author="kumudd"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="becbbbde-a118-4269-9444-d3153f00bf34"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="01/23/2017"
-    wacn.date="03/03/2017"
-    ms.author="kumud" />  
+---
+title: 创建内部负载均衡器 - Azure CLI 经典 | Azure
+description: 了解如何在经典部署模型中使用 Azure CLI 创建内部负载均衡器
+services: load-balancer
+documentationcenter: na
+author: kumudd
+manager: timlt
+editor: ''
+tags: azure-service-management
 
+ms.assetid: becbbbde-a118-4269-9444-d3153f00bf34
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 01/23/2017
+wacn.date: 03/03/2017
+ms.author: kumud
+---
 
 # 开始使用 Azure CLI 创建内部负载均衡器（经典）
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/load-balancer-get-started-ilb-classic-ps/)
-- [Azure CLI](/documentation/articles/load-balancer-get-started-ilb-classic-cli/)
-- [云服务](/documentation/articles/load-balancer-get-started-ilb-classic-cloud/)
+> [!div class="op_single_selector"]
+- [PowerShell](./load-balancer-get-started-ilb-classic-ps.md)
+- [Azure CLI](./load-balancer-get-started-ilb-classic-cli.md)
+- [云服务](./load-balancer-get-started-ilb-classic-cloud.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](/documentation/articles/load-balancer-get-started-ilb-arm-cli/)。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](./load-balancer-get-started-ilb-arm-cli.md)。
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
 
 ## 为虚拟机创建内部负载均衡器集
 
@@ -44,14 +44,18 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 本指南演示如何基于上述方案创建内部负载均衡器。
 
-1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到经典模式，如下所示。
 
-        azure config mode asm
+    ```
+    azure config mode asm
+    ```
 
     预期输出：
 
-        info:    New mode is asm
+    ```
+    info:    New mode is asm
+    ```
 
 ## 创建终结点和负载均衡器集
 
@@ -65,7 +69,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 使用 `azure network service internal-load-balancer add` 创建内部负载均衡器集。
 
-    azure service internal-load-balancer add --serviceName mytestcloud --internalLBName ilbset --subnet-name subnet-1 --static-virtualnetwork-ipaddress 192.168.2.7
+```
+azure service internal-load-balancer add --serviceName mytestcloud --internalLBName ilbset --subnet-name subnet-1 --static-virtualnetwork-ipaddress 192.168.2.7
+```
 
 有关详细信息，请查看 `azure service internal-load-balancer --help`。
 
@@ -73,80 +79,90 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 下面是数据的示例：
 
-    azure service internal-load-balancer list my-testcloud
-    info:    Executing command service internal-load-balancer list
-    + Getting cloud service deployment
-    data:    Name    Type     SubnetName  StaticVirtualNetworkIPAddress
-    data:    ------  -------  ----------  -----------------------------
-    data:    ilbset  Private  subnet-1    192.168.2.7
-    info:    service internal-load-balancer list command OK
+```
+azure service internal-load-balancer list my-testcloud
+info:    Executing command service internal-load-balancer list
++ Getting cloud service deployment
+data:    Name    Type     SubnetName  StaticVirtualNetworkIPAddress
+data:    ------  -------  ----------  -----------------------------
+data:    ilbset  Private  subnet-1    192.168.2.7
+info:    service internal-load-balancer list command OK
+```
 
 ### 步骤 2
 
 当你添加第一个终结点时，可配置内部负载均衡器集。在此步骤中，你会将终结点、虚拟机和探测器端口关联到内部负载均衡器集。
 
-    azure vm endpoint create db1 1433 --local-port 1433 --protocol tcp --probe-port 1433 --probe-protocol tcp --probe-interval 300 --probe-timeout 600 --internal-load-balancer-name ilbset
+```
+azure vm endpoint create db1 1433 --local-port 1433 --protocol tcp --probe-port 1433 --probe-protocol tcp --probe-interval 300 --probe-timeout 600 --internal-load-balancer-name ilbset
+```
 
 ### 步骤 3
 
 使用 `azure vm show`*虚拟机名称*验证负载均衡器配置
 
-    azure vm show DB1
+```
+azure vm show DB1
+```
 
 输出将为：
 
-    azure vm show DB1
-    info:    Executing command vm show
-    + Getting virtual machines
-    data:    DNSName "mytestcloud.chinacloudapp.cn"
-    data:    Location "China East"
-    data:    VMName "DB1"
-    data:    IPAddress "192.168.2.4"
-    data:    InstanceStatus "ReadyRole"
-    data:    InstanceSize "Standard_D1"
-    data:    Image "a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-R2-20151022-en.us-127GB.vhd"
-    data:    OSDisk hostCaching "ReadWrite"
-    data:    OSDisk name "db1-DB1-0-201511120457370846"
-    data:    OSDisk mediaLink "https://XXXX.blob.core.chinacloudapi.cn/vhd"
-    data:    OSDisk sourceImageName "a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-R2-20151022-en.us-127GB.vhd"
-    data:    OSDisk operatingSystem "Windows"
-    data:    OSDisk iOType "Standard"
-    data:    ReservedIPName ""
-    data:    VirtualIPAddresses 0 address "137.116.64.107"
-    data:    VirtualIPAddresses 0 name "db1ContractContract"
-    data:    VirtualIPAddresses 0 isDnsProgrammed true
-    data:    VirtualIPAddresses 1 address "192.168.2.7"
-    data:    VirtualIPAddresses 1 name "ilbset"
-    data:    Network Endpoints 0 localPort 5986
-    data:    Network Endpoints 0 name "PowerShell"
-    data:    Network Endpoints 0 port 5986
-    data:    Network Endpoints 0 protocol "tcp"
-    data:    Network Endpoints 0 virtualIPAddress "137.116.64.107"
-    data:    Network Endpoints 0 enableDirectServerReturn false
-    data:    Network Endpoints 1 localPort 3389
-    data:    Network Endpoints 1 name "Remote Desktop"
-    data:    Network Endpoints 1 port 60173
-    data:    Network Endpoints 1 protocol "tcp"
-    data:    Network Endpoints 1 virtualIPAddress "137.116.64.107"
-    data:    Network Endpoints 1 enableDirectServerReturn false
-    data:    Network Endpoints 2 localPort 1433
-    data:    Network Endpoints 2 name "tcp-1433-1433"
-    data:    Network Endpoints 2 port 1433
-    data:    Network Endpoints 2 loadBalancerProbe port 1433
-    data:    Network Endpoints 2 loadBalancerProbe protocol "tcp"
-    data:    Network Endpoints 2 loadBalancerProbe intervalInSeconds 300
-    data:    Network Endpoints 2 loadBalancerProbe timeoutInSeconds 600
-    data:    Network Endpoints 2 protocol "tcp"
-    data:    Network Endpoints 2 virtualIPAddress "192.168.2.7"
-    data:    Network Endpoints 2 enableDirectServerReturn false
-    data:    Network Endpoints 2 loadBalancerName "ilbset"
-    info:    vm show command OK
+```
+azure vm show DB1
+info:    Executing command vm show
++ Getting virtual machines
+data:    DNSName "mytestcloud.chinacloudapp.cn"
+data:    Location "China East"
+data:    VMName "DB1"
+data:    IPAddress "192.168.2.4"
+data:    InstanceStatus "ReadyRole"
+data:    InstanceSize "Standard_D1"
+data:    Image "a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-R2-20151022-en.us-127GB.vhd"
+data:    OSDisk hostCaching "ReadWrite"
+data:    OSDisk name "db1-DB1-0-201511120457370846"
+data:    OSDisk mediaLink "https://XXXX.blob.core.chinacloudapi.cn/vhd"
+data:    OSDisk sourceImageName "a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-R2-20151022-en.us-127GB.vhd"
+data:    OSDisk operatingSystem "Windows"
+data:    OSDisk iOType "Standard"
+data:    ReservedIPName ""
+data:    VirtualIPAddresses 0 address "137.116.64.107"
+data:    VirtualIPAddresses 0 name "db1ContractContract"
+data:    VirtualIPAddresses 0 isDnsProgrammed true
+data:    VirtualIPAddresses 1 address "192.168.2.7"
+data:    VirtualIPAddresses 1 name "ilbset"
+data:    Network Endpoints 0 localPort 5986
+data:    Network Endpoints 0 name "PowerShell"
+data:    Network Endpoints 0 port 5986
+data:    Network Endpoints 0 protocol "tcp"
+data:    Network Endpoints 0 virtualIPAddress "137.116.64.107"
+data:    Network Endpoints 0 enableDirectServerReturn false
+data:    Network Endpoints 1 localPort 3389
+data:    Network Endpoints 1 name "Remote Desktop"
+data:    Network Endpoints 1 port 60173
+data:    Network Endpoints 1 protocol "tcp"
+data:    Network Endpoints 1 virtualIPAddress "137.116.64.107"
+data:    Network Endpoints 1 enableDirectServerReturn false
+data:    Network Endpoints 2 localPort 1433
+data:    Network Endpoints 2 name "tcp-1433-1433"
+data:    Network Endpoints 2 port 1433
+data:    Network Endpoints 2 loadBalancerProbe port 1433
+data:    Network Endpoints 2 loadBalancerProbe protocol "tcp"
+data:    Network Endpoints 2 loadBalancerProbe intervalInSeconds 300
+data:    Network Endpoints 2 loadBalancerProbe timeoutInSeconds 600
+data:    Network Endpoints 2 protocol "tcp"
+data:    Network Endpoints 2 virtualIPAddress "192.168.2.7"
+data:    Network Endpoints 2 enableDirectServerReturn false
+data:    Network Endpoints 2 loadBalancerName "ilbset"
+info:    vm show command OK
+```
 
 ## 为虚拟机创建远程桌面终结点
 
 你可以使用 `azure vm endpoint create` 创建远程桌面终结点，将网络流量从公共端口转发到特定虚拟机的本地端口。
 
-    azure vm endpoint create web1 54580 -k 3389
+```
+azure vm endpoint create web1 54580 -k 3389
+```
 
 ## 从负载均衡器中删除虚拟机
 
@@ -154,15 +170,17 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 使用上面的示例，你可以使用命令 `azure vm endpoint delete` 从内部负载均衡器“ilbset”中删除为虚拟机“DB1”创建的终结点。
 
-    azure vm endpoint delete DB1 tcp-1433-1433
+```
+azure vm endpoint delete DB1 tcp-1433-1433
+```
 
 有关详细信息，请查看 `azure vm endpoint --help`。
 
 ## 后续步骤
 
-[使用源 IP 关联配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[使用源 IP 关联配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: update meta properties; wording update -->

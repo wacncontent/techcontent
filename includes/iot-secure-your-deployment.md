@@ -101,19 +101,19 @@ Azure IoT 中心引入的数据可供多种服务（例如 Azure 流分析和 Az
 
 [img-overview]: ./media/iot-secure-your-deployment/overview.png
 
-[lnk-security-tokens]: /documentation/articles/iot-hub-sas-tokens/#security-token-structure
-[lnk-sas-tokens]: /documentation/articles/iot-hub-devguide-security/#use-sas-tokens-in-a-device-app
-[lnk-identity-registry]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-protocols]: /documentation/articles/iot-hub-devguide-security
-[lnk-custom-auth]: /documentation/articles/iot-hub-devguide-security/#custom-device-authentication
+[lnk-security-tokens]: ../articles/iot-hub/iot-hub-sas-tokens.md#security-token-structure
+[lnk-sas-tokens]: ../articles/iot-hub/iot-hub-devguide-security.md#use-sas-tokens-in-a-device-app
+[lnk-identity-registry]: ../articles/iot-hub/iot-hub-devguide-identity-registry.md
+[lnk-protocols]: ../articles/iot-hub/iot-hub-devguide-security.md
+[lnk-custom-auth]: ../articles/iot-hub/iot-hub-devguide-security.md#custom-device-authentication
 [lnk-x509]: http://www.itu.int/rec/T-REC-X.509-201210-I/en
-[lnk-use-x509]: /documentation/articles/iot-hub-devguide-security/
+[lnk-use-x509]: ../articles/iot-hub/iot-hub-devguide-security.md
 [lnk-tls12]: https://tools.ietf.org/html/rfc5246
-[lnk-service-tokens]: /documentation/articles/iot-hub-devguide-security/#use-security-tokens-from-service-components
-[lnk-docdb]: /documentation/services/documentdb/
-[lnk-asa]: /documentation/services/stream-analytics/
-[lnk-appservices]: /documentation/services/app-service/
-[lnk-logicapps]: /documentation/services/app-service/logic/
-[lnk-blob]: /documentation/services/storage/
+[lnk-service-tokens]: ../articles/iot-hub/iot-hub-devguide-security.md#use-security-tokens-from-service-components
+[lnk-docdb]: ../articles/documentdb/index.md
+[lnk-asa]: ../articles/stream-analytics/index.md
+[lnk-appservices]: ../articles/app-service/index.md
+[lnk-logicapps]: ../articles/app-service-logic/index.md
+[lnk-blob]: ../articles/storage/index.md
 
 <!---HONumber=Mooncake_1226_2016-->

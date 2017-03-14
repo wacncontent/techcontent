@@ -1,17 +1,16 @@
-<properties 
-	pageTitle="服务总线 AMQP 概述 (Java) | Microsoft Azure" 
-	description="了解如何在 Azure 中使用 Java 和高级消息队列协议 (AMQP) 1.0。" 
-	services="service-bus" 
-	documentationCenter="java" 
-	authors="sethmanheim" 
-	manager="timlt" 
-	editor=""/>
+---
+title: 服务总线 AMQP 概述 (Java) | Microsoft Azure
+description: 了解如何在 Azure 中使用 Java 和高级消息队列协议 (AMQP) 1.0。
+services: service-bus
+documentationCenter: java
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-<tags 
-	ms.service="service-bus" 
-	ms.date="01/12/2017" 
-	wacn.date="02/20/2017"/>
-
+ms.service: service-bus
+ms.date: 01/12/2017
+wacn.date: 02/20/2017
+---
 
 # 服务总线的 AMQP 1.0 支持
 
@@ -73,10 +72,9 @@ Azure 服务总线中对 AMQP 1.0 的支持意味着现在可以通过一系列�
 | PHP | Apache Qpid Proton-PHP |
 | Python | Apache Qpid Proton-Python |
 
-
 **图 2：AMQP 1.0 客户端库表**
 
-有关如何获取和使用这些库以便用于服务总线的详细信息，请参阅 [服务总线 AMQP 开发人员指南][]。有关更多信息的链接，请参阅[后续步骤](/documentation/articles/service-bus-java-amqp-overview/#next-steps)部分。
+有关如何获取和使用这些库以便用于服务总线的详细信息，请参阅 [服务总线 AMQP 开发人员指南][]。有关更多信息的链接，请参阅[后续步骤](./service-bus-java-amqp-overview.md#next-steps)部分。
 
 ## 摘要
 
@@ -87,14 +85,12 @@ Azure 服务总线中对 AMQP 1.0 的支持意味着现在可以通过一系列�
 
 请访问以下链接以了解有关服务总线中的 AMQP 支持的详细信息。
 
-*    [如何将 AMQP 1.0 与服务总线 .NET API 一起使用](/documentation/articles/service-bus-dotnet-advanced-message-queuing/)
-*    [如何将 Java 消息服务 (JMS) API 用于服务总线 和 AMQP 1.0](/documentation/articles/service-bus-java-how-to-use-jms-api-amqp/)
-*    [服务总线 AMQP 开发人员指南](/documentation/articles/service-bus-amqp-dotnet/)
+*    [如何将 AMQP 1.0 与服务总线 .NET API 一起使用](./service-bus-dotnet-advanced-message-queuing.md)
+*    [如何将 Java 消息服务 (JMS) API 用于服务总线 和 AMQP 1.0](./service-bus-java-how-to-use-jms-api-amqp.md)
+*    [服务总线 AMQP 开发人员指南](./service-bus-amqp-dotnet.md)
 *    [OASIS 高级消息队列协议 (AMQP) 1.0 版规范](http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf)
 
 [0]: ./media/service-bus-java-amqp-overview/Example1.png
 
- 
-
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->
-<!--Update_Description:update meta properties--> 
+<!--Update_Description:update meta properties-->

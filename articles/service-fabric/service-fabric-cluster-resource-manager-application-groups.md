@@ -1,25 +1,25 @@
-<properties
-    pageTitle="Service Fabric 群集资源管理器 - 应用程序组 | Azure"
-    description="概述 Service Fabric 群集资源管理器中的应用程序组功能"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="4cae2370-77b3-49ce-bf40-030400c4260d"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider" />  
+---
+title: Service Fabric 群集资源管理器 - 应用程序组 | Azure
+description: 概述 Service Fabric 群集资源管理器中的应用程序组功能
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: 4cae2370-77b3-49ce-bf40-030400c4260d
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider
+---
 
 # 应用程序组简介
-Service Fabric 的群集资源管理器通常通过将负载（通过[指标](/documentation/articles/service-fabric-cluster-resource-manager-metrics/)表示）平均分散到整个群集来管理群集资源。Service Fabric 还管理群集中节点的容量，以及通过[容量](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)的概念管理整个群集。指标和容量非常适用于许多种工作负荷，但大量使用不同 Service Fabric 应用程序实例的模式有时还有其他要求。其他要求通常包括：
+Service Fabric 的群集资源管理器通常通过将负载（通过[指标](./service-fabric-cluster-resource-manager-metrics.md)表示）平均分散到整个群集来管理群集资源。Service Fabric 还管理群集中节点的容量，以及通过[容量](./service-fabric-cluster-resource-manager-cluster-description.md)的概念管理整个群集。指标和容量非常适用于许多种工作负荷，但大量使用不同 Service Fabric 应用程序实例的模式有时还有其他要求。其他要求通常包括：
 
 * 能够在群集中为应用程序实例的服务保留容量
 * 能够限制应用程序中服务运行的节点总数
@@ -45,31 +45,31 @@ Service Fabric 的群集资源管理器通常通过将负载（通过[指标](/d
 
 Powershell
 
-
-	New-ServiceFabricApplication -ApplicationName fabric:/AppName -ApplicationTypeName AppType1 -ApplicationTypeVersion 1.0.0.0 -MaximumNodes 3
-	Update-ServiceFabricApplication –Name fabric:/AppName –MaximumNodes 5
-
+```
+New-ServiceFabricApplication -ApplicationName fabric:/AppName -ApplicationTypeName AppType1 -ApplicationTypeVersion 1.0.0.0 -MaximumNodes 3
+Update-ServiceFabricApplication –Name fabric:/AppName –MaximumNodes 5
+```
 
 C#
 
+```
+ApplicationDescription ad = new ApplicationDescription();
+ad.ApplicationName = new Uri("fabric:/AppName");
+ad.ApplicationTypeName = "AppType1";
+ad.ApplicationTypeVersion = "1.0.0.0";
+ad.MaximumNodes = 3;
+fc.ApplicationManager.CreateApplicationAsync(ad);
 
-	ApplicationDescription ad = new ApplicationDescription();
-	ad.ApplicationName = new Uri("fabric:/AppName");
-	ad.ApplicationTypeName = "AppType1";
-	ad.ApplicationTypeVersion = "1.0.0.0";
-	ad.MaximumNodes = 3;
-	fc.ApplicationManager.CreateApplicationAsync(ad);
-	
-	ApplicationUpdateDescription adUpdate = new ApplicationUpdateDescription(new Uri("fabric:/AppName"));
-	adUpdate.MaximumNodes = 5;
-	fc.ApplicationManager.UpdateApplicationAsync(adUpdate);
-	
-	var appMetric = new ApplicationMetricDescription();
-	appMetric.Name = "Metric1";
-	appMetric.TotalApplicationCapacity = 1000;
-	
-	adUpdate.Metrics.Add(appMetric);
+ApplicationUpdateDescription adUpdate = new ApplicationUpdateDescription(new Uri("fabric:/AppName"));
+adUpdate.MaximumNodes = 5;
+fc.ApplicationManager.UpdateApplicationAsync(adUpdate);
 
+var appMetric = new ApplicationMetricDescription();
+appMetric.Name = "Metric1";
+appMetric.TotalApplicationCapacity = 1000;
+
+adUpdate.Metrics.Add(appMetric);
+```
 
 ## 应用程序指标、负载和容量
 应用程序组还允许定义与特定应用程序实例关联的指标，以及这些指标的应用程序容量。据此，可跟踪、保留和限制应用程序实例中服务的资源消耗量。
@@ -114,10 +114,9 @@ Service Fabric 为蓝色应用程序在 2 个节点上保留容量，并且不�
 
 例如，可以使用以下 PowerShell cmdlet 检索负载：
 
-
-	Get-ServiceFabricApplicationLoad –ApplicationName fabric:/MyApplication1
-
-
+```
+Get-ServiceFabricApplicationLoad –ApplicationName fabric:/MyApplication1
+```
 
 ApplicationLoad 查询返回针对应用程序所指定应用程序容量的基本信息。此信息包括最小节点数和最大节点数信息，以及应用程序当前使用的节点数。还包括有关每个应用程序负载指标的信息，包括：
 
@@ -129,10 +128,9 @@ ApplicationLoad 查询返回针对应用程序所指定应用程序容量的基�
 ## 删除应用程序容量
 为应用程序设置应用程序容量参数后，可以使用更新应用程序 API 或 PowerShell cmdlet 来删除这些参数。例如：
 
-
-	Update-ServiceFabricApplication –Name fabric:/MyApplication1 –RemoveApplicationCapacity
-
-
+```
+Update-ServiceFabricApplication –Name fabric:/MyApplication1 –RemoveApplicationCapacity
+```
 
 此命令从应用程序删除所有应用程序容量参数。该命令立即生效。此命令完成后，群集资源管理器恢复默认行为进行应用程序管理。可通过 Update-ServiceFabricApplication 再次指定应用程序容量参数。
 
@@ -152,11 +150,11 @@ ApplicationLoad 查询返回针对应用程序所指定应用程序容量的基�
 * 不要尝试使用应用程序容量来确保将相同应用程序的 2 个服务放置在一起。可使用相关性或依据特定要求采用相应的放置约束，确保在相同节点上运行服务。
 
 ## 后续步骤
-- 有关可用于配置服务的其他选项的详细信息，请查看 [Learn about configuring Services](/documentation/articles/service-fabric-cluster-resource-manager-configure-services/)（了解如何配置服务）中提供的其他群集资源管理器配置的相关主题
-- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](/documentation/articles/service-fabric-cluster-resource-manager-balancing/)的文章
-- 参阅 [Service Fabric 群集资源管理器简介](/documentation/articles/service-fabric-cluster-resource-manager-introduction/)，帮助自己入门
-- 有关在一般情况下指标的工作原理的详细信息，请阅读 [Service Fabric Load Metrics](/documentation/articles/service-fabric-cluster-resource-manager-metrics/)（Service Fabric 负载指标）
-- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇有关[描述 Service Fabric 群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)的文章
+- 有关可用于配置服务的其他选项的详细信息，请查看 [Learn about configuring Services](./service-fabric-cluster-resource-manager-configure-services.md)（了解如何配置服务）中提供的其他群集资源管理器配置的相关主题
+- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](./service-fabric-cluster-resource-manager-balancing.md)的文章
+- 参阅 [Service Fabric 群集资源管理器简介](./service-fabric-cluster-resource-manager-introduction.md)，帮助自己入门
+- 有关在一般情况下指标的工作原理的详细信息，请阅读 [Service Fabric Load Metrics](./service-fabric-cluster-resource-manager-metrics.md)（Service Fabric 负载指标）
+- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇有关[描述 Service Fabric 群集](./service-fabric-cluster-resource-manager-cluster-description.md)的文章
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-application-groups/application-groups-max-nodes.png
 [Image2]: ./media/service-fabric-cluster-resource-manager-application-groups/application-groups-reserved-capacity.png

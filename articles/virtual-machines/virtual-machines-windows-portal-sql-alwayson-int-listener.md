@@ -1,34 +1,34 @@
-<properties
-    pageTitle="创建 SQL Server 可用性组侦听器 - Azure 虚拟机 | Azure"
-    description="有关为 Azure 虚拟机中的 SQL Server AlwaysOn 可用性组创建侦听器的分步说明"
-    services="virtual-machines"
-    documentationcenter="na"
-    author="MikeRayMSFT"
-    manager="jhubbard"
-    editor="monicar" />
-<tags
-    ms.assetid="d1f291e9-9af2-41ba-9d29-9541e3adcfcf"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows-sql-server"
-    ms.workload="infrastructure-services"
-    ms.date="12/28/2016"
-    wacn.date="02/20/2017"
-    ms.author="mikeray" />  
+---
+title: 创建 SQL Server 可用性组侦听器 - Azure 虚拟机 | Azure
+description: 有关为 Azure 虚拟机中的 SQL Server AlwaysOn 可用性组创建侦听器的分步说明
+services: virtual-machines
+documentationcenter: na
+author: MikeRayMSFT
+manager: jhubbard
+editor: monicar
 
+ms.assetid: d1f291e9-9af2-41ba-9d29-9541e3adcfcf
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 12/28/2016
+wacn.date: 02/20/2017
+ms.author: mikeray
+---
 
 # 在 Azure 中为 AlwaysOn 可用性组配置内部负载均衡器
 本主题说明如何在 Resource Manager 模型中运行的 Azure 虚拟机上创建 SQL Server AlwaysOn 可用性组的内部负载均衡器。当 SQL Server 实例位于 Azure 虚拟机时，可用性组需要负载均衡器。负载均衡器存储可用性组侦听器的 IP 地址。如果可用性组跨多个区域，则每个区域都需要一个负载均衡器。
 
-若要完成此任务，需要在 Resource Manager 模型中的 Azure 虚拟机上部署 SQL Server 可用性组。这两个 SQL Server 虚拟机必须属于同一个可用性集。如果需要，可以[手动配置可用性组](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/)。
+若要完成此任务，需要在 Resource Manager 模型中的 Azure 虚拟机上部署 SQL Server 可用性组。这两个 SQL Server 虚拟机必须属于同一个可用性集。如果需要，可以[手动配置可用性组](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)。
 
 本主题要求事先配置可用性组。
 
 相关主题包括：
 
-* [在 Azure VM \(手动\) 中配置 AlwaysOn 可用性组](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/)
-* [使用 Azure Resource Manager 和 PowerShell 配置 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)
+* [在 Azure VM \(手动\) 中配置 AlwaysOn 可用性组](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)
+* [使用 Azure Resource Manager 和 PowerShell 配置 VNet 到 VNet 连接](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)
 
 执行本文档中的每个步骤可以在 Azure 门户预览中创建和配置负载均衡器。完成这些步骤后，需配置群集，将负载均衡器中的 IP 地址用于可用性组侦听器。
 
@@ -40,7 +40,7 @@
 3. 创建探测
 4. 设置负载均衡规则
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果 SQL Server 位于不同的资源组和区域，则需要执行上述所有步骤两次：在每个资源组中各执行一次。
 > 
 > 
@@ -99,7 +99,7 @@ Azure 将更新后端地址池的设置。现在，可用性集具有包含两�
 
 1.  单击“确定”。
 
-> [AZURE.NOTE]
+> [!NOTE]
 确保指定的端口已在两个 SQL Server 的防火墙上打开。这两个服务器需要所用 TCP 端口的入站规则。有关详细信息，请参阅[添加或编辑防火墙规则](http://technet.microsoft.com/zh-cn/library/cc753558.aspx)。
 > 
 > 
@@ -124,7 +124,7 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
     | **空闲超时\(分钟\)** |*4* |
     | **浮动 IP \(直接服务器返回\)** |**Enabled** |
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     可能需要在边栏选项卡中向下滚动才能看到所有设置。
     > 
 
@@ -133,7 +133,7 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 
 此时，资源组有一个连接到这两个 SQL Server 计算机的负载均衡器。负载均衡器还包含 SQL Server AlwaysOn 可用性组侦听器的 IP 地址，以便任一计算机可以响应针对可用性组的请求。
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果 SQL Server 位于两个不同的区域，请在另一个区域重复上述步骤。每个区域都需要一个负载均衡器。
 > 
 > 
@@ -147,7 +147,7 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 ### 5\.在故障转移群集上创建可用性组侦听器
 在此步骤中，你在故障转移群集管理器和 SQL Server Management Studio \(SSMS\) 中手动创建可用性组侦听器。
 
-[AZURE.INCLUDE [ag-listener-configure](../../includes/virtual-machines-ag-listener-configure.md)]
+[!INCLUDE [ag-listener-configure](../../includes/virtual-machines-ag-listener-configure.md)]
 
 ### 验证侦听器的配置
 
@@ -165,8 +165,10 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
 
 1. 通过 RDP 连接到同一虚拟网络中不拥有副本的 SQL Server。这可以是群集中的其他 SQL Server。
 2. 使用 **sqlcmd** 实用工具测试连接。例如，以下脚本通过侦听器与 Windows 身份验证来与主副本建立 **sqlcmd** 连接：
-   
-        sqlcmd -S <listenerName> -E
+
+    ```
+    sqlcmd -S <listenerName> -E
+    ```
 
 SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。
 

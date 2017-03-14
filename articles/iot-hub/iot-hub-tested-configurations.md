@@ -1,32 +1,29 @@
-<properties
-	pageTitle="OS 平台和硬件兼容性 | Azure"
-	description="总结 IoT 设备 SDK 与 OS 平台和设备硬件的兼容性。"
-	services="iot-hub"
-	documentationCenter=""
-	authors="hegate"
-	manager="timlt"
-	editor=""/>
+---
+title: OS 平台和硬件兼容性 | Azure
+description: 总结 IoT 设备 SDK 与 OS 平台和设备硬件的兼容性。
+services: iot-hub
+documentationCenter: ''
+authors: hegate
+manager: timlt
+editor: ''
 
-<tags
-     ms.service="iot-hub"
-     ms.devlang="na"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="10/04/2016"
-     wacn.date="01/04/2017"
-     ms.author="hegate"/>
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/04/2016
+wacn.date: 01/04/2017
+ms.author: hegate
+---
 
 # OS 平台和硬件与设备 SDK 的兼容性
 
 本文档介绍了 SDK 与不同 OS 平台的兼容性。如果你不确定要使用的设备，请查看 [OS 平台和库](#os-platforms)兼容性部分。
 
-
-
 ## <a name="os-platforms"></a> OS 平台
 
 Azure IoT 库在以下操作系统平台上进行了测试：
-
 
 |Linux/Unix OS 平台 | 版本|
 |:---------------|:------------:|
@@ -52,8 +49,6 @@ Azure IoT 库在以下操作系统平台上进行了测试：
 |mbed | 2\.0 |
 |TI-RTOS | 2\.x |
 
-
-
 ## C 库
 
 适用于 C 的 Azure IoT 设备 SDK 在以下配置上进行了测试：
@@ -69,12 +64,9 @@ Azure IoT 库在以下操作系统平台上进行了测试：
 |Windows 桌面| 10 | HTTPS、AMQP、MQTT、基于 WebSockets 的 AMQP |
 |Yocto Linux|2\.1 | HTTPS、AMQP|
 
-
-
 ## Node.js 库
 
 适用于 Node.js 的 Azure IoT 设备 SDK 在以下配置上进行了测试：
-
 
 |运行时| 版本|协议|
 |:---------|:----------:|:----:|
@@ -102,7 +94,6 @@ Azure IoT 库在以下操作系统平台上进行了测试：
 |:---------|:----------:|:-----|
 |Java SE| 1\.8 | HTTPS、AMQP、MQTT |
 
-
 ## CSharp
 
 适用于 .NET 的 Azure IoT 设备 SDK 在以下配置上进行了测试：
@@ -122,7 +113,6 @@ Azure IoT 库在以下操作系统平台上进行了测试：
 
 托管代理代码需要 Microsoft .NET Framework 4.5
 
-
 ## Python 库
 
 适用于 Python 的 Azure IoT 设备 SDK 在以下配置上进行了测试：
@@ -131,10 +121,7 @@ Azure IoT 库在以下操作系统平台上进行了测试：
 |:---------|:----------:|:----------:|
 |Python | 2\.7.x、3.4.x、3.5.x | HTTPS、AMQP、MQTT |
 
-
-
 ## 后续步骤
-
 
 若要深入了解如何规划 IoT 中心部署，请参阅：
 
@@ -148,14 +135,13 @@ Azure IoT 库在以下操作系统平台上进行了测试：
 - [使用网关 SDK 模拟设备][lnk-gateway]
 - [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
+[lnk-iot-suite]: ../iot-suite/index.md
 
-[lnk-iot-suite]: /documentation/services/iot-suite/
-
-[lnk-protocols]: /documentation/articles/iot-hub-protocol-gateway/
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-portal]: /documentation/articles/iot-hub-manage-through-portal/
+[lnk-protocols]: ./iot-hub-protocol-gateway.md
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-portal]: ./iot-hub-manage-through-portal.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

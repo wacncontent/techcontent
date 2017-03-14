@@ -1,22 +1,22 @@
-<properties
-    pageTitle="资源管理器体系结构 | Azure"
-    description="Service Fabric 群集资源管理器的体系结构概述。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="6c4421f9-834b-450c-939f-1cb4ff456b9b"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider" />  
+---
+title: 资源管理器体系结构 | Azure
+description: Service Fabric 群集资源管理器的体系结构概述。
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: 6c4421f9-834b-450c-939f-1cb4ff456b9b
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider
+---
 
 # 群集资源管理器体系结构概述
 若要管理群集中的资源，Service Fabric 群集资源管理器必须拥有一些相关的信息。它必须了解目前存在哪些服务，以及这些服务正在使用的资源的当前（默认）数量。若要跟踪群集中的可用资源，它必须了解群集中的节点容量和每个节点使用的资源量。给定服务的资源消耗量会随时间变化，服务通常会关注多种类型的资源。在不同的服务之间，可能会同时测量实际物理资源和物理资源。服务可能会跟踪内存和磁盘使用情况等物理指标。更常见的是，服务可能会关注逻辑指标，例如“WorkQueueDepth”或“TotalRequests”。逻辑和实际指标可能跨许多不同类型的服务使用，或可能仅特定对几项服务使用。
@@ -47,7 +47,7 @@
 </center>
 
 ## 后续步骤
-- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇有关[描述 Service Fabric 群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)的文章
+- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇有关[描述 Service Fabric 群集](./service-fabric-cluster-resource-manager-cluster-description.md)的文章
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-architecture/Service-Fabric-Resource-Manager-Architecture-Activity-1.png
 [Image2]: ./media/service-fabric-cluster-resource-manager-architecture/Service-Fabric-Resource-Manager-Architecture-Activity-2.png

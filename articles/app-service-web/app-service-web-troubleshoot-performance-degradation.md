@@ -1,29 +1,29 @@
-<properties
-	pageTitle="应用服务中 Web 应用性能缓慢 | Azure"
-	description="本文将帮助你排查 Azure App Service 中 Web 应用性能缓慢的问题。"
-	services="app-service\web"
-	documentationCenter=""
-	authors="cephalin"
-	manager="wpickett"
-	editor=""
-	tags="top-support-issue"
-	keywords="Web 应用性能，缓慢应用，应用缓慢"/>
+---
+title: 应用服务中 Web 应用性能缓慢 | Azure
+description: 本文将帮助你排查 Azure App Service 中 Web 应用性能缓慢的问题。
+services: app-service\web
+documentationCenter: ''
+authors: cephalin
+manager: wpickett
+editor: ''
+tags: top-support-issue
+keywords: Web 应用性能，缓慢应用，应用缓慢
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/06/2016"
-	wacn.date="09/26/2016"
-	ms.author="cephalin"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/06/2016
+wacn.date: 09/26/2016
+ms.author: cephalin
+---
 
 # 排查 Azure App Service 中 Web 应用性能缓慢的问题
 
-本文将帮助你排查 [Azure App Service](/documentation/services/web-sites/) 中 Web 应用性能缓慢的问题。
+本文将帮助你排查 [Azure App Service](./index.md) 中 Web 应用性能缓慢的问题。
 
-如果你对本文中的任何观点存在疑问，可以联系 [MSDN Azure 和 CSDN Azure](/support/forums/) 上的 Azure 专家。或者，你也可以提出 Azure 支持事件。请转到 [Azure 支持站点](/support/contact/)并单击“获取支持”。
+如果你对本文中的任何观点存在疑问，可以联系 [MSDN Azure 和 CSDN Azure](https://www.azure.cn/support/forums/) 上的 Azure 专家。或者，你也可以提出 Azure 支持事件。请转到 [Azure 支持站点](https://www.azure.cn/support/contact/)并单击“获取支持”。
 
 ## 症状
 
@@ -33,25 +33,25 @@
 
 此问题通常是应用程序级别的问题造成的，例如：
 
--	请求耗费过长的时间
--	应用程序的内存/CPU 使用率过高
--	应用程序因异常而崩溃
+- 请求耗费过长的时间
+- 应用程序的内存/CPU 使用率过高
+- 应用程序因异常而崩溃
 
 ## 疑难解答步骤
 
 故障排除可划分为三种不同的任务，依次为：
 
-1.	[观察和监视应用程序行为](#observe)
-2.	[收集数据](#collect)
-3.	[缓解问题](#mitigate)
+1. [观察和监视应用程序行为](#observe)
+2. [收集数据](#collect)
+3. [缓解问题](#mitigate)
 
-[应用服务 Web 应用](/home/features/app-service/web-apps/)为每个步骤提供了多种选项。
+[应用服务 Web 应用](https://www.azure.cn/home/features/app-service/web-apps/)为每个步骤提供了多种选项。
 
 ### <a name="observe"></a> 1.观察和监视应用程序行为
 
 #### 跟踪服务运行状况
 
-每次发生服务中断或性能下降时 Azure 会进行宣传。可以在 [Azure 门户预览](https://portal.azure.cn/)中跟踪服务的运行状况。有关详细信息，请参阅[跟踪服务的运行状况](/documentation/articles/insights-service-health/)。
+每次发生服务中断或性能下降时 Azure 会进行宣传。可以在 [Azure 门户预览](https://portal.azure.cn/)中跟踪服务的运行状况。有关详细信息，请参阅[跟踪服务的运行状况](../monitoring-and-diagnostics/insights-service-health.md)。
 
 #### 监视你的 Web 应用
 
@@ -59,19 +59,18 @@
 
 你可能想要在 Web 应用中监视的一些指标包括
 
--	平均内存工作集
--	平均响应时间
--	CPU 时间
--	内存工作集
--	请求
+- 平均内存工作集
+- 平均响应时间
+- CPU 时间
+- 内存工作集
+- 请求
 
 ![监视 Web 应用性能](./media/app-service-web-troubleshoot-performance-degradation/1-monitor-metrics.png)  
 
-
 有关详细信息，请参阅：
 
--	[在 Azure App Service 中监视 Web Apps](/documentation/articles/web-sites-monitor/)
--	[接收警报通知](/documentation/articles/insights-receive-alert-notifications/)
+- [在 Azure App Service 中监视 Web Apps](./web-sites-monitor.md)
+- [接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
 
 #### 监视 Web 终结点状态
 
@@ -97,15 +96,15 @@ Web 应用环境为 Web 服务器和 Web 应用中的日志记录信息提供了
 
 你可以启用或禁用以下种类的日志：
 
--	**详细错误日志记录** - 指示故障的 HTTP 状态代码（状态代码 400 或更大数字）的详细错误消息。其中可能包含有助于确定服务器返回错误代码的原因的信息。
--	**失败请求跟踪** - 有关失败请求的详细信息，包括对用于处理请求的 IIS 组件和每个组件所用的时间的跟踪。在尝试提高 Web 应用性能或查找导致特定 HTTP 错误的问题时，此信息很有用。
--	**Web 服务器日志记录** - 使用 W3C 扩展日志文件格式的 HTTP 事务信息。这在确定总体 Web 应用指标（如处理的请求数量或来自特定 IP 地址的请求数）时非常有用。
+- **详细错误日志记录** - 指示故障的 HTTP 状态代码（状态代码 400 或更大数字）的详细错误消息。其中可能包含有助于确定服务器返回错误代码的原因的信息。
+- **失败请求跟踪** - 有关失败请求的详细信息，包括对用于处理请求的 IIS 组件和每个组件所用的时间的跟踪。在尝试提高 Web 应用性能或查找导致特定 HTTP 错误的问题时，此信息很有用。
+- **Web 服务器日志记录** - 使用 W3C 扩展日志文件格式的 HTTP 事务信息。这在确定总体 Web 应用指标（如处理的请求数量或来自特定 IP 地址的请求数）时非常有用。
 
 ##### 应用程序诊断
 
 使用应用程序诊断可以捕获 Web 应用程序生成的信息。ASP.NET 应用程序可使用 `System.Diagnostics.Trace` 类将信息记录到应用程序诊断日志。
 
-有关如何在应用程序中配置日志记录的详细说明，请参阅[在 Azure App Service 中启用 Web 应用的诊断日志记录](/documentation/articles/web-sites-enable-diagnostic-log/)。
+有关如何在应用程序中配置日志记录的详细说明，请参阅[在 Azure App Service 中启用 Web 应用的诊断日志记录](./web-sites-enable-diagnostic-log.md)。
 
 #### 使用远程分析
 
@@ -113,16 +112,15 @@ Web 应用环境为 Web 服务器和 Web 应用中的日志记录信息提供了
 
 有关详细信息，请参阅 [Azure App Service 中的远程分析支持](http://azure.microsoft.com/blog/remote-profiling-support-in-azure-app-service)。
 
-
 #### 使用 Azure App Service 支持门户
 
 在 Web 应用中，可通过查看 HTTP 日志、事件日志、进程转储等信息来排查与 Web 应用相关的问题。你可以使用支持门户 (**http://&lt;your app name>.scm.chinacloudsites.cn/Support**) 访问所有这些信息。
 
 Azure App Service 支持门户具有三个不同的选项卡，用于支持常见故障排除方案的三个步骤：
 
-1.	观察当前行为
-2.	通过收集诊断信息和运行内置分析器进行分析
-3.	缓解
+1. 观察当前行为
+2. 通过收集诊断信息和运行内置分析器进行分析
+3. 缓解
 
 如果目前正在发生问题，请单击“分析”>“诊断”>“立即诊断”创建诊断会话，该会话将收集 HTTP 日志、事件查看器日志、内存转储、PHP 错误日志和 PHP 进程报告。
 
@@ -140,11 +138,10 @@ Web Apps 随附可用于调试、浏览和上载文件的调试控制台，以�
 
 Kudu 提供的一些信息和功能包括：
 
--	应用程序的环境设置
--	日志流
--	诊断转储
--	调试控制台，你可以在其中运行 Powershell cmdlet 和基本 DOS 命令。
-
+- 应用程序的环境设置
+- 日志流
+- 诊断转储
+- 调试控制台，你可以在其中运行 Powershell cmdlet 和基本 DOS 命令。
 
 Kudu 的另一项有用功能是，如果应用程序引发第一次异常，你可以使用 Kudu 和 SysInternals 工具 Procdump 创建内存转储。这些内存转储是进程的快照，通常可以帮助你排查较复杂的 Web 应用问题。
 
@@ -156,7 +153,7 @@ Kudu 的另一项有用功能是，如果应用程序引发第一次异常，你
 
 在 Azure App Service 中，为了提高性能和吞吐量，可以调整运行应用程序的规模。向上缩放 Web 应用涉及到两个相关操作：将 App Service 计划更改为较高的定价层，以及在切换到较高的定价层后配置特定的设置。
 
-有关缩放的详细信息，请参阅[在 Azure App Service 中缩放 Web 应用](/documentation/articles/web-sites-scale/)。
+有关缩放的详细信息，请参阅[在 Azure App Service 中缩放 Web 应用](./web-sites-scale.md)。
 
 此外，你可以选择在多个实例上运行应用程序。这不仅能提供更强大的处理能力，而且还能提供一定程度的容错。如果进程在某个实例上中断，其他实例仍将继续处理请求。
 
@@ -174,6 +171,6 @@ AutoHeal 会根据你选择的设置（例如配置更改、请求、基于内�
 
  ![重新启动 Web 应用以解决性能问题](./media/app-service-web-troubleshoot-performance-degradation/2-restart.png)
 
-你还可以使用 Azure Powershell 管理 Web 应用。有关详细信息，请参阅[将 Azure PowerShell 与 Azure 资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)。
+你还可以使用 Azure Powershell 管理 Web 应用。有关详细信息，请参阅[将 Azure PowerShell 与 Azure 资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
 
 <!---HONumber=Mooncake_0919_2016-->

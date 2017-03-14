@@ -6,11 +6,11 @@
 
 1. 侦听器处于联机状态后，在“资源”选项卡上，右键单击可用性组，然后单击“属性”。
 
-	![配置可用性组资源](./media/virtual-machines-sql-server-configure-alwayson-availability-group-listener/IC678772.gif)
+    ![配置可用性组资源](./media/virtual-machines-sql-server-configure-alwayson-availability-group-listener/IC678772.gif)
 
 1. 在侦听器名称资源（而不是 IP 地址资源名称）上创建依赖项。单击“确定”。
 
-	![在侦听器名称上添加依赖项](./media/virtual-machines-sql-server-configure-alwayson-availability-group-listener/IC678773.gif)
+    ![在侦听器名称上添加依赖项](./media/virtual-machines-sql-server-configure-alwayson-availability-group-listener/IC678773.gif)
 
 1. 启动 SQL Server Management Studio 并连接到主副本。
 

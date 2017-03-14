@@ -1,23 +1,22 @@
-<properties
-    pageTitle="配置流量管理器路由方法 | Azure"
-    description="本文介绍如何在流量管理器中配置不同的路由方法"
-    services="traffic-manager"
-    documentationcenter=""
-    author="sdwheeler"
-    manager="carmonm"
-    editor="" />  
+---
+title: 配置流量管理器路由方法 | Azure
+description: 本文介绍如何在流量管理器中配置不同的路由方法
+services: traffic-manager
+documentationcenter: ''
+author: sdwheeler
+manager: carmonm
+editor: ''
 
-<tags
-    ms.assetid="6dca6de1-18f7-4962-bd98-6055771fab22"
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/18/2016"
-    wacn.date="12/12/2016"
-    ms.author="sewhee" />  
-
+ms.assetid: 6dca6de1-18f7-4962-bd98-6055771fab22
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/18/2016
+wacn.date: 12/12/2016
+ms.author: sewhee
+---
 
 # 配置流量管理器路由方法
 
@@ -50,7 +49,7 @@ Azure 流量管理器提供三种路由方法，用于控制如何将流量路�
 
 一种常见的流量路由方法模式是提供一组相同的终结点（包括云服务和网站），并以循环方式向每个终结点发送流量。以下步骤概述如何配置这种类型的流量路由方法。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Azure 网站已针对数据中心（也称为区域）内的网站提供了轮询机制负载均衡功能。你可以使用流量管理器为不同数据中心内的网站指定轮询机制流量路由方法。
 
 1. 在 Azure 经典管理门户的左窗格中，单击“流量管理器”图标打开“流量管理器”窗格。
@@ -79,11 +78,11 @@ Azure 网站已针对数据中心（也称为区域）内的网站提供了轮�
 
 ## 后续步骤
 
-* [管理流量管理器配置文件](/documentation/articles/traffic-manager-manage-profiles/)
-* [流量管理器路由方法](/documentation/articles/traffic-manager-routing-methods/)
-* [测试流量管理器设置](/documentation/articles/traffic-manager-testing-settings/)
-* [将公司 Internet 域指向流量管理器域](/documentation/articles/traffic-manager-point-internet-domain/)
-* [管理流量管理器终结点](/documentation/articles/traffic-manager-manage-endpoints/)
-* [流量管理器降级状态疑难解答](/documentation/articles/traffic-manager-troubleshooting-degraded/)
+* [管理流量管理器配置文件](./traffic-manager-manage-profiles.md)
+* [流量管理器路由方法](./traffic-manager-routing-methods.md)
+* [测试流量管理器设置](./traffic-manager-testing-settings.md)
+* [将公司 Internet 域指向流量管理器域](./traffic-manager-point-internet-domain.md)
+* [管理流量管理器终结点](./traffic-manager-manage-endpoints.md)
+* [流量管理器降级状态疑难解答](./traffic-manager-troubleshooting-degraded.md)
 
 <!---HONumber=Mooncake_1205_2016-->

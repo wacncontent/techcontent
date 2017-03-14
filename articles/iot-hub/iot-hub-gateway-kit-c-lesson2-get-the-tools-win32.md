@@ -1,36 +1,36 @@
-<properties
-    pageTitle="准备好主计算机和 Azure IoT 中心 | Azure"
-    description="在运行 Windows 的主计算机上安装工具和软件，创建 IoT 中心，以及在 IoT 中心注册设备。"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="iot 开发, iot 软件, iot 云服务, 物联网软件, azure cli, 在 windows 上安装 git, gulp 运行, 安装 node js windows, 在 windows 上安装 npm, 在 windows 上安装 python" />
-<tags
-    ms.assetid="18ae6ee4-574a-4d5f-9838-ca2a78165628"
-    ms.service="iot-hub"
-    ms.devlang="c"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/07/2016"
-    wacn.date="01/23/2017"
-    ms.author="xshi" />  
+---
+title: 准备好主计算机和 Azure IoT 中心 | Azure
+description: 在运行 Windows 的主计算机上安装工具和软件，创建 IoT 中心，以及在 IoT 中心注册设备。
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: iot 开发, iot 软件, iot 云服务, 物联网软件, azure cli, 在 windows 上安装 git, gulp 运行, 安装 node js windows, 在 windows 上安装 npm, 在 windows 上安装 python
 
+ms.assetid: 18ae6ee4-574a-4d5f-9838-ca2a78165628
+ms.service: iot-hub
+ms.devlang: c
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/07/2016
+wacn.date: 01/23/2017
+ms.author: xshi
+---
 
 # 获取工具（Windows 7 及更高版本）
->[AZURE.SELECTOR]
-- [Windows 7 or later](/documentation/articles/iot-hub-gateway-kit-c-lesson2-get-the-tools-win32/)
-- [Ubuntu 16.04](/documentation/articles/iot-hub-gateway-kit-c-lesson2-get-the-tools-ubuntu/)
-- [macOS 10.10](/documentation/articles/iot-hub-gateway-kit-c-lesson2-get-the-tools-mac/)
+>[!div class="op_single_selector"]
+- [Windows 7 or later](./iot-hub-gateway-kit-c-lesson2-get-the-tools-win32.md)
+- [Ubuntu 16.04](./iot-hub-gateway-kit-c-lesson2-get-the-tools-ubuntu.md)
+- [macOS 10.10](./iot-hub-gateway-kit-c-lesson2-get-the-tools-mac.md)
 
 ## 执行的操作
 
 - 安装 Git、Node.js、Gulp、Python。
 - 安装 Azure 命令行接口 (Azure CLI)。
 
-如果有问题，可在[故障排除页](/documentation/articles/iot-hub-gateway-kit-c-troubleshooting/)上查找解决方案。
+如果有问题，可在[故障排除页](./iot-hub-gateway-kit-c-troubleshooting.md)上查找解决方案。
 
 ## 你要学习的知识
 
@@ -68,11 +68,11 @@
 
 按 `Windows + R`，键入 `cmd` 并按 `Enter` 打开命令提示符窗口，然后运行以下命令：
 
+```
+npm install -g gulp
+```
 
-	npm install -g gulp
-
-
-如果遇到安装问题，请参阅[故障排除指南](/documentation/articles/iot-hub-gateway-kit-c-troubleshooting/)，获取常见问题的解决方案。
+如果遇到安装问题，请参阅[故障排除指南](./iot-hub-gateway-kit-c-troubleshooting.md)，获取常见问题的解决方案。
 
 > [!注意]需要节点、NPM 和 Gulp 才能运行在 Node.js 中开发的自动化脚本。
 
@@ -92,23 +92,22 @@
 
 2. 运行以下命令，安装 Azure CLI：
 
-   
-		pip install --upgrade azure-cli
-		pip install --upgrade azure-cli-iot
-   
+    ```
+    pip install --upgrade azure-cli
+    pip install --upgrade azure-cli-iot
+    ```
 
     安装过程可能需要 5 分钟。
 
 3. 运行以下命令，对安装进行验证：
 
-   
-		az iot -h
-   
+    ```
+    az iot -h
+    ```
 
     如果安装成功，则会看到以下输出。
 
    ![验证 Azure CLI 安装](./media/iot-hub-gateway-kit-lessons/lesson2/az_iot_help_win.png)  
-
 
 ## 安装 Visual Studio Code
 
@@ -121,6 +120,6 @@
 已在主计算机上安装所有必需的工具和软件。下一个任务是使用 Azure CLI 创建 IoT 中心并在 IoT 中心注册设备。
 
 ## 后续步骤
-[创建 IoT 中心和注册设备](/documentation/articles/iot-hub-gateway-kit-c-lesson2-register-device/)
+[创建 IoT 中心和注册设备](./iot-hub-gateway-kit-c-lesson2-register-device.md)
 
 <!---HONumber=Mooncake_0116_2017-->

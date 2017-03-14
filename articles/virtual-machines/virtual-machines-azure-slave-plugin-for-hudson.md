@@ -1,21 +1,21 @@
-<properties
-    pageTitle="如何在 Hudson 连续集成中使用 Azure Slave 插件 | Azure"
-    description="介绍如何在 Hudson 连续集成中使用 Azure Slave 插件。"
-    services="virtual-machines-linux"
-    documentationCenter=""
-    authors="rmcmurray"
-    manager="wpickett"
-    editor="" />
+---
+title: 如何在 Hudson 连续集成中使用 Azure Slave 插件 | Azure
+description: 介绍如何在 Hudson 连续集成中使用 Azure Slave 插件。
+services: virtual-machines-linux
+documentationCenter: ''
+authors: rmcmurray
+manager: wpickett
+editor: ''
 
-<tags
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-multiple"
-    ms.devlang="java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="03/01/2017"
-    ms.author="robmcm"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 03/01/2017
+ms.author: robmcm
+---
 
 # 如何在 Hudson 连续集成中使用 Azure Slave 插件
 
@@ -50,24 +50,26 @@
 
 可以在你的[订阅配置文件]中找到这些信息。以下是订阅配置文件的一个示例。
 
-    <?xml version="1.0" encoding="utf-8"?>
+```
+<?xml version="1.0" encoding="utf-8"?>
 
-        <PublishData>
+    <PublishData>
 
-          <PublishProfile SchemaVersion="2.0" PublishMethod="AzureServiceManagementAPI">
+      <PublishProfile SchemaVersion="2.0" PublishMethod="AzureServiceManagementAPI">
 
-        <Subscription
+    <Subscription
 
-              ServiceManagementUrl="https://management.core.chinacloudapi.cn"
+          ServiceManagementUrl="https://management.core.chinacloudapi.cn"
 
-              Id="<Subscription ID>"
+          Id="<Subscription ID>"
 
-              Name="Pay-As-You-Go"
-            ManagementCertificate="<Management certificate value>" />
+          Name="Pay-As-You-Go"
+        ManagementCertificate="<Management certificate value>" />
 
-          </PublishProfile>
+      </PublishProfile>
 
-    </PublishData>
+</PublishData>
+```
 
 获得订阅配置文件以后，请按照以下步骤配置 Azure Slave 插件。
 
@@ -85,7 +87,8 @@
 
     ![配置配置文件][configure profile]
 
-    >[AZURE.NOTE] 要使用 Azure 中国，你需要点击 **Advanced...**，并把 "https://management.core.windows.net" 替换成 "https://management.core.chinacloudapi.cn"。
+    >[!NOTE]
+    > 要使用 Azure 中国，你需要点击 **Advanced...**，并把 "https://management.core.windows.net" 替换成 "https://management.core.chinacloudapi.cn"。
 
 5. 从你的订阅配置文件复制订阅 ID 和管理证书，然后将其粘贴到相应的字段中。
 
@@ -143,27 +146,29 @@
 
 15. 复制下面的脚本并粘贴到“Init script”字段中。
 
-        # Install Java
+    ```
+    # Install Java
 
-        sudo apt-get -y update
+    sudo apt-get -y update
 
-        sudo apt-get install -y openjdk-7-jdk
+    sudo apt-get install -y openjdk-7-jdk
 
-        sudo apt-get -y update --fix-missing
+    sudo apt-get -y update --fix-missing
 
-        sudo apt-get install -y openjdk-7-jdk
+    sudo apt-get install -y openjdk-7-jdk
 
-        # Install git
+    # Install git
 
-        sudo apt-get install -y git
+    sudo apt-get install -y git
 
-        #Install ant
+    #Install ant
 
-        sudo apt-get install -y ant
+    sudo apt-get install -y ant
 
-        sudo apt-get -y update --fix-missing
+    sudo apt-get -y update --fix-missing
 
-        sudo apt-get install -y ant
+    sudo apt-get install -y ant
+    ```
 
     将在创建 VM 后执行“初始化脚本”。在此示例中，脚本安装 Java、git 和 ant。
 
@@ -193,29 +198,31 @@
 
 8. 编辑以下脚本，用相应的值代替 {你的 github 帐户名称} 、{你的项目名称} 和 {你的项目目录}，然后将编辑后的脚本粘贴到出现的文本区域中。
 
-        # Clone from git repo
+    ```
+    # Clone from git repo
 
-        currentDir="$PWD"
+    currentDir="$PWD"
 
-        if [ -e {你的项目目录} ]; then
+    if [ -e {你的项目目录} ]; then
 
-              cd {你的项目目录}
+          cd {你的项目目录}
 
-              git pull origin master
+          git pull origin master
 
-        else
+    else
 
-              git clone https://github.com/{你的 github 帐户名称}/{你的项目名称}.git
+          git clone https://github.com/{你的 github 帐户名称}/{你的项目名称}.git
 
-        fi
+    fi
 
-        # change directory to project
+    # change directory to project
 
-        cd $currentDir/{你的项目目录}
+    cd $currentDir/{你的项目目录}
 
-        #Execute build task
+    #Execute build task
 
-        ant
+    ant
+    ```
 
 9. 单击“Save”。
 
@@ -240,6 +247,5 @@
 [add vm template]: ./media/virtual-machines-azure-slave-plugin-for-hudson/hudson-setup-addnewvmtemplate.png
 [template config]: ./media/virtual-machines-azure-slave-plugin-for-hudson/hudson-setup-templateconfig1-withdata.png
 [OS family list]: ./media/virtual-machines-azure-slave-plugin-for-hudson/hudson-oslist.png
-
 
 <!---HONumber=Mooncake_0606_2016-->

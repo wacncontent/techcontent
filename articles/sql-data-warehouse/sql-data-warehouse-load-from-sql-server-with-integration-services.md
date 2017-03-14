@@ -1,29 +1,27 @@
-<properties
-   pageTitle="将数据从 SQL Server 载入 Azure SQL 数据仓库 (SSIS)| Azure"
-   description="演示如何创建 SQL Server Integration Services (SSIS) 包，以便将数据从各种数据源移动到 SQL 数据仓库。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="lodipalm"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 将数据从 SQL Server 载入 Azure SQL 数据仓库 (SSIS)| Azure
+description: 演示如何创建 SQL Server Integration Services (SSIS) 包，以便将数据从各种数据源移动到 SQL 数据仓库。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: lodipalm
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/25/2017"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/25/2017
+---
 
 # 将数据从 SQL Server 载入 Azure SQL 数据仓库 (SSIS)
 
-> [AZURE.SELECTOR]
-- [SSIS](/documentation/articles/sql-data-warehouse-load-from-sql-server-with-integration-services/)
-- [PolyBase](/documentation/articles/sql-data-warehouse-load-from-sql-server-with-polybase/)
-- [bcp](/documentation/articles/sql-data-warehouse-load-from-sql-server-with-bcp/)
-
+> [!div class="op_single_selector"]
+- [SSIS](./sql-data-warehouse-load-from-sql-server-with-integration-services.md)
+- [PolyBase](./sql-data-warehouse-load-from-sql-server-with-polybase.md)
+- [bcp](./sql-data-warehouse-load-from-sql-server-with-bcp.md)
 
 创建 SQL Server Integration Services (SSIS) 包，以将 SQL Server 的数据加载到 Azure SQL 数据仓库。可以在数据通过 SSIS 数据流进行传递时，选择性地对其进行重构、转换和清理。
 
@@ -103,12 +101,12 @@ Visual Studio 将打开并创建新的 Integration Services (SSIS) 项目。然�
     3. 在“登录到服务器”部分中，选择或输入身份验证信息。
     4. 在“连接到数据库”部分中，选择 AdventureWorks 示例数据库。
     5. 单击“测试连接”。
-    
+
         ![][06]
-    
+
     6. 在报告连接测试结果的对话框中，单击“确定”，返回到“连接管理器”对话框。
     7. 在“连接管理器”对话框中，单击“确定”，返回到“配置 ADO.NET 连接管理器”对话框。
- 
+
 5. 在“配置 ADO.NET 连接管理器”对话框中，单击“确定”，返回到“ADO.NET 源编辑器”。
 6. 在“ADO.NET 源编辑器”的“表或视图名称”列表中，选择“Sales.SalesOrderDetail”表。
 
@@ -146,20 +144,20 @@ Visual Studio 将打开并创建新的 Integration Services (SSIS) 项目。然�
    7. 在“连接管理器”对话框中，单击“确定”，返回到“配置 ADO.NET 连接管理器”对话框。
 5. 在“配置 ADO.NET 连接管理器”对话框中，单击“确定”，返回到“ADO.NET 目标编辑器”。
 6. 在“ADO.NET 目标编辑器”中，单击“使用表或视图”列表旁的“新建”，打开“创建表”对话框来创建一个新目标表，它具有与源表相匹配的列列表。
-   
+
     ![][12a]  
 
 7. 在“创建列表”对话框中，执行以下操作。
-   
+
    1. 将目标表的名称更改为 **SalesOrderDetail**。
    2. 删除 **rowguid** 列。SQL 数据仓库不支持 **Uniqueidentifier** 数据类型。
    3. 将 **LineTotal** 列的数据类型更改为 **money**。SQL 数据仓库不支持 **decimal** 数据类型。若要了解受支持的数据类型，请参阅 [CREATE TABLE（Azure SQL 数据仓库，并行数据仓库）][CREATE TABLE (Azure SQL Data Warehouse, Parallel Data Warehouse)]。
-      
+
        ![][12b]  
 
    4. 单击“确定”创建表并返回到“ADO.NET 目标编辑器”。
 8. 在“ADO.NET 目标编辑器”中，选择“映射”选项卡查看如何将源中的列映射到目标中的列。
-   
+
     ![][13]  
 
 9. 单击“确定”完成数据源配置。

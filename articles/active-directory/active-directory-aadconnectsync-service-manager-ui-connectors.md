@@ -1,26 +1,26 @@
-<properties
-    pageTitle="Azure AD Connect 同步：Synchronization Service Manager UI | Azure"
-    description="了解用于 Azure AD Connect 的 Synchronization Service Manager 中的“连接器”选项卡。"
-    services="active-directory"
-    documentationcenter=""
-    author="andkjell"
-    manager="femila"
-    editor="" />
-<tags
-    ms.assetid="60f1d979-8e6d-4460-aaab-747fffedfc1e"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/09/2017"
-    wacn.date="02/13/2017"
-    ms.author="billmath" />
+---
+title: Azure AD Connect 同步：Synchronization Service Manager UI | Azure
+description: 了解用于 Azure AD Connect 的 Synchronization Service Manager 中的“连接器”选项卡。
+services: active-directory
+documentationcenter: ''
+author: andkjell
+manager: femila
+editor: ''
+
+ms.assetid: 60f1d979-8e6d-4460-aaab-747fffedfc1e
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/09/2017
+wacn.date: 02/13/2017
+ms.author: billmath
+---
 
 # Azure AD Connect 同步：Synchronization Service Manager
 
 ![Sync Service Manager](./media/active-directory-aadconnectsync-service-manager-ui/connectors.png)  
-
 
 “连接器”选项卡可用于管理同步引擎连接的所有系统。
 
@@ -74,7 +74,7 @@
 “旧值”显示当前存储在系统中的数据，而“新值”显示从源系统收到但尚未应用的数据。在本例中，由于发生同步错误，因此无法应用更改。
 
 **错误** 
-对象出现问题时才会显示“错误”页面。有关如何[排查同步错误](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-operations/#troubleshoot-errors-in-operations-tab/)的详细信息，请参阅“操作”页上的详细信息。
+对象出现问题时才会显示“错误”页面。有关如何[排查同步错误](./active-directory-aadconnectsync-service-manager-ui-operations.md#troubleshoot-errors-in-operations-tab)的详细信息，请参阅“操作”页上的详细信息。
 
 **沿袭** 
 “沿袭”选项卡显示连接器空间对象与 Metaverse 对象关联的方式。可以看到连接器上次从连接的系统导入更改的时间，以及应用哪些规则以便在 Metaverse 中填充数据。
@@ -106,9 +106,9 @@
 此选项卡也可让你导航到[连接器空间对象](#connector-space-object-properties)。
 
 ## 后续步骤
-了解有关 [Azure AD Connect 同步](/documentation/articles/active-directory-aadconnectsync-whatis/)配置的详细信息。
+了解有关 [Azure AD Connect 同步](./active-directory-aadconnectsync-whatis.md)配置的详细信息。
 
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_0206_2017-->
 <!--Update_Description: wording update-->

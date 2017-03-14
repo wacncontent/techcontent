@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure 服务终结点"
-    description="介绍 Azure Toolkit for Eclipse 中的 Azure 服务终结点设置。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="9c6125ec-7278-461e-b69c-ed56e844f742"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm" />
+---
+title: Azure 服务终结点
+description: 介绍 Azure Toolkit for Eclipse 中的 Azure 服务终结点设置。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
+
+ms.assetid: 9c6125ec-7278-461e-b69c-ed56e844f742
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm
+---
 
 # Azure 服务终结点
 Azure 服务终结点确定你的应用程序是在全球 Azure 平台管理、中国 21Vianet 运营的 Azure 还是私有 Azure 平台中部署和管理。使用“服务终结点”对话框可以指定要使用的服务终结点。若要打开“服务终结点”对话框，请在 Eclipse 中单击“窗口”，单击“首选项”，展开“Azure”，然后单击“服务终结点”。设置“活动集”字段可以确定要用于当前工作区中 Azure 项目的 Azure 服务终结点。
@@ -23,7 +24,6 @@ Azure 服务终结点确定你的应用程序是在全球 Azure 平台管理、�
 下面显示了“服务终结点”对话框。
 
 ![][ic719493]  
-
 
 ## 设置服务终结点
 在“服务终结点”对话框中，执行以下操作之一：
@@ -50,11 +50,10 @@ Azure 服务终结点确定你的应用程序是在全球 Azure 平台管理、�
 
 <!-- URL List -->
 
-
 [Azure Java Developer Center]: /develop/java/
-[Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse/
-[Creating a Hello World Application for Azure in Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse.md
+[Creating a Hello World Application for Azure in Eclipse]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 

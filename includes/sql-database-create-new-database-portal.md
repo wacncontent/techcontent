@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-database-create-new-database-portal.md
 
@@ -17,12 +16,10 @@ articles/sql-database/sql-database-get-started-tutorial.md
 
      ![新数据库](./media/sql-database-create-new-database-portal/sql-database-create-new-database-portal-1.png)  
 
-
 3. 单击“SQL 数据库(新建数据库)”。
 
      ![新数据库](./media/sql-database-create-new-database-portal/sql-database-create-new-database-portal-2.png)  
 
-   
 4. 单击“创建”，以在 SQL 数据库服务中创建新的数据库。
 
      ![新数据库](./media/sql-database-create-new-database-portal/sql-database-create-new-database-portal-3.png)
@@ -44,7 +41,6 @@ articles/sql-database/sql-database-get-started-tutorial.md
 6.  单击“创建”。可以在通知区域中看到部署已开始。
 
      ![新数据库](./media/sql-database-create-new-database-portal/sql-database-create-new-database-portal-5.png)  
-
 
 7. 等待部署完成，然后继续下一步。
 

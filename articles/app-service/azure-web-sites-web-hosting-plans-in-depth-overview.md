@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Azure 应用服务计划深入概述 | Azure"
-    description="了解针对 Azure 应用服务的应用服务计划的工作原理，以及如何利用它们进行管理。"
-    keywords="应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本"
-    services="app-service"
-    documentationcenter=""
-    author="btardif"
-    manager="wpickett"
-    editor="" />  
+---
+title: Azure 应用服务计划深入概述 | Azure
+description: 了解针对 Azure 应用服务的应用服务计划的工作原理，以及如何利用它们进行管理。
+keywords: 应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本
+services: app-service
+documentationcenter: ''
+author: btardif
+manager: wpickett
+editor: ''
 
-<tags
-    ms.assetid="dea3f41e-cf35-481b-a6bc-33d7fc9d01b1"
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/02/2016"
-    wacn.date="01/03/2017"
-    ms.author="byvinyal" />
+ms.assetid: dea3f41e-cf35-481b-a6bc-33d7fc9d01b1
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/02/2016
+wacn.date: 01/03/2017
+ms.author: byvinyal
+---
 
 # Azure 应用服务计划深入概述
 应用服务计划代表用于托管应用的物理资源的集合。
@@ -29,7 +29,7 @@
 - 实例大小（小、中、大）
 - SKU（免费、共享、基本、标准、高级）
 
-[Azure App Service](/documentation/articles/app-service-changes-existing-services/) 中的 Web 应用、移动应用、Function App 或 API 应用均在应用服务计划中运行。同一订阅、区域和资源组中的应用可共享应用服务计划。
+[Azure App Service](../app-service-web/app-service-changes-existing-services.md) 中的 Web 应用、移动应用、Function App 或 API 应用均在应用服务计划中运行。同一订阅、区域和资源组中的应用可共享应用服务计划。
 
 分配给**应用服务计划**的所有应用程序共享其定义的资源，这样可以在托管多个应用时节省成本。
 
@@ -75,7 +75,6 @@
 
  ![创建应用服务计划。][createASP]  
 
-
 若要创建应用服务计划，可单击“[+] 新建”，键入**应用服务计划**名称，然后选择相应的**位置**。单击“定价层”，然后为服务选择适当的服务定价层。选择“全部查看”以查看其他定价选项，例如“免费”和“共享”。选择定价层后，单击“选择”按钮。
 
 ## 将应用移到其他应用服务计划
@@ -87,7 +86,6 @@
 
 ![应用服务计划选择器。][change]  
 
-
 每个计划都有自己的定价层。例如，将站点从免费层移到标准层时，分配给站点的所有应用都可使用标准层的功能和资源。
 
 ## 将应用克隆到其他应用服务计划
@@ -95,10 +93,9 @@
 
  ![克隆应用。][appclone]  
 
-
 可以在“工具”菜单中查找“克隆应用”。
 
-有关克隆的限制，请阅读[使用 Azure 门户预览进行 Azure App Service 应用克隆](/documentation/articles/app-service-web-app-cloning-portal/)。
+有关克隆的限制，请阅读[使用 Azure 门户预览进行 Azure App Service 应用克隆](../app-service-web/app-service-web-app-cloning-portal.md)。
 
 ## 缩放应用服务计划
 可通过三种方式缩放一个计划：
@@ -111,7 +108,6 @@
 
  ![设置向上缩放应用的值。][pricingtier]  
 
-
 ## 应用服务计划清理
 未与任何应用关联的**应用服务计划**仍会产生费用，因为它们继续保留在应用服务计划规模属性中配置的计算容量。若要避免意想不到的费用，当应用服务计划中托管的最后一个应用被删除时，也要删除此空的应用服务计划。
 
@@ -119,7 +115,7 @@
 应用服务计划表示一组可在应用间共享的功能和容量。可以通过应用服务计划灵活地将特定应用分配给一组资源，并进一步优化 Azure 资源的使用情况。若要节省测试环境的资金，可通过这种方式跨多个应用共享一个计划。也可跨多个区域和计划进行伸缩，实现生产环境吞吐量的最大化。
 
 ## 发生的更改
-* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service and Its Impact on Existing Azure Services](/documentation/articles/app-service-changes-existing-services/)（Azure 应用服务及其对现有 Azure 服务的影响）
+* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service and Its Impact on Existing Azure Services](../app-service-web/app-service-changes-existing-services.md)（Azure 应用服务及其对现有 Azure 服务的影响）
 
 [pricingtier]: ./media/azure-web-sites-web-hosting-plans-in-depth-overview/appserviceplan-pricingtier.png
 [assign]: ./media/azure-web-sites-web-hosting-plans-in-depth-overview/assing-appserviceplan.png

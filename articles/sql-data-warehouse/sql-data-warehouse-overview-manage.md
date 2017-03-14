@@ -1,27 +1,25 @@
-<properties
-   pageTitle="在 Azure SQL 数据仓库中管理数据库 | Azure"
-   description="管理 SQL 数据仓库数据库的概述。包括管理工具、DWU 和向外扩展性能，对查询性能进行故障排除，建立良好的安全策略，以及从数据损坏或区域中断还原数据库。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 在 Azure SQL 数据仓库中管理数据库 | Azure
+description: 管理 SQL 数据仓库数据库的概述。包括管理工具、DWU 和向外扩展性能，对查询性能进行故障排除，建立良好的安全策略，以及从数据损坏或区域中断还原数据库。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="02/21/2017"
-   ms.author="barbkess;sonyama;"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 02/21/2017
+ms.author: barbkess;sonyama;
+---
 
 # 在 Azure SQL 数据仓库中管理数据库
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 SQL 数据仓库自动执行管理数据库的许多方面的操作。例如，若要缩放性能，你只需调整相应级别的计算资源并为这些资源付费，然后即可让 SQL 数据仓库执行向外扩展和缩减的所有工作。
 
@@ -47,7 +45,7 @@ SQL 数据仓库自动执行管理数据库的许多方面的操作。例如，�
 
 ### Visual Studio 中的 SQL Server Data Tools
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-visual-studio-login-guide.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-visual-studio-login-guide.md)]
 
 使用 Visual Studio 中的 [SQL Server Data Tools][] (SSDT)，可以连接到你的数据库并对其进行管理和开发。如果你是熟悉 Visual Studio 或其他集成开发环境 (IDE) 的应用程序开发人员，请尝试使用 Visual Studio 中的 SSDT。
 
@@ -100,22 +98,21 @@ DMV 是管理 SQL 数据仓库的必备工具。在门户中显示的所有信�
 
 <!--Image references-->
 
-
 <!--Article references-->
-[创建 SQL 数据仓库（Azure 门户预览）]: /documentation/articles/sql-data-warehouse-get-started-provision/
-[Create a database (PowerShell)]: /documentation/articles/sql-data-warehouse-get-started-provision-powershell/
+[创建 SQL 数据仓库（Azure 门户预览）]: ./sql-data-warehouse-get-started-provision.md
+[Create a database (PowerShell)]: ./sql-data-warehouse-get-started-provision-powershell.md
 [connection]: /documentation/articles/sql-data-warehouse-develop-connections/
 [Connect to Azure SQL Data Warehouse with Visual Studio]: /documentation/articles/sql-data-warehouse-get-started-connect/
-[Connect and query with sqlcmd]: /documentation/articles/sql-data-warehouse-get-started-connect-sqlcmd/
-[开发概述]: /documentation/articles/sql-data-warehouse-overview-develop/
-[Monitor your workload using DMVs]: /documentation/articles/sql-data-warehouse-manage-monitor/
-[暂停计算]: /documentation/articles/sql-data-warehouse-manage-compute-overview/#pause-compute-bk
-[从快照还原]: /documentation/articles/sql-data-warehouse-restore-database-overview/
-[恢复计算]: /documentation/articles/sql-data-warehouse-manage-compute-overview/
-[缩放性能]: /documentation/articles/sql-data-warehouse-manage-compute-overview/#scale-performance-bk
-[安全性概述]: /documentation/articles/sql-data-warehouse-overview-manage-security/
-[SQL 数据仓库最佳实践]: /documentation/articles/sql-data-warehouse-best-practices/
-[SQL 数据仓库系统视图]: /documentation/articles/sql-data-warehouse-reference-tsql-system-views/
+[Connect and query with sqlcmd]: ./sql-data-warehouse-get-started-connect-sqlcmd.md
+[开发概述]: ./sql-data-warehouse-overview-develop.md
+[Monitor your workload using DMVs]: ./sql-data-warehouse-manage-monitor.md
+[暂停计算]: ./sql-data-warehouse-manage-compute-overview.md#pause-compute-bk
+[从快照还原]: ./sql-data-warehouse-restore-database-overview.md
+[恢复计算]: ./sql-data-warehouse-manage-compute-overview.md
+[缩放性能]: ./sql-data-warehouse-manage-compute-overview.md#scale-performance-bk
+[安全性概述]: ./sql-data-warehouse-overview-manage-security.md
+[SQL 数据仓库最佳实践]: ./sql-data-warehouse-best-practices.md
+[SQL 数据仓库系统视图]: ./sql-data-warehouse-reference-tsql-system-views.md
 
 <!--MSDN references-->
 [SQL Server Data Tools]: https://msdn.microsoft.com/zh-cn/library/mt204009.aspx

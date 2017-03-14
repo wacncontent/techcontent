@@ -1,7 +1,7 @@
-> [AZURE.SELECTOR]
-[Azure 门户](/documentation/articles/load-balancer-get-started-ilb-arm-portal/)
-[PowerShell](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)
-[Azure CLI](/documentation/articles/load-balancer-get-started-ilb-arm-cli/)
-[模板](/documentation/articles/load-balancer-get-started-ilb-arm-template/)
+> [!div class="op_single_selector"]
+[Azure 门户](../articles/load-balancer/load-balancer-get-started-ilb-arm-portal.md)
+[PowerShell](../articles/load-balancer/load-balancer-get-started-ilb-arm-ps.md)
+[Azure CLI](../articles/load-balancer/load-balancer-get-started-ilb-arm-cli.md)
+[模板](../articles/load-balancer/load-balancer-get-started-ilb-arm-template.md)
 
 <!---HONumber=Mooncake_0822_2016-->

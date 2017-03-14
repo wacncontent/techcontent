@@ -1,24 +1,25 @@
-<properties
-   pageTitle="Azure 虚拟网络 (VNet) 规划和设计指南 | Azure"
-   description="了解如何基于隔离、连接性和位置要求规划和设计 Azure 中的虚拟网络。"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn" />
-<tags
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="02/08/2016"
-   wacn.date="06/06/2016"
-   ms.author="jdial" />
+---
+title: Azure 虚拟网络 (VNet) 规划和设计指南 | Azure
+description: 了解如何基于隔离、连接性和位置要求规划和设计 Azure 中的虚拟网络。
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/08/2016
+wacn.date: 06/06/2016
+ms.author: jdial
+---
 
 # 规划和设计 Azure 虚拟网络
 
-创建要用于试验的 VNet 非常简单，但却可能是，你将在一段时间内部署多个 VNet 以支持组织的生产需要。通过进行一些规划和设计，你将能够更有效地部署 VNet 和连接所需的资源。如果你不熟悉 VNet，建议你[了解 VNet](/documentation/articles/virtual-networks-overview/) 和[如何部署](/documentation/articles/virtual-networks-create-vnet-arm-pportal/) VNet 后再继续。
+创建要用于试验的 VNet 非常简单，但却可能是，你将在一段时间内部署多个 VNet 以支持组织的生产需要。通过进行一些规划和设计，你将能够更有效地部署 VNet 和连接所需的资源。如果你不熟悉 VNet，建议你[了解 VNet](./virtual-networks-overview.md) 和[如何部署](./virtual-networks-create-vnet-arm-pportal.md) VNet 后再继续。
 
 ## 计划
 
@@ -30,9 +31,9 @@
 
 - 你在 Azure 中创建的所有内容都由一个或多个资源组成。虚拟机 (VM) 是一种资源，VM 所用的网络适配器接口 (NIC) 是一个资源，NIC 所用的公共 IP 地址是一种资源，NIC 所连接到的 VNet 也是一种资源。
 - 你可在 Azure 区域和订阅中创建资源。并且资源只能连接到它们所属的同一区域和订阅中存在的 VNet。 
-- 你可以使用 Azure [VPN 网关](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)将 VNet 彼此相连。你还可以通过这种方式跨区域和订阅连接 VNet。
-- 你可以使用 Azure 中提供的[连接选项](/documentation/articles/vpn-gateway-plan-design/)之一将 VNet 连接到本地网络。 
-- 不同资源可以在[资源组](/documentation/articles/resource-group-overview/#resource-groups)中分组在一起，这样可便于将资源作一个单元来进行管理。资源组可以包含多个区域中的资源，只要这些资源属于同一订阅。
+- 你可以使用 Azure [VPN 网关](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)将 VNet 彼此相连。你还可以通过这种方式跨区域和订阅连接 VNet。
+- 你可以使用 Azure 中提供的[连接选项](../vpn-gateway/vpn-gateway-plan-design.md)之一将 VNet 连接到本地网络。 
+- 不同资源可以在[资源组](../azure-resource-manager/resource-group-overview.md#resource-groups)中分组在一起，这样可便于将资源作一个单元来进行管理。资源组可以包含多个区域中的资源，只要这些资源属于同一订阅。
 
 ### <a name="Define-requirements"></a> 定义要求
 
@@ -50,7 +51,8 @@
 
 VNet 和子网资源可帮助定义 Azure 中运行的工作负荷的安全边界。VNet 的特征包括一个地址空间（定义为 CIDR 块）的集合。
 
->[AZURE.NOTE] 网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解它的详细信息](http://whatismyipaddress.com/cidr)。
+>[!NOTE]
+> 网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解它的详细信息](http://whatismyipaddress.com/cidr)。
 
 VNet 包含以下属性。
 
@@ -78,19 +80,20 @@ VNet 包含以下属性。
 
 ### 名称解析
 
-默认情况下，你的 VNet 使用 [Azure 提供的名称解析](/documentation/articles/virtual-networks-name-resolution-for-vms-and-role-instances/#Azure-provided-name-resolution)来解析 VNet 内部和公共 Internet 上的名称。但是，如果你将 VNet 连接到本地数据中心，则需要提供 [你自己的 DNS 服务器](/documentation/articles/virtual-networks-name-resolution-for-vms-and-role-instances/#Name-resolution-using-your-own-DNS-server)来解析网络之间的名称。
+默认情况下，你的 VNet 使用 [Azure 提供的名称解析](./virtual-networks-name-resolution-for-vms-and-role-instances.md#Azure-provided-name-resolution)来解析 VNet 内部和公共 Internet 上的名称。但是，如果你将 VNet 连接到本地数据中心，则需要提供 [你自己的 DNS 服务器](./virtual-networks-name-resolution-for-vms-and-role-instances.md#Name-resolution-using-your-own-DNS-server)来解析网络之间的名称。
 
 ### <a name="Limits"></a> 限制
 
-在设计解决方案之前，请确保查看所有[与 Azure 中的网络服务相关的限制](/documentation/articles/azure-subscription-service-limits/#networking-limits)。可以通过[在线申请支持](/support/support-ticket-form/?l=zh-cn)创建工单增加某些限制。
+在设计解决方案之前，请确保查看所有[与 Azure 中的网络服务相关的限制](../azure-subscription-service-limits.md#networking-limits)。可以通过[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单增加某些限制。
 
 ### 基于角色的访问控制 (RBAC)
 
-你可以使用 [Azure RBAC](/documentation/articles/role-based-access-built-in-roles) 来控制不同用户可能对 Azure 中的不同资源具有的访问级别。这样就可以根据团队的需要分隔团队完成的工作。
+你可以使用 [Azure RBAC](../active-directory/role-based-access-built-in-roles.md) 来控制不同用户可能对 Azure 中的不同资源具有的访问级别。这样就可以根据团队的需要分隔团队完成的工作。
 
 就虚拟网络而言，具有**网络参与者**角色的用户可以完全控制 Azure Resource Manager 虚拟网络资源。同样，具有**经典网络参与者**角色的用户可以完全控制经典虚拟网络资源。
 
->[AZURE.NOTE] 你还可以[创建自己的角色](/documentation/articles/role-based-access-control-configure)来分离管理需求。
+>[!NOTE]
+> 你还可以[创建自己的角色](../active-directory/role-based-access-control-configure.md)来分离管理需求。
 
 ## 设计
 
@@ -117,15 +120,14 @@ VNet 包含以下属性。
 |每个业务部门一个订阅，每个应用两个 VNet。|![单个订阅](./media/virtual-network-vnet-plan-design-arm/figure3.png)|在订阅数和 VNet 数之间取得平衡。|每个业务部门（订阅）最多 25 个应用。|
 |每个业务部门一个订阅，每个应用组两个 VNet。|![单个订阅](./media/virtual-network-vnet-plan-design-arm/figure4.png)|在订阅数和 VNet 数之间取得平衡。|必须使用子网和 NSG 隔离应用。|
 
-
 ### 子网数
 
 在以下情况下，你应考虑在 VNet 中创建多个子网：
 
 - **用于子网中的所有 NIC 的专用 IP 地址不足**。如果你的子网地址空间未包含子网中的 NIC 数所对应的足够 IP 地址，则需要创建多个子网。请记住，Azure 保留每个子网中的 5 个专用 IP 地址，这些 IP 地址不能使用：地址空间的第一个和最后一个地址（用于子网地址和多播）和 3 个要内部使用的地址（用于 DHCP 和 DNS 目的）。 
-- **安全性**。你可以使用子网将 VM 组彼此分离以用于具有多层结构的工作负荷，并对这些子网应用不同的[网络安全组 (NSG)](/documentation/articles/virtual-networks-nsg/#subnets)。
-- **混合连接**。你可以使用 VPN 网关和到 ExpressRoute 线路来将 VNet 彼此[连接](/documentation/articles/vpn-gateway-plan-design/)，并连接到本地数据中心。VPN 网关和 ExpressRoute 线路需要创建其自己的子网。
-- **虚拟设备**。可以在 Azure VNet 中使用虚拟设备，如防火墙、WAN 加速器或 VPN 网关。这样做时，需要[路由流量](/documentation/articles/virtual-networks-udr-overview/)到这些设备，并将其隔离在它们自己的子网中。
+- **安全性**。你可以使用子网将 VM 组彼此分离以用于具有多层结构的工作负荷，并对这些子网应用不同的[网络安全组 (NSG)](./virtual-networks-nsg.md#subnets)。
+- **混合连接**。你可以使用 VPN 网关和到 ExpressRoute 线路来将 VNet 彼此[连接](../vpn-gateway/vpn-gateway-plan-design.md)，并连接到本地数据中心。VPN 网关和 ExpressRoute 线路需要创建其自己的子网。
+- **虚拟设备**。可以在 Azure VNet 中使用虚拟设备，如防火墙、WAN 加速器或 VPN 网关。这样做时，需要[路由流量](./virtual-networks-udr-overview.md)到这些设备，并将其隔离在它们自己的子网中。
 
 ### 子网和 NSG 设计模式
 
@@ -171,37 +173,37 @@ VNet 包含以下属性。
 
 1. 你将使用哪些 Azure 位置来托管 VNet？
 
-	北美的 2 个位置和欧洲的 2 个位置。你应基于现有本地数据中心的物理位置选择这些位置。这样从物理位置连接到 Azure 将具有更好的延迟。
+    北美的 2 个位置和欧洲的 2 个位置。你应基于现有本地数据中心的物理位置选择这些位置。这样从物理位置连接到 Azure 将具有更好的延迟。
 
 2. 你是否需要在这些 Azure 位置之间提供通信？
 
-	是的。因为必须将数据库复制到所有位置。
+    是的。因为必须将数据库复制到所有位置。
 
 3. 你是否需要在 Azure VNet 和在本地数据中心之间提供通信？
 
-	是的。因为连接到本地数据中心的用户必须能够通过加密隧道访问应用程序。
- 
+    是的。因为连接到本地数据中心的用户必须能够通过加密隧道访问应用程序。
+
 4. 你需要将多少个 IaaS VM 用于你的解决方案？
 
-	200 个 IaaS VM。App1、App2 和 App3 各需要 5 个 Web 服务器、2 个应用程序服务器和 2 个数据库服务器。每个应用程序总共需要 9 个 IaaS VM，或总共需要 36 个 IaaS VM。App5 和 App6 各需要 5 个 Web 服务器和 2 个数据库服务器。每个应用程序总共需要 7 个 IaaS VM，或总共需要 14 个 IaaS VM。因此，每个 Azure 区域中的所有应用程序需要 50 个 IaaS VM。由于我们需要使用 4 个区域，因此将有 200 个 IaaS VM。
+    200 个 IaaS VM。App1、App2 和 App3 各需要 5 个 Web 服务器、2 个应用程序服务器和 2 个数据库服务器。每个应用程序总共需要 9 个 IaaS VM，或总共需要 36 个 IaaS VM。App5 和 App6 各需要 5 个 Web 服务器和 2 个数据库服务器。每个应用程序总共需要 7 个 IaaS VM，或总共需要 14 个 IaaS VM。因此，每个 Azure 区域中的所有应用程序需要 50 个 IaaS VM。由于我们需要使用 4 个区域，因此将有 200 个 IaaS VM。
 
-	你还需要在每个 VNet 中或本地数据中心内提供 DNS 服务器，以便在 Azure IaaS VM 和本地网络之间解析名称。
+    你还需要在每个 VNet 中或本地数据中心内提供 DNS 服务器，以便在 Azure IaaS VM 和本地网络之间解析名称。
 
 5. 是否需要基于 VM 组（即前端 Web 服务器和后端数据库服务器）隔离流量？
 
-	是的。每个应用程序应彼此完全隔离，并且每个应用程序层也应隔离。
+    是的。每个应用程序应彼此完全隔离，并且每个应用程序层也应隔离。
 
 6. 是否需要使用虚拟设备来控制通信流？
 
-	否。可以使用虚拟设备更好地控制通信流，包括更多详细的数据平面日志记录。
+    否。可以使用虚拟设备更好地控制通信流，包括更多详细的数据平面日志记录。
 
 7. 用户对于不同 Azure 资源是否需要不同权限集？
 
-	是的。网络团队需要完全控制虚拟网络设置，而开发人员则应仅能够将其 VM 部署到预先存在的子网。
+    是的。网络团队需要完全控制虚拟网络设置，而开发人员则应仅能够将其 VM 部署到预先存在的子网。
 
 ### 设计
 
-应按照设计指定订阅、VNet、子网和 NSG。我们将在这里讨论 NSG，但你应在完成设计之前了解有关 [NSG](/documentation/articles/virtual-networks-nsg/) 的更多信息。
+应按照设计指定订阅、VNet、子网和 NSG。我们将在这里讨论 NSG，但你应在完成设计之前了解有关 [NSG](./virtual-networks-nsg.md) 的更多信息。
 
 **订阅和 VNet 的数量**
 
@@ -261,8 +263,8 @@ VNet 包含以下属性。
 
 ## 后续步骤
 
-- 了解如何对 IaaS VM 进行[负载均衡](/documentation/articles/load-balancer-overview/)，以及如何[管理通过多个 Azure 区域的路由](/documentation/articles/traffic-manager-overview/)。
-- 详细了解 [NSG 以及如何规划和设计](/documentation/articles/virtual-networks-nsg/) NSG 解决方案。
-- 详细了解[跨界连接和 VNet 连接选项](/documentation/articles/vpn-gateway-plan-design/)。  
+- 了解如何对 IaaS VM 进行[负载均衡](../load-balancer/load-balancer-overview.md)，以及如何[管理通过多个 Azure 区域的路由](../traffic-manager/traffic-manager-overview.md)。
+- 详细了解 [NSG 以及如何规划和设计](./virtual-networks-nsg.md) NSG 解决方案。
+- 详细了解[跨界连接和 VNet 连接选项](../vpn-gateway/vpn-gateway-plan-design.md)。  
 
 <!---HONumber=Mooncake_0418_2016-->

@@ -1,21 +1,21 @@
-<properties
-   pageTitle="如何将应用程序添加到 Azure Active Directory。"
-   description="本文介绍如何将应用程序添加到 Azure Active Directory 的实例。"
-   services="active-directory"
-   documentationCenter=""
-   authors="shoatman"
-   manager="kbrint"
-   editor=""/>
+---
+title: 如何将应用程序添加到 Azure Active Directory。
+description: 本文介绍如何将应用程序添加到 Azure Active Directory 的实例。
+services: active-directory
+documentationCenter: ''
+authors: shoatman
+manager: kbrint
+editor: ''
 
-   <tags
-      ms.service="active-directory"
-      ms.devlang="na"
-      ms.topic="article"
-      ms.tgt_pltfrm="na"
-      ms.workload="identity"
-      ms.date="02/09/2016"
-      wacn.date="02/06/2017"
-      ms.author="shoatman"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 02/09/2016
+wacn.date: 02/06/2017
+ms.author: shoatman
+---
 
 # 如何以及为何将应用程序添加到 Azure AD
 
@@ -88,7 +88,6 @@ Azure AD 中的应用程序是使用 2 个对象表示的：应用程序对象�
     - [应用程序](https://msdn.microsoft.com/zh-cn/library/azure/dn151677.aspx)
     - [服务主体](https://msdn.microsoft.com/zh-cn/library/azure/dn194452.aspx)
 
-
 ## <a name="who-has-permission-to-add-applications-to-my-azure-ad-instance"></a>如何将应用程序添加到 Azure AD 实例？
 可以使用多种方法将应用程序添加到 Azure AD：
 
@@ -143,7 +142,7 @@ Azure AD 中的应用程序是使用 2 个对象表示的：应用程序对象�
 
 ## 另请参阅
 
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 
 <!--Image references-->
 

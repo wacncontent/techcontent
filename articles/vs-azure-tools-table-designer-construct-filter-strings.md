@@ -1,22 +1,22 @@
-<properties
-   pageTitle="为表设计器构造筛选字符串 | Azure"
-   description="为表设计器构造筛选字符串"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 为表设计器构造筛选字符串 | Azure
+description: 为表设计器构造筛选字符串
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="a1a10ea1-687a-4ee1-a952-6b24c2fe1a22"
-    ms.service="storage"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/18/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: a1a10ea1-687a-4ee1-a952-6b24c2fe1a22
+ms.service: storage
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/18/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 为表设计器构造筛选字符串
 
@@ -56,15 +56,21 @@ WCF 数据服务基于[开放数据协议](http://go.microsoft.com/fwlink/p/?Lin
 
 以下示例对 **PartitionKey** 和 **RowKey** 属性进行筛选；也可以将其他非键属性添加到筛选器字符串中：
 
-    PartitionKey eq 'Partition1' and RowKey eq '00001'
+```
+PartitionKey eq 'Partition1' and RowKey eq '00001'
+```
 
 可以用圆括号将每个筛选器表达式括起来，但这不是必需的：
 
-    (PartitionKey eq 'Partition1') and (RowKey eq '00001')
+```
+(PartitionKey eq 'Partition1') and (RowKey eq '00001')
+```
 
 请注意，表服务不支持通配符查询，并且表设计器中也不支持这些查询。但是，可以通过对所需前缀使用比较运算符来执行前缀匹配。下面的示例返回 LastName 属性以字母“A”开头的实体：
 
-    LastName ge 'A' and LastName lt 'B'
+```
+LastName ge 'A' and LastName lt 'B'
+```
 
 ## 针对数值属性进行筛选
 
@@ -72,11 +78,15 @@ WCF 数据服务基于[开放数据协议](http://go.microsoft.com/fwlink/p/?Lin
 
 此示例将返回 Age 属性值大于 30 的所有实体：
 
-    Age gt 30
+```
+Age gt 30
+```
 
 此示例将返回 AmountDue 属性值小于或等于 100.25 的所有实体：
 
-    AmountDue le 100.25
+```
+AmountDue le 100.25
+```
 
 ## 针对布尔值属性进行筛选
 
@@ -84,15 +94,21 @@ WCF 数据服务基于[开放数据协议](http://go.microsoft.com/fwlink/p/?Lin
 
 以下示例将返回 IsActive 属性设置为 **true** 的所有实体：
 
-    IsActive eq true
+```
+IsActive eq true
+```
 
 你也可以在不使用逻辑运算符的情况下编写此筛选器表达式。在以下示例中，表服务还将返回 IsActive 为 **true** 的所有实体：
 
-    IsActive
+```
+IsActive
+```
 
 若要返回 IsActive 为 false 的所有实体，可以使用 not 运算符：
 
-    not IsActive
+```
+not IsActive
+```
 
 ## 针对日期时间属性进行筛选
 
@@ -100,6 +116,8 @@ WCF 数据服务基于[开放数据协议](http://go.microsoft.com/fwlink/p/?Lin
 
 以下示例将返回 CustomerSince 属性等于 2008-07-10 的实体：
 
-    CustomerSince eq datetime'2008-07-10T00:00:00Z'
+```
+CustomerSince eq datetime'2008-07-10T00:00:00Z'
+```
 
 <!---HONumber=Mooncake_0503_2016-->

@@ -1,4 +1,4 @@
-下表列出了特定于 Azure 事件中心的配额和限制。有关事件中心定价的信息，请参阅[事件中心定价](/pricing/details/event-hubs/)。
+下表列出了特定于 Azure 事件中心的配额和限制。有关事件中心定价的信息，请参阅[事件中心定价](https://www.azure.cn/pricing/details/event-hubs/)。
 
 | 限制 | 范围 | 类型 | 超出时的行为 | 值 |
 | --- | --- | --- | --- | --- |

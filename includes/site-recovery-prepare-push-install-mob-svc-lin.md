@@ -12,7 +12,6 @@
 
      ![Linux](./media/site-recovery-prepare-push-install-mob-svc-lin/mobility2.png)  
 
-
 7. 添加在 CSPSConfigtool 中创建的帐户。
 
     - 登录到配置服务器。

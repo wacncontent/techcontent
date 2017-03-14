@@ -1,29 +1,28 @@
-<properties
-   pageTitle="云灾难恢复解决方案 - SQL 数据库活动异地复制 | Azure"
-   description="了解如何使用 Azure SQL 数据库异地复制来支持云应用程序的在线升级。"
-   services="sql-database"
-   documentationCenter=""
-   authors="anosov1960"
-   manager="jhubbard"
-   editor="monicar"/>
+---
+title: 云灾难恢复解决方案 - SQL 数据库活动异地复制 | Azure
+description: 了解如何使用 Azure SQL 数据库异地复制来支持云应用程序的在线升级。
+services: sql-database
+documentationCenter: ''
+authors: anosov1960
+manager: jhubbard
+editor: monicar
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="07/16/2016"
-   wacn.date="12/26/2016"
-   ms.author="sashan"/>
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 07/16/2016
+wacn.date: 12/26/2016
+ms.author: sashan
+---
 
 # 使用 SQL 数据库活动异地复制管理云应用程序的滚动升级
 
+> [!NOTE]
+> [活动异地复制](./sql-database-geo-replication-overview.md) 现在可用于所有层中的所有数据库。
 
-> [AZURE.NOTE] [活动异地复制](/documentation/articles/sql-database-geo-replication-overview/) 现在可用于所有层中的所有数据库。
-
-
-了解如何使用 SQL 数据库中的[异地复制](/documentation/articles/sql-database-geo-replication-overview/)来启用云应用程序的滚动升级。由于升级是中断性操作，所以它应成为业务连续性规划和设计的一部分。本文介绍了编排升级过程的两种不同方法，并讨论了每种方法的优点和缺点。针对本文的目的，我们将使用一个简单的应用程序，该应用程序包含一个连接到作为其数据层的单一数据库的网站。我们的目标是在不对最终用户体验产生任何显著影响的情况下将版本 1 的应用程序升级到版本 2。
+了解如何使用 SQL 数据库中的[异地复制](./sql-database-geo-replication-overview.md)来启用云应用程序的滚动升级。由于升级是中断性操作，所以它应成为业务连续性规划和设计的一部分。本文介绍了编排升级过程的两种不同方法，并讨论了每种方法的优点和缺点。针对本文的目的，我们将使用一个简单的应用程序，该应用程序包含一个连接到作为其数据层的单一数据库的网站。我们的目标是在不对最终用户体验产生任何显著影响的情况下将版本 1 的应用程序升级到版本 2。
 
 评估升级选项时应考虑以下因素：
 
@@ -39,7 +38,8 @@
 1.  为升级创建过渡槽。要执行此操作需要在同一 Azure 区域中创建一个辅助数据库 (1)，并部署相同的网站。监视此辅助数据库以查看种子设定过程是否已完成。
 3.  使用作为联机终结点的 <i>contoso-1.chinacloudsites.cn</i> 和作为离线终结点的 <i>contoso-2.chinacloudsites.cn</i> 在 WATM 中创建故障转移配置文件。
 
-> [AZURE.NOTE] 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
+> [!NOTE]
+> 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option1-1.png)
 
@@ -65,7 +65,8 @@
 
 此时应用程序可完全正常运行，并且你可以重复上述升级步骤。
 
-> [AZURE.NOTE] 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
+> [!NOTE]
+> 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option1-4.png)
 
@@ -85,7 +86,8 @@
 3.  在备份区域中创建网站的备用副本，并将其链接到地理冗余的辅助数据库 (4)。
 4.  将额外的终结点 <i>contoso-2.chinacloudsites.cn</i> 和 <i>contoso-3.chinacloudsites.cn</i> 作为离线终结点添加到 WATM 中的故障转移配置文件 (5)。
 
-> [AZURE.NOTE] 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
+> [!NOTE]
+> 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option2-1.png)
 
@@ -111,7 +113,8 @@
 
 此时应用程序可完全正常运行，并且你可以重复上述升级步骤。
 
-> [AZURE.NOTE] 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
+> [!NOTE]
+> 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option2-4.png)
 
@@ -121,14 +124,13 @@
 
 本文中所述的两种升级方法具有不同的复杂性和费用成本，但它们都关注于最小化最终用户仅限于执行只读操作的时间。该时间由升级脚本的持续时间直接定义。该时间不依赖于数据库大小、所选的服务层、网站配置和无法轻松控制的其他因素。这是因为所有准备步骤都从升级步骤中分离出来，可以在不影响生产应用程序的情况下完成。升级脚本的效率是决定升级期间最终用户体验的关键因素。因此改进升级的最佳做法是致力于尽可能地提高升级脚本的效率。
 
-
 ## 后续步骤
 
-- 有关业务连续性的概述和应用场景，请参阅[业务连续性概述](/documentation/articles/sql-database-business-continuity/)
-- 若要了解 Azure SQL 数据库自动备份，请参阅 [SQL 数据库自动备份](/documentation/articles/sql-database-automated-backups/)
-- 若要了解如何使用自动备份进行恢复，请参阅[从自动备份中还原数据库](/documentation/articles/sql-database-recovery-using-backups/)
-- 若要了解更快的恢复选项，请参阅[活动异地复制](/documentation/articles/sql-database-geo-replication-overview/)
-- 若要了解如何使用自动备份进行存档，请参阅[数据库复制](/documentation/articles/sql-database-copy/)
+- 有关业务连续性的概述和应用场景，请参阅[业务连续性概述](./sql-database-business-continuity.md)
+- 若要了解 Azure SQL 数据库自动备份，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)
+- 若要了解如何使用自动备份进行恢复，请参阅[从自动备份中还原数据库](./sql-database-recovery-using-backups.md)
+- 若要了解更快的恢复选项，请参阅[活动异地复制](./sql-database-geo-replication-overview.md)
+- 若要了解如何使用自动备份进行存档，请参阅[数据库复制](./sql-database-copy.md)
 
 ## 其他资源
 

@@ -40,12 +40,9 @@
 
     ![网络选择](./media/site-recovery-add-configuration-server/combined-wiz9.png)  
 
-
-
 11. 在“摘要”中复查信息，然后单击“安装”。安装完成后，将生成通行短语。启用复制时需要用到它，因此请复制并将它保存在安全的位置。
 
-	![摘要](./media/site-recovery-add-configuration-server/combined-wiz10.png)  
-
+    ![摘要](./media/site-recovery-add-configuration-server/combined-wiz10.png)  
 
 注册完成后，服务器将显示在保管库的“设置”>“服务器”边栏选项卡中。
 

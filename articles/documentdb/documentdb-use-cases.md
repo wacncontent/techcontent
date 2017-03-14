@@ -1,22 +1,22 @@
-<properties
-    pageTitle="常见 DocumentDB 用例 | Azure"
-    description="了解 DocumentDB 最常见的五个用例：用户生成的内容、事件日志记录、目录数据、用户首选项数据和物联网 (IoT)。"
-    services="documentdb"
-    author="h0n"
-    manager="jhubbard"
-    editor="monicar"
-    documentationcenter="" />
-<tags
-    ms.assetid="eca68a58-1a8c-4851-8cf8-6e4d2b889905"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/12/2017"
-    wacn.date="02/27/2017"
-    ms.author="hawong" />  
+---
+title: 常见 DocumentDB 用例 | Azure
+description: 了解 DocumentDB 最常见的五个用例：用户生成的内容、事件日志记录、目录数据、用户首选项数据和物联网 (IoT)。
+services: documentdb
+author: h0n
+manager: jhubbard
+editor: monicar
+documentationcenter: ''
 
+ms.assetid: eca68a58-1a8c-4851-8cf8-6e4d2b889905
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/12/2017
+wacn.date: 02/27/2017
+ms.author: hawong
+---
 
 # 常见 DocumentDB 用例
 本文概述了 DocumentDB 的几个常见用例。本文中的建议可以作为使用 DocumentDB 开发应用程序的一个起点。
@@ -45,7 +45,6 @@ IoT 用例在引入、处理和存储数据方法方面通常具有相同的模�
 
 ![Azure DocumentDB IoT 参考体系结构](./media/documentdb-use-cases/documentdb-iot.png)  
 
-
 由于 Azure 事件中心可以低延迟引入高吞吐量数据，因此它可以引入激增数据。可以将需要进行实时分析的引入数据传输至 Azure 流分析，以进行实时分析。可以将数据加载到 DocumentDB 中进行即席查询。将数据加载到 DocumentDB 后，即可对其进行查询。DocumentDB 中的数据可以用作实时分析中的参考数据。此外，通过将 DocumentDB 数据连接到 HDInsight 进行 Pig、Hive 或 Map/Reduce 作业，可以进一步优化和处理数据。经过优化的数据随后被加载回 DocumentDB 用于报告。
 
 有关使用 DocumentDB、EventHubs 和 Storm 的 IoT 解决方案示例，请参阅 [GitHub 上的 hdinsight-storm-examples 存储库](https://github.com/hdinsight/hdinsight-storm-examples/)。
@@ -59,11 +58,9 @@ IoT 用例在引入、处理和存储数据方法方面通常具有相同的模�
 
 ![Azure DocumentDB 零售目录参考体系结构](./media/documentdb-use-cases/documentdb-retail-catalog.png)  
 
-
- 此外，存储在 DocumentDB 中的数据可以与 HDInsight 集成，通过 Pig、Hive 或 Map/Reduce 作业进行大数据分析。有关 DocumentDB 的 Hadoop 连接器的详细信息，请参阅[使用 DocumentDB 和 HDInsight 运行 Hadoop 作业](/documentation/articles/documentdb-run-hadoop-with-hdinsight/)。
+ 此外，存储在 DocumentDB 中的数据可以与 HDInsight 集成，通过 Pig、Hive 或 Map/Reduce 作业进行大数据分析。有关 DocumentDB 的 Hadoop 连接器的详细信息，请参阅[使用 DocumentDB 和 HDInsight 运行 Hadoop 作业](./documentdb-run-hadoop-with-hdinsight.md)。
 
  ![Azure DocumentDB 零售订单参考体系结构](./media/documentdb-use-cases/documentdb-retail-orders.png)  
-
 
 ## 游戏
 数据库层是游戏应用程序的关键组件。新式游戏可在移动/控制台客户端执行图形处理，但需依赖云传输自定义的个性化内容，例如游戏中的统计数据、社交媒体集成以及高分排行榜。游戏通常需要单毫秒的读取和写入延迟，从而带来具有吸引力的游戏体验。新游戏启动和功能更新期间，游戏数据库需要具备很快的速度，并且要能够处理请求速率中的大量峰值。
@@ -78,7 +75,6 @@ DocumentDB 用于 [Next Games](http://www.nextgames.com/) 推出的[行尸走肉
 
 ![Azure DocumentDB 游戏参考体系结构](./media/documentdb-use-cases/documentdb-gaming-architecture.png)  
 
-
 ## Web 和移动应用程序
 DocumentDB 常用在 Web 和移动应用程序中，尤其适用于社交互动建模、与第三方服务集成以及打造丰富的个性化体验。
 
@@ -91,14 +87,13 @@ DocumentDB 的一个常见用例就是存储和查询 Web 和移动应用程序�
 
 ![Azure DocumentDB Web 应用参考体系结构](./media/documentdb-use-cases/documentdb-web.png)  
 
-
 ### 个性化
 如今，新式应用程序都具有复杂的视图和体验。它们通常采用动态设计，迎合对用户首选项或情绪以及品牌塑造的需求。因此，应用程序需要能够有效地检索个性化设置，以便快速呈现 UI 元素和体验。
 
 JSON 是一种用于呈现 UI 布局数据的有效格式，它不仅轻量而且可由 JavaScript 轻松理解。DocumentDB 提供可调的一致性级别，可以实现快速读取和低延迟写入。因此，在 DocumentDB 中将包括个性化设置的 UI 布局数据存储为 JSON 文档是获取网络数据的一种有效方法。
 
 ## 后续步骤
-若要开始使用 DocumentDB，可创建一个[帐户](/pricing/1rmb-trial/)，然后了解 DocumentDB 并查找所需信息。
+若要开始使用 DocumentDB，可创建一个[帐户](https://www.azure.cn/pricing/1rmb-trial/)，然后了解 DocumentDB 并查找所需信息。
 
 或者，如果想要了解有关使用 DocumentDB 的客户的详细信息，可以参阅下面的客户案例：
 

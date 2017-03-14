@@ -1,36 +1,35 @@
-<properties
-	pageTitle="使用移动应用在 Apache Cordova 中添加身份验证 | Azure 应用服务"
-	description="了解如何使用 Azure 应用服务中的移动应用，通过各种标识提供者对 Apache Cordova 应用的用户进行身份验证。"
-	services="app-service\mobile"
-	documentationCenter="javascript"
-	authors="adrianhall"
-	manager="erikre"
-	editor=""/>  
+---
+title: 使用移动应用在 Apache Cordova 中添加身份验证 | Azure 应用服务
+description: 了解如何使用 Azure 应用服务中的移动应用，通过各种标识提供者对 Apache Cordova 应用的用户进行身份验证。
+services: app-service\mobile
+documentationCenter: javascript
+authors: adrianhall
+manager: erikre
+editor: ''
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="na"
-	ms.tgt_pltfrm="mobile-html"
-	ms.devlang="javascript"
-	ms.topic="article"
-	ms.date="10/30/2016"
-	wacn.date="01/23/2017"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: na
+ms.tgt_pltfrm: mobile-html
+ms.devlang: javascript
+ms.topic: article
+ms.date: 10/30/2016
+wacn.date: 01/23/2017
+ms.author: adrianha
+---
 
 # 将身份验证添加到 Apache Cordova 应用
 
-[AZURE.INCLUDE [app-service-mobile-selector-get-started-users](../../includes/app-service-mobile-selector-get-started-users.md)]
+[!INCLUDE [app-service-mobile-selector-get-started-users](../../includes/app-service-mobile-selector-get-started-users.md)]
 
 ## 摘要
 本教程介绍如何使用支持的标识提供者将身份验证添加到 Apache Cordova 上的待办事项列表快速入门项目。本教程基于 [Get started with Mobile Apps]（移动应用入门）教程，必须先完成该教程。
 
 ## <a name="register"></a>注册应用以进行身份验证并配置应用服务
-[AZURE.INCLUDE [app-service-mobile-register-authentication](../../includes/app-service-mobile-register-authentication.md)]
+[!INCLUDE [app-service-mobile-register-authentication](../../includes/app-service-mobile-register-authentication.md)]
 
 ## <a name="permissions"></a>将权限限制给已经过身份验证的用户
 
-[AZURE.INCLUDE [app-service-mobile-restrict-permissions-dotnet-backend](../../includes/app-service-mobile-restrict-permissions-dotnet-backend.md)]
+[!INCLUDE [app-service-mobile-restrict-permissions-dotnet-backend](../../includes/app-service-mobile-restrict-permissions-dotnet-backend.md)]
 
 现在，可以验证是否已禁用对后端的匿名访问。在 Visual Studio 中：
 
@@ -52,8 +51,10 @@
 
     下面显示了 Content-Security-Policy（针对 Azure Active Directory 实现）的示例：
 
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'
-			data: gap: https://login.chinacloudapi.cn https://yourapp.chinacloudsites.cn; style-src 'self'">
+    ```
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'
+        data: gap: https://login.chinacloudapi.cn https://yourapp.chinacloudsites.cn; style-src 'self'">
+    ```
 
     应该将 `https://login.chinacloudapi.cn` 替换为上表中的 OAuth 主机。有关此元标记的详细信息，请参阅 [Content-Security-Policy 文档]。
 
@@ -61,25 +62,27 @@
 
 3. 打开 `www/js/index.js` 文件进行编辑，找到 `onDeviceReady()` 方法，然后在客户端创建代码下添加以下代码：
 
-        // Login to the service
-        client.login('SDK_Provider_Name')
-            .then(function () {
+    ```
+    // Login to the service
+    client.login('SDK_Provider_Name')
+        .then(function () {
 
-                // BEGINNING OF ORIGINAL CODE
+            // BEGINNING OF ORIGINAL CODE
 
-                // Create a table reference
-                todoItemTable = client.getTable('todoitem');
+            // Create a table reference
+            todoItemTable = client.getTable('todoitem');
 
-                // Refresh the todoItems
-                refreshDisplay();
+            // Refresh the todoItems
+            refreshDisplay();
 
-                // Wire up the UI Event Handler for the Add Item
-                $('#add-item').submit(addItemHandler);
-                $('#refresh').on('click', refreshDisplay);
+            // Wire up the UI Event Handler for the Add Item
+            $('#add-item').submit(addItemHandler);
+            $('#refresh').on('click', refreshDisplay);
 
-                // END OF ORIGINAL CODE
+            // END OF ORIGINAL CODE
 
-            }, handleError);
+        }, handleError);
+    ```
 
     此代码将替换用于创建表引用和刷新 UI 的现有代码。
 
@@ -98,12 +101,12 @@
 * [Node.js Server SDK]
 
 <!-- URLs. -->
-[Get started with Mobile Apps]: /documentation/articles/app-service-mobile-cordova-get-started/
-[移动应用入门]: /documentation/articles/app-service-mobile-cordova-get-started/
+[Get started with Mobile Apps]: ./app-service-mobile-cordova-get-started.md
+[移动应用入门]: ./app-service-mobile-cordova-get-started.md
 [Content-Security-Policy 文档]: https://cordova.apache.org/docs/en/latest/guide/appdev/whitelist/index.html
-[有关 Azure 应用服务身份验证]: /documentation/articles/app-service-mobile-auth/
-[ASP.NET Server SDK]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[Node.js Server SDK]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/
+[有关 Azure 应用服务身份验证]: ./app-service-mobile-auth.md
+[ASP.NET Server SDK]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[Node.js Server SDK]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--Update_Description:update wording-->

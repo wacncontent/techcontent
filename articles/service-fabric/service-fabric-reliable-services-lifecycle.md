@@ -1,21 +1,21 @@
-<properties
-    pageTitle="Azure Service Fabric Reliable Services 生命周期概述 | Azure"
-    description="了解 Service Fabric Reliable Services 中的不同生命周期事件"
-    services="Service-Fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="vturecek;" />
-<tags
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider;" />  
+---
+title: Azure Service Fabric Reliable Services 生命周期概述 | Azure
+description: 了解 Service Fabric Reliable Services 中的不同生命周期事件
+services: Service-Fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: vturecek;
 
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider;
+---
 
 # Reliable Services 生命周期概述
 在考虑要 Reliable Services 的生命周期时，具备生命周期的基础知识这一点极为重要。一般而言：
@@ -71,7 +71,7 @@
 
 4. 完成副本侦听器的所有 `OpenAsync()` 调用并且已启动 `RunAsync()` 后（或者由于此副本当前是辅助节点而跳过了这些步骤时），将调用 `StatefulServiceBase.OnChangeRoleAsync()`。（这是服务中不常见的重写。）
 
-类似于无状态服务，创建和打开侦听器，以及调用 RunAsync 的顺序不会经过协调。解决方法大致相同，我们另举一例：假设抵达通信侦听器的调用需要在某个 [Reliable Collections](/documentation/articles/service-fabric-reliable-services-reliable-collections/) 中保存信息才能正常工作。由于通信侦听器可能在 Reliable Collections 可读或可写之前打开，因此，在 RunAsync 可以启动之前，必须经过一定的附加协调。最简单且最常见的解决方法是让通信侦听器返回某个错误代码，告知客户端重试请求。
+类似于无状态服务，创建和打开侦听器，以及调用 RunAsync 的顺序不会经过协调。解决方法大致相同，我们另举一例：假设抵达通信侦听器的调用需要在某个 [Reliable Collections](./service-fabric-reliable-services-reliable-collections.md) 中保存信息才能正常工作。由于通信侦听器可能在 Reliable Collections 可读或可写之前打开，因此，在 RunAsync 可以启动之前，必须经过一定的附加协调。最简单且最常见的解决方法是让通信侦听器返回某个错误代码，告知客户端重试请求。
 
 ## 有状态服务关闭
 类似于无状态服务，关闭期间的生命周期事件与启动期间是相同的，但顺序相反。关闭有状态服务时，将发生以下事件：
@@ -104,7 +104,7 @@ Service Fabric 需要使用此副本来停止处理消息，退出正在执行�
 1. 并行
     - 调用 `StatefulServiceBase.CreateServiceReplicaListeners()`，打开返回的所有侦听器（针对每个侦听器调用 `ICommunicationListener.OpenAsync()`）
     - 调用服务的 RunAsync 方法 \(`StatefulServiceBase.RunAsync()`\)
-    
+
 4. 完成副本侦听器的所有 `OpenAsync()` 调用并且已启动 `RunAsync()` 后（或者由于此副本是辅助节点而跳过了这些步骤时），将调用 `StatefulServiceBase.OnChangeRoleAsync()`。（这是服务中不常见的重写。）
 
 ## 有关服务生命周期的说明
@@ -116,8 +116,8 @@ Service Fabric 需要使用此副本来停止处理消息，退出正在执行�
 * `OnCloseAsync()` 路径中的失败会导致调用 `OnAbort()`，服务可以凭借这最后一个机会，尽最大努力清理并释放它们所占用的资源。
 
 ## 后续步骤
-* [Reliable Services 简介](/documentation/articles/service-fabric-reliable-services-introduction/)
-* [Reliable Services 快速入门](/documentation/articles/service-fabric-reliable-services-quick-start/)
-* [Reliable Services 高级用法](/documentation/articles/service-fabric-reliable-services-advanced-usage/)
+* [Reliable Services 简介](./service-fabric-reliable-services-introduction.md)
+* [Reliable Services 快速入门](./service-fabric-reliable-services-quick-start.md)
+* [Reliable Services 高级用法](./service-fabric-reliable-services-advanced-usage.md)
 
 <!---HONumber=Mooncake_0213_2017-->

@@ -1,28 +1,28 @@
-<properties 
-    pageTitle="服务总线定价和计费 | Azure"
-    description="服务总线定价结构概述。"
-    services="service-bus"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />  
+---
+title: 服务总线定价和计费 | Azure
+description: 服务总线定价结构概述。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/06/2016"
-    ms.author="sethm"
-    wacn.date="01/09/2017"/>  
-
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/06/2016
+ms.author: sethm
+wacn.date: 01/09/2017
+---
 
 # 服务总线定价和计费
 
 服务总线推出基本和标准两种层级。可以为你创建的每个服务总线服务命名空间选择一个服务层，此服务层选择将应用于该命名空间中创建的所有实体。
 
->[AZURE.NOTE] 有关当前服务总线定价的详细信息，请参阅 [Azure 服务总线定价页](/pricing/details/messaging/)和[服务总线常见问题解答](/documentation/articles/service-bus-faq/#service-bus-pricing)。
+>[!NOTE]
+> 有关当前服务总线定价的详细信息，请参阅 [Azure 服务总线定价页](https://www.azure.cn/pricing/details/messaging/)和[服务总线常见问题解答](./service-bus-faq.md#service-bus-pricing)。
 
 服务总线将以下两种测定仪用于队列和主题/订阅：
 
@@ -31,7 +31,6 @@
 2. **中转连接**：定义为在给定的 1 小时采样期间内针对队列、主题或订阅打开的持久连接的最大数目。此测定仪仅适用于标准层。可以在标准层中打开其他连接（以前，每个队列/主题/订阅的连接数限制为 100 个），但只需支付名义上的每连接费用。
 
 **标准**层引入了分级定价用于对队列和主题/订阅执行的操作，从而在达到最高使用率级别时可享受 80% 的基于数量的折扣。
-
 
 请注意，每个 Azure 订阅每月仅需支付一次标准基本费用。这意味着在创建一个标准服务总线命名空间后，将能够在同一 Azure 订阅下根据需要创建任意数目的标准命名空间，而不会产生附加的基本费用。
 
@@ -78,7 +77,6 @@
 |1 亿 - 25 亿个操作/月|每百万个操作 3.20 元|
 |超过 25 亿个操作/月|每百万个操作 1.27 元|
 
-
 ## 中转连接
 
 *中转连接*允许客户的使用模式涉及针对队列、主题/订阅或事件中心的大量“永久连接”发送方/接收方。永久连接的发送方/接收方是使用具有非零接收超时（例如，HTTP 长轮询）的 AMQP 或 HTTP 连接的那些。具有立即超时的 HTTP 发送方和接收方不会生成中转连接。
@@ -94,10 +92,11 @@
 |100,000-500,000 个/月|每连接 0.15 元/月|
 |超过 500,000 个/月|每连接 0.10 元/月|
 
->[AZURE.NOTE] 标准消息传送层包括 1,000 个中转连接（通过基本费用），可在关联的 Azure 订阅内的所有队列、主题和订阅中共享这些中转连接。
+>[!NOTE]
+> 标准消息传送层包括 1,000 个中转连接（通过基本费用），可在关联的 Azure 订阅内的所有队列、主题和订阅中共享这些中转连接。
 
->[AZURE.NOTE]根据并发连接的峰值数量计费，按照每月 744 小时，每小时按比例分配费用。
-
+>[!NOTE]
+>根据并发连接的峰值数量计费，按照每月 744 小时，每小时按比例分配费用。
 
 有关中转连接的详细信息，请参阅本主题后面的[常见问题解答](#FAQ)部分。
 
@@ -114,7 +113,7 @@
 
 ### 如何计算中继小时数？
 
-请参阅[此主题](/documentation/articles/service-bus-pricing-faq/#how-is-the-relay-hours-meter-calculated/)。
+请参阅[此主题](./service-bus-pricing-faq.md#how-is-the-relay-hours-meter-calculated)。
 
 ### 什么是中转连接，它的计费方式是怎样的？
 
@@ -138,9 +137,9 @@
 
 ## 后续步骤
 
-- 有关服务总线定价的更多详细信息，请参阅 [Azure 服务总线定价页](/pricing/details/messaging/)。
+- 有关服务总线定价的更多详细信息，请参阅 [Azure 服务总线定价页](https://www.azure.cn/pricing/details/messaging/)。
 
-- 有关服务总线定价和计费的一些常见问题解答，请参阅[服务总线常见问题解答](/documentation/articles/service-bus-faq/#service-bus-pricing)。
+- 有关服务总线定价和计费的一些常见问题解答，请参阅[服务总线常见问题解答](./service-bus-faq.md#service-bus-pricing)。
 
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 

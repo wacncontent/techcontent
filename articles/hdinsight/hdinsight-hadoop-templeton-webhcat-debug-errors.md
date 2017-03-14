@@ -1,23 +1,23 @@
-<properties
-    pageTitle="了解和解决 HDInsight 上的 WebHCat 错误"
-    description="了解 HDInsight 上的 WebHCat 返回的常见错误以及如何解决它们。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun"
-    tags="azure-portal" />
-<tags
-    ms.assetid="1b3d94b1-207d-4550-aece-21dc45485549"
-    ms.service="hdinsight"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="01/12/2017"
-    wacn.date="01/25/2017"
-    ms.author="larryfr" />  
+---
+title: 了解和解决 HDInsight 上的 WebHCat 错误
+description: 了解 HDInsight 上的 WebHCat 返回的常见错误以及如何解决它们。
+services: hdinsight
+documentationcenter: ''
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
 
+ms.assetid: 1b3d94b1-207d-4550-aece-21dc45485549
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 01/12/2017
+wacn.date: 01/25/2017
+ms.author: larryfr
+---
 
 # 了解和解决从 HDInsight 上的 WebHCat (Templeton) 收到的错误
 将 WebHCat（以前称为 Templeton）与 HDInsight 配合使用时，你可能会收到错误。本文档提供常见错误指导 - 为什么会发生这些错误？如何解决这些错误？
@@ -26,16 +26,16 @@
 [WebHCat](https://cwiki.apache.org/confluence/display/Hive/WebHCat)是适用于 [HCatalog](https://cwiki.apache.org/confluence/display/Hive/HCatalog) 的 REST API，是针对 Hadoop 的表和存储管理层。WebHCat 默认情况下在 HDInsight 群集上处于启用状态，可供各种工具在执行提交作业、获取作业状态等操作时使用，无需登录到群集中。
 
 ## <a name="modifying-configuration"></a> 修改配置
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 本文档中列出的几大错误之所以发生，是因为超出了配置的最大值。当解决步骤提到你可以更改一个值时，必须使用下列选项之一来执行更改：
 
-* 对于 **Windows** 群集：使用脚本操作在群集创建过程中配置值。有关详细信息，请参阅[开发脚本操作](/documentation/articles/hdinsight-hadoop-script-actions/)。
-* 对于 **Linux** 群集：使用 Ambari（Web 或 REST API）修改值。有关详细信息，请参阅[使用 Ambari 管理 HDInsight](/documentation/articles/hdinsight-hadoop-manage-ambari/)
+* 对于 **Windows** 群集：使用脚本操作在群集创建过程中配置值。有关详细信息，请参阅[开发脚本操作](./hdinsight-hadoop-script-actions.md)。
+* 对于 **Linux** 群集：使用 Ambari（Web 或 REST API）修改值。有关详细信息，请参阅[使用 Ambari 管理 HDInsight](./hdinsight-hadoop-manage-ambari.md)
 
-[AZURE.INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
 
-> [AZURE.IMPORTANT]
-Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](/documentation/articles/hdinsight-component-versioning/#hdi-version-32-and-33-nearing-deprecation-date)。
+> [!IMPORTANT]
+Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
 ### 默认配置
 以下是在超过时可能影响 WebHCat 性能或导致错误的默认配置值：

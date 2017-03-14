@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Power BI Embedded - 连接到数据源"
-    description="Power BI Embedded, 连接到数据源"
-    services="power-bi-embedded"
-    documentationcenter=""
-    author="guyinacube"
-    manager="erikre"
-    editor=""
-    tags="" />
-<tags
-    ms.assetid="2a4caeb3-255d-4215-9554-0ca8e3568c13"
-    ms.service="power-bi-embedded"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="powerbi"
-    ms.date="01/06/2017"
-    wacn.date="02/22/2017"
-    ms.author="asaxton" />  
+---
+title: Power BI Embedded - 连接到数据源
+description: Power BI Embedded, 连接到数据源
+services: power-bi-embedded
+documentationcenter: ''
+author: guyinacube
+manager: erikre
+editor: ''
+tags: ''
 
+ms.assetid: 2a4caeb3-255d-4215-9554-0ca8e3568c13
+ms.service: power-bi-embedded
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: powerbi
+ms.date: 01/06/2017
+wacn.date: 02/22/2017
+ms.author: asaxton
+---
 
 # 连接到数据源
 使用 **Power BI Embedded**，可以在自己的应用中嵌入报表。当在应用中嵌入 Power BI 报表时，可以通过**导入**数据的副本或通过使用 **DirectQuery** **直接连接**到数据源将该报表连接到基础数据。
@@ -30,7 +30,7 @@
 
 目前，通过 Power BI Embedded，可以将 DirectQuery 与云数据源一起使用，但不能与本地数据源一起使用。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Power BI Embedded 当前不支持本地数据网关。这意味着无法将 DirectQuery 与本地数据源配合使用。
 
 ## 支持的数据源
@@ -58,14 +58,11 @@ Power BI Embedded 当前不支持本地数据网关。这意味着无法将 Dire
 - 不能更改某列的数据类型。
 - 默认情况下，将对度量值中允许使用的 DAX 表达式加以限制。请参阅 [DirectQuery 和度量值](#measures)。
 
-
-
-
 ## DirectQuery 和度量值 <a name="measures"/>  
 为了确保发送到基础数据源的查询具有可接受的性能，针对度量值施加了一些限制。使用 **Power BI Desktop** 时，高级用户可以通过选择“文件”>“选项和设置”>“选项”来选择绕过此限制。在“选项”对话框中，选择“DirectQuery”，然后选择“允许 DirectQuery 模式下的度量值不受限制”选项。选中该选项后，可以使用对度量值有效的任何 DAX 表达式。但是用户必须知道，在导入数据时性能非常好的某些表达式在 **DirectQuery** 模式下可能会导致对后端源的查询非常缓慢。
 
 ## 另请参阅
-- [Power BI Embedded 入门](/documentation/articles/power-bi-embedded-get-started/)
+- [Power BI Embedded 入门](./power-bi-embedded-get-started.md)
 - [Power BI Desktop](https://powerbi.microsoft.com/documentation/powerbi-desktop-get-the-desktop/)
 
 有更多问题？ [试用 Power BI 社区](http://community.powerbi.com/)

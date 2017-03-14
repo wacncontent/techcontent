@@ -1,23 +1,23 @@
 <!-- Remove data-factory -->
-<properties
-   pageTitle="Azure SQL 数据仓库最佳实践 | Azure"
-   description="开发 Azure SQL 数据仓库解决方案时应了解的建议和最佳实践。这些内容可帮助你取得成功。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="sonyam"
-   manager="barbkess"
-   editor=""/>  
 
+---
+title: Azure SQL 数据仓库最佳实践 | Azure
+description: 开发 Azure SQL 数据仓库解决方案时应了解的建议和最佳实践。这些内容可帮助你取得成功。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: sonyam
+manager: barbkess
+editor: ''
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="sonyama;barbkess"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: sonyama;barbkess
+---
 
 # Azure SQL 数据仓库最佳实践
 本文包含一系列最佳实践，可确保用户从 Azure SQL 数据仓库获得最佳性能。本文的有些概念很基本且很容易解释，而有些概念则相对高级，本文只对其进行大致介绍。本文的目的是提供一些基本指导，让用户在生成数据仓库时更加关注那些重要的方面。每部分都将介绍一个概念，并提供哪里可以阅读深度介绍的详细文章。
@@ -114,31 +114,31 @@ SQL 数据仓库有多个 DMV 可用于监视查询执行。以下监视相关�
 
 <!--Article references-->
 [Create a support ticket]: /documentation/articles/sql-data-warehouse-get-started-create-support-ticket/
-[Concurrency and workload management]: /documentation/articles/sql-data-warehouse-develop-concurrency/
-[Create table as select (CTAS)]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[Table overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Table data types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Table distribution]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Table indexes]: /documentation/articles/sql-data-warehouse-tables-index/
-[Causes of poor columnstore index quality]: /documentation/articles/sql-data-warehouse-tables-index/#causes-of-poor-columnstore-index-quality
-[Rebuilding columnstore indexes]: /documentation/articles/sql-data-warehouse-tables-index/#rebuilding-indexes-to-improve-segment-quality
-[Table partitioning]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Manage table statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary tables]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[Guide for using PolyBase]: /documentation/articles/sql-data-warehouse-load-polybase-guide/
-[Load data]: /documentation/articles/sql-data-warehouse-overview-load/
+[Concurrency and workload management]: ./sql-data-warehouse-develop-concurrency.md
+[Create table as select (CTAS)]: ./sql-data-warehouse-develop-ctas.md
+[Table overview]: ./sql-data-warehouse-tables-overview.md
+[Table data types]: ./sql-data-warehouse-tables-data-types.md
+[Table distribution]: ./sql-data-warehouse-tables-distribute.md
+[Table indexes]: ./sql-data-warehouse-tables-index.md
+[Causes of poor columnstore index quality]: ./sql-data-warehouse-tables-index.md#causes-of-poor-columnstore-index-quality
+[Rebuilding columnstore indexes]: ./sql-data-warehouse-tables-index.md#rebuilding-indexes-to-improve-segment-quality
+[Table partitioning]: ./sql-data-warehouse-tables-partition.md
+[Manage table statistics]: ./sql-data-warehouse-tables-statistics.md
+[Temporary tables]: ./sql-data-warehouse-tables-temporary.md
+[Guide for using PolyBase]: ./sql-data-warehouse-load-polybase-guide.md
+[Load data]: ./sql-data-warehouse-overview-load.md
 [Move data with Azure Data Factory]: /documentation/articles/data-factory/data-factory-azure-sql-data-warehouse-connector/
 [Load data with Azure Data Factory]: /documentation/articles/sql-data-warehouse-get-started-load-with-azure-data-factory/
-[Load data with bcp]: /documentation/articles/sql-data-warehouse-load-with-bcp/
-[Load data with PolyBase]: /documentation/articles/sql-data-warehouse-get-started-load-with-polybase/
-[Monitor your workload using DMVs]: /documentation/articles/sql-data-warehouse-manage-monitor/
-[Pause compute resources]: /documentation/articles/sql-data-warehouse-manage-compute-overview/#pause-compute-bk
-[Resume compute resources]: /documentation/articles/sql-data-warehouse-manage-compute-overview/#resume-compute-bk
-[Scale compute resources]: /documentation/articles/sql-data-warehouse-manage-compute-overview/#scale-performance-bk
-[Understanding transactions]: /documentation/articles/sql-data-warehouse-develop-transactions/
-[Optimizing transactions]: /documentation/articles/sql-data-warehouse-develop-best-practices-transactions/
-[Troubleshooting]: /documentation/articles/sql-data-warehouse-troubleshoot/
-[LABEL]: /documentation/articles/sql-data-warehouse-develop-label/
+[Load data with bcp]: ./sql-data-warehouse-load-with-bcp.md
+[Load data with PolyBase]: ./sql-data-warehouse-get-started-load-with-polybase.md
+[Monitor your workload using DMVs]: ./sql-data-warehouse-manage-monitor.md
+[Pause compute resources]: ./sql-data-warehouse-manage-compute-overview.md#pause-compute-bk
+[Resume compute resources]: ./sql-data-warehouse-manage-compute-overview.md#resume-compute-bk
+[Scale compute resources]: ./sql-data-warehouse-manage-compute-overview.md#scale-performance-bk
+[Understanding transactions]: ./sql-data-warehouse-develop-transactions.md
+[Optimizing transactions]: ./sql-data-warehouse-develop-best-practices-transactions.md
+[Troubleshooting]: ./sql-data-warehouse-troubleshoot.md
+[LABEL]: ./sql-data-warehouse-develop-label.md
 
 <!--MSDN references-->
 [ALTER TABLE]: https://msdn.microsoft.com/zh-cn/library/ms190273.aspx

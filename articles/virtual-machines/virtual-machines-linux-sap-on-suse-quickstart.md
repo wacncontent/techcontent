@@ -1,24 +1,24 @@
-<properties
-    pageTitle="在 Azure SUSE Linux VM 上测试 SAP NetWeaver | Azure"
-    description="在 Azure SUSE Linux VM 上测试 SAP NetWeaver"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="hermanndms"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager"
-    keywords="" />
-<tags
-    ms.assetid="645e358b-3ca1-4d3d-bf70-b0f287498d7a"
-    ms.service="virtual-machines-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure-services"
-    ms.date="09/15/2016"
-    wacn.date="01/20/2017"
-    ms.author="hermannd" />  
+---
+title: 在 Azure SUSE Linux VM 上测试 SAP NetWeaver | Azure
+description: 在 Azure SUSE Linux VM 上测试 SAP NetWeaver
+services: virtual-machines-linux
+documentationcenter: ''
+author: hermanndms
+manager: timlt
+editor: ''
+tags: azure-resource-manager
+keywords: ''
 
+ms.assetid: 645e358b-3ca1-4d3d-bf70-b0f287498d7a
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 09/15/2016
+wacn.date: 01/20/2017
+ms.author: hermannd
+---
 
 # 在 Azure SUSE Linux VM 上运行 SAP NetWeaver
 本文介绍在 Azure SUSE Linux 虚拟机 (VM) 上运行 SAP NetWeaver 时应注意的各个事项。自 2016 年 5 月 19 日起，Azure 上的 SUSE Linux VM 已正式支持 SAP NetWeaver。有关 Linux 版本、SAP 内核版本等等的所有详细信息，请参阅 SAP 说明 1928533“Azure 上的 SAP 应用程序：支持的产品和 Azure VM 类型”。
@@ -32,29 +32,29 @@
 
 * 查找现有发布服务器（包括 SUSE）：
 
-	   PS  : Get-AzureRmVMImagePublisher -Location "China East" | where-object { $_.publishername -like "*US*"  }
-	   CLI : azure vm image list-publishers chinaeast | grep "US"
+       PS  : Get-AzureRmVMImagePublisher -Location "China East" | where-object { $_.publishername -like "*US*"  }
+       CLI : azure vm image list-publishers chinaeast | grep "US"
 
 * 从 SUSE 中查找现有产品/服务：
 
-	   PS  : Get-AzureRmVMImageOffer -Location "China East" -Publisher "SUSE"
-	   CLI: azure vm image list-offers chinaeast SUSE
+       PS  : Get-AzureRmVMImageOffer -Location "China East" -Publisher "SUSE"
+       CLI: azure vm image list-offers chinaeast SUSE
 
 * 查找 SUSE SLES 产品/服务：
 
-	   PS: Get-AzureRmVMImageSku -Location "China East" -Publisher "SUSE" -Offer "SLES"
-	   CLI: azure vm image list-skus chinaeast SUSE SLES
+       PS: Get-AzureRmVMImageSku -Location "China East" -Publisher "SUSE" -Offer "SLES"
+       CLI: azure vm image list-skus chinaeast SUSE SLES
 
 * 查找特定版本的 SLES SKU：
 
-	   PS  : Get-AzureRmVMImage -Location "China East" -Publisher "SUSE" -Offer "SLES" -skus "12-SP1"
-	   CLI : azure vm image list chinaeast SUSE SLES 12-SP1
+       PS  : Get-AzureRmVMImage -Location "China East" -Publisher "SUSE" -Offer "SLES" -skus "12-SP1"
+       CLI : azure vm image list chinaeast SUSE SLES 12-SP1
 
 ## 在 SUSE VM 中安装 WALinuxAgent
 名为 WALinuxAgent 的代理是 Azure 应用商店中 SLES 映像的一部分。有关如何手动安装该代理的信息（例如，从本地上载 SLES OS 虚拟硬盘 (VHD) 时），请参阅：
 
 * [OpenSUSE](http://software.opensuse.org/package/WALinuxAgent)
-* [Azure](/documentation/articles/virtual-machines-linux-endorsed-distros/)
+* [Azure](./virtual-machines-linux-endorsed-distros.md)
 * [SUSE](https://www.suse.com/communities/blog/suse-linux-enterprise-server-configuration-for-windows-azure/)
 
 ## SAP“增强型监视”
@@ -80,7 +80,7 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 * 不要使用 UUID（而是使用其他内容）从另一个 VM 附加损坏的 OS 磁盘
 
 ## 从本地将 SUSE VM 上载到 Azure
-有关从本地将 SUSE VM 上载到 Azure 的步骤说明，请参阅[为 Azure 准备 SLES 或 openSUSE 虚拟机](/documentation/articles/virtual-machines-linux-suse-create-upload-vhd/)。
+有关从本地将 SUSE VM 上载到 Azure 的步骤说明，请参阅[为 Azure 准备 SLES 或 openSUSE 虚拟机](./virtual-machines-linux-suse-create-upload-vhd.md)。
 
 若要使用最终没有取消预配步骤的方法上载 VM（例如，为了保留现有 SAP 安装以及主机名），需要检查以下项：
 
@@ -89,18 +89,22 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 
 除了此文中所述的内容以外，建议也删除以下项：
 
-    /lib/udev/rules.d/75-persistent-net-generator.rules
+```
+/lib/udev/rules.d/75-persistent-net-generator.rules
+```
 
 还可以安装 Azure Linux 代理 (waagent) 来帮助避免在没有多个 NIC 时可能出现的问题。
 
 ## 在 Azure 上部署 SUSE VM
 在新的 Azure Resource Manager 模型中，应使用 JSON 模板文件创建新的 SUSE VM。创建 JSON 模板文件后，便可以使用以下 CLI 命令作为 PowerShell 的替代方法部署 VM 了：
 
-       azure group deployment create "<deployment name>" -g "<resource group name>" --template-file "<../../filename.json>"
+```
+   azure group deployment create "<deployment name>" -g "<resource group name>" --template-file "<../../filename.json>"
+```
 
-有关 JSON 模板文件的更多详细信息，请参阅[创作 Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)和 [Azure 快速启动模板](https://github.com/Azure/azure-quickstart-templates/)。
+有关 JSON 模板文件的更多详细信息，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)和 [Azure 快速启动模板](https://github.com/Azure/azure-quickstart-templates/)。
 
-有关 CLI 和 Azure Resource Manager 的更多详细信息，请参阅 [将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure Resource Manager 配合使用](/documentation/articles/xplat-cli-azure-resource-manager/)。
+有关 CLI 和 Azure Resource Manager 的更多详细信息，请参阅 [将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure Resource Manager 配合使用](../azure-resource-manager/xplat-cli-azure-resource-manager.md)。
 
 ## SAP 许可证和硬件密钥
 官方 SAP-Azure 认证中引入了一种新机制，计算用于 SAP 许可证的 SAP 硬件密钥。SAP 内核必须进行修改才能利用此机制。适用于 Linux 的旧 SAP 内核版本不包括此代码更改。因此，在某些情况下（例如 Azure VM 重设大小），SAP 硬件密钥会发生变化，SAP 许可证不再有效。最新的 SAP Linux 内核中已解决此问题。有关详细信息，请查看 SAP 说明 1928533。
@@ -118,23 +122,29 @@ SUSE 提供了一个名为“sapconf”的包，该包可管理一组特定于 S
 如果你使用了分布式安装（例如，要将数据库和 SAP 应用程序服务器安装在独立的 VM 中），你可以通过网络文件系统 (NFS) 来共享 /sapmnt 目录。如果在为 /sapmnt 创建 NFS 共享后，安装步骤会出现问题，请检查是否为该共享设置了“no\_root\_squash”。
 
 ## 逻辑卷
-在过去，如果用户需要一个跨多个 Azure 数据磁盘的大型逻辑卷（例如用于 SAP 数据库），我们建议使用 mdadm，因为 lvm 在 Azure 上尚未完全通过验证。若要了解如何使用 mdadm 在 Azure 上设置 Linux RAID，请参阅[在 Linux 上配置软件 RAID](/documentation/articles/virtual-machines-linux-configure-raid/)。此外，自 2016 年 5 月起，lvm 在 Azure 上也已获得完全支持，可用作 mdadm 的替代方案。有关 Azure 上 lvm 的其他信息，请参阅[在 Azure 中的 Linux VM 上配置 LVM](/documentation/articles/virtual-machines-linux-configure-lvm/)。
+在过去，如果用户需要一个跨多个 Azure 数据磁盘的大型逻辑卷（例如用于 SAP 数据库），我们建议使用 mdadm，因为 lvm 在 Azure 上尚未完全通过验证。若要了解如何使用 mdadm 在 Azure 上设置 Linux RAID，请参阅[在 Linux 上配置软件 RAID](./virtual-machines-linux-configure-raid.md)。此外，自 2016 年 5 月起，lvm 在 Azure 上也已获得完全支持，可用作 mdadm 的替代方案。有关 Azure 上 lvm 的其他信息，请参阅[在 Azure 中的 Linux VM 上配置 LVM](./virtual-machines-linux-configure-lvm.md)。
 
 ## Azure SUSE 存储库
 如果访问标准 Azure SUSE 存储库时遇到问题，可以使用一个简单的命令来重置它。以下情况下会发生这个问题：你在一个 Azure 区域中创建一个专用 OS 映像，然后将该映像复制到其他区域，并且要在该区域中基于此专用 OS 映像部署新 VM。只需在 VM 中运行以下命令：
 
-       service guestregister restart
+```
+   service guestregister restart
+```
 
 ## Gnome 桌面
 如果要使用 Gnome 桌面在单个 VM 中安装完整的 SAP 演示系统（包括 SAP GUI、浏览器、SAP 管理控制台），请根据以下提示在 Azure SLES 映像上安装该系统：
 
 对于 SLES 11：
 
-       zypper in -t pattern gnome
+```
+   zypper in -t pattern gnome
+```
 
 对于 SLES 12：
 
-       zypper in -t pattern gnome-basic
+```
+   zypper in -t pattern gnome-basic
+```
 
 ## 对云中 Linux 上 Oracle 的 SAP 支持
 在虚拟化环境中，对于 Linux 上的 Oracle 的支持受到限制。尽管本主题并非只针对 Azure，但了解相应信息非常重要。SAP 不支持 Azure 等公有云中的 SUSE 或 Red Hat 上的 Oracle。若要讨论此主题，请直接联系 Oracle。

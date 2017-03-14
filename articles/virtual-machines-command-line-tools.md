@@ -1,33 +1,33 @@
-<properties
-    pageTitle="服务管理模式下的 Azure CLI 命令 | Azure"
-    description="在服务管理模式下使用 Azure 命令行界面 (CLI) 命令管理经典部署模型中的部署"
-    services="virtual-machines-linux,virtual-machines-windows,mobile-services, cloud-services"
-    documentationcenter=""
-    author="dlepow"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-service-management" />
-<tags
-    ms.assetid="b9ccdeed-0ab8-4de2-937f-4046c7918bd8"
-    ms.service="multiple"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="vm-multiple"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/03/2017"
-    wacn.date="02/14/2017"
-    ms.author="danlep" />
+---
+title: 服务管理模式下的 Azure CLI 命令 | Azure
+description: 在服务管理模式下使用 Azure 命令行界面 (CLI) 命令管理经典部署模型中的部署
+services: virtual-machines-linux,virtual-machines-windows,mobile-services, cloud-services
+documentationcenter: ''
+author: dlepow
+manager: timlt
+editor: tysonn
+tags: azure-service-management
+
+ms.assetid: b9ccdeed-0ab8-4de2-937f-4046c7918bd8
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: na
+ms.topic: article
+ms.date: 01/03/2017
+wacn.date: 02/14/2017
+ms.author: danlep
+---
 
 # Azure 服务管理 (asm) 模式下的 Azure CLI 命令
 
-
 本文提供经常用于在经典部署模型中创建和管理 Azure 资源的 Azure CLI 命令的语法和选项。通过在 Azure 服务管理 (asm) 模式下运行 CLI 可以访问这些命令。本参考内容并不完整，CLI 版本可能会显示稍微不同的命令或参数。
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[资源管理器模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Microsoft 建议大多数新部署使用资源管理器模型。还可以[阅读有关资源管理器模型 CLI 命令的内容](/documentation/articles/azure-cli-arm-commands/)，使用 CLI 从经典模型将[资源迁移](/documentation/articles/virtual-machines-linux-cli-migration-classic-resource-manager/)到资源管理器模型。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[资源管理器模型和经典模型](./azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Microsoft 建议大多数新部署使用资源管理器模型。还可以[阅读有关资源管理器模型 CLI 命令的内容](./virtual-machines/azure-cli-arm-commands.md)，使用 CLI 从经典模型将[资源迁移](./virtual-machines/virtual-machines-linux-cli-migration-classic-resource-manager.md)到资源管理器模型。
 >
 
-若要开始，请先[安装 Azure CLI](/documentation/articles/xplat-cli-install/) 并[连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)。
+若要开始，请先[安装 Azure CLI](./xplat-cli-install.md) 并[连接到 Azure 订阅](./xplat-cli-connect.md)。
 
 有关命令行当前的命令语法和选项，请键入 `azure help`；若要显示特定命令的帮助，请键入 `azure help [command]`。还可以在创建和管理特定 Azure 服务的说明文档中找到 CLI 示例。
 
@@ -38,35 +38,40 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[资源�
 ## 设置 asm 模式
 使用以下命令启用 Azure CLI 服务管理模式命令。
 
-    azure config mode asm
+```
+azure config mode asm
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 CLI 的 Azure资源管理器模式与 Azure 服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
 > 
 > 
 
 ## 管理帐户信息和发布设置
-CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关其他选项，请参阅 [Connect to an Azure subscription from the Azure CLI](/documentation/articles/xplat-cli-connect/)（从 Azure CLI 连接到 Azure 订阅）。） 可以从 Azure 经典管理门户中的发布设置文件中获取此信息，如下所述。可以导入发布设置文件作为永久性本地配置设置，CLI 会将此设置用于后续操作。只需导入一次发布设置即可。
+CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关其他选项，请参阅 [Connect to an Azure subscription from the Azure CLI](./xplat-cli-connect.md)（从 Azure CLI 连接到 Azure 订阅）。） 可以从 Azure 经典管理门户中的发布设置文件中获取此信息，如下所述。可以导入发布设置文件作为永久性本地配置设置，CLI 会将此设置用于后续操作。只需导入一次发布设置即可。
 
 **account download [options]**
 
 此命令启动浏览器以从 Azure 经典管理门户下载 .publishsettings 文件。
 
-    ~$ azure account download -e AzureChinaCloud
-    info:   Executing command account download
-    info:   Launching browser to https://windows.azure.com/download/publishprofile.aspx
-    help:   Save the downloaded file, then execute the command
-    help:   account import <file>
-    info:   account download command OK
+```
+~$ azure account download -e AzureChinaCloud
+info:   Executing command account download
+info:   Launching browser to https://windows.azure.com/download/publishprofile.aspx
+help:   Save the downloaded file, then execute the command
+help:   account import <file>
+info:   account download command OK
+```
 
 **account import [options] &lt;file>**
 
 此命令导入 publishsettings 文件或证书，以便在未来的会话中可供该工具使用。
 
-    ~$ azure account import publishsettings.publishsettings
+```
+~$ azure account import publishsettings.publishsettings
+```
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 publishsettings 文件可以包含有关多个订阅的详细信息（即，订阅名称和 ID）。在导入 publishsettings 文件时，第一个订阅将用作默认订阅。若要使用其他订阅，请运行以下命令：<code>~$ azure config set subscription &lt;other-subscription-id&gt;</code>
 > 
 > 
@@ -75,23 +80,27 @@ publishsettings 文件可以包含有关多个订阅的详细信息（即，订�
 
 此命令删除已导入的存储的发布设置。如果在此计算机上用完工具后，希望确保在未来的会话中不能通过帐户使用该工具，可使用此命令。
 
-    ~$ azure account clear
-    Clearing account info.
-    info:   OK
+```
+~$ azure account clear
+Clearing account info.
+info:   OK
+```
 
 **account list [options]**
 
 列出导入的订阅
 
-    ~$ azure account list
-    info:    Executing command account list
-    data:    Name                                    Id
-           Current
-    data:    --------------------------------------  -------------------------------
-    -----  -------
-    data:    Forums Subscription                     8679c8be-3b05-49d9-b8fb  true
-    data:    Evangelism Team Subscription            9e672699-1055-41ae-9c36  false
-    data:    MSOpenTech-Prod                         c13e6a92-706e-4cf5-94b6  false
+```
+~$ azure account list
+info:    Executing command account list
+data:    Name                                    Id
+       Current
+data:    --------------------------------------  -------------------------------
+-----  -------
+data:    Forums Subscription                     8679c8be-3b05-49d9-b8fb  true
+data:    Evangelism Team Subscription            9e672699-1055-41ae-9c36  false
+data:    MSOpenTech-Prod                         c13e6a92-706e-4cf5-94b6  false
+```
 
 **account set [options] &lt;subscription&gt;**
 
@@ -104,74 +113,86 @@ publishsettings 文件可以包含有关多个订阅的详细信息（即，订�
 
 可以在一组虚拟机跨越多台物理计算机时设置地缘组。地缘组指定物理计算机应尽可能彼此接近，从而减少网络延迟。
 
-    ~$ azure account affinity-group list
-    + Fetching affinity groups
-    data:   Name                                  Label   Location
-    data:   ------------------------------------  ------  --------
-    data:   535EBAED-BF8B-4B18-A2E9-8755FB9D733F  opentec  China North
-    info:   account affinity-group list command OK
+```
+~$ azure account affinity-group list
++ Fetching affinity groups
+data:   Name                                  Label   Location
+data:   ------------------------------------  ------  --------
+data:   535EBAED-BF8B-4B18-A2E9-8755FB9D733F  opentec  China North
+info:   account affinity-group list command OK
+```
 
 **account affinity-group create [options] &lt;name&gt;**
 
 此命令创建地缘组
 
-    ~$ azure account affinity-group create opentec -l "China North" -e AzureChinaCloud
-    info:    Executing command account affinity-group create
-    + Creating affinity group
-    info:    account affinity-group create command OK
+```
+~$ azure account affinity-group create opentec -l "China North" -e AzureChinaCloud
+info:    Executing command account affinity-group create
++ Creating affinity group
+info:    account affinity-group create command OK
+```
 
 **account affinity-group show [options] &lt;name&gt;**
 
 此命令显示地缘组的详细信息
 
-    ~$ azure account affinity-group show opentec
-    info:    Executing command account affinity-group show
-    + Getting affinity groups
-    data:    $ xmlns "http://schemas.microsoft.com/windowsazure"
-    data:    $ xmlns:i "http://www.w3.org/2001/XMLSchema-instance"
-    data:    Name "opentec"
-    data:    Label "b3BlbnRlYw=="
-    data:    Description $ i:nil "true"
-    data:    Location "China North"
-    data:    HostedServices ""
-    data:    StorageServices ""
-    data:    Capabilities Capability 0 "PersistentVMRole"
-    data:    Capabilities Capability 1 "HighMemory"
-    info:    account affinity-group show command OK
+```
+~$ azure account affinity-group show opentec
+info:    Executing command account affinity-group show
++ Getting affinity groups
+data:    $ xmlns "http://schemas.microsoft.com/windowsazure"
+data:    $ xmlns:i "http://www.w3.org/2001/XMLSchema-instance"
+data:    Name "opentec"
+data:    Label "b3BlbnRlYw=="
+data:    Description $ i:nil "true"
+data:    Location "China North"
+data:    HostedServices ""
+data:    StorageServices ""
+data:    Capabilities Capability 0 "PersistentVMRole"
+data:    Capabilities Capability 1 "HighMemory"
+info:    account affinity-group show command OK
+```
 
 **account affinity-group delete [options] &lt;name&gt;**
 
 此命令将删除指定的地缘组
 
-    ~$ azure account affinity-group delete opentec
-    info:    Executing command account affinity-group delete
-    Delete affinity group opentec? [y/n] y
-    + Deleting affinity group
-    info:    account affinity-group delete command OK
+```
+~$ azure account affinity-group delete opentec
+info:    Executing command account affinity-group delete
+Delete affinity group opentec? [y/n] y
++ Deleting affinity group
+info:    account affinity-group delete command OK
+```
 
 ### 管理帐户环境的命令
 **account env list [options]**
 
 帐户环境列表
 
-    C:\windows\system32>azure account env list
-    info:    Executing command account env list
-    data:    Name
-    data:    ---------------
-    data:    AzureCloud
-    data:    AzureChinaCloud
-    info:    account env list command OK
+```
+C:\windows\system32>azure account env list
+info:    Executing command account env list
+data:    Name
+data:    ---------------
+data:    AzureCloud
+data:    AzureChinaCloud
+info:    account env list command OK
+```
 
 **account env show [options] [environment]**
 
 显示帐户环境详细信息
 
-	~$ azure account env show AzureChinaCloud
-	info:    Executing command account env show
-	Environment name: AzureChinaCloud
-	data:    Environment publishingProfile  http://go.microsoft.com/fwlink/?LinkId=2544
-	data:    Environment portal  http://go.microsoft.com/fwlink/?LinkId=2544
-	info:    account env show command OK
+```
+~$ azure account env show AzureChinaCloud
+info:    Executing command account env show
+Environment name: AzureChinaCloud
+data:    Environment publishingProfile  http://go.microsoft.com/fwlink/?LinkId=2544
+data:    Environment portal  http://go.microsoft.com/fwlink/?LinkId=2544
+info:    account env show command OK
+```
 
 **account env add [options] [environment]**
 
@@ -189,7 +210,6 @@ publishsettings 文件可以包含有关多个订阅的详细信息（即，订�
 下图显示了如何在 Azure 云服务的生产部署环境中托管经典 Azure 虚拟机。
 
 ![Azure 技术图表](./media/virtual-machines-command-line-tools/architecturediagram.jpg)  
-
 
 **create-new** 在 Blob 存储中创建驱动器（即，图中的 e:\\）；**attach** 会将已创建但未附加的磁盘附加到虚拟机。
 
@@ -237,107 +257,122 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 **-b, --subnet-names** 指定要分配虚拟机的子网名称。
 
-
 在此示例中，MSFT\_\_Win2K8R2SP1-120514-1520-141205-01-zh-cn-30GB 是该平台提供的映像。有关操作系统映像的详细信息，请参阅 VM 映像列表。
 
-    ~$ azure vm create my-vm-name MSFT__Windows-Server-2008-R2-SP1.11-29-2011 username --location "China East" -r
-    info:   Executing command vm create
-    Enter VM 'my-vm-name' password: ************
-    info:   vm create command OK
+```
+~$ azure vm create my-vm-name MSFT__Windows-Server-2008-R2-SP1.11-29-2011 username --location "China East" -r
+info:   Executing command vm create
+Enter VM 'my-vm-name' password: ************
+info:   vm create command OK
+```
 
 **vm create-from &lt;dns-name> &lt;role-file>**
 
 此命令从 JSON 角色文件创建 Azure 虚拟机。
 
-    ~$ azure vm create-from my-vm example.json
-    info:   OK
+```
+~$ azure vm create-from my-vm example.json
+info:   OK
+```
 
 **vm list [options]**
 
 此命令列出 Azure 虚拟机。--json 选项指定以原始 JSON 格式返回结果。
 
-	~$ azure vm list
-	info:   Executing command vm list
-	data:    Name     	Status              Location  	DNS Name              	IP Address
-	data:    -------  	------------------  --------  	--------------------  	----------
-	data:    my-vm-name	ReadyRole			China North	my-vm.chinacloudapp.cn
-	info:    vm list command OK
-	info:   vm list command OK
+```
+~$ azure vm list
+info:   Executing command vm list
+data:    Name     	Status              Location  	DNS Name              	IP Address
+data:    -------  	------------------  --------  	--------------------  	----------
+data:    my-vm-name	ReadyRole			China North	my-vm.chinacloudapp.cn
+info:    vm list command OK
+info:   vm list command OK
+```
 
 **vm location list [options]**
 
 此命令列出所有可用的 Azure 帐户位置。
 
-    ~$ azure vm location list
-    info:   Executing command vm location list
-    data:   Name                   Display Name
-    data:   ---------------------  ------------
-    data:   Azure Preview  China East
-    info:   account location list command OK
+```
+~$ azure vm location list
+info:   Executing command vm location list
+data:   Name                   Display Name
+data:   ---------------------  ------------
+data:   Azure Preview  China East
+info:   account location list command OK
+```
 
 **vm show [options] &lt;name>**
 
 此命令显示有关 Azure 虚拟机的详细信息。--json 选项指定以原始 JSON 格式返回结果。
 
-	~$ azure vm show my-vm
-	info:   Executing command vm show
-	data:   {
-	data:       InstanceSize: 'Small',
-	data:       InstanceStatus: 'ReadyRole',
-	data:       DataDisks: [],
-	data:       IPAddress: '10.26.192.206',
-	data:       DNSName: 'my-vm.chinacloudapp.cn',
-	data:       InstanceStateDetails: {},
-	data:       VMName: 'my-vm',
-	data:       Network: {
-	data:           Endpoints: [
-	data:               {
-	data:                   Protocol: 'tcp',
-	data:                   Vip: '65.52.250.250',
-	data:                   Port: '63238' ,
-	data:                   LocalPort: '3389',
-	data:                   Name: 'RemoteDesktop'
-	data:               }
-	data:           ]
-	data:       },
-	data:       Image: '55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-201502.01-zh.cn-127GB.vhd',
-	data:       OSVersion: 'WA-GUEST-OS-1.18_201203-01'
-	data:   }
-	info:   vm show command OK
+```
+~$ azure vm show my-vm
+info:   Executing command vm show
+data:   {
+data:       InstanceSize: 'Small',
+data:       InstanceStatus: 'ReadyRole',
+data:       DataDisks: [],
+data:       IPAddress: '10.26.192.206',
+data:       DNSName: 'my-vm.chinacloudapp.cn',
+data:       InstanceStateDetails: {},
+data:       VMName: 'my-vm',
+data:       Network: {
+data:           Endpoints: [
+data:               {
+data:                   Protocol: 'tcp',
+data:                   Vip: '65.52.250.250',
+data:                   Port: '63238' ,
+data:                   LocalPort: '3389',
+data:                   Name: 'RemoteDesktop'
+data:               }
+data:           ]
+data:       },
+data:       Image: '55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-201502.01-zh.cn-127GB.vhd',
+data:       OSVersion: 'WA-GUEST-OS-1.18_201203-01'
+data:   }
+info:   vm show command OK
+```
 
 **vm delete [options] &lt;name>**
 
 此命令删除 Azure 虚拟机。默认情况下，此命令不删除从中创建操作系统磁盘和数据磁盘的 Azure Blob。若要删除该 Blob 以及作为其基础的虚拟机，请指定 -b 选项。
 
-    ~$ azure vm delete my-vm
-    info:   Executing command vm delete
-    info:   vm delete command OK
+```
+~$ azure vm delete my-vm
+info:   Executing command vm delete
+info:   vm delete command OK
+```
 
 **vm start [options] &lt;name>**
 
 此命令启动 Azure 虚拟机。
 
-    ~$ azure vm start my-vm
-    info:   Executing command vm start
-    info:   vm start command OK
+```
+~$ azure vm start my-vm
+info:   Executing command vm start
+info:   vm start command OK
+```
 
 **vm restart [options] &lt;name>**
 
 此命令重新启动 Azure 虚拟机。
 
-    ~$ azure vm restart my-vm
-    info:   Executing command vm restart
-    info:   vm restart command OK
+```
+~$ azure vm restart my-vm
+info:   Executing command vm restart
+info:   vm restart command OK
+```
 
 **vm shutdown [options] &lt;name>**
 
 此命令关闭 Azure 虚拟机。可以使用 -p 选项指定在关闭时不释放计算资源。
 
-	
-	~$ azure vm shutdown my-vm
-	info:   Executing command vm shutdown
-	info:   vm shutdown command OK  
-	
+```
+~$ azure vm shutdown my-vm
+info:   Executing command vm shutdown
+info:   vm shutdown command OK  
+```
 
 **vm capture &lt;vm-name> &lt;target-image-name>**
 
@@ -345,21 +380,25 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 只有当虚拟机状态为**已停止**时，才能捕获虚拟机映像。请关闭虚拟机，然后再继续操作。
 
-    ~$ azure.cmd vm capture my-vm mycaptureimagename --delete
-    info:   Executing command vm capture
-    + Fetching VMs
-    + Capturing VM
-    info:   vm capture command OK
+```
+~$ azure.cmd vm capture my-vm mycaptureimagename --delete
+info:   Executing command vm capture
++ Fetching VMs
++ Capturing VM
+info:   vm capture command OK
+```
 
 **vm export [options] &lt;vm-name> &lt;file-path>**
 
 此命令将一个 Azure 虚拟机映像导出到文件
 
-    ~$ azure vm export "myvm" "C:\"
-    info:    Executing command vm export
-    + Getting virtual machines
-    + Exporting the VM
-    info:   vm export command OK
+```
+~$ azure vm export "myvm" "C:\"
+info:    Executing command vm export
++ Getting virtual machines
++ Exporting the VM
+info:   vm export command OK
+```
 
 ## <a name="Commands_to_manage_your_Azure_virtual_machine_endpoints"></a>用于管理 Azure 虚拟机终结点的命令
 下图显示了多个经典虚拟机实例的典型部署的体系结构。在本示例中，端口 3389 在每台虚拟机上均为打开状态（用于进行 RDP 访问）。负载均衡器用于将流量路由到虚拟机的每台虚拟机上还有一个内部 IP 地址（例如，168.55.11.1）。此内部 IP 地址也可用于虚拟机之间的通信。
@@ -372,13 +411,15 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 此命令创建虚拟机终结点。还可以使用 -u 或 --enable-direct-server-return 来指定是否在此终结点上启用直接服务器返回，默认情况下为禁用。
 
-    ~$ azure vm endpoint create my-vm 8888 8888
-    azure vm endpoint create my-vm 8888 8888
-    info:   Executing command vm endpoint create
-    + Fetching VM
-    + Reading network configuration
-    + Updating network configuration
-    info:   vm endpoint create command OK
+```
+~$ azure vm endpoint create my-vm 8888 8888
+azure vm endpoint create my-vm 8888 8888
+info:   Executing command vm endpoint create
++ Fetching VM
++ Reading network configuration
++ Updating network configuration
+info:   vm endpoint create command OK
+```
 
 **vm endpoint create-multiple [options] &lt;vm-name> &lt;lb-port>[:&lt;vm-port>[:&lt;protocol>[:&lt;enable-direct-server-return>[:&lt;lb-set-name>[:&lt;probe-protocol>[:&lt;probe-port>[:&lt;probe-path>[:&lt;internal-lb-name>]]]]]]]] {1-*}**
 
@@ -388,57 +429,65 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 此命令删除虚拟机终结点。
 
-    ~$ azure vm endpoint delete my-vm http
-    azure vm endpoint delete my-vm http
-    info:   Executing command vm endpoint delete
-    + Fetching VM
-    + Reading network configuration
-    + Updating network configuration
-    info:   vm endpoint delete command OK
+```
+~$ azure vm endpoint delete my-vm http
+azure vm endpoint delete my-vm http
+info:   Executing command vm endpoint delete
++ Fetching VM
++ Reading network configuration
++ Updating network configuration
+info:   vm endpoint delete command OK
+```
 
 **vm endpoint list &lt;vm-name>**
 
 此命令列出所有虚拟机终结点。--json 选项指定以原始 JSON 格式返回结果。
 
-    ~$ azure vm endpoint list my-linux-vm
-    data:   Name  External Port  Local Port
-    data:   ----  -------------  ----------
-    data:   ssh   22             22
+```
+~$ azure vm endpoint list my-linux-vm
+data:   Name  External Port  Local Port
+data:   ----  -------------  ----------
+data:   ssh   22             22
+```
 
 **vm endpoint update [options] &lt;vm-name> &lt;endpoint-name>**
 
 此命令使用这些选项将 VM 终结点更新为新值。
 
-    -n, --endpoint-name <name>          the new endpoint name
-    -lo, --lb-port <port>                the new load balancer port
-    -t, --vm-port <port>                the new local port
-    -o, --endpoint-protocol <protocol>  the new transport layer protocol for port (tcp or udp)
+```
+-n, --endpoint-name <name>          the new endpoint name
+-lo, --lb-port <port>                the new load balancer port
+-t, --vm-port <port>                the new local port
+-o, --endpoint-protocol <protocol>  the new transport layer protocol for port (tcp or udp)
+```
 
 **vm endpoint show [options] &lt;vm-name>**
 
 此命令显示 VM 上终结点的详细信息
 
-    ~$ azure vm endpoint show "mycouchvm"
-    info:    Executing command vm endpoint show
-    + Getting virtual machines
-    data:    Network Endpoints 0 LoadBalancedEndpointSetName "CouchDB_EP-5984"
-    data:    Network Endpoints 0 LocalPort "5984"
-    data:    Network Endpoints 0 Name "CouchDB_EP"
-    data:    Network Endpoints 0 Port "5984"
-    data:    Network Endpoints 0 Protocol "tcp"
-    data:    Network Endpoints 0 Vip "168.61.9.97"
-    data:    Network Endpoints 1 LoadBalancedEndpointSetName "CouchEP_2-2020"
-    data:    Network Endpoints 1 LocalPort "2020"
-    data:    Network Endpoints 1 Name "CouchEP_2"
-    data:    Network Endpoints 1 Port "2020"
-    data:    Network Endpoints 1 Protocol "tcp"
-    data:    Network Endpoints 1 Vip "168.61.9.97"
-    data:    Network Endpoints 2 LocalPort "3389"
-    data:    Network Endpoints 2 Name "RemoteDesktop"
-    data:    Network Endpoints 2 Port "3389"
-    data:    Network Endpoints 2 Protocol "tcp"
-    data:    Network Endpoints 2 Vip "168.61.9.97"
-    info:    vm endpoint show command OK
+```
+~$ azure vm endpoint show "mycouchvm"
+info:    Executing command vm endpoint show
++ Getting virtual machines
+data:    Network Endpoints 0 LoadBalancedEndpointSetName "CouchDB_EP-5984"
+data:    Network Endpoints 0 LocalPort "5984"
+data:    Network Endpoints 0 Name "CouchDB_EP"
+data:    Network Endpoints 0 Port "5984"
+data:    Network Endpoints 0 Protocol "tcp"
+data:    Network Endpoints 0 Vip "168.61.9.97"
+data:    Network Endpoints 1 LoadBalancedEndpointSetName "CouchEP_2-2020"
+data:    Network Endpoints 1 LocalPort "2020"
+data:    Network Endpoints 1 Name "CouchEP_2"
+data:    Network Endpoints 1 Port "2020"
+data:    Network Endpoints 1 Protocol "tcp"
+data:    Network Endpoints 1 Vip "168.61.9.97"
+data:    Network Endpoints 2 LocalPort "3389"
+data:    Network Endpoints 2 Name "RemoteDesktop"
+data:    Network Endpoints 2 Port "3389"
+data:    Network Endpoints 2 Protocol "tcp"
+data:    Network Endpoints 2 Vip "168.61.9.97"
+info:    vm endpoint show command OK
+```
 
 ##<a name="Commands_to_manage_your_Azure_virtual_machine_images"></a>用于管理 Azure 虚拟机映像的命令
 
@@ -448,70 +497,78 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 此命令获取虚拟机映像的列表。有三种类型的映像：Microsoft 创建的映像（以“MSFT”作为前缀）、第三方创建的映像（以供应商的名称作为前缀）以及用户创建的映像。若要创建映像，可以捕获现有虚拟机或从上载到 Blob 存储的自定义 .vhd 创建映像。有关使用自定义 .vhd 的更多信息，请参见 VM 映像创建。--json 选项指定以原始 JSON 格式返回结果。
 
-	~$ azure vm image list
-	data:   Name                                                                   Category   OS
-	data:   ---------------------------------------------------------------------  ---------  -------
-	data:   CANONICAL__Canonical-Ubuntu-12-04-20120519-2012-05-19-zh-cn-30GB.vhd   Canonical  Linux
-	data:   MSFT__Windows-Server-2008-R2-SP1.11-29-2011                            Microsoft  Windows
-	data:   MSFT__Windows-Server-2008-R2-SP1-with-SQL-Server-2012-Eval.11-29-2011  Microsoft  Windows
-	data:   MSFT__Windows-Server-8-Beta.zh-cn.30GB.2012-03-22                      Microsoft  Windows
-	data:   MSFT__Windows-Server-8-Beta.2-17-2012                                  Microsoft  Windows
-	data:   MSFT__Windows-Server-2008-R2-SP1.zh-cn.30GB.2012-3-22                  Microsoft  Windows
-	data:   OpenLogic__OpenLogic-CentOS-62-20120509-zh-cn-30GB.vhd                 OpenLogic  Linux
-	data:   SUSE__SUSE-Linux-Enterprise-Server-11SP2-20120521-zh-cn-30GB.vhd       SUSE       Linux
-	data:   SUSE__OpenSUSE64121-03192012-zh-cn-15GB.vhd                            SUSE       Linux
-	data:   WIN2K8-R2-WINRM                                                        User       Windows
-	info:   vm image list command OK
+```
+~$ azure vm image list
+data:   Name                                                                   Category   OS
+data:   ---------------------------------------------------------------------  ---------  -------
+data:   CANONICAL__Canonical-Ubuntu-12-04-20120519-2012-05-19-zh-cn-30GB.vhd   Canonical  Linux
+data:   MSFT__Windows-Server-2008-R2-SP1.11-29-2011                            Microsoft  Windows
+data:   MSFT__Windows-Server-2008-R2-SP1-with-SQL-Server-2012-Eval.11-29-2011  Microsoft  Windows
+data:   MSFT__Windows-Server-8-Beta.zh-cn.30GB.2012-03-22                      Microsoft  Windows
+data:   MSFT__Windows-Server-8-Beta.2-17-2012                                  Microsoft  Windows
+data:   MSFT__Windows-Server-2008-R2-SP1.zh-cn.30GB.2012-3-22                  Microsoft  Windows
+data:   OpenLogic__OpenLogic-CentOS-62-20120509-zh-cn-30GB.vhd                 OpenLogic  Linux
+data:   SUSE__SUSE-Linux-Enterprise-Server-11SP2-20120521-zh-cn-30GB.vhd       SUSE       Linux
+data:   SUSE__OpenSUSE64121-03192012-zh-cn-15GB.vhd                            SUSE       Linux
+data:   WIN2K8-R2-WINRM                                                        User       Windows
+info:   vm image list command OK
+```
 
 **vm image show [options] &lt;name>**
 
 此命令显示虚拟机映像的详细信息。
 
-	~$ azure vm image show 55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-201502.01-zh.cn-127GB.vhd 
-	+ Fetching VM image
-	data:    category "Public"
-	data:    label "Windows Server 2012 R2 Datacenter, February 2015 (zh-cn)"
-	data:    location "China East;China North"
-	data:    logicalSizeInGB 128
-	data:    name "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-201502.01-zh.cn-127GB.vhd"
-	data:    operatingSystemType "Windows"
-	data:    description "At the heart of the Microsoft Cloud OS vision, Windows Server 2012 R2 brings Microsoft's experience delivering global-scale cloud services into your infrastructure. It offers enterprise-class performance, flexibility for your applications and excellent economics for your datacenter and hybrid cloud environment. This image includes Windows Server 2012 R2 Update."
-	data:    imageFamily "Windows Server 2012 R2 Datacenter (zh-cn)"
-	data:    publishedDate 2015-02-11T08:00:00.000Z
-	data:    isPremium false
-	data:    iconUri "WindowsServer2012R2_100.png"
-	data:    publisherName "Microsoft"
-	data:    smallIconUri "WindowsServer2012R2_45.png"
-	info:    vm image show command OK
+```
+~$ azure vm image show 55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-201502.01-zh.cn-127GB.vhd 
++ Fetching VM image
+data:    category "Public"
+data:    label "Windows Server 2012 R2 Datacenter, February 2015 (zh-cn)"
+data:    location "China East;China North"
+data:    logicalSizeInGB 128
+data:    name "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-201502.01-zh.cn-127GB.vhd"
+data:    operatingSystemType "Windows"
+data:    description "At the heart of the Microsoft Cloud OS vision, Windows Server 2012 R2 brings Microsoft's experience delivering global-scale cloud services into your infrastructure. It offers enterprise-class performance, flexibility for your applications and excellent economics for your datacenter and hybrid cloud environment. This image includes Windows Server 2012 R2 Update."
+data:    imageFamily "Windows Server 2012 R2 Datacenter (zh-cn)"
+data:    publishedDate 2015-02-11T08:00:00.000Z
+data:    isPremium false
+data:    iconUri "WindowsServer2012R2_100.png"
+data:    publisherName "Microsoft"
+data:    smallIconUri "WindowsServer2012R2_45.png"
+info:    vm image show command OK
+```
 
 **vm image delete [options] &lt;name>**
 
 此命令删除虚拟机映像。
 
-    ~$ azure vm image delete my-vm-image
-    info:   Executing command vm image delete
-    info:   VM image deleted: my-vm-image
-    info:   vm image delete command OK
+```
+~$ azure vm image delete my-vm-image
+info:   Executing command vm image delete
+info:   VM image deleted: my-vm-image
+info:   vm image delete command OK
+```
 
 **vm image create &lt;name> [source-path]**
 
 此命令创建虚拟机映像。自定义 .vhd 文件将上传到 Blob 存储，然后从该位置创建虚拟机映像。然后可使用此虚拟机映像创建虚拟机。Location 和 OS 参数是必需的。
 
-> [AZURE.NOTE]
+> [!NOTE]
 此命令目前仅支持上载固定的 .vhd 文件。若要上载动态 .vhd 文件，请使用[适用于 Go 的 Azure VHD 实用程序](https://github.com/Microsoft/azure-vhd-utils-for-go)。
 > 
 > 
 
 某些系统会施加每进程文件描述符限制。如果超出此限制，工具将显示文件描述符限制错误。可以使用 -p &lt;number> 参数再次运行此命令，以减小最大并行上传数。默认的最大并行上传数为 96。
 
-    ~$ azure vm image create mytestimage ./Sample.vhd -o windows -l "China North"
-    info:   Executing command vm image create
-    + Retrieving storage accounts
-    info:   VHD size : 13 MB
-    info:   Uploading 13312.5 KB
-    Requested:100.0% Completed:100.0% Running: 105 Time:    8s Speed:  1721 KB/s
-    info:   http://myaccount.blob.core.chinacloudapi.cn/vm-images/Sample.vhd is uploaded successfully
-    info:   vm image create command OK
+```
+~$ azure vm image create mytestimage ./Sample.vhd -o windows -l "China North"
+info:   Executing command vm image create
++ Retrieving storage accounts
+info:   VHD size : 13 MB
+info:   Uploading 13312.5 KB
+Requested:100.0% Completed:100.0% Running: 105 Time:    8s Speed:  1721 KB/s
+info:   http://myaccount.blob.core.chinacloudapi.cn/vm-images/Sample.vhd is uploaded successfully
+info:   vm image create command OK
+```
 
 ##<a name="Commands_to_manage_your_Azure_virtual_machine_data_disks" id="commands-to-manage-your-azure-virtual-machine-data-disks"></a>用于管理 Azure 虚拟机数据磁盘的命令
 
@@ -521,7 +578,7 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 当使用 azure vm disk detach 命令分离数据磁盘时，请使用 &lt;lun&gt; 参数指明要分离的磁盘。
 
-> [AZURE.NOTE]
+> [!NOTE]
 应始终按相反的顺序分离数据磁盘，即从已分配的编号最高的 LUN 开始。Linux SCSI 层不支持在仍附加有编号较高的 LUN 时分离编号较低的 LUN。例如，不应在仍附加有 LUN 1 的情况下分离 LUN 0。
 > 
 > 
@@ -530,49 +587,57 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 此命令显示有关 Azure 磁盘的详细信息。
 
-	~$ azure vm disk show anucentos-anucentos-0-20120524070008
-	info:   Executing command vm disk show
-	data:   AttachedTo DeploymentName "mycentos"
-	data:   AttachedTo HostedServiceName "myanucentos"
-	data:   AttachedTo RoleName "myanucentos"
-	data:   OS "Linux"
-	data:   Location "China North"
-	data:   LogicalDiskSizeInGB "30"
-	data:   MediaLink "http://mystorageaccount.blob.core.chinacloudapi.cn/vhd-store/mycentos-cb39b8223b01f95c.vhd"
-	data:   Name "mycentos-mycentos-0-20120524070008"
-	data:   SourceImageName "OpenLogic__OpenLogic-CentOS-62-20120509-zh-cn-30GB.vhd"
-	info:   vm disk show command OK
+```
+~$ azure vm disk show anucentos-anucentos-0-20120524070008
+info:   Executing command vm disk show
+data:   AttachedTo DeploymentName "mycentos"
+data:   AttachedTo HostedServiceName "myanucentos"
+data:   AttachedTo RoleName "myanucentos"
+data:   OS "Linux"
+data:   Location "China North"
+data:   LogicalDiskSizeInGB "30"
+data:   MediaLink "http://mystorageaccount.blob.core.chinacloudapi.cn/vhd-store/mycentos-cb39b8223b01f95c.vhd"
+data:   Name "mycentos-mycentos-0-20120524070008"
+data:   SourceImageName "OpenLogic__OpenLogic-CentOS-62-20120509-zh-cn-30GB.vhd"
+info:   vm disk show command OK
+```
 
 **vm disk list [options] [vm-name]**
 
 此命令列出 Azure 磁盘，或者附加到指定虚拟机的磁盘。如果运行此命令时使用了虚拟机名称参数，将返回附加到该虚拟机的所有磁盘。Lun 1 是随虚拟机创建的，而列出的任何其他磁盘都是单独附加的。
 
-    ~$ azure vm disk list mycentos
-    info:   Executing command vm disk list
-    data:   Lun  Size(GB)  Blob-Name
-    data:   ---  --------  --------------------------------
-    data:   1    30        mycentos-cb39b8223b01f95c.vhd
-    data:   2    10        mycentos-e3f0d717950bb78d.vhd
-    info:   vm disk list command OK
+```
+~$ azure vm disk list mycentos
+info:   Executing command vm disk list
+data:   Lun  Size(GB)  Blob-Name
+data:   ---  --------  --------------------------------
+data:   1    30        mycentos-cb39b8223b01f95c.vhd
+data:   2    10        mycentos-e3f0d717950bb78d.vhd
+info:   vm disk list command OK
+```
 
 在不使用虚拟机名称参数的情况下执行此命令将返回所有磁盘。
 
-    ~$ azure vm disk list
-    data:   Name                                        OS
-    data:   ------------------------------------------  -------
-    data:   mycentos-mycentos-0-20120524070008          Linux
-    data:   mycentos-mycentos-2-20120525055052
-    data:   mywindows-winvm-20120522223119              Windows
-    info:   vm disk list command OK
+```
+~$ azure vm disk list
+data:   Name                                        OS
+data:   ------------------------------------------  -------
+data:   mycentos-mycentos-0-20120524070008          Linux
+data:   mycentos-mycentos-2-20120525055052
+data:   mywindows-winvm-20120522223119              Windows
+info:   vm disk list command OK
+```
 
 **vm disk delete [options] &lt;name>**
 
 此命令从个人存储库中删除 Azure 磁盘。在删除磁盘之前必须从虚拟机中分离该磁盘。
 
-    ~$ azure vm disk delete mycentos-mycentos-2-20120525055052
-    info:   Executing command vm disk delete
-    info:   Disk deleted: mycentos-mycentos-2-20120525055052
-    info:   vm disk delete command OK
+```
+~$ azure vm disk delete mycentos-mycentos-2-20120525055052
+info:   Executing command vm disk delete
+info:   Disk deleted: mycentos-mycentos-2-20120525055052
+info:   vm disk delete command OK
+```
 
 **vm disk create &lt;name> [source-path]**
 
@@ -580,46 +645,56 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 某些系统会施加每进程文件描述符限制。如果超出此限制，工具将显示文件描述符限制错误。可以使用 -p &lt;number> 参数再次运行此命令，以减小最大并行上传数。默认的最大并行上传数为 96。
 
-	~$ azure vm disk create my-data-disk ~/test.vhd --location "China North"
-	info:   Executing command vm disk create
-	info:   VHD size : 10 MB
-	info:   Uploading 10240.5 KB
-	Requested:100.0% Completed:100.0% Running:  81 Time:   11s Speed:   952 KB/s
-	info:   http://account.blob.core.chinacloudapi.cn/disks/test.vhd is uploaded successfully
-	info:   vm disk create command OK
+```
+~$ azure vm disk create my-data-disk ~/test.vhd --location "China North"
+info:   Executing command vm disk create
+info:   VHD size : 10 MB
+info:   Uploading 10240.5 KB
+Requested:100.0% Completed:100.0% Running:  81 Time:   11s Speed:   952 KB/s
+info:   http://account.blob.core.chinacloudapi.cn/disks/test.vhd is uploaded successfully
+info:   vm disk create command OK
+```
 
 **vm disk upload [options] &lt;source-path> &lt;blob-url> &lt;storage-account-key>**
 
 此命令用来上传 vm 磁盘
 
-    ~$ azure vm disk upload "http://sourcestorage.blob.core.chinacloudapi.cn/vhds/sample.vhd" "http://destinationstorage.blob.core.chinacloudapi.cn/vhds/sample.vhd" "DESTINATIONSTORAGEACCOUNTKEY"
-    info:   Executing command vm disk upload
-    info:   Uploading 12351.5 KB
-    info:   vm disk upload command OK
+```
+~$ azure vm disk upload "http://sourcestorage.blob.core.chinacloudapi.cn/vhds/sample.vhd" "http://destinationstorage.blob.core.chinacloudapi.cn/vhds/sample.vhd" "DESTINATIONSTORAGEACCOUNTKEY"
+info:   Executing command vm disk upload
+info:   Uploading 12351.5 KB
+info:   vm disk upload command OK
+```
 
 **vm disk attach &lt;vm-name> &lt;disk-image-name>**
 
 此命令将 Blob 存储中的现有磁盘附加到云服务中部署的现有虚拟机。
 
-    ~$ azure vm disk attach my-vm my-vm-my-vm-2-201242418259
-    info:   Executing command vm disk attach
-    info:   vm disk attach command OK
+```
+~$ azure vm disk attach my-vm my-vm-my-vm-2-201242418259
+info:   Executing command vm disk attach
+info:   vm disk attach command OK
+```
 
 **vm disk attach-new &lt;vm-name> &lt;size-in-gb> [blob-url]**
 
 此命令将数据磁盘附加到 Azure 虚拟机。在此示例中，20 是要附加的新磁盘的大小（以 GB 为单位）。可以选择使用 Blob URL 作为显式指定要创建的目标 Blob 的最后一个参数。如果不指定 Blob URL，将自动生成一个 Blob 对象。
 
-	~$ azure vm disk attach-new nick-test36 20 http://nghinazz.blob.core.chinacloudapi.cn/vhds/vmdisk1.vhd
-	info:   Executing command vm disk attach-new
-	info:   vm disk attach-new command OK  
+```
+~$ azure vm disk attach-new nick-test36 20 http://nghinazz.blob.core.chinacloudapi.cn/vhds/vmdisk1.vhd
+info:   Executing command vm disk attach-new
+info:   vm disk attach-new command OK  
+```
 
 **vm disk detach &lt;vm-name> &lt;lun>**
 
 此命令将数据磁盘与 Azure 虚拟机分离。&lt;lun> 标识要分离的磁盘。要在分离某个磁盘之前获取与该磁盘关联的磁盘的列表，请使用 vm disk-list &lt;vm-name>。
 
-    ~$ azure vm disk detach my-vm 2
-    info:   Executing command vm disk detach
-    info:   vm disk detach command OK
+```
+~$ azure vm disk detach my-vm 2
+info:   Executing command vm disk detach
+info:   vm disk detach command OK
+```
 
 ##<a name="Commands_to_manage_your_Azure_cloud_services"></a>用于管理 Azure 云服务的命令
 
@@ -629,55 +704,62 @@ Azure 云服务是托管在 Web 角色和辅助角色上的应用程序和服务
 
 此命令创建云服务
 
-	~$ azure service create newservicemsopentech
-	info:    Executing command service create
-	+ Getting locations
-	help:    Location:
-	  1) China East
-	  2) China North
-	  : 2
-	+ Creating cloud service
-	data:    Cloud service name newservicemsopentech
-	info:    service create command OK
+```
+~$ azure service create newservicemsopentech
+info:    Executing command service create
++ Getting locations
+help:    Location:
+  1) China East
+  2) China North
+  : 2
++ Creating cloud service
+data:    Cloud service name newservicemsopentech
+info:    service create command OK
+```
 
 **service show [options] &lt;serviceName>**
 
 此命令显示 Azure 云服务的详细信息
 
-    ~$ azure service show newservicemsopentech
-    info:    Executing command service show
-    + Getting cloud service
-    data:    Name newservicemsopentech
-    data:    Url https://management.core.chinacloudapi.cn/9e672699-1055-41ae-9c36-e85152f2e352/services/hostedservices/newservicemsopentech
-    data:    Properties location China North
-    data:    Properties label newservicemsopentech
-    data:    Properties status Created
-    data:    Properties dateCreated
-    data:    Properties dateLastModified
-    info:    service show command OK
+```
+~$ azure service show newservicemsopentech
+info:    Executing command service show
++ Getting cloud service
+data:    Name newservicemsopentech
+data:    Url https://management.core.chinacloudapi.cn/9e672699-1055-41ae-9c36-e85152f2e352/services/hostedservices/newservicemsopentech
+data:    Properties location China North
+data:    Properties label newservicemsopentech
+data:    Properties status Created
+data:    Properties dateCreated
+data:    Properties dateLastModified
+info:    service show command OK
+```
 
 **service list [options]**
 
 此命令列出 Azure 云服务。
 
-    ~$ azure service list
-    info:   Executing command service list
-    data:   Name         Status
-    data:   -----------  -------
-    data:   service1     Created
-    data:   service2     Created
-    info:   service list command OK
+```
+~$ azure service list
+info:   Executing command service list
+data:   Name         Status
+data:   -----------  -------
+data:   service1     Created
+data:   service2     Created
+info:   service list command OK
+```
 
 **service delete [options] &lt;name>**
 
 此命令删除 Azure 云服务。
 
-    ~$ azure service delete myservice
-    info:   Executing command service delete myservice
-    info:   cloud-service delete command OK
+```
+~$ azure service delete myservice
+info:   Executing command service delete myservice
+info:   cloud-service delete command OK
+```
 
 若要强制删除，请使用 `-q` 参数。
-
 
 ##<a name="Commands_to_manage_your_Azure_certificates"></a>用于管理 Azure 证书的命令
 
@@ -687,35 +769,40 @@ Azure 服务证书是连接到 Azure 帐户的 SSL 证书。有关 Azure 证书�
 
 此命令列出 Azure 证书。
 
-    ~$ azure service cert list
-    info:   Executing command service cert list
-    + Fetching cloud services
-    + Fetching certificates
-    data:   Service   Thumbprint                                Algorithm
-    data:   --------  ----------------------------------------  ---------
-    data:   myservice  262DBF95B5E61375FA27F1E74AC7D9EAE842916C  sha1
-    info:   service cert list command OK
+```
+~$ azure service cert list
+info:   Executing command service cert list
++ Fetching cloud services
++ Fetching certificates
+data:   Service   Thumbprint                                Algorithm
+data:   --------  ----------------------------------------  ---------
+data:   myservice  262DBF95B5E61375FA27F1E74AC7D9EAE842916C  sha1
+info:   service cert list command OK
+```
 
 **service cert create &lt;dns-prefix> &lt;file> [password]**
 
 此命令上传证书。将没有密码保护的证书的密码提示保留为空。
 
-    ~$ azure service cert create nghinazz ~/publishSet.pfx
-    info:   Executing command service cert create
-    Cert password:
-    + Creating certificate
-    info:   service cert create command OK
+```
+~$ azure service cert create nghinazz ~/publishSet.pfx
+info:   Executing command service cert create
+Cert password:
++ Creating certificate
+info:   service cert create command OK
+```
 
 **service cert delete [options] &lt;thumbprint>**
 
 此命令删除证书。
 
-    ~$ azure service cert delete 262DBF95B5E61375FA27F1E74AC7D9EAE842916C
-    info:   Executing command service cert delete
-    + Deleting certificate
-    info:   nghinazz : cert deleted
-    info:   service cert delete command OK
-
+```
+~$ azure service cert delete 262DBF95B5E61375FA27F1E74AC7D9EAE842916C
+info:   Executing command service cert delete
++ Deleting certificate
+info:   nghinazz : cert deleted
+info:   service cert delete command OK
+```
 
 ##<a name="Commands_to_manage_your_web_sites"></a>用于管理网站的命令
 
@@ -725,50 +812,58 @@ Azure Web 应用是可通过 URI 访问的 Web 配置。Web 应用在虚拟机�
 
 此命令列出你的 Web 应用。
 
-    ~$ azure site list
-    info:   Executing command site list
-    data:   Name            State    Host names
-    data:   --------------  -------  --------------------------------------------------
-    data:   mongosite       Running  mongosite.antdf0.antares.chinacloudapi.cn
-    data:   myphpsite       Running  myphpsite.antdf0.antares.chinacloudapi.cn
-    data:   mydrupalsite36  Running  mydrupalsite36.antdf0.antares.chinacloudapi.cn
-    info:   site list command OK
+```
+~$ azure site list
+info:   Executing command site list
+data:   Name            State    Host names
+data:   --------------  -------  --------------------------------------------------
+data:   mongosite       Running  mongosite.antdf0.antares.chinacloudapi.cn
+data:   myphpsite       Running  myphpsite.antdf0.antares.chinacloudapi.cn
+data:   mydrupalsite36  Running  mydrupalsite36.antdf0.antares.chinacloudapi.cn
+info:   site list command OK
+```
 
 **site set [options] [name]**
 
 此命令设置 Web 应用 [名称] 的配置选项
 
-    ~$ azure site set
-    info:    Executing command site set
-    Web site name: mydemosite
-    + Getting sites
-    + Updating site config information
-    info:    site set command OK
+```
+~$ azure site set
+info:    Executing command site set
+Web site name: mydemosite
++ Getting sites
++ Updating site config information
+info:    site set command OK
+```
 
 **site deploymentscript [options]**
 
 此命令生成一个自定义部署脚本
 
-    ~$ azure site deploymentscript --node
-    info:    Executing command site deploymentscript
-    info:    Generating deployment script for node.js Web Site
-    info:    Generated deployment script files
-    info:    site deploymentscript command OK
+```
+~$ azure site deploymentscript --node
+info:    Executing command site deploymentscript
+info:    Generating deployment script for node.js Web Site
+info:    Generated deployment script files
+info:    site deploymentscript command OK
+```
 
 **site create [options] [name]**
 
 此命令创建 Web 应用和本地目录。
 
-    ~$ azure site create mysite
-    info:   Executing command site create
-    info:   Using location northeuropewebspace
-    info:   Creating a new web site
-    info:   Created web site at  mysite.antdf0.antares.chinacloudapi.cn
-    info:   Initializing repository
-    info:   Repository initialized
-    info:   site create command OK
+```
+~$ azure site create mysite
+info:   Executing command site create
+info:   Using location northeuropewebspace
+info:   Creating a new web site
+info:   Created web site at  mysite.antdf0.antares.chinacloudapi.cn
+info:   Initializing repository
+info:   Repository initialized
+info:   site create command OK
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 站点名称必须是唯一的。无法创建与现有站点具有相同 DNS 名称的站点。
 > 
 > 
@@ -777,50 +872,56 @@ Azure Web 应用是可通过 URI 访问的 Web 配置。Web 应用在虚拟机�
 
 此命令在浏览器中打开你的 Web 应用。
 
-    ~$ azure site browse mysite
-    info:   Executing command site browse
-    info:   Launching browser to http://mysite.antdf0.antares-test.windows-int.net
-    info:   site browse command OK
+```
+~$ azure site browse mysite
+info:   Executing command site browse
+info:   Launching browser to http://mysite.antdf0.antares-test.windows-int.net
+info:   site browse command OK
+```
 
 **site show [options] [name]**
 
 此命令显示 Web 应用的详细信息。
 
-    ~$ azure site show mysite
-    info:   Executing command site show
-    info:   Showing details for site
-    data:   Site AdminEnabled true
-    data:   Site HostNames mysite.antdf0.antares-test.windows-int.net
-    data:   Site Name mysite
-    data:   Site Owner 00060000814EDDEE
-    data:   Site RepositorySiteName mysite
-    data:   Site SelfLink https://s1.api.antdf0.antares.chinacloudapi.cn:454/subscriptions/444e62ff-4c5f-4116-a695-5c803ed584a5/webspaces/northeuropewebspace/sites/mysite
-    data:   Site State Running
-    data:   Site UsageState Normal
-    data:   Site WebSpace northeuropewebspace
-    data:   Config AppSettings
-    data:   Config ConnectionStrings
-    data:   Config DefaultDocuments 0=Default.htm, 1=Default.asp, 2=index.htm, 3=index.html, 4=iisstart.htm, 5=default.aspx, 6=index.php, 7=hostingstart.aspx
-    data:   Config DetailedErrorLoggingEnabled false
-    data:   Config HttpLoggingEnabled false
-    data:   Config Metadata
-    data:   Config NetFrameworkVersion v4.0
-    data:   Config NumberOfWorkers 1
-    data:   Config PhpVersion 5.3
-    data:   Config PublishingPassword rJ}[Er2v[Y]q16B6vTD]n$[C2z}Z.pvgLfRcLnAp%ax]xstiLny};o@vmMAote@d
-    data:   Config RequestTracingEnabled false
-    data:   Repository https://mysite.scm.antdf0.antares-test.windows-int.net/
-    info:   site show command OK
+```
+~$ azure site show mysite
+info:   Executing command site show
+info:   Showing details for site
+data:   Site AdminEnabled true
+data:   Site HostNames mysite.antdf0.antares-test.windows-int.net
+data:   Site Name mysite
+data:   Site Owner 00060000814EDDEE
+data:   Site RepositorySiteName mysite
+data:   Site SelfLink https://s1.api.antdf0.antares.chinacloudapi.cn:454/subscriptions/444e62ff-4c5f-4116-a695-5c803ed584a5/webspaces/northeuropewebspace/sites/mysite
+data:   Site State Running
+data:   Site UsageState Normal
+data:   Site WebSpace northeuropewebspace
+data:   Config AppSettings
+data:   Config ConnectionStrings
+data:   Config DefaultDocuments 0=Default.htm, 1=Default.asp, 2=index.htm, 3=index.html, 4=iisstart.htm, 5=default.aspx, 6=index.php, 7=hostingstart.aspx
+data:   Config DetailedErrorLoggingEnabled false
+data:   Config HttpLoggingEnabled false
+data:   Config Metadata
+data:   Config NetFrameworkVersion v4.0
+data:   Config NumberOfWorkers 1
+data:   Config PhpVersion 5.3
+data:   Config PublishingPassword rJ}[Er2v[Y]q16B6vTD]n$[C2z}Z.pvgLfRcLnAp%ax]xstiLny};o@vmMAote@d
+data:   Config RequestTracingEnabled false
+data:   Repository https://mysite.scm.antdf0.antares-test.windows-int.net/
+info:   site show command OK
+```
 
 **site delete [options] [name]**
 
 此命令删除 Web 应用。
 
-    ~$ azure site delete mysite
-    info:   Executing command site delete
-    info:   Deleting site mysite
-    info:   Site mysite has been deleted
-    info:   site delete command OK
+```
+~$ azure site delete mysite
+info:   Executing command site delete
+info:   Deleting site mysite
+info:   Site mysite has been deleted
+info:   site delete command OK
+```
 
  **site swap [options] [name]**
 
@@ -830,26 +931,29 @@ Azure Web 应用是可通过 URI 访问的 Web 配置。Web 应用在虚拟机�
 
 **-q** 或 **--quiet**：不提示确认。在自动化脚本中使用此选项。
 
-
 **site start [options] [name]**
 
 此命令启动 Web 应用。
 
-    ~$ azure site start mysite
-    info:   Executing command site start
-    info:   Starting site mysite
-    info:   Site mysite has been started
-    info:   site start command OK
+```
+~$ azure site start mysite
+info:   Executing command site start
+info:   Starting site mysite
+info:   Site mysite has been started
+info:   site start command OK
+```
 
 **site stop [options] [name]**
 
 此命令停止 Web 应用。
 
-    ~$ azure site stop mysite
-    info:   Executing command site stop
-    info:   Stopping site mysite
-    info:   Site mysite has been stopped
-    info:   site stop command OK
+```
+~$ azure site stop mysite
+info:   Executing command site stop
+info:   Stopping site mysite
+info:   Site mysite has been stopped
+info:   site stop command OK
+```
 
 **site restart [options] [name]**
 
@@ -863,83 +967,95 @@ Azure Web 应用是可通过 URI 访问的 Web 配置。Web 应用在虚拟机�
 
 此命令列出你的 Web 应用位置。
 
-	~$ azure site location list
-	info:    Executing command site location list
-	+ Getting locations
-	data:    Name
-	data:    ----------------
-	data:    China North
-	data:    China East
-	info:    site location list command OK
+```
+~$ azure site location list
+info:    Executing command site location list
++ Getting locations
+data:    Name
+data:    ----------------
+data:    China North
+data:    China East
+info:    site location list command OK
+```
 
 ### 用于管理 Web 应用应用程序设置的命令 <a id="Commands_to_manage_mobile_services"></a>
 **site appsetting list [options] [name]**
 
 此命令列出添加到 Web 应用的应用设置。
 
-    ~$ azure site appsetting list
-    info:    Executing command site appsetting list
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site config information
-    data:    Name  Value
-    data:    ----  -----
-    data:    test  value
-    info:    site appsetting list command OK
+```
+~$ azure site appsetting list
+info:    Executing command site appsetting list
+Web site name: mydemosite
++ Getting sites
++ Getting site config information
+data:    Name  Value
+data:    ----  -----
+data:    test  value
+info:    site appsetting list command OK
+```
 
 **site appsetting add [options] &lt;keyvaluepair> [name]**
 
 此命令将应用设置作为键值对添加到你的 Web 应用。
 
-    ~$ azure site appsetting add test=value
-    info:    Executing command site appsetting add
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site config information
-    + Updating site config information
-    info:    site appsetting add command OK
+```
+~$ azure site appsetting add test=value
+info:    Executing command site appsetting add
+Web site name: mydemosite
++ Getting sites
++ Getting site config information
++ Updating site config information
+info:    site appsetting add command OK
+```
 
 **site appsetting delete [options] &lt;key> [name]**
 
 此命令从 Web 应用中删除指定的应用设置。
 
-    ~$ azure site appsetting delete test
-    info:    Executing command site appsetting delete
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site config information
-    Delete application setting test? [y/n] y
-    + Updating site config information
-    info:    site appsetting delete command OK
+```
+~$ azure site appsetting delete test
+info:    Executing command site appsetting delete
+Web site name: mydemosite
++ Getting sites
++ Getting site config information
+Delete application setting test? [y/n] y
++ Updating site config information
+info:    site appsetting delete command OK
+```
 
 **site appsetting show [options] &lt;key> [name]**
 
 此命令显示指定应用程序设置的详细信息
 
-    ~$ azure site appsetting show test
-    info:    Executing command site appsetting show
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site config information
-    data:    Value:  value
-    info:    site appsetting show command OK
+```
+~$ azure site appsetting show test
+info:    Executing command site appsetting show
+Web site name: mydemosite
++ Getting sites
++ Getting site config information
+data:    Value:  value
+info:    site appsetting show command OK
+```
 
 ### 用于管理 Web 应用证书的命令
 **site cert list [options] [name]**
 
 此命令显示 Web 应用证书的列表。
 
-    ~$ azure site cert list
-    info:    Executing command site cert list
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site information
-    data:    Subject                       Expiration Date                      Thumbprint
-    data:    ----------------------------  -----------------------------------------
-    ----------------  ----------------------------------------
-    data:    *.msopentech.com              Fri Nov 28 2014 09:49:57 GMT-0800 (Pacific Standard Time)  A40E82D3DC0286D1F58650E570ECF8224F69A148
-    data:    msopentech.chinacloudsites.cn  Fri Jun 19 2015 11:57:32 GMT-0700 (Pacific Daylight Time)  CE1CD6538852BF7A5DC32001C2E26A29B541F0E8
-    info:    site cert list command OK
+```
+~$ azure site cert list
+info:    Executing command site cert list
+Web site name: mydemosite
++ Getting sites
++ Getting site information
+data:    Subject                       Expiration Date                      Thumbprint
+data:    ----------------------------  -----------------------------------------
+----------------  ----------------------------------------
+data:    *.msopentech.com              Fri Nov 28 2014 09:49:57 GMT-0800 (Pacific Standard Time)  A40E82D3DC0286D1F58650E570ECF8224F69A148
+data:    msopentech.chinacloudsites.cn  Fri Jun 19 2015 11:57:32 GMT-0700 (Pacific Daylight Time)  CE1CD6538852BF7A5DC32001C2E26A29B541F0E8
+info:    site cert list command OK
+```
 
 **site cert add [options] &lt;certificate-path> [name]**
 
@@ -949,19 +1065,21 @@ Azure Web 应用是可通过 URI 访问的 Web 配置。Web 应用在虚拟机�
 
 此命令显示证书详细信息
 
-    ~$ azure site cert show CE1CD65852B38DC32001C2E0E8F7A526A29B541F
-    info:    Executing command site cert show
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site information
-    data:    Certificate hostNames 0=msopentech.chinacloudsites.cn
-    data:    Certificate expirationDate
-    data:    Certificate friendlyName msopentech.chinacloudsites.cn
-    data:    Certificate issueDate
-    data:    Certificate issuer CN=MSIT Machine Auth CA 2, DC=redmond, DC=corp, DC=microsoft, DC=com
-    data:    Certificate subjectName msopentech.chinacloudsites.cn
-    data:    Certificate thumbprint CE1CD65852B38DC32001C2E0E8F7A526A29B541F
-    info:    site cert show command OK
+```
+~$ azure site cert show CE1CD65852B38DC32001C2E0E8F7A526A29B541F
+info:    Executing command site cert show
+Web site name: mydemosite
++ Getting sites
++ Getting site information
+data:    Certificate hostNames 0=msopentech.chinacloudsites.cn
+data:    Certificate expirationDate
+data:    Certificate friendlyName msopentech.chinacloudsites.cn
+data:    Certificate issueDate
+data:    Certificate issuer CN=MSIT Machine Auth CA 2, DC=redmond, DC=corp, DC=microsoft, DC=com
+data:    Certificate subjectName msopentech.chinacloudsites.cn
+data:    Certificate thumbprint CE1CD65852B38DC32001C2E0E8F7A526A29B541F
+info:    site cert show command OK
+```
 
 ### 用于管理 Web 应用连接字符串的命令
 **site connectionstring list [options] [name]**
@@ -1090,43 +1208,49 @@ Azure Web 应用是可通过 URI 访问的 Web 配置。Web 应用在虚拟机�
 
 下载包含你的 Web 应用诊断的 .zip 文件。
 
-    ~$ azure site log download
-    info:    Executing command site log download
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site information
-    + Downloading diagnostic log to diagnostics.zip
-    info:    site log download command OK
+```
+~$ azure site log download
+info:    Executing command site log download
+Web site name: mydemosite
++ Getting sites
++ Getting site information
++ Downloading diagnostic log to diagnostics.zip
+info:    site log download command OK
+```
 
 **site log tail [options] [name]**
 
 此命令将终端连接到日志流式处理服务。
 
-    ~$ azure site log tail
-    info:    Executing command site log tail
-    Web site name: mydemosite
-    + Getting sites
-    + Getting site information
-    2013-11-19T17:24:17  Welcome, you are now connected to log-streaming service.
+```
+~$ azure site log tail
+info:    Executing command site log tail
+Web site name: mydemosite
++ Getting sites
++ Getting site information
+2013-11-19T17:24:17  Welcome, you are now connected to log-streaming service.
+```
 
 **site log set [options] [name]**
 
 此命令配置你的 Web 应用的诊断选项。
 
-    ~$ azure site log set -a
-    info:    Executing command site log set
-    + Getting output options
-    help:    Output:
-      1) file
-      2) storage
-      : 1
-    Web site name: mydemosite
-    + Getting locations
-    + Getting sites
-    + Getting site information
-    + Getting diagnostic settings
-    + Updating diagnostic settings
-    info:    site log set command OK
+```
+~$ azure site log set -a
+info:    Executing command site log set
++ Getting output options
+help:    Output:
+  1) file
+  2) storage
+  : 1
+Web site name: mydemosite
++ Getting locations
++ Getting sites
++ Getting site information
++ Getting diagnostic settings
++ Updating diagnostic settings
+info:    site log set command OK
+```
 
 ### 用于管理 Web 应用存储库的命令
 **site repository branch [options] &lt;branch> [name]**
@@ -1139,7 +1263,6 @@ Azure Web 应用是可通过 URI 访问的 Web 配置。Web 应用在虚拟机�
 **site scale mode [options] &lt;mode> [name]**
 
 **site scale instances [options] &lt;instances> [name]**
-
 
 ##<a name="Commands_to_manage_mobile_services"></a>用于管理 Azure 移动服务的命令
 
@@ -1164,23 +1287,27 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令列出移动服务支持的地理位置。
 
-	~$ azure mobile locations
-	+ Getting mobile service locations
-	info:    Executing command mobile locations
-	info:    China North (default)
+```
+~$ azure mobile locations
++ Getting mobile service locations
+info:    Executing command mobile locations
+info:    China North (default)
+```
 
 **mobile create [options] [servicename] [sqlAdminUsername] [sqlAdminPassword]**
 
 此命令创建移动服务以及 SQL 数据库和服务器。
 
-    ~$ azure mobile create todolist your_login_name Secure$Password
-    info:    Executing command mobile create
-    + Creating mobile service
-    info:    Overall application state: Healthy
-    info:    Mobile service (todolist) state: ProvisionConfigured
-    info:    SQL database (todolist_db) state: Provisioned
-    info:    SQL server (e96ean1c6v) state: ProvisionConfigured
-    info:    mobile create command OK
+```
+~$ azure mobile create todolist your_login_name Secure$Password
+info:    Executing command mobile create
++ Creating mobile service
+info:    Overall application state: Healthy
+info:    Mobile service (todolist) state: ProvisionConfigured
+info:    SQL database (todolist_db) state: Provisioned
+info:    SQL server (e96ean1c6v) state: ProvisionConfigured
+info:    mobile create command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1193,18 +1320,20 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令删除移动服务及其 SQL 数据库和服务器。
 
-    ~$ azure mobile delete todolist -a -q
-    info:    Executing command mobile delete
-    data:    Mobile service todolist
-    data:    SQL database todolistAwrhcL60azo1C401
-    data:    SQL server fh1kvbc7la
-    + Deleting mobile service
-    info:    Deleted mobile service
-    + Deleting SQL server
-    info:    Deleted SQL server
-    + Deleting mobile application
-    info:    Deleted mobile application
-    info:    mobile delete command OK
+```
+~$ azure mobile delete todolist -a -q
+info:    Executing command mobile delete
+data:    Mobile service todolist
+data:    SQL database todolistAwrhcL60azo1C401
+data:    SQL server fh1kvbc7la
++ Deleting mobile service
+info:    Deleted mobile service
++ Deleting SQL server
+info:    Deleted SQL server
++ Deleting mobile application
+info:    Deleted mobile application
+info:    mobile delete command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1216,63 +1345,71 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令列出你的移动服务。
 
-    ~$ azure mobile list
-    info:    Executing command mobile list
-    data:    Name          State  URL
-    data:    ------------  -----  --------------------------------------
-    data:    todolist      Ready  https://todolist.azure-mobile.net/
-    data:    mymobileapp   Ready  https://mymobileapp.azure-mobile.net/
-    info:    mobile list command OK
+```
+~$ azure mobile list
+info:    Executing command mobile list
+data:    Name          State  URL
+data:    ------------  -----  --------------------------------------
+data:    todolist      Ready  https://todolist.azure-mobile.net/
+data:    mymobileapp   Ready  https://mymobileapp.azure-mobile.net/
+info:    mobile list command OK
+```
 
 **mobile show [options] [servicename]**
 
 此命令显示有关移动服务的详细信息。
 
-    ~$ azure mobile show todolist
-    info:    Executing command mobile show
-    + Getting information
-    info:    Mobile application
-    data:    status Healthy
-    data:    Mobile service name todolist
-    data:    Mobile service status ProvisionConfigured
-    data:    SQL database name todolistAwrhcL60azo1C401
-    data:    SQL database status Linked
-    data:    SQL server name fh1kvbc7la
-    data:    SQL server status Linked
-    info:    Mobile service
-    data:    name todolist
-    data:    state Ready
-    data:    applicationUrl https://todolist.azure-mobile.net/
-    data:    applicationKey XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    data:    masterKey XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    data:    webspace WESTUSWEBSPACE
-    data:    region China North
-    data:    tables TodoItem
-    info:    mobile show command OK
+```
+~$ azure mobile show todolist
+info:    Executing command mobile show
++ Getting information
+info:    Mobile application
+data:    status Healthy
+data:    Mobile service name todolist
+data:    Mobile service status ProvisionConfigured
+data:    SQL database name todolistAwrhcL60azo1C401
+data:    SQL database status Linked
+data:    SQL server name fh1kvbc7la
+data:    SQL server status Linked
+info:    Mobile service
+data:    name todolist
+data:    state Ready
+data:    applicationUrl https://todolist.azure-mobile.net/
+data:    applicationKey XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+data:    masterKey XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+data:    webspace WESTUSWEBSPACE
+data:    region China North
+data:    tables TodoItem
+info:    mobile show command OK
+```
 
 **mobile restart [options] [servicename]**
 
 此命令重新启动移动服务实例。
 
-    ~$ azure mobile restart todolist
-    info:    Executing command mobile restart
-    + Restarting mobile service
-    info:    Service was restarted.
-    info:    mobile restart command OK
+```
+~$ azure mobile restart todolist
+info:    Executing command mobile restart
++ Restarting mobile service
+info:    Service was restarted.
+info:    mobile restart command OK
+```
 
 **mobile log [options] [servicename]**
 
 此命令返回移动服务日志，筛选掉除`error`之外的所有日志类型。
 
-    ~$ azure mobile log todolist -t error
-    info:    Executing command mobile log
-    data:
-    data:    timeCreated 2013-01-07T16:04:43.351Z
-    data:    type error
-    data:    source /scheduler/TestingLogs.js
-    data:    message This is an error.
-    data:
-    info:    mobile log command OK
+```
+~$ azure mobile log todolist -t error
+info:    Executing command mobile log
+data:
+data:    timeCreated 2013-01-07T16:04:43.351Z
+data:    type error
+data:    source /scheduler/TestingLogs.js
+data:    message This is an error.
+data:
+info:    mobile log command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1281,7 +1418,7 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 - **-k`<skip>`** 或 **--skip`<skip>`**：跳过 `<skip>` 指定的行数。
 - **-p`<top>`** 或 **--top `<top>`**：返回由 `<top>` 指定的特定行数。
 
-> [AZURE.NOTE]
+> [!NOTE]
 **--query** 参数优先于 **--type**、**--skip** 和 **--top**。
 > 
 > 
@@ -1298,14 +1435,16 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令重新生成移动服务应用程序密钥。
 
-    ~$ azure mobile key regenerate todolist application
-    info:    Executing command mobile key regenerate
-    info:    New application key is SmLorAWVfslMcOKWSsuJvuzdJkfUpt40
-    info:    mobile key regenerate command OK
+```
+~$ azure mobile key regenerate todolist application
+info:    Executing command mobile key regenerate
+info:    New application key is SmLorAWVfslMcOKWSsuJvuzdJkfUpt40
+info:    mobile key regenerate command OK
+```
 
 密钥类型为 `master` 和 `application`。
 
-> [AZURE.NOTE]
+> [!NOTE]
 当重新生成密钥时，使用旧密钥的客户端可能无法访问你的移动服务。当重新生成应用程序密钥时，应使用新密钥值更新应用程序。
 > 
 > 
@@ -1319,87 +1458,98 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令列出移动服务的配置选项。
 
-    ~$ azure mobile config list todolist
-    info:    Executing command mobile config list
-    + Getting mobile service configuration
-    data:    dynamicSchemaEnabled true
-    data:    microsoftAccountClientSecret Not configured
-    data:    microsoftAccountClientId Not configured
-    data:    microsoftAccountPackageSID Not configured
-    data:    facebookClientId Not configured
-    data:    facebookClientSecret Not configured
-    data:    twitterClientId Not configured
-    data:    twitterClientSecret Not configured
-    data:    googleClientId Not configured
-    data:    googleClientSecret Not configured
-    data:    apnsMode none
-    data:    apnsPassword Not configured
-    data:    apnsCertifcate Not configured
-    info:    mobile config list command OK
+```
+~$ azure mobile config list todolist
+info:    Executing command mobile config list
++ Getting mobile service configuration
+data:    dynamicSchemaEnabled true
+data:    microsoftAccountClientSecret Not configured
+data:    microsoftAccountClientId Not configured
+data:    microsoftAccountPackageSID Not configured
+data:    facebookClientId Not configured
+data:    facebookClientSecret Not configured
+data:    twitterClientId Not configured
+data:    twitterClientSecret Not configured
+data:    googleClientId Not configured
+data:    googleClientSecret Not configured
+data:    apnsMode none
+data:    apnsPassword Not configured
+data:    apnsCertifcate Not configured
+info:    mobile config list command OK
+```
 
 **mobile config get [options] [servicename] [key]**
 
 此命令获取移动服务的特定配置选项，在此示例中为动态架构。
 
-    ~$ azure mobile config get todolist dynamicSchemaEnabled
-    info:    Executing command mobile config get
-    data:    dynamicSchemaEnabled true
-    info:    mobile config get command OK
+```
+~$ azure mobile config get todolist dynamicSchemaEnabled
+info:    Executing command mobile config get
+data:    dynamicSchemaEnabled true
+info:    mobile config get command OK
+```
 
 **mobile config set [options] [servicename] [key] [value]**
 
 此命令设置移动服务的特定配置选项，在此示例中为动态架构。
 
-    ~$ azure mobile config set todolist dynamicSchemaEnabled false
-    info:    Executing command mobile config set
-    info:    mobile config set command OK
-
+```
+~$ azure mobile config set todolist dynamicSchemaEnabled false
+info:    Executing command mobile config set
+info:    mobile config set command OK
+```
 
 ### <a name="Mobile_Tables"></a>用于管理移动服务表的命令
 **mobile table list [options] [servicename]**
 
 此命令列出你的移动服务中的所有表。
 
-    ~$azure mobile table list todolist
-    info:    Executing command mobile table list
-    data:    Name      Indexes  Rows
-    data:    --------  -------  ----
-    data:    Channel   1        0
-    data:    TodoItem  1        0
-    info:    mobile table list command OK
+```
+~$azure mobile table list todolist
+info:    Executing command mobile table list
+data:    Name      Indexes  Rows
+data:    --------  -------  ----
+data:    Channel   1        0
+data:    TodoItem  1        0
+info:    mobile table list command OK
+```
 
 **mobile table show [options] [servicename] [tablename]**
 
 此命令显示有关特定表的返回内容的详情。
 
-    ~$azure mobile table show todolist
-    info:    Executing command mobile table show
-    + Getting table information
-    info:    Table statistics:
-    data:    Number of records 5
-    info:    Table operations:
-    data:    Operation  Script       Permissions
-    data:    ---------  -----------  -----------
-    data:    insert     1900 bytes   user
-    data:    read       Not defined  user
-    data:    update     Not defined  user
-    data:    delete     Not defined  user
-    info:    Table columns:
-    data:    Name  Type           Indexed
-    data:    ----  -------------  -------
-    data:    id    bigint(MSSQL)  Yes
-    data:    text      string
-    data:    complete  boolean
-    info:    mobile table show command OK
+```
+~$azure mobile table show todolist
+info:    Executing command mobile table show
++ Getting table information
+info:    Table statistics:
+data:    Number of records 5
+info:    Table operations:
+data:    Operation  Script       Permissions
+data:    ---------  -----------  -----------
+data:    insert     1900 bytes   user
+data:    read       Not defined  user
+data:    update     Not defined  user
+data:    delete     Not defined  user
+info:    Table columns:
+data:    Name  Type           Indexed
+data:    ----  -------------  -------
+data:    id    bigint(MSSQL)  Yes
+data:    text      string
+data:    complete  boolean
+info:    mobile table show command OK
+```
 
 **mobile table create [options] [servicename] [tablename]**
 
 此命令创建表。
 
-    ~$azure mobile table create todolist Channels
-    info:    Executing command mobile table create
-    + Creating table
-    info:    mobile table create command OK
+```
+~$azure mobile table create todolist Channels
+info:    Executing command mobile table create
++ Creating table
+info:    mobile table create command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1409,15 +1559,17 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令读取表中的数据。
 
-    ~$azure mobile data read todolist TodoItem
-    info:    Executing command mobile data read
-    data:    id  text     complete
-    data:    --  -------  --------
-    data:    1   item #1  false
-    data:    2   item #2  true
-    data:    3   item #3  false
-    data:    4   item #4  true
-    info:    mobile data read command OK
+```
+~$azure mobile data read todolist TodoItem
+info:    Executing command mobile data read
+data:    id  text     complete
+data:    --  -------  --------
+data:    1   item #1  false
+data:    2   item #2  true
+data:    3   item #3  false
+data:    4   item #4  true
+info:    mobile data read command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1429,11 +1581,13 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令只更改管理员对表的删除权限。
 
-    ~$azure mobile table update todolist Channels -p delete=admin
-    info:    Executing command mobile table update
-    + Updating permissions
-    info:    Updated permissions
-    info:    mobile table update command OK
+```
+~$azure mobile table update todolist Channels -p delete=admin
+info:    Executing command mobile table update
++ Updating permissions
+info:    Updated permissions
+info:    mobile table update command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1447,11 +1601,13 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令删除表。
 
-    ~$azure mobile table delete todolist Channels
-    info:    Executing command mobile table delete
-    Do you really want to delete the table (yes/no): yes
-    + Deleting table
-    info:    mobile table delete command OK
+```
+~$azure mobile table delete todolist Channels
+info:    Executing command mobile table delete
+Do you really want to delete the table (yes/no): yes
++ Deleting table
+info:    mobile table delete command OK
+```
 
 指定 -q 参数可在不提示确认的情况下删除表。执行此操作可以防止阻止自动化脚本。
 
@@ -1459,45 +1615,50 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令从表中删除所有数据行。
 
-    ~$azure mobile data truncate todolist TodoItem
-    info:    Executing command mobile data truncate
-    info:    There are 7 data rows in the table.
-    Do you really want to delete all data from the table? (y/n): y
-    info:    Deleted 7 rows.
-    info:    mobile data truncate command OK
-
+```
+~$azure mobile data truncate todolist TodoItem
+info:    Executing command mobile data truncate
+info:    There are 7 data rows in the table.
+Do you really want to delete all data from the table? (y/n): y
+info:    Deleted 7 rows.
+info:    mobile data truncate command OK
+```
 
 ### <a name="Mobile_Scripts"></a>用于管理脚本的命令
-本部分中的命令用于管理属于移动服务的服务器脚本。有关详细信息，请参阅[使用移动服务中的服务器脚本](/documentation/articles/mobile-services-how-to-use-server-scripts/)。
+本部分中的命令用于管理属于移动服务的服务器脚本。有关详细信息，请参阅[使用移动服务中的服务器脚本](./mobile-services/mobile-services-how-to-use-server-scripts.md)。
 
 **mobile script list [options] [servicename]**
 
 此命令列出注册的脚本，包括表和计划程序脚本。
 
-    ~$azure mobile script list todolist
-    info:    Executing command mobile script list
-    + Getting script information
-    info:    Table scripts
-    data:    Name                   Size
-    data:    ---------------------  ----
-    data:    table/TodoItem.delete  256
-    data:    table/Devices.insert   1660
-    error:   Unable to get shared scripts
-    info:    Scheduler scripts
-    data:    Name                 Status     Interval   Last run   Next run
-    data:    -------------------  ---------  ---------  ---------  ---------
-    data:    scheduler/undefined  undefined  undefined  undefined  undefined
-    data:    scheduler/undefined  undefined  undefined  undefined  undefined
-    info:    mobile script list command OK
+```
+~$azure mobile script list todolist
+info:    Executing command mobile script list
++ Getting script information
+info:    Table scripts
+data:    Name                   Size
+data:    ---------------------  ----
+data:    table/TodoItem.delete  256
+data:    table/Devices.insert   1660
+error:   Unable to get shared scripts
+info:    Scheduler scripts
+data:    Name                 Status     Interval   Last run   Next run
+data:    -------------------  ---------  ---------  ---------  ---------
+data:    scheduler/undefined  undefined  undefined  undefined  undefined
+data:    scheduler/undefined  undefined  undefined  undefined  undefined
+info:    mobile script list command OK
+```
 
 **mobile script download [options] [servicename] [scriptname]**
 
 此命令将插入脚本从 TodoItem 表下载到 `table` 子文件夹中名为 `todoitem.insert.js` 的文件中。
 
-    ~$azure mobile script download todolist table/todoitem.insert.js
-    info:    Executing command mobile script download
-    info:    Saved script to ./table/todoitem.insert.js
-    info:    mobile script download command OK
+```
+~$azure mobile script download todolist table/todoitem.insert.js
+info:    Executing command mobile script download
+info:    Saved script to ./table/todoitem.insert.js
+info:    mobile script download command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1510,9 +1671,11 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令从 `table` 子文件夹上载名为 `todoitem.insert.js` 的脚本。
 
-    ~$azure mobile script upload todolist table/todoitem.insert.js
-    info:    Executing command mobile script upload
-    info:    mobile script upload command OK
+```
+~$azure mobile script upload todolist table/todoitem.insert.js
+info:    Executing command mobile script upload
+info:    mobile script upload command OK
+```
 
 文件名必须由表名和操作名组成。文件必须位于表子文件夹中（相对于执行命令的位置）。你还可以使用 **-f `<file>`** 或 **--file `<file>`** 参数指定其他包含要注册的脚本的文件的文件名和路径。
 
@@ -1520,9 +1683,11 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令从 TodoItem 表中删除现有插入脚本。
 
-    ~$azure mobile script delete todolist table/todoitem.insert.js
-    info:    Executing command mobile script delete
-    info:    mobile script delete command OK
+```
+~$azure mobile script delete todolist table/todoitem.insert.js
+info:    Executing command mobile script delete
+info:    mobile script delete command OK
+```
 
 ### <a name="Mobile_Jobs"></a>用于管理已计划作业的命令
 本部分中的命令用于管理属于移动服务的已计划作业。有关详细信息，请参阅[计划作业](https://msdn.microsoft.com/zh-cn/library/azure/jj860528.aspx)。
@@ -1531,24 +1696,28 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令列出计划作业。
 
-    ~$azure mobile job list todolist
-    info:    Executing command mobile job list
-    info:    Scheduled jobs
-    data:    Job name    Script name           Status    Interval     Last run              Next run
-    data:    ----------  --------------------  --------  -----------  --------------------  --------------------
-    data:    getUpdates  scheduler/getUpdates  enabled   15 [minute]  2013-01-14T16:15:00Z  2013-01-14T16:30:00Z
-    info:    You can manipulate scheduled job scripts using the 'azure mobile script' command.
-    info:    mobile job list command OK
+```
+~$azure mobile job list todolist
+info:    Executing command mobile job list
+info:    Scheduled jobs
+data:    Job name    Script name           Status    Interval     Last run              Next run
+data:    ----------  --------------------  --------  -----------  --------------------  --------------------
+data:    getUpdates  scheduler/getUpdates  enabled   15 [minute]  2013-01-14T16:15:00Z  2013-01-14T16:30:00Z
+info:    You can manipulate scheduled job scripts using the 'azure mobile script' command.
+info:    mobile job list command OK
+```
 
 **mobile job create [options] [servicename] [jobname]**
 
 此命令创建计划为每小时运行的名为 `getUpdates` 的作业。
 
-    ~$azure mobile job create -i 1 -u hour todolist getUpdates
-    info:    Executing command mobile job create
-    info:    Job was created in disabled state. You can enable the job using the 'azure mobile job update' command.
-    info:    You can manipulate the scheduled job script using the 'azure mobile script' command.
-    info:    mobile job create command OK
+```
+~$azure mobile job create -i 1 -u hour todolist getUpdates
+info:    Executing command mobile job create
+info:    Job was created in disabled state. You can enable the job using the 'azure mobile job update' command.
+info:    You can manipulate the scheduled job script using the 'azure mobile script' command.
+info:    mobile job create command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1561,7 +1730,7 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
   - **none**（按需作业）
 - **-t`<time>`** **--startTime `<time>`** 脚本的首次运行开始时间，采用 ISO 格式。默认值为 `now`。
 
-> [AZURE.NOTE]
+> [!NOTE]
 创建的新作业处于禁用状态，因为还必须上传脚本。请使用 **mobile script upload** 命令上载脚本并使用 **mobile job update** 命令启用作业。
 > 
 > 
@@ -1570,9 +1739,11 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 以下命令启用已禁用的`getUpdates`作业。
 
-    ~$azure mobile job update -a enabled todolist getUpdates
-    info:    Executing command mobile job update
-    info:    mobile job update command OK
+```
+~$azure mobile job update -a enabled todolist getUpdates
+info:    Executing command mobile job update
+info:    mobile job update command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1590,11 +1761,13 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令从 TodoList 服务器中删除 getUpdates 已计划作业。
 
-    ~$azure mobile job delete todolist getUpdates
-    info:    Executing command mobile job delete
-    info:    mobile job delete command OK
+```
+~$azure mobile job delete todolist getUpdates
+info:    Executing command mobile job delete
+info:    mobile job delete command OK
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 删除作业也将删除已上传的脚本。
 > 
 > 
@@ -1606,28 +1779,32 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令显示缩放信息，包括当前计算模式和实例数。
 
-    ~$azure mobile scale show todolist
-    info:    Executing command mobile scale show
-    data:    webspace WESTUSWEBSPACE
-    data:    computeMode Free
-    data:    numberOfInstances 1
-    info:    mobile scale show command OK
+```
+~$azure mobile scale show todolist
+info:    Executing command mobile scale show
+data:    webspace WESTUSWEBSPACE
+data:    computeMode Free
+data:    numberOfInstances 1
+info:    mobile scale show command OK
+```
 
 **mobile scale change [options] [servicename]**
 
 此命令将移动服务的规模从免费模式更改为高级模式。
 
-    ~$azure mobile scale change -c Reserved -i 1 todolist
-    info:    Executing command mobile scale change
-    + Rescaling the mobile service
-    info:    mobile scale change command OK
+```
+~$azure mobile scale change -c Reserved -i 1 todolist
+info:    Executing command mobile scale change
++ Rescaling the mobile service
+info:    mobile scale change command OK
+```
 
 此命令支持以下附加选项：
 
 - **-c`<mode>`** 或 **--computeMode `<mode>`**：计算模式必须为 `Free` 或 `Reserved`。
 - **-i`<count>`** 或 **--numberOfInstances`<count>`**：在保留模式下运行时使用的实例数。
 
-> [AZURE.NOTE]
+> [!NOTE]
 将计算模式设置为`Reserved`时，同一区域中的所有移动服务都将在高级模式下运行。
 > 
 > 
@@ -1637,15 +1814,17 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令显示在指定的服务上可用的预览版功能，以及它们是否已启用。
 
-    ~$ azure mobile preview list mysite
-    info:    Executing command mobile preview list
-    + Getting preview features
-    data:    Preview feature  Enabled
-    data:    ---------------  -------
-    data:    SourceControl    No
-    data:    Users            No
-    info:    You can enable preview features using the 'azure mobile preview enable' command.
-    info:    mobile preview list command OK
+```
+~$ azure mobile preview list mysite
+info:    Executing command mobile preview list
++ Getting preview features
+data:    Preview feature  Enabled
+data:    ---------------  -------
+data:    SourceControl    No
+data:    Users            No
+info:    You can enable preview features using the 'azure mobile preview enable' command.
+info:    mobile preview list command OK
+```
 
 **mobile preview enable [options] [servicename] [featurename]**
 
@@ -1656,25 +1835,29 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令列出为移动服务创建的移动服务自定义 API。
 
-    ~$ azure mobile api list mysite
-    info:    Executing command mobile api list
-    + Retrieving list of APIs
-    info:    APIs
-    data:    Name                  Get          Put          Post         Patch        Delete
-    data:    --------------------  -----------  -----------  -----------  -----------  -----------
-    data:    myCustomRetrieveAPI   application  application  application  application  application
-    info:    You can manipulate API scripts using the 'azure mobile script' command.
-    info:    mobile api list command OK
+```
+~$ azure mobile api list mysite
+info:    Executing command mobile api list
++ Retrieving list of APIs
+info:    APIs
+data:    Name                  Get          Put          Post         Patch        Delete
+data:    --------------------  -----------  -----------  -----------  -----------  -----------
+data:    myCustomRetrieveAPI   application  application  application  application  application
+info:    You can manipulate API scripts using the 'azure mobile script' command.
+info:    mobile api list command OK
+```
 
 **mobile api create [options] [servicename] [apiname]**
 
 创建移动服务自定义 API
 
-    ~$ azure mobile api create mysite myCustomRetrieveAPI
-    info:    Executing command mobile api create
-    + Creating custom API: 'myCustomRetrieveAPI'
-    info:    API was created successfully. You can modify the API using the 'azure mobile script' command.
-    info:    mobile api create command OK
+```
+~$ azure mobile api create mysite myCustomRetrieveAPI
+info:    Executing command mobile api create
++ Creating custom API: 'myCustomRetrieveAPI'
+info:    API was created successfully. You can modify the API using the 'azure mobile script' command.
+info:    mobile api create command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1693,10 +1876,12 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 **mobile api delete [options] [servicename] [apiname]**
 
-    ~$ azure mobile api delete mysite myCustomRetrieveAPI
-    info:    Executing command mobile api delete
-    + Deleting API: 'myCustomRetrieveAPI'
-    info:    mobile api delete command OK
+```
+~$ azure mobile api delete mysite myCustomRetrieveAPI
+info:    Executing command mobile api delete
++ Deleting API: 'myCustomRetrieveAPI'
+info:    mobile api delete command OK
+```
 
 此命令删除指定的移动服务自定义 API。
 
@@ -1705,43 +1890,51 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令显示指定的服务的移动应用程序的应用程序设置。
 
-    ~$ azure mobile appsetting list mysite
-    info:    Executing command mobile appsetting list
-    + Retrieving app settings
-    data:    Name               Value
-    data:    -----------------  -----
-    data:    enablebetacontent  true
-    info:    mobile appsetting list command OK
+```
+~$ azure mobile appsetting list mysite
+info:    Executing command mobile appsetting list
++ Retrieving app settings
+data:    Name               Value
+data:    -----------------  -----
+data:    enablebetacontent  true
+info:    mobile appsetting list command OK
+```
 
 **mobile appsetting add [options] [servicename] [name] [value]**
 
 此命令为移动服务添加自定义应用程序设置。
 
-    ~$ azure mobile appsetting add mysite enablebetacontent true
-    info:    Executing command mobile appsetting add
-    + Retrieving app settings
-    + Adding app setting
-    info:    mobile appsetting add command OK
+```
+~$ azure mobile appsetting add mysite enablebetacontent true
+info:    Executing command mobile appsetting add
++ Retrieving app settings
++ Adding app setting
+info:    mobile appsetting add command OK
+```
 
 **mobile appsetting delete [options] [servicename] [name]**
 
 此命令为移动服务删除指定的应用程序设置。
 
-    ~$ azure mobile appsetting delete mysite enablebetacontent
-    info:    Executing command mobile appsetting delete
-    + Retrieving app settings
-    + Removing app setting 'enablebetacontent'
-    info:    mobile appsetting delete command OK
+```
+~$ azure mobile appsetting delete mysite enablebetacontent
+info:    Executing command mobile appsetting delete
++ Retrieving app settings
++ Removing app setting 'enablebetacontent'
+info:    mobile appsetting delete command OK
+```
 
 **mobile appsetting show [options] [servicename] [name]**
 
 此命令为移动服务删除指定的应用程序设置。
 
-    ~$ azure mobile appsetting show mysite enablebetacontent
-    info:    Executing command mobile appsetting show
-    + Retrieving app settings
-    info:    enablebetacontent: true
-    info:    mobile appsetting show command OK
+```
+~$ azure mobile appsetting show mysite enablebetacontent
+info:    Executing command mobile appsetting show
++ Retrieving app settings
+info:    enablebetacontent: true
+info:    mobile appsetting show command OK
+```
 
 ##<a name="Manage_tool_local_settings"></a>管理工具本地设置
 
@@ -1751,20 +1944,24 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令显示配置设置。
 
-    ~$ azure config list
-    info:   Displaying config settings
-    data:   Setting                Value
-    data:   ---------------------  ------------------------------------
-    data:   subscription           32-digit-subscription-key
-    data:   defaultStorageAccount  name
+```
+~$ azure config list
+info:   Displaying config settings
+data:   Setting                Value
+data:   ---------------------  ------------------------------------
+data:   subscription           32-digit-subscription-key
+data:   defaultStorageAccount  name
+```
 
 **config set [options] &lt;name&gt;,&lt;value&gt;**
 
 此命令更改配置设置。
 
-    ~$ azure config set defaultStorageAccount myname
-    info:   Setting 'defaultStorageAccount' to value 'myname'
-    info:   Changes saved.
+```
+~$ azure config set defaultStorageAccount myname
+info:   Setting 'defaultStorageAccount' to value 'myname'
+info:   Changes saved.
+```
 
 ##<a name ="Commands_to_manage_service_bus"></a>用于管理 Service Bus 的命令
 
@@ -1778,72 +1975,80 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 创建服务总线命名空间。
 
-	~$ azure sb namespace create mysbnamespacea-test "China North"
-	info:    Executing command sb namespace create
-	+ Creating namespace mysbnamespacea-test in region China North
-	data:    name: mysbnamespacea-test
-	data:    region: China North
-	data:    status: Activating
-	data:    createdAt: Fri Mar 20 2015 11:07:22 GMT+0800 (中国标准时间)
-	data:    acsManagementEndpoint: https://mysbnamespacea-test-sb.accesscontrol.chinacloudapi.cn/
-	data:    serviceBusEndpoint: https://mysbnamespacea-test.servicebus.chinacloudapi.cn/
-	data:    subscriptionId: c333413ef84b4cc2944efe29b05c237f
-	data:    enabled: true
-	info:    sb namespace create command OK
-
+```
+~$ azure sb namespace create mysbnamespacea-test "China North"
+info:    Executing command sb namespace create
++ Creating namespace mysbnamespacea-test in region China North
+data:    name: mysbnamespacea-test
+data:    region: China North
+data:    status: Activating
+data:    createdAt: Fri Mar 20 2015 11:07:22 GMT+0800 (中国标准时间)
+data:    acsManagementEndpoint: https://mysbnamespacea-test-sb.accesscontrol.chinacloudapi.cn/
+data:    serviceBusEndpoint: https://mysbnamespacea-test.servicebus.chinacloudapi.cn/
+data:    subscriptionId: c333413ef84b4cc2944efe29b05c237f
+data:    enabled: true
+info:    sb namespace create command OK
+```
 
 **sb namespace delete &lt;name>**
 
 删除某个命名空间。
 
-    ~$ azure sb namespace delete mysbnamespacea-test
-    info:    Executing command sb namespace delete
-    Delete namespace mysbnamespacea-test? [y/n] y
-    + Deleting namespace mysbnamespacea-test
-    info:    sb namespace delete command OK
+```
+~$ azure sb namespace delete mysbnamespacea-test
+info:    Executing command sb namespace delete
+Delete namespace mysbnamespacea-test? [y/n] y
++ Deleting namespace mysbnamespacea-test
+info:    sb namespace delete command OK
+```
 
 **sb namespace list**
 
 列出为帐户所创建的所有命名空间。
 
-	~$ azure sb namespace list
-	info:    Executing command sb namespace list
-	+ Getting namespaces
-	data:    Name                 Region       Status
-	data:    -------------------  -----------  ------
-	data:    mysbnamespacea-test  China North  Active
-	info:    sb namespace list command OK
-
+```
+~$ azure sb namespace list
+info:    Executing command sb namespace list
++ Getting namespaces
+data:    Name                 Region       Status
+data:    -------------------  -----------  ------
+data:    mysbnamespacea-test  China North  Active
+info:    sb namespace list command OK
+```
 
 **sb namespace location list**
 
 显示所有可用的命名空间位置的列表。
 
-	~$ azure sb namespace location list
-	info:    Executing command sb namespace location list
-	+ Getting locations
-	data:    Name              Code
-	data:    ----------------  ----------------
-	data:    China East   China East
-	data:    China North  China North
-	info:    sb namespace location list command OK
+```
+~$ azure sb namespace location list
+info:    Executing command sb namespace location list
++ Getting locations
+data:    Name              Code
+data:    ----------------  ----------------
+data:    China East   China East
+data:    China North  China North
+info:    sb namespace location list command OK
+```
 
 **sb namespace show &lt;name>**
 
 显示有关特定命名空间的详细信息。
 
-	~$ azure sb namespace show mysbnamespacea-test
-	info:    Executing command sb namespace show
-	+ Getting namespace
-	data:    Name: mysbnamespacea-test
-	data:    region: China North
-	data:    status: Activating
-	data:    createdAt: Fri Mar 20 2015 11:10:07 GMT+0800 (中国标准时间)
-	data:    acsManagementEndpoint: https://mysbnamespacea-test-sb.accesscontrol.chinacloudapi.cn/
-	data:    serviceBusEndpoint: https://mysbnamespacea-test.servicebus.chinacloudapi.cn/
-	data:    subscriptionId: c333413ef84b4cc2944efe29b05c237f
-	data:    enabled: true
-	info:    sb namespace show command OK
+```
+~$ azure sb namespace show mysbnamespacea-test
+info:    Executing command sb namespace show
++ Getting namespace
+data:    Name: mysbnamespacea-test
+data:    region: China North
+data:    status: Activating
+data:    createdAt: Fri Mar 20 2015 11:10:07 GMT+0800 (中国标准时间)
+data:    acsManagementEndpoint: https://mysbnamespacea-test-sb.accesscontrol.chinacloudapi.cn/
+data:    serviceBusEndpoint: https://mysbnamespacea-test.servicebus.chinacloudapi.cn/
+data:    subscriptionId: c333413ef84b4cc2944efe29b05c237f
+data:    enabled: true
+info:    sb namespace show command OK
+```
 
 **sb namespace verify &lt;name>**
 
@@ -1857,13 +2062,15 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令显示订阅上的存储帐户。
 
-    ~$ azure storage account list
-    info:    Executing command storage account list
-    + Getting storage accounts
-    data:    Name             Label  Location
-    data:    ---------------  -----  --------
-    data:    mybasestorage           China North
-    info:    storage account list command OK
+```
+~$ azure storage account list
+info:    Executing command storage account list
++ Getting storage accounts
+data:    Name             Label  Location
+data:    ---------------  -----  --------
+data:    mybasestorage           China North
+info:    storage account list command OK
+```
 
 **storage account show [options] <name>**
 
@@ -1873,10 +2080,12 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令根据提供的选项创建存储帐户。
 
-    ~$ azure storage account create mybasestorage --label PrimaryStorage --location "China North"
-    info:    Executing command storage account create
-    + Creating storage account
-    info:    storage account create command OK
+```
+~$ azure storage account create mybasestorage --label PrimaryStorage --location "China North"
+info:    Executing command storage account create
++ Creating storage account
+info:    storage account create command OK
+```
 
 此命令支持以下附加选项：
 
@@ -1890,10 +2099,12 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 此命令更新指定的存储帐户。
 
-    ~$ azure storage account set mybasestorage --kind Storage --sku-name GRS
-    info:    Executing command storage account set
-    + Updating storage account
-    info:    storage account set command OK
+```
+~$ azure storage account set mybasestorage --kind Storage --sku-name GRS
+info:    Executing command storage account set
++ Updating storage account
+info:    storage account set command OK
+```
 
 此命令支持以下附加选项：
 
@@ -2055,46 +2266,54 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 创建新的数据库服务器
 
-    ~$ azure sql server create test T3stte$t "China North"
-    info:    Executing command sql server create
-    + Creating SQL Server
-    data:    Server Name i1qwc540ts
-    info:    sql server create command OK
+```
+~$ azure sql server create test T3stte$t "China North"
+info:    Executing command sql server create
++ Creating SQL Server
+data:    Server Name i1qwc540ts
+info:    sql server create command OK
+```
 
 **sql server show &lt;name>**
 
 显示服务器详细信息。
 
-    ~$ azure sql server show xclfgcndfg
-    info:    Executing command sql server show
-    + Getting SQL server
-    data:    SQL Server Name xclfgcndfg
-    data:    SQL Server AdministratorLogin msopentechforums
-    data:    SQL Server Location China North
-    data:    SQL Server FullyQualifiedDomainName xclfgcndfg.database.chinacloudapi.cn
-    info:    sql server show command OK
+```
+~$ azure sql server show xclfgcndfg
+info:    Executing command sql server show
++ Getting SQL server
+data:    SQL Server Name xclfgcndfg
+data:    SQL Server AdministratorLogin msopentechforums
+data:    SQL Server Location China North
+data:    SQL Server FullyQualifiedDomainName xclfgcndfg.database.chinacloudapi.cn
+info:    sql server show command OK
+```
 
 **sql server list**
 
 获取服务器的列表。
 
-    ~$ azure sql server list
-    info:    Executing command sql server list
-    + Getting SQL server
-    data:    Name        Location
-    data:    ----------  --------
-    data:    xclfgcndfg  China North
-    info:    sql server list command OK
+```
+~$ azure sql server list
+info:    Executing command sql server list
++ Getting SQL server
+data:    Name        Location
+data:    ----------  --------
+data:    xclfgcndfg  China North
+info:    sql server list command OK
+```
 
 **sql server delete &lt;name>**
 
 删除服务器
 
-    ~$ azure sql server delete i1qwc540ts
-    info:    Executing command sql server delete
-    Delete server i1qwc540ts? [y/n] y
-    + Removing SQL Server
-    info:    sql server delete command OK
+```
+~$ azure sql server delete i1qwc540ts
+info:    Executing command sql server delete
+Delete server i1qwc540ts? [y/n] y
++ Removing SQL Server
+info:    sql server delete command OK
+```
 
 ### 用于管理 SQL 数据库的命令
 使用这些命令来管理 SQL 数据库。
@@ -2103,89 +2322,97 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 创建一个数据库实例
 
-    ~$ azure sql db create fr8aelne00 newdb test
-    info:    Executing command sql db create
-    Administrator password: ********
-    + Creating SQL Server Database
-    info:    sql db create command OK
+```
+~$ azure sql db create fr8aelne00 newdb test
+info:    Executing command sql db create
+Administrator password: ********
++ Creating SQL Server Database
+info:    sql db create command OK
+```
 
 **sql db show [options] &lt;serverName> &lt;databaseName> &lt;administratorPassword>**
 
 显示数据库详细信息。
 
-    C:\windows\system32>azure sql db show fr8aelne00 newdb test
-    info:    Executing command sql db show
-    Administrator password: ********
-    + Getting SQL server databases
-    data:    Database _ ContentRootElement=m:properties, id=https://fr8aelne00.datab
-    ase.chinacloudapi.cn/v1/ManagementService.svc/Server2('fr8aelne00')/Databases(4), ter
-    m=Microsoft.SqlServer.Management.Server.Domain.Database, scheme=http://schemas.m
-    icrosoft.com/ado/2007/08/dataservices/scheme, link=[rel=edit, title=Database, hr
-    ef=Databases(4), rel=http://schemas.microsoft.com/ado/2007/08/dataservices/relat
-    ed/Server, type=application/atom+xml;type=entry, title=Server, href=Databases(4)
-    /Server, rel=http://schemas.microsoft.com/ado/2007/08/dataservices/related/Servi
-    ceObjective, type=application/atom+xml;type=entry, title=ServiceObjective, href=
-    Databases(4)/ServiceObjective, rel=http://schemas.microsoft.com/ado/2007/08/data
-    services/related/DatabaseMetrics, type=application/atom+xml;type=entry, title=Da
-    tabaseMetrics, href=Databases(4)/DatabaseMetrics, rel=http://schemas.microsoft.c
-    om/ado/2007/08/dataservices/related/DatabaseCopies, type=application/atom+xml;ty
-    pe=feed, title=DatabaseCopies, href=Databases(4)/DatabaseCopies], title=, update
-    d=2013-11-18T19:48:27Z, name=
-    data:    Database Id 4
-    data:    Database Name newdb
-    data:    Database ServiceObjectiveId 910b4fcb-8a29-4c3e-958f-f7ba794388b2
-    data:    Database AssignedServiceObjectiveId 910b4fcb-8a29-4c3e-958f-f7ba794388b2
-    data:    Database ServiceObjectiveAssignmentState 1
-    data:    Database ServiceObjectiveAssignmentStateDescription Complete
-    data:    Database ServiceObjectiveAssignmentErrorCode
-    data:    Database ServiceObjectiveAssignmentErrorDescription
-    data:    Database ServiceObjectiveAssignmentSuccessDate
-    data:    Database Edition Web
-    data:    Database MaxSizeGB 1
-    data:    Database MaxSizeBytes 1073741824
-    data:    Database CollationName SQL_Latin1_General_CP1_CI_AS
-    data:    Database CreationDate
-    data:    Database RecoveryPeriodStartDate
-    data:    Database IsSystemObject
-    data:    Database Status 1
-    data:    Database IsFederationRoot
-    data:    Database SizeMB -1
-    data:    Database IsRecursiveTriggersOn
-    data:    Database IsReadOnly
-    data:    Database IsFederationMember
-    data:    Database IsQueryStoreOn
-    data:    Database IsQueryStoreReadOnly
-    data:    Database QueryStoreMaxSizeMB
-    data:    Database QueryStoreFlushPeriodSeconds
-    data:    Database QueryStoreIntervalLengthMinutes
-    data:    Database QueryStoreClearAll
-    data:    Database QueryStoreStaleQueryThresholdDays
-    info:    sql db show command OK
+```
+C:\windows\system32>azure sql db show fr8aelne00 newdb test
+info:    Executing command sql db show
+Administrator password: ********
++ Getting SQL server databases
+data:    Database _ ContentRootElement=m:properties, id=https://fr8aelne00.datab
+ase.chinacloudapi.cn/v1/ManagementService.svc/Server2('fr8aelne00')/Databases(4), ter
+m=Microsoft.SqlServer.Management.Server.Domain.Database, scheme=http://schemas.m
+icrosoft.com/ado/2007/08/dataservices/scheme, link=[rel=edit, title=Database, hr
+ef=Databases(4), rel=http://schemas.microsoft.com/ado/2007/08/dataservices/relat
+ed/Server, type=application/atom+xml;type=entry, title=Server, href=Databases(4)
+/Server, rel=http://schemas.microsoft.com/ado/2007/08/dataservices/related/Servi
+ceObjective, type=application/atom+xml;type=entry, title=ServiceObjective, href=
+Databases(4)/ServiceObjective, rel=http://schemas.microsoft.com/ado/2007/08/data
+services/related/DatabaseMetrics, type=application/atom+xml;type=entry, title=Da
+tabaseMetrics, href=Databases(4)/DatabaseMetrics, rel=http://schemas.microsoft.c
+om/ado/2007/08/dataservices/related/DatabaseCopies, type=application/atom+xml;ty
+pe=feed, title=DatabaseCopies, href=Databases(4)/DatabaseCopies], title=, update
+d=2013-11-18T19:48:27Z, name=
+data:    Database Id 4
+data:    Database Name newdb
+data:    Database ServiceObjectiveId 910b4fcb-8a29-4c3e-958f-f7ba794388b2
+data:    Database AssignedServiceObjectiveId 910b4fcb-8a29-4c3e-958f-f7ba794388b2
+data:    Database ServiceObjectiveAssignmentState 1
+data:    Database ServiceObjectiveAssignmentStateDescription Complete
+data:    Database ServiceObjectiveAssignmentErrorCode
+data:    Database ServiceObjectiveAssignmentErrorDescription
+data:    Database ServiceObjectiveAssignmentSuccessDate
+data:    Database Edition Web
+data:    Database MaxSizeGB 1
+data:    Database MaxSizeBytes 1073741824
+data:    Database CollationName SQL_Latin1_General_CP1_CI_AS
+data:    Database CreationDate
+data:    Database RecoveryPeriodStartDate
+data:    Database IsSystemObject
+data:    Database Status 1
+data:    Database IsFederationRoot
+data:    Database SizeMB -1
+data:    Database IsRecursiveTriggersOn
+data:    Database IsReadOnly
+data:    Database IsFederationMember
+data:    Database IsQueryStoreOn
+data:    Database IsQueryStoreReadOnly
+data:    Database QueryStoreMaxSizeMB
+data:    Database QueryStoreFlushPeriodSeconds
+data:    Database QueryStoreIntervalLengthMinutes
+data:    Database QueryStoreClearAll
+data:    Database QueryStoreStaleQueryThresholdDays
+info:    sql db show command OK
+```
 
 **sql db list [options] &lt;serverName> &lt;administratorPassword>**
 
 列出数据库。
 
-    ~$ azure sql db list fr8aelne00 test
-    info:    Executing command sql db list
-    Administrator password: ********
-    + Getting SQL server databases
-    data:    Name    Edition  Collation                     MaxSizeInGB
-    data:    ------  -------  ----------------------------  -----------
-    data:    master  Web      SQL_Latin1_General_CP1_CI_AS  5
-    info:    sql db list command OK
+```
+~$ azure sql db list fr8aelne00 test
+info:    Executing command sql db list
+Administrator password: ********
++ Getting SQL server databases
+data:    Name    Edition  Collation                     MaxSizeInGB
+data:    ------  -------  ----------------------------  -----------
+data:    master  Web      SQL_Latin1_General_CP1_CI_AS  5
+info:    sql db list command OK
+```
 
 **sql db delete [options] &lt;serverName> &lt;databaseName> &lt;administratorPassword>**
 
 删除数据库。
 
-    ~$ azure sql db delete fr8aelne00 newdb test
-    info:    Executing command sql db delete
-    Administrator password: ********
-    Delete database newdb? [y/n] y
-    + Getting SQL server databases
-    + Removing database
-    info:    sql db delete command OK
+```
+~$ azure sql db delete fr8aelne00 newdb test
+info:    Executing command sql db delete
+Administrator password: ********
+Delete database newdb? [y/n] y
++ Getting SQL server databases
++ Removing database
+info:    sql db delete command OK
+```
 
 ### 管理 SQL Server 防火墙规则的命令
 使用这些命令来管理 SQL Server 防火墙规则
@@ -2194,50 +2421,58 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 为 SQL Server 创建防火墙规则。
 
-    ~$ azure sql firewallrule create fr8aelne00 allowed 131.107.0.0 131.107.255.255
-    info:    Executing command sql firewallrule create
-    + Creating Firewall Rule
-    info:    sql firewallrule create command OK
+```
+~$ azure sql firewallrule create fr8aelne00 allowed 131.107.0.0 131.107.255.255
+info:    Executing command sql firewallrule create
++ Creating Firewall Rule
+info:    sql firewallrule create command OK
+```
 
 **sql firewallrule show [options] &lt;serverName> &lt;ruleName>**
 
 显示防火墙规则详细信息。
 
-    ~$ azure sql firewallrule show fr8aelne00 allowed
-    info:    Executing command sql firewallrule show
-    + Getting firewall rule
-    data:    Firewall rule Name allowed
-    data:    Firewall rule Type Microsoft.SqlAzure.FirewallRule
-    data:    Firewall rule State Normal
-    data:    Firewall rule SelfLink https://management.core.chinacloudapi.cn/9e672699-105
-    5-41ae-9c36-e85152f2e352/services/sqlservers/servers/fr8aelne00/firewallrules/allowed
-    data:    Firewall rule ParentLink https://management.core.chinacloudapi.cn/9e672699-1
-    055-41ae-9c36-e85152f2e352/services/sqlservers/servers/fr8aelne00
-    data:    Firewall rule StartIPAddress 131.107.0.0
-    data:    Firewall rule EndIPAddress 131.107.255.255
-    info:    sql firewallrule show command OK
+```
+~$ azure sql firewallrule show fr8aelne00 allowed
+info:    Executing command sql firewallrule show
++ Getting firewall rule
+data:    Firewall rule Name allowed
+data:    Firewall rule Type Microsoft.SqlAzure.FirewallRule
+data:    Firewall rule State Normal
+data:    Firewall rule SelfLink https://management.core.chinacloudapi.cn/9e672699-105
+5-41ae-9c36-e85152f2e352/services/sqlservers/servers/fr8aelne00/firewallrules/allowed
+data:    Firewall rule ParentLink https://management.core.chinacloudapi.cn/9e672699-1
+055-41ae-9c36-e85152f2e352/services/sqlservers/servers/fr8aelne00
+data:    Firewall rule StartIPAddress 131.107.0.0
+data:    Firewall rule EndIPAddress 131.107.255.255
+info:    sql firewallrule show command OK
+```
 
 **sql firewallrule list [options] &lt;serverName>**
 
 列出防火墙规则。
 
-    ~$ azure sql firewallrule list fr8aelne00
-    info:    Executing command sql firewallrule list
-    \data:    Name     Start IP address  End IP address
-    data:    -------  ----------------  ---------------
-    data:    allowed  131.107.0.0       131.107.255.255
-    +
-    info:    sql firewallrule list command OK
+```
+~$ azure sql firewallrule list fr8aelne00
+info:    Executing command sql firewallrule list
+\data:    Name     Start IP address  End IP address
+data:    -------  ----------------  ---------------
+data:    allowed  131.107.0.0       131.107.255.255
++
+info:    sql firewallrule list command OK
+```
 
 **sql firewallrule delete [options] &lt;serverName> &lt;ruleName>**
 
 此命令删除防火墙规则。
 
-    ~$ azure sql firewallrule delete fr8aelne00 allowed
-    info:    Executing command sql firewallrule delete
-    Delete rule allowed? [y/n] y
-    + Removing firewall rule
-    info:    sql firewallrule delete command OK
+```
+~$ azure sql firewallrule delete fr8aelne00 allowed
+info:    Executing command sql firewallrule delete
+Delete rule allowed? [y/n] y
++ Removing firewall rule
+info:    sql firewallrule delete command OK
+```
 
 ##<a name ="Commands_to_manage_vnet"></a>用于管理虚拟网络的命令
 
@@ -2247,65 +2482,72 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 创建虚拟网络。
 
-    ~$ azure network vnet create vnet1 --location "China North" -v
-    info:    Executing command network vnet create
-    info:    Using default address space start IP: 10.0.0.0
-    info:    Using default address space cidr: 8
-    info:    Using default subnet start IP: 10.0.0.0
-    info:    Using default subnet cidr: 11
-    verbose: Address Space [Starting IP/CIDR (Max VM Count)]: 10.0.0.0/8 (16777216)
-    verbose: Subnet [Starting IP/CIDR (Max VM Count)]: 10.0.0.0/11 (2097152)
-    verbose: Fetching Network Configuration
-    verbose: Fetching or creating affinity group
-    verbose: Fetching Affinity Groups
-    verbose: Fetching Locations
-    verbose: Creating new affinity group AG1
-    info:    Using affinity group AG1
-    verbose: Updating Network Configuration
-    info:    network vnet create command OK
+```
+~$ azure network vnet create vnet1 --location "China North" -v
+info:    Executing command network vnet create
+info:    Using default address space start IP: 10.0.0.0
+info:    Using default address space cidr: 8
+info:    Using default subnet start IP: 10.0.0.0
+info:    Using default subnet cidr: 11
+verbose: Address Space [Starting IP/CIDR (Max VM Count)]: 10.0.0.0/8 (16777216)
+verbose: Subnet [Starting IP/CIDR (Max VM Count)]: 10.0.0.0/11 (2097152)
+verbose: Fetching Network Configuration
+verbose: Fetching or creating affinity group
+verbose: Fetching Affinity Groups
+verbose: Fetching Locations
+verbose: Creating new affinity group AG1
+info:    Using affinity group AG1
+verbose: Updating Network Configuration
+info:    network vnet create command OK
+```
 
 **network vnet show &lt;name>**
 
 显示虚拟网络的详细信息。
 
-    ~$ azure network vnet show vnet1
-    info:    Executing command network vnet show
-    + Fetching Virtual Networks
-    data:    Name "vnet1"
-    data:    Id "25786fbe-08e8-4e7e-b1de-b98b7e586c7a"
-    data:    AffinityGroup "AG1"
-    data:    State "Created"
-    data:    AddressSpace AddressPrefixes 0 "10.0.0.0/8"
-    data:    Subnets 0 Name "subnet-1"
-    data:    Subnets 0 AddressPrefix "10.0.0.0/11"
-    info:    network vnet show command OK
+```
+~$ azure network vnet show vnet1
+info:    Executing command network vnet show
++ Fetching Virtual Networks
+data:    Name "vnet1"
+data:    Id "25786fbe-08e8-4e7e-b1de-b98b7e586c7a"
+data:    AffinityGroup "AG1"
+data:    State "Created"
+data:    AddressSpace AddressPrefixes 0 "10.0.0.0/8"
+data:    Subnets 0 Name "subnet-1"
+data:    Subnets 0 AddressPrefix "10.0.0.0/11"
+info:    network vnet show command OK
+```
 
 **network vnet list**
 
 列出所有现有的虚拟网络。
 
-    ~$ azure network vnet list
-    info:    Executing command network vnet list
-    + Fetching Virtual Networks
-    data:    Name        Status   AffinityGroup
-    data:    ----------  -------  -------------
-    data:    vnet1      Created  AG1
-    data:    vnet2      Created  AG1
-    data:    vnet3      Created  AG1
-    data:    vnet4      Created  AG1
-    info:    network vnet list command OK
-
+```
+~$ azure network vnet list
+info:    Executing command network vnet list
++ Fetching Virtual Networks
+data:    Name        Status   AffinityGroup
+data:    ----------  -------  -------------
+data:    vnet1      Created  AG1
+data:    vnet2      Created  AG1
+data:    vnet3      Created  AG1
+data:    vnet4      Created  AG1
+info:    network vnet list command OK
+```
 
 **network vnet delete &lt;name>**
 
 删除指定的虚拟网络。
 
-    ~$ azure network vnet delete opentechvn1
-    info:    Executing command network vnet delete
-    + Fetching Network Configuration
-    Delete the virtual network opentechvn1 ?  (y/n) y
-    + Deleting the virtual network opentechvn1
-    info:    network vnet delete command OK
+```
+~$ azure network vnet delete opentechvn1
+info:    Executing command network vnet delete
++ Fetching Network Configuration
+Delete the virtual network opentechvn1 ?  (y/n) y
++ Deleting the virtual network opentechvn1
+info:    network vnet delete command OK
+```
 
 **network export [file-path]**
 
@@ -2319,35 +2561,41 @@ Azure 移动服务汇聚了一系列支持应用程序的后端功能的 Azure �
 
 注册计划在网络配置中用来进行名称解析的 DNS 服务器。
 
-    ~$ azure network dnsserver register 98.138.253.109 --dns-id FrontEndDnsServer
-    info:    Executing command network dnsserver register
-    + Fetching Network Configuration
-    + Updating Network Configuration
-    info:    network dnsserver register command OK
+```
+~$ azure network dnsserver register 98.138.253.109 --dns-id FrontEndDnsServer
+info:    Executing command network dnsserver register
++ Fetching Network Configuration
++ Updating Network Configuration
+info:    network dnsserver register command OK
+```
 
 **network dnsserver list**
 
 列出在网络配置中注册的所有 DNS 服务器。
 
-    ~$ azure network dnsserver list
-    info:    Executing command network dnsserver list
-    + Fetching Network Configuration
-    data:    DNS Server ID         DNS Server IP
-    data:    --------------------  --------------
-    data:    DNS-bb39b4ac34d66a86  44.55.22.11
-    data:    FrontEndDnsServer     98.138.253.109
-    info:    network dnsserver list command OK
+```
+~$ azure network dnsserver list
+info:    Executing command network dnsserver list
++ Fetching Network Configuration
+data:    DNS Server ID         DNS Server IP
+data:    --------------------  --------------
+data:    DNS-bb39b4ac34d66a86  44.55.22.11
+data:    FrontEndDnsServer     98.138.253.109
+info:    network dnsserver list command OK
+```
 
 **network dnsserver unregister [options] &lt;dnsIP>**
 
 从网络配置中删除 DNS 服务器条目。
 
-    ~$ azure network dnsserver unregister 77.88.99.11
-    info:    Executing command network dnsserver unregister
-    + Fetching Network Configuration
-    Delete the DNS server entry dns-4 ( 77.88.99.11 ) %s ? (y/n) y
-    + Deleting the DNS server entry dns-4 ( 77.88.99.11 )
-    info:    network dnsserver unregister command OK
+```
+~$ azure network dnsserver unregister 77.88.99.11
+info:    Executing command network dnsserver unregister
++ Fetching Network Configuration
+Delete the DNS server entry dns-4 ( 77.88.99.11 ) %s ? (y/n) y
++ Deleting the DNS server entry dns-4 ( 77.88.99.11 )
+info:    network dnsserver unregister command OK
+```
 
 <!---HONumber=Mooncake_0206_2017-->
 <!--Update_Description: wording update-->

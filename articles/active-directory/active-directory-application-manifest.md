@@ -1,21 +1,22 @@
-<properties
-    pageTitle="了解 Azure Active Directory 应用程序清单 | Azure"
-    description="详细介绍 Azure Active Directory 应用程序清单，该清单表示 Azure AD 租户中的应用程序标识配置，并方便实现 OAuth 授权、许可体验和其他功能。"
-    services="active-directory"
-    documentationcenter=""
-    author="bryanla"
-    manager="mbaldwin"
-    editor="" />
-<tags
-    ms.assetid="4804f3d4-0ff1-4280-b663-f8f10d54d184"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="01/07/2017"
-    wacn.date="02/07/2017"
-    ms.author="dkershaw;bryanla" />
+---
+title: 了解 Azure Active Directory 应用程序清单 | Azure
+description: 详细介绍 Azure Active Directory 应用程序清单，该清单表示 Azure AD 租户中的应用程序标识配置，并方便实现 OAuth 授权、许可体验和其他功能。
+services: active-directory
+documentationcenter: ''
+author: bryanla
+manager: mbaldwin
+editor: ''
+
+ms.assetid: 4804f3d4-0ff1-4280-b663-f8f10d54d184
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 01/07/2017
+wacn.date: 02/07/2017
+ms.author: dkershaw;bryanla
+---
 
 # 了解 Azure Active Directory 应用程序清单
 与 Azure Active Directory (AD) 集成的应用程序必须向 Azure AD 租户注册，提供应用程序的持久性标识配置。在运行时查阅此配置，启用允许应用程序通过 Azure AD 外包和中转身份验证/授权的方案。有关 Azure AD 应用程序模型的详细信息，请参阅[添加、更新和删除应用程序][ADD-UPD-RMV-APP]一文。
@@ -47,55 +48,55 @@
 
 1. 导航到 [Azure 经典管理门户][AZURE-CLASSIC-PORTAL]，使用具有服务管理员或协同管理员权限的帐户登录。
 2. 在经过身份验证后，向下滚动并选择左侧导航面板中的 Azure“Active Directory”扩展 (1)，然后单击应用程序注册所在的 Azure AD 租户 (2)。
-   
+
     ![选择 Azure AD 租户][SELECT-AZURE-AD-TENANT]
 3. 出现“目录”页时，单击页面顶部的“应用程序”(1) 以查看在租户中注册的应用程序列表。然后找到要在列表中更新的应用程序并单击它 (2)。
-   
+
     ![选择 Azure AD 租户][SELECT-AZURE-AD-APP]
 4. 选择应用程序的主页后，注意页面底部的“管理清单”功能 (1)。如果你单击此链接，系统将提示下载或上载 JSON 清单文件。单击“下载清单”(2)。随后即会出现下载确认对话框，提示用户单击“下载清单”(3) 进行确认。然后，请在本地打开或保存文件 (4)。
-   
+
     ![管理清单，下载选项][MANAGE-MANIFEST-DOWNLOAD]  
 
-   
     ![下载清单][DOWNLOAD-MANIFEST]
 5. 在此示例中，我们已在本地保存了文件，因此可以在编辑器中打开该文件，对 JSON 进行更改，然后再次保存。下面是 JSON 结构在 Visual Studio JSON 编辑器中的外观。请注意，它遵循[应用程序实体][APPLICATION-ENTITY]的架构，如前所述：
-   
+
     ![更新清单 JSON][UPDATE-MANIFEST]
-   
+
     例如，假设要在资源应用程序 (API) 中实现/公开名为“Employees.Read.All”的新权限，你只需将新的/第二个元素添加到 oauth2Permissions 集合，如下所示：
-   
-        "oauth2Permissions": [
-        {
-        "adminConsentDescription": "Allow the application to access MyWebApplication on behalf of the signed-in user.",
-        "adminConsentDisplayName": "Access MyWebApplication",
-        "id": "aade5b35-ea3e-481c-b38d-cba4c78682a0",
-        "isEnabled": true,
-        "type": "User",
-        "userConsentDescription": "Allow the application to access MyWebApplication on your behalf.",
-        "userConsentDisplayName": "Access MyWebApplication",
-        "value": "user_impersonation"
-        },
-        {
-        "adminConsentDescription": "Allow the application to have read-only access to all Employee data.",
-        "adminConsentDisplayName": "Read-only access to Employee records",
-        "id": "2b351394-d7a7-4a84-841e-08a6a17e4cb8",
-        "isEnabled": true,
-        "type": "User",
-        "userConsentDescription": "Allow the application to have read-only access to your Employee data.",
-        "userConsentDisplayName": "Read-only access to your Employee records",
-        "value": "Employees.Read.All"
-        }
-        ],
-   
+
+    ```
+    "oauth2Permissions": [
+    {
+    "adminConsentDescription": "Allow the application to access MyWebApplication on behalf of the signed-in user.",
+    "adminConsentDisplayName": "Access MyWebApplication",
+    "id": "aade5b35-ea3e-481c-b38d-cba4c78682a0",
+    "isEnabled": true,
+    "type": "User",
+    "userConsentDescription": "Allow the application to access MyWebApplication on your behalf.",
+    "userConsentDisplayName": "Access MyWebApplication",
+    "value": "user_impersonation"
+    },
+    {
+    "adminConsentDescription": "Allow the application to have read-only access to all Employee data.",
+    "adminConsentDisplayName": "Read-only access to Employee records",
+    "id": "2b351394-d7a7-4a84-841e-08a6a17e4cb8",
+    "isEnabled": true,
+    "type": "User",
+    "userConsentDescription": "Allow the application to have read-only access to your Employee data.",
+    "userConsentDisplayName": "Read-only access to your Employee records",
+    "value": "Employees.Read.All"
+    }
+    ],
+    ```
+
     条目必须唯一，因此必须为 `"id"` 属性生成新的全局唯一 ID (GUID)。在本例中，由于指定了 `"type": "User"`，此权限可由资源/API 应用程序注册所在的 Azure AD 租户所验证的任何帐户同意，授予代表帐户进行访问的客户端应用程序权限。说明和显示名称字符串将在同意期间使用，显示在 Azure 经典管理门户中。
 6. 完成更新清单后，返回 Azure 经典管理门户中的 Azure AD 应用程序页，再次单击“管理清单”功能 (1)，但这次选择“上载清单”选项 (2)。与下载时类似，你将看到另一个对话框，提示你选择 JSON 文件的位置。单击“浏览文件...”(3)，使用“选择要上载的文件”对话框选择 JSON 文件 (4)，然后按下“打开”。对话框消失后，选择“确定”复选标记 (5)，随即将会上载你的清单。
-   
-    ![管理清单，上载选项][MANAGE-MANIFEST-UPLOAD]
-   
-    ![上载清单 JSON][UPLOAD-MANIFEST]
-   
-    ![上载清单 JSON - 确认][UPLOAD-MANIFEST-CONFIRM]  
 
+    ![管理清单，上载选项][MANAGE-MANIFEST-UPLOAD]
+
+    ![上载清单 JSON][UPLOAD-MANIFEST]
+
+    ![上载清单 JSON - 确认][UPLOAD-MANIFEST-CONFIRM]  
 
 保存清单后，即可允许注册的客户端应用程序访问上面添加的新权限。此时可以使用 Azure 经典管理门户的 Web UI，不必编辑客户端应用程序的清单：
 
@@ -132,18 +133,18 @@
 [UPLOAD-MANIFEST-CONFIRM]: ./media/active-directory-application-manifest/upload-manifest-confirm.png
 
 <!--article references -->
-[AAD-APP-OBJECTS]: /documentation/articles/active-directory-application-objects/
-[AAD-DEVELOPER-GLOSSARY]: /documentation/articles/active-directory-dev-glossary/
+[AAD-APP-OBJECTS]: ./active-directory-application-objects.md
+[AAD-DEVELOPER-GLOSSARY]: ./active-directory-dev-glossary.md
 [AAD-GROUPS-FOR-AUTHORIZATION]: http://www.dushyantgill.com/blog/2014/12/10/authorization-cloud-applications-using-ad-groups/
-[ADD-UPD-RMV-APP]: /documentation/articles/active-directory-integrating-applications/
+[ADD-UPD-RMV-APP]: ./active-directory-integrating-applications.md
 [APPLICATION-ENTITY]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#application-entity
 [APPLICATION-ENTITY-APP-ROLE]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#approle-type
 [APPLICATION-ENTITY-OAUTH2-PERMISSION]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#oauth2permission-type
 [AZURE-CLASSIC-PORTAL]: https://manage.windowsazure.cn
 [DEV-GUIDE-TO-AUTH-WITH-ARM]: http://www.dushyantgill.com/blog/2015/05/23/developers-guide-to-auth-with-azure-resource-manager-api/
-[GRAPH-API]: /documentation/articles/active-directory-graph-api/
-[IMPLICIT-GRANT]: /documentation/articles/active-directory-dev-understanding-oauth2-implicit-grant/
-[INTEGRATING-APPLICATIONS-AAD]: /documentation/articles/active-directory-integrating-applications/
+[GRAPH-API]: ./active-directory-graph-api.md
+[IMPLICIT-GRANT]: ./active-directory-dev-understanding-oauth2-implicit-grant.md
+[INTEGRATING-APPLICATIONS-AAD]: ./active-directory-integrating-applications.md
 [O365-PERM-DETAILS]: https://msdn.microsoft.com/office/office365/HowTo/application-manifest
 [O365-SERVICE-DAEMON-APPS]: https://msdn.microsoft.com/office/office365/howto/building-service-apps-in-office-365
 [RBAC-CLOUD-APPS-AZUREAD]: http://www.dushyantgill.com/blog/2014/12/10/roles-based-access-control-in-cloud-applications-using-azure-ad/

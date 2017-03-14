@@ -1,19 +1,21 @@
-<properties
-	pageTitle="C# SDK 调用认知服务时提示 Key 无效"
-	description="C# SDK 调用认知服务时提示 Key 无效"
-	service="microsoft.cognitiveservices"
-	resource="cognitiveservices"
-	authors=""
-	displayOrder=""
-	selfHelpType=""
-	supportTopicIds=""
-	productPesIds=""
-	resourceTags="Cognitive Services, C# SDK, Key"
-	cloudEnvironments="MoonCake" />
-<tags
-	ms.service="cognitive-services-aog"
-	ms.date=""
-	wacn.date="01/12/2017" />
+---
+title: C# SDK 调用认知服务时提示 Key 无效
+description: C# SDK 调用认知服务时提示 Key 无效
+service: microsoft.cognitiveservices
+resource: cognitiveservices
+authors: ''
+displayOrder: ''
+selfHelpType: ''
+supportTopicIds: ''
+productPesIds: ''
+resourceTags: Cognitive Services, C# SDK, Key
+cloudEnvironments: MoonCake
+
+ms.service: cognitive-services-aog
+ms.date: ''
+wacn.date: 01/12/2017
+---
+
 # C# SDK 调用认知服务时提示 Key 无效
 
 ## **问题描述**
@@ -30,12 +32,9 @@
 
 通过以下 2 步解决该问题：
 
-1.	下载最新版本 C# 对应的SDK。
-2.	修改初始化人脸识别对象的方法，添加指向中国版认知服务的 endpoint。
+1. 下载最新版本 C# 对应的SDK。
+2. 修改初始化人脸识别对象的方法，添加指向中国版认知服务的 endpoint。
 
-		faceServiceClient = new FaceServiceClient("<key>", "https://api.cognitive.azure.cn/face/v1.0");
-
-
-
-
-
+    ```
+    faceServiceClient = new FaceServiceClient("<key>", "https://api.cognitive.azure.cn/face/v1.0");
+    ```

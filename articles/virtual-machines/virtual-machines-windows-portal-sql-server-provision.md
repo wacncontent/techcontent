@@ -1,28 +1,28 @@
-<properties
-    pageTitle="预配 SQL Server 虚拟机 | Azure"
-    description="使用门户在 Azure 中创建并连接到 SQL Server 虚拟机。本教程使用 Resource Manager 模式。"
-    services="virtual-machines-windows"
-    documentationcenter="na"
-    author="rothja"
-    editor=""
-    manager="jhubbard"
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="1aff691f-a40a-4de2-b6a0-def1384e086e"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="vm-windows-sql-server"
-    ms.workload="infrastructure-services"
-    ms.date="09/21/2016"
-    wacn.date="02/20/2017"
-    ms.author="jroth" />  
+---
+title: 预配 SQL Server 虚拟机 | Azure
+description: 使用门户在 Azure 中创建并连接到 SQL Server 虚拟机。本教程使用 Resource Manager 模式。
+services: virtual-machines-windows
+documentationcenter: na
+author: rothja
+editor: ''
+manager: jhubbard
+tags: azure-resource-manager
 
+ms.assetid: 1aff691f-a40a-4de2-b6a0-def1384e086e
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 09/21/2016
+wacn.date: 02/20/2017
+ms.author: jroth
+---
 
 # 在 Azure 门户预览中预配 SQL Server 虚拟机
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/virtual-machines-windows-portal-sql-server-provision/)
-- [PowerShell](/documentation/articles/virtual-machines-windows-ps-sql-create/)
+> [!div class="op_single_selector"]
+- [门户](./virtual-machines-windows-portal-sql-server-provision.md)
+- [PowerShell](./virtual-machines-windows-ps-sql-create.md)
 
 本端到端教程说明如何使用 Azure 门户预览来预配运行 SQL Server 的虚拟机。
 
@@ -38,23 +38,23 @@ Azure 虚拟机 \(VM\) 库包括几种内含 Microsoft SQL Server 的映像。�
 ## <a name="select-a-sql-vm-image-from-the-gallery"></a> 从库中选择 SQL VM 映像
 
 1. 使用帐户登录到 [Azure 门户预览](https://portal.azure.cn)。
-   
-    > [AZURE.NOTE]
-    如果你没有 Azure 帐户，请访问 [Azure 试用](/pricing/1rmb-trial/)。
+
+    > [!NOTE]
+    如果你没有 Azure 帐户，请访问 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
     > 
     > 
 2. 在 Azure 门户预览中单击“新建”。该门户将打开“新建”边栏选项卡。SQL Server VM 资源位于应用商店的“虚拟机”组中。
 3. 在“新建”边栏选项卡中，单击“虚拟机”。
 4. 若要查看所有可用的映像，请单击“虚拟机”边栏选项卡中的“查看全部”。
-   
+
     ![Azure 虚拟机边栏选项卡](./media/virtual-machines-windows-portal-sql-server-provision/azure-compute-blade.png)
 5. 在“数据库服务器”下，单击“数据库服务器”。你可能需要向下滚动才能找到“数据库服务器”。查看可用的 SQL Server 模板。
-   
+
     ![虚拟机库 SQL 映像](./media/virtual-machines-windows-portal-sql-server-provision/virtual-machine-gallery-sql-server.png)
 6. 每个模板均可标识 SQL Server 版本和操作系统。从列表中选择这些映像之一。然后查看详细信息边栏选项卡，了解虚拟机映像的说明。
 
 7. 在“选择部署模型”下面，确认已选择“Resource Manager”。对于新虚拟机，建议使用“Resource Manager”部署模型。单击“创建”。
-   
+
     ![使用 Resource Manager 创建 SQL VM](./media/virtual-machines-windows-portal-sql-server-provision/azure-compute-sql-deployment-model.png)
 
 ## <a name="configure-the-vm"></a> 配置 VM
@@ -76,27 +76,25 @@ Azure 虚拟机 \(VM\) 库包括几种内含 Microsoft SQL Server 的映像。�
 * 提供一个强**密码**。
 * 如果有多个订阅，验证该订阅是否是新 VM 的正确订阅。
 * 在“资源组”框中，键入新资源组的名称。此外，若要使用现有的资源组，请单击“选择现有项”。资源组是 Azure（虚拟机、存储帐户、虚拟网络等）中相关资源的集合。
-  
-    > [AZURE.NOTE]
-    如果你只是测试或了解 Azure 中的 SQL Server 部署，使用新的资源组很有帮助。测试完成后，删除资源组会自动删除 VM 和与该资源组相关联的所有资源。有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)。
+
+    > [!NOTE]
+    如果你只是测试或了解 Azure 中的 SQL Server 部署，使用新的资源组很有帮助。测试完成后，删除资源组会自动删除 VM 和与该资源组相关联的所有资源。有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
     > 
     > 
 * 选择此部署的**位置**。
 * 单击“确定”保存设置。
 
-	![SQL 基本信息边栏选项卡](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-basic.png)  
-
+    ![SQL 基本信息边栏选项卡](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-basic.png)  
 
 ## <a name="2-choose-virtual-machine-size"></a> 2.选择虚拟机大小
 执行“大小”设置步骤时，请在“选择大小”边栏选项卡中选择虚拟机大小。边栏选项卡最初将根据你选择的模板显示建议的计算机大小。系统还会估算每月运行 VM 的费用。
 
 ![SQL VM 大小选项](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-vm-choose-a-size.png)  
 
+对于生产工作负荷，建议选择可支持[高级存储](../storage/storage-premium-storage.md)的虚拟机大小。如果不需要该级别的性能，请使用“全部查看”按钮来查看所有计算机大小选项。例如，可以将较小的计算机大小用于开发或测试环境。
 
-对于生产工作负荷，建议选择可支持[高级存储](/documentation/articles/storage-premium-storage/)的虚拟机大小。如果不需要该级别的性能，请使用“全部查看”按钮来查看所有计算机大小选项。例如，可以将较小的计算机大小用于开发或测试环境。
-
-> [AZURE.NOTE]
-有关虚拟机大小的详细信息，请参阅[虚拟机大小](/documentation/articles/virtual-machines-windows-sizes/)。有关 SQL Server VM 大小的考虑事项，请参阅 [SQL Server 在 Azure 虚拟机中的性能最佳实践](/documentation/articles/virtual-machines-windows-sql-performance/)。
+> [!NOTE]
+有关虚拟机大小的详细信息，请参阅[虚拟机大小](./virtual-machines-windows-sizes.md)。有关 SQL Server VM 大小的考虑事项，请参阅 [SQL Server 在 Azure 虚拟机中的性能最佳实践](./virtual-machines-windows-sql-performance.md)。
 > 
 > 
 
@@ -107,15 +105,15 @@ Azure 虚拟机 \(VM\) 库包括几种内含 Microsoft SQL Server 的映像。�
 
 * 在“存储”下面，为“磁盘类型”指定“标准”或“高级\(SSD\)”。对于生产型工作负荷，建议使用高级存储。
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果对不支持高级存储的计算机大小选择“高级\(SSD\)”，计算机大小会自动更改。
 > 
 > 
 
-* 在“存储帐户”下面，可以接受自动预配的存储帐户名称。还可以单击“存储帐户”以选择现有帐户和配置存储帐户类型。默认情况下，Azure 将创建具有本地冗余存储空间的新存储帐户。有关存储选项的详细信息，请参阅 [Azure 存储空间复制](/documentation/articles/storage-redundancy/)。
+* 在“存储帐户”下面，可以接受自动预配的存储帐户名称。还可以单击“存储帐户”以选择现有帐户和配置存储帐户类型。默认情况下，Azure 将创建具有本地冗余存储空间的新存储帐户。有关存储选项的详细信息，请参阅 [Azure 存储空间复制](../storage/storage-redundancy.md)。
 * 在“网络”下面，可以接受自动填充的值。也可以单击每个功能来手动配置**虚拟网络**、**子网**、**公共 IP 地址**和**网络安全组**。对于本教程，请保留默认值。
 * 默认情况下，Azure 会对为 VM 指定的同一个存储帐户启用“监视”功能。你可以在此处更改这些设置。
-* 在“可用性集”下指定可用性集。在本教程中，可以选择“无”。如果你计划设置 SQL AlwaysOn 可用性组，可以对可用性进行配置，避免重新创建虚拟机。有关详细信息，请参阅[管理虚拟机的可用性](/documentation/articles/virtual-machines-windows-manage-availability/)。
+* 在“可用性集”下指定可用性集。在本教程中，可以选择“无”。如果你计划设置 SQL AlwaysOn 可用性组，可以对可用性进行配置，避免重新创建虚拟机。有关详细信息，请参阅[管理虚拟机的可用性](./virtual-machines-windows-manage-availability.md)。
 
 配置完这些设置后，请单击“确定”。
 
@@ -137,11 +135,10 @@ Azure 虚拟机 \(VM\) 库包括几种内含 Microsoft SQL Server 的映像。�
 
 ![SQL 连接选项](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-arm-connectivity-alt.png)  
 
-
 若要通过 Internet 连接到 SQL Server，还必须启用下一部分中所述的“SQL Server 身份验证”。
 
-> [AZURE.NOTE]
-该功能可以向 SQL Server VM 添加更多网络通信限制。为此，可以在创建 VM 后编辑网络安全组。有关详细信息，请参阅[什么是网络安全组 \(NSG\)？](/documentation/articles/virtual-networks-nsg/)
+> [!NOTE]
+该功能可以向 SQL Server VM 添加更多网络通信限制。为此，可以在创建 VM 后编辑网络安全组。有关详细信息，请参阅[什么是网络安全组 \(NSG\)？](../virtual-network/virtual-networks-nsg.md)
 > 
 > 
 
@@ -150,22 +147,21 @@ Azure 虚拟机 \(VM\) 库包括几种内含 Microsoft SQL Server 的映像。�
 * **本地\(仅限 VM 内部\)**：仅允许从 VM 内部连接到 SQL Server。
 * **专用\(虚拟网络内部\)**：允许从同一虚拟网络中的虚拟机或服务连接到 SQL Server。
 
-> [AZURE.NOTE]
+> [!NOTE]
 SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。即使对公共和专用连接选项也是如此。对于 Express 版本，必须在创建 VM 后使用 SQL Server 配置管理器来手动启用 TCP/IP 协议。
 > 
 > 
 
 一般情况下，选择方案允许的最严格连接可提高安全性。但是，通过网络安全组规则和 SQL/Windows 身份验证的所有选项都是安全的。
 
-**端口**：默认为 1433。你可以指定其他端口号。有关详细信息，请参阅[连接到 SQL Server 虚拟机 \(Resource Manager\) \| Azure](/documentation/articles/virtual-machines-windows-sql-connect/)。
+**端口**：默认为 1433。你可以指定其他端口号。有关详细信息，请参阅[连接到 SQL Server 虚拟机 \(Resource Manager\) \| Azure](./virtual-machines-windows-sql-connect.md)。
 
 ### <a name="authentication"></a> 身份验证
 如果需要 SQL Server 身份验证，请在“SQL 身份验证”下单击“启用”。
 
 ![SQL Server 身份验证](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-arm-authentication.png)  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 如果你计划通过 Internet 来访问 SQL Server（即“公共”连接选项），则必须在此处启用 SQL 身份验证。对 SQL Server 进行公共访问需要使用 SQL 身份验证。
 > 
 > 
@@ -179,8 +175,7 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 
 ![SQL 存储配置](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-arm-storage.png)  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 如果选择了标准存储，则此选项不可用。自动存储优化只适用于高级存储。
 > 
 > 
@@ -193,7 +188,7 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 * **事务处理**：针对传统数据库 OLTP 工作负荷优化存储。
 * **数据仓库**：针对分析和报告工作负荷优化存储。
 
-> [AZURE.NOTE]
+> [!NOTE]
 滑块上的上限根据所选虚拟机大小的不同而异。
 > 
 > 
@@ -203,8 +198,7 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 
 ![SQL 自动修补](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-arm-patching.png)  
 
-
-有关详细信息，请参阅 [Azure 虚拟机中 SQL Server 的自动修补](/documentation/articles/virtual-machines-windows-sql-automated-patching/)。
+有关详细信息，请参阅 [Azure 虚拟机中 SQL Server 的自动修补](./virtual-machines-windows-sql-automated-patching.md)。
 
 ### <a name="automated-backup"></a> 自动备份
 在“自动备份”下启用针对所有数据库的自动数据库备份。默认情况下，自动备份处于禁用状态。
@@ -219,14 +213,12 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 
 ![SQL 自动备份](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-arm-autobackup.png)  
 
-
- 有关详细信息，请参阅[针对 Azure 虚拟机中 SQL Server 的自动备份](/documentation/articles/virtual-machines-windows-sql-automated-backup/)。
+ 有关详细信息，请参阅[针对 Azure 虚拟机中 SQL Server 的自动备份](./virtual-machines-windows-sql-automated-backup.md)。
 
 ### <a name="azure-key-vault-integration"></a> Azure 密钥保管库集成
 若要将安全密码存储在 Azure 中进行加密，请先单击“Azure 密钥保管库集成”，然后单击“启用”。
 
 ![SQL Azure 密钥保管库集成](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-arm-akv.png)  
-
 
 下表列出了配置 Azure 密钥保管库集成所需的参数。
 
@@ -238,7 +230,7 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 | **主体密码** |Azure Active Directory 服务主体密码。该密码也称为客户端密码。 |9VTJSQwzlFepD8XODnzy8n2V01Jd8dAjwm/azF1XDKM= |
 | **凭据名称** |**凭据名称**：AKV 集成在 SQL Server 内创建一个凭据，使 VM 具有对密钥保管库的访问权限。为此凭据选择一个名称。 |mycred1 |
 
-有关详细信息，请参阅[为 Azure VM 上的 SQL Server 配置 Azure 密钥保管库集成](/documentation/articles/virtual-machines-windows-ps-sql-keyvault/)。
+有关详细信息，请参阅[为 Azure VM 上的 SQL Server 配置 Azure 密钥保管库集成](./virtual-machines-windows-ps-sql-keyvault.md)。
 
 配置完 SQL Server 设置后，单击“确定”。
 
@@ -247,8 +239,7 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 
 ![启用 SQL Server R Services](./media/virtual-machines-windows-portal-sql-server-provision/azure-vm-sql-server-r-services.png)  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 对于不是 2016 Enterprise Edition 的 SQL Server 映像，启用 R 服务的选项将被禁用。
 > 
 > 
@@ -258,7 +249,7 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 
 可以从 Azure 门户预览监视部署情况。屏幕顶部的“通知”按钮显示部署的基本状态。
 
-> [AZURE.NOTE]
+> [!NOTE]
 为了让你了解部署时间，我已使用默认设置将一个 SQL VM 部署到中国东部区域。此测试部署总共花费了 26 分钟才完成。但是根据你所在的区域和选择的设置，你花费的部署时间会更长或更短。
 > 
 > 
@@ -284,19 +275,19 @@ SQL Server Express 版本的虚拟机映像不会自动启用 TCP/IP 协议。�
 
 在本教程中，我们选择了虚拟机的“公共”访问权限和“SQL Server 身份验证”。这些设置将虚拟机自动配置为允许任何客户端通过 Internet 来与 SQL Server 建立连接（假设这些客户端可提供正确的 SQL 登录名）。
 
-> [AZURE.NOTE]
-如果你没有在预配过程中选择“公共”，则需执行其他步骤才能通过 Internet 访问 SQL Server 实例。有关详细信息，请参阅[连接到 SQL Server 虚拟机](/documentation/articles/virtual-machines-windows-sql-connect/)。
+> [!NOTE]
+如果你没有在预配过程中选择“公共”，则需执行其他步骤才能通过 Internet 访问 SQL Server 实例。有关详细信息，请参阅[连接到 SQL Server 虚拟机](./virtual-machines-windows-sql-connect.md)。
 > 
 > 
 
 以下部分说明了如何通过 Internet 从不同的计算机连接到 VM 上的 SQL Server 实例。
 
-> [AZURE.INCLUDE [连接到 VM Resource Manager 中的 SQL Server](../../includes/virtual-machines-sql-server-connection-steps-resource-manager.md)]
+> [!INCLUDE [连接到 VM Resource Manager 中的 SQL Server](../../includes/virtual-machines-sql-server-connection-steps-resource-manager.md)]
 > 
 > 
 
 ## 后续步骤
-有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/) 和[常见问题](/documentation/articles/virtual-machines-windows-sql-server-iaas-faq/)。
+有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](./virtual-machines-windows-sql-server-iaas-overview.md) 和[常见问题](./virtual-machines-windows-sql-server-iaas-faq.md)。
 
 有关 Azure 虚拟机上的 SQL Server 视频概述，请观看 [Azure VM 是 SQL Server 2016 的最佳平台](https://channel9.msdn.com/Events/DataDriven/SQLServer2016/Azure-VM-is-the-best-platform-for-SQL-Server-2016)。
 

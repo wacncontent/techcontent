@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="Widevine 许可证模板概述 | Azure" 
-	description="本主题概述了用于配置 Widevine 许可证的 Widevine 许可证模板。" 
-	authors="juliako" 
-	manager="erikre" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>  
+---
+title: Widevine 许可证模板概述 | Azure
+description: 本主题概述了用于配置 Widevine 许可证的 Widevine 许可证模板。
+authors: juliako
+manager: erikre
+editor: ''
+services: media-services
+documentationCenter: ''
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016"  
-	wacn.date="12/26/2016"  
-	ms.author="juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 #Widevine 许可证模板概述
 
@@ -28,34 +27,36 @@ Widevine 许可证请求的格式设置为 JSON 消息。
 
 请注意，你可以选择创建不包含值而只有“{}”的空消息，并创建包含所有默认值的许可证模板。
 
-	{  
-	   “payload”:“<license challenge>”,
-	   “content_id”: “<content id>” 
-	   “provider”: ”<provider>”
-	   “allowed_track_types”:“<types>”,
-	   “content_key_specs”:[  
-	      {  
-	         “track_type”:“<track type 1>”
-	      },
-	      {  
-	         “track_type”:“<track type 2>”
-	      },
-	      …
-	   ],
-	   “policy_overrides”:{  
-	      “can_play”:<can play>,
-	      “can persist”:<can persist>,
-	      “can_renew”:<can renew>,
-	      “rental_duration_seconds”:<rental duration>,
-	      “playback_duration_seconds”:<playback duration>,
-	      “license_duration_seconds”:<license duration>,
-	      “renewal_recovery_duration_seconds”:<renewal recovery duration>,
-	      “renewal_server_url”:”<renewal server url>”,
-	      “renewal_delay_seconds”:<renewal delay>,
-	      “renewal_retry_interval_seconds”:<renewal retry interval>,
-	      “renew_with_usage”:<renew with usage>
-	   }
-	}
+```
+{  
+   “payload”:“<license challenge>”,
+   “content_id”: “<content id>” 
+   “provider”: ”<provider>”
+   “allowed_track_types”:“<types>”,
+   “content_key_specs”:[  
+      {  
+         “track_type”:“<track type 1>”
+      },
+      {  
+         “track_type”:“<track type 2>”
+      },
+      …
+   ],
+   “policy_overrides”:{  
+      “can_play”:<can play>,
+      “can persist”:<can persist>,
+      “can_renew”:<can renew>,
+      “rental_duration_seconds”:<rental duration>,
+      “playback_duration_seconds”:<playback duration>,
+      “license_duration_seconds”:<license duration>,
+      “renewal_recovery_duration_seconds”:<renewal recovery duration>,
+      “renewal_server_url”:”<renewal server url>”,
+      “renewal_delay_seconds”:<renewal delay>,
+      “renewal_retry_interval_seconds”:<renewal retry interval>,
+      “renew_with_usage”:<renew with usage>
+   }
+}
+```
 
 ##JSON 消息
 
@@ -76,9 +77,7 @@ parse_only | 布尔值。true 或 false | 解析许可证请求，但不颁发�
 
 如果有预先存在的策略，则不需要在内容密钥规范中指定任何值。与此内容关联且预先存在的策略将用于确定输出保护，例如 HDCP 和 CGMS。如果预先存在的策略未注册到 Widevine 许可证服务器，内容提供者可以在许可证请求中注入值。
 
-
 无论选项 use_policy_overrides_exclusively 为何，都必须为所有跟踪指定每个 content_key_specs。
-
 
 名称 | 值 | 说明
 ---|---|---
@@ -87,7 +86,6 @@ content_key_specs <br/> security_level | uint32 | 定义客户端对播放稳定
 content_key_specs <br/> required_output_protection.hdc | 字符串 - HDCP_NONE、HDCP_V1 或 HDCP_V2 | 指示是否需要 HDCP
 content_key_specs <br/>key | Base64 <br/>编码的字符串|用于此跟踪的内容密钥。如果指定，则需要 track_type 或 key_id。此选项可让内容提供者注入此跟踪的内容密钥，而不是让 Widevine 许可证服务器生成或查找密钥。
 content_key_specs.key_id| Base64 编码的二进制字符串，16 字节 | 密钥的唯一标识符。 
-
 
 ##策略重写 
 
@@ -121,87 +119,89 @@ override\_provider\_client\_token | 布尔值。true 或 false |如果为 false 
 
 下面是这些类型的定义。
 
-	public class WidevineMessage
-	{
-	    public WidevineMessage();
-	
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-	    public AllowedTrackTypes? allowed_track_types { get; set; }
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-	    public ContentKeySpecs[] content_key_specs { get; set; }
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-	    public object policy_overrides { get; set; }
-	}
+```
+public class WidevineMessage
+{
+    public WidevineMessage();
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum AllowedTrackTypes
-    {
-        SD_ONLY = 0,
-        SD_HD = 1
-    }
-    public class ContentKeySpecs
-    {
-        public ContentKeySpecs();
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public AllowedTrackTypes? allowed_track_types { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public ContentKeySpecs[] content_key_specs { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public object policy_overrides { get; set; }
+}
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string key_id { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public RequiredOutputProtection required_output_protection { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public int? security_level { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string track_type { get; set; }
-    }
+[JsonConverter(typeof(StringEnumConverter))]
+public enum AllowedTrackTypes
+{
+    SD_ONLY = 0,
+    SD_HD = 1
+}
+public class ContentKeySpecs
+{
+    public ContentKeySpecs();
 
-    public class RequiredOutputProtection
-    {
-        public RequiredOutputProtection();
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public string key_id { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public RequiredOutputProtection required_output_protection { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public int? security_level { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public string track_type { get; set; }
+}
 
-        public Hdcp hdcp { get; set; }
-    }
+public class RequiredOutputProtection
+{
+    public RequiredOutputProtection();
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum Hdcp
-    {
-        HDCP_NONE = 0,
-        HDCP_V1 = 1,
-        HDCP_V2 = 2
-    }
+    public Hdcp hdcp { get; set; }
+}
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum Hdcp
+{
+    HDCP_NONE = 0,
+    HDCP_V1 = 1,
+    HDCP_V2 = 2
+}
+```
 
 ###示例
 
 以下示例演示如何使用 .NET API 配置简单的 Widevine 许可证。
 
-    private static string ConfigureWidevineLicenseTemplate()
+```
+private static string ConfigureWidevineLicenseTemplate()
+{
+    var template = new WidevineMessage
     {
-        var template = new WidevineMessage
+        allowed_track_types = AllowedTrackTypes.SD_HD,
+        content_key_specs = new[]
         {
-            allowed_track_types = AllowedTrackTypes.SD_HD,
-            content_key_specs = new[]
+            new ContentKeySpecs
             {
-                new ContentKeySpecs
-                {
-                    required_output_protection = new RequiredOutputProtection { hdcp = Hdcp.HDCP_NONE},
-                    security_level = 1,
-                    track_type = "SD"
-                }
-            },
-            policy_overrides = new
-            {
-                can_play = true,
-                can_persist = true,
-                can_renew = false
+                required_output_protection = new RequiredOutputProtection { hdcp = Hdcp.HDCP_NONE},
+                security_level = 1,
+                track_type = "SD"
             }
-        };
+        },
+        policy_overrides = new
+        {
+            can_play = true,
+            can_persist = true,
+            can_renew = false
+        }
+    };
 
-        string configuration = JsonConvert.SerializeObject(template);
-        return configuration;
-    }
-
-
+    string configuration = JsonConvert.SerializeObject(template);
+    return configuration;
+}
+```
 
 ##另请参阅
 
-[使用 PlayReady 和/或 Widevine DRM 动态通用加密](/documentation/articles/media-services-protect-with-drm/)
+[使用 PlayReady 和/或 Widevine DRM 动态通用加密](./media-services-protect-with-drm.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

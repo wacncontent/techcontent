@@ -1,24 +1,23 @@
-<properties
-    pageTitle="为工作或学校帐户设置双重验证 | Azure"
-    description="公司配置 Azure 多重身份验证时，会提示你注册双重验证。了解如何进行设置。"
-    services="multi-factor-authentication"
-    keywords="如何使用 azure 目录, 云中的 active directory, active directory 教程"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="pblachar" />
-    
-<tags
-    ms.assetid="46f83a6a-dbdd-4375-8dc4-e7ea77c16357"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/15/2016"
-    wacn.date="02/20/2017"
-    ms.author="kgremban" />  
+---
+title: 为工作或学校帐户设置双重验证 | Azure
+description: 公司配置 Azure 多重身份验证时，会提示你注册双重验证。了解如何进行设置。
+services: multi-factor-authentication
+keywords: 如何使用 azure 目录, 云中的 active directory, active directory 教程
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: pblachar
 
+ms.assetid: 46f83a6a-dbdd-4375-8dc4-e7ea77c16357
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2016
+wacn.date: 02/20/2017
+ms.author: kgremban
+---
 
 # 将我的帐户设置为使用双重验证
 双重验证是一种额外的安全步骤，可使帐户更难被其他人攻破，从而帮助保护帐户。如果正在阅读本文，可能会收到来自工作或学校管理员的有关多重身份验证的电子邮件。或者，也许会在尝试登录时收到消息，要求你设置其他安全性验证。如果是这种情况，**在完成自动注册过程之前将无法登录**。
@@ -32,7 +31,6 @@
 
 ![设置](./media/multi-factor-authentication-end-user-first-time/first.png)  
 
-
 注册过程中的第一个问题是你希望我们如何与你联系。查看表中的选项，然后使用相应的链接转到每种方法的设置步骤。
 
 | 联系方法 | 说明 |
@@ -41,8 +39,8 @@
 | [移动电话呼叫或短信](#use-your-mobile-phone-as-the-contact-method) |- **电话呼叫**会向提供的电话号码进行自动语音呼叫。接听电话并按电话拨号键盘中的 # 进行身份验证。<br>- **短信**会发送包含验证码的短信。按照短信中的提示，回复短信或在登录界面中输入提供的验证码。 |
 | [办公电话呼叫](#use-your-office-phone-as-the-contact-method) |向提供的电话号码进行自动语音呼叫。接听电话并按电话拨号键盘中的 # 进行身份验证。 |
 
-
-> [AZURE.NOTE] 如果你选择使用 “Mobile app” 来作为联系方式并且你使用的是 Android 系统的手机，在安装 “Azure Authentication App” 后系统还会提示安装 “Google Play Services”， 这个 “Google Play Services” 目前在中国无法使用。
+> [!NOTE]
+> 如果你选择使用 “Mobile app” 来作为联系方式并且你使用的是 Android 系统的手机，在安装 “Azure Authentication App” 后系统还会提示安装 “Google Play Services”， 这个 “Google Play Services” 目前在中国无法使用。
 
 ## 使用移动应用作为联系方法 <a name="use-a-mobile-app-as-the-contact-method"></a>
 使用此方法需要在电话或平板上安装验证器应用。本文中的步骤基于 Microsoft Authenticator 应用，该应用可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。
@@ -97,8 +95,8 @@
 4. 单击“Done”（完成）。
 
 ## 后续步骤
-- 更改首选选项并[管理双重验证的设置](/documentation/articles/multi-factor-authentication-end-user-manage-settings/)
-- 查看[Microsoft Authenticator 应用](/documentation/articles/microsoft-authenticator-app-how-to/)文章，了解快速、安全的身份验证（即便没有手机网络服务）。
+- 更改首选选项并[管理双重验证的设置](./multi-factor-authentication-end-user-manage-settings.md)
+- 查看[Microsoft Authenticator 应用](./microsoft-authenticator-app-how-to.md)文章，了解快速、安全的身份验证（即便没有手机网络服务）。
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: wording update-->

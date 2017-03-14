@@ -1,38 +1,39 @@
-<properties
-    pageTitle="排查 Linux VM 部署问题 - RM | Azure"
-    description="排查在 Azure 中创建新 Linux 虚拟机时遇到的 Resource Manager 部署问题"
-    services="virtual-machines-linux, azure-resource-manager"
-    documentationcenter=""
-    author="JiangChen79"
-    manager="felixwu"
-    editor=""
-    tags="top-support-issue, azure-resource-manager" />
-<tags
-    ms.assetid="906a9c89-6866-496b-b4a4-f07fb39f990c"
-    ms.service="virtual-machines-linux"
-    ms.workload="na"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/09/2016"
-    wacn.date="02/20/2017"
-    ms.author="cjiang" />
+---
+title: 排查 Linux VM 部署问题 - RM | Azure
+description: 排查在 Azure 中创建新 Linux 虚拟机时遇到的 Resource Manager 部署问题
+services: virtual-machines-linux, azure-resource-manager
+documentationcenter: ''
+author: JiangChen79
+manager: felixwu
+editor: ''
+tags: top-support-issue, azure-resource-manager
+
+ms.assetid: 906a9c89-6866-496b-b4a4-f07fb39f990c
+ms.service: virtual-machines-linux
+ms.workload: na
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 09/09/2016
+wacn.date: 02/20/2017
+ms.author: cjiang
+---
 
 # 排查在 Azure 中创建新 Linux 虚拟机时遇到的 Resource Manager 部署问题
-[AZURE.INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
+[!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
 
-[AZURE.INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
+[!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
 ## 收集活动日志
 若要开始故障排除，请收集活动日志，以识别与问题相关的错误。以下链接包含有关要遵循的过程的详细信息。
 
-[查看部署操作](/documentation/articles/resource-manager-deployment-operations/)
+[查看部署操作](../azure-resource-manager/resource-manager-deployment-operations.md)
 
-[通过查看活动日志管理 Azure 资源](/documentation/articles/resource-group-audit/)
+[通过查看活动日志管理 Azure 资源](../azure-resource-manager/resource-group-audit.md)
 
-[AZURE.INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-issue1](../../includes/virtual-machines-troubleshoot-deployment-new-vm-issue1-include.md)]
+[!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-issue1](../../includes/virtual-machines-troubleshoot-deployment-new-vm-issue1-include.md)]
 
-[AZURE.INCLUDE [virtual-machines-linux-troubleshoot-deployment-new-vm-table](../../includes/virtual-machines-linux-troubleshoot-deployment-new-vm-table.md)]
+[!INCLUDE [virtual-machines-linux-troubleshoot-deployment-new-vm-table](../../includes/virtual-machines-linux-troubleshoot-deployment-new-vm-table.md)]
 
 **Y：**如果 OS 是通用的 Linux，并且是使用通用设置上载和/或捕获的，则不会有任何错误。同理，如果 OS 是专用的 Linux，并且是使用专用设置上载和/或捕获的，也不会有任何错误。
 
@@ -54,7 +55,7 @@
 
 **解决方法：**
 
-若要解决这两个错误，请从门户中删除当前映像，并[从当前 VHD 重新捕获映像](/documentation/articles/virtual-machines-linux-capture-image/)，该映像具有与该 OS（通用/专用）相同的设置。
+若要解决这两个错误，请从门户中删除当前映像，并[从当前 VHD 重新捕获映像](./virtual-machines-linux-capture-image.md)，该映像具有与该 OS（通用/专用）相同的设置。
 
 ## 问题：自定义/库/应用商店映像；分配失败
 当新的 VM 请求被固定到不支持所请求的 VM 大小、或没有可用空间可处理请求的群集时，便会发生此错误。
@@ -79,7 +80,7 @@
     * 将新 VM 添加到同一虚拟网络。
 
 ## 后续步骤
-如果你在 Azure 中启动已停止的 Linux VM 或调整现有 Linux VM 的大小时遇到问题，请参阅[排查在 Azure 中重新启动或调整现有 Linux 虚拟机时遇到的 Resource Manager 部署问题](/documentation/articles/virtual-machines-linux-restart-resize-error-troubleshooting/)。
+如果你在 Azure 中启动已停止的 Linux VM 或调整现有 Linux VM 的大小时遇到问题，请参阅[排查在 Azure 中重新启动或调整现有 Linux 虚拟机时遇到的 Resource Manager 部署问题](./virtual-machines-linux-restart-resize-error-troubleshooting.md)。
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: wording update-->

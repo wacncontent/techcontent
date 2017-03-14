@@ -1,27 +1,25 @@
-<properties
-   pageTitle="还原 Azure SQL 数据仓库 (REST API) | Azure"
-   description="用于还原 SQL 数据仓库的 REST API 任务。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="Lakshmi1812"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 还原 Azure SQL 数据仓库 (REST API) | Azure
+description: 用于还原 SQL 数据仓库的 REST API 任务。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: Lakshmi1812
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="lakshmir;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: lakshmir;barbkess;sonyama
+---
 
 # 还原 Azure SQL 数据仓库 (REST API)
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [概述][]
 - [门户][]
 - [PowerShell][]
@@ -41,34 +39,34 @@
 2. 使用[创建数据库还原请求][]操作开始还原。
 3. 使用[数据库操作状态][]操作跟踪还原状态。
 
->[AZURE.NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
+>[!NOTE]
+> 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
 
 ## 还原已删除的数据库
 
 还原已删除的数据库：
 
-1.	使用[列出可还原的已删除数据库][]操作列出所有可还原的已删除数据库。
-2.	使用[获取可还原的已删除数据库][]操作获取你要还原的已删除数据库的详细信息。
-3.	使用[创建数据库还原请求][]操作开始还原。
-4.	使用[数据库操作状态][]操作跟踪还原状态。
+1. 使用[列出可还原的已删除数据库][]操作列出所有可还原的已删除数据库。
+2. 使用[获取可还原的已删除数据库][]操作获取你要还原的已删除数据库的详细信息。
+3. 使用[创建数据库还原请求][]操作开始还原。
+4. 使用[数据库操作状态][]操作跟踪还原状态。
 
->[AZURE.NOTE] 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
-
+>[!NOTE]
+> 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
 
 ## 后续步骤
 若要了解 Azure SQL 数据库版本的业务连续性功能，请阅读 [Azure SQL 数据库业务连续性概述][]。
 
 <!--Image references-->
 
-
 <!--Article references-->
-[Azure SQL 数据库业务连续性概述]: /documentation/articles/sql-database-business-continuity/
-[Configure your database after recovery]: /documentation/articles/sql-database-disaster-recovery/
-[How to install and configure Azure PowerShell]: /documentation/articles/powershell-install-configure/
-[概述]: /documentation/articles/sql-data-warehouse-restore-database-overview/
-[门户]: /documentation/articles/sql-data-warehouse-restore-database-portal/
-[PowerShell]: /documentation/articles/sql-data-warehouse-restore-database-powershell/
-[REST]: /documentation/articles/sql-data-warehouse-restore-database-rest-api/
+[Azure SQL 数据库业务连续性概述]: ../sql-database/sql-database-business-continuity.md
+[Configure your database after recovery]: ../sql-database/sql-database-disaster-recovery.md
+[How to install and configure Azure PowerShell]: ../powershell-install-configure.md
+[概述]: ./sql-data-warehouse-restore-database-overview.md
+[门户]: ./sql-data-warehouse-restore-database-portal.md
+[PowerShell]: ./sql-data-warehouse-restore-database-powershell.md
+[REST]: ./sql-data-warehouse-restore-database-rest-api.md
 
 <!--MSDN references-->
 [创建数据库还原请求]: https://msdn.microsoft.com/zh-cn/library/azure/dn509571.aspx

@@ -1,26 +1,24 @@
-<properties
- pageTitle="面向物联网的 Azure 解决方案 | Azure"
- description="Azure 的 IoT 概述包括预配置的解决方案、一个示例解决方案体系结构以及它如何与 Azure IoT 套件关联"
- services=""
- suite="iot-suite"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 面向物联网的 Azure 解决方案 | Azure
+description: Azure 的 IoT 概述包括预配置的解决方案、一个示例解决方案体系结构以及它如何与 Azure IoT 套件关联
+services: ''
+suite: iot-suite
+documentationCenter: ''
+authors: dominicbetts
+manager: timlt
+editor: ''
 
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 02/09/2017
+wacn.date: 03/03/2017
+ms.author: dobett
+---
 
-<tags
- ms.service="iot-suite"
- ms.devlang="na"
- ms.topic="get-started-article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="02/09/2017"
- wacn.date="03/03/2017"
- ms.author="dobett"/>  
-
-
-[AZURE.INCLUDE [iot-azure-and-iot](../../includes/iot-azure-and-iot.md)]
+[!INCLUDE [iot-azure-and-iot](../../includes/iot-azure-and-iot.md)]
 
 ## Azure IoT 套件
 
@@ -43,15 +41,15 @@ Azure IoT 套件是企业级解决方案，通过一组用于处理常见的 IoT
 - [Azure IoT 套件是什么？][lnk-whatissuite]
 - [Azure IoT 套件预配置解决方案是什么？][lnk-whatarepreconfigured]
 
-[lnk-whatissuite]: /documentation/articles/iot-suite-overview/
-[lnk-whatarepreconfigured]: /documentation/articles/iot-suite-what-are-preconfigured-solutions/
+[lnk-whatissuite]: ./iot-suite-overview.md
+[lnk-whatarepreconfigured]: ./iot-suite-what-are-preconfigured-solutions.md
 
-[lnk-preconfigured-solutions]: /documentation/articles/iot-suite-getstarted-preconfigured-solutions/
-[Azure IoT Hub]: /home/features/iot-hub/
-[Azure Event Hubs]: /home/features/event-hubs/
-[Azure Stream Analytics]: /home/features/stream-analytics/
-[Azure storage]: /home/features/storage/
-[lnk-predictive-maintenance]: /documentation/articles/iot-suite-predictive-overview/
+[lnk-preconfigured-solutions]: ./iot-suite-getstarted-preconfigured-solutions.md
+[Azure IoT Hub]: https://www.azure.cn/home/features/iot-hub/
+[Azure Event Hubs]: https://www.azure.cn/home/features/event-hubs/
+[Azure Stream Analytics]: https://www.azure.cn/home/features/stream-analytics/
+[Azure storage]: https://www.azure.cn/home/features/storage/
+[lnk-predictive-maintenance]: ./iot-suite-predictive-overview.md
 
 <!---HONumber=Mooncake_0815_2016-->
 <!--Update_Description:update meta properties-->

@@ -1,21 +1,21 @@
-<properties
- pageTitle="IoT 中心解决方案指南 | Azure"
- description="有关网关、设备预配和身份验证的指导主题，帮助用户使用 Azure IoT 中心开发 IoT 解决方案。"
- services="iot-hub"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>
+---
+title: IoT 中心解决方案指南 | Azure
+description: 有关网关、设备预配和身份验证的指导主题，帮助用户使用 Azure IoT 中心开发 IoT 解决方案。
+services: iot-hub
+documentationCenter: ''
+authors: dominicbetts
+manager: timlt
+editor: ''
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="07/19/2016"
- ms.author="dobett"
- wacn.date="01/04/2017"/>
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 07/19/2016
+ms.author: dobett
+wacn.date: 01/04/2017
+---
 
 # 设计你的解决方案
 
@@ -74,7 +74,8 @@ IoT 解决方案存储有关单个设备的数据，例如：
 3. 令牌服务返回令牌。使用 `/devices/{deviceId}` 作为 `resourceURI`（其中 `deviceId` 是要身份验证的设备），并根据 [IoT 中心开发人员指南的安全部分][lnk-devguide-security]创建令牌。令牌服务使用共享访问策略来构造令牌。
 4. 设备直接通过 IoT 中心使用令牌。
 
-> [AZURE.NOTE] 可以使用 .NET 类 [SharedAccessSignatureBuilder][lnk-dotnet-sas] 或 Java 类 [IotHubServiceSasToken][lnk-java-sas] 在令牌服务中创建令牌。
+> [!NOTE]
+> 可以使用 .NET 类 [SharedAccessSignatureBuilder][lnk-dotnet-sas] 或 Java 类 [IotHubServiceSasToken][lnk-java-sas] 在令牌服务中创建令牌。
 
 令牌服务可以根据需要设置令牌过期日期。令牌过期时，IoT 中心将断开设备连接。然后，设备必须向令牌服务请求新令牌。如果使用过短的过期时间，会增加设备与令牌服务上的负载。
 
@@ -92,7 +93,8 @@ IoT 解决方案存储有关单个设备的数据，例如：
 
 更复杂的实现可包含来自[操作监视][lnk-devguide-opmon]的信息，以便识别尝试连接或通信但失败的设备。实施检测信号模式时，请务必查看 [IoT 中心配额与限制][]。
 
-> [AZURE.NOTE] 如果 IoT 解决方案只根据设备连接状态来决定是否发送云到设备的消息，并且没有把消息广播到大量设备，则可以考虑使用更简单的模式，即使用较短的到期时间。它达到的效果与使用检测信号模式维护设备连接状态达到的效果一样，而且更加有效。IoT 中心还可以通过请求消息确认来通知哪些设备可以接收消息、哪些设备脱机或不能接收消息。有关 C2D 消息的详细信息，请参阅 [IoT 中心开发人员指南][lnk-devguide-messaging]。
+> [!NOTE]
+> 如果 IoT 解决方案只根据设备连接状态来决定是否发送云到设备的消息，并且没有把消息广播到大量设备，则可以考虑使用更简单的模式，即使用较短的到期时间。它达到的效果与使用检测信号模式维护设备连接状态达到的效果一样，而且更加有效。IoT 中心还可以通过请求消息确认来通知哪些设备可以接收消息、哪些设备脱机或不能接收消息。有关 C2D 消息的详细信息，请参阅 [IoT 中心开发人员指南][lnk-devguide-messaging]。
 
 ## 后续步骤
 
@@ -112,27 +114,27 @@ IoT 解决方案存储有关单个设备的数据，例如：
 
 [img-tokenservice]: ./media/iot-hub-guidance/tokenservice.png
 
-[lnk-devguide-identityregistry]: /documentation/articles/iot-hub-devguide-identity-registry
-[lnk-devguide-opmon]: /documentation/articles/iot-hub-operations-monitoring/
+[lnk-devguide-identityregistry]: ./iot-hub-devguide-identity-registry.md
+[lnk-devguide-opmon]: ./iot-hub-operations-monitoring.md
 
-[lnk-devguide-security]: /documentation/articles/iot-hub-devguide-security/
+[lnk-devguide-security]: ./iot-hub-devguide-security.md
 [lnk-tls-psk]: https://tools.ietf.org/html/rfc4279
 
 [lnk-portal]: https://portal.azure.cn
-[lnk-devguide-messaging]: /documentation/articles/iot-hub-devguide-messaging/
+[lnk-devguide-messaging]: ./iot-hub-devguide-messaging.md
 [lnk-dotnet-sas]: https://msdn.microsoft.com/zh-cn/library/microsoft.azure.devices.common.security.sharedaccesssignaturebuilder.aspx
 [lnk-java-sas]: http://azure.github.io/azure-iot-sdks/java/service/api_reference/com/microsoft/azure/iot/service/auth/IotHubServiceSasToken.html
-[IoT 中心配额与限制]: /documentation/articles/iot-hub-devguide-quotas-throttling/
+[IoT 中心配额与限制]: ./iot-hub-devguide-quotas-throttling.md
 [lnk-gateway-sdk]: https://github.com/Azure/azure-iot-gateway-sdk
-[lnk-mqtt]: /documentation/articles/iot-hub-mqtt-support/
-[lnk-devices]: /documentation/articles/iot-hub-tested-configurations/
-[lnk-protocols]: /documentation/articles/iot-hub-protocol-gateway/
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-portal-manage]: /documentation/articles/iot-hub-manage-through-portal/
-[lnk-sas-token]: /documentation/articles/iot-hub-sas-tokens/
+[lnk-mqtt]: ./iot-hub-mqtt-support.md
+[lnk-devices]: ./iot-hub-tested-configurations.md
+[lnk-protocols]: ./iot-hub-protocol-gateway.md
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-portal-manage]: ./iot-hub-manage-through-portal.md
+[lnk-sas-token]: ./iot-hub-sas-tokens.md
 [lnk-securing]: /documentation/articles/iot-hub-security-ground-up/
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

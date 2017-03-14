@@ -1,19 +1,20 @@
-<properties
-    pageTitle="Service Fabric 部署程序后外网如何访问"
-    description="Service Fabric 部署程序后外网如何访问"
-    service=""
-    resource="service-fabric"
-    authors=""
-    displayOrder=""
-    selfHelpType=""
-    supportTopicIds=""
-    productPesIds=""
-    resourceTags="Service Fabric, Load Balancer, Front-End IP"
-    cloudEnvironments="MoonCake" />
-<tags
-    ms.service="service-fabric-aog"
-    ms.date=""
-    wacn.date="02/21/2017" />
+---
+title: Service Fabric 部署程序后外网如何访问
+description: Service Fabric 部署程序后外网如何访问
+service: ''
+resource: service-fabric
+authors: ''
+displayOrder: ''
+selfHelpType: ''
+supportTopicIds: ''
+productPesIds: ''
+resourceTags: Service Fabric, Load Balancer, Front-End IP
+cloudEnvironments: MoonCake
+
+ms.service: service-fabric-aog
+ms.date: ''
+wacn.date: 02/21/2017
+---
 
 # Service Fabric 部署程序后外网如何访问
 
@@ -30,7 +31,7 @@ Service Fabric 外网访问需要您开通对应的端口。<br>
 如果您在程序中指定的端口为 : `8237` 。
 
 ![port](./media/aog-service-fabric-deployment-howto-access-through-internet/port.png)
- 
+
 那么在您部署完程序以后节点的端口也会变为 `8237`。<br>
 打开外部访问端口步骤如下 :
 
@@ -54,5 +55,5 @@ Service Fabric 外网访问需要您开通对应的端口。<br>
     ![service-fabric-summary](./media/aog-service-fabric-deployment-howto-access-through-internet/service-fabric-summary.png)
 
 5. 在浏览器中打开并在后面添加上您的参数即可。
-    
+
     http://vikfabric.chinanorth.cloudapp.chinacloudapi.cn/

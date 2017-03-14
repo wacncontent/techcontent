@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Microsoft Authenticator 应用帮助和支持 | Azure"
-    description="提供与 Microsoft Authenticator 应用和 Azure 多重身份验证相关的常见问题与解答列表。"
-    services="multi-factor-authentication"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="pblachar, librown" />
-    
-<tags
-    ms.assetid="f04d5bce-e99e-4f75-82d1-ef6369be3402"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/06/2017"
-    wacn.date="02/20/2017"
-    ms.author="kgremban" />  
+---
+title: Microsoft Authenticator 应用帮助和支持 | Azure
+description: 提供与 Microsoft Authenticator 应用和 Azure 多重身份验证相关的常见问题与解答列表。
+services: multi-factor-authentication
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: pblachar, librown
 
+ms.assetid: f04d5bce-e99e-4f75-82d1-ef6369be3402
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/06/2017
+wacn.date: 02/20/2017
+ms.author: kgremban
+---
 
 # Microsoft Authenticator 应用常见问题解答
 Microsoft Authenticator 应用替代了 Azure Authenticator 应用，建议使用 Azure 多重身份验证时使用该应用。此应用可用于 Windows Phone、Android 和 iOS。
@@ -74,9 +73,8 @@ Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/
 ### 联系我们
 如果在此处找不到问题的答案，请告诉我们。转到 [Microsoft Authenticator 应用论坛](https://social.technet.microsoft.com/Forums/zh-cn/home?forum=MicrosoftAuthenticatorApp)发布问题并从社区获取帮助、在此页面留言，或[联系支持人员](https://support.microsoft.com/zh-cn/contactus)，我们会尽快回答相关问题。
 
-
 ### 相关主题
 - 关于 Microsoft 帐户的[双重验证](https://support.microsoft.com/zh-cn/help/12408/microsoft-account-about-two-step-verification)
-- 为工作或学校帐户[设置双重验证时遇到问题](/documentation/articles/multi-factor-authentication-end-user-troubleshoot/)？
+- 为工作或学校帐户[设置双重验证时遇到问题](./multi-factor-authentication-end-user-troubleshoot.md)？
 
 <!---HONumber=Mooncake_0213_2017-->

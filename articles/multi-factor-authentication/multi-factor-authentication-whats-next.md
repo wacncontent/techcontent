@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="Azure 多重身份验证 - 后续步骤" 
-	description="这个有关 Azure 多重身份验证的页面介绍了使用 MFA 可以执行的后续步骤。其中包括报告、欺诈警报、一次性跳过、自定义语音消息、缓存，受信任的 IP 和应用密码。" 
-	services="multi-factor-authentication" 
-	documentationCenter="" 
-	authors="billmath" 
-	manager="stevenpo" 
-	editor="curtand"/>  
+---
+title: Azure 多重身份验证 - 后续步骤
+description: 这个有关 Azure 多重身份验证的页面介绍了使用 MFA 可以执行的后续步骤。其中包括报告、欺诈警报、一次性跳过、自定义语音消息、缓存，受信任的 IP 和应用密码。
+services: multi-factor-authentication
+documentationCenter: ''
+authors: billmath
+manager: stevenpo
+editor: curtand
 
-<tags
-	ms.service="multi-factor-authentication"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/23/2016"
-	wacn.date="02/20/2017"
-	ms.author="kgremban"/>
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/23/2016
+wacn.date: 02/20/2017
+ms.author: kgremban
+---
 
 # 配置 Azure 多重身份验证
 
@@ -32,10 +32,10 @@
 
 方法|说明
 :------------- | :------------- | 
-[拨打电话](/documentation/articles/multi-factor-authentication-end-user-first-time-mobile-phone/)| 向身份验证电话拨打自动语音呼叫。用户接听电话，并按电话键盘上的 # 进行身份验证。此电话号码将不会同步到本地 Active Directory。
-[向手机发送短信](/documentation/articles/multi-factor-authentication-end-user-first-time-mobile-phone/)|向用户发送包含验证码的短信。系统会提示用户使用验证码回复短信或在登录界面中输入验证码。
-[通过移动应用发送通知](/documentation/articles/multi-factor-authentication-end-user-first-time-mobile-app/)|在此模式下，Microsoft Authenticator App 可防止对帐户进行未经授权的访问并停止欺诈性事务。此功能是使用推送到你的手机或已注册设备上的推送通知来完成的。你可以直接查看通知，如果该通知是合法的，请点击“验证”。否则，你可以选择“拒绝”。</br></br>Microsoft Authenticator App 可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。|
-[通过移动应用发送验证码](/documentation/articles/multi-factor-authentication-end-user-first-time-mobile-app/)|在此模式下，Microsoft Authenticator App 可用作生成 OATH 验证码所需的软件令牌。然后可以将此验证码与用户名和密码一起输入，进行第二种形式的身份验证。</li><p> Microsoft Authenticator App 可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。
+[拨打电话](./multi-factor-authentication-end-user-first-time-mobile-phone.md)| 向身份验证电话拨打自动语音呼叫。用户接听电话，并按电话键盘上的 # 进行身份验证。此电话号码将不会同步到本地 Active Directory。
+[向手机发送短信](./multi-factor-authentication-end-user-first-time-mobile-phone.md)|向用户发送包含验证码的短信。系统会提示用户使用验证码回复短信或在登录界面中输入验证码。
+[通过移动应用发送通知](./multi-factor-authentication-end-user-first-time-mobile-app.md)|在此模式下，Microsoft Authenticator App 可防止对帐户进行未经授权的访问并停止欺诈性事务。此功能是使用推送到你的手机或已注册设备上的推送通知来完成的。你可以直接查看通知，如果该通知是合法的，请点击“验证”。否则，你可以选择“拒绝”。</br></br>Microsoft Authenticator App 可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。|
+[通过移动应用发送验证码](./multi-factor-authentication-end-user-first-time-mobile-app.md)|在此模式下，Microsoft Authenticator App 可用作生成 OATH 验证码所需的软件令牌。然后可以将此验证码与用户名和密码一起输入，进行第二种形式的身份验证。</li><p> Microsoft Authenticator App 可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。
 
 ### 如何启用/禁用身份验证方法
 

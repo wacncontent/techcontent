@@ -1,23 +1,23 @@
-<properties
-    pageTitle="读取保存在 Azure 存储中的消息 | Azure"
-    description="在将从设备到云的消息写入 Azure 表存储时，对其进行监视。"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="云中的数据, 云数据收集, iot 云服务, iot 数据" />
-<tags
-    ms.assetid="fa2c7efe-7e34-4e39-bb70-015c15ac69ed"
-    ms.service="iot-hub"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/8/2016"
-    wacn.date="01/06/2017"
-    ms.author="xshi" />  
+---
+title: 读取保存在 Azure 存储中的消息 | Azure
+description: 在将从设备到云的消息写入 Azure 表存储时，对其进行监视。
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: 云中的数据, 云数据收集, iot 云服务, iot 数据
 
+ms.assetid: fa2c7efe-7e34-4e39-bb70-015c15ac69ed
+ms.service: iot-hub
+ms.devlang: nodejs
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/8/2016
+wacn.date: 01/06/2017
+ms.author: xshi
+---
 
 # 读取保存在 Azure 存储中的消息
 ## 执行的操作
@@ -36,34 +36,34 @@
 
 1. 运行以下命令，获取连接字符串：
 
-   
-		az storage account list -g iot-sample --query [].name
-		az storage account show-connection-string -g iot-sample -n {storage name}
-   
+    ```
+    az storage account list -g iot-sample --query [].name
+    az storage account show-connection-string -g iot-sample -n {storage name}
+    ```
 
     第一个命令检索 `storage name`，后者在第二个命令中用于获取连接字符串。使用 `iot-sample` 作为 `{resource group name}` 的值（如果尚未更改此值）。
-    
+
 2. 运行以下命令，在 Visual Studio Code 中打开配置文件 `config-edison.json`：
 
-   
-		   # For Windows command prompt
-		   code %USERPROFILE%\.iot-hub-getting-started\config-edison.json
+    ```
+       # For Windows command prompt
+       code %USERPROFILE%\.iot-hub-getting-started\config-edison.json
 
-		   # For MacOS or Ubuntu
-		   code ~/.iot-hub-getting-started/config-edison.json
-   
+       # For MacOS or Ubuntu
+       code ~/.iot-hub-getting-started/config-edison.json
+    ```
+
 3. 将 `[Azure storage connection string]` 替换为在步骤 1 中获取的连接字符串。
 4. 保存 `config-edison.json` 文件。
 5. 运行以下命令，再次发送消息并从 Azure 表存储中读取这些消息：
 
-   
-		   gulp run --read-storage
-   
+    ```
+       gulp run --read-storage
+    ```
 
     从 Azure 表存储进行读取的逻辑位于 `azure-table.js` 文件中。
 
     ![gulp run --read-storage][gulp run]  
-
 
 ## 摘要
 已成功将 Edison 连接到云中的 IoT 中心，并已使用 blink 示例应用程序发送设备到云消息。用户还使用 Azure 函数应用将传入的 IoT 中心消息存储到 Azure 表存储中。现在可从 IoT 中心将云到设备消息发送到 Edison。
@@ -72,10 +72,9 @@
 [运行示例应用程序，接收云到设备消息][receive-cloud-to-device-messages]
 <!-- Images and links -->
 
-
-[troubleshooting]: /documentation/articles/iot-hub-intel-edison-kit-node-troubleshooting/
-[run-the-azure-blink-sample-application-on-intel-edison]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson3-run-azure-blink/
+[troubleshooting]: ./iot-hub-intel-edison-kit-node-troubleshooting.md
+[run-the-azure-blink-sample-application-on-intel-edison]: ./iot-hub-intel-edison-kit-node-lesson3-run-azure-blink.md
 [gulp run]: ./media/iot-hub-intel-edison-lessons/lesson3/gulp_read_message.png
-[receive-cloud-to-device-messages]: /documentation/articles/iot-hub-intel-edison-kit-node-lesson4-send-cloud-to-device-messages/
+[receive-cloud-to-device-messages]: ./iot-hub-intel-edison-kit-node-lesson4-send-cloud-to-device-messages.md
 
 <!---HONumber=Mooncake_0103_2017-->

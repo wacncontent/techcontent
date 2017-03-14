@@ -1,23 +1,23 @@
-<properties
-    pageTitle="预见性维护预配置解决方案 | Azure"
-    description="介绍 Azure IoT 套件预见性维护预配置解决方案。"
-    services=""
-    suite="iot-suite"
-    documentationcenter=""
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="b370b3d7-2ce5-4906-9818-3aeedd471ee3"
-    ms.service="iot-suite"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/16/2017"
-    wacn.date="02/22/2017"
-    ms.author="dobett" />  
+---
+title: 预见性维护预配置解决方案 | Azure
+description: 介绍 Azure IoT 套件预见性维护预配置解决方案。
+services: ''
+suite: iot-suite
+documentationcenter: ''
+author: dominicbetts
+manager: timlt
+editor: ''
 
+ms.assetid: b370b3d7-2ce5-4906-9818-3aeedd471ee3
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/16/2017
+wacn.date: 02/22/2017
+ms.author: dobett
+---
 
 # 预见性维护预配置解决方案概述
 
@@ -30,7 +30,7 @@ Fabrikam 是一家区域性航空公司，致力于以优惠的价格为客户�
 
 Fabrikam 飞机的引擎由各种传感器进行检测，这些传感器监视飞行期间的引擎状况。Fabrikam 使用预见性维护预配置解决方案收集飞行期间所收集的传感器数据。经过多年累积引擎运行数据和故障数据之后，Fabrikam 的数据科学家制作出了一个模型，可以预测飞机引擎的剩余使用寿命 (RUL)。他们从四个引擎传感器的数据中，找出了数据之间的相关性，而其中一个引擎更潜藏了最终会导致引擎故障的问题。Fabrikam 现在除了继续执行定期检查来确保安全之外，还会在每次飞行后，使用模型来计算每个引擎的 RUL。该模型使用飞行期间从引擎收集的遥测数据。Fabrikam 现在可以预测未来的故障点，并预先规划维护和维修工作。
 
-> [AZURE.NOTE]
+> [!NOTE]
 该解决方案模型使用实际的引擎损耗数据。
 
 通过预测必要维护时间点，Fabrikam 可以优化各项作业，进而降低成本。维护专员与排班专员一起合作：
@@ -57,7 +57,7 @@ Azure IoT 预见性维护预配置解决方案使用通过此模板创建的回�
 
 需要有效的 Azure 订阅才能完成此教程。
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用][lnk_free_trial]。
 
 1. 使用 Azure 帐户凭据登录到 [azureiotsuite.cn][lnk-azureiotsuite]，然后单击“+”创建解决方案。
@@ -73,7 +73,7 @@ Azure IoT 预见性维护预配置解决方案使用通过此模板创建的回�
 1. 预配完成后，状态会更改为“就绪”。
 1. 单击磁贴，右窗格中随即会显示解决方案的详细信息。
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果在部署预配置解决方案时遇到问题，请查看 [azureiotsuite.cn 站点上的权限][lnk-permissions]和[常见问题][lnk-faq]。如果问题仍然存在，请在[门户][lnk-portal]中创建服务票证。
 
 以下屏幕截图显示了完成预配后的解决方案面板：
@@ -87,7 +87,6 @@ Azure IoT 预见性维护预配置解决方案使用通过此模板创建的回�
 - 启动解决方案仪表板。
 - 下载远程登录文件，用于连接到解决方案中的 R Server。
 - 查看有关 R Server 的详细信息。
-
 
 是否有你预期会看到但没有列出的解决方案详细信息？ 请在[用户之声](https://feedback.azure.com/forums/321918-azure-iot)中向我们提供功能建议。
 
@@ -106,23 +105,19 @@ Web 应用程序中的此页面会使用 PowerBI JavaScript 控件（请参阅 [
 
 ![][img-resource-group]  
 
-
 在预配包含 R Server 的预配置解决方案期间，界面中会显示服务器的链接。此外，当解决方案处于“就绪”状态时，可通过解决方案的 [azureiotsuite.cn][lnk-azureiotsuite]页连接到 R Server。
 
 在解决方案门户中，可看到本示例预配了 4 个模拟设备，表示各有两个引擎的两架飞机，且每个引擎有 4 个传感器。当你第一次导航到解决方案门户时，模拟便会停止。
 
 ![][img-simulation-stopped]  
 
-
 单击“开始模拟”即可开始模拟，在此期间仪表板上将填写传感器历史记录、RUL、周期和 RUL 历史记录。
 
 ![][img-simulation-running]  
 
-
 RUL 小于 160 时（出于演示目的而选择的任意阈值），解决方案门户会在 RUL 旁边显示警告符号，并将飞机引擎高亮为黄色。请注意 RUL 值如何整体下滑但倾向于上下波动。此行为的原因是周期长度和模型精确度不同。
 
 ![][img-simulation-warning]  
-
 
 完整模拟需要约 35 分钟的时间才能完成 148 个周期。160 RUL 阈值第一次在大约 5 分钟的时候达到，而这两个引擎在大约 8 分钟的时候同时达到阈值。
 
@@ -148,19 +143,19 @@ RUL 小于 160 时（出于演示目的而选择的任意阈值），解决方�
 [img-provisioning-complete]: ./media/iot-suite-predictive-overview/provisioned.png
 
 [lnk-powerbi]: https://www.github.com/Microsoft/PowerBI-visuals
-[lnk-predictive-walkthrough]: /documentation/articles/iot-suite-predictive-walkthrough/
-[lnk_preconfigured_solutions]: /documentation/articles/iot-suite-what-are-preconfigured-solutions/
-[lnk_iot_suite]: /documentation/articles/iot-suite-overview/
+[lnk-predictive-walkthrough]: ./iot-suite-predictive-walkthrough.md
+[lnk_preconfigured_solutions]: ./iot-suite-what-are-preconfigured-solutions.md
+[lnk_iot_suite]: ./iot-suite-overview.md
 [lnk_infographic]: https://www.microsoft.com/server-cloud/predictivemaintenance/Index.html
 [lnk_regression_model]: http://gallery.cortanaanalytics.com/Collection/Predictive-Maintenance-Template-3
 
 [lnk_capture_value]: http://download.microsoft.com/download/0/7/D/07D394CE-185D-4B96-AC3C-9B61179F7080/Capture_value_from_the_Internet%20of%20Things_with_Predictive_Maintenance.PDF
-[lnk-faq]: /documentation/articles/iot-suite-faq/
-[lnk-security-groundup]: /documentation/articles/securing-iot-ground-up/
+[lnk-faq]: ./iot-suite-faq.md
+[lnk-security-groundup]: ./securing-iot-ground-up.md
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn/
-[lnk_free_trial]: /pricing/1rmb-trial/
+[lnk_free_trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn
-[lnk-permissions]: /documentation/articles/iot-suite-permissions/
+[lnk-permissions]: ./iot-suite-permissions.md
 [lnk-portal]: http://portal.azure.cn/
 
 <!---HONumber=Mooncake_0206_2017-->

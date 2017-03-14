@@ -1,21 +1,21 @@
-<properties
-    pageTitle="适用于 Windows Server 的 Azure Service Fabric 独立包 | Azure"
-    description="适用于 Windows Server 的 Azure Service Fabric 独立包的说明和内容。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="maburlik"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="2/15/2017"
-    wacn.date="03/03/2017"
-    ms.author="chackdan;maburlik" />  
+---
+title: 适用于 Windows Server 的 Azure Service Fabric 独立包 | Azure
+description: 适用于 Windows Server 的 Azure Service Fabric 独立包的说明和内容。
+services: service-fabric
+documentationcenter: .net
+author: maburlik
+manager: timlt
+editor: ''
 
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 2/15/2017
+wacn.date: 03/03/2017
+ms.author: chackdan;maburlik
+---
 
 # 打包适用于 Windows Server 的 Service Fabric 独立包的内容
 在[已下载](http://go.microsoft.com/fwlink/?LinkId=730690)的 Service Fabric 独立包中，找到以下文件：
@@ -50,7 +50,7 @@
 最新版本的群集配置模板可以在以下 Github 页上找到：[独立群集配置示例](https://github.com/Azure-Samples/service-fabric-dotnet-standalone-cluster-configuration/tree/master/Samples)。
 
 ## 相关内容
-* [创建独立 Azure Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-for-windows-server/)
-* [Service Fabric 群集安全方案](/documentation/articles/service-fabric-windows-cluster-windows-security/)
+* [创建独立 Azure Service Fabric 群集](./service-fabric-cluster-creation-for-windows-server.md)
+* [Service Fabric 群集安全方案](./service-fabric-windows-cluster-windows-security.md)
 
 <!---HONumber=Mooncake_0227_2017-->

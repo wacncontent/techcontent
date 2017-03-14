@@ -1,24 +1,24 @@
-<properties
-    pageTitle="Azure SQL 数据库 T-SQL 中不支持的语句 | Azure"
-    description="在 Azure SQL 数据库中不完全支持的 Transact-SQL 语句"
-    services="sql-database"
-    documentationcenter=""
-    author="BYHAM"
-    manager="jhubbard"
-    editor=""
-    tags="" />
-<tags
-    ms.assetid="c05abd9e-28a7-4c97-9bdf-bc60d08fc92e"
-    ms.service="sql-database"
-    ms.custom="overview"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="data-management"
-    ms.date="11/28/2016"
-    wacn.date="01/20/2017"
-    ms.author="rick.byham@microsoft.com" />  
+---
+title: Azure SQL 数据库 T-SQL 中不支持的语句 | Azure
+description: 在 Azure SQL 数据库中不完全支持的 Transact-SQL 语句
+services: sql-database
+documentationcenter: ''
+author: BYHAM
+manager: jhubbard
+editor: ''
+tags: ''
 
+ms.assetid: c05abd9e-28a7-4c97-9bdf-bc60d08fc92e
+ms.service: sql-database
+ms.custom: overview
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 11/28/2016
+wacn.date: 01/20/2017
+ms.author: rick.byham@microsoft.com
+---
 
 # Azure SQL 数据库 Transact-SQL 差异
 Microsoft SQL Server 和 Azure SQL 数据库都支持应用程序依赖的大多数 Transact-SQL 功能。例如，核心 SQL 组件（如数据类型、运算符、字符串、算术、逻辑和光标函数等）的工作方式与 SQL Server 没有差别。
@@ -28,7 +28,7 @@ Azure SQL 数据库设计为将功能与 master 数据库和操作系统上的�
 
 例如，可以将 Always On 替换为活动异地复制。因此，SQL 数据库不支持与可用性组相关的任何 Transact-SQL 语句，也不支持与 Always On 相关的动态管理视图。
 
-有关 SQL 数据库支持和不支持的功能列表，请参阅 [Azure SQL 数据库注意事项、准则和功能](/documentation/articles/sql-database-features/)。
+有关 SQL 数据库支持和不支持的功能列表，请参阅 [Azure SQL 数据库注意事项、准则和功能](./sql-database-features.md)。
 
 SQL 数据库通常不支持 SQL Server 中已弃用的语法。
 
@@ -45,10 +45,10 @@ SQL 数据库支持相应 SQL Server 2016 Transact-SQL 语句中存在的某些�
 - 视图：[CREATE](https://msdn.microsoft.com/zh-cn/library/ms187956.aspx)/[ALTER VIEW](https://msdn.microsoft.com/zh-cn/library/ms173846.aspx)
 
 ## SQL 数据库不支持的 Transact-SQL 语法   
-除了与 [Azure SQL 数据库注意事项、准则和功能](/documentation/articles/sql-database-features/)中所述的不支持功能相关的 Transact-SQL 语句外，也不支持以下语句和语句组。
+除了与 [Azure SQL 数据库注意事项、准则和功能](./sql-database-features.md)中所述的不支持功能相关的 Transact-SQL 语句外，也不支持以下语句和语句组。
 - 系统对象的排序规则
-- 相关的连接：终结点语句、`ORIGINAL_DB_NAME`。SQL 数据库不支持 Windows 身份验证，但支持类似的 Azure Active Directory 身份验证。某些身份验证类型要求使用最新版本的 SSMS。有关详细信息，请参阅[使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库](/documentation/articles/sql-database-aad-authentication/)。
-- 使用三个或四个部分名称的跨数据库查询。（使用[弹性数据库查询](/documentation/articles/sql-database-elastic-query-overview/)支持只读跨数据库查询。）
+- 相关的连接：终结点语句、`ORIGINAL_DB_NAME`。SQL 数据库不支持 Windows 身份验证，但支持类似的 Azure Active Directory 身份验证。某些身份验证类型要求使用最新版本的 SSMS。有关详细信息，请参阅[使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库](./sql-database-aad-authentication.md)。
+- 使用三个或四个部分名称的跨数据库查询。（使用[弹性数据库查询](./sql-database-elastic-query-overview.md)支持只读跨数据库查询。）
 - 跨数据库所有权链接、`TRUSTWORTHY` 设置
 - `DATABASEPROPERTY` 改用 `DATABASEPROPERTYEX`。
 - `EXECUTE AS LOGIN` 改用“EXECUTE AS USER”。

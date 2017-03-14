@@ -1,21 +1,22 @@
-<properties
-    pageTitle="如何构建可使任何 Azure Active Directory 用户登录的应用程序 | Azure"
-    description="有关如何构建一个可使用户从任何 Azure Active Directory 租户登录的应用程序（也称为多租户应用程序）的分步说明。"
-    services="active-directory"
-    documentationcenter=""
-    author="skwan"
-    manager="mbaldwin"
-    editor="" />
-<tags
-    ms.assetid="35af95cb-ced3-46ad-b01d-5d2f6fd064a3"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="01/07/2017"
-    wacn.date="02/07/2017"
-    ms.author="skwan;bryanla" />
+---
+title: 如何构建可使任何 Azure Active Directory 用户登录的应用程序 | Azure
+description: 有关如何构建一个可使用户从任何 Azure Active Directory 租户登录的应用程序（也称为多租户应用程序）的分步说明。
+services: active-directory
+documentationcenter: ''
+author: skwan
+manager: mbaldwin
+editor: ''
+
+ms.assetid: 35af95cb-ced3-46ad-b01d-5d2f6fd064a3
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 01/07/2017
+wacn.date: 02/07/2017
+ms.author: skwan;bryanla
+---
 
 # 如何使用多租户应用程序模式将任何 Azure Active Directory (AD) 用户登录
 如果你向许多组织提供软件即服务应用程序，可以将应用程序配置为可接受来自任何 Azure AD 租户的登录。在 Azure AD 中，这称为使应用程序成为多租户应用程序。任何 Azure AD 租户中的用户在同意配合你的应用程序使用其帐户之后，便可登录到你的应用程序。
@@ -45,11 +46,15 @@ Azure AD 中的 Web 应用/API 注册默认为单租户。可以将注册转换�
 ## 将代码更新为向 /common 发送请求
 在单租户应用程序中，登录请求将发送到租户的登录终结点。以 contoso.partner.onmschina.cn 为例，终结点将是：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
 
 发送到租户终结点的请求可以让该租户中的用户（或来宾）登录该租户中的应用程序。使用多租户应用程序时，应用程序事先并不知道用户来自哪个租户，因此无法将请求发送到租户的终结点。取而代之的是，请求将发送到在所有 Azure AD 租户之间多路复用的终结点：
 
-    https://login.microsoftonline.com/common
+```
+https://login.microsoftonline.com/common
+```
 
 当 Azure AD 在 /common 终结点上收到请求时，将会使用户登录，因而可以发现用户来自哪个租户。/common 终结点可与 Azure AD 支持的所有身份验证协议配合使用：OpenID Connect、OAuth 2.0、SAML 2.0 和 WS 联合身份验证。
 
@@ -64,22 +69,28 @@ Azure AD 中的 Web 应用/API 注册默认为单租户。可以将注册转换�
 ## 将代码更新为处理多个颁发者值
 Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 尽管本机客户端应用程序从 Azure AD 请求并接收令牌，但它们这样做是为了将令牌发送到 API 来进行验证。本机应用程序不会验证令牌，并且必须将它们视为不透明。
 > 
 > 
 
 让我们看看应用程序如何验证它从 Azure AD 接收的令牌。单租户应用程序通常采用类似于下面的终结点值：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn
+```
 
 并使用该值构造元数据 URL（在本例中为 OpenID Connect），例如：
 
-    https://login.microsoftonline.com/contoso.partner.onmschina.cn/.well-known/openid-configuration
+```
+https://login.microsoftonline.com/contoso.partner.onmschina.cn/.well-known/openid-configuration
+```
 
 以下载用于验证令牌的两项关键信息：租户的签名密钥和颁发者值。每个 Azure AD 租户使用以下格式的唯一颁发者值：
 
-    https://sts.chinacloudapi.cn/31537af4-6d77-4bb9-a681-d2394888ea26/
+```
+https://sts.chinacloudapi.cn/31537af4-6d77-4bb9-a681-d2394888ea26/
+```
 
 其中，GUID 值是租户的租户 ID 重命名安全版本。如果你单击上面的 `contoso.partner.onmschina.cn` 元数据链接，就可以在文档中看到此颁发者值。
 
@@ -87,7 +98,9 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 由于 /common 终结点既不对应于租户也不是颁发者，因此在检查 /common 的元数据中的颁发者值时，它拥有的是一个模板化的 URL 而不是实际值：
 
-    https://sts.chinacloudapi.cn/{tenantid}/
+```
+https://sts.chinacloudapi.cn/{tenantid}/
+```
 
 因此，多租户应用程序无法仅通过将元数据中的颁发者值与令牌中的 `issuer` 值进行匹配来验证令牌。多租户应用程序需要一个逻辑来根据颁发者值的租户 ID 部分来确定哪些颁发者值有效、哪些颁发者值无效。
 
@@ -124,7 +137,7 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 租户管理员可以禁用普通用户同意应用程序的能力。如果禁用此功能，则始终需要管理员同意，才能在租户中设置应用程序。如果想要在禁用普通用户同意的情况下测试应用程序，可以在 [Azure 经典管理门户][AZURE-classic-portal]的 Azure AD 租户配置部分中找到配置开关。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 某些应用程序想要提供一种体验，让普通用户能够一开始即表示同意，然后应用程序可让管理员参与操作并请求需要管理员同意的权限。目前在 Azure AD 中还没有任何办法可以使用单个应用程序注册来实现此目的。即将推出的 Azure AD v2 终结点可允许应用程序在运行时（而不是在注册时）请求权限，这样会使这种方案成为可能。有关详细信息，请参阅 [Azure AD App Model v2 Developer Guide（Azure AD 应用模型 v2 开发人员指南）][AAD-V2-Dev-Guide]。
 > 
 > 
@@ -134,7 +147,9 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 如果逻辑应用程序包含两个或更多个应用程序注册（例如独立的客户端和资源），这可能造成问题。如何先将资源添加到客户租户中？ Azure AD 通过以单个步骤对客户端和资源行使同意权的方式来处理此情况，其中用户在同意页上看到客户端和资源两者所请求的权限的总和。若要启用此行为，资源的应用程序注册必须在其应用程序清单中以 `knownClientApplications` 形式包含客户端的应用 ID。例如：
 
-    knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
+```
+knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
+```
 
 可以通过资源[应用程序的清单][AAD-App-Manifest]更新此属性，本文末尾的[相关内容](#related-content)部分中的多层本机客户端调用 Web API 示例中也提供了此属性的相关演示。下图提供了同意多层应用的概览：
 
@@ -175,17 +190,17 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 <!--Reference style links IN USE -->
 [AAD-Access-Panel]: https://myapps.microsoft.com
-[AAD-App-Branding]: /documentation/articles/active-directory-branding-guidelines/
-[AAD-App-Manifest]: /documentation/articles/active-directory-application-manifest/
-[AAD-App-SP-Objects]: /documentation/articles/active-directory-application-objects/
-[AAD-Auth-Scenarios]: /documentation/articles/active-directory-authentication-scenarios/
-[AAD-Consent-Overview]: /documentation/articles/active-directory-integrating-applications/#overview-of-the-consent-framework/
-[AAD-Dev-Guide]: /documentation/articles/active-directory-developers-guide/
-[AAD-Graph-Overview]: /documentation/articles/active-directory-graph-api/
+[AAD-App-Branding]: ./active-directory-branding-guidelines.md
+[AAD-App-Manifest]: ./active-directory-application-manifest.md
+[AAD-App-SP-Objects]: ./active-directory-application-objects.md
+[AAD-Auth-Scenarios]: ./active-directory-authentication-scenarios.md
+[AAD-Consent-Overview]: ./active-directory-integrating-applications.md#overview-of-the-consent-framework/
+[AAD-Dev-Guide]: ./active-directory-developers-guide.md
+[AAD-Graph-Overview]: ./active-directory-graph-api.md
 [AAD-Graph-Perm-Scopes]: https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/howto/azure-ad-graph-api-permission-scopes
-[AAD-Integrating-Apps]: /documentation/articles/active-directory-integrating-applications/
+[AAD-Integrating-Apps]: ./active-directory-integrating-applications.md
 [AAD-Samples-MT]: https://azure.microsoft.com/documentation/samples/?service=active-directory&term=multitenant
-[AAD-Why-To-Integrate]: /documentation/articles/active-directory-how-to-integrate/
+[AAD-Why-To-Integrate]: ./active-directory-how-to-integrate.md
 [AZURE-classic-portal]: https://manage.windowsazure.cn
 [MSFT-Graph-AAD]: https://graph.microsoft.io/zh-cn/docs/authorization/permission_scopes
 
@@ -197,19 +212,19 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 <!--Reference style links -->
 
-[AAD-App-Manifest]: /documentation/articles/active-directory-application-manifest/
-[AAD-App-SP-Objects]: /documentation/articles/active-directory-application-objects/
-[AAD-Auth-Scenarios]: /documentation/articles/active-directory-authentication-scenarios/
-[AAD-Integrating-Apps]: /documentation/articles/active-directory-integrating-applications/
-[AAD-Dev-Guide]: /documentation/articles/active-directory-developers-guide/
+[AAD-App-Manifest]: ./active-directory-application-manifest.md
+[AAD-App-SP-Objects]: ./active-directory-application-objects.md
+[AAD-Auth-Scenarios]: ./active-directory-authentication-scenarios.md
+[AAD-Integrating-Apps]: ./active-directory-integrating-applications.md
+[AAD-Dev-Guide]: ./active-directory-developers-guide.md
 [AAD-Graph-Perm-Scopes]: https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/howto/azure-ad-graph-api-permission-scopes
 [AAD-Graph-App-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#application-entity
 [AAD-Graph-Sp-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity
 [AAD-Graph-User-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#user-entity
-[AAD-How-To-Integrate]: /documentation/articles/active-directory-how-to-integrate/
-[AAD-Security-Token-Claims]:/documentation/articles/active-directory-authentication-scenarios/#claims-in-azure-ad-security-tokens/
-[AAD-Tokens-Claims]: /documentation/articles/active-directory-token-and-claims/
-[AAD-V2-Dev-Guide]: /documentation/articles/active-directory-appmodel-v2-overview/
+[AAD-How-To-Integrate]: ./active-directory-how-to-integrate.md
+[AAD-Security-Token-Claims]:./active-directory-authentication-scenarios.md#claims-in-azure-ad-security-tokens/
+[AAD-Tokens-Claims]: ./active-directory-token-and-claims.md
+[AAD-V2-Dev-Guide]: ./active-directory-appmodel-v2-overview.md
 [AZURE-classic-portal]: https://manage.windowsazure.cn
 [Duyshant-Role-Blog]: http://www.dushyantgill.com/blog/2014/12/10/roles-based-access-control-in-cloud-applications-using-azure-ad/
 [JWT]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32

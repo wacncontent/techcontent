@@ -1,23 +1,23 @@
-<properties
-    pageTitle="DocumentDB 中的一致性级别 | Azure"
-    description="DocumentDB 提供四种一致性级别来帮助在最终一致性、可用性和延迟之间做出取舍。"
-    keywords="最终一致性、documentdb、azure、Azure"
-    services="documentdb"
-    author="syamkmsft"
-    manager="jhubbard"
-    editor="cgronlun"
-    documentationcenter="" />  
+---
+title: DocumentDB 中的一致性级别 | Azure
+description: DocumentDB 提供四种一致性级别来帮助在最终一致性、可用性和延迟之间做出取舍。
+keywords: 最终一致性、documentdb、azure、Azure
+services: documentdb
+author: syamkmsft
+manager: jhubbard
+editor: cgronlun
+documentationcenter: ''
 
-<tags
-    ms.assetid="3fe51cfa-a889-4a4a-b320-16bf871fe74c"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/16/2016"
-    wacn.date="01/04/2017"
-    ms.author="syamk" />
+ms.assetid: 3fe51cfa-a889-4a4a-b320-16bf871fe74c
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 01/04/2017
+ms.author: syamk
+---
 
 # DocumentDB 中的一致性级别
 Azure DocumentDB 是从无到有开发出来的，其设计考虑到了全局分发。它旨在提供可预测的低延迟保证、99.99% 的可用性 SLA，以及多个定义完好的宽松一致性模型。目前，DocumentDB 提供四种一致性级别：非常一致性、受限停滞一致性、会话一致性和最终级别。除了其他 NoSQL 数据库通常会提供的**强一致性**和**最终一致性**模型以外，DocumentDB 还提供两个经过谨慎编码和操作化的一致性模型 - **有限过期**模型和**会话**模型，并已根据真实用例验证它们的有效性。总而言之，这四个一致性级别可让你在一致性、可用性和延迟之间做出合理的取舍。
@@ -35,7 +35,7 @@ Azure DocumentDB 是从无到有开发出来的，其设计考虑到了全局分
 - 非常一致性提供[可线性化](https://aphyr.com/posts/313-strong-consistency-models)保证，即保证读取操作返回文档的最新版本。
 - 非常一致性保证写入只有在副本的多数仲裁一直提交的情况下才可见。写入要么由主要副本和辅助副本仲裁一直同步提交，要么被中止。读取始终由多数读取仲裁确认；客户端绝不会看到未提交或不完整的写入，而且始终保证读取最新确认的写入。
 - 配置为使用非常一致性的 DocumentDB 帐户不能将多个 Azure 区域与其 DocumentDB 帐户相关联。
-- 具有非常一致性的读取操作的开销（从消耗的[请求单位数](/documentation/articles/documentdb-request-units/)来讲）高于会话一致性和最终一致性，但与受限停滞一致性相同。
+- 具有非常一致性的读取操作的开销（从消耗的[请求单位数](./documentdb-request-units.md)来讲）高于会话一致性和最终一致性，但与受限停滞一致性相同。
 
 **受限停滞一致性**：
 
@@ -80,13 +80,11 @@ Azure DocumentDB 是从无到有开发出来的，其设计考虑到了全局分
 2. 在“DocumentDB (NoSQL)”边栏选项卡中，选择要修改的数据库帐户。
 3. 在帐户边栏选项卡中，单击“默认一致性”。
 4. 在“默认一致性”边栏选项卡中，选择新的一致性级别，然后单击“保存”。
-   
+
     ![屏幕截图：突出显示“设置”图标和默认一致性条目](./media/documentdb-consistency-levels/database-consistency-level-1.png)  
 
-
-> [AZURE.NOTE]
-[Azure DocumentDB 模拟器](/documentation/articles/documentdb-nosql-local-emulator/)中不支持配置默认的一致性级别。
-
+> [!NOTE]
+[Azure DocumentDB 模拟器](./documentdb-nosql-local-emulator.md)中不支持配置默认的一致性级别。
 
 ## 查询的一致性级别
 默认情况下，对于用户定义的资源，查询的一致性级别与读取的一致性级别相同。默认情况下，每次在集合中插入、替换或删除文档时同步更新索引。这个行为让查询能够使用与文档读取相同的一致性级别。虽然 DocumentDB 针对写入进行了优化，且支持文档写入，以及同步索引维护和提供一致的查询服务，但仍也可以配置某些集合，使其索引延迟更新。延迟索引编制可大大提高写入性能，非常适合工作负荷主要具有大量读取操作的批量引入方案。
@@ -102,11 +100,11 @@ Azure DocumentDB 是从无到有开发出来的，其设计考虑到了全局分
 ## 后续步骤
 如果想详细了解一致性级别和权衡方案，建议参阅下列资源：
 
--	Doug Terry。Replicated Data Consistency explained through baseball（借助棒球解释重复数据一致性）。[http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf](http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf)
--	Doug Terry。Session Guarantees for Weakly Consistent Replicated Data（弱一致性重复数据的会话保证）。[http://dl.acm.org/citation.cfm?id=383631](http://dl.acm.org/citation.cfm?id=383631)
--	Daniel Abadi。Consistency Tradeoffs in Modern Distributed Database Systems Design: CAP is only part of the story”（现代分布式数据库系统设计中的一致性平衡方案：CAP 只是冰山一角）。[http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html](http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html)
--	Peter Bailis、Shivaram Venkataraman、Michael J. Franklin、Joseph M. Hellerstein、Ion Stoica。Probabilistic Bounded Staleness (PBS) for Practical Partial Quorums（实用部分仲裁的概率性有限过期性 (PBS)）。[http://vldb.org/pvldb/vol5/p776\_peterbailis\_vldb2012.pdf](http://vldb.org/pvldb/vol5/p776_peterbailis_vldb2012.pdf)
--	Werner Vogels。Eventual Consistent - Revisited（最终一致 - 重新访问）。[http://allthingsdistributed.com/2008/12/eventually\_consistent.html](http://allthingsdistributed.com/2008/12/eventually_consistent.html)
+- Doug Terry。Replicated Data Consistency explained through baseball（借助棒球解释重复数据一致性）。[http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf](http://research.microsoft.com/pubs/157411/ConsistencyAndBaseballReport.pdf)
+- Doug Terry。Session Guarantees for Weakly Consistent Replicated Data（弱一致性重复数据的会话保证）。[http://dl.acm.org/citation.cfm?id=383631](http://dl.acm.org/citation.cfm?id=383631)
+- Daniel Abadi。Consistency Tradeoffs in Modern Distributed Database Systems Design: CAP is only part of the story”（现代分布式数据库系统设计中的一致性平衡方案：CAP 只是冰山一角）。[http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html](http://computer.org/csdl/mags/co/2012/02/mco2012020037-abs.html)
+- Peter Bailis、Shivaram Venkataraman、Michael J. Franklin、Joseph M. Hellerstein、Ion Stoica。Probabilistic Bounded Staleness (PBS) for Practical Partial Quorums（实用部分仲裁的概率性有限过期性 (PBS)）。[http://vldb.org/pvldb/vol5/p776_peterbailis_vldb2012.pdf](http://vldb.org/pvldb/vol5/p776_peterbailis_vldb2012.pdf)
+- Werner Vogels。Eventual Consistent - Revisited（最终一致 - 重新访问）。[http://allthingsdistributed.com/2008/12/eventually_consistent.html](http://allthingsdistributed.com/2008/12/eventually_consistent.html)
 
 [1]: ./media/documentdb-consistency-levels/consistency-tradeoffs.png
 

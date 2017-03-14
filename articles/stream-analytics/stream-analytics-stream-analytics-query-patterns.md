@@ -1,24 +1,23 @@
-<properties
-    pageTitle="流分析中常用使用模式的查询示例 | Azure"
-    description="常见的 Azure 流分析查询模式 "
-    keywords="查询示例"
-    services="stream-analytics"
-    documentationcenter=""
-    author="jeffstokes72"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="6b9a7d00-fbcc-42f6-9cbb-8bbf0bbd3d0e"
-    ms.service="stream-analytics"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="01/05/2017"
-    wacn.date="02/24/2017"
-    ms.author="jeffstok" />  
+---
+title: 流分析中常用使用模式的查询示例 | Azure
+description: 常见的 Azure 流分析查询模式 
+keywords: 查询示例
+services: stream-analytics
+documentationcenter: ''
+author: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
+ms.assetid: 6b9a7d00-fbcc-42f6-9cbb-8bbf0bbd3d0e
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 01/05/2017
+wacn.date: 02/24/2017
+ms.author: jeffstok
+---
 
 # 常用流分析使用模式的查询示例
 
@@ -44,17 +43,18 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT
-        Make,
-        SUM(CAST(Weight AS BIGINT)) AS Weight
-    FROM
-        Input TIMESTAMP BY Time
-    GROUP BY
-        Make,
-        TumblingWindow(second, 10)
+```
+SELECT
+    Make,
+    SUM(CAST(Weight AS BIGINT)) AS Weight
+FROM
+    Input TIMESTAMP BY Time
+GROUP BY
+    Make,
+    TumblingWindow(second, 10)
+```
 
 **说明**：对“重量”字段使用 CAST 语句，以便指定其类型（请在[此处](https://msdn.microsoft.com/zh-cn/library/azure/dn835065.aspx)查看受支持数据类型的列表）。
-
 
 ## 查询示例：使用 Like/Not like 进行模式匹配
 **说明**：查看事件中的某个字段值是否符合特定模式，例如，返回以 A 开头，以 9 结尾的牌照
@@ -76,12 +76,14 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT
-        *
-    FROM
-        Input TIMESTAMP BY Time
-    WHERE
-        LicensePlate LIKE 'A%9'
+```
+SELECT
+    *
+FROM
+    Input TIMESTAMP BY Time
+WHERE
+    LicensePlate LIKE 'A%9'
+```
 
 **说明**：使用 LIKE 语句查看牌照字段值是否以 A 开头、后面所跟的字符串是否包含 0 个或 0 个以上字符，以及是否以 9 结尾。
 
@@ -105,17 +107,19 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT
-        CASE
-            WHEN COUNT(*) = 1 THEN CONCAT('1 ', Make)
-            ELSE CONCAT(CAST(COUNT(*) AS NVARCHAR(MAX)), ' ', Make, 's')
-        END AS CarsPassed,
-        System.TimeStamp AS Time
-    FROM
-        Input TIMESTAMP BY Time
-    GROUP BY
-        Make,
-        TumblingWindow(second, 10)
+```
+SELECT
+    CASE
+        WHEN COUNT(*) = 1 THEN CONCAT('1 ', Make)
+        ELSE CONCAT(CAST(COUNT(*) AS NVARCHAR(MAX)), ' ', Make, 's')
+    END AS CarsPassed,
+    System.TimeStamp AS Time
+FROM
+    Input TIMESTAMP BY Time
+GROUP BY
+    Make,
+    TumblingWindow(second, 10)
+```
 
 **说明**：可以通过 CASE 子句根据某些标准（在我们的示例中为聚合时段中车辆的计数）提供不同的计算操作。
 
@@ -150,39 +154,43 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT
-        *
-    INTO
-        ArchiveOutput
-    FROM
-        Input TIMESTAMP BY Time
+```
+SELECT
+    *
+INTO
+    ArchiveOutput
+FROM
+    Input TIMESTAMP BY Time
 
-    SELECT
-        Make,
-        System.TimeStamp AS Time,
-        COUNT(*) AS [Count]
-    INTO
-        AlertOutput
-    FROM
-        Input TIMESTAMP BY Time
-    GROUP BY
-        Make,
-        TumblingWindow(second, 10)
-    HAVING
-        [Count] >= 3
+SELECT
+    Make,
+    System.TimeStamp AS Time,
+    COUNT(*) AS [Count]
+INTO
+    AlertOutput
+FROM
+    Input TIMESTAMP BY Time
+GROUP BY
+    Make,
+    TumblingWindow(second, 10)
+HAVING
+    [Count] >= 3
+```
 
 **说明**：INTO 子句告诉流分析哪一个输出可以通过此语句写入数据。第一个查询将我们接收到的数据传递到名为 ArchiveOutput 的输出。第二个查询进行了一些简单的聚合和筛选操作，然后将结果发送到下游的报警系统。*注意*：可以重复使用多个输出语句中的 CTE（即 WITH 语句）结果 – 这有额外的好处，在读取输入源时，可以打开较少的读取器。例如，
 
-    WITH AllRedCars AS (
-        SELECT
-            *
-        FROM
-            Input TIMESTAMP BY Time
-        WHERE
-            Color = 'red'
-    )
-    SELECT * INTO HondaOutput FROM AllRedCars WHERE Make = 'Honda'
-    SELECT * INTO ToyotaOutput FROM AllRedCars WHERE Make = 'Toyota'
+```
+WITH AllRedCars AS (
+    SELECT
+        *
+    FROM
+        Input TIMESTAMP BY Time
+    WHERE
+        Color = 'red'
+)
+SELECT * INTO HondaOutput FROM AllRedCars WHERE Make = 'Honda'
+SELECT * INTO ToyotaOutput FROM AllRedCars WHERE Make = 'Toyota'
+```
 
 ## 查询示例：对唯一值进行计数
 **说明**：计算某时间范围内流中出现的唯一字段值数。例如，2 秒时段内有多少辆唯一品牌的汽车通过了收费站？
@@ -206,13 +214,14 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案：**
 
-    SELECT
-         COUNT(DISTINCT Make) AS CountMake,
-         System.TIMESTAMP AS TIME
-    FROM Input TIMESTAMP BY TIME
-    GROUP BY 
-         TumblingWindow(second, 2)
-
+```
+SELECT
+     COUNT(DISTINCT Make) AS CountMake,
+     System.TIMESTAMP AS TIME
+FROM Input TIMESTAMP BY TIME
+GROUP BY 
+     TumblingWindow(second, 2)
+```
 
 **说明：**COUNT\(DISTINCT Make\) 返回某个时间段内“制造商”列的非重复值数目。
 
@@ -234,13 +243,15 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT
-        Make,
-        Time
-    FROM
-        Input TIMESTAMP BY Time
-    WHERE
-        LAG(Make, 1) OVER (LIMIT DURATION(minute, 1)) <> Make
+```
+SELECT
+    Make,
+    Time
+FROM
+    Input TIMESTAMP BY Time
+WHERE
+    LAG(Make, 1) OVER (LIMIT DURATION(minute, 1)) <> Make
+```
 
 **说明**：使用 LAG 查看后退一个事件之后的输入流，即可获得“制造商”字段的值。然后，将其与当前事件的“制造商”字段进行比较，如果二者不同，则输出该事件。
 
@@ -268,14 +279,16 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT 
-        LicensePlate,
-        Make,
-        Time
-    FROM 
-        Input TIMESTAMP BY Time
-    WHERE 
-        IsFirst(minute, 10) = 1
+```
+SELECT 
+    LicensePlate,
+    Make,
+    Time
+FROM 
+    Input TIMESTAMP BY Time
+WHERE 
+    IsFirst(minute, 10) = 1
+```
 
 现在，我们变更一下这个问题，每 10 分钟查找一次特定制造商的第一辆车。
 
@@ -289,14 +302,16 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT 
-        LicensePlate,
-        Make,
-        Time
-    FROM 
-        Input TIMESTAMP BY Time
-    WHERE 
-        IsFirst(minute, 10) OVER (PARTITION BY Make) = 1
+```
+SELECT 
+    LicensePlate,
+    Make,
+    Time
+FROM 
+    Input TIMESTAMP BY Time
+WHERE 
+    IsFirst(minute, 10) OVER (PARTITION BY Make) = 1
+```
 
 ## 查询示例：查找某一时段内的最后一个事件
 **说明**：在每 10 分钟时间间隔内查找最后一辆车。
@@ -322,24 +337,26 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    WITH LastInWindow AS
-    (
-        SELECT 
-            MAX(Time) AS LastEventTime
-        FROM 
-            Input TIMESTAMP BY Time
-        GROUP BY 
-            TumblingWindow(minute, 10)
-    )
+```
+WITH LastInWindow AS
+(
     SELECT 
-        Input.LicensePlate,
-        Input.Make,
-        Input.Time
-    FROM
-        Input TIMESTAMP BY Time 
-        INNER JOIN LastInWindow
-        ON DATEDIFF(minute, Input, LastInWindow) BETWEEN 0 AND 10
-        AND Input.Time = LastInWindow.LastEventTime
+        MAX(Time) AS LastEventTime
+    FROM 
+        Input TIMESTAMP BY Time
+    GROUP BY 
+        TumblingWindow(minute, 10)
+)
+SELECT 
+    Input.LicensePlate,
+    Input.Make,
+    Input.Time
+FROM
+    Input TIMESTAMP BY Time 
+    INNER JOIN LastInWindow
+    ON DATEDIFF(minute, Input, LastInWindow) BETWEEN 0 AND 10
+    AND Input.Time = LastInWindow.LastEventTime
+```
 
 **说明**：此查询中有两个步骤 – 第一个步骤是查找 10 分钟时段内的最后一个时间戳。第二个步骤需要将第一个查询的结果与初始流联接起来，查找每个时段内与最后一个时间戳匹配的事件。
 
@@ -363,16 +380,18 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
-    SELECT
-        Make,
-        Time,
-        LicensePlate AS CurrentCarLicensePlate,
-        LAG(LicensePlate, 1) OVER (LIMIT DURATION(second, 90)) AS FirstCarLicensePlate,
-        LAG(Time, 1) OVER (LIMIT DURATION(second, 90)) AS FirstCarTime
-    FROM
-        Input TIMESTAMP BY Time
-    WHERE
-        LAG(Make, 1) OVER (LIMIT DURATION(second, 90)) = Make
+```
+SELECT
+    Make,
+    Time,
+    LicensePlate AS CurrentCarLicensePlate,
+    LAG(LicensePlate, 1) OVER (LIMIT DURATION(second, 90)) AS FirstCarLicensePlate,
+    LAG(Time, 1) OVER (LIMIT DURATION(second, 90)) AS FirstCarTime
+FROM
+    Input TIMESTAMP BY Time
+WHERE
+    LAG(Make, 1) OVER (LIMIT DURATION(second, 90)) = Make
+```
 
 **说明**：使用 LAG 查看后退一个事件之后的输入流，即可获得“制造商”字段的值。然后，将其与当前事件的“制造商”字段进行比较，如果二者相同，则输出该事件，并使用 LAG 获取有关前一辆车的数据。
 
@@ -380,26 +399,27 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 **说明**：查找给定事件的持续时间。例如，给定 Web 点击流可以确定在某功能上所花费的时间。
 
 **输入**：
-  
+
 | 用户 | 功能 | 事件 | 时间 |
 | --- | --- | --- | --- |
 | user@location.com | RightMenu | 开始 | 2015-01-01T00:00:01.0000000Z |
 | user@location.com | RightMenu | 结束 | 2015-01-01T00:00:08.0000000Z |
-  
+
 **输出**：
-  
+
 | 用户 | 功能 | 持续时间 |
 | --- | --- | --- |
 | user@location.com | RightMenu | 7 |
-  
 
 **解决方案**
 
-        SELECT
-            [user], feature, DATEDIFF(second, LAST(Time) OVER (PARTITION BY [user], feature LIMIT DURATION(hour, 1) WHEN Event = 'start'), Time) as duration
-        FROM input TIMESTAMP BY Time
-        WHERE
-            Event = 'end'
+```
+    SELECT
+        [user], feature, DATEDIFF(second, LAST(Time) OVER (PARTITION BY [user], feature LIMIT DURATION(hour, 1) WHEN Event = 'start'), Time) as duration
+    FROM input TIMESTAMP BY Time
+    WHERE
+        Event = 'end'
+```
 
 **说明**：使用 LAST 函数检索事件类型为“开始”时的最近的时间值。请注意，LAST 函数使用 PARTITION BY \[user\] 指示结果应按唯一用户计算。该查询在“开始”和“停止”事件之间有 1 小时的最大时差阈值，但也可按需配置 \(LIMIT DURATION\(hour, 1\)。
 
@@ -427,24 +447,24 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 
 **解决方案**：
 
+```
+WITH SelectPreviousEvent AS
+(
+SELECT
+*,
+    LAG([time]) OVER (LIMIT DURATION(hour, 24)) as previousTime,
+    LAG([weight]) OVER (LIMIT DURATION(hour, 24)) as previousWeight
+FROM input TIMESTAMP BY [time]
+)
 
-	WITH SelectPreviousEvent AS
-	(
-	SELECT
-	*,
-		LAG([time]) OVER (LIMIT DURATION(hour, 24)) as previousTime,
-		LAG([weight]) OVER (LIMIT DURATION(hour, 24)) as previousWeight
-	FROM input TIMESTAMP BY [time]
-	)
-
-	SELECT 
-    	LAG(time) OVER (LIMIT DURATION(hour, 24) WHEN previousWeight < 20000 ) [StartFault],
-    	previousTime [EndFault]
-	FROM SelectPreviousEvent
-	WHERE
-    	[weight] < 20000
-	    AND previousWeight > 20000
-
+SELECT 
+    LAG(time) OVER (LIMIT DURATION(hour, 24) WHEN previousWeight < 20000 ) [StartFault],
+    previousTime [EndFault]
+FROM SelectPreviousEvent
+WHERE
+    [weight] < 20000
+    AND previousWeight > 20000
+```
 
 **说明**：使用 LAG 查看 24 小时内的输入流并查找因重量 \< 20000 而持续的 StartFault 和 StopFault 实例。
 
@@ -477,31 +497,29 @@ Azure 流分析中的查询采用类似 SQL 的查询语言表述，该语言的
 | 2014-01-01T14:01:40.000Z | 2014-01-01T14:01:35.000Z | 6 |
 | 2014-01-01T14:01:45.000Z | 2014-01-01T14:01:35.000Z | 6 |
 
-    
 **解决方案**：
 
-    SELECT
-    	System.Timestamp AS windowEnd,
-    	TopOne() OVER (ORDER BY t DESC) AS lastEvent
-    FROM
-    	input TIMESTAMP BY t
-    GROUP BY HOPPINGWINDOW(second, 300, 5)
-
+```
+SELECT
+    System.Timestamp AS windowEnd,
+    TopOne() OVER (ORDER BY t DESC) AS lastEvent
+FROM
+    input TIMESTAMP BY t
+GROUP BY HOPPINGWINDOW(second, 300, 5)
+```
 
 **说明**：此查询每隔 5 秒生成事件，并输出前面收到的最后一个事件。[跳跃窗口](https://msdn.microsoft.com/zh-cn/library/dn835041.aspx "跳跃窗口 - Azure 流分析")持续时间确定多久后查询将查找最新事件（在本例中为 300 秒）。
-
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)
 
 ## 后续步骤
 
-* [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-* [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-* [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+* [Azure 流分析简介](./stream-analytics-introduction.md)
+* [Azure 流分析入门](./stream-analytics-get-started.md)
+* [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 * [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 * [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
- 
 
 <!---HONumber=Mooncake_0220_2017-->
 <!-- Update_Description: update meta properties; wording update -->

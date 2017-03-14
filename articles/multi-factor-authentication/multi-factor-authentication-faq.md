@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure 多重身份验证常见问题 | Azure"
-    description="提供与 Azure 多重身份验证相关的常见问题与解答列表。Azure 多重身份验证是要求使用多种方式（而不仅仅是用户名和密码）验证用户身份的一种方法。它为用户登录和事务提供了额外的安全层。"
-    services="multi-factor-authentication"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="yossib" />
-<tags
-    ms.assetid="50bb8ac3-5559-4d8b-a96a-799a74978b14"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/06/2017"
-    wacn.date="02/20/2017"
-    ms.author="kgremban" />
+---
+title: Azure 多重身份验证常见问题 | Azure
+description: 提供与 Azure 多重身份验证相关的常见问题与解答列表。Azure 多重身份验证是要求使用多种方式（而不仅仅是用户名和密码）验证用户身份的一种方法。它为用户登录和事务提供了额外的安全层。
+services: multi-factor-authentication
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: yossib
+
+ms.assetid: 50bb8ac3-5559-4d8b-a96a-799a74978b14
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/06/2017
+wacn.date: 02/20/2017
+ms.author: kgremban
+---
 
 # Azure 多重身份验证常见问题
 本“常见问题”文章解答有关 Azure 多重身份验证和使用多重身份验证服务的常见问题，包括计费模式和可用性相关问题。
@@ -43,7 +44,7 @@
 验证结果（成功或拒绝）和任何拒绝原因也与身份验证数据一起存储，可从身份验证和使用情况报告中获取。
 
 ## 计费
-可参阅[多重身份验证定价页](/pricing/details/multi-factor-authentication/)获得大多数计费问题的答案。
+可参阅[多重身份验证定价页](https://www.azure.cn/pricing/details/multi-factor-authentication/)获得大多数计费问题的答案。
 
 **问：通过电话或短信对用户进行身份验证时，组织是否需要付费？**
 
@@ -59,7 +60,7 @@
 
 使用授权模式时，需要购买 Azure 多重身份验证许可证并将其分配给用户，如同购买 Office 365 及其他订阅产品时一样。
 
-通过 [Azure 多重身份验证的工作原理](/documentation/articles/multi-factor-authentication-how-it-works/#how-to-get-azure-multi-factor-authentication/)详细了解选项
+通过 [Azure 多重身份验证的工作原理](./multi-factor-authentication-how-it-works.md#how-to-get-azure-multi-factor-authentication)详细了解选项
 
 **问：是否有可供管理员使用的免费 Azure 多重身份验证版本？**
 
@@ -92,10 +93,9 @@
 
 **问：如果用户因无法再访问某个帐户而联系管理员，管理员该如何处理？**
 
-管理员可以要求用户再次完成注册过程来重置其帐户。详细了解如何[在云中使用 Azure 多重身份验证管理用户和设备设置](/documentation/articles/multi-factor-authentication-manage-users-and-devices/)。
+管理员可以要求用户再次完成注册过程来重置其帐户。详细了解如何[在云中使用 Azure 多重身份验证管理用户和设备设置](./multi-factor-authentication-manage-users-and-devices.md)。
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 适用于 Office 2013 客户端的新式验证
 > 
 > Office 2013 客户端（包括 Outlook）支持新式验证协议。可以将 Office 2013 配置为支持多重身份验证。配置 Office 2013 后，Office 2013 客户端不需要应用密码。有关详细信息，请参阅 [Office 2013 modern authentication public preview announcement](https://blogs.office.com/2015/03/23/office-2013-modern-authentication-public-preview-announced/)（Office 2013 新式验证公共预览版发布声明）。
@@ -109,7 +109,6 @@
 难以可靠接收短信的用户应改为选择移动应用或电话呼叫的方法。移动应用可同时通过手机网络和 Wi-Fi 连接接收通知。此外，即使设备完全没有信号，移动应用也可以生成验证码。Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)、[Android](http://go.microsoft.com/fwlink/?Linkid=825072) 和 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)。
 
 如果必须使用短信，建议尽可能使用单向短信，而不要使用双向短信。单向短信更加可靠，可以防止由于回复其他国家/地区发来的短信而给用户造成的全球短信费用。
-
 
 **问：是否可以使用 Azure 多重身份验证服务器保护终端服务？**
 

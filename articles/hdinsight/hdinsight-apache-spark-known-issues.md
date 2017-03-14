@@ -1,24 +1,24 @@
-<properties 
-	pageTitle="HDInsight 中 Apache Spark 的已知问题 | Azure" 
-	description="HDInsight 中 Apache Spark 的已知问题。" 
-	services="hdinsight" 
-	documentationCenter="" 
-	authors="mumian" 
-	manager="paulettm" 
-	editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: HDInsight 中 Apache Spark 的已知问题 | Azure
+description: HDInsight 中 Apache Spark 的已知问题。
+services: hdinsight
+documentationCenter: ''
+authors: mumian
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-	ms.service="hdinsight"
-	ms.date="01/03/2017"
-	wacn.date="02/14/2017"/>
+ms.service: hdinsight
+ms.date: 01/03/2017
+wacn.date: 02/14/2017
+---
 
 # HDInsight Linux 上的 Apache Spark 群集的已知问题
 
 本文档记述了 HDInsight Spark 公共预览版的所有已知问题。
 
 ##Livy 泄漏交互式会话
- 
+
 在某个交互式会话仍保持活动状态的情况下，Livy 重新启动（从 Ambari 重新启动，或者由于头节点 0 虚拟机重新启动），同时交互式作业会话泄漏。因此，新作业可能陷于“已接受”状态中，且无法启动。
 
 **缓解：**
@@ -28,13 +28,17 @@
 1. 通过 SSH 连接到头节点。
 2. 运行以下命令，以查找通过 Livy 启动的交互式作业的应用程序 ID。
 
-        yarn application -list
+    ```
+    yarn application -list
+    ```
 
     如果作业是通过未指定明确名称的 Livy 交互式会话启动的，则默认的作业名称将是 Livy；对于 Jupyter 笔记本启动的 Livy 会话，作业名称以 remotesparkmagics\_* 开头。
 
 3. 运行以下命令以终止这些作业。
 
-        yarn application -kill <Application ID>
+    ```
+    yarn application -kill <Application ID>
+    ```
 
 新作业将开始运行。
 
@@ -51,7 +55,7 @@
 当 hdiuser 通过 spark-submit 提交作业时发生错误 java.io.FileNotFoundException：/var/log/spark/sparkdriver\_hdiuser.log（权限被拒绝），且不会写入驱动程序日志。
 
 **缓解：**
- 
+
 1. 将 hdiuser 添加到 Hadoop 组。
 2. 创建群集后，提供对 /var/log/spark 的 777 权限。
 3. 使用 Ambari 将 Spark 日志位置更新为具有 777 权限的目录。
@@ -60,7 +64,6 @@
 ## Jupyter 笔记本的相关问题
 
 下面是与 Jupyter 笔记本相关的一些已知问题。
-
 
 ### 笔记本的文件名中包含非 ASCII 字符
 
@@ -84,7 +87,7 @@
 在使用 Spark magic 的 Jupyter 笔记本中，第一个代码语句可能需要花费一分钟以上。
 
 **解释：**
- 
+
 这发生在运行第一个代码单元时。它在后台启动设置会话配置，以及设置 SQL、Spark 和 Hive 上下文。设置这些上下文后，第一个语句才运行，因此让人觉得完成语句需要花费很长时间。
 
 ### 创建会话时 Jupyter 笔记本超时
@@ -102,39 +105,39 @@
 
 ##另请参阅
 
-* [概述：Azure HDInsight 上的 Apache Spark](/documentation/articles/hdinsight-apache-spark-overview/)
+* [概述：Azure HDInsight 上的 Apache Spark](./hdinsight-apache-spark-overview.md)
 
 ### 方案
 
-* [Spark 和 BI：使用 HDInsight 中的 Spark 和 BI 工具执行交互式数据分析](/documentation/articles/hdinsight-apache-spark-use-bi-tools/)
+* [Spark 和 BI：使用 HDInsight 中的 Spark 和 BI 工具执行交互式数据分析](./hdinsight-apache-spark-use-bi-tools.md)
 
-* [Spark 和机器学习：使用 HDInsight 中的 Spark 对使用 HVAC 数据生成温度进行分析](/documentation/articles/hdinsight-apache-spark-ipython-notebook-machine-learning/)
+* [Spark 和机器学习：使用 HDInsight 中的 Spark 对使用 HVAC 数据生成温度进行分析](./hdinsight-apache-spark-ipython-notebook-machine-learning.md)
 
-* [Spark 和机器学习：使用 HDInsight 中的 Spark 预测食品检查结果](/documentation/articles/hdinsight-apache-spark-machine-learning-mllib-ipython/)
+* [Spark 和机器学习：使用 HDInsight 中的 Spark 预测食品检查结果](./hdinsight-apache-spark-machine-learning-mllib-ipython.md)
 
-* [Spark 流式处理：使用 HDInsight 中的 Spark 生成实时流式处理应用程序](/documentation/articles/hdinsight-apache-spark-eventhub-streaming/)
+* [Spark 流式处理：使用 HDInsight 中的 Spark 生成实时流式处理应用程序](./hdinsight-apache-spark-eventhub-streaming.md)
 
-* [使用 HDInsight 中的 Spark 分析网站日志](/documentation/articles/hdinsight-apache-spark-custom-library-website-log-analysis/)
+* [使用 HDInsight 中的 Spark 分析网站日志](./hdinsight-apache-spark-custom-library-website-log-analysis.md)
 
 ### 创建和运行应用程序
 
-* [使用 Scala 创建独立的应用程序](/documentation/articles/hdinsight-apache-spark-create-standalone-application/)
+* [使用 Scala 创建独立的应用程序](./hdinsight-apache-spark-create-standalone-application.md)
 
-* [使用 Livy 在 Spark 群集中远程运行作业](/documentation/articles/hdinsight-apache-spark-livy-rest-interface/)
+* [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展
 
-* [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](/documentation/articles/hdinsight-apache-spark-use-zeppelin-notebook/)
+* [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](./hdinsight-apache-spark-use-zeppelin-notebook.md)
 
-* [在 HDInsight 的 Spark 群集中可用于 Jupyter 笔记本的内核](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-kernels/)
+* [在 HDInsight 的 Spark 群集中可用于 Jupyter 笔记本的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)
 
-* [Use external packages with Jupyter notebooks](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-use-external-packages/)（将外部包与 Jupyter 笔记本配合使用）
+* [Use external packages with Jupyter notebooks](./hdinsight-apache-spark-jupyter-notebook-use-external-packages.md)（将外部包与 Jupyter 笔记本配合使用）
 
-* [Install Jupyter on your computer and connect to an HDInsight Spark cluster](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-install-locally/)（在计算机上安装 Jupyter 并连接到 HDInsight Spark 群集）
+* [Install Jupyter on your computer and connect to an HDInsight Spark cluster](./hdinsight-apache-spark-jupyter-notebook-install-locally.md)（在计算机上安装 Jupyter 并连接到 HDInsight Spark 群集）
 
 ### 管理资源
 
-* [管理 Azure HDInsight 中 Apache Spark 群集的资源](/documentation/articles/hdinsight-apache-spark-resource-manager/)
+* [管理 Azure HDInsight 中 Apache Spark 群集的资源](./hdinsight-apache-spark-resource-manager.md)
 
-* [Track and debug jobs running on an Apache Spark cluster in HDInsight](/documentation/articles/hdinsight-apache-spark-job-debugging/)（跟踪和调试 HDInsight 中的 Apache Spark 群集上运行的作业）
+* [Track and debug jobs running on an Apache Spark cluster in HDInsight](./hdinsight-apache-spark-job-debugging.md)（跟踪和调试 HDInsight 中的 Apache Spark 群集上运行的作业）
 <!---HONumber=Mooncake_0711_2016-->

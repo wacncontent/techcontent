@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Azure AD Connect：设计概念 | Azure"
-   description="本主题详细说明某些实现设计方面的问题"
-   services="active-directory"
-   documentationCenter=""
-   authors="AndKjell"
-   manager="femila"
-   editor=""/>
+---
+title: Azure AD Connect：设计概念 | Azure
+description: 本主题详细说明某些实现设计方面的问题
+services: active-directory
+documentationCenter: ''
+authors: AndKjell
+manager: femila
+editor: ''
 
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="Identity"
-   ms.date="09/13/2016"
-   ms.author="andkjell"
-   wacn.date="01/09/2017"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: Identity
+ms.date: 09/13/2016
+ms.author: andkjell
+wacn.date: 01/09/2017
+---
 
 # Azure AD Connect：设计概念
 本主题旨在说明 Azure AD Connect 实现设计期间必须考虑到的各个方面。本主题是特定领域的深入探讨，其他主题中也简要描述了这些概念。
@@ -85,11 +85,11 @@ John 是 contoso.com 中的用户。在将用户同步到 Azure AD 目录 contos
 ### 不可路由的本地域与 Azure AD 的 UPN
 有些组织使用不可路由的域（例如 contoso.local）或简单的单标签域（例如 contoso）。在 Azure AD 中，无法验证不可路由的域。Azure AD Connect 只能同步到 Azure AD 中已验证的域。创建 Azure AD 目录时，将创建可路由的域，该域将成为 Azure AD 的默认域，例如 contoso.partner.onmschina.cn。因此，如果不想要同步到默认的 partner.onmschina.cn 域，必须在此类方案中验证任何其他可路由的域。
 
-有关添加和验证域的详细信息，请阅读 [Add your custom domain name to Azure Active Directory](/documentation/articles/active-directory-add-domain/)（将自定义域名添加到 Azure Active Directory）。
+有关添加和验证域的详细信息，请阅读 [Add your custom domain name to Azure Active Directory](./active-directory-add-domain.md)（将自定义域名添加到 Azure Active Directory）。
 
 Azure AD Connect 将检测你是否在不可路由的域环境中运行，并在适当的情况下警告你不要继续使用快速设置。如果在不可路由的域中操作，用户的 UPN 可能也包含不可路由的后缀。例如，如果在 contoso.local 下运行，Azure AD Connect 建议使用自定义设置而不是快速设置。使用自定义设置，可以在用户同步到 Azure AD 之后，指定要用作 UPN 以供登录 Azure 的属性。
 
 ## 后续步骤
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

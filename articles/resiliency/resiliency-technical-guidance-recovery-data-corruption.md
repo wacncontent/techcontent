@@ -1,21 +1,22 @@
 <!-- Remove storage-backup-and-recovery -->
-<properties
-   pageTitle="有关在数据损坏或意外删除后进行恢复的复原技术指南 | Azure"
-   description="本文可帮助你了解如何在发生数据损坏或数据意外删除后进行恢复，设计有复原能力、高度可用、容错的应用程序，以及针对灾难恢复进行规划"
-   services=""
-   documentationCenter="na"
-   authors="adamglick"
-   manager="saladki"
-   editor=""/>
 
-<tags
-   ms.service="resiliency"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="08/18/2016"
-   ms.author="aglick"/>
+---
+title: 有关在数据损坏或意外删除后进行恢复的复原技术指南 | Azure
+description: 本文可帮助你了解如何在发生数据损坏或数据意外删除后进行恢复，设计有复原能力、高度可用、容错的应用程序，以及针对灾难恢复进行规划
+services: ''
+documentationCenter: na
+authors: adamglick
+manager: saladki
+editor: ''
+
+ms.service: resiliency
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/18/2016
+ms.author: aglick
+---
 
 #Azure 复原技术指南 - 数据损坏或意外删除后进行恢复
 
@@ -24,7 +25,7 @@
 <a id="virtual-machines"></a>
 ## 虚拟机
 
-若要在发生应用程序错误或意外删除后保护 Azure 虚拟机（有时称基础结构即服务 VM），可以使用 [Azure 备份](/home/features/back-up/)。使用 Azure 备份可跨多个 VM 磁盘创建一致的备份。此外，可以跨区域复制备份保管库，以便在发生区域服务中断时进行恢复。
+若要在发生应用程序错误或意外删除后保护 Azure 虚拟机（有时称基础结构即服务 VM），可以使用 [Azure 备份](https://www.azure.cn/home/features/back-up/)。使用 Azure 备份可跨多个 VM 磁盘创建一致的备份。此外，可以跨区域复制备份保管库，以便在发生区域服务中断时进行恢复。
 
 <a id="storage"></a>
 ## 存储
@@ -43,13 +44,14 @@
 <a id="database"></a>
 ## 数据库
 
-Azure SQL 数据库提供了多个[业务连续性](/documentation/articles/sql-database-business-continuity/)（备份、还原）选项。可以使用[数据库复制](/documentation/articles/sql-database-copy/)功能或通过[导出](/documentation/articles/sql-database-export/)和[导入](https://msdn.microsoft.com/zh-cn/library/hh710052.aspx) SQL Server bacpac 文件来复制数据库。数据库复制提供事务一致的结果，而 bacpac（通过导入/导出服务）则不会提供事务一致的结果。这两种选项都在数据中心中作为基于队列的服务运行，当前不提供完成时间 SLA。
+Azure SQL 数据库提供了多个[业务连续性](../sql-database/sql-database-business-continuity.md)（备份、还原）选项。可以使用[数据库复制](../sql-database/sql-database-copy.md)功能或通过[导出](../sql-database/sql-database-export.md)和[导入](https://msdn.microsoft.com/zh-cn/library/hh710052.aspx) SQL Server bacpac 文件来复制数据库。数据库复制提供事务一致的结果，而 bacpac（通过导入/导出服务）则不会提供事务一致的结果。这两种选项都在数据中心中作为基于队列的服务运行，当前不提供完成时间 SLA。
 
->[AZURE.NOTE]数据库复制和导入/导出服务会对源数据库形成极大的负载。它们可能会触发资源争用或限制事件。
+>[!NOTE]
+>数据库复制和导入/导出服务会对源数据库形成极大的负载。它们可能会触发资源争用或限制事件。
 
 ### SQL 数据库备份
 
-Azure SQL 数据库的时间点备份是通过[复制 Azure SQL 数据库](/documentation/articles/sql-database-copy/)来实现的。你可以使用此命令在同一逻辑数据库服务器或不同服务器上创建数据库的事务一致副本。无论是哪种情况，数据库副本都完全独立于源数据库并发挥全部功能。创建的每个副本表示一个时间点恢复选项。可以通过将新数据库重命名为源数据库名称，完全恢复数据库状态。或者，可以通过使用 Transact-SQL 查询从新数据库恢复数据的特定子集。有关 SQL 数据库的更多详细信息，请参阅 [Cloud business continuity and database disaster recovery with SQL Database（使用 SQL 数据库实现云业务连续性和数据库灾难恢复）](/documentation/articles/sql-database-business-continuity/)。
+Azure SQL 数据库的时间点备份是通过[复制 Azure SQL 数据库](../sql-database/sql-database-copy.md)来实现的。你可以使用此命令在同一逻辑数据库服务器或不同服务器上创建数据库的事务一致副本。无论是哪种情况，数据库副本都完全独立于源数据库并发挥全部功能。创建的每个副本表示一个时间点恢复选项。可以通过将新数据库重命名为源数据库名称，完全恢复数据库状态。或者，可以通过使用 Transact-SQL 查询从新数据库恢复数据的特定子集。有关 SQL 数据库的更多详细信息，请参阅 [Cloud business continuity and database disaster recovery with SQL Database（使用 SQL 数据库实现云业务连续性和数据库灾难恢复）](../sql-database/sql-database-business-continuity.md)。
 
 <a id="sql-server-on-virtual-machines-backup"></a>
 ### 虚拟机上的 SQL Server 备份
@@ -100,7 +102,7 @@ Azure SQL 数据库的时间点备份是通过[复制 Azure SQL 数据库](/docu
 
 ## 后续步骤
 
-本文是着重介绍 [Azure 复原技术指南](/documentation/articles/resiliency-technical-guidance/)的系列教程的一部分。如果要查找有关复原、灾难恢复和高可用性的其他资源，请参阅 Azure 复原技术指南中的[其他资源](/documentation/articles/resiliency-technical-guidance/#additional-resources)。
+本文是着重介绍 [Azure 复原技术指南](./resiliency-technical-guidance.md)的系列教程的一部分。如果要查找有关复原、灾难恢复和高可用性的其他资源，请参阅 Azure 复原技术指南中的[其他资源](./resiliency-technical-guidance.md#additional-resources)。
 
 <!---HONumber=Mooncake_0926_2016-->
 <!-- Update_Description: update meta properties; wording update-->

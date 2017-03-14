@@ -1,23 +1,21 @@
-<properties
-   pageTitle="SQL 数据仓库系统视图 | Azure"
-   description="SQL 数据仓库的系统视图内容链接。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库系统视图 | Azure
+description: SQL 数据仓库的系统视图内容链接。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: barbkess;sonyama
+---
 
 # 系统视图
 
@@ -144,8 +142,8 @@ SQL 数据仓库公开许多 SQL Server 动态管理视图 (DMV)。在 SQL 数�
 
 这就是为何其中每个 DMV 都有一个名为 pdw\_node\_id 的特定列的原因。这是计算节点的标识符。在 PDW 中，计算节点是体系结构的强势概念。在 SQL 数据仓库中，体系结构更严重依赖于分布区。
 
->[AZURE.NOTE] 若要使用这些视图，请在名称中插入“pdw\_nodes\_”，如下表所示。
-
+>[!NOTE]
+> 若要使用这些视图，请在名称中插入“pdw\_nodes\_”，如下表所示。
 
 | SQL 数据仓库中的 DMV 名称 | MSDN 上的 SQL Server Transact-SQL 主题链接 |
 | :----------------------------- | :-------------------------------------------- |
@@ -239,10 +237,9 @@ SQL 数据仓库公开许多 SQL Server 动态管理视图 (DMV)。在 SQL 数�
 <!--Image references-->
 
 <!--Article references-->
-[SQL 数据仓库参考概述]: /documentation/articles/sql-data-warehouse-overview-reference/
+[SQL 数据仓库参考概述]: ./sql-data-warehouse-overview-reference.md
 
 <!--MSDN references-->
-
 
 <!--Other Web references-->
 

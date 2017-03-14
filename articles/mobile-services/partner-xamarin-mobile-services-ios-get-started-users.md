@@ -1,26 +1,25 @@
-<properties
-	pageTitle="身份验证入门 (Xamarin.iOS) - 移动服务"
-	description="了解如何在 Xamarin.iOS 的 Azure 移动服务应用程序中使用身份验证。"
-	documentationCenter="xamarin"
-	services="mobile-services"
-	manager="dwrede"
-	authors="lindydonna"
-	editor=""/>
+---
+title: 身份验证入门 (Xamarin.iOS) - 移动服务
+description: 了解如何在 Xamarin.iOS 的 Azure 移动服务应用程序中使用身份验证。
+documentationCenter: xamarin
+services: mobile-services
+manager: dwrede
+authors: lindydonna
+editor: ''
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin-ios"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="donnam"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: donnam
+---
 
 # 向移动服务应用程序添加身份验证
 
-[AZURE.INCLUDE [mobile-services-selector-get-started-users](../../includes/mobile-services-selector-get-started-users.md)]
-
+[!INCLUDE [mobile-services-selector-get-started-users](../../includes/mobile-services-selector-get-started-users.md)]
 
 本主题说明如何通过应用程序对 Azure 移动服务中的用户进行身份验证。在本教程中，你将要使用移动服务支持的标识提供程序向快速入门项目添加身份验证。在移动服务成功完成身份验证和授权后，将显示用户 ID 值。
 
@@ -36,19 +35,17 @@
 
 ## <a name="register"></a>注册应用程序以进行身份验证并配置移动服务
 
-[AZURE.INCLUDE [mobile-services-register-authentication](../../includes/mobile-services-register-authentication.md)]
+[!INCLUDE [mobile-services-register-authentication](../../includes/mobile-services-register-authentication.md)]
 
 ## <a name="permissions"></a>将权限限制给已经过身份验证的用户
 
-
-[AZURE.INCLUDE [mobile-services-restrict-permissions-javascript-backend](../../includes/mobile-services-restrict-permissions-javascript-backend.md)]
-
+[!INCLUDE [mobile-services-restrict-permissions-javascript-backend](../../includes/mobile-services-restrict-permissions-javascript-backend.md)]
 
 3. 在 Xcode 中，打开你在完成[移动服务入门]教程时创建的项目。 
 
 2. 在 iPhone 模拟器中按“运行”按钮以生成项目并启动应用程序；验证启动该应用程序后，是否会引发状态代码为 401（“未授权”）的未处理异常。
-   
-   	发生此异常的原因是应用程序尝试以未经身份验证的用户身份访问移动服务，但 _TodoItem_ 表现在要求身份验证。
+
+       发生此异常的原因是应用程序尝试以未经身份验证的用户身份访问移动服务，但 _TodoItem_ 表现在要求身份验证。
 
 接下来，你需要更新应用程序，以便在从移动服务请求资源之前对用户进行身份验证。
 
@@ -56,67 +53,77 @@
 
 1. 打开 **QSToDoService** 项目文件并添加以下变量
 
-		// Mobile Service logged in user
-		private MobileServiceUser user; 
-		public MobileServiceUser User { get { return user; } }
+    ```
+    // Mobile Service logged in user
+    private MobileServiceUser user; 
+    public MobileServiceUser User { get { return user; } }
+    ```
 
 2. 然后，向 **TodoService** 添加一个名为 **Authenticate** 的新方法，其定义为：
 
-        private async Task Authenticate(MonoTouch.UIKit.UIViewController view)
+    ```
+    private async Task Authenticate(MonoTouch.UIKit.UIViewController view)
+    {
+        try
         {
-            try
-            {
-                user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.MicrosoftAccount);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
-            }
+            user = await client.LoginAsync(view, MobileServiceAuthenticationProvider.MicrosoftAccount);
         }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine (@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
+        }
+    }
+    ```
 
-	> [AZURE.NOTE]如果使用的标识提供程序不是 Microsoft 帐户，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
+    > [!NOTE]
+    >如果使用的标识提供程序不是 Microsoft 帐户，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
 
 3. 从 **ToDoService** 构造函数将对 **ToDoItem** 表的请求移到名为 **CreateTable** 的新方法中：
 
-        private async Task CreateTable()
-        {
-            // Create an MSTable instance to allow us to work with the ToDoItem table
-            todoTable = client.GetSyncTable<ToDoItem>();
-        }
-	
+    ```
+    private async Task CreateTable()
+    {
+        // Create an MSTable instance to allow us to work with the ToDoItem table
+        todoTable = client.GetSyncTable<ToDoItem>();
+    }
+    ```
+
 4. 创建一个名为 **LoginAndGetData** 的新异步公共方法，其定义为：
 
-        public async Task LoginAndGetData(MonoTouch.UIKit.UIViewController view)
-        {
-            await Authenticate(view);
-            await CreateTable();
-        }
+    ```
+    public async Task LoginAndGetData(MonoTouch.UIKit.UIViewController view)
+    {
+        await Authenticate(view);
+        await CreateTable();
+    }
+    ```
 
 5. 在 **TodoListViewController** 中，重写 **ViewDidAppear** 方法，并按如下所示定义它。如果 **TodoService** 还没有用户的句柄，则此代码让用户登录：
 
-        public override async void ViewDidAppear(bool animated)
+    ```
+    public override async void ViewDidAppear(bool animated)
+    {
+        base.ViewDidAppear(animated);
+
+        if (QSTodoService.DefaultService.User == null)
         {
-            base.ViewDidAppear(animated);
-
-            if (QSTodoService.DefaultService.User == null)
-            {
-                await QSTodoService.DefaultService.LoginAndGetData(this);
-            }
-
-            if (QSTodoService.DefaultService.User == null)
-            {
-                // TODO:: show error
-                return;
-            }
-
-
-            await RefreshAsync();
+            await QSTodoService.DefaultService.LoginAndGetData(this);
         }
+
+        if (QSTodoService.DefaultService.User == null)
+        {
+            // TODO:: show error
+            return;
+        }
+
+        await RefreshAsync();
+    }
+    ```
 6. 从 **TodoListViewController.ViewDidLoad** 中删除对 **RefreshAsync** 的原始调用。
-		
+
 7. 按“运行”按钮以生成项目，在 iPhone 模拟器中启动应用，然后使用你选择的标识提供者登录。
 
-   	当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。
+       当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。
 
 ## 获取已完成的示例
 下载已完成的示例项目。请务必使用你自己的 Azure 设置更新 **applicationURL** 和 **applicationKey** 变量。
@@ -143,11 +150,11 @@
 [My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
 [Live SDK for Windows]: http://go.microsoft.com/fwlink/p/?LinkId=262253
 
-[移动服务入门]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started/
+[移动服务入门]: ./partner-xamarin-mobile-services-ios-get-started.md
 [Get started with data]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-data/
-[Get started with authentication]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-users/
-[Get started with push notifications]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-push/
-[使用脚本为用户授权]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
+[Get started with authentication]: ./partner-xamarin-mobile-services-ios-get-started-users.md
+[Get started with push notifications]: ./partner-xamarin-mobile-services-ios-get-started-push.md
+[使用脚本为用户授权]: ./mobile-services-javascript-backend-service-side-authorization.md
 
 [Xamarin Studio]: http://xamarin.com/download
 

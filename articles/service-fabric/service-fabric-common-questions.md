@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure Service Fabric 常见问题 | Azure"
-    description="有关 Service Fabric 的常见问题及其回答"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="seanmck"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="5a179703-ff0c-4b8e-98cd-377253295d12"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/19/2017"
-    wacn.date="03/03/2017"
-    ms.author="seanmck" />  
+---
+title: Azure Service Fabric 常见问题 | Azure
+description: 有关 Service Fabric 的常见问题及其回答
+services: service-fabric
+documentationcenter: .net
+author: seanmck
+manager: timlt
+editor: ''
 
+ms.assetid: 5a179703-ff0c-4b8e-98cd-377253295d12
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/19/2017
+wacn.date: 03/03/2017
+ms.author: seanmck
+---
 
 # Service Fabric 常见问题
 
@@ -60,18 +60,17 @@
 
 一般而言，不可以。Service Fabric 在本地、临时磁盘上存储状态，这意味着如果虚拟机移到其他主机，数据不会随之移动。在正常操作中，这不是问题，因为新节点会通过其他节点保持最新状态。但是，如果停止所有节点然后重启，很可能发生的情况是，大部分节点在新主机上启动，导致系统无法恢复。
 
-如果想要在部署应用程序前创建群集对其进行测试，我们建议将这些群集作为[持续集成/持续部署管道](/documentation/articles/service-fabric-set-up-continuous-integration/)的一部分进行动态创建。
+如果想要在部署应用程序前创建群集对其进行测试，我们建议将这些群集作为[持续集成/持续部署管道](./service-fabric-set-up-continuous-integration.md)的一部分进行动态创建。
 
 ## 应用程序设计
 
 ### 跨可靠集合的分区查询数据的最佳方法是什么？
 
-可靠集合通常[已分区](/documentation/articles/service-fabric-concepts-partitioning/)，可进行扩大，以提供更好的性能和吞吐量。这意味着给定服务的状态可能跨数十台或数百台计算机分布。若要对这个完整的数据集执行操作，有以下几个选项：
+可靠集合通常[已分区](./service-fabric-concepts-partitioning.md)，可进行扩大，以提供更好的性能和吞吐量。这意味着给定服务的状态可能跨数十台或数百台计算机分布。若要对这个完整的数据集执行操作，有以下几个选项：
 
 - 创建查询其他服务的所有分区的服务，拉入所需的数据。
 - 创建可从其他服务的所有分区接收数据的服务。
 - 定期从每个服务将数据推送到外部存储。此方法仅适用于要执行的查询不属于核心业务逻辑的情况。
-
 
 ### 跨执行组件查询数据的最佳方法是什么？
 
@@ -99,8 +98,6 @@
 ### 可以在执行组件中存储多少数据？
 
 和可靠服务一样，可以在执行组件服务中存储的数据量仅受限于群集中各个节点的总磁盘空间和可用内存。但是，单独的执行组件在用于封装少量状态和关联的业务逻辑时效率最高。一般而言，单独的执行组件应具有以千字节为单位的状态。
-
-
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: wording update-->

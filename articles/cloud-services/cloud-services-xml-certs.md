@@ -1,18 +1,16 @@
-<properties 
-	pageTitle="Azure 云服务 - 服务定义和服务配置 - XML 证书" 
-	description="了解如何在服务定义和服务配置文件中配置证书。" 
-	services="cloud-services" 
-	documentationCenter=".net" 
-	authors="Thraka" 
-	manager="timlt" 
-	editor=""/>
+---
+title: Azure 云服务 - 服务定义和服务配置 - XML 证书
+description: 了解如何在服务定义和服务配置文件中配置证书。
+services: cloud-services
+documentationCenter: .net
+authors: Thraka
+manager: timlt
+editor: ''
 
-<tags 
-	ms.service="cloud-services" 
-	ms.date="07/24/2015"
-	wacn.date="10/03/2015"/>
-
-
+ms.service: cloud-services
+ms.date: 07/24/2015
+wacn.date: 10/03/2015
+---
 
 # 配置证书的服务定义和配置
 
@@ -24,18 +22,18 @@
 
 下面是在服务定义中定义的证书的示例。
 
-
-    <ServiceDefinition name="WindowsAzureProject4" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
-      <WorkerRole name="MyWokerRole"> <!-- or <WebRole name="MyWebRole" vmsize="Small"> -->
-        <ConfigurationSettings>
-          ...
-        </ConfigurationSettings>
-        <Certificates>
-          <Certificate name="MySSLCert" storeLocation="LocalMachine" storeName="My" permissionLevel="elevated" />
-        </Certificates>
-      </WorkerRole>
-    </ServiceDefinition>
-
+```
+<ServiceDefinition name="WindowsAzureProject4" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <WorkerRole name="MyWokerRole"> <!-- or <WebRole name="MyWebRole" vmsize="Small"> -->
+    <ConfigurationSettings>
+      ...
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="MySSLCert" storeLocation="LocalMachine" storeName="My" permissionLevel="elevated" />
+    </Certificates>
+  </WorkerRole>
+</ServiceDefinition>
+```
 
 ### 权限
 权限（`permisionLevel` 属性）可以设置为以下值之一：
@@ -49,17 +47,17 @@
 
 下面是在服务配置中定义的证书的示例。
 
-
-    <Role name="MyWokerRole">
-    ...
-        <Certificates>
-            <Certificate name="MySSLCert" 
-                thumbprint="9427befa18ec6865a9ebdc79d4c38de50e6316ff" 
-                thumbprintAlgorithm="sha1" />
-        </Certificates>
-    ...
-    </Role>
-
+```
+<Role name="MyWokerRole">
+...
+    <Certificates>
+        <Certificate name="MySSLCert" 
+            thumbprint="9427befa18ec6865a9ebdc79d4c38de50e6316ff" 
+            thumbprintAlgorithm="sha1" />
+    </Certificates>
+...
+</Role>
+```
 
 **请注意**匹配的 `name` 属性。
 

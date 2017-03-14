@@ -1,31 +1,29 @@
-<properties
-	pageTitle="如何通过 Ruby 使用服务总线队列 | Azure"
-	description="了解如何在 Azure 中使用服务总线队列。用 Ruby 编写的代码示例。"
-	services="service-bus"
-	documentationCenter="ruby"
-	authors="sethmanheim"
-	manager="timlt"
-	editor=""/>  
+---
+title: 如何通过 Ruby 使用服务总线队列 | Azure
+description: 了解如何在 Azure 中使用服务总线队列。用 Ruby 编写的代码示例。
+services: service-bus
+documentationCenter: ruby
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-
-<tags
-	ms.service="service-bus"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="ruby"
-	ms.topic="article"
-	ms.date="01/11/2017"
-	ms.author="sethm" 
-	wacn.date="02/20/2017"/>  
+ms.service: service-bus
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: ruby
+ms.topic: article
+ms.date: 01/11/2017
+ms.author: sethm
+wacn.date: 02/20/2017
+---
 
 # 如何使用服务总线队列
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 本指南介绍如何使用服务总线队列。相关示例用 Ruby 编写且使用 Azure gem。涉及的应用场景包括**创建队列、发送和接收消息**以及**删除队列**。有关服务总线队列的详细信息，请参阅[后续步骤](#next-steps)部分。
 
-[AZURE.INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
-
+[!INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
 
 ## 创建命名空间
 
@@ -37,7 +35,9 @@
 
 2. 键入以下命令以创建服务总线命名空间。提供你自己的命名空间值，并指定与应用程序相同的区域。
 
-	    New-AzureSBNamespace -Name 'yourexamplenamespace' -Location 'China East' -NamespaceType 'Messaging' -CreateACSNamespace $true
+    ```
+    New-AzureSBNamespace -Name 'yourexamplenamespace' -Location 'China East' -NamespaceType 'Messaging' -CreateACSNamespace $true
+    ```
 
     ![Create Namespace](./media/service-bus-ruby-how-to-use-queues/showcmdcreate.png)
 
@@ -49,11 +49,12 @@
 
 ![复制密钥](./media/service-bus-ruby-how-to-use-queues/defaultkey.png)  
 
-> [AZURE.NOTE] 如果登录到 [Azure 经典管理门户](http://manage.windowsazure.cn/)并导航到服务总线命名空间的连接信息，也可以找到此密钥。
+> [!NOTE]
+> 如果登录到 [Azure 经典管理门户](http://manage.windowsazure.cn/)并导航到服务总线命名空间的连接信息，也可以找到此密钥。
 
 ## 创建 Ruby 应用程序
 
-创建 Ruby 应用程序。有关说明，请参阅[在 Azure 上创建 Ruby 应用程序](/documentation/articles/virtual-machines-linux-classic-ruby-rails-web-app/)。
+创建 Ruby 应用程序。有关说明，请参阅[在 Azure 上创建 Ruby 应用程序](../virtual-machines/virtual-machines-linux-classic-ruby-rails-web-app.md)。
 
 ## 配置应用程序以使用服务总线
 
@@ -69,14 +70,18 @@
 
 使用常用的文本编辑器将以下内容添加到要在其中使用存储的 Ruby 文件的顶部：
 
-    require "azure"
+```
+require "azure"
+```
 
 ## 设置 Azure 服务总线连接
 
 Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_SERVICEBUS\_ACCESS\_KEY** 以获取连接到服务总线命名空间所需的信息。如果未设置这些环境变量，则在使用 **Azure::ServiceBusService** 之前必须通过以下代码指定命名空间信息：
 
-    Azure.config.sb_namespace = "<your azure service bus namespace>"
-    Azure.config.sb_access_key = "<your azure service bus access key>"
+```
+Azure.config.sb_namespace = "<your azure service bus namespace>"
+Azure.config.sb_access_key = "<your azure service bus access key>"
+```
 
 将命名空间值设置为你创建的值，而不是整个 URL 的值。例如，使用 **"yourexamplenamespace"**，而不是 "yourexamplenamespace.servicebus.chinacloudapi.cn"。
 
@@ -84,20 +89,24 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 可以通过 **Azure::ServiceBusService** 对象处理队列。若要创建队列，请使用 **create\_queue()** 方法。以下示例将创建一个队列或输出任何错误。
 
-    azure_service_bus_service = Azure::ServiceBusService.new
-    begin
-      queue = azure_service_bus_service.create_queue("test-queue")
-    rescue
-      puts $!
-    end
+```
+azure_service_bus_service = Azure::ServiceBusService.new
+begin
+  queue = azure_service_bus_service.create_queue("test-queue")
+rescue
+  puts $!
+end
+```
 
 还可以通过其他选项传递 **Azure::ServiceBus::Queue** 对象，这些选项可让你重写默认队列设置，如消息保存时间或最大队列大小。以下示例演示了如何将最大队列大小设置为 5 GB，将生存时间设置为 1 分钟：
 
-    queue = Azure::ServiceBus::Queue.new("test-queue")
-    queue.max_size_in_megabytes = 5120
-    queue.default_message_time_to_live = "PT1M"
+```
+queue = Azure::ServiceBus::Queue.new("test-queue")
+queue.max_size_in_megabytes = 5120
+queue.default_message_time_to_live = "PT1M"
 
-    queue = azure_service_bus_service.create_queue(queue)
+queue = azure_service_bus_service.create_queue(queue)
+```
 
 ## 如何向队列发送消息
 
@@ -105,9 +114,11 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 以下示例演示了如何使用 **send\_queue\_message()** 向名为“test-queue”的队列发送测试消息：
 
-    message = Azure::ServiceBus::BrokeredMessage.new("test queue message")
-    message.correlation_id = "test-correlation-id"
-    azure_service_bus_service.send_queue_message("test-queue", message)
+```
+message = Azure::ServiceBus::BrokeredMessage.new("test queue message")
+message.correlation_id = "test-correlation-id"
+azure_service_bus_service.send_queue_message("test-queue", message)
+```
 
 服务总线队列在标准层中支持的最大消息大小为 256 KB。标头最大为 64 KB，其中包括标准和自定义应用程序属性。一个队列可包含的消息数不受限制，但消息的总大小受限。此队列大小是在创建时定义的，上限为 5 GB。
 
@@ -121,10 +132,12 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 以下示例演示如何使用 **receive\_queue\_message()** 接收和处理消息。该示例先通过将 **:peek\_lock** 设置为 **false** 接收并删除一条消息，然后再接收另一条消息，最后使用 **delete\_queue\_message()** 删除该消息：
 
-    message = azure_service_bus_service.receive_queue_message("test-queue", 
-	  { :peek_lock => false })
-    message = azure_service_bus_service.receive_queue_message("test-queue")
-    azure_service_bus_service.delete_queue_message(message)
+```
+message = azure_service_bus_service.receive_queue_message("test-queue", 
+  { :peek_lock => false })
+message = azure_service_bus_service.receive_queue_message("test-queue")
+azure_service_bus_service.delete_queue_message(message)
+```
 
 ## 如何处理应用程序崩溃和不可读消息
 
@@ -138,10 +151,10 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 
 现在，你已了解有关服务总线队列的基础知识，请访问下面的链接以获取详细信息。
 
--   [队列、主题和订阅](/documentation/articles/service-bus-queues-topics-subscriptions/)的概述
+-   [队列、主题和订阅](./service-bus-queues-topics-subscriptions.md)的概述
 -   访问 GitHub 上的 [Azure SDK for Ruby](https://github.com/Azure/azure-sdk-for-ruby) 存储库。
 
-有关本文中讨论的 Azure 服务总线队列与[如何通过 Ruby 使用队列存储](/documentation/articles/storage-ruby-how-to-use-queue-storage/)一文中讨论的 Azure 队列的比较，请参阅 [Azure 队列和 Azure 服务总线队列 - 比较与对照](/documentation/articles/service-bus-azure-and-service-bus-queues-compared-contrasted/)
+有关本文中讨论的 Azure 服务总线队列与[如何通过 Ruby 使用队列存储](../storage/storage-ruby-how-to-use-queue-storage.md)一文中讨论的 Azure 队列的比较，请参阅 [Azure 队列和 Azure 服务总线队列 - 比较与对照](./service-bus-azure-and-service-bus-queues-compared-contrasted.md)
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description:update meta properties and wording-->

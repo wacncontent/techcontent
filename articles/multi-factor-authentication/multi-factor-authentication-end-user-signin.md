@@ -1,27 +1,27 @@
-<properties
-    pageTitle="使用双重验证的 Azure MFA 登录体验 | Azure"
-    description="本页将提供有关在何处查看 Azure MFA 支持的各种登录方法的指导。"
-    keywords="用户身份验证, 登录体验, 使用手机登录, 使用办公电话登录"
-    services="multi-factor-authentication"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="pblachar" />
-<tags
-    ms.assetid="b310b762-471b-4b26-887a-a321c9e81d46"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/15/2016"
-    wacn.date="02/20/2017"
-    ms.author="kgremban" />  
+---
+title: 使用双重验证的 Azure MFA 登录体验 | Azure
+description: 本页将提供有关在何处查看 Azure MFA 支持的各种登录方法的指导。
+keywords: 用户身份验证, 登录体验, 使用手机登录, 使用办公电话登录
+services: multi-factor-authentication
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: pblachar
 
+ms.assetid: b310b762-471b-4b26-887a-a321c9e81d46
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2016
+wacn.date: 02/20/2017
+ms.author: kgremban
+---
 
 # Azure 多重身份验证的登录体验
-> [AZURE.NOTE]
-本页提供的以下文档演示了典型的登录体验。如需登录帮助，请参阅[使用 Azure 多重身份验证时遇到问题](/documentation/articles/multi-factor-authentication-end-user-manage-settings/)
+> [!NOTE]
+本页提供的以下文档演示了典型的登录体验。如需登录帮助，请参阅[使用 Azure 多重身份验证时遇到问题](./multi-factor-authentication-end-user-manage-settings.md)
 >
 >
 
@@ -58,9 +58,7 @@
 
 ![验证](./media/multi-factor-authentication-end-user-signin/phone2.png)  
 
-
 ![设置](./media/multi-factor-authentication-end-user-first-time/scan3.png)  
-
 
 - 现在，应该已登录。
 
@@ -74,11 +72,9 @@
 
 ![输入验证码](./media/multi-factor-authentication-end-user-signin/verify3.png)  
 
-
 - 在手机上打开 Microsoft Authenticator 应用，然后在登录框中输入验证码。
 
 ![获取验证码](./media/multi-factor-authentication-end-user-signin/phone3.png)  
-
 
 - 现在，应该已登录。
 

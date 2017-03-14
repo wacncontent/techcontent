@@ -1,22 +1,22 @@
-<properties
-    pageTitle="在 Eclipse 中显示 Azure Libraries Package for Java 的 Javadoc 内容"
-    description="如何在 Eclipse 中显示 Azure Libraries 的 Javadoc 内容。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
+---
+title: 在 Eclipse 中显示 Azure Libraries Package for Java 的 Javadoc 内容
+description: 如何在 Eclipse 中显示 Azure Libraries 的 Javadoc 内容。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
 
-<tags
-    ms.assetid="30f8b6a1-1d76-4d1c-861b-1db478c46e6b"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm" />
+ms.assetid: 30f8b6a1-1d76-4d1c-861b-1db478c46e6b
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm
+---
 
 # 在 Eclipse 中显示 Azure Libraries Package for Java 的 Javadoc 内容
 通过将 Javadoc 内容关联到 Azure Libraries for Java，可以在 Eclipse 环境中查看 Azure Libraries for Java 的 Javadoc 内容。以下步骤说明如何在 Eclipse 中使用此功能。
@@ -38,7 +38,6 @@
 
 ![][ic553488]  
 
-
 ## 另请参阅
 [适用于 Eclipse 的 Azure 工具包][Azure Toolkit for Eclipse]
 
@@ -50,11 +49,10 @@
 
 <!-- URL List -->
 
-
 [Azure Java Developer Center]: /develop/java/
-[Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse/
-[Creating a Hello World Application for Azure in Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse.md
+[Creating a Hello World Application for Azure in Eclipse]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 

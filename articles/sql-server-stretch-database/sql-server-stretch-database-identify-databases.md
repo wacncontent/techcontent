@@ -1,22 +1,22 @@
-<properties
-    pageTitle="通过运行 Stretch Database 顾问来识别 Stretch Database 的数据库和表 | Azure"
-    description="了解如何识别符合 Stretch Database 条件的数据库和表。"
-    services="sql-server-stretch-database"
-    documentationcenter=""
-    author="douglaslMS"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="9253c5a2-f135-4782-95ec-8ff39454c2c0"
-    ms.service="sql-server-stretch-database"
-    ms.workload="data-management"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/05/2017"
-    wacn.date="02/10/2017"
-    ms.author="douglasl" />  
+---
+title: 通过运行 Stretch Database 顾问来识别 Stretch Database 的数据库和表 | Azure
+description: 了解如何识别符合 Stretch Database 条件的数据库和表。
+services: sql-server-stretch-database
+documentationcenter: ''
+author: douglaslMS
+manager: jhubbard
+editor: ''
 
+ms.assetid: 9253c5a2-f135-4782-95ec-8ff39454c2c0
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/05/2017
+wacn.date: 02/10/2017
+ms.author: douglasl
+---
 
 # 通过运行 Stretch Database 顾问，识别符合 Stretch Database 条件的数据库和表
 若要识别符合 Stretch Database 条件的数据库和表，请下载 SQL Server 2016 升级顾问，然后运行 Stretch Database 顾问。Stretch Database 顾问还可识别阻碍性问题。
@@ -46,21 +46,21 @@
 
 2. 在“分析结果”边栏选项卡上的表列表中，选择一个推荐表以显示“表结果”边栏选项卡。
 
-    如果存在阻止问题，“表结果”边栏选项卡会列出所选表的阻止问题。有关 Stretch Database 顾问检测到的阻止问题的信息，请参阅 [Stretch Database 的限制](/documentation/articles/sql-server-stretch-database-limitations/)。
-    
+    如果存在阻止问题，“表结果”边栏选项卡会列出所选表的阻止问题。有关 Stretch Database 顾问检测到的阻止问题的信息，请参阅 [Stretch Database 的限制](./sql-server-stretch-database-limitations.md)。
+
 3. 在“表结果”边栏选项卡的阻止问题列表中，选择其中一个问题，以便显示有关所选问题的详细信息并提出缓解步骤。如果你要为 Stretch Database 配置选定的表，请执行建议的缓解步骤。
 
 ## 后续步骤
 启用 Stretch Database。
 
-* 若要对**数据库**启用 Stretch Database，请参阅[为数据库启用 Stretch Database ](/documentation/articles/sql-server-stretch-database-enable-database/)。
+* 若要对**数据库**启用 Stretch Database，请参阅[为数据库启用 Stretch Database ](./sql-server-stretch-database-enable-database.md)。
 
-* 若要在已对数据库启用延伸的情况下对另一个**表**启用 Stretch Database，请参阅[为表启用 Stretch Database](/documentation/articles/sql-server-stretch-database-enable-table/)。
+* 若要在已对数据库启用延伸的情况下对另一个**表**启用 Stretch Database，请参阅[为表启用 Stretch Database](./sql-server-stretch-database-enable-table.md)。
 
 ## 另请参阅
-[Stretch Database 的限制](/documentation/articles/sql-server-stretch-database-limitations/)
-[对数据库启用 Stretch Database](/documentation/articles/sql-server-stretch-database-enable-database/)
-[对表启用 Stretch Database](/documentation/articles/sql-server-stretch-database-enable-table/)
+[Stretch Database 的限制](./sql-server-stretch-database-limitations.md)
+[对数据库启用 Stretch Database](./sql-server-stretch-database-enable-database.md)
+[对表启用 Stretch Database](./sql-server-stretch-database-enable-table.md)
 
 <!---HONumber=Mooncake_0206_2017-->
 <!-- Update_Description: wording update; meta data; update link reference -->

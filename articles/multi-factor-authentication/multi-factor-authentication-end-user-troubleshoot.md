@@ -1,30 +1,30 @@
-<properties
-    pageTitle="多重身份验证故障排除 | Azure"
-    description="本文档向用户提供有关如何解决 Azure 多重身份验证问题的信息。"
-    services="multi-factor-authentication"
-    keywords="multifactor authentication 客户端, 身份验证问题, 相关性 ID"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="yossib" />
-<tags
-    ms.assetid="8f3aef42-7f66-4656-a7cd-d25a971cb9eb"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/15/2016"
-    wacn.date="02/20/2017"
-    ms.author="kgremban" />  
+---
+title: 多重身份验证故障排除 | Azure
+description: 本文档向用户提供有关如何解决 Azure 多重身份验证问题的信息。
+services: multi-factor-authentication
+keywords: multifactor authentication 客户端, 身份验证问题, 相关性 ID
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: yossib
 
+ms.assetid: 8f3aef42-7f66-4656-a7cd-d25a971cb9eb
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2016
+wacn.date: 02/20/2017
+ms.author: kgremban
+---
 
 # 执行多重身份验证时遇到问题
 本文讨论了执行多重身份验证时可能会遇到的一些问题。如果此处没有包含你遇到的问题，请在注释部分中提供详细的反馈以便我们可以改进。
 
 ## 我的手机丢失或被盗
 
-如果你的手机已丢失或被盗，建议你要求管理员清除你的设置。 以便在你下次登录时再次提示你[设置帐户](/documentation/articles/multi-factor-authentication-end-user-first-time/)。
+如果你的手机已丢失或被盗，建议你要求管理员清除你的设置。 以便在你下次登录时再次提示你[设置帐户](./multi-factor-authentication-end-user-first-time.md)。
 
 ## 我的手机上未收到短信或呼叫
 
@@ -34,17 +34,15 @@
 
 1. 在等待你验证的页面上选择“使用其他验证选项”。
 
-	![其他验证方法](./media/multi-factor-authentication-end-user-troubleshoot/diff_option.png)  
-
+    ![其他验证方法](./media/multi-factor-authentication-end-user-troubleshoot/diff_option.png)  
 
 2. 选择要使用的电话号码或发送方式。
 
-	如果你收到了多个验证码，则只有最新的一个验证码才起作用。
+    如果你收到了多个验证码，则只有最新的一个验证码才起作用。
 
-如果你没有配置其他方法，请联系管理员并要求他们清除你的设置。你下次登录时，会再次提示你[设置多重身份验证](/documentation/articles/multi-factor-authentication-end-user-first-time/)。
+如果你没有配置其他方法，请联系管理员并要求他们清除你的设置。你下次登录时，会再次提示你[设置多重身份验证](./multi-factor-authentication-end-user-first-time.md)。
 
-
-如果经常因为手机信号弱而导致延迟，建议在你的智能手机上使用 [Microsoft Authenticator 应用](/documentation/articles/microsoft-authenticator-app-how-to/)。该应用可以生成用来登录的随机安全代码，这些代码不需要手机信号或 Internet 连接。
+如果经常因为手机信号弱而导致延迟，建议在你的智能手机上使用 [Microsoft Authenticator 应用](./microsoft-authenticator-app-how-to.md)。该应用可以生成用来登录的随机安全代码，这些代码不需要手机信号或 Internet 连接。
 
 ## 我找不到我的问题的解答。
 
@@ -66,12 +64,11 @@
 
 ![登录错误详细信息](./media/multi-factor-authentication-end-user-troubleshoot/view_details.png)  
 
-
 提供这些信息将有助于我们尽快为你解决问题。
 
 ## 相关主题
-- [管理多重身份验证设置](/documentation/articles/multi-factor-authentication-end-user-manage-settings/)
-- [Microsoft Authenticator 应用程序常见问题解答](/documentation/articles/microsoft-authenticator-app-faq/)
+- [管理多重身份验证设置](./multi-factor-authentication-end-user-manage-settings.md)
+- [Microsoft Authenticator 应用程序常见问题解答](./microsoft-authenticator-app-faq.md)
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: link update-->

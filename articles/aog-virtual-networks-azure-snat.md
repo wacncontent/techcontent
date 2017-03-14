@@ -1,19 +1,21 @@
-<properties
-	pageTitle="Azure SNAT"
-	description="Azure SNAT 详解及实际应用分析"
-	service=""
-	resource="virtualnetworks"
-	authors=""
-	displayOrder=""
-	selfHelpType=""
-	supportTopicIds=""
-	productPesIds=""
-	resourceTags="Virtual Networks, SNAT, DIP, VIP, PIP"
-	cloudEnvironments="MoonCake" />
-<tags 
-	ms.service="virtual-networks-aog"
-	ms.date=""
-	wacn.date="02/07/2017" />
+---
+title: Azure SNAT
+description: Azure SNAT 详解及实际应用分析
+service: ''
+resource: virtualnetworks
+authors: ''
+displayOrder: ''
+selfHelpType: ''
+supportTopicIds: ''
+productPesIds: ''
+resourceTags: Virtual Networks, SNAT, DIP, VIP, PIP
+cloudEnvironments: MoonCake
+
+ms.service: virtual-networks-aog
+ms.date: ''
+wacn.date: 02/07/2017
+---
+
 # Azure SNAT
 
 这篇文章由 Pedro Perez 提供。
@@ -52,8 +54,8 @@ Azure 将把一个出站连接的源端口转换为 160 个预分配端口中的
 
 与任何其他 NAT 表相同，您无法永远存储这些转换记录，表中均有删除记录的规则，其中最明显的是：
 
--	如果连接在 FIN、ACK 状态下被关闭，则我们会等待几分钟（2 x MSL（Maximum Segment Lifetime）- [http://www.rfc-editor.org/rfc/rfc793.txt](http://www.rfc-editor.org/rfc/rfc793.txt)）再删除该记录。
--	如果连接在 RST 状态下被关闭，则我们会立刻删除该记录。
+- 如果连接在 FIN、ACK 状态下被关闭，则我们会等待几分钟（2 x MSL（Maximum Segment Lifetime）- [http://www.rfc-editor.org/rfc/rfc793.txt](http://www.rfc-editor.org/rfc/rfc793.txt)）再删除该记录。
+- 如果连接在 RST 状态下被关闭，则我们会立刻删除该记录。
 
 此时，我相信您已经发现了一个问题。如果配对方消失（例如，程序崩溃或停止响应），那我们如何判断是否应当删除某个 UDP 连接或 TCP 连接呢？
 
@@ -119,13 +121,12 @@ DIP 被转换为 VIP 并且源端口被转换为160 个预分配端口中的第�
 
 这样问题就出现了。假设客户端恢复其操作并决定使用相同的连接从服务器端请求更多数据。不幸的是这将不能实现，Azure 将会在 SNAT 层丢弃这部分流量，因为这些数据包不符合以下任何标准：
 
--	属于现有连接（不满足该条件，因为它已经过期，所以已被删除！）
--	SYN 数据包（对于新连接而言）（不满足该条件，因为它不是一个 SYN 数据包！）
+- 属于现有连接（不满足该条件，因为它已经过期，所以已被删除！）
+- SYN 数据包（对于新连接而言）（不满足该条件，因为它不是一个 SYN 数据包！）
 
 这意味着在这个多元组上尝试的连接都将失败。好，这是个问题，不过并不是无法解决的，对吧？客户端将建立一个新的 TCP 连接（SYN 数据包将通过 SNAT）并在其中发送 HTTP 请求。这没问题，但是有些情况下我们可能会面临 SNAT 记录到期这一后果。
 
 如果客户端与同一个服务器以及端口（服务器 IP : 80）建立新的连接并且足够快的在 160 个分配好的端口中循环（或者更快），但并没有显式地关闭它们， 端口 `54321` 就可以再次使用（记住：端口 `12345` --> `54321` 的转换已过期），我们将可以轻易的在原始的 160 个端口中随意使用。端口 `54321` 终将会与 `12345` 以外的源端口进行对应转换从而再次被使用，但对于相同的源和目标 IP 地址（以及相同的目标端口！），它将会是如下状态：
-
 
 ### 客户端
 

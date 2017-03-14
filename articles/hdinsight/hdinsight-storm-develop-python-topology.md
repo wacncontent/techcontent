@@ -1,31 +1,31 @@
-<properties
-    pageTitle="在 HDinsight 上的 Storm 拓扑中使用 Python 组件 | Azure"
-    description="了解如何在 Azure HDInsight 上的 Apache Storm 中使用 Python 组件。将学习如何通过基于 Java 和 Clojure 的 Storm 拓扑使用 Python 组件。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="edd0ec4f-664d-4266-910c-6ecc94172ad8"
-    ms.service="hdinsight"
-    ms.devlang="python"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="01/12/2017"
-    wacn.date="01/25/2017"
-    ms.author="larryfr" />  
+---
+title: 在 HDinsight 上的 Storm 拓扑中使用 Python 组件 | Azure
+description: 了解如何在 Azure HDInsight 上的 Apache Storm 中使用 Python 组件。将学习如何通过基于 Java 和 Clojure 的 Storm 拓扑使用 Python 组件。
+services: hdinsight
+documentationcenter: ''
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
 
+ms.assetid: edd0ec4f-664d-4266-910c-6ecc94172ad8
+ms.service: hdinsight
+ms.devlang: python
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 01/12/2017
+wacn.date: 01/25/2017
+ms.author: larryfr
+---
 
 # 在 HDInsight 上使用 Python 开发 Apache Storm 拓扑
 
 Apache Storm 支持多种语言，甚至可将多种语言的组件合并成一个拓扑。在本文档中，将学习如何在 HDInsight 上基于 Java 和 Clojure 的 Storm 拓扑中使用 Python 组件。
 
-[AZURE.INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
 
-> [AZURE.IMPORTANT]
-本文档提供了使用基于 Windows 和基于 Linux 的 HDInsight 群集的步骤。Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](/documentation/articles/hdinsight-component-versioning/#hdi-version-32-and-33-nearing-deprecation-date)。
+> [!IMPORTANT]
+本文档提供了使用基于 Windows 和基于 Linux 的 HDInsight 群集的步骤。Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
 ## 先决条件
 
@@ -55,31 +55,35 @@ Storm 模块 (https://github.com/apache/storm/blob/master/storm-multilang/python
 本文介绍这两种方法，并附上示例项目。
 
 ## 使用 Java 拓扑的 Python 组件
-> [AZURE.NOTE]
-此示例在 [https://github.com/Azure-Samples/hdinsight-python-storm-wordcount](https://github.com/Azure-Samples/hdinsight-python-storm-wordcount) 上提供，位于 **JavaTopology** 目录中。这是一个基于 Maven 的项目。如果不熟悉 Maven，请参阅[使用 Apache Storm on HDInsight 开发基于 Java 的拓扑](/documentation/articles/hdinsight-storm-develop-java-topology/)，详细了解如何为 Storm 拓扑创建 Maven 项目。
+> [!NOTE]
+此示例在 [https://github.com/Azure-Samples/hdinsight-python-storm-wordcount](https://github.com/Azure-Samples/hdinsight-python-storm-wordcount) 上提供，位于 **JavaTopology** 目录中。这是一个基于 Maven 的项目。如果不熟悉 Maven，请参阅[使用 Apache Storm on HDInsight 开发基于 Java 的拓扑](./hdinsight-storm-develop-java-topology.md)，详细了解如何为 Storm 拓扑创建 Maven 项目。
 > 
 > 
 
 使用 Python（或其他 JVM 语言组件）的基于 Java 的拓朴乍看之下是使用 Java 组件，但如果仔细查看每个 Java Spout/Bolt，将看到类似于以下代码：
 
-    public SplitBolt() {
-        super("python", "countbolt.py");
-    }
+```
+public SplitBolt() {
+    super("python", "countbolt.py");
+}
+```
 
 Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java Spout/Bolt（对于本示例）只是在基础 Python 组件要发出的 Tuple 中声明字段。
 
 在此示例中，实际 Python 文件存储在 `/multilang/resources` 目录中。`/multilang` 目录在 **pom.xml** 中引用：
 
-    <resources>
-        <resource>
-            <!-- Where the Python bits are kept -->
-            <directory>${basedir}/multilang</directory>
-        </resource>
-    </resources>
+```
+<resources>
+    <resource>
+        <!-- Where the Python bits are kept -->
+        <directory>${basedir}/multilang</directory>
+    </resource>
+</resources>
+```
 
 这会将 `/multilang` 文件夹中的所有文件包含在基于此项目构建的 jar 中。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请注意，这只会指定 `/multilang` 目录，而不是 `/multilang/resources`。Storm 预期非 JVM 资源都位于 `resources` 目录中，因此已在内部查找过该目录。将组件放入此文件夹可以在 Java 代码中直接按名称引用。例如 `super("python", "countbolt.py");`。另一种思路是 Storm 在访问多语言资源时会将 `resources` 目录视为根目录 (/)。
 > <p>
 > 就本示例项目来说，`storm.py` 模块位于 `/multilang/resources` 目录中。
@@ -89,39 +93,43 @@ Java 在此处调用 Python，并运行包含实际 Blot 逻辑的脚本。Java 
 ### 构建并运行项目
 要在本地运行此项目，只需使用以下 Maven 命令构建并以本地模式运行此项目：
 
-    mvn compile exec:java -Dstorm.topology=com.microsoft.example.WordCount
+```
+mvn compile exec:java -Dstorm.topology=com.microsoft.example.WordCount
+```
 
 使用 Ctrl+C 可终止进程。
 
 要将项目部署到运行 Apache Storm 的 HDInsight 群集，请使用以下步骤：
 
 1. 构建 uber jar：
-   
-        mvn package
-   
+
+    ```
+    mvn package
+    ```
+
     这会在此项目的 `/target` 目录中创建名为 **WordCount--1.0-SNAPSHOT.jar** 的文件。
 2. 使用以下方法之一将 jar 文件上载到 Hadoop 群集：
-   
+
     * 对于**基于 Linux** 的 HDInsight 群集：使用 `scp WordCount-1.0-SNAPSHOT.jar USERNAME@CLUSTERNAME-ssh.azurehdinsight.cn:WordCount-1.0-SNAPSHOT.jar` 将 jar 文件复制到群集，将 USERNAME 替换为 SSH 用户名，将 CLUSTERNAME 替换为 HDInsight 群集名称。
-     
+
         上载完文件后，使用 SSH 连接到群集，并使用 `storm jar WordCount-1.0-SNAPSHOT.jar com.microsoft.example.WordCount wordcount` 启动拓扑
     * 对于**基于 Windows** 的 HDInsight 群集：在浏览器中转到 HTTPS://CLUSTERNAME.azurehdinsight.cn/，以连接到 Storm 仪表板。将 CLUSTERNAME 替换为 HDInsight 群集名称，并在出现提示时输入管理员名称和密码。
-     
+
         使用窗体执行以下操作：
-     
+
         * **Jar 文件**：选择“浏览”，然后选择 **WordCount-1.0-SNAPSHOT.jar** 文件
         * **类名**：输入 `com.microsoft.example.WordCount`
         * **其他参数**：输入一个用于标识拓扑的友好名称，例如 `wordcount`
-       
+
         最后，选择“提交”启动拓扑。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Storm 拓扑在启动之后将一直运行，直到被停止（终止）。 若要停止拓扑，请从命令行（例如 Linux 群集的 SSH 会话）使用 `storm kill TOPOLOGYNAME` 命令，或使用 Storm UI 选择拓扑，然后选择“终止”按钮。
 > 
 > 
 
 ## 使用 Clojure 拓扑的 Python 组件
-> [AZURE.NOTE]
+> [!NOTE]
 此示例在 [https://github.com/Azure-Samples/hdinsight-python-storm-wordcount](https://github.com/Azure-Samples/hdinsight-python-storm-wordcount) 上提供，位于 **ClojureTopology** 目录中。
 > 
 > 
@@ -135,45 +143,53 @@ Storm 拓扑在启动之后将一直运行，直到被停止（终止）。 若�
 ### 构建并运行项目
 **若要在本地构建并运行项目**，请使用以下命令：
 
-    lein clean, run
+```
+lein clean, run
+```
 
 若要停止拓扑，请使用 **Ctrl+C**。
 
 **若要构建 Uberjar 并将其部署到 HDInsight**，请使用以下步骤：
 
 1. 创建包含拓扑和所需依赖项的 uberjar：
-   
-        lein uberjar
-   
+
+    ```
+    lein uberjar
+    ```
+
     这会在 `target\uberjar+uberjar` 目录中创建一个名为 `wordcount-1.0-SNAPSHOT.jar` 的新文件。
 2. 使用以下方法之一将拓扑部署到 HDInsight 群集并运行该拓扑：
-   
+
     * **基于 Linux 的 HDInsight**
-     
+
         1. 使用 `scp` 将文件复制到 HDInsight 群集头节点。例如：
-        
-                scp wordcount-1.0-SNAPSHOT.jar USERNAME@CLUSTERNAME-ssh.azurehdinsight.cn:wordcount-1.0-SNAPSHOT.jar
-        
+
+            ```
+            scp wordcount-1.0-SNAPSHOT.jar USERNAME@CLUSTERNAME-ssh.azurehdinsight.cn:wordcount-1.0-SNAPSHOT.jar
+            ```
+
             将 USERNAME 替换为群集的 SSH 用户，并将 CLUSTERNAME 替换为 HDInsight 群集名称。
         2. 将文件复制到群集以后，即可使用 SSH 连接到群集并提交作业。有关如何将 SSH 与 HDInsight 配合使用的信息，请参阅以下文档之一：
-        
-            * [在 Linux、Unix 或 OS X 中将 SSH 与基于 Linux 的 HDInsight 配合使用](/documentation/articles/hdinsight-hadoop-linux-use-ssh-unix/)
-            * [Use SSH with Linux-based HDInsight from Windows（通过 Windows 将 SSH 与基于 Linux 的 HDInsight 配合使用）](/documentation/articles/hdinsight-hadoop-linux-use-ssh-windows/)
+
+            * [在 Linux、Unix 或 OS X 中将 SSH 与基于 Linux 的 HDInsight 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
+            * [Use SSH with Linux-based HDInsight from Windows（通过 Windows 将 SSH 与基于 Linux 的 HDInsight 配合使用）](./hdinsight-hadoop-linux-use-ssh-windows.md)
         3. 连接后，使用以下命令来启动拓扑：
-        
-                storm jar wordcount-1.0-SNAPSHOT.jar wordcount.core wordcount
+
+            ```
+            storm jar wordcount-1.0-SNAPSHOT.jar wordcount.core wordcount
+            ```
     * **基于 Windows 的 HDInsight**
-     
+
         1. 在浏览器中转到 HTTPS://CLUSTERNAME.azurehdinsight.cn/，以连接到 Storm 仪表板。将 CLUSTERNAME 替换为 HDInsight 群集名称，并在出现提示时输入管理员名称和密码。
         2. 使用窗体执行以下操作：
-        
+
             * **Jar 文件**：选择“浏览”，然后选择 **wordcount-1.0-SNAPSHOT.jar** 文件
             * **类名**：输入 `wordcount.core`
             * **其他参数**：输入一个用于标识拓扑的友好名称，例如 `wordcount`
-          
+
             最后，选择“提交”启动拓扑。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Storm 拓扑在启动之后将一直运行，直到被停止（终止）。 若要停止拓扑，请从命令行（Linux 群集的 SSH 会话）使用 `storm kill TOPOLOGYNAME` 命令，或使用 Storm UI 选择拓扑，然后选择“终止”按钮。
 > 
 > 
@@ -181,8 +197,8 @@ Storm 拓扑在启动之后将一直运行，直到被停止（终止）。 若�
 ## 后续步骤
 在本文档中，已学习如何通过 Storm 拓扑使用 Python 组件。请参阅以下文档，了解将 Python 与 HDInsight 配合使用的其他方式：
 
-* [如何使用 Python 流式处理 MapReduce 作业](/documentation/articles/hdinsight-hadoop-streaming-python/)
-* [如何在 Pig 和 Hive 中使用 Python 用户定义的函数 (UDF)](/documentation/articles/hdinsight-python/)
+* [如何使用 Python 流式处理 MapReduce 作业](./hdinsight-hadoop-streaming-python.md)
+* [如何在 Pig 和 Hive 中使用 Python 用户定义的函数 (UDF)](./hdinsight-python.md)
 
 <!---HONumber=Mooncake_0120_2017-->
 <!--Update_Description: update from ASM to ARM-->

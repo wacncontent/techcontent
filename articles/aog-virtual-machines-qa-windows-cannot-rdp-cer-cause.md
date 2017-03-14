@@ -1,19 +1,21 @@
-<properties
-	pageTitle="Windows RDP 证书问题导致无法远程了连接解决方案"
-	description="Windows RDP 证书问题导致无法远程了连接解决方案"
-	service=""
-	resource="virtualmachines"
-	authors=""
-	displayOrder=""
-	selfHelpType=""
-	supportTopicIds=""
-	productPesIds=""
-	resourceTags="Virtual Machines, Windows, RDP"
-	cloudEnvironments="MoonCake" />
-<tags 
-	ms.service="virtual-machines-windows-aog"
-	ms.date=""
-	wacn.date="02/07/2017" />
+---
+title: Windows RDP 证书问题导致无法远程了连接解决方案
+description: Windows RDP 证书问题导致无法远程了连接解决方案
+service: ''
+resource: virtualmachines
+authors: ''
+displayOrder: ''
+selfHelpType: ''
+supportTopicIds: ''
+productPesIds: ''
+resourceTags: Virtual Machines, Windows, RDP
+cloudEnvironments: MoonCake
+
+ms.service: virtual-machines-windows-aog
+ms.date: ''
+wacn.date: 02/07/2017
+---
+
 # Windows RDP 证书问题导致无法远程了连接解决方案
 
 ## **问题描述**
@@ -25,17 +27,17 @@
 
 ## **问题分析**
 
-1.	Azure 平台查看状态健康，并已经启动。
+1. Azure 平台查看状态健康，并已经启动。
 
-	![portal](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/portal.png)
+    ![portal](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/portal.png)
 
-2.	测试网络虚拟机网卡 3389 端口可以通讯，所有端口正常。
+2. 测试网络虚拟机网卡 3389 端口可以通讯，所有端口正常。
 
-	![psping](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/psping.png)
+    ![psping](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/psping.png)
 
-3.	后台抓取虚拟机截图，发现虚拟机已经启动。
+3. 后台抓取虚拟机截图，发现虚拟机已经启动。
 
-	![vm-boot](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/vm-boot.png)
+    ![vm-boot](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/vm-boot.png)
 
 以上初步排查看上去毫无问题。<br>
 但依然无法 RDP 连接。
@@ -54,7 +56,7 @@
 
 ## **解决方法**
 
-微软官网问题原因 参考链接：[https://technet.microsoft.com/zh-cn/library/dn786445(v=ws.11).aspx#BKMK_36870](https://technet.microsoft.com/zh-cn/library/dn786445(v=ws.11).aspx#BKMK_36870)
+微软官网问题原因 参考链接：[https://technet.microsoft.com/zh-cn/library/dn786445(v=ws.11](https://technet.microsoft.com/zh-cn/library/dn786445(v=ws.11).aspx#BKMK_36870)
 
 ![event-36870](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/event-36870.png)
 
@@ -69,12 +71,14 @@ RDP 证书异常,每次使用 RDP 连接后,系统日志中就会自动生产如
 
 在问题虚拟机中打开 MMC 控制台，
 
-	Go to file/ add remove snap-in
-	Select certificates 
-	Select computer account
-	Select local computer
-	Click on finish
-	Click on OK
+```
+Go to file/ add remove snap-in
+Select certificates 
+Select computer account
+Select local computer
+Click on finish
+Click on OK
+```
 
 ![console](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/console.png)
 
@@ -93,8 +97,10 @@ RDP 证书异常,每次使用 RDP 连接后,系统日志中就会自动生产如
 
 以管理员身份运行 PowerShell :
 
-	$hash = read-host "Enter Certificate thumbprint: "
-	wmic /namespace:\\root\cimv2\TerminalServices PATH Win32_TSGeneralSetting Set SSLCertificateSHA1Hash="$hash"
+```
+$hash = read-host "Enter Certificate thumbprint: "
+wmic /namespace:\\root\cimv2\TerminalServices PATH Win32_TSGeneralSetting Set SSLCertificateSHA1Hash="$hash"
+```
 
 ![certificate](./media/aog-virtual-machines-qa-windows-cannot-rdp-cer-cause/certificate.png)
 

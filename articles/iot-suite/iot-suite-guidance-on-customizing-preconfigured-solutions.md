@@ -1,25 +1,22 @@
-<properties
-	pageTitle="自定义预配置解决方案 | Azure"
-	description="提供有关如何自定义 Azure IoT 套件预配置解决方案的指导。"
-	services=""
-    suite="iot-suite"
-	documentationCenter=".net"
-	author="dominicbetts"
-	manager="timlt"
-	editor=""/>
+---
+title: 自定义预配置解决方案 | Azure
+description: 提供有关如何自定义 Azure IoT 套件预配置解决方案的指导。
+services: ''
+suite: iot-suite
+documentationCenter: .net
+author: dominicbetts
+manager: timlt
+editor: ''
 
-
-<tags
-     ms.service="iot-suite"
-     ms.devlang="dotnet"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="02/08/2017"
-     wacn.date="03/03/2017"
-     ms.author="corywink"/>  
-
-
+ms.service: iot-suite
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 02/08/2017
+wacn.date: 03/03/2017
+ms.author: corywink
+---
 
 # 自定义预配置解决方案
 Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何协力提供端到端解决方案。从这个起点开始，有多个地方可以针对特定应用场景扩展和自定义解决方案。以下各节描述了这些常见的自定义点。
@@ -27,19 +24,19 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 ## 查找源代码
 预配置解决方案的源代码可在以下 GitHub 存储库获得：
 
-- 远程监视：[https://www.github.com/Azure/azure-iot-remote-monitoring](https://github.com/Azure/azure-iot-remote-monitoring)
+- 远程监视：[https://github.com/Azure/azure-iot-remote-monitoring](https://github.com/Azure/azure-iot-remote-monitoring)
 - 预见性维护：[https://github.com/Azure/azure-iot-predictive-maintenance](https://github.com/Azure/azure-iot-predictive-maintenance)
 
 提供预配置解决方案源代码的目的，在于演示实现使用 Azure IoT 套件的 IoT 解决方案的端到端功能时所采用的模式和做法。你可以找到有关如何在 GitHub 存储库中生成和部署解决方案的详细信息。
 
 ## 更改预配置规则
 
-远程监视解决方案包含三个 [Azure 流分析](/home/features/stream-analytics)作业，这些作业可处理解决方案中的设备信息、遥测数据及规则逻辑。
+远程监视解决方案包含三个 [Azure 流分析](https://www.azure.cn/home/features/stream-analytics)作业，这些作业可处理解决方案中的设备信息、遥测数据及规则逻辑。
 
-[远程监视预配置解决方案演练](/documentation/articles/iot-suite-remote-monitoring-sample-walkthrough/)深入介绍了这三个流分析作业及其语法。
+[远程监视预配置解决方案演练](./iot-suite-remote-monitoring-sample-walkthrough.md)深入介绍了这三个流分析作业及其语法。
 
 你可以直接编辑这些作业以更改逻辑，或添加特定于你的方案的逻辑。你可以按以下方式查找流分析作业：
- 
+
 1. 转到 [Azure 门户预览](https://portal.azure.cn)。
 2. 导航到名称与 IoT 解决方案相同的资源组。
 3. 选择要修改的 Azure 流分析作业。
@@ -50,7 +47,8 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 6. 启动作业
 
-> [AZURE.NOTE] 远程监视仪表板依赖特定数据，因此更改作业可能会导致仪表板出现故障。
+> [!NOTE]
+> 远程监视仪表板依赖特定数据，因此更改作业可能会导致仪表板出现故障。
 
 ## 添加你自己的规则
 
@@ -60,7 +58,7 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 最常见的扩展活动之一是使用方案特定的设备。使用设备的方法有数种。这些方法包括更改模拟设备以符合你的方案，或使用 [IoT Device SDK][] 将物理设备连接到解决方案。
 
-有关添加设备的分步指南，请参阅 [Iot 套件连接设备](/documentation/articles/iot-suite-connecting-devices/)一文和[远程监视 C SDK 示例](https://github.com/Azure/azure-iot-sdk-c/tree/master/serializer/samples/remote_monitoring)（旨在搭配远程监视预配置解决方案）。
+有关添加设备的分步指南，请参阅 [Iot 套件连接设备](./iot-suite-connecting-devices.md)一文和[远程监视 C SDK 示例](https://github.com/Azure/azure-iot-sdk-c/tree/master/serializer/samples/remote_monitoring)（旨在搭配远程监视预配置解决方案）。
 
 ### 创建你自己的模拟设备
 [远程监视解决方案源代码](https://github.com/Azure/azure-iot-remote-monitoring)中包含 .NET 模拟器。此模拟器是解决方案中预配的模拟器，并且可以更改以发送不同的元数据、遥测数据以及响应不同的命令。
@@ -106,34 +104,36 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 7. 这会将一个 .json 文件下载到本地计算机。在所选的文本编辑器中打开此文件进行编辑。
 
 8. 在 .json 文件的第三行中，可看到：
- 
-		"appRoles" : [],
- 
+
+    ```
+    "appRoles" : [],
+    ```
+
       将此行替换为以下代码：
 
-	
-		  "appRoles": [
-		  {
-		  "allowedMemberTypes": [
-		  "User"
-		  ],
-		  "description": "Administrator access to the application",
-		  "displayName": "Admin",
-		  "id": "a400a00b-f67c-42b7-ba9a-f73d8c67e433",
-		  "isEnabled": true,
-		  "value": "Admin"
-		  },
-		  {
-		  "allowedMemberTypes": [
-		  "User"
-		  ],
-		  "description": "Read only access to device information",
-		  "displayName": "Read Only",
-		  "id": "e5bbd0f5-128e-4362-9dd1-8f253c6082d7",
-		  "isEnabled": true,
-		  "value": "ReadOnly"
-		  } ],
-
+      ```
+      "appRoles": [
+      {
+      "allowedMemberTypes": [
+      "User"
+      ],
+      "description": "Administrator access to the application",
+      "displayName": "Admin",
+      "id": "a400a00b-f67c-42b7-ba9a-f73d8c67e433",
+      "isEnabled": true,
+      "value": "Admin"
+      },
+      {
+      "allowedMemberTypes": [
+      "User"
+      ],
+      "description": "Read only access to device information",
+      "displayName": "Read Only",
+      "id": "e5bbd0f5-128e-4362-9dd1-8f253c6082d7",
+      "isEnabled": true,
+      "value": "ReadOnly"
+      } ],
+      ```
 
 9. 保存更新后的 .json 文件（可以覆盖现有文件）。
 
@@ -153,11 +153,11 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 - [配合使用动态遥测和远程监视预配置解决方案][lnk-dynamic]
 - [远程监视预配置解决方案中的设备信息元数据][lnk-devinfo]
 
-[lnk-dynamic]: /documentation/articles/iot-suite-dynamic-telemetry/
-[lnk-devinfo]: /documentation/articles/iot-suite-remote-monitoring-device-info/
+[lnk-dynamic]: ./iot-suite-dynamic-telemetry.md
+[lnk-devinfo]: ./iot-suite-remote-monitoring-device-info.md
 
-[IoT Device SDK]: /documentation/articles/iot-hub-sdks-summary/
-[lnk-permissions]: /documentation/articles/iot-suite-permissions/
+[IoT Device SDK]: ../iot-hub/iot-hub-sdks-summary.md
+[lnk-permissions]: ./iot-suite-permissions.md
 [lnk-dashboard-controller]: https://github.com/Azure/azure-iot-remote-monitoring/blob/3fd43b8a9f7e0f2774d73f3569439063705cebe4/DeviceAdministration/Web/Controllers/DashboardController.cs#L27
 [lnk-telemetry-api-controller-01]: https://github.com/Azure/azure-iot-remote-monitoring/blob/3fd43b8a9f7e0f2774d73f3569439063705cebe4/DeviceAdministration/Web/WebApiControllers/TelemetryApiController.cs#L27
 [lnk-telemetry-api-controller-02]: https://github.com/Azure/azure-iot-remote-monitoring/blob/e7003339f73e21d3930f71ceba1e74fb5c0d9ea0/DeviceAdministration/Web/WebApiControllers/TelemetryApiController.cs#L25

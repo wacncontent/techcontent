@@ -1,22 +1,22 @@
-<properties
-    pageTitle="什么是 Site Recovery？| Azure"
-    description="概述 Azure Site Recovery 服务并汇总部署方案。"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="cfreeman"
-    editor="" />
-<tags
-    ms.assetid="e9b97b00-0c92-4970-ae92-5166a4d43b68"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="02/06/2017"
-    wacn.date="03/10/2017"
-    ms.author="raynew" />  
+---
+title: 什么是 Site Recovery？| Azure
+description: 概述 Azure Site Recovery 服务并汇总部署方案。
+services: site-recovery
+documentationcenter: ''
+author: rayne-wiselman
+manager: cfreeman
+editor: ''
 
+ms.assetid: e9b97b00-0c92-4970-ae92-5166a4d43b68
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 02/06/2017
+wacn.date: 03/10/2017
+ms.author: raynew
+---
 
 # 什么是 Site Recovery？
 欢迎使用 Azure Site Recovery 服务！ 本文提供 Site Recovery 的快速概述。
@@ -26,10 +26,6 @@
 Site Recovery 可通过协调虚拟机与本地物理服务器的复制，为 BCDR 策略提供辅助。可以将服务器和 VM 从本地主数据中心复制到云 (Azure) 或辅助数据中心。
 
 当主站点发生服务中断时，可以故障转移到辅助站点，使工作负荷保持可访问性和可用性。当主要位置恢复正常时，你可以故障转移回到主要位置。
-
-
-
-
 
 ## 为何要部署 Site Recovery？
 以下是 Site Recovery 可以为企业提供的帮助：
@@ -47,13 +43,11 @@ Site Recovery 可通过协调虚拟机与本地物理服务器的复制，为 BC
 
 ![本地到本地](./media/site-recovery-overview/asr-overview-graphic.png)  
 
-
 **REPLICATE** | **REPLICATE TO** 
 ---|---
-在 VMM 云中管理的本地 Hyper-V VM | [Azure](/documentation/articles/site-recovery-vmm-to-azure/)<br/><br/> [辅助站点](/documentation/articles/site-recovery-vmm-to-vmm/) 
-在 VMM 云中管理的、具有 SAN 存储的本地 Hyper-V VM| [辅助站点](/documentation/articles/site-recovery-vmm-san/)
-不包含 VMM 的本地 Hyper-V VM | [Azure](/documentation/articles/site-recovery-hyper-v-site-to-azure/)
-
+在 VMM 云中管理的本地 Hyper-V VM | [Azure](./site-recovery-vmm-to-azure.md)<br/><br/> [辅助站点](./site-recovery-vmm-to-vmm.md) 
+在 VMM 云中管理的、具有 SAN 存储的本地 Hyper-V VM| [辅助站点](./site-recovery-vmm-san.md)
+不包含 VMM 的本地 Hyper-V VM | [Azure](./site-recovery-hyper-v-site-to-azure.md)
 
 ## Site Recovery 如何保护工作负荷？
 Site Recovery 提供应用程序感知的复制，让工作负荷和应用在发生中断时继续以一致的方式运行。
@@ -66,8 +60,8 @@ Site Recovery 提供应用程序感知的复制，让工作负荷和应用在发
 * **简单的网络管理** — Site Recovery 和 Azure 中的高级网络管理简化了应用程序网络要求，包括保留 IP 地址、配置负载均衡器，以及集成 Azure 流量管理器来提高网络切换的效率。
 
 ## 后续步骤
-- 有关详细信息请参阅 [Site Recovery 可以保护哪些工作负荷？](/documentation/articles/site-recovery-workload/)
-- 有关 Site Recovery 体系结构的详细信息，请参阅 [Site Recovery 的工作原理](/documentation/articles/site-recovery-components/)
+- 有关详细信息请参阅 [Site Recovery 可以保护哪些工作负荷？](./site-recovery-workload.md)
+- 有关 Site Recovery 体系结构的详细信息，请参阅 [Site Recovery 的工作原理](./site-recovery-components.md)
 
 <!---HONumber=Mooncake_0306_2017-->
 <!--Update_Description: wording update-->

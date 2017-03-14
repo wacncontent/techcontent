@@ -1,22 +1,22 @@
-<properties
-    pageTitle="了解 Azure IoT 中心作业 | Azure"
-    description="开发人员指南 - 计划要在连接到 IoT 中心的多个设备上运行的作业。作业可以更新标记和所需属性，并可在多个设备上调用直接方法。"
-    services="iot-hub"
-    documentationcenter=".net"
-    author="juanjperez"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="fe78458f-4f14-4358-ac83-4f7bd14ee8da"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/30/2016"
-    wacn.date="01/13/2017"
-    ms.author="juanpere" />  
+---
+title: 了解 Azure IoT 中心作业 | Azure
+description: 开发人员指南 - 计划要在连接到 IoT 中心的多个设备上运行的作业。作业可以更新标记和所需属性，并可在多个设备上调用直接方法。
+services: iot-hub
+documentationcenter: .net
+author: juanjperez
+manager: timlt
+editor: ''
 
+ms.assetid: fe78458f-4f14-4358-ac83-4f7bd14ee8da
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 01/13/2017
+ms.author: juanpere
+---
 
 # 在多个设备上计划作业
 ## 概述
@@ -32,7 +32,7 @@
 ## 作业生命周期
 作业由解决方案后端启动，并由 IoT 中心维护。可以通过面向服务的 URI \(`{iot hub}/jobs/v2/{device id}/methods/<jobID>?api-version=2016-11-14`\) 启动作业，并通过面向服务的 URI \(`{iot hub}/jobs/v2/<jobId>?api-version=2016-11-14`\) 查询正在执行的作业的进度。启动作业后，查询作业将使后端应用能够刷新正在运行的作业的状态。
 
-> [AZURE.NOTE]
+> [!NOTE]
 启动作业时，属性名称和值只能包含 US ASCII 可打印字母数字，但下列组中的任一项除外：``{'$', '(', ')', '<', '>', '@', ',', ';', ':', '\', '"', '/', '[', ']', '?', '=', '{', '}', SP, HT}``。
 > 
 > 
@@ -43,67 +43,70 @@
 ## 用于执行直接方法的作业
 下面是使用作业在一组设备上执行[直接方法][lnk-dev-methods]的 HTTP 1.1 请求详细信息：
 
-    
-    	PUT /jobs/v2/<jobId>?api-version=2016-11-14
-    
-        Authorization: <config.sharedAccessSignature>
-        Content-Type: application/json; charset=utf-8
-        Request-Id: <guid>
-        User-Agent: <sdk-name>/<sdk-version>
-    
-        {
-            jobId: '<jobId>',
-            type: 'scheduleDirectRequest', 
-            cloudToDeviceMethod: {
-                methodName: '<methodName>',
-                payload: <payload>,                 
-            	responseTimeoutInSeconds: methodTimeoutInSeconds 
-            },
-	    queryCondition: '<queryOrDevices>', // query condition
-            startTime: <jobStartTime>,          // as an ISO-8601 date string
-            maxExecutionTimeInSeconds: <maxExecutionTimeInSeconds>        
-        }
+```
+    PUT /jobs/v2/<jobId>?api-version=2016-11-14
+
+    Authorization: <config.sharedAccessSignature>
+    Content-Type: application/json; charset=utf-8
+    Request-Id: <guid>
+    User-Agent: <sdk-name>/<sdk-version>
+
+    {
+        jobId: '<jobId>',
+        type: 'scheduleDirectRequest', 
+        cloudToDeviceMethod: {
+            methodName: '<methodName>',
+            payload: <payload>,                 
+            responseTimeoutInSeconds: methodTimeoutInSeconds 
+        },
+    queryCondition: '<queryOrDevices>', // query condition
+        startTime: <jobStartTime>,          // as an ISO-8601 date string
+        maxExecutionTimeInSeconds: <maxExecutionTimeInSeconds>        
+    }
+```
 查询条件也可以位于单个设备 ID 上或位于设备 ID 列表中，如下所示
 
 **示例**
 
-	queryCondition = "deviceId = 'MyDevice1'"
-	queryCondition = "deviceId IN ['MyDevice1','MyDevice2']"
-	queryCondition = "deviceId IN ['MyDevice1']
+```
+queryCondition = "deviceId = 'MyDevice1'"
+queryCondition = "deviceId IN ['MyDevice1','MyDevice2']"
+queryCondition = "deviceId IN ['MyDevice1']
+```
 
 [IoT 中心查询语言][lnk-query]格外详细地介绍了 IoT 中心查询语言。
 
 ## 用于更新设备孪生属性的作业
 下面是使用作业更新设备孪生属性的 HTTP 1.1 请求详细信息：
 
-    
-    	PUT /jobs/v2/<jobId>?api-version=2016-11-14
-        Authorization: <config.sharedAccessSignature>
-        Content-Type: application/json; charset=utf-8
-        Request-Id: <guid>
-        User-Agent: <sdk-name>/<sdk-version>
-    
-        {
-            jobId: '<jobId>',
-            type: 'scheduleTwinUpdate', 
-            updateTwin: <patch>                  // Valid JSON object
-            queryCondition: '<queryOrDevices>', // query condition
-            startTime: <jobStartTime>,          // as an ISO-8601 date string
-            maxExecutionTimeInSeconds: <maxExecutionTimeInSeconds>        // format TBD
-        }
+```
+    PUT /jobs/v2/<jobId>?api-version=2016-11-14
+    Authorization: <config.sharedAccessSignature>
+    Content-Type: application/json; charset=utf-8
+    Request-Id: <guid>
+    User-Agent: <sdk-name>/<sdk-version>
 
+    {
+        jobId: '<jobId>',
+        type: 'scheduleTwinUpdate', 
+        updateTwin: <patch>                  // Valid JSON object
+        queryCondition: '<queryOrDevices>', // query condition
+        startTime: <jobStartTime>,          // as an ISO-8601 date string
+        maxExecutionTimeInSeconds: <maxExecutionTimeInSeconds>        // format TBD
+    }
+```
 
 ## 查询作业的进度
 下面是用于[查询作业][lnk-query]的 HTTP 1.1 请求详细信息：
 
-    
-	GET /jobs/v2/query?api-version=2016-11-14[&jobType=<jobType>][&jobStatus=<jobStatus>][&pageSize=<pageSize>][&continuationToken=<continuationToken>]
-    
-        Authorization: <config.sharedAccessSignature>
-        Content-Type: application/json; charset=utf-8
-        Request-Id: <guid>
-        User-Agent: <sdk-name>/<sdk-version>
-    
+```
+GET /jobs/v2/query?api-version=2016-11-14[&jobType=<jobType>][&jobStatus=<jobStatus>][&pageSize=<pageSize>][&continuationToken=<continuationToken>]
+
+    Authorization: <config.sharedAccessSignature>
+    Content-Type: application/json; charset=utf-8
+    Request-Id: <guid>
+    User-Agent: <sdk-name>/<sdk-version>
+```
 
 从响应提供 continuationToken。
 
@@ -137,7 +140,6 @@
 | **deviceJobStatistics.runningCount** |当前正在运行作业的设备数。 |
 | **deviceJobStatistics.pendingCount** |等待运行作业的设备数。 |
 
-
 ### 其他参考资料
 
 IoT 中心开发人员指南中的其他参考主题包括：
@@ -148,19 +150,17 @@ IoT 中心开发人员指南中的其他参考主题包括：
 * [设备孪生和作业的 IoT 中心查询语言][lnk-query]，介绍了在 IoT 中心检索设备孪生和作业相关信息时可使用的 IoT 中心查询语言。
 * [IoT 中心 MQTT 支持][lnk-devguide-mqtt]提供有关 IoT 中心对 MQTT 协议的支持的详细信息。
 
-
 <!-- links and images -->
 
-
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
-[lnk-c2d-methods]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-dev-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-get-started-twin]: /documentation/articles/iot-hub-node-node-twin-getstarted/
-[lnk-twin-devguide]: /documentation/articles/iot-hub-devguide-device-twins/
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
+[lnk-c2d-methods]: ./iot-hub-node-node-direct-methods.md
+[lnk-dev-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-get-started-twin]: ./iot-hub-node-node-twin-getstarted.md
+[lnk-twin-devguide]: ./iot-hub-devguide-device-twins.md
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description:update wording-->

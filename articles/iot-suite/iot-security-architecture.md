@@ -1,25 +1,24 @@
-<properties
- pageTitle="IoT 安全体系结构 | Azure"
- description="IoT 安全体系结构指导原则和注意事项"
- services=""
- suite="iot-suite"
- documentationCenter=""
- authors="YuriDio"
- manager="timlt"
- editor=""/>
+---
+title: IoT 安全体系结构 | Azure
+description: IoT 安全体系结构指导原则和注意事项
+services: ''
+suite: iot-suite
+documentationCenter: ''
+authors: YuriDio
+manager: timlt
+editor: ''
 
-<tags
- ms.service="iot-suite"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="01/04/2017"
- wacn.date="01/25/2017"
- ms.author="yurid"/>
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/04/2017
+wacn.date: 01/25/2017
+ms.author: yurid
+---
 
-
-[AZURE.INCLUDE [iot-security-architecture](../../includes/iot-security-architecture.md)]
+[!INCLUDE [iot-security-architecture](../../includes/iot-security-architecture.md)]
 
 ## 后续步骤
 
@@ -29,9 +28,9 @@
 
 - [有关 IoT 套件的常见问题][lnk-faq]
 
-[lnk-faq]: /documentation/articles/iot-suite-faq/
+[lnk-faq]: ./iot-suite-faq.md
 
-[lnk-security-deployment]: /documentation/articles/iot-suite-security-deployment/
+[lnk-security-deployment]: ./iot-suite-security-deployment.md
 
 <!---HONumber=Mooncake_0829_2016-->
 <!--Update_Description:update meta properties-->

@@ -1,31 +1,30 @@
-<properties
-	pageTitle="存档 Azure 活动日志 | Azure"
-	description="了解如何存档 Azure 活动日志，将其长期保留在存储帐户中。"
-	authors="johnkemnetz"
-	manager="rboucher"
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>
+---
+title: 存档 Azure 活动日志 | Azure
+description: 了解如何存档 Azure 活动日志，将其长期保留在存储帐户中。
+authors: johnkemnetz
+manager: rboucher
+editor: ''
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="12/09/2016"
-	wacn.date="10/17/2016"
-	ms.author="johnkem"/>  
-
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/09/2016
+wacn.date: 10/17/2016
+ms.author: johnkem
+---
 
 # 存档 Azure 活动日志
-本文介绍如何使用 Azure 门户预览、PowerShell Cmdlet 或跨平台 CLI 将 [**Azure 活动日志**](/documentation/articles/monitoring-overview-activity-logs/)存档到存储帐户中。此选项适用于对保留时长超过 90 天的活动日志进行审核、静态分析或备份（对保留策略具备完全控制权限）。如果只需将事件保留 90 天或更短的时间，则不需设置到存储帐户的存档，因为在不启用存档的情况下，活动日志事件保留在 Azure 平台中的时间是 90 天。
+本文介绍如何使用 Azure 门户预览、PowerShell Cmdlet 或跨平台 CLI 将 [**Azure 活动日志**](./monitoring-overview-activity-logs.md)存档到存储帐户中。此选项适用于对保留时长超过 90 天的活动日志进行审核、静态分析或备份（对保留策略具备完全控制权限）。如果只需将事件保留 90 天或更短的时间，则不需设置到存储帐户的存档，因为在不启用存档的情况下，活动日志事件保留在 Azure 平台中的时间是 90 天。
 
 ## 先决条件
-在开始之前，需要[创建存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)，将活动日志存档到其中。强烈建议用户不要使用其中存储了其他非监视数据的现有存储帐户，以便更好地控制监视数据所需的访问权限。但是，如果还要将诊断日志和指标存档到存储帐户，则也可将该存储帐户用于活动日志，使得所有监视数据都位于一个中心位置。所使用的存储帐户必须是一个通用存储帐户，而不是一个 blob 存储帐户。
+在开始之前，需要[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)，将活动日志存档到其中。强烈建议用户不要使用其中存储了其他非监视数据的现有存储帐户，以便更好地控制监视数据所需的访问权限。但是，如果还要将诊断日志和指标存档到存储帐户，则也可将该存储帐户用于活动日志，使得所有监视数据都位于一个中心位置。所使用的存储帐户必须是一个通用存储帐户，而不是一个 blob 存储帐户。
 
 ## 日志配置文件
-若要使用下述任意方法存档活动日志，可为订阅设置**日志配置文件**。日志配置文件定义已存储或流式传输的事件的类型，以及输出 - 存储帐户和/或事件中心。它还定义存储在存储帐户中的事件的保留策略（需保留的天数）。如果将保留策略设置为零，事件将无限期存储。如果不想让事件无限期存储，可将保留策略设置为 1 到 2147483647 之间的任何值。[单击此处了解日志配置文件的详细信息](/documentation/articles/monitoring-overview-activity-logs/#export-the-activity-log-with-log-profiles)。
+若要使用下述任意方法存档活动日志，可为订阅设置**日志配置文件**。日志配置文件定义已存储或流式传输的事件的类型，以及输出 - 存储帐户和/或事件中心。它还定义存储在存储帐户中的事件的保留策略（需保留的天数）。如果将保留策略设置为零，事件将无限期存储。如果不想让事件无限期存储，可将保留策略设置为 1 到 2147483647 之间的任何值。[单击此处了解日志配置文件的详细信息](./monitoring-overview-activity-logs.md#export-the-activity-log-with-log-profiles)。
 
 ## 使用门户预览存档活动日志
 1. 在门户预览中，单击左侧导航中的“活动日志”链接。如果看不到活动日志的链接，请先单击“更多服务”链接。
@@ -82,60 +81,59 @@ azure insights logprofile add --name my_log_profile --storageId /subscriptions/s
 
 ```
 {
-	"records": [
-		{
-			"time": "2015-01-21T22:14:26.9792776Z",
-			"resourceId": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841",
-			"operationName": "microsoft.support/supporttickets/write",
-			"category": "Write",
-			"resultType": "Success",
-			"resultSignature": "Succeeded.Created",
-			"durationMs": 2826,
-			"callerIpAddress": "111.111.111.11",
-			"correlationId": "c776f9f4-36e5-4e0e-809b-c9b3c3fb62a8",
-			"identity": {
-				"authorization": {
-					"scope": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841",
-					"action": "microsoft.support/supporttickets/write",
-					"evidence": {
-						"role": "Subscription Admin"
-					}
-				},
-				"claims": {
-					"aud": "https://management.core.chinacloudapi.cn/",
-					"iss": "https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/",
-					"iat": "1421876371",
-					"nbf": "1421876371",
-					"exp": "1421880271",
-					"ver": "1.0",
-					"http://schemas.microsoft.com/identity/claims/tenantid": "1e8d8218-c5e7-4578-9acc-9abbd5d23315 ",
-					"http://schemas.microsoft.com/claims/authnmethodsreferences": "pwd",
-					"http://schemas.microsoft.com/identity/claims/objectidentifier": "2468adf0-8211-44e3-95xq-85137af64708",
-					"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn": "admin@contoso.com",
-					"puid": "20030000801A118C",
-					"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "9vckmEGF7zDKk1YzIY8k0t1_EAPaXoeHyPRn6f413zM",
-					"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname": "John",
-					"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname": "Smith",
-					"name": "John Smith",
-					"groups": "cacfe77c-e058-4712-83qw-f9b08849fd60,7f71d11d-4c41-4b23-99d2-d32ce7aa621c,31522864-0578-4ea0-9gdc-e66cc564d18c",
-					"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": " admin@contoso.com",
-					"appid": "c44b4083-3bq0-49c1-b47d-974e53cbdf3c",
-					"appidacr": "2",
-					"http://schemas.microsoft.com/identity/claims/scope": "user_impersonation",
-					"http://schemas.microsoft.com/claims/authnclassreference": "1"
-				}
-			},
-			"level": "Information",
-			"location": "global",
-			"properties": {
-				"statusCode": "Created",
-				"serviceRequestId": "50d5cddb-8ca0-47ad-9b80-6cde2207f97c"
-			}
-		}
-	]
+    "records": [
+        {
+            "time": "2015-01-21T22:14:26.9792776Z",
+            "resourceId": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841",
+            "operationName": "microsoft.support/supporttickets/write",
+            "category": "Write",
+            "resultType": "Success",
+            "resultSignature": "Succeeded.Created",
+            "durationMs": 2826,
+            "callerIpAddress": "111.111.111.11",
+            "correlationId": "c776f9f4-36e5-4e0e-809b-c9b3c3fb62a8",
+            "identity": {
+                "authorization": {
+                    "scope": "/subscriptions/s1/resourceGroups/MSSupportGroup/providers/microsoft.support/supporttickets/115012112305841",
+                    "action": "microsoft.support/supporttickets/write",
+                    "evidence": {
+                        "role": "Subscription Admin"
+                    }
+                },
+                "claims": {
+                    "aud": "https://management.core.chinacloudapi.cn/",
+                    "iss": "https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/",
+                    "iat": "1421876371",
+                    "nbf": "1421876371",
+                    "exp": "1421880271",
+                    "ver": "1.0",
+                    "http://schemas.microsoft.com/identity/claims/tenantid": "1e8d8218-c5e7-4578-9acc-9abbd5d23315 ",
+                    "http://schemas.microsoft.com/claims/authnmethodsreferences": "pwd",
+                    "http://schemas.microsoft.com/identity/claims/objectidentifier": "2468adf0-8211-44e3-95xq-85137af64708",
+                    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn": "admin@contoso.com",
+                    "puid": "20030000801A118C",
+                    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "9vckmEGF7zDKk1YzIY8k0t1_EAPaXoeHyPRn6f413zM",
+                    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname": "John",
+                    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname": "Smith",
+                    "name": "John Smith",
+                    "groups": "cacfe77c-e058-4712-83qw-f9b08849fd60,7f71d11d-4c41-4b23-99d2-d32ce7aa621c,31522864-0578-4ea0-9gdc-e66cc564d18c",
+                    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": " admin@contoso.com",
+                    "appid": "c44b4083-3bq0-49c1-b47d-974e53cbdf3c",
+                    "appidacr": "2",
+                    "http://schemas.microsoft.com/identity/claims/scope": "user_impersonation",
+                    "http://schemas.microsoft.com/claims/authnclassreference": "1"
+                }
+            },
+            "level": "Information",
+            "location": "global",
+            "properties": {
+                "statusCode": "Created",
+                "serviceRequestId": "50d5cddb-8ca0-47ad-9b80-6cde2207f97c"
+            }
+        }
+    ]
 }
 ```
-
 
 | 元素名称 | 说明 |
 |-----------------|----------------------------------------------------------------------------------------------------------------|
@@ -154,11 +152,12 @@ azure insights logprofile add --name my_log_profile --storageId /subscriptions/s
 | location | 位置所在的区域（或全局）。 |
 | properties | `<Key, Value>` 对集合（即字典），描述事件的详细信息。 |
 
-> [AZURE.NOTE] 这些属性的属性和使用情况各不相同，具体取决于资源。
+> [!NOTE]
+> 这些属性的属性和使用情况各不相同，具体取决于资源。
 
 ## 后续步骤
-- [下载 blob 进行分析](/documentation/articles/storage-dotnet-how-to-use-blobs/#download-blobs)
-- [将活动日志流式传输到事件中心](/documentation/articles/monitoring-stream-activity-logs-event-hubs/)
-- [详细了解活动日志](/documentation/articles/monitoring-overview-activity-logs/)
+- [下载 blob 进行分析](../storage/storage-dotnet-how-to-use-blobs.md#download-blobs)
+- [将活动日志流式传输到事件中心](./monitoring-stream-activity-logs-event-hubs.md)
+- [详细了解活动日志](./monitoring-overview-activity-logs.md)
 
 <!---HONumber=Mooncake_1010_2016-->

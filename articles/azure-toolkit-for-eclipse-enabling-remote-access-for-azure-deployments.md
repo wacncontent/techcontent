@@ -1,33 +1,34 @@
-<properties
-    pageTitle="在 Eclipse 中为 Azure 部署启用远程访问"
-    description="了解如何使用 Azure Toolkit for Eclipse 为 Azure 部署启用远程访问。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="b6150006-9a7f-4d83-be18-d35ec780c7c5"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm" />
+---
+title: 在 Eclipse 中为 Azure 部署启用远程访问
+description: 了解如何使用 Azure Toolkit for Eclipse 为 Azure 部署启用远程访问。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
+
+ms.assetid: b6150006-9a7f-4d83-be18-d35ec780c7c5
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm
+---
 
 # 在 Eclipse 中为 Azure 部署启用远程访问
 为了帮助排查部署问题，你可以启用并使用远程访问连接到托管部署的虚拟机。远程访问功能依赖于远程桌面协议 (RDP)。你可以在将部署发布到 Azure 后为部署配置远程访问。或者，如果你在 Windows 操作系统中使用 Eclipse，可以在发布到 Azure 之前配置远程访问。请注意，若要连接到 Azure 中的部署的虚拟机，需要使用与操作系统兼容的远程桌面客户端。
 
 ## 如何在部署到 Azure 之前启用远程访问
 
-> [AZURE.NOTE] 若要在将应用程序部署到 Azure 之前启用远程访问，你需要在 Windows 上运行 Eclipse。
+> [!NOTE]
+> 若要在将应用程序部署到 Azure 之前启用远程访问，你需要在 Windows 上运行 Eclipse。
 
 下图显示了用于启用远程访问的“远程访问”属性对话框。
 
 ![][ic719494]  
-
 
 可通过两种方法显示“远程访问”属性对话框：
 
@@ -46,7 +47,7 @@
 3. 在云服务网页中，单击“配置”链接
 4. 在配置页的底部，单击“远程”链接
 5. 当出现弹出式对话框时：
-   
+
    - 指定你要为其启用远程访问的角色
    - 单击“启用远程桌面”复选框将其选中
    - 指定要用于远程访问的用户名和密码
@@ -63,16 +64,16 @@
 5. 指定并确认用户的密码。当你建立远程桌面连接时，将使用此对话框中设置的用户名和密码值。（请注意，此密码不同于你的 PFX 密码）。
 6. 指定用户帐户的过期日期。
 7. 单击“新建”创建新的自签名证书。（或者，你可以通过“工作区”或“文件系统”按钮来分别从工作区或文件系统中选择一个证书，但对于本教程，我们将创建一个新证书。）
-   
+
    - 在“新建证书”对话框中，指定并确认你要用于 PFX 文件的密码。
    - 接受提供给“名称(CN)”的值，或使用自定义名称。
    - 指定新证书的保存路径和文件名（使用 .cer 格式）。对于此步骤和下一步骤，你可以使用 Azure 项目的 **cert** 文件夹，但你可以自由选择其他位置。对于此教程，我们将使用 **c:\\mycert\\mycert.cer**。（在继续下一步之前创建 **c:\\mycert** 文件夹，或者视需要使用现有文件夹。）
    - 指定新证书及其私钥的保存路径和文件名（使用 .pfx 格式）。对于此教程，我们将使用 **c:\\mycert\\mycert.pfx**。“新建证书”对话框应与下面类似（如果你未使用**c:\\mycert**，文件夹路径将会更新）：
-     
-		![][ic712275]
+
+        ![][ic712275]
    - 单击“确定”关闭“新建证书”对话框。
 8. “远程访问”对话框应与下面类似：</p>
-   
+
     ![][ic719495]  
 
 9. 单击“确定”关闭“远程访问”对话框。
@@ -84,14 +85,15 @@
 
 - 如果在 Windows 上使用 Eclipse 并且在部署到 Azure 期间选择了“部署时启动远程桌面”选项，则在启动部署时，系统会显示“远程桌面连接”登录屏幕。当系统提示你输入用户名和密码时，请输入你为远程用户指定的值，然后即可登录。
 - 另一种方法是通过 <a href="https://manage.windowsazure.cn">Azure 管理门户</a>远程登录：
-  
+
   - 在 Azure 管理门户的“云服务”视图中，依次单击你的云服务、“实例”、特定的实例、“连接”按钮。命令栏中会出现如下所示的“连接”按钮：
-    
-		![][ic659273]
+
+        ![][ic659273]
   - 单击“连接”按钮后，系统会提示你打开 RDP 文件。打开该文件并按照提示操作。（你也可以将此文件保存到本地计算机，然后通过双击来运行该文件，这样即可远程登录到虚拟机，而无需首先进入管理门户。）
   - 当系统提示你输入用户名和密码时，请输入你为远程用户指定的值，然后即可登录。
 
-> [AZURE.NOTE] 如果你在非 Windows 操作系统上操作，则需要使用与你的操作系统兼容的远程桌面客户端，并遵照相应的步骤以使用已下载 RDP 文件中的设置配置该客户端。
+> [!NOTE]
+> 如果你在非 Windows 操作系统上操作，则需要使用与你的操作系统兼容的远程桌面客户端，并遵照相应的步骤以使用已下载 RDP 文件中的设置配置该客户端。
 
 ## 另请参阅
 [适用于 Eclipse 的 Azure 工具包][Azure Toolkit for Eclipse]
@@ -104,12 +106,11 @@
 
 <!-- URL List -->
 
-
 [Azure Java Developer Center]: /develop/java/
 [Azure Management Portal]: https://manage.windowsazure.cn
-[Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse/
-[Creating a Hello World Application for Azure in Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse.md
+[Creating a Hello World Application for Azure in Eclipse]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 

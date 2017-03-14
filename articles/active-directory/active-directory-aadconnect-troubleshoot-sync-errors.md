@@ -1,32 +1,31 @@
-<properties
-    pageTitle="Azure AD Connect：排查同步过程中发生的错误 | Azure"
-    description="介绍如何使用 Azure AD Connect 排查同步过程中遇到的错误。"
-    services="active-directory"
-    documentationcenter=""
-    author="karavar"
-    manager="samueld"
-    editor="curtand" />  
+---
+title: Azure AD Connect：排查同步过程中发生的错误 | Azure
+description: 介绍如何使用 Azure AD Connect 排查同步过程中遇到的错误。
+services: active-directory
+documentationcenter: ''
+author: karavar
+manager: samueld
+editor: curtand
 
-<tags
-    ms.assetid="2209d5ce-0a64-447b-be3a-6f06d47995f8"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/18/2016"
-    ms.author="vakarand" 
-    wacn.date="12/09/2016"/>  
-
+ms.assetid: 2209d5ce-0a64-447b-be3a-6f06d47995f8
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/18/2016
+ms.author: vakarand
+wacn.date: 12/09/2016
+---
 
 # 排查同步过程中发生的错误
 将标识数据从 Windows Server Active Directory (AD DS) 同步到 Azure Active Directory (Azure AD) 时可能会发生错误。本文概述不同类型的同步错误、导致这些错误的某些可能情况，以及这些错误的可能解决方法。本文介绍常见错误类型，不一定涵盖所有可能的错误。
 
- 本文假设读者熟悉 [ Azure AD 和 Azure AD Connect 的基础设计概念](/documentation/articles/active-directory-aadconnect-design-concepts/)。
+ 本文假设读者熟悉 [ Azure AD 和 Azure AD Connect 的基础设计概念](./active-directory-aadconnect-design-concepts.md)。
 
 在最新版本的 Azure AD Connect（2016 年 8 月版或更高版本）中，[Azure 门户预览](https://aka.ms/aadconnecthealth)会针对用于同步的 Azure AD Connect Health 提供同步错误报告。
 
-从 2016 年 9 月 1 日开始，默认将为所有 *新的* Azure Active Directory 租户启用 [Azure Active Directory 重复属性复原](/documentation/articles/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/)功能。在接下来的几个月，将自动为现有租户启用此功能。
+从 2016 年 9 月 1 日开始，默认将为所有 *新的* Azure Active Directory 租户启用 [Azure Active Directory 重复属性复原](./active-directory-aadconnectsyncservice-duplicate-attribute-resiliency.md)功能。在接下来的几个月，将自动为现有租户启用此功能。
 
 Azure AD Connect 通过它所同步的目录执行 3 种类型的操作：导入、同步和导出。在执行所有这些操作时都可能发生错误。本文重点介绍在导出到 Azure AD 期间发生的错误。
 
@@ -34,7 +33,6 @@ Azure AD Connect 通过它所同步的目录执行 3 种类型的操作：导入
 以下部分介绍在使用 Azure AD 连接器导出到 Azure AD 期间可能发生的不同类型的同步错误。可以使用“contoso.*partner.onmschina.cn* ”格式的名称来标识此连接器。导出到 Azure AD 期间发生错误表示 Azure AD Connect（同步引擎）尝试针对 Azure Active Directory 执行的操作（添加、更新、删除等）失败。
 
 ![导出错误概述](.\\media\\active-directory-aadconnect-troubleshoot-sync-errors\\Export_Errors_Overview_01.png)  
-
 
 ## 数据不匹配错误
 ### InvalidSoftMatch
@@ -52,10 +50,9 @@ Azure Active Directory 架构不允许两个或更多个对象的以下属性使
 - onPremisesSecurityIdentifier
 - ObjectId
 
-> [AZURE.NOTE] 
-> [Azure AD Attribute Duplicate Attribute Resiliency](/documentation/articles/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/)
+> [!NOTE] 
+> [Azure AD Attribute Duplicate Attribute Resiliency](./active-directory-aadconnectsyncservice-duplicate-attribute-resiliency.md)
 >功能同时将作为 Azure Active Directory 的默认行为推出。该功能可使 Azure AD 更灵活地处理本地 AD 环境中的重复 ProxyAddresses 和 UserPrincipalName 属性，减少 Azure AD Connect（以及其他同步客户端）遇到的同步错误。此功能无法解决重复错误。因此，仍然需要修复数据。但是，使用此功能可以预配新对象，否则，会由于 Azure AD 中存在重复值而无法预配。此外，这还减少了返回到同步客户端的同步错误。如果为租户启用此功能，则预配新对象期间不会出现 InvalidSoftMatch 同步错误。
-
 
 #### 发生 InvalidSoftMatch 的示例情景
 1. 本地 Active Directory 中有两个或更多个对象的 ProxyAddresses 属性值相同。在 Azure AD 中只会预配其中一个对象。
@@ -96,9 +93,8 @@ Azure Active Directory 架构不允许两个或更多个对象的以下属性使
 
 请注意，用于同步的 Azure AD Connect Health 中的同步错误报告每隔 30 分钟更新一次，其中包含最近一次同步尝试出现的错误。
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 根据定义，ImmutableId 在对象的生存期内不应更改。如果在配置 Azure AD Connect 时未考虑到上述列表中的某些情景，Azure AD Connect 为代表相同实体（同一个用户/组/联系人等）的、存在你想要继续使用的 Azure AD 对象的 AD 对象计算的 SourceAnchor 值不同。
-
 
 #### 相关文章
 - [Duplicate or invalid attributes prevent directory synchronization in Office 365](https://support.microsoft.com/zh-cn/kb/2647098)（Office 365 中的重复或无效属性导致无法进行目录同步）

@@ -1,22 +1,23 @@
-<properties
-    pageTitle="预见性维护演练 | Azure"
-    description="Azure IoT 预见性维护预配置解决方案演练。"
-    services=""
-    suite="iot-suite"
-    documentationcenter=""
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="3c48a716-b805-4c99-8177-414cc4bec3de"
-    ms.service="iot-suite"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/16/2017"
-    wacn.date="02/22/2017"
-    ms.author="dobett" />
+---
+title: 预见性维护演练 | Azure
+description: Azure IoT 预见性维护预配置解决方案演练。
+services: ''
+suite: iot-suite
+documentationcenter: ''
+author: dominicbetts
+manager: timlt
+editor: ''
+
+ms.assetid: 3c48a716-b805-4c99-8177-414cc4bec3de
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/16/2017
+wacn.date: 02/22/2017
+ms.author: dobett
+---
 
 # 预见性维护预配置解决方案演练
 
@@ -29,7 +30,6 @@ IoT 套件预见性维护预配置解决方案是一个用于商业应用场景�
 下图概述该预配置解决方案的逻辑组件：
 
 ![][img-architecture]  
-
 
 蓝色项是在预配该预配置解决方案时选择的区域中预配的 Azure 服务。[预配页][lnk-azureiotsuite]显示了可部署预配置解决方案的区域列表。
 
@@ -63,7 +63,6 @@ IoT 中心会提供设备命令确认。
 ## R Server
 R Server 实现使用派生自数据的模型，这些数据是从实际飞机引擎收集的。若要访问 R Server 和模型，请参阅 [ Azure IoT 套件][lnk-azureiotsuite]中预配解决方案的解决方案面板上的链接。
 
-
 ## 后续步骤
 了解预见性维护预配置解决方案的关键组件后，可对其进行自定义。请参阅[预配置解决方案自定义指南][lnk-customize]。
 
@@ -74,11 +73,11 @@ R Server 实现使用派生自数据的模型，这些数据是从实际飞机�
 
 [img-architecture]: ./media/iot-suite-predictive-walkthrough/architecture.png
 
-[lnk-remote-monitoring]: /documentation/articles/iot-suite-remote-monitoring-sample-walkthrough/
+[lnk-remote-monitoring]: ./iot-suite-remote-monitoring-sample-walkthrough.md
 [lnk-cortana-analytics]: http://gallery.cortanaintelligence.com/Collection/Predictive-Maintenance-Template-3
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn/
-[lnk-customize]: /documentation/articles/iot-suite-guidance-on-customizing-preconfigured-solutions/
-[lnk-faq]: /documentation/articles/iot-suite-faq/
-[lnk-security-groundup]: /documentation/articles/securing-iot-ground-up/
+[lnk-customize]: ./iot-suite-guidance-on-customizing-preconfigured-solutions.md
+[lnk-faq]: ./iot-suite-faq.md
+[lnk-security-groundup]: ./securing-iot-ground-up.md
 
 <!---HONumber=Mooncake_0206_2017-->

@@ -1,22 +1,22 @@
-<properties
-   pageTitle="使用 Azure Tools 发布云服务 | Azure"
-   description="了解如何使用 Visual Studio 发布 Azure 云服务项目。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 使用 Azure Tools 发布云服务 | Azure
+description: 了解如何使用 Visual Studio 发布 Azure 云服务项目。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="1a07b6e4-3678-4cbf-b37e-4520b402a3d9"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 1a07b6e4-3678-4cbf-b37e-4520b402a3d9
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 使用 Azure Tools 发布云服务
 
@@ -24,7 +24,8 @@
 
 在发布 Azure 应用程序之前，你必须准备好一个 Azure 订阅。此外还必须设置应用程序使用的云服务和存储帐户。可以在 [Azure 经典管理门户](http://manage.windowsazure.cn)中完成这些设置。
 
->[AZURE.IMPORTANT] 发布时，可以选择云服务的部署环境。你还必须选择用来存储部署的应用程序包的存储帐户。部署后，从存储帐户中删除应用程序包。
+>[!IMPORTANT]
+> 发布时，可以选择云服务的部署环境。你还必须选择用来存储部署的应用程序包的存储帐户。部署后，从存储帐户中删除应用程序包。
 
 当你开发和测试 Azure 应用程序时，可以针对 Web 角色使用 Web 部署以增量方式发布更改。在将应用程序发布到部署环境后，Web 部署允许部署运行 Web 角色虚拟机的直接更改。不必在每次更新 Web 角色以测试更改时，都打包或发布整个 Azure 应用程序。通过此方法，能够让 Web 角色更改可用于云中测试，而无需等待应用程序发布到部署环境。
 
@@ -40,7 +41,7 @@
 
 - 创建服务包：可以使用此包和服务配置文件，从 [Azure 经典管理门户](http://manage.windowsazure.cn)中，将应用程序发布到部署环境。
 
-- 从 Visual Studio 中发布 Azure 项目：若要将应用程序直接发布到 Azure，请使用发布向导。有关信息，请参阅 [发布 Azure 应用程序向导](/documentation/articles/vs-azure-tools-publish-azure-application-wizard/)。
+- 从 Visual Studio 中发布 Azure 项目：若要将应用程序直接发布到 Azure，请使用发布向导。有关信息，请参阅 [发布 Azure 应用程序向导](./vs-azure-tools-publish-azure-application-wizard.md)。
 
 ### 从 Visual Studio 中创建服务包
 
@@ -62,9 +63,10 @@
 
 1. （可选）若要取消部署过程，请在活动日志中的行项目的快捷菜单中选择“取消并删除”。这会停止部署过程，并从 Azure 中删除部署环境。
 
-    >[AZURE.NOTE] 若要在已完成部署后删除此部署环境，必须使用 Azure 经典管理门户。
+    >[!NOTE]
+    > 若要在已完成部署后删除此部署环境，必须使用 Azure 经典管理门户。
 
-1. （可选）启动角色实例后，Visual Studio 将自动在服务器资源管理器的“云服务”节点中显示部署环境。你可以从此位置查看单个角色实例的状态。请参阅 [使用云资源管理器管理 Azure 资源](/documentation/articles/vs-azure-tools-resources-managing-with-cloud-explorer/)。下图显示了仍处于“正在初始化”状态中的角色实例：
+1. （可选）启动角色实例后，Visual Studio 将自动在服务器资源管理器的“云服务”节点中显示部署环境。你可以从此位置查看单个角色实例的状态。请参阅 [使用云资源管理器管理 Azure 资源](./vs-azure-tools-resources-managing-with-cloud-explorer.md)。下图显示了仍处于“正在初始化”状态中的角色实例：
 
     ![VST\_DeployComputeNode](./media/vs-azure-tools-publishing-a-cloud-service/IC744134.png)
 
@@ -98,7 +100,8 @@
 
     随后将发布云服务。创建的虚拟机为 IIS 启用了远程连接，以便能够使用 Web 部署来更新 Web 角色，而无需重新发布它们。
 
-    >[AZURE.NOTE] 如果为 Web 角色配置了多个实例，将显示一条警告消息，指出在为发布应用程序而创建的包中，每个 Web 角色都将限制为仅有一个实例。单击“确定”继续。如果“要求”部分中所述，可以有多个 Web 角色，但每个角色只能有一个实例。
+    >[!NOTE]
+    > 如果为 Web 角色配置了多个实例，将显示一条警告消息，指出在为发布应用程序而创建的包中，每个 Web 角色都将限制为仅有一个实例。单击“确定”继续。如果“要求”部分中所述，可以有多个 Web 角色，但每个角色只能有一个实例。
 
 ### 使用 Web 部署来更新 Web 角色
 
@@ -132,7 +135,8 @@
 
   1. 若要添加 SSL 证书，请在 IIS 管理器中打开管理服务。在 IIS 管理器中，通过在“操作”窗格中打开“绑定”链接来启用 SSL。此时将显示“添加站点绑定”对话框。选择“添加”，然后在“类型”下拉列表中选择“HTTPS”。在 **SSL 证书**列表中，选择你已上载到 Azure 经典管理门户并已由 CA 签名的 SSL 证书。有关详细信息，请参阅 [配置管理服务的连接设置](https://technet.microsoft.com/zh-cn/library/cc770458(WS.10).aspx)。
 
-      >[AZURE.NOTE] 如果你添加受信任的 SSL 证书，“发布向导”中不再会显示黄色警告三角形。
+      >[!NOTE]
+      > 如果你添加受信任的 SSL 证书，“发布向导”中不再会显示黄色警告三角形。
 
 ## 在服务包中包含文件
 
@@ -172,6 +176,6 @@
 
 ## 后续步骤
 
-若要详细了解如何从 Visual Studio 发布到 Azure，请参阅 [发布 Azure 应用程序向导](/documentation/articles/vs-azure-tools-publish-azure-application-wizard/)。
+若要详细了解如何从 Visual Studio 发布到 Azure，请参阅 [发布 Azure 应用程序向导](./vs-azure-tools-publish-azure-application-wizard.md)。
 
 <!---HONumber=Mooncake_0509_2016-->

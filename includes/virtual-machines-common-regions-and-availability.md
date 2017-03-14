@@ -24,7 +24,7 @@ Azure 允许你在规定的地理区域（例如“中国北部”或“中国�
 | 可以从辅助位置和主位置读取数据。 | 否 | 否 | 否 | 是 |
 | 在单独的节点上维护的数据副本数。 | 3 | 3 | 6 | 6 |
 
-可以[在此处详细了解 Azure 存储空间复制选项](/documentation/articles/storage-redundancy/)。
+可以[在此处详细了解 Azure 存储空间复制选项](../articles/storage/storage-redundancy.md)。
 
 ### 存储费用
 价格根据所选存储类型和可用性的不同而异。
@@ -33,23 +33,21 @@ Azure 允许你在规定的地理区域（例如“中国北部”或“中国�
 - 标准存储以普通的旋转式磁盘为基础，收费方式根据所用容量和所需的存储可用性而定。
     - 对于 RA-GRS，有一个额外的异地复制数据传输费用，它是将该数据复制到另一个 Azure 区域收取的带宽费用。
 
-有关不同存储类型和可用性选项的定价信息，请参阅 [Azure Storage Pricing](/pricing/details/storage/)（Azure 存储空间定价）。
-
+有关不同存储类型和可用性选项的定价信息，请参阅 [Azure Storage Pricing](https://www.azure.cn/pricing/details/storage/)（Azure 存储空间定价）。
 
 ## Azure 映像
 在 Azure 中，VM 是基于映像创建的。通常，映像来自 Azure 应用商店，合作伙伴可在 Azure 应用商店提供预配置的完整 OS 映像或应用程序映像。
 
-从 Azure 应用商店中的映像创建 VM 时，实际上是在使用模板。Azure Resource Manager 模板是声明性的 JavaScript 对象表示法 (JSON) 文件，可用于创建包含 VM、存储、虚拟网络等的复杂应用程序环境。详细了解如何使用 [Azure Resource Manager 模板](/documentation/articles/resource-group-overview/)，包括如何[构建自己的模板](/documentation/articles/resource-group-authoring-templates/)。
+从 Azure 应用商店中的映像创建 VM 时，实际上是在使用模板。Azure Resource Manager 模板是声明性的 JavaScript 对象表示法 (JSON) 文件，可用于创建包含 VM、存储、虚拟网络等的复杂应用程序环境。详细了解如何使用 [Azure Resource Manager 模板](../articles/azure-resource-manager/resource-group-overview.md)，包括如何[构建自己的模板](../articles/azure-resource-manager/resource-group-authoring-templates.md)。
 
-也可以使用 [Azure CLI](/documentation/articles/virtual-machines-linux-upload-vhd/) 或 [Azure PowerShell](/documentation/articles/virtual-machines-windows-upload-image/) 创建自己的自定义映像并将其上载，快速创建符合特定构建要求的自定义 VM。
+也可以使用 [Azure CLI](../articles/virtual-machines/virtual-machines-linux-upload-vhd.md) 或 [Azure PowerShell](../articles/virtual-machines/virtual-machines-windows-upload-image.md) 创建自己的自定义映像并将其上载，快速创建符合特定构建要求的自定义 VM。
 
 ## 可用性集
-可用性集是 VM 的逻辑分组，可让 Azure 了解应用程序的构建方式，以便提供冗余和可用性。建议在可用性集内创建两个或多个 VM，提供高度可用的应用程序，并满足 [99\.95% Azure SLA](/support/sla/virtual-machines/) 的要求。可用性集由可防止硬件故障以及允许安全应用更新的两个额外分组构成 - 容错域 (FD) 和更新域 (UD)。
+可用性集是 VM 的逻辑分组，可让 Azure 了解应用程序的构建方式，以便提供冗余和可用性。建议在可用性集内创建两个或多个 VM，提供高度可用的应用程序，并满足 [99\.95% Azure SLA](https://www.azure.cn/support/sla/virtual-machines/) 的要求。可用性集由可防止硬件故障以及允许安全应用更新的两个额外分组构成 - 容错域 (FD) 和更新域 (UD)。
 
 ![更新域和容错域配置的概念图](./media/virtual-machines-common-regions-and-availability/ud-fd-configuration.png)  
 
-
-详细了解如何管理 [Linux VM](/documentation/articles/virtual-machines-linux-manage-availability/) 或 [Windows VM](/documentation/articles/virtual-machines-windows-manage-availability/) 的可用性。
+详细了解如何管理 [Linux VM](../articles/virtual-machines/virtual-machines-linux-manage-availability.md) 或 [Windows VM](../articles/virtual-machines/virtual-machines-windows-manage-availability.md) 的可用性。
 
 ### 容错域
 容错域是共享公用电源和网络交换机的基础硬件逻辑组，类似于本地数据中心内的机架。在可用性集内创建 VM 时，Azure 平台会将 VM 自动分布到这些容错域。此方法可限制潜在物理硬件故障、网络中断或断电的影响。
@@ -57,8 +55,7 @@ Azure 允许你在规定的地理区域（例如“中国北部”或“中国�
 ### 更新域
 更新域是可以同时维护或重新启动的基础硬件逻辑组。在可用性集内创建 VM 时，Azure 平台会自动将 VM 分布到这些更新域。Azure 平台进行定期维护时，此方法可确保至少有一个应用程序实例始终保持运行状态。在计划内维护期间，更新域的重启顺序可能不会按序进行，但一次只重启一个更新域。
 
-
 ## 后续步骤
-现在即可开始使用这些可用性和冗余功能构建 Azure 环境。有关最佳实践的信息，请参阅 [Azure 可用性的最佳实践](/documentation/articles/best-practices-availability-checklist/)。
+现在即可开始使用这些可用性和冗余功能构建 Azure 环境。有关最佳实践的信息，请参阅 [Azure 可用性的最佳实践](../articles/best-practices-availability-checklist.md)。
 
 <!---HONumber=Mooncake_1114_2016-->

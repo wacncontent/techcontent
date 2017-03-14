@@ -1,23 +1,22 @@
+---
+title: 更改 Azure Service Fabric 设置 | Azure
+description: 本文介绍可以自定义的结构设置和结构升级策略。
+services: service-fabric
+documentationcenter: .net
+author: chackdan
+manager: timlt
+editor: ''
 
-<properties
-    pageTitle="更改 Azure Service Fabric 设置 | Azure"
-    description="本文介绍可以自定义的结构设置和结构升级策略。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="chackdan"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="7ced36bf-bd3f-474f-a03a-6ebdbc9677e2"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="02/15/2017"
-    wacn.date="03/03/2017"
-    ms.author="chackdan" />  
-
+ms.assetid: 7ced36bf-bd3f-474f-a03a-6ebdbc9677e2
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 02/15/2017
+wacn.date: 03/03/2017
+ms.author: chackdan
+---
 
 # 自定义 Service Fabric 群集设置和结构升级策略
 本文档说明如何为 Service Fabric 群集自定义各种结构设置和结构升级策略。可以使用门户或 Azure Resource Manager 模板完成自定义。
@@ -169,7 +168,6 @@
 | EnableServiceFabricAutomaticUpdates |Bool，默认值为 false |这将通过 Windows 更新启用结构自动更新。 |
 | EnableServiceFabricBaseUpgrade |Bool，默认值为 false |用于启用服务器的基本更新。 |
 | EnableRestartManagement |Bool，默认值为 false |用于启用服务器重启。 |
-
 
 ### 节名称：FailoverManager
 | **参数** | **允许的值** | **指导或简短说明** |
@@ -592,7 +590,7 @@
 
 有关群集管理的详细信息，请阅读以下文章：
 
-[在 Azure 群集中添加、滚动更新和删除证书](/documentation/articles/service-fabric-cluster-security-update-certs-azure/)
+[在 Azure 群集中添加、滚动更新和删除证书](./service-fabric-cluster-security-update-certs-azure.md)
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: add custom fabric settings details-->

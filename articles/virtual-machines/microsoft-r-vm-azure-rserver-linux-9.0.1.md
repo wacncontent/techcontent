@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Azure 中 Linux 虚拟机上的 Microsoft R Server 2016 (9.0.1)"
-    description="Azure 中 Linux 虚拟机上的 Microsoft R Server 2016 (9.0.1)"
-    keywords="Microsoft R Server"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    tags=""
-    author="j-martens"
-    manager=""
-    editor="j-martens" />
-<tags
-    ms.service="virtual-machines-linux"
-    ms.workload=""
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic=""
-    ms.date="01/14/2017"
-    wacn.date="02/27/2017"
-    ms.author="j-martens" />  
+---
+title: Azure 中 Linux 虚拟机上的 Microsoft R Server 2016 (9.0.1)
+description: Azure 中 Linux 虚拟机上的 Microsoft R Server 2016 (9.0.1)
+keywords: Microsoft R Server
+services: virtual-machines-linux
+documentationcenter: ''
+tags: ''
+author: j-martens
+manager: ''
+editor: j-martens
 
+ms.service: virtual-machines-linux
+ms.workload: ''
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: ''
+ms.date: 01/14/2017
+wacn.date: 02/27/2017
+ms.author: j-martens
+---
 
 # Azure 中 Linux 虚拟机上的 Microsoft R Server 2016 \(9.0.1\)
 
@@ -30,7 +30,7 @@ Microsoft R Server 是目前适用于 R 的可部署范围最广的企业级分�
 
 ## 预配 R Server 虚拟机
 
-如果你是 Azure VM 的新手，我们建议查看[此文](/documentation/services/virtual-machines/linux/)，了解有关使用门户和配置虚拟机的详细信息。
+如果你是 Azure VM 的新手，我们建议查看[此文](./linux/index.md)，了解有关使用门户和配置虚拟机的详细信息。
 
 ### 若要在 Linux VM 上创建 Microsoft R Server，请执行以下操作：
 
@@ -41,9 +41,9 @@ Microsoft R Server 是目前适用于 R 的可部署范围最广的企业级分�
 5. 接受条款，然后单击“创建”开始创建。
 6. 使用屏幕上的提示和字段配置 R Server VM。
 
-    >[AZURE.NOTE]
+    >[!NOTE]
     需要使用一个 Azure 订阅来创建 VM。
-    <p>如果你不熟悉 Azure 上的虚拟机，请[在此处了解相关过程](/documentation/services/virtual-machines/linux/)。
+    <p>如果你不熟悉 Azure 上的虚拟机，请[在此处了解相关过程](./linux/index.md)。
 
 7. 部署并运行 VM 后，请[连接](#connect)到该 VM，开始与 R Server 交互。
 8. 此时，还可以：
@@ -82,17 +82,19 @@ RStudio Server 使用端口 8787。Azure VM 的默认配置不会打开此端口
 
 例如，使用 PowerShell 为包含资源组 `rservercloudrg` 和所需主机名 `rservercloud` 的、名为 `rservercloudvm` 的 VM 添加公共主机名。
 
-    PS C:\\Users\\juser> Select-AzureSubscription -SubscriptionName "Visual Studio Ultimate with MSDN" –Current
+```
+PS C:\\Users\\juser> Select-AzureSubscription -SubscriptionName "Visual Studio Ultimate with MSDN" –Current
 
-    PS C:\\Users\\juser> Switch-AzureMode -Name AzureResourceManager
+PS C:\\Users\\juser> Switch-AzureMode -Name AzureResourceManager
 
-    PS C:\\Users\\juser> New-AzurePublicIpAddress -Name rservercloudvm -ResourceGroupName rservercloudrg -Location "China East" -DomainNameLabel rservercloud -AllocationMethod Dynamic
+PS C:\\Users\\juser> New-AzurePublicIpAddress -Name rservercloudvm -ResourceGroupName rservercloudrg -Location "China East" -DomainNameLabel rservercloud -AllocationMethod Dynamic
+```
 
 在入站安全规则中添加对端口 TCP/8787 的访问权限后，可通过 http://rservercloud.chinaeast.chinacloudapp.cn:8787/ 访问 RStudio Server
 
 相关文章包括：
 
-* [Azure Resource Manager 部署模型中适用于 Windows 应用程序的 Azure 计算、网络和存储提供程序](/documentation/articles/resource-manager-deployment-model/)
+* [Azure Resource Manager 部署模型中适用于 Windows 应用程序的 Azure 计算、网络和存储提供程序](../azure-resource-manager/resource-manager-deployment-model.md)
 * [使用 ARM PowerShell cmdlet 创建 Azure VM](http://blogs.msdn.com/b/cloud_solution_architect/archive/2015/05/05/creating-azure-vms-with-arm-powershell-cmdlets.aspx)
 
 ## <a name="o16n"></a>在 VM 上配合 R Server 操作 R Analytics
@@ -103,8 +105,8 @@ RStudio Server 使用端口 8787。Azure VM 的默认配置不会打开此端口
 
 需要使用 Azure 存储帐户中的数据时，可通过多个选项来访问或移动数据：
 
-* 使用 [AzCopy](/documentation/articles/storage-use-azcopy/) 等实用工具将数据从存储帐户复制到本地文件系统。
-* 将文件添加到存储帐户中的某个文件共享，然后将该文件共享装载为 VM 上的网络驱动器。有关详细信息，请参阅[装载 Azure 文件](/documentation/articles/storage-how-to-use-files-linux/)。
+* 使用 [AzCopy](../storage/storage-use-azcopy.md) 等实用工具将数据从存储帐户复制到本地文件系统。
+* 将文件添加到存储帐户中的某个文件共享，然后将该文件共享装载为 VM 上的网络驱动器。有关详细信息，请参阅[装载 Azure 文件](../storage/storage-how-to-use-files-linux.md)。
 
 ## 文档和资源
 

@@ -1,25 +1,25 @@
-<properties
-    pageTitle="订阅监管方案与示例 | Azure"
-    description="提供示例，解释如何针对常见方案实施 Azure 订阅监管。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="rdendtler"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="e8fbeeb8-d7a1-48af-804f-6fe1a6024bcb"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/03/2017"
-    wacn.date="03/03/2017"
-    ms.author="rodend;karlku;tomfitz" />  
+---
+title: 订阅监管方案与示例 | Azure
+description: 提供示例，解释如何针对常见方案实施 Azure 订阅监管。
+services: azure-resource-manager
+documentationcenter: na
+author: rdendtler
+manager: timlt
+editor: tysonn
 
+ms.assetid: e8fbeeb8-d7a1-48af-804f-6fe1a6024bcb
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/03/2017
+wacn.date: 03/03/2017
+ms.author: rodend;karlku;tomfitz
+---
 
 # 实施 Azure 企业基架的示例
-本主题通过示例介绍企业如何实施 [Azure 企业基架](/documentation/articles/resource-manager-subscription-governance/)的建议事项。其中使用一家虚构公司 Contoso 来演示常见方案的最佳实践。
+本主题通过示例介绍企业如何实施 [Azure 企业基架](./resource-manager-subscription-governance.md)的建议事项。其中使用一家虚构公司 Contoso 来演示常见方案的最佳实践。
 
 ## 背景
 Contoso 是一家跨国公司，为各行业的客户提供供应链解决方案，服务范围从“软件即服务”模型到本地部署的打包模型。他们在全球开发软件，在北京和上海设立了先进的开发中心。
@@ -33,7 +33,7 @@ Contoso 是一家跨国公司，为各行业的客户提供供应链解决方案
 * Dave 是 ETS Azure 管理员。
 * Alice 是 Contoso 供应链业务单位的开发总监。
 
-Contoso 需要构建业务线应用和面向客户的应用。该公司决定在 Azure 上运行这些应用。Dave 阅读了[出于合规目的监管订阅](/documentation/articles/resource-manager-subscription-governance/)主题，现已准备好实施其中的建议。
+Contoso 需要构建业务线应用和面向客户的应用。该公司决定在 Azure 上运行这些应用。Dave 阅读了[出于合规目的监管订阅](./resource-manager-subscription-governance.md)主题，现已准备好实施其中的建议。
 
 ## 方案 1：业务线应用程序
 Contoso 正在构建将由世界各地的开发人员使用的源代码管理系统 (BitBucket)。该应用程序使用基础结构即服务 (IaaS) 来托管软件，由多个 Web 服务器和一个数据库服务器组成。开发人员需要访问其开发环境中的服务器，但不需要访问 Azure 中的服务器。Contoso ETS 希望应用程序所有者和团队能够管理该应用程序。该应用程序只能在 Contoso 的企业网络中使用。Dave 需要为此应用程序设置订阅。该订阅将来还要托管其他与开发人员相关的软件。
@@ -54,10 +54,10 @@ Dave 为订阅分配了以下角色：
 
 | 角色 | 已分配到 | 说明 |
 | --- | --- | --- |
-| [所有者](/documentation/articles/role-based-access-built-in-roles/#owner) |Contoso AD 中的托管 ID |此 ID 是通过 Contoso 的标识管理工具，配合适时使用 (JIT) 访问权限控制的，可确保订阅所有者的访问完全受到审核。 |
-| [安全管理器](/documentation/articles/role-based-access-built-in-roles/#security-manager) |安全与风险管理部门 |此角色允许用户查看 Azure 安全中心及资源状态。 |
-| [网络参与者](/documentation/articles/role-based-access-built-in-roles/#network-contributor) |网络团队 |此角色允许 Contoso 的网络团队管理站点到站点 VPN 和虚拟网络。 |
-| *自定义角色* |应用程序所有者 |Dave 创建了一个可授权修改资源组中资源的角色。有关详细信息，请参阅 [Azure RBAC 中的自定义角色](/documentation/articles/role-based-access-control-custom-roles/) |
+| [所有者](../active-directory/role-based-access-built-in-roles.md#owner) |Contoso AD 中的托管 ID |此 ID 是通过 Contoso 的标识管理工具，配合适时使用 (JIT) 访问权限控制的，可确保订阅所有者的访问完全受到审核。 |
+| [安全管理器](../active-directory/role-based-access-built-in-roles.md#security-manager) |安全与风险管理部门 |此角色允许用户查看 Azure 安全中心及资源状态。 |
+| [网络参与者](../active-directory/role-based-access-built-in-roles.md#network-contributor) |网络团队 |此角色允许 Contoso 的网络团队管理站点到站点 VPN 和虚拟网络。 |
+| *自定义角色* |应用程序所有者 |Dave 创建了一个可授权修改资源组中资源的角色。有关详细信息，请参阅 [Azure RBAC 中的自定义角色](../active-directory/role-based-access-control-custom-roles.md) |
 
 ### 策略
 在管理订阅中的资源方面，Dave 提出以下要求：
@@ -66,7 +66,7 @@ Dave 为订阅分配了以下角色：
 * 另外，他还关心成本。因此，他想要防止应用程序所有者不必要地创建成本不菲的虚拟机。
 * 由于此应用程序为许多业务单位的开发人员提供服务，因此他想要使用业务单元和应用程序所有者标记每个资源。使用这些标记，ETS 可向相应的团队计费。
 
-他创建了以下 [Resource Manager 策略](/documentation/articles/resource-manager-policy/)：
+他创建了以下 [Resource Manager 策略](./resource-manager-policy.md)：
 
 | 字段 | 效果 | 说明 |
 | --- | --- | --- |
@@ -79,7 +79,7 @@ Dave 为订阅分配了以下角色：
 ### 资源标记
 Dave 知道，若要识别 BitBucket 实现的成本中心，就需要获得有关帐单的具体信息。此外，Dave 想要知道 ETS 拥有的所有资源。
 
-他向资源组和资源添加了以下[标记](/documentation/articles/resource-group-using-tags/)。
+他向资源组和资源添加了以下[标记](./resource-group-using-tags.md)。
 
 | 标记名称 | 标记值 |
 | --- | --- |
@@ -101,7 +101,7 @@ Contoso ETS 信息安全与风险管理团队评审了 Dave 规划的将应用�
 ### 资源锁
 Dave 认识到，从 Contoso 的企业网络与内部虚拟网络建立的连接必须避免出现任何意料不到的脚本或意外的删除行为。
 
-他创建了以下[资源锁](/documentation/articles/resource-group-lock-resources/)：
+他创建了以下[资源锁](./resource-group-lock-resources.md)：
 
 | 锁类型 | 资源 | 说明 |
 | --- | --- | --- |
@@ -185,7 +185,7 @@ Dave 和 Alice 经过商讨，决定对环境中的某些重要资源添加资�
 ### Azure 自动化
 Alice 及其开发团队创建了大量的 Runbook 来管理此应用程序的环境。使用 Runbook 可以添加/删除应用程序节点及其他 DevOps 任务。
 
-为了使用这些 Runbook，它们启用了[自动化](/documentation/articles/automation-intro/)。
+为了使用这些 Runbook，它们启用了[自动化](../automation/automation-intro.md)。
 
 ### Azure 安全中心
 Contoso IT 服务管理部门需要快速识别和处理威胁。他们还希望了解可能存在哪些问题。
@@ -193,8 +193,7 @@ Contoso IT 服务管理部门需要快速识别和处理威胁。他们还希望
 为了满足这些要求，Dave 启用了 Azure 安全中心。他确保 Azure 安全中心正在监视这些资源，并向 DevOps 和安全团队提供了访问权限。
 
 ## 后续步骤
-* 若要了解如何创建 Resource Manager 模板，请参阅 [Best practices for creating Azure Resource Manager templates](/documentation/articles/resource-manager-template-best-practices/)（创建 Azure Resource Manager 模板的最佳实践）。
-
+* 若要了解如何创建 Resource Manager 模板，请参阅 [Best practices for creating Azure Resource Manager templates](./resource-manager-template-best-practices.md)（创建 Azure Resource Manager 模板的最佳实践）。
 
 <!---HONumber=Mooncake_0227_2017-->
 <!-- Update_Description: meta data;wording update -->

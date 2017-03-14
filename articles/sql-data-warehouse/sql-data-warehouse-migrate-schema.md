@@ -1,23 +1,21 @@
-<properties
-   pageTitle="将架构迁移到 SQL 数据仓库 | Azure"
-   description="有关在开发解决方案时将架构迁移到 Azure SQL 数据仓库的技巧。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 将架构迁移到 SQL 数据仓库 | Azure
+description: 有关在开发解决方案时将架构迁移到 Azure SQL 数据仓库的技巧。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="jrj;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: jrj;barbkess;sonyama
+---
 
 # 将架构迁移到 SQL 数据仓库#
 以下摘要有助于理解 SQL Server 与 SQL 数据仓库之间的差异，方便用户迁移数据库。
@@ -38,19 +36,17 @@ SQL 数据仓库支持常见的业务数据类型。请参阅[数据类型][]一
 
 <!--Image references-->
 
-
 <!--Article references-->
-[迁移代码]: /documentation/articles/sql-data-warehouse-migrate-code/
-[迁移数据]: /documentation/articles/sql-data-warehouse-migrate-data/
-[最佳实践]: /documentation/articles/sql-data-warehouse-best-practices/
-[development overview]: /documentation/articles/sql-data-warehouse-overview-develop/
-[不受支持的表功能]: /documentation/articles/sql-data-warehouse-tables-overview/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[不受支持的数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[数据类型最佳实践]: /documentation/articles/sql-data-warehouse-tables-data-types/
+[迁移代码]: ./sql-data-warehouse-migrate-code.md
+[迁移数据]: ./sql-data-warehouse-migrate-data.md
+[最佳实践]: ./sql-data-warehouse-best-practices.md
+[development overview]: ./sql-data-warehouse-overview-develop.md
+[不受支持的表功能]: ./sql-data-warehouse-tables-overview.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[不受支持的数据类型]: ./sql-data-warehouse-tables-data-types.md
+[数据类型最佳实践]: ./sql-data-warehouse-tables-data-types.md
 
 <!--MSDN references-->
-
 
 <!--Other Web references-->
 

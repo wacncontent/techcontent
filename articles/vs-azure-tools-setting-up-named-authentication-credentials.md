@@ -1,22 +1,22 @@
-<properties
-   pageTitle="设置命名的身份验证凭据 | Azure"
-   description="了解如何提供 Visual Studio 可用于验证对 Azure 的请求的凭据，以便从 Visual Studio 将应用程序发布到 Azure 或者监视现有云服务。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />  
+---
+title: 设置命名的身份验证凭据 | Azure
+description: 了解如何提供 Visual Studio 可用于验证对 Azure 的请求的凭据，以便从 Visual Studio 将应用程序发布到 Azure 或者监视现有云服务。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="61570907-42a1-40e8-bcd6-952b21a55786"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/18/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 61570907-42a1-40e8-bcd6-952b21a55786
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/18/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 设置命名的身份验证凭据
 
@@ -30,15 +30,17 @@ Azure Tools 还支持以前提供凭据的方式，即使用订阅文件（.publ
 
 - 有效的 X.509 v3 证书
 
->[AZURE.NOTE] X.509 v3 证书的密钥长度必须至少为 2048 位。Azure 将拒绝所有不符合此要求或无效的证书。
+>[!NOTE]
+> X.509 v3 证书的密钥长度必须至少为 2048 位。Azure 将拒绝所有不符合此要求或无效的证书。
 
 Visual Studio 使用订阅 ID 和证书数据作为凭据。订阅文件（.publishsettings 文件）中引用了适当的凭据，该文件包含证书的公共密钥。该订阅文件可以包含多个订阅的凭据。
 
 从“新建/编辑订阅”对话框中，可以编辑订阅信息，如本主题后面所述。
 
-如果要自行创建证书，可以参阅 [创建并上传 Azure 管理证书](/documentation/articles/cloud-services-certs-create/)中的说明，然后将证书手动上传到[Azure 经典管理门户](http://manage.windowsazure.cn/)。
+如果要自行创建证书，可以参阅 [创建并上传 Azure 管理证书](./cloud-services/cloud-services-certs-create.md)中的说明，然后将证书手动上传到[Azure 经典管理门户](http://manage.windowsazure.cn/)。
 
->[AZURE.NOTE] Visual Studio 管理云服务所需的凭据不同于针对 Azure 存储空间服务验证请求所需的凭据。
+>[!NOTE]
+> Visual Studio 管理云服务所需的凭据不同于针对 Azure 存储空间服务验证请求所需的凭据。
 
 ## 在 Visual Studio 中修改或导出身份验证凭据
 
@@ -56,7 +58,8 @@ Visual Studio 使用订阅 ID 和证书数据作为凭据。订阅文件（.publ
 
 1. 选择“复制完整路径”按钮。证书（.cer 文件）的路径将复制到剪贴簿。
 
-    >[AZURE.IMPORTANT] 若要从 Visual Studio 中发布 Azure 应用程序，必须将此证书上载到 [Azure 经典管理门户](http://manage.windowsazure.cn/)。
+    >[!IMPORTANT]
+    > 若要从 Visual Studio 中发布 Azure 应用程序，必须将此证书上载到 [Azure 经典管理门户](http://manage.windowsazure.cn/)。
 
 1. 将证书上载到 [Azure 经典门户](http://manage.windowsazure.cn/)，请执行以下操作：
 

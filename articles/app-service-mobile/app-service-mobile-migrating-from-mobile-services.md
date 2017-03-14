@@ -1,22 +1,21 @@
-<properties
-	pageTitle="从移动服务迁移到应用服务移动应用"
-	description="了解如何轻松将移动服务应用程序迁移到应用服务移动应用"
-	services="app-service\mobile"
-	documentationCenter=""
-	authors="adrianhall"
-	manager="dwrede"
-	editor=""/>  
+---
+title: 从移动服务迁移到应用服务移动应用
+description: 了解如何轻松将移动服务应用程序迁移到应用服务移动应用
+services: app-service\mobile
+documentationCenter: ''
+authors: adrianhall
+manager: dwrede
+editor: ''
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/03/2016"
-	wacn.date="12/26/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile
+ms.devlang: na
+ms.topic: article
+ms.date: 10/03/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 # <a name="article-top"></a>将现有的 Azure 移动服务迁移到 Azure 应用服务
 
@@ -26,7 +25,7 @@
 
 迁移 Azure 移动服务可使移动服务变成 [Azure App Service] 应用，且不会对代码造成影响。通知中心、SQL 数据连接、身份验证设置、计划作业和域名都将保持不变。使用 Azure 移动服务的移动客户端仍可正常运行。迁移操作将服务传输到 Azure App Service 之后，服务会重新启动。
 
-[AZURE.INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
+[!INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
 
 ## <a name="why-migrate"></a>为何要迁移站点
 
@@ -56,7 +55,6 @@ Microsoft 建议迁移 Azure 移动服务来利用 Azure 应用服务的各项�
 
     ![迁移按钮][0]  
 
-
   4.  阅读“迁移到应用服务”对话框。
   5.  在提供的框中输入移动服务名称。例如，如果域名是 contoso.azure-mobile.cn，请在提供的框中输入 _contoso_ 。
   6.  单击打勾按钮。
@@ -64,7 +62,6 @@ Microsoft 建议迁移 Azure 移动服务来利用 Azure 应用服务的各项�
 在活动监视器中监视迁移状态。站点将在 Azure 经典管理门户中列为“正在迁移”。
 
 ![迁移活动监视器][1]  
-
 
 迁移每个移动服务可能需要 3 到 15 分钟时间不等。站点在迁移期间仍可用。迁移过程结束时，将重启站点。站点在重启期间无法使用，此状况可能持续几秒钟。
 
@@ -93,7 +90,8 @@ Microsoft 建议迁移 Azure 移动服务来利用 Azure 应用服务的各项�
 
 为应用程序选择适当的定价层有相当大的灵活性。请参阅 [App Service Pricing]（应用服务定价），全面了解新应用服务定价的详细信息。
 
-> [AZURE.TIP] 应用服务标准层包含可能要使用的多种功能的访问权限，包括[过渡槽]、自动备份和自动缩放。可以在相关位置查看新功能。
+> [!TIP]
+> 应用服务标准层包含可能要使用的多种功能的访问权限，包括[过渡槽]、自动备份和自动缩放。可以在相关位置查看新功能。
 
 ### <a name="review-migration-scheduler-jobs"></a>查看已迁移的计划程序作业
 
@@ -117,7 +115,8 @@ Microsoft 建议迁移 Azure 移动服务来利用 Azure 应用服务的各项�
   5.  在提供的框中输入任何允许的来源，每输入一个就按 Enter。
   6.  如果“允许的来源”列表正确无误，请单击“保存”按钮。
 
-> [AZURE.TIP]  使用 Azure 应用服务的优势之一是可以在相同站点上运行网站和移动服务。有关详细信息，请参阅[后续步骤](#next-steps)部分。
+> [!TIP]
+>  使用 Azure 应用服务的优势之一是可以在相同站点上运行网站和移动服务。有关详细信息，请参阅[后续步骤](#next-steps)部分。
 
 ### <a name="download-publish-profile"></a>下载新的发布配置文件
 
@@ -135,7 +134,6 @@ PublishSettings 文件将下载到计算机。此文件通常名为 _站点名�
   4.  单击“浏览”，然后选择已下载的发布配置文件。单击“确定”
   5.  单击“验证连接”，确保发布设置有效。
   6.  单击“发布”以发布站点。
-
 
 ## <a name="working-with-your-site"></a>在迁移后使用站点
 
@@ -166,7 +164,8 @@ PublishSettings 文件将下载到计算机。此文件通常名为 _站点名�
 
 可以同时更新多个应用设置。
 
-> [AZURE.TIP]  有两项应用程序设置的值相同。例如，可能会出现 _ApplicationKey_ 和 _MS_ApplicationKey_ 。同时更新这两个应用程序设置。
+> [!TIP]
+>  有两项应用程序设置的值相同。例如，可能会出现 _ApplicationKey_ 和 _MS_ApplicationKey_ 。同时更新这两个应用程序设置。
 
 ### <a name="authentication"></a>身份验证
 
@@ -179,9 +178,10 @@ PublishSettings 文件将下载到计算机。此文件通常名为 _站点名�
 
 注意：**MS\_AadTenants** 存储为租户域（移动服务门户中的“允许的租户”字段）的逗号分隔列表。
 
-> [AZURE.WARNING] **请不要使用“设置”菜单中的身份验证机制**
+> [!WARNING]
+> **请不要使用“设置”菜单中的身份验证机制**
 >
-> Azure 应用服务分别在“身份验证/授权设置”菜单下提供“无代码”身份验证和授权系统，以及在“设置”菜单下提供已过时的“移动身份验证”选项。这些选项与已迁移的 Azure 移动服务不兼容。可以[升级站点](/documentation/articles/app-service-mobile-net-upgrading-from-mobile-services/)来利用 Azure 应用服务身份验证。
+> Azure 应用服务分别在“身份验证/授权设置”菜单下提供“无代码”身份验证和授权系统，以及在“设置”菜单下提供已过时的“移动身份验证”选项。这些选项与已迁移的 Azure 移动服务不兼容。可以[升级站点](./app-service-mobile-net-upgrading-from-mobile-services.md)来利用 Azure 应用服务身份验证。
 
 ### <a name="easytables"></a>数据
 
@@ -248,10 +248,11 @@ PublishSettings 文件将下载到计算机。此文件通常名为 _站点名�
   2. 选择“浏览>”，然后选择“通知中心”
   3. 单击与移动服务关联的通知中心名称。
 
-> [AZURE.NOTE] 如果通知中心是“混合”类型，则它不可见。“混合”类型的通知中心同时利用通知中心功能和旧式服务总线功能。[转换混合命名空间]，然后继续。转换完成后，通知中心将出现在 [Azure 门户预览]中。
+> [!NOTE]
+> 如果通知中心是“混合”类型，则它不可见。“混合”类型的通知中心同时利用通知中心功能和旧式服务总线功能。[转换混合命名空间]，然后继续。转换完成后，通知中心将出现在 [Azure 门户预览]中。
 
-
-> [AZURE.TIP] [Azure 门户预览]中的通知中心管理功能仍以预览版提供。仍可使用 [Azure 经典管理门户]管理所有通知中心。
+> [!TIP]
+> [Azure 门户预览]中的通知中心管理功能仍以预览版提供。仍可使用 [Azure 经典管理门户]管理所有通知中心。
 
 ### <a name="legacy-push"></a>传统推送设置
 
@@ -367,7 +368,7 @@ Azure 应用服务中通常会禁用诊断日志记录。若要启用诊断日�
 
   * 对于基于 Node.js 的服务器项目，新的[移动应用 Node.js SDK] 提供了一些新功能。例如，现在可以执行本地开发和调试、使用 0.10 以上的任何 Node.js 版本，以及使用任何 Express.js 中间件自定义。
 
-  * 对于基于 .NET 的服务器项目，新的[移动应用 SDK NuGet 包](https://www.nuget.org/packages/Microsoft.Azure.Mobile.Server/)在 NuGet 依赖性上更为灵活。这些包支持新的应用服务身份验证，并可与任何 ASP.NET 项目组合使用。有关升级的详细信息，请参阅 [Upgrade your existing .NET Mobile Service to App Service](/documentation/articles/app-service-mobile-net-upgrading-from-mobile-services/)（将现有 .NET 移动服务升级到应用服务）。
+  * 对于基于 .NET 的服务器项目，新的[移动应用 SDK NuGet 包](https://www.nuget.org/packages/Microsoft.Azure.Mobile.Server/)在 NuGet 依赖性上更为灵活。这些包支持新的应用服务身份验证，并可与任何 ASP.NET 项目组合使用。有关升级的详细信息，请参阅 [Upgrade your existing .NET Mobile Service to App Service](./app-service-mobile-net-upgrading-from-mobile-services.md)（将现有 .NET 移动服务升级到应用服务）。
 
 <!-- Images -->
 [0]: ./media/app-service-mobile-migrating-from-mobile-services/migrate-to-app-service-button.PNG
@@ -375,27 +376,27 @@ Azure 应用服务中通常会禁用诊断日志记录。若要启用诊断日�
 [2]: ./media/app-service-mobile-migrating-from-mobile-services/triggering-job-with-postman.png
 
 <!-- Links -->
-[App Service pricing]: /pricing/details/app-service/
-[自动缩放]: /documentation/articles/web-sites-scale/
-[Azure App Service]: /documentation/articles/app-service-value-prop-what-is/
-[Azure 应用服务部署文档]: /documentation/articles/web-sites-deploy/
+[App Service pricing]: https://www.azure.cn/pricing/details/app-service/
+[自动缩放]: ../app-service-web/web-sites-scale.md
+[Azure App Service]: ../app-service/app-service-value-prop-what-is.md
+[Azure 应用服务部署文档]: ../app-service-web/web-sites-deploy.md
 [Azure 经典管理门户]: https://manage.windowsazure.cn
 [Azure 门户预览]: https://portal.azure.cn
-[Azure 计划程序计划]: /documentation/articles/scheduler-plans-billing/
-[连续部署]: /documentation/articles/app-service-continuous-deployment/
+[Azure 计划程序计划]: ../scheduler/scheduler-plans-billing.md
+[连续部署]: ../app-service-web/app-service-continuous-deployment.md
 [转换混合命名空间]: https://azure.microsoft.com/blog/updates-from-notification-hubs-independent-nuget-installation-model-pmt-and-more/
 [curl]: http://curl.haxx.se/
-[自定义域名]: /documentation/articles/web-sites-custom-domain-name/
+[自定义域名]: ../app-service-web/web-sites-custom-domain-name.md
 [Fiddler]: http://www.telerik.com/fiddler
 
-[日志记录]: /documentation/articles/web-sites-enable-diagnostic-log/
+[日志记录]: ../app-service-web/web-sites-enable-diagnostic-log.md
 [移动应用 Node.js SDK]: https://github.com/azure/azure-mobile-apps-node
-[Mobile Services vs.App Service]: /documentation/articles/app-service-mobile-value-prop-migration-from-mobile-services/
-[性能监视]: /documentation/articles/web-sites-monitor/
+[Mobile Services vs.App Service]: ./app-service-mobile-value-prop-migration-from-mobile-services.md
+[性能监视]: ../app-service-web/web-sites-monitor.md
 [Postman]: http://www.getpostman.com/
-[备份移动服务]: /documentation/articles/mobile-services-disaster-recovery/
-[过渡槽]: /documentation/articles/web-sites-staged-publishing/
-[Web 作业]: /documentation/articles/websites-webjobs-resources/
+[备份移动服务]: ../mobile-services/mobile-services-disaster-recovery.md
+[过渡槽]: ../app-service-web/web-sites-staged-publishing.md
+[Web 作业]: ../app-service-web/websites-webjobs-resources.md
 [XDT Transform Samples]: https://github.com/projectkudu/kudu/wiki/Xdt-transform-samples
 
 <!---HONumber=Mooncake_1219_2016-->

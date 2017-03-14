@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure Site Recovery 支持矩阵 | Azure"
-    description="汇总了 Azure Site Recovery 支持的操作系统和组件"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="" />  
+---
+title: Azure Site Recovery 支持矩阵 | Azure
+description: 汇总了 Azure Site Recovery 支持的操作系统和组件
+services: site-recovery
+documentationcenter: ''
+author: rayne-wiselman
+manager: jwhit
+editor: ''
 
-<tags
-    ms.assetid="1bbcc13c-ea21-4349-9ddf-0d7dfdcdcbfb"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="12/04/2016"
-    wacn.date="01/11/2017"
-    ms.author="raynew" />
+ms.assetid: 1bbcc13c-ea21-4349-9ddf-0d7dfdcdcbfb
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 12/04/2016
+wacn.date: 01/11/2017
+ms.author: raynew
+---
 
 # Azure Site Recovery 支持矩阵
 
@@ -29,15 +29,12 @@
 **经典门户** |  仅限维护模式。 | 仅限维护模式。
 **PowerShell** | 支持 | 支持
 
-
 ## 支持辅助站点复制方案
 
 **部署** | **Hyper-V（不包含 VMM）** | **Hyper-V（包含 VMM）**
 --- | --- | ---
 **经典门户** | 仅限维护模式。 | 仅限维护模式。
 **PowerShell**  | 不可用 | 支持
-
-
 
 ## 虚拟化服务器操作系统支持
 
@@ -53,18 +50,16 @@ Windows Server 2016、Windows Server 2012 R2（含最新更新）<br/><br/> 目�
 --- | --- |
 vCenter 5.5 版或 6.0 版（仅支持 5.5 版功能）<br/><br/>具有最新更新的 vSphere 6.0 版、5.5 版或 5.1 版 | Windows Server 2016、Windows Server 2012 R2 或 Windows Server 2012（含最新更新）。<br/><br/> Windows Server 2016 主机应由运行 System Center 2016 的 VMM 托管。<br/><br/> 目前不支持混合使用 Windows Server 2016 和更低版主机的 VMM 2016 云。
 
-
 ##<a name="support-for-replicated-machines"></a> 复制的计算机支持
 
 ### 计算机（复制到 Azure）
 
-虚拟机必须满足 [Azure 要求](/documentation/articles/site-recovery-best-practices/#azure-virtual-machine-requirements)。
+虚拟机必须满足 [Azure 要求](./site-recovery-best-practices.md#azure-virtual-machine-requirements)。
 
 **要求** | **Hyper-V（不包含 VMM）** | **Hyper-V（包含 VMM）**
 --- | --- | ---
 复制内容 |  任何工作负荷 | 任何工作负荷
 主机 OS |  [Azure 支持的](https://technet.microsoft.com/zh-cn/library/cc794868.aspx)任何来宾 OS | [Azure 支持的](https://technet.microsoft.com/zh-cn/library/cc794868.aspx)任何来宾 OS
-
 
 ### 计算机（复制到辅助站点）
 
@@ -73,12 +68,11 @@ vCenter 5.5 版或 6.0 版（仅支持 5.5 版功能）<br/><br/>具有最新更
 复制内容 |任何工作负荷
 主机 OS |  [Hyper-V 支持的任何来宾 OS](https://technet.microsoft.com/zh-cn/library/mt126277.aspx)
 
-
 ## 提供程序和代理支持
 
 **名称** | **说明** | **支持** | **详细信息**
 ---|---|---| ---
-**Azure Site Recovery 提供程序** | <p>协调本地服务器与 Azure/辅助站点之间的通信 </p><p> 安装在本地 VMM 服务器或 Hyper-V 服务器（如果没有 VMM 服务器）上</p> | [在线提交工单](/support/support-ticket-form/?l=zh-cn) | [最新功能和修复](https://support.microsoft.com/zh-cn/kb/3155002)
+**Azure Site Recovery 提供程序** | <p>协调本地服务器与 Azure/辅助站点之间的通信 </p><p> 安装在本地 VMM 服务器或 Hyper-V 服务器（如果没有 VMM 服务器）上</p> | [在线提交工单](https://www.azure.cn/support/support-ticket-form/?l=zh-cn) | [最新功能和修复](https://support.microsoft.com/zh-cn/kb/3155002)
 **Azure 恢复服务 (MARS) 代理** | 协调 Hyper-V 虚拟机和 Azure 之间的复制<br/><br/>安装在本地 Hyper-V 服务器（具有或不具有 VMM 服务器）上 | |
 
 ## 网络支持
@@ -130,7 +124,6 @@ IPv6 | 否
 静态 IP (Linux) | 是
 多 NIC |  是
 
-
 ## 存储支持
 
 ### 复制到 Azure
@@ -169,7 +162,6 @@ GRS | 是 | 是
 静态加密 | 是 | 是
 高级存储 | 否 | 否
 导入/导出服务 | 否 | 否
-
 
 ### 存储（复制到辅助站点）
 
@@ -214,7 +206,6 @@ RDM | 不可用
 跨资源组移动保管库<br/><br/> 订阅内和跨订阅移动 | 否 | 否
 跨资源组移动存储、网络和 Azure VM<br/><br/> 订阅内和跨订阅移动 | 否 | 否
 
-
 ## Azure 计算支持（复制到 Azure）
 
 **计算功能** | **Hyper-V（不包含 VMM）** | **Hyper-V（包含 VMM）**
@@ -246,15 +237,8 @@ HUB | 是 | 是
 **VM 名称** | 介于 1 和 63 个字符之间。限制为字母、数字和连字符。应以字母或数字开头和结尾 | 在 Site Recovery 中更新虚拟机属性中的值
 **VM 类型** | 第 1 代<br/><br/> 第 2 代 - Windows | OS 磁盘类型为“基本”的第 2 代 VM，其中包括一个或两个格式化为 VHDX 的数据卷，并且支持的大小小于 300 GB。<br/><br/>.不支持 Linux 第 2 代 VM。[了解详细信息](https://azure.microsoft.com/blog/2015/04/28/disaster-recovery-to-azure-enhanced-and-were-listening/) |
 
-
-
-
-
-
-
-
 ## 后续步骤
 
-[准备部署](/documentation/articles/site-recovery-best-practices/)
+[准备部署](./site-recovery-best-practices.md)
 
 <!---HONumber=Mooncake_1226_2016-->

@@ -1,21 +1,21 @@
-<properties 
-   pageTitle="使服务总线应用程序免受服务中断和灾难影响 | Azure"
-   description="介绍可用于保护应用程序免受潜在服务总线中断影响的技术。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-   editor="tysonn" />  
- 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/10/2017"
-    ms.author="sethm"
-    wacn.date="02/20/2017"/>  
+---
+title: 使服务总线应用程序免受服务中断和灾难影响 | Azure
+description: 介绍可用于保护应用程序免受潜在服务总线中断影响的技术。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: tysonn
+
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/10/2017
+ms.author: sethm
+wacn.date: 02/20/2017
+---
 
 # 使应用程序免受服务总线中断和灾难影响的最佳实践
 
@@ -69,7 +69,8 @@
 
 [使用服务总线中转消息进行异地复制][]示例演示了消息传送实体的主动复制。
 
-> [AZURE.NOTE]主动复制方法将使操作数加倍，因此这种方法可能导致成本上升。
+> [!NOTE]
+>主动复制方法将使操作数加倍，因此这种方法可能导致成本上升。
 
 ## 被动复制
 
@@ -93,15 +94,14 @@
 
 - [Azure SQL 数据库业务连续性][]
 
-
-  [服务总线身份验证]: /documentation/articles/service-bus-authentication-and-authorization/
-  [分区消息实体]: /documentation/articles/service-bus-partitioning/
-  [异步消息传送模式和高可用性]: /documentation/articles/service-bus-async-messaging/#failure-of-service-bus-within-an-azure-datacenter
+  [服务总线身份验证]: ./service-bus-authentication-and-authorization.md
+  [分区消息实体]: ./service-bus-partitioning.md
+  [异步消息传送模式和高可用性]: ./service-bus-async-messaging.md#failure-of-service-bus-within-an-azure-datacenter
   [使用服务总线中继消息进行异地复制]: http://code.msdn.microsoft.com/Geo-replication-with-16dbfecd
   [BrokeredMessage.MessageId]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.messageid.aspx
   [BrokeredMessage.Label]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.label.aspx
   [使用服务总线中转消息进行异地复制]: http://code.msdn.microsoft.com/Geo-replication-with-f5688664
-  [Azure SQL 数据库业务连续性]: /documentation/articles/sql-database-business-continuity/
+  [Azure SQL 数据库业务连续性]: ../sql-database/sql-database-business-continuity.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->
-<!--Update_Description:update meta properties--> 
+<!--Update_Description:update meta properties-->

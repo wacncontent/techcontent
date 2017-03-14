@@ -1,26 +1,26 @@
-<properties
-    pageTitle="获取用于 Azure IoT 初学者工具包（Windows 7 或更高版本）的工具 | Azure"
-    description="下载并安装用于 Windows 7 及更高版本上的 Edison 的第一个示例应用程序的必需工具和软件。"
-    services="iot-hub"
-    documentationcenter=""
-    author="shizn"
-    manager="timtl"
-    tags=""
-    keywords="arduino 开发工具, iot 开发, iot 软件, 物联网软件, 在 windows 上安装 git, 安装 node js windows" />
-<tags
-    ms.assetid="7d29a358-544d-4657-a504-5ed9b79c2925"
-    ms.service="iot-hub"
-    ms.devlang="c"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/8/2016"
-    wacn.date="01/06/2017"
-    ms.author="xshi" />  
+---
+title: 获取用于 Azure IoT 初学者工具包（Windows 7 或更高版本）的工具 | Azure
+description: 下载并安装用于 Windows 7 及更高版本上的 Edison 的第一个示例应用程序的必需工具和软件。
+services: iot-hub
+documentationcenter: ''
+author: shizn
+manager: timtl
+tags: ''
+keywords: arduino 开发工具, iot 开发, iot 软件, 物联网软件, 在 windows 上安装 git, 安装 node js windows
 
+ms.assetid: 7d29a358-544d-4657-a504-5ed9b79c2925
+ms.service: iot-hub
+ms.devlang: c
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/8/2016
+wacn.date: 01/06/2017
+ms.author: xshi
+---
 
 # 获取工具（Windows 7 或更高版本）
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [Windows 7 或更高版本][windows]
 - [Ubuntu 16.04][ubuntu]
 - [macOS 10.10][macos]
@@ -28,7 +28,7 @@
 ## 执行的操作
 下载用于 Intel Edison 的第一个示例应用程序的开发工具和软件。如果有问题，可在[故障排除页][troubleshooting]上查找解决方案。
 
-> [AZURE.NOTE]
+> [!NOTE]
 尽管主逻辑的编程语言为 C，课程中仍使用 Node.js 工具生成和部署示例应用程序。
 
 ## 你要学习的知识
@@ -61,7 +61,9 @@
 
 以管理员身份启动命令提示符。运行以下命令，安装 `gulp`：
 
-	npm install -g gulp
+```
+npm install -g gulp
+```
 
 如果无法在计算机上安装 Node.js 和这些额外的 Node.js 开发工具，请参阅[故障排除指南][troubleshooting]，了解常见问题的解决方案。
 
@@ -79,11 +81,10 @@
 
 <!-- Images and links -->
 
-
-[troubleshooting]: /documentation/articles/iot-hub-intel-edison-kit-c-troubleshooting/
-[create-and-deploy-the-blink-application]: /documentation/articles/iot-hub-intel-edison-kit-c-lesson1-deploy-blink-app/
-[windows]: /documentation/articles/iot-hub-intel-edison-kit-c-lesson1-get-the-tools-win32/
-[ubuntu]: /documentation/articles/iot-hub-intel-edison-kit-c-lesson1-get-the-tools-ubuntu/
-[macos]: /documentation/articles/iot-hub-intel-edison-kit-c-lesson1-get-the-tools-mac/
+[troubleshooting]: ./iot-hub-intel-edison-kit-c-troubleshooting.md
+[create-and-deploy-the-blink-application]: ./iot-hub-intel-edison-kit-c-lesson1-deploy-blink-app.md
+[windows]: ./iot-hub-intel-edison-kit-c-lesson1-get-the-tools-win32.md
+[ubuntu]: ./iot-hub-intel-edison-kit-c-lesson1-get-the-tools-ubuntu.md
+[macos]: ./iot-hub-intel-edison-kit-c-lesson1-get-the-tools-mac.md
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,23 +1,21 @@
-<properties
-	pageTitle="将用户添加到 Azure Active Directory 中的自定义域 | Azure"
-	description="如何使用用户帐户填充 Azure Active Directory 中的自定义域。"
-	services="active-directory"
-	documentationCenter=""
-	authors="jeffsta"
-	manager="femila"
-	editor=""/>  
+---
+title: 将用户添加到 Azure Active Directory 中的自定义域 | Azure
+description: 如何使用用户帐户填充 Azure Active Directory 中的自定义域。
+services: active-directory
+documentationCenter: ''
+authors: jeffsta
+manager: femila
+editor: ''
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/04/2016"
-	ms.author="curtand;jeffsta"
-	wacn.date="02/06/2017"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/04/2016
+ms.author: curtand;jeffsta
+wacn.date: 02/06/2017
+---
 
 # 将用户分配到自定义域
 
@@ -25,7 +23,7 @@
 
 ## 从企业网络上的目录同步的用户
 
-如果你已经设定本地 Active Directory 与 Azure Active Directory 之间的连接，则同步可以填充帐户。如需有关如何同步 Azure Active Directory 与本地 Active Directory 的详细信息，请参阅[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)。
+如果你已经设定本地 Active Directory 与 Azure Active Directory 之间的连接，则同步可以填充帐户。如需有关如何同步 Azure Active Directory 与本地 Active Directory 的详细信息，请参阅[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)。
 
 ## 在云中添加和管理的用户
 
@@ -59,10 +57,10 @@
 
 ## 后续步骤
 
--   [使用自定义域名来简化用户登录体验](/documentation/articles/active-directory-add-domain/)
+-   [使用自定义域名来简化用户登录体验](./active-directory-add-domain.md)
 
--   [管理自定义域名](/documentation/articles/active-directory-add-manage-domain-names/)
+-   [管理自定义域名](./active-directory-add-manage-domain-names.md)
 
--   [了解 Azure AD 中的域管理概念](/documentation/articles/active-directory-add-domain-concepts/)
+-   [了解 Azure AD 中的域管理概念](./active-directory-add-domain-concepts.md)
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

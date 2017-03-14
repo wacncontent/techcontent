@@ -1,22 +1,22 @@
-<properties
-    pageTitle="SQL 数据仓库数据管理合作伙伴 | Azure"
-    description="其解决方案支持 SQL 数据仓库的第三方数据管理合作伙伴列表。"
-    services="sql-data-warehouse"
-    documentationcenter="NA"
-    author="jrowlandjones"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="c3d96b41-f049-49e8-af32-408f4a893477"
-    ms.service="sql-data-warehouse"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="data-services"
-    ms.date="12/27/2016"
-    wacn.date="02/20/2017"
-    ms.author="jrj;barbkess" />  
+---
+title: SQL 数据仓库数据管理合作伙伴 | Azure
+description: 其解决方案支持 SQL 数据仓库的第三方数据管理合作伙伴列表。
+services: sql-data-warehouse
+documentationcenter: NA
+author: jrowlandjones
+manager: jhubbard
+editor: ''
 
+ms.assetid: c3d96b41-f049-49e8-af32-408f4a893477
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 12/27/2016
+wacn.date: 02/20/2017
+ms.author: jrj;barbkess
+---
 
 # SQL 数据仓库数据管理合作伙伴
 若要创建端到端数据仓库解决方案，请从行业领先的各种工具中进行选择。本文重点介绍其数据管理工具和解决方案支持 Azure SQL 数据仓库的 Microsoft 合作伙伴公司。
@@ -46,7 +46,7 @@
 <!--Article links-->
 
 [bi_partners]: /documentation/articles/sql-data-warehouse-partner-business-intelligence/
-[dm_partners]: /documentation/articles/sql-data-warehouse-partner-data-management/
+[dm_partners]: ./sql-data-warehouse-partner-data-management.md
 
 [di_partners]: /documentation/articles/sql-data-warehouse-partner-data-integration/
 

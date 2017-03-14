@@ -1,25 +1,26 @@
-<properties
-    pageTitle="连续部署到 Azure App Service | Azure"
-    description="了解如何实现连续部署到 Azure App Service。"
-    services="app-service"
-    documentationcenter=""
-    author="dariagrigoriu"
-    manager="wpickett"
-    editor="mollybos" />
-<tags
-    ms.assetid="6adb5c84-6cf3-424e-a336-c554f23b4000"
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/28/2016"
-    wacn.date="02/21/2017"
-    ms.author="dariagrigoriu" />
+---
+title: 连续部署到 Azure App Service | Azure
+description: 了解如何实现连续部署到 Azure App Service。
+services: app-service
+documentationcenter: ''
+author: dariagrigoriu
+manager: wpickett
+editor: mollybos
+
+ms.assetid: 6adb5c84-6cf3-424e-a336-c554f23b4000
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/28/2016
+wacn.date: 02/21/2017
+ms.author: dariagrigoriu
+---
 
 # 连续部署到 Azure App Service
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程说明如何为 [Azure App Service] 应用配置连续部署工作流。将应用服务与 BitBucket 和 GitHub 集成可以实现一种连续部署工作流，在其中，Azure 可以从发布到其中一种服务的项目中拉取最近的更新。连续部署选项非常适合用于频繁集成多个分发内容的项目。
 
@@ -36,13 +37,16 @@
 2. 在“速览”部分中，选择“从源控件设置部署”。在“设置部署”对话框中，选择“外部存储库”。
 3. 输入 GitHub 存储库的 URL 并输入要跟踪的分支。将“存储库类型”保留为“Git”，并单击“完成”
 
-    > [AZURE.NOTE] Azure 中国目前只支持公共存储库，因为我们无法输入 Web 应用的 Git 凭据。
+    > [!NOTE]
+    > Azure 中国目前只支持公共存储库，因为我们无法输入 Web 应用的 Git 凭据。
 
     Azure 将创建与所选存储库的关联，从指定的分支提取文件，并保留 Azure Web 应用存储库的副本。
 4. 在“速览”部分中，单击“下载发布配置文件”以下载 Web 应用的发布配置文件。
 5. 使用文本编辑器打开发布配置文件，并获取以下值。
 
-        userName="$<YOUR_WEB_APP>" userPWD="<SOME_BIG_RANDOM_TOKEN>"
+    ```
+    userName="$<YOUR_WEB_APP>" userPWD="<SOME_BIG_RANDOM_TOKEN>"
+    ```
 6. 在你的 GitHub 存储库页面上，单击“设置”，选择“Webhook 与服务”，然后单击“添加 Webhook”
 7. 在“负载 URL”中，输入 `https://$<YOUR_WEB_APP>:<SOME_BIG_RANDOM_TOKEN>@<YOUR_WEB_APP>.scm.chinacloudsites.cn/deploy`，按原样保留所有项目，并单击“添加 Webhook”以保存新的 Webhook。
 5. 若要验证是否已成功部署应用，请在 Azure 经典管理门户中单击应用的 **URL**。
@@ -50,14 +54,14 @@
 
 ## <a name="VSsolution"></a>连续部署 Visual Studio 解决方案
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-visual-studio-login-guide.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-visual-studio-login-guide.md)]
 
 将 Visual Studio 解决方案推送到 Azure App Service 就像推送简单的 index.html 文件一样容易。应用服务部署过程简化了所有细节，包括还原 NuGet 依赖项和生成应用程序二进制文件。可以按照仅在 Git 存储库中维护代码的源控件最佳实践操作，并让应用服务部署处理其余工作。
 
 将 Visual Studio 解决方案推送到应用服务的步骤与[上一部分](#overview)中的步骤相同，前提是按以下方式配置解决方案和存储库：
 
 * 使用 Visual Studio 源代码管理选项生成如下图所示的 `.gitignore` 文件，或者在内容存储库根目录中手动添加一个 `.gitignore` 文件，其内容类似于此 [.gitignore 示例](https://github.com/github/gitignore/blob/master/VisualStudio.gitignore)。
-  
+
     ![](./media/app-service-continuous-deployment/VS_source_control.png)  
 
 * 将整个解决方案的目录树添加到你的存储库中，其中 .sln 文件位于存储库根中。
@@ -78,12 +82,12 @@
 * [Git 文档]
 * [项目 Kudu](https://github.com/projectkudu/kudu/wiki)
 
-[Azure App Service]: /documentation/articles/app-service-changes-existing-services/
+[Azure App Service]: ./app-service-changes-existing-services.md
 [Azure portal preview]: https://portal.azure.cn
 [VSTS Portal]: https://www.visualstudio.com/products/visual-studio-team-services-vs.aspx
 [Installing Git]: http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
 [如何使用适用于 Azure 的 PowerShell]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
-[如何使用针对 Mac 和 Linux 的 Azure 命令行工具]: /documentation/articles/xplat-cli-install/
+[如何使用针对 Mac 和 Linux 的 Azure 命令行工具]: ../xplat-cli-install.md
 [Git 文档]: http://git-scm.com/documentation
 
 [创建存储库 (GitHub)]: https://help.github.com/articles/create-a-repo

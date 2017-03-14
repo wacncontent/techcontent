@@ -1,27 +1,28 @@
-<properties
-    pageTitle="使用 .NET 的 Azure 存储示例 | Azure"
-    description="查看、下载和运行 Azure 存储空间的示例代码和应用程序使用 .NET 存储客户端库发现 Blob、队列、表和文件的入门示例。"
-    services="storage"
-    documentationcenter="na"
-    author="seguler"
-    manager="jahogg"
-    editor="tysonn" />
-<tags
-    ms.service="storage"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage"
-    ms.date="01/12/2017"
-    wacn.date="02/24/2017"
-    ms.author="seguler" />  
+---
+title: 使用 .NET 的 Azure 存储示例 | Azure
+description: 查看、下载和运行 Azure 存储空间的示例代码和应用程序使用 .NET 存储客户端库发现 Blob、队列、表和文件的入门示例。
+services: storage
+documentationcenter: na
+author: seguler
+manager: jahogg
+editor: tysonn
 
+ms.service: storage
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage
+ms.date: 01/12/2017
+wacn.date: 02/24/2017
+ms.author: seguler
+---
 
 # 使用 .NET 的 Azure 存储示例
 
 ## .NET 示例索引
 
->[AZURE.IMPORTANT] 若要使用本文中提供的示例，请将终结点 `windows.net` 替换为 `chinacloudapi.cn`（如果存在）。
+>[!IMPORTANT]
+> 若要使用本文中提供的示例，请将终结点 `windows.net` 替换为 `chinacloudapi.cn`（如果存在）。
 
 下表概述了我们的示例存储库以及每个示例中介绍的方案。单击链接查看 Github 中的相应示例代码。
 
@@ -194,27 +195,24 @@
 </table>
 <br/>  
 
-
 ## Azure 代码示例库
 
-
-
-[AZURE.INCLUDE [storage-dotnet-samples-include](../../includes/storage-dotnet-samples-include.md)]
+[!INCLUDE [storage-dotnet-samples-include](../../includes/storage-dotnet-samples-include.md)]
 
 ## 入门指南
 
 有关 Azure 存储客户端库的安装和入门说明，请查看以下指南。
 
-* [.NET 中 Azure Blob 服务入门](/documentation/articles/storage-dotnet-how-to-use-blobs/)
-* [.NET 中 Azure 队列服务入门](/documentation/articles/storage-dotnet-how-to-use-queues/)
-* [.NET 中 Azure 表服务入门](/documentation/articles/storage-dotnet-how-to-use-tables/)
-* [.NET 中 Azure 文件服务入门](/documentation/articles/storage-dotnet-how-to-use-files/)
+* [.NET 中 Azure Blob 服务入门](./storage-dotnet-how-to-use-blobs.md)
+* [.NET 中 Azure 队列服务入门](./storage-dotnet-how-to-use-queues.md)
+* [.NET 中 Azure 表服务入门](./storage-dotnet-how-to-use-tables.md)
+* [.NET 中 Azure 文件服务入门](./storage-dotnet-how-to-use-files.md)
 
 ## 后续步骤
 
 了解其他语言的示例：
 
-* Java：[使用 Java 的 Azure 存储示例](/documentation/articles/storage-samples-java/)
-* 所有其他语言：[Azure 存储示例](/documentation/articles/storage-samples/)
+* Java：[使用 Java 的 Azure 存储示例](./storage-samples-java.md)
+* 所有其他语言：[Azure 存储示例](./storage-samples.md)
 
 <!---HONumber=Mooncake_0220_2017-->

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Service Fabric 群集资源管理器简介 | Azure"
-    description="介绍 Service Fabric 群集资源管理器。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="cfab735b-923d-4246-a2a8-220d4f4e0c64"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/24/2017"
-    ms.author="masnider" />  
+---
+title: Service Fabric 群集资源管理器简介 | Azure
+description: 介绍 Service Fabric 群集资源管理器。
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: cfab735b-923d-4246-a2a8-220d4f4e0c64
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/24/2017
+ms.author: masnider
+---
 
 # Service Fabric 群集资源管理器简介
 在传统上，管理 IT 系统或一组服务意味着要使一些物理机或虚拟机专用于这些特定的服务或系统。许多主要服务划分为“Web”层和“数据”或“存储”层，此外可能还有其他一些专用组件，例如缓存。其他类型的应用程序会有一个消息传送层，请求在其中流入和流出。该层会连接到一个工作层，以便完成在消息传送过程中必需的分析或转换操作。每种类型的工作负荷都有专用的计算机：数据库需要一些专用计算机，Web 服务器也需要一些。如果特定类型的工作负荷导致其所在的计算机运行时温度过高，则可添加更多使用该配置的计算机。但大多数情况下，你会使用更大型的计算机来替换其中的部分计算机。这很容易理解。如果某台计算机发生故障，则在还原该计算机之前，整个应用程序中的该部件将以较低容量运行。这仍然很容易理解（但不一定有趣）。
@@ -56,12 +56,12 @@
 由于群集资源管理器负责移动服务（而不是将网络流量传送到服务所在位置），因此其所包含的功能集不同于网络负载均衡器中的功能集。如果更详细地进行考察，我们会发现，该管理器本质上采用的是不同的策略，以此确保群集中的硬件资源得到有效的利用。
 
 ## 后续步骤
-- 有关群集资源管理器中体系结构和信息流的信息，请查看[此文](/documentation/articles/service-fabric-cluster-resource-manager-architecture/)
-- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇[描述 Service Fabric 群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)的文章
-- 如需详细了解适用于配置服务的其他选项，请查看[了解如何配置服务](/documentation/articles/service-fabric-cluster-resource-manager-configure-services/)中提供的其他群集资源管理器配置的相关主题
-- 指标是 Service Fabric 群集资源管理器在群集中管理消耗和容量的方式。若要详细了解指标及其配置方式，请查看[此文](/documentation/articles/service-fabric-cluster-resource-manager-metrics/)
-- 群集资源管理器可与 Service Fabric 的管理功能配合使用。若要了解有关这种集成的详细信息，请阅读[此文](/documentation/articles/service-fabric-cluster-resource-manager-management-integration/)
-- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](/documentation/articles/service-fabric-cluster-resource-manager-balancing/)的文章
+- 有关群集资源管理器中体系结构和信息流的信息，请查看[此文](./service-fabric-cluster-resource-manager-architecture.md)
+- 群集资源管理器提供许多用于描述群集的选项。若要详细了解这些选项，请查看这篇[描述 Service Fabric 群集](./service-fabric-cluster-resource-manager-cluster-description.md)的文章
+- 如需详细了解适用于配置服务的其他选项，请查看[了解如何配置服务](./service-fabric-cluster-resource-manager-configure-services.md)中提供的其他群集资源管理器配置的相关主题
+- 指标是 Service Fabric 群集资源管理器在群集中管理消耗和容量的方式。若要详细了解指标及其配置方式，请查看[此文](./service-fabric-cluster-resource-manager-metrics.md)
+- 群集资源管理器可与 Service Fabric 的管理功能配合使用。若要了解有关这种集成的详细信息，请阅读[此文](./service-fabric-cluster-resource-manager-management-integration.md)
+- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](./service-fabric-cluster-resource-manager-balancing.md)的文章
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: add introduction to NLB-->

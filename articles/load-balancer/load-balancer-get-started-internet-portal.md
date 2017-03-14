@@ -1,38 +1,38 @@
-<properties
-    pageTitle="创建面向 Internet 的负载均衡器 - Azure 门户 | Azure"
-    description="了解如何使用 Azure 门户在 Resource Manager 中创建面向 Internet 的负载均衡器"
-    services="load-balancer"
-    documentationcenter="na"
-    author="anavinahar"
-    manager="narayan"
-    editor=""
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="aa9d26ca-3d8a-4a99-83b7-c410dd20b9d0"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="01/23/2017"
-    wacn.date="03/03/2017"
-    ms.author="annahar" />  
+---
+title: 创建面向 Internet 的负载均衡器 - Azure 门户 | Azure
+description: 了解如何使用 Azure 门户在 Resource Manager 中创建面向 Internet 的负载均衡器
+services: load-balancer
+documentationcenter: na
+author: anavinahar
+manager: narayan
+editor: ''
+tags: azure-resource-manager
 
+ms.assetid: aa9d26ca-3d8a-4a99-83b7-c410dd20b9d0
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 01/23/2017
+wacn.date: 03/03/2017
+ms.author: annahar
+---
 
 # 使用 Azure 门户创建面向 Internet 的负载均衡器
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/load-balancer-get-started-internet-portal/)
-- [PowerShell](/documentation/articles/load-balancer-get-started-internet-arm-ps/)
-- [Azure CLI](/documentation/articles/load-balancer-get-started-internet-arm-cli/)
-- [模板](/documentation/articles/load-balancer-get-started-internet-arm-template/)
+> [!div class="op_single_selector"]
+- [门户](./load-balancer-get-started-internet-portal.md)
+- [PowerShell](./load-balancer-get-started-internet-arm-ps.md)
+- [Azure CLI](./load-balancer-get-started-internet-arm-cli.md)
+- [模板](./load-balancer-get-started-internet-arm-template.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
+[!INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
 
-[AZURE.INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
+[!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
 
-本文介绍资源管理器部署模型。还可以[了解如何使用经典部署创建面向 Internet 的负载均衡器](/documentation/articles/load-balancer-get-started-internet-classic-portal/)
+本文介绍资源管理器部署模型。还可以[了解如何使用经典部署创建面向 Internet 的负载均衡器](./load-balancer-get-started-internet-classic-portal.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
+[!INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
 
 这涵盖要创建负载均衡器所必须完成的单个任务的序列，以及详细说明要怎样做才能实现目标。
 
@@ -46,12 +46,12 @@
 * 入站 NAT 规则 - 包含将负载均衡器上的公共端口映射到后端地址池中特定虚拟机的端口的规则。
 * 探测器 - 包含用于检查后端地址池中虚拟机实例的可用性的运行状况探测器。
 
-可在以下网页中获取有关 Azure Resource Manager 的负载均衡器组件的详细信息：[Azure Resource Manager support for load balancer](/documentation/articles/load-balancer-arm/)（Azure Resource Manager 对负载均衡器的支持）。
+可在以下网页中获取有关 Azure Resource Manager 的负载均衡器组件的详细信息：[Azure Resource Manager support for load balancer](./load-balancer-arm.md)（Azure Resource Manager 对负载均衡器的支持）。
 
 ## 在 Azure 门户预览中设置负载均衡器
 
-> [AZURE.IMPORTANT]
-本示例假定已有名为 **myVNet** 的虚拟网络。请参考[创建虚拟网络](/documentation/articles/virtual-networks-create-vnet-arm-pportal/)完成此操作。本示例还假定 **myVNet** 内有一个名为 **LB-Subnet-BE** 的子网以及两个分别名为 **web1** 和 **web2** 的 VM，这两个 VM 都位于 **myVNet** 中名为 **myAvailSet** 的可用性集中。请参考[此链接](/documentation/articles/virtual-machines-windows-hero-tutorial/)创建 VM。
+> [!IMPORTANT]
+本示例假定已有名为 **myVNet** 的虚拟网络。请参考[创建虚拟网络](../virtual-network/virtual-networks-create-vnet-arm-pportal.md)完成此操作。本示例还假定 **myVNet** 内有一个名为 **LB-Subnet-BE** 的子网以及两个分别名为 **web1** 和 **web2** 的 VM，这两个 VM 都位于 **myVNet** 中名为 **myAvailSet** 的可用性集中。请参考[此链接](../virtual-machines/virtual-machines-windows-hero-tutorial.md)创建 VM。
 
 1. 从浏览器导航到 Azure 门户预览：[http://portal.azure.cn](http://portal.azure.cn)，并使用你的 Azure 帐户登录。
 2. 在屏幕的左上方，选择“新建”>“网络”>“负载均衡器”。
@@ -83,7 +83,6 @@
 
     ![添加探测器](./media/load-balancer-get-started-internet-portal/4-load-balancer-probes.png)  
 
-
 2. 创建负载均衡器规则。
 
     单击负载均衡器的“设置”部分中的负载均衡规则。在“新建”边栏选项卡中，单击“添加”。为规则命名。此处使用 HTTP。选择前端和后端端口。此处，两个端口均选择 80。选择“LB-backend”作为后端池，选择以前创建的“HealthProbe”作为探测器。可根据用户的需求设置其他配置。然后，单击“确定”保存负载均衡规则。
@@ -104,11 +103,11 @@
 
 ## 后续步骤
 
-[开始配置内部负载均衡器](/documentation/articles/load-balancer-get-started-ilb-arm-cli/)
+[开始配置内部负载均衡器](./load-balancer-get-started-ilb-arm-cli.md)
 
-[配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: update meta properties; wording update -->

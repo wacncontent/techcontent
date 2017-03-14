@@ -1,5 +1,5 @@
-> [AZURE.SELECTOR]
-- [Device: Node.js Service: Node.js](/documentation/articles/iot-hub-node-node-device-management-get-started/)
-- [Device: Node.js Service: C#](/documentation/articles/iot-hub-csharp-node-device-management-get-started/)
+> [!div class="op_single_selector"]
+- [Device: Node.js Service: Node.js](../articles/iot-hub/iot-hub-node-node-device-management-get-started.md)
+- [Device: Node.js Service: C#](../articles/iot-hub/iot-hub-csharp-node-device-management-get-started.md)
 
 <!---HONumber=Mooncake_1212_2016-->

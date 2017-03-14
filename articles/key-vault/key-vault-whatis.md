@@ -1,24 +1,25 @@
-<properties
-    pageTitle="什么是 Azure 密钥保管库？| Azure"
-    description="Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密钥和机密。通过 Azure 密钥保管库，客户可以使用受硬件安全模块 (HSM) 保护的密钥，来加密密钥和机密（例如身份验证密钥、存储帐户密钥、数据加密密钥、.PFX 文件和密码）。"
-    services="key-vault"
-    documentationcenter=""
-    author="cabailey"
-    manager="mbaldwin"
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="e759df6f-0638-43b1-98ed-30b3913f9b82"
-    ms.service="key-vault"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="01/07/2017"
-    wacn.date="02/27/2017"
-    ms.author="cabailey" />
+---
+title: 什么是 Azure 密钥保管库？| Azure
+description: Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密钥和机密。通过 Azure 密钥保管库，客户可以使用受硬件安全模块 (HSM) 保护的密钥，来加密密钥和机密（例如身份验证密钥、存储帐户密钥、数据加密密钥、.PFX 文件和密码）。
+services: key-vault
+documentationcenter: ''
+author: cabailey
+manager: mbaldwin
+tags: azure-resource-manager
+
+ms.assetid: e759df6f-0638-43b1-98ed-30b3913f9b82
+ms.service: key-vault
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 01/07/2017
+wacn.date: 02/27/2017
+ms.author: cabailey
+---
 
 # 什么是 Azure 密钥保管库？
-大多数区域都提供了 Azure 密钥保管库。有关详细信息，请参阅[密钥保管库定价页](/pricing/details/key-vault/)。
+大多数区域都提供了 Azure 密钥保管库。有关详细信息，请参阅[密钥保管库定价页](https://www.azure.cn/pricing/details/key-vault/)。
 
 ## 介绍
 
@@ -27,10 +28,6 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 密钥保管库简化了密钥管理过程，可让你控制用于访问和加密数据的密钥。开发人员可以在几分钟内创建用于开发和测试的密钥，然后无缝地将其迁移到生产密钥。安全管理员可以根据需要授予（和吊销）密钥权限。
 
 使用下表详细了解密钥保管库如何帮助达到开发人员和安全管理员的需求。
-
-
-
-
 
 | 角色 | 问题陈述 | Azure 密钥保管库已解决问题 |
 | ------------- |-------------|-----|
@@ -50,11 +47,10 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 
    ![Azure 密钥保管库概述][1]
 
-开发人员还可通过使用 API 直接管理密钥。有关详细信息，请参阅[《密钥保管库开发人员指南》](/documentation/articles/key-vault-developers-guide/)。
+开发人员还可通过使用 API 直接管理密钥。有关详细信息，请参阅[《密钥保管库开发人员指南》](./key-vault-developers-guide.md)。
 
 ## 后续步骤
-有关面向管理员的入门教程，请参阅 [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)。
-
+有关面向管理员的入门教程，请参阅 [Azure 密钥保管库入门](./key-vault-get-started.md)。
 
 有关将密钥和机密与 Azure 密钥保管库配合使用的详细信息，请参阅[关于密钥、机密和证书](https://msdn.microsoft.com/zh-cn/library/azure/dn903623(v=azure.1).aspx)。
 

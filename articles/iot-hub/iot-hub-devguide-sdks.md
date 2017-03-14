@@ -1,22 +1,22 @@
-<properties
-    pageTitle="了解 Azure IoT SDK | Azure"
-    description="开发人员指南 - 介绍了相关链接，其指向可用于构建设备应用和后端应用的各种 Azure IoT 设备和服务 SDK。"
-    services="iot-hub"
-    documentationcenter=""
-    author="dominicbetts"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="c5c9a497-bb03-4301-be2d-00edfb7d308f"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/04/2017"
-    wacn.date="02/10/2017"
-    ms.author="dobett" />  
+---
+title: 了解 Azure IoT SDK | Azure
+description: 开发人员指南 - 介绍了相关链接，其指向可用于构建设备应用和后端应用的各种 Azure IoT 设备和服务 SDK。
+services: iot-hub
+documentationcenter: ''
+author: dominicbetts
+manager: timlt
+editor: ''
 
+ms.assetid: c5c9a497-bb03-4301-be2d-00edfb7d308f
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/04/2017
+wacn.date: 02/10/2017
+ms.author: dobett
+---
 
 # Azure IoT SDK
 ## Azure IoT 设备 SDK
@@ -30,7 +30,7 @@ Microsoft Azure IoT 设备 SDK 包含的代码可帮助构建连接到 Azure IoT
 - [适用于 Node.js 的 Azure IoT 设备 SDK][lnk-node-device-sdk]
 - [适用于 Python 的 Azure IoT 设备 SDK][lnk-python-device-sdk]
 
-> [AZURE.NOTE]
+> [!NOTE]
 有关使用语言和平台特定的程序包管理器在开发计算机上安装二进制文件和依赖项的信息，请参阅 GitHub 存储库中的自述文件。
 > 
 > 
@@ -51,7 +51,7 @@ Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中心进行交
 - [适用于 Java 的 Azure IoT 服务 SDK][lnk-java-service-sdk]
 - [适用于 Python 的 Azure IoT 服务 SDK][lnk-python-service-sdk]
 
-> [AZURE.NOTE]
+> [!NOTE]
 有关使用语言和平台特定的程序包管理器在开发计算机上安装二进制文件和依赖项的信息，请参阅 GitHub 存储库中的自述文件。
 > 
 > 
@@ -83,7 +83,6 @@ Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中心进行交
 
 <!-- Links and images -->
 
-
 [lnk-c-device-sdk]: https://github.com/Azure/azure-iot-sdk-c
 [lnk-dotnet-device-sdk]: https://github.com/Azure/azure-iot-sdk-csharp/tree/master/device
 [lnk-java-device-sdk]: https://github.com/Azure/azure-iot-sdk-java/tree/master/device
@@ -93,7 +92,7 @@ Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中心进行交
 [lnk-node-service-sdk]: https://github.com/Azure/azure-iot-sdk-node/tree/master/service
 [lnk-python-device-sdk]: https://github.com/Azure/azure-iot-sdk-python/tree/master/device
 [lnk-python-service-sdk]: https://github.com/Azure/azure-iot-sdk-python/tree/master/service
-[lnk-compatibility]: /documentation/articles/iot-hub-tested-configurations/
+[lnk-compatibility]: ./iot-hub-tested-configurations.md
 [lnk-gateway-sdk]: https://github.com/Azure/azure-iot-gateway-sdk
 
 [lnk-dotnet-ref]: https://msdn.microsoft.com/zh-cn/library/mt488521.aspx
@@ -105,10 +104,10 @@ Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中心进行交
 [lnk-node-service-ref]: http://azure.github.io/azure-iot-sdks/node/api_reference/azure-iothub/1.0.17/index.html
 [lnk-gateway-ref]: http://azure.github.io/azure-iot-gateway-sdk/api_reference/c/html/
 
-[lnk-devguide-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-devguide-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-devguide-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-devguide-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-devguide-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-devguide-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
 <!---HONumber=Mooncake_0206_2017-->
 <!--Update_Description:update wording and link references-->

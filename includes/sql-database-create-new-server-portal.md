@@ -1,4 +1,3 @@
-
 <!--
 includes/sql-database-create-new-server-portal.md
 
@@ -17,11 +16,9 @@ articles/sql-database/sql-database-get-started-tutorial.md
 
       ![SQL 数据库 1](./media/sql-database-create-new-server-portal/sql-database-create-new-server-portal-1.png)  
 
-
 3. 单击“SQL 数据库”以打开“SQL 数据库”边栏选项卡。
 
       ![新逻辑服务器](./media/sql-database-create-new-server-portal/sql-database-create-new-server-portal-2.png)  
-
 
 5. 提供以下服务器属性的值：
 
@@ -37,7 +34,6 @@ articles/sql-database/sql-database-get-started-tutorial.md
 6.  单击“创建”。可以在通知区域中看到部署已开始。
 
        ![新逻辑服务器](./media/sql-database-create-new-server-portal/sql-database-create-new-server-portal-5.png)  
-
 
 7. 等待部署完成，然后继续下一步。
 

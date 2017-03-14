@@ -1,31 +1,32 @@
-<properties 
-   pageTitle="服务总线身份验证和授权 | Azure"
-   description="共享访问签名 (SAS) 身份验证概述。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" />
-<tags 
-    ms.service="service-bus-messaing"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/13/2017"
-    ms.author="sethm" 
-    wacn.date="03/03/2017" />
+---
+title: 服务总线身份验证和授权 | Azure
+description: 共享访问签名 (SAS) 身份验证概述。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: ''
+
+ms.service: service-bus-messaing
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/13/2017
+ms.author: sethm
+wacn.date: 03/03/2017
+---
 
 # 服务总线身份验证和授权
 
 可通过两种方式向 Azure 服务总线验证应用程序，即使用共享访问签名 (SAS) 身份验证，或通过 Azure Active Directory 访问控制（也称为访问控制服务或 ACS）进行身份验证。通过共享访问签名身份验证，应用程序能够使用在命名空间或在关联了特定权限的实体上配置的访问密钥向服务总线进行身份验证。然后可以使用此密钥生成共享访问签名令牌，客户端可用它向服务总线进行身份验证。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 > 建议使用 SAS 而不是 ACS，因为它为服务总线提供了一种简单、灵活且易于使用的身份验证方案。当应用程序不需要管理授权“用户”这一概念时，可以使用 SAS。
 
 ## <a name="shared-access-signature-authentication"></a> 共享访问签名身份验证
 
-通过 [SAS 身份验证](/documentation/articles/service-bus-sas-overview/)，你可以向具有特定权限的用户授予对服务总线资源的访问权限。服务总线中的 SAS 身份验证涉及配置具有服务总线资源相关权限的加密密钥。客户端随后即可通过提供 SAS 令牌来获取该资源的访问权限，该令牌包括正在访问的资源 URI，以及一个由已配置的密钥签名的到期时间。
+通过 [SAS 身份验证](./service-bus-sas-overview.md)，你可以向具有特定权限的用户授予对服务总线资源的访问权限。服务总线中的 SAS 身份验证涉及配置具有服务总线资源相关权限的加密密钥。客户端随后即可通过提供 SAS 令牌来获取该资源的访问权限，该令牌包括正在访问的资源 URI，以及一个由已配置的密钥签名的到期时间。
 
 可以在服务总线命名空间上配置用于 SAS 的密钥。该密钥将应用于该命名空间中的所有消息传送实体。你还可在服务总线队列和主题上配置密钥。服务总线中继也支持 SAS。
 
@@ -49,15 +50,15 @@ Azure .NET SDK 2.0 版和更高版本支持服务总线的 SAS 身份验证。SA
 
 使用 ACS 的服务总线身份验证通过随附的“-sb”ACS 命名空间进行管理。如果你想为服务总线命名空间创建随附 ACS 命名空间，则不能使用 Azure 经典管理门户创建服务总线命名空间，而必须使用 [New-AzureSBNamespace](https://msdn.microsoft.com/zh-cn/library/azure/dn495165.aspx) PowerShell cmdlet 来创建命名空间。例如：
 
-
-	New-AzureSBNamespace <namespaceName> "<Region>” -CreateACSNamespace $true
-
+```
+New-AzureSBNamespace <namespaceName> "<Region>” -CreateACSNamespace $true
+```
 
 若要避免创建 ACS 命名空间，请发出以下命令：
 
-
-	New-AzureSBNamespace <namespaceName> "<Region>” -CreateACSNamespace $false
-
+```
+New-AzureSBNamespace <namespaceName> "<Region>” -CreateACSNamespace $false
+```
 
 例如，如果创建名为 **contoso.servicebus.chinacloudapi.cn** 的服务总线命名空间，则会自动预配名为 **contoso-sb.accesscontrol.chinacloudapi.cn** 的随附 ACS 命名空间。对于在 2014 年 8 月之前创建的所有命名空间，还将创建一个随附的 ACS 命名空间。
 
@@ -69,9 +70,9 @@ Azure.NET SDK 2.0 版和更高版本支持服务总线的 ACS 身份验证。此
 
 ## 后续步骤
 
-请继续阅读[使用服务总线进行共享访问签名身份验证](/documentation/articles/service-bus-shared-access-signature-authentication/)，了解有关 SAS 的更多详细信息。
+请继续阅读[使用服务总线进行共享访问签名身份验证](./service-bus-shared-access-signature-authentication.md)，了解有关 SAS 的更多详细信息。
 
-有关服务总线中的 SAS 的高级概述，请参阅[共享访问签名](/documentation/articles/service-bus-sas-overview/)。
+有关服务总线中的 SAS 的高级概述，请参阅[共享访问签名](./service-bus-sas-overview.md)。
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description:update meta properties and wording-->

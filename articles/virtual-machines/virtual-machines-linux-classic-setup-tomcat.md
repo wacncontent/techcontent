@@ -1,29 +1,29 @@
-<properties
-    pageTitle="在 Linux 虚拟机上设置 Apache Tomcat | Azure"
-    description="了解如何使用运行 Linux 的 Azure 虚拟机设置 Apache Tomcat7。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="NingKuang"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="45ecc89c-1cb0-4e80-8944-bd0d0bbedfdc"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/15/2015"
-    wacn.date="02/20/2017"
-    ms.author="ningk" />  
+---
+title: 在 Linux 虚拟机上设置 Apache Tomcat | Azure
+description: 了解如何使用运行 Linux 的 Azure 虚拟机设置 Apache Tomcat7。
+services: virtual-machines-linux
+documentationcenter: ''
+author: NingKuang
+manager: timlt
+editor: ''
+tags: azure-service-management
 
+ms.assetid: 45ecc89c-1cb0-4e80-8944-bd0d0bbedfdc
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2015
+wacn.date: 02/20/2017
+ms.author: ningk
+---
 
 # 使用 Azure 在 Linux 虚拟机上设置 Tomcat7
 Apache Tomcat（简称 Tomcat，以前也称为 Jakarta Tomcat）是由 Apache Software Foundation \(ASF\) 开发的一个开源 Web 服务器和 servlet 容器。Tomcat 实现 Sun Microsystems 提出的 Java Servlet 和 JavaServer Pages \(JSP\) 规范。Tomcat 提供用于运行 Java 代码的纯 Java HTTP Web 服务器环境。在最简单的配置中，Tomcat 在单个操作系统进程中运行。此进程运行 Java 虚拟机 \(JVM\)。浏览器向 Tomcat 发出的每个 HTTP 请求在 Tomcat 进程中作为单独线程进行处理。
 
-> [AZURE.IMPORTANT]
-Azure 具有用于创建和处理资源的两个不同的部署模型：[Azure Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用经典部署模型。我们建议在大多数新部署中使用 Resource Manager 模型。若要使用 Resource Manager 模板通过 Open JDK 和 Tomcat 部署 Ubuntu VM，请参阅[此文](https://github.com/Azure/azure-quickstart-templates/tree/master/openjdk-tomcat-ubuntu-vm/)。
+> [!IMPORTANT]
+Azure 具有用于创建和处理资源的两个不同的部署模型：[Azure Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用经典部署模型。我们建议在大多数新部署中使用 Resource Manager 模型。若要使用 Resource Manager 模板通过 Open JDK 和 Tomcat 部署 Ubuntu VM，请参阅[此文](https://github.com/Azure/azure-quickstart-templates/tree/master/openjdk-tomcat-ubuntu-vm/)。
 
 在本文中，我们将在 Linux 映像中安装 Tomcat7，并将其部署到 Azure。
 
@@ -46,7 +46,6 @@ SSH 是面向系统管理员的重要工具。但是，我们并不建议基于�
 好消息是，有办法使远程访问保持打开状态，而无需担心密码。此方法包括使用非对称加密进行身份验证。用户的私钥是授予身份验证的密钥。甚至可以锁定用户的帐户，以禁止密码身份验证。
 
 此方法的另一个优点是不需要使用不同的密码来登录到不同的服务器。可以使用个人私钥在所有服务器上进行身份验证，因而不必要记住多个密码。
-
 
 按照下列步骤进行操作可生成 SSH 身份验证密钥。
 
@@ -127,44 +126,60 @@ TCP 端口 8080 是 Tomcat 用来侦听的默认端口号。如果使用 Azure �
 ### Java 运行时环境
 Tomcat 用 Java 编写。有两种类型的 Java 开发工具包 \(JDK\)：OpenJDK 和 Oracle JDK。可以选择所需的工具包。
 
-> [AZURE.NOTE]
+> [!NOTE]
 这两个 JDK 对于 Java API 中的类，几乎包含相同的代码，但用于虚拟机的代码不同。OpenJDK 倾向于使用开放库，而 Oracle JDK 倾向于使用封闭库。Oracle JDK 包含更多类并且修复了一些 bug，比 OpenJDK 更稳定。
 
 #### 安装 OpenJDK  
 
 使用以下命令下载 OpenJDK。
 
-    sudo apt-get update  
-    sudo apt-get install openjdk-7-jre  
+```
+sudo apt-get update  
+sudo apt-get install openjdk-7-jre  
+```
 
 * 若要创建包含 JDK 文件的目录，请执行以下命令：
 
-        sudo mkdir /usr/lib/jvm  
+    ```
+    sudo mkdir /usr/lib/jvm  
+    ```
 * 若要将 JDK 文件解压到 /usr/lib/jvm/ 目录，请执行以下命令：
 
-        sudo tar -zxf jdk-8u5-linux-x64.tar.gz  -C /usr/lib/jvm/
+    ```
+    sudo tar -zxf jdk-8u5-linux-x64.tar.gz  -C /usr/lib/jvm/
+    ```
 
 #### 安装 Oracle JDK
 
 使用以下命令从 Oracle 网站下载 Oracle JDK。
 
-     wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz  
+```
+ wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz  
+```
 * 若要创建包含 JDK 文件的目录，请执行以下命令：
 
-        sudo mkdir /usr/lib/jvm  
+    ```
+    sudo mkdir /usr/lib/jvm  
+    ```
 * 若要将 JDK 文件解压到 /usr/lib/jvm/ 目录，请执行以下命令：
 
-        sudo tar -zxf jdk-8u5-linux-x64.tar.gz  -C /usr/lib/jvm/  
+    ```
+    sudo tar -zxf jdk-8u5-linux-x64.tar.gz  -C /usr/lib/jvm/  
+    ```
 * 将 Oracle JDK 设置为默认 Java 虚拟机：
 
-        sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_05/bin/java 100  
+    ```
+    sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_05/bin/java 100  
 
-        sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.8.0_05/bin/javac 100  
+    sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.8.0_05/bin/javac 100  
+    ```
 
 #### 确认 Java 安装成功
 可以使用如下命令测试是否已正确安装 Java 运行时环境：
 
-    java -version  
+```
+java -version  
+```
 
 如果已安装 OpenJDK，应会看到如下消息：
 ![指出成功安装 OpenJDK 的消息][14]
@@ -175,7 +190,9 @@ Tomcat 用 Java 编写。有两种类型的 Java 开发工具包 \(JDK\)：OpenJ
 ### 安装 Tomcat7
 使用以下命令安装 Tomcat7。
 
-    sudo apt-get install tomcat7  
+```
+sudo apt-get install tomcat7  
+```
 
 如果未使用 Tomcat7，请使用此命令的相应变体。
 
@@ -188,9 +205,11 @@ Tomcat 用 Java 编写。有两种类型的 Java 开发工具包 \(JDK\)：OpenJ
 
 使用 **sudo apt-cache search tomcat7** 命令可查看所有可用组件。使用以下命令安装一些有用的组件。
 
-    sudo apt-get install tomcat7-admin      #admin web applications
+```
+sudo apt-get install tomcat7-admin      #admin web applications
 
-    sudo apt-get install tomcat7-user         #tools to create user instances  
+sudo apt-get install tomcat7-user         #tools to create user instances  
+```
 
 ## 阶段 4：配置 Tomcat7
 在此阶段，可以管理 Tomcat。
@@ -198,34 +217,46 @@ Tomcat 用 Java 编写。有两种类型的 Java 开发工具包 \(JDK\)：OpenJ
 ### 启动和停止 Tomcat7
 安装 Tomcat7 服务器时，该服务器会自动启动。也可以使用以下命令将它启动：
 
-    sudo /etc/init.d/tomcat7 start
+```
+sudo /etc/init.d/tomcat7 start
+```
 
 停止 Tomcat7：
 
-    sudo /etc/init.d/tomcat7 stop
+```
+sudo /etc/init.d/tomcat7 stop
+```
 
 查看 Tomcat7 的状态：
 
-    sudo /etc/init.d/tomcat7 status
+```
+sudo /etc/init.d/tomcat7 status
+```
 
 重新启动 Tomcat 服务：
 
-    sudo /etc/init.d/tomcat7 restart
+```
+sudo /etc/init.d/tomcat7 restart
+```
 
 ### Tomcat7 管理
 可以通过编辑 Tomcat 用户配置文件来设置管理员凭据。请使用以下命令：
 
-    sudo vi  /etc/tomcat7/tomcat-users.xml   
+```
+sudo vi  /etc/tomcat7/tomcat-users.xml   
+```
 
 以下是示例：
 ![显示 sudo vi 命令输出的屏幕截图][17]
 
-> [AZURE.NOTE]
+> [!NOTE]
 为管理员用户名创建强密码。
 
 编辑此文件之后，应使用以下命令重新启动 Tomcat7 服务，确保所做的更改生效：
 
-    sudo /etc/init.d/tomcat7 restart  
+```
+sudo /etc/init.d/tomcat7 restart  
+```
 
 打开浏览器，然后输入 URL **http://\<Tomcat 服务器 DNS 名称\>/manager/html**。对于本文中的示例，URL 为 http://tomcatexample.chinacloudapp.cn/manager/html。
 
@@ -265,17 +296,20 @@ Tomcat 用 Java 编写。有两种类型的 Java 开发工具包 \(JDK\)：OpenJ
 * 如果 Tomcat 侦听端口与发往虚拟机的流量的终结点专用端口不同，则需要将该专用端口更改为与 Tomcat 侦听端口相同。
 2. 如果此问题由防火墙/iptables 导致，请将以下行添加到 /etc/sysconfig/iptables。只有 https 流量才需要第二行：
 
-        -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+    ```
+    -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 
-        -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT  
+    -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT  
+    ```
 
-    > [AZURE.IMPORTANT]
+    > [!IMPORTANT]
     确保将上述行放置在全局限制访问权限的所有行上面，如下所示：-A INPUT -j REJECT --reject-with icmp-host-prohibited
-
 
 若要重新加载 iptables，请运行以下命令：
 
-    service iptables restart
+```
+service iptables restart
+```
 
 这样就已经在 CentOS 6.3 上进行了测试。
 

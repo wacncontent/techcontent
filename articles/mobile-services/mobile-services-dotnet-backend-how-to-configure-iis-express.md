@@ -1,21 +1,21 @@
-<properties
-	pageTitle="配置 IIS Express 以便测试本地移动服务 | Azure 移动服务"
-	description="了解如何配置 IIS Express，以便连接到本地移动服务项目进行测试。"
-	authors="ggailey777"
-	manager="dwrede"
-	services="mobile-services"
-	documentationCenter=""
-	editor=""/>
+---
+title: 配置 IIS Express 以便测试本地移动服务 | Azure 移动服务
+description: 了解如何配置 IIS Express，以便连接到本地移动服务项目进行测试。
+authors: ggailey777
+manager: dwrede
+services: mobile-services
+documentationCenter: ''
+editor: ''
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 配置本地 Web 服务器以允许连接到本地移动服务 
 
@@ -23,6 +23,6 @@
 
 若要使用模拟器、虚拟机或独立工作站上运行的客户端在本地测试移动服务，你必须配置本地 Web 服务器和主机，以允许连接到工作站的 IP 地址和端口。本主题将说明如何配置 IIS Express，以允许连接到本地托管的移动服务。
 
-[AZURE.INCLUDE [mobile-services-how-to-configure-iis-express](../../includes/mobile-services-how-to-configure-iis-express.md)]
+[!INCLUDE [mobile-services-how-to-configure-iis-express](../../includes/mobile-services-how-to-configure-iis-express.md)]
 
 <!---HONumber=Mooncake_0118_2016-->

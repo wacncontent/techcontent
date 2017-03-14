@@ -1,26 +1,26 @@
-<properties
-   pageTitle="为 Azure 云服务和虚拟机配置诊断 | Azure"
-   description="介绍如何在 Visual Studio 中配置诊断信息以用于调试 Azure 云服务和虚拟机 (VM)。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 为 Azure 云服务和虚拟机配置诊断 | Azure
+description: 介绍如何在 Visual Studio 中配置诊断信息以用于调试 Azure 云服务和虚拟机 (VM)。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="e70cd7b4-6298-43aa-adea-6fd618414c26"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: e70cd7b4-6298-43aa-adea-6fd618414c26
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 为 Azure 云服务和虚拟机配置诊断
 
-如果需要对 Azure 云服务或 Azure 虚拟机进行故障排除，使用 Visual Studio 可以更轻松地配置 Azure 诊断。Azure 诊断可以在运行云服务的虚拟机和虚拟机实例上捕获系统数据和日志记录数据，并将这些数据传输到所选的存储帐户中。有关 Azure 中诊断日志记录的详细信息，请参阅[在 Azure App Service 中启用网站的诊断日志记录](/documentation/articles/web-sites-enable-diagnostic-log/)。
+如果需要对 Azure 云服务或 Azure 虚拟机进行故障排除，使用 Visual Studio 可以更轻松地配置 Azure 诊断。Azure 诊断可以在运行云服务的虚拟机和虚拟机实例上捕获系统数据和日志记录数据，并将这些数据传输到所选的存储帐户中。有关 Azure 中诊断日志记录的详细信息，请参阅[在 Azure App Service 中启用网站的诊断日志记录](./app-service-web/web-sites-enable-diagnostic-log.md)。
 
 本主题演示如何在部署前后在 Visual Studio 和 Azure 虚拟机中启用和配置 Azure 诊断。它还演示如何选择要收集的诊断信息的类型以及如何在收集信息后查看这些信息。
 
@@ -98,7 +98,6 @@ Azure 诊断的配置方法有如下数种：
 
     ![存储帐户对话框](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC796662.png)  
 
-
   - 如果你选择“Microsoft Azure 存储模拟器”选项，则连接字符串将设为 UseDevelopmentStorage=true。
 
   - 如果你选择“你的订阅”选项，则可以选择要使用的 Azure 订阅和帐户名称。你可以选择“管理帐户”按钮来管理你的 Azure 订阅。
@@ -108,7 +107,6 @@ Azure 诊断的配置方法有如下数种：
 1. 选择“配置”按钮查看“诊断配置”对话框。每个选项卡（“常规”和“日志目录”除外）表示你可以收集的诊断数据源。默认选项卡“常规”为你提供以下诊断数据收集选项：“仅限错误”、“所有信息”和“自定义计划”。默认选项“仅限错误”占用最少量的存储空间，因为该选项不传输警告或跟踪消息。“所有信息”选项传输的信息最多，因此就存储来说是成本最高的选项。
 
     ![启用 Azure 诊断和配置](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC758144.png)  
-
 
 1. 对于此示例，可以选择“自定义计划”选项，以便自定义所收集的数据。
 
@@ -134,13 +132,12 @@ Azure 诊断的配置方法有如下数种：
 
     ![配置 Azure 虚拟机](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC796663.png)  
 
-
 1. 如果尚未安装，请添加“Microsoft 监视代理诊断”扩展。使用此扩展可以收集 Azure 虚拟机的诊断数据。在“已安装的扩展”列表中，选择“选择可用扩展”下拉菜单，然后选择“Microsoft 监视代理诊断”。
 
     ![安装 Azure 虚拟机扩展](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC766024.png)  
 
-
-    >[AZURE.NOTE] 其他诊断扩展可用于虚拟机。有关详细信息，请参阅“Azure VM 扩展和功能”。
+    >[!NOTE]
+    > 其他诊断扩展可用于虚拟机。有关详细信息，请参阅“Azure VM 扩展和功能”。
 
 1. 选择“添加”按钮以添加扩展，并查看其“诊断配置”对话框。
 
@@ -149,7 +146,6 @@ Azure 诊断的配置方法有如下数种：
     每个选项卡（“常规”和“日志目录”除外）表示你可以收集的诊断数据源。
 
     ![启用 Azure 诊断和配置](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC758144.png)  
-
 
     默认选项卡“常规”为你提供以下诊断数据收集选项：“仅限错误”、“所有信息”和“自定义计划”。默认选项“仅限错误”占用最少量的存储空间，因为该选项不传输警告或跟踪消息。“所有信息”选项传输的信息最多，因此就存储来说是成本最高的选项。
 
@@ -177,15 +173,13 @@ Azure 诊断的配置方法有如下数种：
 
   ![应用程序日志](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC758145.png)  
 
-
-  有关应用程序日志的详细信息，请参阅[在 Azure App Service 中启用 Web 应用的诊断日志记录](/documentation/articles/web-sites-enable-diagnostic-log/)。
+  有关应用程序日志的详细信息，请参阅[在 Azure App Service 中启用 Web 应用的诊断日志记录](./app-service-web/web-sites-enable-diagnostic-log.md)。
 
 ### Windows 事件日志
 
 如果要捕获 Windows 事件日志，请选中“启用 Windows 事件日志的传输”复选框。你可以增加或减少将事件日志传输至存储帐户的分钟数，方法是更改“传输周期(分钟)”值。选中与要跟踪的事件类型对应的复选框。
 
   ![事件日志](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC796664.png)  
-
 
 如果你使用的是 Azure SDK 2.6 或更高版本并想要指定自定义数据源，请在 **<数据源名称>** 文本框中输入它，然后选择它旁边的“添加”按钮。该数据源将添加到 diagnostics.cfcfg 文件中。
 
@@ -199,10 +193,9 @@ Azure 诊断的配置方法有如下数种：
 ```
 ### 性能计数器
 
-性能计数器信息可以帮助你找到系统瓶颈，并优化系统和应用程序性能。有关详细信息，请参阅[在 Azure 应用程序中创建和使用性能计数器](/documentation/articles/cloud-services-dotnet-diagnostics-performance-counters/)。如果要捕获性能计数器，请选中“启用性能计数器的传输”复选框。你可以增加或减少将事件日志传输至存储帐户的分钟数，方法是更改“传输周期(分钟)”值。选中与要跟踪的性能计数器对应的复选框。
+性能计数器信息可以帮助你找到系统瓶颈，并优化系统和应用程序性能。有关详细信息，请参阅[在 Azure 应用程序中创建和使用性能计数器](./cloud-services/cloud-services-dotnet-diagnostics-performance-counters.md)。如果要捕获性能计数器，请选中“启用性能计数器的传输”复选框。你可以增加或减少将事件日志传输至存储帐户的分钟数，方法是更改“传输周期(分钟)”值。选中与要跟踪的性能计数器对应的复选框。
 
   ![性能计数器](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC758147.png)  
-
 
 若要跟踪未列出的性能计数器，请使用建议的语法输入它，然后选择“添加”按钮。虚拟机上的操作系统会确定你可以跟踪哪些性能计数器。有关语法的详细信息，请参阅[指定计数器路径](https://msdn.microsoft.com/library/windows/desktop/aa373193.aspx)。
 
@@ -212,8 +205,7 @@ Azure 诊断的配置方法有如下数种：
 
   ![诊断基础结构日志](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC758148.png)  
 
-
-  有关详细信息，请参阅[使用 Azure 诊断收集日志记录数据](/documentation/articles/cloud-services-dotnet-diagnostics/)。
+  有关详细信息，请参阅[使用 Azure 诊断收集日志记录数据](./cloud-services/cloud-services-dotnet-diagnostics.md)。
 
 ### 日志目录
 
@@ -225,7 +217,6 @@ Azure 诊断的配置方法有如下数种：
 
   ![日志目录](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC796665.png)  
 
-
 ### ETW 日志
 
 如果你使用 [Windows 事件跟踪](https://msdn.microsoft.com/library/windows/desktop/bb968803(v=vs.85).aspx) (ETW) 并要捕获 ETW 日志，请选中“启用 ETW 日志的传输”复选框。你可以增加或减少将日志传输至存储帐户的分钟数，方法是更改“传输周期(分钟)”值。
@@ -234,8 +225,7 @@ Azure 诊断的配置方法有如下数种：
 
   ![ETW 日志](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC766025.png)  
 
-
-  支持在 ASP.NET 中通过 [System.Diagnostics.aspx](https://msdn.microsoft.com/library/system.diagnostics(v=vs.110) 命名空间中的类来使用 ETW 框架。Microsoft.WindowsAzure.Diagnostics 命名空间继承自标准 [System.Diagnostics.aspx](https://msdn.microsoft.com/zh-cn/library/system.diagnostics(v=vs.110) 类并对其进行了扩展，在 Azure 环境中，可以通过该命名空间将 [System.Diagnostics.aspx](https://msdn.microsoft.com/library/system.diagnostics(v=vs.110) 用作日志记录框架。有关详细信息，请参阅[在 Microsoft Azure 中控制日志记录和跟踪](https://msdn.microsoft.com/magazine/ff714589.aspx)以及[在 Azure 云服务和虚拟机中启用诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)。
+  支持在 ASP.NET 中通过 [System.Diagnostics.aspx](https://msdn.microsoft.com/library/system.diagnostics(v=vs.110) 命名空间中的类来使用 ETW 框架。Microsoft.WindowsAzure.Diagnostics 命名空间继承自标准 [System.Diagnostics.aspx](https://msdn.microsoft.com/zh-cn/library/system.diagnostics(v=vs.110) 类并对其进行了扩展，在 Azure 环境中，可以通过该命名空间将 [System.Diagnostics.aspx](https://msdn.microsoft.com/library/system.diagnostics(v=vs.110) 用作日志记录框架。有关详细信息，请参阅[在 Microsoft Azure 中控制日志记录和跟踪](https://msdn.microsoft.com/magazine/ff714589.aspx)以及[在 Azure 云服务和虚拟机中启用诊断](./cloud-services/cloud-services-dotnet-diagnostics.md)。
 
 ### 故障转储
 
@@ -244,7 +234,6 @@ Azure 诊断的配置方法有如下数种：
 系统将列出当前跟踪的进程。选中与要捕获的进程对应的复选框。若要将另一个进程添加到列表中，请输入进程名称，然后选择“添加进程”按钮。
 
   ![故障转储](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC766026.png)  
-
 
   有关详细信息，请参阅[在 Microsoft Azure 中控制日志记录和跟踪](https://msdn.microsoft.com/magazine/ff714589.aspx)，以及 [Microsoft Azure 诊断第 4 部分：自定义日志记录组件和 Azure 诊断 1.3 更改](http://justazure.com/microsoft-azure-diagnostics-part-4-custom-logging-components-azure-diagnostics-1-3-changes/)。
 
@@ -260,11 +249,9 @@ Azure 诊断的配置方法有如下数种：
 
     ![查看诊断数据](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC748912.png)  
 
-
     随即显示包括可用数据的报告。
 
     ![Visual Studio 中的 Microsoft Azure 诊断报告](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC796666.png)  
-
 
     如果最新数据没有显示，可能需要等待传输周期结束。
 
@@ -288,7 +275,7 @@ Azure 诊断的配置方法有如下数种：
 
 1. （可选）间或清除存储帐户中的数据，降低整体存储开销。
 
-1. 进行完整部署时，diagnostics.cscfg 文件（Azure SDK 2.5 中为 .wadcfgx）将在 Azure 中更新，云服务将拾取对诊断配置的所有更改。如果你改为更新现有部署，则不会在 Azure 中更新 .cscfg 文件。但仍可按照下一部分中的步骤更改诊断设置。有关执行完整部署和更新现有部署的详细信息，请参阅[发布 Azure 应用程序向导](/documentation/articles/vs-azure-tools-publish-azure-application-wizard/)。
+1. 进行完整部署时，diagnostics.cscfg 文件（Azure SDK 2.5 中为 .wadcfgx）将在 Azure 中更新，云服务将拾取对诊断配置的所有更改。如果你改为更新现有部署，则不会在 Azure 中更新 .cscfg 文件。但仍可按照下一部分中的步骤更改诊断设置。有关执行完整部署和更新现有部署的详细信息，请参阅[发布 Azure 应用程序向导](./vs-azure-tools-publish-azure-application-wizard.md)。
 
 ### 查看虚拟机的诊断数据
 
@@ -296,11 +283,9 @@ Azure 诊断的配置方法有如下数种：
 
     ![查看 Azure 虚拟机中的诊断数据](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC766027.png)  
 
-
     此时将打开“诊断摘要”窗口。
 
     ![Azure 虚拟机诊断摘要](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC796667.png)  
-
 
     如果最新数据没有显示，可能需要等待传输周期结束。
 
@@ -315,7 +300,6 @@ Azure 诊断的配置方法有如下数种：
 1. 在“服务器资源管理器”中，展开“云服务”节点，然后展开其子节点找到你要调查的角色和/或实例。
 
     ![配置诊断](./media/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/IC748913.png)  
-
 
 1. 在实例节点或角色节点的快捷菜单上，选择“更新诊断设置”，然后选择要收集的诊断设置。
 
@@ -375,6 +359,6 @@ RoleEntryPoint 的方法在 WAIISHost.exe 上下文中调用，而非 IIS。因�
 
 ## 后续步骤
 
-若要详细了解 Azure 中的诊断日志记录，请参阅[在 Azure 云服务和虚拟机中启用诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)和[在 Azure App Service 中启用 Web 应用的诊断日志记录](/documentation/articles/web-sites-enable-diagnostic-log/)。
+若要详细了解 Azure 中的诊断日志记录，请参阅[在 Azure 云服务和虚拟机中启用诊断](./cloud-services/cloud-services-dotnet-diagnostics.md)和[在 Azure App Service 中启用 Web 应用的诊断日志记录](./app-service-web/web-sites-enable-diagnostic-log.md)。
 
 <!---HONumber=Mooncake_0912_2016-->

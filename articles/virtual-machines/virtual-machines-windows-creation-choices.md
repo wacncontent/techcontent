@@ -1,22 +1,22 @@
-<properties
-	pageTitle="创建 Windows VM 的不同方法 | Azure"
-	description="列出使用 Resource Manager 创建 Windows 虚拟机的不同方法。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager,azure-service-management"/>
+---
+title: 创建 Windows VM 的不同方法 | Azure
+description: 列出使用 Resource Manager 创建 Windows 虚拟机的不同方法。
+services: virtual-machines-windows
+documentationCenter: ''
+authors: cynthn
+manager: timlt
+editor: ''
+tags: azure-resource-manager,azure-service-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows"
-	ms.workload="infrastructure-services"
-	ms.date="09/27/2016"
-	wacn.date="12/12/2016"
-	ms.author="cynthn"/>
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 09/27/2016
+wacn.date: 12/12/2016
+ms.author: cynthn
+---
 
 # 使用 Resource Manager 创建 Windows 虚拟机的不同方法
 
@@ -26,21 +26,19 @@
 
 使用 Azure 门户预览是试用虚拟机的一种简单方法，尤其是在刚开始使用 Azure 时。
 
-[使用门户创建运行 Windows 的虚拟机](/documentation/articles/virtual-machines-windows-hero-tutorial/)
+[使用门户创建运行 Windows 的虚拟机](./virtual-machines-windows-hero-tutorial.md)
 
 ## 模板
 
 虚拟机需要使用各种资源（如可用性集和存储账户）的组合。无需单独部署和管理每个资源，可以创建 Azure Resource Manager 模板，用于在单个协调操作中部署和预配所有资源。
 
-- [使用 Resource Manager 模板创建 Windows 虚拟机](/documentation/articles/virtual-machines-windows-ps-template/)
-
+- [使用 Resource Manager 模板创建 Windows 虚拟机](./virtual-machines-windows-ps-template.md)
 
 ## Azure PowerShell
 
 如果喜欢在命令外壳中工作，可以使用 Azure PowerShell。
 
-- [使用 PowerShell 创建 Windows VM](/documentation/articles/virtual-machines-windows-ps-create/)
-
+- [使用 PowerShell 创建 Windows VM](./virtual-machines-windows-ps-create.md)
 
 ## Visual Studio
 

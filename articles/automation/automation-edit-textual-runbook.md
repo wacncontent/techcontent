@@ -1,20 +1,21 @@
-<properties 
-	pageTitle="在 Azure 自动化中编辑文本 Runbook"
-	description="本文提供的不同过程适用于在 Azure 自动化中通过文本编辑器来处理 PowerShell 工作流 Runbook。"
-	services="automation"
-	documentationCenter=""
-	authors="mgoedtel"
-	manager="stevenka"
-	editor="tysonn" />
-<tags 
-	ms.service="automation"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="infrastructure-services"
-	ms.date="02/23/2016"
-	wacn.date="01/09/2017"
-	ms.author="magoedte;bwren" />
+---
+title: 在 Azure 自动化中编辑文本 Runbook
+description: 本文提供的不同过程适用于在 Azure 自动化中通过文本编辑器来处理 PowerShell 工作流 Runbook。
+services: automation
+documentationCenter: ''
+authors: mgoedtel
+manager: stevenka
+editor: tysonn
+
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/23/2016
+wacn.date: 01/09/2017
+ms.author: magoedte;bwren
+---
 
 # 在 Azure 自动化中编辑文本 Runbook
 
@@ -22,8 +23,7 @@ Azure 自动化中的文本编辑器可以用来编辑 PowerShell 工作流 Runb
 
 该文本编辑器包含的一项功能是将活动、资产和子 Runbook 的代码插入 Runbook 中。你不需要亲自键入代码，只需从可用资源列表中进行选择，然后即可将相应代码插入 Runbook 中。
 
-Azure 自动化中的每个 Runbook 都有两个版本：草稿版和已发布版。你先对 Runbook 的草稿版进行编辑，然后将其发布，这样便可以执行了。无法编辑已发布版本。有关详细信息，请参阅[发布 Runbook](/documentation/articles/automation-creating-importing-runbook/#publishing-a-runbook)。
-
+Azure 自动化中的每个 Runbook 都有两个版本：草稿版和已发布版。你先对 Runbook 的草稿版进行编辑，然后将其发布，这样便可以执行了。无法编辑已发布版本。有关详细信息，请参阅[发布 Runbook](./automation-creating-importing-runbook.md#publishing-a-runbook)。
 
 ## <a name="to-edit-a-runbook-with-the-azure-portal"></a> 使用 Azure 经典管理门户编辑 Runbook
 
@@ -50,7 +50,7 @@ Azure 自动化中的每个 Runbook 都有两个版本：草稿版和已发布�
 
 ### 将子 Runbook 的代码插入 Runbook 中
 
-1. 在文本编辑器的“画布”中，将光标置于要放置[子 Runbook](/documentation/articles/automation-child-runbooks/) 的地方。
+1. 在文本编辑器的“画布”中，将光标置于要放置[子 Runbook](./automation-child-runbooks.md) 的地方。
 2. 在屏幕底部，单击“插入”，然后单击“Runbook”。
 3. 选择要从中心列插入的 Runbook，然后单击右箭头。
 4. 如果该 Runbook 具有参数，则会将其列出供你参考。
@@ -65,8 +65,6 @@ Azure 自动化中的每个 Runbook 都有两个版本：草稿版和已发布�
 1. 在中心列的可用资产中进行选择。
 1. 单击勾选按钮。此时会将获取或设置资产的代码插入 Runbook 中。
 
-
-
 ## 使用 Windows PowerShell 编辑 Azure 自动化 Runbook
 
 若要使用 Windows PowerShell 来编辑 Runbook，可使用所选编辑器进行操作，然后将其保存到 .ps1 文件。你可以先使用 [Get-AzureAutomationRunbookDefinition](https://msdn.microsoft.com/zh-cn/library/dn690269.aspx) cmdlet 来检索 Runbook 的内容，然后使用 [Set-AzureAutomationRunbookDefinition](https://msdn.microsoft.com/zh-cn/library/dn690267.aspx) cmdlet 将现有的草稿 Runbook 替换为已修改的 Runbook。
@@ -75,34 +73,38 @@ Azure 自动化中的每个 Runbook 都有两个版本：草稿版和已发布�
 
 以下示例命令演示了如何检索 Runbook 的脚本并将其保存到脚本文件。在此示例中，检索的是草稿版本。也可以检索 Runbook 的已发布版本，不过该版本不能进行更改。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Sample-TestRunbook"
-    $scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
-    
-    $runbookDefinition = Get-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Slot Draft
-    $runbookContent = $runbookDefinition.Content
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Sample-TestRunbook"
+$scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
 
-    Out-File -InputObject $runbookContent -FilePath $scriptPath
+$runbookDefinition = Get-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Slot Draft
+$runbookContent = $runbookDefinition.Content
+
+Out-File -InputObject $runbookContent -FilePath $scriptPath
+```
 
 ### 使用 Windows PowerShell 更改 Runbook 的内容
 
-以下示例命令演示了如何使用脚本文件的内容替换 Runbook 的现有内容。请注意，此示例过程与[使用 Windows PowerShell 从脚本文件中导入 Runbook](/documentation/articles/automation-creating-importing-runbook/#ImportRunbookScriptPS) 中的相同。
+以下示例命令演示了如何使用脚本文件的内容替换 Runbook 的现有内容。请注意，此示例过程与[使用 Windows PowerShell 从脚本文件中导入 Runbook](./automation-creating-importing-runbook.md#ImportRunbookScriptPS) 中的相同。
 
-    $automationAccountName = "MyAutomationAccount"
-    $runbookName = "Sample-TestRunbook"
-    $scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
+```
+$automationAccountName = "MyAutomationAccount"
+$runbookName = "Sample-TestRunbook"
+$scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
 
-    Set-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Path $scriptPath -Overwrite
-    Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+Set-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Path $scriptPath -Overwrite
+Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
+```
 
 ## 相关文章
 
-- [在 Azure 自动化中创建或导入 Runbook](/documentation/articles/automation-creating-importing-runbook/)
-- [了解 PowerShell 工作流](/documentation/articles/automation-powershell-workflow/)
-- [证书](/documentation/articles/automation-certificates/)
-- [连接](/documentation/articles/automation-connections/)
-- [凭据](/documentation/articles/automation-credentials/)
-- [计划](/documentation/articles/automation-schedules/)
-- [变量](/documentation/articles/automation-variables/)
+- [在 Azure 自动化中创建或导入 Runbook](./automation-creating-importing-runbook.md)
+- [了解 PowerShell 工作流](./automation-powershell-workflow.md)
+- [证书](./automation-certificates.md)
+- [连接](./automation-connections.md)
+- [凭据](./automation-credentials.md)
+- [计划](./automation-schedules.md)
+- [变量](./automation-variables.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

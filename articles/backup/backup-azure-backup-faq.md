@@ -1,31 +1,29 @@
-<properties
-    pageTitle="Azure 备份常见问题 | Azure"
-    description="有关备份服务、备份代理、备份和保留、恢复、安全性，以及有关备份和灾难恢复的常见问题的解答。"
-    services="backup"
-    documentationcenter=""
-    author="markgalioto"
-    manager="jwhit"
-    editor=""
-    keywords="备份和灾难恢复; 备份服务" />  
+---
+title: Azure 备份常见问题 | Azure
+description: 有关备份服务、备份代理、备份和保留、恢复、安全性，以及有关备份和灾难恢复的常见问题的解答。
+services: backup
+documentationcenter: ''
+author: markgalioto
+manager: jwhit
+editor: ''
+keywords: 备份和灾难恢复; 备份服务
 
-    
-<tags
-    ms.assetid="1011bdd6-7a64-434f-abd7-2783436668d7"
-    ms.service="backup"
-    ms.workload="storage-backup-recovery"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="11/16/2016"
-    wacn.date="01/04/2017"
-    ms.author="trinadhk; giridham; arunak; markgal; jimpark;" />  
-
+ms.assetid: 1011bdd6-7a64-434f-abd7-2783436668d7
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 11/16/2016
+wacn.date: 01/04/2017
+ms.author: trinadhk; giridham; arunak; markgal; jimpark;
+---
 
 # Azure 备份服务 - 常见问题
 
-> [AZURE.SELECTOR]
-- [经典模式备份常见问题](/documentation/articles/backup-azure-backup-faq/)
-- [资源管理器模式备份常见问题](/documentation/articles/backup-azure-backup-ibiza-faq/)
+> [!div class="op_single_selector"]
+- [经典模式备份常见问题](./backup-azure-backup-faq.md)
+- [资源管理器模式备份常见问题](./backup-azure-backup-ibiza-faq.md)
 
 本文提供有关 Azure 备份服务常见问题（及相应解答）的列表。我们的社区可在短时间内提供解答，如果某个问题被经常提出，我们会将它添加到本文中。问题的解答通常提供参考或支持信息。你可以在本文或相关章的 Disqus 部分中提出有关 Azure 备份的问题。还可以在[论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=windowsazureonlinebackup)中发布有关 Azure 备份服务的问题。
 
@@ -48,7 +46,7 @@ Azure 备份支持在下列操作系统中使用 Azure 备份服务器和 SCDPM 
 
 对于 Azure VM 备份：
 
-- **Linux**：Azure 备份支持 [Azure 认可的分发版列表](/documentation/articles/virtual-machines-linux-endorsed-distros/)，但 Core OS Linux 除外。只要虚拟机上装有 VM 代理且支持 Python，其他自带的 Linux 分发版也可能可用。
+- **Linux**：Azure 备份支持 [Azure 认可的分发版列表](../virtual-machines/virtual-machines-linux-endorsed-distros.md)，但 Core OS Linux 除外。只要虚拟机上装有 VM 代理且支持 Python，其他自带的 Linux 分发版也可能可用。
 - **Windows Server**：不支持低于 Windows Server 2008 R2 的版本。
 
 ## 可以在哪里下载最新的 Azure 备份代理？<br/>
@@ -70,7 +68,7 @@ Azure 备份支持在下列操作系统中使用 Azure 备份服务器和 SCDPM 
 备份数据发送到它所注册到的保管库的数据中心。更改数据中心的最简便方法是卸载代理，然后将代理安装并注册到属于所需数据中心的新保管库。
 
 ## 如果我重命名了用于将数据备份到 Azure 的 Windows 服务器，会发生什么情况？<br/>
-当你重命名服务器时，所有当前配置的备份都将停止。向备份保管库注册服务器的新名称。向保管库注册新名称时，第一个备份操作为*完整* 备份。如果需要恢复以前备份到采用旧服务器名称的保管库的数据，可以使用“恢复数据”向导中“[**其他服务器**](/documentation/articles/backup-azure-restore-windows-server/#recover-to-an-alternate-machine/)”选项来恢复该数据。
+当你重命名服务器时，所有当前配置的备份都将停止。向备份保管库注册服务器的新名称。向保管库注册新名称时，第一个备份操作为*完整* 备份。如果需要恢复以前备份到采用旧服务器名称的保管库的数据，可以使用“恢复数据”向导中“[**其他服务器**](./backup-azure-restore-windows-server.md#recover-to-an-alternate-machine)”选项来恢复该数据。
 
 ## 可以从哪些类型的驱动器备份文件和文件夹？<br/>
 可备份下面一组驱动器/卷：
@@ -200,7 +198,7 @@ Azure 备份代理依赖于 NTFS。[文件路径长度规范受限于 Windows AP
  从 Azure 备份代理、SCDPM 或 Azure 备份服务器备份的所有数据都在传输之前经过压缩和加密。应用压缩和加密后，备份保管库中的数据将减少 30-40%。
 
 ## 是否有办法调整备份服务所用的带宽？<br/>
- 是的，可以使用备份代理中的“更改属性”选项来调整带宽。用户可以调整带宽以及使用该带宽的时间。有关分步说明，请参阅“通过资源管理器部署模型将 Windows Server 或客户端备份到 Azure”这一文章中的**[启用网络限制](/documentation/articles/backup-configure-vault/#enable-network-throttling/)**。
+ 是的，可以使用备份代理中的“更改属性”选项来调整带宽。用户可以调整带宽以及使用该带宽的时间。有关分步说明，请参阅“通过资源管理器部署模型将 Windows Server 或客户端备份到 Azure”这一文章中的**[启用网络限制](./backup-configure-vault.md#enable-network-throttling)**。
 
 ## 我的 Internet 带宽有限，不适用于我需要备份的数据量。是否有办法可将数据移到网络带宽较大的特定位置，然后将数据推送到 Azure？<br/>
 可以通过标准的联机备份过程将数据备份到 Azure，或者使用 Azure 导入/导出服务将数据传输到 Azure 中的 Blob 存储。无法通过其他方法将数据备份到 Azure 存储空间。
@@ -241,7 +239,6 @@ Azure 备份代理依赖于 NTFS。[文件路径长度规范受限于 Windows AP
 
   ```PS C:\> Net start obengine```  
 
-
   在新缓存位置成功完成创建备份后，可以删除原始缓存文件夹。
 
 ## 可以将缓存文件夹放在何处，以便 Azure 备份代理按预期工作？<br/>
@@ -273,9 +270,8 @@ Azure 备份代理依赖于 NTFS。[文件路径长度规范受限于 Windows AP
 ## <a name="i-have-backed-up-my-classic-vms-in-a-backup-vault-can-i-migrate-my-vms-from-classic-mode-to-resource-manager-mode-and-protect-them-in-a-recovery-services-vault"></a> 在备份保管库中备份经典 VM 后，能否将 VM 从经典模式迁移到 Resource Manager 模式并在恢复服务保管库中对其进行保护？
 将 VM 从经典模式移到 Resource Manager 模式时，备份保管库中的经典 VM 恢复点不会自动迁移到恢复服务保管库中。请按以下步骤传输 VM 备份：
 
-1. 在备份保管库中，转到“受保护的项”选项卡并选择 VM。单击“停止保护”。[](/documentation/articles/backup-azure-manage-vms-classic/#stop-protecting-virtual-machines/)将“删除关联的备份数据”选项保持**未选中**状态。
+1. 在备份保管库中，转到“受保护的项”选项卡并选择 VM。单击“停止保护”。[](./backup-azure-manage-vms-classic.md#stop-protecting-virtual-machines)将“删除关联的备份数据”选项保持**未选中**状态。
 2. 将虚拟机从经典模式迁移到 Resource Manager 模式。同时确保将虚拟机对应的存储和网络迁移到 Resource Manager 模式。
 3. 创建恢复服务保管库，使用保管库仪表板上的“备份”操作，在迁移的虚拟机上配置备份。
-
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -1,75 +1,73 @@
-<properties
-		pageTitle="将用户添加到 Azure 上的 Linux VM | Azure"
-		description="将用户添加到 Azure 上的 Linux VM。"
-		services="virtual-machines-linux"
-		documentationCenter=""
-		authors="vlivech"
-		manager="timlt"
-		editor=""
-		tags="azure-resource-manager"
-/>  
+---
+title: 将用户添加到 Azure 上的 Linux VM | Azure
+description: 将用户添加到 Azure 上的 Linux VM。
+services: virtual-machines-linux
+documentationCenter: ''
+authors: vlivech
+manager: timlt
+editor: ''
+tags: azure-resource-manager
 
-
-<tags
-		ms.service="virtual-machines-linux"
-		ms.workload="infrastructure-services"
-		ms.tgt_pltfrm="vm-linux"
-		ms.devlang="na"
-		ms.topic="article"
-		ms.date="08/18/2016"
-		wacn.date="10/24/2016"
-		ms.author="v-livech"
-/>  
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 08/18/2016
+wacn.date: 10/24/2016
+ms.author: v-livech
+---
 
 # 将用户添加到 Azure VM
 
 对于任何新的 Linux VM，首要任务之一就是创建新用户。在本文中，将逐步创建 sudo 用户帐户、设置密码、添加 SSH 公钥，最后使用 `visudo` 来允许不带密码的 sudo。
 
-先决条件包括：[Azure 帐户](/pricing/1rmb-trial/)、[SSH 公钥与私钥](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)、Azure 资源组、已安装 Azure CLI，并已使用 `azure config mode arm` 切换到 Azure Resource Manager 模式。
+先决条件包括：[Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)、[SSH 公钥与私钥](./virtual-machines-linux-mac-create-ssh-keys.md)、Azure 资源组、已安装 Azure CLI，并已使用 `azure config mode arm` 切换到 Azure Resource Manager 模式。
 
 ## 快速命令
 
-	# Add a new user on RedHat family distros
-	sudo useradd -G wheel exampleUser
+```
+# Add a new user on RedHat family distros
+sudo useradd -G wheel exampleUser
 
-	# Add a new user on Debian family distros
-	sudo useradd -G sudo exampleUser
+# Add a new user on Debian family distros
+sudo useradd -G sudo exampleUser
 
-	# Set a password
-	sudo passwd exampleUser
-	Enter new UNIX password:
-	Retype new UNIX password:
-	passwd: password updated successfully
+# Set a password
+sudo passwd exampleUser
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
 
-	# Copy the SSH Public Key to the new user
-	ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
+# Copy the SSH Public Key to the new user
+ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
 
-	# Change sudoers to allow no password
-	# Execute visudo as root to edit the /etc/sudoers file
-	visudo
+# Change sudoers to allow no password
+# Execute visudo as root to edit the /etc/sudoers file
+visudo
 
-	# On RedHat family distros uncomment this line:
-	## Same thing without a password
-	# %wheel        ALL=(ALL)       NOPASSWD: ALL
+# On RedHat family distros uncomment this line:
+## Same thing without a password
+# %wheel        ALL=(ALL)       NOPASSWD: ALL
 
-	# to this
-	## Same thing without a password
-	%wheel        ALL=(ALL)       NOPASSWD: ALL
+# to this
+## Same thing without a password
+%wheel        ALL=(ALL)       NOPASSWD: ALL
 
-	# On Debian family distros change this line:
-	# Allow members of group sudo to execute any command
-	%sudo   ALL=(ALL:ALL) ALL
+# On Debian family distros change this line:
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
 
-	# to this
-	%sudo   ALL=(ALL) NOPASSWD:ALL
+# to this
+%sudo   ALL=(ALL) NOPASSWD:ALL
 
-	# Verify everything
-	# Verify the SSH keys & User account
-	bill@slackware$ ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
+# Verify everything
+# Verify the SSH keys & User account
+bill@slackware$ ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
 
-	# Verify sudo access
-	sudo top
+# Verify sudo access
+sudo top
+```
 
 ## 详细演练
 
@@ -94,20 +92,24 @@
 
 #### 添加用户
 
-	# On RedHat family distros
-	sudo useradd -G wheel exampleUser
+```
+# On RedHat family distros
+sudo useradd -G wheel exampleUser
 
-	# On Debian family distros
-	sudo useradd -G sudo exampleUser
+# On Debian family distros
+sudo useradd -G sudo exampleUser
+```
 
 #### 设置密码
 
 `useradd` 命令将创建用户，并向 `/etc/passwd` 和 `/etc/gpasswd` 同时添加条目，但不实际设置密码。使用 `passwd` 命令将密码添加到条目。
 
-	sudo passwd exampleUser
-	Enter new UNIX password:
-	Retype new UNIX password:
-	passwd: password updated successfully
+```
+sudo passwd exampleUser
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+```
 
 现在，服务器上已有一个具有 sudo 权限的用户。
 
@@ -115,7 +117,9 @@
 
 在计算机上，结合新密码使用 `ssh-copy-id` 命令。
 
-	ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
+ssh-copy-id -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
 
 ### 通过 visudo 允许使用不带密码的 sudo
 
@@ -123,30 +127,34 @@
 
 我们已将用户添加到正确的默认组中以进行 sudo 访问。现在我们要让这些组可以在没有密码的情况下使用 sudo。
 
-	# Execute visudo as root to edit the /etc/sudoers file
-	visudo
+```
+# Execute visudo as root to edit the /etc/sudoers file
+visudo
 
-	# On RedHat family distros uncomment this line:
-	## Same thing without a password
-	# %wheel        ALL=(ALL)       NOPASSWD: ALL
+# On RedHat family distros uncomment this line:
+## Same thing without a password
+# %wheel        ALL=(ALL)       NOPASSWD: ALL
 
-	# to this
-	## Same thing without a password
-	%wheel        ALL=(ALL)       NOPASSWD: ALL
+# to this
+## Same thing without a password
+%wheel        ALL=(ALL)       NOPASSWD: ALL
 
-	# On Debian family distros change this line:
-	# Allow members of group sudo to execute any command
-	%sudo   ALL=(ALL:ALL) ALL
+# On Debian family distros change this line:
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
 
-	# to this
-	%sudo   ALL=(ALL) NOPASSWD:ALL
+# to this
+%sudo   ALL=(ALL) NOPASSWD:ALL
+```
 
 ### 验证用户、ssh 密钥和 sudo
 
-	# Verify the SSH keys & User account
-	ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
+```
+# Verify the SSH keys & User account
+ssh -i ~/.ssh/id_rsa exampleuser@exampleserver
 
-	# Verify sudo access
-	sudo top
+# Verify sudo access
+sudo top
+```
 
 <!---HONumber=Mooncake_1017_2016-->

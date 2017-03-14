@@ -1,28 +1,29 @@
-<properties
-    pageTitle="Azure SQL 弹性缩放常见问题 | Azure"
-    description="关 Azure SQL 数据库弹性缩放的常见问题。"
-    services="sql-database"
-    documentationcenter=""
-    manager="jhubbard"
-    author="ddove"
-    editor="" />
-<tags
-    ms.assetid="e60dde9c-bb7b-4f2f-b52c-bdb506d49fcb"
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="ddove" />
+---
+title: Azure SQL 弹性缩放常见问题 | Azure
+description: 关 Azure SQL 数据库弹性缩放的常见问题。
+services: sql-database
+documentationcenter: ''
+manager: jhubbard
+author: ddove
+editor: ''
+
+ms.assetid: e60dde9c-bb7b-4f2f-b52c-bdb506d49fcb
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: ddove
+---
 
 # 弹性数据库工具常见问题
 #### 如果每个分片只有单个租户且没有分片键，该如何为架构信息填充分片键？
 架构信息对象仅用于“拆分/合并”方案。如果某个应用程序本质上是单租户，那么它则不需要“拆分/合并”工具，因此无需填充架构信息对象。
 
 #### 在已预配了一个数据库，并且已安装了分片映射管理器的情况下，应如何将此新数据库注册为分片？
-请参阅**[使用弹性数据库客户端库将分片添加到应用程序](/documentation/articles/sql-database-elastic-scale-add-a-shard/)**。
+请参阅**[使用弹性数据库客户端库将分片添加到应用程序](./sql-database-elastic-scale-add-a-shard.md)**。
 
 #### 弹性数据库工具的费用如何？
 使用弹性数据库客户端库不会产生任何费用。只有为分片使用的 Azure SQL 数据库和分片映射管理器，以及为“拆分/合并”工具预配的 Web/辅助角色才会产生费用。
@@ -47,7 +48,6 @@ ms.author="ddove" />
 #### 在拆分或合并操作期间，“拆分/合并”工具是否会预配（或删除）数据库？
 不会。对于**拆分**操作，必须存在目标数据库和相应的架构，并且必须注册到分片映射管理器。对于**合并**操作，必须从分片映射管理器中删除分片，然后删除数据库。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
- 
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!---HONumber=Mooncake_1212_2016-->

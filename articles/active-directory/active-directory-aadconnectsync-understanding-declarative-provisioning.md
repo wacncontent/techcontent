@@ -1,23 +1,21 @@
-<properties
-	pageTitle="Azure AD Connect 同步：了解声明性预配 | Azure"
-	description="介绍 Azure AD Connect 中的声明性预配配置模型。"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="stevenpo"
-	editor=""/>
+---
+title: Azure AD Connect 同步：了解声明性预配 | Azure
+description: 介绍 Azure AD Connect 中的声明性预配配置模型。
+services: active-directory
+documentationCenter: ''
+authors: andkjell
+manager: stevenpo
+editor: ''
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/29/2016"
-	wacn.date="10/25/2016"
-	ms.author="billmath"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/29/2016
+wacn.date: 10/25/2016
+ms.author: billmath
+---
 
 # Azure AD Connect 同步：了解声明性预配
 本主题介绍 Azure AD Connect 中的配置模型。该模型称为声明性预配，让用户能够轻松地更改配置。本主题介绍的许多内容都是高级内容，在大部分客户方案中并非必要。
@@ -27,11 +25,9 @@
 
 ![同步管道](./media/active-directory-aadconnectsync-understanding-declarative-provisioning/sync1.png)  
 
-
 管道有多个不同的模块。每个模块负责对象同步中的一个概念。
 
 ![同步管道](./media/active-directory-aadconnectsync-understanding-declarative-provisioning/pipeline.png)  
-
 
 - 源：源对象
 - 范围：查找范围内的所有同步规则
@@ -89,10 +85,9 @@ ISMEMBEROF、ISNOTMEMBEROF | 值应该包含连接器空间中组的 DN。如果
 删除 metaverse 对象后，所有与标记为“预配”的出站同步规则关联的对象都将标记为要删除。
 
 ## 转换
-转换用于定义属性应该如何从源流动到目标。流可以是以下**流类型**之一：直接、常数或表达式。直接流会按原样流动属性值，而不进行其他转换。常数值会设置指定的值。表达式会使用声明性预配表达式语言来表达应该如何转换。有关表达式语言的详细信息，请参阅[了解声明性预配表达式语言](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning-expressions/)主题。
+转换用于定义属性应该如何从源流动到目标。流可以是以下**流类型**之一：直接、常数或表达式。直接流会按原样流动属性值，而不进行其他转换。常数值会设置指定的值。表达式会使用声明性预配表达式语言来表达应该如何转换。有关表达式语言的详细信息，请参阅[了解声明性预配表达式语言](./active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)主题。
 
 ![预配或联接](./media/active-directory-aadconnectsync-understanding-declarative-provisioning/transformations1.png)  
-
 
 “应用一次”复选框定义只应在最初创建对象时设置的属性。例如，此配置可用于设置新用户对象的初始密码。
 
@@ -100,7 +95,6 @@ ISMEMBEROF、ISNOTMEMBEROF | 值应该包含连接器空间中组的 DN。如果
 在属性流中，有一个设置可用于确定是否应从多个不同的连接器合并多值属性。默认值为“Update”，表示应采用具有最高优先级的同步规则。
 
 ![合并类型](./media/active-directory-aadconnectsync-understanding-declarative-provisioning/mergetype.png)  
-
 
 此外，还有“Merge”和“MergeCaseInsensitive”。这些选项让用户能够合并来自不同源的值。例如，它可用于合并来自多个不同林的成员或 proxyAddresses 属性。使用此选项时，对象范围内的所有同步规则都必须使用相同的合并类型。不能定义从一个连接器“Update”，从另一个连接器“Merge”。如果尝试此操作，将收到错误。
 
@@ -135,7 +129,6 @@ ISMEMBEROF、ISNOTMEMBEROF | 值应该包含连接器空间中组的 DN。如果
 
 ![合并类型](./media/active-directory-aadconnectsync-understanding-declarative-provisioning/precedence1.png)  
 
-
 此排序可用于针对小部分对象定义更精确的属性流。例如，现成规则可确保已启用帐户 (**User AccountEnabled**) 的属性优先于其他帐户的属性。
 
 可定义连接器之间的优先级。这样一来，具有更好的数据的连接器可以先提供值。
@@ -147,18 +140,18 @@ ISMEMBEROF、ISNOTMEMBEROF | 值应该包含连接器空间中组的 DN。如果
 
 ## 后续步骤
 
-- 在 [Understanding Declarative Provisioning Expressions](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning-expressions/)（了解声明性预配表达式）中了解有关表达式语言的详细信息。
-- 以 [Understanding the default configuration](/documentation/articles/active-directory-aadconnectsync-understanding-default-configuration/)（了解默认配置）中了解如何现成地使用声明式预配。
-- 在 [How to make a change to the default configuration](/documentation/articles/active-directory-aadconnectsync-change-the-configuration/)（如何对默认配置进行更改）中了解如何使用声明性预配进行实际更改。
-- 如需了解用户和联系人如何协同工作，请继续阅读[了解用户和联系人](/documentation/articles/active-directory-aadconnectsync-understanding-users-and-contacts/)。
+- 在 [Understanding Declarative Provisioning Expressions](./active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)（了解声明性预配表达式）中了解有关表达式语言的详细信息。
+- 以 [Understanding the default configuration](./active-directory-aadconnectsync-understanding-default-configuration.md)（了解默认配置）中了解如何现成地使用声明式预配。
+- 在 [How to make a change to the default configuration](./active-directory-aadconnectsync-change-the-configuration.md)（如何对默认配置进行更改）中了解如何使用声明性预配进行实际更改。
+- 如需了解用户和联系人如何协同工作，请继续阅读[了解用户和联系人](./active-directory-aadconnectsync-understanding-users-and-contacts.md)。
 
 **概述主题**
 
-- [Azure AD Connect 同步：理解和自定义同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [Azure AD Connect 同步：理解和自定义同步](./active-directory-aadconnectsync-whatis.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 **参考主题**
 
-- [Azure AD Connect 同步：函数参考](/documentation/articles/active-directory-aadconnectsync-functions-reference/)
+- [Azure AD Connect 同步：函数参考](./active-directory-aadconnectsync-functions-reference.md)
 
 <!---HONumber=Mooncake_1017_2016-->

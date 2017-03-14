@@ -1,23 +1,22 @@
-<properties
-    pageTitle="什么是 Azure SQL 数据仓库？| Azure"
-    description="企业级分布式数据库，可处理 1 千万亿字节的关系数据和非关系数据量。它是行业首个云数据仓库，可以在数秒内增长、收缩和暂停。"
-    services="sql-data-warehouse"
-    documentationcenter="NA"
-    author="jrowlandjones"
-    manager="bjhubbard"
-    editor="" />
-<tags
-    ms.assetid="4006c201-ec71-4982-b8ba-24bba879d7bb"
-    ms.service="sql-data-warehouse"
-    ms.devlang="NA"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="data-services"
-    ms.date="10/31/2016"
-    wacn.date="02/20/2017"
-    ms.author="jrj;mausher;kevin;barbkess" />  
+---
+title: 什么是 Azure SQL 数据仓库？| Azure
+description: 企业级分布式数据库，可处理 1 千万亿字节的关系数据和非关系数据量。它是行业首个云数据仓库，可以在数秒内增长、收缩和暂停。
+services: sql-data-warehouse
+documentationcenter: NA
+author: jrowlandjones
+manager: bjhubbard
+editor: ''
 
-
+ms.assetid: 4006c201-ec71-4982-b8ba-24bba879d7bb
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: hero-article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 02/20/2017
+ms.author: jrj;mausher;kevin;barbkess
+---
 
 # 什么是 Azure SQL 数据仓库？
 Azure SQL 数据仓库是一种基于云的向外扩展数据库，可以处理大量数据（关系数据和非关系数据）。SQL 数据仓库在大规模并行处理 (MPP) 体系结构的基础上构建，可以处理你的企业工作负荷。
@@ -43,7 +42,6 @@ SQL 数据仓库是一种大规模并行处理 (MPP) 分布式数据库系统。
 下图更详细地说明了此体系结构。
 
 ![SQL 数据仓库体系结构][1]  
-
 
 **控制节点：**控制节点管理和优化查询。它是与所有应用程序和连接进行交互的前端。在 SQL 数据仓库中，控制节点由 SQL 数据库提供支持，并且连接到它时它看起来就像 SQL 数据库。表面之下，控制节点协调对分布式数据运行并行查询所需的所有数据移动和计算。当你将 T-SQL 查询提交到 SQL 数据仓库时，控制节点会将其转换为可在每个计算节点上并行运行的单独查询。
 
@@ -155,7 +153,6 @@ SQL 数据仓库提供产品级别的服务级别协议 (SLA) 作为 Microsoft O
 * [Stack Overflow 论坛]
 * [Twitter]
 
-
 <!--Image references-->
 
 [1]: ./media/sql-data-warehouse-overview-what-is/dwarchitecture.png
@@ -163,13 +160,13 @@ SQL 数据仓库提供产品级别的服务级别协议 (SLA) 作为 Microsoft O
 <!--Article references-->
 
 [创建支持票证]: /documentation/articles/sql-data-warehouse-get-started-create-support-ticket/
-[load sample data]: /documentation/articles/sql-data-warehouse-load-sample-databases/
-[create a SQL Data Warehouse]: /documentation/articles/sql-data-warehouse-get-started-provision/
-[Migration documentation]: /documentation/articles/sql-data-warehouse-overview-migrate/
+[load sample data]: ./sql-data-warehouse-load-sample-databases.md
+[create a SQL Data Warehouse]: ./sql-data-warehouse-get-started-provision.md
+[Migration documentation]: ./sql-data-warehouse-overview-migrate.md
 [SQL Data Warehouse solution partners]: /documentation/articles/sql-data-warehouse-partner-business-intelligence/
-[Integrated tools overview]: /documentation/articles/sql-data-warehouse-overview-integrate/
-[Backup and restore overview]: /documentation/articles/sql-data-warehouse-restore-database-overview/
-[Azure glossary]: /documentation/articles/azure-glossary-cloud-terminology/
+[Integrated tools overview]: ./sql-data-warehouse-overview-integrate.md
+[Backup and restore overview]: ./sql-data-warehouse-restore-database-overview.md
+[Azure glossary]: ../azure-glossary-cloud-terminology.md
 
 <!--MSDN references-->
 
@@ -185,7 +182,7 @@ SQL 数据仓库提供产品级别的服务级别协议 (SLA) 作为 Microsoft O
 [视频]: https://azure.microsoft.com/documentation/videos/index/?services=sql-data-warehouse
 [SLA for SQL Data Warehouse]: https://azure.microsoft.com/zh-cn/support/legal/sla/sql-data-warehouse/v1_0/
 [Volume Licensing]: http://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=37
-[服务级别协议]: /support/legal/sla/
+[服务级别协议]: https://www.azure.cn/support/legal/sla/
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->
 <!--Update_Description:meta-data; words update; updating link reference -->

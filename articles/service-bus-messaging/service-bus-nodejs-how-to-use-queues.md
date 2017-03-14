@@ -1,24 +1,24 @@
-<properties 
-	pageTitle="如何通过 Node.js 使用服务总线队列 | Azure" 
-	description="了解如何在来自 Node.js 应用程序的 Azure 中使用服务总线队列。" 
-	services="service-bus" 
-	documentationCenter="nodejs" 
-	authors="sethmanheim" 
-	manager="timlt" 
-	editor=""/>
+---
+title: 如何通过 Node.js 使用服务总线队列 | Azure
+description: 了解如何在来自 Node.js 应用程序的 Azure 中使用服务总线队列。
+services: service-bus
+documentationCenter: nodejs
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-<tags 
-	ms.service="service-bus" 
-	ms.date="01/11/2017" 
-	wacn.date="02/20/2017"/>
+ms.service: service-bus
+ms.date: 01/11/2017
+wacn.date: 02/20/2017
+---
 
 # 如何使用 Service Bus 队列
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 本文介绍如何通过 Node.js 使用服务总线队列。示例用 JavaScript 编写并使用 Node.js Azure 模块。涉及的任务包括**创建队列**、**发送和接收消息**以及**删除队列**。有关队列的详细信息，请参阅 [后续步骤](#next-steps) 部分。
 
-[AZURE.INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
+[!INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
 
 ## 创建 Node.js 应用程序
 
@@ -34,19 +34,19 @@
 
 2.  在命令窗口中键入 **npm install azure**，这应该产生类似如下的输出：
 
-	
-    	azure@0.7.5 node_modules\azure
-    		├── dateformat@1.0.2-1.2.3
-    		├── xmlbuilder@0.4.2
-    		├── node-uuid@1.2.0
-    		├── mime@1.2.9
-    		├── underscore@1.4.4
-    		├── validator@1.1.1
-    		├── tunnel@0.0.2
-    		├── wns@0.5.3
-    		├── xml2js@0.2.7 (sax@0.5.2)
-    		└── request@2.21.0 (json-stringify-safe@4.0.0, forever-agent@0.5.0, aws-sign@0.3.0, tunnel-agent@0.3.0, oauth-sign@0.3.0, qs@0.6.5, cookie-jar@0.3.0, node-uuid@1.4.0, http-signature@0.9.11, form-data@0.0.8, hawk@0.13.1)
-	
+    ```
+    azure@0.7.5 node_modules\azure
+        ├── dateformat@1.0.2-1.2.3
+        ├── xmlbuilder@0.4.2
+        ├── node-uuid@1.2.0
+        ├── mime@1.2.9
+        ├── underscore@1.4.4
+        ├── validator@1.1.1
+        ├── tunnel@0.0.2
+        ├── wns@0.5.3
+        ├── xml2js@0.2.7 (sax@0.5.2)
+        └── request@2.21.0 (json-stringify-safe@4.0.0, forever-agent@0.5.0, aws-sign@0.3.0, tunnel-agent@0.3.0, oauth-sign@0.3.0, qs@0.6.5, cookie-jar@0.3.0, node-uuid@1.4.0, http-signature@0.9.11, form-data@0.0.8, hawk@0.13.1)
+    ```
 
 3. 可以手动运行 **ls** 命令来验证是否创建了 **node\_modules** 文件夹。在该文件夹中，找到 **azure** 包，其中包含访问服务总线队列所需的库。
 
@@ -54,9 +54,9 @@
 
 使用记事本或其他文本编辑器将以下内容添加到应用程序的 **server.js** 文件的顶部：
 
-
-		var azure = require('azure');
-
+```
+    var azure = require('azure');
+```
 
 ### 设置 Azure 服务总线连接
 
@@ -70,57 +70,57 @@ Azure 模块将读取环境变量 AZURE_SERVICEBUS_NAMESPACE 和 AZURE_SERVICEBU
 
 可以通过 **ServiceBusService** 对象处理服务总线队列。以下代码创建 **ServiceBusService** 对象。将它添加到靠近 **server.js** 文件顶部，用于导入 Azure 模块的语句之后的位置：
 
-
-		var serviceBusService = azure.createServiceBusService();
-
+```
+    var serviceBusService = azure.createServiceBusService();
+```
 
 通过对 **ServiceBusService** 对象调用 **createQueueIfNotExists**，将返回指定的队列（如果存在），否则将使用指定的名称创建一个新队列。以下代码使用 **createQueueIfNotExists** 创建或连接到名为 `myqueue` 的队列：
 
-
-		serviceBusService.createQueueIfNotExists('myqueue', function(error){
-		    if(!error){
-		        // Queue exists
-		    }
-		});
-
+```
+    serviceBusService.createQueueIfNotExists('myqueue', function(error){
+        if(!error){
+            // Queue exists
+        }
+    });
+```
 
 **createServiceBusService** 也支持其他选项，这些选项允许你重写默认队列设置，如消息生存时间或最大队列大小。以下示例将最大队列大小设置为 5 GB，将生存时间 (TTL) 值设置为 1 分钟：
 
+```
+    var queueOptions = {
+          MaxSizeInMegabytes: '5120',
+          DefaultMessageTimeToLive: 'PT1M'
+        };
 
-		var queueOptions = {
-		      MaxSizeInMegabytes: '5120',
-		      DefaultMessageTimeToLive: 'PT1M'
-		    };
-
-		serviceBusService.createQueueIfNotExists('myqueue', queueOptions, function(error){
-		    if(!error){
-		        // Queue exists
-		    }
-		});
-
+    serviceBusService.createQueueIfNotExists('myqueue', queueOptions, function(error){
+        if(!error){
+            // Queue exists
+        }
+    });
+```
 
 ### 筛选器
 
 可选的筛选操作可应用于使用 **ServiceBusService** 执行的操作。筛选操作可包括日志记录、自动重试等。筛选器是实现具有签名的方法的对象：
 
-
-		function handle (requestOptions, next)
-
+```
+    function handle (requestOptions, next)
+```
 
 在对请求选项执行预处理后，该方法必须调用 `next` 并传递具有以下签名的回调：
 
-
-		function (returnObject, finalCallback, next)
-
+```
+    function (returnObject, finalCallback, next)
+```
 
 在此回调中并且在处理 **returnObject**（来自对服务器请求的响应）后，回调必须调用 `next`（如果它存在）以便继续处理其他筛选器或只调用 `finalCallback`，以便结束服务调用。
 
 Azure SDK for Node.js 中附带了两个实现了重试逻辑的筛选器，分别是 **ExponentialRetryPolicyFilter** 和 **LinearRetryPolicyFilter**。以下代码创建一个 **ServiceBusService** 对象，该对象使用 **ExponentialRetryPolicyFilter**：
 
-
-		var retryOperations = new azure.ExponentialRetryPolicyFilter();
-		var serviceBusService = azure.createServiceBusService().withFilter(retryOperations);
-
+```
+    var retryOperations = new azure.ExponentialRetryPolicyFilter();
+    var serviceBusService = azure.createServiceBusService().withFilter(retryOperations);
+```
 
 ## 向队列发送消息
 
@@ -128,18 +128,18 @@ Azure SDK for Node.js 中附带了两个实现了重试逻辑的筛选器，分�
 
 以下示例演示如何使用 **sendQueueMessage** 向名为 `myqueue` 的队列发送一条测试消息：
 
-
-		var message = {
-		    body: 'Test message',
-		    customProperties: {
-		        testproperty: 'TestValue'
-		    }};
-		serviceBusService.sendQueueMessage('myqueue', message, function(error){
-		    if(!error){
-		        // message sent
-		    }
-		});
-
+```
+    var message = {
+        body: 'Test message',
+        customProperties: {
+            testproperty: 'TestValue'
+        }};
+    serviceBusService.sendQueueMessage('myqueue', message, function(error){
+        if(!error){
+            // message sent
+        }
+    });
+```
 
 服务总线队列在标准层中支持的最大消息大小为 256 KB。标头最大为 64 KB，其中包括标准和自定义应用程序属性。一个队列可包含的消息数不受限制，但消息的总大小受限。此队列大小是在创建时定义的，上限为 5 GB。有关配额的详细信息，请参阅[服务总线配额][]。
 
@@ -153,23 +153,23 @@ Azure SDK for Node.js 中附带了两个实现了重试逻辑的筛选器，分�
 
 以下示例演示如何使用 **receiveQueueMessage** 接收和处理消息。该示例先接收并删除一条消息，然后使用设置为 **true** 的 **isPeekLock** 接收一条消息，最后使用 **deleteMessage** 删除该消息：
 
-
-		serviceBusService.receiveQueueMessage('myqueue', function(error, receivedMessage){
-		    if(!error){
-		        // Message received and deleted
-		    }
-		});
-		serviceBusService.receiveQueueMessage('myqueue', { isPeekLock: true }, function(error, lockedMessage){
-		    if(!error){
-		        // Message received and locked
-		        serviceBusService.deleteMessage(lockedMessage, function (deleteError){
-		            if(!deleteError){
-		                // Message deleted
-		            }
-		        });
-		    }
-		});
-
+```
+    serviceBusService.receiveQueueMessage('myqueue', function(error, receivedMessage){
+        if(!error){
+            // Message received and deleted
+        }
+    });
+    serviceBusService.receiveQueueMessage('myqueue', { isPeekLock: true }, function(error, lockedMessage){
+        if(!error){
+            // Message received and locked
+            serviceBusService.deleteMessage(lockedMessage, function (deleteError){
+                if(!deleteError){
+                    // Message deleted
+                }
+            });
+        }
+    });
+```
 
 ## 如何处理应用程序崩溃和不可读消息
 
@@ -189,13 +189,13 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
   [Azure SDK for Node]: https://github.com/Azure/azure-sdk-for-node
   [Azure 经典管理门户]: http://manage.windowsazure.cn
-  
-  [Node.js 云服务]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
-  [队列、主题和订阅]: /documentation/articles/service-bus-queues-topics-subscriptions/
-  [创建 Node.js 应用程序并将其部署到 Azure 网站]: /documentation/articles/web-sites-nodejs-develop-deploy-mac/
-  [使用存储构建 Node.js 云服务]: /documentation/articles/storage-nodejs-use-table-storage-cloud-service-app/
-  [使用存储构建 Node.js Web 应用程序]: /documentation/articles/storage-nodejs-how-to-use-table-storage/
-  [服务总线配额]: /documentation/articles/service-bus-quotas/
+
+  [Node.js 云服务]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
+  [队列、主题和订阅]: ./service-bus-queues-topics-subscriptions.md
+  [创建 Node.js 应用程序并将其部署到 Azure 网站]: ../app-service-web/web-sites-nodejs-develop-deploy-mac.md
+  [使用存储构建 Node.js 云服务]: ../storage/storage-nodejs-use-table-storage-cloud-service-app.md
+  [使用存储构建 Node.js Web 应用程序]: ../storage/storage-nodejs-how-to-use-table-storage.md
+  [服务总线配额]: ./service-bus-quotas.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->
-<!--Update_Description:update meta properties--> 
+<!--Update_Description:update meta properties-->

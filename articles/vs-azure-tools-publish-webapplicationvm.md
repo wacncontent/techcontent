@@ -1,22 +1,22 @@
-<properties
-   pageTitle="Publish-WebApplicationVM | Azure"
-   description="了解如何将 Web 应用程序部署到虚拟机。如果资源不存在，则此脚本将在你的 Azure 订阅中创建所需的资源。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: Publish-WebApplicationVM | Azure
+description: 了解如何将 Web 应用程序部署到虚拟机。如果资源不存在，则此脚本将在你的 Azure 订阅中创建所需的资源。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="de4cec95-f73f-44d9-babd-9f47f2633cdb"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: de4cec95-f73f-44d9-babd-9f47f2633cdb
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # Publish-WebApplicationVM（Windows PowerShell 脚本）
 
@@ -119,7 +119,7 @@ Azure 中的 SQL 数据库的凭据。示例：-DatabaseServerPassword @{Name = 
 
 ## 备注
 
-有关如何使用脚本创建开发和测试环境的完整说明，请参阅[使用 Windows PowerShell 脚本发布到开发和测试环境](/documentation/articles/vs-azure-tools-publishing-using-powershell-scripts/)。
+有关如何使用脚本创建开发和测试环境的完整说明，请参阅[使用 Windows PowerShell 脚本发布到开发和测试环境](./vs-azure-tools-publishing-using-powershell-scripts.md)。
 
 JSON 配置文件指定要部署的内容的详细信息。它包括当你创建项目时指定的信息，如名称、地缘组、VHD 映像和虚拟机的大小。它还包括虚拟机上的终结点、要预配的数据库（如果有的话）和 Web 部署参数。以下代码显示一个示例 JSON 配置文件：
 

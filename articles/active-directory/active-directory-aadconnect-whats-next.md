@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure AD Connect：后续步骤以及如何管理 Azure AD Connect | Azure"
-    description="了解如何扩展 Azure AD Connect 的默认配置和操作任务。"
-    services="active-directory"
-    documentationcenter=""
-    author="billmath"
-    manager="femila"
-    editor="curtand" />  
+---
+title: Azure AD Connect：后续步骤以及如何管理 Azure AD Connect | Azure
+description: 了解如何扩展 Azure AD Connect 的默认配置和操作任务。
+services: active-directory
+documentationcenter: ''
+author: billmath
+manager: femila
+editor: curtand
 
-<tags
-    ms.assetid="c18bee36-aebf-4281-b8fc-3fe14116f1a5"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/01/2016"
-    ms.author="billmath" 
-    wacn.date="12/09/2016"/>
+ms.assetid: c18bee36-aebf-4281-b8fc-3fe14116f1a5
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/01/2016
+ms.author: billmath
+wacn.date: 12/09/2016
+---
 
 # 后续步骤以及如何管理 Azure AD Connect
 以下属于高级操作主题，介绍如何根据组织的需要和要求自定义 Azure Active Directory Connect。
@@ -54,7 +54,7 @@
 
 <center>![云](./media/active-directory-aadconnect-whats-next/startsynch.png)</center>
 
-有关“Azure AD Connect 同步：计划程序”的详细信息，请参阅 [Azure AD Connect 计划程序](/documentation/articles/active-directory-aadconnectsync-feature-scheduler/)
+有关“Azure AD Connect 同步：计划程序”的详细信息，请参阅 [Azure AD Connect 计划程序](./active-directory-aadconnectsync-feature-scheduler.md)
 
 ## Azure AD Connect 中提供的其他任务
 在完成 Azure AD Connect 的初始安装后，你随时可以从 Azure AD Connect 启动页或桌面快捷方式再次启动向导。在再次运行向导的过程中，你会发现，它会以“其他任务”的形式提供一些新选项。
@@ -70,6 +70,6 @@
 | 启用暂存模式 |可让你暂存稍后将要同步的信息，但不会将任何内容导出到 Azure AD 或 Active Directory。这样，你便可以在同步之前进行预览。 |
 
 ## 后续步骤
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_1128_2016-->

@@ -1,29 +1,28 @@
-<properties
-    pageTitle="Power BI Embedded 是什么？"
-    description="借助 Power BI Embedded，可将 Power BI 报表集成到 Web 或移动应用程序中，因此无需生成自定义解决方案。"
-    services="power-bi-embedded"
-    documentationcenter=""
-    author="guyinacube"
-    manager="erikre"
-    editor=""
-    tags="" />
-<tags
-    ms.assetid="03649b72-b7d7-40ca-b077-12356d72d4f3"
-    ms.service="power-bi-embedded"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="powerbi"
-    ms.date="01/06/2017"
-    wacn.date="02/22/2017"
-    ms.author="asaxton" />  
+---
+title: Power BI Embedded 是什么？
+description: 借助 Power BI Embedded，可将 Power BI 报表集成到 Web 或移动应用程序中，因此无需生成自定义解决方案。
+services: power-bi-embedded
+documentationcenter: ''
+author: guyinacube
+manager: erikre
+editor: ''
+tags: ''
 
+ms.assetid: 03649b72-b7d7-40ca-b077-12356d72d4f3
+ms.service: power-bi-embedded
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: powerbi
+ms.date: 01/06/2017
+wacn.date: 02/22/2017
+ms.author: asaxton
+---
 
 # Power BI Embedded 是什么？
 通过 **Power BI Embedded**，可以将 Power BI 报表集成到 web 或移动应用程序。
 
 ![](./media/powerbi-embedded-whats-is/what-is.png)  
-
 
 Power BI Embedded 是一项 **Azure 服务**，使 ISV 能够在其自己的应用程序中融入 Power BI 数据体验。开发人员已经构建了应用程序，并且这些应用程序具有其自己的用户和不同的功能集。这些应用也可能碰巧具有内置的数据元素（如图表和报表），这些元素现在可以由 Power BI Embedded 提供支持。不需要 Power BI 帐户便可使用这些应用。可继续像以前那样登录这些应用程序，查看并与 Power BI 报表体验进行交互，而无需任何额外的授权。
 
@@ -32,7 +31,6 @@ Power BI Embedded 是一项 **Azure 服务**，使 ISV 能够在其自己的应�
 
 ## Power BI Embedded 概念模型
 ![](./media/powerbi-embedded-whats-is/model.png)  
-
 
 与 Azure 中的任何其他服务一样，Power BI Embedded 的资源也是通过 [Azure资源管理器API](https://msdn.microsoft.com/zh-cn/library/mt712306.aspx) 进行预配的。在此示例中，预配的资源是一个 **Power BI 工作区集合**。
 
@@ -54,18 +52,17 @@ Power BI Embedded 是一项 **Azure 服务**，使 ISV 能够在其自己的应�
 
 ![](./media/powerbi-embedded-whats-is/app-tokens.png)  
 
-
 **应用程序身份验证令牌（应用令牌）**用于向 **Power BI Embedded** 表明身份。有三种类型的**应用令牌**：
 
 1. 预配令牌 - 在**工作区集合**中预配新的**工作区**时使用
 2. 开发令牌 - 直接调用 **Power BI REST API** 时使用
 3. 嵌入令牌 - 进行调用以在嵌入式 iframe 中呈现报表时使用
 
-这些令牌适用于与 **Power BI Embedded** 进行交互的各个阶段。这些令牌经过专门设计，以便可以将应用中的权限委托给 Power BI。有关详细信息，请参阅[应用令牌流](/documentation/articles/power-bi-embedded-app-token-flow/)。
+这些令牌适用于与 **Power BI Embedded** 进行交互的各个阶段。这些令牌经过专门设计，以便可以将应用中的权限委托给 Power BI。有关详细信息，请参阅[应用令牌流](./power-bi-embedded-app-token-flow.md)。
 
 ## 另请参阅
-- [常见 Power BI Embedded 方案](/documentation/articles/power-bi-embedded-scenarios/)
-- [Power BI Embedded 入门](/documentation/articles/power-bi-embedded-get-started/)
+- [常见 Power BI Embedded 方案](./power-bi-embedded-scenarios.md)
+- [Power BI Embedded 入门](./power-bi-embedded-get-started.md)
 
 <!---HONumber=Mooncake_0213_2017-->
 <!---Update_Description: wording update -->

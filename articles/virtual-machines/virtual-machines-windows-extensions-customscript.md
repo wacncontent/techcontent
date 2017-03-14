@@ -1,23 +1,23 @@
-<properties
-    pageTitle="适用于 Windows 的 Azure 自定义脚本扩展 | Azure"
-    description="使用自定义脚本扩展自动化 Windows VM 配置任务"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="neilpeterson"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="f4181fee-7a9d-4a1c-b517-52956f5b7fa1"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="01/17/2017"
-    wacn.date="02/24/2017"
-    ms.author="nepeters" />  
+---
+title: 适用于 Windows 的 Azure 自定义脚本扩展 | Azure
+description: 使用自定义脚本扩展自动化 Windows VM 配置任务
+services: virtual-machines-windows
+documentationcenter: ''
+author: neilpeterson
+manager: timlt
+editor: ''
+tags: azure-resource-manager
 
+ms.assetid: f4181fee-7a9d-4a1c-b517-52956f5b7fa1
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 01/17/2017
+wacn.date: 02/24/2017
+ms.author: nepeters
+---
 
 # 适用于 Windows 的自定义脚本扩展
 
@@ -43,35 +43,37 @@
 
 以下 JSON 显示自定义脚本扩展的架构。扩展需要脚本位置（Azure 存储或其他具有有效 URL 的位置）以及命令才能执行。如果使用 Azure 存储作为脚本源，则需 Azure 存储帐户名称和帐户密钥。这些项目应视为敏感数据，并在扩展的受保护设置配置中指定。Azure VM 扩展的受保护设置数据已加密，并且只能在目标虚拟机上解密。
 
-    {
-        "apiVersion": "2015-06-15",
-        "type": "extensions",
-        "name": "config-app",
-        "location": "[resourceGroup().location]",
-        "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),copyindex())]",
-            "[variables('musicstoresqlName')]"
-        ],
-        "tags": {
-            "displayName": "config-app"
+```
+{
+    "apiVersion": "2015-06-15",
+    "type": "extensions",
+    "name": "config-app",
+    "location": "[resourceGroup().location]",
+    "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),copyindex())]",
+        "[variables('musicstoresqlName')]"
+    ],
+    "tags": {
+        "displayName": "config-app"
+    },
+    "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.8",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+            "fileUris": [
+                "script location"
+            ]
         },
-        "properties": {
-            "publisher": "Microsoft.Compute",
-            "type": "CustomScriptExtension",
-            "typeHandlerVersion": "1.8",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-                "fileUris": [
-                    "script location"
-                ]
-            },
-            "protectedSettings": {
-                "commandToExecute": "myExecutionCommand",
-                "storageAccountName": "myStorageAccountName",
-                "storageAccountKey": "myStorageAccountKey"
-            }
+        "protectedSettings": {
+            "commandToExecute": "myExecutionCommand",
+            "storageAccountName": "myStorageAccountName",
+            "storageAccountKey": "myStorageAccountKey"
         }
     }
+}
+```
 
 ### 属性值
 
@@ -94,12 +96,14 @@
 
 可以使用 `Set-AzureRmVMCustomScriptExtension` 命令将自定义脚本扩展添加到现有的虚拟机。有关详细信息，请参阅 [Set-AzureRmVMCustomScriptExtension ](https://docs.microsoft.com/powershell/resourcemanager/azurerm.compute/v2.1.0/set-azurermvmcustomscriptextension)。
 
-    Set-AzureRmVMCustomScriptExtension -ResourceGroupName myResourceGroup `
-    -VMName myVM `
-    -Location myLocation `
-    -FileUri myURL `
-    -Run 'myScript.ps1' `
-    -Name DemoScriptExtension
+```
+Set-AzureRmVMCustomScriptExtension -ResourceGroupName myResourceGroup `
+-VMName myVM `
+-Location myLocation `
+-FileUri myURL `
+-Run 'myScript.ps1' `
+-Name DemoScriptExtension
+```
 
 ## 故障排除和支持
 
@@ -107,19 +111,25 @@
 
 有关扩展部署状态的数据可以通过 Azure 门户预览和 Azure PowerShell 模块进行检索。若要查看给定 VM 的扩展部署状态，请运行以下命令。
 
-    Get-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
+```
+Get-AzureRmVMExtension -ResourceGroupName myResourceGroup -VMName myVM -Name myExtensionName
+```
 
 扩展执行输出将记录到在目标虚拟机的以下目录中发现的文件。
 
-    C:\WindowsAzure\Logs\Plugins\Microsoft.Compute.CustomScriptExtension
+```
+C:\WindowsAzure\Logs\Plugins\Microsoft.Compute.CustomScriptExtension
+```
 
 脚本本身下载到目标虚拟机的以下目录中。
 
-    C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.*\Downloads
+```
+C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.*\Downloads
+```
 
 ### 支持
 
-如果对本文中的任何观点存在疑问，可以联系 [MSDN Azure 和 CSDN Azure](/support/forums/) 上的 Azure 专家。或者，也可以提交 Azure 支持事件。请转到 [Azure 支持站点](/support/contact/)并选择“获取支持”。有关使用 Azure 支持的信息，请阅读 [Azure 支持常见问题](/support/faq/)。
+如果对本文中的任何观点存在疑问，可以联系 [MSDN Azure 和 CSDN Azure](https://www.azure.cn/support/forums/) 上的 Azure 专家。或者，也可以提交 Azure 支持事件。请转到 [Azure 支持站点](https://www.azure.cn/support/contact/)并选择“获取支持”。有关使用 Azure 支持的信息，请阅读 [Azure 支持常见问题](https://www.azure.cn/support/faq/)。
 
 <!---HONumber=Mooncake_0220_2017-->
 <!--Update_Description: adding details to the sample-->

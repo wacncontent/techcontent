@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Service Fabric 群集资源管理器 - 相关性 | Azure"
-    description="概述如何为 Service Fabric 服务配置相关性"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="678073e1-d08d-46c4-a811-826e70aba6c4"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider" />  
+---
+title: Service Fabric 群集资源管理器 - 相关性 | Azure
+description: 概述如何为 Service Fabric 服务配置相关性
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: 678073e1-d08d-46c4-a811-826e70aba6c4
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider
+---
 
 # 在 Service Fabric 中配置和使用服务相关性
 相关性是一个控件，主要用于帮助简化将较大型的单体式应用程序转换到云和微服务领域。也就是说，在某些情况下，它也可以用作提升服务性能的合法优化，尽管这样做可能产生副作用。
@@ -36,13 +36,13 @@
 ## 如何配置相关性
 若要设置相关性，可以定义两个不同服务之间的相关性关系。可以将相关性想象成在一个服务上“指向”另一个服务，同时假设“这个服务只有在那个服务正在运行时才能运行”。 有时我们将这种相关性称为父子关系（将子级指向父级）。相关性确保将一个服务的副本或实例放置在与另一个服务的副本或实例相同的节点上。
 
-
-	ServiceCorrelationDescription affinityDescription = new ServiceCorrelationDescription();
-	affinityDescription.Scheme = ServiceCorrelationScheme.Affinity;
-	affinityDescription.ServiceName = new Uri("fabric:/otherApplication/parentService");
-	serviceDescription.Correlations.Add(affinityDescription);
-	await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
-
+```
+ServiceCorrelationDescription affinityDescription = new ServiceCorrelationDescription();
+affinityDescription.Scheme = ServiceCorrelationScheme.Affinity;
+affinityDescription.ServiceName = new Uri("fabric:/otherApplication/parentService");
+serviceDescription.Correlations.Add(affinityDescription);
+await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
+```
 
 ## 不同的相关性选项
 相关性通过多种相互关联的架构之一来表示，有两种不同的模式。相关性的最常见模式是所谓的 NonAlignedAffinity 模式。在 NonAlignedAffinity 下，不同服务的副本或实例均放置在同一个节点上。另一种模式是 AlignedAffinity。对齐的相关性仅适用于有状态服务。配置两个有状态服务实现对齐的相关性，可确保这些服务的主要副本与其他服务的主要副本位于相同的节点上。它还能确保这些服务的每个次要副本对位于相同的节点上。也可以针对有状态服务配置 NonAlignedAffinity（但不太常见）。使用 NonAlignedAffinity 时，会将两个有状态服务的不同副本并置在同一个节点上，但不会尝试对齐它们的主要副本或次要副本。
@@ -53,7 +53,7 @@
 相关性与单体式体系结构之间有一些差异。产生这些差异的原因有许多是因为相关性关系是以尽力而为的方式获取。具有相关性关系的服务是本质上不同的实体，可能失败或者被单独移动。还有一些原因会破坏相关性关系。例如，相关性关系中只有某些服务对象的容量限制能够适用于给定的节点。在这些情况下，即使存在相关性关系，也会因为其他限制而无法强制实施这种关系。如果可以这样做，稍后会自动纠正违规情况。
 
 ### 链形与星形
-目前，群集资源管理器无法为链形相关性关系建模。这意味着，如果有一个服务是某一个相关性关系中的子级，则该服务不能是另一个相关性关系中的父级。如果想要为这种关系建模，需要有效地将它建模为星形而不是链形。为了从链形转变为星形，最下面的子级会变成第一个子级的父级。根据服务的排列方式，可能需要多次执行此操作。如果没有自然的父级服务，可能需要创建一个作为预留位置。根据用户要求，可能还需要了解[应用程序组](/documentation/articles/service-fabric-cluster-resource-manager-application-groups/)。
+目前，群集资源管理器无法为链形相关性关系建模。这意味着，如果有一个服务是某一个相关性关系中的子级，则该服务不能是另一个相关性关系中的父级。如果想要为这种关系建模，需要有效地将它建模为星形而不是链形。为了从链形转变为星形，最下面的子级会变成第一个子级的父级。根据服务的排列方式，可能需要多次执行此操作。如果没有自然的父级服务，可能需要创建一个作为预留位置。根据用户要求，可能还需要了解[应用程序组](./service-fabric-cluster-resource-manager-application-groups.md)。
 
 <center> ![相关性关系上下文中的链形与星形][Image2] </center>
 
@@ -63,8 +63,8 @@
 对于相关性，要注意的最后一点是，不支持分区父级的相关性关系。我们最终可能会支持这一功能，但目前并不允许。
 
 ## 后续步骤
-- 有关可用于配置服务的其他选项的详细信息，请查看 [Learn about configuring Services](/documentation/articles/service-fabric-cluster-resource-manager-configure-services/)（了解如何配置服务）中提供的其他群集资源管理器配置的相关主题
-- 对于将服务限制于少量计算机，以及尝试聚合服务集合负载的用例，可使用[应用程序组](/documentation/articles/service-fabric-cluster-resource-manager-application-groups/)
+- 有关可用于配置服务的其他选项的详细信息，请查看 [Learn about configuring Services](./service-fabric-cluster-resource-manager-configure-services.md)（了解如何配置服务）中提供的其他群集资源管理器配置的相关主题
+- 对于将服务限制于少量计算机，以及尝试聚合服务集合负载的用例，可使用[应用程序组](./service-fabric-cluster-resource-manager-application-groups.md)
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-advanced-placement-rules-affinity/cluster-resrouce-manager-affinity-modes.png
 [Image2]: ./media/service-fabric-cluster-resource-manager-advanced-placement-rules-affinity/cluster-resource-manager-chains-vs-stars.png

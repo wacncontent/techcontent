@@ -1,24 +1,21 @@
-<properties
-    pageTitle="Azure 流量管理器性能注意事项 | Azure"
-    description="了解流量管理器的性能以及如何测试使用流量管理器时的网站性能"
-    services="traffic-manager"
-    documentationCenter=""
-    authors="sdwheeler"
-    manager="carmonm"
-    editor=""
-/>  
+---
+title: Azure 流量管理器性能注意事项 | Azure
+description: 了解流量管理器的性能以及如何测试使用流量管理器时的网站性能
+services: traffic-manager
+documentationCenter: ''
+authors: sdwheeler
+manager: carmonm
+editor: ''
 
-<tags
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/11/2016"
-    wacn.date="01/18/2017"
-    ms.author="sewhee"
-/>  
-
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/11/2016
+wacn.date: 01/18/2017
+ms.author: sewhee
+---
 
 # 流量管理器的性能注意事项
 
@@ -54,18 +51,15 @@ DNS 名称解析速度将会加快，结果将被缓存。初始 DNS 查找速�
 
     ![pulse1](./media/traffic-manager-performance-considerations/traffic-manager-web-site-pulse.png)  
 
-
     由于结果会缓存，针对同一个流量管理器终结点执行第二次测试时，DNS 查找仅花费了 0.002 秒。
 
     ![pulse2](./media/traffic-manager-performance-considerations/traffic-manager-web-site-pulse2.png)  
-
 
 - [CA App Synthetic Monitor](https://asm.ca.com/en/checkit.php)
 
     前称 Watchmouse Check Website Tool，此站点可以同时从多个地理区域显示 DNS 解析时间。输入 URL 即可查看 DNS 解析时间、连接时间以及各个地理位置的连接速度。使用此测试可以查看针对全国不同位置返回了哪些托管服务。
 
     ![pulse1](./media/traffic-manager-performance-considerations/traffic-manager-web-site-watchmouse.png)  
-
 
 - [Pingdom](http://tools.pingdom.com/)
 
@@ -81,9 +75,9 @@ DNS 名称解析速度将会加快，结果将被缓存。初始 DNS 查找速�
 
 ## 后续步骤
 
-[关于流量管理器流量路由方法](/documentation/articles/traffic-manager-routing-methods/)
+[关于流量管理器流量路由方法](./traffic-manager-routing-methods.md)
 
-[测试流量管理器设置](/documentation/articles/traffic-manager-testing-settings/)
+[测试流量管理器设置](./traffic-manager-testing-settings.md)
 
 [流量管理器上的操作（REST API 参考）](https://msdn.microsoft.com/zh-cn/library/hh758255.aspx)
 

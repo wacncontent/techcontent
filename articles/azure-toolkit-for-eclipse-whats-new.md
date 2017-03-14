@@ -1,27 +1,29 @@
-<properties
-    pageTitle="Azure Toolkit for Eclipse 的新增功能"
-    description="了解 Azure Toolkit for Eclipse 中的最新功能。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="16b066ea-aae7-4c30-9a12-fa0c3711b93e"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm;asirveda;martinsawicki" />
+---
+title: Azure Toolkit for Eclipse 的新增功能
+description: 了解 Azure Toolkit for Eclipse 中的最新功能。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
+
+ms.assetid: 16b066ea-aae7-4c30-9a12-fa0c3711b93e
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm;asirveda;martinsawicki
+---
 
 # Azure Toolkit for Eclipse 的新增功能
 ## Azure Toolkit for Eclipse 版本
 本文包含有关 Azure Toolkit for Eclipse 的不同版本和最新更新的信息。
 
-> [AZURE.NOTE] 另外还有 Azure Toolkit for IntelliJ IDE。有关详细信息，请参阅 [Azure Toolkit for IntelliJ]。
+> [!NOTE]
+> 另外还有 Azure Toolkit for IntelliJ IDE。有关详细信息，请参阅 [Azure Toolkit for IntelliJ]。
 
 ### 2016 年 8 月 26 日
 用于 Eclipse 的 Azure 工具包 - 2016 年 8 月版包含以下增强功能：
@@ -97,7 +99,8 @@ Azure Toolkit for Eclipse - 2015 年 3 月版包含以下增强功能：
 
 - **支持 Mac、Ubuntu 和其他 Linux 风格**。此版本的 Azure Toolkit for Eclipse 添加了对 Mac OS 和多种 Unix 平台的支持，因此，开发人员可以在运行非 Windows 操作系统的 Eclipse 中，安装该工具包来创建、配置 Java 项目并将其发布到 Azure 云服务 (PaaS)。
 
-	>[AZURE.NOTE] 此功能目前以预览版提供，不建议在生产环境中使用。对于此版本，我们不提供客户支持服务级别协议 (SLA)，但鼓励并感谢大家的反馈。
+    >[!NOTE]
+    > 此功能目前以预览版提供，不建议在生产环境中使用。对于此版本，我们不提供客户支持服务级别协议 (SLA)，但鼓励并感谢大家的反馈。
 
 - **新的 Application Insights 插件**。现在，开发人员可以在 Azure 上使用 Application Insights 配置自动服务器遥测。
 - **基于 Ant 的命令行部署自动化**。此功能使开发人员能够使用 Eclipse 外部的 Ant，自动发布其较新版本的部署。首次从 Eclipse 部署某个项目后，将为该项目自动配置一个预先生成的脚本，后续的部署只需使用该脚本通过命令行完全自动化部署。
@@ -302,34 +305,33 @@ Azure Plugin for Eclipse - 2011 年 12 月 CTP 已发布。新功能包括：新
 
 <!-- URL List -->
 
-
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij/
-[用于 IntelliJ 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-intellij/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[安装 Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij-installation/
-[What's New in the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
-[Azure Toolkit for IntelliJ 中的新增功能]: /documentation/articles/azure-toolkit-for-intellij-whats-new/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij.md
+[用于 IntelliJ 的 Azure 工具包]: ./azure-toolkit-for-intellij.md
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[安装 Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij-installation.md
+[What's New in the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-whats-new.md
+[Azure Toolkit for IntelliJ 中的新增功能]: ./azure-toolkit-for-intellij-whats-new.md
 
 [Azure Java 开发人员中心]: /develop/java/
 
 [Zulu OpenJDK 的 Azul Systems 网页]: http://go.microsoft.com/fwlink/?LinkId=402457
 [Azure 服务终结点]: http://go.microsoft.com/fwlink/?LinkID=699526
-[Azure 存储帐户列表]: /documentation/articles/azure-toolkit-for-eclipse-azure-storage-account-list/
-[组件属性]: /documentation/articles/azure-toolkit-for-eclipse-azure-role-properties/#components_properties/
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[在 Eclipse 中调试 Azure 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-debugging-azure-applications/
-[实施大型部署]: /documentation/articles/azure-toolkit-for-eclipse-deploying-large-deployments/
-[环境变量属性]: /documentation/articles/azure-toolkit-for-eclipse-azure-role-properties/#environment_variables_properties/
+[Azure 存储帐户列表]: ./azure-toolkit-for-eclipse-azure-storage-account-list.md
+[组件属性]: ./azure-toolkit-for-eclipse-azure-role-properties.md#components_properties/
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[在 Eclipse 中调试 Azure 应用程序]: ./azure-toolkit-for-eclipse-debugging-azure-applications.md
+[实施大型部署]: ./azure-toolkit-for-eclipse-deploying-large-deployments.md
+[环境变量属性]: ./azure-toolkit-for-eclipse-azure-role-properties.md#environment_variables_properties/
 [如何使用 SSL 卸载]: /develop/java/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[本地存储属性]: /documentation/articles/azure-toolkit-for-eclipse-azure-role-properties/#local_storage_properties/
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[本地存储属性]: ./azure-toolkit-for-eclipse-azure-role-properties.md#local_storage_properties/
 [Azure 客户端 API]: http://go.microsoft.com/fwlink/?LinkId=280397
-[服务器配置属性]: /documentation/articles/azure-toolkit-for-eclipse-azure-role-properties/#server_configuration_properties/
-[会话相关性]: /documentation/articles/azure-toolkit-for-eclipse-enable-session-affinity/
+[服务器配置属性]: ./azure-toolkit-for-eclipse-azure-role-properties.md#server_configuration_properties/
+[会话相关性]: ./azure-toolkit-for-eclipse-enable-session-affinity.md
 [SSL 卸载]: /develop/java/
-[新建存储帐户]: /documentation/articles/azure-toolkit-for-eclipse-azure-storage-account-list/#create_new/
-[Azure 的虚拟机和云服务大小]:/documentation/articles/cloud-services-sizes-specs/
+[新建存储帐户]: ./azure-toolkit-for-eclipse-azure-storage-account-list.md#create_new/
+[Azure 的虚拟机和云服务大小]:./cloud-services/cloud-services-sizes-specs.md
 
 <!-- IMG List -->
 

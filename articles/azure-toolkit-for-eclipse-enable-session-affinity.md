@@ -1,22 +1,21 @@
-<properties
-    pageTitle="使用 Azure Toolkit for Eclipse 启用会话相关性"
-    description="了解如何使用 Azure Toolkit for Eclipse 启用会话相关性。"
-    services=""
-    documentationCenter="java"
-    authors="rmcmurray"
-    manager="wpickett"
-    editor=""/>
+---
+title: 使用 Azure Toolkit for Eclipse 启用会话相关性
+description: 了解如何使用 Azure Toolkit for Eclipse 启用会话相关性。
+services: ''
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: ''
 
-<tags
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016" 
-    wacn.date="12/05/2016" 
-    ms.author="robmcm"/>
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 # 启用会话相关性 #
 在 Azure Toolkit for Eclipse 中，你可以为角色启用 HTTP 会话相关性或“粘性会话”。下图显示了用于启用会话相关性功能的“负载均衡”属性对话框：
@@ -57,14 +56,13 @@ Eclipse 工具包是通过在角色实例中安装名为应用程序请求路由
 <!-- URL List -->
 
 [Azure Java 开发人员中心]: /develop/java/
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
 [如何使用会话相关性来维护会话数据]: /develop/java/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 
 [ic719492]: ./media/azure-toolkit-for-eclipse-enable-session-affinity/ic719492.png
-
 
 <!---HONumber=Mooncake_1128_2016-->

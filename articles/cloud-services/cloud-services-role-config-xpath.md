@@ -1,20 +1,21 @@
-<properties 
-pageTitle="云服务角色配置 XPath 速查表 | Azure" 
-description="可在云服务角色配置中用来将设置公开为环境变量的各种 XPath 设置。" 
-services="cloud-services" 
-documentationCenter="" 
-authors="Thraka" 
-manager="timlt" 
-editor=""/>
-<tags 
-ms.service="cloud-services" 
-ms.workload="tbd" 
-ms.tgt_pltfrm="na" 
-ms.devlang="na" 
-ms.topic="article" 
-ms.date="11/16/2016" 
-wacn.date="12/26/2016" 
-ms.author="adegeo"/>
+---
+title: 云服务角色配置 XPath 速查表 | Azure
+description: 可在云服务角色配置中用来将设置公开为环境变量的各种 XPath 设置。
+services: cloud-services
+documentationCenter: ''
+authors: Thraka
+manager: timlt
+editor: ''
+
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 12/26/2016
+ms.author: adegeo
+---
 
 # 使用 XPath 将角色配置设置公开为环境变量
 
@@ -31,7 +32,6 @@ ms.author="adegeo"/>
 | XPath | xpath="/RoleEnvironment/Deployment/@emulated" |
 | 代码 | var x = RoleEnvironment.IsEmulated; |
 
-
 ## 部署 ID
 
 检索实例的部署 ID。
@@ -40,7 +40,6 @@ ms.author="adegeo"/>
 | ----- | ------- |
 | XPath | xpath="/RoleEnvironment/Deployment/@id" |
 | 代码 | var deploymentId = RoleEnvironment.DeploymentId; |
-
 
 ## 角色 ID 
 
@@ -51,7 +50,6 @@ ms.author="adegeo"/>
 | XPath | xpath="/RoleEnvironment/CurrentInstance/@id" |
 | 代码 | var id = RoleEnvironment.CurrentRoleInstance.Id; |
 
-
 ## 更新域
 
 检索实例的更新域。
@@ -60,7 +58,6 @@ ms.author="adegeo"/>
 | ----- | ------- |
 | XPath | xpath="/RoleEnvironment/CurrentInstance/@updateDomain" |
 | 代码 | var ud = RoleEnvironment.CurrentRoleInstance.UpdateDomain; |
-
 
 ## 容错域
 
@@ -71,7 +68,6 @@ ms.author="adegeo"/>
 | XPath | xpath="/RoleEnvironment/CurrentInstance/@faultDomain" |
 | 代码 | var fd = RoleEnvironment.CurrentRoleInstance.FaultDomain; |
 
-
 ## 角色名称
 
 检索实例的角色名称。
@@ -81,7 +77,6 @@ ms.author="adegeo"/>
 | XPath | xpath="/RoleEnvironment/CurrentInstance/@roleName" |
 | 代码 | var rname = RoleEnvironment.CurrentRoleInstance.Role.Name; |
 
-
 ## 配置设置
 
 检索指定配置设置的值。
@@ -90,7 +85,7 @@ ms.author="adegeo"/>
 | ----- | ------- |
 | XPath | xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Setting1']/@value" |
 | 代码 | var setting = RoleEnvironment.GetConfigurationSettingValue("Setting1"); |
- 
+
 ## 本地存储路径
 
 检索实例的本地存储路径。
@@ -99,7 +94,6 @@ ms.author="adegeo"/>
 | ----- | ------- |
 | XPath | xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='LocalStore1']/@path" |
 | 代码 | var localResourcePath = RoleEnvironment.GetLocalResource("LocalStore1").RootPath; |
-
 
 ## 本地存储大小
 
@@ -137,55 +131,53 @@ ms.author="adegeo"/>
 | XPath | xpath="/RoleEnvironment/CurrentInstance/Endpoints/Endpoint[@name='Endpoint1']/@port" |
 | 代码 | var port = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["Endpoint1"].IPEndpoint.Port; |
 
-
-
-
-
 ## 示例
 
 以下是使用名为 `TestIsEmulated`，设置为 [@emulated xpath value](#app-running-in-emulator) 的环境变量创建启动任务的辅助角色示例。
 
-        <WorkerRole name="Role1">
-            <ConfigurationSettings>
-              <Setting name="Setting1" />
-            </ConfigurationSettings>
-            <LocalResources>
-              <LocalStorage name="LocalStore1" sizeInMB="1024"/>
-            </LocalResources>
-            <Endpoints>
-              <InternalEndpoint name="Endpoint1" protocol="tcp" />
-            </Endpoints>
-            <Startup>
-              <Task commandLine="example.cmd inputParm">
-                <Environment>
-                  <Variable name="TestConstant" value="Constant"/>
-                  <Variable name="TestEmptyValue" value=""/>
-                  <Variable name="TestIsEmulated">
-                    <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated"/>
-                  </Variable>
-                  ...
-                </Environment>
-              </Task>
-            </Startup>
-            <Runtime>
-              <Environment>
-                <Variable name="TestConstant" value="Constant"/>
-                <Variable name="TestEmptyValue" value=""/>
-                <Variable name="TestIsEmulated">
-                  <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated"/>
-                </Variable>
-                ...
-              </Environment>
-            </Runtime>
+```
+    <WorkerRole name="Role1">
+        <ConfigurationSettings>
+          <Setting name="Setting1" />
+        </ConfigurationSettings>
+        <LocalResources>
+          <LocalStorage name="LocalStore1" sizeInMB="1024"/>
+        </LocalResources>
+        <Endpoints>
+          <InternalEndpoint name="Endpoint1" protocol="tcp" />
+        </Endpoints>
+        <Startup>
+          <Task commandLine="example.cmd inputParm">
+            <Environment>
+              <Variable name="TestConstant" value="Constant"/>
+              <Variable name="TestEmptyValue" value=""/>
+              <Variable name="TestIsEmulated">
+                <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated"/>
+              </Variable>
+              ...
+            </Environment>
+          </Task>
+        </Startup>
+        <Runtime>
+          <Environment>
+            <Variable name="TestConstant" value="Constant"/>
+            <Variable name="TestEmptyValue" value=""/>
+            <Variable name="TestIsEmulated">
+              <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated"/>
+            </Variable>
             ...
-        </WorkerRole>
+          </Environment>
+        </Runtime>
+        ...
+    </WorkerRole>
+```
 
 ## 后续步骤
 
-了解有关 [ServiceConfiguration.cscfg](/documentation/articles/cloud-services-model-and-package/#cscfg) 文件的详细信息。
+了解有关 [ServiceConfiguration.cscfg](./cloud-services-model-and-package.md#cscfg) 文件的详细信息。
 
-创建 [ServicePackage.cspkg](/documentation/articles/cloud-services-model-and-package/#cspkg) 包。
+创建 [ServicePackage.cspkg](./cloud-services-model-and-package.md#cspkg) 包。
 
-为角色启用[远程桌面](/documentation/articles/cloud-services-role-enable-remote-desktop/)。
+为角色启用[远程桌面](./cloud-services-role-enable-remote-desktop.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

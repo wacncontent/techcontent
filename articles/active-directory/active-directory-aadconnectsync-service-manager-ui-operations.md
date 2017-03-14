@@ -1,31 +1,31 @@
-<properties
-    pageTitle="Azure AD Connect 同步：Synchronization Service Manager UI | Azure"
-    description="了解用于 Azure AD Connect 的 Synchronization Service Manager 中的“操作”选项卡。"
-    services="active-directory"
-    documentationcenter=""
-    author="andkjell"
-    manager="femila"
-    editor="" />
-<tags
-    ms.assetid="97a26565-618f-4313-8711-5925eeb47cdc"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/09/2016"
-    wacn.date="02/13/2017"
-    ms.author="billmath" />
+---
+title: Azure AD Connect 同步：Synchronization Service Manager UI | Azure
+description: 了解用于 Azure AD Connect 的 Synchronization Service Manager 中的“操作”选项卡。
+services: active-directory
+documentationcenter: ''
+author: andkjell
+manager: femila
+editor: ''
+
+ms.assetid: 97a26565-618f-4313-8711-5925eeb47cdc
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/09/2016
+wacn.date: 02/13/2017
+ms.author: billmath
+---
 
 # Azure AD Connect 同步：Synchronization Service Manager
 
 ![Sync Service Manager](./media/active-directory-aadconnectsync-service-manager-ui/operations.png)  
 
-
 “操作”选项卡显示最新操作的结果。此选项卡是了解和排查问题的关键所在。
 
 ## 了解“操作”选项卡中显示的信息
-上半部分按时间顺序显示所有运行。默认情况下，操作日志保留最后七天的相关信息，但可以使用[计划程序](/documentation/articles/active-directory-aadconnectsync-feature-scheduler/)来更改此设置。想要查找所有未显示成功状态的运行。可以单击标题来更改排序。
+上半部分按时间顺序显示所有运行。默认情况下，操作日志保留最后七天的相关信息，但可以使用[计划程序](./active-directory-aadconnectsync-feature-scheduler.md)来更改此设置。想要查找所有未显示成功状态的运行。可以单击标题来更改排序。
 
 “状态”列是最重要的信息，并显示最严重的运行问题。下面是按调查优先级顺序显示的最常见状态的快速摘要（其中 * 表示多个可能的错误字符串）。
 
@@ -51,12 +51,12 @@
 ![Sync Service Manager](./media/active-directory-aadconnectsync-service-manager-ui/errorinnerexception.png) 
 后面的行显示错误。在上图中，错误来自所创建的自定义同步规则 Fabrikam。
 
-如果错误本身未提供足够的信息，则请查看数据本身。可以单击对象标识符的链接，然后[在整个系统中跟踪对象及其数据](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-connectors/#follow-an-object-and-its-data-through-the-system/)。
+如果错误本身未提供足够的信息，则请查看数据本身。可以单击对象标识符的链接，然后[在整个系统中跟踪对象及其数据](./active-directory-aadconnectsync-service-manager-ui-connectors.md#follow-an-object-and-its-data-through-the-system)。
 
 ## 后续步骤
-了解有关 [Azure AD Connect 同步](/documentation/articles/active-directory-aadconnectsync-whatis/)配置的详细信息。
+了解有关 [Azure AD Connect 同步](./active-directory-aadconnectsync-whatis.md)配置的详细信息。
 
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_0206_2017-->
 <!--Update_Description: wording update-->

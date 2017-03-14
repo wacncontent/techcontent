@@ -1,20 +1,21 @@
-<properties
-    pageTitle="在扩大云数据库之间移动数据 | Azure"
-    description="介绍如何使用弹性数据库 API 通过自托管服务来操作分片和移动数据。"
-    services="sql-database"
-    documentationcenter=""
-    manager="jhubbard"
-    author="ddove" />
-<tags
-    ms.assetid="204fd902-0397-4185-985a-dea3ed7c7d9f"
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="ddove" />
+---
+title: 在扩大云数据库之间移动数据 | Azure
+description: 介绍如何使用弹性数据库 API 通过自托管服务来操作分片和移动数据。
+services: sql-database
+documentationcenter: ''
+manager: jhubbard
+author: ddove
+
+ms.assetid: 204fd902-0397-4185-985a-dea3ed7c7d9f
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: ddove
+---
 
 # 在扩大云数据库之间移动数据
 
@@ -28,13 +29,13 @@ ms.author="ddove" />
 [Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge](http://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge)
 
 ## 文档
-1. [弹性数据库拆分/合并工具教程](/documentation/articles/sql-database-elastic-scale-configure-deploy-split-and-merge/)
-* [拆分合并安全配置](/documentation/articles/sql-database-elastic-scale-split-merge-security-configuration/)
-* [拆分/合并安全注意事项](/documentation/articles/sql-database-elastic-scale-split-merge-security-configuration/)
-* [分片映射管理](/documentation/articles/sql-database-elastic-scale-shard-map-management/)
-* [迁移要扩大的现有数据库](/documentation/articles/sql-database-elastic-convert-to-use-elastic-tools/)
-* [弹性数据库工具](/documentation/articles/sql-database-elastic-scale-introduction/)
-* [弹性数据库工具词汇表](/documentation/articles/sql-database-elastic-scale-glossary/)
+1. [弹性数据库拆分/合并工具教程](./sql-database-elastic-scale-configure-deploy-split-and-merge.md)
+* [拆分合并安全配置](./sql-database-elastic-scale-split-merge-security-configuration.md)
+* [拆分/合并安全注意事项](./sql-database-elastic-scale-split-merge-security-configuration.md)
+* [分片映射管理](./sql-database-elastic-scale-shard-map-management.md)
+* [迁移要扩大的现有数据库](./sql-database-elastic-convert-to-use-elastic-tools.md)
+* [弹性数据库工具](./sql-database-elastic-scale-introduction.md)
+* [弹性数据库工具词汇表](./sql-database-elastic-scale-glossary.md)
 
 ## 为什么使用拆分/合并工具？
 **灵活性**
@@ -56,7 +57,7 @@ ms.author="ddove" />
 ## 概念和主要功能
 **客户托管服务**
 
-拆分/合并将作为客户托管的服务交付。必须在 Azure 订阅中部署和托管该服务。你从 NuGet 下载的程序包将包含一个要使用你的特定部署信息完成的配置模板。有关详细信息，请参阅[拆分/合并教程](/documentation/articles/sql-database-elastic-scale-configure-deploy-split-and-merge/)。由于服务在你的 Azure 订阅中运行，因此你可以控制和配置该服务的大多数安全设置。默认模板包括配置 SSL 的选项、基于证书的客户端身份验证、存储凭据的加密、DoS 防护和 IP 限制。你可以在以下[拆分/合并安全配置](/documentation/articles/sql-database-elastic-scale-split-merge-security-configuration/)文档中找到有关安全方面的详细信息。
+拆分/合并将作为客户托管的服务交付。必须在 Azure 订阅中部署和托管该服务。你从 NuGet 下载的程序包将包含一个要使用你的特定部署信息完成的配置模板。有关详细信息，请参阅[拆分/合并教程](./sql-database-elastic-scale-configure-deploy-split-and-merge.md)。由于服务在你的 Azure 订阅中运行，因此你可以控制和配置该服务的大多数安全设置。默认模板包括配置 SSL 的选项、基于证书的客户端身份验证、存储凭据的加密、DoS 防护和 IP 限制。你可以在以下[拆分/合并安全配置](./sql-database-elastic-scale-split-merge-security-configuration.md)文档中找到有关安全方面的详细信息。
 
 默认部署的服务可与一个辅助角色和一个 Web 角色同时运行。在 Azure 云服务中，每个角色都使用 A1 VM 大小。虽然你无法在部署程序包时修改这些设置，但可以在运行的云服务中成功进行部署之后更改它们（通过 Azure 门户）。请注意，出于技术方面的原因，不得为多个实例配置辅助角色。
 
@@ -86,19 +87,21 @@ ms.author="ddove" />
 
 有关引用表和分片表对比的信息可由分片映射上的 **SchemaInfo** API 提供。以下示例说明了如何在给定分片映射管理器对象 smm 上使用这些 API：
 
-    // Create the schema annotations 
-    SchemaInfo schemaInfo = new SchemaInfo(); 
+```
+// Create the schema annotations 
+SchemaInfo schemaInfo = new SchemaInfo(); 
 
-    // Reference tables 
-    schemaInfo.Add(new ReferenceTableInfo("dbo", "region")); 
-    schemaInfo.Add(new ReferenceTableInfo("dbo", "nation")); 
+// Reference tables 
+schemaInfo.Add(new ReferenceTableInfo("dbo", "region")); 
+schemaInfo.Add(new ReferenceTableInfo("dbo", "nation")); 
 
-    // Sharded tables 
-    schemaInfo.Add(new ShardedTableInfo("dbo", "customer", "C_CUSTKEY")); 
-    schemaInfo.Add(new ShardedTableInfo("dbo", "orders", "O_CUSTKEY")); 
+// Sharded tables 
+schemaInfo.Add(new ShardedTableInfo("dbo", "customer", "C_CUSTKEY")); 
+schemaInfo.Add(new ShardedTableInfo("dbo", "orders", "O_CUSTKEY")); 
 
-    // Publish 
-    smm.GetSchemaInfoCollection().Add(Configuration.ShardMapName, schemaInfo); 
+// Publish 
+smm.GetSchemaInfoCollection().Add(Configuration.ShardMapName, schemaInfo); 
+```
 
 将表“region”和表“nation”定义为引用表，并使用拆分/合并/移动操作复制它们。而将“customer”和“orders”定义为分片表。C\_CUSTKEY 和 O\_CUSTKEY 将用作分片键。
 
@@ -109,7 +112,6 @@ ms.author="ddove" />
 **分片映射一致性和最终完成**
 
 出现故障时，拆分/合并服务将在发生任何中断后恢复操作，旨在完成任何正在进行的请求。但是，也可能存在未涉及到的情况，例如，目标分片丢失或泄露，无法修复。在这些情况下，一些本应移动的 shardlet 可能会继续驻留在源分片上。该服务可确保仅在已将必需的数据成功地复制到目标分片后才更新 shardlet 映射。仅当已将 shardlet 的所有数据都成功地复制到目标分片并已成功地更新对应的映射后，才在源分片上删除 shardlet。当目标分片上的范围已处于联机状态时，删除操作会在后台执行。拆分/合并服务始终确保存储在分片映射中的映射的正确性。
-
 
 ## 拆分/合并用户界面
 
@@ -133,7 +135,6 @@ ms.author="ddove" />
 
 -    操作 ID（取消）：如果你具有不再需要的进行中的操作，则可以通过在此字段中提供其操作 ID 来取消该操作。你可以从请求状态表（请参阅章节 8.1）或提交请求的 Web 浏览器的输出中检索该操作 ID。
 
-
 ## 要求和限制 
 
 拆分/合并服务的当前实现遵循以下要求和限制：
@@ -147,12 +148,11 @@ ms.author="ddove" />
 * 在请求处理过程中，一些 shardlet 数据可能会同时存在于源分片和目标分片上。为了防止在 shardlet 移动过程中出现故障，这是必需的。拆分/合并与分片映射功能的集成可以确保在分片映射上使用 **OpenConnectionForKey** 方法通过依赖于数据的路由 API 建立的连接不会显示任何不一致的中间状态。但是，在不使用 **OpenConnectionForKey** 方法连接到源分片或目标分片时，如果正在执行拆分/合并/移动请求，则不一致的中间状态可能可见。这些连接可能会显示部分或重复的结果，具体取决于时间设置或进行基础连接的分片。此限制当前包括由弹性缩放多分片查询建立的连接。
 
 * 不能在不同的角色之间共享用于拆分/合并服务的元数据数据库。例如，在过渡环境中运行的拆分/合并服务的角色需要指向其他元数据数据库而不是生产角色。
- 
 
 ## 计费 
 
 在 Azure 订阅中拆分/合并服务作为云服务运行。因此将对你的服务实例收取云服务费用。除非你频繁地执行拆分/合并/移动操作，否则建议删除你的拆分/合并云服务。这可以节省用于运行中的或已部署的云服务实例的成本。只要你需要执行拆分或合并操作，你就可以重新部署和启用已准备好的可运行配置。
- 
+
 ## 监视 
 ### 状态表 
 
@@ -170,36 +170,35 @@ ms.author="ddove" />
 
 * **Details**：用于提供更详细的进度报告的 XML 值。当将多组行从源复制到目标时，进度报告会定期更新。此列还包括有关故障的详细信息，以防故障或异常。
 
-
 ### Azure 诊断
 
-拆分/合并服务使用基于 Azure SDK 2.5 的 Azure Diagnostics 进行监视与诊断。可以根据此处所述控制诊断配置：[在 Azure 云服务和虚拟机中启用诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)。下载包包含两个诊断配置 – 一个用于 Web 角色，另一个用于辅助角色。该服务的这些诊断配置遵循 [Azure 中的云服务基本原则](https://code.msdn.microsoft.com/windowsazure/Cloud-Service-Fundamentals-4ca72649)中的指导。它包括用于记录性能计数器、IIS 日志、Windows 事件日志和拆分/合并应用程序事件日志的定义。
+拆分/合并服务使用基于 Azure SDK 2.5 的 Azure Diagnostics 进行监视与诊断。可以根据此处所述控制诊断配置：[在 Azure 云服务和虚拟机中启用诊断](../cloud-services/cloud-services-dotnet-diagnostics.md)。下载包包含两个诊断配置 – 一个用于 Web 角色，另一个用于辅助角色。该服务的这些诊断配置遵循 [Azure 中的云服务基本原则](https://code.msdn.microsoft.com/windowsazure/Cloud-Service-Fundamentals-4ca72649)中的指导。它包括用于记录性能计数器、IIS 日志、Windows 事件日志和拆分/合并应用程序事件日志的定义。
 
 ## 部署诊断 
 
 针对 NuGet 包所提供的 Web 和辅助角色，若要使用诊断配置启用监视和诊断，请使用 Azure PowerShell 运行以下命令：
 
-    $storage_name = "<YourAzureStorageAccount>" 
-    
-    $key = "<YourAzureStorageAccountKey" 
-    
-    $storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key  
-    
-    
-    $config_path = "<YourFilePath>\SplitMergeWebContent.diagnostics.xml" 
-    
-    $service_name = "<YourCloudServiceName>" 
-    
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWeb" 
-    
-    
-    $config_path = "<YourFilePath>\SplitMergeWorkerContent.diagnostics.xml" 
-    
-    $service_name = "<YourCloudServiceName>" 
-    
-    Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWorker" 
+```
+$storage_name = "<YourAzureStorageAccount>" 
 
-可以在此处找到有关如何配置和部署诊断设置的详细信息：[在 Azure 云服务和虚拟机中启用诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)。
+$key = "<YourAzureStorageAccountKey" 
+
+$storageContext = New-AzureStorageContext -StorageAccountName $storage_name -StorageAccountKey $key  
+
+$config_path = "<YourFilePath>\SplitMergeWebContent.diagnostics.xml" 
+
+$service_name = "<YourCloudServiceName>" 
+
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWeb" 
+
+$config_path = "<YourFilePath>\SplitMergeWorkerContent.diagnostics.xml" 
+
+$service_name = "<YourCloudServiceName>" 
+
+Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWorker" 
+```
+
+可以在此处找到有关如何配置和部署诊断设置的详细信息：[在 Azure 云服务和虚拟机中启用诊断](../cloud-services/cloud-services-dotnet-diagnostics.md)。
 
 ## 检索诊断 
 
@@ -211,7 +210,6 @@ ms.author="ddove" />
 
 ![配置][3]
 
-
 ## 性能
 
 通常，Azure SQL 数据库中更高、更可执行的服务层应具有更好的性能。为更高服务层分配更高的 IO、CPU 和内存有利于拆分/合并服务使用的批量复制和删除操作。因此，在定义的有限时间段内仅为这些数据库提高服务层。
@@ -222,7 +220,7 @@ ms.author="ddove" />
 
 ## 如何升级
 
-1. 请按照[部署拆分/合并服务](/documentation/articles/sql-database-elastic-scale-configure-deploy-split-and-merge/)中的步骤进行操作。
+1. 请按照[部署拆分/合并服务](./sql-database-elastic-scale-configure-deploy-split-and-merge.md)中的步骤进行操作。
 2. 更改拆分/合并部署的云服务配置文件，以反映新的配置参数。新的必需参数是用于加密的证书的相关信息。执行此操作的简单方法是将下载的新配置模板文件与现有配置进行比较。请确保添加 Web 和辅助角色的“DataEncryptionPrimaryCertificateThumbprint”与“DataEncryptionPrimary”设置。
 3. 将更新部署到 Azure 之前，请确保当前运行的所有拆分/合并操作都已完成。做法很简单，可以针对进行中的请求，查询拆分/合并元数据数据库中的 RequestStatus 和 PendingWorkflows 表。
 4. 使用新程序包和更新的服务配置文件，在 Azure 订阅中更新拆分/合并的现有云服务部署。
@@ -230,22 +228,19 @@ ms.author="ddove" />
 无需预配新的元数据数据库，即可升级拆分/合并。新版本会自动将现有的元数据数据库升级到新版本。
 
 ## 最佳实践和疑难解答
- 
+
 -    定义一个测试租户，并使用该测试租户在几个分片上对最重要的拆分/合并/移动操作进行实验。确保已在你的分片映射中正确定义所有元数据，并且这些操作不违反约束或外键。
 -    请使测试租户的数据大小始终大于最大租户的最大数据大小，以确保你不会遇到与数据大小有关的问题。这将会帮助你评估移动单个租户所需时间的上限。
 -    确保你的架构允许删除操作。拆分/合并服务要求在将数据成功地复制到目标分片后，能够从源分片中删除数据。例如，**删除触发器**可以阻止该服务删除源分片上的数据，并且可能导致操作失败。
 -    分片键在主键或唯一索引定义中应该是起始列。这可以确保拆分或合并验证查询以及实际的数据移动和删除操作（始终在分片键范围上执行）的最佳性能。
 -    将拆分/合并服务并置在数据库所在的区域和数据中心。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
-
-
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Anchors-->
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-overview-split-and-merge/split-merge-overview.png
 [2]: ./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics.png
 [3]: ./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics-config.png
- 
 
 <!---HONumber=Mooncake_1212_2016-->

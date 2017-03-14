@@ -1,29 +1,30 @@
-<properties
-    pageTitle="DocumentDB Node.js API 和 SDK | Azure"
-    description="了解有关 Node.js API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Node.js SDK 各版本之间所做的更改。"
-    services="documentdb"
-    documentationcenter="nodejs"
-    author="rnagpal"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="9d5621fa-0e11-4619-a28b-a19d872bcf37"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/27/2017"
-    ms.author="rnagpal" />
+---
+title: DocumentDB Node.js API 和 SDK | Azure
+description: 了解有关 Node.js API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Node.js SDK 各版本之间所做的更改。
+services: documentdb
+documentationcenter: nodejs
+author: rnagpal
+manager: jhubbard
+editor: cgronlun
+
+ms.assetid: 9d5621fa-0e11-4619-a28b-a19d872bcf37
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/27/2017
+ms.author: rnagpal
+---
 
 # DocumentDB API 和 SDK
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-sdk-dotnet/)
-- [.NET Core](/documentation/articles/documentdb-sdk-dotnet-core/)
-- [Node.js](/documentation/articles/documentdb-sdk-node/)
-- [Java](/documentation/articles/documentdb-sdk-java/)
-- [Python](/documentation/articles/documentdb-sdk-python/)
+> [!div class="op_single_selector"]
+- [.NET](./documentdb-sdk-dotnet.md)
+- [.NET Core](./documentdb-sdk-dotnet-core.md)
+- [Node.js](./documentdb-sdk-node.md)
+- [Java](./documentdb-sdk-java.md)
+- [Python](./documentdb-sdk-python.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/documentdb/)
 - [REST 资源提供程序](https://docs.microsoft.com/rest/api/documentdbresourceprovider/)
 - [SQL](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)
@@ -39,11 +40,11 @@
 
 <tr><td>**参与 SDK**</td><td><a href="https://github.com/Azure/azure-documentdb-node/tree/master/source">GitHub</a></td></tr>
 
-<tr><td>**示例**</td><td><a href="/documentation/articles/documentdb-nodejs-samples/">Node.js 代码示例</a></td></tr>
+<tr><td>**示例**</td><td><a href="./documentdb-nodejs-samples.md">Node.js 代码示例</a></td></tr>
 
-<tr><td>**入门教程**</td><td><a href="/documentation/articles/documentdb-nodejs-get-started/">Node.js SDK 入门</a></td></tr>
+<tr><td>**入门教程**</td><td><a href="./documentdb-nodejs-get-started.md">Node.js SDK 入门</a></td></tr>
 
-<tr><td>**Web 应用教程**</td><td><a href="/documentation/articles/documentdb-nodejs-application/">使用 DocumentDB 构建 Node.js Web 应用程序</a></td></tr>
+<tr><td>**Web 应用教程**</td><td><a href="./documentdb-nodejs-application.md">使用 DocumentDB 构建 Node.js Web 应用程序</a></td></tr>
 
 <tr><td>**当前受支持的平台**</td><td><a href="https://nodejs.org/en/blog/release/v0.10.0/">Node.js v0.10</a><br/><a href="https://nodejs.org/en/blog/release/v0.12.0/">Node.js v0.12</a><br/><a href="https://nodejs.org/en/blog/release/v4.2.0/">Node.js v4.2.0</a></td></tr>
 </table>
@@ -70,7 +71,7 @@
 - 添加了对文档生存时间 \(TTL\) 功能的支持。
 
 ### <a name="1.6.0"/>1.6.0</a>
-- 实现了[分区集合](/documentation/articles/documentdb-partition-data/)和[用户定义的性能级别](/documentation/articles/documentdb-performance-levels/)。
+- 实现了[分区集合](./documentdb-partition-data.md)和[用户定义的性能级别](./documentdb-performance-levels.md)。
 
 ### <a name="1.5.6"/>1.5.6</a>
 - 修复了 RangePartitionResolver.resolveForRead Bug，其会由于结果的错误 concat，它不返回链接。
@@ -138,7 +139,6 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 
 <br/>  
 
-
 | 版本 | 发布日期 | 停用日期 |
 | --- | --- | --- |
 | [1\.10.1](#1.10.1) |2016 年 12 月 22 日 |--- | 
@@ -166,10 +166,10 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 | [1\.0.0](#1.0.0) |2015 年 4 月 8 日 |--- |
 
 ## 常见问题
-[AZURE.INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
+[!INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
 
 ## 另请参阅
-若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](/home/features/documentdb/) 服务页。
+若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 服务页。
 
 <!---HONumber=Mooncake_0220_2017-->
 <!--Update_Description: wording update-->

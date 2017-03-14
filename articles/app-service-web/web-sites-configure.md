@@ -1,27 +1,27 @@
-<properties 
-	pageTitle="在 Azure 应用服务中配置 Web 应用" 
-	description="如何在 Azure 应用服务中配置 Web 应用" 
-	services="app-service\web" 
-	documentationCenter="" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 在 Azure 应用服务中配置 Web 应用
+description: 如何在 Azure 应用服务中配置 Web 应用
+services: app-service\web
+documentationCenter: ''
+authors: rmcmurray
+manager: wpickett
+editor: ''
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="12/22/2016" 
-	wacn.date="03/01/2017" 
-	ms.author="robmcm"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 03/01/2017
+ms.author: robmcm
+---
 
 # 在 Azure 应用服务中配置 Web 应用 #
 
 本主题介绍如何使用 [Azure 门户预览]配置 Web 应用。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## 应用程序设置
 
@@ -54,7 +54,7 @@
 
 **托管管道版本**。设置 IIS [管道模式]。将此设置保留为“集成(默认)”，除非旧版应用需要旧版 IIS。
 
-**自动交换**。如果启用部署槽的自动交换，则在向该槽推送更新时，应用服务会自动将 Web 应用交换到生产。有关详细信息，请参阅[为 Azure 应用服务中的 Web 应用部署到过渡槽](/documentation/articles/web-sites-staged-publishing/)。
+**自动交换**。如果启用部署槽的自动交换，则在向该槽推送更新时，应用服务会自动将 Web 应用交换到生产。有关详细信息，请参阅[为 Azure 应用服务中的 Web 应用部署到过渡槽](./web-sites-staged-publishing.md)。
 
 ### 调试
 
@@ -97,11 +97,9 @@ Web 应用可能会使用根据 URL 路由的模块，而不是提供静态内�
 - **脚本处理器路径**。脚本处理器的绝对路径。与文件扩展名匹配的文件请求将由脚本处理器处理。使用路径 `D:\home\site\wwwroot` 表示应用的根目录。
 - **其他参数**。脚本处理器的可选命令行参数
 
-
 ### 虚拟应用程序和目录 
- 
-若要配置虚拟应用程序和目录，请指定每个虚拟目录及其对应于网站根目录的物理路径。还可选中“应用程序”复选框，将虚拟目录标记为应用程序。
 
+若要配置虚拟应用程序和目录，请指定每个虚拟目录及其对应于网站根目录的物理路径。还可选中“应用程序”复选框，将虚拟目录标记为应用程序。
 
 ## 启用诊断日志
 
@@ -168,14 +166,14 @@ Web 应用可能会使用根据 URL 路由的模块，而不是提供静态内�
 
 [ASP.NET SignalR]: http://www.asp.net/signalr
 [Azure 门户预览]: https://portal.azure.cn/
-[在 Azure 应用服务中配置自定义域名]: /documentation/articles/web-sites-custom-domain-name/
-[为 Azure 应用服务中的 Web 应用部署到过渡环境]: /documentation/articles/web-sites-staged-publishing/
-[Enable HTTPS for an app in Azure App Service（为 Azure 应用服务中的应用启用 HTTPS）]: /documentation/articles/web-sites-configure-ssl-certificate/
+[在 Azure 应用服务中配置自定义域名]: ./web-sites-custom-domain-name.md
+[为 Azure 应用服务中的 Web 应用部署到过渡环境]: ./web-sites-staged-publishing.md
+[Enable HTTPS for an app in Azure App Service（为 Azure 应用服务中的应用启用 HTTPS）]: ./web-sites-configure-ssl-certificate.md
 [如何监视 Web 终结点状态]: http://go.microsoft.com/fwLink/?LinkID=279906
-[Azure 应用服务中 Web 应用的监视基础知识]: /documentation/articles/web-sites-monitor/
+[Azure 应用服务中 Web 应用的监视基础知识]: ./web-sites-monitor.md
 [管道模式]: http://www.iis.net/learn/get-started/introduction-to-iis/introduction-to-iis-architecture#Application
-[在 Azure 应用服务中缩放 Web 应用]: /documentation/articles/web-sites-scale/
-[socket.io]: /documentation/articles/web-sites-nodejs-chat-app-socketio/
+[在 Azure 应用服务中缩放 Web 应用]: ./web-sites-scale.md
+[socket.io]: ./web-sites-nodejs-chat-app-socketio.md
 [试用应用服务]: https://tryappservice.azure.com/
 
 <!-- IMG List -->

@@ -1,26 +1,25 @@
-<properties
-	pageTitle="如何使用适用于 Azure 移动应用的 Apache Cordova 插件"
-	description="如何使用适用于 Azure 移动应用的 Apache Cordova 插件"
-	services="app-service\mobile"
-	documentationCenter="javascript"
-	authors="adrianhall"
-	manager="erikre"
-	editor=""/>  
+---
+title: 如何使用适用于 Azure 移动应用的 Apache Cordova 插件
+description: 如何使用适用于 Azure 移动应用的 Apache Cordova 插件
+services: app-service\mobile
+documentationCenter: javascript
+authors: adrianhall
+manager: erikre
+editor: ''
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-html"
-	ms.devlang="javascript"
-	ms.topic="article"
-	ms.date="10/30/2016"
-	wacn.date="01/23/2017"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-html
+ms.devlang: javascript
+ms.topic: article
+ms.date: 10/30/2016
+wacn.date: 01/23/2017
+ms.author: adrianha
+---
 
 # 如何使用适用于 Azure 移动应用的 Apache Cordova 客户端库
 
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 本指南介绍如何使用最新的[适用于 Azure 移动应用的 Apache Cordova 插件]执行常见任务。对于 Azure 移动应用的新手，请先完成 [Azure Mobile Apps Quick Start]（Azure 移动应用快速入门），创建后端、创建表并下载预先生成的 Apache Cordova 项目。本指南侧重于客户端 Apache Cordova 插件。
 
@@ -37,11 +36,13 @@
 
 本指南假设已创建了包含表的后端。本指南假设该表的架构与这些教程中的表相同。本指南还假设已将 Apache Cordova 插件添加到代码。如果尚未这样做，可以在命令行中将 Apache Cordova 插件添加到项目：
 
-    cordova plugin add cordova-plugin-ms-azure-mobile-apps
+```
+cordova plugin add cordova-plugin-ms-azure-mobile-apps
+```
 
 有关创建[第一个 Apache Cordova 应用]的详细信息，请参阅相关文档。
 
-[AZURE.INCLUDE [app-service-mobile-html-js-library.md](../../includes/app-service-mobile-html-js-library.md)]
+[!INCLUDE [app-service-mobile-html-js-library.md](../../includes/app-service-mobile-html-js-library.md)]
 
 ## <a name="auth"></a>如何：对用户进行身份验证
 
@@ -54,7 +55,7 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 
 支持两种身份验证流：服务器流和客户端流。服务器流依赖于提供者的 Web 身份验证界面，因此可提供最简便的身份验证体验。客户端流依赖于提供者和设备特定的 SDK，因此允许与设备特定的功能（例如单一登录）进行更深入的集成。
 
-[AZURE.INCLUDE [app-service-mobile-html-js-auth-library.md](../../includes/app-service-mobile-html-js-auth-library.md)]
+[!INCLUDE [app-service-mobile-html-js-auth-library.md](../../includes/app-service-mobile-html-js-auth-library.md)]
 
 ### <a name="configure-external-redirect-urls"></a>如何为外部重定向 URL 配置移动应用服务。
 
@@ -75,10 +76,12 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 6. 单击“编辑”
 7. 查找“allowedExternalRedirectUrls”元素。它可能被设置为 null 或值数组。将该值更改为以下值：
 
-         "allowedExternalRedirectUrls": [
-             "http://localhost:3000",
-             "https://localhost:3000"
-         ],
+    ```
+     "allowedExternalRedirectUrls": [
+         "http://localhost:3000",
+         "https://localhost:3000"
+     ],
+    ```
 
     将 URL 替换为自己服务的 URL。示例包括“http://localhost:3000”（适用于 Node.js 示例服务）或“http://localhost:4400”（适用于 Ripple 服务）。但是，这些 URL 是示例，根据不同的情况（包括示例中提到的服务）可能会有差异。
 8. 单击屏幕右上角的“读/写”按钮。
@@ -100,42 +103,42 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 
 安装 [phonegap-plugin-push] 即可处理推送通知。在命令行中使用 `cordova plugin add` 命令，或者在 Visual Studio 内通过 Git 插件安装程序，即可轻松添加此插件。Apache Cordova 应用中的以下代码为设备注册推送通知：
 
+```
+    var pushOptions = {
+        android: {
+            senderId: '<from-gcm-console>'
+        },
+        ios: {
+            alert: true,
+            badge: true,
+            sound: true
+        },
+        windows: {
+        }
+    };
+    pushHandler = PushNotification.init(pushOptions);
 
-		var pushOptions = {
-		    android: {
-		        senderId: '<from-gcm-console>'
-		    },
-		    ios: {
-		        alert: true,
-		        badge: true,
-		        sound: true
-		    },
-		    windows: {
-		    }
-		};
-		pushHandler = PushNotification.init(pushOptions);
+    pushHandler.on('registration', function (data) {
+        registrationId = data.registrationId;
+        // For cross-platform, you can use the device plugin to determine the device
+        // Best is to use device.platform
+        var name = 'gcm'; // For android - default
+        if (device.platform.toLowerCase() === 'ios')
+            name = 'apns';
+        if (device.platform.toLowerCase().substring(0, 3) === 'win')
+            name = 'wns';
+        client.push.register(name, registrationId);
+    });
 
-		pushHandler.on('registration', function (data) {
-		    registrationId = data.registrationId;
-		    // For cross-platform, you can use the device plugin to determine the device
-		    // Best is to use device.platform
-		    var name = 'gcm'; // For android - default
-		    if (device.platform.toLowerCase() === 'ios')
-		        name = 'apns';
-		    if (device.platform.toLowerCase().substring(0, 3) === 'win')
-		        name = 'wns';
-		    client.push.register(name, registrationId);
-		});
+    pushHandler.on('notification', function (data) {
+        // data is an object and is whatever is sent by the PNS - check the format
+        // for your particular PNS
+    });
 
-		pushHandler.on('notification', function (data) {
-		    // data is an object and is whatever is sent by the PNS - check the format
-		    // for your particular PNS
-		});
-
-		pushHandler.on('error', function (error) {
-		    // Handle errors
-		});
-
+    pushHandler.on('error', function (error) {
+        // Handle errors
+    });
+```
 
 使用通知中心 SDK 从服务器发送推送通知。永远不要直接从客户端发送推送通知。此做法可能会被用于触发针对通知中心或 PNS 的拒绝服务攻击。PNS 可能会因此类攻击而禁止相关流量。
 
@@ -146,9 +149,9 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 <!-- URLs. -->
 
 [Azure 门户预览]: https://portal.azure.cn
-[Azure Mobile Apps Quick Start]: /documentation/articles/app-service-mobile-cordova-get-started/
-[Get started with authentication]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[Add authentication to your app]: /documentation/articles/app-service-mobile-cordova-get-started-users/
+[Azure Mobile Apps Quick Start]: ./app-service-mobile-cordova-get-started.md
+[Get started with authentication]: ./app-service-mobile-cordova-get-started-users.md
+[Add authentication to your app]: ./app-service-mobile-cordova-get-started-users.md
 
 [适用于 Azure 移动应用的 Apache Cordova 插件]: https://www.npmjs.com/package/cordova-plugin-ms-azure-mobile-apps
 [第一个 Apache Cordova 应用]: http://cordova.apache.org/#getstarted

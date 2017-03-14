@@ -1,22 +1,23 @@
-<properties 
-pageTitle="Azure 开发人员中心：Media Services" 
-description="Azure 开发人员中心：Media Services" 
-services="Media Services" 
-documentationCenter="Develop" 
-authors="" 
-manager="Tiffena" 
-editor="Eric Chen" />
-<tags ms.service="Media Services"
-    ms.date=""
-    wacn.date="06/29/2015"
-    />
+---
+title: Azure 开发人员中心：Media Services
+description: Azure 开发人员中心：Media Services
+services: Media Services
+documentationCenter: Develop
+authors: ''
+manager: Tiffena
+editor: Eric Chen
+
+ms.service: Media Services
+ms.date: ''
+wacn.date: 06/29/2015
+---
 
 #Media Services开发人员中心
 
 ##快速链接
 
--   [服务概述](/home/features/media-services/)
--   [定价详细信息](/pricing/details/media-services/)
+-   [服务概述](https://www.azure.cn/home/features/media-services/)
+-   [定价详细信息](https://www.azure.cn/pricing/details/media-services/)
 -   [了解 SDK](/develop/media-services/developer-tools)
 -   [在论坛上获取帮助](https://social.msdn.microsoft.com/Forums/azure/zh-CN/home?forum=windowsazurezhchs)
 
@@ -24,31 +25,31 @@ editor="Eric Chen" />
 
 ###上载
 
-- [设置您的计算机](/documentation/articles/media-services-set-up-computer/)
+- [设置您的计算机](../articles/media-services/media-services-set-up-computer.md)
 - [批量上载内容](http://msdn.microsoft.com/zh-cn/library/azure/jj853022.aspx)
 - [全部显示](/develop/media-services/resources)
 
 ###编码
 
-- [对资产进行编码](/documentation/articles/media-services-encode-asset/)
-- [检查作业进度](/documentation/articles/media-services-check-job-progress/)
-- [在经典管理门户中进行监视](/documentation/articles/media-services-monitor-services-account/)
-- [经典管理门户中的内容](/documentation/articles/media-services-manage-content/)
+- [对资产进行编码](../articles/media-services/media-services-encode-asset.md)
+- [检查作业进度](../articles/media-services/media-services-check-job-progress.md)
+- [在经典管理门户中进行监视](../articles/media-services/media-services-monitor-services-account.md)
+- [经典管理门户中的内容](../articles/media-services/media-services-manage-content.md)
 - [全部显示](/develop/media-services/resources)
 
 ###传送
 
-- [管理多个源](/documentation/articles/media-services-manage-origins/)
-- [通过下载传送资产](/documentation/articles/media-services-deliver-asset-download/)
-- [传送流式处理内容](/documentation/articles/media-services-deliver-streaming-content/)
+- [管理多个源](../articles/media-services/media-services-manage-origins.md)
+- [通过下载传送资产](../articles/media-services/media-services-deliver-asset-download.md)
+- [传送流式处理内容](../articles/media-services/media-services-deliver-streaming-content.md)
 - [动态包装内容](https://msdn.microsoft.com/zh-cn/library/azure/jj889436.aspx)
 - [全部显示](/develop/media-services/resources)
 
 ###使用
 
 - [开发媒体服务应用程序](http://msdn.microsoft.com/zh-cn/library/dn223283.aspx)
-- [开发 Windows 8 播放器](/documentation/articles/media-services-build-smooth-streaming-apps/)
-- [开发 Flash 播放器](/documentation/articles/media-services-use-osmf-smooth-streaming-client-plugin/)
+- [开发 Windows 8 播放器](../articles/media-services/media-services-build-smooth-streaming-apps.md)
+- [开发 Flash 播放器](../articles/media-services/media-services-use-osmf-smooth-streaming-client-plugin.md)
 - [全部显示](/develop/media-services/resources)
 
 ##更多资源

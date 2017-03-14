@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="在 Azure 门户预览中启用存储度量值 | Azure" 
-	description="如何为 Blob、队列、表和文件服务启用存储度量值" 
-	services="storage" 
-	documentationCenter="" 
-	authors="robinsh" 
-	manager="carmonm" 
-	editor="tysonn"/>
+---
+title: 在 Azure 门户预览中启用存储度量值 | Azure
+description: 如何为 Blob、队列、表和文件服务启用存储度量值
+services: storage
+documentationCenter: ''
+authors: robinsh
+manager: carmonm
+editor: tysonn
 
-<tags 
-	ms.service="storage" 
-	ms.workload="storage" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="08/03/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="fryu;robinsh"/>
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/03/2016
+wacn.date: 12/26/2016
+ms.author: fryu;robinsh
+---
 
 # 启用存储度量值并查看度量值数据
 
-[AZURE.INCLUDE [storage-selector-portal-enable-and-view-metrics](../../includes/storage-selector-portal-enable-and-view-metrics.md)]
+[!INCLUDE [storage-selector-portal-enable-and-view-metrics](../../includes/storage-selector-portal-enable-and-view-metrics.md)]
 
 ## 概述
 
@@ -38,7 +38,6 @@
 - 详细 - 除了收集服务级度量值，存储度量值还收集全套度量值，其中包括对每个存储 API 操作都相同的度量值。通过详细度量值可对应用程序运行期间出现的问题进行进一步分析。
 
 请注意，Azure 经典管理门户目前不允许你在存储帐户中配置分钟度量值；你必须通过 PowerShell 或以编程方式启用分钟度量值。
-
 
 ## 如何使用 PowerShell 启用存储度量值
 
@@ -60,55 +59,53 @@
 
 `Get-AzureStorageServiceMetricsProperty -MetricsType Hour -ServiceType Blob`
 
-有关如何配置 Azure PowerShell cmdlet 以使用 Azure 订阅以及如何选择要使用的默认存储帐户的信息，请参阅：[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
+有关如何配置 Azure PowerShell cmdlet 以使用 Azure 订阅以及如何选择要使用的默认存储帐户的信息，请参阅：[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
 ## 如何以编程方式启用存储度量值
 
 下面的 C# 代码段演示了如何使用 .NET 的存储客户端库为 Blob 服务启用度量值和日志记录：
 
-    //Parse the connection string for the storage account.
-    const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
-    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
+```
+//Parse the connection string for the storage account.
+const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
+CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
 
-    // Create service client for credentialed access to the Blob service.
-    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+// Create service client for credentialed access to the Blob service.
+CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-    // Enable Storage Analytics logging and set retention policy to 10 days. 
-    ServiceProperties properties = new ServiceProperties();
-    properties.Logging.LoggingOperations = LoggingOperations.All;
-    properties.Logging.RetentionDays = 10;
-    properties.Logging.Version = "1.0";
+// Enable Storage Analytics logging and set retention policy to 10 days. 
+ServiceProperties properties = new ServiceProperties();
+properties.Logging.LoggingOperations = LoggingOperations.All;
+properties.Logging.RetentionDays = 10;
+properties.Logging.Version = "1.0";
 
-    // Configure service properties for metrics. Both metrics and logging must be set at the same time.
-    properties.HourMetrics.MetricsLevel = MetricsLevel.ServiceAndApi;
-    properties.HourMetrics.RetentionDays = 10;
-    properties.HourMetrics.Version = "1.0";
+// Configure service properties for metrics. Both metrics and logging must be set at the same time.
+properties.HourMetrics.MetricsLevel = MetricsLevel.ServiceAndApi;
+properties.HourMetrics.RetentionDays = 10;
+properties.HourMetrics.Version = "1.0";
 
-    properties.MinuteMetrics.MetricsLevel = MetricsLevel.ServiceAndApi;
-    properties.MinuteMetrics.RetentionDays = 10;
-    properties.MinuteMetrics.Version = "1.0";
+properties.MinuteMetrics.MetricsLevel = MetricsLevel.ServiceAndApi;
+properties.MinuteMetrics.RetentionDays = 10;
+properties.MinuteMetrics.Version = "1.0";
 
-    // Set the default service version to be used for anonymous requests.
-    properties.DefaultServiceVersion = "2015-04-05";
+// Set the default service version to be used for anonymous requests.
+properties.DefaultServiceVersion = "2015-04-05";
 
-    // Set the service properties.
-    blobClient.SetServiceProperties(properties);
-    
+// Set the service properties.
+blobClient.SetServiceProperties(properties);
+```
+
 ## 查看存储度量值
 
 在配置为监视存储帐户后，存储度量值将使用存储帐户在一组已知表中记录度量值。你可以在 Azure 经典管理门户中使用存储帐户的“监视”页以查看图表上可用的小时度量值。在 Azure 经典管理门户中，你可以在此页上执行以下操作：
 
 - 选择要在图表上绘制的度量值（可用度量值的选择将取决于你在“配置”页上为服务选择“详细”还是“最小”监视）。
 
-
 - 为图表上显示的度量值选择时间范围。
-
 
 - 选择使用绝对刻度还是相对刻度来绘制度量值。
 
-
 - 配置电子邮件警报，以在特定度量值达到某值时通知你。
-
 
 如果你要为长期存储下载度量值或在本地分析这些度量值，则需要使用工具或编写一些代码来读取表。你必须下载分钟度量值以供分析。如果你在存储帐户中列出所有表，则这些表不会显示，但你可以按名称直接访问它们。很多第三方存储浏览工具都识别这些表，并允许你直接查看它们（有关可用工具的列表，请参阅博客文章 [Azure 存储资源管理器](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)）。
 
@@ -140,60 +137,56 @@
 
 - 请求类型是 all（在这种情况下是摘要行）或可识别的特定 API，如 QueryEntity 或 UpdateEntity。
 
-
 上面的示例数据显示一分钟的所有记录（从上午 11:00 开始），因此 QueryEntities 请求数加 QueryEntity 请求数再加 UpdateEntity 请求数的和为 7，这是显示在 user:All 行上的总数。同样，通过计算 ((143.8 * 5) + 3 + 9)/7，可以在 user:All 行得到平均端到端延迟为 104.4286。
 
 你应该考虑在 Azure 经典管理门户中的“监视”页上设置警报，以便存储度量值自动通知你存储服务行为中发生的任何重要更改。如果使用存储资源管理器工具下载这种采用分隔格式的度量值数据，则可以使用 Microsoft Excel 分析该数据。有关可用存储资源管理器工具的列表，请参阅博客文章 [Azure 存储资源管理器](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)。
-
-
 
 ## 以编程方式访问度量值数据
 
 以下列表显示示例 C# 代码，该代码用于访问分钟范围的分钟度量值，并在控制台窗口中显示结果。它使用 Azure 存储库版本 4，其中包括 CloudAnalyticsClient 类，用于简化访问存储中的度量值表的过程。
 
-    private static void PrintMinuteMetrics(CloudAnalyticsClient analyticsClient, DateTimeOffset startDateTime, DateTimeOffset endDateTime)
-    {
-    // Convert the dates to the format used in the PartitionKey
-    var start = startDateTime.ToUniversalTime().ToString("yyyyMMdd'T'HHmm");
-    var end = endDateTime.ToUniversalTime().ToString("yyyyMMdd'T'HHmm");
-    
-    var services = Enum.GetValues(typeof(StorageService));
-    foreach (StorageService service in services)
-    {
-    Console.WriteLine("Minute Metrics for Service {0} from {1} to {2} UTC", service, start, end);
-    var metricsQuery = analyticsClient.CreateMinuteMetricsQuery(service, StorageLocation.Primary);
-    var t = analyticsClient.GetMinuteMetricsTable(service);
-    var opContext = new OperationContext();
-    var query =
-    from entity in metricsQuery
-    // Note, you can't filter using the entity properties Time, AccessType, or TransactionType
-    // because they are calculated fields in the MetricsEntity class.
-    // The PartitionKey identifies the DataTime of the metrics.
-    where entity.PartitionKey.CompareTo(start) >= 0 && entity.PartitionKey.CompareTo(end) <= 0 
-    select entity;
-    
-    // Filter on "user" transactions after fetching the metrics from Table Storage.
-    // (StartsWith is not supported using LINQ with Azure table storage)
-    var results = query.ToList().Where(m => m.RowKey.StartsWith("user"));
-    var resultString = results.Aggregate(new StringBuilder(), (builder, metrics) => builder.AppendLine(MetricsString(metrics, opContext))).ToString();
-    Console.WriteLine(resultString);
-    }
-    }
-    
-    private static string MetricsString(MetricsEntity entity, OperationContext opContext)
-    {
-    var entityProperties = entity.WriteEntity(opContext);
-    var entityString =
-    string.Format("Time: {0}, ", entity.Time) +
-    string.Format("AccessType: {0}, ", entity.AccessType) +
-    string.Format("TransactionType: {0}, ", entity.TransactionType) +
-    string.Join(",", entityProperties.Select(e => new KeyValuePair<string, string>(e.Key.ToString(), e.Value.PropertyAsObject.ToString())));
-    return entityString;
-    
-    }
+```
+private static void PrintMinuteMetrics(CloudAnalyticsClient analyticsClient, DateTimeOffset startDateTime, DateTimeOffset endDateTime)
+{
+// Convert the dates to the format used in the PartitionKey
+var start = startDateTime.ToUniversalTime().ToString("yyyyMMdd'T'HHmm");
+var end = endDateTime.ToUniversalTime().ToString("yyyyMMdd'T'HHmm");
 
+var services = Enum.GetValues(typeof(StorageService));
+foreach (StorageService service in services)
+{
+Console.WriteLine("Minute Metrics for Service {0} from {1} to {2} UTC", service, start, end);
+var metricsQuery = analyticsClient.CreateMinuteMetricsQuery(service, StorageLocation.Primary);
+var t = analyticsClient.GetMinuteMetricsTable(service);
+var opContext = new OperationContext();
+var query =
+from entity in metricsQuery
+// Note, you can't filter using the entity properties Time, AccessType, or TransactionType
+// because they are calculated fields in the MetricsEntity class.
+// The PartitionKey identifies the DataTime of the metrics.
+where entity.PartitionKey.CompareTo(start) >= 0 && entity.PartitionKey.CompareTo(end) <= 0 
+select entity;
 
+// Filter on "user" transactions after fetching the metrics from Table Storage.
+// (StartsWith is not supported using LINQ with Azure table storage)
+var results = query.ToList().Where(m => m.RowKey.StartsWith("user"));
+var resultString = results.Aggregate(new StringBuilder(), (builder, metrics) => builder.AppendLine(MetricsString(metrics, opContext))).ToString();
+Console.WriteLine(resultString);
+}
+}
 
+private static string MetricsString(MetricsEntity entity, OperationContext opContext)
+{
+var entityProperties = entity.WriteEntity(opContext);
+var entityString =
+string.Format("Time: {0}, ", entity.Time) +
+string.Format("AccessType: {0}, ", entity.AccessType) +
+string.Format("TransactionType: {0}, ", entity.TransactionType) +
+string.Join(",", entityProperties.Select(e => new KeyValuePair<string, string>(e.Key.ToString(), e.Value.PropertyAsObject.ToString())));
+return entityString;
+
+}
+```
 
 ## 在启用存储度量值时，你需要支付多少费用？
 
@@ -211,6 +204,5 @@
 
 ## 后续步骤：
 [启用存储分析日志记录和访问日志数据](https://msdn.microsoft.com/zh-cn/library/dn782840.aspx)
- 
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

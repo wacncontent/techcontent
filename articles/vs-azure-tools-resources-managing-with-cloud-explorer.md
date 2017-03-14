@@ -1,22 +1,22 @@
-<properties 
-   pageTitle="使用云资源管理器管理 Azure 资源 | Azure"
-   description="了解如何使用云资源管理器来浏览和管理 Visual Studio 中的 Azure 资源。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 使用云资源管理器管理 Azure 资源 | Azure
+description: 了解如何使用云资源管理器来浏览和管理 Visual Studio 中的 Azure 资源。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="6347dc53-f497-49d5-b29b-e8b9f0e939d7"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 6347dc53-f497-49d5-b29b-e8b9f0e939d7
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 使用云资源管理器管理 Azure 资源
 
@@ -33,7 +33,7 @@
 - Visual Studio 2015 RTM。
 
 - Visual Studio Tools for Azure SDK。
-- 你还必须有一个 Azure 帐户并登录，才能在云资源管理器中查看 Azure 资源。如果你没有帐户，只需几分钟的时间就能创建一个帐户。请参阅[创建试用帐户](/pricing/1rmb-trial/)。
+- 你还必须有一个 Azure 帐户并登录，才能在云资源管理器中查看 Azure 资源。如果你没有帐户，只需几分钟的时间就能创建一个帐户。请参阅[创建试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 - 如果看不到云资源管理器，可以在菜单栏上依次选择“查看”、“其他窗口”、“云资源管理器”。
 
@@ -73,8 +73,7 @@
 
 - “资源组”视图按关联的 Azure 资源组将 Azure 资源分类。
 
- 
-	资源组是通常由特定应用程序使用的 Azure 资源组合。若要了解有关 Azure 资源组的详细信息，请参阅 [Azure Resource Manager Overview](/documentation/articles/resource-group-overview/)（Azure Resource Manager 概述）。
+    资源组是通常由特定应用程序使用的 Azure 资源组合。若要了解有关 Azure 资源组的详细信息，请参阅 [Azure Resource Manager Overview](./azure-resource-manager/resource-group-overview.md)（Azure Resource Manager 概述）。
 
 ## 查看和导航资源
 

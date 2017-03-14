@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure 存储客户端工具 | Azure"
-    description="可用于查看 Azure 存储数据或与之交互的工具列表。"
-    services="storage"
-    documentationcenter=""
-    author="micurd"
-    manager="jahogg"
-    editor="tysonn" />  
+---
+title: Azure 存储客户端工具 | Azure
+description: 可用于查看 Azure 存储数据或与之交互的工具列表。
+services: storage
+documentationcenter: ''
+author: micurd
+manager: jahogg
+editor: tysonn
 
-<tags
-    ms.assetid="e4748642-98c4-437e-b0ed-4f9641c2e894"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/17/2016"
-    wacn.date="12/26/2016"
-    ms.author="micurd" />
+ms.assetid: e4748642-98c4-437e-b0ed-4f9641c2e894
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/17/2016
+wacn.date: 12/26/2016
+ms.author: micurd
+---
 
 # Azure 存储客户端工具
 Azure 存储用户经常要使用 Azure 存储客户端工具查看其数据或者与数据交互。下表列出了可用于实现此目的的多种工具。我们在每个能够枚举和/或访问数据抽象的块中打上“X”。该表还指明了工具是否免费。“试用”表示存在免费试用版，但完整版产品不是免费的。“是/否”表示有一个免费版本，而提供的其他版本需要购买。

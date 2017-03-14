@@ -1,27 +1,27 @@
-<properties
-    pageTitle="下载适用于 Java 的 Azure SDK | Azure"
-    description="了解如何使用针对 Maven 项目提供的示例代码下载适用于 Java 的 Azure SDK。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="4b8f8fe6-1b26-4bb4-9be9-6ae757a59e66"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm;asirveda" />  
+---
+title: 下载适用于 Java 的 Azure SDK | Azure
+description: 了解如何使用针对 Maven 项目提供的示例代码下载适用于 Java 的 Azure SDK。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
 
+ms.assetid: 4b8f8fe6-1b26-4bb4-9be9-6ae757a59e66
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm;asirveda
+---
 
 # 下载 Azure SDK for Java
 本文包含有关下载和安装适用于 Java 的 Azure 管理库的说明。
 
-> [AZURE.NOTE]
+> [!NOTE]
 将根据 [Apache 许可证 2.0 版][license]分发适用于 Java 的 Azure 管理库。
 >
 
@@ -33,7 +33,7 @@
 - 在 Eclipse 或 IntelliJ 中将 JAR 文件导入 Java 项目。
 - 在 Eclipe 或 IntelliJ 中为项目配置生成路径，将该路径包含在 JAR 文件的路径中。
 
-> [AZURE.NOTE]
+> [!NOTE]
 有关许可证和其他信息，请参阅 ZIP 文件中的 license.txt 和 ThirdPartyNotices.txt 文件。
 >
 
@@ -44,56 +44,58 @@
 ### 步骤 2 - 使用必要的依赖项配置 Maven 设置
 将项目配置为使用 Maven 生成之后，可以使用类似于以下示例的语法，将必要的依赖项添加到 pom.xml 文件中。请注意，你无需添加以下示例中所列的每个依赖项，而只需添加项目所需的特定依赖项。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在以下示例中的每个 `<version>` 元素中，将此示例中的“n.n.n”占位符替换为有效版本号，可从 [Maven 上的 Azure 库存储库]获取此版本号。
 >
 >
 
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-compute</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-network</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-sql</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-storage</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-websites</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-svc-mgmt-media</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-servicebus</artifactId>
-        <version>n.n.n</version>
-    </dependency>
-    <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-serviceruntime</artifactId>
-        <version>n.n.n</version>
-    </dependency>
+```
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-compute</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-network</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-sql</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-storage</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-websites</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-svc-mgmt-media</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-servicebus</artifactId>
+    <version>n.n.n</version>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-serviceruntime</artifactId>
+    <version>n.n.n</version>
+</dependency>
+```
 
 ## 另请参阅
 有关 Azure Toolkits for Java IDE 的详细信息，请参阅以下链接：
@@ -107,19 +109,18 @@
 
 有关将 Azure 与 Java 配合使用的详细信息，请参阅 [Azure Java 开发人员中心]。
 
-> [AZURE.NOTE]
+> [!NOTE]
 有关在 Eclipse 中设置生成路径的详细信息，请参阅 Eclipse 网站上的 [Java 生成路径]一文。
 >
 
 <!-- URL List -->
 
-
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[安装 Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij-installation/
-[Azure Toolkit for Eclipse 的新增功能]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
-[Azure Toolkit for IntelliJ 中的新增功能]: /documentation/articles/azure-toolkit-for-intellij-whats-new/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij.md
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[安装 Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij-installation.md
+[Azure Toolkit for Eclipse 的新增功能]: ./azure-toolkit-for-eclipse-whats-new.md
+[Azure Toolkit for IntelliJ 中的新增功能]: ./azure-toolkit-for-intellij-whats-new.md
 
 [Azure Java 开发人员中心]: /develop/java/
 [Maven 上的 Azure 库存储库]: http://go.microsoft.com/fwlink/?LinkID=286274

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="密钥保管库 .NET 2.x API 发行说明 | Azure"
-    description=".NET 开发人员可使用此 API 来编写 Azure 密钥保管库的代码"
-    services="key-vault"
-    documentationcenter=""
-    author="BrucePerlerMS"
-    manager="mbaldwin"
-    editor="bruceper" />
-<tags
-    ms.assetid="1cccf21b-5be9-4a49-8145-483b695124ba"
-    ms.service="key-vault"
-    ms.devlang="CSharp"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="01/07/2017"
-    wacn.date="02/27/2017"
-    ms.author="bruceper" />  
+---
+title: 密钥保管库 .NET 2.x API 发行说明 | Azure
+description: .NET 开发人员可使用此 API 来编写 Azure 密钥保管库的代码
+services: key-vault
+documentationcenter: ''
+author: BrucePerlerMS
+manager: mbaldwin
+editor: bruceper
 
+ms.assetid: 1cccf21b-5be9-4a49-8145-483b695124ba
+ms.service: key-vault
+ms.devlang: CSharp
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 01/07/2017
+wacn.date: 02/27/2017
+ms.author: bruceper
+---
 
 # Azure 密钥保管库 .NET 2.0 - 发行说明和迁移指南
 以下说明和指导面向使用 Azure 密钥保管库 .NET/C\# 库的开发人员。在从版本 1.0 更改为版本 2.0 的过程中做出了大量的更新，开发人员需要在代码中完成一些迁移工作，才能享用功能改进和新增的功能，例如密钥保管库证书支持。
@@ -28,7 +28,7 @@
 - 允许证书所有者创建策略来指示密钥保管库如何管理证书的生命周期。
 - 允许证书所有者提供联系信息用于接收有关证书过期和续订生命周期事件的通知。
 - 支持在选定的颁发者（密钥保管库合作伙伴 X509 证书提供者/证书颁发机构）处自动续订证书。
-  
+
   - 注意 - 也允许在未建立合作关系的提供者/颁发机构那里获取证书，但这些机构不支持自动续订功能。
 
 ## .NET 支持

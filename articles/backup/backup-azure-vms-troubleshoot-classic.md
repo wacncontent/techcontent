@@ -1,27 +1,28 @@
-<properties
-    pageTitle="Azure 虚拟机备份疑难解答 | Azure"
-    description="Azure 虚拟机备份和还原疑难解答"
-    services="backup"
-    documentationcenter=""
-    author="trinadhk"
-    manager="shreeshd"
-    editor="" />
-<tags
-    ms.assetid="117201fb-c0cd-4be4-b47f-abd88fe914cf"
-    ms.service="backup"
-    ms.workload="storage-backup-recovery"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/28/2016"
-    wacn.date="01/24/2017"
-    ms.author="trinadhk;jimpark;" />
+---
+title: Azure 虚拟机备份疑难解答 | Azure
+description: Azure 虚拟机备份和还原疑难解答
+services: backup
+documentationcenter: ''
+author: trinadhk
+manager: shreeshd
+editor: ''
+
+ms.assetid: 117201fb-c0cd-4be4-b47f-abd88fe914cf
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/28/2016
+wacn.date: 01/24/2017
+ms.author: trinadhk;jimpark;
+---
 
 # Azure 虚拟机备份疑难解答
 
-> [AZURE.SELECTOR]
-- [恢复服务保管库](/documentation/articles/backup-azure-vms-troubleshoot/)
-- [备份保管库](/documentation/articles/backup-azure-vms-troubleshoot-classic/)
+> [!div class="op_single_selector"]
+- [恢复服务保管库](./backup-azure-vms-troubleshoot.md)
+- [备份保管库](./backup-azure-vms-troubleshoot-classic.md)
 
 可参考下表中所列的信息，排查使用 Azure 备份时遇到的错误。
 
@@ -35,7 +36,7 @@
 | 备份操作 | 错误详细信息 | 解决方法 |
 | -------- | -------- | -------|
 | 注册 |附加到虚拟机的数据磁盘数超过了支持的限制 - 请分离此虚拟机上的某些数据磁盘，然后重试操作。Azure 备份最多支持将 16 个数据磁盘附加到 Azure 虚拟机进行备份 |无 |
-| 注册 |Azure 备份遇到内部错误 - 等候几分钟，然后重试操作。如果问题持续出现，请联系 Microsoft 支持。 |出现此错误的原因是，Premium LRS 上有以下其中一项不受支持的 VM 配置。<br> 高级存储 VM 可以使用恢复服务保管库进行备份。[了解详细信息](/documentation/articles/backup-introduction-to-azure-backup/#using-premium-storage-vms-with-azure-backup/) |
+| 注册 |Azure 备份遇到内部错误 - 等候几分钟，然后重试操作。如果问题持续出现，请联系 Microsoft 支持。 |出现此错误的原因是，Premium LRS 上有以下其中一项不受支持的 VM 配置。<br> 高级存储 VM 可以使用恢复服务保管库进行备份。[了解详细信息](./backup-introduction-to-azure-backup.md#using-premium-storage-vms-with-azure-backup) |
 | 注册 |安装代理操作超时，注册失败 |检查是否支持虚拟机的操作系统版本。 |
 | 注册 |命令执行失败 - 此项上正在进行另一项操作。请等待前一项操作完成 |无 |
 | 注册 |不支持对虚拟硬盘存储在高级存储上的虚拟机进行备份 |无 |
@@ -44,7 +45,7 @@
 ## 备份
 | 备份操作 | 错误详细信息 | 解决方法 |
 | -------- | -------- | -------|
-| 备份 |无法与 VM 代理通信，因此无法获取快照状态。快照 VM 子任务超时。请参阅故障排除指南以了解如何解决此问题。 |如果 VM 代理出现问题，或以某种方式阻止了对 Azure 基础结构的网络访问，则会引发此错误。详细了解如何[调试 VM 快照问题](/documentation/articles/backup-azure-troubleshoot-vm-backup-fails-snapshot-timeout/)。<br> 如果 VM 代理未导致任何问题，则重新启动 VM。有时 VM 状态不正确可能会导致问题，而重新启动 VM 会重置此“错误状态” |
+| 备份 |无法与 VM 代理通信，因此无法获取快照状态。快照 VM 子任务超时。请参阅故障排除指南以了解如何解决此问题。 |如果 VM 代理出现问题，或以某种方式阻止了对 Azure 基础结构的网络访问，则会引发此错误。详细了解如何[调试 VM 快照问题](./backup-azure-troubleshoot-vm-backup-fails-snapshot-timeout.md)。<br> 如果 VM 代理未导致任何问题，则重新启动 VM。有时 VM 状态不正确可能会导致问题，而重新启动 VM 会重置此“错误状态” |
 | 备份 |发生内部错误，备份失败 - 请在几分钟后重试操作。如果问题仍然存在，请联系 Microsoft 支持 |请检查访问 VM 存储时是否存在暂时性问题。请检查 Azure 状态，以确定区域中是否存在与计算/存储/网络相关的任何问题。解决问题后，请重试备份。 |
 | 备份 |无法执行该操作，因为 VM 不复存在。 |无法执行备份，因为已删除针对备份配置的 VM。请转到“受保护的项”视图，选择受保护的项，单击“停止保护”，停止进一步备份操作。选择“保留备份数据”选项即可保留数据。之后可以单击“已注册项”视图中的“配置保护”，继续保护此虚拟机 |
 | 备份 |无法在选择的项上安装 Azure 恢复服务扩展 - VM 代理是 Azure 恢复服务扩展的必备组件。请安装 Azure VM 代理并重新启动注册操作 |<ol> <li>检查是否已正确安装 VM 代理。<li>确保已正确设置 VM 配置中的标志。</ol> [详细了解](#validating-vm-agent-installation)如何安装 VM 代理以及如何验证 VM 代理安装。 |
@@ -66,7 +67,7 @@
 ## 还原
 | 操作 | 错误详细信息 | 解决方法 |
 | -------- | -------- | -------|
-| 还原 |发生云内部错误，还原失败 |<ol><li>尝试还原的云服务配置了 DNS 设置。可检查 <br>$deployment = Get-AzureDeployment -ServiceName "ServiceName" -Slot "Production" Get-AzureDns -DnsSettings $deployment.DnsSettings<br>，如果配置了地址，则表示配置了 DNS 设置。<br> <li>尝试还原的云服务配置了 ReservedIP，且云服务中现有的 VM 处于停止状态。<br>可以使用以下 PowerShell cmdlet 检查云服务是否有保留的 IP：<br>$deployment = Get-AzureDeployment -ServiceName "servicename" -Slot "Production" $dep.ReservedIPName<br><li>正在尝试还原同一云服务中具有以下特殊网络配置的虚拟机。<br>- 采用负载均衡器配置的虚拟机（内部和外部）<br>- 具有多个保留 IP 的虚拟机<br>- 具有多个 NIC 的虚拟机<br>请在 UI 中选择新的云服务，或者参阅[还原注意事项](/documentation/articles/backup-azure-restore-vms/#restoring-vms-with-special-network-configurations/)，了解具有特殊网络配置的 VM</ol> |
+| 还原 |发生云内部错误，还原失败 |<ol><li>尝试还原的云服务配置了 DNS 设置。可检查 <br>$deployment = Get-AzureDeployment -ServiceName "ServiceName" -Slot "Production" Get-AzureDns -DnsSettings $deployment.DnsSettings<br>，如果配置了地址，则表示配置了 DNS 设置。<br> <li>尝试还原的云服务配置了 ReservedIP，且云服务中现有的 VM 处于停止状态。<br>可以使用以下 PowerShell cmdlet 检查云服务是否有保留的 IP：<br>$deployment = Get-AzureDeployment -ServiceName "servicename" -Slot "Production" $dep.ReservedIPName<br><li>正在尝试还原同一云服务中具有以下特殊网络配置的虚拟机。<br>- 采用负载均衡器配置的虚拟机（内部和外部）<br>- 具有多个保留 IP 的虚拟机<br>- 具有多个 NIC 的虚拟机<br>请在 UI 中选择新的云服务，或者参阅[还原注意事项](./backup-azure-restore-vms.md#restoring-vms-with-special-network-configurations)，了解具有特殊网络配置的 VM</ol> |
 | 还原 |所选 DNS 名称已被使用 - 请指定其他 DNS 名称，然后重试。 |此处的 DNS 名称是指云服务名称（通常以 .chinacloudapp.cn 结尾）。此名称必须是唯一名称。如果遇到此错误，则需在还原过程中选择其他 VM 名称。<br><br>此错误仅向 Azure 门户预览用户显示。通过 PowerShell 进行的还原操作会成功，因为它只还原磁盘，而不创建 VM。如果在磁盘还原操作之后显式创建 VM，则会遇到该错误。 |
 | 还原 |指定的虚拟网络配置不正确 - 请指定其他虚拟网络配置，然后重试。 |无 |
 | 还原 |指定的云服务使用的是保留 IP，这不符合要还原的虚拟机的配置 - 请指定其他不使用保留 IP 的云服务，或者选择其他用于还原的恢复点。 |无 |
@@ -81,7 +82,6 @@
 | 操作 | 错误详细信息 | 解决方法 |
 | -------- | -------- | -------|
 | 创建策略 |无法创建策略 - 请减少保留选项数，以便继续进行策略配置。 |无 |
-
 
 ## VM 代理 <a name="vm-agent"></a>
 
@@ -105,8 +105,7 @@
 
 对于 Linux VM：
 
-- 按照[更新 Linux VM 代理](/documentation/articles/virtual-machines-linux-update-agent?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json/)上的说明进行操作。
-
+- 按照[更新 Linux VM 代理](../virtual-machines/virtual-machines-linux-update-agent.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json/)上的说明进行操作。
 
 ### 验证 VM 代理安装 <a name="validating-vm-agent-installation"></a>
 如何检查 Windows VM 上的 VM 代理版本：

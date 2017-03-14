@@ -1,22 +1,22 @@
-<properties
-    pageTitle="应用程序方案和设计 | Azure"
-    description="Service Fabric 中云应用程序的类别概述。介绍使用有状态服务和无状态服务的应用程序设计。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="msfussell"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="3a8ca6ea-b8e9-4bc3-9e20-262437d2528e"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="2/17/2017"
-    wacn.date="03/03/2017"
-    ms.author="mfussell" />  
+---
+title: 应用程序方案和设计 | Azure
+description: Service Fabric 中云应用程序的类别概述。介绍使用有状态服务和无状态服务的应用程序设计。
+services: service-fabric
+documentationcenter: .net
+author: msfussell
+manager: timlt
+editor: ''
 
+ms.assetid: 3a8ca6ea-b8e9-4bc3-9e20-262437d2528e
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 2/17/2017
+wacn.date: 03/03/2017
+ms.author: mfussell
+---
 
 # Service Fabric 应用程序方案
 Azure Service Fabric 提供了一个可靠而灵活的平台，可用于编写和运行多种类型的商业应用程序和服务。这些应用程序和微服务可以无状态也可以有状态，它们在各虚拟机间资源平衡，可最大限度提高工作效率。通过 Service Fabric 的独特体系结构，可以在应用程序中执行准实时数据分析、内存中计算、并行事务和事件处理。可根据不断变化的资源需求轻松扩展或缩减（实为放大或缩小）应用程序。
@@ -39,27 +39,25 @@ Azure 中的 Service Fabric 平台非常适合以下类别的应用程序：
 
 生成包含微服务的应用程序时，通常有一个无状态 Web 应用（ASP.NET 和 Node.js 等）组合调用应用于无状态和有状态业务中间层服务，这些服务使用 Service Fabric 部署命令部署到同一 Service Fabric 群集中。在规模、可靠性和资源使用情况方面，其中每项服务都是独立的，因而大大提高了开发和生命周期管理的灵活性。
 
-有状态微服务将简化应用程序设计，因为它们不再需要传统上需要用来处理纯无状态应用程序的可用性和延迟需求的附加队列和缓存。由于有状态服务原本就具有高可用性和低延迟，这意味着在应用程序中要作为一个整体进行管理的移动部件更少。下图说明了设计有状态应用程序与无状态应用程序之间的差异。通过利用 [Reliable Services](/documentation/articles/service-fabric-reliable-services-introduction/) 和 [Reliable Actors](/documentation/articles/service-fabric-reliable-actors-introduction/) 编程模型，有状态服务降低了应用程序的复杂性，同时实现了高吞吐量和低延迟。
+有状态微服务将简化应用程序设计，因为它们不再需要传统上需要用来处理纯无状态应用程序的可用性和延迟需求的附加队列和缓存。由于有状态服务原本就具有高可用性和低延迟，这意味着在应用程序中要作为一个整体进行管理的移动部件更少。下图说明了设计有状态应用程序与无状态应用程序之间的差异。通过利用 [Reliable Services](./service-fabric-reliable-services-introduction.md) 和 [Reliable Actors](./service-fabric-reliable-actors-introduction.md) 编程模型，有状态服务降低了应用程序的复杂性，同时实现了高吞吐量和低延迟。
 
 ## 使用无状态服务生成的应用程序
 ![使用无状态服务的应用程序][Image1]  
 
-
 ## 使用有状态服务生成的应用程序
 ![使用无状态服务的应用程序][Image2]  
 
-
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 ## 后续步骤
-* 使用 Service Fabric [Reliable Services](/documentation/articles/service-fabric-reliable-services-quick-start/) 和 [Reliable Actors](/documentation/articles/service-fabric-reliable-actors-get-started/) 编程模型，开始生成无状态和有状态服务。
-* 详细了解[模式和方案](/documentation/articles/service-fabric-patterns-and-scenarios/)。
+* 使用 Service Fabric [Reliable Services](./service-fabric-reliable-services-quick-start.md) 和 [Reliable Actors](./service-fabric-reliable-actors-get-started.md) 编程模型，开始生成无状态和有状态服务。
+* 详细了解[模式和方案](./service-fabric-patterns-and-scenarios.md)。
 * 了解[客户案例研究](https://mva.microsoft.com/en-us/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=qDJnf86yC_5206218965)。
 * 此外，请参阅以下主题：
-    * [介绍微服务](/documentation/articles/service-fabric-overview-microservices/)
-    * [定义和管理服务状态](/documentation/articles/service-fabric-concepts-state/)
-    * [Service Fabric 服务的可用性](/documentation/articles/service-fabric-availability-services/)
-    * [缩放 Service Fabric 服务](/documentation/articles/service-fabric-concepts-scalability/)
-    * [Service Fabric 服务分区](/documentation/articles/service-fabric-concepts-partitioning/)
+    * [介绍微服务](./service-fabric-overview-microservices.md)
+    * [定义和管理服务状态](./service-fabric-concepts-state.md)
+    * [Service Fabric 服务的可用性](./service-fabric-availability-services.md)
+    * [缩放 Service Fabric 服务](./service-fabric-concepts-scalability.md)
+    * [Service Fabric 服务分区](./service-fabric-concepts-partitioning.md)
 
 [Image1]: ./media/service-fabric-application-scenarios/AppwithStatelessServices.jpg
 [Image2]: ./media/service-fabric-application-scenarios/AppwithStatefulServices.jpg

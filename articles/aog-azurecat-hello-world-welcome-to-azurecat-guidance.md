@@ -1,19 +1,21 @@
-<properties
-    pageTitle="Hello world! 欢迎来到 AzureCAT 指南"
-    description="Hello world! 欢迎来到 AzureCAT 指南"
-    service=""
-    resource=""
-    authors=""
-    displayOrder=""
-    selfHelpType=""
-    supportTopicIds=""
-    productPesIds=""
-    resourceTags="AzureCAT, Ed Price, patterns & practices, SAP CAT, SQLCAT"
-    cloudEnvironments="MoonCake" />
-<tags
-    ms.service="na-aog"
-    ms.date=""
-    wacn.date="02/24/2017" />
+---
+title: Hello world! 欢迎来到 AzureCAT 指南
+description: Hello world! 欢迎来到 AzureCAT 指南
+service: ''
+resource: ''
+authors: ''
+displayOrder: ''
+selfHelpType: ''
+supportTopicIds: ''
+productPesIds: ''
+resourceTags: AzureCAT, Ed Price, patterns & practices, SAP CAT, SQLCAT
+cloudEnvironments: MoonCake
+
+ms.service: na-aog
+ms.date: ''
+wacn.date: 02/24/2017
+---
+
 # Hello world! 欢迎来到 AzureCAT 指南
 
 [![Azure CAT & SQL CAT](./media/aog-azurecat-hello-world-welcome-to-azurecat-guidance/azurecat-sqlcat.png)](http://aka.ms/CAT)
@@ -93,7 +95,7 @@ AzureCAT 还包括我们的子团队、模式和实践。相关内容详见此�
 7. [内容交付网络（CDN）](https://docs.microsoft.com/zh-cn/azure/best-practices-cdn)
 8. [数据分区](https://docs.microsoft.com/zh-cn/azure/best-practices-data-partitioning)
 9. [监视和诊断指南（1/25 新增）](https://docs.microsoft.com/zh-cn/azure/best-practices-monitoring)
-10.	[建议的命名约定](https://docs.microsoft.com/zh-cn/azure/guidance/guidance-naming-conventions)
+10. [建议的命名约定](https://docs.microsoft.com/zh-cn/azure/guidance/guidance-naming-conventions)
 11. [有关重试的一般性指南](https://docs.microsoft.com/zh-cn/azure/best-practices-retry-general)
 12. [重试服务指南](https://docs.microsoft.com/zh-cn/azure/best-practices-retry-service-specific)
 

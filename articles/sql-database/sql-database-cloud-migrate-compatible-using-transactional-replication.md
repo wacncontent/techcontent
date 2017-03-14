@@ -1,30 +1,31 @@
-<properties
-    pageTitle="使用事务复制迁移到 SQL 数据库 | Azure"
-    description="Azure SQL 数据库，数据库迁移，导入数据库，事务复制"
-    services="sql-database"
-    documentationcenter=""
-    author="jognanay"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="eebdd725-833d-4151-9b2b-a0303f39e30f"
-    ms.service="sql-database"
-    ms.custom="migrate and move"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="sqldb-migrate"
-    ms.date="12/09/2016"
-    wacn.date="01/20/2017"
-    ms.author="carlrab; jognanay;" />
+---
+title: 使用事务复制迁移到 SQL 数据库 | Azure
+description: Azure SQL 数据库，数据库迁移，导入数据库，事务复制
+services: sql-database
+documentationcenter: ''
+author: jognanay
+manager: jhubbard
+editor: ''
+
+ms.assetid: eebdd725-833d-4151-9b2b-a0303f39e30f
+ms.service: sql-database
+ms.custom: migrate and move
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: sqldb-migrate
+ms.date: 12/09/2016
+wacn.date: 01/20/2017
+ms.author: carlrab; jognanay;
+---
 
 # 使用事务复制将 SQL Server 数据库迁移到 Azure SQL 数据库
 
-> [AZURE.SELECTOR]
-- [SSMS 迁移向导](/documentation/articles/sql-database-cloud-migrate-compatible-using-ssms-migration-wizard/)
-- [导出到 BACPAC 文件](/documentation/articles/sql-database-cloud-migrate-compatible-export-bacpac-ssms/)
-- [从 BACPAC 文件导入](/documentation/articles/sql-database-cloud-migrate-compatible-import-bacpac-ssms/)
-- [事务复制](/documentation/articles/sql-database-cloud-migrate-compatible-using-transactional-replication/)
+> [!div class="op_single_selector"]
+- [SSMS 迁移向导](./sql-database-cloud-migrate-compatible-using-ssms-migration-wizard.md)
+- [导出到 BACPAC 文件](./sql-database-cloud-migrate-compatible-export-bacpac-ssms.md)
+- [从 BACPAC 文件导入](./sql-database-cloud-migrate-compatible-import-bacpac-ssms.md)
+- [事务复制](./sql-database-cloud-migrate-compatible-using-transactional-replication.md)
 
 在本文中，你将了解如何使用 SQL Server 事务复制以最短的停机时间将兼容的 SQL Server 数据库迁移到 Azure SQL 数据库。
 
@@ -37,7 +38,6 @@
 
  ![SeedCloudTR 示意图](./media/sql-database-cloud-migrate/SeedCloudTR.png)  
 
-
 ## 事务复制的工作原理
 
 事务复制涉及到 3 个主要组件，分别是发布服务器、分发服务器和订阅服务器。复制过程由这些组件共同执行。分发服务器负责控制在服务器之间移动数据的过程。设置分发时，SQL 将创建分发数据库。每个发布服务器需要绑定到分发数据库。分发数据库包含每个关联发布内容的元数据，以及有关每个复制操作的进度的数据。在事务复制中，分发数据库包含所有事务，但要在订阅服务器中执行的事务除外。
@@ -48,7 +48,7 @@
 
 ## 事务复制要求
 [转到更新的要求列表的链接。](https://msdn.microsoft.com/zh-cn/library/mt589530.aspx)
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 使用最新版本的 SQL Server Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。较旧版本的 SQL Server Management Studio 不能将 SQL 数据库设置为订阅服务器。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 > 
 
@@ -82,7 +82,7 @@
 
 ## 其他资源
 * 若要了解有关事务复制的详细信息，请参阅[事务复制](https://msdn.microsoft.com/zh-cn/library/mt589530.aspx)。
-* 若要了解整个迁移过程和选项，请参阅[将 SQL Server 数据库迁移到云中的 SQL 数据库](/documentation/articles/sql-database-cloud-migrate/)。
+* 若要了解整个迁移过程和选项，请参阅[将 SQL Server 数据库迁移到云中的 SQL 数据库](./sql-database-cloud-migrate.md)。
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--update: add three sections("事务复制工作原理","使用事务复制工作流迁移到 SQL 数据库","有关迁移到 SQL 数据库的一些提示和差异";remove two links) ; -->

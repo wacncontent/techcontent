@@ -1,19 +1,20 @@
-<properties
-    pageTitle="ARM 中可用性集使用的注意事项"
-    description="ARM 中可用性集使用的注意事项"
-    service=""
-    resource="virtual-machines"
-    authors=""
-    displayOrder=""
-    selfHelpType=""
-    supportTopicIds=""
-    productPesIds=""
-    resourceTags="Virtual Machines, ARM, ASM, HA"
-    cloudEnvironments="MoonCake" />
-<tags
-    ms.service="virtual-machines-aog"
-    ms.date=""
-    wacn.date="02/21/2017" />
+---
+title: ARM 中可用性集使用的注意事项
+description: ARM 中可用性集使用的注意事项
+service: ''
+resource: virtual-machines
+authors: ''
+displayOrder: ''
+selfHelpType: ''
+supportTopicIds: ''
+productPesIds: ''
+resourceTags: Virtual Machines, ARM, ASM, HA
+cloudEnvironments: MoonCake
+
+ms.service: virtual-machines-aog
+ms.date: ''
+wacn.date: 02/21/2017
+---
 
 # ARM 中可用性集使用的注意事项
 
@@ -75,5 +76,5 @@ Azure 目前有两种部署模型：经典部署模型 (ASM) 和资源管理器 
 
     2. 如果该可用性集中同时有多个诊断存储账号被误删，则方法 1 因一个虚拟机设置等待另一个虚拟机设置先修正而造成死锁。在这种情况下，需要找到所有被误删的诊断存储账号，重建之。
 
-        [AZURE.NOTE] 前端显示存储账号重建成功后，后台各资源提供程序间的同步需要一段时间，可能发生因同步延迟造成的存储账号还是找不到的问题。请在重建好所有存储账号，大约一至一个半小时后，再次尝试管理操作。<p>同时，建议客户在使用可用性集时，提前进行规划，比如使用有意义的虚拟机和存储账号命名，将诊断设置放在同一个单独的存储账号中等，避免存储账号被误删的情况发生。
-
+        >[!NOTE]
+        > 前端显示存储账号重建成功后，后台各资源提供程序间的同步需要一段时间，可能发生因同步延迟造成的存储账号还是找不到的问题。请在重建好所有存储账号，大约一至一个半小时后，再次尝试管理操作。<p>同时，建议客户在使用可用性集时，提前进行规划，比如使用有意义的虚拟机和存储账号命名，将诊断设置放在同一个单独的存储账号中等，避免存储账号被误删的情况发生。

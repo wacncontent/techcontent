@@ -1,22 +1,23 @@
-<properties
-    pageTitle="Azure SQL 数据库资源限制 | Azure"
-    description="本页介绍 Azure SQL 数据库的一些常见资源限制。"
-    services="sql-database"
-    documentationcenter="na"
-    author="CarlRabeler"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="884e519f-23bb-4b73-a718-00658629646a"
-    ms.service="sql-database"
-    ms.custom="overview"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="data-management"
-    ms.date="01/11/2017"
-    wacn.date="01/25/2017"
-    ms.author="carlrab; janeng" />
+---
+title: Azure SQL 数据库资源限制 | Azure
+description: 本页介绍 Azure SQL 数据库的一些常见资源限制。
+services: sql-database
+documentationcenter: na
+author: CarlRabeler
+manager: jhubbard
+editor: ''
+
+ms.assetid: 884e519f-23bb-4b73-a718-00658629646a
+ms.service: sql-database
+ms.custom: overview
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 01/11/2017
+wacn.date: 01/25/2017
+ms.author: carlrab; janeng
+---
 
 # Azure SQL 数据库资源限制
 ## 概述
@@ -35,7 +36,7 @@ Azure SQL 数据库使用两种不同的机制管理可用于数据库的资源�
 3. 优化查询，以减少每个查询的资源利用率。有关详细信息，请参阅“Azure SQL 数据库性能指南”一文中的“查询优化/提示”部分。
 
 ## 强制实施限制
-CPU、内存、日志 I/O 和数据 I/O 以外的资源在达到限制时，将通过拒绝新请求来强制实施。客户端将根据已达到的限制收到[错误消息](/documentation/articles/sql-database-develop-error-messages/)。
+CPU、内存、日志 I/O 和数据 I/O 以外的资源在达到限制时，将通过拒绝新请求来强制实施。客户端将根据已达到的限制收到[错误消息](./sql-database-develop-error-messages.md)。
 
 例如，会限制与 SQL 数据库的连接数以及可处理的并发请求数。SQL 数据库允许与数据库的连接数大于并发请求数以支持连接池。虽然应用程序可以轻松地控制可用的连接数，但并行请求数通常难于估计和控制。特别是在负载峰值期间，应用程序发送过多请求或数据库达到其资源限制，并且由于长时间运行查询，开始堆积工作线程，可能会遇到错误。
 
@@ -45,14 +46,14 @@ CPU、内存、日志 I/O 和数据 I/O 以外的资源在达到限制时，将�
 ### 单一数据库
 对于单一数据库，数据库服务层和性能级别定义了数据库限制。下表描述了基本、标准和高级数据库在不同性能级别上的特征。
 
-[AZURE.INCLUDE [SQL 数据库服务层表](../../includes/sql-database-service-tiers-table.md)]
+[!INCLUDE [SQL 数据库服务层表](../../includes/sql-database-service-tiers-table.md)]
 
 ### 弹性池
-[弹性池](/documentation/articles/sql-database-elastic-pool/)共享池中的数据库中的资源。下表描述了基本、标准和高级弹性池的特征。
+[弹性池](./sql-database-elastic-pool.md)共享池中的数据库中的资源。下表描述了基本、标准和高级弹性池的特征。
 
-[AZURE.INCLUDE [用于弹性数据库的 SQL DB 服务层表](../../includes/sql-database-service-tiers-table-elastic-pools.md)]
+[!INCLUDE [用于弹性数据库的 SQL DB 服务层表](../../includes/sql-database-service-tiers-table-elastic-pools.md)]
 
-有关上述表中列出的每个资源的扩展定义，请参阅[服务层功能和限制](/documentation/articles/sql-database-performance-guidance/#service-tier-capabilities-and-limits)中的描述。有关服务层的概述，请参阅 [Azure SQL 数据库服务层和性能级别](/documentation/articles/sql-database-service-tiers/)。
+有关上述表中列出的每个资源的扩展定义，请参阅[服务层功能和限制](./sql-database-performance-guidance.md#service-tier-capabilities-and-limits)中的描述。有关服务层的概述，请参阅 [Azure SQL 数据库服务层和性能级别](./sql-database-service-tiers.md)。
 
 ## 其他 SQL 数据库限制
 | 区域 | 限制 | 说明 |
@@ -61,16 +62,16 @@ CPU、内存、日志 I/O 和数据 I/O 以外的资源在达到限制时，将�
 | 每个服务器的数据库 |最多 5000 个 |V12 服务器上每个服务器最多允许使用 5000 个数据库。 |
 | 每个服务器的 DTU |45000 |V12 服务器上每个服务器有 45000 个 DTU 可用于预配数据库、弹性池和数据仓库。 |
 
-> [AZURE.IMPORTANT]
-Azure SQL 数据库自动导出现在处于预览状态且将于 2017 年 3 月 1 日停用。从 2016 年 12 月 1 日起，你将不再能够在任何 SQL 数据库上配置自动导出。所有现有的自动导出作业将继续工作，直到 2017 年 3 月 1 日。在 2016 年 12 月 1 日后，可以根据所选的计划定期通过 PowerShell 使用 [Azure 自动化](/documentation/articles/automation-intro/)存档 SQL 数据库。如需示例脚本，可以[从 Github 下载示例脚本](https://github.com/Microsoft/sql-server-samples/tree/master/samples/manage/azure-automation-automated-export)。
+> [!IMPORTANT]
+Azure SQL 数据库自动导出现在处于预览状态且将于 2017 年 3 月 1 日停用。从 2016 年 12 月 1 日起，你将不再能够在任何 SQL 数据库上配置自动导出。所有现有的自动导出作业将继续工作，直到 2017 年 3 月 1 日。在 2016 年 12 月 1 日后，可以根据所选的计划定期通过 PowerShell 使用 [Azure 自动化](../automation/automation-intro.md)存档 SQL 数据库。如需示例脚本，可以[从 Github 下载示例脚本](https://github.com/Microsoft/sql-server-samples/tree/master/samples/manage/azure-automation-automated-export)。
 >
 
 ## 资源
-[Azure 订阅和服务限制、配额和约束](/documentation/articles/azure-subscription-service-limits/)
+[Azure 订阅和服务限制、配额和约束](../azure-subscription-service-limits.md)
 
-[Azure SQL 数据库服务层和性能级别](/documentation/articles/sql-database-service-tiers/)
+[Azure SQL 数据库服务层和性能级别](./sql-database-service-tiers.md)
 
-[SQL 数据库客户端程序的错误消息](/documentation/articles/sql-database-develop-error-messages/)
+[SQL 数据库客户端程序的错误消息](./sql-database-develop-error-messages.md)
 
 <!---HONumber=Mooncake_0120_2017-->
 <!--update: update one include reference-->

@@ -1,28 +1,29 @@
 <!-- Remove PowerBI, ML -->
-<properties
-   pageTitle="查询 Azure SQL 数据仓库 (Visual Studio) | Azure"
-   description="使用 Visual Studio 查询 SQL 数据仓库。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="sonyam"
-   manager="barbkess"
-   editor=""/>
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="sonyama;barbkess"/>
+---
+title: 查询 Azure SQL 数据仓库 (Visual Studio) | Azure
+description: 使用 Visual Studio 查询 SQL 数据仓库。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: sonyam
+manager: barbkess
+editor: ''
+
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: get-started-article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: sonyama;barbkess
+---
 
 # 查询 Azure SQL 数据仓库 (Visual Studio)
 
-> [AZURE.SELECTOR]
-- [Visual Studio](/documentation/articles/sql-data-warehouse-query-visual-studio/)
-- [sqlcmd](/documentation/articles/sql-data-warehouse-get-started-connect-sqlcmd/)
+> [!div class="op_single_selector"]
+- [Visual Studio](./sql-data-warehouse-query-visual-studio.md)
+- [sqlcmd](./sql-data-warehouse-get-started-connect-sqlcmd.md)
 
 <!-- - [Power BI](sql-data-warehouse-get-started-visualize-with-power-bi)
 - [Azure 机器学习](sql-data-warehouse-get-started-analyze-with-azure-machine-learning)
@@ -73,9 +74,9 @@
 
 3. 将以下 TSQL 查询复制到查询窗口中：
 
-
-        SELECT COUNT(*) FROM dbo.FactInternetSales;
-
+    ```
+    SELECT COUNT(*) FROM dbo.FactInternetSales;
+    ```
 
 4. 运行该查询。为此，请单击绿色箭头，或使用以下快捷键：`CTRL`+`SHIFT`+`E`。
 
@@ -92,10 +93,10 @@
 若要为 Azure Active Directory 身份验证配置环境，请参阅 [SQL 数据仓库身份验证][]。
 
 <!--Arcticles-->
-[连接到 SQL 数据仓库]: /documentation/articles/sql-data-warehouse-connect-overview/
-[创建 SQL 数据仓库]: /documentation/articles/sql-data-warehouse-get-started-provision-powershell/
-[安装 Visual Studio 和 SSDT]: /documentation/articles/sql-data-warehouse-install-visual-studio/
-[SQL 数据仓库身份验证]: /documentation/articles/sql-data-warehouse-authentication/
+[连接到 SQL 数据仓库]: ./sql-data-warehouse-connect-overview.md
+[创建 SQL 数据仓库]: ./sql-data-warehouse-get-started-provision-powershell.md
+[安装 Visual Studio 和 SSDT]: ./sql-data-warehouse-install-visual-studio.md
+[SQL 数据仓库身份验证]: ./sql-data-warehouse-authentication.md
 
 <!--Other-->
 [Azure portal]: https://manage.windowsazure.cn

@@ -1,27 +1,27 @@
-<properties
-	pageTitle="在 Azure 应用服务中生成和部署 Java API 应用"
-	description="了解如何创建 Java API 应用包并将其部署到 Azure 应用服务。"
-	services="app-service\api"
-	documentationCenter="java"
-	authors="bradygaster"
-	manager="mohisri"
-	editor="tdykstra"/>
+---
+title: 在 Azure 应用服务中生成和部署 Java API 应用
+description: 了解如何创建 Java API 应用包并将其部署到 Azure 应用服务。
+services: app-service\api
+documentationCenter: java
+authors: bradygaster
+manager: mohisri
+editor: tdykstra
 
-<tags
-	ms.service="app-service-api"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="java"
-	ms.topic="get-started-article"
-	ms.date="12/22/2016"
-	wacn.date="03/01/2017"
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: java
+ms.topic: get-started-article
+ms.date: 12/22/2016
+wacn.date: 03/01/2017
+ms.author: rachelap
+---
 
 # 在 Azure 应用服务中生成和部署 Java API 应用
 
-[AZURE.INCLUDE [app-service-api-get-started-selector](../../includes/app-service-api-get-started-selector.md)]
+[!INCLUDE [app-service-api-get-started-selector](../../includes/app-service-api-get-started-selector.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程介绍如何创建 Java 应用程序，并使用 [Git] 将其部署到 Azure 应用服务 API 应用。本教程中的说明适用于任何能够运行 Java 的操作系统。本教程中的代码是使用 [Maven] 生成的。将使用 [Jax-RS] 创建 RESTful 服务，这些 Jax-RS 是根据 [Swagger] 元数据规范使用[Swagger 编辑器]生成的。
 
@@ -41,98 +41,100 @@
 
 1. 将以下 Swagger JSON 代码复制到剪贴板：
 
-        {
-            "swagger": "2.0",
-            "info": {
-                "version": "v1",
-                "title": "Contact List",
-                "description": "A Contact list API based on Swagger and built using Java"
-            },
-            "host": "localhost",
-            "schemes": [
-                "http",
-                "https"
-            ],
-            "basePath": "/api",
-            "paths": {
-                "/contacts": {
-                    "get": {
-                        "tags": [
-                            "Contact"
-                        ],
-                        "operationId": "contacts_get",
-                        "consumes": [],
-                        "produces": [
-                            "application/json",
-                            "text/json"
-                        ],
-                        "responses": {
-                            "200": {
-                                "description": "OK",
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Contact"
-                                    }
+    ```
+    {
+        "swagger": "2.0",
+        "info": {
+            "version": "v1",
+            "title": "Contact List",
+            "description": "A Contact list API based on Swagger and built using Java"
+        },
+        "host": "localhost",
+        "schemes": [
+            "http",
+            "https"
+        ],
+        "basePath": "/api",
+        "paths": {
+            "/contacts": {
+                "get": {
+                    "tags": [
+                        "Contact"
+                    ],
+                    "operationId": "contacts_get",
+                    "consumes": [],
+                    "produces": [
+                        "application/json",
+                        "text/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/Contact"
                                 }
                             }
-                        },
-                        "deprecated": false
-                    }
-                },
-                "/contacts/{id}": {
-                    "get": {
-                        "tags": [
-                            "Contact"
-                        ],
-                        "operationId": "contacts_getById",
-                        "consumes": [],
-                        "produces": [
-                            "application/json",
-                            "text/json"
-                        ],
-                        "parameters": [
-                            {
-                                "name": "id",
-                                "in": "path",
-                                "required": true,
-                                "type": "integer",
-                                "format": "int32"
-                            }
-                        ],
-                        "responses": {
-                            "200": {
-                                "description": "OK",
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Contact"
-                                    }
-                                }
-                            }
-                        },
-                        "deprecated": false
-                    }
+                        }
+                    },
+                    "deprecated": false
                 }
             },
-            "definitions": {
-                "Contact": {
-                    "type": "object",
-                    "properties": {
-                        "Id": {
-                            "format": "int32",
-                            "type": "integer"
-                        },
-                        "Name": {
-                            "type": "string"
-                        },
-                        "EmailAddress": {
-                            "type": "string"
+            "/contacts/{id}": {
+                "get": {
+                    "tags": [
+                        "Contact"
+                    ],
+                    "operationId": "contacts_getById",
+                    "consumes": [],
+                    "produces": [
+                        "application/json",
+                        "text/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "required": true,
+                            "type": "integer",
+                            "format": "int32"
                         }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/Contact"
+                                }
+                            }
+                        }
+                    },
+                    "deprecated": false
+                }
+            }
+        },
+        "definitions": {
+            "Contact": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "Name": {
+                        "type": "string"
+                    },
+                    "EmailAddress": {
+                        "type": "string"
                     }
                 }
             }
         }
+    }
+    ```
 
 1. 导航到[在线 Swagger 编辑器]。在该位置，单击“文件”->“粘贴 JSON”菜单项。
 
@@ -162,12 +164,14 @@
 
 1. 将以下构造函数添加到 **Contact** 类。
 
-        public Contact(Integer id, String name, String email) 
-        {
-            this.id = id;
-            this.name = name;
-            this.emailAddress = email;
-        }
+    ```
+    public Contact(Integer id, String name, String email) 
+    {
+        this.id = id;
+        this.name = name;
+        this.emailAddress = email;
+    }
+    ```
 
 1. 使用 [Visual Studio Code] 或偏好的文本编辑器，打开位于 *src/main/java/io/swagger/api/impl* 文件夹中的 *ContactsApiServiceImpl.java* 服务实现文件。
 
@@ -175,61 +179,65 @@
 
 1. 使用新代码覆盖文件中的代码，将模拟实现添加到服务代码。
 
-        package io.swagger.api.impl;
+    ```
+    package io.swagger.api.impl;
 
-        import io.swagger.api.*;
-        import io.swagger.model.*;
-        import com.sun.jersey.multipart.FormDataParam;
-        import io.swagger.model.Contact;
-        import java.util.*;
-        import io.swagger.api.NotFoundException;
-        import java.io.InputStream;
-        import com.sun.jersey.core.header.FormDataContentDisposition;
-        import com.sun.jersey.multipart.FormDataParam;
-        import javax.ws.rs.core.Response;
-        import javax.ws.rs.core.SecurityContext;
+    import io.swagger.api.*;
+    import io.swagger.model.*;
+    import com.sun.jersey.multipart.FormDataParam;
+    import io.swagger.model.Contact;
+    import java.util.*;
+    import io.swagger.api.NotFoundException;
+    import java.io.InputStream;
+    import com.sun.jersey.core.header.FormDataContentDisposition;
+    import com.sun.jersey.multipart.FormDataParam;
+    import javax.ws.rs.core.Response;
+    import javax.ws.rs.core.SecurityContext;
 
-        @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JaxRSServerCodegen", date = "2015-11-24T21:54:11.648Z")
-        public class ContactsApiServiceImpl extends ContactsApiService {
-  
-            private ArrayList<Contact> loadContacts()
-            {
-                ArrayList<Contact> list = new ArrayList<Contact>();
-                list.add(new Contact(1, "Barney Poland", "barney@contoso.com"));
-                list.add(new Contact(2, "Lacy Barrera", "lacy@contoso.com"));
-                list.add(new Contact(3, "Lora Riggs", "lora@contoso.com"));
-                return list;
-            }
-  
-            @Override
-            public Response contactsGet(SecurityContext securityContext)
-            throws NotFoundException {
-                ArrayList<Contact> list = loadContacts();
-                return Response.ok().entity(list).build();
-                }
-  
-            @Override
-            public Response contactsGetById(Integer id, SecurityContext securityContext)
-            throws NotFoundException {
-                ArrayList<Contact> list = loadContacts();
-                Contact ret = null;
-            
-                for(int i=0; i<list.size(); i++)
-                {
-                    if(list.get(i).getId() == id)
-                        {
-                            ret = list.get(i);
-                        }
-                }
-                return Response.ok().entity(ret).build();
-            }
+    @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JaxRSServerCodegen", date = "2015-11-24T21:54:11.648Z")
+    public class ContactsApiServiceImpl extends ContactsApiService {
+
+        private ArrayList<Contact> loadContacts()
+        {
+            ArrayList<Contact> list = new ArrayList<Contact>();
+            list.add(new Contact(1, "Barney Poland", "barney@contoso.com"));
+            list.add(new Contact(2, "Lacy Barrera", "lacy@contoso.com"));
+            list.add(new Contact(3, "Lora Riggs", "lora@contoso.com"));
+            return list;
         }
+
+        @Override
+        public Response contactsGet(SecurityContext securityContext)
+        throws NotFoundException {
+            ArrayList<Contact> list = loadContacts();
+            return Response.ok().entity(list).build();
+            }
+
+        @Override
+        public Response contactsGetById(Integer id, SecurityContext securityContext)
+        throws NotFoundException {
+            ArrayList<Contact> list = loadContacts();
+            Contact ret = null;
+
+            for(int i=0; i<list.size(); i++)
+            {
+                if(list.get(i).getId() == id)
+                    {
+                        ret = list.get(i);
+                    }
+            }
+            return Response.ok().entity(ret).build();
+        }
+    }
+    ```
 
 1. 打开命令提示符，将目录切换到应用程序的根文件夹。
 
 1. 执行以下 Maven 命令生成代码，然后在本地使用 Jetty 应用服务器运行该代码。
 
-        mvn package jetty:run
+    ```
+    mvn package jetty:run
+    ```
 
 1. 应会在命令窗口中看到 Jetty 已经在端口 8080 上启动代码。
 
@@ -245,18 +253,24 @@
 
 1. 最后，在控制台中执行以下 Maven 命令来生成 Java WAR（Web 存档）文件。
 
-        mvn package war:war
+    ```
+    mvn package war:war
+    ```
 
 1. 生成的 WAR 文件将放入 **target** 文件夹。导航到 **target** 文件夹，然后将 WAR 文件重命名为 **ROOT.war**。（请确保大小写符合此格式）。
 
-         rename swagger-jaxrs-server-1.0.0.war ROOT.war
+    ```
+     rename swagger-jaxrs-server-1.0.0.war ROOT.war
+    ```
 
 1. 最后，从应用程序的根文件夹执行以下命令创建 **deploy** 文件夹，用于将 WAR 文件部署到 Azure。
 
-         mkdir deploy
-         mkdir deploy\webapps
-         copy target\ROOT.war deploy\webapps
-         cd deploy
+    ```
+     mkdir deploy
+     mkdir deploy\webapps
+     copy target\ROOT.war deploy\webapps
+     cd deploy
+    ```
 
 ## 将输出发布到 Azure 应用服务
 
@@ -282,11 +296,13 @@
 
 1. Git 会将 WAR 文件推送到联机存储库。为此，请导航到前面创建的 **deploy** 文件夹，以便轻松地将代码提交到应用服务中运行的存储库。进入控制台窗口并导航到 webapps 文件夹所在的文件夹后，请发出以下 Git 命令启动过程并开始部署。
 
-         git init
-         git add .
-         git commit -m "initial commit"
-         git remote add azure [YOUR GIT URL]
-         git push azure master
+    ```
+     git init
+     git add .
+     git commit -m "initial commit"
+     git remote add azure [YOUR GIT URL]
+     git push azure master
+    ```
 
     发出**推送**请求后，系统会要求提供前面为部署凭据创建的密码。输入凭据后，门户会显示已部署更新。
 
@@ -304,10 +320,10 @@
 
 <!-- URL List -->
 
-[App Service API CORS]: /documentation/articles/app-service-api-cors-consume-javascript/
+[App Service API CORS]: ./app-service-api-cors-consume-javascript.md
 [Azure 门户预览]: https://portal.azure.cn/
-[Document DB Java SDK]: /documentation/articles/documentdb-java-application/
-[试用]: /pricing/1rmb-trial/
+[Document DB Java SDK]: ../documentdb/documentdb-java-application.md
+[试用]: https://www.azure.cn/pricing/1rmb-trial/
 [Git]: http://www.git-scm.com/
 [Java Developer Center]: /develop/java/
 [Java 开发人员工具包 8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
@@ -316,7 +332,7 @@
 [Azure]: https://www.azure.cn/
 [在线 Swagger 编辑器]: http://editor.swagger.io/
 [Postman]: https://www.getpostman.com/
-[用于 Java 的存储 SDK]: /documentation/articles/storage-java-how-to-use-blob-storage/
+[用于 Java 的存储 SDK]: ../storage/storage-java-how-to-use-blob-storage.md
 [Swagger]: http://swagger.io/
 [Swagger 编辑器]: http://editor.swagger.io/
 [Visual Studio Code]: https://code.visualstudio.com

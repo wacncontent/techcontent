@@ -1,27 +1,28 @@
-<properties
-    pageTitle="在基于 Linux 的 HDInsight 上安装 R | Azure"
-    description="了解如何安装并使用 R 来自定义基于 Linux 的 Hadoop 群集。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags 
-    ms.assetid="7b758492-87bf-4d82-8b8c-1664e7d177bd"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/09/2017"
-    wacn.date="02/20/2017"
-    ms.author="larryfr" />
+---
+title: 在基于 Linux 的 HDInsight 上安装 R | Azure
+description: 了解如何安装并使用 R 来自定义基于 Linux 的 Hadoop 群集。
+services: hdinsight
+documentationcenter: ''
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+
+ms.assetid: 7b758492-87bf-4d82-8b8c-1664e7d177bd
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/09/2017
+wacn.date: 02/20/2017
+ms.author: larryfr
+---
 
 # 在 HDInsight Hadoop 群集上安装并使用 R
 你可以使用**脚本操作**群集自定义在 HDInsight 上 Hadoop 中的任何类型的群集上安装 R。这样，数据科学家和分析人员便可使用 R 部署功能强大的 MapReduce/YARN 编程框架，以便在 HDInsight 中部署的 Hadoop 群集上处理大量数据。
 
-> [AZURE.IMPORTANT]
-HDInsight 的 [HDInsight](/pricing/details/hdinsight/) 产品/服务包括 HDInsight 群集中的 R Server。这将允许 R 脚本使用 MapReduce 和 Spark 运行分布式计算。有关详细信息，请参阅[Get started using R Server on HDInsight](/documentation/articles/hdinsight-hadoop-r-server-get-started/)（开始使用 HDInsight 上的 R Server）。
+> [!IMPORTANT]
+HDInsight 的 [HDInsight](https://www.azure.cn/pricing/details/hdinsight/) 产品/服务包括 HDInsight 群集中的 R Server。这将允许 R 脚本使用 MapReduce 和 Spark 运行分布式计算。有关详细信息，请参阅[Get started using R Server on HDInsight](./hdinsight-hadoop-r-server-get-started.md)（开始使用 HDInsight 上的 R Server）。
 > 
 > 
 
@@ -62,14 +63,14 @@ R 脚本可以在 HDInsight 中使用创建用于安装 R 环境的脚本操作�
 
 本部分提供有关如何在使用 Azure 门户预览创建新群集时使用脚本的说明。
 
-> [AZURE.NOTE]
-Azure PowerShell、Azure CLI、HDInsight .NET SDK 或 Azure Resource Manager 模板也可用于应用脚本操作。你也可以将脚本操作应用于已在运行的群集。有关详细信息，请参阅 [Customize HDInsight clusters with Script Actions](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/)（使用脚本操作自定义 HDInsight 群集）。
+> [!NOTE]
+Azure PowerShell、Azure CLI、HDInsight .NET SDK 或 Azure Resource Manager 模板也可用于应用脚本操作。你也可以将脚本操作应用于已在运行的群集。有关详细信息，请参阅 [Customize HDInsight clusters with Script Actions](./hdinsight-hadoop-customize-cluster-linux.md)（使用脚本操作自定义 HDInsight 群集）。
 > 
 > 
 
-1. 使用 [Provision Linux-based HDInsight clusters](/documentation/articles/hdinsight-hadoop-provision-linux-clusters/)（预配基于 Linux 的 HDInsight 群集）中的步骤开始预配群集，但不要完成预配。
+1. 使用 [Provision Linux-based HDInsight clusters](./hdinsight-hadoop-provision-linux-clusters.md)（预配基于 Linux 的 HDInsight 群集）中的步骤开始预配群集，但不要完成预配。
 2. 在“可选配置”边栏选项卡上，选择“脚本操作”，并提供以下信息：
-   
+
     * **名称**：输入脚本操作的友好名称。
     * **脚本 URI**：https://hdiconfigactions.blob.core.windows.net/linuxrconfigactionv01/r-installer-v01.sh
     * **标头**：选中此选项
@@ -77,61 +78,75 @@ Azure PowerShell、Azure CLI、HDInsight .NET SDK 或 Azure Resource Manager 模
     * **ZOOKEEPER**：选中此选项以在 Zookeeper 节点上安装。
     * **参数**：将此字段留空
 3. 在“脚本操作”的底部，使用“选择”按钮保存配置。最后，使用“可选配置”边栏选项卡底部的“选择”按钮保存可选配置信息。
-4. 根据 [Provision Linux-based HDInsight clusters](/documentation/articles/hdinsight-hadoop-provision-linux-clusters/)（预配基于 Linux 的 HDInsight 群集）中所述继续预配群集。
+4. 根据 [Provision Linux-based HDInsight clusters](./hdinsight-hadoop-provision-linux-clusters.md)（预配基于 Linux 的 HDInsight 群集）中所述继续预配群集。
 
 ## 运行 R 脚本
 在群集完成预配后，执行以下步骤，使用 R 在 群集上执行 MapReduce 操作。
 
 1. 使用 SSH 连接到 HDInsight 群集：
-   
-        ssh USERNAME@CLUSTERNAME-ed-ssh.azurehdinsight.cn
-   
+
+    ```
+    ssh USERNAME@CLUSTERNAME-ed-ssh.azurehdinsight.cn
+    ```
+
     有关如何在 HDInsight 中使用 SSH 的详细信息，请参阅以下文档：
-   
-    * [在 Linux、Unix 或 OS X 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](/documentation/articles/hdinsight-hadoop-linux-use-ssh-unix/)
-    * [在 Windows 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](/documentation/articles/hdinsight-hadoop-linux-use-ssh-windows/)
+
+    * [在 Linux、Unix 或 OS X 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
+    * [在 Windows 中的 HDInsight 上将 SSH 与基于 Linux 的 Hadoop 配合使用](./hdinsight-hadoop-linux-use-ssh-windows.md)
 2. 在 `username@hn0-CLUSTERNAME:~$` 提示符中输入以下命令，启动交互式 R 会话：
-   
-        R
+
+    ```
+    R
+    ```
 3. 输入以下 R 程序。这会生成数字 1 到 100 ，然后将它们乘以 2。
-   
-        library(rmr2)
-        ints = to.dfs(1:100)
-        calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
-   
+
+    ```
+    library(rmr2)
+    ints = to.dfs(1:100)
+    calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
+    ```
+
     第一行会调用 RHadoop 库 rmr2，该库用于 MapReduce 操作。
-   
+
     第二行会生成值 1 到 100，然后使用 `to.dfs` 将它们存储到 Hadoop 文件系统。
-   
+
     第三行会使用 rmr2 提供的功能创建 MapReduce 进程并开始处理。随着处理操作开始，应看到多个行滚动过去。
 4. 接下来，请使用以下命令查看存储 MapReduce 输出的临时路径：
-   
-        print(calc())
-   
+
+    ```
+    print(calc())
+    ```
+
     路径应该类似 `/tmp/file5f615d870ad2`。若要查看实际输出，请使用以下命令：
-   
-        print(from.dfs(calc))
-   
+
+    ```
+    print(from.dfs(calc))
+    ```
+
     输出应如下所示：
-   
-        [1,]  1 2
-        [2,]  2 4
-        .
-        .
-        .
-        [98,]  98 196
-        [99,]  99 198
-        [100,] 100 200
+
+    ```
+    [1,]  1 2
+    [2,]  2 4
+    .
+    .
+    .
+    [98,]  98 196
+    [99,]  99 198
+    [100,] 100 200
+    ```
 5. 若要退出 R，请使用以下命令：
-   
-        q()
+
+    ```
+    q()
+    ```
 
 ## 后续步骤
-* [Install and use Hue on HDInsight clusters](/documentation/articles/hdinsight-hadoop-hue-linux/)（在 HDInsight 群集上安装并使用 Hue）。Hue 是一种 Web UI，可让你轻松创建、运行及保存 Pig 和 Hive 作业，以及浏览 HDInsight 群集的默认存储。
-* [在 HDInsight 群集上安装 Giraph](/documentation/articles/hdinsight-hadoop-giraph-install/)。使用群集自定义在 HDInsight Hadoop 群集上安装 Giraph。Giraph 可让你使用 Hadoop 执行图形处理，并可以在 Azure HDInsight 上使用。
-* [在 HDInsight 群集上安装 Solr](/documentation/articles/hdinsight-hadoop-solr-install/)。使用群集自定义在 HDInsight Hadoop 群集上安装 Solr。Solr 允许你对存储的数据执行功能强大的搜索操作。
-* [Install Hue on HDInsight clusters](/documentation/articles/hdinsight-hadoop-hue-linux/)（在 HDInsight 群集上安装 Hue）。使用群集自定义在 HDInsight Hadoop 群集上安装 Hue。Hue 是用来与 Hadoop 群集交互的一系列 Web 应用程序。
+* [Install and use Hue on HDInsight clusters](./hdinsight-hadoop-hue-linux.md)（在 HDInsight 群集上安装并使用 Hue）。Hue 是一种 Web UI，可让你轻松创建、运行及保存 Pig 和 Hive 作业，以及浏览 HDInsight 群集的默认存储。
+* [在 HDInsight 群集上安装 Giraph](./hdinsight-hadoop-giraph-install.md)。使用群集自定义在 HDInsight Hadoop 群集上安装 Giraph。Giraph 可让你使用 Hadoop 执行图形处理，并可以在 Azure HDInsight 上使用。
+* [在 HDInsight 群集上安装 Solr](./hdinsight-hadoop-solr-install.md)。使用群集自定义在 HDInsight Hadoop 群集上安装 Solr。Solr 允许你对存储的数据执行功能强大的搜索操作。
+* [Install Hue on HDInsight clusters](./hdinsight-hadoop-hue-linux.md)（在 HDInsight 群集上安装 Hue）。使用群集自定义在 HDInsight Hadoop 群集上安装 Hue。Hue 是用来与 Hadoop 群集交互的一系列 Web 应用程序。
 
-[hdinsight-cluster-customize]: /documentation/articles/hdinsight-hadoop-customize-cluster-linux/
+[hdinsight-cluster-customize]: ./hdinsight-hadoop-customize-cluster-linux.md
 
 <!---HONumber=Mooncake_0213_2017-->

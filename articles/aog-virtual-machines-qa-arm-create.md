@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="订阅无法在 ARM 模式下创建虚拟机，只能在 ASM 模式下创建 Azure VM 部署" 
-	description="订阅无法在 ARM 模式下创建虚拟机，只能在 ASM 模式下创建 Azure VM 部署。" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="12/05/2016"/>
+---
+title: 订阅无法在 ARM 模式下创建虚拟机，只能在 ASM 模式下创建 Azure VM 部署
+description: 订阅无法在 ARM 模式下创建虚拟机，只能在 ASM 模式下创建 Azure VM 部署。
+services: virtual machine
+documentationCenter: ''
+authors: ''
+manager: ''
+editor: ''
+
+ms.service: virtual-machines-aog
+ms.date: ''
+wacn.date: 12/05/2016
+---
+
 # 订阅无法在 ARM 模式下创建虚拟机，只能在 ASM 模式下创建 Azure VM 部署 #
 
 ### 问题描述 ###
@@ -57,8 +62,5 @@ AA 创建的资源组的 owner 之所以没有自动注册资源提供程序是�
 
 基于以上理论，解决方案有两个：
 
-1.	手动运行 PowerShell 命令注册资源提供程序；
-2.	用创建资源组 owner 的那个账号（AA） 先创建一个 ARM 的 Azure 虚拟机。
-
-
-
+1. 手动运行 PowerShell 命令注册资源提供程序；
+2. 用创建资源组 owner 的那个账号（AA） 先创建一个 ARM 的 Azure 虚拟机。

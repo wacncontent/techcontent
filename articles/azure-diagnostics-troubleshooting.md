@@ -1,41 +1,45 @@
-<properties
-	pageTitle="Azure 诊断故障排除"
-	description="排查在 Azure 云服务和虚拟机中使用 Azure 诊断时遇到的问题 "
-	services="multiple"
-	documentationCenter=".net"
-	authors="rboucher"
-	manager="jwhit"
-	editor=""/>  
+---
+title: Azure 诊断故障排除
+description: 排查在 Azure 云服务和虚拟机中使用 Azure 诊断时遇到的问题 
+services: multiple
+documentationCenter: .net
+authors: rboucher
+manager: jwhit
+editor: ''
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/04/2016"
-	ms.author="robb"
-	wacn.date="12/23/2016"/>
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/04/2016
+ms.author: robb
+wacn.date: 12/23/2016
+---
 
 # Azure 诊断故障排除
-有关使用 Azure 诊断的故障排除信息。有关 Azure 诊断的详细信息，请参阅 [Azure 诊断概述](/documentation/articles/azure-diagnostics/)。
+有关使用 Azure 诊断的故障排除信息。有关 Azure 诊断的详细信息，请参阅 [Azure 诊断概述](./azure-diagnostics.md)。
 
 ## Azure Diagnostics 不启动
 Diagnostics 由两个组件构成：来宾代理插件和监视代理。可以检查日志文件 **DiagnosticsPluginLauncher.log** 和 **DiagnosticsPlugin.log** 来获取有关诊断工具无法启动的信息。
 
 在云服务角色中，来宾代理插件的日志文件位于：
 
-	C:\Logs\Plugins\Microsoft.Azure.Diagnostics.PaaSDiagnostics\1.6.3.0\
+```
+C:\Logs\Plugins\Microsoft.Azure.Diagnostics.PaaSDiagnostics\1.6.3.0\
+```
 
 在 Azure 虚拟机中，来宾代理插件的日志文件位于：
 
-	C:\Packages\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics\1.6.3.0\Logs\
+```
+C:\Packages\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics\1.6.3.0\Logs\
+```
 
 日志文件的最后一行包含退出代码。
 
-	DiagnosticsPluginLauncher.exe Information: 0 : [4/16/2016 6:24:15 AM] DiagnosticPlugin exited with code 0
+```
+DiagnosticsPluginLauncher.exe Information: 0 : [4/16/2016 6:24:15 AM] DiagnosticPlugin exited with code 0
+```
 
 该插件返回以下退出代码：
 
@@ -71,11 +75,15 @@ Azure 诊断会将所有数据存储在 Azure 存储空间中。
 
 对于云服务角色，LocalResourceDirectory 为：
 
-    C:\Resources\Directory<CloudServiceDeploymentID>.<RoleName>.DiagnosticStore\WAD<DiagnosticsMajorandMinorVersion>\Tables
+```
+C:\Resources\Directory<CloudServiceDeploymentID>.<RoleName>.DiagnosticStore\WAD<DiagnosticsMajorandMinorVersion>\Tables
+```
 
 对于虚拟机，LocalResourceDirectory 为：
 
-    C:\WindowsAzure\Logs\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics<DiagnosticsVersion>\WAD<DiagnosticsMajorandMinorVersion>\Tables
+```
+C:\WindowsAzure\Logs\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics<DiagnosticsVersion>\WAD<DiagnosticsMajorandMinorVersion>\Tables
+```
 
 如果 LocalResourceDirectory 文件夹中没有任何文件，监视代理将无法启动。这种情况通常是由无效的配置文件造成的，CommandExecution.log 中应会报告相关事件。
 
@@ -83,38 +91,46 @@ Azure 诊断会将所有数据存储在 Azure 存储空间中。
 
 在云服务角色上：
 
-    %SystemDrive%\Packages\Plugins\Microsoft.Azure.Diagnostics.PaaSDiagnostics<DiagnosticsVersion>\Monitor\x64\table2csv maeventtable.tsf
+```
+%SystemDrive%\Packages\Plugins\Microsoft.Azure.Diagnostics.PaaSDiagnostics<DiagnosticsVersion>\Monitor\x64\table2csv maeventtable.tsf
+```
 
 云服务角色上的 %SystemDrive% 通常为是 D:
 
 在虚拟机上：
 
-    C:\Packages\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics<DiagnosticsVersion>\Monitor\x64\table2csv maeventtable.tsf
+```
+C:\Packages\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics<DiagnosticsVersion>\Monitor\x64\table2csv maeventtable.tsf
+```
 
 上述命令将生成日志文件 maeventtable.csv，你可以打开该文件并检查失败消息。
 
 ## 找不到诊断数据表
 Azure 存储空间中保存 Azure 诊断数据的表是使用以下代码命名的：
 
-        if (String.IsNullOrEmpty(eventDestination)) {
-            if (e == "DefaultEvents")
-                tableName = "WADDefault" + MD5(provider);
-            else
-                tableName = "WADEvent" + MD5(provider) + eventId;
-        }
+```
+    if (String.IsNullOrEmpty(eventDestination)) {
+        if (e == "DefaultEvents")
+            tableName = "WADDefault" + MD5(provider);
         else
-            tableName = "WAD" + eventDestination;
+            tableName = "WADEvent" + MD5(provider) + eventId;
+    }
+    else
+        tableName = "WAD" + eventDestination;
+```
 
 下面是一个示例：
 
-        <EtwEventSourceProviderConfiguration provider=”prov1”>
-          <Event id=”1” />
-          <Event id=”2” eventDestination=”dest1” />
-          <DefaultEvents />
-        </EtwEventSourceProviderConfiguration>
-        <EtwEventSourceProviderConfiguration provider=”prov2”>
-          <DefaultEvents eventDestination=”dest2” />
-        </EtwEventSourceProviderConfiguration>
+```
+    <EtwEventSourceProviderConfiguration provider=”prov1”>
+      <Event id=”1” />
+      <Event id=”2” eventDestination=”dest1” />
+      <DefaultEvents />
+    </EtwEventSourceProviderConfiguration>
+    <EtwEventSourceProviderConfiguration provider=”prov2”>
+      <DefaultEvents eventDestination=”dest2” />
+    </EtwEventSourceProviderConfiguration>
+```
 
 这会生成 4 个表：
 

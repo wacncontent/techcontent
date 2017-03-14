@@ -1,5 +1,5 @@
 ###Azure 会对 VNet 之间的流量收费吗？
-同一区域中的 VNet 到 VNet 流量两个方向都是免费的。跨区域 VNet 到 VNet 出口流量根据源区域的出站 VNet 间数据传输费率收费。有关详细信息，请参阅[定价页](/pricing/details/vpn-gateway/)。
+同一区域中的 VNet 到 VNet 流量两个方向都是免费的。跨区域 VNet 到 VNet 出口流量根据源区域的出站 VNet 间数据传输费率收费。有关详细信息，请参阅[定价页](https://www.azure.cn/pricing/details/vpn-gateway/)。
 
 ###VNet 到 VNet 流量是否会通过 Internet？
 否。VNet 到 VNet 流量会流经 Azure 主干，而非 Internet。
@@ -17,7 +17,7 @@
 是的。虚拟网络连接可与多站点 VPN 同时使用。
 
 ### 一个虚拟网络可以连接到多少个本地站点和虚拟网络？
-请参阅[网关要求](/documentation/articles/vpn-gateway-about-vpn-gateway-settings/#requirements)表。
+请参阅[网关要求](../articles/vpn-gateway/vpn-gateway-about-vpn-gateway-settings.md#requirements)表。
 
 ###是否可以使用 VNet 到 VNet 连接 VNet 外的 VM 或云服务？
 否。VNet 到 VNet 支持连接虚拟网络。它不支持连接不在虚拟网络中的虚拟机或云服务。

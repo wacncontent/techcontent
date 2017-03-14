@@ -1,26 +1,26 @@
-<properties
-    pageTitle="通过 Java 使用事件中心入门 | Azure"
-    description="遵循本教程开始使用 Azure 事件中心，以通过 Java 发送事件，并使用 EventProcessorHost 接收事件。"
-    services="event-hubs"
-    documentationcenter=""
-    author="jtaubensee"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="38e3be53-251c-488f-a856-9a500f41b6ca"
-    ms.service="event-hubs"
-    ms.workload="core"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/04/2017"
-    wacn.date="02/24/2017"
-    ms.author="jotaub;sethm" />  
+---
+title: 通过 Java 使用事件中心入门 | Azure
+description: 遵循本教程开始使用 Azure 事件中心，以通过 Java 发送事件，并使用 EventProcessorHost 接收事件。
+services: event-hubs
+documentationcenter: ''
+author: jtaubensee
+manager: timlt
+editor: ''
 
+ms.assetid: 38e3be53-251c-488f-a856-9a500f41b6ca
+ms.service: event-hubs
+ms.workload: core
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/04/2017
+wacn.date: 02/24/2017
+ms.author: jotaub;sethm
+---
 
 # 事件中心入门
 
-[AZURE.INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
+[!INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
 
 ## 介绍
 
@@ -34,23 +34,23 @@
 
 * Java 开发环境。对于本教程，我们将采用 Eclipse。
 
-* 有效的 Azure 帐户。<br/>如果你没有帐户，只需花费几分钟就能创建一个免费帐户。有关详细信息，请参阅 <a href="/pricing/1rmb-trial/" target="_blank">Azure 试用</a>。
+* 有效的 Azure 帐户。<br/>如果你没有帐户，只需花费几分钟就能创建一个免费帐户。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/" target="_blank">Azure 试用</a>。
 
-[AZURE.INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
+[!INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-send-java](../../includes/service-bus-event-hubs-get-started-send-java.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-send-java](../../includes/service-bus-event-hubs-get-started-send-java.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-receive-ephjava](../../includes/service-bus-event-hubs-get-started-receive-ephjava.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-receive-ephjava](../../includes/service-bus-event-hubs-get-started-receive-ephjava.md)]
 
 ## 运行应用程序
 
 现在，你已准备就绪，可以运行应用程序了。
 
 1. 运行 **Receiver** 项目。
-   
+
     ![][21]
 2. 运行 **Sender** 项目。
-   
+
     ![][22]
 
 ## 后续步骤
@@ -69,10 +69,9 @@
 
 <!-- Links -->
 
-[Event Hubs overview]: /documentation/articles/event-hubs-overview/
+[Event Hubs overview]: ./event-hubs-overview.md
 [sample application that uses Event Hubs]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 [Scale out Event Processing with Event Hubs]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-45f43fc3
- 
 
 <!---HONumber=Mooncake_0220_2017-->
 <!-- Update_Description: update meta properties; wording update; update link reference -->

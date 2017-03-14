@@ -1,26 +1,26 @@
-<properties
-	pageTitle="虚拟机上的 Tomcat | Azure"
-	description="本教程利用使用经典部署模型创建的资源，显示如何创建 Windows 虚拟机并将其配置为运行 Apache Tomcat 应用程序服务器。"
-	services="virtual-machines-windows"
-	documentationCenter="java"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""
-    tags="azure-service-management" />
+---
+title: 虚拟机上的 Tomcat | Azure
+description: 本教程利用使用经典部署模型创建的资源，显示如何创建 Windows 虚拟机并将其配置为运行 Apache Tomcat 应用程序服务器。
+services: virtual-machines-windows
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: ''
+tags: azure-service-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="web"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="Java"
-	ms.topic="article"
-	ms.date="12/22/2016"
-	wacn.date="03/01/2017"
-	ms.author="robmcm"/>
+ms.service: virtual-machines-windows
+ms.workload: web
+ms.tgt_pltfrm: vm-windows
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 03/01/2017
+ms.author: robmcm
+---
 
 # 如何在使用经典部署模型创建的虚拟机上运行 Java 应用程序服务器
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 想发布使用 Java 8 和 Tomcat 的 Web 应用，请查看这个[资源管理器模板](https://github.com/Azure/azure-quickstart-templates/tree/master/201-web-app-java-tomcat/).
 
@@ -38,7 +38,7 @@
 
 ![运行 Apache Tomcat 的虚拟机][virtual_machine_tomcat]
 
-[AZURE.INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
+[!INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
 
 ## 创建虚拟机
 
@@ -138,14 +138,6 @@
 [virtual_machine_tomcat]: ./media/virtual-machines-windows-classic-java-run-tomcat-app-server/WA_VirtualMachineRunningApacheTomcat.png
 
 [service_automatic_startup]: ./media/virtual-machines-windows-classic-java-run-tomcat-app-server/WA_TomcatServiceAutomaticStart.png
-
-
-
-
-
-
-
-
 
 [NewIBRule]: ./media/virtual-machines-windows-classic-java-run-tomcat-app-server/NewInboundRule.png
 [NewRulePort]: ./media/virtual-machines-windows-classic-java-run-tomcat-app-server/NewRulePort.png

@@ -1,21 +1,21 @@
-<properties
-    pageTitle="Azure Service Fabric 独立群集部署准备 | Azure"
-    description="在部署专用于处理生产工作负荷的群集之前要考虑的与准备环境和创建群集配置相关的文档。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="maburlik"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="1/17/2016"
-    wacn.date="03/03/2017"
-    ms.author="dkshir;chackdan;maburlik" />
+---
+title: Azure Service Fabric 独立群集部署准备 | Azure
+description: 在部署专用于处理生产工作负荷的群集之前要考虑的与准备环境和创建群集配置相关的文档。
+services: service-fabric
+documentationcenter: .net
+author: maburlik
+manager: timlt
+editor: ''
 
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 1/17/2016
+wacn.date: 03/03/2017
+ms.author: dkshir;chackdan;maburlik
+---
 
 <a id="preparemachines"></a>
 
@@ -62,7 +62,7 @@
 * "upgradeDomain": "DomainRed"
 * "upgradeDomain": "Blue"
 
-有关升级域和容错域的更多详细信息，请参阅[描述 Service Fabric 群集](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)一文。
+有关升级域和容错域的更多详细信息，请参阅[描述 Service Fabric 群集](./service-fabric-cluster-resource-manager-cluster-description.md)一文。
 
 ### 步骤 5：下载适用于 Windows Server 的 Service Fabric 独立包
 [下载链接 - Service Fabric 独立包 - Windows Server](http://go.microsoft.com/fwlink/?LinkId=730690)，将包解压缩到群集外的一台部署计算机中或解压缩到群集内的其中一台计算机中。
@@ -70,7 +70,7 @@
 ### 步骤 6：修改群集配置
 若要创建独立群集，必须创建独立群集配置 ClusterConfig.json 文件，其中描述群集的规范。可以基于在以下链接中找到的模板创建配置文件。<br>[独立群集配置](https://github.com/Azure-Samples/service-fabric-dotnet-standalone-cluster-configuration/tree/master/Samples)
 
-有关此文件中各个节的详细信息，请参阅 [Windows 独立群集的配置设置](/documentation/articles/service-fabric-cluster-manifest/)。
+有关此文件中各个节的详细信息，请参阅 [Windows 独立群集的配置设置](./service-fabric-cluster-manifest.md)。
 
 从已下载的包中打开某个 ClusterConfig.json 文件，然后修改以下设置：
 | **配置设置** | **说明** |
@@ -124,34 +124,31 @@
 | FileStoreService.exe |
 
 ### 步骤 8。使用 TestConfiguration 脚本验证环境
-可以在独立包中找到 TestConfiguration.ps1 脚本。它作为最佳做法分析器，可验证上述某些条件，并应该用作健全性检查来验证是否可以在给定环境上部署群集。如果有任何失败，请参阅[环境设置](/documentation/articles/service-fabric-cluster-standalone-deployment-preparation/)下的列表进行故障排除。
+可以在独立包中找到 TestConfiguration.ps1 脚本。它作为最佳做法分析器，可验证上述某些条件，并应该用作健全性检查来验证是否可以在给定环境上部署群集。如果有任何失败，请参阅[环境设置](./service-fabric-cluster-standalone-deployment-preparation.md)下的列表进行故障排除。
 
 可以在对群集配置文件中列为节点的所有计算机具有管理员访问权限的任何计算机上运行此脚本。运行此脚本的计算机不必要是群集的一部分。
 
+```
+PS C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer> .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json
+Trace folder already exists. Traces will be written to existing trace folder: C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer\DeploymentTraces
+Running Best Practices Analyzer...
+Best Practices Analyzer completed successfully.
 
-	PS C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer> .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.DevCluster.json
-	Trace folder already exists. Traces will be written to existing trace folder: C:\temp\Microsoft.Azure.ServiceFabric.WindowsServer\DeploymentTraces
-	Running Best Practices Analyzer...
-	Best Practices Analyzer completed successfully.
-
-
-	LocalAdminPrivilege        : True
-	IsJsonValid                : True
-	IsCabValid                 : True
-	RequiredPortsOpen          : True
-	RemoteRegistryAvailable    : True
-	FirewallAvailable          : True
-	RpcCheckPassed             : True
-	NoConflictingInstallations : True
-	FabricInstallable          : True
-	Passed                     : True
-
+LocalAdminPrivilege        : True
+IsJsonValid                : True
+IsCabValid                 : True
+RequiredPortsOpen          : True
+RemoteRegistryAvailable    : True
+FirewallAvailable          : True
+RpcCheckPassed             : True
+NoConflictingInstallations : True
+FabricInstallable          : True
+Passed                     : True
+```
 
 当前此配置测试模块不验证安全配置，因此这必须独立完成。
 
-
-
 ## 后续步骤
-* [创建在 Windows Server 上运行的独立群集](/documentation/articles/service-fabric-cluster-creation-for-windows-server/)
+* [创建在 Windows Server 上运行的独立群集](./service-fabric-cluster-creation-for-windows-server.md)
 
 <!---HONumber=Mooncake_0227_2017-->

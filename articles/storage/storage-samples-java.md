@@ -1,28 +1,28 @@
-<properties
-    pageTitle="使用 Java 的 Azure 存储示例 | Azure"
-    description="查看、下载和运行 Azure 存储空间的示例代码和应用程序使用 Java 存储客户端库发现 Blob、队列、表和文件的入门示例。"
-    services="storage"
-    documentationcenter="na"
-    author="seguler"
-    manager="jahogg"
-    editor="tysonn" />
-<tags
-    ms.service="storage"
-    ms.devlang="java"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage"
-    ms.date="01/12/2017"
-    wacn.date="02/24/2017"
-    ms.author="seguler" />  
+---
+title: 使用 Java 的 Azure 存储示例 | Azure
+description: 查看、下载和运行 Azure 存储空间的示例代码和应用程序使用 Java 存储客户端库发现 Blob、队列、表和文件的入门示例。
+services: storage
+documentationcenter: na
+author: seguler
+manager: jahogg
+editor: tysonn
 
+ms.service: storage
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage
+ms.date: 01/12/2017
+wacn.date: 02/24/2017
+ms.author: seguler
+---
 
 # 使用 Java 的 Azure 存储示例
 
 ## Java 示例索引
 
->[AZURE.IMPORTANT] 若要使用本文中提供的示例，请将终结点 `windows.net` 替换为 `chinacloudapi.cn`（如果存在）。
-
+>[!IMPORTANT]
+> 若要使用本文中提供的示例，请将终结点 `windows.net` 替换为 `chinacloudapi.cn`（如果存在）。
 
 下表概述了我们的示例存储库以及每个示例中介绍的方案。单击链接查看 Github 中的相应示例代码。
 
@@ -195,27 +195,26 @@
 </table>
 <br/>  
 
-
 ## Azure 代码示例库
 
 若要查看完整的示例库，请访问 [Azure 代码示例](https://azure.microsoft.com/resources/samples/?service=storage)库，其中包括 Azure 存储的示例，可以下载并在本地运行。代码示例库提供 .zip 格式的示例代码。此外，用户也可以浏览 GitHub 存储库以获取每个示例并进行克隆。
 
-[AZURE.INCLUDE [storage-java-samples-include](../../includes/storage-java-samples-include.md)]
+[!INCLUDE [storage-java-samples-include](../../includes/storage-java-samples-include.md)]
 
 ## 入门指南
 
 有关 Azure 存储客户端库的安装和入门说明，请查看以下指南。
 
-* [Java 中的 Azure Blob 服务入门](/documentation/articles/storage-java-how-to-use-blob-storage/)
-* [Java 中的 Azure 队列服务入门](/documentation/articles/storage-java-how-to-use-queue-storage/)
-* [Java 中的 Azure 表服务入门](/documentation/articles/storage-java-how-to-use-table-storage/)
-* [Java 中的 Azure 文件服务入门](/documentation/articles/storage-java-how-to-use-file-storage/)
+* [Java 中的 Azure Blob 服务入门](./storage-java-how-to-use-blob-storage.md)
+* [Java 中的 Azure 队列服务入门](./storage-java-how-to-use-queue-storage.md)
+* [Java 中的 Azure 表服务入门](./storage-java-how-to-use-table-storage.md)
+* [Java 中的 Azure 文件服务入门](./storage-java-how-to-use-file-storage.md)
 
 ## 后续步骤
 
 了解其他语言的示例：
 
-* .NET：[使用 .NET 的 Azure 存储示例](/documentation/articles/storage-samples-dotnet/)
-* 所有其他语言：[Azure 存储示例](/documentation/articles/storage-samples/)
+* .NET：[使用 .NET 的 Azure 存储示例](./storage-samples-dotnet.md)
+* 所有其他语言：[Azure 存储示例](./storage-samples.md)
 
 <!---HONumber=Mooncake_0220_2017-->

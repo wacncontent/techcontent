@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure 应用程序网关常见问题 | Azure"
-    description="本页提供有关 Azure 应用程序网关常见问题的解答"
-    documentationcenter="na"
-    services="application-gateway"
-    author="georgewallace"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="d54ee7ec-4d6b-4db7-8a17-6513fda7e392"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="01/17/2017"
-    wacn.date="03/03/2017"
-    ms.author="gwallace" />  
+---
+title: Azure 应用程序网关常见问题 | Azure
+description: 本页提供有关 Azure 应用程序网关常见问题的解答
+documentationcenter: na
+services: application-gateway
+author: georgewallace
+manager: timlt
+editor: tysonn
 
+ms.assetid: d54ee7ec-4d6b-4db7-8a17-6513fda7e392
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 01/17/2017
+wacn.date: 03/03/2017
+ms.author: gwallace
+---
 
 # 应用程序网关常见问题
 
@@ -28,7 +28,7 @@ Azure 应用程序网关是服务形式的应用程序传送控制器 (ADC)，�
 
 **问：应用程序网关支持哪些功能？**
 
-应用程序网关支持 SSL 卸载和端到端 SSL、基于 Cookie 的会话相关性、基于 URL 路径的路由、多站点托管，等等。有关支持的功能的完整列表，请访问 [Introduction to Application Gateway](/documentation/articles/application-gateway-introduction/)（应用程序网关简介）
+应用程序网关支持 SSL 卸载和端到端 SSL、基于 Cookie 的会话相关性、基于 URL 路径的路由、多站点托管，等等。有关支持的功能的完整列表，请访问 [Introduction to Application Gateway](./application-gateway-introduction.md)（应用程序网关简介）
 
 **问：应用程序网关与 Azure 负载均衡器之间有什么区别？**
 
@@ -78,7 +78,7 @@ Azure 应用程序网关是服务形式的应用程序传送控制器 (ADC)，�
 
 **问：应用程序网关是否能够与其虚拟网络外部的实例通信？**
 
-应用程序网关可与其所在的虚拟网络外部的实例通信，前提是已建立 IP 连接。如果打算使用内部 IP 作为后端池成员，则需要使用 [VNET 对等互连](/documentation/articles/virtual-network-peering-overview/)或 [VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/)。
+应用程序网关可与其所在的虚拟网络外部的实例通信，前提是已建立 IP 连接。如果打算使用内部 IP 作为后端池成员，则需要使用 [VNET 对等互连](../virtual-network/virtual-network-peering-overview.md)或 [VPN 网关](../vpn-gateway/vpn-gateway-about-vpngateways.md)。
 
 **问：是否可以在应用程序网关子网中部署其他任何组件？**
 
@@ -90,7 +90,7 @@ Azure 应用程序网关是服务形式的应用程序传送控制器 (ADC)，�
 
 **问：应用程序网关有哪些限制？ 是否可以提高这些限制？**
 
-请访问[应用程序网关限制](/documentation/articles/azure-subscription-service-limits/#application-gateway-limits)查看限制。
+请访问[应用程序网关限制](../azure-subscription-service-limits.md#application-gateway-limits)查看限制。
 
 **问：是否可以同时对外部和内部流量使用应用程序网关？**
 
@@ -202,18 +202,18 @@ TLS\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA
 
 **问：应用程序网关可以使用哪些类型的日志？**
 
-应用程序网关可以使用三种日志。有关这些日志和其他诊断功能的详细信息，请访问 [Backend health, diagnostics logging and metrics for Application Gateway](/documentation/articles/application-gateway-diagnostics/)（应用程序网关的后端运行状况、诊断日志记录和指标）。
+应用程序网关可以使用三种日志。有关这些日志和其他诊断功能的详细信息，请访问 [Backend health, diagnostics logging and metrics for Application Gateway](./application-gateway-diagnostics.md)（应用程序网关的后端运行状况、诊断日志记录和指标）。
 
 - **ApplicationGatewayAccessLog** - 此日志包含提交到应用程序网关前端的每个请求。数据包括调用方的 IP、请求的 URL、响应延迟、返回代码，以及传入和传出的字节数。每隔 300 秒会收集一次访问日志。此日志包含每个应用程序网关实例的一条记录。
 - **ApplicationGatewayPerformanceLog** - 此日志捕获每个实例的性能信息，包括提供的请求总数、吞吐量（以字节为单位）、失败的请求计数、正常和不正常的后端实例计数。
 
 **问：如何知道后端池成员是否正常？**
 
-可以使用 PowerShell cmdlet `Get-AzureRmApplicationGatewayBackendHealth`，或者在门户中访问[应用程序网关诊断](/documentation/articles/application-gateway-diagnostics/)来验证运行状况
+可以使用 PowerShell cmdlet `Get-AzureRmApplicationGatewayBackendHealth`，或者在门户中访问[应用程序网关诊断](./application-gateway-diagnostics.md)来验证运行状况
 
 **问：什么是诊断日志的保留策略？**
 
-诊断日志将发往客户存储帐户，客户可以根据偏好设置保留策略。此外，可将诊断日志发送到事件中心或 Log Analytics。有关详细信息，请访问 [Application Gateway Diagnostics](/documentation/articles/application-gateway-diagnostics/)（应用程序网关诊断）。
+诊断日志将发往客户存储帐户，客户可以根据偏好设置保留策略。此外，可将诊断日志发送到事件中心或 Log Analytics。有关详细信息，请访问 [Application Gateway Diagnostics](./application-gateway-diagnostics.md)（应用程序网关诊断）。
 
 **问：如何获取应用程序网关的审核日志？**
 
@@ -221,14 +221,14 @@ TLS\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA
 
 **问：是否可以使用应用程序网关设置警报？**
 
-可以，应用程序网关确实支持警报。可以基于指标设置警报。应用程序网关目前提供“吞吐量”指标，可以使用它来配置警报。若要了解有关警报的详细信息，请访问[接收警报通知](/documentation/articles/insights-receive-alert-notifications/)。
+可以，应用程序网关确实支持警报。可以基于指标设置警报。应用程序网关目前提供“吞吐量”指标，可以使用它来配置警报。若要了解有关警报的详细信息，请访问[接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)。
 
 **问：后端运行状况返回未知状态，原因是什么？**
 
-最常见的原因是访问的后端被 NSG 或自定义 DNS 阻止。有关详细信息，请访问 [Backend health, diagnostics logging, and metrics for Application Gateway](/documentation/articles/application-gateway-diagnostics/)（应用程序网关的后端运行状况、诊断日志记录和指标）。
+最常见的原因是访问的后端被 NSG 或自定义 DNS 阻止。有关详细信息，请访问 [Backend health, diagnostics logging, and metrics for Application Gateway](./application-gateway-diagnostics.md)（应用程序网关的后端运行状况、诊断日志记录和指标）。
 
 ## 后续步骤
 
-若要了解有关应用程序网关的详细信息，请访问 [Introduction to Application Gateway](/documentation/articles/application-gateway-introduction/)（应用程序网关简介）。
+若要了解有关应用程序网关的详细信息，请访问 [Introduction to Application Gateway](./application-gateway-introduction.md)（应用程序网关简介）。
 
 <!---HONumber=Mooncake_0227_2017-->

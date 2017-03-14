@@ -1,22 +1,23 @@
-<properties
-    pageTitle="将 BI 工具与 HDInsight 上的 Apache Spark 配合使用 | Azure"
-    description="逐步介绍如何在 Apache Spark 上使用笔记本，基于原始数据创建架构并将其保存为 Hive 表，然后使用 BI 工具分析 Hive 表中的数据"
-    services="hdinsight"
-    documentationcenter=""
-    author="nitinme"
-    manager="jhubbard"
-    editor="cgronlun"
-    tags="azure-portal" />
-<tags 
-    ms.assetid="1448b536-9bc8-46bc-bbc6-d7001623642a"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/06/2017"
-    wacn.date="01/25/2017"
-    ms.author="nitinme" />
+---
+title: 将 BI 工具与 HDInsight 上的 Apache Spark 配合使用 | Azure
+description: 逐步介绍如何在 Apache Spark 上使用笔记本，基于原始数据创建架构并将其保存为 Hive 表，然后使用 BI 工具分析 Hive 表中的数据
+services: hdinsight
+documentationcenter: ''
+author: nitinme
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
+
+ms.assetid: 1448b536-9bc8-46bc-bbc6-d7001623642a
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/06/2017
+wacn.date: 01/25/2017
+ms.author: nitinme
+---
 
 # 将 BI 工具与 HDInsight Linux 上的 Apache Spark 群集配合使用
 了解如何使用 Azure HDInsight 中的 Apache Spark 执行以下操作：
@@ -30,8 +31,8 @@
 
 你必须具有以下各项：
 
-* Azure 订阅。请参阅[获取 Azure 试用版](/pricing/1rmb-trial/)。
-* HDInsight Linux 上的 Apache Spark 群集。有关说明，请参阅 [Create Apache Spark clusters in Azure HDInsight](/documentation/articles/hdinsight-apache-spark-jupyter-spark-sql/)（在 Azure HDInsight 中创建 Apache Spark 群集）。
+* Azure 订阅。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
+* HDInsight Linux 上的 Apache Spark 群集。有关说明，请参阅 [Create Apache Spark clusters in Azure HDInsight](./hdinsight-apache-spark-jupyter-spark-sql.md)（在 Azure HDInsight 中创建 Apache Spark 群集）。
 * 安装 Microsoft Spark ODBC 驱动程序的计算机（HDInsight 上的 Spark 需要驱动程序才能使用 Tableau）。可从[此处](http://go.microsoft.com/fwlink/?LinkId=616229)安装该驱动程序。
 * [Power BI](http://www.powerbi.com/) 或 [Tableau Desktop](http://www.tableau.com/products/desktop) 等 BI 工具。可以从 [http://www.powerbi.com/](http://www.powerbi.com/) 获取免费的 Power BI 预览版订阅。
 
@@ -43,7 +44,7 @@
 1. 在 [Azure 门户预览](https://portal.azure.cn/)上的启动板中，单击 Spark 群集的磁贴（如果已将它固定到启动板）。也可以在“全部浏览”>“HDInsight 群集”下导航到你的群集。
 2. 在“Spark 群集”边栏选项卡中，单击“群集仪表板”，然后单击“Jupyter 笔记本”。出现提示时，请输入群集的管理员凭据。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     也可以在浏览器中打开以下 URL 来访问群集的 Jupyter 笔记本。将 **CLUSTERNAME** 替换为群集的名称：
     ><p>
     > `https://CLUSTERNAME.azurehdinsight.cn/jupyter`
@@ -57,48 +58,58 @@
     ![提供笔记本的名称](./media/hdinsight-apache-spark-use-bi-tools/hdispark.note.jupyter.notebook.name.png "提供笔记本的名称")
 5. 使用笔记本是使用 PySpark 内核创建的，因此不需要显式创建任何上下文。当你运行第一个代码单元格时，系统将自动为你创建 Spark 和 Hive 上下文。首先，可以导入此方案所需的类型。为此，请将光标放在单元格中，然后按 **SHIFT + ENTER**。
 
-        from pyspark.sql import *
+    ```
+    from pyspark.sql import *
+    ```
 6. 将示例数据载入临时表。在 HDInsight 中创建 Spark 群集时，系统会将数据示例文件 **hvac.csv** 复制到 **\\HdiSamples\\HdiSamples\\SensorSampleData\\hvac** 下的关联存储帐户。
 
     将以下代码段粘贴到空白单元格中，然后按 **SHIFT + ENTER**。此代码段会将数据注册到名为 **hvac** 的 Hive 表。
 
-        # Create an RDD from sample data
-        hvacText = sc.textFile("wasbs:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
+    ```
+    # Create an RDD from sample data
+    hvacText = sc.textFile("wasbs:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
 
-        # Create a schema for our data
-        Entry = Row('Date', 'Time', 'TargetTemp', 'ActualTemp', 'BuildingID')
+    # Create a schema for our data
+    Entry = Row('Date', 'Time', 'TargetTemp', 'ActualTemp', 'BuildingID')
 
-        # Parse the data and create a schema
-        hvacParts = hvacText.map(lambda s: s.split(',')).filter(lambda s: s[0] != 'Date')
-        hvac = hvacParts.map(lambda p: Entry(str(p[0]), str(p[1]), int(p[2]), int(p[3]), int(p[6])))
+    # Parse the data and create a schema
+    hvacParts = hvacText.map(lambda s: s.split(',')).filter(lambda s: s[0] != 'Date')
+    hvac = hvacParts.map(lambda p: Entry(str(p[0]), str(p[1]), int(p[2]), int(p[3]), int(p[6])))
 
-        # Infer the schema and create a table       
-        hvacTable = sqlContext.createDataFrame(hvac)
-        hvacTable.registerTempTable('hvactemptable')
-        dfw = DataFrameWriter(hvacTable)
-        dfw.saveAsTable('hvac')
+    # Infer the schema and create a table       
+    hvacTable = sqlContext.createDataFrame(hvac)
+    hvacTable.registerTempTable('hvactemptable')
+    dfw = DataFrameWriter(hvacTable)
+    dfw.saveAsTable('hvac')
+    ```
 
-1. 验证创建表是否成功。可以使用 `%%sql` 幻数直接运行 Hive 查询。有关 `%%sql` 幻数以及可在 PySpark 内核中使用的其他幻数的详细信息，请参阅 [Kernels available on Jupyter notebooks with Spark HDInsight clusters](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-kernels/#why-should-i-use-the-pyspark-or-spark-kernels)（包含 Spark HDInsight 群集的 Jupyter 笔记本上可用的内核）。
+1. 验证创建表是否成功。可以使用 `%%sql` 幻数直接运行 Hive 查询。有关 `%%sql` 幻数以及可在 PySpark 内核中使用的其他幻数的详细信息，请参阅 [Kernels available on Jupyter notebooks with Spark HDInsight clusters](./hdinsight-apache-spark-jupyter-notebook-kernels.md#why-should-i-use-the-pyspark-or-spark-kernels)（包含 Spark HDInsight 群集的 Jupyter 笔记本上可用的内核）。
 
-        %%sql
-        SHOW TABLES
+    ```
+    %%sql
+    SHOW TABLES
+    ```
 
     输出应如下所示：
 
-        +-----------+---------------+
-        |isTemporary|tableName        |
-        +-----------+---------------+
-        |       true|hvactemptable  |
-        |      false|hivesampletable|
-        |      false|hvac            |
-        +-----------+---------------+
+    ```
+    +-----------+---------------+
+    |isTemporary|tableName        |
+    +-----------+---------------+
+    |       true|hvactemptable  |
+    |      false|hivesampletable|
+    |      false|hvac            |
+    +-----------+---------------+
+    ```
 
     只有 **isTemporary** 列中包含 false 的表才是要存储在元存储，并且可通过 BI 工具访问的 Hive 表。在本教程中，连接到刚创建的 **hvac** 表。
 
 1. 验证表是否包含所需的数据。将以下代码段粘贴到笔记本的空白单元格中，然后按 **SHIFT + ENTER**。
 
-        %%sql
-        SELECT * FROM hvac LIMIT 10
+    ```
+    %%sql
+    SELECT * FROM hvac LIMIT 10
+    ```
 2. 现在，可以关闭笔记本以释放资源。为此，在笔记本的“文件”菜单中，单击“关闭并停止”。这将会关闭笔记本。
 
 ## <a name="powerbi"></a>使用 Power BI 分析 Hive 表中的数据
@@ -133,7 +144,7 @@
 
 ## <a name="tableau"></a>使用 Tableau Desktop 分析 Hive 表中的数据
 
-> [AZURE.NOTE]
+> [!NOTE]
 本部分仅适用于在 Azure HDInsight 中创建的 Spark 1.5.2 群集。
 >
 >
@@ -170,36 +181,36 @@
 9. 单击“保存”以保存工作表。可以创建仪表板，并在其中添加一个或多个工作表。
 
 ## <a name="seealso"></a>另请参阅
-* [概述：Azure HDInsight 上的 Apache Spark](/documentation/articles/hdinsight-apache-spark-overview/)
+* [概述：Azure HDInsight 上的 Apache Spark](./hdinsight-apache-spark-overview.md)
 
 ### 方案
-* [Spark 和机器学习：使用 HDInsight 中的 Spark 对使用 HVAC 数据生成温度进行分析](/documentation/articles/hdinsight-apache-spark-ipython-notebook-machine-learning/)
-* [Spark 和机器学习：使用 HDInsight 中的 Spark 预测食品检查结果](/documentation/articles/hdinsight-apache-spark-machine-learning-mllib-ipython/)
-* [Spark 流式处理：使用 HDInsight 中的 Spark 生成实时流式处理应用程序](/documentation/articles/hdinsight-apache-spark-eventhub-streaming/)
-* [使用 HDInsight 中的 Spark 分析网站日志](/documentation/articles/hdinsight-apache-spark-custom-library-website-log-analysis/)
+* [Spark 和机器学习：使用 HDInsight 中的 Spark 对使用 HVAC 数据生成温度进行分析](./hdinsight-apache-spark-ipython-notebook-machine-learning.md)
+* [Spark 和机器学习：使用 HDInsight 中的 Spark 预测食品检查结果](./hdinsight-apache-spark-machine-learning-mllib-ipython.md)
+* [Spark 流式处理：使用 HDInsight 中的 Spark 生成实时流式处理应用程序](./hdinsight-apache-spark-eventhub-streaming.md)
+* [使用 HDInsight 中的 Spark 分析网站日志](./hdinsight-apache-spark-custom-library-website-log-analysis.md)
 
 ### 创建和运行应用程序
-* [使用 Scala 创建独立的应用程序](/documentation/articles/hdinsight-apache-spark-create-standalone-application/)
-* [使用 Livy 在 Spark 群集中远程运行作业](/documentation/articles/hdinsight-apache-spark-livy-rest-interface/)
+* [使用 Scala 创建独立的应用程序](./hdinsight-apache-spark-create-standalone-application.md)
+* [使用 Livy 在 Spark 群集中远程运行作业](./hdinsight-apache-spark-livy-rest-interface.md)
 
 ### 工具和扩展
-* [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](/documentation/articles/hdinsight-apache-spark-use-zeppelin-notebook/)
-* [在 HDInsight 的 Spark 群集中可用于 Jupyter 笔记本的内核](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-kernels/)
-* [Use external packages with Jupyter notebooks（将外部包与 Jupyter 笔记本配合使用）](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-use-external-packages/)
-* [Install Jupyter on your computer and connect to an HDInsight Spark cluster（在计算机上安装 Jupyter 并连接到 HDInsight Spark 群集）](/documentation/articles/hdinsight-apache-spark-jupyter-notebook-install-locally/)
+* [在 HDInsight 上的 Spark 群集中使用 Zeppelin 笔记本](./hdinsight-apache-spark-use-zeppelin-notebook.md)
+* [在 HDInsight 的 Spark 群集中可用于 Jupyter 笔记本的内核](./hdinsight-apache-spark-jupyter-notebook-kernels.md)
+* [Use external packages with Jupyter notebooks（将外部包与 Jupyter 笔记本配合使用）](./hdinsight-apache-spark-jupyter-notebook-use-external-packages.md)
+* [Install Jupyter on your computer and connect to an HDInsight Spark cluster（在计算机上安装 Jupyter 并连接到 HDInsight Spark 群集）](./hdinsight-apache-spark-jupyter-notebook-install-locally.md)
 
 ### 管理资源
-* [管理 Azure HDInsight 中 Apache Spark 群集的资源](/documentation/articles/hdinsight-apache-spark-resource-manager/)
-* [Track and debug jobs running on an Apache Spark cluster in HDInsight（跟踪和调试 HDInsight 中的 Apache Spark 群集上运行的作业）](/documentation/articles/hdinsight-apache-spark-job-debugging/)
+* [管理 Azure HDInsight 中 Apache Spark 群集的资源](./hdinsight-apache-spark-resource-manager.md)
+* [Track and debug jobs running on an Apache Spark cluster in HDInsight（跟踪和调试 HDInsight 中的 Apache Spark 群集上运行的作业）](./hdinsight-apache-spark-job-debugging.md)
 
-[hdinsight-versions]: /documentation/articles/hdinsight-component-versioning/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
+[hdinsight-versions]: ./hdinsight-component-versioning.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
 
-[azure-purchase-options]: /pricing/overview/
-[azure-member-offers]: /pricing/member-offers/
-[azure-trial]: /pricing/1rmb-trial/
+[azure-purchase-options]: https://www.azure.cn/pricing/overview/
+[azure-member-offers]: https://www.azure.cn/pricing/member-offers/
+[azure-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [azure-management-portal]: https://manage.windowsazure.cn/
-[azure-create-storageaccount]: /documentation/articles/storage-create-storage-account/
+[azure-create-storageaccount]: ../storage/storage-create-storage-account.md
 
 <!---HONumber=Mooncake_0120_2017-->

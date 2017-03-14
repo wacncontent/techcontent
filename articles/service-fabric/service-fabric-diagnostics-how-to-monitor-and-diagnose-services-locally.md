@@ -1,27 +1,27 @@
-<properties
-    pageTitle="在本地监视和诊断使用 Azure Service Fabric 编写的服务 | Azure"
-    description="了解如何在本地开发计算机上监视和诊断使用 Azure Service Fabric 编写的服务。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="ms-toddabel"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="edcc0631-ed2d-45a3-851d-2c4fa0f4a326"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/04/2017"
-    wacn.date="02/20/2017"
-    ms.author="toddabel" />  
+---
+title: 在本地监视和诊断使用 Azure Service Fabric 编写的服务 | Azure
+description: 了解如何在本地开发计算机上监视和诊断使用 Azure Service Fabric 编写的服务。
+services: service-fabric
+documentationcenter: .net
+author: ms-toddabel
+manager: timlt
+editor: ''
 
+ms.assetid: edcc0631-ed2d-45a3-851d-2c4fa0f4a326
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/04/2017
+wacn.date: 02/20/2017
+ms.author: toddabel
+---
 
 # 在本地计算机开发安装过程中监视和诊断服务
->[AZURE.SELECTOR]
-- [Windows](/documentation/articles/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/)
-- [Linux](/documentation/articles/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally-linux/)
+>[!div class="op_single_selector"]
+- [Windows](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)
+- [Linux](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally-linux.md)
 
 监视、检测、诊断和故障排除允许服务继续运行，使对用户体验造成了干扰降至最低。虽然监视和诊断在实际部署的生产环境中相当重要，但其效力具有依赖性：开发服务时采用类似模型，才能确保其在移到实际安装时正常工作。通过 Service Fabric，服务开发人员能够轻松实现诊断，可以跨单个计算机本地开发安装和实际生产群集安装无缝工作。
 
@@ -33,10 +33,9 @@
 * **Service Fabric 系统代码也使用 ETW 进行内部跟踪。** 因此可查看与 Service Fabric 系统跟踪交错的应用程序跟踪。它还可帮助你更轻松地了解基础系统中应用程序代码与事件之间的序列和相互关系。
 * **Service Fabric Visual Studio 工具中有内置支持，可以查看 ETW 事件。**
 
-
 ##<a name="view-service-fabric-system-events-in-visual-studio"></a> 在 Visual Studio 中查看 Service Fabric 系统事件
 
-Service Fabric 发出 ETW 事件以帮助应用程序开发人员了解平台中发生的情况。如果你还没有这么做，请继续遵循[在 Visual Studio 中创建第一个应用程序](/documentation/articles/service-fabric-create-your-first-application-in-visual-studio/)中的步骤。此信息将帮助你使应用程序启动并运行，通过诊断事件查看器显示跟踪消息。
+Service Fabric 发出 ETW 事件以帮助应用程序开发人员了解平台中发生的情况。如果你还没有这么做，请继续遵循[在 Visual Studio 中创建第一个应用程序](./service-fabric-create-your-first-application-in-visual-studio.md)中的步骤。此信息将帮助你使应用程序启动并运行，通过诊断事件查看器显示跟踪消息。
 
 1. 如果诊断事件窗口未自动显示，请在 Visual Studio 中转到“视图”选项卡上，选择“其他窗口”，然后选择“诊断事件查看器”。
 
@@ -62,7 +61,7 @@ Service Fabric Visual Studio 项目模板包含示例代码。该代码将显示
 
 ## 后续步骤
 添加到上述应用程序用于进行本地诊断的跟踪代码适用于各种工具，在 Azure 群集上运行应用程序时，可以使用这些工具查看这些事件。请查看以下文章，其中介绍了各种工具选项，以及如何设置这些选项。
-* [如何使用 Azure 诊断收集日志](/documentation/articles/service-fabric-diagnostics-how-to-setup-wad/)
+* [如何使用 Azure 诊断收集日志](./service-fabric-diagnostics-how-to-setup-wad.md)
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: add selector at the beginning-->

@@ -1,27 +1,28 @@
-<properties
-	pageTitle="Azure 移动应用中的身份验证和授权 | Azure"
-	description="Azure 移动应用身份验证/授权功能的概念参考和概述"
-	services="app-service\mobile"
-	documentationCenter=""
-	authors="mattchenderson"
-	manager="erikre"
-	editor=""/>
+---
+title: Azure 移动应用中的身份验证和授权 | Azure
+description: Azure 移动应用身份验证/授权功能的概念参考和概述
+services: app-service\mobile
+documentationCenter: ''
+authors: mattchenderson
+manager: erikre
+editor: ''
 
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="mahender"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: mahender
+---
 
 # Azure 移动应用中的身份验证和授权
 
 ## 什么是应用服务身份验证/授权？
 
-> [AZURE.NOTE] 本主题将会移入 [App Service Authentication / Authorization](/documentation/articles/app-service-authentication-overview/)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
+> [!NOTE]
+> 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
 
 应用服务身份验证/授权是一项功能，使应用程序能够将用户登录，而无需在应用后端进行任何代码更改。该功能可以方便地保护应用程序和处理每个用户的数据。
 
@@ -50,7 +51,8 @@
 - 使用一行代码，让移动应用客户端 SDK 登录用户。
 - 利用给定标识提供者发布的 SDK 建立标识，然后获取对应用服务的访问权限。
 
->[AZURE.TIP] 大多数应用程序都应该使用提供程序 SDK 来获得更自然的登录体验，使用刷新支持和其他提供程序特定的优势。
+>[!TIP]
+> 大多数应用程序都应该使用提供程序 SDK 来获得更自然的登录体验，使用刷新支持和其他提供程序特定的优势。
 
 ### 不使用提供程序 SDK 进行身份验证的工作原理
 
@@ -86,14 +88,14 @@
 - [How to configure your app to use Azure Active Directory login]（如何将应用配置为使用 Azure Active Directory 登录）
 - [How to configure your app to use Microsoft Account login]（如何将应用配置为使用 Microsoft 帐户登录）
 
-如果想要使用此处提供的标识系统以外的标识系统，也可以利用 [.NET 服务器 SDK 中的预览自定义身份验证](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#custom-auth)支持。
+如果想要使用此处提供的标识系统以外的标识系统，也可以利用 [.NET 服务器 SDK 中的预览自定义身份验证](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#custom-auth)支持。
 
-[Add authentication to your iOS app]: /documentation/articles/app-service-mobile-ios-get-started-users/
-[Add authentication to your Xamarin.iOS app]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-users/
-[Add authentication to your Xamarin.Android app]: /documentation/articles/app-service-mobile-xamarin-android-get-started-users/
-[Add Authentication to your Windows app]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started-users/
+[Add authentication to your iOS app]: ./app-service-mobile-ios-get-started-users.md
+[Add authentication to your Xamarin.iOS app]: ./app-service-mobile-xamarin-ios-get-started-users.md
+[Add authentication to your Xamarin.Android app]: ./app-service-mobile-xamarin-android-get-started-users.md
+[Add Authentication to your Windows app]: ./app-service-mobile-windows-store-dotnet-get-started-users.md
 
-[How to configure your app to use Azure Active Directory login]: /documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/
-[How to configure your app to use Microsoft Account login]: /documentation/articles/app-service-mobile-how-to-configure-microsoft-authentication/
+[How to configure your app to use Azure Active Directory login]: ./app-service-mobile-how-to-configure-active-directory-authentication.md
+[How to configure your app to use Microsoft Account login]: ./app-service-mobile-how-to-configure-microsoft-authentication.md
 
 <!---HONumber=Mooncake_0919_2016-->

@@ -1,29 +1,25 @@
-<properties
-	pageTitle="使用 Azure 诊断跟踪云服务应用程序中的流 | Azure"
-	description="将跟踪消息添加到 Azure 应用程序，以帮助调试、性能度量、监视和流量分析等。"
-	services="cloud-services"
-	documentationCenter=".net"
-	authors="rboucher"
-	manager="jwhit"
-	editor=""/>  
+---
+title: 使用 Azure 诊断跟踪云服务应用程序中的流 | Azure
+description: 将跟踪消息添加到 Azure 应用程序，以帮助调试、性能度量、监视和流量分析等。
+services: cloud-services
+documentationCenter: .net
+authors: rboucher
+manager: jwhit
+editor: ''
 
-
-<tags
-	ms.service="cloud-services"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="02/20/2016"
-	wacn.date="12/26/2016"
-	ms.author="robb"/>
-
-
+ms.service: cloud-services
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 02/20/2016
+wacn.date: 12/26/2016
+ms.author: robb
+---
 
 # 使用 Azure 诊断跟踪云服务应用程序的流
 
 跟踪是在应用程序运行时监视其执行情况的一种方式。可以使用 [System.Diagnostics.Trace](https://msdn.microsoft.com/zh-cn/library/system.diagnostics.trace.aspx)、[System.Diagnostics.Debug](https://msdn.microsoft.com/zh-cn/library/system.diagnostics.debug.aspx) 和 [System.Diagnostics.TraceSource](https://msdn.microsoft.com/zh-cn/library/system.diagnostics.tracesource.aspx) 类在日志、文本文件或其他设备中记录有关错误和应用程序执行情况的信息，供以后进行分析。有关跟踪的详细信息，请参阅[跟踪和检测应用程序](https://msdn.microsoft.com/zh-cn/library/zs6s4h68.aspx)。
-
 
 ## 使用 Trace 语句和 Trace 开关
 
@@ -37,32 +33,34 @@
 
 Trace、Debug 和 TraceSource 都需要设置“侦听器”来收集和记录发送的消息。侦听器可收集、存储和路由跟踪消息。它们将跟踪输出传输到适当的目标，如日志、窗口或文本文件。Azure 诊断使用 [DiagnosticMonitorTraceListener](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.diagnostics.diagnosticmonitortracelistener.aspx) 类。
 
-完成以下过程之前，必须初始化 Azure 诊断监视器。若要执行此操作，请参阅[在 Azure 中启用诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)。
+完成以下过程之前，必须初始化 Azure 诊断监视器。若要执行此操作，请参阅[在 Azure 中启用诊断](./cloud-services-dotnet-diagnostics.md)。
 
 请注意，如果使用 Visual Studio 提供的模板，将自动添加侦听器的配置。
-
 
 ### 添加跟踪侦听器
 
 1. 打开角色的 web.config 或 app.config 文件。
 2. 将以下代码添加到文件。更改 Version 属性，以使用引用的程序集的版本号。除非有更新，否则程序集版本不一定随着每个 Azure SDK 发行版而改变。
-	
-    	<system.diagnostics>
-    		<trace>
-    			<listeners>
-    				<add type="Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitorTraceListener,
-    		          Microsoft.WindowsAzure.Diagnostics,
-    		          Version=2.8.0.0,
-    		          Culture=neutral,
-    		          PublicKeyToken=31bf3856ad364e35"
-    		          name="AzureDiagnostics">
-    			  	  <filter type="" />
-    				</add>
-    			</listeners>
-    		</trace>
-    	</system.diagnostics>
-	
-	>[AZURE.IMPORTANT] 确保与 Microsoft.WindowsAzure.Diagnostics 程序集建立项目引用。更新上述 xml 中的版本号，以便与引用的 Microsoft.WindowsAzure.Diagnostics 程序集的版本匹配。
+
+    ```
+    <system.diagnostics>
+        <trace>
+            <listeners>
+                <add type="Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitorTraceListener,
+                  Microsoft.WindowsAzure.Diagnostics,
+                  Version=2.8.0.0,
+                  Culture=neutral,
+                  PublicKeyToken=31bf3856ad364e35"
+                  name="AzureDiagnostics">
+                    <filter type="" />
+                </add>
+            </listeners>
+        </trace>
+    </system.diagnostics>
+    ```
+
+    >[!IMPORTANT]
+    > 确保与 Microsoft.WindowsAzure.Diagnostics 程序集建立项目引用。更新上述 xml 中的版本号，以便与引用的 Microsoft.WindowsAzure.Diagnostics 程序集的版本匹配。
 
 3. 保存 config 文件。
 
@@ -70,14 +68,15 @@ Trace、Debug 和 TraceSource 都需要设置“侦听器”来收集和记录�
 
 完成添加侦听器步骤后，可以将 Trace 语句添加到代码。
 
-
 ### 将 Trace 语句添加到代码
 
 1. 打开应用程序的源文件。例如，用于辅助角色或 Web 角色的 <RoleName>.cs 文件。
 2. 添加以下 using 语句（如果尚未添加）：
-	
-	    using System.Diagnostics;
-	
+
+    ```
+    using System.Diagnostics;
+    ```
+
 3. 添加 Trace 语句，以便捕获有关应用程序状态的信息。可以使用多种方法格式化 Trace 语句的输出。有关详细信息，请参阅[如何：向应用程序代码添加 Trace 语句](https://msdn.microsoft.com/zh-cn/library/zd83saa2.aspx)。
 4. 保存源文件。
 

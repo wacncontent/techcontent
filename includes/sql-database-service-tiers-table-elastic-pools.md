@@ -5,7 +5,6 @@ sql-database-resource-limits.md
 sql-database-service-tiers.md  
 -->
 
-
 ### 基本弹性池限制
 
 | 池大小 (eDTU) | **50** | **100** | **200** | **300** | **400** | **800** | **1200** | **1600** |

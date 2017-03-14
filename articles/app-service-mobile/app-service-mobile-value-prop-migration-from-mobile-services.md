@@ -1,21 +1,21 @@
-<properties
-	pageTitle="使用移动服务时，应用服务有何作用？"
-	description="了解应用服务为现有的移动服务项目带来的优势。"
-	services="app-service\mobile"
-	documentationCenter="ios"
-	authors="adrianhall"
-	manager="dwrede"
-	editor=""/>
+---
+title: 使用移动服务时，应用服务有何作用？
+description: 了解应用服务为现有的移动服务项目带来的优势。
+services: app-service\mobile
+documentationCenter: ios
+authors: adrianhall
+manager: dwrede
+editor: ''
 
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="na"
-	ms.topic="get-started-article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # <a name="getting-started"></a>使用移动服务时，应用服务有何作用？
 
@@ -60,6 +60,6 @@
 ##各就位，预备，跑！
 使用 *Azure 应用服务* ，可以为移动应用创建多个专用测试和过渡环境。可以在部署之前使用这些环境执行测试。无需停机即可切换到生产环境。预先加载 Web 应用，确保最佳客户体验。
 
-可以遵循此 *教程* ，开始将[应用服务](/documentation/articles/app-service-mobile-migrating-from-mobile-services/)用于现有移动服务。
+可以遵循此 *教程* ，开始将[应用服务](./app-service-mobile-migrating-from-mobile-services.md)用于现有移动服务。
 
 <!---HONumber=Mooncake_0919_2016-->

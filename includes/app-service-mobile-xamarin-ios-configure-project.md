@@ -12,7 +12,6 @@
 
    ![](./media/app-service-mobile-xamarin-ios-configure-project/mobile-services-ios-push-20.png)  
 
-
    这确保项目使用新配置文件进行代码签名。有关正式的 Xamarin 设备设置文档，请参阅 [Xamarin 设备设置]。
 
 #### 在 Visual Studio 中配置 iOS 项目
@@ -24,7 +23,6 @@
 3. 在“iOS 捆绑签名”选项卡中，选择刚为此项目设置的相应的标识符和预配配置文件。
 
     ![](./media/app-service-mobile-xamarin-ios-configure-project/mobile-services-ios-push-24.png)  
-
 
     这确保项目使用新配置文件进行代码签名。有关正式的 Xamarin 设备设置文档，请参阅 [Xamarin 设备设置]。
 4. 双击 Info.plist 打开它，然后在“后台模式”下面启用“远程通知”。

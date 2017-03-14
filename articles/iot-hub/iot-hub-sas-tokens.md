@@ -1,16 +1,16 @@
-<properties
- pageTitle="如何生成 IoT 中心安全令牌 | Azure"
- description="说明 IoT 中心使用的不同类型的安全令牌（如 SAS 和 X.509），以及如何生成这些令牌。"
- services="iot-hub"
- documentationCenter=".net"
- authors="fsautomata"
- manager="timlt"
- editor=""/>
+---
+title: 如何生成 IoT 中心安全令牌 | Azure
+description: 说明 IoT 中心使用的不同类型的安全令牌（如 SAS 和 X.509），以及如何生成这些令牌。
+services: iot-hub
+documentationCenter: .net
+authors: fsautomata
+manager: timlt
+editor: ''
 
-<tags
- ms.service="iot-hub"
- ms.date="06/07/2016"
-wacn.date="01/04/2017"/>
+ms.service: iot-hub
+ms.date: 06/07/2016
+wacn.date: 01/04/2017
+---
 
 # 使用 IoT 中心安全令牌
 
@@ -27,7 +27,6 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 * 注册与特定设备绑定的 X.509 客户端证书的过程。
 * 设备与使用 X.509 客户端证书进行身份验证的 IoT 中心之间的运行时流。
 
-
 ## <a name="security-token-structure"></a> 安全令牌结构
 可以使用安全令牌向设备和服务授予限时访问 IoT 中心特定功能的权限。为确保只有经过授权的设备和服务能够连接，安全令牌必须使用共享访问策略密钥或存储在标识注册表中并带有设备标识的对称密钥进行签名。
 
@@ -35,7 +34,9 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 安全令牌采用以下格式：
 
-    SharedAccessSignature sig={signature-string}&se={expiry}&skn={policyName}&sr={URL-encoded-resourceURI}
+```
+SharedAccessSignature sig={signature-string}&se={expiry}&skn={policyName}&sr={URL-encoded-resourceURI}
+```
 
 以下是预期值：
 
@@ -51,51 +52,56 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 这是一个根据 `resourceUri, signingKey, policyName, expiresInMins` 输入计算令牌的 Node 函数。以下各节将详细讲解如何初始化不同令牌用例的不同输入。
 
-    var crypto = require('crypto');
+```
+var crypto = require('crypto');
 
-    var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMins) {
-        resourceUri = encodeURIComponent(resourceUri.toLowerCase()).toLowerCase();
+var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMins) {
+    resourceUri = encodeURIComponent(resourceUri.toLowerCase()).toLowerCase();
 
-        // Set expiration in seconds
-        var expires = (Date.now() / 1000) + expiresInMins * 60;
-        expires = Math.ceil(expires);
-        var toSign = resourceUri + '\n' + expires;
+    // Set expiration in seconds
+    var expires = (Date.now() / 1000) + expiresInMins * 60;
+    expires = Math.ceil(expires);
+    var toSign = resourceUri + '\n' + expires;
 
-        // using crypto
-        var decodedPassword = new Buffer(signingKey, 'base64').toString('binary');
-        const hmac = crypto.createHmac('sha256', decodedPassword);
-        hmac.update(toSign);
-        var base64signature = hmac.digest('base64');
-        var base64UriEncoded = encodeURIComponent(base64signature);
+    // using crypto
+    var decodedPassword = new Buffer(signingKey, 'base64').toString('binary');
+    const hmac = crypto.createHmac('sha256', decodedPassword);
+    hmac.update(toSign);
+    var base64signature = hmac.digest('base64');
+    var base64UriEncoded = encodeURIComponent(base64signature);
 
-        // construct autorization string
-        var token = "SharedAccessSignature sr=" + resourceUri + "&sig="
-        + base64UriEncoded + "&se=" + expires;
-        if (policyName) token += "&skn="+policyName;
-        // console.log("signature:" + token);
-        return token;
-    };
- 
+    // construct autorization string
+    var token = "SharedAccessSignature sr=" + resourceUri + "&sig="
+    + base64UriEncoded + "&se=" + expires;
+    if (policyName) token += "&skn="+policyName;
+    // console.log("signature:" + token);
+    return token;
+};
+```
+
  为方便比较，下面提供了等效的 Python 代码：
- 
+
     from base64 import b64encode, b64decode
     from hashlib import sha256
     from hmac import HMAC
     from urllib import urlencode
-    
+
     def generate_sas_token(uri, key, policy_name='device', expiry=3600):
         ttl = time() + expiry
         sign_key = "%s\n%d" % (uri, int(ttl))
         signature = b64encode(HMAC(b64decode(key), sign_key, sha256).digest())
-     
-        return 'SharedAccessSignature ' + urlencode({
-            'sr' :  uri,
-            'sig': signature,
-            'se' : str(int(ttl)),
-            'skn': policy_name
-        })
 
-> [AZURE.NOTE] 由于 IoT 中心计算机会验证令牌的有效期，因此生成令牌的计算机的时间偏差必须很小。
+    ```
+    return 'SharedAccessSignature ' + urlencode({
+        'sr' :  uri,
+        'sig': signature,
+        'se' : str(int(ttl)),
+        'skn': policy_name
+    })
+    ```
+
+> [!NOTE]
+> 由于 IoT 中心计算机会验证令牌的有效期，因此生成令牌的计算机的时间偏差必须很小。
 
 ## <a name="use-sas-tokens-as-a-device"></a> 将 SAS 令牌当做设备使用
 
@@ -103,7 +109,8 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 此外，必须注意的是，可从设备访问的所有功能都故意显示在前缀为 `/devices/{deviceId}` 的终结点上。
 
-> [AZURE.IMPORTANT] IoT 中心对某个特定设备进行身份验证的唯一方法是使用设备标识对称密钥。使用共享访问策略访问设备功能时，解决方案必须考虑将安全令牌作为受信任的子组件进行颁发的组件。
+> [!IMPORTANT]
+> IoT 中心对某个特定设备进行身份验证的唯一方法是使用设备标识对称密钥。使用共享访问策略访问设备功能时，解决方案必须考虑将安全令牌作为受信任的子组件进行颁发的组件。
 
 面向设备的终结点包括（无论任何协议）：
 
@@ -125,16 +132,21 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 使用上述 Node 函数的示例如下：
 
-    var endpoint ="myhub.azure-devices.cn/devices/device1";
-    var deviceKey ="...";
+```
+var endpoint ="myhub.azure-devices.cn/devices/device1";
+var deviceKey ="...";
 
-    var token = generateSasToken(endpoint, deviceKey, null, 60);
+var token = generateSasToken(endpoint, deviceKey, null, 60);
+```
 
 授权访问设备 1 的所有功能的安全令牌是：
 
-    SharedAccessSignature sr=myhub.azure-devices.cn%2fdevices%2fdevice1&sig=13y8ejUk2z7PLmvtwR5RqlGBOVwiq7rQR3WZ5xZX3N4%3D&se=1456971697
+```
+SharedAccessSignature sr=myhub.azure-devices.cn%2fdevices%2fdevice1&sig=13y8ejUk2z7PLmvtwR5RqlGBOVwiq7rQR3WZ5xZX3N4%3D&se=1456971697
+```
 
-> [AZURE.NOTE] 可以使用 .NET 工具设备资源管理器来生成安全令牌。
+> [!NOTE]
+> 可以使用 .NET 工具设备资源管理器来生成安全令牌。
 
 ### 使用共享访问策略
 
@@ -156,15 +168,19 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 使用上述 Node 函数的示例如下：
 
-    var endpoint ="myhub.azure-devices.cn/devices/device1";
-    var policyName = 'device';
-    var policyKey = '...';
+```
+var endpoint ="myhub.azure-devices.cn/devices/device1";
+var policyName = 'device';
+var policyKey = '...';
 
-    var token = generateSasToken(endpoint, policyKey, policyName, 60);
+var token = generateSasToken(endpoint, policyKey, policyName, 60);
+```
 
 授权访问设备 1 的所有功能的安全令牌是：
 
-    SharedAccessSignature sr=myhub.azure-devices.cn%2fdevices%2fdevice1&sig=13y8ejUk2z7PLmvtwR5RqlGBOVwiq7rQR3WZ5xZX3N4%3D&se=1456971697&skn=device
+```
+SharedAccessSignature sr=myhub.azure-devices.cn%2fdevices%2fdevice1&sig=13y8ejUk2z7PLmvtwR5RqlGBOVwiq7rQR3WZ5xZX3N4%3D&se=1456971697&skn=device
+```
 
 协议网关可以对所有设备使用相同的令牌，只需将资源 URI 设置为 `myhub.azure-devices.cn/devices`。
 
@@ -194,7 +210,9 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 授权读取所有设备标识权限的安全令牌是：
 
-    SharedAccessSignature sr=myhub.azure-devices.cn%2fdevices&sig=JdyscqTpXdEJs49elIUCcohw2DlFDR3zfH5KqGJo4r4%3D&se=1456973447&skn=registryRead
+```
+SharedAccessSignature sr=myhub.azure-devices.cn%2fdevices&sig=JdyscqTpXdEJs49elIUCcohw2DlFDR3zfH5KqGJo4r4%3D&se=1456973447&skn=registryRead
+```
 
 ## 支持的 X.509 证书
 
@@ -216,24 +234,25 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 **RegistryManager** 类提供了用于注册设备的编程方式。具体而言，使用 **AddDeviceAsync** 和 **UpdateDeviceAsync** 方法，用户可以在 Iot 中心设备标识注册表中注册和更新设备。这两种方法均采用 **Device** 实例作为输入。**Device** 类包括 **Authentication** 属性，以允许用户指定主要和次要 X.509 证书指纹。指纹表示 X.509 证书的 SHA-1 哈希值（使用二进制 DER 编码存储）。用户可以选择指定主要指纹和/或次要指纹。为了处理证书滚动更新方案，支持主要和次要指纹。
 
-> [AZURE.NOTE] IoT 中心不需要也不存储整个 X.509 客户端证书，仅存储指纹。
+> [!NOTE]
+> IoT 中心不需要也不存储整个 X.509 客户端证书，仅存储指纹。
 
 下面是使用 X.509 客户端证书注册设备的示例 C# 代码片段：
 
-
-		var device = new Device(deviceId)
-		{
-		  Authentication = new AuthenticationMechanism()
-		  {
-		    X509Thumbprint = new X509Thumbprint()
-		    {
-		      PrimaryThumbprint = "921BC9694ADEB8929D4F7FE4B9A3A6DE58B0790B"
-		    }
-		  }
-		};
-		RegistryManager registryManager = RegistryManager.CreateFromConnectionString(deviceGatewayConnectionString);
-		await registryManager.AddDeviceAsync(device);
-
+```
+    var device = new Device(deviceId)
+    {
+      Authentication = new AuthenticationMechanism()
+      {
+        X509Thumbprint = new X509Thumbprint()
+        {
+          PrimaryThumbprint = "921BC9694ADEB8929D4F7FE4B9A3A6DE58B0790B"
+        }
+      }
+    };
+    RegistryManager registryManager = RegistryManager.CreateFromConnectionString(deviceGatewayConnectionString);
+    await registryManager.AddDeviceAsync(device);
+```
 
 ## 在运行时操作期间使用 X.509 客户端证书
 
@@ -245,16 +264,16 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 下面是示例代码片段：
 
+```
+    var authMethod = new DeviceAuthenticationWithX509Certificate("<device id>", x509Certificate);
 
-		var authMethod = new DeviceAuthenticationWithX509Certificate("<device id>", x509Certificate);
-
-		var deviceClient = DeviceClient.Create("<IotHub DNS HostName>", authMethod);
-
+    var deviceClient = DeviceClient.Create("<IotHub DNS HostName>", authMethod);
+```
 
 [lnk-apis-sdks]: https://github.com/Azure/azure-iot-sdks/blob/master/readme.md
-[lnk-guidance-security]: /documentation/articles/iot-hub-guidance/#customauth
-[lnk-devguide-security]: /documentation/articles/iot-hub-devguide-security/
-[lnk-azure-protocol-gateway]: /documentation/articles/iot-hub-protocol-gateway/
+[lnk-guidance-security]: ./iot-hub-guidance.md#customauth
+[lnk-devguide-security]: ./iot-hub-devguide-security.md
+[lnk-azure-protocol-gateway]: ./iot-hub-protocol-gateway.md
 [lnk-device-explorer]: https://github.com/Azure/azure-iot-sdks/blob/master/tools/DeviceExplorer/doc/how_to_use_device_explorer.md
 
 [OpenSSL]: https://www.openssl.org/

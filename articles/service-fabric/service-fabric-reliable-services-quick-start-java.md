@@ -1,34 +1,34 @@
-<properties
-    pageTitle="在 Java 中创建第一个可靠的 Azure 微服务 | Azure"
-    description="介绍如何创建包含无状态服务和有状态服务的 Azure Service Fabric 应用程序。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="vturecek"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="7831886f-7ec4-4aef-95c5-b2469a5b7b5d"
-    ms.service="service-fabric"
-    ms.devlang="java"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="02/10/2017"
-    wacn.date="03/03/2017"
-    ms.author="vturecek" />  
+---
+title: 在 Java 中创建第一个可靠的 Azure 微服务 | Azure
+description: 介绍如何创建包含无状态服务和有状态服务的 Azure Service Fabric 应用程序。
+services: service-fabric
+documentationcenter: .net
+author: vturecek
+manager: timlt
+editor: ''
 
+ms.assetid: 7831886f-7ec4-4aef-95c5-b2469a5b7b5d
+ms.service: service-fabric
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 02/10/2017
+wacn.date: 03/03/2017
+ms.author: vturecek
+---
 
 # Reliable Services 入门
 
-> [AZURE.SELECTOR]
-- [Windows 上的 C#](/documentation/articles/service-fabric-reliable-services-quick-start/)
-- [Linux 上的 Java](/documentation/articles/service-fabric-reliable-services-quick-start-java/)
+> [!div class="op_single_selector"]
+- [Windows 上的 C#](./service-fabric-reliable-services-quick-start.md)
+- [Linux 上的 Java](./service-fabric-reliable-services-quick-start-java.md)
 
 本文介绍 Azure Service Fabric Reliable Services 的基础知识，并演示如何创建和部署以 Java 编写的简单 Reliable Service 应用程序。此微软虚拟学院视频还说明如何创建无状态可靠服务：
 <center><a target="_blank" href="https://mva.microsoft.com/en-us/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=DOX8K86yC_206218965"> <img src="./media/service-fabric-reliable-services-quick-start-java/ReliableServicesJavaVid.png" WIDTH="360" HEIGHT="244"> </a></center>
 
 ## 安装和设置
-在开始之前，请确保已在计算机上设置 Service Fabric 开发环境。如果需要设置环境，请转到[在 Mac 上开始使用](/documentation/articles/service-fabric-get-started-mac/)或[在 Linux 上开始使用](/documentation/articles/service-fabric-get-started-linux/)。
+在开始之前，请确保已在计算机上设置 Service Fabric 开发环境。如果需要设置环境，请转到[在 Mac 上开始使用](./service-fabric-get-started-mac.md)或[在 Linux 上开始使用](./service-fabric-get-started-linux.md)。
 
 ## 基本概念
 了解几个基本概念，即可开始使用 Reliable Services：
@@ -44,36 +44,36 @@
 ## 创建无状态服务
 首先创建 Service Fabric 应用程序。适用于 Linux 的 Service Fabric SDK 包括一个 Yeoman 生成器，它为包含无状态服务的 Service Fabric 应用程序提供基架。首先，请运行以下 Yeoman 命令：
 
-
-	$ yo azuresfjava
-
+```
+$ yo azuresfjava
+```
 
 按照说明创建**可靠无状态服务**。本教程将应用程序命名为“HelloWorldApplication”，将服务命名为“HelloWorld”。结果包含 `HelloWorldApplication` 和 `HelloWorld` 的目录。
 
-
-	HelloWorldApplication/
-	├── build.gradle
-	├── HelloWorld
-	│   ├── build.gradle
-	│   └── src
-	│       └── statelessservice
-	│           ├── HelloWorldServiceHost.java
-	│           └── HelloWorldService.java
-	├── HelloWorldApplication
-	│   ├── ApplicationManifest.xml
-	│   └── HelloWorldPkg
-	│       ├── Code
-	│       │   ├── entryPoint.sh
-	│       │   └── _readme.txt
-	│       ├── Config
-	│       │   └── _readme.txt
-	│       ├── Data
-	│       │   └── _readme.txt
-	│       └── ServiceManifest.xml
-	├── install.sh
-	├── settings.gradle
-	└── uninstall.sh
-
+```
+HelloWorldApplication/
+├── build.gradle
+├── HelloWorld
+│   ├── build.gradle
+│   └── src
+│       └── statelessservice
+│           ├── HelloWorldServiceHost.java
+│           └── HelloWorldService.java
+├── HelloWorldApplication
+│   ├── ApplicationManifest.xml
+│   └── HelloWorldPkg
+│       ├── Code
+│       │   ├── entryPoint.sh
+│       │   └── _readme.txt
+│       ├── Config
+│       │   └── _readme.txt
+│       ├── Data
+│       │   └── _readme.txt
+│       └── ServiceManifest.xml
+├── install.sh
+├── settings.gradle
+└── uninstall.sh
+```
 
 ## 实现服务
 
@@ -81,21 +81,17 @@
 
 * 名为 `runAsync()` 的开放式入口点方法，可在其中开始执行任何工作负荷，包括长时间运行的计算工作负荷。
 
-
-	@Override
-	protected CompletableFuture<?> runAsync(CancellationToken cancellationToken) {
-	    ...
-	}
-
+    @Override
+    protected CompletableFuture<?> runAsync(CancellationToken cancellationToken) {
+        ...
+    }
 
 * 一个通信入口点，可在其中插入选择的通信堆栈。可在其中开始接收来自用户和其他服务的请求。
 
-
-	@Override
-	protected List<ServiceInstanceListener> createServiceInstanceListeners() {
-	    ...
-	}
-
+    @Override
+    protected List<ServiceInstanceListener> createServiceInstanceListeners() {
+        ...
+    }
 
 在本教程中，我们重点介绍 `runAsync()` 入口点方法。可在其中立即开始运行代码。
 
@@ -114,60 +110,60 @@ Service Fabric 将管理此业务流程，以便保持服务的高度可用和�
 #### 取消
 取消工作负荷是一项协同操作，由提供的取消标记进行协调。系统会等待任务结束（成功完成、取消或出现故障），然后再执行下一步操作。当系统请求取消时，请务必接受取消标记，完成所有任务，然后尽快退出 `runAsync()`。以下示例演示如何处理取消事件：
 
+```
+    @Override
+    protected CompletableFuture<?> runAsync(CancellationToken cancellationToken) {
 
-	    @Override
-	    protected CompletableFuture<?> runAsync(CancellationToken cancellationToken) {
+        // TODO: Replace the following sample code with your own logic
+        // or remove this runAsync override if it's not needed in your service.
 
-	        // TODO: Replace the following sample code with your own logic
-	        // or remove this runAsync override if it's not needed in your service.
+        CompletableFuture.runAsync(() -> {
+          long iterations = 0;
+          while(true)
+          {
+            cancellationToken.throwIfCancellationRequested();
+            logger.log(Level.INFO, "Working-{0}", ++iterations);
 
-	        CompletableFuture.runAsync(() -> {
-	          long iterations = 0;
-	          while(true)
-	          {
-	            cancellationToken.throwIfCancellationRequested();
-	            logger.log(Level.INFO, "Working-{0}", ++iterations);
-
-	            try
-	            {
-	              Thread.sleep(1000);
-	            }
-	            catch (IOException ex) {}
-	          }
-	        });
-	    }
-
+            try
+            {
+              Thread.sleep(1000);
+            }
+            catch (IOException ex) {}
+          }
+        });
+    }
+```
 
 ### 服务注册
 
 必须将服务类型注册到 Service Fabric 运行时。服务类型在 `ServiceManifest.xml` 中以及实现 `StatelessService` 的服务类中定义。服务注册在进程主入口点中执行。在本示例中，进程主入口点为 `HelloWorldServiceHost.java`：
 
-
-	public static void main(String[] args) throws Exception {
-	    try {
-	        ServiceRuntime.registerStatelessServiceAsync("HelloWorldType", (context) -> new HelloWorldService(), Duration.ofSeconds(10));
-	        logger.log(Level.INFO, "Registered stateless service type HelloWorldType.");
-	        Thread.sleep(Long.MAX_VALUE);
-	    } 
-	    catch (Exception ex) {
-        	logger.log(Level.SEVERE, "Exception in registration:", ex);
-	        throw ex;
-	    }
-	}
-
+```
+public static void main(String[] args) throws Exception {
+    try {
+        ServiceRuntime.registerStatelessServiceAsync("HelloWorldType", (context) -> new HelloWorldService(), Duration.ofSeconds(10));
+        logger.log(Level.INFO, "Registered stateless service type HelloWorldType.");
+        Thread.sleep(Long.MAX_VALUE);
+    } 
+    catch (Exception ex) {
+        logger.log(Level.SEVERE, "Exception in registration:", ex);
+        throw ex;
+    }
+}
+```
 
 ## 运行应用程序
 Yeoman 基架包含用于构建应用程序的 gradle 脚本，以及用于部署和取消部署应用程序的 bash 脚本。若要运行应用程序，请先使用 gradle 构建应用程序：
 
-
-	$ gradle
-
+```
+$ gradle
+```
 
 这会生成可以使用 Service Fabric Azure CLI 部署的 Service Fabric 应用程序包。Install.sh 脚本包含用于部署应用程序包的 Azure CLI 命令。运行 install.sh 脚本进行部署：
 
-
-	$ ./install.sh
-
+```
+$ ./install.sh
+```
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: sample code update; add a MVA video-->

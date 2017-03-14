@@ -1,28 +1,29 @@
-<properties
-    pageTitle="在 HDInsight Linux 群集上将 Hue 与 Hadoop 搭配使用 | Azure"
-    description="了解如何在 HDInsight Linux 上安装 Hue 并将其与 Hadoop 群集搭配使用。"
-    services="hdinsight"
-    documentationcenter=""
-    author="nitinme"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="9e57fcca-e26c-479d-a745-7b80a9290447"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="02/09/2017"
-    wacn.date="03/10/2017"
-    ms.author="nitinme" />
+---
+title: 在 HDInsight Linux 群集上将 Hue 与 Hadoop 搭配使用 | Azure
+description: 了解如何在 HDInsight Linux 上安装 Hue 并将其与 Hadoop 群集搭配使用。
+services: hdinsight
+documentationcenter: ''
+author: nitinme
+manager: jhubbard
+editor: cgronlun
+
+ms.assetid: 9e57fcca-e26c-479d-a745-7b80a9290447
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/09/2017
+wacn.date: 03/10/2017
+ms.author: nitinme
+---
 
 # 在 HDInsight Hadoop 群集上安装并使用 Hue
 
 了解如何在 HDInsight 群集上安装 Hue，并使用隧道将请求路由至 Hue。
 
-> [AZURE.IMPORTANT]
-本文档中的步骤需要使用 Linux 的 HDInsight 群集。Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](/documentation/articles/hdinsight-component-versioning/#hdi-version-32-and-33-nearing-deprecation-date)。
+> [!IMPORTANT]
+本文档中的步骤需要使用 Linux 的 HDInsight 群集。Linux 是在 HDInsight 3.4 版或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
 ## 什么是 Hue？
 Hue 是一组 Web 应用程序，用来与 Hadoop 群集交互。你可以使用 Hue 浏览与 Hadoop 群集关联的存储（在 HDInsight 群集的案例中为 WASB）、运行 Hive 作业和 Pig 脚本等等。HDInsight Hadoop 群集上的 Hue 安装提供以下组件。
@@ -34,7 +35,7 @@ Hue 是一组 Web 应用程序，用来与 Hadoop 群集交互。你可以使用
 * FileBrowser（与 WASB 默认容器进行通信）
 * 作业浏览器
 
-> [AZURE.WARNING]
+> [!WARNING]
 完全支持通过 HDInsight 群集提供的组件，Azure 支持部门将帮助找出并解决与这些组件相关的问题。
 ><p>
 > 自定义组件可获得合理范围的支持，有助于进一步解决问题。这可能会促进解决问题，或要求使用可用的开源技术渠道，在渠道中可找到该技术的深厚的专业知识。有许多可以使用的社区站点，例如：[HDInsight 的 MSDN 论坛](https://social.msdn.microsoft.com/Forums/azure/zh-cn/home?forum=hdinsight)和 [Azure CSDN](http://azure.csdn.net/)。此外，Apache 项目在 [http://apache.org](http://apache.org) 上提供了项目站点，例如 [Hadoop](http://hadoop.apache.org/)。
@@ -47,14 +48,14 @@ Hue 是一组 Web 应用程序，用来与 Hadoop 群集交互。你可以使用
 
 本部分说明如何在使用 Azure 门户预览预配群集时使用脚本。
 
-> [AZURE.NOTE]
-Azure PowerShell、Azure CLI、HDInsight .NET SDK 或 Azure Resource Manager 模板也可用于应用脚本操作。你也可以将脚本操作应用于已在运行的群集。有关详细信息，请参阅[使用脚本操作自定义 HDInsight 群集](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/)。
+> [!NOTE]
+Azure PowerShell、Azure CLI、HDInsight .NET SDK 或 Azure Resource Manager 模板也可用于应用脚本操作。你也可以将脚本操作应用于已在运行的群集。有关详细信息，请参阅[使用脚本操作自定义 HDInsight 群集](./hdinsight-hadoop-customize-cluster-linux.md)。
 >
 >
 
-1. 使用[预配 Linux 上的 HDInsight 群集](/documentation/articles/hdinsight-hadoop-provision-linux-clusters/)中的步骤开始预配群集，但不要完成预配。
+1. 使用[预配 Linux 上的 HDInsight 群集](./hdinsight-hadoop-provision-linux-clusters.md)中的步骤开始预配群集，但不要完成预配。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     若要在 HDInsight 群集上安装 Hue，建议的头节点大小为至少 A4（8 核、14 GB 内存）。
     >
     >
@@ -69,37 +70,41 @@ Azure PowerShell、Azure CLI、HDInsight .NET SDK 或 Azure Resource Manager 模
     * **ZOOKEEPER**：将此选项留空。
     * **参数**：将此选项留空。
 3. 在“脚本操作”的底部，使用“选择”按钮保存配置。最后，使用“可选配置”边栏选项卡底部的“选择”按钮保存可选配置信息。
-4. 继续按[预配 Linux 上的 HDInsight 群集](/documentation/articles/hdinsight-hadoop-provision-linux-clusters/)中所述预配群集。
+4. 继续按[预配 Linux 上的 HDInsight 群集](./hdinsight-hadoop-provision-linux-clusters.md)中所述预配群集。
 
 ## 将 Hue 与 HDInsight 群集搭配使用
 
 运行 Hue 时，SSH 隧道是在群集上访问 Hue 的唯一方式。通过 SSH 的隧道允许流量直接流向运行 Hue 的群集的头节点。在完成群集预配后，通过执行以下步骤在 HDInsight Linux 群集上使用 Hue。
 
-> [AZURE.NOTE]
+> [!NOTE]
 建议使用 Firefox web 浏览器按照以下说明进行操作。
 >
 >
 
-1. 利用[使用 SSH 隧道来访问 Ambari Web UI、ResourceManager、JobHistory、NameNode、Oozie 及其他 Web UI](/documentation/articles/hdinsight-linux-ambari-ssh-tunnel/) 中的信息，创建从客户端系统到 HDInsight 群集的 SSH 隧道，然后将 Web 浏览器配置为将 SSH 隧道用作代理。
+1. 利用[使用 SSH 隧道来访问 Ambari Web UI、ResourceManager、JobHistory、NameNode、Oozie 及其他 Web UI](./hdinsight-linux-ambari-ssh-tunnel.md) 中的信息，创建从客户端系统到 HDInsight 群集的 SSH 隧道，然后将 Web 浏览器配置为将 SSH 隧道用作代理。
 
 2. 在创建 SSH 隧道并将浏览器配置为通过它代理发送流量后，必须查找主头节点的主机名。为此，可以在端口 22 上使用 SSH 连接到群集。例如 `ssh USERNAME@CLUSTERNAME-ssh.azurehdinsight.cn`，其中 **USERNAME** 是 SSH 用户名，**CLUSTERNAME** 是群集的名称。
 
     有关使用 SSH 的详细信息，请参阅以下文档：
 
-    * [在 Linux、Unix 或 Mac OS X 客户端中将 SSH 与 HDInsight 配合使用](/documentation/articles/hdinsight-hadoop-linux-use-ssh-unix/)
-    * [Use SSH with HDInsight from Windows clients（在 Windows 客户端中将 SSH 与 HDInsight 配合使用）](/documentation/articles/hdinsight-hadoop-linux-use-ssh-windows/)
+    * [在 Linux、Unix 或 Mac OS X 客户端中将 SSH 与 HDInsight 配合使用](./hdinsight-hadoop-linux-use-ssh-unix.md)
+    * [Use SSH with HDInsight from Windows clients（在 Windows 客户端中将 SSH 与 HDInsight 配合使用）](./hdinsight-hadoop-linux-use-ssh-windows.md)
 3. 连接后，使用以下命令获取主头节点的完全限定域名：
 
-        hostname -f
+    ```
+    hostname -f
+    ```
 
     此命令将返回类似于下面的名称：
 
-        hn0-myhdi-nfebtpfdv1nubcidphpap2eq2b.ex.internal.chinacloudapp.cn
+    ```
+    hn0-myhdi-nfebtpfdv1nubcidphpap2eq2b.ex.internal.chinacloudapp.cn
+    ```
 
     这是 Hue 网站所在的主头节点的主机名。
 4. 使用浏览器打开 Hue 门户 (http://HOSTNAME:8888)。将 HOSTNAME 替换为在上一步骤中获取的名称。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     第一次登录时，系统会提示你创建帐户来登录 Hue 门户。你在此处指定的凭据只能用于该门户，并且与预配群集时指定的管理员或 SSH 用户凭据不相关。
     >
     >
@@ -123,7 +128,7 @@ Azure PowerShell、Azure CLI、HDInsight .NET SDK 或 Azure Resource Manager 模
     ![使用文件浏览器](./media/hdinsight-hadoop-hue-linux/HDI.Hue.Portal.File.Browser.png "使用文件浏览器")
 3. 右键单击某个文件或文件夹，以查看可用的操作。使用右侧的“上载”按钮，将文件上载到当前目录。使用“新建”按钮创建新的文件或目录。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Hue 文件浏览器只能显示与 HDInsight 群集关联的默认容器的内容。与群集关联的任何其他存储帐户/容器将无法使用文件浏览器访问。不过，与群集关联的其他容器始终可供 Hive 作业访问。例如，如果在 Hive 编辑器中输入 `dfs -ls wasbs://newcontainer@mystore.blob.core.chinacloudapi.cn` 命令，也可以看到其他容器的内容。在此命令中，**newcontainer** 不是与群集关联的默认容器。
 >
 >
@@ -134,7 +139,9 @@ Hue 文件浏览器只能显示与 HDInsight 群集关联的默认容器的内�
 2. 在安装期间，系统会重启多个 Hadoop 服务（HDFS、YARN、MR2、Oozie），以更新配置。在脚本安装完 Hue 之后，可能需要一些时间让其他 Hadoop 服务启动。一开始可能会影响 Hue 的性能。等所有服务都启动之后，Hue 就可以完全正常运行。
 3. Hue 不了解 Tez 作业，这是 Hive 当前的默认值。如果你想使用 MapReduce 作为 Hive 执行引擎，请更新脚本，以在你的脚本中使用以下命令：
 
-        set hive.execution.engine=mr;
+    ```
+    set hive.execution.engine=mr;
+    ```
 
 4. 使用 Linux 群集时，可能会出现这种情况：服务在主头节点上运行，而 Resource Manager 可能在辅助头节点上运行。使用 Hue 查看群集上正在运行的作业的详细信息时，这种情况可能会导致错误（如下所示）。不过，你可以在作业完成后查看作业详细信息。
 
@@ -144,13 +151,13 @@ Hue 文件浏览器只能显示与 HDInsight 群集关联的默认容器的内�
 5. 当 HDInsight 群集使用 Azure 存储（使用 `wasbs://`）时，Hue 能识别 WebHDFS。因此，搭配脚本操作使用的自定义脚本会安装 WebWasb，这是用来与 WASB 通信的 WebHDFS 兼容服务。因此，即使 Hue 门户中显示 HDFS（例如，将鼠标移到“文件浏览器”上时），也应该将它解释为 WASB。
 
 ## 后续步骤
-* [在 HDInsight 群集上安装 Giraph](/documentation/articles/hdinsight-hadoop-giraph-install-linux/)。使用群集自定义在 HDInsight Hadoop 群集上安装 Giraph。Giraph 可让你使用 Hadoop 执行图形处理，并可以在 Azure HDInsight 上使用。
-* [在 HDInsight 群集上安装 Solr](/documentation/articles/hdinsight-hadoop-solr-install-linux/)。使用群集自定义在 HDInsight Hadoop 群集上安装 Solr。Solr 允许你对存储的数据执行功能强大的搜索操作。
-* [在 HDInsight 群集上安装 R](/documentation/articles/hdinsight-hadoop-r-scripts-linux/)。使用群集自定义在 HDInsight Hadoop 群集上安装 R。R 是一种用于统计计算的开放源代码语言和环境。它提供了数百个内置统计函数及其自己的编程语言，可结合各方面的函数编程和面向对象的编程。它还提供了各种图形功能。
+* [在 HDInsight 群集上安装 Giraph](./hdinsight-hadoop-giraph-install-linux.md)。使用群集自定义在 HDInsight Hadoop 群集上安装 Giraph。Giraph 可让你使用 Hadoop 执行图形处理，并可以在 Azure HDInsight 上使用。
+* [在 HDInsight 群集上安装 Solr](./hdinsight-hadoop-solr-install-linux.md)。使用群集自定义在 HDInsight Hadoop 群集上安装 Solr。Solr 允许你对存储的数据执行功能强大的搜索操作。
+* [在 HDInsight 群集上安装 R](./hdinsight-hadoop-r-scripts-linux.md)。使用群集自定义在 HDInsight Hadoop 群集上安装 R。R 是一种用于统计计算的开放源代码语言和环境。它提供了数百个内置统计函数及其自己的编程语言，可结合各方面的函数编程和面向对象的编程。它还提供了各种图形功能。
 
 [powershell-install-configure]: /documentation/articles/install-configure-powershell-linux/
 [hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-linux/
-[hdinsight-cluster-customize]: /documentation/articles/hdinsight-hadoop-customize-cluster-linux/
+[hdinsight-cluster-customize]: ./hdinsight-hadoop-customize-cluster-linux.md
 
 <!---HONumber=Mooncake_0306_2017-->
 <!--Update_Description: add information about HDInsight Windows is going to be abandoned-->

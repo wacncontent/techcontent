@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure 移动应用中的脱机数据同步 | Azure"
-	description="Azure 移动应用脱机数据同步功能的概念参考和概述"
-	documentationCenter="windows"
-	authors="adrianhall"
-	manager="dwrede"
-	editor=""
-	services="app-service\mobile"/>
+---
+title: Azure 移动应用中的脱机数据同步 | Azure
+description: Azure 移动应用脱机数据同步功能的概念参考和概述
+documentationCenter: windows
+authors: adrianhall
+manager: dwrede
+editor: ''
+services: app-service\mobile
 
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="10/30/2016"
-	wacn.date="01/23/2017"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/30/2016
+wacn.date: 01/23/2017
+ms.author: adrianha
+---
 
 # Azure 移动应用中的脱机数据同步
 
@@ -36,11 +36,11 @@
 以下教程说明如何使用 Azure 移动应用将脱机同步添加到移动客户端：
 
 * [Android: Enable offline sync]（Android：启用脱机同步）
-* [Apache Cordova：启用脱机同步](/documentation/articles/app-service-mobile-cordova-get-started-offline-data/)
+* [Apache Cordova：启用脱机同步](./app-service-mobile-cordova-get-started-offline-data.md)
 * [iOS: Enable offline sync]（iOS：启用脱机同步）
 * [Xamarin iOS: Enable offline sync]（Xamarin iOS：启用脱机同步）
 * [Xamarin Android: Enable offline sync]（Xamarin Android：启用脱机同步）
-* [Xamarin.Forms: Enable offline sync（Xamarin.Forms：启用脱机同步）](/documentation/articles/app-service-mobile-xamarin-forms-get-started-offline-data/)
+* [Xamarin.Forms: Enable offline sync（Xamarin.Forms：启用脱机同步）](./app-service-mobile-xamarin-forms-get-started-offline-data.md)
 * [通用 Windows 平台：启用脱机同步]
 
 ## 什么是同步表？
@@ -74,8 +74,10 @@
 
   如果查询具有参数，创建唯一查询名称的方法之一是包含该参数值。例如，如果要按 userid 筛选，可以使用如下所示的查询名称（在 C# 中）：
 
-        await todoTable.PullAsync("todoItems" + userid,
-            syncTable.Where(u => u.UserId == userid));
+  ```
+    await todoTable.PullAsync("todoItems" + userid,
+        syncTable.Where(u => u.UserId == userid));
+  ```
 
   如果想要选择退出增量同步，请将 `null` 作为查询 ID 传递。在此情况下，在对 `PullAsync` 的每次调用中将检索所有记录，从而可能会降低效率。
 * **清除**：可以使用 `IMobileServiceSyncTable.PurgeAsync` 清除本地存储的内容。如果客户端数据库包含陈旧数据，或者想要丢弃所有挂起的更改，可能需要执行清除操作。
@@ -92,12 +94,12 @@
 * [通用 Windows 平台：启用脱机同步]
 
 <!-- Links -->
-[.NET 客户端 SDK]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/
-[Android: Enable offline sync]: /documentation/articles/app-service-mobile-android-get-started-offline-data/
-[iOS: Enable offline sync]: /documentation/articles/app-service-mobile-ios-get-started-offline-data/
-[Xamarin iOS: Enable offline sync]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-offline-data/
-[Xamarin Android: Enable offline sync]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-offline-data/
-[通用 Windows 平台：启用脱机同步]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started-offline-data/
+[.NET 客户端 SDK]: ./app-service-mobile-dotnet-how-to-use-client-library.md
+[Android: Enable offline sync]: ./app-service-mobile-android-get-started-offline-data.md
+[iOS: Enable offline sync]: ./app-service-mobile-ios-get-started-offline-data.md
+[Xamarin iOS: Enable offline sync]: ./app-service-mobile-xamarin-ios-get-started-offline-data.md
+[Xamarin Android: Enable offline sync]: ./app-service-mobile-xamarin-ios-get-started-offline-data.md
+[通用 Windows 平台：启用脱机同步]: ./app-service-mobile-windows-store-dotnet-get-started-offline-data.md
 
 <!---HONumber=Mooncake_0116_2017-->
 <!--Update_Description:update wording-->

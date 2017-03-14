@@ -1,29 +1,29 @@
-<properties
-    pageTitle="优化 Linux 上的 MySQL 性能 | Azure"
-    description="了解如何优化运行 Linux 的 Azure 虚拟机 (VM) 上运行的 MySQL。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="NingKuang"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="0c1c7fc5-a528-4d84-b65d-2df225f2233f"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/15/2015"
-    wacn.date="02/20/2017"
-    ms.author="ningk" />  
+---
+title: 优化 Linux 上的 MySQL 性能 | Azure
+description: 了解如何优化运行 Linux 的 Azure 虚拟机 (VM) 上运行的 MySQL。
+services: virtual-machines-linux
+documentationcenter: ''
+author: NingKuang
+manager: timlt
+editor: ''
+tags: azure-service-management
 
+ms.assetid: 0c1c7fc5-a528-4d84-b65d-2df225f2233f
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2015
+wacn.date: 02/20/2017
+ms.author: ningk
+---
 
 # 优化 Azure Linux VM 上的 MySQL 性能
 影响 Azure 上 MySQL 性能的因素有很多，主要体现在虚拟硬件选择和软件配置两个方面。本文重点介绍如何通过存储、系统和数据库配置优化性能。
 
-> [AZURE.IMPORTANT]
-Azure 有两种用于创建和处理资源的不同部署模型：[Azure Resource Manager 部署模型](/documentation/articles/resource-manager-deployment-model/)和经典部署模型。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。若要了解如何通过 Resource Manager 模型进行 Linux VM 优化，请参阅[优化 Azure 上的 Linux VM](/documentation/articles/virtual-machines-linux-optimization/)。
+> [!IMPORTANT]
+Azure 有两种用于创建和处理资源的不同部署模型：[Azure Resource Manager 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)和经典部署模型。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。若要了解如何通过 Resource Manager 模型进行 Linux VM 优化，请参阅[优化 Azure 上的 Linux VM](./virtual-machines-linux-optimization.md)。
 
 ## 利用 Azure 虚拟机上的 RAID
 存储是影响云环境中的数据库性能的关键因素。与单个磁盘相比，RAID 可以通过并发访问提供更快的访问速度。有关详细信息，请参阅 [Standard RAID levels](http://en.wikipedia.org/wiki/Standard_RAID_levels)（标准 RAID 级别）。
@@ -50,11 +50,9 @@ Azure 有两种用于创建和处理资源的不同部署模型：[Azure Resourc
 
 ![虚拟机仪表板][2]  
 
-
 在任务栏中，单击“附加”。
 
 ![虚拟机任务栏][3]  
-
 
 然后单击“附加空磁盘”。
 
@@ -66,38 +64,50 @@ Azure 有两种用于创建和处理资源的不同部署模型：[Azure Resourc
 
 通过查看内核消息日志，可以看到虚拟机中添加的驱动器。例如，若要在 Ubuntu 上查看，请使用以下命令：
 
-    sudo grep SCSI /var/log/dmesg
+```
+sudo grep SCSI /var/log/dmesg
+```
 
 #### 创建具有更多磁盘的 RAID
-以下步骤介绍如何[在 Linux 上配置软件 RAID](/documentation/articles/virtual-machines-linux-configure-raid/)。
+以下步骤介绍如何[在 Linux 上配置软件 RAID](./virtual-machines-linux-configure-raid.md)。
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果使用的是 XFS 文件系统，请在创建 RAID 后执行以下步骤。
 >
 >
 
 若要在 Debian、Ubuntu 或 Linux Mint 上安装 XFS，请使用以下命令：
 
-    apt-get -y install xfsprogs  
+```
+apt-get -y install xfsprogs  
+```
 
 若要在 Fedora、CentOS 或 RHEL 上安装 XFS，请使用以下命令：
 
-    yum -y install xfsprogs  xfsdump
+```
+yum -y install xfsprogs  xfsdump
+```
 
 #### 设置新的存储路径
 使用以下命令设置新的存储路径：
 
-    root@mysqlnode1:~# mkdir -p /RAID0/mysql
+```
+root@mysqlnode1:~# mkdir -p /RAID0/mysql
+```
 
 #### 将原始数据复制到新的存储路径
 使用以下命令将数据复制到新的存储路径：
 
-    root@mysqlnode1:~# cp -rp /var/lib/mysql/* /RAID0/mysql/
+```
+root@mysqlnode1:~# cp -rp /var/lib/mysql/* /RAID0/mysql/
+```
 
 #### 修改权限以便 MySQL 访问（读取和写入）数据磁盘
 使用以下命令修改权限：
 
-    root@mysqlnode1:~# chown -R mysql.mysql /RAID0/mysql && chmod -R 755 /RAID0/mysql
+```
+root@mysqlnode1:~# chown -R mysql.mysql /RAID0/mysql && chmod -R 755 /RAID0/mysql
+```
 
 ## 调整磁盘 I/O 计划算法
 Linux 实现了四种类型的 I/O 计划算法：
@@ -118,39 +128,49 @@ Linux 实现了四种类型的 I/O 计划算法：
 ### 查看当前的 I/O 调度器
 若要查看计划程序，请运行以下命令：
 
-    root@mysqlnode1:~# cat /sys/block/sda/queue/scheduler
+```
+root@mysqlnode1:~# cat /sys/block/sda/queue/scheduler
+```
 
 此时会显示以下输出，指示当前的计划程序：
 
-    noop [deadline] cfq
+```
+noop [deadline] cfq
+```
 
 ### 更改当前设备 \(/dev/sda\) 的 I/O 计划算法
 运行以下命令以更改当前设备：
 
-    azureuser@mysqlnode1:~$ sudo su -
-    root@mysqlnode1:~# echo "noop" >/sys/block/sda/queue/scheduler
-    root@mysqlnode1:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
-    root@mysqlnode1:~# update-grub
+```
+azureuser@mysqlnode1:~$ sudo su -
+root@mysqlnode1:~# echo "noop" >/sys/block/sda/queue/scheduler
+root@mysqlnode1:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
+root@mysqlnode1:~# update-grub
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 对 /dev/sda 单独进行此设置毫无用处。必须对数据库所在的所有数据磁盘进行设置。
 >
 >
 
 此时会显示以下输出，指示已成功重新生成 grub.cfg 并且默认计划程序已更新为 NOOP：
 
-    Generating grub configuration file ...
-    Found linux image: /boot/vmlinuz-3.13.0-34-generic
-    Found initrd image: /boot/initrd.img-3.13.0-34-generic
-    Found linux image: /boot/vmlinuz-3.13.0-32-generic
-    Found initrd image: /boot/initrd.img-3.13.0-32-generic
-    Found memtest86+ image: /memtest86+.elf
-    Found memtest86+ image: /memtest86+.bin
-    done
+```
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.13.0-34-generic
+Found initrd image: /boot/initrd.img-3.13.0-34-generic
+Found linux image: /boot/vmlinuz-3.13.0-32-generic
+Found initrd image: /boot/initrd.img-3.13.0-32-generic
+Found memtest86+ image: /memtest86+.elf
+Found memtest86+ image: /memtest86+.bin
+done
+```
 
 对于 Red Hat 系列分发版本，只需以下命令：
 
-    echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
+```
+echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
+```
 
 ## 配置系统文件操作设置
 最佳做法之一是禁用文件系统上的 *atime* 日志记录功能。Atime 指文件的最后一次访问时间。无论何时访问文件，文件系统都会在日志中记录时间戳。但是，很少使用此信息。如果不需要，可以禁用它，这样将减少总体磁盘访问时间。
@@ -159,15 +179,19 @@ Linux 实现了四种类型的 I/O 计划算法：
 
 例如，编辑 vim /etc/fstab 文件，按以下示例所示添加 noatime：
 
-    # CLOUD_IMG: This file was created/modified by the Cloud Image build process
-    UUID=3cc98c06-d649-432d-81df-6dcd2a584d41       /        ext4   defaults,discard        0 0
-    #Add the "noatime" option below to disable atime logging
-    UUID="431b1e78-8226-43ec-9460-514a9adf060e"     /RAID0   xfs   defaults,nobootwait, noatime 0 0
-    /dev/sdb1       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2
+```
+# CLOUD_IMG: This file was created/modified by the Cloud Image build process
+UUID=3cc98c06-d649-432d-81df-6dcd2a584d41       /        ext4   defaults,discard        0 0
+#Add the "noatime" option below to disable atime logging
+UUID="431b1e78-8226-43ec-9460-514a9adf060e"     /RAID0   xfs   defaults,nobootwait, noatime 0 0
+/dev/sdb1       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2
+```
 
 然后，使用以下命令重新装载文件系统：
 
-    mount -o remount /RAID0
+```
+mount -o remount /RAID0
+```
 
 测试修改后的结果。修改测试文件时，系统不会更新访问时间。以下示例展现了代码在修改前后的样子。
 
@@ -175,11 +199,9 @@ Linux 实现了四种类型的 I/O 计划算法：
 
 ![进行访问权限修改之前的代码][5]  
 
-
 之后：
 
 ![进行访问权限修改之后的代码][6]  
-
 
 ## 增加系统句柄的最大数量以实现高并发
 MySQL 是高并发数据库。对于 Linux，默认的并发句柄数量是 1024 个，这个数量有时候不够用。通过执行以下步骤来增加系统的最大并发句柄数，以此支持 MySQL 的高并发。
@@ -187,22 +209,28 @@ MySQL 是高并发数据库。对于 Linux，默认的并发句柄数量是 1024
 ### 修改 limits.conf 文件
 若要增加允许的最大并发句柄数，可在 /etc/security/limits.conf 文件中添加以下四行。请注意，65536 是系统可以支持的最大数量。
 
-    * soft nofile 65536
-    * hard nofile 65536
-    * soft nproc 65536
-    * hard nproc 65536
+```
+* soft nofile 65536
+* hard nofile 65536
+* soft nproc 65536
+* hard nproc 65536
+```
 
 ### 更新系统以实施新限制
 若要更新系统，请运行以下命令：
 
-    ulimit -SHn 65536
-    ulimit -SHu 65536
+```
+ulimit -SHn 65536
+ulimit -SHu 65536
+```
 
 ### 确保在启动时更新限制
 在 /etc/rc.local 文件中放置以下启动命令，以便其在启动时生效。
 
-    echo "ulimit -SHn 65536" >>/etc/rc.local
-    echo "ulimit -SHu 65536" >>/etc/rc.local
+```
+echo "ulimit -SHn 65536" >>/etc/rc.local
+echo "ulimit -SHu 65536" >>/etc/rc.local
+```
 
 ## MySQL 数据库优化
 若要在 Azure 上配置 MySQL，可以使用本地计算机上使用的同一性能优化策略。
@@ -233,18 +261,21 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 1. 通过在末尾添加以下行来修改 my.cnf 文件：
 
-        long_query_time = 2
-        slow_query_log = 1
-        slow_query_log_file = /RAID0/mysql/mysql-slow.log
+    ```
+    long_query_time = 2
+    slow_query_log = 1
+    slow_query_log_file = /RAID0/mysql/mysql-slow.log
+    ```
 
 2. 重新启动 MySQL Server。
 
-        service  mysql  restart
+    ```
+    service  mysql  restart
+    ```
 
 3. 使用 **show** 命令检查该设置是否生效。
 
 ![Slow-query-log ON][7]  
-
 
 ![Slow-query-log 结果][8]
 
@@ -258,12 +289,13 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 ![不同 RAID 级别的磁盘 IOPS][9]  
 
-
 **测试命令**
 
-    fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=5G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
+```
+fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=5G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
+```
 
-> [AZURE.NOTE]
+> [!NOTE]
 此测试的工作负荷使用 64 个线程，尝试达到 RAID 的上限。
 >
 >
@@ -276,13 +308,17 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 **测试命令**
 
-    mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write -engine=innodb
+```
+mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write -engine=innodb
+```
 
 **不同 RAID 级别的 MySQL 性能 \(OLTP\) 比较**![不同 RAID 级别的 MySQL 性能 \(OLTP\) 比较][12]
 
 **测试命令**
 
-    time sysbench --test=oltp --db-driver=mysql --mysql-user=root --mysql-password=0ps.123  --mysql-table-engine=innodb --mysql-host=127.0.0.1 --mysql-port=3306 --mysql-socket=/var/run/mysqld/mysqld.sock --mysql-db=test --oltp-table-size=1000000 prepare
+```
+time sysbench --test=oltp --db-driver=mysql --mysql-user=root --mysql-password=0ps.123  --mysql-table-engine=innodb --mysql-host=127.0.0.1 --mysql-port=3306 --mysql-socket=/var/run/mysqld/mysqld.sock --mysql-db=test --oltp-table-size=1000000 prepare
+```
 
 ### <a name="AppendixC"></a>附录 C   
 **不同区块大小的磁盘性能 \(IOPS\) 比较**
@@ -290,11 +326,12 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 ![][13]  
 
-
 **测试命令**
 
-    fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=30G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
-    fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=1G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite  
+```
+fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=30G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
+fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=1G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite  
+```
 
 用于此测试的文件大小分别为 30 GB 和 1 GB，并且使用的是 RAID 0（4 个磁盘）XFS 文件系统。
 
@@ -304,10 +341,11 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 ![优化前和优化后的 MySQL 性能（吞吐量）比较][14]  
 
-
 **测试命令**
 
-    mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write -engine=innodb,misam
+```
+mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write -engine=innodb,misam
+```
 
 **默认值和优化值的配置设置如下所示：**
 

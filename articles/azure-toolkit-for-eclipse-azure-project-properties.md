@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure 项目属性"
-    description="介绍 Azure Toolkit for Eclipse 中的 Azure 项目属性设置。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="0fce53ec-0c5e-47b9-a453-59a0d4307556"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm" />
+---
+title: Azure 项目属性
+description: 介绍 Azure Toolkit for Eclipse 中的 Azure 项目属性设置。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
+
+ms.assetid: 0fce53ec-0c5e-47b9-a453-59a0d4307556
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm
+---
 
 # Azure 项目属性
 可以在 Azure Toolkit for Eclipse 中指定 Azure 项目的各种设置。
@@ -46,13 +47,12 @@
 
 <!-- URL List -->
 
-
 [Azure Java Developer Center]: /develop/java/
-[Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure Role Properties]: /documentation/articles/azure-toolkit-for-eclipse-azure-role-properties/
-[Azure Storage Account List]: /documentation/articles/azure-toolkit-for-eclipse-azure-storage-account-list/
-[Creating a Hello World Application for Azure in Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse.md
+[Azure Role Properties]: ./azure-toolkit-for-eclipse-azure-role-properties.md
+[Azure Storage Account List]: ./azure-toolkit-for-eclipse-azure-storage-account-list.md
+[Creating a Hello World Application for Azure in Eclipse]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 

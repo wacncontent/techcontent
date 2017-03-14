@@ -1,22 +1,22 @@
-<properties
-   pageTitle="使用 Visual Studio 在 Azure 云服务项目中管理角色 | Azure"
-   description="了解如何使用 Visual Studio 向 Azure 云服务项目中添加新的角色或从中删除现有角色。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 使用 Visual Studio 在 Azure 云服务项目中管理角色 | Azure
+description: 了解如何使用 Visual Studio 向 Azure 云服务项目中添加新的角色或从中删除现有角色。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="5ec9ae2e-8579-4e5d-999e-8ae05b629bd1"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 5ec9ae2e-8579-4e5d-999e-8ae05b629bd1
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 使用 Visual Studio 在 Azure 云服务项目中管理角色
 
@@ -38,25 +38,25 @@
 
 例如，你可能删除了 Web 服务角色，但后来又决定将此角色添加回解决方案中。如果你这样做，则会出现错误。为了防止出现此错误，必须将以下 XML 中显示的 `<LocalResources>` 元素添加回 ServiceDefinition.csdef 文件中。使用你添加回项目中的 Web 服务角色的名称作为 **<LocalStorage>** 元素的名称特性的一部分。在此示例中，Web 服务角色的名称为 **WCFServiceWebRole1**。
 
-	<WebRole name="WCFServiceWebRole1">
-	    <Sites>
-	      <Site name="Web">
-	        <Bindings>
-	          <Binding name="Endpoint1" endpointName="Endpoint1" />
-	        </Bindings>
-	      </Site>
-	    </Sites>
-	    <Endpoints>
-	      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
-	    </Endpoints>
-	    <Imports>
-	      <Import moduleName="Diagnostics" />
-	    </Imports>
-	   <LocalResources>
-	      <LocalStorage name="WCFServiceWebRole1.svclog" sizeInMB="1000" cleanOnRoleRecycle="false" />
-	   </LocalResources>
-	</WebRole>
-
-
+```
+<WebRole name="WCFServiceWebRole1">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+   <LocalResources>
+      <LocalStorage name="WCFServiceWebRole1.svclog" sizeInMB="1000" cleanOnRoleRecycle="false" />
+   </LocalResources>
+</WebRole>
+```
 
 <!---HONumber=Mooncake_0516_2016-->

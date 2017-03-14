@@ -1,26 +1,26 @@
-<properties
-    pageTitle="在 HDInsight 中使用 Hadoop Pig | Azure"
-    description="了解如何将 Pig 与 HDInsight 上的 Hadoop 配合使用。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun"
-    tags="azure-portal" />
-<tags
-    ms.assetid="acfeb52b-4b81-4a7d-af77-3e9908407404"
-    ms.service="hdinsight"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="01/12/2017"
-    wacn.date="01/25/2017"
-    ms.author="larryfr" />  
+---
+title: 在 HDInsight 中使用 Hadoop Pig | Azure
+description: 了解如何将 Pig 与 HDInsight 上的 Hadoop 配合使用。
+services: hdinsight
+documentationcenter: ''
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
 
+ms.assetid: acfeb52b-4b81-4a7d-af77-3e9908407404
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 01/12/2017
+wacn.date: 01/25/2017
+ms.author: larryfr
+---
 
 # 将 Pig 与 HDInsight 上的 Hadoop 配合使用
-[AZURE.INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
+[!INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
 
 [Apache Pig](http://pig.apache.org/) 是一个可以使用名为 *Pig Latin* 的过程语言为 Hadoop 创建程序的平台。Pig 可以替代 Java 来创建 *MapReduce* 解决方案，并且已在 Azure HDInsight 中随附。
 
@@ -43,29 +43,33 @@ Pig Latin 还支持使用用户定义函数 (UDF) 来调用外部组件，以便
 
 如需通过 Pig 使用 UDF 的示例，请参阅以下文档：
 
-* [在 HDInsight 中通过 Pig 使用 DataFu](/documentation/articles/hdinsight-hadoop-use-pig-datafu-udf/) - DataFu 是由 Apache 维护的有用 UDF 的集合
-* [在 HDInsight 中将 Python 与 Pig 和 Hive 配合使用](/documentation/articles/hdinsight-python/)
-* [在 HDInsight 中将 C# 与 Hive 和 Pig 配合使用](/documentation/articles/hdinsight-hadoop-hive-pig-udf-dotnet-csharp/)
+* [在 HDInsight 中通过 Pig 使用 DataFu](./hdinsight-hadoop-use-pig-datafu-udf.md) - DataFu 是由 Apache 维护的有用 UDF 的集合
+* [在 HDInsight 中将 Python 与 Pig 和 Hive 配合使用](./hdinsight-python.md)
+* [在 HDInsight 中将 C# 与 Hive 和 Pig 配合使用](./hdinsight-hadoop-hive-pig-udf-dotnet-csharp.md)
 
 ## <a id="data"></a>关于示例数据
 本示例使用 *log4j* 示例文件，该文件存储在 Blob 存储容器的 **/example/data/sample.log** 中。该文件中的每个日志都由一行字段组成，其中包含一个用于显示类型和严重性的 `[LOG LEVEL]` 字段，例如：
 
-    2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```
+2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```
 
 在前面的示例中，日志级别为 ERROR。
 
-> [AZURE.NOTE]
-你还可以使用 [Apache Log4j](http://zh.wikipedia.org/wiki/Log4j) 日志记录工具来生成 log4j 文件，然后将该文件上载到 Blob。请参阅[将数据上载到 HDInsight](/documentation/articles/hdinsight-upload-data/) 以获取相关说明。有关如何将 Azure 存储空间中的 Blob 用于 HDInsight 的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](/documentation/articles/hdinsight-hadoop-use-blob-storage/)。
+> [!NOTE]
+你还可以使用 [Apache Log4j](http://zh.wikipedia.org/wiki/Log4j) 日志记录工具来生成 log4j 文件，然后将该文件上载到 Blob。请参阅[将数据上载到 HDInsight](./hdinsight-upload-data.md) 以获取相关说明。有关如何将 Azure 存储空间中的 Blob 用于 HDInsight 的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](./hdinsight-hadoop-use-blob-storage.md)。
 > 
 > 
 
 示例数据存储在 Azure Blob 存储中，HDInsight 可以将该存储用作 Hadoop 群集的默认文件系统。HDInsight 可以使用 **wasb** 前缀来访问存储在 Blob 中的文件。例如，若要访问 sample.log 文件，可使用以下语法：
 
-    wasbs:///example/data/sample.log
+```
+wasbs:///example/data/sample.log
+```
 
 由于 WASB 是 HDInsight 的默认存储，也可以使用 Pig Latin 中的 **/example/data/sample.log** 来访问该文件。
 
-> [AZURE.NOTE]
+> [!NOTE]
 语法 **wasbs:///** 用于访问存储在 HDInsight 群集的默认存储容器中的文件。若在预配群集时指定了其他存储帐户，并且想要访问存储在这些帐户中的文件，可以通过指定容器名称和存储帐户地址来访问数据，例如：**wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/sample.log**。
 > 
 > 
@@ -73,34 +77,35 @@ Pig Latin 还支持使用用户定义函数 (UDF) 来调用外部组件，以便
 ## <a id="job"></a>关于示例作业
 下面的 Pig Latin 作业从 HDInsight 群集的默认存储加载 **sample.log** 文件。然后，它会执行一系列转换，对输入数据中出现的每个日志级别进行计数。结果转储到 STDOUT。
 
-    LOGS = LOAD 'wasbs:///example/data/sample.log';
-    LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
-    FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
-    GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
-    FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
-    RESULT = order FREQUENCIES by COUNT desc;
-    DUMP RESULT;
+```
+LOGS = LOAD 'wasbs:///example/data/sample.log';
+LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
+FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
+GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
+FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
+RESULT = order FREQUENCIES by COUNT desc;
+DUMP RESULT;
+```
 
 下同详细显示了每个转换对数据的影响。
 
 ![转换的图形表示形式][image-hdi-pig-data-transformation]  
-
 
 ## <a id="run"></a>运行 Pig Latin 作业
 HDInsight 可以使用各种方法来运行 Pig Latin 作业。使用下表来确定哪种方法最适合你，然后访问此链接进行演练。
 
 | **使用此方法**，如果想要... | ...**交互式** shell | ...**批处理** | ...使用此**群集操作系统** | ...从此**客户端操作系统** |
 |:--- |:---:|:---:|:--- |:--- |
-| [SSH](/documentation/articles/hdinsight-hadoop-use-pig-ssh/) |✔ |✔ |Linux |Linux、Unix、Mac OS X 或 Windows |
-| [Curl](/documentation/articles/hdinsight-hadoop-use-pig-curl/) |&nbsp; |✔ |Linux 或 Windows |Linux、Unix、Mac OS X 或 Windows |
-| [.NET SDK for Hadoop](/documentation/articles/hdinsight-hadoop-use-pig-dotnet-sdk/) |&nbsp; |✔ |Linux 或 Windows |Windows（暂时） |
-| [Windows PowerShell](/documentation/articles/hdinsight-hadoop-use-pig-powershell/) |&nbsp; |✔ |Linux 或 Windows |Windows |
-| [远程桌面](/documentation/articles/hdinsight-hadoop-use-pig-remote-desktop/) |✔ |✔ |Windows |Windows |
+| [SSH](./hdinsight-hadoop-use-pig-ssh.md) |✔ |✔ |Linux |Linux、Unix、Mac OS X 或 Windows |
+| [Curl](./hdinsight-hadoop-use-pig-curl.md) |&nbsp; |✔ |Linux 或 Windows |Linux、Unix、Mac OS X 或 Windows |
+| [.NET SDK for Hadoop](./hdinsight-hadoop-use-pig-dotnet-sdk.md) |&nbsp; |✔ |Linux 或 Windows |Windows（暂时） |
+| [Windows PowerShell](./hdinsight-hadoop-use-pig-powershell.md) |&nbsp; |✔ |Linux 或 Windows |Windows |
+| [远程桌面](./hdinsight-hadoop-use-pig-remote-desktop.md) |✔ |✔ |Windows |Windows |
 
-[AZURE.INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
 
-> [AZURE.IMPORTANT]
-Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](/documentation/articles/hdinsight-component-versioning/#hdi-version-32-and-33-nearing-deprecation-date)。
+> [!IMPORTANT]
+Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有关详细信息，请参阅 [HDInsight 在 Windows 上弃用](./hdinsight-component-versioning.md#hdi-version-32-and-33-nearing-deprecation-date)。
 
 ## 使用本地 SQL Server Integration Services 在 Azure HDInsight 上运行 Pig 作业
 也可以使用 SQL Server Integration Services (SSIS) 运行 Pig 作业。Azure Feature Pack for SSIS 提供以下组件，用于 HDInsight 上的 Pig 作业。
@@ -115,8 +120,8 @@ Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有�
 
 * [将数据上载到 HDInsight][hdinsight-upload-data]
 * [将 Hive 与 HDInsight 配合使用][hdinsight-use-hive]
-* [将 Sqoop 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-sqoop/)
-* [将 Oozie 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-oozie/)
+* [将 Sqoop 与 HDInsight 配合使用](./hdinsight-use-sqoop.md)
+* [将 Oozie 与 HDInsight 配合使用](./hdinsight-use-oozie.md)
 * [将 MapReduce 作业与 HDInsight 配合使用][hdinsight-use-mapreduce]
 
 [apachepig-home]: http://pig.apache.org/
@@ -126,15 +131,15 @@ Linux 是在 HDInsight 3.4 或更高版本上使用的唯一操作系统。有�
 [connectionmanager]: http://msdn.microsoft.com/zh-cn/library/mt146773(v=sql.120).aspx
 [ssispack]: http://msdn.microsoft.com/zh-cn/library/mt146770(v=sql.120).aspx
 
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
 
-[hdinsight-admin-powershell]: /documentation/articles/hdinsight-administer-use-powershell/
+[hdinsight-admin-powershell]: ./hdinsight-administer-use-powershell.md
 
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-mapreduce]: /documentation/articles/hdinsight-use-mapreduce/
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-use-mapreduce]: ./hdinsight-use-mapreduce.md
 
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters/
-[hdinsight-submit-jobs]: /documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/#mapreduce-sdk
+[hdinsight-provision]: ./hdinsight-provision-clusters.md
+[hdinsight-submit-jobs]: ./hdinsight-submit-hadoop-jobs-programmatically.md#mapreduce-sdk
 
 [Powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 

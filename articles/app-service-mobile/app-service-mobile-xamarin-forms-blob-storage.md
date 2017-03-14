@@ -1,21 +1,21 @@
-<properties
-    pageTitle="在 Xamarin.Forms 应用中连接到 Azure 存储"
-    description="连接到 Azure blob 存储向待办事项列表 Xamarin.Forms 移动应用添加图像"
-    documentationCenter="xamarin"
-    authors="adrianhall"
-    manager="erikre"
-    editor=""
-    services="app-service\mobile"/>
+---
+title: 在 Xamarin.Forms 应用中连接到 Azure 存储
+description: 连接到 Azure blob 存储向待办事项列表 Xamarin.Forms 移动应用添加图像
+documentationCenter: xamarin
+authors: adrianhall
+manager: erikre
+editor: ''
+services: app-service\mobile
 
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="mobile-xamarin-ios"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/01/2016"
-    wacn.date="11/21/2016"
-    ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 #在 Xamarin.Forms 应用中连接到 Azure 存储
 
@@ -27,13 +27,15 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 
 在本教程中，将创建一个存储帐户，并将连接字符串添加到移动应用后端。然后将从新的移动应用类型 `StorageController<T>` 将新继承项添加到服务器项目。
 
->[AZURE.TIP] 本教程提供了可用的[配套示例](https://azure.microsoft.com/documentation/samples/app-service-mobile-dotnet-todo-list-files/)，用户可将其部署到自己的 Azure 帐户。
+>[!TIP]
+> 本教程提供了可用的[配套示例](https://azure.microsoft.com/documentation/samples/app-service-mobile-dotnet-todo-list-files/)，用户可将其部署到自己的 Azure 帐户。
 
 ## 先决条件
 
 * 完成[创建 Xamarin.Forms 应用]教程，其中列出了其他先决条件。本文使用该教程中完成的应用。
 
->[AZURE.NOTE] 如果要在注册 Azure 帐户之前就开始使用 Azure 应用服务，请转到 [Try App Service](https://tryappservice.azure.com/?appServiceName=mobile)（试用应用服务）。在那里，可以立即在应用服务中创建短期的入门级移动应用 - 无需信用卡，也无需做出承诺。
+>[!NOTE]
+> 如果要在注册 Azure 帐户之前就开始使用 Azure 应用服务，请转到 [Try App Service](https://tryappservice.azure.com/?appServiceName=mobile)（试用应用服务）。在那里，可以立即在应用服务中创建短期的入门级移动应用 - 无需信用卡，也无需做出承诺。
 
 ## 创建存储帐户
 
@@ -59,44 +61,52 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 
 3. 添加以下 using 语句：
 
-        using Microsoft.Azure.Mobile.Server.Files;
-        using Microsoft.Azure.Mobile.Server.Files.Controllers;
+    ```
+    using Microsoft.Azure.Mobile.Server.Files;
+    using Microsoft.Azure.Mobile.Server.Files.Controllers;
+    ```
 
 4. 将基类更改为 `StorageController`：
-    
-        public class TodoItemStorageController : StorageController<TodoItem>
+
+    ```
+    public class TodoItemStorageController : StorageController<TodoItem>
+    ```
 
 5. 将以下方法添加到类：
 
-        [HttpPost]
-        [Route("tables/TodoItem/{id}/StorageToken")]
-        public async Task<HttpResponseMessage> PostStorageTokenRequest(string id, StorageTokenRequest value)
-        {
-            StorageToken token = await GetStorageTokenAsync(id, value);
+    ```
+    [HttpPost]
+    [Route("tables/TodoItem/{id}/StorageToken")]
+    public async Task<HttpResponseMessage> PostStorageTokenRequest(string id, StorageTokenRequest value)
+    {
+        StorageToken token = await GetStorageTokenAsync(id, value);
 
-            return Request.CreateResponse(token);
-        }
+        return Request.CreateResponse(token);
+    }
 
-        // Get the files associated with this record
-        [HttpGet]
-        [Route("tables/TodoItem/{id}/MobileServiceFiles")]
-        public async Task<HttpResponseMessage> GetFiles(string id)
-        {
-            IEnumerable<MobileServiceFile> files = await GetRecordFilesAsync(id);
+    // Get the files associated with this record
+    [HttpGet]
+    [Route("tables/TodoItem/{id}/MobileServiceFiles")]
+    public async Task<HttpResponseMessage> GetFiles(string id)
+    {
+        IEnumerable<MobileServiceFile> files = await GetRecordFilesAsync(id);
 
-            return Request.CreateResponse(files);
-        }
+        return Request.CreateResponse(files);
+    }
 
-        [HttpDelete]
-        [Route("tables/TodoItem/{id}/MobileServiceFiles/{name}")]
-        public Task Delete(string id, string name)
-        {
-            return base.DeleteFileAsync(id, name);
-        }
+    [HttpDelete]
+    [Route("tables/TodoItem/{id}/MobileServiceFiles/{name}")]
+    public Task Delete(string id, string name)
+    {
+        return base.DeleteFileAsync(id, name);
+    }
+    ```
 
 6. 更新 Web API 配置，设置属性路由。在 **Startup.MobileApp.cs** 中，将以下代码行添加到 `ConfigureMobileApp()` 方法，在 `config` 变量的定义后：
 
-        config.MapHttpAttributeRoutes();
+    ```
+    config.MapHttpAttributeRoutes();
+    ```
 
 7. 将服务器项目发布到移动应用后端。
 
@@ -107,17 +117,17 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 - StorageToken
 
     + HTTP POST：创建存储令牌
-    
+
         `/tables/TodoItem/{id}/MobileServiceFiles`
-    
+
 - MobileServiceFiles
 
     + HTTP GET：检索与记录关联的文件列表
-    
+
         `/tables/TodoItem/{id}/MobileServiceFiles`
 
     + HTTP DELETE：删除文件资源标识符中指定的文件
-    
+
         `/tables/TodoItem/{id}/MobileServiceFiles/{fileid}`
 
 ###<a name="client-communication"></a>客户端和服务器通信
@@ -143,7 +153,8 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 - [更新主视图](#update-main-view)
 - [更新 Android 项目](#update-android)、[iOS 项目](#update-ios)、[Windows 项目](#update-windows)
 
->[AZURE.NOTE] 本教程中仅包含有关 Android、iOS 和 Windows 应用商店平台的说明，而不包含有关 Windows Phone 的说明。
+>[!NOTE]
+> 本教程中仅包含有关 Android、iOS 和 Windows 应用商店平台的说明，而不包含有关 Windows Phone 的说明。
 
 ###<a name="add-nuget"></a>添加 NuGet 包
 
@@ -165,80 +176,88 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 
 1. 添加以下 using 语句：
 
-        using Microsoft.WindowsAzure.MobileServices.Files;
-        using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-        using Microsoft.WindowsAzure.MobileServices.Sync;
+    ```
+    using Microsoft.WindowsAzure.MobileServices.Files;
+    using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
+    using Microsoft.WindowsAzure.MobileServices.Sync;
+    ```
 
 2. 使用以下代码替换实现：
 
-        public interface IPlatform
-        {
-            Task <string> GetTodoFilesPathAsync();
+    ```
+    public interface IPlatform
+    {
+        Task <string> GetTodoFilesPathAsync();
 
-            Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata);
+        Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata);
 
-            Task<string> TakePhotoAsync(object context);
+        Task<string> TakePhotoAsync(object context);
 
-            Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename);
-        }
+        Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename);
+    }
+    ```
 
 ###<a name="add-filehelper"></a>添加 FileHelper 类
 
 1. 在主要的可移植库项目中创建新类 `FileHelper`。添加以下 using 语句：
 
-        using System.IO;
-        using PCLStorage;
-        using System.Threading.Tasks;
-        using Xamarin.Forms;
+    ```
+    using System.IO;
+    using PCLStorage;
+    using System.Threading.Tasks;
+    using Xamarin.Forms;
+    ```
 
 2. 添加类定义：
 
-        public class FileHelper
+    ```
+    public class FileHelper
+    {
+        public static async Task<string> CopyTodoItemFileAsync(string itemId, string filePath)
         {
-            public static async Task<string> CopyTodoItemFileAsync(string itemId, string filePath)
-            {
-                IFolder localStorage = FileSystem.Current.LocalStorage;
+            IFolder localStorage = FileSystem.Current.LocalStorage;
 
-                string fileName = Path.GetFileName(filePath);
-                string targetPath = await GetLocalFilePathAsync(itemId, fileName);
+            string fileName = Path.GetFileName(filePath);
+            string targetPath = await GetLocalFilePathAsync(itemId, fileName);
 
-                var sourceFile = await localStorage.GetFileAsync(filePath);
-                var sourceStream = await sourceFile.OpenAsync(FileAccess.Read);
+            var sourceFile = await localStorage.GetFileAsync(filePath);
+            var sourceStream = await sourceFile.OpenAsync(FileAccess.Read);
 
-                var targetFile = await localStorage.CreateFileAsync(targetPath, CreationCollisionOption.ReplaceExisting);
+            var targetFile = await localStorage.CreateFileAsync(targetPath, CreationCollisionOption.ReplaceExisting);
 
-                using (var targetStream = await targetFile.OpenAsync(FileAccess.ReadAndWrite)) {
-                    await sourceStream.CopyToAsync(targetStream);
-                }
-
-                return targetPath;
+            using (var targetStream = await targetFile.OpenAsync(FileAccess.ReadAndWrite)) {
+                await sourceStream.CopyToAsync(targetStream);
             }
 
-            public static async Task<string> GetLocalFilePathAsync(string itemId, string fileName)
-            {
-                IPlatform platform = DependencyService.Get<IPlatform>();
+            return targetPath;
+        }
 
-                string recordFilesPath = Path.Combine(await platform.GetTodoFilesPathAsync(), itemId);
+        public static async Task<string> GetLocalFilePathAsync(string itemId, string fileName)
+        {
+            IPlatform platform = DependencyService.Get<IPlatform>();
 
-                    var checkExists = await FileSystem.Current.LocalStorage.CheckExistsAsync(recordFilesPath);
-                    if (checkExists == ExistenceCheckResult.NotFound) {
-                        await FileSystem.Current.LocalStorage.CreateFolderAsync(recordFilesPath, CreationCollisionOption.ReplaceExisting);
-                    }
+            string recordFilesPath = Path.Combine(await platform.GetTodoFilesPathAsync(), itemId);
 
-                return Path.Combine(recordFilesPath, fileName);
-            }
-
-            public static async Task DeleteLocalFileAsync(Microsoft.WindowsAzure.MobileServices.Files.MobileServiceFile fileName)
-            {
-                string localPath = await GetLocalFilePathAsync(fileName.ParentId, fileName.Name);
-                var checkExists = await FileSystem.Current.LocalStorage.CheckExistsAsync(localPath);
-
-                if (checkExists == ExistenceCheckResult.FileExists) {
-                    var file = await FileSystem.Current.LocalStorage.GetFileAsync(localPath);
-                    await file.DeleteAsync();
+                var checkExists = await FileSystem.Current.LocalStorage.CheckExistsAsync(recordFilesPath);
+                if (checkExists == ExistenceCheckResult.NotFound) {
+                    await FileSystem.Current.LocalStorage.CreateFolderAsync(recordFilesPath, CreationCollisionOption.ReplaceExisting);
                 }
+
+            return Path.Combine(recordFilesPath, fileName);
+        }
+
+        public static async Task DeleteLocalFileAsync(Microsoft.WindowsAzure.MobileServices.Files.MobileServiceFile fileName)
+        {
+            string localPath = await GetLocalFilePathAsync(fileName.ParentId, fileName.Name);
+            var checkExists = await FileSystem.Current.LocalStorage.CheckExistsAsync(localPath);
+
+            if (checkExists == ExistenceCheckResult.FileExists) {
+                var file = await FileSystem.Current.LocalStorage.GetFileAsync(localPath);
+                await file.DeleteAsync();
             }
         }
+    }
+    ```
 
 ###<a name="file-sync-handler"></a> 添加文件同步处理程序
 
@@ -248,39 +267,43 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 1. 添加以下 using 语句：
 
-        using System.Threading.Tasks;
-        using Microsoft.WindowsAzure.MobileServices.Files.Sync;
-        using Microsoft.WindowsAzure.MobileServices.Files;
-        using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-        using Xamarin.Forms;
+    ```
+    using System.Threading.Tasks;
+    using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+    using Microsoft.WindowsAzure.MobileServices.Files;
+    using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
+    using Xamarin.Forms;
+    ```
 
 2. 将类定义替换为以下代码：
 
-        public class TodoItemFileSyncHandler : IFileSyncHandler
+    ```
+    public class TodoItemFileSyncHandler : IFileSyncHandler
+    {
+        private readonly TodoItemManager todoItemManager;
+
+        public TodoItemFileSyncHandler(TodoItemManager itemManager)
         {
-            private readonly TodoItemManager todoItemManager;
+            this.todoItemManager = itemManager;
+        }
 
-            public TodoItemFileSyncHandler(TodoItemManager itemManager)
-            {
-                this.todoItemManager = itemManager;
+        public Task<IMobileServiceFileDataSource> GetDataSource(MobileServiceFileMetadata metadata)
+        {
+            IPlatform platform = DependencyService.Get<IPlatform>();
+            return platform.GetFileDataSource(metadata);
+        }
+
+        public async Task ProcessFileSynchronizationAction(MobileServiceFile file, FileSynchronizationAction action)
+        {
+            if (action == FileSynchronizationAction.Delete) {
+                await FileHelper.DeleteLocalFileAsync(file);
             }
-
-            public Task<IMobileServiceFileDataSource> GetDataSource(MobileServiceFileMetadata metadata)
-            {
-                IPlatform platform = DependencyService.Get<IPlatform>();
-                return platform.GetFileDataSource(metadata);
-            }
-
-            public async Task ProcessFileSynchronizationAction(MobileServiceFile file, FileSynchronizationAction action)
-            {
-                if (action == FileSynchronizationAction.Delete) {
-                    await FileHelper.DeleteLocalFileAsync(file);
-                }
-                else { // Create or update. We're aggressively downloading all files.
-                    await this.todoItemManager.DownloadFileAsync(file);
-                }
+            else { // Create or update. We're aggressively downloading all files.
+                await this.todoItemManager.DownloadFileAsync(file);
             }
         }
+    }
+    ```
 
 ###<a name="update-todoitemmanager"></a>更新 TodoItemManager
 
@@ -288,51 +311,61 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 2. 在 **TodoItemManager.cs** 中，添加以下 using 语句：
 
-        using System.IO;
-        using Xamarin.Forms;
-        using Microsoft.WindowsAzure.MobileServices.Files;
-        using Microsoft.WindowsAzure.MobileServices.Files.Sync;
-        using Microsoft.WindowsAzure.MobileServices.Eventing;
+    ```
+    using System.IO;
+    using Xamarin.Forms;
+    using Microsoft.WindowsAzure.MobileServices.Files;
+    using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+    using Microsoft.WindowsAzure.MobileServices.Eventing;
+    ```
 
 3. 在 `TodoItemManager` 的构造函数中调用 `DefineTable()` 的后面添加以下代码：
 
-        // Initialize file sync
-        this.client.InitializeFileSyncContext(new TodoItemFileSyncHandler(this), store);
+    ```
+    // Initialize file sync
+    this.client.InitializeFileSyncContext(new TodoItemFileSyncHandler(this), store);
+    ```
 
 4. 在构造函数中，将调用 `InitializeAsync` 替换为以下代码。这可确保在本地存储中修改记录时没有回调。文件同步功能使用这些回调来触发文件同步处理程序。
 
-        this.client.SyncContext.InitializeAsync(store, StoreTrackingOptions.NotifyLocalAndServerOperations);
+    ```
+    this.client.SyncContext.InitializeAsync(store, StoreTrackingOptions.NotifyLocalAndServerOperations);
+    ```
 
 5. 在 `SyncAsync()` 中调用 `PushAsync()` 的后面添加以下代码：
 
-        await this.todoTable.PushFileChangesAsync();
+    ```
+    await this.todoTable.PushFileChangesAsync();
+    ```
 
 6. 将以下方法添加到 `TodoItemManager`：
 
-        internal async Task DownloadFileAsync(MobileServiceFile file)
-        {
-            var todoItem = await todoTable.LookupAsync(file.ParentId);
-            IPlatform platform = DependencyService.Get<IPlatform>();
+    ```
+    internal async Task DownloadFileAsync(MobileServiceFile file)
+    {
+        var todoItem = await todoTable.LookupAsync(file.ParentId);
+        IPlatform platform = DependencyService.Get<IPlatform>();
 
-            string filePath = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name); 
-            await platform.DownloadFileAsync(this.todoTable, file, filePath);
-        }
+        string filePath = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name); 
+        await platform.DownloadFileAsync(this.todoTable, file, filePath);
+    }
 
-        internal async Task<MobileServiceFile> AddImage(TodoItem todoItem, string imagePath)
-        {
-            string targetPath = await FileHelper.CopyTodoItemFileAsync(todoItem.Id, imagePath);
-            return await this.todoTable.AddFileAsync(todoItem, Path.GetFileName(targetPath));
-        }
+    internal async Task<MobileServiceFile> AddImage(TodoItem todoItem, string imagePath)
+    {
+        string targetPath = await FileHelper.CopyTodoItemFileAsync(todoItem.Id, imagePath);
+        return await this.todoTable.AddFileAsync(todoItem, Path.GetFileName(targetPath));
+    }
 
-        internal async Task DeleteImage(TodoItem todoItem, MobileServiceFile file)
-        {
-            await this.todoTable.DeleteFileAsync(file);
-        }
+    internal async Task DeleteImage(TodoItem todoItem, MobileServiceFile file)
+    {
+        await this.todoTable.DeleteFileAsync(file);
+    }
 
-        internal async Task<IEnumerable<MobileServiceFile>> GetImageFilesAsync(TodoItem todoItem)
-        {
-            return await this.todoTable.GetFilesAsync(todoItem);
-        }
+    internal async Task<IEnumerable<MobileServiceFile>> GetImageFilesAsync(TodoItem todoItem)
+    {
+        return await this.todoTable.GetFilesAsync(todoItem);
+    }
+    ```
 
 ###<a name="add-details-view"></a>添加详细信息视图
 
@@ -340,132 +373,144 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 1. 将新类 **TodoItemImage** 添加到可移植库项目，该类具有以下实现：
 
-        public class TodoItemImage : INotifyPropertyChanged
+    ```
+    public class TodoItemImage : INotifyPropertyChanged
+    {
+        private string name;
+        private string uri;
+
+        public MobileServiceFile File { get; private set; }
+
+        public string Name
         {
-            private string name;
-            private string uri;
-
-            public MobileServiceFile File { get; private set; }
-
-            public string Name
+            get { return name; }
+            set
             {
-                get { return name; }
-                set
-                {
-                    name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-
-            public string Uri
-            {
-                get { return uri; }      
-                set
-                {
-                    uri = value;
-                    OnPropertyChanged(nameof(Uri));
-                }
-            }
-
-            public TodoItemImage(MobileServiceFile file, TodoItem todoItem)
-            {
-                Name = file.Name;
-                File = file;
-
-                FileHelper.GetLocalFilePathAsync(todoItem.Id, file.Name).ContinueWith(x => this.Uri = x.Result);
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private void OnPropertyChanged(string propertyName)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                name = value;
+                OnPropertyChanged(nameof(Name));
             }
         }
 
+        public string Uri
+        {
+            get { return uri; }      
+            set
+            {
+                uri = value;
+                OnPropertyChanged(nameof(Uri));
+            }
+        }
+
+        public TodoItemImage(MobileServiceFile file, TodoItem todoItem)
+        {
+            Name = file.Name;
+            File = file;
+
+            FileHelper.GetLocalFilePathAsync(todoItem.Id, file.Name).ContinueWith(x => this.Uri = x.Result);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+    ```
+
 2. 编辑 **App.cs**。将 `MainPage` 的初始化替换为以下代码：
-    
-        MainPage = new NavigationPage(new TodoList());
+
+    ```
+    MainPage = new NavigationPage(new TodoList());
+    ```
 
 3. 在 **App.cs** 中，添加以下属性：
 
-        public static object UIContext { get; set; }
+    ```
+    public static object UIContext { get; set; }
+    ```
 
 4. 右键单击可移植库项目并选择“添加”->“新建项”->“跨平台”->“Forms Xaml 页”。将视图命名为 `TodoItemDetailsView`。
 
 5. 打开 **TodoItemDetailsView.xaml**，将 ContentPage 的正文替换为以下内容：
 
-          <Grid>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto"/>
-              <RowDefinition Height="Auto"/>
-              <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Button Clicked="OnAdd" Text="Add image"></Button>
-            <ListView x:Name="imagesList"
-                      ItemsSource="{Binding Images}"
-                      IsPullToRefreshEnabled="false"
-                      Grid.Row="2">
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <ImageCell ImageSource="{Binding Uri}"
-                             Text="{Binding Name}">
-                  </ImageCell>
-                </DataTemplate>
-              </ListView.ItemTemplate>
-            </ListView>
-          </Grid>
+    ```
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Clicked="OnAdd" Text="Add image"></Button>
+        <ListView x:Name="imagesList"
+                  ItemsSource="{Binding Images}"
+                  IsPullToRefreshEnabled="false"
+                  Grid.Row="2">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ImageCell ImageSource="{Binding Uri}"
+                         Text="{Binding Name}">
+              </ImageCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+      </Grid>
+    ```
 
 6. 编辑 **TodoItemDetailsView.xaml.cs**，添加以下 using 语句：
 
-        using System.Collections.ObjectModel;
-        using Microsoft.WindowsAzure.MobileServices.Files;
+    ```
+    using System.Collections.ObjectModel;
+    using Microsoft.WindowsAzure.MobileServices.Files;
+    ```
 
 7. 将 `TodoItemDetailsView` 的实现替换为以下内容：
 
-        public partial class TodoItemDetailsView : ContentPage
+    ```
+    public partial class TodoItemDetailsView : ContentPage
+    {
+        private TodoItemManager manager;
+
+        public TodoItem TodoItem { get; set; }        
+        public ObservableCollection<TodoItemImage> Images { get; set; }
+
+        public TodoItemDetailsView(TodoItem todoItem, TodoItemManager manager)
         {
-            private TodoItemManager manager;
+            InitializeComponent();
+            this.Title = todoItem.Name;
 
-            public TodoItem TodoItem { get; set; }        
-            public ObservableCollection<TodoItemImage> Images { get; set; }
+            this.TodoItem = todoItem;
+            this.manager = manager;
 
-            public TodoItemDetailsView(TodoItem todoItem, TodoItemManager manager)
-            {
-                InitializeComponent();
-                this.Title = todoItem.Name;
+            this.Images = new ObservableCollection<TodoItemImage>();
+            this.BindingContext = this;
+        }
 
-                this.TodoItem = todoItem;
-                this.manager = manager;
+        public async Task LoadImagesAsync()
+        {
+            IEnumerable<MobileServiceFile> files = await this.manager.GetImageFilesAsync(TodoItem);
+            this.Images.Clear();
 
-                this.Images = new ObservableCollection<TodoItemImage>();
-                this.BindingContext = this;
-            }
-
-            public async Task LoadImagesAsync()
-            {
-                IEnumerable<MobileServiceFile> files = await this.manager.GetImageFilesAsync(TodoItem);
-                this.Images.Clear();
-
-                foreach (var f in files) {
-                    var todoImage = new TodoItemImage(f, this.TodoItem);
-                    this.Images.Add(todoImage);
-                }
-            }
-
-            public async void OnAdd(object sender, EventArgs e)
-            {
-                IPlatform mediaProvider = DependencyService.Get<IPlatform>();
-                string sourceImagePath = await mediaProvider.TakePhotoAsync(App.UIContext);
-
-                if (sourceImagePath != null) {
-                    MobileServiceFile file = await this.manager.AddImage(this.TodoItem, sourceImagePath);
-
-                    var image = new TodoItemImage(file, this.TodoItem);
-                    this.Images.Add(image);
-                }
+            foreach (var f in files) {
+                var todoImage = new TodoItemImage(f, this.TodoItem);
+                this.Images.Add(todoImage);
             }
         }
+
+        public async void OnAdd(object sender, EventArgs e)
+        {
+            IPlatform mediaProvider = DependencyService.Get<IPlatform>();
+            string sourceImagePath = await mediaProvider.TakePhotoAsync(App.UIContext);
+
+            if (sourceImagePath != null) {
+                MobileServiceFile file = await this.manager.AddImage(this.TodoItem, sourceImagePath);
+
+                var image = new TodoItemImage(file, this.TodoItem);
+                this.Images.Add(image);
+            }
+        }
+    }
+    ```
 
 ###<a name="update-main-view"></a>更新主视图 
 
@@ -473,18 +518,20 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 在 **TodoList.xaml.cs** 中，将 `OnSelected` 的实现替换为以下内容：
 
-    public async void OnSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        var todo = e.SelectedItem as TodoItem;
+```
+public async void OnSelected(object sender, SelectedItemChangedEventArgs e)
+{
+    var todo = e.SelectedItem as TodoItem;
 
-        if (todo != null) {
-            var detailsView = new TodoItemDetailsView(todo, manager);
-            await detailsView.LoadImagesAsync();
-            await Navigation.PushAsync(detailsView);
-        }
-
-        todoList.SelectedItem = null;
+    if (todo != null) {
+        var detailsView = new TodoItemDetailsView(todo, manager);
+        await detailsView.LoadImagesAsync();
+        await Navigation.PushAsync(detailsView);
     }
+
+    todoList.SelectedItem = null;
+}
+```
 
 ###<a name="update-android"></a>更新 Android 项目
 
@@ -496,67 +543,71 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 2. 添加具有以下实现的新类 `DroidPlatform`。将“YourNamespace”替换为项目的主命名空间。
 
-        using System;
-        using System.IO;
-        using System.Threading.Tasks;
-        using Android.Content;
-        using Microsoft.WindowsAzure.MobileServices.Files;
-        using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-        using Microsoft.WindowsAzure.MobileServices.Files.Sync;
-        using Microsoft.WindowsAzure.MobileServices.Sync;
-        using Xamarin.Media;
+    ```
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using Android.Content;
+    using Microsoft.WindowsAzure.MobileServices.Files;
+    using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
+    using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+    using Microsoft.WindowsAzure.MobileServices.Sync;
+    using Xamarin.Media;
 
-        [assembly: Xamarin.Forms.Dependency(typeof(YourNamespace.Droid.DroidPlatform))]
-        namespace YourNamespace.Droid
+    [assembly: Xamarin.Forms.Dependency(typeof(YourNamespace.Droid.DroidPlatform))]
+    namespace YourNamespace.Droid
+    {
+        public class DroidPlatform : IPlatform
         {
-            public class DroidPlatform : IPlatform
+            public async Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename)
             {
-                public async Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename)
-                {
-                    var path = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name);
-                    await table.DownloadFileAsync(file, path);
-                }
+                var path = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name);
+                await table.DownloadFileAsync(file, path);
+            }
 
-                public async Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata)
-                {
-                    var filePath = await FileHelper.GetLocalFilePathAsync(metadata.ParentDataItemId, metadata.FileName);
-                    return new PathMobileServiceFileDataSource(filePath);
-                }
+            public async Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata)
+            {
+                var filePath = await FileHelper.GetLocalFilePathAsync(metadata.ParentDataItemId, metadata.FileName);
+                return new PathMobileServiceFileDataSource(filePath);
+            }
 
-                public async Task<string> TakePhotoAsync(object context)
-                {
-                    try {
-                        var uiContext = context as Context;
-                        if (uiContext != null) {
-                            var mediaPicker = new MediaPicker(uiContext);
-                            var photo = await mediaPicker.TakePhotoAsync(new StoreCameraMediaOptions());
+            public async Task<string> TakePhotoAsync(object context)
+            {
+                try {
+                    var uiContext = context as Context;
+                    if (uiContext != null) {
+                        var mediaPicker = new MediaPicker(uiContext);
+                        var photo = await mediaPicker.TakePhotoAsync(new StoreCameraMediaOptions());
 
-                            return photo.Path;
-                        }
+                        return photo.Path;
                     }
-                    catch (TaskCanceledException) {
-                    }
-
-                    return null;
+                }
+                catch (TaskCanceledException) {
                 }
 
-                public Task<string> GetTodoFilesPathAsync()
-                {
-                    string appData = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string filesPath = Path.Combine(appData, "TodoItemFiles");
+                return null;
+            }
 
-                    if (!Directory.Exists(filesPath)) {
-                        Directory.CreateDirectory(filesPath);
-                    }
+            public Task<string> GetTodoFilesPathAsync()
+            {
+                string appData = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string filesPath = Path.Combine(appData, "TodoItemFiles");
 
-                    return Task.FromResult(filesPath);
+                if (!Directory.Exists(filesPath)) {
+                    Directory.CreateDirectory(filesPath);
                 }
+
+                return Task.FromResult(filesPath);
             }
         }
+    }
+    ```
 
 3. 编辑 **MainActivity.cs**。在 `OnCreate` 中调用 `LoadApplication()` 的前面添加以下代码：
 
-        App.UIContext = this;
+    ```
+    App.UIContext = this;
+    ```
 
 ###<a name="update-ios"></a>更新 iOS 项目
 
@@ -566,127 +617,131 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 2. 添加具有以下实现的新类 `TouchPlatform`。将“YourNamespace”替换为项目的主命名空间。
 
-        using System;
-        using System.Collections.Generic;
-        using System.IO;
-        using System.Text;
-        using System.Threading.Tasks;
-        using Microsoft.WindowsAzure.MobileServices.Files;
-        using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-        using Microsoft.WindowsAzure.MobileServices.Files.Sync;
-        using Microsoft.WindowsAzure.MobileServices.Sync;
-        using Xamarin.Media;
+    ```
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.WindowsAzure.MobileServices.Files;
+    using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
+    using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+    using Microsoft.WindowsAzure.MobileServices.Sync;
+    using Xamarin.Media;
 
-        [assembly: Xamarin.Forms.Dependency(typeof(YourNamespace.iOS.TouchPlatform))]
-        namespace YourNamespace.iOS
+    [assembly: Xamarin.Forms.Dependency(typeof(YourNamespace.iOS.TouchPlatform))]
+    namespace YourNamespace.iOS
+    {
+        class TouchPlatform : IPlatform
         {
-            class TouchPlatform : IPlatform
+            public async Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename)
             {
-                public async Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename)
-                {
-                    var path = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name);
-                    await table.DownloadFileAsync(file, path);
+                var path = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name);
+                await table.DownloadFileAsync(file, path);
+            }
+
+            public async Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata)
+            {
+                var filePath = await FileHelper.GetLocalFilePathAsync(metadata.ParentDataItemId, metadata.FileName);
+                return new PathMobileServiceFileDataSource(filePath);
+            }
+
+            public async Task<string> TakePhotoAsync(object context)
+            {
+                try {
+                    var mediaPicker = new MediaPicker();
+                    var mediaFile = await mediaPicker.PickPhotoAsync();
+                    return mediaFile.Path;
                 }
-
-                public async Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata)
-                {
-                    var filePath = await FileHelper.GetLocalFilePathAsync(metadata.ParentDataItemId, metadata.FileName);
-                    return new PathMobileServiceFileDataSource(filePath);
-                }
-
-                public async Task<string> TakePhotoAsync(object context)
-                {
-                    try {
-                        var mediaPicker = new MediaPicker();
-                        var mediaFile = await mediaPicker.PickPhotoAsync();
-                        return mediaFile.Path;
-                    }
-                    catch (TaskCanceledException) {
-                        return null;
-                    }
-                }
-
-                public Task<string> GetTodoFilesPathAsync()
-                {
-                    string filesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TodoItemFiles");
-
-                    if (!Directory.Exists(filesPath)) {
-                        Directory.CreateDirectory(filesPath);
-                    }
-
-                    return Task.FromResult(filesPath);
+                catch (TaskCanceledException) {
+                    return null;
                 }
             }
+
+            public Task<string> GetTodoFilesPathAsync()
+            {
+                string filesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TodoItemFiles");
+
+                if (!Directory.Exists(filesPath)) {
+                    Directory.CreateDirectory(filesPath);
+                }
+
+                return Task.FromResult(filesPath);
+            }
         }
+    }
+    ```
 
 3. 编辑 **AppDelegate.cs**，取消调用 `SQLitePCL.CurrentPlatform.Init()` 的注释。
 
 ###<a name="update-windows"></a>更新 Windows 项目
 
-1. 安装 Visual Studio 扩展 [SQLite for Windows 8.1](http://go.microsoft.com/fwlink/?LinkID=716919)。有关详细信息，请参阅教程[为 Windows 应用启用脱机同步](/documentation/articles/app-service-mobile-windows-store-dotnet-get-started-offline-data/)。
+1. 安装 Visual Studio 扩展 [SQLite for Windows 8.1](http://go.microsoft.com/fwlink/?LinkID=716919)。有关详细信息，请参阅教程[为 Windows 应用启用脱机同步](./app-service-mobile-windows-store-dotnet-get-started-offline-data.md)。
 
 2. 编辑 **Package.appxmanifest**，检查**网络摄像头**功能。
 
 3. 添加具有以下实现的新类 `WindowsStorePlatform`。将“YourNamespace”替换为项目的主命名空间。
 
-        using System;
-        using System.Threading.Tasks;
-        using Microsoft.WindowsAzure.MobileServices.Files;
-        using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-        using Microsoft.WindowsAzure.MobileServices.Files.Sync;
-        using Microsoft.WindowsAzure.MobileServices.Sync;
-        using Windows.Foundation;
-        using Windows.Media.Capture;
-        using Windows.Storage;
-        using YourNamespace;
+    ```
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.WindowsAzure.MobileServices.Files;
+    using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
+    using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+    using Microsoft.WindowsAzure.MobileServices.Sync;
+    using Windows.Foundation;
+    using Windows.Media.Capture;
+    using Windows.Storage;
+    using YourNamespace;
 
-        [assembly: Xamarin.Forms.Dependency(typeof(WinApp.WindowsStorePlatform))]
-        namespace WinApp
+    [assembly: Xamarin.Forms.Dependency(typeof(WinApp.WindowsStorePlatform))]
+    namespace WinApp
+    {
+        public class WindowsStorePlatform : IPlatform
         {
-            public class WindowsStorePlatform : IPlatform
+            public async Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename)
             {
-                public async Task DownloadFileAsync<T>(IMobileServiceSyncTable<T> table, MobileServiceFile file, string filename)
-                {
-                    var path = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name);
-                    await table.DownloadFileAsync(file, path);
+                var path = await FileHelper.GetLocalFilePathAsync(file.ParentId, file.Name);
+                await table.DownloadFileAsync(file, path);
+            }
+
+            public async Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata)
+            {
+                var filePath = await FileHelper.GetLocalFilePathAsync(metadata.ParentDataItemId, metadata.FileName);
+                return new PathMobileServiceFileDataSource(filePath);
+            }
+
+            public async Task<string> GetTodoFilesPathAsync()
+            {
+                var storageFolder = ApplicationData.Current.LocalFolder;
+                var filePath = "TodoItemFiles";
+
+                var result = await storageFolder.TryGetItemAsync(filePath);
+
+                if (result == null) {
+                    result = await storageFolder.CreateFolderAsync(filePath);
                 }
 
-                public async Task<IMobileServiceFileDataSource> GetFileDataSource(MobileServiceFileMetadata metadata)
-                {
-                    var filePath = await FileHelper.GetLocalFilePathAsync(metadata.ParentDataItemId, metadata.FileName);
-                    return new PathMobileServiceFileDataSource(filePath);
+                return result.Name; // later operations will use relative paths
+            }
+
+            public async Task<string> TakePhotoAsync(object context)
+            {
+                try {
+                    CameraCaptureUI dialog = new CameraCaptureUI();
+                    Size aspectRatio = new Size(16, 9);
+                    dialog.PhotoSettings.CroppedAspectRatio = aspectRatio;
+
+                    StorageFile file = await dialog.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                    return file.Path;
                 }
-
-                public async Task<string> GetTodoFilesPathAsync()
-                {
-                    var storageFolder = ApplicationData.Current.LocalFolder;
-                    var filePath = "TodoItemFiles";
-
-                    var result = await storageFolder.TryGetItemAsync(filePath);
-
-                    if (result == null) {
-                        result = await storageFolder.CreateFolderAsync(filePath);
-                    }
-
-                    return result.Name; // later operations will use relative paths
-                }
-
-                public async Task<string> TakePhotoAsync(object context)
-                {
-                    try {
-                        CameraCaptureUI dialog = new CameraCaptureUI();
-                        Size aspectRatio = new Size(16, 9);
-                        dialog.PhotoSettings.CroppedAspectRatio = aspectRatio;
-
-                        StorageFile file = await dialog.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                        return file.Path;
-                    }
-                    catch (TaskCanceledException) {
-                        return null;
-                    }
+                catch (TaskCanceledException) {
+                    return null;
                 }
             }
         }
+    }
+    ```
 
 ##摘要
 
@@ -698,7 +753,9 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 - Azure 移动客户端 SDK 不实际存储任何文件数据。而是由客户端 SDK 调用 `IFileSyncHandler`，然后后者决定如何（以及是否）将文件存储在本地设备上。按如下所示注册同步处理程序：
 
-        client.InitializeFileSync(new MyFileSyncHandler(), store);
+    ```
+    client.InitializeFileSync(new MyFileSyncHandler(), store);
+    ```
 
       + Azure 移动客户端 SDK 需要文件数据时（例如，在上载过程中），调用 `IFileSyncHandler.GetDataSource`。这使用户能够管理如何（以及是否）将文件存储在本地设备上，并在需要时返回该信息。
 
@@ -708,11 +765,15 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 
 - 若要检索项目的文件，请调用 `IMobileServiceTable<T>` 或 IMobileServiceSyncTable<T> 实例的 `GetFilesAsync` 方法。此方法返回与所提供的数据项关联的文件列表。（请注意：这是 *本地* 操作，将根据上次同步时对象的状态返回文件。若要从服务器获取已更新的文件列表，应先启动同步操作。）
 
-        IEnumerable<MobileServiceFile> files = await myTable.GetFilesAsync(myItem);
+    ```
+    IEnumerable<MobileServiceFile> files = await myTable.GetFilesAsync(myItem);
+    ```
 
 - 文件同步功能使用本地存储中的记录更改通知，检索客户端已在推送或拉取操作过程中收到的记录。使用 `StoreTrackingOptions` 参数为同步上下文打开本地和服务器通知即可实现此功能。
 
-        this.client.SyncContext.InitializeAsync(store, StoreTrackingOptions.NotifyLocalAndServerOperations);
+    ```
+    this.client.SyncContext.InitializeAsync(store, StoreTrackingOptions.NotifyLocalAndServerOperations);
+    ```
 
       + 其他存储跟踪选项也可用，如仅本地或仅服务器通知。使用 `IMobileServiceClient` 的 `EventManager` 属性可添加或拥有自定义回调：
 
@@ -727,12 +788,12 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
 <!-- URLs. -->
 
 [Visual Studio Community 2013]: https://go.microsoft.com/fwLink/p/?LinkID=534203
-[创建 Xamarin.Forms 应用]: /documentation/articles/app-service-mobile-xamarin-forms-get-started/
+[创建 Xamarin.Forms 应用]: ./app-service-mobile-xamarin-forms-get-started.md
 [Xamarin.Forms DependencyService]: https://developer.xamarin.com/guides/xamarin-forms/dependency-service/
 [Microsoft.Azure.Mobile.Client.Files]: https://www.nuget.org/packages/Microsoft.Azure.Mobile.Client.Files/
 [Microsoft.Azure.Mobile.Client.SQLiteStore]: https://www.nuget.org/packages/Microsoft.Azure.Mobile.Client.SQLiteStore/
 [Microsoft.Azure.Mobile.Server.Files]: https://www.nuget.org/packages/Microsoft.Azure.Mobile.Server.Files/
-[了解共享访问签名]: /documentation/articles/storage-dotnet-shared-access-signature-part-1/
-[创建 Azure 存储帐户]: /documentation/articles/storage-create-storage-account/#create-a-storage-account
+[了解共享访问签名]: ../storage/storage-dotnet-shared-access-signature-part-1.md
+[创建 Azure 存储帐户]: ../storage/storage-create-storage-account.md#create-a-storage-account
 
 <!---HONumber=Mooncake_0919_2016-->

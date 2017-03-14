@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure 自动化中的连接资产 | Azure"
-    description="Azure 自动化中的连接资产包含从 Runbook 连接到外部服务或应用程序所需的信息。本文介绍了有关连接的详细信息，以及如何在文本和图形创作中使用连接。"
-    services="automation"
-    documentationcenter=""
-    author="mgoedtel"
-    manager="jwhit"
-    editor="tysonn" />
-<tags
-    ms.assetid="f0239017-5c66-4165-8cca-5dcb249b8091"
-    ms.service="automation"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="01/13/2017"
-    wacn.date="02/10/2017"
-    ms.author="magoedte; bwren" />  
+---
+title: Azure 自动化中的连接资产 | Azure
+description: Azure 自动化中的连接资产包含从 Runbook 连接到外部服务或应用程序所需的信息。本文介绍了有关连接的详细信息，以及如何在文本和图形创作中使用连接。
+services: automation
+documentationcenter: ''
+author: mgoedtel
+manager: jwhit
+editor: tysonn
 
+ms.assetid: f0239017-5c66-4165-8cca-5dcb249b8091
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 01/13/2017
+wacn.date: 02/10/2017
+ms.author: magoedte; bwren
+---
 
 # Azure 自动化中的连接资产
 
@@ -24,7 +24,7 @@
 
 当创建连接时，必须指定“连接类型”。连接类型是定义了一组属性的模板。连接为其连接类型中定义的每个属性定义值。连接类型通过集成模块添加到 Azure 自动化或使用 [Azure 自动化 API](http://msdn.microsoft.com/zh-cn/library/azure/mt163818.aspx) 创建。在创建连接时，仅能使用安装到你的自动化帐户中的连接类型。
 
->[AZURE.NOTE] 
+>[!NOTE] 
 Azure 自动化中的安全资产包括凭据、证书、连接和加密的变量。这些资产已使用针对每个自动化帐户生成的唯一密钥加密并存储在 Azure 自动化中。此密钥由主证书加密，并存储在 Azure 自动化中。在存储安全资产之前，会先使用主证书来解密自动化帐户的密钥，然后使用该密钥来加密资产。
 
 ## Windows PowerShell Cmdlet
@@ -46,7 +46,7 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 |---|---|
 |[Get-AutomationConnection](https://docs.microsoft.com/powershell/servicemanagement/azure.automation/v1.6.1/Get-AzureAutomationConnection?redirectedfrom=msdn)|获取要使用的连接。返回包括该连接属性的哈希表。|
 
->[AZURE.NOTE] 
+>[!NOTE] 
 应避免在 **Get- AutomationConnection** 的 -Name 参数中使用变量，因为这可能会使设计时发现 Runbook 与连接资产之间的依赖关系变得复杂化。
 
 ## 创建新连接
@@ -65,11 +65,13 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
 下面的示例命令为 [Twilio](http://www.twilio.com) 创建一个新连接，Twilio 是一种允许您发送和接收短信的电话服务。在[脚本中心](http://gallery.technet.microsoft.com/scriptcenter/Twilio-PowerShell-Module-8a8bfef8)中提供了包括 Twilio 连接类型的示例集成模块。此连接类型为“帐户 SID”和“授权令牌”定义属性，这些是连接到 Twilio 时验证你的帐户时所需的属性。您必须[下载此模块](http://gallery.technet.microsoft.com/scriptcenter/Twilio-PowerShell-Module-8a8bfef8)并将其安装到您的自动化帐户中，才能使此示例代码正常工作。
 
-    $AccountSid = "DAf5fed830c6f8fac3235c5b9d58ed7ac5"
-    $AuthToken  = "17d4dadfce74153d5853725143c52fd1"
-    $FieldValues = @{"AccountSid" = $AccountSid;"AuthToken"=$AuthToken}
+```
+$AccountSid = "DAf5fed830c6f8fac3235c5b9d58ed7ac5"
+$AuthToken  = "17d4dadfce74153d5853725143c52fd1"
+$FieldValues = @{"AccountSid" = $AccountSid;"AuthToken"=$AuthToken}
 
-    New-AzureAutomationConnection -AutomationAccountName "MyAutomationAccount" -Name "TwilioConnection" -ConnectionTypeName "Twilio" -ConnectionFieldValues $FieldValues
+New-AzureAutomationConnection -AutomationAccountName "MyAutomationAccount" -Name "TwilioConnection" -ConnectionTypeName "Twilio" -ConnectionFieldValues $FieldValues
+```
 
 ## 在 Runbook
 在 Runbook 中使用 **Get-AutomationConnection** cmdlet 检索连接。此活动检索连接中的不同字段的值，并将它们按[哈希表](https://technet.microsoft.com/zh-cn/library/hh847780.aspx)返回，该哈希表随后可用于 Runbook 中适当的命令。
@@ -78,8 +80,10 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
 以下示例命令演示如何使用前面所述的运行方式帐户，向 Runbook 中的 Azure Resource Manager 资源进行身份验证。它使用表示该运行方式帐户的连接资产，该帐户引用基于证书的服务主体而不是凭据。
 
-    $Conn = Get-AutomationConnection -Name AzureRunAsConnection 
-    Add-AzureRMAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint 
+```
+$Conn = Get-AutomationConnection -Name AzureRunAsConnection 
+Add-AzureRMAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint 
+```
 
 <!---HONumber=Mooncake_0206_2017-->
 <!--Update_Description: update some commands and sample code-->

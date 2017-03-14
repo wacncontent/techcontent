@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Service Fabric 可靠服务编程模型概述 | Azure"
-    description="了解 Service Fabric 的 Reliable Service 编程模型，并开始编写自己的服务。"
-    services="Service-Fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="vturecek; mani-ramaswamy" />
-<tags
-    ms.assetid="0c88a533-73f8-4ae1-a939-67d17456ac06"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider;" />  
+---
+title: Service Fabric 可靠服务编程模型概述 | Azure
+description: 了解 Service Fabric 的 Reliable Service 编程模型，并开始编写自己的服务。
+services: Service-Fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: vturecek; mani-ramaswamy
 
+ms.assetid: 0c88a533-73f8-4ae1-a939-67d17456ac06
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider;
+---
 
 # Reliable Services 概述
 Azure Service Fabric 可简化无状态和有状态 Reliable Services 的编写与管理。本主题的内容：
@@ -25,23 +25,23 @@ Azure Service Fabric 可简化无状态和有状态 Reliable Services 的编写�
 - 编写 Reliable Services 时必须做出选择。
 - 有关 Reliable Services 的使用方案及编写方式的一些方案和示例。
 
-Reliable Services 是 Service Fabric 上可用的编程模型之一。另一个是 Reliable Actor 编程模型，它在 Reliable Services 模型的顶层提供虚拟执行组件编程模型。有关 Reliable Actors 编程模型的详细信息，请参阅 [Service Fabric Reliable Actors 简介](/documentation/articles/service-fabric-reliable-actors-introduction/)。
+Reliable Services 是 Service Fabric 上可用的编程模型之一。另一个是 Reliable Actor 编程模型，它在 Reliable Services 模型的顶层提供虚拟执行组件编程模型。有关 Reliable Actors 编程模型的详细信息，请参阅 [Service Fabric Reliable Actors 简介](./service-fabric-reliable-actors-introduction.md)。
 
-Service Fabric 通过 [Service Fabric 应用程序管理](/documentation/articles/service-fabric-deploy-remove-applications/)管理服务的生存期，从预配和部署一直到升级和删除。
+Service Fabric 通过 [Service Fabric 应用程序管理](./service-fabric-deploy-remove-applications.md)管理服务的生存期，从预配和部署一直到升级和删除。
 
 ## 什么是 Reliable Services？
 Reliable Services 可提供简单且功能强大的顶级编程模型，以便帮助用户表达对其应用程序至关重要的内容。借助 Reliable Services 编程模型有以下益处：
 
-* 访问其余的 Service Fabric 编程 API。与建模为[来宾可执行文件](/documentation/articles/service-fabric-deploy-existing-app/)的 Service Fabric Services 不同，Reliable Services 往往直接使用其余的 Service Fabric API。这样，服务便可以：
+* 访问其余的 Service Fabric 编程 API。与建模为[来宾可执行文件](./service-fabric-deploy-existing-app.md)的 Service Fabric Services 不同，Reliable Services 往往直接使用其余的 Service Fabric API。这样，服务便可以：
   * 查询系统
   * 报告群集中实体的运行状况
   * 接收有关配置和代码更改的通知
   * 查找其他服务并与它们通信
-  * （可选）使用 [Reliable Collections](/documentation/articles/service-fabric-reliable-services-reliable-collections/)
+  * （可选）使用 [Reliable Collections](./service-fabric-reliable-services-reliable-collections.md)
   * ...以及访问其他许多功能，所有这些操作都可通过使用多种编程语言编写的一流编程模型执行。
 * 类似于用户所习惯编程模型的简单模型，用于运行自己的代码。代码具有定义完善的入口点和易于管理的生命周期。
-* 可插式通信模型。使用选择的传输方式，如包含 [Web API](/documentation/articles/service-fabric-reliable-services-communication-webapi/) 的 HTTP、WebSockets、自定义 TCP 协议，等等。Reliable Services 提供一些极佳的自带选项供选用，但也可以提供自己的选项。
-* 对于有状态服务，Reliable Services 编程模型允许使用 [Reliable Collections](/documentation/articles/service-fabric-reliable-services-reliable-collections/) 直接在服务内以一致、可靠的方式存储状态。Reliable Collections 是一组简单的高度可用、可靠集合类，用过 C\# 集合的用户都对它很熟悉。按照惯例，服务需借助外部系统来进行可靠的状态管理。利用 Reliable Collections，可将状态存储在计算旁边，获得高可用性外部存储一样的高可用性和可靠性。此模型还能改善延迟问题，因为可将运行此模型所需的计算资源与状态放置在一起。
+* 可插式通信模型。使用选择的传输方式，如包含 [Web API](./service-fabric-reliable-services-communication-webapi.md) 的 HTTP、WebSockets、自定义 TCP 协议，等等。Reliable Services 提供一些极佳的自带选项供选用，但也可以提供自己的选项。
+* 对于有状态服务，Reliable Services 编程模型允许使用 [Reliable Collections](./service-fabric-reliable-services-reliable-collections.md) 直接在服务内以一致、可靠的方式存储状态。Reliable Collections 是一组简单的高度可用、可靠集合类，用过 C\# 集合的用户都对它很熟悉。按照惯例，服务需借助外部系统来进行可靠的状态管理。利用 Reliable Collections，可将状态存储在计算旁边，获得高可用性外部存储一样的高可用性和可靠性。此模型还能改善延迟问题，因为可将运行此模型所需的计算资源与状态放置在一起。
 
 请观看这段 Microsoft 虚拟大学视频，大致了解 Reliable Services：
 <center> 
@@ -61,10 +61,10 @@ Service Fabric 中的 Reliable Services 与你以前编写的服务不同。Serv
 ## 服务生命周期
 无论服务有状态还是无状态，Reliable Services 都会提供简单的生命周期，以便快速插入代码并开始执行。只需实现一两种方法，即可启动并运行服务。
 
-* **CreateServiceReplicaListeners/CreateServiceInstanceListeners** - 服务在此方法中定义要使用的通信堆栈。通信堆栈（如 [Web API](/documentation/articles/service-fabric-reliable-services-communication-webapi/)）可定义服务的一个或多个侦听终结点（客户端将如何访问服务）。它还定义所显示的消息如何与服务代码的其余部分交互。
+* **CreateServiceReplicaListeners/CreateServiceInstanceListeners** - 服务在此方法中定义要使用的通信堆栈。通信堆栈（如 [Web API](./service-fabric-reliable-services-communication-webapi.md)）可定义服务的一个或多个侦听终结点（客户端将如何访问服务）。它还定义所显示的消息如何与服务代码的其余部分交互。
 * **RunAsync** - 服务在此方法中运行其业务逻辑，对于在服务生存期内一直运行的所有后台任务，服务可在此方法中启动这些任务。所提供的取消标记是指示该操作何时应停止的信号。例如，如果服务需要从 Reliable Queue 中提取消息并进行处理，`RunAsync()` 就是这些工作的发生位置。
 
-如果这是你第一次学习 Reliable Services，请继续阅读！ 如果你正在寻找 Reliable Services 生命周期的详细演练，请阅读[此文](/documentation/articles/service-fabric-reliable-services-lifecycle/)。
+如果这是你第一次学习 Reliable Services，请继续阅读！ 如果你正在寻找 Reliable Services 生命周期的详细演练，请阅读[此文](./service-fabric-reliable-services-lifecycle.md)。
 
 ## 示例服务
 了解这一编程模型后，让我们来快速看看两种不同的服务，了解这些部分如何搭配运作。
@@ -74,7 +74,7 @@ Service Fabric 中的 Reliable Services 与你以前编写的服务不同。Serv
 
 以没有内存的计算器为例，它会接收所有项并同时执行运算。
 
-在这种情况下，由于服务无需处理任何后台任务，因此，服务的 `RunAsync()` 可为空。创建计算器服务后，该服务将返回 `ICommunicationListener`（例如 [Web API](/documentation/articles/service-fabric-reliable-services-communication-webapi/)），用于在某个端口上打开侦听终结点。此侦听终结点挂接到不同的计算方法（例如："Add\(n1, n2\)"），这些方法定义计算器的公共 API。
+在这种情况下，由于服务无需处理任何后台任务，因此，服务的 `RunAsync()` 可为空。创建计算器服务后，该服务将返回 `ICommunicationListener`（例如 [Web API](./service-fabric-reliable-services-communication-webapi.md)），用于在某个端口上打开侦听终结点。此侦听终结点挂接到不同的计算方法（例如："Add\(n1, n2\)"），这些方法定义计算器的公共 API。
 
 从客户端进行调用时，将调用相应的方法，并且计算器服务会对所提供的数据执行运算并返回结果。它不存储任何状态。
 
@@ -109,10 +109,9 @@ Service Fabric 中常见的无状态服务使用示例是作为前端，它公�
 * 想要开发或使用第三方开发的自定义状态提供程序。
 
 ## 后续步骤
-+ [Reliable Services 快速启动](/documentation/articles/service-fabric-reliable-services-quick-start/)
-+ [Reliable Services 高级用法](/documentation/articles/service-fabric-reliable-services-advanced-usage/)
-+ [Reliable Actors 编程模型](/documentation/articles/service-fabric-reliable-actors-introduction/)
- 
++ [Reliable Services 快速启动](./service-fabric-reliable-services-quick-start.md)
++ [Reliable Services 高级用法](./service-fabric-reliable-services-advanced-usage.md)
++ [Reliable Actors 编程模型](./service-fabric-reliable-actors-introduction.md)
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: enrich introduction for Reliable Services; add one MVA video; wording update-->

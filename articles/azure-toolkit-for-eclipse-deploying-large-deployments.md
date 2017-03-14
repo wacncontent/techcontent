@@ -1,21 +1,22 @@
-<properties
-    pageTitle="实施大型部署"
-    description="了解如何使用 Azure Toolkit for Eclipse 实施大型部署。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="5e18bace-5df0-4af8-ad86-6151ea8bd823"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm" />
+---
+title: 实施大型部署
+description: 了解如何使用 Azure Toolkit for Eclipse 实施大型部署。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
+
+ms.assetid: 5e18bace-5df0-4af8-ad86-6151ea8bd823
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm
+---
 
 # 实施大型部署
 如果你的部署太大，从而无法包含在默认 approot 文件夹中，你可以使用本地存储资源作为 JDK 和应用程序服务器的部署根文件夹。
@@ -42,12 +43,11 @@
 
 <!-- URL List -->
 
-
 [Azure Java Developer Center]: /develop/java/
-[Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse/
-[Creating a Hello World Application for Azure in Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[Local storage properties]: /documentation/articles/azure-toolkit-for-eclipse-azure-role-properties/#local_storage_properties/
+[Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse.md
+[Creating a Hello World Application for Azure in Eclipse]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[Local storage properties]: ./azure-toolkit-for-eclipse-azure-role-properties.md#local_storage_properties/
 
 <!-- IMG List -->
 

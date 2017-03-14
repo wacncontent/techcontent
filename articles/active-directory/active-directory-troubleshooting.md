@@ -1,22 +1,22 @@
-<properties
-    pageTitle="故障排除：“Active Directory”项缺失或不可用 | Azure"
-    description="Azure 管理门户中未显示 Active Directory 菜单项时怎么办。"
-    services="active-directory"
-    documentationcenter="na"
-    author="bryanla"
-    manager="mbaldwin"
-    editor="" />
-<tags
-    ms.assetid="3383020d-6397-43ea-b7aa-c6a9d6a1e3df"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="01/07/2017"
-    wacn.date="02/15/2017"
-    ms.author="mbaldwin" />  
+---
+title: 故障排除：“Active Directory”项缺失或不可用 | Azure
+description: Azure 管理门户中未显示 Active Directory 菜单项时怎么办。
+services: active-directory
+documentationcenter: na
+author: bryanla
+manager: mbaldwin
+editor: ''
 
+ms.assetid: 3383020d-6397-43ea-b7aa-c6a9d6a1e3df
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 01/07/2017
+wacn.date: 02/15/2017
+ms.author: mbaldwin
+---
 
 # 故障排除：“Active Directory”项缺失或不可用
 
@@ -38,9 +38,9 @@
 
     或
 
-- Azure 租户至少有一个 Azure 多重身份验证提供程序。有关详细信息，请参阅[管理 Azure 多重身份验证提供程序](/documentation/articles/multi-factor-authentication-get-started-cloud/)。
+- Azure 租户至少有一个 Azure 多重身份验证提供程序。有关详细信息，请参阅[管理 Azure 多重身份验证提供程序](../multi-factor-authentication/multi-factor-authentication-get-started-cloud.md)。
 
-要获取对目录的管理权限，请让管理员为你的帐户分配管理员角色。有关详细信息，请参阅[分配管理员角色](/documentation/articles/active-directory-assign-admin-roles/)。
+要获取对目录的管理权限，请让管理员为你的帐户分配管理员角色。有关详细信息，请参阅[分配管理员角色](./active-directory-assign-admin-roles.md)。
 
 ## Active Directory 不可用
 

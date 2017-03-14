@@ -1,21 +1,22 @@
-<properties
-    pageTitle="可测试性：服务通信 | Azure"
-    description="服务到服务通信是 Service Fabric 应用程序的关键集成点。本文讨论设计注意事项和测试技术。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="vturecek"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="017557df-fb59-4e4a-a65d-2732f29255b8"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/04/2017"
-    wacn.date="02/20/2017"
-    ms.author="vturecek" />
+---
+title: 可测试性：服务通信 | Azure
+description: 服务到服务通信是 Service Fabric 应用程序的关键集成点。本文讨论设计注意事项和测试技术。
+services: service-fabric
+documentationcenter: .net
+author: vturecek
+manager: timlt
+editor: ''
+
+ms.assetid: 017557df-fb59-4e4a-a65d-2732f29255b8
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/04/2017
+wacn.date: 02/20/2017
+ms.author: vturecek
+---
 
 # Service Fabric 可测试性方案：服务通信
 Azure Service Fabric 中自然显露了微服务和面向服务的体系结构风格。在这些类型的分布式体系结构中，组件化微服务应用程序通常由需要相互通信的多个服务组成。即使在最简单的情况下，一般至少有一个无状态 Web 服务和一个有状态数据存储服务需要进行通信。
@@ -53,11 +54,9 @@ Azure Service Fabric 中自然显露了微服务和面向服务的体系结构�
 
     移动有状态服务分区的主副本有无数原因。用此来指定某个特定分区的主副本，以查看服务如何以一种非常有控制力的方式对移动做出反应。
 
-    
-
-    	PS > Move-ServiceFabricPrimaryReplica -PartitionId 6faa4ffa-521a-44e9-8351-dfca0f7e0466 -ServiceName fabric:/MyApplication/MyService
-
-    
+    ```
+    PS > Move-ServiceFabricPrimaryReplica -PartitionId 6faa4ffa-521a-44e9-8351-dfca0f7e0466 -ServiceName fabric:/MyApplication/MyService
+    ```
 
 2. 停止某个节点。
 
@@ -65,11 +64,9 @@ Azure Service Fabric 中自然显露了微服务和面向服务的体系结构�
 
     可以使用 PowerShell **Stop-ServiceFabricNode** cmdlet 来停止节点：
 
-    
-
-    	PS > Restart-ServiceFabricNode -NodeName Node_1
-
-   
+    ```
+    PS > Restart-ServiceFabricNode -NodeName Node_1
+    ```
 
 ## 维持服务可用性
 
@@ -83,19 +80,17 @@ Azure Service Fabric 中自然显露了微服务和面向服务的体系结构�
 
 可以使用 Invoke-ServiceFabricPartitionQuorumLoss PowerShell cmdlet 引入仲裁丢失：
 
-
-
-	PS > Invoke-ServiceFabricPartitionQuorumLoss -ServiceName fabric:/Myapplication/MyService -QuorumLossMode QuorumReplicas -QuorumLossDurationInSeconds 20
-
-
+```
+PS > Invoke-ServiceFabricPartitionQuorumLoss -ServiceName fabric:/Myapplication/MyService -QuorumLossMode QuorumReplicas -QuorumLossDurationInSeconds 20
+```
 
 在本示例中，我们将 `QuorumLossMode` 设置为 `QuorumReplicas` 以指出我们希望引入仲裁丢失而不关闭所有副本。这样仍然能够进行读取操作。若要测试整个分区不可用的情形，可将此开关设置为 `AllReplicas`。
 
 ## 后续步骤
 
-[了解有关可测试性操作的详细信息](/documentation/articles/service-fabric-testability-actions/)
+[了解有关可测试性操作的详细信息](./service-fabric-testability-actions.md)
 
-[了解有关可测试性方案的详细信息](/documentation/articles/service-fabric-testability-scenarios/)
+[了解有关可测试性方案的详细信息](./service-fabric-testability-scenarios.md)
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: wording update-->

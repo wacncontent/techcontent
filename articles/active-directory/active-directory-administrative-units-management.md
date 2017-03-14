@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure Active Directory 中的管理单元管理"
-    description="在 Azure Active Directory 中使用管理单元获得更精细的委派权限"
-    services="active-directory"
-    documentationcenter=""
-    author="curtand"
-    manager="femila"
-    editor="" />  
+---
+title: Azure Active Directory 中的管理单元管理
+description: 在 Azure Active Directory 中使用管理单元获得更精细的委派权限
+services: active-directory
+documentationcenter: ''
+author: curtand
+manager: femila
+editor: ''
 
-<tags
-    ms.assetid="8464cd6b-1d1a-470d-a4fb-ee29b8eab4c4"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="11/09/2016"
-    ms.author="curtand" 
-    wacn.date="12/09/2016"/>
+ms.assetid: 8464cd6b-1d1a-470d-a4fb-ee29b8eab4c4
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/09/2016
+ms.author: curtand
+wacn.date: 12/09/2016
+---
 
 # Azure AD - 公共预览版中的管理单元管理
 本文介绍管理单元，这是一个新的 Azure Active Directory 资源容器，可用于向部分用户委托管理权限，以及向部分用户应用策略。在 Azure Active Directory 中，利用管理单元，中心管理员能够将权限委派给区域管理员或以粒度级别设置策略。
@@ -31,6 +31,6 @@
 有关软件要求和安装 Azure AD 模块的详细信息，以及有关用于管理管理单元的 Azure AD 模块 cmdlet 的信息（包括语法、参数说明和示例），请参阅[使用 Windows PowerShell 管理 Azure AD](https://msdn.microsoft.com/zh-cn/library/azure/jj151815.aspx)。
 
 ## 后续步骤
-[Azure Active Directory 版本](/documentation/articles/active-directory-editions/)
+[Azure Active Directory 版本](./active-directory-editions.md)
 
 <!---HONumber=Mooncake_1128_2016-->

@@ -1,25 +1,25 @@
-<properties
-    pageTitle="使用 Azure DocumentDB 构建多区域作者体系结构 | Azure"
-    description="了解如何使用 Azure DocumentDB 来设计可实现跨多个地理区域进行本地读取和写入的应用程序结构。"
-    services="documentdb"
-    documentationcenter=""
-    author="arramac"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="706ced74-ea67-45dd-a7de-666c3c893687"
-    ms.service="documentdb"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/10/2016"
-    wacn.date="02/27/2017"
-    ms.author="arramac" />  
+---
+title: 使用 Azure DocumentDB 构建多区域作者体系结构 | Azure
+description: 了解如何使用 Azure DocumentDB 来设计可实现跨多个地理区域进行本地读取和写入的应用程序结构。
+services: documentdb
+documentationcenter: ''
+author: arramac
+manager: jhubbard
+editor: ''
 
+ms.assetid: 706ced74-ea67-45dd-a7de-666c3c893687
+ms.service: documentdb
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/10/2016
+wacn.date: 02/27/2017
+ms.author: arramac
+---
 
 # 使用 Azure DocumentDB 构建多区域作者体系结构
-DocumentDB 支持全面的[全球复制](/documentation/articles/documentdb-distribute-data-globally/)，可将数据分布到多个区域，让用户在工作负荷中的任意位置以较低的延迟访问数据。此模型常用于发布者/使用者工作负荷。在这些工作负荷中，单个地理区域包含一个作者，其他（读取）区域包含分布于全球的读者。
+DocumentDB 支持全面的[全球复制](./documentdb-distribute-data-globally.md)，可将数据分布到多个区域，让用户在工作负荷中的任意位置以较低的延迟访问数据。此模型常用于发布者/使用者工作负荷。在这些工作负荷中，单个地理区域包含一个作者，其他（读取）区域包含分布于全球的读者。
 
 还可以使用 DocumentDB 的全球复制支持来构建作者和读者分布于全球的应用程序。本文档概述一种使用 Azure DocumentDB 为全球分布的作者实现本地写入和本地读取访问的模式。
 
@@ -35,127 +35,137 @@ DocumentDB 支持全面的[全球复制](/documentation/articles/documentdb-dist
 
 假设存在数百万的使用者和发布者以及数十亿篇文章，我们很快就必须面对扩展以及保证访问位置的问题。与大多数可伸缩性问题一样，解决方案在于良好的分区策略。接下来，让我们看看如何将文章、评论和通知作为文档建模、配置 DocumentDB 帐户以及实现数据访问层。
 
-若要了解有关分区和分区键的详细信息，请参阅 [Azure DocumentDB 中的分区和缩放](/documentation/articles/documentdb-partition-data/)。
+若要了解有关分区和分区键的详细信息，请参阅 [Azure DocumentDB 中的分区和缩放](./documentdb-partition-data.md)。
 
 ## <a id="ModelingNotifications"></a>为通知建模
 通知是特定于用户的数据馈送。因此，通知文档的访问模式始终发生在单个用户的上下文中。例如，可以“向某个用户发布通知”或“为某个给定用户获取所有通知”。因此，对于此类型，分区键的最佳选择是 `UserId`。
 
-	class Notification 
-	{ 
-		// Unique ID for Notification. 
-		public string Id { get; set; }
+```
+class Notification 
+{ 
+    // Unique ID for Notification. 
+    public string Id { get; set; }
 
-		// The user Id for which notification is addressed to. 
-		public string UserId { get; set; }
+    // The user Id for which notification is addressed to. 
+    public string UserId { get; set; }
 
-		// The partition Key for the resource. 
-		public string PartitionKey 
-		{ 
-			get 
-			{ 
-				return this.UserId; 
-			}
-		}
+    // The partition Key for the resource. 
+    public string PartitionKey 
+    { 
+        get 
+        { 
+            return this.UserId; 
+        }
+    }
 
-		// Subscription for which this notification is raised. 
-		public string SubscriptionFilter { get; set; }
+    // Subscription for which this notification is raised. 
+    public string SubscriptionFilter { get; set; }
 
-		// Subject of the notification. 
-		public string ArticleId { get; set; } 
-	}
+    // Subject of the notification. 
+    public string ArticleId { get; set; } 
+}
+```
 
 ## <a id="ModelingSubscriptions"></a>为订阅建模
 订阅可以根据各种标准创建，如感兴趣的特定类别的文章或特定的发布者。因此，`SubscriptionFilter` 是很好的分区键选择。
 
-	class Subscriptions 
-	{ 
-		// Unique ID for Subscription 
-		public string Id { get; set; }
+```
+class Subscriptions 
+{ 
+    // Unique ID for Subscription 
+    public string Id { get; set; }
 
-		// Subscription source. Could be Author | Category etc. 
-		public string SubscriptionFilter { get; set; }
+    // Subscription source. Could be Author | Category etc. 
+    public string SubscriptionFilter { get; set; }
 
-		// subscribing User. 
-		public string UserId { get; set; }
+    // subscribing User. 
+    public string UserId { get; set; }
 
-		public string PartitionKey 
-		{ 
-			get 
-			{ 
-				return this.SubscriptionFilter; 
-			} 
-		} 
-	}
+    public string PartitionKey 
+    { 
+        get 
+        { 
+            return this.SubscriptionFilter; 
+        } 
+    } 
+}
+```
 
 ## <a id="ModelingArticles"></a>为文章建模
 通过通知标识一篇文章后，后续查询通常基于 `ArticleId`。选择 `ArticleID` 作为分区键将为在 DocumentDB 集合内存储文章提供最佳分布。
 
-	class Article 
-	{ 
-		// Unique ID for Article public string Id { get; set; }
-		public string PartitionKey 
-		{ 
-			get 
-			{ 
-				return this.Id; 
-			} 
-		}
-		
-		// Author of the article
-		public string Author { get; set; }
+```
+class Article 
+{ 
+    // Unique ID for Article public string Id { get; set; }
+    public string PartitionKey 
+    { 
+        get 
+        { 
+            return this.Id; 
+        } 
+    }
 
-		// Category/genre of the article
-		public string Category { get; set; }
+    // Author of the article
+    public string Author { get; set; }
 
-		// Tags associated with the article
-		public string[] Tags { get; set; }
+    // Category/genre of the article
+    public string Category { get; set; }
 
-		// Title of the article
-		public string Title { get; set; }
-		
-		//... 
-	}
+    // Tags associated with the article
+    public string[] Tags { get; set; }
+
+    // Title of the article
+    public string Title { get; set; }
+
+    //... 
+}
+```
 
 ## <a id="ModelingReviews"></a>为评论建模
 和文章一样，评论通常在文章上下文中写入和读取。选择 `ArticleId` 作为分区键将为与文章相关的评论提供最佳分布和高效访问。
 
-	class Review 
-	{ 
-		// Unique ID for Review 
-		public string Id { get; set; }
+```
+class Review 
+{ 
+    // Unique ID for Review 
+    public string Id { get; set; }
 
-		// Article Id of the review 
-		public string ArticleId { get; set; }
+    // Article Id of the review 
+    public string ArticleId { get; set; }
 
-		public string PartitionKey 
-		{ 
-			get 
-			{ 
-				return this.ArticleId; 
-			} 
-		}
-		
-		//Reviewer Id public string UserId { get; set; }
-		public string ReviewText { get; set; }
-		
-		public int Rating { get; set; } }
-	}
+    public string PartitionKey 
+    { 
+        get 
+        { 
+            return this.ArticleId; 
+        } 
+    }
+
+    //Reviewer Id public string UserId { get; set; }
+    public string ReviewText { get; set; }
+
+    public int Rating { get; set; } }
+}
+```
 
 ## <a id="DataAccessMethods"></a>数据访问层方法
 现在让我们看看需要实现的主要数据访问方法。以下是 `ContentPublishDatabase` 需要的方法列表：
 
-	class ContentPublishDatabase 
-	{ 
-		public async Task CreateSubscriptionAsync(string userId, string category);
-	
-		public async Task<IEnumerable<Notification>> ReadNotificationFeedAsync(string userId);
-	
-		public async Task<Article> ReadArticleAsync(string articleId);
-	
-		public async Task WriteReviewAsync(string articleId, string userId, string reviewText, int rating);
-	
-		public async Task<IEnumerable<Review>> ReadReviewsAsync(string articleId); 
-	}
+```
+class ContentPublishDatabase 
+{ 
+    public async Task CreateSubscriptionAsync(string userId, string category);
+
+    public async Task<IEnumerable<Notification>> ReadNotificationFeedAsync(string userId);
+
+    public async Task<Article> ReadArticleAsync(string articleId);
+
+    public async Task WriteReviewAsync(string articleId, string userId, string reviewText, int rating);
+
+    public async Task<IEnumerable<Review>> ReadReviewsAsync(string articleId); 
+}
+```
 
 ## <a id="Architecture"></a>DocumentDB 帐户配置
 若要保证本地读取和写入，数据分区不仅要基于分区键，还要基于不同区域的地理访问模式。该模型依赖于每个区域具有异地复制的 Azure DocumentDB 数据库帐户。例如，对于两个区域，具有针对多区域写入的设置：
@@ -166,24 +176,26 @@ DocumentDB 支持全面的[全球复制](/documentation/articles/documentdb-dist
 | `contentpubdatabase-europe.documents.azure.com` | `North Europe` |`West US` |
 
 以下代码片段演示如何在 `China North` 区域中运行的 DAL 中初始化客户端。
-    
-    ConnectionPolicy writeClientPolicy = new ConnectionPolicy { ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp };
-    writeClientPolicy.PreferredLocations.Add(LocationNames.WestUS);
-    writeClientPolicy.PreferredLocations.Add(LocationNames.NorthEurope);
 
-    DocumentClient writeClient = new DocumentClient(
-        new Uri("https://contentpubdatabase-usa.documents.azure.com"), 
-        writeRegionAuthKey,
-        writeClientPolicy);
+```
+ConnectionPolicy writeClientPolicy = new ConnectionPolicy { ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp };
+writeClientPolicy.PreferredLocations.Add(LocationNames.WestUS);
+writeClientPolicy.PreferredLocations.Add(LocationNames.NorthEurope);
 
-    ConnectionPolicy readClientPolicy = new ConnectionPolicy { ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp };
-    readClientPolicy.PreferredLocations.Add(LocationNames.NorthEurope);
-    readClientPolicy.PreferredLocations.Add(LocationNames.WestUS);
+DocumentClient writeClient = new DocumentClient(
+    new Uri("https://contentpubdatabase-usa.documents.azure.com"), 
+    writeRegionAuthKey,
+    writeClientPolicy);
 
-    DocumentClient readClient = new DocumentClient(
-        new Uri("https://contentpubdatabase-europe.documents.azure.com"),
-        readRegionAuthKey,
-        readClientPolicy);
+ConnectionPolicy readClientPolicy = new ConnectionPolicy { ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp };
+readClientPolicy.PreferredLocations.Add(LocationNames.NorthEurope);
+readClientPolicy.PreferredLocations.Add(LocationNames.WestUS);
+
+DocumentClient readClient = new DocumentClient(
+    new Uri("https://contentpubdatabase-europe.documents.azure.com"),
+    readRegionAuthKey,
+    readClientPolicy);
+```
 
 通过上述设置，数据访问层可以根据其部署位置将所有写入转发到本地帐户。通过从两个帐户读取来执行读取以获得数据的全局视图。这种方法可以扩展到所需的任意多个区域。例如，以下是三个地理区域的设置：
 
@@ -201,113 +213,117 @@ DocumentDB 支持全面的[全球复制](/documentation/articles/documentdb-dist
 
 通过上述设置，可以实现数据访问方法。写入操作将写入转发到相应的 `writeClient`。
 
-    public async Task CreateSubscriptionAsync(string userId, string category)
+```
+public async Task CreateSubscriptionAsync(string userId, string category)
+{
+    await this.writeClient.CreateDocumentAsync(this.contentCollection, new Subscriptions
     {
-        await this.writeClient.CreateDocumentAsync(this.contentCollection, new Subscriptions
-        {
-            UserId = userId,
-            SubscriptionFilter = category
-        });
-    }
+        UserId = userId,
+        SubscriptionFilter = category
+    });
+}
 
-    public async Task WriteReviewAsync(string articleId, string userId, string reviewText, int rating)
+public async Task WriteReviewAsync(string articleId, string userId, string reviewText, int rating)
+{
+    await this.writeClient.CreateDocumentAsync(this.contentCollection, new Review
     {
-        await this.writeClient.CreateDocumentAsync(this.contentCollection, new Review
-        {
-            UserId = userId,
-            ArticleId = articleId,
-            ReviewText = reviewText,
-            Rating = rating
-        });
-    }
+        UserId = userId,
+        ArticleId = articleId,
+        ReviewText = reviewText,
+        Rating = rating
+    });
+}
+```
 
 若要读取通知和评论，必须从两个区域读取并合并结果，如以下代码片段所示：
 
-    public async Task<IEnumerable<Notification>> ReadNotificationFeedAsync(string userId)
+```
+public async Task<IEnumerable<Notification>> ReadNotificationFeedAsync(string userId)
+{
+    IDocumentQuery<Notification> writeAccountNotification = (
+        from notification in this.writeClient.CreateDocumentQuery<Notification>(this.contentCollection) 
+        where notification.UserId == userId 
+        select notification).AsDocumentQuery();
+
+    IDocumentQuery<Notification> readAccountNotification = (
+        from notification in this.readClient.CreateDocumentQuery<Notification>(this.contentCollection) 
+        where notification.UserId == userId 
+        select notification).AsDocumentQuery();
+
+    List<Notification> notifications = new List<Notification>();
+
+    while (writeAccountNotification.HasMoreResults || readAccountNotification.HasMoreResults)
     {
-        IDocumentQuery<Notification> writeAccountNotification = (
-        	from notification in this.writeClient.CreateDocumentQuery<Notification>(this.contentCollection) 
-        	where notification.UserId == userId 
-        	select notification).AsDocumentQuery();
-        
-        IDocumentQuery<Notification> readAccountNotification = (
-        	from notification in this.readClient.CreateDocumentQuery<Notification>(this.contentCollection) 
-        	where notification.UserId == userId 
-        	select notification).AsDocumentQuery();
+        IList<Task<FeedResponse<Notification>>> results = new List<Task<FeedResponse<Notification>>>();
 
-        List<Notification> notifications = new List<Notification>();
-
-        while (writeAccountNotification.HasMoreResults || readAccountNotification.HasMoreResults)
+        if (writeAccountNotification.HasMoreResults)
         {
-            IList<Task<FeedResponse<Notification>>> results = new List<Task<FeedResponse<Notification>>>();
-
-            if (writeAccountNotification.HasMoreResults)
-            {
-                results.Add(writeAccountNotification.ExecuteNextAsync<Notification>());
-            }
-
-            if (readAccountNotification.HasMoreResults)
-            {
-                results.Add(readAccountNotification.ExecuteNextAsync<Notification>());
-            }
-
-            IList<FeedResponse<Notification>> notificationFeedResult = await Task.WhenAll(results);
-
-            foreach (FeedResponse<Notification> feed in notificationFeedResult)
-            {
-                notifications.AddRange(feed);
-            }
-        }
-        return notifications;
-    }
-
-    public async Task<IEnumerable<Review>> ReadReviewsAsync(string articleId)
-    {
-        IDocumentQuery<Review> writeAccountReviews = (
-        	from review in this.writeClient.CreateDocumentQuery<Review>(this.contentCollection) 
-        	where review.ArticleId == articleId 
-        	select review).AsDocumentQuery();
-        
-        IDocumentQuery<Review> readAccountReviews = (
-        	from review in this.readClient.CreateDocumentQuery<Review>(this.contentCollection) 
-        	where review.ArticleId == articleId 
-        	select review).AsDocumentQuery();
-
-        List<Review> reviews = new List<Review>();
-        
-        while (writeAccountReviews.HasMoreResults || readAccountReviews.HasMoreResults)
-        {
-            IList<Task<FeedResponse<Review>>> results = new List<Task<FeedResponse<Review>>>();
-
-            if (writeAccountReviews.HasMoreResults)
-            {
-                results.Add(writeAccountReviews.ExecuteNextAsync<Review>());
-            }
-
-            if (readAccountReviews.HasMoreResults)
-            {
-                results.Add(readAccountReviews.ExecuteNextAsync<Review>());
-            }
-
-            IList<FeedResponse<Review>> notificationFeedResult = await Task.WhenAll(results);
-
-            foreach (FeedResponse<Review> feed in notificationFeedResult)
-            {
-                reviews.AddRange(feed);
-            }
+            results.Add(writeAccountNotification.ExecuteNextAsync<Notification>());
         }
 
-        return reviews;
+        if (readAccountNotification.HasMoreResults)
+        {
+            results.Add(readAccountNotification.ExecuteNextAsync<Notification>());
+        }
+
+        IList<FeedResponse<Notification>> notificationFeedResult = await Task.WhenAll(results);
+
+        foreach (FeedResponse<Notification> feed in notificationFeedResult)
+        {
+            notifications.AddRange(feed);
+        }
     }
+    return notifications;
+}
+
+public async Task<IEnumerable<Review>> ReadReviewsAsync(string articleId)
+{
+    IDocumentQuery<Review> writeAccountReviews = (
+        from review in this.writeClient.CreateDocumentQuery<Review>(this.contentCollection) 
+        where review.ArticleId == articleId 
+        select review).AsDocumentQuery();
+
+    IDocumentQuery<Review> readAccountReviews = (
+        from review in this.readClient.CreateDocumentQuery<Review>(this.contentCollection) 
+        where review.ArticleId == articleId 
+        select review).AsDocumentQuery();
+
+    List<Review> reviews = new List<Review>();
+
+    while (writeAccountReviews.HasMoreResults || readAccountReviews.HasMoreResults)
+    {
+        IList<Task<FeedResponse<Review>>> results = new List<Task<FeedResponse<Review>>>();
+
+        if (writeAccountReviews.HasMoreResults)
+        {
+            results.Add(writeAccountReviews.ExecuteNextAsync<Review>());
+        }
+
+        if (readAccountReviews.HasMoreResults)
+        {
+            results.Add(readAccountReviews.ExecuteNextAsync<Review>());
+        }
+
+        IList<FeedResponse<Review>> notificationFeedResult = await Task.WhenAll(results);
+
+        foreach (FeedResponse<Review> feed in notificationFeedResult)
+        {
+            reviews.AddRange(feed);
+        }
+    }
+
+    return reviews;
+}
+```
 
 因此，通过选择合适的分区键和静态的基于帐户的分区，可以使用 Azure DocumentDB 实现多区域本地写入和读取。
 
 ## <a id="NextSteps"></a>后续步骤
 本文以内容发布作为示例方案，介绍如何通过 DocumentDB 使用全球分布式多区域读写模式。
 
-- 了解 DocumentDB 如何支持[全球分布](/documentation/articles/documentdb-distribute-data-globally/)
-- 了解 [Azure DocumentDB 中的自动和手动故障转移](/documentation/articles/documentdb-regional-failovers/)
-- 了解 [DocumentDB 的全球一致性](/documentation/articles/documentdb-consistency-levels/)
-- 使用 [Azure DocumentDB SDK](/documentation/articles/documentdb-developing-with-multiple-regions/) 在多个区域中进行开发
+- 了解 DocumentDB 如何支持[全球分布](./documentdb-distribute-data-globally.md)
+- 了解 [Azure DocumentDB 中的自动和手动故障转移](./documentdb-regional-failovers.md)
+- 了解 [DocumentDB 的全球一致性](./documentdb-consistency-levels.md)
+- 使用 [Azure DocumentDB SDK](./documentdb-developing-with-multiple-regions.md) 在多个区域中进行开发
 
 <!---HONumber=Mooncake_0220_2017-->

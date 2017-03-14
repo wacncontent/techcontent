@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="Azure Redis 缓存示例 | Azure" 
-	description="了解如何使用 Azure Redis Cache" 
-	services="redis-cache" 
-	documentationCenter="" 
-	authors="steved0x" 
-	manager="douge" 
-	editor=""/>
+---
+title: Azure Redis 缓存示例 | Azure
+description: 了解如何使用 Azure Redis Cache
+services: redis-cache
+documentationCenter: ''
+authors: steved0x
+manager: douge
+editor: ''
 
-<tags 
-	ms.service="cache" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="cache-redis" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="01/06/2017" 
-	wacn.date="03/01/2017" 
-	ms.author="sdanie"/>
+ms.service: cache
+ms.workload: tbd
+ms.tgt_pltfrm: cache-redis
+ms.devlang: multiple
+ms.topic: article
+ms.date: 01/06/2017
+wacn.date: 03/01/2017
+ms.author: sdanie
+---
 
 # Azure Redis Cache 示例 
 
@@ -29,20 +29,20 @@
 
 此示例演示如何：
 
--	使用不同的连接选项
--	使用同步和异步操作与缓存相互读取和写入对象
--	使用 Redis MGET/MSET 命令返回指定键的值
--	执行 Redis 事务操作
--	处理 Redis 列表和排序集
--	使用 JsonConvert 序列化程序存储.NET 对象
--	使用 Redis 集实现标记
--	使用 Redis 群集
+- 使用不同的连接选项
+- 使用同步和异步操作与缓存相互读取和写入对象
+- 使用 Redis MGET/MSET 命令返回指定键的值
+- 执行 Redis 事务操作
+- 处理 Redis 列表和排序集
+- 使用 JsonConvert 序列化程序存储.NET 对象
+- 使用 Redis 集实现标记
+- 使用 Redis 群集
 
 有关详细信息，请参阅 github 上的 [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis)；有关更多的使用方案，请参阅 [StackExchange.Redis.Tests](https://github.com/StackExchange/StackExchange.Redis/tree/master/StackExchange.Redis.Tests) 单位测试。
 
-[如何将 Azure Redis 缓存与 Python 配合使用](/documentation/articles/cache-python-get-started/)展示了如何使用 Python 和 [redis-py](https://github.com/andymccurdy/redis-py) 客户端开始使用 Azure Redis 缓存。
+[如何将 Azure Redis 缓存与 Python 配合使用](./cache-python-get-started.md)展示了如何使用 Python 和 [redis-py](https://github.com/andymccurdy/redis-py) 客户端开始使用 Azure Redis 缓存。
 
-[在缓存中处理 .NET 对象](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/#work-with-net-objects-in-the-cache)演示了如何对 .NET 对象进行序列化以便可以将其写入到 Azure Redis 缓存实例以及从中进行读取。
+[在缓存中处理 .NET 对象](./cache-dotnet-how-to-use-azure-redis-cache.md#work-with-net-objects-in-the-cache)演示了如何对 .NET 对象进行序列化以便可以将其写入到 Azure Redis 缓存实例以及从中进行读取。
 
 ## 将 Redis Cache 用作 ASP.NET SignalR 的扩展基架
 
@@ -52,8 +52,8 @@
 
 此示例对从缓存访问数据与从持久存储访问数据时的性能进行了比较。此示例有两个项目。
 
--	[展示 Redis Cache 如何通过对数据进行缓存提高性能](https://github.com/rustd/RedisSamples/tree/master/RedisCacheCustomerQuerySample)
--	[为进行展示创立数据库和缓存](https://github.com/rustd/RedisSamples/tree/master/SeedCacheForCustomerQuerySample)
+- [展示 Redis Cache 如何通过对数据进行缓存提高性能](https://github.com/rustd/RedisSamples/tree/master/RedisCacheCustomerQuerySample)
+- [为进行展示创立数据库和缓存](https://github.com/rustd/RedisSamples/tree/master/SeedCacheForCustomerQuerySample)
 
 ## ASP.NET 会话状态和输出缓存
 

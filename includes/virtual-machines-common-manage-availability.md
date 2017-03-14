@@ -12,9 +12,9 @@
 * [为每个可用性集使用多个存储帐户]
 
 ### <a name="configure-multiple-virtual-machines-in-an-availability-set-for-redundancy"></a>在可用性集中配置多个虚拟机以确保冗余
-若要为应用程序提供冗余，建议你将两个或更多虚拟机组合到一个可用性集中。这种配置可以确保在发生计划内或计划外维护事件时，至少有一个虚拟机可用，并满足 99.95% 的 Azure SLA 要求。有关详细信息，请参阅[虚拟机的 SLA](/support/sla/virtual-machines/)。
+若要为应用程序提供冗余，建议你将两个或更多虚拟机组合到一个可用性集中。这种配置可以确保在发生计划内或计划外维护事件时，至少有一个虚拟机可用，并满足 99.95% 的 Azure SLA 要求。有关详细信息，请参阅[虚拟机的 SLA](https://www.azure.cn/support/sla/virtual-machines/)。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 避免将单实例虚拟机单独地置于可用性集中。此配置中的虚拟机并不符合 SLA 保证，在出现 Azure 计划内维护事件时就会停机。
 > 
 > 
@@ -35,7 +35,7 @@
 ![应用程序层](./media/virtual-machines-common-manage-availability/application-tiers.png)
 
 ### <a name="combine-a-load-balancer-with-availability-sets"></a>将负载均衡器与可用性集组合在一起
-将 [Azure Load Balancer](/documentation/articles/load-balancer-overview/) 与可用性集组合在一起，以便获取最大的应用程序复原能力。Azure Load Balancer 将流量分布到多个虚拟机中。对于标准层虚拟机来说，Azure Load Balancer 已包括在内。请注意，并非所有虚拟机层都包括 Azure Load Balancer。若要深入了解如何对虚拟机进行负载均衡，请参阅对 [Windows](/documentation/articles/virtual-machines-windows-load-balance/) 或 [Linux](/documentation/articles/load-balancer-overview/) 虚拟机进行负载均衡。
+将 [Azure Load Balancer](../articles/load-balancer/load-balancer-overview.md) 与可用性集组合在一起，以便获取最大的应用程序复原能力。Azure Load Balancer 将流量分布到多个虚拟机中。对于标准层虚拟机来说，Azure Load Balancer 已包括在内。请注意，并非所有虚拟机层都包括 Azure Load Balancer。若要深入了解如何对虚拟机进行负载均衡，请参阅对 [Windows](../articles/virtual-machines/virtual-machines-windows-load-balance.md) 或 [Linux](../articles/load-balancer/load-balancer-overview.md) 虚拟机进行负载均衡。
 
 如果没有将负载均衡器配置为对多个虚拟机上的流量进行平衡，则任何计划内维护事件都会影响唯一的那个处理流量的虚拟机，导致应用程序层中断。将同一层的多个虚拟机置于相同的负载均衡器和可用性集下可以确保至少有一个虚拟机实例能够持续处理流量。
 
@@ -43,7 +43,7 @@
 关于 VM 中虚拟硬盘 \(VHD\) 所使用的存储帐户，请遵循以下最佳做法。在 Azure 存储帐户中，每个磁盘 \(VHD\) 是一个页 blob。请务必确保存储帐户之间存在冗余和隔离，以便为可用性集中的 VM 提供高可用性。
 
 1. **将与 VM 关联的所有磁盘（OS 磁盘和数据磁盘）保留在同一存储帐户中**
-2. 向存储帐户添加更多 VHD 时，**应考虑存储帐户[限制](/documentation/articles/storage-scalability-targets/)**
+2. 向存储帐户添加更多 VHD 时，**应考虑存储帐户[限制](../articles/storage/storage-scalability-targets.md)**
 3. **为可用性集中的每个 VM 使用单独的存储帐户。** 同一可用性集中的多个 VM 绝对不能共享同一存储帐户。在遵循上述最佳做法的前提下，不同可用性集之间的 VM 可共享存储帐户
 
 <!-- Link references -->

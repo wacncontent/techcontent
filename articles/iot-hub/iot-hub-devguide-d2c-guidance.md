@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure IoT 中心从设备到云选项 | Azure"
-    description="开发人员指南 - 指导用户何时使用从设备到云的消息、报告属性或文件上传，以进行从云到设备的通信。"
-    services="iot-hub"
-    documentationcenter=".net"
-    author="fsautomata"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="979136db-c92d-4288-870c-f305e8777bdd"
-    ms.service="iot-hub"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/30/2016"
-    wacn.date="01/13/2017"
-    ms.author="elioda" />  
+---
+title: Azure IoT 中心从设备到云选项 | Azure
+description: 开发人员指南 - 指导用户何时使用从设备到云的消息、报告属性或文件上传，以进行从云到设备的通信。
+services: iot-hub
+documentationcenter: .net
+author: fsautomata
+manager: timlt
+editor: ''
 
+ms.assetid: 979136db-c92d-4288-870c-f305e8777bdd
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 01/13/2017
+ms.author: elioda
+---
 
 # 从设备到云通信指南
 将信息从设备应用发送到后端时，IoT 中心会公开三个选项：
@@ -35,16 +35,16 @@
 | 频率 | 高。有关详细信息，请参阅 [IoT 中心限制][lnk-quotas]。 | 中。有关详细信息，请参阅 [IoT 中心限制][lnk-quotas]。 | 低。有关详细信息，请参阅 [IoT 中心限制][lnk-quotas]。 |
 | 协议 | 在所有协议上可用。 | 目前仅在使用 MQTT 时提供。 | 不管使用什么协议都提供，但要求在设备上启用 HTTP。 |
 
-> [AZURE.NOTE]
+> [!NOTE]
 可能出现的情况是，应用程序既要求将信息以遥测时间系列或警报方式发送，又要求以设备孪生方式提供。不管什么情况，既可以通过设备应用发送 D2C 消息并报告属性更改，也可以通过解决方案后端在收到消息时将信息存储在设备孪生的标记中。由于 D2C 消息允许的吞吐量远高于设备孪生更新，因此在有些时候，最好是避免为每条 D2C 消息更新设备孪生。
 > 
 > 
 
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-fileupload]: /documentation/articles/iot-hub-devguide-file-upload/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-fileupload]: ./iot-hub-devguide-file-upload.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
 
 <!---HONumber=Mooncake_1212_2016-->
 <!--Update_Description:update wording-->

@@ -1,26 +1,26 @@
-<properties
-    pageTitle="通过 C 使用事件中心入门 | Azure"
-    description="遵循本教程开始使用 Azure 事件中心，以便通过事件处理程序主机，使用 C 程序发送事件和使用 Java 程序接收事件。"
-    services="event-hubs"
-    documentationcenter=""
-    author="jtaubensee"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="aa6553f9-e12e-4568-9bf3-667f1c47a6cf"
-    ms.service="event-hubs"
-    ms.workload="na"
-    ms.tgt_pltfrm="c"
-    ms.devlang="csharp"
-    ms.topic="article"
-    ms.date="01/04/2017"
-    wacn.date="02/24/2017"
-    ms.author="jotaub;sethm" />  
+---
+title: 通过 C 使用事件中心入门 | Azure
+description: 遵循本教程开始使用 Azure 事件中心，以便通过事件处理程序主机，使用 C 程序发送事件和使用 Java 程序接收事件。
+services: event-hubs
+documentationcenter: ''
+author: jtaubensee
+manager: timlt
+editor: ''
 
+ms.assetid: aa6553f9-e12e-4568-9bf3-667f1c47a6cf
+ms.service: event-hubs
+ms.workload: na
+ms.tgt_pltfrm: c
+ms.devlang: csharp
+ms.topic: article
+ms.date: 01/04/2017
+wacn.date: 02/24/2017
+ms.author: jotaub;sethm
+---
 
 # 事件中心入门
 
-[AZURE.INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
+[!INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
 
 ## 介绍
 
@@ -32,29 +32,29 @@
 
 若要完成本教程，你需要以下各项：
 
-* C 语言开发环境。对于本教程，我们假设 gcc 堆栈位于使用 Ubuntu 14.04 的 [Azure Linux VM](/documentation/articles/virtual-machines-linux-quick-create-cli/) 上。其他环境的说明将在外部链接中提供。
+* C 语言开发环境。对于本教程，我们假设 gcc 堆栈位于使用 Ubuntu 14.04 的 [Azure Linux VM](../virtual-machines/virtual-machines-linux-quick-create-cli.md) 上。其他环境的说明将在外部链接中提供。
 
 * Microsoft Visual Studio Express for Windows
 
-* 有效的 Azure 帐户。<br/>如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="/pricing/free-trial/" target="_blank">Azure 免费试用</a>。
+* 有效的 Azure 帐户。<br/>如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/free-trial/" target="_blank">Azure 免费试用</a>。
 
-[AZURE.INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
+[!INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-send-c](../../includes/service-bus-event-hubs-get-started-send-c.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-send-c](../../includes/service-bus-event-hubs-get-started-send-c.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-receive-ephjava](../../includes/service-bus-event-hubs-get-started-receive-ephjava.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-receive-ephjava](../../includes/service-bus-event-hubs-get-started-receive-ephjava.md)]
 
 ## 运行应用程序
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	运行 **Receiver** 项目。
+1. 运行 **Receiver** 项目。
 
-	![][21]
+    ![][21]
 
-2.	运行 **Sender** 程序，然后就会看到事件出现在接收方窗口中。
+2. 运行 **Sender** 程序，然后就会看到事件出现在接收方窗口中。
 
-	![][24]
+    ![][24]
 
 ## 后续步骤
 
@@ -71,7 +71,7 @@
 <!-- Links -->
 
 [Event Processor Host]: https://www.nuget.org/packages/Microsoft.Azure.ServiceBus.EventProcessorHost
-[Event Hubs overview]: /documentation/articles/event-hubs-overview/
+[Event Hubs overview]: ./event-hubs-overview.md
 [sample application that uses Event Hubs]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 [Scale out Event Processing with Event Hubs]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-45f43fc3
 

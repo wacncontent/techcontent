@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用本地编码器执行实时传送视频流以创建多比特率流 - Azure | Azure"
-    description="本主题介绍如何设置接收来自本地编码器的多比特率实时流的频道。然后，该流可使用以下自适应流式传输协议之一，通过一个或多个流式传输终结点传送给客户端播放应用程序：HLS、平滑流、DASH。"
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="d9f0912d-39ec-4c9c-817b-e5d9fcf1f7ea"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="ne"
-    ms.topic="article"
-    ms.date="01/23/2017"
-    wacn.date="03/10/2017"
-    ms.author="cenkd;juliako" />  
+---
+title: 使用本地编码器执行实时传送视频流以创建多比特率流 - Azure | Azure
+description: 本主题介绍如何设置接收来自本地编码器的多比特率实时流的频道。然后，该流可使用以下自适应流式传输协议之一，通过一个或多个流式传输终结点传送给客户端播放应用程序：HLS、平滑流、DASH。
+services: media-services
+documentationcenter: ''
+author: Juliako
+manager: erikre
+editor: ''
 
+ms.assetid: d9f0912d-39ec-4c9c-817b-e5d9fcf1f7ea
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: ne
+ms.topic: article
+ms.date: 01/23/2017
+wacn.date: 03/10/2017
+ms.author: cenkd;juliako
+---
 
 # 使用本地编码器执行实时传送视频流以创建多比特率流
 ## 概述
@@ -24,8 +24,9 @@
 
 * 本地实时编码器将多比特率 RTMP 或平滑流式处理（分片 MP4）流发送到无法通过媒体服务执行实时编码的频道。引入流将通过频道，而不会进行任何进一步处理。这种方法称为*直通*。可以使用以下输出多比特率平滑流式处理的实时编码器：Media Excel、Ateme、Imagine Communications、Envivio、Cisco 和 Elemental。以下实时编码器将 RTMP 作为输出：Adobe Flash Media Live Encoder、Telestream Wirecast、Haivision、Teradek 和 TriCaster。实时编码器也可将单比特率流发送到并未启用实时编码的频道，并不建议这样做。媒体服务会将流传送给请求它的客户。
 
-	>[AZURE.NOTE] 实时传送视频流时，使用直通方法是最经济的。
-	
+    >[!NOTE]
+    > 实时传送视频流时，使用直通方法是最经济的。
+
 * 本地实时编码器采用以下格式之一将单比特率流发送至能够使用媒体服务执行实时编码的频道：RTP (MPEG-TS)、RTMP 或平滑流式处理（分片 MP4）。然后，频道将对传入的单比特率流执行实时编码，使之转换为多比特率（自适应）视频流。媒体服务会将流传送给请求它的客户。
 
 从媒体服务 2.10 版开始，创建频道时，可以指定频道接收输入流的方式。还可以指定是否想要频道对流执行实时编码。可以使用两个选项：可以使用两个选项：
@@ -33,38 +34,38 @@
 * **无**：如果计划使用将多比特率流（直通流）作为输出的本地实时编码器，请指定此值。在这种情况下，传入流无需任何编码即可传递到输出。这是 2.10 版以前的频道行为。本主题提供了有关使用此类型的频道的详细信息。
 * **标准**：如果计划使用媒体服务将单比特率实时流编码为多比特率流，请选择此值。请注意，使实时编码频道处于“正在运行”状态将产生帐单费用。建议在实时传送视频流事件完成之后立即停止正在运行的频道，以避免产生额外的小时费用。媒体服务会将流传送给请求它的客户。
 
->[AZURE.NOTE]本主题讨论未针对执行实时编码（编码类型为**无**）而启用的频道的属性。有关使用为执行实时编码而启用的频道的信息，请参阅[使用 Azure 媒体服务进行实时传送视频流以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+>[!NOTE]
+>本主题讨论未针对执行实时编码（编码类型为**无**）而启用的频道的属性。有关使用为执行实时编码而启用的频道的信息，请参阅[使用 Azure 媒体服务进行实时传送视频流以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 下图表示的是一个使用本地实时编码器输出多比特率 RTMP 或分片 MP4（平滑流式处理）流的实时传送视频流工作流。
 
 ![实时工作流][live-overview]  
 
-
 ## <a id="scenario"></a>常见的实时流处理方案
 以下步骤介绍创建常见的实时传送视频流应用程序时涉及的任务。
 
 1. 将视频摄像机连接到计算机。启动并配置输出多比特率 RTMP 或分段 MP4（平滑流式处理）流的本地实时编码器。有关详细信息，请参阅 [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/zh-cn/blog/azure-media-services-rtmp-support-and-live-encoders/)。
-	
+
     也可以在创建频道后执行此步骤。
 
 2. 创建并启动通道。
 3. 检索频道引入 URL。
 
-	实时编码器使用引入 URL 将流发送到频道。
+    实时编码器使用引入 URL 将流发送到频道。
 4. 检索频道预览 URL。
 
-	使用此 URL 来验证通道是否正常接收实时流。
+    使用此 URL 来验证通道是否正常接收实时流。
 
 5. 创建节目。
 
-	使用 Azure 经典管理门户时，创建节目的同时还会创建资产。
+    使用 Azure 经典管理门户时，创建节目的同时还会创建资产。
 
-	使用 .NET SDK 或 REST 时，需要创建一个资产并指定在创建节目时要使用该资产。
+    使用 .NET SDK 或 REST 时，需要创建一个资产并指定在创建节目时要使用该资产。
 6. 发布与节目关联的资产。
 
-	>[AZURE.NOTE]
-	创建 Azure 媒体服务帐户后，会将一个处于“已停止”状态的**默认**流式处理终结点添加到帐户。流式处理终结点（用于内容流式处理）必须处于“正在运行”状态。
-	
+    >[!NOTE]
+    创建 Azure 媒体服务帐户后，会将一个处于“已停止”状态的**默认**流式处理终结点添加到帐户。流式处理终结点（用于内容流式处理）必须处于“正在运行”状态。
+
 7. 准备好开始流式传输和存档后，启动节目。
 8. （可选）可以向实时编码器发信号，以启动广告。将广告插入到输出流中。
 9. 在要停止对事件进行流式传输和存档时，停止节目。
@@ -78,8 +79,7 @@
 * **主 URL**：指定频道的主 RTMP 引入终结点的完全限定 URL。
 * **辅助 URL**（可选）：指定频道的辅助 RTMP 引入终结点的完全限定 URL。
 
-
-	如果你想要提高引入流的持久性和容错性，并实现编码器故障转移和容错性（尤其在以下情况下），请使用辅助 URL。
+    如果你想要提高引入流的持久性和容错性，并实现编码器故障转移和容错性（尤其在以下情况下），请使用辅助 URL。
 
 - 单个编码器双推送到主和辅助 URL：
 
@@ -206,18 +206,16 @@
 
 * 每次重新配置实时编码器后，请对通道调用**重置**方法。重置通道之前，必须停止节目。重置通道后，重新启动节目。
 * 仅当频道处于“正在运行”状态且频道中的所有节目都已停止时，才能停止频道。
-* 默认情况下，只能向媒体服务帐户添加 5 个频道。有关详细信息，请参阅[配额和限制](/documentation/articles/media-services-quotas-and-limitations/)。
-* 仅当频道处于“正在运行”状态时才会产生费用。有关详细信息，请参阅[频道状态和计费](/documentation/articles/media-services-live-streaming-with-onprem-encoders/#states)部分。
-
-
+* 默认情况下，只能向媒体服务帐户添加 5 个频道。有关详细信息，请参阅[配额和限制](./media-services-quotas-and-limitations.md)。
+* 仅当频道处于“正在运行”状态时才会产生费用。有关详细信息，请参阅[频道状态和计费](./media-services-live-streaming-with-onprem-encoders.md#states)部分。
 
 ##相关主题
 
-[Azure 媒体服务分片 MP4 实时引入规范](/documentation/articles/media-services-fmp4-live-ingest-overview/)
+[Azure 媒体服务分片 MP4 实时引入规范](./media-services-fmp4-live-ingest-overview.md)
 
-[Azure 媒体服务概述和常见应用场景](/documentation/articles/media-services-overview/)
+[Azure 媒体服务概述和常见应用场景](./media-services-overview.md)
 
-[媒体服务概念](/documentation/articles/media-services-concepts/)
+[媒体服务概念](./media-services-concepts.md)
 
 [live-overview]: ./media/media-services-manage-channels-overview/media-services-live-streaming-current.png
 

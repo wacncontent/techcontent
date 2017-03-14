@@ -1,23 +1,22 @@
-<properties
-    pageTitle="手机版 Microsoft Authenticator 应用 | Azure"
-    description="了解如何升级到最新版本的 Azure Authenticator。"
-    services="multi-factor-authentication"
-    documentationcenter=""
-    author="kgremban"
-    manager="femila"
-    editor="curtland" />
-    
-<tags
-    ms.assetid="3065a1ee-f253-41f0-a68d-2bd84af5ffba"
-    ms.service="multi-factor-authentication"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/15/2016"
-    wacn.date="02/20/2017"
-    ms.author="kgremban" />  
+---
+title: 手机版 Microsoft Authenticator 应用 | Azure
+description: 了解如何升级到最新版本的 Azure Authenticator。
+services: multi-factor-authentication
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: curtland
 
+ms.assetid: 3065a1ee-f253-41f0-a68d-2bd84af5ffba
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2016
+wacn.date: 02/20/2017
+ms.author: kgremban
+---
 
 # Microsoft Authenticator
 Microsoft Authenticator 应用在 Azure 帐户（例如，bsimon@contoso.partner.onmschina.cn）、本地工作帐户（例如，bsimon@contoso.com）或 Microsoft 帐户（例如，bsimon@outlook.com）中提供附加安全级别。
@@ -36,11 +35,10 @@ Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/
 对于要添加到 Microsoft Authenticator 应用的每个帐户，使用以下过程之一。
 
 ### 使用 QR 码扫描仪将帐户添加到应用
-1. 转到安全验证设置屏幕。有关如何访问此屏幕的信息，请参阅[更改安全设置](/documentation/articles/multi-factor-authentication-end-user-manage-settings/)。
+1. 转到安全验证设置屏幕。有关如何访问此屏幕的信息，请参阅[更改安全设置](./multi-factor-authentication-end-user-manage-settings.md)。
 2. 选择“Set up”。
 
     ![安全验证设置屏幕上的“配置”按钮](./media/authenticator-app-how-to/azureauthe.png)  
-
 
     这将显示一个有 QR 码的屏幕。
 
@@ -50,13 +48,11 @@ Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/
 
     ![带有加号的帐户屏幕](./media/authenticator-app-how-to/addaccount3.png)  
 
-
     ![用于指定工作帐户或学校帐户的屏幕](./media/authenticator-app-how-to/scan.png)  
 
 4. 使用相机扫描该 QR 码，然后选择“完成”以关闭该 QR 码屏幕。
 
     ![用于扫描 QR 码的屏幕](./media/multi-factor-authentication-end-user-first-time/scan2.png)  
-
 
     如果相机不能正常工作，可以手动输入 QR 码和 URL。有关详细信息，请参阅[手动将帐户添加到应用](#add-an-account-to-the-app-manually)。
 5. 稍候片刻，帐户即会激活。激活完成后，选择“与我联系”。此时会将通知或验证码发送到手机。选择“验证”。
@@ -75,13 +71,11 @@ Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/
 
 ![帐户屏幕](./media/authenticator-app-how-to/accounts.png)  
 
-
 ### 手动将帐户添加到应用
-1. 转到安全验证设置屏幕。有关如何访问此屏幕的信息，请参阅[更改安全设置](/documentation/articles/multi-factor-authentication-end-user-manage-settings/)。
+1. 转到安全验证设置屏幕。有关如何访问此屏幕的信息，请参阅[更改安全设置](./multi-factor-authentication-end-user-manage-settings.md)。
 2. 选择“Set up”。
 
     ![安全验证设置屏幕上的“配置”按钮](./media/authenticator-app-how-to/azureauthe.png)  
-
 
     这将显示一个有 QR 码的屏幕。记下该代码和 URL。
 
@@ -90,7 +84,6 @@ Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/
 3. 打开 Microsoft Authenticator 应用。在“帐户”屏幕上，选择 **+**，然后指定要添加工作帐户或学校帐户。
 
     ![带有加号的帐户屏幕](./media/authenticator-app-how-to/addaccount3.png)  
-
 
     ![用于指定工作帐户或学校帐户的屏幕](./media/authenticator-app-how-to/scan.png)  
 
@@ -102,7 +95,6 @@ Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/
 
     ![用于输入代码和 URL 的屏幕](./media/authenticator-app-how-to/manual.png)  
 
-
     ![用于输入代码和 URL 的屏幕](./media/authenticator-app-how-to/addaccount2.png)  
 
 6. 稍候片刻，帐户即会激活。激活完成后，选择“与我联系”。此时会将通知或验证码发送到手机。选择“验证”。
@@ -111,7 +103,6 @@ Microsoft Authenticator 应用可用于 [Windows Phone](http://go.microsoft.com/
 
 ![帐户屏幕](./media/authenticator-app-how-to/accounts.png)  
 
-
 ### 使用 Touch ID 将帐户添加到应用
 iOS 上的 Microsoft Authenticator 应用支持 Touch ID。Azure 多重身份验证允许组织对设备要求提供 PIN。使用 Touch ID，iOS 用户无需输入 PIN。而是可以扫描其指纹，然后选择“批准”。
 
@@ -119,11 +110,9 @@ iOS 上的 Microsoft Authenticator 应用支持 Touch ID。Azure 多重身份验
 
 ![验证 Touch ID 设置](./media/authenticator-app-how-to/touchid1.png)  
 
-
 随后，需要验证登录时，请选择收到的推送通知，并扫描指纹而不是输入 PIN。
 
 ![推送通知](./media/authenticator-app-how-to/touchid2.png)  
-
 
 ## 卸载旧的 Azure Authentication 应用
 将所有帐户添加到新应用后，可以从手机中卸载旧应用。

@@ -1,23 +1,22 @@
-<properties
-    pageTitle="使用 Azure Site Recovery 在站点之间进行 Hyper-V 复制的测试结果 | Azure"
-    description="本文介绍了使用 Azure Site Recovery 进行本地到本地复制时的性能测试。"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="tysonn" />  
+---
+title: 使用 Azure Site Recovery 在站点之间进行 Hyper-V 复制的测试结果 | Azure
+description: 本文介绍了使用 Azure Site Recovery 进行本地到本地复制时的性能测试。
+services: site-recovery
+documentationcenter: ''
+author: rayne-wiselman
+manager: jwhit
+editor: tysonn
 
-<tags
-    ms.assetid="96ff404f-0d88-43fa-a00b-2dffde93d192"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="01/23/2017"
-    wacn.date="03/10/2017"
-    ms.author="raynew" />  
-
+ms.assetid: 96ff404f-0d88-43fa-a00b-2dffde93d192
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 01/23/2017
+wacn.date: 03/10/2017
+ms.author: raynew
+---
 
 # 使用 Site Recovery 进行本地到本地 Hyper-V 复制的测试结果
 可以使用 Azure Site Recovery 来协调和管理从虚拟机和物理服务器到 Azure 或辅助数据中心的复制。本文提供了我们在两个本地数据中心之间进行 Hyper-V 虚拟机复制时执行的性能测试的结果。
@@ -168,7 +167,7 @@ Hyper-V 副本使用恢复服务器上的少量内存来使存储操作数量最
 | VM 写入吞吐量 |\\Hyper-V Virtual Storage Device(<VHD>)\\Write Bytes/sec |
 
 ## 后续步骤
-- [设置两个本地 VMM 站点之间的保护](/documentation/articles/site-recovery-vmm-to-vmm/)
+- [设置两个本地 VMM 站点之间的保护](./site-recovery-vmm-to-vmm.md)
 
 <!---HONumber=Mooncake_0306_2017-->
 <!--Update_Description: wording update-->

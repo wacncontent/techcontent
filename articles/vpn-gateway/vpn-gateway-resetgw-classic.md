@@ -1,23 +1,23 @@
-<properties
-    pageTitle="重置 Azure VPN 网关以重新建立 IPsec 隧道 | Azure"
-    description="本文逐步讲解如何通过重置 Azure VPN 网关来重新建立 IPsec 隧道。本文适用于经典和 Resource Manager 部署模型中的 VPN 网关。"
-    services="vpn-gateway"
-    documentationcenter="na"
-    author="cherylmc"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager,azure-service-management" />
-<tags
-    ms.assetid="79d77cb8-d175-4273-93ac-712d7d45b1fe"
-    ms.service="vpn-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/07/2017"
-    wacn.date="03/03/2017"
-    ms.author="cherylmc" />  
+---
+title: 重置 Azure VPN 网关以重新建立 IPsec 隧道 | Azure
+description: 本文逐步讲解如何通过重置 Azure VPN 网关来重新建立 IPsec 隧道。本文适用于经典和 Resource Manager 部署模型中的 VPN 网关。
+services: vpn-gateway
+documentationcenter: na
+author: cherylmc
+manager: timlt
+editor: ''
+tags: azure-resource-manager,azure-service-management
 
+ms.assetid: 79d77cb8-d175-4273-93ac-712d7d45b1fe
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/07/2017
+wacn.date: 03/03/2017
+ms.author: cherylmc
+---
 
 # 重置 VPN 网关
 
@@ -49,8 +49,7 @@
 1. 打开 Azure 门户预览并导航到想要重置的 Resource Manager 虚拟网络网关。
 2. 在虚拟网络网关的边栏选项卡上，单击“重置”。
 
-	![“重置 VPN 网关”边栏选项卡](./media/vpn-gateway-howto-reset-gateway/reset-vpn-gateway-portal.png)  
-
+    ![“重置 VPN 网关”边栏选项卡](./media/vpn-gateway-howto-reset-gateway/reset-vpn-gateway-portal.png)  
 
 3. 在“重置”边栏选项卡，单击 ![“重置 VPN 网关”边栏选项卡](./media/vpn-gateway-howto-reset-gateway/reset-button.png) 按钮。
 
@@ -60,23 +59,29 @@
 
 需要最新版本的 PowerShell cmdlet。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。用于重置网关的 PowerShell Resource Manager cmdlet 为 `Reset-AzureRmVirtualNetworkGateway`。以下示例重置资源组“TestRG1”中的 Azure VPN 网关“VNet1GW”。
 
-    $gw = Get-AzureRmVirtualNetworkGateway -Name VNet1GW -ResourceGroup TestRG1
-    Reset-AzureRmVirtualNetworkGateway -VirtualNetworkGateway $gw
+```
+$gw = Get-AzureRmVirtualNetworkGateway -Name VNet1GW -ResourceGroup TestRG1
+Reset-AzureRmVirtualNetworkGateway -VirtualNetworkGateway $gw
+```
 
 ### <a name="resetclassic"></a>经典部署模型
 
 需要最新版本的 PowerShell cmdlet。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。用于重置 Azure VPN 网关的 PowerShell cmdlet 为 `Reset-AzureVNetGateway`。以下示例重置名为“ContosoVNet”的虚拟网络的 Azure VPN 网关。
 
-    Reset-AzureVNetGateway -VnetName "ContosoVNet" 
+```
+Reset-AzureVNetGateway -VnetName "ContosoVNet" 
+```
 
 结果：
 
-    Error          :
-    HttpStatusCode : OK
-    Id             : f1600632-c819-4b2f-ac0e-f4126bec1ff8
-    Status         : Successful
-    RequestId      : 9ca273de2c4d01e986480ce1ffa4d6d9
-    StatusCode     : OK
+```
+Error          :
+HttpStatusCode : OK
+Id             : f1600632-c819-4b2f-ac0e-f4126bec1ff8
+Status         : Successful
+RequestId      : 9ca273de2c4d01e986480ce1ffa4d6d9
+StatusCode     : OK
+```
 
 <!---HONumber=Mooncake_0227_2017-->
 <!--Update_Description: add a new portal solution and delete "next step"->

@@ -1,37 +1,36 @@
-<properties
-    pageTitle="DocumentDB Python API 和 SDK | Azure"
-    description="了解有关 Python API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Python SDK 各版本之间所做的更改。"
-    services="documentdb"
-    documentationcenter="python"
-    author="rnagpal"
-    manager="jhubbard"
-    editor="cgronlun" />  
+---
+title: DocumentDB Python API 和 SDK | Azure
+description: 了解有关 Python API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Python SDK 各版本之间所做的更改。
+services: documentdb
+documentationcenter: python
+author: rnagpal
+manager: jhubbard
+editor: cgronlun
 
-<tags
-    ms.assetid="3ac344a9-b2fa-4a3f-a4cc-02d287e05469"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="python"
-    ms.topic="article"
-    ms.date="10/30/2016"
-    wacn.date="01/19/2017"
-    ms.author="rnagpal" />
+ms.assetid: 3ac344a9-b2fa-4a3f-a4cc-02d287e05469
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 10/30/2016
+wacn.date: 01/19/2017
+ms.author: rnagpal
+---
 
 # DocumentDB API 和 SDK
->[AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-sdk-dotnet/)
-- [.NET Core](/documentation/articles/documentdb-sdk-dotnet-core/)
-- [Node.js](/documentation/articles/documentdb-sdk-node/)
-- [Java](/documentation/articles/documentdb-sdk-java/)
-- [Python](/documentation/articles/documentdb-sdk-python/)
+>[!div class="op_single_selector"]
+- [.NET](./documentdb-sdk-dotnet.md)
+- [.NET Core](./documentdb-sdk-dotnet-core.md)
+- [Node.js](./documentdb-sdk-node.md)
+- [Java](./documentdb-sdk-java.md)
+- [Python](./documentdb-sdk-python.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/documentdb/)
 - [REST 资源提供程序](https://docs.microsoft.com/rest/api/documentdbresourceprovider/)
 - [SQL](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)
 
 ## DocumentDB Python API 和 SDK
 <table>  
-
 
 <tr><td>**下载 SDK**</td><td><a href="https://pypi.python.org/pypi/pydocumentdb">PyPI</a></td></tr>
 
@@ -41,7 +40,7 @@
 
 <tr><td>**参与 SDK**</td><td><a href="https://github.com/Azure/azure-documentdb-python">GitHub</a></td></tr>
 
-<tr><td>**入门**</td><td><a href="/documentation/articles/documentdb-python-application/">Python SDK 入门</a></td></tr>
+<tr><td>**入门**</td><td><a href="./documentdb-python-application.md">Python SDK 入门</a></td></tr>
 
 <tr><td>**当前受支持的平台**</td><td><a href="https://www.python.org/downloads/">Python 2.7</a> 和 <a href="https://www.python.org/downloads/">Python 3.5</a></td></tr>
 </table>
@@ -71,7 +70,7 @@
 - 与服务器端分区相关的 bug 修复，以允许在 partitionkey 路径中使用特殊字符。
 
 ### <a name="1.6.0"/>[1\.6.0](https://pypi.python.org/pypi/pydocumentdb/1.6.0)
-- 实现了[分区集合](/documentation/articles/documentdb-partition-data/)和[用户定义的性能级别](/documentation/articles/documentdb-performance-levels/)。
+- 实现了[分区集合](./documentdb-partition-data.md)和[用户定义的性能级别](./documentdb-performance-levels.md)。
 
 ### <a name="1.5.0"/>[1\.5.0](https://pypi.python.org/pypi/pydocumentdb/1.5.0)
 - 添加哈希和范围分区冲突解决程序以协助跨多个分区对应用程序进行分片。
@@ -101,7 +100,7 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 
 使用已停用的 SDK 对 DocumentDB 发出的任何请求都将被服务拒绝。
 
-> [AZURE.WARNING]
+> [!WARNING]
 Azure DocumentDB SDK for Python 在 **1.0.0** 版之前的所有版本都将在 **2016 年 2 月 29 日**停用。
 
 <br/>
@@ -129,9 +128,9 @@ Azure DocumentDB SDK for Python 在 **1.0.0** 版之前的所有版本都将在 
 |0.9.0-prelease | 2014 年 8 月 21 日 | 2016 年 2 月 29日|
 
 ## 常见问题
-[AZURE.INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
+[!INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
 
 ## 另请参阅
-若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](/home/features/documentdb/) 服务页。
+若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 服务页。
 
 <!---HONumber=Mooncake_1219_2016-->

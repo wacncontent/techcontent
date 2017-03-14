@@ -1,35 +1,35 @@
-<properties
-    pageTitle="有关用于跨界 Azure 连接的 VPN 设备 | Azure"
-    description="本文讨论用于 S2S VPN 网关跨界连接的 VPN 设备和 IPsec 参数。提供了配置说明和示例的链接。"
-    services="vpn-gateway"
-    documentationcenter="na"
-    author="yushwang"
-    manager="rossort"
-    editor=""
-    tags="azure-resource-manager, azure-service-management" />
-<tags
-    ms.assetid="ba449333-2716-4b7f-9889-ecc521e4d616"
-    ms.service="vpn-gateway"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/12/2016"
-    wacn.date="03/03/2017"
-    ms.author="yushwang;cherylmc" />  
+---
+title: 有关用于跨界 Azure 连接的 VPN 设备 | Azure
+description: 本文讨论用于 S2S VPN 网关跨界连接的 VPN 设备和 IPsec 参数。提供了配置说明和示例的链接。
+services: vpn-gateway
+documentationcenter: na
+author: yushwang
+manager: rossort
+editor: ''
+tags: azure-resource-manager, azure-service-management
 
+ms.assetid: ba449333-2716-4b7f-9889-ecc521e4d616
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/12/2016
+wacn.date: 03/03/2017
+ms.author: yushwang;cherylmc
+---
 
 # 关于站点到站点 VPN 网关连接的 VPN 设备
 使用 VPN 网关配置站点到站点 (S2S) 跨界 VPN 连接需要 VPN 设备。在创建混合解决方案时，或者每当你想要在本地网络与虚拟网络之间建立安全连接时，可以使用站点到站点连接。本文介绍兼容的 VPN 设备和配置参数。
 
-> [AZURE.NOTE]
+> [!NOTE]
 配置站点到站点连接时，需要为 VPN 设备提供面向公众的 IPv4 IP 地址。
 >
 >
 
 如果你的设备没有出现在[已验证的 VPN 设备](#devicetable)表中，请参阅本文的[非验证的 VPN 设备](#additionaldevices)部分。你的设备仍可能兼容 Azure。有关 VPN 设备支持，请联系你的设备制造商。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 如果遇到本地 VPN 设备与 Azure VPN 网关之间的连接问题，请参阅[已知的设备兼容性问题](#known)。
 
 **查看表时的注意事项：**
@@ -40,7 +40,7 @@
 * 除非另有说明，否则高性能 VPN 网关和 RouteBased VPN 网关的规范是相同的。例如，与 RouteBased VPN 网关兼容的已验证的 VPN 设备也与 Azure 高性能 VPN 网关兼容。
 
 ## <a name="devicetable"></a>已验证的 VPN 设备
-我们在与设备供应商合作的过程中验证了一系列标准 VPN 设备。以下列表中包含的设备系列中的所有设备都应适用于 Azure VPN 网关。请参阅[关于 VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/)以确定需要为要配置的解决方案创建的网关类型。
+我们在与设备供应商合作的过程中验证了一系列标准 VPN 设备。以下列表中包含的设备系列中的所有设备都应适用于 Azure VPN 网关。请参阅[关于 VPN 网关](./vpn-gateway-about-vpngateways.md)以确定需要为要配置的解决方案创建的网关类型。
 
 若要获取配置 VPN 设备的帮助，请参考对应于相应设备系列的链接。有关 VPN 设备支持，请联系你的设备制造商。
 
@@ -72,7 +72,7 @@
 (*) ISR 7200 系列路由器仅支持 PolicyBased VPN。
 
 ## <a name="additionaldevices"  id="devices-not-on-the-compatible-list"></a> 未验证的 VPN 设备
-如果没有看到设备在“已验证的 VPN 设备”表中列出，该设备仍有可能兼容站点到站点连接。请确保 VPN 设备符合[关于 VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/)一文“网关要求”部分所列概述的最低要求。满足最低要求的设备也应该与 VPN 网良好兼容。请联系设备制造商了解更多支持和配置说明。
+如果没有看到设备在“已验证的 VPN 设备”表中列出，该设备仍有可能兼容站点到站点连接。请确保 VPN 设备符合[关于 VPN 网关](./vpn-gateway-about-vpngateways.md)一文“网关要求”部分所列概述的最低要求。满足最低要求的设备也应该与 VPN 网良好兼容。请联系设备制造商了解更多支持和配置说明。
 
 ## 编辑设备配置示例
 在下载提供的 VPN 设备配置示例后，你需要替换一些值来反映你环境的设置。
@@ -97,7 +97,7 @@
 | &lt;SP\_PresharedKey&gt; |此信息特定于你的虚拟网络，并作为“管理密钥”位于经典管理门户中。 |
 
 ## IPsec 参数
-> [AZURE.NOTE]
+> [!NOTE]
 尽管 Azure VPN 网关支持下表中列出的值，但你目前无法从 Azure VPN 网关中指定或选择特定的组合。你必须从本地 VPN 设备指定任何约束。此外，你必须将 MSS 固定在 1350。
 >
 >
@@ -154,7 +154,7 @@
 
 ## <a name="known"></a>已知的设备兼容性问题
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 这些是第三方 VPN 设备与 Azure VPN 网关之间的已知兼容性问题。Azure 团队正积极与供应商合作解决此处列出的问题。解决问题后，将使用最新的信息更新此页。请定期查看。
 
 ###2017 年 2 月 16 日

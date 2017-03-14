@@ -1,23 +1,22 @@
-<properties
-	pageTitle="预配置解决方案入门 | Azure"
-	description="遵循本教程，了解如何部署 Azure IoT 套件预配置解决方案。"
-	services=""
-    suite="iot-suite"
-	documentationCenter=""
-	authors="dominicbetts"
-	manager="timlt"
-	editor=""/>  
+---
+title: 预配置解决方案入门 | Azure
+description: 遵循本教程，了解如何部署 Azure IoT 套件预配置解决方案。
+services: ''
+suite: iot-suite
+documentationCenter: ''
+authors: dominicbetts
+manager: timlt
+editor: ''
 
-
-<tags
-     ms.service="iot-suite"
-     ms.devlang="na"
-     ms.topic="hero-article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="11/16/2016"
-     wacn.date="12/05/2016"
-     ms.author="dobett"/>
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: dobett
+---
 
 # 教程：预配置解决方案入门
 
@@ -29,13 +28,12 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
 ![远程监控预配置解决方案仪表板][img-dashboard]  
 
-
 需要有效的 Azure 订阅才能完成此教程。
 
-> [AZURE.NOTE]  如果没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Trial][1rmb-trial]（试用）。
+> [!NOTE]
+>  如果没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Trial][1rmb-trial]（试用）。
 
-
-[AZURE.INCLUDE [iot-suite-provision-remote-monitoring](../../includes/iot-suite-provision-remote-monitoring.md)]
+[!INCLUDE [iot-suite-provision-remote-monitoring](../../includes/iot-suite-provision-remote-monitoring.md)]
 
 ## 查看解决方案仪表板
 
@@ -45,11 +43,9 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![启动预配置解决方案][img-launch-solution]  
 
-
 2.  默认情况下，此解决方案门户会显示 *解决方案仪表板* 。你可以使用左侧菜单选择其他视图。
 
     ![远程监控预配置解决方案仪表板][img-dashboard]  
-
 
 仪表板将显示以下信息：
 
@@ -65,13 +61,11 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![仪表板中的设备列表][img-devicelist]  
 
-
 2.  此设备列表显示预配过程所创建的四个模拟设备。
 
 3.  单击设备列表中的设备，查看设备详细信息。
 
     ![仪表板中的设备详细信息][img-devicedetails]  
-
 
 “设备详细信息”面板包含三个部分：
 
@@ -87,7 +81,6 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![仪表板中的设备命令][img-devicecommands]  
 
-
 2.  从命令列表中选择“PingDevice”。
 
 3.  单击“发送命令”。
@@ -95,7 +88,6 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 4.  你可以在命令历史记录中查看命令的状态。
 
     ![仪表板中的命令状态][img-pingcommand]  
-
 
 解决方案会跟踪其发送的每个命令的状态。结果最初为“挂起”。当设备报告它已执行命令时，结果会设置为“成功”。
 
@@ -111,11 +103,10 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![将设备添加到预配置解决方案][img-adddevice]  
 
-
 3.  单击“模拟设备”磁贴上的“新增”。
 
     ![在仪表板中设置新设备详细信息][img-addnew]
-    
+
     如果选择创建“自定义设备”，则除了创建新的模拟设备，也可以添加物理设备。若要深入了解如何将物理设备连接到解决方案，请参阅[将设备连接到 IoT 套件远程监视预配置解决方案][lnk-connect-rm]。
 
 4.  选择“自行定义设备 ID”，然后输入唯一的设备 ID 名称，例如 **mydevice\_01**。
@@ -123,7 +114,6 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 5.  单击“创建”。
 
     ![保存新设备][img-definedevice]  
-
 
 6. 在“添加模拟设备”的步骤 3 中，单击“完成”回到设备列表。
 
@@ -135,7 +125,6 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![查看新设备发出的遥测数据][img-runningnew-2]  
 
-
 ## 编辑设备元数据
 
 设备首次连接到解决方案后，会向该方案发送其元数据。当你通过解决方案仪表板编辑设备元数据时，会将新的元数据值发送到设备，并将新值存储在解决方案的 DocumentDB 数据库中。有关详细信息，请参阅 [Device identity registry and DocumentDB][lnk-devicemetadata]（设备标识注册表和 DocumentDB）。
@@ -146,16 +135,13 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![编辑设备元数据][img-editdevice]  
 
-
 3. 向下滚动并对纬度和经度值进行更改。然后单击“将更改保存到设备注册表”。
 
     ![编辑设备元数据][img-editdevice2]  
 
-
 4. 导航回到仪表板，地图上的设备位置已更改：
 
     ![编辑设备元数据][img-editdevice3]  
-
 
 ## <a name="add-a-rule-for-the-new-device"></a> 为新设备添加规则
 
@@ -168,7 +154,6 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 3. 创建一个规则，该规则使用“温度”作为数据字段，使用“AlarmTemp”作为温度超过 47 度时的输出：
 
     ![添加设备规则][img-adddevicerule]  
-
 
 4. 单击“保存并查看规则”以保存更改。
 
@@ -184,7 +169,6 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![添加设备规则][img-adddevicerule4]  
 
-
 8. 可以在仪表板的“规则”页上查看和编辑所有规则：
 
     ![列出设备规则][img-rules]
@@ -193,26 +177,21 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
     ![列出设备操作][img-actions]  
 
-
-
 ## 其他功能
 
 可以使用解决方案门户搜索具有特定特征（例如型号）的设备：
 
 ![搜索设备][img-search]  
 
-
 可以禁用设备，并且在已禁用之后删除：
 
 ![禁用并删除设备][img-disable]  
-
 
 ## 幕后
 
 当你部署预配置解决方案时，部署过程会在你选择的 Azure 订阅中创建多个资源。你可以在 Azure [门户预览][lnk-portal]中查看这些资源。部署过程会创建一个**资源组**，其名称基于你为预配置解决方案选择的名称：
 
 ![Azure 门户中的预配置解决方案][img-portal]  
-
 
 你可以查看每个资源的设置，方法是在资源组中的资源列表中选择该资源。
 
@@ -224,7 +203,8 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 
 完成后，可在 [azureiotsuite.cn][lnk-azureiotsuite] 站点的 Azure 订阅中删除预配置解决方案。通过该站点，可轻松删除创建预配置解决方案时预配的所有资源。
 
-> [AZURE.NOTE] 若要确保删除与预配置解决方案相关的所有内容，请在 [azureiotsuite.cn][lnk-azureiotsuite] 站点中删除这些内容，而不只是删除门户中的资源组。
+> [!NOTE]
+> 若要确保删除与预配置解决方案相关的所有内容，请在 [azureiotsuite.cn][lnk-azureiotsuite] 站点中删除这些内容，而不只是删除门户中的资源组。
 
 ## 后续步骤
 
@@ -257,16 +237,16 @@ Azure IoT 套件[预配置解决方案][lnk-preconfigured-solutions]结合了多
 [img-portal]: ./media/iot-suite-getstarted-preconfigured-solutions/portal.png
 [img-search]: ./media/iot-suite-getstarted-preconfigured-solutions/solutionportal_07.png
 [img-disable]: ./media/iot-suite-getstarted-preconfigured-solutions/solutionportal_08.png
-[1rmb-trial]: /pricing/1rmb-trial/
-[lnk-preconfigured-solutions]: /documentation/articles/iot-suite-what-are-preconfigured-solutions/
+[1rmb-trial]: https://www.azure.cn/pricing/1rmb-trial/
+[lnk-preconfigured-solutions]: ./iot-suite-what-are-preconfigured-solutions.md
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn
-[lnk-logic-apps]: /documentation/services/app-service/logic/
+[lnk-logic-apps]: ../app-service-logic/index.md
 [lnk-portal]: http://portal.azure.cn/
 [lnk-rmgithub]: https://github.com/Azure/azure-iot-remote-monitoring
-[lnk-devicemetadata]: /documentation/articles/iot-suite-what-are-preconfigured-solutions/#device-identity-registry-and-documentdb
+[lnk-devicemetadata]: ./iot-suite-what-are-preconfigured-solutions.md#device-identity-registry-and-documentdb
 [lnk-logicapptutorial]: /documentation/articles/iot-suite-logic-apps-tutorial/
-[lnk-rm-walkthrough]: /documentation/articles/iot-suite-remote-monitoring-sample-walkthrough/
-[lnk-connect-rm]: /documentation/articles/iot-suite-connecting-devices/
-[lnk-permissions]: /documentation/articles/iot-suite-permissions/
+[lnk-rm-walkthrough]: ./iot-suite-remote-monitoring-sample-walkthrough.md
+[lnk-connect-rm]: ./iot-suite-connecting-devices.md
+[lnk-permissions]: ./iot-suite-permissions.md
 
 <!---HONumber=Mooncake_0306_2017-->

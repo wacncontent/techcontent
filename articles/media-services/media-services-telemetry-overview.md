@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure 媒体服务遥测 | Azure"
-    description="本文概述了 Azure 媒体服务遥测。"
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="95c20ec4-c782-4063-8042-b79f95741d28"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/07/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako" />  
+---
+title: Azure 媒体服务遥测 | Azure
+description: 本文概述了 Azure 媒体服务遥测。
+services: media-services
+documentationcenter: ''
+author: Juliako
+manager: erikre
+editor: ''
 
+ms.assetid: 95c20ec4-c782-4063-8042-b79f95741d28
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/07/2016
+wacn.date: 01/13/2017
+ms.author: juliako
+---
 
 # Azure 媒体服务遥测
 
@@ -34,10 +34,9 @@
 
 以下主题说明如何启用遥测：
 
-[通过 .NET 启用遥测](/documentation/articles/media-services-dotnet-telemetry/)
+[通过 .NET 启用遥测](./media-services-dotnet-telemetry.md)
 
-[通过 REST 启用遥测](/documentation/articles/media-services-rest-telemetry/)
-
+[通过 REST 启用遥测](./media-services-rest-telemetry.md)
 
 ## 使用遥测信息
 
@@ -49,8 +48,7 @@
 
 或
 
-- 使用媒体服务 .NET SDK 中支持的内容来读取存储数据，如[此主题](/documentation/articles/media-services-dotnet-telemetry/)中所述。
-
+- 使用媒体服务 .NET SDK 中支持的内容来读取存储数据，如[此主题](./media-services-dotnet-telemetry.md)中所述。
 
 下述遥测架构的设计目的是在 Azure 表存储限制内提供良好性能：
 
@@ -64,23 +62,20 @@
 - 检索某一日期范围内给定服务的所有数据。
 - 检索某项服务的最新数据。
 
-
 ### 遥测表存储输出架构
 
 遥测数据汇总存储在表“TelemetryMetrics20160321”中，其中是“20160321”创建表的日期。遥测系统将为每个新日期（基于 00:00 UTC）单独创建一个表。该表用于存储重复值，如给定时间范围内的引入比特率、发送的字节数等。
 
-
 属性|值|示例/说明
 ---|---|---
 PartitionKey|<p>{account ID}\_{entity ID}|e49bef329c29495f9b9570989682069d\_64435281c50a4dd8ab7011cb0f4cdf66</p><p>帐户 ID 包括在分区键中，可简化将多个媒体服务帐户写入同一存储帐户的工作流。</p>
-RowKey|<p>{seconds to midnight}\_{random value}|01688\_00199</p><p>行键以距午夜的秒数开头，可允许分区内的前 n 个样式查询。有关详细信息，请参阅[此](/documentation/articles/storage-table-design-guide/#log-tail-pattern)文章。</p> 
+RowKey|<p>{seconds to midnight}\_{random value}|01688\_00199</p><p>行键以距午夜的秒数开头，可允许分区内的前 n 个样式查询。有关详细信息，请参阅[此](../storage/storage-table-design-guide.md#log-tail-pattern)文章。</p> 
 Timestamp|日期/时间|Azure 表中的自动时间戳 2016-09-09T22:43:42.241Z
 类型|提供遥测数据的实体类型|<p>Channel/StreamingEndpoint/Archive</p><p>事件类型只是一个字符串值。</p>
 名称|遥测事件的名称|ChannelHeartbeat/StreamingEndpointRequestLog
 ObservedTime|发生遥测事件的时间 (UTC)|<p>2016-09-09T22:42:36.924Z</p><p>观察时间由发送遥测的实体（例如通道）提供。组件之间可能存在时间同步问题，因此此值为近似值</p>
 ServiceID|{service ID}|f70bd731-691d-41c6-8f2d-671d0bdc9c7e
 特定于实体的属性|由事件定义|<p>StreamName: stream1, Bitrate 10123, …</p><p>其余属性针对给定时间类型定义。Azure 表内容是键值对，也就是说，表中的不同行具有不同的属性集。</p>
-
 
 ### 特定于实体的架构
 
@@ -109,7 +104,6 @@ BytesSent|发送的聚合字节数|2987358
 ServerLatency|平均服务器延迟（包括存储）|129
 E2ELatency|平均端到端延迟|250
 
-
 **实时频道**
 
 属性|值|示例/说明
@@ -135,7 +129,6 @@ UnalignedPresentationTime|是否收到演示时间不一致的片段（跨音质
 UnexpectedBitrate|如果音频/视频轨道的计算/实际比特率 > 40,000 bps 且 IncomingBitrate == 0，或者 IncomingBitrate 和 actualBitrate 相差 50%，则为 true |True
 Healthy|如果 <br/>overlapCount、<br/>DiscontinuityCount、<br/>NonIncreasingCount、<br/>UnalignedKeyFrames、<br/>UnalignedPresentationTime 和 <br/>UnexpectedBitrate<br/> 全部为 0，则为 true|<p>True</p><p>Healthy 是一个复合函数，满足以下任意条件时返回 false：</p><p>- OverlapCount > 0</p><p>- DiscontinuityCount > 0</p><p>- NonincreasingCount > 0</p><p>- UnalignedKeyFrames == True</p><p>- UnalignedPresentationTime == True</p><p>- UnexpectedBitrate == True</p>
 
-
 **直播存档**
 
 属性|值|示例/说明
@@ -153,7 +146,6 @@ TrackType|轨道类型|音频/视频
 CustomAttribute|十六进制字符串，用于区分具有相同名称和比特率的不同轨道（多摄像机角度）|
 比特率|轨道比特率|785000
 Healthy|如果 FragmentDiscardedCount == 0 && ArchiveAcquisitionError == False，则为 true|<p>True（这两个值不在指标中显示，但是它们会在源事件中显示）</p><p>Healthy 是一个复合函数，满足以下任意条件时返回 false：</p><p>- FragmentDiscardedCount > 0</p><p>- ArchiveAcquisitionError == True</p>
-
 
 ## 常见问答
 
@@ -188,7 +180,6 @@ Healthy|如果 FragmentDiscardedCount == 0 && ArchiveAcquisitionError == False�
 - UnalignedPresentationTime == True
 - UnexpectedBitrate == True
 
-
 ### 如何检测中断？
 
 若要检测中断，请查找 DiscontinuityCount > 0 的所有频道数据条目。对应的 ObservedTime 时间戳指示发生中断的时间。
@@ -204,7 +195,6 @@ Healthy|如果 FragmentDiscardedCount == 0 && ArchiveAcquisitionError == False�
 ### 如何通过外部工具使用数据？
 
 可使用以下工具对遥测数据进行处理和可视化：
-
 
 - AMS 实时仪表板
 - Azure 门户预览（尚未发行）

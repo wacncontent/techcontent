@@ -1,23 +1,22 @@
-<properties
-    pageTitle="在应用程序网关上启用 SSL 策略和端到端 SSL | Azure"
-    description="此页概述应用程序网关的端到端 SSL 支持。"
-    documentationcenter="na"
-    services="application-gateway"
-    author="amsriva"
-    manager="rossort"
-    editor="amsriva" />  
+---
+title: 在应用程序网关上启用 SSL 策略和端到端 SSL | Azure
+description: 此页概述应用程序网关的端到端 SSL 支持。
+documentationcenter: na
+services: application-gateway
+author: amsriva
+manager: rossort
+editor: amsriva
 
-<tags
-    ms.assetid="3976399b-25ad-45eb-8eb3-fdb736a598c5"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/12/2016"
-    wacn.date="01/03/2017"
-    ms.author="amsriva" />  
-
+ms.assetid: 3976399b-25ad-45eb-8eb3-fdb736a598c5
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/12/2016
+wacn.date: 01/03/2017
+ms.author: amsriva
+---
 
 # 在应用程序网关上启用 SSL 策略和端到端 SSL
 
@@ -30,7 +29,6 @@
 如果配置为端到端 SSL 通信模式，应用程序网关会在网关上终止用户的 SSL 会话，并解密用户流量。然后，它会应用配置的规则，以选择要将流量路由到的适当后端池实例。应用程序网关接下来会初始化到后端服务器的新 SSL 连接，并先使用后端服务器的公钥证书重新加密数据，然后再将请求传输到后端。若要启用端到端 SSL，请将 BackendHTTPSetting 中的协议设置设为 Https，然后再将其应用到后端池。后端池中每个已启用端到端 SSL 的后端服务器都必须配置证书，以便能够进行安全的通信。
 
 ![端到端 ssl 方案][1]  
-
 
 此示例通过端到端 SSL 将使用 TLS1.2 的请求路由到 Pool1 中的后端服务器。
 
@@ -48,10 +46,9 @@
 
 ## 后续步骤
 
-了解端到端 SSL 及 SSL 策略后，可转到[在应用程序网关上启用端到端 SSL](/documentation/articles/application-gateway-end-to-end-ssl-powershell/)，使用端到端 SSL 创建应用程序网关。
+了解端到端 SSL 及 SSL 策略后，可转到[在应用程序网关上启用端到端 SSL](./application-gateway-end-to-end-ssl-powershell.md)，使用端到端 SSL 创建应用程序网关。
 
 <!--Image references-->
-
 
 [1]: ./media/application-gateway-backend-ssl/scenario.png
 

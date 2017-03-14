@@ -1,25 +1,25 @@
-<properties
-    pageTitle="了解 Azure 中的资源访问权限 | Azure"
-    description="本主题介绍有关使用订阅管理员在整个 Azure 门户预览中控制资源访问权限的概念。"
-    services="active-directory"
-    documentationcenter=""
-    author="MarkusVi"
-    manager="femila" />
-<tags
-    ms.assetid="174f1706-b959-4230-9a75-bf651227ebf6"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/10/2017"
-    wacn.date="02/15/2017"
-    ms.author="markvi" />  
+---
+title: 了解 Azure 中的资源访问权限 | Azure
+description: 本主题介绍有关使用订阅管理员在整个 Azure 门户预览中控制资源访问权限的概念。
+services: active-directory
+documentationcenter: ''
+author: MarkusVi
+manager: femila
 
+ms.assetid: 174f1706-b959-4230-9a75-bf651227ebf6
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/10/2017
+wacn.date: 02/15/2017
+ms.author: markvi
+---
 
 # 了解 Azure 中的资源访问权限
-> [AZURE.NOTE]
-本主题介绍有关使用订阅管理员在整个 Azure 门户预览中控制资源访问权限的概念。作为替代方法，Azure 经典管理门户提供[基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)，以便更准确地管理 Azure 资源。
+> [!NOTE]
+本主题介绍有关使用订阅管理员在整个 Azure 门户预览中控制资源访问权限的概念。作为替代方法，Azure 经典管理门户提供[基于角色的访问控制](./role-based-access-control-configure.md)，以便更准确地管理 Azure 资源。
 > 
 > 
 
@@ -35,7 +35,7 @@ Azure 中的访问控制首先体现在计费方面。Azure 帐户的所有者�
 
 借助 Azure 经典管理门户中的功能，通过 Microsoft 帐户登录的 SA 可以使用“设置”中“订阅”页上的“编辑目录”命令来更改与订阅关联的目录。注意，此操作会影响该订阅的访问控制。
 
-> [AZURE.NOTE]
+> [!NOTE]
 使用工作或学校帐户登录的用户不可以使用 Azure 经典管理门户中的“编辑目录”命令，因为这些帐户只能登录到其所属的目录。
 > 
 > 
@@ -54,8 +54,8 @@ Azure 中的访问控制首先体现在计费方面。Azure 帐户的所有者�
 由这种单一的订阅目录视图所致，诸如在订阅之间移动资源的操作可能会更难以实现。若要执行资源传输，务必首先使用“设置”中“订阅”页上的“编辑目录”命令将订阅与相同目录关联。
 
 ## 后续步骤
-- 有关 Azure Active Directory 如何与 Azure 订阅相关联的详细信息，请参阅 [How Azure subscriptions are associated with Azure Active Directory](/documentation/articles/active-directory-how-subscriptions-associated-directory/)（Azure 订阅与 Azure Active Directory 的关联方式）
-- 有关如何在 Azure AD 中分配角色的详细信息，请参阅[在 Azure Active Directory 中分配管理员角色](/documentation/articles/active-directory-assign-admin-roles/)
+- 有关 Azure Active Directory 如何与 Azure 订阅相关联的详细信息，请参阅 [How Azure subscriptions are associated with Azure Active Directory](./active-directory-how-subscriptions-associated-directory.md)（Azure 订阅与 Azure Active Directory 的关联方式）
+- 有关如何在 Azure AD 中分配角色的详细信息，请参阅[在 Azure Active Directory 中分配管理员角色](./active-directory-assign-admin-roles.md)
 
 <!--Image references-->
 [1]: ./media/active-directory-understanding-resource-access/IC707931.png

@@ -1,21 +1,21 @@
-<properties
-   pageTitle="ExpressRoute 位置 | Azure"
-   description="本文详细介绍了提供服务的区域以及如何连接到 Azure 区域。"
-   services="expressroute"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor="" />
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="01/12/2017"
-   wacn.date="02/24/2017"
-   ms.author="cherylmc" />  
+---
+title: ExpressRoute 位置 | Azure
+description: 本文详细介绍了提供服务的区域以及如何连接到 Azure 区域。
+services: expressroute
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: ''
 
+ms.service: expressroute
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 01/12/2017
+wacn.date: 02/24/2017
+ms.author: cherylmc
+---
 
 # ExpressRoute 合作伙伴和对等位置
 
@@ -36,10 +36,7 @@
 | --- | --- | --- |
 | **中国** |中国北部、中国东部 |北京、上海 |
 
-
-
 标准 ExpressRoute SKU 不支持跨地缘政治区域的连接。需要启用 ExpressRoute 高级外接程序以支持全球连接。
-
 
 ## <a name="locations"></a>连接服务提供商位置
 
@@ -48,13 +45,12 @@
 | **北京** |中国电信 |
 | **上海** |中国电信 |
 
-若要了解详细信息，请参阅[位于中国的 ExpressRoute](/home/features/expressroute/)。 
-
+若要了解详细信息，请参阅[位于中国的 ExpressRoute](https://www.azure.cn/home/features/expressroute/)。 
 
 ## 后续步骤
 
-- 有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](/documentation/articles/expressroute-faqs/)。
-- 确保符合所有先决条件。请参阅 [ExpressRoute 先决条件](/documentation/articles/expressroute-prerequisites/)。
+- 有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](./expressroute-faqs.md)。
+- 确保符合所有先决条件。请参阅 [ExpressRoute 先决条件](./expressroute-prerequisites.md)。
 
 <!--Image References-->
 [0]: ./media/expressroute-locations/expressroute-locations-map.png "位置地图"

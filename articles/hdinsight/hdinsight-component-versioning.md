@@ -1,32 +1,33 @@
-<properties
-    pageTitle="可与 HDInsight 群集使用的不同组件有哪些？|Azure"
-    description="HDInsight 支持多个可部署的 Hadoop 群集组件和版本。请参见“支持的 Hadoop 和 HortonWorks 数据平台 (HDP) 版本”。"
-    services="hdinsight"
-    editor="cgronlun"
-    manager="jhubbard"
-    author="saurinsh"
-    tags="azure-portal"
-    documentationcenter="" />
-<tags 
-    ms.assetid="367b3f4a-f7d3-4e59-abd0-5dc59576f1ff"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/13/2016"
-    wacn.date="02/06/2017"
-    ms.author="saurinsh" />
+---
+title: 可与 HDInsight 群集使用的不同组件有哪些？|Azure
+description: HDInsight 支持多个可部署的 Hadoop 群集组件和版本。请参见“支持的 Hadoop 和 HortonWorks 数据平台 (HDP) 版本”。
+services: hdinsight
+editor: cgronlun
+manager: jhubbard
+author: saurinsh
+tags: azure-portal
+documentationcenter: ''
+
+ms.assetid: 367b3f4a-f7d3-4e59-abd0-5dc59576f1ff
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/13/2016
+wacn.date: 02/06/2017
+ms.author: saurinsh
+---
 
 # 可与 HDInsight 使用的不同 Hadoop 组件有哪些？
 了解 HDInsight 提供的不同服务级别，以及 HDInsight 所包括的不同 Hadoop 组件版本。
 
-[AZURE.INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
+[!INCLUDE [hdinsight-linux-acn-version.md](../../includes/hdinsight-linux-acn-version.md)]
 
 ## 可与不同 HDInsight 版本使用的 Hadoop 组件
 Azure HDInsight 支持多个可随时部署的 Hadoop 群集版本。每个版本选项创建 Hortonworks 数据平台 (HDP) 分发的特定版本和该分发内包含的一组组件。下表中逐项列出了与 HDInsight 群集版本关联的组件版本。请注意，Azure HDInsight 使用的默认群集版本当前是 3.4（到 09/14/2016 为止）并基于 HDP 2.4。
 
-> [AZURE.NOTE]
+> [!NOTE]
 服务默认版本随时可更改，恕不另行通知。如果依赖某个版本，我们建议在创建群集时使用 .NET SDK/Azure PowerShell 和 Azure CLI 指定版本。
 > 
 > 
@@ -53,7 +54,7 @@ Azure HDInsight 支持多个可随时部署的 Hadoop 群集版本。每个版�
 
 **发行说明**
 
-请参阅 [HDInsight 发行说明](/documentation/articles/hdinsight-release-notes/)，了解 HDInsight 最新版本的更多发行说明。
+请参阅 [HDInsight 发行说明](./hdinsight-release-notes.md)，了解 HDInsight 最新版本的更多发行说明。
 
 ## <a name="supported-hdinsight-versions"></a> 支持的 HDInsight 版本
 下表列出当前可用的 HDInsight 版本以及它们使用的相应 Hortonworks 数据平台版本和发布日期。如果知道，还提供其支持到期日期和弃用日期。请注意以下事项：
@@ -83,7 +84,7 @@ SLA 用“支持窗口”来定义。“支持窗口”是指 HDInsight 群集�
 
 **弃用日期**是在该日期后，不能在 HDInsight 上创建此群集版本的日期。
 
-> [AZURE.NOTE]
+> [!NOTE]
 基于 Windows 的 HDInsight 群集（包括版本 2.1、3.0、3.1、3.2 和 3.3）在 Azure 来宾 OS 系列 4 上运行，该系列使用 64 位版本的 Windows Server 2012 R2 并支持 .NET Framework 4.0、4.5、4.5.1 和 4.5.2。
 > 
 > 
@@ -96,17 +97,16 @@ SLA 用“支持窗口”来定义。“支持窗口”是指 HDInsight 群集�
 * 开源社区可以主动开发实现 Hadoop 和更新的大数据技术
 * HDInsight 服务可以更专注于大数据开放源代码技术
 
-为了对开放源代码大数据技术持续投资，将来的 HDInsight 版本将仅在 Linux 操作系统上可用。Windows 操作系统上的 HDInsight 将不会有任何将来版本。Windows 上的最后一个 HDInsight 版本是 HDI 3.3。对 HDI 3.3 的支持于 06/27/2016 到期，并将于 07/31/2017 弃用。若要从基于 Windows 的 HDInsight 群集迁移到基于 Linux 的群集，请参阅[此文](/documentation/articles/hdinsight-migrate-from-windows-to-linux/)。
-
+为了对开放源代码大数据技术持续投资，将来的 HDInsight 版本将仅在 Linux 操作系统上可用。Windows 操作系统上的 HDInsight 将不会有任何将来版本。Windows 上的最后一个 HDInsight 版本是 HDI 3.3。对 HDI 3.3 的支持于 06/27/2016 到期，并将于 07/31/2017 弃用。若要从基于 Windows 的 HDInsight 群集迁移到基于 Linux 的群集，请参阅[此文](./hdinsight-migrate-from-windows-to-linux.md)。
 
 ## 与 HDInsight 版本相关的 Hortonworks 发行说明
 * HDInsight 群集版本 3.4 使用基于 [Hortonworks 数据平台 2.4](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.4.0/bk_HDP_RelNotes/content/ch_relnotes_v240.html) 的 Hadoop 分发版。这是使用门户时创建的**默认** Hadoop 群集。
 * HDInsight 群集版本 3.3 使用基于 [Hortonworks 数据平台 2.3](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_RelNotes/content/ch_relnotes_v230.html) 的 Hadoop 分发版。
-  
+
     * [此处](https://storm.apache.org/2015/11/05/storm0100-released.html)提供了 Apache Storm 发行说明。
     * [此处](https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12332384&styleName=Text&projectId=12310843)提供了 Apache Hive 发行说明。
 * HDInsight 群集版本 3.2 使用基于 [Hortonworks 数据平台 2.2][hdp-2-2] 的 Hadoop 分发版。
-  
+
     * 特定 Apache 组件的发行说明 - [Hive 0.14](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310843&version=12326450)、[Pig 0.14](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310730&version=12326954)、[HBase 0.98.4](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310753&version=12326810)、[Phoenix 4.2.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12315120&version=12327581)、[M/R 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310941&version=12327180)、[HDFS 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310942&version=12327181)、[YARN 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12313722&version=12327197)、[Common](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310240&version=12327179)、[Tez 0.5.2](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12314426&version=12328742)、[Ambari 2.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12312020&version=12327486)、[Storm 0.9.3](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12314820&version=12327112)、[Oozie 4.1.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12324960&projectId=12311620)。
 * HDInsight 群集版本 3.1 使用基于 [Hortonworks 数据平台 2.1.7][hdp-2-1-7] 的 Hadoop 分发版。创建于 11/7/2014 之前的 HDInsight 3.1 群集基于 [Hortonworks 数据平台 2.1.1][hdp-2-1-1]
 * HDInsight 群集版本 3.0 使用基于 [Hortonworks 数据平台 2.0][hdp-2-0-8] 的 Hadoop 分发版。
@@ -115,9 +115,9 @@ SLA 用“支持窗口”来定义。“支持窗口”是指 HDInsight 群集�
 
 [image-hdi-versioning-versionscreen]: ./media/hdinsight-component-versioning-v1/hdi-versioning-version-screen.png
 
-[wa-forums]: /support/forums/
+[wa-forums]: https://www.azure.cn/support/forums/
 
-[connect-excel-with-hive-ODBC]: /documentation/articles/hdinsight-connect-excel-hive-ODBC-driver/
+[connect-excel-with-hive-ODBC]: ./hdinsight-connect-excel-hive-ODBC-driver.md
 
 [hdp-2-2]: http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.2.0/bk_HDP_RelNotes/content/ch_relnotes_v220.html
 

@@ -1,21 +1,21 @@
-<properties 
-    pageTitle="Azure 服务总线和事件中心内的 AMQP 1.0 协议指南 | Azure" 
-    description="Azure 服务总线和事件中心内 AMQP 1.0 协议的表达与描述指南" 
-    services="service-bus,event-hubs" 
-    documentationCenter=".net" 
-    authors="clemensv" 
-    manager="timlt" 
-    editor=""/>
+---
+title: Azure 服务总线和事件中心内的 AMQP 1.0 协议指南 | Azure
+description: Azure 服务总线和事件中心内 AMQP 1.0 协议的表达与描述指南
+services: service-bus,event-hubs
+documentationCenter: .net
+authors: clemensv
+manager: timlt
+editor: ''
 
-<tags
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na" 
-    ms.date="01/07/2017"
-    ms.author="clemensv;jotaub;hillaryc;sethm"  
-    wacn.date="02/20/2017"/>
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/07/2017
+ms.author: clemensv;jotaub;hillaryc;sethm
+wacn.date: 02/20/2017
+---
 
 # Azure 服务总线和事件中心内的 AMQP 1.0 协议指南
 
@@ -63,7 +63,7 @@ Azure 服务总线随时都需要使用 TLS。它支持通过 TCP 端口 5671 �
 
 在设置连接和 TLS 之后，服务总线提供两个 SASL 机制选项：
 
--   SASL PLAIN 常用于将用户名和密码凭据发送到服务器。服务总线没有帐户，但指定了[共享访问安全规则](/documentation/articles/service-bus-shared-access-signature-authentication/)，这些规则可授予权限并与某个密钥关联。规则名称可作为用户名，而密钥（如 base64 编码文本）可作为密码。与所选规则关联的权限控管允许在连接上进行的操作。
+-   SASL PLAIN 常用于将用户名和密码凭据发送到服务器。服务总线没有帐户，但指定了[共享访问安全规则](./service-bus-shared-access-signature-authentication.md)，这些规则可授予权限并与某个密钥关联。规则名称可作为用户名，而密钥（如 base64 编码文本）可作为密码。与所选规则关联的权限控管允许在连接上进行的操作。
 
 -   当客户端想要使用稍后所述的基于声明的安全 (CBS) 模型时，SASL ANONYMOUS 可用于绕过 SASL 授权。使用此选项，即可以匿名方式创建短期的客户端连接，在此连接期间，客户端只能与 CBS 终结点交互，并且 CBS 握手必须完成。
 
@@ -235,7 +235,8 @@ Azure 服务总线不支持链接恢复；如果客户端失去对服务总线�
 
 本部分介绍 Azure 服务总线的高级功能，这些功能基于 AMQP 的 OASIS 技术委员会目前正在开发的 AMQP 草稿扩展。Azure 服务总线实现这些草稿的最新状态，并且采用这些草稿达到标准状态时所引进的更改。
 
-> [AZURE.NOTE] 服务总线消息传送高级操作通过请求/响应模式受到支持。[服务总线中的 AMQP 1.0：基于请求/响应的操作](/documentation/articles/service-bus-amqp-request-response/)文档详细介绍这些操作。
+> [!NOTE]
+> 服务总线消息传送高级操作通过请求/响应模式受到支持。[服务总线中的 AMQP 1.0：基于请求/响应的操作](./service-bus-amqp-request-response.md)文档详细介绍这些操作。
 
 ### AMQP 管理
 AMQP 管理规范是我们将在此介绍的第一个草稿扩展。此规范定义一组基于 AMQP 协议的协议手势，以便通过 AMQP 进行消息基础结构的管理交互。此规范定义一般操作（例如*创建*、*读取*、*更新*和*删除*），以便管理消息传送基础结构内的实体和一组查询操作。
@@ -325,8 +326,8 @@ CBS 定义由消息传送基础结构提供的虚拟管理节点（名为 *$cbs*
 [3]: ./media/service-bus-amqp/amqp3.png
 [4]: ./media/service-bus-amqp/amqp4.png
 
-[服务总线 AMQP 概述]: /documentation/articles/service-bus-amqp-overview/
-[针对服务总线分区队列和主题的 AMQP 1.0 支持]: /documentation/articles/service-bus-partitioned-queues-and-topics-amqp-overview/
+[服务总线 AMQP 概述]: ./service-bus-amqp-overview.md
+[针对服务总线分区队列和主题的 AMQP 1.0 支持]: ./service-bus-partitioned-queues-and-topics-amqp-overview.md
 [适用于 Windows Server 的服务总线中的 AMQP]: https://msdn.microsoft.com/zh-cn/library/dn574799.aspx
 
 <!---HONumber=Mooncake_0213_2017-->

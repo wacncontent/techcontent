@@ -1,25 +1,26 @@
-<properties
-    pageTitle="平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移 | Azure"
-    description="本文逐步讲解如何对资源进行平台支持的从经典部署模型到 Azure Resource Manager 的迁移"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="singhkays"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags 
-    ms.assetid="78492a2c-2694-4023-a7b8-c97d3708dcb7"
-    ms.service="virtual-machines-windows"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="08/22/2016"
-    wacn.date="03/06/2017"
-    ms.author="kasing" />
+---
+title: 平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移 | Azure
+description: 本文逐步讲解如何对资源进行平台支持的从经典部署模型到 Azure Resource Manager 的迁移
+services: virtual-machines-windows
+documentationcenter: ''
+author: singhkays
+manager: timlt
+editor: ''
+tags: azure-resource-manager
+
+ms.assetid: 78492a2c-2694-4023-a7b8-c97d3708dcb7
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 08/22/2016
+wacn.date: 03/06/2017
+ms.author: kasing
+---
 
 # 平台支持的从经典部署模型到 Azure Resource Manager 的 IaaS 资源迁移
-本文介绍如何才能将基础结构即服务 (IaaS) 资源从经典部署模型迁移到 Resource Manager 部署模型。用户可以阅读有关 [Azure Resource Manager 功能和优点](/documentation/articles/resource-group-overview/)的更多内容。本文详述了如何使用虚拟网络的站点到站点网关连接订阅中并存的两个部署模型中的资源。
+本文介绍如何才能将基础结构即服务 (IaaS) 资源从经典部署模型迁移到 Resource Manager 部署模型。用户可以阅读有关 [Azure Resource Manager 功能和优点](../azure-resource-manager/resource-group-overview.md)的更多内容。本文详述了如何使用虚拟网络的站点到站点网关连接订阅中并存的两个部署模型中的资源。
 
 ## 迁移目标
 Resource Manager 除了可让你通过模板部署复杂的应用程序之外，还可使用 VM 扩展来配置虚拟机，并且纳入了访问管理和标记。Azure Resource Manager 将虚拟机的可缩放并行部署包含在可用性集内。新部署模型还针对计算、网络和存储单独提供生命周期管理。最后，将重点介绍为了按默认启用安全性而要在虚拟网络中实施虚拟机的做法。
@@ -35,7 +36,7 @@ Resource Manager 除了可让你通过模板部署复杂的应用程序之外，
 * *管理平面* 描述进入管理平面或 API 修改资源的调用。例如，创建 VM、重启 VM 以及将虚拟网络更新成新子网等操作均可管理正在运行的资源。它们并不直接影响与实例之间的连接。
 * *数据平面* （应用程序）描述应用程序本身的运行时，并涉及与不通过 Azure API 的实例的交互。访问网站或从运行中的 SQL Server 实例或 MongoDB 服务器拉取数据，全都被视为数据平面或应用程序交互。从存储帐户复制 Blob，以及访问公共 IP 地址以通过 RDP 或 SSH 连接到虚拟机也属于数据平面。这些操作可让应用程序继续跨计算、网络和存储运行。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在某些迁移方案中，Azure 平台会停止、释放和重新启动虚拟机。这会造成短暂的数据平面停机。
 >
 >
@@ -49,7 +50,7 @@ Resource Manager 除了可让你通过模板部署复杂的应用程序之外，
 * 你可以请求平台创建新的虚拟网络，并将虚拟机迁移到新的虚拟网络。
 * 你可以将虚拟机迁移到 Resource Manager 中的现有虚拟网络。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在此迁移范围内，迁移期间可能有一段时间不允许进行管理平面操作和数据平面操作。
 >
 >
@@ -62,7 +63,7 @@ Resource Manager 除了可让你通过模板部署复杂的应用程序之外，
 * 在单个云服务中有一个以上的可用性集。
 * 在单个云服务中有一个或多个可用性集和不在可用性集中的 VM。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在此迁移范围内，迁移期间可能有一段时间不允许进行管理平面操作。上述某些配置会造成数据平面停机。
 >
 >
@@ -70,7 +71,7 @@ Resource Manager 除了可让你通过模板部署复杂的应用程序之外，
 ### 存储帐户迁移
 为了让迁移顺畅进行，可以在经典存储帐户中部署 Resource Manager VM。通过此功能，就可以并且应该迁移计算和网络资源，而不必受到存储帐户的约束。迁移虚拟机和虚拟网络后，需要迁移存储帐户才能完成迁移过程。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储帐户时，经典映像和磁盘不在 Resource Manager 堆栈中可见，但后备 VHD 保留在存储帐户中。
 >
 >
@@ -87,7 +88,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 | 计算 |虚拟机映像。 |
 | 网络 |终结点 ACL。 |
 | 网络 |虚拟网络网关（Azure ExpressRoute 网关、应用程序网关）。 |
-| 网络 |使用 VNet 对等互连的虚拟网络。（将 VNet 迁移到 ARM，然后进行对等互连）详细了解 [VNet Peering](/documentation/articles/virtual-network-peering-overview/)（VNet 对等互连）。 |
+| 网络 |使用 VNet 对等互连的虚拟网络。（将 VNet 迁移到 ARM，然后进行对等互连）详细了解 [VNet Peering](../virtual-network/virtual-network-peering-overview.md)（VNet 对等互连）。 |
 | 网络 |流量管理器配置文件。 |
 
 ### 不支持的配置
@@ -123,8 +124,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 
 ![显示迁移工作流的屏幕截图](./media/virtual-machines-windows-migration-classic-resource-manager/migration-workflow.png)  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 下列各节描述的所有操作都是幂等的。如果遇到功能不受支持或配置错误以外的问题，建议重试准备、中止或提交操作。Azure 平台会尝试再次操作。
 >
 >
@@ -148,7 +148,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 
 准备操作完成之后，可以选择在经典模型和 Resource Manager 模型中将资源可视化。对于经典部署模型中的每项云服务，Azure 平台都会创建模式为 `cloud-service-name>-migrated` 的资源组名称。
 
-> [AZURE.NOTE]
+> [!NOTE]
 不属于经典虚拟网络的虚拟机将在此迁移阶段中停止（解除分配）。
 >
 >
@@ -167,7 +167,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 ### 中止
 中止是可选步骤，可让你将更改还原为经典部署模型，并停止迁移。
 
-> [AZURE.NOTE]
+> [!NOTE]
 触发提交操作后，就无法执行此操作。
 >
 >
@@ -175,7 +175,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 ### 提交
 完成验证之后，就可以提交迁移。资源不会再出现在经典部署模型中，而只有在 Resource Manager 部署模型中才能使用这些资源。只能在新门户中管理迁移的资源。
 
-> [AZURE.NOTE]
+> [!NOTE]
 这是幂等操作。如果该操作失败，建议重试该操作。如果一直失败，请创建支持票证，或在 [VM 论坛](https://social.msdn.microsoft.com/Forums/azure/zh-cn/home?forum=WAVirtualMachinesforWindows)上创建标记为 ClassicIaaSMigration 的论坛帖子。
 >
 >
@@ -187,7 +187,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 
 **如果我近期不打算迁移，我的 VM 会出现什么情况？**
 
-我们近期不会淘汰现有的经典 API 和资源模型。我们想要通过 Resource Manager 部署模型中提供的高级功能，让迁移变得简单。强烈建议查看 Resource Manager 下 IaaS 包含的[一些改进](/documentation/articles/resource-manager-deployment-model/)。
+我们近期不会淘汰现有的经典 API 和资源模型。我们想要通过 Resource Manager 部署模型中提供的高级功能，让迁移变得简单。强烈建议查看 Resource Manager 下 IaaS 包含的[一些改进](../azure-resource-manager/resource-manager-deployment-model.md)。
 
 **对于我现有的工具而言，此迁移计划有何意义？**
 
@@ -207,7 +207,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 
 **如果我必须使用 Resource Manager 下的 IaaS，是否必须购买其他 ExpressRoute 线路？**
 
-否。我们近期实现了[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](/documentation/articles/expressroute-move/)。如果你已有 ExpressRoute 线路，则不需要购买新的线路。
+否。我们近期实现了[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](../expressroute/expressroute-move.md)。如果你已有 ExpressRoute 线路，则不需要购买新的线路。
 
 **如果我已经为经典 IaaS 资源配置基于角色的访问控制策略，该怎么办？**
 
@@ -215,7 +215,7 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 
 **如果我目前正在使用 Azure Site Recovery 或 Azure 备份，该怎么办？**
 
-若要迁移允许进行备份的虚拟机，请参阅[已经在备份保管库中备份了经典 VM。想要将 VM 从经典模型迁移到 Resource Manager 模型，如何在恢复服务保管库中备份它们？](/documentation/articles/backup-azure-backup-ibiza-faq/)我已在备份保管库中备份经典 VM。想要将 VM 从经典模型迁移到 Resource Manager 模型，该如何在恢复服务保管库中备份它们？
+若要迁移允许进行备份的虚拟机，请参阅[已经在备份保管库中备份了经典 VM。想要将 VM 从经典模型迁移到 Resource Manager 模型，如何在恢复服务保管库中备份它们？](../backup/backup-azure-backup-ibiza-faq.md)我已在备份保管库中备份经典 VM。想要将 VM 从经典模型迁移到 Resource Manager 模型，该如何在恢复服务保管库中备份它们？
 
 **我是否可以验证订阅或资源，以查看其是否能够迁移？**
 
@@ -240,10 +240,10 @@ Resource Manager 部署模型没有经典映像和磁盘的概念。迁移存储
 ## 后续步骤
 你已经了解经典 IaaS 资源到 Resource Manager 的迁移，现在可以开始迁移资源。
 
-* [有关平台支持的从经典部署模型到 Azure Resource Manager 的迁移的技术深入探讨](/documentation/articles/virtual-machines-windows-migration-classic-resource-manager-deep-dive/)
-* [使用 PowerShell 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](/documentation/articles/virtual-machines-windows-ps-migration-classic-resource-manager/)
-* [使用 CLI 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](/documentation/articles/virtual-machines-linux-cli-migration-classic-resource-manager/)
-* [使用社区 PowerShell 脚本将经典虚拟机克隆到 Azure Resource Manager](/documentation/articles/virtual-machines-windows-migration-scripts/)
-* [查看最常见的迁移错误](/documentation/articles/virtual-machines-migration-errors/)
+* [有关平台支持的从经典部署模型到 Azure Resource Manager 的迁移的技术深入探讨](./virtual-machines-windows-migration-classic-resource-manager-deep-dive.md)
+* [使用 PowerShell 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](./virtual-machines-windows-ps-migration-classic-resource-manager.md)
+* [使用 CLI 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](./virtual-machines-linux-cli-migration-classic-resource-manager.md)
+* [使用社区 PowerShell 脚本将经典虚拟机克隆到 Azure Resource Manager](./virtual-machines-windows-migration-scripts.md)
+* [查看最常见的迁移错误](./virtual-machines-migration-errors.md)
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,22 +1,22 @@
-<properties
-   pageTitle="在 Visual Studio 中优化 Azure 代码 | Azure"
-   description="了解 Visual Studio 中的 Azure 代码优化工具如何帮助你提高代码的可靠性和性能。"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 在 Visual Studio 中优化 Azure 代码 | Azure
+description: 了解 Visual Studio 中的 Azure 代码优化工具如何帮助你提高代码的可靠性和性能。
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="ed48ee06-e2d2-4322-af22-07200fb16987"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: ed48ee06-e2d2-4322-af22-07200fb16987
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 优化 Azure 代码
 
@@ -126,9 +126,9 @@ BrokeredMessage receivedMessage = sc.Receive();
 
 有关更多信息，请参阅以下主题。
 
-- 有关概述，请参阅 [服务总线的共享访问签名身份验证](/documentation/articles/service-bus-shared-access-signature-authentication/)
+- 有关概述，请参阅 [服务总线的共享访问签名身份验证](./service-bus-messaging/service-bus-shared-access-signature-authentication.md)
 
-- [如何使用服务总线的共享访问签名身份验证](/documentation/articles/service-bus-shared-access-signature-authentication/)
+- [如何使用服务总线的共享访问签名身份验证](./service-bus-messaging/service-bus-shared-access-signature-authentication.md)
 
 ## 考虑使用 OnMessage 方法来避免“receive 循环”
 
@@ -252,7 +252,7 @@ AP2003
 
 ### 原因
 
-使用异步方法可实现应用程序并行性效果，因为在执行每个调用时不会阻塞主线程。使用服务总线消息传送方法时，执行某项操作（发送、接收、删除等）需要花费一定的时间。这一时间包括服务总线服务处理该操作的时间，外加延迟处理请求和答复的时间。若要增加每次操作的数目，操作必须同时执行。有关详细信息，请参阅 [使用服务总线中转消息传送改善性能的最佳实践](/documentation/articles/service-bus-performance-improvements/)。
+使用异步方法可实现应用程序并行性效果，因为在执行每个调用时不会阻塞主线程。使用服务总线消息传送方法时，执行某项操作（发送、接收、删除等）需要花费一定的时间。这一时间包括服务总线服务处理该操作的时间，外加延迟处理请求和答复的时间。若要增加每次操作的数目，操作必须同时执行。有关详细信息，请参阅 [使用服务总线中转消息传送改善性能的最佳实践](./service-bus-messaging/service-bus-performance-improvements.md)。
 
 ### 解决方案
 
@@ -274,7 +274,7 @@ AP2004
 
 ### 原因
 
-将服务总线队列和主题分区可提高性能吞吐量和服务可用性，因为分区的队列或主题的总吞吐量不再受到单个消息中转站或消息存储性能的限制。此外，消息传送存储的临时中断不会导致分区的队列或主题不可用。有关详细信息，请参阅[分区消息实体](/documentation/articles/service-bus-partitioning/)。
+将服务总线队列和主题分区可提高性能吞吐量和服务可用性，因为分区的队列或主题的总吞吐量不再受到单个消息中转站或消息存储性能的限制。此外，消息传送存储的临时中断不会导致分区的队列或主题不可用。有关详细信息，请参阅[分区消息实体](./service-bus-messaging/service-bus-partitioning.md)。
 
 ### 解决方案
 
@@ -380,7 +380,7 @@ blobPermissions.SharedAccessPolicies.Add("mypolicy", new SharedAccessBlobPolicy(
 });
 ```
 
-有关详细信息，请参阅 [创建和使用共享访问签名](/documentation/articles/storage-manage-access-to-resources/)。
+有关详细信息，请参阅 [创建和使用共享访问签名](./storage/storage-manage-access-to-resources.md)。
 
 ## 使用 CloudConfigurationManager
 
@@ -482,8 +482,7 @@ AP5000
 
   ![访问“启用诊断”选项](./media/vs-azure-tools-optimizing-azure-code-in-visual-studio/IC796660.png)
 
-  有关详细信息，请参阅 [为 Azure 云服务和虚拟机配置诊断](/documentation/articles/vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines/)。
-
+  有关详细信息，请参阅 [为 Azure 云服务和虚拟机配置诊断](./vs-azure-tools-diagnostics-for-cloud-services-and-virtual-machines.md)。
 
 ## 避免将 DbContext 对象声明为静态
 
@@ -528,6 +527,5 @@ public class BlogsController : Controller
         }
     }
 ```
-
 
 <!---HONumber=Mooncake_0509_2016-->

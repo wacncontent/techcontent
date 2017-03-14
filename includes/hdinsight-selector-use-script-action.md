@@ -1,3 +1,3 @@
-> [AZURE.SELECTOR]
-- [Linux](/documentation/articles/hdinsight-hadoop-customize-cluster-linux/)
-- [Windows](/documentation/articles/hdinsight-hadoop-customize-cluster/)
+> [!div class="op_single_selector"]
+- [Linux](../articles/hdinsight/hdinsight-hadoop-customize-cluster-linux.md)
+- [Windows](../articles/hdinsight/hdinsight-hadoop-customize-cluster.md)

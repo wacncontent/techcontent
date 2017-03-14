@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Service Fabric 群集资源管理器 - 放置策略 | Azure"
-    description="概述 Service Fabric 服务的其他放置策略和规则"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="5c2d19c6-dd40-4c4b-abd3-5c5ec0abed38"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider" />  
+---
+title: Service Fabric 群集资源管理器 - 放置策略 | Azure
+description: 概述 Service Fabric 服务的其他放置策略和规则
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: 5c2d19c6-dd40-4c4b-abd3-5c5ec0abed38
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider
+---
 
 # Service Fabric 服务的放置策略
 在极少数情况下，可能需要配置其他许多不同的规则。这些情况可能包括：
@@ -44,16 +44,17 @@ InvalidDomain 放置策略允许指定特定的容错域对此工作负荷无效
 
 代码：
 
-
-	ServicePlacementInvalidDomainPolicyDescription invalidDomain = new ServicePlacementInvalidDomainPolicyDescription();
-	invalidDomain.DomainName = "fd:/DCEast"; //regulations prohibit this workload here
-	serviceDescription.PlacementPolicies.Add(invalidDomain);
-
+```
+ServicePlacementInvalidDomainPolicyDescription invalidDomain = new ServicePlacementInvalidDomainPolicyDescription();
+invalidDomain.DomainName = "fd:/DCEast"; //regulations prohibit this workload here
+serviceDescription.PlacementPolicies.Add(invalidDomain);
+```
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("InvalidDomain,fd:/DCEast”)
+```
+New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("InvalidDomain,fd:/DCEast”)
+```
 
 ## 指定所需域
 所需域放置策略要求服务的所有有状态副本或无状态服务实例出现在指定的域中。可以通过单独的策略指定多个所需域。
@@ -64,16 +65,17 @@ Powershell：
 
 代码：
 
-	ServicePlacementRequiredDomainPolicyDescription requiredDomain = new ServicePlacementRequiredDomainPolicyDescription();
-	requiredDomain.DomainName = "fd:/DC01/RK03/BL2";
-	serviceDescription.PlacementPolicies.Add(requiredDomain);
-
+```
+ServicePlacementRequiredDomainPolicyDescription requiredDomain = new ServicePlacementRequiredDomainPolicyDescription();
+requiredDomain.DomainName = "fd:/DC01/RK03/BL2";
+serviceDescription.PlacementPolicies.Add(requiredDomain);
+```
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("RequiredDomain,fd:/DC01/RK03/BL2")
-
+```
+New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("RequiredDomain,fd:/DC01/RK03/BL2")
+```
 
 ## 指定主要副本的首选域
 首选主域是一个有趣的控制条件，因为它允许选择容错域，如果能够这样做，主要副本就应放置在该域中。如果一切运行正常，主要副本最终位于此域中。如果域或主要副本发生故障，或出于某种原因而关闭，则主要副本会迁移到其他某个位置。如果此新位置不在首选域中，群集资源管理器会尽快将主要副本移回首选域。当然，此设置仅适用于有状态服务。此策略最适合用于跨 Azure 区域或多个数据中心，但希望主要副本放置在特定位置的群集。主要副本保持接近其用户有助于降低延迟，尤其是读取延迟。
@@ -82,19 +84,20 @@ Powershell：
 ![首选主域和故障转移][Image3] 
 </center>
 
-	ServicePlacementPreferPrimaryDomainPolicyDescription primaryDomain = new ServicePlacementPreferPrimaryDomainPolicyDescription();
-	primaryDomain.DomainName = "fd:/ChinaEast/";
-	serviceDescription.PlacementPolicies.Add(invalidDomain);
-
+```
+ServicePlacementPreferPrimaryDomainPolicyDescription primaryDomain = new ServicePlacementPreferPrimaryDomainPolicyDescription();
+primaryDomain.DomainName = "fd:/ChinaEast/";
+serviceDescription.PlacementPolicies.Add(invalidDomain);
+```
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("PreferredPrimaryDomain,fd:/ChinaEast")
-
+```
+New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("PreferredPrimaryDomain,fd:/ChinaEast")
+```
 
 ## 要求在所有域之间分布副本，并且不允许打包
-副本通常在群集状况良好的情况下跨域分布，但仍然可能有特定分区的副本最终被暂时打包成单个域的情况。例如，假设群集在 3 个容错域（fd:/0、fd:/1 和 fd:/2）中有 9 个节点，服务有 3 个副本。假设 fd:/1 和 fd:/2 中用于这些副本的节点已关闭。现在，群集资源管理器往往更倾向于使用相同容错域中的其他节点。在这种情况下，假设由于容量问题，这些域中的其他任何节点都无效。如果群集资源管理器要为这些副本生成替代项，则必须在 fd:/0 中选择节点。但是，执行此操作又违反了容错域约束。同时，这也会增加关闭或丢失整个副本集的可能性（如果永久丢失 FD 0 的话）。有关约束和约束优先级的其他一般信息，请参阅[此主题](/documentation/articles/service-fabric-cluster-resource-manager-management-integration/#constraint-priorities)。
+副本通常在群集状况良好的情况下跨域分布，但仍然可能有特定分区的副本最终被暂时打包成单个域的情况。例如，假设群集在 3 个容错域（fd:/0、fd:/1 和 fd:/2）中有 9 个节点，服务有 3 个副本。假设 fd:/1 和 fd:/2 中用于这些副本的节点已关闭。现在，群集资源管理器往往更倾向于使用相同容错域中的其他节点。在这种情况下，假设由于容量问题，这些域中的其他任何节点都无效。如果群集资源管理器要为这些副本生成替代项，则必须在 fd:/0 中选择节点。但是，执行此操作又违反了容错域约束。同时，这也会增加关闭或丢失整个副本集的可能性（如果永久丢失 FD 0 的话）。有关约束和约束优先级的其他一般信息，请参阅[此主题](./service-fabric-cluster-resource-manager-management-integration.md#constraint-priorities)。
 
 如果看到类似于 `The Load Balancer has detected a Constraint Violation for this Replica:fabric:/<some service name> Secondary Partition <some partition ID> is violating the Constraint: FaultDomain` 的运行状况警告，即表示已触发此条件或类似的条件。这种情况很少发生，一旦发生通常也是暂时性的，节点恢复后就会停止。如果节点持续关闭，并且群集资源管理器需要生成替代项，说明正确的容错域中还有其他有效节点。
 
@@ -104,21 +107,21 @@ Powershell：
 
 代码：
 
-
-	ServicePlacementRequireDomainDistributionPolicyDescription distributeDomain = new ServicePlacementRequireDomainDistributionPolicyDescription();
-	serviceDescription.PlacementPolicies.Add(distributeDomain);
-
+```
+ServicePlacementRequireDomainDistributionPolicyDescription distributeDomain = new ServicePlacementRequireDomainDistributionPolicyDescription();
+serviceDescription.PlacementPolicies.Add(distributeDomain);
+```
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("RequiredDomainDistribution")
-
+```
+New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementPolicy @("RequiredDomainDistribution")
+```
 
 现在，是否可针对不跨越地理区域的群集中的服务使用这些配置？ 当然可以！ 但也没有充分的理由。除非实际上正在运行跨越地理区域的群集，否则，应避免所需、无效和首选域配置。强制特定工作负荷在单个机架上运行，或者优先使用本地群集上某些段并没有太大意义。不同的硬件配置应分布在各个域，这些域通过普通放置约束和节点属性进行处理。
 
 ## 后续步骤
-* 若要深入了解可用于配置服务的其他选项，请转到[了解如何配置服务](/documentation/articles/service-fabric-cluster-resource-manager-configure-services/)
+* 若要深入了解可用于配置服务的其他选项，请转到[了解如何配置服务](./service-fabric-cluster-resource-manager-configure-services.md)
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-advanced-placement-rules-placement-policies/cluster-invalid-placement-domain.png
 [Image2]: ./media/service-fabric-cluster-resource-manager-advanced-placement-rules-placement-policies/cluster-required-placement-domain.png

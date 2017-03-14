@@ -1,43 +1,45 @@
-<properties
-    pageTitle="为 Azure 部署创建模板 | Azure"
-    description="使用声明性 JSON 语法描述 Azure Resource Manager 模板的结构和属性。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="19694cb4-d9ed-499a-a2cc-bcfc4922d7f5"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="01/03/2017"
-    wacn.date="03/03/2017"
-    ms.author="tomfitz" />
+---
+title: 为 Azure 部署创建模板 | Azure
+description: 使用声明性 JSON 语法描述 Azure Resource Manager 模板的结构和属性。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
+ms.assetid: 19694cb4-d9ed-499a-a2cc-bcfc4922d7f5
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 01/03/2017
+wacn.date: 03/03/2017
+ms.author: tomfitz
+---
 
 # 创作 Azure 资源管理器模板
 本主题介绍 Azure Resource Manager 模板的结构，演示了模板的不同部分，以及可在相应部分使用的属性。模板中包含可用于为部署构造值的 JSON 和表达式。
 
-若要查看已部署资源的模板，请参阅[从现有资源导出 Azure Resource Manager 模板](/documentation/articles/resource-manager-export-template/)。有关创建模板的指导，请参阅 [Resource Manager Template Walkthrough](/documentation/articles/resource-manager-template-walkthrough/)（Resource Manager 模板演练）。有关创建模板的建议，请参阅 [Best practices for creating Azure Resource Manager templates](/documentation/articles/resource-manager-template-best-practices/)（创建 Azure Resource Manager 模板的最佳实践）。
+若要查看已部署资源的模板，请参阅[从现有资源导出 Azure Resource Manager 模板](./resource-manager-export-template.md)。有关创建模板的指导，请参阅 [Resource Manager Template Walkthrough](./resource-manager-template-walkthrough.md)（Resource Manager 模板演练）。有关创建模板的建议，请参阅 [Best practices for creating Azure Resource Manager templates](./resource-manager-template-best-practices.md)（创建 Azure Resource Manager 模板的最佳实践）。
 
-好的 JSON 编辑器可以简化模板创建任务。有关使用 Visual Studio 处理模板的信息，请参阅 [Creating and deploying Azure resource groups through Visual Studio](/documentation/articles/vs-azure-tools-resource-groups-deployment-projects-create-deploy/)（通过 Visual Studio 创建和部署 Azure 资源组）。有关如何使用 VS Code 的信息，请参阅 [Working with Azure Resource Manager Templates in Visual Studio Code](/documentation/articles/resource-manager-vs-code/)（在 Visual Studio Code 中使用 Azure Resource Manager 模板）。
+好的 JSON 编辑器可以简化模板创建任务。有关使用 Visual Studio 处理模板的信息，请参阅 [Creating and deploying Azure resource groups through Visual Studio](./vs-azure-tools-resource-groups-deployment-projects-create-deploy.md)（通过 Visual Studio 创建和部署 Azure 资源组）。有关如何使用 VS Code 的信息，请参阅 [Working with Azure Resource Manager Templates in Visual Studio Code](./resource-manager-vs-code.md)（在 Visual Studio Code 中使用 Azure Resource Manager 模板）。
 
 将模板大小限制为 1 MB 以内，每个参数文件大小限制为 64 KB 以内。通过迭代资源定义及变量和参数的值扩展模板后，1 MB 的限制适用于模板的最终状态。
 
 ## <a name="template-format"></a> 模板格式
 使用最简单的结构时，模板包含以下元素：
 
-    {
-       "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-       "contentVersion": "",
-       "parameters": {  },
-       "variables": {  },
-       "resources": [  ],
-       "outputs": {  }
-    }
+```
+{
+   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+   "contentVersion": "",
+   "parameters": {  },
+   "variables": {  },
+   "resources": [  ],
+   "outputs": {  }
+}
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -57,13 +59,15 @@
 
 以下示例演示如何在构造值时使用一些函数：
 
-    "variables": {
-       "location": "[resourceGroup().location]",
-       "usernameAndPassword": "[concat(parameters('username'), ':', parameters('password'))]",
-       "authorizationHeader": "[concat('Basic ', base64(variables('usernameAndPassword')))]"
-    }
+```
+"variables": {
+   "location": "[resourceGroup().location]",
+   "usernameAndPassword": "[concat(parameters('username'), ':', parameters('password'))]",
+   "authorizationHeader": "[concat('Basic ', base64(variables('usernameAndPassword')))]"
+}
+```
 
-有关模板函数的完整列表，请参阅 [Azure 资源管理器模板函数](/documentation/articles/resource-group-template-functions/)。
+有关模板函数的完整列表，请参阅 [Azure 资源管理器模板函数](./resource-group-template-functions.md)。
 
 ## <a name="parameters"></a> Parameters
 在模板的 parameters 节中，你可以指定在部署资源时能够输入的值。提供针对特定环境（例如开发、测试和生产环境）定制的参数值可以自定义部署。无需在模板中提供参数，但如果没有参数，模板始终部署具有相同名称、位置和属性的相同资源。
@@ -72,20 +76,22 @@
 
 使用以下结构定义参数：
 
-    "parameters": {
-       "<parameter-name>" : {
-         "type" : "<type-of-parameter-value>",
-         "defaultValue": "<default-value-of-parameter>",
-         "allowedValues": [ "<array-of-allowed-values>" ],
-         "minValue": <minimum-value-for-int>,
-         "maxValue": <maximum-value-for-int>,
-         "minLength": <minimum-length-for-string-or-array>,
-         "maxLength": <maximum-length-for-string-or-array-parameters>,
-         "metadata": {
-             "description": "<description-of-the parameter>" 
-         }
-       }
-    }
+```
+"parameters": {
+   "<parameter-name>" : {
+     "type" : "<type-of-parameter-value>",
+     "defaultValue": "<default-value-of-parameter>",
+     "allowedValues": [ "<array-of-allowed-values>" ],
+     "minValue": <minimum-value-for-int>,
+     "maxValue": <maximum-value-for-int>,
+     "minLength": <minimum-length-for-string-or-array>,
+     "maxLength": <maximum-length-for-string-or-array-parameters>,
+     "metadata": {
+         "description": "<description-of-the parameter>" 
+     }
+   }
+}
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -113,7 +119,7 @@
 
 如果在模板中指定的参数名称与部署模板时所用命令中的参数匹配，则可能会对提供的值造成混淆。Resource Manager 解决此混淆问题的方式是将后缀 **FromTemplate** 添加到模板参数。例如，如果在模板中包括名为 **ResourceGroupName** 的参数，则该参数会与 [New-AzureRmResourceGroupDeployment][deployment2cmdlet] cmdlet 中的 **ResourceGroupName** 参数冲突。在部署期间，系统会提示用户提供 **ResourceGroupNameFromTemplate** 的值。通常，不应将参数命名为与用于部署操作的参数的名称相同以避免这种混乱。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 所有密码、密钥和其他机密信息应使用 **secureString** 类型。若要将敏感数据传入 JSON 对象，请使用 **secureObject** 类型。部署资源后，无法读取 secureString 或 secureObject 类型的模板参数。
 ><p> 
 > 例如，部署历史记录中的以下条目将显示字符串和对象的值，但不会显示 secureString 和 secureObject 的值。
@@ -123,113 +129,123 @@
 
 以下示例演示如何定义参数：
 
-    "parameters": {
-      "siteName": {
-        "type": "string",
-        "defaultValue": "[concat('site', uniqueString(resourceGroup().id))]"
-      },
-      "hostingPlanName": {
-        "type": "string",
-        "defaultValue": "[concat(parameters('siteName'),'-plan')]"
-      },
-      "skuName": {
-        "type": "string",
-        "defaultValue": "F1",
-        "allowedValues": [
-          "F1",
-          "D1",
-          "B1",
-          "B2",
-          "B3",
-          "S1",
-          "S2",
-          "S3",
-          "P1",
-          "P2",
-          "P3",
-          "P4"
-        ]
-      },
-      "skuCapacity": {
-        "type": "int",
-        "defaultValue": 1,
-        "minValue": 1
-      }
-    }
+```
+"parameters": {
+  "siteName": {
+    "type": "string",
+    "defaultValue": "[concat('site', uniqueString(resourceGroup().id))]"
+  },
+  "hostingPlanName": {
+    "type": "string",
+    "defaultValue": "[concat(parameters('siteName'),'-plan')]"
+  },
+  "skuName": {
+    "type": "string",
+    "defaultValue": "F1",
+    "allowedValues": [
+      "F1",
+      "D1",
+      "B1",
+      "B2",
+      "B3",
+      "S1",
+      "S2",
+      "S3",
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+    ]
+  },
+  "skuCapacity": {
+    "type": "int",
+    "defaultValue": 1,
+    "minValue": 1
+  }
+}
+```
 
-若要了解如何在部署过程中输入参数值，请参阅 [Deploy an application with Azure Resource Manager template](/documentation/articles/resource-group-template-deploy/)（使用 Azure Resource Manager 模板部署应用程序）。
+若要了解如何在部署过程中输入参数值，请参阅 [Deploy an application with Azure Resource Manager template](./resource-group-template-deploy.md)（使用 Azure Resource Manager 模板部署应用程序）。
 
 ## <a name="variables"></a> 变量
 在 variables 节中构造可在整个模板中使用的值。通常，变量基于通过参数提供的值。不需要定义变量，但使用变量可以减少复杂的表达式，从而简化模板。
 
 使用以下结构定义变量：
 
-    "variables": {
-       "<variable-name>": "<variable-value>",
-       "<variable-name>": { 
-           <variable-complex-type-value> 
-       }
-    }
+```
+"variables": {
+   "<variable-name>": "<variable-value>",
+   "<variable-name>": { 
+       <variable-complex-type-value> 
+   }
+}
+```
 
 以下示例演示如何定义从两个参数值构造出的变量：
 
-    "variables": {
-        "connectionString": "[concat('Name=', parameters('username'), ';Password=', parameters('password'))]"
-    }
+```
+"variables": {
+    "connectionString": "[concat('Name=', parameters('username'), ';Password=', parameters('password'))]"
+}
+```
 
 下一个示例演示一个属于复杂的 JSON 类型的变量，以及从其他变量构造出的变量：
 
-    "parameters": {
-       "environmentName": {
-         "type": "string",
-         "allowedValues": [
-           "test",
-           "prod"
-         ]
-       }
-    },
-    "variables": {
-       "environmentSettings": {
-         "test": {
-           "instancesSize": "Small",
-           "instancesCount": 1
-         },
-         "prod": {
-           "instancesSize": "Large",
-           "instancesCount": 4
-         }
-       },
-       "currentEnvironmentSettings": "[variables('environmentSettings')[parameters('environmentName')]]",
-       "instancesSize": "[variables('currentEnvironmentSettings').instancesSize]",
-       "instancesCount": "[variables('currentEnvironmentSettings').instancesCount]"
-    }
+```
+"parameters": {
+   "environmentName": {
+     "type": "string",
+     "allowedValues": [
+       "test",
+       "prod"
+     ]
+   }
+},
+"variables": {
+   "environmentSettings": {
+     "test": {
+       "instancesSize": "Small",
+       "instancesCount": 1
+     },
+     "prod": {
+       "instancesSize": "Large",
+       "instancesCount": 4
+     }
+   },
+   "currentEnvironmentSettings": "[variables('environmentSettings')[parameters('environmentName')]]",
+   "instancesSize": "[variables('currentEnvironmentSettings').instancesSize]",
+   "instancesCount": "[variables('currentEnvironmentSettings').instancesCount]"
+}
+```
 
 ## <a name="resources"></a> 资源
 在 resources 节，可以定义部署或更新的资源。此节可能比较复杂，因为用户必须了解要部署哪些类型才能提供正确的值。
 
 使用以下结构定义资源：
 
-    "resources": [
-       {
-         "apiVersion": "<api-version-of-resource>",
-         "type": "<resource-provider-namespace/resource-type-name>",
-         "name": "<name-of-the-resource>",
-         "location": "<location-of-resource>",
-         "tags": "<name-value-pairs-for-resource-tagging>",
-         "comments": "<your-reference-notes>",
-         "dependsOn": [
-           "<array-of-related-resource-names>"
-         ],
-         "properties": "<settings-for-the-resource>",
-         "copy": {
-           "name": "<name-of-copy-loop>",
-           "count": "<number-of-iterations>"
-         },
-         "resources": [
-           "<array-of-child-resources>"
-         ]
-       }
-    ]
+```
+"resources": [
+   {
+     "apiVersion": "<api-version-of-resource>",
+     "type": "<resource-provider-namespace/resource-type-name>",
+     "name": "<name-of-the-resource>",
+     "location": "<location-of-resource>",
+     "tags": "<name-value-pairs-for-resource-tagging>",
+     "comments": "<your-reference-notes>",
+     "dependsOn": [
+       "<array-of-related-resource-names>"
+     ],
+     "properties": "<settings-for-the-resource>",
+     "copy": {
+       "name": "<name-of-copy-loop>",
+       "count": "<number-of-iterations>"
+     },
+     "resources": [
+       "<array-of-child-resources>"
+     ]
+   }
+]
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -239,133 +255,153 @@
 | location |多种多样 |提供的资源支持的地理位置。可以选择任何可用位置，但通常选取靠近用户的位置。通常还会将彼此交互的资源置于同一区域。大多数资源类型需要一个位置，但某些类型 （如角色分配）不需要位置。 |
 | 标记 |否 |与资源关联的标记。 |
 | 注释 |否 |用于描述模板中资源的注释 |
-| dependsOn |否 |部署此资源之前必须部署的资源。Resource Manager 将评估资源之间的依赖关系，并按正确的顺序部署资源。如果资源不相互依赖，则可并行部署资源。该值可以是资源名称或资源唯一标识符的逗号分隔列表。在此模板中仅部署列出的资源。此模板中未定义的资源必须已存在。避免添加不必要的依赖项，因为这些依赖项可能会降低部署速度并创建循环依赖项。有关设置依赖项的指导，请参阅[在 Azure Resource Manager 模板中定义依赖项](/documentation/articles/resource-group-define-dependencies/)。 |
-| 属性 |否 |特定于资源的配置设置。properties 的值与用户在创建资源时，在 REST API 操作（PUT 方法）的请求正文中提供的值相同。有关资源架构文档或 REST API 的链接，请参阅 [Resource Manager 提供程序、区域、API 版本和架构](/documentation/articles/resource-manager-supported-services/)。 |
-| 复制 |否 |如果需要多个实例，则为要创建的资源数。有关详细信息，请参阅[在 Azure Resource Manager 中创建多个资源实例](/documentation/articles/resource-group-create-multiple/)。 |
+| dependsOn |否 |部署此资源之前必须部署的资源。Resource Manager 将评估资源之间的依赖关系，并按正确的顺序部署资源。如果资源不相互依赖，则可并行部署资源。该值可以是资源名称或资源唯一标识符的逗号分隔列表。在此模板中仅部署列出的资源。此模板中未定义的资源必须已存在。避免添加不必要的依赖项，因为这些依赖项可能会降低部署速度并创建循环依赖项。有关设置依赖项的指导，请参阅[在 Azure Resource Manager 模板中定义依赖项](./resource-group-define-dependencies.md)。 |
+| 属性 |否 |特定于资源的配置设置。properties 的值与用户在创建资源时，在 REST API 操作（PUT 方法）的请求正文中提供的值相同。有关资源架构文档或 REST API 的链接，请参阅 [Resource Manager 提供程序、区域、API 版本和架构](./resource-manager-supported-services.md)。 |
+| 复制 |否 |如果需要多个实例，则为要创建的资源数。有关详细信息，请参阅[在 Azure Resource Manager 中创建多个资源实例](./resource-group-create-multiple.md)。 |
 | 资源 |否 |依赖于所定义的资源的子资源。只能提供父资源的架构允许的资源类型。子资源的完全限定类型包含父资源类型，例如 **Microsoft.Web/sites/extensions**。不隐式表示对父资源的依赖。必须显式定义该依赖关系。 |
 
 了解哪些值可以指定，因为 **apiVersion**、**type** 和 **location** 不会立即显示。幸运的是，可以通过 Azure PowerShell 或 Azure CLI 确定这些值。
 
 若要通过 **PowerShell** 获取所有资源提供程序，请使用：
 
-    Get-AzureRmResourceProvider -ListAvailable
+```
+Get-AzureRmResourceProvider -ListAvailable
+```
 
 从返回的列表中，找到感兴趣的资源提供程序。若要获取资源提供程序（如存储）的资源类型，请使用：
 
-    (Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes
+```
+(Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes
+```
 
 若要获取资源类型（如存储帐户）的 API 版本，请使用：
 
-    ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).ApiVersions
+```
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).ApiVersions
+```
 
 若要获取资源类型支持的位置，请使用：
 
-    ((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).Locations
+```
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage).ResourceTypes | Where-Object ResourceTypeName -eq storageAccounts).Locations
+```
 
 若要通过 **Azure CLI** 获取所有资源提供程序，请使用：
 
-    azure provider list
+```
+azure provider list
+```
 
 从返回的列表中，找到感兴趣的资源提供程序。若要获取资源提供程序（如存储）的资源类型，请使用：
 
-    azure provider show Microsoft.Storage
+```
+azure provider show Microsoft.Storage
+```
 
 若要获取支持的位置和 API 版本，请使用：
 
-    azure provider show Microsoft.Storage --details --json
+```
+azure provider show Microsoft.Storage --details --json
+```
 
-若要详细了解资源提供程序，请参阅 [Resource Manager 提供程序、区域、API 版本和架构](/documentation/articles/resource-manager-supported-services/)。
+若要详细了解资源提供程序，请参阅 [Resource Manager 提供程序、区域、API 版本和架构](./resource-manager-supported-services.md)。
 
 resources 节包含要部署的资源数组。在每个资源内，还可以定义子资源数组。因此，resources 节的结构可能类似于：
 
-    "resources": [
-       {
-           "name": "resourceA",
-       },
-       {
-           "name": "resourceB",
-           "resources": [
-               {
-                   "name": "firstChildResourceB",
-               },
-               {   
-                   "name": "secondChildResourceB",
-               }
-           ]
-       },
-       {
-           "name": "resourceC",
-       }
-    ]
+```
+"resources": [
+   {
+       "name": "resourceA",
+   },
+   {
+       "name": "resourceB",
+       "resources": [
+           {
+               "name": "firstChildResourceB",
+           },
+           {   
+               "name": "secondChildResourceB",
+           }
+       ]
+   },
+   {
+       "name": "resourceC",
+   }
+]
+```
 
 以下示例演示了 **Microsoft.Web/serverfarms** 资源，以及一个包含 **Extensions** 子资源的 **Microsoft.Web/sites** 资源。请注意，站点标记为依赖于服务器场，因为只有该服务器场存在，才能部署该站点。另请注意，**Extensions** 资源是站点的子级。
 
+```
+"resources": [
+  {
+    "apiVersion": "2015-08-01",
+    "name": "[parameters('hostingPlanName')]",
+    "type": "Microsoft.Web/serverfarms",
+    "location": "[resourceGroup().location]",
+    "tags": {
+      "displayName": "HostingPlan"
+    },
+    "sku": {
+      "name": "[parameters('skuName')]",
+      "capacity": "[parameters('skuCapacity')]"
+    },
+    "properties": {
+      "name": "[parameters('hostingPlanName')]",
+      "numberOfWorkers": 1
+    }
+  },
+  {
+    "apiVersion": "2015-08-01",
+    "type": "Microsoft.Web/sites",
+    "name": "[parameters('siteName')]",
+    "location": "[resourceGroup().location]",
+    "tags": {
+      "environment": "test",
+      "team": "Web"
+    },
+    "dependsOn": [
+      "[concat(parameters('hostingPlanName'))]"
+    ],
+    "properties": {
+      "name": "[parameters('siteName')]",
+      "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+    },
     "resources": [
       {
         "apiVersion": "2015-08-01",
-        "name": "[parameters('hostingPlanName')]",
-        "type": "Microsoft.Web/serverfarms",
-        "location": "[resourceGroup().location]",
-        "tags": {
-          "displayName": "HostingPlan"
-        },
-        "sku": {
-          "name": "[parameters('skuName')]",
-          "capacity": "[parameters('skuCapacity')]"
-        },
-        "properties": {
-          "name": "[parameters('hostingPlanName')]",
-          "numberOfWorkers": 1
-        }
-      },
-      {
-        "apiVersion": "2015-08-01",
-        "type": "Microsoft.Web/sites",
-        "name": "[parameters('siteName')]",
-        "location": "[resourceGroup().location]",
-        "tags": {
-          "environment": "test",
-          "team": "Web"
-        },
+        "type": "extensions",
+        "name": "MSDeploy",
         "dependsOn": [
-          "[concat(parameters('hostingPlanName'))]"
+          "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
         ],
         "properties": {
-          "name": "[parameters('siteName')]",
-          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
-        },
-        "resources": [
-          {
-            "apiVersion": "2015-08-01",
-            "type": "extensions",
-            "name": "MSDeploy",
-            "dependsOn": [
-              "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
-            ],
-            "properties": {
-              "packageUri": "https://auxmktplceprod.blob.core.windows.net/packages/StarterSite-modified.zip",
-              "dbType": "None",
-              "connectionString": "",
-              "setParameters": {
-                "Application Path": "[parameters('siteName')]"
-              }
-            }
+          "packageUri": "https://auxmktplceprod.blob.core.windows.net/packages/StarterSite-modified.zip",
+          "dbType": "None",
+          "connectionString": "",
+          "setParameters": {
+            "Application Path": "[parameters('siteName')]"
           }
-        ]
+        }
       }
     ]
+  }
+]
+```
 
 ## Outputs
 在 Outputs 节中，可以指定从部署返回的值。例如，可能会返回用于访问已部署资源的 URI。
 
 以下示例演示了输出定义的结构：
 
-    "outputs": {
-       "<outputName>" : {
-         "type" : "<type-of-output-value>",
-         "value": "<output-value-expression>"
-       }
-    }
+```
+"outputs": {
+   "<outputName>" : {
+     "type" : "<type-of-output-value>",
+     "value": "<output-value-expression>"
+   }
+}
+```
 
 | 元素名称 | 必选 | 说明 |
 |:--- |:--- |:--- |
@@ -375,20 +411,22 @@ resources 节包含要部署的资源数组。在每个资源内，还可以定�
 
 以下示例演示了 Outputs 节中返回的值。
 
-    "outputs": {
-       "siteUri" : {
-         "type" : "string",
-         "value": "[concat('http://',reference(resourceId('Microsoft.Web/sites', parameters('siteName'))).hostNames[0])]"
-       }
-    }
+```
+"outputs": {
+   "siteUri" : {
+     "type" : "string",
+     "value": "[concat('http://',reference(resourceId('Microsoft.Web/sites', parameters('siteName'))).hostNames[0])]"
+   }
+}
+```
 
-有关如何处理输出的详细信息，请参阅 [Sharing state in Azure Resource Manager templates](/documentation/articles/best-practices-resource-manager-state/)（在 Azure Resource Manager 模板中共享状态）。
+有关如何处理输出的详细信息，请参阅 [Sharing state in Azure Resource Manager templates](./best-practices-resource-manager-state.md)（在 Azure Resource Manager 模板中共享状态）。
 
 ## 后续步骤
 * 若要查看许多不同类型的解决方案的完整模型，请参阅 [Azure Quickstart Templates](https://github.com/Azure/azure-quickstart-templates/)（Azure 快速入门模板）。
-* 有关用户可以使用的来自模板中的函数的详细信息，请参阅 [Azure Resource Manager Template Functions](/documentation/articles/resource-group-template-functions/)（Azure Resource Manager 模板函数）。
-* 若要在部署期间合并多个模板，请参阅 [Using linked templates with Azure Resource Manager](/documentation/articles/resource-group-linked-templates/)（将已链接的模板与 Azure Resource Manager 配合使用）。
-* 你可能需要使用不同资源组中的资源。使用跨多个资源组共享的存储帐户或虚拟网络时，此方案很常见。有关详细信息，请参阅 [resourceId 函数](/documentation/articles/resource-group-template-functions/#resourceid)。
+* 有关用户可以使用的来自模板中的函数的详细信息，请参阅 [Azure Resource Manager Template Functions](./resource-group-template-functions.md)（Azure Resource Manager 模板函数）。
+* 若要在部署期间合并多个模板，请参阅 [Using linked templates with Azure Resource Manager](./resource-group-linked-templates.md)（将已链接的模板与 Azure Resource Manager 配合使用）。
+* 你可能需要使用不同资源组中的资源。使用跨多个资源组共享的存储帐户或虚拟网络时，此方案很常见。有关详细信息，请参阅 [resourceId 函数](./resource-group-template-functions.md#resourceid)。
 
 [deployment2cmdlet]: https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.2.0/new-azurermresourcegroupdeployment
 

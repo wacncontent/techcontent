@@ -1,21 +1,22 @@
-<properties
-    pageTitle="技术指南：Azure 中发生局部故障后进行恢复 | Azure"
-    description="本文可帮助你了解和设计有复原能力、高度可用、容错的应用程序，以及针对灾难恢复进行规划，其内容侧重于 Azure 中的局部故障。"
-    services=""
-    documentationcenter="na"
-    author="adamglick"
-    manager="saladki"
-    editor="" />
-<tags
-    ms.assetid="2e50f6c1-fa61-4c7d-ac26-566a142fbfc2"
-    ms.service="resiliency"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="08/18/2016"
-    wacn.date="02/20/2017"
-    ms.author="aglick" />
+---
+title: 技术指南：Azure 中发生局部故障后进行恢复 | Azure
+description: 本文可帮助你了解和设计有复原能力、高度可用、容错的应用程序，以及针对灾难恢复进行规划，其内容侧重于 Azure 中的局部故障。
+services: ''
+documentationcenter: na
+author: adamglick
+manager: saladki
+editor: ''
+
+ms.assetid: 2e50f6c1-fa61-4c7d-ac26-566a142fbfc2
+ms.service: resiliency
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/18/2016
+wacn.date: 02/20/2017
+ms.author: aglick
+---
 
 # Azure 复原技术指南：Azure 中发生局部故障后进行恢复
 
@@ -45,7 +46,7 @@ Azure 云服务由包含一个或多个 Web 角色或辅助角色的集合组成
 
 ### 弹性
 
-为每个角色运行的初始实例数量由每个角色的配置决定。管理员应根据预期负载，将每个角色初始配置为运行两个或多个实例。但是，角色实例数可以随着使用模式的更改轻松扩展或缩减。可以在 Azure 门户预览中手动执行此操作，或者使用 Windows PowerShell、服务管理 API 或第三方工具来自动完成该过程。有关详细信息，请参阅 [如何自动缩放应用程序](/documentation/articles/cloud-services-how-to-scale/)。
+为每个角色运行的初始实例数量由每个角色的配置决定。管理员应根据预期负载，将每个角色初始配置为运行两个或多个实例。但是，角色实例数可以随着使用模式的更改轻松扩展或缩减。可以在 Azure 门户预览中手动执行此操作，或者使用 Windows PowerShell、服务管理 API 或第三方工具来自动完成该过程。有关详细信息，请参阅 [如何自动缩放应用程序](../cloud-services/cloud-services-how-to-scale.md)。
 
 ### 分区
 
@@ -54,7 +55,7 @@ Azure 结构控制器使用两种类型的分区：
 * *更新域*用于按组升级服务的角色实例。Azure 将服务实例部署到多个更新域中。对于就地更新，结构控制器会停止一个更新域中的所有实例，更新这些实例，然后重新启动这些实例，接下来将它们移到下一个更新域中。这种方法能够避免整个服务在更新期间无法使用。
 * *容错域*定义硬件或网络的潜在故障点。对于任何角实例数超过一个的角色，结构控制器会确保这些实例分布在多个容错域上，从而防止孤立的硬件故障中断服务。所有服务器和群集故障风险都由容错域管理。
 
-[Azure 服务级别协议 (SLA)](/support/legal/sla/) 保证在有两个或更多个 Web 角色实例部署到不同的容错域和升级域时，它们将有至少 99.95% 的时间具有外部连接性。与更新域不同的是，没有办法控制容错域的数量。Azure 会自动分配容错域，并将角色实例分布到这些容错域中。至少应将每个角色的前两个实例放在不同的容错域和升级域中，以确保至少有两个实例的任何角色都能满足 SLA。下图对此做了演示。
+[Azure 服务级别协议 (SLA)](https://www.azure.cn/support/legal/sla/) 保证在有两个或更多个 Web 角色实例部署到不同的容错域和升级域时，它们将有至少 99.95% 的时间具有外部连接性。与更新域不同的是，没有办法控制容错域的数量。Azure 会自动分配容错域，并将角色实例分布到这些容错域中。至少应将每个角色的前两个实例放在不同的容错域和升级域中，以确保至少有两个实例的任何角色都能满足 SLA。下图对此做了演示。
 
 ![容错域隔离的简化视图](./media/resiliency-technical-guidance-recovery-local-failures/partitioning-1.png)
 
@@ -82,7 +83,7 @@ Azure 原本就能识别 PaaS 应用程序（Web 角色和辅助角色）中的�
 
 ### 负载均衡
 
-如果应在各 VM 间分布流量，必须将应用程序中的 VM 分组，并对特定的 TCP 或 UDP 终结点进行负载均衡。有关详细信息，请参阅[对虚拟机进行负载均衡](/documentation/articles/load-balancer-overview/)。如果 VM 接收来自其他来源（如排队机制）的输入，则不需要负载均衡器。负载均衡器使用基本运行状况检查来确定是否应将流量发送到节点。你也可以创建自己的探测，实现应用程序特定的运行状况指标，以确定 VM 是否应接收流量。
+如果应在各 VM 间分布流量，必须将应用程序中的 VM 分组，并对特定的 TCP 或 UDP 终结点进行负载均衡。有关详细信息，请参阅[对虚拟机进行负载均衡](../load-balancer/load-balancer-overview.md)。如果 VM 接收来自其他来源（如排队机制）的输入，则不需要负载均衡器。负载均衡器使用基本运行状况检查来确定是否应将流量发送到节点。你也可以创建自己的探测，实现应用程序特定的运行状况指标，以确定 VM 是否应接收流量。
 
 ## 存储
 
@@ -111,8 +112,8 @@ Azure 存储空间数据持久性形成的方式，是在区域内完全独立�
 
 Azure SQL 数据库提供数据库即服务。它使应用程序可以快速预配和查询关系数据库，并在数据库中插入数据。它提供许多熟悉的 SQL Server 特性与功能，同时减少了硬件、配置、修补和复原方面的负担。
 
-> [AZURE.NOTE]
-> Azure SQL 数据库并不提供与 SQL Server 一一对应的功能。其目的在于满足专门适用于云应用程序的一套不同的要求（通过弹性扩展、数据库即服务来降低维护成本等）。有关详细信息，请参阅[选择云 SQL Server 选项：Azure SQL (PaaS) 数据库或 Azure VM 上的 SQL Server (IaaS)](/documentation/articles/sql-database-paas-vs-sql-server-iaas/)。
+> [!NOTE]
+> Azure SQL 数据库并不提供与 SQL Server 一一对应的功能。其目的在于满足专门适用于云应用程序的一套不同的要求（通过弹性扩展、数据库即服务来降低维护成本等）。有关详细信息，请参阅[选择云 SQL Server 选项：Azure SQL (PaaS) 数据库或 Azure VM 上的 SQL Server (IaaS)](../sql-database/sql-database-paas-vs-sql-server-iaas.md)。
 > 
 > 
 
@@ -122,7 +123,7 @@ Azure SQL 数据库对节点级故障提供内置的复原功能。所有写入�
 
 ####资源管理
 
-每个数据库在创建时，都配置了大小上限。当前可用的最大大小为 1 TB（大小限制随服务层而定），请参阅 [Azure SQL 数据库的服务层和性能级别](/documentation/articles/sql-database-resource-limits/#service-tiers-and-performance-levels)。当数据库达到大小限制时，它会拒绝其他 INSERT 或 UPDATE 命令。（仍可查询和删除数据。）
+每个数据库在创建时，都配置了大小上限。当前可用的最大大小为 1 TB（大小限制随服务层而定），请参阅 [Azure SQL 数据库的服务层和性能级别](../sql-database/sql-database-resource-limits.md#service-tiers-and-performance-levels)。当数据库达到大小限制时，它会拒绝其他 INSERT 或 UPDATE 命令。（仍可查询和删除数据。）
 
 在数据库内，Azure SQL 数据库使用结构来管理资源。但是，它不使用结构控制器，而是使用环形拓扑来检测故障。群集中的每个副本都有两个相邻副本，并负责检测这两个副本何时停止。当某个副本停止时，它的相邻副本便会触发重新配置代理，在另一台计算机上重新创建该副本。引擎限制可确保逻辑服务器不会在一台计算机上使用过多资源，或超过计算机的物理限制。
 
@@ -146,17 +147,17 @@ Azure SQL 数据库对节点级故障提供内置的复原功能。所有写入�
 
 可使用 AlwaysOn 可用性组或数据库镜像，为 Azure 中的 SQL Server 数据库提供高可用性解决方案。
 
-下图演示了 Azure 虚拟机中运行的 AlwaysOn 可用性组的体系架构。此图摘自有关本主题的深入文章，即[Azure 虚拟机中的 SQL Server 高可用性和灾难恢复](/documentation/articles/virtual-machines-windows-sql-high-availability-dr/)。
+下图演示了 Azure 虚拟机中运行的 AlwaysOn 可用性组的体系架构。此图摘自有关本主题的深入文章，即[Azure 虚拟机中的 SQL Server 高可用性和灾难恢复](../virtual-machines/virtual-machines-windows-sql-high-availability-dr.md)。
 
 ![Azure 中的 AlwaysOn 可用性组](./media/resiliency-technical-guidance-recovery-local-failures/high_availability_solutions-1.png)
 
 也可以在 Azure 门户中使用 AlwaysOn 模板在 Azure VM 上自动预配 AlwaysOn 可用性组的端到端部署。有关详细信息，请参阅 [SQL Server AlwaysOn Offering in Azure Portal Preview Gallery](https://blogs.technet.microsoft.com/dataplatforminsider/2014/08/25/sql-server-alwayson-offering-in-microsoft-azure-portal-gallery/)（Azure 门户预览库中的 SQL Server AlwaysOn 产品/服务）。
 
-下图演示了在 Azure 虚拟机上使用数据库镜像的情况。该图同样摘自深入主题文章（[Azure 虚拟机中的 SQL Server 高可用性和灾难恢复](/documentation/articles/virtual-machines-windows-sql-high-availability-dr/)）。
+下图演示了在 Azure 虚拟机上使用数据库镜像的情况。该图同样摘自深入主题文章（[Azure 虚拟机中的 SQL Server 高可用性和灾难恢复](../virtual-machines/virtual-machines-windows-sql-high-availability-dr.md)）。
 
 ![Azure 中的数据库镜像](./media/resiliency-technical-guidance-recovery-local-failures/high_availability_solutions-2.png)
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 这两种体系结构都需要域控制器。但是，数据库镜像也可以使用服务器证书，从而不再需要域控制器。
 > 
 > 
@@ -168,11 +169,11 @@ Azure SQL 数据库对节点级故障提供内置的复原功能。所有写入�
 
 ### 服务总线
 
-为了防范 Azure 服务总线的临时中断，请考虑创建一个持久的客户端队列。这会临时使用备用的本地存储机制，来存储无法添加到服务总线队列的消息。应用程序可以在还原服务后再决定如何处理临时存储的消息。有关详细信息，请参阅[使用服务总线中转消息传送改进性能的最佳实践](/documentation/articles/service-bus-performance-improvements/)和[服务总线（灾难恢复）](/documentation/articles/resiliency-technical-guidance-recovery-loss-azure-region/#other-azure-platform-services)。
+为了防范 Azure 服务总线的临时中断，请考虑创建一个持久的客户端队列。这会临时使用备用的本地存储机制，来存储无法添加到服务总线队列的消息。应用程序可以在还原服务后再决定如何处理临时存储的消息。有关详细信息，请参阅[使用服务总线中转消息传送改进性能的最佳实践](../service-bus-messaging/service-bus-performance-improvements.md)和[服务总线（灾难恢复）](./resiliency-technical-guidance-recovery-loss-azure-region.md#other-azure-platform-services)。
 
 ### HDInsight
 
-与 Azure HDInsight 关联的数据默认存储在 Azure Blob 存储中。Azure 存储空间为 Blob 存储指定了高可用性和持久性属性。与 Hadoop MapReduce 作业关联的多节点处理是在 HDInsight 根据需要预配的暂时性 Hadoop 分布式文件系统 (HDFS) 上进行的。MapReduce 作业产生的结果默认也存储在 Azure Blob 存储中，因此在取消 Hadoop 群集的设置后处理过的数据仍具有持久性且仍然高度可用。有关详细信息，请参阅 [HDInsight（灾难恢复）](/documentation/articles/resiliency-technical-guidance-recovery-loss-azure-region/#other-azure-platform-services)。
+与 Azure HDInsight 关联的数据默认存储在 Azure Blob 存储中。Azure 存储空间为 Blob 存储指定了高可用性和持久性属性。与 Hadoop MapReduce 作业关联的多节点处理是在 HDInsight 根据需要预配的暂时性 Hadoop 分布式文件系统 (HDFS) 上进行的。MapReduce 作业产生的结果默认也存储在 Azure Blob 存储中，因此在取消 Hadoop 群集的设置后处理过的数据仍具有持久性且仍然高度可用。有关详细信息，请参阅 [HDInsight（灾难恢复）](./resiliency-technical-guidance-recovery-loss-azure-region.md#other-azure-platform-services)。
 
 ## 局部故障清单
 
@@ -223,7 +224,7 @@ Azure SQL 数据库对节点级故障提供内置的复原功能。所有写入�
 
 ## 后续步骤
 
-本文是着重介绍 [Azure 复原技术指南](/documentation/articles/resiliency-technical-guidance/)的系列教程的一部分。本系列教程的下一篇文章是[Recovery from a region-wide service disruption](/documentation/articles/resiliency-technical-guidance-recovery-loss-azure-region/)（在发生区域范围的服务中断后进行恢复）。
+本文是着重介绍 [Azure 复原技术指南](./resiliency-technical-guidance.md)的系列教程的一部分。本系列教程的下一篇文章是[Recovery from a region-wide service disruption](./resiliency-technical-guidance-recovery-loss-azure-region.md)（在发生区域范围的服务中断后进行恢复）。
 
 <!---HONumber=Mooncake_0213_2017-->
 <!-- Update_Description: update meta properties; wording update-->

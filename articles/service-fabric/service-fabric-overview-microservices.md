@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure 微服务简介 | Azure"
-    description="概述了为何使用微服务方法生成云应用程序对于开发现代应用程序非常重要，以及 Azure Service Fabric 如何提供一个平台来实现此目的。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="msfussell"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="fae2be85-0ab4-4cd3-9d1f-e0d95fe1959b"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="02/06/2017"
-    wacn.date="03/03/2017"
-    ms.author="msfussell" />  
+---
+title: Azure 微服务简介 | Azure
+description: 概述了为何使用微服务方法生成云应用程序对于开发现代应用程序非常重要，以及 Azure Service Fabric 如何提供一个平台来实现此目的。
+services: service-fabric
+documentationcenter: .net
+author: msfussell
+manager: timlt
+editor: ''
 
+ms.assetid: fae2be85-0ab4-4cd3-9d1f-e0d95fe1959b
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 02/06/2017
+wacn.date: 03/03/2017
+ms.author: msfussell
+---
 
 # 为什么通过微服务的方法生成应用程序？
 作为软件开发人员，我们已知道思考如何将应用程序因数分解成组件部分。这是对象导向、软件抽象和组件化的中心模式。现在，这种因数分解往往以共享库和技术层之间的类与接口呈现。通常采用一种分层方法，有后端存储、中间层业务逻辑和前端用户界面 \(UI\)。过去几年来*的*变化是身为开发人员的我们开始为业务驱动的云生成分布式应用程序。
@@ -79,7 +79,6 @@
 
 微服务应用程序是由独立控制版本和可缩放的、以客户为中心的服务组成，这些服务通过标准协议和定义完善的接口彼此通信。
 
-
 我们在上一部分已介绍了前两点，接下来进一步澄清其他各要点。
 
 ### 使用任何编程语言编写并使用任何框架
@@ -94,7 +93,6 @@
 
 #### 应用程序样式之间的状态存储
 ![Service Fabric 平台状态存储][Image2]
-
 
 ***左侧的单一式方法有单一数据库和多层的特定技术。***
 
@@ -137,7 +135,7 @@ Azure 从提供盒装产品（通常是单一式）转换到提供服务后，Az
 Service Fabric 提供两个广泛的领域，帮助用户生成使用微服务方法的应用程序：
 
 * 一个提供系统服务的平台，这些系统服务负责部署、升级、检测和重新启动失败的服务，发现服务位置，管理状态以及监视运行状况。这些系统服务实际上具备上述微服务的许多特性。
-* 编程 API 或框架，帮助您将应用程序构建成微服务：[Reliable Actors 和 Reliable Services](/documentation/articles/service-fabric-choose-framework/)。当然，用户可以选择任何代码来生成微服务。但使用这些 API 不仅可让作业变得更简单，也能更深入地与平台集成。例如，可以通过这种方式获取运行状况和诊断信息，或利用内置的高可用性。
+* 编程 API 或框架，帮助您将应用程序构建成微服务：[Reliable Actors 和 Reliable Services](./service-fabric-choose-framework.md)。当然，用户可以选择任何代码来生成微服务。但使用这些 API 不仅可让作业变得更简单，也能更深入地与平台集成。例如，可以通过这种方式获取运行状况和诊断信息，或利用内置的高可用性。
 
 ***Service Fabric 不限制用户生成服务的方式，允许用户使用任何技术，但提供内置的编程 API，方便用户生成微服务。***
 
@@ -148,9 +146,8 @@ Service Fabric 的目标是将使用微服务方法生成应用程序时的复�
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 ## 后续步骤
 
-* [Service Fabric 术语概述](/documentation/articles/service-fabric-technical-overview/)
+* [Service Fabric 术语概述](./service-fabric-technical-overview.md)
 * [微服务：由云支持的应用程序变革](https://azure.microsoft.com/zh-CN/blog/microservices-an-application-revolution-powered-by-the-cloud/)
-
 
 [Image1]: ./media/service-fabric-overview-microservices/monolithic-vs-micro.png
 [Image2]: ./media/service-fabric-overview-microservices/statemonolithic-vs-micro.png

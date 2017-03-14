@@ -1,34 +1,33 @@
-<properties 
-	pageTitle="对云服务启用远程桌面 (Node.js)" 
-	description="了解如何对托管 Azure Node.js 应用程序的虚拟机进行远程桌面访问。" 
-	services="cloud-services" 
-	documentationCenter="nodejs" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 对云服务启用远程桌面 (Node.js)
+description: 了解如何对托管 Azure Node.js 应用程序的虚拟机进行远程桌面访问。
+services: cloud-services
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: ''
 
-<tags 
-	ms.service="cloud-services" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="nodejs" 
-	ms.topic="article" 
-	ms.date="12/22/2016" 
-	wacn.date="01/25/2017" 
-	ms.author="robmcm"/>
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 01/25/2017
+ms.author: robmcm
+---
 
 # 在 Azure 中启用远程桌面
 
 你可以通过远程桌面访问 Azure 中运行的角色实例的桌面。也可以使用远程桌面连接配置虚拟机，或者排查应用程序问题。
 
-> [AZURE.NOTE] 本文适用于托管为 Azure 云服务的 Node.js 应用程序。
-
+> [!NOTE]
+> 本文适用于托管为 Azure 云服务的 Node.js 应用程序。
 
 ## 先决条件
 
-- 安装和配置 [Azure PowerShell](/documentation/articles/powershell-install-configure/)。
-- 将 Node.js 应用部署到 Azure 云服务。有关详细信息，请参阅[生成 Node.js 应用程序并将其部署到 Azure 云服务](/documentation/articles/cloud-services-nodejs-develop-deploy-app/)。
-
+- 安装和配置 [Azure PowerShell](../powershell-install-configure.md)。
+- 将 Node.js 应用部署到 Azure 云服务。有关详细信息，请参阅[生成 Node.js 应用程序并将其部署到 Azure 云服务](./cloud-services-nodejs-develop-deploy-app.md)。
 
 ## 步骤 1：使用 Azure PowerShell 配置服务以进行远程桌面访问
 
@@ -42,17 +41,21 @@
 
 3. 输入以下 Azure Powershell cmdlet：
 
-		Enable-AzureServiceProjectRemoteDesktop
+    ```
+    Enable-AzureServiceProjectRemoteDesktop
+    ```
 
 4. 在提示符处，输入用户名和密码。
 
-	![enable-azureserviceprojectremotedesktop][enable-rdp]
+    ![enable-azureserviceprojectremotedesktop][enable-rdp]
 
 3.  输入以下 PowerShell cmdlet 以发布更改：
 
-    	Publish-AzureServiceProject
+    ```
+    Publish-AzureServiceProject
+    ```
 
-	![publish-azureserviceproject][publish-project]
+    ![publish-azureserviceproject][publish-project]
 
 ## 步骤 2：连接到角色实例
 
@@ -60,7 +63,7 @@
 
 1.  在 [Azure 经典管理门户]中选择“云服务”，然后选择服务。
 
-	![Azure 经典管理门户][cloud-services]
+    ![Azure 经典管理门户][cloud-services]
 
 2.  单击“实例”，然后单击“生产”或“过渡”查看服务实例。选择一个实例，然后单击页面底部的“连接”。
 
@@ -84,23 +87,25 @@
 
 ## 步骤 3：配置服务以禁用远程桌面访问 
 
-不再需要与云中角色实例的远程桌面连接时，可使用 [Azure PowerShell](/documentation/articles/powershell-install-configure/) 禁用远程桌面访问。
+不再需要与云中角色实例的远程桌面连接时，可使用 [Azure PowerShell](../powershell-install-configure.md) 禁用远程桌面访问。
 
 1.  输入以下 Azure Powershell cmdlet：
 
-    	Disable-AzureServiceProjectRemoteDesktop
+    ```
+    Disable-AzureServiceProjectRemoteDesktop
+    ```
 
 2.  输入以下 PowerShell cmdlet 以发布更改：
 
-    	Publish-AzureServiceProject
+    ```
+    Publish-AzureServiceProject
+    ```
 
 ## 其他资源
 
 - [远程访问 Azure 中的角色实例] 
 - [将远程桌面与 Azure 角色一起使用]
 - [Node.js 开发人员中心](/develop/nodejs/)
-
-
 
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 [publish-project]: ./media/cloud-services-nodejs-enable-remote-desktop/publish-rdp.png
@@ -111,10 +116,9 @@
 [5]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-12.png
 [6]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-13.png
 [7]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-14.png
-  
+
 [远程访问 Azure 中的角色实例]: http://msdn.microsoft.com/zh-cn/library/windowsazure/hh124107.aspx
 [将远程桌面与 Azure 角色一起使用]: http://msdn.microsoft.com/zh-cn/library/windowsazure/gg443832.aspx
- 
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->
 <!--Update_Description:update meta properties-->

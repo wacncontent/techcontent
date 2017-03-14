@@ -1,23 +1,23 @@
-<properties
-    pageTitle="使用 JavaScript API 与报表进行交互 | Azure"
-    description="Power BI Embedded, 使用 JavaScript API 与报表进行交互"
-    services="power-bi-embedded"
-    documentationcenter=""
-    author="guyinacube"
-    manager="erikre"
-    editor=""
-    tags="" />
-<tags
-    ms.assetid="bdd885d3-1b00-4dcf-bdff-531eb1f97bfb"
-    ms.service="power-bi-embedded"
-    ms.devlang="NA"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="powerbi"
-    ms.date="01/06/2017"
-    wacn.date="02/22/2017"
-    ms.author="asaxton" />  
+---
+title: 使用 JavaScript API 与报表进行交互 | Azure
+description: Power BI Embedded, 使用 JavaScript API 与报表进行交互
+services: power-bi-embedded
+documentationcenter: ''
+author: guyinacube
+manager: erikre
+editor: ''
+tags: ''
 
+ms.assetid: bdd885d3-1b00-4dcf-bdff-531eb1f97bfb
+ms.service: power-bi-embedded
+ms.devlang: NA
+ms.topic: hero-article
+ms.tgt_pltfrm: NA
+ms.workload: powerbi
+ms.date: 01/06/2017
+wacn.date: 02/22/2017
+ms.author: asaxton
+---
 
 # 使用 JavaScript API 与 Power BI 报表进行交互
 Power BI JavaScript API 可以轻松将 Power BI 报表嵌入到应用程序中。使用此 API，应用程序能够以编程方式与各种报表元素（例如页面和筛选器）进行交互。这种交互这种交互性使 Power BI 报表与应用程序的集成更紧密。
@@ -26,11 +26,9 @@ Power BI JavaScript API 可以轻松将 Power BI 报表嵌入到应用程序中�
 
 ![不带 Javascript API 的 Power BI embedded iframe](./media/powerbi-embedded-interact-with-reports/powerbi-embedded-interact-report-1.png)  
 
-
 iframe 使嵌入过程变得更容易，但是如果没有 JavaScript API，报表和应用程序相互之间将无法进行交互。较少交互可能会让人感觉报表没有真正成为应用程序的一部分。报表和应用程序之间实际上需要相互通信，如下图中所示。
 
 ![带 Javascript API 的 Power BI embedded iframe](./media/powerbi-embedded-interact-with-reports/powerbi-embedded-interact-report-2.png)  
-
 
 使用 Power BI JavaScript API，可以编写能够安全地通过 iframe 边界的代码。这使得应用程序能够以编程方式在报表中执行操作，侦听由于用户在报表中执行操作而发生的事件。
 
@@ -38,8 +36,6 @@ iframe 使嵌入过程变得更容易，但是如果没有 JavaScript API，报�
 使用此 JavaScript API 可以管理报表、导航到报表中的页面、筛选报表以及处理嵌入的事件。下图显示了此 API 的结构。
 
 ![Power BI JavaScript API 图示](./media/powerbi-embedded-interact-with-reports/powerbi-embedded-interact-report-3.png)  
-
-
 
 ### 管理报表
 使用此 Javascript API 可以管理在报表和页面级别发生的行为：
@@ -53,7 +49,6 @@ iframe 使嵌入过程变得更容易，但是如果没有 JavaScript API，报�
 
 [了解有关嵌入报表的详细信息](https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embedding-Basics)
 
-
 ### 导航到报表中的页面
 可以使用此 JavaScript API 发现报表中的所有页面以及设置当前页面。请尝试[导航演示应用程序](http://azure-samples.github.io/powerbi-angular-client/#/scenario3)。
 
@@ -62,20 +57,20 @@ iframe 使嵌入过程变得更容易，但是如果没有 JavaScript API，报�
 ### 筛选报表
 此 JavaScript API 针对嵌入的报表和报表页面提供了基本和高级筛选功能。请尝试[筛选演示应用程序](http://azure-samples.github.io/powerbi-angular-client/#/scenario4)，并查看此处的一些入门代码。
 
-
 #### 基本筛选器
 基本筛选器置于列或层次结构级别，包含要包括或排除的值的列表。
 
-	const basicFilter: pbi.models.IBasicFilter = {
-	  $schema: "http://powerbi.com/product/schema#basic",
-	  target: {
-	    table: "Store",
-	    column: "Count"
-	  },
-	  operator: "In",
-	  values: [1,2,3,4]
-	}
-
+```
+const basicFilter: pbi.models.IBasicFilter = {
+  $schema: "http://powerbi.com/product/schema#basic",
+  target: {
+    table: "Store",
+    column: "Count"
+  },
+  operator: "In",
+  values: [1,2,3,4]
+}
+```
 
 #### 高级筛选器
 高级筛选器使用逻辑运算符 AND 或 OR，接受一个或两个条件，每个条件都有其自己的运算符和值。支持的条件有：
@@ -94,25 +89,26 @@ iframe 使嵌入过程变得更容易，但是如果没有 JavaScript API，报�
 - IsBlank
 - IsNotBlank
 
-
-		const advancedFilter: pbi.models.IAdvancedFilter = {
-		  $schema: "http://powerbi.com/product/schema#advanced",
-		  target: {
-		    table: "Store",
-		    column: "Name"
-		  },
-		  logicalOperator: "Or",
-		  conditions: [
-		    {
-		      operator: "Contains",
-		      value: "Wash"
-		    },
-		    {
-		      operator: "Contains",
-		      value: "Park"
-		    }
-		  ]
-		}
+    ```
+    const advancedFilter: pbi.models.IAdvancedFilter = {
+      $schema: "http://powerbi.com/product/schema#advanced",
+      target: {
+        table: "Store",
+        column: "Name"
+      },
+      logicalOperator: "Or",
+      conditions: [
+        {
+          operator: "Contains",
+          value: "Wash"
+        },
+        {
+          operator: "Contains",
+          value: "Park"
+        }
+      ]
+    }
+    ```
 
 [了解有关筛选的详细信息](https://github.com/Microsoft/PowerBI-JavaScript/wiki/Filters)
 

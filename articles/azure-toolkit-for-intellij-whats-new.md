@@ -1,27 +1,29 @@
-<properties
-    pageTitle="适用于 IntelliJ 的 Azure 工具包的新增功能 | Azure"
-    description="了解 Azure Toolkit for IntelliJ 中的最新功能。"
-    services=""
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="46ed791f-df59-416a-809e-f52345ad973c"
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/22/2016"
-    wacn.date="02/14/2017"
-    ms.author="robmcm;asirveda;martinsawicki" />
+---
+title: 适用于 IntelliJ 的 Azure 工具包的新增功能 | Azure
+description: 了解 Azure Toolkit for IntelliJ 中的最新功能。
+services: ''
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: ''
+
+ms.assetid: 46ed791f-df59-416a-809e-f52345ad973c
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/22/2016
+wacn.date: 02/14/2017
+ms.author: robmcm;asirveda;martinsawicki
+---
 
 # Azure Toolkit for IntelliJ 中的新增功能
 ## Azure Toolkit for IntelliJ 版本
 本文包含有关 Azure Toolkit for IntelliJ 的不同版本和最新更新的信息。
 
-> [AZURE.NOTE] 另外还有 Azure Toolkit for Eclipse IDE。有关详细信息，请参阅 [Azure Toolkit for Eclipse]。
+> [!NOTE]
+> 另外还有 Azure Toolkit for Eclipse IDE。有关详细信息，请参阅 [Azure Toolkit for Eclipse]。
 
 ### 2016 年 8 月 26 日
 用于 IntelliJ 的 Azure 工具包 - 2016 年 8 月版包含以下增强功能：
@@ -65,14 +67,13 @@ Azure Toolkit for IntelliJ - 2016 年 4 月版包含以下增强功能：
 
 <!-- URL List -->
 
-
-[Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse/
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[安装 Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij-installation/
-[Azure Toolkit for Eclipse 的新增功能]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
-[What's New in the Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij-whats-new/
+[Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse.md
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij.md
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[安装 Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij-installation.md
+[Azure Toolkit for Eclipse 的新增功能]: ./azure-toolkit-for-eclipse-whats-new.md
+[What's New in the Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij-whats-new.md
 
 [Azure Java 开发人员中心]: /develop/java/
 

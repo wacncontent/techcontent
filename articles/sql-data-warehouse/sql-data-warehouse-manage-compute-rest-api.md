@@ -1,33 +1,30 @@
-<properties
-   pageTitle="管理 Azure SQL 数据仓库中的计算能力 (REST) | Azure"
-   description="用于管理计算能力的 PowerShell 任务。通过调整 DWU 缩放计算资源。或者，暂停和恢复计算资源来节省成本。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 管理 Azure SQL 数据仓库中的计算能力 (REST) | Azure
+description: 用于管理计算能力的 PowerShell 任务。通过调整 DWU 缩放计算资源。或者，暂停和恢复计算资源来节省成本。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: ''
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="barbkess;sonyama"/>
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: barbkess;sonyama
+---
 
 # 管理 Azure SQL 数据仓库中的计算能力 (REST)
 
-> [AZURE.SELECTOR]
-- [概述](/documentation/articles/sql-data-warehouse-manage-compute-overview/)
-- [Azure 门户预览](/documentation/articles/sql-data-warehouse-manage-compute-portal/)
-- [PowerShell](/documentation/articles/sql-data-warehouse-manage-compute-powershell/)
-- [REST](/documentation/articles/sql-data-warehouse-manage-compute-rest-api/)
-- [TSQL](/documentation/articles/sql-data-warehouse-manage-compute-tsql/)
-
+> [!div class="op_single_selector"]
+- [概述](./sql-data-warehouse-manage-compute-overview.md)
+- [Azure 门户预览](./sql-data-warehouse-manage-compute-portal.md)
+- [PowerShell](./sql-data-warehouse-manage-compute-powershell.md)
+- [REST](./sql-data-warehouse-manage-compute-rest-api.md)
+- [TSQL](./sql-data-warehouse-manage-compute-tsql.md)
 
 通过扩大计算资源和内存来提升性能，从而满足工作负荷不断变化的需求。通过在非高峰时段缩减资源或同时暂停计算来节省成本。
 
@@ -44,7 +41,7 @@
 
 ## 缩放计算能力
 
-[AZURE.INCLUDE [SQL Data Warehouse scale DWUs description（SQL 数据仓库缩放 DWU 说明）](../../includes/sql-data-warehouse-scale-dwus-description.md)]
+[!INCLUDE [SQL Data Warehouse scale DWUs description（SQL 数据仓库缩放 DWU 说明）](../../includes/sql-data-warehouse-scale-dwus-description.md)]
 
 若要更改 DWU，请使用[创建或更新数据库][] REST API。以下示例将托管在服务器 MyServer 上的数据库 MySQLDW 的服务级别目标设置为 DW1000。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
@@ -63,7 +60,7 @@ Content-Type: application/json; charset=UTF-8
 
 ## 暂停计算
 
-[AZURE.INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description.md)]
+[!INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description.md)]
 
 若要暂停数据库，请使用[暂停数据库][] REST API。以下示例将暂停 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
@@ -75,7 +72,7 @@ POST https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourc
 
 ## 恢复计算
 
-[AZURE.INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description.md)]
+[!INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description.md)]
 
 若要启动数据库，请使用[恢复数据库][] REST API。以下示例将启动 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
@@ -92,8 +89,8 @@ POST https://management.chinacloudapi.cn/subscriptions{subscription-id}/resource
 <!--Image references-->
 
 <!--Article references-->
-[管理概述]: /documentation/articles/sql-data-warehouse-overview-manage/
-[管理计算概述]: /documentation/articles/sql-data-warehouse-manage-compute-overview/
+[管理概述]: ./sql-data-warehouse-overview-manage.md
+[管理计算概述]: ./sql-data-warehouse-manage-compute-overview.md
 
 <!--MSDN references-->
 [暂停数据库]: https://msdn.microsoft.com/zh-cn/library/azure/mt718817.aspx

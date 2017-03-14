@@ -1,40 +1,40 @@
-<properties
-    pageTitle="Azure Active Directory v2.0 令牌参考 | Azure"
-    description="Azure AD v2.0 终结点发出的令牌和声明类型"
-    services="active-directory"
-    documentationcenter=""
-    author="dstrockis"
-    manager="mbaldwin"
-    editor="" />
-<tags
-    ms.assetid="dc58c282-9684-4b38-b151-f3e079f034fd"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/07/2017"
-    wacn.date="02/13/2017"
-    ms.author="dastrock" />  
+---
+title: Azure Active Directory v2.0 令牌参考 | Azure
+description: Azure AD v2.0 终结点发出的令牌和声明类型
+services: active-directory
+documentationcenter: ''
+author: dstrockis
+manager: mbaldwin
+editor: ''
 
+ms.assetid: dc58c282-9684-4b38-b151-f3e079f034fd
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/07/2017
+wacn.date: 02/13/2017
+ms.author: dastrock
+---
 
 # Azure Active Directory v2.0 令牌参考
-Azure Active Directory (Azure AD) v2.0 终结点在每个[身份验证流](/documentation/articles/active-directory-v2-flows/)中发出多种安全令牌。本参考文档介绍每种令牌的格式、安全特征和内容。
+Azure Active Directory (Azure AD) v2.0 终结点在每个[身份验证流](./active-directory-v2-flows.md)中发出多种安全令牌。本参考文档介绍每种令牌的格式、安全特征和内容。
 
-> [AZURE.NOTE]
-v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](/documentation/articles/active-directory-v2-limitations/)。
+> [!NOTE]
+v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 >
 >
 
 ## 令牌类型  <a name="types-of-tokens"></a>
-v2.0 终结点支持 [OAuth 2.0 授权协议](/documentation/articles/active-directory-v2-protocols/)，该协议使用访问令牌和刷新令牌。v2.0 终结点还支持通过[OpenID Connect](/documentation/articles/active-directory-v2-protocols/) 进行身份验证和登录。OpenID Connect 引入了第三种类型的令牌：ID 令牌。其中每种令牌都表示为*持有者*令牌。
+v2.0 终结点支持 [OAuth 2.0 授权协议](./active-directory-v2-protocols.md)，该协议使用访问令牌和刷新令牌。v2.0 终结点还支持通过[OpenID Connect](./active-directory-v2-protocols.md) 进行身份验证和登录。OpenID Connect 引入了第三种类型的令牌：ID 令牌。其中每种令牌都表示为*持有者*令牌。
 
 持有者令牌是一种轻型安全令牌，可授予对受保护资源的持有者访问权限。持有者是可以提供令牌的任何一方。尽管某一方必须通过 Azure AD 的身份验证才能收到持有者令牌，但如果不采取措施在传输和存储过程中对令牌进行保护，令牌可能会被意外的某一方拦截并使用。某些安全令牌具有防止未授权方使用令牌的内置机制，但持有者令牌并不具有这种机制。持有者令牌必须在安全通道（例如传输层安全性 (HTTPS)）中传输。如果传输持有者令牌时不采取这种安全措施，则恶意方可能会利用“中间人攻击”来获取令牌，并使用它对受保护的资源进行未经授权的访问。当存储或缓存持有者令牌供以后使用时，也应遵循同样的安全原则。请始终确保应用以安全的方式传输和存储持有者令牌。有关持有者令牌的更多安全注意事项，请参阅 [RFC 6750 第 5 部分](http://tools.ietf.org/html/rfc6750)。
 
 v2.0 终结点颁发的许多令牌都以 JSON Web 令牌 (JWT) 的方式实现。JWT 是一种精简的 URL 安全方法，可在两方之间传输信息。JWT 中的信息称为*声明*。这些信息是有关令牌持有者和主题的断言信息。JWT 中的声明是为了传输而编码和序列化的 JavaScript 对象表示法 (JSON) 对象。由于 v2.0 终结点所颁发的 JWT 已签名但未加密，因此可以轻松地检查 JWT 的内容以便调试。有关 JWT 的详细信息，请参阅 [JWT 规范](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html)。
 
 ### ID 令牌 <a name="id_tokens"></a>
-ID 令牌是应用使用 [OpenID Connect](/documentation/articles/active-directory-v2-protocols/) 执行身份验证时收到的一种登录安全令牌形式。ID 令牌以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以多种方式使用 ID 令牌中的声明。通常情况下，管理员使用 ID 令牌显示帐户信息或者在应用中做出访问控制决策。v2.0 终结点只颁发一种类型的 ID 令牌，无论登录的用户类型，都具有一组一致的声明。个人 Microsoft 帐户用户的 ID 令牌格式和内容与工作或学校帐户相同。
+ID 令牌是应用使用 [OpenID Connect](./active-directory-v2-protocols.md) 执行身份验证时收到的一种登录安全令牌形式。ID 令牌以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以多种方式使用 ID 令牌中的声明。通常情况下，管理员使用 ID 令牌显示帐户信息或者在应用中做出访问控制决策。v2.0 终结点只颁发一种类型的 ID 令牌，无论登录的用户类型，都具有一组一致的声明。个人 Microsoft 帐户用户的 ID 令牌格式和内容与工作或学校帐户相同。
 
 目前，ID 令牌已签名但未加密。应用收到 ID 令牌时，必须[验证签名](#validating-tokens)以证明令牌的真实性，并验证令牌中的几个声明来证明其有效性。应用验证的声明根据方案要求而有所不同，但在每种情况下，应用都必须执行一些[常见声明验证](#validating-tokens)。
 
@@ -42,10 +42,11 @@ ID 令牌是应用使用 [OpenID Connect](/documentation/articles/active-directo
 
 #### 示例 ID 令牌
 
-	eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiI2NzMxZGU3Ni0xNGE2LTQ5YWUtOTdiYy02ZWJhNjkxNDM5MWUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYjk0MTk4MTgtMDlhZi00OWMyLWIwYzMtNjUzYWRjMWYzNzZlL3YyLjAiLCJpYXQiOjE0NTIyODUzMzEsIm5iZiI6MTQ1MjI4NTMzMSwiZXhwIjoxNDUyMjg5MjMxLCJuYW1lIjoiQmFiZSBSdXRoIiwibm9uY2UiOiIxMjM0NSIsIm9pZCI6ImExZGJkZGU4LWU0ZjktNDU3MS1hZDkzLTMwNTllMzc1MGQyMyIsInByZWZlcnJlZF91c2VybmFtZSI6InRoZWdyZWF0YmFtYmlub0BueXkub25taWNyb3NvZnQuY29tIiwic3ViIjoiTUY0Zi1nZ1dNRWppMTJLeW5KVU5RWnBoYVVUdkxjUXVnNWpkRjJubDAxUSIsInRpZCI6ImI5NDE5ODE4LTA5YWYtNDljMi1iMGMzLTY1M2FkYzFmMzc2ZSIsInZlciI6IjIuMCJ9.p_rYdrtJ1oCmgDBggNHB9O38KTnLCMGbMDODdirdmZbmJcTHiZDdtTc-hguu3krhbtOsoYM2HJeZM3Wsbp_YcfSKDY--X_NobMNsxbT7bqZHxDnA2jTMyrmt5v2EKUnEeVtSiJXyO3JWUq9R0dO-m4o9_8jGP6zHtR62zLaotTBYHmgeKpZgTFB9WtUq8DVdyMn_HSvQEfz-LWqckbcTwM_9RNKoGRVk38KChVJo4z5LkksYRarDo8QgQ7xEKmYmPvRr_I7gvM2bmlZQds2OeqWLB1NSNbFZqyFOCgYn3bAQ-nEQSKwBaA36jYGPOVG2r2Qv1uKcpSOxzxaQybzYpQ
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiI2NzMxZGU3Ni0xNGE2LTQ5YWUtOTdiYy02ZWJhNjkxNDM5MWUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYjk0MTk4MTgtMDlhZi00OWMyLWIwYzMtNjUzYWRjMWYzNzZlL3YyLjAiLCJpYXQiOjE0NTIyODUzMzEsIm5iZiI6MTQ1MjI4NTMzMSwiZXhwIjoxNDUyMjg5MjMxLCJuYW1lIjoiQmFiZSBSdXRoIiwibm9uY2UiOiIxMjM0NSIsIm9pZCI6ImExZGJkZGU4LWU0ZjktNDU3MS1hZDkzLTMwNTllMzc1MGQyMyIsInByZWZlcnJlZF91c2VybmFtZSI6InRoZWdyZWF0YmFtYmlub0BueXkub25taWNyb3NvZnQuY29tIiwic3ViIjoiTUY0Zi1nZ1dNRWppMTJLeW5KVU5RWnBoYVVUdkxjUXVnNWpkRjJubDAxUSIsInRpZCI6ImI5NDE5ODE4LTA5YWYtNDljMi1iMGMzLTY1M2FkYzFmMzc2ZSIsInZlciI6IjIuMCJ9.p_rYdrtJ1oCmgDBggNHB9O38KTnLCMGbMDODdirdmZbmJcTHiZDdtTc-hguu3krhbtOsoYM2HJeZM3Wsbp_YcfSKDY--X_NobMNsxbT7bqZHxDnA2jTMyrmt5v2EKUnEeVtSiJXyO3JWUq9R0dO-m4o9_8jGP6zHtR62zLaotTBYHmgeKpZgTFB9WtUq8DVdyMn_HSvQEfz-LWqckbcTwM_9RNKoGRVk38KChVJo4z5LkksYRarDo8QgQ7xEKmYmPvRr_I7gvM2bmlZQds2OeqWLB1NSNbFZqyFOCgYn3bAQ-nEQSKwBaA36jYGPOVG2r2Qv1uKcpSOxzxaQybzYpQ
+```
 
-
-> [AZURE.TIP]
+> [!TIP]
 练习时，若要检查示例 ID 令牌中的声明，请将示例 ID 令牌粘贴到 [calebb.net](http://calebb.net/) 中。
 >
 >
@@ -81,7 +82,7 @@ ID 令牌是应用使用 [OpenID Connect](/documentation/articles/active-directo
 
 刷新令牌属于多资源令牌。在一个资源的令牌请求期间收到的刷新令牌可以兑换完全不同资源的访问令牌。
 
-为了在令牌响应中接收刷新令牌，应用必须请求并获得 `offline_acesss` 范围。若要了解有关 `offline_access` 范围的详细信息，请参阅有关[许可和范围](/documentation/articles/active-directory-v2-scopes/)的文章。
+为了在令牌响应中接收刷新令牌，应用必须请求并获得 `offline_acesss` 范围。若要了解有关 `offline_access` 范围的详细信息，请参阅有关[许可和范围](./active-directory-v2-scopes.md)的文章。
 
 刷新令牌始终对应用完全不透明。它们由 Azure AD v2.0 终结点颁发，只能由 v2.0 终结点检查和解释。它们属于长效令牌，但不应将应用编写成预期刷新令牌将持续任何一段时间。刷新令牌可能出于各种原因而随时失效。让应用知道刷新令牌是否有效的唯一方式就是对 v2.0 终结点发出令牌请求以尝试兑换。
 
@@ -99,12 +100,13 @@ JWT 包含三个段（以 `.` 字符分隔）。第一个段称为*标头*，第
 
 ID 令牌使用行业标准非对称式加密算法（例如 RSA 256）进行签名。ID 令牌标头包含用于签名令牌的密钥和加密方法的相关信息。例如：
 
-	{
-	  "typ": "JWT",
-	  "alg": "RS256",
-	  "kid": "MnC_VZcATfM5pOYiJHMba9goEKY"
-	}
-
+```
+{
+  "typ": "JWT",
+  "alg": "RS256",
+  "kid": "MnC_VZcATfM5pOYiJHMba9goEKY"
+}
+```
 
 `alg` 声明指示用来为令牌签名的算法。`kid` 声明指示用来为牌签名的公钥。
 
@@ -112,11 +114,11 @@ v2.0 终结点随时都可以使用任何一组特定的公钥-私钥对来为 I
 
 可以使用位于以下位置的 OpenID Connect 元数据文档来获取验证签名所需的签名密钥数据：
 
+```
+https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
+```
 
-	https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
-
-
-> [AZURE.TIP]
+> [!TIP]
 请在浏览器中尝试打开此 URL！
 >
 >

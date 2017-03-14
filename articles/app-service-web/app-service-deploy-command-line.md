@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用命令行工具自动执行 Azure 应用部署 | Azure"
-    description="发现如何从命令行部署 Azure 应用的信息"
-    services="app-service"
-    documentationcenter=""
-    author="cephalin"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="8b65980c-eb75-44a2-8e0f-f9eb9e617d16"
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/05/2017"
-    wacn.date="02/10/2017"
-    ms.author="cephalin" />  
+---
+title: 使用命令行工具自动执行 Azure 应用部署 | Azure
+description: 发现如何从命令行部署 Azure 应用的信息
+services: app-service
+documentationcenter: ''
+author: cephalin
+manager: erikre
+editor: ''
 
+ms.assetid: 8b65980c-eb75-44a2-8e0f-f9eb9e617d16
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/05/2017
+wacn.date: 02/10/2017
+ms.author: cephalin
+---
 
 # 使用命令行工具自动执行 Azure 应用部署
 可以使用命令行工具自动执行 Azure 应用部署。本文列出了可用工具以及说明如何在部署工作流中使用它们的有用链接。
@@ -34,9 +34,9 @@
 
 有关详细信息，请参阅以下资源：
 
-* [部署链接到 GitHub 存储库的 Web 应用](/documentation/articles/app-service-web-arm-from-github-provision/)
-* [设置使用 SQL 数据库的 Web 应用](/documentation/articles/app-service-web-arm-with-sql-database-provision/)
-* [按可预见的方式在 Azure 中设置和部署微服务](/documentation/articles/app-service-deploy-complex-application-predictably/)
+* [部署链接到 GitHub 存储库的 Web 应用](./app-service-web-arm-from-github-provision.md)
+* [设置使用 SQL 数据库的 Web 应用](./app-service-web-arm-with-sql-database-provision.md)
+* [按可预见的方式在 Azure 中设置和部署微服务](./app-service-deploy-complex-application-predictably.md)
 * [使用 Azure 构建真实世界云应用 – 使一切自动化](http://asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/automate-everything)。电子书章节，其中介绍电子书中所示的示例应用程序如何使用 Windows PowerShell 脚本创建 Azure 测试环境并部署到该环境中。请参阅[资源](http://asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/automate-everything#resources)部分以获取指向其他 Azure PowerShell 文档的链接。
 
 ## <a name="api"></a>使用 .NET 管理 API 自动进行部署

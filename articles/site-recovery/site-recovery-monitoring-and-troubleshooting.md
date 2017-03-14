@@ -1,22 +1,22 @@
-<properties
-    pageTitle="监视虚拟机和物理服务器的保护及其故障排除 | Azure"
-    description="Azure Site Recovery 可以协调位于本地服务器中的虚拟机到 Azure 或辅助数据中心的复制、故障转移和恢复。参考本文来监视 Virtual Machine Manager 或 Hyper-V 站点保护并对其进行故障排除。"
-    services="site-recovery"
-    documentationcenter=""
-    author="ruturaj"
-    manager="mkjain"
-    editor="" />
-<tags
-    ms.assetid="0fc8e368-0c0e-4bb1-9d50-cffd5ad0853f"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="01/19/2017"
-    wacn.date="03/10/2017"
-    ms.author="rajanaki" />  
+---
+title: 监视虚拟机和物理服务器的保护及其故障排除 | Azure
+description: Azure Site Recovery 可以协调位于本地服务器中的虚拟机到 Azure 或辅助数据中心的复制、故障转移和恢复。参考本文来监视 Virtual Machine Manager 或 Hyper-V 站点保护并对其进行故障排除。
+services: site-recovery
+documentationcenter: ''
+author: ruturaj
+manager: mkjain
+editor: ''
 
+ms.assetid: 0fc8e368-0c0e-4bb1-9d50-cffd5ad0853f
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 01/19/2017
+wacn.date: 03/10/2017
+ms.author: rajanaki
+---
 
 # 监视虚拟机和物理服务器的保护及其故障排除
 本监视与故障排除指南可帮助你了解如何跟踪 Azure Site Recovery 的复制运行状况，并掌握相关的故障排除方法。
@@ -28,68 +28,56 @@
 
 ![用于在本地与 Azure 之间复制的物理站点部署](./media/site-recovery-monitoring-and-troubleshooting/image18.png)
 
-
 ### 用于在本地站点之间复制的 Virtual Machine Manager 站点部署
 若要在两个本地位置之间设置数据库恢复，需要下载 Azure Site Recovery 提供程序，并将其安装在 Virtual Machine Manager 服务器上。该提供程序需要连接到 Internet，确保从 Azure 门户触发的所有操作都转换成本地操作。
 
 ![用于在本地站点之间复制的 Virtual Machine Manager 站点部署](./media/site-recovery-monitoring-and-troubleshooting/image1.png)  
 
-
 ### 用于在本地位置与 Azure 之间复制的 Virtual Machine Manager 站点部署
-在本地位置与 Azure 之间设置数据库恢复时，需要下载 Azure Site Recovery 提供程序，并将其安装在 Virtual Machine Manager 服务器上。此外，还需要在每个 Hyper-V 主机上安装 Azure 恢复服务代理。有关详细信息，请参阅[了解站点到 Azure 的保护](/documentation/articles/site-recovery-understanding-site-to-azure-protection/)。
+在本地位置与 Azure 之间设置数据库恢复时，需要下载 Azure Site Recovery 提供程序，并将其安装在 Virtual Machine Manager 服务器上。此外，还需要在每个 Hyper-V 主机上安装 Azure 恢复服务代理。有关详细信息，请参阅[了解站点到 Azure 的保护](./site-recovery-understanding-site-to-azure-protection.md)。
 
 ![用于在本地位置与 Azure 之间复制的 Virtual Machine Manager 站点部署](./media/site-recovery-monitoring-and-troubleshooting/image2.png)  
 
-
 ### 用于在本地位置与 Azure 之间复制的 Hyper-V 站点部署
-此过程与 Virtual Machine Manager 部署类似。唯一的区别在于，Azure Site Recovery 提供程序和 Azure 恢复服务代理将在 Hyper-V 主机上自行安装。有关详细信息，请参阅[了解站点到 Azure 的保护](/documentation/articles/site-recovery-understanding-site-to-azure-protection/)。
+此过程与 Virtual Machine Manager 部署类似。唯一的区别在于，Azure Site Recovery 提供程序和 Azure 恢复服务代理将在 Hyper-V 主机上自行安装。有关详细信息，请参阅[了解站点到 Azure 的保护](./site-recovery-understanding-site-to-azure-protection.md)。
 
 ## 监视配置、保护和恢复操作
 在“作业”选项卡下，Azure Site Recovery 中的每项操作都会经过审核和跟踪。若要查看任何配置、保护或恢复错误，请转到“作业”选项卡，然后查找故障。
 
 ![“作业”选项卡中的失败筛选器](./media/site-recovery-monitoring-and-troubleshooting/image3.png)  
 
-
 如果在“作业”选项卡下发现故障，请单击相应的作业，然后单击该作业对应的“错误详细信息”。
 
 ![“错误详细信息”按钮](./media/site-recovery-monitoring-and-troubleshooting/image4.png)  
-
 
 可以借助错误详细信息识别可能的原因，获得解决问题的建议。
 
 ![显示特定作业的错误详细信息的对话框](./media/site-recovery-monitoring-and-troubleshooting/image5.png)  
 
-
 在上述示例中，另一个正在进行的操作可能导致保护配置失败。请根据建议解决此问题，然后单击“重新启动”再次启动操作。
 
 ![“作业”选项卡中的“重新启动”按钮](./media/site-recovery-monitoring-and-troubleshooting/image6.png)  
 
-
 “重新启动”选项并不适用于所有操作。如果操作没有对应的“重新启动”选项，请返回到对象，然后重做操作。可以使用“取消”按钮取消正在进行的任何作业。
 
 ![“取消”按钮](./media/site-recovery-monitoring-and-troubleshooting/image7.png)  
-
 
 ## 监视虚拟机的复制运行状况
 可以使用 Azure 门户远程监视每个受保护的实体的 Azure Site Recovery 提供程序。单击“受保护的项”，然后单击“VMM 云”或“保护组”。“VMM 云”选项卡只适用于基于 Virtual Machine Manager 的部署。对于其他方案，受保护的实体位于“保护组”选项卡下。
 
 ![“VMM 云”和“保护组”选项](./media/site-recovery-monitoring-and-troubleshooting/image8.png)  
 
-
 在相应的云或保护组下，单击受保护的实体，查看底部窗格中显示的所有可用操作。
 
 ![所选受保护实体的可用选项](./media/site-recovery-monitoring-and-troubleshooting/image9.png)  
-
 
 如上面的屏幕截图所示，虚拟机运行状况为“关键”。可以单击底部的“错误详细信息”按钮查看错误。根据“可能的原因”和“建议”解决问题。
 
 ![“错误详细信息”按钮](./media/site-recovery-monitoring-and-troubleshooting/image10.png)  
 
-
 ![“错误详细信息”对话框中的错误和建议](./media/site-recovery-monitoring-and-troubleshooting/image11.png)  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 如果任何可用操作正在进行或失败，请转到“作业”视图（如前所述），查看特定作业的错误。
 > 
 > 
@@ -99,16 +87,13 @@
 
 ![用于在 Hyper-V 管理器控制台中查看复制运行状况的选项](./media/site-recovery-monitoring-and-troubleshooting/image12.png)  
 
-
 在本例中，“复制运行状况”为“关键”。右键单击虚拟机，然后单击“复制”>“查看复制运行状况”查看详细信息。
 
 ![特定虚拟机的复制运行状况](./media/site-recovery-monitoring-and-troubleshooting/image13.png)  
 
-
 如果虚拟机复制已暂停，请右键单击虚拟机，然后单击“复制”>“恢复复制”。
 
 ![用于在 Hyper-V 管理器控制台中恢复复制的选项](./media/site-recovery-monitoring-and-troubleshooting/image19.png)  
-
 
 如果虚拟机迁移通过 Azure Site Recovery 配置的新 Hyper-V 主机（在群集或独立计算机中），虚拟机的复制不受影响。请确保新的 Hyper-V 主机符合所有先决条件，并已使用 Azure Site Recovery 进行配置。
 
@@ -121,22 +106,18 @@
 | **Applications and Service Logs/Microsoft/Azure Site Recovery/Provider/Operational**（Hyper-V 主机） |提供实用的日志记录，用于排查许多 Azure Site Recovery 服务问题。<br/> ![Hyper-V 主机的操作事件源位置](./media/site-recovery-monitoring-and-troubleshooting/eventviewer02.png) |
 | **Applications and Service Logs/Microsoft/Windows/Hyper-V-VMMS/Admin**（Hyper-V 主机） |提供实用的日志记录，用于排查许多 Hyper-V 虚拟机管理问题。<br/> ![Hyper-V 主机的 Virtual Machine Manager 事件源位置](./media/site-recovery-monitoring-and-troubleshooting/eventviewer01.png) |
 
-
 ### Hyper-V 复制日志记录选项
 与 Hyper-V 复制相关的所有事件都会记录在“Applications and Services Logs\\Microsoft\\Windows”下的 Hyper-V-VMMS\\Admin 日志中。此外，还可为 Hyper-V 虚拟机管理服务启用分析日志。若要启用此日志，请先在“事件查看器”中显示“分析”与“调试”日志。打开“事件查看器”，然后单击“视图”>“显示分析和调试日志”。
 
 ![“显示分析和调试日志”选项](./media/site-recovery-monitoring-and-troubleshooting/image14.png)  
 
-
 分析日志显示在“Hyper-V-VMMS”下。
 
 ![事件查看器树中的分析日志](./media/site-recovery-monitoring-and-troubleshooting/image15.png)  
 
-
 在“操作”窗格中，单击“启用日志”。启用后，日志将作为“事件跟踪会话”显示在“性能监视器”中的“数据收集器集”下。
 
 ![性能监视器树中的事件跟踪会话](./media/site-recovery-monitoring-and-troubleshooting/image16.png)  
-
 
 若要查看收集到的信息，请先禁用日志，从而停止跟踪会话。保存日志，然后再次在“事件查看器”中打开日志，或使用其他工具根据需要转换日志。
 
@@ -156,7 +137,7 @@
 
 ### 在线申请支持
 
-若需要对应 ASR 的帮助，请[在线申请支持](/support/support-ticket-form/?l=zh-cn)创建工单
+若需要对应 ASR 的帮助，请[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单
 
 ## 知识库文章
 * [如何为已故障转移或迁移到 Azure 的受保护虚拟机保留驱动器号](http://support.microsoft.com/zh-cn/kb/3031135)

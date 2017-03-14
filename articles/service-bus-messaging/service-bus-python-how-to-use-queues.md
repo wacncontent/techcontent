@@ -1,65 +1,65 @@
-<properties 
-	pageTitle="如何通过 Python 使用服务总线队列 | Azure" 
-	description="了解如何通过 Python 使用 Azure 服务总线队列。" 
-	services="service-bus" 
-	documentationCenter="python" 
-	authors="sethmanheim" 
-	manager="timlt" 
-	editor=""/>
+---
+title: 如何通过 Python 使用服务总线队列 | Azure
+description: 了解如何通过 Python 使用 Azure 服务总线队列。
+services: service-bus
+documentationCenter: python
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-<tags 
-	ms.service="service-bus" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="python" 
-	ms.topic="article" 
-	ms.date="01/11/2017" 
-	ms.author="sethm;lmazuel"  
-	wacn.date="02/20/2017"/>
-
+ms.service: service-bus
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 01/11/2017
+ms.author: sethm;lmazuel
+wacn.date: 02/20/2017
+---
 
 # 如何使用服务总线队列
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 本文介绍了如何使用服务总线队列。相关示例是使用 Python 编写的，并使用 [Python Azure 服务总线包][]。涉及的应用场景包括**创建队列、发送和接收消息**以及**删除队列**。
 
-[AZURE.INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
+[!INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
 
-> [AZURE.NOTE] 若要安装 Python 或 [Python Azure 服务总线包][]，请参阅 [Python 安装指南](/documentation/articles/python-how-to-install/)。
+> [!NOTE]
+> 若要安装 Python 或 [Python Azure 服务总线包][]，请参阅 [Python 安装指南](../python-how-to-install.md)。
 
 ## 创建队列
 
 可以通过 **ServiceBusService** 对象处理队列。将以下代码添加到任何 Python 文件的顶部附近，你希望在其中以编程方式访问服务总线：
 
-
-		from azure.servicebus import ServiceBusService, Message, Queue
-
+```
+    from azure.servicebus import ServiceBusService, Message, Queue
+```
 
 以下代码创建 **ServiceBusService** 对象。将 `mynamespace`、`sharedaccesskeyname` 和 `sharedaccesskey` 替换为你的命名空间、共享访问签名 (SAS) 密钥名称和值。
 
-
-		bus_service = ServiceBusService(
-			service_namespace='mynamespace',
-			shared_access_key_name='sharedaccesskeyname',
-			shared_access_key_value='sharedaccesskey')
-
+```
+    bus_service = ServiceBusService(
+        service_namespace='mynamespace',
+        shared_access_key_name='sharedaccesskeyname',
+        shared_access_key_value='sharedaccesskey')
+```
 
 SAS 密钥名称和值可以在 [Azure 经典门户][]连接信息中找到，也可以在服务器资源管理器中选择服务总线命名空间后，在 Visual Studio“属性”窗格中找到（如前一部分中所示）。
 
-
-		bus_service.create_queue('taskqueue')
-
+```
+    bus_service.create_queue('taskqueue')
+```
 
 **create\_queue** 还支持其他选项，使你能够重写默认队列设置，例如消息生存时间 (TTL) 或最大队列大小。以下示例将最大队列大小设置为 5 GB，将 TTL 值设置为 1 分钟：
 
+```
+    queue_options = Queue()
+    queue_options.max_size_in_megabytes = '5120'
+    queue_options.default_message_time_to_live = 'PT1M'
 
-		queue_options = Queue()
-		queue_options.max_size_in_megabytes = '5120'
-		queue_options.default_message_time_to_live = 'PT1M'
-
-		bus_service.create_queue('taskqueue', queue_options)
-
+    bus_service.create_queue('taskqueue', queue_options)
+```
 
 ## 向队列发送消息
 
@@ -67,10 +67,10 @@ SAS 密钥名称和值可以在 [Azure 经典门户][]连接信息中找到，�
 
 以下示例演示了如何使用 **send\_queue\_message** 向名为 *taskqueue* 的队列发送测试消息：
 
-
-		msg = Message(b'Test Message')
-		bus_service.send_queue_message('taskqueue', msg)
-
+```
+    msg = Message(b'Test Message')
+    bus_service.send_queue_message('taskqueue', msg)
+```
 
 服务总线队列在标准层中支持的最大消息大小为 256 KB。标头最大为 64 KB，其中包括标准和自定义应用程序属性。一个队列可包含的消息数不受限制，但消息的总大小受限。此队列大小是在创建时定义的，上限为 5 GB。有关配额的详细信息，请参阅[服务总线配额][]。
 
@@ -78,10 +78,10 @@ SAS 密钥名称和值可以在 [Azure 经典门户][]连接信息中找到，�
 
 可通过对 **ServiceBusService** 对象使用 **receive\_queue\_message** 方法来从队列接收消息：
 
-
-		msg = bus_service.receive_queue_message('taskqueue', peek_lock=False)
-		print(msg.body)
-
+```
+    msg = bus_service.receive_queue_message('taskqueue', peek_lock=False)
+    print(msg.body)
+```
 
 当 **peek‑lock** 参数设置为 **False** 时，将在读取消息后将其从队列中删除。通过将参数 **peek\_lock** 设置为 **True**，你可以读取（速览）并锁定消息，以避免将其从队列中删除。
 
@@ -89,12 +89,12 @@ SAS 密钥名称和值可以在 [Azure 经典门户][]连接信息中找到，�
 
 如果将 **peek\_lock** 参数设置为 **True**，则接收将变成一个两阶段操作，从而有可能支持不允许遗漏消息的应用程序。当服务总线收到请求时，它会查找下一条要使用的消息，锁定该消息以防其他使用方接收，然后将该消息返回给应用程序。应用程序完成消息处理（或可靠地存储消息以供将来处理）后，它将通过对 **Message** 对象调用 **delete** 方法完成接收过程的第二个阶段。**delete** 方法会将消息标记为“已使用”并将其从队列中删除。
 
-		
-		msg = bus_service.receive_queue_message('taskqueue', peek_lock=True)
-		print(msg.body)
+```
+    msg = bus_service.receive_queue_message('taskqueue', peek_lock=True)
+    print(msg.body)
 
-		msg.delete()
-
+    msg.delete()
+```
 
 ## 如何处理应用程序崩溃和不可读消息
 
@@ -112,9 +112,8 @@ SAS 密钥名称和值可以在 [Azure 经典门户][]连接信息中找到，�
 
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 [Python Azure 服务总线包]: https://pypi.python.org/pypi/azure-servicebus
-[队列、主题和订阅]: /documentation/articles/service-bus-queues-topics-subscriptions/
-[服务总线配额]: /documentation/articles/service-bus-quotas/
- 
+[队列、主题和订阅]: ./service-bus-queues-topics-subscriptions.md
+[服务总线配额]: ./service-bus-quotas.md
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description:update meta properties and wording-->

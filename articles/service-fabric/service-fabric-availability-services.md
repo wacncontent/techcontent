@@ -1,28 +1,28 @@
-<properties
-    pageTitle="Service Fabric 服务的可用性 | Azure"
-    description="介绍服务的故障检测、故障转移和恢复"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="279ba4a4-f2ef-4e4e-b164-daefd10582e4"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider" />  
+---
+title: Service Fabric 服务的可用性 | Azure
+description: 介绍服务的故障检测、故障转移和恢复
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: 279ba4a4-f2ef-4e4e-b164-daefd10582e4
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider
+---
 
 # Service Fabric 服务的可用性
 本文概述 Service Fabric 如何保持服务的可用性。
 
 ## Service Fabric 无状态服务的可用性
-Azure Service Fabric 服务可以是有状态服务，也可以是无状态服务。无状态服务是不具备任何[本地持久状态](/documentation/articles/service-fabric-concepts-state/)的应用程序服务。
+Azure Service Fabric 服务可以是有状态服务，也可以是无状态服务。无状态服务是不具备任何[本地持久状态](./service-fabric-concepts-state.md)的应用程序服务。
 
 创建无状态服务需要定义实例计数。实例计数定义应在群集中运行的无状态服务应用程序逻辑的实例数。建议通过增加实例数来扩大无状态服务。
 
@@ -40,21 +40,20 @@ Azure Service Fabric 服务可以是有状态服务，也可以是无状态服�
 ### 副本角色
 副本的角色用于管理受该副本所管理状态的生命周期。具有主要副本角色的副本将为读取请求提供服务。主要副本还可通过更新其状态并复制更改来处理所有写入请求。这些更改会应用于副本集中的活动次要副本。活动次要副本的任务是接收主要副本已复制的状态更改并更新其状态视图。
 
-> [AZURE.NOTE]
-对开发人员而言，更高级别的编程模型（例如 [Reliable Actors 框架](/documentation/articles/service-fabric-reliable-actors-introduction/)和 [Reliable Services](/documentation/articles/service-fabric-reliable-services-introduction/)）可使副本角色的概念不再抽象化。在执行组件中，角色的概念是不必要的，而在服务中，它在必要的情况下是可见的，但已大幅简化。
+> [!NOTE]
+对开发人员而言，更高级别的编程模型（例如 [Reliable Actors 框架](./service-fabric-reliable-actors-introduction.md)和 [Reliable Services](./service-fabric-reliable-services-introduction.md)）可使副本角色的概念不再抽象化。在执行组件中，角色的概念是不必要的，而在服务中，它在必要的情况下是可见的，但已大幅简化。
 >
 >
 
 ## 后续步骤
 有关 Service Fabric 概念的详细信息，请参阅以下文章：
 
-- [Service Fabric 服务的可伸缩性](/documentation/articles/service-fabric-concepts-scalability/)
+- [Service Fabric 服务的可伸缩性](./service-fabric-concepts-scalability.md)
 
-- [Service Fabric 服务分区](/documentation/articles/service-fabric-concepts-partitioning/)
+- [Service Fabric 服务分区](./service-fabric-concepts-partitioning.md)
 
-- [定义和管理状态](/documentation/articles/service-fabric-concepts-state/)
-- [Reliable Services](/documentation/articles/service-fabric-reliable-services-introduction/)
- 
+- [定义和管理状态](./service-fabric-concepts-state.md)
+- [Reliable Services](./service-fabric-reliable-services-introduction.md)
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: add introduction to reliable services-->

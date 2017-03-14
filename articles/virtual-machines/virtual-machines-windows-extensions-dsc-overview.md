@@ -1,27 +1,27 @@
-<properties
-    pageTitle="适用于 Azure 的 Desired State Configuration 概述 | Azure"
-    description="有关使用 PowerShell Desired State Configuration 的 Azure 扩展的概述。内容涉及先决条件、体系结构和 cmdlet。"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="zjalexander"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management,azure-resource-manager"
-    keywords="" />
-<tags
-    ms.assetid="bbacbc93-1e7b-4611-a3ec-e3320641f9ba"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="na"
-    ms.date="01/09/2017"
-    wacn.date="02/24/2017"
-    ms.author="zachal" />  
+---
+title: 适用于 Azure 的 Desired State Configuration 概述 | Azure
+description: 有关使用 PowerShell Desired State Configuration 的 Azure 扩展的概述。内容涉及先决条件、体系结构和 cmdlet。
+services: virtual-machines-windows
+documentationcenter: ''
+author: zjalexander
+manager: timlt
+editor: ''
+tags: azure-service-management,azure-resource-manager
+keywords: ''
 
+ms.assetid: bbacbc93-1e7b-4611-a3ec-e3320641f9ba
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: na
+ms.date: 01/09/2017
+wacn.date: 02/24/2017
+ms.author: zachal
+---
 
 # Azure Desired State Configuration 扩展处理程序简介
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
 
 Azure VM 代理和关联的扩展是 Azure 基础结构服务的一部分。VM 扩展是软件组件，可以扩展 VM 功能并简化各种 VM 管理操作。例如，VMAccess 扩展可用于重置管理员的密码，自定义脚本扩展可用于在 VM 上执行脚本。
 
@@ -94,49 +94,55 @@ Azure DSC 扩展使用 Azure VM 代理框架来传送、启用和报告 Azure VM
 ## 入门
 Azure DSC 扩展将检索并在 Azure VM 上启用 DSC 配置文档。下面是一个简单的配置示例。以“IisInstall.ps1”的名称将它保存在本地：
 
-    configuration IISInstall 
+```
+configuration IISInstall 
+{ 
+    node "localhost"
     { 
-        node "localhost"
+        WindowsFeature IIS 
         { 
-            WindowsFeature IIS 
-            { 
-                Ensure = "Present" 
-                Name = "Web-Server"                       
-            } 
+            Ensure = "Present" 
+            Name = "Web-Server"                       
         } 
-    }
+    } 
+}
+```
 
 以下步骤将 IisInstall.ps1 脚本放在指定的 VM 上，执行配置，然后报告状态。
 ###经典模型
 
-    #Azure PowerShell cmdlets are required
-    Import-Module Azure
+```
+#Azure PowerShell cmdlets are required
+Import-Module Azure
 
-    #Use an existing Azure Virtual Machine, 'DscDemo1'
-    $demoVM = Get-AzureVM DscDemo1
+#Use an existing Azure Virtual Machine, 'DscDemo1'
+$demoVM = Get-AzureVM DscDemo1
 
-    #Publish the configuration script into user storage.
-    Publish-AzureVMDscConfiguration -ConfigurationPath ".\IisInstall.ps1" -StorageContext $storageContext -Verbose -Force
+#Publish the configuration script into user storage.
+Publish-AzureVMDscConfiguration -ConfigurationPath ".\IisInstall.ps1" -StorageContext $storageContext -Verbose -Force
 
-    #Set the VM to run the DSC configuration
-    Set-AzureVMDscExtension -VM $demoVM -ConfigurationArchive "IisInstall.ps1.zip" -StorageContext $storageContext -ConfigurationName "IisInstall" -Verbose
+#Set the VM to run the DSC configuration
+Set-AzureVMDscExtension -VM $demoVM -ConfigurationArchive "IisInstall.ps1.zip" -StorageContext $storageContext -ConfigurationName "IisInstall" -Verbose
 
-    #Update the configuration of an Azure Virtual Machine
-    $demoVM | Update-AzureVM -Verbose
+#Update the configuration of an Azure Virtual Machine
+$demoVM | Update-AzureVM -Verbose
 
-    #check on status
-    Get-AzureVMDscExtensionStatus -VM $demovm -Verbose
+#check on status
+Get-AzureVMDscExtensionStatus -VM $demovm -Verbose
+```
 
 ### Azure Resource Manager 模型
 
-    $resourceGroup = "dscVmDemo"
-    $location = "chinanorth"
-    $vmName = "myVM"
-    $storageName = "demostorage"
-    #Publish the configuration script into user storage
-    Publish-AzureRmVMDscConfiguration -ConfigurationPath .\iisInstall.ps1 -ResourceGroupName $resourceGroup -StorageAccountName $storageName -force
-    #Set the VM to run the DSC configuration
-    Set-AzureRmVmDscExtension -Version 2.21 -ResourceGroupName $resourceGroup -VMName $vmName -ArchiveStorageAccountName $storageName -ArchiveBlobName iisInstall.ps1.zip -AutoUpdate:$true -ConfigurationName "IISInstall"
+```
+$resourceGroup = "dscVmDemo"
+$location = "chinanorth"
+$vmName = "myVM"
+$storageName = "demostorage"
+#Publish the configuration script into user storage
+Publish-AzureRmVMDscConfiguration -ConfigurationPath .\iisInstall.ps1 -ResourceGroupName $resourceGroup -StorageAccountName $storageName -force
+#Set the VM to run the DSC configuration
+Set-AzureRmVmDscExtension -Version 2.21 -ResourceGroupName $resourceGroup -VMName $vmName -ArchiveStorageAccountName $storageName -ArchiveBlobName iisInstall.ps1.zip -AutoUpdate:$true -ConfigurationName "IISInstall"
+```
 
 ## 日志记录
 日志位于：
@@ -146,11 +152,11 @@ C:\\WindowsAzure\\Logs\\Plugins\\Microsoft.Powershell.DSC\[Version Number\]
 ## 后续步骤
 有关 PowerShell DSC 的详细信息，请[访问 PowerShell 文档中心](https://msdn.microsoft.com/powershell/dsc/overview)。
 
-检查 [Azure Resource Manager template for the DSC extension](/documentation/articles/virtual-machines-windows-extensions-dsc-template/)（适用于 DSC 扩展的 Azure Resource Manager 模板）。
+检查 [Azure Resource Manager template for the DSC extension](./virtual-machines-windows-extensions-dsc-template.md)（适用于 DSC 扩展的 Azure Resource Manager 模板）。
 
 若要查找可以使用 PowerShell DSC 管理的其他功能，请[浏览 PowerShell 库](https://www.powershellgallery.com/packages?q=DscResource&x=0&y=0)以获取更多 DSC 资源。
 
-有关将敏感参数传入配置的详细信息，请参阅 [Manage credentials securely with the DSC extension handler](/documentation/articles/virtual-machines-windows-extensions-dsc-credentials/)（使用 DSC 扩展处理程序安全管理凭据）。
+有关将敏感参数传入配置的详细信息，请参阅 [Manage credentials securely with the DSC extension handler](./virtual-machines-windows-extensions-dsc-credentials.md)（使用 DSC 扩展处理程序安全管理凭据）。
 
 <!---HONumber=Mooncake_0220_2017-->
 <!--Update_Description: Adding ARM model-->

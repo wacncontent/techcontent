@@ -1,22 +1,24 @@
 <!-- Remove Channel9 videos -->
-<properties
-    pageTitle="Azure 应用程序的灾难恢复和高可用性 | Azure"
-    description="有关对在 Azure 基础之上设计应用程序高可用性和灾难恢复的技术概述和深入信息。"
-    services=""
-    documentationcenter="na"
-    author="adamglick"
-    manager="saladki"
-    editor="" />
-<tags
-    ms.assetid="e13d5f49-2b91-44ba-829a-1e0f1fceaae8"
-    ms.service="resiliency"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="08/18/2016"
-    wacn.date="02/20/2017"
-    ms.author="aglick" />  
+
+---
+title: Azure 应用程序的灾难恢复和高可用性 | Azure
+description: 有关对在 Azure 基础之上设计应用程序高可用性和灾难恢复的技术概述和深入信息。
+services: ''
+documentationcenter: na
+author: adamglick
+manager: saladki
+editor: ''
+
+ms.assetid: e13d5f49-2b91-44ba-829a-1e0f1fceaae8
+ms.service: resiliency
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/18/2016
+wacn.date: 02/20/2017
+ms.author: aglick
+---
 
 # 构建在 Azure 基础之上的应用程序灾难恢复和高可用性
 
@@ -62,7 +64,7 @@ Azure 等云平台在中国国内提供分散在各地的区域。通过这些�
 
 必须为所有服务有可能在不同时间中断安排对策。在这个简化的示例中，应用程序每月可中断的总分钟数为 108 分钟。一个月 30 天共有 43200 分钟。108 分钟占一个月 30 天的总分钟数（43200 分钟）的 0.25%。这样，云服务的有效可用性为 99.75%。
 
-但是，使用本章中介绍的可用性方法可提高这个数字。例如，如果将应用程序设计为在 SQL 数据库不可用时继续运行，则可从等式中删去那一行。这可能意味着应用程序运行时功能减少，因此还要考虑业务要求。有关 Azure SLA 的完整列表，请参阅[服务级别协议](/support/legal/sla/)。
+但是，使用本章中介绍的可用性方法可提高这个数字。例如，如果将应用程序设计为在 SQL 数据库不可用时继续运行，则可从等式中删去那一行。这可能意味着应用程序运行时功能减少，因此还要考虑业务要求。有关 Azure SLA 的完整列表，请参阅[服务级别协议](https://www.azure.cn/support/legal/sla/)。
 
 ### 可伸缩性
 
@@ -90,7 +92,7 @@ RPO 是恢复过程导致丢失数据的可接受时间范围。例如，如果 
 
 ##清单
 
-下面总结本文已讨论的要点（并列出有关 Azure 应用程序[高可用性](/documentation/articles/resiliency-high-availability-azure-applications/)和[灾难恢复](/documentation/articles/resiliency-disaster-recovery-azure-applications/)的文章）。本摘要旨在提供你在自己进行可用性和灾难恢复规划时应考虑事项的清单。这些最佳实践对于寻求认真实现成功的解决方案的客户非常有用。
+下面总结本文已讨论的要点（并列出有关 Azure 应用程序[高可用性](./resiliency-high-availability-azure-applications.md)和[灾难恢复](./resiliency-disaster-recovery-azure-applications.md)的文章）。本摘要旨在提供你在自己进行可用性和灾难恢复规划时应考虑事项的清单。这些最佳实践对于寻求认真实现成功的解决方案的客户非常有用。
 
 1. 对每个应用程序执行风险评估，因为每个应用程序的要求可能会有不同。某些应用程序比其他一些重要，有理由投入额外的成本为这些应用程序设计灾难恢复功能。
 2. 使用此信息定义每个应用程序的 RTO 和 RPO。
@@ -115,15 +117,15 @@ Azure 可检测并处理许多故障，但有许多类型的故障需要使用�
 
 ## 其他资源
 
-[构建在 Azure 基础之上的应用程序高可用性](/documentation/articles/resiliency-high-availability-azure-applications/)
+[构建在 Azure 基础之上的应用程序高可用性](./resiliency-high-availability-azure-applications.md)
 
-[构建在 Azure 基础之上的应用程序灾难恢复](/documentation/articles/resiliency-disaster-recovery-azure-applications/)
+[构建在 Azure 基础之上的应用程序灾难恢复](./resiliency-disaster-recovery-azure-applications.md)
 
-[Azure 复原技术指南](/documentation/articles/resiliency-technical-guidance/)
+[Azure 复原技术指南](./resiliency-technical-guidance.md)
 
-[概述：云业务连续性与使用 SQL 数据库进行数据库灾难恢复](/documentation/articles/sql-database-business-continuity/)
+[概述：云业务连续性与使用 SQL 数据库进行数据库灾难恢复](../sql-database/sql-database-business-continuity.md)
 
-[Azure 虚拟机中 SQL Server 的高可用性和灾难恢复](/documentation/articles/virtual-machines-windows-sql-high-availability-dr/)
+[Azure 虚拟机中 SQL Server 的高可用性和灾难恢复](../virtual-machines/virtual-machines-windows-sql-high-availability-dr.md)
 
 <!-- [防故障：弹性云体系结构指南](https://channel9.msdn.com/Series/FailSafe) -->
 
@@ -131,7 +133,7 @@ Azure 可检测并处理许多故障，但有许多类型的故障需要使用�
 
 ##后续步骤
 
-本文是着重介绍 Azure 应用程序灾难恢复和高可用性的系列教程的一部分。本系列教程的下一篇文章为[构建在 Azure 基础之上的应用程序高可用性](/documentation/articles/resiliency-high-availability-azure-applications/)。
+本文是着重介绍 Azure 应用程序灾难恢复和高可用性的系列教程的一部分。本系列教程的下一篇文章为[构建在 Azure 基础之上的应用程序高可用性](./resiliency-high-availability-azure-applications.md)。
 
 <!---HONumber=Mooncake_0213_2017-->
 <!-- Update_Description: update meta properties; wording update; update link reference -->

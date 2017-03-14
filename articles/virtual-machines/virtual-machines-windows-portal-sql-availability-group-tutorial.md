@@ -1,23 +1,24 @@
-<properties
-    pageTitle="SQL Server 可用性组 - Azure 虚拟机 - 教程 | Azure"
-    description="本教程介绍如何在 Azure 虚拟机上创建 SQL Server Always On 可用性组。"
-    services="virtual-machines"
-    documentationCenter="na"
-    authors="MikeRayMSFT"
-    manager="jhubbard"
-    editor="monicar"
-    tags="azure-service-management" />
-<tags
-    ms.assetid="08a00342-fee2-4afe-8824-0db1ed4b8fca"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.custom="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows-sql-server"
-    ms.workload="iaas-sql-server"
-    ms.date="01/10/2016"
-    wacn.date="02/20/2017"
-    ms.author="mikeray" />
+---
+title: SQL Server 可用性组 - Azure 虚拟机 - 教程 | Azure
+description: 本教程介绍如何在 Azure 虚拟机上创建 SQL Server Always On 可用性组。
+services: virtual-machines
+documentationCenter: na
+authors: MikeRayMSFT
+manager: jhubbard
+editor: monicar
+tags: azure-service-management
+
+ms.assetid: 08a00342-fee2-4afe-8824-0db1ed4b8fca
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.custom: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: iaas-sql-server
+ms.date: 01/10/2016
+wacn.date: 02/20/2017
+ms.author: mikeray
+---
 
 # 创建 Always On 可用性组来提高可用性和实现灾难恢复
 
@@ -28,7 +29,6 @@
 下图演示了在本教程中生成的项目。
 
 ![可用性组](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/00-EndstateSampleNoELB.png)  
-
 
 ## 先决条件
 
@@ -46,10 +46,9 @@
 |![Square](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/square.png) |添加故障转移群集功能 | 两个 SQL Server 都需要此功能 |
 |![Square](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/square.png) |安装域帐户 | - 每个 SQL Server 上的本地管理员帐户 <br/> - 每个 SQL Server 实例的 SQL Server sysadmin 固定服务器角色的成员 |
 
-在开始学习本教程之前，需要[满足在 Azure 虚拟机中创建 Always On 可用性组的先决条件](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-prereq/)。如果已满足这些先决条件，可转到[创建群集](#CreateCluster)。
+在开始学习本教程之前，需要[满足在 Azure 虚拟机中创建 Always On 可用性组的先决条件](./virtual-machines-windows-portal-sql-availability-group-prereq.md)。如果已满足这些先决条件，可转到[创建群集](#CreateCluster)。
 
 <!--**Procedure**: *This is the first "step". Make titles H2's and short and clear - H2's appear in the right pane on the web page and are important for navigation.*-->
-
 
 ## <a name="CreateCluster"></a>创建群集
 
@@ -57,8 +56,8 @@
 
 1. 使用在两个 SQL Server 上和见证服务器上充当管理员的域帐户通过 RDP 连接到第一个 SQL Server。
 
-    >[AZURE.TIP]
-    如果已完成[预备文档](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-prereq/)，则已创建名为 **CORP\\Install** 的帐户。请使用此帐户。
+    >[!TIP]
+    如果已完成[预备文档](./virtual-machines-windows-portal-sql-availability-group-prereq.md)，则已创建名为 **CORP\\Install** 的帐户。请使用此帐户。
 
 2. 在“服务器管理器”仪表板中，选择“工具”，然后单击“故障转移群集管理器”。
 3. 在左窗格中，右键单击“故障转移群集管理器”，然后单击“创建群集”。
@@ -81,7 +80,6 @@
 
     ![群集属性](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/42_IPProperties.png)  
 
-
 3. 选择“静态 IP 地址”，在“地址”文本框中指定 SQL Server 所在的子网中可用的地址。然后，单击“确定”。
 4. 在“群集核心资源”部分中，右键单击群集名称，然后单击“联机”。然后等待两个资源都已联机。当该群集名称资源联机时，它会用新的 AD 计算机帐户更新 DC 服务器。稍后将使用此 AD 帐户来运行可用性组群集服务。
 
@@ -93,7 +91,6 @@
 
     ![向群集添加节点](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/44-addnode.png)  
 
-
 1. 在“添加节点向导”中，单击“下一步”。在“选择服务器”页中添加第二个 SQL Server。在“输入服务器名称”中键入服务器名称，然后单击“添加”。完成后，单击“下一步”。
 
 1. 在“验证警告”页上，单击“否”（在生产方案中，你应执行验证测试）。然后，单击“下一步”。
@@ -102,7 +99,7 @@
 
     ![添加节点确认](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/46-addnodeconfirmation.png)  
 
-    >[AZURE.WARNING]
+    >[!WARNING]
     如果使用存储空间并且未取消选中“将所有符合条件的存储添加到群集中”，Windows 将在组建群集的过程中分离虚拟磁盘。因此，会导致在从群集中删除存储空间并使用 PowerShell 重新附加之前，磁盘管理器或资源管理器中不会显示这些磁盘。存储空间会将多个磁盘分组到存储池。有关详细信息，请参阅[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)。
 
 1. 单击“下一步”。
@@ -163,7 +160,7 @@
 
 1. 在“选择仲裁见证”中，单击“配置文件共享见证”。
 
-    >[AZURE.TIP]
+    >[!TIP]
     Windows Server 2016 支持云见证。如果选择此类见证，则不需要文件共享见证。有关详细信息，请参阅 [Deploy a cloud witness for a Failover Cluster](http://technet.microsoft.com/windows-server-docs/failover-clustering/deploy-cloud-witness)（为故障转移群集部署云见证）。本教程使用早期操作系统支持的文件共享见证。
 
 1. 在“配置文件共享见证”中，键入所创建的共享的路径。单击**“下一步”**。
@@ -253,7 +250,7 @@
 
 3. 在“选择数据库”页中选择你的数据库，然后单击“下一步”。
 
-    >[AZURE.NOTE]
+    >[!NOTE]
     这些数据库满足可用性组的先决条件，因为已经对目标主副本至少执行了一次完整备份。
 
     ![新建 AG 向导，选择数据库](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/60-newagselectdatabase.png)  
@@ -268,13 +265,13 @@
 
     ![新建可用性组向导，指定副本（完整）](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/64-newagreplica.png)  
 
-6. 单击“终结点”，查看此可用性组的数据库镜像终结点。使用设置[数据库镜像终结点的防火墙规则](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-prereq/#endpoint-firewall)时所用的同一端口。
+6. 单击“终结点”，查看此可用性组的数据库镜像终结点。使用设置[数据库镜像终结点的防火墙规则](./virtual-machines-windows-portal-sql-availability-group-prereq.md#endpoint-firewall)时所用的同一端口。
 
     ![新建可用性组向导，选择初始数据同步](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/66-endpoint.png)  
 
 8. 在“选择初始数据同步”页中，选择“完全”并指定共享网络位置。对于位置，请使用[创建的备份共享](#backupshare)。在本示例中为 \**\\\\\<First SQL Server\>\\Backup\**。单击“下一步”。
 
-    >[AZURE.NOTE]
+    >[!NOTE]
     完全同步创建第一个 SQL Server 实例上的数据库的完整备份，并将其还原到第二个实例。对于大型数据库，不建议使用完全同步，因为这可能需要花费很长时间。手动创建数据库备份并使用 `NO RECOVERY` 还原它可减少同步时间。如果在配置可用性组之前已使用 `NO RECOVERY` 在第二个 SQL Server 上还原数据库，请选择“仅联接”。如果想要在配置可用性组之后创建备份，请选择“跳过初始数据同步”。
 
     ![新建可用性组向导，选择初始数据同步](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/70-datasynchronization.png)  
@@ -283,8 +280,8 @@
 
     ![新建 AG 向导，验证](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/72-validation.png)  
 
-	>[AZURE.NOTE]
-	由于尚未配置可用性组侦听器，因此会出现侦听器配置警告。可以忽略此警告，因为在 Azure 虚拟机上，需要在创建 Azure 负载均衡器之后才能创建侦听器。
+    >[!NOTE]
+    由于尚未配置可用性组侦听器，因此会出现侦听器配置警告。可以忽略此警告，因为在 Azure 虚拟机上，需要在创建 Azure 负载均衡器之后才能创建侦听器。
 
 10. 在“摘要”页中单击“完成”，然后等待向导配置完新的可用性组。在“进度”页上，可单击“更多详细信息”以查看详细进度。完成向导操作后，请检查“结果”页，确认可用性组已成功创建。
 
@@ -308,7 +305,7 @@
 
     ![故障转移群集管理器中的可用性组](./media/virtual-machines-windows-portal-sql-availability-group-tutorial/80-clustermanager.png)  
 
-    > [AZURE.WARNING]
+    > [!WARNING]
     请勿尝试从故障转移群集管理器对可用性组进行故障转移。所有故障转移操作都应在 SSMS 中的 **AlwaysOn 仪表板**内进行。有关详细信息，请参阅[将 WSFC 故障转移群集管理器用于可用性组的限制](https://msdn.microsoft.com/zh-cn/library/ff929171.aspx)。
     >
 
@@ -407,7 +404,7 @@
     | **空闲超时** | 将 TCP 连接保持打开的分钟数 | 4 |
     | **浮动 IP \(直接服务器返回\)** | |Enabled |
 
-    > [AZURE.WARNING]
+    > [!WARNING]
     直接服务器返回是在创建过程中设置的，无法更改。
 
 1. 单击“确定”设置负载均衡规则。
@@ -416,12 +413,12 @@
 
 下一步是在故障转移群集上配置可用性组侦听器。
 
-> [AZURE.NOTE]
-本教程说明如何创建单个侦听器，该侦听器只使用一个 ILB IP 地址。若要创建使用一个或多个 IP 地址的一个或多个侦听器，请参阅[创建可用性组侦听器和负载均衡器 \| Azure](/documentation/articles/virtual-machines-windows-portal-sql-ps-alwayson-int-listener/)。
+> [!NOTE]
+本教程说明如何创建单个侦听器，该侦听器只使用一个 ILB IP 地址。若要创建使用一个或多个 IP 地址的一个或多个侦听器，请参阅[创建可用性组侦听器和负载均衡器 \| Azure](./virtual-machines-windows-portal-sql-ps-alwayson-int-listener.md)。
 >
 >
 
-[AZURE.INCLUDE [ag-listener-configure](../../includes/virtual-machines-ag-listener-configure.md)]
+[!INCLUDE [ag-listener-configure](../../includes/virtual-machines-ag-listener-configure.md)]
 
 ## 设置侦听器端口
 
@@ -445,22 +442,24 @@
 
 1. 使用 **sqlcmd** 实用工具测试连接。例如，以下脚本通过侦听器与 Windows 身份验证来与主副本建立 **sqlcmd** 连接：
 
-        sqlmd -S <listenerName> -E
+    ```
+    sqlmd -S <listenerName> -E
+    ```
 
     如果侦听器使用的端口不是默认端口 \(1433\)，请在连接字符串中指定该端口。例如，以下 sqlcmd 命令连接到位于端口 1435 的侦听器：
 
-        sqlcmd -S <listenerName>,1435 -E
+    ```
+    sqlcmd -S <listenerName>,1435 -E
+    ```
 
     SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。
 
-> [AZURE.TIP]
+> [!TIP]
 确保指定的端口已在两个 SQL Server 的防火墙上打开。这两个服务器需要所用 TCP 端口的入站规则。有关详细信息，请参阅 [Add or Edit Firewall Rule](http://technet.microsoft.com/zh-cn/library/cc753558.aspx)（添加或编辑防火墙规则）。
 >
 >
 
-
 <!--**Notes**: *Notes provide just-in-time info: A Note is "by the way" info, an Important is info users need to complete a task, Tip is for shortcuts. Don't overdo*.-->
-
 
 <!--**Procedures**: *This is the second "step." They often include substeps. Again, use a short title that tells users what they'll do*. *("Configure a new web project.")*-->
 
@@ -474,6 +473,6 @@
 
 ## 后续步骤
 
-- [将 IP 地址添加到第二个可用性组的负载均衡器](/documentation/articles/virtual-machines-windows-portal-sql-ps-alwayson-int-listener/#Add-IP)。
+- [将 IP 地址添加到第二个可用性组的负载均衡器](./virtual-machines-windows-portal-sql-ps-alwayson-int-listener.md#Add-IP)。
 
 <!---HONumber=Mooncake_0213_2017-->

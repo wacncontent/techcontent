@@ -1,21 +1,23 @@
-<properties 
-    pageTitle="服务总线定价常见问题解答 | Azure"
-    description="回答了一些关于服务总线定价结构的常见问题。"
-    services="service-bus"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />
-<tags 
-   ms.service="service-bus"
-   ms.date="03/16/2016"
-   wacn.date="01/09/2017" />
+---
+title: 服务总线定价常见问题解答 | Azure
+description: 回答了一些关于服务总线定价结构的常见问题。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: ''
+
+ms.service: service-bus
+ms.date: 03/16/2016
+wacn.date: 01/09/2017
+---
 
 # 服务总线定价常见问题解答
 
-本文回答了一些关于服务总线定价结构的常见问题。你还可以访问 [Azure 支持常见问题](http://go.microsoft.com/fwlink/?LinkID=185083)了解一般的 Azure 定价信息。有关服务总线定价的完整信息，请参阅[服务总线定价](/pricing/details/messaging/)。
+本文回答了一些关于服务总线定价结构的常见问题。你还可以访问 [Azure 支持常见问题](http://go.microsoft.com/fwlink/?LinkID=185083)了解一般的 Azure 定价信息。有关服务总线定价的完整信息，请参阅[服务总线定价](https://www.azure.cn/pricing/details/messaging/)。
 
->[AZURE.NOTE] 有关事件中心的定价结构，请参阅[事件中心的可用性和支持常见问题解答](/documentation/articles/event-hubs-faq/)一文，有关其详细信息，请参阅[事件中心定价](/pricing/details/event-hubs/)一文。
+>[!NOTE]
+> 有关事件中心的定价结构，请参阅[事件中心的可用性和支持常见问题解答](../event-hubs/event-hubs-faq.md)一文，有关其详细信息，请参阅[事件中心定价](https://www.azure.cn/pricing/details/event-hubs/)一文。
 
 - [服务总线如何收取费用？](#how-do-you-charge-for-service-bus)
 - [服务总线的哪些使用情况受数据传输限制？ 哪些不受其限制？](#what-usage-of-service-bus-is-subject-to-data-transfer-what-is-not)
@@ -28,7 +30,7 @@
 
 ## <a name="how-do-you-charge-for-service-bus"></a> 服务总线如何收取费用？
 
-有关服务总线定价的完整信息，请参阅[服务总线定价和计费](/documentation/articles/service-bus-pricing-billing/)以及[服务总线定价详细信息](/pricing/details/messaging/)。除标示的价格外，你还需为在其中部署应用程序的数据中心之外的相关数据输出支付费用。有关详细信息，请参阅下面的[服务总线的哪些使用情况受数据传输限制？ 哪些不受其限制？](#what-usage-of-service-bus-is-subject-to-data-transfer-what-is-not)部分。
+有关服务总线定价的完整信息，请参阅[服务总线定价和计费](./service-bus-pricing-billing.md)以及[服务总线定价详细信息](https://www.azure.cn/pricing/details/messaging/)。除标示的价格外，你还需为在其中部署应用程序的数据中心之外的相关数据输出支付费用。有关详细信息，请参阅下面的[服务总线的哪些使用情况受数据传输限制？ 哪些不受其限制？](#what-usage-of-service-bus-is-subject-to-data-transfer-what-is-not)部分。
 
 ## <a name="what-usage-of-service-bus-is-subject-to-data-transfer-what-is-not"></a> 服务总线的哪些使用情况受数据传输限制？ 哪些不受其限制？
 
@@ -67,13 +69,12 @@
 
 虽然我们保留禁用在给定月份超过使用率配额的客户帐户的权利，但我们仍然会在采取任何措施前发送电子邮件通知并会多次尝试与客户联系。超过这些配额的客户仍将负责超出配额的费用。
 
-至于 Azure 上的其他服务，服务总线会强制使用一组特定[配额](/documentation/articles/service-bus-quotas/)，以确保资源的公平使用。服务强制执行的使用率配额如下：
+至于 Azure 上的其他服务，服务总线会强制使用一组特定[配额](./service-bus-quotas.md)，以确保资源的公平使用。服务强制执行的使用率配额如下：
 
 - **队列/主题大小** – 在创建队列或主题时指定最大队列或主题大小。此配额的值可以是 1 GB、2 GB、3 GB、4 GB 或 5 GB。如果达到最大大小，则将拒绝其他传入的消息，调用代码将收到一个异常。
 
 - **并发连接数**
-	- **队列/主题/订阅** -队列/主题/订阅上的并发 TCP 连接数限制为 100。如果达到此配额，将拒绝后续的其他连接请求，调用代码将收到一个异常。对于每个消息工厂，如果由该消息传送工厂创建的任何客户端具有活动的操作挂起时，或者刚完成操作不超过 60 秒时间，则服务总线都会保持一个 TCP 连接。REST 操作不计入并发 TCP 连接数。
-
+    - **队列/主题/订阅** -队列/主题/订阅上的并发 TCP 连接数限制为 100。如果达到此配额，将拒绝后续的其他连接请求，调用代码将收到一个异常。对于每个消息工厂，如果由该消息传送工厂创建的任何客户端具有活动的操作挂起时，或者刚完成操作不超过 60 秒时间，则服务总线都会保持一个 TCP 连接。REST 操作不计入并发 TCP 连接数。
 
 - **中继上的并发侦听器数** - 中继上的并发 **netTcpRelay** 和 **netHttpRelay ** 侦听器数被限制为 25 个（1 表示 **NetOneway** 中继）。
 
@@ -82,14 +83,14 @@
 - **每个服务命名空间的主题/队列数** – 服务命名空间上的主题/队列（持久存储备份的实体）的最大数被限制为 10,000。如果达到此配额，将拒绝后续的在服务命名空间上创建新主题/队列的请求。在这种情况下，[Azure 经典管理门户][] 将显示一条错误消息或调用客户端代码将收到一个异常，具体取决于创建尝试是通过门户还是通过客户端代码完成。
 
 - **消息大小配额**
-	- **队列/主题/订阅**
-		- **消息大小** – 每条消息的总大小限制为 256 KB，包括消息标头。
-		- **消息标头大小** – 每条消息标头限制为 64 KB。
+    - **队列/主题/订阅**
+        - **消息大小** – 每条消息的总大小限制为 256 KB，包括消息标头。
+        - **消息标头大小** – 每条消息标头限制为 64 KB。
 
-	- **NetOneway 和 NetEvent 中继** – 每条消息的总大小限制为 64 KB，包括消息标头。
-	- **Http 和 NetTcp 中继** – 服务总线不强制设置这些消息的大小上限。
+    - **NetOneway 和 NetEvent 中继** – 每条消息的总大小限制为 64 KB，包括消息标头。
+    - **Http 和 NetTcp 中继** – 服务总线不强制设置这些消息的大小上限。
 
-	系统将拒绝超过这些大小配额的消息，调用代码将收到一个异常。
+    系统将拒绝超过这些大小配额的消息，调用代码将收到一个异常。
 
 - **每个主题的订阅数** – 每个主题的最大订阅数被限制为 2000。如果达到此配额，则将拒绝创建该主题的附加订阅的请求。在这种情况下，[Azure 经典管理门户][] 将显示一条错误消息或调用客户端代码将收到一个异常，具体取决于创建尝试是通过门户还是通过客户端代码完成。
 
@@ -97,15 +98,15 @@
 
 - **每个主题的相关筛选器数** – 每个主题的最大相关筛选器数被限制为 100,000。如果达到此配额，将拒绝任何后续的创建该主题的其他筛选器的请求，调用代码将收到一个异常。
 
-有关配额的详细信息，请参阅[服务总线配额](/documentation/articles/service-bus-quotas/)。
+有关配额的详细信息，请参阅[服务总线配额](./service-bus-quotas.md)。
 
 ## 后续步骤
 
 若要了解有关服务总线消息传送的详细信息，请参阅以下主题。
 
-- [服务总线消息传送概述](/documentation/articles/service-bus-messaging-overview/)
-- [Azure 服务总线体系结构概述](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
-- [如何使用 Service Bus 队列](/documentation/articles/service-bus-dotnet-get-started-with-queues/)
+- [服务总线消息传送概述](./service-bus-messaging-overview.md)
+- [Azure 服务总线体系结构概述](./service-bus-fundamentals-hybrid-solutions.md)
+- [如何使用 Service Bus 队列](./service-bus-dotnet-get-started-with-queues.md)
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

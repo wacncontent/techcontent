@@ -1,29 +1,30 @@
-﻿<properties 
-   pageTitle="服务总线示例概述 | Azure"
-    description="分类并介绍相互链接的服务总线消息传送示例。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" />
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/07/2016"
-    ms.author="sethm"  
-    wacn.date="01/04/2017" />
+﻿---
+title: 服务总线示例概述 | Azure
+description: 分类并介绍相互链接的服务总线消息传送示例。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: ''
+
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/07/2016
+ms.author: sethm
+wacn.date: 01/04/2017
+---
 
 # 服务总线消息传送示例
 
-服务总线消息传送示例演示了[服务总线](/home/features/messaging/)（云服务）和 [Windows Server 服务总线](https://msdn.microsoft.com/zh-cn/library/dn282144.aspx)中的主要功能。本文分类并介绍了可用的示例，每个示例均具有链接。
+服务总线消息传送示例演示了[服务总线](https://www.azure.cn/home/features/messaging/)（云服务）和 [Windows Server 服务总线](https://msdn.microsoft.com/zh-cn/library/dn282144.aspx)中的主要功能。本文分类并介绍了可用的示例，每个示例均具有链接。
 
->[AZURE.NOTE] 服务总线示例未安装 SDK。若要获取这些示例，请访问 [Azure SDK 示例页](https://code.msdn.microsoft.com/site/search?query=service%20bus&f%5B0%5D.Value=service%20bus&f%5B0%5D.Type=SearchText&ac=5)。
+>[!NOTE]
+> 服务总线示例未安装 SDK。若要获取这些示例，请访问 [Azure SDK 示例页](https://code.msdn.microsoft.com/site/search?query=service%20bus&f%5B0%5D.Value=service%20bus&f%5B0%5D.Type=SearchText&ac=5)。
 >
 >另外，[此处](https://github.com/Azure-Samples/azure-servicebus-messaging-samples)提供一组已更新的服务总线消息传送示例（撰写本文时未介绍这些示例）。[此处](https://github.com/Azure-Samples/azure-servicebus-relay-samples)是中继示例。
-
 
 ## 服务总线消息传送
 
@@ -49,7 +50,9 @@
 
 1. 运行以下 Azure Powershell cmdlet：
 
-    	get-sbClientConfiguration
+    ```
+    get-sbClientConfiguration
+    ```
 
 2. 将连接字符串粘贴到示例的 App.config 文件中。
 
@@ -100,8 +103,8 @@
 
 有关服务总线的概念性概述，请参阅以下主题。
 
-- [服务总线消息传送概述](/documentation/articles/service-bus-messaging-overview/)
-- [服务总线体系结构](/documentation/articles/service-bus-architecture/)
-- [服务总线基础知识](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
+- [服务总线消息传送概述](./service-bus-messaging-overview.md)
+- [服务总线体系结构](./service-bus-architecture.md)
+- [服务总线基础知识](./service-bus-fundamentals-hybrid-solutions.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用 Azure Service Fabric 群集资源管理器平衡群集 | Azure"
-    description="介绍如何使用 Azure Service Fabric 群集资源管理器平衡群集。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="030b1465-6616-4c0b-8bc7-24ed47d054c0"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider" />  
+---
+title: 使用 Azure Service Fabric 群集资源管理器平衡群集 | Azure
+description: 介绍如何使用 Azure Service Fabric 群集资源管理器平衡群集。
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: 030b1465-6616-4c0b-8bc7-24ed47d054c0
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider
+---
 
 # 均衡 Service Fabric 群集
 Service Fabric 群集资源管理器支持动态负载更改，对节点或服务的添加或删除作出反应，纠正约束冲突，以及重新均衡群集。但是，执行这些操作的频率是什么，以及如何触发这些操作呢？
@@ -38,37 +38,38 @@ Service Fabric 群集资源管理器支持动态负载更改，对节点或服�
 
 ClusterManifest.xml：
 
-
-        <Section Name="PlacementAndLoadBalancing">
-            <Parameter Name="PLBRefreshGap" Value="0.1" />
-            <Parameter Name="MinPlacementInterval" Value="1.0" />
-            <Parameter Name="MinConstraintCheckInterval" Value="1.0" />
-            <Parameter Name="MinLoadBalancingInterval" Value="5.0" />
-        </Section>
+```
+    <Section Name="PlacementAndLoadBalancing">
+        <Parameter Name="PLBRefreshGap" Value="0.1" />
+        <Parameter Name="MinPlacementInterval" Value="1.0" />
+        <Parameter Name="MinConstraintCheckInterval" Value="1.0" />
+        <Parameter Name="MinLoadBalancingInterval" Value="5.0" />
+    </Section>
+```
 
 通过用于独立部署的 ClusterConfig.json 或用于 Azure 托管群集的 Template.json：
 
-
-	"fabricSettings": [
-	  {
-	    "name": "PlacementAndLoadBalancing",
-	    "parameters": [
-	      {
-	          "name": "PLBRefreshGap",
-	          "value": "0.10"
-	      },
-	      {
-	          "name": "MinPlacementInterval",
-	          "value": "1.0"
-	      },
-	      {
-	          "name": "MinLoadBalancingInterval",
-	          "value": "5.0"
-	      }
-	    ]
-	  }
-	]
-
+```
+"fabricSettings": [
+  {
+    "name": "PlacementAndLoadBalancing",
+    "parameters": [
+      {
+          "name": "PLBRefreshGap",
+          "value": "0.10"
+      },
+      {
+          "name": "MinPlacementInterval",
+          "value": "1.0"
+      },
+      {
+          "name": "MinLoadBalancingInterval",
+          "value": "5.0"
+      }
+    ]
+  }
+]
+```
 
 今天群集资源管理器按顺序一次只执行这些操作中的一个（这就是为什么我们将这些计时器称为“最小间隔”）。例如，群集资源管理器处理挂起的请求，以在均衡群集之前创建服务。根据指定的默认时间间隔所示，群集资源管理器会扫描并检查需要频繁执行的任何操作，因此在每个步骤结束时所做的更改集通常比较小。频繁进行微小更改让群集资源管理器能够对群集中发生的事情快速响应。许多相同类型的事件往往同时发生，因此默认计时器可进行某种批处理。默认情况下，群集资源管理器不扫描群集中数小时内进行的更改或尝试一次处理所有更改。这样会导致大量改动。
 
@@ -77,35 +78,36 @@ ClusterManifest.xml：
 ## 均衡阈值
 平衡阈值是触发主动式重新平衡的主要控件。MinLoadBalancingInterval 计时器只反应群集资源管理器应检查的频率，并不代表发生了什么情况。均衡阈值以某个特定指标来定义群集的不均衡程度，使资源管理器能够考虑它是否不均衡并触发均衡操作。
 
-均衡阈值根据每个指标定义为群集定义的一部分。有关指标的详细信息，请参阅[此文](/documentation/articles/service-fabric-cluster-resource-manager-metrics/)。
+均衡阈值根据每个指标定义为群集定义的一部分。有关指标的详细信息，请参阅[此文](./service-fabric-cluster-resource-manager-metrics.md)。
 
 ClusterManifest.xml
 
-
-    <Section Name="MetricBalancingThresholds">
-      <Parameter Name="MetricName1" Value="2"/>
-      <Parameter Name="MetricName2" Value="3.5"/>
-    </Section>
-
+```
+<Section Name="MetricBalancingThresholds">
+  <Parameter Name="MetricName1" Value="2"/>
+  <Parameter Name="MetricName2" Value="3.5"/>
+</Section>
+```
 
 通过用于独立部署的 ClusterConfig.json 或用于 Azure 托管群集的 Template.json：
 
-
-	"fabricSettings": [
-	  {
-	    "name": "MetricBalancingThresholds",
-	    "parameters": [
-	      {
-	          "name": "MetricName1",
-	          "value": "2"
-	      },
-	      {
-	          "name": "MetricName2",
-	          "value": "3.5"
-	      }
-	    ]
-	  }
-	]
+```
+"fabricSettings": [
+  {
+    "name": "MetricBalancingThresholds",
+    "parameters": [
+      {
+          "name": "MetricName1",
+          "value": "2"
+      },
+      {
+          "name": "MetricName2",
+          "value": "3.5"
+      }
+    ]
+  }
+]
+```
 
 指标的平衡阈值是一个比率。如果负载最重的节点的负载量除以负载最轻的节点的负载量超过此数，此群集将被视为不均衡。因此群集资源管理器进行下一次检查时将触发均衡。
 
@@ -136,26 +138,27 @@ ClusterManifest.xml
 
 ClusterManifest.xml
 
-
-    <Section Name="MetricActivityThresholds">
-      <Parameter Name="Memory" Value="1536"/>
-    </Section>
+```
+<Section Name="MetricActivityThresholds">
+  <Parameter Name="Memory" Value="1536"/>
+</Section>
+```
 
 通过用于独立部署的 ClusterConfig.json 或用于 Azure 托管群集的 Template.json：
 
-
-	"fabricSettings": [
-	  {
-	    "name": "MetricActivityThresholds",
-	    "parameters": [
-	      {
-	          "name": "Memory",
-	          "value": "1536"
-	      }
-	    ]
-	  }
-	]
-
+```
+"fabricSettings": [
+  {
+    "name": "MetricActivityThresholds",
+    "parameters": [
+      {
+          "name": "Memory",
+          "value": "1536"
+      }
+    ]
+  }
+]
+```
 
 均衡和活动阈值都绑定到具体指标，只有在同一个指标的均衡阈值和活动阈值都超过时才触发均衡。
 
@@ -179,9 +182,9 @@ ClusterManifest.xml
 </center>
 
 ## 后续步骤
-- 指标是 Service Fabric 群集资源管理器在群集中管理消耗和容量的方式。若要详细了解指标及其配置方式，请查看[此文](/documentation/articles/service-fabric-cluster-resource-manager-metrics/)
-- 移动成本是向群集资源管理器发出信号，表示移动某些服务比移动其他服务会产生更高成本的方式之一。有关移动成本的详细信息，请参阅[此文](/documentation/articles/service-fabric-cluster-resource-manager-movement-cost/)
-- 群集资源管理器提供多个限制机制，你可以配置这些限制机制，以减慢群集中的流动。这些限制通常不是必要的，但如果需要，可以在[此处](/documentation/articles/service-fabric-cluster-resource-manager-advanced-throttling/)了解其相关信息
+- 指标是 Service Fabric 群集资源管理器在群集中管理消耗和容量的方式。若要详细了解指标及其配置方式，请查看[此文](./service-fabric-cluster-resource-manager-metrics.md)
+- 移动成本是向群集资源管理器发出信号，表示移动某些服务比移动其他服务会产生更高成本的方式之一。有关移动成本的详细信息，请参阅[此文](./service-fabric-cluster-resource-manager-movement-cost.md)
+- 群集资源管理器提供多个限制机制，你可以配置这些限制机制，以减慢群集中的流动。这些限制通常不是必要的，但如果需要，可以在[此处](./service-fabric-cluster-resource-manager-advanced-throttling.md)了解其相关信息
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-balancing/cluster-resrouce-manager-balancing-thresholds.png
 [Image2]: ./media/service-fabric-cluster-resource-manager-balancing/cluster-resource-manager-balancing-threshold-triggered-results.png

@@ -1,23 +1,24 @@
-<properties
-    pageTitle="SQL Server 可用性组 - Azure 虚拟机 - 灾难恢复 | Azure"
-    description="本文介绍如何使用不同区域中的副本在 Azure 虚拟机上配置 SQL Server Always On 可用性组。"
-    services="virtual-machines"
-    documentationCenter="na"
-    authors="MikeRayMSFT"
-    manager="jhubbard"
-    editor="monicar"
-    tags="azure-service-management" />
-<tags
-    ms.assetid="388c464e-a16e-4c9d-a0d5-bb7cf5974689"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.custom="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows-sql-server"
-    ms.workload="iaas-sql-server"
-    ms.date="01/09/2017"
-    wacn.date="02/20/2017"
-    ms.author="mikeray" />
+---
+title: SQL Server 可用性组 - Azure 虚拟机 - 灾难恢复 | Azure
+description: 本文介绍如何使用不同区域中的副本在 Azure 虚拟机上配置 SQL Server Always On 可用性组。
+services: virtual-machines
+documentationCenter: na
+authors: MikeRayMSFT
+manager: jhubbard
+editor: monicar
+tags: azure-service-management
+
+ms.assetid: 388c464e-a16e-4c9d-a0d5-bb7cf5974689
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.custom: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: iaas-sql-server
+ms.date: 01/09/2017
+wacn.date: 02/20/2017
+ms.author: mikeray
+---
 
 # 在不同区域中的 Azure 虚拟机上创建 SQL Server Always On 可用性组
 
@@ -29,7 +30,7 @@
 
 ![Availability Group](./media/virtual-machines-windows-portal-sql-availability-group-dr/00-availability-group-basic.png)
 
-在此部署中，所有虚拟机位于一个 Azure 区域。在 SQL-1 和 SQL-2 上，可以使用自动故障转移为可用性组副本配置同步提交。可以使用[可用性组模板或教程](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-overview/)构建此体系结构。
+在此部署中，所有虚拟机位于一个 Azure 区域。在 SQL-1 和 SQL-2 上，可以使用自动故障转移为可用性组副本配置同步提交。可以使用[可用性组模板或教程](./virtual-machines-windows-portal-sql-availability-group-overview.md)构建此体系结构。
 
 如果无法访问 Azure 区域，此体系结构将很容易停机。为了解决此漏洞，可在不同的 Azure 区域添加一个副本。下图显示了新体系结构的大致形式：
 
@@ -37,7 +38,7 @@
 
 上图显示了名为 SQL-3 的新虚拟机。SQL-3 位于不同的 Azure 区域中。SQL-3 已添加到 Windows Server 故障转移群集。SQL-3 可以托管可用性组副本。最后，请注意，SQL-3 所在的 Azure 区域具有一个新的 Azure 负载均衡器。
 
->[AZURE.NOTE]
+>[!NOTE]
 如果同一区域中有多个虚拟机，则需要创建 Azure 可用性集。如果区域中只有一个虚拟机，则不需要可用性集。只能在创建虚拟机时将虚拟机放入可用性集。如果虚拟机已在可用性集中，以后可为附加的副本添加虚拟机。
 
 在此体系结构中，远程区域中的副本通常配置了异步提交可用性模式和手动故障转移模式。
@@ -55,36 +56,36 @@
 
 若要在远程数据中心创建副本，请执行以下步骤：
 
-1. [在新区域中创建虚拟网络](/documentation/articles/virtual-networks-create-vnet-arm-pportal/)
+1. [在新区域中创建虚拟网络](../virtual-network/virtual-networks-create-vnet-arm-pportal.md)
 
-1. [使用 Azure 门户预览配置 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-howto-vnet-vnet-resource-manager-portal/)。
+1. [使用 Azure 门户预览配置 VNet 到 VNet 连接](../vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal.md)。
 
-    >[AZURE.NOTE]
-    在某些情况下，可能需要使用 PowerShell 创建 VNet 到 VNet 连接。例如，如果使用不同的 Azure 帐户，则无法在门户中配置该连接。对于这种情况，请参阅[使用 Azure 门户预览配置 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)。
+    >[!NOTE]
+    在某些情况下，可能需要使用 PowerShell 创建 VNet 到 VNet 连接。例如，如果使用不同的 Azure 帐户，则无法在门户中配置该连接。对于这种情况，请参阅[使用 Azure 门户预览配置 VNet 到 VNet 连接](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)。
 
-1. [在新区域中创建域控制器](/documentation/articles/active-directory-new-forest-virtual-machine/)。
+1. [在新区域中创建域控制器](../active-directory/active-directory-new-forest-virtual-machine.md)。
 
     如果主站点中的域控制器不可用，此域控制器可提供身份验证。
 
-1. [在新区域中创建 SQL Server 虚拟机](/documentation/articles/virtual-machines-windows-portal-sql-server-provision/)。
+1. [在新区域中创建 SQL Server 虚拟机](./virtual-machines-windows-portal-sql-server-provision.md)。
 
-1. [在新区域中的网络上创建 Azure 负载均衡器](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/#configure-internal-load-balancer)。
+1. [在新区域中的网络上创建 Azure 负载均衡器](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md#configure-internal-load-balancer)。
 
     此负载均衡器必须：
-   
+
     - 与新虚拟机位于同一网络和子网中。
     - 对可用性组侦听器使用静态 IP 地址。
     - 包括后端池，该池只由负载均衡器所在同一区域中的虚拟机构成。
     - 使用特定于 IP 地址的 TCP 端口探测。
     - 具有特定于同一区域中 SQL Server 的负载均衡规则。
 
-1. [向新 SQL Server 添加故障转移群集功能](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-prereq/#add-failover-cluster-features-to-both-sql-servers)
+1. [向新 SQL Server 添加故障转移群集功能](./virtual-machines-windows-portal-sql-availability-group-prereq.md#add-failover-cluster-features-to-both-sql-servers)
 
-1. [将新 SQL Server 加入域](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-prereq/#joinDomain)。
+1. [将新 SQL Server 加入域](./virtual-machines-windows-portal-sql-availability-group-prereq.md#joinDomain)。
 
-1. [将新 SQL Server 服务帐户设置为使用域帐户](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-prereq/#setServiceAccount)。
+1. [将新 SQL Server 服务帐户设置为使用域帐户](./virtual-machines-windows-portal-sql-availability-group-prereq.md#setServiceAccount)。
 
-1. [将新 SQL Server 添加到 Windows Server 故障转移群集](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-tutorial/#addNode)。
+1. [将新 SQL Server 添加到 Windows Server 故障转移群集](./virtual-machines-windows-portal-sql-availability-group-tutorial.md#addNode)。
 
 1. 在群集上创建 IP 地址资源。
 
@@ -93,13 +94,13 @@
     ![创建 IP 地址](./media/virtual-machines-windows-portal-sql-availability-group-dr/20-add-ip-resource.png)  
 
     按如下所示配置此 IP 地址：
-   
+
     - 使用远程数据中心内的网络。
     - 从新的 Azure 负载均衡器分配 IP 地址。
 
 1. 在 SQL Server 配置管理器中，[启用 Always On 可用性组](http://msdn.microsoft.com/zh-cn/library/ff878259.aspx)。
 
-1. [在新 SQL Server 上打开防火墙端口](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-prereq/#a-nameendpoint-firewall-configure-the-firewall-on-each-sql-server)。
+1. [在新 SQL Server 上打开防火墙端口](./virtual-machines-windows-portal-sql-availability-group-prereq.md#a-nameendpoint-firewall-configure-the-firewall-on-each-sql-server)。
 
     需要打开的端口号取决于环境。打开镜像终结点和 Azure 负载均衡器运行状况探测的端口。
 
@@ -113,12 +114,12 @@
 
     ![可用性组](./media/virtual-machines-windows-portal-sql-availability-group-dr/50-configure-dependency-multiple-ip.png)  
 
-    >[AZURE.IMPORTANT]
+    >[!IMPORTANT]
     该群集资源组包含这两个 IP 地址。这两个 IP 地址是侦听器客户端接入点的依赖项。在群集依赖项配置中使用 **OR** 运算符。
 
-1. [在 PowerShell 中设置群集参数](/documentation/articles/virtual-machines-windows-portal-sql-availability-group-tutorial/#setparam)。
+1. [在 PowerShell 中设置群集参数](./virtual-machines-windows-portal-sql-availability-group-tutorial.md#setparam)。
 
-    >[AZURE.IMPORTANT]
+    >[!IMPORTANT]
     使用在新区域中的负载均衡器上配置的 IP 地址和探测端口运行 PowerShell 脚本。
 
 ## 设置多个子网的连接
@@ -163,8 +164,8 @@
 ## 其他链接
 
 * [Always On 可用性组](http://msdn.microsoft.com/zh-cn/library/hh510230.aspx)
-* [Azure 虚拟机](/documentation/services/virtual-machines/windows/)
-* [Azure 负载均衡器](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/#configure-internal-load-balancer)
-* [Azure 可用性集](/documentation/articles/virtual-machines-windows-manage-availability/)
+* [Azure 虚拟机](./windows/index.md)
+* [Azure 负载均衡器](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md#configure-internal-load-balancer)
+* [Azure 可用性集](./virtual-machines-windows-manage-availability.md)
 
 <!---HONumber=Mooncake_0213_2017-->

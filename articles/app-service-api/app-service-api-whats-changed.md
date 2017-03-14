@@ -1,21 +1,21 @@
-<properties
-	pageTitle="应用服务 API 应用 - 功能更改 | Azure"
-	description="了解 Azure 应用服务中 API 应用的新增功能"
-	services="app-service\api"
-	documentationCenter=".net"
-	authors="mohitsriv"
-	manager="wpickett"
-	editor="tdykstra"/>
+---
+title: 应用服务 API 应用 - 功能更改 | Azure
+description: 了解 Azure 应用服务中 API 应用的新增功能
+services: app-service\api
+documentationCenter: .net
+authors: mohitsriv
+manager: wpickett
+editor: tdykstra
 
-<tags
-	ms.service="app-service-api"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="02/21/2017"
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 02/21/2017
+ms.author: rachelap
+---
 
 # 应用服务 API 应用 - 功能更改
 
@@ -36,29 +36,33 @@ API 应用更新的关键设计原则是让用户以所选的语言直接使用 
 - **支持直接使用 Azure Active Directory**，无需客户端代码交换会话令牌的 AAD 令牌：客户端可以根据持有者令牌规范，在 Authorization 标头中只包含 AAD 令牌。这也意味着客户端或服务器端上不需要有任何特定于应用服务的 SDK。
 - **服务到服务或“内部”访问**：如果有后台程序进程或其他某个客户端需要在不提供接口的情况下访问 API，可以使用 AAD 服务主体来请求令牌，并将它传递给应用服务，以便在应用程序中进行身份验证。
 - **延迟授权**：许多应用程序对于应用程序的不同部分有各种不同的访问限制。用户可能希望某些 API 可公开访问，但另一些 API 要求登录。原始身份验证/授权功能采用“全有或全无”的模式，整个站点都要求登录。此选项仍然存在，但也可以选择允许应用程序代码在应用服务对用户进行身份验证之后提出访问决策。
- 
-有关新身份验证功能的详细信息，请参阅 [Authentication and authorization for API Apps in Azure App Service](/documentation/articles/app-service-api-authentication/)（Azure 应用服务中 API 应用的身份验证和授权）。有关如何将现有 API 应用从以前的 API 应用模型迁移到新模型的详细信息，请参阅本文稍后的[迁移现有 API 应用](#migrating-existing-api-apps)。
- 
+
+有关新身份验证功能的详细信息，请参阅 [Authentication and authorization for API Apps in Azure App Service](./app-service-api-authentication.md)（Azure 应用服务中 API 应用的身份验证和授权）。有关如何将现有 API 应用从以前的 API 应用模型迁移到新模型的详细信息，请参阅本文稍后的[迁移现有 API 应用](#migrating-existing-api-apps)。
+
 ### CORS
 现在，Azure 管理门户中提供了一个边栏选项卡用于配置 CORS，而不再提供以逗号分隔的 **MS\_CrossDomainOrigins** 应用设置。也可以使用 Azure PowerShell、CLI 等 Resource Manager 工具进行配置。在 **&lt;site name&gt;/web** 资源的 **Microsoft.Web/sites/config** 资源类型中设置 **cors** 属性。例如：
 
-    {
-        "cors": {
-            "allowedOrigins": [
-                "https://localhost:44300"
-            ]
-        }
-    } 
+```
+{
+    "cors": {
+        "allowedOrigins": [
+            "https://localhost:44300"
+        ]
+    }
+} 
+```
 
 ### API 元数据
 Web 应用、移动应用和 API 应用中各自提供了 API 定义边栏选项卡。在管理门户中，可以指定相对 URL，或者提供指向 API 的 Swagger 2.0 表示形式所在的终结点的绝对 URL。也可以使用 Resource Manager 工具进行配置。在 **&lt;site name&gt;/web** 资源的 **Microsoft.Web/sites/config** 资源类型中设置 **apiDefinition** 属性。例如：
 
+```
+{
+    "apiDefinition":
     {
-        "apiDefinition":
-        {
-            "url": "https://myStorageAccount.blob.core.chinacloudapi.cn/swagger/apiDefinition.json"
-        }
+        "url": "https://myStorageAccount.blob.core.chinacloudapi.cn/swagger/apiDefinition.json"
     }
+}
+```
 
 目前，元数据终结点需要在不经过身份验证的情况下即可公开访问，使许多下游客户端（例如 Visual Studio REST API 客户端生成和 PowerApps 的“添加 API”流）能够使用它。这意味着，如果使用应用服务身份验证并想要从应用本身内部公开 API 定义，则需要使用前面所述的“延迟身份验证”选项，使 Swagger 元数据的路由公开。
 
@@ -67,11 +71,11 @@ Web 应用、移动应用和 API 应用中各自提供了 API 定义边栏选项
 
 ## Visual Studio
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 大多数 Web 应用工具适用于新的 API 应用，因为它们共享相同的基础 **Microsoft.Web/sites** 资源类型。但是，应该将 Azure Visual Studio 工具升级到 2.8.1 或更高版本，因为它公开一些特定于 API 的功能。从 [Azure 下载页](/downloads/)下载 SDK。
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-visual-studio-login-guide.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-visual-studio-login-guide.md)]
 
 随着应用服务类型的合理化，发布功能也已在“发布”>“Azure 应用服务”下面统一：
 
@@ -88,8 +92,8 @@ Web 应用、移动应用和 API 应用中各自提供了 API 定义边栏选项
 重新部署的步骤与将任何现有 Web API 部署到应用服务的步骤相同。步骤：
 
 1. 创建一个空的 API 应用。为此，可以在门户中使用“新建”>“API 应用”、在 Visual Studio 中使用“发布”，或者使用 Resource Manager 工具。如果使用 Resource Manager 工具或模板，请在 **Microsoft.Web/sites** 资源类型中将 **kind** 值设置为 **api**，使管理门户中的快速启动和设置面向 API 方案。
-2. 使用应用服务支持的任何部署机制，将项目连接并部署到空 API 应用。有关详细信息，请参阅 [Azure 应用服务部署文档](/documentation/articles/web-sites-deploy/)。
-  
+2. 使用应用服务支持的任何部署机制，将项目连接并部署到空 API 应用。有关详细信息，请参阅 [Azure 应用服务部署文档](../app-service-web/web-sites-deploy.md)。
+
 ### 身份验证
 应用服务身份验证服务支持以前的 API 应用模型所提供的相同功能。如果使用会话令牌并且需要 SDK，请使用以下客户端与服务器 SDK：
 
@@ -104,7 +108,7 @@ Web 应用、移动应用和 API 应用中各自提供了 API 定义边栏选项
 但是，具体对于 Azure Active Directory 而言，如果直接使用 AAD 令牌，则不需要任何特定于应用服务的 SDK。
 
 ### 内部访问
-以前的 API 应用模型包含内置的内部访问级别。这需要使用 SDK 为请求签名。如前所述，在 API 应用模型中，可以使用 AAD 服务主体代替服务到服务身份验证，而不需要特定于应用服务的 SDK。在 [Service principal authentication for API Apps in Azure App Service](/documentation/articles/app-service-api-dotnet-service-principal-auth/)（Azure 应用服务中 API 应用的服务主体身份验证）中了解详细信息。
+以前的 API 应用模型包含内置的内部访问级别。这需要使用 SDK 为请求签名。如前所述，在 API 应用模型中，可以使用 AAD 服务主体代替服务到服务身份验证，而不需要特定于应用服务的 SDK。在 [Service principal authentication for API Apps in Azure App Service](./app-service-api-dotnet-service-principal-auth.md)（Azure 应用服务中 API 应用的服务主体身份验证）中了解详细信息。
 
 ### 发现
 以前的 API 应用模型提供相应的 API，用于在运行时发现同一网关后面同一资源组中的其他 API 应用。在实现微服务模式的体系结构中，此功能特别有用。可以使用许多选项（但这些选项不一定直接受支持）：
@@ -116,7 +120,7 @@ Web 应用、移动应用和 API 应用中各自提供了 API 定义边栏选项
 
 ## 后续步骤
 
-有关详细信息，请参阅 [API 应用文档部分](/documentation/services/app-service/api/)中的文章。这些文章已经过更新，反映 API 应用的新模型。此外，请务必访问论坛，获取其他详细信息或迁移指导：
+有关详细信息，请参阅 [API 应用文档部分](./index.md)中的文章。这些文章已经过更新，反映 API 应用的新模型。此外，请务必访问论坛，获取其他详细信息或迁移指导：
 
 - [MSDN 论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureAPIApps)
 - [CSDN 论坛](http://azure.csdn.net/)

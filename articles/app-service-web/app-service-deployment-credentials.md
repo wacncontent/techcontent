@@ -1,28 +1,28 @@
-<properties
-    pageTitle="Azure App Service 部署凭据 | Azure"
-    description="了解如何使用 Azure App Service 部署凭据。"
-    services="app-service"
-    documentationcenter=""
-    author="dariagrigoriu"
-    manager="wpickett"
-    editor="mollybos" />
-<tags
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.date="01/05/2016"
-    wacn.date="02/10/2017"
-    ms.author="dariagrigoriu" />  
+---
+title: Azure App Service 部署凭据 | Azure
+description: 了解如何使用 Azure App Service 部署凭据。
+services: app-service
+documentationcenter: ''
+author: dariagrigoriu
+manager: wpickett
+editor: mollybos
 
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 01/05/2016
+wacn.date: 02/10/2017
+ms.author: dariagrigoriu
+---
 
 # 配置 Azure 应用服务的部署凭据
-[Azure 应用服务](/documentation/articles/app-service-changes-existing-services/)对于[本地 Git 部署](/documentation/articles/app-service-deploy-local-git/)和 [FTP/S 部署](/documentation/articles/app-service-deploy-ftp/)支持两种类型的凭据。
+[Azure 应用服务](./app-service-changes-existing-services.md)对于[本地 Git 部署](./app-service-deploy-local-git.md)和 [FTP/S 部署](./app-service-deploy-ftp.md)支持两种类型的凭据。
 
-* **用户级凭据**：用于整个 Azure 帐户的一组凭据。在任何订阅中，它均可用于为 Azure 帐户有权访问的任何应用部署应用服务。可从 [Azure 经典管理门户](https://manage.windowsazure.cn)设置或重置用户范围部署凭据，每个应用服务应用在其“仪表板”>“速览”下均有一个可编辑的入口点。这些是可在“应用程序服务”>“&lt;app\_name>”>“部署凭据”下配置的默认凭据集。这也是在门户 GUI（如应用的[资源边栏选项卡](/documentation/articles/resource-group-portal/#manage-resources)的“概述”和“属性”）中显示的默认凭据集。
+* **用户级凭据**：用于整个 Azure 帐户的一组凭据。在任何订阅中，它均可用于为 Azure 帐户有权访问的任何应用部署应用服务。可从 [Azure 经典管理门户](https://manage.windowsazure.cn)设置或重置用户范围部署凭据，每个应用服务应用在其“仪表板”>“速览”下均有一个可编辑的入口点。这些是可在“应用程序服务”>“&lt;app\_name>”>“部署凭据”下配置的默认凭据集。这也是在门户 GUI（如应用的[资源边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)的“概述”和“属性”）中显示的默认凭据集。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     如果通过基于角色的访问控制 (RBAC) 或共同管理员权限委派 Azure 资源的访问权限，则在撤销访问权限前，每个收到应用访问权限的 Azure 用户均可使用自己的个人用户级凭据。不应与其他 Azure 用户共享这些部署凭据。
     >
     >
@@ -44,7 +44,6 @@
 
     ![](./media/app-service-deployment-credentials/publish_profile_get.png)  
 
-
 3. 打开 .PublishSettings 文件并找到具有属性 `publishMethod="FTP"` 的 `<publishProfile>` 标记。然后，获取其 `userName` 和 `password` 属性。这些是应用级凭据。
 
     ![](./media/app-service-deployment-credentials/publish_profile_editor.png)  
@@ -61,7 +60,7 @@
 
 ## 后续步骤
 
-了解如何使用这些凭据从[本地 Git](/documentation/articles/app-service-deploy-local-git/) 或使用 [FTP/S](/documentation/articles/app-service-deploy-ftp/) 部署应用。
+了解如何使用这些凭据从[本地 Git](./app-service-deploy-local-git.md) 或使用 [FTP/S](./app-service-deploy-ftp.md) 部署应用。
 
 <!---HONumber=Mooncake_0206_2017-->
 <!--Update_Description: add details about the 2 type of credentials, and add steps for how to set them-->

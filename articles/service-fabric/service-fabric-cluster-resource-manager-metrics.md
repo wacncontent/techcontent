@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用 Azure Service Fabric 群集资源管理器管理指标 | Azure"
-    description="了解如何在 Service Fabric 中配置和使用指标。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="masnider"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="0d622ea6-a7c7-4bef-886b-06e6b85a97fb"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="01/05/2017"
-    wacn.date="02/20/2017"
-    ms.author="masnider" />  
+---
+title: 使用 Azure Service Fabric 群集资源管理器管理指标 | Azure
+description: 了解如何在 Service Fabric 中配置和使用指标。
+services: service-fabric
+documentationcenter: .net
+author: masnider
+manager: timlt
+editor: ''
 
+ms.assetid: 0d622ea6-a7c7-4bef-886b-06e6b85a97fb
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 01/05/2017
+wacn.date: 02/20/2017
+ms.author: masnider
+---
 
 # 在 Service Fabric 中使用指标管理资源消耗和负载
 在 Service Fabric 中，指标是与服务关切的、由群集中的节点提供的资源相关的一般术语。一般而言，指标是要管理的、用于处理服务性能的任何信息。
@@ -73,45 +73,45 @@
 
 代码：
 
+```
+StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
+StatefulServiceLoadMetricDescription memoryMetric = new StatefulServiceLoadMetricDescription();
+memoryMetric.Name = "MemoryInMb";
+memoryMetric.PrimaryDefaultLoad = 20;
+memoryMetric.SecondaryDefaultLoad = 5;
+memoryMetric.Weight = ServiceLoadMetricWeight.High;
 
-	StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
-	StatefulServiceLoadMetricDescription memoryMetric = new StatefulServiceLoadMetricDescription();
-	memoryMetric.Name = "MemoryInMb";
-	memoryMetric.PrimaryDefaultLoad = 20;
-	memoryMetric.SecondaryDefaultLoad = 5;
-	memoryMetric.Weight = ServiceLoadMetricWeight.High;
-	
-	StatefulServiceLoadMetricDescription primaryCountMetric = new StatefulServiceLoadMetricDescription();
-	primaryCountMetric.Name = "PrimaryCount";
-	primaryCountMetric.PrimaryDefaultLoad = 1;
-	primaryCountMetric.SecondaryDefaultLoad = 0;
-	primaryCountMetric.Weight = ServiceLoadMetricWeight.Medium;
-	
-	StatefulServiceLoadMetricDescription replicaCountMetric = new StatefulServiceLoadMetricDescription();
-	replicaCountMetric.Name = "ReplicaCount";
-	replicaCountMetric.PrimaryDefaultLoad = 1;
-	replicaCountMetric.SecondaryDefaultLoad = 1;
-	replicaCountMetric.Weight = ServiceLoadMetricWeight.Low;
-	
-	StatefulServiceLoadMetricDescription totalCountMetric = new StatefulServiceLoadMetricDescription();
-	totalCountMetric.Name = "Count";
-	totalCountMetric.PrimaryDefaultLoad = 1;
-	totalCountMetric.SecondaryDefaultLoad = 1;
-	totalCountMetric.Weight = ServiceLoadMetricWeight.Low;
-	
-	serviceDescription.Metrics.Add(memoryMetric);
-	serviceDescription.Metrics.Add(primaryCountMetric);
-	serviceDescription.Metrics.Add(replicaCountMetric);
-	serviceDescription.Metrics.Add(totalCountMetric);
-	
-	await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
+StatefulServiceLoadMetricDescription primaryCountMetric = new StatefulServiceLoadMetricDescription();
+primaryCountMetric.Name = "PrimaryCount";
+primaryCountMetric.PrimaryDefaultLoad = 1;
+primaryCountMetric.SecondaryDefaultLoad = 0;
+primaryCountMetric.Weight = ServiceLoadMetricWeight.Medium;
 
+StatefulServiceLoadMetricDescription replicaCountMetric = new StatefulServiceLoadMetricDescription();
+replicaCountMetric.Name = "ReplicaCount";
+replicaCountMetric.PrimaryDefaultLoad = 1;
+replicaCountMetric.SecondaryDefaultLoad = 1;
+replicaCountMetric.Weight = ServiceLoadMetricWeight.Low;
+
+StatefulServiceLoadMetricDescription totalCountMetric = new StatefulServiceLoadMetricDescription();
+totalCountMetric.Name = "Count";
+totalCountMetric.PrimaryDefaultLoad = 1;
+totalCountMetric.SecondaryDefaultLoad = 1;
+totalCountMetric.Weight = ServiceLoadMetricWeight.Low;
+
+serviceDescription.Metrics.Add(memoryMetric);
+serviceDescription.Metrics.Add(primaryCountMetric);
+serviceDescription.Metrics.Add(replicaCountMetric);
+serviceDescription.Metrics.Add(totalCountMetric);
+
+await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
+```
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton –Metric @("Memory,High,20,5”,"PrimaryCount,Medium,1,0”,"ReplicaCount,Low,1,1”,"Count,Low,1,1”)
-
+```
+New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton –Metric @("Memory,High,20,5”,"PrimaryCount,Medium,1,0”,"ReplicaCount,Low,1,1”,"Count,Low,1,1”)
+```
 
 （提醒：如果只想要使用默认指标，则完全不必要处理指标集合，或者在创建服务时执行任何特殊操作。）
 
@@ -141,9 +141,9 @@ Powershell：
 
 代码：
 
-
-	this.ServicePartition.ReportLoad(new List<LoadMetric> { new LoadMetric("MemoryInMb", 1234), new LoadMetric("metric1", 42) });
-
+```
+this.ServicePartition.ReportLoad(new List<LoadMetric> { new LoadMetric("MemoryInMb", 1234), new LoadMetric("metric1", 42) });
+```
 
 服务副本或实例只能针对创建它们时配置使用的指标报告负载。服务可报告的指标列表与创建服务时指定的指标集相同。与服务关联的指标列表也可动态更新。如果服务副本或实例尝试针对当前未配置使用的指标报告负载，Service Fabric 将记录但会忽略该报告。如果同一 API 调用中报告的其他指标有效，将接受并使用这些报告。这是理想的结果，因为可以改善体验。代码可以测量并报告它了解的所有指标，操作员无需更改代码，就能指定和更新该服务的指标配置。例如，管理员或操作员团队可以禁用包含特定服务的错误报告的指标、根据行为重新配置指标的权重，或者仅在通过其他机制部署和验证代码之后才启用新指标。
 
@@ -154,9 +154,9 @@ Powershell：
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton –Metric @("MemoryInMb,High,21,11”,"PrimaryCount,Medium,1,0”,"ReplicaCount,Low,1,1”,"Count,Low,1,1”)
-
+```
+New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton –Metric @("MemoryInMb,High,21,11”,"PrimaryCount,Medium,1,0”,"ReplicaCount,Low,1,1”,"Count,Low,1,1”)
+```
 
 提醒一下，此语法为 \("MetricName, MetricWeight, PrimaryDefaultLoad, SecondaryDefaultLoad"\)。
 
@@ -209,11 +209,11 @@ Powershell：
 在最下面的示例中，群集资源管理器已根据全局均衡和基于服务的均衡来分布副本。在计算解决方案的评分时，群集资源管理器会将大多数权重分配给全局解决方案，将（可配置的）一部分权重分配给单个服务。可以根据针对每个服务配置的指标权重平均值计算全局均衡。可以根据服务自身的定义指标权重均衡每个服务。这可确保服务尽量根据自身的需要在内部实现均衡。因此，如果上述第一个节点发生故障，主副本（和辅助副本）的损失将分布在所有服务的所有分区之间。这种影响对于每个分区都是相同的。
 
 ## 后续步骤
-- 有关可用于配置服务的其他选项的详细信息，请查看 [Learn about configuring Services](/documentation/articles/service-fabric-cluster-resource-manager-configure-services/)（了解如何配置服务）中提供的其他群集资源管理器配置的相关主题
-- 定义碎片整理指标是合并（而不是分散）节点上负载的一种方式。若要了解如何配置重整，请参阅[此文](/documentation/articles/service-fabric-cluster-resource-manager-defragmentation-metrics/)
-- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](/documentation/articles/service-fabric-cluster-resource-manager-balancing/)的文章
-- 参阅 [Service Fabric 群集资源管理器简介](/documentation/articles/service-fabric-cluster-resource-manager-introduction/)，帮助自己入门
-- 移动成本是向群集资源管理器发出信号，表示移动某些服务比移动其他服务会产生更高成本的方式之一。若要了解有关移动成本的详细信息，请参阅[此文](/documentation/articles/service-fabric-cluster-resource-manager-movement-cost/)
+- 有关可用于配置服务的其他选项的详细信息，请查看 [Learn about configuring Services](./service-fabric-cluster-resource-manager-configure-services.md)（了解如何配置服务）中提供的其他群集资源管理器配置的相关主题
+- 定义碎片整理指标是合并（而不是分散）节点上负载的一种方式。若要了解如何配置重整，请参阅[此文](./service-fabric-cluster-resource-manager-defragmentation-metrics.md)
+- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](./service-fabric-cluster-resource-manager-balancing.md)的文章
+- 参阅 [Service Fabric 群集资源管理器简介](./service-fabric-cluster-resource-manager-introduction.md)，帮助自己入门
+- 移动成本是向群集资源管理器发出信号，表示移动某些服务比移动其他服务会产生更高成本的方式之一。若要了解有关移动成本的详细信息，请参阅[此文](./service-fabric-cluster-resource-manager-movement-cost.md)
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-metrics/cluster-resource-manager-cluster-layout-with-default-metrics.png
 [Image2]: ./media/service-fabric-cluster-resource-manager-metrics/Service-Fabric-Resource-Manager-Dynamic-Load-Reports.png

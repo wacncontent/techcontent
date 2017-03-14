@@ -1,22 +1,22 @@
-<properties
-    pageTitle="移动订阅后更改密钥保管库租户 ID | Azure"
-    description="了解将订阅移至不同的租户后如何切换密钥保管库的租户 ID"
-    services="key-vault"
-    documentationcenter=""
-    author="amitbapat"
-    manager="mbaldwin"
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="46d7bc21-fa79-49e4-8c84-032eef1d813e"
-    ms.service="key-vault"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.date="01/07/2017"
-    wacn.date="02/27/2017"
-    ms.author="ambapat" />  
+---
+title: 移动订阅后更改密钥保管库租户 ID | Azure
+description: 了解将订阅移至不同的租户后如何切换密钥保管库的租户 ID
+services: key-vault
+documentationcenter: ''
+author: amitbapat
+manager: mbaldwin
+tags: azure-resource-manager
 
+ms.assetid: 46d7bc21-fa79-49e4-8c84-032eef1d813e
+ms.service: key-vault
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 01/07/2017
+wacn.date: 02/27/2017
+ms.author: ambapat
+---
 
 # 订阅移动后更改密钥保管库租户 ID
 ### 问：我的订阅已从租户 A 移动到租户 B。如何更改我的现有密钥保管库的租户 ID，并为租户 B 中的主体设置正确的 ACL？

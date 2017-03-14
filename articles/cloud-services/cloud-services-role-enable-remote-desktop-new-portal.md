@@ -1,30 +1,28 @@
-<properties
-    pageTitle="为 Azure 云服务中的角色启用远程桌面连接 | Azure"
-    description="如何配置 Azure 云服务应用程序以允许远程桌面连接"
-    services="cloud-services"
-    documentationcenter=""
-    author="seanmck"
-    manager="timlt"
-    editor="" />  
+---
+title: 为 Azure 云服务中的角色启用远程桌面连接 | Azure
+description: 如何配置 Azure 云服务应用程序以允许远程桌面连接
+services: cloud-services
+documentationcenter: ''
+author: seanmck
+manager: timlt
+editor: ''
 
-<tags
-    ms.assetid="73ea1d64-1529-4d72-b58e-f6c10499e6bb"
-    ms.service="cloud-services"
-    ms.workload="tbd"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/28/2016"
-    wacn.date=""
-    ms.author="seanmck" />  
-
+ms.assetid: 73ea1d64-1529-4d72-b58e-f6c10499e6bb
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/28/2016
+wacn.date: ''
+ms.author: seanmck
+---
 
 # 为 Azure 云服务中的角色设置远程桌面连接
->[AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/cloud-services-role-enable-remote-desktop-new-portal/)
-- [Azure 经典管理门户](/documentation/articles/cloud-services-role-enable-remote-desktop/)
-- [PowerShell](/documentation/articles/cloud-services-role-enable-remote-desktop-powershell/)
-
+>[!div class="op_single_selector"]
+- [Azure 门户预览](./cloud-services-role-enable-remote-desktop-new-portal.md)
+- [Azure 经典管理门户](./cloud-services-role-enable-remote-desktop.md)
+- [PowerShell](./cloud-services-role-enable-remote-desktop-powershell.md)
 
 你可以通过远程桌面访问在 Azure 中运行的角色的桌面。也可以使用远程桌面连接，在应用程序正在运行时排查和诊断其问题。
 
@@ -37,16 +35,14 @@ Azure 门户使用远程桌面扩展方法，即使在部署应用程序之后�
 
     ![云服务远程桌面](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop.png)  
 
-
 2. 选择希望为单个角色还是所有角色启用远程桌面，然后将切换器的值更改为“已启用”。
 
 3. 填写所需的字段：用户名、密码、到期时间和证书。
 
     ![云服务远程桌面](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop_Details.png)  
 
-
-   > [AZURE.WARNING]
-   首次启用远程桌面并单击“确定”（复选标记）时，所有角色实例会重新启动。为避免重新启动，必须在角色上安装用于对密码进行加密的证书。若要避免重新启动，请[上载云服务的证书](/documentation/articles/cloud-services-configure-ssl-certificate/#step-3-upload-a-certificate)，然后返回到此对话框。
+   > [!WARNING]
+   首次启用远程桌面并单击“确定”（复选标记）时，所有角色实例会重新启动。为避免重新启动，必须在角色上安装用于对密码进行加密的证书。若要避免重新启动，请[上载云服务的证书](./cloud-services-configure-ssl-certificate.md#step-3-upload-a-certificate)，然后返回到此对话框。
    >
    >
 3. 在“角色”中，选择要更新的角色，或选择“全部”以选择所有角色。
@@ -62,11 +58,10 @@ Azure 门户使用远程桌面扩展方法，即使在部署应用程序之后�
 
     ![云服务远程桌面](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop_Connect.png)  
 
-
 4. 依次单击“打开”和“连接”以启动远程桌面连接。
 
 ## 后续步骤
 
-[如何配置云服务](/documentation/articles/cloud-services-how-to-configure/)。
+[如何配置云服务](./cloud-services-how-to-configure.md)。
 
 <!---HONumber=Mooncake_1226_2016-->

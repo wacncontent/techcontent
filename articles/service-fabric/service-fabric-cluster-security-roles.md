@@ -1,26 +1,21 @@
+---
+title: Service Fabric 群集安全性：客户端角色 | Azure
+description: 本文介绍两个客户端角色以及提供给这些角色的权限。
+services: service-fabric
+documentationCenter: .net
+authors: mani-ramaswamy
+manager: coreysa
+editor: ''
 
-<properties
-   pageTitle="Service Fabric 群集安全性：客户端角色 | Azure"
-   description="本文介绍两个客户端角色以及提供给这些角色的权限。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="mani-ramaswamy"
-   manager="coreysa"
-   editor=""/>  
-
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/14/2016"
-   wacn.date="01/25/2017"
-   ms.author="subramar"/>  
-
-
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/14/2016
+wacn.date: 01/25/2017
+ms.author: subramar
+---
 
 # 适用于 Service Fabric 客户端的基于角色的访问控制
 
@@ -28,14 +23,11 @@ Azure Service Fabric 针对连接到 Service Fabric 群集的客户端支持两�
 
 **管理员**对管理功能（包括读取/写入功能）拥有完全访问权限。默认情况下，**用户**只有管理功能的读取访问权限（例如查询功能），以及解析应用程序和服务的能力。
 
-可在创建群集时为每个角色提供不同的证书，以指定两个客户端角色（管理员和客户端）。有关设置安全 Service Fabric 群集的详细信息，请参阅 [Service Fabric 群集安全性](/documentation/articles/service-fabric-cluster-security/)。
-
+可在创建群集时为每个角色提供不同的证书，以指定两个客户端角色（管理员和客户端）。有关设置安全 Service Fabric 群集的详细信息，请参阅 [Service Fabric 群集安全性](./service-fabric-cluster-security.md)。
 
 ## 默认访问控制设置
 
-
 管理员访问控制类型对所有 FabricClient API 拥有完全访问权限。它可以对 Service Fabric 群集执行任何读取和写入，包括以下操作：
-
 
 ### 应用程序和服务操作
 * **CreateService**：创建服务
@@ -56,7 +48,6 @@ Azure Service Fabric 针对连接到 Service Fabric 群集的客户端支持两�
 * **RecoverPartitions**：恢复多个分区
 * **RecoverServicePartitions**：恢复服务分区
 * **RecoverSystemPartitions**：恢复系统服务分区
-
 
 ### 群集操作
 * **ProvisionFabric**：预配 MSI 和/或群集清单
@@ -87,8 +78,6 @@ Azure Service Fabric 针对连接到 Service Fabric 群集的客户端支持两�
 * **Query**：允许所有查询
 * **NameExists**：检查命名 URI 是否存在
 
-
-
 用户访问控制类型默认限制为以下操作：
 
 * **EnumerateSubnames**：枚举命名 URI
@@ -110,12 +99,12 @@ Azure Service Fabric 针对连接到 Service Fabric 群集的客户端支持两�
 
 ## 更改客户端角色的默认设置
 
-在群集清单文件中，你可以根据需要向客户端提供管理功能。可以更改默认设置，方法是在[创建群集](/documentation/articles/service-fabric-cluster-creation-via-portal/)过程中转到“结构设置”选项，然后在“名称”、“管理员”、“用户”和“值”字段中提供上述设置。
+在群集清单文件中，你可以根据需要向客户端提供管理功能。可以更改默认设置，方法是在[创建群集](./service-fabric-cluster-creation-via-portal.md)过程中转到“结构设置”选项，然后在“名称”、“管理员”、“用户”和“值”字段中提供上述设置。
 
 ## 后续步骤
 
-[Service Fabric 群集安全性](/documentation/articles/service-fabric-cluster-security/)
+[Service Fabric 群集安全性](./service-fabric-cluster-security.md)
 
-[创建 Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-via-portal/)
+[创建 Service Fabric 群集](./service-fabric-cluster-creation-via-portal.md)
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

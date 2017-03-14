@@ -1,34 +1,32 @@
-<properties
-    pageTitle="在 Azure Site Recovery 中创建用于故障转移和恢复的恢复计划 | Azure"
-    description="介绍如何在 Azure Site Recovery 中创建和自定义用于故障转移以及恢复 VM 与物理服务器的恢复计划"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="" />
-<tags
-    ms.assetid="72408c62-fcb6-4ee2-8ff5-cab1218773f2"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="02/14/2017"
-    wacn.date="03/10/2017"
-    ms.author="raynew" />  
+---
+title: 在 Azure Site Recovery 中创建用于故障转移和恢复的恢复计划 | Azure
+description: 介绍如何在 Azure Site Recovery 中创建和自定义用于故障转移以及恢复 VM 与物理服务器的恢复计划
+services: site-recovery
+documentationcenter: ''
+author: rayne-wiselman
+manager: jwhit
+editor: ''
 
+ms.assetid: 72408c62-fcb6-4ee2-8ff5-cab1218773f2
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 02/14/2017
+wacn.date: 03/10/2017
+ms.author: raynew
+---
 
 # 创建恢复计划
 
-
-本文提供有关在 [Azure Site Recovery](/documentation/articles/site-recovery-overview/) 中创建和自定义恢复计划的信息。
+本文提供有关在 [Azure Site Recovery](./site-recovery-overview.md) 中创建和自定义恢复计划的信息。
 
  恢复计划执行以下操作：
 
 * 定义要一起故障转移再同时启动的计算机组。
 * 将计算机一起分组到恢复计划组中，为计算机之间的依赖关系建模。例如，若要故障转移并启动特定的应用程序，可将该应用程序的所有 VM 分组到同一个恢复计划组中。
 * 故障转移。可以对恢复计划运行测试、计划或非计划的故障转移。
-
 
 ## 创建恢复计划
 
@@ -46,7 +44,7 @@
 - **添加新组** - 向默认组添加其他恢复计划组（最多 7 个），然后向这些组添加更多计算机或复制组。组将按添加顺序进行编号。一个虚拟机或复制组只能包含在一个恢复计划组中。
 - **添加手动操作** - 可以添加要在恢复计划组之前或之后运行的手动操作。恢复计划运行时，将在手动操作的插入点停止。此时会显示一个对话框，提示你指定该手动操作已完成。
 - **添加脚本** - 可添加在恢复计划组前或后运行的脚本。添加脚本时，将为该组添加一组新的操作。例如，将使用以下名称创建组 1 的一组预先步骤：“组 1: 预先步骤”。该集中将列出所有预先步骤。仅当已部署 VMM 服务器时，才能在主站点上添加脚本。
-- **添加 Azure Runbook** - 可通过 Azure Runbook 扩展恢复计划。例如，自动执行任务或创建单步恢复。[了解详细信息](/documentation/articles/site-recovery-runbook-automation/)。
+- **添加 Azure Runbook** - 可通过 Azure Runbook 扩展恢复计划。例如，自动执行任务或创建单步恢复。[了解详细信息](./site-recovery-runbook-automation.md)。
 
 ## 添加脚本
 
@@ -85,7 +83,6 @@
 5. 如果添加 Azure 自动化 Runbook，请指定该 Runbook 所在的 Azure 自动化帐户，然后选择相应的 Azure Runbook 脚本。
 6. 执行恢复计划故障转移，确保脚本按预期运行。
 
-
 ### VMM 脚本
 
 如果有一个 VMM 源站点，可在 VMM 服务器上创建一个脚本，并将其包含在恢复计划中。
@@ -94,10 +91,9 @@
 2. 创建脚本（例如，RPScript），并验证其按预期运行。
 3. 将该脚本放在源和目标 VMM 服务器上的 <VMMServerName> \\MSSCVMMLibrary 位置。
 
-
 ## 后续步骤
 
-[详细了解](/documentation/articles/site-recovery-failover/)如何运行故障转移。
+[详细了解](./site-recovery-failover.md)如何运行故障转移。
 
 <!---HONumber=Mooncake_0306_2017-->
 <!--Update_Description: whole content update-->

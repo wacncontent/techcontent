@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="Azure 服务总线 | Azure" 
-	description="介绍如何使用服务总线将 Azure 应用程序连接到其他软件。" 
-	services="service-bus" 
-	documentationCenter=".net" 
-	authors="sethmanheim" 
-	manager="timlt" 
-	editor=""/>  
+---
+title: Azure 服务总线 | Azure
+description: 介绍如何使用服务总线将 Azure 应用程序连接到其他软件。
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: ''
 
-
-<tags 
-	ms.service="service-bus" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="get-started-article" 
-	ms.date="01/10/2017" 
-	ms.author="sethm"
-	wacn.date="02/20/2017"/>  
-
+ms.service: service-bus
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 01/10/2017
+ms.author: sethm
+wacn.date: 02/20/2017
+---
 
 # Azure 服务总线
 
@@ -49,7 +47,6 @@
 
 ![][2]  
 
-
 **图 2：服务总线队列提供单向异步排队方法。**
 
 过程很简单：发送方将消息发送至服务总线队列，接收方在随后的某个时间内接收该消息。一个队列只能有一个接收方，如图 2 所示。或者，多个应用程序可从同一个队列读取。在后一种情况下，每条消息仅由一个接收方读取。对于多播服务，应改用主题。
@@ -73,7 +70,6 @@
 
 ![][3]  
 
- 
 **图 3：根据订阅应用程序指定的筛选器，它可接收发送至服务总线主题的部分或全部消息。**
 
 *主题*在很多方面与队列类似。发送方将消息提交至主题的方式与将消息提交至队列的方式相同，这些消息与使用队列的消息看起来一样。最大的区别是主题允许每个接收应用程序通过定义*筛选器*创建其自己的*订阅*。然后，订户将只能看到与该筛选器匹配的消息。例如，图 3 显示了一个发送方以及一个具有三个订户的主题，每个订户都拥有自己的筛选器：
@@ -89,7 +85,6 @@
 
 ![][4]  
 
- 
 **图 4：服务总线中继提供应用程序之间的同步双向通信。**
 
 关于中继的一个很明显的问题是：为何我要使用中继？ 即使我不需要队列，为什么仍然要通过云服务进行应用程序通信，而非直接交互？ 答案是直接对话比您想象的更困难。
@@ -112,10 +107,10 @@
 
 现在，你已了解有关 Azure 服务总线的基础知识，请单击下面的链接了解更多信息。
 
-- 如何使用[服务总线队列](/documentation/articles/service-bus-dotnet-get-started-with-queues/)。
-- 如何使用[服务总线主题](/documentation/articles/service-bus-dotnet-how-to-use-topics-subscriptions/)。
-- 如何使用[服务总线中继](/documentation/articles/service-bus-dotnet-how-to-use-relay/)。
-- [服务总线示例](/documentation/articles/service-bus-samples/)
+- 如何使用[服务总线队列](./service-bus-dotnet-get-started-with-queues.md)。
+- 如何使用[服务总线主题](./service-bus-dotnet-how-to-use-topics-subscriptions.md)。
+- 如何使用[服务总线中继](./service-bus-dotnet-how-to-use-relay.md)。
+- [服务总线示例](./service-bus-samples.md)
 
 [1]: ./media/service-bus-fundamentals-hybrid-solutions/SvcBus_01_architecture.png
 [2]: ./media/service-bus-fundamentals-hybrid-solutions/SvcBus_02_queues.png

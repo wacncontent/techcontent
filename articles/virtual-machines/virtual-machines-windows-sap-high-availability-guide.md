@@ -1,24 +1,24 @@
-<properties
-    pageTitle="针对 SAP NetWeaver 的 Azure 虚拟机高可用性 | Azure"
-    description="Azure 虚拟机上的 SAP NetWeaver 高可用性指南"
-    services="virtual-machines-windows,virtual-network,storage"
-    documentationcenter="saponazure"
-    author="goraco"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager"
-    keywords="" />
-<tags
-    ms.assetid="5e514964-c907-4324-b659-16dd825f6f87"
-    ms.service="virtual-machines-windows"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="12/07/2016"
-    wacn.date="02/24/2017"
-    ms.author="goraco" />  
+---
+title: 针对 SAP NetWeaver 的 Azure 虚拟机高可用性 | Azure
+description: Azure 虚拟机上的 SAP NetWeaver 高可用性指南
+services: virtual-machines-windows,virtual-network,storage
+documentationcenter: saponazure
+author: goraco
+manager: timlt
+editor: ''
+tags: azure-resource-manager
+keywords: ''
 
+ms.assetid: 5e514964-c907-4324-b659-16dd825f6f87
+ms.service: virtual-machines-windows
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 12/07/2016
+wacn.date: 02/24/2017
+ms.author: goraco
+---
 
 # 针对 SAP NetWeaver 的 Azure 虚拟机高可用性
 
@@ -69,30 +69,30 @@
 
 [sap-installation-guides]: http://service.sap.com/instguides
 
-[azure-cli]: /documentation/articles/xplat-cli-install/
+[azure-cli]: ../xplat-cli-install.md
 [azure-portal]: https://portal.azure.cn
 [azure-ps]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 [azure-quickstart-templates-github]: https://github.com/Azure/azure-quickstart-templates
 [azure-script-ps]: https://go.microsoft.com/fwlink/p/?LinkID=395017
-[azure-subscription-service-limits]: /documentation/articles/azure-subscription-service-limits/
-[azure-subscription-service-limits-subscription]: /documentation/articles/azure-subscription-service-limits/
+[azure-subscription-service-limits]: ../azure-subscription-service-limits.md
+[azure-subscription-service-limits-subscription]: ../azure-subscription-service-limits.md
 
-[dbms-guide]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/
-[dbms-guide-2.1]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#c7abf1f0-c927-4a7c-9c1d-c7b5b3b7212f
-[dbms-guide-2.2]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#c8e566f9-21b7-4457-9f7f-126036971a91
-[dbms-guide-2.3]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#10b041ef-c177-498a-93ed-44b3441ab152
-[dbms-guide-2]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#65fa79d6-a85f-47ee-890b-22e794f51a64
-[dbms-guide-3]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#871dfc27-e509-4222-9370-ab1de77021c3
-[dbms-guide-5.5.1]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#0fef0e79-d3fe-4ae2-85af-73666a6f7268
-[dbms-guide-5.5.2]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#f9071eff-9d72-4f47-9da4-1852d782087b
-[dbms-guide-5.6]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#1b353e38-21b3-4310-aeb6-a77e7c8e81c8
-[dbms-guide-5.8]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#9053f720-6f3b-4483-904d-15dc54141e30
-[dbms-guide-5]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#3264829e-075e-4d25-966e-a49dad878737
-[dbms-guide-8.4.1]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#b48cfe3b-48e9-4f5b-a783-1d29155bd573
-[dbms-guide-8.4.2]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#23c78d3b-ca5a-4e72-8a24-645d141a3f5d
-[dbms-guide-8.4.3]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#77cd2fbb-307e-4cbf-a65f-745553f72d2c
-[dbms-guide-8.4.4]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#f77c1436-9ad8-44fb-a331-8671342de818
-[dbms-guide-900-sap-cache-server-on-premises]: /documentation/articles/virtual-machines-windows-sap-dbms-guide/#642f746c-e4d4-489d-bf63-73e80177a0a8
+[dbms-guide]: ./virtual-machines-windows-sap-dbms-guide.md
+[dbms-guide-2.1]: ./virtual-machines-windows-sap-dbms-guide.md#c7abf1f0-c927-4a7c-9c1d-c7b5b3b7212f
+[dbms-guide-2.2]: ./virtual-machines-windows-sap-dbms-guide.md#c8e566f9-21b7-4457-9f7f-126036971a91
+[dbms-guide-2.3]: ./virtual-machines-windows-sap-dbms-guide.md#10b041ef-c177-498a-93ed-44b3441ab152
+[dbms-guide-2]: ./virtual-machines-windows-sap-dbms-guide.md#65fa79d6-a85f-47ee-890b-22e794f51a64
+[dbms-guide-3]: ./virtual-machines-windows-sap-dbms-guide.md#871dfc27-e509-4222-9370-ab1de77021c3
+[dbms-guide-5.5.1]: ./virtual-machines-windows-sap-dbms-guide.md#0fef0e79-d3fe-4ae2-85af-73666a6f7268
+[dbms-guide-5.5.2]: ./virtual-machines-windows-sap-dbms-guide.md#f9071eff-9d72-4f47-9da4-1852d782087b
+[dbms-guide-5.6]: ./virtual-machines-windows-sap-dbms-guide.md#1b353e38-21b3-4310-aeb6-a77e7c8e81c8
+[dbms-guide-5.8]: ./virtual-machines-windows-sap-dbms-guide.md#9053f720-6f3b-4483-904d-15dc54141e30
+[dbms-guide-5]: ./virtual-machines-windows-sap-dbms-guide.md#3264829e-075e-4d25-966e-a49dad878737
+[dbms-guide-8.4.1]: ./virtual-machines-windows-sap-dbms-guide.md#b48cfe3b-48e9-4f5b-a783-1d29155bd573
+[dbms-guide-8.4.2]: ./virtual-machines-windows-sap-dbms-guide.md#23c78d3b-ca5a-4e72-8a24-645d141a3f5d
+[dbms-guide-8.4.3]: ./virtual-machines-windows-sap-dbms-guide.md#77cd2fbb-307e-4cbf-a65f-745553f72d2c
+[dbms-guide-8.4.4]: ./virtual-machines-windows-sap-dbms-guide.md#f77c1436-9ad8-44fb-a331-8671342de818
+[dbms-guide-900-sap-cache-server-on-premises]: ./virtual-machines-windows-sap-dbms-guide.md#642f746c-e4d4-489d-bf63-73e80177a0a8
 
 [dbms-guide-figure-100]: ./media/virtual-machines-shared-sap-dbms-guide/100_storage_account_types.png
 [dbms-guide-figure-200]: ./media/virtual-machines-shared-sap-dbms-guide/200-ha-set-for-dbms-ha.png
@@ -104,61 +104,61 @@
 [dbms-guide-figure-800]: ./media/virtual-machines-shared-sap-dbms-guide/800-azure-vm-sap-content-server.png
 [dbms-guide-figure-900]: ./media/virtual-machines-shared-sap-dbms-guide/900-sap-cache-server-on-premises.png
 
-[deployment-guide]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/
-[deployment-guide-2.2]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#42ee2bdb-1efc-4ec7-ab31-fe4c22769b94
-[deployment-guide-3.1.2]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#3688666f-281f-425b-a312-a77e7db2dfab
-[deployment-guide-3.2]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#db477013-9060-4602-9ad4-b0316f8bb281
-[deployment-guide-3.3]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#54a1fc6d-24fd-4feb-9c57-ac588a55dff2
-[deployment-guide-3.4]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#a9a60133-a763-4de8-8986-ac0fa33aa8c1
-[deployment-guide-3]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#b3253ee3-d63b-4d74-a49b-185e76c4088e
-[deployment-guide-4.1]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#604bcec2-8b6e-48d2-a944-61b0f5dee2f7
-[deployment-guide-4.2]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#7ccf6c3e-97ae-4a7a-9c75-e82c37beb18e
-[deployment-guide-4.3]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#31d9ecd6-b136-4c73-b61e-da4a29bbc9cc
-[deployment-guide-4.4.2]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#6889ff12-eaaf-4f3c-97e1-7c9edc7f7542
-[deployment-guide-4.4]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#c7cbb0dc-52a4-49db-8e03-83e7edc2927d
-[deployment-guide-4.5.1]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#987cf279-d713-4b4c-8143-6b11589bb9d4
-[deployment-guide-4.5.2]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#408f3779-f422-4413-82f8-c57a23b4fc2f
-[deployment-guide-4.5]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#d98edcd3-f2a1-49f7-b26a-07448ceb60ca
-[deployment-guide-5.1]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#bb61ce92-8c5c-461f-8c53-39f5e5ed91f2
-[deployment-guide-5.2]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#e2d592ff-b4ea-4a53-a91a-e5521edb6cd1
-[deployment-guide-5.3]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#fe25a7da-4e4e-4388-8907-8abc2d33cfd8
+[deployment-guide]: ./virtual-machines-windows-sap-deployment-guide.md
+[deployment-guide-2.2]: ./virtual-machines-windows-sap-deployment-guide.md#42ee2bdb-1efc-4ec7-ab31-fe4c22769b94
+[deployment-guide-3.1.2]: ./virtual-machines-windows-sap-deployment-guide.md#3688666f-281f-425b-a312-a77e7db2dfab
+[deployment-guide-3.2]: ./virtual-machines-windows-sap-deployment-guide.md#db477013-9060-4602-9ad4-b0316f8bb281
+[deployment-guide-3.3]: ./virtual-machines-windows-sap-deployment-guide.md#54a1fc6d-24fd-4feb-9c57-ac588a55dff2
+[deployment-guide-3.4]: ./virtual-machines-windows-sap-deployment-guide.md#a9a60133-a763-4de8-8986-ac0fa33aa8c1
+[deployment-guide-3]: ./virtual-machines-windows-sap-deployment-guide.md#b3253ee3-d63b-4d74-a49b-185e76c4088e
+[deployment-guide-4.1]: ./virtual-machines-windows-sap-deployment-guide.md#604bcec2-8b6e-48d2-a944-61b0f5dee2f7
+[deployment-guide-4.2]: ./virtual-machines-windows-sap-deployment-guide.md#7ccf6c3e-97ae-4a7a-9c75-e82c37beb18e
+[deployment-guide-4.3]: ./virtual-machines-windows-sap-deployment-guide.md#31d9ecd6-b136-4c73-b61e-da4a29bbc9cc
+[deployment-guide-4.4.2]: ./virtual-machines-windows-sap-deployment-guide.md#6889ff12-eaaf-4f3c-97e1-7c9edc7f7542
+[deployment-guide-4.4]: ./virtual-machines-windows-sap-deployment-guide.md#c7cbb0dc-52a4-49db-8e03-83e7edc2927d
+[deployment-guide-4.5.1]: ./virtual-machines-windows-sap-deployment-guide.md#987cf279-d713-4b4c-8143-6b11589bb9d4
+[deployment-guide-4.5.2]: ./virtual-machines-windows-sap-deployment-guide.md#408f3779-f422-4413-82f8-c57a23b4fc2f
+[deployment-guide-4.5]: ./virtual-machines-windows-sap-deployment-guide.md#d98edcd3-f2a1-49f7-b26a-07448ceb60ca
+[deployment-guide-5.1]: ./virtual-machines-windows-sap-deployment-guide.md#bb61ce92-8c5c-461f-8c53-39f5e5ed91f2
+[deployment-guide-5.2]: ./virtual-machines-windows-sap-deployment-guide.md#e2d592ff-b4ea-4a53-a91a-e5521edb6cd1
+[deployment-guide-5.3]: ./virtual-machines-windows-sap-deployment-guide.md#fe25a7da-4e4e-4388-8907-8abc2d33cfd8
 
-[deployment-guide-configure-monitoring-scenario-1]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#ec323ac3-1de9-4c3a-b770-4ff701def65b
-[deployment-guide-configure-proxy]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#baccae00-6f79-4307-ade4-40292ce4e02d
+[deployment-guide-configure-monitoring-scenario-1]: ./virtual-machines-windows-sap-deployment-guide.md#ec323ac3-1de9-4c3a-b770-4ff701def65b
+[deployment-guide-configure-proxy]: ./virtual-machines-windows-sap-deployment-guide.md#baccae00-6f79-4307-ade4-40292ce4e02d
 [deployment-guide-figure-100]: ./media/virtual-machines-shared-sap-deployment-guide/100-deploy-vm-image.png
 [deployment-guide-figure-1000]: ./media/virtual-machines-shared-sap-deployment-guide/1000-service-properties.png
-[deployment-guide-figure-11]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#figure-11
+[deployment-guide-figure-11]: ./virtual-machines-windows-sap-deployment-guide.md#figure-11
 [deployment-guide-figure-1100]: ./media/virtual-machines-shared-sap-deployment-guide/1100-azperflib.png
 [deployment-guide-figure-1200]: ./media/virtual-machines-shared-sap-deployment-guide/1200-cmd-test-login.png
 [deployment-guide-figure-1300]: ./media/virtual-machines-shared-sap-deployment-guide/1300-cmd-test-executed.png
-[deployment-guide-figure-14]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#figure-14
+[deployment-guide-figure-14]: ./virtual-machines-windows-sap-deployment-guide.md#figure-14
 [deployment-guide-figure-1400]: ./media/virtual-machines-shared-sap-deployment-guide/1400-azperflib-error-servicenotstarted.png
 [deployment-guide-figure-300]: ./media/virtual-machines-shared-sap-deployment-guide/300-deploy-private-image.png
 [deployment-guide-figure-400]: ./media/virtual-machines-shared-sap-deployment-guide/400-deploy-using-disk.png
-[deployment-guide-figure-5]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#figure-5
+[deployment-guide-figure-5]: ./virtual-machines-windows-sap-deployment-guide.md#figure-5
 [deployment-guide-figure-50]: ./media/virtual-machines-shared-sap-deployment-guide/50-forced-tunneling-suse.png
 [deployment-guide-figure-500]: ./media/virtual-machines-shared-sap-deployment-guide/500-install-powershell.png
-[deployment-guide-figure-6]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#figure-6
+[deployment-guide-figure-6]: ./virtual-machines-windows-sap-deployment-guide.md#figure-6
 [deployment-guide-figure-600]: ./media/virtual-machines-shared-sap-deployment-guide/600-powershell-version.png
-[deployment-guide-figure-7]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#figure-7
+[deployment-guide-figure-7]: ./virtual-machines-windows-sap-deployment-guide.md#figure-7
 [deployment-guide-figure-700]: ./media/virtual-machines-shared-sap-deployment-guide/700-install-powershell-installed.png
 [deployment-guide-figure-760]: ./media/virtual-machines-shared-sap-deployment-guide/760-azure-cli-version.png
 [deployment-guide-figure-900]: ./media/virtual-machines-shared-sap-deployment-guide/900-cmd-update-executed.png
-[deployment-guide-figure-azure-cli-installed]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#402488e5-f9bb-4b29-8063-1c5f52a892d0
-[deployment-guide-figure-azure-cli-version]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#0ad010e6-f9b5-4c21-9c09-bb2e5efb3fda
-[deployment-guide-install-vm-agent-windows]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#b2db5c9a-a076-42c6-9835-16945868e866
-[deployment-guide-troubleshooting-chapter]: /documentation/articles/virtual-machines-windows-sap-deployment-guide/#564adb4f-5c95-4041-9616-6635e83a810b
+[deployment-guide-figure-azure-cli-installed]: ./virtual-machines-windows-sap-deployment-guide.md#402488e5-f9bb-4b29-8063-1c5f52a892d0
+[deployment-guide-figure-azure-cli-version]: ./virtual-machines-windows-sap-deployment-guide.md#0ad010e6-f9b5-4c21-9c09-bb2e5efb3fda
+[deployment-guide-install-vm-agent-windows]: ./virtual-machines-windows-sap-deployment-guide.md#b2db5c9a-a076-42c6-9835-16945868e866
+[deployment-guide-troubleshooting-chapter]: ./virtual-machines-windows-sap-deployment-guide.md#564adb4f-5c95-4041-9616-6635e83a810b
 
-[deploy-template-cli]: /documentation/articles/resource-group-template-deploy/#deploy-with-azure-cli-for-mac-linux-and-windows
-[deploy-template-portal]: /documentation/articles/resource-group-template-deploy/#deploy-with-the-preview-portal
-[deploy-template-powershell]: /documentation/articles/resource-group-template-deploy/#deploy-with-powershell
+[deploy-template-cli]: ../azure-resource-manager/resource-group-template-deploy.md#deploy-with-azure-cli-for-mac-linux-and-windows
+[deploy-template-portal]: ../azure-resource-manager/resource-group-template-deploy.md#deploy-with-the-preview-portal
+[deploy-template-powershell]: ../azure-resource-manager/resource-group-template-deploy.md#deploy-with-powershell
 
 [dr-guide-classic]: http://go.microsoft.com/fwlink/?LinkID=521971
 
-[getting-started]: /documentation/articles/virtual-machines-windows-sap-get-started/
-[getting-started-dbms]: /documentation/articles/virtual-machines-windows-sap-get-started/#1343ffe1-8021-4ce6-a08d-3a1553a4db82
-[getting-started-deployment]: /documentation/articles/virtual-machines-windows-sap-get-started/#6aadadd2-76b5-46d8-8713-e8d63630e955
-[getting-started-planning]: /documentation/articles/virtual-machines-windows-sap-get-started/#3da0389e-708b-4e82-b2a2-e92f132df89c
+[getting-started]: ./virtual-machines-windows-sap-get-started.md
+[getting-started-dbms]: ./virtual-machines-windows-sap-get-started.md#1343ffe1-8021-4ce6-a08d-3a1553a4db82
+[getting-started-deployment]: ./virtual-machines-windows-sap-get-started.md#6aadadd2-76b5-46d8-8713-e8d63630e955
+[getting-started-planning]: ./virtual-machines-windows-sap-get-started.md#3da0389e-708b-4e82-b2a2-e92f132df89c
 
 [getting-started-windows-classic]: /documentation/articles/virtual-machines-windows-classic-sap-get-started/
 [getting-started-windows-classic-dbms]: /documentation/articles/virtual-machines-windows-classic-sap-get-started/#c5b77a14-f6b4-44e9-acab-4d28ff72a930
@@ -169,7 +169,7 @@
 
 [ha-guide-classic]: http://go.microsoft.com/fwlink/?LinkId=613056
 
-[ha-guide]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/
+[ha-guide]: ./virtual-machines-windows-sap-high-availability-guide.md
 
 [install-extension-cli]: /documentation/articles/virtual-machines-linux-enable-aem/
 
@@ -178,33 +178,33 @@
 
 [msdn-set-azurermvmaemextension]: https://msdn.microsoft.com/zh-cn/library/azure/mt670598.aspx
 
-[planning-guide]: /documentation/articles/virtual-machines-windows-sap-planning-guide/
-[planning-guide-1.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#e55d1e22-c2c8-460b-9897-64622a34fdff
-[planning-guide-11]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#7cf991a1-badd-40a9-944e-7baae842a058
-[planning-guide-11.4.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#5d9d36f9-9058-435d-8367-5ad05f00de77
-[planning-guide-11.5]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#4e165b58-74ca-474f-a7f4-5e695a93204f
-[planning-guide-2.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#1625df66-4cc6-4d60-9202-de8a0b77f803
-[planning-guide-2.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#f5b3b18c-302c-4bd8-9ab2-c388f1ab3d10
-[planning-guide-3.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#be80d1b9-a463-4845-bd35-f4cebdb5424a
-[planning-guide-3.2.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#df49dc09-141b-4f34-a4a2-990913b30358
-[planning-guide-3.2.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#fc1ac8b2-e54a-487c-8581-d3cc6625e560
-[planning-guide-3.2.3]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#18810088-f9be-4c97-958a-27996255c665
-[planning-guide-3.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#8d8ad4b8-6093-4b91-ac36-ea56d80dbf77
-[planning-guide-3.3.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#ff5ad0f9-f7f4-4022-9102-af07aef3bc92
-[planning-guide-5.1.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#4d175f1b-7353-4137-9d2f-817683c26e53
-[planning-guide-5.1.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#e18f7839-c0e2-4385-b1e6-4538453a285c
-[planning-guide-5.2.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#1b287330-944b-495d-9ea7-94b83aff73ef
-[planning-guide-5.2.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#57f32b1c-0cba-4e57-ab6e-c39fe22b6ec3
-[planning-guide-5.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#6ffb9f41-a292-40bf-9e70-8204448559e7
-[planning-guide-5.3.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#6e835de8-40b1-4b71-9f18-d45b20959b79
-[planning-guide-5.3.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#a43e40e6-1acc-4633-9816-8f095d5a7b6a
-[planning-guide-5.4.2]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#9789b076-2011-4afa-b2fe-b07a8aba58a1
-[planning-guide-5.5.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#4efec401-91e0-40c0-8e64-f2dceadff646
-[planning-guide-5.5.3]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#17e0d543-7e8c-4160-a7da-dd7117a1ad9d
-[planning-guide-7.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#3e9c3690-da67-421a-bc3f-12c520d99a30
-[planning-guide-7]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#96a77628-a05e-475d-9df3-fb82217e8f14
-[planning-guide-9.1]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#6f0a47f3-a289-4090-a053-2521618a28c3
-[planning-guide-azure-premium-storage]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#ff5ad0f9-f7f4-4022-9102-af07aef3bc92
+[planning-guide]: ./virtual-machines-windows-sap-planning-guide.md
+[planning-guide-1.2]: ./virtual-machines-windows-sap-planning-guide.md#e55d1e22-c2c8-460b-9897-64622a34fdff
+[planning-guide-11]: ./virtual-machines-windows-sap-planning-guide.md#7cf991a1-badd-40a9-944e-7baae842a058
+[planning-guide-11.4.1]: ./virtual-machines-windows-sap-planning-guide.md#5d9d36f9-9058-435d-8367-5ad05f00de77
+[planning-guide-11.5]: ./virtual-machines-windows-sap-planning-guide.md#4e165b58-74ca-474f-a7f4-5e695a93204f
+[planning-guide-2.1]: ./virtual-machines-windows-sap-planning-guide.md#1625df66-4cc6-4d60-9202-de8a0b77f803
+[planning-guide-2.2]: ./virtual-machines-windows-sap-planning-guide.md#f5b3b18c-302c-4bd8-9ab2-c388f1ab3d10
+[planning-guide-3.1]: ./virtual-machines-windows-sap-planning-guide.md#be80d1b9-a463-4845-bd35-f4cebdb5424a
+[planning-guide-3.2.1]: ./virtual-machines-windows-sap-planning-guide.md#df49dc09-141b-4f34-a4a2-990913b30358
+[planning-guide-3.2.2]: ./virtual-machines-windows-sap-planning-guide.md#fc1ac8b2-e54a-487c-8581-d3cc6625e560
+[planning-guide-3.2.3]: ./virtual-machines-windows-sap-planning-guide.md#18810088-f9be-4c97-958a-27996255c665
+[planning-guide-3.2]: ./virtual-machines-windows-sap-planning-guide.md#8d8ad4b8-6093-4b91-ac36-ea56d80dbf77
+[planning-guide-3.3.2]: ./virtual-machines-windows-sap-planning-guide.md#ff5ad0f9-f7f4-4022-9102-af07aef3bc92
+[planning-guide-5.1.1]: ./virtual-machines-windows-sap-planning-guide.md#4d175f1b-7353-4137-9d2f-817683c26e53
+[planning-guide-5.1.2]: ./virtual-machines-windows-sap-planning-guide.md#e18f7839-c0e2-4385-b1e6-4538453a285c
+[planning-guide-5.2.1]: ./virtual-machines-windows-sap-planning-guide.md#1b287330-944b-495d-9ea7-94b83aff73ef
+[planning-guide-5.2.2]: ./virtual-machines-windows-sap-planning-guide.md#57f32b1c-0cba-4e57-ab6e-c39fe22b6ec3
+[planning-guide-5.2]: ./virtual-machines-windows-sap-planning-guide.md#6ffb9f41-a292-40bf-9e70-8204448559e7
+[planning-guide-5.3.1]: ./virtual-machines-windows-sap-planning-guide.md#6e835de8-40b1-4b71-9f18-d45b20959b79
+[planning-guide-5.3.2]: ./virtual-machines-windows-sap-planning-guide.md#a43e40e6-1acc-4633-9816-8f095d5a7b6a
+[planning-guide-5.4.2]: ./virtual-machines-windows-sap-planning-guide.md#9789b076-2011-4afa-b2fe-b07a8aba58a1
+[planning-guide-5.5.1]: ./virtual-machines-windows-sap-planning-guide.md#4efec401-91e0-40c0-8e64-f2dceadff646
+[planning-guide-5.5.3]: ./virtual-machines-windows-sap-planning-guide.md#17e0d543-7e8c-4160-a7da-dd7117a1ad9d
+[planning-guide-7.1]: ./virtual-machines-windows-sap-planning-guide.md#3e9c3690-da67-421a-bc3f-12c520d99a30
+[planning-guide-7]: ./virtual-machines-windows-sap-planning-guide.md#96a77628-a05e-475d-9df3-fb82217e8f14
+[planning-guide-9.1]: ./virtual-machines-windows-sap-planning-guide.md#6f0a47f3-a289-4090-a053-2521618a28c3
+[planning-guide-azure-premium-storage]: ./virtual-machines-windows-sap-planning-guide.md#ff5ad0f9-f7f4-4022-9102-af07aef3bc92
 
 [planning-guide-figure-100]: ./media/virtual-machines-shared-sap-planning-guide/100-single-vm-in-azure.png
 [planning-guide-figure-1300]: ./media/virtual-machines-shared-sap-planning-guide/1300-ref-config-iaas-for-sap.png
@@ -229,68 +229,68 @@
 [planning-guide-figure-600]: ./media/virtual-machines-shared-sap-planning-guide/600-s2s-details.png
 [planning-guide-figure-700]: ./media/virtual-machines-shared-sap-planning-guide/700-decision-tree-deploy-to-azure.png
 [planning-guide-figure-800]: ./media/virtual-machines-shared-sap-planning-guide/800-portal-vm-overview.png
-[planning-guide-microsoft-azure-networking]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#61678387-8868-435d-9f8c-450b2424f5bd
-[planning-guide-storage-microsoft-azure-storage-and-data-disks]: /documentation/articles/virtual-machines-windows-sap-planning-guide/#a72afa26-4bf4-4a25-8cf7-855d6032157f
+[planning-guide-microsoft-azure-networking]: ./virtual-machines-windows-sap-planning-guide.md#61678387-8868-435d-9f8c-450b2424f5bd
+[planning-guide-storage-microsoft-azure-storage-and-data-disks]: ./virtual-machines-windows-sap-planning-guide.md#a72afa26-4bf4-4a25-8cf7-855d6032157f
 
-[sap-ha-guide]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/
-[sap-ha-guide-1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#217c5479-5595-4cd8-870d-15ab00d4f84c
-[sap-ha-guide-2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#42b8f600-7ba3-4606-b8a5-53c4f026da08
-[sap-ha-guide-3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#42156640c6-01cf-45a9-b225-4baa678b24f1
-[sap-ha-guide-3.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#f76af273-1993-4d83-b12d-65deeae23686
-[sap-ha-guide-3.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#3e85fbe0-84b1-4892-87af-d9b65ff91860
-[sap-ha-guide-4]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#8ecf3ba0-67c0-4495-9c14-feec1a2255b7
-[sap-ha-guide-4.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#1a3c5408-b168-46d6-99f5-4219ad1b1ff2
-[sap-ha-guide-5]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#fdfee875-6e66-483a-a343-14bbaee33275
-[sap-ha-guide-5.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#be21cf3e-fb01-402b-9955-54fbecf66592
-[sap-ha-guide-5.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#ff7a9a06-2bc5-4b20-860a-46cdb44669cd
-[sap-ha-guide-6]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#2ddba413-a7f5-4e4e-9a51-87908879c10a
-[sap-ha-guide-6.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#1a464091-922b-48d7-9d08-7cecf757f341
-[sap-ha-guide-6.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#44641e18-a94e-431f-95ff-303ab65e0bcb
-[sap-ha-guide-7]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#2e3fec50-241e-441b-8708-0b1864f66dfa
-[sap-ha-guide-7.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#93faa747-907e-440a-b00a-1ae0a89b1c0e
-[sap-ha-guide-7.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#f559c285-ee68-4eec-add1-f60fe7b978db
-[sap-ha-guide-7.2.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#b5b1fd0b-1db4-4d49-9162-de07a0132a51
-[sap-ha-guide-7.3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#ddd878a0-9c2f-4b8e-8968-26ce60be1027
-[sap-ha-guide-7.4]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#045252ed-0277-4fc8-8f46-c5a29694a816
-[sap-ha-guide-8]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#78092dbe-165b-454c-92f5-4972bdbef9bf
-[sap-ha-guide-8.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#c87a8d3f-b1dc-4d2f-b23c-da4b72977489
-[sap-ha-guide-8.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#7fe9af0e-3cce-495b-a5ec-dcb4d8e0a310
-[sap-ha-guide-8.3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#47d5300a-a830-41d4-83dd-1a0d1ffdbe6a
-[sap-ha-guide-8.4]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#b22d7b3b-4343-40ff-a319-097e13f62f9e
-[sap-ha-guide-8.5]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#9fbd43c0-5850-4965-9726-2a921d85d73f
-[sap-ha-guide-8.6]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#84c019fe-8c58-4dac-9e54-173efd4b2c30
-[sap-ha-guide-8.7]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#7a8f3e9b-0624-4051-9e41-b73fff816a9e
-[sap-ha-guide-8.8]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#f19bd997-154d-4583-a46e-7f5a69d0153c
-[sap-ha-guide-8.9]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#fe0bd8b5-2b43-45e3-8295-80bee5415716
-[sap-ha-guide-8.10]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#e69e9a34-4601-47a3-a41c-d2e11c626c0c
-[sap-ha-guide-8.11]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#661035b2-4d0f-4d31-86f8-dc0a50d78158
-[sap-ha-guide-8.12]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#0d67f090-7928-43e0-8772-5ccbf8f59aab
-[sap-ha-guide-8.12.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#5eecb071-c703-4ccc-ba6d-fe9c6ded9d79
-[sap-ha-guide-8.12.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#e49a4529-50c9-4dcf-bde7-15a0c21d21ca
-[sap-ha-guide-8.12.2.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#06260b30-d697-4c4d-b1c9-d22c0bd64855
-[sap-ha-guide-8.12.2.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#4c08c387-78a0-46b1-9d27-b497b08cac3d
-[sap-ha-guide-8.12.3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#5c8e5482-841e-45e1-a89d-a05c0907c868
-[sap-ha-guide-8.12.3.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#1c2788c3-3648-4e82-9e0d-e058e475e2a3
-[sap-ha-guide-8.12.3.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#dd41d5a2-8083-415b-9878-839652812102
-[sap-ha-guide-8.12.3.3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#d9c1fc8e-8710-4dff-bec2-1f535db7b006
-[sap-ha-guide-9]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#a06f0b49-8a7a-42bf-8b0d-c12026c5746b
-[sap-ha-guide-9.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#31c6bd4f-51df-4057-9fdf-3fcbc619c170
-[sap-ha-guide-9.1.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#a97ad604-9094-44fe-a364-f89cb39bf097
-[sap-ha-guide-9.1.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#eb5af918-b42f-4803-bb50-eff41f84b0b0
-[sap-ha-guide-9.1.3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#e4caaab2-e90f-4f2c-bc84-2cd2e12a9556
-[sap-ha-guide-9.1.4]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#10822f4f-32e7-4871-b63a-9b86c76ce761
-[sap-ha-guide-9.1.5]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#4498c707-86c0-4cde-9c69-058a7ab8c3ac
-[sap-ha-guide-9.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#85d78414-b21d-4097-92b6-34d8bcb724b7
-[sap-ha-guide-9.3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#8a276e16-f507-4071-b829-cdc0a4d36748
-[sap-ha-guide-9.4]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#094bc895-31d4-4471-91cc-1513b64e406a
-[sap-ha-guide-9.5]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#2477e58f-c5a7-4a5d-9ae3-7b91022cafb5
-[sap-ha-guide-9.6]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#0ba4a6c1-cc37-4bcf-a8dc-025de4263772
-[sap-ha-guide-10]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#18aa2b9d-92d2-4c0e-8ddd-5acaabda99e9
-[sap-ha-guide-10.1]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#65fdef0f-9f94-41f9-b314-ea45bbfea445
-[sap-ha-guide-10.2]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#5e959fa9-8fcd-49e5-a12c-37f6ba07b916
-[sap-ha-guide-10.3]: /documentation/articles/virtual-machines-windows-sap-high-availability-guide/#755a6b93-0099-4533-9f6d-5c9a613878b5
+[sap-ha-guide]: ./virtual-machines-windows-sap-high-availability-guide.md
+[sap-ha-guide-1]: ./virtual-machines-windows-sap-high-availability-guide.md#217c5479-5595-4cd8-870d-15ab00d4f84c
+[sap-ha-guide-2]: ./virtual-machines-windows-sap-high-availability-guide.md#42b8f600-7ba3-4606-b8a5-53c4f026da08
+[sap-ha-guide-3]: ./virtual-machines-windows-sap-high-availability-guide.md#42156640c6-01cf-45a9-b225-4baa678b24f1
+[sap-ha-guide-3.1]: ./virtual-machines-windows-sap-high-availability-guide.md#f76af273-1993-4d83-b12d-65deeae23686
+[sap-ha-guide-3.2]: ./virtual-machines-windows-sap-high-availability-guide.md#3e85fbe0-84b1-4892-87af-d9b65ff91860
+[sap-ha-guide-4]: ./virtual-machines-windows-sap-high-availability-guide.md#8ecf3ba0-67c0-4495-9c14-feec1a2255b7
+[sap-ha-guide-4.1]: ./virtual-machines-windows-sap-high-availability-guide.md#1a3c5408-b168-46d6-99f5-4219ad1b1ff2
+[sap-ha-guide-5]: ./virtual-machines-windows-sap-high-availability-guide.md#fdfee875-6e66-483a-a343-14bbaee33275
+[sap-ha-guide-5.1]: ./virtual-machines-windows-sap-high-availability-guide.md#be21cf3e-fb01-402b-9955-54fbecf66592
+[sap-ha-guide-5.2]: ./virtual-machines-windows-sap-high-availability-guide.md#ff7a9a06-2bc5-4b20-860a-46cdb44669cd
+[sap-ha-guide-6]: ./virtual-machines-windows-sap-high-availability-guide.md#2ddba413-a7f5-4e4e-9a51-87908879c10a
+[sap-ha-guide-6.1]: ./virtual-machines-windows-sap-high-availability-guide.md#1a464091-922b-48d7-9d08-7cecf757f341
+[sap-ha-guide-6.2]: ./virtual-machines-windows-sap-high-availability-guide.md#44641e18-a94e-431f-95ff-303ab65e0bcb
+[sap-ha-guide-7]: ./virtual-machines-windows-sap-high-availability-guide.md#2e3fec50-241e-441b-8708-0b1864f66dfa
+[sap-ha-guide-7.1]: ./virtual-machines-windows-sap-high-availability-guide.md#93faa747-907e-440a-b00a-1ae0a89b1c0e
+[sap-ha-guide-7.2]: ./virtual-machines-windows-sap-high-availability-guide.md#f559c285-ee68-4eec-add1-f60fe7b978db
+[sap-ha-guide-7.2.1]: ./virtual-machines-windows-sap-high-availability-guide.md#b5b1fd0b-1db4-4d49-9162-de07a0132a51
+[sap-ha-guide-7.3]: ./virtual-machines-windows-sap-high-availability-guide.md#ddd878a0-9c2f-4b8e-8968-26ce60be1027
+[sap-ha-guide-7.4]: ./virtual-machines-windows-sap-high-availability-guide.md#045252ed-0277-4fc8-8f46-c5a29694a816
+[sap-ha-guide-8]: ./virtual-machines-windows-sap-high-availability-guide.md#78092dbe-165b-454c-92f5-4972bdbef9bf
+[sap-ha-guide-8.1]: ./virtual-machines-windows-sap-high-availability-guide.md#c87a8d3f-b1dc-4d2f-b23c-da4b72977489
+[sap-ha-guide-8.2]: ./virtual-machines-windows-sap-high-availability-guide.md#7fe9af0e-3cce-495b-a5ec-dcb4d8e0a310
+[sap-ha-guide-8.3]: ./virtual-machines-windows-sap-high-availability-guide.md#47d5300a-a830-41d4-83dd-1a0d1ffdbe6a
+[sap-ha-guide-8.4]: ./virtual-machines-windows-sap-high-availability-guide.md#b22d7b3b-4343-40ff-a319-097e13f62f9e
+[sap-ha-guide-8.5]: ./virtual-machines-windows-sap-high-availability-guide.md#9fbd43c0-5850-4965-9726-2a921d85d73f
+[sap-ha-guide-8.6]: ./virtual-machines-windows-sap-high-availability-guide.md#84c019fe-8c58-4dac-9e54-173efd4b2c30
+[sap-ha-guide-8.7]: ./virtual-machines-windows-sap-high-availability-guide.md#7a8f3e9b-0624-4051-9e41-b73fff816a9e
+[sap-ha-guide-8.8]: ./virtual-machines-windows-sap-high-availability-guide.md#f19bd997-154d-4583-a46e-7f5a69d0153c
+[sap-ha-guide-8.9]: ./virtual-machines-windows-sap-high-availability-guide.md#fe0bd8b5-2b43-45e3-8295-80bee5415716
+[sap-ha-guide-8.10]: ./virtual-machines-windows-sap-high-availability-guide.md#e69e9a34-4601-47a3-a41c-d2e11c626c0c
+[sap-ha-guide-8.11]: ./virtual-machines-windows-sap-high-availability-guide.md#661035b2-4d0f-4d31-86f8-dc0a50d78158
+[sap-ha-guide-8.12]: ./virtual-machines-windows-sap-high-availability-guide.md#0d67f090-7928-43e0-8772-5ccbf8f59aab
+[sap-ha-guide-8.12.1]: ./virtual-machines-windows-sap-high-availability-guide.md#5eecb071-c703-4ccc-ba6d-fe9c6ded9d79
+[sap-ha-guide-8.12.2]: ./virtual-machines-windows-sap-high-availability-guide.md#e49a4529-50c9-4dcf-bde7-15a0c21d21ca
+[sap-ha-guide-8.12.2.1]: ./virtual-machines-windows-sap-high-availability-guide.md#06260b30-d697-4c4d-b1c9-d22c0bd64855
+[sap-ha-guide-8.12.2.2]: ./virtual-machines-windows-sap-high-availability-guide.md#4c08c387-78a0-46b1-9d27-b497b08cac3d
+[sap-ha-guide-8.12.3]: ./virtual-machines-windows-sap-high-availability-guide.md#5c8e5482-841e-45e1-a89d-a05c0907c868
+[sap-ha-guide-8.12.3.1]: ./virtual-machines-windows-sap-high-availability-guide.md#1c2788c3-3648-4e82-9e0d-e058e475e2a3
+[sap-ha-guide-8.12.3.2]: ./virtual-machines-windows-sap-high-availability-guide.md#dd41d5a2-8083-415b-9878-839652812102
+[sap-ha-guide-8.12.3.3]: ./virtual-machines-windows-sap-high-availability-guide.md#d9c1fc8e-8710-4dff-bec2-1f535db7b006
+[sap-ha-guide-9]: ./virtual-machines-windows-sap-high-availability-guide.md#a06f0b49-8a7a-42bf-8b0d-c12026c5746b
+[sap-ha-guide-9.1]: ./virtual-machines-windows-sap-high-availability-guide.md#31c6bd4f-51df-4057-9fdf-3fcbc619c170
+[sap-ha-guide-9.1.1]: ./virtual-machines-windows-sap-high-availability-guide.md#a97ad604-9094-44fe-a364-f89cb39bf097
+[sap-ha-guide-9.1.2]: ./virtual-machines-windows-sap-high-availability-guide.md#eb5af918-b42f-4803-bb50-eff41f84b0b0
+[sap-ha-guide-9.1.3]: ./virtual-machines-windows-sap-high-availability-guide.md#e4caaab2-e90f-4f2c-bc84-2cd2e12a9556
+[sap-ha-guide-9.1.4]: ./virtual-machines-windows-sap-high-availability-guide.md#10822f4f-32e7-4871-b63a-9b86c76ce761
+[sap-ha-guide-9.1.5]: ./virtual-machines-windows-sap-high-availability-guide.md#4498c707-86c0-4cde-9c69-058a7ab8c3ac
+[sap-ha-guide-9.2]: ./virtual-machines-windows-sap-high-availability-guide.md#85d78414-b21d-4097-92b6-34d8bcb724b7
+[sap-ha-guide-9.3]: ./virtual-machines-windows-sap-high-availability-guide.md#8a276e16-f507-4071-b829-cdc0a4d36748
+[sap-ha-guide-9.4]: ./virtual-machines-windows-sap-high-availability-guide.md#094bc895-31d4-4471-91cc-1513b64e406a
+[sap-ha-guide-9.5]: ./virtual-machines-windows-sap-high-availability-guide.md#2477e58f-c5a7-4a5d-9ae3-7b91022cafb5
+[sap-ha-guide-9.6]: ./virtual-machines-windows-sap-high-availability-guide.md#0ba4a6c1-cc37-4bcf-a8dc-025de4263772
+[sap-ha-guide-10]: ./virtual-machines-windows-sap-high-availability-guide.md#18aa2b9d-92d2-4c0e-8ddd-5acaabda99e9
+[sap-ha-guide-10.1]: ./virtual-machines-windows-sap-high-availability-guide.md#65fdef0f-9f94-41f9-b314-ea45bbfea445
+[sap-ha-guide-10.2]: ./virtual-machines-windows-sap-high-availability-guide.md#5e959fa9-8fcd-49e5-a12c-37f6ba07b916
+[sap-ha-guide-10.3]: ./virtual-machines-windows-sap-high-availability-guide.md#755a6b93-0099-4533-9f6d-5c9a613878b5
 
-[sap-ha-multi-sid-guide]: /documentation/articles/virtual-machines-windows-sap-high-availability-multi-sid/ "SAP 多 SID 高可用性配置"
+[sap-ha-multi-sid-guide]: ./virtual-machines-windows-sap-high-availability-multi-sid.md "SAP 多 SID 高可用性配置"
 
 [sap-ha-guide-figure-1000]: ./media/virtual-machines-shared-sap-high-availability-guide/1000-wsfc-for-sap-ascs-on-azure.png
 [sap-ha-guide-figure-1001]: ./media/virtual-machines-shared-sap-high-availability-guide/1001-wsfc-on-azure-ilb.png
@@ -360,9 +360,9 @@
 [sap-ha-guide-figure-6003]: ./media/virtual-machines-shared-sap-high-availability-guide/6003-sap-multi-sid-full-landscape.png
 
 [powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
-[resource-group-authoring-templates]: /documentation/articles/resource-group-authoring-templates/
-[resource-group-overview]: /documentation/articles/resource-group-overview/
-[resource-groups-networking]: /documentation/articles/resource-groups-networking/
+[resource-group-authoring-templates]: ../azure-resource-manager/resource-group-authoring-templates.md
+[resource-group-overview]: ../azure-resource-manager/resource-group-overview.md
+[resource-groups-networking]: ../virtual-network/resource-groups-networking.md
 [sap-pam]: https://support.sap.com/pam "SAP 产品可用性对照表"
 [sap-templates-2-tier-marketplace-image]: https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-2-tier-marketplace-image%2Fazuredeploy.json
 [sap-templates-2-tier-os-disk]: https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-2-tier-user-disk%2Fazuredeploy.json
@@ -372,71 +372,71 @@
 [sap-templates-3-tier-multisid-xscs-marketplace-image]: https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-3-tier-marketplace-image-multi-sid-xscs%2Fazuredeploy.json
 [sap-templates-3-tier-multisid-db-marketplace-image]: https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-3-tier-marketplace-image-multi-sid-db%2Fazuredeploy.json
 [sap-templates-3-tier-multisid-apps-marketplace-image]: https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fsap-3-tier-marketplace-image-multi-sid-apps%2Fazuredeploy.json
-[storage-azure-cli]: /documentation/articles/storage-azure-cli/
-[storage-azure-cli-copy-blobs]: /documentation/articles/storage-azure-cli/#copy-blobs
-[storage-introduction]: /documentation/articles/storage-introduction/
-[storage-powershell-guide-full-copy-vhd]: /documentation/articles/storage-powershell-guide-full/#how-to-copy-blobs-from-one-storage-container-to-another
-[storage-premium-storage-preview-portal]: /documentation/articles/storage-premium-storage/
-[storage-redundancy]: /documentation/articles/storage-redundancy/
-[storage-scalability-targets]: /documentation/articles/storage-scalability-targets/
-[storage-use-azcopy]: /documentation/articles/storage-use-azcopy/
+[storage-azure-cli]: ../storage/storage-azure-cli.md
+[storage-azure-cli-copy-blobs]: ../storage/storage-azure-cli.md#copy-blobs
+[storage-introduction]: ../storage/storage-introduction.md
+[storage-powershell-guide-full-copy-vhd]: ../storage/storage-powershell-guide-full.md#how-to-copy-blobs-from-one-storage-container-to-another
+[storage-premium-storage-preview-portal]: ../storage/storage-premium-storage.md
+[storage-redundancy]: ../storage/storage-redundancy.md
+[storage-scalability-targets]: ../storage/storage-scalability-targets.md
+[storage-use-azcopy]: ../storage/storage-use-azcopy.md
 [template-201-vm-from-specialized-vhd]: https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-from-specialized-vhd
 [templates-101-simple-windows-vm]: https://github.com/Azure/azure-quickstart-templates/tree/master/101-simple-windows-vm
 [templates-101-vm-from-user-image]: https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-from-user-image
-[virtual-machines-linux-attach-disk-portal]: /documentation/articles/virtual-machines-linux-attach-disk-portal/
-[virtual-machines-windows-attach-disk-portal]: /documentation/articles/virtual-machines-windows-attach-disk-portal/
-[virtual-machines-azure-resource-manager-architecture]: /documentation/articles/resource-group-overview/
-[virtual-machines-azure-resource-manager-architecture-benefits-arm]: /documentation/articles/resource-group-overview/#the-benefits-of-using-resource-manager
+[virtual-machines-linux-attach-disk-portal]: ./virtual-machines-linux-attach-disk-portal.md
+[virtual-machines-windows-attach-disk-portal]: ./virtual-machines-windows-attach-disk-portal.md
+[virtual-machines-azure-resource-manager-architecture]: ../azure-resource-manager/resource-group-overview.md
+[virtual-machines-azure-resource-manager-architecture-benefits-arm]: ../azure-resource-manager/resource-group-overview.md#the-benefits-of-using-resource-manager
 [virtual-machines-azurerm-versus-azuresm]: /documentation/articles/virtual-machines-windows-compare-deployment-models/
-[virtual-machines-windows-classic-configure-oracle-data-guard]: /documentation/articles/virtual-machines-windows-classic-configure-oracle-data-guard/
-[virtual-machines-linux-cli-deploy-templates]: /documentation/articles/virtual-machines-linux-cli-deploy-templates/
-[virtual-machines-deploy-rmtemplates-powershell]: /documentation/articles/virtual-machines-windows-ps-manage/
-[virtual-machines-linux-agent-user-guide]: /documentation/articles/virtual-machines-linux-agent-user-guide/
-[virtual-machines-linux-agent-user-guide-command-line-options]: /documentation/articles/virtual-machines-linux-agent-user-guide/#command-line-options
-[virtual-machines-linux-capture-image]: /documentation/articles/virtual-machines-linux-capture-image/
-[virtual-machines-linux-capture-image-capture]: /documentation/articles/virtual-machines-linux-capture-image/#capture-the-vm
-[virtual-machines-windows-capture-image]: /documentation/articles/virtual-machines-windows-capture-image/
-[virtual-machines-windows-capture-image-capture]: /documentation/articles/virtual-machines-windows-capture-image/#capture-the-vm
-[virtual-machines-linux-configure-lvm]: /documentation/articles/virtual-machines-linux-configure-lvm/
-[virtual-machines-linux-configure-raid]: /documentation/articles/virtual-machines-linux-configure-raid/
-[virtual-machines-linux-classic-create-upload-vhd-step-1]: /documentation/articles/virtual-machines-linux-classic-create-upload-vhd/#step-1-prepare-the-image-to-be-uploaded
-[virtual-machines-linux-create-upload-vhd-suse]: /documentation/articles/virtual-machines-linux-suse-create-upload-vhd/
-[virtual-machines-linux-redhat-create-upload-vhd]: /documentation/articles/virtual-machines-linux-redhat-create-upload-vhd/
-[virtual-machines-linux-how-to-attach-disk]: /documentation/articles/virtual-machines-linux-add-disk/
-[virtual-machines-linux-how-to-attach-disk-how-to-initialize-a-new-data-disk-in-linux]: /documentation/articles/virtual-machines-linux-add-disk/#connect-to-the-linux-vm-to-mount-the-new-disk
-[virtual-machines-linux-tutorial]: /documentation/articles/virtual-machines-linux-quick-create-cli/
-[virtual-machines-linux-update-agent]: /documentation/articles/virtual-machines-linux-update-agent/
-[virtual-machines-manage-availability]: /documentation/articles/virtual-machines-windows-manage-availability/
-[virtual-machines-ps-create-preconfigure-windows-resource-manager-vms]: /documentation/articles/virtual-machines-windows-ps-create/
-[virtual-machines-sizes]: /documentation/articles/virtual-machines-windows-sizes/
-[./windows/sqlclassic/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups]: /documentation/articles/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups/
-[./windows/sqlclassic/virtual-machines-windows-classic-ps-sql-int-listener]: /documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/
-[./windows/sql/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual]: /documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/
-[./windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener]: /documentation/articles/virtual-machines-windows-portal-sql-alwayson-int-listener/
-[./windows/sql/virtual-machines-sql-server-high-availability-and-disaster-recovery-solutions]: /documentation/articles/virtual-machines-windows-sql-high-availability-dr/
-[./windows/sql/virtual-machines-sql-server-infrastructure-services]: /documentation/articles/virtual-machines-windows-sql-server-iaas-overview/
-[./windows/sql/virtual-machines-sql-server-performance-best-practices]: /documentation/articles/virtual-machines-windows-sql-performance/
-[virtual-machines-upload-image-windows-resource-manager]: /documentation/articles/virtual-machines-windows-upload-image/
-[virtual-machines-windows-tutorial]: /documentation/articles/virtual-machines-windows-hero-tutorial/
+[virtual-machines-windows-classic-configure-oracle-data-guard]: ./virtual-machines-windows-classic-configure-oracle-data-guard.md
+[virtual-machines-linux-cli-deploy-templates]: ./virtual-machines-linux-cli-deploy-templates.md
+[virtual-machines-deploy-rmtemplates-powershell]: ./virtual-machines-windows-ps-manage.md
+[virtual-machines-linux-agent-user-guide]: ./virtual-machines-linux-agent-user-guide.md
+[virtual-machines-linux-agent-user-guide-command-line-options]: ./virtual-machines-linux-agent-user-guide.md#command-line-options
+[virtual-machines-linux-capture-image]: ./virtual-machines-linux-capture-image.md
+[virtual-machines-linux-capture-image-capture]: ./virtual-machines-linux-capture-image.md#capture-the-vm
+[virtual-machines-windows-capture-image]: ./virtual-machines-windows-capture-image.md
+[virtual-machines-windows-capture-image-capture]: ./virtual-machines-windows-capture-image.md#capture-the-vm
+[virtual-machines-linux-configure-lvm]: ./virtual-machines-linux-configure-lvm.md
+[virtual-machines-linux-configure-raid]: ./virtual-machines-linux-configure-raid.md
+[virtual-machines-linux-classic-create-upload-vhd-step-1]: ./virtual-machines-linux-classic-create-upload-vhd.md#step-1-prepare-the-image-to-be-uploaded
+[virtual-machines-linux-create-upload-vhd-suse]: ./virtual-machines-linux-suse-create-upload-vhd.md
+[virtual-machines-linux-redhat-create-upload-vhd]: ./virtual-machines-linux-redhat-create-upload-vhd.md
+[virtual-machines-linux-how-to-attach-disk]: ./virtual-machines-linux-add-disk.md
+[virtual-machines-linux-how-to-attach-disk-how-to-initialize-a-new-data-disk-in-linux]: ./virtual-machines-linux-add-disk.md#connect-to-the-linux-vm-to-mount-the-new-disk
+[virtual-machines-linux-tutorial]: ./virtual-machines-linux-quick-create-cli.md
+[virtual-machines-linux-update-agent]: ./virtual-machines-linux-update-agent.md
+[virtual-machines-manage-availability]: ./virtual-machines-windows-manage-availability.md
+[virtual-machines-ps-create-preconfigure-windows-resource-manager-vms]: ./virtual-machines-windows-ps-create.md
+[virtual-machines-sizes]: ./virtual-machines-windows-sizes.md
+[./windows/sqlclassic/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups]: ./virtual-machines-windows-classic-ps-sql-alwayson-availability-groups.md
+[./windows/sqlclassic/virtual-machines-windows-classic-ps-sql-int-listener]: ./virtual-machines-windows-classic-ps-sql-int-listener.md
+[./windows/sql/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual]: ./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md
+[./windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener]: ./virtual-machines-windows-portal-sql-alwayson-int-listener.md
+[./windows/sql/virtual-machines-sql-server-high-availability-and-disaster-recovery-solutions]: ./virtual-machines-windows-sql-high-availability-dr.md
+[./windows/sql/virtual-machines-sql-server-infrastructure-services]: ./virtual-machines-windows-sql-server-iaas-overview.md
+[./windows/sql/virtual-machines-sql-server-performance-best-practices]: ./virtual-machines-windows-sql-performance.md
+[virtual-machines-upload-image-windows-resource-manager]: ./virtual-machines-windows-upload-image.md
+[virtual-machines-windows-tutorial]: ./virtual-machines-windows-hero-tutorial.md
 [virtual-machines-workload-template-sql-alwayson]: https://github.com/Azure/azure-quickstart-templates/tree/master/sql-server-2014-alwayson-dsc/
-[virtual-network-deploy-multinic-arm-cli]: /documentation/articles/virtual-network-deploy-multinic-arm-cli/
-[virtual-network-deploy-multinic-arm-ps]: /documentation/articles/virtual-network-deploy-multinic-arm-ps/
-[virtual-network-deploy-multinic-arm-template]: /documentation/articles/virtual-network-deploy-multinic-arm-template/
-[virtual-networks-configure-vnet-to-vnet-connection]: /documentation/articles/vpn-gateway-vnet-vnet-rm-ps/
-[virtual-networks-create-vnet-arm-pportal]: /documentation/articles/virtual-networks-create-vnet-arm-pportal/
-[virtual-networks-manage-dns-in-vnet]: /documentation/articles/virtual-networks-name-resolution-for-vms-and-role-instances/
-[virtual-networks-multiple-nics]: /documentation/articles/virtual-networks-multiple-nics/
-[virtual-networks-nsg]: /documentation/articles/virtual-networks-nsg/
-[virtual-networks-reserved-private-ip]: /documentation/articles/virtual-networks-static-private-ip-arm-ps/
-[virtual-networks-static-private-ip-arm-pportal]: /documentation/articles/virtual-networks-static-private-ip-arm-pportal/
-[virtual-networks-udr-overview]: /documentation/articles/virtual-networks-udr-overview/
-[vpn-gateway-about-vpn-devices]: /documentation/articles/vpn-gateway-about-vpn-devices/
-[vpn-gateway-create-site-to-site-rm-powershell]: /documentation/articles/vpn-gateway-create-site-to-site-rm-powershell/
-[vpn-gateway-cross-premises-options]: /documentation/articles/vpn-gateway-plan-design/
-[vpn-gateway-site-to-site-create]: /documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/
-[vpn-gateway-vpn-faq]: /documentation/articles/vpn-gateway-vpn-faq/
-[xplat-cli]: /documentation/articles/xplat-cli-install/
-[xplat-cli-azure-resource-manager]: /documentation/articles/xplat-cli-azure-resource-manager/
+[virtual-network-deploy-multinic-arm-cli]: ../virtual-network/virtual-network-deploy-multinic-arm-cli.md
+[virtual-network-deploy-multinic-arm-ps]: ../virtual-network/virtual-network-deploy-multinic-arm-ps.md
+[virtual-network-deploy-multinic-arm-template]: ../virtual-network/virtual-network-deploy-multinic-arm-template.md
+[virtual-networks-configure-vnet-to-vnet-connection]: ../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md
+[virtual-networks-create-vnet-arm-pportal]: ../virtual-network/virtual-networks-create-vnet-arm-pportal.md
+[virtual-networks-manage-dns-in-vnet]: ../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md
+[virtual-networks-multiple-nics]: ../virtual-network/virtual-networks-multiple-nics.md
+[virtual-networks-nsg]: ../virtual-network/virtual-networks-nsg.md
+[virtual-networks-reserved-private-ip]: ../virtual-network/virtual-networks-static-private-ip-arm-ps.md
+[virtual-networks-static-private-ip-arm-pportal]: ../virtual-network/virtual-networks-static-private-ip-arm-pportal.md
+[virtual-networks-udr-overview]: ../virtual-network/virtual-networks-udr-overview.md
+[vpn-gateway-about-vpn-devices]: ../vpn-gateway/vpn-gateway-about-vpn-devices.md
+[vpn-gateway-create-site-to-site-rm-powershell]: ../vpn-gateway/vpn-gateway-create-site-to-site-rm-powershell.md
+[vpn-gateway-cross-premises-options]: ../vpn-gateway/vpn-gateway-plan-design.md
+[vpn-gateway-site-to-site-create]: ../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal.md
+[vpn-gateway-vpn-faq]: ../vpn-gateway/vpn-gateway-vpn-faq.md
+[xplat-cli]: ../xplat-cli-install.md
+[xplat-cli-azure-resource-manager]: ../azure-resource-manager/xplat-cli-azure-resource-manager.md
 
 各组织可以使用 Azure 虚拟机解决方案在最短时间内获取计算、存储和网络资源，而无需经历冗长的采购周期。可以使用 Azure 虚拟机来部署经典应用程序，例如，基于 SAP NetWeaver 的 ABAP、Java 和 ABAP+Java 堆栈。无需添置本地资源即可提高可靠性和可用性。Azure 虚拟机支持跨界连接，因此可将 Azure 虚拟机集成到组织的本地域、私有云和 SAP 系统布局中。
 
@@ -465,7 +465,7 @@
 * [针对 SAP NetWeaver 的 Azure 虚拟机 DBMS 部署][dbms-guide]
 * [针对 SAP NetWeaver 的 Azure 虚拟机高可用性（本指南）][sap-ha-guide]
 
-> [AZURE.NOTE]
+> [!NOTE]
 在可能的情况下，本文中会提供 SAP 安装指南的参考链接（请参阅 [SAP 安装指南][sap-installation-guides]）。有关安装过程的先决条件和相关信息，建议仔细阅读 SAP NetWeaver 安装指南。本文仅介绍可在 Azure 虚拟机上针对基于 SAP NetWeaver 的系统执行的特定任务。
 >
 >
@@ -491,7 +491,7 @@ Azure Resource Manager 与 Azure 经典部署模型的不同之处体现在以�
 - SAP 多 SID 方案支持
 
 ### <a name="f76af273-1993-4d83-b12d-65deeae23686"></a> 资源组
-在 Azure Resource Manager 中，可以使用资源组来管理 Azure 订阅中的所有应用程序资源。使用集成方法时，资源组中的所有资源具有相同的生命周期。例如，所有资源同时创建并同时删除。了解有关[资源组](/documentation/articles/resource-group-overview/#resource-groups)的详细信息。
+在 Azure Resource Manager 中，可以使用资源组来管理 Azure 订阅中的所有应用程序资源。使用集成方法时，资源组中的所有资源具有相同的生命周期。例如，所有资源同时创建并同时删除。了解有关[资源组](../azure-resource-manager/resource-group-overview.md#resource-groups)的详细信息。
 
 ### <a name="3e85fbe0-84b1-4892-87af-d9b65ff91860"></a>Azure 内部负载均衡器与 Azure 资源组的依赖关系
 
@@ -505,7 +505,7 @@ Azure Resource Manager 与 Azure 经典部署模型的不同之处体现在以�
 
 若要使用 Azure 经典部署模型，请遵循 [Azure 中的 SAP NetWeaver：配合 SIOS DataKeeper 使用 Azure 中的 Windows Server 故障转移群集来组建 SAP ASCS/SCS 实例的群集](http://go.microsoft.com/fwlink/?LinkId=613056)中所述的过程。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 强烈建议针对 SAP 安装使用 Azure Resource Manager 部署模型。它提供经典部署模型所不具备的多种优势。了解有关 Azure [部署模型][virtual-machines-azure-resource-manager-architecture-benefits-arm]的详细信息。
 >
 >
@@ -529,13 +529,12 @@ Windows Server 故障转移群集是 Windows 中高可用性 SAP ASCS/SCS 安装
 
 ![图 1：Azure 中 SAP ASCS/SCS 的 Windows Server 故障转移群集配置示例][sap-ha-guide-figure-1000]  
 
-
 _**图 1：**Azure 中 SAP ASCS/SCS 的 Windows Server 故障转移群集配置示例_
 
 ### <a name="be21cf3e-fb01-402b-9955-54fbecf66592"></a>共享存储
 图 1 还显示了包含两个节点的共享存储群集。在本地共享存储群集中，群集中的所有节点将检测共享存储。锁定机制可防止数据损坏。所有节点都可以检测另一个节点是否发生故障。如果一个节点发生故障，剩余的节点将取得存储资源的所有权，确保服务的可用性。
 
-> [AZURE.NOTE]
+> [!NOTE]
 对于某些 DBMS 应用程序（例如 SQL Server），无需使用共享磁盘即可实现高可用性。SQL Server Always On 将 DBMS 数据和日志从一个群集节点的本地磁盘复制到另一个群集节点的本地磁盘。在此情况下，Windows 群集配置不需要共享磁盘。
 >
 >
@@ -556,7 +555,6 @@ _**图 1：**Azure 中 SAP ASCS/SCS 的 Windows Server 故障转移群集配置�
 
 ![图 2：Azure 中没有共享磁盘的 Windows Server 故障转移群集配置][sap-ha-guide-figure-1001]  
 
-
 _**图 2：**Azure 中没有共享磁盘的 Windows Server 故障转移群集配置_
 
 ### <a name="1a464091-922b-48d7-9d08-7cecf757f341"></a>使用 SIOS DataKeeper 在 Azure 中创建共享磁盘
@@ -570,10 +568,9 @@ _**图 2：**Azure 中没有共享磁盘的 Windows Server 故障转移群集配
 
 ![图 3：Azure 中使用 SIOS DataKeeper 的 Windows Server 故障转移群集配置][sap-ha-guide-figure-1002]  
 
-
 _**图 3：**Azure 中使用 SIOS DataKeeper 的 Windows Server 故障转移群集配置_
 
-> [AZURE.NOTE]
+> [!NOTE]
 对于某些 DBMS 产品（例如 SQL Server），无需使用共享磁盘即可实现高可用性。SQL Server Always On 将 DBMS 数据和日志从一个群集节点的本地磁盘复制到另一个群集节点的本地磁盘。在这种情况下，Windows 群集配置不需要共享磁盘。
 >
 >
@@ -595,7 +592,6 @@ Azure 云平台不提供配置虚拟 IP 地址（例如浮动 IP 地址）的选
 
 ![图 4：高可用性 SAP 应用程序服务器][sap-ha-guide-figure-2000]  
 
-
 **图 4：**高可用性 SAP 应用程序服务器
 
 必须将所有托管 SAP 应用程序服务器实例的虚拟机放置在同一个 Azure 可用性集中。Azure 可用性集可确保：
@@ -612,7 +608,6 @@ Azure 云平台不提供配置虚拟 IP 地址（例如浮动 IP 地址）的选
 
 ![图 5：高可用性 SAP ASCS/SCS 实例][sap-ha-guide-figure-2001]  
 
-
 _**图 5：**高可用性 SAP ASCS/SCS 实例_
 
 #### <a name="b5b1fd0b-1db4-4d49-9162-de07a0132a51"></a>在 Azure 中使用 Windows Server 故障转移群集实现 SAP ASCS/SCS 实例的高可用性
@@ -620,14 +615,12 @@ _**图 5：**高可用性 SAP ASCS/SCS 实例_
 
 ![图 6：Azure 中使用 SIOS DataKeeper 的 SAP ASCS/SCS 的 Windows Server 故障转移群集配置][sap-ha-guide-figure-1002]  
 
-
 _**图 6：**Azure 中使用 SIOS DataKeeper 的 SAP ASCS/SCS 的 Windows Server 故障转移群集配置_
 
 ### <a name="ddd878a0-9c2f-4b8e-8968-26ce60be1027"></a>高可用性 DBMS 实例
 DBMS 也是 SAP 系统中的单一联系点。需要使用高可用性解决方案来保护它。图 7 显示在 Azure 中使用 Windows Server 故障转移群集和 Azure 内部负载均衡器的 SQL Server AlwaysOn 高可用性解决方案。SQL Server Always On 使用自身的 DBMS 复制功能复制 DBMS 数据和日志文件。在此情况下，无需使用群集共享磁盘，从而简化了整个设置。
 
 ![图 7：带有 SQL Server AlwaysOn 的高可用性 SAP DBMS 的示例][sap-ha-guide-figure-2003]  
-
 
 **图 7：**使用 SQL Server AlwaysOn 的高可用性 SAP DBMS 示例
 
@@ -648,7 +641,6 @@ DBMS 也是 SAP 系统中的单一联系点。需要使用高可用性解决方�
 
 ![图 8：SAP 高可用性体系结构模板 1，包含用于 ASCS/SCS 和 DBMS 的专用群集][sap-ha-guide-figure-2004]  
 
-
 **图 8：**SAP 高可用性体系结构模板 1，用于 ASCS/SCS 和 DBMS 的专用群集
 
 ### 使用体系结构模板 2 的部署方案
@@ -659,7 +651,6 @@ DBMS 也是 SAP 系统中的单一联系点。需要使用高可用性解决方�
 - SAP 应用程序服务器实例部署在其自身的专用 VM 中。
 
 ![图 9：SAP 高可用性体系结构模板 2，包含一个用于 ASCS/SCS 的专用群集和一个用于 DBMS 的专用群集][sap-ha-guide-figure-2005]  
-
 
 **图 9：**SAP 高可用性体系结构模板 2，包含一个用于 ASCS/SCS 的专用群集和一个用于 DBMS 的专用群集
 
@@ -673,7 +664,6 @@ DBMS 也是 SAP 系统中的单一联系点。需要使用高可用性解决方�
 - SAP 系统 SID2 的 SAP 应用程序服务器实例具有自身的专用 VM。
 
 ![图 10：SAP 高可用性体系结构模板 3，包含一个用于不同的 ASCS/SCS 实例的专用群集][sap-ha-guide-figure-6003]  
-
 
 **图 10：**SAP 高可用性体系结构模板 3，包含一个用于不同 ASCS/SCS 实例的专用群集
 
@@ -694,7 +684,6 @@ Azure Resource Manager 中的三层模板还支持高可用性方案，例如体
 - 在 Azure 门户预览中，在“参数”边栏选项卡上的“SYSTEMAVAILABILITY”框中，选择“HA”。
 
   ![图 11：设置 SAP 高可用性 Azure Resource Manager 参数][sap-ha-guide-figure-3000]  
-
 
 **图 11：**设置 SAP 高可用性 Azure Resource Manager 参数
 
@@ -724,7 +713,7 @@ Azure Resource Manager 中的三层模板还支持高可用性方案，例如体
   * **网络安全组**：\<*SAPSystemSID*\>-nsg-ascs-0
       * 向 \<*SAPSystemSID*\>-ascs-0 虚拟机开放的外部远程桌面协议 \(RDP\) 端口
 
-> [AZURE.NOTE]
+> [!NOTE]
 网卡和 Azure 内部负载均衡器的所有 IP 地址默认为**动态**。请将其更改为**静态** IP 地址。本文稍后将介绍如何执行此操作。
 >
 >
@@ -732,7 +721,7 @@ Azure Resource Manager 中的三层模板还支持高可用性方案，例如体
 ### <a name="c87a8d3f-b1dc-4d2f-b23c-da4b72977489"></a>部署具有企业网络连接（跨界连接）的虚拟机以便在生产环境中使用
 对于生产 SAP 系统，可以使用 Azure 站点到站点 VPN 或 Azure ExpressRoute 部署具有[企业网络连接（跨界）][planning-guide-2.2]的 Azure 虚拟机。
 
-> [AZURE.NOTE]
+> [!NOTE]
 可以使用 Azure 虚拟网络实例。已创建并准备好虚拟网络和子网。
 >
 >
@@ -741,16 +730,22 @@ Azure Resource Manager 中的三层模板还支持高可用性方案，例如体
 2.  在“SUBNETID”框中，添加已准备好的“Azure 网络 SubnetID”的完整字符串，这是打算用于部署 Azure 虚拟机的位置。
 3.  若要获取所有 Azure 网络子网的列表，请运行以下 PowerShell 命令：
 
-        (Get-AzureRmVirtualNetwork -Name <azureVnetName> -ResourceGroupName <ResourceGroupOfVNET>).Subnets
+    ```
+    (Get-AzureRmVirtualNetwork -Name <azureVnetName> -ResourceGroupName <ResourceGroupOfVNET>).Subnets
+    ```
 
 “ID”字段显示 **SUBNETID**。
 4. 若要获取所有“SUBNETID”值的列表，请运行以下 PowerShell 命令：
 
-        (Get-AzureRmVirtualNetwork -Name <azureVnetName> -ResourceGroupName <ResourceGroupOfVNET>).Subnets.Id
+    ```
+    (Get-AzureRmVirtualNetwork -Name <azureVnetName> -ResourceGroupName <ResourceGroupOfVNET>).Subnets.Id
+    ```
 
 **SUBNETID** 如下所示：
 
-      /subscriptions/<SubscriptionId>/resourceGroups/<VPNName>/providers/Microsoft.Network/virtualNetworks/azureVnet/subnets/<SubnetName>
+```
+  /subscriptions/<SubscriptionId>/resourceGroups/<VPNName>/providers/Microsoft.Network/virtualNetworks/azureVnet/subnets/<SubnetName>
+```
 
 ### <a name="7fe9af0e-3cce-495b-a5ec-dcb4d8e0a310"></a>部署用于测试和演示的仅限云 SAP 实例
 可以在仅限云的部署模型中部署高可用性 SAP 系统。这种部署主要用于演示和测试目的。而不适合用于生产环境用途。
@@ -759,7 +754,7 @@ Azure Resource Manager 中的三层模板还支持高可用性方案，例如体
 
   SAP Azure Resource Manager 模板将自动创建 Azure 虚拟网络和子网。
 
-> [AZURE.NOTE]
+> [!NOTE]
 还需要在同一个 Azure 虚拟网络实例中，针对 Active Directory 和 DNS 至少部署一个专用虚拟机。模板不会创建这些虚拟机。
 >
 >
@@ -800,7 +795,9 @@ ASCS/SCS 模板部署两个虚拟机，可以使用这两个虚拟机创建托�
 -  **新的或现有的子网**。设置是否创建新的虚拟网络和子网，还是使用现有子网。如果已有连接到本地网络的虚拟网络，请选择**现有**虚拟网络。
 -  **子网 ID**。设置虚拟机应连接到的子网的 ID。选择用于将虚拟机连接到本地网络的虚拟专用网络 \(VPN\) 或 ExpressRoute 虚拟网络的子网。ID 通常如下所示：
 
-        /subscriptions/<*subscription id*>/resourceGroups/<*resource group name*>/providers/Microsoft.Network/virtualNetworks/<*virtual network name*>/subnets/<*subnet name*>
+    ```
+    /subscriptions/<*subscription id*>/resourceGroups/<*resource group name*>/providers/Microsoft.Network/virtualNetworks/<*virtual network name*>/subnets/<*subnet name*>
+    ```
 
 模板将部署一个支持多个 SAP 系统的 Azure 负载均衡器。
 
@@ -854,7 +851,7 @@ ASCS/SCS 模板部署两个虚拟机，可以使用这两个虚拟机创建托�
 ### <a name="47d5300a-a830-41d4-83dd-1a0d1ffdbe6a"></a>Azure 虚拟网络
 在本例中，Azure 虚拟网络的地址空间为 10.0.0.0/16。有一个名为 **Subnet**、地址范围为 10.0.0.0/24 的子网。所有虚拟机和内部负载均衡器部署在此虚拟网络中。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请不要对来宾操作系统中的网络设置进行任何更改。这包括 IP 地址、DNS 服务器和子网。在 Azure 中设置所有网络设置。动态主机配置协议 \(DHCP\) 服务会传播设置。
 >
 >
@@ -872,7 +869,7 @@ ASCS/SCS 模板部署两个虚拟机，可以使用这两个虚拟机创建托�
 
     _**图 12：**为 Azure 虚拟网络配置 DNS 服务器_
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     如果更改了 DNS 服务器的 IP 地址，则需要重新启动 Azure 虚拟机，才能应用更改并传播新的 DNS 服务器。
     >
     >
@@ -904,7 +901,7 @@ ASCS/SCS 模板部署两个虚拟机，可以使用这两个虚拟机创建托�
 1.  在 Azure 门户预览中，选择“资源组”\>“网卡”\>“设置”\>“IP 地址”。
 2.  在“IP 地址”边栏选项卡的“分配”下，选择“静态”。在“IP 地址”框中，输入要使用的 IP 地址。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     如果更改了网卡的 IP 地址，则需要重新启动 Azure 虚拟机才能应用更改。
     >
     >
@@ -932,7 +929,7 @@ ASCS/SCS 模板部署两个虚拟机，可以使用这两个虚拟机创建托�
 
 SAP Azure Resource Manager 模板可创建用于 SAP ASCS/SCS 实例和 DBMS 实例的 Azure 内部负载均衡器。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 SAP ASCS/SCS 的虚拟主机名的 IP 地址与 SAP ASCS/SCS 内部负载均衡器 **pr1-lb-ascs** 的 IP 地址相同。DBMS 的虚拟名称的 IP 地址与 DBMS 内部负载均衡器 **pr1-lb-dbms** 的 IP 地址相同。
 >
 >
@@ -1001,7 +998,6 @@ _**表 1：**SAP NetWeaver ABAP ASCS 实例的端口号_
 _**表 2：**SAP NetWeaver Java SCS 实例的端口号_
 
 ![图 15：Azure 内部负载均衡器的默认 ASCS/SCS 负载均衡规则][sap-ha-guide-figure-3004]  
-
 
 _**图 15：**Azure 内部负载均衡器的默认 ASCS/SCS 负载均衡规则_
 
@@ -1078,7 +1074,7 @@ _**表 4：**更改第二个 TCP/IP 参数_
     ![图 18：添加第一个群集节点的服务器或虚拟机名称][sap-ha-guide-figure-3007]  
 
     _**图 18：**添加第一个群集节点的服务器或虚拟机名称_
-  
+
 3.  输入群集的网络名称（虚拟主机名）。
 
     ![图 19：输入群集名称][sap-ha-guide-figure-3008]  
@@ -1133,7 +1129,7 @@ _**表 4：**更改第二个 TCP/IP 参数_
 
     **图 27：**输入第二个群集节点主机名
 
-    > [AZURE.IMPORTANT]
+    > [!IMPORTANT]
     **切勿**选中“将所有符合条件的存储添加到群集”复选框。
     >
     >
@@ -1161,7 +1157,7 @@ _**表 4：**更改第二个 TCP/IP 参数_
 
     在本文的示例中，文件共享见证位于 Azure 中运行的 Active Directory/DNS 服务器上。文件共享见证名为 **domcontr-0**。由于已配置 Azure 的 VPN 连接（通过站点到站点 VPN 或 Azure ExpressRoute），因此 Active Directory/DNS 服务位于本地，不适合用于运行文件共享见证。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     如果 Active Directory/DNS 服务仅在本地运行，请不要在本地运行的 Active Directory/DNS Windows 操作系统上配置文件共享见证。在 Azure 中与本地 Active Directory DNS 中运行的群集节点之间的网络延迟可能太大，会造成连接问题。请务必在运行位置靠近群集节点的 Azure 虚拟机上配置文件共享见证。
     >
     >
@@ -1253,7 +1249,9 @@ Microsoft .NET Framework 3.5 不会在 Windows Server 2012 R2 上自动激活或
 
 - 使用命令行工具 dism.exe。对于这种类型的安装，需要访问 Windows 安装媒体中的 SxS 目录。在权限提升的命令提示符下键入：
 
-        Dism /online /enable-feature /featurename:NetFx3 /All /Source:installation\_media\_drive:\\sources\\sxs /LimitAccess
+    ```
+    Dism /online /enable-feature /featurename:NetFx3 /All /Source:installation\_media\_drive:\\sources\\sxs /LimitAccess
+    ```
 
 #### <a name="dd41d5a2-8083-415b-9878-839652812102"></a>安装 SIOS DataKeeper
 
@@ -1261,7 +1259,7 @@ Microsoft .NET Framework 3.5 不会在 Windows Server 2012 R2 上自动激活或
 
 安装 SIOS 软件之前，请先创建域用户 **DataKeeperSvc**。
 
-> [AZURE.NOTE]
+> [!NOTE]
 请将 **DataKeeperSvc** 用户同时添加到两个群集节点上的“本地管理员”组中。
 >
 >
@@ -1373,14 +1371,14 @@ Microsoft .NET Framework 3.5 不会在 Windows Server 2012 R2 上自动激活或
 
 当不同的 DBMS 服务与 Azure 中这种群集 SAP ASCS/SCS 配置交互时，不存在任何特殊注意事项。
 
-> [AZURE.NOTE]
+> [!NOTE]
 SAP NetWeaver ABAP 系统、Java 系统和 ABAP+Java 系统的安装过程几乎完全相同。最明显的差别在于，SAP ABAP 系统只有一个 ASCS 实例。SAP Java 系统只有一个 SCS 实例，而 SAP ABAP+Java 系统则有一个 ASCS，以及一个在同一 Microsoft 故障转移群集组中运行的 SCS 实例。本文将明确说明每个 SAP NetWeaver 安装堆栈的所有安装差异。可以假设其他所有部分相同。
 >
 >
 
 ### <a name="31c6bd4f-51df-4057-9fdf-3fcbc619c170"></a>安装包含高可用性 ASCS/SCS 实例的 SAP 系统
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 切勿将页面文档放在 DataKeeper 镜像卷上。DataKeeper 不支持镜像卷。可将页面文件保留在 Azure 虚拟机的临时驱动器 D 中，这是默认设置。将 Windows 页面文件移到 Azure 虚拟机的驱动器 D（如果不在该位置）。
 >
 >
@@ -1397,7 +1395,7 @@ SAP NetWeaver ABAP 系统、Java 系统和 ABAP+Java 系统的安装过程几乎
 
 1.  在 Windows DNS 管理器中，为 ASCS/SCS 实例的虚拟主机名创建 DNS 条目。
 
-    > [AZURE.IMPORTANT]
+    > [!IMPORTANT]
     分配给 ASCS/SCS 实例虚拟主机名的 IP 地址必须与分配给 Azure 负载均衡器 \(**\<*SID*\>-lb-ascs**\) 的 IP 地址相同。
     >
     >
@@ -1427,7 +1425,7 @@ SAP NetWeaver ABAP 系统、Java 系统和 ABAP+Java 系统的安装过程几乎
 
 接下来的几个任务在标准 SAP 安装文档中未介绍。
 
-> [AZURE.NOTE]
+> [!NOTE]
 SAP 安装文档介绍了如何安装第一个 ASCS/SCS 群集节点。
 >
 >
@@ -1440,7 +1438,9 @@ SAP 安装文档介绍了如何安装第一个 ASCS/SCS 群集节点。
 
 1.  将此配置文件参数添加到 SAP ASCS/SCS 实例配置文件：
 
-        enque/encni/set\_so\_keepalive = true
+    ```
+    enque/encni/set\_so\_keepalive = true
+    ```
 
     在本例中，路径为：
 
@@ -1460,9 +1460,11 @@ SAP 安装文档介绍了如何安装第一个 ASCS/SCS 群集节点。
 
 1.  通过运行以下 PowerShell 命令检查当前 ** ProbePort ** 设置。在群集配置中的某个虚拟机上执行该检查。
 
-        $SAPSID = "PR1" \# SAP \<SID\>
+    ```
+    $SAPSID = "PR1" \# SAP \<SID\>
 
-        $SAPNetworkIPClusterName = "SAP $SAPSID IP" Get-ClusterResource $SAPNetworkIPClusterName \| Get-ClusterParameter
+    $SAPNetworkIPClusterName = "SAP $SAPSID IP" Get-ClusterResource $SAPNetworkIPClusterName \| Get-ClusterParameter
+    ```
 
 2.  定义探测端口。默认探测端口号为 **0**。本示例使用探测端口 **62000**。
 
@@ -1474,66 +1476,70 @@ SAP 安装文档介绍了如何安装第一个 ASCS/SCS 群集节点。
 
     若要为 **SAP \<*SID*\> IP** 群集资源设置新的 ProbePort 值，请运行以下 PowerShell 脚本。更新环境的 PowerShell 变量。脚本运行后，系统将提示重新启动 SAP 群集组，以便激活所做的更改。
 
-        $SAPSID = "PR1"      # SAP <SID>
-        $ProbePort = 62000   # ProbePort of the Azure Internal Load Balancer
+    ```
+    $SAPSID = "PR1"      # SAP <SID>
+    $ProbePort = 62000   # ProbePort of the Azure Internal Load Balancer
 
-        Clear-Host
-        $SAPClusterRoleName = "SAP $SAPSID"
-        $SAPIPresourceName = "SAP $SAPSID IP"
-        $SAPIPResourceClusterParameters =  Get-ClusterResource $SAPIPresourceName | Get-ClusterParameter
-        $IPAddress = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "Address" }).Value
-        $NetworkName = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "Network" }).Value
-        $SubnetMask = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "SubnetMask" }).Value
-        $OverrideAddressMatch = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "OverrideAddressMatch" }).Value
-        $EnableDhcp = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "EnableDhcp" }).Value
-        $OldProbePort = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "ProbePort" }).Value
+    Clear-Host
+    $SAPClusterRoleName = "SAP $SAPSID"
+    $SAPIPresourceName = "SAP $SAPSID IP"
+    $SAPIPResourceClusterParameters =  Get-ClusterResource $SAPIPresourceName | Get-ClusterParameter
+    $IPAddress = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "Address" }).Value
+    $NetworkName = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "Network" }).Value
+    $SubnetMask = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "SubnetMask" }).Value
+    $OverrideAddressMatch = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "OverrideAddressMatch" }).Value
+    $EnableDhcp = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "EnableDhcp" }).Value
+    $OldProbePort = ($SAPIPResourceClusterParameters | Where-Object {$_.Name -eq "ProbePort" }).Value
 
-        $var = Get-ClusterResource | Where-Object {  $_.name -eq $SAPIPresourceName  }
+    $var = Get-ClusterResource | Where-Object {  $_.name -eq $SAPIPresourceName  }
 
-        Write-Host "Current configuration parameters for SAP IP cluster resource '$SAPIPresourceName' are:" -ForegroundColor Cyan
-        Get-ClusterResource -Name $SAPIPresourceName | Get-ClusterParameter
+    Write-Host "Current configuration parameters for SAP IP cluster resource '$SAPIPresourceName' are:" -ForegroundColor Cyan
+    Get-ClusterResource -Name $SAPIPresourceName | Get-ClusterParameter
 
-        Write-Host
-        Write-Host "Current probe port property of the SAP cluster resource '$SAPIPresourceName' is '$OldProbePort'." -ForegroundColor Cyan
-        Write-Host
-        Write-Host "Setting the new probe port property of the SAP cluster resource '$SAPIPresourceName' to '$ProbePort' ..." -ForegroundColor Cyan
-        Write-Host
+    Write-Host
+    Write-Host "Current probe port property of the SAP cluster resource '$SAPIPresourceName' is '$OldProbePort'." -ForegroundColor Cyan
+    Write-Host
+    Write-Host "Setting the new probe port property of the SAP cluster resource '$SAPIPresourceName' to '$ProbePort' ..." -ForegroundColor Cyan
+    Write-Host
 
-        $var | Set-ClusterParameter -Multiple @{"Address"=$IPAddress;"ProbePort"=$ProbePort;"Subnetmask"=$SubnetMask;"Network"=$NetworkName;"OverrideAddressMatch"=$OverrideAddressMatch;"EnableDhcp"=$EnableDhcp}
+    $var | Set-ClusterParameter -Multiple @{"Address"=$IPAddress;"ProbePort"=$ProbePort;"Subnetmask"=$SubnetMask;"Network"=$NetworkName;"OverrideAddressMatch"=$OverrideAddressMatch;"EnableDhcp"=$EnableDhcp}
 
-        Write-Host
+    Write-Host
 
-        $ActivateChanges = Read-Host "Do you want to take restart SAP cluster role '$SAPClusterRoleName', to activate the changes (yes/no)?"
+    $ActivateChanges = Read-Host "Do you want to take restart SAP cluster role '$SAPClusterRoleName', to activate the changes (yes/no)?"
 
-        if($ActivateChanges -eq "yes"){
-        Write-Host
-        Write-Host "Activating changes..." -ForegroundColor Cyan
+    if($ActivateChanges -eq "yes"){
+    Write-Host
+    Write-Host "Activating changes..." -ForegroundColor Cyan
 
-        Write-Host
-        write-host "Taking SAP cluster IP resource '$SAPIPresourceName' offline ..." -ForegroundColor Cyan
-        Stop-ClusterResource -Name $SAPIPresourceName
-        sleep 5
+    Write-Host
+    write-host "Taking SAP cluster IP resource '$SAPIPresourceName' offline ..." -ForegroundColor Cyan
+    Stop-ClusterResource -Name $SAPIPresourceName
+    sleep 5
 
-        Write-Host "Starting SAP cluster role '$SAPClusterRoleName' ..." -ForegroundColor Cyan
-        Start-ClusterGroup -Name $SAPClusterRoleName
+    Write-Host "Starting SAP cluster role '$SAPClusterRoleName' ..." -ForegroundColor Cyan
+    Start-ClusterGroup -Name $SAPClusterRoleName
 
-        Write-Host "New ProbePort parameter is active." -ForegroundColor Green
-        Write-Host
+    Write-Host "New ProbePort parameter is active." -ForegroundColor Green
+    Write-Host
 
-        Write-Host "New configuration parameters for SAP IP cluster resource '$SAPIPresourceName':" -ForegroundColor Cyan
-        Write-Host
-        Get-ClusterResource -Name $SAPIPresourceName | Get-ClusterParameter
-        }else
-        {
-        Write-Host "Changes are not activated."
-        }
+    Write-Host "New configuration parameters for SAP IP cluster resource '$SAPIPresourceName':" -ForegroundColor Cyan
+    Write-Host
+    Get-ClusterResource -Name $SAPIPresourceName | Get-ClusterParameter
+    }else
+    {
+    Write-Host "Changes are not activated."
+    }
+    ```
 
     将**SAP \<*SID*\>** 群集角色设为联机状态后，验证 **ProbePort** 是否设置为新值。
 
-        $SAPSID = "PR1"     # SAP <SID>
+    ```
+    $SAPSID = "PR1"     # SAP <SID>
 
-        $SAPNetworkIPClusterName = "SAP $SAPSID IP"
-        Get-ClusterResource $SAPNetworkIPClusterName | Get-ClusterParameter
+    $SAPNetworkIPClusterName = "SAP $SAPSID IP"
+    Get-ClusterResource $SAPNetworkIPClusterName | Get-ClusterParameter
+    ```
 
     ![图 59：设置新值后探测群集端口][sap-ha-guide-figure-3049]  
 
@@ -1543,9 +1549,11 @@ SAP 安装文档介绍了如何安装第一个 ASCS/SCS 群集节点。
 
 需要在两个群集节点上打开 Windows 防火墙探测端口。使用以下脚本打开 Windows 防火墙探测端口。更新环境的 PowerShell 变量。
 
-      $ProbePort = 62000   # ProbePort of the Azure Internal Load Balancer
+```
+  $ProbePort = 62000   # ProbePort of the Azure Internal Load Balancer
 
-      New-NetFirewallRule -Name AzureProbePort -DisplayName "Rule for Azure Probe Port" -Direction Inbound -Action Allow -Protocol TCP -LocalPort $ProbePort
+  New-NetFirewallRule -Name AzureProbePort -DisplayName "Rule for Azure Probe Port" -Direction Inbound -Action Allow -Protocol TCP -LocalPort $ProbePort
+```
 
 **ProbePort** 已设置为 **62000**。现在，可从其他主机（例如 **ascsha-dbas**）访问文件共享 **\\\\ascsha-clsap\\sapmnt**。
 
@@ -1573,7 +1581,7 @@ _**图 60：**将 SAP ERS 实例的服务类型更改为自动延迟_
 
 在指定用于托管 SAP 应用程序服务器实例的所有虚拟机上安装 SAP 附加应用程序服务器 \(AAS\)。例如，在 \<*SID*\>-di-1 到 \<*SID*\>-di-\<n\> 上。
 
-> [AZURE.NOTE]
+> [!NOTE]
 这将完成高可用性 SAP NetWeaver 系统的安装。接下来，继续执行故障转移测试。
 >
 
@@ -1600,10 +1608,12 @@ _**图 62：**SIOS DataKeeper：将本地卷从群集节点 A 复制到群集节
     - 使用故障转移群集管理器
     - 使用故障转移群集 PowerShell
 
-            $SAPSID = "PR1" \# SAP \<SID\>
+        ```
+        $SAPSID = "PR1" \# SAP \<SID\>
 
-            $SAPClusterGroup = "SAP $SAPSID"
-            Move-ClusterGroup -Name $SAPClusterGroup
+        $SAPClusterGroup = "SAP $SAPSID"
+        Move-ClusterGroup -Name $SAPClusterGroup
+        ```
 
 2.  在 Windows 来宾操作系统中重新启动群集节点 A（这会启动将 SAP \<*SID*\> 群集组从节点 A 故障转移到节点 B 的自动故障转移）。
 3.  在 Azure 门户预览中重新启动群集节点 A（这会启动将 SAP \<*SID*\> 群集组从节点 A 故障转移到节点 B 的自动故障转移）。

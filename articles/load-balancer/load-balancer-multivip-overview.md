@@ -1,30 +1,27 @@
-<properties
-   pageTitle="Azure 负载均衡器的多个 VIP | Azure"
-   description="Azure 负载均衡器上的多个 VIP 概述"
-   services="load-balancer"
-   documentationCenter="na"
-   authors="chkuhtz"
-   manager="narayan"
-   editor=""
-/>  
+---
+title: Azure 负载均衡器的多个 VIP | Azure
+description: Azure 负载均衡器上的多个 VIP 概述
+services: load-balancer
+documentationCenter: na
+authors: chkuhtz
+manager: narayan
+editor: ''
 
-<tags
-   ms.service="load-balancer"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="08/11/2016"
-   wacn.date="10/31/2016"
-   ms.author="chkuhtz"
-/>  
-
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/11/2016
+wacn.date: 10/31/2016
+ms.author: chkuhtz
+---
 
 # Azure 负载均衡器的多个 VIP
 
 使用 Azure 负载均衡器可对多个端口和/或多个 IP 地址上的服务进行负载均衡。可以使用公共和内部负载均衡器定义来对一组 VM 之间的流量进行负载均衡。
 
-本文介绍此功能的基础知识、重要概念和约束。如果只想要公开一个 IP 地址上的服务，可以查看[公共](/documentation/articles/load-balancer-get-started-internet-portal/)或[内部](/documentation/articles/load-balancer-get-started-ilb-arm-portal/)负载均衡器配置的简要说明。添加多个 VIP 是对单个 VIP 配置的递增。使用本文中的概念，随时可以扩展简化的配置。
+本文介绍此功能的基础知识、重要概念和约束。如果只想要公开一个 IP 地址上的服务，可以查看[公共](./load-balancer-get-started-internet-portal.md)或[内部](./load-balancer-get-started-ilb-arm-portal.md)负载均衡器配置的简要说明。添加多个 VIP 是对单个 VIP 配置的递增。使用本文中的概念，随时可以扩展简化的配置。
 
 定义 Azure 负载均衡器时，前端和后端配置与规则相连接。规则引用的运行状况探测用于确定如何将新流量发送到后端池中的节点。前端由虚拟 IP (VIP) 定义，VIP 是由 IP 地址（公共或内部）、传输协议（UDP 或 TCP）和端口号组成的 3 元组。DIP 是附加到后端池中 VM 的 Azure 虚拟 NIC 上的 IP 地址。
 
@@ -51,7 +48,6 @@ Azure 负载均衡器允许在相同的负载均衡器配置中混用这两种�
 ## 规则类型 #1：不重复使用后端端口
 
 ![MultiVIP 示意图](./media/load-balancer-multivip-overview/load-balancer-multivip.png)  
-
 
 在此方案中，前端 VIP 的配置如下：
 
@@ -94,14 +90,14 @@ DIP 是入站流量的目标。在后端池中，每个 VM 公开 DIP 上唯一�
 
 ![MultiVIP 示意图](./media/load-balancer-multivip-overview/load-balancer-multivip-dsr.png)  
 
-
 此方案中，后端池中的每个 VM 有三个网络接口：
 
 * DIP：与 VM 关联的虚拟 NIC（Azure 的 NIC 资源）
 * VIP1：来宾 OS 中的环回接口，该接口上已配置 VIP1 的 IP 地址
 * VIP2：来宾 OS 中的环回接口，该接口上已配置 VIP2 的 IP 地址
 
->[AZURE.IMPORTANT] 逻辑接口的配置在来宾 OS 中执行。此配置不是由 Azure 执行或管理。如果没有此配置，规则将无法正常运行。运行状况探测定义使用 VM 的 DIP，而不是逻辑 VIP。因此，服务必须在 DIP 端口上提供探测响应，反映逻辑 VIP 上提供的服务的状态。
+>[!IMPORTANT]
+> 逻辑接口的配置在来宾 OS 中执行。此配置不是由 Azure 执行或管理。如果没有此配置，规则将无法正常运行。运行状况探测定义使用 VM 的 DIP，而不是逻辑 VIP。因此，服务必须在 DIP 端口上提供探测响应，反映逻辑 VIP 上提供的服务的状态。
 
 假设上述方案使用相同的前端配置：
 
@@ -128,13 +124,13 @@ DIP 是入站流量的目标。在后端池中，每个 VM 公开 DIP 上唯一�
 
 请注意，本示例未更改目标端口。这是一个浮动 IP 方案，不过 Azure 负载均衡器也支持定义规则来重写后端的目标端口，使其与前端的目标端口不同。
 
-浮动 IP 规则类型是多种负载均衡器配置模式的基础。[具有多个侦听器的 SQL AlwaysOn](/documentation/articles/virtual-machines-windows-portal-sql-ps-alwayson-int-listener/) 配置是目前提供的示例之一。一段时间后，我们会介绍更多此类方案。
+浮动 IP 规则类型是多种负载均衡器配置模式的基础。[具有多个侦听器的 SQL AlwaysOn](../virtual-machines/virtual-machines-windows-portal-sql-ps-alwayson-int-listener.md) 配置是目前提供的示例之一。一段时间后，我们会介绍更多此类方案。
 
 ## 限制
 
 * 只有 IaaS VM 支持多个 VIP 配置。
 * 使用浮点 IP 规则时，应用程序必须为出站流量使用 DIP。如果应用程序绑定到来宾 OS 中环回接口上配置的 VIP 地址，则无法使用 SNAT 来重写出站流量，此时流量处理将会失败。
-* 公共 IP 地址会影响计费。有关详细信息，请参阅 [IP Address pricing](/pricing/details/reserved-ip-addresses/)（IP 地址定价）。
-* 订阅有所限制。有关详细信息，请参阅 [Service limits](/documentation/articles/azure-subscription-service-limits#networking-limits)（服务限制）。
+* 公共 IP 地址会影响计费。有关详细信息，请参阅 [IP Address pricing](https://www.azure.cn/pricing/details/reserved-ip-addresses/)（IP 地址定价）。
+* 订阅有所限制。有关详细信息，请参阅 [Service limits](../azure-subscription-service-limits.md#networking-limits)（服务限制）。
 
 <!---HONumber=Mooncake_1024_2016-->

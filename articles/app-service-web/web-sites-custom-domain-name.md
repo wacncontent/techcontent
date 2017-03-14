@@ -1,27 +1,28 @@
-<properties
-    pageTitle="将自定义域名映射到 Azure 应用"
-    description="了解如何在 Azure App Service 中将自定义域名（虚域）映射到应用。"
-    services="app-service"
-    documentationcenter=""
-    author="cephalin"
-    manager="wpickett"
-    editor="jimbe"
-    tags="top-support-issue" />
-<tags
-    ms.assetid="48644a39-107c-45fb-9cd3-c741974ff590"
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="01/30/2017"
-    wacn.date="03/03/2017"
-    ms.author="cephalin" />
+---
+title: 将自定义域名映射到 Azure 应用
+description: 了解如何在 Azure App Service 中将自定义域名（虚域）映射到应用。
+services: app-service
+documentationcenter: ''
+author: cephalin
+manager: wpickett
+editor: jimbe
+tags: top-support-issue
+
+ms.assetid: 48644a39-107c-45fb-9cd3-c741974ff590
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/30/2017
+wacn.date: 03/03/2017
+ms.author: cephalin
+---
 
 # 将自定义域名映射到 Azure 应用
-[AZURE.INCLUDE [web-selector](../../includes/websites-custom-domain-selector.md)]
+[!INCLUDE [web-selector](../../includes/websites-custom-domain-selector.md)]
 
-本文演示如何在 [Azure App Service](/documentation/articles/app-service-value-prop-what-is/) 中手动将自定义域名映射到 Web 应用、移动应用后端或 API 应用。
+本文演示如何在 [Azure App Service](../app-service/app-service-value-prop-what-is.md) 中手动将自定义域名映射到 Web 应用、移动应用后端或 API 应用。
 
 如果已从第三方提供商购买了自定义域，则可按照以下三个主要步骤将自定义域映射到应用：
 
@@ -51,7 +52,7 @@ CNAME 的优点是其不会随 IP 地址的更改而更改。如果删除和重�
 
 本教程将演示使用 A 记录和使用 CNAME 记录的步骤。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 不要为根域（即“根记录”）创建 CNAME 记录。有关详细信息，请参阅 [Why can't a CNAME record be used at the root domain](http://serverfault.com/questions/613829/why-cant-a-cname-record-be-used-at-the-apex-aka-root-of-a-domain)（为什么不能将 CNAME 记录用于根域）。若要将根域映射到 Azure 应用，请改用 A 记录。
 > 
 > 
@@ -63,7 +64,7 @@ CNAME 的优点是其不会随 IP 地址的更改而更改。如果删除和重�
 2. 在左侧菜单上，单击“应用服务”。
 3. 单击应用，然后单击“自定义域”。
 4. 记下“主机名”部分上方的 IP 地址。
-   
+
     ![使用 A 记录映射自定义域名：获取 Azure App Service 应用的 IP 地址](./media/web-sites-custom-domain-name/virtual-ip-address.png)
 5. 将此门户边栏选项卡保持打开状态。在创建 DNS 记录后会返回这里。
 
@@ -132,7 +133,7 @@ CNAME 的优点是其不会随 IP 地址的更改而更改。如果删除和重�
 ### <a name="cname"></a>创建 CNAME 记录
 如果使用 CNAME 记录映射到 Azure 应用的默认域名，则不需要其他 TXT 记录，这一点与使用 A 记录不同。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 不要为根域（即“根记录”）创建 CNAME 记录。有关详细信息，请参阅 [Why can't a CNAME record be used at the root domain](http://serverfault.com/questions/613829/why-cant-a-cname-record-be-used-at-the-apex-aka-root-of-a-domain)（为什么不能将 CNAME 记录用于根域）。若要将根域映射到 Azure 应用，请改用 [A 记录](#a)。
 > 
 > 
@@ -164,10 +165,10 @@ CNAME 的优点是其不会随 IP 地址的更改而更改。如果删除和重�
 2. 在 Azure 门户预览中，单击左侧菜单中的“应用程序服务”。
 3. 单击应用，然后单击“自定义域”>“添加域”。
 4. 将自定义域的 FQDN 添加到列表中（例如 **www.contoso.com**）。
-   
+
     ![将自定义域名映射到 Azure 应用：添加域名的列表](./media/web-sites-custom-domain-name/add-custom-domain.png)
-   
-    > [AZURE.NOTE]
+
+    > [!NOTE]
     Azure 将尝试验证在此处使用的域名。请确保它与在[步骤 2](#createdns) 中用于创建 DNS 记录的域名是同一域名。
     > 
     > 
@@ -178,20 +179,20 @@ CNAME 的优点是其不会随 IP 地址的更改而更改。如果删除和重�
 
 ## 迁移活动域名
 
-如果想要映射的域名已被现有网站使用，并且想要避免故障时间，请参阅[将活动自定义域迁移到应用服务](/documentation/articles/app-service-custom-domain-name-migrate/)。
+如果想要映射的域名已被现有网站使用，并且想要避免故障时间，请参阅[将活动自定义域迁移到应用服务](./app-service-custom-domain-name-migrate.md)。
 
 ## <a name="verify"></a>验证 DNS 传播
 完成配置步骤后，更改可能需要一些时间来进行传播，传播速度取决于 DNS 提供商。可以通过使用 [http://digwebinterface.com/](http://digwebinterface.com/) 验证 DNS 传播是否按预期方式工作。浏览到站点后，在文本框中指定主机名并单击“深入发掘”。验证结果以确认最近所做的更改是否已生效。
 
 ![将自定义域名映射到 Azure 应用：验证 DNS 传播](./media/web-sites-custom-domain-name/1-digwebinterface.png)
 
-> [AZURE.NOTE]
+> [!NOTE]
 DNS 条目的传播可能需要 48 小时（有时会更久）。如果已正确进行了所有配置，仍需要等待传播成功。
 > 
 > 
 
 ## 后续步骤
-请参阅 [using an SSL certificate from elsewhere](/documentation/articles/web-sites-configure-ssl-certificate/)（使用在其他地方购买的 SSL 证书），了解如何使用 HTTPS 保护自定义域名。
+请参阅 [using an SSL certificate from elsewhere](./web-sites-configure-ssl-certificate.md)（使用在其他地方购买的 SSL 证书），了解如何使用 HTTPS 保护自定义域名。
 
 <!-- Images -->
 

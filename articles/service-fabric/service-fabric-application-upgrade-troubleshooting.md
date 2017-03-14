@@ -1,23 +1,21 @@
-<properties
-   pageTitle="应用程序升级故障排除 | Azure"
-   description="本文涵盖了有关升级 Service Fabric 应用程序的一些常见问题以及如何解决这些问题。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="mani-ramaswamy"
-   manager="timlt"
-   editor=""/>  
+---
+title: 应用程序升级故障排除 | Azure
+description: 本文涵盖了有关升级 Service Fabric 应用程序的一些常见问题以及如何解决这些问题。
+services: service-fabric
+documentationCenter: .net
+authors: mani-ramaswamy
+manager: timlt
+editor: ''
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="11/15/2016"
-   wacn.date="01/25/2017"
-   ms.author="subramar"/>  
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/15/2016
+wacn.date: 01/25/2017
+ms.author: subramar
+---
 
 # 应用程序升级故障排除
 本文介绍一些围绕升级 Azure Service Fabric 应用程序的常见问题以及这些问题的解决方法。
@@ -43,7 +41,7 @@
 ### 调查升级超时
 升级超时失败通常由服务可用性问题引起。当服务副本或实例未能在新代码版本中启动时，此段落后面的输出是升级的典型输出。**UpgradeDomainProgressAtFailure** 字段捕获失败时所有挂起的升级工作的快照。
 
-~~~
+```
 PS D:\temp> Get-ServiceFabricApplicationUpgrade fabric:/DemoApp
 
 ApplicationName                : fabric:/DemoApp
@@ -75,7 +73,7 @@ UpgradeKind                    : Rolling
 RollingUpgradeMode             : UnmonitoredAuto
 ForceRestart                   : False
 UpgradeReplicaSetCheckTimeout  : 00:00:00
-~~~
+```
 
 在本示例中，升级域 *MYUD1* 的升级失败，两个分区（*744c8d9f-1d26-417e-a60e-cd48f5c098f0* 和 *4b43f4d8-b26b-424e-9307-7a7a62e79750*）已停滞。分区由于运行时无法将主副本 (*WaitForPrimaryPlacement*) 放在在目标节点 *Node1* 和 *Node4* 上而停滞。
 
@@ -86,9 +84,9 @@ UpgradeReplicaSetCheckTimeout  : 00:00:00
 当前 **UpgradeState** 为 *RollingBackCompleted*，因此必须已使用回滚 **FailureAction**（将在失败时自动回滚升级）执行原始升级。如果已使用手动 **FailureAction** 执行了原始升级，则升级将改为处于挂起状态，以允许对应用程序进行实时调试。
 
 ### 调查运行状况检查失败
-运行状况检查失败可能由各种其他问题触发，这些问题可能发生在升级域中所有节点完成升级、通过所有安全检查之后。此段落后面的输出是升级因运行状况检查失败而失败时的典型输出。**UnhealthyEvaluations** 字段根据指定的[运行状况策略](/documentation/articles/service-fabric-health-introduction/)，捕获升级失败时失败的运行状况检查的快照。
+运行状况检查失败可能由各种其他问题触发，这些问题可能发生在升级域中所有节点完成升级、通过所有安全检查之后。此段落后面的输出是升级因运行状况检查失败而失败时的典型输出。**UnhealthyEvaluations** 字段根据指定的[运行状况策略](./service-fabric-health-introduction.md)，捕获升级失败时失败的运行状况检查的快照。
 
-~~~
+```
 PS D:\temp> Get-ServiceFabricApplicationUpgrade fabric:/DemoApp
 
 ApplicationName                         : fabric:/DemoApp
@@ -138,7 +136,7 @@ MaxPercentUnhealthyReplicasPerPartition :
 MaxPercentUnhealthyServices             :
 MaxPercentUnhealthyDeployedApplications :
 ServiceTypeHealthPolicyMap              :
-~~~
+```
 
 调查运行状况检查失败原因首先需要了解 Service Fabric 运行状况模型。但即使没有深入理解，我们也可以看到有两个服务是不正常的：*fabric:/DemoApp/Svc3* 和 *fabric:/DemoApp/Svc2*，还可看到错误运行状况报告（本例中为“InjectedFault”）。在本示例中，四个服务中有两个服务不正常，低于不正常运行状况的默认目标 (*MaxPercentUnhealthyServices*) 0%。
 
@@ -157,7 +155,7 @@ ServiceTypeHealthPolicyMap              :
 
 **Update-ServiceFabricApplicationUpgrade** 命令可用于继续进行受监控的升级，同时执行安全检查和运行状况检查。
 
-~~~
+```
 PS D:\temp> Update-ServiceFabricApplicationUpgrade fabric:/DemoApp -UpgradeMode Monitored
 
 UpgradeMode                             : Monitored
@@ -177,7 +175,7 @@ MaxPercentUnhealthyDeployedApplications :
 ServiceTypeHealthPolicyMap              :
 
 PS D:\temp>
-~~~
+```
 
 升级将从上次挂起的升级域继续，并使用与以前相同的升级参数和运行状况策略。如果需要，在继续进行升级时，可使用同一命令更改上面的输出中显示的任何升级参数和运行状况策略。在本示例中，升级以监视模式继续，参数和运行状况策略保持不变。
 
@@ -212,17 +210,16 @@ Service Fabric 将所有百分比转换为实际实体（如副本、分区和�
 
 ## 后续步骤
 
-[使用 Visual Studio 升级应用程序](/documentation/articles/service-fabric-application-upgrade-tutorial/)逐步讲解了如何使用 Visual Studio 进行应用程序升级。
+[使用 Visual Studio 升级应用程序](./service-fabric-application-upgrade-tutorial.md)逐步讲解了如何使用 Visual Studio 进行应用程序升级。
 
-[使用 PowerShell 升级应用程序](/documentation/articles/service-fabric-application-upgrade-tutorial-powershell/)逐步讲解了如何使用 PowerShell 进行应用程序升级。
+[使用 PowerShell 升级应用程序](./service-fabric-application-upgrade-tutorial-powershell.md)逐步讲解了如何使用 PowerShell 进行应用程序升级。
 
-使用[升级参数](/documentation/articles/service-fabric-application-upgrade-parameters/)来控制应用程序的升级方式。
+使用[升级参数](./service-fabric-application-upgrade-parameters.md)来控制应用程序的升级方式。
 
-了解如何使用[数据序列化](/documentation/articles/service-fabric-application-upgrade-data-serialization/)，使应用程序在升级后保持兼容。
+了解如何使用[数据序列化](./service-fabric-application-upgrade-data-serialization.md)，使应用程序在升级后保持兼容。
 
-参考[高级主题](/documentation/articles/service-fabric-application-upgrade-advanced/)，了解如何在升级应用程序时使用高级功能。
+参考[高级主题](./service-fabric-application-upgrade-advanced.md)，了解如何在升级应用程序时使用高级功能。
 
-参考 [Troubleshooting Application Upgrades](/documentation/articles/service-fabric-application-upgrade-troubleshooting/)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
- 
+参考 [Troubleshooting Application Upgrades](./service-fabric-application-upgrade-troubleshooting.md)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
 
 <!---HONumber=Mooncake_Quality_Review_0125_2017-->

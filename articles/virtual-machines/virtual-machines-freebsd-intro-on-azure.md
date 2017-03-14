@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Azure FreeBSD 简介 | Azure"
-    description="了解如何在 Azure 上使用 FreeBSD 虚拟机。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="KylieLiang"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="32b87a5f-d024-4da0-8bf0-77e233d1422b"
-    ms.service="virtual-machines-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure-services"
-    ms.date="01/09/2017"
-    wacn.date="02/20/2017"
-    ms.author="kyliel" />  
+---
+title: Azure FreeBSD 简介 | Azure
+description: 了解如何在 Azure 上使用 FreeBSD 虚拟机。
+services: virtual-machines-linux
+documentationcenter: ''
+author: KylieLiang
+manager: timlt
+editor: ''
+tags: azure-service-management
 
+ms.assetid: 32b87a5f-d024-4da0-8bf0-77e233d1422b
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 01/09/2017
+wacn.date: 02/20/2017
+ms.author: kyliel
+---
 
 # Azure FreeBSD 简介
 本主题概述如何在 Azure 中运行 FreeBSD 虚拟机。
@@ -65,7 +65,8 @@ Azure 虚拟机代理负责 FreeBSD 虚拟机 和 Azure 结构控制器之间的
 * 自动删除 shell 和 Python 脚本中的 BOM。
 * 保护 CommandToExecute 中的敏感数据。
 
-[AZURE.NOTE]FreeBSD VM 目前仅支持 CustomScript 1.x 版。
+>[!NOTE]
+>FreeBSD VM 目前仅支持 CustomScript 1.x 版。
 
 ## 身份验证：用户名、密码和 SSH 密钥
 使用 Azure 门户预览创建 FreeBSD 虚拟机时，必须提供用户名、密码或 SSH 公钥。在 Azure 上部署 FreeBSD 虚拟机时，用户名必须与已经存在于虚拟机中的系统帐户 \(UID \<100\) 的名称（例如“root”）相符。目前仅支持 RSA SSH 密钥。多行 SSH 密钥必须以 `---- BEGIN SSH2 PUBLIC KEY ----` 开头，以 `---- END SSH2 PUBLIC KEY ----` 结尾。
@@ -73,7 +74,9 @@ Azure 虚拟机代理负责 FreeBSD 虚拟机 和 Azure 结构控制器之间的
 ## 获取超级用户特权
 在 Azure 上部署虚拟机实例的过程中指定的用户帐户是特权帐户。sudo 包安装在已发布的 FreeBSD 镜像中。通过此用户帐户登录后，即可使用命令语法以 root 用户身份运行命令。
 
-    $ sudo <COMMAND>
+```
+$ sudo <COMMAND>
+```
 
 可以选择使用 `sudo -s` 获取 root shell。
 
@@ -84,7 +87,7 @@ Azure 虚拟机代理负责 FreeBSD 虚拟机 和 Azure 结构控制器之间的
 
 ## 后续步骤
 * 转到 [Azure 应用商店](https://portal.azure.cn/#create/Microsoft.FreeBSD103-ARM)创建 FreeBSD 虚拟机。
-* 若要将自己的 FreeBSD 上载到 Azure，请参阅[创建 FreeBSD VHD 并将其上载到 Azure](/documentation/articles/virtual-machines-linux-classic-freebsd-create-upload-vhd/)。
+* 若要将自己的 FreeBSD 上载到 Azure，请参阅[创建 FreeBSD VHD 并将其上载到 Azure](./virtual-machines-linux-classic-freebsd-create-upload-vhd.md)。
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: add information about supported CustomScript version-->

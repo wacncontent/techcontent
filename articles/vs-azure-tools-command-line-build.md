@@ -1,29 +1,28 @@
-<properties
-   pageTitle="为 Azure 构建的命令行 | Azure"
-   description="为 Azure 构建的命令行"
-   services="visual-studio-online"
-   documentationCenter="na"
-   authors="TomArcher"
-   manager="douge"
-   editor="" />
+---
+title: 为 Azure 构建的命令行 | Azure
+description: 为 Azure 构建的命令行
+services: visual-studio-online
+documentationCenter: na
+authors: TomArcher
+manager: douge
+editor: ''
 
-<tags
-    ms.assetid="94b35d0d-0d35-48b6-b48b-3641377867fd"
-    ms.service="multiple"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/11/2016"
-    wacn.date="02/04/2017"
-    ms.author="tarcher" />
+ms.assetid: 94b35d0d-0d35-48b6-b48b-3641377867fd
+ms.service: multiple
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/11/2016
+wacn.date: 02/04/2017
+ms.author: tarcher
+---
 
 # 为 Azure 构建的命令行
 
 ## 概述
 
 可以通过在命令提示符下运行 MSBuild 来为 Azure 部署创建包。除了自动化某些生成过程外，你还可以配置和定义用于调试、过渡和生产的生成。
-
 
 ## Microsoft 生成引擎 (MSBuild)
 
@@ -63,6 +62,6 @@
 
 ## 部署
 
-生成包后，即可将其部署到 Azure。有关演示该过程的教程，请参阅 Azure 网站。有关如何自动化该过程的信息，请参阅[在 Azure 中持续交付云服务](/documentation/articles/cloud-services-dotnet-continuous-delivery/)。
+生成包后，即可将其部署到 Azure。有关演示该过程的教程，请参阅 Azure 网站。有关如何自动化该过程的信息，请参阅[在 Azure 中持续交付云服务](./cloud-services/cloud-services-dotnet-continuous-delivery.md)。
 
 <!---HONumber=Mooncake_0516_2016-->

@@ -1,21 +1,22 @@
-<properties
-    pageTitle="有关在发生 Azure 区域服务中断时进行复原的技术指南 | Azure"
-    description="本文可帮助你了解和设计有复原能力、高度可用、容错的应用程序，以及针对灾难恢复进行规划。"
-    services=""
-    documentationcenter="na"
-    author="adamglick"
-    manager="saladki"
-    editor="" />
-<tags
-    ms.assetid="f2f750aa-9305-487e-8c3f-1f8fbc06dc47"
-    ms.service="resiliency"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="08/18/2016"
-    wacn.date="02/20/2017"
-    ms.author="aglick" />
+---
+title: 有关在发生 Azure 区域服务中断时进行复原的技术指南 | Azure
+description: 本文可帮助你了解和设计有复原能力、高度可用、容错的应用程序，以及针对灾难恢复进行规划。
+services: ''
+documentationcenter: na
+author: adamglick
+manager: saladki
+editor: ''
+
+ms.assetid: f2f750aa-9305-487e-8c3f-1f8fbc06dc47
+ms.service: resiliency
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/18/2016
+wacn.date: 02/20/2017
+ms.author: aglick
+---
 
 # Azure 复原技术指南：在发生区域范围的服务中断后进行恢复
 
@@ -32,14 +33,14 @@ Azure 在物理上和逻辑上划分为称为区域的单位。一个区域由�
 
 在容量规则方面，事先确定为实现灾难恢复而部署的备用角色实例数目是其中的重要一环。具有规模完整的辅助部署可确保容量在需要时始终可用，但是，这实际上也会使成本加倍。常见的模式是准备小型的辅助部署，规模足以满足运行关键服务即可。建议你建立一个小型辅助部署用于保留容量和测试辅助环境的配置。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 订阅配额并非容量保证。配额只是信用限制。若要保证容量，必须在服务模型中定义所需数量的角色，且必须部署这些角色。
 > 
 > 
 
 ### 负载均衡
 
-若要实现各区域流量的负载均衡，需要使用流量管理解决方案。Azure 提供 [Azure 流量管理器](/home/features/traffic-manager/)。你也可以利用提供类似流理管理功能的第三方服务。
+若要实现各区域流量的负载均衡，需要使用流量管理解决方案。Azure 提供 [Azure 流量管理器](https://www.azure.cn/home/features/traffic-manager/)。你也可以利用提供类似流理管理功能的第三方服务。
 
 ### 策略
 
@@ -51,7 +52,7 @@ Azure 在物理上和逻辑上划分为称为区域的单位。一个区域由�
 
 * **热备份（主动/主动）**：应用程序设计为接收多个区域的生产负载。为每个区域中云服务所配置的容量可能高于灾难恢复用途所需的容量。或者，云服务可在灾难或故障转移时进行扩展。这种方法需要在应用程序设计中进行大量的投资，但是也具有明显的好处。这些好处包括恢复时间更短且更有保证、连续测试所有恢复位置和对容量的有效使用。
 
-关于分布式设计的完整讨论不属于本文档的范畴。有关更多信息，请参阅 [Disaster Recovery and High Availability for Azure Applications（Azure 应用程序的灾难恢复和高可用性）](/documentation/articles/resiliency-disaster-recovery-high-availability-azure-applications/)。
+关于分布式设计的完整讨论不属于本文档的范畴。有关更多信息，请参阅 [Disaster Recovery and High Availability for Azure Applications（Azure 应用程序的灾难恢复和高可用性）](./resiliency-disaster-recovery-high-availability-azure-applications.md)。
 
 <a id="virtual-machines"></a>
 ## 虚拟机
@@ -59,11 +60,11 @@ Azure 在物理上和逻辑上划分为称为区域的单位。一个区域由�
 基础结构即服务 (IaaS) 虚拟机 (VM) 的恢复在许多方面与平台即服务 (PaaS) 计算恢复相似。但是，由于 IaaS VM 包含 VM 和 VM 磁盘，因此两者之间也存在一些重要的差异。
 
 * **使用 Azure 备份创建应用程序一致的跨区域备份**。
-[Azure 备份](/home/features/back-up/)可让客户跨多个 VM 磁盘创建应用程序一致的备份，并支持跨区域的备份复制。为此，可在创建时选择异地复制备份保管库。请注意，必须在创建时配置备份保管库的复制，而不能在以后设置。如果某个区域发生服务中断，Azure.cn 将向客户提供备份。然后，客户可以还原到配置的任何还原点。
+[Azure 备份](https://www.azure.cn/home/features/back-up/)可让客户跨多个 VM 磁盘创建应用程序一致的备份，并支持跨区域的备份复制。为此，可在创建时选择异地复制备份保管库。请注意，必须在创建时配置备份保管库的复制，而不能在以后设置。如果某个区域发生服务中断，Azure.cn 将向客户提供备份。然后，客户可以还原到配置的任何还原点。
 
 * **将数据磁盘与操作系统磁盘分开**。有关 IaaS VM 的一项重要注意事项就是，如果你不重新创建 VM 就不能更改操作系统磁盘。如果你的恢复策略是在灾难后部署的，这便不是问题。但是，如果你使用暖备份方法来保留容量，则它可能会成为问题。要正确实现这一点，必须将正确的操作系统磁盘部署到主要位置和辅助位置，而将应用程序数据存储在单独的驱动器上。如果可能，请使用这两个位置均可以提供标准的操作系统配置。在故障转移后，必须将数据驱动器连接到辅助 DC 中的现有 IaaS VM。可以使用 AzCopy 将数据磁盘的快照复制到远程站点。
 
-* **注意异地故障转移多个 VM 磁盘后的潜在一致性问题**。VM 磁盘是作为 Azure 存储 Blob 实现的，具有相同的异地复制特征。除非使用 [Azure 备份](/home/features/back-up/)，否则不能保证磁盘间的一致性，因为异地复制是异步进行的，并且是独立复制的。可以保证 VM 磁盘在异地故障转移后处于崩溃一致状态，但不能保证磁盘间的一致性。在某些情况下（例如使用磁盘条带化时）可能会产生问题。
+* **注意异地故障转移多个 VM 磁盘后的潜在一致性问题**。VM 磁盘是作为 Azure 存储 Blob 实现的，具有相同的异地复制特征。除非使用 [Azure 备份](https://www.azure.cn/home/features/back-up/)，否则不能保证磁盘间的一致性，因为异地复制是异步进行的，并且是独立复制的。可以保证 VM 磁盘在异地故障转移后处于崩溃一致状态，但不能保证磁盘间的一致性。在某些情况下（例如使用磁盘条带化时）可能会产生问题。
 
 <a id="storage"></a>
 ## 存储
@@ -76,13 +77,13 @@ Azure 在物理上和逻辑上划分为称为区域的单位。一个区域由�
 
 除了 GRS 提供的自动故障转移之外，Azure 还推出了一种服务，让你能够对位于辅助存储位置的数据副本进行读取访问。这称为读取访问异地冗余存储 (RA-GRS)。
 
-有关 GRS 和 RA-GRS 存储的详细信息，请参阅 [Azure Storage replication](/documentation/articles/storage-redundancy/)（Azure 存储复制）。
+有关 GRS 和 RA-GRS 存储的详细信息，请参阅 [Azure Storage replication](../storage/storage-redundancy.md)（Azure 存储复制）。
 
 ### 异地复制区域映射：
 
 必须了解异地复制会将数据复制到哪里，这样才能知道，对于要求与存储保持区域关系的数据，应将其实例部署到哪里。下表显示了配对的主要位置和辅助位置：
 
-[AZURE.INCLUDE [paired-region-list](../../includes/paired-region-list.md)]
+[!INCLUDE [paired-region-list](../../includes/paired-region-list.md)]
 
 ### 异地复制定价：
 
@@ -90,13 +91,15 @@ Azure 在物理上和逻辑上划分为称为区域的单位。一个区域由�
 
 ### 确定是否发生了异地故障转移
 
-如果发生了异地故障转移，信息会发布到 [Azure 服务运行状况仪表板](/support/service-dashboard/)。但是，应用程序可以通过监视其存储帐户的地理区域，来实施自动的检测方法。这可以用来触发其他恢复操作，如激活存储移往的地理区域中的计算资源。可使用[获取存储帐户属性](https://msdn.microsoft.com/zh-cn/library/ee460802.aspx)从服务管理 API 来进行查询。相关的属性包括：
+如果发生了异地故障转移，信息会发布到 [Azure 服务运行状况仪表板](https://www.azure.cn/support/service-dashboard/)。但是，应用程序可以通过监视其存储帐户的地理区域，来实施自动的检测方法。这可以用来触发其他恢复操作，如激活存储移往的地理区域中的计算资源。可使用[获取存储帐户属性](https://msdn.microsoft.com/zh-cn/library/ee460802.aspx)从服务管理 API 来进行查询。相关的属性包括：
 
-    <GeoPrimaryRegion>primary-region</GeoPrimaryRegion>
-    <StatusOfPrimary>[Available|Unavailable]</StatusOfPrimary>
-    <LastGeoFailoverTime>DateTime</LastGeoFailoverTime>
-    <GeoSecondaryRegion>secondary-region</GeoSecondaryRegion>
-    <StatusOfSecondary>[Available|Unavailable]</StatusOfSecondary>
+```
+<GeoPrimaryRegion>primary-region</GeoPrimaryRegion>
+<StatusOfPrimary>[Available|Unavailable]</StatusOfPrimary>
+<LastGeoFailoverTime>DateTime</LastGeoFailoverTime>
+<GeoSecondaryRegion>secondary-region</GeoSecondaryRegion>
+<StatusOfSecondary>[Available|Unavailable]</StatusOfSecondary>
+```
 
 ### VM 磁盘和异地故障转移
 
@@ -111,30 +114,29 @@ Azure SQL 数据库提供两种类型的恢复：异地还原和活动异地复�
 
 #### 异地还原
 
-[异地还原](/documentation/articles/sql-database-recovery-using-backups/#geo-restore)也适用于基本、标准和高级数据库。当数据库由于它所在的区域发生事故而不可用时，异地还原会提供默认的恢复选项。与时间点还原一样，异地还原依赖于异地冗余的 Azure 存储空间中的数据库备份。它会从异地复制的备份副本中还原，因此可以灵活应对主要区域中的存储中断。有关更多详细信息，请参阅[还原 Azure SQL 数据库或故障转移到次要数据库](/documentation/articles/sql-database-disaster-recovery/)。
+[异地还原](../sql-database/sql-database-recovery-using-backups.md#geo-restore)也适用于基本、标准和高级数据库。当数据库由于它所在的区域发生事故而不可用时，异地还原会提供默认的恢复选项。与时间点还原一样，异地还原依赖于异地冗余的 Azure 存储空间中的数据库备份。它会从异地复制的备份副本中还原，因此可以灵活应对主要区域中的存储中断。有关更多详细信息，请参阅[还原 Azure SQL 数据库或故障转移到次要数据库](../sql-database/sql-database-disaster-recovery.md)。
 
 #### 活动异地复制
 
-[活动异地复制](/documentation/articles/sql-database-geo-replication-overview/)适用于所有数据库层。它专为恢复要求超出了异地还原的能力的应用程序设计。使用活动异地复制，最多可以在不同区域中的服务器上创建四个可读辅助数据库。可以启动到任何辅助数据库的故障转移。此外，活动异地复制可用于支持应用程序升级或重定位方案，以及只读工作负荷的负载均衡。有关详细信息，请参阅[配置异地复制](/documentation/articles/sql-database-geo-replication-portal/)和[故障转移到次要数据库](/documentation/articles/sql-database-geo-replication-failover-portal/)。有关如何在无需停机的情况下设计和实现应用程序及应用程序升级的详细信息，请参阅[使用 SQL 数据库中的活动异地复制功能针对云灾难恢复设计应用程序](/documentation/articles/sql-database-designing-cloud-solutions-for-disaster-recovery/)和[使用 SQL 数据库活动异地复制功能管理云应用程序的滚动升级](/documentation/articles/sql-database-manage-application-rolling-upgrade/)。
+[活动异地复制](../sql-database/sql-database-geo-replication-overview.md)适用于所有数据库层。它专为恢复要求超出了异地还原的能力的应用程序设计。使用活动异地复制，最多可以在不同区域中的服务器上创建四个可读辅助数据库。可以启动到任何辅助数据库的故障转移。此外，活动异地复制可用于支持应用程序升级或重定位方案，以及只读工作负荷的负载均衡。有关详细信息，请参阅[配置异地复制](../sql-database/sql-database-geo-replication-portal.md)和[故障转移到次要数据库](../sql-database/sql-database-geo-replication-failover-portal.md)。有关如何在无需停机的情况下设计和实现应用程序及应用程序升级的详细信息，请参阅[使用 SQL 数据库中的活动异地复制功能针对云灾难恢复设计应用程序](../sql-database/sql-database-designing-cloud-solutions-for-disaster-recovery.md)和[使用 SQL 数据库活动异地复制功能管理云应用程序的滚动升级](../sql-database/sql-database-manage-application-rolling-upgrade.md)。
 
 <a id="sql-server-on-virtual-machines"></a>
 ### 虚拟机上的 SQL Server
 
-可以使用各种选项对 Azure 虚拟机中运行的 SQL Server 2012（和更高版本）实现恢复和高可用性目的。有关详细信息，请参阅 [High availability and disaster recovery for SQL Server in Azure Virtual Machines](/documentation/articles/virtual-machines-windows-sql-high-availability-dr/)（Azure 虚拟机中 SQL Server 的高可用性和灾难恢复）。
-
+可以使用各种选项对 Azure 虚拟机中运行的 SQL Server 2012（和更高版本）实现恢复和高可用性目的。有关详细信息，请参阅 [High availability and disaster recovery for SQL Server in Azure Virtual Machines](../virtual-machines/virtual-machines-windows-sql-high-availability-dr.md)（Azure 虚拟机中 SQL Server 的高可用性和灾难恢复）。
 
 ## <a id="other-azure-platform-services"></a> 其他 Azure 平台服务
 
 在尝试于多个 Azure 区域运行云服务时，必须考虑每个依赖项的含义。在以下部分中，服务特定的指南假设你在备用 Azure 数据中心中使用相同的 Azure 服务。这同时涉及到配置和数据复制任务。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 在某些情况下，这些步骤有助于缓解服务特定的中断，而不是整个数据中心的中断事件。从应用程序的角度而言，服务特定的中断可能只是受到限制，需要临时将服务迁移到备用 Azure 区域。
 > 
 > 
 
 ### 服务总线
 
-Azure 服务总线使用不跨越 Azure 区域的唯一命名空间。因此，首要要求是在备用区域中设置必要的服务总线命名空间。但是，对于排队消息的持久性，也有一些注意事项。有几种在 Azure 区域间复制消息的策略。有关这些复制策略和其他灾难恢复策略的详细信息，请参阅 [Best practices for insulating applications against Service Bus outages and disasters](/documentation/articles/service-bus-outages-disasters/)（使应用程序免受服务总线中断和灾难影响的最佳实践）。有关其他可用性注意事项，请参阅 [Service Bus (Availability)](/documentation/articles/resiliency-technical-guidance-recovery-local-failures/#other-azure-platform-services)（服务总线（可用性））。
+Azure 服务总线使用不跨越 Azure 区域的唯一命名空间。因此，首要要求是在备用区域中设置必要的服务总线命名空间。但是，对于排队消息的持久性，也有一些注意事项。有几种在 Azure 区域间复制消息的策略。有关这些复制策略和其他灾难恢复策略的详细信息，请参阅 [Best practices for insulating applications against Service Bus outages and disasters](../service-bus-messaging/service-bus-outages-disasters.md)（使应用程序免受服务总线中断和灾难影响的最佳实践）。有关其他可用性注意事项，请参阅 [Service Bus (Availability)](./resiliency-technical-guidance-recovery-local-failures.md#other-azure-platform-services)（服务总线（可用性））。
 
 <a id="web-apps"></a>
 ### App Service
@@ -143,7 +145,7 @@ Azure 服务总线使用不跨越 Azure 区域的唯一命名空间。因此，�
 
 ### HDInsight
 
-与 HDInsight 关联的数据默认存储在 Azure Blob 存储中。HDInsight 要求处理 MapReduce 作业的 Hadoop 群集必须与包含所分析数据的存储帐户位于同一区域中。假如你使用可用于 Azure 存储空间的区域异地复制功能，则如果主要区域因为某些原因而无法使用，你可以访问复制到次要区域的数据。你可以在数据复制到的区域中创建新的 Hadoop 群集并继续处理这些数据。有关其他可用性注意事项，请参阅 [HDInsight (Availability)](/documentation/articles/resiliency-technical-guidance-recovery-local-failures/#other-azure-platform-services)（HDInsight（可用性））。
+与 HDInsight 关联的数据默认存储在 Azure Blob 存储中。HDInsight 要求处理 MapReduce 作业的 Hadoop 群集必须与包含所分析数据的存储帐户位于同一区域中。假如你使用可用于 Azure 存储空间的区域异地复制功能，则如果主要区域因为某些原因而无法使用，你可以访问复制到次要区域的数据。你可以在数据复制到的区域中创建新的 Hadoop 群集并继续处理这些数据。有关其他可用性注意事项，请参阅 [HDInsight (Availability)](./resiliency-technical-guidance-recovery-local-failures.md#other-azure-platform-services)（HDInsight（可用性））。
 
 <a id="sql-reporting"></a>
 ### SQL 报告
@@ -158,7 +160,7 @@ Azure 媒体服务对于编码和流有不同的恢复方法。通常，在区�
 <a id="virtual-network"></a>
 ### 虚拟网络
 
-配置文件是在备用 Azure 区域设置虚拟网络的最快速方式。在主要 Azure 区域配置虚拟网络之后，将当前网络的[虚拟网络设置导出](/documentation/articles/virtual-networks-create-vnet-classic-portal/)为网络配置文件。如果主要区域发生中断，则从存储的配置文件[还原虚拟网络](/documentation/articles/virtual-networks-create-vnet-classic-portal/)。然后，配置其他云服务、虚拟机或跨部署设置，来使用新的虚拟网络。
+配置文件是在备用 Azure 区域设置虚拟网络的最快速方式。在主要 Azure 区域配置虚拟网络之后，将当前网络的[虚拟网络设置导出](../virtual-network/virtual-networks-create-vnet-classic-portal.md)为网络配置文件。如果主要区域发生中断，则从存储的配置文件[还原虚拟网络](../virtual-network/virtual-networks-create-vnet-classic-portal.md)。然后，配置其他云服务、虚拟机或跨部署设置，来使用新的虚拟网络。
 
 ## 灾难恢复清单
 
@@ -172,7 +174,7 @@ Azure 媒体服务对于编码和流有不同的恢复方法。通常，在区�
 ## 虚拟机清单
 
 1. 查看本文档的“虚拟机”部分。
-2. 使用 [Azure 备份](/home/features/back-up/)创建应用程序一致的跨区域备份。
+2. 使用 [Azure 备份](https://www.azure.cn/home/features/back-up/)创建应用程序一致的跨区域备份。
 
 ## 存储清单
 
@@ -184,7 +186,7 @@ Azure 媒体服务对于编码和流有不同的恢复方法。通常，在区�
 ## SQL 数据库清单
 
 1. 查看本文档的“SQL 数据库”部分。
-2. 根据情况使用[异地还原](/documentation/articles/sql-database-recovery-using-backups/#geo-restore)或[异地复制](/documentation/articles/sql-database-geo-replication-overview/)。
+2. 根据情况使用[异地还原](../sql-database/sql-database-recovery-using-backups.md#geo-restore)或[异地复制](../sql-database/sql-database-geo-replication-overview.md)。
 
 ## 虚拟机上的 SQL Server 清单
 
@@ -231,7 +233,7 @@ Azure 媒体服务对于编码和流有不同的恢复方法。通常，在区�
 
 ## 后续步骤
 
-本文是着重介绍 [Azure 复原技术指南](/documentation/articles/resiliency-technical-guidance/)的系列教程的一部分。本系列教程的下一篇文章着重介绍如何[从本地数据中心恢复到 Azure](/documentation/articles/resiliency-technical-guidance-recovery-on-premises-azure/)。
+本文是着重介绍 [Azure 复原技术指南](./resiliency-technical-guidance.md)的系列教程的一部分。本系列教程的下一篇文章着重介绍如何[从本地数据中心恢复到 Azure](./resiliency-technical-guidance-recovery-on-premises-azure.md)。
 
 <!---HONumber=Mooncake_0213_2017-->
 <!--Update_Description: update meta properties; wording update -->
